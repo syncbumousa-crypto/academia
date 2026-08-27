@@ -1028,7 +1028,7 @@
         <button type="button" class="acct-btn acct-btn--go" id="auth-go">${join ? T().joinGo : T().loginGo}</button>
       </div>
       <button type="button" class="auth-swap" id="auth-swap">${join ? T().haveAcct : T().noAcct}</button>
-      <p class="auth-note">${T().localAcctNote}</p>
+      <p class="auth-note">${AUTH_SRV ? '' : T().localAcctNote + ' '}${join ? T().noResetNote : ''}</p>
     </div>`;
   }
 
@@ -1330,7 +1330,7 @@
         id: r.id, srv: 1, uid: r.uid,
         me: false,                            /* الختمُ: محسوبٌ لا مقروء */
         u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
-        likes: 0, liked: false,               /* العدّاداتُ في م٣ */
+        likes: r.likes | 0, liked: !!r.liked,   /* العدُّ من الخادم — يُقرأ ولا يُخترع */
         ts: (r.ts || 0) * 1000 || Date.now(),
         data: r.data,
       });
@@ -1339,6 +1339,34 @@
     save();
     /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها */
     if (n && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
+
+  /* ---------- الإعجاب على الخادم (م٣أ) ----------
+     ومساهمةُ الخادم (‎srv:1‎) عدُّها هناك لا هنا. فالضغطةُ تُقلب في الشاشة فورًا
+     (فلا ينتظر المستخدمُ الشبكةَ ليرى أثرَ إصبعه)، ثمّ يُصحَّح بما يردّه الخادم —
+     وإن سقط الطلبُ رُدَّ ما كان. وهذا هو «التفاؤلُ مع الرجوع»: سرعةُ المحلّيّ
+     وصدقُ الخادم معًا. */
+  async function srvLike(p) {
+    if (!p || !p.srv) return false;              /* مبذورةٌ أو لي: الدرجُ يكفيها */
+    if (!SRV_ON()) return false;
+    if (!memberGate(T().needAcctLike)) return true;   /* حُرست: الضغطةُ لا تمضي */
+    const was = { liked: !!p.liked, likes: p.likes | 0 };
+    p.liked = !was.liked;
+    p.likes = Math.max(0, was.likes + (p.liked ? 1 : -1));
+    renderCmSection();
+    try {
+      const r = await fetch(postsURL().replace('/posts', '/likes'), {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: p.id }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 409) { Object.assign(p, was); toast(T().likeSelf); }
+      else if (!r.ok) Object.assign(p, was);
+      else { p.likes = j.likes | 0; p.liked = !!j.liked; }
+    } catch (e) { Object.assign(p, was); }
+    save(); renderCmSection();
+    return true;
   }
 
   /* ===== ونداءُ البوابة: يُقال ما فات لا «ممنوع» =====

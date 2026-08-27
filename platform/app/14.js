@@ -402,6 +402,9 @@
       const p = thumbBtn.dataset.dr != null
         ? doctorsOf(cmCode)[+thumbBtn.dataset.dr].posts[+thumbBtn.dataset.like]
         : postsOf(cmCode, thumbBtn.dataset.sub || cmTabSel)[+thumbBtn.dataset.like];
+      /* ومساهمةُ الخادم عدُّها هناك: تُصرَف إلى ‎srvLike‎ ولا تُمسّ محلّيًّا.
+         والخفضُ لا خادمَ له بعد — فيبقى محلّيًّا حتى يُبنى (م٣ب) */
+      if (p && p.srv && thumbBtn.dataset.react === 'up') { srvLike(p); return; }
       if (p) {
         if (thumbBtn.dataset.react === 'up') {
           p.liked = !p.liked;
@@ -440,6 +443,7 @@
       const p = likeBtn.dataset.dr != null
         ? doctorsOf(cmCode)[+likeBtn.dataset.dr].posts[+likeBtn.dataset.like]
         : postsOf(cmCode, likeBtn.dataset.sub || cmTabSel)[+likeBtn.dataset.like];
+      if (p && p.srv) { srvLike(p); return; }   /* واردةٌ: عدُّها على الخادم */
       if (p) {
         p.liked = !p.liked;
         p.likes = Math.max(0, (p.likes || 0) + (p.liked ? 1 : -1));

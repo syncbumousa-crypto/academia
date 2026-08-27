@@ -52,19 +52,28 @@ export async function onRequest({ request, env }) {
     if (m === 'GET') {
       const code = (url.searchParams.get('code') || '').trim();
       if (!code) return J({ error: 'code' }, 400);
+      /* والعدُّ يُجمع في الاستعلام نفسِه لا في رحلةٍ ثانية — ومن كان له جلسةٌ
+         عرف أيَّها أعجبَ (‎mine‎)، ومن لا جلسةَ له فالعدُّ وحدَه */
+      const me = await session(db, request);
+      const uid = me ? me.uid : '';
       const rs = await db.prepare(
-        `SELECT p.id, p.uid, p.sec, p.data, p.ts, u.name, u.img
+        `SELECT p.id, p.uid, p.sec, p.data, p.ts, u.name, u.img,
+                (SELECT COUNT(*) FROM likes l WHERE l.pid = p.id) likes,
+                (SELECT COUNT(*) FROM likes l WHERE l.pid = p.id AND l.uid = ?) mine
            FROM posts p JOIN users u ON u.id = p.uid
-          WHERE p.code = ? ORDER BY p.ts`).bind(code).all();
+          WHERE p.code = ? ORDER BY p.ts`).bind(uid, code).all();
       const posts = (rs.results || []).map(r => {
         let data = null;
         try { data = JSON.parse(r.data); } catch (e) { /* صفٌّ تالف: يُترك بمتنٍ خاوٍ */ }
         return { id: r.id, uid: r.uid, sec: r.sec, ts: r.ts,
+                 likes: r.likes | 0, liked: !!r.mine,
                  u: { name: r.name || '', img: r.img || '' }, data: data };
       }).filter(p => p.data);
       return J({ code, posts }, 200, {
-        /* خبءٌ قصير: المساهماتُ تتبدّل أكثرَ من الكتالوج، والقارئُ يريد الجديد */
-        'cache-control': 'public, max-age=15, s-maxage=30, stale-while-revalidate=300',
+        /* ولا خبءٌ مشترك: الردُّ صار يحمل ‎liked‎ — وهو خبرٌ عن **هذا** القارئ.
+           فخبءُ الحافّة يُعطي جوابَ أوّلِ سائلٍ لمن بعده، فيرى إعجابَ غيره إعجابَه.
+           ‎private‎ يقصره على متصفّح صاحبه، والثوانيُ العشرُ تكفي لكبح التكرار */
+        'cache-control': 'private, max-age=10',
       });
     }
 

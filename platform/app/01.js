@@ -885,9 +885,11 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
+      likeSelf: 'لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به لا يُزكّيه صاحبُه',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
+      noResetNote: 'واحفظ كلمة المرور في مكان آمن: ما فيه استرجاع لها بعد.',
       /* المرآة: نصوصٌ تقول ما يقع بالضبط — «نسخة حيّة» لا «نسخة احتياطية»، فالفرق أنّها تُكتب بلا طلبك */
       mirTitle: 'نسختي على الجهاز',
       mirWhy: 'اربطها بملفٍّ على سطح مكتبك، فتُكتب فيه كلّ حفظة. ولو فُرّغ المتصفّح بالكامل بقي عندك كل شيء.',
@@ -1205,8 +1207,10 @@
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
+      likeSelf: 'You cannot like your own contribution',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
+      noResetNote: 'Keep your password somewhere safe: there is no reset yet.',
       mirTitle: 'My copy on this device',
       mirWhy: 'Link a file on your desktop and every save is written to it. Wipe the browser entirely and you still have everything.',
       mirLinked: 'Linked to', mirLink: 'Link a file', mirChange: 'Change file', mirUnlink: 'Unlink',
