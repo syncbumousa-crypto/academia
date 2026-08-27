@@ -1,0 +1,348 @@
+<!doctype html>
+<!-- ============================================================
+     نقل — يُخرج عملَك من متصفّحٍ ويُدخله في آخر
+     ============================================================
+     بياناتُ أكاديميا لا تسكن خادمًا: تسكن **درجَ المتصفّح على الأصل الذي فُتح منه**.
+     وما حُفظ على ‎file://‎ لا يراه ‎https://…pages.dev‎ ولو كان الموقعُ واحدًا. فالنقلُ
+     بينهما لا يقع إلّا بملفٍّ يخرج من هنا ويدخل هناك.
+
+     وموضعان لا موضعٌ واحد:
+       ١ · ‎localStorage‎ — الحالُ كلُّها ‎academia2:v1‎ وأخواتُها
+       ٢ · ‎IndexedDB: academia2-media‎ — بِتاتُ الصور التي لصقتَها في البطائق
+     و‎backup.html‎ القديمة تأخذ الأوّلَ وتترك الثاني، فتخرج بنسخةٍ بلا صور.
+
+     ولا يُفترض شيء: يُقاس أوّلًا ويُعرض الرقمُ ثمّ يُصدَّر. وقد كُتب في ‎app.js‎ أنّ
+     ‎indexedDB.open‎ قد لا يجيب أصلًا على ‎file://‎ — لا نجاحًا ولا خطأً — فلكلّ نداءٍ
+     مهلةٌ ينتهي إليها، ويُقال للمستخدم إن كان المخزنُ غائبًا لا فارغًا. -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نقل — أكاديميا</title>
+<style>
+  :root {
+    --pet: #2c5e65; --pet-soft: #e7eff0; --gold: #c9a25c;
+    --ink: #14233f; --ink-soft: #5d6b82;
+    --bg: #f4f1ea; --surface: #fff; --border: #d7dee8;
+    --ok: #1f7a4d; --warn: #a9701f; --bad: #c0453e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --pet: #4d8f97; --pet-soft: #1b3238; --ink: #e8eef2; --ink-soft: #9fb1bd;
+      --bg: #0f1c21; --surface: #16252b; --border: #2a4249;
+      --ok: #5fbf8d; --warn: #d9b878; --bad: #e2756d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 18px 60px; background: var(--bg); color: var(--ink);
+    font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 14px; line-height: 1.7;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--ink-soft); margin: 0 0 8px; font-size: 13px; }
+  .origin {
+    display: inline-block; margin-bottom: 22px; padding: 5px 11px; border-radius: 8px;
+    background: var(--pet-soft); color: var(--pet); font-weight: 700; font-size: 12px;
+    direction: ltr; unicode-bidi: embed; word-break: break-all;
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 16px; margin: 0 0 4px; }
+  .card p.why { margin: 0 0 14px; color: var(--ink-soft); font-size: 12.5px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: right; padding: 7px 6px; border-bottom: 1px solid var(--border); }
+  th { color: var(--ink-soft); font-weight: 700; font-size: 12px; }
+  td.n { direction: ltr; text-align: left; font-variant-numeric: tabular-nums; }
+  td.k { direction: ltr; text-align: right; font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+  tr.total td { font-weight: 800; border-bottom: 0; }
+  button {
+    font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+    padding: 11px 18px; border-radius: 11px; border: 1px solid transparent;
+    transition: filter .15s, background .15s;
+  }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .go { background: var(--pet); color: #fff; }
+  .go:hover:not(:disabled) { filter: brightness(1.1); }
+  .alt { background: transparent; color: var(--ink-soft); border-color: var(--border); }
+  .alt:hover:not(:disabled) { border-color: var(--pet); color: var(--pet); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+  .note { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 12.5px; }
+  .note.ok   { background: color-mix(in srgb, var(--ok) 12%, transparent);   color: var(--ok);   }
+  .note.warn { background: color-mix(in srgb, var(--warn) 14%, transparent); color: var(--warn); }
+  .note.bad  { background: color-mix(in srgb, var(--bad) 12%, transparent);  color: var(--bad);  }
+  .note[hidden] { display: none; }
+  input[type=file] { font-family: inherit; font-size: 13px; }
+  .steps { margin: 0; padding-inline-start: 20px; color: var(--ink-soft); font-size: 12.5px; }
+  .steps li { margin-bottom: 5px; }
+  .steps b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>نقل</h1>
+  <p class="sub">يُخرج عملك من متصفّح ويُدخله في آخر — الحال كلها ومعها بِتات الصور.</p>
+  <div class="origin" id="origin"></div>
+
+  <!-- ١ · القياس -->
+  <section class="card">
+    <h2>١ · ما في هذا الأصل الآن</h2>
+    <p class="why">يُقاس ولا يُفترض. والصفرُ ههنا يعني أنّك على أصلٍ آخر غير الذي فيه عملك.</p>
+    <table id="tbl"><tbody><tr><td>يُقاس…</td></tr></tbody></table>
+    <div class="row"><button class="alt" id="remeasure">أعِد القياس</button></div>
+    <div class="note warn" id="idbNote" hidden></div>
+  </section>
+
+  <!-- ٢ · التصدير -->
+  <section class="card">
+    <h2>٢ · صدِّر</h2>
+    <p class="why">ينزل ملفّان: <b>الحال</b> (صغير، وفيه عملك كلّه) و<b>الصور</b> (بِتات ما لصقتَه).
+      وإن كان مخزن الصور خاويًا نزل الأوّل وحده — وهذا يقع حين يأبى المتصفّحُ المخزنَ على
+      <span dir="ltr">file://</span> فتنزل الصور داخل البطائق نفسها.</p>
+    <div class="row">
+      <button class="go" id="expBtn">صدِّر الآن</button>
+    </div>
+    <div class="note ok"  id="expOk"  hidden></div>
+    <div class="note bad" id="expBad" hidden></div>
+  </section>
+
+  <!-- ٣ · الاستيراد -->
+  <section class="card">
+    <h2>٣ · استورد</h2>
+    <p class="why">اختر الملفّ (أو الملفّين معًا) الذي صدّرتَه من الأصل الآخر.
+      وإن كان في هذا الأصل عملٌ قائم فسيُصدَّر تلقائيًّا قبل أيّ كتابة — لا يُبتر شيءٌ قبل أن تُؤخذ نسخته.</p>
+    <div class="row">
+      <input type="file" id="file" accept=".json,application/json" multiple>
+      <button class="go" id="impBtn" disabled>استورد</button>
+    </div>
+    <div class="note warn" id="impPlan" hidden></div>
+    <div class="note ok"   id="impOk"   hidden></div>
+    <div class="note bad"  id="impBad"  hidden></div>
+  </section>
+
+  <section class="card">
+    <h2>الترتيب</h2>
+    <ol class="steps">
+      <li>افتح هذي الصفحة من <b>القرص</b> (<span dir="ltr">file://</span>) حيث عملك ← <b>صدِّر</b> ← احفظ الملفّين في مكان تعرفه.</li>
+      <li>افتح <b><span dir="ltr">academia-kfupm.pages.dev/transfer.html</span></b> ← <b>استورد</b> ← اختر الملفّين.</li>
+      <li>افتح الموقع المنشور — عملُك هناك، والمسارات تُصلَح وحدها في أوّل إقلاع.</li>
+    </ol>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const PREFIX = 'academia2';
+  const MED_DB = 'academia2-media', MED_STORE = 'm';
+  const IDB_T = 4000;   /* المهلة: ‎indexedDB.open‎ قد لا يجيب أصلًا على ‎file://‎ */
+
+  const kb = n => n < 1024 ? n + ' ب'
+    : n < 1048576 ? (n / 1024).toFixed(1) + ' ك'
+    : (n / 1048576).toFixed(2) + ' م';
+
+  $('#origin').textContent = location.origin === 'null'
+    ? 'file:// (أصل الملفّات المحلّية)' : location.origin;
+
+  /* ---------- المخزن: كلُّ نداءٍ بمهلة ---------- */
+  function idbAll() {
+    return new Promise(res => {
+      let done = false;
+      const fin = v => { if (!done) { done = true; res(v); } };
+      setTimeout(() => fin({ state: 'timeout', items: [] }), IDB_T);
+      let rq;
+      try { rq = indexedDB.open(MED_DB, 1); } catch (e) { return fin({ state: 'error', items: [] }); }
+      rq.onupgradeneeded = () => { try { rq.result.createObjectStore(MED_STORE); } catch (e) {} };
+      rq.onerror = () => fin({ state: 'error', items: [] });
+      rq.onsuccess = () => {
+        const db = rq.result;
+        let tx, st;
+        try { tx = db.transaction(MED_STORE, 'readonly'); st = tx.objectStore(MED_STORE); }
+        catch (e) { return fin({ state: 'empty', items: [] }); }
+        const keys = st.getAllKeys(), vals = st.getAll();
+        let k = null, v = null;
+        keys.onsuccess = () => { k = keys.result; if (v) fin({ state: 'ok', items: k.map((x, i) => [x, v[i]]) }); };
+        vals.onsuccess = () => { v = vals.result; if (k) fin({ state: 'ok', items: k.map((x, i) => [x, v[i]]) }); };
+        keys.onerror = vals.onerror = () => fin({ state: 'error', items: [] });
+      };
+    });
+  }
+  function idbPut(pairs) {
+    return new Promise(res => {
+      let done = false;
+      const fin = v => { if (!done) { done = true; res(v); } };
+      setTimeout(() => fin(0), IDB_T + pairs.length * 20);
+      let rq;
+      try { rq = indexedDB.open(MED_DB, 1); } catch (e) { return fin(0); }
+      rq.onupgradeneeded = () => { try { rq.result.createObjectStore(MED_STORE); } catch (e) {} };
+      rq.onerror = () => fin(0);
+      rq.onsuccess = () => {
+        const db = rq.result;
+        let tx, st;
+        try { tx = db.transaction(MED_STORE, 'readwrite'); st = tx.objectStore(MED_STORE); }
+        catch (e) { return fin(0); }
+        pairs.forEach(([k, blob]) => { try { st.put(blob, k); } catch (e) {} });
+        tx.oncomplete = () => fin(pairs.length);
+        tx.onerror = tx.onabort = () => fin(0);
+      };
+    });
+  }
+
+  const blobToData = b => new Promise(r => {
+    const fr = new FileReader();
+    fr.onload = () => r(fr.result); fr.onerror = () => r(null);
+    fr.readAsDataURL(b);
+  });
+  function dataToBlob(d) {
+    const i = d.indexOf(','), head = d.slice(0, i), bin = atob(d.slice(i + 1));
+    const type = (head.match(/data:([^;]+)/) || [])[1] || 'application/octet-stream';
+    const u = new Uint8Array(bin.length);
+    for (let j = 0; j < bin.length; j++) u[j] = bin.charCodeAt(j);
+    return new Blob([u], { type: type });
+  }
+
+  /* ---------- القياس ---------- */
+  let lsKeys = [], medItems = [], medState = '';
+  async function measure() {
+    lsKeys = [];
+    let tot = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k.indexOf(PREFIX) !== 0) continue;
+      const n = (localStorage.getItem(k) || '').length;
+      lsKeys.push([k, n]); tot += n;
+    }
+    lsKeys.sort((a, b) => b[1] - a[1]);
+
+    const med = await idbAll();
+    medState = med.state; medItems = med.items;
+    let medBytes = 0;
+    medItems.forEach(([, b]) => { medBytes += (b && b.size) || 0; });
+
+    const rows = lsKeys.map(([k, n]) =>
+      `<tr><td class="k">${k}</td><td class="n">${kb(n)}</td></tr>`).join('')
+      || '<tr><td colspan="2">لا مفاتيح لأكاديميا في هذا الأصل</td></tr>';
+    $('#tbl').innerHTML = '<thead><tr><th>المخزن</th><th style="text-align:left">الحجم</th></tr></thead><tbody>'
+      + rows
+      + `<tr><td class="k">IndexedDB · ${MED_DB}</td><td class="n">${
+          medState === 'ok' ? medItems.length + ' صورة · ' + kb(medBytes)
+          : medState === 'timeout' ? 'لا يستجيب' : 'غائب'}</td></tr>`
+      + `<tr class="total"><td>المجموع</td><td class="n">${kb(tot + medBytes)}</td></tr>`
+      + '</tbody>';
+
+    const nb = $('#idbNote');
+    if (medState === 'timeout' || medState === 'error') {
+      nb.hidden = false;
+      nb.textContent = 'مخزن الصور لا يستجيب على هذا الأصل — وهذا معروفٌ على '
+        + 'file:// في بعض المتصفّحات. ولا يعني ضياع صورك: حين يأبى المخزنُ الحفظَ '
+        + 'تنزل الصورةُ داخل البطاقة نفسها، فتخرج مع «الحال».';
+    } else if (medState === 'ok' && !medItems.length) {
+      nb.hidden = false;
+      nb.textContent = 'مخزن الصور موجودٌ وفارغ — صورُك (إن كانت) داخل البطائق نفسها، وتخرج مع «الحال».';
+    } else nb.hidden = true;
+
+    $('#expBtn').disabled = !lsKeys.length && !medItems.length;
+    return { tot: tot + medBytes };
+  }
+
+  /* ---------- التنزيل ---------- */
+  function download(name, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+  const stamp = () => new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
+
+  async function exportAll(silent) {
+    const ls = {};
+    lsKeys.forEach(([k]) => { ls[k] = localStorage.getItem(k); });
+    const files = [];
+    if (lsKeys.length) {
+      download('academia-حال-' + stamp() + '.json', JSON.stringify(
+        { نوع: 'academia2/state', وقت: new Date().toISOString(), أصل: location.origin, مفاتيح: ls }));
+      files.push('الحال (' + lsKeys.length + ' مفاتيح)');
+    }
+    if (medItems.length) {
+      const out = {};
+      for (const [k, b] of medItems) { const d = await blobToData(b); if (d) out[k] = d; }
+      download('academia-صور-' + stamp() + '.json', JSON.stringify(
+        { نوع: 'academia2/media', وقت: new Date().toISOString(), صور: out }));
+      files.push('الصور (' + Object.keys(out).length + ')');
+    }
+    if (!silent) {
+      const ok = $('#expOk');
+      ok.hidden = files.length === 0;
+      ok.textContent = 'نزل: ' + files.join(' · ') + '. احفظهما في مكانٍ تعرفه — هذي نسختك.';
+      $('#expBad').hidden = files.length > 0;
+      if (!files.length) $('#expBad').textContent = 'لا شيء في هذا الأصل ليُصدَّر.';
+    }
+    return files.length;
+  }
+  $('#expBtn').addEventListener('click', () => exportAll(false));
+  $('#remeasure').addEventListener('click', measure);
+
+  /* ---------- الاستيراد ---------- */
+  let parsed = { state: null, media: null };
+  $('#file').addEventListener('change', async e => {
+    parsed = { state: null, media: null };
+    const notes = [];
+    for (const f of e.target.files) {
+      let j;
+      try { j = JSON.parse(await f.text()); }
+      catch (err) { notes.push('«' + f.name + '» ليس JSON سليمًا'); continue; }
+      if (j && j['مفاتيح']) { parsed.state = j; notes.push('الحال: ' + Object.keys(j['مفاتيح']).length + ' مفاتيح'); }
+      else if (j && j['صور']) { parsed.media = j; notes.push('الصور: ' + Object.keys(j['صور']).length); }
+      else notes.push('«' + f.name + '» ليس من ملفّات النقل');
+    }
+    const p = $('#impPlan');
+    p.hidden = false;
+    const here = lsKeys.length || medItems.length;
+    p.textContent = notes.join(' · ')
+      + (here ? ' — وفي هذا الأصل عملٌ قائم، فسيُصدَّر تلقائيًّا قبل الكتابة.' : '');
+    $('#impBtn').disabled = !(parsed.state || parsed.media);
+    $('#impOk').hidden = $('#impBad').hidden = true;
+  });
+
+  $('#impBtn').addEventListener('click', async () => {
+    $('#impBtn').disabled = true;
+    $('#impOk').hidden = $('#impBad').hidden = true;
+    try {
+      /* لا يُبتر شيءٌ قبل أن تُؤخذ نسخته */
+      if (lsKeys.length || medItems.length) await exportAll(true);
+
+      let nk = 0, nm = 0;
+      if (parsed.state) {
+        const m = parsed.state['مفاتيح'];
+        for (const k in m) { localStorage.setItem(k, m[k]); nk++; }
+      }
+      if (parsed.media) {
+        const src = parsed.media['صور'];
+        const pairs = Object.keys(src).map(k => [k, dataToBlob(src[k])]);
+        nm = await idbPut(pairs);
+      }
+      await measure();
+      const ok = $('#impOk');
+      ok.hidden = false;
+      ok.textContent = 'دخل: ' + nk + ' مفاتيح'
+        + (parsed.media ? ' و' + nm + ' صورة' : '')
+        + '. افتح الموقع الآن — المسارات القديمة تُصلَح وحدها في أوّل إقلاع.';
+    } catch (err) {
+      $('#impBad').hidden = false;
+      $('#impBad').textContent = 'تعثّر الاستيراد: ' + (err && err.message || err);
+    }
+    $('#impBtn').disabled = false;
+  });
+
+  measure();
+})();
+</script>
+</body>
+</html>

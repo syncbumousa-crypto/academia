@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- ============================================================
+     ٤٠٤ — صفحةٌ لا وجود لها
+     ============================================================
+     كلاودفلير بيچز يلتقط ‎404.html‎ من الجذر ويردُّ به على كلّ مسارٍ لا يقابله ملفّ،
+     **ومعه رمزُ ٤٠٤ نفسُه**. ولولاها لَرُدَّ الزائرُ إلى ‎index.html‎ برمز ٢٠٠ —
+     فيُقال له «تمّ» عن طلبٍ لم يتمّ، ويُخفى الخطأ بدل أن يُقال.
+
+     وقائمةٌ بذاتها لا تفريعَ لها: لا تحمّل ورقةَ الموقع (١٫٢ ميجا) لأجل سطرين،
+     ولا خطًّا يُنزَّل — الصفحةُ التي تُقال في الخطأ يجب أن تصل ولو كان ما حولها معطوبًا. -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لا توجد هذه الصفحة — أكاديميا</title>
+<style>
+  :root {
+    --pet: #2c5e65; --gold: #c9a25c;
+    --ink: #14233f; --ink-soft: #5d6b82;
+    --bg: #f4f1ea; --surface: #fff; --border: #d7dee8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --pet: #4d8f97; --gold: #d9b878;
+      --ink: #e8eef2; --ink-soft: #9fb1bd;
+      --bg: #0f1c21; --surface: #16252b; --border: #2a4249;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+    display: grid; place-items: center; padding: 24px; line-height: 1.75;
+  }
+  .box {
+    max-width: 440px; width: 100%; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px 28px 30px;
+    box-shadow: 0 12px 40px rgba(20, 35, 63, .07);
+  }
+  /* الرقم كبيرٌ خافت: يقول «أين أنت» بلا أن يصيح */
+  .num {
+    font-size: 62px; font-weight: 800; line-height: 1;
+    color: var(--pet); opacity: .22; letter-spacing: 2px;
+  }
+  h1 { font-size: 19px; margin: 14px 0 8px; }
+  p  { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
+  .dash { width: 34px; height: 3px; background: var(--gold); border-radius: 2px; margin: 20px auto 0; }
+  .go {
+    display: inline-block; margin-top: 22px; padding: 11px 22px;
+    background: var(--pet); color: #fff; text-decoration: none;
+    border-radius: 12px; font-weight: 700; font-size: 13.5px;
+    transition: filter .15s;
+  }
+  .go:hover { filter: brightness(1.1); }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="num">٤٠٤</div>
+    <h1>لا توجد هذه الصفحة</h1>
+    <p>الرابط الذي فتحته لا يقابله شيء في الموقع — لعلّه قديم أو فيه خطأ مطبعيّ.</p>
+    <div class="dash"></div>
+    <a class="go" href="/platform/index.html">إلى أكاديميا</a>
+  </div>
+</body>
+</html>
