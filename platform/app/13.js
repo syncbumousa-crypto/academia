@@ -1116,11 +1116,65 @@
     renderAcct();
   }
 
-  function authJoin(name, email, pass) {
+  /* ============================================================
+     الباب — على الخادم إن وُجد، وفي الدرج إن لم يوجد (م١أ)
+     ============================================================
+     ‎AUTH_SRV‎ يفرّق الحالين: على ‎https‎ ثمّ خادمٌ، وعلى ‎file://‎ لا خادمَ يُسأل.
+
+     ===== ولا يُصنع حسابٌ محلّيٌّ إن كان الخادمُ موجودًا وسقط =====
+     كان يُغري أن نسقط إلى الدرج عند كلّ تعثّر. وهو خطأ: من أنشأ حسابًا محلّيًّا
+     والخادمُ قائمٌ صار له هويّتان تفترقان، ولا يعرف أيَّهما الحقّ. فإذا انقطعت
+     الشبكةُ **يُقال ذلك** ولا يُصنع شيء.
+
+     ===== والخادمُ هو الحقُّ متى نطق =====
+     ‎/api/auth/me‎ تُسأل في الإقلاع. فإن قالت «لا أحد» فالمستخدمُ زائرٌ ولو قال
+     درجُه غيرَ ذلك — والدرجُ ذاكرةٌ لا حجّة. وإن لم تُجب (لا شبكة) بقي ما في
+     الدرج: خارج الشبكة تُصدَّق الذاكرةُ لأنّه لا حَكَمَ سواها.
+
+     ===== وكلمةُ السرّ لا تُحفظ في الدرج بعد اليوم =====
+     ‎state.profile.password‎ كان يحملها نصًّا. ومع الخادم لا معنى له — والتجزئةُ
+     هناك. فيُمحى عند أوّل دخولٍ ناجح. */
+  const AUTH_SRV = /^https?:/.test(location.protocol);
+  const authURL = p => (ASSET_BASE ? new URL('api/auth/' + p, ASSET_BASE).href
+                                   : location.origin + '/api/auth/' + p);
+
+  async function authCall(p, data) {
+    const r = await fetch(authURL(p), {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data || {}),
+    });
+    let j = {}; try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
+    return { ok: r.ok, status: r.status, j };
+  }
+
+  /* يُلبس البروفايلَ ما ردّه الخادم — والصورةُ المحلّيّةُ تبقى إن لم يكن هناك واحدة */
+  function authTake(u) {
+    if (!u) return;
+    state.profile.name = u.name || state.profile.name || '';
+    state.profile.email = u.email || '';
+    if (u.img) state.profile.img = u.img;
+    state.profile.password = '';        /* لا سرَّ في الدرج بعد اليوم */
+    state.uid = u.id || '';
+    state.signedIn = true;
+    save(); applyAuth();
+  }
+
+  async function authJoin(name, email, pass) {
     if (!name.trim()) return T().errName;
     if (!EMAIL_RE.test(email.trim())) return T().errEmail;
     if ((pass || '').length < 6) return T().errPass;
-    /* والبروفايلُ يُملأ ولا يُستبدل: قد تكون فيه صورةٌ اختارها الزائرُ قبل أن يُنشئ */
+
+    if (AUTH_SRV) {
+      let r;
+      try { r = await authCall('join', { name: name.trim(), email: email.trim(), password: pass }); }
+      catch (e) { return T().errNet; }
+      if (r.status === 409) return T().errTaken;
+      if (!r.ok) return T().errNet;
+      authTake(r.j.user);
+      return '';
+    }
+    /* بلا خادم (‎file://‎): حسابٌ في الدرج كما كان */
     state.profile.name = name.trim();
     state.profile.email = email.trim();
     state.profile.password = pass;
@@ -1129,7 +1183,16 @@
     return '';
   }
 
-  function authLogin(email, pass) {
+  async function authLogin(email, pass) {
+    if (AUTH_SRV) {
+      let r;
+      try { r = await authCall('login', { email: email.trim(), password: pass }); }
+      catch (e) { return T().errNet; }
+      if (r.status === 401) return T().errBadLogin;
+      if (!r.ok) return T().errNet;
+      authTake(r.j.user);
+      return '';
+    }
     if (!hasAcct() || state.profile.email !== email.trim()) return T().errNoAcct;
     if (state.profile.password !== pass) return T().errPassWrong;
     state.signedIn = true;
@@ -1137,9 +1200,29 @@
     return '';
   }
 
-  function authLogout() {
+  async function authLogout() {
+    /* ويُبطَل على الخادم أوّلًا: علمٌ محلّيٌّ يُطفأ وجلسةٌ باقيةٌ هناك خروجٌ كاذب.
+       وإن تعثّر الإبطالُ خرج محلّيًّا على أيّ حال — ولا يُحبس المستخدم في حسابه */
+    if (AUTH_SRV) { try { await authCall('logout', {}); } catch (e) { /* يُخرَج على أيّ حال */ } }
     state.signedIn = false;
+    state.uid = '';
     save(); applyAuth(); goMarket();
+  }
+
+  /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
+  function authSync() {
+    if (!AUTH_SRV) return;
+    fetch(authURL('me'), { credentials: 'same-origin', cache: 'no-store' })
+      .then(async r => {
+        if (r.status === 401) {                    /* الخادمُ يعرفني: لستُ أحدًا */
+          if (state.signedIn) { state.signedIn = false; state.uid = ''; save(); applyAuth(); }
+          return;
+        }
+        if (!r.ok) return;                          /* خللٌ في الخادم: يُترك الدرجُ كما هو */
+        const j = await r.json();
+        if (j && j.user) authTake(j.user);
+      })
+      .catch(() => { /* لا شبكة: الذاكرةُ تكفي حتى تعود */ });
   }
 
   /* ===== ونداءُ البوابة: يُقال ما فات لا «ممنوع» =====
@@ -1236,12 +1319,21 @@
     if (e.target.closest('#auth-swap')) { openAuthPage(authMode === 'join' ? 'login' : 'join'); return; }
     if (e.target.closest('#auth-go')) {
       const v = a => { const i = $(`.auth-in[data-a="${a}"]`); return i ? i.value : ''; };
-      const err = authMode === 'join'
+      /* والزرُّ يُقفل ويقول «لحظة»: الطلبُ يعبر الشبكةَ الآن، وضغطتان تصنعان
+         حسابين أو جلستين. ويُفتح في كلّ الأحوال — نجح أم لا */
+      const btn = e.target.closest('#auth-go');
+      const was = btn.textContent;
+      btn.disabled = true; btn.textContent = T().authWait;
+      const mode = authMode;
+      const p = mode === 'join'
         ? authJoin(v('name'), v('email'), v('pass'))
         : authLogin(v('email'), v('pass'));
-      /* والخطأُ يُكتب في الصفحة لا في شريطٍ يزول: النموذجُ أمامه ويريد أن يُصلحه */
-      if (err) { const b = $('#auth-err'); if (b) { b.textContent = err; b.hidden = false; } return; }
-      openAcctPage();   /* نجح: الصفحةُ نفسُها تعرض حسابَه الآن */
+      Promise.resolve(p).then(err => {
+        btn.disabled = false; btn.textContent = was;
+        /* والخطأُ يُكتب في الصفحة لا في شريطٍ يزول: النموذجُ أمامه ويريد أن يُصلحه */
+        if (err) { const b = $('#auth-err'); if (b) { b.textContent = err; b.hidden = false; } return; }
+        openAcctPage();   /* نجح: الصفحةُ نفسُها تعرض حسابَه الآن */
+      });
       return;
     }
     /* ===== وجهُ الحساب ===== */

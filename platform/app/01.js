@@ -876,6 +876,12 @@
       /* وأخطاءُ النموذج تقول أيَّ حقلٍ بالضبط: «تحقّق من بياناتك» تُبقي المستخدم يخمّن */
       errName: 'اكتب اسمك', errEmail: 'اكتب إيميلًا صحيحًا', errPass: 'كلمة المرور ٦ أحرف فأكثر',
       errNoAcct: 'ما فيه حساب بهذا الإيميل على هذا المتصفّح', errPassWrong: 'كلمة المرور غير صحيحة',
+      /* ورسائلُ الخادم: تقول ما وقع بلا أن تُفشي. «لا حساب» و«كلمةٌ خاطئة» رسالةٌ
+         واحدةٌ عمدًا — التفريقُ يُخبر المهاجمَ أيُّ العناوين مسجَّلٌ عندنا */
+      errBadLogin: 'الإيميل أو كلمة المرور غير صحيحة',
+      errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
+      errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
+      authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
       /* المرآة: نصوصٌ تقول ما يقع بالضبط — «نسخة حيّة» لا «نسخة احتياطية»، فالفرق أنّها تُكتب بلا طلبك */
@@ -1191,6 +1197,10 @@
       guestCan: 'As a guest you can browse the library, study cards, and take exams — and your exams are recorded for you.',
       errName: 'Enter your name', errEmail: 'Enter a valid email', errPass: 'Password must be 6 characters or more',
       errNoAcct: 'No account with this email on this browser', errPassWrong: 'Wrong password',
+      errBadLogin: 'Wrong email or password',
+      errTaken: 'This email is registered — log in instead',
+      errNet: 'Could not reach the server — check your connection',
+      authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
       mirTitle: 'My copy on this device',
       mirWhy: 'Link a file on your desktop and every save is written to it. Wipe the browser entirely and you still have everything.',
