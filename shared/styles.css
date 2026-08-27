@@ -5384,7 +5384,7 @@ html[data-theme="dark"] .cd-fan { background: #17313a; box-shadow: 0 12px 30px r
 /* ===== إنذارا التخزين =====
    الأحمر: لم يُحفظ ما كتبتَه — يبقى حتى ينجح حفظٌ بعده، فلا يُغلَق ولا يخبو.
    والذهبيّ: نسختك على الجهاز تنتظر ضغطةَ إذن. كلاهما فوق كل شيء لأنّ الخبر لا يحتمل التأجيل */
-#sv-alarm, #mir-ask {
+#sv-alarm, #mir-ask, #cat-new {
   position: fixed; inset-inline: 16px; bottom: 16px; z-index: 9999;
   display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
   padding: 12px 18px; border-radius: 12px; font-size: 13.5px; line-height: 1.7;
@@ -5392,6 +5392,13 @@ html[data-theme="dark"] .cd-fan { background: #17313a; box-shadow: 0 12px 30px r
 }
 #sv-alarm { background: #c0455f; color: #fff; border: 1px solid #a3364c; }
 #sv-alarm a { color: #fff; font-weight: 700; }
+/* والثالث: قائمةُ المواد تحدّثت على الخادم. وهو خبرٌ لا إنذار — فبتروليُّ الهويّة
+   لا أحمرُ الخطر ولا ذهبيُّ الطلب، ولا يُقاطع عملًا: يُقال ويُنتظر ضغطتُك */
+#cat-new { background: var(--c-kfupm, #2c5e65); color: #fff; border: 1px solid rgba(0, 0, 0, .2); }
+#cat-new button {
+  font: inherit; font-weight: 700; cursor: pointer; padding: 5px 14px; border-radius: 999px;
+  border: 0; background: #fff; color: var(--c-kfupm, #2c5e65);
+}
 #mir-ask { background: var(--u-gold, #c8a44a); color: #14233f; border: 1px solid rgba(0, 0, 0, .18); }
 #mir-ask button {
   font: inherit; font-weight: 700; cursor: pointer; padding: 5px 14px; border-radius: 999px;

@@ -321,9 +321,74 @@
   /* ---------- كتالوج الأدمن ----------
      مصدر المواد والتخصصات هو لوحة «أكاديميا أدمن» (مفتاح مستقلّ في نفس التخزين).
      إن لم تُفتح اللوحة بعد، يعمل الموقع على مواد data.js كما كان (بلا تخصصات) */
-  const CAT = (() => { try { return JSON.parse(localStorage.getItem('academia2:catalog:v1')); } catch (e) { return null; } })();
+  const CAT_KEY = 'academia2:catalog:v1';
+  const CAT = (() => { try { return JSON.parse(localStorage.getItem(CAT_KEY)); } catch (e) { return null; } })();
   const CAT_ON = !!(CAT && Array.isArray(CAT.courses) && CAT.courses.length);
   const TAGS = (CAT && Array.isArray(CAT.tags)) ? CAT.tags : [];
+
+  /* ============================================================
+     الكتالوجُ من الخادم — م٠ من ‎ROADMAP-SERVER.md‎
+     ============================================================
+     أوّلُ خيطٍ يصل الموقعَ بخادم. ولا يُقلب المعمارُ لأجله: الإقلاعُ يقرأ **الدرجَ**
+     كما كان — متزامنًا، بلا انتظار شبكة — فتفتح الصفحةُ في اللحظة نفسها وتعمل
+     بلا إنترنت. ثمّ يُسأل الخادمُ **بعد** أن يستقرّ كلُّ شيء.
+
+     ===== ولمَ لا يُنتظر الخادمُ في الإقلاع؟ =====
+     لأنّ ‎CAT‎ يُبنى عليها ‎CLIST‎ و‎CM‎ وما بعدهما في السطر الذي يليها. فانتظارُ
+     الشبكة ههنا يعني صفحةً بيضاءَ بقدر بُعد الخادم، وموقعًا لا يفتح إن انقطع
+     الإنترنت. والسرعةُ التي في الموقع منشؤها أنّه لا ينتظر أحدًا — ولا تُباع
+     لأجل مئةٍ وثمانِ مادّةٍ تتبدّل مرّاتٍ في الفصل.
+
+     ===== وكيف يُطبَّق ما وصل؟ =====
+     ‎CAT‎ و‎CLIST‎ ثوابتُ بُنيت، فلا تُبدَّل تحت الرسم. فالوارد يُحفظ في الدرج،
+     ثمّ:
+       · إن لم يكن في الدرج كتالوجٌ أصلًا (زائرٌ لأوّل مرّة) — تُعاد الصفحةُ **مرّةً
+         واحدةً في الجلسة** فيُقلع بالكتالوج كاملًا. ولم يفعل شيئًا بعدُ، والإعادةُ
+         من الخبء لحظيّة.
+       · وإن كان عنده كتالوجٌ فتبدّل — يُعرض شريطٌ هادئٌ فيه زرُّ تحديث، ولا تُقطع
+         عليه صفحةٌ يعمل فيها.
+     والحارسُ في ‎sessionStorage‎ لا في ‎state‎: يزول بإغلاق اللسان، فلا يعلق علمٌ
+     يمنع التحديثَ أبدًا، ويستحيل أن تدور الإعادةُ أكثر من مرّة.
+
+     ===== ولا يُوثَق بما يرد =====
+     يُفحص شكلُه (مصفوفةٌ فيها أكوادٌ) قبل أن يُكتب. وردٌّ مكسورٌ أو صفحةُ خطأٍ
+     تُقرأ JSON فتُسقط الكتالوجَ كلَّه — والموقعُ يبقى على ما في درجه. */
+  const CAT_URL = 'api/catalog';
+  function catSync() {
+    if (!/^https?:/.test(location.protocol)) return;   /* على ‎file://‎ لا خادمَ يُسأل */
+    /* والأساسُ ‎ASSET_BASE‎ (جذرُ المشروع، يُقتطع من ‎src‎ الخاصّ بالمحرّك) لا
+       ‎location.href‎: الصفحةُ في ‎platform/‎ فيصير النسبيُّ ‎platform/api/…‎.
+       وإن غاب الأساسُ فجذرُ الأصل — لا الصفحةُ التي نحن فيها */
+    const url = ASSET_BASE ? new URL(CAT_URL, ASSET_BASE).href : location.origin + '/' + CAT_URL;
+    fetch(url, { cache: 'no-cache' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => {
+        if (!j || !Array.isArray(j.courses) || !j.courses.length || !j.courses[0].code) return;
+        const had = CAT_ON;
+        if (CAT && String(CAT.v) === String(j.v) && had) return;   /* لم يتبدّل */
+        try { localStorage.setItem(CAT_KEY, JSON.stringify(j)); } catch (e) { return; }
+        if (!had) {
+          if (sessionStorage.getItem('academia2:catReload')) return;
+          sessionStorage.setItem('academia2:catReload', '1');
+          location.reload();
+          return;
+        }
+        catBar();
+      })
+      .catch(() => { /* لا شبكةَ أو لا خادم: الدرجُ يكفي */ });
+  }
+  /* شريطُ التحديث: يُقال ولا يُقاطَع */
+  function catBar() {
+    if (document.getElementById('cat-new')) return;
+    const ar = (state.lang || 'ar') === 'ar';
+    const b = document.createElement('div');
+    b.id = 'cat-new';
+    b.innerHTML = (ar
+      ? '<span>تحدّثت قائمة المواد.</span><button type="button">حدِّث الصفحة</button>'
+      : '<span>The course list was updated.</span><button type="button">Refresh</button>');
+    b.querySelector('button').onclick = () => location.reload();
+    document.body.appendChild(b);
+  }
   const ORIG = {}; COURSES.forEach(c => ORIG[c.code] = c);   /* الأصل: لون الغلاف البديل يتبع كليّتها */
   /* شكل المادة الموحّد: code · ar (الاسم الكامل) · arName (المختصر المعروض) · h · col · tags · lab */
   const CLIST = CAT_ON
@@ -27035,6 +27100,7 @@
 
   ankiRedo();
   seedMark();       /* آخِرَ البذور كلِّها: يُوسَم المصنوعُ ليُمحى بسطرٍ يوم يجيء الحقيقيّ */
+  catSync();        /* وبعد أن يستقرّ كلُّ شيء: يُسأل الخادمُ عن الكتالوج — بلا انتظارٍ في الإقلاع */
   applyTheme();
   applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ

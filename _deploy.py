@@ -29,8 +29,10 @@ LIVE    = 'https://academia-kfupm.pages.dev'
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # ---------- ما لا يُرفع ----------
-SKIP_DIRS  = {'admin'}                 # لوحةُ الأدمن — بقرار صاحب الموقع
-SKIP_FILES = {'README.md'}             # وثيقةٌ داخليّة
+SKIP_DIRS  = set()                     # (كانت ‎admin‎ — نُشرت ٢٨ أغسطس بقرار صاحب الموقع)
+SKIP_FILES = {'README.md',             # وثيقةٌ داخليّة
+              'wrangler.toml',         # ضبطُ الربط: يقرؤه wrangler من الجذر ولا يُقدَّم
+              'ROADMAP-SERVER.md'}
 SKIP_PATHS = {'platform/app'}          # أجزاءُ المحرّك: مدخلُ بناءٍ لا مخرَجه
 SKIP_ROOT_PREFIX = '_'                 # ملفّاتُ العُدّة
 # وكلُّ ما يبدأ بنقطة، في أيّ عمق (‎.git‎ و‎.stage‎ وما يجيء بعدهما)
