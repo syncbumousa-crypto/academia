@@ -1,0 +1,746 @@
+/* ============================================================
+   أكاديميا أدمن — لوحة تحكّم المكتبة
+   البيانات مشتركة مع الموقع: كلاهما يُفتح بـfile:// فيقرآن نفس تخزين المتصفّح
+     academia2:catalog:v1 → كتالوج الأدمن  { tags, courses }
+     academia2:v1         → حالة الموقع    (cinfo/المساهمات/الصور/الأترام)
+   الكتالوج يُبذَر مرّة واحدة من مواد الموقع الحالية (data.js) فتصير كأن الأدمن أضافها
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const LS_CAT = 'academia2:catalog:v1';
+  const LS_APP = 'academia2:v1';
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* مواد الموقع التي لها معمل (نفس قائمة app.js) — تُستعمل في البذرة الأولى فقط */
+  const SEED_LABS = new Set(['ICS 104', 'STAT 214', 'MIS 250', 'MIS 301', 'MIS 311', 'MIS 315', 'MIS 341', 'ACCT 300', 'CGS 392', 'COE 344', 'ICS 108', 'SWE 206']);
+
+  /* ---------- التخزين ---------- */
+  const readJSON = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
+  let cat = readJSON(LS_CAT, null);
+  const saveCat = () => {
+    try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); }
+    catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); }
+  };
+  const app = () => readJSON(LS_APP, {});
+  const saveApp = s => {
+    try { localStorage.setItem(LS_APP, JSON.stringify(s)); return true; }
+    catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); return false; }
+  };
+
+  /* الاسم العربي المختصر لمادة الموقع: «احصاء 214» من الكود + جدول الأقسام */
+  function arShort(code) {
+    const sp = code.indexOf(' ');
+    if (sp < 0) return code;
+    const dept = code.slice(0, sp);
+    return `${(typeof DEPT_AR !== 'undefined' && DEPT_AR[dept]) || dept} ${code.slice(sp + 1)}`;
+  }
+
+  /* البذرة الأولى: مواد الموقع الحالية تُستورد كأن الأدمن أضافها، وكلها تحت تخصص «نظم المعلومات» */
+  const MIS = { id: 'mis', ar: 'نظم المعلومات', en: 'MIS' };
+  function seedCatalog() {
+    const courses = (typeof COURSES !== 'undefined' ? COURSES : []).map(c => ({
+      code: c.code,               /* الاسم الإنجليزي = مفتاح المادة في كل الموقع */
+      ar: arShort(c.code),        /* الاسم العربي المختصر المعروض */
+      full: c.ar || '',           /* الاسم الكامل (تلميح وبحث) */
+      h: c.h || 0,
+      lab: SEED_LABS.has(c.code),
+      tags: [MIS.id],
+    }));
+    cat = { tags: [Object.assign({}, MIS)], courses, v: 2 };
+    saveCat();
+  }
+  if (!cat || !Array.isArray(cat.courses)) seedCatalog();
+  cat.tags = cat.tags || [];
+  cat.courses = cat.courses || [];
+  /* ترقية الكتالوج (٢): وسوم الكليات الثلاث تُستبدل بتخصص واحد «نظم المعلومات» على كل المواد */
+  if (cat.v !== 2) {
+    cat.tags = [Object.assign({}, MIS)];
+    cat.courses.forEach(c => { c.tags = [MIS.id]; });
+    cat.v = 2;
+    saveCat();
+  }
+
+  /* ---------- إشعار ---------- */
+  let toastT = 0;
+  function toast(msg) {
+    const el = $('#a-toast');
+    el.textContent = msg;
+    clearTimeout(toastT);
+    requestAnimationFrame(() => el.classList.add('on'));
+    toastT = setTimeout(() => el.classList.remove('on'), 2400);
+  }
+
+  /* ---------- التبويبات ---------- */
+  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time'];
+  $('#a-tabs').addEventListener('click', e => {
+    const b = e.target.closest('button[data-tab]'); if (!b) return;
+    document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
+    PANELS.forEach(p => { $('#a-panel-' + p).hidden = p !== b.dataset.tab; });
+    if (b.dataset.tab === 'docs') renderDocs();
+    if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
+  });
+
+  /* ============================================================
+     ١) التخصصات
+     ============================================================ */
+  let tagEdit = null;   // معرّف التخصص قيد التعديل
+
+  function renderTags() {
+    const host = $('#tag-list');
+    host.innerHTML = cat.tags.length
+      ? cat.tags.map(t => {
+          const used = cat.courses.filter(c => (c.tags || []).includes(t.id)).length;
+          return `<div class="a-item" data-tag="${esc(t.id)}">
+            <div class="a-item__main">
+              <span class="a-item__t">${esc(t.ar)}${t.en ? `<span class="a-en">${esc(t.en)}</span>` : ''}</span>
+              <span class="a-item__sub">${used} مادة</span>
+            </div>
+            <div class="a-acts">
+              <button type="button" class="a-btn" data-act="edit">تعديل</button>
+              <button type="button" class="a-btn a-btn--del" data-act="del">حذف</button>
+            </div>
+          </div>`;
+        }).join('')
+      : `<p class="a-empty">لا تخصصات بعد — أضِف أولها من الأعلى.</p>`;
+    renderTagChips();
+    renderStats();
+  }
+
+  $('#tag-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const ar = $('#tag-ar').value.trim(), en = $('#tag-en').value.trim();
+    if (!ar) return;
+    if (tagEdit) {
+      const t = cat.tags.find(x => x.id === tagEdit);
+      if (t) { t.ar = ar; t.en = en; }
+      tagEdit = null;
+      $('#tag-save').textContent = 'إضافة التخصص';
+      $('#tag-cancel').hidden = true;
+      toast('حُدّث التخصص');
+    } else {
+      if (cat.tags.some(t => t.ar === ar)) { toast('هذا التخصص موجود'); return; }
+      cat.tags.push({ id: 't' + Date.now().toString(36), ar, en });
+      toast(`أُضيف «${ar}»`);
+    }
+    saveCat();
+    $('#tag-ar').value = ''; $('#tag-en').value = '';
+    renderTags();
+  });
+
+  $('#tag-cancel').addEventListener('click', () => {
+    tagEdit = null;
+    $('#tag-ar').value = ''; $('#tag-en').value = '';
+    $('#tag-save').textContent = 'إضافة التخصص';
+    $('#tag-cancel').hidden = true;
+  });
+
+  $('#tag-list').addEventListener('click', e => {
+    const row = e.target.closest('[data-tag]'); if (!row) return;
+    const id = row.dataset.tag, t = cat.tags.find(x => x.id === id);
+    const act = (e.target.closest('[data-act]') || {}).dataset;
+    if (!t || !act) return;
+    if (act.act === 'edit') {
+      tagEdit = id;
+      $('#tag-ar').value = t.ar; $('#tag-en').value = t.en || '';
+      $('#tag-save').textContent = 'حفظ التعديل';
+      $('#tag-cancel').hidden = false;
+      $('#tag-ar').focus();
+    } else if (act.act === 'del') {
+      const used = cat.courses.filter(c => (c.tags || []).includes(id)).length;
+      if (!confirm(`حذف «${t.ar}»؟${used ? `\nسيُزال من ${used} مادة.` : ''}`)) return;
+      cat.tags = cat.tags.filter(x => x.id !== id);
+      cat.courses.forEach(c => { c.tags = (c.tags || []).filter(x => x !== id); });
+      saveCat(); renderTags(); renderCourses();
+      toast('حُذف التخصص');
+    }
+  });
+
+  /* وسوم التخصصات داخل نموذج المادة */
+  let pickedTags = [];
+  function renderTagChips() {
+    $('#c-tags').innerHTML = cat.tags.length
+      ? cat.tags.map(t => `<button type="button" class="a-chip${pickedTags.includes(t.id) ? ' on' : ''}" data-tid="${esc(t.id)}">${esc(t.ar)}</button>`).join('')
+      : `<span class="a-none">لا تخصصات بعد — أضِفها من تبويب «التخصصات».</span>`;
+  }
+  $('#c-tags').addEventListener('click', e => {
+    const b = e.target.closest('[data-tid]'); if (!b) return;
+    const id = b.dataset.tid;
+    pickedTags = pickedTags.includes(id) ? pickedTags.filter(x => x !== id) : pickedTags.concat(id);
+    renderTagChips();
+  });
+
+  /* ============================================================
+     ٢) المواد
+     ============================================================ */
+  let courseEdit = null;   // كود المادة قيد التعديل
+  let actLab = false;
+
+  $('#c-act').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    actLab = b.dataset.act === 'lab';
+    document.querySelectorAll('#c-act .a-seg').forEach(x => x.classList.toggle('on', x === b));
+  });
+
+  function resetCourseForm() {
+    courseEdit = null; pickedTags = []; actLab = false;
+    $('#c-ar').value = ''; $('#c-en').value = ''; $('#c-h').value = 3;
+    document.querySelectorAll('#c-act .a-seg').forEach((x, i) => x.classList.toggle('on', i === 0));
+    $('#c-save').textContent = 'إضافة المادة';
+    $('#c-cancel').hidden = true;
+    renderTagChips();
+  }
+  $('#c-cancel').addEventListener('click', resetCourseForm);
+
+  $('#course-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const ar = $('#c-ar').value.trim(), code = $('#c-en').value.trim().replace(/\s+/g, ' ');
+    const h = Math.max(0, +$('#c-h').value || 0);
+    if (!ar || !code) return;
+    const dup = cat.courses.find(c => c.code === code);
+    if (courseEdit) {
+      const c = cat.courses.find(x => x.code === courseEdit);
+      if (!c) return;
+      if (code !== courseEdit && dup) { toast('الاسم الإنجليزي مستعمل في مادة أخرى'); return; }
+      if (code !== courseEdit) migrateCode(courseEdit, code);
+      Object.assign(c, { code, ar, h, lab: actLab, tags: pickedTags.slice() });
+      toast('حُدّثت المادة');
+    } else {
+      if (dup) { toast('هذه المادة موجودة'); return; }
+      cat.courses.push({ code, ar, full: '', h, lab: actLab, tags: pickedTags.slice() });
+      toast(`أُضيفت «${ar}»`);
+    }
+    saveCat(); resetCourseForm(); renderCourses(); fillCourseSelects();
+  });
+
+  /* تغيير الاسم الإنجليزي = تغيير مفتاح المادة: تُنقل معه مساهماتها وصورتها وأترامها */
+  function migrateCode(oldC, newC) {
+    const s = app();
+    if (s.cinfo && s.cinfo[oldC]) { s.cinfo[newC] = s.cinfo[oldC]; delete s.cinfo[oldC]; }
+    if (s.imgs && s.imgs[oldC]) { s.imgs[newC] = s.imgs[oldC]; delete s.imgs[oldC]; }
+    Object.keys(s.libs || {}).forEach(t => {
+      (s.libs[t] || []).forEach(en => { if (en.code === oldC) en.code = newC; });
+    });
+    saveApp(s);
+  }
+
+  function tagName(id) { const t = cat.tags.find(x => x.id === id); return t ? t.ar : id; }
+
+  function renderCourses() {
+    const q = ($('#c-search').value || '').trim();
+    const list = q
+      ? cat.courses.filter(c => (c.ar + ' ' + c.code + ' ' + (c.full || '')).includes(q))
+      : cat.courses;
+    $('#c-count').textContent = `${list.length} مادة`;
+    $('#course-list').innerHTML = list.length
+      ? list.map(c => `<div class="a-item" data-code="${esc(c.code)}">
+          <div class="a-item__main">
+            <span class="a-item__t">${esc(c.ar)}<span class="a-en">${esc(c.code)}</span></span>
+            <span class="a-item__sub">
+              <span class="a-h">${c.h} س</span>
+              ${c.lab ? `<span class="a-lab">معمل</span>` : ''}
+              ${(c.tags || []).map(t => `<span class="a-tag">${esc(tagName(t))}</span>`).join('')}
+            </span>
+          </div>
+          <div class="a-acts">
+            <button type="button" class="a-btn" data-act="edit">تعديل</button>
+            <button type="button" class="a-btn a-btn--del" data-act="del">حذف</button>
+          </div>
+        </div>`).join('')
+      : `<p class="a-empty">${q ? 'لا مادة تطابق البحث.' : 'لا مواد بعد — أضِف أولها من الأعلى.'}</p>`;
+    renderStats();
+  }
+  $('#c-search').addEventListener('input', renderCourses);
+
+  $('#course-list').addEventListener('click', e => {
+    const row = e.target.closest('[data-code]'); if (!row) return;
+    const code = row.dataset.code, c = cat.courses.find(x => x.code === code);
+    const act = (e.target.closest('[data-act]') || {}).dataset;
+    if (!c || !act) return;
+    if (act.act === 'edit') {
+      courseEdit = code; pickedTags = (c.tags || []).slice(); actLab = !!c.lab;
+      $('#c-ar').value = c.ar; $('#c-en').value = c.code; $('#c-h').value = c.h;
+      document.querySelectorAll('#c-act .a-seg').forEach(x => x.classList.toggle('on', (x.dataset.act === 'lab') === actLab));
+      $('#c-save').textContent = 'حفظ التعديل';
+      $('#c-cancel').hidden = false;
+      renderTagChips();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (act.act === 'del') {
+      const s = app();
+      const posts = countPosts(s, code);
+      if (!confirm(`حذف «${c.ar}»؟${posts ? `\nلها ${posts} مساهمة ستبقى في التخزين لكن لن تظهر.` : ''}`)) return;
+      cat.courses = cat.courses.filter(x => x.code !== code);
+      saveCat(); renderCourses(); fillCourseSelects();
+      toast('حُذفت المادة');
+    }
+  });
+
+  /* ============================================================
+     ٣) الدكاترة — وسوم لكل مادة (اسم + صورة) تُكتب في cinfo[code].doctors
+     ============================================================ */
+  let docImg = '';        // صورة الدكتور (dataURL مصغَّرة)
+  let docEdit = null;     // معرّف الدكتور قيد التعديل
+
+  function fillCourseSelects() {
+    const opts = cat.courses.map(c => `<option value="${esc(c.code)}">${esc(c.ar)} — ${esc(c.code)}</option>`).join('');
+    ['#d-course'].forEach(sel => {
+      const el = $(sel); if (!el) return;
+      const keep = el.value;
+      el.innerHTML = opts;
+      if (keep && cat.courses.some(c => c.code === keep)) el.value = keep;
+    });
+  }
+
+  const drAvatar = d => d.img ? `<img src="${d.img}" alt="">` : esc((d.name || '؟').trim().charAt(0));
+
+  function docsOf(s, code) {
+    s.cinfo = s.cinfo || {};
+    s.cinfo[code] = s.cinfo[code] || { desc: '', rel: 0, docs: [] };
+    s.cinfo[code].doctors = s.cinfo[code].doctors || [];
+    return s.cinfo[code].doctors;
+  }
+
+  function renderDocs() {
+    const code = $('#d-course').value;
+    if (!code) { $('#doc-list').innerHTML = `<p class="a-empty">أضِف مادة أولًا.</p>`; return; }
+    const list = docsOf(app(), code);
+    $('#doc-list').innerHTML = list.length
+      ? list.map((d, i) => `<div class="a-item" data-di="${i}">
+          <span class="a-av">${drAvatar(d)}</span>
+          <div class="a-item__main">
+            <span class="a-item__t">${esc(d.name) || '—'}${d.en ? `<span class="a-en">${esc(d.en)}</span>` : ''}</span>
+            <span class="a-item__sub">${(d.posts || []).length} مساهمة عنه</span>
+          </div>
+          <div class="a-acts">
+            <button type="button" class="a-btn" data-act="edit">تعديل</button>
+            <button type="button" class="a-btn a-btn--del" data-act="del">حذف</button>
+          </div>
+        </div>`).join('')
+      : `<p class="a-empty">لا دكاترة في هذه المادة بعد.</p>`;
+  }
+  $('#d-course').addEventListener('change', () => { cancelDoc(); renderDocs(); });
+
+  $('#d-pick').addEventListener('click', () => $('#d-img').click());
+  $('#d-img').addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => {
+      /* تصغير إلى ٢٠٠px مربّعة — الصور الكبيرة تملأ حصّة التخزين المشتركة */
+      const im = new Image();
+      im.onload = () => {
+        const S = 200, cv = document.createElement('canvas');
+        cv.width = cv.height = S;
+        const g = cv.getContext('2d');
+        const side = Math.min(im.width, im.height);
+        g.drawImage(im, (im.width - side) / 2, (im.height - side) / 2, side, side, 0, 0, S, S);
+        docImg = cv.toDataURL('image/jpeg', .82);
+        $('#d-prev').innerHTML = `<img src="${docImg}" alt="">`;
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(f);
+    e.target.value = '';
+  });
+
+  function cancelDoc() {
+    docEdit = null; docImg = '';
+    $('#d-name').value = ''; $('#d-en').value = ''; $('#d-prev').innerHTML = '';
+    $('#d-save').textContent = 'إضافة الدكتور';
+    $('#d-cancel').hidden = true;
+  }
+  $('#d-cancel').addEventListener('click', cancelDoc);
+
+  $('#d-save').addEventListener('click', () => {
+    const code = $('#d-course').value, name = $('#d-name').value.trim();
+    const en = $('#d-en').value.trim();   /* اسمه بالإنجليزي — يُعرض حين يكون الموقع إنجليزيًّا */
+    if (!code || !name) { toast('اكتب اسم الدكتور'); return; }
+    const s = app(), list = docsOf(s, code);
+    if (docEdit != null) {
+      const d = list[docEdit];
+      if (d) { d.name = name; d.en = en; if (docImg) d.img = docImg; }
+      toast('حُدّث الدكتور');
+    } else {
+      list.push({
+        id: 'd' + Date.now().toString(36), name, en, img: docImg,
+        me: false, u: { name: 'الأدمن' }, ts: Date.now(), posts: [],
+      });
+      toast(`أُضيف «${name}»`);
+    }
+    if (saveApp(s)) { cancelDoc(); renderDocs(); }
+  });
+
+  $('#doc-list').addEventListener('click', e => {
+    const row = e.target.closest('[data-di]'); if (!row) return;
+    const i = +row.dataset.di, code = $('#d-course').value;
+    const act = (e.target.closest('[data-act]') || {}).dataset; if (!act) return;
+    const s = app(), list = docsOf(s, code), d = list[i];
+    if (!d) return;
+    if (act.act === 'edit') {
+      docEdit = i; docImg = '';
+      $('#d-name').value = d.name || '';
+      $('#d-en').value = d.en || '';
+      $('#d-prev').innerHTML = d.img ? `<img src="${d.img}" alt="">` : '';
+      $('#d-save').textContent = 'حفظ التعديل';
+      $('#d-cancel').hidden = false;
+      $('#d-name').focus();
+    } else if (act.act === 'del') {
+      const n = (d.posts || []).length;
+      if (!confirm(`حذف «${d.name}»؟${n ? `\nستُحذف معه ${n} مساهمة عنه.` : ''}`)) return;
+      list.splice(i, 1);
+      if (saveApp(s)) { cancelDoc(); renderDocs(); toast('حُذف الدكتور'); }
+    }
+  });
+
+  /* ============================================================
+     ٤) المساهمات — المكتبة نفسها معروضة من الموقع داخل إطار (بلا أي فرق في العرض)،
+        وفوقها «وضع الحذف»: بتفعيله يصير النقر على أي مساهمة داخل المكتبة حذفًا لها.
+        المشروعان على نفس الأصل (file://) فيقرأ الأدمن داخل الإطار ويكتب في التخزين نفسه
+     ============================================================ */
+  let delMode = false;
+
+  /* كود المادة المعروضة الآن = الكتاب المتمركز في بِكرة المكتبة المزروعة */
+  function shownCode() {
+    const el = $('#lib-host .reel-slot.is-center [data-info]');
+    return el ? el.dataset.info : '';
+  }
+
+  /* وضع الحذف: نلتقط النقرة قبل معالجات الموقع (مرحلة الالتقاط) فنمنع فتح/طيّ المساهمة */
+  $('#lib-host').addEventListener('click', e => {
+    if (!delMode) return;
+    const post = e.target.closest('.post'); if (!post) return;
+    e.preventDefault(); e.stopPropagation();
+    const code = shownCode();
+    if (!code) { toast('افتح مادة أولًا'); return; }
+    const sub = post.dataset.sub, dr = post.dataset.dr, pi = +post.dataset.pi;
+    const who = ((post.querySelector('.post-name') || {}).textContent || '').trim();
+    if (!confirm(`حذف مساهمة «${who}» نهائيًّا؟`)) return;
+    const s = app();
+    if (dr != null && dr !== '') {
+      const d = (((s.cinfo || {})[code] || {}).doctors || [])[+dr];
+      if (d) d.posts.splice(pi, 1);
+    } else {
+      postsOf(s, code, sub || 'info').splice(pi, 1);
+    }
+    if (!saveApp(s)) return;
+    toast('حُذفت المساهمة');
+    /* الموقع يقرأ حالته عند الإقلاع فقط — نعيد تحميل الصفحة كي يعرض ما بعد الحذف */
+    location.reload();
+  }, true);
+
+  $('#del-mode').addEventListener('click', e => {
+    delMode = !delMode;
+    e.target.classList.toggle('on', delMode);
+    e.target.textContent = `وضع الحذف: ${delMode ? 'مُشغَّل — انقر أي مساهمة' : 'مُطفأ'}`;
+    document.body.classList.toggle('a-delmode', delMode);
+    $('#del-hint').textContent = delMode
+      ? 'النقر على أي مساهمة يحذفها بعد تأكيد'
+      : 'شغّل وضع الحذف ثم انقر أي مساهمة داخل المكتبة';
+  });
+
+  /* ============================================================
+     ٥) المساهمات بالتاريخ — خيط زمني واحد لكل مساهمات المكتبة
+        القراءة من cinfo مباشرةً (لا من الكتالوج) كي تشمل خيوط المعامل «CODE::معمل»
+     ============================================================ */
+  const SEC_AR = {
+    info: 'المادة', doc: 'الدكاترة', abs: 'الغياب والتأخير', grade: 'توزيع الدرجات',
+    srcU: 'مصادر الفهم', srcP: 'مصادر الممارسة', videos: 'الشروح', cards: 'البطائق', lessons: 'المواضيع',
+  };
+  const SITE_NAMES = ['أكاديميا', 'academia'];
+  const MONTHS_AR = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  const baseOf = c => { const j = c.indexOf('::'); return j < 0 ? c : c.slice(0, j); };
+  const isLabKey = c => c.indexOf('::') > -1;
+
+  let tl = { q: '', code: '', sec: '', tag: '', kind: 'all', sort: 'old' };
+
+  function courseLabel(code) {
+    const c = cat.courses.find(x => x.code === baseOf(code));
+    const nm = c ? c.ar : baseOf(code);
+    return isLabKey(code) ? `${nm} — معمل` : nm;
+  }
+  const authorOf = p => p.me ? 'حسابي (أنا)' : ((p.u && p.u.name) || '—');
+  const isSitePost = p => SITE_NAMES.indexOf((p.u || {}).name) > -1;
+
+  /* عدّ عقد شجرة (الشروح/البطائق) بنوع معيّن على أي عمق */
+  function nodeCount(deck, t) {
+    let n = 0;
+    (deck || []).forEach(x => { if (x.t === t) n++; if (x.ch) n += nodeCount(x.ch, t); });
+    return n;
+  }
+
+  /* سطر واحد يلخّص ما في المساهمة — لكل بند حقوله */
+  function summarize(sec, d, drName) {
+    d = d || {};
+    const bits = [];
+    if (sec === 'info') {
+      if (d.book) bits.push(`الكتاب: ${d.book}`);
+      else if (d.bookImg) bits.push('صورة غلاف');
+      if (d.lang) bits.push(d.lang);
+      if (d.type) bits.push(d.type);
+      if (d.rel) bits.push(`الترابط ${d.rel}%`);
+      if (d.desc) bits.push(d.desc);
+    } else if (sec === 'doc') {
+      if (drName) bits.push(drName);
+      if (d.e) bits.push(d.e);
+      if ((d.hours || []).length) bits.push(`${d.hours.length} ساعة مكتبية`);
+      if (d.teach) bits.push(`الشرح ${d.teach}/10`);
+      if (d.grade) bits.push(`التصحيح ${d.grade}/10`);
+      if (d.d) bits.push(d.d);
+    } else if (sec === 'abs') {
+      if (d.free) bits.push(`${d.free} غياب مجاني`);
+      if (d.dedAmt) bits.push(`خصم ${d.dedAmt} من ${d.dedFrom}`);
+      if (d.dn) bits.push(`DN عند ${d.dn}`);
+      if (d.late) bits.push(`${d.late} تأخير = غياب`);
+    } else if (sec === 'grade') {
+      const it = (d.items || []).filter(x => x && x.name);
+      if (it.length) bits.push(it.map(x => `${x.name}${x.pct ? ` ${x.pct}%` : ''}`).join(' · '));
+    } else if (sec === 'srcU' || sec === 'srcP') {
+      const files = Object.keys(d.files || {}).length;
+      if (files) bits.push(`${files} ملف`);
+      if (d.html) bits.push(String(d.html).replace(/<[^>]*>/g, ' '));
+      if (Array.isArray(d.items) && d.items.length) bits.push(`${d.items.length} مصدر`);
+    } else if (sec === 'videos') {
+      const v = nodeCount(d.deck, 'v'), f = nodeCount(d.deck, 'f');
+      if (v) bits.push(`${v} فيديو`);
+      if (f) bits.push(`${f} مجلد`);
+    } else if (sec === 'cards') {
+      let c = 0, f = 0;
+      Object.keys(d.decks || {}).forEach(k => { c += nodeCount(d.decks[k], 'c'); f += nodeCount(d.decks[k], 'f'); });
+      if (c) bits.push(`${c} بطاقة`);
+      if (f) bits.push(`${f} مجلد`);
+    }
+    const s = bits.join(' · ').replace(/\s+/g, ' ').trim();
+    return s || '—';
+  }
+
+  /* كل المساهمات مسطّحة: {p, code, sec, i, di, drName} */
+  function allPosts() {
+    const s = app(), out = [];
+    Object.keys(s.cinfo || {}).forEach(code => {
+      const info = s.cinfo[code] || {};
+      Object.keys(info.posts || {}).forEach(sec => {
+        (info.posts[sec] || []).forEach((p, i) => { if (p) out.push({ p, code, sec, i, di: -1, drName: '' }); });
+      });
+      (info.doctors || []).forEach((dr, di) => {
+        (dr.posts || []).forEach((p, i) => { if (p) out.push({ p, code, sec: 'doc', i, di, drName: dr.name || '' }); });
+      });
+    });
+    return out;
+  }
+
+  function fillTlSelects() {
+    const codes = Array.from(new Set(allPosts().map(x => x.code))).sort();
+    $('#tl-code').innerHTML = `<option value="">كل المواد</option>` +
+      codes.map(c => `<option value="${esc(c)}">${esc(courseLabel(c))}</option>`).join('');
+    $('#tl-code').value = tl.code;
+    $('#tl-sec').innerHTML = `<option value="">كل البنود</option>` +
+      Object.keys(SEC_AR).map(k => `<option value="${k}">${SEC_AR[k]}</option>`).join('');
+    $('#tl-sec').value = tl.sec;
+    $('#tl-tag').innerHTML = `<option value="">كل التخصصات</option>` +
+      cat.tags.map(t => `<option value="${esc(t.id)}">${esc(t.ar)}</option>`).join('');
+    $('#tl-tag').value = tl.tag;
+  }
+
+  const dayKey = ts => { const d = new Date(ts || 0); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; };
+  const dayLabel = ts => { const d = new Date(ts || 0); return `${d.getDate()} ${MONTHS_AR[d.getMonth()]} ${d.getFullYear()}`; };
+  const timeLabel = ts => { const d = new Date(ts || 0); const h = d.getHours(), m = d.getMinutes(); return `${h > 12 ? h - 12 : (h || 12)}:${m < 10 ? '0' + m : m} ${h < 12 ? 'ص' : 'م'}`; };
+
+  function renderTimeline() {
+    const tagCodes = tl.tag
+      ? new Set(cat.courses.filter(c => (c.tags || []).includes(tl.tag)).map(c => c.code))
+      : null;
+    const q = tl.q.trim();
+    let list = allPosts().filter(x => {
+      if (tl.code && x.code !== tl.code) return false;
+      if (tl.sec && x.sec !== tl.sec) return false;
+      if (tagCodes && !tagCodes.has(baseOf(x.code))) return false;
+      if (tl.kind === 'pin' && !x.p.pin) return false;
+      if (tl.kind === 'site' && !isSitePost(x.p)) return false;
+      if (tl.kind === 'stu' && isSitePost(x.p)) return false;
+      if (q) {
+        const hay = `${authorOf(x.p)} ${courseLabel(x.code)} ${x.code} ${SEC_AR[x.sec] || x.sec} ${summarize(x.sec, x.p.data, x.drName)}`;
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    list.sort((a, b) => tl.sort === 'new' ? (b.p.ts || 0) - (a.p.ts || 0) : (a.p.ts || 0) - (b.p.ts || 0));
+
+    $('#tl-count').textContent = `${list.length} مساهمة`;
+    if (!list.length) {
+      $('#tl-list').innerHTML = `<p class="a-empty">لا مساهمة تطابق التصفية.</p>`;
+      return;
+    }
+    /* تجميع بالأيام: عنوان يوم ثم مساهماته على خيط رأسيّ */
+    let html = '', day = '';
+    list.forEach(x => {
+      const k = dayKey(x.p.ts);
+      if (k !== day) {
+        if (day) html += '</div>';
+        day = k;
+        const n = list.filter(y => dayKey(y.p.ts) === k).length;
+        html += `<div class="a-tl__day"><span class="a-tl__date">${dayLabel(x.p.ts)}</span><span class="a-tl__n">${n} مساهمة</span></div><div class="a-tl__group">`;
+      }
+      const av = (x.p.u && x.p.u.img) ? `<img src="${x.p.u.img}" alt="">` : esc(authorOf(x.p).trim().charAt(0));
+      html += `<article class="a-tl__row" data-code="${esc(x.code)}" data-sec="${esc(x.sec)}" data-i="${x.i}" data-di="${x.di}">
+          <span class="a-tl__dot"></span>
+          <span class="a-av a-av--sm">${av}</span>
+          <div class="a-tl__main">
+            <div class="a-tl__meta">
+              <b class="a-tl__who">${esc(authorOf(x.p))}</b>
+              ${x.p.pin ? `<span class="a-pin">مثبّتة</span>` : ''}
+              <span class="a-tag">${esc(courseLabel(x.code))}</span>
+              <span class="a-tag a-tag--sec">${esc(SEC_AR[x.sec] || x.sec)}</span>
+              <span class="a-tl__time">${timeLabel(x.p.ts)}</span>
+            </div>
+            <p class="a-tl__txt">${esc(summarize(x.sec, x.p.data, x.drName))}</p>
+          </div>
+          <div class="a-acts">
+            <button type="button" class="a-btn" data-act="pin">${x.p.pin ? 'إلغاء التثبيت' : 'تثبيت'}</button>
+            <button type="button" class="a-btn" data-act="open">في المكتبة ↗</button>
+            <button type="button" class="a-btn a-btn--del" data-act="del">حذف</button>
+          </div>
+        </article>`;
+    });
+    html += '</div>';
+    $('#tl-list').innerHTML = html;
+  }
+
+  /* مصفوفة المساهمة الأصلية داخل الحالة — نكتب فيها ثم نحفظ */
+  function tlArray(s, code, sec, di) {
+    if (di > -1) {
+      const dr = (((s.cinfo || {})[code] || {}).doctors || [])[di];
+      return dr ? (dr.posts = dr.posts || []) : null;
+    }
+    return postsOf(s, code, sec);
+  }
+
+  $('#tl-q').addEventListener('input', e => { tl.q = e.target.value; renderTimeline(); });
+  $('#tl-code').addEventListener('change', e => { tl.code = e.target.value; renderTimeline(); });
+  $('#tl-sec').addEventListener('change', e => { tl.sec = e.target.value; renderTimeline(); });
+  $('#tl-tag').addEventListener('change', e => { tl.tag = e.target.value; renderTimeline(); });
+  $('#tl-kind').addEventListener('click', e => {
+    const b = e.target.closest('[data-kind]'); if (!b) return;
+    tl.kind = b.dataset.kind;
+    document.querySelectorAll('#tl-kind .a-seg').forEach(x => x.classList.toggle('on', x === b));
+    renderTimeline();
+  });
+  $('#tl-sort').addEventListener('click', e => {
+    const b = e.target.closest('[data-sort]'); if (!b) return;
+    tl.sort = b.dataset.sort;
+    document.querySelectorAll('#tl-sort .a-seg').forEach(x => x.classList.toggle('on', x === b));
+    renderTimeline();
+  });
+
+  $('#tl-list').addEventListener('click', e => {
+    const row = e.target.closest('.a-tl__row'); if (!row) return;
+    const act = (e.target.closest('[data-act]') || {}).dataset; if (!act) return;
+    const code = row.dataset.code, sec = row.dataset.sec, i = +row.dataset.i, di = +row.dataset.di;
+    if (act.act === 'open') { openInLibrary(code, sec); return; }
+    const s = app(), arr = tlArray(s, code, sec, di);
+    const p = arr && arr[i]; if (!p) { toast('لم تعد المساهمة موجودة'); renderTimeline(); return; }
+    if (act.act === 'pin') {
+      p.pin = !p.pin;
+      if (p.pin) p.pinAt = Date.now();   /* الأحدث تثبيتًا هو صاحب غلاف المادة */
+      if (saveApp(s)) {
+        toast(p.pin ? 'ثُبّتت المساهمة' : 'أُلغي التثبيت');
+        /* المكتبة المزروعة تقرأ حالتها عند الإقلاع — نعيد التحميل كي يتبع الغلافُ التثبيتَ
+           (وحفظُها لاحقًا فوق تخزيننا يمحو التغيير لولا ذلك). التصفية تُستعاد بعد التحميل */
+        reloadKeepTl();
+      }
+    } else if (act.act === 'del') {
+      if (!confirm(`حذف مساهمة «${authorOf(p)}» في «${courseLabel(code)} — ${SEC_AR[sec] || sec}» نهائيًّا؟`)) return;
+      arr.splice(i, 1);
+      if (saveApp(s)) { toast('حُذفت المساهمة'); reloadKeepTl(); }
+    }
+  });
+
+  /* إعادة تحميل مع حفظ حال الخيط الزمني (تبويبه وتصفيته) لجلسة واحدة */
+  const LS_TL = 'academia2:admin:tl';
+  function reloadKeepTl() {
+    try { sessionStorage.setItem(LS_TL, JSON.stringify(tl)); } catch (e) {}
+    location.reload();
+  }
+  /* مزامنة عناصر التحكّم مع حالة التصفية المستعادة */
+  function applyTlControls() {
+    $('#tl-q').value = tl.q;
+    document.querySelectorAll('#tl-kind .a-seg').forEach(x => x.classList.toggle('on', x.dataset.kind === tl.kind));
+    document.querySelectorAll('#tl-sort .a-seg').forEach(x => x.classList.toggle('on', x.dataset.sort === tl.sort));
+  }
+  function restoreTl() {
+    let raw = null;
+    try { raw = sessionStorage.getItem(LS_TL); sessionStorage.removeItem(LS_TL); } catch (e) {}
+    if (!raw) return;
+    try { tl = Object.assign(tl, JSON.parse(raw)); } catch (e) { return; }
+    const b = document.querySelector('#a-tabs button[data-tab="time"]');
+    if (b) { b.click(); applyTlControls(); renderTimeline(); }
+  }
+
+  /* «في المكتبة»: ننتقل لتبويب المساهمات ونقود المكتبة المزروعة إلى المادة ثم بندها */
+  function openInLibrary(code, sec) {
+    const tab = document.querySelector('#a-tabs button[data-tab="posts"]');
+    if (tab) tab.click();
+    const base = baseOf(code);
+    const search = $('#lib-host #m-search');
+    if (!search) { toast('المكتبة غير جاهزة'); return; }
+    search.value = base;
+    search.dispatchEvent(new Event('input', { bubbles: true }));
+    setTimeout(() => {
+      const card = $('#lib-host .reel-slot.is-center [data-info]') || $(`#lib-host [data-info="${base}"]`);
+      if (!card) { toast('لم أجد المادة في المكتبة'); return; }
+      card.click();
+      setTimeout(() => {
+        const t = document.querySelector(`#lib-host #cm-tabs button[data-tab="${sec}"]`);
+        if (t) t.click();
+        const host = $('#a-panel-posts');
+        if (host) host.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 420);
+    }, 420);
+  }
+
+  /* ============================================================
+     أدوات مشتركة لقراءة المساهمات (تُستعمل في الإحصاء وحذف المادة)
+     ============================================================ */
+  const postsOf = (s, code, sec) => {
+    s.cinfo = s.cinfo || {};
+    s.cinfo[code] = s.cinfo[code] || {};
+    s.cinfo[code].posts = s.cinfo[code].posts || {};
+    s.cinfo[code].posts[sec] = s.cinfo[code].posts[sec] || [];
+    return s.cinfo[code].posts[sec];
+  };
+  function countPosts(s, code) {
+    const info = (s.cinfo || {})[code]; if (!info) return 0;
+    let n = Object.values(info.posts || {}).reduce((a, arr) => a + (arr || []).length, 0);
+    (info.doctors || []).forEach(d => { n += (d.posts || []).length; });
+    return n;
+  }
+
+  /* ---------- المظهر: فاتح/داكن (محفوظ للأدمن وحده) ---------- */
+  const LS_THEME = 'academia2:admin:theme';
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    document.querySelectorAll('#a-themebar button').forEach(b => b.classList.toggle('on', b.dataset.theme === t));
+    try { localStorage.setItem(LS_THEME, t); } catch (e) {}
+  }
+  $('#a-themebar').addEventListener('click', e => {
+    const b = e.target.closest('button[data-theme]'); if (!b) return;
+    applyTheme(b.dataset.theme);
+  });
+  applyTheme(localStorage.getItem(LS_THEME) === 'dark' ? 'dark' : 'light');
+
+  /* ---------- إحصاء جانبي ---------- */
+  function renderStats() {
+    const s = app();
+    const posts = cat.courses.reduce((a, c) => a + countPosts(s, c.code), 0);
+    $('#a-stat').innerHTML =
+      `<div>التخصصات: <b>${cat.tags.length}</b></div>` +
+      `<div>المواد: <b>${cat.courses.length}</b></div>` +
+      `<div>المساهمات: <b>${posts}</b></div>`;
+  }
+
+  /* ---------- إقلاع ---------- */
+  renderTags();
+  renderCourses();
+  fillCourseSelects();
+  renderDocs();
+  restoreTl();   /* عودة إلى الخيط الزمني بتصفيته بعد إعادة تحميل تلت تثبيتًا أو حذفًا */
+})();
