@@ -418,6 +418,9 @@
       localStorage.setItem(LS_KEY, JSON.stringify(state));
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
+      /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
+         و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
+      if (typeof srvPushSoon === 'function') srvPushSoon();
     } catch (e) { saveBad = true; saveAlarm(e); }
   };
   /* الشريط بلغتيه بلا ‎T()‎: قد يُستدعى قبل أن تُبنى النصوص، والإنذارُ لا يُؤجَّل */
@@ -881,6 +884,7 @@
       errBadLogin: 'الإيميل أو كلمة المرور غير صحيحة',
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
+      srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
@@ -1200,6 +1204,7 @@
       errBadLogin: 'Wrong email or password',
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
+      srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
       mirTitle: 'My copy on this device',

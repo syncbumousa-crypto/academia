@@ -607,7 +607,12 @@
     pstAsk = null;
     $('#pst-modal').hidden = true;
     const p = editingPost();
-    if (chosen && p) { p.st = chosen; save(); }
+    if (chosen && p) {
+      p.st = chosen; save();
+      /* والنشرُ فعلٌ صريح، فيبلغ الخادمَ في حينه لا بعد تأجيل — ‎srvPush‎ ترفع
+         إن صارت «عامّة» وتسحب إن غادرتها */
+      srvPush(p, cmCode, cmView.sub || cmTabSel);
+    }
     /* «تمّ» تُنهي التحرير لا تحفظ: المحفوظ محفوظٌ منذ أوّل حرف */
     if (wasSend) { cleanupEmptyMine(); cmView = { mode: 'list', pi: 0 }; }
     renderCmSection();

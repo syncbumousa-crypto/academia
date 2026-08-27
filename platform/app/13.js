@@ -1225,6 +1225,122 @@
       .catch(() => { /* لا شبكة: الذاكرةُ تكفي حتى تعود */ });
   }
 
+  /* ============================================================
+     مزامنةُ المساهمات — الدفعُ والجذب (م٢ من ROADMAP-SERVER)
+     ============================================================
+     العهدُ: **ما نُشر صراحةً وحدَه يبلغ الخادم.** ‎p.st === 'pub'‎ لا غير. وما كان
+     «غير مدرج» أو «خاصّ» لا يُرفع ثمّ يُحجب — لا يُرفع أصلًا.
+
+     ===== والوافدُ يلبس ثوبَ البذور =====
+     مساهماتُ غيري تُحقن في ‎state.cinfo[code].posts[sec]‎ بالشكل الذي تتوقّعه
+     الشاشةُ منذ بُني الموقع (‎{id,me,u,likes,ts,data}‎). فلا يتغيّر سطرٌ واحدٌ في
+     الرسم — البذورُ كانت تفعل هذا بعينه، والفرقُ أنّ هؤلاء أناسٌ حقيقيّون.
+     وتُوسَم ‎srv:1‎ فتُعرف: تُمحى قبل كلّ جذبٍ وتُستبدل، ولا تُخلط بالمبذور ولا
+     بما كتبتَه أنت.
+
+     ===== والختمُ عند الورود =====
+     هو العهدُ المكتوب فوق ‎myPost‎: الواردُ يُجرَّد ثمّ يُختم — ‎me‎ يُحسب من
+     ‎uid === state.uid‎ ولا يُقرأ ممّا أرسله الخادم، والعدّاداتُ تُصفَّر حتى تُبنى
+     في م٣. فمساهمةُ زميلي لا تدّعي أنّها لي ولو حملت ‎me:true‎ في درجه.
+
+     ===== والدفعُ لا يقع مع كلّ حرف =====
+     ‎save()‎ تُنادى عشراتِ المرّات في الدقيقة. فيُؤجَّل الدفعُ ويُقاس بتجزئةٍ
+     رخيصة: ما لم يتبدّل متنُه لا يُرفع ثانيةً. */
+  const SRV_ON = () => /^https?:/.test(location.protocol);
+  const postsURL = q => (ASSET_BASE ? new URL('api/posts' + (q || ''), ASSET_BASE).href
+                                    : location.origin + '/api/posts' + (q || ''));
+
+  /* تجزئةٌ رخيصة (FNV-1a): تكفي لسؤال «أتبدّل المتن؟» ولا تُستعمل في أمنٍ */
+  function srvHash(s) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 0x01000193) >>> 0; }
+    return h.toString(36) + ':' + s.length;
+  }
+
+  /* ---------- الدفع ---------- */
+  async function srvPush(p, code, sec) {
+    if (!SRV_ON() || !p || !p.me || isGuest()) return;
+    if (p.st !== 'pub') {                      /* سُحبت من النشر — أو لم تُنشر قطّ */
+      if (!p.srvH) return;                     /* لم تبلغ الخادمَ أصلًا */
+      try {
+        await fetch(postsURL('?id=' + encodeURIComponent(p.id)),
+                    { method: 'DELETE', credentials: 'same-origin' });
+        delete p.srvH; save();
+      } catch (e) { /* تُعاد في مزامنةٍ لاحقة */ }
+      return;
+    }
+    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts || Date.now(), data: p.data });
+    const h = srvHash(body);
+    if (p.srvH === h) return;                  /* لم يتبدّل شيء */
+    try {
+      const r = await fetch(postsURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' }, body: body,
+      });
+      if (r.status === 413) { toast(T().srvTooBig); return; }
+      if (!r.ok) return;
+      p.srvH = h; save();
+    } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
+  }
+
+  /* ويُمشى على مساهماتي المنشورة كلِّها — مؤجَّلًا، فلا يُتبع كلَّ حرفٍ طلبٌ */
+  let srvT = 0;
+  function srvPushSoon() {
+    if (!SRV_ON() || isGuest()) return;
+    clearTimeout(srvT);
+    srvT = setTimeout(() => {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        const ps = (state.cinfo[code] || {}).posts || {};
+        Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
+          if (p && p.me && (p.st === 'pub' || p.srvH)) srvPush(p, code, sec);
+        }));
+      });
+    }, 4000);
+  }
+
+  /* ---------- الجذب ---------- */
+  const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
+  const SRV_FRESH = 60000;
+
+  async function srvPull(code, force) {
+    if (!SRV_ON() || !code) return;
+    if (!force && Date.now() - (srvPulled[code] || 0) < SRV_FRESH) return;
+    srvPulled[code] = Date.now();
+    let j;
+    try {
+      const r = await fetch(postsURL('?code=' + encodeURIComponent(code)), { credentials: 'same-origin' });
+      if (!r.ok) return;
+      j = await r.json();
+    } catch (e) { return; }
+    if (!j || !Array.isArray(j.posts)) return;
+
+    const info = state.cinfo[code];
+    if (!info || !info.posts) return;
+    let n = 0;
+    /* أوّلًا: يُرفع الوافدُ القديم — الجذبُ استبدالٌ لا تكديس */
+    Object.keys(info.posts).forEach(sec => {
+      if (Array.isArray(info.posts[sec])) info.posts[sec] = info.posts[sec].filter(p => !p || !p.srv);
+    });
+    j.posts.forEach(r => {
+      if (!SECTIONS.includes(r.sec)) return;
+      /* ومساهمتي أنا لا تُحقن نسخةً ثانية: عندي أصلُها في درجي */
+      if (r.uid && state.uid && r.uid === state.uid) return;
+      if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
+      info.posts[r.sec].push({
+        id: r.id, srv: 1, uid: r.uid,
+        me: false,                            /* الختمُ: محسوبٌ لا مقروء */
+        u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
+        likes: 0, liked: false,               /* العدّاداتُ في م٣ */
+        ts: (r.ts || 0) * 1000 || Date.now(),
+        data: r.data,
+      });
+      n++;
+    });
+    save();
+    /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها */
+    if (n && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
+
   /* ===== ونداءُ البوابة: يُقال ما فات لا «ممنوع» =====
      ولا تُقذف صفحةُ الباب في وجهه: من ضغط ♥ يريد ♥ لا نموذجًا يبتلع مكانَه.
      فيُقال له ما فاته ويبقى حيث هو، والبابُ في قاع الشريط أمامه متى أراد */
