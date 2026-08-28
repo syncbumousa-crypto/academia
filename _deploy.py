@@ -141,38 +141,34 @@ def step_stage():
 
 
 # ============================================================
-# ٣ب · نافذةُ المادّة تُطعَّم في اللوحة من الموقع
+# ٣ب · جسدُ الموقع يُطعَّم في اللوحة
 # ============================================================
-#  لوحةُ الأدمن تعرض المكتبةَ كما يراها الطالب: تحمل نسخةً من وسم الموقع في
-#  ‎#lib-host‎. ونُسخت يومَ بُنيت **يدًا**، فتخلّفت — وسقطت منها نافذةُ المادّة
-#  (‎#course-modal‎ و‎#lib-course‎) وهي التي فيها الأزرارُ الخمسة. فكانت الشيفرةُ
-#  تسأل ‎#cm-tabs‎ ولا تجده، فلا يُفتح شيءٌ عند النقر.
+#  لوحةُ الأدمن تعرض المكتبةَ «كما يراها الطالب»، فتحمل نسخةً من وسم الموقع في
+#  ‎#lib-host‎. ونُسخت يومَ بُنيت **يدًا**، فتخلّفت: قِيس فإذا فيها ‎٢٦‎ عنصرًا من
+#  ‎١١٩‎ — سقط منها ‎٩٤‎، ومنها ‎#lib-grid‎ (فلا تظهر الكتب) و‎#course-modal‎ (فلا
+#  تُفتح المادّةُ بأزرارها) والمعالجُ ونوافذُ البطاقة والتواريخ كلُّها.
 #
-#  والعلاجُ ألّا تُنسخ يدًا مرّةً أخرى: تُقتطع من ‎platform/index.html‎ **في كلّ
-#  نشرة**، فلا تتخلّف أبدًا. ولا يُمَسّ المصدرُ على القرص — الحقنُ في المجهَّز.
-GRAFT_MARK = '<!-- ‎graft‎: نافذةُ المادّة مقتطعةٌ من الموقع وقتَ النشر — لا تُحرَّر ههنا -->'
+#  ولا يُصلَح ذلك بنسخِ ما سقط: النسخةُ اليدويّةُ تتخلّف ثانيةً. فيُطعَّم **جسدُ
+#  الموقع كلُّه** وقتَ النشر — من ‎<body>‎ إلى أوّل ‎<script>‎ — فما يُضاف غدًا في
+#  الموقع يبلغ اللوحةَ من نفسِه.
+#
+#  ===== ويُطرح ما لا يخصّ اللوحة =====
+#  الشريطُ الجانبيُّ للموقع (‎.sidebar‎ و‎.side-handle‎) مطروحٌ أصلًا بـ‎admin.css‎،
+#  فلا يُعالَج ههنا. وأمّا ألواحُ الحساب والاختبارات والإحصائيّات فتبقى مخفيّةً
+#  بـ‎hidden‎ كما هي في الموقع — لا يُظهرها شيءٌ في اللوحة، ووجودُها لا يضرّ
+#  ويمنع أن تسقط الشيفرةُ حين تسألها.
+GRAFT_A = '<!-- ‎graft‎: جسدُ الموقع مقتطعٌ وقتَ النشر — لا يُحرَّر ههنا -->'
+GRAFT_Z = '<!-- ‎graft/‎ -->'
 
 
-def cut_block(html, start_needle):
-    """يقتطع كتلةً من فتح الوسم إلى إغلاقه المقابل — بعدِّ الوسوم لا بالمسافة."""
-    i = html.find(start_needle)
+def site_body(html):
+    """ما بين ‎<body>‎ وأوّل ‎<script>‎ — وهو الوسمُ كلُّه بلا شيفرة."""
+    i = html.find('<body>')
     if i < 0:
         return None
-    i = html.rfind('<', 0, i + len(start_needle))
-    depth, k = 0, i
-    while k < len(html):
-        if html.startswith('<div', k) or html.startswith('<nav', k) \
-           or html.startswith('<span', k) or html.startswith('<button', k) \
-           or html.startswith('<h3', k):
-            depth += 1
-        elif html.startswith('</div>', k) or html.startswith('</nav>', k) \
-             or html.startswith('</span>', k) or html.startswith('</button>', k) \
-             or html.startswith('</h3>', k):
-            depth -= 1
-            if depth == 0:
-                return html[i:html.find('>', k) + 1]
-        k += 1
-    return None
+    i += len('<body>')
+    j = html.find('<script', i)
+    return html[i:j].rstrip() if j > 0 else None
 
 
 def graft_course_ui():
@@ -180,33 +176,26 @@ def graft_course_ui():
     adm = os.path.join(STAGE, 'admin', 'index.html')
     if not (os.path.isfile(site) and os.path.isfile(adm)):
         return
-    # ===== ويُفكّ الرابطُ قبل الكتابة =====
-    # التجهيزُ يربط ربطًا صلبًا (رخيصًا، بلا كلفة قرص)، والرابطُ **اسمٌ ثانٍ
-    # للبِتات نفسِها** — فالكتابةُ في المجهَّز كتابةٌ في مصدرك. وقد وقعت: طُعّم
-    # ‎admin/index.html‎ في المجهَّز فتطعّم المصدرُ معه.
-    # فيُنسخ الملفُّ نسخًا حقيقيًّا ثمّ يُكتب — وهو ملفٌّ واحدٌ صغير.
-    src = io.open(site, encoding='utf-8', newline='').read()
+    body = site_body(io.open(site, encoding='utf-8', newline='').read())
+    if not body:
+        die('تعذّر اقتطاعُ جسد الموقع — لا يُنشر بلوحةٍ مكسورة')
+
     dst = io.open(adm, encoding='utf-8', newline='').read()
-
-    modal = cut_block(src, 'id="course-modal"')
-    libc = cut_block(src, 'id="lib-course"')
-    if not modal or not libc:
-        die('تعذّر اقتطاعُ نافذة المادّة من الموقع — لا يُنشر بلوحةٍ مكسورة')
-
-    # ويُطرح ما طُعّم قبلُ (إن نُشر مرّتين على مجهَّزٍ واحد)
-    a = dst.find(GRAFT_MARK)
-    if a >= 0:
-        b = dst.find('</section>', a)
-        dst = dst[:a] + dst[b:]
-
-    # ويُوضع داخل ‎#lib-host‎ آخِرَه — فيرث جلدَ الموقع كما ترثه المكتبة
-    end = dst.find('</section>', dst.find('id="lib-host"'))
-    if end < 0:
+    a = dst.find('id="lib-host"')
+    if a < 0:
         die('لا موضعَ للتطعيم في لوحة الأدمن')
-    graft = '\n      ' + GRAFT_MARK + '\n      ' + libc + '\n      ' + modal + '\n      '
-    os.remove(adm)                      # يُفكّ الرابطُ لا البِتات
-    io.open(adm, 'w', encoding='utf-8', newline='').write(dst[:end] + graft + dst[end:])
-
+    a = dst.find('>', a) + 1
+    z = dst.find('</section>', a)
+    if z < 0:
+        die('لا نهايةَ للوح المساهمات في لوحة الأدمن')
+    # وما بين الفتح والإغلاق يُستبدل كلُّه — فلا تُكدَّس نسخةٌ على نسخة
+    nl = chr(10)
+    inner = nl + GRAFT_A + nl + body + nl + GRAFT_Z + nl + '      '
+    # ===== ويُفكّ الرابطُ قبل الكتابة =====
+    # التجهيزُ يربط ربطًا صلبًا (رخيصًا بلا كلفة قرص)، والرابطُ **اسمٌ ثانٍ
+    # للبِتات نفسِها** — فالكتابةُ في المجهَّز كتابةٌ في مصدرك. وقد وقعت مرّةً.
+    os.remove(adm)
+    io.open(adm, 'w', encoding='utf-8', newline='').write(dst[:a] + inner + dst[z:])
 
 # ============================================================
 # ٤ · حارسُ التجهيز — يفحص ما جُهّز، لا ما نوينا
@@ -228,11 +217,22 @@ def step_guard(n, size):
     if not os.path.isfile(os.path.join(STAGE, '404.html')):   bad.append('لا صفحةَ ٤٠٤')
     # ولوحةٌ بلا نافذةِ مادّةٍ لوحةٌ مكسورة: النقرُ لا يفتح شيئًا، وهو خللٌ صامتٌ
     # لا يصيح — وقد بقي فيها من يومَ بُنيت حتى قِيس
+    # ولوحةٌ ينقصها شيءٌ من جسد الموقع لوحةٌ مكسورة: النقرُ لا يفتح، والكتبُ لا
+    # تظهر — وهو خللٌ صامتٌ لا يصيح، بقي فيها من يومَ بُنيت حتى قِيس.
+    # والفحصُ **بالعدّ لا بمعرّفاتٍ تُسمّى**: ما يُضاف غدًا في الموقع يدخل في
+    # الحساب من نفسِه، ولا يُنتظر أن يُذكر ههنا
     adm = os.path.join(STAGE, 'admin', 'index.html')
-    if os.path.isfile(adm):
-        a = io.open(adm, encoding='utf-8', newline='').read()
-        miss = [k for k in ('id="cm-tabs"', 'id="cm-ui"', 'id="lib-course"') if k not in a]
-        if miss: bad.append('لوحةُ الأدمن بلا نافذةِ مادّة: %s' % miss)
+    sit = os.path.join(STAGE, 'platform', 'index.html')
+    if os.path.isfile(adm) and os.path.isfile(sit):
+        A = io.open(adm, encoding='utf-8', newline='').read()
+        S = io.open(sit, encoding='utf-8', newline='').read()
+        miss = set(re.findall(r'id="([\w-]+)"', S)) - set(re.findall(r'id="([\w-]+)"', A))
+        if miss:
+            bad.append('لوحةُ الأدمن ينقصها %d عنصرًا من الموقع: %s'
+                       % (len(miss), sorted(miss)[:5]))
+        if A.count('<div') != A.count('</div>'):
+            bad.append('وسومُ لوحة الأدمن غيرُ متوازنة: %d / %d'
+                       % (A.count('<div'), A.count('</div>')))
     if n > 20000:               bad.append('فوق حدّ كلاودفلير: ٢٠٠٠٠ ملفّ')
     big = [os.path.relpath(os.path.join(r, f), STAGE)
            for r, _, fs in os.walk(STAGE) for f in fs
