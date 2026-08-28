@@ -21982,21 +21982,42 @@
      لو خُتم ‎me:true‎ لصار عندي مساهمتان لبندٍ واحدٍ إن كان أصلي في درجي —
      ونموذجُ الموقع مساهمةٌ واحدةٌ لكلّ بند. فيُطرح الوافدُ إن كان لي أصلٌ،
      ويُختم إن لم يكن (فهو نسختي الوحيدة، جاءت من الخادم). */
+  const SITE_NAMES = ['أكاديميا', 'academia'];
+  const SITE_UID = 'u-academia';
+
   function srvClaim() {
     const me = state.uid;
     if (!me) return;
+    /* ===== ومن دخل بحساب الموقع ملك ما يحمل اسمَه =====
+       أغلفةُ الكتب وبطائقُ البداية بذورٌ **محلّيّة** كُتبت بـ‎me:false‎ واسمِ
+       «أكاديميا» منذ اليومِ الأوّل — لم تبلغ خادمًا قطّ، فلا ‎uid‎ لها ولا ‎srv‎،
+       ولم تكن تُحرَّر أبدًا. وذاك كان صوابًا يومَ لم يكن للموقع حساب.
+       فلمّا صار له حسابٌ يُدخَل به، صار ما يحمل اسمَه ملكًا لمن دخل به. */
+    const isSite = me === SITE_UID;
     let fixed = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const ps = (state.cinfo[code] || {}).posts || {};
       Object.keys(ps).forEach(sec => {
         const arr = ps[sec];
         if (!Array.isArray(arr)) return;
-        const hasMine = arr.some(p => p && p.me);
+        let hasMineNow = arr.some(p => p && p.me);
         for (let i = arr.length - 1; i >= 0; i--) {
           const p = arr[i];
-          if (!p || !p.srv || p.uid !== me) continue;
-          if (hasMine) { arr.splice(i, 1); fixed++; }
-          else { delete p.srv; p.me = true; fixed++; }
+          if (!p || p.me) continue;
+          const hasMine = hasMineNow;
+          /* وافدٌ من الخادم يحمل ‎uid‎ي */
+          const mineSrv = p.srv && p.uid === me;
+          /* أو بذرةٌ محلّيّةٌ باسم الموقع، وأنا داخلٌ بحسابه */
+          const mineSeed = isSite && !p.srv && p.u && SITE_NAMES.indexOf(p.u.name) > -1;
+          if (!mineSrv && !mineSeed) continue;
+          /* ===== ولا تصير لي اثنتان في بندٍ واحد =====
+             نموذجُ الموقع مساهمةٌ واحدةٌ لكلّ صاحبٍ في كلّ بند، و‎myPost‎ تأخذ
+             أوّلَ ما تجد — فلو مُلّكت ثانيةٌ لَحُرِّرت واحدةٌ وأُهملت أختُها بلا
+             خبر. فإن كان لي أصلٌ ههنا: يُطرح الوافدُ (نسخةٌ من الخادم لأصلي)،
+             وتُترك البذرةُ المحلّيّةُ كما هي (محتوًى آخرُ لا نسخةٌ منّي). */
+          if (hasMine) { if (mineSrv) { arr.splice(i, 1); fixed++; } continue; }
+          delete p.srv; p.me = true; fixed++;
+          hasMineNow = true;
         }
       });
     });
