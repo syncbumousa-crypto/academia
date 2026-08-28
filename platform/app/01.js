@@ -670,6 +670,7 @@
         if (c !== lastCore) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
+      if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */

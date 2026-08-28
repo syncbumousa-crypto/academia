@@ -945,6 +945,8 @@
     return { n, ok, no: n - ok, pct: n ? Math.round((ok / n) * 100) : 0 };
   }
   function xtPastPaint() {
+    /* وأوّلُ فتحةٍ تجلب السجلَّ من الحساب: لا يُنقل في الإقلاع ما لا يُقرأ فيه */
+    if (typeof xtPull === 'function') xtPull();
     const el = document.getElementById('panel-past'); if (!el) return;
     const L = xtPastAll();
     if (!L.length) {
@@ -1971,6 +1973,7 @@
   catSync();        /* وبعد أن يستقرّ كلُّ شيء: يُسأل الخادمُ عن الكتالوج — بلا انتظارٍ في الإقلاع */
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
   if (typeof nookPull === 'function') nookPull();   /* ونواةُ الركن من الحساب */
+  if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
   applyTheme();
   applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ

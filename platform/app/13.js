@@ -1763,6 +1763,37 @@
     return new Blob([u], { type: type });
   };
 
+  /* ---------- أغلفةُ المواد المرفوعة ⇐ المستودع (م٢) ----------
+     ‏‎state.imgs[code]‎ صورةٌ رفعها صاحبُ الموقع بيده، تُخزَّن ‎data:‎ في الدرج —
+     ثلاثُ مئةٍ وواحدٌ وأربعون كيلو عند صاحب الموقع. والمستودعُ يخزّنها مرّةً
+     بمفتاح محتواها ويقدّمها بذاكرةٍ أبديّة، فتصير في الدرج بضعةَ حروف.
+
+     ===== وتُرفع واحدةً واحدةً، وما تعثّر يُعاد =====
+     لا علَمَ يُرفع مرّةً في العمر: ما بقي ‎data:‎ يُحاوَل في الإقلاع التالي. فمن
+     كان بلا شبكةٍ أو بلا حساب لا يفقد شيئًا — صورتُه في درجه حتّى تصعد.
+
+     ===== ولا تُمَسّ صورةٌ حتّى تصعد =====
+     تُكتب الحالُ بعد كلّ رفعةٍ ناجحة، لا بعد الجميع: انقطاعٌ في الوسط يُبقي ما
+     صعد صاعدًا. */
+  async function imgsToStore() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    const keys = Object.keys(state.imgs || {}).filter(k =>
+      typeof state.imgs[k] === 'string' && state.imgs[k].indexOf('data:') === 0);
+    if (!keys.length) return;
+    let n = 0;
+    for (const k of keys) {
+      const blob = dataToBlob(state.imgs[k]);
+      if (!blob) continue;
+      let url = null;
+      try { url = await medUp(blob); } catch (e) { url = null; }
+      if (!url) break;                      /* تعثّرت: يُترك الباقي لإقلاعٍ آخر */
+      state.imgs[k] = url;
+      n++;
+      save();
+    }
+    if (n) console.log('رُفع ' + n + ' غلافًا إلى المستودع');
+  }
+
   /* يمشي على متن HTML ويردّه بعد تبديل الصور — أو كما هو إن لم يكن فيه شيء */
   async function medHTML(html) {
     if (typeof html !== 'string' || html.indexOf('<img') < 0) return html;
@@ -2084,6 +2115,76 @@
     nookT = setTimeout(nookPush, 3000);
   }
   window.acNookSync = nookPull;                      /* يُنادى بعد الدخول */
+
+  /* ============================================================
+     سجلُّ الاختبارات ⇐ الحساب (م٢)
+     ============================================================
+     ‏‎xtPast‎ مئتان وستّةٌ وتسعون كيلو في درج صاحب الموقع، وينمو مع كلّ اختبار.
+     وهو خبرُه هو، فمكانُه حسابُه.
+
+     ===== ولا يُقرأ في الإقلاع =====
+     لا تُفتح صفحتُه في كلّ فتحة، فلا يُنقل في كلّ فتحة. يُجلب عند فتح
+     «الاختبارات» أوّلَ مرّة، ويُدفع مؤجَّلًا متى تبدّل.
+
+     ===== والدمجُ اتّحادٌ لا ترجيح =====
+     الاختبارُ واقعةٌ مضت لا رأيٌ يُبدَّل: فما عند الخادم وما عندي يجتمعان
+     بمعرّفاتهما، ولا يُطرح شيء. ومن اختبر في متصفّحين وجد الاثنين. */
+  const udocURL = q => (ASSET_BASE ? new URL('api/udoc' + (q || ''), ASSET_BASE).href
+                                   : location.origin + '/api/udoc' + (q || ''));
+  let xtGot = false, xtT = 0, xtSig = '';
+
+  async function xtPull() {
+    if (!SRV_ON() || isGuest() || !state.uid || xtGot) return;
+    let j;
+    try {
+      const r = await fetch(udocURL('?kind=exams'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('xt:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('xt:neterr'); return; }
+    xtGot = true;
+    const mine = Array.isArray(state.xtPast) ? state.xtPast : [];
+    const rem = (j && j.data && Array.isArray(j.data.list)) ? j.data.list : [];
+    if (rem.length) {
+      const seen = new Set(mine.map(x => x && x.id).filter(Boolean));
+      let add = 0;
+      rem.forEach(x => { if (x && x.id && !seen.has(x.id)) { mine.push(x); seen.add(x.id); add++; } });
+      if (add) {
+        mine.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+        state.xtPast = mine;
+        save();
+        bootMark('xt:got' + add);
+      }
+    }
+    xtSig = JSON.stringify(state.xtPast || []);
+    xtPushSoon();
+  }
+
+  async function xtPush() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    /* ولا يُدفع قبل جذب: من دفع قبل أن يقرأ محا سجلَّ متصفّحٍ آخر.
+       والجذبُ ينتهي بدفعٍ مؤجَّل، فلا تضيع الدفعةُ التي أوقفناها */
+    if (!xtGot) { xtPull(); return; }
+    const list = Array.isArray(state.xtPast) ? state.xtPast : [];
+    const sig = JSON.stringify(list);
+    if (sig === xtSig) return;
+    try {
+      const r = await fetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'exams', data: { list: list } }),
+      });
+      if (!r.ok) { bootMark('xt:put' + r.status); return; }
+      xtSig = sig;
+      bootMark('xt:ok' + list.length);
+    } catch (e) { bootMark('xt:puterr'); }
+  }
+
+  function xtPushSoon() {
+    if (!SRV_ON() || isGuest()) return;
+    clearTimeout(xtT);
+    xtT = setTimeout(xtPush, 3000);
+  }
+  window.acExamSync = xtPull;
 
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
