@@ -1710,24 +1710,32 @@
      الموقع هويّةً)، ويبقى ما وقع.
 
      ===== وتُعرف بالاسم لا بالعلم =====
-     الغلافُ الذي يحمل اسمَ «أكاديميا» ملكُ الموقع أينما وُجد. ومن كتب غلافًا
-     بيده فاسمُه عليه لا اسمُ الموقع، فلا يُمَسّ. */
-  function coverUnclaim() {
-    if (state.coverUnclaim1) return;
+     ما يحمل اسمَ «أكاديميا» ملكُ الموقع أينما وُجد. ومن كتب بيده فاسمُه عليه لا
+     اسمُ الموقع، فلا يُمَسّ.
+
+     ===== ولا الأغلفةُ وحدَها =====
+     كانت أوّلَ ما بان (وهي ثمانيةٌ وأربعون)، فقُصر الردُّ عليها. وللموقع سواها:
+     ما نُشر باسمه في «الملخّصات» و«الدرجات» و«المصادر». فيُعمَّم على كلّ ما
+     يحمل اسمَه — ورزمُ البطائق المردودةُ إليه ‎me:false‎ أصلًا، فلا يُغيّر فيها
+     هذا شيئًا. */
+  function siteUnclaim() {
+    if (state.siteUnclaim1) return;
     const SITE = ['أكاديميا', 'academia'];
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
-      const arr = ((state.cinfo[code].posts || {}).info) || [];
-      arr.forEach(p => {
-        if (!p || !p.me) return;
-        if (!(p.data && p.data.bookImg)) return;
-        if (!p.u || SITE.indexOf(p.u.name) < 0) return;
-        p.me = false; n++;
+      const ps = (state.cinfo[code] || {}).posts || {};
+      Object.keys(ps).forEach(sec => {
+        if (!Array.isArray(ps[sec])) return;
+        ps[sec].forEach(p => {
+          if (!p || !p.me) return;
+          if (!p.u || SITE.indexOf(p.u.name) < 0) return;
+          p.me = false; n++;
+        });
       });
     });
-    state.coverUnclaim1 = 1;
+    state.coverUnclaim1 = state.siteUnclaim1 = 1;
     save();
-    if (n) console.log('رُدّ ' + n + ' غلافًا إلى أكاديميا');
+    if (n) console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا');
   }
 
   function seedMark() {
@@ -1754,7 +1762,7 @@
   ankiRedo();
   ankiHandBack();   /* وما نُسب إليك من بطائق الموقع يُردّ إليه */
   coverPub();       /* وأغلفةُ الكتب تُنشر: خبرٌ عن المادّة لا شيءٌ يخصّ متصفّحًا */
-  coverUnclaim();   /* وما نُسب إليك من أغلفة الموقع سهوًا يُردّ إليه */
+  siteUnclaim();    /* وما نُسب إليك من مساهمات الموقع سهوًا يُردّ إليه */
   seedMark();       /* آخِرَ البذور كلِّها: يُوسَم المصنوعُ ليُمحى بسطرٍ يوم يجيء الحقيقيّ */
   catSync();        /* وبعد أن يستقرّ كلُّ شيء: يُسأل الخادمُ عن الكتالوج — بلا انتظارٍ في الإقلاع */
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
