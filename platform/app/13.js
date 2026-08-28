@@ -1288,6 +1288,26 @@
     }, 1200);
   }
 
+  /* ---------- صورةُ البروفايل إلى الخادم ----------
+     تُرفع إلى المستودع (المعنونِ بالمحتوى) ثمّ يُبعث عنوانُها. ولا تُرسل ‎data:‎:
+     نقطةُ البروفايل ترفضها، وصورةٌ خامٌ في جدول المستخدمين تُثقل كلَّ قراءةِ
+     مساهمةٍ لأنّ الاسمَ والصورةَ يُقرآن معها. */
+  async function profImg(dataUrl) {
+    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return;
+    const blob = dataToBlob(dataUrl);
+    if (!blob) return;
+    try {
+      const url = await medUp(blob);
+      if (!url) return;
+      const r = await fetch(authURL('me'), {
+        method: 'PATCH', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ img: url }),
+      });
+      if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
+    } catch (e) { /* لا شبكة: تبقى محلّيّةً حتى يُعاد الاختيار */ }
+  }
+
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
   function authSync() {
     if (!AUTH_SRV) return;

@@ -24,7 +24,16 @@
         cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
         cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
         const url = cv.toDataURL('image/jpeg', .82);
-        if (pickProfile) { state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage(); return; }
+        if (pickProfile) {
+          state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage();
+          /* ===== وتبلغ الخادمَ إن كنتَ عضوًا =====
+             الصورةُ تُعرض على كلّ مساهمةٍ نشرتَها، وهي في جدول المستخدمين لا في
+             نسخة المساهمة. فلو بقيت في الدرج لَظهرتَ للناس بلا صورةٍ أبدًا.
+             وترفعها ‎profImg‎ إلى المستودع أوّلًا ثمّ تبعث عنوانَها: نقطةُ البروفايل
+             لا تقبل ‎data:‎ — ضخمةٌ تُثقل كلَّ قراءةِ مساهمة. */
+          profImg(url);
+          return;
+        }
         state.imgs[pickCode] = url;
         /* الغلاف المعروض مصدره المساهمة المثبَّتة — فترفيع صورة يحدّثها فيها كي يظهر الجديد */
         const cp = coverPost(pickCode);

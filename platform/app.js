@@ -1873,7 +1873,16 @@
         cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
         cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
         const url = cv.toDataURL('image/jpeg', .82);
-        if (pickProfile) { state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage(); return; }
+        if (pickProfile) {
+          state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage();
+          /* ===== وتبلغ الخادمَ إن كنتَ عضوًا =====
+             الصورةُ تُعرض على كلّ مساهمةٍ نشرتَها، وهي في جدول المستخدمين لا في
+             نسخة المساهمة. فلو بقيت في الدرج لَظهرتَ للناس بلا صورةٍ أبدًا.
+             وترفعها ‎profImg‎ إلى المستودع أوّلًا ثمّ تبعث عنوانَها: نقطةُ البروفايل
+             لا تقبل ‎data:‎ — ضخمةٌ تُثقل كلَّ قراءةِ مساهمة. */
+          profImg(url);
+          return;
+        }
         state.imgs[pickCode] = url;
         /* الغلاف المعروض مصدره المساهمة المثبَّتة — فترفيع صورة يحدّثها فيها كي يظهر الجديد */
         const cp = coverPost(pickCode);
@@ -21894,6 +21903,26 @@
         if (r.ok) profLast = nm;
       } catch (e) { /* لا شبكة: يُعاد عند التعديل التالي */ }
     }, 1200);
+  }
+
+  /* ---------- صورةُ البروفايل إلى الخادم ----------
+     تُرفع إلى المستودع (المعنونِ بالمحتوى) ثمّ يُبعث عنوانُها. ولا تُرسل ‎data:‎:
+     نقطةُ البروفايل ترفضها، وصورةٌ خامٌ في جدول المستخدمين تُثقل كلَّ قراءةِ
+     مساهمةٍ لأنّ الاسمَ والصورةَ يُقرآن معها. */
+  async function profImg(dataUrl) {
+    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return;
+    const blob = dataToBlob(dataUrl);
+    if (!blob) return;
+    try {
+      const url = await medUp(blob);
+      if (!url) return;
+      const r = await fetch(authURL('me'), {
+        method: 'PATCH', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ img: url }),
+      });
+      if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
+    } catch (e) { /* لا شبكة: تبقى محلّيّةً حتى يُعاد الاختيار */ }
   }
 
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */

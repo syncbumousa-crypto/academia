@@ -30,6 +30,7 @@ const RULES = [
   { p: '/api/posts',      m: 'POST',   n: 120, w: 3600, by: 'ip' },
   { p: '/api/posts',      m: 'DELETE', n: 120, w: 3600, by: 'ip' },
   { p: '/api/likes',      m: 'POST',   n: 300, w: 3600, by: 'ip' },
+  { p: '/api/catalog',    m: 'PUT',    n: 40,  w: 3600, by: 'ip' },   /* النشرُ فعلٌ نادر */
 ];
 
 const SEC = {

@@ -132,7 +132,30 @@
       ['الإعجابات', o.likes], ['الصور', o.media], ['حجمها', gKb(o.mediaBytes || 0)],
       ['الجلسات', o.sessions],
     ].map(([k, v]) => '<div class="g-num"><b>' + gEsc(v) + '</b><span>' + k + '</span></div>').join('');
-    await Promise.all([guardPosts(), guardUsers()]);
+    await Promise.all([guardCat(), guardPosts(), guardUsers()]);
+  }
+
+  /* ---------- الكتالوج: أين المحلّيُّ من المنشور؟ ----------
+     ويُقارَن بالعدد لا بالنسخة وحدَها: رقمُ النسخة قد يتّفق والمحتوى يختلف
+     (حُرِّر ولم يُنشر)، فيُقال ما يُرى: كم مادّةً هنا وكم هناك. */
+  async function guardCat() {
+    const el = $('#g-cat');
+    const local = cat && Array.isArray(cat.courses) ? cat.courses.length : 0;
+    const lTags = cat && Array.isArray(cat.tags) ? cat.tags.length : 0;
+    let srv = null;
+    try {
+      const r = await fetch('/api/catalog', { cache: 'no-store' });
+      if (r.ok) srv = await r.json();
+    } catch (e) { /* لا شبكة */ }
+    if (!srv) { el.innerHTML = '<span class="g-empty">تعذّر قراءةُ المنشور.</span>'; return; }
+    const same = srv.courses.length === local && (srv.tags || []).length === lTags
+                 && String(srv.v) === String((cat && cat.v) || '');
+    el.innerHTML =
+      '<div class="g-cat__row"><b>عندك</b><span>' + local + ' مادّة · ' + lTags + ' تخصّص</span></div>' +
+      '<div class="g-cat__row"><b>المنشور</b><span>' + srv.courses.length + ' مادّة · '
+        + (srv.tags || []).length + ' تخصّص · نسخة ' + gEsc(srv.v) + '</span></div>' +
+      '<div class="g-cat__sig ' + (same ? 'is-same' : 'is-diff') + '">'
+        + (same ? 'المنشورُ مطابقٌ لما عندك' : 'ما عندك يخالف المنشور — انشره ليراه الناس') + '</div>';
   }
 
   async function guardPosts() {
@@ -180,6 +203,34 @@
   $('#a-panel-guard').addEventListener('click', async e => {
     const rl = e.target.closest('#g-reload');
     if (rl) { guardOpen(); return; }
+
+    const cp = e.target.closest('#g-cat-pub');
+    if (cp) {
+      if (!cat || !Array.isArray(cat.courses) || !cat.courses.length) {
+        cp.textContent = 'لا كتالوجَ عندك'; return;
+      }
+      gConfirm(cp, async () => {
+        cp.disabled = true; cp.textContent = 'يُنشر…';
+        /* والنسخةُ تُزاد عند كلّ نشر: بها يعرف الموقعُ في متصفّح كلّ قارئٍ
+           أنّ عليه أن يقرأ من جديد — ولولاها لبقي على القديم */
+        cat.v = Date.now();
+        saveCat();
+        let out;
+        try {
+          const rr = await fetch('/api/catalog', {
+            method: 'PUT', credentials: 'same-origin',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ tags: cat.tags || [], courses: cat.courses, v: cat.v }),
+          });
+          out = { ok: rr.ok, j: await rr.json().catch(() => ({})) };
+        } catch (e) { out = { ok: false, j: {} }; }
+        cp.disabled = false;
+        cp.textContent = out.ok ? 'نُشر ✓' : (out.j.error === 'empty' ? 'كتالوجٌ خاوٍ' : 'تعذّر');
+        setTimeout(() => { cp.textContent = 'انشر الكتالوج'; }, 2200);
+        if (out.ok) guardCat();
+      });
+      return;
+    }
 
     const del = e.target.closest('[data-del]');
     if (del) {
