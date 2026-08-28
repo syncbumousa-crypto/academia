@@ -22921,22 +22921,19 @@
   /* ---------- الدفع ---------- */
   async function srvPush(p, code, sec) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
-    if (p.st !== 'pub') {                      /* سُحبت من النشر — أو لم تُنشر قطّ */
-      if (!p.srvH) return;                     /* لم تبلغ الخادمَ أصلًا */
-      try {
-        await fetch(postsURL('?id=' + encodeURIComponent(p.id)),
-                    { method: 'DELETE', credentials: 'same-origin' });
-        delete p.srvH; save();
-      } catch (e) { /* تُعاد في مزامنةٍ لاحقة */ }
-      return;
-    }
+    /* ===== وتُرفع المسوّدةُ كما يُرفع المنشور =====
+       كان الدفعُ يشترط ‎st === 'pub'‎ ويحذف من الخادم ما سواه. وذاك صوابٌ يومَ
+       كان الدرجُ يحفظ عملَك؛ فلمّا صار المتصفّحُ لا يخزّن شيئًا صار المعنى:
+       **ما لم تنشره يضيع بتحديث الصفحة**.
+       فتُرفع كلُّها وتُحفظ حالُها معها، والخادمُ لا يُطلع عليها أحدًا سواك
+       (شرطُ ‎st='pub' OR uid=me‎ في القراءة). */
     /* ===== وما رُدَّ لكِبَرِه لا يُعاد حتى يتبدّل =====
        كان الردُّ ‎413‎ يُصيح ثمّ يرجع بلا أثر — و‎srvPushSoon‎ تُنادى من ‎save()‎،
        و‎save()‎ تُنادى مع كلّ حرف. فصار الإشعارُ لا ينقطع: مساهمةٌ واحدةٌ كبيرةٌ
        تصيح في كلّ ضغطةٍ إلى الأبد. فتُحفظ بصمةُ ما رُدَّ، ولا يُعاد إلّا إن
        تبدّل المتن — والبصمةُ على المتن **الخام** لا المجهَّز، فيُوقَف الرفعُ
        والتجهيزُ كلُّه قبل أن يبدأ. */
-    const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, data: p.data }));
+    const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, st: p.st || '', data: p.data }));
     if (p.srvBig === rawH) return;
     if (p.srvBig) { delete p.srvBig; }          /* تبدّل المتن: تُعطى فرصةً جديدة */
 
@@ -22959,7 +22956,8 @@
        يختلف متنُها في كلّ مرّة، فلا تطابق بصمتُها بصمةَ ما رُفع، فتُرفع أبدًا مع
        كلّ حفظ. فيُكتب التاريخُ عليها مرّةً ثمّ يثبت. */
     if (!p.ts) p.ts = Date.now();
-    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, data: prepped });
+    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts,
+                                 st: p.st || 'priv', data: prepped });
     const h = srvHash(body);
     if (p.srvH === h) return;                  /* لم يتبدّل شيء */
     try {
@@ -22988,7 +22986,7 @@
       Object.keys(state.cinfo || {}).forEach(code => {
         const ps = (state.cinfo[code] || {}).posts || {};
         Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
-          if (p && p.me && (p.st === 'pub' || p.srvH)) srvPush(p, code, sec);
+          if (p && p.me) srvPush(p, code, sec);   /* المسوّدةُ كالمنشور: كلاهما عملُك */
         }));
       });
     }, 4000);
@@ -23365,7 +23363,7 @@
           if (postEmpty(mine) && !mine.srvH) {
             mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
             if (r.ts) mine.ts = r.ts * 1000;
-            mine.st = 'pub'; delete mine.srvH; delete mine.srvBig;
+            mine.st = r.st || 'pub'; delete mine.srvH; delete mine.srvBig;
             cut++; return;
           }
           /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
@@ -23378,7 +23376,7 @@
            ‎me:true‎ بلا ‎srv‎، فتُحرَّر كما كانت وتُدفع إن بُدّلت. */
         if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
         info.posts[r.sec].push({
-          id: r.id, uid: r.uid, me: true, st: 'pub',
+          id: r.id, uid: r.uid, me: true, st: r.st || 'pub',
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
           ts: (r.ts || 0) * 1000 || Date.now(),
