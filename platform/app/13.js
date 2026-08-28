@@ -2269,6 +2269,71 @@
     return true;
   }
 
+  /* ============================================================
+     جدولةُ المذاكرة ⇐ الحساب (م٢)
+     ============================================================
+     ‏‎state.srs‎ يقول متى تعود إلى كلّ بطاقة وكم أصبتَ فيها — وهو عملُ شهور
+     لا يُعوَّض، ومفتاحُه البطاقةُ لا المادّة. فمكانُه الحساب.
+
+     ===== والدمجُ بالختم =====
+     البطاقةُ الواحدةُ قد تُذاكَر في متصفّحين، فتُرجَّح النسخةُ الأحدثُ ختمًا
+     (‎t‎ يُكتب مع كلّ حكم). وما لا ختمَ له فمن قبل الختم: يُؤخذ إن لم يكن
+     للآخر مثلُه، ولا يعلو على مختوم. */
+  let srsGot = false, srsT = 0, srsSig = '';
+
+  async function srsPull() {
+    if (!SRV_ON() || isGuest() || !state.uid || srsGot) return;
+    let j;
+    try {
+      const r = await fetch(udocURL('?kind=srs'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('srs:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('srs:neterr'); return; }
+    srsGot = true;
+    const rem = (j && j.data && j.data.map) ? j.data.map : {};
+    const mine = state.srs || (state.srs = {});
+    let add = 0;
+    Object.keys(rem).forEach(id => {
+      const a = mine[id], b = rem[id];
+      if (!b) return;
+      if (!a) { mine[id] = b; add++; return; }
+      if ((b.t || 0) > (a.t || 0)) { mine[id] = b; add++; }
+    });
+    srsSig = JSON.stringify(rem);
+    if (add) { save(); bootMark('srs:got' + add); }
+    srsPushSoon();
+  }
+
+  async function srsPush() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (!srsGot) { srsPull(); return; }
+    const map = state.srs || {};
+    const sig = JSON.stringify(map);
+    if (sig === srsSig) return;
+    try {
+      const r = await fetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'srs', data: { map: map } }),
+      });
+      if (!r.ok) { bootMark('srs:put' + r.status); return; }
+      srsSig = sig;
+      bootMark('srs:ok' + Object.keys(map).length);
+    } catch (e) { bootMark('srs:puterr'); }
+  }
+
+  function srsPushSoon() {
+    if (!SRV_ON() || isGuest()) return;
+    clearTimeout(srsT);
+    srsT = setTimeout(srsPush, 3000);
+  }
+  /* وقد بلغ الحساب؟ — بها يُسقَط من الدرج */
+  function srsSynced() {
+    if (!SRV_ON() || isGuest() || !state.uid || !srsGot) return false;
+    return srsSig === JSON.stringify(state.srs || {});
+  }
+  window.acSrsSync = srsPull;
+
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
   const SRV_FRESH = 60000;

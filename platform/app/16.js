@@ -1974,6 +1974,7 @@
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
   if (typeof nookPull === 'function') nookPull();   /* ونواةُ الركن من الحساب */
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
+  if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
   applyTheme();
   applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ

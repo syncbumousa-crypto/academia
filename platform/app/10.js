@@ -1487,13 +1487,13 @@
     const today = todayISO();
     const nx = srsNext(state.srs[id], g);
     state.srs[id] = Object.assign({}, state.srs[id] || {},
-      { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today });
+      { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today, t: Date.now() });
   }
   function srsTally(id, right) {
     const p = state.srs[id] || {};
     state.srs[id] = Object.assign({}, p, {
       ok: (p.ok || 0) + (right ? 1 : 0), no: (p.no || 0) + (right ? 0 : 1),
-      l: right ? 1 : 0 });
+      l: right ? 1 : 0, t: Date.now() });
   }
   function srsApply(id, g) {
     const today = todayISO();
@@ -1507,7 +1507,7 @@
        في الدائرة — أصدقُ من أن يُخترع له آخِرٌ لم يُسجَّل */
     state.srs[id] = { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today,
       ok: (p.ok || 0) + (g === 'again' ? 0 : 1), no: (p.no || 0) + (g === 'again' ? 1 : 0),
-      l: g === 'again' ? 0 : 1 };
+      l: g === 'again' ? 0 : 1, t: Date.now() };
     save();
   }
   /* تقييم البطاقة الحالية: «مرة أخرى» تعيدها لآخر الجلسة، والبقية تتقدم */

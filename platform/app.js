@@ -686,6 +686,8 @@
     /* وسجلُّ الاختبارات: يُسقط متى بلغ الحساب — ويُجلب عند فتح صفحته */
     if (k === 'xtPast' && this === state
         && typeof xtSynced === 'function' && xtSynced()) return undefined;
+    if (k === 'srs' && this === state
+        && typeof srsSynced === 'function' && srsSynced()) return undefined;
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
@@ -727,6 +729,7 @@
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
+      if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
       if (typeof pendPaint === 'function') pendPaint();       /* ويُقال ما لم يصل بعد */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
@@ -17289,13 +17292,13 @@
     const today = todayISO();
     const nx = srsNext(state.srs[id], g);
     state.srs[id] = Object.assign({}, state.srs[id] || {},
-      { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today });
+      { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today, t: Date.now() });
   }
   function srsTally(id, right) {
     const p = state.srs[id] || {};
     state.srs[id] = Object.assign({}, p, {
       ok: (p.ok || 0) + (right ? 1 : 0), no: (p.no || 0) + (right ? 0 : 1),
-      l: right ? 1 : 0 });
+      l: right ? 1 : 0, t: Date.now() });
   }
   function srsApply(id, g) {
     const today = todayISO();
@@ -17309,7 +17312,7 @@
        في الدائرة — أصدقُ من أن يُخترع له آخِرٌ لم يُسجَّل */
     state.srs[id] = { e: nx.e, i: nx.i, d: nx.i > 0 ? addDaysISO(today, nx.i) : today,
       ok: (p.ok || 0) + (g === 'again' ? 0 : 1), no: (p.no || 0) + (g === 'again' ? 1 : 0),
-      l: g === 'again' ? 0 : 1 };
+      l: g === 'again' ? 0 : 1, t: Date.now() };
     save();
   }
   /* تقييم البطاقة الحالية: «مرة أخرى» تعيدها لآخر الجلسة، والبقية تتقدم */
@@ -23374,6 +23377,71 @@
     if (d.type || d.lang || d.rel) return false;
     return true;
   }
+
+  /* ============================================================
+     جدولةُ المذاكرة ⇐ الحساب (م٢)
+     ============================================================
+     ‏‎state.srs‎ يقول متى تعود إلى كلّ بطاقة وكم أصبتَ فيها — وهو عملُ شهور
+     لا يُعوَّض، ومفتاحُه البطاقةُ لا المادّة. فمكانُه الحساب.
+
+     ===== والدمجُ بالختم =====
+     البطاقةُ الواحدةُ قد تُذاكَر في متصفّحين، فتُرجَّح النسخةُ الأحدثُ ختمًا
+     (‎t‎ يُكتب مع كلّ حكم). وما لا ختمَ له فمن قبل الختم: يُؤخذ إن لم يكن
+     للآخر مثلُه، ولا يعلو على مختوم. */
+  let srsGot = false, srsT = 0, srsSig = '';
+
+  async function srsPull() {
+    if (!SRV_ON() || isGuest() || !state.uid || srsGot) return;
+    let j;
+    try {
+      const r = await fetch(udocURL('?kind=srs'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('srs:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('srs:neterr'); return; }
+    srsGot = true;
+    const rem = (j && j.data && j.data.map) ? j.data.map : {};
+    const mine = state.srs || (state.srs = {});
+    let add = 0;
+    Object.keys(rem).forEach(id => {
+      const a = mine[id], b = rem[id];
+      if (!b) return;
+      if (!a) { mine[id] = b; add++; return; }
+      if ((b.t || 0) > (a.t || 0)) { mine[id] = b; add++; }
+    });
+    srsSig = JSON.stringify(rem);
+    if (add) { save(); bootMark('srs:got' + add); }
+    srsPushSoon();
+  }
+
+  async function srsPush() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (!srsGot) { srsPull(); return; }
+    const map = state.srs || {};
+    const sig = JSON.stringify(map);
+    if (sig === srsSig) return;
+    try {
+      const r = await fetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'srs', data: { map: map } }),
+      });
+      if (!r.ok) { bootMark('srs:put' + r.status); return; }
+      srsSig = sig;
+      bootMark('srs:ok' + Object.keys(map).length);
+    } catch (e) { bootMark('srs:puterr'); }
+  }
+
+  function srsPushSoon() {
+    if (!SRV_ON() || isGuest()) return;
+    clearTimeout(srsT);
+    srsT = setTimeout(srsPush, 3000);
+  }
+  /* وقد بلغ الحساب؟ — بها يُسقَط من الدرج */
+  function srsSynced() {
+    if (!SRV_ON() || isGuest() || !state.uid || !srsGot) return false;
+    return srsSig === JSON.stringify(state.srs || {});
+  }
+  window.acSrsSync = srsPull;
 
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
@@ -29500,6 +29568,7 @@
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
   if (typeof nookPull === 'function') nookPull();   /* ونواةُ الركن من الحساب */
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
+  if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
   applyTheme();
   applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ

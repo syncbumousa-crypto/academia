@@ -686,6 +686,8 @@
     /* وسجلُّ الاختبارات: يُسقط متى بلغ الحساب — ويُجلب عند فتح صفحته */
     if (k === 'xtPast' && this === state
         && typeof xtSynced === 'function' && xtSynced()) return undefined;
+    if (k === 'srs' && this === state
+        && typeof srsSynced === 'function' && srsSynced()) return undefined;
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
@@ -727,6 +729,7 @@
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
+      if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
       if (typeof pendPaint === 'function') pendPaint();       /* ويُقال ما لم يصل بعد */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
