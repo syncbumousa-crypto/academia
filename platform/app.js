@@ -730,7 +730,6 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
-      if (typeof pendPaint === 'function') pendPaint();       /* ويُقال ما لم يصل بعد */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
@@ -23052,7 +23051,6 @@
       p.srvH = h;
       if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
       save();
-      pendPaint();                             /* وصلت: تنقص واحدةٌ من المعلَّق */
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
 
@@ -23080,23 +23078,10 @@
     return n;
   }
 
-  let pendT = 0;
-  function pendPaint() {
-    clearTimeout(pendT);
-    pendT = setTimeout(() => {
-      const n = pendCount();
-      let b = document.getElementById('sv-pend');
-      if (!n) { if (b) b.remove(); return; }
-      if (!b) {
-        b = document.createElement('div');
-        b.id = 'sv-pend';
-        document.body.appendChild(b);
-      }
-      b.textContent = state.lang === 'en'
-        ? n + ' change' + (n > 1 ? 's' : '') + ' saving…'
-        : 'يُحفظ في حسابك… (' + n + ')';
-    }, 400);
-  }
+  /* ===== ولا نقطةَ تُرى =====
+     بُنيت نقطةٌ تقول «يُحفظ في حسابك…» ما دام ثمّ ما لم يصل. ورآها صاحبُ
+     الموقع فقال: لا تظهر أبدًا. فرُفعت — والتحذيرُ عند الإغلاق يكفي: يظهر
+     حين يقع الخطرُ وحدَه، ولا يجلس في الزاوية يذكّر بما لا يُفعل به شيء. */
   window.addEventListener('beforeunload', e => {
     if (!pendCount()) return;
     e.preventDefault();
