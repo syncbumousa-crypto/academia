@@ -23,8 +23,44 @@
     try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); }
     catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); }
   };
-  const app = () => readJSON(LS_APP, {});
+  /* ============================================================
+     درجُ الموقع: يُقرأ ويُكتب كلُّه — فالكتابةُ العمياءُ محوٌ
+     ============================================================
+     اللوحةُ تقرأ ‎academia2:v1‎ لقطةً، ثمّ تكتبها كلَّها. ومحرّكُ الموقع
+     يعمل **في هذي الصفحة نفسِها** ويكتب الدرجَ كلَّه كذلك في كلّ ‎save()‎.
+     فكاتبان لدرجٍ واحد، ومن كتب أخيرًا محا عملَ الآخر بلا صياح.
+
+     وأخطرُ منه: ‎readJSON(k, {})‎ تردّ ‎{}‎ إن تعثّرت القراءةُ لأيّ سبب — ثمّ
+     تُكتب ‎{}‎ فوق الدرج. أترامٌ ومكتبةٌ وتواريخُ في سطرين.
+
+     فثلاثةُ قيود:
+       ١ · ‎app()‎ تصيح إن تعثّرت القراءةُ ولا تردّ خواءً صامتًا
+       ٢ · و‎saveApp‎ ترفض أن تكتب درجًا بلا أترامٍ فوق درجٍ فيه أترام
+       ٣ · وإن كان محرّكُ الموقع حاضرًا في الصفحة فهو صاحبُ الدرج: يُكتب
+           بيده (‎acSaveState‎) فلا تُكتب لقطةٌ قديمةٌ فوق ما بنى */
+  let appBad = false;
+  const app = () => {
+    let raw = null;
+    try { raw = localStorage.getItem(LS_APP); } catch (e) { raw = null; }
+    if (raw == null || raw === '') return {};
+    try { return JSON.parse(raw) || {}; }
+    catch (e) {
+      appBad = true;
+      toast('درج الموقع تالف — أُوقفت الكتابة حمايةً له');
+      return null;                       /* لا خواءَ يُكتب فوق عمل */
+    }
+  };
+
   const saveApp = s => {
+    if (appBad || !s) { toast('لم يُكتب شيء — الدرج غير مقروء'); return false; }
+    let cur = null;
+    try { cur = JSON.parse(localStorage.getItem(LS_APP) || 'null'); } catch (e) { cur = null; }
+    if (cur && (cur.terms || []).length && !(s.terms || []).length) {
+      toast('مُنعت كتابة كانت ستمحو الأترام — حدّث الصفحة');
+      return false;
+    }
+    /* والمحرّكُ إن كان حاضرًا كتب بنفسه: حالتُه هي الحيّة، ولقطتُنا قديمة */
+    if (typeof window.acSaveState === 'function' && window.acSaveState(s)) return true;
     try { localStorage.setItem(LS_APP, JSON.stringify(s)); return true; }
     catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); return false; }
   };

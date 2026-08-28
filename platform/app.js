@@ -34,8 +34,50 @@
   };
   const $ = s => document.querySelector(s);
 
-  let state;
-  try { state = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { state = {}; }
+  /* ============================================================
+     الدرجُ يُقرأ — والقراءةُ الفاشلةُ لا تصير درجًا خاويًا يُكتب
+     ============================================================
+     كان السطرُ واحدًا:
+       ‎try { state = JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { state = {} }‎
+     وهو أخطرُ سطرٍ في المشروع. لأنّ ‎state‎ يُكتب كلُّه في كلّ ‎save()‎ — فقراءةٌ
+     تفشل لأيّ سببٍ تصير ‎{}‎، ثمّ يأتي أوّلُ حفظٍ فيكتب الخواءَ **فوق العمل**.
+     بلا صياحٍ ولا نسخةٍ ولا سؤال. أترامُك ومكتبتُك وتواريخُك في سطرٍ واحد.
+
+     فصار يُفرَّق بين ثلاثٍ:
+       · لا شيءَ في الدرج ⇐ متصفّحٌ جديد، ويُبنى الخواءُ ويُكتب (صواب)
+       · نصٌّ صالح      ⇐ يُقرأ
+       · نصٌّ تالف      ⇐ **يُجمَّد الحفظُ كلُّه** ويُحفظ الخامُ في مفتاح إنقاذ،
+                          ويُصاح. وخيرٌ أن يقف الموقعُ من أن يمحوَ ما لا يُستعاد. */
+  const CORE_KEY = 'academia2:core:v1';    /* نسخةُ النواة — صغيرةٌ ولا تُعوَّض */
+  const RAW_KEY  = 'academia2:v1:rescue';  /* الخامُ التالف — يُحفظ ولا يُمحى */
+  const CORE_F = ['terms', 'libs', 'termDates', 'lastNook', 'profile'];
+  const coreOf = s => { const o = {}; CORE_F.forEach(k => { if (s && s[k] !== undefined) o[k] = s[k]; }); return o; };
+
+  let state, stateFrozen = false, coreBak = null;
+  try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
+  {
+    let raw = null;
+    try { raw = localStorage.getItem(LS_KEY); } catch (e) { raw = null; }
+    if (raw == null || raw === '') {
+      state = {};
+    } else {
+      try {
+        state = JSON.parse(raw) || {};
+      } catch (e) {
+        state = {};
+        stateFrozen = true;
+        try { if (!localStorage.getItem(RAW_KEY)) localStorage.setItem(RAW_KEY, raw); } catch (e2) {}
+      }
+    }
+  }
+  /* ===== وما ضاع من النواة يُردّ من نسختها =====
+     النواةُ أترامٌ ومكتبةٌ وتواريخُ وحساب — كيلوباتاتٌ لا تُعوَّض، بخلاف البطائق
+     والمساهمات (هي في الخادم وفي البذرة). فتُنسخ وحدَها، ويُردُّ منها ما ضاع. */
+  if (coreBak && Array.isArray(coreBak.terms) && coreBak.terms.length
+      && !(Array.isArray(state.terms) && state.terms.length)) {
+    CORE_F.forEach(k => { if (coreBak[k] !== undefined) state[k] = coreBak[k]; });
+    setTimeout(() => coreRestored(coreBak.terms.length), 0);
+  }
   state.imgs = state.imgs || {};
   state.lang = state.lang === 'en' ? 'en' : 'ar';
   state.terms = Array.isArray(state.terms) ? state.terms : [];
@@ -434,19 +476,66 @@
      كان الامتلاءُ يُبتلع في ‎console.warn‎: تكتب، وترى كتابتك أمامك، ولا تُحفظ، ولا يقول أحدٌ شيئًا —
      فلا تكتشفه إلا بعد إعادة تحميلٍ وقد ذهب العمل. والدرجُ مشتركٌ بين كلّ مشاريع ‎file://‎
      فامتلاؤه ليس فرضًا بعيدًا. فصار الفشلُ **شريطًا أحمر لا يزول** حتى ينجح حفظٌ بعده */
-  let saveBad = false;
+  let saveBad = false, lastCore = '';
   const save = () => {
+    /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
+       إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
+       كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
+    if (stateFrozen) { saveAlarm(new Error('frozen'), 'frozen'); return; }
+
+    /* ===== ولا تُمحى النواةُ بحفظٍ =====
+       أترامٌ كانت ثمّ صارت صفرًا في الذاكرة: ذاك محوٌ لم يطلبه أحد. ولا يُكتب،
+       بل يُصاح — فيبقى المكتوبُ على القرص كما هو ويُعاد التحميلُ فيعود. */
+    const bak = coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0;
+    if (bak && !(state.terms || []).length) { saveAlarm(new Error('wipe'), 'wipe'); return; }
+
     try {
       localStorage.setItem(LS_KEY, JSON.stringify(state));
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
+      /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
+      try {
+        const c = JSON.stringify(coreOf(state));
+        if (c !== lastCore) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
+      } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
     } catch (e) { saveBad = true; saveAlarm(e); }
   };
+
+  /* ---------- بابُ اللوحة إلى الدرج ----------
+     لوحةُ الأدمن تعمل في هذي الصفحة نفسِها وتكتب الدرجَ كلَّه من لقطةٍ قديمة،
+     فتمحو ما كتبه المحرّكُ بعد اللقطة. فتُعطى بابًا: تُنقل مفاتيحُ لقطتِها إلى
+     الحال الحيّة ثمّ يُحفظ **بالحارس** — فتمرّ كتابتُها بما يمرّ به كلُّ حفظ. */
+  window.acSaveState = function (s) {
+    if (!s || typeof s !== 'object' || Array.isArray(s)) return false;
+    Object.keys(s).forEach(k => { state[k] = s[k]; });
+    save();
+    return !saveBad && !stateFrozen;
+  };
+
+  /* يُقال صراحةً حين يُردّ ما ضاع: صمتُ الإصلاح كصمت العطب */
+  function coreRestored(n) {
+    const ar = (state.lang || 'ar') === 'ar';
+    const b = document.createElement('div');
+    b.id = 'core-back';
+    b.style.cssText = 'position:fixed;inset-inline:0;top:0;z-index:9999;padding:11px 16px;'
+      + 'background:#2c5e65;color:#fff;font:700 13px/1.7 "IBM Plex Sans Arabic",sans-serif;'
+      + 'text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.3)';
+    b.textContent = ar
+      ? 'كان الدرج فارغًا، فاستُعيدت ' + n + ' أترام بموادها وتواريخها من النسخة الاحتياطية.'
+      : 'The drawer was empty — ' + n + ' terms restored from backup with their courses and dates.';
+    const x = document.createElement('button');
+    x.type = 'button'; x.textContent = ar ? 'حسنًا' : 'OK';
+    x.style.cssText = 'margin-inline-start:12px;border:0;border-radius:8px;padding:4px 12px;'
+      + 'cursor:pointer;font:inherit;background:#fff;color:#2c5e65';
+    x.onclick = () => b.remove();
+    b.appendChild(x);
+    document.body.appendChild(b);
+  }
   /* الشريط بلغتيه بلا ‎T()‎: قد يُستدعى قبل أن تُبنى النصوص، والإنذارُ لا يُؤجَّل */
-  function saveAlarm(e) {
+  function saveAlarm(e, kind) {
     let b = document.getElementById('sv-alarm');
     if (!b) {
       b = document.createElement('div');
@@ -454,12 +543,27 @@
       document.body.appendChild(b);
     }
     const ar = (state.lang || 'ar') === 'ar';
-    b.innerHTML = ar
-      ? `<b>لم يُحفظ ما كتبتَه.</b> مساحةُ التخزين في المتصفّح امتلأت — وهي مشتركةٌ بين كل مشاريعك المحليّة.
-         افتح <a href="../backup.html" target="_blank">الخزنة</a> وصدّر نسختك ثمّ نظّف، ولا تُغلق هذه الصفحة قبلها.`
-      : `<b>Your changes were not saved.</b> Browser storage is full — it is shared across all your local projects.
-         Open <a href="../backup.html" target="_blank">the Vault</a>, export a copy, then clean up. Do not close this page first.`;
-    console.warn('تعذّر الحفظ (الحصة ممتلئة؟)', e);
+    /* ثلاثةُ أسبابٍ لا سببٌ واحد — ولكلٍّ ما يُفعل، والرسالةُ الواحدةُ تُضلّ */
+    if (kind === 'frozen') {
+      b.innerHTML = ar
+        ? `<b>درجُ الموقع تالفٌ فأُوقف الحفظ.</b> لم يُمحَ شيء — الأصلُ محفوظٌ كما هو
+           في <code>${RAW_KEY}</code>. لا تُفرّغ تخزينَ المتصفّح، وأخبِر صاحبَ الموقع.`
+        : `<b>The drawer is corrupt, so saving is stopped.</b> Nothing was erased — the original is
+           kept in <code>${RAW_KEY}</code>. Do not clear browser storage; tell the site owner.`;
+    } else if (kind === 'wipe') {
+      b.innerHTML = ar
+        ? `<b>مُنع حفظٌ كان سيمحو أترامَك.</b> الذاكرةُ خاويةٌ والقرصُ عامر، فلم يُكتب شيء.
+           <b>حدّث الصفحة</b> فتعود كما كانت.`
+        : `<b>A save that would have wiped your terms was blocked.</b> Memory was empty while the disk
+           still holds your data, so nothing was written. <b>Refresh the page</b> and it comes back.`;
+    } else {
+      b.innerHTML = ar
+        ? `<b>لم يُحفظ ما كتبتَه.</b> مساحةُ التخزين في المتصفّح امتلأت — وهي مشتركةٌ بين كل مشاريعك المحليّة.
+           افتح <a href="../backup.html" target="_blank">الخزنة</a> وصدّر نسختك ثمّ نظّف، ولا تُغلق هذه الصفحة قبلها.`
+        : `<b>Your changes were not saved.</b> Browser storage is full — it is shared across all your local projects.
+           Open <a href="../backup.html" target="_blank">the Vault</a>, export a copy, then clean up. Do not close this page first.`;
+    }
+    console.warn('تعذّر الحفظ:', kind || 'quota', e);
   }
 
   /* ============================================================
