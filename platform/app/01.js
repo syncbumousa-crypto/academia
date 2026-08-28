@@ -730,7 +730,6 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
-      mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
@@ -799,97 +798,11 @@
     console.warn('تعذّر الحفظ:', kind || 'quota', e);
   }
 
-  /* ============================================================
-     مرآةُ الملفّ — بياناتُك تعيش على جهازك لا في المتصفّح وحده
-     ============================================================
-     المتصفّح يمنح الصفحة المحليّة مِقبضًا على ملفٍّ تختاره بنفسك (‎showSaveFilePicker‎)،
-     ويبقى المِقبض محفوظًا في ‎IndexedDB‎ فيُستعاد بعد إغلاق المتصفّح. فتصير كلّ حفظةٍ
-     في الدرج حفظةً في ملفٍّ على سطح مكتبك — ولو فُرّغ المتصفّح كلُّه بقي الملفّ.
-     والإذنُ لا يُورَّث بين الجلسات: أوّلُ محاولةٍ بعد فتح المتصفّح تحتاج ضغطةً واحدة،
-     فيُعرض شريطٌ هادئ يطلبها ولا يُلحّ. ولا يُبنى على المرآة شيءٌ في المنطق —
-     هي نسخةٌ صامتة، إن غابت فالموقع كما كان */
-  const MIR_DB = 'academia2-mirror';
-  let mirHandle = null, mirT = 0, mirAsked = false;
-  const idbHandle = (mode, val) => new Promise(res => {
-    let rq;
-    try { rq = indexedDB.open(MIR_DB, 1); } catch (e) { return res(null); }
-    rq.onupgradeneeded = () => rq.result.createObjectStore('h');
-    rq.onerror = () => res(null);
-    rq.onsuccess = () => {
-      const db = rq.result;
-      let tx;
-      try { tx = db.transaction('h', mode); } catch (e) { return res(null); }
-      const st = tx.objectStore('h');
-      /* ‎put‎ ترمي مباشرةً (لا عبر ‎onerror‎) إن كانت القيمة غير قابلة للنسخ.
-         ولا يجوز أن يُسقط عجزُ **تذكُّر** المِقبض عمليّةَ الوصل نفسَها: أسوأُ ما يقع
-         حينئذٍ أن تُعيد اختيار الملفّ بعد إغلاق المتصفّح — لا أن تبقى بلا نسخة */
-      let op;
-      try { op = mode === 'readwrite' ? st.put(val, 'file') : st.get('file'); }
-      catch (e) { return res(null); }
-      op.onsuccess = () => res(op.result || null);
-      op.onerror = () => res(null);
-    };
-  });
-  /* الكتابة مؤجَّلة: الحالةُ تُحفظ عشرات المرّات في الدقيقة، والملفُّ لا يحتمل ذلك */
-  function mirrorSoon() {
-    if (!mirHandle) return;
-    clearTimeout(mirT);
-    mirT = setTimeout(mirrorNow, 4000);
-  }
-  async function mirrorNow() {
-    if (!mirHandle) return;
-    try {
-      const p = await mirHandle.queryPermission({ mode: 'readwrite' });
-      if (p !== 'granted') { mirrorAsk(); return; }
-      const w = await mirHandle.createWritable();
-      await w.write(JSON.stringify({ _وقت: new Date().toISOString(), مفتاح: LS_KEY, بيانات: state }, null, 1));
-      await w.close();
-    } catch (e) { mirrorAsk(); }
-  }
-  /* طلبُ الإذن مرّةً في الجلسة: شريطٌ فيه زرّ — لأنّ المتصفّح لا يمنح الكتابة إلا بلمسةٍ منك */
-  function mirrorAsk() {
-    if (mirAsked || document.getElementById('mir-ask')) return;
-    mirAsked = true;
-    const ar = (state.lang || 'ar') === 'ar';
-    const b = document.createElement('div');
-    b.id = 'mir-ask';
-    b.innerHTML = (ar
-      ? '<span>نسختك على الجهاز متوقّفة — المتصفّح يطلب إذنًا بعد كل فتحة.</span><button type="button">استأنف</button>'
-      : '<span>Your on-disk copy is paused — the browser asks again each session.</span><button type="button">Resume</button>');
-    b.querySelector('button').onclick = async () => {
-      try {
-        const p = await mirHandle.requestPermission({ mode: 'readwrite' });
-        if (p === 'granted') { b.remove(); mirAsked = false; mirrorNow(); }
-      } catch (e) { /* رُفض: يبقى الشريط */ }
-    };
-    document.body.appendChild(b);
-  }
-  /* الوصل: يُختار الملفّ مرّةً واحدة ثمّ يُحفظ مِقبضُه */
-  async function mirrorLink() {
-    if (!window.showSaveFilePicker) { toast(T().mirNoApi); return; }
-    try {
-      const h = await window.showSaveFilePicker({
-        suggestedName: 'academia2-نسختي.json',
-        types: [{ description: 'نسخة أكاديميا', accept: { 'application/json': ['.json'] } }]
-      });
-      mirHandle = h;
-      await idbHandle('readwrite', h);
-      mirAsked = false;
-      const el = document.getElementById('mir-ask'); if (el) el.remove();
-      await mirrorNow();
-      toast(T().mirOn);
-      renderAcct();
-    } catch (e) { /* أُلغي الاختيار */ }
-  }
-  async function mirrorUnlink() {
-    mirHandle = null;
-    await idbHandle('readwrite', null);
-    renderAcct();
-    toast(T().mirOff);
-  }
-  idbHandle('readonly').then(h => { if (h) { mirHandle = h; renderAcct(); } });
+  /* ===== ولا مرآةَ على جهازك =====
+     كانت الحالُ تُكتب في ملفٍّ تختاره على قرصك مع كلّ حفظة. ورُفعت بحكم
+     صاحب الموقع: «ما راح نربط شي بسطح المكتب» — وبعد أن صارت بياناتُه في
+     حسابه لم يبقَ لها موجب. */
 
-  /* ---------- نصوص الواجهة باللغتين ---------- */
   const I18N = {
     ar: {
       title: 'أكاديميا',

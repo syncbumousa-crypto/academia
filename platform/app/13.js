@@ -1266,84 +1266,13 @@
         <input class="acct-in" data-f="email" type="email" inputmode="email" value="${esc(p.email || '')}" placeholder="${T().acctEmailPh}"></label>
       <label class="acct-field"><span>${T().acctPassword}</span>
         <input class="acct-in" data-f="password" type="password" value="${esc(p.password || '')}" placeholder="${T().acctPasswordPh}"></label>
-      ${mirrorCardHTML()}
-      ${nookCardHTML()}
-      ${bootCardHTML()}
       <div class="acct-btns">
         <button type="button" class="acct-btn acct-btn--logout" id="acct-logout">${logoutIcon}${T().logout}</button>
         <button type="button" class="acct-btn acct-btn--del" id="acct-delete">${T().deleteAcct}</button>
       </div>
     </div>`;
   }
-  /* بطاقةُ النسخة على الجهاز — في صفحة الحساب لأنّها من شؤونك لا من شؤون المادة */
-  function mirrorCardHTML() {
-    const on = !!mirHandle;
-    return `<div class="acct-mir${on ? ' on' : ''}">
-      <div class="acct-mir__t"><b>${T().mirTitle}</b>
-        <span>${on ? T().mirLinked + ' — ' + esc(mirHandle.name) : T().mirWhy}</span></div>
-      <div class="acct-mir__b">
-        <button type="button" class="acct-btn" id="mir-link">${on ? T().mirChange : T().mirLink}</button>
-        ${on ? `<button type="button" class="acct-btn acct-btn--del" id="mir-unlink">${T().mirUnlink}</button>` : ''}
-      </div>
-    </div>`;
-  }
-  /* ---------- حالُ حرز النواة: يُقال ولا يُترك يُظنّ ---------- */
-  function nookCardHTML() {
-    const ar = state.lang !== 'en';
-    const nT = (state.terms || []).length;
-    let cls = 'warn', txt;
-    const when = nookAt ? new Date(nookAt * 1000) : null;
-    const p2 = x => (x < 10 ? '0' : '') + x;
-    const hhmm = when ? p2(when.getHours()) + ':' + p2(when.getMinutes()) : '';
-    if (nookOff === 'local') { cls = 'off'; txt = ar ? 'الحفظ في هذا المتصفّح وحده — لا خادم هنا.' : 'This browser only — no server here.'; }
-    else if (isGuest() || !state.uid || nookOff === 'out') {
-      txt = ar ? 'لست داخلًا بحسابك، فأترامُك محفوظةٌ في هذا المتصفّح وحدَه. سجّل الدخول ليُحفظ نسخُها في حسابك.'
-               : 'You are signed out, so your terms live in this browser only. Sign in to keep a copy in your account.';
-    } else if (nookAt) {
-      cls = 'on';
-      txt = ar ? ('أترامُك (' + nT + ') ومكتبتُها وتواريخُها في حسابك — آخر مزامنة ' + hhmm + ' (نسخة ' + nookRev + ').')
-               : ('Your ' + nT + ' terms are in your account — last synced ' + hhmm + ' (rev ' + nookRev + ').');
-    } else {
-      /* داخلٌ ولم يقع شيءٌ بعد: يُقال «لم يقع» لا «وقع» */
-      txt = ar ? ('لم تصل نواتُك الخادمَ بعد' + (nookTried ? '' : ' (لم تُجرَّب المزامنة)') + '. أعِد تحميل الصفحة، فإن بقي فأخبِر صاحبَ الموقع.')
-               : 'Your nook has not reached the server yet. Reload; if it persists, tell the site owner.';
-    }
-    return `<div class="acct-nk is-${cls}"><b>${ar ? 'حرز الركن' : 'Nook backup'}</b><span>${esc(txt)}</span></div>`;
-  }
 
-  /* ---------- سجلُّ الإقلاع في الصفحة لا في أدوات المطوّر ----------
-     بُني الدفترُ ليُقرأ يومَ يقع فقد، ثمّ طُلب من صاحبه أن يفتح نافذةً سوداء
-     ويكتب فيها اسمَ دالّة. وتشخيصٌ لا يُبلَغ إلّا بتعويذةٍ لا يُقرأ.
-     فيُطوى ههنا: مطويٌّ لا يشغل، ومفتوحٌ يُنسخ بضغطة. */
-  function bootCardHTML() {
-    let rows = [];
-    try { rows = JSON.parse(localStorage.getItem('academia2:boot:v1') || '[]') || []; } catch (e) {}
-    if (!rows.length) return '';
-    const ar = state.lang !== 'en';
-    const bad = rows.filter(r => r.r !== 'ok' || (r.ev || []).length).length;
-    const line = r => {
-      const d = new Date(r.t * 1000);
-      const p2 = x => (x < 10 ? '0' : '') + x;
-      const when = p2(d.getDate()) + '/' + p2(d.getMonth() + 1) + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes());
-      const tag = r.r === 'ok' ? '' : ' is-bad';
-      return `<div class="bootrow${(r.ev || []).length ? ' is-bad' : tag}">`
-        + `<b>${when}</b><span>${r.p === 'a' ? (ar ? 'لوحة' : 'panel') : (ar ? 'موقع' : 'site')}</span>`
-        + `<span>${r.r}</span><span>${ar ? 'أترام' : 'terms'} ${r.tm}</span>`
-        + `<span>${ar ? 'مكتبة' : 'lib'} ${r.lb}</span>`
-        + `<span>${ar ? 'مواد' : 'courses'} ${r.ci}</span>`
-        + (r.in !== undefined ? `<span>${r.in ? (ar ? 'داخل' : 'in') : (ar ? 'خارج' : 'out')}</span>` : '')
-        + (r.big ? `<span class="bootbig">${esc(r.big)}</span>` : '')
-        + (r.deep ? `<span class="bootbig">${esc(r.deep)}</span>` : '')
-        + `<span>${Math.round((r.b || 0) / 1024)}${ar ? 'ك' : 'K'}</span>`
-        + `<i>${esc((r.ev || []).join(' · '))}</i></div>`;
-    };
-    return `<details class="acct-boot${bad ? ' has-bad' : ''}">
-      <summary>${ar ? 'سجلّ الإقلاع' : 'Boot log'}
-        <span>${rows.length}${ar ? ' مرّة' : ''}${bad ? (ar ? ' — ' + bad + ' فيها خبر' : ' — ' + bad + ' notable') : ''}</span></summary>
-      <div class="acct-boot__b">${rows.slice().reverse().map(line).join('')}</div>
-      <button type="button" class="acct-btn" id="boot-copy">${ar ? 'انسخ السجل' : 'Copy log'}</button>
-    </details>`;
-  }
 
   /* ألواحُ منطقة المحتوى — تُطوى معًا ويُكشف واحدٌ منها */
   const PANELS = ['panel-market', 'panel-library', 'panel-past', 'panel-stats', 'panel-nook-lock'];
@@ -2810,20 +2739,6 @@
     /* والخروجُ يُبقي الحساب — والحذفُ وحدَه يمحوه. وكانا فعلًا واحدًا قبل الجلسة */
     if (e.target.closest('#acct-logout')) { authLogout(); return; }
     /* ونسخُ السجلّ: النصُّ نفسُه الذي تطبعه ‎acBootLog‎ — يُلصق كما هو */
-    if (e.target.closest('#boot-copy')) {
-      const t = typeof window.acBootLog === 'function' ? window.acBootLog() : '';
-      const done = () => toast(state.lang === 'en' ? 'Copied' : 'نُسخ السجل');
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(t).then(done, () => {});
-      } else {
-        /* ومتصفّحٌ يمنع الحافظة: يُحدَّد النصُّ ليُنسخ باليد، ولا يُترك بلا سبيل */
-        const ta = document.createElement('textarea');
-        ta.value = t; document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); done(); } catch (err) {}
-        ta.remove();
-      }
-      return;
-    }
     if (e.target.closest('#mir-link')) { mirrorLink(); return; }
     if (e.target.closest('#mir-unlink')) { mirrorUnlink(); return; }
     const del = e.target.closest('#acct-delete');

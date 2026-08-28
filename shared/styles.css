@@ -5403,22 +5403,8 @@ html[data-theme="dark"] .cd-fan { background: #17313a; box-shadow: 0 12px 30px r
   font: inherit; font-weight: 700; cursor: pointer; padding: 5px 14px; border-radius: 999px;
   border: 0; background: #fff; color: var(--c-kfupm, #2c5e65);
 }
-#mir-ask { background: var(--u-gold, #c8a44a); color: #14233f; border: 1px solid rgba(0, 0, 0, .18); }
-#mir-ask button {
-  font: inherit; font-weight: 700; cursor: pointer; padding: 5px 14px; border-radius: 999px;
-  border: 0; background: #14233f; color: #fff;
-}
 /* بطاقةُ النسخة على الجهاز في صفحة الحساب — تخضرّ حين تُوصل، فالحال تُرى لا تُقرأ */
-.acct-mir {
-  border: 1px dashed var(--u-in-line); border-radius: 12px; padding: 14px 16px; margin-top: 6px;
-  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-}
-.acct-mir.on { border-style: solid; border-color: #4e9d57;
   background: color-mix(in srgb, #4e9d57 8%, transparent); }
-.acct-mir__t { min-width: 220px; flex: 1 1 260px; }
-.acct-mir__t b { display: block; font-size: 14px; }
-.acct-mir__t span { display: block; font-size: 12px; color: var(--u-mut); margin-top: 2px; }
-.acct-mir__b { display: flex; gap: 8px; flex-wrap: wrap; }
 
 /* مطالعةُ الماضي بلا شريطٍ ولا زرّ: الختمُ والحلقةُ يبيّضّان معًا فيُقرأ الحالُ من موضعه،
    والحقلان يخفتان قليلًا فيُحسّ أنّهما للقراءة. والعودةُ بضغطة النسخة الحاليّة في المروحة */
@@ -15014,43 +15000,5 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
 /* وحقلا تاريخ الترم: نصٌّ لا تقويمٌ، فيُقرأ ‎ISO‎ لاتينيًّا ويُضغط ليُفتح المنتقي */
 .dm-date { direction: ltr; text-align: start; cursor: pointer; font-variant-numeric: tabular-nums; }
 
-/* ===== سجلُّ الإقلاع في صفحة الحساب =====
-   مطويٌّ لا يشغل، ومفتوحٌ يُقرأ ويُنسخ. وليس زينةً: هو ما يُقرأ يومَ يقع فقد. */
-.acct-boot { margin-top: 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.acct-boot > summary {
-  cursor: pointer; padding: 10px 13px; font-size: 12.5px; font-weight: 700;
-  color: var(--c-ink-soft); display: flex; align-items: center; gap: 8px;
-  background: color-mix(in srgb, var(--c-kfupm) 4%, transparent);
-}
-.acct-boot > summary::-webkit-details-marker { display: none; }
-.acct-boot > summary span { margin-inline-start: auto; font-weight: 600; opacity: .8; }
-.acct-boot.has-bad > summary { color: var(--c-gold); }
-.acct-boot__b { max-height: 220px; overflow: auto; padding: 4px 0; }
-.bootrow {
-  display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline;
-  padding: 5px 13px; font-size: 11px; color: var(--c-ink-soft);
-  font-variant-numeric: tabular-nums; border-top: 1px solid var(--border);
-}
-.bootrow:first-child { border-top: 0; }
-.bootrow b { color: var(--c-ink); font-weight: 700; }
-.bootrow i { font-style: normal; color: var(--c-gold); font-weight: 700; }
-.bootrow.is-bad { background: color-mix(in srgb, var(--c-gold) 10%, transparent); }
-.acct-boot #boot-copy { margin: 8px 13px 12px; width: calc(100% - 26px); }
 
-/* ===== حالُ حرز النواة في صفحة الحساب =====
-   حرزٌ لا يعمل يجب أن يُقال: صمتُه أخطرُ من غيابه، إذ يُبنى عليه أمانٌ لا وجودَ له. */
-.acct-nk {
-  margin-top: 14px; padding: 11px 13px; border-radius: 12px;
-  display: flex; flex-direction: column; gap: 3px;
-  font-size: 12px; line-height: 1.7; border: 1px solid var(--border);
-}
-.acct-nk b { font-size: 12.5px; }
-.acct-nk span { color: var(--c-ink-soft); }
-.acct-nk.is-on { border-color: color-mix(in srgb, var(--c-kfupm) 40%, transparent);
-                 background: var(--c-kfupm-soft); }
-.acct-nk.is-on b { color: var(--brand-tx); }
-.acct-nk.is-warn { border-color: color-mix(in srgb, var(--c-gold) 55%, transparent);
-                   background: color-mix(in srgb, var(--c-gold) 12%, transparent); }
-.acct-nk.is-warn b { color: var(--c-gold); }
-.bootrow .bootbig { opacity: .75; direction: ltr; }
 
