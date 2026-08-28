@@ -293,6 +293,31 @@
   <!-- نافذة إضافة بطاقة (على غرار نافذة الإضافة في أنكي): شطر علويّ فيه إعدادات البطاقة
        (لغتها · نوعها · مكان حفظها) ثم خطّ، وتحته شريط التنسيق ثم الوجه والظهر -->
   <!-- سؤال نشر المساهمة: يُفتح عند الإرسال ما دامت غير مدرجة -->
+  <!-- ============================================================
+       منتقي التاريخ — «البكرات» (اتّجاه ب من مختبر date-pick-lab)
+       ============================================================
+       ثلاثةُ أعمدةٍ تُدار، والمختارُ ما وقف في النافذة الوسطى لا ما أصابه
+       الإصبع. ويحلّ محلَّ منتقي المتصفّح في موضعين: تاريخَي الترم، وموعدِ
+       بندِ الدرجة — وذاك محدودٌ بحدَّي الترم فتُطفأ الأيّامُ خارجَهما.
+
+       وهو فوق ‎.mmodal‎ في الطبقات: يُفتح من فوق نافذة «إعدادات الترم» نفسِها. -->
+  <div class="mmodal dpk" id="dpk-modal" hidden>
+    <div class="dp">
+      <div class="dp__head">
+        <b class="dp__t" id="dpk-title"></b>
+        <button type="button" class="dp__x" id="dpk-x" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="dp__body" id="dpk-body"></div>
+      <div class="dp__foot">
+        <button type="button" class="dp__ghost" id="dpk-clear"></button>
+        <button type="button" class="dp__ghost" id="dpk-today"></button>
+        <span class="dp__spacer"></span>
+        <b class="dp__read" id="dpk-read">—</b>
+        <button type="button" class="dp__go" id="dpk-ok"></button>
+      </div>
+    </div>
+  </div>
+
   <div class="mmodal" id="pst-modal" hidden>
     <div class="mmodal__card pst-card">
       <p class="pst-q"></p>
@@ -432,13 +457,16 @@
           <span id="dm-name-label">اسم الترم</span>
           <input type="text" id="dm-name">
         </label>
+        <!-- ‏‎type="text" readonly‎ لا ‎type="date"‎: القيمةُ تبقى ‎ISO‎ كما كانت
+             (‎.value‎ يُقرأ ويُكتب في المواضع نفسِها بلا تبديل)، والمنعُ لئلّا يفتح
+             المتصفّحُ منتقيَه فوق منتقينا. و‎inputmode="none"‎ تكفّ لوحةَ الهاتف. -->
         <label class="dm-field">
           <span id="dm-start-label">تاريخ البداية</span>
-          <input type="date" id="dm-start">
+          <input type="text" id="dm-start" class="dm-date" readonly inputmode="none" placeholder="—">
         </label>
         <label class="dm-field">
           <span id="dm-end-label">تاريخ النهاية</span>
-          <input type="date" id="dm-end">
+          <input type="text" id="dm-end" class="dm-date" readonly inputmode="none" placeholder="—">
         </label>
         <!-- مواد الترم: تُعرض هنا ويمكن حذفها -->
         <div class="dm-courses">

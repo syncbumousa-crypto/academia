@@ -137,7 +137,10 @@
       if (!me) return '';
       const g = gmOf(me, x.name), due = g && g.d ? g.d : '';
       return `<span class="gcal${due ? ' is-set' : ''}" title="${T().gmDue}${due ? ': ' + esc(due) : ''}">${GM_CAL}` +
-        `<input type="date" data-gmd="${esc(x.name)}" value="${esc(due)}"${gmBounds()} aria-label="${T().gmDue}"></span>`;
+        /* ‏‎type="text" readonly‎ لا ‎type="date"‎: الحقلُ مخزنُ القيمة (ISO كما كان)
+           ولا يُفتح عليه منتقي المتصفّح — المنتقي منتقينا. و‎gmBounds‎ تبقى: منها
+           يقرأ المنتقي حدَّي الترم. */
+        `<input type="text" readonly inputmode="none" data-gmd="${esc(x.name)}" value="${esc(due)}"${gmBounds()} aria-label="${T().gmDue}"></span>`;
     };
     /* ===== وموعدُ البند يُرى، لا يبقى في تلميح الأيقونة =====
        كان ما يُختار من التقويم لا يظهر إلّا إذا وُقف على الأيقونة، فالجدولُ كلُّه
@@ -366,14 +369,19 @@
     }
     save();
   });
-  /* والنقرُ على الحقل المبسوط يُبئِر خانةً من التاريخ ولا يفتح التقويم — فيُطلب صراحةً،
-     ولا يُجاب الطلبُ إلّا داخل لمسةٍ من المستخدم، وههنا نحن في قلبها */
+  /* ---------- والضغطةُ تفتح منتقيَنا لا منتقيَ المتصفّح ----------
+     كان يُطلب ‎showPicker()‎ صراحةً — ونافذةُ المتصفّح لا تعرف الموقعَ: لا ثوبَه
+     ولا خطَّه ولا لغتَه ولا حدَّي ترمِه إلّا رقمين. وقد عُرضت ثلاثةُ اتّجاهاتٍ
+     في ‎RE\date-pick-lab‎ واختار صاحبُ الموقع «البكرات».
+     والحدُّ يُقرأ من الحقل نفسِه (‎min/max‎ التي كتبتها ‎gmBounds‎). */
   $('#lib-course').addEventListener('click', e => {
     const g = e.target.closest('.gcal');
     if (!g) return;
-    const inp = g.querySelector('input[type="date"]');
+    const inp = g.querySelector('input[data-gmd]');
     if (!inp) return;
-    try { inp.showPicker(); } catch (err) { inp.focus(); }
+    e.preventDefault();
+    dpkForInput(inp, T().gmDue + ' — ' + (inp.dataset.gmd || ''),
+                inp.getAttribute('min') || '', inp.getAttribute('max') || '');
   });
 
   /* ============================================================

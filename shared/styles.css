@@ -14929,3 +14929,83 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
    الرقعةُ ووقف الوجهُ فيها فاختلّت النسبةُ التي عُويرت.
    فيُرفع السقفُ والقاعُ والنسبةُ معا بقدر ما رُفع المعامل (‎+18٪‎ تقريبا) */
 #nook .nk-doc__top { --dm-av: clamp(30px, 25cqw, 40px); }
+
+/* ============================================================
+   منتقي التاريخ — «البكرات» (اتّجاه ب من مختبر date-pick-lab)
+   ============================================================
+   يحلّ محلَّ منتقي المتصفّح في تاريخَي الترم وموعدِ بند الدرجة. وكلُّ لونٍ فيه
+   توكنٌ من توكنات الموقع، فالثوبان الفاتحُ والداكنُ يتبعانه بلا كتلةٍ ثانية.
+   ============================================================ */
+.dpk { z-index: 95; padding: 20px; backdrop-filter: blur(3px); }
+.dp {
+  width: min(100%, 360px);
+  background: var(--surface); color: var(--c-ink);
+  border: 1px solid var(--border); border-radius: 20px;
+  box-shadow: 0 22px 60px rgba(9, 18, 22, .3);
+  overflow: hidden; animation: dpIn .16s ease;
+}
+@keyframes dpIn { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
+
+.dp__head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+}
+.dp__t { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-size: 14.5px; font-weight: 800; }
+.dp__x {
+  margin-inline-start: auto; width: 27px; height: 27px; border: 0; border-radius: 8px;
+  background: none; color: var(--c-ink-soft); cursor: pointer; font-size: 14px; line-height: 1;
+}
+.dp__x:hover { background: var(--c-kfupm-soft); color: var(--c-kfupm); }
+.dp__body { padding: 14px 16px; }
+
+.dp__foot {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 16px; border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--c-kfupm) 4%, transparent);
+}
+.dp__spacer { flex: 1; }
+.dp__ghost {
+  border: 1px solid var(--border); background: var(--surface); color: var(--c-ink-soft);
+  border-radius: 9px; padding: 6px 11px; cursor: pointer;
+  font-family: inherit; font-size: 11.5px; font-weight: 700;
+}
+.dp__ghost:hover { border-color: var(--c-kfupm); color: var(--c-kfupm); }
+.dp__read { font-size: 12px; font-variant-numeric: tabular-nums; direction: ltr; color: var(--brand-tx); }
+.dp__go {
+  border: 0; border-radius: 9px; padding: 7px 16px; cursor: pointer;
+  font-family: inherit; font-size: 12.5px; font-weight: 700;
+  background: var(--c-kfupm); color: #fff;
+}
+.dp__go:hover { filter: brightness(1.08); }
+
+/* ===== والشريطُ الأوسطُ ثابتٌ والأرقامُ تمرّ تحته =====
+   المختارُ ما وقف في النافذة لا ما أصابه الإصبع — فالهدفُ شريطٌ عريضٌ يمتدّ
+   على العمود، لا مربّعٌ صغيرٌ يُصاب. */
+.dpb { position: relative; }
+.dpb__cols { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 8px; }
+.dpb__band {
+  position: absolute; inset-inline: 0; top: 50%; height: 38px;
+  transform: translateY(-50%); pointer-events: none;
+  border-radius: 11px; background: var(--c-kfupm-soft);
+  border: 1px solid color-mix(in srgb, var(--c-kfupm) 32%, transparent);
+}
+.dpb__col {
+  height: 190px; overflow-y: auto; scroll-snap-type: y mandatory;
+  scrollbar-width: none; -ms-overflow-style: none;
+  /* والحشوُ نصفُ ما بقي بعد الشريط: ‏‎(190 − 38) ÷ 2‎ — فيقف أوّلُ عنصرٍ وآخِرُه في النافذة */
+  padding: 76px 0; position: relative; z-index: 1;
+}
+.dpb__col::-webkit-scrollbar { width: 0; display: none; }
+.dpb__i {
+  height: 38px; display: grid; place-items: center; scroll-snap-align: center;
+  font-size: 13.5px; font-weight: 600; color: var(--c-ink-soft);
+  font-variant-numeric: tabular-nums; cursor: pointer; opacity: .5;
+  transition: opacity .12s, color .12s, font-size .12s;
+}
+.dpb__i.is-on { opacity: 1; color: var(--c-kfupm); font-size: 15px; font-weight: 800; }
+.dpb__i.is-off { opacity: .18; cursor: not-allowed; }
+.dpb__cap { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 8px; margin-bottom: 6px; }
+.dpb__cap span { text-align: center; font-size: 10.5px; font-weight: 700; color: var(--c-ink-soft); }
+
+/* وحقلا تاريخ الترم: نصٌّ لا تقويمٌ، فيُقرأ ‎ISO‎ لاتينيًّا ويُضغط ليُفتح المنتقي */
+.dm-date { direction: ltr; text-align: start; cursor: pointer; font-variant-numeric: tabular-nums; }

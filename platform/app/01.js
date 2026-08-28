@@ -874,6 +874,11 @@
       /* مقابض مربع المادة المرن */
       nkiW: 'اسحب: عرض المربع', nkiH: 'اسحب: طول المربع', nkiWH: 'اسحب: العرض والطول',
       gmPct: 'درجتك في هذا البند بالمئة', gmDue: 'موعد البند',
+      /* منتقي التاريخ — بكرات: يوم · شهر · سنة */
+      dpkClear: 'امسح', dpkToday: 'اليوم', dpkDay: 'اليوم', dpkMonth: 'الشهر', dpkYear: 'السنة',
+      dpkNone: 'بلا موعد',
+      months: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+               'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
       chNumPh: 'رقم', chNamePh: 'اسم الموضوع', chTag: 'فـ',
       topicsSec: 'مواضيع المادة', topicsCount: n => `${n} موضوع`, topicsWord: n => 'موضوع',
       copyTopic: 'نسخ عنوان الفصل',
@@ -1219,6 +1224,10 @@
       jrTaskPh: 'Write the task…', jrCardPh: 'Card front…', jrFoldPh: 'Folder name…',
       nkiW: 'Drag: box width', nkiH: 'Drag: box height', nkiWH: 'Drag: width and height',
       gmPct: 'Your score on this item (%)', gmDue: 'Item date',
+      dpkClear: 'Clear', dpkToday: 'Today', dpkDay: 'Day', dpkMonth: 'Month', dpkYear: 'Year',
+      dpkNone: 'No date',
+      months: ['January', 'February', 'March', 'April', 'May', 'June',
+               'July', 'August', 'September', 'October', 'November', 'December'],
       chNumPh: 'No.', chNamePh: 'Topic name', chTag: 'Ch',
       topicsSec: 'Course topics', topicsCount: n => n === 1 ? '1 topic' : `${n} topics`, topicsWord: n => n === 1 ? 'topic' : 'topics',
       copyTopic: 'Copy topic title',

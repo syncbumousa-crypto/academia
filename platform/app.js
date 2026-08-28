@@ -874,6 +874,11 @@
       /* مقابض مربع المادة المرن */
       nkiW: 'اسحب: عرض المربع', nkiH: 'اسحب: طول المربع', nkiWH: 'اسحب: العرض والطول',
       gmPct: 'درجتك في هذا البند بالمئة', gmDue: 'موعد البند',
+      /* منتقي التاريخ — بكرات: يوم · شهر · سنة */
+      dpkClear: 'امسح', dpkToday: 'اليوم', dpkDay: 'اليوم', dpkMonth: 'الشهر', dpkYear: 'السنة',
+      dpkNone: 'بلا موعد',
+      months: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+               'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
       chNumPh: 'رقم', chNamePh: 'اسم الموضوع', chTag: 'فـ',
       topicsSec: 'مواضيع المادة', topicsCount: n => `${n} موضوع`, topicsWord: n => 'موضوع',
       copyTopic: 'نسخ عنوان الفصل',
@@ -1219,6 +1224,10 @@
       jrTaskPh: 'Write the task…', jrCardPh: 'Card front…', jrFoldPh: 'Folder name…',
       nkiW: 'Drag: box width', nkiH: 'Drag: box height', nkiWH: 'Drag: width and height',
       gmPct: 'Your score on this item (%)', gmDue: 'Item date',
+      dpkClear: 'Clear', dpkToday: 'Today', dpkDay: 'Day', dpkMonth: 'Month', dpkYear: 'Year',
+      dpkNone: 'No date',
+      months: ['January', 'February', 'March', 'April', 'May', 'June',
+               'July', 'August', 'September', 'October', 'November', 'December'],
       chNumPh: 'No.', chNamePh: 'Topic name', chTag: 'Ch',
       topicsSec: 'Course topics', topicsCount: n => n === 1 ? '1 topic' : `${n} topics`, topicsWord: n => n === 1 ? 'topic' : 'topics',
       copyTopic: 'Copy topic title',
@@ -18982,7 +18991,10 @@
       if (!me) return '';
       const g = gmOf(me, x.name), due = g && g.d ? g.d : '';
       return `<span class="gcal${due ? ' is-set' : ''}" title="${T().gmDue}${due ? ': ' + esc(due) : ''}">${GM_CAL}` +
-        `<input type="date" data-gmd="${esc(x.name)}" value="${esc(due)}"${gmBounds()} aria-label="${T().gmDue}"></span>`;
+        /* ‏‎type="text" readonly‎ لا ‎type="date"‎: الحقلُ مخزنُ القيمة (ISO كما كان)
+           ولا يُفتح عليه منتقي المتصفّح — المنتقي منتقينا. و‎gmBounds‎ تبقى: منها
+           يقرأ المنتقي حدَّي الترم. */
+        `<input type="text" readonly inputmode="none" data-gmd="${esc(x.name)}" value="${esc(due)}"${gmBounds()} aria-label="${T().gmDue}"></span>`;
     };
     /* ===== وموعدُ البند يُرى، لا يبقى في تلميح الأيقونة =====
        كان ما يُختار من التقويم لا يظهر إلّا إذا وُقف على الأيقونة، فالجدولُ كلُّه
@@ -19211,14 +19223,19 @@
     }
     save();
   });
-  /* والنقرُ على الحقل المبسوط يُبئِر خانةً من التاريخ ولا يفتح التقويم — فيُطلب صراحةً،
-     ولا يُجاب الطلبُ إلّا داخل لمسةٍ من المستخدم، وههنا نحن في قلبها */
+  /* ---------- والضغطةُ تفتح منتقيَنا لا منتقيَ المتصفّح ----------
+     كان يُطلب ‎showPicker()‎ صراحةً — ونافذةُ المتصفّح لا تعرف الموقعَ: لا ثوبَه
+     ولا خطَّه ولا لغتَه ولا حدَّي ترمِه إلّا رقمين. وقد عُرضت ثلاثةُ اتّجاهاتٍ
+     في ‎RE\date-pick-lab‎ واختار صاحبُ الموقع «البكرات».
+     والحدُّ يُقرأ من الحقل نفسِه (‎min/max‎ التي كتبتها ‎gmBounds‎). */
   $('#lib-course').addEventListener('click', e => {
     const g = e.target.closest('.gcal');
     if (!g) return;
-    const inp = g.querySelector('input[type="date"]');
+    const inp = g.querySelector('input[data-gmd]');
     if (!inp) return;
-    try { inp.showPicker(); } catch (err) { inp.focus(); }
+    e.preventDefault();
+    dpkForInput(inp, T().gmDue + ' — ' + (inp.dataset.gmd || ''),
+                inp.getAttribute('min') || '', inp.getAttribute('max') || '');
   });
 
   /* ============================================================
@@ -21406,6 +21423,154 @@
     };
     rd.readAsDataURL(file);
   }
+
+  /* ============================================================
+     منتقي التاريخ — «البكرات»
+     ============================================================
+     اختاره صاحبُ الموقع من ثلاثة اتّجاهاتٍ في ‎RE\date-pick-lab‎ (‎#b‎).
+     وحجّتُه: من يعرف التاريخَ لا يريد أن يبحث عنه في شبكةِ شهر — يدير ثلاثةَ
+     أعمدةٍ ويقف. والمختارُ **ما وقف في النافذة الوسطى** لا ما أصابه الإصبع،
+     فالهدفُ شريطٌ عريضٌ لا مربّعٌ صغير.
+
+     ===== ولا يحلّ محلَّ الحقل بل محلَّ منتقي المتصفّح =====
+     الحقلُ باقٍ يحمل ‎ISO‎ كما كان، وهذي تكتب فيه ثمّ تُطلق ‎change‎ — فكلُّ ما
+     بُني على ذلك الحقل (سجلُّ الدرجات، وحفظُ تواريخ الترم) يعمل بلا سطرٍ يُبدَّل.
+
+     ===== والحدُّ يُطفئ ولا يَحجب =====
+     موعدُ بندٍ خارج ترمه ليس موعدًا (‎gmBounds‎). فتُعرض الأيّامُ كلُّها ويُطفأ
+     ما خرج — فيُرى الحدُّ ولا يُخمَّن. */
+  function dpkOpen(o) {
+    const box = $('#dpk-body'), wrap = $('#dpk-modal');
+    if (!box || !wrap) return;
+
+    const p2 = x => (x < 10 ? '0' : '') + x;
+    const isoOf = d => d ? d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()) : '';
+    const ymdOf = s => { const a = String(s || '').split('-');
+                         return a.length === 3 ? new Date(+a[0], +a[1] - 1, +a[2]) : null; };
+    const dim = (y, m) => new Date(y, m + 1, 0).getDate();
+
+    const min = ymdOf(o.min), max = ymdOf(o.max);
+    const off = d => (min && d < min) || (max && d > max);
+    const today = new Date();
+    const start = ymdOf(o.value) || (min && today < min ? min : (max && today > max ? max : today));
+    let sel = { y: start.getFullYear(), m: start.getMonth(), d: start.getDate() };
+    let val = ymdOf(o.value);
+
+    const M = T().months;
+    function read() {
+      $('#dpk-read').textContent = val ? isoOf(val) : '—';
+      $('#dpk-ok').disabled = false;      /* و«تمّ» بلا قيمةٍ تعني المسحَ لا المنع */
+    }
+
+    function build() {
+      const y0 = min ? min.getFullYear() : sel.y - 5;
+      const y1 = max ? max.getFullYear() : sel.y + 5;
+      const col = (k, list) => '<div class="dpb__col" data-k="' + k + '">' + list.map(it =>
+        '<div class="dpb__i' + (it.v === sel[k] ? ' is-on' : '') + (it.off ? ' is-off' : '') +
+        '" data-v="' + it.v + '">' + esc(String(it.t)) + '</div>').join('') + '</div>';
+
+      const dl = [], ml = [], yl = [];
+      for (let i = 1; i <= dim(sel.y, sel.m); i++) dl.push({ v: i, t: i, off: off(new Date(sel.y, sel.m, i)) });
+      for (let i = 0; i < 12; i++) ml.push({ v: i, t: M[i], off: false });
+      for (let i = y0; i <= y1; i++) yl.push({ v: i, t: i, off: false });
+
+      box.innerHTML =
+        '<div class="dpb__cap"><span>' + esc(T().dpkDay) + '</span><span>' + esc(T().dpkMonth) +
+        '</span><span>' + esc(T().dpkYear) + '</span></div>' +
+        '<div class="dpb"><div class="dpb__band"></div><div class="dpb__cols">' +
+        col('d', dl) + col('m', ml) + col('y', yl) + '</div></div>';
+
+      [].forEach.call(box.querySelectorAll('.dpb__col'), c => {
+        const on = c.querySelector('.is-on');
+        if (on) c.scrollTop = on.offsetTop - c.clientHeight / 2 + on.offsetHeight / 2;
+        let t = 0;
+        c.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => land(c), 90); });
+      });
+    }
+
+    /* وما وقف في النافذة هو المختار — يُقاس بالمسافة إلى وسط العمود */
+    function land(c) {
+      const mid = c.scrollTop + c.clientHeight / 2;
+      let best = null, bd = 1e9;
+      [].forEach.call(c.querySelectorAll('.dpb__i'), el => {
+        const d = Math.abs(el.offsetTop + el.offsetHeight / 2 - mid);
+        if (d < bd) { bd = d; best = el; }
+      });
+      if (!best) return;
+      const k = c.dataset.k, v = +best.dataset.v;
+      if (sel[k] === v) return;
+      sel[k] = v;
+      /* وتبديلُ الشهر أو السنة يبدّل عدّةَ أيّامه، فيُعاد البناء. وتبديلُ اليوم
+         وحدَه لا يُعيده: إعادةُ البناء تحت الإصبع تقطع الإدارة. */
+      if (k !== 'd') { sel.d = Math.min(sel.d, dim(sel.y, sel.m)); build(); }
+      else [].forEach.call(c.querySelectorAll('.dpb__i'), el =>
+        el.classList.toggle('is-on', +el.dataset.v === v));
+      const d = new Date(sel.y, sel.m, sel.d);
+      val = off(d) ? null : d;
+      read();
+    }
+
+    box.onclick = e => {
+      const it = e.target.closest('.dpb__i');
+      if (!it || it.classList.contains('is-off')) return;
+      const c = it.parentNode;
+      c.scrollTo({ top: it.offsetTop - c.clientHeight / 2 + it.offsetHeight / 2, behavior: 'smooth' });
+    };
+
+    $('#dpk-title').textContent = o.title || '';
+    $('#dpk-clear').textContent = T().dpkClear;
+    $('#dpk-today').textContent = T().dpkToday;
+    $('#dpk-ok').textContent = T().doneBtn;
+    build(); read();
+    wrap.hidden = false;
+
+    dpkNow = {
+      close: () => { wrap.hidden = true; dpkNow = null; box.innerHTML = ''; },
+      clear: () => { val = null; read(); },
+      today: () => {
+        if (off(today)) return;
+        sel = { y: today.getFullYear(), m: today.getMonth(), d: today.getDate() };
+        val = today; build(); read();
+      },
+      ok: () => { const v = val ? isoOf(val) : ''; dpkNow.close(); o.commit(v); },
+    };
+  }
+
+  let dpkNow = null;
+  const dpkWire = (id, k) => { const b = $(id); if (b) b.onclick = () => { if (dpkNow) dpkNow[k](); }; };
+  dpkWire('#dpk-x', 'close'); dpkWire('#dpk-clear', 'clear');
+  dpkWire('#dpk-today', 'today'); dpkWire('#dpk-ok', 'ok');
+  if ($('#dpk-modal')) $('#dpk-modal').addEventListener('click', e => {
+    if (e.target.id === 'dpk-modal' && dpkNow) dpkNow.close();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && dpkNow) { e.stopPropagation(); dpkNow.close(); }
+  }, true);
+
+  /* ويكتب في الحقل ثمّ يُطلق ‎change‎: كلُّ ما بُني على الحقل يعمل كما كان */
+  function dpkForInput(inp, title, min, max) {
+    if (!inp) return;
+    dpkOpen({
+      title: title, value: inp.value, min: min, max: max,
+      commit: v => {
+        if (inp.value === v) return;
+        inp.value = v;
+        inp.dispatchEvent(new Event('change', { bubbles: true }));
+      },
+    });
+  }
+
+  /* وتاريخا الترم: كلٌّ يحدّ الآخر — فلا تسبق نهايةٌ بدايةً.
+     والمستمعُ على ‎#date-modal‎ لا على ‎.dm-body‎: تلك صنفٌ لا معرّف، و‎$('#dm-body')‎
+     تردّ ‎null‎ بلا صياح — فلا يُربط شيءٌ ولا يُعلم أحد. */
+  if ($('#date-modal')) $('#date-modal').addEventListener('click', e => {
+    const inp = e.target.closest('#dm-start, #dm-end');
+    if (!inp) return;
+    const isS = inp.id === 'dm-start';
+    dpkForInput(inp, isS ? T().startDate : T().endDate,
+                isS ? '' : ($('#dm-start') || {}).value,
+                isS ? ($('#dm-end') || {}).value : '');
+  });
 
   nookPicker.addEventListener('change', e => {
     if (!pickDraft) return;
