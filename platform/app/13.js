@@ -1062,7 +1062,6 @@
     el.innerHTML = `<div class="acct-page auth-page">
       <div class="auth-head">
         <b class="acct-title">${join ? T().joinTitle : T().loginTitle}</b>
-        <p class="auth-can">${T().guestCan}</p>
       </div>
       ${join ? `<label class="acct-field"><span>${T().acctName}</span>
         <input class="auth-in" data-a="name" value="${esc(sName)}" autocomplete="name" placeholder="${T().acctNamePh}"></label>` : ''}
@@ -1076,7 +1075,7 @@
       </div>
       <button type="button" class="auth-swap" id="auth-swap">${join ? T().haveAcct : T().noAcct}</button>
       ${join ? '' : `<button type="button" class="auth-swap auth-swap--q" id="auth-forgot">${T().forgot}</button>`}
-      <p class="auth-note">${AUTH_SRV ? '' : T().localAcctNote + ' '}${join ? T().noResetNote : ''}</p>
+      ${AUTH_SRV ? '' : `<p class="auth-note">${T().localAcctNote}</p>`}
     </div>`;
   }
 

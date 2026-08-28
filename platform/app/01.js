@@ -899,7 +899,6 @@
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
-      noResetNote: 'وبعد الإنشاء يظهر لك رمز استرجاع — احفظه، فهو طريقك الوحيد لو نسيت كلمة المرور.',
       recTitle: 'رمز الاسترجاع',
       recWhy: 'هذا رمزك. يُعرض مرة واحدة ولن يُعرض ثانية. احفظه في مكان آمن — بدونه لا سبيل لاسترجاع حسابك لو نسيت كلمة المرور.',
       recCopy: 'انسخ الرمز', recCopied: 'نُسخ ✓', recSaved: 'حفظته',
@@ -1232,7 +1231,6 @@
       cmtStale: 'Refresh the page so your comment reaches its author',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
-      noResetNote: 'After signing up you get a recovery code — save it. It is your only way back if you forget your password.',
       recTitle: 'Recovery code',
       recWhy: 'This is your code. It is shown once and never again. Save it somewhere safe — without it there is no way back into your account if you forget your password.',
       recCopy: 'Copy code', recCopied: 'Copied ✓', recSaved: 'Saved it',
