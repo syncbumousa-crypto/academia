@@ -1917,6 +1917,17 @@
         headers: { 'content-type': 'application/json' }, body: body,
       });
       if (r.status === 413) { p.srvBig = rawH; save(); bootMark('push:413'); toast(T().srvTooBig + tooBigWhere(code)); return; }
+      if (r.status === 409) {
+        /* ===== و‎409‎ مصالحةٌ لا عطب =====
+           «لك مساهمةٌ في هذا البند بمعرّفٍ آخر» — قيدُ ‎(uid, code, sec)‎ الفريد.
+           فلو سُجّلت وتُركت لَبقيت تُحاول في كلّ حفظةٍ أبدًا ولا تصل، ولبقي
+           الدرجُ يحفظها لأنّها «لم تبلغ الخادم».
+           والجذبُ يعرف كيف يصالح: يتبنّى المعرّفَ أو يملأ الخاوية. فيُطلب. */
+        bootMark('push:409');
+        srvPulled[code] = 0;
+        srvPull(code, true);
+        return;
+      }
       if (!r.ok) { bootMark('push:' + r.status); return; }
       p.srvH = h;
       if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
@@ -2197,7 +2208,12 @@
         bootMark('xt:got' + add);
       }
     }
-    xtSig = JSON.stringify(state.xtPast || []);
+    /* ===== وبصمةُ «ما عند الخادم» لا «ما عندي» =====
+       كانت تُكتب بصمةُ سجلّي بعد الجذب — فإن كان الخادمُ خاويًا ظنّ الدفعُ أنّ
+       ما عندي هو ما عنده، فلم يرفع شيئًا أبدًا. وهي علّةُ ‎exams: 0‎ في القاعدة
+       مع تسعةٍ وتسعين ومئتي كيلو في الدرج.
+       فالبصمةُ بصمةُ ما **قرأتُه منه**: فإن خالفها سجلّي رُفع. */
+    xtSig = JSON.stringify(rem);
     xtPushSoon();
   }
 
@@ -2225,6 +2241,11 @@
     if (!SRV_ON() || isGuest()) return;
     clearTimeout(xtT);
     xtT = setTimeout(xtPush, 3000);
+  }
+  /* وقد بلغ الحسابَ؟ — بها يُعرف أنّه لا يحتاج مأوًى في الدرج */
+  function xtSynced() {
+    if (!SRV_ON() || isGuest() || !state.uid || !xtGot) return false;
+    return xtSig === JSON.stringify(state.xtPast || []);
   }
   window.acExamSync = xtPull;
 

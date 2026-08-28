@@ -166,7 +166,9 @@
        ثلاثةُ ملايين ونصفٌ من الحروف، والحدُّ خمسةُ ملايين. فلا يكفي أن يُقال
        «كبير» — يُقال **أين**. وتُقاس المفاتيحُ الكبرى وحدَها، ولا تُقاس أصلًا
        إن كان الدرجُ صغيرًا: القياسُ نفسُه ثمنٌ لا يُدفع بلا حاجة. */
-    if (bootRaw > 900000) {
+    /* والحدُّ ثلاثُ مئةٍ لا تسعُ مئة: الدرجُ انكمش من ثلاثة ملايين إلى دون
+       الميجا، فصار القياسُ يصمت في المدى الذي صرنا نعمل فيه */
+    if (bootRaw > 300000) {
       try {
         const wt = v => { try { return JSON.stringify(v).length; } catch (e) { return 0; } };
         const kids = v => (v && typeof v === 'object')
@@ -681,6 +683,9 @@
 
   function saveTrim(k, v) {
     if (k === 'cinfo' && dropCinfo && this === state) return cinfoThin(v);
+    /* وسجلُّ الاختبارات: يُسقط متى بلغ الحساب — ويُجلب عند فتح صفحته */
+    if (k === 'xtPast' && this === state
+        && typeof xtSynced === 'function' && xtSynced()) return undefined;
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
