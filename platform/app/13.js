@@ -1391,6 +1391,7 @@
     state.uid = u.id || '';
     state.signedIn = true;
     save(); applyAuth();
+    nookPull();                       /* ونواتُه تُجلب: أترامُه معه أينما دخل */
     /* ===== ومن دخل ملك ما عليه ختمُه =====
        رزمُ البطائق تنزل مع الموقع بـ‎uid‎ مؤلّفها وبلا ‎me‎ — فتُملَّك عند الدخول
        لا عند الزرع. وكانت هذي تُنادى من اللوحة وحدَها، فيبقى صاحبُ الموقع في
@@ -1868,6 +1869,136 @@
     }
     Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') srvMark(v[k], pid); });
   }
+
+  /* ============================================================
+     نواةُ الركن ⇐ الحساب (م٢) — والدمجُ بقاعدةٍ لا بحدس
+     ============================================================
+     أترامُك ومكتبتُك وتواريخُك ودرجاتُك كانت في مفتاحٍ واحدٍ في متصفّحٍ واحد،
+     فضاعت. والمساهماتُ لم تضِع لأنّها في الحساب. فتلحق النواةُ بها.
+
+     ===== القاعدة: الأحدثُ يعلو، والحذفُ صريحٌ لا استنتاج =====
+     · لكلّ ترمٍ شاهدُ تبدُّلٍ (‎termAt‎) — فمن كان أحدثَ عَلَت مكتبتُه وتاريخاه.
+     · ولا يُحذف ترمٌ لأنّه غاب عن نسخة: يُحذف بشاهدِ حذفٍ (‎termsGone‎) وحدَه.
+       فمتصفّحٌ لم يعرف ترمًا لا يمحوه عند غيره — وهذا ما يجعل الفقدَ مستحيلًا.
+
+     ===== ولا يُدفع إلّا بعد جذبٍ =====
+     من دفع قبل أن يقرأ كتب نسختَه فوق نسخةِ غيرِه بلا أن يراها. فيُقفل الدفعُ
+     حتّى يقع أوّلُ جذبٍ ناجح (‎nookGot‎). */
+  const nookURL = () => (ASSET_BASE ? new URL('api/nook', ASSET_BASE).href
+                                    : location.origin + '/api/nook');
+  const NOOK_F = ['terms', 'libs', 'termDates', 'lastNook', 'termAt', 'termsGone'];
+  let nookGot = false, nookT = 0, nookLast = '';
+
+  const nookOf = () => {
+    const o = {};
+    NOOK_F.forEach(k => { if (state[k] !== undefined) o[k] = state[k]; });
+    return o;
+  };
+
+  /* ---------- الدمج: نسختان تصيران واحدة ---------- */
+  function nookMerge(rem) {
+    if (!rem || typeof rem !== 'object') return false;
+    const mine = { terms: state.terms || [], libs: state.libs || {}, termDates: state.termDates || {},
+                   termAt: state.termAt || {}, termsGone: state.termsGone || {} };
+    const rT = Array.isArray(rem.terms) ? rem.terms : [];
+    const rAt = rem.termAt || {}, rGone = rem.termsGone || {};
+
+    /* شواهدُ الحذف تُجمع من الجهتين: من حذف في متصفّحٍ حُذف في الكلّ */
+    const gone = Object.assign({}, rGone, mine.termsGone);
+    Object.keys(rGone).forEach(t => {
+      /* إلّا أن يكون قد عاد بعد حذفه: التبديلُ الأحدثُ من الحذف يُحييه */
+      if ((mine.termAt[t] || 0) > (rGone[t] || 0)) delete gone[t];
+    });
+    Object.keys(mine.termsGone).forEach(t => {
+      if ((rAt[t] || 0) > (mine.termsGone[t] || 0)) delete gone[t];
+    });
+
+    /* الأترام: اتّحادٌ يحفظ ترتيبَ صاحبه، ثمّ يُطرح ما له شاهدُ حذف */
+    const out = [];
+    mine.terms.forEach(t => { if (!gone[t] && out.indexOf(t) < 0) out.push(t); });
+    rT.forEach(t => { if (!gone[t] && out.indexOf(t) < 0) out.push(t); });
+
+    let changed = JSON.stringify(out) !== JSON.stringify(mine.terms);
+    const libs = {}, dates = {}, at = {};
+    out.forEach(t => {
+      const hereAt = mine.termAt[t] || 0, thereAt = rAt[t] || 0;
+      const hasHere = Object.prototype.hasOwnProperty.call(mine.libs, t)
+                   || Object.prototype.hasOwnProperty.call(mine.termDates, t);
+      const hasThere = Object.prototype.hasOwnProperty.call(rem.libs || {}, t)
+                    || Object.prototype.hasOwnProperty.call(rem.termDates || {}, t);
+      /* ومن عنده وحدَه يُؤخذ منه، وإن كانا فالأحدثُ شاهدًا */
+      const takeRem = hasThere && (!hasHere || thereAt > hereAt);
+      const src = takeRem ? rem : mine;
+      const sAt = takeRem ? thereAt : hereAt;
+      if ((src.libs || {})[t] !== undefined) libs[t] = (src.libs || {})[t];
+      if ((src.termDates || {})[t] !== undefined) dates[t] = (src.termDates || {})[t];
+      if (sAt) at[t] = sAt;
+      if (takeRem) changed = true;
+    });
+    Object.keys(gone).forEach(t => { at[t] = at[t] || 0; });
+
+    if (!changed) {
+      /* ولا تبدُّلَ في المتن، لكنّ الشواهدَ قد تكون تبدّلت — تُحفظ بلا رسمٍ ثانٍ */
+      state.termAt = Object.assign({}, mine.termAt, at);
+      state.termsGone = gone;
+      return false;
+    }
+    state.terms = out;
+    state.libs = libs;
+    state.termDates = dates;
+    state.termAt = at;
+    state.termsGone = gone;
+    if (state.lastNook && out.indexOf(state.lastNook.term) < 0) state.lastNook = null;
+    return true;
+  }
+
+  async function nookPull() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    let j;
+    try {
+      const r = await fetch(nookURL(), { credentials: 'same-origin', cache: 'no-store' });
+      if (r.status === 401) return;                 /* لا جلسةَ بعد: يُعاد عند الدخول */
+      if (!r.ok) return;
+      j = await r.json();
+    } catch (e) { return; }
+    nookGot = true;                                  /* قُرئ، فيُؤذن بالدفع */
+    if (!j || !j.data) { nookPushSoon(); return; }   /* لا نواةَ هناك: تُرفع نواتي */
+    const hit = nookMerge(j.data);
+    nookLast = JSON.stringify(nookOf());             /* ما جاء لا يُعاد دفعُه */
+    if (hit) {
+      save();
+      if (typeof renderTerms === 'function') renderTerms();
+      if (typeof renderNook === 'function' && $('#panel-nook')) { try { renderNook(); } catch (e) {} }
+    }
+  }
+
+  async function nookPush() {
+    if (!SRV_ON() || isGuest() || !state.uid || !nookGot) return;
+    const body = nookOf();
+    const sig = JSON.stringify(body);
+    if (sig === nookLast) return;                    /* لم يتبدّل شيء */
+    try {
+      const r = await fetch(nookURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ data: body }),
+      });
+      if (r.status === 409) {                        /* الخادمُ منع محوًا: تُقرأ نسختُه */
+        nookGot = false; nookPull();
+        return;
+      }
+      if (!r.ok) return;
+      nookLast = sig;
+    } catch (e) { /* لا شبكة: يُعاد مع الحفظ التالي */ }
+  }
+
+  /* ويُدفع مؤجَّلًا كالمساهمات: ‎save()‎ تُنادى مع كلّ حرف */
+  function nookPushSoon() {
+    if (!SRV_ON() || isGuest()) return;
+    clearTimeout(nookT);
+    nookT = setTimeout(nookPush, 3000);
+  }
+  window.acNookSync = nookPull;                      /* يُنادى بعد الدخول */
 
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */

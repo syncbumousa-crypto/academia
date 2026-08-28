@@ -50,8 +50,44 @@
                           ويُصاح. وخيرٌ أن يقف الموقعُ من أن يمحوَ ما لا يُستعاد. */
   const CORE_KEY = 'academia2:core:v1';    /* نسخةُ النواة — صغيرةٌ ولا تُعوَّض */
   const RAW_KEY  = 'academia2:v1:rescue';  /* الخامُ التالف — يُحفظ ولا يُمحى */
-  const CORE_F = ['terms', 'libs', 'termDates', 'lastNook', 'profile'];
+  const CORE_F = ['terms', 'libs', 'termDates', 'lastNook', 'profile', 'termAt', 'termsGone'];
   const coreOf = s => { const o = {}; CORE_F.forEach(k => { if (s && s[k] !== undefined) o[k] = s[k]; }); return o; };
+
+  /* ============================================================
+     شواهدُ الترم — لتُحكَم بها المزامنةُ لا بالحدس
+     ============================================================
+     القاعدةُ التي اختارها صاحبُ الموقع: **الأحدثُ يعلو، والحذفُ صريحٌ لا
+     استنتاج**. فيحتاج الدمجُ شاهدين لكلّ ترم:
+       ‎termAt[t]‎    ⇐ متى تبدّل هذا الترمُ آخِرَ مرّة (مكتبتُه أو تاريخاه)
+       ‎termsGone[t]‎ ⇐ متى حُذف — وبها وحدَها يُحذف عند غيره
+
+     ===== وتُحسب بالمقابلة لا تُكتب في كلّ موضع =====
+     الترمُ يُمَسّ في عشرات المواضع (إضافةُ مادّة، تبديلُ تاريخ، درجةُ بند…)،
+     فلو وُسم في كلٍّ لَنُسي واحدٌ يومًا. فيُقابَل المحفوظُ بالحاضر **عند الحفظ**
+     — موضعٌ واحدٌ يمرّ به كلُّ تبديل.
+
+     ===== والغيابُ لا يُقرأ حذفًا إلّا واحدًا =====
+     ذهابُ ترمٍ بين حفظتين فعلُ صاحبه: ضغط «حذف الترم». وأمّا ذهابُ ثلاثةٍ
+     دفعةً فليس فعلَ إنسان — بل عطبٌ. فيُقيَّد الشاهدُ بواحدٍ في المرّة، وما
+     زاد يُترك بلا شاهدٍ فلا يُحذف عند أحد. */
+  function coreStamp(prevCore) {
+    const nowS = Math.floor(Date.now() / 1000);
+    state.termAt = state.termAt || {};
+    state.termsGone = state.termsGone || {};
+    const sig = (o, t) => JSON.stringify([(o.libs || {})[t] || null, (o.termDates || {})[t] || null]);
+    const now_ = state.terms || [];
+    const was = (prevCore && prevCore.terms) || [];
+
+    now_.forEach(t => {
+      if (was.indexOf(t) < 0) { state.termAt[t] = nowS; return; }   /* ترمٌ جديد */
+      if (sig(state, t) !== sig(prevCore, t)) state.termAt[t] = nowS;
+      if (state.termsGone[t]) delete state.termsGone[t];            /* عاد فليس محذوفًا */
+    });
+
+    const gone = was.filter(t => now_.indexOf(t) < 0);
+    if (gone.length === 1) state.termsGone[gone[0]] = nowS;
+    /* وما زاد على واحدٍ: لا شاهدَ له. يبقى على الخادم ويعود في أوّل جذب. */
+  }
 
   let state, stateFrozen = false, coreBak = null, bootRead = 'new', bootRaw = 0;
   try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
@@ -565,9 +601,11 @@
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
+        coreStamp(coreBak || {});          /* الشاهدان: بمقابلة المحفوظ بالحاضر */
         const c = JSON.stringify(coreOf(state));
         if (c !== lastCore) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
+      if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
