@@ -1151,6 +1151,7 @@
   /* يُلبس البروفايلَ ما ردّه الخادم — والصورةُ المحلّيّةُ تبقى إن لم يكن هناك واحدة */
   function authTake(u) {
     if (!u) return;
+    profLast = u.name || '';          /* ما جاء من الخادم لا يُدفع إليه */
     state.profile.name = u.name || state.profile.name || '';
     state.profile.email = u.email || '';
     if (u.img) state.profile.img = u.img;
@@ -1207,6 +1208,26 @@
     state.signedIn = false;
     state.uid = '';
     save(); applyAuth(); goMarket();
+  }
+
+  /* ---------- دفعُ البروفايل إلى الخادم ----------
+     ولا يُدفع إلّا ما تغيّر فعلًا: من فتح صفحةَ حسابه ولم يكتب شيئًا لا يُتبعه طلب */
+  let profT = 0, profLast = null;
+  function profSoon() {
+    if (!AUTH_SRV || isGuest()) return;
+    clearTimeout(profT);
+    profT = setTimeout(async () => {
+      const nm = (state.profile.name || '').trim();
+      if (!nm || nm === profLast) return;
+      try {
+        const r = await fetch(authURL('me'), {
+          method: 'PATCH', credentials: 'same-origin',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name: nm }),
+        });
+        if (r.ok) profLast = nm;
+      } catch (e) { /* لا شبكة: يُعاد عند التعديل التالي */ }
+    }, 1200);
   }
 
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
@@ -1558,6 +1579,11 @@
   $('#panel-account').addEventListener('input', e => {
     const inp = e.target.closest('.acct-in'); if (!inp) return;
     state.profile[inp.dataset.f] = inp.value; save(); renderProfile();
+    /* والاسمُ يُعرض على كلّ مساهمةٍ نشرتَها، وهو في جدول المستخدمين لا في
+       نسخة المساهمة — فلو بقي في الدرج لَظهرتَ للناس باسمك القديم، ولَأعاد
+       ‎/api/auth/me‎ القديمَ فوق الجديد في أوّل إقلاع. ويُدفع مؤجَّلًا: الحقلُ
+       يُكتب حرفًا حرفًا، والطلبُ لا يُتبع كلَّ حرف */
+    if (inp.dataset.f === 'name') profSoon();
   });
   $('#panel-account').addEventListener('click', e => {
     /* ===== وجهُ الباب ===== */

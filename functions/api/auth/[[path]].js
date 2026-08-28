@@ -122,6 +122,67 @@ export async function onRequest(ctx) {
       return J({ ok: true }, 200, { 'set-cookie': 'sid=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0' });
     }
 
+    /* ---------- تعديلُ البروفايل وكلمةِ السرّ ----------
+       ‎PATCH /api/auth/me‎  {name?, img?, password?, current?}
+
+       ===== ولمَ نقطةٌ لهذا أصلًا؟ =====
+       الاسمُ والصورةُ يُعرضان على **كلّ مساهمةٍ نشرتَها**، وهما في جدول
+       ‎users‎ لا في نسخة المساهمة. فلو بقي تعديلُهما في الدرج لَظهرتَ للناس
+       باسمك القديم أبدًا، ولَأعاد ‎/api/auth/me‎ القديمَ فوق الجديد في أوّل
+       إقلاع — تعديلٌ يُمحى بلا أن يُقال.
+
+       ===== وتبديلُ كلمة السرّ يسأل عن القديمة =====
+       والجلسةُ وحدَها لا تكفي: حاسوبٌ تُرك مفتوحًا يُغيَّر سرُّه فيُطرد صاحبُه.
+       فمن عرف القديمةَ فهو صاحبُها.
+
+       ===== وتبديلُها يُنهي الجلساتِ الأخرى =====
+       من بدّل سرَّه فقد أراد قطعَ ما لا يعرف — جهازٌ منسيٌّ أو جلسةٌ مسروقة.
+       فتُمحى الجلساتُ كلُّها إلّا هذه. */
+    if (path === 'me' && m === 'PATCH') {
+      const u = await sessionUser(db, request);
+      if (!u) return J({ error: 'auth' }, 401);
+      const b = await body(request);
+      const set = [], val = [];
+
+      if (b.name !== undefined) {
+        const nm = String(b.name).trim().slice(0, 60);
+        if (!nm) return J({ error: 'name' }, 400);
+        set.push('name = ?'); val.push(nm);
+      }
+      if (b.img !== undefined) {
+        const im = String(b.img || '');
+        /* والصورةُ عنوانٌ لا بِتات: ‎data:‎ ضخمةٌ تُثقل كلَّ قراءةِ مساهمة.
+           فيُقبل مسارُ المستودع وحدَه (م٤) أو الخلوّ */
+        if (im && !/^\/api\/media\/[a-f0-9]{64}$/.test(im)) return J({ error: 'img' }, 400);
+        set.push('img = ?'); val.push(im);
+      }
+
+      let killOthers = false;
+      if (b.password !== undefined) {
+        const pw = String(b.password);
+        if (pw.length < PW_MIN) return J({ error: 'pass' }, 400);
+        const cur = String(b.current || '');
+        const got = await pbkdf2(cur, unb64(u.pw_salt), u.pw_iter || PW_ITER);
+        if (!same(got, u.pw_hash)) return J({ error: 'current' }, 403);
+        const salt = rnd(16);
+        set.push('pw_hash = ?', 'pw_salt = ?', 'pw_iter = ?');
+        val.push(await pbkdf2(pw, salt, PW_ITER), b64(salt), PW_ITER);
+        killOthers = true;
+      }
+
+      if (!set.length) return J({ error: 'nothing' }, 400);
+      val.push(u.id);
+      await db.prepare('UPDATE users SET ' + set.join(', ') + ' WHERE id = ?').bind(...val).run();
+
+      if (killOthers) {
+        const tok = readCookie(request);
+        await db.prepare('DELETE FROM sessions WHERE uid = ? AND th <> ?')
+          .bind(u.id, tok ? await sha256(tok) : '').run();
+      }
+      const fresh = await db.prepare('SELECT * FROM users WHERE id = ?').bind(u.id).first();
+      return J({ user: publicUser(fresh) });
+    }
+
     /* ---------- إنشاء ---------- */
     if (path === 'join' && m === 'POST') {
       const b = await body(request);
