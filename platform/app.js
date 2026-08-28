@@ -831,6 +831,7 @@
       datesTitle: 'تواريخ الترم', startDate: 'تاريخ البداية', endDate: 'تاريخ النهاية', saveBtn: 'حفظ',
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
+      termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
       infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
@@ -1249,6 +1250,7 @@
       datesTitle: 'Term dates', startDate: 'Start date', endDate: 'End date', saveBtn: 'Save',
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
+      termHint: 'Add courses to your term from + above.',
       infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
@@ -2285,6 +2287,9 @@
     if (list.length) nookReel.setList(list, L && L.term === selTerm ? L.code : null);
     if (!list.length) { $('#lib-course').hidden = true; nookEntry = null; }
     $('#term-frame').classList.toggle('has-items', list.length > 0);
+    /* والدليلُ يظهر ما دام الإطارُ خاليًا، ويذهب مع أوّل مادّة */
+    const hint = $('#term-hint');
+    if (hint) hint.hidden = list.length > 0;
   }
 
   /* اللسان المنسدل: صغير، ينزل عموديًا من تحت طبقة مربع الترم نفسه (كأنه ابن له) —
@@ -24647,6 +24652,8 @@
     { const g = $('#drop-gear'); if (g) { g.title = t.termSettings; g.setAttribute('aria-label', t.termSettings); } }
     $('#mm-title').textContent = t.tabMarket;
     $('#dm-name-label').textContent = t.termNameLabel;
+    /* والدليلُ في الإطار الخالي يتبع اللغة كسائر النصوص */
+    { const h = document.getElementById('term-hint'); if (h) h.textContent = t.termHint; }
     $('#dm-start-label').textContent = t.startDate;
     $('#dm-end-label').textContent = t.endDate;
     $('#dm-save').textContent = t.saveBtn;

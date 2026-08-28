@@ -15002,3 +15002,10 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
 
 
 
+
+/* دليل الإطار الخالي: يقول ما يُفعل بالمستطيل المرقّط بدل ان يقف صاحبه امامه */
+.term-frame__hint {
+  margin: 0; font-size: 13px; line-height: 1.9; font-weight: 600;
+  color: var(--c-ink-soft); opacity: .85; text-align: center;
+}
+.term-frame__hint[hidden] { display: none; }

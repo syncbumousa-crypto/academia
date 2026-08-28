@@ -704,6 +704,8 @@
     { const g = $('#drop-gear'); if (g) { g.title = t.termSettings; g.setAttribute('aria-label', t.termSettings); } }
     $('#mm-title').textContent = t.tabMarket;
     $('#dm-name-label').textContent = t.termNameLabel;
+    /* والدليلُ في الإطار الخالي يتبع اللغة كسائر النصوص */
+    { const h = document.getElementById('term-hint'); if (h) h.textContent = t.termHint; }
     $('#dm-start-label').textContent = t.startDate;
     $('#dm-end-label').textContent = t.endDate;
     $('#dm-save').textContent = t.saveBtn;

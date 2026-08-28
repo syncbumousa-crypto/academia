@@ -134,6 +134,9 @@
     if (list.length) nookReel.setList(list, L && L.term === selTerm ? L.code : null);
     if (!list.length) { $('#lib-course').hidden = true; nookEntry = null; }
     $('#term-frame').classList.toggle('has-items', list.length > 0);
+    /* والدليلُ يظهر ما دام الإطارُ خاليًا، ويذهب مع أوّل مادّة */
+    const hint = $('#term-hint');
+    if (hint) hint.hidden = list.length > 0;
   }
 
   /* اللسان المنسدل: صغير، ينزل عموديًا من تحت طبقة مربع الترم نفسه (كأنه ابن له) —
