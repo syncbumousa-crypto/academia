@@ -2186,6 +2186,21 @@
   }
   window.acExamSync = xtPull;
 
+  /* هل هذي المساهمةُ خاويةٌ حقًّا؟ — تُسأل عن كلّ وعاءٍ يحمل عملًا في المتون */
+  function postEmpty(p) {
+    const d = (p && p.data) || {};
+    if (Array.isArray(d.deck) && d.deck.length) return false;
+    if (String(d.html || '').trim()) return false;
+    if (String(d.desc || '').trim()) return false;
+    if (String(d.book || '').trim() || String(d.bookImg || '').trim()) return false;
+    if (Array.isArray(d.items) && d.items.length) return false;
+    if (Array.isArray(d.docs) && d.docs.length) return false;
+    if (Array.isArray(d.topics) && d.topics.length) return false;
+    if (Array.isArray(d.vids) && d.vids.length) return false;
+    if (d.type || d.lang || d.rel) return false;
+    return true;
+  }
+
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
   const SRV_FRESH = 60000;
@@ -2284,8 +2299,29 @@
            ولا يُبدَّل معرّفُ ما بلغ الخادمَ من قبل (‎srvH‎): ذاك صفٌّ قائمٌ باسمه. */
         const mine = (info.posts[r.sec] || []).find(p => p && p.me);
         if (mine) {
-          if (mine.id !== r.id && !mine.srvH) { mine.id = r.id; cut++; }
-          return;                                  /* عندي أصلُها */
+          if (mine.id === r.id) return;            /* هي هي بعينها */
+          /* ===== وخانةٌ خاويةٌ ليست «أصلًا عندي» =====
+             ‏‎myPost‎ تُنشئ مساهمةً خاويةً بمجرّد فتح المحرّر. فكانت تُقرأ أصلًا
+             فيُتخطّى ما على الخادم — فلا تعود رزمةُ صاحبها إليه أبدًا. وهي علّةُ
+             «مساهمة الإسلامي وبطائقها غير موجودة».
+             وأخطرُ منها: كانت الخاويةُ تتبنّى معرّفَ الخادم، فأوّلُ دفعةٍ تكتب
+             الخواءَ فوق أربعِ مئةٍ وأربعٍ وأربعين بطاقةً هناك.
+
+             ===== ولا يُوازن بالتاريخ =====
+             خطر لي أن يُقال «الأحدثُ يعلو» فيُقارَن ‎ts‎ — وهو **تاريخُ الإنشاء**
+             لا تاريخُ آخرِ تعديل. فمساهمةٌ قديمةٌ عامرةٌ كانت ستُمحى بأحدثَ خاوية.
+             فالقاعدةُ التي لا تُضيّع: الخاويةُ تُملأ، والعامرةُ تبقى. */
+          /* ولا تُمَسّ مساهمةٌ بلغت الخادمَ من قبل (‎srvH‎): هي القائمةُ هناك
+             بمعرّفها، فتبديلُ معرّفها يجعلها ضرّةً لنفسها */
+          if (postEmpty(mine) && !mine.srvH) {
+            mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
+            if (r.ts) mine.ts = r.ts * 1000;
+            mine.st = 'pub'; delete mine.srvH; delete mine.srvBig;
+            cut++; return;
+          }
+          /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
+          if (!mine.srvH) { mine.id = r.id; cut++; }
+          return;
         }
         /* ===== وما ليس عندي منها شيءٌ يُستردّ =====
            «مساهمتي عندي أصلُها» صحيحٌ ما دام لي أصل. فإن لم يكن — درجٌ جديد،
