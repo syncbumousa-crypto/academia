@@ -1022,6 +1022,7 @@
       const c = cdCmtAt(clk.dataset.clk);
       if (!c) return true;
       if (!memberGate(T().needAcctLike)) return true;
+      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return true; } }
       c.liked = !c.liked;
       c.lk = Math.max(0, (c.lk || 0) + (c.liked ? 1 : -1));
       clk.classList.toggle('on', c.liked);
@@ -1541,6 +1542,9 @@
       return;
     }
     if (!memberGate(T().needAcctPost)) return;   /* التعليقُ مشاركةٌ في المساهمة */
+    /* وعقدةٌ من الخادم: كلامُك لا يبلغ صاحبَها بعد (م٣ب)، وكتابتُه في نسختك
+       تُمحى في أوّل جذب. فيُقال ولا يُكتب — والصمتُ أسوأ من المنع */
+    if (n && n.srvN) { toast(T().cmtSoon); return; }
     /* ويُوسَم بوجهه ساعةَ يُكتب: هو الموضع الوحيد الذي يعرف في أيّ وجهٍ وقع الكلام */
     (n.cm = n.cm || []).push({ id: newId(), me: true, k: cdFaceK(), u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
@@ -1563,6 +1567,7 @@
     const c = cdCmtAt(p);
     if (!c || (!cmtBox && !cdNode())) return;
     if (!memberGate(T().needAcctPost)) return;
+    { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return; } }
     (c.rp = c.rp || []).push({ id: newId(), me: true, u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
     cmtS().cmtReDraft = '';

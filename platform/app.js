@@ -886,6 +886,7 @@
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
       likeSelf: 'لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به لا يُزكّيه صاحبُه',
+      cmtSoon: 'التعليق على مساهمات غيرك قريبًا — ولا يُكتب الآن كي لا يضيع',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
@@ -1208,6 +1209,7 @@
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       likeSelf: 'You cannot like your own contribution',
+      cmtSoon: "Commenting on others' contributions is coming — not saved now so it is not lost",
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
       noResetNote: 'Keep your password somewhere safe: there is no reset yet.',
@@ -12982,6 +12984,7 @@
       const c = cdCmtAt(clk.dataset.clk);
       if (!c) return true;
       if (!memberGate(T().needAcctLike)) return true;
+      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return true; } }
       c.liked = !c.liked;
       c.lk = Math.max(0, (c.lk || 0) + (c.liked ? 1 : -1));
       clk.classList.toggle('on', c.liked);
@@ -13501,6 +13504,9 @@
       return;
     }
     if (!memberGate(T().needAcctPost)) return;   /* التعليقُ مشاركةٌ في المساهمة */
+    /* وعقدةٌ من الخادم: كلامُك لا يبلغ صاحبَها بعد (م٣ب)، وكتابتُه في نسختك
+       تُمحى في أوّل جذب. فيُقال ولا يُكتب — والصمتُ أسوأ من المنع */
+    if (n && n.srvN) { toast(T().cmtSoon); return; }
     /* ويُوسَم بوجهه ساعةَ يُكتب: هو الموضع الوحيد الذي يعرف في أيّ وجهٍ وقع الكلام */
     (n.cm = n.cm || []).push({ id: newId(), me: true, k: cdFaceK(), u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
@@ -13523,6 +13529,7 @@
     const c = cdCmtAt(p);
     if (!c || (!cmtBox && !cdNode())) return;
     if (!memberGate(T().needAcctPost)) return;
+    { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return; } }
     (c.rp = c.rp || []).push({ id: newId(), me: true, u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
     cmtS().cmtReDraft = '';
@@ -21949,6 +21956,14 @@
     }, 4000);
   }
 
+  /* يمشي على متن المساهمة فيسم كلَّ عقدةٍ لها معرّف: هذي من الخادم لا منك */
+  function srvMark(v) {
+    if (Array.isArray(v)) { v.forEach(srvMark); return; }
+    if (!v || typeof v !== 'object') return;
+    if (v.id && (v.t === 'c' || v.t === 'f' || v.f !== undefined || v.b !== undefined)) v.srvN = 1;
+    Object.keys(v).forEach(k => { if (k !== 'srvN') srvMark(v[k]); });
+  }
+
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
   const SRV_FRESH = 60000;
@@ -21985,6 +22000,12 @@
         ts: (r.ts || 0) * 1000 || Date.now(),
         data: r.data,
       });
+      /* ===== وتُوسَم عقدُ الوافد واحدةً واحدة =====
+         التعليقُ يسكن العقدةَ (‎n.cm‎)، والنافذةُ المفتوحةُ تجد عقدتَها بالبحث في
+         الرزمة ولا تحمل معرّفَ مساهمتها. فلو لم تُوسَم العقدةُ نفسُها لَما عرف
+         مرسِلُ التعليق أنّه يكتب في مساهمةِ غيره — فيكتب في نسخته، ويُمحى كلامُه
+         في أوّل جذبٍ بلا أن يعلم. والوسمُ يجعلها تُعرف بنفسها. */
+      srvMark(r.data);
       n++;
     });
     save();

@@ -886,6 +886,7 @@
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
       likeSelf: 'لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به لا يُزكّيه صاحبُه',
+      cmtSoon: 'التعليق على مساهمات غيرك قريبًا — ولا يُكتب الآن كي لا يضيع',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
@@ -1208,6 +1209,7 @@
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       likeSelf: 'You cannot like your own contribution',
+      cmtSoon: "Commenting on others' contributions is coming — not saved now so it is not lost",
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
       noResetNote: 'Keep your password somewhere safe: there is no reset yet.',
