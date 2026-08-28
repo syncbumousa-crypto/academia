@@ -82,11 +82,12 @@
   function renderTerms() {
     $('#term-list').innerHTML = state.terms.map(t => {
       const dt = state.termDates[t];
-      /* التاريخ صار عرضًا فقط (لا يفتح شيئًا) — تعديله عبر زر الإعدادات ⚙ أعلى-يسار المربع.
-         بلا تواريخ: أيقونة تقويم باهتة (تلميح) · بها تواريخ: المدى نصًّا */
+      /* التاريخ عرضٌ (تعديله عبر زر الإعدادات ⚙)، وأمّا أيقونةُ التقويم فبابٌ
+         يفتح إعداداتِ ترمِها — فهي أوضحُ ما في المربّع دلالةً على أنّه ينقصه تاريخ.
+         بلا تواريخ: أيقونة تقويم · بها تواريخ: المدى نصًّا */
       const sub = dt && dt.s && dt.e
         ? `<span class="tp-dates">${fmtDate(dt.s)} – ${fmtDate(dt.e)}</span>`
-        : `<span class="tp-cal">
+        : `<span class="tp-cal" role="button" tabindex="0" title="${T().datesTitle}" aria-label="${T().datesTitle}">
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>
              </svg>
@@ -205,6 +206,16 @@
   $('#term-list').addEventListener('click', e => {
     /* ⚙ إعدادات الترم · + إضافة مواد — أيقونتان داخل البِيل المحدَّد (تُعالَج قبل فتح الترم) */
     if (e.target.closest('.tp-gear')) { if (selTerm) openTermSettings(selTerm); return; }
+    /* ===== وأيقونةُ التقويم بابٌ لا شارة =====
+       تظهر في الترم الذي لا تاريخَ له، وكانت عرضًا محضًا: صورةُ تقويمٍ باهتةٍ
+       تقول «ينقصك تاريخ» ولا تُفضي إلى موضعٍ يُكتب فيه. فمن رآها ذهب يبحث عن
+       ⚙. وهي أوضحُ ما في المربّع دلالةً على المقصود، فصارت تفتحه.
+       ولا يُشترط أن يكون الترمُ مفتوحًا: أيقونتُه في مربّعه، فيُفتح مربّعُه هو. */
+    const cal = e.target.closest('.tp-cal');
+    if (cal) {
+      const pill = cal.closest('[data-term]');
+      if (pill) { openTermSettings(pill.dataset.term); return; }
+    }
     if (e.target.closest('.tp-add')) { mkModal.render(); modal.hidden = false; return; }
     const b = e.target.closest('[data-term]'); if (!b) return;   /* نقر المربّع يفتح الترم */
     openTerm(b.dataset.term);
