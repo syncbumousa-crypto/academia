@@ -194,6 +194,19 @@
     rows.push(bootRow);
     bootPut(rows);
     if (bootRead === 'bad') bootMark('frozen');
+    /* ===== والعالقُ يُسمّى =====
+       مساهمةٌ لم تبلغ الخادمَ تُبقي الدرجَ يحفظها وتُقلق صاحبَها. فتُعدّ عند
+       الإقلاع ويُقال بندُها ومادّتها — «كم» لا يكفي، والمرّةُ الماضيةُ علّمتني. */
+    try {
+      const stuck = [];
+      Object.keys(state.cinfo || {}).forEach(code => {
+        const ps = (state.cinfo[code] || {}).posts || {};
+        Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
+          if (p && p.me && !p.srvH) stuck.push(code + '/' + sec + (p.srvBig ? '!كبيرة' : ''));
+        }));
+      });
+      if (stuck.length) bootRow.st = stuck.slice(0, 4).join(' ') + (stuck.length > 4 ? ' +' + (stuck.length - 4) : '');
+    } catch (e) {}
   }
   /* ويُقرأ بسطرٍ في الطرفيّة: ‎acBootLog()‎ — نصٌّ يُنسخ ويُرسَل كما هو */
   window.acBootLog = function () {
@@ -208,7 +221,7 @@
                        r.p === 'a' ? 'لوحة' : 'موقع', r.r,
                        'خام=' + r.b, 'أترام=' + r.tm, 'مكتبة=' + r.lb, 'مواد=' + r.ci,
                        'نسخة=' + r.bk, r.in ? 'داخل' : 'خارج',
-                       r.big || '', r.deep || '',
+                       r.big || '', r.deep || '', r.st ? 'عالق: ' + r.st : '',
                        (r.ev || []).join(',') || ''].filter(Boolean).join(' · ');
     const out = rows.map(line).join('\n');
     console.log(out);
@@ -730,6 +743,7 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
+      if (typeof acEdited === 'function') acEdited();         /* وختمُ آخر تبديل */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
@@ -22908,6 +22922,9 @@
      فيها فقد ما كتبه.
      فيُقال: نقطةٌ هادئةٌ ما دام ثمّ ما لم يصل، ونداءٌ عند الإغلاق. ولا يُترك
      الأمرُ للظنّ — والظنُّ ههنا يكلّف عملَ ساعة. */
+  /* متى وقع آخرُ تبديل؟ — به يُعرف أنّ البقاءَ ينفع */
+  let editAt = 0;
+  function acEdited() { editAt = Date.now(); }
   function pendCount() {
     if (!SRV_ON() || isGuest() || !state.uid) return 0;
     let n = 0;
@@ -22924,7 +22941,14 @@
      بُنيت نقطةٌ تقول «يُحفظ في حسابك…» ما دام ثمّ ما لم يصل. ورآها صاحبُ
      الموقع فقال: لا تظهر أبدًا. فرُفعت — والتحذيرُ عند الإغلاق يكفي: يظهر
      حين يقع الخطرُ وحدَه، ولا يجلس في الزاوية يذكّر بما لا يُفعل به شيء. */
+  /* ===== ولا يُحذَّر إلّا حيث ينفع البقاء =====
+     كان يصيح ما دام ثمّ مساهمةٌ لم تبلغ الخادم. ومساهمةٌ عالقةٌ لا ترتفع أبدًا
+     (رُدّت لكِبَرها، أو ختمُها ليس ختمي) تجعله يصيح في **كلّ** تحديثٍ وصاحبُه
+     لم يكتب حرفًا — وبقاؤه في الصفحة لا يصلح منها شيئًا.
+     فالشرطُ: تبديلٌ وقع قريبًا ولم يبلغ بعد. أمّا العالقُ فيُسجَّل في الدفتر
+     ولا يُقرع به بابُ صاحبه. */
   window.addEventListener('beforeunload', e => {
+    if (!editAt || Date.now() - editAt > 15000) return;
     if (!pendCount()) return;
     e.preventDefault();
     e.returnValue = '';        /* المتصفّحُ يعرض نصَّه هو — والمقصودُ الوقفة */

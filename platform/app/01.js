@@ -194,6 +194,19 @@
     rows.push(bootRow);
     bootPut(rows);
     if (bootRead === 'bad') bootMark('frozen');
+    /* ===== والعالقُ يُسمّى =====
+       مساهمةٌ لم تبلغ الخادمَ تُبقي الدرجَ يحفظها وتُقلق صاحبَها. فتُعدّ عند
+       الإقلاع ويُقال بندُها ومادّتها — «كم» لا يكفي، والمرّةُ الماضيةُ علّمتني. */
+    try {
+      const stuck = [];
+      Object.keys(state.cinfo || {}).forEach(code => {
+        const ps = (state.cinfo[code] || {}).posts || {};
+        Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
+          if (p && p.me && !p.srvH) stuck.push(code + '/' + sec + (p.srvBig ? '!كبيرة' : ''));
+        }));
+      });
+      if (stuck.length) bootRow.st = stuck.slice(0, 4).join(' ') + (stuck.length > 4 ? ' +' + (stuck.length - 4) : '');
+    } catch (e) {}
   }
   /* ويُقرأ بسطرٍ في الطرفيّة: ‎acBootLog()‎ — نصٌّ يُنسخ ويُرسَل كما هو */
   window.acBootLog = function () {
@@ -208,7 +221,7 @@
                        r.p === 'a' ? 'لوحة' : 'موقع', r.r,
                        'خام=' + r.b, 'أترام=' + r.tm, 'مكتبة=' + r.lb, 'مواد=' + r.ci,
                        'نسخة=' + r.bk, r.in ? 'داخل' : 'خارج',
-                       r.big || '', r.deep || '',
+                       r.big || '', r.deep || '', r.st ? 'عالق: ' + r.st : '',
                        (r.ev || []).join(',') || ''].filter(Boolean).join(' · ');
     const out = rows.map(line).join('\n');
     console.log(out);
@@ -730,6 +743,7 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
+      if (typeof acEdited === 'function') acEdited();         /* وختمُ آخر تبديل */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
