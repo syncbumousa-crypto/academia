@@ -1943,6 +1943,9 @@
       state.termsGone = gone;
       return false;
     }
+    /* والدمجُ قد يُسقط أكثرَ من ترمٍ دفعةً (شواهدُ حذفٍ تراكمت في متصفّحٍ آخر) —
+       وذاك نقصانٌ مقصودٌ لا عطب، فيُستأذن له صراحةً */
+    if (mine.terms.length - out.length > 1) allowDrop(mine.terms.length - out.length);
     state.terms = out;
     state.libs = libs;
     state.termDates = dates;
