@@ -1770,8 +1770,8 @@
      ويُنزع معها ‎srvH‎ و‎uid‎: الأولى بصمةُ ما رُفع (وقد مُحي من الخادم)،
      والثاني ختمُ من نشرها — ولم تعد له. */
   function coverHandBack() {
-    if (ADMIN) return;          /* واللوحةُ هي الموقع: ما فيها له أصلًا */
-    if (state.coverBack1) return;
+    if (state.coverBack2) return;
+    const SITE = ['أكاديميا', 'academia'];
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const arr = ((state.cinfo[code] || {}).posts || {}).info || [];
@@ -1783,14 +1783,21 @@
         if ((d.desc || '').trim()) return;
         if (d.type || d.lang || d.rel) return;
         if ((d.topics || []).length) return;
+        /* ===== وفي اللوحةِ لا يُرَدُّ ما هو للموقع أصلًا =====
+           هناك ‎srvClaim‎ تختم أغلفةَ الموقع ‎me:true‎ لتُحرَّر، فلو رُدَّت لَذهب
+           ختمُها ثمّ عاد في الجلسة نفسِها — عملٌ يلغي نفسَه. والمقصودُ ههنا
+           غيرُه: ما نُسب إلى **شخص**. */
+        if (ADMIN && p.u && SITE.indexOf(p.u.name) > -1) return;
         p.me = false;
         p.u = { name: T().siteName };
         p.seeded = 1;
-        delete p.srvH; delete p.uid; delete p.srvBig; delete p.st;
+        /* و‎st‎ تبقى: الغلافُ منشورٌ، والناشرُ صار الموقع. ولو نُزعت لَما
+           استطاعت اللوحةُ أن تدفعَ تعديلًا عليه بعد أن تستردَّه. */
+        delete p.srvH; delete p.uid; delete p.srvBig;
         n++;
       });
     });
-    state.coverBack1 = 1;
+    state.coverBack1 = state.coverBack2 = 1;
     save();
     if (n) console.log('رُدّ ' + n + ' غلافًا إلى أكاديميا');
   }
