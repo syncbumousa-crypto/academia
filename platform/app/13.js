@@ -1765,9 +1765,17 @@
        ولا يُمَسّ ما كتبتُه بيدي (‎me‎): ذاك أصلٌ لا صورة. */
     const srvIds = new Set();
     const siteCoverSec = {};
+    /* ===== وحجّةٌ ثالثة: صاحبٌ بعينه في بندٍ بعينه =====
+       رزمُ البطائق تنزل في كلّ متصفّحٍ بختم مؤلّفها (‎ankiToOwner‎)، ثمّ صارت
+       تُنشر — فيصير للرزمة الواحدة نسختان: بذرةٌ في درجي ومساهمةٌ على الخادم،
+       ومعرّفاهما مختلفان (البذرةُ تأخذ معرّفًا من عندها في كلّ متصفّح).
+       فيُجمعان بالصاحب: ما جاء من الخادم بختم فلانٍ في بندٍ **يعلو على** كلّ
+       نسخةٍ محلّيّةٍ بختمِه في ذلك البند. وهذا يعمّ الرزمَ والأغلفةَ وما يأتي. */
+    const srvBy = {};                       /* «uid|sec» ⇐ جاء منه شيءٌ من الخادم */
     j.posts.forEach(r => {
       if (!r || !SECTIONS.includes(r.sec)) return;
       if (r.id) srvIds.add(r.id);
+      if (r.uid) srvBy[r.uid + '|' + r.sec] = 1;
       if (r.uid === SITE_UID && r.data && r.data.bookImg) siteCoverSec[r.sec] = 1;
     });
     const isSiteCover = p => p.u && SITE_NAMES.indexOf(p.u.name) > -1
@@ -1783,6 +1791,7 @@
         if (p.srv) return false;                              /* وافدٌ من جذبٍ سابق */
         if (p.me) return true;                                /* أصلي: لا يُمَسّ */
         if (p.id && srvIds.has(p.id)) { cut++; return false; }        /* هي هي بعينها */
+        if (p.uid && srvBy[p.uid + '|' + sec]) { cut++; return false; }  /* لصاحبها أصلٌ هناك */
         if (siteCoverSec[sec] && isSiteCover(p)) { cut++; return false; } /* بذرةٌ نزلت لأصلها */
         return true;
       });
