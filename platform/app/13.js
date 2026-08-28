@@ -1267,6 +1267,7 @@
       <label class="acct-field"><span>${T().acctPassword}</span>
         <input class="acct-in" data-f="password" type="password" value="${esc(p.password || '')}" placeholder="${T().acctPasswordPh}"></label>
       ${mirrorCardHTML()}
+      ${bootCardHTML()}
       <div class="acct-btns">
         <button type="button" class="acct-btn acct-btn--logout" id="acct-logout">${logoutIcon}${T().logout}</button>
         <button type="button" class="acct-btn acct-btn--del" id="acct-delete">${T().deleteAcct}</button>
@@ -1285,6 +1286,36 @@
       </div>
     </div>`;
   }
+  /* ---------- سجلُّ الإقلاع في الصفحة لا في أدوات المطوّر ----------
+     بُني الدفترُ ليُقرأ يومَ يقع فقد، ثمّ طُلب من صاحبه أن يفتح نافذةً سوداء
+     ويكتب فيها اسمَ دالّة. وتشخيصٌ لا يُبلَغ إلّا بتعويذةٍ لا يُقرأ.
+     فيُطوى ههنا: مطويٌّ لا يشغل، ومفتوحٌ يُنسخ بضغطة. */
+  function bootCardHTML() {
+    let rows = [];
+    try { rows = JSON.parse(localStorage.getItem('academia2:boot:v1') || '[]') || []; } catch (e) {}
+    if (!rows.length) return '';
+    const ar = state.lang !== 'en';
+    const bad = rows.filter(r => r.r !== 'ok' || (r.ev || []).length).length;
+    const line = r => {
+      const d = new Date(r.t * 1000);
+      const p2 = x => (x < 10 ? '0' : '') + x;
+      const when = p2(d.getDate()) + '/' + p2(d.getMonth() + 1) + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes());
+      const tag = r.r === 'ok' ? '' : ' is-bad';
+      return `<div class="bootrow${(r.ev || []).length ? ' is-bad' : tag}">`
+        + `<b>${when}</b><span>${r.p === 'a' ? (ar ? 'لوحة' : 'panel') : (ar ? 'موقع' : 'site')}</span>`
+        + `<span>${r.r}</span><span>${ar ? 'أترام' : 'terms'} ${r.tm}</span>`
+        + `<span>${ar ? 'مواد' : 'courses'} ${r.ci}</span>`
+        + `<span>${Math.round((r.b || 0) / 1024)}${ar ? 'ك' : 'K'}</span>`
+        + `<i>${esc((r.ev || []).join(' · '))}</i></div>`;
+    };
+    return `<details class="acct-boot${bad ? ' has-bad' : ''}">
+      <summary>${ar ? 'سجلّ الإقلاع' : 'Boot log'}
+        <span>${rows.length}${ar ? ' مرّة' : ''}${bad ? (ar ? ' — ' + bad + ' فيها خبر' : ' — ' + bad + ' notable') : ''}</span></summary>
+      <div class="acct-boot__b">${rows.slice().reverse().map(line).join('')}</div>
+      <button type="button" class="acct-btn" id="boot-copy">${ar ? 'انسخ السجل' : 'Copy log'}</button>
+    </details>`;
+  }
+
   /* ألواحُ منطقة المحتوى — تُطوى معًا ويُكشف واحدٌ منها */
   const PANELS = ['panel-market', 'panel-library', 'panel-past', 'panel-stats', 'panel-nook-lock'];
   /* تُعاد كتابةُ الصفحة إن كانت مفتوحة — تُستدعى من وصل المرآة وفصلها */
@@ -2432,6 +2463,21 @@
     /* ===== وجهُ الحساب ===== */
     /* والخروجُ يُبقي الحساب — والحذفُ وحدَه يمحوه. وكانا فعلًا واحدًا قبل الجلسة */
     if (e.target.closest('#acct-logout')) { authLogout(); return; }
+    /* ونسخُ السجلّ: النصُّ نفسُه الذي تطبعه ‎acBootLog‎ — يُلصق كما هو */
+    if (e.target.closest('#boot-copy')) {
+      const t = typeof window.acBootLog === 'function' ? window.acBootLog() : '';
+      const done = () => toast(state.lang === 'en' ? 'Copied' : 'نُسخ السجل');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(done, () => {});
+      } else {
+        /* ومتصفّحٌ يمنع الحافظة: يُحدَّد النصُّ ليُنسخ باليد، ولا يُترك بلا سبيل */
+        const ta = document.createElement('textarea');
+        ta.value = t; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        ta.remove();
+      }
+      return;
+    }
     if (e.target.closest('#mir-link')) { mirrorLink(); return; }
     if (e.target.closest('#mir-unlink')) { mirrorUnlink(); return; }
     const del = e.target.closest('#acct-delete');
