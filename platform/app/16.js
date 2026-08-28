@@ -1738,7 +1738,13 @@
         if (!Array.isArray(ps[sec])) return;
         ps[sec].forEach(p => {
           if (!p || !p.me) return;
-          if (!p.u || SITE.indexOf(p.u.name) < 0) return;
+          /* ===== والختمُ أقوى من الاسم =====
+             ما كتبتَه في اللوحة يحمل اسمَ «أنا» لا اسمَ الموقع (‎myPost‎ تكتب
+             ‎meName‎) — فالاسمُ وحدَه لا يعرفه، ويبقى في الموقع الأساسيّ ‎me:true‎
+             فيحاول رفعَه باسم من دخل فيه. و‎uid‎ يقطع: من نشرها مكتوبٌ عليها. */
+          const byUid = p.uid === SITE_UID;
+          const byName = p.u && SITE.indexOf(p.u.name) > -1;
+          if (!byUid && !byName) return;
           p.me = false; n++;
         });
       });

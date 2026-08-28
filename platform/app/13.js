@@ -695,25 +695,45 @@
       refreshActs();
     }
   });
+  /* ============================================================
+     غلافُ الكتاب: يُقاس مرّةً بمقاسِ المجموعة
+     ============================================================
+     كان للغلاف بابان مختلفان: بابُ الركن يُصغّره إلى ٣٢٠، وبابُ المكتبة
+     يخزّن **ملفَّ الجهاز كما هو** حتّى ثلاثةِ ميجا. فصورةُ هاتفٍ عاديّةٌ تصير
+     في المساهمة أربعةَ ميجا بـ‎base64‎ — وحدُّ المساهمة أربعُ مئةِ كيلو. فيُنشر
+     محلّيًّا ثمّ يردّه الخادم، وصاحبُها يظنّها صغيرة. وهي كذلك على القرص.
+
+     والمقاسُ مقيسٌ لا مخترَع: أغلفةُ المجموعة الاثنان والأربعون كلُّها ‎٣٢٠‎
+     في ضلعها الأطول، وأثقلُها تسعةٌ وعشرون كيلو. فهذا مقاسُ الغلاف في الموقع،
+     وما زاد عليه لا يُرى.
+
+     وبابٌ واحدٌ لهما بعد اليوم: البابان يفترقان أوّلَ تعديل. */
+  function coverFit(file, done) {
+    if (!file || !/^image\//.test(file.type || '')) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const MAX = 320, k = Math.min(1, MAX / Math.max(im.width, im.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * k) || 1; cv.height = Math.round(im.height * k) || 1;
+        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+        done(cv.toDataURL('image/jpeg', .82));
+      };
+      /* وصورةٌ لا تُفكّ تُترك ولا تُخزَّن: خيرٌ من غلافٍ مكسورٍ في المكتبة */
+      im.onerror = () => {};
+      im.src = rd.result;
+    };
+    rd.readAsDataURL(file);
+  }
+
   nookPicker.addEventListener('change', e => {
     if (!pickDraft) return;
     const t = e.target;
     /* غلاف الكتاب: صورة من الجهاز تُصغَّر ثم تُخزَّن في المسوّدة */
     if (t.classList.contains('pkf-img')) {
       const f = t.files && t.files[0]; if (!f) return;
-      const rd = new FileReader();
-      rd.onload = () => {
-        const im = new Image();
-        im.onload = () => {
-          const MAX = 320, k = Math.min(1, MAX / Math.max(im.width, im.height));
-          const cv = document.createElement('canvas');
-          cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
-          cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
-          setVals(v => { v.bookImg = cv.toDataURL('image/jpeg', .82); });
-        };
-        im.src = rd.result;
-      };
-      rd.readAsDataURL(f);
+      coverFit(f, url => setVals(v => { v.bookImg = url; }));
       t.value = '';
     }
   });
@@ -1381,7 +1401,11 @@
           const mineSrv = p.srv && p.uid === me;
           /* أو بذرةٌ محلّيّةٌ باسم الموقع، وأنا داخلٌ بحسابه */
           const mineSeed = isSite && !p.srv && p.u && SITE_NAMES.indexOf(p.u.name) > -1;
-          if (!mineSrv && !mineSeed) continue;
+          /* أو محلّيّةٌ نشرتُها أنا بهذا الحساب وعليها ختمُه — والموقعُ الأساسيُّ
+             ينزع عنها ‎me‎ لأنّها ليست له، فتُردّ ههنا إلى صاحبها.
+             ولا تُطرح كما يُطرح الوافد: هذي أصلٌ لا نسخةٌ عنه. */
+          const mineOwn = !p.srv && p.uid && p.uid === me;
+          if (!mineSrv && !mineSeed && !mineOwn) continue;
           /* ===== ولا تصير لي اثنتان في بندٍ واحد =====
              نموذجُ الموقع مساهمةٌ واحدةٌ لكلّ صاحبٍ في كلّ بند، و‎myPost‎ تأخذ
              أوّلَ ما تجد — فلو مُلّكت ثانيةٌ لَحُرِّرت واحدةٌ وأُهملت أختُها بلا
@@ -1482,12 +1506,18 @@
      خارطةُ ‎mid ⇐ مفتاح‎ في الجلسة فلا يُعاد الرفعُ في النشرة الواحدة أصلًا. */
   const medMap = new Map();          /* mid أو data: ⇐ /api/media/… (لهذه الجلسة) */
 
+  /* ===== وتعثّرُ الحجمِ يُميَّز من تعثّرِ الشبكة =====
+     كلاهما يردّ ‎null‎، وحكمُهما نقيضان: الشبكةُ تُعاد، والحجمُ لا يُعاد أبدًا
+     مهما أُعيد. فلو خُلطا لَبقيت المساهمةُ تُحاول إلى الأبد بلا كلمة. */
+  let medBig = false;
+
   async function medUp(blob) {
     const r = await fetch((ASSET_BASE ? new URL('api/media', ASSET_BASE).href
                                       : location.origin + '/api/media'), {
       method: 'POST', credentials: 'same-origin',
       headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
     });
+    if (r.status === 413) { medBig = true; return null; }
     if (!r.ok) return null;
     const j = await r.json().catch(() => null);
     return j && j.url ? j.url : null;
@@ -1531,14 +1561,44 @@
     return hit ? box.innerHTML : html;
   }
 
-  /* ويُمشى على المتن كلِّه: كلُّ نصٍّ فيه ‎<img‎ يُعرض على المحوِّل.
+  /* ---------- والصورةُ العاريةُ كالصورةِ في المتن ----------
+     ‎medHTML‎ لا ترى إلّا ما كان داخل ‎<img>‎ في نصِّ HTML. وفي المتن حقولٌ تحمل
+     الصورةَ **عاريةً**: ‎bookImg‎ غلافُ الكتاب أوّلُها. فكانت تسافر كما هي داخل
+     المساهمة — وستّونَ في المئة زيادةٌ من ‎base64‎ فوق حجمها — حتّى تتجاوز حدَّ
+     المساهمة (٤٠٠ك) وتُردّ. وهي في المستودع تُخزَّن مرّةً بمفتاحِ محتواها وتُقدَّم
+     بذاكرةٍ أبديّة.
+     ولا يُحوَّل إلّا ‎;base64,‎: أيقوناتُ ‎svg‎ المرمَّزةُ بالنسبة المئويّة صغيرةٌ
+     أصلًا، و‎atob‎ تصيح فيها. */
+  const DATA_IMG = /^data:image\/[a-z0-9+.-]+;base64,/i;
+
+  async function medBare(s) {
+    if (s.length < 512 || !DATA_IMG.test(s)) return s;
+    let url = medMap.get(s);
+    if (!url) {
+      const blob = dataToBlob(s);
+      if (!blob) return s;                       /* غير مقروءة: تُترك كما هي */
+      url = await medUp(blob);
+      if (!url) return null;                     /* تعثّر الرفع: يُلغى النشر */
+      medMap.set(s, url);
+    }
+    return url;
+  }
+
+  /* ويُمشى على المتن كلِّه: كلُّ نصٍّ فيه ‎<img‎ أو كان صورةً عاريةً يُعرض على المحوِّل.
      ونسخةٌ عميقةٌ أوّلًا — فلا يُمَسّ ما في الدرج بحالٍ */
   async function medPrep(data) {
     let clone;
     try { clone = JSON.parse(JSON.stringify(data)); } catch (e) { return data; }
     let failed = false;
     const walk = async v => {
-      if (typeof v === 'string') { const o = await medHTML(v); if (o === null) { failed = true; return v; } return o; }
+      if (typeof v === 'string') {
+        const b = await medBare(v);
+        if (b === null) { failed = true; return v; }
+        if (b !== v) return b;                   /* كانت عاريةً فصارت عنوانًا */
+        const o = await medHTML(v);
+        if (o === null) { failed = true; return v; }
+        return o;
+      }
       if (Array.isArray(v)) { for (let i = 0; i < v.length; i++) v[i] = await walk(v[i]); return v; }
       if (v && typeof v === 'object') { for (const k of Object.keys(v)) v[k] = await walk(v[k]); return v; }
       return v;
@@ -1559,9 +1619,30 @@
       } catch (e) { /* تُعاد في مزامنةٍ لاحقة */ }
       return;
     }
+    /* ===== وما رُدَّ لكِبَرِه لا يُعاد حتى يتبدّل =====
+       كان الردُّ ‎413‎ يُصيح ثمّ يرجع بلا أثر — و‎srvPushSoon‎ تُنادى من ‎save()‎،
+       و‎save()‎ تُنادى مع كلّ حرف. فصار الإشعارُ لا ينقطع: مساهمةٌ واحدةٌ كبيرةٌ
+       تصيح في كلّ ضغطةٍ إلى الأبد. فتُحفظ بصمةُ ما رُدَّ، ولا يُعاد إلّا إن
+       تبدّل المتن — والبصمةُ على المتن **الخام** لا المجهَّز، فيُوقَف الرفعُ
+       والتجهيزُ كلُّه قبل أن يبدأ. */
+    const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, data: p.data }));
+    if (p.srvBig === rawH) return;
+    if (p.srvBig) { delete p.srvBig; }          /* تبدّل المتن: تُعطى فرصةً جديدة */
+
+    /* ===== ولا تُنشر باسمي مساهمةُ غيري =====
+       الدرجُ للأصل كلِّه: ما كتبتَه في اللوحة بحساب «أكاديميا» تجده في الموقع
+       الأساسيّ، وهو ‎me:true‎ ههنا كذلك. فلولا هذا لَرفعه الموقعُ باسم من دخل
+       فيه — تُنسب مساهمةُ الموقع إلى طالبٍ لم يكتبها. ومن نشرها يُكتب عليها. */
+    if (p.uid && state.uid && p.uid !== state.uid) return;
+
     /* والصورُ تُجهَّز أوّلًا: ما لا يسافر يُرفع ويصير عنوانًا */
+    medBig = false;
     const prepped = await medPrep(p.data);
-    if (prepped === null) return;               /* تعثّر رفعُ صورة: يُعاد في مزامنةٍ لاحقة */
+    if (prepped === null) {
+      /* وصورةٌ أكبرُ من ميجا لا يُصلحها إعادةُ محاولة — تُقال مرّةً وتُقيَّد */
+      if (medBig) { p.srvBig = rawH; save(); toast(T().srvTooBig + tooBigWhere(code)); }
+      return;                                   /* وإلّا فتعثّرُ شبكةٍ: يُعاد لاحقًا */
+    }
     const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts || Date.now(), data: prepped });
     const h = srvHash(body);
     if (p.srvH === h) return;                  /* لم يتبدّل شيء */
@@ -1570,11 +1651,17 @@
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' }, body: body,
       });
-      if (r.status === 413) { toast(T().srvTooBig); return; }
+      if (r.status === 413) { p.srvBig = rawH; save(); toast(T().srvTooBig + tooBigWhere(code)); return; }
       if (!r.ok) return;
-      p.srvH = h; save();
+      p.srvH = h;
+      if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
+      save();
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
+
+  /* واسمُ المادّة يُلحق بالشكوى: الدرجُ مشتركٌ بين اللوحة والموقع، فمن سمع
+     «مساهمةٌ كبيرة» ولا يدري أيَّها لا ينتفع بالخبر */
+  const tooBigWhere = code => code ? ' — ' + code : '';
 
   /* ويُمشى على مساهماتي المنشورة كلِّها — مؤجَّلًا، فلا يُتبع كلَّ حرفٍ طلبٌ */
   let srvT = 0;
@@ -2136,13 +2223,12 @@
   /* بعد انتهاء سحب السلايدر: رسمة نظيفة (تظهر «اكتمل التوزيع» وتختفي البقية) */
   $('.cm-panel').addEventListener('change', e => {
     if (!cmCode) return;
-    /* «المادة»: رفع صورة غلاف الكتاب (تُقرأ Data URL وتُحفظ، حد 3MB) */
+    /* «المادة»: رفع صورة غلاف الكتاب — تُقاس بمقاس المجموعة كما في الركن */
     if (e.target.classList.contains('book-imgfile')) {
       const file = e.target.files[0];
-      if (!file || file.size > 3 * 1024 * 1024) return;
-      const rd = new FileReader();
-      rd.onload = () => { infoData(cmCode).bookImg = rd.result; save(); renderCmSection(); };
-      rd.readAsDataURL(file);
+      if (!file || file.size > 12 * 1024 * 1024) return;   /* ملفٌّ لا يُفتح أصلًا */
+      const code = cmCode;
+      coverFit(file, url => { infoData(code).bookImg = url; save(); renderCmSection(); });
       return;
     }
     if (e.target.classList.contains('gi-pct')) { renderGrading(); return; }
