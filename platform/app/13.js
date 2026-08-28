@@ -1316,8 +1316,39 @@
      فتُنادى هذي فتمرّ بـ‎authTake‎ نفسِها، ويُعاد الجذبُ إن كانت مادّةٌ مفتوحة. */
   window.acSessionChanged = function (user) {
     authTake(user);
+    srvClaim();                     /* وما نزل قبل أن تُعرف الهويّةُ يُردّ إليها */
     if (cmCode) { srvPulled[cmCode] = 0; srvPull(cmCode, true); }
   };
+
+  /* ---------- ردُّ ما نُسب إلى غيرك وهو لك ----------
+     الوافدُ الذي جاء قبل أن تبلغ الهويّةُ المحرّكَ نزل بـ‎me:false‎ — والحارسُ
+     الجديدُ يمنع أن يتكرّر ولا يمحو ما وقع. فيُمشى على الحال مرّةً عند كلّ
+     تبدُّلِ جلسة: ما كان ‎uid‎ه ‎uid‎ي فهو لي.
+
+     ===== ويُطرح الوافدُ لا يُختم =====
+     لو خُتم ‎me:true‎ لصار عندي مساهمتان لبندٍ واحدٍ إن كان أصلي في درجي —
+     ونموذجُ الموقع مساهمةٌ واحدةٌ لكلّ بند. فيُطرح الوافدُ إن كان لي أصلٌ،
+     ويُختم إن لم يكن (فهو نسختي الوحيدة، جاءت من الخادم). */
+  function srvClaim() {
+    const me = state.uid;
+    if (!me) return;
+    let fixed = 0;
+    Object.keys(state.cinfo || {}).forEach(code => {
+      const ps = (state.cinfo[code] || {}).posts || {};
+      Object.keys(ps).forEach(sec => {
+        const arr = ps[sec];
+        if (!Array.isArray(arr)) return;
+        const hasMine = arr.some(p => p && p.me);
+        for (let i = arr.length - 1; i >= 0; i--) {
+          const p = arr[i];
+          if (!p || !p.srv || p.uid !== me) continue;
+          if (hasMine) { arr.splice(i, 1); fixed++; }
+          else { delete p.srv; p.me = true; fixed++; }
+        }
+      });
+    });
+    if (fixed) { save(); if (cmCode && typeof renderCmSection === 'function') renderCmSection(); }
+  }
 
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
   function authSync() {

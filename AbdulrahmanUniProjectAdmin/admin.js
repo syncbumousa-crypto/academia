@@ -81,7 +81,7 @@
     if (b.dataset.tab === 'docs') renderDocs();
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
     if (b.dataset.tab === 'guard') guardOpen();
-    if (b.dataset.tab === 'posts') whoPaint();
+    if (b.dataset.tab === 'posts') whoPaint();   /* ويُعاد الطلاءُ لا الجلسة: whoPaint تعرف */
   });
 
   /* ---------- مَن أنت داخل المكتبة؟ ----------
@@ -977,4 +977,11 @@
   fillCourseSelects();
   renderDocs();
   restoreTl();   /* عودة إلى الخيط الزمني بتصفيته بعد إعادة تحميل تلت تثبيتًا أو حذفًا */
+
+  /* ===== وجلسةُ الموقع تُفتح عند الإقلاع لا عند ضغط التاب =====
+     كانت تُفتح في ‎whoPaint‎ وحدَها، وهي لا تُنادى إلّا بضغط «المساهمات». فمن
+     فتح اللوحةَ ولم يضغطه بقي المحرّكُ بلا هويّة — وحينئذٍ تُجذب مساهماتُه
+     كأنّها لغيره فلا تُحرَّر. وهي العلّةُ التي بقيت بعد إصلاح الجسر. */
+  whoPaint();
+
 })();
