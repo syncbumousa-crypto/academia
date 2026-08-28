@@ -31,6 +31,8 @@ const RULES = [
   { p: '/api/posts',      m: 'DELETE', n: 120, w: 3600, by: 'ip' },
   { p: '/api/likes',      m: 'POST',   n: 300, w: 3600, by: 'ip' },
   { p: '/api/catalog',    m: 'PUT',    n: 40,  w: 3600, by: 'ip' },   /* النشرُ فعلٌ نادر */
+  { p: '/api/lock/open',  m: 'POST',   n: 10,  w: 900,  by: 'ip' },   /* قفلُ اللوحة: لا يُخمَّن */
+  { p: '/api/lock/set',   m: 'POST',   n: 5,   w: 3600, by: 'ip' },
 ];
 
 const SEC = {
