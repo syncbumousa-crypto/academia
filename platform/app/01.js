@@ -589,6 +589,12 @@
       .then(j => {
         if (!j || !Array.isArray(j.courses) || !j.courses.length || !j.courses[0].code) return;
         const had = CAT_ON;
+        /* ===== ولا يُمحى ما لم يُنشر بعد =====
+           لوحةُ الأدمن تحرّر الكتالوجَ في هذا الدرج نفسِه ثمّ يُنشر بضغطة. فلو
+           جُذب الخادمُ قبل النشر لَكتب فوق التعديل — ومحا عملَ صاحبه بلا كلمة.
+           وقع بصاحب الموقع مرّتين: يضيف مادّةً، ثمّ يفتح الموقعَ فتذهب.
+           فما كان معلَّقًا (‎dirty‎) لا يُمَسّ حتّى يُنشر أو يُترك. */
+        if (CAT && CAT.dirty) return;
         if (CAT && String(CAT.v) === String(j.v) && had) return;   /* لم يتبدّل */
         try { localStorage.setItem(CAT_KEY, JSON.stringify(j)); } catch (e) { return; }
         if (!had) {

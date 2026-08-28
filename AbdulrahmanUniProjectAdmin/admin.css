@@ -389,3 +389,8 @@ html:root body { padding-inline: 0; }
   font-size: 11px; color: var(--a-ink-soft); margin-top: 3px;
   font-variant-numeric: tabular-nums;
 }
+
+/* زر النشر وعليه تعديل لم يبلغ الناس: يُرى من بعيد ولا يُبحث عنه */
+.g-btn.is-dirty {
+  background: #c9a25c; border-color: #c9a25c; color: #1a1408; font-weight: 800;
+}

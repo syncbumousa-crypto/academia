@@ -19,10 +19,29 @@
   /* ---------- التخزين ---------- */
   const readJSON = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
   let cat = readJSON(LS_CAT, null);
+  /* ===== وما لم يُنشر يُعلَّم =====
+     الكتالوجُ يُحرَّر ههنا ويُنشر بزرٍّ في لوحٍ آخر. فمن أضاف مادّةً ظنّ أنّه
+     فرغ، ثمّ فتح الموقعَ فجذب الكتالوجَ من الخادم — **فمحا تعديلَه**، لأنّ
+     الدرجَ واحدٌ والخادمُ لا يعرف ما لم يُنشر. وقع مرّتين بصاحب الموقع.
+     فيُعلَّم المحرَّرُ ‎dirty‎: يمتنع الموقعُ عن محوه، ويُقال ههنا إنّه ينتظر نشرًا. */
   const saveCat = () => {
+    if (cat) cat.dirty = 1;
     try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); }
     catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); }
+    catBadge();
   };
+
+  /* شارةٌ على زرّ النشر: ما دام ثمّ تعديلٌ لم يبلغ الناس */
+  function catBadge() {
+    const b = document.getElementById('g-cat-pub');
+    if (!b) return;
+    const on = !!(cat && cat.dirty);
+    b.classList.toggle('is-dirty', on);
+    if (on && b.textContent.indexOf('•') < 0 && b.textContent === 'انشر الكتالوج') {
+      b.textContent = '• انشر الكتالوج';
+    }
+    if (!on) b.textContent = 'انشر الكتالوج';
+  }
   /* ============================================================
      درجُ الموقع: يُقرأ ويُكتب كلُّه — فالكتابةُ العمياءُ محوٌ
      ============================================================
@@ -405,7 +424,8 @@
         /* والنسخةُ تُزاد عند كلّ نشر: بها يعرف الموقعُ في متصفّح كلّ قارئٍ
            أنّ عليه أن يقرأ من جديد — ولولاها لبقي على القديم */
         cat.v = Date.now();
-        saveCat();
+        delete cat.dirty;              /* بلغ الناسَ، فلم يبقَ معلَّق */
+        try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (e) {}
         let out;
         try {
           const rr = await fetch('/api/catalog', {
@@ -418,6 +438,8 @@
         cp.disabled = false;
         cp.textContent = out.ok ? 'نُشر ✓' : (out.j.error === 'empty' ? 'كتالوجٌ خاوٍ' : 'تعذّر');
         setTimeout(() => { cp.textContent = 'انشر الكتالوج'; }, 2200);
+        if (!out.ok) { cat.dirty = 1; try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (e) {} }
+        catBadge();
         if (out.ok) guardCat();
       });
       return;
@@ -589,11 +611,11 @@
       if (code !== courseEdit && dup) { toast('الاسم الإنجليزي مستعمل في مادة أخرى'); return; }
       if (code !== courseEdit) migrateCode(courseEdit, code);
       Object.assign(c, { code, ar, h, lab: actLab, tags: pickedTags.slice() });
-      toast('حُدّثت المادة');
+      toast('حُدّثت المادة — اضغط «انشر الكتالوج» لتصل الناس');
     } else {
       if (dup) { toast('هذه المادة موجودة'); return; }
       cat.courses.push({ code, ar, full: '', h, lab: actLab, tags: pickedTags.slice() });
-      toast(`أُضيفت «${ar}»`);
+      toast(`أُضيفت «${ar}» — اضغط «انشر الكتالوج» لتظهر في الموقع`);
     }
     saveCat(); resetCourseForm(); renderCourses(); fillCourseSelects();
   });
@@ -1132,6 +1154,7 @@
      كانت تُفتح في ‎whoPaint‎ وحدَها، وهي لا تُنادى إلّا بضغط «المساهمات». فمن
      فتح اللوحةَ ولم يضغطه بقي المحرّكُ بلا هويّة — وحينئذٍ تُجذب مساهماتُه
      كأنّها لغيره فلا تُحرَّر. وهي العلّةُ التي بقيت بعد إصلاح الجسر. */
+  catBadge();   /* وما كان معلَّقًا من تعديلات الكتالوج يُرى من أوّل نظرة */
   whoPaint();
 
 })();
