@@ -53,29 +53,100 @@
   const CORE_F = ['terms', 'libs', 'termDates', 'lastNook', 'profile'];
   const coreOf = s => { const o = {}; CORE_F.forEach(k => { if (s && s[k] !== undefined) o[k] = s[k]; }); return o; };
 
-  let state, stateFrozen = false, coreBak = null;
+  let state, stateFrozen = false, coreBak = null, bootRead = 'new', bootRaw = 0;
   try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
   {
     let raw = null;
     try { raw = localStorage.getItem(LS_KEY); } catch (e) { raw = null; }
+    bootRaw = raw ? raw.length : 0;
     if (raw == null || raw === '') {
       state = {};
+      bootRead = 'new';
     } else {
       try {
         state = JSON.parse(raw) || {};
+        bootRead = 'ok';
       } catch (e) {
         state = {};
         stateFrozen = true;
+        bootRead = 'bad';
         try { if (!localStorage.getItem(RAW_KEY)) localStorage.setItem(RAW_KEY, raw); } catch (e2) {}
       }
     }
   }
+
+  /* ============================================================
+     دفترُ الإقلاع — نُصدّق ولا نحدس
+     ============================================================
+     ضاعت أترامُ صاحب الموقع، وفي الشيفرة آليّتان تُنتجان ذلك — ولم أستطع أن
+     أجزم أيُّهما وقعت، لأنّ الحادثةَ لم تترك أثرًا. فيُكتب أثرُها من اليوم:
+     سطرٌ عند كلّ إقلاع يقول ما وجده، وسطورٌ تُلحَق بما وقع في الجلسة.
+
+     ===== ويسكن مفتاحًا غيرَ الدرج =====
+     وإلّا ذهب مع ما يشهد عليه. وهو خارجَ ‎state‎ فلا يمرّ بـ‎save()‎ ولا يُجمَّد
+     معه: الدفترُ يكتب ولو وقف كلُّ شيء — وذاك أحوجُ ما يكون إليه.
+
+     ===== وعشرون سطرًا لا أكثر =====
+     كيلوباتٌ واحد. والقديمُ يسقط من ذيله، فلا ينمو أبدًا. */
+  const BOOT_KEY = 'academia2:boot:v1';
+  const BOOT_MAX = 20;
+  let bootRow = null;
+
+  function bootRead_() {
+    try { return JSON.parse(localStorage.getItem(BOOT_KEY) || '[]') || []; } catch (e) { return []; }
+  }
+  function bootPut(rows) {
+    try { localStorage.setItem(BOOT_KEY, JSON.stringify(rows.slice(-BOOT_MAX))); } catch (e) {}
+  }
+  /* حدثٌ يقع في الجلسة يُلحَق بسطرها: المحوُ المُنَع، والتجميدُ، والاستعادةُ، والامتلاء */
+  function bootMark(ev) {
+    if (!bootRow) return;
+    bootRow.ev = bootRow.ev || [];
+    if (bootRow.ev.indexOf(ev) > -1) return;      /* لا يُكرَّر الحدثُ نفسُه */
+    bootRow.ev.push(ev);
+    const rows = bootRead_();
+    if (rows.length && rows[rows.length - 1].t === bootRow.t) rows[rows.length - 1] = bootRow;
+    else rows.push(bootRow);
+    bootPut(rows);
+  }
+  {
+    const libN = (o => { let n = 0; Object.keys(o || {}).forEach(k => { n += (o[k] || []).length; }); return n; })(state.libs);
+    bootRow = {
+      t: Math.floor(Date.now() / 1000),
+      p: ADMIN ? 'a' : 's',                        /* اللوحةُ أم الموقع */
+      r: bootRead,                                 /* ok · bad · new */
+      b: bootRaw,                                  /* طولُ الخام */
+      tm: (state.terms || []).length,
+      lb: libN,
+      ci: Object.keys(state.cinfo || {}).length,
+      bk: coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0,
+      u: (state.profile && state.profile.email) || '',
+    };
+    const rows = bootRead_();
+    rows.push(bootRow);
+    bootPut(rows);
+    if (bootRead === 'bad') bootMark('frozen');
+  }
+  /* ويُقرأ بسطرٍ في الطرفيّة: ‎acBootLog()‎ — نصٌّ يُنسخ ويُرسَل كما هو */
+  window.acBootLog = function () {
+    const rows = bootRead_();
+    const line = r => [new Date(r.t * 1000).toISOString().slice(0, 16).replace('T', ' '),
+                       r.p === 'a' ? 'لوحة' : 'موقع', r.r,
+                       'خام=' + r.b, 'أترام=' + r.tm, 'مكتبة=' + r.lb, 'مواد=' + r.ci,
+                       'نسخة=' + r.bk, r.u || '—', (r.ev || []).join(',') || ''].join(' · ');
+    const out = rows.map(line).join('\n');
+    console.log(out);
+    return out;
+  };
   /* ===== وما ضاع من النواة يُردّ من نسختها =====
      النواةُ أترامٌ ومكتبةٌ وتواريخُ وحساب — كيلوباتاتٌ لا تُعوَّض، بخلاف البطائق
      والمساهمات (هي في الخادم وفي البذرة). فتُنسخ وحدَها، ويُردُّ منها ما ضاع. */
   if (coreBak && Array.isArray(coreBak.terms) && coreBak.terms.length
       && !(Array.isArray(state.terms) && state.terms.length)) {
     CORE_F.forEach(k => { if (coreBak[k] !== undefined) state[k] = coreBak[k]; });
+    /* والدفترُ مبنيٌّ قبل هذا السطر، فيُلحَق به الحدثُ الآن — ولا يُقرأ علَمٌ
+       يُصرَّح به بعدَه: ‎let‎ لا يُرفع، وقراءتُه قبل تصريحه ترمي وقتَ التشغيل */
+    bootMark('restore:' + coreBak.terms.length);
     setTimeout(() => coreRestored(coreBak.terms.length), 0);
   }
   state.imgs = state.imgs || {};
@@ -481,13 +552,13 @@
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
-    if (stateFrozen) { saveAlarm(new Error('frozen'), 'frozen'); return; }
+    if (stateFrozen) { bootMark('frozen'); saveAlarm(new Error('frozen'), 'frozen'); return; }
 
     /* ===== ولا تُمحى النواةُ بحفظٍ =====
        أترامٌ كانت ثمّ صارت صفرًا في الذاكرة: ذاك محوٌ لم يطلبه أحد. ولا يُكتب،
        بل يُصاح — فيبقى المكتوبُ على القرص كما هو ويُعاد التحميلُ فيعود. */
     const bak = coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0;
-    if (bak && !(state.terms || []).length) { saveAlarm(new Error('wipe'), 'wipe'); return; }
+    if (bak && !(state.terms || []).length) { bootMark('wipe:' + bak); saveAlarm(new Error('wipe'), 'wipe'); return; }
 
     try {
       localStorage.setItem(LS_KEY, JSON.stringify(state));
@@ -501,7 +572,7 @@
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
-    } catch (e) { saveBad = true; saveAlarm(e); }
+    } catch (e) { saveBad = true; bootMark('quota'); saveAlarm(e); }
   };
 
   /* ---------- بابُ اللوحة إلى الدرج ----------
