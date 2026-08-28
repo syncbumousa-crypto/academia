@@ -24,23 +24,41 @@
      فرغ، ثمّ فتح الموقعَ فجذب الكتالوجَ من الخادم — **فمحا تعديلَه**، لأنّ
      الدرجَ واحدٌ والخادمُ لا يعرف ما لم يُنشر. وقع مرّتين بصاحب الموقع.
      فيُعلَّم المحرَّرُ ‎dirty‎: يمتنع الموقعُ عن محوه، ويُقال ههنا إنّه ينتظر نشرًا. */
+  /* ===== والنشرُ يقع مع التعديل =====
+     كان زرًّا في لوحٍ آخر، فمن أضاف مادّةً ظنّ أنّه فرغ ولم تصل الناسَ —
+     وهو ظنٌّ في محلّه: لوحةُ الأدمن **هي** موضعُ القرار، فلا يُطلب قرارٌ ثانٍ
+     على قرار. فما حُرِّر ههنا يبلغ الخادمَ من نفسِه.
+
+     ===== ويُؤجَّل قليلًا لا يُتبع كلَّ حرف =====
+     تحريرُ اسمٍ يقع حرفًا حرفًا، فلو رُفع مع كلٍّ لَبلغ الخادمَ عشرُ نسخٍ لكلمة.
+     فثانيةٌ ونصفٌ بعد آخر تبديل — قريبةٌ لا تُحسّ، وكافيةٌ لتجمع الحروف. */
+  let catT = 0;
   const saveCat = () => {
     if (cat) cat.dirty = 1;
     try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); }
     catch (e) { toast('تعذّر الحفظ — مساحة التخزين ممتلئة'); }
-    catBadge();
+    clearTimeout(catT);
+    catT = setTimeout(catPublish, 1500);
   };
 
-  /* شارةٌ على زرّ النشر: ما دام ثمّ تعديلٌ لم يبلغ الناس */
-  function catBadge() {
-    const b = document.getElementById('g-cat-pub');
-    if (!b) return;
-    const on = !!(cat && cat.dirty);
-    b.classList.toggle('is-dirty', on);
-    if (on && b.textContent.indexOf('•') < 0 && b.textContent === 'انشر الكتالوج') {
-      b.textContent = '• انشر الكتالوج';
-    }
-    if (!on) b.textContent = 'انشر الكتالوج';
+  async function catPublish() {
+    if (!cat || !Array.isArray(cat.courses) || !cat.courses.length) return;
+    cat.v = Date.now();
+    let ok = false;
+    try {
+      const r = await fetch('/api/catalog', {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tags: cat.tags || [], courses: cat.courses, v: cat.v }),
+      });
+      ok = r.ok;
+    } catch (e) { ok = false; }
+    /* ===== والعلامةُ لا تُرفع إلّا ببلوغٍ =====
+       فإن تعثّر النشرُ بقيت ‎dirty‎، فلا يمحو الموقعُ التعديلَ (حارسُه يقرؤها)
+       ويُعاد الرفعُ مع أوّل تبديلٍ بعده. ويُقال للمستخدم — صمتُ التعثّر أسوأُ
+       من التعثّر. */
+    if (ok) delete cat.dirty; else toast('لم يصل التعديل — سيُعاد مع أوّل تبديل');
+    try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (e) {}
   }
   /* ============================================================
      درجُ الموقع: يُقرأ ويُكتب كلُّه — فالكتابةُ العمياءُ محوٌ
@@ -137,14 +155,13 @@
   }
 
   /* ---------- التبويبات ---------- */
-  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'guard', 'people'];
+  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'people'];
   $('#a-tabs').addEventListener('click', e => {
     const b = e.target.closest('button[data-tab]'); if (!b) return;
     document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
     PANELS.forEach(p => { $('#a-panel-' + p).hidden = p !== b.dataset.tab; });
     if (b.dataset.tab === 'docs') renderDocs();
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
-    if (b.dataset.tab === 'guard') guardOpen();
     if (b.dataset.tab === 'people') peopleOpen();
     if (b.dataset.tab === 'posts') whoPaint();   /* ويُعاد الطلاءُ لا الجلسة: whoPaint تعرف */
   });
@@ -318,175 +335,8 @@
   const gEsc = t => String(t == null ? '' : t)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const gKb = n => n < 1024 ? n + ' ب' : n < 1048576 ? (n / 1024).toFixed(0) + ' ك' : (n / 1048576).toFixed(1) + ' م';
-  const gWhen = ts => {
-    if (!ts) return '—';
-    const d = Math.floor((Date.now() / 1000 - ts) / 86400);
-    return d <= 0 ? 'اليوم' : d === 1 ? 'أمس' : d + ' يومًا';
-  };
 
-  async function guardOpen() {
-    const gate = $('#g-gate'), body = $('#g-body');
-    gate.hidden = false; body.hidden = true;
-    gate.textContent = 'جارٍ السؤال…';
-    const r = await gAsk('overview');
-    if (!r.ok) {
-      gate.innerHTML = r.status === 404
-        ? 'انتهت جلسةُ القفل — حدّث الصفحة واكتب كلمة المرور.'
-        : 'تعذّر الوصول إلى الخادم.';
-      return;
-    }
-    gate.hidden = true; body.hidden = false;
-    const o = r.j;
-    $('#g-nums').innerHTML = [
-      ['الحسابات', o.users], ['الممنوعون', o.banned], ['المنشورات', o.posts],
-      ['الإعجابات', o.likes], ['الصور', o.media], ['حجمها', gKb(o.mediaBytes || 0)],
-      ['الجلسات', o.sessions],
-    ].map(([k, v]) => '<div class="g-num"><b>' + gEsc(v) + '</b><span>' + k + '</span></div>').join('');
-    await Promise.all([guardCat(), guardPosts(), guardUsers()]);
-  }
 
-  /* ---------- الكتالوج: أين المحلّيُّ من المنشور؟ ----------
-     ويُقارَن بالعدد لا بالنسخة وحدَها: رقمُ النسخة قد يتّفق والمحتوى يختلف
-     (حُرِّر ولم يُنشر)، فيُقال ما يُرى: كم مادّةً هنا وكم هناك. */
-  async function guardCat() {
-    const el = $('#g-cat');
-    const local = cat && Array.isArray(cat.courses) ? cat.courses.length : 0;
-    const lTags = cat && Array.isArray(cat.tags) ? cat.tags.length : 0;
-    let srv = null;
-    try {
-      const r = await fetch('/api/catalog', { cache: 'no-store' });
-      if (r.ok) srv = await r.json();
-    } catch (e) { /* لا شبكة */ }
-    if (!srv) { el.innerHTML = '<span class="g-empty">تعذّر قراءةُ المنشور.</span>'; return; }
-    const same = srv.courses.length === local && (srv.tags || []).length === lTags
-                 && String(srv.v) === String((cat && cat.v) || '');
-    el.innerHTML =
-      '<div class="g-cat__row"><b>عندك</b><span>' + local + ' مادّة · ' + lTags + ' تخصّص</span></div>' +
-      '<div class="g-cat__row"><b>المنشور</b><span>' + srv.courses.length + ' مادّة · '
-        + (srv.tags || []).length + ' تخصّص · نسخة ' + gEsc(srv.v) + '</span></div>' +
-      '<div class="g-cat__sig ' + (same ? 'is-same' : 'is-diff') + '">'
-        + (same ? 'المنشورُ مطابقٌ لما عندك' : 'ما عندك يخالف المنشور — انشره ليراه الناس') + '</div>';
-  }
-
-  async function guardPosts() {
-    const el = $('#g-posts');
-    const r = await gAsk('posts?limit=100');
-    const ps = r.j.posts || [];
-    if (!ps.length) { el.innerHTML = '<p class="g-empty">ما نُشر شيءٌ بعد.</p>'; return; }
-    el.innerHTML = ps.map(p => `<div class="g-row" data-pid="${gEsc(p.id)}">
-      <div class="g-row__m">
-        <b>${gEsc(p.code)}</b>
-        <span class="g-chip">${gEsc(p.sec)}</span>
-        <span class="g-by">${gEsc(p.name)}${p.banned ? ' · ممنوع' : ''}</span>
-      </div>
-      <div class="g-row__s">${gKb(p.size || 0)} · ♥ ${p.likes | 0} · ${gWhen(p.updated)}</div>
-      <button type="button" class="g-btn g-btn--del" data-del="${gEsc(p.id)}">امحُ</button>
-    </div>`).join('');
-  }
-
-  async function guardUsers() {
-    const el = $('#g-users');
-    const r = await gAsk('users');
-    gUsers = r.j.users || [];
-    el.innerHTML = gUsers.map(u => `<div class="g-row" data-uid="${gEsc(u.id)}">
-      <div class="g-row__m">
-        <b>${gEsc(u.name || '—')}</b>
-        ${u.admin ? '<span class="g-chip g-chip--boss">مشرف</span>' : ''}
-        ${u.banned ? '<span class="g-chip g-chip--ban">ممنوع</span>' : ''}
-        <span class="g-by">${gEsc(u.email)}</span>
-      </div>
-      <div class="g-row__s">${u.posts | 0} مساهمة · دخل ${gWhen(u.seen)}</div>
-      ${u.admin ? '' : `<button type="button" class="g-btn" data-code="${gEsc(u.id)}">رمز استرجاع</button>
-      <button type="button" class="g-btn ${u.banned ? '' : 'g-btn--del'}" data-ban="${gEsc(u.id)}" data-on="${u.banned ? 0 : 1}">${u.banned ? 'ارفع المنع' : 'امنع'}</button>`}
-    </div>`).join('');
-  }
-
-  /* والضغطتان: الأولى تسأل والثانية تُمضي — والسؤالُ يزول وحدَه بعد ثوانٍ */
-  function gConfirm(btn, then) {
-    if (btn.dataset.sure) { then(); return; }
-    const was = btn.textContent;
-    btn.dataset.sure = '1';
-    btn.textContent = 'متأكّد؟';
-    setTimeout(() => { if (btn.dataset.sure) { btn.dataset.sure = ''; btn.textContent = was; } }, 3500);
-  }
-
-  $('#a-panel-guard').addEventListener('click', async e => {
-    const rl = e.target.closest('#g-reload');
-    if (rl) { guardOpen(); return; }
-
-    const cp = e.target.closest('#g-cat-pub');
-    if (cp) {
-      if (!cat || !Array.isArray(cat.courses) || !cat.courses.length) {
-        cp.textContent = 'لا كتالوجَ عندك'; return;
-      }
-      gConfirm(cp, async () => {
-        cp.disabled = true; cp.textContent = 'يُنشر…';
-        /* والنسخةُ تُزاد عند كلّ نشر: بها يعرف الموقعُ في متصفّح كلّ قارئٍ
-           أنّ عليه أن يقرأ من جديد — ولولاها لبقي على القديم */
-        cat.v = Date.now();
-        delete cat.dirty;              /* بلغ الناسَ، فلم يبقَ معلَّق */
-        try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (e) {}
-        let out;
-        try {
-          const rr = await fetch('/api/catalog', {
-            method: 'PUT', credentials: 'same-origin',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ tags: cat.tags || [], courses: cat.courses, v: cat.v }),
-          });
-          out = { ok: rr.ok, j: await rr.json().catch(() => ({})) };
-        } catch (e) { out = { ok: false, j: {} }; }
-        cp.disabled = false;
-        cp.textContent = out.ok ? 'نُشر ✓' : (out.j.error === 'empty' ? 'كتالوجٌ خاوٍ' : 'تعذّر');
-        setTimeout(() => { cp.textContent = 'انشر الكتالوج'; }, 2200);
-        if (!out.ok) { cat.dirty = 1; try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (e) {} }
-        catBadge();
-        if (out.ok) guardCat();
-      });
-      return;
-    }
-
-    const del = e.target.closest('[data-del]');
-    if (del) {
-      gConfirm(del, async () => {
-        const r = await gAsk('post?id=' + encodeURIComponent(del.dataset.del), { method: 'DELETE' });
-        if (r.ok && r.j.removed) { const row = del.closest('.g-row'); if (row) row.remove(); }
-        else { del.textContent = 'تعذّر'; }
-      });
-      return;
-    }
-
-    const ban = e.target.closest('[data-ban]');
-    if (ban) {
-      gConfirm(ban, async () => {
-        const r = await gAsk('ban', {
-          method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ uid: ban.dataset.ban, on: ban.dataset.on === '1' }),
-        });
-        if (r.ok) { await guardUsers(); await guardPosts(); }
-        else { ban.textContent = r.j.error === 'self' ? 'لا تمنع نفسك' : 'تعذّر'; }
-      });
-      return;
-    }
-
-    const cd = e.target.closest('[data-code]');
-    if (cd) {
-      gConfirm(cd, async () => {
-        const r = await gAsk('newcode', {
-          method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ uid: cd.dataset.code }),
-        });
-        if (!r.ok) { cd.textContent = 'تعذّر'; return; }
-        /* ويُعرض في الصفّ نفسِه لا في نافذةٍ تُغلق سهوًا — ويبقى حتى تُحدَّث القائمة */
-        const row = cd.closest('.g-row');
-        const box = document.createElement('div');
-        box.className = 'g-code';
-        box.innerHTML = '<span>' + gEsc(r.j.recovery) + '</span><em>سلّمه إليه بيدك — يُعرض هنا مرّةً</em>';
-        row.appendChild(box);
-        cd.remove();
-      });
-      return;
-    }
-  });
 
   /* ============================================================
      ١) التخصصات
@@ -611,11 +461,11 @@
       if (code !== courseEdit && dup) { toast('الاسم الإنجليزي مستعمل في مادة أخرى'); return; }
       if (code !== courseEdit) migrateCode(courseEdit, code);
       Object.assign(c, { code, ar, h, lab: actLab, tags: pickedTags.slice() });
-      toast('حُدّثت المادة — اضغط «انشر الكتالوج» لتصل الناس');
+      toast('حُدّثت المادة');
     } else {
       if (dup) { toast('هذه المادة موجودة'); return; }
       cat.courses.push({ code, ar, full: '', h, lab: actLab, tags: pickedTags.slice() });
-      toast(`أُضيفت «${ar}» — اضغط «انشر الكتالوج» لتظهر في الموقع`);
+      toast(`أُضيفت «${ar}»`);
     }
     saveCat(); resetCourseForm(); renderCourses(); fillCourseSelects();
   });
@@ -1154,7 +1004,6 @@
      كانت تُفتح في ‎whoPaint‎ وحدَها، وهي لا تُنادى إلّا بضغط «المساهمات». فمن
      فتح اللوحةَ ولم يضغطه بقي المحرّكُ بلا هويّة — وحينئذٍ تُجذب مساهماتُه
      كأنّها لغيره فلا تُحرَّر. وهي العلّةُ التي بقيت بعد إصلاح الجسر. */
-  catBadge();   /* وما كان معلَّقًا من تعديلات الكتالوج يُرى من أوّل نظرة */
   whoPaint();
 
 })();

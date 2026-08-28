@@ -50,11 +50,6 @@
         <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 20.5v-1.8a3.7 3.7 0 0 0-3.7-3.7H6.2a3.7 3.7 0 0 0-3.7 3.7v1.8"/><circle cx="9" cy="7.4" r="3.6"/><path d="M21.5 20.5v-1.8a3.7 3.7 0 0 0-2.8-3.6"/><path d="M16 3.7a3.7 3.7 0 0 1 0 7.2"/></svg>
         <span>المستخدمون</span>
       </button>
-      <!-- الإشراف: درعٌ لا قلمٌ ولا وسم — هذا البابُ يحرس ما كتبه الناسُ لا يكتبه -->
-      <button type="button" data-tab="guard">
-        <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.2 3.1 7.9 7.5 9 4.4-1.1 7.5-4.8 7.5-9V6z"/><path d="m9.2 12 2 2 3.6-3.8"/></svg>
-        <span>الإشراف</span>
-      </button>
       <button type="button" data-tab="time">
         <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3 1.8"/></svg>
         <span>المساهمات بالتاريخ</span>
@@ -239,67 +234,6 @@
          سائرُ ألواح اللوحة تعمل على درجِ فاتحها. وهذا وحدَه يسأل الخادمَ ويكتب
          فيه، ولا يفتحه إلّا صاحبُ الموقع — ومن سواه يجد لوحًا يقول ذلك ولا يرى
          شيئًا. -->
-    <!-- ============================================================
-         المستخدمون — مَن سجّل في الموقع
-         ============================================================
-         صورةٌ واسمٌ وبريد، وشيءٌ ممّا صنعوا. ولا يُعرض ما لا يُحتاج: لا كلمةَ
-         سرٍّ (ولا تجزئتَها)، ولا رمزَ استرجاع، ولا جلساتٍ ولا أجهزة — تلك
-         أسرارُهم لا أخبارُهم.
-         والبريدُ يُنسخ صفًّا أو جملةً: هو ما يُبلَّغ به من سجّل. -->
-    <section class="a-panel" id="a-panel-people" hidden>
-      <header class="a-head">
-        <h1>المستخدمون</h1>
-        <p>مَن سجّل في أكاديميا — الصورة والاسم والبريد، وما صنعوا.</p>
-      </header>
-
-      <div class="p-gate" id="p-gate">جارٍ السؤال…</div>
-
-      <div id="p-body" hidden>
-        <div class="a-tools">
-          <span class="a-count" id="p-count"></span>
-          <input class="p-find" id="p-find" type="search" placeholder="ابحث باسمٍ أو بريد…">
-          <button type="button" class="a-btn" id="p-copy">انسخ البُرُد</button>
-        </div>
-        <div class="p-grid" id="p-grid"></div>
-      </div>
-    </section>
-
-    <section class="a-panel" id="a-panel-guard" hidden>
-      <header class="a-head">
-        <h1>الإشراف</h1>
-        <p>ما على الخادم: الحسابات والمنشورات. وأنت وحدك من يفتحه.</p>
-      </header>
-
-      <div class="g-gate" id="g-gate">جارٍ السؤال…</div>
-
-      <div id="g-body" hidden>
-        <div class="g-nums" id="g-nums"></div>
-
-        <!-- الكتالوج: يُحرَّر في ألواح اللوحة على درجك، ثمّ يُنشر من هنا بضغطة.
-             ولا يُدفع مع كلّ تعديل: هذا ما يراه الناسُ كلُّهم، وحرفٌ يُكتب سهوًا
-             يبلغهم في الحال. فالنشرُ قرارٌ صريحٌ كالنشر في الموقع. -->
-        <div class="g-sec">
-          <div class="g-sec__h">
-            <h2>الكتالوج</h2>
-            <button type="button" class="g-btn" id="g-cat-pub">انشر الكتالوج</button>
-          </div>
-          <div class="g-cat" id="g-cat">يُقاس…</div>
-        </div>
-
-        <div class="g-sec">
-          <div class="g-sec__h">
-            <h2>المنشورات</h2>
-            <button type="button" class="g-btn" id="g-reload">حدِّث</button>
-          </div>
-          <div class="g-list" id="g-posts"></div>
-        </div>
-
-        <div class="g-sec">
-          <div class="g-sec__h"><h2>الحسابات</h2></div>
-          <div class="g-list" id="g-users"></div>
-        </div>
-      </div>
-    </section>
 
     <section class="a-panel" id="a-panel-posts" hidden>
       <header class="a-head">
