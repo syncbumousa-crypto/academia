@@ -1643,7 +1643,12 @@
       if (medBig) { p.srvBig = rawH; save(); toast(T().srvTooBig + tooBigWhere(code)); }
       return;                                   /* وإلّا فتعثّرُ شبكةٍ: يُعاد لاحقًا */
     }
-    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts || Date.now(), data: prepped });
+    /* ===== وتاريخُها يُثبَّت لا يُولَد في كلّ دفعة =====
+       كان ‎ts: p.ts || Date.now()‎ — فمساهمةٌ بلا تاريخ (وهي نادرةٌ لكنّها تقع)
+       يختلف متنُها في كلّ مرّة، فلا تطابق بصمتُها بصمةَ ما رُفع، فتُرفع أبدًا مع
+       كلّ حفظ. فيُكتب التاريخُ عليها مرّةً ثمّ يثبت. */
+    if (!p.ts) p.ts = Date.now();
+    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, data: prepped });
     const h = srvHash(body);
     if (p.srvH === h) return;                  /* لم يتبدّل شيء */
     try {

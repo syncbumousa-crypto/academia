@@ -1,0 +1,1095 @@
+[
+  {
+    "results": [
+      {
+        "id": "p281",
+        "uid": "u-academia",
+        "code": "ACCT 110",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/588e819e3939ade43b028660c7e5cb1e98d8db8f222b57f6f5b96c06614c3e07\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p277",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 210",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/ccd2d963f5f28416406b60cfb087f93e140896b744c3a44bd1090ec6ba5099d4\"}",
+        "ts": 1784567545436,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs6x",
+        "uid": "u-academia",
+        "code": "ACCT 300",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_300.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p230",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 300",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_300.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs6y",
+        "uid": "u-academia",
+        "code": "ACCT 300::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_300.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p289",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 300::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/ACCT_300.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs6z",
+        "uid": "u-academia",
+        "code": "ACCT 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_301.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p231",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_301.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs70",
+        "uid": "u-academia",
+        "code": "ACCT 302",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_302.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p232",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 302",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_302.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs71",
+        "uid": "u-academia",
+        "code": "ACCT 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_321.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p233",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_321.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs72",
+        "uid": "u-academia",
+        "code": "ACCT 403",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_403.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p234",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 403",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_403.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs73",
+        "uid": "u-academia",
+        "code": "ACCT 410",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_410.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p235",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ACCT 410",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ACCT_410.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p282",
+        "uid": "u-academia",
+        "code": "BUS 200",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/b4a6ce24a513844030162334efddaf7cee2a13986adbb317787ce356f0bc6a3e\"}",
+        "ts": 1784567545436,
+        "updated": 1787918143
+      },
+      {
+        "id": "p286",
+        "uid": "u-academia",
+        "code": "COE 292",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/7f991b2bc7864a4c4a19cdfda2e99d4d72e1d2e09312e61bbf342cc3d67c53f7\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p288",
+        "uid": "u-academia",
+        "code": "COE 344",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/f9c6a5bedb590d061e704e2e9192f51dc192591785401238c9d798bcef31392f\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p297",
+        "uid": "u-academia",
+        "code": "COE 344::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/f9c6a5bedb590d061e704e2e9192f51dc192591785401238c9d798bcef31392f\"}",
+        "ts": 1784604967357,
+        "updated": 1787918142
+      },
+      {
+        "id": "pz335gpvqqs74",
+        "uid": "u-academia",
+        "code": "COE 401",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/COE_401.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p236",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "COE 401",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/COE_401.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p280",
+        "uid": "u-academia",
+        "code": "ECON 101",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/1eb2d62410af981514e5437920ee8ea44371e71efedc17cb5543ef6b36c72b0b\"}",
+        "ts": 1784567545436,
+        "updated": 1787918143
+      },
+      {
+        "id": "p279",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ECON 102",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/1eb2d62410af981514e5437920ee8ea44371e71efedc17cb5543ef6b36c72b0b\"}",
+        "ts": 1784567545436,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs75",
+        "uid": "u-academia",
+        "code": "ECON 306",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ECON_306.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p237",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ECON 306",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ECON_306.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918420
+      },
+      {
+        "id": "p272",
+        "uid": "u-academia",
+        "code": "FIN 250",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/ed9868f525b66b0e47df2240dc2bfc4968651c1dda576056e1b1a82a6754ac99\"}",
+        "ts": 1784567545436,
+        "updated": 1787918143
+      },
+      {
+        "id": "pz335gpvqqs76",
+        "uid": "u-academia",
+        "code": "FIN 320",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_320.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p238",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "FIN 320",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_320.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs77",
+        "uid": "u-academia",
+        "code": "FIN 421",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_421.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p239",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "FIN 421",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_421.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs78",
+        "uid": "u-academia",
+        "code": "FIN 425",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_425.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p240",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "FIN 425",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/FIN_425.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs79",
+        "uid": "u-academia",
+        "code": "GS 318",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_318.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p241",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 318",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_318.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7a",
+        "uid": "u-academia",
+        "code": "GS 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_321.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p242",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_321.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7b",
+        "uid": "u-academia",
+        "code": "GS 332",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_332.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p243",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 332",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_332.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7c",
+        "uid": "u-academia",
+        "code": "GS 342",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_342.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p244",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 342",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_342.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7d",
+        "uid": "u-academia",
+        "code": "GS 420",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_420.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p245",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 420",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_420.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7e",
+        "uid": "u-academia",
+        "code": "GS 424",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_424.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p246",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 424",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_424.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7f",
+        "uid": "u-academia",
+        "code": "GS 426",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_426.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p247",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 426",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_426.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7g",
+        "uid": "u-academia",
+        "code": "GS 434",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_434.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p248",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 434",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_434.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918420
+      },
+      {
+        "id": "pz335gpvqqs7h",
+        "uid": "u-academia",
+        "code": "GS 447",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_447.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p249",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "GS 447",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/GS_447.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7i",
+        "uid": "u-academia",
+        "code": "HRM 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_301.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p250",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "HRM 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_301.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7j",
+        "uid": "u-academia",
+        "code": "HRM 390",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_390.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p251",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "HRM 390",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_390.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7k",
+        "uid": "u-academia",
+        "code": "HRM 401",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_401.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p252",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "HRM 401",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_401.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7l",
+        "uid": "u-academia",
+        "code": "HRM 402",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_402.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p253",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "HRM 402",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/HRM_402.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p496",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "abs",
+        "data": "{\"free\":4,\"dedFrom\":5,\"dedAmt\":1,\"dn\":5,\"late\":1}",
+        "ts": 1785395644421,
+        "updated": 1787912420
+      },
+      {
+        "id": "p878",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "grade",
+        "data": "{\"method\":\"avg\",\"items\":[{\"name\":\"\",\"pct\":10}]}",
+        "ts": 1785879504349,
+        "updated": 1787912420
+      },
+      {
+        "id": "pz335gpvqqs8w",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "IAS 111",
+        "sec": "info",
+        "data": "{\"desc\":\"\",\"type\":\"\",\"rel\":0,\"lang\":\"\",\"book\":\"ميثاق\",\"topics\":[],\"bookImg\":\"/api/media/c75a9384744fb6df3199a3e1bda51859713433f082e99a30121e113fba7da239\"}",
+        "ts": 1787912453520,
+        "updated": 1787918092
+      },
+      {
+        "id": "p888",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "srcP",
+        "data": "{\"html\":\"ة<span data-fid=\\\"p1013\\\" class=\\\"src-fchip\\\" contenteditable=\\\"false\\\"></span>​\",\"files\":{\"p1013\":{\"name\":\"\",\"v\":\"\"}}}",
+        "ts": 1785882409501,
+        "updated": 1787912420
+      },
+      {
+        "id": "pz335gpvqqs7m",
+        "uid": "u-academia",
+        "code": "IAS 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/IAS_321.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p254",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "IAS 321",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/IAS_321.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p274",
+        "uid": "u-academia",
+        "code": "ICS 104",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/11bd735b501341b9db54e471404d45f434855ead413021ee695bf0c767c0480b\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p295",
+        "uid": "u-academia",
+        "code": "ICS 104::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/11bd735b501341b9db54e471404d45f434855ead413021ee695bf0c767c0480b\"}",
+        "ts": 1784604967357,
+        "updated": 1787918143
+      },
+      {
+        "id": "pz335gpvqqs7n",
+        "uid": "u-academia",
+        "code": "ICS 108",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ICS_108.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p255",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ICS 108",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ICS_108.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7o",
+        "uid": "u-academia",
+        "code": "ICS 108::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ICS_108.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p290",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ICS 108::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/ICS_108.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "p287",
+        "uid": "u-academia",
+        "code": "ISE 291",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/84f94a60161af3341ccbd95b1d0a2f4918f1e5a8b09f175917bc17f64770cf88\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "pz335gpvqqs7p",
+        "uid": "u-academia",
+        "code": "ISE 496",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ISE_496.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p256",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "ISE 496",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/ISE_496.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p275",
+        "uid": "u-academia",
+        "code": "MATH 105",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/57d40da083a8ebdec509f5b640bc030bf808039762e587ac8e0f2a56f2e3a89d\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p276",
+        "uid": "u-academia",
+        "code": "MATH 106",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/57d40da083a8ebdec509f5b640bc030bf808039762e587ac8e0f2a56f2e3a89d\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "pz335gpvqqs7q",
+        "uid": "u-academia",
+        "code": "MGT 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_301.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p257",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MGT 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_301.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p284",
+        "uid": "u-academia",
+        "code": "MGT 310",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/ccd2d963f5f28416406b60cfb087f93e140896b744c3a44bd1090ec6ba5099d4\"}",
+        "ts": 1784567545436,
+        "updated": 1787918143
+      },
+      {
+        "id": "pz335gpvqqs7r",
+        "uid": "u-academia",
+        "code": "MGT 355",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_355.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p258",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MGT 355",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_355.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7s",
+        "uid": "u-academia",
+        "code": "MGT 430",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_430.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p259",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MGT 430",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_430.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7t",
+        "uid": "u-academia",
+        "code": "MGT 440",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_440.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p260",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MGT 440",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_440.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7u",
+        "uid": "u-academia",
+        "code": "MGT 449",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_449.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p261",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MGT 449",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MGT_449.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7v",
+        "uid": "u-academia",
+        "code": "MIS 250",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_250.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p262",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 250",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_250.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7w",
+        "uid": "u-academia",
+        "code": "MIS 250::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_250.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p291",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 250::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/MIS_250.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7x",
+        "uid": "u-academia",
+        "code": "MIS 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_301.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p263",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 301",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_301.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs7y",
+        "uid": "u-academia",
+        "code": "MIS 301::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_301.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p292",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 301::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/MIS_301.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918420
+      },
+      {
+        "id": "pz335gpvqqs7z",
+        "uid": "u-academia",
+        "code": "MIS 311",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_311.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p264",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 311",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_311.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs80",
+        "uid": "u-academia",
+        "code": "MIS 311::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MIS_311.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p293",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MIS 311::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/MIS_311.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "p273",
+        "uid": "u-academia",
+        "code": "MKT 250",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/6b607ba42885b092d3fa0c26de6c2213cee0f629ae72f75fa577fdc774bb36aa\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "pz335gpvqqs81",
+        "uid": "u-academia",
+        "code": "MKT 345",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MKT_345.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p265",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MKT 345",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MKT_345.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs82",
+        "uid": "u-academia",
+        "code": "MKT 490",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MKT_490.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p266",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "MKT 490",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/MKT_490.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs83",
+        "uid": "u-academia",
+        "code": "OM 210",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/OM_210.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914549
+      },
+      {
+        "id": "p267",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "OM 210",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/OM_210.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs84",
+        "uid": "u-academia",
+        "code": "OM 311",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/OM_311.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p268",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "OM 311",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/OM_311.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "p283",
+        "uid": "u-academia",
+        "code": "PE 101",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/4e26612915ba1eee89192e8cc9bfc1d1e5e65e16420fbfbdd3b44cb5f06be211\"}",
+        "ts": 1784567545436,
+        "updated": 1787918143
+      },
+      {
+        "id": "p278",
+        "uid": "u-academia",
+        "code": "STAT 214",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/edc144c0792ec1771473b9f5978915ec9f2e38468d1ec42603d641ed9dad05cd\"}",
+        "ts": 1784567545436,
+        "updated": 1787918142
+      },
+      {
+        "id": "p296",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "STAT 214::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"/api/media/edc144c0792ec1771473b9f5978915ec9f2e38468d1ec42603d641ed9dad05cd\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs85",
+        "uid": "u-academia",
+        "code": "SWE 206",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_206.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p269",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "SWE 206",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_206.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs86",
+        "uid": "u-academia",
+        "code": "SWE 206::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_206.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p294",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "SWE 206::معمل",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"file:///C:/Users/thebu/Desktop/RE/academia2/covers/SWE_206.jpg\"}",
+        "ts": 1784604967357,
+        "updated": 1787918419
+      },
+      {
+        "id": "pz335gpvqqs87",
+        "uid": "u-academia",
+        "code": "SWE 216",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_216.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p270",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "SWE 216",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_216.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918420
+      },
+      {
+        "id": "pz335gpvqqs88",
+        "uid": "u-academia",
+        "code": "SWE 422",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_422.jpg\"}",
+        "ts": 1787877130325,
+        "updated": 1787914548
+      },
+      {
+        "id": "p271",
+        "uid": "udbf4a46c9534b8183ddf8400",
+        "code": "SWE 422",
+        "sec": "info",
+        "data": "{\"book\":\"\",\"bookImg\":\"assets/covers/SWE_422.jpg\"}",
+        "ts": 1784556701366,
+        "updated": 1787918419
+      }
+    ],
+    "success": true,
+    "meta": {
+      "served_by": "v3-prod",
+      "served_by_region": "WEUR",
+      "served_by_colo": "AMS",
+      "served_by_primary": true,
+      "timings": {
+        "sql_duration_ms": 2.3925
+      },
+      "duration": 2.3925,
+      "changes": 0,
+      "last_row_id": 0,
+      "changed_db": false,
+      "size_after": 1355776,
+      "rows_read": 119,
+      "rows_written": 0,
+      "total_attempts": 1
+    }
+  }
+]
