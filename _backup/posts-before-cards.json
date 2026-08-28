@@ -1,0 +1,521 @@
+[
+  {
+    "results": [
+      {
+        "id": "p878",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "grade",
+        "b": 47
+      },
+      {
+        "id": "p496",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "abs",
+        "b": 49
+      },
+      {
+        "id": "p888",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "srcP",
+        "b": 128
+      },
+      {
+        "id": "pz335gpvqqs84",
+        "uid": "u-academia",
+        "code": "OM 311",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs6x",
+        "uid": "u-academia",
+        "code": "ACCT 300",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs6y",
+        "uid": "u-academia",
+        "code": "ACCT 300::معمل",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs70",
+        "uid": "u-academia",
+        "code": "ACCT 302",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs74",
+        "uid": "u-academia",
+        "code": "COE 401",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7c",
+        "uid": "u-academia",
+        "code": "GS 342",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs78",
+        "uid": "u-academia",
+        "code": "FIN 425",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7a",
+        "uid": "u-academia",
+        "code": "GS 321",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs7i",
+        "uid": "u-academia",
+        "code": "HRM 301",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs79",
+        "uid": "u-academia",
+        "code": "GS 318",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs75",
+        "uid": "u-academia",
+        "code": "ECON 306",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs7b",
+        "uid": "u-academia",
+        "code": "GS 332",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs71",
+        "uid": "u-academia",
+        "code": "ACCT 321",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs6z",
+        "uid": "u-academia",
+        "code": "ACCT 301",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs7h",
+        "uid": "u-academia",
+        "code": "GS 447",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs77",
+        "uid": "u-academia",
+        "code": "FIN 421",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs80",
+        "uid": "u-academia",
+        "code": "MIS 311::معمل",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs73",
+        "uid": "u-academia",
+        "code": "ACCT 410",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs88",
+        "uid": "u-academia",
+        "code": "SWE 422",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs85",
+        "uid": "u-academia",
+        "code": "SWE 206",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7e",
+        "uid": "u-academia",
+        "code": "GS 424",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs7k",
+        "uid": "u-academia",
+        "code": "HRM 401",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7n",
+        "uid": "u-academia",
+        "code": "ICS 108",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7s",
+        "uid": "u-academia",
+        "code": "MGT 430",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7x",
+        "uid": "u-academia",
+        "code": "MIS 301",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7d",
+        "uid": "u-academia",
+        "code": "GS 420",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs87",
+        "uid": "u-academia",
+        "code": "SWE 216",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs72",
+        "uid": "u-academia",
+        "code": "ACCT 403",
+        "sec": "info",
+        "b": 50
+      },
+      {
+        "id": "pz335gpvqqs7f",
+        "uid": "u-academia",
+        "code": "GS 426",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs7g",
+        "uid": "u-academia",
+        "code": "GS 434",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs7l",
+        "uid": "u-academia",
+        "code": "HRM 402",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7z",
+        "uid": "u-academia",
+        "code": "MIS 311",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7t",
+        "uid": "u-academia",
+        "code": "MGT 440",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7q",
+        "uid": "u-academia",
+        "code": "MGT 301",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs86",
+        "uid": "u-academia",
+        "code": "SWE 206::معمل",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7o",
+        "uid": "u-academia",
+        "code": "ICS 108::معمل",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7m",
+        "uid": "u-academia",
+        "code": "IAS 321",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs76",
+        "uid": "u-academia",
+        "code": "FIN 320",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs82",
+        "uid": "u-academia",
+        "code": "MKT 490",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7j",
+        "uid": "u-academia",
+        "code": "HRM 390",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7r",
+        "uid": "u-academia",
+        "code": "MGT 355",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs83",
+        "uid": "u-academia",
+        "code": "OM 210",
+        "sec": "info",
+        "b": 48
+      },
+      {
+        "id": "pz335gpvqqs7u",
+        "uid": "u-academia",
+        "code": "MGT 449",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7y",
+        "uid": "u-academia",
+        "code": "MIS 301::معمل",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7w",
+        "uid": "u-academia",
+        "code": "MIS 250::معمل",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs81",
+        "uid": "u-academia",
+        "code": "MKT 345",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7v",
+        "uid": "u-academia",
+        "code": "MIS 250",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs7p",
+        "uid": "u-academia",
+        "code": "ISE 496",
+        "sec": "info",
+        "b": 49
+      },
+      {
+        "id": "pz335gpvqqs8w",
+        "uid": "u-academia",
+        "code": "IAS 111",
+        "sec": "info",
+        "b": 154
+      },
+      {
+        "id": "p287",
+        "uid": "u-academia",
+        "code": "ISE 291",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p278",
+        "uid": "u-academia",
+        "code": "STAT 214",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p274",
+        "uid": "u-academia",
+        "code": "ICS 104",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p297",
+        "uid": "u-academia",
+        "code": "COE 344::معمل",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p288",
+        "uid": "u-academia",
+        "code": "COE 344",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p275",
+        "uid": "u-academia",
+        "code": "MATH 105",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p273",
+        "uid": "u-academia",
+        "code": "MKT 250",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p286",
+        "uid": "u-academia",
+        "code": "COE 292",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p281",
+        "uid": "u-academia",
+        "code": "ACCT 110",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p276",
+        "uid": "u-academia",
+        "code": "MATH 106",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p280",
+        "uid": "u-academia",
+        "code": "ECON 101",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p272",
+        "uid": "u-academia",
+        "code": "FIN 250",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p283",
+        "uid": "u-academia",
+        "code": "PE 101",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p282",
+        "uid": "u-academia",
+        "code": "BUS 200",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p295",
+        "uid": "u-academia",
+        "code": "ICS 104::معمل",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p284",
+        "uid": "u-academia",
+        "code": "MGT 310",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p279",
+        "uid": "u-academia",
+        "code": "ECON 102",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p277",
+        "uid": "u-academia",
+        "code": "ACCT 210",
+        "sec": "info",
+        "b": 99
+      },
+      {
+        "id": "p296",
+        "uid": "u-academia",
+        "code": "STAT 214::معمل",
+        "sec": "info",
+        "b": 99
+      }
+    ],
+    "success": true,
+    "meta": {
+      "served_by": "v3-prod",
+      "served_by_region": "WEUR",
+      "served_by_colo": "AMS",
+      "served_by_primary": true,
+      "timings": {
+        "sql_duration_ms": 2.3687
+      },
+      "duration": 2.3687,
+      "changes": 0,
+      "last_row_id": 0,
+      "changed_db": false,
+      "size_after": 1343488,
+      "rows_read": 71,
+      "rows_written": 0,
+      "total_attempts": 1
+    }
+  }
+]
