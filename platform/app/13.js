@@ -1267,6 +1267,7 @@
       <label class="acct-field"><span>${T().acctPassword}</span>
         <input class="acct-in" data-f="password" type="password" value="${esc(p.password || '')}" placeholder="${T().acctPasswordPh}"></label>
       ${mirrorCardHTML()}
+      ${nookCardHTML()}
       ${bootCardHTML()}
       <div class="acct-btns">
         <button type="button" class="acct-btn acct-btn--logout" id="acct-logout">${logoutIcon}${T().logout}</button>
@@ -1286,6 +1287,23 @@
       </div>
     </div>`;
   }
+  /* ---------- حالُ حرز النواة: يُقال ولا يُترك يُظنّ ---------- */
+  function nookCardHTML() {
+    const ar = state.lang !== 'en';
+    const nT = (state.terms || []).length;
+    let cls = 'on', txt;
+    if (nookOff === 'local') { cls = 'off'; txt = ar ? 'الحفظ في هذا المتصفّح وحده — لا خادم هنا.' : 'This browser only — no server here.'; }
+    else if (nookOff === 'out' || isGuest() || !state.uid) {
+      cls = 'warn';
+      txt = ar ? 'لست داخلًا بحسابك، فأترامُك محفوظةٌ في هذا المتصفّح وحدَه. سجّل الدخول ليُحفظ نسخُها في حسابك.'
+               : 'You are signed out, so your terms live in this browser only. Sign in to keep a copy in your account.';
+    } else {
+      txt = ar ? ('أترامُك (' + nT + ') ومكتبتُها وتواريخُها محفوظةٌ في حسابك — تعود في أيّ متصفّحٍ تدخل منه.')
+               : ('Your ' + nT + ' terms, their courses and dates are saved in your account.');
+    }
+    return `<div class="acct-nk is-${cls}"><b>${ar ? 'حرز الركن' : 'Nook backup'}</b><span>${esc(txt)}</span></div>`;
+  }
+
   /* ---------- سجلُّ الإقلاع في الصفحة لا في أدوات المطوّر ----------
      بُني الدفترُ ليُقرأ يومَ يقع فقد، ثمّ طُلب من صاحبه أن يفتح نافذةً سوداء
      ويكتب فيها اسمَ دالّة. وتشخيصٌ لا يُبلَغ إلّا بتعويذةٍ لا يُقرأ.
@@ -1986,12 +2004,21 @@
     return true;
   }
 
+  /* ===== وحرزٌ لا يعمل يجب أن يُقال =====
+     المزامنةُ لا تقع إلّا لعضوٍ داخل. وفتحُ لوحة الأدمن يأخذ كوكيَّ الأصل
+     لحساب «أكاديميا»، فيخرج صاحبُه من الموقع — فتصمت المزامنةُ وهو يظنّها
+     تعمل. وصمتُ الحرز أخطرُ من غيابه: يُبنى عليه أمانٌ لا وجودَ له.
+     فيُقال في صفحة الحساب صراحةً. */
+  let nookOff = '';
+
   async function nookPull() {
-    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (!SRV_ON()) { nookOff = 'local'; return; }
+    if (isGuest() || !state.uid) { nookOff = 'out'; return; }
+    nookOff = '';
     let j;
     try {
       const r = await fetch(nookURL(), { credentials: 'same-origin', cache: 'no-store' });
-      if (r.status === 401) return;                 /* لا جلسةَ بعد: يُعاد عند الدخول */
+      if (r.status === 401) { nookOff = 'out'; return; }   /* لا جلسةَ بعد: يُعاد عند الدخول */
       if (!r.ok) return;
       j = await r.json();
     } catch (e) { return; }

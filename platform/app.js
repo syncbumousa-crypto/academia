@@ -156,8 +156,26 @@
       lb: libN,
       ci: Object.keys(state.cinfo || {}).length,
       bk: coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0,
-      u: (state.profile && state.profile.email) || '',
+      /* ===== وأدَاخلٌ أنت؟ لا: ما اسمُك؟ =====
+         كان يُسجَّل بريدُ البروفايل — وهو يبقى بعد الخروج، فلا يقول شيئًا.
+         والسؤالُ الذي احتجتُه ولم أجد جوابَه: أكانت له جلسةٌ حين أقلع؟
+         فبها وحدَها تُرفع نواتُه إلى حسابه، وبدونها لا حرزَ له. */
+      in: state.signedIn ? (state.uid ? 1 : 0) : 0,
     };
+    /* ===== وما الذي يملأ الدرج؟ =====
+       ثلاثةُ ملايين ونصفٌ من الحروف، والحدُّ خمسةُ ملايين. فلا يكفي أن يُقال
+       «كبير» — يُقال **أين**. وتُقاس المفاتيحُ الكبرى وحدَها، ولا تُقاس أصلًا
+       إن كان الدرجُ صغيرًا: القياسُ نفسُه ثمنٌ لا يُدفع بلا حاجة. */
+    if (bootRaw > 900000) {
+      try {
+        const sz = Object.keys(state).map(k => {
+          let n = 0;
+          try { n = JSON.stringify(state[k]).length; } catch (e) { n = 0; }
+          return [k, n];
+        }).sort((x, y) => y[1] - x[1]).slice(0, 3);
+        bootRow.big = sz.map(x => x[0] + ':' + Math.round(x[1] / 1024)).join(' ');
+      } catch (e) { /* لا يُعطَّل الإقلاعُ لأجل قياس */ }
+    }
     const rows = bootRead_();
     rows.push(bootRow);
     bootPut(rows);
@@ -166,10 +184,17 @@
   /* ويُقرأ بسطرٍ في الطرفيّة: ‎acBootLog()‎ — نصٌّ يُنسخ ويُرسَل كما هو */
   window.acBootLog = function () {
     const rows = bootRead_();
-    const line = r => [new Date(r.t * 1000).toISOString().slice(0, 16).replace('T', ' '),
+    /* والوقتُ محلّيٌّ لا ‎UTC‎: ‎toISOString‎ تُزيح ثلاثَ ساعاتٍ ههنا، فيُقرأ
+       السطرُ على أنّه قبل ما هو بعده — وقد أوشكتُ أن أستنتج بذلك خطأً */
+    const p2 = x => (x < 10 ? '0' : '') + x;
+    const stamp = t => { const d = new Date(t * 1000);
+      return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate())
+             + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes()); };
+    const line = r => [stamp(r.t),
                        r.p === 'a' ? 'لوحة' : 'موقع', r.r,
                        'خام=' + r.b, 'أترام=' + r.tm, 'مكتبة=' + r.lb, 'مواد=' + r.ci,
-                       'نسخة=' + r.bk, r.u || '—', (r.ev || []).join(',') || ''].join(' · ');
+                       'نسخة=' + r.bk, r.in ? 'داخل' : 'خارج',
+                       r.big || '', (r.ev || []).join(',') || ''].filter(Boolean).join(' · ');
     const out = rows.map(line).join('\n');
     console.log(out);
     return out;
@@ -22204,6 +22229,7 @@
       <label class="acct-field"><span>${T().acctPassword}</span>
         <input class="acct-in" data-f="password" type="password" value="${esc(p.password || '')}" placeholder="${T().acctPasswordPh}"></label>
       ${mirrorCardHTML()}
+      ${nookCardHTML()}
       ${bootCardHTML()}
       <div class="acct-btns">
         <button type="button" class="acct-btn acct-btn--logout" id="acct-logout">${logoutIcon}${T().logout}</button>
@@ -22223,6 +22249,23 @@
       </div>
     </div>`;
   }
+  /* ---------- حالُ حرز النواة: يُقال ولا يُترك يُظنّ ---------- */
+  function nookCardHTML() {
+    const ar = state.lang !== 'en';
+    const nT = (state.terms || []).length;
+    let cls = 'on', txt;
+    if (nookOff === 'local') { cls = 'off'; txt = ar ? 'الحفظ في هذا المتصفّح وحده — لا خادم هنا.' : 'This browser only — no server here.'; }
+    else if (nookOff === 'out' || isGuest() || !state.uid) {
+      cls = 'warn';
+      txt = ar ? 'لست داخلًا بحسابك، فأترامُك محفوظةٌ في هذا المتصفّح وحدَه. سجّل الدخول ليُحفظ نسخُها في حسابك.'
+               : 'You are signed out, so your terms live in this browser only. Sign in to keep a copy in your account.';
+    } else {
+      txt = ar ? ('أترامُك (' + nT + ') ومكتبتُها وتواريخُها محفوظةٌ في حسابك — تعود في أيّ متصفّحٍ تدخل منه.')
+               : ('Your ' + nT + ' terms, their courses and dates are saved in your account.');
+    }
+    return `<div class="acct-nk is-${cls}"><b>${ar ? 'حرز الركن' : 'Nook backup'}</b><span>${esc(txt)}</span></div>`;
+  }
+
   /* ---------- سجلُّ الإقلاع في الصفحة لا في أدوات المطوّر ----------
      بُني الدفترُ ليُقرأ يومَ يقع فقد، ثمّ طُلب من صاحبه أن يفتح نافذةً سوداء
      ويكتب فيها اسمَ دالّة. وتشخيصٌ لا يُبلَغ إلّا بتعويذةٍ لا يُقرأ.
@@ -22923,12 +22966,21 @@
     return true;
   }
 
+  /* ===== وحرزٌ لا يعمل يجب أن يُقال =====
+     المزامنةُ لا تقع إلّا لعضوٍ داخل. وفتحُ لوحة الأدمن يأخذ كوكيَّ الأصل
+     لحساب «أكاديميا»، فيخرج صاحبُه من الموقع — فتصمت المزامنةُ وهو يظنّها
+     تعمل. وصمتُ الحرز أخطرُ من غيابه: يُبنى عليه أمانٌ لا وجودَ له.
+     فيُقال في صفحة الحساب صراحةً. */
+  let nookOff = '';
+
   async function nookPull() {
-    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (!SRV_ON()) { nookOff = 'local'; return; }
+    if (isGuest() || !state.uid) { nookOff = 'out'; return; }
+    nookOff = '';
     let j;
     try {
       const r = await fetch(nookURL(), { credentials: 'same-origin', cache: 'no-store' });
-      if (r.status === 401) return;                 /* لا جلسةَ بعد: يُعاد عند الدخول */
+      if (r.status === 401) { nookOff = 'out'; return; }   /* لا جلسةَ بعد: يُعاد عند الدخول */
       if (!r.ok) return;
       j = await r.json();
     } catch (e) { return; }

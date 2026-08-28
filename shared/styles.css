@@ -15036,3 +15036,19 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
 .bootrow i { font-style: normal; color: var(--c-gold); font-weight: 700; }
 .bootrow.is-bad { background: color-mix(in srgb, var(--c-gold) 10%, transparent); }
 .acct-boot #boot-copy { margin: 8px 13px 12px; width: calc(100% - 26px); }
+
+/* ===== حالُ حرز النواة في صفحة الحساب =====
+   حرزٌ لا يعمل يجب أن يُقال: صمتُه أخطرُ من غيابه، إذ يُبنى عليه أمانٌ لا وجودَ له. */
+.acct-nk {
+  margin-top: 14px; padding: 11px 13px; border-radius: 12px;
+  display: flex; flex-direction: column; gap: 3px;
+  font-size: 12px; line-height: 1.7; border: 1px solid var(--border);
+}
+.acct-nk b { font-size: 12.5px; }
+.acct-nk span { color: var(--c-ink-soft); }
+.acct-nk.is-on { border-color: color-mix(in srgb, var(--c-kfupm) 40%, transparent);
+                 background: var(--c-kfupm-soft); }
+.acct-nk.is-on b { color: var(--brand-tx); }
+.acct-nk.is-warn { border-color: color-mix(in srgb, var(--c-gold) 55%, transparent);
+                   background: color-mix(in srgb, var(--c-gold) 12%, transparent); }
+.acct-nk.is-warn b { color: var(--c-gold); }
