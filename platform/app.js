@@ -624,6 +624,16 @@
   /* إذنُ نقصانٍ مقصود — يُعطى قبل الحفظ ويُستهلك فيه */
   let dropOK = 0;
   function allowDrop(n) { dropOK = Math.max(dropOK, n | 0); }
+  /* ===== وما مُلئ من مصدرٍ لا يُكتب في المخزن =====
+     عقدةٌ في الرحلة تحمل ‎ref‎ تُملأ في الذاكرة من رزمتها ليعمل كلُّ ما يرسمها،
+     ولا يُخزَّن ما مُلئ: وإلّا عاد التكرارُ الذي نُزع من أجله.
+     والمرشِّحُ يمرّ على كلّ مفتاحٍ مرّةً في الحفظة الواحدة — وهو أرخصُ من نسخةٍ
+     عميقةٍ للحال كلِّها قبل كلّ كتابة. */
+  const SRC_FILL = ['f', 'b', 'hist', 'cs', 'wl', 'cm', 'pr', 'a', 'v', 'pend', 'pv', 'dt', 'name'];
+  function saveTrim(k, v) {
+    if (SRC_FILL.indexOf(k) < 0) return v;
+    return (this && this.ref && this.ref.pid) ? undefined : v;
+  }
   let saveBad = false, lastCore = '';
   const save = () => {
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
@@ -651,7 +661,7 @@
     dropOK = 0;                                  /* الإذنُ يُستهلك */
 
     try {
-      localStorage.setItem(LS_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_KEY, JSON.stringify(state, saveTrim));
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
@@ -19631,6 +19641,38 @@
     }));
     return out;
   };
+  /* ---------- تُملأ الإشاراتُ من مصادرها عند العرض ----------
+     تُنادى بعد كلّ ما يبدّل المصادرَ (جذبُ المساهمات) وعند فتح الرحلة. وتكتب في
+     العقدة نفسِها، فما بعدها يقرأ كما كان يقرأ — و‎save‎ لا تكتب ما مُلئ. */
+  function roadFill(entry) {
+    if (!entry) return 0;
+    const code = nookCode(entry);
+    const packs = new Map();     /* pid ⇐ رزمة — تُقرأ مرّةً لكلّ مساهمة لا لكلّ بطاقة */
+    let n = 0;
+    (function walk(list) {
+      (list || []).forEach(x => {
+        if (x && x.ref && x.ref.pid) {
+          const k = x.ref.sub + '|' + x.ref.pid;
+          if (!packs.has(k)) {
+            const p = postsOf(code, x.ref.sub || 'cards').find(y => y.id === x.ref.pid);
+            packs.set(k, (p && p.data && p.data.deck) || null);
+          }
+          const deck = packs.get(k);
+          const r = deck ? findNode(deck, x.ref.nid) : null;
+          if (r) {
+            JRI_SRC_F.forEach(f => { if (r.n[f] !== undefined) x[f] = r.n[f]; });
+            x.gone = 0; n++;
+          } else {
+            /* ذهب أصلُها: تُعلَّم ولا تُمحى — الحذفُ خبرٌ يُقال لا يقع بصمت */
+            x.gone = 1;
+          }
+        }
+        if (x && x.ch) walk(x.ch);
+      });
+    })(roadOf(entry));
+    return n;
+  }
+
   const roadOf = (entry, create) => {
     if (!entry) return [];
     const k = roadKey(entry);
@@ -20194,6 +20236,7 @@
      فلو لم تُحفظ لَأُعيد إصدارُ المعرّفات في كلّ إقلاع. والحفظُ **مشروطٌ بالفرق**:
      رسمةٌ لم تُغيّر شيئًا لا تكتب في الدرج — والرسمُ يقع مع كلّ طيّة فصل */
   function roadSyncSave(entry) {
+    roadFill(entry);          /* تُملأ الإشاراتُ من مصادرها قبل أن تُرسم */
     const r = roadSync(entry);
     /* ومعها مسحةُ التحديث: تُمحى ذاكرةُ الأصول أوّلًا لأنّ صاحبَ المساهمة قد نشر
        بين رسمتين — والذاكرةُ لطول الرسمة لا أكثر */
@@ -20542,7 +20585,27 @@
      فصلًا: يُنسب إلى موضوعٍ فيلبس اسمَه، أو لا يُنسب فيُطرح إن خلا.
      فيُوسم كلُّ مجلّدٍ منسوخٍ ‎tp: 0‎ — والوسمُ الصريحُ يقطع شقَّي ‎isCh‎ معًا.
      والمعرّفاتُ تُجدَّد في العمق: لو بقيت لَاشتبكت مع مصدرها في ‎state.srs‎ وفي التحديد */
-  const jriClone = n => {
+  /* ============================================================
+     الإشارةُ بدل النسخة (م١ من خطّة السحابة)
+     ============================================================
+     كانت كلُّ بطاقةٍ تُستورد **تُنسخ** بوجهها وظهرها وصورها وسجلّها إلى دفتر
+     صاحبها. فرحلةُ مادّةٍ واحدةٍ عند صاحب الموقع بلغت ثمانَ مئةٍ وثلاثين كيلو —
+     نسخةٌ ثانيةٌ من رزمةٍ مخزَّنةٍ أصلًا في الموقع، وثالثةٌ عند من يستوردها بعده.
+
+     وحكمُ صاحب الموقع: المحتوى يُقرأ من مكانٍ واحد، ولا يُكرَّر في كلّ حساب.
+
+     ===== وتُخزَّن إشارةً وتُقرأ محتوًى =====
+     العقدةُ تحفظ ‎ref = {pid, sub, nid}‎ ولا تحفظ متنًا. وعند العرض تُملأ من
+     مصدرها في الذاكرة (‎roadFill‎)، فكلُّ شاشةٍ في الموقع تعمل كما كانت — ولا
+     يُكتب المملوءُ إلى المخزن (‎save‎ تُسقطه).
+
+     ===== وما الذي يُفقد؟ =====
+     تجميدُ النسخة. كنتَ ترى ما استوردتَه يومَ استوردتَه ويُقال لك «صدر تحديث»،
+     وصرتَ ترى الأحدثَ دائمًا. ولو حُذفت البطاقةُ من مصدرها ذهبت من رحلتك.
+     والتحريرُ لا يُفقد: المستوردةُ لم تكن تُحرَّر أصلًا (‎ro: !!n.imp‎). */
+  const JRI_SRC_F = ['f', 'b', 'hist', 'cs', 'wl', 'cm', 'pr', 'a', 'v', 'pend', 'pv', 'dt', 'name'];
+
+  const jriClone = (n, pid, sub) => {
     const o = JSON.parse(JSON.stringify(n));
     (function fix(x) {
       /* وأثرُ الأصل يُكتب قبل تجديد المعرّف: بعده يضيع. والمجلّدُ لا سجلَّ له فلا أثرَ */
@@ -20564,7 +20627,11 @@
          فيُفرَّق بينهما بوسمٍ يُكتب مرّةً عند النسخ: ما جاء من رزمةٍ يحمل خبرَه معه،
          وما وُلد ههنا لا يُوعَد بخبرٍ لا يجيء.
          والمجلّدُ لا يُوسم: لا خبرَ له من نفسِه أصلًا (هو وعاءٌ) */
-      if (x.t !== 'f') x.imp = 1;
+      if (x.t !== 'f') {
+        x.imp = 1;
+        /* والإشارةُ إلى أصلها: مساهمتُها وبندُها ومعرّفُها فيها */
+        if (pid && was) x.ref = { pid: pid, sub: sub || '', nid: was };
+      }
       /* ===== وبلاغُك أنت لا يُنسخ معه =====
          ‏‎n.wl‎ قائمةُ مَن نبّه على خطأٍ فيها، و‎me‎ وسمُ بلاغك أنت. والنسخةُ تحمل
          **عددَ** مَن نبّه (خبرٌ عن البطاقة يُنشر معها كالكلام)، ولا تحمل الوسمَ: لو
@@ -20597,7 +20664,13 @@
     const arr = roadOf(nookEntry, true);
     const h = jriDest ? (findNode(arr, jriDest) || {}).n : null;
     const dest = (h && h.t === 'f') ? (h.ch = h.ch || []) : arr;
-    roots.forEach(x => dest.push(jriClone(x)));
+    /* ومعها مساهمتُها: بها تُعرف الإشارةُ إلى أصلها */
+    const own = new Map();
+    jriBag.forEach(v => { own.set(v.id, v); });
+    roots.forEach(x => {
+      const g = own.get(x.id) || {};
+      dest.push(jriClone(x, g.pid || null, g.sub || ''));
+    });
     if (h) h.open = true;   /* الوجهةُ تُفتح: ما استوردتَه يُرى حيث وقع لا خلف مثلّثٍ مطويّ */
     save();
     jriBag.clear();
@@ -29035,6 +29108,52 @@
     if (n) console.log('وُسمت ' + n + ' رزمةً للنشر');
   }
 
+  /* ---------- ترحيلٌ لمرّةٍ واحدة: نُسخُ الرحلة تصير إشاراتٍ ----------
+     كلُّ بطاقةٍ استُوردت إلى رحلةٍ نُسخت بوجهها وظهرها وصورها وسجلّها. فرحلةُ
+     مادّةٍ واحدةٍ عند صاحب الموقع ثمانُ مئةٍ وثلاثون كيلو — والرزمةُ نفسُها
+     مخزَّنةٌ إلى جانبها.
+
+     والعقدةُ المستوردةُ تحمل ‎src‎ (معرّفَ أصلها) منذ اليوم الأوّل، فيُبحث عنه
+     في مساهمات المادّة فتُكتب ‎ref‎. وحينها تتوقّف ‎save‎ عن كتابة المتن (‎saveTrim‎)
+     ويُملأ عند العرض (‎roadFill‎) — فينزل الحجمُ بلا أن يتبدّل ما يُرى.
+
+     ===== وما لم يوجد أصلُه يُترك نسخةً =====
+     مصدرٌ حُذف، أو رزمةٌ لم تعد منشورة: نسختُك هي كلُّ ما بقي منها. فلا تُنزع
+     ولا تُعلَّم منقطعةً — هي عندك تامّة. */
+  function roadRefs() {
+    if (state.roadRef1) return;
+    let hit = 0, miss = 0;
+    Object.keys(state.libs || {}).forEach(term => {
+      (state.libs[term] || []).forEach(en => {
+        if (!en || !en.code) return;
+        ['road', 'roadLab'].forEach(k => {
+          if (!Array.isArray(en[k])) return;
+          const code = k === 'roadLab' ? labKey(en.code) : en.code;
+          (function walk(list) {
+            list.forEach(x => {
+              if (x && x.imp && x.src && !x.ref) {
+                let found = null;
+                SECTIONS.forEach(sec => {
+                  if (found) return;
+                  (postsOf(code, sec) || []).forEach(p => {
+                    if (found || !p || !p.data || !p.data.deck) return;
+                    const r = findNode(p.data.deck, x.src);
+                    if (r) found = { pid: p.id, sub: sec, nid: x.src };
+                  });
+                });
+                if (found) { x.ref = found; hit++; } else miss++;
+              }
+              if (x && x.ch) walk(x.ch);
+            });
+          })(en[k]);
+        });
+      });
+    });
+    state.roadRef1 = 1;
+    save();
+    if (hit || miss) console.log('رحلة: ' + hit + ' صارت إشارة، و' + miss + ' بقيت نسخة (ذهب أصلها)');
+  }
+
   function seedMark() {
     if (SERVER_ON) return;
     let n = 0;
@@ -29085,6 +29204,7 @@
     };
     document.head.appendChild(sc);
   }
+  roadRefs();       /* ونُسخُ الرحلة تصير إشاراتٍ: المحتوى يُقرأ من مكانٍ واحد */
   coverPub();       /* وأغلفةُ الكتب تُنشر: خبرٌ عن المادّة لا شيءٌ يخصّ متصفّحًا */
   coverHandBack();  /* وغلافُ الكتاب خبرٌ عن المادّة لا عملُ أحد — يُردّ إلى الموقع */
   siteUnclaim();    /* وما نُسب إليك من مساهمات الموقع سهوًا يُردّ إليه */

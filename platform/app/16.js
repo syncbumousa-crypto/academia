@@ -1867,6 +1867,52 @@
     if (n) console.log('وُسمت ' + n + ' رزمةً للنشر');
   }
 
+  /* ---------- ترحيلٌ لمرّةٍ واحدة: نُسخُ الرحلة تصير إشاراتٍ ----------
+     كلُّ بطاقةٍ استُوردت إلى رحلةٍ نُسخت بوجهها وظهرها وصورها وسجلّها. فرحلةُ
+     مادّةٍ واحدةٍ عند صاحب الموقع ثمانُ مئةٍ وثلاثون كيلو — والرزمةُ نفسُها
+     مخزَّنةٌ إلى جانبها.
+
+     والعقدةُ المستوردةُ تحمل ‎src‎ (معرّفَ أصلها) منذ اليوم الأوّل، فيُبحث عنه
+     في مساهمات المادّة فتُكتب ‎ref‎. وحينها تتوقّف ‎save‎ عن كتابة المتن (‎saveTrim‎)
+     ويُملأ عند العرض (‎roadFill‎) — فينزل الحجمُ بلا أن يتبدّل ما يُرى.
+
+     ===== وما لم يوجد أصلُه يُترك نسخةً =====
+     مصدرٌ حُذف، أو رزمةٌ لم تعد منشورة: نسختُك هي كلُّ ما بقي منها. فلا تُنزع
+     ولا تُعلَّم منقطعةً — هي عندك تامّة. */
+  function roadRefs() {
+    if (state.roadRef1) return;
+    let hit = 0, miss = 0;
+    Object.keys(state.libs || {}).forEach(term => {
+      (state.libs[term] || []).forEach(en => {
+        if (!en || !en.code) return;
+        ['road', 'roadLab'].forEach(k => {
+          if (!Array.isArray(en[k])) return;
+          const code = k === 'roadLab' ? labKey(en.code) : en.code;
+          (function walk(list) {
+            list.forEach(x => {
+              if (x && x.imp && x.src && !x.ref) {
+                let found = null;
+                SECTIONS.forEach(sec => {
+                  if (found) return;
+                  (postsOf(code, sec) || []).forEach(p => {
+                    if (found || !p || !p.data || !p.data.deck) return;
+                    const r = findNode(p.data.deck, x.src);
+                    if (r) found = { pid: p.id, sub: sec, nid: x.src };
+                  });
+                });
+                if (found) { x.ref = found; hit++; } else miss++;
+              }
+              if (x && x.ch) walk(x.ch);
+            });
+          })(en[k]);
+        });
+      });
+    });
+    state.roadRef1 = 1;
+    save();
+    if (hit || miss) console.log('رحلة: ' + hit + ' صارت إشارة، و' + miss + ' بقيت نسخة (ذهب أصلها)');
+  }
+
   function seedMark() {
     if (SERVER_ON) return;
     let n = 0;
@@ -1917,6 +1963,7 @@
     };
     document.head.appendChild(sc);
   }
+  roadRefs();       /* ونُسخُ الرحلة تصير إشاراتٍ: المحتوى يُقرأ من مكانٍ واحد */
   coverPub();       /* وأغلفةُ الكتب تُنشر: خبرٌ عن المادّة لا شيءٌ يخصّ متصفّحًا */
   coverHandBack();  /* وغلافُ الكتاب خبرٌ عن المادّة لا عملُ أحد — يُردّ إلى الموقع */
   siteUnclaim();    /* وما نُسب إليك من مساهمات الموقع سهوًا يُردّ إليه */

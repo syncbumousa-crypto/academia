@@ -624,6 +624,16 @@
   /* إذنُ نقصانٍ مقصود — يُعطى قبل الحفظ ويُستهلك فيه */
   let dropOK = 0;
   function allowDrop(n) { dropOK = Math.max(dropOK, n | 0); }
+  /* ===== وما مُلئ من مصدرٍ لا يُكتب في المخزن =====
+     عقدةٌ في الرحلة تحمل ‎ref‎ تُملأ في الذاكرة من رزمتها ليعمل كلُّ ما يرسمها،
+     ولا يُخزَّن ما مُلئ: وإلّا عاد التكرارُ الذي نُزع من أجله.
+     والمرشِّحُ يمرّ على كلّ مفتاحٍ مرّةً في الحفظة الواحدة — وهو أرخصُ من نسخةٍ
+     عميقةٍ للحال كلِّها قبل كلّ كتابة. */
+  const SRC_FILL = ['f', 'b', 'hist', 'cs', 'wl', 'cm', 'pr', 'a', 'v', 'pend', 'pv', 'dt', 'name'];
+  function saveTrim(k, v) {
+    if (SRC_FILL.indexOf(k) < 0) return v;
+    return (this && this.ref && this.ref.pid) ? undefined : v;
+  }
   let saveBad = false, lastCore = '';
   const save = () => {
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
@@ -651,7 +661,7 @@
     dropOK = 0;                                  /* الإذنُ يُستهلك */
 
     try {
-      localStorage.setItem(LS_KEY, JSON.stringify(state));
+      localStorage.setItem(LS_KEY, JSON.stringify(state, saveTrim));
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
