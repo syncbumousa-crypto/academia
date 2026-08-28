@@ -1921,12 +1921,56 @@
       p.srvH = h;
       if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
       save();
+      pendPaint();                             /* وصلت: تنقص واحدةٌ من المعلَّق */
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
 
   /* واسمُ المادّة يُلحق بالشكوى: الدرجُ مشتركٌ بين اللوحة والموقع، فمن سمع
      «مساهمةٌ كبيرة» ولا يدري أيَّها لا ينتفع بالخبر */
   const tooBigWhere = code => code ? ' — ' + code : '';
+
+  /* ============================================================
+     «لم يُحفظ بعد» — الثمنُ المعلوم للسحابة الصافية
+     ============================================================
+     ما دام الدرجُ يحفظ، كان التعديلُ محفوظًا لحظةَ كتابته. ولمّا صار الحفظُ في
+     الحساب، صار بين الكتابةِ والحفظِ ثوانٍ ورحلةُ شبكة — فمن أغلق الصفحةَ
+     فيها فقد ما كتبه.
+     فيُقال: نقطةٌ هادئةٌ ما دام ثمّ ما لم يصل، ونداءٌ عند الإغلاق. ولا يُترك
+     الأمرُ للظنّ — والظنُّ ههنا يكلّف عملَ ساعة. */
+  function pendCount() {
+    if (!SRV_ON() || isGuest() || !state.uid) return 0;
+    let n = 0;
+    Object.keys(state.cinfo || {}).forEach(code => {
+      const ps = (state.cinfo[code] || {}).posts || {};
+      Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
+        if (p && p.me && !p.srvH && !postEmpty(p)) n++;
+      }));
+    });
+    return n;
+  }
+
+  let pendT = 0;
+  function pendPaint() {
+    clearTimeout(pendT);
+    pendT = setTimeout(() => {
+      const n = pendCount();
+      let b = document.getElementById('sv-pend');
+      if (!n) { if (b) b.remove(); return; }
+      if (!b) {
+        b = document.createElement('div');
+        b.id = 'sv-pend';
+        document.body.appendChild(b);
+      }
+      b.textContent = state.lang === 'en'
+        ? n + ' change' + (n > 1 ? 's' : '') + ' saving…'
+        : 'يُحفظ في حسابك… (' + n + ')';
+    }, 400);
+  }
+  window.addEventListener('beforeunload', e => {
+    if (!pendCount()) return;
+    e.preventDefault();
+    e.returnValue = '';        /* المتصفّحُ يعرض نصَّه هو — والمقصودُ الوقفة */
+  });
 
   /* ويُمشى على مساهماتي المنشورة كلِّها — مؤجَّلًا، فلا يُتبع كلَّ حرفٍ طلبٌ */
   let srvT = 0;

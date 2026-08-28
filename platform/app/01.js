@@ -630,7 +630,36 @@
      والمرشِّحُ يمرّ على كلّ مفتاحٍ مرّةً في الحفظة الواحدة — وهو أرخصُ من نسخةٍ
      عميقةٍ للحال كلِّها قبل كلّ كتابة. */
   const SRC_FILL = ['f', 'b', 'hist', 'cs', 'wl', 'cm', 'pr', 'a', 'v', 'pend', 'pv', 'dt', 'name'];
+
+  /* ============================================================
+     والمساهماتُ لا تُخزَّن في المتصفّح — إذا بلغت الخادمَ كلُّها (م٣)
+     ============================================================
+     حكمُ صاحب الموقع: المتصفّحُ لا يحفظ إلّا أنّك مسجَّل، وما سواه في الحساب.
+     و‎cinfo‎ أثقلُ ما فيه: مساهماتُك ومساهماتُ غيرك والبطائق.
+
+     ===== ولا يُترك المخزنُ حتّى يُؤمَن البديل =====
+     الإسقاطُ مشروطٌ بأن يكون **كلُّ ما لك** قد بلغ الخادم (‎srvH‎). فما دام
+     شيءٌ لم يبلغه بقي الدرجُ يحفظه — ولو دام شهرًا. فلا تُنزع الشبكةُ من تحتك
+     ثقةً بأنّ الدفع وقع، بل بعد أن يُرى أنّه وقع.
+     والزائرُ لا حساب له فلا خادمَ يحفظ له: درجُه مأواه، ولا يُمَسّ. */
+  let dropCinfo = false;
+  function cinfoSafe() {
+    if (!/^https?:/.test(location.protocol)) return false;   /* بلا خادم */
+    if (!state.signedIn || !state.uid) return false;         /* زائرٌ: درجُه مأواه */
+    let ok = true;
+    const C = state.cinfo || {};
+    Object.keys(C).forEach(code => {
+      const ps = (C[code] || {}).posts || {};
+      Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
+        if (!ok || !p || !p.me) return;
+        if (!p.srvH && !(typeof postEmpty === 'function' && postEmpty(p))) ok = false;
+      }));
+    });
+    return ok;
+  }
+
   function saveTrim(k, v) {
+    if (k === 'cinfo' && dropCinfo && this === state) return undefined;
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
@@ -661,6 +690,7 @@
     dropOK = 0;                                  /* الإذنُ يُستهلك */
 
     try {
+      dropCinfo = cinfoSafe();     /* يُسأل مرّةً في الحفظة لا لكلّ مفتاح */
       localStorage.setItem(LS_KEY, JSON.stringify(state, saveTrim));
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
@@ -671,6 +701,7 @@
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
+      if (typeof pendPaint === 'function') pendPaint();       /* ويُقال ما لم يصل بعد */
       mirrorSoon();                    /* ونسخةٌ إلى ملفٍّ على الجهاز إن كان موصولًا */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */

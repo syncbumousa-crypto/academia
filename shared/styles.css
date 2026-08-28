@@ -15053,3 +15053,17 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
                    background: color-mix(in srgb, var(--c-gold) 12%, transparent); }
 .acct-nk.is-warn b { color: var(--c-gold); }
 .bootrow .bootbig { opacity: .75; direction: ltr; }
+
+/* ===== «يُحفظ في حسابك…» — الثمن المعلوم للسحابة الصافية =====
+   نقطة هادئة لا تحجب شيئا: تظهر ما دام ثمّ ما لم يصل الخادم، وتذهب بوصوله.
+   وهي فوق كل شيء في الطبقات — إن ظهرت فالمقصود أن تُرى. */
+#sv-pend {
+  position: fixed; inset-inline-end: 14px; bottom: 14px; z-index: 9998;
+  padding: 7px 13px; border-radius: 999px;
+  background: var(--c-kfupm); color: #fff;
+  font: 700 11.5px/1.6 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 6px 18px rgba(9, 18, 22, .28);
+  opacity: .92; pointer-events: none;
+  animation: pendIn .18s ease;
+}
+@keyframes pendIn { from { opacity: 0; transform: translateY(6px); } to { opacity: .92; transform: none; } }
