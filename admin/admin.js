@@ -81,7 +81,33 @@
     if (b.dataset.tab === 'docs') renderDocs();
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
     if (b.dataset.tab === 'guard') guardOpen();
+    if (b.dataset.tab === 'posts') whoPaint();
   });
+
+  /* ---------- مَن أنت داخل المكتبة؟ ----------
+     المكتبةُ المطعَّمةُ هي الموقعُ بعينه، فجلستُك فيها جلستُك في الموقع (الكوكيّ
+     واحدٌ والأصلُ واحد). لكنّ شريطَ الموقع الجانبيَّ مطروحٌ ههنا، وفيه كان بابُ
+     الحساب — فلا يُعرف أعضوٌ أنت أم زائر، ولا لماذا مُنعت من المساهمة.
+     فيُقال صراحةً، ويُعطى البابُ لمن ليس داخلًا. */
+  async function whoPaint() {
+    const el = $('#a-who'); if (!el) return;
+    el.hidden = false;
+    el.innerHTML = '<span class="a-who__t">…</span>';
+    let u = null;
+    try {
+      const r = await fetch('/api/auth/me', { credentials: 'same-origin', cache: 'no-store' });
+      if (r.ok) u = (await r.json()).user;
+    } catch (e) { /* لا شبكة */ }
+    if (u) {
+      el.className = 'a-who is-in';
+      el.innerHTML = '<span class="a-who__t">أنت داخلٌ باسم <b>' + gEsc(u.name || u.email) + '</b>'
+        + ' — ما تكتبه في المكتبة يُنشر باسمك.</span>';
+    } else {
+      el.className = 'a-who is-out';
+      el.innerHTML = '<span class="a-who__t">أنت زائرٌ هنا — لا تُعجب ولا تُساهم.</span>'
+        + '<a class="a-btn" href="../platform/index.html" target="_blank">سجّل دخولك في أكاديميا</a>';
+    }
+  }
 
   /* ============================================================
      الإشراف — النافذةُ الوحيدةُ على الخادم

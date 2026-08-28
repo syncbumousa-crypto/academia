@@ -171,14 +171,29 @@ def site_body(html):
     return html[i:j].rstrip() if j > 0 else None
 
 
+def site_inline(html):
+    """سكربتُ ذيل الموقع الداخليّ — معالجُ التابات.
+
+    والوسمُ لا يعمل بلا سكربته: طُعّمت الألواحُ الخمسةُ في اللوحة أوّلَ مرّةٍ بلا
+    هذا، فبقيت كما هي لا تتبدّل بالضغط. فيُنقل معه.
+    """
+    i = html.find('<script>')
+    if i < 0:
+        return ''
+    j = html.find('</script>', i)
+    return html[i:j + len('</script>')] if j > 0 else ''
+
+
 def graft_course_ui():
     site = os.path.join(STAGE, 'platform', 'index.html')
     adm = os.path.join(STAGE, 'admin', 'index.html')
     if not (os.path.isfile(site) and os.path.isfile(adm)):
         return
-    body = site_body(io.open(site, encoding='utf-8', newline='').read())
+    src = io.open(site, encoding='utf-8', newline='').read()
+    body = site_body(src)
     if not body:
         die('تعذّر اقتطاعُ جسد الموقع — لا يُنشر بلوحةٍ مكسورة')
+    tabs = site_inline(src)
 
     dst = io.open(adm, encoding='utf-8', newline='').read()
     a = dst.find('id="lib-host"')
@@ -190,7 +205,7 @@ def graft_course_ui():
         die('لا نهايةَ للوح المساهمات في لوحة الأدمن')
     # وما بين الفتح والإغلاق يُستبدل كلُّه — فلا تُكدَّس نسخةٌ على نسخة
     nl = chr(10)
-    inner = nl + GRAFT_A + nl + body + nl + GRAFT_Z + nl + '      '
+    inner = nl + GRAFT_A + nl + body + nl + tabs + nl + GRAFT_Z + nl + '      '
     # ===== ويُفكّ الرابطُ قبل الكتابة =====
     # التجهيزُ يربط ربطًا صلبًا (رخيصًا بلا كلفة قرص)، والرابطُ **اسمٌ ثانٍ
     # للبِتات نفسِها** — فالكتابةُ في المجهَّز كتابةٌ في مصدرك. وقد وقعت مرّةً.

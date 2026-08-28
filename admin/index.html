@@ -282,6 +282,11 @@
         <span class="a-count" id="del-hint">شغّل وضع الحذف ثم انقر أي مساهمة داخل المكتبة</span>
       </div>
 
+      <!-- مَن أنت داخل المكتبة المطعَّمة؟ الشريطُ الجانبيُّ للموقع مطروحٌ ههنا
+           (‎admin.css‎)، وفيه كان بابُ الحساب. فلولا هذا السطرِ لم تعرف أعضوٌ أنت
+           أم زائر، ولا لماذا مُنعت من المساهمة. -->
+      <div class="a-who" id="a-who" hidden></div>
+
       <div id="lib-host">
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
@@ -556,6 +561,9 @@
 <script>window.ACADEMIA_ADMIN = true;</script>
 <script src="../shared/courses.js"></script>
 <script src="../shared/covers.js"></script>
+<!-- فهرسُ وجوه المجلدات وبذرةُ البطائق: يقرؤهما app.js، وغيابُهما يترك
+     منتقيَ الوجوه خاويًا ولا تنزل البطائق في اللوحة -->
+<script src="../platform/emoji.js"></script>
 <script src="../platform/app.js"></script>
 <script src="admin.js"></script>
 </body>

@@ -327,3 +327,17 @@ html:root body { padding-inline: 0; }
 }
 .g-cat__sig.is-same { color: var(--a-petrol); }
 .g-cat__sig.is-diff { color: var(--a-gold); }
+
+/* شريطُ «مَن أنت» فوق المكتبة المطعَّمة — بترولي إن كنتَ داخلًا، ذهبيٌّ إن لم تكن */
+.a-who {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; border-radius: 11px; margin-bottom: 14px;
+  font-size: 13px; border: 1px solid var(--a-line); background: var(--a-paper);
+}
+.a-who[hidden] { display: none; }
+.a-who__t { flex: 1 1 16rem; color: var(--a-ink-soft); }
+.a-who__t b { color: var(--a-ink); font-weight: 700; }
+.a-who.is-in  { border-color: var(--a-petrol); background: var(--a-petrol-soft); }
+.a-who.is-in .a-who__t { color: var(--a-ink); }
+.a-who.is-out { border-color: var(--a-gold); background: color-mix(in srgb, var(--a-gold) 12%, transparent); }
+.a-who .a-btn { flex: none; text-decoration: none; }
