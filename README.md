@@ -26,7 +26,7 @@
 │   ├── emoji.js        فهرس وجوه المجلدات
 │   └── seed-cards.js   بذرة البطائق — تنزل مرّة واحدة في أول فتحة
 │
-├── admin/              ✦ آدمن المنصّة — مالك الكتالوج
+├── AbdulrahmanUniProjectAdmin/   ✦ آدمن المنصّة — مالك الكتالوج
 │   ├── index.html      المواد والوسوم والدكاترة والمساهمات
 │   ├── admin.css
 │   └── admin.js
@@ -106,7 +106,7 @@ python _deploy.py --dry    يفحص ولا ينشر
 | ٤ · الحارس | يفحص **ما جُهّز** لا ما نوينا |
 | ٥ · النشر | `wrangler pages deploy` |
 
-**ولا يُرفع:** `admin/` · `README.md` · `platform/app/` (مدخل بناء) · كل ما يبدأ
+**ولا يُرفع:** `README.md` · `platform/app/` (مدخل بناء) · كل ما يبدأ
 بـ`_` أو بنقطة.
 
 **ولمَ قائمة سماح وحارسٌ معًا؟** لأن قائمة المنع تنسى. يوم صار المجلد مستودع
@@ -122,7 +122,7 @@ python _deploy.py --dry    يفحص ولا ينشر
 python -m http.server 8740
 ```
 
-ثم `http://localhost:8740` للمنصّة، و`http://localhost:8740/admin/` للوحة.
+ثم `http://localhost:8740` للمنصّة، و`http://localhost:8740/AbdulrahmanUniProjectAdmin/` للوحة.
 ويعمل بفتح `index.html` مباشرة كذلك، إلّا أنّ `file://` تشترك في درج تخزين واحد بين
 كل المشاريع المحلية — فيمتلئ.
 

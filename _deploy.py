@@ -36,6 +36,10 @@ SKIP_FILES = {'README.md',             # وثيقةٌ داخليّة
               'wrangler.toml',         # ضبطُ الربط: يقرؤه wrangler من الجذر ولا يُقدَّم
               'ROADMAP-SERVER.md'}
 SKIP_PATHS = {'platform/app'}          # أجزاءُ المحرّك: مدخلُ بناءٍ لا مخرَجه
+# ===== مسارُ اللوحة =====
+# اسمٌ لا يُخمَّن بدل ‎admin/‎: اللوحةُ منشورةٌ للجميع، وبابٌ يُعرف اسمُه يُطرق.
+# وهو ثابتٌ واحدٌ ههنا — فتبديلُه غدًا سطرٌ واحد، ولا يُطارَد في ستّة مواضع.
+ADMIN_DIR = 'AbdulrahmanUniProjectAdmin'
 SKIP_ROOT_PREFIX = '_'                 # ملفّاتُ العُدّة
 # وكلُّ ما يبدأ بنقطة، في أيّ عمق (‎.git‎ و‎.stage‎ وما يجيء بعدهما)
 
@@ -71,7 +75,7 @@ def step_paths():
         return os.path.normpath(os.path.join(base, href.replace('/', os.sep)))
 
     pages = ['index.html', '404.html', 'transfer.html',
-             'platform/index.html', 'admin/index.html']
+             'platform/index.html', ADMIN_DIR + '/index.html']
     n = 0
     for p in pages:
         fp = os.path.join(ROOT, p.replace('/', os.sep))
@@ -186,7 +190,7 @@ def site_inline(html):
 
 def graft_course_ui():
     site = os.path.join(STAGE, 'platform', 'index.html')
-    adm = os.path.join(STAGE, 'admin', 'index.html')
+    adm = os.path.join(STAGE, ADMIN_DIR, 'index.html')
     if not (os.path.isfile(site) and os.path.isfile(adm)):
         return
     src = io.open(site, encoding='utf-8', newline='').read()
@@ -236,7 +240,7 @@ def step_guard(n, size):
     # تظهر — وهو خللٌ صامتٌ لا يصيح، بقي فيها من يومَ بُنيت حتى قِيس.
     # والفحصُ **بالعدّ لا بمعرّفاتٍ تُسمّى**: ما يُضاف غدًا في الموقع يدخل في
     # الحساب من نفسِه، ولا يُنتظر أن يُذكر ههنا
-    adm = os.path.join(STAGE, 'admin', 'index.html')
+    adm = os.path.join(STAGE, ADMIN_DIR, 'index.html')
     sit = os.path.join(STAGE, 'platform', 'index.html')
     if os.path.isfile(adm) and os.path.isfile(sit):
         A = io.open(adm, encoding='utf-8', newline='').read()
