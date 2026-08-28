@@ -894,7 +894,7 @@
       likeSelf: 'الإعجاب لمساهمات غيرك',
       /* ونصّان بعد أن شُحن التعليق: الأوّلُ لإعجاب تعليقٍ وارد (لم يُبنَ بعد)،
          والثاني لعقدةٍ من جذبٍ قديمٍ لا تحمل أصلَها — تُشفى بفتح المادّة */
-      cmtLikeSoon: 'الإعجاب بالتعليقات قريبًا',
+      cmtLikeSelf: 'الإعجاب لكلام غيرك',
       cmtStale: 'حدِّث الصفحة ليصل كلامُك',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
@@ -1228,7 +1228,7 @@
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       likeSelf: 'You cannot like your own contribution',
-      cmtLikeSoon: 'Liking comments is coming',
+      cmtLikeSelf: 'You cannot like your own comment',
       cmtStale: 'Refresh the page so your comment reaches its author',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
@@ -13040,8 +13040,8 @@
       const c = cdCmtAt(clk.dataset.clk);
       if (!c) return true;
       if (!memberGate(T().needAcctLike)) return true;
-      /* وإعجابُ تعليقٍ وارد لم يُبنَ بعد: عدُّه على الخادم كعدّ المساهمات */
-      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtLikeSoon); return true; } }
+      /* وتعليقٌ وارد: عدُّه على الخادم لا في نسختك — وهو يحمل ‎srv‎ فيُعرف */
+      if (c.srv) { srvCmtLike(c); return true; }
       c.liked = !c.liked;
       c.lk = Math.max(0, (c.lk || 0) + (c.liked ? 1 : -1));
       clk.classList.toggle('on', c.liked);
@@ -22258,7 +22258,7 @@
         k: r.face || 1,
         u: { name: r.name || '', img: r.img || '' },
         ts: (r.ts || 0) * 1000, x: r.txt || '',
-        lk: 0, liked: false,
+        lk: r.lk | 0, liked: !!r.mine,      /* العدُّ من الخادم — يُقرأ ولا يُخترع */
       };
       byId[r.id] = { c: c, nid: r.nid, parent: r.parent };
       if (!r.parent) roots.push(byId[r.id]);
@@ -22310,6 +22310,32 @@
       (node.cm = node.cm || []).push(c);
     }
     save();
+    return true;
+  }
+
+  /* ---------- إعجابُ تعليقٍ وارد ----------
+     كإعجاب المساهمات سواءً بسواء: يُقلب في الشاشة فورًا فلا ينتظر المستخدمُ
+     الشبكةَ ليرى أثرَ إصبعه، ثمّ يُصحَّح بما يردّه الخادم — وإن سقط رُدَّ ما كان. */
+  async function srvCmtLike(c) {
+    if (!c || !c.srv || !SRV_ON()) return false;
+    if (!memberGate(T().needAcctLike)) return true;
+    const was = { liked: !!c.liked, lk: c.lk | 0 };
+    c.liked = !was.liked;
+    c.lk = Math.max(0, was.lk + (c.liked ? 1 : -1));
+    if (cmtBox || cardDlg) cdCmtPaint(true);
+    try {
+      const r = await fetch(cmtURL('/like'), {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: c.id }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 409) { Object.assign(c, was); toast(T().cmtLikeSelf); }
+      else if (!r.ok) Object.assign(c, was);
+      else { c.lk = j.lk | 0; c.liked = !!j.liked; }
+    } catch (e) { Object.assign(c, was); }
+    save();
+    if (cmtBox || cardDlg) cdCmtPaint(true);
     return true;
   }
 

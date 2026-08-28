@@ -894,7 +894,7 @@
       likeSelf: 'الإعجاب لمساهمات غيرك',
       /* ونصّان بعد أن شُحن التعليق: الأوّلُ لإعجاب تعليقٍ وارد (لم يُبنَ بعد)،
          والثاني لعقدةٍ من جذبٍ قديمٍ لا تحمل أصلَها — تُشفى بفتح المادّة */
-      cmtLikeSoon: 'الإعجاب بالتعليقات قريبًا',
+      cmtLikeSelf: 'الإعجاب لكلام غيرك',
       cmtStale: 'حدِّث الصفحة ليصل كلامُك',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
@@ -1228,7 +1228,7 @@
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       likeSelf: 'You cannot like your own contribution',
-      cmtLikeSoon: 'Liking comments is coming',
+      cmtLikeSelf: 'You cannot like your own comment',
       cmtStale: 'Refresh the page so your comment reaches its author',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',

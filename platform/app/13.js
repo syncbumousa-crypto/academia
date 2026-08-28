@@ -1605,7 +1605,7 @@
         k: r.face || 1,
         u: { name: r.name || '', img: r.img || '' },
         ts: (r.ts || 0) * 1000, x: r.txt || '',
-        lk: 0, liked: false,
+        lk: r.lk | 0, liked: !!r.mine,      /* العدُّ من الخادم — يُقرأ ولا يُخترع */
       };
       byId[r.id] = { c: c, nid: r.nid, parent: r.parent };
       if (!r.parent) roots.push(byId[r.id]);
@@ -1657,6 +1657,32 @@
       (node.cm = node.cm || []).push(c);
     }
     save();
+    return true;
+  }
+
+  /* ---------- إعجابُ تعليقٍ وارد ----------
+     كإعجاب المساهمات سواءً بسواء: يُقلب في الشاشة فورًا فلا ينتظر المستخدمُ
+     الشبكةَ ليرى أثرَ إصبعه، ثمّ يُصحَّح بما يردّه الخادم — وإن سقط رُدَّ ما كان. */
+  async function srvCmtLike(c) {
+    if (!c || !c.srv || !SRV_ON()) return false;
+    if (!memberGate(T().needAcctLike)) return true;
+    const was = { liked: !!c.liked, lk: c.lk | 0 };
+    c.liked = !was.liked;
+    c.lk = Math.max(0, was.lk + (c.liked ? 1 : -1));
+    if (cmtBox || cardDlg) cdCmtPaint(true);
+    try {
+      const r = await fetch(cmtURL('/like'), {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: c.id }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 409) { Object.assign(c, was); toast(T().cmtLikeSelf); }
+      else if (!r.ok) Object.assign(c, was);
+      else { c.lk = j.lk | 0; c.liked = !!j.liked; }
+    } catch (e) { Object.assign(c, was); }
+    save();
+    if (cmtBox || cardDlg) cdCmtPaint(true);
     return true;
   }
 

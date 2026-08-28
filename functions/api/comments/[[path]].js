@@ -37,21 +37,29 @@ async function session(db, req) {
       WHERE s.th = ? AND s.expires > ?`).bind(await sha256(m[1]), now()).first();
 }
 
-export async function onRequest({ request, env }) {
+export async function onRequest({ request, env, params }) {
   const db = env.DB;
   if (!db) return J({ error: 'no-db' }, 503);
   const url = new URL(request.url);
   const m = request.method;
+  /* ‎/api/comments‎ للكلام، و‎/api/comments/like‎ لإعجابه — ملفٌّ ملتقِطٌ واحد */
+  const path = (Array.isArray(params.path) ? params.path : [params.path || '']).filter(Boolean).join('/');
 
   try {
     /* ---------- قراءة ---------- */
     if (m === 'GET') {
       const pid = (url.searchParams.get('pid') || '').trim();
       if (!pid) return J({ error: 'pid' }, 400);
+      /* والعدُّ يُجمع في الاستعلام نفسِه لا في رحلةٍ ثانية — ومن كان له جلسةٌ
+         عرف أيَّها أعجب (‎mine‎)، ومن لا جلسةَ له فالعدُّ وحدَه */
+      const me = await session(db, request);
+      const uid = me ? me.uid : '';
       const rs = await db.prepare(
-        `SELECT c.id, c.nid, c.parent, c.uid, c.face, c.txt, c.ts, u.name, u.img
+        `SELECT c.id, c.nid, c.parent, c.uid, c.face, c.txt, c.ts, u.name, u.img,
+                (SELECT COUNT(*) FROM cmt_likes l WHERE l.cid = c.id) lk,
+                (SELECT COUNT(*) FROM cmt_likes l WHERE l.cid = c.id AND l.uid = ?) mine
            FROM comments c JOIN users u ON u.id = c.uid
-          WHERE c.pid = ? ORDER BY c.ts`).bind(pid).all();
+          WHERE c.pid = ? ORDER BY c.ts`).bind(uid, pid).all();
       return J({ pid, comments: rs.results || [] }, 200, {
         /* ولا خبءٌ مشترك: الكلامُ يتبدّل، والقارئُ يريد ما كُتب الآن */
         'cache-control': 'private, max-age=5',
@@ -60,6 +68,28 @@ export async function onRequest({ request, env }) {
 
     const s = await session(db, request);
     if (!s) return J({ error: 'auth' }, 401);
+
+    /* ---------- إعجابُ تعليق ----------
+       ‎POST /api/comments/like‎  {id}  ⇐ يقلب حالي عليه ويردّ العدَّ بعده
+       وقلبٌ لا فعلان — كإعجاب المساهمات: العميلُ قد يكون حالُه قديمًا فيطلب ما
+       هو واقعٌ أصلًا، والقلبُ يصحّ مهما ظنّ.
+       ولا يُعجب أحدٌ بكلام نفسِه. */
+    if (path === 'like' && m === 'POST') {
+      let b = {};
+      try { b = await request.json(); } catch (e) { return J({ error: 'body' }, 400); }
+      const cid = String(b.id || '').trim();
+      if (!cid) return J({ error: 'id' }, 400);
+      const c = await db.prepare('SELECT uid FROM comments WHERE id = ?').bind(cid).first();
+      if (!c) return J({ error: 'gone' }, 404);
+      if (c.uid === s.uid) return J({ error: 'self' }, 409);
+
+      const had = await db.prepare('SELECT 1 FROM cmt_likes WHERE cid = ? AND uid = ?')
+        .bind(cid, s.uid).first();
+      if (had) await db.prepare('DELETE FROM cmt_likes WHERE cid = ? AND uid = ?').bind(cid, s.uid).run();
+      else await db.prepare('INSERT INTO cmt_likes (cid, uid, ts) VALUES (?,?,?)').bind(cid, s.uid, now()).run();
+      const n = await db.prepare('SELECT COUNT(*) n FROM cmt_likes WHERE cid = ?').bind(cid).first();
+      return J({ id: cid, lk: (n && n.n) || 0, liked: !had });
+    }
 
     /* ---------- محو ---------- */
     if (m === 'DELETE') {

@@ -1022,8 +1022,8 @@
       const c = cdCmtAt(clk.dataset.clk);
       if (!c) return true;
       if (!memberGate(T().needAcctLike)) return true;
-      /* وإعجابُ تعليقٍ وارد لم يُبنَ بعد: عدُّه على الخادم كعدّ المساهمات */
-      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtLikeSoon); return true; } }
+      /* وتعليقٌ وارد: عدُّه على الخادم لا في نسختك — وهو يحمل ‎srv‎ فيُعرف */
+      if (c.srv) { srvCmtLike(c); return true; }
       c.liked = !c.liked;
       c.lk = Math.max(0, (c.lk || 0) + (c.liked ? 1 : -1));
       clk.classList.toggle('on', c.liked);
