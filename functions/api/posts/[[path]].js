@@ -50,6 +50,23 @@ export async function onRequest({ request, env }) {
   try {
     /* ---------- قراءة: منشوراتُ مادّة ---------- */
     if (m === 'GET') {
+      /* ---------- «مساهماتي» ----------
+         ‎GET /api/posts?mine=1‎ — ما نشرتَه في المواد كلِّها، لتراه وتسحبه من
+         موضعٍ واحدٍ بلا أن تفتح كلَّ مادّةٍ تبحث فيها. والجدولُ مفهرسٌ بـ‎uid‎.
+         ولا يُردّ المتنُ ههنا: قائمةُ عناوينَ لا محتوى — فرزمةٌ فيها ألفُ بطاقةٍ
+         لا تُنقل لتُعرض في سطر. */
+      const mine = url.searchParams.get('mine');
+      if (mine) {
+        const me = await session(db, request);
+        if (!me) return J({ error: 'auth' }, 401);
+        const rs = await db.prepare(
+          `SELECT p.id, p.code, p.sec, p.ts, p.updated, LENGTH(p.data) size,
+                  (SELECT COUNT(*) FROM likes l WHERE l.pid = p.id) likes,
+                  (SELECT COUNT(*) FROM comments c WHERE c.pid = p.id) cmts
+             FROM posts p WHERE p.uid = ? ORDER BY p.updated DESC`).bind(me.uid).all();
+        return J({ posts: rs.results || [] }, 200, { 'cache-control': 'no-store' });
+      }
+
       const code = (url.searchParams.get('code') || '').trim();
       if (!code) return J({ error: 'code' }, 400);
       /* والعدُّ يُجمع في الاستعلام نفسِه لا في رحلةٍ ثانية — ومن كان له جلسةٌ
