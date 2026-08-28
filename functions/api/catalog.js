@@ -39,16 +39,37 @@ const JSON_HEADERS = {
    ===== والنسخةُ تُزاد فيعرف الموقعُ أنّ عليه أن يقرأ =====
    ‎catalog_rev‎ هو ما يقارنه ‎catSync‎ في المتصفّح. فلولا زيادتُه لَبقي الناسُ
    على القديم حتى يُفرَّغ خبءُ متصفّحهم. */
+/* حجّتان كما في ‎/api/admin‎: جلسةُ مشرفٍ، **أو قفلُ اللوحة مفتوح**.
+   واللوحةُ تدخل بحساب «أكاديميا» وهو ليس مشرفًا، فبلا الثانيةِ لا تنشر كتالوجًا. */
+const _hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+const _sha = async s => _hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)));
+const _same = (a, b) => {
+  if (a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+};
+
 async function boss(db, req) {
-  const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)sid=([^;]+)/);
-  if (!m) return null;
-  const enc = new TextEncoder();
-  const buf = await crypto.subtle.digest('SHA-256', enc.encode(m[1]));
-  const th = [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
-  const r = await db.prepare(
-    `SELECT u.id, u.admin FROM sessions s JOIN users u ON u.id = s.uid
-      WHERE s.th = ? AND s.expires > ?`).bind(th, Math.floor(Date.now() / 1000)).first();
-  return (r && r.admin) ? r : null;
+  const ck = req.headers.get('cookie') || '';
+  const m = ck.match(/(?:^|;\s*)sid=([^;]+)/);
+  if (m) {
+    const r = await db.prepare(
+      `SELECT u.id, u.admin FROM sessions s JOIN users u ON u.id = s.uid
+        WHERE s.th = ? AND s.expires > ?`)
+      .bind(await _sha(m[1]), Math.floor(Date.now() / 1000)).first();
+    if (r && r.admin) return r;
+  }
+  const L = ck.match(/(?:^|;\s*)alock=([^;]+)/);
+  if (!L) return null;
+  const g = async k => {
+    const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();
+    return r ? r.v : '';
+  };
+  const pw = await g('admin_pw');
+  if (!pw) return null;
+  return _same(L[1], await _sha('alock|' + pw + '|' + await g('admin_salt')))
+    ? { id: 'u-academia', admin: 1 } : null;
 }
 
 export async function onRequestPut({ request, env }) {

@@ -28,14 +28,46 @@ const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')
 const now = () => Math.floor(Date.now() / 1000);
 const sha256 = async s => hex(await crypto.subtle.digest('SHA-256', enc.encode(s)));
 
-/* لا يمرّ إلّا صاحبُ الموقع */
+/* ============================================================
+   لا يمرّ إلّا صاحبُ الموقع — وله حجّتان
+   ============================================================
+   ١ · جلسةٌ لحسابٍ عليه ‎admin = 1‎.
+   ٢ · **أو قفلُ اللوحة مفتوح**: من عرف الكلمةَ التي عيّنها صاحبُ الموقع فهو هو.
+
+   والثانيةُ لازمة: اللوحةُ تدخل بحساب «أكاديميا» وهو ليس مشرفًا (النشرُ باسمه
+   شيءٌ والحكمُ شيء)، فلولاها لَوجد صاحبُ الموقع بابًا مقفلًا بعد أن فتح قفله
+   بكلمته — وهو ما وقع. */
+function same(a, b) {
+  if (a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+}
+
+async function lockOpen(db, req) {
+  const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/);
+  if (!m) return false;
+  const g = async k => {
+    const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();
+    return r ? r.v : '';
+  };
+  const pw = await g('admin_pw');
+  if (!pw) return false;
+  return same(m[1], await sha256('alock|' + pw + '|' + await g('admin_salt')));
+}
+
 async function boss(db, req) {
   const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)sid=([^;]+)/);
-  if (!m) return null;
-  const r = await db.prepare(
-    `SELECT u.id, u.name, u.admin FROM sessions s JOIN users u ON u.id = s.uid
-      WHERE s.th = ? AND s.expires > ?`).bind(await sha256(m[1]), now()).first();
-  return (r && r.admin) ? r : null;
+  let r = null;
+  if (m) {
+    r = await db.prepare(
+      `SELECT u.id, u.name, u.admin FROM sessions s JOIN users u ON u.id = s.uid
+        WHERE s.th = ? AND s.expires > ?`).bind(await sha256(m[1]), now()).first();
+  }
+  if (r && r.admin) return r;
+  /* والقفلُ حجّةٌ قائمةٌ بنفسها — ومن فتحه ولا جلسةَ له يُنسب إلى الموقع */
+  if (await lockOpen(db, req)) return r || { id: 'u-academia', name: 'أكاديميا', admin: 1 };
+  return null;
 }
 
 export async function onRequest({ request, env, params }) {
