@@ -23148,8 +23148,14 @@
      ===== ولا يُدفع إلّا بعد جذبٍ =====
      من دفع قبل أن يقرأ كتب نسختَه فوق نسخةِ غيرِه بلا أن يراها. فيُقفل الدفعُ
      حتّى يقع أوّلُ جذبٍ ناجح (‎nookGot‎). */
-  const nookURL = () => (ASSET_BASE ? new URL('api/nook', ASSET_BASE).href
-                                    : location.origin + '/api/nook');
+  /* ===== ومخزنٌ واحدٌ لوثائقك لا اثنان =====
+     بُنيت ‎/api/nook‎ أوّلًا، ثمّ عُمّمت إلى ‎/api/udoc‎ بمفتاحَي الصاحب والنوع —
+     ونُقلت الصفوفُ ونُسي العميل. فبقي يكتب في القديم، وصار للنواة نسختان:
+     حيّةٌ هناك وميّتةٌ ههنا. وهو عينُ ما أحذّر منه في كلّ نسخةٍ تُؤخذ باليد.
+     فالعميلُ يكتب في المخزن الواحد، والقديمُ يبقى قائمًا لمتصفّحٍ لم يُحدَّث
+     بعدُ ثمّ يُرفع. */
+  const udocURL = q => (ASSET_BASE ? new URL('api/udoc' + (q || ''), ASSET_BASE).href
+                                   : location.origin + '/api/udoc' + (q || ''));
   const NOOK_F = ['terms', 'libs', 'termDates', 'lastNook', 'termAt', 'termsGone'];
   let nookGot = false, nookT = 0, nookLast = '';
 
@@ -23236,7 +23242,7 @@
     nookOff = ''; nookTried++;
     let j;
     try {
-      const r = await fetch(nookURL(), { credentials: 'same-origin', cache: 'no-store' });
+      const r = await fetch(udocURL('?kind=nook'), { credentials: 'same-origin', cache: 'no-store' });
       if (r.status === 401) { nookOff = 'out'; bootMark('nook:401'); return; }
       if (!r.ok) { nookOff = 'err'; bootMark('nook:get' + r.status); return; }
       j = await r.json();
@@ -23267,10 +23273,10 @@
     const sig = JSON.stringify(body);
     if (sig === nookLast) return;                    /* لم يتبدّل شيء */
     try {
-      const r = await fetch(nookURL(), {
+      const r = await fetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ data: body }),
+        body: JSON.stringify({ kind: 'nook', data: body }),
       });
       if (r.status === 409) {                        /* الخادمُ منع محوًا: تُقرأ نسختُه */
         nookOff = 'conflict'; bootMark('nook:409');
@@ -23309,8 +23315,6 @@
      ===== والدمجُ اتّحادٌ لا ترجيح =====
      الاختبارُ واقعةٌ مضت لا رأيٌ يُبدَّل: فما عند الخادم وما عندي يجتمعان
      بمعرّفاتهما، ولا يُطرح شيء. ومن اختبر في متصفّحين وجد الاثنين. */
-  const udocURL = q => (ASSET_BASE ? new URL('api/udoc' + (q || ''), ASSET_BASE).href
-                                   : location.origin + '/api/udoc' + (q || ''));
   let xtGot = false, xtT = 0, xtSig = '';
 
   async function xtPull() {
