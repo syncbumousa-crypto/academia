@@ -21961,6 +21961,17 @@
     } catch (e) { /* لا شبكة: تبقى محلّيّةً حتى يُعاد الاختيار */ }
   }
 
+  /* ---------- جسرٌ للوحة الأدمن ----------
+     اللوحةُ تفتح جلسةَ الموقع بنفسها (‎/api/auth/site‎) بعد أن يكون المحرّكُ قد
+     أقلع. فلو لم تُعلمه لبقي ‎state.uid‎ خاويًا — وحينئذٍ يفشل شرطُ «مساهمتي لا
+     تُحقن نسخةً ثانية» في الجذب، **فتُحقن مساهماتُك بـ‎me:false‎ فلا تُحرَّر**.
+     وهي العلّةُ التي شكاها صاحبُ الموقع: ينشر فيعدّل، ثمّ يعود فلا يقدر.
+     فتُنادى هذي فتمرّ بـ‎authTake‎ نفسِها، ويُعاد الجذبُ إن كانت مادّةٌ مفتوحة. */
+  window.acSessionChanged = function (user) {
+    authTake(user);
+    if (cmCode) { srvPulled[cmCode] = 0; srvPull(cmCode, true); }
+  };
+
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
   function authSync() {
     if (!AUTH_SRV) return;
@@ -22172,14 +22183,24 @@
     const info = state.cinfo[code];
     if (!info || !info.posts) return;
     let n = 0;
+    /* ومعرّفاتُ ما أملكه ههنا: تُجمع مرّةً قبل المشي لا تُبحث لكلّ وافد */
+    const mineIds = new Set();
+    Object.keys(info.posts).forEach(sec =>
+      (info.posts[sec] || []).forEach(p => { if (p && p.me && p.id) mineIds.add(p.id); }));
     /* أوّلًا: يُرفع الوافدُ القديم — الجذبُ استبدالٌ لا تكديس */
     Object.keys(info.posts).forEach(sec => {
       if (Array.isArray(info.posts[sec])) info.posts[sec] = info.posts[sec].filter(p => !p || !p.srv);
     });
     j.posts.forEach(r => {
       if (!SECTIONS.includes(r.sec)) return;
-      /* ومساهمتي أنا لا تُحقن نسخةً ثانية: عندي أصلُها في درجي */
+      /* ومساهمتي أنا لا تُحقن نسخةً ثانية: عندي أصلُها في درجي.
+         ===== ويُعرف بالمعرّف كما يُعرف بالهويّة =====
+         شرطُ ‎uid‎ وحدَه يفشل إن لم تكن الهويّةُ قد بلغت المحرّكَ بعد (كما وقع في
+         لوحة الأدمن: تفتح الجلسةَ بـ‎fetch‎ فيؤخذ الكوكيُّ ويبقى ‎state.uid‎
+         خاويًا) — فتُحقن مساهماتُك نسخةً ثانيةً بـ‎me:false‎ فلا تُحرَّر.
+         والمعرّفُ حجّةٌ لا تحتاج جلسة: ما عندي مثلُ معرّفِه فهو هو. */
       if (r.uid && state.uid && r.uid === state.uid) return;
+      if (mineIds.has(r.id)) return;
       if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
       info.posts[r.sec].push({
         id: r.id, srv: 1, uid: r.uid,

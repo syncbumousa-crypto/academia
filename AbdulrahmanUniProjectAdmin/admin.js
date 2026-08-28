@@ -109,6 +109,11 @@
       } catch (e) { /* لا شبكة */ }
     }
 
+    /* ويُعلَم المحرّكُ بمن نحن: أخذُ الكوكيّ وحدَه لا يكفي — ‎state.uid‎ فيه هو
+       الذي يميّز مساهماتِك من مساهمات غيرك عند الجذب. ولولا هذا لَجُذبت
+       مساهماتُك نسخةً ثانيةً بـ‎me:false‎ فلم تُحرَّر. */
+    if (u && window.acSessionChanged) window.acSessionChanged(u);
+
     if (u) {
       el.className = 'a-who is-in';
       el.innerHTML = '<span class="a-who__t">تنشر باسم <b>' + gEsc(u.name || u.email) + '</b>'
