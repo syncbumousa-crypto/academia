@@ -646,20 +646,41 @@
   function cinfoSafe() {
     if (!/^https?:/.test(location.protocol)) return false;   /* بلا خادم */
     if (!state.signedIn || !state.uid) return false;         /* زائرٌ: درجُه مأواه */
-    let ok = true;
-    const C = state.cinfo || {};
-    Object.keys(C).forEach(code => {
-      const ps = (C[code] || {}).posts || {};
-      Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
-        if (!ok || !p || !p.me) return;
-        if (!p.srvH && !(typeof postEmpty === 'function' && postEmpty(p))) ok = false;
-      }));
+    return true;
+  }
+
+  /* ===== ولا يُوقف الكلَّ واحدٌ لم يصل =====
+     كان الشرطُ جملةً: «إن بلغ الخادمَ كلُّ ما لك». وجرّبه صاحبُ الموقع فبقيت
+     ‎cinfo‎ كما هي — مساهمةٌ واحدةٌ لم تصل (كبيرةٌ رُدّت، أو تعثّرت) تُقفل البابَ
+     على الجميع أبدًا. وهذا قفلٌ لا حارس.
+
+     فالتصفيةُ **مساهمةً مساهمة**: يُترك في الدرج ما لم يبلغ الخادمَ من عملك
+     وحدَه، ويُسقط ما بلغه وما ليس لك (فالخادمُ مصدرُه). فينكمش المخزنُ اليوم،
+     ويظلّ ما لم يصل محفوظًا حتّى يصل.
+
+     ===== ولا يُمَسّ ما ليس مساهمةً =====
+     ‎doctors‎ وما في ‎cinfo[code]‎ من حقولٍ أخرى تبقى: لم يُبنَ لها بابٌ في
+     الخادم بعد، ولا يُنزع مأوًى قبل أن يوجد بديلُه. */
+  function cinfoThin(C) {
+    const out = {};
+    Object.keys(C || {}).forEach(code => {
+      const src = C[code] || {};
+      const keep = {};
+      let any = false;
+      Object.keys(src.posts || {}).forEach(sec => {
+        const list = (src.posts[sec] || []).filter(p =>
+          p && p.me && !p.srvH && !(typeof postEmpty === 'function' && postEmpty(p)));
+        if (list.length) { keep[sec] = list; any = true; }
+      });
+      const rest = {};
+      Object.keys(src).forEach(k2 => { if (k2 !== 'posts') { rest[k2] = src[k2]; any = true; } });
+      if (any) out[code] = Object.assign(rest, Object.keys(keep).length ? { posts: keep } : {});
     });
-    return ok;
+    return out;
   }
 
   function saveTrim(k, v) {
-    if (k === 'cinfo' && dropCinfo && this === state) return undefined;
+    if (k === 'cinfo' && dropCinfo && this === state) return cinfoThin(v);
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }

@@ -1916,8 +1916,8 @@
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' }, body: body,
       });
-      if (r.status === 413) { p.srvBig = rawH; save(); toast(T().srvTooBig + tooBigWhere(code)); return; }
-      if (!r.ok) return;
+      if (r.status === 413) { p.srvBig = rawH; save(); bootMark('push:413'); toast(T().srvTooBig + tooBigWhere(code)); return; }
+      if (!r.ok) { bootMark('push:' + r.status); return; }
       p.srvH = h;
       if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
       save();
