@@ -22253,15 +22253,22 @@
   function nookCardHTML() {
     const ar = state.lang !== 'en';
     const nT = (state.terms || []).length;
-    let cls = 'on', txt;
+    let cls = 'warn', txt;
+    const when = nookAt ? new Date(nookAt * 1000) : null;
+    const p2 = x => (x < 10 ? '0' : '') + x;
+    const hhmm = when ? p2(when.getHours()) + ':' + p2(when.getMinutes()) : '';
     if (nookOff === 'local') { cls = 'off'; txt = ar ? 'الحفظ في هذا المتصفّح وحده — لا خادم هنا.' : 'This browser only — no server here.'; }
-    else if (nookOff === 'out' || isGuest() || !state.uid) {
-      cls = 'warn';
+    else if (isGuest() || !state.uid || nookOff === 'out') {
       txt = ar ? 'لست داخلًا بحسابك، فأترامُك محفوظةٌ في هذا المتصفّح وحدَه. سجّل الدخول ليُحفظ نسخُها في حسابك.'
                : 'You are signed out, so your terms live in this browser only. Sign in to keep a copy in your account.';
+    } else if (nookAt) {
+      cls = 'on';
+      txt = ar ? ('أترامُك (' + nT + ') ومكتبتُها وتواريخُها في حسابك — آخر مزامنة ' + hhmm + ' (نسخة ' + nookRev + ').')
+               : ('Your ' + nT + ' terms are in your account — last synced ' + hhmm + ' (rev ' + nookRev + ').');
     } else {
-      txt = ar ? ('أترامُك (' + nT + ') ومكتبتُها وتواريخُها محفوظةٌ في حسابك — تعود في أيّ متصفّحٍ تدخل منه.')
-               : ('Your ' + nT + ' terms, their courses and dates are saved in your account.');
+      /* داخلٌ ولم يقع شيءٌ بعد: يُقال «لم يقع» لا «وقع» */
+      txt = ar ? ('لم تصل نواتُك الخادمَ بعد' + (nookTried ? '' : ' (لم تُجرَّب المزامنة)') + '. أعِد تحميل الصفحة، فإن بقي فأخبِر صاحبَ الموقع.')
+               : 'Your nook has not reached the server yet. Reload; if it persists, tell the site owner.';
     }
     return `<div class="acct-nk is-${cls}"><b>${ar ? 'حرز الركن' : 'Nook backup'}</b><span>${esc(txt)}</span></div>`;
   }
@@ -22284,7 +22291,10 @@
       return `<div class="bootrow${(r.ev || []).length ? ' is-bad' : tag}">`
         + `<b>${when}</b><span>${r.p === 'a' ? (ar ? 'لوحة' : 'panel') : (ar ? 'موقع' : 'site')}</span>`
         + `<span>${r.r}</span><span>${ar ? 'أترام' : 'terms'} ${r.tm}</span>`
+        + `<span>${ar ? 'مكتبة' : 'lib'} ${r.lb}</span>`
         + `<span>${ar ? 'مواد' : 'courses'} ${r.ci}</span>`
+        + (r.in !== undefined ? `<span>${r.in ? (ar ? 'داخل' : 'in') : (ar ? 'خارج' : 'out')}</span>` : '')
+        + (r.big ? `<span class="bootbig">${esc(r.big)}</span>` : '')
         + `<span>${Math.round((r.b || 0) / 1024)}${ar ? 'ك' : 'K'}</span>`
         + `<i>${esc((r.ev || []).join(' · '))}</i></div>`;
     };
@@ -22971,21 +22981,27 @@
      لحساب «أكاديميا»، فيخرج صاحبُه من الموقع — فتصمت المزامنةُ وهو يظنّها
      تعمل. وصمتُ الحرز أخطرُ من غيابه: يُبنى عليه أمانٌ لا وجودَ له.
      فيُقال في صفحة الحساب صراحةً. */
-  let nookOff = '';
+  /* ===== ولا يُقال «محفوظ» إلّا بشهادةِ الخادم =====
+     كانت البطاقةُ خضراءَ ما دام لا فشلَ **مسجَّل** — وذاك خبرٌ عن جهلي لا عن
+     حال. فالحالُ تُبنى على ما وقع: ‎nookAt‎ لا تُكتب إلّا بعد ردٍّ ناجحٍ من
+     الخادم، وما لم تُكتب فالحرزُ «لم يقع بعد» لا «واقع». */
+  let nookOff = '', nookAt = 0, nookRev = 0, nookTried = 0;
 
   async function nookPull() {
     if (!SRV_ON()) { nookOff = 'local'; return; }
-    if (isGuest() || !state.uid) { nookOff = 'out'; return; }
-    nookOff = '';
+    if (isGuest() || !state.uid) { nookOff = 'out'; bootMark('nook:out'); return; }
+    nookOff = ''; nookTried++;
     let j;
     try {
       const r = await fetch(nookURL(), { credentials: 'same-origin', cache: 'no-store' });
-      if (r.status === 401) { nookOff = 'out'; return; }   /* لا جلسةَ بعد: يُعاد عند الدخول */
-      if (!r.ok) return;
+      if (r.status === 401) { nookOff = 'out'; bootMark('nook:401'); return; }
+      if (!r.ok) { nookOff = 'err'; bootMark('nook:get' + r.status); return; }
       j = await r.json();
-    } catch (e) { return; }
+    } catch (e) { nookOff = 'net'; bootMark('nook:neterr'); return; }
     nookGot = true;                                  /* قُرئ، فيُؤذن بالدفع */
+    bootMark('nook:got' + (j && j.data ? (j.rev | 0) : 0));
     if (!j || !j.data) { nookPushSoon(); return; }   /* لا نواةَ هناك: تُرفع نواتي */
+    nookAt = j.updated | 0; nookRev = j.rev | 0;   /* شهادةُ الخادم: هذا ما عنده */
     const hit = nookMerge(j.data);
     nookLast = JSON.stringify(nookOf());             /* ما جاء لا يُعاد دفعُه */
     if (hit) {
@@ -23007,12 +23023,19 @@
         body: JSON.stringify({ data: body }),
       });
       if (r.status === 409) {                        /* الخادمُ منع محوًا: تُقرأ نسختُه */
+        nookOff = 'conflict'; bootMark('nook:409');
         nookGot = false; nookPull();
         return;
       }
-      if (!r.ok) return;
+      if (!r.ok) { nookOff = 'err'; bootMark('nook:put' + r.status); return; }
+      const jr = await r.json().catch(() => null);
       nookLast = sig;
-    } catch (e) { /* لا شبكة: يُعاد مع الحفظ التالي */ }
+      nookAt = Math.floor(Date.now() / 1000);
+      nookRev = (jr && jr.rev) | 0;
+      nookOff = '';
+      bootMark('nook:put' + nookRev);
+      if (typeof renderAcct === 'function') renderAcct();
+    } catch (e) { nookOff = 'net'; bootMark('nook:puterr'); }
   }
 
   /* ويُدفع مؤجَّلًا كالمساهمات: ‎save()‎ تُنادى مع كلّ حرف */

@@ -15052,3 +15052,4 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
 .acct-nk.is-warn { border-color: color-mix(in srgb, var(--c-gold) 55%, transparent);
                    background: color-mix(in srgb, var(--c-gold) 12%, transparent); }
 .acct-nk.is-warn b { color: var(--c-gold); }
+.bootrow .bootbig { opacity: .75; direction: ltr; }
