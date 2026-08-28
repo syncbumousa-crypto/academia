@@ -23305,7 +23305,12 @@
         if (p.srv) return false;                              /* وافدٌ من جذبٍ سابق */
         if (p.me) return true;                                /* أصلي: لا يُمَسّ */
         if (p.id && srvIds.has(p.id)) { cut++; return false; }        /* هي هي بعينها */
-        if (p.uid && srvBy[p.uid + '|' + sec]) { cut++; return false; }  /* لصاحبها أصلٌ هناك */
+        /* ===== ولا يُطرح ما لن يُحقن بدلَه =====
+           الطرحُ يقع قبل الحقن، والحقنُ يتخطّى ما ختمُه ختمي («عندي أصلُها»).
+           فلو طُرحت نسختي ثمّ تُخطّيَت لَذهبت بينهما — وهو ما وقع: رزمةُ
+           بطائقَ كاملةٌ غابت عن شاشة صاحبها وهي سالمةٌ على الخادم.
+           فما ختمُه ختمي لا يُطرح ههنا: بدلُه لن يجيء. */
+        if (p.uid && p.uid !== state.uid && srvBy[p.uid + '|' + sec]) { cut++; return false; }
         if (siteCoverSec[sec] && isSiteCover(p)) { cut++; return false; } /* بذرةٌ نزلت لأصلها */
         return true;
       });
@@ -23327,7 +23332,24 @@
            فتُصالَح ههنا: تأخذ نسختي معرّفَ أصلها فتصير تحديثًا له لا ضرّةً.
            ولا يُبدَّل معرّفُ ما بلغ الخادمَ من قبل (‎srvH‎): ذاك صفٌّ قائمٌ باسمه. */
         const mine = (info.posts[r.sec] || []).find(p => p && p.me);
-        if (mine && mine.id !== r.id && !mine.srvH) { mine.id = r.id; cut++; }
+        if (mine) {
+          if (mine.id !== r.id && !mine.srvH) { mine.id = r.id; cut++; }
+          return;                                  /* عندي أصلُها */
+        }
+        /* ===== وما ليس عندي منها شيءٌ يُستردّ =====
+           «مساهمتي عندي أصلُها» صحيحٌ ما دام لي أصل. فإن لم يكن — درجٌ جديد،
+           أو نسخةٌ ضاعت — فالخادمُ آخرُ ما بقي منها. فتُحقن وتُختم لي:
+           ‎me:true‎ بلا ‎srv‎، فتُحرَّر كما كانت وتُدفع إن بُدّلت. */
+        if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
+        info.posts[r.sec].push({
+          id: r.id, uid: r.uid, me: true, st: 'pub',
+          u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
+          likes: r.likes | 0, liked: !!r.liked,
+          ts: (r.ts || 0) * 1000 || Date.now(),
+          pin: (r.uid === SITE_UID && r.data && r.data.bookImg) ? 1 : 0,
+          data: r.data,
+        });
+        n++;
         return;
       }
       if (mineIds.has(r.id)) return;
