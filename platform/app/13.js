@@ -1003,6 +1003,7 @@
      ويُقال للزائر **ما يقدر عليه** لا ما يُمنع منه فقط: من عرف أنّ الاختبارَ مفتوحٌ
      له جرّب قبل أن يقرّر، ومن رأى بابًا وحده انصرف. */
   let authMode = 'join';
+  let authRec = '', authRecNew = false;   /* الرمزُ المعروضُ الآن — يُمحى بمغادرة الصفحة */
 
   function openAuthPage(mode) {
     authMode = mode === 'login' ? 'login' : 'join';
@@ -1010,6 +1011,46 @@
   }
 
   function renderAuthPage(el) {
+    /* ===== وجهٌ ثالثٌ: رمزُك =====
+       يُعرض بعد الإنشاء أو الاسترجاع، ولا سبيلَ إلى رؤيته بعدها — فلا يُبنى
+       على أنّ المستخدمَ سيرجع إليه. ولا زرَّ «تخطَّ» فيه: الزرُّ الوحيدُ
+       «حفظتُه»، فلا تُغادَر الصفحةُ سهوًا */
+    if (authMode === 'code') {
+      el.innerHTML = `<div class="acct-page auth-page">
+        <div class="auth-head">
+          <b class="acct-title">${T().recTitle}</b>
+          <p class="auth-can">${authRecNew ? T().recNew + ' ' : ''}${T().recWhy}</p>
+        </div>
+        <div class="rec-code" id="rec-code">${esc(authRec)}</div>
+        <div class="acct-btns">
+          <button type="button" class="acct-btn" id="rec-copy">${T().recCopy}</button>
+          <button type="button" class="acct-btn acct-btn--go" id="rec-done">${T().recSaved}</button>
+        </div>
+      </div>`;
+      return;
+    }
+    /* ===== ووجهٌ رابع: استرجاعٌ برمز ===== */
+    if (authMode === 'recover') {
+      el.innerHTML = `<div class="acct-page auth-page">
+        <div class="auth-head">
+          <b class="acct-title">${T().recFormTitle}</b>
+          <p class="auth-can">${T().recFormWhy}</p>
+        </div>
+        <label class="acct-field"><span>${T().acctEmail}</span>
+          <input class="auth-in" data-a="email" type="email" inputmode="email" placeholder="${T().acctEmailPh}"></label>
+        <label class="acct-field"><span>${T().recCodeLabel}</span>
+          <input class="auth-in rec-in" data-a="code" placeholder="${T().recCodePh}" autocapitalize="characters" spellcheck="false"></label>
+        <label class="acct-field"><span>${T().recNewPass}</span>
+          <input class="auth-in" data-a="pass" type="password" placeholder="${T().acctPasswordPh}"></label>
+        <p class="auth-err" id="auth-err" hidden></p>
+        <div class="acct-btns">
+          <button type="button" class="acct-btn acct-btn--go" id="auth-go">${T().recGo}</button>
+        </div>
+        <button type="button" class="auth-swap" id="auth-swap">${T().haveAcct}</button>
+        <p class="auth-note">${T().recLost}</p>
+      </div>`;
+      return;
+    }
     const join = authMode === 'join';
     const p = state.profile;
     el.innerHTML = `<div class="acct-page auth-page">
@@ -1028,6 +1069,7 @@
         <button type="button" class="acct-btn acct-btn--go" id="auth-go">${join ? T().joinGo : T().loginGo}</button>
       </div>
       <button type="button" class="auth-swap" id="auth-swap">${join ? T().haveAcct : T().noAcct}</button>
+      ${join ? '' : `<button type="button" class="auth-swap auth-swap--q" id="auth-forgot">${T().forgot}</button>`}
       <p class="auth-note">${AUTH_SRV ? '' : T().localAcctNote + ' '}${join ? T().noResetNote : ''}</p>
     </div>`;
   }
@@ -1173,6 +1215,8 @@
       if (r.status === 409) return T().errTaken;
       if (!r.ok) return T().errNet;
       authTake(r.j.user);
+      /* والرمزُ يُعرض قبل كلّ شيء: هو الشيءُ الوحيدُ الذي لا يُعاد */
+      if (r.j.recovery) { authRec = r.j.recovery; authRecNew = false; authMode = 'code'; }
       return '';
     }
     /* بلا خادم (‎file://‎): حسابٌ في الدرج كما كان */
@@ -1198,6 +1242,20 @@
     if (state.profile.password !== pass) return T().errPassWrong;
     state.signedIn = true;
     save(); applyAuth();
+    return '';
+  }
+
+  async function authRecover(email, code, pass) {
+    if (!AUTH_SRV) return T().errNet;
+    if ((pass || '').length < 6) return T().errPass;
+    let r;
+    try {
+      r = await authCall('recover', { email: (email || '').trim(), code: (code || '').trim(), password: pass });
+    } catch (e) { return T().errNet; }
+    if (r.status === 401) return T().errRecBad;
+    if (!r.ok) return T().errNet;
+    authTake(r.j.user);
+    if (r.j.recovery) { authRec = r.j.recovery; authRecNew = true; authMode = 'code'; }
     return '';
   }
 
@@ -1588,6 +1646,25 @@
   $('#panel-account').addEventListener('click', e => {
     /* ===== وجهُ الباب ===== */
     if (e.target.closest('#auth-swap')) { openAuthPage(authMode === 'join' ? 'login' : 'join'); return; }
+    if (e.target.closest('#auth-forgot')) { openAuthPage('recover'); return; }
+    if (e.target.closest('#rec-copy')) {
+      const b = e.target.closest('#rec-copy');
+      /* والنسخُ قد يُمنع (سياقٌ غيرُ آمنٍ أو إذنٌ مرفوض) — فيُحدَّد النصُّ ليُنسخ بيد */
+      const done = () => { b.textContent = T().recCopied; setTimeout(() => { b.textContent = T().recCopy; }, 1600); };
+      if (navigator.clipboard) navigator.clipboard.writeText(authRec).then(done, () => {});
+      const el = $('#rec-code');
+      if (el && window.getSelection) {
+        const rg = document.createRange(); rg.selectNodeContents(el);
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+      }
+      if (!navigator.clipboard) done();
+      return;
+    }
+    if (e.target.closest('#rec-done')) {
+      authRec = ''; authRecNew = false; authMode = 'login';
+      openAcctPage();   /* صار عضوًا، فصفحةُ الحساب هي ما يُعرض */
+      return;
+    }
     if (e.target.closest('#auth-go')) {
       const v = a => { const i = $(`.auth-in[data-a="${a}"]`); return i ? i.value : ''; };
       /* والزرُّ يُقفل ويقول «لحظة»: الطلبُ يعبر الشبكةَ الآن، وضغطتان تصنعان
@@ -1596,14 +1673,15 @@
       const was = btn.textContent;
       btn.disabled = true; btn.textContent = T().authWait;
       const mode = authMode;
-      const p = mode === 'join'
-        ? authJoin(v('name'), v('email'), v('pass'))
-        : authLogin(v('email'), v('pass'));
+      const p = mode === 'join'   ? authJoin(v('name'), v('email'), v('pass'))
+              : mode === 'recover' ? authRecover(v('email'), v('code'), v('pass'))
+              : authLogin(v('email'), v('pass'));
       Promise.resolve(p).then(err => {
         btn.disabled = false; btn.textContent = was;
         /* والخطأُ يُكتب في الصفحة لا في شريطٍ يزول: النموذجُ أمامه ويريد أن يُصلحه */
         if (err) { const b = $('#auth-err'); if (b) { b.textContent = err; b.hidden = false; } return; }
-        openAcctPage();   /* نجح: الصفحةُ نفسُها تعرض حسابَه الآن */
+        /* ووضعُ «رمزك» يُعرض أوّلًا إن وُلد رمزٌ — ثمّ صفحةُ الحساب بضغطة «حفظته» */
+        openAcctPage();
       });
       return;
     }

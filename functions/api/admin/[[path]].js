@@ -108,6 +108,36 @@ export async function onRequest({ request, env, params }) {
       return J({ ok: true, removed: (r.meta && r.meta.changes) || 0 });
     }
 
+    /* ---------- رمزُ استرجاعٍ جديدٍ لمن ضاع منه ----------
+       البابُ الثاني: لا بريدَ في المشروع، فمن ضاع منه رمزُه ونسي كلمتَه
+       يُراجع صاحبَ الموقع. ويُردّ الرمزُ **مرّةً ههنا** فيُسلَّم إليه بيده.
+       ولا يُبدَّل سرُّه: الرمزُ يُمكّنه أن يضع سرَّه بنفسه، فلا يمرّ سرُّه بأحد. */
+    if (path === 'newcode' && m === 'POST') {
+      let b = {};
+      try { b = await request.json(); } catch (e) { return J({ error: 'body' }, 400); }
+      const uid = String(b.uid || '').trim();
+      if (!uid) return J({ error: 'uid' }, 400);
+      const t = await db.prepare('SELECT id FROM users WHERE id = ?').bind(uid).first();
+      if (!t) return J({ error: 'gone' }, 404);
+
+      const ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+      const r = crypto.getRandomValues(new Uint8Array(20));
+      let code = '';
+      for (let i = 0; i < 20; i++) {
+        code += ABC[r[i] % ABC.length];
+        if (i % 5 === 4 && i < 19) code += '-';
+      }
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(code),
+                                                'PBKDF2', false, ['deriveBits']);
+      const bits = await crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' }, key, 256);
+      const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+      await db.prepare('UPDATE users SET rec_hash = ?, rec_salt = ?, rec_iter = ?, rec_at = ? WHERE id = ?')
+        .bind(b64(bits), b64(salt), 100000, now(), uid).run();
+      return J({ ok: true, uid, recovery: code });
+    }
+
     /* ---------- منعُ حسابٍ أو رفعُ المنع ---------- */
     if (path === 'ban' && m === 'POST') {
       let b = {};

@@ -64,6 +64,27 @@ function same(a, b) {
   return d === 0;
 }
 
+/* ---------- رمزُ الاسترجاع ----------
+   ولا بريدَ في المشروع ولا خدمةَ وسيطة، فالاسترجاعُ برمزٍ يُعرض مرّةً ويُحفظ.
+   وأبجديّتُه بلا ما يلتبس في الخطّ: لا صفرَ ولا حرفَ O، ولا واحدَ ولا I ولا l —
+   فمن نسخه بيده لا يقع في حرفٍ يشبه حرفًا. وأربعُ مجموعاتٍ من خمسةٍ = مئةُ
+   بِتٍّ تقريبًا، لا يُخمَّن ولو فُتح البابُ بلا حدّ (وهو محدود). */
+const REC_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+function recCode() {
+  const r = rnd(20);
+  let out = '';
+  for (let i = 0; i < 20; i++) {
+    out += REC_ABC[r[i] % REC_ABC.length];
+    if (i % 5 === 4 && i < 19) out += '-';
+  }
+  return out;
+}
+/* ويُهيَّأ للخزن مجزَّأً — كما تُخزَّن كلمةُ السرّ سواءً بسواء */
+async function recPrep(code) {
+  const salt = rnd(16);
+  return { h: await pbkdf2(code, salt, PW_ITER), s: b64(salt), i: PW_ITER };
+}
+
 const cookie = (tok, days) =>
   `sid=${tok}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${days * 86400}`;
 
@@ -198,13 +219,55 @@ export async function onRequest(ctx) {
 
       const salt = rnd(16);
       const id = 'u' + hex(rnd(12));
+      const code = recCode();
+      const rc = await recPrep(code);
       await db.prepare(
-        `INSERT INTO users (id,email,name,img,pw_hash,pw_salt,pw_iter,verified,created,seen)
-         VALUES (?,?,?,'',?,?,?,0,?,?)`)
-        .bind(id, email, name, await pbkdf2(pw, salt, PW_ITER), b64(salt), PW_ITER, now(), now()).run();
+        `INSERT INTO users (id,email,name,img,pw_hash,pw_salt,pw_iter,verified,created,seen,
+                            rec_hash,rec_salt,rec_iter,rec_at)
+         VALUES (?,?,?,'',?,?,?,0,?,?,?,?,?,?)`)
+        .bind(id, email, name, await pbkdf2(pw, salt, PW_ITER), b64(salt), PW_ITER, now(), now(),
+              rc.h, rc.s, rc.i, now()).run();
 
       const tok = await startSession(db, id, request.headers.get('user-agent'));
-      return J({ user: { id, name, email, img: '' } }, 200, { 'set-cookie': cookie(tok, SESSION_DAYS) });
+      /* والرمزُ يُردّ **ههنا وحدَه**: لا يُخزَّن خامًا فلا يُقرأ بعدها أبدًا */
+      return J({ user: { id, name, email, img: '' }, recovery: code }, 200,
+               { 'set-cookie': cookie(tok, SESSION_DAYS) });
+    }
+
+    /* ---------- استرجاعٌ برمز ----------
+       ‎POST /api/auth/recover‎  {email, code, password}
+
+       ولا جلسةَ ولا بريدَ: من عرف الرمزَ فهو صاحبُ الحساب. ولذلك:
+         · يُقطع كلُّ جلساتِه القائمة — لعلّ الحسابَ أُخذ منه، فيُطرد الآخذ.
+         · ويُصدَر رمزٌ **جديد** ويُردّ مرّةً: المستعملُ لا يُستعمل ثانيةً.
+       ورسالةٌ واحدةٌ لكلّ فشل: التفريقُ بين «لا حسابَ» و«رمزٌ خاطئ» يُخبر
+       المجرّبَ أيُّ العناوين مسجَّل. */
+    if (path === 'recover' && m === 'POST') {
+      const b = await body(request);
+      const email = String(b.email || '').trim().toLowerCase();
+      const code = String(b.code || '').trim().toUpperCase().replace(/\s/g, '');
+      const pw = String(b.password || '');
+      if (pw.length < PW_MIN) return J({ error: 'pass' }, 400);
+
+      const u = await db.prepare('SELECT * FROM users WHERE email = ?').bind(email).first();
+      if (!u || !u.rec_hash) return J({ error: 'bad' }, 401);
+      const got = await pbkdf2(code, unb64(u.rec_salt), u.rec_iter || PW_ITER);
+      if (!same(got, u.rec_hash)) return J({ error: 'bad' }, 401);
+
+      const salt = rnd(16);
+      const fresh = recCode();
+      const rc = await recPrep(fresh);
+      await db.prepare(
+        `UPDATE users SET pw_hash = ?, pw_salt = ?, pw_iter = ?,
+                          rec_hash = ?, rec_salt = ?, rec_iter = ?, rec_at = ?
+          WHERE id = ?`)
+        .bind(await pbkdf2(pw, salt, PW_ITER), b64(salt), PW_ITER,
+              rc.h, rc.s, rc.i, now(), u.id).run();
+      await db.prepare('DELETE FROM sessions WHERE uid = ?').bind(u.id).run();
+
+      const tok = await startSession(db, u.id, request.headers.get('user-agent'));
+      return J({ user: publicUser(u), recovery: fresh }, 200,
+               { 'set-cookie': cookie(tok, SESSION_DAYS) });
     }
 
     /* ---------- دخول ---------- */
