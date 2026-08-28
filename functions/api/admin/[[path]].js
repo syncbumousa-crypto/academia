@@ -86,9 +86,10 @@ export async function onRequest({ request, env, params }) {
     /* ---------- الحسابات ---------- */
     if (path === 'users' && m === 'GET') {
       const rs = await db.prepare(
-        `SELECT id, email, name, admin, banned, created, seen,
-                (SELECT COUNT(*) FROM posts p WHERE p.uid = users.id) posts
-           FROM users ORDER BY created DESC LIMIT 200`).all();
+        `SELECT id, email, name, img, admin, banned, created, seen,
+                (SELECT COUNT(*) FROM posts p WHERE p.uid = users.id) posts,
+                (SELECT COUNT(*) FROM comments c WHERE c.uid = users.id) cmts
+           FROM users ORDER BY created DESC LIMIT 500`).all();
       return J({ users: rs.results || [] });
     }
 

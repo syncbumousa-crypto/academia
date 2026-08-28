@@ -73,7 +73,7 @@
   }
 
   /* ---------- التبويبات ---------- */
-  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'guard'];
+  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'guard', 'people'];
   $('#a-tabs').addEventListener('click', e => {
     const b = e.target.closest('button[data-tab]'); if (!b) return;
     document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
@@ -81,7 +81,98 @@
     if (b.dataset.tab === 'docs') renderDocs();
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
     if (b.dataset.tab === 'guard') guardOpen();
+    if (b.dataset.tab === 'people') peopleOpen();
     if (b.dataset.tab === 'posts') whoPaint();   /* ويُعاد الطلاءُ لا الجلسة: whoPaint تعرف */
+  });
+
+  /* ============================================================
+     المستخدمون — مَن سجّل في الموقع
+     ============================================================
+     صورةٌ واسمٌ وبريدٌ وما صنعوا. ولا يُعرض ما لا يُحتاج: لا كلمةَ سرٍّ ولا
+     تجزئتَها، ولا رمزَ استرجاع، ولا جلساتٍ ولا أجهزة — تلك أسرارُهم لا أخبارُهم.
+     والنقطةُ نفسُها لا تردّها أصلًا، فالسترُ في الخادم لا في الشاشة.
+
+     ===== ومن لا صورةَ له يُرسم له حرفُه =====
+     مربّعٌ خاوٍ يجعل الصفَّ ناقصًا، والحرفُ الأوّلُ في دائرةٍ يميّز الوجوهَ في
+     قائمةٍ طويلةٍ بلا أن يدّعي صورةً ليست له. */
+  let people = [];
+
+  const pAv = function (u) {
+    if (u.img) return '<img class="p-av" src="' + gEsc(u.img) + '" alt="">';
+    var ch = (u.name || u.email || '؟').trim().charAt(0);
+    return '<span class="p-av p-av--tx">' + gEsc(ch) + '</span>';
+  };
+  const pDate = function (ts) {
+    if (!ts) return '—';
+    var d = new Date(ts * 1000);
+    return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+  };
+
+  async function peopleOpen() {
+    const gate = $('#p-gate'), body = $('#p-body');
+    gate.hidden = false; body.hidden = true;
+    gate.textContent = 'جارٍ السؤال…';
+    const r = await gAsk('users');
+    if (!r.ok) {
+      gate.innerHTML = r.status === 404
+        ? 'هذا البابُ لصاحب الموقع. افتح تاب «الإشراف» أوّلًا، أو سجّل دخولك بحسابٍ له صلاحيةُ الإشراف.'
+        : 'تعذّر الوصول إلى الخادم.';
+      return;
+    }
+    gate.hidden = true; body.hidden = false;
+    people = r.j.users || [];
+    peoplePaint('');
+  }
+
+  function peoplePaint(q) {
+    q = (q || '').trim().toLowerCase();
+    const list = q
+      ? people.filter(u => ((u.name || '') + ' ' + (u.email || '')).toLowerCase().indexOf(q) > -1)
+      : people;
+    $('#p-count').textContent = q
+      ? list.length + ' من ' + people.length
+      : people.length + (people.length === 1 ? ' مستخدم' : ' مستخدمًا');
+    if (!list.length) {
+      $('#p-grid').innerHTML = '<p class="g-empty">' + (q ? 'لا أحدَ يطابق البحث.' : 'ما سجّل أحدٌ بعد.') + '</p>';
+      return;
+    }
+    $('#p-grid').innerHTML = list.map(u => `<div class="p-card">
+      ${pAv(u)}
+      <div class="p-who">
+        <b class="p-nm">${gEsc(u.name || '—')}</b>
+        ${u.admin ? '<span class="g-chip g-chip--boss">مشرف</span>' : ''}
+        ${u.banned ? '<span class="g-chip g-chip--ban">ممنوع</span>' : ''}
+        <button type="button" class="p-mail" data-mail="${gEsc(u.email)}" title="انسخ البريد">${gEsc(u.email)}</button>
+        <span class="p-meta">${u.posts | 0} مساهمة · ${u.cmts | 0} تعليق · سجّل ${pDate(u.created)}</span>
+      </div>
+    </div>`).join('');
+  }
+
+  $('#a-panel-people').addEventListener('input', e => {
+    if (e.target.id === 'p-find') peoplePaint(e.target.value);
+  });
+
+  $('#a-panel-people').addEventListener('click', async e => {
+    /* والبريدُ يُنسخ بالنقر عليه: هو ما يُبلَّغ به من سجّل */
+    const one = e.target.closest('[data-mail]');
+    if (one) {
+      const was = one.textContent;
+      try { await navigator.clipboard.writeText(one.dataset.mail); } catch (er) { /* يُحدَّد بيد */ }
+      one.textContent = 'نُسخ ✓';
+      setTimeout(() => { one.textContent = was; }, 1200);
+      return;
+    }
+    const all = e.target.closest('#p-copy');
+    if (all) {
+      /* والمعروضُ لا الكلُّ: من بحث أراد ما بحث عنه */
+      const q = ($('#p-find').value || '').trim().toLowerCase();
+      const list = q ? people.filter(u => ((u.name || '') + ' ' + (u.email || '')).toLowerCase().indexOf(q) > -1) : people;
+      const txt = list.map(u => u.email).filter(Boolean).join(', ');
+      try { await navigator.clipboard.writeText(txt); } catch (er) { /* لا حافظة */ }
+      all.textContent = 'نُسخ ' + list.length + ' ✓';
+      setTimeout(() => { all.textContent = 'انسخ البُرُد'; }, 1600);
+      return;
+    }
   });
 
   /* ---------- مَن أنت داخل المكتبة؟ ----------
