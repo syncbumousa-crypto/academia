@@ -1,0 +1,780 @@
+[
+  {
+    "results": [
+      {
+        "code": "ACCT 110",
+        "ar": "محاسبة 110",
+        "full": "مبادئ المحاسبة المالية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 210",
+        "ar": "محاسبة 210",
+        "full": "المحاسبة الإدارية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 300",
+        "ar": "محاسبة 300",
+        "full": "Accounting Information Systems",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "ACCT 301",
+        "ar": "محاسبة 301",
+        "full": "Intermediate Accounting I",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 302",
+        "ar": "محاسبة 302",
+        "full": "Intermediate Accounting II",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 321",
+        "ar": "محاسبة 321",
+        "full": "Data Analytics for Accounting",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 403",
+        "ar": "محاسبة 403",
+        "full": "Advanced Accounting",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 407",
+        "ar": "محاسبة 407",
+        "full": "Financial Statement Analysis",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ACCT 410",
+        "ar": "محاسبة 410",
+        "full": "Cost Accounting",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "BUS 200",
+        "ar": "أعمال 200",
+        "full": "الأعمال وريادة الأعمال",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "CGS 392",
+        "ar": "مهارات 392",
+        "full": "المهارات المهنية",
+        "h": 1,
+        "lab": 1
+      },
+      {
+        "code": "COE 292",
+        "ar": "هندسة حاسب 292",
+        "full": "مقدمة في الذكاء الاصطناعي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "COE 344",
+        "ar": "هندسة حاسب 344",
+        "full": "أساسيات اتصالات الحاسب",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "COE 401",
+        "ar": "هندسة حاسب 401",
+        "full": "Modeling & Simulation of Computer & Network Systems",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "COE 484",
+        "ar": "هندسة حاسب 484",
+        "full": "Introduction to Robotics",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "COE 487",
+        "ar": "هندسة حاسب 487",
+        "full": "Computer Vision Processing",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ECON 101",
+        "ar": "اقتصاد 101",
+        "full": "مبادئ الاقتصاد الجزئي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ECON 102",
+        "ar": "اقتصاد 102",
+        "full": "مبادئ الاقتصاد الكلي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ECON 306",
+        "ar": "اقتصاد 306",
+        "full": "اقتصاد المملكة",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ECON 405",
+        "ar": "اقتصاد 405",
+        "full": "Introduction to Econometrics",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ECON 475",
+        "ar": "اقتصاد 475",
+        "full": "Energy Markets, Policies & Regulations",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ENGL 101",
+        "ar": "انجليزي 101",
+        "full": "مهارات الخطاب الأكاديمي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ENGL 102",
+        "ar": "انجليزي 102",
+        "full": "مهارات الكتابة الجدلية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ENGL 214",
+        "ar": "انجليزي 214",
+        "full": "التواصل الأكاديمي والمهني",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ENTR 410",
+        "ar": "ريادة 410",
+        "full": "Video Game Entrepreneurship",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 250",
+        "ar": "مالية 250",
+        "full": "الإدارة المالية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 315",
+        "ar": "مالية 315",
+        "full": "Corporate Finance",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 320",
+        "ar": "مالية 320",
+        "full": "Investments",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 415",
+        "ar": "مالية 415",
+        "full": "Management of Financial Institutions",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 421",
+        "ar": "مالية 421",
+        "full": "Security Analysis & Portfolio Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "FIN 425",
+        "ar": "مالية 425",
+        "full": "Financial Modeling",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 318",
+        "ar": "عام 318",
+        "full": "World Civilizations",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 321",
+        "ar": "عام 321",
+        "full": "Principles of Human Behavior",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 332",
+        "ar": "عام 332",
+        "full": "Principles of Sociology",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 342",
+        "ar": "عام 342",
+        "full": "International Relations",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 355",
+        "ar": "عام 355",
+        "full": "Cultural Anthropology",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 420",
+        "ar": "عام 420",
+        "full": "Personality Psychology",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 424",
+        "ar": "عام 424",
+        "full": "Business Psychology",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 426",
+        "ar": "عام 426",
+        "full": "Social Psychology",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 434",
+        "ar": "عام 434",
+        "full": "Mass Media & Society",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 437",
+        "ar": "عام 437",
+        "full": "Work and Society",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 447",
+        "ar": "عام 447",
+        "full": "Globalization",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 454",
+        "ar": "عام 454",
+        "full": "Anthropology of Travel",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 456",
+        "ar": "عام 456",
+        "full": "Science, Technology & Society",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 457",
+        "ar": "عام 457",
+        "full": "Social Networks",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 494",
+        "ar": "عام 494",
+        "full": "Special Topics I",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 495",
+        "ar": "عام 495",
+        "full": "Special Topics II",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "GS 496",
+        "ar": "عام 496",
+        "full": "Special Topics III",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "HRM 301",
+        "ar": "موارد 301",
+        "full": "Human Resources Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "HRM 390",
+        "ar": "موارد 390",
+        "full": "Performance Appraisal & Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "HRM 401",
+        "ar": "موارد 401",
+        "full": "Staffing & Selection",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "HRM 402",
+        "ar": "موارد 402",
+        "full": "Training & Development",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "IAS 111",
+        "ar": "اسلامي 111",
+        "full": "العقيدة وأثرها",
+        "h": 2,
+        "lab": 0
+      },
+      {
+        "code": "IAS 212",
+        "ar": "اسلامي 212",
+        "full": "الأخلاق المهنية والحوكمة",
+        "h": 2,
+        "lab": 0
+      },
+      {
+        "code": "IAS 321",
+        "ar": "اسلامي 321",
+        "full": "Effective Language Communication",
+        "h": 2,
+        "lab": 0
+      },
+      {
+        "code": "IAS 322",
+        "ar": "اسلامي 322",
+        "full": "Human Rights in Islam",
+        "h": 2,
+        "lab": 0
+      },
+      {
+        "code": "IAS 330",
+        "ar": "اسلامي 330",
+        "full": "Introduction to Justice & Law",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "IAS 430",
+        "ar": "اسلامي 430",
+        "full": "Jurisprudence of Entrepreneurship",
+        "h": 2,
+        "lab": 0
+      },
+      {
+        "code": "ICS 104",
+        "ar": "حاسب 104",
+        "full": "مقدمة في البرمجة (Python و C)",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "ICS 108",
+        "ar": "حاسب 108",
+        "full": "Object Oriented Programming",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "ICS 474",
+        "ar": "حاسب 474",
+        "full": "Big Data Analytics",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ICS 487",
+        "ar": "حاسب 487",
+        "full": "Intelligent Decision Support System",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ISE 291",
+        "ar": "صناعية 291",
+        "full": "مقدمة في علم البيانات",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "ISE 496",
+        "ar": "صناعية 496",
+        "full": "Industrial Strategic Planning & Balanced Scorecard",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MATH 105",
+        "ar": "رياضيات 105",
+        "full": "الرياضيات المنتهية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MATH 106",
+        "ar": "رياضيات 106",
+        "full": "التفاضل والتكامل التطبيقي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 301",
+        "ar": "إدارة 301",
+        "full": "Principles of Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 310",
+        "ar": "إدارة 310",
+        "full": "السلوك التنظيمي",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 311",
+        "ar": "إدارة 311",
+        "full": "البيئة القانونية للأعمال",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 313",
+        "ar": "إدارة 313",
+        "full": "International Legal Environment",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 355",
+        "ar": "إدارة 355",
+        "full": "مناهج بحث الأعمال",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 430",
+        "ar": "إدارة 430",
+        "full": "Organizational Leadership",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 440",
+        "ar": "إدارة 440",
+        "full": "International Business",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 449",
+        "ar": "إدارة 449",
+        "full": "الإدارة الإستراتيجية",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MGT 450",
+        "ar": "إدارة 450",
+        "full": "Management of Innovation & Change",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 250",
+        "ar": "نظم 250",
+        "full": "مبادئ نظم المعلومات الإدارية",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "MIS 300",
+        "ar": "نظم 300",
+        "full": "Fundamentals of Electronic Commerce",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 301",
+        "ar": "نظم 301",
+        "full": "تحليل وتصميم النظم",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "MIS 311",
+        "ar": "نظم 311",
+        "full": "إدارة بيانات الأعمال",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "MIS 315",
+        "ar": "نظم 315",
+        "full": "MIS Innovation and New Technologies",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "MIS 341",
+        "ar": "نظم 341",
+        "full": "Introduction to Data Analytics",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "MIS 365",
+        "ar": "نظم 365",
+        "full": "Blockchain Fundamentals in Business",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 380",
+        "ar": "نظم 380",
+        "full": "IS Security",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 393",
+        "ar": "نظم 393",
+        "full": "التحول الرقمي في الأعمال",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 398",
+        "ar": "نظم 398",
+        "full": "التدريب التعاوني",
+        "h": 6,
+        "lab": 0
+      },
+      {
+        "code": "MIS 399",
+        "ar": "نظم 399",
+        "full": "التدريب الصيفي",
+        "h": 1,
+        "lab": 0
+      },
+      {
+        "code": "MIS 405",
+        "ar": "نظم 405",
+        "full": "إدارة مشاريع نظم المعلومات",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 442",
+        "ar": "نظم 442",
+        "full": "Data Analytics Applications",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MIS 477",
+        "ar": "نظم 477",
+        "full": "مشروع التخرّج ١",
+        "h": 0,
+        "lab": 0
+      },
+      {
+        "code": "MIS 478",
+        "ar": "نظم 478",
+        "full": "مشروع التخرّج ٢",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 250",
+        "ar": "تسويق 250",
+        "full": "مبادئ التسويق",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 345",
+        "ar": "تسويق 345",
+        "full": "Marketing Research",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 360",
+        "ar": "تسويق 360",
+        "full": "Product & Brand Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 370",
+        "ar": "تسويق 370",
+        "full": "Integrated Marketing Communications",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 420",
+        "ar": "تسويق 420",
+        "full": "International Marketing",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 485",
+        "ar": "تسويق 485",
+        "full": "Digital Marketing",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "MKT 490",
+        "ar": "تسويق 490",
+        "full": "Business-to-Business Marketing",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "OM 210",
+        "ar": "عمليات 210",
+        "full": "إدارة العمليات",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "OM 311",
+        "ar": "عمليات 311",
+        "full": "تحليلات الأعمال",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "OM 421",
+        "ar": "عمليات 421",
+        "full": "Procurement and Suppliers Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "OM 423",
+        "ar": "عمليات 423",
+        "full": "Logistics and Transportation Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "OM 430",
+        "ar": "عمليات 430",
+        "full": "Supply Chain Management",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "PE 101",
+        "ar": "لياقة 101",
+        "full": "اللياقة والصحة",
+        "h": 1,
+        "lab": 0
+      },
+      {
+        "code": "STAT 214",
+        "ar": "احصاء 214",
+        "full": "الأساليب الإحصائية للأعمال",
+        "h": 4,
+        "lab": 1
+      },
+      {
+        "code": "SWE 206",
+        "ar": "برمجيات 206",
+        "full": "Introduction to Software Engineering",
+        "h": 3,
+        "lab": 1
+      },
+      {
+        "code": "SWE 216",
+        "ar": "برمجيات 216",
+        "full": "Software Requirements Engineering",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "SWE 422",
+        "ar": "برمجيات 422",
+        "full": "Usability Engineering",
+        "h": 3,
+        "lab": 0
+      },
+      {
+        "code": "SWE 463",
+        "ar": "برمجيات 463",
+        "full": "Mobile Application Development",
+        "h": 3,
+        "lab": 0
+      }
+    ],
+    "success": true,
+    "meta": {
+      "served_by": "v3-prod",
+      "served_by_region": "WEUR",
+      "served_by_colo": "AMS",
+      "served_by_primary": true,
+      "timings": {
+        "sql_duration_ms": 0.9053
+      },
+      "duration": 0.9053,
+      "changes": 0,
+      "last_row_id": 0,
+      "changed_db": false,
+      "size_after": 2002944,
+      "rows_read": 108,
+      "rows_written": 0,
+      "total_attempts": 1
+    }
+  }
+]
