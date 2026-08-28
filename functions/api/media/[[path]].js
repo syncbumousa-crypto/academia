@@ -1,0 +1,116 @@
+/* ============================================================
+   ‎/api/media‎ — بِتاتُ الصور المنشورة (م٤ من ROADMAP-SERVER)
+   ============================================================
+     POST /api/media        ⇐ يرفع صورةً (المتنُ بِتاتٌ خام، والنوعُ في الترويسة)
+                              يردّ ‎{k, url}‎ — والجلسةُ شرط
+     GET  /api/media/<k>    ⇐ يُقدّمها للجميع بلا جلسة
+
+   ===== المفتاحُ هو المحتوى =====
+   ‎k = sha256(bytes)‎. فثلاثُ ثمرات:
+     · الصورةُ الواحدةُ تُخزَّن مرّةً مهما نشرها من نشر.
+     · ورفعُها ثانيةً لا يكتب شيئًا — يُردّ المفتاحُ نفسُه ويُغلق الطلب.
+     · والعنوانُ **أبديّ**: محتوًى لا يتغيّر تحت مفتاحٍ لا يتغيّر، فيُخبَّأ سنةً
+       بلا خوفٍ من قديمٍ يُقدَّم مكان جديد.
+
+   ===== ولا يُصدَّق النوعُ المرسَل =====
+   ‎Content-Type‎ يكتبه المرسِل، فقد يقول «صورة» ويرسل سكربتًا. فتُقرأ **البِتاتُ
+   الأولى** ويُستخرج النوعُ منها (توقيعُ الملفّ)، وما لم يُعرف يُردّ. ثمّ يُقدَّم
+   بـ‎nosniff‎ فلا يُعيد المتصفّحُ تخمينَه.
+
+   ===== وموضعُ البِتات يُبدَّل ولا يُمسّ العميل =====
+   ‎mediaPut‎ و‎mediaGet‎ وحدَهما تعرفان أين تسكن. اليومَ ‎D1‎، وغدًا ‎R2‎ متى
+   فُعِّل — والمفتاحُ والعنوانُ والعميلُ لا يتغيّر منها شيء. */
+
+const J = (o, s = 200) => new Response(JSON.stringify(o), {
+  status: s, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
+});
+
+const MAX = 1024 * 1024;          /* ميجابايتٌ للصورة — وأكبرُ ما في المجموعة ٣٥٤ك */
+const enc = new TextEncoder();
+const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+const now = () => Math.floor(Date.now() / 1000);
+const sha256 = async b => hex(await crypto.subtle.digest('SHA-256', b));
+const sha256s = async s => hex(await crypto.subtle.digest('SHA-256', enc.encode(s)));
+
+async function session(db, req) {
+  const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)sid=([^;]+)/);
+  if (!m) return null;
+  return await db.prepare('SELECT uid FROM sessions WHERE th = ? AND expires > ?')
+    .bind(await sha256s(m[1]), now()).first();
+}
+
+/* ---------- النوعُ من التوقيع لا من الترويسة ---------- */
+function sniff(u8) {
+  const b = u8;
+  if (b.length > 8 && b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) return 'image/png';
+  if (b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return 'image/jpeg';
+  if (b.length > 6 && b[0] === 0x47 && b[1] === 0x49 && b[2] === 0x46) return 'image/gif';
+  if (b.length > 12 && b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46
+      && b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50) return 'image/webp';
+  return null;                    /* SVG لا يُقبل: نصٌّ يُنفَّذ لا صورةٌ تُعرض */
+}
+
+/* ---------- والبِتاتُ تعود مصفوفةَ أرقامٍ لا بِتات ----------
+   ‎D1‎ تُخزّن ‎BLOB‎ صحيحًا (قِيس: ‎TYPEOF=blob‎ و‎LENGTH=15079‎) لكنّها تردّه إلى
+   جافاسكربت **مصفوفةَ أرقام**. و‎new Response(array)‎ متنُه خاوٍ — بلا خطأٍ ولا
+   صياح: ترويسةٌ صحيحةٌ وصفرُ بايت. فيُحوَّل صراحةً.
+   ويُقبل الشكلان: مصفوفةً كما تردّ ‎D1‎، أو ‎ArrayBuffer‎ كما يردّ ‎R2‎ غدًا. */
+function asBytes(v) {
+  if (!v) return new Uint8Array(0);
+  if (v instanceof ArrayBuffer) return new Uint8Array(v);
+  if (ArrayBuffer.isView(v)) return new Uint8Array(v.buffer, v.byteOffset, v.byteLength);
+  if (Array.isArray(v)) return Uint8Array.from(v);
+  return new Uint8Array(0);
+}
+
+/* ---------- موضعُ البِتات: هنا وحدَه يُعرف ---------- */
+const mediaGet = (db, k) => db.prepare('SELECT mime, bytes FROM media WHERE k = ?').bind(k).first();
+const mediaPut = (db, k, mime, u8, uid) =>
+  db.prepare('INSERT INTO media (k, mime, size, bytes, uid, ts) VALUES (?,?,?,?,?,?)')
+    .bind(k, mime, u8.length, u8.buffer, uid, now()).run();
+
+export async function onRequest({ request, env, params }) {
+  const db = env.DB;
+  if (!db) return J({ error: 'no-db' }, 503);
+  const seg = (Array.isArray(params.path) ? params.path : [params.path || '']).filter(Boolean);
+
+  try {
+    /* ---------- تقديم ---------- */
+    if (request.method === 'GET') {
+      const k = (seg[0] || '').toLowerCase();
+      if (!/^[a-f0-9]{64}$/.test(k)) return J({ error: 'key' }, 400);
+      const row = await mediaGet(db, k);
+      if (!row) return J({ error: 'gone' }, 404);
+      return new Response(asBytes(row.bytes), {
+        headers: {
+          'content-type': row.mime,
+          /* أبديّ: المفتاحُ هو المحتوى، فلا يتبدّل تحته شيء */
+          'cache-control': 'public, max-age=31536000, immutable',
+          'x-content-type-options': 'nosniff',
+        },
+      });
+    }
+
+    if (request.method !== 'POST') return J({ error: 'method' }, 405);
+
+    /* ---------- رفع ---------- */
+    const s = await session(db, request);
+    if (!s) return J({ error: 'auth' }, 401);
+
+    const buf = await request.arrayBuffer();
+    if (!buf || !buf.byteLength) return J({ error: 'empty' }, 400);
+    if (buf.byteLength > MAX) return J({ error: 'too-big', max: MAX, got: buf.byteLength }, 413);
+
+    const u8 = new Uint8Array(buf);
+    const mime = sniff(u8);
+    if (!mime) return J({ error: 'type' }, 415);
+
+    const k = await sha256(buf);
+    const had = await db.prepare('SELECT k FROM media WHERE k = ?').bind(k).first();
+    if (!had) await mediaPut(db, k, mime, u8, s.uid);
+    return J({ k, url: '/api/media/' + k, mime, size: buf.byteLength, fresh: !had });
+  } catch (e) {
+    console.error('media:', e && e.message);
+    return J({ error: 'server' }, 500);
+  }
+}

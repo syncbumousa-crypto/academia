@@ -8120,7 +8120,15 @@
            من أجلها طُرح ‎src‎ أصلًا: لا يموت بإغلاق المتصفّح، ويعمل على ‎file://‎ و‎localhost‎ معًا.
            ولولا استثناؤه لَعُرضت البطاقة سليمةً ثمّ محا أوّلُ تعديلٍ صورَها بلا خبر — والمنقّي
            يمرّ على البطاقة كلَّ حفظة. والقيدُ ضيّقٌ عمدًا: هذا المجلّد وحدَه، لا كلُّ مسارٍ نسبيّ */
-        const rsrc = ch.tagName === 'IMG' && /^\.\.\/assets\/cards\/[^"'<>]+$/.test(cSrc) ? cSrc : null;
+        /* ===== وخامسةٌ: صورةٌ من مستودع الخادم (‎/api/media/<تجزئة>‎) =====
+           تجيء في مساهمةٍ نشرها غيرُك. وعنوانٌ مطلقٌ ثابتٌ لا يموت بإغلاق المتصفّح،
+           والمفتاحُ تجزئةُ محتواه فلا يتبدّل تحته شيء. ولولا استثناؤه ههنا لَعُرضت
+           المساهمةُ سليمةً ثمّ محا أوّلُ حفظةٍ صورَها — والمنقّي يمرّ في كلّ حفظة.
+           والقيدُ ضيّقٌ عمدًا: هذا الشكلُ وحدَه بستّينَ حرفًا من ستّةَ عشرَ رمزًا،
+           لا كلُّ عنوانٍ مطلق. */
+        const rsrc = ch.tagName === 'IMG'
+          && (/^\.\.\/assets\/cards\/[^"'<>]+$/.test(cSrc) || /^\/api\/media\/[a-f0-9]{64}$/.test(cSrc))
+          ? cSrc : null;
         /* واسمُ ملفّ الصورة يبقى معها: منه يُبنى اسمُ البطاقة (ROADMAP-CARD-NAMES)، وهو
            وحدَه ما لا يُشتقّ من البِتات — فلو مُحي مع سائر السمات لَذهب اسمُ البطاقة
            أوّلَ مرورٍ بالمنقّي، وهو خبرٌ عنها لا زينة */
@@ -21813,6 +21821,90 @@
     return h.toString(36) + ':' + s.length;
   }
 
+  /* ============================================================
+     تجهيزُ الصور قبل النشر (م٤)
+     ============================================================
+     صورةُ البطاقة تسكن أحدَ ثلاثة، ولكلٍّ حكمٌ عند النشر:
+       ‎data-mid‎          بِتاتُها في ‎IndexedDB‎ عندي وحدي — **لا تسافر**، فيرى
+                          القارئُ فراغًا. وهذي كانت علّةً في م٢ لا حدَّ حجم.
+       ‎src="data:…"‎      تسافر لكنّها تُضخّم المتنَ حتى يُردّ لتجاوزه الحدّ.
+       ‎src="../assets/…"‎ ملفٌّ في الموقع عند الجميع — تُترك كما هي.
+     فالأوّلان يُرفعان إلى المستودع ويصيران ‎/api/media/<تجزئة>‎.
+
+     ===== ولا يُمَسّ ما في درجك =====
+     التحويلُ يقع على **نسخةٍ** تُرسل، وبطاقتُك عندك تبقى على ‎data-mid‎ — أخفَّ
+     وأسرعَ ولا تحتاج شبكةً لتُعرض. فالنشرُ لا يغيّر ما تملك.
+
+     ===== والصورةُ الواحدةُ تُرفع مرّةً =====
+     المفتاحُ تجزئةُ البِتات، فرفعُها ثانيةً يردّ المفتاحَ نفسَه بلا كتابة. وتُحفظ
+     خارطةُ ‎mid ⇐ مفتاح‎ في الجلسة فلا يُعاد الرفعُ في النشرة الواحدة أصلًا. */
+  const medMap = new Map();          /* mid أو data: ⇐ /api/media/… (لهذه الجلسة) */
+
+  async function medUp(blob) {
+    const r = await fetch((ASSET_BASE ? new URL('api/media', ASSET_BASE).href
+                                      : location.origin + '/api/media'), {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
+    });
+    if (!r.ok) return null;
+    const j = await r.json().catch(() => null);
+    return j && j.url ? j.url : null;
+  }
+
+  const dataToBlob = d => {
+    const i = d.indexOf(','); if (i < 0) return null;
+    const type = (d.slice(0, i).match(/data:([^;]+)/) || [])[1] || 'image/png';
+    const bin = atob(d.slice(i + 1));
+    const u = new Uint8Array(bin.length);
+    for (let j = 0; j < bin.length; j++) u[j] = bin.charCodeAt(j);
+    return new Blob([u], { type: type });
+  };
+
+  /* يمشي على متن HTML ويردّه بعد تبديل الصور — أو كما هو إن لم يكن فيه شيء */
+  async function medHTML(html) {
+    if (typeof html !== 'string' || html.indexOf('<img') < 0) return html;
+    const box = document.createElement('div');
+    box.innerHTML = html;
+    const imgs = [...box.querySelectorAll('img')];
+    let hit = false;
+    for (const im of imgs) {
+      const mid = im.getAttribute('data-mid');
+      const src = im.getAttribute('src') || '';
+      if (!mid && src.indexOf('data:') !== 0) continue;      /* ملفُّ المشروع: يُترك */
+      const key = mid || src;
+      let url = medMap.get(key);
+      if (!url) {
+        let blob = null;
+        if (mid) blob = await idbMedia('readonly', mid);      /* بِتاتُها في مخزني */
+        else blob = dataToBlob(src);
+        if (!blob) continue;                                  /* غابت: تُترك كما هي */
+        url = await medUp(blob);
+        if (!url) return null;                                /* تعثّر الرفع: يُلغى النشر */
+        medMap.set(key, url);
+      }
+      im.setAttribute('src', url);
+      im.removeAttribute('data-mid');
+      hit = true;
+    }
+    return hit ? box.innerHTML : html;
+  }
+
+  /* ويُمشى على المتن كلِّه: كلُّ نصٍّ فيه ‎<img‎ يُعرض على المحوِّل.
+     ونسخةٌ عميقةٌ أوّلًا — فلا يُمَسّ ما في الدرج بحالٍ */
+  async function medPrep(data) {
+    let clone;
+    try { clone = JSON.parse(JSON.stringify(data)); } catch (e) { return data; }
+    let failed = false;
+    const walk = async v => {
+      if (typeof v === 'string') { const o = await medHTML(v); if (o === null) { failed = true; return v; } return o; }
+      if (Array.isArray(v)) { for (let i = 0; i < v.length; i++) v[i] = await walk(v[i]); return v; }
+      if (v && typeof v === 'object') { for (const k of Object.keys(v)) v[k] = await walk(v[k]); return v; }
+      return v;
+    };
+    await walk(clone);
+    return failed ? null : clone;
+  }
+
   /* ---------- الدفع ---------- */
   async function srvPush(p, code, sec) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
@@ -21825,7 +21917,10 @@
       } catch (e) { /* تُعاد في مزامنةٍ لاحقة */ }
       return;
     }
-    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts || Date.now(), data: p.data });
+    /* والصورُ تُجهَّز أوّلًا: ما لا يسافر يُرفع ويصير عنوانًا */
+    const prepped = await medPrep(p.data);
+    if (prepped === null) return;               /* تعثّر رفعُ صورة: يُعاد في مزامنةٍ لاحقة */
+    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts || Date.now(), data: prepped });
     const h = srvHash(body);
     if (p.srvH === h) return;                  /* لم يتبدّل شيء */
     try {
