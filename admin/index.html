@@ -45,6 +45,11 @@
         <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l1.6-3.2A8 8 0 1 1 21 12z"/><path d="M8.5 10h7M8.5 14h4"/></svg>
         <span>المساهمات</span>
       </button>
+      <!-- الإشراف: درعٌ لا قلمٌ ولا وسم — هذا البابُ يحرس ما كتبه الناسُ لا يكتبه -->
+      <button type="button" data-tab="guard">
+        <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.2 3.1 7.9 7.5 9 4.4-1.1 7.5-4.8 7.5-9V6z"/><path d="m9.2 12 2 2 3.6-3.8"/></svg>
+        <span>الإشراف</span>
+      </button>
       <button type="button" data-tab="time">
         <svg class="a-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3 1.8"/></svg>
         <span>المساهمات بالتاريخ</span>
@@ -223,6 +228,38 @@
     </section>
 
     <!-- ===== المساهمات: المكتبة نفسها مزروعة هنا (ترميز الموقع وسكربتاته) ===== -->
+    <!-- ============================================================
+         الإشراف — النافذةُ الوحيدةُ على الخادم
+         ============================================================
+         سائرُ ألواح اللوحة تعمل على درجِ فاتحها. وهذا وحدَه يسأل الخادمَ ويكتب
+         فيه، ولا يفتحه إلّا صاحبُ الموقع — ومن سواه يجد لوحًا يقول ذلك ولا يرى
+         شيئًا. -->
+    <section class="a-panel" id="a-panel-guard" hidden>
+      <header class="a-head">
+        <h1>الإشراف</h1>
+        <p>ما على الخادم: الحسابات والمنشورات. وأنت وحدك من يفتحه.</p>
+      </header>
+
+      <div class="g-gate" id="g-gate">جارٍ السؤال…</div>
+
+      <div id="g-body" hidden>
+        <div class="g-nums" id="g-nums"></div>
+
+        <div class="g-sec">
+          <div class="g-sec__h">
+            <h2>المنشورات</h2>
+            <button type="button" class="g-btn" id="g-reload">حدِّث</button>
+          </div>
+          <div class="g-list" id="g-posts"></div>
+        </div>
+
+        <div class="g-sec">
+          <div class="g-sec__h"><h2>الحسابات</h2></div>
+          <div class="g-list" id="g-users"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="a-panel" id="a-panel-posts" hidden>
       <header class="a-head">
         <h1>المساهمات</h1>

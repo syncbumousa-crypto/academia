@@ -243,3 +243,72 @@ html:root body { padding-inline: 0; }
   .a-side { width: auto; min-height: 0; border-inline-start: 0; border-bottom: 1px solid var(--a-line); }
   .a-tabs { flex-direction: row; flex-wrap: wrap; }
 }
+
+/* ============================================================
+   لوحُ الإشراف — النافذةُ الوحيدةُ على الخادم
+   ============================================================
+   ويلبس توكنات اللوحة نفسَها فلا يفترق عنها في جلدٍ ولا يومَ يتبدّل أحدُهما.
+   والأحمرُ (‎--a-danger‎) لا يُصرف إلّا على ما لا رجعةَ له: المحوُ والمنع. */
+.g-gate {
+  background: var(--a-paper); border: 1px solid var(--a-line); border-radius: 14px;
+  padding: 22px; text-align: center; color: var(--a-ink-soft); font-size: 14px;
+}
+.g-gate a { color: var(--a-petrol); font-weight: 700; }
+
+/* الأرقام: صفٌّ يُقرأ بالنظرة قبل أن يُقرأ الجدول */
+.g-nums { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.g-num {
+  flex: 1 1 6.5rem; background: var(--a-paper); border: 1px solid var(--a-line);
+  border-radius: 12px; padding: 12px 14px; text-align: center;
+}
+.g-num b { display: block; font-size: 20px; font-weight: 800; color: var(--a-petrol);
+           font-variant-numeric: tabular-nums; line-height: 1.2; }
+.g-num span { display: block; font-size: 11.5px; color: var(--a-ink-soft); margin-top: 2px; }
+
+.g-sec { margin-bottom: 26px; }
+.g-sec__h { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.g-sec__h h2 { font-size: 15px; font-weight: 800; margin: 0; }
+
+.g-list { display: flex; flex-direction: column; gap: 8px; }
+.g-row {
+  background: var(--a-paper); border: 1px solid var(--a-line); border-radius: 12px;
+  padding: 11px 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.g-row__m { flex: 1 1 16rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.g-row__m b { font-size: 14px; font-weight: 700; }
+.g-row__s { font-size: 11.5px; color: var(--a-ink-soft); font-variant-numeric: tabular-nums; }
+.g-by { font-size: 12px; color: var(--a-ink-soft); word-break: break-all; }
+
+.g-chip {
+  font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+  background: var(--a-petrol-soft); color: var(--a-petrol);
+}
+.g-chip--boss { background: var(--a-gold-soft); color: var(--a-ink); }
+.g-chip--ban  { background: color-mix(in srgb, var(--a-danger) 18%, transparent); color: var(--a-danger); }
+
+.g-btn {
+  font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+  padding: 6px 12px; border-radius: 9px;
+  border: 1px solid var(--a-line); background: transparent; color: var(--a-ink-soft);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.g-btn:hover { border-color: var(--a-petrol); color: var(--a-petrol); }
+.g-btn--del { color: var(--a-danger); border-color: color-mix(in srgb, var(--a-danger) 40%, transparent); }
+.g-btn--del:hover { color: var(--a-danger); border-color: var(--a-danger);
+                    background: color-mix(in srgb, var(--a-danger) 10%, transparent); }
+.g-btn[data-sure="1"] { border-color: var(--a-danger); color: var(--a-danger); }
+
+.g-empty { color: var(--a-ink-soft); font-size: 13px; margin: 0; }
+
+/* والرمزُ يُعرض في الصفّ نفسِه: نافذةٌ تُغلق سهوًا تُضيّعه، وهو يُعرض مرّةً */
+.g-code {
+  flex: 1 1 100%; margin-top: 8px; padding: 10px 12px; border-radius: 10px;
+  background: var(--a-petrol-soft); border: 1px dashed var(--a-petrol);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.g-code span {
+  direction: ltr; unicode-bidi: embed; user-select: all;
+  font-family: ui-monospace, Consolas, monospace; font-size: 14px; font-weight: 700;
+  letter-spacing: .1em; color: var(--a-petrol);
+}
+.g-code em { font-style: normal; font-size: 11.5px; color: var(--a-ink-soft); }

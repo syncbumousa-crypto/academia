@@ -73,13 +73,155 @@
   }
 
   /* ---------- التبويبات ---------- */
-  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time'];
+  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'guard'];
   $('#a-tabs').addEventListener('click', e => {
     const b = e.target.closest('button[data-tab]'); if (!b) return;
     document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
     PANELS.forEach(p => { $('#a-panel-' + p).hidden = p !== b.dataset.tab; });
     if (b.dataset.tab === 'docs') renderDocs();
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
+    if (b.dataset.tab === 'guard') guardOpen();
+  });
+
+  /* ============================================================
+     الإشراف — النافذةُ الوحيدةُ على الخادم
+     ============================================================
+     سائرُ اللوحة تعمل على درجِ فاتحها؛ وهذا البابُ يسأل الخادمَ ويكتب فيه.
+     ولا يُفتح إلّا لصاحب الموقع: الخادمُ يردّ ‎404‎ لمن سواه — لا ‎403‎، فالثانيةُ
+     تُخبر الغريبَ أنّ ههنا بابًا.
+
+     ===== ولا يُبنى شيءٌ قبل أن يُسأل =====
+     اللوحُ يبدأ بسطرٍ «جارٍ السؤال»، فإن رُدَّ قيل ذلك ولم يُرسم جدولٌ خاوٍ
+     يُوهم أنّ الموقعَ فارغٌ وإنّما البابُ مغلق.
+
+     ===== وكلُّ فعلٍ يُسأل عنه مرّتين =====
+     المحوُ والمنعُ لا رجعةَ لهما، فيُطلبان بضغطتين: الأولى تُحوّل الزرَّ إلى
+     «متأكّد؟» والثانية تُمضي. وهو نمطُ «حذف الحساب» في الموقع نفسِه. */
+  const API = '/api/admin/';
+  let gUsers = [];
+
+  const gAsk = async (path, opt) => {
+    const r = await fetch(API + path, Object.assign({ credentials: 'same-origin' }, opt || {}));
+    let j = null; try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
+    return { ok: r.ok, status: r.status, j: j || {} };
+  };
+  const gEsc = t => String(t == null ? '' : t)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const gKb = n => n < 1024 ? n + ' ب' : n < 1048576 ? (n / 1024).toFixed(0) + ' ك' : (n / 1048576).toFixed(1) + ' م';
+  const gWhen = ts => {
+    if (!ts) return '—';
+    const d = Math.floor((Date.now() / 1000 - ts) / 86400);
+    return d <= 0 ? 'اليوم' : d === 1 ? 'أمس' : d + ' يومًا';
+  };
+
+  async function guardOpen() {
+    const gate = $('#g-gate'), body = $('#g-body');
+    gate.hidden = false; body.hidden = true;
+    gate.textContent = 'جارٍ السؤال…';
+    const r = await gAsk('overview');
+    if (!r.ok) {
+      gate.innerHTML = r.status === 404
+        ? 'هذا البابُ لصاحب الموقع. سجّل دخولك في <a href="../platform/index.html">أكاديميا</a> بحسابٍ له صلاحيةُ الإشراف.'
+        : 'تعذّر الوصول إلى الخادم.';
+      return;
+    }
+    gate.hidden = true; body.hidden = false;
+    const o = r.j;
+    $('#g-nums').innerHTML = [
+      ['الحسابات', o.users], ['الممنوعون', o.banned], ['المنشورات', o.posts],
+      ['الإعجابات', o.likes], ['الصور', o.media], ['حجمها', gKb(o.mediaBytes || 0)],
+      ['الجلسات', o.sessions],
+    ].map(([k, v]) => '<div class="g-num"><b>' + gEsc(v) + '</b><span>' + k + '</span></div>').join('');
+    await Promise.all([guardPosts(), guardUsers()]);
+  }
+
+  async function guardPosts() {
+    const el = $('#g-posts');
+    const r = await gAsk('posts?limit=100');
+    const ps = r.j.posts || [];
+    if (!ps.length) { el.innerHTML = '<p class="g-empty">ما نُشر شيءٌ بعد.</p>'; return; }
+    el.innerHTML = ps.map(p => `<div class="g-row" data-pid="${gEsc(p.id)}">
+      <div class="g-row__m">
+        <b>${gEsc(p.code)}</b>
+        <span class="g-chip">${gEsc(p.sec)}</span>
+        <span class="g-by">${gEsc(p.name)}${p.banned ? ' · ممنوع' : ''}</span>
+      </div>
+      <div class="g-row__s">${gKb(p.size || 0)} · ♥ ${p.likes | 0} · ${gWhen(p.updated)}</div>
+      <button type="button" class="g-btn g-btn--del" data-del="${gEsc(p.id)}">امحُ</button>
+    </div>`).join('');
+  }
+
+  async function guardUsers() {
+    const el = $('#g-users');
+    const r = await gAsk('users');
+    gUsers = r.j.users || [];
+    el.innerHTML = gUsers.map(u => `<div class="g-row" data-uid="${gEsc(u.id)}">
+      <div class="g-row__m">
+        <b>${gEsc(u.name || '—')}</b>
+        ${u.admin ? '<span class="g-chip g-chip--boss">مشرف</span>' : ''}
+        ${u.banned ? '<span class="g-chip g-chip--ban">ممنوع</span>' : ''}
+        <span class="g-by">${gEsc(u.email)}</span>
+      </div>
+      <div class="g-row__s">${u.posts | 0} مساهمة · دخل ${gWhen(u.seen)}</div>
+      ${u.admin ? '' : `<button type="button" class="g-btn" data-code="${gEsc(u.id)}">رمز استرجاع</button>
+      <button type="button" class="g-btn ${u.banned ? '' : 'g-btn--del'}" data-ban="${gEsc(u.id)}" data-on="${u.banned ? 0 : 1}">${u.banned ? 'ارفع المنع' : 'امنع'}</button>`}
+    </div>`).join('');
+  }
+
+  /* والضغطتان: الأولى تسأل والثانية تُمضي — والسؤالُ يزول وحدَه بعد ثوانٍ */
+  function gConfirm(btn, then) {
+    if (btn.dataset.sure) { then(); return; }
+    const was = btn.textContent;
+    btn.dataset.sure = '1';
+    btn.textContent = 'متأكّد؟';
+    setTimeout(() => { if (btn.dataset.sure) { btn.dataset.sure = ''; btn.textContent = was; } }, 3500);
+  }
+
+  $('#a-panel-guard').addEventListener('click', async e => {
+    const rl = e.target.closest('#g-reload');
+    if (rl) { guardOpen(); return; }
+
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      gConfirm(del, async () => {
+        const r = await gAsk('post?id=' + encodeURIComponent(del.dataset.del), { method: 'DELETE' });
+        if (r.ok && r.j.removed) { const row = del.closest('.g-row'); if (row) row.remove(); }
+        else { del.textContent = 'تعذّر'; }
+      });
+      return;
+    }
+
+    const ban = e.target.closest('[data-ban]');
+    if (ban) {
+      gConfirm(ban, async () => {
+        const r = await gAsk('ban', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ uid: ban.dataset.ban, on: ban.dataset.on === '1' }),
+        });
+        if (r.ok) { await guardUsers(); await guardPosts(); }
+        else { ban.textContent = r.j.error === 'self' ? 'لا تمنع نفسك' : 'تعذّر'; }
+      });
+      return;
+    }
+
+    const cd = e.target.closest('[data-code]');
+    if (cd) {
+      gConfirm(cd, async () => {
+        const r = await gAsk('newcode', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ uid: cd.dataset.code }),
+        });
+        if (!r.ok) { cd.textContent = 'تعذّر'; return; }
+        /* ويُعرض في الصفّ نفسِه لا في نافذةٍ تُغلق سهوًا — ويبقى حتى تُحدَّث القائمة */
+        const row = cd.closest('.g-row');
+        const box = document.createElement('div');
+        box.className = 'g-code';
+        box.innerHTML = '<span>' + gEsc(r.j.recovery) + '</span><em>سلّمه إليه بيدك — يُعرض هنا مرّةً</em>';
+        row.appendChild(box);
+        cd.remove();
+      });
+      return;
+    }
   });
 
   /* ============================================================
