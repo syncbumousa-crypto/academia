@@ -878,15 +878,24 @@
       guestCan: 'وأنت زائر تقدر تتصفّح المكتبة وتذاكر البطائق وتختبر — واختباراتك تُسجَّل لك.',
       /* وأخطاءُ النموذج تقول أيَّ حقلٍ بالضبط: «تحقّق من بياناتك» تُبقي المستخدم يخمّن */
       errName: 'اكتب اسمك', errEmail: 'اكتب إيميلًا صحيحًا', errPass: 'كلمة المرور ٦ أحرف فأكثر',
-      errNoAcct: 'ما فيه حساب بهذا الإيميل على هذا المتصفّح', errPassWrong: 'كلمة المرور غير صحيحة',
+      /* ولا تُذكر «هذا المتصفّح» بعد اليوم: الحسابُ صار على الخادم يعبر الأجهزة.
+         وهذان النصّان لا يُريان إلّا على ‎file://‎ حيث لا خادمَ ولا عبور — لكنّ
+         نصًّا كاذبًا لا يُترك لأنّ موضعَه نادر */
+      errNoAcct: 'ما فيه حساب بهذا الإيميل', errPassWrong: 'كلمة المرور غير صحيحة',
       /* ورسائلُ الخادم: تقول ما وقع بلا أن تُفشي. «لا حساب» و«كلمةٌ خاطئة» رسالةٌ
          واحدةٌ عمدًا — التفريقُ يُخبر المهاجمَ أيُّ العناوين مسجَّلٌ عندنا */
       errBadLogin: 'الإيميل أو كلمة المرور غير صحيحة',
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
-      likeSelf: 'لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به لا يُزكّيه صاحبُه',
-      cmtSoon: 'التعليق على مساهمات غيرك قريبًا — ولا يُكتب الآن كي لا يضيع',
+      /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
+         لا يُزكّيه صاحبُه». والسببُ صحيحٌ ومكانُه التعليقُ في الشيفرة لا شريطٌ
+         يُقرأ في ثانية. فيُقال ما وقع وحدَه */
+      likeSelf: 'الإعجاب لمساهمات غيرك',
+      /* ونصّان بعد أن شُحن التعليق: الأوّلُ لإعجاب تعليقٍ وارد (لم يُبنَ بعد)،
+         والثاني لعقدةٍ من جذبٍ قديمٍ لا تحمل أصلَها — تُشفى بفتح المادّة */
+      cmtLikeSoon: 'الإعجاب بالتعليقات قريبًا',
+      cmtStale: 'حدِّث الصفحة ليصل كلامُك',
       authWait: 'لحظة…',
       /* والصدقُ في مكانه: حسابٌ في الدرج ليس حسابًا على خادم، فيُقال ولا يُخفى */
       localAcctNote: 'حسابك محفوظ في هذا المتصفّح وحده — لا يعبر إلى جهاز آخر بعد.',
@@ -1213,13 +1222,14 @@
       needAcctNookWhy: 'This is where you build your term: add your courses and follow your grades and progress. It needs an account so it stays yours.',
       guestCan: 'As a guest you can browse the library, study cards, and take exams — and your exams are recorded for you.',
       errName: 'Enter your name', errEmail: 'Enter a valid email', errPass: 'Password must be 6 characters or more',
-      errNoAcct: 'No account with this email on this browser', errPassWrong: 'Wrong password',
+      errNoAcct: 'No account with this email', errPassWrong: 'Wrong password',
       errBadLogin: 'Wrong email or password',
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
       likeSelf: 'You cannot like your own contribution',
-      cmtSoon: "Commenting on others' contributions is coming — not saved now so it is not lost",
+      cmtLikeSoon: 'Liking comments is coming',
+      cmtStale: 'Refresh the page so your comment reaches its author',
       authWait: 'One moment…',
       localAcctNote: 'Your account is stored in this browser only — it does not travel to another device yet.',
       noResetNote: 'After signing up you get a recovery code — save it. It is your only way back if you forget your password.',

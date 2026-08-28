@@ -1022,7 +1022,8 @@
       const c = cdCmtAt(clk.dataset.clk);
       if (!c) return true;
       if (!memberGate(T().needAcctLike)) return true;
-      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return true; } }
+      /* وإعجابُ تعليقٍ وارد لم يُبنَ بعد: عدُّه على الخادم كعدّ المساهمات */
+      { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtLikeSoon); return true; } }
       c.liked = !c.liked;
       c.lk = Math.max(0, (c.lk || 0) + (c.liked ? 1 : -1));
       clk.classList.toggle('on', c.liked);
@@ -1553,8 +1554,9 @@
       });
       return;
     }
-    /* وعقدةٌ موسومةٌ بلا معرّفِ مساهمة (بذرةٌ قديمة): تُترك كما كانت */
-    if (n && n.srvN) { toast(T().cmtSoon); return; }
+    /* وعقدةٌ موسومةٌ بلا معرّفِ مساهمة: جُذبت قبل أن يصير الوسمُ يحمل الأصل.
+       تُشفى بفتح المادّة من جديدٍ فيُعاد الجذب — فيُقال ذلك ولا يُكتب ما يضيع */
+    if (n && n.srvN) { toast(T().cmtStale); return; }
     /* ويُوسَم بوجهه ساعةَ يُكتب: هو الموضع الوحيد الذي يعرف في أيّ وجهٍ وقع الكلام */
     (n.cm = n.cm || []).push({ id: newId(), me: true, k: cdFaceK(), u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
@@ -1590,7 +1592,7 @@
         });
         return;
       }
-      if (nn && nn.srvN) { toast(T().cmtSoon); return; }
+      if (nn && nn.srvN) { toast(T().cmtStale); return; }
     }
     (c.rp = c.rp || []).push({ id: newId(), me: true, u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
