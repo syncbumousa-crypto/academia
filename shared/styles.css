@@ -10495,15 +10495,32 @@ html[data-lang="en"] body.side-closed .side-handle svg { transform: rotate(0deg)
 .acct-title { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-size: 17px; font-weight: 800; color: var(--c-ink); }
 .acct-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
 .acct-field > span { font-size: 12px; font-weight: 700; color: var(--c-ink-soft); }
-.acct-in {
+/* ===== وحقلُ البابِ يلبس جلدَ حقلِ الحساب =====
+   صفحةُ الدخول والإنشاء تلبس ‎.acct-page‎ عمدًا (انظر «بابُ الزائر» أسفلَه)،
+   لكنّ حقولَها سُمّيت ‎.auth-in‎ فلم يكن لها جلدٌ **أصلًا** — مربّعُ المتصفّح
+   الخام في بطاقةٍ مصمَّمة، وفي الجلد الداكن مربّعٌ أبيضُ يصيح.
+   ولا يُجمعان في الوسم (‎class="acct-in auth-in"‎): على ‎.acct-in‎ مستمعُ إدخالٍ
+   يكتب ‎state.profile[dataset.f]‎، وحقولُ الباب تحمل ‎data-a‎ لا ‎data-f‎ —
+   فيُكتب في ‎profile[undefined]‎. فيُجمعان في المُحدِّد لا في الوسم. */
+.acct-in, .auth-in {
   border: 1.5px solid var(--border); border-radius: 10px;
   background: var(--bg); color: var(--c-ink);
   padding: 9px 12px; font-family: inherit; font-size: 13.5px; outline: none;
   transition: border-color .15s;
 }
-.acct-in:focus { border-color: var(--c-kfupm); }
-.acct-in::placeholder { color: var(--placeholder); }
-.acct-in[type="tel"], .acct-in[type="email"] { direction: ltr; text-align: start; }
+.acct-in:focus, .auth-in:focus { border-color: var(--c-kfupm); }
+.acct-in::placeholder, .auth-in::placeholder { color: var(--placeholder); }
+.acct-in[type="tel"], .acct-in[type="email"],
+.auth-in[type="tel"], .auth-in[type="email"] { direction: ltr; text-align: start; }
+/* والمتصفّحُ يطلي ما ملأه بنفسه بأصفرَ ثابتٍ لا يتبع جلدًا — فيُردّ إلى التوكنات:
+   ‎-webkit-text-fill-color‎ للحبر، وظلٌّ داخليٌّ بلا نهايةٍ مكانَ الخلفيّة (الخلفيّةُ
+   نفسُها لا تُنقض في هذي الحال، والظلُّ يُقبل) */
+.acct-in:-webkit-autofill, .auth-in:-webkit-autofill,
+.acct-in:-webkit-autofill:focus, .auth-in:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--c-ink);
+  -webkit-box-shadow: 0 0 0 40px var(--bg) inset;
+  caret-color: var(--c-ink);
+}
 .acct-btns { display: flex; gap: 10px; margin-top: 22px; }
 .acct-btn {
   flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 7px;

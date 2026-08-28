@@ -1729,6 +1729,8 @@
   function siteUnclaim() {
     if (ADMIN) return;          /* اللوحةُ دارُه: فيها يملك ما يحمل اسمَه */
     const SITE = ['أكاديميا', 'academia'];
+    /* وهويّتُه لا تبقى في بروفايلي: البابُ يُبذَر منه، فكان يُفتح ممتلئًا باسمه */
+    const forgot = siteForget();
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const ps = (state.cinfo[code] || {}).posts || {};
@@ -1742,7 +1744,9 @@
       });
     });
     /* ولا يُكتب الدرجُ إن لم يتبدّل شيء: المسحُ في كلّ إقلاع، والحفظُ عند الحاجة */
-    if (n) { save(); console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا'); }
+    if (n || forgot) save();
+    if (n) console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا');
+    if (forgot) console.log('ومُحيت هويّةُ الموقع من البروفايل');
   }
 
   function seedMark() {

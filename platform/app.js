@@ -21690,11 +21690,11 @@
           <p class="auth-can">${T().recFormWhy}</p>
         </div>
         <label class="acct-field"><span>${T().acctEmail}</span>
-          <input class="auth-in" data-a="email" type="email" inputmode="email" placeholder="${T().acctEmailPh}"></label>
+          <input class="auth-in" data-a="email" type="email" inputmode="email" autocomplete="username" placeholder="${T().acctEmailPh}"></label>
         <label class="acct-field"><span>${T().recCodeLabel}</span>
-          <input class="auth-in rec-in" data-a="code" placeholder="${T().recCodePh}" autocapitalize="characters" spellcheck="false"></label>
+          <input class="auth-in rec-in" data-a="code" placeholder="${T().recCodePh}" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
         <label class="acct-field"><span>${T().recNewPass}</span>
-          <input class="auth-in" data-a="pass" type="password" placeholder="${T().acctPasswordPh}"></label>
+          <input class="auth-in" data-a="pass" type="password" autocomplete="new-password" placeholder="${T().acctPasswordPh}"></label>
         <p class="auth-err" id="auth-err" hidden></p>
         <div class="acct-btns">
           <button type="button" class="acct-btn acct-btn--go" id="auth-go">${T().recGo}</button>
@@ -21706,17 +21706,23 @@
     }
     const join = authMode === 'join';
     const p = state.profile;
+    /* ===== ولا يُملأ البابُ بهويّةِ الموقع =====
+       المربّعُ يُبذَر من الدرج تسهيلًا على العائد. و‎siteForget‎ تمسحه من الدرج،
+       لكنّ الحارسَ ههنا لازمٌ على أيّ حال: الرسمُ لا يُبنى على أنّ مسحًا سبقه.
+       ولمّا يُملأ البابُ باسمِ الموقع وبريدِه، يظنّ الزائرُ أنّ هذا حسابُه. */
+    const sName = SITE_NAMES.indexOf(p.name) > -1 ? '' : (p.name || '');
+    const sMail = p.email === SITE_MAIL ? '' : (p.email || '');
     el.innerHTML = `<div class="acct-page auth-page">
       <div class="auth-head">
         <b class="acct-title">${join ? T().joinTitle : T().loginTitle}</b>
         <p class="auth-can">${T().guestCan}</p>
       </div>
       ${join ? `<label class="acct-field"><span>${T().acctName}</span>
-        <input class="auth-in" data-a="name" value="${esc(p.name || '')}" placeholder="${T().acctNamePh}"></label>` : ''}
+        <input class="auth-in" data-a="name" value="${esc(sName)}" autocomplete="name" placeholder="${T().acctNamePh}"></label>` : ''}
       <label class="acct-field"><span>${T().acctEmail}</span>
-        <input class="auth-in" data-a="email" type="email" inputmode="email" value="${esc(p.email || '')}" placeholder="${T().acctEmailPh}"></label>
+        <input class="auth-in" data-a="email" type="email" inputmode="email" value="${esc(sMail)}" autocomplete="${join ? 'email' : 'username'}" placeholder="${T().acctEmailPh}"></label>
       <label class="acct-field"><span>${T().acctPassword}</span>
-        <input class="auth-in" data-a="pass" type="password" placeholder="${T().acctPasswordPh}"></label>
+        <input class="auth-in" data-a="pass" type="password" autocomplete="${join ? 'new-password' : 'current-password'}" placeholder="${T().acctPasswordPh}"></label>
       <p class="auth-err" id="auth-err" hidden></p>
       <div class="acct-btns">
         <button type="button" class="acct-btn acct-btn--go" id="auth-go">${join ? T().joinGo : T().loginGo}</button>
@@ -21984,6 +21990,26 @@
      ويُختم إن لم يكن (فهو نسختي الوحيدة، جاءت من الخادم). */
   const SITE_NAMES = ['أكاديميا', 'academia'];
   const SITE_UID = 'u-academia';
+  const SITE_MAIL = 'site@academia.local';
+
+  /* ---------- وهويّةُ الموقع لا تبقى في بروفايلِ زائر ----------
+     ‎authTake‎ تُلبس البروفايلَ ما ردّه الخادم — الاسمَ والبريد. فيومَ اتّخذ
+     الموقعُ الأساسيُّ جلسةَ «أكاديميا» (والكوكيُّ للأصل كلِّه) كُتب في درجه
+     ‎أكاديميا‎ و‎site@academia.local‎. ثمّ مُنع اللبسُ وبقي المكتوب — فمن جاء
+     ينشئ حسابًا وجد المربّعات ممتلئةً بهويّةٍ ليست هويّتَه.
+
+     ولا يُمحى إلّا ما هو للموقع بعينه: البريدُ حجّةٌ قاطعة، والاسمُ يُمحى معه
+     إن كان اسمَه — ومن كتب اسمَه بيده قبل أن يقع هذا يبقى اسمُه.
+     والصورةُ لا تُمَسّ: حسابُ الموقع بلا صورة، فما في الدرج صورةُ صاحبِه. */
+  function siteForget() {
+    const p = state.profile;
+    if (!p || p.email !== SITE_MAIL) return false;
+    p.email = '';
+    if (SITE_NAMES.indexOf(p.name) > -1) p.name = '';
+    p.password = '';
+    profLast = null;
+    return true;
+  }
 
   function srvClaim() {
     const me = state.uid;
@@ -22048,7 +22074,10 @@
            متسابقان على نقطةٍ واحدة. فلو تأخّر جوابُ هذي لَمحت ما أثبتته تلك،
            فوجد صاحبُ الموقع نفسَه مخرَجًا من لوحته بعد أن دخلها. */
         if (j.user.id === SITE_UID && !ADMIN) {
-          if (state.signedIn) { state.signedIn = false; state.uid = ''; save(); applyAuth(); }
+          const forgot = siteForget();   /* ولا يبقى أثرُه في بروفايلي */
+          if (state.signedIn || forgot) {
+            state.signedIn = false; state.uid = ''; save(); applyAuth();
+          }
           return;
         }
         authTake(j.user);
@@ -28035,6 +28064,8 @@
   function siteUnclaim() {
     if (ADMIN) return;          /* اللوحةُ دارُه: فيها يملك ما يحمل اسمَه */
     const SITE = ['أكاديميا', 'academia'];
+    /* وهويّتُه لا تبقى في بروفايلي: البابُ يُبذَر منه، فكان يُفتح ممتلئًا باسمه */
+    const forgot = siteForget();
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const ps = (state.cinfo[code] || {}).posts || {};
@@ -28048,7 +28079,9 @@
       });
     });
     /* ولا يُكتب الدرجُ إن لم يتبدّل شيء: المسحُ في كلّ إقلاع، والحفظُ عند الحاجة */
-    if (n) { save(); console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا'); }
+    if (n || forgot) save();
+    if (n) console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا');
+    if (forgot) console.log('ومُحيت هويّةُ الموقع من البروفايل');
   }
 
   function seedMark() {
