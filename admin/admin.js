@@ -98,14 +98,24 @@
       const r = await fetch('/api/auth/me', { credentials: 'same-origin', cache: 'no-store' });
       if (r.ok) u = (await r.json()).user;
     } catch (e) { /* لا شبكة */ }
+
+    /* ولستَ داخلًا؟ تُفتح جلسةُ الموقع نفسِه — فما يُكتب من اللوحة يُنشر باسم
+       «أكاديميا» لا باسم زائرٍ لم يكتبه. وهذا هو المقصودُ من اللوحة أصلًا:
+       المحتوى الذي يشحنه الموقعُ معه يُنسب إليه. */
+    if (!u) {
+      try {
+        const r = await fetch('/api/auth/site', { method: 'POST', credentials: 'same-origin' });
+        if (r.ok) u = (await r.json()).user;
+      } catch (e) { /* لا شبكة */ }
+    }
+
     if (u) {
       el.className = 'a-who is-in';
-      el.innerHTML = '<span class="a-who__t">أنت داخلٌ باسم <b>' + gEsc(u.name || u.email) + '</b>'
-        + ' — ما تكتبه في المكتبة يُنشر باسمك.</span>';
+      el.innerHTML = '<span class="a-who__t">تنشر باسم <b>' + gEsc(u.name || u.email) + '</b>'
+        + ' — ما تكتبه في المكتبة يظهر للناس بهذا الاسم.</span>';
     } else {
       el.className = 'a-who is-out';
-      el.innerHTML = '<span class="a-who__t">أنت زائرٌ هنا — لا تُعجب ولا تُساهم.</span>'
-        + '<a class="a-btn" href="../platform/index.html" target="_blank">سجّل دخولك في أكاديميا</a>';
+      el.innerHTML = '<span class="a-who__t">تعذّر فتحُ جلسةِ الموقع — تحقّق من اتصالك.</span>';
     }
   }
 

@@ -270,6 +270,25 @@ export async function onRequest(ctx) {
                { 'set-cookie': cookie(tok, SESSION_DAYS) });
     }
 
+    /* ---------- دخولُ الموقع بنفسه ----------
+       ‎POST /api/auth/site‎  ⇐ يفتح جلسةً باسم «أكاديميا»
+
+       تناديها لوحةُ الأدمن عند فتحها، فيصير ما يُكتب في المكتبة منشورًا باسم
+       الموقع لا باسم زائرٍ لم يكتبه — كما تُنسب الأغلفةُ والبطائقُ الأولى.
+
+       ===== وليس مشرفًا =====
+       الحسابُ ‎admin = 0‎: النشرُ باسمه شيء، وحذفُ مساهمات الناس ومنعُهم شيءٌ
+       آخر. فمن دخل به يكتب ولا يحكم — والإشرافُ يبقى على حسابك أنت.
+
+       ===== ولا كلمةَ سرَّ له =====
+       ‎pw_hash‎ خاوٍ، فلا يُبلَغ من بابِ الدخول العاديّ أبدًا. */
+    if (path === 'site' && m === 'POST') {
+      const u = await db.prepare("SELECT * FROM users WHERE id = 'u-academia'").first();
+      if (!u) return J({ error: 'no-site-account' }, 503);
+      const tok = await startSession(db, u.id, request.headers.get('user-agent'));
+      return J({ user: publicUser(u) }, 200, { 'set-cookie': cookie(tok, SESSION_DAYS) });
+    }
+
     /* ---------- دخول ---------- */
     if (path === 'login' && m === 'POST') {
       const b = await body(request);
