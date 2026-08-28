@@ -1333,6 +1333,7 @@
         + `<span>${ar ? 'مواد' : 'courses'} ${r.ci}</span>`
         + (r.in !== undefined ? `<span>${r.in ? (ar ? 'داخل' : 'in') : (ar ? 'خارج' : 'out')}</span>` : '')
         + (r.big ? `<span class="bootbig">${esc(r.big)}</span>` : '')
+        + (r.deep ? `<span class="bootbig">${esc(r.deep)}</span>` : '')
         + `<span>${Math.round((r.b || 0) / 1024)}${ar ? 'ك' : 'K'}</span>`
         + `<i>${esc((r.ev || []).join(' · '))}</i></div>`;
     };

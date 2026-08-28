@@ -168,12 +168,24 @@
        إن كان الدرجُ صغيرًا: القياسُ نفسُه ثمنٌ لا يُدفع بلا حاجة. */
     if (bootRaw > 900000) {
       try {
-        const sz = Object.keys(state).map(k => {
-          let n = 0;
-          try { n = JSON.stringify(state[k]).length; } catch (e) { n = 0; }
-          return [k, n];
-        }).sort((x, y) => y[1] - x[1]).slice(0, 3);
-        bootRow.big = sz.map(x => x[0] + ':' + Math.round(x[1] / 1024)).join(' ');
+        const wt = v => { try { return JSON.stringify(v).length; } catch (e) { return 0; } };
+        const kids = v => (v && typeof v === 'object')
+          ? (Array.isArray(v) ? v.map((x, i) => [String(i), x]) : Object.keys(v).map(k => [k, v[k]]))
+          : [];
+        const top = kids(state).map(([k, v]) => [k, wt(v)]).sort((a2, b2) => b2[1] - a2[1]).slice(0, 3);
+        bootRow.big = top.map(x => x[0] + ':' + Math.round(x[1] / 1024)).join(' ');
+        /* ===== وأثقلُ فرعٍ يُتتبَّع إلى قراره =====
+           «‎libs:833‎» يقول كم ولا يقول أين، فيبقى التخمين. فيُنزل في أثقلِ
+           ابنٍ مرّةً بعد مرّة (أربعَ طبقاتٍ تكفي) — فيُقال المسارُ بعينه.
+           والكلفةُ محتملة: أبناءُ عقدةٍ واحدةٍ في كلّ طبقةٍ لا الشجرةُ كلُّها. */
+        let node = state, path = [], depth = 0;
+        while (depth++ < 4) {
+          const ks = kids(node).map(([k, v]) => [k, wt(v)]).sort((a2, b2) => b2[1] - a2[1]);
+          if (!ks.length || ks[0][1] < 60000) break;
+          path.push(ks[0][0] + ':' + Math.round(ks[0][1] / 1024));
+          node = Array.isArray(node) ? node[+ks[0][0]] : node[ks[0][0]];
+        }
+        if (path.length) bootRow.deep = path.join(' > ');
       } catch (e) { /* لا يُعطَّل الإقلاعُ لأجل قياس */ }
     }
     const rows = bootRead_();
@@ -194,7 +206,8 @@
                        r.p === 'a' ? 'لوحة' : 'موقع', r.r,
                        'خام=' + r.b, 'أترام=' + r.tm, 'مكتبة=' + r.lb, 'مواد=' + r.ci,
                        'نسخة=' + r.bk, r.in ? 'داخل' : 'خارج',
-                       r.big || '', (r.ev || []).join(',') || ''].filter(Boolean).join(' · ');
+                       r.big || '', r.deep || '',
+                       (r.ev || []).join(',') || ''].filter(Boolean).join(' · ');
     const out = rows.map(line).join('\n');
     console.log(out);
     return out;
@@ -22295,6 +22308,7 @@
         + `<span>${ar ? 'مواد' : 'courses'} ${r.ci}</span>`
         + (r.in !== undefined ? `<span>${r.in ? (ar ? 'داخل' : 'in') : (ar ? 'خارج' : 'out')}</span>` : '')
         + (r.big ? `<span class="bootbig">${esc(r.big)}</span>` : '')
+        + (r.deep ? `<span class="bootbig">${esc(r.deep)}</span>` : '')
         + `<span>${Math.round((r.b || 0) / 1024)}${ar ? 'ك' : 'K'}</span>`
         + `<i>${esc((r.ev || []).join(' · '))}</i></div>`;
     };
