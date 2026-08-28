@@ -743,7 +743,6 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
-      if (typeof acEdited === 'function') acEdited();         /* وختمُ آخر تبديل */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
