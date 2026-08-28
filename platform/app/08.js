@@ -1542,8 +1542,18 @@
       return;
     }
     if (!memberGate(T().needAcctPost)) return;   /* التعليقُ مشاركةٌ في المساهمة */
-    /* وعقدةٌ من الخادم: كلامُك لا يبلغ صاحبَها بعد (م٣ب)، وكتابتُه في نسختك
-       تُمحى في أوّل جذب. فيُقال ولا يُكتب — والصمتُ أسوأ من المنع */
+    /* وعقدةٌ من الخادم: كلامُك يذهب إليه لا إلى نسختك — وهي تحمل معرّفَ
+       مساهمتها (‎srvP‎) فتعرف إلى أين. ثمّ يُطلى ما رجع */
+    if (n && n.srvP) {
+      cmtS().cmtDraft = '';
+      if (el) el.value = '';
+      srvCmtSend(n, tx, null).then(() => {
+        if (cmtBox) { cdCmtPaint(true); cmtCountPaint(); } else renderCardDlg();
+        const nx = document.getElementById('cd-cmtin'); if (nx) nx.focus();
+      });
+      return;
+    }
+    /* وعقدةٌ موسومةٌ بلا معرّفِ مساهمة (بذرةٌ قديمة): تُترك كما كانت */
     if (n && n.srvN) { toast(T().cmtSoon); return; }
     /* ويُوسَم بوجهه ساعةَ يُكتب: هو الموضع الوحيد الذي يعرف في أيّ وجهٍ وقع الكلام */
     (n.cm = n.cm || []).push({ id: newId(), me: true, k: cdFaceK(), u: { name: state.profile.name || T().meName },
@@ -1567,7 +1577,21 @@
     const c = cdCmtAt(p);
     if (!c || (!cmtBox && !cdNode())) return;
     if (!memberGate(T().needAcctPost)) return;
-    { const nn = cdNode(); if (nn && nn.srvN) { toast(T().cmtSoon); return; } }
+    {
+      const nn = cdNode();
+      if (nn && nn.srvP) {
+        /* والردُّ يحتاج معرّفَ أصله لا رقمَه في القائمة: الترتيبُ يتبدّل بالجذب */
+        const up = cdCmtAt(String(p).split('.')[0]);
+        cmtS().cmtReDraft = '';
+        srvCmtSend(nn, tx, up && up.id).then(() => {
+          cmtS().cmtRe = null;
+          cmtS().cmtThread = String(p).split('.')[0];
+          if (cmtBox) cdCmtPaint(true); else renderCardDlg();
+        });
+        return;
+      }
+      if (nn && nn.srvN) { toast(T().cmtSoon); return; }
+    }
     (c.rp = c.rp || []).push({ id: newId(), me: true, u: { name: state.profile.name || T().meName },
       ts: Date.now(), x: tx, lk: 0, liked: false });
     cmtS().cmtReDraft = '';

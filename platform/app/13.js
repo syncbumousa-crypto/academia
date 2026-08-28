@@ -1484,12 +1484,20 @@
     }, 4000);
   }
 
-  /* يمشي على متن المساهمة فيسم كلَّ عقدةٍ لها معرّف: هذي من الخادم لا منك */
-  function srvMark(v) {
-    if (Array.isArray(v)) { v.forEach(srvMark); return; }
+  /* يمشي على متن المساهمة فيسم كلَّ عقدةٍ لها معرّف: هذي من الخادم لا منك.
+     ===== وتحمل معها معرّفَ مساهمتها =====
+     وهذا ما فتح بابَ التعليق (م٣ب). كان الظنُّ أنّ الأمرَ يحتاج تمريرَ المعرّف
+     عبر نموذج النوافذ — أعقدِ موضعٍ في المشروع — لأنّ النافذةَ تجد عقدتَها
+     بالبحث في الرزمة ولا تعرف من أين جاءت. والحلُّ أبسط: **العقدةُ تحمل أصلَها
+     في نفسِها**، فمن أمسك عقدةً عرف مساهمتَها بلا أن يسأل أحدًا. */
+  function srvMark(v, pid) {
+    if (Array.isArray(v)) { v.forEach(x => srvMark(x, pid)); return; }
     if (!v || typeof v !== 'object') return;
-    if (v.id && (v.t === 'c' || v.t === 'f' || v.f !== undefined || v.b !== undefined)) v.srvN = 1;
-    Object.keys(v).forEach(k => { if (k !== 'srvN') srvMark(v[k]); });
+    if (v.id && (v.t === 'c' || v.t === 'f' || v.f !== undefined || v.b !== undefined)) {
+      v.srvN = 1;
+      if (pid) v.srvP = pid;
+    }
+    Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') srvMark(v[k], pid); });
   }
 
   /* ---------- الجذب ---------- */
@@ -1533,12 +1541,123 @@
          الرزمة ولا تحمل معرّفَ مساهمتها. فلو لم تُوسَم العقدةُ نفسُها لَما عرف
          مرسِلُ التعليق أنّه يكتب في مساهمةِ غيره — فيكتب في نسخته، ويُمحى كلامُه
          في أوّل جذبٍ بلا أن يعلم. والوسمُ يجعلها تُعرف بنفسها. */
-      srvMark(r.data);
+      srvMark(r.data, r.id);
+      /* وتعليقاتُها تُجلب في أثرها: رحلةٌ لكلّ مساهمةٍ لا لكلّ بطاقة */
+      srvCmtPull(r.id, r.data, true);
       n++;
     });
     save();
     /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها */
     if (n && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
+
+  /* ============================================================
+     تعليقاتُ الخادم — تُجلب وتُدمج في العقد (م٣ب)
+     ============================================================
+     التعليقُ لا يسكن متنَ المساهمة (القارئُ لا يكتب في متن غيره)، بل جدولَه.
+     فيُجلب لكلّ مساهمةٍ مرّةً ويُوزَّع على عقدها في ‎n.cm‎ — بالشكل الذي تتوقّعه
+     الشاشةُ منذ بُني الموقع، فلا يتغيّر سطرٌ في الرسم.
+     ويُوسَم ‎srv:1‎ فيُمحى قبل كلّ دمجٍ ويُستبدل: استبدالٌ لا تكديس، كالمساهمات.
+     والردُّ يسكن ‎rp‎ في أصله كما يفعل الموقع، فالخيطُ يُبنى ههنا لا هناك. */
+  const cmtPulled = {};
+  const CMT_FRESH = 20000;
+
+  const cmtURL = q => (ASSET_BASE ? new URL('api/comments' + (q || ''), ASSET_BASE).href
+                                  : location.origin + '/api/comments' + (q || ''));
+
+  /* يجد عقدةً بمعرّفها في متنٍ مهما عمق — والمتونُ أشكالٌ شتّى، فلا يُفترض شكل */
+  function cmtFind(v, id, out) {
+    if (Array.isArray(v)) { v.forEach(x => cmtFind(x, id, out)); return out; }
+    if (!v || typeof v !== 'object') return out;
+    if (v.id === id) out.push(v);
+    Object.keys(v).forEach(k => cmtFind(v[k], id, out));
+    return out;
+  }
+
+  async function srvCmtPull(pid, data, force) {
+    if (!SRV_ON() || !pid || !data) return;
+    if (!force && Date.now() - (cmtPulled[pid] || 0) < CMT_FRESH) return;
+    cmtPulled[pid] = Date.now();
+    let j;
+    try {
+      const r = await fetch(cmtURL('?pid=' + encodeURIComponent(pid)), { credentials: 'same-origin' });
+      if (!r.ok) return;
+      j = await r.json();
+    } catch (e) { return; }
+    if (!j || !Array.isArray(j.comments)) return;
+
+    /* يُرفع الوافدُ القديم من كلّ عقدة، ثمّ يُبنى من جديد */
+    const wipe = v => {
+      if (Array.isArray(v)) { v.forEach(wipe); return; }
+      if (!v || typeof v !== 'object') return;
+      if (Array.isArray(v.cm)) v.cm = v.cm.filter(c => !c || !c.srv);
+      Object.keys(v).forEach(k => wipe(v[k]));
+    };
+    wipe(data);
+
+    const mine = state.uid || '';
+    const byId = {};
+    const roots = [];
+    j.comments.forEach(r => {
+      const c = {
+        id: r.id, srv: 1, uid: r.uid,
+        me: !!(mine && r.uid === mine),      /* الختمُ: محسوبٌ لا مقروء */
+        k: r.face || 1,
+        u: { name: r.name || '', img: r.img || '' },
+        ts: (r.ts || 0) * 1000, x: r.txt || '',
+        lk: 0, liked: false,
+      };
+      byId[r.id] = { c: c, nid: r.nid, parent: r.parent };
+      if (!r.parent) roots.push(byId[r.id]);
+    });
+    /* ثمّ تُعلَّق الردودُ بأصولها — والردُّ الذي ذهب أصلُه يُترك */
+    Object.keys(byId).forEach(k => {
+      const it = byId[k];
+      if (!it.parent) return;
+      const up = byId[it.parent];
+      if (!up) return;
+      (up.c.rp = up.c.rp || []).push(it.c);
+    });
+    let n = 0;
+    roots.forEach(it => {
+      const hits = cmtFind(data, it.nid, []);
+      if (!hits.length) return;                /* عقدةٌ ذهبت من المتن */
+      const node = hits[0];
+      (node.cm = node.cm || []).push(it.c);
+      n++;
+    });
+    if (n) save();
+    if (n && cardDlg && typeof cdCmtPaint === 'function') { try { cdCmtPaint(true); } catch (e) {} }
+  }
+
+  /* والكتابةُ: تذهب إلى الخادم ثمّ تُعرض — ولا تُكتب في المتن أصلًا */
+  async function srvCmtSend(node, txt, parentId) {
+    if (!node || !node.srvP) return false;
+    if (!memberGate(T().needAcctPost)) return true;
+    const id = newId();
+    let j;
+    try {
+      const r = await fetch(cmtURL(), {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: id, pid: node.srvP, nid: node.id,
+                               face: cdFaceK(), parent: parentId || null, txt: txt }),
+      });
+      j = await r.json().catch(() => ({}));
+      if (!r.ok) { toast(r.status === 401 ? T().needAcctPost : T().errNet); return true; }
+    } catch (e) { toast(T().errNet); return true; }
+
+    const c = { id: id, srv: 1, uid: j.uid, me: true, k: cdFaceK(),
+                u: { name: j.name || state.profile.name || T().meName, img: j.img || '' },
+                ts: (j.ts || 0) * 1000 || Date.now(), x: txt, lk: 0, liked: false };
+    if (parentId) {
+      const up = (node.cm || []).find(x => x && x.id === parentId);
+      if (up) (up.rp = up.rp || []).push(c);
+    } else {
+      (node.cm = node.cm || []).push(c);
+    }
+    save();
+    return true;
   }
 
   /* ---------- الإعجاب على الخادم (م٣أ) ----------
