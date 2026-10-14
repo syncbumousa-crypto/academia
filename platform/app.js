@@ -545,7 +545,7 @@
     const s = document.currentScript && document.currentScript.src;
     return s ? s.replace(/platform\/app\.js.*$/, '') : '';
   })();
-  const assetURL = p => (!p || /^(data:|blob:|https?:|\/)/.test(p)) ? p : ASSET_BASE + p;
+  const assetURL = p => (!p || /^(data:|blob:|https?:)/.test(p)) ? p : /^\/api\//.test(p) ? (window.AC_API_ORIGIN || location.origin) + p : /^\//.test(p) ? p : ASSET_BASE + p;
   /* ---------- غلاف المادة = مساهمة مثبَّتة في بند «المادة» تحمل صورة كتاب ----------
      الغلاف ليس إعدادًا مستقلًّا: هو نتيجة تثبيت مساهمة. وإذا ثُبِّتت مساهمة أخرى فيها غلاف
      صار الغلافُ غلافَها (الأحدث تثبيتًا يفوز عبر pinAt). قراءة مباشرة من الحالة بلا ترحيل
@@ -24759,7 +24759,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
 
   const authURL = p => (ASSET_BASE ? new URL('api/auth/' + p, ASSET_BASE).href
-                                   : location.origin + '/api/auth/' + p);
+                                   : (window.AC_API_ORIGIN || location.origin) + '/api/auth/' + p);
 
   async function authCall(p, data) {
     const r = await apiFetch(authURL(p), {
@@ -25053,8 +25053,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return true;                                   /* fixed — worth retrying */
   }
 
-  const postsURL = q => (ASSET_BASE ? new URL('api/posts' + (q || ''), ASSET_BASE).href
-                                    : location.origin + '/api/posts' + (q || ''));
+  const postsURL = q => (ASSET_BASE ? new URL('api/posts' + (q || ''), window.AC_API_BASE || ASSET_BASE).href
+                                    : (window.AC_API_ORIGIN || location.origin) + '/api/posts' + (q || ''));
 
   /* تجزئةٌ رخيصة (FNV-1a): تكفي لسؤال «أتبدّل المتن؟» ولا تُستعمل في أمنٍ */
   function srvHash(s) {
@@ -25111,8 +25111,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   async function medUp(blob) {
     let r = null;
     try {
-      r = await apiFetch((ASSET_BASE ? new URL('api/media', ASSET_BASE).href
-                                  : location.origin + '/api/media'), {
+      r = await apiFetch((ASSET_BASE ? new URL('api/media', window.AC_API_BASE || ASSET_BASE).href
+                                  : (window.AC_API_ORIGIN || location.origin) + '/api/media'), {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
       });
@@ -25449,8 +25449,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      حيّةٌ هناك وميّتةٌ ههنا. وهو عينُ ما أحذّر منه في كلّ نسخةٍ تُؤخذ باليد.
      فالعميلُ يكتب في المخزن الواحد، والقديمُ يبقى قائمًا لمتصفّحٍ لم يُحدَّث
      بعدُ ثمّ يُرفع. */
-  const udocURL = q => (ASSET_BASE ? new URL('api/udoc' + (q || ''), ASSET_BASE).href
-                                   : location.origin + '/api/udoc' + (q || ''));
+  const udocURL = q => (ASSET_BASE ? new URL('api/udoc' + (q || ''), window.AC_API_BASE || ASSET_BASE).href
+                                   : (window.AC_API_ORIGIN || location.origin) + '/api/udoc' + (q || ''));
   const NOOK_F = ['terms', 'libs', 'termDates', 'lastNook', 'termAt', 'termsGone'];
   let nookGot = false, nookT = 0, nookLast = '';
 
@@ -25869,7 +25869,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن: يُعامَل كأنّه لم يمحُ */ }
       if (r.ok && j && j.removed) { bootMark('del:mine'); srvBump(code); return; }
       const a = (ASSET_BASE ? new URL('api/admin/post', ASSET_BASE).href
-                            : location.origin + '/api/admin/post') + q;
+                            : (window.AC_API_ORIGIN || location.origin) + '/api/admin/post') + q;
       r = await apiFetch(a, { method: 'DELETE', credentials: 'same-origin' });
       bootMark('del:adm' + (r.ok ? '' : ':' + r.status));
       if (r.ok) srvBump(code);
@@ -26283,8 +26283,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const cmtPulled = {};
   const CMT_FRESH = 20000;
 
-  const cmtURL = q => (ASSET_BASE ? new URL('api/comments' + (q || ''), ASSET_BASE).href
-                                  : location.origin + '/api/comments' + (q || ''));
+  const cmtURL = q => (ASSET_BASE ? new URL('api/comments' + (q || ''), window.AC_API_BASE || ASSET_BASE).href
+                                  : (window.AC_API_ORIGIN || location.origin) + '/api/comments' + (q || ''));
 
   /* يجد عقدةً بمعرّفها في متنٍ مهما عمق — والمتونُ أشكالٌ شتّى، فلا يُفترض شكل */
   function cmtFind(v, id, out) {
