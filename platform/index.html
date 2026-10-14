@@ -3,7 +3,7 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-theme="light" spellcheck="false">
+<html lang="ar" dir="rtl" data-skin="flat" data-theme="light" spellcheck="false">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +20,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/icon-180.png">
 
   <link rel="stylesheet" href="../shared/styles.css">
+  <!-- جلدُ الجذر: رماديٌّ مسطَّح. يُحمَّل بعد الأمّ فيغلب توكناتِها -->
+  <link rel="stylesheet" href="../shared/skin-flat.css">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -60,6 +62,7 @@
     .sc-item:hover  { color: var(--c-kfupm); background: var(--c-kfupm-soft); }
     .sc-item.is-on  { color: var(--c-kfupm); font-weight: 700; }
     .sc-dash        { letter-spacing: .12em; }
+    a.sc-item { display: block; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -80,13 +83,13 @@
         <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
         <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
           <svg class="sc-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          <span class="sc-nm">المسلخ</span>
+          <span class="sc-nm">—</span>
         </button>
 
         <div class="sc-menu" id="sc-menu" hidden>
           <!-- الأوّلُ: أكاديميا نفسُها، بلا مجتمع -->
-          <button class="sc-item sc-dash" type="button" title="أكاديميا — بلا مجتمع">—</button>
-          <button class="sc-item is-on" type="button">المسلخ</button>
+          <span class="sc-item sc-dash is-on" title="أكاديميا — بلا مجتمع">—</span>
+          <a class="sc-item" href="../Almaslakh/">المسلخ</a>
           <button class="sc-item" type="button">المدرج</button>
           <button class="sc-item" type="button">القدرات</button>
           <button class="sc-item" type="button">الآيلتس</button>

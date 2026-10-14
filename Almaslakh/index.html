@@ -1,0 +1,648 @@
+<!doctype html>
+<!-- ‎spellcheck="false"‎ على الجذر: المتصفّح يقرأ ما تكتب فيرسم تحته خطًّا أحمر للإملاء
+     وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
+     ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
+     القائمِ منها والذي يولد بعدُ -->
+<html lang="ar" dir="rtl" data-theme="light" spellcheck="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>أكاديميا</title>
+
+  <!-- ===== أيقونةُ اللسان =====
+       ثلاثةُ مقاساتٍ مصرَّحة، ولكلٍّ قصُّه: ‎١٦‎ مقصوصةٌ إلى ‎٧٢٪‎ لأنّ هامشَ
+       الأيقونة يأكل ثلثَ بكسلاتها في ذلك الحجم فتذوب العلامات، و‎٣٢‎ فما فوق
+       كما رُسمت. والمتصفّحُ ينتقي الأقربَ إلى ما يطلب، فيُعطى مضبوطًا لا مُصغَّرًا.
+       و‎favicon.ico‎ في الجذر لمن لا يقرأ الوسمَ ويطلبه بالعادة. -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/icon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/icon-180.png">
+
+  <link rel="stylesheet" href="../shared/styles.css">
+
+  <!-- ===== مبدِّلُ المجتمع =====
+       موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
+       المنشور والمستودع (الورقةُ إحدى الملفّات المتفرّقة بينهما، فتعديلُ الأقدم
+       يمحو الأحدث). ومتى استوَيا نُقل هذا البابُ إلى موضعه. -->
+  <style>
+    /* الشعارُ والمبدِّلُ أخوان: فُرجةٌ بينهما أضيقُ من فُرجة الشريط (‎gap:14px‎) */
+    .side-head { display: flex; flex-direction: column; gap: 5px; }
+    .side-com  { display: flex; flex-direction: column; gap: 5px; }
+
+    .sc-now {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      width: fit-content; margin: 0 auto; padding: 1px 9px;
+      border: 0; border-radius: 9px; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.7;
+      color: var(--c-ink-soft);
+      transition: color .15s, background .15s;
+    }
+    .sc-now:hover { color: var(--c-kfupm); background: var(--surface); }
+    .sc-car { width: 12px; height: 12px; flex: none; transition: transform .18s; }
+    .sc-now[aria-expanded="true"] .sc-car { transform: rotate(180deg); }
+
+    /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
+       فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
+    .sc-menu {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 4px; border: 1px solid var(--border); border-radius: 12px;
+      background: var(--surface);
+    }
+    .sc-menu[hidden] { display: none; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
+
+    .sc-item {
+      border: 0; border-radius: 8px; background: transparent; cursor: pointer;
+      padding: 5px 10px; text-align: center;
+      font-family: inherit; font-size: 12.5px; color: var(--c-ink-soft);
+      transition: color .15s, background .15s;
+    }
+    .sc-item:hover  { color: var(--c-kfupm); background: var(--c-kfupm-soft); }
+    .sc-item.is-on  { color: var(--c-kfupm); font-weight: 700; }
+    .sc-dash        { letter-spacing: .12em; }
+    a.sc-item { display: block; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
+       يمين مع العربية · يسار مع الإنجليزية (عبر html[data-lang]) -->
+  <aside class="sidebar" id="sidebar">
+    <!-- شعار الموقع: أعلى الشريط الجانبي (يمين) بخط الهوية KFUPM Display -->
+    <!-- ===== الشعارُ ومبدِّلُ المجتمع =====
+         ‎.side-logo‎ يبقى كما هو ولا يُلَفّ المبدِّلُ داخله: المحرّكُ يكتب فيه
+         اسمَ الموقع عند تبديل اللغة (‎lg.textContent = t.siteName‎)، و‎textContent‎
+         يمحو ما تحته. فهما أخوان في ‎.side-head‎.
+         والخياراتُ معروضةٌ ولا تَفعل شيئًا بعدُ — تُوصَل يومَ تُبنى المجتمعات. -->
+    <div class="side-head">
+      <div class="side-logo">أكاديميا</div>
+
+      <div class="side-com" id="side-com">
+        <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
+        <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
+          <svg class="sc-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="sc-nm">المسلخ</span>
+        </button>
+
+        <div class="sc-menu" id="sc-menu" hidden>
+          <!-- الأوّلُ: أكاديميا نفسُها، بلا مجتمع -->
+          <a class="sc-item sc-dash" href="../platform/index.html" title="أكاديميا — بلا مجتمع">—</a>
+          <button class="sc-item is-on" type="button">المسلخ</button>
+          <button class="sc-item" type="button">المدرج</button>
+          <button class="sc-item" type="button">القدرات</button>
+          <button class="sc-item" type="button">الآيلتس</button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button type="button" data-tab="market" class="is-active">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span class="tab-tx">المكتبة</span>
+      </button>
+      <button type="button" data-tab="library">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span class="tab-tx">الركن</span>
+      </button>
+    </nav>
+
+    <!-- ===== وما يخصُّك أنت: مجموعةٌ ثانيةٌ في قاع الشريط =====
+         الأوليان أبوابُ **المحتوى** (مكتبةُ الموقع وركنُك فيه)، وهاتان سجلّاك أنت —
+         لا تُتصفَّح بل يُرجع إليهما. فتُفصلان بفراغٍ يدفعهما إلى القاع فوق شريط
+         التحكّم، فلا تُقرأ الأربعةُ صفًّا واحدًا وهي جنسان. -->
+    <nav class="tabs tabs--me">
+      <!-- الاختبارات الماضية: ورقةٌ عليها صحّ — «امتحانٌ فُرغ منه» لا ساعةٌ ولا رسمٌ
+           بيانيّ، فالمقصودُ الأوراقُ التي مرّت لا الزمنُ ولا الأرقام -->
+      <button type="button" data-tab="past">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2 2 4-4"/></svg>
+        <span class="tab-tx">الاختبارات</span>
+      </button>
+      <!-- الإحصائيات: أعمدةٌ صاعدة — «ما جمعتَه» لا «ما فعلتَه»، فلا تلتبس بورقة صحّ -->
+      <button type="button" data-tab="stats">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+        <span class="tab-tx">إحصائياتي</span>
+      </button>
+    </nav>
+
+    <div class="side-ctl">
+      <!-- تاريخ اليوم (فوق) ثم الوقت (تحته) بتوقيت السعودية — فوق زرّي المظهر -->
+      <div class="sb-date"><span id="today-date"></span></div>
+      <div class="sb-time">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span id="today-time"></span>
+      </div>
+
+      <!-- المظهر: فاتح · داكن -->
+      <nav class="themebar" id="themebar">
+        <button type="button" data-theme="light" class="is-active" title="فاتح" aria-label="فاتح">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <button type="button" data-theme="dark" title="داكن" aria-label="داكن">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </nav>
+
+      <!-- اللغة: عربي · English -->
+      <nav class="langbar" id="langbar">
+        <button type="button" data-lang="ar" class="is-active">عربي</button>
+        <button type="button" data-lang="en">English</button>
+      </nav>
+
+      <!-- قاعُ الشريط: وجهان لحالٍ واحدة —
+           العضوُ يرى بروفايلَه وبابَ الخروج، والزائرُ يرى بابَي الدخول.
+           والاثنان في الوسم معًا ويُبدَّل بينهما بصنفٍ على ‎body‎ (‎is-guest‎)، لا
+           بحقنِ وسمٍ: المستمعان معلَّقان على الأزرار نفسِها منذ الإقلاع، ولو أُعيد
+           بناءُ الجوف لَذهبا معه -->
+      <div class="side-acct">
+        <!-- عضو: صورة + اسم · نقره يفتح صفحة الحساب -->
+        <button type="button" class="side-profile" id="side-profile"></button>
+        <button type="button" class="side-logout" id="side-logout" title="تسجيل الخروج" aria-label="تسجيل الخروج">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h9"/></svg>
+          <span class="side-logout-tx">تسجيل الخروج</span>
+        </button>
+
+        <!-- زائر: إنشاءُ حسابٍ (مصمَت — الفعلُ المقصود) ثمّ تسجيلُ دخولٍ (خفيفٌ تحته) -->
+        <div class="side-auth" id="side-auth">
+          <button type="button" class="side-join" id="side-join">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="8.5" cy="7" r="3.5"/><path d="M18 7v6M21 10h-6"/></svg>
+            <span class="side-auth-tx">إنشاء حساب</span>
+          </button>
+          <button type="button" class="side-login" id="side-login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v16h4"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/></svg>
+            <span class="side-auth-tx">تسجيل الدخول</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- مقبض طيّ/فتح الشريط: تبويب عمودي ملتصق بحافة الشريط في المنتصف -->
+  <button type="button" class="side-handle" id="side-handle" title="طيّ/فتح الشريط" aria-label="طيّ/فتح الشريط">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+
+  <!-- لوحة سوق المواد -->
+  <section class="panel" id="panel-market">
+
+    <!-- مستطيل السوق: أعلاه البحث والتصنيفات، وتحته سطر كتب واحد يُمرَّر أفقيًا -->
+    <div class="market-box">
+      <div class="market-tools">
+        <input class="search" id="m-search" type="text" placeholder="ابحث عن مادة…">
+        <div class="filterwrap">
+          <button class="btn-filter" id="m-btn-filter" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 6h16M7 12h10M10 18h4"/>
+            </svg>
+            <span id="m-f-label">تصنيفات</span>
+            <span class="fbadge" id="m-fbadge" hidden></span>
+          </button>
+          <div class="fpanel" id="m-fpanel" hidden>
+            <div class="fgroup">
+              <p class="fgroup__t" id="m-fg-hours">عدد الساعات</p>
+              <div class="fchips" id="m-f-hours"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="m-fg-col">الكلية المقدمة للمادة</p>
+              <div class="fchips" id="m-f-col"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="m-fg-stat">حالة المادة</p>
+              <div class="fchips" id="m-f-stat"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="m-fg-act">النشاط</p>
+              <div class="fchips" id="m-f-act"></div>
+            </div>
+          </div>
+        </div>
+        <!-- الفلاتر المفعّلة: تظهر بعد زر التصنيفات، والنقر على أي منها يحذفه -->
+        <div class="factive" id="m-factive"></div>
+      </div>
+
+      <!-- بِكرة الكتب (Cover Flow): دائمًا كتاب متمركز، والتمرير يمين/يسار ينقل البؤرة -->
+      <div id="m-grid"></div>
+    </div>
+
+    <!-- عرض مساهمات المادة المختارة: خط فاصل تحت مستطيل السوق ثم واجهة #cm-ui مدمجة -->
+    <div class="market-course" id="market-course" hidden></div>
+  </section>
+
+  <!-- لوحة المكتبة: شريط الأترام (يبدأ فاضيًا) + زر إضافة ترم
+       (شريط اليوم انتقل إلى الشريط الجانبي فوق زرّي المظهر) -->
+  <section class="panel" id="panel-library" hidden>
+
+    <div class="termbar">
+      <span class="term-list" id="term-list"></span>
+      <input class="term-input" id="term-input" type="text" hidden>
+      <button class="btn-addterm" id="btn-addterm" type="button">+ إضافة ترم</button>
+      <!-- الصندوق المنسدل تحت مربع الترم المضغوط (داخل الشريط):
+           ⚙ إعدادات الترم يمينًا، خط فاصل خفيف، ثم زر + لإضافة المواد -->
+      <div class="term-drop" id="term-drop" hidden>
+        <button class="drop-gear" id="drop-gear" type="button" title="إعدادات الترم" aria-label="إعدادات الترم">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+        <span class="drop-sep"></span>
+        <button class="drop-add" id="drop-add" type="button" title="إضافة مادة">+</button>
+      </div>
+    </div>
+
+    <!-- الإطار المرقّط: مواد الترم المحدد -->
+    <div class="term-frame" id="term-frame" hidden>
+      <!-- ===== وإطارٌ خالٍ يقول ما يُفعل به =====
+           كان مستطيلًا مرقّطًا فارغًا لا يقول شيئًا، فمن أنشأ ترمَه وقف أمامه
+           لا يدري من أين يبدأ. والدليلُ يشير إلى الزرّ الذي يفتح البابَ نفسَه. -->
+      <p class="term-frame__hint" id="term-hint">أضف مواد إلى ترمك من + بالأعلى.</p>
+      <!-- بِكرة كتب مواد الترم (مثل المكتبة) — يبنيها makeReel -->
+      <div id="lib-grid" hidden></div>
+    </div>
+
+    <!-- عرض المادة داخل الصفحة: خط فاصل تحت مواد الترم، وتحته شريط المادة بأقسامه
+         (تُنقل إليه واجهة #cm-ui عند نقر مادة من المكتبة) -->
+    <div class="lib-course" id="lib-course" hidden></div>
+  </section>
+
+  <!-- لوحة الاختبارات الماضية: كل اختبار دخله المستخدم وبدأ فيه — يُملأ من الجافا -->
+  <section class="panel" id="panel-past" hidden></section>
+
+  <!-- لوحة الإحصائيات: ما صنعه المستخدم وما جلسه ومتى — يُملأ من الجافا -->
+  <section class="panel" id="panel-stats" hidden></section>
+
+  <!-- لوحة الحساب: تحل محل السوق/المكتبة في منطقة المحتوى عند نقر البروفايل -->
+  <section class="panel" id="panel-account" hidden></section>
+
+  <!-- ركنُ الزائر: تحل محل «الركن» لمن لا حساب له — يُملأ من الجافا.
+       ولوحٌ مستقلٌّ لا حجبةٌ فوق الركن: الركنُ يُبنى من بياناتٍ ليست للزائر أصلًا،
+       فرسمُه ثمّ سترُه عملٌ ضائعٌ ووعدٌ كاذبٌ بما تحت الستار -->
+  <section class="panel" id="panel-nook-lock" hidden></section>
+
+  <!-- النافذة المنبثقة: سوق المواد (ثيم بترولي الجامعة) -->
+  <div class="mmodal" id="market-modal" hidden>
+    <div class="mmodal__card">
+      <div class="mmodal__head">
+        <h3 class="mmodal__title" id="mm-title">سوق المواد</h3>
+        <button class="mmodal__close" id="mm-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="market-tools">
+        <input class="search" id="mm-search" type="text" placeholder="ابحث عن مادة…">
+        <div class="filterwrap">
+          <button class="btn-filter" id="mm-btn-filter" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 6h16M7 12h10M10 18h4"/>
+            </svg>
+            <span id="mm-f-label">تصنيفات</span>
+            <span class="fbadge" id="mm-fbadge" hidden></span>
+          </button>
+          <div class="fpanel" id="mm-fpanel" hidden>
+            <div class="fgroup">
+              <p class="fgroup__t" id="mm-fg-hours">عدد الساعات</p>
+              <div class="fchips" id="mm-f-hours"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="mm-fg-col">الكلية المقدمة للمادة</p>
+              <div class="fchips" id="mm-f-col"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="mm-fg-stat">حالة المادة</p>
+              <div class="fchips" id="mm-f-stat"></div>
+            </div>
+            <div class="fgroup">
+              <p class="fgroup__t" id="mm-fg-act">النشاط</p>
+              <div class="fchips" id="mm-f-act"></div>
+            </div>
+          </div>
+        </div>
+        <div class="factive" id="mm-factive"></div>
+      </div>
+      <div class="mmodal__scroll">
+        <!-- بِكرة الكتب (Cover Flow): دائمًا كتاب متمركز، والتمرير يمين/يسار ينقل البؤرة -->
+        <div id="mm-grid"></div>
+      </div>
+
+      <!-- معالج «جهّز نسختك» (ROADMAP-PICKS م1): يظهر فوق المنتقي داخل النافذة نفسها،
+           بند بند — اختيار مساهمة واحدة أو تخطٍّ، ولا إضافة قبل إكماله -->
+      <div class="wiz" id="wiz" hidden>
+        <div class="wiz__head">
+          <span class="cm-timg" id="wiz-timg"></span>
+          <div class="wiz__t">
+            <b id="wiz-title"></b>
+            <span class="wiz__prog" id="wiz-progress"></span>
+          </div>
+          <button class="mmodal__close" id="wiz-close" type="button" aria-label="إغلاق">✕</button>
+        </div>
+        <p class="wiz__secname" id="wiz-secname"></p>
+        <div class="mmodal__scroll wiz__body" id="wiz-body"></div>
+        <div class="wiz__foot">
+          <button type="button" id="wiz-prev" class="wiz-btn"></button>
+          <button type="button" id="wiz-skip" class="wiz-btn wiz-btn--ghost"></button>
+          <button type="button" id="wiz-next" class="wiz-btn wiz-btn--gold"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- نافذة تفاصيل المادة (من سوق المواد) — نفس ثيم الجامعة
+       #cm-ui = واجهة المادة الواحدة: تبقى هنا حين تُفتح من السوق،
+       وتُنقل إلى #lib-course حين تُفتح من المكتبة (عرض داخل الصفحة) -->
+  <div class="mmodal" id="course-modal" hidden>
+    <div class="mmodal__card mmodal__card--course">
+      <div id="cm-ui">
+        <div class="mmodal__head">
+          <span class="cm-timg" id="cm-timg"></span>
+          <h3 class="mmodal__title" id="cm-title"></h3>
+          <button class="mmodal__close" id="cm-close" type="button" aria-label="إغلاق">✕</button>
+        </div>
+        <!-- شريط واحد لكل الأقسام، وتحته نافذة واحدة (الزر المُحدَّد يتّصل بها كتبويب متصفح) -->
+        <div class="cm-panel">
+          <nav class="cm-tabs" id="cm-tabs"></nav>
+          <div class="mmodal__scroll cm-pane" id="cm-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- نافذة إضافة بطاقة (على غرار نافذة الإضافة في أنكي): شطر علويّ فيه إعدادات البطاقة
+       (لغتها · نوعها · مكان حفظها) ثم خطّ، وتحته شريط التنسيق ثم الوجه والظهر -->
+  <!-- سؤال نشر المساهمة: يُفتح عند الإرسال ما دامت غير مدرجة -->
+  <!-- ============================================================
+       منتقي التاريخ — «البكرات» (اتّجاه ب من مختبر date-pick-lab)
+       ============================================================
+       ثلاثةُ أعمدةٍ تُدار، والمختارُ ما وقف في النافذة الوسطى لا ما أصابه
+       الإصبع. ويحلّ محلَّ منتقي المتصفّح في موضعين: تاريخَي الترم، وموعدِ
+       بندِ الدرجة — وذاك محدودٌ بحدَّي الترم فتُطفأ الأيّامُ خارجَهما.
+
+       وهو فوق ‎.mmodal‎ في الطبقات: يُفتح من فوق نافذة «إعدادات الترم» نفسِها. -->
+  <div class="mmodal dpk" id="dpk-modal" hidden>
+    <div class="dp">
+      <div class="dp__head">
+        <b class="dp__t" id="dpk-title"></b>
+        <button type="button" class="dp__x" id="dpk-x" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="dp__body" id="dpk-body"></div>
+      <div class="dp__foot">
+        <button type="button" class="dp__ghost" id="dpk-clear"></button>
+        <button type="button" class="dp__ghost" id="dpk-today"></button>
+        <span class="dp__spacer"></span>
+        <b class="dp__read" id="dpk-read">—</b>
+        <button type="button" class="dp__go" id="dpk-ok"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mmodal" id="pst-modal" hidden>
+    <div class="mmodal__card pst-card">
+      <p class="pst-q"></p>
+      <!-- ثلاثة خيارات في مستوًى واحد: أيقونةٌ ملوّنة واسمٌ تحتها — يُختار واحدٌ فينغلق -->
+      <div class="pst-opts"></div>
+      <p class="pst-hint"></p>
+    </div>
+  </div>
+
+  <div class="mmodal" id="card-modal" hidden>
+    <!-- دُرج البطائق: طبقةٌ علويّة تمتدّ على عرض الشاشة كلّه فوق الشريط الجانبيّ —
+         ابنٌ للنافذة لا للمسرح، وإلّا تقيّد بعرضه. زرُّ سحبه أيقونةٌ وحدها متدلّيةٌ من حافّته -->
+    <div class="cd-dw" id="cd-drawer">
+      <div class="cd-dw__tray">
+        <!-- النوع أوّل قرار: البطائق الأربع مفروشةً في الدُّرج -->
+        <div class="cd-types" id="cd-types" role="group" aria-label="نوع البطاقة"></div>
+      </div>
+      <!-- ===== صفُّ الحافّة: المِقبضُ ثمّ ألسنةُ المطويّات إلى يساره =====
+           الصفُّ متوسّطٌ في عرض الشاشة، فكلّما نزل لسانٌ **يسارَ** المِقبض انزاح المِقبضُ
+           يمينًا وبقي الكلُّ متوسّطًا — لا يُدفع من مكانه بل يقتسم الوسطَ مع ما جاوره -->
+      <div class="cd-dwrow">
+        <button type="button" class="cd-dw__handle" id="cd-handle" aria-expanded="false"></button>
+        <div class="cd-mins" id="cd-mins"></div>
+        <!-- الموازن: فراغٌ خاوٍ في ذيل الصفّ عرضُه (عرض «+» + الفُرجة). الصفُّ يقتسم وسطَه
+             معه فينزاح، فيستقرّ مركزُ **الألسنة** على مركز الشاشة ويقف «+» على طرفها —
+             فلا ترقص الألسنةُ كلّما فُتحت نافذةٌ أو طُويت. وهو فراغٌ لا ‎transform‎:
+             المتحوَّلُ يصير جذرَ خلفيّةٍ فيموت الضبابُ في أبنائه -->
+        <i class="cd-bal"></i>
+      </div>
+    </div>
+
+    <!-- لكلّ نافذةٍ طبقتُها: صفيحةٌ مطلقةٌ تملأ الشاشة وتتوسّط ما فيها. ولولاها لَاصطفّت
+         النوافذُ جنبًا إلى جنبٍ في صفّ النافذة الأمّ المرن بدل أن تتراكب — فتوسيطُ
+         الواحدة يستقيم في صفٍّ، وتوسيطُ اثنتين في **الموضع نفسِه** لا يستقيم إلّا بطبقتين.
+         والصفيحةُ لا تلتقط المؤشّر (‎pointer-events:none‎) وإلّا حجبت العتمةَ التي تُغلق بها -->
+    <div class="cd-layer">
+    <!-- ثلاثة أسطحٍ مستقلّة على مسرحٍ واحد: منتقي النوع · البطاقة · الوجهة.
+         لا شريطَ أدواتٍ ثابت — فقاعةُ التحديد تنوب عنه، فتبقى البطاقة بطاقةً -->
+    <div class="cd-stage">
+      <div class="mmodal__card mmodal__card--md" id="cd-card">
+        <!-- الترويسة العليا: من صنعها · نسختها · من عندها الآن · زياراتها.
+             وأزرارُ النافذة (✕ · تكبير · نافذة مستقلّة) بُنيت داخلها في ‎renderCardDlg‎
+             لا هنا: لتقع على خطّ ما فيها من أيقونات بمحاذاةٍ واحدة مهما تبدّل ارتفاعُه -->
+        <div class="cd-meta" id="cd-meta"></div>
+
+        <!-- كل حقل ونتوؤه: الأيقونة لسانٌ بارز فوق مستطيل النصّ لا تسمية عائمة فوقه -->
+        <div class="cd-body">
+          <div class="cd-field">
+            <p class="cd-flab" id="cd-front-lab"></p>
+            <!-- مِسطرةُ التقريب: تقرأ ما تفعله أصابعُك وتُعدَّل منها. وترتيبُها في السطر
+                 ترتيبُ الكتابة: «‎−‎» أوّلًا فتقع يمينَ الرقم، و«‎+‎» آخرًا فتقع يسارَه.
+                 وهي أختُ الحقل لا ابنتُه، فلا يبلغها التقريبُ ولا تصغر معه -->
+            <span class="cd-zbar">
+              <button type="button" class="cd-zb" data-zs="-1">−</button>
+              <b class="cd-zval">100%</b>
+              <button type="button" class="cd-zb" data-zs="1">+</button>
+            </span>
+            <div class="cd-in" id="cd-front" contenteditable="true"></div>
+          </div>
+          <div class="cd-field">
+            <p class="cd-flab" id="cd-back-lab"></p>
+            <div class="cd-in" id="cd-back" contenteditable="true"></div>
+          </div>
+        </div>
+
+        <!-- الترويسة السفليّة: وجهةُ البطاقة وزرُّ نشرها — الزرُّ يمينًا والمسارُ يسارًا،
+             تصلهما شَرَطاتٌ تمرّ خلف مستطيل المسار. وكان الرصيفُ سطحًا مستقلًّا تحت النافذة
+             يصله خيطٌ رأسيّ، فصار الكلُّ جسمًا واحدًا -->
+        <div class="cd-foot" id="cd-foot"></div>
+      </div>
+
+      <!-- مقابضُ التوسيع الثمانية: أطرافٌ على حوافّ المسرح لا على البطاقة — المسرحُ هو
+           الصندوقُ الذي يُقاس ويُوسَّع، والبطاقةُ تملؤه. و‎ex/ey‎ الطرفُ المشدود:
+           ‎-1‎ يسارٌ أو أعلى · ‎+1‎ يمينٌ أو أسفل — بالجهات المرئيّة لا المنطقيّة،
+           فمؤشّرُ التوسيع نفسُه مرئيٌّ لا ينقلب بانقلاب الكتابة -->
+      <i class="cd-rz cd-rz--t" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--b" data-ey="1"></i>
+      <i class="cd-rz cd-rz--l" data-ex="-1"></i>
+      <i class="cd-rz cd-rz--r" data-ex="1"></i>
+      <i class="cd-rz cd-rz--tl" data-ex="-1" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--tr" data-ex="1" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--bl" data-ex="-1" data-ey="1"></i>
+      <i class="cd-rz cd-rz--br" data-ex="1" data-ey="1"></i>
+    </div>
+    </div>
+    <!-- فقاعة التنسيق: تُلحق بالمسرح لا بالبطاقة كي لا يمحوها إعادةُ الرسم -->
+    <div class="cd-bub" id="cd-bub" hidden></div>
+  </div>
+
+  <!-- ===== نافذة «الدورة» — مُشغّلُ رزمة الشروح =====
+       ترويستُها غلافُ الدورة يمينًا واسمُها يساره. وجوفُها نصفان: المستطيلُ الكبير فيه
+       الشرحُ الجاري، ويساره شجرةُ الدورة بمجلداتها كمسارٍ يُنتقل فيه. -->
+  <div class="mmodal" id="vw-modal" hidden>
+    <div class="mmodal__card mmodal__card--course vw-card">
+      <div class="mmodal__head vw-head">
+        <!-- والغلافُ حاملُ توكناتٍ كذلك: هو خارج ‎.vw-body‎ فلا يبلغه حاملُها،
+             و‎.x3-art‎ تقرأ ‎--u-*‎ — فيلبس ‎vw-tok‎ ويذوب بها -->
+        <span class="vw-art vw-tok" id="vw-art"></span>
+        <h3 class="mmodal__title" id="vw-title"></h3>
+        <button class="mmodal__close" id="vw-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <!-- حاملُ التوكنات: يذوب بـ‎display: contents‎ فلا يُغيّر تخطيطَ الشبكة -->
+      <div class="vw-body"><span class="vw-tok">
+        <div class="vw-main" id="vw-main"></div>
+        <aside class="vw-side" id="vw-side"></aside>
+      </span></div>
+    </div>
+  </div>
+
+  <!-- ===== نافذة «استورد من المكتبة» =====
+       بابان أوّلًا (الشروح · البطائق والملخصات)، ثمّ مساهماتُ القسم المختار **بواجهة
+       المكتبة نفسِها**: ‎#cm-ui‎ يُنقل إلى جوفها كما يُنقل إلى رفّ الموارد، فلا يُبنى
+       عارضٌ ثانٍ ولا تُنسخ دالّةُ عرضٍ واحدة. وبابُ الرجوع في ترويستها يردّك إلى البابين -->
+  <div class="mmodal" id="jri-modal" hidden>
+    <div class="mmodal__card mmodal__card--course jri-card">
+      <div class="mmodal__head">
+        <button class="jri-back" id="jri-back" type="button" hidden></button>
+        <h3 class="mmodal__title" id="jri-title"></h3>
+        <button class="mmodal__close" id="jri-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="jri-body" id="jri-body"></div>
+      <!-- الرصيف: خبرُ ما حدَّدتَ، ثمّ وجهتُه في رحلتك، ثمّ فعلُ الاستيراد.
+           وهو قائمٌ من أوّل فتحةٍ — قبل الدخول من أيّ باب — ليُعرف أنّ للنافذة مقصدًا -->
+      <div class="jri-dock" id="jri-dock"></div>
+    </div>
+  </div>
+
+  <!-- نافذة إعدادات الترم (الاسم + التواريخ + حذف) — نفس ثيم الجامعة -->
+  <div class="mmodal" id="date-modal" hidden>
+    <div class="mmodal__card mmodal__card--sm">
+      <div class="mmodal__head">
+        <h3 class="mmodal__title" id="dm-title">إعدادات الترم</h3>
+        <button class="mmodal__close" id="dm-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="dm-body">
+        <label class="dm-field">
+          <span id="dm-name-label">اسم الترم</span>
+          <input type="text" id="dm-name">
+        </label>
+        <!-- ‏‎type="text" readonly‎ لا ‎type="date"‎: القيمةُ تبقى ‎ISO‎ كما كانت
+             (‎.value‎ يُقرأ ويُكتب في المواضع نفسِها بلا تبديل)، والمنعُ لئلّا يفتح
+             المتصفّحُ منتقيَه فوق منتقينا. و‎inputmode="none"‎ تكفّ لوحةَ الهاتف. -->
+        <label class="dm-field">
+          <span id="dm-start-label">تاريخ البداية</span>
+          <input type="text" id="dm-start" class="dm-date" readonly inputmode="none" placeholder="—">
+        </label>
+        <label class="dm-field">
+          <span id="dm-end-label">تاريخ النهاية</span>
+          <input type="text" id="dm-end" class="dm-date" readonly inputmode="none" placeholder="—">
+        </label>
+        <!-- مواد الترم: تُعرض هنا ويمكن حذفها -->
+        <div class="dm-courses">
+          <p class="dm-courses__t"><span id="dm-courses-label">مواد الترم</span><b id="dm-courses-n">0</b></p>
+          <div class="dm-courses__list" id="dm-courses"></div>
+        </div>
+      </div>
+      <!-- ولا زرَّ حفظ: كلُّ ما في النافذة يقع فورَ وقوعه، كما كانت
+           المادّةُ تُحذف من قائمتها ههنا من قبل -->
+      <div class="dm-actions">
+        <button class="dm-del" id="dm-delete" type="button">حذف الترم</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- شريط التحديد في محرّر «البطائق» (ROADMAP-SELBAR — اتّجاه أ «الحبّة»):
+       يظهر حين تُحدَّد بطائقُ أو مجلدات، ويملؤه cxBarPaint. ابنُ الجسم لا ابنُ اللوح
+       ليبقى وأنت تمرّر، وخارجُ #cm-ui كي لا يمحوه إعادةُ رسم الواجهة -->
+  <div class="cx-selbar" id="cx-selbar" hidden></div>
+
+  <!-- منتقي ملف الصورة (مخفي، يُستدعى من مربّع صورة المادة) -->
+  <input type="file" id="imgpick" accept="image/*" hidden>
+
+  <script>
+    // تبديل التابات الأربعة — والمستمعُ على الشريط لا على مجموعةٍ منه:
+    // ‏querySelector('.tabs') يمسك الأولى وحدَها، فلا تصل ضغطةُ المجموعة الثانية.
+    document.getElementById('sidebar').addEventListener('click', e => {
+      const b = e.target.closest('button[data-tab]'); if (!b) return;
+      document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('is-active', x === b));
+      document.getElementById('side-profile').classList.remove('on');   // مغادرة لوحة الحساب
+      document.getElementById('panel-account').hidden = true;
+      // الركنُ للأعضاء: الزائرُ يُصرف إلى لوحٍ يقول له ما فيه ولا يبني ما لا يبقى له.
+      // والحارسُ ههنا لا في app.js لأنّ هذا هو المستمعُ الذي يفتح الألواح.
+      const guestNook = b.dataset.tab === 'library' && window.acIsGuest && window.acIsGuest();
+      document.getElementById('panel-nook-lock').hidden = !guestNook;
+      if (guestNook && window.acNookLock) window.acNookLock();
+      document.getElementById('panel-market').hidden  = b.dataset.tab !== 'market';
+      document.getElementById('panel-library').hidden = b.dataset.tab !== 'library' || guestNook;
+      document.getElementById('panel-past').hidden    = b.dataset.tab !== 'past';
+      document.getElementById('panel-stats').hidden   = b.dataset.tab !== 'stats';
+      // واللوحان يُبنيان عند فتحهما لا في كل إقلاع: حسابٌ يمشي في بياناتك كلها ولا يُنظر كل مرة
+      if (b.dataset.tab === 'past'  && window.acPastPaint)  window.acPastPaint();
+      if (b.dataset.tab === 'stats' && window.acStatsPaint) window.acStatsPaint();
+    });
+  </script>
+  <!-- ===== حمولةُ نقلة أنكي — ملفُّ عُدّةٍ مؤقّت =====
+       يُحمَّل مرّةً واحدةً لتنزل البطائق، ثمّ يُرفع هذا الوسمُ والملفُّ والدالّةُ معه.
+       ما نفعله **استيرادٌ لا ربط**: البطائقُ تصير بيانًا في الموقع كأنّك كتبتَها بيدك،
+       ولا يبقى في المشروع اسمُ برنامجٍ آخر ولا ملفٌّ يُقرأ في كلّ إقلاع -->
+  <!-- ‏‎seed-cards.js‎ لا يُحمَّل ههنا: ٦٣٥ك تُقرأ مرّةً في عمر المتصفّح
+       ثمّ لا تُقرأ أبدًا. فيجلبها المحرّكُ عند الحاجة وحدَها (م٥). -->
+  <!-- عبّئ المادة من سيلبوسها — ROADMAP-SYLLABUS.md -->
+  <div class="mmodal syl-modal" id="syl-modal" hidden>
+    <div class="mmodal__card syl-card">
+      <div class="mmodal__head">
+        <h3 class="mmodal__title" id="syl-title"></h3>
+        <button class="mmodal__close" id="syl-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="syl-body">
+        <section class="syl-half syl-half--p">
+          <p class="syl-step"><b>1</b><span id="syl-s1"></span></p>
+          <textarea class="syl-prompt" id="syl-prompt" readonly spellcheck="false"></textarea>
+          <button class="syl-btn syl-btn--copy" id="syl-copy" type="button"></button>
+        </section>
+        <section class="syl-half syl-half--d">
+          <p class="syl-step"><b>2</b><span id="syl-s2"></span></p>
+          <div class="syl-drop" id="syl-drop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>
+            </svg>
+            <b id="syl-drop-t"></b>
+            <button class="syl-btn" id="syl-pick" type="button"></button>
+            <input type="file" id="syl-file" accept=".json,.txt,application/json,text/plain" hidden>
+          </div>
+          <div class="syl-out" id="syl-out" hidden></div>
+          <button class="syl-btn syl-btn--go" id="syl-done" type="button" hidden></button>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
+  <script src="../platform/api-base.js"></script>
+  <script src="../shared/courses.js"></script>
+  <script src="../shared/covers.js"></script>
+  <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
+  <script src="../platform/emoji.js"></script>
+  <script src="../platform/app.js"></script>
+  <!-- فتحُ مبدِّل المجتمع وإغلاقُه. والخياراتُ بلا أثرٍ بعدُ: وسمٌ ينتظر وصلَه -->
+  <script>
+    (function () {
+      var b = document.getElementById('sc-now'),
+          m = document.getElementById('sc-menu'),
+          w = document.getElementById('side-com');
+      if (!b || !m || !w) return;
+      function put(open) {
+        m.hidden = !open;
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      b.addEventListener('click', function (e) { e.stopPropagation(); put(m.hidden); });
+      document.addEventListener('click', function (e) {
+        if (!m.hidden && !w.contains(e.target)) put(false);
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') put(false); });
+    })();
+  </script>
+</body>
+</html>
