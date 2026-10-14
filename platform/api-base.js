@@ -23,7 +23,7 @@
   'use strict';
 
   var API  = 'https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api';
-  var JAR  = { site: 'academia2:tok:site', user: 'academia2:tok:user' };
+  var JAR  = { site: 'academia2:tok:site', user: 'academia2:tok:user', lock: 'academia2:tok:lock' };
   var REL  = /^(?:https?:\/\/[^\/]+)?(\/api(?:\/|\?|$)[^]*)$/;
 
   function get(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
@@ -46,9 +46,26 @@
 
     var tok = get(h.get('x-as') === 'site' ? JAR.site : JAR.user);
     if (tok) h.set('authorization', 'Bearer ' + tok);
+
+    /* وقفلُ اللوحة رمزٌ ثالثٌ مستقلّ: لا هو جلسةُ زائرٍ ولا جلسةُ موقع،
+       بل إذنُ دخولٍ إلى اللوحة نفسِها. وكان كوكيًّا ‎alock‎. */
+    var lk = get(JAR.lock);
+    if (lk) h.set('x-alock', lk);
     o.headers = h;
 
     var p = native(API + m[1].slice(4), o);
+
+    if (/\/api\/lock\/(open|set)(\?|$)/.test(url)) {
+      p = p.then(function (r) {
+        try {
+          r.clone().json().then(function (j) { if (j && j.tok) put(JAR.lock, j.tok); }).catch(function () {});
+        } catch (e) {}
+        return r;
+      });
+    }
+    if (/\/api\/lock\/close(\?|$)/.test(url)) {
+      p = p.then(function (r) { del(JAR.lock); return r; });
+    }
 
     /* والرمزُ يُلتقط من ردّ الدخول مرّةً، ثمّ يُرسَل في كلّ نداءٍ بعده */
     if (/\/api\/auth\/(login|join|site)(\?|$|\/)/.test(url)) {

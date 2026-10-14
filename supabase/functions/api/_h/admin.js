@@ -50,7 +50,11 @@ function same(a, b) {
 }
 
 async function lockOpen(db, req) {
-  const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/);
+  /* The admin page is served from GitHub Pages and the API from Supabase, so
+   the alock cookie cannot ride along. The page holds the token and sends
+   it in `x-alock`; the cookie still works where the origins do match. */
+  const m = (req.headers.get('x-alock') ? [0, req.headers.get('x-alock')]
+    : (req.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/));
   if (!m) return false;
   const g = async k => {
     const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();

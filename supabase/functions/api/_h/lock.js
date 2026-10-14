@@ -76,7 +76,11 @@ const cookie = (v, days) =>
   `alock=${v}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${days * 86400}`;
 
 async function opened(db, req) {
-  const m = (req.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/);
+  /* The admin page is served from GitHub Pages and the API from Supabase, so
+   the alock cookie cannot ride along. The page holds the token and sends
+   it in `x-alock`; the cookie still works where the origins do match. */
+  const m = (req.headers.get('x-alock') ? [0, req.headers.get('x-alock')]
+    : (req.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/));
   if (!m) return false;
   const want = await meta(db, 'admin_pw');
   if (!want) return false;
@@ -118,7 +122,7 @@ export async function onRequest({ request, env, params }) {
       await setMeta(db, 'admin_salt', b64(salt));
       await setMeta(db, 'admin_set', '1');
       const tok = await sha256('alock|' + stored + '|' + b64(salt));
-      return J({ ok: true }, 200, { 'set-cookie': cookie(tok, LOCK_DAYS) });
+      return J({ ok: true, tok }, 200, { 'set-cookie': cookie(tok, LOCK_DAYS) });
     }
 
     /* ---------- الفتح ---------- */
@@ -129,7 +133,7 @@ export async function onRequest({ request, env, params }) {
       const got = await pbkdf2(h, unb64(salt), ITER_S);
       if (!same(got, want)) return J({ error: 'bad' }, 401);
       const tok = await sha256('alock|' + want + '|' + salt);
-      return J({ ok: true }, 200, { 'set-cookie': cookie(tok, LOCK_DAYS) });
+      return J({ ok: true, tok }, 200, { 'set-cookie': cookie(tok, LOCK_DAYS) });
     }
 
     return J({ error: 'not-found' }, 404);

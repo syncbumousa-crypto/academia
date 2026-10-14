@@ -157,7 +157,11 @@ export async function onRequest(ctx) {
     const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();
     return r ? r.v : '';
   };
-  const m = (request.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/);
+  /* The admin page is served from GitHub Pages and the API from Supabase, so
+   the alock cookie cannot ride along. The page holds the token and sends
+   it in `x-alock`; the cookie still works where the origins do match. */
+  const m = (request.headers.get('x-alock') ? [0, request.headers.get('x-alock')]
+    : (request.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/));
   let ok = false;
   if (m) {
     const pw = await g('admin_pw');

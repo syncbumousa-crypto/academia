@@ -65,7 +65,11 @@ async function pbkdf2(pw, salt, iter) {
 /* The admin page's password lock, read the same way the lock itself reads it.
    Kept here rather than imported so this endpoint cannot drift from it. */
 async function adminLocked(db, request) {
-  const m = (request.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/);
+  /* The admin page is served from GitHub Pages and the API from Supabase, so
+   the alock cookie cannot ride along. The page holds the token and sends
+   it in `x-alock`; the cookie still works where the origins do match. */
+  const m = (request.headers.get('x-alock') ? [0, request.headers.get('x-alock')]
+    : (request.headers.get('cookie') || '').match(/(?:^|;\s*)alock=([^;]+)/));
   if (!m) return false;
   const g = async k => {
     const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();
