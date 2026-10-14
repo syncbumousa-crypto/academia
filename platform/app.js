@@ -319,6 +319,15 @@
     state.nkSzV = 2;
     Object.keys(NK_DEF).forEach(k => { state[k] = Object.assign({}, NK_DEF[k]); });
   }
+  /* ===== والملءُ التلقائيُّ حتّى أوّلِ جرَّة =====
+     الأعراضُ الأربعةُ أعلاه مجموعُها أضيقُ من الصفّ في الشاشات الواسعة، فيبقى على
+     اليسار فاضلٌ لا صاحبَ له — وحافّةُ الصفّ لا تستوي مع «التقويم» فوقه و«الموارد»
+     تحته. فيُعطى الفاضلُ للرابع **ما دام صاحبُ الموقع لم يجرَّ عرضًا قطّ**.
+     فإذا جرَّ صارت الأعراضُ أعدادًا صريحةً، وصار الفراغُ على اليسار **مقصودًا**:
+     من ضيّق مربّعًا فقد أراد أن يضيق. (وكان الملءُ في الورقة ‎flex-grow: 1 !important‎
+     فكان يغلب العرضَ المكتوبَ سطريًّا أبدًا — فمربّعُ الدرجة لا يُضيَّق بيدٍ: مقبضُه
+     يُمسك ومؤشّرُه يتبدّل ولا يتحرّك شيء.) */
+  state.nkFit = state.nkFit == null ? 1 : (state.nkFit ? 1 : 0);
   /* ما يقع عند حفظ البطاقة — يعيش في الحال المحفوظة لا في الجلسة، فعادةُ الإضافة لا تُستأنف كلَّ مرّة.
      والمفتاحان مطفآن ابتداءً: الحفظُ حفظٌ ولا يُزاد عليه فعلٌ لم يُطلب.
      و‎cdSetV‎ ترقيمُ معنًى لا ترقيمُ بنية: كان المفتاحان يحكمان ✕ و‎close‎ مشتعلٌ ابتداءً،
@@ -377,6 +386,18 @@
   const libEntries = term => state.libs[term] || (state.libs[term] = []);
   const libCodes = term => libEntries(term).map(e => e.code);
   const libEntry = (term, code) => libEntries(term).find(e => e.code === code);
+  /* ===== وما خرج من الترم يعود كما تركتَه =====
+     «احذف المادة» لا يمحو عملَك: القيدُ يُوضع جانبًا بكلّ ما عليه (اختياراتُك في
+     المربّعات، ورحلتُك، ودرجاتُك). فمن أعادها إلى الترم وجدها كما كانت.
+     وتُنادى من كلّ بابٍ يُضيف مادّةً — وهما اثنان، فلا يفترق أحدُهما عن الآخر. */
+  function libTake(term, code) {
+    const bin = (state.libBin || {})[term];
+    if (!Array.isArray(bin)) return null;
+    const i = bin.findIndex(e => e && e.code === code);
+    if (i < 0) return null;
+    const [en] = bin.splice(i, 1);
+    return en;
+  }
   state.cinfo = state.cinfo || {};           // تفاصيل المادة: { code: { desc, rel, docs: [{n,e,days,from,to,d,teach,grade}] } }
   state.viewMode = 'all';   // شريط كل/أفضل أُزيل — القوائم دائمًا كاملة
   state.srs = state.srs || {};   // جدولة التكرار المتباعد الشخصية للبطائق: { cardId: {e: ease%, i: فاصل بالأيام, d: تاريخ الاستحقاق} }
@@ -508,6 +529,11 @@
   const LAB_COURSES = new Set(['ICS 104', 'STAT 214', 'MIS 250', 'MIS 301', 'MIS 311', 'MIS 315', 'MIS 341', 'ACCT 300', 'CGS 392', 'COE 344', 'ICS 108', 'SWE 206']);
   const baseOf = code => { const j = code.indexOf('::'); return j < 0 ? code : code.slice(0, j); };   // «ICS 104::معمل» → «ICS 104»
   const labKey = code => code + '::معمل';                                                            // مفتاح مساهمات نشاط المعمل (خيط منفصل)
+  /* ===== ومفتاحُ النشاط يُسمّى ولا يُنثَر =====
+     المادّةُ ذاتُ المعمل **مادّتان**: لكلٍّ مساهماتُها وغلافُها وتثبيتُها. والمفتاحُ
+     كان يُحسب في كلّ موضعٍ على حدة (‎isL ? labKey(x) : x‎)، فمن نسيه أخذ مفتاحَ
+     المحاضرة — وسأل الكتابان سؤالًا واحدًا فأخذا جوابًا واحدًا. */
+  const actCode = (code, act) => (act === 'معمل' ? labKey(code) : code);
   const isLab = code => LAB_COURSES.has(baseOf(code));
   const labSel = {};                                                                                 // النشاط المحدَّد لكل مادة لاب (افتراضيًا «محاضرة»)
   const selOf = code => labSel[code] || 'محاضرة';
@@ -533,13 +559,208 @@
     }
     return best;
   }
-  const imgOf = code => {
-    const cp = coverPost(code) || coverPost(baseOf(code));
-    /* assetURL: مسار مستودع مخزَّن نسبيًّا («covers/…») يُصحَّح حسب الصفحة (الموقع أو لوحة الأدمن)،
-       ولا يمسّ data:‎ ولا http:‎ */
-    return (cp && assetURL(cp.data.bookImg))
-      || state.imgs[code] || state.imgs[baseOf(code)]
-      || (typeof COVERS !== 'undefined' && assetURL(COVERS[code] || COVERS[baseOf(code)])) || '';
+  /* ============================================================
+     ‎bookHTML‎ — راسمُ الكتاب الوحيد
+     ============================================================
+     كان الكتابُ يُرسم **يدًا في ثلاثة مواضع** بثلاثة أوسمةٍ مختلفة، ويُنسَّق
+     بخمسٍ وعشرين قاعدة. فلمّا بُدّل سلوكُه («المرسومُ أساسٌ والصورةُ فوقه»)
+     بُدّل في اثنين وبقي الثالث — وهو الذي في **المساهمات** — على النظام القديم:
+     صورةٌ في السَّيل بلا ما يعطيها قامة. فبدت «لا تُحمَّل».
+
+     والعقدُ البصريُّ يُكتب ههنا مرّةً (‎ROADMAP-BOOK‎):
+       · النسبةُ ‎0.7‎ في كلّ المقاسات
+       · بلا صورةٍ: وجهٌ مرسومٌ فيه القسمُ والرقم
+       · مع صورةٍ: الصورةُ **فوق** المرسوم بـ‎object-fit: cover‎
+       · أثناء التحميل: المرسومُ ظاهرٌ — لا فراغَ في أيّ لحظة
+       · عند الفشل: ‎onerror‎ ينزع وجهَ الصورة فينكشف المرسومُ تحتها
+
+     ولا يُخرج وسمَ ‎.bk‎ غيرُها — و‎_book.py‎ يمنع أن يُولد رابعٌ. */
+  function bookFace(code) {
+    const c = String(code || '');
+    const sp = c.indexOf(' ');
+    const dept = sp < 0 ? c : c.slice(0, sp);
+    const num = sp < 0 ? '' : c.slice(sp + 1);
+    const lab = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
+    return '<b>' + esc(lab) + '</b><i>' + esc(num) + '</i>';
+  }
+  /* ‎o = { size: 'xs'|'lg'|'' , inner: وسمٌ داخل الوجه , after: وسمٌ أخو الوجه }‎ */
+  function bookHTML(code, img, o) {
+    const op = o || {};
+    const sz = op.size ? ' bk--' + op.size : '';
+    const inner = op.inner || '';
+    /* ‏‎this.parentNode.remove()‎ لا ‎this.remove()‎: يُنزع الوجهُ المصوَّر كلُّه
+       فينكشف المرسومُ تحته — ولو نُزعت الصورةُ وحدَها بقي سطحٌ فارغٌ فوقه */
+    /* ===== والصورةُ هي التي تعطي القدَّ حين توجد =====
+       جعلتُ المرسومَ يعطي القدَّ دائمًا (نسبة ‎0.7‎) والصورةَ فوقه بقصّ، فمُطّت
+       أغلفةٌ نسبتُها غيرُ ذلك. والأصلُ قبلُ: الصورةُ بنسبتها (‎height:100%‎ و‎width:auto‎)
+       — وهو الصحيح، فالغلافُ يُرى كما هو لا مقصوصًا.
+       فتُقلب الطبقتان: الصورةُ في السَّيل تعطي القدَّ، والمرسومُ **خلفها** يملأ
+       ما تحتها فيُرى قبل أن تصل. وإن سقطت نُزع صنفُ ‎bk--img‎ فعاد المرسومُ إلى
+       السَّيل وأعطى القدَّ — فلا ينهار الصندوق. */
+    const face = '<span class="bkface">' + bookFace(baseOf(code)) + (img ? '' : inner) + '</span>';
+    const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
+               + ' this.parentNode.remove()';
+    const shot = img
+      ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy"'
+        + ' onerror="' + fail + '">' + inner + '</span>'
+      : '';
+    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : '') + '">'
+      + face + shot + (op.after || '') + '</span>';
+  }
+
+  /* ============================================================
+     سلسلةُ الغلاف — ترتيبٌ واحدٌ مُعلَنٌ يُقرأ ويُكشف
+     ============================================================
+     كانت ثلاثةَ مصادرَ متتاليةٍ بلا اسمٍ ولا طريقةٍ لمعرفة أيُّها فاز. فحذفُ
+     المساهمة لا يحذف الغلاف: يسقط الاختيارُ إلى ما تحته وهو **الصورةُ القديمةُ
+     نفسُها** — والمستخدم يرى «الحذف ما اشتغل». وأربعُ محاولاتِ إصلاحٍ ضاعت
+     لأنّ السلسلةَ لم تكن تُرى.
+
+     فصارت واحدةً تردّ **المصدرَ مع الصورة**، و‎acCover(code)‎ تطبعه.
+
+     ===== و‎state.imgs‎ خرج من السلسلة =====
+     مخزنُ متصفّحٍ، وقد استقرّ ألّا يُخزَّن في المتصفّح شيءٌ سوى الجلسة. وما فيه
+     يرفعه ‎imgsToStore‎ إلى المستودع ثمّ يصير عنوانًا في مساهمة. فبقاؤه مصدرًا
+     يجعل الحذفَ يسقط عليه فلا يُحذف شيء. */
+  /* ===== ومعرّفُ حساب الموقع يُعرَّف ههنا لا في جزءٍ متأخّر =====
+     ‎const‎ لا يُرفع: نداؤه قبل سطره يُلقي وقتَ التشغيل، و‎node --check‎ لا يراه.
+     وسلسلةُ الغلاف تُنادى في أوّل رسم، فيجب أن يكون مُعرَّفًا قبلها. */
+  /* =========================================================================
+     OWNERSHIP — who owns a contribution, and who this page is acting as
+     =========================================================================
+     THE PROBLEM, in one sentence:
+
+       One browser holds two identities. The admin page acts as the site
+       account; the main site acts as the signed-in student. They share one
+       login cookie and one local drawer. So "is this mine?" kept being
+       answered by whoever happened to be signed in at that moment.
+
+     THE RULES. Five lines. Everything else follows from them.
+
+       1. A contribution records its owner the moment it is created.
+       2. Each page knows who it acts as: admin page = the site account,
+          main site = the signed-in user (or nobody).
+       3. "Mine" is a question, not a stored fact. It is answered by
+          comparing the owner with who this page acts as. The `me` field is
+          only a cached answer, and it is refreshed in ONE place.
+       4. Only the owner may upload a contribution. The server checks it.
+       5. Before uploading, make the login cookie match who we act as.
+          Never upload under the wrong identity.
+
+     WHAT WENT WRONG BEFORE THESE RULES (all seen in real use, 29 Aug):
+       · A pinned site cover appeared under the student's name and avatar,
+         and the student could edit it.
+       · A contribution written in the admin page was uploaded under the
+         student's account, lost its pin, and left no site copy at all.
+       · Site covers stopped reaching the main site.
+
+     Each of those was patched separately, in a different file, and each
+     patch was correct on its own. They were all the same bug. This block
+     is that bug's one home.
+     ========================================================================= */
+  const SITE_UID = 'u-academia';
+  const SITE_NAMES = ['أكاديميا', 'academia'];
+  const SITE_MAIL = 'site@academia.local';
+
+  /* Who this page acts as. Empty means nobody is signed in. */
+  const actingAs = () => (ADMIN ? SITE_UID : (state.uid || ''));
+
+  /* Who owns a contribution.
+     Contributions written before accounts existed have no owner field. If
+     one carries the site's name it belongs to the site — that is how the
+     shipped book covers and starter card decks were written. Anything else
+     without an owner is an unclaimed draft that lives only in this browser. */
+  const ownerOf = p => (!p ? ''
+    : (p.uid || ((p.u && SITE_NAMES.indexOf(p.u.name) > -1) ? SITE_UID : '')));
+
+  /* Is this mine?
+     If it has an owner, the owner decides — that is the whole point.
+     If it has none, it is a local draft or a demo row, and whatever flag it
+     already carries stays: we have nothing better to go on, and guessing
+     "yes" would hand every seeded demo contribution to the reader. */
+  const isMine = p => { const o = ownerOf(p); return o ? o === actingAs() : !!p.me; };
+
+  /* Every contribution in the drawer, including the ones filed under a
+     doctor. One walker, so nothing is ever half-updated again. */
+  function eachPost(fn) {
+    const C = state.cinfo || {};
+    Object.keys(C).forEach(code => {
+      const info = C[code] || {};
+      const ps = info.posts || {};
+      Object.keys(ps).forEach(sec => {
+        if (Array.isArray(ps[sec])) ps[sec].forEach(p => { if (p) fn(p, code, sec); });
+      });
+      (info.doctors || []).forEach(dr => {
+        (dr.posts || []).forEach(p => { if (p) fn(p, code, 'doc'); });
+      });
+    });
+  }
+
+  /* ===== وتوقيعُ الاقتراحات القديمة يُصحَّح مرّةً واحدة =====
+     ما أُرسل قبل أن يُوقَّع بالاسم يحمل «أنا»، فتقرؤه اللوحةُ ضميرًا لا اسمًا.
+     ويقع في متصفّحٍ واحد: نسخةُ الخادم تحمل الاسمَ من قاعدةِ الحسابات، وإنّما
+     تغلبها النسخةُ المحلّيّةُ لأنّها لصاحبها. فتُصحَّح ههنا حيث هي **لك** — ثمّ
+     تقرؤها اللوحةُ في المتصفّح نفسِه مصحَّحة.
+     ومقصورةٌ على ‎drx‎: هو البندُ الوحيدُ الذي يُقرأ ‎u‎ فيه لصاحبه. */
+  function drxSign() {
+    const nm = (state.profile || {}).name;
+    if (!nm) return 0;
+    let n = 0;
+    eachPost((p, code, sec) => {
+      if (sec !== 'drx' || !isMine(p)) return;
+      const u = p.u || {};
+      if (u.name && u.name !== T().meName) return;
+      p.u = { name: nm, img: (state.profile || {}).img || '' };
+      n++;
+    });
+    if (n) { save(); bootMark('drx:sign:' + n); }
+    return n;
+  }
+
+  /* Rule 3: refresh the cached answer. Called at boot and on every session
+     change. This replaces three older functions that each fixed part of the
+     same thing in a different file (`siteUnclaim`, the claim step, and a
+     repair inside the pull). */
+  function refreshOwnership() {
+    let n = 0;
+    eachPost(p => {
+      const want = isMine(p);
+      if (!!p.me !== want) { p.me = want; n++; }
+    });
+    if (n) { save(); bootMark('own:' + n); }
+    return n;
+  }
+
+  /* ===== قاعدةٌ واحدةٌ لا سلسلة =====
+     كانت أربعةَ مصادرَ متتالية، فكان **النزولُ** هو العطب لا ترتيبُه: تُحذف
+     المساهمةُ أو يُسحب تثبيتُها فيقع الاختيارُ على ما تحتها، فيبقى غلافٌ لا
+     مساهمةَ له — «الحذف ما اشتغل».
+     والعقد: **الغلافُ صورةُ المساهمة المثبَّتة، ولا مثبَّتةَ ⇒ لا غلاف.**
+     فلا «ثمّ» ولا «وإلّا».
+
+     ===== والمعملُ والمحاضرةُ مادّتان مستقلّتان =====
+     كان المعملُ يرث كتابَ مادّته بـ‎baseOf‎. ورُفع بحكم صاحب الموقع: هما
+     مادّتان لكلٍّ مساهماتُها، فتثبيتُ مساهمةٍ في إحداهما لا يعيّن غلافَ الأخرى —
+     وإلّا صار الغلافُ للحزمة لا للمادّة. ومن أراد للمعمل غلافًا ثبّت له مساهمةً
+     في مفتاحه هو. */
+  function coverOf(code) {
+    const cp = coverPost(code);
+    return cp ? { via: 'pin', img: assetURL(cp.data.bookImg), pid: cp.id }
+              : { via: 'none', img: '', pid: '' };
+  }
+  const coverSrc = coverOf;
+  const imgOf = code => coverSrc(code).img;
+  /* ودالّةُ كشفٍ للمِرقاب: أيُّ مصدرٍ فاز ولماذا — السلسلةُ التي لا تُرى لا تُصلَّح */
+  window.acCover = code => {
+    const r = coverSrc(code);
+    const arr = (((state.cinfo || {})[code] || {}).posts || {}).info || [];
+    console.log('غلاف ' + code + ' ⇐ ' + r.via + (r.pid ? ' (' + r.pid + ')' : ''));
+    console.log('  المساهمات:', arr.map(p => ({
+      id: p.id, uid: p.uid, pin: p.pin ? 1 : 0, st: p.st || '-',
+      img: (p.data && p.data.bookImg || '').slice(0, 42) || '—',
+    })));
+    console.log('  الصورة:', r.img || '(لا شيء — الكتابُ المرسوم)');
+    return r;
   };
 
   /* ---------- كتالوج الأدمن ----------
@@ -682,6 +903,43 @@
      ===== ولا يُمَسّ ما ليس مساهمةً =====
      ‎doctors‎ وما في ‎cinfo[code]‎ من حقولٍ أخرى تبقى: لم يُبنَ لها بابٌ في
      الخادم بعد، ولا يُنزع مأوًى قبل أن يوجد بديلُه. */
+  /* ============================================================
+     أبلغ الخادمَ **ما فيها الآن** لا مجرّد أنّها بلغته يومًا؟
+     ============================================================
+     كان الإسقاطُ على وجود ‎srvH‎ وحدَه: «بلغت الخادمَ ⇒ تُسقط من الدرج، والخادمُ
+     يحفظها». وهو صوابٌ ما لم تُعدَّل بعد بلوغها. فإن عُدّلت — ثمّ لم يقع الدفعُ
+     بعدُ — أُسقط التعديلُ من الدرج والخادمُ لا يعرفه، فيذهب بأوّل تحديثِ صفحة.
+     وهو ما وقع بالصور: تُضاف الصورةُ، ويقف الدفعُ حتّى ترتفع، ويُحدَّث الصفحةُ
+     قبل ذلك — **فتختفي**. وكان يقع بالنصّ أيضًا في نافذة الأربع ثوانٍ، لكنّه
+     نادرٌ فلم يُرَ.
+
+     فالبصمةُ تُقاس على المتن: ‎srvD‎ يُكتب عند نجاح الدفع، ويُقارن ههنا. فما
+     تبدّل بعد الدفع يبقى في الدرج حتّى يبلغ. والحسابُ رخيص (بصمةٌ نصّيّةٌ لا
+     تعمّيةٌ)، ولا يقع إلّا على مساهماتي أنا. */
+  /* أفيها صورةٌ لم تُرفع بعد؟ — ‎data:‎ في المتن دليلٌ قاطع */
+  const hasRaw = p => {
+    try { return JSON.stringify((p && p.data) || {}).indexOf('data:image') > -1; }
+    catch (e) { return true; }                 /* شكٌّ ⇒ تُبقى */
+  };
+
+  const sentAll = p => {
+    if (!p.srvH) return false;                 /* لم تبلغ أصلًا */
+    if (p.imgPend) return false;               /* فيها صورةٌ تنتظر الرفع */
+    let s;
+    try { s = JSON.stringify(p.data || {}); }
+    catch (e) { return false; }                /* شكٌّ ⇒ تُبقى: الإبقاءُ أرخصُ من المحو */
+    /* ===== وصورةٌ لم تُرفع لا تُسقط أبدًا، بصمةً كانت أو لم تكن =====
+       مساهماتُ صاحب الموقع كُتبت قبل أن تُوجد ‎srvD‎. وقلتُ «بلا بصمةٍ فاعتبرها
+       بلغت» رفقًا بالدروج القديمة — فكانت هي التي تُسقط الصورةَ الجديدة: ‎srvH‎
+       قديمةٌ موجودة، و‎srvD‎ غائبة، فتُقرأ «بلغت كلُّها» وتُمحى من الدرج ولم يبلغ
+       الخادمَ منها شيء. فظهرت الصورةُ ثمّ ذهبت بأوّل تحديث.
+       و‎data:‎ في المتن دليلٌ قاطعٌ أنّ فيها ما لم يُرفع — لا يحتمل بصمةً ولا
+       تاريخًا: ما دامت الصورةُ في المتصفّح فالمتصفّحُ آخرُ ما يحفظها. */
+    if (s.indexOf('data:image') > -1) return false;
+    if (!p.srvD) return true;                  /* بلغت قبل البصمة ولا صورةَ معلَّقة */
+    return srvHash(s) === p.srvD;
+  };
+
   function cinfoThin(C) {
     const out = {};
     Object.keys(C || {}).forEach(code => {
@@ -689,8 +947,15 @@
       const keep = {};
       let any = false;
       Object.keys(src.posts || {}).forEach(sec => {
+        /* ===== وصورةٌ لم تُرفع تبقى ولو لم تكن المساهمةُ لي =====
+           الإسقاطُ مقصورٌ على ما هو ‎me‎، والموقعُ الأساسيُّ يردّ مساهماتِ الموقع
+           إليه كلَّ إقلاع (‎siteUnclaim‎) — فتصير غيرَ ‎me‎ فتُسقط، ومعها صورةٌ
+           لم يبلغ الخادمَ منها شيء. فبقيت في اللوحة وذهبت في الموقع.
+           والدرجُ واحدٌ للأصل كلِّه، فما لم يُرفع بعدُ لا يملكه أحدٌ دون أحد:
+           **يبقى حتّى يبلغ**، ثمّ يُسقط كسائره. */
         const list = (src.posts[sec] || []).filter(p =>
-          p && p.me && !p.srvH && !(typeof postEmpty === 'function' && postEmpty(p)));
+          p && (hasRaw(p)
+                || (p.me && !sentAll(p) && !(typeof postEmpty === 'function' && postEmpty(p)))));
         if (list.length) { keep[sec] = list; any = true; }
       });
       const rest = {};
@@ -759,6 +1024,14 @@
      لوحةُ الأدمن تعمل في هذي الصفحة نفسِها وتكتب الدرجَ كلَّه من لقطةٍ قديمة،
      فتمحو ما كتبه المحرّكُ بعد اللقطة. فتُعطى بابًا: تُنقل مفاتيحُ لقطتِها إلى
      الحال الحيّة ثمّ يُحفظ **بالحارس** — فتمرّ كتابتُها بما يمرّ به كلُّ حفظ. */
+  /* ===== واللوحةُ تقرأ الحالَ الحيّةَ لا لقطةَ الدرج =====
+     الدرجُ **مُنقًّى**: ما بلغ الخادمَ من المساهمات يُسقط منه (‎cinfoThin‎) ويُعاد
+     جذبُه عند الإقلاع. فمن قرأ الدرجَ رأى مساهماتِه المعلَّقة وحدَها، ولم يرَ
+     مساهمةَ غيره ألبتّة — واللوحةُ تحتاج أن ترى اقتراحاتِ الناس.
+     وأخطرُ منه: كانت اللوحةُ تقرأ اللقطةَ ثمّ تُلبسها الحالَ الحيّة (‎acSaveState‎)،
+     فتمحو من الذاكرة كلَّ ما جُذب. فبابٌ للقراءة كما للكتابة، والكائنُ واحد. */
+  window.acState = () => state;
+
   window.acSaveState = function (s) {
     if (!s || typeof s !== 'object' || Array.isArray(s)) return false;
     Object.keys(s).forEach(k => { state[k] = s[k]; });
@@ -1122,6 +1395,11 @@
       /* قُمرة المادة في الرَّكن (هيكل «على ذوقي») */
       hoursShort: 'ساعات', closeBtn: 'إغلاق',
       nkPickTip: 'اختر مساهمة', contribsTitle: 'المساهمات',
+      imgFail: 'تعذّرت الصورة — جرّب صورة أخرى',
+      imgWait: 'الصورة لم تُرفع بعد — محفوظة في متصفّحك، وتُعاد المحاولة',
+      /* دعوةُ الحال الصفريّة — لفظُها من ‎RE/nook-four‎ حيث صُمّمت */
+      nkCta: { info: 'سجل بنود المادة', doc: 'سجل بنود الدكتور',
+               abs: 'سجل بنود الغياب', grade: 'سجل بنود الدرجات' },
       cancelBtn: 'إلغاء',
       pubTitle: 'تشكيلك للمادة', pubTitleDoc: 'تشكيلك للدكتور', pubOn: 'عام', pubOff: 'خاص',
       pubTip: 'بجعله عامًّا يصير تشكيلك مساهمةً في بند «المادة»',
@@ -1129,6 +1407,10 @@
       pkDragTip: 'اسحب المساهمة أو أحد بنودها إلى اليسار',
       nkCalendar: 'التقويم', nkCourse: 'المادة', nkDoctor: 'الدكتور',
       nkGrade: 'الدرجة', nkResources: 'الموارد', nkSelfProgress: 'تقدمي الذاتي',
+      nkWait: 'جارٍ التحميل…',
+      gbTitle: 'الدرجة من كم؟', gbHint: 'اتركها ١٠٠ للمادة كاملة. وللمحاضرة وحدها في مادة معها معمل، اكتب نصيبها.',
+      gbSave: 'اعتمد', gbOf: n => `من ${n}`,
+      gbDone: n => `صارت الدرجة من ${n}`,
       jrEmpty: 'لا مواضيع لهذه المادة بعد — تُكتب في مربع «المادة»، وتظهر هنا',
       jrAddC: 'بطاقة', jrAddF: 'مجلد', jrAddK: 'مهمة', jrDel: 'حذف',
       jrAddI: 'استورد من المكتبة',
@@ -1143,7 +1425,7 @@
       jrTaskPh: 'اكتب المهمة…', jrCardPh: 'وجه البطاقة…', jrFoldPh: 'اسم المجلد…',
       /* مقابض مربع المادة المرن */
       nkiW: 'اسحب: عرض المربع', nkiH: 'اسحب: طول المربع', nkiWH: 'اسحب: العرض والطول',
-      gmPct: 'درجتك في هذا البند بالمئة', gmDue: 'موعد البند',
+      gmPct: 'كم نلتَ من وزن هذا البند', gmDue: 'موعد البند',
       /* منتقي التاريخ — بكرات: يوم · شهر · سنة */
       dpkClear: 'امسح', dpkToday: 'اليوم', dpkDay: 'اليوم', dpkMonth: 'الشهر', dpkYear: 'السنة',
       dpkNone: 'بلا موعد',
@@ -1158,6 +1440,40 @@
       lateNote: n => `كل ${n} تأخير = غياب واحد`,
       studySec: 'المصادر والملفات', natureSec: 'نوعية المادة', courseType: 'نوعية المادة',
       courseLang: 'لغة المادة', langs: { ar: 'عربي', en: 'إنجليزي' },
+      bkmAI: 'عبّئها من السيلبوس', bkmDel: 'احذف المادة', bkmReset: 'أعِد تعيين بنودها',
+      bkmDelAsk: n => `تُحذف «${n}» من ترمك.\n\nوما كتبته فيها يبقى — فإن أعدتها وجدته كما تركته.`,
+      bkmDelDone: n => `حُذفت «${n}» من ترمك`,
+      bkmNotHere: 'افتح الترم الذي فيها أوّلًا',
+      bkmResetAsk: n => `يُمحى كلُّ ما كتبته في «${n}»: المربّعات الأربعة، ورحلتك فيها، ودرجاتك،
+ومساهماتك عنها — هنا وعلى الخادم.\n\nثمّ تعود كأنّك أضفتها الآن. ولا رجعة.`,
+      bkmResetDone: n => `أُعيد تعيين «${n}»`,
+      bkmNotYours: 'هذا الغلاف ليس لك — لا يُحذف من هنا',
+      sylBadJson: 'الملف غير مقروء — تأكد انك نسخته كاملا',
+      sylNotOurs: 'هذا ليس ملف اكاديميا — اطلب الصيغة كما في البرومبت',
+      sylEmpty: 'الملف صحيح لكنه فارغ — ما فيه شيء يُعبّأ',
+      sylSum: n => 'مجموع بنود الدرجة ' + n + '٪ لا ١٠٠٪ — راجعه',
+      sylTitle: c => 'عبّئ «' + c + '» من سيلبوسها',
+      sylS1: 'انسخ هذا وارسله لأي ذكاء اصطناعي مع ملف السيلبوس',
+      sylS2: 'ثم احضر الملف الذي ردّ به واسقطه هنا',
+      sylCopy: 'انسخ البرومبت', sylCopied: 'نُسخ ✓',
+      sylDropT: 'اسقط الملف هنا', sylPick: 'او اختره من جهازك',
+      sylGo: 'عبّئ المربّعات',
+      sylDone: n => 'عُبّئ ' + n + ' حقلا — والغلاف لم يُمَسّ',
+      sylDesc: 'الوصف', sylTopics: 'مواضيع', sylHours: 'فترة',
+      sylFields: 'حقول', sylItems: 'بنود',
+      sylReport: 'ما حصل:', sylDone2: 'تمام',
+      sylFilled: n => 'عُبّئ ' + n,
+      sylNothing: 'لم يتغيّر شيء',
+      sylLeft: k => '— بقي فارغًا: ' + k,
+      sylCover: 'غلاف الكتاب',
+      sylCoverKept: 'لم يُمَسّ — السيلبوس لا يحمل صورة',
+      sylField: { book: 'الكتاب', desc: 'الوصف', type: 'النوعية',
+                  lang: 'اللغة', topics: 'المواضيع',
+                  doc: 'الاسم', e: 'البريد', bld: 'المبنى',
+                  room: 'الغرفة', d: 'ملاحظة', hours: 'الساعات المكتبية',
+                  free: 'المسموح', dedFrom: 'بدء الخصم', dedAmt: 'مقدار الخصم',
+                  dn: 'DN', late: 'التأخير', grade: 'التوزيع',
+                  dates: 'المواعيد' },
       noData: 'لا توجد معلومات بعد',
       communityTitle: 'المساهمات', sharePost: 'شارك علمك', shareBtn: 'مشاركة', typePick: 'نوعية المادة', meName: 'أنا',
       acctTitle: 'الحساب', acctName: 'الاسم', acctNamePh: 'اسمك', acctPhone: 'رقم الجوال', acctPhonePh: '05xxxxxxxx', acctPhoto: 'غيّر الصورة',
@@ -1185,6 +1501,7 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
+      srvBusy: 'بلغتَ حدّ الطلبات — سيُعاد الإرسال تلقائيًا بعد قليل',
       /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
          لا يُزكّيه صاحبُه». والسببُ صحيحٌ ومكانُه التعليقُ في الشيفرة لا شريطٌ
          يُقرأ في ثانية. فيُقال ما وقع وحدَه */
@@ -1220,6 +1537,12 @@
       completePct: n => `اكتمال التوزيع: ${n}% من 100%`,
       sortBy: 'ترتيب', sortBest: 'الأفضل', sortNewest: 'الأحدث', contribUnit: 'مساهمة',
       filterByDoctor: 'تصفية حسب الدكتور', allDoctors: 'كل الدكاترة', docPickLab: 'الدكتور',
+      drxAsk: 'الدكتور غير موجود؟', drxCta: 'أقترحه',
+      pkDocLock: 'تظهر المساهمات الخاصة بالدكتور الذي تختاره هنا. اختر الدكتور في البند الأول.',
+      drxTitle: 'اقترح دكتورًا', drxAr: 'اسمه بالعربي', drxEn: 'اسمه بالإنجليزي',
+      drxImg: 'صورته', drxPick: 'اختر صورة…', drxSend: 'أرسل الاقتراح', drxCancel: 'إلغاء',
+      drxNeedName: 'اكتب اسم الدكتور بالعربي', drxNeedAcct: 'سجّل الدخول لترسل اقتراحك',
+      drxDone: 'وصل اقتراحك — يظهر بعد اعتماده',
       prevDoctor: 'السابق', nextDoctor: 'التالي',
       dispTitle: 'طريقة الإظهار', dispBest: 'أفضل', dispAll: 'كل', aboutLabel: 'المساهمات عن',
       ago: n => {
@@ -1474,6 +1797,10 @@
       /* Course cockpit in the Nook */
       hoursShort: 'hours', closeBtn: 'Close',
       nkPickTip: 'Pick a contribution', contribsTitle: 'Contributions',
+      imgFail: 'Image failed — try another',
+      imgWait: 'Image not uploaded yet — kept in your browser, will retry',
+      nkCta: { info: 'Log course fields', doc: 'Log instructor fields',
+               abs: 'Log absence fields', grade: 'Log grade fields' },
       cancelBtn: 'Cancel',
       pubTitle: 'Your course composition', pubTitleDoc: 'Your instructor composition', pubOn: 'Public', pubOff: 'Private',
       pubTip: 'Making it public turns your composition into a “Course” contribution',
@@ -1481,6 +1808,10 @@
       pkDragTip: 'Drag a contribution — or one of its fields — to the left',
       nkCalendar: 'Calendar', nkCourse: 'Course', nkDoctor: 'Instructor',
       nkGrade: 'Grade', nkResources: 'Resources', nkSelfProgress: 'My progress',
+      nkWait: 'Loading…',
+      gbTitle: 'Out of how much?', gbHint: 'Leave it at 100 for a whole course. For a lecture that has a lab beside it, write its share.',
+      gbSave: 'Set', gbOf: n => `out of ${n}`,
+      gbDone: n => `the grade is now out of ${n}`,
       jrEmpty: 'No topics for this course yet — write them in the «Course» box and they appear here',
       jrAddC: 'Card', jrAddF: 'Folder', jrAddK: 'Task', jrDel: 'Delete',
       jrAddI: 'Import from library',
@@ -1494,7 +1825,7 @@
       jriNC: n => `${n} card${n === 1 ? '' : 's'}`,
       jrTaskPh: 'Write the task…', jrCardPh: 'Card front…', jrFoldPh: 'Folder name…',
       nkiW: 'Drag: box width', nkiH: 'Drag: box height', nkiWH: 'Drag: width and height',
-      gmPct: 'Your score on this item (%)', gmDue: 'Item date',
+      gmPct: 'How much of this item you earned', gmDue: 'Item date',
       dpkClear: 'Clear', dpkToday: 'Today', dpkDay: 'Day', dpkMonth: 'Month', dpkYear: 'Year',
       dpkNone: 'No date',
       months: ['January', 'February', 'March', 'April', 'May', 'June',
@@ -1508,6 +1839,39 @@
       lateNote: n => `${n} lates = 1 absence`,
       studySec: 'Sources & Files', natureSec: 'Course type', courseType: 'Course type',
       courseLang: 'Course language', langs: { ar: 'Arabic', en: 'English' },
+      bkmAI: 'Fill it from the syllabus', bkmDel: 'Remove the course',
+      bkmReset: 'Start it over',
+      bkmDelAsk: n => `«${n}» will be removed from your term.\n\nWhat you wrote in it stays — add it again and you will find it as you left it.`,
+      bkmDelDone: n => `«${n}» removed from your term`,
+      bkmNotHere: 'Open the term it belongs to first',
+      bkmResetAsk: n => `Everything you wrote in «${n}» will be erased: the four boxes, your journey through it, your marks,
+and your contributions about it — here and on the server.\n\nIt then looks as though you just added it. This cannot be undone.`,
+      bkmResetDone: n => `«${n}» was started over`,
+      bkmNotYours: 'This cover is not yours to remove',
+      sylBadJson: 'The file could not be read — check you copied all of it',
+      sylNotOurs: 'This is not an academia file — ask the AI for the exact shape in the prompt',
+      sylEmpty: 'The file is valid but empty — there is nothing to fill',
+      sylSum: n => 'The grade items add up to ' + n + '%, not 100% — worth a look',
+      sylTitle: c => 'Fill "' + c + '" from its syllabus',
+      sylS1: 'Copy this and send it to any AI together with your syllabus file',
+      sylS2: 'Then bring back the file it returns and drop it here',
+      sylCopy: 'Copy the prompt', sylCopied: 'Copied ✓',
+      sylDropT: 'Drop the file here', sylPick: 'or choose it from your device',
+      sylGo: 'Fill the boxes',
+      sylDone: n => n + ' fields filled — the cover was left alone',
+      sylDesc: 'Description', sylTopics: 'topics', sylHours: 'slots',
+      sylFields: 'fields', sylItems: 'items',
+      sylReport: 'What happened:', sylDone2: 'Done',
+      sylFilled: n => n + ' filled',
+      sylNothing: 'nothing changed',
+      sylLeft: k => '— left empty: ' + k,
+      sylCover: 'Book cover',
+      sylCoverKept: 'untouched — a syllabus carries no picture',
+      sylField: { book: 'textbook', desc: 'description', type: 'kind', lang: 'language',
+                  topics: 'topics', doc: 'name', e: 'e-mail', bld: 'building', room: 'room',
+                  d: 'note', hours: 'office hours', free: 'allowed', dedFrom: 'deduction starts',
+                  dedAmt: 'deduction', dn: 'DN', late: 'lateness', grade: 'distribution',
+                  dates: 'due dates' },
       noData: 'Nothing here yet',
       communityTitle: 'Contributions', sharePost: 'Share your knowledge', shareBtn: 'Share', typePick: 'Course type', meName: 'Me',
       acctTitle: 'Account', acctName: 'Name', acctNamePh: 'Your name', acctPhone: 'Phone number', acctPhonePh: '05xxxxxxxx', acctPhoto: 'Change photo',
@@ -1528,6 +1892,7 @@
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
+      srvBusy: 'Rate limit reached — this will be sent again shortly',
       likeSelf: 'You cannot like your own contribution',
       cmtLikeSelf: 'You cannot like your own comment',
       cmtStale: 'Refresh the page so your comment reaches its author',
@@ -1556,6 +1921,12 @@
       completePct: n => `Allocated: ${n}% of 100%`,
       sortBy: 'Sort', sortBest: 'Top', sortNewest: 'Newest', contribUnit: 'contributions',
       filterByDoctor: 'Filter by instructor', allDoctors: 'All instructors', docPickLab: 'Instructor',
+      drxAsk: 'Instructor not listed?', drxCta: 'Suggest one',
+      pkDocLock: 'Contributions about the instructor you choose appear here. Choose one in the first field.',
+      drxTitle: 'Suggest an instructor', drxAr: 'Name in Arabic', drxEn: 'Name in English',
+      drxImg: 'Photo', drxPick: 'Choose a photo…', drxSend: 'Send suggestion', drxCancel: 'Cancel',
+      drxNeedName: 'Write the instructor’s name in Arabic', drxNeedAcct: 'Sign in to send a suggestion',
+      drxDone: 'Suggestion sent — it appears once approved',
       prevDoctor: 'Previous', nextDoctor: 'Next',
       dispTitle: 'Display mode', dispBest: 'Best', dispAll: 'All', aboutLabel: 'contributions about',
       ago: n => {
@@ -1604,7 +1975,7 @@
     const dept = code.slice(0, sp), num = code.slice(sp + 1);
     /* الاسم على الغلاف يتبع اللغة: عربي = القسم بالعربي المختصر · إنجليزي = الكود اللاتيني */
     const deptLabel = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
-    return `<span class="bk ${big ? 'bk--lg ' : ''}bk--ph"><span class="bkface"><b>${deptLabel}</b><i>${num}</i></span>${side || ''}</span>`;
+    return bookHTML(code, '', { size: big ? 'lg' : '', after: side || '' });
   }
 
   /* أيقونتا النشاط + كتاب داخل حزمة اللاب (نشاط: «محاضرة» أو «معمل») */
@@ -1637,7 +2008,12 @@
 
   function bundleBookHTML(c, act, stat) {
     const isL = act === 'معمل';
-    const img = imgOf(c.code);
+    /* ===== ويُسأل بمفتاح نشاطه لا بمفتاح مادّته =====
+       كانت ‎imgOf(c.code)‎: تعرف النشاطَ في السطر الذي قبلها ولا تستعمله، فيسأل
+       كتابُ المحاضرة وكتابُ المعمل سؤالًا واحدًا فيأخذان جوابًا واحدًا — فيبدو
+       أنّ التثبيتَ يرسل الصورةَ إلى الاثنين. والخطأُ في **السؤال** لا في الجواب،
+       ولذلك لم تمسكه محاولتان أصلحتا القاعدة. */
+    const img = imgOf(actCode(c.code, act));
     /* نصّ الشريط يتبع اللغة (محاضرة/معمل · Lecture/Lab) — و«act» يبقى بالعربي لأنه مفتاح الحالة */
     /* ===== وأيقونةُ النشاط تعود إلى شريطه =====
        كانت في مختبر المفاهيم (‎lab-bundle-concepts.html‎) شارةً على وجه الغلاف:
@@ -1657,15 +2033,12 @@
        فتُعلَّق على **حافّته** لا على إحداثيّ: ‎right: 100%‎ ثمّ فُرجةٌ مشتقّةٌ من سُمك
        الكتاب نفسِه — لا رقمَ يُكتب ويُنسى يومَ يتبدّل عرضُ غلاف */
     const st = stat || '';
-    let bk;
-    if (img) {
-      bk = `<span class="bk"><span class="bkface bkface--img"><img src="${img}" alt="">${rib}</span>${st}</span>`;
-    } else {
-      const sp = c.code.indexOf(' ');
-      const dept = c.code.slice(0, sp), num = c.code.slice(sp + 1);
-      const deptLabel = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
-      bk = `<span class="bk bk--ph"><span class="bkface"><b>${deptLabel}</b><i>${num}</i>${rib}</span>${st}</span>`;
-    }
+    /* ===== والمرسومُ أساسٌ في الحالين =====
+       كان الاختيارُ ثنائيًّا: صورةٌ **أو** كتابٌ مرسوم. فبين طلبِ الصورة ووصولها
+       فراغٌ، وإن سقط الطلبُ (عنوانٌ ذهب مرجعُه — وقد وقع) بقي الفراغُ أبدًا.
+       فيُبنى المرسومُ دائمًا وتُركَّب الصورةُ فوقه، و‎onerror‎ ينزع وجهَها فينكشف
+       ما تحتها. فلا لحظةَ فراغٍ ولا أيقونةُ صورةٍ مكسورة. */
+    const bk = bookHTML(c.code, img, { inner: rib, after: st });
     const sel = act === selOf(c.code) ? ' sel' : '';   /* المحدَّد (افتراضيًا المحاضرة) — الآخر يبهت عند الفتح */
     return `<span class="cimg cimg--book${img ? ' has-img' : ' cimg--ph'} ${isL ? 'lab' : 'lec'}${sel}" data-act="${act}">${bk}</span>`;
   }
@@ -1706,9 +2079,8 @@
     const stat = (mode === 'plain' || ((mode === 'market' || mode === 'pick') && inAnyTerm(c.code)))
       ? statHTML(entry, null, c.code) : '';
     /* مع صورة: كتاب 3D بغلافها · بلا صورة: كتاب بديل ملوّن بالكود (يعتدل عند مرور الماوس) */
-    const bookInner = img
-      ? `<span class="bk"><img src="${img}" alt="">${stat}</span>`
-      : phBook(c.code, false, stat);
+    /* ولا فرعان: الراسمُ يبني المرسومَ دائمًا والصورةَ فوقه إن وُجدت */
+    const bookInner = bookHTML(c.code, img, { after: stat });
     /* في السوق الرئيسي فقط: تلميح كاميرا يظهر عند المرور فوق الكتاب البديل (النقر يرفع صورة) */
     const phCam = (!img && mode === 'upload')
       ? `<span class="ph-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg></span>`
@@ -2102,7 +2474,7 @@
     cardMode: 'pick',
     confirm: code => {
       if (!selTerm || libCodes(selTerm).includes(code)) return;
-      libEntries(selTerm).push({ code, picks: null });
+      libEntries(selTerm).push(libTake(selTerm, code) || { code, picks: null });
       save();
       mkModal.render();   /* اسم المادة المُضافة يصير ذهبيًّا داخل النافذة */
       mkTab.render();
@@ -2193,16 +2565,778 @@
           profImg(url);
           return;
         }
-        state.imgs[pickCode] = url;
-        /* الغلاف المعروض مصدره المساهمة المثبَّتة — فترفيع صورة يحدّثها فيها كي يظهر الجديد */
-        const cp = coverPost(pickCode);
-        if (cp) cp.data.bookImg = url;
+        /* ===== ولا مخزنَ ثانٍ للصورة =====
+           كانت تُكتب في ‎state.imgs‎ **وفي** المساهمة معًا، فمصدران لشيءٍ واحد
+           بلا قاعدةٍ تحكم أيُّهما يفوز. والغلافُ صورةُ المساهمة المثبَّتة وحدَها،
+           فتُكتب فيها. وإن لم تكن ثمّ مثبَّتةٌ صارت هذه الرفعةُ مساهمةً مثبَّتة —
+           فما رُفع لا يضيع، والقاعدةُ تبقى واحدة. */
+        let cp = coverPost(pickCode);
+        if (!cp) {
+          cp = myPost(pickCode, 'info');
+          cp.pin = 1;
+          cp.pinAt = Date.now();
+        }
+        cp.data.bookImg = url;
         save();
+        if (typeof srvPush === 'function') srvPush(cp, pickCode, 'info');
         mkTab.render(); mkModal.render();
       };
       im.src = rd.result;
     };
     rd.readAsDataURL(file);
+  });
+
+  /* =========================================================================
+     RIGHT-CLICK ON A BOOK — the cover menu
+     =========================================================================
+     Right-clicking a book cover in الركن opens a small menu with two entries:
+
+       · Fill from a syllabus  — hands you a prompt for any AI, and takes back
+                                 the file it returns (ROADMAP-SYLLABUS.md)
+       · Remove the cover      — the picture goes, the drawn book returns
+
+     Which book was clicked matters: a subject with a lab has two, and they are
+     two separate subjects. The activity is read from the book's own wrapper
+     (`data-act`), never guessed from the card.
+
+     It borrows the skin the card window's own right-click menus already use
+     (`.iom-mn`), so no third kind of surface enters the site.
+     ========================================================================= */
+  /* Two icons, drawn here so the menu owns its own marks: a wand for "let an
+     AI read my syllabus", and the site's own bin for "remove". */
+  const BKM_IC = {
+    ai: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"'
+      + ' stroke-linecap="round" stroke-linejoin="round">'
+      + '<path d="M15 4l1.2 2.8L19 8l-2.8 1.2L15 12l-1.2-2.8L11 8l2.8-1.2z"/>'
+      + '<path d="M6.5 12.5l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z"/>'
+      + '<path d="M19.5 14.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>',
+    del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"'
+      + ' stroke-linecap="round" stroke-linejoin="round">'
+      + '<path d="M4 7h16M10 4h4M9 7v12M15 7v12M6 7l1 13h10l1-13"/></svg>',
+    /* سهمٌ يدور إلى بدايته: «تعود كأنّك أضفتها الآن» */
+    reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"'
+      + ' stroke-linecap="round" stroke-linejoin="round">'
+      + '<path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3 4v5h5"/></svg>',
+  };
+
+  let bkMenu = null;
+  const bkMenuClose = () => { if (bkMenu) { bkMenu.remove(); bkMenu = null; } };
+
+  /* The subject this book stands for, activity included. Returns '' if the
+     click was not on a book we own. */
+  function bkMenuCode(el) {
+    const card = el.closest('.crow');
+    const code = card && (card.dataset.info || card.dataset.add || '');
+    if (!code) return '';
+    const wrap = el.closest('[data-act]');
+    return wrap ? actCode(code, wrap.dataset.act) : code;
+  }
+
+  document.addEventListener('contextmenu', e => {
+    if (!e.target.closest) return;
+    /* الركن alone. The library and the market have their own click meanings,
+       and the browser's own menu is left alone everywhere else. */
+    const bk = e.target.closest('#term-frame .bk, #lib-course .bk');
+    if (!bk) return;
+    const code = bkMenuCode(bk);
+    if (!code) return;
+    e.preventDefault();
+    bkMenuClose();
+    /* ثلاثةٌ مرتَّبةٌ من أخفِّها أثرًا إلى أثقلها: املأها · أخرجها من ترمك · ابدأها
+       من جديد. والاثنتان الأخيرتان تسألان قبل أن تفعلا. */
+    document.body.insertAdjacentHTML('beforeend', '<div class="iom-mn bkm-mn">'
+      + '<button type="button" class="bkm-b" data-bkm="ai">'
+      + '<i class="bkm-ic">' + BKM_IC.ai + '</i><b>' + esc(T().bkmAI) + '</b></button>'
+      + '<button type="button" class="bkm-b" data-bkm="reset">'
+      + '<i class="bkm-ic">' + BKM_IC.reset + '</i><b>' + esc(T().bkmReset) + '</b></button>'
+      + '<button type="button" class="bkm-b bkm-b--del" data-bkm="del">'
+      + '<i class="bkm-ic">' + BKM_IC.del + '</i><b>' + esc(T().bkmDel) + '</b></button>'
+      + '</div>');
+    bkMenu = document.body.lastElementChild;
+    bkMenu.dataset.code = code;
+    /* Kept inside the window, like every other menu here. */
+    const w = bkMenu.offsetWidth, h = bkMenu.offsetHeight;
+    bkMenu.style.left = Math.max(6, Math.min(e.clientX + 6, window.innerWidth - w - 6)) + 'px';
+    bkMenu.style.top = Math.max(6, Math.min(e.clientY + 6, window.innerHeight - h - 6)) + 'px';
+  });
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-bkm]');
+    if (!b) { bkMenuClose(); return; }
+    const code = bkMenu ? bkMenu.dataset.code : '';
+    bkMenuClose();
+    if (!code) return;
+    if (b.dataset.bkm === 'del') { bkCourseDrop(code); return; }
+    if (b.dataset.bkm === 'reset') { bkCourseReset(code); return; }
+    if (typeof openSyllabus === 'function') openSyllabus(code);
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') bkMenuClose(); });
+  window.addEventListener('resize', bkMenuClose);
+
+  /* =========================================================================
+     REMOVING A COURSE FROM YOUR TERM, AND STARTING ONE OVER
+     =========================================================================
+     Two different things, and the difference is the whole point:
+
+       remove  — the course leaves your term. Nothing you wrote is destroyed.
+       reset   — everything you wrote in it is destroyed. It stays in your term.
+
+     WHY REMOVING KEEPS EVERYTHING
+     Some of your work lives on the course entry itself: which contribution you
+     follow in each box, your marks, and your journey through it. Splicing the
+     entry out of the term would take all of that with it, silently. So the
+     entry is not destroyed — it is set aside, and adding the course to that
+     term again brings it back exactly as you left it. That is what "your work
+     stays" has to mean if it is to mean anything.
+
+     WHY RESETTING REACHES THE SERVER
+     Contributions you published are not only in this browser. Erasing them here
+     and leaving them there would bring them back on the next pull — the reader
+     would watch their own deletion undo itself. So each one is deleted where it
+     lives too.
+
+     BOTH ASK FIRST, and the question says what will happen in plain words. */
+  /* ‏‎arShort‎ تأخذ **المادّة** لا كودَها (تقرأ ‎c.arName‎ و‎c.code‎) — ومن ناداها بكودٍ
+     نصّيٍّ رماها بـ‎undefined.indexOf‎، فسقط السؤالُ قبل أن يُسأل والزرُّ يسكت */
+  const bkmName = code => {
+    const c = typeof CM !== 'undefined' ? CM[baseOf(code)] : null;
+    if (!c) return baseOf(code);
+    return (state.lang === 'ar' && typeof arShort === 'function') ? arShort(c) : c.code;
+  };
+
+  /* ===== وأيُّ ترمٍ تعنيه هذه المادّة؟ =====
+     كان الجوابُ ‎selTerm‎ — وهو **اختيارُ جلسةٍ لا يُحفظ**: خاوٍ حتّى يُضغط ترمٌ في
+     هذه الجلسة بعينها. فمن فتح الركنَ من غير ذلك الطريق ضغط الزرَّ فلم يقع شيء:
+     لا سؤالَ ولا فعل، لأنّ ‎libEntry(null, code)‎ لا تجد قيدًا. وهو أسوأُ ما يكون:
+     زرٌّ يُضغط ويسكت.
+     فيُطلب القيدُ من الدروج نفسِها: مادّةٌ في ترمٍ واحدٍ لا لبسَ فيها، وإن كانت في
+     أكثرَ فالمفتوحُ هو المقصود. وإن لم تُعرف قيلت كلمةٌ ولم يُسكت. */
+  function bkWhere(base) {
+    const L = state.libs || {};
+    const hits = [];
+    Object.keys(L).forEach(t => {
+      const i = (L[t] || []).findIndex(e => e && e.code === base);
+      if (i >= 0) hits.push({ term: t, i: i, en: L[t][i] });
+    });
+    if (hits.length === 1) return hits[0];
+    return hits.find(h => h.term === selTerm) || null;
+  }
+
+  /* الجانبُ الذي يُوضع فيه ما خرج من الترم، ليعود إن أُعيدت المادّة */
+  const libBin = term => (state.libBin || (state.libBin = {}))[term]
+    || (state.libBin[term] = []);
+
+  function bkCourseDrop(code) {
+    const base = baseOf(code);
+    const at = bkWhere(base);
+    if (!at) { if (typeof toast === 'function') toast(T().bkmNotHere); return; }
+    if (!confirm(T().bkmDelAsk(bkmName(base)))) return;
+    /* لا يُمحى: يُوضع جانبًا بكلّ ما عليه — اختياراتُك ورحلتُك ودرجاتُك */
+    const bin = libBin(at.term).filter(e => e && e.code !== base);
+    bin.push(at.en);
+    state.libBin[at.term] = bin;
+    libEntries(at.term).splice(at.i, 1);
+    save();
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+    if (typeof renderFrame === 'function') renderFrame();
+    if (typeof renderTerms === 'function') renderTerms();
+    if (typeof toast === 'function') toast(T().bkmDelDone(bkmName(base)));
+  }
+
+  function bkCourseReset(code) {
+    const base = baseOf(code);
+    const at = bkWhere(base);
+    if (!at) { if (typeof toast === 'function') toast(T().bkmNotHere); return; }
+    const en = at.en;
+    if (!confirm(T().bkmResetAsk(bkmName(base)))) return;
+
+    /* ١ · ما على القيد: الاختياراتُ والرحلةُ وكلُّ ما زِيد عليه — يبقى الكودُ وحدَه */
+    Object.keys(en).forEach(k => { if (k !== 'code') delete en[k]; });
+    en.picks = null;
+
+    /* ٢ · ومساهماتُك عنها: في المحاضرة وفي المعمل، في البنود وتحت الدكاترة.
+       وتُحذف من الخادم كذلك، وإلّا عادت في أوّل جذب. */
+    let gone = 0;
+    [base, typeof labKey === 'function' ? labKey(base) : null].forEach(key => {
+      if (!key) return;
+      const info = (state.cinfo || {})[key];
+      if (!info) return;
+      Object.keys(info.posts || {}).forEach(sec => {
+        const arr = info.posts[sec];
+        if (!Array.isArray(arr)) return;
+        info.posts[sec] = arr.filter(p => {
+          if (!p || !isMine(p)) return true;
+          if (typeof srvDel === 'function') srvDel(p, key);
+          gone++; return false;
+        });
+      });
+      (info.doctors || []).forEach(dr => {
+        if (!Array.isArray(dr.posts)) return;
+        dr.posts = dr.posts.filter(p => {
+          if (!p || !isMine(p)) return true;
+          if (typeof srvDel === 'function') srvDel(p, key);
+          gone++; return false;
+        });
+      });
+    });
+
+    save();
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+    if (typeof renderFrame === 'function') renderFrame();
+    if (typeof renderTerms === 'function') renderTerms();
+    if (typeof cmCode !== 'undefined' && cmCode && typeof renderCmSection === 'function') renderCmSection();
+    if (typeof toast === 'function') toast(T().bkmResetDone(bkmName(base)));
+  }
+
+  /* ===== Removing a cover =====
+     A cover is the picture on a pinned contribution — so removing it means
+     clearing that picture, not deleting the contribution and not unpinning it.
+     The contribution keeps everything else the reader wrote in it.
+     And it only touches a contribution that is mine: the site's cover is not
+     a reader's to remove. */
+  function bkCoverDrop(code) {
+    const cp = coverPost(code);
+    if (!cp || !cp.data || !cp.data.bookImg) return;
+    if (!isMine(cp)) { if (typeof toast === 'function') toast(T().bkmNotYours); return; }
+    cp.data.bookImg = '';
+    save();
+    if (typeof srvPush === 'function') srvPush(cp, code, 'info');
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+    if (typeof renderFrame === 'function') renderFrame();
+    if (typeof renderTerms === 'function') renderTerms();
+    if (typeof cmCode !== 'undefined' && cmCode && typeof renderCmSection === 'function') renderCmSection();
+  }
+
+  /* =========================================================================
+     READING THE FILE THE AI RETURNS
+     =========================================================================
+     One object, described in ROADMAP-SYLLABUS.md. Everything in it is
+     optional; what it does not mention keeps whatever it had.
+
+     THE RULES THIS KEEPS (each one is a bug this project already had once):
+
+       1. It fills, it never erases. Applying the same file twice loses
+          nothing, and a field the file omits is left exactly as it was.
+       2. It never touches the cover. The picture is not in the format at all.
+       3. It writes through `myPost` — the same door as typing. Never into
+          the site's contribution, never into another reader's.
+       4. It never publishes. What it writes stays private until you publish.
+       5. Nothing is trusted from the file: no owner, no id, no publish state.
+          Numbers are clamped, text is capped, lists are bounded.
+       6. A bad file is refused by name, never silently ignored.
+
+     It returns a report, so the window above it can say what happened and the
+     guard below it can check every one of those rules.
+     ========================================================================= */
+
+  /* --- reading values out of something a stranger wrote --- */
+  const sylTx = (v, max) => (typeof v === 'string' ? v : '')
+    .replace(/\s+/g, ' ').trim().slice(0, max || 400);
+  const sylNum = (v, lo, hi) => {
+    const n = typeof v === 'number' ? v : parseFloat(String(v).replace(/[^\d.-]/g, ''));
+    if (!isFinite(n)) return null;
+    return Math.min(hi, Math.max(lo, Math.round(n * 100) / 100));
+  };
+  const sylList = (v, max) => (Array.isArray(v) ? v.slice(0, max) : []);
+  /* A date, or nothing. "YYYY-MM-DD" only — anything else is a guess we will
+     not make on the reader's behalf, and a wrong date is worse than none.
+
+     ===== and it is checked by its parts, not by a Date =====
+     The first version built `new Date(t + 'T00:00:00')` and compared
+     `toISOString()` back to the text. That reads the string as **local** time
+     and writes it back as **UTC** — so east of Greenwich every date came back
+     a day earlier and was thrown away as malformed. Every single one. Here,
+     where the clock runs three hours ahead, the feature would have silently
+     kept no dates at all. Arithmetic has no timezone. */
+  const sylDate = v => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v == null ? '' : v).trim());
+    if (!m) return '';
+    const y = +m[1], mo = +m[2], d = +m[3];
+    if (mo < 1 || mo > 12 || d < 1) return '';
+    const last = new Date(Date.UTC(y, mo, 0)).getUTCDate();   /* day 0 = last of mo */
+    return d > last ? '' : m[0];
+  };
+  /* Times come back as "14:00" or "2:00 PM" or "2 pm". One shape goes in. */
+  const sylTime = v => {
+    const t = String(v == null ? '' : v).trim();
+    const m = /^(\d{1,2})\s*[:.]?\s*(\d{2})?\s*(am|pm)?$/i.exec(t);
+    if (!m) return '';
+    let h = +m[1];
+    const mi = m[2] ? +m[2] : 0, ap = (m[3] || '').toLowerCase();
+    if (ap === 'pm' && h < 12) h += 12;
+    if (ap === 'am' && h === 12) h = 0;
+    if (h > 23 || mi > 59) return '';
+    return String(h).padStart(2, '0') + ':' + String(mi).padStart(2, '0');
+  };
+
+  /* Read the file. Nothing is applied here, so the window can show what will
+     happen before it happens. */
+  function syllabusRead(raw) {
+    let j = raw;
+    if (typeof raw === 'string') {
+      const t = raw.replace(/^﻿/, '').trim()
+        .replace(/^```(?:json)?\s*/i, '').replace(/```$/, '').trim();
+      try { j = JSON.parse(t); } catch (e) { return { ok: false, error: T().sylBadJson }; }
+    }
+    if (!j || typeof j !== 'object' || Array.isArray(j)) return { ok: false, error: T().sylBadJson };
+    if (!j.academia) return { ok: false, error: T().sylNotOurs };
+
+    const out = { course: sylTx(j.course, 40), notes: [], info: {}, doc: null, abs: {}, grade: null };
+
+    /* --- المادة --- */
+    const I = j.info || {};
+    const book = sylTx(I.book, 200);
+    if (book) out.info.book = book;
+    const desc = sylTx(I.desc, 1200);
+    if (desc) out.info.desc = desc;
+    if (['none', 'theory', 'practical', 'both'].indexOf(I.type) > -1) out.info.type = I.type;
+    if (I.lang === 'ar' || I.lang === 'en') out.info.lang = I.lang;
+    const topics = sylList(I.topics, 60)
+      .map((t, i) => {
+        const o = { num: sylNum(t && t.num, 1, 99) || (i + 1), name: sylTx(t && t.name, 120) };
+        const dt = sylDate(t && t.date);
+        if (dt) o.date = dt;
+        return o;
+      })
+      .filter(t => t.name);
+    if (topics.length) out.info.topics = topics;
+
+    /* --- الدكتور --- */
+    const D = j.doc || {};
+    const dn = sylTx(D.name, 80);
+    if (dn) {
+      const hours = sylList(D.hours, 14)
+        .map(h => ({ day: sylNum(h && h.day, 0, 4), from: sylTime(h && h.from), to: sylTime(h && h.to) }))
+        .filter(h => h.day !== null && h.from && h.to);
+      out.doc = {
+        name: dn, e: sylTx(D.email, 120), bld: sylTx(D.building, 30),
+        room: sylTx(D.room, 30), d: sylTx(D.note, 400), hours: hours,
+      };
+    }
+
+    /* --- الغياب والتأخير --- */
+    const A = j.abs || {};
+    [['free', 0, 30], ['dedFrom', 0, 30], ['dedAmt', 0, 20], ['dn', 0, 40], ['late', 0, 10]]
+      .forEach(pair => {
+        const n = sylNum(A[pair[0]], pair[1], pair[2]);
+        if (n !== null) out.abs[pair[0]] = n;
+      });
+
+    /* --- الدرجة --- */
+    const G = j.grade || {};
+    const items = sylList(G.items, 24)
+      .map(x => {
+        const o = { name: sylTx(x && x.name, 60), pct: sylNum(x && x.pct, 0, 100) };
+        const dt = sylDate(x && x.date);
+        if (dt) o.date = dt;
+        return o;
+      })
+      .filter(x => x.name && x.pct !== null);
+    if (items.length) {
+      out.grade = { items: items };
+      if (G.method === 'avg' || G.method === 'std') out.grade.method = G.method;
+      const sum = items.reduce((s, x) => s + x.pct, 0);
+      if (Math.round(sum) !== 100) out.notes.push(T().sylSum(Math.round(sum * 10) / 10));
+    }
+
+    sylList(j.notes, 12).forEach(n => { const t = sylTx(n, 240); if (t) out.notes.push(t); });
+
+    if (!Object.keys(out.info).length && !out.doc
+        && !Object.keys(out.abs).length && !out.grade) return { ok: false, error: T().sylEmpty };
+    return { ok: true, data: out };
+  }
+
+  /* Apply what was read. Returns a report: what filled, what was left. */
+  function syllabusApply(code, data) {
+    const filled = [], left = [];
+    const put = (target, k, v) => {
+      if (v === undefined || v === '' || (Array.isArray(v) && !v.length)) { left.push(k); return; }
+      target[k] = v; filled.push(k);
+    };
+
+    /* المادة — the cover is not among these, and never will be */
+    const info = myPost(code, 'info').data;
+    ['book', 'desc', 'type', 'lang', 'topics'].forEach(k => put(info, k, data.info[k]));
+
+    /* الغياب */
+    const abs = myPost(code, 'abs').data;
+    ['free', 'dedFrom', 'dedAmt', 'dn', 'late'].forEach(k => put(abs, k, data.abs[k]));
+
+    /* الدرجة — and its dates.
+       ===== the split and the dates live apart, and that is deliberate =====
+       The split is a contribution: it is what the course says, shared with
+       everyone. The dates are yours — they sit in `bag.gradeMe`, keyed by the
+       item's name, next to the mark you give yourself. So a date read from a
+       syllabus is written where a date you typed would go, and it survives
+       you swapping whose split you follow. */
+    if (data.grade) {
+      const g = myPost(code, 'grade').data;
+      g.items = data.grade.items.map(x => ({ name: x.name, pct: x.pct }));
+      g.method = data.grade.method || g.method || 'avg';
+      filled.push('grade');
+
+      const dated = data.grade.items.filter(x => x.date);
+      if (dated.length && typeof libEntry === 'function' && typeof gradeMe === 'function') {
+        const en = libEntry(selTerm, baseOf(code));
+        const me = en ? gradeMe(en, 1) : null;
+        if (me) {
+          dated.forEach(x => {
+            const rec = me[x.name] || (me[x.name] = {});
+            /* A date you set yourself is not overwritten by a guess. */
+            if (!rec.d) rec.d = x.date;
+          });
+          filled.push('dates');
+        } else left.push('dates');
+      } else if (dated.length) left.push('dates');
+    } else left.push('grade');
+
+    /* ============================================================
+       الدكتور — تُملأ تفاصيلُه، ولا يُسمّى هو
+       ============================================================
+       كان الملفُّ يُنشئ دكتورًا باسمه إن لم يجده، فيصير الاسمُ الذي كتبه نموذجٌ
+       لغويٌّ **دكتورًا رسميًّا في المادّة** يراه الناسُ ويُنسب إليه ما يُكتب. وذاك
+       خبرٌ عن إنسانٍ لا يُؤخذ من تخمين.
+       والدكاترةُ في هذا الموقع يُضافون من لوحة الأدمن أو باقتراحٍ يُعتمد — بابان
+       فيهما إنسانٌ يقرّر. فلا يُفتح لهما بابٌ ثالثٌ من ملفٍّ يُسقَط.
+       فيُقرأ كلُّ شيءٍ سواه: البريدُ والمكتبُ والساعاتُ والوصف. وتنتظر في **جِراب
+       المادّة** حتّى يختار صاحبُ الموقع دكتورَه من قائمة الموقع، فتنتقل إليه
+       عندئذٍ (‎docPend‎ في ‎11.js‎). فالمربّعُ يُفتح تامَّ البيانات وعند اسم الدكتور
+       شَرطة، وهو الصدق: التفاصيلُ من الملفّ، والاسمُ لم يُقل بعد. */
+    if (data.doc) {
+      const en = typeof libEntry === 'function' ? libEntry(selTerm, baseOf(code)) : null;
+      const bag = en && typeof nookPicks === 'function' ? nookPicks(en, true) : null;
+      if (bag) {
+        const pend = bag.docPend || (bag.docPend = {});
+        ['e', 'bld', 'room', 'd', 'hours'].forEach(k => put(pend, k, data.doc[k]));
+        filled.push('doc');
+      } else left.push('doc');
+    } else left.push('doc');
+
+    /* The cover is never touched, and nothing here is published. */
+    left.push('bookImg');
+    save();
+    return { filled: filled, left: left, notes: data.notes || [] };
+  }
+
+  /* =========================================================================
+     THE PROMPT
+     =========================================================================
+     This is the whole feature's contract with the outside world. The site
+     never reads a syllabus — an AI does, and this text is the only thing
+     telling it what we can accept.
+
+     Written from four real syllabi (two PDF, two Word, four departments). It
+     does five things, and each one is there because one of those four would
+     otherwise come back wrong:
+
+       · it shows the shape by example, not by description
+       · it forbids inventing — a fact that is not written is left out, and
+         said aloud in `notes`
+       · it gives the conversions that differ between models: day letters,
+         12-hour clocks, and the attendance prose
+       · it says what to do when a syllabus covers several sections
+       · it asks for the file and nothing else — no preamble, no fence
+
+     The prompt follows the reader's language; the values it produces stay in
+     whatever language the syllabus is written in.
+     ========================================================================= */
+  function sylPrompt(code) {
+    const ar = state.lang !== 'en';
+    const c = code ? String(code).split('::')[0] : '';
+    const shape = [
+      '{',
+      '  "academia": 1,',
+      '  "course": "' + (c || 'MIS 250') + '",',
+      '  "info": {',
+      '    "book": "the title only — no edition, no ISBN, no publisher",',
+      '    "type": "none | theory | practical | both",',
+      '    "lang": "ar | en",',
+      '    "desc": "the course description, as written",',
+      '    "topics": [{ "num": 1, "name": "week 1 topic", "date": "2026-08-19" }]',
+      '  },',
+      '  "doc": {',
+      '    "name": "instructor name",',
+      '    "email": "…@kfupm.edu.sa",',
+      '    "building": "24",',
+      '    "room": "296",',
+      '    "note": "phone, or how they prefer to be contacted",',
+      '    "hours": [{ "day": 0, "from": "14:00", "to": "15:00" }]',
+      '  },',
+      '  "abs":   { "free": 2, "dedFrom": 3, "dedAmt": 1, "dn": 6, "late": 3 },',
+      '  "grade": { "method": "avg", "items": [',
+      '    { "name": "Quiz 1",  "pct": 2.5, "date": "2026-09-15" },',
+      '    { "name": "Quiz 2",  "pct": 2.5, "date": "2026-10-06" },',
+      '    { "name": "Midterm", "pct": 25,  "date": "2026-10-20" }',
+      '  ]},',
+      '  "notes": ["anything you could not find, or had to judge"]',
+      '}',
+    ].join('\n');
+
+    const rulesAr = [
+      '١) اقرأ السيلبوس المرفق واملأ الصيغة اعلاه.',
+      '٢) **لا تخترع شيئا.** اي معلومة غير مكتوبة في السيلبوس: احذف حقلها تماما،',
+      '   واذكر في notes انها غير موجودة. لا تضع صفرا ولا نصا فارغا ولا تخمينا.',
+      '٣) الايام ارقام: الاحد 0 · الاثنين 1 · الثلاثاء 2 · الاربعاء 3 · الخميس 4.',
+      '   والحروف الشائعة: U=0 M=1 T=2 W=3 R=4 — و«UTR» تعني ثلاثة ايام.',
+      '4) الاوقات بنظام 24 ساعة «HH:MM». مثال: 2:00 PM ⇐ "14:00".',
+      '5) النسب ارقام بلا علامة ٪. ومجموع بنود الدرجة يفترض 100.',
+      '6) الغياب والتأخير مكتوب في السيلبوس نصا لا حقولا. حوّله هكذا:',
+      '   «لديك غيابان قبل ان يبدأ الخصم، وبعدها كل غياب يكلفك 1٪،',
+      '    وستة غيابات تعني DN، وكل ثلاث تأخيرات تُحسب غيابا»',
+      '   ⇐ { "free": 2, "dedFrom": 3, "dedAmt": 1, "dn": 6, "late": 3 }',
+      '   · free    = الغيابات المسموحة قبل بدء الخصم',
+      '   · dedFrom = رقم الغياب الذي يبدأ عنده الخصم (غالبا free + 1)',
+      '   · dedAmt  = كم نقطة مئوية تُخصم عن كل غياب بعده',
+      '   · dn      = عدد الغيابات التي تسبب DN',
+      '   · late    = كم تأخيرة تساوي غيابا واحدا',
+      '7) اذا كان السيلبوس يغطي اكثر من شعبة، خذ الشعبة ' + (c || 'المطلوبة')
+        + ' ان وُجدت، والا فالاولى — واذكر ايها اخذت في notes.',
+      '8) type: هل المادة نظرية فقط، عملية فقط، الاثنان معا، ام لا تحتاج مذاكرة؟',
+      '9) اسم الكتاب: **العنوان وحده**. بلا طبعة ولا ISBN ولا ناشر ولا سنة.',
+      '   «Financial Management, 16th Edition (Global Edition), ISBN 978-0-13-694588-8, 2022, Pearson»',
+      '   ⇐ "Financial Management"',
+      '10) اسماء البنود نظيفة: بلا اسم منصة ولا نظام.',
+      '    «Assignments on MyFinanceLab» ⇐ "Assignments"',
+      '11) **قسّم البنود المجمَّعة الى اصغر وحدة تعرف عددها.**',
+      '    «اربعة كويزات مجموعها 10٪» ⇐ اربعة بنود: Quiz 1 · Quiz 2 · Quiz 3 · Quiz 4',
+      '    كلٌّ منها 2.5٪. وكذلك الواجبات والعروض ان ذُكر عددها.',
+      '    وان لم يُذكر العدد فاتركه بندا واحدا بمجموعه، واذكر ذلك في notes.',
+      '    (وان قال «افضل 5 من 6» فالعدد ستة والنسبة تُقسم على خمسة — اذكر ذلك.)',
+      '12) **المواعيد.** بعد ان تنتهي من توزيع الدرجة، ارجع الى جدول الاسابيع',
+      '    وتواريخ الترم في السيلبوس، وحاول ان تعطي **كل بند** تاريخه بصيغة',
+      '    "YYYY-MM-DD" في حقل date. ولو كان تقريبيا فاعطه واذكر في notes انه تقدير.',
+      '    وكذلك مواضيع الاسابيع: ان كان لكل اسبوع تاريخ بداية فاكتبه في date.',
+      '    وان لم يكن في السيلبوس تاريخ واحد، احذف الحقل ولا تخترع.',
+      '13) الاسماء والاوصاف تبقى بلغتها كما هي في السيلبوس — لا تترجمها.',
+      '14) **اخرج ملف JSON وحده.** بلا مقدمة ولا شرح ولا اسوار ``` .',
+    ].join('\n');
+
+    const rulesEn = [
+      '1) Read the attached syllabus and fill in the shape above.',
+      '2) **Invent nothing.** If a fact is not written in the syllabus, drop its',
+      '   field entirely and say so in `notes`. No zeros, no empty strings, no guesses.',
+      '3) Days are numbers: Sunday 0 · Monday 1 · Tuesday 2 · Wednesday 3 · Thursday 4.',
+      '   Common letters: U=0 M=1 T=2 W=3 R=4 — and "UTR" means three days.',
+      '4) Times in 24-hour "HH:MM". Example: 2:00 PM -> "14:00".',
+      '5) Percentages are numbers with no % sign. The grade items should add up to 100.',
+      '6) Attendance is written as prose, not as fields. Convert it like this:',
+      '   "you have 2 unexcused absences before points are deducted. Thereafter,',
+      '    each unexcused absence costs 1%. Six absences result in DN. Every three',
+      '    late attendances count as one absence."',
+      '   -> { "free": 2, "dedFrom": 3, "dedAmt": 1, "dn": 6, "late": 3 }',
+      '   · free    = absences allowed before deductions begin',
+      '   · dedFrom = the absence number deductions start at (usually free + 1)',
+      '   · dedAmt  = percentage points lost per absence after that',
+      '   · dn      = absences that cause a DN',
+      '   · late    = how many late attendances equal one absence',
+      '7) If the syllabus covers several sections, take section ' + (c || 'the one asked for')
+        + ' if it is there, otherwise the first — and say which in `notes`.',
+      '8) type: is the course theory only, practical only, both, or needs no studying?',
+      '9) The textbook: **the title alone.** No edition, no ISBN, no publisher, no year.',
+      '   "Financial Management, 16th Edition (Global Edition), ISBN 978-0-13-694588-8, 2022, Pearson"',
+      '   -> "Financial Management"',
+      '10) Keep item names clean: no platform or system names.',
+      '    "Assignments on MyFinanceLab" -> "Assignments"',
+      '11) **Split grouped items into the smallest unit whose count you know.**',
+      '    "four quizzes, 10% total" -> four items: Quiz 1 · Quiz 2 · Quiz 3 · Quiz 4,',
+      '    2.5% each. The same for assignments and presentations when a count is given.',
+      '    If no count is given, leave it as one item with its total, and say so in `notes`.',
+      '    ("best 5 of 6" means six exist and the percentage divides by five — say so.)',
+      '12) **Dates.** Once the grade split is done, go back to the weekly schedule and',
+      '    the term dates in the syllabus and try to give **every item** its date as',
+      '    "YYYY-MM-DD" in a `date` field. An approximate date is welcome — say in',
+      '    `notes` that it is an estimate.',
+      '    Weekly topics too: if each week has a start date, put it in `date`.',
+      '    If the syllabus carries no dates at all, drop the field. Do not invent one.',
+      '13) Keep names and descriptions in the syllabus\'s own language — do not translate.',
+      '14) **Return the JSON file and nothing else.** No preamble, no explanation, no ``` fences.',
+    ].join('\n');
+
+    /* ===== ويُقرأ صورًا لا نصًّا =====
+       السيلبوس جداولُ ومحاذاةٌ ومربّعات: توزيعُ الدرجة جدولٌ، وجدولُ الاسابيع
+       جدولٌ، وساعاتُ المكتب صفٌّ محاذًى. واستخراجُ النصّ يفكّ هذي كلَّها الى سطورٍ
+       متتابعةٍ يضيع فيها العمود. فيُطلب من الذكاء الاصطناعيّ ان ينظر الى الصفحات
+       **صورًا** ان استطاع — فالجدولُ يُقرأ جدولًا. (بحكم صاحب الموقع.) */
+    const eyes = ar
+      ? 'اقرأ صفحات الملف **صورًا** ان استطعت، لا نصًّا مستخرَجا: فيه جداولُ'
+        + ' (توزيع الدرجة · جدول الاسابيع · ساعات المكتب) تضيع اعمدتُها اذا فُكَّت سطورا.'
+      : 'Read the pages as **images** if you can, not as extracted text: this document'
+        + ' has tables (the grade split, the weekly schedule, office hours) whose columns'
+        + ' are lost when they are flattened into lines.';
+    return (ar
+      ? 'هذا سيلبوس مادة جامعية. حوّله الى ملف JSON بهذه الصيغة بالضبط:'
+      : 'This is a university course syllabus. Turn it into a JSON file in exactly this shape:')
+      + '\n' + eyes
+      + '\n\n' + shape + '\n\n'
+      + (ar ? 'القواعد:' : 'Rules:') + '\n' + (ar ? rulesAr : rulesEn);
+  }
+
+  /* =========================================================================
+     THE WINDOW
+     =========================================================================
+     Two halves. The prompt to copy on one side, the place to drop what comes
+     back on the other. Nothing is applied until it has been read and shown.
+     ========================================================================= */
+  let sylCode = '';
+
+  function openSyllabus(code) {
+    sylCode = code || '';
+    const m = $('#syl-modal');
+    if (!m) return;
+    $('#syl-title').textContent = T().sylTitle(String(sylCode).split('::')[0]);
+    $('#syl-prompt').value = sylPrompt(sylCode);
+    $('#syl-out').innerHTML = '';
+    $('#syl-out').hidden = true;
+    $('#syl-done').hidden = true;
+    $('#syl-drop').hidden = false;
+    $('#syl-drop').classList.remove('is-over');
+    m.hidden = false;
+  }
+  const closeSyllabus = () => { const m = $('#syl-modal'); if (m) m.hidden = true; };
+
+  /* ===== The file is read AND applied the moment it arrives =====
+     It first read the file, showed what it found, and waited for a second
+     click to apply it. That extra step was rejected by the site's owner:
+     dropping the file **is** the instruction. So there is one action, and the
+     report takes the place of the confirmation — it says what happened after,
+     instead of asking permission before.
+     Nothing is lost by this: it fills and never erases, so there is nothing
+     to undo, and the report names every field it did not touch. */
+  function sylShow(res) {
+    const out = $('#syl-out');
+    out.hidden = false;
+    if (!res.ok) {
+      out.innerHTML = '<p class="syl-err">' + esc(res.error) + '</p>';
+      $('#syl-done').hidden = false;
+      return;
+    }
+    const rep = syllabusApply(sylCode, res.data);
+    out.innerHTML = sylReport(rep);
+    $('#syl-drop').hidden = true;
+    $('#syl-done').hidden = false;
+    if (typeof renderFrame === 'function') renderFrame();
+    if (typeof renderTerms === 'function') renderTerms();
+    if (typeof nookEntry !== 'undefined' && nookEntry && typeof openNook === 'function') openNook(nookEntry);
+    if (typeof cmCode !== 'undefined' && cmCode && typeof renderCmSection === 'function') renderCmSection();
+  }
+
+  /* =========================================================================
+     THE REPORT
+     =========================================================================
+     Filling four boxes from a file someone else's AI produced is a black box
+     unless it says what it did. A count in a toast ("7 fields filled") is not
+     an answer to the question the reader actually has, which is:
+
+         "did it get my instructor's office hours, or not?"
+
+     So it answers per box, names what it left, and says plainly that the
+     cover was never its business. The reader closes it when satisfied — it
+     does not vanish on its own.
+
+     `syllabusApply` already returns which keys filled and which were left.
+     This only groups them the way the reader sees them: as four boxes.
+     ========================================================================= */
+  const SYL_BOX = {
+    info:  ['book', 'desc', 'type', 'lang', 'topics'],
+    doc:   ['doc', 'e', 'bld', 'room', 'd', 'hours'],
+    abs:   ['free', 'dedFrom', 'dedAmt', 'dn', 'late'],
+    grade: ['grade', 'dates'],
+  };
+
+  function sylReport(rep) {
+    const t = T(), nm = t.sylField;
+    const fill = {}, miss = {};
+    Object.keys(SYL_BOX).forEach(b => { fill[b] = []; miss[b] = []; });
+    const put = (k, into) => {
+      const b = Object.keys(SYL_BOX).find(x => SYL_BOX[x].indexOf(k) > -1);
+      if (b) into[b].push(nm[k] || k);
+    };
+    (rep.filled || []).forEach(k => put(k, fill));
+    (rep.left || []).forEach(k => put(k, miss));
+
+    const title = { info: t.nkCourse, doc: t.nkDoctor, abs: t.absSec, grade: t.nkGrade };
+    const rows = Object.keys(SYL_BOX).map(b => {
+      const got = fill[b].length, lost = miss[b];
+      const mark = got ? 'is-in' : 'is-out';
+      return '<li class="' + mark + '"><b>' + esc(title[b]) + '</b><span>'
+        + (got ? esc(t.sylFilled(got)) : esc(t.sylNothing))
+        + (lost.length ? ' <i>' + esc(t.sylLeft(lost.join('، '))) + '</i>' : '')
+        + '</span></li>';
+    }).join('');
+
+    /* The cover is not a field that happened to be missing — it is never in
+       the file at all, and saying so is the point. */
+    const cover = '<li class="is-keep"><b>' + esc(t.sylCover) + '</b><span>'
+      + esc(t.sylCoverKept) + '</span></li>';
+
+    return '<p class="syl-rep-h">' + esc(t.sylReport) + '</p>'
+      + '<ul class="syl-rep">' + rows + cover + '</ul>'
+      + ((rep.notes && rep.notes.length)
+        ? '<ul class="syl-notes">' + rep.notes.map(n => '<li>' + esc(n) + '</li>').join('') + '</ul>'
+        : '');
+  }
+
+  const sylTake = text => sylShow(syllabusRead(text));
+  const sylFile = f => {
+    if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => sylTake(String(rd.result || ''));
+    rd.onerror = () => sylShow({ ok: false, error: T().sylBadJson });
+    rd.readAsText(f);
+  };
+
+  document.addEventListener('click', e => {
+    const t = e.target;
+    if (!t.closest) return;
+    if (t.closest('#syl-close') || t === $('#syl-modal')) { closeSyllabus(); return; }
+    if (t.closest('#syl-copy')) {
+      const ta = $('#syl-prompt');
+      ta.select();
+      const done = () => {
+        const b = $('#syl-copy'), was = b.textContent;
+        b.textContent = T().sylCopied;
+        setTimeout(() => { b.textContent = was; }, 1600);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(ta.value).then(done, done);
+      else done();
+      return;
+    }
+    if (t.closest('#syl-pick')) { $('#syl-file').click(); return; }
+    if (t.closest('#syl-done')) { closeSyllabus(); return; }
+  });
+
+  document.addEventListener('change', e => {
+    if (e.target && e.target.id === 'syl-file') {
+      sylFile(e.target.files && e.target.files[0]);
+      e.target.value = '';
+    }
+  });
+
+  /* Dropping a file. The page-wide default is cancelled only over the drop
+     area, so dragging a file anywhere else still behaves normally. */
+  ['dragenter', 'dragover'].forEach(k => document.addEventListener(k, e => {
+    if (!e.target.closest || !e.target.closest('#syl-drop')) return;
+    e.preventDefault();
+    $('#syl-drop').classList.add('is-over');
+  }));
+  document.addEventListener('dragleave', e => {
+    if (e.target.closest && e.target.closest('#syl-drop')) $('#syl-drop').classList.remove('is-over');
+  });
+  document.addEventListener('drop', e => {
+    if (!e.target.closest || !e.target.closest('#syl-drop')) return;
+    e.preventDefault();
+    $('#syl-drop').classList.remove('is-over');
+    const dt = e.dataTransfer;
+    if (!dt) return;
+    if (dt.files && dt.files[0]) { sylFile(dt.files[0]); return; }
+    const txt = dt.getData && dt.getData('text');
+    if (txt) sylTake(txt);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { const m = $('#syl-modal'); if (m && !m.hidden) closeSyllabus(); }
   });
 
   /* ---------- شريط الأترام: إضافة حرّة + اختيار ترم يُظهر الإطار المرقّط ---------- */
@@ -2292,6 +3426,20 @@
     const L = state.lastNook;
     if (list.length) nookReel.setList(list, L && L.term === selTerm ? L.code : null);
     if (!list.length) { $('#lib-course').hidden = true; nookEntry = null; }
+    /* ===== ويُدفَّأ الترمُ كلُّه في رحلةٍ واحدة =====
+       المساهماتُ تُجذب مادّةً مادّة حين تُفتح المادّة، والرحلةُ أربعُ مئةِ مللي.
+       فتُطلب موادُّ الترم كلُّها ههنا — والإطارُ يُرسم قبل أن يفتح المرءُ مادّةً
+       بوقتٍ كافٍ — فتُفتح كلُّ واحدةٍ منها بلا انتظار.
+       ومعها مفاتيحُ المعامل: خيطُ المعمل مساهماتٌ مستقلّةٌ تحت مفتاحٍ آخر.
+       والتدفئةُ لا تكرّر: ما جاء جوابُه قريبًا لا يُطلب ثانيةً (‎SRV_FRESH‎). */
+    if (list.length && typeof srvWarm === 'function') {
+      const codes = [];
+      list.forEach(c => {
+        codes.push(c.code);
+        if (c.__en && CM[c.code] && CM[c.code].lab) codes.push(labKey(c.code));
+      });
+      srvWarm(codes);
+    }
     $('#term-frame').classList.toggle('has-items', list.length > 0);
     /* والدليلُ يظهر ما دام الإطارُ خاليًا، ويذهب مع أوّل مادّة */
     const hint = $('#term-hint');
@@ -2462,16 +3610,44 @@
     return true;
   }
 
-  $('#dm-save').addEventListener('click', () => {
-    if (!dateTerm) return;
-    const newName = $('#dm-name').value.trim();
-    const term = (newName && renameTerm(dateTerm, newName)) ? newName : dateTerm;
-    state.termDates[term] = { s: $('#dm-start').value, e: $('#dm-end').value };
+  /* ============================================================
+     ولا زرَّ حفظ — كلُّ تبديلٍ يقع فورَ وقوعه
+     ============================================================
+     كان زرٌّ يجمع ثلاثةً في ضغطة (اسمٌ وتاريخان) ثمّ يُغلق النافذة. ومن بدّل
+     ثمّ أغلق بالـ‎✕‎ ذهب عملُه بلا كلمة — والنافذةُ لا تقول إنّ فيها ما لم
+     يُحفظ. وحذفُ المادّة من القائمة ههنا كان يقع فورًا من قبل، فاختلف بابان
+     في نافذةٍ واحدة.
+     فصار كلُّ حقلٍ يُطبَّق عند ‎change‎، والنافذةُ تُغلَق متى شاء صاحبُها. */
+  function dmApply() {
     save();
     renderTerms();
     if (selTerm) renderFrame();   /* دوائر حالة المواد تتبع تواريخ الترم */
     mkTab.render(); mkModal.render();   /* وكذلك فلتر «حالة المادة» في السوقين */
-    closeDateModal();
+  }
+
+  /* والتاريخان يُكتبان معًا: منتقي «البكرات» يرسل ‎change‎ بعد كلّ اختيار */
+  const dmDates = () => {
+    if (!dateTerm) return;
+    state.termDates[dateTerm] = { s: $('#dm-start').value, e: $('#dm-end').value };
+    dmApply();
+  };
+  $('#dm-start').addEventListener('change', dmDates);
+  $('#dm-end').addEventListener('change', dmDates);
+
+  /* والاسمُ على ‎change‎ لا على كلّ حرف: ‎input‎ يعيد التسمية بنصف اسمٍ ثمّ
+     يمنع تمامَه، لأنّ النصفَ صار ترمًا قائمًا فيُرفض ما بعده مكرَّرًا */
+  $('#dm-name').addEventListener('change', () => {
+    if (!dateTerm) return;
+    const el = $('#dm-name');
+    const newName = el.value.trim();
+    if (newName === dateTerm) return;
+    if (!newName || !renameTerm(dateTerm, newName)) {
+      el.value = dateTerm;        /* خاوٍ أو مكرّر: يُردّ ما كان ولا يُصاح */
+      return;
+    }
+    dateTerm = newName;
+    $('#dm-title').textContent = `${T().termSettings} — ${dateTerm}`;
+    dmApply();
   });
 
   $('#dm-delete').addEventListener('click', () => {
@@ -2747,7 +3923,10 @@
     if (entry) {
       entry.picks = picks;
     } else {
-      entry = { code: wiz.code, picks };
+      /* وإن كانت قد خرجت من هذا الترم فقيدُها موضوعٌ جانبًا: يعود بكلّ ما عليه،
+         وتُكتب فوقه اختياراتُ المُعالج وحدَها */
+      entry = libTake(selTerm, wiz.code) || { code: wiz.code };
+      entry.picks = picks;
       libEntries(selTerm).push(entry);
     }
     const solo = wiz.solo;
@@ -2852,7 +4031,10 @@
 
   /* ---------- نموذج المشاركات: لكل قسم قائمة مشاركات {me, u:{name,img}, likes, liked, data} ---------- */
   /* abs = الغياب والتأخير (قناة واحدة، المساهمة تحمل الاثنين) · srcU/srcP = مصادر الفهم/الممارسة */
-  const SECTIONS = ['info', 'doc', 'grade', 'abs', 'srcU', 'srcP', 'lessons', 'videos', 'cards'];
+  /* ‏‎drx‎ اقتراحُ دكتور: بندٌ بلا تبويبٍ في الموقع — يُكتب من قائمة التصفية
+     ويُقرأ في لوحة الأدمن. ووجودُه ههنا شرطٌ لوصوله: الجذبُ يردّ ما ليس في
+     هذه القائمة (‎13.js‎)، فلولاه لَوصل الخادمَ ولم يعد أبدًا. */
+  const SECTIONS = ['info', 'doc', 'grade', 'abs', 'srcU', 'srcP', 'lessons', 'videos', 'cards', 'drx'];
   function defaultData(sec) {
     switch (sec) {
       case 'info':  return { desc: '', type: '', rel: 0, lang: '', book: '' };   // «المادة»: النوعية + اللغة + الترابط + اسم الكتاب + الوصف
@@ -2935,26 +4117,9 @@
     return info.posts;
   }
   const postsOf = (code, sec) => { const P = coursePosts(code); return P[sec] || (P[sec] = []); };
-  /* ============================================================
-     ‎me‎ — عهدٌ يُقرأ قبل أن يُوصل الموقعُ بخادم
-     ============================================================
-     ‎me: true‎ تعني «هذي لي». وهي حقلٌ **مخزَّنٌ** لا سؤالٌ يُحسب، وتُقرأ في ثمانيةٍ
-     وخمسين موضعًا بصيغةٍ واحدة (‎p.me‎ · ‎find(x => x.me)‎ · ‎x.me ? … : …‎).
-
-     وما دام لا خادمَ فهي صادقةٌ دائمًا: ما في درجي فهو لي.
-
-     ===== ويومَ يجيء الخادم =====
-     تصير كاذبةً في حالةٍ واحدةٍ خطيرة: مساهمةٌ كتبها زميلي تحمل ‎me: true‎ في
-     **درجه هو**، فإذا نزلت إليّ كما هي ادّعت أنّها لي — فأملكُ ما ليس لي، وأحرّره،
-     ويُنسب إليّ.
-
-     فالعهد: **كلُّ ما يرد من الخادم يُجرَّد من ‎me‎ ثمّ يُختم من جديد**
-     (‎p.me = p.uid === session.uid‎) في **نقطة الورود وحدَها**. ولا يُوثَق بحقلٍ
-     ورد من خارج — لا ‎me‎ ولا العدّادات.
-
-     ولا تُلَفّ المواضعُ الثمانيةُ والخمسون في دالّة: اللفُّ لا يغني عن ختم الورود
-     (فالختمُ لازمٌ لتجريد سائر الحقول على أيّ حال)، ويشتري ثمانيًا وخمسين فرصةَ
-     خطأٍ اليوم بلا مقابل. القياسُ قال هذا، لا الذوق. */
+  /* `me` is only a cached answer to "is this mine?".
+     The question itself, and the one place that refreshes the answer, live
+     in the OWNERSHIP block at the top of 01.js. Read that, not this. */
   /* ---------- مساهمةُ الموقع ----------
      ما يشحنه الموقعُ معه (أغلفةُ الكتب، وبطائقُ البداية) ليس مساهمةَ أحد. وكان
      يُكتب بـ‎myPost‎ فيُنسب إلى **كلّ زائر**: يفتح المكتبةَ فيجد ألفًا وسبعمئة
@@ -2972,10 +4137,22 @@
     return p;
   }
 
+  /* Writing points. These are the only two places that answer "which
+     contribution do I write into?" — everywhere else only reads. If one of
+     them picks the wrong post, my text lands in someone else's work. */
   function myPost(code, sec) {
     const arr = postsOf(code, sec);
-    let p = arr.find(x => x.me);
-    if (!p) { p = { id: newId(), me: true, u: { name: T().meName }, likes: 0, liked: false, ts: Date.now(), data: defaultData(sec) }; arr.push(p); save(); }
+    let p = arr.find(isMine) || null;
+    /* ===== ولوحةُ الأدمن تُنشئ منشورًا لا مسوّدة =====
+       الافتراضُ «خاصّة» عهدٌ مع الطالب: ما كتبه له حتّى ينشره. ولوحةُ الأدمن
+       ضدُّ ذلك — هي تكتب **باسم الموقع لِلناس**، فمسوّدةٌ فيها لا يراها أحدٌ
+       ولا تصير غلافًا ولو ثُبّتت. وقد وقع: غلافٌ مثبَّتٌ خاصٌّ لا يظهر لأحد. */
+    if (!p) {
+      p = { id: newId(), me: true, u: { name: T().meName }, likes: 0, liked: false,
+            ts: Date.now(), st: ADMIN ? 'pub' : 'priv', data: defaultData(sec),
+            uid: actingAs() };
+      arr.push(p); save();
+    }
     return p;
   }
 
@@ -2984,12 +4161,18 @@
   const natureData  = code => { const d = infoData(code); d.type = d.type || ''; d.rel = d.rel || 0; d.lang = d.lang || ''; d.book = d.book || ''; d.bookImg = d.bookImg || ''; return d; };   /* النوعية + اللغة + اسم الكتاب + صورته داخل «المادة» */
 
   /* كتاب 3D صغير جدًا: صورة الغلاف المضافة (إن وُجدت) وإلا غلاف بديل بكود المادة */
-  function bookMini(code, img) {
-    if (img) return `<span class="bk bk--xs"><span class="bkface bkface--img"><img src="${img}" alt=""></span></span>`;
-    const sp = code.indexOf(' '), dept = code.slice(0, sp), num = code.slice(sp + 1);
-    const deptLabel = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
-    return `<span class="bk bk--xs bk--ph"><span class="bkface"><b>${deptLabel}</b><i>${num}</i></span></span>`;
-  }
+  /* ============================================================
+     الكتابُ المرسومُ أساسٌ دائمًا، والصورةُ تُركَّب فوقه
+     ============================================================
+     كان الاختيارُ ثنائيًّا: صورةٌ **أو** كتابٌ مرسوم. فبين طلبِ الصورة ووصولها
+     فراغٌ، وإن سقط الطلبُ (عنوانٌ ذهب مرجعُه) بقي الفراغُ أبدًا — ولا شيءَ يقول
+     إنّ ثمّة مادّةً هنا.
+     فيُبنى المرسومُ في كلّ حال، وتُوضع الصورةُ فوقه. فإن جاءت غطّته، وإن تأخّرت
+     رأى الناظرُ كتابًا باسم مادّته، وإن سقطت (‎onerror‎) انكشف المرسومُ تحتها
+     فلا تبقى أيقونةُ صورةٍ مكسورة. */
+  /* ‎bookMini‎ صارت اسمًا للراسم بمقاسه الصغير — والوسمُ في ‎bookHTML‎ وحدَها */
+  const bookMini = (code, img) => bookHTML(code, img, { size: 'xs' });
+
   const docsData    = code => { const d = myPost(code, 'doc').data; return d.docs || (d.docs = []); };
   const gradingOf   = code => { const d = myPost(code, 'grade').data; d.items || (d.items = []); d.method || (d.method = 'avg'); return d; };
 
@@ -3028,26 +4211,143 @@
 
   /* ---------- الدكاترة: هوياتهم (صورة + اسم) يديرها الأدمن، وتحت كل دكتور مشاركات المجتمع عنه ----------
      doctors: [{name, img, posts: [{me, u, likes, liked, data:{e, hours, d, teach, grade}}]}] */
+  /* ============================================================
+     والدكاترةُ على السلك: مساهمةٌ واحدةٌ لكلّ صاحبٍ في المادّة
+     ============================================================
+     ‏‎doctors‎ ليست مساهمةً ولا هي من حقول وثيقة الحساب، ومساهماتُ الدكاترة تسكن
+     على الدكتور لا على المادّة — و‎srvPushSoon‎ لا تمشي إلّا على مساهمات المادّة.
+     فلم يبلغ الخادمَ من هذا البند شيءٌ قطّ: سُئل الخادمُ عن المواد الثلاثين والمئتين
+     فردّ ‎info 60 · srcU 2 · drx 2 · cards 4 · abs 1 · grade 1 · srcP 1‎ و‎doc 0‎.
+     وهو ما رآه صاحبُ الموقع: «مربوطة بمتصفّحي».
+     ===== والقيدُ يفرض الشكل =====
+     ‏‎UNIQUE(uid, code, sec)‎ — مساهمةٌ واحدةٌ للواحد في البند الواحد. فأربعةُ
+     دكاترةٍ في مادّةٍ لا يكونون أربعَ مساهمات؛ يكونون **صفوفًا في مساهمةٍ واحدة**:
+       ‎data.docs = [{ id, n, img, fromId, e, bld, room, d, hours, teach, grade }]‎
+     وهو الشكلُ الذي بقي قارئُه ههنا ولم يُبنَ كاتبُه.
+     ===== ومساهمتي ليست نسخةً من صفّها، بل هي هو =====
+     ‏‎p.data = row‎ — جسمٌ واحدٌ باسمين. فما تكتبه في المربّع يقع في عين ما يُدفع،
+     فلا خطوةَ تسلسلٍ تُنسى، ولا نسختان تفترقان، ولا قراءةٌ تردّ ما كُتب توًّا.
+     ومساهماتُ غيرك نسخٌ كما كانت: تُقرأ ولا تُكتب.
+     ===== وتُقرأ في كلّ مرّةٍ لا مرّةً واحدة =====
+     كان الترحيلُ مشروطًا بـ‎if (!info.doctors)‎، فمساهمةٌ تصل بعد أوّل بناءٍ للقائمة
+     لا يراها أحد — والجذبُ يقع بعد الرسم دائمًا. */
+  const DOC_WIRE = ['e', 'bld', 'room', 'hours', 'teach', 'grade', 'd'];
+  /* ووصلُ مساهمتي بصفّها. وما كُتب قبل السلك — في دُرجٍ مضى — يُنقل إلى الصفّ
+     ولا يُكتب فوق ما فيه: الصفُّ أحدثُ، لأنّه هو الذي يُكتب اليوم */
+  function docLink(p, row) {
+    if (!p || !row || p.data === row) return 0;
+    const old = p.data || {};
+    DOC_WIRE.forEach(k => {
+      const v = old[k], cur = row[k];
+      const bare = cur === undefined || cur === '' || cur === 0
+                || (Array.isArray(cur) && !cur.length);
+      const has = v !== undefined && v !== '' && v !== 0
+               && !(Array.isArray(v) && !v.length);
+      if (bare && has) row[k] = v;
+    });
+    p.data = row;
+    return 1;
+  }
+
+  function docAbsorb(code, info, seen) {
+    const key = p => (p && p.uid) || ((p && p.u && p.u.name) || '') || '?';
+    /* ===== وشاهدُ الحذف يعلو على الوافد =====
+       القائمةُ تُبنى من الصفوف، فمن حُذف وبقي صفُّه في مساهمةٍ لم تُدفع بعد —
+       أو جاء جذبٌ بالنسخة القديمة قبل أن تبلغ الجديدة — عاد كأنّ الحذفَ لم يقع.
+       فيُكتب له شاهدٌ يبقى، كما لأترام الحساب شواهدُها (‎termsGone‎) */
+    const gone = info.docGone || {};
+    let hit = 0;
+    (coursePosts(code).doc || []).forEach(post => {
+      const mine = isMine(post);
+      ((post.data && post.data.docs) || []).forEach(d => {
+        if (!d) return;
+        if (d.id && gone[d.id]) return;      /* حُذف ⇐ لا يُبعث من صفّه */
+        /* ===== وما نشره غيري لا أُعيد نشرَه — بشرط أن يكون نُشر فعلًا =====
+           الشرطُ كان «مساهمةٌ ليست لي تحمله»، وفي الدرج مساهماتُ ‎doc‎ قديمةٌ
+           **بلا مالك**: بقايا نموذجٍ سابق، لم تبلغ الخادمَ قطُّ ولن تبلغه (لا
+           صاحبَ لها يدفعها). فكانت تُقرأ «قد نُشر» فيُمنع نشرُه — ودكتورٌ يُمنع
+           نشرُه بحجّة مساهمةٍ لا وجودَ لها إلّا في هذا المتصفّح لا يخرج أبدًا.
+           وقد قِيس: أربعٌ من سبع موادَّ لم يُفتح لدكاترتها صفٌّ أصلًا.
+           و‎uid‎ هو الفارق: من له مالكٌ فقد عرفه الخادم. */
+        if (!mine && post.uid && d.id && seen) seen[d.id] = 1;
+        /* ومن جاء بلا معرّفٍ فمن نموذجٍ أقدم: يُعرَّف بالاسم مرّةً ثمّ يحمل معرّفَه */
+        let dr = (d.id && info.doctors.find(x => x.id === d.id))
+              || info.doctors.find(x => !x.id && x.name === (d.n || ''));
+        if (!dr) {
+          dr = { id: d.id || newId(), name: d.n || '', en: d.en || '', img: d.img || '',
+                 me: mine, u: post.u || { name: T().docByAnon },
+                 ts: post.ts || Date.now(), posts: [] };
+          if (d.fromId) dr.fromId = d.fromId;
+          if (d.by) dr.by = d.by;
+          info.doctors.push(dr); hit++;
+        } else {
+          if (!dr.id && d.id) { dr.id = d.id; hit++; }
+          if (!dr.name && d.n) { dr.name = d.n; hit++; }
+          if (!dr.en && d.en) { dr.en = d.en; hit++; }
+          if (!dr.img && d.img) { dr.img = d.img; hit++; }
+          if (!dr.fromId && d.fromId) { dr.fromId = d.fromId; hit++; }
+          if (!dr.by && d.by) { dr.by = d.by; hit++; }
+        }
+        /* ===== ومساهمتي تُوصَل ولا تُنسخ =====
+           النسخُ ههنا يردّ ما كُتب قبل أن يُدفع. والوصلُ لازمٌ في هذا الموضع
+           بعينه: متصفّحٌ جديدٌ يستقبل مساهمتي من الخادم ولا مساهمةَ محلّيّةً
+           عنده تحت الدكتور، فلولا الوصلُ ههنا لَبقي المربّعُ خاويًا وفي يده متنُه */
+        if (mine) {
+          let p = (dr.posts || []).find(isMine);
+          if (!p) {
+            p = { id: newId(), me: true, uid: post.uid || actingAs(),
+                  u: post.u || { name: T().meName }, likes: 0, liked: false,
+                  ts: post.ts || Date.now(), data: d };
+            dr.posts.push(p); hit++;
+          } else hit += docLink(p, d);
+          return;
+        }
+        const who = key(post);
+        let p = (dr.posts || []).find(x => x && !x.me && key(x) === who);
+        const data = {};
+        DOC_WIRE.forEach(k => { if (d[k] !== undefined) data[k] = d[k]; });
+        if (!p) {
+          dr.posts.push({ id: d.pid || newId(), me: false, uid: post.uid || '',
+                          u: post.u || { name: T().docByAnon }, likes: 0, liked: false,
+                          ts: post.ts || Date.now(), data });
+          hit++;
+        } else if (JSON.stringify(p.data) !== JSON.stringify(data)) { p.data = data; hit++; }
+      });
+    });
+    return hit;
+  }
+
   function doctorsOf(code) {
     const info = cinfo(code);
-    if (!info.doctors) {
-      info.doctors = [];
-      /* ترحيل النموذج السابق: مشاركات القسم كانت تحمل قائمة دكاترة كاملة */
-      const P = coursePosts(code);
-      (P.doc || []).forEach(post => {
-        ((post.data && post.data.docs) || []).forEach(d => {
-          info.doctors.push({
-            name: d.n || '', img: d.img || '',
-            me: !!post.me, u: post.u || { name: T().meName }, ts: post.ts || Date.now(),   /* من أضاف الدكتور */
-            posts: [{
-              me: !!post.me, u: post.u || { name: T().meName }, likes: 0, liked: false, ts: Date.now(),
-              data: { e: d.e || '', hours: d.hours || [], d: d.d || '', teach: d.teach || 0, grade: d.grade || 0 },
-            }],
-          });
-        });
+    if (!info.doctors) info.doctors = [];
+    const seen = {};
+    let hit = docAbsorb(code, info, seen);
+    /* ============================================================
+       والقائمةُ تُنشر من اللوحة وحدَها
+       ============================================================
+       اللوحةُ تكتب الدكتورَ في ‎cinfo[code].doctors‎ رأسًا، وليست تلك مساهمةً ولا
+       هي من حقول وثيقة الحساب. فما لم يُفتح له صفٌّ في مساهمةٍ لم يعرفه متصفّحٌ
+       آخرُ أصلًا — لا اسمَه ولا صورتَه. وهو ما رآه صاحبُ الموقع: «بالمتصفحات
+       الثانية ما فيه ولا دكتور معتمد».
+       ===== ولا يُشترط ‎dr.me‎ =====
+       اللوحةُ تكتب ‎me: false‎ على كلّ معتمَد — أي «ليس هذا من مساهماتي، هو
+       تعريفُ الموقع». فلو اشتُرط ‎me‎ لم يُنشر أحدٌ منهم أبدًا. وقد وقع.
+       ===== والناشرُ هو الموقعُ لا القارئ =====
+       ‏‎myPost‎ تلد في اللوحة ‎pub‎ وفي الموقع ‎priv‎ (وهو عهدٌ صحيحٌ مع الطالب:
+       ما كتبتَه لك حتّى تنشره). فلو نشر القارئُ القائمةَ لَخرجت **خاصّةً** —
+       لا يراها أحدٌ سواه — وباسمه لا باسم الموقع. فالنشرُ مقصورٌ على اللوحة،
+       والقارئُ لا يحمل في مساهمته إلّا صفوفَ من كتب عنهم (‎myDrPost‎).
+       ===== وما نشره غيري لا أُعيد نشرَه =====
+       ‏‎seen‎ ما حمله وافدٌ ليس لي. */
+    if (ADMIN) {
+      const rows = (((coursePosts(code).doc || []).find(isMine) || {}).data || {}).docs || [];
+      info.doctors.forEach(dr => {
+        if (!dr.id) { dr.id = newId(); hit++; }
+        if (seen[dr.id]) return;
+        if (!rows.some(x => x && x.id === dr.id)) { docRow(code, dr); hit++; }
       });
-      save();
     }
+    if (hit) save();
     /* معرفات ثابتة للدكاترة ومساهماتهم (م0) */
     {
       let tagged = false;
@@ -3093,14 +4393,94 @@
     }
     return info.doctors;
   }
+  /* ===== ومساهمتي عن الدكتور متنُها صفُّه في مساهمتي عن المادّة =====
+     ‏‎p.data‎ **هو** الصفُّ لا صورةٌ عنه: فما يُكتب في المربّع يقع في جوف مساهمةٍ
+     يمشي عليها الدفعُ أصلًا (‎info.posts.doc‎)، ويحكم فيها ‎srvMerge‎ بحكم الملكيّة
+     الواحد، ويعرف ‎postEmpty‎ أنّ فيها شيئًا. ولا تُبنى آلةُ مزامنةٍ ثانية.
+     وهويّةُ الدكتور تُكتب في الصفّ كذلك: من عرّفه حمل تعريفَه معه، وإلّا وصل
+     المتنُ إلى متصفّحٍ لا يعرف عمّن يتكلّم. */
+  const docRow = (code, dr) => {
+    const docs = docsData(code);
+    let row = dr.id ? docs.find(x => x && x.id === dr.id) : null;
+    if (!row) {
+      row = { id: dr.id, n: dr.name || '', en: dr.en || '', img: dr.img || '',
+              e: '', bld: '', room: '', d: '', hours: [], teach: 0, grade: 0 };
+      if (dr.fromId) row.fromId = dr.fromId;
+      if (dr.by) row.by = dr.by;
+      docs.push(row);
+    }
+    /* والهويّةُ تتبع الدكتورَ: تبديلُها في اللوحة يبلغ السلك */
+    if (dr.name && row.n !== dr.name) row.n = dr.name;
+    if (dr.en && row.en !== dr.en) row.en = dr.en;
+    if (dr.img && row.img !== dr.img) row.img = dr.img;
+    return row;
+  };
+  /* ===== وبابٌ للوحة =====
+     اللوحةُ تكتب في الدرج رأسًا (‎docsOf‎) ولا تمرّ بـ‎doctorsOf‎، فلا يُفتح
+     للمعتمَد صفٌّ حتّى يُفتح مربّعُه في الموقع المضمَّن — وقد لا يُفتح. فتُنادى
+     هذه بعد كلّ تبديلٍ في القائمة: تكتب الصفوفَ وتدفعها */
+  window.acDocPub = code => {
+    if (!code) return 0;
+    const n = doctorsOf(code).length;
+    if (typeof srvPushSoon === 'function') srvPushSoon();
+    return n;
+  };
+  /* ===== واللوحةُ تنشر قائمتَها بنفسها عند الإقلاع =====
+     تعليقُ النشر على ملفّ اللوحة يجعله رهنَ أمرين لا يُملكان: أن تُفتح كلُّ
+     مادّةٍ بيدها، وأن يكون ملفُّ اللوحة عند المتصفّح **جديدًا** — وهو يُخدم من
+     مخزنه، فيُنادى قديمٌ لا يعرف هذا الباب. والمحرّكُ ههنا هو المحرّكُ، فيمسح
+     الدرجَ بنفسه: مادّةٌ فيها دكاترةٌ تُقرأ فتُفتح لهم صفوفُهم، ثمّ يُدفع.
+     ومرّتان: الأولى للدرج المحفوظ، والثانية لِما وصل من الحساب بعده.
+     ولا ضررَ في التكرار: ‎doctorsOf‎ لا تفتح صفًّا موجودًا. */
+  if (ADMIN) [2500, 9000].forEach(ms => setTimeout(() => {
+    /* ===== والحارسُ حول المادّة الواحدة لا حول المسح كلِّه =====
+       كان ‎try‎ يلفّ الحلقةَ، فمادّةٌ واحدةٌ تُلقي تُسقط كلَّ ما بعدها صامتةً —
+       ولا يُرى منها إلّا أنّ بعضَ المواد نُشرت وبعضَها لا، بلا قاعدةٍ تُفهم.
+       فيُلَفّ كلٌّ بحارسه: ما سقط سقط وحدَه، ويُعدّ الساقطُ في الدفتر */
+    let n = 0, bad = 0;
+    Object.keys(state.cinfo || {}).forEach(code => {
+      if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+      try { doctorsOf(code); n++; } catch (e) { bad++; }
+    });
+    if (n && typeof srvPushSoon === 'function') srvPushSoon();
+    if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
+  }, ms));
+  /* ===== وحذفُ الدكتور يُنزع معه صفُّه =====
+     القائمةُ تُبنى من الصفوف، فمن حُذف من القائمة وبقي صفُّه عاد في القراءة
+     التالية. ويُنزع من مساهماتي كلِّها في المادّة: صفُّ التعريف وصفُّ ما كتبتُه
+     عنه سواء — الدكتورُ ذهب، فلا معنى لِما قيل فيه. */
+  window.acDocDrop = (code, id) => {
+    if (!code || !id) return 0;
+    let n = 0;
+    (coursePosts(code).doc || []).forEach(p => {
+      if (!isMine(p) || !p.data || !Array.isArray(p.data.docs)) return;
+      const before = p.data.docs.length;
+      p.data.docs = p.data.docs.filter(x => x && x.id !== id);
+      n += before - p.data.docs.length;
+    });
+    const info = cinfo(code);
+    if (Array.isArray(info.doctors)) {
+      const k = info.doctors.findIndex(x => x && x.id === id);
+      if (k > -1) { info.doctors.splice(k, 1); n++; }
+    }
+    /* ويُكتب شاهدُ الحذف: بدونه يُعيده أوّلُ جذبٍ أو أوّلُ قراءةٍ للصفّ */
+    info.docGone = info.docGone || {};
+    if (!info.docGone[id]) { info.docGone[id] = Date.now(); n++; }
+    if (n) { save(); if (typeof srvPushSoon === 'function') srvPushSoon(); }
+    return n;
+  };
   function myDrPost(code, di) {
     const dr = doctorsOf(code)[di];
-    let p = dr.posts.find(x => x.me);
+    if (!dr) return null;
+    if (!dr.id) dr.id = newId();
+    const row = docRow(code, dr);
+    let p = (dr.posts || []).find(isMine) || null;
     if (!p) {
-      p = { id: newId(), me: true, u: { name: T().meName }, likes: 0, liked: false, ts: Date.now(), data: { e: '', hours: [], d: '', teach: 0, grade: 0 } };
+      p = { id: newId(), me: true, u: { name: T().meName }, likes: 0, liked: false,
+            ts: Date.now(), uid: actingAs(), data: row };
       dr.posts.push(p);
       save();
-    }
+    } else if (docLink(p, row)) save();
     return p;
   }
 
@@ -3229,9 +4609,7 @@
   /* مربع صورة المادة (عرض فقط — الرفع من سوق المواد): كتاب 3D كبير داخل نافذة المادة */
   function courseImgBox(code) {
     const im = imgOf(code);
-    return `<div class="cm-cimg cm-cimg--book">${
-      im ? `<span class="bk bk--lg"><img src="${im}" alt=""></span>` : phBook(code, true)
-    }</div>`;
+    return `<div class="cm-cimg cm-cimg--book">${bookHTML(code, im, { size: 'lg' })}</div>`;
   }
 
 
@@ -3900,8 +5278,13 @@
   const autoGrow = el => { if (!el) return; el.style.height = 'auto'; el.style.height = (el.scrollHeight + 2) + 'px'; };
 
   /* غلاف الكتاب داخل المستطيل: كتاب 3D مائل صغير جدًا (بارتفاع ثابت لا يكبّر المستطيل) · وإلا أيقونة كتاب */
-  const chipBook = raw => assetURL(raw)
-    ? `<span class="pchip-bk"><span class="bk"><span class="bkface bkface--img"><img src="${assetURL(raw)}" alt=""></span></span></span>`
+  /* ===== وهذا كان الموضعَ الثالثَ الذي تُخلّف =====
+     كان يُخرج ‎.bk‎ وحدَه وصورةً في السَّيل، فلمّا صار الكتابُ «مرسومٌ أساسٌ
+     والصورةُ فوقه» في الموضعين الآخرَين بقي هذا على النظام القديم: صورةٌ لا تجد
+     ما يعطيها قامةً، فتبدو «لا تُحمَّل». ونادى الراسمَ فاستوى الثلاثة.
+     والمادّةُ تُمرَّر ليُرسم وجهُها إن تعذّرت الصورة — و‎cmCode‎ هي المفتوحةُ الآن. */
+  const chipBook = (raw, code) => assetURL(raw)
+    ? `<span class="pchip-bk">${bookHTML(code || cmCode || '', assetURL(raw), { size: 'xs' })}</span>`
     : `<svg class="peek-bookic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H18a1 1 0 0 1 1 1v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M8 4v14"/></svg>`;
 
   /* قيمة التقييم «10/الدرجة» بترتيب LTR ثابت — الدرجة يمين و«/10» يسار (يُستخدم في التحرير والنشر) */
@@ -4255,9 +5638,15 @@
   /* سؤال النشر: يُفتح عند الإرسال (‎send=true‎) فيُخرج من التحرير بعد الجواب،
      أو من الشارة وحدها فيبدّل الوضع ويبقى المحرّر مفتوحًا */
   let pstAsk = null;
-  function openPstAsk(send) {
+  /* ===== وللقائمة هدفان =====
+     كانت مقصورةً على مساهمة محرّر المكتبة (‎editingPost‎). ثمّ احتاجها مربّعُ
+     الرُّكن، فعُمّمت بهدفٍ يُمرَّر: ‎{p, code, sec, after}‎ — أو ‎null‎ فمحرّرُ
+     المكتبة كما كان. وقائمةٌ واحدةٌ خيرٌ من ثنتين تفترقان يومًا. */
+  let pstTarget = null;
+  function openPstAsk(send, target) {
+    pstTarget = target || null;
     pstAsk = { send: !!send };
-    const cur = pstOf(editingPost()), P = PST();
+    const cur = pstOf(pstTarget ? pstTarget.p : editingPost()), P = PST();
     /* الخيارات الثلاثة صفٌّ واحد في مستوًى واحد: لا سطورًا نصّيّةً متراكمة.
        والوصف في التلميح لا تحت كل اسم، وإلّا صار الصفُّ فقراتٍ تُقرأ لا أزرارًا تُضغط.
        ولا سطرَ «أبقِها غير مدرجة» أسفل: هو خيارٌ من الثلاثة أصلًا، وتكرارُه بلبلة */
@@ -4274,9 +5663,14 @@
   }
   function closePstAsk(chosen) {
     const wasSend = pstAsk && pstAsk.send;
-    pstAsk = null;
+    const tg = pstTarget;
+    pstAsk = null; pstTarget = null;
     $('#pst-modal').hidden = true;
-    const p = editingPost();
+    /* الهدفُ الخارجيّ قد لا تكون له مساهمةٌ بعد (فُتح المربّعُ ولم يُكتب فيه
+       شيء). فتُصنع عند الحاجة وحدَها: اختيارُ «خاصّة» هو الافتراضُ أصلًا،
+       فلا يستحقّ أن يُولَد له صفٌّ خاوٍ في درج أحد. */
+    const p = tg ? (tg.p || (chosen && chosen !== 'priv' && tg.make ? tg.make() : null))
+                 : editingPost();
     if (chosen && p) {
       p.st = chosen;
       /* ===== ومن نشرها يُكتب عليها عند النشر لا عند النجاح =====
@@ -4288,8 +5682,10 @@
       save();
       /* والنشرُ فعلٌ صريح، فيبلغ الخادمَ في حينه لا بعد تأجيل — ‎srvPush‎ ترفع
          إن صارت «عامّة» وتسحب إن غادرتها */
-      srvPush(p, cmCode, cmView.sub || cmTabSel);
+      srvPush(p, tg ? tg.code : cmCode, tg ? tg.sec : (cmView.sub || cmTabSel));
     }
+    /* وهدفٌ خارجيّ لا يُعاد به رسمُ محرّر المكتبة: صاحبُه يرسم نفسَه */
+    if (tg) { if (tg.after) tg.after(); return; }
     /* «تمّ» تُنهي التحرير لا تحفظ: المحفوظ محفوظٌ منذ أوّل حرف */
     if (wasSend) { cleanupEmptyMine(); cmView = { mode: 'list', pi: 0 }; }
     renderCmSection();
@@ -4587,12 +5983,158 @@
             <button type="button" class="cm-sortopt${cmSort === 'best' ? ' on' : ''}" data-sort="best">${T().sortBest}</button>
             <button type="button" class="cm-sortopt${cmSort === 'newest' ? ' on' : ''}" data-sort="newest">${T().sortNewest}</button>
           </div>
-          <div class="cm-docmenu__t">${T().filterByDoctor}</div>
+          <div class="cm-docmenu__t"><span>${T().filterByDoctor}</span>${drxCtaHTML(cmCode)}</div>
           ${rows}
         </div>
       </div>${activeChip}
     </div>`;
   }
+
+  /* ============================================================
+     SUGGEST AN INSTRUCTOR
+     ============================================================
+     The filter list holds the instructors this course already has. When the one
+     you want is not among them the list is a dead end -- so beside its title
+     there is a way out: name the instructor, add a photo, and send it to the
+     site owner.
+
+     HOW IT TRAVELS
+     A suggestion is an ordinary contribution in a section of its own (`drx`),
+     published the moment it is sent. That is the one door everything else on
+     this site already uses, and it comes with everything already built:
+       · the photo is uploaded to the media store on push, like every other image
+       · the server records who sent it, so the panel can show their name and face
+       · the admin panel reads it back with all the other contributions
+     A second pipeline would be a second thing to keep in step. There is none.
+
+     WHY IT IS PUBLISHED, NOT SAVED AS A DRAFT
+     Contributions start private and are published later, on purpose -- what you
+     write is yours until you say otherwise. A suggestion has no such stage:
+     sending IS the act. So it is written `pub` from birth.
+
+     WHAT APPROVING IT DOES is in the admin panel, not here. */
+  let drxImg = '';        /* the chosen photo, shrunk, as a data URL until it is pushed */
+
+  /* ===== وتحمل مادّتها معها =====
+     هي تُبنى في موضعين: شريطُ تصفية نافذة المادّة، ومنسدلةُ الدكتور في لوحة الركن.
+     وهما سياقان مختلفان — الأولى تعرف ‎cmCode‎ والثانية تعرف مادّةَ الركن. فلو
+     سألت الورقةُ عن المادّة عند الإرسال لَاحتاجت أن تعرف من أين فُتحت. فتُكتب
+     المادّةُ على الزرّ، وتُلتقط عند الفتح. */
+  let drxFor = '';
+  const drxCtaHTML = code =>
+    `<button type="button" class="drx-cta" data-drx="open" data-code="${esc(code || '')}">`
+    + `<i>${esc(T().drxAsk)}</i><b>${esc(T().drxCta)}</b></button>`;
+
+  /* The form lives in the popup the course window already carries, so there is
+     no second shell to dress and no second thing that can be left open. */
+  function drxOpen(code) {
+    if (isGuest()) { toast(T().drxNeedAcct); return; }
+    drxFor = code || cmCode || '';
+    /* والمنسدلةُ التي فُتح منها تُغلق: حارسُها العامُّ يُبقيها لأنّ الزرَّ من أهلها،
+       فتبقى مفتوحةً خلف الورقة */
+    document.querySelectorAll('.mdrop-list').forEach(l => { l.hidden = true; });
+    drxImg = '';
+    const body = document.getElementById('cmt-body');
+    if (!body) return;
+    body.innerHTML = `<div class="drx">
+        <h3 class="drx__t">${esc(T().drxTitle)}</h3>
+        <label class="drx__f"><span>${esc(T().drxAr)}</span>
+          <input type="text" id="drx-ar" maxlength="60"></label>
+        <label class="drx__f"><span>${esc(T().drxEn)}</span>
+          <input type="text" id="drx-en" maxlength="60" dir="ltr"></label>
+        <div class="drx__f"><span>${esc(T().drxImg)}</span>
+          <div class="drx__pick">
+            <input type="file" id="drx-file" accept="image/*" hidden>
+            <button type="button" class="drx__btn" data-drx="pick">${esc(T().drxPick)}</button>
+            <span class="drx__av" id="drx-prev"></span>
+          </div></div>
+        <div class="drx__row">
+          <button type="button" class="drx__btn drx__btn--go" data-drx="send">${esc(T().drxSend)}</button>
+          <button type="button" class="drx__btn" data-drx="close">${esc(T().drxCancel)}</button>
+        </div>
+      </div>`;
+    const modal = document.querySelector('.cmt-modal');
+    if (modal) modal.hidden = false;
+    const f = document.getElementById('drx-ar');
+    if (f) f.focus();
+  }
+
+  const drxClose = () => {
+    const modal = document.querySelector('.cmt-modal');
+    if (modal) modal.hidden = true;
+  };
+
+  /* 200px square, the same shrink the panel uses for the instructors it adds
+     itself -- one size for one kind of picture, whoever supplies it. */
+  function drxTake(file) {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const S = 200, cv = document.createElement('canvas');
+        cv.width = cv.height = S;
+        const g = cv.getContext('2d');
+        const side = Math.min(im.width, im.height);
+        g.drawImage(im, (im.width - side) / 2, (im.height - side) / 2, side, side, 0, 0, S, S);
+        drxImg = cv.toDataURL('image/jpeg', .82);
+        const prev = document.getElementById('drx-prev');
+        if (prev) prev.innerHTML = `<img src="${drxImg}" alt="">`;
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  }
+
+  function drxSend() {
+    const code = drxFor;
+    if (!code) return;
+    const ar = (($('#drx-ar') || {}).value || '').trim();
+    const en = (($('#drx-en') || {}).value || '').trim();
+    if (!ar) { toast(T().drxNeedName); return; }
+    const post = {
+      /* ===== ويُوقَّع باسم صاحبه لا بـ«أنا» =====
+         سائرُ المساهمات تكتب ‎u: { name: 'أنا' }‎ وهو صحيحٌ لها: الموقعُ لا يقرأ ‎u‎
+         لما هو لك، بل يعرض اسمَك من حسابك (‎state.profile‎). أمّا الاقتراحُ فيُقرأ
+         في **لوحة الأدمن**، وهي تعمل بهُويّة الموقع لا بهُويّتك — فأنت عندها
+         «غيرُك»، فتقرأ ‎u‎ فتجد «أنا». وقد وقع: «اقترحه أنا».
+         و‎u‎ لا تُرسل إلى الخادم أصلًا (يشتقُّها من الجلسة)، فهي محلّيّةٌ صرفة —
+         فتُكتب صادقةً من أوّلها. */
+      id: newId(), me: true, uid: actingAs(),
+      u: { name: state.profile.name || T().meName, img: state.profile.img || '' },
+      likes: 0, liked: false, ts: Date.now(), st: 'pub',
+      data: { ar: ar, en: en, img: drxImg },
+    };
+    postsOf(code, 'drx').push(post);
+    save();
+    /* ===== ويُدفع في حينه، لا بعد أربع ثوانٍ =====
+       الدفعُ العامُّ مؤجَّلٌ عمدًا (‎srvPushSoon‎ تنتظر ‎4000‎ وتُعيد العدَّ مع كلّ
+       حفظ) — وهو صوابٌ لما يُكتب حرفًا حرفًا: لا يُتبع كلُّ حرفٍ طلبَ شبكة.
+       والاقتراحُ ليس كذلك: هو فعلٌ واحدٌ تامٌّ، ومن ضغط «أرسل» فقد أرسل. وقد
+       بقي أربعَ ثوانٍ في المتصفّح بينما اللوحةُ تسأل عنه فلا تجده.
+       فيُدفع هو وحدَه في حينه، ويبقى المؤجَّلُ شبكةَ أمانٍ إن تعثّر. */
+    if (typeof srvPush === 'function') srvPush(post, code, 'drx');
+    if (typeof srvPushSoon === 'function') srvPushSoon();
+    drxImg = '';
+    drxClose();
+    toast(T().drxDone);
+  }
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-drx]');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const act = b.dataset.drx;
+    if (act === 'open') drxOpen(b.dataset.code);
+    else if (act === 'pick') { const f = document.getElementById('drx-file'); if (f) f.click(); }
+    else if (act === 'send') drxSend();
+    else if (act === 'close') drxClose();
+  });
+  document.addEventListener('change', e => {
+    if (!e.target || e.target.id !== 'drx-file') return;
+    const f = e.target.files && e.target.files[0];
+    if (f) drxTake(f);
+    e.target.value = '';
+  });
 
   /* أفضل مشاركة: الأكثر لايكات، وعند التعادل الأحدث */
   function bestIdx(arr) {
@@ -4619,11 +6161,13 @@
     return `${t.h || '12'}:${t.m || '00'} ${T().ampmS[t.ap] || ''}`;
   }
   /* قائمة منسدلة مخصّصة بثيم الموقع (بديل <select> الأصلي غير القابل للتنسيق) */
-  function mdropHTML(kind, key, curVal, options) {
+  /* ‏‎lead‎: وسمٌ يتصدّر القائمةَ قبل خياراتها — بابٌ لمن لم يجد ما يبحث عنه فيها.
+     اختياريٌّ، فلا تتبدّل به منسدلةٌ لم تطلبه. */
+  function mdropHTML(kind, key, curVal, options, lead) {
     const cur = options.find(o => String(o[0]) === String(curVal)) || options[0];
     return `<span class="mdrop mdrop--${kind}" data-drop="${key}">
       <button type="button" class="mdrop-btn"><svg class="mdrop-arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${cur && cur[2] ? `<span class="mdrop-av">${cur[2]}</span>` : ''}<span class="mdrop-val">${cur ? cur[1] : ''}</span></button>
-      <div class="mdrop-list" hidden>${options.filter(o => String(o[0]) !== '').map(o => `<button type="button" class="mdrop-opt${String(o[0]) === String(curVal) ? ' on' : ''}" data-v="${o[0]}">${o[2] ? `<span class="mdrop-av">${o[2]}</span>` : ''}<span class="mdrop-optnm">${o[1]}</span></button>`).join('')}</div>
+      <div class="mdrop-list" hidden>${lead || ''}${options.filter(o => String(o[0]) !== '').map(o => `<button type="button" class="mdrop-opt${String(o[0]) === String(curVal) ? ' on' : ''}" data-v="${o[0]}">${o[2] ? `<span class="mdrop-av">${o[2]}</span>` : ''}<span class="mdrop-optnm">${o[1]}</span></button>`).join('')}</div>
     </span>`;
   }
   /* حقل وقت مخصّص: خانتا HH:MM قابلتان للكتابة (تلميح 00 باهت، بلا تظليل أزرق) + منسدلة ص/م */
@@ -17686,6 +19230,29 @@
     if (create && !entry[k]) entry[k] = {};
     return entry[k];
   }
+  /* ============================================================
+     المساهمةُ هي المصدر — لا نسخةَ ثانيةً في المربّع
+     ============================================================
+     كان لكلّ مربّعٍ تشكيلُه في ‎bag.infoV‎ ونحوِه، ومساهمتُك في المكتبة شيءٌ
+     آخر، والنسخُ بينهما يقع عند «حفظ» وبشرطِ «عام». فمن عبّأ ونسي الزرَّ ضاع
+     عملُه، ومن عبّأ خاصًّا لم يبقَ له أثر، ومن كتب من المكتبة لم يعرفه المربّع.
+     فصار المصدرُ واحدًا: ‎myPost(code, sec).data‎. ولا شيفرةَ مزامنةٍ لأنّه لا
+     شيءَ يُزامَن — شيءٌ واحدٌ يُقرأ من موضعين.
+
+     ===== وتُقرأ بلا إنشاء =====
+     ‎myPost‎ يُنشئ المساهمةَ إن غابت **ويحفظ**. والقراءةُ لا تُنشئ شيئًا: لو
+     أنشأت لَامتلأ درجُ كلّ زائرٍ بمساهماتٍ خاويةٍ لمجرّد أنّه فتح مربّعًا. */
+  const myPostRO   = (code, sec) => postsOf(code, sec).find(x => x.me) || null;
+  const myDrPostRO = (code, id) => {
+    const dr = id ? doctorsOf(code).find(x => x.id === id) : null;
+    return dr ? (dr.posts || []).find(x => x.me) || null : null;
+  };
+  /* أفيها شيء؟ — الخاويةُ لا تُقدَّم على التشكيل المركَّب من مساهمات غيرك */
+  const anyVal = (d, keys) => !!d && keys.some(k => {
+    const v = d[k];
+    return Array.isArray(v) ? v.length : (typeof v === 'number' ? !!v : !!(v && String(v).trim()));
+  });
+
   function nookPick(entry, sec) {
     const bag = nookPicks(entry);
     const v = bag && bag[sec];
@@ -17694,8 +19261,20 @@
     return postsOf(code, sec).find(x => x.id === v) || null;
   }
   /* دائرة الإضافة: مرقّطة ذهبية شفافة بعلامة + في وسط المربّع الفارغ — نقرتها تفتح مساحة الانتقاء */
-  const nkPickBtn = sec =>
-    `<button type="button" class="nk-pick" data-nkpick="${sec}" title="${T().nkPickTip}" aria-label="${T().nkPickTip}">+</button>`;
+  /* ============================================================
+     دعوةُ الحال الصفريّة — «المصمت»
+     ============================================================
+     كانت دائرةً مرقّطةً بعلامةِ زائدٍ في **وسط** المربّع: تُقرأ زخرفةً تنتظر،
+     وتدفع العنوانَ إلى أن يُقاسم الوسطَ فيبدو نازلًا بلا سبب.
+     والحالُ الصفريّةُ أوّلُ ما يراه الطالب، فهي موضعُ الدعوة لا موضعُ العدم.
+     فصارت زرًّا مصمتًا بلفظه — وهو الوجهُ الذي اختاره صاحبُ الموقع من ستّةٍ
+     عُرضت في ‎RE/nook-four‎، ومنها نُقل لفظُه وشكلُه. */
+  const CTA_PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+  const nkPickBtn = sec => {
+    const tx = (T().nkCta || {})[sec] || T().nkPickTip;
+    return `<button type="button" class="nk-cta" data-nkpick="${sec}" title="${esc(tx)}" aria-label="${esc(tx)}">`
+      + `<span class="nk-cta__ic">${CTA_PLUS}</span><span class="nk-cta__tx">${esc(tx)}</span></button>`;
+  };
   /* ============================================================
      زرُّ التوسيع والتضييق — يسار الترس في كلّ مربّع
      ============================================================
@@ -17721,9 +19300,56 @@
     return `<button type="button" class="nk-fold" data-nkfold="${sec}" title="${esc(lab)}" aria-label="${esc(lab)}">`
       + (on ? NK_FOLD.out : NK_FOLD.in) + `</button>`;
   };
+  /* ============================================================
+     الحالُ الصفريّة — راسمٌ واحدٌ للأربعة، وفيه سهمُ الطيّ
+     ============================================================
+     كانت تُكتب يدًا في أربعة مواضع (‎المادة · الدكتور · الغياب · الدرجة‎) بنصٍّ
+     واحدٍ مكرَّر: عنوانٌ وزرُّ دعوةٍ ولا شيءَ غيرُهما. **ولا سهمَ فيها.**
+
+     وذاك عطبٌ لا نقصُ زينة: السهمُ يحكم **الأربعةَ معًا** (نقرةٌ تنشرها جميعًا)،
+     فمن كان عنده ثلاثةٌ صفريّةٌ ومربّعٌ واحدٌ ممتلئ لم يجد في الثلاثة بابًا يفتح
+     منه الصفَّ، ولم يرَ فيها أثرَ الفتح. ولو كانت الأربعةُ صفريّةً لَما وجد سهمًا
+     في الرَّكن كلِّه. فالسهمُ يُولد مع المربّع لا مع متنه.
+
+     وموضعُه ‎.fx-tools--w‎ نفسُه الذي في الممتلئ — فيقع حيث يقع في إخوته بلا رقمٍ
+     يُكتب ههنا: يسارَ سطر العنوان (‎inset-inline-end‎ في اتّجاهٍ من اليمين).
+
+     ولا سهمَ في المعاينة (‎on === false‎): ليست لك فلا تُطوى بيدك. */
+  const nkEmptyBox = (sec, title, on) => {
+    const tools = on === false ? ''
+      : `<span class="fx-tools fx-tools--w">${nkFoldBtn(sec)}</span>`;
+    const cta = on === false ? '' : nkPickBtn(sec);
+    /* و‎data-m‎ يُكتب عند البناء كما يُكتب في الممتلئ: بين البناء والقياس لحظةٌ
+       يُرسم فيها المربّع، فلو خلا منها لَلبس وضعَ الواسع ثمّ قفز إلى الضيّق */
+    /* ===== والمقابضُ للفارغ كما للممتلئ =====
+       كانت للممتلئ وحدَه. والصفُّ ميزانيّةٌ واحدة: أوسعُ ما يبلغه مربّعٌ هو عرضُ
+       الصفّ ناقصًا أعراضَ إخوته — فمن كان عنده ثلاثةٌ فارغةٌ بلا مقابضَ لم يستطع
+       أن يُضيّقها، فبقي الرابعُ محبوسًا: مقبضُه يُمسك، ومؤشّرُه يتبدّل، ولا يتحرّك
+       شيء. وهو ما رآه صاحب الموقع في مربّع الدرجة.
+       ولا مقابضَ في المعاينة (‎on === false‎): ليست له فلا يُقاس بيده. */
+    const grips = on === false ? '' : nkiRZ();
+    /* ===== ولا يُقال «سجّل بنودك» وجوابُ الخادم لم يصل بعد =====
+       المربّعاتُ تُبنى من الدرج في اللحظة التي يُفتح فيها الرَّكن، والدرجُ لا يحمل
+       مساهماتِ غيرك حتّى تصل. فمن دخل رأى الدعوةَ الصفريّة في مكانٍ فيه عمل —
+       فقرأها «ضاع ما كتبتُه». وهي أسوأُ من انتظار: خبرٌ كاذبٌ لا تأخير.
+       فيُقال الانتظارُ حتّى يجيء الجواب، ثمّ تُعاد الأربعةُ (‎nkFourRefresh‎). */
+    const wait = on !== false && typeof nookEntry !== 'undefined' && nookEntry
+      && typeof srvSeen === 'function' && !srvSeen(nookCode(nookEntry));
+    const body = wait
+      ? `<span class="nk-wait"><i class="nk-wait__d"></i>${esc(T().nkWait)}</span>` : cta;
+    return `<div class="nk-box nk-box--empty${wait ? ' is-wait' : ''}" data-k="${sec}" data-m="${nkMode(sec)}">`
+      /* والاسمُ في حاملٍ (‎.nk-t__n‎) كما في الممتلئ: به يُقاس قاعُ المربّع حين يدفعه
+         جارُه (‎nkHeadMin‎) — والنصُّ العاري لا يُسأل عن عرضه */
+      + `<h3 class="nk-t"><span class="nk-t__n">${esc(title)}</span></h3>`
+      + `${tools}${body}${grips}</div>`;
+  };
+
   /* ومقابضُ الجرّ الثلاثةُ: نصٌّ واحدٌ يلبسه كلُّ مربّعٍ من الأربعة — والمربّعُ يُعرف
      من موضعه في الصفّ لا من مفتاحٍ يُكتب في المقبض (‎nkiDrag‎)، فلا اسمَ يُنسى */
+  /* وحافّتان للعرض لا واحدة: اليسرى والــيمنى. وكلٌّ تجرُّ حافّتَها هي — والأخرى
+     ساكنة. فمن أراد أن يمدَّ مربّعَه يمينًا لم يُجبَر أن يمدَّه يسارًا (‎nkPlan‎) */
   const nkiRZ = () => `<i class="nki-rz nki-rz--w" data-nki="w" title="${esc(T().nkiW)}"></i>`
+    + `<i class="nki-rz nki-rz--e" data-nki="e" title="${esc(T().nkiW)}"></i>`
     + `<i class="nki-rz nki-rz--h" data-nki="h" title="${esc(T().nkiH)}"></i>`
     + `<i class="nki-rz nki-rz--c" data-nki="c" title="${esc(T().nkiWH)}"></i>`;
   /* ===== الشريطُ الجانبيّ: مَجرًى وابهام =====
@@ -17739,7 +19365,7 @@
 
   /* بعد الاختيار: تختفي الدائرة ويحلّ محلّها ترس ذهبي صغير يسار عنوان البند */
   const nkGearBtn = sec =>
-    `<button type="button" class="nk-gear nk-pick" data-nkpick="${sec}" title="${T().nkPickTip}" aria-label="${T().nkPickTip}">` +
+    `<button type="button" class="nk-gear" data-nkpick="${sec}" title="${T().nkPickTip}" aria-label="${T().nkPickTip}">` +
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>` +
     `</button>`;
 
@@ -17957,8 +19583,10 @@
 
     const SOFT = 'var(--nk-ink-soft)';
 
+    /* الرقمُ من النقاط والحرفُ من الموقف — والقديمُ كان يأخذهما من واحد */
+    const gRel = () => Math.max(0, Math.min(100, +S.grel || 0));
     function numGrade() {
-      const p = Math.max(0, Math.min(100, +S.gpct || 0)), b = gband(p);
+      const p = Math.max(0, Math.min(100, +S.gpct || 0)), b = gband(gRel());
       if (!S.gset) return { big: '—', sub: 'لم ترصد درجة', tone: SOFT, st: { p, b } };
       return S.fGrade === 'b'
         ? { big: (Math.round(p * 10) / 10) + '%', sub: b.L, tone: b.c, st: { p, b } }
@@ -18092,14 +19720,15 @@
 
     function fillGrade() {
       if (!S.gset) return [{ f: 1, c: SOFT, o: 1 }];
-      const p = Math.max(0, Math.min(100, +S.gpct || 0)), b = gband(p);
+      const b = gband(gRel());
       if (S.scope === 'mine') return [{ f: 1, c: b.c, o: 1 }];
       return GLD.map(x => ({ f: 1, c: x.c, o: 1 }));
     }
 
     function meAt(k) {
       if (!S.meOn) return null;
-      if (k === 'grade') return S.gset ? gpos(Math.max(0, Math.min(100, +S.gpct || 0))) : null;
+      /* ومحورُ الضيّق سُلَّمُ الحروف نفسُه، فموضعُه من الموقف لا من النقاط */
+      if (k === 'grade') return S.gset ? gpos(gRel()) : null;
       if (k === 'abs')   return absEmpty() ? null : absState().p * 100;
       /* والمادّةُ بلا مؤشّر: الثلاثةُ الأُخَر فيها **موضعٌ يهمّ** (حضورٌ وخطرٌ وحرف)،
          وهذه طريقٌ يُقطع — فيكفيها أن تقول كم قُطع، ولا حاجةَ إلى خطٍّ يقف عنده */
@@ -18329,9 +19958,11 @@
        دون التمام. فالطالبُ يبدأ ومعه ‎A+‎ في جيبه ويُعدَّل بما يسجّل.
        فيُرفع شرطُ الرصد ويبقى شرطُ الوجود وحدَه: لا حكمَ بلا **توزيع**. وذاك لا يقع في
        هذا المربّع اصلا (‎nookGradeBox‎ لا يُبنى الّا بتوزيع) — فيبقى حارسا لا اكثر */
+    /* ورقمان لا رقم: ‎gpct‎ نقاطُك من مئة المادّة (وهو المعروض)، و‎grel‎ موقفُك من
+       وزن هذا المربّع (وهو الحرفُ واللونُ والمؤشّر). وشرحُهما في ‎gradeStand‎ */
     const st = gradeStand(entry);
     return { cap: T().nkGrade, gset: st == null ? 0 : 1,
-      gpct: st == null ? 0 : st };
+      gpct: st == null ? 0 : st.pts, grel: st == null ? 0 : st.rel };
   }
   /* والوسمُ يُبنى مرّةً: أدواتُه نسخةٌ من ازرار الموقع، ومستمعاهما مفوَّضان */
   function nkNarrowHTML(k, entry, d) {
@@ -18373,7 +20004,7 @@
        فمادّةٌ لا شيءَ فيها إلّا مواضيعُها لا يجوز أن تُعرض «فارغةً» — وكانت تُعرض
        فارغةً بلا دائرة إضافةٍ أيضًا، لأنّ ‎filledCount‎ يعدّها فيطلب الترس */
     const has = d && (d.book || d.bookImg || d.type || d.lang || d.rel || d.desc || liveTopics(d.topics).length);
-    if (!has) return `<div class="nk-box nk-box--empty"><h3 class="nk-t">${T().nkCourse}</h3>${btn === 'pick' ? nkPickBtn('info') : ''}</div>`;
+    if (!has) return nkEmptyBox('info', T().nkCourse, btn === 'pick');
     /* الصدَفةُ وحدَها تُبنى هنا — وجوفُها يملؤه ‎nkInfoFill‎ بعد أن يستقرّ في الصفحة:
        فما يظهر لا يُعرف إلّا بالقياس، والقياسُ لا يكون على متنٍ لم يُلحق بعد */
     return `<div class="nk-box nk-box--mini" id="nk-info" data-k="info" data-m="${nkMode('info')}"
@@ -18487,7 +20118,7 @@
        نفسِه (‎.nk-hnow‎). وهو حكمُ ‎RE/nook-four‎ بعد ان جُرّب الوجهان.
        وكلاهما لا يسقط ولو فاض: العنوانُ يقول اين انت، والكتابُ هو المطلوبُ نفسُه */
     const say = NK_NARROW.say('info', nkNarrowData('info', null, v));
-    const hd = `<h3 class="nk-t"><span class="nk-ittl">${T().nkCourse}</span>`
+    const hd = `<h3 class="nk-t"><span class="nk-ittl nk-t__n">${T().nkCourse}</span>`
       + (say ? `<span class="nk-hnow">${esc(say)}</span>` : '') + `</h3>`;
     /* ===== وعنوانُ المادّة يبقى ثابتا كاخوته =====
        هو الوحيدُ الساكنُ **داخل** جوفه (‎.nkm‎)، فلو مُرّر الجوفُ مرّ معه — وثلاثةٌ
@@ -18639,6 +20270,16 @@
          من مجموع الأربعة — فيَسَع الصفُّ ما فيه ولا ينزل أحدٌ سطرًا ولا يفيض.
          والرقمُ المحفوظ لا يُمسّ: من ضاقت شاشتُه ثمّ اتّسعت وجد نوافذَه كما تركها */
       el.style.flex = sz.w ? '0 1 ' + sz.w + 'px' : '';
+      /* ===== والرابعُ يملأ الفاضلَ حتّى أوّلِ جرَّة =====
+         كان الملءُ في الورقة (‎flex-grow: 1 !important‎)، والمهمُّ ‎!important‎: هي تغلب
+         العرضَ المكتوبَ سطريًّا **أبدًا**، فلا يُضيَّق الرابعُ بيدٍ قطّ — يُكتب له عرضٌ
+         أصغرُ ثمّ يعود النموُّ فيملأ الصفَّ، فلا يتحرّك شيء. وهي علّةُ «مربّعُ الدرجة
+         لا أقدر أوسّعه ولا أضيّقه».
+         فصار الملءُ حكمًا يُقرأ من الحال لا من الورقة: ما دام ‎nkFit‎ فالرابعُ يملأ،
+         فإذا جرَّ صاحبُ الموقع عرضًا انطفأ وصارت الأعدادُ صريحةً.
+         و‎'0'‎ لا ‎''‎ عند الإطفاء: الفراغُ يمحو ما كتبته ‎flex‎ سطريًّا فتعود نِسَبُ
+         الورقة (‎flex: 167 1 0‎) فينمو من حيث فرَرْنا */
+      if (i === NK_SZ.length - 1) el.style.flexGrow = state.nkFit ? '1' : '0';
       el.style.height = sz.h ? sz.h + 'px' : '';
       el.style.minHeight = sz.h ? '0' : '';
       /* ===== والوضعُ صفةٌ في الوسم تتبع الحال =====
@@ -18695,6 +20336,163 @@
     gh.remove();
     return w;
   }
+  /* ============================================================
+     HOW TALL DO THE FOUR BOXES OPEN?
+     ============================================================
+     The expand button opens all four together, so they all get ONE height, and
+     that height is whichever box needs the most room for its content. It is
+     measured fresh on every press, so it follows the course you are looking at
+     and nothing is stored anywhere.
+
+     Measuring is the whole difficulty, because a folded box tells you nothing:
+     its body is display:none, its height is pinned at 44, and the course box is
+     emptied while folded. So the four are put into expanded mode, given room,
+     asked, and put back -- all in one run, with no paint in between, so none of
+     it is ever seen.
+
+     WHY THEY ARE GIVEN THE CEILING AND NOT `height: auto`
+     The instructor box reveals its rows BY height:
+       @container nkdoc (min-height: 74 / 106 / 138 / 178 / 224px)
+     Asked at `auto` it answers "I need almost nothing" -- because it was given
+     almost nothing. A closed loop. So the probe hands out the ceiling first,
+     every row appears, and only then does it ask how much was used.
+
+     AND THE ONE THING THAT KEPT GOING WRONG
+     Once a box is 900px tall, anything that FILLS its container answers with
+     the container. Three separate things do that, and every one of them made
+     all four boxes open at ~900px with a screen of emptiness underneath:
+
+       1. `scrollHeight` never reports less than `clientHeight`.
+       2. A paragraph whose line clamp was lifted keeps growing with its text.
+       3. `margin: auto` on a flex item is reported by getComputedStyle as the
+          free space it SOAKED UP -- 859px of nothing, on the empty box's
+          call-to-action.
+
+     Each is handled below, each is named where it is handled, and each has a
+     guard. The whole thing is measured for real -- real stylesheet, real
+     layout -- by `_openh.mjs`, because none of these three can be caught
+     without a browser actually laying the page out.
+     Full write-up: ROADMAP-NOOK-OPEN-HEIGHT.md */
+
+  /* How far down the content inside `el` actually reaches, counting el's own
+     padding. This is what `scrollHeight` would say if `scrollHeight` were
+     honest -- trap 1: it never reports less than `clientHeight`, and we are
+     asking inside a container we deliberately made huge.
+
+     Out of the flow means out of the measurement: drag handles, the tools
+     cluster and the scrollbar lane are positioned, not content, and nothing
+     hidden needs room.
+
+     Margins are deliberately NOT added -- trap 3. `margin-bottom: auto` comes
+     back from getComputedStyle as the free space it absorbed, so adding it
+     hands back exactly the emptiness we are here to remove. Measured: the empty
+     box's call-to-action ends at 39px and reports `margin-bottom: 859.797px`,
+     which is how every empty box came to answer "I need 898px". */
+  function nkFlowH(el) {
+    const cs = getComputedStyle(el);
+    const top = el.getBoundingClientRect().top + (parseFloat(cs.borderTopWidth) || 0);
+    let reach = parseFloat(cs.paddingTop) || 0;
+    [].forEach.call(el.children, kid => {
+      const ks = getComputedStyle(kid);
+      if (ks.display === 'none' || ks.position === 'absolute' || ks.position === 'fixed') return;
+      const bottom = kid.getBoundingClientRect().bottom - top;
+      if (bottom > reach) reach = bottom;
+    });
+    return reach + (parseFloat(cs.paddingBottom) || 0);
+  }
+
+  /* The height this box needs for nothing inside it to be cut off.
+
+     A filled box holds a scroller; an empty box is just a title and a button.
+     The scroller is found with NK_SBQ -- the same selector the scrollbar uses,
+     so there is one answer to "what scrolls inside a box", not two lists that
+     can drift apart.
+
+     The frame is everything the content is NOT: the title, the paddings, the
+     scroller's transparent bottom border. It is read as a single subtraction
+     rather than added up piece by piece, so no piece can be forgotten. */
+  function nkNeedH(box) {
+    const cs = getComputedStyle(box);
+    const border = (parseFloat(cs.borderTopWidth) || 0) + (parseFloat(cs.borderBottomWidth) || 0);
+    const scroller = box.querySelector(NK_SBQ);
+    const frame = scroller ? box.clientHeight - scroller.clientHeight : 0;
+    return Math.ceil(frame + nkFlowH(scroller || box) + border);
+  }
+
+  /* The descriptions: the two blocks of free text in the row. The stylesheet
+     lifts their line clamp so they read in full and scroll; the measurement
+     puts a clamp back so they cannot claim the row. Named here, and checked
+     against the stylesheet's own unset rule by `_openh.mjs`. */
+  const NK_PROSE = '.nk-doc__d, .nkm-desc';
+
+  /* The one height the four open to: the tallest content among them, never
+     shorter than they were folded, never taller than the hand's own ceiling. */
+  function nkOpenH() {
+    const four = nkFour();
+    if (!four) return 0;
+    const boxes = NK_SZ.map((k, n) => four.children[n]).filter(Boolean);
+    const folded = Math.max.apply(null, NK_SZ.map(k => ((state[k] || {}).h) || 0).concat(0));
+    if (!boxes.length) return folded;
+
+    const wasBox = boxes.map(el => [el.dataset.m, el.style.height, el.style.minHeight]);
+    const wasRow = [four.style.height, four.style.overflow];
+
+    /* Pin the row. The four become 900px for an instant; if the page grew by
+       that, it could gain a scrollbar, the viewport would narrow, the boxes
+       would narrow, and text measured a few pixels narrower wraps one line more
+       and reports itself taller. Their widths are pixel values that do not
+       follow height, so nothing else about them can move. */
+    four.style.height = Math.round(four.getBoundingClientRect().height) + 'px';
+    four.style.overflow = 'hidden';
+
+    /* 1 - expanded mode, ceiling height, transitions off.
+       Transitions must be off or the measurement reads the height the box is
+       animating FROM (44) instead of the one it was given (900). */
+    boxes.forEach(el => {
+      el.classList.add('is-rz');
+      el.dataset.m = 'wide';
+      el.style.height = NK_H[1] + 'px';
+      el.style.minHeight = '0';
+    });
+    nkInfoFill();     /* the course box fills only while expanded */
+
+    /* 2 - hold the prose to a few lines while measuring -- trap 2.
+       Both descriptions have their line clamp lifted, on purpose, because the
+       body scrolls: "what does not fit is scrolled to, never erased". That is
+       right for reading and wrong for measuring -- unclamped, a syllabus
+       paragraph wins "tallest" every time and hands the other three boxes a
+       screen of emptiness. So text built to be scrolled counts, for the
+       measurement only, as the number of lines the stylesheet names next to the
+       rule that lifted it. Nothing here decides that number. */
+    const lines = (getComputedStyle(four).getPropertyValue('--nk-desc-lines') || '3').trim();
+    const prose = [];
+    boxes.forEach(el => [].forEach.call(el.querySelectorAll(NK_PROSE), p => {
+      prose.push([p, p.style.getPropertyValue('-webkit-line-clamp')]);
+      p.style.setProperty('-webkit-line-clamp', lines);
+    }));
+
+    /* 3 - read all four */
+    const need = boxes.map(nkNeedH);
+    prose.forEach(p => {
+      if (p[1]) p[0].style.setProperty('-webkit-line-clamp', p[1]);
+      else p[0].style.removeProperty('-webkit-line-clamp');
+    });
+
+    /* 4 - put everything back, and force the restore to stick BEFORE
+       transitions return -- otherwise the opening animation starts from 900px
+       and the boxes are seen shrinking instead of expanding. */
+    boxes.forEach((el, n) => {
+      el.dataset.m = wasBox[n][0];
+      el.style.height = wasBox[n][1];
+      el.style.minHeight = wasBox[n][2];
+    });
+    four.style.height = wasRow[0];
+    four.style.overflow = wasRow[1];
+    void four.offsetHeight;
+    boxes.forEach(el => el.classList.remove('is-rz'));
+
+    return Math.max(folded, Math.min(NK_H[1], Math.max.apply(null, need.concat(0))));
+  }
   function nkMinFit() {
     const four = nkFour(), nook = document.getElementById('nook');
     if (!four || !nook) return;
@@ -18720,6 +20518,164 @@
       if (el) el.style.minWidth = '';
     });
   }
+  /* ============================================================
+     أدنى عرضٍ يبقى عنده اسمُ المربّع مقروءًا — قاعُ الجار
+     ============================================================
+     ‏«ما يكون عندي حدٌّ بالتوسيع إلّا لمّا يصير عرضُ المستطيل اللي يساره يخفي العنوان
+     اللي بداخله». فالقاعُ يُقاس ولا يُكتب رقمًا: اسمُ المربّع، وحشوةُ سطره (وفيها
+     الموضعُ المحجوزُ للترس والسهم)، وما حول السطر من ورقة المربّع.
+     ولا يُقاس سطرُ العنوان كلُّه: فيه بعد الاسم خبرٌ متبدّل (حزامُ الدرجة، حالُ
+     الدكتور، كسرُ الغياب) وهو **يلتفّ ويُقصّ بنقاط** عند الضيق بحكمٍ سابق. فلو
+     قِيس بأوسعه لَصار القاعُ ضِعفَه ولَما بقي للجار ما يعطيه. المصونُ الاسمُ وحدَه.
+     ===== وفي الضيّق يُقاس جسدُ الضيّق =====
+     الوضعُ الضيّقُ يُخفي سطرَ العنوان ويعرض ‎.fx‎، واسمُه فيها ‎.fx-cap‎. فالسؤالُ
+     واحدٌ في الوضعين — «أين يختفي الاسم؟» — والمقيسُ يتبع ما يُرى.
+     ===== والقياسُ على شبحٍ لا على الحيّ =====
+     الحيُّ مضغوطٌ أصلًا فيعطي ما هو عليه لا ما يحتاجه (وهي طريقةُ ‎nkTitleMin‎ نفسُها).
+     و‎zoom‎ يُقرأ من السطر لا يُكتب: ‎.nk-t‎ مزويٌّ بـ‎--nkt-s‎ و‎.fx‎ ليست كذلك. */
+  function nkHeadMin(box) {
+    if (!box) return NK_W[0];
+    const narrow = box.dataset.m === 'narrow' && !box.classList.contains('nk-box--empty');
+    const head = box.querySelector(narrow ? '.fx' : '.nk-t');
+    if (!head) return NK_W[0];
+    const name = head.querySelector(narrow ? '.fx-cap' : '.nk-t__n') || head;
+    const gh = name.cloneNode(true);
+    gh.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;'
+      + 'width:max-content;max-width:none;flex:none;pointer-events:none';
+    gh.querySelectorAll('*').forEach(el => { el.style.flexShrink = '0'; });
+    head.appendChild(gh);
+    const nw = gh.getBoundingClientRect().width;
+    gh.remove();
+    const cs = getComputedStyle(head);
+    /* ===== والزويُّ يُضرب في الحشوة وحدَها =====
+       الشبحُ مُلحَقٌ **داخل السطر**، فهو تحت زَويِّه: ‎getBoundingClientRect‎ يردّ عرضًا
+       مزويًّا أصلًا. فلو ضُرب في الزويّ مرّةً أخرى لَنزل القاعُ إلى نصفه صامتًا.
+       وأمّا الحشوةُ فتُقرأ من ‎getComputedStyle‎ بوحدات السطر نفسِه (قبل الزويّ)،
+       فهي وحدَها التي تُضرب. وفي حشوةِ الواسع ‎34px ÷ --nkt-s‎ — وهو الموضعُ المحجوزُ
+       للترس والسهم، فيدخل في القاع بلا رقمٍ يُكتب ههنا. */
+    const pad = (parseFloat(cs.paddingInlineStart) || 0) + (parseFloat(cs.paddingInlineEnd) || 0);
+    const zoom = parseFloat(cs.zoom) || 1;
+    /* وفي الضيّق الترسُ والسهمُ في السَّيل لا مُطلَقان، فيُحجز عرضُهما وفُرجتُهما */
+    const tools = narrow ? head.querySelector('.fx-tools') : null;
+    const extra = tools
+      ? tools.getBoundingClientRect().width + (parseFloat(cs.columnGap) || 0) : 0;
+    /* وما حول السطر من ورقةِ المربّع: حدُّه وحشوتُه. يُقرأ فرقًا لا يُستأنف حسابُه */
+    const chrome = Math.max(0, box.getBoundingClientRect().width - head.getBoundingClientRect().width);
+    return Math.ceil(nw + pad * zoom + extra + chrome);
+  }
+  /* ============================================================
+     الصفُّ ميزانيّةٌ واحدة — ومن يعطي حين يتّسع مربّع
+     ============================================================
+     أربعةُ مربّعاتٍ في سطرٍ لا يلتفّ، فكلُّ بكسلٍ يكسبه واحدٌ خسِره غيرُه أو خسِره
+     الفراغ. وهذه أحكامُها الخمسةُ، مكتوبةً مرّةً ومحروسةً في ‎_nkbox.mjs‎
+     (وشرحُها كلُّه في ‎ROADMAP-NOOK-RESIZE.md‎):
+
+     ١ · **من ضيّق فقد أراد أن يضيق.** التضييقُ لا يُعطي أحدًا شيئًا: يصير البكسلُ
+         فراغًا يتجمّع في آخر الصفّ (يسارَه في العربيّة). والفراغُ ليس عطبًا.
+     ٢ · **ومن وسّع أخذ من جهةِ تمدُّده.** المقبضُ على الحافّة اليسرى والمرساةُ أعلى
+         اليمين، فالحافّةُ تمضي يسارًا فتأكل من الذين على يسارها (‎i+1 … n−1‎).
+         فتوسيعُ «الغياب» يأخذ من «الدرجة» وحدَها، كما طلب صاحبُ الموقع.
+     ٣ · **وآخرُ الصفّ يأخذ من الثلاثة بالتساوي.** لا أحدَ على يساره — الجدارُ هناك —
+         فيتمدّد يمينًا، ومن على يمينه ثلاثةٌ لا واحد، فالقسمةُ بينهم بالسويّة.
+         وهو نصُّ الطلب: «ياخذ مساحة من كلٍّ من الـ٣ مستطيلات اللي يمينه بالتساوي».
+     ٤ · **وللعرض حافّتان، وكلٌّ تفي بوعدها.** الوعدُ واحد: «الحافّةُ التي تمسكها
+         تتبع إصبعَك، والأخرى لا تتحرّك». ومنه يخرج اختلافُهما لا تماثلُهما:
+         · اليسرى تمضي يسارًا فتأكل من ‎i+1 … n−1‎، وفي جهتها فراغُ الصفّ فتأكله أوّلًا
+           (كدفعِ لوحٍ على طاولةٍ حتّى يبلغ الجدارَ ثمّ ينضغط)، وتضييقُها يفتح فراغًا.
+         · واليمنى تمضي يمينًا فتأكل من ‎0 … i−1‎، **ولا فراغَ في جهتها** لأنّ الصفَّ
+           مرصوصٌ إلى الجدار — فتضييقُها يردُّ ما تركه إلى جيرانه. وهي «فاصلٌ» بين
+           لوحين، ولولا ذلك لَانفتحت فُرجةٌ عند الجدار لا يقبلها السَّيل.
+         وعند الجدار تستعير كلٌّ جهةَ أختها: آخرُ الصفّ لا يسارَ له وأوّلُه لا يمينَ
+         له، فالمعطون الباقون كلُّهم بالسويّة (وهو الحكمُ ٣ ومرآتُه).
+     ٥ · **ولا يُدفع جارٌ دون اسمه.** حدُّ التوسيع أن يبلغ كلُّ معطٍ قاعَه، وقاعُه
+         عرضُ اسمِه (‎nkHeadMin‎) — أو قاعُ اليد (‎NK_W[0]‎) أيّهما أوسع. وأمّا المجرورُ
+         بيدك فقاعُه قاعُ اليد وحدَه: «من جرّ فقد اختار، ولو غُطّي طرفٌ من عنوانه».
+
+     ===== والحسابُ دالّةٌ صافية، لا تراكم =====
+     تُحسب الأعراضُ الأربعةُ في كلّ حركةٍ **من لقطةِ الإمساك** لا ممّا كانت عليه قبل
+     حركةٍ واحدة. فالجرُّ يسارًا ثمّ رجوعًا يردُّ الجيرانَ إلى ما كانوا عليه بالضبط،
+     ولا ينزلق شيءٌ بتراكم كسورٍ ولا يُقفل بابٌ لا يُفتح. وهي التي تجعلها لا تنكسر. */
+  /* ===== ويُقسم بالسويّة، ثمّ يُقرَّب فيبقى المجموعُ هو المطلوبَ بعينه =====
+     من بلغ سعتَه خرج وقُسم نصيبُه على الباقين. والتقريبُ «بأكبر الكسور»: تُؤخذ
+     الصحاحُ أوّلًا ثمّ يُوزَّع الباقي بكسلًا بكسلًا على أصحاب أكبر الكسور — فيخرج
+     المجموعُ عددًا صحيحًا مساويًا للمطلوب تمامًا. ولولا ذلك لَتسرّب بكسلٌ من
+     التقريب في كلّ حركةٍ فإمّا فاض الصفُّ وإمّا انكمش. */
+  function nkShare(need, room) {
+    const raw = room.map(() => 0);
+    let rest = Math.max(0, need);
+    let live = room.map((r, n) => n).filter(n => room[n] > 0);
+    for (let pass = 0; pass < room.length + 1 && rest > 1e-6 && live.length; pass++) {
+      const share = rest / live.length, next = [];
+      live.forEach(n => {
+        const can = room[n] - raw[n], take = Math.min(share, can);
+        raw[n] += take; rest -= take;
+        if (room[n] - raw[n] > 1e-6) next.push(n);
+      });
+      live = next;
+    }
+    const cut = raw.map(v => Math.floor(v));
+    const cap = room.reduce((a, b) => a + b, 0);
+    let left = Math.min(Math.round(Math.max(0, need)), cap) - cut.reduce((a, b) => a + b, 0);
+    const order = raw.map((v, n) => n).sort((a, b) =>
+      (raw[b] - Math.floor(raw[b])) - (raw[a] - Math.floor(raw[a])));
+    for (let p = 0; left > 0 && p < order.length * 2; p++) {
+      const n = order[p % order.length];
+      if (cut[n] + 1 <= room[n]) { cut[n]++; left--; }
+    }
+    return cut;
+  }
+  /* ===== ومن يعطي: أهلُ الجهة التي تمضي إليها الحافّة =====
+     الحافّةُ اليسرى تمضي يسارًا فأهلُها من على يسارها (‎x > i‎)، واليمنى تمضي يمينًا
+     فأهلُها من على يمينها (‎x < i‎). فإن لم يكن على تلك الجهة أحدٌ — جدارُ الصفّ —
+     فالباقون كلُّهم بالسويّة، والمربّعُ ينمو من حافّته الأخرى.
+     ‏‎slack‎: أفي هذه الجهة فراغٌ يُؤكل؟ الفراغُ يتجمّع في آخر الصفّ (يسارَه)، فهو
+     في جهة اليسار أبدًا، وفي جهة اليمين لا يُبلَغ — إلّا لأوّل الصفّ الذي لا يمين
+     له فينمو يسارًا. */
+  const nkSide = (i, n, side) => {
+    const own = [];
+    for (let x = 0; x < n; x++) if (side === 'e' ? x < i : x > i) own.push(x);
+    if (own.length) return { give: own, slack: side !== 'e' };
+    const all = [];
+    for (let x = 0; x < n; x++) if (x !== i) all.push(x);
+    return { give: all, slack: true };
+  };
+  const nkGivers = (i, n, side) => nkSide(i, n, side).give;
+  /* ===== ومدى المربّع بين حدّين =====
+     الأعلى: عرضُه + الفراغُ الذي يبلغه + كلُّ ما يستطيع المعطون أن يعطوه (حتّى
+     أسمائهم). والأدنى: قاعُ اليد — إلّا في جهةٍ لا فراغَ فيها، فما يتركه المضيَّقُ
+     يجب أن يُعطى لجيرانه (لا يُقبل فراغٌ عند الجدار)، فالحدُّ ما يسعهم أن يأخذوه. */
+  function nkSpan(i, w0, floor, avail, side) {
+    const s = nkSide(i, w0.length, side);
+    const sum = w0.reduce((a, b) => a + b, 0);
+    const slack = s.slack ? Math.max(0, avail - sum) : 0;
+    const down = s.give.reduce((t, n) => t + Math.max(0, w0[n] - floor[n]), 0);
+    const up = s.slack ? Infinity
+      : s.give.reduce((t, n) => t + Math.max(0, NK_W[1] - w0[n]), 0);
+    const lo = Math.max(NK_W[0], w0[i] - up);
+    return [lo, Math.max(lo, Math.min(NK_W[1], w0[i] + slack + down))];
+  }
+  /* أعراضُ الأربعة إذا صار عرضُ ‎i‎ هو ‎want‎ — دالّةٌ صافيةٌ من اللقطة وحدَها */
+  function nkPlan(i, want, w0, floor, avail, side) {
+    const s = nkSide(i, w0.length, side);
+    const span = nkSpan(i, w0, floor, avail, side);
+    const slack = s.slack ? Math.max(0, avail - w0.reduce((a, b) => a + b, 0)) : 0;
+    want = Math.max(span[0], Math.min(span[1], Math.round(want)));
+    const out = w0.slice();
+    out[i] = want;
+    const need = want - w0[i] - slack;
+    if (need > 0) {                     /* اتّسع: يأخذ من أهل جهته حتّى أسمائهم */
+      const room = w0.map((v, x) => (s.give.indexOf(x) < 0 ? 0 : Math.max(0, v - floor[x])));
+      /* و‎x !== i‎ لازمة: القسمةُ تردّ صفًّا بطول الأربعة، وفيه للمجرور صفرٌ — فلولاها
+         لَأعادته إلى عرضه الأوّل وبقي الجيرانُ مقتطَعين. وقد وقع فقِيس: ‎303 ← 303‎ */
+      nkShare(need, room).forEach((c, x) => { if (x !== i) out[x] = w0[x] - c; });
+    } else if (!s.slack && need < 0) {
+      /* ضاق في جهةٍ لا فراغَ فيها: الصفُّ مرصوصٌ إلى الجدار فلا تُترك فُرجةٌ عنده —
+         وما تركه يعود إلى أهل جهته بالسويّة. وهي قسمةُ «الفاصل» بين لوحين */
+      const room = w0.map((v, x) => (s.give.indexOf(x) < 0 ? 0 : Math.max(0, NK_W[1] - v)));
+      nkShare(-need, room).forEach((c, x) => { if (x !== i) out[x] = w0[x] + c; });
+    }
+    return out;
+  }
   /* السحب: المرساةُ أعلى اليمين — فالجرُّ يسارًا يوسّع، والجرُّ نزولًا يُطيل */
   function nkiDrag(e) {
     const h = e.target.closest('[data-nki]');
@@ -18739,33 +20695,33 @@
        وكانت **ميتةً**: لا كاتبَ لصنفها في هذا الموقع. فيُكتب ههنا ويُنزع عند الترك */
     box.classList.add('is-rz');
     const k = h.dataset.nki, x0 = e.clientX, y0 = e.clientY;
-    const r = box.getBoundingClientRect(), w0 = Math.round(r.width), h0 = Math.round(r.height);
-    const lim = (v, a) => Math.max(a[0], Math.min(a[1], Math.round(v)));
-    if ((k === 'w' || k === 'c') && !NK_SZ.every(x => state[x].w)) {
-      NK_SZ.forEach((x, n) => {
-        const el = four.children[n];
-        if (el && !state[x].w) state[x].w = Math.floor(el.getBoundingClientRect().width);
-      });
+    const r = box.getBoundingClientRect(), h0 = Math.round(r.height);
+    const wide = k === 'w' || k === 'e' || k === 'c';
+    /* والجهةُ جهةُ المقبض: الزاويةُ في أسفل اليسار فهي غربيّةٌ مع أختها */
+    const side = k === 'e' ? 'e' : 'w';
+    /* ===== لقطةُ الإمساك: أربعةُ أعراضٍ وميزانيّةُ الصفّ =====
+       تُؤخذ مرّةً واحدةً ثمّ يُحسب منها كلُّ شيء. والمقيسُ **ما على الشاشة** لا ما في
+       الحال المحفوظة: قد يفترقان (الرابعُ يملأ الفاضلَ ما دام ‎nkFit‎، والشاشةُ إن
+       ضاقت انكمشت الأربعةُ دون أعدادها). فيُعتمد المرئيُّ ويُكتب في الحال، فتصير
+       الحقيقةُ واحدةً قبل أن تتحرّك اليد — ولا يقفز المربّعُ عند أوّل حركة.
+       والقاماتُ لا تدخل في شيءٍ من هذا: العمودُ حرٌّ، والصفحةُ تطول ولا تضيق. */
+    const g = parseFloat(getComputedStyle(four).columnGap) || 0;
+    const avail = Math.floor(four.clientWidth - g * (NK_SZ.length - 1));
+    const W0 = NK_SZ.map((x, n) => {
+      const el = four.children[n];
+      return el ? Math.round(el.getBoundingClientRect().width) : (state[x].w || 0);
+    });
+    const w0 = W0[i];
+    let floor = NK_W;
+    if (wide) {
+      NK_SZ.forEach((x, n) => { state[x].w = W0[n]; });
+      state.nkFit = 0;      /* ومن جرَّ عرضًا فقد تولّى القسمةَ بنفسه — لا ملءَ بعدها */
       nkSzApply();
-      nkMinFit();   /* والتثبيتُ يُعطي الأربعةَ أعراضًا، فتُرفع عنها الحدود */
+      /* وقاعُ كلِّ جارٍ اسمُه، وقاعُ المجرور قاعُ اليد: «من جرّ فقد اختار» */
+      floor = NK_SZ.map((x, n) => (n === i ? NK_W[0]
+        : Math.max(NK_W[0], nkHeadMin(four.children[n]))));
     }
-    /* ===== وحدُّ التوسيع: ما تركه الجيران =====
-       الالتفافُ ممنوع، فالصفُّ ميزانيّةٌ ثابتة: أوسعُ ما يبلغه المجرور هو عرضُ الصفّ
-       ناقصًا أعراضَ إخوته وفجواتِهم. فلا ينزل أحدٌ سطرًا ولا يُقتطع من جارٍ — ومن
-       أراد توسيعَ مربّعٍ ضيّق جارَه أوّلًا، فالمساحةُ المحرَّرة تصير حدًّا جديدًا.
-       ويُحسب مرّةً عند الإمساك: أعراضُ الإخوة لا تتبدّل أثناء الجرّ.
-       والفجوةُ تُقرأ من الجلد لا تُكتب رقمًا: من بدّل ‎gap‎ الصفِّ لا يحتاج أن يبدّل
-       ههنا شيئًا */
-    let wCap = NK_W;
-    if (k === 'w' || k === 'c') {
-      const g = parseFloat(getComputedStyle(four).columnGap) || 0;
-      const others = NK_SZ.reduce((t, x, n) => t + (n === i ? 0 : (state[x].w || 0)), 0);
-      const room = Math.floor(four.clientWidth - others - g * (NK_SZ.length - 1));
-      /* وأدنى الجرِّ سبعون: الحدُّ المقيسُ يحكم الأصلَ لا اليد، فمن جرّ فقد اختار —
-         ولو غُطّي طرفٌ من عنوانه */
-      const lo = NK_W[0];
-      wCap = [lo, Math.max(lo, Math.min(NK_W[1], room))];
-    }
+    const lim = (v, a) => Math.max(a[0], Math.min(a[1], Math.round(v)));
     /* ومن جرَّ فقد خرج عن الطيّ: تُطفأ ‎c‎ وتنقلب أيقونتُه مرّةً واحدةً عند الإمساك */
     if (sz.c) {
       sz.c = 0;
@@ -18773,13 +20729,22 @@
       if (fb) { fb.innerHTML = NK_FOLD.in; fb.title = T().nkNarrow; fb.setAttribute('aria-label', T().nkNarrow); }
     }
     const move = ev => {
-      if (k === 'w' || k === 'c') sz.w = lim(w0 + (x0 - ev.clientX), wCap);
+      if (wide) {
+        /* كلُّ حافّةٍ تتّسع حين تبتعد عن جوف المربّع: اليسرى بالمضيّ يسارًا واليمنى
+           بالمضيّ يمينًا. ومن اللقطة في كلّ مرّة، لا ممّا كان قبل حركة: فالرجوعُ
+           يردُّ الجيرانَ بالضبط */
+        const d = side === 'e' ? (ev.clientX - x0) : (x0 - ev.clientX);
+        const plan = nkPlan(i, w0 + d, W0, floor, avail, side);
+        NK_SZ.forEach((x, n) => { state[x].w = plan[n]; });
+      }
       if (k === 'h' || k === 'c') sz.h = lim(h0 + (ev.clientY - y0), NK_H);
-      nkSzApply(i);
+      /* والأربعةُ تُلبَس معًا لا المجرورُ وحدَه: الجيرانُ تبدّلت أعراضُهم */
+      nkSzApply(wide ? null : i);
       /* ولا يُملأ إلّا «المادة»: جوفُ الدكتور يُكشف بـ‎@container‎ في الجلد، والغيابُ
-         والدرجةُ متنُهما ثابتٌ يُقصّ بالقامة — فلا قياسَ في الجافا لهما */
-      if (i === 0) nkInfoFill();
-      nkSbSync(box);   /* والقامةُ تبدّلت، فيتبدّل مدى الابهام وظهورُ الشريط */
+         والدرجةُ متنُهما ثابتٌ يُقصّ بالقامة — فلا قياسَ في الجافا لهما.
+         وهي تُملأ إن كانت هي المجرورَ أو كانت من المعطين (وذاك حين يُجَرّ آخرُ الصفّ) */
+      if (i === 0 || (wide && nkGivers(i, NK_SZ.length, side).indexOf(0) > -1)) nkInfoFill();
+      nkSbSync(wide ? null : box);   /* والمقاسُ تبدّل، فيتبدّل مدى الابهام وظهورُ الشريط */
     };
     const up = () => {
       h.classList.remove('on');
@@ -18792,14 +20757,29 @@
     document.addEventListener('pointerup', up);
   }
   /* قيم تشكيل «المادة» كما حفظها المستخدم (نموذج القيم) — والنموذج المرجعي القديم يُرحَّل قيمًا */
+  const INFO_KEYS = ['book', 'bookImg', 'type', 'lang', 'rel', 'topics', 'desc'];
+  /* ===== والقسمةُ بندًا بندًا لا جملةً واحدة =====
+     كانت «الكلَّ أو لا شيء»: إن كان في مساهمتي شيءٌ قُرئت وحدَها. ومساهمتي فيها
+     ‎type‎ و‎lang‎ وغلافُها فارغ — فحُجب غلافُ المساهمة المنتقاة، وبدا المربّعُ
+     بلا كتابٍ وفي المكتبة كتاب.
+     فلكلّ بندٍ مصدرُه: ما ملأتَه فهو لك، وما تركتَه يجيء ممّا انتقيتَ من غيرك.
+     والكتابُ وغلافُه بندٌ واحدٌ يُؤخذان معًا — وإلّا جاء اسمُ كتابٍ فوق غلافِ آخر. */
   function infoValues(entry) {
-    const bag = nookPicks(entry) || {};
     const base = { book: '', bookImg: '', type: '', lang: '', rel: 0, topics: [], desc: '' };
-    if (bag.infoV) return Object.assign(base, bag.infoV, { topics: (bag.infoV.topics || []).map(x => Object.assign({}, x)) });
-    const { d } = infoComposed(entry);
+    const mine = (myPostRO(nookCode(entry), 'info') || {}).data || {};
+    const comp = infoComposed(entry).d || {};
+    const has = (o, k) => (k === 'topics' ? liveTopics(o.topics).length
+                        : k === 'rel' ? !!o.rel
+                        : !!(o[k] && String(o[k]).trim()));
+    const src = k => (has(mine, k) ? mine : (has(comp, k) ? comp : base));
+    const bk = (has(mine, 'book') || has(mine, 'bookImg')) ? mine
+             : ((has(comp, 'book') || has(comp, 'bookImg')) ? comp : base);
+    const d = src;
     return Object.assign(base, {
-      book: d.book || '', bookImg: d.bookImg || '', type: d.type || '', lang: d.lang || '',
-      rel: d.rel || 0, topics: (d.topics || []).map(x => Object.assign({}, x)), desc: d.desc || '',
+      book: bk.book || '', bookImg: bk.bookImg || '',
+      type: d('type').type || '', lang: d('lang').lang || '', rel: d('rel').rel || 0,
+      desc: d('desc').desc || '',
+      topics: (d('topics').topics || []).map(x => Object.assign({}, x)),
     });
   }
   const hasVal = (v, k) => k === 'book' ? !!(v.book || v.bookImg)
@@ -18814,11 +20794,47 @@
   /* ---------- تشكيل «الدكتور»: نفس نظام «المادة» — قيمٌ تُكتب أو تُسحب من مساهمات الدكتور المختار ---------- */
   const DOC_SLOTS = ['e', 'office', 'hours', 'teach', 'grade', 'd'];
   const docBase = () => ({ dr: '', e: '', bld: '', room: '', hours: [], teach: 0, grade: 0, d: '' });
+  const DOC_KEYS = ['e', 'bld', 'room', 'hours', 'teach', 'grade', 'd'];
+  /* ===== واختيارُ الدكتور يبقى في المربّع =====
+     مساهمةُ «الدكتور» تسكن على الدكتور نفسِه (‎dr.posts‎) لا على المادّة، فمتنُها
+     يُقرأ من هناك. وأمّا **أيُّهما دكتورُك** فشأنُ الترم: قد يختلف من ترمٍ لآخر
+     في المادّة نفسِها. فيبقى ‎bag.docDr‎ في المربّع، والمتنُ في المساهمة. */
+  /* ===== وتفاصيلُ الدكتور قد تسبق اسمَه =====
+     ملفُّ السِّلَّبس يملأ البريدَ والمكتبَ والساعاتِ والوصف، ولا يسمّي الدكتور —
+     التسميةُ فعلُ إنسانٍ لا قراءةُ ملفّ. فأين تسكن تلك التفاصيلُ حتّى يُختار؟
+     في جِراب المادّة (‎bag.docPend‎): ليست مساهمةً عن أحد، فلا تُكتب على أحد.
+     فإذا اختير الدكتورُ انتقلت إلى مساهمتك عنه (‎docTake‎) وخلا الجِراب.
+     وتُقرأ ههنا ما دام لا مختار، فيُفتح المربّعُ تامَّ البيانات وعند الاسم شَرطة. */
   function docValues(entry) {
     const bag = nookPicks(entry) || {};
-    const v = Object.assign(docBase(), bag.docV || {});
-    v.hours = ((bag.docV || {}).hours || []).map(h => Object.assign({}, h));
+    const id = bag.docDr || '';
+    const v = Object.assign(docBase(), { dr: id });
+    const d = id ? ((myDrPostRO(nookCode(entry), id) || {}).data || {})
+                 : (bag.docPend || {});
+    DOC_KEYS.forEach(k => { if (k !== 'hours') v[k] = d[k] === undefined ? v[k] : d[k]; });
+    v.hours = (d.hours || []).map(h => Object.assign({}, h));
     return v;
+  }
+  /* والانتقالُ يقع مرّةً عند الاختيار: ما انتظر في الجِراب يصير مساهمتَك عنه.
+     ولا يُكتب فوق ما كتبتَه عنه من قبل — الأقدمُ عملُ يدك، والمنتظرُ قراءةُ ملفّ. */
+  function docTake(entry, id) {
+    const bag = nookPicks(entry, true) || {};
+    const pend = bag.docPend;
+    if (!id || !pend || !Object.keys(pend).length) return 0;
+    const code = nookCode(entry);
+    const di = doctorsOf(code).findIndex(x => x.id === id);
+    if (di < 0) return 0;
+    const d = myDrPost(code, di).data;
+    let n = 0;
+    DOC_KEYS.forEach(k => {
+      const v = pend[k];
+      if (v === undefined || v === '' || (Array.isArray(v) && !v.length)) return;
+      const cur = d[k];
+      if (cur === undefined || cur === '' || (Array.isArray(cur) && !cur.length)) { d[k] = v; n++; }
+    });
+    delete bag.docPend;
+    save();
+    return n;
   }
   const docOf = (code, id) => doctorsOf(code).find(x => x.id === id) || null;
   /* ===== والتقييمُ الكلّيُّ له مصدرٌ واحدٌ في الموقع =====
@@ -18922,7 +20938,7 @@
   function nookDocBox(entry) {
     const v = docValues(entry);
     const dr = v.dr ? docOf(nookCode(entry), v.dr) : null;
-    if (!dr) return `<div class="nk-box nk-box--empty"><h3 class="nk-t">${T().nkDoctor}</h3>${nkPickBtn('doc')}</div>`;
+    if (!dr) return nkEmptyBox('doc', T().nkDoctor);
     const S = docNow(v);
     const nm = dr.name || '—';
     const face = dr.img
@@ -18949,7 +20965,7 @@
            التي كانت ههنا (‎10.5px‎).
            ومصدرُها ‎numDoc‎ نفسُها التي يقرؤها الضيّق (‎NK_NARROW.say‎)، فلا يفترق
            الوضعان يوما ولا يُحسب الخبرُ حسابين */''}
-      <h3 class="nk-t"><span class="nk-doc__ttl">${T().nkDoctor}</span>${(() => {
+      <h3 class="nk-t"><span class="nk-doc__ttl nk-t__n">${T().nkDoctor}</span>${(() => {
         const say = NK_NARROW.say('doc', nkNarrowData('doc', entry));
         return say ? `<span class="nk-hnow">${esc(say)}</span>` : '';
       })()}</h3>
@@ -18996,13 +21012,15 @@
   /* ---------- تشكيل «الغياب والتأخير»: نفس نظام «المادة» و«الدكتور» ---------- */
   const ABS_SLOTS = ['free', 'dedFrom', 'dedAmt', 'dn', 'late'];
   function absValues(entry) {
-    const bag = nookPicks(entry) || {};
-    return Object.assign({ free: 0, dedFrom: 0, dedAmt: 0, dn: 0, late: 0 }, bag.absV || {});
+    const base = { free: 0, dedFrom: 0, dedAmt: 0, dn: 0, late: 0 };
+    const d = (myPostRO(nookCode(entry), 'abs') || {}).data || {};
+    ABS_SLOTS.forEach(k => { base[k] = +d[k] || 0; });
+    return base;
   }
   function nookAbsBox(entry) {
     const v = absValues(entry);
     const any = ABS_SLOTS.some(k => v[k]);
-    if (!any) return `<div class="nk-box nk-box--empty"><h3 class="nk-t">${T().absSec}</h3>${nkPickBtn('abs')}</div>`;
+    if (!any) return nkEmptyBox('abs', T().absSec);
     /* «الغياب» بحروف متباعدة (تطويل) في مربّع الركن وحده */
     const body = postPeek('abs', v, 'nkabs', null, false, true, null, absMe(entry) || {})
       .replace(`<i class="v-lab">${T().absLab}</i>`, `<i class="v-lab">${T().absLabWide}</i>`);
@@ -19022,7 +21040,7 @@
              فتُسقط، وتحلّ محلَّها جملةُ الحال كما في ‎RE/nook-four‎: «‎3/2‎ بمنطقة
              المسموح» — كسرٌ ثمّ المنطقةُ التي بلغتَها، بلا رقعةٍ ولا رسمٍ ولا تلوين.
              ومصدرُها ‎numAbs‎ التي يقرؤها الضيّق (‎NK_NARROW.say‎) فلا يفترق الوضعان */''}`
-      + `<h3 class="nk-t"><span class="nk-abs__ttl">${T().absSec}</span>${(() => {
+      + `<h3 class="nk-t"><span class="nk-abs__ttl nk-t__n">${T().absSec}</span>${(() => {
         const say = NK_NARROW.say('abs', nkNarrowData('abs', entry));
         return say ? `<span class="nk-hnow">${esc(say)}</span>` : '';
       })()}</h3>
@@ -19184,10 +21202,29 @@
   /* والمدى يُكتب كما يُقرأ: ‎85–89‎ لا ‎85–90‎ — الأعلى مفتوحٌ في الحساب مغلقٌ في الكلام */
   const gldRange = b => b.t || (b.lo + '–' + (b.hi >= 100 ? 100 : b.hi - 1));
   const gldPos = p => Math.max(0, Math.min(100, (p - GLD_CUT) / (100 - GLD_CUT) * 100));
-  /* ===== وموضعُك يُقاس ممّا رُصد لا من المئة كلِّها =====
-     قبل النهائيّ لم يُرصد نصفُ الوزن، فحسابُه من المئة يقول «راسب» عن كلّ أحد. فتُقسم
-     درجاتُك على أوزان **البنود المرصودة** وحدَها، ثمّ يقع الخصمُ والبونس على الناتج
-     (وهما نقطتان من مئةٍ لا نسبةٌ من وزن). ومن لم يرصد شيئًا فلا حرفَ له: ‎null‎ */
+  /* ============================================================
+     TWO READINGS, NOT ONE NUMBER
+     ============================================================
+     This used to answer with a single percentage — your share of the split,
+     rescaled to a hundred — and that one number was then used as the big
+     figure, as the letter, and as the marker's place on the ladder. While a
+     course is out of a hundred those three are the same number, so nothing
+     showed. Split a course into a lecture and a lab and they come apart:
+
+       points   what this box puts into the course's hundred. A lecture worth
+                76, fully earned, is 76 points. Its ceiling is the base, and
+                this is the figure the box shows.
+
+       standing where you sit INSIDE this box. That same lecture is 100% of the
+                lecture — an A+. Its ceiling is A+ whatever the base, and this
+                is what the letter, the band colour and the marker read, since
+                the ladder they sit on is a ladder of letters.
+
+     Read together: «76% · من ٧٦ · A+» — I hold 76 of the hundred, and within
+     this part I am at the top.
+
+     Returns null when there is no split at all; there is no verdict without
+     one.                                                                    */
   function gradeStand(entry) {
     const v = gradeValues(entry), me = gradeMe(entry) || {};
     /* ===== وما لم تُدخَل درجتُه فهو تامّ =====
@@ -19197,20 +21234,51 @@
        وهو سقفُك اليوم، ينزل كلّما رُصدت درجةٌ دون التمام. وهي قاعدةُ التخطيط في
        الموقع نفسُها: ما لم يقع بعدُ يُفترض تامًّا لا معدومًا.
        والوزنُ صار مجموعَ البنود كلِّها لا المرصودةَ منها، فالقسمةُ على الكلّ */
+    /* ===== والخانةُ نقاطٌ من وزن بندها، لا نسبةٌ من مئة =====
+       كانت القيمةُ تُقرأ نسبةً مئويّةً **من البند**: بندٌ وزنُه عشرون وكُتب فيه
+       واحدٌ يعني «واحدٌ في المئة من العشرين» = خُمسَ نقطة. وهو حسابٌ صحيحٌ في
+       نفسه، لكنّه ليس ما يعنيه من يكتب: الشريطُ إلى جانبه يقول «‎20%‎»، فمن كتب
+       واحدًا قال «نلتُ واحدًا من العشرين». وقد قِيس أثرُه: كتابةُ ‎1‎ تُنزل الحصيلةَ
+       إلى ‎80.2‎ — أي أنّ البندَ كلَّه ذهب إلّا خُمسَ نقطة، وهو ليس ما أراد.
+       فصارت الوحدةُ واحدةً في الموضعين: ما في الخانة وما في الشريط **نقاطٌ من
+       مئة المادّة**. وسقفُ الخانة وزنُ بندها لا مئة.
+       وما لم يُكتب يُحسب تامًّا كما كان: الحصيلةُ سقفُك اليوم لا ما رُصد فقط. */
     let got = 0, w = 0;
     (v.items || []).forEach(x => {
       if (!x.pct) return;
       const g = gmOf(me, x.name);
-      got += x.pct * ((g && g.g != null) ? g.g : 100) / 100;
+      got += (g && g.g != null) ? Math.min(x.pct, g.g) : x.pct;
       w += x.pct;
     });
     if (!w) return null;
-    return Math.max(0, Math.min(100, got / w * 100 - absDed(entry) + gBonus(entry)));
+    /* ===== وما لم يُعلَن بعدُ تامٌّ كالخاوي =====
+       التوزيعُ قد لا يبلغ ما عليه: توزيعٌ من مئةٍ أُعلن منه أربعون، والبارُ يرسم
+       الفجوة. وحكمُها حكمُ البند الخاوي بعينه — «ما لم يقع بعدُ يُفترض تامًّا» —
+       فهي أولى به: ذاك بندٌ بلا درجة، وهذه لم تُوصف أصلًا.
+       ويترتّب عليه أمران: التمامُ يبلغ ما عليه التوزيعُ ولو نصفُ السيلبوس لم
+       يُكتب؛ وخسارةُ خمسٍ تبقى خمسًا. وكانت تُبسط على ما لم يُعلن: أربعون
+       أُعلنت وخُسرت منها خمسٌ تُقرأ ‎87.5٪‎، والمفقودُ من مئة المادّة خمسٌ
+       فسقفُك ‎95‎ */
+    const whole = Math.max(gradeBase(v), w);
+    got += whole - w;
+    /* ===== ولا سقفَ عند المئة =====
+       كان ‎Math.min(100, …)‎، فمن نال درجاتٍ إضافيّةً رأى حصيلتَه واقفةً عند مئةٍ
+       مهما زاد — والدرجاتُ الإضافيّةُ إنّما تُضاف لتُرى. وهي في السيلبوسات نقاطٌ
+       فوق المئة، فمئةٌ واثنتان حصيلةٌ صحيحةٌ لا خطأٌ يُقصّ.
+       والقاعُ يبقى صفرًا: خصمُ الغياب لا يُنزل أحدًا تحت الصفر.
+       والحزامُ يحتمله: ‎gldBand‎ تأخذ أعلى نطاقٍ لِما فوقه، و‎gldPos‎ تقيّد **موضعَ**
+       المؤشّر وحدَه فيقف عند طرف المحور ولا يخرج عنه. */
+    /* والخصمُ نقاطٌ من مئة المادّة لا نسبةٌ من وزن، فيقع على النقاط — ثمّ يُشتقّ
+       منها الموقف. وعند مئةٍ تامّةِ التوزيع القسمةُ على مئةٍ وضربٌ في مئة، أي
+       هُويّة: فالمادّةُ التي لم تُقسَم لا يتبدّل فيها رقمٌ واحد */
+    const pts = Math.max(0, got - absDed(entry) + gBonus(entry));
+    return { pts, rel: pts / whole * 100, whole };
   }
   function gldHTML() {
     const cells = GLD_BANDS.map(b =>
       `<span class="gld-b" data-b="${b.L}" style="--bc:${b.c}"><u>${b.L}</u><s>${gldRange(b)}</s></span>`).join('');
-    return `<span class="gld"><b class="gld-let">—</b><b class="gld-pct"></b>` +
+    return `<span class="gld"><b class="gld-let">—</b><b class="gld-pct"></b>`
+      + `<b class="gld-of"></b>` +
       `<span class="gld-slot"><span class="gld-ax">${cells}<i class="gld-me"></i></span></span></span>`;
   }
   /* ولا يُعاد رسمُ القُمرة حين تكتب: يُكتب الحرفُ ويُزاح المؤشّرُ ويُطلى الحزام —
@@ -19218,25 +21286,136 @@
   function gldPaint() {
     const el = document.querySelector('#nook .gld');
     if (!el || !nookEntry) return;
-    const p = gradeStand(nookEntry), has = p != null, b = has ? gldBand(p) : null;
+    /* والرقمُ نقاطٌ والحكمُ موقف: ذاك سقفُه ما عليه التوزيع، وهذا سقفُه ‎A+‎ */
+    const st = gradeStand(nookEntry), has = st != null, b = has ? gldBand(st.rel) : null;
     el.style.setProperty('--gld-c', b ? b.c : 'var(--nk-ink-soft)');
     const L = el.querySelector('.gld-let'); if (L) L.textContent = has ? b.L : '—';
-    const P = el.querySelector('.gld-pct'); if (P) P.textContent = has ? (Math.round(p * 10) / 10) + '%' : '';
+    const P = el.querySelector('.gld-pct');
+    if (P) P.textContent = has ? (Math.round(st.pts * 10) / 10) + '%' : '';
+    /* وما عليه التوزيعُ يُقال حين يخالف المئة — فلا يبقى حكمًا خفيًّا في المتن.
+       والمئةُ لا تُقال: هي الأصلُ، وقولُها في كلّ مادّةٍ ضجيج */
+    const OF = el.querySelector('.gld-of');
+    if (OF) {
+      const bs = gradeBase(gradeValues(nookEntry));
+      OF.textContent = bs === 100 ? '' : T().gbOf(bs);
+    }
     const M = el.querySelector('.gld-me');
-    if (M) { M.style.left = gldPos(has ? p : 0) + '%'; M.style.opacity = has ? 1 : 0; }
+    /* ‏‎insetInlineStart‎ لا ‎left‎: المحورُ يتبع لغةَ الصفحة، فالموضعُ يُقاس من مبتدئه.
+       وموضعُه من الموقف لا من النقاط: المحورُ سُلَّمُ حروفٍ، فمن وضع عليه ‎76‎ وحرفُها
+       ‎A+‎ أوقف الخيطَ على ‎C+‎ وكتب فوقه ‎A+‎ — خبرانِ متناقضان في شاشةٍ واحدة */
+    if (M) { M.style.insetInlineStart = gldPos(has ? st.rel : 0) + '%'; M.style.opacity = has ? 1 : 0; }
     el.querySelectorAll('.gld-b').forEach(c => c.classList.toggle('on', has && c.dataset.b === b.L));
     /* ===== وجسدُ الضيّق يتبع الحزامَ =====
        ‏‎gldPaint‎ هي مَعبرُ كلّ ما يُبدّل الحصيلةَ: خانةُ درجةٍ تُكتب، وسهمُ غيابٍ
        يُضغط (فالخصمُ يدخل الحساب)، ودرجاتٌ اضافيّة. فتُنادى المِبناةُ من ههنا مرّةً
        واحدةً بدل ان يُنادى من كلّ موضعٍ فيُنسى واحد */
     nkNarrowRefresh('grade');
+    gmFit();
+  }
+
+  /* ===== وعرضُ عمود الخانات يُقاس لا يُكتب =====
+     العمودُ ‎max-content‎: عرضُه عرضُ أوسعِ رقمٍ فيه، ويتبدّل بما يُكتب. وصفُّ الخصم
+     تحته ليس من أبنائه، فلا يرثه — فيُقاس مرّةً بعد الرسم ويُكتب في ‎--gm-wfit‎.
+     ولا حلقةَ: المقيسُ عمودٌ قاعُه ثابت (‎--gm-w‎)، والمكتوبُ لا يعود إليه. */
+  function gmFit() {
+    const nook = document.getElementById('nook');
+    const col = nook && nook.querySelector('.nk-body .gvert__ins');
+    if (!col) return;
+    const w = Math.round(col.getBoundingClientRect().width);
+    if (w > 0) nook.style.setProperty('--gm-wfit', w + 'px');
   }
 
   /* ---------- تشكيل «الدرجة»: نفس نظام بقيّة المربّعات ---------- */
+  /* ============================================================
+     WHAT THE SPLIT IS OUT OF
+     ============================================================
+     A course whose grade is a hundred needs no such number, and that is why
+     there was none. But a course taught as a lecture and a lab is two boxes,
+     and each carries a share of one grade — the lecture out of 70, the lab out
+     of 30. Both boxes were drawing the gap up to a hundred, so each looked
+     mostly unaccounted for, and there was no way to say otherwise.
+
+     So the split says what it is out of. It is part of the split, not a setting
+     beside it: whoever follows that split follows its whole too.
+
+     The standing already divides by the split's own total, so full marks on a
+     split of 70 has always read as 100%. Nothing about the arithmetic changes;
+     what changes is that the box stops drawing thirty points of nothing. */
+  const GB_MIN = 1, GB_MAX = 1000;
+  const gradeBase = v => {
+    const n = Math.round(+(v && v.base) || 0);
+    return n >= GB_MIN && n <= GB_MAX ? n : 100;
+  };
+  /* ===== وتُقال بنقرة اليمين على الحزام =====
+     هو الموضعُ الذي يُقرأ فيه الحكمُ («‎92.4%‎ · A»)، فهو الموضعُ الذي يُسأل فيه
+     «من كم؟». ولا زرَّ في سطر العنوان: السطرُ مزدحمٌ أصلًا، وهذا إعدادٌ يُضبط
+     مرّةً في الفصل لا فعلٌ يتكرّر.
+     وتُكتب في مساهمتك أنت في «الدرجة» — حيث تسكن بنودُه — فتُنشر معها وتُقرأ مع
+     من يتبع توزيعَك. */
+  let gbMenu = null;
+  function gbClose() { if (gbMenu) { gbMenu.remove(); gbMenu = null; } }
+
+  function gbOpen(x, y) {
+    gbClose();
+    if (!nookEntry) return;
+    const cur = gradeBase(gradeValues(nookEntry));
+    document.body.insertAdjacentHTML('beforeend',
+      `<div class="iom-mn gb-mn">
+         <b class="gb-t">${esc(T().gbTitle)}</b>
+         <span class="gb-row">
+           <input type="number" id="gb-in" min="${GB_MIN}" max="${GB_MAX}" step="1" value="${cur}">
+           <button type="button" class="gb-go" data-gb="save">${esc(T().gbSave)}</button>
+         </span>
+         <i class="gb-h">${esc(T().gbHint)}</i>
+       </div>`);
+    gbMenu = document.body.lastElementChild;
+    const w = gbMenu.offsetWidth, h = gbMenu.offsetHeight;
+    gbMenu.style.left = Math.max(6, Math.min(x + 6, window.innerWidth - w - 6)) + 'px';
+    gbMenu.style.top = Math.max(6, Math.min(y + 6, window.innerHeight - h - 6)) + 'px';
+    const f = document.getElementById('gb-in');
+    if (f) { f.focus(); f.select(); }
+  }
+
+  function gbSave() {
+    const f = document.getElementById('gb-in');
+    if (!f || !nookEntry) return;
+    const n = Math.round(+f.value);
+    if (!isFinite(n) || n < GB_MIN || n > GB_MAX) return;
+    const code = nookCode(nookEntry);
+    const d = myPost(code, 'grade').data;
+    /* والمئةُ لا تُكتب: هي الأصل، فلا يحمل المتنُ ما لا يبدّل شيئًا */
+    if (n === 100) delete d.base; else d.base = n;
+    save();
+    if (typeof srvPushSoon === 'function') srvPushSoon();
+    gbClose();
+    /* ويُعاد بناءُ المربّع لا طلاءُ الحزام وحدَه: الفراغُ في البار يتبدّل معه */
+    fillCourseUI(code);
+    if (typeof toast === 'function') toast(T().gbDone(n));
+  }
+
+  document.addEventListener('contextmenu', e => {
+    if (!e.target.closest) return;
+    if (!e.target.closest('#nook .gld')) return;
+    e.preventDefault();
+    gbOpen(e.clientX, e.clientY);
+  });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-gb]');
+    if (b) { e.preventDefault(); gbSave(); return; }
+    if (gbMenu && !(e.target.closest && e.target.closest('.gb-mn'))) gbClose();
+  }, true);
+  document.addEventListener('keydown', e => {
+    if (!gbMenu) return;
+    if (e.key === 'Escape') gbClose();
+    else if (e.key === 'Enter' && e.target && e.target.id === 'gb-in') { e.preventDefault(); gbSave(); }
+  });
+  window.addEventListener('resize', gbClose);
+
   function gradeValues(entry) {
-    const bag = nookPicks(entry) || {};
-    const g = bag.gradeV || {};
-    return { method: g.method || 'avg', items: (g.items || []).map(x => Object.assign({}, x)) };
+    /* المصدرُ مساهمتُك في «الدرجة» — و‎gradeMe‎ (درجاتُك أنت) مخزنٌ آخرُ لا يُمَسّ */
+    const g = (myPostRO(nookCode(entry), 'grade') || {}).data || {};
+    return { method: g.method || 'avg', base: gradeBase(g),
+             items: (g.items || []).map(x => Object.assign({}, x)) };
   }
   /* ============================================================
      سجلُّك أنت في مربّع الدرجة — درجتُك في كلّ بندٍ وموعدُه
@@ -19257,6 +21436,64 @@
     return bag.gradeMe || null;
   }
   const gmOf = (me, name) => (me && me[name]) || null;
+
+  /* =========================================================================
+     HOW TALL IS EACH ROW IN THE GRADE SPLIT
+     =========================================================================
+     Three things are wanted at once, and all three cannot hold:
+
+       1. every row tall enough to read a name, a score box and a date
+       2. the difference in weight visible
+       3. the box not getting taller
+
+     With nine items and a readable floor, most of the box is already spoken
+     for by readability alone. What is left over is the whole budget for
+     showing weight. There is no arrangement that escapes that — only choices
+     about where to spend it. (ROADMAP-GRADE-GEOMETRY.md carries the numbers.)
+
+     WHAT WAS THERE BEFORE — `max(floor, weight × step)`. Everything under
+     about eighteen per cent landed on the floor and became identical. Measured
+     on a real split: weights differing 17× produced heights differing 1.88×,
+     and an item worth 2% was **exactly as tall** as one worth 6%.
+
+     WHAT IS THERE NOW
+
+         height = floor + budget × weight^α ÷ Σ(weight^α)
+
+     · no row is ever below the floor
+     · the total is exactly the height chosen — the box does not drift
+     · a heavier item is never shorter than a lighter one
+     · and the budget is whatever the old rule would have used, so the box
+       does not grow by a single pixel
+
+     True proportion is not on the table: for a 2% item to reach a readable
+     floor proportionally, a 34% item would have to be 357px — one row taller
+     than the whole box. The only question was how to compress, and `α` is
+     that answer. Raise it and the difference reads harder; the cost is paid by
+     the shortest row, which is why the floor is the other half of the pair. */
+  const G_FLOOR = 16;     /* the shortest row its content still fits in */
+  const G_ALPHA = 0.65;   /* 1 = true proportion (impossible), 0 = all equal */
+
+  function gradeHeights(items) {
+    const ps = items.map(x => Math.max(0, +x.pct || 0));
+    const n = ps.length;
+    if (!n) return [];
+    /* The height the old rule would have taken — so this cannot grow the box */
+    const was = ps.reduce((a, p) => a + Math.max(21, 1.16 * p), 0);
+    const H = Math.max(116, was);
+    const budget = Math.max(0, H - n * G_FLOOR);
+    const f = ps.map(p => (p > 0 ? Math.pow(p, G_ALPHA) : 0));
+    const S = f.reduce((a, b) => a + b, 0);
+    if (!S) return ps.map(() => H / n);
+    return f.map(x => G_FLOOR + budget * x / S);
+  }
+
+  /* أعلى ما يُنال من بندٍ: وزنُه. يُقرأ من التوزيع الحاضر في موضعٍ واحدٍ فلا يفترق
+     ما يحرسه المدخلُ عمّا يحرسه المثلّثان. */
+  const gmCap = name => {
+    const it = ((gradeValues(nookEntry) || {}).items || []).find(x => x && x.name === name);
+    return it && it.pct ? it.pct : 100;
+  };
   /* حدّا الترم: موعدُ بندٍ خارج ترمه ليس موعدًا. وترمٌ بلا تاريخين لا يُقيَّد */
   function gmBounds() {
     const d = state.termDates[selTerm] || {};
@@ -19269,9 +21506,41 @@
      و‎me‎ سجلُّك: إن مُرِّر وُلد لكلّ بندٍ **خانةُ درجةٍ يمينَ البار وخارجَه** (فأوّلُ
      الصفّ في العربيّة يمينُه) و**أيقونةُ موعدٍ في طرفه الأيسر**. وبدونه يبقى البارُ
      عارضًا كما كان — فمعاينةُ المنتقي لا تُدخِل شيئًا */
-  function gBarVertHTML(items, me, ded, bon) {
-    const rem = Math.max(0, 100 - items.reduce((s, x) => s + (+x.pct || 0), 0));
-    const seg = (x, i) => `<span class="gvseg" style="flex-grow:${x.pct};background:${GCOLORS[i % GCOLORS.length]}">${x.pct >= 7 ? x.pct + '%' : ''}</span>`;
+  function gBarVertHTML(items, me, ded, bon, base) {
+    /* ===== والبنودُ تُقرأ بمواعيدها: الأقربُ أعلى =====
+       التوزيعُ يُكتب بترتيب صاحبه، وهو ترتيبُ سيلبوسٍ لا ترتيبُ وقت. والقارئُ
+       إنّما يسأل «ما الذي يليني؟» — فيُرتَّب بالموعد: الأوّلُ فالأوّل، وما لا
+       موعدَ له في الذيل (لا يُقال عنه إنّه بعيدٌ، إنّما لم يُقَل متى).
+       والصيغةُ ‎ISO‎، فمقارنةُ نصَّيها مقارنةُ زمنَيهما — لا يُبنى منها تاريخ.
+       والفرزُ ثابتٌ (‎sort‎ مستقرّةٌ)، فمن استوى موعدُهما بقيا على ترتيب صاحبهما.
+       ويقع على **نسخةٍ**: ترتيبُ المتن ملكُ كاتبه لا يُبدَّل بقراءة. */
+    const dueOf = x => { const g = gmOf(me, x.name); return (g && g.d) || ''; };
+    items = items.slice().sort((a, b) => {
+      const da = dueOf(a), db = dueOf(b);
+      if (da === db) return 0;
+      if (!da) return 1;
+      if (!db) return -1;
+      return da < db ? -1 : 1;
+    });
+    /* والفراغُ يُقاس إلى ما عليه التوزيعُ لا إلى مئةٍ مفترضة: توزيعٌ من سبعين
+       تامٌّ عند سبعين، فلا يُرسم تحته ثلاثون من لا شيء */
+    const whole = base || 100;
+    const rem = Math.max(0, whole - items.reduce((s, x) => s + (+x.pct || 0), 0));
+    /* ===== ورقمُ القطعة يُكتب في كلّ قطعةٍ، بعلامته =====
+       كان الشرطُ ‎pct >= 7‎، وهو قياسُ **قامة**: القطعةُ كانت تأخذ نصيبَها من مئةٍ
+       وستّةَ عشرَ بكسلًا، فسبعةٌ في المئة ثمانيةُ بكسلاتٍ — أدنى ما يسع سطرًا.
+       فلمّا صار لكلّ صفٍّ قاعٌ (‎--gmin‎) زالت علّةُ الشرط وبقي أثرُه: أرقامٌ تظهر
+       وأرقامٌ تغيب بلا سببٍ يُرى.
+
+       والحاجزُ الباقي **عرضٌ** لا قامة. وجُرّب رفعُ العلامة لتسع، فرُدّ بحكم صاحب
+       الموقع: العلامةُ هي التي تقول إنّ الرقمَ نسبة. فبقيت، ووُسِّع الشريطُ بقدرها
+       بالحساب لا بالتقدير: أعرضُ ملصقٍ ممكن ‎«12.5%»‎ — خمسةُ محارف — يبلغ عند
+       ‎7.5px‎ اثنين وعشرين ونصفًا، فأربعةٌ وعشرون تسعه بفسحةٍ ونصف.
+       (وأصغرُ توسيعٍ يفي: عشرون لا تسع ‎«100%»‎ عند أيّ قدٍّ يُقرأ.) */
+    /* والقاماتُ تُحسب مرّةً للثلاثة معًا فتصطفّ الأعمدةُ صفًّا بصفّ */
+    const HS = gradeHeights(items);
+    const hOf = i => (HS[i] || 0).toFixed(2) + 'px';
+    const seg = (x, i) => `<span class="gvseg" style="--gh:${hOf(i)};background:${GCOLORS[i % GCOLORS.length]}">${x.pct}%</span>`;
     const cal = x => {
       if (!me) return '';
       const g = gmOf(me, x.name), due = g && g.d ? g.d : '';
@@ -19294,7 +21563,7 @@
       const g = gmOf(me, x.name);
       return (g && g.d) ? `<span class="gmd">${esc(g.d)}</span>` : '';
     };
-    const row = (x, i) => `<span class="gvrow" style="flex-grow:${x.pct}"><i class="gvrow__line" style="background:${GCOLORS[i % GCOLORS.length]}"></i><b class="gvrow__name">${esc(x.name) || '—'}</b>${dat(x)}${cal(x)}</span>`;
+    const row = (x, i) => `<span class="gvrow" style="--gh:${hOf(i)}"><i class="gvrow__line" style="background:${GCOLORS[i % GCOLORS.length]}"></i><b class="gvrow__name">${esc(x.name) || '—'}</b>${dat(x)}${cal(x)}</span>`;
     /* والخانةُ تُبنى بالنسب نفسِها كي تقف بإزاء شريحتها، وللباقي فراغٌ بوزنه وإلّا انزاح العمودان */
     /* ===== ومثلّثان يمينَ الخانة =====
        ‏‎STEP_IC‎ عينُه الذي لعدّاد الغياب: الفعلُ واحدٌ (زِد · انقُص) فليكن المرسومُ
@@ -19309,16 +21578,21 @@
       /* ‏‎<input>‎ لا يقبل ولدًا، فالمثلّثان لا يدخلانه. وإنّما يُنقل **الصندوقُ**
          (الحدُّ والاستدارةُ والأرضيّة) من المدخل إلى حاضنٍ ‎.gscw‎ يسعهما معًا،
          ويصير المدخلُ في جوفه شفّافًا بلا حدّ — فيُرى الثلاثةُ صندوقًا واحدًا */
-      return `<span class="gvin" style="flex-grow:${x.pct}"><span class="gscw">` +
+      return `<span class="gvin" style="--gh:${hOf(items.indexOf(x))}"><span class="gscw">` +
         `<span class="chipe__steps gsc-stp">${gstp(1)}${gstp(-1)}</span>` +
         `<input type="text" class="gsc${got !== '' ? ' is-set' : ''}"` +
-        ` data-gmg="${esc(x.name)}" inputmode="decimal" maxlength="5" placeholder="—" value="${esc(got)}"` +
-        ` title="${T().gmPct}" aria-label="${T().gmPct}"></span></span>`;
+        ` data-gmg="${esc(x.name)}" inputmode="decimal" maxlength="8" placeholder="—" value="${esc(got)}"` +
+        ` title="${T().gmPct}" aria-label="${T().gmPct}">` +
+        /* ===== والعلامةُ تُكتب، فالرقمُ بلا سياق =====
+           القيمةُ نسبةٌ من وزن البند نفسِه: بندٌ وزنُه عشرون وكتبتَ فيه واحدًا،
+           فحصّتُك من العشرين واحدٌ في المئة. وكان الرقمُ عاريًا فيُقرأ درجةً خامًا.
+           فتُلحق به علامتُه — تُرى ولا تُكتب: خارجَ المدخل، فلا تدخل ما تُرسل. */
+        `<i class="gscp">%</i></span></span>`;
     };
     const ins = me ? `<span class="gvert__ins">${items.map(inp).join('')}${
-      rem > 0 ? `<span class="gvin" style="flex-grow:${rem}"></span>` : ''}</span>` : '';
-    const segs = items.map(seg).join('') + (rem > 0 ? `<span class="gvseg gvseg--rest" style="flex-grow:${rem}"></span>` : '');
-    const rows = items.map(row).join('') + (rem > 0 ? `<span class="gvrow gvrow--rest" style="flex-grow:${rem}"></span>` : '');
+      rem > 0 ? `<span class="gvin gvin--rest" style="--gp:${rem}"></span>` : ''}</span>` : '';
+    const segs = items.map(seg).join('') + (rem > 0 ? `<span class="gvseg gvseg--rest" style="--gp:${rem}"></span>` : '');
+    const rows = items.map(row).join('') + (rem > 0 ? `<span class="gvrow gvrow--rest" style="--gp:${rem}"></span>` : '');
     /* ===== وبندُ الخصم تحت البار لا فيه =====
        بنودُ البار تقتسم مئةً وشرائحُها بأوزانها، والخصمُ ليس منها: هو نقصانٌ يقع على
        المجموع بعد قسمته. فلو أُدخل شريحةً لَاقتطع من أوزان إخوته وكذب البار.
@@ -19336,8 +21610,10 @@
     const bonRow = bon == null ? '' : `<span class="gvded">` +
       `<span class="gscw"><span class="chipe__steps">${gstp(1)}${gstp(-1)}</span>` +
       `<input type="text" class="gsc${bon ? ' is-set' : ''}" data-gbn="1" inputmode="decimal"` +
-      ` maxlength="5" placeholder="—" value="${bon || ''}"` +
-      ` title="${T().bonRowLab}" aria-label="${T().bonRowLab}"></span>` +
+      ` maxlength="8" placeholder="—" value="${bon || ''}"` +
+      ` title="${T().bonRowLab}" aria-label="${T().bonRowLab}">` +
+      /* وعلامتُها كعلامة أخواتها: نقاطٌ من مئة المادّة، تُضاف فوقها */
+      `<i class="gscp">%</i></span>` +
       `<i class="gvded__gap"></i>` +
       `<span class="gvrow gvded__row"><i class="gvrow__line gvded__line"></i>` +
       `<b class="gvrow__name">${T().bonRowLab}</b></span></span>`;
@@ -19348,7 +21624,7 @@
   function gradePeek(d, dragSrc, vert, me, ded, bon) {
     const dg = k => dragSrc ? ` data-drag="field" data-slot="${k}" data-src="${dragSrc}"` : '';
     const items = (d.items || []).filter(x => x && x.pct);
-    const bar = vert ? gBarVertHTML(items, me, ded, bon) : gBarHTML(items);
+    const bar = vert ? gBarVertHTML(items, me, ded, bon, gradeBase(d)) : gBarHTML(items);
     const dist = `<span class="v-badge v-badge--g grade-chip${vert ? ' grade-chip--v' : ''}"${dg('items')}><i class="v-lab">${T().distShort}</i>${
       items.length ? `<span class="grade-chip__bar">${bar}</span>` : `<b class="v-val">—</b>`}</span>`;
     const meth = d.method ? `<span class="v-badge v-badge--g meth-badge"${dg('method')}><i class="v-lab">${T().methodLabel}</i><b class="v-val">${d.method === 'avg' ? 'Average' : 'Standard'}</b></span>` : '';
@@ -19357,11 +21633,11 @@
   }
   function nookGradeBox(entry) {
     const v = gradeValues(entry);
-    if (!(v.items || []).some(x => x.pct)) return `<div class="nk-box nk-box--empty"><h3 class="nk-t">${T().nkGrade}</h3>${nkPickBtn('grade')}</div>`;
+    if (!(v.items || []).some(x => x.pct)) return nkEmptyBox('grade', T().nkGrade);
     return `<div class="nk-box" id="nk-grade" data-k="grade" data-m="${nkMode('grade')}">`
       + `${nkNarrowHTML('grade', entry)}`
       + `<span class="fx-tools fx-tools--w">${nkGearBtn('grade')}${nkFoldBtn('grade')}</span>`
-      + `<h3 class="nk-t"><span class="nk-gttl">${T().nkGrade}</span>${gldHTML()}</h3>
+      + `<h3 class="nk-t"><span class="nk-gttl nk-t__n">${T().nkGrade}</span>${gldHTML()}</h3>
         <div class="nk-sc"><div class="nk-body pk--peek fold-peek--rich">${gradePeek(v, null, true, gradeMe(entry) || {}, absDed(entry), gBonus(entry))}</div></div>
         ${nkSB()}
         ${nkiRZ()}
@@ -19480,7 +21756,9 @@
     const n = parseFloat(v);
     const me = gradeMe(nookEntry, true), key = el.dataset.gmg;
     const rec = me[key] || (me[key] = {});
-    if (isFinite(n)) rec.g = Math.max(0, Math.min(100, n)); else delete rec.g;
+    /* والسقفُ وزنُ البند نفسِه: لا يُنال من بندٍ وزنُه عشرون أكثرُ من عشرين.
+       ويُقرأ من التوزيع الحاضر، فإن لم يوجد البندُ فيه فمئةٌ (لا سقفَ يُخترع). */
+    if (isFinite(n)) rec.g = Math.max(0, Math.min(gmCap(key), n)); else delete rec.g;
     if (rec.g == null && rec.d == null) delete me[key];
     el.classList.toggle('is-set', v !== '');
     gldPaint();
@@ -19584,6 +21862,30 @@
     fillCourseUI(nookCode(nookEntry));
     showCmTab(sec);
   }
+  /* ===== وما يستقرّ به الصفُّ بعد بنائه — في موضعٍ واحد =====
+     ستُّ خطواتٍ كانت مكتوبةً في ‎openNook‎ وحدَها، فمن أعاد بناءَ الأربعة في غيرها
+     نسي منها واحدةً أو خمسًا. فصارت اسمًا يُنادى، ويُعاد بناءُ الصفّ به. */
+  function nkFourSettle(host) {
+    const h = host || $('#lib-course');
+    nkSzApply();            /* مقاساتُ الأربعة تُلبَس بعد أن استقرّ الصفُّ في الصفحة */
+    nkMinFit();             /* ثمّ يُقاس أدنى عرضٍ يسع سطرَ كلّ عنوان */
+    fitGradeLabels(h);      /* دلالات شريط الدرجة في مربّع القُمرة */
+    gldPaint();             /* وسُلَّمُ الحروف: حرفُك وموضعُك يُكتبان بعد أن يُبنى المربّع */
+    nkInfoFill();           /* ومربّعُ «المادة» يُملأ بالقياس بعد أن استقرّ في الصفحة */
+    nkSbSync();             /* والشريطُ يُقاس بعد ان يستقرّ المتنُ في الاربعة */
+  }
+
+  /* ===== وتُعاد الأربعةُ وحدَها حين يصل جوابُ الخادم =====
+     ولا يُعاد بناءُ الرَّكن كلِّه: فيه شجرةُ الرحلة ومواضعُ تمريرٍ وحالُ نظرٍ لا
+     تُهدم لأنّ مساهمةَ غيرِك وصلت. */
+  function nkFourRefresh() {
+    const four = document.querySelector('#nook .nk-four');
+    if (!four || !nookEntry) return;
+    four.innerHTML = nookInfoBox(nookEntry) + nookDocBox(nookEntry)
+                   + nookAbsBox(nookEntry) + nookGradeBox(nookEntry);
+    nkFourSettle();
+  }
+
   /* ============================================================
      «رحلتي» — الرزمةُ التي تملكها أنت في هذه المادّة
      ============================================================
@@ -20905,12 +23207,7 @@
       <div class="nk-two">${nookRoadBox(entry)}</div>
     </div>`;
     host.hidden = false;
-    nkSzApply();            /* مقاساتُ الأربعة تُلبَس بعد أن استقرّ الصفُّ في الصفحة */
-    nkMinFit();             /* ثمّ يُقاس أدنى عرضٍ يسع سطرَ كلّ عنوان */
-    fitGradeLabels(host);   /* دلالات شريط الدرجة في مربّع القُمرة */
-    gldPaint();             /* وسُلَّمُ الحروف: حرفُك وموضعُك يُكتبان بعد أن يُبنى المربّع */
-    nkInfoFill();           /* ومربّعُ «المادة» يُملأ بالقياس بعد أن استقرّ في الصفحة */
-    nkSbSync();             /* والشريطُ يُقاس بعد ان يستقرّ المتنُ في الاربعة */
+    nkFourSettle(host);
     /* ===== والقياسُ آخِرُ ما يقع — وغيابُه ههنا كان العطبَ =====
        ‏‎openNook‎ تبني مربّعَ الرحلة بنفسها (‎nookRoadBox‎ في قالب القُمرة) ولا تمرّ
        بـ‎roadRender‎، فلم يبلغها قياسٌ. فكان أوّلُ دخولٍ يعرض دوائرَ بلا خيطٍ يجمعها،
@@ -20951,7 +23248,7 @@
         } else {
           const me = gradeMe(nookEntry, true), key = inp.dataset.gmg;
           const rec = me[key] || (me[key] = {});
-          const n = Math.max(0, Math.min(100, Math.round((+rec.g || 0) + d)));
+          const n = Math.max(0, Math.min(gmCap(key), Math.round((+rec.g || 0) + d)));
           if (n) rec.g = n; else delete rec.g;
           if (rec.g == null && rec.d == null) delete me[key];
           inp.value = rec.g == null ? '' : rec.g;
@@ -20997,7 +23294,7 @@
            ‎200 ← 319‎ عرضا مع النشر. وهو مرفوض: الطيُّ فعلُ «أرني ما تحت» لا فعلُ
            تحجيم؛ والعرضُ ملكُ الحافّة التي يجرُّها صاحبُ الموقع بيده، فلا يُنقض
            عليه بزرّ. (وهو حكمُ ‎RE/nook-four‎ نفسُه: «‎w‎ لا يمسّه الوضع ابدا».)
-           و‎o‎ يبقى قامةً وحدَها: هي التي تُردّ */
+           و‎o‎ كان يبقى قامةً وحدَها ثمّ تقاعد: النشرُ يقيس ولا يتذكّر (انظر أدناه) */
         /* ===== والزرُّ يحكم الاربعةَ لا صندوقَه وحدَه =====
            الرَّكنُ يُقرأ **صفّا**: أربعةٌ على قامةٍ واحدةٍ تُمسح بلمحة. فطيُّ واحدٍ دون
            اخوته يكسر ذلك الصفَّ ويجعل الشاشةَ درجاتٍ. والمقصودُ من الزرّ «أرني ما
@@ -21008,17 +23305,18 @@
            على حدة — فمن نشر وجد كلَّ صندوقٍ على قامته التي تركه عليها لا على قامةٍ
            موحَّدة */
         const open = !!sz.c;   /* أكان المضغوطُ مطويّا؟ فالجهةُ نشرٌ */
+        /* ===== وقامةُ النشر تُقاس قبله: أطولُ الأربعة متنًا يقرّر لهم جميعًا =====
+           كان يُردّ كلٌّ إلى قامةٍ محفوظةٍ من قبل الطيّ (‎z.o.h‎) أو إلى ‎210‎ لمن لم
+           يُوسَّع قطّ — فيُفتح الصفُّ درجاتٍ، والرقمُ لا يعرف ما في المربّع. فصار
+           يُقاس (‎nkOpenH‎ في ‎11.js‎، وخارطتُه ‎ROADMAP-NOOK-OPEN-HEIGHT.md‎).
+           و‎o‎ تقاعدت معه: النشرُ يقيس ولا يتذكّر — ولذلك تُعاد القسمةُ في كلّ نشرةٍ
+           وتختلف من مادّةٍ إلى مادّة بلا رقمٍ يُحفظ لكلّ مادّة. */
+        const H = open ? nkOpenH() : 0;
         NK_SZ.forEach(key => {
           const z = state[key];
           if (!z) return;
-          if (open) {
-            const o = z.o || {};
-            z.h = o.h || 210;   /* من طُوي ولم يُوسَّع قطُّ يُفتح على قامةٍ تُري جوفَه */
-            z.c = 0;
-          } else {
-            z.o = { h: z.h };
-            z.h = NK_DEF[key].h; z.c = 1;
-          }
+          if (open) { z.h = H; z.c = 0; }
+          else { z.h = NK_DEF[key].h; z.c = 1; }
         });
         const lab = open ? T().nkNarrow : T().nkWiden;
         /* ===== وازرارُ الطيّ ثمانيةٌ لا زرّان =====
@@ -21040,7 +23338,13 @@
     if (bk) { closeNookRes(); return; }
     const tp = e.target.closest('.nkm-more');
     if (tp) { nkInfoTopics(); return; }
-    const pk = e.target.closest('.nk-pick');
+    /* ===== والعقدُ سمةٌ لا صنف =====
+       يفتح المنتقيَ بابان: زرُّ الحال الصفريّة والترسُ في المربّع الممتلئ.
+       وكانا يشتركان في صنف ‎.nk-pick‎، فلمّا صار للأوّل صنفٌ خاصّ (‎.nk-cta‎)
+       وتبع المستمعُ الصنفَ، **انقطع الترس** — يُضغط فلا يفتح شيئًا ولا يصيح.
+       والسمةُ ‎data-nkpick‎ هي العقدُ الحقيقيّ: تحمل البندَ وتُميّز الباب، ومن
+       أضاف بابًا ثالثًا غدًا حملها فعمل من نفسه. */
+    const pk = e.target.closest('[data-nkpick]');
     if (pk && nookEntry) openNookPicker(pk.dataset.nkpick);
   });
   /* ============================================================
@@ -21188,7 +23492,6 @@
   let pickSec = null;      // البند الذي يُنتقى له حاليًا
   let pickSort = 'newest'; // فرز قائمة المنتقي (مستقلّ عن فرز المكتبة)
   let pickDraft = null;    // مسوّدة التشكيل: {بند: معرّف المساهمة} — لا تُحفظ إلا بزر «حفظ»
-  let pickPub = false;     // مفتاح النشر: عام = التشكيل يصير مساهمتي في بند «المادة»
 
   /* رأس المنتقي = نفس شريط المساهمات في المكتبة: العدد و«مساهمة» يمينًا وأيقونة الفرز يسارها */
   const pickSortBar = n => `<div class="cm-sortbar">
@@ -21275,20 +23578,36 @@
         ${pkTopicsChip(v)}
         <textarea id="pkf-desc" class="chipe-in chipe-in--desc" rows="1" data-slot="desc" placeholder="${T().descPh}">${esc(v.desc || '')}</textarea>
       </div></div>`;
-    return fields + pkActsHTML(filled, INFO_SLOTS.length, done);
+    return fields + pkActsHTML(filled, INFO_SLOTS.length);
   }
 
-  /* صفّ الإجراءات المشترك بين تشكيلَي «المادة» و«الدكتور» */
-  const pkActsHTML = (filled, total, done) => `
+  /* ============================================================
+     صفُّ الإجراءات: أيقونةُ حالٍ واحدة
+     ============================================================
+     كانت ثلاثةً: مفتاحُ «عام»، و«حفظ» معطَّلٌ حتى تكتمل البنود، و«إلغاء».
+     ورُفعت كلُّها: ما تكتبه يصير مساهمتَك في حينه، فلا شيءَ يُحفظ ولا شيءَ
+     يُلغى. وبقي سؤالٌ واحدٌ صادق: **مَن يراها؟** — بأيقونات المكتبة نفسِها،
+     فلا يتعلّم صاحبُ الموقع لغتين لشيءٍ واحد. */
+  const pkActsHTML = (filled, total) => {
+    const st = pstOf(pkMine());
+    const P = PST();
+    const o = P[st] || P.priv;
+    /* أيقونةٌ عاريةٌ بلا مربّعٍ ولا لفظٍ بجانبها — ‎.pst-badge‎ جِلدُ المكتبة نفسُه،
+       واللونُ وحدَه يحمل الحال. واللفظُ في القائمة التي تُفتح بضغطها. */
+    return `
       <div class="nkw__acts">
-        <span class="nkw__pubs">${pickPub ? T().pubOn : T().pubOff}</span>
-        <button type="button" class="sw sw--sm${pickPub ? ' on' : ''}" id="pk-pub" role="switch"
-          aria-checked="${pickPub ? 'true' : 'false'}" title="${T().pubTip}"><span class="sw__k"></span></button>
-        <button type="button" class="nkw__ic nkw__ic--save" id="pk-save"${done ? '' : ' disabled'}
-          title="${done ? T().saveBtn : T().saveNeedAll}" aria-label="${T().saveBtn}">${SAVE_IC}</button>
-        <button type="button" class="nkw__ic nkw__ic--cancel" id="pk-cancel" title="${T().cancelBtn}" aria-label="${T().cancelBtn}">✕</button>
+        <button type="button" class="pst-badge is-${st}" id="pk-pst"
+          title="${esc(o.n)} — ${esc(o.d)}" aria-label="${esc(o.n)}">${o.ic}</button>
         ${completeGlyph({ filled, total })}
       </div>`;
+  };
+  /* مساهمتي في البند المفتوح — قراءةً بلا إنشاء (فتحُ مربّعٍ لا يُنشئ شيئًا) */
+  function pkMine() {
+    if (!nookEntry) return null;
+    const code = nookCode(nookEntry);
+    if (pickSec !== 'doc') return myPostRO(code, pickSec);
+    return myDrPostRO(code, (pickDraft || {}).dr || '');
+  }
 
   /* ---------- حقول تشكيل «الدكتور» ----------
      المرحلة الأولى: مستطيل اختيار الدكتور وحده (واللوحة في وسط المنبثقة).
@@ -21301,11 +23620,23 @@
     const done = !!v.dr && cc.filled === cc.total;
     /* الاسم ومعه التقييم الكلّي — في القائمة وفي المستطيل بعد الاختيار */
     const opts = [['', '—'], ...drs.map(dd => [dd.id, `${esc(dd.name) || T().docName}${drRateTag(dd)}`, drAvatar(dd)])];
+    /* ===== وأوّلُ ما في القائمة بابٌ لمن لم يجد =====
+       القائمةُ تعدّ دكاترةَ هذه المادّة. فمن فتحها ليختار ولم يجد وقف: لا سبيلَ
+       أمامه إلّا أن يغلقها ويبحث عن مكانٍ آخرَ يقترح منه. فيتصدّرها البابُ نفسُه
+       الذي في شريط التصفية — وسمٌ واحدٌ في موضعين، لا زرّان يفترقان. */
     const pickChip = `<span class="chipe chipe--wide chipe--drpick" data-slot="dr">
-        <i>${T().docPickLab}</i>${mdropHTML('drpick', 'pkdr', v.dr || '', opts)}
+        <i>${T().docPickLab}</i>${mdropHTML('drpick', 'pkdr', v.dr || '', opts,
+          /* ===== و«—» خيارٌ يُنقر =====
+             المنسدلةُ تُسقط الخيارَ الخاويَ من قائمتها (‎mdropHTML‎)، فكان «—» حالًا
+             تبدأ منها ولا سبيلَ للرجوع إليها: من اختار دكتورًا لم يستطع أن يعود
+             إلى «لا أحد». فيُكتب خيارًا صريحًا تحت الباب — و‎data-v=""‎ يقرؤه
+             مُمسكُ المنسدلة كما يقرأ سائرَها (‎bag.docDr = val || ''‎). */
+          `<span class="mdrop-lead">${drxCtaHTML(code)}</span>`
+          + `<button type="button" class="mdrop-opt${v.dr ? '' : ' on'}" data-v="">`
+          + `<span class="mdrop-optnm">—</span></button>`)}
       </span>`;
-    /* قبل اختيار الدكتور: المستطيل وحده */
-    const rest = !v.dr ? '' : `
+    /* وسائرُ الحقول تُعرض من أوّلها كإخوتها في البنود الأخرى — لا تنتظر اختيارًا */
+    const rest = `
         <span class="chipe chipe--mail" data-slot="e">
           <input class="doc-in chipe-in chipe-in--mail pkd-in" data-f="e" type="email" value="${esc(v.e || '')}" placeholder="${T().docEmail}">
         </span>
@@ -21321,7 +23652,7 @@
     const fields = `<div class="pk-head pkedit pk--edit"><div class="fold-peek fold-peek--edit">
         ${pickChip}${rest}
       </div></div>`;
-    return fields + pkActsHTML(cc.filled, cc.total, done);
+    return fields + pkActsHTML(cc.filled, cc.total);
   }
   /* الساعات المكتبية: صفٌّ لكل فترة (يكبر المستطيل بعددها) — يومها ووقتاها وزرّ حذفها */
   function pkHoursChip(v) {
@@ -21368,7 +23699,7 @@
         ${chip('free', T().absFree)}${chip('dedFrom', T().absDedFrom)}${chip('dedAmt', T().absDedAmt, true)}
         ${chip('dn', T().absDN)}${chip('late', T().absLate)}
       </div></div>`;
-    return fields + pkActsHTML(cc.filled, cc.total, cc.filled === cc.total);
+    return fields + pkActsHTML(cc.filled, cc.total);
   }
 
   /* حقول تشكيل «الدرجة»: بنود التوزيع (صفٌّ لكل بند) وبارها الحيّ، ومستطيل طريقة التقييم */
@@ -21402,7 +23733,7 @@
           ${mdropHTML('gmethod', 'pkgm', v.method || 'avg', [['avg', 'Average'], ['std', 'Standard']])}
         </span>
       </div></div>`;
-    return fields + pkActsHTML(cc.filled, cc.total, cc.filled >= 100);
+    return fields + pkActsHTML(cc.filled, cc.total);
   }
 
   /* تحديث النصف الأيسر وحده (بلا إعادة بناء القائمة) */
@@ -21414,9 +23745,14 @@
       : pkSlotsHTML(nookEntry);
     /* حقول النصّ تنمو بمحتواها كما في محرّر المكتبة (rows=1 لا يكفي للوصف الطويل) */
     nookPicker.querySelectorAll('#pkf-book, #pkf-desc, #pkf-docdesc').forEach(grow);
-    /* «الدكتور» قبل اختياره: لا قائمة على اليمين واللوحة في الوسط */
-    const split = nookPicker.querySelector('.nkw__split');
-    if (split) split.classList.toggle('nkw--solo', pickSec === 'doc' && !pickDraft.dr);
+    /* ===== ولا حالَ مبدئيّةً لـ«الدكتور» =====
+       كانت اللوحةُ تُفتح على حالين: أولاهما لوحٌ وحيدٌ في الوسط لا قائمةَ معه،
+       ليس فيه إلّا منتقي الدكتور؛ فإذا اختير انقلبت إلى الحال الطبيعيّة —
+       إعدادٌ يسارًا ومساهماتٌ يمينًا. وهي عتبةٌ بلا فائدة: المنتقي أوّلُ حقلٍ في
+       الإعداد على كلّ حال، فالعتبةُ تعرض ما سيُعرض ثمّ تُعيد بناء الصفحة.
+       فيُفتح البابُ على الحال الطبيعيّة وحدَها: الإعدادُ تامٌّ من أوّله، والقائمةُ
+       على اليمين — خاويةً حتّى يُختار دكتور، وذاك خبرٌ صادقٌ لا عتبة.
+       (وحكمُ «لا دكتورَ ⇒ لا مساهمةَ تُصنع» باقٍ في موضعه من النشر.) */
   }
 
   function openNookPicker(sec) {
@@ -21427,8 +23763,6 @@
         : sec === 'abs' ? absValues(nookEntry)
         : sec === 'grade' ? gradeValues(nookEntry)
         : infoValues(nookEntry);
-      pickPub = !!(nookPicks(nookEntry) || {})[
-        sec === 'doc' ? 'docPub' : sec === 'abs' ? 'absPub' : sec === 'grade' ? 'gradePub' : 'infoPub'];
     }
     nookPicker.hidden = false;   /* قبل الرسم: قياس ارتفاع الحقول يحتاج تخطيطًا حيًّا */
     renderPickList();
@@ -21444,7 +23778,16 @@
       : (b.ts || 0) - (a.ts || 0));
     if (pickSec === 'doc') {
       const dr = pickDraft.dr ? docOf(nCode, pickDraft.dr) : null;
-      const posts = dr ? (dr.posts || []).slice().sort(byPickSort) : [];
+      /* ===== ولا قائمةَ قبل أن يُختار دكتور =====
+         المساهماتُ ههنا **عن دكتورٍ بعينه**، فقبل اختياره لا مجموعةَ تُعرض أصلًا —
+         ولا شريطَ فرزٍ لصفرٍ يُفرز، ولا «لا مساهمات» تُقرأ حكمًا على دكتورٍ لم
+         يُسمَّ بعد. فيُقال ما هو صادق: ما الذي يظهر ههنا، ومن أين يُختار. */
+      if (!dr) {
+        $('#pk-head').innerHTML = '';
+        $('#pk-list').innerHTML = `<p class="pk-lock">${esc(T().pkDocLock)}</p>`;
+        return;
+      }
+      const posts = (dr.posts || []).slice().sort(byPickSort);
       $('#pk-head').innerHTML = pickSortBar(posts.length);
       $('#pk-list').innerHTML = posts.length
         ? posts.map(p => pkRowHTML(
@@ -21485,115 +23828,12 @@
         }).join('')
       : `<p class="pk-none">${T().noPosts}</p>`;
   }
-  /* الإغلاق يطرح المسوّدة ويعيد رسم القُمرة بما هو محفوظ فعلًا */
+  /* الإغلاق يطرح المسوّدة ويعيد الرسم — وما كُتب بلغ مساهمتَك قبل الإغلاق */
   const closeNookPicker = () => {
-    nookPicker.hidden = true; pickSec = null; pickDraft = null; pickPub = false;
+    nookPicker.hidden = true; pickSec = null; pickDraft = null;
     if (nookEntry) openNook(nookEntry);
   };
-  /* الحفظ: المسوّدة تصير الاختيار المعتمد — ومع «عام» يُنشر التشكيل مساهمةً لي في «المادة» */
-  const savePicker = () => {
-    if (nookEntry && pickDraft) {
-      const bag = nookPicks(nookEntry, true);
-      if (pickSec === 'doc') {
-        bag.docV = Object.assign({}, pickDraft, { hours: (pickDraft.hours || []).map(h => Object.assign({}, h)) });
-        publishDocComposition(bag);
-      } else if (pickSec === 'abs') {
-        bag.absV = Object.assign({}, pickDraft);
-        publishAbsComposition(bag);
-      } else if (pickSec === 'grade') {
-        bag.gradeV = { method: pickDraft.method || 'avg', items: (pickDraft.items || []).map(x => Object.assign({}, x)) };
-        publishGradeComposition(bag);
-      } else {
-        bag.infoV = Object.assign({}, pickDraft);
-        delete bag.info;   /* النموذج المرجعي القديم لم يعد مستعملًا */
-        publishComposition(bag);
-      }
-      save();
-    }
-    closeNookPicker();
-  };
-  /* النشر: نسخة من التشكيل تُكتب في مساهمتي بالقناة — وإلغاء العموم يسحب ما نُشر منه */
-  function publishComposition(bag) {
-    const code = nookCode(nookEntry);
-    const d = pickDraft || {};
-    if (pickPub && filledCount(d)) {
-      const mp = myPost(code, 'info');
-      mp.data = Object.assign({}, mp.data, {
-        book: d.book || '', bookImg: d.bookImg || '',
-        type: d.type || '', lang: d.lang || '', rel: d.rel || 0, desc: d.desc || '',
-        topics: (d.topics || []).map(x => Object.assign({}, x)),
-      });
-      mp.ts = Date.now();
-      bag.infoPub = 1;
-    } else if (bag.infoPub) {
-      /* كان منشورًا وصار خاصًّا: تُحذف مساهمتي التي وُلدت من التشكيل */
-      const arr = postsOf(code, 'info');
-      const mi = arr.findIndex(x => x.me);
-      if (mi >= 0) arr.splice(mi, 1);
-      bag.infoPub = 0;
-    }
-  }
-  /* نشر تشكيل «الدرجة»: يصير مساهمتي في قناتها */
-  function publishGradeComposition(bag) {
-    const code = nookCode(nookEntry);
-    const v = pickDraft || {};
-    if (pickPub && (v.items || []).some(x => x.pct)) {
-      const mp = myPost(code, 'grade');
-      mp.data = Object.assign({}, mp.data, {
-        method: v.method || 'avg',
-        items: (v.items || []).map(x => Object.assign({}, x)),
-      });
-      mp.ts = Date.now();
-      bag.gradePub = 1;
-    } else if (bag.gradePub) {
-      const arr = postsOf(code, 'grade');
-      const mi = arr.findIndex(x => x.me);
-      if (mi >= 0) arr.splice(mi, 1);
-      bag.gradePub = 0;
-    }
-  }
-  /* نشر تشكيل «الغياب والتأخير»: يصير مساهمتي في قناته */
-  function publishAbsComposition(bag) {
-    const code = nookCode(nookEntry);
-    const v = pickDraft || {};
-    if (pickPub && absCompleteness(v).filled) {
-      const mp = myPost(code, 'abs');
-      mp.data = Object.assign({}, mp.data, {
-        free: +v.free || 0, dedFrom: +v.dedFrom || 0, dedAmt: +v.dedAmt || 0, dn: +v.dn || 0, late: +v.late || 0,
-      });
-      mp.ts = Date.now();
-      bag.absPub = 1;
-    } else if (bag.absPub) {
-      const arr = postsOf(code, 'abs');
-      const mi = arr.findIndex(x => x.me);
-      if (mi >= 0) arr.splice(mi, 1);
-      bag.absPub = 0;
-    }
-  }
-  /* نشر تشكيل «الدكتور»: يصير مساهمتي عن ذلك الدكتور بعينه */
-  function publishDocComposition(bag) {
-    const code = nookCode(nookEntry);
-    const v = pickDraft || {};
-    const di = doctorsOf(code).findIndex(x => x.id === v.dr);
-    if (pickPub && di >= 0 && docCompleteness(v).filled) {
-      const mp = myDrPost(code, di);
-      mp.data = Object.assign({}, mp.data, {
-        e: v.e || '', bld: v.bld || '', room: v.room || '',
-        hours: (v.hours || []).map(h => Object.assign({}, h)),
-        teach: +v.teach || 0, grade: +v.grade || 0, d: v.d || '',
-      });
-      mp.ts = Date.now();
-      bag.docPub = 1;
-    } else if (bag.docPub) {
-      doctorsOf(code).forEach(dr => {
-        const mi = (dr.posts || []).findIndex(x => x.me);
-        if (mi >= 0) dr.posts.splice(mi, 1);
-      });
-      bag.docPub = 0;
-    }
-  }
 
-  /* Esc = إلغاء (تملأ المساحة النافذة فلا مكان «خارجها» يُنقر) */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !nookPicker.hidden) closeNookPicker();
   });
@@ -21601,9 +23841,25 @@
   nookPicker.addEventListener('click', e => {
     /* النقر خارج البطاقة = إلغاء (كالمنبثقات الأخرى) */
     if (e.target === nookPicker) { closeNookPicker(); return; }
-    if (e.target.closest('#pk-cancel')) { closeNookPicker(); return; }
-    if (e.target.closest('#pk-save')) { savePicker(); return; }
-    if (e.target.closest('#pk-pub')) { pickPub = !pickPub; renderPickSide(); return; }
+    /* ===== الحالُ تُختار من قائمةٍ لا تدور بالضغط =====
+       الدورانُ يُخفي الخياراتِ ويجعل «عامّة» تمرّ في الطريق إلى «خاصّة» — ولو
+       لحظةً. فتُفتح قائمةُ المكتبة نفسُها: ثلاثةٌ بأيقوناتها وأسمائها، يُقصد
+       المرادُ منها قصدًا. ولا تُحذف مساهمةٌ عند أيّ حال: الخاصُّ محفوظٌ لك. */
+    if (e.target.closest('#pk-pst')) {
+      const code = nookCode(nookEntry);
+      const sec = pickSec;
+      openPstAsk(false, {
+        p: pkMine(), code, sec,
+        make: () => {
+          if (sec !== 'doc') return myPost(code, sec);
+          /* ولا دكتورَ مختار ⇒ لا مأوى للمتن، فلا تُصنع مساهمةٌ معلَّقة */
+          const di = doctorsOf(code).findIndex(x => x.id === (pickDraft || {}).dr);
+          return di < 0 ? null : myDrPost(code, di);
+        },
+        after: () => renderPickSide(),
+      });
+      return;
+    }
     /* قائمة الفرز داخل المنتقي (معالج المكتبة يعيش في ‎.cm-panel‎ فلا يصل هنا) */
     const sb = e.target.closest('#pk-sortbtn');
     if (sb) {
@@ -21644,7 +23900,21 @@
       if (key === 'pklang') setVals(x => { x.lang = val; });
       else if (key === 'pktype') setVals(x => { x.type = val; });
       else if (key === 'pkgm') setVals(x => { x.method = val; });
-      else if (key === 'pkdr') { setVals(x => { x.dr = val; }); renderPickList(); }   /* تغيّر الدكتور ⇐ تتغيّر قائمة اليمين */
+      /* ===== وتبديلُ الدكتور ليس تبديلَ حقل =====
+         متنُ المربّع صار يسكن مساهمةَ الدكتور نفسِه. فلو مرّ التبديلُ بـ‎setVals‎
+         لَكُتب متنُ الدكتور السابق في مساهمة الجديد — ينتقل انطباعُك في فلانٍ
+         إلى فلان. فيُثبَّت الاختيارُ في المربّع، ثمّ **تُقرأ المسوّدةُ من جديد**
+         من مساهمة من اخترتَ. وتتبدّل قائمةُ اليمين معه. */
+      else if (key === 'pkdr') {
+        const bag = nookPicks(nookEntry, true);
+        bag.docDr = val || '';
+        /* وما انتظر في الجِراب من ملفّ السِّلَّبس ينتقل إلى من اخترتَ — مرّةً */
+        if (typeof docTake === 'function') docTake(nookEntry, bag.docDr);
+        pickDraft = docValues(nookEntry);
+        save();
+        renderPickSide();
+        renderPickList();
+      }
       else if (key.indexOf('pkday-') === 0) {
         const i = +key.slice(6);
         setVals(x => { if (x.hours[i]) x.hours[i].day = +val; });
@@ -21753,20 +24023,40 @@
      وما زاد عليه لا يُرى.
 
      وبابٌ واحدٌ لهما بعد اليوم: البابان يفترقان أوّلَ تعديل. */
+  /* ============================================================
+     قصُّ الغلاف — ولا مخرجَ صامتًا فيه
+     ============================================================
+     كانت أربعةُ مخارجَ تسكت: نوعٌ غيرُ صورة، وقراءةٌ بلا معالجِ فشل، و‎onerror‎
+     خاويةٌ للصورة، ورسمٌ قد يُلقي. فمن اختار ملفًا لم يقع شيءٌ ولم يُقل شيء —
+     «الصورة ما تحمل». وذهبت في البحث عنها ساعةٌ لأنّ الصمتَ لا يُتتبَّع.
+     فصار كلُّ سقوطٍ يُسمّي نفسَه: يُصاح به ويُسجَّل في دفتر الإقلاع. */
   function coverFit(file, done) {
-    if (!file || !/^image\//.test(file.type || '')) return;
+    const bad = why => {
+      bootMark('img:' + why);
+      if (typeof toast === 'function') toast(T().imgFail || 'تعذّرت الصورة');
+      console.warn('coverFit: ' + why, file && file.name, file && file.type, file && file.size);
+    };
+    if (!file) return bad('no-file');
+    if (!/^image\//.test(file.type || '')) return bad('not-image:' + (file.type || '؟'));
     const rd = new FileReader();
+    rd.onerror = () => bad('read');
     rd.onload = () => {
       const im = new Image();
+      im.onerror = () => bad('decode');
       im.onload = () => {
-        const MAX = 320, k = Math.min(1, MAX / Math.max(im.width, im.height));
-        const cv = document.createElement('canvas');
-        cv.width = Math.round(im.width * k) || 1; cv.height = Math.round(im.height * k) || 1;
-        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
-        done(cv.toDataURL('image/jpeg', .82));
+        try {
+          const MAX = 320, k = Math.min(1, MAX / Math.max(im.width, im.height));
+          const cv = document.createElement('canvas');
+          cv.width = Math.round(im.width * k) || 1; cv.height = Math.round(im.height * k) || 1;
+          const cx = cv.getContext('2d');
+          if (!cx) return bad('canvas');
+          cx.drawImage(im, 0, 0, cv.width, cv.height);
+          const url = cv.toDataURL('image/jpeg', .82);
+          if (!url || url.length < 512) return bad('tiny:' + (url ? url.length : 0));
+          bootMark('img:ok:' + url.length);
+          done(url);
+        } catch (e) { bad('draw:' + ((e && e.message) || '?')); }
       };
-      /* وصورةٌ لا تُفكّ تُترك ولا تُخزَّن: خيرٌ من غلافٍ مكسورٍ في المكتبة */
-      im.onerror = () => {};
       im.src = rd.result;
     };
     rd.readAsDataURL(file);
@@ -21935,7 +24225,62 @@
   function setVals(mut, quiet) {
     const v = pickDraft || (pickDraft = infoValues(nookEntry));
     mut(v);
+    pkBond();                      /* ولا زرَّ حفظ: ما كُتب صار مساهمةً في حينه */
     if (!quiet) renderPickSide();
+  }
+
+  /* ============================================================
+     العقد: المسوّدة تُكتب في مساهمتك في حينها
+     ============================================================
+     ‎setVals‎ قمعٌ واحدٌ يمرّ به كلُّ تبديلٍ في المربّع، فالعقدُ ههنا سطرٌ واحد.
+
+     ===== والكتابةُ فورًا، والحفظُ بعد سكون =====
+     ‎save()‎ يُسلسل الحالةَ كلَّها؛ ونداؤه مع كلّ حرفٍ يُثقل. فالمتنُ يبلغ
+     المساهمةَ في اللحظة (فتراه المكتبةُ فورًا)، وحفظُ الدرج يُؤجَّل ربعَ ثانية
+     بعد آخر حرف. */
+  let pkSaveT = 0;
+  function pkBond() {
+    if (!nookEntry || !pickDraft) return;
+    const code = nookCode(nookEntry);
+    const v = pickDraft;
+    let mp = null;
+
+    if (pickSec === 'doc') {
+      /* واختيارُ الدكتور شأنُ الترم لا شأنُ المساهمة */
+      const bag = nookPicks(nookEntry, true);
+      if (bag.docDr !== (v.dr || '')) bag.docDr = v.dr || '';
+      const di = doctorsOf(code).findIndex(x => x.id === v.dr);
+      if (di < 0) return;                                  /* لا دكتورَ بعد: لا مأوى للمتن */
+      mp = myDrPost(code, di);
+      mp.data = Object.assign({}, mp.data, {
+        e: v.e || '', bld: v.bld || '', room: v.room || '',
+        hours: (v.hours || []).map(h => Object.assign({}, h)),
+        teach: +v.teach || 0, grade: +v.grade || 0, d: v.d || '',
+      });
+    } else if (pickSec === 'abs') {
+      mp = myPost(code, 'abs');
+      mp.data = Object.assign({}, mp.data, {
+        free: +v.free || 0, dedFrom: +v.dedFrom || 0, dedAmt: +v.dedAmt || 0,
+        dn: +v.dn || 0, late: +v.late || 0,
+      });
+    } else if (pickSec === 'grade') {
+      mp = myPost(code, 'grade');
+      mp.data = Object.assign({}, mp.data, {
+        method: v.method || 'avg',
+        items: (v.items || []).map(x => Object.assign({}, x)),
+      });
+    } else {
+      mp = myPost(code, 'info');
+      mp.data = Object.assign({}, mp.data, {
+        book: v.book || '', bookImg: v.bookImg || '',
+        type: v.type || '', lang: v.lang || '', rel: v.rel || 0, desc: v.desc || '',
+        topics: (v.topics || []).map(x => Object.assign({}, x)),
+      });
+    }
+    /* والحالُ الافتراضيّةُ خاصّة: ما لم يُنشر صراحةً لا يبلغ أحدًا */
+    if (mp && !mp.st) mp.st = 'priv';
+    clearTimeout(pkSaveT);
+    pkSaveT = setTimeout(save, 250);
   }
   /* مساهمة بمعرّفها داخل البند الحالي (قناة المادة · أو مساهمات الدكتور المختار) */
   function pickPostById(pid) {
@@ -21989,9 +24334,8 @@
       : pickSec === 'grade' ? gradeCompleteness(pickDraft)
       : { filled: filledCount(pickDraft), total: INFO_SLOTS.length };
     const filled = cc.filled, total = cc.total;
-    const done = filled >= total && (pickSec !== 'doc' || !!pickDraft.dr);
-    const btn = wrap.querySelector('#pk-save');
-    if (btn) { btn.disabled = !done; btn.title = done ? T().saveBtn : T().saveNeedAll; }
+    /* ولا زرَّ يُعطَّل: البنودُ الناقصةُ تُحفظ كما تُحفظ التامّة — والحلقةُ
+       تقول كم بقي، فلا حاجةَ إلى منعٍ يُحبَط به من يكتب على مهل */
     const ring = wrap.querySelector('.cc-liquid');
     if (ring) {
       const pct = total ? Math.round(filled / total * 100) : 0;
@@ -22134,9 +24478,7 @@
       const im = chip.querySelector('.pchip-bk img');
       const nm = chip.querySelector('b');
       const name = nm ? nm.textContent.trim() : '';
-      const cover = im
-        ? `<span class="bk bk--lg"><img src="${im.getAttribute('src')}" alt=""></span>`
-        : phBook(cmCode, true);
+      const cover = bookHTML(cmCode, im ? im.getAttribute('src') : '', { size: 'lg' });
       $('#cmt-body').innerHTML = `<div class="cmt-book">
           <div class="cmt-book__cover">${cover}</div>
           <!-- زر النسخ أوّل العناصر ⇐ يقع أقصى اليمين، والاسم يساره -->
@@ -22186,7 +24528,14 @@
       setTimeout(() => { cp.classList.remove('is-copied'); cp.title = cp.dataset.t || T().copyName; }, 1600);
       return;
     }
-    if (!e.target.closest('.cmt-chip, .cmt-book, .cmt-topics')) cmtModal.hidden = true;
+    /* ===== ولا تُغلق إلّا بنقرةٍ خارج الورقة =====
+       كان الشرطُ قائمةَ أسماءِ سُكّانها (‎.cmt-chip, .cmt-book, .cmt-topics‎): من
+       نقر داخل واحدٍ منها بقيت، ومن نقر في غيرها أُغلقت. فكلُّ ساكنٍ جديدٍ يُغلقها
+       بأيّ نقرةٍ فيه حتّى يُكتب اسمُه ههنا — وقد وقع بورقة اقتراح الدكتور: كتابةُ
+       حرفٍ في حقلها تُغلقها.
+       فالحكمُ بالموضع لا بالاسم: تُغلق إن وقعت النقرةُ على الصدَفة نفسِها أو على
+       فراغ التوسيط حولها. فيدخلها ساكنٌ جديدٌ بلا أن يُذكر ههنا. */
+    if (e.target === cmtModal || e.target === e.currentTarget.firstElementChild) cmtModal.hidden = true;
   });
 
   /* ---------- بروفايل الحساب: صورة + اسم أسفل الشريط الجانبي · نقره يفتح صفحة الحساب ---------- */
@@ -22384,11 +24733,36 @@
      ‎state.profile.password‎ كان يحملها نصًّا. ومع الخادم لا معنى له — والتجزئةُ
      هناك. فيُمحى عند أوّل دخولٍ ناجح. */
   const AUTH_SRV = /^https?:/.test(location.protocol);
+  /* ============================================================
+     ONE DOOR TO OUR OWN API
+     ============================================================
+     Every call to our server goes through here, so "who am I acting as" is
+     decided once instead of at twenty-two call sites.
+
+     The admin page marks its requests `x-as: site`. The server then reads
+     the site's login (`asid`) instead of the reader's (`sid`). That is what
+     stopped the admin page from signing the reader out of the main site:
+     the two logins now live in separate cookies and never overwrite each
+     other. Signing out is the only thing that ends a session.
+
+     Two endpoints never get the mark:
+       /api/admin    — that authority belongs to your own account, not the
+                       site's account (which is deliberately not an admin)
+       /api/catalog  — it has its own owner and its own rules
+     ============================================================ */
+  const apiFetch = (url, opt) => {
+    const o = Object.assign({ credentials: 'same-origin' }, opt || {});
+    if (ADMIN && !/\/api\/(admin|catalog)/.test(String(url))) {
+      o.headers = Object.assign({}, o.headers, { 'x-as': 'site' });
+    }
+    return fetch(url, o);
+  };
+
   const authURL = p => (ASSET_BASE ? new URL('api/auth/' + p, ASSET_BASE).href
                                    : location.origin + '/api/auth/' + p);
 
   async function authCall(p, data) {
-    const r = await fetch(authURL(p), {
+    const r = await apiFetch(authURL(p), {
       method: 'POST', credentials: 'same-origin',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data || {}),
@@ -22514,7 +24888,7 @@
       const nm = (state.profile.name || '').trim();
       if (!nm || nm === profLast) return;
       try {
-        const r = await fetch(authURL('me'), {
+        const r = await apiFetch(authURL('me'), {
           method: 'PATCH', credentials: 'same-origin',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ name: nm }),
@@ -22535,7 +24909,7 @@
     try {
       const url = await medUp(blob);
       if (!url) return;
-      const r = await fetch(authURL('me'), {
+      const r = await apiFetch(authURL('me'), {
         method: 'PATCH', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ img: url }),
@@ -22565,9 +24939,7 @@
      لو خُتم ‎me:true‎ لصار عندي مساهمتان لبندٍ واحدٍ إن كان أصلي في درجي —
      ونموذجُ الموقع مساهمةٌ واحدةٌ لكلّ بند. فيُطرح الوافدُ إن كان لي أصلٌ،
      ويُختم إن لم يكن (فهو نسختي الوحيدة، جاءت من الخادم). */
-  const SITE_NAMES = ['أكاديميا', 'academia'];
-  const SITE_UID = 'u-academia';
-  const SITE_MAIL = 'site@academia.local';
+  /* SITE_UID / SITE_NAMES / SITE_MAIL live in the OWNERSHIP block (01.js) */
 
   /* ---------- وهويّةُ الموقع لا تبقى في بروفايلِ زائر ----------
      ‎authTake‎ تُلبس البروفايلَ ما ردّه الخادم — الاسمَ والبريد. فيومَ اتّخذ
@@ -22588,47 +24960,11 @@
     return true;
   }
 
+  /* Rule 3 again, under its old name so the ten call sites keep working.
+     It used to hold its own copy of the ownership rules — three of them,
+     each slightly different. Now it just refreshes the cached answer. */
   function srvClaim() {
-    const me = state.uid;
-    if (!me) return;
-    /* ===== ومن دخل بحساب الموقع ملك ما يحمل اسمَه =====
-       أغلفةُ الكتب وبطائقُ البداية بذورٌ **محلّيّة** كُتبت بـ‎me:false‎ واسمِ
-       «أكاديميا» منذ اليومِ الأوّل — لم تبلغ خادمًا قطّ، فلا ‎uid‎ لها ولا ‎srv‎،
-       ولم تكن تُحرَّر أبدًا. وذاك كان صوابًا يومَ لم يكن للموقع حساب.
-       فلمّا صار له حسابٌ يُدخَل به، صار ما يحمل اسمَه ملكًا لمن دخل به. */
-    const isSite = me === SITE_UID;
-    let fixed = 0;
-    Object.keys(state.cinfo || {}).forEach(code => {
-      const ps = (state.cinfo[code] || {}).posts || {};
-      Object.keys(ps).forEach(sec => {
-        const arr = ps[sec];
-        if (!Array.isArray(arr)) return;
-        let hasMineNow = arr.some(p => p && p.me);
-        for (let i = arr.length - 1; i >= 0; i--) {
-          const p = arr[i];
-          if (!p || p.me) continue;
-          const hasMine = hasMineNow;
-          /* وافدٌ من الخادم يحمل ‎uid‎ي */
-          const mineSrv = p.srv && p.uid === me;
-          /* أو بذرةٌ محلّيّةٌ باسم الموقع، وأنا داخلٌ بحسابه */
-          const mineSeed = isSite && !p.srv && p.u && SITE_NAMES.indexOf(p.u.name) > -1;
-          /* أو محلّيّةٌ نشرتُها أنا بهذا الحساب وعليها ختمُه — والموقعُ الأساسيُّ
-             ينزع عنها ‎me‎ لأنّها ليست له، فتُردّ ههنا إلى صاحبها.
-             ولا تُطرح كما يُطرح الوافد: هذي أصلٌ لا نسخةٌ عنه. */
-          const mineOwn = !p.srv && p.uid && p.uid === me;
-          if (!mineSrv && !mineSeed && !mineOwn) continue;
-          /* ===== ولا تصير لي اثنتان في بندٍ واحد =====
-             نموذجُ الموقع مساهمةٌ واحدةٌ لكلّ صاحبٍ في كلّ بند، و‎myPost‎ تأخذ
-             أوّلَ ما تجد — فلو مُلّكت ثانيةٌ لَحُرِّرت واحدةٌ وأُهملت أختُها بلا
-             خبر. فإن كان لي أصلٌ ههنا: يُطرح الوافدُ (نسخةٌ من الخادم لأصلي)،
-             وتُترك البذرةُ المحلّيّةُ كما هي (محتوًى آخرُ لا نسخةٌ منّي). */
-          if (hasMine) { if (mineSrv) { arr.splice(i, 1); fixed++; } continue; }
-          delete p.srv; p.me = true; fixed++;
-          hasMineNow = true;
-        }
-      });
-    });
-    if (fixed) { save(); if (cmCode && typeof renderCmSection === 'function') renderCmSection(); }
+    if (refreshOwnership() && cmCode && typeof renderCmSection === 'function') renderCmSection();
   }
 
   /* ===== المصالحة في الإقلاع: مَن يقول الخادمُ إنّي؟ ===== */
@@ -22688,6 +25024,35 @@
      ‎save()‎ تُنادى عشراتِ المرّات في الدقيقة. فيُؤجَّل الدفعُ ويُقاس بتجزئةٍ
      رخيصة: ما لم يتبدّل متنُه لا يُرفع ثانيةً. */
   const SRV_ON = () => /^https?:/.test(location.protocol);
+  /* Rule 5: one login cookie, two identities.
+     The admin page must be signed in as the site account; the main site
+     must be signed in as whoever the reader signed in as. Opening one page
+     can silently replace the other's session, so we check before writing.
+     Asked at most once every few seconds — this sits in the save path. */
+  let sesUid = null, sesAt = 0;
+  async function fixSession() {
+    const want = actingAs();
+    if (!want) return false;                       /* nobody signed in */
+    if (sesUid === want && Date.now() - sesAt < 5000) return false;
+    let who = '';
+    try {
+      const r = await apiFetch(authURL('me'), { credentials: 'same-origin', cache: 'no-store' });
+      if (r.ok) who = ((await r.json()).user || {}).id || '';
+    } catch (e) { return false; }                  /* offline: leave it alone */
+    sesUid = who; sesAt = Date.now();
+    if (who === want) return false;                /* already right */
+    /* Only the admin page can repair its own session, and only into the
+       site account. A reader whose session went missing must sign in. */
+    if (!ADMIN) { bootMark('ses:mismatch'); return false; }
+    try {
+      const r = await apiFetch(authURL('site'), { method: 'POST', credentials: 'same-origin' });
+      if (!r.ok) { bootMark('ses:fail:' + r.status); return false; }
+    } catch (e) { return false; }
+    sesUid = want; sesAt = Date.now();
+    bootMark('ses:fixed');
+    return true;                                   /* fixed — worth retrying */
+  }
+
   const postsURL = q => (ASSET_BASE ? new URL('api/posts' + (q || ''), ASSET_BASE).href
                                     : location.origin + '/api/posts' + (q || ''));
 
@@ -22722,16 +25087,49 @@
      مهما أُعيد. فلو خُلطا لَبقيت المساهمةُ تُحاول إلى الأبد بلا كلمة. */
   let medBig = false;
 
+  /* ============================================================
+     وحالُ المساهمة عند الدفع — ولا يُخفَّض ما جاء من الخادم منشورًا
+     ============================================================
+     ‎st: p.st || 'priv'‎ احتياطٌ صحيحٌ لمساهمةٍ **وُلدت هنا**: ما لم يُنشر صراحةً
+     لا يبلغ أحدًا. لكنّه خطأٌ لمساهمةٍ **جاءت من الخادم**: الخادمُ لا يردّ للناس
+     إلّا ‎pub‎، فغيابُ ‎st‎ عنها نسيانٌ في الطريق لا قرارُ صاحبها. فكان الاحتياطُ
+     يخفضها إلى «خاصّة» فتغيب عن الناس ويذهب غلافُها.
+     فالافتراضُ يتبع المنشأ: ما جاء من الخادم منشورٌ، وما وُلد هنا خاصّ. */
+  const stOf = p => p.st || ((p.srv || p.srvH) ? 'pub' : 'priv');
+
+
+  /* ===== ورفعُ الصورة يقول لِمَ سقط =====
+     كان يردّ عدمًا في كلّ حال: انتهاءُ جلسةٍ ونوعٌ مرفوضٌ ونفادُ حصّةٍ وانقطاعُ
+     شبكةٍ سواء. فلا المستخدمُ يعرف ولا نحن. فصار يردّ سببًا يُقال بلغته. */
+  const MED_SAY = {
+    auth: 'انتهت جلستك — سجّل الدخول ثمّ أعِد الرفع',
+    type: 'نوعُ الصورة غير مدعوم',
+    quota: 'بلغتَ حصّةَ الصور لليوم',
+    'too-big': 'الصورة أكبر من الحدّ',
+    net: 'تعذّر الوصول للخادم',
+  };
   async function medUp(blob) {
-    const r = await fetch((ASSET_BASE ? new URL('api/media', ASSET_BASE).href
-                                      : location.origin + '/api/media'), {
-      method: 'POST', credentials: 'same-origin',
-      headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
-    });
-    if (r.status === 413) { medBig = true; return null; }
-    if (!r.ok) return null;
+    let r = null;
+    try {
+      r = await apiFetch((ASSET_BASE ? new URL('api/media', ASSET_BASE).href
+                                  : location.origin + '/api/media'), {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
+      });
+    } catch (e) { bootMark('med:net'); return null; }
+    if (r.status === 413) { medBig = true; bootMark('med:413'); return null; }
+    if (!r.ok) {
+      let j = null;
+      try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
+      const why = (j && j.error) || ('http' + r.status);
+      bootMark('med:' + why);
+      if (typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
+      return null;
+    }
     const j = await r.json().catch(() => null);
-    return j && j.url ? j.url : null;
+    if (!j || !j.url) { bootMark('med:noUrl'); return null; }
+    bootMark('med:ok:' + (j.size | 0));
+    return j.url;
   }
 
   const dataToBlob = d => {
@@ -22850,7 +25248,9 @@
   }
 
   /* ---------- الدفع ---------- */
-  async function srvPush(p, code, sec) {
+  /* عدّادُ ‎429‎ ومؤقّتُ إعادتها — تراخٍ يزيد بكلّ ردّ ولا يتجاوز ربعَ ساعة */
+  let srv429 = 0, srv429T = 0;
+  async function srvPush(p, code, sec, retried) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
     /* ===== وتُرفع المسوّدةُ كما يُرفع المنشور =====
        كان الدفعُ يشترط ‎st === 'pub'‎ ويحذف من الخادم ما سواه. وذاك صوابٌ يومَ
@@ -22874,25 +25274,47 @@
        فيه — تُنسب مساهمةُ الموقع إلى طالبٍ لم يكتبها. ومن نشرها يُكتب عليها. */
     if (p.uid && state.uid && p.uid !== state.uid) return;
 
+    /* Rule 5: make the cookie match who we act as, before anything is sent */
+    if (!retried) await fixSession();
+
     /* والصورُ تُجهَّز أوّلًا: ما لا يسافر يُرفع ويصير عنوانًا */
     medBig = false;
     const prepped = await medPrep(p.data);
     if (prepped === null) {
       /* وصورةٌ أكبرُ من ميجا لا يُصلحها إعادةُ محاولة — تُقال مرّةً وتُقيَّد */
       if (medBig) { p.srvBig = rawH; save(); toast(T().srvTooBig + tooBigWhere(code)); }
-      return;                                   /* وإلّا فتعثّرُ شبكةٍ: يُعاد لاحقًا */
+      /* ===== ولا يُدفع متنٌ بلا صورته =====
+         جرّبتُ أن أدفع النصَّ وأترك موضعَ الصورة خاويًا لئلّا يضيع ما كُتب معها.
+         وكان أسوأ: الخادمُ يصير **بلا الصورة**، ثمّ يجذب المتصفّحُ فيحلّ الوافدُ
+         محلَّ ما عنده — فتختفي الصورةُ بعد أن ظهرت لحظة. وهو ما رآه صاحب الموقع.
+         فالدفعُ يقف كلُّه حتّى ترتفع الصورة: الدرجُ يحفظها ‎data:‎ وتُعاد المحاولة.
+         والفشلُ يُقال (‎medUp‎ تصيح بسببه) فلا يقف صامتًا. */
+      /* ===== ولا تقف صامتةً =====
+         الوقوفُ صحيحٌ (لا يُدفع متنٌ بلا صورته)، لكنّه إن لم يُقَل ظنّ صاحبُه
+         أنّ كلَّ شيءٍ محفوظ. و‎medUp‎ تصيح بسببها إن عرفته؛ فإن لم تعرفه — أو
+         سقط الرفعُ قبل أن يبلغها — قيلت كلمةٌ واحدةٌ ههنا لا تتكرّر مع كلّ دفعة. */
+      p.imgPend = 1;
+      bootMark('push:imgWait');
+      /* ولا صياحان لعلّةٍ واحدة: الكِبَرُ قيل آنفًا بلفظه */
+      if (!p.imgSaid && !medBig) {
+        p.imgSaid = 1;
+        if (typeof toast === 'function') toast(T().imgWait || 'الصورة لم تُرفع بعد — محفوظة في متصفّحك');
+      }
+      return;
     }
+    if (p.imgPend) { delete p.imgPend; delete p.imgSaid; }   /* وصلت الصورةُ أخيرًا */
     /* ===== وتاريخُها يُثبَّت لا يُولَد في كلّ دفعة =====
        كان ‎ts: p.ts || Date.now()‎ — فمساهمةٌ بلا تاريخ (وهي نادرةٌ لكنّها تقع)
        يختلف متنُها في كلّ مرّة، فلا تطابق بصمتُها بصمةَ ما رُفع، فتُرفع أبدًا مع
        كلّ حفظ. فيُكتب التاريخُ عليها مرّةً ثمّ يثبت. */
     if (!p.ts) p.ts = Date.now();
-    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts,
-                                 st: p.st || 'priv', data: prepped });
+    /* ويُصرَّح بصاحبها: الخادمُ يطابقه بالجلسة فلا يبدّله الكوكيُّ بصمت */
+    const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, uid: p.uid || '',
+                                 st: stOf(p), pin: p.pin ? 1 : 0, data: prepped });
     const h = srvHash(body);
     if (p.srvH === h) return;                  /* لم يتبدّل شيء */
     try {
-      const r = await fetch(postsURL(), {
+      const r = await apiFetch(postsURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' }, body: body,
       });
@@ -22913,10 +25335,54 @@
         srvPushSoon();
         return;
       }
+      /* ===== و‎403‎: هذي ليست لِمن هو داخلٌ الآن =====
+         مساهمةٌ كُتبت في اللوحة باسم الموقع، والجلسةُ الآن جلسةُ طالب. فلا تُرفع
+         باسمه — تُترك في الدرج حتّى تعود جلستُها. ولا تُعاد المحاولةُ في كلّ حرف:
+         تُقيَّد ببصمة المتن كما يُقيَّد الكِبَر، وتُفكّ إن تبدّل المتنُ أو الهويّة. */
+      /* Rule 5. The server says this is not ours to write. That means the
+         login cookie is not who this page acts as — the admin page and the
+         main site share one cookie, so opening one can log the other out.
+         Fix the session and try once more; never latch it shut. */
+      if (r.status === 403) {
+        bootMark('push:403');
+        if (!retried && await fixSession()) return srvPush(p, code, sec, true);
+        return;
+      }
+      /* ===== و‎429‎ ليست بابًا مسدودًا =====
+         حدُّ الطلبات لدينا ‎120‎ دفعةً في الساعة لكلّ عنوان. وكان الردُّ يُسجَّل
+         في دفتر الإقلاع ثمّ يُرجع صامتًا: المساهمةُ بلا بصمةٍ فتبقى في الدرج،
+         ولا شيءَ يُعيد الدفعَ حتّى يقع حفظٌ آخر — وقد لا يقع. فتقف البيانات
+         عند حدٍّ مؤقّتٍ وقوفًا دائمًا، ولا يُقال لصاحبها شيء. وقد وقع: قائمةُ
+         الدكاترة لم تصل، والسببُ ‎PUT … 429‎ في الطرفيّة لا عطبٌ في الطريق.
+         فتُعاد المحاولةُ بتراخٍ متزايد، وتُقال مرّةً واحدةً لا مع كلّ دفعة. */
+      if (r.status === 429) {
+        bootMark('push:429');
+        srv429 += 1;
+        if (srv429 === 1 && typeof toast === 'function') toast(T().srvBusy);
+        clearTimeout(srv429T);
+        srv429T = setTimeout(srvPushSoon, Math.min(15 * 60000, 60000 * srv429));
+        return;
+      }
       if (!r.ok) { bootMark('push:' + r.status); return; }
+      srv429 = 0;
       p.srvH = h;
-      if (state.uid) p.uid = state.uid;        /* ومن نشرها يُكتب عليها */
+      /* وبصمةُ المتن كما بلغ الخادمَ: بها يُعرف ما تبدّل بعده فلا يُسقط من الدرج */
+      try { p.srvD = srvHash(JSON.stringify(p.data || {})); } catch (e) { delete p.srvD; }
+      /* ===== ومن نشرها يُكتب عليها — بقول الخادم لا بذاكرتي =====
+         كان ‎if (state.uid) p.uid = state.uid‎ وحدَه. ولوحةُ الأدمن تفتح الجلسةَ
+         بـ‎fetch‎ فيؤخذ الكوكيُّ وتبقى الذاكرةُ خاويةً لحظاتٍ — فتُرفع المساهمةُ
+         **بلا مالكٍ في الدرج**. ثمّ يفتح صاحبُها الموقعَ الأساسيَّ فلا يعرفها
+         ‎siteUnclaim‎ مساهمةَ موقعٍ (لا ‎uid‎ لها، واسمُها اسمُه هو)، فيبقى ختمُ
+         «لي» عليها، فيقول الجذبُ «عندي أصلُها» فيُسقط الوافدَ — **ومعه الصورة**.
+         وهي علّةُ «الصورة موجودة في اللوحة وغائبة في الموقع» بعينها.
+         فالخادمُ يعرف صاحبَها يقينًا (الجلسة) ويقوله في ردّه، والدرجُ يُصدّقه. */
+      let ru = '';
+      try { const jr = await r.json(); ru = (jr && jr.uid) || ''; } catch (e) { /* ردٌّ بلا متن */ }
+      if (ru) p.uid = ru;
+      else if (state.uid) p.uid = state.uid;
+      if (!isMine(p)) refreshOwnership();   /* owner learned: judge again */
       save();
+      srvBump(code);                           /* وسائرُ التبويبات تُنادى في الحال */
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
 
@@ -23071,7 +25537,7 @@
     nookOff = ''; nookTried++;
     let j;
     try {
-      const r = await fetch(udocURL('?kind=nook'), { credentials: 'same-origin', cache: 'no-store' });
+      const r = await apiFetch(udocURL('?kind=nook'), { credentials: 'same-origin', cache: 'no-store' });
       if (r.status === 401) { nookOff = 'out'; bootMark('nook:401'); return; }
       if (!r.ok) { nookOff = 'err'; bootMark('nook:get' + r.status); return; }
       j = await r.json();
@@ -23102,7 +25568,7 @@
     const sig = JSON.stringify(body);
     if (sig === nookLast) return;                    /* لم يتبدّل شيء */
     try {
-      const r = await fetch(udocURL(), {
+      const r = await apiFetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ kind: 'nook', data: body }),
@@ -23150,7 +25616,7 @@
     if (!SRV_ON() || isGuest() || !state.uid || xtGot) return;
     let j;
     try {
-      const r = await fetch(udocURL('?kind=exams'), { credentials: 'same-origin', cache: 'no-store' });
+      const r = await apiFetch(udocURL('?kind=exams'), { credentials: 'same-origin', cache: 'no-store' });
       if (!r.ok) { bootMark('xt:get' + r.status); return; }
       j = await r.json();
     } catch (e) { bootMark('xt:neterr'); return; }
@@ -23186,7 +25652,7 @@
     const sig = JSON.stringify(list);
     if (sig === xtSig) return;
     try {
-      const r = await fetch(udocURL(), {
+      const r = await apiFetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ kind: 'exams', data: { list: list } }),
@@ -23210,19 +25676,49 @@
   window.acExamSync = xtPull;
 
   /* هل هذي المساهمةُ خاويةٌ حقًّا؟ — تُسأل عن كلّ وعاءٍ يحمل عملًا في المتون */
+  /* ============================================================
+     IS THERE ANYTHING IN THIS CONTRIBUTION?
+     ============================================================
+     Two places lean on this answer, and both of them destroy work when it is
+     wrong: the drawer drops a post it calls empty before it has been sent, and
+     the pull lets the server's copy replace a local one it calls empty.
+
+     It used to answer by NAMING the fields it knew — deck, html, desc, book,
+     items, docs, topics, vids, type, lang, rel. Any section whose fields were
+     not on that list read as empty, whatever was in it. Measured:
+
+         absence, filled in by hand   {free:2, dedFrom:3, dedAmt:1, dn:6, late:3}   ->  "empty"
+         an instructor's office hours {e:…, bld:'24', room:'296', hours:[…]}        ->  "empty"
+
+     So the absence box lost what you typed on the next refresh, and had done
+     since it was built. A suggestion with no photo lost the same way, and was
+     fixed by adding two more names to the list — which cured that one case and
+     left the disease.
+
+     So it no longer names anything. It asks whether ANY value in the data
+     carries meaning: a string with something in it, a number that is not zero,
+     a list with something in it. A section invented tomorrow is covered on the
+     day it is written.
+
+     THE ONE EXCEPTION is a default that a person did not choose. Opening an
+     editor creates the shell of a contribution, and the shell must still read
+     as empty — otherwise the pull would treat it as "I already have this one"
+     and never bring back what is on the server. `method` is such a default: it
+     is 'avg' before anyone has said anything at all. */
+  const EMPTY_DEFAULTS = ['method'];
+  function hasMeaning(v) {
+    if (v == null || v === false) return false;
+    if (typeof v === 'string') return v.trim() !== '';
+    if (typeof v === 'number') return v !== 0;
+    if (Array.isArray(v)) return v.some(hasMeaning);
+    if (typeof v === 'object') return Object.keys(v).some(k => hasMeaning(v[k]));
+    return !!v;
+  }
   function postEmpty(p) {
     const d = (p && p.data) || {};
-    if (Array.isArray(d.deck) && d.deck.length) return false;
-    if (String(d.html || '').trim()) return false;
-    if (String(d.desc || '').trim()) return false;
-    if (String(d.book || '').trim() || String(d.bookImg || '').trim()) return false;
-    if (Array.isArray(d.items) && d.items.length) return false;
-    if (Array.isArray(d.docs) && d.docs.length) return false;
-    if (Array.isArray(d.topics) && d.topics.length) return false;
-    if (Array.isArray(d.vids) && d.vids.length) return false;
-    if (d.type || d.lang || d.rel) return false;
-    return true;
+    return !Object.keys(d).some(k => EMPTY_DEFAULTS.indexOf(k) < 0 && hasMeaning(d[k]));
   }
+
 
   /* ============================================================
      جدولةُ المذاكرة ⇐ الحساب (م٢)
@@ -23240,7 +25736,7 @@
     if (!SRV_ON() || isGuest() || !state.uid || srsGot) return;
     let j;
     try {
-      const r = await fetch(udocURL('?kind=srs'), { credentials: 'same-origin', cache: 'no-store' });
+      const r = await apiFetch(udocURL('?kind=srs'), { credentials: 'same-origin', cache: 'no-store' });
       if (!r.ok) { bootMark('srs:get' + r.status); return; }
       j = await r.json();
     } catch (e) { bootMark('srs:neterr'); return; }
@@ -23266,7 +25762,7 @@
     const sig = JSON.stringify(map);
     if (sig === srsSig) return;
     try {
-      const r = await fetch(udocURL(), {
+      const r = await apiFetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ kind: 'srs', data: { map: map } }),
@@ -23289,9 +25785,269 @@
   }
   window.acSrsSync = srsPull;
 
+  /* ============================================================
+     نداءُ التبويبات — التبديلُ يُرى في الحال لا بعد دقيقة
+     ============================================================
+     اللوحةُ والموقعُ صفحتان في أصلٍ واحد. فمن ثبّت غلافًا في اللوحة بقي الموقعُ
+     على ما عنده حتّى تنقضي طزاجةُ الجذب (دقيقة) — فبدا التبديلُ بطيئًا.
+     وتقصيرُ الطزاجة يُكثر النداءَ على الخادم بلا داعٍ.
+     فيُكتب مفتاحٌ صغيرٌ في الدرج، و‎storage‎ يوقظ **سائرَ التبويبات دون التي
+     كتبته** — فتُبطل طزاجتَها لتلك المادّة وحدَها وتجذبها من جديد.
+     ولا يُقرأ الدرجُ كلُّه عند النداء: قراءةُ درجٍ كامل تمحو ما لم يُحفظ بعد. */
+  const BUMP_KEY = 'academia2:bump:v1';
+  const srvBump = code => {
+    if (!code) return;
+    try { localStorage.setItem(BUMP_KEY, JSON.stringify({ code: code, t: Date.now() })); }
+    catch (e) { /* درجٌ ممتلئ: النداءُ زينةٌ لا ركن */ }
+  };
+  window.addEventListener('storage', e => {
+    if (e.key !== BUMP_KEY || !e.newValue) return;
+    let b = null;
+    try { b = JSON.parse(e.newValue); } catch (x) { return; }
+    if (!b || !b.code) return;
+    srvPulled[b.code] = 0;                 /* أُبطلت الطزاجةُ لهذه المادّة */
+    srvPull(b.code, true);
+    /* والأغلفةُ معها: التثبيتُ في تبويبةٍ يجب أن يُرى في المكتبة في الأخرى —
+       والمكتبةُ تقرأ الأغلفةَ من جذبٍ آخرَ لا من جذب المادّة */
+    coversPull(true);
+  });
+
+  /* ============================================================
+     ‎acImg(code)‎ — أين وقفت الصورة؟
+     ============================================================
+     ذهبت ساعةٌ في «الصورة ما تحمل» لأنّ المسارَ سبعُ محطّاتٍ لا تُرى إحداها.
+     فهذه تمشي عليها وتقول عند أيّها وقفت — وتُنادى من المِرقاب. */
+  window.acImg = async code => {
+    const arr = (((state.cinfo || {})[code] || {}).posts || {}).info || [];
+    console.log('صور ' + code + ' — ' + arr.length + ' مساهمة');
+    for (const p of arr) {
+      const v = (p.data && p.data.bookImg) || '';
+      const kind = !v ? 'لا صورة'
+                 : v.indexOf('data:') === 0 ? 'مسوّدة في متصفّحك (' + v.length + ' حرفًا)'
+                 : v.indexOf('/api/media/') === 0 ? 'عنوانٌ في المستودع' : 'مسارٌ ساكن';
+      const row = { id: p.id, uid: p.uid || '—', pin: p.pin ? 1 : 0, st: p.st || '—',
+                    الصورة: kind, وصلت: p.srvH ? 'نعم' : 'لا',
+                    معلَّقة: p.imgPend ? 'نعم' : '—', محظورة: p.srvBig ? 'كِبَرًا' : '—' };
+      if (v.indexOf('/api/media/') === 0) {
+        try {
+          const r = await apiFetch(v, { cache: 'no-store' });
+          const b = await r.arrayBuffer();
+          row.المستودع = r.status + ' · ' + b.byteLength + ' بايت';
+        } catch (e) { row.المستودع = 'تعذّر'; }
+      }
+      console.log(row);
+    }
+    console.log('دفتر الإقلاع (آخر ما يخصّ الصور):',
+      (window.acBootLog ? acBootLog() : []).filter(x => /img|med|put|push/.test(x.ev || '')).slice(-8));
+  };
+
   /* ---------- الجذب ---------- */
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
   const SRV_FRESH = 60000;
+
+  /* ============================================================
+     الحذفُ يبلغ الخادمَ — وإلّا لم يُحذف شيء
+     ============================================================
+     كان الحذفُ ‎splice‎ في الدرج ثمّ ‎save()‎، ولا نداءَ للخادم أصلًا. فتُمحى
+     المساهمةُ من متصفّحك وتبقى عند الناس، ثمّ تعود إليك مع أوّل جذب — والغلافُ
+     الذي جاء منها يبقى. وقع بصاحب الموقع مرّتين: «حذفتُ المساهمة والصورة بقت».
+
+     ===== ونداءان لا واحد =====
+     ‎/api/posts?id=‎ يحذف **ما لك أنت** (الشرطُ ‎uid‎ في الحذف نفسِه). ومساهمةُ
+     غيرك — ومنها مساهماتُ «أكاديميا» حين تُفتح اللوحةُ بحسابٍ آخر — تحتاج
+     ‎/api/admin/post‎. فيُجرَّب الأوّلُ، فإن لم يُمحَ شيءٌ جُرّب الثاني.
+     ولا يُصاح إن سقطا: الحذفُ المحلّيُّ وقع، والصفُّ يُمحى في جذبٍ لاحقٍ أو يعود
+     — والصياحُ في وجه من حذف لا يفيده. */
+  async function srvDel(p, code) {
+    if (!SRV_ON() || isGuest() || !p || !p.id) return;
+    /* ولا يُنادى لِما لم يبلغ الخادمَ قطّ: لا صفَّ هناك يُحذف */
+    if (!p.srv && !p.srvH && !p.uid) return;
+    try {
+      const q = '?id=' + encodeURIComponent(p.id);
+      let r = await apiFetch(postsURL(q), { method: 'DELETE', credentials: 'same-origin' });
+      let j = null;
+      try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن: يُعامَل كأنّه لم يمحُ */ }
+      if (r.ok && j && j.removed) { bootMark('del:mine'); srvBump(code); return; }
+      const a = (ASSET_BASE ? new URL('api/admin/post', ASSET_BASE).href
+                            : location.origin + '/api/admin/post') + q;
+      r = await apiFetch(a, { method: 'DELETE', credentials: 'same-origin' });
+      bootMark('del:adm' + (r.ok ? '' : ':' + r.status));
+      if (r.ok) srvBump(code);
+    } catch (e) {
+      bootMark('del:net');
+    }
+  }
+
+  /* ============================================================
+     الأغلفةُ تُجذب كلُّها مرّةً — والخادمُ هو المرجع
+     ============================================================
+     العطبُ الذي دار عليه صاحبُ الموقع مرارًا: «أثبّت غلافًا في اللوحة فلا يظهر
+     في الموقع، وأسحب التثبيتَ فلا يذهب». وكان الجوابُ يُطلب في التثبيت وفي
+     الرسم وفي الدمج — **وكلُّها كانت سليمة**. والعلّةُ أنّ الموقعَ لم يكن يسأل:
+     الغلافُ يُقرأ من الدرج، والدرجُ لا يعلم بما على الخادم إلّا حين تُفتح
+     المادّةُ بعينها (‎srvPull‎ لواحدةٍ لا لكلّ). والمكتبةُ تعرض ستّةً وستّين
+     كتابًا دفعةً واحدة — فبقيت تعرض البذرةَ الساكنة أبدًا.
+
+     فرحلةٌ واحدةٌ في الإقلاع تقول: **هؤلاء لهم أغلفة، ومن ليس فيهم فلا غلافَ له.**
+
+     ===== والغيابُ حكمٌ كالحضور =====
+     لو أُخذ الحاضرُ وتُرك الغائبُ لَما ذهب غلافٌ سُحب تثبيتُه أبدًا — وذاك نصفُ
+     العقد. فما كان للموقع (‎u-academia‎ أو اسمُه) وليس في الجواب: يُطرح.
+     ولا يُمَسّ ما لغيره: غلافُ طالبٍ في مساهمته شأنُه، والجوابُ لا يحكم عليه.
+
+     ولا تُجذب متونٌ ههنا: عنوانُ الصورة واسمُ الكتاب وحدَهما. */
+  let coversPulled = 0;
+  async function coversPull(force) {
+    if (!SRV_ON()) return;
+    if (!force && coversPulled) return;
+    coversPulled = 1;
+    let j;
+    try {
+      const r = await apiFetch(postsURL('?covers=1'), { credentials: 'same-origin' });
+      if (!r.ok) { coversPulled = 0; return; }
+      j = await r.json();
+    } catch (e) { coversPulled = 0; return; }
+    if (!j || !Array.isArray(j.covers)) { coversPulled = 0; return; }
+
+    const byCode = {};
+    j.covers.forEach(r => { if (r && r.code) byCode[r.code] = r; });
+    /* "The site's cover" — asked through the one ownership rule, not a
+       second copy of it. `!isMine` keeps the admin page's own copy safe. */
+    const isSiteCover = p => p && p.data && p.data.bookImg
+      && ownerOf(p) === SITE_UID && !isMine(p);
+
+    let n = 0, cut = 0;
+    /* ما في الدرج: يُطرح غلافُ الموقع القديم أينما كان — حضر بديلُه أو غاب */
+    Object.keys(state.cinfo || {}).forEach(code => {
+      const arr = ((state.cinfo[code] || {}).posts || {}).info;
+      if (!Array.isArray(arr)) return;
+      const keep = arr.filter(p => !isSiteCover(p));
+      if (keep.length !== arr.length) { cut += arr.length - keep.length; }
+      state.cinfo[code].posts.info = keep;
+    });
+    /* ثمّ يُحقن ما قاله الخادم — ولا يُحقن حيث لي أصلُه (‎me‎) */
+    Object.keys(byCode).forEach(code => {
+      const r = byCode[code];
+      const info = (state.cinfo[code] = state.cinfo[code] || {});
+      info.posts = info.posts || {};
+      const arr = (info.posts.info = info.posts.info || []);
+      if (arr.some(p => p && (p.id === r.id || (p.me && p.uid === r.uid)))) return;
+      arr.push({
+        id: r.id, srv: 1, uid: r.uid, st: r.st || 'pub', me: false,
+        u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
+        likes: 0, liked: false, ts: r.ts || Date.now(), pin: 1, data: r.data,
+      });
+      n++;
+    });
+    if (n || cut) {
+      save();
+      bootMark('covers:' + n + '/' + cut);
+      /* وتُعاد الأغلفةُ حيث تُرى: المكتبةُ والسوقُ وإطارُ الترم والركن */
+      if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+      if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+      if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
+      if (typeof renderTerms === 'function') renderTerms();   /* ورفوفُ الترم في الركن */
+      if (cmCode && typeof renderCmSection === 'function') renderCmSection();
+    }
+  }
+  /* ============================================================
+     ‏‎acDocDiag()‎ — لِمَ لَمْ تبلغ قائمةُ الدكاترة الخادمَ؟
+     ============================================================
+     الطريقُ من القائمة إلى الخادم فيه ستّةُ أبوابٍ يُغلق كلٌّ منها **صامتًا**:
+     درجٌ ليس فيه دكاترةٌ أصلًا · صفٌّ لم يُفتح · مساهمةٌ ليست لي · جلسةٌ بحسابٍ
+     آخر · صورةٌ خامٌّ تنتظر الرفع · متنٌ رُدَّ لكِبَره. فتُقرأ كلُّها دفعةً واحدة.
+     ولا يُخمَّن بعد اليوم: هذا يُطبع في الطرفيّة فيُقرأ الجوابُ رقمًا. */
+  window.acDocDiag = () => {
+    const rows = [];
+    const C = state.cinfo || {};
+    Object.keys(C).forEach(code => {
+      const info = C[code] || {};
+      const drs = info.doctors || [];
+      if (!drs.length) return;
+      const arr = ((info.posts || {}).doc) || [];
+      const p = arr.find(x => x && x.me) || null;
+      const docs = p ? ((p.data || {}).docs || []) : [];
+      let raw = 0;
+      try { raw = (JSON.stringify(docs).match(/data:image/g) || []).length; } catch (e) { raw = -1; }
+      rows.push({
+        المادّة: code, دكاترة: drs.length, صفوف: docs.length,
+        مساهمة: p ? 'نعم' : '— لم تُفتح',
+        صاحبها: p ? (p.uid || '—') : '—',
+        الحال: p ? (p.st || '—') : '—',
+        بلغت: p ? (p.srvH ? 'نعم' : 'لا') : '—',
+        صورةٌ_خام: raw,
+        معلَّقة: p && p.imgPend ? 'نعم' : '—',
+        محظورة: p && p.srvBig ? 'كِبَرًا' : '—',
+        حجم: p ? JSON.stringify(p.data || {}).length : 0,
+      });
+    });
+    console.log('أنا: state.uid=' + (state.uid || '—') + '  ·  أعمل بصفة=' + actingAs()
+      + '  ·  خادم=' + (SRV_ON() ? 'نعم' : 'لا') + '  ·  زائر=' + (isGuest() ? 'نعم' : 'لا')
+      + '  ·  لوحة=' + (ADMIN ? 'نعم' : 'لا'));
+    if (!rows.length) console.log('لا مادّةَ في درج هذا المتصفّح فيها دكاترة.');
+    else console.table(rows);
+    console.log('دفتر الإقلاع (ما يخصّ الدفع):',
+      (window.acBootLog ? acBootLog() : []).filter(x => /docPub|push|put|med|img/.test(x.ev || '')).slice(-12));
+    return rows.length;
+  };
+
+  window.acCovers = () => coversPull(true);
+  /* ===== وبابُ الجذب لمادّةٍ بعينها =====
+     المساهماتُ تُجذب **مادّةً مادّة** حين تُفتح المادّة. ولوحةُ الأدمن تعرض
+     اقتراحاتِ الدكاترة لمادّةٍ لا تفتحها، فما كان في الذاكرة منها شيء: الاقتراحُ
+     وصل الخادمَ ولم يُطلَب قطُّ. وقد وقع: «أُرسل ولم يصل اللوحة».
+     فيُفتح البابُ لمن يعرض مادّةً بلا أن يفتحها. */
+  window.acPull = (code, force) => srvPull(code, force);
+
+  /* ============================================================
+     تدفئةُ الترم: رحلةٌ واحدةٌ لموادّه كلِّها
+     ============================================================
+     المساهماتُ كانت تُجذب مادّةً مادّة، ولا تبدأ رحلتُها إلّا حين تُفتح المادّة.
+     وقِيست الرحلةُ الواحدة: **مئةٌ وستّون مللي شبكةً ومئتان وأربعون خادمًا**. فمن
+     فتح مادّةً انتظر أربعَ مئةٍ قبل أن يرى مساهماتِ غيره — ورأى قبلها مربّعاتٍ
+     صفريّةً ظنّها فقدًا.
+     فتُطلب موادُّ الترم كلُّها في رحلةٍ واحدةٍ حين يُفتح الترم — قبل أن يفتح المرءُ
+     مادّةً بوقت. فإذا فتحها كان جوابُها عنده، فلا انتظارَ أصلًا.
+     ولا تُطلب مادّةٌ جاء جوابُها قريبًا (‎SRV_FRESH‎): التدفئةُ تسبق ولا تكرّر. */
+  async function srvWarm(codes) {
+    if (!SRV_ON() || !Array.isArray(codes)) return;
+    const t = Date.now();
+    const want = [];
+    codes.forEach(c => {
+      if (!c || want.indexOf(c) > -1) return;
+      if (t - (srvPulled[c] || 0) < SRV_FRESH) return;
+      want.push(c);
+    });
+    if (!want.length) return;
+    want.forEach(c => { srvPulled[c] = t; });
+    let j;
+    try {
+      const r = await apiFetch(postsURL('?codes=' + encodeURIComponent(want.join(','))),
+                               { credentials: 'same-origin' });
+      if (!r.ok) return;
+      j = await r.json();
+    } catch (e) {
+      /* وتُنسى الأختامُ إن تعثّرت الرحلة، فلا تُحرَم المادّةُ من جذبها الخاصّ */
+      want.forEach(c => { delete srvPulled[c]; });
+      return;
+    }
+    const by = (j && j.byCode) || null;
+    if (!by) { want.forEach(c => { delete srvPulled[c]; }); return; }
+    want.forEach(c => {
+      if (!Array.isArray(by[c])) return;
+      srvMerge(c, by[c]);
+    });
+  }
+  window.acWarm = srvWarm;
+
+  /* ===== أَجاء جوابُ الخادم عن هذه المادّة بعد؟ =====
+     ‏‎srvPulled‎ يُختم عند **بدء** الرحلة لا عند نهايتها (وهو صوابٌ لغرضه: يمنع
+     رحلتين متلاحقتين). فلا يُعرف به «هل وصل الجواب» — وهو ما تحتاجه الشاشة:
+     المربّعاتُ تُبنى من الدرج فورًا، والدرجُ لا يحمل مساهماتِ غيرك حتّى تصل. فمن
+     دخل الرَّكنَ رأى «سجّل بنودك» في مكانٍ فيه عمل — كأنّه ضاع.
+     فختمٌ ثانٍ عند **الوصول**، وبه تُقال «جارٍ التحميل» ولا يُكذَب على الناظر. */
+  const srvGot = {};
+  const srvSeen = code => !SRV_ON() || !!srvGot[code];
 
   async function srvPull(code, force) {
     if (!SRV_ON() || !code) return;
@@ -23299,16 +26055,47 @@
     srvPulled[code] = Date.now();
     let j;
     try {
-      const r = await fetch(postsURL('?code=' + encodeURIComponent(code)), { credentials: 'same-origin' });
+      const r = await apiFetch(postsURL('?code=' + encodeURIComponent(code)), { credentials: 'same-origin' });
       if (!r.ok) return;
       j = await r.json();
     } catch (e) { return; }
     if (!j || !Array.isArray(j.posts)) return;
+    srvMerge(code, j.posts);
+  }
 
-    const info = state.cinfo[code];
-    if (!info || !info.posts) return;
+  /* ===== والدمجُ واحدٌ، والجالبُ اثنان =====
+     رحلةٌ لمادّةٍ (‎srvPull‎) ورحلةٌ لترمٍ كامل (‎srvWarm‎) — وكلتاهما تنتهيان ههنا.
+     ولو كُتب الدمجُ مرّتين لَافترقا يومَ يُبدَّل أحدُهما، وهو دمجٌ فيه أحكامُ
+     ملكيّةٍ وبذورٍ وأغلفةٍ لا تُكرَّر بيدٍ سليمة. */
+  function srvMerge(code, incoming) {
+    const j = { posts: incoming };
+
+    /* ===== ومادّةٌ لا أثرَ لها في الدرج تُفتح لها خانة =====
+       كان الجذبُ يقول: «لا خانةَ لهذي المادّة عندي ⇒ لا شيءَ أضعه فيها» فيرجع
+       صامتًا. وذاك يستقيم يومَ كان الدرجُ يحفظ كلَّ شيء. فلمّا صار **يُسقط ما
+       بلغ الخادمَ** (‎cinfoThin‎ — والخانةُ الخاليةُ من كلّ شيءٍ تُحذف كلُّها)
+       صار الصحيحُ هو الذي يمنع الجذب: مادّةٌ كلُّ مساهماتها منشورةٌ على الخادم
+       لا خانةَ لها في الدرج، فلا تُجذب، فلا يظهر منها شيء — لا مساهمةٌ ولا غلاف.
+       وهذا ما رآه صاحبُ الموقع: «في اللوحة موجودة وفي الموقع الأساسيّ لا».
+       واللوحةُ كانت تراها لأنّ نسختَها ‎me‎ فتبقى في الدرج.
+       فالخانةُ تُفتح ههنا: الجذبُ مصدرٌ للبيانات لا قارئٌ لها. */
+    const info = (state.cinfo[code] = state.cinfo[code] || {});
+    info.posts = info.posts || {};
     let n = 0;
-    /* ومعرّفاتُ ما أملكه ههنا: تُجمع مرّةً قبل المشي لا تُبحث لكلّ وافد */
+    /* The server knows who owns what. Copy that onto our local copies, then
+       let the one ownership rule decide what is mine. (Before, this place
+       held its own version of that decision.) */
+    const srvById = {};
+    j.posts.forEach(r => { if (r && r.id) srvById[r.id] = r; });
+    let learned = 0;
+    Object.keys(info.posts).forEach(sec =>
+      (info.posts[sec] || []).forEach(p => {
+        const r = p && p.id ? srvById[p.id] : null;
+        if (r && r.uid && p.uid !== r.uid) { p.uid = r.uid; learned++; }
+      }));
+    if (learned) { refreshOwnership(); bootMark('own:learn:' + learned); }
+
+    /* Ids of what is mine here — collected once, after ownership is settled */
     const mineIds = new Set();
     Object.keys(info.posts).forEach(sec =>
       (info.posts[sec] || []).forEach(p => { if (p && p.me && p.id) mineIds.add(p.id); }));
@@ -23421,7 +26208,7 @@
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
           ts: (r.ts || 0) * 1000 || Date.now(),
-          pin: (r.uid === SITE_UID && r.data && r.data.bookImg) ? 1 : 0,
+          pin: r.pin ? 1 : 0,
           data: r.data,
         });
         n++;
@@ -23431,15 +26218,22 @@
       if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
       info.posts[r.sec].push({
         id: r.id, srv: 1, uid: r.uid,
+        /* ===== وحالُها تُقرأ من الخادم ولا تُترك =====
+           كانت تُحقن **بلا ‎st‎**، فتضيع الحالُ في الدرج. ثمّ تفتح اللوحةُ فتختم
+           مساهماتِ الموقع ‎me‎ (‎srvClaim‎)، فيدفعها ‎srvPush‎ بـ‎st: p.st || 'priv'‎ —
+           فتنقلب المنشورةُ المثبَّتةُ **خاصّةً بلا سياق**، ويذهب غلافُها معها.
+           والخادمُ لا يردّ للناس إلّا ‎pub‎، فما جاء منه فهو منشورٌ ما لم يُقل غيرُه. */
+        st: r.st || 'pub',
         me: false,                            /* الختمُ: محسوبٌ لا مقروء */
         u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
         likes: r.likes | 0, liked: !!r.liked,   /* العدُّ من الخادم — يُقرأ ولا يُخترع */
         ts: (r.ts || 0) * 1000 || Date.now(),
-        /* ===== والتثبيتُ يُستنتج من الشكل لا يُنقل =====
-           ‎pin‎ أخُو ‎data‎ لا ابنُه، والدفعُ لا يرفع إلّا ‎data‎ — فلا يعود من
-           الخادم أبدًا. ولو تُرك لَسقط غلافُ الكتاب من صدر بنده يومَ حلّ الوافدُ
-           محلَّ البذرة. وهو مثبَّتٌ **لأنّه غلافُ الموقع**، فيُقرأ من ذلك. */
-        pin: (r.uid === SITE_UID && r.data && r.data.bookImg) ? 1 : 0,
+        /* ===== والتثبيتُ صار يسافر =====
+           كان يُستنتج من الشكل («مساهمةُ الموقع فيها غلافٌ ⇒ مثبَّتة») لأنّه لم
+           يكن عمودًا. فما ثُبّت بعد ذلك لم يُعرف تثبيتُه فلم يصر غلافًا أبدًا.
+           فصار عمودًا يُرسل ويُقرأ — والاستنتاجُ يبقى **احتياطًا** للصفوف التي
+           كُتبت قبل العمود، فصفرٌ من الخادم لا يمحو غلافَ الموقع القديم. */
+        pin: r.pin ? 1 : 0,
         data: r.data,
       });
       /* ===== وتُوسَم عقدُ الوافد واحدةً واحدة =====
@@ -23456,7 +26250,26 @@
     /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها.
        والطرحُ حدثٌ كالحقن: لو نُظر إلى ‎n‎ وحدَها لَبقيت النسخةُ المطروحةُ على
        الشاشة حتى تُفتح المادّةُ ثانيةً. */
+    /* ===== ووصولُ الجواب حدثٌ ولو كان خاويًا =====
+       الشاشةُ تنتظره لتكفّ عن قول «جارٍ التحميل». فيُختم قبل كلّ إعادةِ رسم. */
+    srvGot[code] = 1;
     if ((n || cut) && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+    /* ===== والمربّعاتُ الأربعةُ تُعاد كذلك =====
+       كانت تُبنى مرّةً عند فتح الرَّكن ثمّ لا يبلغها شيء: يصل الجوابُ فتُعاد لوحةُ
+       المادّة وحدَها، وتبقى الأربعةُ على حالها الصفريّة حتّى يُفتح الرَّكنُ من جديد.
+       وهو ما رآه صاحبُ الموقع: «كأنّها اختفت».
+       وتُعاد ولو لم يجئ جديد: كانت تقول «جارٍ التحميل»، فلا بدّ أن تكفّ. */
+    if (typeof nookEntry !== 'undefined' && nookEntry
+        && typeof nookCode === 'function' && nookCode(nookEntry) === code
+        && typeof nkFourRefresh === 'function') nkFourRefresh();
+    /* ===== والغلافُ يُعاد رسمُه حيث يُرى =====
+       كان يُعاد لوحُ المادّة وحدَه، والغلافُ في السوقين وفي إطار الترم أيضًا.
+       فمن ثبّت في اللوحة رأى الكتابَ في المكتبة على حاله حتّى يُعاد بناءُ الصفحة. */
+    if (n || cut) {
+      if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+      if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+      if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
+    }
   }
 
   /* ============================================================
@@ -23488,7 +26301,7 @@
     cmtPulled[pid] = Date.now();
     let j;
     try {
-      const r = await fetch(cmtURL('?pid=' + encodeURIComponent(pid)), { credentials: 'same-origin' });
+      const r = await apiFetch(cmtURL('?pid=' + encodeURIComponent(pid)), { credentials: 'same-origin' });
       if (!r.ok) return;
       j = await r.json();
     } catch (e) { return; }
@@ -23545,7 +26358,7 @@
     const id = newId();
     let j;
     try {
-      const r = await fetch(cmtURL(), {
+      const r = await apiFetch(cmtURL(), {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ id: id, pid: node.srvP, nid: node.id,
@@ -23579,7 +26392,7 @@
     c.lk = Math.max(0, was.lk + (c.liked ? 1 : -1));
     if (cmtBox || cardDlg) cdCmtPaint(true);
     try {
-      const r = await fetch(cmtURL('/like'), {
+      const r = await apiFetch(cmtURL('/like'), {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ id: c.id }),
@@ -23608,7 +26421,7 @@
     p.likes = Math.max(0, was.likes + (p.liked ? 1 : -1));
     renderCmSection();
     try {
-      const r = await fetch(postsURL().replace('/posts', '/likes'), {
+      const r = await apiFetch(postsURL().replace('/posts', '/likes'), {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ id: p.id }),
@@ -23716,6 +26529,25 @@
        يُكتب حرفًا حرفًا، والطلبُ لا يُتبع كلَّ حرف */
     if (inp.dataset.f === 'name') profSoon();
   });
+  /* ============================================================
+     ENTER SUBMITS
+     ============================================================
+     The sign-in and sign-up fields are not inside a <form>, so the browser
+     does not treat Enter as "press the button" — you had to reach for the
+     mouse after typing your password. This gives that back.
+
+     It listens on the panel, not on each field, so a field added later is
+     covered without anyone remembering to wire it. And it goes through the
+     button's own click, so the "one moment" lock that stops a double sign-up
+     applies to Enter exactly as it does to a tap. */
+  $('#panel-account').addEventListener('keydown', e => {
+    if (e.key !== 'Enter' || e.isComposing) return;
+    if (!e.target.closest || !e.target.closest('.auth-in')) return;
+    e.preventDefault();
+    const go = $('#auth-go');
+    if (go && !go.disabled) go.click();
+  });
+
   $('#panel-account').addEventListener('click', e => {
     /* ===== وجهُ الباب ===== */
     if (e.target.closest('#auth-swap')) { openAuthPage(authMode === 'join' ? 'login' : 'join'); return; }
@@ -24325,7 +27157,8 @@
         ? doctorsOf(cmCode)[+pd.dataset.dr].posts
         : postsOf(cmCode, pd.dataset.sub || cmTabSel);
       const mi = arr.findIndex(x => x.me);
-      if (mi >= 0) { arr.splice(mi, 1); save(); renderCmSection(); }
+      /* ويبلغ الخادمَ: الحذفُ من الدرج وحدَه يعود مع أوّل جذب */
+      if (mi >= 0) { const gone = arr[mi]; arr.splice(mi, 1); save(); srvDel(gone, cmCode); renderCmSection(); }
       return;
     }
     /* حذف إداري لأي مساهمة (لوحة الأدمن) — بتأكيد، والفهرس فهرس المصفوفة الأصلية */
@@ -24336,7 +27169,9 @@
         : postsOf(cmCode, admDel.dataset.sub || cmTabSel);
       const i = +admDel.dataset.like;
       const who = arr[i] ? nameOf(arr[i]) : '';
-      if (arr[i] && confirm(`${T().delItem}: «${who}»؟`)) { arr.splice(i, 1); save(); renderCmSection(); }
+      if (arr[i] && confirm(`${T().delItem}: «${who}»؟`)) {
+        const gone = arr[i]; arr.splice(i, 1); save(); srvDel(gone, cmCode); renderCmSection();
+      }
       document.querySelectorAll('.post-menu.open').forEach(x => x.classList.remove('open'));
       return;
     }
@@ -24383,6 +27218,11 @@
         p.pin = !p.pin;
         if (p.pin) p.pinAt = Date.now();   /* الأحدث تثبيتًا هو صاحب الغلاف */
         save();
+        /* ===== ويبلغ الخادمَ في حينه =====
+           التثبيتُ يعيّن غلافَ المادّة عند **كلّ** من يفتح الموقع، فهو قرارٌ
+           كالنشر لا تبديلَ عرض. ولو تُرك للتأجيل لَرآه صاحبُه ولم يره أحدٌ حتّى
+           يقع حفظٌ آخر — أو لا يقع. */
+        srvPush(p, cmCode, pinBtn.dataset.sub || cmTabSel);
         /* الغلاف تابع للتثبيت: نعيد بناء واجهة المادة (فيها صورة العنوان) وبِكَر الكتب كي يتغيّر فورًا */
         if (cmCode) fillCourseUI(cmCode); else renderCmSection();
         mkTab.render(); mkModal.render();
@@ -24649,7 +27489,12 @@
     /* التخطيط ثابت دائمًا (dir=rtl لا يتغيّر): تغيير اللغة يبدّل النصوص فقط.
        الاستثناء الوحيد: اتجاه بطاقة المادة (الصورة يمين/يسار) عبر CSS على data-lang. */
     document.title = t.title;
-    { const lg = $('.side-logo'); if (lg) lg.textContent = t.siteName; }   /* الشعار: أكاديميا · academia */
+    { const lg = $('.side-logo'); if (lg) lg.textContent = t.siteName; }
+    /* نافذة «عبّئ من السيلبوس»: نصوصُها الساكنة */
+    [['#syl-s1', t.sylS1], ['#syl-s2', t.sylS2], ['#syl-copy', t.sylCopy],
+     ['#syl-drop-t', t.sylDropT], ['#syl-pick', t.sylPick],
+     ['#syl-done', t.sylDone2]]
+      .forEach(pair => { const el = $(pair[0]); if (el) el.textContent = pair[1]; });   /* الشعار: أكاديميا · academia */
     document.querySelector('.tabs [data-tab="market"] .tab-tx').textContent = t.tabMarket;
     document.querySelector('.tabs [data-tab="library"] .tab-tx').textContent = t.tabLibrary;
     $('#btn-addterm').textContent = `+ ${t.addTerm}`;
@@ -24662,7 +27507,6 @@
     { const h = document.getElementById('term-hint'); if (h) h.textContent = t.termHint; }
     $('#dm-start-label').textContent = t.startDate;
     $('#dm-end-label').textContent = t.endDate;
-    $('#dm-save').textContent = t.saveBtn;
     $('#dm-delete').textContent = t.delTermBtn;
     { const cl = $('#dm-courses-label'); if (cl) cl.textContent = t.termCourses; }
     if (dateTerm) renderDmCourses();   /* أسماء المواد تتبع اللغة */
@@ -25228,11 +28072,10 @@
      الاسم يُطابَق باللغتين لأن البذرة تحمل اسم الموقع بلغة وقت الزرع */
   function pinCoverPosts() {
     if (state.pinCovers1) return;
-    const SITE = ['أكاديميا', 'academia'];
     Object.keys(state.cinfo || {}).forEach(code => {
       const arr = ((state.cinfo[code] || {}).posts || {}).info || [];
       arr.forEach(p => {
-        if (p && p.u && SITE.indexOf(p.u.name) > -1 && p.data && p.data.bookImg) p.pin = 1;
+        if (p && ownerOf(p) === SITE_UID && p.data && p.data.bookImg) p.pin = 1;
       });
     });
     state.pinCovers1 = 1;
@@ -29131,13 +31974,12 @@
      وهذي بطائقُ حقيقيّةٌ لمؤلِّفٍ حقيقيّ، فلا تُمحى مع المصنوع. */
   function ankiToOwner() {
     if (state.ankiOwner1) return;
-    const SITE = ['أكاديميا', 'academia'];
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const arr = ((state.cinfo[code].posts || {}).cards) || [];
       arr.forEach(p => {
         if (!p || p.srv) return;                       /* وافدٌ من الخادم: له صاحبُه */
-        if (!p.u || SITE.indexOf(p.u.name) < 0) return;
+        if (ownerOf(p) !== SITE_UID) return;
         p.u = { name: OWNER.name, img: OWNER.img };
         p.uid = OWNER.uid;
         delete p.seeded;
@@ -29153,6 +31995,39 @@
      كانت تُكتب بلا حالِ نشرٍ فتبقى في درجِ من فُتح عنده — والغلافُ خبرٌ عن
      المادّة يراه الناسُ كلُّهم. فتُوسَم منشورةً، ويرفعها الدفعُ من نفسِه متى
      كانت الجلسةُ جلسةَ الموقع. */
+  /* ============================================================
+     الأغلفةُ الرسميّةُ تصير مساهماتٍ — فلا استثناءَ في القاعدة
+     ============================================================
+     كان ‎COVERS‎ ملفًّا ساكنًا في المستودع يُقرأ **مصدرًا حيًّا** آخِرَ السلسلة.
+     فمن حذف المساهمةَ أو سحب تثبيتَها بقي غلافُها: الاختيارُ ينزل إلى الساكن.
+     وهي اثنتان وأربعون مادّة — منها ‎MIS 250‎ التي وقع بها العطب.
+
+     فتُبذر مرّةً مساهماتِ موقعٍ منشورةً مثبَّتة، ثمّ يخرج ‎COVERS‎ من القراءة.
+     فتخضع لِما تخضع له سائرُ الأغلفة: تُحذف فيذهب الغلاف، ويُسحب تثبيتُها
+     فيذهب الغلاف — والعقدُ جملةٌ واحدةٌ بلا حالةٍ خاصّة.
+
+     ولا تُبذر حيث توجد مساهمةٌ فيها غلاف: العامرةُ تبقى. */
+  function coversSeed() {
+    if (state.coverSeed1 || typeof COVERS === 'undefined') return;
+    let n = 0;
+    Object.keys(COVERS).forEach(code => {
+      const arr = ((state.cinfo[code] = state.cinfo[code] || {}).posts
+                  = (state.cinfo[code].posts || {})).info
+                  = (state.cinfo[code].posts.info || []);
+      if (arr.some(p => p && p.data && p.data.bookImg)) return;   /* له غلافٌ أصلًا */
+      arr.push({
+        id: newId(), uid: SITE_UID, me: false, srv: 0,
+        u: { name: 'أكاديميا', img: '' },
+        st: 'pub', pin: 1, pinAt: Date.now(), likes: 0, liked: false,
+        ts: Date.now(), data: Object.assign(defaultData('info'), { bookImg: COVERS[code] }),
+      });
+      n++;
+    });
+    state.coverSeed1 = 1;
+    save();
+    if (n) bootMark('cseed:' + n);
+  }
+
   function coverPub() {
     if (state.coverPub1) return;
     let n = 0;
@@ -29161,8 +32036,7 @@
       arr.forEach(p => {
         if (!p || p.st) return;
         if (!(p.data && p.data.bookImg)) return;
-        const nm = p.u && p.u.name;
-        if (!p.me && ['أكاديميا', 'academia'].indexOf(nm) < 0) return;
+        if (!p.me && ownerOf(p) !== SITE_UID) return;
         p.st = 'pub'; n++;
       });
     });
@@ -29171,56 +32045,15 @@
     if (n) console.log('نُشر ' + n + ' غلافًا');
   }
 
-  /* ---------- مساهماتُ الموقع تُردّ إليه — في كلّ إقلاعٍ لا مرّةً ----------
-     ===== والدرجُ واحدٌ والصفحتان اثنتان =====
-     ‎localStorage‎ للأصل كلِّه: اللوحةُ والموقعُ يكتبان في درجٍ واحد. واللوحةُ
-     تدخل بحساب «أكاديميا» فتختم ما يحمل اسمَه ‎me:true‎ **وتحفظ** (‎srvClaim‎) —
-     لأنّ محرّراتها لا تفتح إلّا على ما هو ‎me‎. ثمّ يُفتح الموقعُ الأساسيُّ فيقرأ
-     الدرجَ نفسَه، فيجد ثمانيةً وأربعين غلافًا مختومةً باسمه وهو لم يدخل بحساب.
-
-     ولا يُصلح هذا ترحيلٌ يقع مرّةً: ما يُكتب في كلّ فتحةٍ للوحة لا يمحوه علَمٌ
-     يُرفع مرّةً واحدةً في العمر. فصار مسحًا في كلّ إقلاع.
-
-     ===== وكلُّ صفحةٍ تقول حقَّها عند إقلاعها =====
-     اللوحةُ تختم عند فتح جلستها، والموقعُ يمسح عند إقلاعه — ولا تتنازعان، لأنّ
-     كلًّا منهما يُثبت حقَّه في صفحته هو. و‎ADMIN‎ هو الفرق.
-
-     ===== وتُعرف بالاسم لا بالعلم =====
-     ما يحمل اسمَ «أكاديميا» ملكُ الموقع أينما وُجد. ومن كتب بيده فاسمُه عليه
-     (‎myPost‎ تكتب ‎meName‎ لا اسمَ الموقع)، فلا يُمَسّ.
-
-     ===== ولا الأغلفةُ وحدَها =====
-     كانت أوّلَ ما بان (وهي ثمانيةٌ وأربعون)، فقُصر الردُّ عليها. وللموقع سواها:
-     ما نُشر باسمه في «الملخّصات» و«الدرجات» و«المصادر». فيُعمَّم على كلّ ما
-     يحمل اسمَه — ورزمُ البطائق المردودةُ إليه ‎me:false‎ أصلًا، فلا يُغيّر فيها
-     هذا شيئًا. */
+  /* The main site used to hand the site's contributions back with its own
+     copy of the ownership rules. That job now belongs to the one rule in
+     01.js; all that is left here is not keeping the site's identity in a
+     visitor's profile. */
   function siteUnclaim() {
-    if (ADMIN) return;          /* اللوحةُ دارُه: فيها يملك ما يحمل اسمَه */
-    const SITE = ['أكاديميا', 'academia'];
-    /* وهويّتُه لا تبقى في بروفايلي: البابُ يُبذَر منه، فكان يُفتح ممتلئًا باسمه */
-    const forgot = siteForget();
-    let n = 0;
-    Object.keys(state.cinfo || {}).forEach(code => {
-      const ps = (state.cinfo[code] || {}).posts || {};
-      Object.keys(ps).forEach(sec => {
-        if (!Array.isArray(ps[sec])) return;
-        ps[sec].forEach(p => {
-          if (!p || !p.me) return;
-          /* ===== والختمُ أقوى من الاسم =====
-             ما كتبتَه في اللوحة يحمل اسمَ «أنا» لا اسمَ الموقع (‎myPost‎ تكتب
-             ‎meName‎) — فالاسمُ وحدَه لا يعرفه، ويبقى في الموقع الأساسيّ ‎me:true‎
-             فيحاول رفعَه باسم من دخل فيه. و‎uid‎ يقطع: من نشرها مكتوبٌ عليها. */
-          const byUid = p.uid === SITE_UID;
-          const byName = p.u && SITE.indexOf(p.u.name) > -1;
-          if (!byUid && !byName) return;
-          p.me = false; n++;
-        });
-      });
-    });
-    /* ولا يُكتب الدرجُ إن لم يتبدّل شيء: المسحُ في كلّ إقلاع، والحفظُ عند الحاجة */
-    if (n || forgot) save();
-    if (n) console.log('رُدّت ' + n + ' مساهمةً إلى أكاديميا');
-    if (forgot) console.log('ومُحيت هويّةُ الموقع من البروفايل');
+    if (ADMIN) return;                 /* the admin page IS the site */
+    if (siteForget()) { save(); }
+    refreshOwnership();
+    drxSign();      /* واقتراحاتُك تُوقَّع باسمك، ههنا حيث هي لك */
   }
 
   /* ---------- ترحيلٌ لمرّةٍ واحدة: أغلفةُ الكتب تُردّ إلى الموقع ----------
@@ -29239,7 +32072,6 @@
      والثاني ختمُ من نشرها — ولم تعد له. */
   function coverHandBack() {
     if (state.coverBack2) return;
-    const SITE = ['أكاديميا', 'academia'];
     let n = 0;
     Object.keys(state.cinfo || {}).forEach(code => {
       const arr = ((state.cinfo[code] || {}).posts || {}).info || [];
@@ -29255,7 +32087,7 @@
            هناك ‎srvClaim‎ تختم أغلفةَ الموقع ‎me:true‎ لتُحرَّر، فلو رُدَّت لَذهب
            ختمُها ثمّ عاد في الجلسة نفسِها — عملٌ يلغي نفسَه. والمقصودُ ههنا
            غيرُه: ما نُسب إلى **شخص**. */
-        if (ADMIN && p.u && SITE.indexOf(p.u.name) > -1) return;
+        if (ADMIN && ownerOf(p) === SITE_UID) return;
         p.me = false;
         p.u = { name: T().siteName };
         p.seeded = 1;
@@ -29309,6 +32141,97 @@
      ===== وما لم يوجد أصلُه يُترك نسخةً =====
      مصدرٌ حُذف، أو رزمةٌ لم تعد منشورة: نسختُك هي كلُّ ما بقي منها. فلا تُنزع
      ولا تُعلَّم منقطعةً — هي عندك تامّة. */
+  /* ============================================================
+     التشكيلُ يصير مساهمة — مرّةً واحدةً في عمر الدرج
+     ============================================================
+     كان لكلّ مربّعٍ تشكيلُه في ‎entry.picks.infoV‎ ونحوِه، ومساهمتُك في المكتبة
+     شيءٌ آخر. فصار المصدرُ واحدًا (‎ROADMAP-NOOK-BOND‎)، وما في المربّعات يُنقل.
+
+     ===== والقاعدةُ المستقرّة: الخاويةُ تُملأ والعامرةُ تبقى =====
+     من كتب مساهمةً من المكتبة فمساهمتُه أوثق: كُتبت قصدًا لا مركَّبةً من انتقاء.
+     ولا موازنةَ بـ‎ts‎ — هو تاريخُ الإنشاء لا آخِرَ تعديل، والموازنةُ به تمحو عملًا.
+
+     ===== و‎gradeMe‎ لا يُمَسّ =====
+     درجاتُك أنت، مخزنٌ مستقلٌّ بمفتاح الاسم — لا علاقةَ له بالمساهمة. */
+  function bondPicks() {
+    if (state.pickBond1) return;
+    let moved = 0, kept = 0;
+
+    Object.keys(state.libs || {}).forEach(term => {
+      (state.libs[term] || []).forEach(entry => {
+        ['picks', 'picksLab'].forEach(bagKey => {
+          const bag = entry[bagKey];
+          if (!bag) return;
+          const isLabBag = bagKey === 'picksLab';
+          const code = isLabBag ? labKey(entry.code) : entry.code;
+
+          /* [مفتاحُ التشكيل، البند، مفتاحُ «كان عامًّا»، البنودُ التي تُنقل] */
+          [['infoV',  'info',  'infoPub',  ['book', 'bookImg', 'type', 'lang', 'rel', 'desc', 'topics']],
+           ['absV',   'abs',   'absPub',   ['free', 'dedFrom', 'dedAmt', 'dn', 'late']],
+           ['gradeV', 'grade', 'gradePub', ['method', 'items']],
+          ].forEach(([vk, sec, pk, keys]) => {
+            const v = bag[vk];
+            if (v) {
+              const arr = postsOf(code, sec);
+              let mp = arr.find(x => x.me);
+              const empty = !mp || !keys.some(k => {
+                const x = (mp.data || {})[k];
+                return Array.isArray(x) ? x.length : (typeof x === 'number' ? !!x : !!(x && String(x).trim()));
+              });
+              if (empty) {
+                mp = myPost(code, sec);
+                const d = {};
+                keys.forEach(k => {
+                  d[k] = Array.isArray(v[k]) ? v[k].map(x => Object.assign({}, x))
+                       : (v[k] === undefined ? (mp.data || {})[k] : v[k]);
+                });
+                mp.data = Object.assign({}, mp.data, d);
+                moved++;
+              } else { kept++; }
+              if (mp && !mp.st) mp.st = bag[pk] ? 'pub' : 'priv';
+            }
+            delete bag[vk];
+            delete bag[pk];
+          });
+
+          /* والدكتور: متنُه على الدكتور نفسِه، واختيارُه يبقى في المربّع */
+          const dv = bag.docV;
+          if (dv) {
+            if (dv.dr) {
+              bag.docDr = dv.dr;
+              const di = doctorsOf(code).findIndex(x => x.id === dv.dr);
+              if (di >= 0) {
+                const dr = doctorsOf(code)[di];
+                let mp = (dr.posts || []).find(x => x.me);
+                const K = ['e', 'bld', 'room', 'hours', 'teach', 'grade', 'd'];
+                const empty = !mp || !K.some(k => {
+                  const x = (mp.data || {})[k];
+                  return Array.isArray(x) ? x.length : (typeof x === 'number' ? !!x : !!(x && String(x).trim()));
+                });
+                if (empty) {
+                  mp = myDrPost(code, di);
+                  mp.data = Object.assign({}, mp.data, {
+                    e: dv.e || '', bld: dv.bld || '', room: dv.room || '',
+                    hours: (dv.hours || []).map(h => Object.assign({}, h)),
+                    teach: +dv.teach || 0, grade: +dv.grade || 0, d: dv.d || '',
+                  });
+                  moved++;
+                } else { kept++; }
+                if (mp && !mp.st) mp.st = bag.docPub ? 'pub' : 'priv';
+              }
+            }
+            delete bag.docV;
+            delete bag.docPub;
+          }
+        });
+      });
+    });
+
+    state.pickBond1 = 1;
+    if (moved || kept) bootMark('bond:' + moved + '/' + kept);
+    save();
+  }
+
   function roadRefs() {
     if (state.roadRef1) return;
     let hit = 0, miss = 0;
@@ -29394,6 +32317,8 @@
     document.head.appendChild(sc);
   }
   roadRefs();       /* ونُسخُ الرحلة تصير إشاراتٍ: المحتوى يُقرأ من مكانٍ واحد */
+  bondPicks();      /* وتشكيلاتُ المربّعات تصير مساهماتِك: مخزنان يصيران واحدًا */
+  coversSeed();     /* والأغلفةُ الرسميّةُ تصير مساهماتٍ: لا مصدرَ خارجَ المساهمات */
   coverPub();       /* وأغلفةُ الكتب تُنشر: خبرٌ عن المادّة لا شيءٌ يخصّ متصفّحًا */
   coverHandBack();  /* وغلافُ الكتاب خبرٌ عن المادّة لا عملُ أحد — يُردّ إلى الموقع */
   siteUnclaim();    /* وما نُسب إليك من مساهمات الموقع سهوًا يُردّ إليه */
@@ -29401,6 +32326,9 @@
   catSync();        /* وبعد أن يستقرّ كلُّ شيء: يُسأل الخادمُ عن الكتالوج — بلا انتظارٍ في الإقلاع */
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
   if (typeof nookPull === 'function') nookPull();   /* ونواةُ الركن من الحساب */
+  /* والأغلفةُ كلُّها في رحلةٍ واحدة: المكتبةُ تعرض ستّةً وستّين كتابًا معًا، ولا
+     تُجذب مادّةٌ إلّا حين تُفتح — فكانت تعرض البذرةَ الساكنة أبدًا */
+  if (typeof coversPull === 'function') coversPull();
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
   if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
   applyTheme();

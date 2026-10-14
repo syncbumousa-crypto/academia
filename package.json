@@ -1,0 +1,12 @@
+{
+  "name": "academia",
+  "private": true,
+  "type": "module",
+  "description": "اكاديميا — الخادم على فيرسل. والصفحات ساكنة لا تُبنى.",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  }
+}

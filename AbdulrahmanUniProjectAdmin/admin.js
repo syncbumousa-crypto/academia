@@ -76,7 +76,16 @@
        ٣ · وإن كان محرّكُ الموقع حاضرًا في الصفحة فهو صاحبُ الدرج: يُكتب
            بيده (‎acSaveState‎) فلا تُكتب لقطةٌ قديمةٌ فوق ما بنى */
   let appBad = false;
+  /* ===== والحالُ الحيّةُ أوّلًا =====
+     الدرجُ مُنقًّى: ما بلغ الخادمَ من المساهمات يُسقط منه ويُعاد جذبُه عند الإقلاع.
+     فمن قرأه رأى المعلَّقَ من عمله وحدَه — ولم يرَ مساهمةَ غيره ألبتّة، ومنها
+     اقتراحاتُ الدكاترة التي تصل من الناس.
+     ومحرّكُ الموقع يعمل في هذي الصفحة نفسِها وحالُه هي التامّة، فتُقرأ منه.
+     وهو أسلمُ كذلك: كانت اللوحةُ تقرأ اللقطةَ ثمّ تُلبسها الحالَ الحيّة، فتمحو
+     من الذاكرة كلَّ ما جُذب حتّى الجذبةِ التالية.
+     والدرجُ يبقى بديلًا إن غاب المحرّك — ومعه حارسُه ضدّ الدرج التالف. */
   const app = () => {
+    if (typeof window.acState === 'function') { const live = window.acState(); if (live) return live; }
     let raw = null;
     try { raw = localStorage.getItem(LS_APP); } catch (e) { raw = null; }
     if (raw == null || raw === '') return {};
@@ -160,7 +169,7 @@
     const b = e.target.closest('button[data-tab]'); if (!b) return;
     document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
     PANELS.forEach(p => { $('#a-panel-' + p).hidden = p !== b.dataset.tab; });
-    if (b.dataset.tab === 'docs') renderDocs();
+    if (b.dataset.tab === 'docs') { renderDocs(); drxSync($('#d-course').value); }
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
     if (b.dataset.tab === 'people') peopleOpen();
     if (b.dataset.tab === 'posts') whoPaint();   /* ويُعاد الطلاءُ لا الجلسة: whoPaint تعرف */
@@ -283,14 +292,19 @@
     el.innerHTML = '<span class="a-who__t">…</span>';
     let u = null;
     try {
-      const r = await fetch('/api/auth/me', { credentials: 'same-origin', cache: 'no-store' });
+      /* `x-as: site` — read the site's login, not the reader's. The two now
+         live in separate cookies, so opening this page no longer signs the
+         reader out of the main site. */
+      const r = await fetch('/api/auth/me',
+        { credentials: 'same-origin', cache: 'no-store', headers: { 'x-as': 'site' } });
       if (r.ok) u = (await r.json()).user;
     } catch (e) { /* لا شبكة */ }
 
     /* وما لم تكن الجلسةُ جلسةَ الموقع أصلًا، تُفتح جلستُه — كائنًا من كان الداخل */
     if (!u || u.id !== SITE_UID) {
       try {
-        const r = await fetch('/api/auth/site', { method: 'POST', credentials: 'same-origin' });
+        const r = await fetch('/api/auth/site',
+          { method: 'POST', credentials: 'same-origin', headers: { 'x-as': 'site' } });
         if (r.ok) u = (await r.json()).user;
       } catch (e) { /* لا شبكة: تبقى الجلسةُ القائمة */ }
     }
@@ -538,15 +552,67 @@
   let docImg = '';        // صورة الدكتور (dataURL مصغَّرة)
   let docEdit = null;     // معرّف الدكتور قيد التعديل
 
-  function fillCourseSelects() {
-    const opts = cat.courses.map(c => `<option value="${esc(c.code)}">${esc(c.ar)} — ${esc(c.code)}</option>`).join('');
-    ['#d-course'].forEach(sel => {
-      const el = $(sel); if (!el) return;
-      const keep = el.value;
-      el.innerHTML = opts;
-      if (keep && cat.courses.some(c => c.code === keep)) el.value = keep;
+  /* ===== والمادةُ المختارةُ تبقى بعد تحديث الصفحة =====
+     كان الاختيارُ يُستعاد من قيمة القائمة نفسِها (‎el.value‎) — وهي فارغةٌ عند
+     أوّل ملءٍ بعد التحميل، فتقع القائمةُ على **أوّل مادّةٍ في الكتالوج** صامتةً.
+     فمن أضاف دكتورًا لمادّةٍ ثمّ حدّث الصفحة لم يجده: الدكتورُ في مادّته، والقائمةُ
+     تعرض مادّةً أخرى. وقد وقع، وقيل «انضاف ثمّ اختفى».
+     فتُحفظ كما يُحفظ تصفيةُ الخيط الزمنيّ (‎LS_TL‎) — العادةُ نفسُها في هذا الملفّ.
+     و‎sessionStorage‎ لا ‎localStorage‎: هي حالُ نظرةٍ لا تفضيلٌ يدوم. */
+  const LS_DOC = 'academia2:admin:doc';
+  const docCourseSaved = () => { try { return sessionStorage.getItem(LS_DOC) || ''; } catch (e) { return ''; } };
+  const docCourseKeep = c => { try { sessionStorage.setItem(LS_DOC, c || ''); } catch (e) {} };
+
+  /* ===== وتصفيةُ القائمة: المواد عشراتٌ والشريطُ مشوار =====
+     تُكتب حروفٌ فتقصر القائمة. والمقارنةُ على ما يُعرض وما يُكتب معًا: الاسمُ
+     العربيُّ والرمزُ والاسمُ الكامل — كما في بحث تبويب المواد (‎#c-search‎)، عادةٌ
+     واحدةٌ لا اثنتان.
+     ===== والمختارةُ لا تسقط بالتصفية أبدًا =====
+     لو صُفّيت خارجَ القائمة لَاختار المتصفّحُ أوّلَ الباقين صامتًا — وهو عينُ العطب
+     الذي أُصلح قبل قليل: «أضفتُ دكتورًا ثمّ لم أجده». فتُلحق دائمًا ولو لم تطابق،
+     فلا يتبدّل اختيارُك إلّا بيدك. */
+  /* ===== ومادّةٌ لها معملٌ صفّان لا صفٌّ واحد =====
+     المحاضرةُ والمعملُ نشاطان مستقلّان في هذا الموقع: مساهماتُهما تُخزَّن تحت
+     مفتاحين (‎«ICS 104»‎ و‎«ICS 104::معمل»‎)، ولكلٍّ دكاترتُه — والمعملُ يُدرّسه غيرُ
+     من يُدرّس المحاضرة في الغالب. فالقائمةُ تعرضهما بندين، وينفصل عندهما كلُّ شيء:
+     الدكاترةُ المضافون، والاقتراحاتُ الواصلة.
+     والمفتاحُ يُبنى بالصيغة التي يبنيها بها الموقعُ نفسُه (‎code + '::معمل'‎)، فلا
+     صيغتان لمفتاحٍ واحد. */
+  const LAB_SUFFIX = '::معمل';
+  function courseKeys() {
+    const out = [];
+    cat.courses.forEach(c => {
+      out.push({ key: c.code, c: c });
+      if (c.lab) out.push({ key: c.code + LAB_SUFFIX, c: c });
     });
+    return out;
   }
+  const courseMatch = (c, q) =>
+    !q || (c.ar + ' ' + c.code + ' ' + (c.full || '')).toLowerCase().includes(q);
+
+  function fillCourseSelects() {
+    const el = $('#d-course'); if (!el) return;
+    const q = (($('#d-search') || {}).value || '').trim().toLowerCase();
+    const keep = el.value || docCourseSaved();
+    const all = courseKeys();
+    const hit = all.filter(x => courseMatch(x.c, q));
+    const list = (keep && !hit.some(x => x.key === keep))
+      ? hit.concat(all.filter(x => x.key === keep))
+      : hit;
+    el.innerHTML = list
+      .map(x => `<option value="${esc(x.key)}">${esc(courseLabel(x.key))} — ${esc(x.c.code)}</option>`)
+      .join('');
+    if (keep && list.some(x => x.key === keep)) el.value = keep;
+    const cnt = $('#d-count');
+    if (cnt) cnt.textContent = q ? `${hit.length} من ${all.length}` : '';
+  }
+  /* ولا يُعاد رسمُ قائمة الدكاترة إلّا إن تبدّلت المادّة — والتصفيةُ لا تبدّلها */
+  const dSearch = $('#d-search');
+  if (dSearch) dSearch.addEventListener('input', () => {
+    const was = $('#d-course').value;
+    fillCourseSelects();
+    if ($('#d-course').value !== was) renderDocs();
+  });
 
   const drAvatar = d => d.img ? `<img src="${d.img}" alt="">` : esc((d.name || '؟').trim().charAt(0));
 
@@ -557,25 +623,229 @@
     return s.cinfo[code].doctors;
   }
 
+  /* ============================================================
+     SUGGESTED INSTRUCTORS
+     ============================================================
+     A reader who cannot find an instructor in a course's filter list sends a
+     suggestion from the site. It arrives here as an ordinary contribution in
+     the `drx` section of that course -- name in Arabic, name in English, photo,
+     and the server's record of who sent it.
+
+     WHAT COUNTS AS PENDING
+     A suggestion is pending until an instructor in this course carries its id.
+     There is no second list of "handled" ones to keep in step: approving writes
+     `fromId` onto the instructor it creates, and that IS the record. Delete the
+     instructor and the suggestion comes back -- which is right, it was never
+     dealt with.
+
+     WHAT APPROVING DOES
+     It adds the instructor to this course exactly as adding one by hand does,
+     keeping the photo and both names, plus who suggested it. From that moment
+     it is an ordinary instructor with edit and delete beside it. */
+  const drxOf = (s, code) => (((s.cinfo || {})[code] || {}).posts || {}).drx || [];
+
+  function drxPending(s, code) {
+    const taken = {};
+    (((s.cinfo || {})[code] || {}).doctors || []).forEach(d => { if (d.fromId) taken[d.fromId] = 1; });
+    return drxOf(s, code).filter(p => p && p.id && !taken[p.id]);
+  }
+
+  /* من اقترحه: اسمُه وصورتُه من الخادم (‎u‎ على المساهمة) — ولوحةُ الأدمن لا تخترعهما */
+  const drxWho = p => (p.u || {});
+
+  /* ===== ولا تُعرض اقتراحاتٌ لم تُطلب =====
+     المساهماتُ تُجذب مادّةً مادّة حين تُفتح المادّة في الموقع — واللوحةُ تعرض مادّةً
+     لا تفتحها، فذاكرتُها منها خالية.
+     ===== وتُسأل كلَّما نظرتَ، لا مرّةً في الجلسة =====
+     كان السؤالُ مرّةً واحدةً لكلّ مادّة، فمن فتح التبويبَ ثمّ وصل اقتراحٌ لم يره
+     حتّى يُحدّث الصفحة. فيُسأل عند كلّ فتحٍ للتبويب وكلّ تبديلٍ للمادّة — وهما
+     فعلا إنسانٍ لا رسمة، فلا تدور الرسمةُ على نفسها.
+     و‎drxBusy‎ يمنع طلبين متلاحقين لمادّةٍ واحدة، لا أكثر. */
+  const drxBusy = {};
+  function drxSync(code) {
+    if (!code || drxBusy[code] || typeof window.acPull !== 'function') return;
+    drxBusy[code] = 1;
+    Promise.resolve(window.acPull(code, true))
+      .catch(() => {})
+      .then(() => { delete drxBusy[code]; renderDrx(); });
+  }
+
+  /* ===== وأين ينتظر ما ليس في هذه المادّة؟ =====
+     العمودُ يعرض اقتراحاتِ المادّة المختارة وحدَها — وهو المطلوب. لكنّ من أرسل
+     اقتراحًا لمادّةٍ ثمّ فتح اللوحةَ على غيرها قال «لم يصل»، والاقتراحُ واصلٌ
+     ينتظر في مادّته. وقد وقع، وضاع فيه وقت.
+     فيُسأل الخادمُ مرّةً واحدةً عن مساهماته (‎/api/admin/posts‎ يردّ المادّةَ والبندَ
+     لكلّ واحدة)، فيُقال أين ينتظر الباقي — ويُنقر فيُفتح. ولا يُعدّ ما اعتُمد:
+     الدكتورُ يحمل معرّفَ اقتراحه (‎fromId‎)، وهو سجلُّ الاعتماد نفسُه.
+     ويحتاج جلسةَ القفل؛ فإن لم تكن سكت ولم يُعطّل شيئًا. */
+  let drxMap = null;
+  async function drxWhere() {
+    if (drxMap) return drxMap;
+    let r = null;
+    try { r = await gAsk('posts?limit=200'); } catch (e) { r = null; }
+    drxMap = (r && r.ok ? (r.j.posts || []) : [])
+      .filter(p => p && p.sec === 'drx').map(p => ({ code: p.code, id: p.id }));
+    return drxMap;
+  }
+  function paintDrxWhere() {
+    const el = $('#drx-where'); if (!el) return;
+    const cur = $('#d-course').value, s = app(), by = {};
+    (drxMap || []).forEach(x => {
+      if (x.code === cur) return;
+      const docs = (((s.cinfo || {})[x.code] || {}).doctors) || [];
+      if (docs.some(d => d.fromId === x.id)) return;   /* اعتُمد، فلا ينتظر */
+      by[x.code] = (by[x.code] || 0) + 1;
+    });
+    const keys = Object.keys(by);
+    el.innerHTML = keys.length
+      ? 'وتنتظر في: ' + keys.map(c =>
+          `<button type="button" class="a-jump" data-jump="${esc(c)}">${esc(courseLabel(c))} (${by[c]})</button>`
+        ).join(' · ')
+      : '';
+  }
+  /* ===== والقفزةُ واحدةٌ لسطرَي الدليل =====
+     «وتنتظر في» و«ولهم دكاترة في» يقولان الشيءَ نفسَه: ثَمّ شيءٌ في مادّةٍ أخرى.
+     فمُمسكٌ واحدٌ لهما. والمفتاحُ يُلحق بالقائمة إن لم يكن فيها — فمفتاحٌ خارجَ
+     الكتالوج يُبلَغ ولا يبقى خبرًا لا يُنقر، وهو الذي كان يُخفي دكتورًا تسرّب. */
+  function jumpTo(key) {
+    const sel = $('#d-course');
+    if (![].some.call(sel.options, o => o.value === key)) {
+      sel.insertAdjacentHTML('beforeend',
+        `<option value="${esc(key)}">${esc(courseLabel(key))} — ${esc(key)}</option>`);
+    }
+    sel.value = key;
+    cancelDoc(); renderDocs(); drxSync(key);
+  }
+  ['#drx-where', '#doc-where'].forEach(q => {
+    const host = $(q); if (!host) return;
+    host.addEventListener('click', e => {
+      const b = e.target.closest('[data-jump]');
+      if (b) jumpTo(b.dataset.jump);
+    });
+  });
+
+  function renderDrx() {
+    const code = $('#d-course').value;
+    const host = $('#drx-list'); if (!host) return;
+    drxWhere().then(paintDrxWhere).catch(() => {});
+    const list = code ? drxPending(app(), code) : [];
+    const n = $('#drx-n');
+    if (n) n.textContent = list.length ? String(list.length) : '';
+    host.innerHTML = list.length
+      ? list.map(p => {
+          const d = p.data || {}, w = drxWho(p);
+          return `<div class="a-item a-item--drx" data-drx="${esc(p.id)}">
+            <span class="a-av">${d.img ? `<img src="${esc(d.img)}" alt="">` : esc((d.ar || '؟').trim().charAt(0))}</span>
+            <div class="a-item__main">
+              <span class="a-item__t">${esc(d.ar) || '—'}${d.en ? `<span class="a-en">${esc(d.en)}</span>` : ''}</span>
+              <span class="a-item__sub a-by">
+                <span class="a-by__av">${w.img ? `<img src="${esc(w.img)}" alt="">` : esc((w.name || '؟').trim().charAt(0))}</span>
+                اقترحه ${esc(w.name || 'مساهم')}
+              </span>
+            </div>
+            <div class="a-acts">
+              <button type="button" class="a-btn a-btn--gold" data-act="ok">اعتماد</button>
+            </div>
+          </div>`;
+        }).join('')
+      : `<p class="a-empty">لا اقتراحات في «${esc(courseLabel(code))}».</p>`;
+  }
+
+  $('#drx-list').addEventListener('click', e => {
+    const row = e.target.closest('[data-drx]'); if (!row) return;
+    if (!e.target.closest('[data-act="ok"]')) return;
+    const code = $('#d-course').value, s = app();
+    const p = drxOf(s, code).find(x => x && x.id === row.dataset.drx);
+    if (!p) return;
+    const d = p.data || {}, w = drxWho(p);
+    if (!confirm(`اعتماد «${d.ar || '—'}» دكتورًا في «${courseLabel(code)}»؟`)) return;
+    docsOf(s, code).push({
+      id: 'd' + Date.now().toString(36), name: d.ar || '', en: d.en || '', img: d.img || '',
+      /* ‏‎fromId‎ هو سجلُّ الاعتماد نفسُه: به يُعرف أنّ الاقتراحَ عُولج */
+      fromId: p.id,
+      me: false, u: { name: 'الأدمن' }, by: { name: w.name || '', img: w.img || '' },
+      ts: Date.now(), posts: [],
+    });
+    if (saveApp(s)) { renderDocs(); toast(`اعتُمد «${d.ar || '—'}»`); }
+  });
+
+  /* ===== وأين دكاترةُ المواد الأخرى؟ =====
+     الدكاترةُ يسكنون الدرجَ تحت مفتاح مادّتهم، والقائمةُ تعرض المفتاحَ المختار
+     وحدَه. فمن كان له دكتورٌ تحت مفتاحٍ لا يخطر بباله — معملُ مادّةٍ مثلًا، أو
+     مفتاحٌ ليس في الكتالوج أصلًا — لم يجده أبدًا، ولا شيءَ يقول له أين هو.
+     ولا يحتاج هذا خادمًا: الدرجُ بين يدي اللوحة، فيُعدُّ ما فيه ويُقال. */
+  function paintDocWhere() {
+    const el = $('#doc-where'); if (!el) return;
+    const cur = $('#d-course').value, s = app(), by = {};
+    Object.keys((s.cinfo || {})).forEach(k => {
+      if (k === cur) return;
+      const n = ((((s.cinfo || {})[k] || {}).doctors) || []).length;
+      if (n) by[k] = n;
+    });
+    const keys = Object.keys(by).sort();
+    el.innerHTML = keys.length
+      ? 'ولهم دكاترة في: ' + keys.map(c =>
+          `<button type="button" class="a-jump" data-jump="${esc(c)}">${esc(courseLabel(c))} (${by[c]})</button>`
+        ).join(' · ')
+      : '';
+  }
+
+  /* ===== ودكاترةُ المواد الأخرى يُنشرون معهم =====
+     الرسمُ يعرض مادّةً واحدة، والدكاترةُ في الدرج تحت مفاتيحَ كثيرة — وكلُّهم
+     محبوسون في هذا المتصفّح. فلو انتُظر أن تُفتح كلُّ مادّةٍ بيدها لَبقي أكثرُهم
+     محبوسًا. فتُمسح المفاتيحُ كلُّها مرّةً عند فتح اللسان: كتابةٌ محلّيّةٌ رخيصة،
+     والدفعُ بعدها مؤجَّلٌ يجمعها */
+  let docSwept = 0;
+  function docPubAll() {
+    if (docSwept || typeof window.acDocPub !== 'function') return;
+    docSwept = 1;
+    const s = app(), C = (s && s.cinfo) || {};
+    Object.keys(C).forEach(k => {
+      if (!(((C[k] || {}).doctors) || []).length) return;
+      try { window.acDocPub(k); } catch (e) {}
+    });
+  }
+
   function renderDocs() {
     const code = $('#d-course').value;
+    docCourseKeep(code);        /* كلُّ رسمةٍ تُثبّت المادّةَ التي رُسمت، فلا يُنسى الاختيار */
     if (!code) { $('#doc-list').innerHTML = `<p class="a-empty">أضِف مادة أولًا.</p>`; return; }
+    /* ===== والقائمةُ تُنشر مع كلّ رسمة =====
+       اللوحةُ تكتب الدكاترةَ في الدرج رأسًا، وليست تلك مساهمةً فلا يمشي عليها
+       الدفع — فلم يبلغ الخادمَ منهم أحدٌ قطّ، ولم يظهر في متصفّحٍ آخرَ معتمَدٌ
+       واحد. فيُنادى بابُ المحرّك: يفتح لكلّ دكتورٍ صفَّه في مساهمة الموقع
+       (‎pub‎ ههنا لأنّ هذي اللوحة) ويدفعها.
+       وموضعُه الرسمُ لا الحفظ: كلُّ تبديلٍ في القائمة يُعقبه رسمٌ — اعتمادٌ
+       وإضافةٌ وتعديلٌ وحذف — فلا يُنسى واحد */
+    if (typeof window.acDocPub === 'function') { try { window.acDocPub(code); } catch (e) {} }
+    docPubAll();
     const list = docsOf(app(), code);
     $('#doc-list').innerHTML = list.length
       ? list.map((d, i) => `<div class="a-item" data-di="${i}">
           <span class="a-av">${drAvatar(d)}</span>
           <div class="a-item__main">
             <span class="a-item__t">${esc(d.name) || '—'}${d.en ? `<span class="a-en">${esc(d.en)}</span>` : ''}</span>
-            <span class="a-item__sub">${(d.posts || []).length} مساهمة عنه</span>
+            <span class="a-item__sub">${(d.posts || []).length} مساهمة عنه${
+              d.by && d.by.name ? ` · باقتراح ${esc(d.by.name)}` : ''}</span>
           </div>
           <div class="a-acts">
             <button type="button" class="a-btn" data-act="edit">تعديل</button>
             <button type="button" class="a-btn a-btn--del" data-act="del">حذف</button>
           </div>
         </div>`).join('')
-      : `<p class="a-empty">لا دكاترة في هذه المادة بعد.</p>`;
+      /* ===== وتُسمّى المادةُ في الحال الصفريّة =====
+         «لا دكاترة في هذه المادة» لا تقول **أيّ** مادّة، فتُقرأ على المادّة التي في
+         ذهن الناظر لا التي في القائمة. فإن وقعت القائمةُ على غيرِها بدا أنّ عملَه
+         ضاع. فيُقال الاسمُ صريحًا — فراغٌ منسوبٌ لا يُلبس. */
+      : `<p class="a-empty">لا دكاترة في «${esc(courseLabel(code))}» بعد.</p>`;
+    const n = $('#doc-n');
+    if (n) n.textContent = list.length ? String(list.length) : '';
+    paintDocWhere();
+    renderDrx();   /* العمودان يُقرآن معًا: ما اعتُمد يخرج من هذا ويدخل ذاك في رسمةٍ واحدة */
   }
-  $('#d-course').addEventListener('change', () => { cancelDoc(); renderDocs(); });
+  $('#d-course').addEventListener('change', () => {
+    cancelDoc(); renderDocs(); drxSync($('#d-course').value);
+  });
 
   $('#d-pick').addEventListener('click', () => $('#d-img').click());
   $('#d-img').addEventListener('change', e => {
@@ -644,6 +914,11 @@
       const n = (d.posts || []).length;
       if (!confirm(`حذف «${d.name}»؟${n ? `\nستُحذف معه ${n} مساهمة عنه.` : ''}`)) return;
       list.splice(i, 1);
+      /* ===== ويُنزع صفُّه من المنشور، وإلّا عاد =====
+         صار للدكتور صفٌّ في مساهمة الموقع (به يعرفه المتصفّحُ الآخر)، والقراءةُ
+         تبني القائمةَ من الصفوف. فمن حذفه من القائمة وحدَها وجده أمامه في
+         الرسمة التالية — حذفٌ يُبطله قارئُه */
+      if (typeof window.acDocDrop === 'function') { try { window.acDocDrop(code, d.id); } catch (e2) {} }
       if (saveApp(s)) { cancelDoc(); renderDocs(); toast('حُذف الدكتور'); }
     }
   });

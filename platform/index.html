@@ -478,9 +478,10 @@
           <div class="dm-courses__list" id="dm-courses"></div>
         </div>
       </div>
+      <!-- ولا زرَّ حفظ: كلُّ ما في النافذة يقع فورَ وقوعه، كما كانت
+           المادّةُ تُحذف من قائمتها ههنا من قبل -->
       <div class="dm-actions">
         <button class="dm-del" id="dm-delete" type="button">حذف الترم</button>
-        <button class="dm-save" id="dm-save" type="button">حفظ</button>
       </div>
     </div>
   </div>
@@ -521,6 +522,37 @@
        ولا يبقى في المشروع اسمُ برنامجٍ آخر ولا ملفٌّ يُقرأ في كلّ إقلاع -->
   <!-- ‏‎seed-cards.js‎ لا يُحمَّل ههنا: ٦٣٥ك تُقرأ مرّةً في عمر المتصفّح
        ثمّ لا تُقرأ أبدًا. فيجلبها المحرّكُ عند الحاجة وحدَها (م٥). -->
+  <!-- عبّئ المادة من سيلبوسها — ROADMAP-SYLLABUS.md -->
+  <div class="mmodal syl-modal" id="syl-modal" hidden>
+    <div class="mmodal__card syl-card">
+      <div class="mmodal__head">
+        <h3 class="mmodal__title" id="syl-title"></h3>
+        <button class="mmodal__close" id="syl-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="syl-body">
+        <section class="syl-half syl-half--p">
+          <p class="syl-step"><b>1</b><span id="syl-s1"></span></p>
+          <textarea class="syl-prompt" id="syl-prompt" readonly spellcheck="false"></textarea>
+          <button class="syl-btn syl-btn--copy" id="syl-copy" type="button"></button>
+        </section>
+        <section class="syl-half syl-half--d">
+          <p class="syl-step"><b>2</b><span id="syl-s2"></span></p>
+          <div class="syl-drop" id="syl-drop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>
+            </svg>
+            <b id="syl-drop-t"></b>
+            <button class="syl-btn" id="syl-pick" type="button"></button>
+            <input type="file" id="syl-file" accept=".json,.txt,application/json,text/plain" hidden>
+          </div>
+          <div class="syl-out" id="syl-out" hidden></div>
+          <button class="syl-btn syl-btn--go" id="syl-done" type="button" hidden></button>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->

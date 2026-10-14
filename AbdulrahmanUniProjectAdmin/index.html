@@ -149,6 +149,11 @@
             <span>المادة</span>
             <select id="d-course"></select>
           </label>
+          <!-- تصفية القائمة: المواد عشرات، والشريط مشوار. تُكتب حروف فتقصر القائمة -->
+          <label class="a-fld a-fld--grow">
+            <span>تصفية القائمة <i class="a-count" id="d-count"></i></span>
+            <input type="text" id="d-search" placeholder="اسم المادة أو رمزها…">
+          </label>
         </div>
         <div class="a-row">
           <label class="a-fld a-fld--grow">
@@ -172,7 +177,21 @@
         </div>
       </div>
 
-      <div class="a-list" id="doc-list"></div>
+      <!-- عمودان: الموجودون يمينًا، والمقترَحون يسارًا. الاقتراح يعبر بضغطة «اعتماد» -->
+      <div class="a-two">
+        <div class="a-col">
+          <h2 class="a-colt">الدكاترة في هذه المادة <i class="a-count" id="doc-n"></i></h2>
+          <!-- وأين دكاترة المواد الأخرى: يُقرأ من الدرج، فلا مادة تختفي عن اللوحة -->
+          <p class="a-where" id="doc-where"></p>
+          <div class="a-list" id="doc-list"></div>
+        </div>
+        <div class="a-col">
+          <h2 class="a-colt">اقتراحات المساهمين <i class="a-count" id="drx-n"></i></h2>
+          <!-- وأين ينتظر ما ليس في هذه المادة: رحلة واحدة تسأل الخادم عن كل اقتراح عنده -->
+          <p class="a-where" id="drx-where"></p>
+          <div class="a-list" id="drx-list"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== المساهمات بالتاريخ: خيط زمني واحد لكل مساهمات المكتبة ===== -->
@@ -227,14 +246,25 @@
       <div class="a-tl" id="tl-list"></div>
     </section>
 
-    <!-- ===== المساهمات: المكتبة نفسها مزروعة هنا (ترميز الموقع وسكربتاته) ===== -->
-    <!-- ============================================================
-         الإشراف — النافذةُ الوحيدةُ على الخادم
-         ============================================================
-         سائرُ ألواح اللوحة تعمل على درجِ فاتحها. وهذا وحدَه يسأل الخادمَ ويكتب
-         فيه، ولا يفتحه إلّا صاحبُ الموقع — ومن سواه يجد لوحًا يقول ذلك ولا يرى
-         شيئًا. -->
+    <section class="a-panel" id="a-panel-people" hidden>
+      <header class="a-head">
+        <h1>المستخدمون</h1>
+        <p>مَن سجّل في أكاديميا — الصورة والاسم والبريد، وما صنعوا.</p>
+      </header>
 
+      <div class="p-gate" id="p-gate">جارٍ السؤال…</div>
+
+      <div id="p-body" hidden>
+        <div class="a-tools">
+          <span class="a-count" id="p-count"></span>
+          <input class="p-find" id="p-find" type="search" placeholder="ابحث باسمٍ أو بريد…">
+          <button type="button" class="a-btn" id="p-copy">انسخ البُرُد</button>
+        </div>
+        <div class="p-grid" id="p-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== المساهمات: المكتبة نفسها مزروعة هنا (ترميز الموقع وسكربتاته) ===== -->
     <section class="a-panel" id="a-panel-posts" hidden>
       <header class="a-head">
         <h1>المساهمات</h1>
@@ -252,6 +282,8 @@
       <div class="a-who" id="a-who" hidden></div>
 
       <div id="lib-host">
+<!-- ‎graft‎: جسدُ الموقع مقتطعٌ وقتَ النشر — لا يُحرَّر ههنا -->
+
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
        يمين مع العربية · يسار مع الإنجليزية (عبر html[data-lang]) -->
@@ -267,6 +299,24 @@
       <button type="button" data-tab="library">
         <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         <span class="tab-tx">الركن</span>
+      </button>
+    </nav>
+
+    <!-- ===== وما يخصُّك أنت: مجموعةٌ ثانيةٌ في قاع الشريط =====
+         الأوليان أبوابُ **المحتوى** (مكتبةُ الموقع وركنُك فيه)، وهاتان سجلّاك أنت —
+         لا تُتصفَّح بل يُرجع إليهما. فتُفصلان بفراغٍ يدفعهما إلى القاع فوق شريط
+         التحكّم، فلا تُقرأ الأربعةُ صفًّا واحدًا وهي جنسان. -->
+    <nav class="tabs tabs--me">
+      <!-- الاختبارات الماضية: ورقةٌ عليها صحّ — «امتحانٌ فُرغ منه» لا ساعةٌ ولا رسمٌ
+           بيانيّ، فالمقصودُ الأوراقُ التي مرّت لا الزمنُ ولا الأرقام -->
+      <button type="button" data-tab="past">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2 2 4-4"/></svg>
+        <span class="tab-tx">الاختبارات</span>
+      </button>
+      <!-- الإحصائيات: أعمدةٌ صاعدة — «ما جمعتَه» لا «ما فعلتَه»، فلا تلتبس بورقة صحّ -->
+      <button type="button" data-tab="stats">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+        <span class="tab-tx">إحصائياتي</span>
       </button>
     </nav>
 
@@ -294,13 +344,30 @@
         <button type="button" data-lang="en">English</button>
       </nav>
 
-      <!-- بروفايل الحساب: صورة + اسم · نقره يفتح نافذة الحساب على الجانب -->
+      <!-- قاعُ الشريط: وجهان لحالٍ واحدة —
+           العضوُ يرى بروفايلَه وبابَ الخروج، والزائرُ يرى بابَي الدخول.
+           والاثنان في الوسم معًا ويُبدَّل بينهما بصنفٍ على ‎body‎ (‎is-guest‎)، لا
+           بحقنِ وسمٍ: المستمعان معلَّقان على الأزرار نفسِها منذ الإقلاع، ولو أُعيد
+           بناءُ الجوف لَذهبا معه -->
       <div class="side-acct">
+        <!-- عضو: صورة + اسم · نقره يفتح صفحة الحساب -->
         <button type="button" class="side-profile" id="side-profile"></button>
         <button type="button" class="side-logout" id="side-logout" title="تسجيل الخروج" aria-label="تسجيل الخروج">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h9"/></svg>
           <span class="side-logout-tx">تسجيل الخروج</span>
         </button>
+
+        <!-- زائر: إنشاءُ حسابٍ (مصمَت — الفعلُ المقصود) ثمّ تسجيلُ دخولٍ (خفيفٌ تحته) -->
+        <div class="side-auth" id="side-auth">
+          <button type="button" class="side-join" id="side-join">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="8.5" cy="7" r="3.5"/><path d="M18 7v6M21 10h-6"/></svg>
+            <span class="side-auth-tx">إنشاء حساب</span>
+          </button>
+          <button type="button" class="side-login" id="side-login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v16h4"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/></svg>
+            <span class="side-auth-tx">تسجيل الدخول</span>
+          </button>
+        </div>
       </div>
     </div>
   </aside>
@@ -377,6 +444,10 @@
 
     <!-- الإطار المرقّط: مواد الترم المحدد -->
     <div class="term-frame" id="term-frame" hidden>
+      <!-- ===== وإطارٌ خالٍ يقول ما يُفعل به =====
+           كان مستطيلًا مرقّطًا فارغًا لا يقول شيئًا، فمن أنشأ ترمَه وقف أمامه
+           لا يدري من أين يبدأ. والدليلُ يشير إلى الزرّ الذي يفتح البابَ نفسَه. -->
+      <p class="term-frame__hint" id="term-hint">أضف مواد إلى ترمك من + بالأعلى.</p>
       <!-- بِكرة كتب مواد الترم (مثل المكتبة) — يبنيها makeReel -->
       <div id="lib-grid" hidden></div>
     </div>
@@ -386,8 +457,19 @@
     <div class="lib-course" id="lib-course" hidden></div>
   </section>
 
+  <!-- لوحة الاختبارات الماضية: كل اختبار دخله المستخدم وبدأ فيه — يُملأ من الجافا -->
+  <section class="panel" id="panel-past" hidden></section>
+
+  <!-- لوحة الإحصائيات: ما صنعه المستخدم وما جلسه ومتى — يُملأ من الجافا -->
+  <section class="panel" id="panel-stats" hidden></section>
+
   <!-- لوحة الحساب: تحل محل السوق/المكتبة في منطقة المحتوى عند نقر البروفايل -->
   <section class="panel" id="panel-account" hidden></section>
+
+  <!-- ركنُ الزائر: تحل محل «الركن» لمن لا حساب له — يُملأ من الجافا.
+       ولوحٌ مستقلٌّ لا حجبةٌ فوق الركن: الركنُ يُبنى من بياناتٍ ليست للزائر أصلًا،
+       فرسمُه ثمّ سترُه عملٌ ضائعٌ ووعدٌ كاذبٌ بما تحت الستار -->
+  <section class="panel" id="panel-nook-lock" hidden></section>
 
   <!-- النافذة المنبثقة: سوق المواد (ثيم بترولي الجامعة) -->
   <div class="mmodal" id="market-modal" hidden>
@@ -474,6 +556,161 @@
     </div>
   </div>
 
+  <!-- نافذة إضافة بطاقة (على غرار نافذة الإضافة في أنكي): شطر علويّ فيه إعدادات البطاقة
+       (لغتها · نوعها · مكان حفظها) ثم خطّ، وتحته شريط التنسيق ثم الوجه والظهر -->
+  <!-- سؤال نشر المساهمة: يُفتح عند الإرسال ما دامت غير مدرجة -->
+  <!-- ============================================================
+       منتقي التاريخ — «البكرات» (اتّجاه ب من مختبر date-pick-lab)
+       ============================================================
+       ثلاثةُ أعمدةٍ تُدار، والمختارُ ما وقف في النافذة الوسطى لا ما أصابه
+       الإصبع. ويحلّ محلَّ منتقي المتصفّح في موضعين: تاريخَي الترم، وموعدِ
+       بندِ الدرجة — وذاك محدودٌ بحدَّي الترم فتُطفأ الأيّامُ خارجَهما.
+
+       وهو فوق ‎.mmodal‎ في الطبقات: يُفتح من فوق نافذة «إعدادات الترم» نفسِها. -->
+  <div class="mmodal dpk" id="dpk-modal" hidden>
+    <div class="dp">
+      <div class="dp__head">
+        <b class="dp__t" id="dpk-title"></b>
+        <button type="button" class="dp__x" id="dpk-x" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="dp__body" id="dpk-body"></div>
+      <div class="dp__foot">
+        <button type="button" class="dp__ghost" id="dpk-clear"></button>
+        <button type="button" class="dp__ghost" id="dpk-today"></button>
+        <span class="dp__spacer"></span>
+        <b class="dp__read" id="dpk-read">—</b>
+        <button type="button" class="dp__go" id="dpk-ok"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mmodal" id="pst-modal" hidden>
+    <div class="mmodal__card pst-card">
+      <p class="pst-q"></p>
+      <!-- ثلاثة خيارات في مستوًى واحد: أيقونةٌ ملوّنة واسمٌ تحتها — يُختار واحدٌ فينغلق -->
+      <div class="pst-opts"></div>
+      <p class="pst-hint"></p>
+    </div>
+  </div>
+
+  <div class="mmodal" id="card-modal" hidden>
+    <!-- دُرج البطائق: طبقةٌ علويّة تمتدّ على عرض الشاشة كلّه فوق الشريط الجانبيّ —
+         ابنٌ للنافذة لا للمسرح، وإلّا تقيّد بعرضه. زرُّ سحبه أيقونةٌ وحدها متدلّيةٌ من حافّته -->
+    <div class="cd-dw" id="cd-drawer">
+      <div class="cd-dw__tray">
+        <!-- النوع أوّل قرار: البطائق الأربع مفروشةً في الدُّرج -->
+        <div class="cd-types" id="cd-types" role="group" aria-label="نوع البطاقة"></div>
+      </div>
+      <!-- ===== صفُّ الحافّة: المِقبضُ ثمّ ألسنةُ المطويّات إلى يساره =====
+           الصفُّ متوسّطٌ في عرض الشاشة، فكلّما نزل لسانٌ **يسارَ** المِقبض انزاح المِقبضُ
+           يمينًا وبقي الكلُّ متوسّطًا — لا يُدفع من مكانه بل يقتسم الوسطَ مع ما جاوره -->
+      <div class="cd-dwrow">
+        <button type="button" class="cd-dw__handle" id="cd-handle" aria-expanded="false"></button>
+        <div class="cd-mins" id="cd-mins"></div>
+        <!-- الموازن: فراغٌ خاوٍ في ذيل الصفّ عرضُه (عرض «+» + الفُرجة). الصفُّ يقتسم وسطَه
+             معه فينزاح، فيستقرّ مركزُ **الألسنة** على مركز الشاشة ويقف «+» على طرفها —
+             فلا ترقص الألسنةُ كلّما فُتحت نافذةٌ أو طُويت. وهو فراغٌ لا ‎transform‎:
+             المتحوَّلُ يصير جذرَ خلفيّةٍ فيموت الضبابُ في أبنائه -->
+        <i class="cd-bal"></i>
+      </div>
+    </div>
+
+    <!-- لكلّ نافذةٍ طبقتُها: صفيحةٌ مطلقةٌ تملأ الشاشة وتتوسّط ما فيها. ولولاها لَاصطفّت
+         النوافذُ جنبًا إلى جنبٍ في صفّ النافذة الأمّ المرن بدل أن تتراكب — فتوسيطُ
+         الواحدة يستقيم في صفٍّ، وتوسيطُ اثنتين في **الموضع نفسِه** لا يستقيم إلّا بطبقتين.
+         والصفيحةُ لا تلتقط المؤشّر (‎pointer-events:none‎) وإلّا حجبت العتمةَ التي تُغلق بها -->
+    <div class="cd-layer">
+    <!-- ثلاثة أسطحٍ مستقلّة على مسرحٍ واحد: منتقي النوع · البطاقة · الوجهة.
+         لا شريطَ أدواتٍ ثابت — فقاعةُ التحديد تنوب عنه، فتبقى البطاقة بطاقةً -->
+    <div class="cd-stage">
+      <div class="mmodal__card mmodal__card--md" id="cd-card">
+        <!-- الترويسة العليا: من صنعها · نسختها · من عندها الآن · زياراتها.
+             وأزرارُ النافذة (✕ · تكبير · نافذة مستقلّة) بُنيت داخلها في ‎renderCardDlg‎
+             لا هنا: لتقع على خطّ ما فيها من أيقونات بمحاذاةٍ واحدة مهما تبدّل ارتفاعُه -->
+        <div class="cd-meta" id="cd-meta"></div>
+
+        <!-- كل حقل ونتوؤه: الأيقونة لسانٌ بارز فوق مستطيل النصّ لا تسمية عائمة فوقه -->
+        <div class="cd-body">
+          <div class="cd-field">
+            <p class="cd-flab" id="cd-front-lab"></p>
+            <!-- مِسطرةُ التقريب: تقرأ ما تفعله أصابعُك وتُعدَّل منها. وترتيبُها في السطر
+                 ترتيبُ الكتابة: «‎−‎» أوّلًا فتقع يمينَ الرقم، و«‎+‎» آخرًا فتقع يسارَه.
+                 وهي أختُ الحقل لا ابنتُه، فلا يبلغها التقريبُ ولا تصغر معه -->
+            <span class="cd-zbar">
+              <button type="button" class="cd-zb" data-zs="-1">−</button>
+              <b class="cd-zval">100%</b>
+              <button type="button" class="cd-zb" data-zs="1">+</button>
+            </span>
+            <div class="cd-in" id="cd-front" contenteditable="true"></div>
+          </div>
+          <div class="cd-field">
+            <p class="cd-flab" id="cd-back-lab"></p>
+            <div class="cd-in" id="cd-back" contenteditable="true"></div>
+          </div>
+        </div>
+
+        <!-- الترويسة السفليّة: وجهةُ البطاقة وزرُّ نشرها — الزرُّ يمينًا والمسارُ يسارًا،
+             تصلهما شَرَطاتٌ تمرّ خلف مستطيل المسار. وكان الرصيفُ سطحًا مستقلًّا تحت النافذة
+             يصله خيطٌ رأسيّ، فصار الكلُّ جسمًا واحدًا -->
+        <div class="cd-foot" id="cd-foot"></div>
+      </div>
+
+      <!-- مقابضُ التوسيع الثمانية: أطرافٌ على حوافّ المسرح لا على البطاقة — المسرحُ هو
+           الصندوقُ الذي يُقاس ويُوسَّع، والبطاقةُ تملؤه. و‎ex/ey‎ الطرفُ المشدود:
+           ‎-1‎ يسارٌ أو أعلى · ‎+1‎ يمينٌ أو أسفل — بالجهات المرئيّة لا المنطقيّة،
+           فمؤشّرُ التوسيع نفسُه مرئيٌّ لا ينقلب بانقلاب الكتابة -->
+      <i class="cd-rz cd-rz--t" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--b" data-ey="1"></i>
+      <i class="cd-rz cd-rz--l" data-ex="-1"></i>
+      <i class="cd-rz cd-rz--r" data-ex="1"></i>
+      <i class="cd-rz cd-rz--tl" data-ex="-1" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--tr" data-ex="1" data-ey="-1"></i>
+      <i class="cd-rz cd-rz--bl" data-ex="-1" data-ey="1"></i>
+      <i class="cd-rz cd-rz--br" data-ex="1" data-ey="1"></i>
+    </div>
+    </div>
+    <!-- فقاعة التنسيق: تُلحق بالمسرح لا بالبطاقة كي لا يمحوها إعادةُ الرسم -->
+    <div class="cd-bub" id="cd-bub" hidden></div>
+  </div>
+
+  <!-- ===== نافذة «الدورة» — مُشغّلُ رزمة الشروح =====
+       ترويستُها غلافُ الدورة يمينًا واسمُها يساره. وجوفُها نصفان: المستطيلُ الكبير فيه
+       الشرحُ الجاري، ويساره شجرةُ الدورة بمجلداتها كمسارٍ يُنتقل فيه. -->
+  <div class="mmodal" id="vw-modal" hidden>
+    <div class="mmodal__card mmodal__card--course vw-card">
+      <div class="mmodal__head vw-head">
+        <!-- والغلافُ حاملُ توكناتٍ كذلك: هو خارج ‎.vw-body‎ فلا يبلغه حاملُها،
+             و‎.x3-art‎ تقرأ ‎--u-*‎ — فيلبس ‎vw-tok‎ ويذوب بها -->
+        <span class="vw-art vw-tok" id="vw-art"></span>
+        <h3 class="mmodal__title" id="vw-title"></h3>
+        <button class="mmodal__close" id="vw-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <!-- حاملُ التوكنات: يذوب بـ‎display: contents‎ فلا يُغيّر تخطيطَ الشبكة -->
+      <div class="vw-body"><span class="vw-tok">
+        <div class="vw-main" id="vw-main"></div>
+        <aside class="vw-side" id="vw-side"></aside>
+      </span></div>
+    </div>
+  </div>
+
+  <!-- ===== نافذة «استورد من المكتبة» =====
+       بابان أوّلًا (الشروح · البطائق والملخصات)، ثمّ مساهماتُ القسم المختار **بواجهة
+       المكتبة نفسِها**: ‎#cm-ui‎ يُنقل إلى جوفها كما يُنقل إلى رفّ الموارد، فلا يُبنى
+       عارضٌ ثانٍ ولا تُنسخ دالّةُ عرضٍ واحدة. وبابُ الرجوع في ترويستها يردّك إلى البابين -->
+  <div class="mmodal" id="jri-modal" hidden>
+    <div class="mmodal__card mmodal__card--course jri-card">
+      <div class="mmodal__head">
+        <button class="jri-back" id="jri-back" type="button" hidden></button>
+        <h3 class="mmodal__title" id="jri-title"></h3>
+        <button class="mmodal__close" id="jri-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="jri-body" id="jri-body"></div>
+      <!-- الرصيف: خبرُ ما حدَّدتَ، ثمّ وجهتُه في رحلتك، ثمّ فعلُ الاستيراد.
+           وهو قائمٌ من أوّل فتحةٍ — قبل الدخول من أيّ باب — ليُعرف أنّ للنافذة مقصدًا -->
+      <div class="jri-dock" id="jri-dock"></div>
+    </div>
+  </div>
+
   <!-- نافذة إعدادات الترم (الاسم + التواريخ + حذف) — نفس ثيم الجامعة -->
   <div class="mmodal" id="date-modal" hidden>
     <div class="mmodal__card mmodal__card--sm">
@@ -486,6 +723,9 @@
           <span id="dm-name-label">اسم الترم</span>
           <input type="text" id="dm-name">
         </label>
+        <!-- ‏‎type="text" readonly‎ لا ‎type="date"‎: القيمةُ تبقى ‎ISO‎ كما كانت
+             (‎.value‎ يُقرأ ويُكتب في المواضع نفسِها بلا تبديل)، والمنعُ لئلّا يفتح
+             المتصفّحُ منتقيَه فوق منتقينا. و‎inputmode="none"‎ تكفّ لوحةَ الهاتف. -->
         <label class="dm-field">
           <span id="dm-start-label">تاريخ البداية</span>
           <input type="text" id="dm-start" class="dm-date" readonly inputmode="none" placeholder="—">
@@ -500,15 +740,46 @@
           <div class="dm-courses__list" id="dm-courses"></div>
         </div>
       </div>
+      <!-- ولا زرَّ حفظ: كلُّ ما في النافذة يقع فورَ وقوعه، كما كانت
+           المادّةُ تُحذف من قائمتها ههنا من قبل -->
       <div class="dm-actions">
         <button class="dm-del" id="dm-delete" type="button">حذف الترم</button>
-        <button class="dm-save" id="dm-save" type="button">حفظ</button>
       </div>
     </div>
   </div>
 
+  <!-- شريط التحديد في محرّر «البطائق» (ROADMAP-SELBAR — اتّجاه أ «الحبّة»):
+       يظهر حين تُحدَّد بطائقُ أو مجلدات، ويملؤه cxBarPaint. ابنُ الجسم لا ابنُ اللوح
+       ليبقى وأنت تمرّر، وخارجُ #cm-ui كي لا يمحوه إعادةُ رسم الواجهة -->
+  <div class="cx-selbar" id="cx-selbar" hidden></div>
+
   <!-- منتقي ملف الصورة (مخفي، يُستدعى من مربّع صورة المادة) -->
   <input type="file" id="imgpick" accept="image/*" hidden>
+<script>
+    // تبديل التابات الأربعة — والمستمعُ على الشريط لا على مجموعةٍ منه:
+    // ‏querySelector('.tabs') يمسك الأولى وحدَها، فلا تصل ضغطةُ المجموعة الثانية.
+    document.getElementById('sidebar').addEventListener('click', e => {
+      const b = e.target.closest('button[data-tab]'); if (!b) return;
+      document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('is-active', x === b));
+      document.getElementById('side-profile').classList.remove('on');   // مغادرة لوحة الحساب
+      document.getElementById('panel-account').hidden = true;
+      // الركنُ للأعضاء: الزائرُ يُصرف إلى لوحٍ يقول له ما فيه ولا يبني ما لا يبقى له.
+      // والحارسُ ههنا لا في app.js لأنّ هذا هو المستمعُ الذي يفتح الألواح.
+      const guestNook = b.dataset.tab === 'library' && window.acIsGuest && window.acIsGuest();
+      document.getElementById('panel-nook-lock').hidden = !guestNook;
+      if (guestNook && window.acNookLock) window.acNookLock();
+      document.getElementById('panel-market').hidden  = b.dataset.tab !== 'market';
+      document.getElementById('panel-library').hidden = b.dataset.tab !== 'library' || guestNook;
+      document.getElementById('panel-past').hidden    = b.dataset.tab !== 'past';
+      document.getElementById('panel-stats').hidden   = b.dataset.tab !== 'stats';
+      // واللوحان يُبنيان عند فتحهما لا في كل إقلاع: حسابٌ يمشي في بياناتك كلها ولا يُنظر كل مرة
+      if (b.dataset.tab === 'past'  && window.acPastPaint)  window.acPastPaint();
+      if (b.dataset.tab === 'stats' && window.acStatsPaint) window.acStatsPaint();
+    });
+  </script>
+<!-- ‎graft/‎ -->
+      </section>
+
 
   
   

@@ -362,10 +362,52 @@ html[data-lang="en"] .crow { direction: ltr; }
 /* مرور الماوس على البطاقة يعتدل الكتاب نحو الناظر */
 .crow:hover .bk { transform: rotateY(7deg); }
 
+/* ============================================================
+   الوجهان: المرسومُ أساسٌ، والصورةُ فوقه
+   ============================================================
+   كان الاختيارُ ثنائيًّا — صورةٌ **أو** كتابٌ مرسوم. فبين طلبِ الصورة ووصولها
+   فراغٌ، وإن سقط الطلبُ بقي الفراغُ أبدًا ولا شيءَ يقول إنّ ثمّة مادّةً هنا.
+   فصار المرسومُ يُبنى دائمًا في السَّيل (وهو الذي يعطي المقاسَ ونسبةَ الكتاب)،
+   والمصوَّرُ مطلَقٌ فوقه يغطّيه. و‎onerror‎ في الجافا ينزع وجهَ الصورة فينكشف
+   المرسومُ تحتها — فلا أيقونةَ صورةٍ مكسورة ولا سطحٌ خاوٍ. */
+.bk--ph { position: relative; }
+/* ===== والنوعيّةُ تُرفع فوق قاعدة الحزمة =====
+   ‏‎.crow.bundle .bkface--img‎ (ثلاثةُ أصناف) تجعله ‎position: relative‎ في السَّيل.
+   وقاعدتي كانت صنفين، فغُلبت في مواد المحاضرة والمعمل وحدَها — فنزلت الصورةُ
+   **تحت** الكتاب المرسوم بدل أن تُركَّب فوقه، فظهر غلافان.
+   فأربعةُ أصنافٍ ههنا: تغلب مهما كان الترتيب، ولا تحتاج ‎!important‎. */
+/* ===== والصورةُ في السَّيل تعطي القدَّ، والمرسومُ خلفها =====
+   كانت الصورةُ مطلَقةً فوق المرسوم، والمرسومُ يفرض نسبةَ ‎0.7‎ — فمُطّت أغلفةٌ
+   نسبتُها غيرُ ذلك. فصارت الصورةُ بنسبتها كما كانت قبلُ (‎height:100%‎ و‎width:auto‎)،
+   والمرسومُ مطلَقٌ **تحتها** يملأ ما وراءها فيُرى قبل أن تصل.
+   وإن سقطت نزع ‎onerror‎ صنفَ ‎bk--img‎ فعاد المرسومُ إلى السَّيل وأعطى القدَّ. */
+.bk.bk--img > .bkface:not(.bkface--img) {
+  position: absolute; inset: 0; z-index: 0; aspect-ratio: auto;
+}
+.bk.bk--img > .bkface.bkface--img {
+  position: relative; z-index: 1; display: block;
+  height: 100%; width: auto; aspect-ratio: auto;
+  padding: 0; gap: 0; background: none; box-shadow: none;
+  border-radius: var(--r) 1px 1px var(--r); overflow: hidden;
+}
+html[data-lang="en"] .bk.bk--img > .bkface.bkface--img { border-radius: 1px var(--r) var(--r) 1px; }
+.bk.bk--img > .bkface.bkface--img > img {
+  height: 100%; width: auto; display: block; object-fit: unset;
+  border-radius: inherit; transform: translateZ(0.1px);
+}
+
 /* ============ الغلاف البديل: كتاب ملوّن بالكود (المواد بلا صورة) ============
    نفس هندسة الكتاب 3D، لكن الوجه لوحة متدرّجة بلون الكلية + كود المادة (لاتيني) */
+/* ===== والوجهُ المرسومُ لا يخرج من مستطيله =====
+   متنُه مقاسٌ لكتابٍ بقدّ اليد: رقمٌ بتسعةٍ واسمٌ بسبعةٍ ونصف وحشوتان. وهو يُوضع
+   في رقاقة المساهمة في مستطيلٍ **أحدَ عشرَ في ستّةَ عشر** — فيفيض متنُه من
+   جوانبه ويُرى شَظِيّةً غريبةً بجانب الغلاف. وأسوأُ من ذلك أنّه يقع هناك وقد
+   وُضع غلافٌ فوقه: المرسومُ أساسٌ **مستور**، فلا يجوز أن يُرى منه حرف.
+
+   و‎overflow: hidden‎ يحسمها في كلّ مقاس: ما زاد عن المستطيل لا يُطلى. ولا
+   يُخفى الوجهُ نفسُه — هو الذي يُرى ريثما تصل الصورةُ ويعود إن سقطت. */
 .bk--ph .bkface {
-  height: 100%; aspect-ratio: .7; box-sizing: border-box;
+  height: 100%; aspect-ratio: .7; box-sizing: border-box; overflow: hidden;
   border-radius: var(--r) 1px 1px var(--r);
   background: linear-gradient(150deg, var(--phc1, #3a6f76), var(--phc2, #22454b));
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
@@ -580,6 +622,26 @@ html[data-theme="dark"] .mdrop-list { background: #17313a; border-color: rgba(25
 }
 .mdrop-opt:hover { background: var(--u-hov); }
 .mdrop-opt.on { background: var(--c-kfupm); color: #fff; }
+/* ===== وصدرُ القائمة: بابٌ لمن لم يجد =====
+   يجلس فوق الخيارات ويُفصل عنها بخيط، فيُقرأ فعلًا لا خيارًا خامسًا. والقائمةُ
+   بيضاءُ في الوضعين (‎.mdrop-list‎)، فألوانُه مكتوبةٌ لا موروثة */
+.mdrop-lead {
+  display: block; padding: 4px 6px 7px; margin-bottom: 4px;
+  border-bottom: 1px solid rgba(20, 35, 63, .1);
+}
+/* ولا يُعاد ههنا جسدُها: هو مكتوبٌ في ‎.drx-cta‎ مرّةً. وإنّما يكبر قدُّها قليلًا،
+   فصدرُ القائمة أفسحُ من سطر عنوانٍ مزويّ */
+.mdrop-lead .drx-cta > i { font-size: 10px; color: #5d6b82; opacity: .9; }
+.mdrop-lead .drx-cta > b { font-size: 11px; color: #a8842e; }
+.mdrop-lead .drx-cta:hover { background: rgba(20, 35, 63, .05); }
+.mdrop-lead .drx-cta:hover > b { color: #14233f; }
+/* والقائمةُ لها وجهٌ داكن (‎.mdrop-list‎ أعلاه)، فلصدرها مثلُه — وإلّا بقي حبرُ
+   الورق الأبيض على ورقٍ داكن */
+html[data-theme="dark"] .mdrop-lead { border-bottom-color: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .mdrop-lead .drx-cta > i { color: #9dc3ca; }
+html[data-theme="dark"] .mdrop-lead .drx-cta > b { color: #e1c172; }
+html[data-theme="dark"] .mdrop-lead .drx-cta:hover { background: rgba(255, 255, 255, .07); }
+html[data-theme="dark"] .mdrop-lead .drx-cta:hover > b { color: #eef5f6; }
 /* ===== حقل وقت مخصّص: خانتا HH:MM (تلميح 00 باهت، بلا تظليل أزرق) + منسدلة ص/م ===== */
 .tfield { display: inline-flex; align-items: center; gap: 4px; }
 .thm { direction: ltr; display: inline-flex; align-items: center; }
@@ -668,6 +730,15 @@ html[data-lang="ar"] .info-sharebtn svg { transform: scaleX(-1); }
 
 /* نافذة تفاصيل تعليق «المادة» (Popup): بطاقة فاتحة تُقرأ فيها التعليق كاملًا */
 .cmt-modal { --u-av: #dfe9eb; --u-mut: #5d6b82; --u-tx-strong: #14233f; --u-ph: rgba(20, 35, 63, .5); }
+/* ===== وتعلو ما فُتحت منه — و‎.mmodal.cmt-modal‎ لا ‎.cmt-modal‎ =====
+   ‏‎.mmodal‎ على ‎85‎ و‎.pick-modal.nkwork‎ على ‎90‎، فورقةُ الاقتراح تُفتح من لوحة
+   الركن فتقع **خلفها**: تُرى أطرافُها ولا تُمسّ، ولا يُعتم ما وراءها.
+   وكُتب لها ‎95‎ على ‎.cmt-modal‎ فلم يتبدّل شيء: نوعيّتُها نوعيّةُ ‎.mmodal‎ سواءً
+   بسواء (صنفٌ واحد)، و‎.mmodal‎ **متأخّرةٌ عنها في الورقة** (‎١٠٦٩‎ بعد ‎٧٣٦‎) —
+   فالمتأخّرُ يحكم عند التساوي، فبقيت على ‎85‎.
+   فيُكتب بصنفين: يغلب بالنوعيّة لا بالترتيب، فلا يُنقض بنقلِ سطر.
+   والعتمةُ تأتي معها من ‎.mmodal‎ نفسِها، فإذا علت عَلَت معها. */
+.mmodal.cmt-modal { z-index: 95; }
 .cmt-modal .mmodal__card--cmt {
   width: min(470px, 92vw); background: #fff; color: #35455c;
   border-radius: 18px; padding: 24px 22px 22px; position: relative;
@@ -885,8 +956,14 @@ html[data-lang="en"] .drop-gear { border-radius: 0 0 0 12px; }
   flex: none; white-space: nowrap;
   font-size: 9.5px; font-weight: 600;
   color: #5d6b82; padding: 2px 9px; line-height: 1.4;
-  direction: ltr; unicode-bidi: embed;
+  /* ===== والمدى يتبع القراءة =====
+     كان ‎ltr‎ فيقع تاريخُ **النهاية** أقربَ إلى العين في صفحةٍ تُقرأ من اليمين —
+     فيُقرأ المدى مقلوبًا. والصندوقُ يتبع اللغة: البدايةُ أوّلًا حيث تبدأ القراءة.
+     وكلُّ تاريخٍ في نفسه يبقى ‎19/8/2026‎: الأرقامُ مقطعٌ لاتينيٌّ لا يقلبه اتّجاهُ
+     ما حوله. و‎isolate‎ لا ‎embed‎ لئلّا تتسرّب محايداتُ الطرفين إلى الجوار. */
+  direction: rtl; unicode-bidi: isolate;
 }
+html[data-lang="en"] .tp-dates { direction: ltr; }
 /* المستطيل نفسه مائل لليمين (شكل italic) بحواف حادّة — الخلفية تُمال والنصّ يبقى مستقيمًا */
 .tp-dates::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
@@ -909,8 +986,12 @@ html[data-lang="en"] .termbar { direction: ltr; }
 /* ٤) مواد مكتبة الترم: تصطف من اليسار إلى اليمين */
 html[data-lang="en"] #lib-grid { direction: ltr; }
 .tpill.on .tp-row { color: rgba(255, 255, 255, .78); }
-.tpill.on .tp-dates { color: rgba(255, 255, 255, .92); }
-.tpill.on .tp-dates::before { background: rgba(255, 255, 255, .16); }
+.tpill.on .tp-dates { color: rgba(255, 255, 255, .96); }
+/* ===== والحبرُ الأبيضُ يريد أرضًا داكنة =====
+   كانت ‎rgba(255,255,255,.16)‎ — بياضٌ على بياضٍ، فيخفت النصُّ حتى لا يكاد يُقرأ.
+   فصارت الأرضُ سوادًا شفيفًا: تُغمِّق ما تحتها مهما كان لونُ المربّع، ولا تحتاج
+   قيمةً لكلّ حال. */
+.tpill.on .tp-dates::before { background: rgba(9, 22, 28, .34); }
 /* البِيل المحدَّد بارتفاع البقية (43px): كل شيء في سطرٍ واحد — الاسم يمينًا ثم التاريخ/البار/سيبدأ */
 .tpill.on { flex-direction: row; align-items: center; justify-content: flex-start; gap: 9px; }
 .tpill.on .tp-name { flex: none; font-size: 13.5px; }
@@ -2854,7 +2935,109 @@ html[data-lang="en"] .cm-sort__list { inset-inline-start: auto; inset-inline-end
 .cm-sortgrp { display: flex; gap: 5px; padding-bottom: 7px; margin-bottom: 6px; border-bottom: 1px solid var(--u-div); }
 .cm-sortgrp .cm-sortopt { flex: 1; text-align: center; border-radius: 7px; background: var(--u-hov); }
 .cm-sortgrp .cm-sortopt.on { background: var(--u-ctl); }
-.cm-docmenu__t { font-size: 10px; font-weight: 700; color: var(--u-lab); padding: 2px 6px 6px; }
+/* ===== وسطرُ العنوان صفٌّ: اللافتةُ يمينًا والمخرجُ يسارًا =====
+   القائمةُ تعدّ دكاترةَ المادّة، فإن لم يكن فيها من تريد كانت طريقًا مسدودًا.
+   فيجلس المخرجُ حيث يقع البصرُ حين لا يجد: في آخر سطر العنوان نفسِه */
+.cm-docmenu__t {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; color: var(--u-lab); padding: 2px 6px 6px;
+}
+.cm-docmenu__t > span { flex: none; }
+/* والدعوةُ تُقرأ سؤالًا وجوابًا: «الدكتور غير موجود؟» خافتةً، و«أقترحه» ذهبيّةً
+   مؤكَّدة — فالفعلُ هو الذي يُلتقط بالعين لا السؤال */
+/* ===== وجسدُ الدعوة ههنا، مرّةً واحدةً لموضعيها =====
+   هي في موضعين: شريطِ تصفية النافذة، وصدرِ منسدلة الدكتور في لوحة الركن. وكان
+   جسدُها مكتوبًا في القاعدة المرفوعة (‎.cm-docmenu .drx-cta‎) وحدَها — فحين وُلد
+   الموضعُ الثاني خرج **زرَّ متصفّحٍ عاريًا**: رماديًّا بخطّ النظام، كأنّ جلدَه
+   مفقود. وقد وقع، وقيل «كأن الـCSS حقته مفقودة».
+   ودرسٌ: رفعُ النوعيّة بإعادة تسمية المحدِّد **ينقل الكتلةَ كلَّها** إلى الموضع
+   المرفوع — فالجسدُ يُكتب عاريًا، والرفعُ يقتصر على ما يحتاج أن يغلب. */
+.drx-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 0; background: transparent; cursor: pointer; padding: 2px 4px;
+  border-radius: 7px; font: inherit; color: inherit; text-align: start;
+}
+/* ===== ونوعيّتُها تُرفع في شريط التصفية وحدَه =====
+   ‏‎.post-menu__list button‎ تفرض ‎display: block‎ و‎width: 100%‎ على كلّ زرٍّ في تلك
+   القائمة، وهي أقوى من ‎.drx-cta‎ وحدَها. فكان الزرُّ كتلةً لا صفًّا مرنًا، و‎gap‎ في
+   الكتلة لا يفعل شيئًا — فالتصق السؤالُ بالفعل: «الدكتور غير موجود؟أقترحه».
+   وهو الرفعُ نفسُه الذي رُفعت به ‎.drcar-nav‎ في هذه القائمة قبلها. */
+.cm-docmenu .drx-cta {
+  margin-inline-start: auto; display: inline-flex; width: auto;
+}
+/* والسؤالُ أخفتُ وأصغرُ من الفعل: هو يُعرّف، والفعلُ هو الذي يُلتقط بالعين */
+.drx-cta > i { font-style: normal; font-size: 8.5px; font-weight: 600; color: var(--u-lab); opacity: .8; }
+.drx-cta > b { font-size: 9.5px; color: var(--u-gold); text-decoration: underline; text-underline-offset: 2px; }
+.drx-cta:hover { background: var(--u-hov); }
+.drx-cta:hover > b { color: var(--u-tx-strong); }
+
+/* ============================================================
+   ورقةُ اقتراح الدكتور
+   ============================================================
+   تسكن منبثقةَ المادّة (‎.cmt-modal‎)، وتلك **صدَفةٌ خاوية**: ‎.cmt-body‎ صفٌّ يوسّط
+   ما يُلقى فيه ولا يرسم شيئًا — والسطحُ والحدُّ والظلُّ يحملها الساكنُ نفسُه
+   (كما تفعل ‎.cmt-topics‎). فمن ألقى فيها كتلةً بلا سطحٍ خرجت شفّافةً بلا خلفيّة.
+   وقد وقع، وقيل «النافذة صايرة شفافة».
+   ===== وألوانُها صريحةٌ لا توكنات =====
+   ‏‎--u-*‎ ليست على ‎:root‎ ولا تبلغ هذي المنبثقة. وجُرّبت حمالةٌ تُلحقها بالحاملين
+   فكانت أسوأ: المنبثقةُ بيضاءُ في الوضعين، فتنزل عليها ألوانُ الوضع الداكن على
+   ورقٍ أبيض. فالألوانُ ألوانُ جارتها ‎.cmt-topics‎ عينُها، مكتوبةً لا موروثة. */
+.cmt-modal .drx {
+  display: flex !important; flex-direction: column; gap: 12px;
+  width: 100%; max-width: min(360px, 92vw);
+  background: #f4f7f8; border: 1px solid #c9d9dd; border-radius: 14px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 18px 46px #0a1c22;
+  color: #35455c;
+}
+.drx__t { margin: 0; font-size: 15px; font-weight: 800; color: #14233f; }
+.drx__f { display: flex; flex-direction: column; gap: 5px;
+  font-size: 11px; font-weight: 700; color: #5d6b82; }
+.drx__f input[type="text"] {
+  border: 1.5px solid #c9d9dd; border-radius: 10px; background: #fff;
+  padding: 9px 12px; font-family: inherit; font-size: 13.5px; font-weight: 600;
+  color: #14233f; outline: none; transition: border-color .15s;
+}
+.drx__f input[type="text"]:focus { border-color: #c9a25c; }
+.drx__f input[type="text"]::placeholder { color: #9fb2cc; font-weight: 400; }
+.drx__pick { display: flex; align-items: center; gap: 9px; }
+/* والوجهُ دائرةٌ بقدِّ ما يُرى في القائمة، فيُقاس الاقتراحُ بما سيصير إليه */
+.drx__av {
+  width: 34px; height: 34px; flex: none; border-radius: 50%; overflow: hidden;
+  background: #e7eff0; border: 1.5px solid #c9d9dd;
+}
+.drx__av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.drx__row { display: flex; gap: 8px; }
+.drx__btn {
+  border: 1.5px solid #c9d9dd; background: #fff; cursor: pointer;
+  border-radius: 10px; padding: 8px 14px; font-family: inherit;
+  font-size: 12.5px; font-weight: 700; color: #35455c;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.drx__btn:hover { border-color: #c9a25c; color: #14233f; }
+.drx__btn--go { background: #e1c172; border-color: #e1c172; color: #14233f; }
+.drx__btn--go:hover { background: #c9a25c; color: #14233f; }
+
+/* ===== والوجهُ الداكنُ للورقة =====
+   جارتُها ‎.cmt-topics‎ تكتب لونَها الفاتحَ ثمّ يكتب لها الوضعُ الداكنُ لونَه
+   (‎#1f4850‎ بحدّ ‎#356169‎) — والورقةُ كُتب لها الفاتحُ وحدَه، فبقيت بيضاءَ والموقعُ
+   داكن. فتُكتب الأخرى بالقيم نفسِها: سطحٌ واحدٌ لمنبثقةٍ واحدة.
+   ولا ‎--u-*‎ ههنا كذلك: هي لا تبلغ هذي المنبثقة، والقيمُ مكتوبةٌ في الوجهين. */
+html[data-theme="dark"] .cmt-modal .drx {
+  background: #1f4850; border-color: #356169; color: #cfe2e4;
+}
+html[data-theme="dark"] .drx__t { color: #eef5f6; }
+html[data-theme="dark"] .drx__f { color: #9dc3ca; }
+html[data-theme="dark"] .drx__f input[type="text"] {
+  background: #16373d; border-color: #356169; color: #eef5f6;
+}
+html[data-theme="dark"] .drx__f input[type="text"]:focus { border-color: #e1c172; }
+html[data-theme="dark"] .drx__f input[type="text"]::placeholder { color: #6f939a; }
+html[data-theme="dark"] .drx__av { background: #16373d; border-color: #356169; }
+html[data-theme="dark"] .drx__btn { background: #16373d; border-color: #356169; color: #cfe2e4; }
+html[data-theme="dark"] .drx__btn:hover { border-color: #e1c172; color: #eef5f6; }
+html[data-theme="dark"] .drx__btn--go { background: #e1c172; border-color: #e1c172; color: #16272b; }
+html[data-theme="dark"] .drx__btn--go:hover { background: #d9b06a; color: #16272b; }
 /* ===== منتقي الدكاترة الأفقي: سهم يمين (السابق) · بطاقة الدكتور · سهم يسار (التالي) · ثم العدّاد =====
    الترتيب ثابت: «كل الدكاترة» أولًا ثم الدكاترة بحسب تقييمهم تنازليًّا (المنطق في drCarSlides) */
 .drcar { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 2px 0 4px; }
@@ -4087,7 +4270,11 @@ body.cd-sizing #card-modal .cd-stage, body.cd-sizing #card-modal .cd-stage * {
 .pst-badge.is-pub, .cd-pst.is-pub { color: #3f8fb8; }
 .pst-badge.is-priv, .cd-pst.is-priv { color: var(--u-mut); }
 /* الجلد نفسه الذي لنافذة البطاقة: سطحٌ صلب وحدٌّ هادئ — لا التدرّج البترولي للنوافذ الكبيرة */
-#pst-modal { background: rgba(8, 20, 24, .58); --pst-win: #16272b; --pst-line: #25403f; --pst-surf: #1d3036; }
+/* ===== وقائمةُ الحال فوق كلِّ ما تُفتح منه =====
+   ورثت ‎.mmodal‎ ‎z-index: 85‎، ومنتقي مربّعات الرُّكن (‎.nkwork‎) عند ‎90‎. فكانت
+   تُفتح **خلفه** — تُضغط الأيقونةُ فلا يظهر شيء، ولا خطأ يُقال. و‎96‎ فوق
+   الاثنين ودون ما هو أعلى (‎120‎ فما فوقها). */
+#pst-modal { z-index: 96; background: rgba(8, 20, 24, .58); --pst-win: #16272b; --pst-line: #25403f; --pst-surf: #1d3036; }
 html[data-theme="light"] #pst-modal { background: rgba(20, 35, 63, .3); --pst-win: #fff; --pst-line: #dbe6e6; --pst-surf: #f7fafa; }
 #pst-modal .pst-card {
   width: min(376px, 92vw); padding: 18px 16px 14px; gap: 0;
@@ -5403,8 +5590,6 @@ html[data-theme="dark"] .cd-fan { background: #17313a; box-shadow: 0 12px 30px r
   font: inherit; font-weight: 700; cursor: pointer; padding: 5px 14px; border-radius: 999px;
   border: 0; background: #fff; color: var(--c-kfupm, #2c5e65);
 }
-/* بطاقةُ النسخة على الجهاز في صفحة الحساب — تخضرّ حين تُوصل، فالحال تُرى لا تُقرأ */
-  background: color-mix(in srgb, #4e9d57 8%, transparent); }
 
 /* مطالعةُ الماضي بلا شريطٍ ولا زرّ: الختمُ والحلقةُ يبيّضّان معًا فيُقرأ الحالُ من موضعه،
    والحقلان يخفتان قليلًا فيُحسّ أنّهما للقراءة. والعودةُ بضغطة النسخة الحاليّة في المروحة */
@@ -6917,8 +7102,6 @@ html[data-theme] .nkwork .nkw {
   display: grid; grid-template-columns: 1fr 1fr;
 }
 /* «الدكتور» قبل اختياره: لوحة التشكيل وحدها متوسّطة والقائمة مخفيّة */
-.nkw__split.nkw--solo { grid-template-columns: minmax(0, 560px); justify-content: center; }
-.nkw__split.nkw--solo .nkw__col--list { display: none; }
 .nkw__col { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 16px clamp(14px, 2.4vw, 28px) 20px; }
 /* الخط الفاصل بين النصفين: على الحافّة الداخلية للقائمة (يسارها في العربية) لا الخارجية */
 .nkw__col--list { border-inline-end: 1px solid #25403f; }
@@ -7120,6 +7303,14 @@ html[data-theme="light"] .nkw__col--list { border-color: #d5e2e6; }
 html[data-theme="dark"] .pick-modal .pk-react .post-thumb--up.on:hover { color: #9fd0d8; }
 html[data-theme="dark"] .pick-modal .pk-react .post-thumb--down.on:hover { color: #eaa3ae; }
 .pick-modal .pk-none { margin: 0; color: var(--u-ph2); font-size: 13px; }
+/* ===== ولوحُ الانتظار: العمودُ مقفلٌ حتّى يُختار دكتور =====
+   ليس «لا مساهمات» — تلك حكمٌ على دكتورٍ لم يُسمَّ بعد. بل خبرٌ عمّا يظهر ههنا
+   ومن أين يُختار. فيتوسّط العمودَ ويُقرأ في سطرين */
+.pick-modal .pk-lock {
+  margin: auto; max-width: 30ch; padding: 18px 10px;
+  text-align: center; line-height: 2;
+  font-size: 12.5px; font-weight: 700; color: var(--u-lab);
+}
 /* شريط تمرير القائمة ولوحة التشكيل (يقع يسارًا في العربية) بلون الموقع لا الافتراضي */
 .pick-modal .pk-list,
 .pick-modal .nkw__paneb { scrollbar-width: thin; scrollbar-color: var(--u-line) transparent; }
@@ -7183,17 +7374,10 @@ html[data-theme="light"] #date-modal .dmc__del { color: rgba(20, 35, 63, .45); }
   transition: border-color .15s;
 }
 .dm-field input[type="date"]:focus, .dm-field input[type="text"]:focus { border-color: var(--c-gold); }
-/* صف الإجراءات: حذف (يسار، أحمر) + حفظ (يمين، ذهبي) */
-.dm-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-/* ذهبي بحبر داكن — نفس لغة أزرار الموقع (كانت بنصّ أبيض ضعيف التباين) */
-.dm-save {
-  border: 0; cursor: pointer;
-  background: #e1c172; color: #14233f;
-  border-radius: 10px; padding: 10px 22px;
-  font-family: inherit; font-size: 14px; font-weight: 800;
-  transition: filter .15s;
-}
-.dm-save:hover { filter: brightness(1.08); }
+/* صفُّ الإجراءات: الحذفُ وحدَه. ورُفع «حفظ» لأنّ كلَّ تبديلٍ صار يقع فورَ
+   وقوعه — و‎flex-start‎ لا ‎space-between‎: الأخيرةُ تدفع الوحيدَ إلى الحافّة
+   ثمّ تُغري بملء الفراغ بما لا يلزم */
+.dm-actions { display: flex; align-items: center; justify-content: flex-start; gap: 10px; }
 /* الحذف: هادئ بحدّ مرقّط، يحمرّ عند المرور (نفس نهج بقية أزرار الحذف) */
 .dm-del {
   border: 1.5px dashed rgba(255, 255, 255, .35); cursor: pointer;
@@ -7380,8 +7564,9 @@ html[data-theme="light"] .toast {
      فلم يبقَ فيه فراغٌ يُقتطع. وأضيقُ منه يقُصّ «‎100‎»، والحاضنُ ‎overflow: hidden‎
      فيقُصّ صامتًا. والفائضُ يعود إلى عمود الأسماء في مربّع الدرجة */
   --gm-w: 29px; --gm-h: 17px; --gm-ic: 15px;
-  /* وعرضُ البار توكنٌ لأنّ صفَّ الخصم تحته يحجز بقدره ليصطفّ الاسمان */
-  --gm-bar: 20px;
+  /* وعرضُ البار توكنٌ لأنّ صفَّ الخصم تحته يحجز بقدره ليصطفّ الاسمان.
+     ‏‎20 ⇐ 24‎: الملصقُ يحمل علامتَه، وأعرضُه ‎«12.5%»‎ يبلغ ‎22.5‎ عند ‎7.5px‎ */
+  --gm-bar: 24px;
   /* والفجوةُ بين المثلّثين والرقم مقبضٌ واحدٌ للموضعين (خانةُ الدرجة وعدّادا الغياب
      والتأخير)، فلا يُعايَر أحدُهما ويُنسى أخوه. والمرئيُّ أوسعُ من المكتوب بنحوِ
      بكسلين: بياضٌ داخلَ رقعة المثلّث وسعةُ زرّه، وهما مساحةُ النقر فلا تُلغى */
@@ -7413,17 +7598,46 @@ html[data-theme="dark"] #nook {
   background: var(--nk-paper); border: 1px solid var(--nk-line); border-radius: 16px;
   box-shadow: var(--nk-shadow);
 }
-/* دائرة إضافة المساهمة: مرقّطة ذهبية شفافة بعلامة + — في وسط المربّع الفارغ */
-#nook .nk-pick {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 42px; height: 42px; border-radius: 50%;
-  border: 2px dashed rgba(201, 162, 92, .55); background: rgba(201, 162, 92, .1);
-  color: #c9a25c; cursor: pointer;
-  font: 300 24px/1 'IBM Plex Sans Arabic', sans-serif;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s, border-color .15s, transform .15s;
+/* ============================================================
+   الحالُ الصفريّة: العنوانُ في أعلاه، والدعوةُ زرٌّ مصمت
+   ============================================================
+   كانت الدعوةُ دائرةً مرقّطةً مطلَقةً في **وسط** المربّع، والعنوانُ يعوم فوقها
+   بحشوةِ أربعةَ عشرَ — فيبدو نازلًا، والمربّعُ فارغًا ينتظر لا بابًا يُطرق.
+   فصار الصندوقُ عمودًا: العنوانُ في رأسه بحشوةٍ أقلّ، والزرُّ في وسط ما بقي.
+   والشكلُ من ‎RE/nook-four‎ (وجهُ «المصمت»، مختارٌ من ستّةٍ عُرضت). */
+#nook .nk-box--empty { display: flex; flex-direction: column; }
+/* والحشوةُ ‎13‎: مشت ‎14 ⇐ 7 ⇐ 11 ⇐ 13‎ بحكم العين لا بالحساب. وهي تُضرب في
+   ‎zoom: .69‎ الذي على السطر، فالأربعةُ عند العين ‎9.7‎ و‎4.8‎ و‎7.6‎ و‎9.0‎ —
+   والخطوةُ أصغرُ ممّا يوحي به الرقم، ولذلك تُمشى صغيرةً */
+/* ورفعُ العنوان لا يرفع الزرّ: ‎margin-block-start: auto‎ عليه يبتلع الفرقَ،
+   فيبقى ملزوقًا بالقاع حيث هو. فيُحرَّك أحدُهما بلا الآخر بسطرٍ واحد */
+/* والكتلةُ (العنوانُ ومستطيلُه) تُرفع بهذي وحدَها: الفُرجةُ بينهما مكتوبةٌ على
+   المستطيل، فما بينهما ثابتٌ ويتحرّكان معًا.
+   ‏‎13.5 ⇐ 9‎ بحكم العين (٢٩ اغسطس) — وهي مزويّةٌ بـ‎.69‎، فالرفعُ عند العين ‎3.1‎ */
+#nook .nk-box--empty .nk-t { flex: none; padding-top: 9px; }
+#nook .nk-cta {
+  /* ===== ويحاذي العنوانَ لا وسطَ الصندوق =====
+     ‏‎flex-start‎ لا ‎center‎: وهو يتبع الاتّجاه — يمينًا في العربيّة ويسارًا في
+     الإنجليزيّة — فلا يُكتب موضعان لِلُغتين.
+     وحافّتُه على حافّة حرف العنوان: حشوةُ ‎.nk-t‎ ستّةَ عشر، وعليها ‎zoom: .69‎،
+     فهي عند العين ‎11‎. والزرُّ لا ‎zoom‎ عليه، فيُكتب له ‎11‎ عددًا لا ‎16‎.
+     و‎auto‎ فوقه يدفعه إلى أسفل ما تحت العنوان. */
+  /* ===== والفُرجةُ تُزاد بإنزال الزرّ لا بحشوةٍ تحت العنوان =====
+     ‏‎margin-block-start: auto‎ يبتلع الفراغَ كلَّه فيلصق الزرَّ بالقاع. فحشوةٌ
+     تُزاد تحت العنوان يبتلعها ‎auto‎ ولا يتحرّك شيء — الفراغُ الكلّيُّ ثابت.
+     فالفُرجةُ تكبر بتقليل ما تحت الزرّ وحدَه: ‎12 ⇐ 8‎. */
+  align-self: flex-start; margin-block: auto 8px; margin-inline: 11px 0;
+  display: inline-flex; align-items: center; gap: 4px; max-width: calc(100% - 24px);
+  /* والحشوةُ العليا والسفلى وحدَهما ‎5 ⇐ 3.5‎: القامةُ تقصر والعرضُ لا يتبدّل */
+  border: 0; cursor: pointer; padding: 3.5px 9px; border-radius: 8px;
+  background: var(--nk-title); color: var(--nk-paper);
+  font: 800 9.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif;
+  transition: background .14s;
 }
-#nook .nk-pick:hover { background: rgba(201, 162, 92, .2); border-color: #c9a25c; transform: translate(-50%, -50%) scale(1.06); }
+#nook .nk-cta:hover { background: #c9a25c; }
+#nook .nk-cta__ic { flex: none; display: inline-flex; width: 9.5px; height: 9.5px; }
+#nook .nk-cta__ic svg { width: 100%; height: 100%; display: block; }
+#nook .nk-cta__tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* بعد الاختيار: تختفي الدائرة ويحلّ محلّها ترس ذهبي صغير مباشر (بلا دائرة) قبل عنوان البند */
 #nook .nk-t { display: flex; align-items: center; gap: 5px; }
 /* ===== الترسُ يغيب حتى يُقصد المربّع =====
@@ -7764,7 +7978,10 @@ html[data-theme="dark"] #nook .nk-body .abs-legbox .abs-leg { background: rgba(0
    فاسمُه تحت أسماء البنود على استقامةٍ واحدة، وخانتُه تحت خاناتها.
    ومستطيلُه ‎.gscw‎ نفسُها بلا مدخل: الرقمُ محسوبٌ لا مكتوب، فلا مثلّثَ ولا بؤرة */
 #nook .nk-body .gvded { display: flex; align-items: center; gap: 8px; }
-#nook .nk-body .gvded .gscw { flex: none; width: var(--gm-w); }
+/* ويتبع صفُّ الخصم عرضَ العمود فوقه لا الرقمَ المكتوب: العمودُ صار يتّسع لأوسعِ
+   خانة، فلو بقي هذا على ‎--gm-w‎ لَانزاح عنه. و‎--gm-wfit‎ يكتبه القياسُ بعد الرسم،
+   واحتياطُه ‎--gm-w‎ ريثما يُقاس */
+#nook .nk-body .gvded .gscw { flex: none; width: var(--gm-wfit, var(--gm-w)); }
 #nook .nk-body .gvded__gap { flex: none; width: var(--gm-bar); }
 /* ===== واسمُه على استقامة إخوته: يُعار صفُّ البند نفسُه =====
    كان الاسمُ ينمو من عند البار فيبتدئ يمينًا، وأسماءُ البنود تُدفع إلى المنتهى بخطٍّ
@@ -7775,7 +7992,20 @@ html[data-theme="dark"] #nook .nk-body .abs-legbox .abs-leg { background: rgba(0
    المربّع مخفَّفًا لا أبيضَ صريحًا — الأبيضُ على ورقٍ أبيضَ لا يُرى، وهذا يُقرأ في
    الثوبين ويقاربه بياضًا في الداكن */
 #nook .nk-body .gvded__row { flex: 1 1 auto; min-width: 0; }
-#nook .nk-body .gvded__line { background: color-mix(in srgb, var(--nk-ink) 32%, transparent); }
+/* ===== وفي هذين الصفّين الاسمُ أَولى بالمساحة من خيطه =====
+   ‏‎.gvrow__name‎ مقيَّدٌ بـ‎62%‎ من صفّه، وهو صوابٌ في بنود التوزيع: هناك عمودٌ من
+   أسماءٍ قصيرةٍ إلى جانب خيطٍ ملوّنٍ يقود العين إلى قطعته في الشريط، فالقيدُ يمنع
+   اسمًا طويلًا من أن يبتلع أعمدةَ الصفّ كلِّها.
+   وأمّا «خصم الغياب/التأخير» و«درجات اضافية» فسطران مفردان، لا عمودَ لهما ولا
+   قطعةَ في الشريط — وخيطُهما زينةٌ لا دليل. فكان الاسمُ يُقصّ إلى «خصم الغيا…»
+   والمساحةُ إلى يساره خاليةٌ يشغلها خيط.
+   فيُرفع القيدُ عنهما وحدَهما: الاسمُ يأخذ متنَه، والخيطُ يأخذ ما فضل — ويبقى له
+   أدنى طولٍ يُقرأ خطًّا. وإن ضاق الصفُّ حقًّا انكمش الاسمُ وقُصّ كما كان. */
+#nook .nk-body .gvded__row .gvrow__name { max-width: none; }
+#nook .nk-body .gvded__line {
+  background: color-mix(in srgb, var(--nk-ink) 32%, transparent);
+  flex: 1 1 0; min-width: 8px;
+}
 #nook .nk-body .gvded__v {
   font: 800 9.5px 'IBM Plex Sans Arabic', sans-serif; line-height: 1;
   color: var(--nk-gm-tx); direction: ltr;
@@ -7819,10 +8049,16 @@ html[data-theme="dark"] #nook .nk-body .abs-legbox .abs-leg { background: rgba(0
    تُنزله مركزًا آخر، فيهتزّ وهو يكبر.
    و‎top: 50%‎ مع ‎translateY(-50%)‎ تُلغي الحسابَ كلَّه: يتوسّط في كلّ قامةٍ يبلغها،
    فينمو من مركزه حقًّا لا تقريبًا — ولا يبقى في الجلد رقمٌ يُصان */
+/* ===== ويقرأ المحورُ كما تقرأ الصفحة =====
+   كان ‎direction: ltr‎ مكتوبةً، والنطاقاتُ مصفوفةٌ من الأدنى إلى الأعلى — فوقع
+   الأحمرُ (‎F‎ والصفر) يسارًا والأخضرُ (‎A+‎ والمئة) يمينًا. وهو ترتيبُ من يقرأ من
+   اليسار، والصفحةُ عربيّةٌ تبدأ من اليمين: فيبدأ السلَّمُ من حيث تبدأ العين.
+   فتُنزع، ويرث المحورُ اتّجاهَ الصفحة: في العربيّة الصفرُ يمينًا والمئةُ يسارًا،
+   وفي الإنجليزيّة ينقلب معها — سلَّمٌ واحدٌ يُقرأ في اللغتين لا سلَّمان. */
 #nook .gld-ax {
   position: absolute; inset-inline: 0; top: 50%; height: 8px; z-index: 2;
   transform: translateY(-50%);
-  display: flex; direction: ltr; border-radius: 4px; overflow: hidden;
+  display: flex; border-radius: 4px; overflow: hidden;
   transition: height .18s ease, box-shadow .18s ease;
 }
 #nook .gld-slot:hover .gld-ax {
@@ -7852,36 +8088,104 @@ html[data-theme="dark"] #nook .gld-slot:hover .gld-ax { box-shadow: 0 3px 12px r
 #nook .gld-slot:hover .gld-b.on s { opacity: .92; color: #fff; }
 /* والمؤشّرُ داخلَ المحور لا يبرز منه: المحورُ ‎overflow: hidden‎ ليستدير طرفاه،
    فما برز قُصّ. وطوقُه بلون الورق ليُرى على الحزام المصمت */
+/* وموضعُه يُقاس من **مبتدأ** المحور لا من يساره: ‎inset-inline-start‎ تتبع الاتّجاه،
+   فتُقاس من اليمين في العربيّة ومن اليسار في الإنجليزيّة بحسابٍ واحد */
 #nook .gld-me {
-  position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; z-index: 3;
+  position: absolute; top: 0; bottom: 0; width: 2px; margin-inline-start: -1px; z-index: 3;
   background: var(--nk-ink); box-shadow: 0 0 0 1.5px var(--nk-paper);
-  transition: left .4s cubic-bezier(.4, 1.3, .5, 1), opacity .2s ease;
+  transition: inset-inline-start .4s cubic-bezier(.4, 1.3, .5, 1), opacity .2s ease;
 }
 @media (prefers-reduced-motion: reduce) {
   #nook .gld-ax, #nook .gld-me, #nook .gld-b u, #nook .gld-b s, #nook .gld-pct { transition: none; }
 }
 
-#nook .nk-body .gvert { display: flex; gap: 8px; height: 116px; width: 100%; }
+/* ============================================================
+   THE GRADE SPLIT GROWS WITH ITS ITEMS
+   ============================================================
+   It was 116px tall, and the three columns shared that height by
+   `flex-grow: <percentage>`. So the taller the list, the thinner each row —
+   and once a syllabus is split into its real items (four quizzes at 2.5%
+   each), a row is **three pixels**. The name is there, and unreadable.
+
+   Now each row is as tall as its weight says, with a floor under it:
+
+       height = max(floor, weight × step)
+
+   · above the floor the picture is exactly as proportional as before
+   · below it, a small item is still a readable row
+   · and the box simply adds them up, so it grows instead of squeezing
+
+   The leftover strip has no floor: it is empty space, not an item.
+   The box around it scrolls and can be dragged taller, so growing is free. */
+#nook .nk-body .gvert {
+  --gk: 1.16px;          /* one percentage point, at the old 116px for 100% */
+  --gmin: 21px;          /* the shortest row a name and a date still read in */
+  display: flex; gap: 8px;
+  height: auto; min-height: 116px;
+  /* ===== والصفُّ يملأ عرضَه، والخيطُ هو المرن =====
+     العطبُ الأوّل: عمودُ الخانات يتّسع بما يُكتب فيه فيُقتطع من الأسماء.
+     وجُرّب أن تُقاس الكتلةُ بمتنها وتُوسَّط — فحُلَّ ذاك ووقع أسوأُ منه: انزاح
+     صفَّا الخصم والاضافة عن عمودهما، وتوسّطت نصوصُهما بدل أن تُزاح إلى اليسار.
+
+     والحلُّ الذي يجمعها: **الصفُّ يملأ عرضَه، والفضلةُ للخيط**.
+     الخيطُ بين الاسم وشريحته هو العنصرُ الوحيد الذي يحتمل الطولَ والقِصر بلا أن
+     يفقد معناه — فهو يأخذ كلَّ ما بقي من عرض، ويتنازل عنه أوّلًا حين يضيق
+     المربّع. فإذا كبرت خانةُ الدرجة، دفعَ الخيطُ الثمنَ لا الاسم؛ وإذا ضاق
+     المربّعُ حقًّا حتى يبلغ الخيطُ أدناه، عندئذٍ — وعندئذٍ فقط — يُقصّ الاسم.
+     (بحكم صاحب الموقع، ٣٠ اغسطس.) */
+  width: 100%;
+}
+/* ===== والقاعدةُ مقصورةٌ على أبناء الأعمدة الثلاثة =====
+   كُتبت أوّلًا بالصنف وحدَه (‎.gvrow‎)، وصفُّ الخصم يلبس ‎.gvrow‎ كذلك — وهو ليس
+   من صفوف العمود، وإنّما بندٌ **أفقيٌّ** يمتدّ بعرض المربّع (‎flex: 1 1 auto‎).
+   ونوعيّةُ القاعدتين واحدة، وهذي بعدها في الورقة، فغلبتها بـ‎flex: none‎ فتوقّف
+   الصفُّ عن الامتداد وانكمش إلى متنه — فبدا النصُّ منزويًا إلى اليمين وذهب خيطُه.
+   فتُقصر على **أبناء** الأعمدة الثلاثة، فلا تبلغ شيئًا خارجها مهما تشابهت الأصناف. */
+/* والقامةُ تُحسب في الجافا وتُكتب ههنا: الأسُّ لا يُحسب في الجلد، والقاعُ وحدَه
+   لا يكفي — كان ‎max(gmin, gk × gp)‎ فاستوى كلُّ ما دون الثُّمن تقريبًا */
+#nook .nk-body .gvert__bar > .gvseg,
+#nook .nk-body .gvert__rows > .gvrow,
+#nook .nk-body .gvert__ins > .gvin {
+  flex: none; height: var(--gh, auto);
+}
+/* والفضلةُ تبقى على النسبة الخام: هي فراغٌ لا بند، فلا أرضيّةَ لها ولا ضغط */
+#nook .nk-body .gvert__bar > .gvseg--rest,
+#nook .nk-body .gvert__rows > .gvrow--rest,
+#nook .nk-body .gvert__ins > .gvin--rest {
+  height: calc(var(--gk) * var(--gp, 0));
+}
 #nook .nk-body .gvert__bar {
   flex: none; width: var(--gm-bar); display: flex; flex-direction: column;
   border-radius: 5px; overflow: hidden; background: rgba(20, 35, 63, .1);
 }
 html[data-theme="dark"] #nook .nk-body .gvert__bar { background: rgba(255, 255, 255, .1); }
+/* والرقمُ يُقصّ ولا يفيض: عشرون بكسلًا حدُّ الشريط، وخطٌّ يتبدّل من جهازٍ إلى جهاز.
+   و‎tabular-nums‎ لأنّها أرقامٌ في عمود: بلا تسويةٍ تهتزّ عروضُها من قطعةٍ إلى قطعة */
 #nook .nk-body .gvseg {
-  display: flex; align-items: center; justify-content: center; min-height: 0;
-  font-size: 8.5px; font-weight: 700; color: #14233f; direction: ltr; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; font-variant-numeric: tabular-nums;
+  font-size: 7.5px; font-weight: 700; color: #14233f; direction: ltr; line-height: 1;
 }
 #nook .nk-body .gvseg--rest { background: transparent !important; }
 /* البنود: كل صفّ = خطّ ملوّن (يمين، يمتدّ نحو البار) ثم الاسم (يسار) بمحاذاة عموده */
+/* ويأخذ عمودُ الأسماء كلَّ ما بقي من عرض: فيه الخيطُ الذي يحمل الفضلة */
 #nook .nk-body .gvert__rows { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
-#nook .nk-body .gvrow { display: flex; align-items: center; gap: 6px; min-height: 0; }
-#nook .nk-body .gvrow__line { flex: 1 1 auto; height: 2px; border-radius: 2px; min-width: 10px; }
+#nook .nk-body .gvrow { display: flex; align-items: center; gap: 6px; }
+/* ===== والخيطُ هو الذي يتنازل، وله أدنى يبقى عنده خطًّا =====
+   كان أدناه عشرةً، وهي أقربُ إلى الشَّرطة منها إلى الخيط. وصار أربعةً وعشرين:
+   دونه لا يُقرأ رابطًا بين الاسم وشريحته، وفوقه يأخذ كلَّ ما بقي من عرض. */
+#nook .nk-body .gvrow__line { flex: 1 1 auto; height: 2px; border-radius: 2px; min-width: 24px; }
 /* و‎0 1 auto‎ بدل ‎none‎: لمّا دخلت شارةُ الموعد الصفَّ صار فيه أربعةٌ لا ثلاثة، وأضيقُ
    المربّعات لا تسعها. والاسمُ هو الذي يُقصّ (له ‎ellipsis‎ من قبل) لا الذي يدفع غيرَه
    خارج المربّع — و‎none‎ تمنعه الانكماشَ فيفيض الصفُّ صامتًا. ولا يتبدّل شيءٌ ما دام
    في المربّع سعة: هو لا ينمو، وإنّما يقبل الانكماش عند الضيق */
+/* ===== ولا سقفَ على الاسم =====
+   كان ‎max-width: 62%‎ حارسًا يمنع اسمًا طويلًا من ابتلاع الخيط. وقد صار للخيط
+   أدناه يحرس نفسَه به، فالسقفُ زائدٌ — بل ضارّ: كان يقُصّ الاسمَ عند اثنين
+   وستّين في المئة والخيطُ لا يزال يشغل ثمانيةً وثلاثين. والترتيبُ المطلوب:
+   الخيطُ يتنازل حتّى يبلغ أدناه، **ثمّ** يُقصّ الاسم. */
 #nook .nk-body .gvrow__name {
-  flex: 0 1 auto; min-width: 0; max-width: 62%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-size: 11px; font-weight: 700; color: var(--nk-ink);
 }
 /* ===== شارةُ الموعد: مستطيلٌ محفور («ج» من مختبر ‎RE\gm-date-lab‎) =====
@@ -7897,7 +8201,7 @@ html[data-theme="dark"] #nook .nk-body .gvert__bar { background: rgba(255, 255, 
   background: color-mix(in srgb, var(--nk-ink) 7%, transparent);
   box-shadow: inset 0 1px 2px color-mix(in srgb, var(--nk-ink) 16%, transparent);
 }
-#nook .nk-body .gvrow--rest { min-height: 0; }
+
 /* ============================================================
    سجلُّك أنت في مربّع الدرجة — خانةُ درجةٍ وأيقونةُ موعد (‎grade-box-lab#a‎)
    ============================================================
@@ -7906,8 +8210,17 @@ html[data-theme="dark"] #nook .nk-body .gvert__bar { background: rgba(255, 255, 
    ثلاثةٌ خانتُه أضيقُ منها، وهو ازدحامُ الأسماء بعينِه لا عطبٌ جديد.
    والأيقونةُ في الطرف الآخر: مرسومُنا ظاهرٌ وحقلُ ‎type="date"‎ شفّافٌ مبسوطٌ فوقه —
    فالتقويمُ تقويمُ المتصفّح، لا نبنيه ولا نصونه */
-#nook .nk-body .gvert__ins { flex: none; width: var(--gm-w); display: flex; flex-direction: column; }
-#nook .nk-body .gvin { display: flex; align-items: center; justify-content: center; min-height: 0; }
+/* ===== وعمودُ الخانات بعرضِ أوسعِ خانةٍ فيه =====
+   كان عرضًا مكتوبًا (‎--gm-w‎)، فرقمٌ أطولُ منه يُقصّ صامتًا — وصاحبُ الموقع يريد أن
+   يكتب ‎1.3442‎ فيراه كاملًا. فيصير العمودُ ‎max-content‎: عرضُه عرضُ أوسعِ ما فيه،
+   وبقيّةُ الخانات تتمدّد إليه (‎.gscw‎ فيها ‎flex: 1 1 auto‎) — فيستوي العمودُ على
+   أوسعِها كما طُلب، ولا واحدةَ تشذّ.
+   و‎min-width‎ يبقى ‎--gm-w‎: قاعٌ ثابتٌ لا يُقاس، فلا حلقةَ بين قياسٍ وقاعٍ مقيس. */
+#nook .nk-body .gvert__ins {
+  flex: none; width: max-content; min-width: var(--gm-w);
+  display: flex; flex-direction: column;
+}
+#nook .nk-body .gvin { display: flex; align-items: center; justify-content: center; }
 /* ===== مثلّثا الخانة: عاريان صغيران كمثلّثَي الغياب =====
    يُكتب لهما ما كُتب لأولئك حرفًا بحرف (لا صندوقَ ولا استدارةَ ولا حشوة، والإشارةُ
    بلون المثلّث ذهبيًّا عند المرور) — ولو نُسخ الثوبُ لَافترقا يومَ يُعدَّل أحدُهما.
@@ -7943,6 +8256,13 @@ html[data-theme="dark"] #nook .nk-body .gvert__bar { background: rgba(255, 255, 
   display: flex; align-items: center; justify-content: center; gap: 0; padding: 0 2px;
   border: 1px solid var(--nk-gm-line); border-radius: 5px;
   background: var(--nk-paper); overflow: hidden;
+}
+/* والعلامةُ تلي الرقمَ بلا فُرجة: هما كلمةٌ واحدةٌ تُقرأ «واحدٌ في المئة»، لا رقمٌ
+   وشارةٌ إلى جانبه. وقدُّها دون قدِّ الرقم: هي تُعرِّفه ولا تُزاحمه */
+#nook .nk-body .gscp {
+  flex: none; margin-inline-start: .5px; direction: ltr;
+  font: 800 7.5px 'IBM Plex Sans Arabic', sans-serif; line-height: 1;
+  color: var(--nk-gm-tx); opacity: .62;
 }
 #nook .nk-body .gscw:focus-within { border-color: #c9a25c; box-shadow: 0 0 0 2px rgba(201, 162, 92, .22); }
 #nook .nk-body .gscw:has(.gsc.is-set) { border-color: #c9a25c; }
@@ -7982,7 +8302,10 @@ html[data-theme="dark"] #nook .nk-body .gvert__bar { background: rgba(255, 255, 
    عمودُ الخانات كلُّه */
 @supports (field-sizing: content) {
   #nook .nk-body .gsc {
-    field-sizing: content; width: auto; min-width: 7px; max-width: 20px;
+    field-sizing: content; width: auto; min-width: 7px;
+    /* ولا سقفَ: السقفُ كان يقُصّ ‎1.3442‎ صامتًا. والعمودُ يتّسع له، والمربّعُ
+       يمرّر، فلا شيءَ يفيض بغير علمِ صاحبه */
+    max-width: none;
     margin-inline-start: var(--gm-gap);
   }
 }
@@ -8031,6 +8354,19 @@ html[data-theme="dark"] #nook .nk-body .gchip-labels .glabel__t { color: #eef7f8
 #nook .nk-four > :nth-child(1), #nook .nk-four > :nth-child(2) { flex: 92 1 0; }
 #nook .nk-four > :nth-child(3) { flex: 0 0 128px; }
 #nook .nk-four > :nth-child(4) { flex: 167 1 0; }
+/* ===== والرابعُ يبلغ الحافّةَ اليسرى — حتّى أوّلِ جرَّة =====
+   الأربعةُ تُلبَس عروضًا محفوظةً بـ‎flex: 0 1 Wpx‎ — لا تنمو أبدًا عمدًا («عرضُه
+   عرضُه»). فإن نقص مجموعُها عن عرض الصفّ بقي الفاضلُ على اليسار، فلا تُحاذي
+   حافّةُ «الدرجة» حافّةَ «التقويم» و«الموارد» فوقها وتحتها — وهما يملآن الصفّ.
+   فيُعطى الفاضلُ للرابع وحدَه.
+   ===== ولا تُكتب ههنا بـ‎!important‎ =====
+   كانت ‎#nook .nk-four > :nth-child(4) { flex-grow: 1 !important }‎، و‎!important‎ تغلب
+   السطريَّ أبدًا — فمربّعُ الدرجة **لا يُضيَّق بيدٍ قطّ**: يُكتب له عرضٌ أصغر، ثمّ
+   يعود النموُّ فيملأ الصفَّ، فلا يتحرّك شيء. وقد رآها صاحبُ الموقع: «المقبضُ يُمسك
+   والمؤشّرُ يتبدّل ولا يصير شي».
+   فصار الملءُ حكمًا في الجافا يُقرأ من الحال (‎state.nkFit‎ في ‎nkSzApply‎): يملأ ما
+   دام لم يُجَرَّ عرضٌ قطّ، فإذا جُرَّ انطفأ وصارت الأعدادُ صريحةً والفراغُ مقصودًا.
+   وحارسُه ‎_nkbox.mjs‎ يمنع عودةَ ‎!important‎ إلى هذا الموضع. */
 /* (وتضييقُ عمود الغياب إلى ‎128‎ صار في نِسَب الصفّ أعلاه، ومعه ‎--nki-w‎ التي كانت
    تقود عمودَ «المادة»: لم يبقَ عمودٌ يُقاد — كلُّ مربّعٍ يحمل عرضَه بنفسه) */
 #nook .nk-box { min-height: 150px; }
@@ -8376,6 +8712,11 @@ html[data-theme="dark"] #nook .nk-doc { --dm-on: #5fbf7a; --dm-off: #6d7f86; --d
 #nook .nk-box:hover .nki-rz { opacity: .14; }
 #nook .nki-rz:hover, #nook .nki-rz.on { opacity: .5; }
 #nook .nki-rz--w { left: 0; top: 10px; bottom: 16px; width: 6px; cursor: ew-resize; }
+/* ===== وحافّةٌ يمنى بقدِّ اليسرى =====
+   كان العرضُ يُجَرّ من اليسار وحدَه، فمن أراد أن يمدَّ مربّعَه يمينًا لم يجد حافّةً
+   يمسكها. وحكمُهما واحدٌ في الجافا (‎nkPlan‎ بجهةٍ)، وقدُّهما واحدٌ ههنا — فلا تُقرأ
+   إحداهما مقبضًا والأخرى زينة. وذيلُ المربّع (‎--h‎) يقف عند ‎right: 10px‎ فلا تلتقيان */
+#nook .nki-rz--e { right: 0; top: 10px; bottom: 16px; width: 6px; cursor: ew-resize; }
 #nook .nki-rz--h { bottom: 0; left: 16px; right: 10px; height: 6px; cursor: ns-resize; }
 #nook .nki-rz--c { left: 0; bottom: 0; width: 12px; height: 12px; border-radius: 4px; cursor: nesw-resize; }
 /* ===== وصفُّ الاثنين صار واحدًا =====
@@ -9286,9 +9627,20 @@ html[data-lang="en"] :is(.pk--edit, .cx-ro) .x3-st.on > :is(.x3-hd, .x3-ep) > .c
   overflow: hidden; }
 /* والفجوةُ في الحشو لا في وعائه: وعاءٌ عرضُه صفرٌ لا يدفع بهامشٍ في جوفه — ولو كُتبت
    على الوعاء لَبقيت مقتطعةً من النصّ حتى حين لا حشوَ أصلًا */
+/* ===== والحشوُ شريطٌ شبحٌ لا خيط =====
+   كان خيطًا ذهبيًّا رفيعًا (‎1px‎ · ‎30٪‎). وفي شجرةٍ من مئات الصفوف يصير جدارَ
+   خطوطٍ يزاحم الأسماءَ ويجرّ العينَ إلى الفراغ بدل المتن.
+   فصار **أرضيّةً خافتةً بقدّ السطر** تملأ ما بقي — تُري العمودَ بلا خطٍّ ولا
+   نقطة، كورقةٍ مسطَّرة. (وجهُ «الشريط الشبح» من ‎RE/cx-name-lab‎، بحكم صاحب
+   الموقع ٢٩ اغسطس.)
+
+   ولونُه **ذهبُ السطر**: جُرّب بحبر المتن (كما في المختبر) فرُدّ — الشريطُ امتدادُ
+   الاسم لا سطرٌ تحته، فيلبس لونَه. و‎currentColor‎ لا اسمُ توكن: يتبع السطرَ فيصير
+   ذهبيًّا مع الاسم ورماديًّا مع النائب، ولا يختفي صامتًا إن رُسمت شجرةٌ خارج حَمَلة
+   التوكن (وهي علّةٌ وقعت من قبل). */
 .cx-nm__f::before {
-  content: ''; flex: 1 1 0; min-width: 0; height: 1px;
-  margin-inline-start: 6px; background: var(--u-gold); opacity: .3;
+  content: ''; flex: 1 1 0; min-width: 0; height: 13px; border-radius: 4px;
+  margin-inline-start: 6px; background: currentColor; opacity: .055;
 }
 /* ===== وحكمُ القصّ لا يقع إلّا على المقصوص =====
    القناعُ لا يحرس نفسَه كما يحرس ‎text-overflow‎: لو كُتب مطلقًا لَخبا طرفُ كلّ اسمٍ
@@ -9549,8 +9901,10 @@ button.cs-i.is-0:hover svg, button.cs-i.is-0:hover b { opacity: 1; }
 .cs-i.is-0 { opacity: var(--cs-zero); }
 /* والساقطُ يُحذف حذفًا: الصفُّ راتقٌ لا جدوليّ */
 .cs-i.is-off, .cs-p.is-off { display: none; }
-/* وخيطُ النائب أخفتُ: «بطاقةٌ فارغة» ليست اسمًا يُملأ ما بعده، فلا يُمدّ له خطٌّ كامل */
-.cx-nm.is-ph .cx-nm__f::before { opacity: .1; }
+/* وشريطُ النائب أخفتُ: «بطاقةٌ فارغة» ليست اسمًا يُملأ ما بعده.
+   وكان ‎.1‎ حين كان الحشوُ خيطًا عتمتُه ‎.3‎ — أي ثُلثَه. فلمّا صار شريطًا شبحًا
+   عتمتُه ‎.055‎ انقلب المعنى: صار النائبُ **أظهرَ** من التامّ. فيُردّ إلى ما دونه. */
+.cx-nm.is-ph .cx-nm__f::before { opacity: .03; }
 /* ===== سلّةُ البند: للمحدَّد وحدَه =====
    تظهر على البند المحدَّد فقط — بطاقةً كان أو مجلدًا — فإذا صار المحدَّدون اثنين فأكثر
    رُفعت عن الجميع (سلّةٌ على أحدهم حينئذٍ تكذب: أتحذفه وحدَه أم تحذفهم كلَّهم؟).
@@ -14079,12 +14433,35 @@ html[data-theme="dark"] #nook { --mk-c: #ffffff; --mk-rc: #050505; }
    (وههنا الغلافُ متدرّجٌ مصنوعٌ كغلاف الموقع البديل — وفي الموقع يُوضع ‎url()‎ الصورة) */
 #nook { --cov1: #3a6f76; --cov2: #22454b; --gold-s: #c9a25c; }
 html[data-theme="dark"] #nook { --cov1: #2b545a; --cov2: #16323a; --gold-s: #d9b878; }
+/* ============================================================
+   تايم لاين الأسبوع — المتاحُ أخضرُ وغيرُه منقوش
+   ============================================================
+   نُقل من ‎RE/nook-four‎، و**سقط منه في النقل الأوّل ثلاثُ قواعد**: التي تُقيم
+   الخلايا، والتي تطلي المتاحَ أخضرَ، والتي تطلي غيرَه. فبقيت خلايا الأسبوع بلا
+   خلفيّةٍ من عندها، فظهر ما تحتها — بتروليًّا حيث يجب أن يكون أخضر. وقد رآه صاحبُ
+   الموقع وقابله بالمصدر.
+   و‎--dt-on‎ و‎--dt-off‎ عتمتاهما. ولونُ غير المتاح توكنٌ واحدٌ (‎--dm-nof‎) يُكتب من
+   موضعٍ واحد، واحتياطُه الحبرُ فلا يسقط شيءٌ إن غاب. */
+.fl--wk .wk-on, .fl--wk .wk-off { display: block; height: 100%; flex: none; }
+.fl--wk .wk-on  { background: var(--dm-on); opacity: var(--dt-on, .62); }
+.fl--wk .wk-off { background: var(--dm-nof, var(--nk-ink)); opacity: var(--dt-off, .38); }
 /* والخيطُ الفاصلُ بلون الورق: يُرى على الأخضر وعلى النقش سواءً */
 /* وخيوطُ الأيّام تذوب وهو مقرَّب: المحورُ لم يعد خطّيّا، فحدُّ يومٍ عند العشرين
    في المئة لا يقابل شيئا */
 .fl--wk.is-zoom .wk-sep { opacity: 0; }
+/* ===== والانتقالُ على العرض هو الحركةُ نفسُها =====
+   ينضغط الأسبوعُ إلى الحافّتين وتتمدّد الساعةُ مكانَه، ثمّ ينفتح راجعا. ولا يقع
+   الانتقالُ إلّا على عنصرٍ **باق** تتبدّل قيمتُه — فالنبضةُ تكتب العروضَ على
+   الخلايا نفسِها ولا تعيد بناءها */
+.fl--wk .wk-on, .fl--wk .wk-off {
+  transition: flex-basis var(--zdur, 700ms) cubic-bezier(.22, .61, .36, 1);
+}
 @media (prefers-reduced-motion: reduce) {
   .fl--wk .wk-on, .fl--wk .wk-off, .nk-box.is-zooming .fl-me { transition: none; }
+}
+.nk-box.is-zooming .fl-me {
+  transition: left var(--zdur, 700ms) cubic-bezier(.22, .61, .36, 1),
+              right var(--zdur, 700ms) cubic-bezier(.22, .61, .36, 1);
 }
 .fl--wk .wk-sep {
   position: absolute; top: 0; bottom: 0; width: 1px; z-index: 2;
@@ -14105,8 +14482,13 @@ html[data-theme="dark"] #nook { --cov1: #2b545a; --cov2: #16323a; --gold-s: #d9b
   --nk-title: #2c5e65; --nk-ink: #14233f; --nk-ink-soft: #5d6b82;
   --nk-shadow: 0 2px 10px rgba(20, 35, 63, .06), 0 8px 26px rgba(20, 35, 63, .05);
   --nk-gm-line: #a9ccd1; --nk-gm-tx: #0f303a;
-  /* توكناتُ المؤشّر الأربعة — تُكتب من لوح المعايرة */
-  --mk-len: 0px; --mk-w: 2px; --mk-ring: 1.5px; --mk-a: 72%; --mk-r: 2px;
+  /* ===== وتوكناتُ المؤشّر لا تُكرَّر ههنا =====
+     كانت أرقامُ لوح المعايرة **قبل أن يُعاير** تُنقل مع الجلد، وموضعُها ‎#nook‎ عينُه
+     الذي فيه المعايرةُ المعتمدةُ فوق (§ «المؤشّر — الوتدُ العابر»). والنوعيّةُ
+     متساويةٌ فالأخيرُ في الورقة يغلب — فكان المؤشّرُ يلبس المصنعَ لا المعايرة:
+     ‎2px‎ بحبرٍ ‎72٪‎ وطوقٍ ‎1.5px‎ ونصفِ قطرٍ ‎2px‎، بدل ‎3px‎ بحبرٍ ‎10٪‎ وطوقٍ ‎.5px‎
+     ونصفِ قطرٍ ‎12px‎. ولا يُرى ذلك في النصّ: الأرقامُ الصحيحةُ كلُّها حاضرةٌ فيه.
+     وحارسُه ‎_mk.mjs‎ يقيسها في متصفّحٍ حقيقيّ ويشترط أن تُعلَن مرّةً واحدة */
   --dm-on: #3f8a52; --dm-off: #9aa8ad; --dm-soon: #c9902f;
   --as-ok: #3f8a5b; --as-warn: #a8822f; --as-bad: #bf5555; --as-dead: #55606b;
   --gold: #c9a25c;
@@ -14274,19 +14656,23 @@ html[data-theme="dark"] #nook {
    تدرّجُهما من الدرجة المختارة، فيُرى الأثرُ قبل الضغط.
    ===== وإضاءتان: واحدةٌ لكلّ ثوب =====
    الغائرُ يُرى على الورق الفاتح ويذوب في الداكن. فالدرجةُ والإشباعُ مشتركان (فجنسُ
-   اللون واحد) والإضاءةُ لكلّ ثوبٍ إضاءتُه — فلا يختفي المؤشّرُ نصفَ الوقت */
-#nook { --mk-c: hsl(var(--mkh, 190) var(--mks, 55%) var(--mkl, 11%)); }
-html[data-theme="dark"] #nook { --mk-c: hsl(var(--mkh, 190) var(--mks, 55%) var(--mkld, 62%)); }
-.nook.mkauto, html[data-theme="dark"] .nook.mkauto { --mk-c: var(--nk-ink); }
+   اللون واحد) والإضاءةُ لكلّ ثوبٍ إضاءتُه — فلا يختفي المؤشّرُ نصفَ الوقت.
+   ===== والمنتقي بقي في المختبر، وحاصلُه هو الذي نُقل =====
+   أشرطةُ الدرجة والإشباع والإضاءة لوحُ معايرةٍ لا واجهةُ موقع، فلم يُنقل منها شيء.
+   وكان يُنقل حكمُها: ‎--mk-c: hsl(var(--mkh, 190) …)‎ — ولا ‎--mkh‎ في الموقع ولا
+   أختُها، فالمقروءُ **احتياطُ منتقٍ ميّت** لا لونٌ اختاره أحد. وهو مع ذلك يقع بعد
+   المعايرة في الورقة على ‎#nook‎ نفسِه، فيغلبها: ‎hsl(190 55% 11%)‎ بدل ‎#006a80‎،
+   و‎hsl(190 20% 96%)‎ بدل ‎#2e2e2e‎. فحُذف، والحاصلُ مكتوبٌ فوق سطرا واحدا لكلّ ثوب */
 /* ===== ولونُ الإطار كذلك يُختار =====
    الطوقُ بلون **الورق** لأنّه ثُلمةٌ تفصل الخيطَ عمّا تحته — وهو حسنٌ ما دام تحته
    ورق. فإذا صار تحته أرضيّةٌ ملوّنةٌ أو نقشٌ صار الطوقُ خطًّا أبيضَ يصيح.
    فيُفتح: يبقى الورقُ أصلًا (‎mkrauto‎)، ومن أراد طوقًا داكنًا أو بلون الأرضيّة نفسِها
    أخذه من طيفٍ ثانٍ — والدرجةُ والإشباعُ مشتركان بين الثوبين والإضاءةُ لكلٍّ إضاءتُه،
-   كما في طيف الحبر سواءً بسواء */
-#nook { --mk-rc: hsl(var(--mkrh, 190) var(--mkrs, 20%) var(--mkrl, 96%)); }
-html[data-theme="dark"] #nook { --mk-rc: hsl(var(--mkrh, 190) var(--mkrs, 20%) var(--mkrld, 14%)); }
-.nook.mkrauto, html[data-theme="dark"] .nook.mkrauto { --mk-rc: var(--nk-paper); }/* ===== وشريطُ الطيف يُقصر على منتقيه =====
+   كما في طيف الحبر سواءً بسواء.
+   وطيفُ الطوق مثلُ طيف الحبر: بقي في المختبر ونُقل حاصلُه — ‎#2e2e2e‎ نهارا
+   و‎#050505‎ ليلا، مكتوبَين فوق. و‎mkauto‎ و‎mkrauto‎ مفتاحا لوحٍ لا مفتاحا موقع،
+   ولم يكن لهما أثرٌ ههنا أصلا: حاملُهما ‎.nook‎ صفًّا، وحاملُ الموقع ‎#nook‎ معرِّفا */
+/* ===== وشريطُ الطيف يُقصر على منتقيه =====
    ‏‎.cbar‎ اسمٌ مشغولٌ: به شريطُ «الحالات الجاهزة» فوق كلّ مربّع، وبه شريطُ الطيف
    في المنتقي. وهذا يقع بعده في الملفّ فيغلبه في المشترك — فيُسحق شريطُ الحالات
    في خمسةَ عشرَ بكسلا ويُرسم حوله إطارٌ غائرٌ ويصير مؤشّرُ الفأرة صليبا. وهما
@@ -14354,7 +14740,43 @@ html[data-theme="dark"] #nook { --mk-rc: hsl(var(--mkrh, 190) var(--mkrs, 20%) v
   border-radius: var(--mk-r, 2px);
 }
 .fl-clip { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; z-index: 0; }
-.mk-tpin   .fl-me { --w: calc(var(--mk-w, 2px) * .9); }/* ===== والثلاثةُ الأخيرة **لا تدخل الصندوقَ أصلًا** =====
+/* ============================================================
+   والمؤشّرُ عابرٌ: يبرز من فوق الصندوق ومن تحته
+   ============================================================
+   المختارُ في المختبر «الوتدُ العابر» (‎mark: 'tpin'‎، وطائفتُه ‎thru‎)، وهو المكتوبُ
+   في رأس هذه الورقة منذ نُقلت المعايرة. ونُقلت الأرقامُ ولم تُنقل **الهندسة**،
+   فوقع الخيطُ داخلَ الصندوق منحسرًا عن حدّيه ثلاثةً — وإنّما شأنُ هذه الطائفة
+   أن تخرج من الحدّين فتُشير إلى الصندوق من خارجه ولا تُغطّي متنَه.
+   ===== ومبدؤها تجاوزُ أربعةٍ، ويزيد بالطول =====
+   الداخلةُ تبدأ منحسرةً ‎3‎ والقاطعةُ ملاصقةً والعابرةُ متجاوزةً ‎4‎ — والمقبضُ
+   (‎--mk-len‎) واحدٌ في الثلاث ومنحاه واحد.
+   ===== والقصُّ يُرفع في موضعين لا موضع =====
+   ‏‎.nk-box‎ عليه ‎overflow: hidden‎ يصون انحناءَ أركانه، فيقُصّ كلَّ ناتئ. ويُرفع
+   عنه في الضيّق وحدَه (في الواسع متنٌ قد يفيض)، وأرضيّتُه محفوظةٌ: هي ملفوفةٌ
+   في ‎.fl-clip‎ تقُصّ نفسَها فتبقى مستديرة.
+   ثمّ **العمودُ فوقه يقُصّ أيضًا** — ‎‎.nk-four > *‎ في هذه الورقة، ولا نظيرَ له في
+   المختبر — فلو رُفع عن الصندوق وحدَه لَقُصَّ الناتئُ عند حدّ العمود بعينه ولم
+   يتبدّل شيءٌ ممّا يُرى. ويُرفع عنه بشرطِ ما فيه (‎:has‎) لا مطلقًا: في الواسع
+   القصُّ حارسٌ لعرض العمود.
+   ===== والشكلُ يُعرف بـ‎data-k‎ لا بصنفٍ يُعلَّق =====
+   المختبرُ يُلبس الصندوقَ ‎mk-tpin is-thru‎ لأنّ عنده ستّةً وعشرين شكلًا يُبدَّل
+   بينها. وههنا شكلٌ واحدٌ معتمَد، والثلاثةُ التي تحمل مؤشّرًا معروفةٌ بأسمائها —
+   فلا يُزاد صنفٌ في خمسة مواضعَ من الجافا ليقول ما يقوله ‎data-k‎ أصلًا.
+   (وكان ‎.mk-tpin .fl-me‎ ههنا يكتب ‎--w‎ وحدَها ولا يجد حاملًا، فضُمّ إلى هذه) */
+#nook .nk-box[data-k="doc"] .fl-me,
+#nook .nk-box[data-k="abs"] .fl-me,
+#nook .nk-box[data-k="grade"] .fl-me {
+  --w: calc(var(--mk-w, 2px) * .9);
+  top: calc(-4px - var(--mk-len, 0px)); bottom: calc(-4px - var(--mk-len, 0px));
+  z-index: 4;
+}
+/* ===== ولا يُرفع القصُّ إلّا عمّن فيه ما يخرج =====
+   الشرطُ ‎[data-k]‎ وحدَه يبلغ المربّعَ الصفريَّ أيضًا — وهو لا مؤشّرَ فيه أصلًا،
+   وقصُّه حارسٌ يمنع دعوتَه أن تفيض عن ورقته. فيُشترط **وجودُ المؤشّر** نفسِه:
+   من حمله أخرجه، ومن لم يحمله بقي على قصّه */
+#nook .nk-box[data-m="narrow"]:has(> .fl-me) { overflow: visible; }
+#nook .nk-four > .col:has(> .nk-box[data-m="narrow"] > .fl-me) { overflow: visible; }
+/* ===== والثلاثةُ الأخيرة **لا تدخل الصندوقَ أصلًا** =====
    تقف خارجَه من فوق ومن تحت وتُشير إليه، فلا تُغطّي أرضيّةً ولا تقطع نصًّا —
    وهي أنظفُ ما في الطائفة: الخبرُ كلُّه في الخارج والصندوقُ سليمٌ كما هو */
 /* ============================================================
@@ -14770,9 +15192,11 @@ html[data-theme="dark"] #nook { --mk-rc: hsl(var(--mkrh, 190) var(--mkrs, 20%) v
    حجزا كحجز الواسع */
 #nook .nki-rz { background: transparent; border-radius: 0; }
 #nook .nki-rz--w { left: 0; top: 12px; bottom: 22px; width: 11px; }
+#nook .nki-rz--e { right: 0; top: 12px; bottom: 22px; width: 11px; }
 #nook .nki-rz--h { bottom: 0; left: 22px; right: 14px; height: 11px; }
 #nook .nki-rz--c { left: 0; bottom: 0; width: 14px; height: 14px; z-index: 7; }
 #nook .nk-box[data-m="narrow"] .nki-rz--w { left: 0; top: 3px; bottom: 3px; width: 8px; }
+#nook .nk-box[data-m="narrow"] .nki-rz--e { right: 0; top: 3px; bottom: 3px; width: 8px; }
 
 /* ============================================================
    شريطُ التمرير — منقولٌ من RE/nook-four كما هو
@@ -14892,6 +15316,14 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
    (ووصفُ المادّة يُرفع قصُّه من الجافا كذلك — ‎nkInfoFill‎ — فيُوحَّد الحكمُ ههنا
    ولا يُنقض ذاك: كلاهما يقول `unset`) */
 #nook .nk-doc__d, #nook .nkm-desc { -webkit-line-clamp: unset; }
+/* ===== وكم سطرًا يطلب الوصفُ حين يُقاس الصفُّ؟ =====
+   النصُّ يُعرض كاملًا كما فوق — وهذا لا يُنقض. لكنّ زرَّ النشر يقيس متونَ الأربعة
+   ليفتحها على أطولها (‎nkOpenH‎)، ونصٌّ بلا قصٍّ يربح «الأطول» أبدًا: فقرةُ سِلَّبس
+   تبلغ مئاتِ البكسلات، فتُفتح الأربعةُ عليها ويبقى تحت ثلاثةٍ منها فراغُ شاشة.
+   فما صُنع ليُمرَّر لا يقرّر قامةً: يُحسب في القياس وحدَه بهذا العدد — وهو العدد
+   الذي كان القصُّ عليه قبل أن يُرفع (ثلاثةٌ للوصفين معًا).
+   وهو ههنا لا في الجافا: أرقامُ القصّ كلُّها في هذه الورقة، فيُبدَّل في موضعٍ واحد. */
+#nook { --nk-desc-lines: 3; }
 
 /* ===== وصفُ المادّة يُقاس بوصف الدكتور =====
    الوصفان بندٌ واحدٌ في مربّعين، فلا معنى لافتراقهما. وكانا يفترقان في خمسة:
@@ -15009,3 +15441,275 @@ html[data-theme="dark"] #nook .nk-sb__th:hover { background: rgba(200, 224, 228,
   color: var(--c-ink-soft); opacity: .85; text-align: center;
 }
 .term-frame__hint[hidden] { display: none; }
+
+/* ============================================================
+   الحالُ الصفريّة في الوضعين — سهمٌ حاضرٌ، وضيّقٌ مصمَّمٌ لا مقصوص
+   ============================================================
+   المربّعُ الصفريُّ كان ابنَ الصفِّ كإخوته: يأخذ قامتَه من ‎nkSzApply‎ ويلبس
+   ‎data-m‎ — ولم يكن له في الوضعين شكلٌ مبنيّ.
+   · في الواسع: عنوانٌ في رأسه ودعوةٌ في قاعه، بلا سهمٍ يُنقر.
+   · وفي الضيّق (‎44px‎): عمودٌ فيه عنوانٌ ودعوةٌ قامتُهما ‎49‎ — **يفيض**،
+     ولا ‎overflow: hidden‎ عليه (هي على ‎.nk-box--mini‎ وحدَها) فيبرز من الورقة.
+
+   ‏‎.nk-box--empty‎ لا ‎[data-m]‎ في قواعد السهم: هو حاضرٌ في الوضعين سواءً —
+   وقيمُه هي قيمُ إخوته حرفًا بحرف، فلا يختلف سهمٌ عن سهم. */
+#nook .nk-box--empty > .fx-tools.fx-tools--w {
+  position: absolute; inset-inline-end: 8px; top: 10px; z-index: 4;
+  margin: 0; flex: none; display: inline-flex; align-items: center;
+}
+#nook .nk-box--empty .fx-tools.fx-tools--w .nk-fold {
+  position: static; transform: none; overflow: visible;
+  padding: 0; border: 0; background: transparent; cursor: pointer;
+  margin: 0; flex: none; width: 7.5px; height: 7.5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  opacity: 1; pointer-events: auto;
+  color: color-mix(in srgb, var(--nk-ink-soft) 46%, transparent);
+  transition: color .15s;
+}
+#nook .nk-box--empty .fx-tools.fx-tools--w .nk-fold svg {
+  width: 10px; height: 10px; flex: none;
+}
+#nook .nk-box--empty:hover .fx-tools.fx-tools--w .nk-fold { color: var(--nk-ink-soft); }
+#nook .nk-box--empty .fx-tools.fx-tools--w .nk-fold:hover {
+  background: transparent; color: var(--gold);
+}
+
+/* ===== ولا يتحرّك شيءٌ بالطيّ والنشر =====
+   الطيُّ فعلُ «أرني ما تحت»: القامةُ تنمو إلى **أسفل**، وما فوقها يبقى حيث هو.
+   وكان الضيّقُ يضغط حشوةَ العنوان (‎4‎ بدل ‎13.5‎) ويرفع السهمَ (‎5‎ بدل ‎10‎)، فكان
+   العنوانُ والمستطيلُ والسهمُ **تنزل ثلاثتُها** عند النشر. وهي وثبةٌ يراها العينُ
+   ولا يطلبها أحد. (بحكم صاحب الموقع، ٢٩ اغسطس.)
+
+   فوُحّدت الأرقامُ: لا قاعدةَ خاصّةً بوضعٍ في هذا الصندوق ألبتّة.
+
+   ===== ويسعُها الضيّقُ بالحساب لا بالرجاء =====
+   القامةُ المطويّة ‎44‎. وخطُّ العنوان ‎KFUPM Display‎ ثمّ ‎IBM Plex Sans Arabic‎،
+   وقُرئت مقاييسُهما من ملفّيهما: سطرُ الأوّل ‎1.2×‎ وسطرُ الثاني ‎1.5×‎ — والأسوأُ
+   يحكم لأنّ العربيَّ قد يقع على الثاني. فعند ‎15px‎ يرتفع السطرُ ‎22.5‎:
+
+       (13.5 حشوةً + 22.5 خطًّا) × 0.69 زَواةً = 24.84
+     +  2.5 فُرجةً  +  16.5 مستطيلًا           = 43.84  في  44
+
+   يسعُها — وبقيّةُ الفضلة عند القاع (‎margin-block-end: auto‎). */
+
+/* ===== والسهمُ يتنصّف المربّعَ المطويّ =====
+   قامتُه ‎7.5‎ ومنتصفُ المطويّ ‎22‎، فرأسُه ‎18.25‎ — ويبقى عليها في الواسع فلا ينزل.
+   والمحدِّدُ يزيد صنفًا على قاعدة الواسع (‎[data-m="wide"]‎) فيغلبها بالنوعيّة لا
+   بالترتيب: الغلبةُ بالترتيب رهنُ موضعِ الكتلة في الملفّ، وهو يتبدّل. */
+#nook .nk-box.nk-box--empty[data-m] > .fx-tools.fx-tools--w { top: 18.25px; }
+
+/* ===== والدعوةُ تحت العنوان، والفراغُ كلُّه تحتها =====
+   كانت ‎margin-block: auto 8px‎ — و‎auto‎ في الرأس يبتلع الفراغَ كلَّه فيلصقها
+   بالقاع. وذاك صوابٌ في صندوقٍ قصير، فإذا طال صار بين العنوان والدعوة **وادٍ**.
+   فيُقلب الأمر: فُرجةٌ مكتوبةٌ تحت العنوان، و‎auto‎ في القاع يأخذ الباقيَ — فيبقى
+   الزرُّ حيث هو مهما طال الصندوق. (بحكم صاحب الموقع، ٢٩ اغسطس.)
+
+   ===== والفُرجةُ واحدةٌ في الوضعين =====
+   كانت عشرين في الواسع وخمسًا في الضيّق — رقمان لشيءٍ واحد، والفرقُ يُرى عند
+   الطيّ. فصارت **‎2.5‎** فيهما معًا بحكم صاحب الموقع، وقاعدةً واحدةً لا اثنتين.
+   وهي بكسلاتٌ حقيقيّةٌ غيرُ مزويّة: الزرُّ لا ‎zoom‎ عليه، بخلاف سطر العنوان. */
+#nook .nk-box--empty .nk-cta { margin-block: 2.5px auto; }
+/* ===== ولا يفيض في الوضعين =====
+   ‏‎overflow: hidden‎ على ‎.nk-box--mini‎ وحدَها، والصفريُّ ليس منها. فمن جرّ قامتَه
+   دون ما يسع عنوانَه ودعوتَه رآهما يبرزان من الورقة — وهي حافّةٌ تقع بالجرّ */
+#nook .nk-box--empty { overflow: hidden; }
+
+/* ============================================================
+   RIGHT-CLICK ON A BOOK — the cover menu
+   ============================================================
+   It wears `.iom-mn`, the same surface the card window's own right-click
+   menus use, so the site does not grow a third kind of popup. What is added
+   here is only the shape of a labelled row — those menus are icons in a line,
+   this one is a short list you read.
+   ============================================================ */
+.bkm-mn { display: flex; flex-direction: column; gap: 2px; padding: 5px; min-width: 172px; }
+.bkm-b {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 10px; border: 0; border-radius: 7px;
+  background: transparent; color: var(--i-tx); cursor: pointer;
+  font: 600 12.5px/1.5 'IBM Plex Sans Arabic', sans-serif; text-align: start;
+  transition: background .13s, color .13s;
+}
+.bkm-b:hover:not(:disabled) { background: var(--i-hov); }
+.bkm-b:disabled { opacity: .38; cursor: default; }
+.bkm-b b { font-weight: 600; }
+.bkm-ic { flex: none; display: inline-flex; width: 16px; height: 16px; color: var(--i-gold); }
+.bkm-ic svg { width: 100%; height: 100%; display: block; }
+/* والحذفُ يلبس لونَه: هو الفعلُ الذي لا يُتراجع عنه في هذي القائمة */
+.bkm-b--del { color: var(--i-del); }
+.bkm-b--del .bkm-ic { color: var(--i-del); }
+.bkm-b--del:hover:not(:disabled) { background: color-mix(in srgb, var(--i-del) 12%, transparent); }
+
+/* ============================================================
+   FILL A COURSE FROM ITS SYLLABUS — the window
+   ============================================================
+   It wears the site's own window (`.mmodal`), and is dressed the way the
+   other windows here are dressed: **explicit colours, twice** — once for the
+   dark skin and once for the light one.
+
+   The first attempt reached for `--u-tx` and friends with fallbacks. Those
+   tokens are carried by `#cm-ui`, `#nook`, `#card-modal` and their kin — not
+   by `:root`. This window is a child of `<body>`, so every one of them fell
+   through to its fallback and the window came out wearing nothing of the
+   site. The fallback is the trap: it fails quietly and looks almost right.
+   ============================================================ */
+#syl-modal { background: rgba(8, 20, 24, .58); }
+#syl-modal .mmodal__card {
+  width: min(940px, 94vw);
+  background: #16272b; border-color: #25403f;
+  box-shadow: 0 20px 52px -24px rgba(0, 0, 0, .6);
+}
+.syl-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  padding: 14px 2px 4px; align-items: start; overflow: auto;
+}
+@media (max-width: 760px) { .syl-body { grid-template-columns: 1fr; } }
+.syl-half { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* والخطوتان مرقَّمتان: الرحلة تخرج من الموقع ثمّ تعود، والترتيب هو الشرح */
+.syl-step { display: flex; align-items: center; gap: 8px; margin: 0;
+  font: 700 13px/1.5 'IBM Plex Sans Arabic', sans-serif; color: #eef5f6; }
+.syl-step b {
+  flex: none; width: 20px; height: 20px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #e1c172; color: #16272b; font: 700 11px/1 sans-serif;
+}
+.syl-prompt {
+  width: 100%; min-height: 290px; resize: vertical; box-sizing: border-box;
+  padding: 12px 13px; border-radius: 10px;
+  border: 1px solid #2f4d4d; background: #10202400; color: #cfe0e3;
+  background-color: rgba(0, 0, 0, .22);
+  font: 400 11.5px/1.7 ui-monospace, Consolas, monospace;
+  direction: ltr; text-align: left; white-space: pre; overflow: auto;
+}
+.syl-btn {
+  align-self: flex-start; border: 0; cursor: pointer; padding: 8px 16px; border-radius: 9px;
+  background: #e1c172; color: #16272b;
+  font: 700 12.5px/1 'IBM Plex Sans Arabic', sans-serif;
+  transition: filter .14s;
+}
+.syl-btn:hover { filter: brightness(1.08); }
+
+/* والاسقاطُ حدٌّ متقطّع: يقول «ضَعْ ههنا» ولا يدّعي أنّه سطحٌ ممتلئ */
+.syl-drop {
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 26px 18px; border-radius: 12px; text-align: center;
+  border: 2px dashed #34565a; background: rgba(0, 0, 0, .16); color: #bcd3d8;
+  transition: border-color .15s, background .15s;
+}
+.syl-drop.is-over { border-color: #e1c172; background: rgba(225, 193, 114, .12); }
+.syl-drop svg { width: 30px; height: 30px; opacity: .6; }
+.syl-drop b { font: 700 13px/1.5 'IBM Plex Sans Arabic', sans-serif; color: #eef5f6; }
+.syl-drop .syl-btn { background: transparent; color: #e1c172;
+  padding: 2px 4px; text-decoration: underline; font-size: 12px; }
+
+/* وتقريرُ ما حصل — لا يختفي وحدَه: هو الجواب على السؤال الذي في رأس القارئ */
+.syl-out { border-radius: 10px; padding: 12px 14px;
+  background: rgba(0, 0, 0, .16); border: 1px solid #2b4749; }
+.syl-rep-h { margin: 0 0 8px; font: 700 12.5px/1.5 'IBM Plex Sans Arabic', sans-serif;
+  color: #eef5f6; }
+.syl-rep, .syl-notes { list-style: none; margin: 0; padding: 0; }
+.syl-rep li { display: flex; gap: 10px; align-items: baseline; padding: 5px 0;
+  font: 500 12.5px/1.6 'IBM Plex Sans Arabic', sans-serif; }
+.syl-rep b { flex: none; min-width: 96px; font-weight: 700; color: #eef5f6; }
+.syl-rep span { min-width: 0; color: #bcd3d8; }
+.syl-rep i { font-style: normal; opacity: .8; }
+/* وثلاثُ حالاتٍ يفرّقها اللون: امتلأ · لم يتغيّر · لا يُمَسّ أصلًا */
+.syl-rep li.is-in b::before { content: '✓ '; color: #6fc47a; }
+.syl-rep li.is-out b::before { content: '· '; opacity: .5; }
+.syl-rep li.is-keep b::before { content: '⌾ '; color: #e1c172; }
+.syl-rep li.is-keep span { font-style: italic; }
+.syl-notes { margin-top: 8px; padding-top: 8px; border-top: 1px solid #2b4749; }
+.syl-notes li { font: 400 11.5px/1.6 'IBM Plex Sans Arabic', sans-serif; color: #bcd3d8; }
+.syl-notes li::before { content: '· '; }
+.syl-err { margin: 0; color: #ff9aab; font: 600 12.5px/1.6 'IBM Plex Sans Arabic', sans-serif; }
+.syl-btn--go { align-self: stretch; text-align: center; padding: 11px 16px; font-size: 13.5px; }
+
+/* ===== الجلد الفاتح: ورقةٌ بيضاء بحبرٍ داكن — كأخيه في السوق ===== */
+html[data-theme="light"] #syl-modal { background: rgba(20, 35, 63, .3); }
+html[data-theme="light"] #syl-modal .mmodal__card {
+  background: #ffffff; border-color: #dbe6e6; color: #35455c;
+  box-shadow: 0 2px 10px rgba(20, 35, 63, .06), 0 22px 54px -26px rgba(20, 35, 63, .45);
+}
+html[data-theme="light"] #syl-modal .mmodal__title { color: #2c5e65; }
+html[data-theme="light"] #syl-modal .mmodal__close { border-color: #dbe6e6; color: #5d6b82; }
+html[data-theme="light"] #syl-modal .mmodal__close:hover {
+  background: rgba(44, 94, 101, .09); color: #2c5e65;
+}
+html[data-theme="light"] .syl-step { color: #35455c; }
+html[data-theme="light"] .syl-step b { background: #a8842e; color: #fff; }
+html[data-theme="light"] .syl-prompt {
+  border-color: #dbe6e6; background-color: #f6f8f8; color: #35455c;
+}
+html[data-theme="light"] .syl-btn { background: #a8842e; color: #fff; }
+html[data-theme="light"] .syl-drop {
+  border-color: #d6e0e0; background: #f6f8f8; color: #5d6b82;
+}
+html[data-theme="light"] .syl-drop.is-over {
+  border-color: #a8842e; background: rgba(168, 132, 46, .09);
+}
+html[data-theme="light"] .syl-drop b { color: #35455c; }
+html[data-theme="light"] .syl-drop .syl-btn { background: transparent; color: #a8842e; }
+html[data-theme="light"] .syl-out { background: #f6f8f8; border-color: #dbe6e6; }
+html[data-theme="light"] .syl-rep-h,
+html[data-theme="light"] .syl-rep b { color: #35455c; }
+html[data-theme="light"] .syl-rep span,
+html[data-theme="light"] .syl-notes li { color: #5d6b82; }
+html[data-theme="light"] .syl-rep li.is-in b::before { color: #4e9d57; }
+html[data-theme="light"] .syl-rep li.is-keep b::before { color: #a8842e; }
+html[data-theme="light"] .syl-notes { border-top-color: #dbe6e6; }
+html[data-theme="light"] .syl-err { color: #b03a52; }
+
+/* ============================================================
+   «الدرجة من كم؟» — منبثقةُ نقرة اليمين على الحزام
+   ============================================================
+   تلبس جلدَ قوائم الموقع (‎.iom-mn‎) فلا صدَفةَ ثانية، وتزيد سطرًا للرقم وسطرًا
+   يقول متى يُبدَّل. وألوانُها مكتوبةٌ: هي مُلحَقةٌ بـ‎body‎ فلا تبلغها توكناتُ
+   الواجهة (‎--u-*‎ على حامليها لا على الجذر). */
+.gb-mn { width: 232px; padding: 11px 12px; display: flex; flex-direction: column; gap: 8px; }
+.gb-t { font-size: 12.5px; font-weight: 800; color: #14233f; }
+.gb-row { display: flex; align-items: center; gap: 7px; }
+.gb-row input {
+  flex: 1 1 auto; min-width: 0; width: 100%;
+  border: 1.5px solid #c9d9dd; border-radius: 9px; background: #fff;
+  padding: 7px 10px; font-family: inherit; font-size: 14px; font-weight: 700;
+  color: #14233f; outline: none; text-align: center;
+}
+.gb-row input:focus { border-color: #c9a25c; }
+.gb-go {
+  flex: none; border: 0; cursor: pointer; border-radius: 9px; padding: 8px 13px;
+  background: #e1c172; color: #14233f; font-family: inherit; font-size: 12.5px; font-weight: 800;
+}
+.gb-go:hover { background: #c9a25c; }
+.gb-h { font-style: normal; font-size: 10.5px; font-weight: 600; line-height: 1.75; color: #5d6b82; }
+html[data-theme="dark"] .gb-t { color: #eef5f6; }
+html[data-theme="dark"] .gb-row input { background: #16373d; border-color: #356169; color: #eef5f6; }
+html[data-theme="dark"] .gb-row input:focus { border-color: #e1c172; }
+html[data-theme="dark"] .gb-h { color: #9dc3ca; }
+
+/* وما عليه التوزيعُ يجلس بعد النسبة، أخفتَ منها: هو سياقٌ لا حكم */
+#nook .gld-of {
+  font-size: 9px; font-weight: 700; color: var(--nk-ink-soft);
+  opacity: .85; margin-inline-start: 3px;
+}
+#nook .gld-of:empty { display: none; }
+
+/* ============================================================
+   «جارٍ التحميل» في المربّع الصفريّ
+   ============================================================
+   يقف حيث تقف الدعوةُ الصفريّة تمامًا — الصفُّ الثاني تحت العنوان، محاذيًا له —
+   فلا يقفز شيءٌ حين تحلّ إحداهما محلّ الأخرى. ونبضةٌ واحدةٌ خافتة: خبرُ انتظارٍ
+   لا لافتةٌ تطلب النظر. */
+#nook .nk-box--empty .nk-wait {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 6px;
+  margin-block: 2.5px auto; margin-inline-start: 13px;
+  font-size: 11px; font-weight: 700; color: var(--nk-ink-soft); opacity: .8;
+}
+#nook .nk-wait__d {
+  width: 6px; height: 6px; border-radius: 50%; flex: none;
+  background: currentColor; animation: nk-wait-p 1.1s ease-in-out infinite;
+}
+@keyframes nk-wait-p { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  #nook .nk-wait__d { animation: none; opacity: .6; }
+}
