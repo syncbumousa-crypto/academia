@@ -70,3 +70,49 @@ html[data-skin="flat"] .langbar button.is-active {
 /* والأشرطةُ المرفوعةُ تُسطَّح: ظلُّ الشريط الجانبيّ وحدَه مكتوبٌ صريحًا
    في الورقة الأمّ، فلا يُنزع بمتغيّر */
 html[data-skin="flat"] .sidebar { box-shadow: none; }
+
+/* ============================================================
+   خطّا الجذر — مرخَّصان، وللجذر وحدَه
+   ============================================================
+   ‎Ping AR LT‎ للمتن، و‎HT Heliopolis‎ للعناوين والشعار. والمسلخُ يبقى على
+   ‎IBM Plex Sans Arabic‎ و‎KFUPM Display‎ كما كان — فالخطُّ جزءٌ من الثوب،
+   وثوبُ الجذر غيرُ ثوبه.
+
+   ===== ولا تُرفع إلّا ‎woff2‎ =====
+   في الحزمتين ‎TTF‎ و‎WOFF2-Web‎. والأولى رخصةُ سطحِ مكتبٍ تُنصَّب في الجهاز،
+   والثانية رخصةُ ويبٍ تُقدَّم من الصفحة — فلا يُرفع إلى الموقع إلّا ما رُخّص له. */
+
+@font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 300; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Light.woff2')   format('woff2'); }
+@font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 400; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 500; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2')  format('woff2'); }
+@font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 700; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Heavy.woff2')   format('woff2'); }
+@font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 900; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Black.woff2')   format('woff2'); }
+
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 200; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-Thin.woff2')     format('woff2'); }
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 400; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-Regular.woff2')  format('woff2'); }
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 500; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-Medium.woff2')   format('woff2'); }
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 600; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 700; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-Bold.woff2')     format('woff2'); }
+@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 800; font-display: swap;
+             src: url('../assets/fonts/HT-Heliopolis-Heavy.woff2')    format('woff2'); }
+
+/* المتن: ‎Ping‎. وأكثرُ عناصر الموقع ترث خطَّ الجسم أو تقول ‎font: inherit‎،
+   فيكفي ‎body‎ ولا تُلاحَق العناصرُ واحدًا واحدًا */
+html[data-skin="flat"] body { font-family: 'Ping AR LT', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+
+/* والعناوينُ والشعار: ‎Heliopolis‎ — وهو أعرضُ عينًا وأشدُّ تباينًا في الثقيل */
+html[data-skin="flat"] .side-logo,
+html[data-skin="flat"] h1, html[data-skin="flat"] h2,
+html[data-skin="flat"] h3, html[data-skin="flat"] h4 {
+  font-family: 'HT Heliopolis', 'Ping AR LT', 'Segoe UI', Tahoma, sans-serif;
+}
