@@ -20,6 +20,47 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/icon-180.png">
 
   <link rel="stylesheet" href="../shared/styles.css">
+
+  <!-- ===== مبدِّلُ المجتمع =====
+       موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
+       المنشور والمستودع (الورقةُ إحدى الملفّات المتفرّقة بينهما، فتعديلُ الأقدم
+       يمحو الأحدث). ومتى استوَيا نُقل هذا البابُ إلى موضعه. -->
+  <style>
+    /* الشعارُ والمبدِّلُ أخوان: فُرجةٌ بينهما أضيقُ من فُرجة الشريط (‎gap:14px‎) */
+    .side-head { display: flex; flex-direction: column; gap: 5px; }
+    .side-com  { display: flex; flex-direction: column; gap: 5px; }
+
+    .sc-now {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      width: fit-content; margin: 0 auto; padding: 1px 9px;
+      border: 0; border-radius: 9px; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.7;
+      color: var(--c-ink-soft);
+      transition: color .15s, background .15s;
+    }
+    .sc-now:hover { color: var(--c-kfupm); background: var(--surface); }
+    .sc-car { width: 12px; height: 12px; flex: none; transition: transform .18s; }
+    .sc-now[aria-expanded="true"] .sc-car { transform: rotate(180deg); }
+
+    /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
+       فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
+    .sc-menu {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 4px; border: 1px solid var(--border); border-radius: 12px;
+      background: var(--surface);
+    }
+    .sc-menu[hidden] { display: none; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
+
+    .sc-item {
+      border: 0; border-radius: 8px; background: transparent; cursor: pointer;
+      padding: 5px 10px; text-align: center;
+      font-family: inherit; font-size: 12.5px; color: var(--c-ink-soft);
+      transition: color .15s, background .15s;
+    }
+    .sc-item:hover  { color: var(--c-kfupm); background: var(--c-kfupm-soft); }
+    .sc-item.is-on  { color: var(--c-kfupm); font-weight: 700; }
+    .sc-dash        { letter-spacing: .12em; }
+  </style>
 </head>
 <body>
 
@@ -27,7 +68,31 @@
        يمين مع العربية · يسار مع الإنجليزية (عبر html[data-lang]) -->
   <aside class="sidebar" id="sidebar">
     <!-- شعار الموقع: أعلى الشريط الجانبي (يمين) بخط الهوية KFUPM Display -->
-    <div class="side-logo">أكاديميا</div>
+    <!-- ===== الشعارُ ومبدِّلُ المجتمع =====
+         ‎.side-logo‎ يبقى كما هو ولا يُلَفّ المبدِّلُ داخله: المحرّكُ يكتب فيه
+         اسمَ الموقع عند تبديل اللغة (‎lg.textContent = t.siteName‎)، و‎textContent‎
+         يمحو ما تحته. فهما أخوان في ‎.side-head‎.
+         والخياراتُ معروضةٌ ولا تَفعل شيئًا بعدُ — تُوصَل يومَ تُبنى المجتمعات. -->
+    <div class="side-head">
+      <div class="side-logo">أكاديميا</div>
+
+      <div class="side-com" id="side-com">
+        <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
+        <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
+          <svg class="sc-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="sc-nm">المسلخ</span>
+        </button>
+
+        <div class="sc-menu" id="sc-menu" hidden>
+          <!-- الأوّلُ: أكاديميا نفسُها، بلا مجتمع -->
+          <button class="sc-item sc-dash" type="button" title="أكاديميا — بلا مجتمع">—</button>
+          <button class="sc-item is-on" type="button">المسلخ</button>
+          <button class="sc-item" type="button">المدرج</button>
+          <button class="sc-item" type="button">القدرات</button>
+          <button class="sc-item" type="button">الآيلتس</button>
+        </div>
+      </div>
+    </div>
 
     <nav class="tabs">
       <button type="button" data-tab="market" class="is-active">
@@ -553,10 +618,30 @@
     </div>
   </div>
 
+  <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
+  <script src="api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
   <script src="emoji.js"></script>
   <script src="app.js"></script>
+  <!-- فتحُ مبدِّل المجتمع وإغلاقُه. والخياراتُ بلا أثرٍ بعدُ: وسمٌ ينتظر وصلَه -->
+  <script>
+    (function () {
+      var b = document.getElementById('sc-now'),
+          m = document.getElementById('sc-menu'),
+          w = document.getElementById('side-com');
+      if (!b || !m || !w) return;
+      function put(open) {
+        m.hidden = !open;
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      b.addEventListener('click', function (e) { e.stopPropagation(); put(m.hidden); });
+      document.addEventListener('click', function (e) {
+        if (!m.hidden && !w.contains(e.target)) put(false);
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') put(false); });
+    })();
+  </script>
 </body>
 </html>
