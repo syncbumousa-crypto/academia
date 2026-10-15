@@ -54,21 +54,55 @@
     .sidebar .tabs button[data-tab="market"] { display: none; }
     #panel-market { display: none !important; }
 
-    /* المجتمعاتُ عمودٌ على يسار منطقة المحتوى — يمينًا وشمالًا بالفيزياء
-       لا بالمنطق، فلا ينتقل إلى الجهة الأخرى متى صارت الصفحةُ إنجليزيّة */
-    .ex-rail  { width: min(380px, 100%); margin-right: auto; margin-left: 0; }
-    .ex-h     { margin: 0 0 3px; font-size: 19px; font-weight: 700; }
-    .ex-sub   { margin: 0 0 16px; color: var(--c-ink-soft); font-size: 13px; }
-    .ex-list  { display: flex; flex-direction: column; gap: 8px; }
-    .ex-item  { display: flex; align-items: center; gap: 10px; text-decoration: none;
-                padding: 12px 14px; border: 1px solid var(--border); border-radius: 14px;
-                background: var(--surface); color: inherit;
-                transition: border-color .15s, transform .15s; }
-    a.ex-item:hover { border-color: var(--c-kfupm); transform: translateY(-1px); }
-    .ex-nm    { font-weight: 700; font-size: 14.5px; }
-    .ex-go    { margin-inline-start: auto; font-size: 12px; font-weight: 700; color: var(--c-kfupm); }
-    .ex-item.is-soon { opacity: .55; }
-    .ex-item.is-soon .ex-go { color: var(--c-ink-soft); font-weight: 600; }
+    /* صفوفٌ تُمرَّر أفقيًّا على طريقة نتفلكس وثمانية: عنوانٌ في مبدأ القراءة
+       (يمينُ الصفحة في العربيّة) وتحته شريطُ أغلفةٍ ينزلق. ولا شيءَ ههنا
+       مثبَّتٌ بالفيزياء: الاتّجاهُ منطقيّ، فينقلب الصفُّ كلُّه مع اللغة. */
+    .ex-row   { position: relative; margin: 0 0 32px; }
+    .ex-head  { display: flex; align-items: baseline; gap: 10px; margin: 0 0 11px; }
+    .ex-h     { margin: 0; font-size: 19px; font-weight: 700; }
+    .ex-sub   { margin: 0; color: var(--c-ink-soft); font-size: 12.5px; }
+
+    .ex-wrap  { position: relative; }
+    .ex-strip { display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth;
+                scroll-snap-type: x proximity; padding: 4px 2px 8px;
+                scrollbar-width: none; }
+    .ex-strip::-webkit-scrollbar { display: none; }
+
+    .ex-card  { flex: 0 0 auto; scroll-snap-align: start; text-decoration: none; color: inherit; }
+    .ex-cover { position: relative; display: grid; place-items: center; overflow: hidden;
+                border: 1px solid var(--border); border-radius: 12px;
+                transition: transform .18s ease, box-shadow .18s ease; }
+    a.ex-card:hover .ex-cover, a.ex-card:focus-visible .ex-cover {
+                transform: scale(1.035); box-shadow: 0 10px 26px rgba(0,0,0,.2); }
+    .ex-cap   { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 12.5px; }
+    .ex-cap b { font-weight: 700; }
+    .ex-cap s { text-decoration: none; color: var(--c-ink-soft); font-size: 11.5px; }
+
+    /* المجتمعات: ‎١٦:٩‎ — مقاسُ مصغَّرة يوتيوب، وهو مقاسُ صفّ نتفلكس كذلك */
+    .ex-strip--com .ex-card  { width: clamp(196px, 25vw, 300px); }
+    .ex-strip--com .ex-cover { aspect-ratio: 16 / 9; border: 0; }
+    .ex-cover-t { color: #fff; font-size: clamp(18px, 2.4vw, 26px); font-weight: 700;
+                  text-shadow: 0 1px 10px rgba(0,0,0,.28); }
+    .ex-cover-m { position: absolute; inset-inline-end: 11px; bottom: 10px;
+                  width: 21px; color: #fff; opacity: .45; }
+    .ex-card.is-soon .ex-cover { filter: saturate(.3) brightness(.85); }
+    .ex-card.is-soon { cursor: default; }
+
+    /* الكتب: غلافُ الكتاب قائمٌ لا مضطجع، فيُترك على نسبته */
+    .ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
+    .ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
+    .ex-strip--books img       { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* سهما التمرير: يظهران عند المرور، ويختفي الواصلُ إلى طرفه */
+    .ex-nav   { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+                width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+                border: 1px solid var(--border); background: var(--surface); color: inherit;
+                display: grid; place-items: center; opacity: 0; transition: opacity .15s; }
+    .ex-wrap:hover .ex-nav, .ex-nav:focus-visible { opacity: .96; }
+    .ex-nav[hidden] { display: none; }
+    .ex-nav svg { width: 16px; height: 16px; }
+    .ex-nav--s { inset-inline-start: -8px; }
+    .ex-nav--e { inset-inline-end: -8px; }
 
     .side-com  { display: flex; flex-direction: column; gap: 5px; }
 
@@ -243,16 +277,21 @@
   <!-- لوحُ الاستكشاف: المجتمعاتُ، ومنها المسلخ. ما لم يُفتح بعدُ يُعرض
        ساكنًا ومكتوبًا عليه «قريبًا» — فالوعدُ معلومٌ ولا يُضغط ما لا يَفتح -->
   <section class="panel" id="panel-explore">
-    <div class="ex-rail">
-      <h2 class="ex-h" id="ex-h">مجتمعات</h2>
-      <p class="ex-sub" id="ex-sub">لكلِّ مجتمعٍ أهلُه ومكتبتُه.</p>
-      <div class="ex-list">
-        <a class="ex-item" href="../Almaslakh/"><span class="ex-nm">المسلخ</span><span class="ex-go">ادخل</span></a>
-        <div class="ex-item is-soon"><span class="ex-nm">المدرج</span><span class="ex-go">قريبًا</span></div>
-        <div class="ex-item is-soon"><span class="ex-nm">القدرات</span><span class="ex-go">قريبًا</span></div>
-        <div class="ex-item is-soon"><span class="ex-nm">الآيلتس</span><span class="ex-go">قريبًا</span></div>
+    <section class="ex-row">
+      <div class="ex-head"><h2 class="ex-h" id="ex-h">مجتمعات</h2>
+        <p class="ex-sub" id="ex-sub">لكلِّ مجتمعٍ أهلُه ومكتبتُه.</p></div>
+      <div class="ex-wrap">
+        <div class="ex-strip ex-strip--com" id="ex-coms"></div>
       </div>
-    </div>
+    </section>
+
+    <section class="ex-row">
+      <div class="ex-head"><h2 class="ex-h" id="ex-h2">كتب</h2>
+        <p class="ex-sub" id="ex-sub2">المقرّرات وأغلفتها.</p></div>
+      <div class="ex-wrap">
+        <div class="ex-strip ex-strip--books" id="ex-books"></div>
+      </div>
+    </section>
   </section>
 
   <section class="panel" id="panel-market" hidden>
@@ -677,19 +716,95 @@
         .observe(mk, { attributes: true, attributeFilter: ['hidden'] });
 
       /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
-      var tx = document.getElementById('tab-explore-tx');
-      var h  = document.getElementById('ex-h');
-      var sb = document.getElementById('ex-sub');
+      var T = { tab:['استكشاف','Explore'], h1:['مجتمعات','Communities'],
+                s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
+                h2:['كتب','Books'], s2:['المقرّرات وأغلفتها.','The courses and their covers.'] };
       function label() {
-        var en = document.documentElement.getAttribute('data-lang') === 'en';
-        tx.textContent = en ? 'Explore'    : 'استكشاف';
-        h.textContent  = en ? 'Communities': 'مجتمعات';
-        sb.textContent = en ? 'Each community has its own people and library.'
-                            : 'لكلِّ مجتمعٍ أهلُه ومكتبتُه.';
+        var i = document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0;
+        document.getElementById('tab-explore-tx').textContent = T.tab[i];
+        document.getElementById('ex-h').textContent   = T.h1[i];
+        document.getElementById('ex-sub').textContent = T.s1[i];
+        document.getElementById('ex-h2').textContent  = T.h2[i];
+        document.getElementById('ex-sub2').textContent= T.s2[i];
+        document.querySelectorAll('.ex-card.is-soon .ex-cap b').forEach(function (b) {
+          b.textContent = i ? 'Soon' : 'قريبًا';
+        });
       }
       new MutationObserver(label).observe(document.documentElement,
         { attributes: true, attributeFilter: ['data-lang'] });
       label();
+
+      /* ===== الصفّان =====
+         المجتمعاتُ أغلفتُها مرسومةٌ ههنا لا مرفوعة: تدرّجٌ ولونٌ لكلّ واحد
+         وعليه اسمُه وختمُ لُب. ومتى جاءت صورةٌ حقيقيّةٌ وُضعت مكانَ التدرّج
+         بسطرٍ واحد (‎img‎ داخل ‎.ex-cover‎). والكتبُ أغلفتُها موجودةٌ أصلًا في
+         ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
+      var COMS = [
+        { ar:'المسلخ',  en:'Almaslakh', href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
+        { ar:'المدرج',  en:'Almudarraj', soon:1,              a:'#3a2d18', b:'#8a6d2f' },
+        { ar:'القدرات', en:'Qudurat',    soon:1,              a:'#2a2142', b:'#5d4a95' },
+        { ar:'الآيلتس', en:'IELTS',      soon:1,              a:'#3b1f26', b:'#8d4654' }
+      ];
+      var MARK = '<svg class="ex-cover-m" viewBox="-155 57.49 310 244.51" fill="currentColor" aria-hidden="true">' +
+        '<path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg>';
+
+      function esc(t) { return String(t).replace(/[&<>"]/g, function (c) {
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+
+      function buildComs() {
+        document.getElementById('ex-coms').innerHTML = COMS.map(function (c) {
+          var cover = '<div class="ex-cover" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')">' +
+                      '<span class="ex-cover-t">' + esc(c.ar) + '</span>' + MARK + '</div>';
+          var cap = '<div class="ex-cap"><b>' + (c.soon ? 'قريبًا' : esc(c.ar)) + '</b>' +
+                    (c.soon ? '' : '<s>' + esc(c.en) + '</s>') + '</div>';
+          return c.soon
+            ? '<div class="ex-card is-soon">' + cover + cap + '</div>'
+            : '<a class="ex-card" href="' + c.href + '">' + cover + cap + '</a>';
+        }).join('');
+      }
+
+      function buildBooks() {
+        if (typeof COVERS === 'undefined') return;           /* الورقةُ لم تصل بعد */
+        var html = Object.keys(COVERS).map(function (code) {
+          return '<div class="ex-card"><div class="ex-cover">' +
+                 '<img loading="lazy" alt="' + esc(code) + '" src="../' + COVERS[code] + '">' +
+                 '</div><div class="ex-cap"><b>' + esc(code) + '</b></div></div>';
+        }).join('');
+        document.getElementById('ex-books').innerHTML = html;
+      }
+
+      /* سهما التمرير: الاتّجاهُ يُؤخذ من الصفحة لا يُفترض — ‎scrollLeft‎ يسير
+         بالسالب في العربيّة، فالحسابُ بالقيمة المطلقة والإشارةُ من الجهة. */
+      function wireNav(wrap) {
+        var strip = wrap.querySelector('.ex-strip');
+        var mk = function (cls, d) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'ex-nav ' + cls;
+          b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+                        'stroke-linecap="round" stroke-linejoin="round"><path d="M' +
+                        (d < 0 ? '15 5l-7 7 7 7' : '9 5l7 7-7 7') + '"/></svg>';
+          b.addEventListener('click', function () {
+            var rtl = getComputedStyle(strip).direction === 'rtl';
+            strip.scrollBy({ left: d * strip.clientWidth * 0.85 * (rtl ? -1 : 1), behavior: 'smooth' });
+          });
+          wrap.appendChild(b); return b;
+        };
+        var prev = mk('ex-nav--s', -1), next = mk('ex-nav--e', 1);
+        function upd() {
+          var x = Math.abs(strip.scrollLeft);
+          var max = strip.scrollWidth - strip.clientWidth - 2;
+          prev.hidden = x <= 12;
+          next.hidden = x >= max - 12 || max <= 0;
+        }
+        strip.addEventListener('scroll', upd);
+        window.addEventListener('resize', upd);
+        setTimeout(upd, 60);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        buildComs(); buildBooks(); label();
+        document.querySelectorAll('#panel-explore .ex-wrap').forEach(wireNav);
+      });
     })();
   </script>
 
