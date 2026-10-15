@@ -826,6 +826,31 @@
                '<i class="ex-dot" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')"></i>' +
                '<span>' + esc(i ? c.en : c.ar) + '</span></a>';
       }
+      /* ===== اسمُ المادّة يتبع لغةَ الموقع =====
+         بالعربيّة: القسمُ مختصرًا ثمّ الرقم — «محاسبة 300».
+         وبالإنجليزيّة: الكودُ اللاتينيُّ كما هو — «ACCT 300».
+         والقاعدةُ ليست من عندي: هي ‎arShort‎ في المحرّك بعينها، وجدولُها
+         ‎DEPT_AR‎ في ‎shared/courses.js‎ — فيُسمّى الكتابُ ههنا كما يُسمّى في
+         المكتبة سواءً، ولا ينشقّ اسمٌ عن اسم. */
+      function codeLabel(code, i) {
+        if (i) return code;                       /* الإنجليزيّةُ هي الكود */
+        var sp = code.indexOf(' ');
+        if (sp < 1 || typeof DEPT_AR === 'undefined') return code;
+        var d = DEPT_AR[code.slice(0, sp)];
+        return d ? d + ' ' + code.slice(sp + 1) : code;
+      }
+      /* والاسمُ الكاملُ تلميحًا عند المرور، من جدول المواد إن كان فيه */
+      var FULL = null;
+      function fullName(code) {
+        if (FULL === null) {
+          FULL = {};
+          if (typeof COURSES !== 'undefined') {
+            COURSES.forEach(function (c) { FULL[c.code] = c.ar || ''; });
+          }
+        }
+        return FULL[code] || '';
+      }
+
       function bookCards(sh) {
         if (sh.com === undefined || typeof COVERS === 'undefined') {
           var ph = '<div class="ex-card is-ph"><div class="ex-cover">' +
@@ -834,11 +859,13 @@
                    'A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg></div></div>';
           return new Array(7).join('|').split('|').map(function () { return ph; }).join('');
         }
-        var own = ownOf(sh.com);
+        var own = ownOf(sh.com), i = lang();
         return Object.keys(COVERS).map(function (code) {
-          return '<div class="ex-card"><div class="ex-cover">' +
-                 '<img loading="lazy" alt="' + esc(code) + '" src="../' + COVERS[code] + '">' +
-                 '</div><div class="ex-cap"><b>' + esc(code) + '</b></div>' + own + '</div>';
+          var nm = codeLabel(code, i), full = fullName(code);
+          return '<div class="ex-card"' + (full ? ' title="' + esc(full) + '"' : '') + '>' +
+                 '<div class="ex-cover">' +
+                 '<img loading="lazy" alt="' + esc(nm) + '" src="../' + COVERS[code] + '">' +
+                 '</div><div class="ex-cap"><b>' + esc(nm) + '</b></div>' + own + '</div>';
         }).join('');
       }
       function buildShelves() {
