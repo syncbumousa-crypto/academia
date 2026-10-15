@@ -1,0 +1,412 @@
+/* ============================================================
+   نظامُ الزجاج — ورقةٌ واحدةٌ لموقعين
+   ============================================================
+   كان هذا كلُّه في ‎<style>‎ داخلِ ‎platform/index.html‎. ونُقل ههنا يومَ
+   أُريد للمسلخ زجاجٌ مثلُه: مصدران يفترقان في أوّل تعديل، وقد جرّبناه
+   في هذا المشروع مرّتين فافترقا.
+
+   **وليس فيه قيمةُ لونٍ واحدة.** كلُّ ما يُلوِّن معلَّقٌ على ستّة متغيّرات
+   يُعلنها كلُّ موقعٍ في ‎:root‎ عنده:
+     ‎--glass‎ الصبغة · ‎--glass-mix‎ تعتيمُها · ‎--glass-ink‎ الحبر ·
+     ‎--glass-edge‎ لمعةُ الحرف · ‎--glass-cast‎ الظلّ · ‎--side-w‎ العرض.
+   فالجذرُ يُعلن حبرَه الأسودَ والأبيض، والمسلخُ يُعلن تيلَه، والقواعدُ
+   واحدة. ومن أراد أن يَعرف لِمَ ٥٤٪ ولِمَ ٦٣٪ فليقرأ ‎ROADMAP-SIDEBAR.md‎
+   — هي **أقلُّ تعتيمٍ يَعبُر ‎4.5:1‎** على أسوأ خلفيّةٍ تمرّ تحت الزجاج،
+   محسوبةٌ لا مُجرَّبة.
+
+   وفيه قواعدُ لا تُطابق إلّا في الجذر (‎#panel-explore‎ و‎.nook-block‎
+   و‎.ex-nav‎). تُركت: خاملةٌ حيث لا تُطابق، ومُعَدَّةٌ ليومِ تَصير في
+   المسلخ كتلةٌ مثلُها.
+
+   ولا تُحمَّل هذي الورقةُ إلّا **بعد** ‎styles.css‎ و‎skin-flat.css‎، و**قبل**
+   ‎<style>‎ الصفحة الثانية: فترتيبُ المصدر هو ترتيبُ الغلبة، وقد رُتّب
+   كما كان قبل النقل حرفًا بحرف.
+   ============================================================ */
+
+/* ============================================================
+   الزجاج — م١ وم٢ من «خارطة الشريط الجانبيّ»
+   ============================================================
+   م١ · ليكن تحت الزجاج ما يُرى: صفوفُ الأغلفة تمتدّ تحت الشريط بدل
+        أن تقف عنده. فأوّلُ بطاقةٍ تبقى بارزةً (الحَشْوُ يردّها)، وما
+        بعدها ينزلق تحت الزجاج عند التمرير. وبلا هذا فالزجاجُ فوق
+        لونٍ واحدٍ = لونٌ واحد.
+   م٢ · السطح: ثلاثُ درجاتٍ لا قفزة —
+          لا دعمَ        ⟵ مصمتٌ كما كان
+          blur           ⟵ زجاجٌ مثلَّج (هذي المرحلة)
+          blur + url()   ⟵ انكسارُ الحافّة (م٣، لم تأتِ بعد)
+        ومن طلب تقليلَ الشفافيّة رجع إلى المصمت: قراءةُ الواجهة
+        حقٌّ لا زينة. */
+
+
+/* م١ · الصفوفُ تمرّ تحت الشريط */
+#panel-explore .ex-strip {
+  margin-inline-start:  calc((var(--side-w) + var(--pnl-pad)) * -1);
+  padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+  /* والالتقاطُ يحترم الحَشْو: بدونه يَجذب البطاقةَ الأولى إلى حافّة
+     الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
+  scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+}
+
+
+
+
+
+
+/* ============================================================
+   الزجاجُ يخرج من اللوح — بالنظام نفسِه لا بنسخةٍ ثانية
+   ============================================================
+   أوّلُ ما بعد الخارطة: أن يَعُمّ الزجاجُ ما يطفو فوق المحتوى. وشرطُه
+   ألّا يُعاد اختراعُه: الصبغةُ والتعتيمُ والحرفُ هي هي، تُستدعى بصنفٍ
+   واحدٍ ‎.ac-glass‎ فيَرِث كلَّ شيءٍ ويَرِث معه البديلَ والبوّابة.
+
+   والمُرشَّحُ للزجاج ما **يطفو فوق محتوًى يتحرّك** — شريطُ الأدوات
+   وأسهمُ الصفوف. أمّا ما هو سطحُ قراءةٍ ثابتٌ (بطاقةُ مادّة، نافذةُ
+   حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال. */
+.ac-glass {
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent) !important;
+  border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  .ac-glass { -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ac-glass { background: var(--glass) !important;
+              -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* شريطُ أدوات المكتبة: بحثٌ وتصنيفاتٌ يطفوان فوق رفّ الكتب */
+#panel-market #m-search,
+#panel-market .btn-filter { background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent); }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  #panel-market #m-search, #panel-market .btn-filter {
+    -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
+}
+
+/* وأسهمُ الصفوف: أقراصٌ زجاجيّةٌ كقرص الطيّ، لا دوائرُ مصمتة */
+#panel-explore .ex-nav {
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 6px 18px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  #panel-explore .ex-nav { -webkit-backdrop-filter: blur(14px) saturate(160%);
+                           backdrop-filter: blur(14px) saturate(160%); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  #panel-market #m-search, #panel-market .btn-filter, #panel-explore .ex-nav {
+    background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* ============================================================
+   م٦ · الحياة — الزجاجُ يتبدّل بما يمرّ تحته
+   ============================================================
+   ١· الكثافةُ تتبع التمرير: في رأس الصفحة لا شيءَ تحت اللوح فيكون
+      أصفى ما يكون، وكلّما مرّت الأغلفةُ تحته ثَقُل ليبقى النصُّ مقروءًا.
+      والحركةُ **صعودًا فقط** من قيمة الجلد المقيسة — فالبوّابةُ (4.5:1)
+      محفوظةٌ في أدنى الحالتين، وما فوقها أأمن.
+   ٢· ولمعةٌ تتبع المؤشّر على الصفّ المُحوَّم عليه، كانعكاسٍ على زجاج.
+   وكلتاهما تُطفأ لمن طلب تقليلَ الحركة. */
+@property --glass-mix { syntax: '<percentage>'; inherits: true; initial-value: 54%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    @keyframes ac-glass-dense { to { --glass-mix: 76%; } }
+    /* المُمرِّرُ ههنا ‎body‎ لا الجذر — قِيس: ‎scroll(root)‎ لم يرتبط
+       و‎scrollTop‎ يقع على الجسد. فيُسمَّى الجدولُ على المُمرِّر نفسِه،
+       ويُطلب بالاسم من اللوح وهو ابنُه. */
+    body { scroll-timeline-name: --ac-page; scroll-timeline-axis: block; }
+    .sidebar {
+      animation: ac-glass-dense linear both;
+      animation-timeline: --ac-page;
+      animation-range: 0 340px;
+    }
+  }
+}
+
+/* اللمعة: طبقةٌ لا تُمسك الضغط، وتتبع ‎--mx/--my‎ من حركة المؤشّر */
+.sidebar .tabs button, .nook-com { position: relative; overflow: hidden; }
+.sidebar .tabs button::after, .nook-com::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  transition: opacity .18s;
+  background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 50%),
+              color-mix(in srgb, var(--glass-ink) 13%, transparent), transparent 68%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar .tabs button:hover::after, .nook-com:hover::after { opacity: 1; }
+}
+
+/* ============================================================
+   م٥ · ثلاثُ حالاتٍ للوح: واسعٌ · سكّةٌ · مطويّ
+   ============================================================
+   مبدأُ أبل: «دع الناسَ يُخفونه» — ومعه درجةٌ وسطى تُبقي التنقّلَ قائمًا
+   وتردّ المساحةَ للمحتوى. والحيلةُ أنّ كلّ شيءٍ ههنا محسوبٌ من ‎--side-w‎:
+   حَشْوُ الجسد، وموضعُ الدائرة، وامتدادُ الصفوف تحت اللوح. فتبديلُ
+   **متغيّرٍ واحد** يُزيح المنظومة كلَّها، ولا يُطارَد رقمٌ في عشرة مواضع. */
+:root { --side-w: 200px; }
+body.side-rail { --side-w: 64px; }
+
+body.side-rail .side-logo,
+body.side-rail .sidebar .tab-tx,
+body.side-rail .nook-com span,
+body.side-rail .side-logout .side-logout-tx,
+body.side-rail .side-auth-tx,
+body.side-rail .side-profile .sp-name { display: none; }
+
+body.side-rail .sidebar { padding: 14px 8px; }
+body.side-rail .sidebar .tabs button,
+body.side-rail .nook-com,
+body.side-rail .side-logout,
+body.side-rail .side-join,
+body.side-rail .side-login,
+body.side-rail .side-profile { justify-content: center; padding-inline: 0; }
+body.side-rail .nook-com { padding-inline-start: 0; }
+body.side-rail .side-ctl { align-items: center; }
+body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
+/* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء، ولا الكتلةُ: الجوفُ صفٌّ
+   من نقاطٍ تحت أيقونةٍ، ولوحةٌ حولَه تُضيّق السكّةَ بلا فائدة. */
+body.side-rail .nook-caret { display: none !important; }
+body.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
+body.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
+body.side-rail .nook-block.is-open > #nook-head.is-active {
+  box-shadow: inset 0 0 0 1px var(--plate-edge); }
+body.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
+
+/* ===== الحسابُ في السكّة: دائرةُ صورةٍ لا صندوق =====
+   كان الاسمُ يُخفى بصنفٍ لا وجودَ له (‎.side-pname‎ والصحيح ‎.sp-name‎)،
+   فيبقى شاغلًا سطرَه ويدفع الصورةَ إلى الحافّة. فصُحِّح الاسمُ، وصار
+   الزرُّ نفسُه دائرةً بقدر الصورة: لا لوحةَ تحتها ولا حشوَ حولها. */
+body.side-rail .side-acct .side-profile {
+  width: 38px; height: 38px; min-height: 0; padding: 0; margin-inline: auto;
+  border-radius: 50%; overflow: hidden; background: transparent;
+  box-shadow: inset 0 0 0 1px var(--plate-edge); }
+body.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
+body.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
+body.side-rail .side-brand { gap: 0; }
+
+/* ============================================================
+   داخلُ اللوح — نظامٌ واحدٌ لكلّ ما يُضغط
+   ============================================================
+   قِيس قبل أن يُعدَّل، فإذا في اللوح ثلاثةُ أنصافِ أقطار (١٢ و١٠ و٩)،
+   وخمسةُ ارتفاعات (٥١ و٥٠ و٣٨ و٣٤ و٣٠)، وثلاثةُ مقاسات خطّ — **وسطحان
+   مصمتان** (‎#252525‎ و‎#202020‎) داخل زجاج. والمصمتُ داخل الزجاج يَكسره:
+   يقول للعين «هذا ليس شفّافًا» فيبطل ما تحته.
+
+   فالنظام:
+     · الصفُّ الكبير (تاب) ‎44px‎ · والصغير (مجتمع) ‎34px‎ · والقرص ‎32px‎.
+     · لا لونَ مصمتًا البتّة: كلُّ سطحٍ **لوحةٌ** من حبر اللوح نفسِه
+       بنسبةٍ قليلة، فتُظلم في الفاتح وتُضيء في الداكن من غير قاعدتين.
+     · والحالةُ النشطةُ لوحةٌ أثقلُ وحدٌّ داخليٌّ لامع، لا مستطيلٌ مصمت. */
+.sidebar {
+  --row-h: 44px;  --row-r: 14px;  --chip: 32px;
+  --plate:      color-mix(in srgb, var(--glass-ink) 8%,  transparent);
+  --plate-hi:   color-mix(in srgb, var(--glass-ink) 14%, transparent);
+  --plate-edge: color-mix(in srgb, var(--glass-ink) 12%, transparent);
+  gap: 10px;
+}
+
+/* الصفوفُ الكبرى: استكشاف · الركن · الاختبارات · إحصائياتي */
+.sidebar .tabs { margin-inline: 0; gap: 2px; }
+.sidebar .tabs button {
+  min-height: var(--row-h); padding: 0 11px; gap: 10px;
+  border-radius: var(--row-r); font-size: 14px; font-weight: 600;
+  transition: background .15s, box-shadow .15s;
+}
+.sidebar .tabs button:hover { background: var(--plate); }
+.sidebar .tabs button.is-active {
+  background: var(--plate-hi); color: var(--glass-ink);
+  box-shadow: inset 0 0 0 1px var(--plate-edge);
+}
+.sidebar .tabs .tab-ic { width: 17px; height: 17px; }
+
+/* درجُ المجتمعات: صفٌّ أصغرُ وبنفس اللغة */
+/* وتخصيصُها بقدر ما يغلب ‎.sidebar .tabs button‎: الجوفُ ساكنُ ‎nav.tabs‎
+   فكان يرث ارتفاعَ الصفّ الكبير ويقف ٤٤ في موضع ٣٤، فتستوي الترويسةُ
+   وما تحتها ولا يُقرأ أيُّهما ابنُ الآخر. */
+.sidebar .tabs .nook-com { min-height: 34px; border-radius: 12px;
+                           padding-inline-start: 26px; font-size: 12.5px; }
+.nook-com:hover { background: var(--plate); color: var(--glass-ink); }
+.nook-com.is-on { background: var(--plate-hi); color: var(--glass-ink);
+                  box-shadow: inset 0 0 0 1px var(--plate-edge); }
+
+/* ===== الكتلةُ مفتوحة =====
+   لوحةٌ واحدةٌ تضمّ الترويسةَ وجوفَها، وخطٌّ شعريٌّ تحت الترويسة يقول
+   «هذا رأسُ الكتلة وهذا جوفُها». ولم أُثقّل الترويسةَ بلوحةٍ ثانية:
+   كانت ستُقرأ «نشِطة» وهي ليست كذلك متى تُرك الركنُ إلى تابٍ آخر. */
+.nook-block.is-open { background: var(--plate);
+                      box-shadow: inset 0 0 0 1px var(--plate-edge);
+                      padding-bottom: 4px; }
+.nook-block.is-open > #nook-head { box-shadow: inset 0 -1px 0 var(--plate-edge); }
+.nook-block.is-open > #nook-head.is-active {
+  box-shadow: inset 0 0 0 1px var(--plate-edge), inset 0 -1px 0 var(--plate-edge); }
+.nook-block.is-open .nook-coms { padding-inline: 4px; padding-top: 3px; }
+
+/* الأقراص: الجلد واللغة — دائرتان كدائرة المقبض */
+.sidebar .themebar button, .sidebar .langbar button {
+  width: var(--chip); height: var(--chip); border-radius: 50%; padding: 0;
+  background: var(--plate); border: 0;
+  box-shadow: inset 0 0 0 1px var(--plate-edge);
+  color: var(--glass-ink); transition: background .15s;
+}
+.sidebar .themebar button:hover, .sidebar .langbar button:hover { background: var(--plate-hi); }
+.side-ctl { gap: 10px; margin-top: auto; }
+/* المجموعتان صفٌّ واحدٌ متّصل: كانت الثانيةُ تُدفع إلى القاع
+   بـ‎margin-top:auto‎، فصار بينهما فراغٌ لا معنى له. */
+.sidebar .tabs--me { margin-top: 0; }
+.sidebar .tabs--me + .side-ctl { margin-top: auto; }
+
+/* الحساب والخروج والدخول: لوحاتٌ لا صناديقُ مصمتة */
+.side-acct .side-profile, .side-logout, .side-join, .side-login {
+  background: var(--plate); border: 0;
+  box-shadow: inset 0 0 0 1px var(--plate-edge);
+  border-radius: var(--row-r); color: var(--glass-ink);
+  transition: background .15s;
+}
+.side-acct .side-profile { min-height: var(--row-h); }
+/* وكِسوةُ الصورة حين لا صورة: لوحةُ اللوح لا بترولٌ فاتح */
+.sidebar .sp-av { background: var(--plate-hi); color: var(--glass-ink); }
+.side-logout, .side-join, .side-login { min-height: 36px; font-size: 12.5px; }
+.side-acct .side-profile:hover, .side-logout:hover, .side-join:hover, .side-login:hover {
+  background: var(--plate-hi); color: var(--glass-ink);
+}
+/* و«إنشاء حساب» وحدَه مصمتٌ عمدًا: هو الفعلُ المقصود في اللوح. ومصمتُه
+   حبرُ اللوح مقلوبًا — أسودُ على الفاتح وأبيضُ على الداكن — فيبقى
+   أعلى الأشياء نبرةً من غير لونٍ مستعار.
+   وتخصيصُه بقدر ‎.sidebar .side-ctl button‎ الآتي بعدَه: قِيس فوجِد
+   حبرًا على حبر — أسودُ على أسود لا يُرى. */
+.sidebar .side-acct .side-join { background: var(--glass-ink); color: var(--glass); box-shadow: none; }
+.sidebar .side-acct .side-join:hover { background: var(--glass-ink); color: var(--glass); opacity: .86; }
+
+
+/* ============================================================
+   م٤ · الشريطُ لوحٌ عائمٌ لا جدارٌ ملتصق
+   ============================================================
+   كان يلصق بالحافّات الثلاث فلا حرفَ له يُرى. وزجاجٌ بلا حرفٍ لا يُرى
+   أنّه زجاج. فصار **بطاقةً** تطفو بفجوةٍ من كلّ جانب، بحوافَّ ناعمةٍ
+   كأمثلة ‎glassapp‎، فيَظهر سمكُها ولمعةُ حرفها وظلُّها على ما تحتها. */
+:root { --glass-gap: 14px; --glass-r: 26px; }
+
+.sidebar {
+  top: var(--glass-gap); bottom: var(--glass-gap);
+  right: var(--glass-gap); height: auto;
+  border: 0; border-radius: var(--glass-r);
+  overflow-x: hidden;
+}
+html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
+/* والمحتوى يُفسح للوح وفجوته */
+body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2); }
+html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2); }
+/* والمطويُّ يخرج كلَّه ومعه فجوتُه */
+
+/* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
+.sidebar .tabs { margin-inline: -4px; }
+.sidebar .tabs button { border-radius: var(--row-r); }
+.sidebar .tabs .nook-block > button { border-top: 0; }
+.sidebar .tabs button + button { border-top: 0; }
+.nook-com { border-radius: 10px; }
+
+/* ============================================================
+   المقبض: دائرةٌ فيها أيقونةُ شريط، لا لسانٌ ملتصقٌ بسهم
+   ============================================================ */
+.side-handle {
+  /* أصغرُ وفي الأعلى: يحاذي رأسَ اللوح لا وسطَه — فالوسطُ موضعُ مرورٍ
+     لا موضعُ أمر، والرأسُ حيث تبدأ العينُ في الشريط. */
+  width: 30px; height: 30px; border-radius: 50%; padding: 0; border: 0;
+  top: calc(var(--glass-gap) + 8px); transform: none;
+  /* مفتوحًا: في منتصف الممرّ بين حرف اللوح وأوّل عنوانٍ في المحتوى.
+     والممرُّ محسوبٌ لا مقدَّر — حرفُ اللوح عند ‎side-w + gap‎، وطرفُ
+     العنوان عند ‎side-w + 2gap + حشو اللوحة‎. فالمركزُ منتصفُهما،
+     ناقصًا نصفَ قطر الدائرة. فتتبع أيَّ تغييرٍ في العرض أو الفجوة. */
+  right: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  color: var(--glass-ink);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
+  transition: right .25s ease, left .25s ease, color .15s, transform .15s;
+}
+html[data-lang="en"] .side-handle {
+  right: auto; left: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
+  border: 0; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
+}
+.side-handle:hover { background: color-mix(in srgb, var(--glass) 92%, transparent); transform: scale(1.09); }
+/* الأيقونةُ ثابتةٌ لا تدور: هي تقول «شريط» لا «اتّجاه» */
+.side-handle svg { width: 15px; height: 15px; transform: none !important; }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  .side-handle { -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); }
+}
+
+/* ===== مقايضةٌ مقيسة =====
+   الزجاجُ الأصفى يُسقط التباين، والتباينُ شرطٌ لا يُساوَم. فبدل أن
+   أُثقّل اللوحَ أشدَدتُ الحبر: في الفاتح ‎#1b1a18‎ بدل ‎#37352f‎، وفي
+   الداكن أبيضُ خالص. فنزل أقلُّ تعتيمٍ يَعبُر البوّابة من ٦٦ إلى ٥٤،
+   ومن ٧٠ إلى ٦٣ — زجاجٌ أصفى بالقياس لا بالتنازل. */
+.sidebar, .sidebar .side-logo, .sidebar .tabs button,
+.sidebar .nook-com, .sidebar .side-ctl button { color: var(--glass-ink); }
+/* والنشِطُ حبرُ اللوح لا أبيضَ: لوحتُه رماديّةٌ شفّافةٌ لا مستطيلٌ
+   بتروليّ، والأبيضُ عليها في الجلد الفاتح يكاد لا يُرى. */
+.sidebar .tabs button.is-active { color: var(--glass-ink); }
+.sidebar .nook-com span { color: inherit; opacity: .82; }
+
+/* م٢ · السطح الزجاجيّ */
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  .sidebar {
+    background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+            backdrop-filter: blur(20px) saturate(170%);
+  }
+  /* والظلُّ بتخصيصٍ أعلى: ‎html[data-skin="flat"] .sidebar‎ في جلد الجذر
+     يُصفّر الظلَّ، وقِيس فغلب ‎.sidebar‎ وحدَها. فالحدُّ الفاتحُ على الوجه
+     المواجه للمحتوى، وينقلب مع اللغة.
+     والمِشبَكُ ‎data-theme‎ لا ‎data-skin‎: المسلخُ بلا جلدٍ مُسمّى، فكان
+     الظلُّ والحدُّ لا يَبلغانه أصلًا. والتخصيصُ واحدٌ (٠,٢,١) فيَغلب
+     ‎.sidebar‎ في الأمّ، ويَغلب جلدَ الجذر بترتيب التحميل. */
+  html[data-theme] .sidebar {
+    box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
+  }
+  html[data-theme][data-lang="en"] .sidebar {
+    box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
+  }
+
+  /* الدرجةُ الثالثة: الانكسار. تُضاف للسلسلة نفسِها ولا تَستبدلها، فمن
+     لا يدعم ‎url()‎ في الخلفيّة (سفاري وفايرفوكس) يبقى على المثلَّج. */
+  @supports (backdrop-filter: url(#lg-edge)) {
+    html[data-glass="liquid"] .sidebar {
+      -webkit-backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
+              backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
+    }
+  }
+}
+/* ولا شفافيّةَ لمن لا يريدها */
+@media (prefers-reduced-transparency: reduce) {
+  .sidebar {
+    background: var(--glass);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    box-shadow: none;
+  }
+}
+
+
+/* الرأسُ صار خارجَ الألواح، فيأخذ عرضَها وحشوَها بنفسه */
+.com-head { max-width: 1180px; margin: 0 auto 18px; padding: 23px clamp(16px,3vw,32px) 0; }
+.soon-area { min-height: 62vh; border-radius: 18px; background: var(--surface);
+             display: grid; place-items: center; }
+.soon-area span { color: var(--c-ink-soft); font-size: 14px; opacity: .4; }
+
+.ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
+.ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
+.ex-strip--books img       { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* سهما التمرير: يظهران عند المرور، ويختفي الواصلُ إلى طرفه */
+.ex-nav   { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+            width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+            border: 1px solid var(--border); background: var(--surface); color: inherit;
+            display: grid; place-items: center; opacity: 0; transition: opacity .15s; }
+.ex-wrap:hover .ex-nav, .ex-nav:focus-visible { opacity: .96; }
+.ex-nav[hidden] { display: none; }
+.ex-nav svg { width: 16px; height: 16px; }
+.ex-nav--s { inset-inline-start: -8px; }
+.ex-nav--e { inset-inline-end: -8px; }
+

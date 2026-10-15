@@ -3,7 +3,7 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-theme="light" spellcheck="false">
+<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-glass="liquid">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,11 +21,83 @@
 
   <link rel="stylesheet" href="../shared/styles.css?v=1">
 
+  <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
+       — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
+  <link rel="stylesheet" href="../shared/glass.css?v=1">
+
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
        المنشور والمستودع (الورقةُ إحدى الملفّات المتفرّقة بينهما، فتعديلُ الأقدم
        يمحو الأحدث). ومتى استوَيا نُقل هذا البابُ إلى موضعه. -->
   <style>
+    /* ============================================================
+       م٢ · قيمُ المسلخ — تيلٌ في الصبغة لا في الحبر
+       ============================================================
+       البوّابةُ واحدةٌ في الموقعين: تباينُ النصّ على الزجاج ≥ ‎4.5:1‎ على
+       أسوأ خلفيّةٍ تمرّ تحته. وحُسب للمسلخ على سبع خلفيّات، فظهر الثمن:
+       لو بقي نصُّ الصفوف تيلًا (‎#2c5e65‎) لَلزم الزجاجَ **٨٦٪** تعتيمًا في
+       الفاتح و**٩٢٪** في الداكن — جدارٌ عليه إشاعةُ شفافيّة لا زجاج.
+       فانتقل التيلُ من الحبر إلى الصبغة: اللوحُ تيليٌّ يُرى من أوّل نظرة،
+       والنصُّ حبرٌ — فنزل الحدُّ إلى **٥٨٪** و**٦٥٪**. وهما أقلُّ تعتيمٍ
+       يَعبُر، محسوبًا لا مُجرَّبًا. والتفصيلُ في ‎ROADMAP-SIDEBAR-MASLAKH.md‎.
+       ============================================================ */
+    :root {
+      --pnl-pad: clamp(16px, 3vw, 32px);
+      --glass:      #e7eff0;
+      --glass-mix:  58%;
+      --glass-ink:  #14233f;
+      --glass-edge: rgba(255,255,255,.85);
+      --glass-cast: rgba(13,42,72,.13);
+    }
+    html[data-theme="dark"] {
+      --glass:      #17313a;
+      --glass-mix:  65%;
+      --glass-ink:  #ffffff;
+      --glass-edge: rgba(255,255,255,.10);
+      --glass-cast: rgba(0,0,0,.34);
+    }
+
+    /* ===== وأين يبقى التيلُ إذن =====
+       حيث يُقرأ **رمزًا لا متنًا**: الصفُّ النشِط، والعلامة، والمقبض،
+       وزرُّ الانضمام. والنشِطُ لوحةٌ تيليّةٌ **شفّافة** لا مستطيلٌ مصمت:
+       المصمتُ داخل الزجاج يَكسره — يقول للعين «هذا ليس شفّافًا» فيُبطل
+       ما تحته. فالتيلُ يُرى واللوحُ يبقى زجاجًا. */
+    .sidebar .tabs button.is-active {
+      background: color-mix(in srgb, var(--c-kfupm) 78%, transparent);
+      color: #fff;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-kfupm) 90%, transparent); }
+    html[data-theme="dark"] .sidebar .tabs button.is-active {
+      background: color-mix(in srgb, var(--c-kfupm) 86%, transparent); }
+    /* وحبرُ الصفوف في الجلد الداكن: في الأمّ قاعدةٌ أعلى تخصيصًا
+       ‎html[data-theme="dark"] :is(.langbar,.tabs,.themebar) button:not(.is-active)‎
+       تُلبسها تيلًا شاحبًا ‎#7fb3bb‎ — وذاك الحبرُ يطلب ٩٢٪ تعتيمًا. قِيس
+       فوُجد غالبًا، فيُردُّ بمثل تخصيصه. */
+    html[data-theme="dark"] .sidebar :is(.langbar, .tabs, .themebar) button:not(.is-active),
+    html[data-theme="dark"] .sidebar .side-ctl button:not(.is-active),
+    html[data-theme="dark"] .sidebar .side-logo { color: var(--glass-ink); }
+
+    .side-mark { color: var(--c-kfupm); }
+    html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
+    .side-handle { color: var(--c-kfupm); }
+    .sidebar .side-acct .side-join { background: var(--c-kfupm); color: #fff; }
+    .sidebar .side-acct .side-join:hover { background: var(--c-kfupm); color: #fff; opacity: .88; }
+
+    /* ============================================================
+       م٠ · لقمتان قبل الزجاج — ‎ROADMAP-SIDEBAR-MASLAKH.md‎
+       ============================================================
+       أ· رفعُ «الاختبارات» و«إحصائياتي».
+          في المشترك ‎.sidebar .tabs--me { margin-top: auto }‎، والفضلةُ كلُّها
+          تُجمع عند أوّل هامشٍ تلقائيّ، فكانت المجموعةُ الثانيةُ تهبط إلى
+          القاع و**٢١٨ بكسلًا** من الفراغ تفصلها عن «الركن». فيُنقل الهامشُ
+          إلى ما بعدها: حاملٌ واحدٌ للفضلة، لكنّه الآن شريطُ التحكّم.
+          وهو العلاجُ نفسُه المطبَّقُ في الجذر.
+       ب· استواءُ الارتفاع. كانت ٤٦ و٤٧: الصفُّ الذي يحمل ‎border-top‎ يزيد
+          بكسلًا لأنّ الارتفاعَ محسوبٌ من الحَشْو لا مكتوبًا. فيُكتب صريحًا،
+          فيطوي الحدَّ داخلَه ولا يزيد. ============================== */
+    .sidebar .tabs--me { margin-top: 0; }
+    .sidebar .tabs--me + .side-ctl { margin-top: auto; }
+    .sidebar .tabs button { min-height: 46px; padding-block: 0; }
+
     /* الشعارُ والمبدِّلُ أخوان: فُرجةٌ بينهما أضيقُ من فُرجة الشريط (‎gap:14px‎) */
     .side-head { display: flex; flex-direction: column; gap: 5px; }
 
@@ -53,16 +125,40 @@
       color: var(--c-ink-soft);
       transition: color .15s, background .15s;
     }
-    .sc-now:hover { color: var(--c-kfupm); background: var(--surface); }
     .sc-car { width: 12px; height: 12px; flex: none; transition: transform .18s; }
     .sc-now[aria-expanded="true"] .sc-car { transform: rotate(180deg); }
+
+    /* ===== م٦ · المبدِّلُ كتلةٌ لا صندوق =====
+       كان جوفُه سطحًا مصمتًا (‎--surface‎) بحدٍّ قائمٍ داخلَ الزجاج. والمصمتُ
+       داخل الزجاج يَكسره: يقول للعين «هذا ليس شفّافًا» فيُبطل ما تحته.
+       فصار بلغة اللوح نفسِها: لوحةٌ من حبره، وخطٌّ شعريٌّ تحت الترويسة
+       حين تُفتح — وهو شكلُ «كتلة الركن» في الجذر حرفًا بحرف. */
+    .side-com { border-radius: var(--row-r, 14px);
+                transition: background .2s ease, box-shadow .2s ease; }
+    .side-com:has(.sc-menu:not([hidden])) {
+      background: var(--plate);
+      box-shadow: inset 0 0 0 1px var(--plate-edge);
+      padding-bottom: 4px; gap: 0; }
+    .sc-now { border-radius: 10px; width: 100%; padding: 4px 9px; }
+    .sc-now:hover { color: var(--glass-ink); background: var(--plate); }
+    .side-com:has(.sc-menu:not([hidden])) .sc-now {
+      box-shadow: inset 0 -1px 0 var(--plate-edge); border-radius: 10px 10px 0 0; }
+    .sc-menu { border: 0; background: transparent; padding: 4px; }
+    .sc-item { border-radius: 9px; color: var(--glass-ink); opacity: .82; }
+    .sc-item:hover { background: var(--plate); color: var(--glass-ink); opacity: 1; }
+    .sc-item.is-on { background: var(--plate-hi); color: var(--glass-ink); opacity: 1;
+                     box-shadow: inset 0 0 0 1px var(--plate-edge); font-weight: 700; }
+    /* وفي السكّة لا أسماءَ ولا كتلة */
+    body.side-rail .side-com:has(.sc-menu:not([hidden])) {
+      background: transparent; box-shadow: none; padding-bottom: 0; }
+    body.side-rail .sc-now .sc-nm { display: none; }
 
     /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
        فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
     .sc-menu {
       display: flex; flex-direction: column; gap: 2px;
-      padding: 4px; border: 1px solid var(--border); border-radius: 12px;
-      background: var(--surface);
+      padding: 4px; border: 0; border-radius: 12px;
+      background: transparent;   /* م٦: لا سطحَ مصمتًا داخل الزجاج */
     }
     .sc-menu[hidden] { display: none; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
 
@@ -72,13 +168,32 @@
       font-family: inherit; font-size: 12.5px; color: var(--c-ink-soft);
       transition: color .15s, background .15s;
     }
-    .sc-item:hover  { color: var(--c-kfupm); background: var(--c-kfupm-soft); }
-    .sc-item.is-on  { color: var(--c-kfupm); font-weight: 700; }
+    /* م٦: وحبرُهما حبرُ اللوح لا التيل — التيلُ ‎#2c5e65‎ على لوحةٍ شفّافةٍ
+       في جلدٍ داكنٍ داكنٌ على داكن. والهويّةُ في اللوحة لا في الكلمة. */
+    .sc-item:hover  { color: var(--glass-ink); background: var(--plate); opacity: 1; }
+    .sc-item.is-on  { color: var(--glass-ink); font-weight: 700; opacity: 1;
+                      background: var(--plate-hi);
+                      box-shadow: inset 0 0 0 1px var(--plate-edge); }
     .sc-dash        { letter-spacing: .12em; }
     a.sc-item { display: block; text-decoration: none; }
   </style>
 </head>
 <body>
+
+<!-- ===== م٣ · انكسارُ الحافّة =====
+     خريطةُ إزاحةٍ تُقرأ قناتاها: الحمراءُ تُزيح أفقيًّا، والخضراءُ رأسيًّا.
+     فجعلتُ الخضراءَ ثابتةً (لا إزاحةَ رأسيّة)، والحمراءَ ١٢٨ في الوسط (أي
+     صفرًا) وتندفع إلى طرفيها — فينحني ما خلفَ الزجاج عند حافّتيه ويستوي
+     في وسطه، كشريحةِ زجاجٍ مشطوفةِ الحرفين. وهي مضمَّنةٌ هنا لا ملفًّا:
+     مرشّحٌ ينتظر طلبَ شبكةٍ يُرى بعد أن تُرسم الصفحة. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <filter id="lg-edge" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(255,128,0)'/%3E%3Cstop offset='0.16' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='0.84' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,128,0)'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='8' fill='url(%23g)'/%3E%3C/svg%3E" preserveAspectRatio="none" result="map"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="26"
+                       xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
        يمين مع العربية · يسار مع الإنجليزية (عبر html[data-lang]) -->
@@ -646,6 +761,46 @@
   </div>
 
   <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
+  <script>
+    /* ===== حالتان لا ثلاث: سكّةٌ ⇄ واسع =====
+       النظامُ في ‎shared/glass.css‎ يَعرف السكّةَ بصنف ‎body.side-rail‎،
+       ومن يضعه هو هذا. وهو نسخةُ الجذر نفسُها وبالخطوات الثلاث:
+         ١· يُنظَّف ما حفظه المحرّكُ من «مطويّ» **قبل أن يقرأه** —
+            هذا الوسمُ يسبق ‎app.js‎ — فلا تومض الصفحةُ بشريطٍ غائب.
+         ٢· وتُعترض الضغطةُ في طور الالتقاط أبدًا، فلا تبلغه قطّ.
+         ٣· ويُنزع الصنفُ عند الإقلاع احتياطًا. */
+    (function () {
+      try {
+        var SK = 'academia2:v1', st = JSON.parse(localStorage.getItem(SK) || 'null');
+        if (st && st.sideCollapsed) { st.sideCollapsed = false; localStorage.setItem(SK, JSON.stringify(st)); }
+      } catch (e) {}
+
+      var RAIL_K = 'academia2:rail:maslakh:v1';
+      function setRail(on) {
+        document.body.classList.toggle('side-rail', !!on);
+        try { localStorage.setItem(RAIL_K, on ? '1' : ''); } catch (e) {}
+        var h = document.getElementById('side-handle');
+        if (h) h.title = h.ariaLabel = on ? 'توسيع الشريط' : 'تضييق الشريط';
+      }
+      document.getElementById('side-handle').addEventListener('click', function (e) {
+        e.stopImmediatePropagation(); e.preventDefault();
+        setRail(!document.body.classList.contains('side-rail'));
+      }, true);
+      try { if (localStorage.getItem(RAIL_K)) document.body.classList.add('side-rail'); } catch (e) {}
+
+      /* وأيقونةُ «شريط جانبيّ» مكانَ السهم: المحرّكُ يبنيها وهو مشترك،
+         فتُبدَّل من ههنا كما صُنع في الجذر. */
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.classList.remove('side-closed');
+        setRail(document.body.classList.contains('side-rail'));
+        var h = document.getElementById('side-handle');
+        if (h) h.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+          + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+          + '<rect x="3" y="4.5" width="18" height="15" rx="3.2"/><path d="M15.2 4.5v15"/></svg>';
+      });
+    })();
+  </script>
+
   <script src="../platform/api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
