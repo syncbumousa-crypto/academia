@@ -45,6 +45,31 @@
                    border-radius: 8px; transition: opacity .15s; }
     .side-mark-a:hover { opacity: .7; }
     .side-mark-a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+
+    /* ===== الجذرُ بلا مكتبة، وفيه «استكشاف» =====
+       تابُ المكتبة يُخفى ولا يُحذف: المحرّكُ مشتركٌ مع المسلخ، وفيه سطرٌ
+       يكتب نصَّ هذا التاب عند تبديل اللغة بلا حارس — فحذفُ الزرّ يُسقط
+       الترجمةَ كلَّها على الموقعين. فالإخفاءُ ههنا، والمحرّكُ لا يُمَسّ. */
+    .sidebar .tabs button[data-tab="market"] { display: none; }
+    #panel-market { display: none !important; }
+
+    /* المجتمعاتُ عمودٌ على يسار منطقة المحتوى — يمينًا وشمالًا بالفيزياء
+       لا بالمنطق، فلا ينتقل إلى الجهة الأخرى متى صارت الصفحةُ إنجليزيّة */
+    .ex-rail  { width: min(380px, 100%); margin-right: auto; margin-left: 0; }
+    .ex-h     { margin: 0 0 3px; font-size: 19px; font-weight: 700; }
+    .ex-sub   { margin: 0 0 16px; color: var(--c-ink-soft); font-size: 13px; }
+    .ex-list  { display: flex; flex-direction: column; gap: 8px; }
+    .ex-item  { display: flex; align-items: center; gap: 10px; text-decoration: none;
+                padding: 12px 14px; border: 1px solid var(--border); border-radius: 14px;
+                background: var(--surface); color: inherit;
+                transition: border-color .15s, transform .15s; }
+    a.ex-item:hover { border-color: var(--c-kfupm); transform: translateY(-1px); }
+    .ex-nm    { font-weight: 700; font-size: 14.5px; }
+    .ex-go    { margin-inline-start: auto; font-size: 12px; font-weight: 700; color: var(--c-kfupm); }
+    .ex-item.is-soon { opacity: .55; }
+    .ex-item.is-soon .ex-go { color: var(--c-ink-soft); font-weight: 600; }
+
     .side-com  { display: flex; flex-direction: column; gap: 5px; }
 
     .sc-now {
@@ -124,7 +149,12 @@
     </div>
 
     <nav class="tabs">
-      <button type="button" data-tab="market" class="is-active">
+      <!-- «استكشاف» هو مُستقَرُّ الجذر بعد رفع المكتبة، فيتصدّر الشريط -->
+      <button type="button" data-tab="explore" class="is-active">
+        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg>
+        <span class="tab-tx" id="tab-explore-tx">استكشاف</span>
+      </button>
+      <button type="button" data-tab="market">
         <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <span class="tab-tx">المكتبة</span>
       </button>
@@ -210,7 +240,22 @@
   </button>
 
   <!-- لوحة سوق المواد -->
-  <section class="panel" id="panel-market">
+  <!-- لوحُ الاستكشاف: المجتمعاتُ، ومنها المسلخ. ما لم يُفتح بعدُ يُعرض
+       ساكنًا ومكتوبًا عليه «قريبًا» — فالوعدُ معلومٌ ولا يُضغط ما لا يَفتح -->
+  <section class="panel" id="panel-explore">
+    <div class="ex-rail">
+      <h2 class="ex-h" id="ex-h">مجتمعات</h2>
+      <p class="ex-sub" id="ex-sub">لكلِّ مجتمعٍ أهلُه ومكتبتُه.</p>
+      <div class="ex-list">
+        <a class="ex-item" href="../Almaslakh/"><span class="ex-nm">المسلخ</span><span class="ex-go">ادخل</span></a>
+        <div class="ex-item is-soon"><span class="ex-nm">المدرج</span><span class="ex-go">قريبًا</span></div>
+        <div class="ex-item is-soon"><span class="ex-nm">القدرات</span><span class="ex-go">قريبًا</span></div>
+        <div class="ex-item is-soon"><span class="ex-nm">الآيلتس</span><span class="ex-go">قريبًا</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-market" hidden>
 
     <!-- مستطيل السوق: أعلاه البحث والتصنيفات، وتحته سطر كتب واحد يُمرَّر أفقيًا -->
     <div class="market-box">
@@ -601,6 +646,7 @@
       const guestNook = b.dataset.tab === 'library' && window.acIsGuest && window.acIsGuest();
       document.getElementById('panel-nook-lock').hidden = !guestNook;
       if (guestNook && window.acNookLock) window.acNookLock();
+      document.getElementById('panel-explore').hidden = b.dataset.tab !== 'explore';
       document.getElementById('panel-market').hidden  = b.dataset.tab !== 'market';
       document.getElementById('panel-library').hidden = b.dataset.tab !== 'library' || guestNook;
       document.getElementById('panel-past').hidden    = b.dataset.tab !== 'past';
@@ -609,7 +655,44 @@
       if (b.dataset.tab === 'past'  && window.acPastPaint)  window.acPastPaint();
       if (b.dataset.tab === 'stats' && window.acStatsPaint) window.acStatsPaint();
     });
+
+    /* ===== مُستقَرُّ الجذر =====
+       المحرّكُ مشتركٌ، وفيه «العودةُ إلى المكتبة» بعد الخروج من الحساب أو
+       حذفه. فلا يُعدَّل من أجل موقعٍ واحد: يُرصد كشفُ لوحِ المكتبة، فإن
+       كُشف رُدّ القصدُ إلى «استكشاف». رقابةٌ على الأثر لا جراحةٌ في المصدر. */
+    (function () {
+      var mk = document.getElementById('panel-market');
+      var ex = document.getElementById('panel-explore');
+      function toExplore() {
+        ['panel-market', 'panel-library', 'panel-past', 'panel-stats',
+         'panel-nook-lock', 'panel-account'].forEach(function (id) {
+          var p = document.getElementById(id); if (p) p.hidden = true;
+        });
+        ex.hidden = false;
+        document.querySelectorAll('.tabs button').forEach(function (x) {
+          x.classList.toggle('is-active', x.dataset.tab === 'explore');
+        });
+      }
+      new MutationObserver(function () { if (!mk.hidden) toExplore(); })
+        .observe(mk, { attributes: true, attributeFilter: ['hidden'] });
+
+      /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
+      var tx = document.getElementById('tab-explore-tx');
+      var h  = document.getElementById('ex-h');
+      var sb = document.getElementById('ex-sub');
+      function label() {
+        var en = document.documentElement.getAttribute('data-lang') === 'en';
+        tx.textContent = en ? 'Explore'    : 'استكشاف';
+        h.textContent  = en ? 'Communities': 'مجتمعات';
+        sb.textContent = en ? 'Each community has its own people and library.'
+                            : 'لكلِّ مجتمعٍ أهلُه ومكتبتُه.';
+      }
+      new MutationObserver(label).observe(document.documentElement,
+        { attributes: true, attributeFilter: ['data-lang'] });
+      label();
+    })();
   </script>
+
   <!-- ===== حمولةُ نقلة أنكي — ملفُّ عُدّةٍ مؤقّت =====
        يُحمَّل مرّةً واحدةً لتنزل البطائق، ثمّ يُرفع هذا الوسمُ والملفُّ والدالّةُ معه.
        ما نفعله **استيرادٌ لا ربط**: البطائقُ تصير بيانًا في الموقع كأنّك كتبتَها بيدك،
