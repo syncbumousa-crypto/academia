@@ -89,7 +89,8 @@
     .ex-cover { position: relative; display: grid; place-items: center; overflow: hidden;
                 border: 1px solid var(--border); border-radius: 12px;
                 transition: transform .18s ease, box-shadow .18s ease; }
-    a.ex-card:hover .ex-cover, a.ex-card:focus-visible .ex-cover {
+    .ex-face  { display: block; text-decoration: none; color: inherit; }
+    a.ex-face:hover .ex-cover, a.ex-face:focus-visible .ex-cover {
                 transform: scale(1.035); box-shadow: 0 10px 26px rgba(0,0,0,.2); }
     .ex-cap   { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 12.5px; }
     .ex-cap b { font-weight: 700; }
@@ -119,6 +120,16 @@
     .ex-card.is-ph .ex-cover { border-style: dashed; background: transparent;
                                display: grid; place-items: center; }
     .ex-card.is-ph svg { width: 26px; opacity: .17; color: var(--c-ink-soft); }
+
+    /* زرُّ الإضافة: في طرف السطر — يسارَه في العربيّة ويمينَه في الإنجليزيّة.
+       ولا يفعل شيئًا بعدُ: وُضع ليُرى موضعُه، ويُوصَل يومَ يُقرَّر كيف تُضاف
+       المادّةُ أو المجتمعُ إلى الحساب. */
+    .ex-add   { margin-inline-start: auto; flex: none; width: 22px; height: 22px; padding: 0;
+                border: 1px solid var(--border); border-radius: 50%; background: transparent;
+                color: var(--c-ink-soft); font: inherit; font-size: 15px; line-height: 1;
+                cursor: pointer; display: grid; place-items: center;
+                transition: color .15s, border-color .15s; }
+    .ex-add:hover { color: var(--c-kfupm); border-color: var(--c-kfupm); }
 
     .ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
     .ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
@@ -196,9 +207,7 @@
       </div>
 
       <div class="side-com" id="side-com">
-        <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
         <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
-          <svg class="sc-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           <span class="sc-nm">—</span>
         </button>
 
@@ -329,7 +338,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
         </button>
         <h2 id="com-name"></h2>
-        <svg class="ex-cover-m" viewBox="-155 57.49 310 244.51" fill="currentColor" aria-hidden="true"><path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg>
       </div>
     </div>
 
@@ -798,24 +806,25 @@
         { ar:'القدرات', en:'Qudurat',    soon:1,              a:'#2a2142', b:'#5d4a95' },
         { ar:'الآيلتس', en:'IELTS',      soon:1,              a:'#3b1f26', b:'#8d4654' }
       ];
-      var MARK = '<svg class="ex-cover-m" viewBox="-155 57.49 310 244.51" fill="currentColor" aria-hidden="true">' +
-        '<path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg>';
+      var PLUS = '<button class="ex-add" type="button" title="أضِف">+</button>';
 
       function esc(t) { return String(t).replace(/[&<>"]/g, function (c) {
         return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
 
       function buildComs() {
+        var i = lang();
         document.getElementById('ex-coms').innerHTML = COMS.map(function (c) {
           var cover = '<div class="ex-cover" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')">' +
-                      '<span class="ex-cover-t">' + esc(c.ar) + '</span>' + MARK + '</div>';
-          var cap = '<div class="ex-cap"><b>' + (c.soon ? 'قريبًا' : esc(c.ar)) + '</b>' +
-                    (c.soon ? '' : '<s>' + esc(c.en) + '</s>') + '</div>';
-          return c.soon
-            ? '<div class="ex-card is-soon">' + cover + cap + '</div>'
+                      '<span class="ex-cover-t">' + esc(i ? c.en : c.ar) + '</span></div>';
+          /* والزرُّ خارجَ الوصلة لا بداخلها: لو سكن فيها لفتح المجتمعَ من ضغطه */
+          var cap = '<div class="ex-cap"><b>' +
+                    (c.soon ? T.soon[i] : esc(i ? c.en : c.ar)) + '</b>' + PLUS + '</div>';
+          var face = c.soon
+            ? '<div class="ex-face">' + cover + '</div>'
             /* الرابطُ يبقى في ‎href‎ وإن كان الفتحُ في مكانه: من فتحه في لسانٍ
                جديدٍ أو عطبت جافاسكربتُه وجد موقعَ المجتمع لا زرًّا ميّتًا */
-            : '<a class="ex-card" href="' + c.href + '" data-com="' + COMS.indexOf(c) + '">' +
-              cover + cap + '</a>';
+            : '<a class="ex-face" href="' + c.href + '" data-com="' + COMS.indexOf(c) + '">' + cover + '</a>';
+          return '<div class="ex-card' + (c.soon ? ' is-soon' : '') + '">' + face + cap + '</div>';
         }).join('');
       }
 
@@ -865,7 +874,7 @@
           return '<div class="ex-card"' + (full ? ' title="' + esc(full) + '"' : '') + '>' +
                  '<div class="ex-cover">' +
                  '<img loading="lazy" alt="' + esc(nm) + '" src="../' + COVERS[code] + '">' +
-                 '</div><div class="ex-cap"><b>' + esc(nm) + '</b></div>' + own + '</div>';
+                 '</div><div class="ex-cap"><b>' + esc(nm) + '</b>' + PLUS + '</div>' + own + '</div>';
         }).join('');
       }
       function buildShelves() {
