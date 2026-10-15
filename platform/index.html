@@ -23,12 +23,12 @@
   <!-- جلدُ الجذر: رماديٌّ مسطَّح. يُحمَّل بعد الأمّ فيغلب توكناتِها -->
   <link rel="stylesheet" href="../shared/skin-flat.css?v=6">
 
-  <!-- ===== مبدِّلُ المجتمع =====
-       موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
-       المنشور والمستودع (الورقةُ إحدى الملفّات المتفرّقة بينهما، فتعديلُ الأقدم
-       يمحو الأحدث). ومتى استوَيا نُقل هذا البابُ إلى موضعه. -->
+  <!-- ===== ما يخصّ الجذرَ وحدَه =====
+       قُفلُ الشعار، ولوحُ «استكشاف»، ورأسُ المجتمع. وموضعُ هذي القواعد ههنا لا
+       في ‎shared/styles.css‎ لأنّ تلك الورقةَ مشتركةٌ مع المسلخ، وهذا بابٌ لا
+       يعنيه. وكان فيه مبدِّلُ المجتمع فرُفع: الجذرُ يُبدَّل منه بـ«استكشاف»،
+       والمبدّلُ يبقى في المسلخ وحده. -->
   <style>
-    /* الشعارُ والمبدِّلُ أخوان: فُرجةٌ بينهما أضيقُ من فُرجة الشريط (‎gap:14px‎) */
     .side-head { display: flex; flex-direction: column; gap: 5px; }
 
     /* الشعارُ والاسمُ قُفلٌ واحد: الرمزُ يتقدّم الاسمَ في القراءتين كلتيهما.
@@ -146,39 +146,6 @@
     .ex-nav--s { inset-inline-start: -8px; }
     .ex-nav--e { inset-inline-end: -8px; }
 
-    .side-com  { display: flex; flex-direction: column; gap: 5px; }
-
-    .sc-now {
-      display: flex; align-items: center; justify-content: center; gap: 5px;
-      width: fit-content; margin: 0 auto; padding: 1px 9px;
-      border: 0; border-radius: 9px; background: transparent; cursor: pointer;
-      font-family: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.7;
-      color: var(--c-ink-soft);
-      transition: color .15s, background .15s;
-    }
-    .sc-now:hover { color: var(--c-kfupm); background: var(--surface); }
-    .sc-car { width: 12px; height: 12px; flex: none; transition: transform .18s; }
-    .sc-now[aria-expanded="true"] .sc-car { transform: rotate(180deg); }
-
-    /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
-       فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
-    .sc-menu {
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 4px; border: 1px solid var(--border); border-radius: 12px;
-      background: var(--surface);
-    }
-    .sc-menu[hidden] { display: none; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
-
-    .sc-item {
-      border: 0; border-radius: 8px; background: transparent; cursor: pointer;
-      padding: 5px 10px; text-align: center;
-      font-family: inherit; font-size: 12.5px; color: var(--c-ink-soft);
-      transition: color .15s, background .15s;
-    }
-    .sc-item:hover  { color: var(--c-kfupm); background: var(--c-kfupm-soft); }
-    .sc-item.is-on  { color: var(--c-kfupm); font-weight: 700; }
-    .sc-dash        { letter-spacing: .12em; }
-    a.sc-item { display: block; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -206,20 +173,6 @@
         <div class="side-logo">أكاديميا</div>
       </div>
 
-      <div class="side-com" id="side-com">
-        <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
-          <span class="sc-nm">—</span>
-        </button>
-
-        <div class="sc-menu" id="sc-menu" hidden>
-          <!-- الأوّلُ: أكاديميا نفسُها، بلا مجتمع -->
-          <span class="sc-item sc-dash is-on" title="أكاديميا — بلا مجتمع">—</span>
-          <a class="sc-item" href="../Almaslakh/">المسلخ</a>
-          <button class="sc-item" type="button">المدرج</button>
-          <button class="sc-item" type="button">القدرات</button>
-          <button class="sc-item" type="button">الآيلتس</button>
-        </div>
-      </div>
     </div>
 
     <nav class="tabs">
@@ -1016,23 +969,5 @@
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
   <script src="emoji.js"></script>
   <script src="app.js"></script>
-  <!-- فتحُ مبدِّل المجتمع وإغلاقُه. والخياراتُ بلا أثرٍ بعدُ: وسمٌ ينتظر وصلَه -->
-  <script>
-    (function () {
-      var b = document.getElementById('sc-now'),
-          m = document.getElementById('sc-menu'),
-          w = document.getElementById('side-com');
-      if (!b || !m || !w) return;
-      function put(open) {
-        m.hidden = !open;
-        b.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      b.addEventListener('click', function (e) { e.stopPropagation(); put(m.hidden); });
-      document.addEventListener('click', function (e) {
-        if (!m.hidden && !w.contains(e.target)) put(false);
-      });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') put(false); });
-    })();
-  </script>
 </body>
 </html>
