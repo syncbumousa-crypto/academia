@@ -210,6 +210,38 @@
 
 
 
+
+    /* ============================================================
+       م٥ · ثلاثُ حالاتٍ للوح: واسعٌ · سكّةٌ · مطويّ
+       ============================================================
+       مبدأُ أبل: «دع الناسَ يُخفونه» — ومعه درجةٌ وسطى تُبقي التنقّلَ قائمًا
+       وتردّ المساحةَ للمحتوى. والحيلةُ أنّ كلّ شيءٍ ههنا محسوبٌ من ‎--side-w‎:
+       حَشْوُ الجسد، وموضعُ الدائرة، وامتدادُ الصفوف تحت اللوح. فتبديلُ
+       **متغيّرٍ واحد** يُزيح المنظومة كلَّها، ولا يُطارَد رقمٌ في عشرة مواضع. */
+    :root { --side-w: 200px; }
+    body.side-rail { --side-w: 64px; }
+
+    body.side-rail .side-logo,
+    body.side-rail .sidebar .tab-tx,
+    body.side-rail .nook-com span,
+    body.side-rail .side-logout .side-logout-tx,
+    body.side-rail .side-auth-tx,
+    body.side-rail .side-profile .side-pname { display: none; }
+
+    body.side-rail .sidebar { padding: 14px 8px; }
+    body.side-rail .sidebar .tabs button,
+    body.side-rail .nook-com,
+    body.side-rail .side-logout,
+    body.side-rail .side-join,
+    body.side-rail .side-login,
+    body.side-rail .side-profile { justify-content: center; padding-inline: 0; }
+    body.side-rail .nook-com { padding-inline-start: 0; }
+    body.side-rail .side-ctl { align-items: center; }
+    body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
+    /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء */
+    body.side-rail .sidebar .tabs button.nook-twist { display: none; }
+    body.side-rail .side-brand { gap: 0; }
+
     /* ============================================================
        داخلُ اللوح — نظامٌ واحدٌ لكلّ ما يُضغط
        ============================================================
@@ -1344,6 +1376,24 @@
           ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
           '<rect x="3" y="4.5" width="18" height="15" rx="3.2"/><path d="M15.2 4.5v15"/></svg>';
       }
+      /* ===== دورةُ الحالات الثلاث =====
+         الإخفاءُ يبقى للمحرّك (هو يحفظه ويعرفه)، والسكّةُ لنا. فيُعترض
+         الضغطُ في طور الالتقاط: إن كان واسعًا صار سكّةً ولا يبلغ المحرّكَ
+         الخبر، وإن كان سكّةً مرّت الضغطةُ إليه فأخفاه، وإن كان مخفيًّا
+         فتحه هو ونحن نُطفئ السكّة. فحالتان محفوظتان في موضعيهما. */
+      var RAIL_K = 'academia2:rail:v1';
+      function setRail(on) {
+        document.body.classList.toggle('side-rail', !!on);
+        try { localStorage.setItem(RAIL_K, on ? '1' : ''); } catch (e) {}
+      }
+      document.getElementById('side-handle').addEventListener('click', function (e) {
+        var hidden = document.body.classList.contains('side-closed');
+        var rail   = document.body.classList.contains('side-rail');
+        if (!hidden && !rail) { setRail(true); e.stopImmediatePropagation(); e.preventDefault(); return; }
+        setRail(false);          /* سكّةٌ ⟵ مطويّ · ومطويٌّ ⟵ واسع: كلاهما للمحرّك */
+      }, true);
+      try { if (localStorage.getItem(RAIL_K)) document.body.classList.add('side-rail'); } catch (e) {}
+
       document.addEventListener('DOMContentLoaded', function () { paint(); sideIcon(); });
     })();
   </script>
