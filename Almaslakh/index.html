@@ -39,6 +39,10 @@
                   color: var(--c-kfupm); }
     html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
     html[data-lang="en"]    .side-brand { flex-direction: row-reverse; }
+    .side-mark-a { display: flex; flex: none; color: inherit; text-decoration: none;
+                   border-radius: 8px; transition: opacity .15s; }
+    .side-mark-a:hover { opacity: .7; }
+    .side-mark-a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
     .side-com  { display: flex; flex-direction: column; gap: 5px; }
 
     .sc-now {
@@ -89,10 +93,13 @@
       <div class="side-brand">
         <!-- «لُب» — قلبٌ بثلاثة رؤوس: ثلاثُ دوائرَ متداخلةٍ وإسفينٌ يمسُّها.
              الصندوقُ هو مدى الشكل نفسِه بلا حَشْو، فيُقاس بالاسم لا بالفراغ. -->
-        <svg class="side-mark" viewBox="-155 57.49 310 244.51" fill="currentColor"
-             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="لُب">
-          <path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/>
-        </svg>
+        <a class="side-mark-a" href="https://syncbumousa-crypto.github.io/lobe/"
+           target="_blank" rel="noopener" title="لُب" aria-label="لُب">
+          <svg class="side-mark" viewBox="-155 57.49 310 244.51" fill="currentColor"
+               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/>
+          </svg>
+        </a>
         <div class="side-logo">أكاديميا</div>
       </div>
 
