@@ -55,7 +55,6 @@
 
     /* رأسُ المجتمع: غلافٌ عريضٌ عليه اسمُه وزرُّ رجوع، يعلو مكتبتَه.
        والمكتبةُ تحته هي هي: بحثُها وتصنيفاتُها وتاباتُ المادّة لم تُمَسّ. */
-    .com-head  { margin: 0 0 18px; }
     .com-cover { position: relative; display: flex; align-items: flex-end; flex-wrap: wrap; gap: 12px;
                  min-height: clamp(112px, 16vw, 172px); padding: 16px 20px;
                  border-radius: 16px; overflow: hidden; color: #fff; }
@@ -168,6 +167,13 @@
                  padding-block: 9px; padding-inline-start: 36px; padding-inline-end: 14px; }
     .nook-com:hover { color: var(--c-kfupm); background: var(--surface); }
     .nook-com i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+    .nook-com.is-on { color: var(--c-kfupm); background: var(--surface); font-weight: 700; }
+
+    /* الرأسُ صار خارجَ الألواح، فيأخذ عرضَها وحشوَها بنفسه */
+    .com-head { max-width: 1180px; margin: 0 auto 18px; padding: 23px clamp(16px,3vw,32px) 0; }
+    .soon-area { min-height: 62vh; border-radius: 18px; background: var(--surface);
+                 display: grid; place-items: center; }
+    .soon-area span { color: var(--c-ink-soft); font-size: 14px; opacity: .4; }
 
     .ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
     .ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
@@ -315,6 +321,22 @@
   <!-- لوحة سوق المواد -->
   <!-- لوحُ الاستكشاف: المجتمعاتُ، ومنها المسلخ. ما لم يُفتح بعدُ يُعرض
        ساكنًا ومكتوبًا عليه «قريبًا» — فالوعدُ معلومٌ ولا يُضغط ما لا يَفتح -->
+  <div class="com-head" id="com-head" hidden>
+    <div class="com-cover" id="com-cover">
+      <button class="com-back" id="com-back" type="button" aria-label="رجوع" title="رجوع">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <h2 id="com-name"></h2>
+      <div class="com-acts">
+        <!-- الإضافةُ لا تفعل شيئًا بعدُ، كزرّ البطاقة في «استكشاف» سواءً -->
+        <button class="com-btn" id="com-add" type="button">
+          <span class="com-plus">+</span><span id="com-add-tx">أضِف المجتمع</span></button>
+        <!-- وهذي تخرج من الجذر إلى موقع المجتمع نفسِه -->
+        <a class="com-btn com-btn--go" id="com-open" href="../Almaslakh/"><span id="com-open-tx">صفحة المجتمع</span></a>
+      </div>
+    </div>
+  </div>
+
   <section class="panel" id="panel-explore">
     <section class="ex-row">
       <div class="ex-head"><h2 class="ex-h" id="ex-h">مجتمعات</h2>
@@ -331,22 +353,6 @@
   <section class="panel" id="panel-market" hidden>
 
     <!-- رأسُ المجتمع — يُكشف متى دخلتَ مجتمعًا من «استكشاف» -->
-    <div class="com-head" id="com-head" hidden>
-      <div class="com-cover" id="com-cover">
-        <button class="com-back" id="com-back" type="button" aria-label="رجوع" title="رجوع">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-        <h2 id="com-name"></h2>
-        <div class="com-acts">
-          <!-- الإضافةُ لا تفعل شيئًا بعدُ، كزرّ البطاقة في «استكشاف» سواءً -->
-          <button class="com-btn" id="com-add" type="button">
-            <span class="com-plus">+</span><span id="com-add-tx">أضِف المجتمع</span></button>
-          <!-- وهذي تخرج من الجذر إلى موقع المجتمع نفسِه -->
-          <a class="com-btn com-btn--go" id="com-open" href="../Almaslakh/"><span id="com-open-tx">صفحة المجتمع</span></a>
-        </div>
-      </div>
-    </div>
-
     <!-- مستطيل السوق: أعلاه البحث والتصنيفات، وتحته سطر كتب واحد يُمرَّر أفقيًا -->
     <div class="market-box">
       <div class="market-tools">
@@ -425,6 +431,12 @@
   </section>
 
   <!-- لوحة الاختبارات الماضية: كل اختبار دخله المستخدم وبدأ فيه — يُملأ من الجافا -->
+  <!-- الركنُ العامّ: كلُّ مجتمعاتك وكتبك. شكلُه لم يُقرَّر بعد، فمكانُه
+       محجوزٌ بمساحةٍ رماديّةٍ لا بوعدٍ مكتوب -->
+  <section class="panel" id="panel-nook-soon" hidden>
+    <div class="soon-area"><span id="soon-tx">الركن العامّ</span></div>
+  </section>
+
   <section class="panel" id="panel-past" hidden></section>
 
   <!-- لوحة الإحصائيات: ما صنعه المستخدم وما جلسه ومتى — يُملأ من الجافا -->
@@ -733,12 +745,16 @@
       document.getElementById('panel-account').hidden = true;
       // الركنُ للأعضاء: الزائرُ يُصرف إلى لوحٍ يقول له ما فيه ولا يبني ما لا يبقى له.
       // والحارسُ ههنا لا في app.js لأنّ هذا هو المستمعُ الذي يفتح الألواح.
-      const guestNook = b.dataset.tab === 'library' && window.acIsGuest && window.acIsGuest();
-      document.getElementById('panel-nook-lock').hidden = !guestNook;
-      if (guestNook && window.acNookLock) window.acNookLock();
+      /* ===== «الركن» في الجذر غيرُه في المسلخ =====
+         ههنا هو **الركنُ العامّ**: كلُّ مجتمعاتك وكتبك معًا. وشكلُه لم
+         يُقرَّر، فيُحجز مكانُه بمساحةٍ رماديّة. وركنُك في مجتمعٍ بعينه
+         يُفتح من اسمه في الدرج تحته، وذاك هو ‎panel-library‎ الحقيقيّ. */
+      const toSoon = b.dataset.tab === 'library';
+      document.getElementById('panel-nook-soon').hidden = !toSoon;
+      document.getElementById('panel-nook-lock').hidden = true;
       document.getElementById('panel-explore').hidden = b.dataset.tab !== 'explore';
       document.getElementById('panel-market').hidden  = b.dataset.tab !== 'market';
-      document.getElementById('panel-library').hidden = b.dataset.tab !== 'library' || guestNook;
+      document.getElementById('panel-library').hidden = true;
       document.getElementById('panel-past').hidden    = b.dataset.tab !== 'past';
       document.getElementById('panel-stats').hidden   = b.dataset.tab !== 'stats';
       // واللوحان يُبنيان عند فتحهما لا في كل إقلاع: حسابٌ يمشي في بياناتك كلها ولا يُنظر كل مرة
@@ -772,7 +788,7 @@
                 s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
                 soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'],
                 add:['أضِف المجتمع','Add community'], added:['مضاف','Added'],
-                page:['صفحة المجتمع','Community page'] };
+                page:['صفحة المجتمع','Community page'], soonN:['الركن العامّ','Your nook'] };
       function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
 
       /* الرفوف: جدولٌ واحدٌ يُقرأ، فزيادةُ رفٍّ سطرٌ فيه لا قسمٌ في الصفحة.
@@ -789,6 +805,7 @@
         document.getElementById('tab-explore-tx').textContent = T.tab[i];
         document.getElementById('ex-h').textContent   = T.h1[i];
         document.getElementById('ex-sub').textContent = T.s1[i];
+        document.getElementById('soon-tx').textContent     = T.soonN[i];
         document.getElementById('com-add-tx').textContent  = T.add[i];
         document.getElementById('com-open-tx').textContent = T.page[i];
         /* ومن كان داخل مجتمعٍ يتبدّل اسمُه معه ولا ينتظر خروجَه */
@@ -833,7 +850,7 @@
       /* ودخولُ مجتمعٍ من الدرج كدخوله من بطاقته سواءً */
       document.getElementById('nook-coms').addEventListener('click', function (e) {
         var b = e.target.closest('button[data-open]'); if (!b) return;
-        var c = comById(b.dataset.open); if (c) openCom(c);
+        var c = comById(b.dataset.open); if (c) openCom(c, 'nook');
       });
       /* وزرُّ الإضافة — في البطاقة وفي الغلاف — يُبدّل العضويّة */
       document.getElementById('panel-explore').addEventListener('click', function (e) {
@@ -1020,8 +1037,11 @@
         document.body.scrollTop = 0;
         if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
       }
-      function openCom(c) {
+      /* ‎mode‎: ‎'market'‎ مكتبةُ المجتمع (من بطاقته) · ‎'nook'‎ ركنُك فيه
+         (من اسمه في الدرج). والرأسُ واحدٌ فوقهما، فيُعلم أين أنت. */
+      function openCom(c, mode) {
         inCom = true; curCom = c;
+        var nook = mode === 'nook';
         document.getElementById('com-open').href = c.href;
         document.getElementById('com-cover').style.background =
           'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
@@ -1029,7 +1049,21 @@
         document.getElementById('com-head').hidden = false;
         paintMine();
         ex.hidden = true;
-        mk.hidden = false;
+        document.getElementById('panel-nook-soon').hidden = true;
+        document.getElementById('panel-account').hidden = true;
+        mk.hidden = nook;
+        /* والركنُ للأعضاء: الزائرُ يُصرف إلى لوحه كما يصنع تابُ الركن */
+        var guest = window.acIsGuest && window.acIsGuest();
+        document.getElementById('panel-library').hidden   = !nook || guest;
+        document.getElementById('panel-nook-lock').hidden = !nook || !guest;
+        if (nook && guest && window.acNookLock) window.acNookLock();
+        /* والتابُ المضيء: الدرجُ ساكنٌ تحت «الركن»، فهو المضيءُ معه */
+        document.querySelectorAll('.tabs button').forEach(function (x) {
+          x.classList.toggle('is-active', nook && x.dataset.tab === 'library');
+        });
+        document.querySelectorAll('.nook-com').forEach(function (x) {
+          x.classList.toggle('is-on', nook && x.dataset.open === c.id);
+        });
         top();
         try { history.pushState({ ac: 'com' }, '', '#' + (c.en || 'community')); } catch (e) {}
       }
@@ -1039,6 +1073,9 @@
         inCom = false; curCom = null;
         document.getElementById('com-head').hidden = true;
         mk.hidden = true;
+        document.getElementById('panel-library').hidden   = true;
+        document.getElementById('panel-nook-lock').hidden = true;
+        document.querySelectorAll('.nook-com').forEach(function (x) { x.classList.remove('is-on'); });
         ex.hidden = false;
         top();
         if (!fromPop) { try { history.back(); } catch (e) {} }
