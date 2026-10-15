@@ -211,6 +211,45 @@
 
 
 
+
+    /* ============================================================
+       م٦ · الحياة — الزجاجُ يتبدّل بما يمرّ تحته
+       ============================================================
+       ١· الكثافةُ تتبع التمرير: في رأس الصفحة لا شيءَ تحت اللوح فيكون
+          أصفى ما يكون، وكلّما مرّت الأغلفةُ تحته ثَقُل ليبقى النصُّ مقروءًا.
+          والحركةُ **صعودًا فقط** من قيمة الجلد المقيسة — فالبوّابةُ (4.5:1)
+          محفوظةٌ في أدنى الحالتين، وما فوقها أأمن.
+       ٢· ولمعةٌ تتبع المؤشّر على الصفّ المُحوَّم عليه، كانعكاسٍ على زجاج.
+       وكلتاهما تُطفأ لمن طلب تقليلَ الحركة. */
+    @property --glass-mix { syntax: '<percentage>'; inherits: true; initial-value: 54%; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: scroll()) {
+        @keyframes ac-glass-dense { to { --glass-mix: 76%; } }
+        /* المُمرِّرُ ههنا ‎body‎ لا الجذر — قِيس: ‎scroll(root)‎ لم يرتبط
+           و‎scrollTop‎ يقع على الجسد. فيُسمَّى الجدولُ على المُمرِّر نفسِه،
+           ويُطلب بالاسم من اللوح وهو ابنُه. */
+        body { scroll-timeline-name: --ac-page; scroll-timeline-axis: block; }
+        .sidebar {
+          animation: ac-glass-dense linear both;
+          animation-timeline: --ac-page;
+          animation-range: 0 340px;
+        }
+      }
+    }
+
+    /* اللمعة: طبقةٌ لا تُمسك الضغط، وتتبع ‎--mx/--my‎ من حركة المؤشّر */
+    .sidebar .tabs button, .nook-com { position: relative; overflow: hidden; }
+    .sidebar .tabs button::after, .nook-com::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      transition: opacity .18s;
+      background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 50%),
+                  color-mix(in srgb, var(--glass-ink) 13%, transparent), transparent 68%);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .sidebar .tabs button:hover::after, .nook-com:hover::after { opacity: 1; }
+    }
+
     /* ============================================================
        م٥ · ثلاثُ حالاتٍ للوح: واسعٌ · سكّةٌ · مطويّ
        ============================================================
@@ -1393,6 +1432,17 @@
         setRail(false);          /* سكّةٌ ⟵ مطويّ · ومطويٌّ ⟵ واسع: كلاهما للمحرّك */
       }, true);
       try { if (localStorage.getItem(RAIL_K)) document.body.classList.add('side-rail'); } catch (e) {}
+
+      /* موضعُ المؤشّر داخل الصفّ — نسبةً مئويّةً لا بكسلات، فلا يُعاد الحسابُ
+         متى تغيّر العرض. ويُقرأ من حدث واحدٍ على اللوح لا من مستمعٍ لكلّ صفّ. */
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.getElementById('sidebar').addEventListener('pointermove', function (e) {
+          var row = e.target.closest('.tabs button, .nook-com'); if (!row) return;
+          var r = row.getBoundingClientRect();
+          row.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%');
+          row.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
+        }, { passive: true });
+      }
 
       document.addEventListener('DOMContentLoaded', function () { paint(); sideIcon(); });
     })();
