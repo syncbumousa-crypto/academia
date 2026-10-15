@@ -15713,3 +15713,55 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 @media (prefers-reduced-motion: reduce) {
   #nook .nk-wait__d { animation: none; opacity: .6; }
 }
+
+/* ============================================================
+   قاعُ الشريط: أيقونتان متجاورتان
+   ============================================================
+   كان فيه أربعةُ صفوف: التاريخُ، والساعةُ، وزرّا المظهر، وزرّا اللغة.
+   فصار سطرًا واحدًا: أيقونةُ المظهر وأيقونةُ اللغة جنبًا إلى جنب.
+
+   ===== والتاريخُ والساعةُ يُخفيان ولا يُحذفان من الوسم =====
+   المحرّكُ يكتب فيهما كلَّ ثانية (‎#today-date‎ و‎#today-time‎) بلا أن يسأل
+   أموجودان هما، فحذفُهما يرمي خطأً متكرّرًا في مؤقّتٍ لا يقف. والإخفاءُ
+   يُذهبهما عن العين ويُبقي الكتابةَ بلا ضرر.
+
+   ===== وزرٌّ واحدٌ لا زرّان: العاملُ يُخفى =====
+   ولا تُمسّ شيفرةُ المحرّك: مستمعُه معلَّقٌ على الحاوية لا على الأزرار،
+   و‎is-active‎ يتنقّل بين الزرّين كما كان. فيكفي أن يُخفى العاملُ ليبقى
+   الآخرُ وحدَه — وهو بطبعه «ما ستنتقل إليه»، فضغطُه تبديل.
+   وهذا أسلمُ من زرٍّ جديدٍ يُكتب له مستمعٌ ثانٍ يُنسى عند أوّل تعديل. */
+
+.sb-date, .sb-time { display: none; }
+
+.side-ctl { flex-flow: row wrap; gap: 8px; justify-content: center; align-items: center; }
+.side-ctl > .side-acct { width: 100%; }
+
+/* و‎.sidebar .themebar‎ في السطر ١٨٧ يمدّهما إلى ‎width:100%‎ فيلتفّان.
+   فيُطابَق محدِّدُه خصوصيّةً (صنفان) ويُغلب بالترتيب — لا بـ‎!important‎:
+   الأخيرةُ تُغلق البابَ على كلّ تعديلٍ بعدها. */
+.sidebar .themebar, .sidebar .langbar {
+  margin: 0; padding: 0; background: transparent;
+  width: auto; flex: 0 0 auto;
+}
+.sidebar .themebar button, .sidebar .langbar button { flex: 0 0 auto; }
+/* وخصوصيّتُها أعلى من قاعدة التحجيم تحتها (صنفان + عنصر) — وإلّا غلبها
+   display:grid فظهر الزرّان معًا. وهذا ما وقع أوّلَ مرّة. */
+.sidebar .themebar button.is-active, .sidebar .langbar button.is-active { display: none; }
+
+/* والزرّان الباقيان يتساويان قدًّا فيُقرآن أيقونتين لا زرَّ نصٍّ وزرَّ رسم */
+.sidebar .themebar button, .sidebar .langbar button {
+  width: 34px; height: 34px; padding: 0; border-radius: 10px;
+  background: var(--c-kfupm-soft); color: var(--c-kfupm);
+  display: grid; place-items: center;
+  transition: background .15s, color .15s;
+}
+.sidebar .themebar button:hover, .sidebar .langbar button:hover { background: var(--surface); }
+.sidebar .themebar button svg { width: 17px; height: 17px; }
+
+/* واللغةُ تُختصر إلى رمزين: «English» أطولُ من أن يكون أيقونةً إلى جانب رسم.
+   والنصُّ يُصغَّر إلى صفرٍ ويُكتب بديلُه في ‎::before‎ — فلا يُمسّ الوسمُ ولا
+   المحرّك، ويبقى الزرُّ يقول إلى أيِّ لغةٍ ينقلك. */
+.sidebar .langbar button { font-size: 0; padding: 0; }
+.sidebar .langbar button::before { font-size: 12.5px; font-weight: 700; line-height: 1; }
+.sidebar .langbar button[data-lang="en"]::before { content: 'EN'; }
+.sidebar .langbar button[data-lang="ar"]::before { content: 'ع'; font-size: 15px; }
