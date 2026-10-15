@@ -37,9 +37,10 @@
        والرمزُ أخٌ لـ‎.side-logo‎ لا ابنٌ لها: المحرّكُ يكتب فيها بـ‎textContent‎
        عند تبديل اللغة، فما بداخلها يُمحى. */
     .side-brand { display: flex; align-items: center; justify-content: center; gap: 5px; }
+    /* ولونُها حبرُ اللوح لا بترولُ المسلخ: الجذرُ ليس مجتمعًا من مجتمعاته،
+       فلا يلبس لونَ أحدِها. أسودُ على الفاتح وأبيضُ على الداكن. */
     .side-mark  { width: 22px; height: auto; flex: none; display: block;
-                  color: var(--c-kfupm); }
-    html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
+                  color: var(--glass-ink); }
     html[data-lang="en"]    .side-brand { flex-direction: row-reverse; }
     .side-mark-a { display: flex; flex: none; color: inherit; text-decoration: none;
                    border-radius: 8px; transition: opacity .15s; }
@@ -169,20 +170,17 @@
     .ex-add:hover { color: var(--c-kfupm); border-color: var(--c-kfupm); }
     .ex-add.is-in { color: var(--c-kfupm); border-color: var(--c-kfupm); font-size: 12px; }
 
-    /* ===== مجتمعاتي: دُرجٌ تحت «الركن» =====
-       السهمُ في طرف صفّ الركن (يسارَه في العربيّة)، ولا يَظهر إلّا إذا كان
-       فيه ما يُفتح. وهو زرٌّ مستقلٌّ بجانب زرّ التاب لا بداخله: زرٌّ داخل
-       زرٍّ ترميزٌ باطل، وضغطتُه كانت ستفتح التابَ معه. */
-    .tab-wrap { position: relative; border-top: 1px solid var(--border); }
-    .sidebar .tabs .tab-wrap button + button { border-top: 0; }
-    .sidebar .tabs button.nook-twist {
-      position: absolute; inset-inline-end: 7px; top: 50%; transform: translateY(-50%);
-      width: 30px; height: 30px; padding: 0; border-radius: 9px;
-      display: grid; place-items: center; color: inherit; opacity: .7; }
-    .sidebar .tabs button.nook-twist:hover { opacity: 1; background: rgba(128,128,128,.14); }
-    .nook-twist[hidden] { display: none !important; }
-    .nook-twist svg { width: 14px; height: 14px; transition: transform .18s; }
-    .nook-twist[aria-expanded="true"] svg { transform: rotate(180deg); }
+    /* ===== مجتمعاتي: كتلةٌ تحت «الركن» =====
+       الترويسةُ صفٌّ كامل كإخوته، والسهمُ علامةٌ في طرفه لا زرٌّ يجاوره:
+       زرٌّ داخل زرٍّ ترميزٌ باطل، وزرٌّ يجاوره يَقضم نصفَ الصفّ فلا يُضغط
+       إلّا نصفُه. ولا يَظهر السهمُ إلّا إذا كان تحته ما يُفتح. */
+    .nook-block { display: flex; flex-direction: column; border-radius: var(--row-r, 14px);
+                  transition: background .2s ease, box-shadow .2s ease; }
+    .nook-caret { margin-inline-start: auto; flex: none; display: grid; place-items: center;
+                  width: 18px; height: 18px; opacity: .55; }
+    .nook-caret[hidden] { display: none !important; }
+    .nook-caret svg { width: 13px; height: 13px; transition: transform .2s ease; }
+    .nook-block.is-open .nook-caret svg { transform: rotate(180deg); }
 
     .nook-coms { display: flex; flex-direction: column; }
     .nook-coms[hidden] { display: none; }
@@ -340,7 +338,7 @@
     body.side-rail .nook-com span,
     body.side-rail .side-logout .side-logout-tx,
     body.side-rail .side-auth-tx,
-    body.side-rail .side-profile .side-pname { display: none; }
+    body.side-rail .side-profile .sp-name { display: none; }
 
     body.side-rail .sidebar { padding: 14px 8px; }
     body.side-rail .sidebar .tabs button,
@@ -352,8 +350,25 @@
     body.side-rail .nook-com { padding-inline-start: 0; }
     body.side-rail .side-ctl { align-items: center; }
     body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
-    /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء */
-    body.side-rail .sidebar .tabs button.nook-twist { display: none; }
+    /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء، ولا الكتلةُ: الجوفُ صفٌّ
+       من نقاطٍ تحت أيقونةٍ، ولوحةٌ حولَه تُضيّق السكّةَ بلا فائدة. */
+    body.side-rail .nook-caret { display: none !important; }
+    body.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
+    body.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
+    body.side-rail .nook-block.is-open > #nook-head.is-active {
+      box-shadow: inset 0 0 0 1px var(--plate-edge); }
+    body.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
+
+    /* ===== الحسابُ في السكّة: دائرةُ صورةٍ لا صندوق =====
+       كان الاسمُ يُخفى بصنفٍ لا وجودَ له (‎.side-pname‎ والصحيح ‎.sp-name‎)،
+       فيبقى شاغلًا سطرَه ويدفع الصورةَ إلى الحافّة. فصُحِّح الاسمُ، وصار
+       الزرُّ نفسُه دائرةً بقدر الصورة: لا لوحةَ تحتها ولا حشوَ حولها. */
+    body.side-rail .side-acct .side-profile {
+      width: 38px; height: 38px; min-height: 0; padding: 0; margin-inline: auto;
+      border-radius: 50%; overflow: hidden; background: transparent;
+      box-shadow: inset 0 0 0 1px var(--plate-edge); }
+    body.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
+    body.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
     body.side-rail .side-brand { gap: 0; }
 
     /* ============================================================
@@ -392,13 +407,26 @@
     .sidebar .tabs .tab-ic { width: 17px; height: 17px; }
 
     /* درجُ المجتمعات: صفٌّ أصغرُ وبنفس اللغة */
-    .nook-com { min-height: 34px; border-radius: 12px; padding-inline-start: 30px; font-size: 12.5px; }
+    /* وتخصيصُها بقدر ما يغلب ‎.sidebar .tabs button‎: الجوفُ ساكنُ ‎nav.tabs‎
+       فكان يرث ارتفاعَ الصفّ الكبير ويقف ٤٤ في موضع ٣٤، فتستوي الترويسةُ
+       وما تحتها ولا يُقرأ أيُّهما ابنُ الآخر. */
+    .sidebar .tabs .nook-com { min-height: 34px; border-radius: 12px;
+                               padding-inline-start: 26px; font-size: 12.5px; }
     .nook-com:hover { background: var(--plate); color: var(--glass-ink); }
     .nook-com.is-on { background: var(--plate-hi); color: var(--glass-ink);
                       box-shadow: inset 0 0 0 1px var(--plate-edge); }
-    .sidebar .tabs button.nook-twist { width: 26px; height: 26px; min-height: 0;
-      border-radius: 50%; inset-inline-end: 9px; padding: 0; }
-    .sidebar .tabs button.nook-twist:hover { background: var(--plate); }
+
+    /* ===== الكتلةُ مفتوحة =====
+       لوحةٌ واحدةٌ تضمّ الترويسةَ وجوفَها، وخطٌّ شعريٌّ تحت الترويسة يقول
+       «هذا رأسُ الكتلة وهذا جوفُها». ولم أُثقّل الترويسةَ بلوحةٍ ثانية:
+       كانت ستُقرأ «نشِطة» وهي ليست كذلك متى تُرك الركنُ إلى تابٍ آخر. */
+    .nook-block.is-open { background: var(--plate);
+                          box-shadow: inset 0 0 0 1px var(--plate-edge);
+                          padding-bottom: 4px; }
+    .nook-block.is-open > #nook-head { box-shadow: inset 0 -1px 0 var(--plate-edge); }
+    .nook-block.is-open > #nook-head.is-active {
+      box-shadow: inset 0 0 0 1px var(--plate-edge), inset 0 -1px 0 var(--plate-edge); }
+    .nook-block.is-open .nook-coms { padding-inline: 4px; padding-top: 3px; }
 
     /* الأقراص: الجلد واللغة — دائرتان كدائرة المقبض */
     .sidebar .themebar button, .sidebar .langbar button {
@@ -422,13 +450,19 @@
       transition: background .15s;
     }
     .side-acct .side-profile { min-height: var(--row-h); }
+    /* وكِسوةُ الصورة حين لا صورة: لوحةُ اللوح لا بترولٌ فاتح */
+    .sidebar .sp-av { background: var(--plate-hi); color: var(--glass-ink); }
     .side-logout, .side-join, .side-login { min-height: 36px; font-size: 12.5px; }
     .side-acct .side-profile:hover, .side-logout:hover, .side-join:hover, .side-login:hover {
       background: var(--plate-hi); color: var(--glass-ink);
     }
-    /* و«إنشاء حساب» وحدَه مصمتٌ عمدًا: هو الفعلُ المقصود في اللوح */
-    .side-join { background: var(--c-kfupm); color: #fff; box-shadow: none; }
-    .side-join:hover { background: var(--c-kfupm); color: #fff; filter: brightness(1.08); }
+    /* و«إنشاء حساب» وحدَه مصمتٌ عمدًا: هو الفعلُ المقصود في اللوح. ومصمتُه
+       حبرُ اللوح مقلوبًا — أسودُ على الفاتح وأبيضُ على الداكن — فيبقى
+       أعلى الأشياء نبرةً من غير لونٍ مستعار.
+       وتخصيصُه بقدر ‎.sidebar .side-ctl button‎ الآتي بعدَه: قِيس فوجِد
+       حبرًا على حبر — أسودُ على أسود لا يُرى. */
+    .sidebar .side-acct .side-join { background: var(--glass-ink); color: var(--glass); box-shadow: none; }
+    .sidebar .side-acct .side-join:hover { background: var(--glass-ink); color: var(--glass); opacity: .86; }
 
     /* ============================================================
        م٤ · الشريطُ لوحٌ عائمٌ لا جدارٌ ملتصق
@@ -457,7 +491,7 @@
     /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
     .sidebar .tabs { margin-inline: -4px; }
     .sidebar .tabs button { border-radius: var(--row-r); }
-    .sidebar .tabs .tab-wrap { border-top: 0; }
+    .sidebar .tabs .nook-block > button { border-top: 0; }
     .sidebar .tabs button + button { border-top: 0; }
     .nook-com { border-radius: 10px; }
 
@@ -475,7 +509,7 @@
          ناقصًا نصفَ قطر الدائرة. فتتبع أيَّ تغييرٍ في العرض أو الفجوة. */
       right: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
       background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
-      color: var(--c-kfupm);
+      color: var(--glass-ink);
       box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
       transition: right .25s ease, left .25s ease, color .15s, transform .15s;
     }
@@ -500,7 +534,9 @@
        ومن ٧٠ إلى ٦٣ — زجاجٌ أصفى بالقياس لا بالتنازل. */
     .sidebar, .sidebar .side-logo, .sidebar .tabs button,
     .sidebar .nook-com, .sidebar .side-ctl button { color: var(--glass-ink); }
-    .sidebar .tabs button.is-active { color: #fff; }
+    /* والنشِطُ حبرُ اللوح لا أبيضَ: لوحتُه رماديّةٌ شفّافةٌ لا مستطيلٌ
+       بتروليّ، والأبيضُ عليها في الجلد الفاتح يكاد لا يُرى. */
+    .sidebar .tabs button.is-active { color: var(--glass-ink); }
     .sidebar .nook-com span { color: inherit; opacity: .82; }
 
     /* م٢ · السطح الزجاجيّ */
@@ -613,18 +649,23 @@
         <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <span class="tab-tx">المكتبة</span>
       </button>
-      <div class="tab-wrap">
-      <button type="button" data-tab="library">
-        <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        <span class="tab-tx">الركن</span>
-      </button>
-      <button type="button" class="nook-twist" id="nook-twist" hidden
-              aria-expanded="false" aria-controls="nook-coms" title="مجتمعاتي" aria-label="مجتمعاتي">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
+      <!-- ===== كتلةُ الركن: ترويسةٌ وجوف =====
+           كان السهمُ زرًّا مستقلًّا بجانب الصفّ، فكان صفُّ «الركن» يَنكمش
+           إلى عرض كلمته (٨٢ من ١٨٤) — زرٌّ نصفُه لا يُضغط. فصار السهمُ
+           **علامةً** داخل الترويسة، والترويسةُ تملأ سطرَها كإخوتها،
+           وضغطتُها تفتح الركنَ وتفتح الكتلةَ معًا. -->
+      <div class="nook-block" id="nook-block">
+        <button type="button" data-tab="library" id="nook-head"
+                aria-expanded="false" aria-controls="nook-coms">
+          <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span class="tab-tx">الركن</span>
+          <span class="nook-caret" id="nook-twist" hidden aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </button>
+        <!-- مجتمعاتُ المستخدم — تُبنى من الجافا، وتسكن جوفَ الكتلة -->
+        <div class="nook-coms" id="nook-coms" hidden></div>
       </div>
-      <!-- مجتمعاتُ المستخدم — تُبنى من الجافا، وتُطوى معه -->
-      <div class="nook-coms" id="nook-coms" hidden></div>
     </nav>
 
     <!-- ===== وما يخصُّك أنت: مجموعةٌ ثانيةٌ في قاع الشريط =====
@@ -1210,7 +1251,8 @@
                  '<span>' + esc(i ? c.en : c.ar) + '</span></button>';
         }).join('');
         tw.hidden = !list.length;
-        if (!list.length) { box.hidden = true; tw.setAttribute('aria-expanded', 'false'); }
+        if (!list.length) setNook(false);
+        else if (!box.hidden) setNook(true);   /* والكتلةُ تبقى مطبوعةً بعد إعادة البناء */
         /* وأزرارُ «استكشاف» تُرى حالتُها: ‎+‎ صار ‎✓‎ لِما أُضيف */
         document.querySelectorAll('#ex-coms .ex-add[data-mine]').forEach(function (b) {
           var on = isMine(b.dataset.mine);
@@ -1226,10 +1268,23 @@
         }
       }
 
-      document.getElementById('nook-twist').addEventListener('click', function () {
-        var box = document.getElementById('nook-coms');
-        box.hidden = !box.hidden;
-        this.setAttribute('aria-expanded', box.hidden ? 'false' : 'true');
+      /* فتحُ الكتلة وطيُّها — من الترويسة وحدَها.
+         وقاعدتُها: إن لم يكن الركنُ هو النشِط فالضغطةُ قصدُ دخولٍ، فتُفتح
+         دائمًا؛ وإن كان نشطًا فالضغطةُ قصدُ تبديلٍ، فتُقلب. و‎is-active‎
+         ههنا هي حالُ ما قبل الضغطة: مستمعُ الألواح معلَّقٌ على ‎#sidebar‎
+         فيأتي بعد هذا في مسار الفقاعة. */
+      function setNook(open) {
+        document.getElementById('nook-coms').hidden = !open;
+        document.getElementById('nook-block').classList.toggle('is-open', open);
+        document.getElementById('nook-head').setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      document.getElementById('nook-head').addEventListener('click', function () {
+        if (document.getElementById('nook-twist').hidden) return;   /* لا جوفَ يُفتح */
+        var shut   = document.getElementById('nook-coms').hidden;
+        /* وأنت في ركن مجتمعٍ بعينه، «الركن» خروجٌ منه إلى ركنك العامّ —
+           قصدُ انتقالٍ لا قصدُ طيّ. فلا تُطوى الكتلةُ تحتك وأنت تغادرها. */
+        var inside = !!document.querySelector('.nook-com.is-on');
+        setNook((this.classList.contains('is-active') && !inside) ? shut : true);
       });
       /* ودخولُ مجتمعٍ من الدرج كدخوله من بطاقته سواءً */
       document.getElementById('nook-coms').addEventListener('click', function (e) {
