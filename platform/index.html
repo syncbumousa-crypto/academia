@@ -169,6 +169,70 @@
     .nook-com i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
     .nook-com.is-on { color: var(--c-kfupm); background: var(--surface); font-weight: 700; }
 
+    /* ============================================================
+       الزجاج — م١ وم٢ من «خارطة الشريط الجانبيّ»
+       ============================================================
+       م١ · ليكن تحت الزجاج ما يُرى: صفوفُ الأغلفة تمتدّ تحت الشريط بدل
+            أن تقف عنده. فأوّلُ بطاقةٍ تبقى بارزةً (الحَشْوُ يردّها)، وما
+            بعدها ينزلق تحت الزجاج عند التمرير. وبلا هذا فالزجاجُ فوق
+            لونٍ واحدٍ = لونٌ واحد.
+       م٢ · السطح: ثلاثُ درجاتٍ لا قفزة —
+              لا دعمَ        ⟵ مصمتٌ كما كان
+              blur           ⟵ زجاجٌ مثلَّج (هذي المرحلة)
+              blur + url()   ⟵ انكسارُ الحافّة (م٣، لم تأتِ بعد)
+            ومن طلب تقليلَ الشفافيّة رجع إلى المصمت: قراءةُ الواجهة
+            حقٌّ لا زينة. */
+
+    :root {
+      --pnl-pad: clamp(16px, 3vw, 32px);
+      --glass:      #f1f0ee;
+      --glass-mix:  66%;   /* أقلُّ ما يَعبُر 4.5:1 فوق أسودَ خالص (4.58) */
+      --glass-edge: rgba(255,255,255,.85);
+      --glass-cast: rgba(0,0,0,.10);
+    }
+    html[data-theme="dark"] {
+      --glass:      #252525;
+      --glass-mix:  70%;   /* وكذلك فوق أبيضَ خالص في الداكن (4.59) */
+      --glass-edge: rgba(255,255,255,.09);
+      --glass-cast: rgba(0,0,0,.30);
+    }
+
+    /* م١ · الصفوفُ تمرّ تحت الشريط */
+    #panel-explore .ex-strip {
+      margin-inline-start:  calc((var(--side-w) + var(--pnl-pad)) * -1);
+      padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+      /* والالتقاطُ يحترم الحَشْو: بدونه يَجذب البطاقةَ الأولى إلى حافّة
+         الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
+      scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+    }
+
+    /* م٢ · السطح الزجاجيّ */
+    @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+      .sidebar {
+        background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+                backdrop-filter: blur(20px) saturate(170%);
+      }
+      /* والظلُّ بتخصيصٍ أعلى: ‎html[data-skin="flat"] .sidebar‎ في جلد الجذر
+         يُصفّر الظلَّ، وقِيس فغلب ‎.sidebar‎ وحدَها. فالحدُّ الفاتحُ على الوجه
+         المواجه للمحتوى، وينقلب مع اللغة. */
+      html[data-skin] .sidebar {
+        box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
+      }
+      html[data-skin][data-lang="en"] .sidebar {
+        box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
+      }
+    }
+    /* ولا شفافيّةَ لمن لا يريدها */
+    @media (prefers-reduced-transparency: reduce) {
+      .sidebar {
+        background: var(--glass);
+        -webkit-backdrop-filter: none; backdrop-filter: none;
+        box-shadow: none;
+      }
+    }
+
+
     /* الرأسُ صار خارجَ الألواح، فيأخذ عرضَها وحشوَها بنفسه */
     .com-head { max-width: 1180px; margin: 0 auto 18px; padding: 23px clamp(16px,3vw,32px) 0; }
     .soon-area { min-height: 62vh; border-radius: 18px; background: var(--surface);
