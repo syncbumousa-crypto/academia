@@ -36,8 +36,8 @@
        ينقلب الصفُّ من نفسه، فيُقلب صراحةً بقاعدةِ ‎data-lang‎ تحتُ.
        والرمزُ أخٌ لـ‎.side-logo‎ لا ابنٌ لها: المحرّكُ يكتب فيها بـ‎textContent‎
        عند تبديل اللغة، فما بداخلها يُمحى. */
-    .side-brand { display: flex; align-items: center; justify-content: center; gap: 9px; }
-    .side-mark  { width: 27px; height: auto; flex: none; display: block;
+    .side-brand { display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .side-mark  { width: 22px; height: auto; flex: none; display: block;
                   color: var(--c-kfupm); }
     html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
     html[data-lang="en"]    .side-brand { flex-direction: row-reverse; }
@@ -262,7 +262,11 @@
       color: var(--glass-ink); transition: background .15s;
     }
     .sidebar .themebar button:hover, .sidebar .langbar button:hover { background: var(--plate-hi); }
-    .side-ctl { gap: 10px; }
+    .side-ctl { gap: 10px; margin-top: auto; }
+    /* المجموعتان صفٌّ واحدٌ متّصل: كانت الثانيةُ تُدفع إلى القاع
+       بـ‎margin-top:auto‎، فصار بينهما فراغٌ لا معنى له. */
+    .sidebar .tabs--me { margin-top: 0; }
+    .sidebar .tabs--me + .side-ctl { margin-top: auto; }
 
     /* الحساب والخروج والدخول: لوحاتٌ لا صناديقُ مصمتة */
     .side-acct .side-profile, .side-logout, .side-join, .side-login {
@@ -319,14 +323,16 @@
          لا موضعُ أمر، والرأسُ حيث تبدأ العينُ في الشريط. */
       width: 30px; height: 30px; border-radius: 50%; padding: 0; border: 0;
       top: calc(var(--glass-gap) + 8px); transform: none;
-      right: calc(var(--side-w) + var(--glass-gap) * 2 + 8px);
+      /* مفتوحًا تركب حرفَ اللوح ولا تدخل عمودَ المحتوى: حافّتُها اليسرى
+         داخلَ حدّ الحشو، فلا تُغطّي عنوانًا مثل «مجتمعات». */
+      right: calc(var(--side-w) + var(--glass-gap) - 22px);
       background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
       color: var(--c-kfupm);
       box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
       transition: right .25s ease, left .25s ease, color .15s, transform .15s;
     }
     html[data-lang="en"] .side-handle {
-      right: auto; left: calc(var(--side-w) + var(--glass-gap) * 2 + 10px);
+      right: auto; left: calc(var(--side-w) + var(--glass-gap) - 22px);
       border: 0; border-radius: 50%;
       box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
     }
