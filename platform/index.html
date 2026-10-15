@@ -143,6 +143,31 @@
                 cursor: pointer; display: grid; place-items: center;
                 transition: color .15s, border-color .15s; }
     .ex-add:hover { color: var(--c-kfupm); border-color: var(--c-kfupm); }
+    .ex-add.is-in { color: var(--c-kfupm); border-color: var(--c-kfupm); font-size: 12px; }
+
+    /* ===== مجتمعاتي: دُرجٌ تحت «الركن» =====
+       السهمُ في طرف صفّ الركن (يسارَه في العربيّة)، ولا يَظهر إلّا إذا كان
+       فيه ما يُفتح. وهو زرٌّ مستقلٌّ بجانب زرّ التاب لا بداخله: زرٌّ داخل
+       زرٍّ ترميزٌ باطل، وضغطتُه كانت ستفتح التابَ معه. */
+    .tab-wrap { position: relative; border-top: 1px solid var(--border); }
+    .sidebar .tabs .tab-wrap button + button { border-top: 0; }
+    .sidebar .tabs button.nook-twist {
+      position: absolute; inset-inline-end: 7px; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; padding: 0; border-radius: 9px;
+      display: grid; place-items: center; color: inherit; opacity: .7; }
+    .sidebar .tabs button.nook-twist:hover { opacity: 1; background: rgba(128,128,128,.14); }
+    .nook-twist[hidden] { display: none !important; }
+    .nook-twist svg { width: 14px; height: 14px; transition: transform .18s; }
+    .nook-twist[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+    .nook-coms { display: flex; flex-direction: column; }
+    .nook-coms[hidden] { display: none; }
+    .nook-com  { display: flex; align-items: center; gap: 8px; width: 100%;
+                 border: 0; background: transparent; cursor: pointer; text-align: start;
+                 font: inherit; font-size: 13px; color: var(--c-ink-soft);
+                 padding-block: 9px; padding-inline-start: 36px; padding-inline-end: 14px; }
+    .nook-com:hover { color: var(--c-kfupm); background: var(--surface); }
+    .nook-com i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
 
     .ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
     .ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
@@ -198,10 +223,18 @@
         <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <span class="tab-tx">المكتبة</span>
       </button>
+      <div class="tab-wrap">
       <button type="button" data-tab="library">
         <svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         <span class="tab-tx">الركن</span>
       </button>
+      <button type="button" class="nook-twist" id="nook-twist" hidden
+              aria-expanded="false" aria-controls="nook-coms" title="مجتمعاتي" aria-label="مجتمعاتي">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      </div>
+      <!-- مجتمعاتُ المستخدم — تُبنى من الجافا، وتُطوى معه -->
+      <div class="nook-coms" id="nook-coms" hidden></div>
     </nav>
 
     <!-- ===== وما يخصُّك أنت: مجموعةٌ ثانيةٌ في قاع الشريط =====
@@ -738,7 +771,8 @@
       var T = { tab:['استكشاف','Explore'], h1:['مجتمعات','Communities'],
                 s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
                 soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'],
-                add:['أضِف المجتمع','Add community'], page:['صفحة المجتمع','Community page'] };
+                add:['أضِف المجتمع','Add community'], added:['مضاف','Added'],
+                page:['صفحة المجتمع','Community page'] };
       function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
 
       /* الرفوف: جدولٌ واحدٌ يُقرأ، فزيادةُ رفٍّ سطرٌ فيه لا قسمٌ في الصفحة.
@@ -761,8 +795,58 @@
         if (curCom) document.getElementById('com-name').textContent = i ? curCom.en : curCom.ar;
       }
 
+      /* ===== دُرجُ «مجتمعاتي» في الشريط =====
+         ما يُضيفه المستخدمُ يسكن تحت «الركن». والسهمُ لا يُعرض إلّا إذا كان
+         تحته شيء: سهمٌ يَفتح فراغًا وعدٌ كاذب. */
+      function paintMine() {
+        var list = mine().map(comById).filter(Boolean);
+        var i = lang();
+        var box = document.getElementById('nook-coms');
+        var tw  = document.getElementById('nook-twist');
+        box.innerHTML = list.map(function (c) {
+          return '<button class="nook-com" type="button" data-open="' + c.id + '">' +
+                 '<i style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')"></i>' +
+                 '<span>' + esc(i ? c.en : c.ar) + '</span></button>';
+        }).join('');
+        tw.hidden = !list.length;
+        if (!list.length) { box.hidden = true; tw.setAttribute('aria-expanded', 'false'); }
+        /* وأزرارُ «استكشاف» تُرى حالتُها: ‎+‎ صار ‎✓‎ لِما أُضيف */
+        document.querySelectorAll('#ex-coms .ex-add[data-mine]').forEach(function (b) {
+          var on = isMine(b.dataset.mine);
+          b.classList.toggle('is-in', on);
+          b.textContent = on ? '✓' : '+';
+          b.title = on ? 'مضاف — اضغط للإزالة' : 'أضِف المجتمع';
+        });
+        var ca = document.getElementById('com-add');
+        if (ca && curCom) {
+          var on2 = isMine(curCom.id);
+          ca.querySelector('.com-plus').textContent = on2 ? '✓' : '+';
+          document.getElementById('com-add-tx').textContent = on2 ? T.added[lang()] : T.add[lang()];
+        }
+      }
+
+      document.getElementById('nook-twist').addEventListener('click', function () {
+        var box = document.getElementById('nook-coms');
+        box.hidden = !box.hidden;
+        this.setAttribute('aria-expanded', box.hidden ? 'false' : 'true');
+      });
+      /* ودخولُ مجتمعٍ من الدرج كدخوله من بطاقته سواءً */
+      document.getElementById('nook-coms').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-open]'); if (!b) return;
+        var c = comById(b.dataset.open); if (c) openCom(c);
+      });
+      /* وزرُّ الإضافة — في البطاقة وفي الغلاف — يُبدّل العضويّة */
+      document.getElementById('panel-explore').addEventListener('click', function (e) {
+        var b = e.target.closest('.ex-add[data-mine]'); if (!b) return;
+        e.preventDefault(); e.stopPropagation();
+        toggleMine(b.dataset.mine);
+      });
+      document.getElementById('com-add').addEventListener('click', function () {
+        if (curCom) toggleMine(curCom.id);
+      });
+
       function paint() {
-        label(); buildComs(); buildShelves();
+        label(); buildComs(); buildShelves(); paintMine();
         /* الأسهمُ تُعلَّق على ما لم يُعلَّق عليه بعد: الرفوفُ تُبنى من جديدٍ
            عند تبديل اللغة، فلولا العلامةُ لتضاعفت أزرارُها */
         document.querySelectorAll('#panel-explore .ex-wrap').forEach(function (w) {
@@ -779,12 +863,39 @@
          بسطرٍ واحد (‎img‎ داخل ‎.ex-cover‎). والكتبُ أغلفتُها موجودةٌ أصلًا في
          ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
       var COMS = [
-        { ar:'المسلخ',  en:'Almaslakh', href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
-        { ar:'المدرج',  en:'Almudarraj', soon:1,              a:'#3a2d18', b:'#8a6d2f' },
-        { ar:'القدرات', en:'Qudurat',    soon:1,              a:'#2a2142', b:'#5d4a95' },
-        { ar:'الآيلتس', en:'IELTS',      soon:1,              a:'#3b1f26', b:'#8d4654' }
+        { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
+        { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', soon:1,               a:'#3a2d18', b:'#8a6d2f' },
+        { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1,               a:'#2a2142', b:'#5d4a95' },
+        { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1,               a:'#3b1f26', b:'#8d4654' }
       ];
+
+      /* ===== مجتمعاتي =====
+         قائمةُ معرّفاتٍ لا أكثر — بضعةُ بايتاتٍ في درجٍ خاصٍّ بها، فلا تزاحم
+         درجَ الموقع الثقيل. وهي اليومَ في المتصفّح وحده: لا نقطةَ في الخادم
+         تحفظها بعد، فمتى صارت نُقلت إلى الحساب فتتبعك بين أجهزتك. */
+      var MINE_K = 'academia2:coms:v1';
+      function mine() {
+        try { var a = JSON.parse(localStorage.getItem(MINE_K) || '[]'); return Array.isArray(a) ? a : []; }
+        catch (e) { return []; }
+      }
+      function mineSet(a) { try { localStorage.setItem(MINE_K, JSON.stringify(a)); } catch (e) {} }
+      function isMine(id) { return mine().indexOf(id) >= 0; }
+      function toggleMine(id) {
+        var a = mine(), i = a.indexOf(id);
+        if (i >= 0) a.splice(i, 1); else a.push(id);
+        mineSet(a); paintMine();
+      }
+      function comById(id) {
+        for (var i = 0; i < COMS.length; i++) if (COMS[i].id === id) return COMS[i];
+        return null;
+      }
+      /* زرُّ الكتاب بلا معرّف: لم يُقرَّر بعدُ ما يفعله، فيبقى ساكنًا */
       var PLUS = '<button class="ex-add" type="button" title="أضِف">+</button>';
+      function plusFor(id) {
+        var on = isMine(id);
+        return '<button class="ex-add' + (on ? ' is-in' : '') + '" type="button" data-mine="' + id +
+               '" title="' + (on ? 'مضاف — اضغط للإزالة' : 'أضِف المجتمع') + '">' + (on ? '✓' : '+') + '</button>';
+      }
 
       function esc(t) { return String(t).replace(/[&<>"]/g, function (c) {
         return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
@@ -796,7 +907,7 @@
                       '<span class="ex-cover-t">' + esc(i ? c.en : c.ar) + '</span></div>';
           /* والزرُّ خارجَ الوصلة لا بداخلها: لو سكن فيها لفتح المجتمعَ من ضغطه */
           var cap = '<div class="ex-cap"><b>' +
-                    (c.soon ? T.soon[i] : esc(i ? c.en : c.ar)) + '</b>' + PLUS + '</div>';
+                    (c.soon ? T.soon[i] : esc(i ? c.en : c.ar)) + '</b>' + plusFor(c.id) + '</div>';
           var face = c.soon
             ? '<div class="ex-face">' + cover + '</div>'
             /* الرابطُ يبقى في ‎href‎ وإن كان الفتحُ في مكانه: من فتحه في لسانٍ
@@ -916,6 +1027,7 @@
           'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
         document.getElementById('com-name').textContent = lang() ? c.en : c.ar;
         document.getElementById('com-head').hidden = false;
+        paintMine();
         ex.hidden = true;
         mk.hidden = false;
         top();
