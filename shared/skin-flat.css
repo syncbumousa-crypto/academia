@@ -148,3 +148,24 @@ html[data-skin="flat"] body {
   font-family: 'HT Heliopolis', 'Segoe UI', Tahoma, sans-serif;
   font-feature-settings: 'swsh' 1;
 }
+
+/* ---------- ولا يُذكر اسمٌ قديمٌ في مكدَّسٍ أصلًا ----------
+   التحويلُ أعلاه يكفي للرسم، لكنّ المتصفّح يرى الاسمَ القديم مذكورًا في
+   مئتَي موضعٍ فيجلب ملفَّه احتياطًا — أربعةُ ملفّاتٍ نحوَ ٩٧٠ كيلو لا يُرسم
+   بها حرف. فتُسمّى الشجرةُ كلُّها بالاسم الجديد، ولا يبقى للقديم ذِكر.
+
+   و‎*‎ ههنا لا يُثقل: قاعدةٌ واحدةٌ تُحسب مرّةً عند الرسم، وأرخصُ من مئتَي
+   محدِّدٍ يُلاحَق. والخطُّ يغطّي العربيَّ واللاتينيَّ والرقمين، فلا يخسر
+   عنصرٌ شيئًا بانتقاله إليه. */
+html[data-skin="flat"] body,
+html[data-skin="flat"] body * {
+  font-family: 'HT Heliopolis', 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* إلّا ما وُضع للأرقام الثابتة العرض عمدًا: شيفرةٌ أو جدولٌ يُقرأ بالعمود */
+html[data-skin="flat"] body code,
+html[data-skin="flat"] body pre,
+html[data-skin="flat"] body kbd,
+html[data-skin="flat"] body samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
