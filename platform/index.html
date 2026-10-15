@@ -56,7 +56,7 @@
     /* رأسُ المجتمع: غلافٌ عريضٌ عليه اسمُه وزرُّ رجوع، يعلو مكتبتَه.
        والمكتبةُ تحته هي هي: بحثُها وتصنيفاتُها وتاباتُ المادّة لم تُمَسّ. */
     .com-head  { margin: 0 0 18px; }
-    .com-cover { position: relative; display: flex; align-items: flex-end;
+    .com-cover { position: relative; display: flex; align-items: flex-end; flex-wrap: wrap; gap: 12px;
                  min-height: clamp(112px, 16vw, 172px); padding: 16px 20px;
                  border-radius: 16px; overflow: hidden; color: #fff; }
     .com-cover h2 { margin: 0; font-size: clamp(21px, 3.1vw, 33px); font-weight: 700;
@@ -67,6 +67,19 @@
                  background: rgba(0,0,0,.34); color: #fff; display: grid; place-items: center;
                  transition: background .15s; }
     .com-back:hover { background: rgba(0,0,0,.54); }
+
+    /* زرّا الغلاف: في طرف سطر الاسم، فيتوازن الرأسُ — الاسمُ في مبدأ
+       القراءة وفعلاهُ في منتهاها. ويلتفّان تحته في الشاشة الضيّقة. */
+    .com-acts { margin-inline-start: auto; display: flex; gap: 8px; align-items: center; }
+    .com-btn  { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+                border: 1px solid rgba(255,255,255,.45); background: rgba(0,0,0,.24);
+                color: #fff; border-radius: 99px; padding: 7px 15px; text-decoration: none;
+                font: inherit; font-size: 12.5px; font-weight: 700; white-space: nowrap;
+                transition: background .15s, border-color .15s; }
+    .com-btn:hover { background: rgba(0,0,0,.42); border-color: #fff; color: #fff; }
+    .com-btn--go { background: rgba(255,255,255,.93); border-color: transparent; color: #1b1a18; }
+    .com-btn--go:hover { background: #fff; color: #1b1a18; }
+    .com-plus { font-size: 15px; line-height: 1; }
     .com-back svg { width: 17px; height: 17px; }
     /* سهمُ الرجوع يشير إلى حيث جئت: يمينًا في العربيّة ويسارًا في الإنجليزيّة */
     html[dir="ltr"] .com-back svg { transform: scaleX(-1); }
@@ -291,6 +304,13 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
         </button>
         <h2 id="com-name"></h2>
+        <div class="com-acts">
+          <!-- الإضافةُ لا تفعل شيئًا بعدُ، كزرّ البطاقة في «استكشاف» سواءً -->
+          <button class="com-btn" id="com-add" type="button">
+            <span class="com-plus">+</span><span id="com-add-tx">أضِف المجتمع</span></button>
+          <!-- وهذي تخرج من الجذر إلى موقع المجتمع نفسِه -->
+          <a class="com-btn com-btn--go" id="com-open" href="../Almaslakh/"><span id="com-open-tx">صفحة المجتمع</span></a>
+        </div>
       </div>
     </div>
 
@@ -717,7 +737,8 @@
       /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
       var T = { tab:['استكشاف','Explore'], h1:['مجتمعات','Communities'],
                 s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
-                soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'] };
+                soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'],
+                add:['أضِف المجتمع','Add community'], page:['صفحة المجتمع','Community page'] };
       function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
 
       /* الرفوف: جدولٌ واحدٌ يُقرأ، فزيادةُ رفٍّ سطرٌ فيه لا قسمٌ في الصفحة.
@@ -734,6 +755,10 @@
         document.getElementById('tab-explore-tx').textContent = T.tab[i];
         document.getElementById('ex-h').textContent   = T.h1[i];
         document.getElementById('ex-sub').textContent = T.s1[i];
+        document.getElementById('com-add-tx').textContent  = T.add[i];
+        document.getElementById('com-open-tx').textContent = T.page[i];
+        /* ومن كان داخل مجتمعٍ يتبدّل اسمُه معه ولا ينتظر خروجَه */
+        if (curCom) document.getElementById('com-name').textContent = i ? curCom.en : curCom.ar;
       }
 
       function paint() {
@@ -876,7 +901,7 @@
          إلى موقعٍ آخر: يُكشف رأسُ المجتمع ثمّ لوحُ المكتبة كما هو — بحثُه
          وتصنيفاتُه وتاباتُ المادّة من «المادّة» إلى «البطاقات والملخّصات».
          ولا يُبنى شيءٌ من جديد، فما بُني مرّةً لا يُكتب مرّتين. */
-      var inCom = false;
+      var inCom = false, curCom = null;
       /* المُمَرَّرُ في هذه الصفحة هو ‎body‎ لا النافذة — قِيس فوُجد. فتُمسح
          الثلاثةُ معًا، إذ تختلف بين المتصفّحات وبين أوضاع الصفحة. */
       function top() {
@@ -885,10 +910,11 @@
         if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
       }
       function openCom(c) {
-        inCom = true;
+        inCom = true; curCom = c;
+        document.getElementById('com-open').href = c.href;
         document.getElementById('com-cover').style.background =
           'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
-        document.getElementById('com-name').textContent = c.ar;
+        document.getElementById('com-name').textContent = lang() ? c.en : c.ar;
         document.getElementById('com-head').hidden = false;
         ex.hidden = true;
         mk.hidden = false;
@@ -898,7 +924,7 @@
       /* الرجوعُ واحدٌ سواءٌ جاء من الزرّ أو من زرّ المتصفّح */
       function closeCom(fromPop) {
         if (!inCom) return;
-        inCom = false;
+        inCom = false; curCom = null;
         document.getElementById('com-head').hidden = true;
         mk.hidden = true;
         ex.hidden = false;
