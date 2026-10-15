@@ -212,6 +212,56 @@
 
 
 
+
+    /* ============================================================
+       الزجاجُ يخرج من اللوح — بالنظام نفسِه لا بنسخةٍ ثانية
+       ============================================================
+       أوّلُ ما بعد الخارطة: أن يَعُمّ الزجاجُ ما يطفو فوق المحتوى. وشرطُه
+       ألّا يُعاد اختراعُه: الصبغةُ والتعتيمُ والحرفُ هي هي، تُستدعى بصنفٍ
+       واحدٍ ‎.ac-glass‎ فيَرِث كلَّ شيءٍ ويَرِث معه البديلَ والبوّابة.
+
+       والمُرشَّحُ للزجاج ما **يطفو فوق محتوًى يتحرّك** — شريطُ الأدوات
+       وأسهمُ الصفوف. أمّا ما هو سطحُ قراءةٍ ثابتٌ (بطاقةُ مادّة، نافذةُ
+       حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال. */
+    .ac-glass {
+      background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent) !important;
+      border-color: transparent !important;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent);
+    }
+    @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+      .ac-glass { -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .ac-glass { background: var(--glass) !important;
+                  -webkit-backdrop-filter: none; backdrop-filter: none; }
+    }
+
+    /* شريطُ أدوات المكتبة: بحثٌ وتصنيفاتٌ يطفوان فوق رفّ الكتب */
+    #panel-market #m-search,
+    #panel-market .btn-filter { background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+      border-color: transparent;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent); }
+    @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+      #panel-market #m-search, #panel-market .btn-filter {
+        -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
+    }
+
+    /* وأسهمُ الصفوف: أقراصٌ زجاجيّةٌ كقرص الطيّ، لا دوائرُ مصمتة */
+    #panel-explore .ex-nav {
+      background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+      border-color: transparent;
+      box-shadow: inset 0 0 0 1px var(--glass-edge), 0 6px 18px var(--glass-cast);
+      color: var(--glass-ink);
+    }
+    @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+      #panel-explore .ex-nav { -webkit-backdrop-filter: blur(14px) saturate(160%);
+                               backdrop-filter: blur(14px) saturate(160%); }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      #panel-market #m-search, #panel-market .btn-filter, #panel-explore .ex-nav {
+        background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+    }
+
     /* ============================================================
        م٦ · الحياة — الزجاجُ يتبدّل بما يمرّ تحته
        ============================================================
