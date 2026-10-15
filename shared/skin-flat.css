@@ -73,32 +73,43 @@ html[data-skin="flat"] .sidebar { box-shadow: none; }
 
 
 /* ============================================================
-   خطّا الجذر — مرخَّصان، وللجذر وحدَه
+   خطُّ الجذر — Gellix للاتينيّ، Ping AR LT للعربيّ
    ============================================================
-   ‎Ping AR LT‎ للمتن، و‎HT Heliopolis‎ للعناوين والأرقام والشعار.
+   ===== ولمَ خطّان لا خطٌّ واحد؟ =====
+   قُرئ جدولُ المحارف من ملفّ Gellix نفسِه: ‎U+0627‎ (ا) و‎U+0628‎ (ب)
+   و‎U+0645‎ (م) **غائبةٌ كلُّها**، و‎A‎ و‎0‎ موجودان. فهو لاتينيٌّ بحت، ولو
+   أُسند إليه الموقعُ وحدَه لهبط كلُّ حرفٍ عربيٍّ إلى خطّ النظام.
+   وهذا عينُ ما يفعله الموقعُ الذي أُخذ منه: يحمّل Gellix وPing AR معًا.
 
-   ===== ولمَ يُعاد تعريفُ الاسمين القديمين بدل ملاحقة القواعد؟ =====
-   في الورقة الأمّ ‎١٢٩‎ قاعدةً تذكر الخطّ: ‎٦٤‎ منها ‎inherit‎ فتتبع ما فوقها،
-   و‎٥٤‎ تقول ‎'KFUPM Display'‎ صراحةً، و‎٩‎ تقول ‎'IBM Plex Sans Arabic'‎.
-   فتبديلُ ‎body‎ وحدَه لا يغيّر إلّا ما ورث — وهي العلّة التي ظهرت: تبدّل
-   الشعارُ وبقي سائرُ الموقع.
+   ===== والوصلُ بـ‎unicode-range‎ لا بمكدَّسٍ احتياطيّ =====
+   المكدَّسُ (‎'Gellix', 'Ping AR LT'‎) يعمل، لكنّه يجعل الأمرَ حظًّا: متى غاب
+   محرفٌ لاتينيٌّ نادرٌ من Gellix هبط إلى Ping بلا قصد. و‎unicode-range‎ يقسم
+   بالقصد: اللاتينيُّ والأرقامُ لـGellix، والعربيُّ لـPing — فكلُّ حرفٍ يُعرف
+   خطُّه قبل أن يُرسم.
 
-   وملاحقةُ ثلاثٍ وستّين قاعدةً بمحدِّداتٍ مكرَّرةٍ دَينٌ يُنسى عند أوّل تعديل.
-   فبدلًا منها يُعاد تعريفُ **الاسمين نفسيهما** ليشيرا إلى الملفّين الجديدين:
-   كلُّ قاعدةٍ تقول ‎'KFUPM Display'‎ تُرسم بـ‎Heliopolis‎، وكلُّ ‎'IBM Plex'‎
-   تُرسم بـ‎Ping‎ — بلا محدِّدٍ واحدٍ يُكتب.
+   ===== والاسمان القديمان يُحوَّلان كلاهما إلى هذا الزوج =====
+   في الورقة الأمّ ‎١٩٥‎ موضعًا تذكر ‎IBM Plex‎ و‎٥٤‎ تذكر ‎KFUPM Display‎،
+   أكثرُها بصيغة ‎font:‎ المختصرة. فبدل ملاحقتها تُحوَّل العائلتان نفسُهما. */
 
-   ===== ولمَ لا يُصيب هذا المسلخ؟ =====
-   ‎@font-face‎ لا يُحصر بمحدِّد، لكنّه **محصورٌ بالوثيقة التي حمّلته**. وهذي
-   الورقةُ لا تُحمَّل إلّا في صفحة الجذر، فالمسلخُ لا يراها أصلًا ويبقى على
-   خطَّيه. والتعريفُ الأخيرُ هو الغالب، وهذي الورقةُ بعد الأمّ، فتغلبها.
+/* ---------- Gellix: اللاتينيُّ والأرقامُ والترقيم ---------- */
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 200; font-display: swap;
+             src: url('../assets/fonts/Gellix-Thin.woff2')       format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 300; font-display: swap;
+             src: url('../assets/fonts/Gellix-Light.woff2')      format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 400; font-display: swap;
+             src: url('../assets/fonts/Gellix-Regular.woff2')    format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 500; font-display: swap;
+             src: url('../assets/fonts/Gellix-Medium.woff2')     format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 600; font-display: swap;
+             src: url('../assets/fonts/Gellix-SemiBold.woff2')   format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 700; font-display: swap;
+             src: url('../assets/fonts/Gellix-Bold.woff2')       format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 800; font-display: swap;
+             src: url('../assets/fonts/Gellix-ExtraBold.woff2')  format('woff2'); }
+@font-face { font-family: 'Gellix'; font-style: normal; font-weight: 900; font-display: swap;
+             src: url('../assets/fonts/Gellix-Black.woff2')      format('woff2'); }
 
-   ===== والأوزانُ تُطابق ما تطلبه الورقةُ الأمّ =====
-   تطلب ‎400/500/600/700‎ من ‎IBM Plex‎ و‎400/700‎ من ‎KFUPM‎. فلو نقص وزنٌ
-   لاصطنعه المتصفّحُ بالتثخين — فيُعرَّف كلُّ وزنٍ تطلبه، ويُقرَّب ما لا نظيرَ له
-   (لا ‎SemiBold‎ في ‎Ping‎، فـ‎٦٠٠‎ تأخذ ‎Medium‎ لا ‎Heavy‎: الأقربُ لا الأثقل). */
-
-/* ---------- الأسماء الجديدة، لمن أراد أن يكتب بها صراحةً ---------- */
+/* ---------- Ping AR LT: العربيُّ وحدَه ---------- */
 @font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 300; font-display: swap;
              src: url('../assets/fonts/Ping-AR-LT-Light.woff2')   format('woff2'); }
 @font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 400; font-display: swap;
@@ -110,79 +121,89 @@ html[data-skin="flat"] .sidebar { box-shadow: none; }
 @font-face { font-family: 'Ping AR LT'; font-style: normal; font-weight: 900; font-display: swap;
              src: url('../assets/fonts/Ping-AR-LT-Black.woff2')   format('woff2'); }
 
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 200; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-Thin.woff2')     format('woff2'); }
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-Regular.woff2')  format('woff2'); }
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 500; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-Medium.woff2')   format('woff2'); }
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 600; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-SemiBold.woff2') format('woff2'); }
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-Bold.woff2')     format('woff2'); }
-@font-face { font-family: 'HT Heliopolis'; font-style: normal; font-weight: 800; font-display: swap;
-             src: url('../assets/fonts/HT-Heliopolis-Heavy.woff2')    format('woff2'); }
-
-/* ---------- والاسمان القديمان يُحوَّلان: ههنا يقع التبديلُ كلُّه ---------- */
+/* ---------- والاسمان القديمان: لاتينيٌّ Gellix وعربيٌّ Ping ---------- */
+/* IBM Plex Sans Arabic */
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 200; font-display: swap;
+             src: url('../assets/fonts/Gellix-Thin.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 200; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Light.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 300; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Light.woff2')   format('woff2'); }
+             src: url('../assets/fonts/Gellix-Light.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 300; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Light.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Regular.woff2') format('woff2'); }
+             src: url('../assets/fonts/Gellix-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 400; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Regular.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 500; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2')  format('woff2'); }
+             src: url('../assets/fonts/Gellix-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 500; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 600; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2')  format('woff2'); }
+             src: url('../assets/fonts/Gellix-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 600; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Heavy.woff2')   format('woff2'); }
+             src: url('../assets/fonts/Gellix-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 700; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Heavy.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 800; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Black.woff2')   format('woff2'); }
+             src: url('../assets/fonts/Gellix-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 800; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Black.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 900; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Black.woff2')   format('woff2'); }
-
+             src: url('../assets/fonts/Gellix-Black.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 900; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Black.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+/* KFUPM Display */
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 200; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Light.woff2')     format('woff2'); }
+             src: url('../assets/fonts/Gellix-Thin.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 200; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Light.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 300; font-display: swap;
+             src: url('../assets/fonts/Gellix-Light.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 300; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Light.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Regular.woff2')  format('woff2'); }
+             src: url('../assets/fonts/Gellix-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 400; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Regular.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 500; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2')   format('woff2'); }
+             src: url('../assets/fonts/Gellix-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 500; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 600; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2') format('woff2'); }
+             src: url('../assets/fonts/Gellix-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 600; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Medium.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Heavy.woff2')     format('woff2'); }
+             src: url('../assets/fonts/Gellix-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 700; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Heavy.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 800; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Black.woff2')    format('woff2'); }
+             src: url('../assets/fonts/Gellix-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 800; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Black.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 900; font-display: swap;
-             src: url('../assets/fonts/Ping-AR-LT-Black.woff2')    format('woff2'); }
+             src: url('../assets/fonts/Gellix-Black.woff2') format('woff2'); }
+@font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 900; font-display: swap;
+             src: url('../assets/fonts/Ping-AR-LT-Black.woff2') format('woff2');
+             unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
 
-/* والمتنُ يُسمّى بالاسم الجديد كذلك، فمن قرأ الوسمَ عرف بأيّ خطٍّ يُرسم */
-html[data-skin="flat"] body {
-  font-family: 'Ping AR LT', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
-}
-
-/* ---------- وأربعُ قواعدَ تذكر الاسمَ القديم صراحةً ----------
-   التحويلُ أعلاه يكفي للرسم، لكنّ المتصفّح رآه اسمين فجلب الملفَّ القديم
-   كذلك (‎IBMPlexSansArabic-Bold.ttf‎ — ٢٤٨ كيلو بلا فائدة، وسببُه
-   ‎.cd-mtab__k‎ وحدَها بوزنها الثقيل). فتُسمّى الأربعُ بالاسم الجديد،
-   فلا يبقى في الصفحة طالبٌ للقديم. */
-html[data-skin="flat"] .cd-mtab__k,
-html[data-skin="flat"] .pkedit .pkh-chip .tp-add,
-html[data-skin="flat"] .fmn,
-html[data-skin="flat"] .iom-mn,
-html[data-skin="flat"] .iom-sub {
-  font-family: 'Ping AR LT', 'Segoe UI', Tahoma, sans-serif;
-}
-
-/* ---------- ولا يبقى الاسمُ القديم في مكدَّسٍ واحد ----------
-   ‎.side-logo‎ مكدَّسُه ‎'KFUPM Display', 'IBM Plex Sans Arabic', …‎ — والأوّلُ
-   محوَّلٌ فيُرسم به، لكنّ الثاني يبقى مذكورًا فيجلبه المتصفّحُ احتياطًا.
-   فيُسمّى المكدَّسُ بالجديدين وحدَهما. */
-html[data-skin="flat"] .side-logo,
-html[data-skin="flat"] h1, html[data-skin="flat"] h2,
-html[data-skin="flat"] h3, html[data-skin="flat"] h4,
-html[data-skin="flat"] .mmodal__title,
-html[data-skin="flat"] .bkface,
-html[data-skin="flat"] .bkface i,
-html[data-skin="flat"] .bkface b,
-html[data-skin="flat"] .bkface span {
-  font-family: 'HT Heliopolis', 'Ping AR LT', 'Segoe UI', Tahoma, sans-serif;
-}
+/* والمتنُ يُسمّى بالزوج صراحةً، فمن قرأ الوسمَ عرف بأيّ خطٍّ يُرسم */
+html[data-skin="flat"] body { font-family: 'Gellix', 'Ping AR LT', 'Segoe UI', Tahoma, sans-serif; }
