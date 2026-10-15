@@ -361,7 +361,11 @@ export async function onRequest(ctx) {
 
       await db.prepare('UPDATE users SET seen = ? WHERE id = ?').bind(now(), u.id).run();
       const tok = await startSession(db, u.id, request.headers.get('user-agent'));
-      return J({ user: publicUser(u) }, 200, { 'set-cookie': cookie(tok, SESSION_DAYS) });
+      /* والرمزُ في المتن كما في أخواتها الثلاث. وكان يُردّ كوكيًّا وحدَه:
+         فلمّا افترق أصلُ الصفحة عن أصل الخادم لم يَعبُر الكوكيُّ، فكان
+         الداخلُ يدخل ثمّ يُخرَج عند أوّل تحميلٍ لصفحة — إذ تسأل ‎/me‎
+         بلا رمزٍ فتردّ ‎401‎. والكوكيُّ يبقى لمن كان على أصلٍ واحد. */
+      return J({ user: publicUser(u), tok }, 200, { 'set-cookie': cookie(tok, SESSION_DAYS) });
     }
 
     return J({ error: 'not-found' }, 404);
