@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حارس الزجاج — _vglass</title>
+<style>
+  :root{ --bg:#fbfaf9; --panel:#fff; --ink:#37352f; --dim:#7a766e; --line:#e7e5e1;
+         --ok:#166534; --okbg:#f0fdf4; --bad:#9a1c1c; --badbg:#fef2f2; }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#191919; --panel:#202020; --ink:#e6e6e4; --dim:#908d87; --line:#2f2f2f;
+           --ok:#86efac; --okbg:#14211a; --bad:#fca5a5; --badbg:#2a1616; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;
+       font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;font-size:14px}
+  .wrap{max-width:860px;margin:0 auto;padding:26px 18px 70px}
+  h1{font-size:20px;margin:0 0 3px} .sub{color:var(--dim);font-size:13px;margin:0 0 20px}
+  .verdict{border-radius:14px;padding:14px 18px;margin:0 0 18px;font-weight:700}
+  .verdict.ok{background:var(--okbg);color:var(--ok)} .verdict.bad{background:var(--badbg);color:var(--bad)}
+  table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:13px}
+  th,td{text-align:start;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11.5px}
+  td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .p{color:var(--ok);font-weight:700} .f{color:var(--bad);font-weight:700}
+  code{font-family:"Cascadia Mono",Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+  h2{font-size:15px;margin:22px 0 6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>حارس الزجاج</h1>
+  <p class="sub">يقرأ <code>platform/index.html</code> من مصدره ويُعيد الحساب. لا يُنشر تعديلٌ وهو أحمر.</p>
+  <div class="verdict" id="verdict">…يقرأ</div>
+  <div id="out"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  /* ============================================================
+     الحارسُ يقرأ المصدرَ لا الصفحةَ المرسومة
+     ============================================================
+     لو فحص الصفحةَ الحيّةَ لَأجاز ما رُسم في متصفّحٍ يدعم كلَّ شيء، وسكت
+     عن سقوط البديل. فيُجلب النصُّ ويُقرأ منه: القيمُ تُستخرج ويُعاد حساب
+     التباين عليها، والقواعدُ الواجبةُ تُطلب بوجودها. */
+  var SRC = 'platform/index.html';
+
+  function srgb(c){ c/=255; return c<=0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+  function lum(p){ return 0.2126*srgb(p[0]) + 0.7152*srgb(p[1]) + 0.0722*srgb(p[2]); }
+  function ratio(a,b){ var l1=lum(a), l2=lum(b), hi=Math.max(l1,l2), lo=Math.min(l1,l2); return (hi+0.05)/(lo+0.05); }
+  function hex(h){ h=h.replace('#',''); if(h.length===3) h=h.split('').map(function(c){return c+c;}).join('');
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; }
+  function over(t,a,b){ return t.map(function(v,i){ return Math.round(v*a + b[i]*(1-a)); }); }
+
+  /* أسوأُ ما يمكن أن يمرّ تحت الزجاج: الطرفان وألوانُ أغلفة المجتمعات */
+  var BACKS = [[255,255,255],[0,0,0],[31,122,133],[141,70,84],[93,74,149],[138,109,47]];
+
+  function grab(src, re, what) {
+    var m = re.exec(src);
+    return m ? m[1].trim() : null;
+  }
+
+  fetch(SRC + '?v=' + Date.now()).then(function (r) { return r.text(); }).then(function (src) {
+    var rows = [], fails = 0;
+    function check(name, pass, got, want) {
+      rows.push({ name:name, pass:pass, got:got, want:want });
+      if (!pass) fails++;
+    }
+
+    /* ---------- ١· القيم تُستخرج من المصدر ---------- */
+    var light = {
+      glass: grab(src, /:root\s*\{[^}]*--glass:\s*([#\w]+)/),
+      mix:   grab(src, /:root\s*\{[^}]*--glass-mix:\s*(\d+)%/),
+      ink:   grab(src, /:root\s*\{[^}]*--glass-ink:\s*([#\w]+)/)
+    };
+    var dark = {
+      glass: grab(src, /data-theme="dark"\]\s*\{[^}]*--glass:\s*([#\w]+)/),
+      mix:   grab(src, /data-theme="dark"\]\s*\{[^}]*--glass-mix:\s*(\d+)%/),
+      ink:   grab(src, /data-theme="dark"\]\s*\{[^}]*--glass-ink:\s*([#\w]+)/)
+    };
+
+    [['فاتح', light], ['داكن', dark]].forEach(function (pair) {
+      var k = pair[0], v = pair[1];
+      if (!v.glass || !v.mix || !v.ink) { check('قيمُ الجلد ' + k, false, 'لم تُقرأ', 'glass/mix/ink'); return; }
+      var worst = Infinity, at = null;
+      BACKS.forEach(function (b) {
+        var s = over(hex(v.glass), (+v.mix)/100, b);
+        var c = ratio(s, hex(v.ink));
+        if (c < worst) { worst = c; at = b; }
+      });
+      check('تباينُ النصّ — ' + k + ' (تعتيم ' + v.mix + '٪)',
+            worst >= 4.5, worst.toFixed(2) + ' فوق rgb(' + at.join(',') + ')', '≥ 4.5');
+    });
+
+    /* ---------- ٢· القواعدُ الواجبةُ موجودة ---------- */
+    check('سلّمُ الدعم — الزجاجُ داخل @supports',
+          /@supports\s*\(\((?:-webkit-)?backdrop-filter/.test(src), 'موجود', '@supports');
+    check('البديلُ المصمت — prefers-reduced-transparency',
+          /prefers-reduced-transparency:\s*reduce/.test(src), 'موجود', 'media query');
+    check('الانكسارُ داخل سلّمه — @supports url()',
+          /@supports\s*\(backdrop-filter:\s*url\(/.test(src), 'موجود', '@supports url()');
+    check('الحركةُ تحترم prefers-reduced-motion',
+          /prefers-reduced-motion:\s*no-preference/.test(src), 'موجود', 'media query');
+    check('خريطةُ الإزاحة مضمَّنةٌ لا مجلوبة',
+          /feDisplacementMap/.test(src) && !/feImage[^>]*href="https?:/.test(src),
+          'مضمَّنة', 'بلا طلب شبكة');
+
+    /* ---------- ٣· لا سطحَ مصمتًا داخل اللوح ---------- */
+    var sideCss = src.slice(src.indexOf('داخلُ اللوح'), src.indexOf('م٤ · الشريطُ لوحٌ عائم'));
+    var opaque = (sideCss.match(/background:\s*#[0-9a-f]{3,6}\b/gi) || [])
+                 .filter(function (x) { return !/transparent/.test(x); });
+    check('لا لونَ مصمتًا في عناصر اللوح', opaque.length === 0,
+          opaque.length ? opaque.join(' · ') : 'صفر', 'صفر');
+
+    /* ---------- الحكم ---------- */
+    var v = document.getElementById('verdict');
+    v.className = 'verdict ' + (fails ? 'bad' : 'ok');
+    v.textContent = fails ? ('أحمر — ' + fails + ' فحصًا سقط. لا يُنشر.')
+                          : ('أخضر — ' + rows.length + ' فحصًا مرّ.');
+
+    document.getElementById('out').innerHTML =
+      '<table><thead><tr><th>الفحص</th><th>ما وُجد</th><th>المطلوب</th><th></th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><td>' + r.name + '</td><td class="n">' + r.got + '</td><td class="n">' + r.want +
+               '</td><td class="' + (r.pass ? 'p' : 'f') + '">' + (r.pass ? '✓' : '✗') + '</td></tr>';
+      }).join('') + '</tbody></table>' +
+      '<h2>كيف يُقرأ</h2><p class="sub">التباينُ محسوبٌ على ستّ خلفيّاتٍ — أبيضُ وأسودُ وألوانُ الأغلفة الأربعة — ' +
+      'ويُؤخذ أسوأُها. فالرقمُ المعروض هو الحدُّ الأدنى لا المتوسّط.</p>';
+  }).catch(function (e) {
+    var v = document.getElementById('verdict');
+    v.className = 'verdict bad';
+    v.textContent = 'تعذّر قراءةُ المصدر — افتح الصفحةَ من خادمٍ محلّيّ لا من ملفّ.';
+  });
+})();
+</script>
+</body>
+</html>
