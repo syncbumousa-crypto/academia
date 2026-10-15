@@ -1046,7 +1046,9 @@
         document.getElementById('com-cover').style.background =
           'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
         document.getElementById('com-name').textContent = lang() ? c.en : c.ar;
-        document.getElementById('com-head').hidden = false;
+        /* ولا غلافَ فوق الركن: الأترامُ أوّلَ ما تقع عليه العين. والغلافُ
+           لمكتبة المجتمع وحدها، وموضعُك معلومٌ من الدرج المضيء. */
+        document.getElementById('com-head').hidden = nook;
         paintMine();
         ex.hidden = true;
         document.getElementById('panel-nook-soon').hidden = true;
