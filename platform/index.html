@@ -323,16 +323,18 @@
          لا موضعُ أمر، والرأسُ حيث تبدأ العينُ في الشريط. */
       width: 30px; height: 30px; border-radius: 50%; padding: 0; border: 0;
       top: calc(var(--glass-gap) + 8px); transform: none;
-      /* مفتوحًا تركب حرفَ اللوح ولا تدخل عمودَ المحتوى: حافّتُها اليسرى
-         داخلَ حدّ الحشو، فلا تُغطّي عنوانًا مثل «مجتمعات». */
-      right: calc(var(--side-w) + var(--glass-gap) - 22px);
+      /* مفتوحًا: في منتصف الممرّ بين حرف اللوح وأوّل عنوانٍ في المحتوى.
+         والممرُّ محسوبٌ لا مقدَّر — حرفُ اللوح عند ‎side-w + gap‎، وطرفُ
+         العنوان عند ‎side-w + 2gap + حشو اللوحة‎. فالمركزُ منتصفُهما،
+         ناقصًا نصفَ قطر الدائرة. فتتبع أيَّ تغييرٍ في العرض أو الفجوة. */
+      right: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
       background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
       color: var(--c-kfupm);
       box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
       transition: right .25s ease, left .25s ease, color .15s, transform .15s;
     }
     html[data-lang="en"] .side-handle {
-      right: auto; left: calc(var(--side-w) + var(--glass-gap) - 22px);
+      right: auto; left: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
       border: 0; border-radius: 50%;
       box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
     }
