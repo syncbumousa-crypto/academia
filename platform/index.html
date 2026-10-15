@@ -52,7 +52,24 @@
        يكتب نصَّ هذا التاب عند تبديل اللغة بلا حارس — فحذفُ الزرّ يُسقط
        الترجمةَ كلَّها على الموقعين. فالإخفاءُ ههنا، والمحرّكُ لا يُمَسّ. */
     .sidebar .tabs button[data-tab="market"] { display: none; }
-    #panel-market { display: none !important; }
+
+    /* رأسُ المجتمع: غلافٌ عريضٌ عليه اسمُه وزرُّ رجوع، يعلو مكتبتَه.
+       والمكتبةُ تحته هي هي: بحثُها وتصنيفاتُها وتاباتُ المادّة لم تُمَسّ. */
+    .com-head  { margin: 0 0 18px; }
+    .com-cover { position: relative; display: flex; align-items: flex-end;
+                 min-height: clamp(112px, 16vw, 172px); padding: 16px 20px;
+                 border-radius: 16px; overflow: hidden; color: #fff; }
+    .com-cover h2 { margin: 0; font-size: clamp(21px, 3.1vw, 33px); font-weight: 700;
+                    text-shadow: 0 1px 12px rgba(0,0,0,.32); }
+    .com-cover .ex-cover-m { width: 29px; opacity: .45; inset-inline-end: 17px; bottom: 15px; }
+    .com-back  { position: absolute; inset-inline-start: 13px; top: 13px; z-index: 2;
+                 width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 0;
+                 background: rgba(0,0,0,.34); color: #fff; display: grid; place-items: center;
+                 transition: background .15s; }
+    .com-back:hover { background: rgba(0,0,0,.54); }
+    .com-back svg { width: 17px; height: 17px; }
+    /* سهمُ الرجوع يشير إلى حيث جئت: يمينًا في العربيّة ويسارًا في الإنجليزيّة */
+    html[dir="ltr"] .com-back svg { transform: scaleX(-1); }
 
     /* صفوفٌ تُمرَّر أفقيًّا على طريقة نتفلكس وثمانية: عنوانٌ في مبدأ القراءة
        (يمينُ الصفحة في العربيّة) وتحته شريطُ أغلفةٍ ينزلق. ولا شيءَ ههنا
@@ -295,6 +312,17 @@
   </section>
 
   <section class="panel" id="panel-market" hidden>
+
+    <!-- رأسُ المجتمع — يُكشف متى دخلتَ مجتمعًا من «استكشاف» -->
+    <div class="com-head" id="com-head" hidden>
+      <div class="com-cover" id="com-cover">
+        <button class="com-back" id="com-back" type="button" aria-label="رجوع" title="رجوع">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <h2 id="com-name"></h2>
+        <svg class="ex-cover-m" viewBox="-155 57.49 310 244.51" fill="currentColor" aria-hidden="true"><path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg>
+      </div>
+    </div>
 
     <!-- مستطيل السوق: أعلاه البحث والتصنيفات، وتحته سطر كتب واحد يُمرَّر أفقيًا -->
     <div class="market-box">
@@ -708,11 +736,12 @@
           var p = document.getElementById(id); if (p) p.hidden = true;
         });
         ex.hidden = false;
+        var ch = document.getElementById('com-head'); if (ch) ch.hidden = true;
         document.querySelectorAll('.tabs button').forEach(function (x) {
           x.classList.toggle('is-active', x.dataset.tab === 'explore');
         });
       }
-      new MutationObserver(function () { if (!mk.hidden) toExplore(); })
+      new MutationObserver(function () { if (!mk.hidden && !inCom) toExplore(); })
         .observe(mk, { attributes: true, attributeFilter: ['hidden'] });
 
       /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
@@ -759,7 +788,10 @@
                     (c.soon ? '' : '<s>' + esc(c.en) + '</s>') + '</div>';
           return c.soon
             ? '<div class="ex-card is-soon">' + cover + cap + '</div>'
-            : '<a class="ex-card" href="' + c.href + '">' + cover + cap + '</a>';
+            /* الرابطُ يبقى في ‎href‎ وإن كان الفتحُ في مكانه: من فتحه في لسانٍ
+               جديدٍ أو عطبت جافاسكربتُه وجد موقعَ المجتمع لا زرًّا ميّتًا */
+            : '<a class="ex-card" href="' + c.href + '" data-com="' + COMS.indexOf(c) + '">' +
+              cover + cap + '</a>';
         }).join('');
       }
 
@@ -800,6 +832,56 @@
         window.addEventListener('resize', upd);
         setTimeout(upd, 60);
       }
+
+      /* ===== الدخولُ إلى مجتمع =====
+         الجذرُ بلا مكتبةٍ خاصّةٍ به، ومكتبةُ المجتمع تُفتح داخلَه لا بالانتقال
+         إلى موقعٍ آخر: يُكشف رأسُ المجتمع ثمّ لوحُ المكتبة كما هو — بحثُه
+         وتصنيفاتُه وتاباتُ المادّة من «المادّة» إلى «البطاقات والملخّصات».
+         ولا يُبنى شيءٌ من جديد، فما بُني مرّةً لا يُكتب مرّتين. */
+      var inCom = false;
+      /* المُمَرَّرُ في هذه الصفحة هو ‎body‎ لا النافذة — قِيس فوُجد. فتُمسح
+         الثلاثةُ معًا، إذ تختلف بين المتصفّحات وبين أوضاع الصفحة. */
+      function top() {
+        try { window.scrollTo(0, 0); } catch (e) {}
+        document.body.scrollTop = 0;
+        if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+      }
+      function openCom(c) {
+        inCom = true;
+        document.getElementById('com-cover').style.background =
+          'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
+        document.getElementById('com-name').textContent = c.ar;
+        document.getElementById('com-head').hidden = false;
+        ex.hidden = true;
+        mk.hidden = false;
+        top();
+        try { history.pushState({ ac: 'com' }, '', '#' + (c.en || 'community')); } catch (e) {}
+      }
+      /* الرجوعُ واحدٌ سواءٌ جاء من الزرّ أو من زرّ المتصفّح */
+      function closeCom(fromPop) {
+        if (!inCom) return;
+        inCom = false;
+        document.getElementById('com-head').hidden = true;
+        mk.hidden = true;
+        ex.hidden = false;
+        top();
+        if (!fromPop) { try { history.back(); } catch (e) {} }
+      }
+      document.getElementById('ex-coms').addEventListener('click', function (e) {
+        var a = e.target.closest('a[data-com]');
+        if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+        e.preventDefault();
+        openCom(COMS[+a.dataset.com]);
+      });
+      document.getElementById('com-back').addEventListener('click', function () { closeCom(false); });
+      window.addEventListener('popstate', function () { closeCom(true); });
+      /* ومغادرةُ المجتمع بتابٍ آخر مغادرةٌ أيضًا، وإلّا بقي الحارسُ معطَّلًا */
+      document.getElementById('sidebar').addEventListener('click', function (e) {
+        if (e.target.closest('button[data-tab]')) {
+          inCom = false;
+          document.getElementById('com-head').hidden = true;
+        }
+      });
 
       document.addEventListener('DOMContentLoaded', function () {
         buildComs(); buildBooks(); label();
