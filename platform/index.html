@@ -111,11 +111,36 @@
     /* المجتمعات: ‎١٦:٩‎ — مقاسُ مصغَّرة يوتيوب، وهو مقاسُ صفّ نتفلكس كذلك */
     .ex-strip--com .ex-card  { width: clamp(196px, 25vw, 300px); }
     .ex-strip--com .ex-cover { aspect-ratio: 16 / 9; border: 0; }
-    .ex-cover-t { color: #fff; font-size: clamp(18px, 2.4vw, 26px); font-weight: 700;
-                  text-shadow: 0 1px 10px rgba(0,0,0,.28); }
+    /* ===== الغلافُ صورةٌ وحجاب =====
+       الحجابُ الأسودُ ليس زينةً وحده: إضاءةُ الصورة تختلف من ركنٍ إلى ركن،
+       والاسمُ الأبيضُ يضيع على فاتحها. فهو يُثبّت الأرضيّةَ تحت الاسم
+       ويُعمّق الحافّتين — وذلك ما يصنع الفخامة. وأثقلُ طرفيه أسفلُ لأنّ
+       الاسمَ يقف في الوسط والعينَ تنزل إليه. */
+    .ex-shot  { position: absolute; inset: 0; width: 100%; height: 100%;
+                object-fit: cover; display: block; transition: transform .45s ease; }
+    a.ex-face:hover .ex-shot, a.ex-face:focus-visible .ex-shot { transform: scale(1.05); }
+    /* والحجابُ طبقتان لا واحدة:
+       ١· بِركةٌ بيضاويّةٌ وسط الغلاف تحت الاسم، لها هضبةٌ ثابتةٌ إلى ٣٦٪
+          ثمّ تنحدر. ولولا الهضبةُ لانحسر السوادُ عن طرفَي الكلمة فسقط
+          تباينُها على صورةٍ فاتحةٍ (ثوبٌ أبيضُ في قاعة).
+       ٢· وعمودٌ يُغرق الأعلى قليلًا والأسفلَ كثيرًا، ويترك الوسطَ‑الأعلى
+          صافيًا. فالصورةُ تبقى حيّةً ولا تُطمس تحت ستارٍ مستوٍ.
+       وفي مركز البِركة ‎.60‎: أشدُّ ما يمكن أن يقع تحتها بياضٌ خالصٌ،
+       فيصير ‎102‎ ونسبةُ الأبيض فوقه ‎5.7:1‎ — فوق البوّابة بلا صورةٍ بعينها. */
+    .ex-veil  { position: absolute; inset: 0; pointer-events: none;
+                background:
+                  radial-gradient(60% 70% at 50% 50%, rgba(0,0,0,.60) 0%, rgba(0,0,0,.55) 36%,
+                                                     rgba(0,0,0,0) 76%),
+                  linear-gradient(180deg, rgba(0,0,0,.48) 0%, rgba(0,0,0,.04) 30%,
+                                          rgba(0,0,0,.06) 50%, rgba(0,0,0,.88) 100%); }
+    .ex-cover-t { position: relative; color: #fff; font-size: clamp(18px, 2.4vw, 26px);
+                  font-weight: 700; letter-spacing: .005em;
+                  text-shadow: 0 2px 16px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.45); }
     .ex-cover-m { position: absolute; inset-inline-end: 11px; bottom: 10px;
                   width: 21px; color: #fff; opacity: .45; }
-    .ex-card.is-soon .ex-cover { filter: saturate(.3) brightness(.85); }
+    /* و«قريبًا» تُخفَت ولا تُقتَل: مع التدرّجات كان نزعُ اللون يكفي، ومع
+       الصور يُفسدها. والكلمةُ تحتها كافيةٌ بيانًا، فيُكتفى بخفضٍ يسير. */
+    .ex-card.is-soon .ex-cover { filter: saturate(.74) brightness(.82); }
     .ex-card.is-soon { cursor: default; }
 
     /* الكتب: غلافُ الكتاب قائمٌ لا مضطجع، فيُترك على نسبته */
@@ -1234,15 +1259,17 @@
 
 
       /* ===== الصفّان =====
-         المجتمعاتُ أغلفتُها مرسومةٌ ههنا لا مرفوعة: تدرّجٌ ولونٌ لكلّ واحد
-         وعليه اسمُه وختمُ لُب. ومتى جاءت صورةٌ حقيقيّةٌ وُضعت مكانَ التدرّج
-         بسطرٍ واحد (‎img‎ داخل ‎.ex-cover‎). والكتبُ أغلفتُها موجودةٌ أصلًا في
-         ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
+         أغلفةُ المجتمعات صورٌ في ‎assets/communities‎، وفوق كلٍّ منها حجابٌ
+         أسودُ متدرّج. والتدرّجُ القديم (‎a‎ و‎b‎) باقٍ لا لغوًا: هو أرضيّةُ
+         الغلاف قبل أن تصل صورتُه، وهو لونُ النقطة تحت الكتاب ونقطةِ الدرج
+         — وصورةٌ في خمسةَ عشرَ بكسلًا طينٌ لا صورة. والكتبُ أغلفتُها موجودةٌ
+         أصلًا في ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
       var COMS = [
-        { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
-        { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', soon:1,               a:'#3a2d18', b:'#8a6d2f' },
-        { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1,               a:'#2a2142', b:'#5d4a95' },
-        { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1,               a:'#3b1f26', b:'#8d4654' }
+        { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', img:'maslakh.jpg',  a:'#0e3b41', b:'#1f7a85' },
+        { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', soon:1, img:'mudarraj.jpg', a:'#3a2d18', b:'#8a6d2f' },
+        { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1, img:'qudurat.webp', a:'#2a2142', b:'#5d4a95' },
+        { id:'tahsili',  ar:'التحصيلي', en:'Tahsili',   soon:1, img:'tahsili.jpg',  a:'#1e3326', b:'#3f7a55' },
+        { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1, img:'ielts.jpg',    a:'#3b1f26', b:'#8d4654' }
       ];
 
       /* ===== مجتمعاتي =====
@@ -1279,7 +1306,12 @@
       function buildComs() {
         var i = lang();
         document.getElementById('ex-coms').innerHTML = COMS.map(function (c) {
+          /* الصورةُ عنصرٌ لا خلفيّة: ‎loading="lazy"‎ لا يعمل على الخلفيّات،
+             وصفٌّ من خمسةِ أغلفةٍ يُحمَّل كلُّه قبل أن يُرى منه اثنان. والتدرّجُ
+             تحتها يبقى: هو ما يُرى في الومضة الأولى وإن تعذّرت الصورة. */
           var cover = '<div class="ex-cover" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')">' +
+                      (c.img ? '<img class="ex-shot" loading="lazy" decoding="async" alt="" src="../assets/communities/' + c.img + '">' : '') +
+                      '<span class="ex-veil"></span>' +
                       '<span class="ex-cover-t">' + esc(i ? c.en : c.ar) + '</span></div>';
           /* والزرُّ خارجَ الوصلة لا بداخلها: لو سكن فيها لفتح المجتمعَ من ضغطه */
           var cap = '<div class="ex-cap"><b>' +
@@ -1402,7 +1434,12 @@
         inCom = true; curCom = c;
         var nook = mode === 'nook';
         document.getElementById('com-open').href = c.href;
+        /* ورأسُ المجتمع يلبس صورتَه. والترتيبُ في ‎background‎ من فوقُ إلى
+           تحت: الحجابُ أوّلًا، ثمّ الصورةُ، ثمّ التدرّجُ أرضيّةً لها. */
         document.getElementById('com-cover').style.background =
+          (c.img ? 'linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.18) 38%, rgba(0,0,0,.76) 100%),'
+                 + ' url("../assets/communities/' + c.img + '") center/cover no-repeat,'
+                 : '') +
           'linear-gradient(135deg,' + c.a + ',' + c.b + ')';
         document.getElementById('com-name').textContent = lang() ? c.en : c.ar;
         /* ولا غلافَ فوق الركن: الأترامُ أوّلَ ما تقع عليه العين. والغلافُ
