@@ -106,6 +106,20 @@
     .ex-card.is-soon { cursor: default; }
 
     /* الكتب: غلافُ الكتاب قائمٌ لا مضطجع، فيُترك على نسبته */
+    /* شارةُ المجتمع تحت الكتاب: دائرةٌ بلون غلافه واسمُه — فيُرى الارتباطُ
+       من غير قراءة. وهي وصلةٌ تفتح المجتمعَ كبطاقته في الصفّ الأوّل. */
+    .ex-own   { display: flex; align-items: center; gap: 6px; margin-top: 5px;
+                font-size: 11.5px; color: var(--c-ink-soft); text-decoration: none; }
+    a.ex-own:hover { color: var(--c-kfupm); }
+    .ex-dot   { width: 15px; height: 15px; border-radius: 50%; flex: none; }
+
+    /* رفٌّ موعودٌ لم يُملأ بعد: أغلفةٌ مرسومةٌ بالخطّ المتقطّع لا كتبٌ مخترَعة */
+    .ex-chip  { font-size: 11px; font-weight: 700; color: var(--c-ink-soft);
+                border: 1px solid var(--border); border-radius: 99px; padding: 1px 9px; }
+    .ex-card.is-ph .ex-cover { border-style: dashed; background: transparent;
+                               display: grid; place-items: center; }
+    .ex-card.is-ph svg { width: 26px; opacity: .17; color: var(--c-ink-soft); }
+
     .ex-strip--books .ex-card  { width: clamp(112px, 12.5vw, 152px); }
     .ex-strip--books .ex-cover { aspect-ratio: 2 / 3; background: var(--surface); }
     .ex-strip--books img       { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -302,13 +316,8 @@
       </div>
     </section>
 
-    <section class="ex-row">
-      <div class="ex-head"><h2 class="ex-h" id="ex-h2">كتب</h2>
-        <p class="ex-sub" id="ex-sub2">المقرّرات وأغلفتها.</p></div>
-      <div class="ex-wrap">
-        <div class="ex-strip ex-strip--books" id="ex-books"></div>
-      </div>
-    </section>
+    <!-- رفوفُ الكتب: تُولَّد من جدولٍ واحد، فزيادةُ رفٍّ سطرٌ فيه -->
+    <div id="ex-shelves"></div>
   </section>
 
   <section class="panel" id="panel-market" hidden>
@@ -747,21 +756,36 @@
       /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
       var T = { tab:['استكشاف','Explore'], h1:['مجتمعات','Communities'],
                 s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
-                h2:['كتب','Books'], s2:['المقرّرات وأغلفتها.','The courses and their covers.'] };
+                soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'] };
+      function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
+
+      /* الرفوف: جدولٌ واحدٌ يُقرأ، فزيادةُ رفٍّ سطرٌ فيه لا قسمٌ في الصفحة.
+         و«كتب أكاديميّة» وحدَه مملوء — كتبُه من المسلخ، ولذلك تحت كلِّ كتابٍ
+         دائرتُه واسمُه. وما سواه رفٌّ موعودٌ يُعرض خاويًا ولا يُخترع له كتب. */
+      var SHELVES = [
+        { ar:'كتب أكاديمية', en:'Academic books', com:0 },
+        { ar:'كتب ثقافية',   en:'Culture books' },
+        { ar:'روايات',       en:'Novels' },
+        { ar:'كتب إسلامية',  en:'Islamic books' }
+      ];
       function label() {
-        var i = document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0;
+        var i = lang();
         document.getElementById('tab-explore-tx').textContent = T.tab[i];
         document.getElementById('ex-h').textContent   = T.h1[i];
         document.getElementById('ex-sub').textContent = T.s1[i];
-        document.getElementById('ex-h2').textContent  = T.h2[i];
-        document.getElementById('ex-sub2').textContent= T.s2[i];
-        document.querySelectorAll('.ex-card.is-soon .ex-cap b').forEach(function (b) {
-          b.textContent = i ? 'Soon' : 'قريبًا';
+      }
+
+      function paint() {
+        label(); buildComs(); buildShelves();
+        /* الأسهمُ تُعلَّق على ما لم يُعلَّق عليه بعد: الرفوفُ تُبنى من جديدٍ
+           عند تبديل اللغة، فلولا العلامةُ لتضاعفت أزرارُها */
+        document.querySelectorAll('#panel-explore .ex-wrap').forEach(function (w) {
+          if (w.dataset.nav) return; w.dataset.nav = '1'; wireNav(w);
         });
       }
-      new MutationObserver(label).observe(document.documentElement,
+      new MutationObserver(paint).observe(document.documentElement,
         { attributes: true, attributeFilter: ['data-lang'] });
-      label();
+
 
       /* ===== الصفّان =====
          المجتمعاتُ أغلفتُها مرسومةٌ ههنا لا مرفوعة: تدرّجٌ ولونٌ لكلّ واحد
@@ -795,14 +819,39 @@
         }).join('');
       }
 
-      function buildBooks() {
-        if (typeof COVERS === 'undefined') return;           /* الورقةُ لم تصل بعد */
-        var html = Object.keys(COVERS).map(function (code) {
+      /* شارةُ المجتمع: دائرتُه بلون غلافه، واسمُه، ووصلةٌ تفتحه */
+      function ownOf(ci) {
+        var c = COMS[ci], i = lang();
+        return '<a class="ex-own" href="' + c.href + '" data-com="' + ci + '">' +
+               '<i class="ex-dot" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')"></i>' +
+               '<span>' + esc(i ? c.en : c.ar) + '</span></a>';
+      }
+      function bookCards(sh) {
+        if (sh.com === undefined || typeof COVERS === 'undefined') {
+          var ph = '<div class="ex-card is-ph"><div class="ex-cover">' +
+                   '<svg viewBox="-155 57.49 310 244.51" fill="currentColor" aria-hidden="true">' +
+                   '<path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 ' +
+                   'A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/></svg></div></div>';
+          return new Array(7).join('|').split('|').map(function () { return ph; }).join('');
+        }
+        var own = ownOf(sh.com);
+        return Object.keys(COVERS).map(function (code) {
           return '<div class="ex-card"><div class="ex-cover">' +
                  '<img loading="lazy" alt="' + esc(code) + '" src="../' + COVERS[code] + '">' +
-                 '</div><div class="ex-cap"><b>' + esc(code) + '</b></div></div>';
+                 '</div><div class="ex-cap"><b>' + esc(code) + '</b></div>' + own + '</div>';
         }).join('');
-        document.getElementById('ex-books').innerHTML = html;
+      }
+      function buildShelves() {
+        var i = lang();
+        document.getElementById('ex-shelves').innerHTML = SHELVES.map(function (sh) {
+          var open = sh.com !== undefined;
+          return '<section class="ex-row"><div class="ex-head">' +
+                   '<h2 class="ex-h">' + esc(i ? sh.en : sh.ar) + '</h2>' +
+                   (open ? '' : '<span class="ex-chip">' + T.soon[i] + '</span>' +
+                                '<p class="ex-sub">' + T.empty[i] + '</p>') +
+                 '</div><div class="ex-wrap"><div class="ex-strip ex-strip--books">' +
+                 bookCards(sh) + '</div></div></section>';
+        }).join('');
       }
 
       /* سهما التمرير: الاتّجاهُ يُؤخذ من الصفحة لا يُفترض — ‎scrollLeft‎ يسير
@@ -867,7 +916,7 @@
         top();
         if (!fromPop) { try { history.back(); } catch (e) {} }
       }
-      document.getElementById('ex-coms').addEventListener('click', function (e) {
+      document.getElementById('panel-explore').addEventListener('click', function (e) {
         var a = e.target.closest('a[data-com]');
         if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
         e.preventDefault();
@@ -883,10 +932,7 @@
         }
       });
 
-      document.addEventListener('DOMContentLoaded', function () {
-        buildComs(); buildBooks(); label();
-        document.querySelectorAll('#panel-explore .ex-wrap').forEach(wireNav);
-      });
+      document.addEventListener('DOMContentLoaded', paint);
     })();
   </script>
 
