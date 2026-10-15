@@ -3,7 +3,7 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-skin="flat" data-theme="light" spellcheck="false">
+<html lang="ar" dir="rtl" data-skin="flat" data-theme="light" spellcheck="false" data-glass="liquid">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -186,13 +186,15 @@
     :root {
       --pnl-pad: clamp(16px, 3vw, 32px);
       --glass:      #f1f0ee;
-      --glass-mix:  66%;   /* أقلُّ ما يَعبُر 4.5:1 فوق أسودَ خالص (4.58) */
+      --glass-mix:  54%;   /* أصفى، لأنّ الحبرَ اشتدّ — والبوّابةُ ما زالت 4.5 */
+      --glass-ink:  #1b1a18;
       --glass-edge: rgba(255,255,255,.85);
       --glass-cast: rgba(0,0,0,.10);
     }
     html[data-theme="dark"] {
       --glass:      #252525;
-      --glass-mix:  70%;   /* وكذلك فوق أبيضَ خالص في الداكن (4.59) */
+      --glass-mix:  63%;
+      --glass-ink:  #ffffff;
       --glass-edge: rgba(255,255,255,.09);
       --glass-cast: rgba(0,0,0,.30);
     }
@@ -205,6 +207,73 @@
          الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
       scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
     }
+
+
+    /* ============================================================
+       م٤ · الشريطُ لوحٌ عائمٌ لا جدارٌ ملتصق
+       ============================================================
+       كان يلصق بالحافّات الثلاث فلا حرفَ له يُرى. وزجاجٌ بلا حرفٍ لا يُرى
+       أنّه زجاج. فصار **بطاقةً** تطفو بفجوةٍ من كلّ جانب، بحوافَّ ناعمةٍ
+       كأمثلة ‎glassapp‎، فيَظهر سمكُها ولمعةُ حرفها وظلُّها على ما تحتها. */
+    :root { --glass-gap: 14px; --glass-r: 26px; }
+
+    .sidebar {
+      top: var(--glass-gap); bottom: var(--glass-gap);
+      right: var(--glass-gap); height: auto;
+      border: 0; border-radius: var(--glass-r);
+      overflow-x: hidden;
+    }
+    html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
+    /* والمحتوى يُفسح للوح وفجوته */
+    body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2); }
+    html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2); }
+    /* والمطويُّ يخرج كلَّه ومعه فجوتُه */
+    body.side-closed .sidebar { transform: translateX(calc(100% + var(--glass-gap) * 2)); }
+    html[data-lang="en"] body.side-closed .sidebar { transform: translateX(calc(-100% - var(--glass-gap) * 2)); }
+    body.side-closed { padding-right: 0; }
+    html[data-lang="en"] body.side-closed { padding-left: 0; }
+
+    /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
+    .sidebar .tabs { margin-inline: -4px; }
+    .sidebar .tabs button { border-radius: 12px; }
+    .sidebar .tabs .tab-wrap { border-top: 0; }
+    .sidebar .tabs button + button { border-top: 0; }
+    .nook-com { border-radius: 10px; }
+
+    /* ============================================================
+       المقبض: دائرةٌ فيها أيقونةُ شريط، لا لسانٌ ملتصقٌ بسهم
+       ============================================================ */
+    .side-handle {
+      width: 38px; height: 38px; border-radius: 50%; padding: 0; border: 0;
+      top: 50%; right: calc(var(--side-w) + var(--glass-gap) * 2 + 10px);
+      background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+      color: var(--c-kfupm);
+      box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
+      transition: right .25s ease, left .25s ease, color .15s, transform .15s;
+    }
+    html[data-lang="en"] .side-handle {
+      right: auto; left: calc(var(--side-w) + var(--glass-gap) * 2 + 10px);
+      border: 0; border-radius: 50%;
+      box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
+    }
+    body.side-closed .side-handle { right: calc(var(--glass-gap) + 4px); }
+    html[data-lang="en"] body.side-closed .side-handle { left: calc(var(--glass-gap) + 4px); }
+    .side-handle:hover { background: color-mix(in srgb, var(--glass) 92%, transparent); transform: translateY(-50%) scale(1.06); }
+    /* الأيقونةُ ثابتةٌ لا تدور: هي تقول «شريط» لا «اتّجاه» */
+    .side-handle svg { width: 17px; height: 17px; transform: none !important; }
+    @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+      .side-handle { -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); }
+    }
+
+    /* ===== مقايضةٌ مقيسة =====
+       الزجاجُ الأصفى يُسقط التباين، والتباينُ شرطٌ لا يُساوَم. فبدل أن
+       أُثقّل اللوحَ أشدَدتُ الحبر: في الفاتح ‎#1b1a18‎ بدل ‎#37352f‎، وفي
+       الداكن أبيضُ خالص. فنزل أقلُّ تعتيمٍ يَعبُر البوّابة من ٦٦ إلى ٥٤،
+       ومن ٧٠ إلى ٦٣ — زجاجٌ أصفى بالقياس لا بالتنازل. */
+    .sidebar, .sidebar .side-logo, .sidebar .tabs button,
+    .sidebar .nook-com, .sidebar .side-ctl button { color: var(--glass-ink); }
+    .sidebar .tabs button.is-active { color: #fff; }
+    .sidebar .nook-com span { color: inherit; opacity: .82; }
 
     /* م٢ · السطح الزجاجيّ */
     @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
@@ -221,6 +290,15 @@
       }
       html[data-skin][data-lang="en"] .sidebar {
         box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
+      }
+
+      /* الدرجةُ الثالثة: الانكسار. تُضاف للسلسلة نفسِها ولا تَستبدلها، فمن
+         لا يدعم ‎url()‎ في الخلفيّة (سفاري وفايرفوكس) يبقى على المثلَّج. */
+      @supports (backdrop-filter: url(#lg-edge)) {
+        html[data-glass="liquid"] .sidebar {
+          -webkit-backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
+                  backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
+        }
       }
     }
     /* ولا شفافيّةَ لمن لا يريدها */
@@ -257,6 +335,20 @@
   </style>
 </head>
 <body>
+
+<!-- ===== م٣ · انكسارُ الحافّة =====
+     خريطةُ إزاحةٍ تُقرأ قناتاها: الحمراءُ تُزيح أفقيًّا، والخضراءُ رأسيًّا.
+     فجعلتُ الخضراءَ ثابتةً (لا إزاحةَ رأسيّة)، والحمراءَ ١٢٨ في الوسط (أي
+     صفرًا) وتندفع إلى طرفيها — فينحني ما خلفَ الزجاج عند حافّتيه ويستوي
+     في وسطه، كشريحةِ زجاجٍ مشطوفةِ الحرفين. وهي مضمَّنةٌ هنا لا ملفًّا:
+     مرشّحٌ ينتظر طلبَ شبكةٍ يُرى بعد أن تُرسم الصفحة. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <filter id="lg-edge" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(255,128,0)'/%3E%3Cstop offset='0.16' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='0.84' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,128,0)'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='8' fill='url(%23g)'/%3E%3C/svg%3E" preserveAspectRatio="none" result="map"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="26"
+                       xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
        يمين مع العربية · يسار مع الإنجليزية (عبر html[data-lang]) -->
@@ -1162,7 +1254,15 @@
         }
       });
 
-      document.addEventListener('DOMContentLoaded', paint);
+      /* أيقونةُ «شريط جانبيّ»: مستطيلٌ وقسمةٌ على جهة الشريط — تُبدَّل ههنا
+         لأنّ المحرّكَ الذي يبنيها مشتركٌ مع المسلخ، وهذا تغييرُ الجذر وحده. */
+      function sideIcon() {
+        var h = document.getElementById('side-handle'); if (!h) return;
+        h.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"' +
+          ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '<rect x="3" y="4.5" width="18" height="15" rx="3.2"/><path d="M15.2 4.5v15"/></svg>';
+      }
+      document.addEventListener('DOMContentLoaded', function () { paint(); sideIcon(); });
     })();
   </script>
 
