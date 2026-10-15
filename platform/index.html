@@ -30,6 +30,17 @@
   <style>
     /* الشعارُ والمبدِّلُ أخوان: فُرجةٌ بينهما أضيقُ من فُرجة الشريط (‎gap:14px‎) */
     .side-head { display: flex; flex-direction: column; gap: 5px; }
+
+    /* الشعارُ والاسمُ قُفلٌ واحد: الرمزُ يتقدّم الاسمَ في القراءتين كلتيهما.
+       والشريطُ يبقى في مجرى العربيّة ولو صارت الصفحةُ إنجليزيّة — قِيسَ فلم
+       ينقلب الصفُّ من نفسه، فيُقلب صراحةً بقاعدةِ ‎data-lang‎ تحتُ.
+       والرمزُ أخٌ لـ‎.side-logo‎ لا ابنٌ لها: المحرّكُ يكتب فيها بـ‎textContent‎
+       عند تبديل اللغة، فما بداخلها يُمحى. */
+    .side-brand { display: flex; align-items: center; justify-content: center; gap: 9px; }
+    .side-mark  { width: 27px; height: auto; flex: none; display: block;
+                  color: var(--c-kfupm); }
+    html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
+    html[data-lang="en"]    .side-brand { flex-direction: row-reverse; }
     .side-com  { display: flex; flex-direction: column; gap: 5px; }
 
     .sc-now {
@@ -77,7 +88,15 @@
          يمحو ما تحته. فهما أخوان في ‎.side-head‎.
          والخياراتُ معروضةٌ ولا تَفعل شيئًا بعدُ — تُوصَل يومَ تُبنى المجتمعات. -->
     <div class="side-head">
-      <div class="side-logo">أكاديميا</div>
+      <div class="side-brand">
+        <!-- «لُب» — قلبٌ بثلاثة رؤوس: ثلاثُ دوائرَ متداخلةٍ وإسفينٌ يمسُّها.
+             الصندوقُ هو مدى الشكل نفسِه بلا حَشْو، فيُقاس بالاسم لا بالفراغ. -->
+        <svg class="side-mark" viewBox="-155 57.49 310 244.51" fill="currentColor"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="لُب">
+          <path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/>
+        </svg>
+        <div class="side-logo">أكاديميا</div>
+      </div>
 
       <div class="side-com" id="side-com">
         <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
