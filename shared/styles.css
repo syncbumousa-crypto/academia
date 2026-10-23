@@ -15765,3 +15765,25 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 .sidebar .langbar button::before { font-size: 12.5px; font-weight: 700; line-height: 1; }
 .sidebar .langbar button[data-lang="en"]::before { content: 'EN'; }
 .sidebar .langbar button[data-lang="ar"]::before { content: 'ع'; font-size: 15px; }
+
+/* ============================================================
+   الصفحةُ الكبرى (‎.mmodal__card.is-page‎) — الخطوةُ الأولى: خاوية
+   ============================================================
+   نافذةٌ من نوافذ البطائق، فلا يُكتب لها هنا إلّا ما يفترق به **سطحُها** عن
+   سطح البطاقة والورقة: صفحةٌ بيضاءُ واحدةٌ تملأ النافذة.
+   وقاعدةُ الطاولة الداكنة تُصيب كلَّ ‎.cd-body‎ ليست ورقةً (سطر ‎#card-modal
+   .cd-body:not(.sh-body)‎)، فتُردّ ههنا بوزنٍ أثقل: معرّفٌ وصنفان. */
+#card-modal .cd-body.pg-body {
+  background: var(--u-bg, #fbfaf9);
+  padding: 0; overflow: auto; display: block;
+}
+.mmodal__card.is-page { display: flex; flex-direction: column; }
+.mmodal__card.is-page .cd-body.pg-body { flex: 1 1 auto; min-height: 0; }
+.pg-sheet { min-height: 100%; padding: 28px 32px; box-sizing: border-box; }
+/* وخواؤها مكتوب: صفحةٌ بيضاءُ صامتةٌ تُقرأ عطبًا لا خطوةً أولى */
+.pg-empty { margin: 0; color: var(--u-dim, #a6a29b); font-size: 13.5px; }
+#card-modal .cd-meta .cd-mid.pg-mid { align-items: center; gap: 8px; min-width: 0; }
+.pg-ttl { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+.pg-ttl svg { width: 17px; height: 17px; flex: none; }
+.pg-ttl b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cd-foot.pg-foot { min-height: 0; }

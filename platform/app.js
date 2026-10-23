@@ -1365,6 +1365,7 @@
       cxEqW: { a: 'كل', r: 'جذر', f: 'تبع' },
       /* ورقة الملخّص */
       shTitle: 'ورقة الملخّص', shRoot: 'الجذر', shPrint: 'طباعة',
+      pgTitle: 'صفحة جديدة', pgEmpty: 'صفحةٌ خاوية — تُملأ في الخطوة التالية',
       shColN: 'رقم', shColQ: 'السؤال', shColA: 'الإجابة',
       shToDark: 'ورقةٌ داكنة', shToLight: 'ورقةٌ فاتحة',
       /* شارةُ الزرّ: كم بطاقةً تُولَد من هذه — تُقرأ صوتًا ولا تُرى نصًّا */
@@ -1770,6 +1771,7 @@
       cxEqTip: (a, o, f) => `${a} cards below · ${o} in this folder · ${f} in its subfolders`,
       cxEqW: { a: 'All', r: 'Root', f: 'Follow' },
       shTitle: 'Summary sheet', shRoot: 'Root', shPrint: 'Print',
+      pgTitle: 'New page', pgEmpty: 'Empty page — filled in the next step',
       shColN: 'No.', shColQ: 'Question', shColA: 'Answer',
       shToDark: 'Dark sheet', shToLight: 'Light sheet',
       cdFaces: n => `${n} card${n === 1 ? '' : 's'}`,
@@ -7972,6 +7974,71 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cdApplyPos(); cdApplySize();
     /* والمقاسُ يُطبَّق بعد الرسم، فيُعاد ضبطُ الورقة على العرض الحقيقيّ لا على الافتراضيّ */
     shFit(w.el.querySelector('.mmodal__card'));
+  }
+  /* ============================================================
+     الصفحةُ الكبرى: نافذةٌ ثالثةٌ في المكدَّس نفسِه
+     ============================================================
+     «إضافة بطاقة» في مساهمة البطائق كانت تفتح بوّابةَ البطاقة (‎openCardDlg‎): دُرجٌ
+     بأنواعها ثمّ حقلان. والكونسبت تبدّل — تُفتح صفحةٌ كبيرةٌ خاوية.
+
+     ولا تُبنى طبقةً جديدةً من الصفر: تدخل ‎cdWins‎ كما دخلتها ورقةُ الملخّص، فترث بذلك
+     **كلَّ** خصائص النوافذ بلا سطرٍ يُكتب لها — لسانُها في الشريط، وطيُّها ونشرُها،
+     وتركيزُها، وسَحبُها، ومقابضُ توسيعها الثمانية، وتتالي مواضعها، وحجبُها بتبديل المادّة.
+     وهذا معنى «نفس خصائص التبويبات»: لا محاكاةٌ لها، بل العضويّةُ فيها.
+
+     ويبقى ترتيبُ الألسنة ترتيبَ الميلاد (‎cdBorn‎) لا ترتيبَ السحب — فسحبُ اللسان
+     لإعادة ترتيبه ليس في النظام بعدُ، وهو بندٌ مستقلّ.
+     ============================================================ */
+  const PG_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"'
+    + ' stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14'
+    + 'a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+  function cxPageOpen(pid) {
+    /* تُظهَر النافذةُ قبل الرسم: المقاسُ يُطبَّق بقياسٍ، والمخفيُّ يَردّ أصفارًا */
+    const m = document.getElementById('card-modal');
+    if (m) { m.hidden = false; m.classList.remove('is-away'); }
+    const el = shWinEl();
+    const w = cdWinState(null, null, el, 'c');
+    w.what = 'page';
+    /* ‎picked‎ شرطُ وجود اللسان: ما لم يُختَر نوعُه لا لسانَ له. والصفحةُ لا نوعَ
+       يُختار لها أصلًا، فهي مختارةٌ بميلادها */
+    w.picked = true;
+    /* وملفُّها معها: الزرُّ قد يُضغط داخلَ مجلدٍ في الشجرة، فتُولد الصفحةُ تعرف أين تنزل */
+    w.pid = pid || null;
+    /* **كبيرةٌ** كما طُلبت — بخلاف الورقة التي تُفتح متواضعةً وتُوسَّع. والحدُّ من الشاشة
+       لا رقمٌ مطلق، فلا تفيض على شاشةٍ صغيرة */
+    w.w = Math.min(innerWidth - 80, 1100);
+    w.h = Math.min(innerHeight - 90, 760);
+    if (cdWins.length) cdCascade();
+    cdWins.push(w);
+    cdFocusWin(w);
+    renderCardDlg();
+    cdApplyPos(); cdApplySize();
+  }
+  /* والرسمُ ينطلق من مسرحه (‎cdStage()‎) لا من المعرّفات: نافذتان على الشاشة تعنيان
+     معرّفًا مكرّرًا، و‎querySelector‎ تأخذ أوّلَه لا الذي تكتب فيه */
+  function renderPageDlg() {
+    const st = cdStage();
+    if (!st) return;
+    const card = st.querySelector('.mmodal__card');
+    if (!card) return;
+    /* الهيكلُ مرّةً واحدة: إعادةُ بنائه في كلّ تركيزٍ تقطع التمرير وتُفقد ما كُتب */
+    if (!card.classList.contains('is-page')) {
+      card.classList.add('is-page');
+      card.innerHTML = '<div class="cd-meta" id="cd-meta"></div>'
+        + '<div class="cd-body pg-body"><div class="pg-sheet"></div></div>'
+        + '<div class="cd-foot pg-foot" id="cd-foot"></div>';
+    }
+    const meta = card.querySelector('.cd-meta');
+    const sheet = card.querySelector('.pg-sheet');
+    /* أزرارُ النافذة من مصدرها المشترك: فلا يفترق سلوكُ الإغلاق والطيّ بين النوافذ */
+    meta.innerHTML = '<div class="cd-bar">' + cdWinBtns() + '</div>'
+      + '<div class="cd-mid pg-mid"><span class="pg-ttl">' + PG_IC
+      + '<b>' + esc(T().pgTitle) + '</b></span></div>';
+    /* وخواؤها مكتوبٌ لا مسكوتٌ عنه: صفحةٌ بيضاءُ بلا كلمةٍ تُقرأ عطبًا لا خطوةً أولى */
+    if (!sheet.dataset.seeded) {
+      sheet.dataset.seeded = '1';
+      sheet.innerHTML = '<p class="pg-empty">' + esc(T().pgEmpty) + '</p>';
+    }
   }
   /* ===== ورقةُ البطاقة التي بين يديك: تُبنى من **ملفّها** لا من تحديد الشجرة =====
      الزرُّ في الشريط السفليّ يسأل: «أرِني الورقةَ التي أنا فيها». وجوابُه ملفُّ البطاقة
@@ -15585,6 +15652,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        و‎liveSync‎ لا تكتب في الدرج إلّا إذا تبدّلت العضويّةُ حقًّا */
     liveSync();
     if (cardDlg.what === 'sheet') { renderSheetDlg(); return; }
+    if (cardDlg.what === 'page') { renderPageDlg(); return; }
     if (cardDlg.what === 'exam') { renderXtDlg(); return; }
     /* و‎gate‎ يبقى ههنا وإن كتبه ‎cdDrawerSync‎ صنفًا على النافذة: هذه الدالّة تقرؤه
        بعدُ لتقف عنده (‎if (gate) return‎) — فلا يُرفع من هنا لأنّه كُتب هناك */
@@ -16513,6 +16581,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const cdFcFaces = c => (c.fs || (c.fs = czFacesOf(c.n) || []));
   function cdMinFace(w) {
     if (w.what === 'sheet') return { ic: CX_BAR_IC.sum, tx: T().shTitle };
+    if (w.what === 'page') return { ic: PG_IC, tx: T().pgTitle };
     /* ولسانُ الاختبار يقول حالَه لا اسمَه: «إعدادات» أو «جارٍ» أو «نتيجة» */
     /* ===== واسمُ النافذة اسمُها لا حالُها =====
        كان لسانُها يقول الطَّورَ («إعدادات الاختبار» ← «الاختبار جارٍ» ← «نتيجة الاختبار»)
@@ -16913,7 +16982,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== نَسَبُ النافذة: مُعرّفُ بطاقتها الأمّ =====
      الوجهُ ينتسب إلى بطاقته، والأمُّ إلى نفسها — فالمعرّفُ واحدٌ لهما. وما سواهما
      (وجهان · متعدّدٌ · ورقةُ ملخّص) لا نسبَ له، فلا يُلَمّ في صدَفة */
-  const cdGid = w => (!w || w.what === 'sheet' || !w.id) ? ''
+  const cdGid = w => (!w || w.what === 'sheet' || w.what === 'page' || !w.id) ? ''
     : (w.ro || w.ctype === 'cloze' || w.ctype === 'io') ? String(w.id) : '';
   /* ورقمُ الميلاد من المعرّف: ‎w17‎ ⇐ ‎17‎. وترتيبُ الشريط ترتيبُ الميلاد لا ترتيبُ البؤرة —
      ‎cdWins‎ يُعاد ترتيبُه بكلّ تركيز، ولو تبعه الشريطُ لَرقصت الألسنةُ كلّما نظرتَ في نافذة */
@@ -26911,7 +26980,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return;
     }
     const cxc = e.target.closest('.cx-addc');
-    if (cxc && edSec() === 'cards') { openCardDlg((cxc.closest('.cx-add') || {}).dataset.pid || null, null); return; }
+    /* الكونسبتُ الجديد: «إضافة بطاقة» تفتح الصفحةَ الكبرى لا بوّابةَ البطاقة.
+       والقديمةُ ‎openCardDlg‎ باقيةٌ يستدعيها سائرُ المداخل (الشجرة · ‎#add=cards‎ · الدُّرج) */
+    if (cxc && edSec() === 'cards') { cxPageOpen((cxc.closest('.cx-add') || {}).dataset.pid || null); return; }
     const cxa = e.target.closest('.cx-addc, .cx-addq, .cx-addf');
     if (cxa) {
       const d = edPack(), wrap = cxa.closest('.cx-add');
