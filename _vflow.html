@@ -38,6 +38,7 @@ async function go(){
   P(n('.cx-del')>=1, 'البطاقةُ نزلت في الرزمة ('+n('.cx-del')+' صفًّا)');
   /* ٣ · الضغطةُ تفتح ورقةَ الملخّص لا نافذةَ بطاقة */
   var addc=q('.cx-addc'); if(addc){ addc.click(); await sleep(2200); }
+  P(n('.pg-box')>=1, 'مربّعاتُ المجلدات مبنيّةٌ ('+n('.pg-box')+')');
   P(n('.mmodal__card.is-sheet')>=1, 'فُتحت ورقةُ الملخّص ('+n('.mmodal__card.is-sheet')+')');
   P(n('.sh-sheet')>=1, 'وفيها ورقةٌ مرسومةٌ ('+n('.sh-sheet')+')');
   /* ٤ · ولا أغلفةَ تفصل — وهذا ما لا تكشفه محاكاةُ النمط */
@@ -49,7 +50,7 @@ async function go(){
   P(names.length>=1, 'فيها '+names.length+' مجلدًا: '+names.join(' · '));
   /* ٦ · وزرُّ «الكلّ» لا يُرسم لواحد */
   P(true,
-    'ألواحٌ تُفتح: '+n('.pg-bar[data-pgx]')+' من '+names.length+' لوحًا');
+    'مربّعاتٌ تُفتح: '+n('.pg-face[data-pgx]')+' من '+names.length+' مربّعًا');
   /* ٧ · وهي خارجَ مسرح الورق فلا تَفسد المُلاءمة */
   var body=q('.mmodal__card.is-sheet .sh-body');
   P(!!st && !!body && !body.contains(st), 'الشجرةُ خارجَ ‎.sh-body‎');

@@ -7585,13 +7585,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        لو وُضع داخلها لَأكل من ارتفاعٍ قِيست عليه المُلاءمةُ قبله، ففاضت الورقةُ بقدره.
        وهو أخوها لا ابنُها، فنقصانُ ارتفاعها يوقظ مرقابَ المقاس فتُعاد المُلاءمةُ على
        الجوف الحقيقيّ. ولا يُرسم إلّا لورقةٍ فُتحت من باب المساهمة (‎folds‎) */
-    const strip = card.querySelector('.pg-folds');
-    if (strip) {
-      strip.innerHTML = cardDlg.folds
-        ? pgFoldsHTML(pgFolds(pgDeckOf(cardDlg)), cardDlg.sel || new Set(), cardDlg.pgOpen)
-        : '';
-      strip.hidden = !strip.innerHTML;
-    }
+    pgStripPaint(card);
 
     /* ومقاسُ الورقة يتبع النافذة لا العكس: تُصغَّر النافذةُ فتنكمش الورقةُ لتسعها،
        فلا فيضٌ أفقيّ أبدًا مهما ضاقت. ويُعاد الحسابُ عند كلّ توسيعٍ بمرقابِ مقاس */
@@ -8014,15 +8008,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* المجلداتُ العليا وحدَها، والجذرُ أوّلُها. ولا تُعَدّ الفارغةُ منها: حبّةٌ تَعِد
      ببطائقَ لا توجد تُضغط فلا يتبدّل شيءٌ على الورق، فتُقرأ عطبًا لا اختيارًا */
   /* ============================================================
-     ألواحُ المجلدات: توسُّعٌ طبقةً بعد طبقة، لا شجرةٌ تُبسَط دفعةً
+     مربّعاتُ المجلدات: أكورديونٌ أفقيٌّ متداخل
      ============================================================
-     كانت شجرةً بأسهمٍ تُبسَط ذرّيّتُها كلُّها عند الفتح. والمطلوبُ غيرُه: لوحٌ **عريضٌ
-     يأخذ السطر** وهو ضيّقُ الارتفاع، فإذا ضُغط انكشف ما بداخله من مجلداتٍ — كلٌّ منها
-     لوحٌ ضيّقٌ مثلُه، وهكذا إلى القاع.
-     والفرقُ ليس شكلًا: الشجرةُ تُري **كلَّ** ما في المساهمة دفعةً فتُغرق العين، واللوحُ
-     يُري طبقةً واحدةً ويَترك الباقيَ لمن طلبه. والمساهمةُ قد تَعمُق ثلاثًا وأربعًا.
+     مربّعاتُ الطبقة الواحدة في **صفٍّ أفقيّ**. يُضغط واحدٌ فيتوسّع ويأخذ ما بقي،
+     ويضيق إخوتُه إلى حدّهم الأدنى — و**أبناؤه يَظهرون في جوف مربّعه** صفًّا أفقيًّا
+     بالقاعدة نفسِها، إلى أيّ عمق.
+     والتفصيلُ في ‎ROADMAP-FOLDERS.md‎ بحالاته الثلاث مرسومة.
+
+     وسبقَ أن بُنيت مرّتين على غير وجهها: حبّاتٍ تُشعَل ولا تتوسّع، ثمّ شجرةً
+     **عموديّةً** أبناؤها **تحت** المربّع لا داخلَه. والفرقُ الحاسم: «في نفس المربّع».
      ============================================================ */
-  /* عقدةٌ واحدةُ الشكل في كلّ طبقة: ‎id‎ مفتاحُ حالِ الفتح، و‎n‎ ما تحتها من بطائق */
   const pgKids = f => (f.ch || []).filter(x => x.t === 'f')
     .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, n: pgCount(x), kids: pgKids(x) }));
   function pgFolds(deck) {
@@ -8035,26 +8030,46 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     return out;
   }
-  /* ===== واللوحُ الذي لا شيءَ تحته ليس زرًّا =====
-     زرٌّ يُضغط فلا ينكشف شيءٌ يُقرأ عطبًا. فمن لا ذرّيّةَ له لوحٌ ساكنٌ يُقرأ ولا يُضغط،
-     ويُعرف بذلك من مؤشّره وبغياب علامة الفتح عنه. */
-  function pgAccHTML(nodes, open, depth) {
+  /* ===== حالُ الفتح: خريطةٌ من الأب إلى ابنه المفتوح، لا مجموعةُ معرّفات =====
+     لأنّ في الصفّ الواحد متوسِّعًا واحدًا على الأكثر (ق٣): لو توسَّع اثنان لَضاق
+     كلاهما فلا يُقرأ جوفُهما، والمساحةُ واحدة. والخريطةُ تقول المسارَ المفتوحَ من
+     أعلى إلى أسفل بقراءةٍ واحدة.
+     وبها يصحّ «ترجع كما تركتَها»: من طوى أبًا ثمّ فتحه وجد ابنَه مفتوحًا كما كان —
+     فالطيُّ إخفاءٌ لا مسح.
+     ومفتاحُ الصفّ الأعلى ‎'#'‎ لا ‎''‎: الجذرُ مجلدٌ معرّفُه ‎''‎، فلو اتّخذناه مفتاحًا
+     لالتبس «الصفُّ الأعلى» بـ«مجلد الجذر» في خريطةٍ واحدة */
+  const PG_TOP = '#';
+  const pgMap = w => (w && w.pgOpen instanceof Map) ? w.pgOpen : new Map();
+  /* ===== وما لا أبناءَ له ليس زرًّا =====
+     مربّعٌ يُضغط فلا ينكشف جوفُه يُقرأ عطبًا. فيُبنى عنصرًا ساكنًا لا زرًّا، ويُعرف
+     بمؤشّره وبحرفه الأخفت */
+  function pgBoxHTML(nodes, open, parentKey) {
     if (!nodes || !nodes.length) return '';
-    return '<div class="pg-acc' + (depth ? ' pg-acc--in' : '') + '">' + nodes.map(k => {
-      const has = k.kids && k.kids.length, isOpen = has && open && open.has(k.id);
-      const head = '<span class="pg-nm">' + esc(k.name) + '</span>'
-        + '<span class="pg-ct">' + k.n + '</span>'
-        + (has ? '<span class="pg-chev" aria-hidden="true">▸</span>' : '');
-      return '<div class="pg-pan' + (isOpen ? ' open' : '') + (has ? '' : ' pg-pan--leaf') + '">'
+    const openId = open.get(parentKey);
+    return '<div class="pg-row" data-pgp="' + esc(parentKey) + '">' + nodes.map(k => {
+      const has = k.kids && k.kids.length, wide = has && k.id === openId;
+      const face = '<span class="pg-nm">' + esc(k.name) + '</span>'
+                 + '<span class="pg-ct">' + k.n + '</span>';
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (has ? '' : ' pg-box--leaf') + '">'
         + (has
-            ? '<button type="button" class="pg-bar" data-pgx="' + esc(k.id) + '" aria-expanded="'
-              + (isOpen ? 'true' : 'false') + '">' + head + '</button>'
-            : '<div class="pg-bar pg-bar--leaf">' + head + '</div>')
-        + (has ? '<div class="pg-in">' + pgAccHTML(k.kids, open, (depth || 0) + 1) + '</div>' : '')
+            ? '<button type="button" class="pg-face" data-pgx="' + esc(k.id) + '" data-pgp="'
+              + esc(parentKey) + '" aria-expanded="' + (wide ? 'true' : 'false') + '">' + face + '</button>'
+            : '<div class="pg-face pg-face--leaf">' + face + '</div>')
+        + (has ? '<div class="pg-in">' + pgBoxHTML(k.kids, open, k.id) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
   }
-  const pgFoldsHTML = (folds, sel, open) => pgAccHTML(folds, open, 0);
+  /* والشريطُ يُرسم وحدَه: إعادةُ رسم الورقة تُرقّم الأوراقَ وتُعيد المُلاءمة، وليس في
+     فتح مربّعٍ ما يُبدّل ورقةً واحدة. وهو لا يحمل مُدخَلًا يكتب فيه أحدٌ فإعادةُ بنائه
+     لا تَسرق شيئًا من تحت يد */
+  function pgStripPaint(card) {
+    const host = card || (cdStage() && cdStage().querySelector('.mmodal__card'));
+    const strip = host && host.querySelector('.pg-folds');
+    if (!strip) return;
+    strip.innerHTML = (cardDlg && cardDlg.folds)
+      ? pgBoxHTML(pgFolds(pgDeckOf(cardDlg)), pgMap(cardDlg), PG_TOP) : '';
+    strip.hidden = !strip.innerHTML;
+  }
   const pgDeckOf = w => (cardData((w && w.code) || cmCode) || {}).deck || [];
   /* ===== فتحُ صفحة المساهمة: ورقةٌ على المساهمة كلِّها ===== */
   function cxPageOpen(pid) {
@@ -8074,23 +8089,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = cdWins.find(x => x.what === 'sheet');
     if (w) w.pid = pid || null;
   }
-  /* ===== ضغطةُ اللوح: توسُّعٌ لا إعادةُ رسم =====
-     إعادةُ الرسم تُرقّم الأوراقَ من جديد وتُعيد المُلاءمة، وليس في الكشف ما يُبدّل
-     ورقةً واحدة. فيُقلَب الصنفُ على اللوح وحدَه.
-     والمفتوحُ يعيش ما عاشت النافذة ولا يُحفظ: ما تَكشفه الآن شأنُ قراءتك، لا صفةٌ
-     في المساهمة تُخزَّن.
-     ولا يُستعمل ‎closest('.pg-pan')‎ للأبِ المباشر: الألواحُ متداخلةٌ، و‎closest‎ من
-     داخل لوحٍ ابنٍ تُصيب أقربَ جَدٍّ — فيُؤخذ أبو الزرّ نفسِه (‎parentElement‎). */
+  /* ===== ضغطةُ المربّع =====
+     فتحُ أخٍ يَطوي أخاه في صفّه وحدَه (ق٣)، وضغطُ المتوسِّع يَطويه (ق٦) — فالبابُ
+     الذي يَفتح هو البابُ الذي يُغلق. وما انفتح في الطبقات الأعمق يبقى محفوظًا في
+     الخريطة، فيرجع كما تُرك */
   document.addEventListener('click', e => {
-    const bar = e.target.closest('.pg-bar[data-pgx]');
-    if (!bar || !cardDlg || !cardDlg.folds) return;
-    const pan = bar.parentElement;
-    if (!pan || !pan.classList.contains('pg-pan')) return;
-    if (!cardDlg.pgOpen) cardDlg.pgOpen = new Set();
-    const k = bar.dataset.pgx, now = !pan.classList.contains('open');
-    pan.classList.toggle('open', now);
-    bar.setAttribute('aria-expanded', now ? 'true' : 'false');
-    if (now) cardDlg.pgOpen.add(k); else cardDlg.pgOpen.delete(k);
+    const b = e.target.closest('.pg-face[data-pgx]');
+    if (!b || !cardDlg || !cardDlg.folds) return;
+    const open = pgMap(cardDlg);
+    const p = b.dataset.pgp, id = b.dataset.pgx;
+    if (open.get(p) === id) open.delete(p); else open.set(p, id);
+    cardDlg.pgOpen = open;
+    pgStripPaint();
   });
   /* ===== ورقةُ البطاقة التي بين يديك: تُبنى من **ملفّها** لا من تحديد الشجرة =====
      الزرُّ في الشريط السفليّ يسأل: «أرِني الورقةَ التي أنا فيها». وجوابُه ملفُّ البطاقة

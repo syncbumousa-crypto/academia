@@ -15773,50 +15773,51 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 #card-modal.is-pageonly .cd-dw { display: none; }
 
 /* ============================================================
-   ألواحُ مجلدات المساهمة — عرضٌ كاملٌ وتوسُّعٌ طبقةً بعد طبقة
+   مربّعاتُ مجلدات المساهمة — أكورديونٌ أفقيٌّ متداخل
    ============================================================
-   اللوحُ يأخذ السطرَ كلَّه وهو ضيّقُ الارتفاع، فإذا فُتح انكشف جَوفُه وفيه ألواحُ
-   بنيه — كلٌّ ضيّقٌ مثلُه. فالعينُ ترى طبقةً واحدةً في كلّ مرّة، بخلاف الشجرة
-   المبسوطة التي تُري القاعَ كلَّه دفعةً.
+   صفٌّ أفقيٌّ في كلّ طبقة. يُضغط مربّعٌ فيتوسّع ويأخذ ما بقي، ويضيق إخوتُه إلى
+   حدّهم الأدنى — وأبناؤه في **جوفه** صفًّا أفقيًّا بالقاعدة نفسِها.
+   والتفصيلُ في ‎ROADMAP-FOLDERS.md‎.
 
-   ===== وهي أختُ الورقة لا ابنتُها =====
-   تسكن بين الترويسة و‎.sh-body‎ لا داخلَها. ولو كانت داخلَها لَأكلت من ارتفاعٍ
-   قِيست عليه المُلاءمةُ قبلها ففاضت الورقةُ بقدرها. وخارجَها تُنقِص ارتفاعَها
-   فيوقظ مرقابَ المقاس، فتُعاد المُلاءمةُ على الجوف الحقيقيّ.
+   ===== ولمَ ‎:has‎ ولم تكفِ أوزانُ النموّ؟ =====
+   لو أُعطي المتوسِّعُ وزنًا أكبرَ وحدَه (‎flex-grow:6‎) لَبقي إخوتُه ينمون معه
+   بنسبتهم، فتُقتطع المساحةُ منه بلا سبب. والمطلوبُ أن يأخذ **ما بقي** بعد حدِّهم
+   الأدنى — ولا يُقال ذلك إلّا بشرطٍ على **الصفّ**: إن كان فيه متوسِّعٌ فلا ينمو
+   سواه. وذاك ما تقوله ‎:has‎ بسطرٍ واحد.
 
-   ===== وسقفُ ارتفاعها لأنّ الطبقاتِ تَفتح بعضُها بعضًا =====
-   ثلاثُ طبقاتٍ مفتوحةٍ تدفع الورقةَ خارجَ النافذة. فلها سقفٌ وتمريرٌ خاصٌّ بها،
-   فيبقى للورقة نصيبُها مهما عمُقت المساهمة. */
-.pg-folds { display: block; padding: 4px 12px 8px; flex: none; max-height: 38%; overflow: auto; }
+   ===== والانتقالُ على ‎flex-grow‎ لا على ‎width‎ =====
+   ‎width:auto‎ لا يُحرَّك، و‎flex-grow‎ عددٌ يُحرَّك — فالتوسّعُ يُرى حركةً لا قفزة. */
+.pg-folds { display: block; padding: 4px 12px 8px; flex: none; max-height: 44%; overflow: auto; }
 .pg-folds[hidden] { display: none; }
-.pg-acc { display: flex; flex-direction: column; gap: 3px; }
-/* وجَوفُ اللوح يُزاح عن حافّته بخيطٍ يَصِل الابنَ بأبيه، فلا يُقرأ أخًا له */
-.pg-acc--in { margin: 3px 0 2px; padding-inline-start: 12px;
-  border-inline-start: 1px solid var(--u-line, #3a4a50); }
-.pg-pan { display: block; }
-.pg-bar {
-  display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0;
-  font: inherit; font-size: 12.5px; text-align: start;
-  padding: 7px 10px; border: 1px solid var(--u-line, #3a4a50); border-radius: 8px;
+/* الصفُّ أفقيٌّ، وإن ضاق مُرّر أفقيًّا ولم تُسحق مربّعاتُه دون حدّها */
+.pg-row { display: flex; align-items: stretch; gap: 6px; overflow-x: auto; }
+.pg-box {
+  display: flex; flex-direction: column; min-width: 0;
+  flex: 1 1 0; min-width: 96px; max-width: 100%;
+  border: 1px solid var(--u-line, #3a4a50); border-radius: 10px; overflow: hidden;
   background: color-mix(in srgb, var(--shp-pet, #2c5e65) 7%, transparent);
-  color: var(--u-ink, #dfeaec); cursor: pointer;
-  transition: background .14s ease, border-color .14s ease;
+  transition: flex-grow .18s ease, background .14s ease, border-color .14s ease;
 }
-.pg-bar:hover { border-color: var(--shp-pet, #5a737b);
-  background: color-mix(in srgb, var(--shp-pet, #2c5e65) 14%, transparent); }
-/* واللوحُ الساكنُ ليس زرًّا: لا مؤشّرَ قلمٍ له ولا وميضَ تحويم، وحرفُه أخفت */
-.pg-bar--leaf { cursor: default; color: var(--u-dim, #9db4ba); background: transparent; }
-.pg-bar--leaf:hover { border-color: var(--u-line, #3a4a50); background: transparent; }
+.pg-row:has(> .pg-box.is-wide) > .pg-box { flex-grow: 0; }
+.pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide { flex-grow: 1; min-width: 200px; }
+.pg-box.is-wide {
+  background: color-mix(in srgb, var(--shp-pet, #2c5e65) 16%, transparent);
+  border-color: var(--shp-pet, #2c5e65);
+}
+.pg-face {
+  display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0;
+  font: inherit; font-size: 12.5px; text-align: start; padding: 7px 10px;
+  border: 0; background: transparent; color: var(--u-ink, #dfeaec); cursor: pointer;
+}
+.pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .12); }
+/* الساكنُ ليس زرًّا، فلا مؤشّرَ قلمٍ له ولا وميضَ تحويم، وحرفُه أخفت */
+.pg-face--leaf { cursor: default; color: var(--u-dim, #9db4ba); }
 .pg-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pg-ct {
   flex: none; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
   background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums;
 }
-.pg-chev { flex: none; font-size: 10px; color: var(--u-dim, #9db4ba);
-  transition: transform .16s ease; }
-.pg-pan.open > .pg-bar > .pg-chev { transform: rotate(90deg); color: var(--u-ink, #dfeaec); }
-.pg-pan.open > .pg-bar { background: color-mix(in srgb, var(--shp-pet, #2c5e65) 18%, transparent);
-  border-color: var(--shp-pet, #2c5e65); }
-/* الجَوفُ مغلقٌ حتى يُفتح أبوه — و‎display‎ لا ارتفاعٌ صفر: المغلقُ لا يُقاس ولا يُطبَع */
-.pg-pan > .pg-in { display: none; }
-.pg-pan.open > .pg-in { display: block; }
+/* الجَوفُ داخلَ المربّع: لا يُرى حتى يتوسّع أبوه، و‎display‎ لا ارتفاعٌ صفر —
+   فالمغلقُ لا يُقاس ولا يُطبَع ولا يُصاد بالتبويب */
+.pg-box > .pg-in { display: none; }
+.pg-box.is-wide > .pg-in { display: block; padding: 0 8px 8px; }

@@ -1,16 +1,16 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<title>حارسُ ألواح المجلدات</title>
+<title>حارسُ مربّعات المجلدات</title>
 <link rel="stylesheet" href="shared/styles.css">
 <style>
  body{margin:0;background:#20323a;font-family:system-ui,sans-serif}
  #card-modal{display:block;position:static;background:none;padding:18px}
- .mmodal__card.is-sheet{height:470px;width:760px;margin:0 auto;border-radius:12px;display:flex;flex-direction:column}
+ .mmodal__card.is-sheet{height:470px;width:780px;margin:0 auto;border-radius:12px;display:flex;flex-direction:column}
  .cd-meta{background:#17262c;color:#dfeaec;padding:8px 12px;font-size:13px}
  .cd-dw{height:40px;background:#111}.sh-body{flex:1;min-height:0}
- #rep{max-width:760px;margin:14px auto;padding:10px 14px;border-radius:10px;background:#17262c;
+ #rep{max-width:780px;margin:14px auto;padding:10px 14px;border-radius:10px;background:#17262c;
       color:#dfeaec;font:13px/1.9 system-ui,sans-serif;direction:rtl;white-space:pre-wrap}
  #rep b.ok{color:#6ec39a}#rep b.no{color:#ff8f87}
- #stressWrap{position:absolute;left:0;top:-3000px}
+ .off{position:absolute;left:0;top:-3000px}
 </style></head><body>
 <div id="card-modal" class="is-pageonly">
   <div class="cd-dw" id="drawer"></div>
@@ -21,95 +21,115 @@
     <div class="cd-foot sh-foot"></div>
   </div>
 </div>
-<div id="stressWrap"><div class="mmodal__card is-sheet" id="sCard" data-sh="dark" style="height:460px;width:760px;display:flex;flex-direction:column">
-  <div class="cd-meta">س</div><div class="pg-folds" id="stress"></div>
+<!-- بطاقةٌ بجِلدٍ داكنٍ ثابت: يُقاس اتّباعُ الجِلد بالمقارنة لا بقلب سمةٍ ثمّ قراءةِ
+     نمطٍ محسوبٍ في التِّكّة نفسِها — تلك تردُّ القيمةَ القديمة -->
+<div class="off"><div class="mmodal__card is-sheet" id="dCard" data-sh="dark" style="height:300px;width:780px;display:flex;flex-direction:column">
+  <div class="pg-folds" id="dark"></div></div></div>
+<!-- اثنا عشرَ مربّعًا: أيَنضغط أصغرُها دون حدّه أم يُمرَّر الصفّ؟ -->
+<div class="off"><div class="mmodal__card is-sheet" id="mCard" style="height:300px;width:780px;display:flex;flex-direction:column">
+  <div class="pg-folds" id="many"></div></div></div>
+<!-- ثلاثُ طبقاتٍ مفتوحةٍ في نافذةٍ بقدر الحقيقيّة: أيبقى للورقة نصيب؟ -->
+<div class="off"><div class="mmodal__card is-sheet" id="sCard" style="height:460px;width:780px;display:flex;flex-direction:column">
+  <div class="cd-meta">س</div><div class="pg-folds" id="deep"></div>
   <div class="cd-body sh-body" id="sBody" style="flex:1;min-height:0"></div></div></div>
 <div class="pg-folds" id="empty" hidden></div>
 <pre id="rep">PENDING</pre>
 <script>
-/* بيانٌ بأرقام الواقع: الجذرُ ساكن، و«المخاطرة» مفتوحةٌ وفيها ابنٌ له ابن، و«التقييم» مطويّ */
+var ES=function(s){var d=document.createElement('div');d.textContent=String(s==null?'':s);return d.innerHTML;};
+var TOP='#';
+/* نسخةٌ من البانِي كما في app.js. وهذا يَحرس النمطَ والهندسة؛ أمّا أنّ الموقعَ
+   يَبني هذا الشكلَ فعلًا فيَحرسه _vflow.html بالضغط على الموقع نفسِه */
+function box(nodes,open,pk){
+ if(!nodes||!nodes.length) return '';
+ var openId=open.get(pk);
+ return '<div class="pg-row" data-pgp="'+ES(pk)+'">'+nodes.map(function(k){
+  var has=k.kids&&k.kids.length, wide=has&&k.id===openId;
+  var face='<span class="pg-nm">'+ES(k.name)+'</span><span class="pg-ct">'+k.n+'</span>';
+  return '<div class="pg-box'+(wide?' is-wide':'')+(has?'':' pg-box--leaf')+'">'
+   +(has?'<button type="button" class="pg-face" data-pgx="'+ES(k.id)+'" data-pgp="'+ES(pk)+'" aria-expanded="'+wide+'">'+face+'</button>'
+        :'<div class="pg-face pg-face--leaf">'+face+'</div>')
+   +(has?'<div class="pg-in">'+box(k.kids,open,k.id)+'</div>':'')+'</div>';
+ }).join('')+'</div>';
+}
+/* بيانٌ بأرقام الواقع: جذرٌ ساكن، و«المخاطرة» متوسِّعةٌ وفي جوفها «بيتا» متوسِّعةٌ أيضًا */
 var N=[
  {id:'',  name:'الجذر',    n:3,  kids:[]},
  {id:'f1',name:'المخاطرة', n:12, kids:[
-    {id:'f1a',name:'بيتا', n:5, kids:[{id:'f1a1',name:'التغاير',n:2,kids:[]}]},
-    {id:'f1b',name:'التشتّت', n:7, kids:[]}]},
- {id:'f2',name:'التقييم',  n:5,  kids:[{id:'f2a',name:'الخصم',n:5,kids:[]}]}
+   {id:'f1a',name:'بيتا',   n:5, kids:[{id:'f1a1',name:'التغاير',n:2,kids:[]},{id:'f1a2',name:'بيتا الرافعة',n:3,kids:[]}]},
+   {id:'f1b',name:'التشتّت',n:7, kids:[]},
+   {id:'f1c',name:'الذيل',  n:3, kids:[]}]},
+ {id:'f2',name:'التقييم',  n:5,  kids:[{id:'f2a',name:'الخصم',n:5,kids:[]}]},
+ {id:'f3',name:'السيولة',  n:8,  kids:[]}
 ];
-var OPEN=new Set(['f1']);
-var ES=function(s){var d=document.createElement('div');d.textContent=String(s==null?'':s);return d.innerHTML;};
-function acc(nodes,open,depth){
- if(!nodes||!nodes.length) return '';
- return '<div class="pg-acc'+(depth?' pg-acc--in':'')+'">'+nodes.map(function(k){
-  var has=k.kids&&k.kids.length, op=has&&open.has(k.id);
-  var head='<span class="pg-nm">'+ES(k.name)+'</span><span class="pg-ct">'+k.n+'</span>'
-          +(has?'<span class="pg-chev">▸</span>':'');
-  return '<div class="pg-pan'+(op?' open':'')+(has?'':' pg-pan--leaf')+'">'
-   +(has?'<button type="button" class="pg-bar" data-pgx="'+ES(k.id)+'" aria-expanded="'+op+'">'+head+'</button>'
-        :'<div class="pg-bar pg-bar--leaf">'+head+'</div>')
-   +(has?'<div class="pg-in">'+acc(k.kids,open,(depth||0)+1)+'</div>':'')+'</div>';
- }).join('')+'</div>';
-}
-document.getElementById('acc').innerHTML = acc(N,OPEN,0);
-var many=[]; for(var i=1;i<=30;i++) many.push({id:'s'+i,name:'مجلد '+i,n:4,kids:[{id:'s'+i+'a',name:'فرع',n:4,kids:[]}]});
-document.getElementById('stress').innerHTML = acc(many,new Set(many.map(function(x){return x.id;})),0);
+document.getElementById('acc').innerHTML  = box(N,new Map([[TOP,'f1'],['f1','f1a']]),TOP);
+document.getElementById('dark').innerHTML = box(N,new Map([[TOP,'f1']]),TOP);
+document.getElementById('deep').innerHTML = box(N,new Map([[TOP,'f1'],['f1','f1a']]),TOP);
+var many=[]; for(var i=1;i<=12;i++) many.push({id:'m'+i,name:'مجلد طويل الاسم '+i,n:4,kids:[]});
+document.getElementById('many').innerHTML = box(many,new Map(),TOP);
 
 var out=[],bad=0;
 function L(h){var s=h();out.push('<b class="'+(s[0]?'ok':'no')+'">'+(s[0]?'PASS':'FAIL')+'</b> '+s[1]);if(!s[0])bad++;}
 var CS=function(e){return getComputedStyle(e);}, Q=function(s){return document.querySelector(s);};
+var R=function(e){return e.getBoundingClientRect();};
 
 L(function(){return [CS(document.getElementById('drawer')).display==='none','صفُّ الدُّرج مخفيّ'];});
-L(function(){var t=document.querySelectorAll('#acc > .pg-acc > .pg-pan').length;
-  return [t===3,'ثلاثةُ ألواحٍ في الطبقة الأولى ('+t+')'];});
-/* اللوحُ عريضٌ يأخذ السطر، وضيّقُ الارتفاع */
-L(function(){var b=Q('#acc .pg-bar').getBoundingClientRect(), a=Q('#acc .pg-acc').getBoundingClientRect();
-  return [Math.abs(b.width-a.width)<2 && b.height<=40,
-   'اللوحُ عريضٌ '+Math.round(b.width)+'px من '+Math.round(a.width)+'px وضيّقٌ '+Math.round(b.height)+'px'];});
-/* المطويُّ جَوفُه مُغلَق */
-L(function(){var s=Q('#acc .pg-pan:not(.open) > .pg-in');
-  return [!!s && CS(s).display==='none','جَوفُ المطويِّ مُغلَق ('+(s?CS(s).display:'لا جوف')+')'];});
-/* والمفتوحُ يُظهر بنيه */
-L(function(){var o=Q('#acc .pg-pan.open > .pg-in');
-  return [!!o && o.getBoundingClientRect().height>0,'جَوفُ المفتوحِ مكشوفٌ بارتفاع '+Math.round(o?o.getBoundingClientRect().height:0)+'px'];});
-/* ===== وهذا لبُّ الفكرة: الابنُ ينكشف **ضيّقًا** لا مفتوحًا =====
-   لو وُرِث الفتحُ لَانبسطت الشجرةُ كلُّها بضغطةٍ واحدة، وذاك ما استُبدل */
-L(function(){var kids=document.querySelectorAll('#acc .pg-pan.open > .pg-in > .pg-acc > .pg-pan');
-  var openKids=0; kids.forEach(function(p){ if(p.classList.contains('open')) openKids++; });
-  var shut=0; kids.forEach(function(p){ var g=p.querySelector('.pg-in'); if(g&&CS(g).display==='none') shut++; });
-  return [kids.length===2 && openKids===0 && shut===1,
-    'بنو المفتوحِ '+kids.length+'، المفتوحُ منهم '+openKids+'، وذو الجوفِ منهم مُغلَق ('+shut+')'];});
-/* الجَوفُ مُزاحٌ عن حافّة أبيه بخيطٍ يَصِله به */
-L(function(){var inn=Q('#acc .pg-acc--in'), s=CS(inn);
-  var pad=parseFloat(s.paddingInlineStart)||0, bw=parseFloat(s.borderInlineStartWidth)||0;
-  return [pad>=8 && bw>0,'الجَوفُ مُزاحٌ '+Math.round(pad)+'px وبخيطٍ '+bw+'px'];});
-/* السهمُ يدور، والساكنُ بلا سهم */
-L(function(){var o=CS(Q('#acc .pg-pan.open > .pg-bar > .pg-chev')).transform;
-  return [o!=='none','سهمُ المفتوحِ مدارٌ ('+o+')'];});
-L(function(){var leaf=Q('#acc .pg-pan--leaf');
-  return [!!leaf && !leaf.querySelector('.pg-chev') && !leaf.querySelector('button'),
-   'اللوحُ الساكنُ بلا سهمٍ وبلا زرّ'];});
-L(function(){return [CS(Q('#acc .pg-bar--leaf')).cursor==='default','الساكنُ بمؤشّرٍ عاديٍّ لا قلم'];});
-/* والمفتوحُ يفترق عن المطويّ في أرضيّته */
-L(function(){var a=CS(Q('#acc .pg-pan.open > .pg-bar')).backgroundColor,
-      b=CS(Q('#acc .pg-pan:not(.open):not(.pg-pan--leaf) > .pg-bar')).backgroundColor;
-  return [a!==b,'المفتوحُ يفترق بأرضيّته'];});
-/* خارجَ مسرح الورق وفوقَه */
-L(function(){var t=document.getElementById('acc').getBoundingClientRect(),
-      b=document.getElementById('body').getBoundingClientRect();
+
+/* ح١ · أفقيّ: المتجاوران على خطٍّ واحدٍ وأحدُهما إلى جنب الآخر لا تحته */
+L(function(){var b=document.querySelectorAll('#acc > .pg-row > .pg-box');
+  if(b.length<2) return [false,'مربّعات: '+b.length];
+  var a=R(b[0]), c=R(b[1]);
+  return [b.length===4 && Math.abs(a.top-c.top)<2 && Math.abs(a.left-c.left)>20,
+   'الطبقةُ الأولى '+b.length+' مربّعاتٍ أفقيّة (فرقُ الأعلى '+Math.round(Math.abs(a.top-c.top))+'px)'];});
+
+/* ح٢ · الجوفُ داخلَ أبيه — بالبنية **وبالإحداثيّات** */
+L(function(){var w=Q('#acc > .pg-row > .pg-box.is-wide'), inn=w&&w.querySelector('.pg-in');
+  if(!w||!inn) return [false,'لا متوسِّع'];
+  var rw=R(w), ri=R(inn);
+  return [w.contains(inn) && ri.top>=rw.top-1 && ri.bottom<=rw.bottom+1 && ri.left>=rw.left-1 && ri.right<=rw.right+1,
+   'صفُّ الأبناء داخلَ حدود أبيه بالإحداثيّات'];});
+
+L(function(){var k=document.querySelectorAll('#acc > .pg-row > .pg-box.is-wide > .pg-in > .pg-row > .pg-box');
+  if(k.length<2) return [false,'بنو المتوسِّع '+k.length];
+  var a=R(k[0]), c=R(k[1]);
+  return [k.length===3 && Math.abs(a.top-c.top)<2,'بنوه '+k.length+' أفقيّون في جوفه'];});
+
+/* ح٣ · واحدٌ متوسِّعٌ في الصفّ الواحد */
+L(function(){var rows=document.querySelectorAll('#acc .pg-row'), worst=0;
+  rows.forEach(function(r){var c=r.querySelectorAll(':scope > .pg-box.is-wide').length; if(c>worst)worst=c;});
+  return [worst<=1,'أكثرُ متوسِّعٍ في صفٍّ واحد: '+worst];});
+
+/* ح٤ · المتوسِّعُ يأخذ ما بقي */
+L(function(){var w=R(Q('#acc > .pg-row > .pg-box.is-wide')).width, sib=[];
+  document.querySelectorAll('#acc > .pg-row > .pg-box:not(.is-wide)').forEach(function(e){sib.push(R(e).width);});
+  var avg=sib.reduce(function(a,b){return a+b;},0)/sib.length;
+  return [w>avg*2,'المتوسِّع '+Math.round(w)+'px ومتوسّطُ إخوته '+Math.round(avg)+'px'];});
+
+/* ح٥ · اثنا عشرَ مربّعًا: لا يُسحق أصغرُها، ويُمرَّر الصفّ */
+L(function(){var r=Q('#many > .pg-row'), min=1e9;
+  r.querySelectorAll(':scope > .pg-box').forEach(function(e){var w=R(e).width; if(w<min)min=w;});
+  var sc=r.scrollWidth>r.clientWidth+1;
+  return [min>=95 && sc,'أصغرُ مربّعٍ من اثني عشرَ: '+Math.round(min)+'px، والصفُّ يُمرَّر ('+sc+')'];});
+
+/* ح٦ · ثلاثُ طبقاتٍ مفتوحة: يبقى للورقة نصيبُها */
+L(function(){var c=R(document.getElementById('sCard')).height, t=R(document.getElementById('deep')).height,
+      b=R(document.getElementById('sBody')).height;
+  return [t<c*0.45 && b>c*0.4,'بثلاث طبقاتٍ مفتوحة: الشريط '+Math.round(t)+'px من '+Math.round(c)+'px، وللورق '+Math.round(b)+'px'];});
+
+L(function(){var s=Q('#acc .pg-box:not(.is-wide) > .pg-in');
+  return [!!s && CS(s).display==='none','جَوفُ المطويِّ مُغلَق'];});
+L(function(){var leaf=Q('#acc .pg-box--leaf');
+  return [!!leaf && !leaf.querySelector('button') && CS(leaf.querySelector('.pg-face')).cursor==='default',
+   'الساكنُ بلا زرٍّ وبمؤشّرٍ عاديّ'];});
+L(function(){var a=CS(Q('#acc > .pg-row > .pg-box.is-wide')).backgroundColor,
+      b=CS(Q('#acc > .pg-row > .pg-box:not(.is-wide):not(.pg-box--leaf)')).backgroundColor;
+  return [a!==b,'المتوسِّعُ يفترق بأرضيّته'];});
+L(function(){var t=R(document.getElementById('acc')), b=R(document.getElementById('body'));
   return [t.bottom<=b.top+1 && !document.getElementById('body').contains(document.getElementById('acc')),
-   'الألواحُ فوق مسرح الورق وخارجَه'];});
-/* ثلاثون لوحًا كلُّها مفتوحةٌ: أيبقى للورقة نصيب؟ */
-L(function(){var c=document.getElementById('sCard').getBoundingClientRect().height,
-      t=document.getElementById('stress').getBoundingClientRect().height,
-      b=document.getElementById('sBody').getBoundingClientRect().height,
-      sc=document.getElementById('stress').scrollHeight>document.getElementById('stress').clientHeight+1;
-  return [t<c*0.45 && sc && b>c*0.4,
-   'ثلاثون لوحًا مفتوحة: الألواح '+Math.round(t)+'px من '+Math.round(c)+'px وتُمرَّر، وبقي للورق '+Math.round(b)+'px'];});
+   'الشريطُ فوق مسرح الورق وخارجَه'];});
 L(function(){return [document.getElementById('empty').offsetHeight===0,'الخاوي بارتفاع صفر'];});
-/* ولا يُقلَب الوسمُ على بطاقةٍ ثمّ يُقاس: قراءةُ نمطٍ محسوبٍ بعد تبديل سمةٍ في
-   التِّكّة نفسِها تردُّ قيمةً قديمة. فلوحان في بطاقتين، إحداهما بجِلدٍ داكنٍ ثابت */
-L(function(){var lite=CS(Q('#acc .pg-pan.open > .pg-bar')).borderTopColor,
-      dark=CS(Q('#stress .pg-pan.open > .pg-bar')).borderTopColor;
-  return [lite!==dark,'اللوحُ يتبع جِلدَ الورقة ('+lite+' ⟵ نهارًا · '+dark+' ⟵ ليلًا)'];});
+L(function(){var lite=CS(Q('#acc > .pg-row > .pg-box.is-wide')).borderTopColor,
+      dark=CS(Q('#dark > .pg-row > .pg-box.is-wide')).borderTopColor;
+  return [lite!==dark,'المربّعُ يتبع جِلدَ الورقة ('+lite+' ⟵ نهارًا · '+dark+' ⟵ ليلًا)'];});
 
 document.getElementById('rep').innerHTML =
  (bad?'<b class="no">'+bad+' إخفاق</b>':'<b class="ok">ALL PASS</b>')+'\n'+out.join('\n');
