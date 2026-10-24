@@ -7948,7 +7948,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== فتحُ الورقة: نافذةٌ من نوافذ البطائق، تدخل مكدّسَها وترث هندستَها ===== */
   /* و‎deck‎ سطرٌ لا افتراض: الورقةُ تُبنى من شجرة التحرير حين تُطلب من نافذة البطاقة،
      ومن شجرة النشر حين تُطلب من شريط تحديدها — والافتراضُ يبقى للأولى */
-  function cxSumOpen(sel, deck) {
+  function cxSumOpen(sel, deck, folds) {
     deck = deck || edPack().deck;
     const secs = sheetSections(deck, sel);
     if (!secs.length) return;
@@ -7961,6 +7961,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const old = cdWins.find(w => w.what === 'sheet');
     if (old) {
       old.secs = secs; old.sign = shSign(secs); old.sel = sel || null;
+      if (folds !== undefined) old.folds = !!folds;
       /* ‎renderCardDlg‎ لا ‎renderSheetDlg‎: تلك ترسم الورقةَ وحدَها، وهذه تبني الدُّرجَ
          قبلها ثمّ تنادي تلك — فيبقى «+» حيًّا حين تُستدعى ورقةٌ قائمةٌ من جديد */
       cdFocusWin(old); renderCardDlg();
@@ -7974,6 +7975,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const el = shWinEl();
     const w = cdWinState(null, null, el, 'c');
     w.what = 'sheet'; w.picked = true;
+    /* ===== والوسمُ يُولد مع النافذة لا يُلحَق بها =====
+       كان يُرفع بعد العودة من هنا، واللسانُ يُصنع في أثناء أوّل رسمٍ قبله — فيَبقى
+       لسانٌ لنافذةٍ لا لسانَ لها. وكلُّ صفةٍ يقرؤها الرسمُ يجب أن تسبقه */
+    w.folds = !!folds;
     w.secs = secs; w.sign = shSign(secs);
     /* ===== ومصدرُ الورقة يُحفظ فيها لا يُستأنف من الشجرة =====
        الورقةُ **حيّةٌ**: ‎sheetLive‎ تعيد بناءَ أقسامها كلّما تبدّل نصّ. فلو بنتها من
@@ -8032,9 +8037,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return '<ul class="pg-kids">' + kids.map(k => '<li><span class="pg-kn">' + esc(k.name)
       + '</span><span class="pg-fold-n">' + k.n + '</span>' + pgKidsHTML(k.kids) + '</li>').join('') + '</ul>';
   }
-  /* وشجرةٌ من مجلدٍ واحدٍ لا خيارَ فيها: تقول البديهيَّ وتقف بين القارئ وما جاء له */
+  /* ===== وتُرسم ولو كان المجلدُ واحدًا =====
+     نقلتُ عن MyTerm قاعدةَ «مجلدٌ واحدٌ لا خيارَ فيه فلا شريطَ له»، وهي صحيحةٌ هناك:
+     شريطُه **مُرشِّحٌ** فحسب، ومُرشِّحٌ بخيارٍ واحدٍ عبث. وههنا الشجرةُ **خريطةٌ** قبل
+     أن تكون مُرشِّحًا: بها يُعرَف ما في المساهمة من مجلدات. فمساهمةٌ بطائقُها في
+     الجذر كانت تُحجب شجرتُها كلُّها — فلا يرى صاحبُها شيئًا ويظنّ أنّ شيئًا لم يُبنَ.
+     والقاعدةُ تُنقل بعلّتها، فإذا تبدّلت العلّةُ لم تُنقل. ويُنظر: نُقلت التهذيباتُ
+     وتُرك الأساسُ على حاله خطأً من قبل.
+     ويبقى من روحها شيء: زرُّ «الكلّ» لا يُرسم لواحد — إطفاءُ الكلّ وإشعالُه بزرّين
+     لشيءٍ واحدٍ هو العبثُ بعينه */
   function pgFoldsHTML(folds, sel, open) {
-    if (folds.length < 2) return '';
+    if (!folds.length) return '';
     const all = folds.every(f => pgOn(f, sel));
     const rows = folds.map(f => {
       const has = f.kids.length, isOpen = open && open.has(f.key);
@@ -8050,8 +8063,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + (has ? '<div class="pg-kidsw">' + pgKidsHTML(f.kids) + '</div>' : '')
         + '</div>';
     }).join('');
-    return rows + '<button type="button" class="pg-all" data-pgall="1">'
-      + esc(all ? T().pgNone : T().pgAll) + '</button>';
+    return rows + (folds.length < 2 ? ''
+      : '<button type="button" class="pg-all" data-pgall="1">'
+        + esc(all ? T().pgNone : T().pgAll) + '</button>');
   }
   const pgDeckOf = w => (cardData((w && w.code) || cmCode) || {}).deck || [];
   /* ===== فتحُ صفحة المساهمة: ورقةٌ على المساهمة كلِّها ===== */
@@ -8068,12 +8082,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!sheetSections(deck, sel).length) { openCardDlg(pid || null, null); return; }
     /* ولا تُفتح بتحديد الشجرة: الصفحةُ تُفتح من «إضافة» لا من تحديدٍ قائم، فمحتواها
        المساهمةُ كلُّها حتى تُطفئ منها بالشريط */
-    cxSumOpen(sel, deck);
+    cxSumOpen(sel, deck, true);
     const w = cdWins.find(x => x.what === 'sheet');
-    if (!w) return;
-    w.folds = true;
-    w.pid = pid || null;
-    renderCardDlg();
+    if (w) w.pid = pid || null;
   }
   /* ===== ضغطةُ الحبّة =====
      تُبدّل التحديدَ ثمّ تُعيد بناءَ الأقسام بـ‎sheetSections‎ نفسِها لا بحسابٍ ثانٍ —

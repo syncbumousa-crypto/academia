@@ -1,0 +1,67 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<title>حارسُ المسار: من «بطاقة» إلى ورقة المساهمة</title>
+<style>
+ body{margin:0;background:#161a1c;color:#dfeaec;font:13px/1.9 system-ui,sans-serif;direction:rtl}
+ #rep{padding:12px 16px;white-space:pre-wrap}
+ #rep b.ok{color:#6ec39a}#rep b.no{color:#ff8f87}
+ iframe{width:1340px;height:880px;border:0;position:absolute;left:0;top:-3000px}
+</style></head><body>
+<pre id="rep">PENDING — يُشغَّل على خادمٍ محلّيّ (file:// لا يصلح: الإطارُ يحتاج أصلًا واحدًا)</pre>
+<iframe id="f" src="platform/index.html#add=cards|ACCT%20110"></iframe>
+<script>
+/* ===== حارسٌ يَضغط لا يَنظر =====
+   المحاكاةُ تَحرس النمطَ والبنية، ولا تَحرس أنّ الزرَّ يفتح ما يُراد. وهذا يُشغّل
+   الموقعَ نفسَه في إطار: يَسلك طريق ‎#add=cards‎ إلى محرّر المساهمة، ويكتب بطاقةً،
+   ثمّ يضغط «بطاقة» ويَسأل عمّا وقع. */
+var out=[], bad=0, L=[], done=false;
+function P(ok,txt){ out.push('<b class="'+(ok?'ok':'no')+'">'+(ok?'PASS':'FAIL')+'</b> '+txt); if(!ok)bad++; }
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+var f=document.getElementById('f');
+function D(){return f.contentDocument;} function W(){return f.contentWindow;}
+function q(s){return D().querySelector(s);} function n(s){return D().querySelectorAll(s).length;}
+function type(el,txt){ el.focus(); el.textContent=txt; el.dispatchEvent(new (W().Event)('input',{bubbles:true})); }
+f.onload=function(){ if(done) return; done=true; setTimeout(go,7000); };
+async function go(){
+ try{
+  /* ١ · الطريقُ يوصل إلى محرّر المساهمة */
+  P(n('.cx-addc')===1, 'زرُّ «بطاقة» في محرّر المساهمة ('+n('.cx-addc')+')');
+  P(n('#cd-front')===1, 'نافذةُ البطاقة مفتوحةٌ من الرابط');
+  /* ٢ · تُكتب بطاقةٌ وتُودَع في الرزمة */
+  var fr=q('#cd-front'); if(!fr){ fin(); return; }
+  type(fr,'مفهوم أ'); var bk=q('#cd-back'); if(bk) type(bk,'شرح أ');
+  await sleep(400);
+  /* و«+» قبل الإغلاق: هي التي تُودِع المكتوبَ في الرزمة (cdCommit). والإغلاقُ وحدَه
+     لا يُودِع ما كُتب برمجيًّا — وهذا خبرٌ عن الفاحص لا عن الموقع: اليدُ تَكتب بأحداث
+     مفاتيحَ حقيقيّةٍ يلتقطها، والنصُّ المزروعُ لا يُوقظها */
+  var plus=q('#cd-add'); if(plus){ plus.click(); await sleep(900); }
+  var x=q('.cd-wb--x'); if(x){ x.click(); await sleep(1200); }
+  P(n('.cx-del')>=1, 'البطاقةُ نزلت في الرزمة ('+n('.cx-del')+' صفًّا)');
+  /* ٣ · الضغطةُ تفتح ورقةَ الملخّص لا نافذةَ بطاقة */
+  var addc=q('.cx-addc'); if(addc){ addc.click(); await sleep(2200); }
+  P(n('.mmodal__card.is-sheet')>=1, 'فُتحت ورقةُ الملخّص ('+n('.mmodal__card.is-sheet')+')');
+  P(n('.sh-sheet')>=1, 'وفيها ورقةٌ مرسومةٌ ('+n('.sh-sheet')+')');
+  /* ٤ · ولا أغلفةَ تفصل — وهذا ما لا تكشفه محاكاةُ النمط */
+  P(n('.sh-sheet--cover')===0, 'لا أغلفةَ فاصلةً ('+n('.sh-sheet--cover')+')');
+  /* ٥ · والشجرةُ ظاهرةٌ ولو كان المجلدُ واحدًا — وهي العلّةُ التي بلّغ عنها صاحبُ الموقع */
+  var st=q('.pg-folds');
+  P(!!st && st.hidden===false, 'شجرةُ المجلدات ظاهرةٌ (hidden='+(st?st.hidden:'لا وعاء')+')');
+  var names=[].map.call(D().querySelectorAll('.pg-fold-nm'),function(e){return e.textContent;});
+  P(names.length>=1, 'فيها '+names.length+' مجلدًا: '+names.join(' · '));
+  /* ٦ · وزرُّ «الكلّ» لا يُرسم لواحد */
+  P(names.length>1 ? n('.pg-all')===1 : n('.pg-all')===0,
+    'زرُّ «الكلّ»: '+n('.pg-all')+' لـ'+names.length+' مجلد');
+  /* ٧ · وهي خارجَ مسرح الورق فلا تَفسد المُلاءمة */
+  var body=q('.mmodal__card.is-sheet .sh-body');
+  P(!!st && !!body && !body.contains(st), 'الشجرةُ خارجَ ‎.sh-body‎');
+  /* ٨ · ولا دُرجَ ولا لسان */
+  var dw=q('#cd-drawer');
+  P(!!dw && W().getComputedStyle(dw).display==='none', 'صفُّ الدُّرج مخفيّ');
+  P(n('.cd-mtab')===0, 'لا لسانَ للصفحة ('+n('.cd-mtab')+')');
+  fin();
+ }catch(e){ document.getElementById('rep').innerHTML='<b class="no">ERR</b> '+e.message+'\n'+out.join('\n'); }
+}
+function fin(){
+  document.getElementById('rep').innerHTML =
+    (bad? '<b class="no">'+bad+' إخفاق</b>' : '<b class="ok">ALL PASS</b>')+'\n'+out.join('\n');
+}
+</script></body></html>
