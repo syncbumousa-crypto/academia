@@ -15809,14 +15809,16 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
   font: inherit; font-size: 12.5px; text-align: start; padding: 7px 10px;
   border: 0; background: transparent; color: var(--u-ink, #dfeaec); cursor: pointer;
 }
+/* ===== والمربّعُ الضيّقُ مَضغَطٌ واحدٌ لا رأسٌ وجسم =====
+   إخوةُ المتوسِّعِ يطولون بطوله (الصفُّ يُمدِّدهم)، فإن بقي الزرُّ سطرًا في أعلاه
+   صار المربّعُ رأسًا يُضغط وجسمًا لا يُضغط — فيَضغط القارئُ وسطَه فلا يَفتح، وهو
+   يرى مربّعًا واحدًا لا جزأين. فيُمدَّد الوجهُ ليملأ المربّع، ويبقى متنُه في أعلاه.
+   أمّا المتوسِّعُ فوجهُه ترويسةٌ حقًّا: تحتها جوفُه، فلا يُمدَّد. */
+.pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; align-items: flex-start; }
 .pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .12); }
 /* الساكنُ ليس زرًّا، فلا مؤشّرَ قلمٍ له ولا وميضَ تحويم، وحرفُه أخفت */
 .pg-face--leaf { cursor: default; color: var(--u-dim, #9db4ba); }
 .pg-nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pg-ct {
-  flex: none; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px;
-  background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums;
-}
 /* الجَوفُ داخلَ المربّع: لا يُرى حتى يتوسّع أبوه، و‎display‎ لا ارتفاعٌ صفر —
    فالمغلقُ لا يُقاس ولا يُطبَع ولا يُصاد بالتبويب */
 .pg-box > .pg-in { display: none; }

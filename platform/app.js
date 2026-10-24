@@ -8048,8 +8048,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const openId = open.get(parentKey);
     return '<div class="pg-row" data-pgp="' + esc(parentKey) + '">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId;
-      const face = '<span class="pg-nm">' + esc(k.name) + '</span>'
-                 + '<span class="pg-ct">' + k.n + '</span>';
+      /* ولا حُبيبةَ عددٍ في وجه المربّع: رُفعت بطلبه. والعددُ ما زال في ‎k.n‎ إن
+         أُريد ردُّه نصًّا لا صَدَفةً */
+      const face = '<span class="pg-nm">' + esc(k.name) + '</span>';
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (has ? '' : ' pg-box--leaf') + '">'
         + (has
             ? '<button type="button" class="pg-face" data-pgx="' + esc(k.id) + '" data-pgp="'

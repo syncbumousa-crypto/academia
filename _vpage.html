@@ -44,7 +44,7 @@ function box(nodes,open,pk){
  var openId=open.get(pk);
  return '<div class="pg-row" data-pgp="'+ES(pk)+'">'+nodes.map(function(k){
   var has=k.kids&&k.kids.length, wide=has&&k.id===openId;
-  var face='<span class="pg-nm">'+ES(k.name)+'</span><span class="pg-ct">'+k.n+'</span>';
+  var face='<span class="pg-nm">'+ES(k.name)+'</span>';
   return '<div class="pg-box'+(wide?' is-wide':'')+(has?'':' pg-box--leaf')+'">'
    +(has?'<button type="button" class="pg-face" data-pgx="'+ES(k.id)+'" data-pgp="'+ES(pk)+'" aria-expanded="'+wide+'">'+face+'</button>'
         :'<div class="pg-face pg-face--leaf">'+face+'</div>')
@@ -104,6 +104,16 @@ L(function(){var w=R(Q('#acc > .pg-row > .pg-box.is-wide')).width, sib=[];
   var avg=sib.reduce(function(a,b){return a+b;},0)/sib.length;
   return [w>avg*2,'المتوسِّع '+Math.round(w)+'px ومتوسّطُ إخوته '+Math.round(avg)+'px'];});
 
+/* ولا حُبيبةَ عددٍ في وجهٍ: رُفعت بطلبه، فيُحرَس غيابُها كيلا تعود سهوًا */
+L(function(){var c=document.querySelectorAll('.pg-ct').length;
+  return [c===0,'لا حُبيبةَ عددٍ في المربّعات ('+c+')'];});
+/* ===== والمربّعُ الضيّقُ مَضغَطٌ واحد =====
+   إخوةُ المتوسِّعِ يطولون بطوله؛ فإن لم يملأ الوجهُ المربّعَ صار نصفُه ميّتًا تحت
+   الإصبع. ويُقاس بنسبة ارتفاع الوجه إلى ارتفاع المربّع، لا بوجود صنف */
+L(function(){var b=Q('#acc > .pg-row > .pg-box:not(.is-wide):not(.pg-box--leaf)');
+  var fa=b.querySelector('.pg-face'); var rb=R(b), rf=R(fa);
+  return [rf.height>=rb.height-2 && rb.height>40,
+   'وجهُ الضيّقِ يملأ مربّعَه ('+Math.round(rf.height)+'px من '+Math.round(rb.height)+'px)'];});
 /* ح٥ · اثنا عشرَ مربّعًا: لا يُسحق أصغرُها، ويُمرَّر الصفّ */
 L(function(){var r=Q('#many > .pg-row'), min=1e9;
   r.querySelectorAll(':scope > .pg-box').forEach(function(e){var w=R(e).width; if(w<min)min=w;});
