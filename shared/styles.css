@@ -15848,3 +15848,16 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 }
 .pg-in .pg-box.is-wide > .pg-face { color: var(--u-dim, #9db4ba); }
 .pg-in .pg-box.is-wide > .pg-in { padding: 0 5px 5px; }
+
+/* ===== رقمُ النسخة: أسفلَ اليسار =====
+   خبرٌ عن **البناء** لا عن المحتوى، فلا يُزاحم شيئًا: ثابتٌ في زاويةٍ، خافتٌ
+   جدًّا، لا يَلتقط مؤشّرًا ولا يُحدَّد نصُّه ولا يُطبَع — ومع ذلك يُقرأ متى طُلب.
+   و‎left‎ لا ‎inset-inline-start‎: الزاويةُ **مرئيّةٌ** لا منطقيّة، فتبقى يسارًا
+   في العربيّة والإنجليزيّة معًا كما هي في MyTerm. */
+#acver {
+  position: fixed; left: 8px; bottom: 6px; z-index: 9999;
+  font: 600 10px/1 ui-monospace, Consolas, monospace; letter-spacing: .3px;
+  color: color-mix(in srgb, currentColor 28%, transparent);
+  pointer-events: none; user-select: none;
+}
+@media print { #acver { display: none; } }

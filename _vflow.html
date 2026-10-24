@@ -19,10 +19,21 @@ function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
 var f=document.getElementById('f');
 function D(){return f.contentDocument;} function W(){return f.contentWindow;}
 function q(s){return D().querySelector(s);} function n(s){return D().querySelectorAll(s).length;}
+function W_(){return f.contentWindow.innerWidth;}
+function H_(){return f.contentWindow.innerHeight;}
 function type(el,txt){ el.focus(); el.textContent=txt; el.dispatchEvent(new (W().Event)('input',{bubbles:true})); }
 f.onload=function(){ if(done) return; done=true; setTimeout(go,7000); };
 async function go(){
  try{
+  /* ===== رقمُ النسخة أوّلًا: به يُعرَف أنّ ما يُفحَص هو ما نُشر =====
+     بلّغ صاحبُ الموقع «ما تغيّر شيء» وكان على بناءٍ أقدم. فالرقمُ خبرٌ عن البناء،
+     ويُقاس موضعُه بالإحداثيّات لا بالنظر: أسفلَ اليسار من المنظور */
+  (function(){ var v=q('#acver');
+    P(!!v && /^ver [0-9]+$/.test(v.textContent.trim()),
+      'رقمُ النسخة ظاهر: ' + (v?v.textContent.trim():'غائب'));
+    if(v){ var r=v.getBoundingClientRect(), W=W_(), H=H_();
+      P(r.left<40 && r.bottom>H-40, 'موضعُه أسفلَ اليسار ('+Math.round(r.left)+'px من اليسار · '+Math.round(H-r.bottom)+'px من الأسفل)'); }
+  })();
   /* ١ · الطريقُ يوصل إلى محرّر المساهمة */
   P(n('.cx-addc')===1, 'زرُّ «بطاقة» في محرّر المساهمة ('+n('.cx-addc')+')');
   P(n('#cd-front')===1, 'نافذةُ البطاقة مفتوحةٌ من الرابط');

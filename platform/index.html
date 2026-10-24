@@ -1271,11 +1271,21 @@
   </div>
 
   <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
+  <script src="../shared/version.js"></script>
   <script src="api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
   <script src="emoji.js"></script>
   <script src="app.js"></script>
+<!-- ===== رقمُ النسخة: أسفلَ اليسار، لا يُلتقط ولا يُطبَع =====
+     غرضُه واحد: أن يَعرف الناظرُ **أيَّ بناءٍ** يَرى. فمن فتح نسخةً مخزَّنةً في
+     متصفّحه أو خادمًا محلّيًّا قديمًا رأى رقمًا أقدمَ من المنشور فعَلِم.
+     وهو مشتقٌّ من عدد الإيداعات (‎_ver.sh‎) لا مكتوبٌ بيدٍ تَسهو. -->
+<div id="acver" aria-hidden="true"></div>
+<script>
+  (function(){ var e=document.getElementById('acver');
+    if (e) e.textContent = 'ver ' + (window.AC_VER || '?'); })();
+</script>
 </body>
 </html>
