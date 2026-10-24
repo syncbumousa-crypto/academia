@@ -15861,3 +15861,37 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
   pointer-events: none; user-select: none;
 }
 @media print { #acver { display: none; } }
+
+/* ===== شريطُ تمرير المجلدات: أنحفُ وأخفت =====
+   المربّعاتُ تفيض عن الصفّ فيظهر شريطُ تمريرٍ — في الطبقة الأولى وفي أجواف
+   المجلدات معًا. وشريطُ المتصفّح الافتراضيُّ خمسةَ عشرَ بكسلًا بلونٍ مصمت: في
+   صفٍّ قامتُه ثلاثون يأخذ نصفَه، ويَصرخ أعلى ممّا يَصرخ المحتوى.
+
+   ===== ولا يُجمَع ‎scrollbar-width‎ مع ‎::-webkit-scrollbar‎ =====
+   في كروميوم إذا كُتبت الأولى أُهملت الثانيةُ جملةً — فلا يُحترم ‎height‎ ويعود
+   الشريطُ إلى «thin» وهي أحدَ عشرَ بكسلًا لا أربعة. فتُكتب الثانيةُ وحدَها،
+   وتُترك الأولى لمن لا يَعرف الثانيةَ (فَيَرفُكس) داخلَ ‎@supports‎.
+
+   واللونُ من ‎currentColor‎ لا رقمًا: فيتبع حرفَ الورقة فاتحةً وداكنةً بلا قاعدةٍ ثانية. */
+.pg-row::-webkit-scrollbar,
+.pg-folds::-webkit-scrollbar { height: 4px; width: 4px; }
+.pg-row::-webkit-scrollbar-track,
+.pg-folds::-webkit-scrollbar-track { background: transparent; }
+.pg-row::-webkit-scrollbar-thumb,
+.pg-folds::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+/* ويَظهر قليلًا عند المرور: خافتٌ حتى يُطلب */
+.pg-row:hover::-webkit-scrollbar-thumb,
+.pg-folds:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, currentColor 26%, transparent);
+}
+.pg-row::-webkit-scrollbar-corner,
+.pg-folds::-webkit-scrollbar-corner { background: transparent; }
+@supports not selector(::-webkit-scrollbar) {
+  .pg-row, .pg-folds {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, currentColor 18%, transparent) transparent;
+  }
+}

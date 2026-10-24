@@ -33,6 +33,8 @@
   <div class="cd-meta">س</div><div class="pg-folds" id="deep"></div>
   <div class="cd-body sh-body" id="sBody" style="flex:1;min-height:0"></div></div></div>
 <div class="pg-folds" id="empty" hidden></div>
+<!-- شاهدٌ بلا أنماطنا: شريطُ التمرير الافتراضيّ، يُقاس ليُعرف كم نَحُف شريطُنا عنه -->
+<div class="off"><div id="ctl" style="width:120px;overflow-x:scroll"><div style="width:600px;height:10px"></div></div></div>
 <pre id="rep">PENDING</pre>
 <script>
 var ES=function(s){var d=document.createElement('div');d.textContent=String(s==null?'':s);return d.innerHTML;};
@@ -151,6 +153,16 @@ L(function(){var r=Q('#many > .pg-row'), min=1e9;
   var sc=r.scrollWidth>r.clientWidth+1;
   return [min>=95 && sc,'أصغرُ مربّعٍ من اثني عشرَ: '+Math.round(min)+'px، والصفُّ يُمرَّر ('+sc+')'];});
 
+/* ===== وشريطُ التمرير أنحفُ من الافتراضيّ =====
+   يُقاس بالفرق بين ارتفاع العنصر وجوفه — وهو قامةُ الشريط بعينها. ويُقارَن
+   بشاهدٍ بلا أنماطنا، فيُقال «أنحفُ من» لا «أنحفُ» مجرّدةً */
+L(function(){
+  var r=Q('#many > .pg-row');
+  var mine=r.offsetHeight-r.clientHeight;
+  var c=document.getElementById('ctl');
+  var deflt=c.offsetHeight-c.clientHeight;
+  return [mine>0 && mine<=6 && mine<deflt,
+   'قامةُ شريط التمرير '+mine+'px، والافتراضيُّ '+deflt+'px'];});
 /* ح٦ · ثلاثُ طبقاتٍ مفتوحة: يبقى للورقة نصيبُها */
 L(function(){var c=R(document.getElementById('sCard')).height, t=R(document.getElementById('deep')).height,
       b=R(document.getElementById('sBody')).height;
