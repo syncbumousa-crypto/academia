@@ -1366,6 +1366,8 @@
       /* ورقة الملخّص */
       shTitle: 'ورقة الملخّص', shRoot: 'الجذر', shPrint: 'طباعة',
       pgTitle: 'صفحة جديدة', pgColK: 'العنصر', pgColV: 'الخلاصة',
+      pgAll: 'الكلّ', pgNone: 'لا شيء', pgNoCards: 'لا بطائقَ في المحدَّد',
+      pgRich: 'فيها صورةٌ أو تنسيق — تُحرَّر في نافذة البطاقة كيلا يُمحى ما فيها',
       shColN: 'رقم', shColQ: 'السؤال', shColA: 'الإجابة',
       shToDark: 'ورقةٌ داكنة', shToLight: 'ورقةٌ فاتحة',
       /* شارةُ الزرّ: كم بطاقةً تُولَد من هذه — تُقرأ صوتًا ولا تُرى نصًّا */
@@ -1772,6 +1774,8 @@
       cxEqW: { a: 'All', r: 'Root', f: 'Follow' },
       shTitle: 'Summary sheet', shRoot: 'Root', shPrint: 'Print',
       pgTitle: 'New page', pgColK: 'Item', pgColV: 'Summary',
+      pgAll: 'All', pgNone: 'None', pgNoCards: 'No cards in the chosen folders',
+      pgRich: 'Holds an image or formatting — edit it in the card window so nothing is lost',
       shColN: 'No.', shColQ: 'Question', shColA: 'Answer',
       shToDark: 'Dark sheet', shToLight: 'Light sheet',
       cdFaces: n => `${n} card${n === 1 ? '' : 's'}`,
@@ -8026,9 +8030,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!card.classList.contains('is-page')) {
       card.classList.add('is-page');
       card.innerHTML = '<div class="cd-meta" id="cd-meta"></div>'
-        + '<div class="cd-body pg-body"><div class="pg-roll"><div class="pg-sheet">'
-        + pgTblHTML() + '</div></div></div>'
+        + '<div class="cd-body pg-body"><div class="pg-head"></div>'
+        + '<div class="pg-roll"><div class="pg-sheet"></div></div></div>'
         + '<div class="cd-foot pg-foot" id="cd-foot"></div>';
+      pgWire(card);
+      pgPaint(card);
     }
     const meta = card.querySelector('.cd-meta');
     /* أزرارُ النافذة من مصدرها المشترك: فلا يفترق سلوكُ الإغلاق والطيّ بين النوافذ */
@@ -8049,20 +8055,106 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وعمودُ الأرقام ليس خانةً تُكتب: هو ترقيمٌ يُقرأ، فلا ‎contenteditable‎ عليه —
      وإلّا جاز أن يُمحى رقمٌ فيختلّ العدّ بلا سببٍ يُفهَم.
      ============================================================ */
-  const PG_ROWS = 6;
-  function pgTblHTML() {
-    let rows = '';
-    for (let i = 1; i <= PG_ROWS; i++) {
-      rows += '<tr><td class="n">' + i + '</td>'
-        + '<td class="k" contenteditable="plaintext-only"></td>'
-        + '<td class="v" contenteditable="plaintext-only"></td></tr>';
-    }
+  /* نافذةُ هذا المسرح: الحدثُ يقع على عنصرٍ لا على متغيّرٍ عامّ، فتُطلب من شجرته */
+  const pgWin = el => cdWins.find(w => w.el === (el && el.closest('.cd-stage')));
+  const pgDeck = w => (cardData((w && w.code) || cmCode) || {}).deck || [];
+  /* المتنُ نصًّا: حقلُ البطاقة قد يحمل وسمًا، والجدولُ سطرٌ لا صفحة */
+  const pgText = h => { const d = document.createElement('div'); d.innerHTML = h || ''; return (d.textContent || '').trim(); };
+  /* وما فيه وسمٌ لا يُحرَّر ههنا: الكتابةُ تردُّ نصًّا مجرّدًا، فلو كُتب على حقلٍ فيه
+     صورةٌ أو تنسيقٌ لَمحاه بصمت. فيُقفل ويُقال لماذا */
+  const pgRich = v => /<[a-z!/]/i.test(String(v || ''));
+
+  /* ============================================================
+     أقسامُ المساهمة: مجلداتُها، والجذرُ أوّلُها
+     ============================================================
+     القسمُ مجلدٌ **له أبناءٌ مباشرون ليسوا مجلدات** — فالمجلدُ الذي لا يحمل إلّا
+     مجلداتٍ ليس قسمًا بل طريقٌ إليها، وحبّةٌ باسمه تَعِد ببطائقَ لا توجد.
+     وهذا حكمُ ‎sheetSections‎ نفسُه في ورقة الملخّص، فلا يفترق البابان. */
+  function pgSecs(deck) {
+    const out = [];
+    const loose = (deck || []).filter(n => n.t !== 'f');
+    if (loose.length) out.push({ key: '', name: T().shRoot, cards: loose });
+    const walk = ns => (ns || []).forEach(n => {
+      if (n.t !== 'f') return;
+      const direct = (n.ch || []).filter(x => x.t !== 'f');
+      if (direct.length) out.push({ key: n.id, name: n.name || T().pkTitlePh, cards: direct });
+      walk(n.ch);
+    });
+    walk(deck);
+    return out;
+  }
+  /* ============================================================
+     ترويسةُ المجلدات — حبّةٌ لكلّ قسمٍ باسمه وعدده، تُشعَل وتُطفأ
+     ============================================================
+     وقسمٌ واحدٌ لا خيارَ فيه: شريطٌ من حبّةٍ واحدةٍ يقول البديهيَّ ويقف بين القارئ
+     وبين ما جاء له. فلا يُرسم إلّا عند اثنين فصاعدًا. */
+  function pgHeadHTML(secs, sel) {
+    if (secs.length < 2) return '';
+    const all = secs.every(s => sel.has(s.key));
+    return secs.map(s => '<button type="button" class="pg-fold' + (sel.has(s.key) ? ' on' : '')
+        + '" data-pgf="' + esc(s.key) + '"><span class="pg-fold-nm">' + esc(s.name)
+        + '</span><span class="pg-fold-n">' + s.cards.length + '</span></button>').join('')
+      + '<button type="button" class="pg-fold pg-fold-all" data-pgall="1">'
+      + esc(all ? T().pgNone : T().pgAll) + '</button>';
+  }
+  function pgTblHTML(secs, sel) {
+    const rows = [];
+    secs.forEach(s => { if (sel.has(s.key)) s.cards.forEach(c => rows.push(c)); });
+    let body = '';
+    rows.forEach((c, i) => {
+      const cell = (fld, cls) => {
+        const raw = c[fld];
+        return pgRich(raw)
+          ? '<td class="' + cls + ' pg-rich" title="' + esc(T().pgRich) + '">' + esc(pgText(raw)) + '</td>'
+          : '<td class="' + cls + '" contenteditable="plaintext-only" data-pgf2="' + fld + '">'
+            + esc(pgText(raw)) + '</td>';
+      };
+      body += '<tr data-pgid="' + esc(c.id) + '"><td class="n">' + (i + 1) + '</td>'
+        + cell('f', 'k') + cell('b', 'v') + '</tr>';
+    });
+    if (!rows.length) body = '<tr><td class="pg-none" colspan="3">' + esc(T().pgNoCards) + '</td></tr>';
     return '<table class="pg-tbl">'
       + '<colgroup><col class="n"><col class="k"><col class="v"></colgroup>'
       + '<thead><tr><th class="n"></th>'
-      + '<th contenteditable="plaintext-only">' + esc(T().pgColK) + '</th>'
-      + '<th contenteditable="plaintext-only">' + esc(T().pgColV) + '</th>'
-      + '</tr></thead><tbody>' + rows + '</tbody></table>';
+      + '<th>' + esc(T().pgColK) + '</th><th>' + esc(T().pgColV) + '</th>'
+      + '</tr></thead><tbody>' + body + '</tbody></table>';
+  }
+  /* والرسمُ لا يقع في ‎renderPageDlg‎: تلك تُدعى مع كلّ تركيزٍ وطيٍّ ونشر، ولو أعادت
+     بناءَ الجدول لَانتُزع ما تكتبه من تحت مؤشّرك. فلا يُعاد إلّا بفعلٍ صريح: ميلادٌ
+     أو ضغطةُ حبّة */
+  function pgPaint(card) {
+    const w = pgWin(card);
+    const secs = pgSecs(pgDeck(w));
+    if (!w.pgSel) w.pgSel = new Set(secs.map(s => s.key));
+    const head = card.querySelector('.pg-head');
+    head.innerHTML = pgHeadHTML(secs, w.pgSel);
+    head.hidden = !head.innerHTML;
+    card.querySelector('.pg-sheet').innerHTML = pgTblHTML(secs, w.pgSel);
+  }
+  function pgWire(card) {
+    card.addEventListener('click', e => {
+      const b = e.target.closest('.pg-fold'); if (!b) return;
+      const w = pgWin(card); if (!w) return;
+      const secs = pgSecs(pgDeck(w));
+      if (b.dataset.pgall) {
+        w.pgSel = secs.every(s => w.pgSel.has(s.key)) ? new Set() : new Set(secs.map(s => s.key));
+      } else {
+        const k = b.dataset.pgf;
+        if (w.pgSel.has(k)) w.pgSel.delete(k); else w.pgSel.add(k);
+      }
+      pgPaint(card);
+    });
+    /* والكتابةُ تنزل في الرزمة لا في الشاشة: ‎input‎ لا ‎blur‎ كيلا يضيع ما كُتب إن
+       أُغلقت النافذةُ قبل أن يُغادَر الحقل. و‎save()‎ وحدَها بلا ‎edRender()‎: تلك
+       تُعيد بناءَ محرّر المساهمة تحت يدك فتسرق البؤرة */
+    card.addEventListener('input', e => {
+      const td = e.target.closest('td[data-pgf2]'); if (!td) return;
+      const w = pgWin(card); if (!w) return;
+      const tr = td.closest('tr[data-pgid]'); if (!tr) return;
+      const r = findNode(pgDeck(w), tr.dataset.pgid); if (!r) return;
+      r.n[td.dataset.pgf2] = td.textContent.trim();
+      save();
+    });
   }
   /* ===== ورقةُ البطاقة التي بين يديك: تُبنى من **ملفّها** لا من تحديد الشجرة =====
      الزرُّ في الشريط السفليّ يسأل: «أرِني الورقةَ التي أنا فيها». وجوابُه ملفُّ البطاقة
@@ -15655,6 +15747,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        الدُّرجُ يَعِد بإضافة بطاقةٍ **إلى رزمةٍ بعينها**، فإن لم تكن في مساهمةٍ فلا رزمةَ
        تُضاف إليها — ومن ثَمّ لا «+» في المشترك أبدًا (حكمُ صاحب الموقع).
        ويُخفى كذلك ما دام في النطاق اختبارٌ: الامتحانُ ليس محلَّ إنشاء */
+    /* ===== ولا دُرجَ ولا ألسنةَ ما دامت في المكدَّس صفحة =====
+       الصفحةُ هي الكونسبت: نافذةٌ واحدةٌ يُكتب فيها، لا مسرحٌ تتناثر فوقه الأدوات.
+       فيُخفى صفُّ الدُّرج كلُّه — أنواعُ البطائق ومِقبضُه وألسنةُ المطويّات.
+       ===== والعبرةُ بوجودها لا بتركيزها =====
+       هو حكمُ الاختبار نفسُه أعلاه، ولعلّته عينِها: لو كان الشرطُ «المركَّزةُ صفحة»
+       لَعاد الدُّرجُ كلّما فُتحت فوقها نافذةٌ أخرى ثمّ غاب حين تُركَّز هي — تذبذبٌ
+       لا قاعدة */
+    $('#card-modal').classList.toggle('is-pageonly', cdWins.some(w => w.what === 'page'));
     $('#card-modal').classList.toggle('is-noadd', cdNoAdd());
   }
   function renderCardDlg() {
@@ -17020,7 +17120,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الافتراضيُّ في السِّجلّ لا اختيارُ اليد — فيُقرأ إعلانًا عن بطاقةٍ لم تُخلق.
      فتُستثنى حتى تُختار (‎picked‎)، وعندها يُصنع لسانُها بنوعها الذي اخترتَ */
   function cdMinSlots() {
-    const order = cdWins.filter(w => w.picked).sort((a, b) => cdBorn(a) - cdBorn(b));
+    /* ولا لسانَ للصفحة: هي النافذةُ المقصودةُ وحدَها، ولسانٌ فوقها يَعِد بتعدّدٍ
+       ليس في كونسبتها. وصفُّ الدُّرج مخفيٌّ معها أصلًا (‎is-pageonly‎)، فيُستثنى
+       ههنا كذلك كيلا يُصنع لسانٌ لا يراه أحد ثمّ يُقاس ويُحرَّك */
+    const order = cdWins.filter(w => w.picked && w.what !== 'page').sort((a, b) => cdBorn(a) - cdBorn(b));
     const out = [], seen = new Set();
     order.forEach(w => {
       const g = cdGid(w);

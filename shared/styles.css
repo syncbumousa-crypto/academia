@@ -15779,6 +15779,7 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
   --pgp-tx: #14233f;           /* حبرُها */
   --pgp-head: #123037;         /* ترويسةُ الجدول وعمودُ أرقامه */
   --pgp-pet: #2c5e65;          /* بترولُ الهويّة — حلقةُ الخانة المركَّزة */
+  --pgp-dim: #6b7b86;          /* الخافتُ: خانةٌ لا تُحرَّر، وسطرُ «لا بطائق» */
   display: flex; flex-direction: column;
 }
 /* الداخلُ غامق. والقاعدةُ العامّة ‎#card-modal .cd-body:not(.sh-body)‎ تُعطيه الطاولةَ
@@ -15819,3 +15820,40 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 .pg-ttl { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
 .pg-ttl svg { width: 17px; height: 17px; flex: none; }
 .pg-ttl b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ===== ولا صفَّ دُرجٍ ما دامت في المكدَّس صفحة =====
+   الصفُّ يحمل أنواعَ البطائق ومِقبضَه وألسنةَ المطويّات — وثلاثتُها خارجَ كونسبت
+   الصفحة. و‎display:none‎ لا ‎visibility‎: الصفُّ يحجز ارتفاعَه فوق المسرح، فإخفاءٌ
+   يُبقي مكانَه يَترك فجوةً فوق النافذة لا يُعرف سببُها */
+#card-modal.is-pageonly .cd-dw { display: none; }
+
+/* ============================================================
+   ترويسةُ المجلدات في الصفحة — حبّةٌ لكلّ قسم
+   ============================================================
+   قاعدتُها من شريط مجلدات MyTerm (‎.qfolders‎): حبّةٌ محدَّدةُ الحافّة فيها الاسمُ
+   وعددُه في فقاعة، والمشتعلةُ تُعرف بحافّتها وأرضيّتها لا بلونِ حرفها وحدَه.
+   والأسماءُ ‎pg-*‎ لا ‎qfolder‎: ذاك شريطُ جلسةِ اختبارٍ معناه «ادخل في القسم»،
+   وهذا شريطُ عرضٍ معناه «أرِني القسم» — واسمٌ واحدٌ لمعنيين يُغري بتوحيدهما
+   في تهذيبٍ لاحقٍ فينكسر أحدُهما */
+.pg-head {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 0 18px 12px; background: var(--cd-desk);
+}
+.pg-fold {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: inherit; font-size: 11.5px; padding: 5px 10px;
+  border: 1px solid #3a4a50; border-radius: 999px;
+  background: transparent; color: #9db4ba; cursor: pointer;
+}
+.pg-fold:hover { border-color: #5a737b; }
+.pg-fold.on { border-color: var(--pgp-pet, #2c5e65); background: rgba(127, 188, 198, .16); color: #dfeaec; }
+.pg-fold-n {
+  font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
+  background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums;
+}
+.pg-fold-all { font-weight: 700; }
+/* والخانةُ التي فيها وسمٌ لا تُحرَّر ههنا، فلا تُعرَض كأنّها تُحرَّر: حرفُها خافتٌ
+   ومؤشّرُها مؤشّرُ نصٍّ لا قلم، وسببُها في ‎title‎ يُقرأ بالتحويم */
+.pg-tbl td.pg-rich { color: var(--pgp-dim, #6b7b86); cursor: help; }
+.pg-tbl td.pg-none { text-align: center; color: var(--pgp-dim, #6b7b86); padding: 22px 9px; }
