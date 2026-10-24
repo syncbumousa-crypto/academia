@@ -15773,40 +15773,70 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 #card-modal.is-pageonly .cd-dw { display: none; }
 
 /* ============================================================
-   شريطُ مجلدات المساهمة — حبّةٌ لكلّ مجلد، فوق الورقة
+   شجرةُ مجلدات المساهمة — عموديّةٌ فوق الورقة
    ============================================================
-   قاعدتُه من شريط مجلدات MyTerm (‎.qfolders‎): حبّةٌ محدَّدةُ الحافّة فيها الاسمُ
-   وعددُه في فقاعة، والمشتعلةُ تُعرف بحافّتها وأرضيّتها لا بلونِ حرفها وحدَه.
-   والاسمُ ‎pg-*‎ لا ‎qfolder‎: ذاك شريطُ جلسةِ اختبارٍ معناه «ادخل في القسم»، وهذا
-   شريطُ عرضٍ معناه «أرِني القسم» — واسمٌ واحدٌ لمعنيين يُغري بتوحيدهما في تهذيبٍ
-   لاحقٍ فينكسر أحدُهما.
+   قاعدتُها من صفّ الفصل في MyTerm (‎.ch‎ و‎.ch-twist‎): سهمٌ صغيرٌ يدور ٩٠° عند
+   الفتح، والتفصيلُ ينكشف تحت الصفّ لا بجانبه. والاسمُ ‎pg-*‎ لا ‎ch-*‎: ذاك صفُّ
+   فصلٍ في لوحِ ترمٍ، وهذا مجلدُ مساهمة — واسمٌ واحدٌ لمعنيين يُغري بتوحيدهما
+   في تهذيبٍ لاحقٍ فينكسر أحدُهما.
 
-   ===== وهو أخو الورقة لا ابنُها =====
-   يسكن بين الترويسة و‎.sh-body‎، لا داخلَها. ولو كان داخلَها لَأكل من ارتفاعٍ
-   قِيست عليه المُلاءمةُ قبله ففاضت الورقةُ بقدره. وخارجَها يُنقِص ارتفاعَها فيوقظ
-   مرقابَ المقاس، فتُعاد المُلاءمةُ على الجوف الحقيقيّ.
-   ولذلك لا ‎sticky‎ له: ما يَلصَق يَلصَق في حاوية تمريره، وهو ليس فيها أصلًا. */
+   ===== وهي أختُ الورقة لا ابنتُها =====
+   تسكن بين الترويسة و‎.sh-body‎ لا داخلَها. ولو كانت داخلَها لَأكلت من ارتفاعٍ
+   قِيست عليه المُلاءمةُ قبلها ففاضت الورقةُ بقدرها. وخارجَها تُنقِص ارتفاعَها
+   فيوقظ مرقابَ المقاس، فتُعاد المُلاءمةُ على الجوف الحقيقيّ.
+
+   ===== وسقفُ ارتفاعها لأنّ المجلداتِ لا عددَ لها =====
+   مساهمةٌ بعشرين مجلدًا تدفع الورقةَ خارجَ النافذة. فلها سقفٌ وتمريرٌ خاصٌّ بها،
+   فيبقى للورقة نصيبُها مهما كثُرت. */
 .pg-folds {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  padding: 2px 12px 10px; flex: none;
+  display: flex; flex-direction: column; gap: 1px;
+  padding: 4px 12px 8px; flex: none;
+  max-height: 34%; overflow: auto;
 }
 .pg-folds[hidden] { display: none; }
-.pg-fold {
-  display: inline-flex; align-items: center; gap: 6px;
-  font: inherit; font-size: 11.5px; padding: 5px 10px;
-  border: 1px solid var(--u-line, #3a4a50); border-radius: 999px;
-  background: transparent; color: var(--u-dim, #9db4ba); cursor: pointer;
+.pg-row {
+  display: grid; grid-template-columns: 16px minmax(0, 1fr);
+  align-items: center; gap: 4px; border-radius: 6px;
 }
-.pg-fold:hover { border-color: var(--shp-pet, #5a737b); }
-/* والمشتعلةُ تتبع جِلدَ الورقة: ‎--shp-pet‎ يُرفع درجةً على الجِلد الداكن، فتبقى
-   الحبّةُ مرئيّةً في الحالين بلا قاعدةٍ ثانيةٍ تُكتب لكلٍّ منهما */
-.pg-fold.on {
-  border-color: var(--shp-pet, #2c5e65);
-  background: color-mix(in srgb, var(--shp-pet, #2c5e65) 18%, transparent);
-  color: var(--u-ink, #dfeaec);
+.pg-row:hover { background: rgba(127, 127, 127, .10); }
+.pg-twist {
+  width: 16px; height: 16px; padding: 0; border: 0; border-radius: 4px;
+  font: inherit; font-size: 9px; line-height: 1; background: transparent;
+  color: var(--u-dim, #9db4ba); cursor: pointer;
+  transition: transform .14s ease, color .14s ease, background .14s ease;
 }
+.pg-twist:hover { color: var(--u-ink, #dfeaec); background: rgba(127, 127, 127, .20); }
+.pg-twist--none { cursor: default; }
+.pg-row.open > .pg-twist { transform: rotate(90deg); color: var(--u-ink, #dfeaec); }
+/* الاسمُ زرٌّ يملأ سطرَه: مساحةُ الضغط سطرٌ كامل لا كلمةٌ تُصاد */
+.pg-pick {
+  display: flex; align-items: center; gap: 7px; width: 100%; min-width: 0;
+  font: inherit; font-size: 12px; text-align: start; padding: 4px 6px;
+  border: 0; border-radius: 6px; background: transparent;
+  color: var(--u-dim, #9db4ba); cursor: pointer;
+}
+.pg-fold-nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* والمشتعلُ يُعرف بحرفه وبنقطةٍ على حافّته، لا بأرضيّةٍ تملأ السطر: الصفوفُ
+   متلاصقةٌ عموديًّا، وأرضيّةٌ لكلّ مشتعلٍ تُصيّرها كتلةً واحدةً لا تُقرأ صفوفًا */
+.pg-row.on > .pg-pick {
+  color: var(--u-ink, #dfeaec); font-weight: 700;
+  box-shadow: inset 2px 0 0 var(--shp-pet, #2c5e65);
+}
+html[dir="rtl"] .pg-row.on > .pg-pick { box-shadow: inset -2px 0 0 var(--shp-pet, #2c5e65); }
 .pg-fold-n {
   font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
-  background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums;
+  background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums; flex: none;
 }
-.pg-fold-all { font-weight: 700; }
+/* الذرّيّةُ تحت الصفّ لا بجانبه، ولا تُرى إلّا بالسهم */
+.pg-kidsw { display: none; grid-column: 1 / -1; }
+.pg-row.open > .pg-kidsw { display: block; }
+.pg-kids { margin: 0 0 4px; padding-inline-start: 22px; list-style: none; }
+.pg-kids li { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding: 2px 0; }
+.pg-kids .pg-kids { flex-basis: 100%; }
+.pg-kn { font-size: 11.5px; color: var(--u-dim, #9db4ba); overflow: hidden; text-overflow: ellipsis; }
+.pg-all {
+  align-self: flex-start; margin-top: 4px; font: inherit; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border: 1px solid var(--u-line, #3a4a50); border-radius: 999px;
+  background: transparent; color: var(--u-dim, #9db4ba); cursor: pointer;
+}
+.pg-all:hover { border-color: var(--shp-pet, #5a737b); }

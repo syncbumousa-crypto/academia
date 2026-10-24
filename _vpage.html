@@ -1,10 +1,10 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<title>حارسُ شريط مجلدات المساهمة</title>
+<title>حارسُ شجرة مجلدات المساهمة</title>
 <link rel="stylesheet" href="shared/styles.css">
 <style>
   body{margin:0;background:#20323a;font-family:system-ui,sans-serif}
   #card-modal{display:block;position:static;background:none;padding:18px}
-  .mmodal__card.is-sheet{height:420px;width:820px;margin:0 auto;border-radius:12px;display:flex;flex-direction:column}
+  .mmodal__card.is-sheet{height:460px;width:820px;margin:0 auto;border-radius:12px;display:flex;flex-direction:column}
   .cd-meta{background:#17262c;color:#dfeaec;padding:8px 12px;font-size:13px}
   .cd-dw{height:40px;background:#111}
   .sh-body{flex:1;min-height:0}
@@ -16,57 +16,93 @@
   <div class="cd-dw" id="drawer"></div>
   <div class="mmodal__card is-sheet" id="card">
     <div class="cd-meta">ورقة الملخّص</div>
-    <div class="pg-folds" id="strip"></div>
-    <div class="cd-body sh-body" id="body"><div class="sh-roll"></div></div>
+    <div class="pg-folds" id="tree"></div>
+    <div class="cd-body sh-body" id="body"><span class="cd-zbar sh-zbar">− 100% +</span></div>
     <div class="cd-foot sh-foot"></div>
   </div>
 </div>
 <div class="pg-folds" id="empty" hidden></div>
+<div id="card-modal" class="is-pageonly" style="position:absolute;left:0;top:-3000px"><div class="mmodal__card is-sheet" id="stressCard" style="height:460px;width:820px;display:flex;flex-direction:column"><div class="cd-meta">س</div><div class="pg-folds" id="stress"></div><div class="cd-body sh-body" id="stressBody" style="flex:1;min-height:0"></div></div></div>
 <pre id="rep">PENDING</pre>
 <script>
-/* بيانٌ بأرقام الواقع: ثلاثةُ مجلداتٍ أحدُها الجذر، وواحدٌ منها مُطفأٌ عمدًا */
-var FOLDS = [ {key:'',name:'الجذر',n:1}, {key:'f1',name:'المخاطرة',n:12}, {key:'f2',name:'التقييم',n:5} ];
-var ON = { '':1, 'f1':1 };
-var ES = function(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; };
-document.getElementById('strip').innerHTML =
-  FOLDS.map(function(f){ return '<button type="button" class="pg-fold'+(ON[f.key]?' on':'')
-    +'" data-pgf="'+ES(f.key)+'"><span class="pg-fold-nm">'+ES(f.name)+'</span>'
-    +'<span class="pg-fold-n">'+f.n+'</span></button>'; }).join('')
-  +'<button type="button" class="pg-fold pg-fold-all">الكلّ</button>';
+/* بيانٌ بأرقام الواقع: الجذرُ بلا ذرّيّة، ومجلدٌ له ابنان أحدُهما له ابن، وثالثٌ مُطفأ */
+var FOLDS = [
+ {key:'',  name:'الجذر',    n:3,  kids:[]},
+ {key:'f1',name:'المخاطرة', n:12, kids:[{name:'بيتا',n:5,kids:[{name:'التغاير',n:2,kids:[]}]},{name:'التشتّت',n:7,kids:[]}]},
+ {key:'f2',name:'التقييم',  n:5,  kids:[{name:'الخصم',n:5,kids:[]}]}
+];
+var ON = { '':1, 'f1':1 }, OPEN = { 'f1':1 };
+var ES=function(s){var d=document.createElement('div');d.textContent=String(s==null?'':s);return d.innerHTML;};
+function kidsHTML(k){ return !k.length?'':'<ul class="pg-kids">'+k.map(function(x){
+  return '<li><span class="pg-kn">'+ES(x.name)+'</span><span class="pg-fold-n">'+x.n+'</span>'+kidsHTML(x.kids)+'</li>';
+}).join('')+'</ul>'; }
+document.getElementById('tree').innerHTML = FOLDS.map(function(f){
+  var has=f.kids.length, op=!!OPEN[f.key];
+  return '<div class="pg-row'+(ON[f.key]?' on':'')+(op?' open':'')+'">'
+   +(has?'<button type="button" class="pg-twist" data-pgx="'+ES(f.key)+'" aria-expanded="'+op+'">▸</button>'
+        :'<i class="pg-twist pg-twist--none"></i>')
+   +'<button type="button" class="pg-pick" data-pgf="'+ES(f.key)+'"><span class="pg-fold-nm">'+ES(f.name)
+   +'</span><span class="pg-fold-n">'+f.n+'</span></button>'
+   +(has?'<div class="pg-kidsw">'+kidsHTML(f.kids)+'</div>':'')+'</div>';
+}).join('')+'<button type="button" class="pg-all">الكلّ</button>';
 
-var out=[], bad=0;
-function L(h){ var s=h(); out.push('<b class="'+(s[0]?'ok':'no')+'">'+(s[0]?'PASS':'FAIL')+'</b> '+s[1]); if(!s[0])bad++; }
-var CS=function(el){ return getComputedStyle(el); };
+document.getElementById("stress").innerHTML = Array.from({length:40},function(_,i){return '<div class="pg-row"><i class="pg-twist pg-twist--none"></i><button type="button" class="pg-pick"><span class="pg-fold-nm">مجلد '+(i+1)+'</span><span class="pg-fold-n">7</span></button></div>';}).join("");
+var out=[],bad=0;
+function L(h){var s=h();out.push('<b class="'+(s[0]?'ok':'no')+'">'+(s[0]?'PASS':'FAIL')+'</b> '+s[1]);if(!s[0])bad++;}
+var CS=function(e){return getComputedStyle(e);};
+var Q=function(s){return document.querySelector(s);};
 
-L(function(){ var d=CS(document.getElementById('drawer')).display;
-  return [d==='none','صفُّ الدُّرج مخفيٌّ بـdisplay:'+d]; });
-L(function(){ var n=document.querySelectorAll('#strip .pg-fold').length;
-  return [n===4,'أربعُ حبّاتٍ: ثلاثةُ مجلداتٍ وزرُّ الكلّ ('+n+')']; });
-L(function(){ var ns=[].map.call(document.querySelectorAll('#strip .pg-fold-n'),function(e){return e.textContent;}).join('·');
-  return [ns==='1·12·5','العددُ على كلّ حبّة: '+ns]; });
-L(function(){ var on=CS(document.querySelector('#strip .pg-fold.on')).backgroundColor,
-      off=CS(document.querySelector('#strip .pg-fold:not(.on)')).backgroundColor;
-  return [on!==off,'المشتعلةُ تفترق بالأرضيّة ('+on+' ≠ '+off+')']; });
-/* الشريطُ فوق الورقة — بالإحداثيّات لا بترتيب الوسم */
-L(function(){ var s=document.getElementById('strip').getBoundingClientRect(),
+L(function(){var d=CS(document.getElementById('drawer')).display;
+  return [d==='none','صفُّ الدُّرج مخفيٌّ بـdisplay:'+d];});
+L(function(){var n=document.querySelectorAll('#tree .pg-row').length;
+  return [n===3,'ثلاثةُ صفوفٍ عموديّة ('+n+')'];});
+/* عموديّةٌ فعلًا: الصفُّ الثاني تحت الأوّل لا بجانبه */
+L(function(){var r=document.querySelectorAll('#tree .pg-row');
+  var a=r[0].getBoundingClientRect(),b=r[1].getBoundingClientRect();
+  return [b.top>=a.bottom-1,'الصفُّ الثاني تحت الأوّل ('+Math.round(b.top)+' ≥ '+Math.round(a.bottom)+')'];});
+L(function(){var ns=[].map.call(document.querySelectorAll('#tree .pg-row > .pg-pick .pg-fold-n'),
+  function(e){return e.textContent;}).join('·');
+  return [ns==='3·12·5','العددُ على كلّ مجلد: '+ns];});
+/* المطويُّ لا تُرى ذرّيّتُه، والمفتوحُ تُرى */
+L(function(){var shut=Q('#tree .pg-row:not(.open) .pg-kidsw');
+  return [shut&&CS(shut).display==='none','ذرّيّةُ المطويِّ مخفيّةٌ ('+(shut?CS(shut).display:'لا مطويّ')+')'];});
+L(function(){var op=Q('#tree .pg-row.open .pg-kidsw');
+  return [op&&CS(op).display!=='none'&&op.getBoundingClientRect().height>0,
+    'ذرّيّةُ المفتوحِ مرئيّةٌ بارتفاع '+Math.round(op?op.getBoundingClientRect().height:0)+'px'];});
+/* والحفيدُ يظهر معه: «التغاير» تحت «بيتا» */
+L(function(){var deep=document.querySelectorAll('#tree .pg-row.open .pg-kids .pg-kids .pg-kn').length;
+  return [deep===1,'الحفيدُ معروضٌ في المفتوح ('+deep+')'];});
+/* السهمُ يدور عند الفتح */
+L(function(){var o=CS(Q('#tree .pg-row.open > .pg-twist')).transform,
+      s=CS(Q('#tree .pg-row:not(.open) > .pg-twist')).transform;
+  return [o!==s&&o!=='none','سهمُ المفتوحِ مدارٌ ('+o+')'];});
+/* المشتعلُ يُعرف بنقطةٍ على حافّته لا بأرضيّةٍ تملأ السطر */
+L(function(){var on=CS(Q('#tree .pg-row.on > .pg-pick')).boxShadow,
+      off=CS(Q('#tree .pg-row:not(.on) > .pg-pick')).boxShadow;
+  return [on!==off&&on!=='none','المشتعلُ بنقطةِ حافّة ('+on.slice(0,34)+'…)'];});
+/* فوق مسرح الورق وخارجَه */
+L(function(){var t=document.getElementById('tree').getBoundingClientRect(),
       b=document.getElementById('body').getBoundingClientRect();
-  return [s.bottom<=b.top+1,'الشريطُ فوق مسرح الورق ('+Math.round(s.bottom)+' ≤ '+Math.round(b.top)+')']; });
-/* ===== وهو أخو الورقة لا ابنُها =====
-   هذا هو الفحصُ الذي يَحرس العلّة: لو صار داخلَ .sh-body لَأكل من ارتفاعٍ قِيست
-   عليه المُلاءمةُ قبله، ففاضت الورقة. والشكلُ لا يكشفه — البنيةُ وحدَها تكشفه */
-L(function(){ var inBody=document.getElementById('body').contains(document.getElementById('strip'));
-  return [!inBody,'الشريطُ خارجَ ‎.sh-body‎ فلا يَفسد قياسُ المُلاءمة']; });
-/* وشريطٌ خاوٍ لا يحجز ارتفاعًا */
-L(function(){ var h=document.getElementById('empty').offsetHeight;
-  return [h===0,'الشريطُ الخاوي بارتفاع '+h+'px']; });
-/* ويتبع جِلدَ الورقة: الداكنُ يرفع --shp-pet فتبقى الحبّةُ مرئيّةً بلا قاعدةٍ ثانية */
-L(function(){ var c=document.getElementById('card'), on=document.querySelector('#strip .pg-fold.on');
-  var lite=CS(on).borderTopColor;
-  c.setAttribute('data-sh','dark');
-  var dark=CS(on).borderTopColor;
-  c.removeAttribute('data-sh');
-  return [lite!==dark,'الحبّةُ تتبع جِلدَ الورقة ('+lite+' ⟵ نهارًا · '+dark+' ⟵ ليلًا)']; });
+  return [t.bottom<=b.top+1,'الشجرةُ فوق مسرح الورق ('+Math.round(t.bottom)+' ≤ '+Math.round(b.top)+')'];});
+L(function(){return [!document.getElementById('body').contains(document.getElementById('tree')),
+  'الشجرةُ خارجَ ‎.sh-body‎ فلا يَفسد قياسُ المُلاءمة'];});
+/* ===== وسقفُها يُقاس بالضغط لا بقراءة القيمة =====
+   «‎max-height:34%‎» نصٌّ لا يقول شيئًا عمّا يقع. فتُبنى شجرةُ أربعين مجلدًا في نافذةٍ
+   بقدر النافذة الحقيقيّة، ويُسأل: أبقي للورقة نصيبُها، وهل تُمرَّر الشجرةُ أم فاضت؟ */
+L(function(){
+  var card=document.getElementById('stressCard'), tree=document.getElementById('stress');
+  var ch=card.getBoundingClientRect().height, th=tree.getBoundingClientRect().height;
+  var scrolls=tree.scrollHeight>tree.clientHeight+1;
+  var body=document.getElementById('stressBody').getBoundingClientRect().height;
+  return [th<ch*0.45 && scrolls && body>ch*0.4,
+    'أربعون مجلدًا: الشجرة '+Math.round(th)+'px من '+Math.round(ch)+'px وتُمرَّر، وبقي للورق '+Math.round(body)+'px'];});
+L(function(){var h=document.getElementById('empty').offsetHeight;
+  return [h===0,'الشجرةُ الخاويةُ بارتفاع '+h+'px'];});
+L(function(){var c=document.getElementById('card'),on=Q('#tree .pg-row.on > .pg-pick');
+  var lite=CS(on).boxShadow; c.setAttribute('data-sh','dark');
+  var dark=CS(on).boxShadow; c.removeAttribute('data-sh');
+  return [lite!==dark,'النقطةُ تتبع جِلدَ الورقة (تتبدّل بين النهار والليل)'];});
 
 document.getElementById('rep').innerHTML =
-  (bad? '<b class="no">'+bad+' إخفاق</b>' : '<b class="ok">ALL PASS</b>') + '\n' + out.join('\n');
+  (bad?'<b class="no">'+bad+' إخفاق</b>':'<b class="ok">ALL PASS</b>')+'\n'+out.join('\n');
 </script></body></html>

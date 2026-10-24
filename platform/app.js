@@ -7402,7 +7402,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فيصحّ الحسابُ مهما تبدّل تكبيرُ المتصفّح. */
   const SH_PRINT_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="7.5" rx="2"/><path d="M7 14h10v6.5H7z"/></svg>';
   const SH_W = 210, SH_H = 297, SH_PAD = 14;   /* A4 بالمليمتر وحاشيتُها */
-  function sheetPaginate(secs, gauge) {
+  function sheetPaginate(secs, gauge, noCover) {
     const px = gauge.getBoundingClientRect().width / (SH_W - SH_PAD * 2);   /* بكسل لكلّ مليمتر */
     /* ولمّا رُفعت الترويسةُ الجارية عادت مساحتُها إلى الصفوف: الحدُّ جوفُ الورقة كلُّه،
        ولا يُطرح منه إلّا فسحةُ أمانٍ صغيرةٌ تحمي من فيضِ كسرٍ عشريّ.
@@ -7426,10 +7426,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        متجاورين. والغلافُ يفصل: ورقةٌ بيضاءُ فيها رمزُه واسمُه وعددُه لا غير — كصفحة الباب
        في الكتاب المطبوع. فيُطوى ما قبله، ويُبدأ ما بعده في ورقةٍ جديدة.
        ولا يُقاس: الغلافُ لا يزاحمه شيءٌ في ورقته، فلا حاجة إلى وزنه */
+    /* ===== ولا أغلفةَ في صفحة المساهمة =====
+       الغلافُ ورقةٌ فاصلةٌ بين قسمٍ وقسم، وهي تُفيد في ملفٍّ يُقلَّب كالكتاب. أمّا ههنا
+       فالشجرةُ فوق الورقة تقول الأقسامَ كلَّها دفعةً وتُطفئ ما لا يُراد منها — فالورقةُ
+       الفاصلةُ تكرارٌ يُقلَّب، وورقةٌ بيضاءُ بين كلّ قسمين تُضاعف عددَ الأوراق بلا متن.
+       ولا يُمسّ الملفُّ المفتوحُ من غير هذا الباب: أغلفتُه باقيةٌ كما كانت */
     secs.forEach(s => {
-      if (pages[pages.length - 1].length) pages.push([]);
-      pages[pages.length - 1].push({ t: 'cover', s });
-      pages.push([]); h = 0;
+      if (!noCover) {
+        if (pages[pages.length - 1].length) pages.push([]);
+        pages[pages.length - 1].push({ t: 'cover', s });
+        pages.push([]); h = 0;
+      }
       s.cards.forEach(n => { i++; const r = sheetRow(n); put({ t: 'row', n, i, r }, shRowHTML(i, r)); });
     });
     gauge.innerHTML = '';
@@ -7581,7 +7588,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const strip = card.querySelector('.pg-folds');
     if (strip) {
       strip.innerHTML = cardDlg.folds
-        ? pgFoldsHTML(pgFolds(pgDeckOf(cardDlg)), cardDlg.sel || new Set())
+        ? pgFoldsHTML(pgFolds(pgDeckOf(cardDlg)), cardDlg.sel || new Set(), cardDlg.pgOpen)
         : '';
       strip.hidden = !strip.innerHTML;
     }
@@ -7602,7 +7609,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       card._shFit.observe(card.querySelector('.sh-body'));
     }
 
-    const pages = sheetPaginate(secs, gauge);
+    const pages = sheetPaginate(secs, gauge, !!cardDlg.folds);
     /* ===== لا ترويسةَ جاريةً على الورق =====
        كانت كلُّ ورقةٍ تحمل اسمَ المادة و«ملخّص البطائق» ورقمَها من العدد. ورُفعت كلُّها:
        اسمُ المادة مكتوبٌ في ترويسة النافذة فوقها، فذكرُه في كلّ ورقةٍ تكرارٌ لا يُقرأ.
@@ -8001,25 +8008,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pgCount = f => (f.ch || []).reduce((a, x) => a + (x.t === 'f' ? pgCount(x) : 1), 0);
   /* المجلداتُ العليا وحدَها، والجذرُ أوّلُها. ولا تُعَدّ الفارغةُ منها: حبّةٌ تَعِد
      ببطائقَ لا توجد تُضغط فلا يتبدّل شيءٌ على الورق، فتُقرأ عطبًا لا اختيارًا */
+  /* ذرّيّةُ المجلد: بنوه من المجلدات وحدَهم، كلٌّ بعدده وذرّيّته — تُعرَض عند التوسّع */
+  const pgKids = f => (f.ch || []).filter(x => x.t === 'f')
+    .map(x => ({ name: x.name || T().pkTitlePh, n: pgCount(x), kids: pgKids(x) }));
   function pgFolds(deck) {
     const out = [];
     const loose = (deck || []).filter(n => n.t !== 'f');
-    if (loose.length) out.push({ key: '', name: T().shRoot, ids: loose.map(n => n.id), n: loose.length });
+    if (loose.length) out.push({ key: '', name: T().shRoot, ids: loose.map(n => n.id), n: loose.length, kids: [] });
     (deck || []).filter(n => n.t === 'f').forEach(f => {
       const c = pgCount(f);
-      if (c) out.push({ key: f.id, name: f.name || T().pkTitlePh, ids: [f.id], n: c });
+      if (c) out.push({ key: f.id, name: f.name || T().pkTitlePh, ids: [f.id], n: c, kids: pgKids(f) });
     });
     return out;
   }
   const pgOn = (f, sel) => f.ids.every(id => sel.has(id));
-  /* وشريطٌ من حبّةٍ واحدةٍ لا خيارَ فيه: يقول البديهيَّ ويقف بين القارئ وما جاء له */
-  function pgFoldsHTML(folds, sel) {
+  /* ===== ولمَ يُشعَل الأعلى وحدَه؟ =====
+     ‎sheetSections‎ تَحسب الابنَ من أبيه: المحدَّدُ الذي لا محدَّدَ فوقه يأخذ ذرّيّتَه
+     كاملةً. فلو أُطفئ ابنٌ وأبوه مشتعلٌ لَما تبدّل شيءٌ على الورق — زرٌّ يُضغط ولا
+     يَفعل، وذاك أسوأُ من زرٍّ لا يكون. فالتوسّعُ **معرفةٌ** بما في المجلد لا تحكّمٌ فيه،
+     والإشعالُ على العليا وحدَها. */
+  function pgKidsHTML(kids) {
+    if (!kids.length) return '';
+    return '<ul class="pg-kids">' + kids.map(k => '<li><span class="pg-kn">' + esc(k.name)
+      + '</span><span class="pg-fold-n">' + k.n + '</span>' + pgKidsHTML(k.kids) + '</li>').join('') + '</ul>';
+  }
+  /* وشجرةٌ من مجلدٍ واحدٍ لا خيارَ فيها: تقول البديهيَّ وتقف بين القارئ وما جاء له */
+  function pgFoldsHTML(folds, sel, open) {
     if (folds.length < 2) return '';
     const all = folds.every(f => pgOn(f, sel));
-    return folds.map(f => '<button type="button" class="pg-fold' + (pgOn(f, sel) ? ' on' : '')
-        + '" data-pgf="' + esc(f.key) + '"><span class="pg-fold-nm">' + esc(f.name)
-        + '</span><span class="pg-fold-n">' + f.n + '</span></button>').join('')
-      + '<button type="button" class="pg-fold pg-fold-all" data-pgall="1">'
+    const rows = folds.map(f => {
+      const has = f.kids.length, isOpen = open && open.has(f.key);
+      /* والسهمُ وحدَه بابُ الدخول والخروج، فلا يُنفق على الكشف شيءٌ من سطر الاسم.
+         ومن لا ذرّيّةَ له يأخذ فراغًا بقدره فتستقيم الأسماءُ على خطٍّ واحد */
+      return '<div class="pg-row' + (pgOn(f, sel) ? ' on' : '') + (isOpen ? ' open' : '') + '">'
+        + (has ? '<button type="button" class="pg-twist" data-pgx="' + esc(f.key)
+              + '" aria-expanded="' + (isOpen ? 'true' : 'false') + '">▸</button>'
+              : '<i class="pg-twist pg-twist--none" aria-hidden="true"></i>')
+        + '<button type="button" class="pg-pick" data-pgf="' + esc(f.key) + '">'
+        + '<span class="pg-fold-nm">' + esc(f.name) + '</span>'
+        + '<span class="pg-fold-n">' + f.n + '</span></button>'
+        + (has ? '<div class="pg-kidsw">' + pgKidsHTML(f.kids) + '</div>' : '')
+        + '</div>';
+    }).join('');
+    return rows + '<button type="button" class="pg-all" data-pgall="1">'
       + esc(all ? T().pgNone : T().pgAll) + '</button>';
   }
   const pgDeckOf = w => (cardData((w && w.code) || cmCode) || {}).deck || [];
@@ -8047,8 +8078,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ضغطةُ الحبّة =====
      تُبدّل التحديدَ ثمّ تُعيد بناءَ الأقسام بـ‎sheetSections‎ نفسِها لا بحسابٍ ثانٍ —
      فمصدرُ ما يُعرض واحد، ولا يجوز أن يقول الشريطُ شيئًا ويقول الورقُ غيرَه */
+  /* ===== والتوسّعُ لا يُعيد الرسم =====
+     إعادةُ الرسم تُرقّم الأوراقَ من جديد وتُعيد المُلاءمة، وليس في الكشف ما يُبدّل
+     ورقةً واحدة. فيُقلَب الصنفُ على الصفّ وحدَه. والمفتوحُ يعيش ما عاشت النافذة ولا
+     يُحفظ: ما تَكشفه الآن شأنُ قراءتك، لا صفةٌ في المساهمة تُخزَّن */
   document.addEventListener('click', e => {
-    const b = e.target.closest('.pg-fold');
+    const x = e.target.closest('.pg-twist[data-pgx]');
+    if (x && cardDlg && cardDlg.folds) {
+      const row = x.closest('.pg-row');
+      if (!cardDlg.pgOpen) cardDlg.pgOpen = new Set();
+      const k = x.dataset.pgx, now = !row.classList.contains('open');
+      row.classList.toggle('open', now);
+      x.setAttribute('aria-expanded', now ? 'true' : 'false');
+      if (now) cardDlg.pgOpen.add(k); else cardDlg.pgOpen.delete(k);
+      return;
+    }
+    const b = e.target.closest('.pg-pick, .pg-all');
     if (!b || !cardDlg || !cardDlg.folds) return;
     const deck = pgDeckOf(cardDlg);
     const folds = pgFolds(deck);
