@@ -1,99 +1,71 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<title>حارسُ الصفحة الكبرى</title>
+<title>حارسُ شريط مجلدات المساهمة</title>
 <link rel="stylesheet" href="shared/styles.css">
 <style>
   body{margin:0;background:#20323a;font-family:system-ui,sans-serif}
   #card-modal{display:block;position:static;background:none;padding:18px}
-  .mmodal__card.is-page{height:560px;width:860px;margin:0 auto;border-radius:12px;overflow:hidden}
+  .mmodal__card.is-sheet{height:420px;width:820px;margin:0 auto;border-radius:12px;display:flex;flex-direction:column}
   .cd-meta{background:#17262c;color:#dfeaec;padding:8px 12px;font-size:13px}
   .cd-dw{height:40px;background:#111}
-  #rep{max-width:860px;margin:14px auto;padding:10px 14px;border-radius:10px;
+  .sh-body{flex:1;min-height:0}
+  #rep{max-width:820px;margin:14px auto;padding:10px 14px;border-radius:10px;
        background:#17262c;color:#dfeaec;font:13px/1.9 system-ui,sans-serif;direction:rtl;white-space:pre-wrap}
   #rep b.ok{color:#6ec39a}#rep b.no{color:#ff8f87}
 </style></head><body>
 <div id="card-modal" class="is-pageonly">
   <div class="cd-dw" id="drawer"></div>
-  <div class="mmodal__card is-page">
-    <div class="cd-meta"><div class="cd-mid pg-mid"><span class="pg-ttl"><b>صفحة جديدة</b></span></div></div>
-    <div class="cd-body pg-body">
-      <div class="pg-head" id="head"></div>
-      <div class="pg-roll"><div class="pg-sheet" id="sheet"></div></div>
-    </div>
-    <div class="cd-foot pg-foot"></div>
+  <div class="mmodal__card is-sheet" id="card">
+    <div class="cd-meta">ورقة الملخّص</div>
+    <div class="pg-folds" id="strip"></div>
+    <div class="cd-body sh-body" id="body"><div class="sh-roll"></div></div>
+    <div class="cd-foot sh-foot"></div>
   </div>
 </div>
+<div class="pg-folds" id="empty" hidden></div>
 <pre id="rep">PENDING</pre>
 <script>
-/* بيانُ الحارس يحمل أرقامَ الواقع: أقسامٌ ثلاثةٌ أحدُها الجذر، وبطاقةٌ فيها وسمٌ
-   فلا تُحرَّر، وقسمٌ مُطفأٌ فلا تَظهر بطائقُه */
-var SECS = [
-  { key:'',    name:'الجذر',   cards:[{id:'a1',f:'التدفّق النقديّ',b:'ما يدخل وما يخرج'}] },
-  { key:'f1',  name:'المخاطرة', cards:[{id:'b1',f:'بيتا',b:'حساسيّةُ السهم للسوق'},
-                                       {id:'b2',f:'<img src="x">رسم',b:'شرحٌ <b>منسّق</b>'}] },
-  { key:'f2',  name:'التقييم',  cards:[{id:'c1',f:'القيمةُ الحاليّة',b:'خصمُ التدفّقات'}] }
-];
-var SEL = new Set(['', 'f1']);            /* «التقييم» مُطفأ عمدًا */
+/* بيانٌ بأرقام الواقع: ثلاثةُ مجلداتٍ أحدُها الجذر، وواحدٌ منها مُطفأٌ عمدًا */
+var FOLDS = [ {key:'',name:'الجذر',n:1}, {key:'f1',name:'المخاطرة',n:12}, {key:'f2',name:'التقييم',n:5} ];
+var ON = { '':1, 'f1':1 };
 var ES = function(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; };
-var TX = function(h){ var d=document.createElement('div'); d.innerHTML=h||''; return (d.textContent||'').trim(); };
-var RICH = function(v){ return /<[a-z!/]/i.test(String(v||'')); };
-
-document.getElementById('head').innerHTML =
-  SECS.map(function(s){ return '<button type="button" class="pg-fold'+(SEL.has(s.key)?' on':'')
-    +'" data-pgf="'+ES(s.key)+'"><span class="pg-fold-nm">'+ES(s.name)+'</span>'
-    +'<span class="pg-fold-n">'+s.cards.length+'</span></button>'; }).join('')
-  + '<button type="button" class="pg-fold pg-fold-all">الكلّ</button>';
-
-var rows=[]; SECS.forEach(function(s){ if(SEL.has(s.key)) s.cards.forEach(function(c){ rows.push(c); }); });
-var body=''; rows.forEach(function(c,i){
-  function cell(f,cls){ return RICH(c[f])
-    ? '<td class="'+cls+' pg-rich" title="فيها وسم">'+ES(TX(c[f]))+'</td>'
-    : '<td class="'+cls+'" contenteditable="plaintext-only" data-pgf2="'+f+'">'+ES(TX(c[f]))+'</td>'; }
-  body += '<tr data-pgid="'+ES(c.id)+'"><td class="n">'+(i+1)+'</td>'+cell('f','k')+cell('b','v')+'</tr>';
-});
-document.getElementById('sheet').innerHTML =
-  '<table class="pg-tbl"><colgroup><col class="n"><col class="k"><col class="v"></colgroup>'
-  +'<thead><tr><th class="n"></th><th>العنصر</th><th>الخلاصة</th></tr></thead><tbody>'+body+'</tbody></table>';
+document.getElementById('strip').innerHTML =
+  FOLDS.map(function(f){ return '<button type="button" class="pg-fold'+(ON[f.key]?' on':'')
+    +'" data-pgf="'+ES(f.key)+'"><span class="pg-fold-nm">'+ES(f.name)+'</span>'
+    +'<span class="pg-fold-n">'+f.n+'</span></button>'; }).join('')
+  +'<button type="button" class="pg-fold pg-fold-all">الكلّ</button>';
 
 var out=[], bad=0;
 function L(h){ var s=h(); out.push('<b class="'+(s[0]?'ok':'no')+'">'+(s[0]?'PASS':'FAIL')+'</b> '+s[1]); if(!s[0])bad++; }
-function lum(c){ var m=c.match(/[\d.]+/g); if(!m) return -1; return (0.2126*m[0]+0.7152*m[1]+0.0722*m[2])/255; }
-var CS = function(el){ return getComputedStyle(el); };
+var CS=function(el){ return getComputedStyle(el); };
 
-L(function(){ var l=lum(CS(document.querySelector('.pg-body')).backgroundColor);
-  return [l>=0&&l<0.20,'الطاولةُ غامقة (إضاءة '+l.toFixed(3)+' — الحدّ دون 0.20)']; });
-L(function(){ var d=lum(CS(document.querySelector('.pg-body')).backgroundColor),
-      p=lum(CS(document.querySelector('.pg-sheet')).backgroundColor);
-  return [p>d+0.35,'الورقةُ أفتحُ من الطاولة بفارق '+(p-d).toFixed(3)]; });
-/* الدُّرجُ يُخفى — وبـ‎display‎ لا بإخفاءٍ يحجز مكانَه */
-L(function(){ var s=CS(document.getElementById('drawer'));
-  return [s.display==='none','صفُّ الدُّرج مخفيٌّ بـdisplay:'+s.display]; });
-/* الترويسةُ فوق الورقة فعلًا — بالإحداثيّات لا بترتيب الوسم */
-L(function(){ var h=document.getElementById('head').getBoundingClientRect(),
-      s=document.getElementById('sheet').getBoundingClientRect();
-  return [h.bottom<=s.top+1,'الترويسةُ فوق الورقة ('+Math.round(h.bottom)+' ≤ '+Math.round(s.top)+')']; });
-L(function(){ var s=CS(document.querySelector('.pg-head'));
-  return [s.position==='sticky','الترويسةُ لاصقةٌ عند التمرير ('+s.position+')']; });
-/* المشتعلةُ تُعرف بأرضيّتها لا بحرفها وحدَه */
-L(function(){ var on=CS(document.querySelector('.pg-fold.on')).backgroundColor,
-      off=CS(document.querySelector('.pg-fold:not(.on)')).backgroundColor;
-  return [on!==off,'المشتعلةُ تفترق عن المطفأة بالأرضيّة ('+on+' ≠ '+off+')']; });
-/* القسمُ المطفأُ لا تَظهر بطائقُه — والعددُ يُقاس لا يُفترض */
-L(function(){ var n=document.querySelectorAll('.pg-tbl tbody tr').length;
-  return [n===3,'ظهر '+n+' صفًّا من المحدَّد (الجذر ١ + المخاطرة ٢)، و«التقييم» مُطفأ']; });
-/* وما فيه وسمٌ لا يُحرَّر، وما لا وسمَ فيه يُحرَّر */
-L(function(){ var rich=document.querySelectorAll('.pg-tbl td.pg-rich'), bad=0;
-  rich.forEach(function(c){ if(c.isContentEditable) bad++; });
-  return [rich.length===2&&bad===0,'خانتان فيهما وسمٌ، وكلتاهما مقفلة']; });
-L(function(){ var ed=document.querySelectorAll('.pg-tbl td[data-pgf2]'), n=0;
-  ed.forEach(function(c){ if(c.isContentEditable) n++; });
-  return [n===4&&n===ed.length,n+' خانةً تُحرَّر من '+ed.length]; });
-/* والمقفلةُ تُرى مقفلةً: حرفُها أخفتُ من حرف أختها */
-L(function(){ var r=lum(CS(document.querySelector('.pg-tbl td.pg-rich')).color),
-      k=lum(CS(document.querySelector('.pg-tbl td[data-pgf2]')).color);
-  return [r>k,'المقفلةُ أخفتُ حرفًا ('+r.toFixed(3)+' > '+k.toFixed(3)+')']; });
-L(function(){ var b=document.querySelector('.pg-body'), s=document.querySelector('.pg-sheet');
-  return [s.getBoundingClientRect().width<=b.clientWidth,
-    'عرضُ الورقة '+Math.round(s.getBoundingClientRect().width)+'px داخلَ '+b.clientWidth+'px']; });
+L(function(){ var d=CS(document.getElementById('drawer')).display;
+  return [d==='none','صفُّ الدُّرج مخفيٌّ بـdisplay:'+d]; });
+L(function(){ var n=document.querySelectorAll('#strip .pg-fold').length;
+  return [n===4,'أربعُ حبّاتٍ: ثلاثةُ مجلداتٍ وزرُّ الكلّ ('+n+')']; });
+L(function(){ var ns=[].map.call(document.querySelectorAll('#strip .pg-fold-n'),function(e){return e.textContent;}).join('·');
+  return [ns==='1·12·5','العددُ على كلّ حبّة: '+ns]; });
+L(function(){ var on=CS(document.querySelector('#strip .pg-fold.on')).backgroundColor,
+      off=CS(document.querySelector('#strip .pg-fold:not(.on)')).backgroundColor;
+  return [on!==off,'المشتعلةُ تفترق بالأرضيّة ('+on+' ≠ '+off+')']; });
+/* الشريطُ فوق الورقة — بالإحداثيّات لا بترتيب الوسم */
+L(function(){ var s=document.getElementById('strip').getBoundingClientRect(),
+      b=document.getElementById('body').getBoundingClientRect();
+  return [s.bottom<=b.top+1,'الشريطُ فوق مسرح الورق ('+Math.round(s.bottom)+' ≤ '+Math.round(b.top)+')']; });
+/* ===== وهو أخو الورقة لا ابنُها =====
+   هذا هو الفحصُ الذي يَحرس العلّة: لو صار داخلَ .sh-body لَأكل من ارتفاعٍ قِيست
+   عليه المُلاءمةُ قبله، ففاضت الورقة. والشكلُ لا يكشفه — البنيةُ وحدَها تكشفه */
+L(function(){ var inBody=document.getElementById('body').contains(document.getElementById('strip'));
+  return [!inBody,'الشريطُ خارجَ ‎.sh-body‎ فلا يَفسد قياسُ المُلاءمة']; });
+/* وشريطٌ خاوٍ لا يحجز ارتفاعًا */
+L(function(){ var h=document.getElementById('empty').offsetHeight;
+  return [h===0,'الشريطُ الخاوي بارتفاع '+h+'px']; });
+/* ويتبع جِلدَ الورقة: الداكنُ يرفع --shp-pet فتبقى الحبّةُ مرئيّةً بلا قاعدةٍ ثانية */
+L(function(){ var c=document.getElementById('card'), on=document.querySelector('#strip .pg-fold.on');
+  var lite=CS(on).borderTopColor;
+  c.setAttribute('data-sh','dark');
+  var dark=CS(on).borderTopColor;
+  c.removeAttribute('data-sh');
+  return [lite!==dark,'الحبّةُ تتبع جِلدَ الورقة ('+lite+' ⟵ نهارًا · '+dark+' ⟵ ليلًا)']; });
 
 document.getElementById('rep').innerHTML =
   (bad? '<b class="no">'+bad+' إخفاق</b>' : '<b class="ok">ALL PASS</b>') + '\n' + out.join('\n');

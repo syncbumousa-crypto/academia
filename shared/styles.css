@@ -15766,94 +15766,47 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 .sidebar .langbar button[data-lang="en"]::before { content: 'EN'; }
 .sidebar .langbar button[data-lang="ar"]::before { content: 'ع'; font-size: 15px; }
 
-/* ============================================================
-   الصفحةُ الكبرى (‎.mmodal__card.is-page‎): طاولةٌ داكنةٌ وورقةٌ عليها جدول
-   ============================================================
-   اللغةُ لغةُ ورقة الملخّص: طاولةٌ غامقةٌ (‎--cd-desk‎) والورقةُ أفتحُ منها أبدًا،
-   وحدودُ الجدول بترولٌ داكنٌ يكاد يكون حبرًا. ونُقلت **القاعدةُ** لا الأصناف:
-   ‎.sh-*‎ تحمل آلةَ التصغير بالمِلّيمتر و‎--sh-hair‎ المعكوس، ولا شيءَ منها يلزم
-   ههنا — والصفحةُ لا تُصغَّر، فالخيطُ عندها بكسلٌ صريحٌ لا كسرٌ يومض.
-   فلو لُبست أصنافُها لَوُرثت آلتُها كلُّها، ولَصار الاسمُ الواحدُ لشيئين. */
-.mmodal__card.is-page {
-  --pgp-bg: var(--cd-fld-l);   /* ورقُها — ورقُ البطائق بعينه */
-  --pgp-tx: #14233f;           /* حبرُها */
-  --pgp-head: #123037;         /* ترويسةُ الجدول وعمودُ أرقامه */
-  --pgp-pet: #2c5e65;          /* بترولُ الهويّة — حلقةُ الخانة المركَّزة */
-  --pgp-dim: #6b7b86;          /* الخافتُ: خانةٌ لا تُحرَّر، وسطرُ «لا بطائق» */
-  display: flex; flex-direction: column;
-}
-/* الداخلُ غامق. والقاعدةُ العامّة ‎#card-modal .cd-body:not(.sh-body)‎ تُعطيه الطاولةَ
-   أصلًا، لكنّه يُكتب صريحًا: شرطٌ منفيٌّ يحمل لونَ الصفحة رهينةُ اسمٍ غيرِ اسمها */
-#card-modal .cd-body.pg-body {
-  background: var(--cd-desk); padding: 18px 0 22px; overflow: auto; display: block;
-}
-.mmodal__card.is-page .cd-body.pg-body { flex: 1 1 auto; min-height: 0; }
-/* ‎safe center‎ لا ‎center‎: الورقةُ إن فاضت عن النافذة فالمركزةُ تقصّ رأسَها ولا
-   يبلغه التمرير — و‎safe‎ ترتدّ إلى البداية عند الفيض فيبقى أعلاها مُدرَكًا */
-.pg-roll { display: flex; justify-content: safe center; }
-.pg-sheet {
-  width: min(780px, calc(100% - 36px)); min-height: 420px; box-sizing: border-box;
-  background: var(--pgp-bg); color: var(--pgp-tx); padding: 26px 28px;
-  box-shadow: 0 8px 26px -10px rgba(0, 0, 0, .5);
-}
-.pg-tbl { width: 100%; table-layout: fixed; border-collapse: collapse; }
-.pg-tbl col.n { width: 34px; } .pg-tbl col.k { width: 34%; } .pg-tbl col.v { width: auto; }
-.pg-tbl td, .pg-tbl th {
-  border: 1px solid var(--pgp-head); padding: 7px 9px; vertical-align: top;
-  font-size: 14px; line-height: 1.8; text-align: start; word-wrap: break-word;
-}
-.pg-tbl th { background: var(--pgp-head); color: var(--pgp-bg); font-weight: 700; }
-/* والرقمُ يتوسّط خانتَه طولًا وعرضًا: خانتُه تطول بطول جارتيها، فلو بقي في أعلاها
-   لَبدا معلّقًا في رأس عمودٍ فارغٍ تحته. والمتنُ يبقى في الأعلى لأنّه يُقرأ من أوّله */
-.pg-tbl td.n {
-  background: var(--pgp-head); color: var(--pgp-bg); text-align: center;
-  vertical-align: middle; font-size: 11px; font-weight: 700; padding-inline: 2px;
-  font-variant-numeric: tabular-nums; user-select: none;
-}
-/* الخانةُ المركَّزة تُعرَف: حلقةٌ **داخلَ** الحدّ (‎offset‎ سالب) فلا تزيح الجدولَ ولا
-   تُسمّك حدَّه، وتبقى الشبكةُ على قياسها حرفًا */
-.pg-tbl [contenteditable]:focus {
-  outline: 2px solid var(--pgp-pet); outline-offset: -2px;
-}
-.cd-foot.pg-foot { min-height: 0; }
-#card-modal .cd-meta .cd-mid.pg-mid { align-items: center; gap: 8px; min-width: 0; }
-.pg-ttl { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
-.pg-ttl svg { width: 17px; height: 17px; flex: none; }
-.pg-ttl b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* ===== ولا صفَّ دُرجٍ ما دامت في المكدَّس صفحة =====
-   الصفُّ يحمل أنواعَ البطائق ومِقبضَه وألسنةَ المطويّات — وثلاثتُها خارجَ كونسبت
-   الصفحة. و‎display:none‎ لا ‎visibility‎: الصفُّ يحجز ارتفاعَه فوق المسرح، فإخفاءٌ
-   يُبقي مكانَه يَترك فجوةً فوق النافذة لا يُعرف سببُها */
+/* ===== ولا صفَّ دُرجٍ ما دامت في المكدَّس صفحةُ مساهمة =====
+   الصفُّ يحمل أنواعَ البطائق ومِقبضَه وألسنةَ المطويّات — وثلاثتُها خارجَ كونسبتها.
+   و‎display:none‎ لا ‎visibility‎: الصفُّ يحجز ارتفاعَه فوق المسرح، فإخفاءٌ يُبقي
+   مكانَه يَترك فجوةً فوق النافذة لا يُعرف سببُها */
 #card-modal.is-pageonly .cd-dw { display: none; }
 
 /* ============================================================
-   ترويسةُ المجلدات في الصفحة — حبّةٌ لكلّ قسم
+   شريطُ مجلدات المساهمة — حبّةٌ لكلّ مجلد، فوق الورقة
    ============================================================
-   قاعدتُها من شريط مجلدات MyTerm (‎.qfolders‎): حبّةٌ محدَّدةُ الحافّة فيها الاسمُ
+   قاعدتُه من شريط مجلدات MyTerm (‎.qfolders‎): حبّةٌ محدَّدةُ الحافّة فيها الاسمُ
    وعددُه في فقاعة، والمشتعلةُ تُعرف بحافّتها وأرضيّتها لا بلونِ حرفها وحدَه.
-   والأسماءُ ‎pg-*‎ لا ‎qfolder‎: ذاك شريطُ جلسةِ اختبارٍ معناه «ادخل في القسم»،
-   وهذا شريطُ عرضٍ معناه «أرِني القسم» — واسمٌ واحدٌ لمعنيين يُغري بتوحيدهما
-   في تهذيبٍ لاحقٍ فينكسر أحدُهما */
-.pg-head {
-  position: sticky; top: 0; z-index: 2;
+   والاسمُ ‎pg-*‎ لا ‎qfolder‎: ذاك شريطُ جلسةِ اختبارٍ معناه «ادخل في القسم»، وهذا
+   شريطُ عرضٍ معناه «أرِني القسم» — واسمٌ واحدٌ لمعنيين يُغري بتوحيدهما في تهذيبٍ
+   لاحقٍ فينكسر أحدُهما.
+
+   ===== وهو أخو الورقة لا ابنُها =====
+   يسكن بين الترويسة و‎.sh-body‎، لا داخلَها. ولو كان داخلَها لَأكل من ارتفاعٍ
+   قِيست عليه المُلاءمةُ قبله ففاضت الورقةُ بقدره. وخارجَها يُنقِص ارتفاعَها فيوقظ
+   مرقابَ المقاس، فتُعاد المُلاءمةُ على الجوف الحقيقيّ.
+   ولذلك لا ‎sticky‎ له: ما يَلصَق يَلصَق في حاوية تمريره، وهو ليس فيها أصلًا. */
+.pg-folds {
   display: flex; flex-wrap: wrap; gap: 6px;
-  padding: 0 18px 12px; background: var(--cd-desk);
+  padding: 2px 12px 10px; flex: none;
 }
+.pg-folds[hidden] { display: none; }
 .pg-fold {
   display: inline-flex; align-items: center; gap: 6px;
   font: inherit; font-size: 11.5px; padding: 5px 10px;
-  border: 1px solid #3a4a50; border-radius: 999px;
-  background: transparent; color: #9db4ba; cursor: pointer;
+  border: 1px solid var(--u-line, #3a4a50); border-radius: 999px;
+  background: transparent; color: var(--u-dim, #9db4ba); cursor: pointer;
 }
-.pg-fold:hover { border-color: #5a737b; }
-.pg-fold.on { border-color: var(--pgp-pet, #2c5e65); background: rgba(127, 188, 198, .16); color: #dfeaec; }
+.pg-fold:hover { border-color: var(--shp-pet, #5a737b); }
+/* والمشتعلةُ تتبع جِلدَ الورقة: ‎--shp-pet‎ يُرفع درجةً على الجِلد الداكن، فتبقى
+   الحبّةُ مرئيّةً في الحالين بلا قاعدةٍ ثانيةٍ تُكتب لكلٍّ منهما */
+.pg-fold.on {
+  border-color: var(--shp-pet, #2c5e65);
+  background: color-mix(in srgb, var(--shp-pet, #2c5e65) 18%, transparent);
+  color: var(--u-ink, #dfeaec);
+}
 .pg-fold-n {
   font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px;
   background: rgba(127, 127, 127, .22); font-variant-numeric: tabular-nums;
 }
 .pg-fold-all { font-weight: 700; }
-/* والخانةُ التي فيها وسمٌ لا تُحرَّر ههنا، فلا تُعرَض كأنّها تُحرَّر: حرفُها خافتٌ
-   ومؤشّرُها مؤشّرُ نصٍّ لا قلم، وسببُها في ‎title‎ يُقرأ بالتحويم */
-.pg-tbl td.pg-rich { color: var(--pgp-dim, #6b7b86); cursor: help; }
-.pg-tbl td.pg-none { text-align: center; color: var(--pgp-dim, #6b7b86); padding: 22px 9px; }
