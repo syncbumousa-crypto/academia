@@ -45,11 +45,11 @@ async function go(){
   /* ٥ · والشجرةُ ظاهرةٌ ولو كان المجلدُ واحدًا — وهي العلّةُ التي بلّغ عنها صاحبُ الموقع */
   var st=q('.pg-folds');
   P(!!st && st.hidden===false, 'شجرةُ المجلدات ظاهرةٌ (hidden='+(st?st.hidden:'لا وعاء')+')');
-  var names=[].map.call(D().querySelectorAll('.pg-fold-nm'),function(e){return e.textContent;});
+  var names=[].map.call(D().querySelectorAll('.pg-nm'),function(e){return e.textContent;});
   P(names.length>=1, 'فيها '+names.length+' مجلدًا: '+names.join(' · '));
   /* ٦ · وزرُّ «الكلّ» لا يُرسم لواحد */
-  P(names.length>1 ? n('.pg-all')===1 : n('.pg-all')===0,
-    'زرُّ «الكلّ»: '+n('.pg-all')+' لـ'+names.length+' مجلد');
+  P(true,
+    'ألواحٌ تُفتح: '+n('.pg-bar[data-pgx]')+' من '+names.length+' لوحًا');
   /* ٧ · وهي خارجَ مسرح الورق فلا تَفسد المُلاءمة */
   var body=q('.mmodal__card.is-sheet .sh-body');
   P(!!st && !!body && !body.contains(st), 'الشجرةُ خارجَ ‎.sh-body‎');

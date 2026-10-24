@@ -8013,60 +8013,48 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pgCount = f => (f.ch || []).reduce((a, x) => a + (x.t === 'f' ? pgCount(x) : 1), 0);
   /* المجلداتُ العليا وحدَها، والجذرُ أوّلُها. ولا تُعَدّ الفارغةُ منها: حبّةٌ تَعِد
      ببطائقَ لا توجد تُضغط فلا يتبدّل شيءٌ على الورق، فتُقرأ عطبًا لا اختيارًا */
-  /* ذرّيّةُ المجلد: بنوه من المجلدات وحدَهم، كلٌّ بعدده وذرّيّته — تُعرَض عند التوسّع */
+  /* ============================================================
+     ألواحُ المجلدات: توسُّعٌ طبقةً بعد طبقة، لا شجرةٌ تُبسَط دفعةً
+     ============================================================
+     كانت شجرةً بأسهمٍ تُبسَط ذرّيّتُها كلُّها عند الفتح. والمطلوبُ غيرُه: لوحٌ **عريضٌ
+     يأخذ السطر** وهو ضيّقُ الارتفاع، فإذا ضُغط انكشف ما بداخله من مجلداتٍ — كلٌّ منها
+     لوحٌ ضيّقٌ مثلُه، وهكذا إلى القاع.
+     والفرقُ ليس شكلًا: الشجرةُ تُري **كلَّ** ما في المساهمة دفعةً فتُغرق العين، واللوحُ
+     يُري طبقةً واحدةً ويَترك الباقيَ لمن طلبه. والمساهمةُ قد تَعمُق ثلاثًا وأربعًا.
+     ============================================================ */
+  /* عقدةٌ واحدةُ الشكل في كلّ طبقة: ‎id‎ مفتاحُ حالِ الفتح، و‎n‎ ما تحتها من بطائق */
   const pgKids = f => (f.ch || []).filter(x => x.t === 'f')
-    .map(x => ({ name: x.name || T().pkTitlePh, n: pgCount(x), kids: pgKids(x) }));
+    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, n: pgCount(x), kids: pgKids(x) }));
   function pgFolds(deck) {
     const out = [];
     const loose = (deck || []).filter(n => n.t !== 'f');
-    if (loose.length) out.push({ key: '', name: T().shRoot, ids: loose.map(n => n.id), n: loose.length, kids: [] });
+    if (loose.length) out.push({ id: '', key: '', name: T().shRoot, ids: loose.map(n => n.id), n: loose.length, kids: [] });
     (deck || []).filter(n => n.t === 'f').forEach(f => {
       const c = pgCount(f);
-      if (c) out.push({ key: f.id, name: f.name || T().pkTitlePh, ids: [f.id], n: c, kids: pgKids(f) });
+      if (c) out.push({ id: f.id, key: f.id, name: f.name || T().pkTitlePh, ids: [f.id], n: c, kids: pgKids(f) });
     });
     return out;
   }
-  const pgOn = (f, sel) => f.ids.every(id => sel.has(id));
-  /* ===== ولمَ يُشعَل الأعلى وحدَه؟ =====
-     ‎sheetSections‎ تَحسب الابنَ من أبيه: المحدَّدُ الذي لا محدَّدَ فوقه يأخذ ذرّيّتَه
-     كاملةً. فلو أُطفئ ابنٌ وأبوه مشتعلٌ لَما تبدّل شيءٌ على الورق — زرٌّ يُضغط ولا
-     يَفعل، وذاك أسوأُ من زرٍّ لا يكون. فالتوسّعُ **معرفةٌ** بما في المجلد لا تحكّمٌ فيه،
-     والإشعالُ على العليا وحدَها. */
-  function pgKidsHTML(kids) {
-    if (!kids.length) return '';
-    return '<ul class="pg-kids">' + kids.map(k => '<li><span class="pg-kn">' + esc(k.name)
-      + '</span><span class="pg-fold-n">' + k.n + '</span>' + pgKidsHTML(k.kids) + '</li>').join('') + '</ul>';
-  }
-  /* ===== وتُرسم ولو كان المجلدُ واحدًا =====
-     نقلتُ عن MyTerm قاعدةَ «مجلدٌ واحدٌ لا خيارَ فيه فلا شريطَ له»، وهي صحيحةٌ هناك:
-     شريطُه **مُرشِّحٌ** فحسب، ومُرشِّحٌ بخيارٍ واحدٍ عبث. وههنا الشجرةُ **خريطةٌ** قبل
-     أن تكون مُرشِّحًا: بها يُعرَف ما في المساهمة من مجلدات. فمساهمةٌ بطائقُها في
-     الجذر كانت تُحجب شجرتُها كلُّها — فلا يرى صاحبُها شيئًا ويظنّ أنّ شيئًا لم يُبنَ.
-     والقاعدةُ تُنقل بعلّتها، فإذا تبدّلت العلّةُ لم تُنقل. ويُنظر: نُقلت التهذيباتُ
-     وتُرك الأساسُ على حاله خطأً من قبل.
-     ويبقى من روحها شيء: زرُّ «الكلّ» لا يُرسم لواحد — إطفاءُ الكلّ وإشعالُه بزرّين
-     لشيءٍ واحدٍ هو العبثُ بعينه */
-  function pgFoldsHTML(folds, sel, open) {
-    if (!folds.length) return '';
-    const all = folds.every(f => pgOn(f, sel));
-    const rows = folds.map(f => {
-      const has = f.kids.length, isOpen = open && open.has(f.key);
-      /* والسهمُ وحدَه بابُ الدخول والخروج، فلا يُنفق على الكشف شيءٌ من سطر الاسم.
-         ومن لا ذرّيّةَ له يأخذ فراغًا بقدره فتستقيم الأسماءُ على خطٍّ واحد */
-      return '<div class="pg-row' + (pgOn(f, sel) ? ' on' : '') + (isOpen ? ' open' : '') + '">'
-        + (has ? '<button type="button" class="pg-twist" data-pgx="' + esc(f.key)
-              + '" aria-expanded="' + (isOpen ? 'true' : 'false') + '">▸</button>'
-              : '<i class="pg-twist pg-twist--none" aria-hidden="true"></i>')
-        + '<button type="button" class="pg-pick" data-pgf="' + esc(f.key) + '">'
-        + '<span class="pg-fold-nm">' + esc(f.name) + '</span>'
-        + '<span class="pg-fold-n">' + f.n + '</span></button>'
-        + (has ? '<div class="pg-kidsw">' + pgKidsHTML(f.kids) + '</div>' : '')
+  /* ===== واللوحُ الذي لا شيءَ تحته ليس زرًّا =====
+     زرٌّ يُضغط فلا ينكشف شيءٌ يُقرأ عطبًا. فمن لا ذرّيّةَ له لوحٌ ساكنٌ يُقرأ ولا يُضغط،
+     ويُعرف بذلك من مؤشّره وبغياب علامة الفتح عنه. */
+  function pgAccHTML(nodes, open, depth) {
+    if (!nodes || !nodes.length) return '';
+    return '<div class="pg-acc' + (depth ? ' pg-acc--in' : '') + '">' + nodes.map(k => {
+      const has = k.kids && k.kids.length, isOpen = has && open && open.has(k.id);
+      const head = '<span class="pg-nm">' + esc(k.name) + '</span>'
+        + '<span class="pg-ct">' + k.n + '</span>'
+        + (has ? '<span class="pg-chev" aria-hidden="true">▸</span>' : '');
+      return '<div class="pg-pan' + (isOpen ? ' open' : '') + (has ? '' : ' pg-pan--leaf') + '">'
+        + (has
+            ? '<button type="button" class="pg-bar" data-pgx="' + esc(k.id) + '" aria-expanded="'
+              + (isOpen ? 'true' : 'false') + '">' + head + '</button>'
+            : '<div class="pg-bar pg-bar--leaf">' + head + '</div>')
+        + (has ? '<div class="pg-in">' + pgAccHTML(k.kids, open, (depth || 0) + 1) + '</div>' : '')
         + '</div>';
-    }).join('');
-    return rows + (folds.length < 2 ? ''
-      : '<button type="button" class="pg-all" data-pgall="1">'
-        + esc(all ? T().pgNone : T().pgAll) + '</button>');
+    }).join('') + '</div>';
   }
+  const pgFoldsHTML = (folds, sel, open) => pgAccHTML(folds, open, 0);
   const pgDeckOf = w => (cardData((w && w.code) || cmCode) || {}).deck || [];
   /* ===== فتحُ صفحة المساهمة: ورقةٌ على المساهمة كلِّها ===== */
   function cxPageOpen(pid) {
@@ -8086,43 +8074,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = cdWins.find(x => x.what === 'sheet');
     if (w) w.pid = pid || null;
   }
-  /* ===== ضغطةُ الحبّة =====
-     تُبدّل التحديدَ ثمّ تُعيد بناءَ الأقسام بـ‎sheetSections‎ نفسِها لا بحسابٍ ثانٍ —
-     فمصدرُ ما يُعرض واحد، ولا يجوز أن يقول الشريطُ شيئًا ويقول الورقُ غيرَه */
-  /* ===== والتوسّعُ لا يُعيد الرسم =====
+  /* ===== ضغطةُ اللوح: توسُّعٌ لا إعادةُ رسم =====
      إعادةُ الرسم تُرقّم الأوراقَ من جديد وتُعيد المُلاءمة، وليس في الكشف ما يُبدّل
-     ورقةً واحدة. فيُقلَب الصنفُ على الصفّ وحدَه. والمفتوحُ يعيش ما عاشت النافذة ولا
-     يُحفظ: ما تَكشفه الآن شأنُ قراءتك، لا صفةٌ في المساهمة تُخزَّن */
+     ورقةً واحدة. فيُقلَب الصنفُ على اللوح وحدَه.
+     والمفتوحُ يعيش ما عاشت النافذة ولا يُحفظ: ما تَكشفه الآن شأنُ قراءتك، لا صفةٌ
+     في المساهمة تُخزَّن.
+     ولا يُستعمل ‎closest('.pg-pan')‎ للأبِ المباشر: الألواحُ متداخلةٌ، و‎closest‎ من
+     داخل لوحٍ ابنٍ تُصيب أقربَ جَدٍّ — فيُؤخذ أبو الزرّ نفسِه (‎parentElement‎). */
   document.addEventListener('click', e => {
-    const x = e.target.closest('.pg-twist[data-pgx]');
-    if (x && cardDlg && cardDlg.folds) {
-      const row = x.closest('.pg-row');
-      if (!cardDlg.pgOpen) cardDlg.pgOpen = new Set();
-      const k = x.dataset.pgx, now = !row.classList.contains('open');
-      row.classList.toggle('open', now);
-      x.setAttribute('aria-expanded', now ? 'true' : 'false');
-      if (now) cardDlg.pgOpen.add(k); else cardDlg.pgOpen.delete(k);
-      return;
-    }
-    const b = e.target.closest('.pg-pick, .pg-all');
-    if (!b || !cardDlg || !cardDlg.folds) return;
-    const deck = pgDeckOf(cardDlg);
-    const folds = pgFolds(deck);
-    const sel = new Set(cardDlg.sel || []);
-    if (b.dataset.pgall) {
-      const all = folds.every(f => pgOn(f, sel));
-      sel.clear();
-      if (!all) folds.forEach(f => f.ids.forEach(id => sel.add(id)));
-    } else {
-      const f = folds.find(x => x.key === b.dataset.pgf);
-      if (!f) return;
-      const on = pgOn(f, sel);
-      f.ids.forEach(id => { if (on) sel.delete(id); else sel.add(id); });
-    }
-    cardDlg.sel = sel;
-    cardDlg.secs = sheetSections(deck, sel);
-    cardDlg.sign = shSign(cardDlg.secs);
-    renderCardDlg();
+    const bar = e.target.closest('.pg-bar[data-pgx]');
+    if (!bar || !cardDlg || !cardDlg.folds) return;
+    const pan = bar.parentElement;
+    if (!pan || !pan.classList.contains('pg-pan')) return;
+    if (!cardDlg.pgOpen) cardDlg.pgOpen = new Set();
+    const k = bar.dataset.pgx, now = !pan.classList.contains('open');
+    pan.classList.toggle('open', now);
+    bar.setAttribute('aria-expanded', now ? 'true' : 'false');
+    if (now) cardDlg.pgOpen.add(k); else cardDlg.pgOpen.delete(k);
   });
   /* ===== ورقةُ البطاقة التي بين يديك: تُبنى من **ملفّها** لا من تحديد الشجرة =====
      الزرُّ في الشريط السفليّ يسأل: «أرِني الورقةَ التي أنا فيها». وجوابُه ملفُّ البطاقة
