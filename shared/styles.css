@@ -15823,3 +15823,28 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
    فالمغلقُ لا يُقاس ولا يُطبَع ولا يُصاد بالتبويب */
 .pg-box > .pg-in { display: none; }
 .pg-box.is-wide > .pg-in { display: block; padding: 0 8px 8px; }
+
+/* ===== ألواحُ الجوف: أخفتُ وأغمقُ وأنحفُ من أبيها =====
+   الطبقةُ تُعرف بثقلها لا بإزاحةٍ وحدَها: كانت الأجوافُ بثِقَل الطبقة الأولى نفسِه،
+   فتُقرأ أربعةُ مستوياتٍ في مستوًى واحدٍ ويَضيع أيُّها الأب.
+   فتُغمَّق أرضيّتُها (سوادٌ شفّافٌ يَنزل تحت أرضيّة أبيها مهما كان جِلدُه، فلا يلزم
+   لونٌ ثانٍ للداكن)، ويُخفَّت حرفُها، ويُنحَّف حشوُها وقامتُها.
+
+   وفيه مكسبٌ ثانٍ: حدُّ العرض الأدنى يَنزل مع النحافة، فيَسع الجوفُ الضيّقُ بنيه
+   ولا يَخرج آخرُهم عنه — وهي العلّةُ التي كان يختفي بها آخرُ المجلدات. */
+.pg-in .pg-box {
+  min-width: 76px;
+  background: rgba(0, 0, 0, .18);
+  border-color: color-mix(in srgb, var(--u-line, #3a4a50) 55%, transparent);
+}
+.pg-in .pg-box.is-wide {
+  min-width: 150px;
+  background: rgba(0, 0, 0, .26);
+  border-color: color-mix(in srgb, var(--shp-pet, #2c5e65) 55%, transparent);
+}
+.pg-in .pg-face {
+  padding: 2px 8px; font-size: 11px; line-height: 1.65;
+  color: color-mix(in srgb, var(--u-dim, #9db4ba) 82%, transparent);
+}
+.pg-in .pg-box.is-wide > .pg-face { color: var(--u-dim, #9db4ba); }
+.pg-in .pg-box.is-wide > .pg-in { padding: 0 5px 5px; }

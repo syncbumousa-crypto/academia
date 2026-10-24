@@ -114,6 +114,37 @@ L(function(){var b=Q('#acc > .pg-row > .pg-box:not(.is-wide):not(.pg-box--leaf)'
   var fa=b.querySelector('.pg-face'); var rb=R(b), rf=R(fa);
   return [rf.height>=rb.height-2 && rb.height>40,
    'وجهُ الضيّقِ يملأ مربّعَه ('+Math.round(rf.height)+'px من '+Math.round(rb.height)+'px)'];});
+/* ===== وألواحُ الجوف أخفتُ وأغمقُ وأنحفُ — ثلاثتُها تُقاس لا تُوصَف =====
+   الطبقةُ تُعرف بثِقَلها: لو ساوت أباها لَقُرئت أربعةُ مستوياتٍ في مستوًى واحد */
+/* ===== ولا يُقارَن سُلَّمٌ بسُلَّم =====
+   النمطُ المحسوبُ يردُّ ‎rgb(223,234,236)‎ مرّةً و‎color(srgb .61 .70 .72 / .82)‎ مرّةً —
+   سُلَّمٌ من ٢٥٥ وسُلَّمٌ من واحد، ومقارنتُهما تُمرِّر الفحصَ بالمصادفة (وقع ذلك).
+   وألوانُ ‎color-mix‎ شفّافةٌ أيضًا، فالشفافيّةُ جزءٌ ممّا تَراه العين.
+   فتُطلى على لوحٍ فوق أرضيّةٍ سوداءَ معلومةٍ وتُقرأ بكسلًا: مقياسٌ واحدٌ للجميع،
+   وفيه أثرُ الشفافيّة كما يقع على الشاشة */
+function LUM(c){
+  var cv=document.createElement('canvas'); cv.width=cv.height=1;
+  var g=cv.getContext('d2'.split('').reverse().join(''));
+  g.fillStyle='#000'; g.fillRect(0,0,1,1);
+  g.fillStyle=c; g.fillRect(0,0,1,1);
+  var d=g.getImageData(0,0,1,1).data;
+  return (0.2126*d[0]+0.7152*d[1]+0.0722*d[2])/255;
+}
+L(function(){
+  var top=Q('#acc > .pg-row > .pg-box.is-wide > .pg-face');
+  var inn=Q('#acc .pg-in .pg-box:not(.is-wide) .pg-face');
+  var ht=R(top).height, hi=R(inn).height;
+  return [hi < ht*0.75, 'الجوفُ أنحف: قامةُ وجهه '+Math.round(hi)+'px من '+Math.round(ht)+'px'];});
+L(function(){
+  var top=Q('#acc > .pg-row > .pg-box:not(.is-wide):not(.pg-box--leaf)');
+  var inn=Q('#acc .pg-in .pg-box:not(.is-wide)');
+  var lt=LUM(CS(top).backgroundColor), li=LUM(CS(inn).backgroundColor);
+  return [li < lt, 'الجوفُ أغمق (إضاءة '+li.toFixed(3)+' دون '+lt.toFixed(3)+')'];});
+L(function(){
+  var top=Q('#acc > .pg-row > .pg-box.is-wide > .pg-face');
+  var inn=Q('#acc .pg-in .pg-box:not(.is-wide) .pg-face');
+  var lt=LUM(CS(top).color), li=LUM(CS(inn).color);
+  return [li < lt, 'الجوفُ أخفتُ حرفًا (إضاءة '+li.toFixed(3)+' دون '+lt.toFixed(3)+')'];});
 /* ح٥ · اثنا عشرَ مربّعًا: لا يُسحق أصغرُها، ويُمرَّر الصفّ */
 L(function(){var r=Q('#many > .pg-row'), min=1e9;
   r.querySelectorAll(':scope > .pg-box').forEach(function(e){var w=R(e).width; if(w<min)min=w;});
