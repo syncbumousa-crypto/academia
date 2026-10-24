@@ -1365,7 +1365,7 @@
       cxEqW: { a: 'كل', r: 'جذر', f: 'تبع' },
       /* ورقة الملخّص */
       shTitle: 'ورقة الملخّص', shRoot: 'الجذر', shPrint: 'طباعة',
-      pgTitle: 'صفحة جديدة', pgEmpty: 'صفحةٌ خاوية — تُملأ في الخطوة التالية',
+      pgTitle: 'صفحة جديدة', pgColK: 'العنصر', pgColV: 'الخلاصة',
       shColN: 'رقم', shColQ: 'السؤال', shColA: 'الإجابة',
       shToDark: 'ورقةٌ داكنة', shToLight: 'ورقةٌ فاتحة',
       /* شارةُ الزرّ: كم بطاقةً تُولَد من هذه — تُقرأ صوتًا ولا تُرى نصًّا */
@@ -1771,7 +1771,7 @@
       cxEqTip: (a, o, f) => `${a} cards below · ${o} in this folder · ${f} in its subfolders`,
       cxEqW: { a: 'All', r: 'Root', f: 'Follow' },
       shTitle: 'Summary sheet', shRoot: 'Root', shPrint: 'Print',
-      pgTitle: 'New page', pgEmpty: 'Empty page — filled in the next step',
+      pgTitle: 'New page', pgColK: 'Item', pgColV: 'Summary',
       shColN: 'No.', shColQ: 'Question', shColA: 'Answer',
       shToDark: 'Dark sheet', shToLight: 'Light sheet',
       cdFaces: n => `${n} card${n === 1 ? '' : 's'}`,
@@ -8021,24 +8021,48 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!st) return;
     const card = st.querySelector('.mmodal__card');
     if (!card) return;
-    /* الهيكلُ مرّةً واحدة: إعادةُ بنائه في كلّ تركيزٍ تقطع التمرير وتُفقد ما كُتب */
+    /* الهيكلُ مرّةً واحدة: إعادةُ بنائه في كلّ تركيزٍ تقطع التمرير وتُفقد ما كُتب.
+       والجدولُ داخلَه، فما يُكتب فيه يَسلم من كلّ إعادةِ رسمٍ بعد الميلاد */
     if (!card.classList.contains('is-page')) {
       card.classList.add('is-page');
       card.innerHTML = '<div class="cd-meta" id="cd-meta"></div>'
-        + '<div class="cd-body pg-body"><div class="pg-sheet"></div></div>'
+        + '<div class="cd-body pg-body"><div class="pg-roll"><div class="pg-sheet">'
+        + pgTblHTML() + '</div></div></div>'
         + '<div class="cd-foot pg-foot" id="cd-foot"></div>';
     }
     const meta = card.querySelector('.cd-meta');
-    const sheet = card.querySelector('.pg-sheet');
     /* أزرارُ النافذة من مصدرها المشترك: فلا يفترق سلوكُ الإغلاق والطيّ بين النوافذ */
     meta.innerHTML = '<div class="cd-bar">' + cdWinBtns() + '</div>'
       + '<div class="cd-mid pg-mid"><span class="pg-ttl">' + PG_IC
       + '<b>' + esc(T().pgTitle) + '</b></span></div>';
-    /* وخواؤها مكتوبٌ لا مسكوتٌ عنه: صفحةٌ بيضاءُ بلا كلمةٍ تُقرأ عطبًا لا خطوةً أولى */
-    if (!sheet.dataset.seeded) {
-      sheet.dataset.seeded = '1';
-      sheet.innerHTML = '<p class="pg-empty">' + esc(T().pgEmpty) + '</p>';
+  }
+  /* ============================================================
+     جدولُ الملخّص على الورقة
+     ============================================================
+     ‎plaintext-only‎ لا ‎true‎: الخانةُ تَقبل اللصقَ، و‎true‎ يُدخل معه شجرةَ HTML كاملةً
+     بألوانها وخطوطها من حيثما نُسخ — فتنكسر الورقةُ بأوّل لصقةٍ من متصفّح. وهذه تُسقط
+     الوسمَ عند حدّ المتصفّح نفسِه فلا يلزم تنظيفٌ بعده.
+
+     ورأسُ الجدول يُكتب هو أيضًا: «جدولُ ملخّص» لم يُقيَّد بحقولٍ بعينها، واسمٌ مفروضٌ
+     من عندي يَحبس معناه. فاسماهُ اقتراحٌ يُمحى بحرف.
+
+     وعمودُ الأرقام ليس خانةً تُكتب: هو ترقيمٌ يُقرأ، فلا ‎contenteditable‎ عليه —
+     وإلّا جاز أن يُمحى رقمٌ فيختلّ العدّ بلا سببٍ يُفهَم.
+     ============================================================ */
+  const PG_ROWS = 6;
+  function pgTblHTML() {
+    let rows = '';
+    for (let i = 1; i <= PG_ROWS; i++) {
+      rows += '<tr><td class="n">' + i + '</td>'
+        + '<td class="k" contenteditable="plaintext-only"></td>'
+        + '<td class="v" contenteditable="plaintext-only"></td></tr>';
     }
+    return '<table class="pg-tbl">'
+      + '<colgroup><col class="n"><col class="k"><col class="v"></colgroup>'
+      + '<thead><tr><th class="n"></th>'
+      + '<th contenteditable="plaintext-only">' + esc(T().pgColK) + '</th>'
+      + '<th contenteditable="plaintext-only">' + esc(T().pgColV) + '</th>'
+      + '</tr></thead><tbody>' + rows + '</tbody></table>';
   }
   /* ===== ورقةُ البطاقة التي بين يديك: تُبنى من **ملفّها** لا من تحديد الشجرة =====
      الزرُّ في الشريط السفليّ يسأل: «أرِني الورقةَ التي أنا فيها». وجوابُه ملفُّ البطاقة

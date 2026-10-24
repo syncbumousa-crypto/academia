@@ -1,0 +1,67 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<title>حارسُ الصفحة الكبرى</title>
+<link rel="stylesheet" href="shared/styles.css">
+<style>
+  body{margin:0;background:#20323a;font-family:system-ui,sans-serif}
+  #card-modal{display:block;position:static;background:none;padding:18px}
+  .mmodal__card.is-page{height:520px;width:860px;margin:0 auto;border-radius:12px;overflow:hidden}
+  .cd-meta{background:#17262c;color:#dfeaec;padding:8px 12px;font-size:13px}
+  #rep{max-width:860px;margin:14px auto;padding:10px 14px;border-radius:10px;
+       background:#17262c;color:#dfeaec;font:13px/1.9 system-ui,sans-serif;direction:rtl}
+  #rep b.ok{color:#6ec39a}#rep b.no{color:#ff8f87}
+</style></head><body>
+<div id="card-modal">
+  <div class="mmodal__card is-page">
+    <div class="cd-meta"><div class="cd-mid pg-mid"><span class="pg-ttl"><b>صفحة جديدة</b></span></div></div>
+    <div class="cd-body pg-body"><div class="pg-roll"><div class="pg-sheet" id="sheet"></div></div></div>
+    <div class="cd-foot pg-foot"></div>
+  </div>
+</div>
+<pre id="rep">PENDING</pre>
+<script>
+var PG_ROWS = 6;
+function tbl(){
+  var rows='';
+  for(var i=1;i<=PG_ROWS;i++){
+    rows+='<tr><td class="n">'+i+'</td>'
+       +'<td class="k" contenteditable="plaintext-only"></td>'
+       +'<td class="v" contenteditable="plaintext-only"></td></tr>';
+  }
+  return '<table class="pg-tbl"><colgroup><col class="n"><col class="k"><col class="v"></colgroup>'
+    +'<thead><tr><th class="n"></th><th contenteditable="plaintext-only">العنصر</th>'
+    +'<th contenteditable="plaintext-only">الخلاصة</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+document.getElementById('sheet').innerHTML = tbl();
+
+var out=[], bad=0;
+function L(h){ var s=h(); out.push('<b class="'+(s[0]?'ok':'no')+'">'+(s[0]?'PASS':'FAIL')+'</b> '+s[1]); if(!s[0])bad++; }
+function lum(c){ var m=c.match(/\d+/g); if(!m) return -1;
+  return (0.2126*m[0]+0.7152*m[1]+0.0722*m[2])/255; }
+
+/* ١ · الداخلُ غامق — ويُقاس بالإضاءة لا باسم اللون */
+L(function(){ var b=getComputedStyle(document.querySelector('.pg-body')).backgroundColor;
+  var l=lum(b); return [l>=0 && l<0.20, 'الطاولةُ غامقة: '+b+' (إضاءة '+l.toFixed(3)+' — الحدّ دون 0.20)']; });
+/* ٢ · والورقةُ أفتحُ من طاولتها أبدًا */
+L(function(){ var d=lum(getComputedStyle(document.querySelector('.pg-body')).backgroundColor),
+      p=lum(getComputedStyle(document.querySelector('.pg-sheet')).backgroundColor);
+  return [p>d+0.35, 'الورقةُ أفتحُ من الطاولة بفارق '+(p-d).toFixed(3)]; });
+/* ٣ · الجدولُ قائمٌ بصفوفه */
+L(function(){ var r=document.querySelectorAll('.pg-tbl tbody tr').length,
+      h=document.querySelectorAll('.pg-tbl thead th').length;
+  return [r===PG_ROWS && h===3, 'الجدول: '+r+' صفًّا و'+h+' رؤوس']; });
+/* ٤ · كلُّ خانةِ متنٍ تُكتب — والعددُ يُقاس لا يُفترض */
+L(function(){ var cells=document.querySelectorAll('.pg-tbl td.k, .pg-tbl td.v, .pg-tbl thead th[contenteditable]');
+  var n=0; cells.forEach(function(c){ if(c.isContentEditable) n++; });
+  return [n===cells.length && n===PG_ROWS*2+2, n+' خانةً تُكتب من '+(PG_ROWS*2+2)]; });
+/* ٥ · وعمودُ الأرقام لا يُكتب */
+L(function(){ var ns=document.querySelectorAll('.pg-tbl td.n'), bad=0;
+  ns.forEach(function(c){ if(c.isContentEditable) bad++; });
+  return [bad===0 && ns.length===PG_ROWS, 'أرقامُ الصفوف غيرُ قابلةٍ للكتابة ('+ns.length+')']; });
+/* ٦ · والورقةُ لا تفيض عن النافذة عرضًا */
+L(function(){ var b=document.querySelector('.pg-body'), s=document.querySelector('.pg-sheet');
+  return [s.getBoundingClientRect().width <= b.clientWidth,
+    'عرضُ الورقة '+Math.round(s.getBoundingClientRect().width)+'px داخلَ '+b.clientWidth+'px']; });
+
+document.getElementById('rep').innerHTML =
+  (bad? '<b class="no">'+bad+' إخفاق</b>' : '<b class="ok">ALL PASS</b>') + '\n' + out.join('\n');
+</script></body></html>
