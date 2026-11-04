@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', chUp: 'ارفع المصدر PDF', chUpHint: 'كتاب أو ملزمة هذا الشابتر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', chUp: 'Upload PDF source', chUpHint: 'This chapter’s book or notes', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -6456,7 +6456,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     $('#cm-body').innerHTML = inner;
-    if (isChTab(sec)) chPdfPaint();   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
+    if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
       else editorMount(cmView.sub || sec);
@@ -19349,28 +19349,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       op.onerror = () => fin(null);
     };
   });
+  /* ===== الوعاءُ: شريطٌ بزرّين فوق، والكتابُ تحته =====
+     الزرُّ الأوّل **الغلاف** (صورةٌ أو PDF): تُقرأ أطرافُه فيصير لونُها لونَ حوافّ الكتاب.
+     والثاني **صفحاتُ الكتاب** (PDF): هي ما يُقلَّب. ولكلٍّ استبدالُه وإزالتُه مستقلّين،
+     فمن غيّر الغلافَ لم يمسّ صفحاتِه */
+  const chSize = n => n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.ceil(n / 1024) + ' KB';
+  const CH_IC = {
+    cover: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M12 7v6M9 10h6"/></svg>',
+    pages: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></svg>',
+    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>',
+  };
   function chPaneHTML(code, ch) {
-    const m = chPdfMeta(code, ch);
-    const kb = m && m.size ? ` · ${m.size >= 1048576 ? (m.size / 1048576).toFixed(1) + ' MB' : Math.ceil(m.size / 1024) + ' KB'}` : '';
-    const right = m
-      ? `<div class="chsrc">
-          <div class="chsrc__bar">
-            <b class="chsrc__name" title="${esc(m.name)}">${esc(m.name)}</b><small>${kb}</small>
-            <span class="chsrc__acts">
-              <button type="button" class="chsrc__btn" data-chup>${T().chReplace}</button>
-              <button type="button" class="chsrc__btn chsrc__btn--del" data-chdel>${T().chRemove}</button>
-            </span>
-          </div>
-          <div class="chsrc__view" data-chview><p class="v-none">${T().chLoading}</p></div>
+    const m = chPdfMeta(code, ch), cv = chCovMeta(code, ch);
+    const covBtn = cv
+      ? `<div class="chtool chtool--on" data-chcov title="${esc(T().chCovReplace)}">
+          <span class="chtool__thumb" style="--sw:${cv.color || 'transparent'}"><img alt="" data-chcovimg></span>
+          <span class="chtool__txt"><b>${T().chCov}</b><small>${esc(cv.name)}</small></span>
+          <button type="button" class="chtool__x" data-chcovdel title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
         </div>`
-      : `<button type="button" class="chup" data-chup>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></svg>
-          <b>${T().chUp}</b><small>${T().chUpHint}</small>
-        </button>`;
-    /* بعد الرفع يأخذ الكتابُ عرضَ الوعاء كلَّه: صفحتان متقابلتان في نصفٍ أضيقُ من أن تُقرأا */
-    return m
-      ? `<div class="cm-chpane cm-chpane--book"><div class="chcol chcol--src">${right}</div></div>`
-      : `<div class="cm-chpane"><div class="chcol chcol--src">${right}</div><div class="chcol chcol--rest"></div></div>`;
+      : `<button type="button" class="chtool" data-chcov>${CH_IC.cover}<span class="chtool__txt"><b>${T().chCovAdd}</b><small>${T().chCovHint}</small></span></button>`;
+    const pgBtn = m
+      ? `<div class="chtool chtool--on" data-chup title="${esc(T().chReplace)}">
+          ${CH_IC.pages}
+          <span class="chtool__txt"><b>${T().chPages}</b><small>${esc(m.name)} · ${chSize(m.size || 0)}</small></span>
+          <button type="button" class="chtool__x" data-chdel title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
+        </div>`
+      : `<button type="button" class="chtool" data-chup>${CH_IC.pages}<span class="chtool__txt"><b>${T().chUp}</b><small>${T().chUpHint}</small></span></button>`;
+    const body = m
+      ? `<div class="chsrc__view" data-chview><p class="v-none">${T().chLoading}</p></div>`
+      : `<div class="chempty">${T().chEmpty}</div>`;
+    return `<div class="cm-chpane cm-chpane--book"><div class="chcol chcol--src"><div class="chsrc">`
+      + `<div class="chtools">${covBtn}${pgBtn}</div>${body}</div></div></div>`;
   }
   /* ===== عارضُنا لا عارضُ المتصفّح =====
      كان الملفُّ يُعرض في ‎iframe‎ بعارض المتصفّح: شريطُ أدواتٍ غريبٌ عن الموقع، ولا شيءَ
@@ -19498,7 +19507,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
     bkMount(view, {
       doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
-      cover: (meta && meta.cover) || '#2c5e65',
+      /* لونُ الحوافّ: من أطراف ملفّ الغلاف إن رُفع، وإلّا من الصفحة الأولى، وإلّا بتروليُّ الموقع */
+      cover: ((chCovMeta(code, ch) || {}).color) || (meta && meta.cover) || '#2c5e65',
       pos: Math.max(1, Math.min((meta && meta.pos) || 1, doc.numPages)),
     });
   }
@@ -19524,6 +19534,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.slotL = b.el.querySelector('.cbk__pg--l');
     b.slotR = b.el.querySelector('.cbk__pg--r');
     b.ind = view.querySelector('[data-bkind]');
+    b.nav = view.querySelector('.cbk-nav');
     b.leaf = null;
     b.view = view;
     bkLayout(b);
@@ -19538,7 +19549,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
 
   function bkLayout(b) {
-    const W = b.stage.clientWidth - 56, H = b.stage.clientHeight - 64;   /* هامشٌ يسع حافّةَ الغلاف وسُمكَ الورق */
+    /* أصغرُ قليلًا ممّا يسع (‎82%‎)، ويُلصق باليمين — ويبقى اليسارُ لما يأتي بعدُ */
+    const W = (b.stage.clientWidth - 56) * 0.82, H = (b.stage.clientHeight - 64) * 0.9;
     if (W <= 0 || H <= 0) return;
     b.single = W < 620;
     const cols = b.single ? 1 : 2;
@@ -19551,6 +19563,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.el.style.width = b.pw * cols + 'px';
     b.el.style.height = b.ph + 'px';
     b.el.style.setProperty('--pw', b.pw + 'px');
+    b.nav.style.width = b.pw * cols + 'px';   /* والتنقّلُ تحت الكتاب لا في وسط الوعاء */
     bkShow(b);
   }
 
@@ -19791,6 +19804,100 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.view.querySelectorAll('[data-bknav]').forEach(btn =>
       btn.addEventListener('click', () => bkFlip(b, +btn.dataset.bknav)));
   }
+  /* ===== ملفُّ الغلاف =====
+     صورةٌ (PNG/JPG/WebP) أو PDF تُؤخذ صفحتُه الأولى. البِتاتُ في المخزن بمفتاحٍ غيرِ
+     مفتاح الصفحات، والوصفُ في ‎state.chCov‎ ومعه **لونُ الأطراف** محسوبًا مرّةً واحدة. */
+  const chCovKey = (code, ch) => `chcov:${code}:${ch}`;
+  const chCovMeta = (code, ch) => ((state.chCov || {})[code] || {})[ch] || null;
+  const chCovUrl = {};
+  /* لوحةٌ صغيرةٌ من ملفّ الغلاف — منها يُقرأ اللون ومنها الصورةُ المصغّرة */
+  async function chCovCanvas(file, w) {
+    const cv = document.createElement('canvas');
+    if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '')) {
+      const L = await chPdfLib();
+      const doc = await L.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+      const pg = await doc.getPage(1);
+      const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w / v1.width });
+      cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+      const cx = cv.getContext('2d', { willReadFrequently: true });
+      cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      doc.destroy();
+      return cv;
+    }
+    const bmp = await createImageBitmap(file);
+    cv.width = w; cv.height = Math.max(1, Math.round(w * bmp.height / bmp.width));
+    cv.getContext('2d', { willReadFrequently: true }).drawImage(bmp, 0, 0, cv.width, cv.height);
+    bmp.close && bmp.close();
+    return cv;
+  }
+  /* ===== أطرافُ الغلاف ⇐ لونُ حوافّ الكتاب =====
+     يُقرأ **إطارُ** الصورة وحده (‎9%‎ من كلّ حافّة) لا وسطُها: الوسطُ عنوانٌ وزخرفة،
+     والأطرافُ هي ما يلتفّ على الكرتون في الكتاب الحقيقيّ. ويُؤخذ اللونُ الغالب فيها
+     ويُعتَم قليلًا — الكرتونُ المقوّى أغمقُ من طباعته */
+  function chEdgeColor(cv) {
+    const w = cv.width, h = cv.height;
+    const d = cv.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
+    const bx = Math.max(2, Math.round(w * 0.09)), by = Math.max(2, Math.round(h * 0.09));
+    const bins = new Map();
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      if (x >= bx && x < w - bx && y >= by && y < h - by) continue;
+      const i = (y * w + x) * 4;
+      if (d[i + 3] < 128) continue;
+      const r = d[i], g = d[i + 1], bl = d[i + 2];
+      const k = ((r >> 4) << 8) | ((g >> 4) << 4) | (bl >> 4);
+      const e = bins.get(k) || [0, 0, 0, 0];
+      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
+      bins.set(k, e);
+    }
+    let best = null;
+    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
+    if (!best) return null;
+    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.86));
+    return `rgb(${c.join(',')})`;
+  }
+  async function chCovSet(file) {
+    const code = cmCode, ch = cmTabSel;
+    if (!code || !isChTab(ch) || !file) return;
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf && !/^image\//.test(file.type)) { toast(T().chCovBad); return; }
+    let color = null, thumb = null;
+    try {
+      const cv = await chCovCanvas(file, 96);
+      color = chEdgeColor(cv);
+      /* المصغّرةُ تُحفظ صورةً دائمًا: غلافُ PDF لا يُرسم في ‎<img>‎ */
+      thumb = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.85));
+    } catch (e) { toast(T().chCovBad); return; }
+    const key = chCovKey(code, ch);
+    const ok = await chIdb('readwrite', key, thumb || file);
+    if (!ok) { toast(T().chSaveFail); return; }
+    if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+    state.chCov = state.chCov || {};
+    (state.chCov[code] = state.chCov[code] || {})[ch] = { name: file.name, color, ts: Date.now() };
+    save();
+    if (cmCode === code && cmTabSel === ch) renderCmSection();
+  }
+  async function chCovDel() {
+    const code = cmCode, ch = cmTabSel, key = chCovKey(code, ch);
+    if (!chCovMeta(code, ch)) return;
+    await chIdb('readwrite', key, null);
+    if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+    delete state.chCov[code][ch];
+    save();
+    renderCmSection();
+  }
+  async function chCovPaint() {
+    const img = document.querySelector('#cm-body [data-chcovimg]');
+    if (!img) return;
+    const key = chCovKey(cmCode, cmTabSel);
+    if (!chCovUrl[key]) {
+      const blob = await chIdb('readonly', key);
+      if (!blob) return;
+      chCovUrl[key] = URL.createObjectURL(blob);
+    }
+    if (img.isConnected) img.src = chCovUrl[key];
+  }
+
   async function chPdfSet(file) {
     const code = cmCode, ch = cmTabSel;
     if (!code || !isChTab(ch) || !file) return;
@@ -19820,10 +19927,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   chPick.type = 'file'; chPick.accept = 'application/pdf,.pdf'; chPick.hidden = true;
   document.body.appendChild(chPick);
   chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
+  const chPickCov = document.createElement('input');
+  chPickCov.type = 'file'; chPickCov.accept = 'image/*,application/pdf,.pdf'; chPickCov.hidden = true;
+  document.body.appendChild(chPickCov);
+  chPickCov.addEventListener('change', () => { const f = chPickCov.files && chPickCov.files[0]; chPickCov.value = ''; chCovSet(f); });
   document.addEventListener('click', e => {
     if (!e.target.closest('#cm-body .cm-chpane')) return;
-    if (e.target.closest('[data-chup]')) chPick.click();
-    else if (e.target.closest('[data-chdel]')) chPdfDel();
+    /* زرُّ الإزالة داخل الزرّ: يُسأل أوّلًا لئلّا يفتح اللاقطَ معه */
+    if (e.target.closest('[data-chdel]')) chPdfDel();
+    else if (e.target.closest('[data-chcovdel]')) chCovDel();
+    else if (e.target.closest('[data-chup]')) chPick.click();
+    else if (e.target.closest('[data-chcov]')) chPickCov.click();
   });
 
   function fillCourseUI(code) {
