@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -19509,15 +19509,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
       /* لونُ الحوافّ: من أطراف ملفّ الغلاف إن رُفع، وإلّا من الصفحة الأولى، وإلّا بتروليُّ الموقع */
       cover: ((chCovMeta(code, ch) || {}).color) || (meta && meta.cover) || '#2c5e65',
-      pos: Math.max(1, Math.min((meta && meta.pos) || 1, doc.numPages)),
+      pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
+      /* يُفتح الكتابُ مغلقًا أوّلَ مرّة، ثمّ كما تركتَه */
+      closed: !meta || meta.closed !== false,
+      covKey: chCovMeta(code, ch) ? chCovKey(code, ch) : null,
     });
   }
 
   const BK_ARR = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+  /* ===== الكتابُ مغلقًا ومفتوحًا =====
+     المغلقُ غلافُه وحده: ورقةٌ من ورق الكتاب نفسِه (‎kind: 'cover'‎) وجهُها صورةُ الغلاف
+     وظهرُها باطنُ الغلاف بلونه. فتحُه تقليبُها حول الكعب كأيّ ورقة — والكتابُ عربيّ،
+     فيستقرّ الغلافُ مفتوحًا يمينًا (باطنُه) وتنكشف الصفحةُ الأولى يسارًا.
+     · ‏‎pos‎ في الفتحتين رقمُ الصفحة اليمنى **زوجيًّا**: ‎0‎ باطنُ الغلاف، ثمّ ‎2، 4…‎
+       وفي الصفحة الواحدة رقمُ الصفحة الظاهرة من ‎1‎.
+     · والمغلقُ يقف حيث تقف الصفحةُ اليمنى (‎translateX(pw)‎) فيبقى ملصقًا باليمين،
+       ويرجع إلى مكانه مع دوران الغلاف حين يُفتح */
   function bkMount(view, b) {
     view.innerHTML = `
       <div class="cbk-stage" tabindex="0" data-bkstage>
         <div class="cbk" data-bk style="--bk-cover:${b.cover}">
+          <div class="cbk__closed"></div>
           <div class="cbk__cover"></div>
           <div class="cbk__stack cbk__stack--l"></div><div class="cbk__stack cbk__stack--r"></div>
           <div class="cbk__pg cbk__pg--l"><img alt="" draggable="false"></div>
@@ -19528,6 +19540,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <button type="button" class="cbk-nav__b" data-bknav="-1" aria-label="prev">${BK_ARR('M9 6l6 6-6 6')}</button>
         <span class="cbk-nav__i" data-bkind></span>
         <button type="button" class="cbk-nav__b" data-bknav="1" aria-label="next">${BK_ARR('M15 6l-6 6 6 6')}</button>
+        <button type="button" class="cbk-nav__b cbk-nav__close" data-bkclose title="${esc(T().bkClose)}" aria-label="${esc(T().bkClose)}">${BK_ARR('M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3')}</button>
       </div>`;
     b.stage = view.querySelector('[data-bkstage]');
     b.el = view.querySelector('[data-bk]');
@@ -19558,19 +19571,42 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pw * cols > W) { pw = W / cols; ph = pw / b.ar; }
     b.pw = Math.floor(pw); b.ph = Math.floor(ph);
     b.rw = Math.min(1800, Math.ceil(b.pw * Math.min(window.devicePixelRatio || 1, 2) / 150) * 150);
-    if (!b.single && b.pos % 2 === 0) b.pos--;   /* الفتحةُ تبدأ بصفحةٍ فرديّةٍ يمينًا */
+    /* الفتحةُ يمينُها زوجيّ (‎0‎ باطنُ الغلاف)، والصفحةُ الواحدة من ‎1‎ */
+    b.pos = b.single ? Math.max(1, b.pos) : Math.max(0, b.pos - (b.pos % 2));
     b.el.classList.toggle('cbk--single', b.single);
     b.el.style.width = b.pw * cols + 'px';
     b.el.style.height = b.ph + 'px';
     b.el.style.setProperty('--pw', b.pw + 'px');
     b.nav.style.width = b.pw * cols + 'px';   /* والتنقّلُ تحت الكتاب لا في وسط الوعاء */
+    b.coverP = null;                          /* وجهُ الغلاف يُرسم بمقاس الصفحة الجديد */
     bkShow(b);
   }
 
-  /* صفحتا الفتحة الساكنتان، وسُمكُ الكومتين، والعدّاد — ثمّ تُجهَّز الفتحتان المجاورتان */
+  /* وجهُ الغلاف بمقاس الصفحة تمامًا: صورةُ الغلاف المرفوعة (تملأ ولا تتشوّه)، وإلّا
+     الصفحةُ الأولى من الملفّ — وصورةٌ واحدةٌ تُقطَّع على شرائح الورقة كأيّ صفحة */
+  function bkCoverURL(b) {
+    if (b.coverP) return b.coverP;
+    b.coverP = (async () => {
+      const blob = b.covKey ? await chIdb('readonly', b.covKey) : null;
+      if (!blob) return bkPageURL(b, 1);
+      const bmp = await createImageBitmap(blob);
+      const cv = document.createElement('canvas');
+      cv.width = b.rw; cv.height = Math.round(b.rw / b.ar);
+      const k = Math.max(cv.width / bmp.width, cv.height / bmp.height);
+      const dw = bmp.width * k, dh = bmp.height * k;
+      cv.getContext('2d').drawImage(bmp, (cv.width - dw) / 2, (cv.height - dh) / 2, dw, dh);
+      bmp.close && bmp.close();
+      const out = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.92));
+      return URL.createObjectURL(out);
+    })().catch(() => bkPageURL(b, 1));
+    return b.coverP;
+  }
+
+  /* صفحةٌ ساكنة: ‎0‎ باطنُ الغلاف (لونُه بلا صورة)، وما خرج عن الملفّ ورقٌ فارغ */
   function bkSlot(b, slot, n) {
     const img = slot.querySelector('img');
     slot.dataset.n = n;
+    slot.classList.toggle('is-inside', n === 0);
     if (n < 1 || n > b.n) { img.removeAttribute('src'); return Promise.resolve(); }
     return bkPageURL(b, n).then(u => {
       if (+slot.dataset.n !== n) return;
@@ -19579,41 +19615,59 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bkShow(b) {
     const p = b.pos;
+    b.el.classList.toggle('cbk--closed', !!b.closed);
+    b.el.classList.remove('cbk--moving');
+    b.el.style.transform = b.closed && !b.single ? `translateX(${b.pw}px)` : '';
     const jobs = [bkSlot(b, b.slotR, p)];
     if (!b.single) jobs.push(bkSlot(b, b.slotL, p + 1));
-    const f = b.n > 1 ? (p - 1) / (b.n - 1) : 0;
+    const f = b.closed ? 0 : b.n > 1 ? Math.max(0, p - 1) / (b.n - 1) : 0;
     b.el.style.setProperty('--tr', (2 + 9 * f).toFixed(1) + 'px');        /* ما قرأتَ: يمينًا */
     b.el.style.setProperty('--tl', (2 + 9 * (1 - f)).toFixed(1) + 'px');  /* ما بقي: يسارًا */
-    b.ind.textContent = b.single || p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    b.ind.textContent = b.closed ? T().bkCover
+      : b.single ? `${p} / ${b.n}`
+      : p === 0 ? `1 / ${b.n}`
+      : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
     b.view.querySelector('[data-bknav="1"]').disabled = !bkCan(b, 1);
     b.view.querySelector('[data-bknav="-1"]').disabled = !bkCan(b, -1);
+    b.view.querySelector('[data-bkclose]').hidden = !!b.closed;
     const step = b.single ? 1 : 2;
     for (let i = p - step; i <= p + 2 * step + 1; i++) if (i >= 1 && i <= b.n) bkPageURL(b, i);
+    /* والمغلقُ غلافُه ورقةٌ ساكنة — تُبنى إن لم تكن */
+    if (b.closed && !b.leaf) { const lf = bkLeafMake(b, 1); if (lf) lf.mode = 'rest'; }
     return Promise.all(jobs);
   }
-  const bkCan = (b, dir) => dir > 0 ? b.pos + (b.single ? 1 : 2) <= b.n : b.pos > 1;
+  /* ‏‎atCover‎: هل الخطوةُ إلى الخلف إغلاق؟ — من الفتحة الأولى، أو من الصفحة الأولى وحدها */
+  const bkAtCover = b => !b.closed && (b.single ? b.pos <= 1 : b.pos <= 0);
+  const bkCan = (b, dir) => b.closed ? dir > 0
+    : dir > 0 ? b.pos + (b.single ? 1 : 2) <= b.n : true;
 
   /* ===== الورقة =====
      ‏‎o‎: جهةُ الكعب من الورقة ('r' = حرفُها الأيمن · 'l' = الأيسر)، و‎sg‎ إشارةُ الدوران.
-     ‏‎θ‎ من ‎0‎ (مستقرّةٌ حيث بدأت) إلى ‎180‎ (مطويّةٌ على الجهة الأخرى). */
+     ‏‎θ‎ من ‎0‎ (مستقرّةٌ يسارَ الكعب) إلى ‎180‎ (مطويّةٌ يمينَه) للورقة ذات الكعب الأيمن،
+     وبالعكس لذات الكعب الأيسر. ‏‎start‎ حيث تبدأ. */
   function bkLeafMake(b, dir) {
     if (!bkCan(b, dir)) return null;
     const p = b.pos, w = b.pw, h = b.ph;
-    let o, left, front, back, under = 0, underSlot = null, start = 0;
-    if (!b.single) {
-      if (dir > 0) { o = 'r'; left = 0; front = p + 1; back = p + 2; under = p + 3; underSlot = b.slotL; }
+    let o = 'r', left = 0, front, back, under = 0, underSlot = null, start = 0, kind = 'page';
+    if (b.closed || (dir < 0 && bkAtCover(b))) {
+      /* الغلاف: يُفتح من مغلق (‎0 ⇠ 180‎)، أو يُغلق من مفتوح (‎180 ⇠ 0‎) */
+      kind = 'cover'; front = 'cover'; back = 'inside';
+      if (b.closed) { start = 0; under = 1; underSlot = b.single ? b.slotR : b.slotL; }
+      else start = 180;
+    } else if (!b.single) {
+      if (dir > 0) { front = p + 1; back = p + 2; under = p + 3; underSlot = b.slotL; }
       else { o = 'l'; left = w; front = p; back = p - 1; under = p - 2; underSlot = b.slotR; }
     } else {
-      o = 'r'; left = 0; back = 0;
+      back = -1;
       if (dir > 0) { front = p; under = p + 1; underSlot = b.slotR; }   /* الورقةُ تُغطّيها، وتحتها التالية */
       else { front = p - 1; start = 180; }                               /* تأتي من اليمين على الحاضرة */
     }
-    const lf = { dir, o, sg: o === 'r' ? 1 : -1, th: start, v: 0, front, back, under, underSlot, ready: false };
+    const lf = { dir, o, kind, sg: o === 'r' ? 1 : -1, th: start, start, v: 0, front, back, under, underSlot, ready: false };
     const s = w / BK_N;
     const el = document.createElement('div');
-    el.className = 'cbk-leaf';
+    el.className = 'cbk-leaf' + (kind === 'cover' ? ' cbk-leaf--cover' : '');
     el.style.cssText = `left:${left}px;width:${w}px;height:${h}px`;
-    let host = el, html = '';
+    let host = el;
     const strips = [];
     for (let i = 0; i < BK_N; i++) {
       const st = document.createElement('div');
@@ -19629,10 +19683,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       host = st;
     }
     lf.el = el; lf.strips = strips;
-    const fill = (n, sel) => n >= 1 && n <= b.n
-      ? bkPageURL(b, n).then(u => strips.forEach(st => { st.querySelector(sel).style.backgroundImage = `url("${u}")`; }))
-      : Promise.resolve();
-    /* في الصفحة الواحدة يُقلَب إلى الخلف بورقةٍ تأتي من اليمين — فما تحتها هو الصفحةُ الحاضرة نفسُها */
+    const paint = (u, sel) => strips.forEach(st => { st.querySelector(sel).style.backgroundImage = `url("${u}")`; });
+    const fill = (n, sel) => n === 'cover' ? bkCoverURL(b).then(u => paint(u, sel))
+      : n === 'inside' ? Promise.resolve()
+      : n >= 1 && n <= b.n ? bkPageURL(b, n).then(u => paint(u, sel)) : Promise.resolve();
     lf.ready = Promise.all([fill(front, '.cbk-face--f'), fill(back, '.cbk-face--b'),
       underSlot ? bkSlot(b, underSlot, under) : Promise.resolve()]);
     b.el.appendChild(el);
@@ -19651,22 +19705,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الوضع: زاويةُ الجذر وانثناءُ البقيّة والظلال — كلُّه من ‎θ‎ وسرعتِها */
   function bkLeafPose(b) {
     const lf = b.leaf, th = lf.th, r = th * Math.PI / 180;
-    const B = (34 + Math.min(26, Math.abs(lf.v) * 0.06)) * Math.sin(r);   /* الانثناءُ الكلّيّ بالدرجات */
+    /* والغلافُ كرتونٌ مقوّى: يكاد لا ينثني */
+    const bend = lf.kind === 'cover' ? 4 : 34 + Math.min(26, Math.abs(lf.v) * 0.06);
+    const B = bend * Math.sin(r);
     const step = BK_N > 1 ? B / (BK_N - 1) : 0;
-    let a = th + B / 2;
+    const a = th + B / 2;
     lf.strips.forEach((st, i) => {
       const rel = i === 0 ? a : -step;
-      const abs = th + B / 2 - i * step;
+      /* والغلافُ لوحٌ واحد: ظلُّه واحدٌ على شرائحه كلِّها، وإلّا بدت عليه خطوط */
+      const abs = lf.kind === 'cover' ? th : a - i * step;
       st.style.transform = `rotateY(${(lf.sg * rel).toFixed(2)}deg)`;
       const fs = Math.min(0.42, Math.max(0, abs / 90) * 0.42);
       const bs = Math.min(0.32, Math.max(0, (180 - abs) / 90) * 0.32);
       st.firstChild.style.setProperty('--sh', fs.toFixed(3));
       st.lastChild.style.setProperty('--sh', bs.toFixed(3));
     });
+    if (lf.kind === 'cover') {
+      /* الغلافُ يدور والكتابُ ينزاح معه: مغلقًا يقف يمينًا، ومفتوحًا يأخذ مكانه */
+      /* والغلافُ الساكنُ (أو الذي لم يُعطَ حالًا بعدُ) لا يُحرّك شيئًا */
+      const live = lf.mode === 'flip' || lf.mode === 'peel' || lf.mode === 'drag';
+      if (live) b.el.classList.add('cbk--moving');
+      if (!b.single) b.el.style.transform = `translateX(${(b.pw * (1 - th / 180)).toFixed(1)}px)`;
+      if (live && th > 0.5) b.el.classList.remove('cbk--closed');
+    }
     /* الظلُّ المنطرح: على الصفحة التي تنكشف، وعلى التي تُغطّى حين تقترب منها الورقة */
     const sn = Math.sin(r);
     if (!b.single) {
-      const revealed = lf.dir > 0 ? b.slotL : b.slotR, covered = lf.dir > 0 ? b.slotR : b.slotL;
+      const revealed = lf.o === 'r' ? b.slotL : b.slotR, covered = lf.o === 'r' ? b.slotR : b.slotL;
       revealed.style.setProperty('--cast', (0.38 * sn * (1 - th / 180)).toFixed(3));
       covered.style.setProperty('--cast', (th > 90 ? 0.3 * sn : 0).toFixed(3));
     } else {
@@ -19679,7 +19744,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!lf) return;
     cancelAnimationFrame(lf.raf);
     lf.target = target;
-    const K = 150, C = 2 * Math.sqrt(K) * 1.02;
+    const K = lf.kind === 'cover' ? 95 : 150, C = 2 * Math.sqrt(K) * 1.02;
     let last = performance.now();
     const tick = now => {
       if (!b.el.isConnected || b.leaf !== lf) return;
@@ -19697,41 +19762,61 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     };
     lf.raf = requestAnimationFrame(tick);
   }
-  /* إتمامُ التقليب: تتقدّم الفتحة، وتُلبَس صفحتاها الساكنتان **قبل** أن تُرفع الورقة —
-     فلا ومضةَ بيضاءَ بين الورقة وما تحتها */
+  /* إتمامُ التقليب: تتقدّم الفتحة (أو يُفتح الكتابُ ويُغلق)، وتُلبَس الصفحتان الساكنتان
+     **قبل** أن تُرفع الورقة — فلا ومضةَ بيضاءَ بين الورقة وما تحتها */
   function bkCommit(b, lf) {
-    b.pos += lf.dir * (b.single ? 1 : 2);
-    if (b.meta) { b.meta.pos = b.pos; save(); }
+    if (lf.kind === 'cover') {
+      if (b.closed) { b.closed = false; b.pos = b.single ? 1 : 0; }
+      else b.closed = true;
+    } else b.pos += lf.dir * (b.single ? 1 : 2);
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = !!b.closed; save(); }
+    if (b.closed) { b.leaf = null; lf.el.remove(); bkShow(b); return; }
     bkShow(b).then(() => { if (b.leaf === lf) bkLeafDrop(b); });
   }
   const bkReduce = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* تقليبٌ كاملٌ بالنقر أو بالمفاتيح */
+  /* تقليبٌ كاملٌ بالنقر أو بالمفاتيح — والغلافُ يُفتح ويُغلق بالطريق نفسِها */
   function bkFlip(b, dir) {
-    if (b.leaf && b.leaf.mode !== 'peel') return;
-    if (b.leaf) bkLeafDrop(b);
+    if (b.leaf && b.leaf.mode !== 'peel' && b.leaf.mode !== 'rest') return;
     if (!bkCan(b, dir)) return;
+    if (b.leaf && !(b.closed && b.leaf.kind === 'cover')) bkLeafDrop(b);
     if (bkReduce()) {
-      b.pos += dir * (b.single ? 1 : 2);
-      if (b.meta) { b.meta.pos = b.pos; save(); }
+      const lf0 = { kind: b.closed || (dir < 0 && bkAtCover(b)) ? 'cover' : 'page', dir, el: document.createElement('i') };
+      if (b.leaf) { b.leaf.el.remove(); b.leaf = null; }
       b.el.classList.remove('cbk--fade'); void b.el.offsetWidth; b.el.classList.add('cbk--fade');
-      bkShow(b);
+      bkCommit(b, lf0);
       return;
     }
-    const lf = bkLeafMake(b, dir);
+    const lf = (b.closed && b.leaf) || bkLeafMake(b, dir);
     if (!lf) return;
     lf.mode = 'flip';
-    const end = lf.th === 180 ? 0 : 180;
+    const end = lf.start === 180 ? 0 : 180;
     lf.ready.then(() => { lf.v = end > lf.th ? 260 : -260; bkAnimate(b, end, () => bkCommit(b, lf)); });
+  }
+  function bkClose(b) {
+    if (b.closed || (b.leaf && b.leaf.mode === 'flip')) return;
+    if (bkAtCover(b)) { bkFlip(b, -1); return; }
+    /* من وسط الكتاب: يُطوى إلى أوّله ثمّ يُغلق الغلاف — ويُحفظ موضعُك للفتحة القادمة؟ لا:
+       الكتابُ المغلقُ يُفتح على أوّله كما يُفتح كتابٌ من الرفّ */
+    if (b.leaf) bkLeafDrop(b);
+    b.pos = b.single ? 1 : 0;
+    bkShow(b);
+    bkFlip(b, -1);
   }
 
   function bkWire(b) {
     const st = b.stage;
     const geo = e => {
+      /* ‏‎getBoundingClientRect‎ يحسب إزاحةَ المغلق من نفسه — فالغلافُ عنده في ‎[0, pw]‎ */
       const r = b.el.getBoundingClientRect();
       return { x: e.clientX - r.left, y: e.clientY - r.top, w: r.width, h: r.height };
     };
-    /* أيُّ ورقةٍ تحت اليد؟ اليسرى تتقدّم واليمنى ترجع (عربيّ) — وفي الصفحة الواحدة نصفُها */
-    const dirAt = g => g.x < 0 || g.x > g.w || g.y < 0 || g.y > g.h ? 0 : (g.x < g.w / 2 ? 1 : -1);
+    /* أيُّ ورقةٍ تحت اليد؟ اليسرى تتقدّم واليمنى ترجع (عربيّ) — وفي الصفحة الواحدة نصفُها.
+       والمغلقُ كلُّه غلافٌ يُفتح */
+    const dirAt = g => {
+      if (g.y < 0 || g.y > g.h) return 0;
+      if (b.closed) return g.x >= 0 && g.x <= b.pw ? 1 : 0;
+      return g.x < 0 || g.x > g.w ? 0 : (g.x < g.w / 2 ? 1 : -1);
+    };
     /* حرفُ الورقة الخارجيّ: حيث تنفرج الزاوية عند المرور */
     const nearEdge = (g, dir) => dir > 0 ? g.x < b.pw * 0.16 : g.x > g.w - b.pw * 0.16;
     /* زاويةُ الورقة من موضع اليد: الحرفُ يتبع الإصبع (‎acos‎) — لا خطًّا مستقيمًا */
@@ -19747,7 +19832,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.button !== 0) return;
       const g = geo(e), dir = dirAt(g);
       if (!dir || !bkCan(b, dir)) return;
-      if (b.leaf && b.leaf.mode !== 'peel') return;
+      if (b.leaf && b.leaf.mode === 'flip') return;
+      st.focus({ preventScroll: true });
+      /* الغلافُ لا يُسحب: الكتابُ ينزاح معه فيفرّ من تحت اليد — نقرةٌ تفتحه أو تغلقه */
+      if (b.closed || (dir < 0 && bkAtCover(b))) { drag = { cover: true, dir, x0: e.clientX }; return; }
       if (b.leaf && b.leaf.dir !== dir) bkLeafDrop(b);
       const lf = b.leaf || bkLeafMake(b, dir);
       if (!lf) return;
@@ -19755,11 +19843,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       lf.mode = 'drag'; lf.x0 = g.x;
       drag = { lf, x0: e.clientX, moved: false, hist: [{ t: performance.now(), th: lf.th }] };
       st.setPointerCapture(e.pointerId);
-      st.focus({ preventScroll: true });
     });
     st.addEventListener('pointermove', e => {
       const g = geo(e);
       if (drag) {
+        if (drag.cover) return;
         if (Math.abs(e.clientX - drag.x0) > 5) drag.moved = true;
         if (!drag.moved) return;
         const lf = drag.lf, now = performance.now();
@@ -19772,24 +19860,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         return;
       }
       if (e.pointerType !== 'mouse' || bkReduce()) return;
-      /* مرورُ الفأرة على الحرف الخارجيّ: الزاويةُ تنفرج — دعوةٌ للسحب */
+      /* مرورُ الفأرة على الحرف الخارجيّ: الزاويةُ تنفرج — دعوةٌ للسحب (أو للفتح) */
       const dir = dirAt(g);
-      const want = dir && nearEdge(g, dir) && bkCan(b, dir) && !(b.single && dir < 0);
-      if (want && !b.leaf) { const lf = bkLeafMake(b, dir); if (lf) { lf.mode = 'peel'; lf.ready.then(() => { if (b.leaf === lf && lf.mode === 'peel') bkAnimate(b, 16); }); } }
-      else if (!want && b.leaf && b.leaf.mode === 'peel') { const lf = b.leaf; bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); }); }
+      const want = dir && nearEdge(g, dir) && bkCan(b, dir) && !(b.single && dir < 0) && !(dir < 0 && bkAtCover(b));
+      const lf = b.leaf;
+      if (b.closed) {
+        if (!lf || (lf.mode !== 'rest' && lf.mode !== 'peel')) return;
+        if (want && lf.mode === 'rest') { lf.mode = 'peel'; bkAnimate(b, 9); }
+        else if (!want && lf.mode === 'peel') bkAnimate(b, 0, () => { if (b.leaf === lf) { lf.mode = 'rest'; bkShow(b); } });
+        return;
+      }
+      if (want && !lf) { const nl = bkLeafMake(b, dir); if (nl) { nl.mode = 'peel'; nl.ready.then(() => { if (b.leaf === nl && nl.mode === 'peel') bkAnimate(b, 16); }); } }
+      else if (!want && lf && lf.mode === 'peel') bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); });
     });
     st.addEventListener('pointerleave', () => {
-      if (drag || !b.leaf || b.leaf.mode !== 'peel') return;
-      const lf = b.leaf; bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); });
+      const lf = b.leaf;
+      if (drag || !lf || lf.mode !== 'peel') return;
+      if (b.closed) bkAnimate(b, 0, () => { if (b.leaf === lf) { lf.mode = 'rest'; bkShow(b); } });
+      else bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); });
     });
     const release = () => {
       if (!drag) return;
-      const { lf, moved } = drag; drag = null;
+      const d = drag; drag = null;
+      if (d.cover) { bkFlip(b, d.dir); return; }
+      const { lf, moved } = d;
       if (b.leaf !== lf) return;
       if (!moved) { lf.mode = 'peel'; bkLeafDrop(b); bkFlip(b, lf.dir); return; }
       lf.mode = 'flip';
-      const from = lf.dir > 0 || !b.single ? 0 : 180;   /* حيث بدأت الورقة */
-      const to = 180 - from;
+      const from = lf.start, to = 180 - from;
       const toward = (to - from) * lf.v > 0 ? Math.abs(lf.v) : 0;
       const past = Math.abs(lf.th - from) > 90;
       const done = toward > 240 || (past && !((to - from) * lf.v < -240));
@@ -19800,10 +19898,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); bkFlip(b, 1); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); bkFlip(b, -1); }
+      else if (e.key === 'Escape') { e.preventDefault(); bkClose(b); }
     });
     b.view.querySelectorAll('[data-bknav]').forEach(btn =>
       btn.addEventListener('click', () => bkFlip(b, +btn.dataset.bknav)));
+    b.view.querySelector('[data-bkclose]').addEventListener('click', () => bkClose(b));
   }
+
   /* ===== ملفُّ الغلاف =====
      صورةٌ (PNG/JPG/WebP) أو PDF تُؤخذ صفحتُه الأولى. البِتاتُ في المخزن بمفتاحٍ غيرِ
      مفتاح الصفحات، والوصفُ في ‎state.chCov‎ ومعه **لونُ الأطراف** محسوبًا مرّةً واحدة. */
@@ -19865,8 +19966,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     try {
       const cv = await chCovCanvas(file, 96);
       color = chEdgeColor(cv);
-      /* المصغّرةُ تُحفظ صورةً دائمًا: غلافُ PDF لا يُرسم في ‎<img>‎ */
-      thumb = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.85));
+      /* ويُحفظ الغلافُ صورةً بدقّةٍ تصلح لوجه الكتاب: الصورةُ كما هي، وغلافُ PDF
+         تُرسم صفحتُه الأولى (‎<img>‎ وشرائحُ الورقة لا تعرض PDF) */
+      thumb = isPdf
+        ? await new Promise(async r => (await chCovCanvas(file, 1200)).toBlob(r, 'image/jpeg', 0.9))
+        : file;
     } catch (e) { toast(T().chCovBad); return; }
     const key = chCovKey(code, ch);
     const ok = await chIdb('readwrite', key, thumb || file);

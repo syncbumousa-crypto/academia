@@ -2050,6 +2050,32 @@ html[data-lang="en"] .cm-faces { direction: ltr; }   /* جهة العدّاد ت
 .cbk-face--b { transform: rotateY(180deg); }
 .cbk-face::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,var(--sh, 0)); }
 .cbk--fade .cbk__pg img { animation: bkFade .35s ease; }
+/* ===== مغلقًا =====
+   لا يُرى إلّا الغلاف: ورقتُه (وجهُها صورةُ الغلاف) فوق كتلةٍ تُري سُمكَ الورق وحافّةَ
+   الظهر. والكرتونُ والصفحاتُ مخفيّة حتى يبدأ الفتح */
+.cbk__closed {
+  position: absolute; left: 0; top: 0; width: var(--pw); height: 100%; display: none;
+  border-radius: 3px 6px 6px 3px; transform: translate(5px, 7px);
+  background: linear-gradient(90deg, rgba(0,0,0,.12), transparent 30%), var(--bk-cover, #2c5e65);
+  box-shadow: 0 24px 40px -14px rgba(0,0,0,.45), 0 4px 10px rgba(0,0,0,.18);
+}
+.cbk__closed::after {   /* حرفُ الورق بين الغلافين */
+  content: ''; position: absolute; left: 4px; right: 3px; bottom: 3px; height: 5px; border-radius: 0 0 2px 2px;
+  background: repeating-linear-gradient(180deg, #f3ead6 0 1px, #cfc3a8 1px 2px);
+}
+.cbk--closed .cbk__closed { display: block; }
+.cbk--closed .cbk__cover, .cbk--closed .cbk__pg, .cbk--closed .cbk__stack { visibility: hidden; }
+.cbk--single.cbk--closed .cbk__closed { width: var(--pw); }
+/* وفي أثناء الفتح (الفتحتان): نصفُ الكتاب الأيمن لا يُرى حتى يستقرّ عليه الغلاف —
+   فلا يبرز وهو مُزاحٌ خارج صندوقه */
+.cbk--moving:not(.cbk--single) .cbk__cover { clip-path: inset(-40px 50% -40px -40px); }
+.cbk--moving:not(.cbk--single) .cbk__pg--r,
+.cbk--moving:not(.cbk--single) .cbk__stack--r { visibility: hidden; }
+/* ورقةُ الغلاف: وجهُها الصورةُ بلا صبغة الورق، وظهرُها باطنُ الغلاف بلونه */
+.cbk-leaf--cover .cbk-face--f { background-color: #fff; background-blend-mode: normal; }
+.cbk-leaf--cover .cbk-face--b { background-color: var(--bk-cover, #2c5e65); background-image: none !important; }
+.cbk__pg.is-inside { background: linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,.05) 12%, transparent 40%), var(--bk-cover, #2c5e65); }
+.cbk-nav__close[hidden] { display: none; }
 @keyframes bkFade { from { opacity: 0; } }
 /* شريطُ التنقّل تحت الكتاب */
 .cbk-nav { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 8px 0 2px; margin-inline-start: 26px; }
