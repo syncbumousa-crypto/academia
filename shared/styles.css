@@ -1923,9 +1923,35 @@ html[data-lang="en"] .cm-faces { direction: ltr; }   /* جهة العدّاد ت
   font-size: 10px; font-weight: 500; opacity: .72;
 }
 .cm-tabs button.on .cm-chname { opacity: .9; }
-.cm-chpane { padding: 18px 16px; }
-.cm-chpane__t { margin: 0 0 8px; font-size: 16px; }
-.cm-chpane__t span { font-weight: 500; opacity: .7; }
+.cm-chpane { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+.chcol { min-width: 0; padding: 16px; display: flex; flex-direction: column; }
+.chcol--src { border-inline-end: 1.5px solid var(--u-line, rgba(127,127,127,.28)); }
+.chup {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border: 1.6px dashed rgba(225,193,114,.75); border-radius: 14px; background: rgba(225,193,114,.07);
+  color: inherit; font: inherit; cursor: pointer; padding: 24px; transition: background .15s;
+}
+.chup:hover { background: rgba(225,193,114,.16); }
+.chup svg { width: 38px; height: 38px; color: #c9a24d; }
+.chup b { font-size: 15px; }
+.chup small { opacity: .65; font-size: 12px; }
+.chsrc { flex: 1; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.chsrc__bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chsrc__name { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; }
+.chsrc__bar small { opacity: .6; font-size: 11.5px; }
+.chsrc__acts { margin-inline-start: auto; display: flex; gap: 6px; }
+.chsrc__btn {
+  border: 1px solid rgba(127,127,127,.35); background: transparent; color: inherit; font: inherit;
+  font-size: 12px; border-radius: 8px; padding: 4px 10px; cursor: pointer;
+}
+.chsrc__btn:hover { background: var(--u-hov); }
+.chsrc__btn--del { color: #c0564b; border-color: rgba(192,86,75,.45); }
+.chsrc__view { flex: 1; display: flex; min-height: 0; }
+.chsrc__frame { flex: 1; width: 100%; min-height: 66vh; border: 0; border-radius: 10px; background: #fff; }
+@media (max-width: 760px) {
+  .cm-chpane { grid-template-columns: 1fr; }
+  .chcol--src { border-inline-end: 0; border-bottom: 1.5px solid var(--u-line, rgba(127,127,127,.28)); }
+}
 .cm-face {
   flex: none; width: 19px; height: 19px; border-radius: 999px;
   margin-inline-start: -6px; border: 1.5px solid var(--u-badge);

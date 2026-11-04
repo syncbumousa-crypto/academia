@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', chSoon: 'محتوى هذا الشابتر قريبًا', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', chUp: 'ارفع المصدر PDF', chUpHint: 'كتاب أو ملزمة هذا الشابتر', chReplace: 'استبدال', chRemove: 'إزالة', chOpen: 'افتح في نافذة', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', chSoon: 'This chapter’s content is coming soon', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', chUp: 'Upload PDF source', chUpHint: 'This chapter’s book or notes', chReplace: 'Replace', chRemove: 'Remove', chOpen: 'Open in new tab', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -6359,11 +6359,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const back = `<div class="cm-back"><button type="button" class="cm-backbtn" id="cm-back">← ${T().backToList}</button></div>`;
     let inner = '';
     if (isChTab(sec)) {
-      /* شابترٌ من كونسبت الشابترات — وعاءٌ فارغٌ بعنوانه حتّى يتقرّر ما يسكنه */
-      const n = +sec.slice(2), name = (chTabsOf(cmCode) || [])[n - 1] || '';
-      inner = `<div class="cm-chpane"><h3 class="cm-chpane__t">${T().chapter} ${n}`
-        + `${name ? ` <span>— ${esc(name)}</span>` : ''}</h3>`
-        + `<p class="v-none">${T().chSoon}</p></div>`;
+      /* شابترٌ من كونسبت الشابترات: شقّان بخطٍّ عموديّ — يمينُه مصدرُ الشابتر (PDF)،
+         ويسارُه فارغٌ حتّى يتقرّر ما يسكنه */
+      inner = chPaneHTML(cmCode, sec);
     } else if (sec === 'cards') {
       /* «البطائق»: عرض مجمّع كالشروح — متصفح شجرة المجلدات والبطائق (ROADMAP-CARDS م2) */
       inner = cardsTabHTML();
@@ -6458,6 +6456,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     $('#cm-body').innerHTML = inner;
+    if (isChTab(sec)) chPdfPaint();   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
       else editorMount(cmView.sub || sec);
@@ -19324,6 +19323,103 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ] : null;
   }
   function isChTab(t) { return /^ch\d+$/.test(t || ''); }
+
+  /* ===== مصدرُ الشابتر: ملفُّ PDF لكلّ شابترٍ وحده =====
+     البِتاتُ في ‎IndexedDB‎ (مخزنُ الوسائط نفسُه) بمفتاحٍ يجمع المادّةَ والشابتر —
+     فلا يشترك شابتران في مصدر. ويسكن الحالَ وصفُه وحده (الاسم والحجم) ليُرسم الوعاءُ
+     في الحال، ثمّ يُستدعى الملفُّ ويُعرض في عارض المتصفّح.
+     ومهلتُه أطولُ من مهلة الصور: كتابُ PDF أثقلُ من صورةٍ ملصوقة */
+  const chPdfKey = (code, ch) => `chpdf:${code}:${ch}`;
+  const chPdfMeta = (code, ch) => ((state.chPdf || {})[code] || {})[ch] || null;
+  const chPdfUrl = {};
+  const chIdb = (mode, key, val) => new Promise(res => {
+    let done = false;
+    const fin = v => { if (!done) { done = true; res(v); } };
+    setTimeout(() => fin(null), 30000);
+    let rq;
+    try { rq = indexedDB.open(MED_DB, 1); } catch (e) { return fin(null); }
+    rq.onupgradeneeded = () => rq.result.createObjectStore('m');
+    rq.onerror = () => fin(null);
+    rq.onsuccess = () => {
+      let st;
+      try { st = rq.result.transaction('m', mode).objectStore('m'); } catch (e) { return fin(null); }
+      let op;
+      try { op = mode === 'readwrite' ? (val == null ? st.delete(key) : st.put(val, key)) : st.get(key); }
+      catch (e) { return fin(null); }
+      op.onsuccess = () => fin(mode === 'readwrite' ? key : (op.result || null));
+      op.onerror = () => fin(null);
+    };
+  });
+  function chPaneHTML(code, ch) {
+    const m = chPdfMeta(code, ch);
+    const kb = m && m.size ? ` · ${m.size >= 1048576 ? (m.size / 1048576).toFixed(1) + ' MB' : Math.ceil(m.size / 1024) + ' KB'}` : '';
+    const right = m
+      ? `<div class="chsrc">
+          <div class="chsrc__bar">
+            <b class="chsrc__name" title="${esc(m.name)}">${esc(m.name)}</b><small>${kb}</small>
+            <span class="chsrc__acts">
+              <button type="button" class="chsrc__btn" data-chopen>${T().chOpen}</button>
+              <button type="button" class="chsrc__btn" data-chup>${T().chReplace}</button>
+              <button type="button" class="chsrc__btn chsrc__btn--del" data-chdel>${T().chRemove}</button>
+            </span>
+          </div>
+          <div class="chsrc__view" data-chview><p class="v-none">${T().chLoading}</p></div>
+        </div>`
+      : `<button type="button" class="chup" data-chup>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></svg>
+          <b>${T().chUp}</b><small>${T().chUpHint}</small>
+        </button>`;
+    return `<div class="cm-chpane"><div class="chcol chcol--src">${right}</div><div class="chcol chcol--rest"></div></div>`;
+  }
+  async function chPdfPaint() {
+    const view = document.querySelector('#cm-body [data-chview]');
+    if (!view) return;
+    const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
+    if (!chPdfUrl[key]) {
+      const blob = await chIdb('readonly', key);
+      if (!blob) { if (view.isConnected) view.innerHTML = `<p class="v-none">${T().chMissing}</p>`; return; }
+      chPdfUrl[key] = URL.createObjectURL(blob);
+    }
+    /* والرسمُ قد تبدّل في أثناء الانتظار (شابترٌ آخر أو مادّةٌ أخرى) — فلا يُلبَس غيرَ صاحبه */
+    if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
+    view.innerHTML = `<iframe class="chsrc__frame" src="${chPdfUrl[key]}#view=FitH" title="PDF"></iframe>`;
+  }
+  async function chPdfSet(file) {
+    const code = cmCode, ch = cmTabSel;
+    if (!code || !isChTab(ch) || !file) return;
+    if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) { toast(T().chNotPdf); return; }
+    const key = chPdfKey(code, ch);
+    const ok = await chIdb('readwrite', key, file);
+    if (!ok) { toast(T().chSaveFail); return; }
+    if (chPdfUrl[key]) { URL.revokeObjectURL(chPdfUrl[key]); delete chPdfUrl[key]; }
+    state.chPdf = state.chPdf || {};
+    (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
+    save();
+    if (cmCode === code && cmTabSel === ch) renderCmSection();
+  }
+  async function chPdfDel() {
+    const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
+    if (!chPdfMeta(code, ch)) return;
+    await chIdb('readwrite', key, null);
+    if (chPdfUrl[key]) { URL.revokeObjectURL(chPdfUrl[key]); delete chPdfUrl[key]; }
+    delete state.chPdf[code][ch];
+    save();
+    renderCmSection();
+  }
+  /* لاقطُ الملفّ واحدٌ مخفيّ، وأزرارُ الوعاء تُلتقط بالتفويض — فالوعاءُ يُعاد بناؤه كلَّ رسمة */
+  const chPick = document.createElement('input');
+  chPick.type = 'file'; chPick.accept = 'application/pdf,.pdf'; chPick.hidden = true;
+  document.body.appendChild(chPick);
+  chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#cm-body .cm-chpane')) return;
+    if (e.target.closest('[data-chup]')) chPick.click();
+    else if (e.target.closest('[data-chdel]')) chPdfDel();
+    else if (e.target.closest('[data-chopen]')) {
+      const u = chPdfUrl[chPdfKey(cmCode, cmTabSel)];
+      if (u) window.open(u, '_blank', 'noopener');
+    }
+  });
 
   function fillCourseUI(code) {
     if (cmCode && cmCode !== code) cleanupEmptyMine();   /* تبديل مادة ومحرر المادة السابقة مفتوح */
