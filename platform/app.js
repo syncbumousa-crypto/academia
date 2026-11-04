@@ -19367,7 +19367,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></svg>
           <b>${T().chUp}</b><small>${T().chUpHint}</small>
         </button>`;
-    return `<div class="cm-chpane"><div class="chcol chcol--src">${right}</div><div class="chcol chcol--rest"></div></div>`;
+    /* بعد الرفع يأخذ الكتابُ عرضَ الوعاء كلَّه: صفحتان متقابلتان في نصفٍ أضيقُ من أن تُقرأا */
+    return m
+      ? `<div class="cm-chpane cm-chpane--book"><div class="chcol chcol--src">${right}</div></div>`
+      : `<div class="cm-chpane"><div class="chcol chcol--src">${right}</div><div class="chcol chcol--rest"></div></div>`;
   }
   /* ===== عارضُنا لا عارضُ المتصفّح =====
      كان الملفُّ يُعرض في ‎iframe‎ بعارض المتصفّح: شريطُ أدواتٍ غريبٌ عن الموقع، ولا شيءَ
@@ -19403,6 +19406,80 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     chPdfDoc[key] = await L.getDocument({ data }).promise;
     return chPdfDoc[key];
   }
+  /* ============================================================
+     الكتاب — مصدرُ الشابتر كتابٌ عربيٌّ يُقلَّب (ROADMAP-BOOK.md)
+     ============================================================
+     الكتابُ عربيّ: الصفحةُ الأولى يمينًا، والتقدُّمُ ترفعُ اليسرى وتطويها إلى اليمين.
+     · الفتحةُ تُعرَّف بصفحتها اليمنى ‎pos‎ (فرديّة): يمينُها ‎pos‎ ويسارُها ‎pos+1‎.
+     · والورقةُ المقلَّبة شرائحُ متداخلة (‎BK_N‎) كلٌّ ابنةُ التي قبلها وتدور عنها قليلًا —
+       فتنثني قوسًا كالورق لا لوحًا كالباب. والانثناءُ ‎∝ sin θ‎: صفرٌ حين تستقرّ.
+     · والحركةُ نابضٌ لا زمنٌ ثابت: السحبُ يُعطيه سرعتَه، والإفلاتُ يُكمله أو يردّه.
+     · وفي العرض الضيّق صفحةٌ واحدة، كعبُها حرفُها الأيمن */
+  const BK_N = 10;
+  const BK_PAPER = '#f4ecdc';
+  const bkCache = new Map();   /* ‎key|n|w‎ ⇐ وعدٌ بعنوان صورة الصفحة — والأقدمُ يُطرح */
+  function bkPageURL(b, n) {
+    const id = `${b.key}|${n}|${b.rw}`;
+    if (bkCache.has(id)) { const v = bkCache.get(id); bkCache.delete(id); bkCache.set(id, v); return v; }
+    const pr = (async () => {
+      const pg = await b.doc.getPage(n);
+      const v1 = pg.getViewport({ scale: 1 });
+      const vp = pg.getViewport({ scale: b.rw / v1.width });
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+      const cx = cv.getContext('2d');
+      cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.92));
+      return URL.createObjectURL(blob);
+    })();
+    bkCache.set(id, pr);
+    while (bkCache.size > 30) {
+      const [k0, p0] = bkCache.entries().next().value;
+      bkCache.delete(k0);
+      p0.then(u => URL.revokeObjectURL(u)).catch(() => {});
+    }
+    return pr;
+  }
+  function bkForget(key) {
+    [...bkCache.keys()].forEach(id => {
+      if (id.startsWith(key + '|')) { bkCache.get(id).then(u => URL.revokeObjectURL(u)).catch(() => {}); bkCache.delete(id); }
+    });
+  }
+  /* ===== لونُ الغلاف من الصفحة الأولى =====
+     تُرسم صغيرةً (‎48px‎) ويُعدّ لونُها الغالب بعد طرح الورق الأبيض. فإن كان أكثرُها
+     ورقًا (صفحةُ نصٍّ لا غلاف) رُدّ ‎null‎ وأخذ الكتابُ بتروليَّ الموقع.
+     واللونُ يُعتَم قليلًا: الغلافُ المقوّى أغمقُ من طباعته */
+  async function bkCoverColor(doc) {
+    const pg = await doc.getPage(1);
+    const v1 = pg.getViewport({ scale: 1 });
+    const vp = pg.getViewport({ scale: 48 / v1.width });
+    const cv = document.createElement('canvas');
+    cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+    const cx = cv.getContext('2d', { willReadFrequently: true });
+    cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    const d = cx.getImageData(0, 0, cv.width, cv.height).data;
+    const bins = new Map();
+    let tot = 0, ink = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i], g = d[i + 1], bl = d[i + 2];
+      tot++;
+      const mx = Math.max(r, g, bl), mn = Math.min(r, g, bl);
+      if (mx > 228 && mx - mn < 26) continue;
+      ink++;
+      const k = ((r >> 5) << 6) | ((g >> 5) << 3) | (bl >> 5);
+      const e = bins.get(k) || [0, 0, 0, 0];
+      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
+      bins.set(k, e);
+    }
+    if (!tot || ink / tot < 0.3) return null;
+    let best = null;
+    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
+    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.8));
+    return `rgb(${c.join(',')})`;
+  }
+
   async function chPdfPaint() {
     const view = document.querySelector('#cm-body [data-chview]');
     if (!view) return;
@@ -19412,44 +19489,307 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والرسمُ قد تبدّل في أثناء الانتظار (شابترٌ آخر أو مادّةٌ أخرى) — فلا يُلبَس غيرَ صاحبه */
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
     if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
-    const n = doc.numPages;
+    const meta = chPdfMeta(code, ch);
+    if (meta && meta.cover === undefined) {
+      meta.cover = await bkCoverColor(doc).catch(() => null);
+      save();
+    }
     const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
-    if (!view.isConnected) return;
-    /* كلُّ صفحةٍ وعاءٌ بنسبة الصفحة الأولى ريثما تُرسم — فطولُ العمود صحيحٌ من أوّل لحظة
-       ويقول الشريطُ الحقيقةَ عن طول الكتاب، ثمّ تُصحَّح النسبةُ حين تُرسم صفحتُها */
-    let pages = '';
-    for (let i = 1; i <= n; i++)
-      pages += `<div class="chpv__pg" data-pn="${i}" style="aspect-ratio:${p1.width}/${p1.height}"><span class="chpv__no">${i}</span></div>`;
-    view.innerHTML = `<div class="chpv"><div class="chpv__scroll" data-chpv>${pages}</div>`
-      + `<div class="chpv__ind"><b data-chpvi>1</b> / ${n}</div></div>`;
-    const sc = view.querySelector('[data-chpv]'), ind = view.querySelector('[data-chpvi]');
-    const drawn = new Set();
-    const draw = async el => {
-      const pn = +el.dataset.pn;
-      if (drawn.has(pn)) return;
-      drawn.add(pn);
-      const pg = await doc.getPage(pn);
-      const vp1 = pg.getViewport({ scale: 1 });
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.max(sc.clientWidth, 320);
-      const vp = pg.getViewport({ scale: (w * dpr) / vp1.width });
-      const cv = document.createElement('canvas');
-      cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height);
-      await pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
-      el.style.aspectRatio = `${vp1.width}/${vp1.height}`;
-      el.appendChild(cv);
-      el.classList.add('is-on');
+    if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
+    bkMount(view, {
+      doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
+      cover: (meta && meta.cover) || '#2c5e65',
+      pos: Math.max(1, Math.min((meta && meta.pos) || 1, doc.numPages)),
+    });
+  }
+
+  const BK_ARR = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+  function bkMount(view, b) {
+    view.innerHTML = `
+      <div class="cbk-stage" tabindex="0" data-bkstage>
+        <div class="cbk" data-bk style="--bk-cover:${b.cover}">
+          <div class="cbk__cover"></div>
+          <div class="cbk__stack cbk__stack--l"></div><div class="cbk__stack cbk__stack--r"></div>
+          <div class="cbk__pg cbk__pg--l"><img alt="" draggable="false"></div>
+          <div class="cbk__pg cbk__pg--r"><img alt="" draggable="false"></div>
+        </div>
+      </div>
+      <div class="cbk-nav">
+        <button type="button" class="cbk-nav__b" data-bknav="-1" aria-label="prev">${BK_ARR('M9 6l6 6-6 6')}</button>
+        <span class="cbk-nav__i" data-bkind></span>
+        <button type="button" class="cbk-nav__b" data-bknav="1" aria-label="next">${BK_ARR('M15 6l-6 6 6 6')}</button>
+      </div>`;
+    b.stage = view.querySelector('[data-bkstage]');
+    b.el = view.querySelector('[data-bk]');
+    b.slotL = b.el.querySelector('.cbk__pg--l');
+    b.slotR = b.el.querySelector('.cbk__pg--r');
+    b.ind = view.querySelector('[data-bkind]');
+    b.leaf = null;
+    b.view = view;
+    bkLayout(b);
+    let raf = 0;
+    b.ro = new ResizeObserver(() => {
+      if (!b.el.isConnected) { b.ro.disconnect(); return; }
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => { bkLeafDrop(b); bkLayout(b); });
+    });
+    b.ro.observe(b.stage);
+    bkWire(b);
+  }
+
+  function bkLayout(b) {
+    const W = b.stage.clientWidth - 56, H = b.stage.clientHeight - 64;   /* هامشٌ يسع حافّةَ الغلاف وسُمكَ الورق */
+    if (W <= 0 || H <= 0) return;
+    b.single = W < 620;
+    const cols = b.single ? 1 : 2;
+    let ph = H, pw = ph * b.ar;
+    if (pw * cols > W) { pw = W / cols; ph = pw / b.ar; }
+    b.pw = Math.floor(pw); b.ph = Math.floor(ph);
+    b.rw = Math.min(1800, Math.ceil(b.pw * Math.min(window.devicePixelRatio || 1, 2) / 150) * 150);
+    if (!b.single && b.pos % 2 === 0) b.pos--;   /* الفتحةُ تبدأ بصفحةٍ فرديّةٍ يمينًا */
+    b.el.classList.toggle('cbk--single', b.single);
+    b.el.style.width = b.pw * cols + 'px';
+    b.el.style.height = b.ph + 'px';
+    b.el.style.setProperty('--pw', b.pw + 'px');
+    bkShow(b);
+  }
+
+  /* صفحتا الفتحة الساكنتان، وسُمكُ الكومتين، والعدّاد — ثمّ تُجهَّز الفتحتان المجاورتان */
+  function bkSlot(b, slot, n) {
+    const img = slot.querySelector('img');
+    slot.dataset.n = n;
+    if (n < 1 || n > b.n) { img.removeAttribute('src'); return Promise.resolve(); }
+    return bkPageURL(b, n).then(u => {
+      if (+slot.dataset.n !== n) return;
+      if (img.getAttribute('src') !== u) { img.src = u; return img.decode().catch(() => {}); }
+    });
+  }
+  function bkShow(b) {
+    const p = b.pos;
+    const jobs = [bkSlot(b, b.slotR, p)];
+    if (!b.single) jobs.push(bkSlot(b, b.slotL, p + 1));
+    const f = b.n > 1 ? (p - 1) / (b.n - 1) : 0;
+    b.el.style.setProperty('--tr', (2 + 9 * f).toFixed(1) + 'px');        /* ما قرأتَ: يمينًا */
+    b.el.style.setProperty('--tl', (2 + 9 * (1 - f)).toFixed(1) + 'px');  /* ما بقي: يسارًا */
+    b.ind.textContent = b.single || p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    b.view.querySelector('[data-bknav="1"]').disabled = !bkCan(b, 1);
+    b.view.querySelector('[data-bknav="-1"]').disabled = !bkCan(b, -1);
+    const step = b.single ? 1 : 2;
+    for (let i = p - step; i <= p + 2 * step + 1; i++) if (i >= 1 && i <= b.n) bkPageURL(b, i);
+    return Promise.all(jobs);
+  }
+  const bkCan = (b, dir) => dir > 0 ? b.pos + (b.single ? 1 : 2) <= b.n : b.pos > 1;
+
+  /* ===== الورقة =====
+     ‏‎o‎: جهةُ الكعب من الورقة ('r' = حرفُها الأيمن · 'l' = الأيسر)، و‎sg‎ إشارةُ الدوران.
+     ‏‎θ‎ من ‎0‎ (مستقرّةٌ حيث بدأت) إلى ‎180‎ (مطويّةٌ على الجهة الأخرى). */
+  function bkLeafMake(b, dir) {
+    if (!bkCan(b, dir)) return null;
+    const p = b.pos, w = b.pw, h = b.ph;
+    let o, left, front, back, under = 0, underSlot = null, start = 0;
+    if (!b.single) {
+      if (dir > 0) { o = 'r'; left = 0; front = p + 1; back = p + 2; under = p + 3; underSlot = b.slotL; }
+      else { o = 'l'; left = w; front = p; back = p - 1; under = p - 2; underSlot = b.slotR; }
+    } else {
+      o = 'r'; left = 0; back = 0;
+      if (dir > 0) { front = p; under = p + 1; underSlot = b.slotR; }   /* الورقةُ تُغطّيها، وتحتها التالية */
+      else { front = p - 1; start = 180; }                               /* تأتي من اليمين على الحاضرة */
+    }
+    const lf = { dir, o, sg: o === 'r' ? 1 : -1, th: start, v: 0, front, back, under, underSlot, ready: false };
+    const s = w / BK_N;
+    const el = document.createElement('div');
+    el.className = 'cbk-leaf';
+    el.style.cssText = `left:${left}px;width:${w}px;height:${h}px`;
+    let host = el, html = '';
+    const strips = [];
+    for (let i = 0; i < BK_N; i++) {
+      const st = document.createElement('div');
+      st.className = 'cbk-strip';
+      const side = i === 0 ? (o === 'r' ? 'right:0' : 'left:0') : (o === 'r' ? 'right:100%' : 'left:100%');
+      st.style.cssText = `${side};width:${s + 1.6}px;transform-origin:${o === 'r' ? 'right' : 'left'} center`;
+      const fx = o === 'r' ? -(w - (i + 1) * s) : -(i * s);
+      const bx = o === 'r' ? -(i * s) : -(w - (i + 1) * s);
+      st.innerHTML = `<div class="cbk-face cbk-face--f" style="background-size:${w}px ${h}px;background-position:${fx}px 0"></div>`
+        + `<div class="cbk-face cbk-face--b" style="background-size:${w}px ${h}px;background-position:${bx}px 0"></div>`;
+      host.appendChild(st);
+      strips.push(st);
+      host = st;
+    }
+    lf.el = el; lf.strips = strips;
+    const fill = (n, sel) => n >= 1 && n <= b.n
+      ? bkPageURL(b, n).then(u => strips.forEach(st => { st.querySelector(sel).style.backgroundImage = `url("${u}")`; }))
+      : Promise.resolve();
+    /* في الصفحة الواحدة يُقلَب إلى الخلف بورقةٍ تأتي من اليمين — فما تحتها هو الصفحةُ الحاضرة نفسُها */
+    lf.ready = Promise.all([fill(front, '.cbk-face--f'), fill(back, '.cbk-face--b'),
+      underSlot ? bkSlot(b, underSlot, under) : Promise.resolve()]);
+    b.el.appendChild(el);
+    b.leaf = lf;
+    bkLeafPose(b);
+    return lf;
+  }
+  function bkLeafDrop(b) {
+    if (!b.leaf) return;
+    cancelAnimationFrame(b.leaf.raf);
+    b.leaf.el.remove();
+    b.leaf = null;
+    b.el.querySelectorAll('.cbk__pg').forEach(s => s.style.removeProperty('--cast'));
+    bkShow(b);
+  }
+  /* الوضع: زاويةُ الجذر وانثناءُ البقيّة والظلال — كلُّه من ‎θ‎ وسرعتِها */
+  function bkLeafPose(b) {
+    const lf = b.leaf, th = lf.th, r = th * Math.PI / 180;
+    const B = (34 + Math.min(26, Math.abs(lf.v) * 0.06)) * Math.sin(r);   /* الانثناءُ الكلّيّ بالدرجات */
+    const step = BK_N > 1 ? B / (BK_N - 1) : 0;
+    let a = th + B / 2;
+    lf.strips.forEach((st, i) => {
+      const rel = i === 0 ? a : -step;
+      const abs = th + B / 2 - i * step;
+      st.style.transform = `rotateY(${(lf.sg * rel).toFixed(2)}deg)`;
+      const fs = Math.min(0.42, Math.max(0, abs / 90) * 0.42);
+      const bs = Math.min(0.32, Math.max(0, (180 - abs) / 90) * 0.32);
+      st.firstChild.style.setProperty('--sh', fs.toFixed(3));
+      st.lastChild.style.setProperty('--sh', bs.toFixed(3));
+    });
+    /* الظلُّ المنطرح: على الصفحة التي تنكشف، وعلى التي تُغطّى حين تقترب منها الورقة */
+    const sn = Math.sin(r);
+    if (!b.single) {
+      const revealed = lf.dir > 0 ? b.slotL : b.slotR, covered = lf.dir > 0 ? b.slotR : b.slotL;
+      revealed.style.setProperty('--cast', (0.38 * sn * (1 - th / 180)).toFixed(3));
+      covered.style.setProperty('--cast', (th > 90 ? 0.3 * sn : 0).toFixed(3));
+    } else {
+      b.slotR.style.setProperty('--cast', (0.32 * sn).toFixed(3));
+    }
+  }
+  /* النابض: يجرّ ‎θ‎ إلى غايته بلا ارتدادٍ يتجاوز الكعب، ثمّ يُثبَّت أو يُطرح */
+  function bkAnimate(b, target, onDone) {
+    const lf = b.leaf;
+    if (!lf) return;
+    cancelAnimationFrame(lf.raf);
+    lf.target = target;
+    const K = 150, C = 2 * Math.sqrt(K) * 1.02;
+    let last = performance.now();
+    const tick = now => {
+      if (!b.el.isConnected || b.leaf !== lf) return;
+      const dt = Math.min(0.032, (now - last) / 1000); last = now;
+      const acc = K * (lf.target - lf.th) - C * lf.v;
+      lf.v += acc * dt;
+      lf.th = Math.max(0, Math.min(180, lf.th + lf.v * dt));
+      bkLeafPose(b);
+      if (Math.abs(lf.target - lf.th) < 0.4 && Math.abs(lf.v) < 6) {
+        lf.th = lf.target; lf.v = 0; bkLeafPose(b);
+        if (onDone) onDone();
+        return;
+      }
+      lf.raf = requestAnimationFrame(tick);
     };
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) draw(e.target); }),
-      { root: sc, rootMargin: '900px 0px' });
-    sc.querySelectorAll('.chpv__pg').forEach(el => io.observe(el));
-    /* عدّادُ الصفحة: الصفحةُ التي يعبر منتصفَ النافذة حرفُها */
-    sc.addEventListener('scroll', () => {
-      const mid = sc.scrollTop + sc.clientHeight / 2;
-      let cur = 1;
-      for (const el of sc.children) { if (el.offsetTop <= mid) cur = +el.dataset.pn; else break; }
-      ind.textContent = cur;
-    }, { passive: true });
+    lf.raf = requestAnimationFrame(tick);
+  }
+  /* إتمامُ التقليب: تتقدّم الفتحة، وتُلبَس صفحتاها الساكنتان **قبل** أن تُرفع الورقة —
+     فلا ومضةَ بيضاءَ بين الورقة وما تحتها */
+  function bkCommit(b, lf) {
+    b.pos += lf.dir * (b.single ? 1 : 2);
+    if (b.meta) { b.meta.pos = b.pos; save(); }
+    bkShow(b).then(() => { if (b.leaf === lf) bkLeafDrop(b); });
+  }
+  const bkReduce = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* تقليبٌ كاملٌ بالنقر أو بالمفاتيح */
+  function bkFlip(b, dir) {
+    if (b.leaf && b.leaf.mode !== 'peel') return;
+    if (b.leaf) bkLeafDrop(b);
+    if (!bkCan(b, dir)) return;
+    if (bkReduce()) {
+      b.pos += dir * (b.single ? 1 : 2);
+      if (b.meta) { b.meta.pos = b.pos; save(); }
+      b.el.classList.remove('cbk--fade'); void b.el.offsetWidth; b.el.classList.add('cbk--fade');
+      bkShow(b);
+      return;
+    }
+    const lf = bkLeafMake(b, dir);
+    if (!lf) return;
+    lf.mode = 'flip';
+    const end = lf.th === 180 ? 0 : 180;
+    lf.ready.then(() => { lf.v = end > lf.th ? 260 : -260; bkAnimate(b, end, () => bkCommit(b, lf)); });
+  }
+
+  function bkWire(b) {
+    const st = b.stage;
+    const geo = e => {
+      const r = b.el.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top, w: r.width, h: r.height };
+    };
+    /* أيُّ ورقةٍ تحت اليد؟ اليسرى تتقدّم واليمنى ترجع (عربيّ) — وفي الصفحة الواحدة نصفُها */
+    const dirAt = g => g.x < 0 || g.x > g.w || g.y < 0 || g.y > g.h ? 0 : (g.x < g.w / 2 ? 1 : -1);
+    /* حرفُ الورقة الخارجيّ: حيث تنفرج الزاوية عند المرور */
+    const nearEdge = (g, dir) => dir > 0 ? g.x < b.pw * 0.16 : g.x > g.w - b.pw * 0.16;
+    /* زاويةُ الورقة من موضع اليد: الحرفُ يتبع الإصبع (‎acos‎) — لا خطًّا مستقيمًا */
+    const angleAt = (g, lf) => {
+      /* الكعبُ على ‎pw‎ من اليسار في الحالين: منتصفُ الفتحة، أو حرفُ الصفحة الواحدة الأيمن */
+      const px = Math.max(-b.pw, Math.min(b.pw, g.x - b.pw));
+      if (b.single && lf.dir < 0) return Math.max(0, Math.min(180, 180 - ((lf.x0 - g.x) / b.pw) * 180));
+      const a = Math.acos(px / b.pw) * 180 / Math.PI;
+      return lf.o === 'r' ? 180 - a : a;
+    };
+    let drag = null;
+    st.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      const g = geo(e), dir = dirAt(g);
+      if (!dir || !bkCan(b, dir)) return;
+      if (b.leaf && b.leaf.mode !== 'peel') return;
+      if (b.leaf && b.leaf.dir !== dir) bkLeafDrop(b);
+      const lf = b.leaf || bkLeafMake(b, dir);
+      if (!lf) return;
+      cancelAnimationFrame(lf.raf);
+      lf.mode = 'drag'; lf.x0 = g.x;
+      drag = { lf, x0: e.clientX, moved: false, hist: [{ t: performance.now(), th: lf.th }] };
+      st.setPointerCapture(e.pointerId);
+      st.focus({ preventScroll: true });
+    });
+    st.addEventListener('pointermove', e => {
+      const g = geo(e);
+      if (drag) {
+        if (Math.abs(e.clientX - drag.x0) > 5) drag.moved = true;
+        if (!drag.moved) return;
+        const lf = drag.lf, now = performance.now();
+        lf.th = angleAt(g, lf);
+        drag.hist.push({ t: now, th: lf.th });
+        while (drag.hist.length > 2 && now - drag.hist[0].t > 90) drag.hist.shift();
+        const h0 = drag.hist[0];
+        lf.v = now > h0.t ? (lf.th - h0.th) / ((now - h0.t) / 1000) : 0;
+        bkLeafPose(b);
+        return;
+      }
+      if (e.pointerType !== 'mouse' || bkReduce()) return;
+      /* مرورُ الفأرة على الحرف الخارجيّ: الزاويةُ تنفرج — دعوةٌ للسحب */
+      const dir = dirAt(g);
+      const want = dir && nearEdge(g, dir) && bkCan(b, dir) && !(b.single && dir < 0);
+      if (want && !b.leaf) { const lf = bkLeafMake(b, dir); if (lf) { lf.mode = 'peel'; lf.ready.then(() => { if (b.leaf === lf && lf.mode === 'peel') bkAnimate(b, 16); }); } }
+      else if (!want && b.leaf && b.leaf.mode === 'peel') { const lf = b.leaf; bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); }); }
+    });
+    st.addEventListener('pointerleave', () => {
+      if (drag || !b.leaf || b.leaf.mode !== 'peel') return;
+      const lf = b.leaf; bkAnimate(b, 0, () => { if (b.leaf === lf) bkLeafDrop(b); });
+    });
+    const release = () => {
+      if (!drag) return;
+      const { lf, moved } = drag; drag = null;
+      if (b.leaf !== lf) return;
+      if (!moved) { lf.mode = 'peel'; bkLeafDrop(b); bkFlip(b, lf.dir); return; }
+      lf.mode = 'flip';
+      const from = lf.dir > 0 || !b.single ? 0 : 180;   /* حيث بدأت الورقة */
+      const to = 180 - from;
+      const toward = (to - from) * lf.v > 0 ? Math.abs(lf.v) : 0;
+      const past = Math.abs(lf.th - from) > 90;
+      const done = toward > 240 || (past && !((to - from) * lf.v < -240));
+      lf.ready.then(() => bkAnimate(b, done ? to : from, () => { if (done) bkCommit(b, lf); else if (b.leaf === lf) bkLeafDrop(b); }));
+    };
+    st.addEventListener('pointerup', release);
+    st.addEventListener('pointercancel', release);
+    st.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); bkFlip(b, 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); bkFlip(b, -1); }
+    });
+    b.view.querySelectorAll('[data-bknav]').forEach(btn =>
+      btn.addEventListener('click', () => bkFlip(b, +btn.dataset.bknav)));
   }
   async function chPdfSet(file) {
     const code = cmCode, ch = cmTabSel;
@@ -19459,6 +19799,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ok = await chIdb('readwrite', key, file);
     if (!ok) { toast(T().chSaveFail); return; }
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    bkForget(key);
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
     save();
@@ -19469,6 +19810,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!chPdfMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    bkForget(key);
     delete state.chPdf[code][ch];
     save();
     renderCmSection();
