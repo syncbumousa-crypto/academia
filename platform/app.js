@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', chUp: 'ارفع المصدر PDF', chUpHint: 'كتاب أو ملزمة هذا الشابتر', chReplace: 'استبدال', chRemove: 'إزالة', chOpen: 'افتح في نافذة', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', chUp: 'ارفع المصدر PDF', chUpHint: 'كتاب أو ملزمة هذا الشابتر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', chUp: 'Upload PDF source', chUpHint: 'This chapter’s book or notes', chReplace: 'Replace', chRemove: 'Remove', chOpen: 'Open in new tab', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', chUp: 'Upload PDF source', chUpHint: 'This chapter’s book or notes', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -19331,7 +19331,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ومهلتُه أطولُ من مهلة الصور: كتابُ PDF أثقلُ من صورةٍ ملصوقة */
   const chPdfKey = (code, ch) => `chpdf:${code}:${ch}`;
   const chPdfMeta = (code, ch) => ((state.chPdf || {})[code] || {})[ch] || null;
-  const chPdfUrl = {};
   const chIdb = (mode, key, val) => new Promise(res => {
     let done = false;
     const fin = v => { if (!done) { done = true; res(v); } };
@@ -19358,7 +19357,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           <div class="chsrc__bar">
             <b class="chsrc__name" title="${esc(m.name)}">${esc(m.name)}</b><small>${kb}</small>
             <span class="chsrc__acts">
-              <button type="button" class="chsrc__btn" data-chopen>${T().chOpen}</button>
               <button type="button" class="chsrc__btn" data-chup>${T().chReplace}</button>
               <button type="button" class="chsrc__btn chsrc__btn--del" data-chdel>${T().chRemove}</button>
             </span>
@@ -19371,18 +19369,87 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         </button>`;
     return `<div class="cm-chpane"><div class="chcol chcol--src">${right}</div><div class="chcol chcol--rest"></div></div>`;
   }
+  /* ===== عارضُنا لا عارضُ المتصفّح =====
+     كان الملفُّ يُعرض في ‎iframe‎ بعارض المتصفّح: شريطُ أدواتٍ غريبٌ عن الموقع، ولا شيءَ
+     على الجوال. فصار الملفُّ صفحاتٍ تُرسم على لوحاتٍ (‎pdf.js‎ من ‎assets/vendor‎ — يُحمَّل
+     عند أوّل حاجةٍ لا مع الموقع)، مصفوفةً في عمودٍ يُمرَّر بشريطٍ على ألوان الموقع.
+     ولا تُرسم الصفحاتُ كلُّها دفعةً: كلُّ صفحةٍ تُرسم حين تقترب من النظر، فكتابٌ من
+     ثلاثمئة صفحةٍ لا يُجمّد الصفحة */
+  let chLibP = null;
+  function chPdfLib() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if (chLibP) return chLibP;
+    chLibP = new Promise((res, rej) => {
+      const sc = document.createElement('script');
+      sc.src = assetURL('assets/vendor/pdfjs/pdf.min.js');
+      sc.onload = () => {
+        const L = window.pdfjsLib;
+        if (!L) { chLibP = null; return rej(new Error('pdfjs')); }
+        L.GlobalWorkerOptions.workerSrc = assetURL('assets/vendor/pdfjs/pdf.worker.min.js');
+        res(L);
+      };
+      sc.onerror = () => { chLibP = null; rej(new Error('pdfjs')); };
+      document.head.appendChild(sc);
+    });
+    return chLibP;
+  }
+  const chPdfDoc = {};   /* المستندُ المفتوح لكلّ مفتاح — فالعودةُ إلى شابترٍ لا تُعيد قراءةَ ملفّه */
+  async function chPdfOpen(key) {
+    if (chPdfDoc[key]) return chPdfDoc[key];
+    const blob = await chIdb('readonly', key);
+    if (!blob) return null;
+    const L = await chPdfLib();
+    const data = new Uint8Array(await blob.arrayBuffer());
+    chPdfDoc[key] = await L.getDocument({ data }).promise;
+    return chPdfDoc[key];
+  }
   async function chPdfPaint() {
     const view = document.querySelector('#cm-body [data-chview]');
     if (!view) return;
     const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
-    if (!chPdfUrl[key]) {
-      const blob = await chIdb('readonly', key);
-      if (!blob) { if (view.isConnected) view.innerHTML = `<p class="v-none">${T().chMissing}</p>`; return; }
-      chPdfUrl[key] = URL.createObjectURL(blob);
-    }
+    let doc;
+    try { doc = await chPdfOpen(key); } catch (e) { doc = undefined; }
     /* والرسمُ قد تبدّل في أثناء الانتظار (شابترٌ آخر أو مادّةٌ أخرى) — فلا يُلبَس غيرَ صاحبه */
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
-    view.innerHTML = `<iframe class="chsrc__frame" src="${chPdfUrl[key]}#view=FitH" title="PDF"></iframe>`;
+    if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+    const n = doc.numPages;
+    const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
+    if (!view.isConnected) return;
+    /* كلُّ صفحةٍ وعاءٌ بنسبة الصفحة الأولى ريثما تُرسم — فطولُ العمود صحيحٌ من أوّل لحظة
+       ويقول الشريطُ الحقيقةَ عن طول الكتاب، ثمّ تُصحَّح النسبةُ حين تُرسم صفحتُها */
+    let pages = '';
+    for (let i = 1; i <= n; i++)
+      pages += `<div class="chpv__pg" data-pn="${i}" style="aspect-ratio:${p1.width}/${p1.height}"><span class="chpv__no">${i}</span></div>`;
+    view.innerHTML = `<div class="chpv"><div class="chpv__scroll" data-chpv>${pages}</div>`
+      + `<div class="chpv__ind"><b data-chpvi>1</b> / ${n}</div></div>`;
+    const sc = view.querySelector('[data-chpv]'), ind = view.querySelector('[data-chpvi]');
+    const drawn = new Set();
+    const draw = async el => {
+      const pn = +el.dataset.pn;
+      if (drawn.has(pn)) return;
+      drawn.add(pn);
+      const pg = await doc.getPage(pn);
+      const vp1 = pg.getViewport({ scale: 1 });
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(sc.clientWidth, 320);
+      const vp = pg.getViewport({ scale: (w * dpr) / vp1.width });
+      const cv = document.createElement('canvas');
+      cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height);
+      await pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+      el.style.aspectRatio = `${vp1.width}/${vp1.height}`;
+      el.appendChild(cv);
+      el.classList.add('is-on');
+    };
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) draw(e.target); }),
+      { root: sc, rootMargin: '900px 0px' });
+    sc.querySelectorAll('.chpv__pg').forEach(el => io.observe(el));
+    /* عدّادُ الصفحة: الصفحةُ التي يعبر منتصفَ النافذة حرفُها */
+    sc.addEventListener('scroll', () => {
+      const mid = sc.scrollTop + sc.clientHeight / 2;
+      let cur = 1;
+      for (const el of sc.children) { if (el.offsetTop <= mid) cur = +el.dataset.pn; else break; }
+      ind.textContent = cur;
+    }, { passive: true });
   }
   async function chPdfSet(file) {
     const code = cmCode, ch = cmTabSel;
@@ -19391,7 +19458,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = chPdfKey(code, ch);
     const ok = await chIdb('readwrite', key, file);
     if (!ok) { toast(T().chSaveFail); return; }
-    if (chPdfUrl[key]) { URL.revokeObjectURL(chPdfUrl[key]); delete chPdfUrl[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
     save();
@@ -19401,7 +19468,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
     if (!chPdfMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
-    if (chPdfUrl[key]) { URL.revokeObjectURL(chPdfUrl[key]); delete chPdfUrl[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
     delete state.chPdf[code][ch];
     save();
     renderCmSection();
@@ -19415,10 +19482,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!e.target.closest('#cm-body .cm-chpane')) return;
     if (e.target.closest('[data-chup]')) chPick.click();
     else if (e.target.closest('[data-chdel]')) chPdfDel();
-    else if (e.target.closest('[data-chopen]')) {
-      const u = chPdfUrl[chPdfKey(cmCode, cmTabSel)];
-      if (u) window.open(u, '_blank', 'noopener');
-    }
   });
 
   function fillCourseUI(code) {

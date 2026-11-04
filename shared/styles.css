@@ -1923,8 +1923,11 @@ html[data-lang="en"] .cm-faces { direction: ltr; }   /* جهة العدّاد ت
   font-size: 10px; font-weight: 500; opacity: .72;
 }
 .cm-tabs button.on .cm-chname { opacity: .9; }
-.cm-chpane { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
-.chcol { min-width: 0; padding: 16px; display: flex; flex-direction: column; }
+/* الوعاءُ يملأ جوفَ النافذة بالضبط ولا يفيض عنه: فلا تمريرَ داخل تمرير —
+   الذي يُمرَّر هو عمودُ الصفحات وحده، والنافذةُ ثابتة */
+.cm-pane:has(> .cm-chpane) { overflow: hidden; }
+.cm-chpane { display: grid; grid-template-columns: 1fr 1fr; height: 100%; min-height: 0; }
+.chcol { min-width: 0; min-height: 0; padding: 16px; display: flex; flex-direction: column; }
 .chcol--src { border-inline-end: 1.5px solid var(--u-line, rgba(127,127,127,.28)); }
 .chup {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
@@ -1946,10 +1949,43 @@ html[data-lang="en"] .cm-faces { direction: ltr; }   /* جهة العدّاد ت
 }
 .chsrc__btn:hover { background: var(--u-hov); }
 .chsrc__btn--del { color: #c0564b; border-color: rgba(192,86,75,.45); }
-.chsrc__view { flex: 1; display: flex; min-height: 0; }
-.chsrc__frame { flex: 1; width: 100%; min-height: 66vh; border: 0; border-radius: 10px; background: #fff; }
+.chsrc__view { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+/* عارضُ الصفحات: عمودٌ يُمرَّر، وعدّادٌ عائمٌ في أسفله، وشريطٌ على لون الموقع
+   (بتروليّ في الفاتح · ذهبيّ في الداكن) — لا عارضَ المتصفّح ولا شريطَه */
+.chpv { position: relative; flex: 1; display: flex; min-height: 0; }
+.chpv__scroll {
+  flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column; gap: 14px; padding: 4px 6px 4px 4px;
+  border-radius: 12px; background: color-mix(in srgb, currentColor 5%, transparent);
+  overscroll-behavior: contain;
+}
+.chpv__pg {
+  position: relative; flex: none; width: 100%; border-radius: 6px; overflow: hidden;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 4px 14px rgba(0,0,0,.06);
+}
+.chpv__pg.is-on { background: #fff; }
+.chpv__pg canvas { display: block; width: 100%; height: 100%; }
+.chpv__no { position: absolute; inset: 0; display: grid; place-items: center; font-size: 22px; font-weight: 700; opacity: .25; }
+.chpv__pg.is-on .chpv__no { display: none; }
+.chpv__ind {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  padding: 4px 12px; border-radius: 999px; font-size: 12px; pointer-events: none;
+  background: rgba(20, 35, 63, .78); color: #fff; backdrop-filter: blur(6px);
+}
+.chpv__scroll::-webkit-scrollbar { width: 8px; }
+.chpv__scroll::-webkit-scrollbar-button { display: none; height: 0; }
+.chpv__scroll::-webkit-scrollbar-track { background: transparent; margin: 6px 0; }
+.chpv__scroll::-webkit-scrollbar-thumb { border-radius: 999px; background: #e1c172; border: 2px solid transparent; background-clip: padding-box; }
+.chpv__scroll::-webkit-scrollbar-thumb:hover { background: #d4ad55; background-clip: padding-box; }
+html[data-theme="light"] .chpv__scroll::-webkit-scrollbar-thumb { background: #2c5e65; background-clip: padding-box; }
+html[data-theme="light"] .chpv__scroll::-webkit-scrollbar-thumb:hover { background: #234c52; background-clip: padding-box; }
+@supports not selector(::-webkit-scrollbar) {
+  .chpv__scroll { scrollbar-width: thin; scrollbar-color: #e1c172 transparent; }
+  html[data-theme="light"] .chpv__scroll { scrollbar-color: #2c5e65 transparent; }
+}
 @media (max-width: 760px) {
-  .cm-chpane { grid-template-columns: 1fr; }
+  .cm-chpane { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
   .chcol--src { border-inline-end: 0; border-bottom: 1.5px solid var(--u-line, rgba(127,127,127,.28)); }
 }
 .cm-face {
