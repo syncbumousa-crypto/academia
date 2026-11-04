@@ -1911,6 +1911,21 @@ html[data-theme="light"] #market-course .cm-res {
 .cm-tabs button.on .cm-tabic { opacity: 1; }
 .cm-faces { display: flex; align-items: center; justify-content: center; min-height: 20px; direction: rtl; }
 html[data-lang="en"] .cm-faces { direction: ltr; }   /* جهة العدّاد تتبع اللغة (يمين بالإنجليزي/يسار بالعربي) */
+/* ===== كونسبت الشابترات (تجريبيّ — IAS 111): الشريطُ شابتراتٌ بدل الأقسام =====
+   رقمٌ في دائرةٍ مكانَ الأيقونة، ثمّ «شابتر ن»، ثمّ اسمُه سطرًا خافتًا يُقصّ بنقاط */
+.cm-tabs .cm-chtab { gap: 3px; }
+.cm-chnum {
+  display: grid; place-items: center; width: 20px; height: 20px; border-radius: 999px;
+  border: 1.6px solid currentColor; font-size: 11px; line-height: 1; opacity: .9;
+}
+.cm-chname {
+  display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 10px; font-weight: 500; opacity: .72;
+}
+.cm-tabs button.on .cm-chname { opacity: .9; }
+.cm-chpane { padding: 18px 16px; }
+.cm-chpane__t { margin: 0 0 8px; font-size: 16px; }
+.cm-chpane__t span { font-weight: 500; opacity: .7; }
 .cm-face {
   flex: none; width: 19px; height: 19px; border-radius: 999px;
   margin-inline-start: -6px; border: 1.5px solid var(--u-badge);

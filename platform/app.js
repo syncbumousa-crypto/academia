@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', chSoon: 'محتوى هذا الشابتر قريبًا', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', chSoon: 'This chapter’s content is coming soon', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -3993,7 +3993,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxStudy = null;   /* أي جلسة مذاكرة تنتهي بتبديل التبويب */
     cxSel.clear();    /* والتحديدُ حالُ شجرةٍ بعينها — لا يُورَّث لتبويبٍ آخر */
     /* طريقة الإظهار «الأفضل»: دخول مباشر إلى أفضل مشاركة في القسم (إن وُجدت) */
-    if (state.viewMode === 'best') {
+    if (state.viewMode === 'best' && !isChTab(t)) {   /* الشابترُ بلا مساهماتٍ بعد */
       if (t === 'doc') {
         let best = null;
         doctorsOf(cmCode).forEach((dr, di) => dr.posts.forEach((p, pi) => {
@@ -6358,7 +6358,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sec = cmTabSel;
     const back = `<div class="cm-back"><button type="button" class="cm-backbtn" id="cm-back">← ${T().backToList}</button></div>`;
     let inner = '';
-    if (sec === 'cards') {
+    if (isChTab(sec)) {
+      /* شابترٌ من كونسبت الشابترات — وعاءٌ فارغٌ بعنوانه حتّى يتقرّر ما يسكنه */
+      const n = +sec.slice(2), name = (chTabsOf(cmCode) || [])[n - 1] || '';
+      inner = `<div class="cm-chpane"><h3 class="cm-chpane__t">${T().chapter} ${n}`
+        + `${name ? ` <span>— ${esc(name)}</span>` : ''}</h3>`
+        + `<p class="v-none">${T().chSoon}</p></div>`;
+    } else if (sec === 'cards') {
       /* «البطائق»: عرض مجمّع كالشروح — متصفح شجرة المجلدات والبطائق (ROADMAP-CARDS م2) */
       inner = cardsTabHTML();
     } else if (sec === 'doc') {
@@ -19305,6 +19311,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
 
   /* تعبئة واجهة المادة المشتركة #cm-ui — تُستدعى بعد تركيبها في مضيفها (نافذة أو صفحة) */
+  /* ===== كونسبت الشابترات — تجريبيٌّ على مادّةٍ واحدة (‎IAS 111‎) =====
+     المادّةُ التي لها شابترات يصير شريطُها شابتراتِها بدل الأقسام الثمانية كلّها.
+     والعناوينُ نفسُها التي في بذرة مواضيع ‎IAS 111‎.
+     دوالُّ مُعلَنةٌ لا ثوابت: ‎renderCmSection‎ و‎showCmTab‎ تسألانها من أعلى الملفّ،
+     والمُعلَنةُ تُرفع والثابتُ لا يُرفع */
+  function chTabsOf(code) {
+    return code === 'IAS 111' ? [
+      'مفهوم العقيدة وأهميتها', 'مصادر العقيدة', 'توحيد الربوبية', 'توحيد الألوهية',
+      'الأسماء والصفات', 'الإيمان بالملائكة', 'الإيمان بالكتب والرسل',
+      'الإيمان باليوم الآخر', 'الإيمان بالقضاء والقدر',
+    ] : null;
+  }
+  function isChTab(t) { return /^ch\d+$/.test(t || ''); }
+
   function fillCourseUI(code) {
     if (cmCode && cmCode !== code) cleanupEmptyMine();   /* تبديل مادة ومحرر المادة السابقة مفتوح */
     cxSel.clear();   /* التحديدُ حالُ جلسةٍ في مادّةٍ بعينها — ولا يُورَّث لمادّةٍ أخرى */
@@ -19323,6 +19343,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* «المواضيع» حُذف من شريط التبويبات (بيانات القناة lessons باقية في التخزين).
        آخر أربعة = موارد الإتقان (فهم/ممارسة/شروح/بطائق) تُلَفّ في «رفّ الموارد» المرفوع (بلا عنوان) */
     const cmTab = ([v, txt]) => `<button type="button" data-tab="${v}">${TAB_IC[v]}${txt}<span class="cm-faces"></span></button>`;
+    /* والتبويبُ النشطُ يُصالَح: من دخل مادّةَ الشابترات على «المادّة» نُقل إلى أوّل
+       شابتر، ومن غادرها على شابترٍ رُدّ إلى «المادّة» — فلا يرث شريطٌ تبويبًا ليس فيه.
+       وزرُّ الشابتر بلا ‎.cm-faces‎: لا مساهماتِ له بعد، فلا دوائرَ ولا «+» */
+    const chs = chTabsOf(code);
+    if (chs) {
+      if (!isChTab(cmTabSel) || +cmTabSel.slice(2) > chs.length) cmTabSel = 'ch1';
+      $('#cm-tabs').innerHTML = chs.map((name, i) =>
+        `<button type="button" class="cm-chtab" data-tab="ch${i + 1}" title="${esc(name)}">`
+        + `<span class="cm-chnum">${i + 1}</span>${T().chapter} ${i + 1}<small class="cm-chname">${esc(name)}</small></button>`
+      ).join('');
+      renderCmSection();
+      return;
+    }
+    if (isChTab(cmTabSel)) cmTabSel = 'info';
     $('#cm-tabs').innerHTML =
       [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].map(cmTab).join('')
       + `<div class="cm-res">`
