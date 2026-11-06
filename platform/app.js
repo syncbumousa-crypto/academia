@@ -18805,9 +18805,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المربّعُ صار النافذةَ نفسَها، فالزرُّ العائمُ على حافّته لا مكانَ له. فيصير
      **الزاويةُ نفسُها** هي المقبض: قوسٌ ذهبيٌّ على انحنائها (نصفُ قطره نصفُ قطر النافذة)،
      ونقرُه يُعيد المساهمةَ إلى حجمها. ومسارٌ شفّافٌ أعرضُ تحته يوسّع موضعَ النقر */
-  const CX_CURVE = '<svg viewBox="0 0 44 44" aria-hidden="true">'
+  /* ‏‎.pk-curve__grip‎ مسكةٌ رماديّةٌ شفّافة **أضيقُ من القوس** على انحنائه (١٥°–٧٥°)،
+     وعليها ثلاثُ نقاطٍ (٢٢٫٥° · ٤٥° · ٦٧٫٥°) — مقبضٌ يُقرأ «أمسكني». والكلُّ في ‎<g>‎
+     ينزلق للداخل عند المرور، فيُحسّ قبل النقر أنّه يُضيّق */
+  const CX_CURVE = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
     + '<path class="pk-curve__hit" d="M6 4.5H24A15.5 15.5 0 0 1 39.5 20V38"/>'
-    + '<path class="pk-curve__arc" d="M6 4.5H24A15.5 15.5 0 0 1 39.5 20V38"/></svg>';
+    + '<path class="pk-curve__arc" d="M6 4.5H24A15.5 15.5 0 0 1 39.5 20V38"/>'
+    + '<path class="pk-curve__grip" d="M28.01 5.03A15.5 15.5 0 0 1 38.97 15.99"/>'
+    + '<g class="pk-curve__dots"><circle cx="29.93" cy="5.68" r="1.2"/><circle cx="34.96" cy="9.04" r="1.2"/>'
+    + '<circle cx="38.32" cy="14.07" r="1.2"/></g></g></svg>';
   const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max${cxMax ? ' pk-max--curve' : ''}" data-cxmax aria-pressed="${cxMax}"
       title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${cxMax ? CX_CURVE : CX_MAX_IC.out}</button></span>`;
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
