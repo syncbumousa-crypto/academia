@@ -16225,5 +16225,8 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 /* الرفع: ‎.post-yt‎ كلُّه يصعد بقامة الرأس المقيسة، والمربّعُ يقصّ ما فوق حدّه، والجوفُ يتمدّد.
    والحركةُ في التبديل وحده (‎pk--hdanim‎) — لو دامت لرقص الرأسُ مع كلّ رسم */
 .pk--hdup > .post-yt { margin-top: calc(-1 * var(--hdh, 0px)); }
+/* ومرفوعًا يخلو المربّعُ للجوف وحده: يغيب صفُّ «مفيد / غير مفيد» تحته وقائمةُ ⋮ بجانبه
+   (في النشر) — فما بقي على الشاشة إلّا المقبضُ والمجلّدات */
+.pk--hdup .post-react, .pk--hdup .post-menu { display: none; }
 .pk--hdanim > .post-yt { transition: margin-top .22s ease; }
 @media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt { transition: none; } .pk-hdline__grip { transition: none; } }
