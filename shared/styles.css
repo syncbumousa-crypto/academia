@@ -16075,3 +16075,48 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
     scrollbar-color: color-mix(in srgb, currentColor 18%, transparent) transparent;
   }
 }
+
+/* ============================================================
+   التكبير (ROADMAP-EXPAND) — مساهمةُ البطائق تملأ جوفَ النافذة وهي تُحرَّر
+   ============================================================
+   ‏‎#cm-body.is-cxmax‎ لا يُمرَّر: إخوةُ المربّع يُخفَون، والمربّعُ يأخذ القامةَ كلَّها،
+   والذي يُمرَّر جوفُ الشجرة (‎#cm-cards‎) وحده — فالرأسُ والأزرارُ لا تفرّ بالتمرير.
+   ولا يُنقل عنصرٌ ولا يُغطّى غيرُ النافذة: المستمعون المفوَّضون يبقون كما هم */
+.pk--edit[data-sub="cards"] { position: relative; }
+/* الزرّ: على زاوية المربّع العليا (اليمنى في العربيّة) نصفُه خارجه — فلا يتصادم
+   مع صورة المساهِم التي تسكن الزاويةَ من الداخل. وهامشُ النافذة (‎14px‎) يسعه
+   مكبَّرًا فلا يُقصّ */
+/* المرساة: أوّلُ ما في المربّع، بلا قامة، تلصق بأعلى النافذة إذا مُرِّر المربّعُ عنها.
+   والزرُّ منها على الزاوية: فوقَها بحشوة المربّع (‎10‎) ونصفِ الزرّ (‎11‎)، وجانبَها كذلك */
+.pk-maxdock { position: sticky; top: 22px; z-index: 3; display: block; height: 0; }
+.pk-max {
+  position: absolute; top: -21px; inset-inline-start: -23px;
+  display: grid; place-items: center; width: 24px; height: 24px; padding: 0;
+  border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--u-line); background: var(--u-surf); color: var(--u-fade, currentColor);
+  box-shadow: 0 1px 4px rgba(0,0,0,.14);
+  transition: background .15s, color .15s, transform .15s;
+}
+.pk-max svg { width: 13px; height: 13px; }
+.pk-max:hover { background: var(--u-gold-hov, rgba(225,193,114,.18)); color: var(--u-gold, #c9a24d); transform: scale(1.08); }
+.pk-max[aria-pressed="true"] { background: #e1c172; color: #14233f; border-color: #e1c172; }
+.pk-max:focus-visible { outline: 2px solid #e1c172; outline-offset: 2px; }
+
+#cm-body.is-cxmax { overflow: hidden; display: flex; flex-direction: column; }
+#cm-body.is-cxmax > :not(.pk--max) { display: none !important; }
+#cm-body.is-cxmax > .pk--max { flex: 1 1 auto; min-height: 0; margin: 0; }
+.pk--max > .post-yt { flex: 1 1 auto; min-height: 0; }
+.pk--max .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+.pk--max #cm-cards {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
+  margin-inline-end: -6px; padding-inline-end: 6px;   /* الشريطُ لا يلتصق بالمحتوى */
+  scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent;
+}
+.pk--max #cm-cards::-webkit-scrollbar { width: 8px; }
+.pk--max #cm-cards::-webkit-scrollbar-track { background: transparent; }
+.pk--max #cm-cards::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+.pk--max .vt-foot { flex: none; }
+/* الحركة: يمتدّ بلا قفزة — والمقلِّلُ للحركة يراه فوريًّا */
+.pk--maxfx { animation: pkMaxIn .2s ease-out; }
+@keyframes pkMaxIn { from { opacity: .55; transform: scale(.985); } }
+@media (prefers-reduced-motion: reduce) { .pk--maxfx { animation: none; } .pk-max { transition: none; } }

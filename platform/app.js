@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -3977,11 +3977,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cmDocSel = null;                     // الدكتور المختار في تبويب الدكاترة (null = شبكة الدكاترة)
   let docCarIdx = 0;                       // شريحة منتقي الدكاترة الأفقي المعروضة (٠ = كل الدكاترة)
   let cmSrcSel = null;                      // القناة المختارة في «المصادر» (null = تقسيم فهم/ممارسة · srcU · srcP)
+  /* ===== التكبير (ROADMAP-EXPAND) =====
+     مساهمتي في «البطائق» وهي تُحرَّر تملأ جوفَ النافذة. حالُ نظرةٍ لا تفضيلٌ يُحفظ،
+     ويُلبَس في موضعٍ واحد (‎renderCmSection‎) لأنّ الرسمَ يمحو ‎#cm-body‎ في كلّ نقرة */
+  let cxMax = false;
+  let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
 
   function showCmTab(t) {
     cleanupEmptyMine();   /* الخروج من محرر بلا كتابة لا يترك مشاركة فارغة */
     cxRoadSel = false;    /* ومغادرةُ الرَّكن تردّ التحديدَ إلى أشجار المساهمات */
     cmTabSel = t;
+    cxMax = false;        /* التكبيرُ لا يُورَّث لتبويبٍ آخر */
     cmView = { mode: 'list', pi: 0, di: 0 };
     cmOpen = new Set();   /* كومنتات المادة/الدكاترة تعود مسفوطة عند تبديل التبويب */
     dtAbs = new Set();    /* ومفاتيح التاريخ تعود إلى الزمن النسبيّ */
@@ -6455,12 +6461,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : `<p class="v-none">${T().noPosts}</p>`;
     }
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
+    /* والمكبَّرُ يُمرَّر جوفُه (‎#cm-cards‎) وهو يُبنى من جديد هنا — فيُحفظ تمريرُه ويُردّ */
+    const cxY = cxMax ? ((document.querySelector('#cm-body #cm-cards') || {}).scrollTop || 0) : 0;
     $('#cm-body').innerHTML = inner;
+    /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
+       حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
+    if (cxMax && !cxMaxOk()) cxMax = false;
+    $('#cm-body').classList.toggle('is-cxmax', cxMax);
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
       else editorMount(cmView.sub || sec);
     }
+    if (cxMax && cxY) { const cc = document.querySelector('#cm-body #cm-cards'); if (cc) cc.scrollTop = cxY; }
     document.querySelectorAll('#cm-body textarea.chipe-in').forEach(autoGrow);   /* ارتفاع حقول تحرير المادة يتبع محتواها */
     fitGradeLabels($('#cm-body'));   /* دلالات شريط الدرجة داخل الحدود */
     /* حالة أزرار الشريط الواحد: المفعّل فقط */
@@ -18781,9 +18794,51 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* بطاقة تحرير «البطائق» إنلاين — نظير vidEditCard: ترويسة كترويسة المساهمة النهائية،
      ثم الخطّ، ثم الشجرة، ثم شريط الإضافة والحذف والنشر */
+  /* زرُّ التكبير على زاوية المربّع: زاويتان تتباعدان (كبّر) ⇄ تتقاربان (صغّر) */
+  const CX_MAX_IC = {
+    out: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5"/></svg>',
+    in: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10h-6V4M4 14h6v6M14 10l6.5-6.5M10 14l-6.5 6.5"/></svg>',
+  };
+  /* ‏‎.pk-maxdock‎ مرساةٌ لاصقةٌ بلا قامة: الزرُّ على زاوية المربّع ما دام رأسُه ظاهرًا،
+     فإذا مرّرتَ في مساهمةٍ طويلة لصق بأعلى النافذة — فلا يفرّ منك حيث تحتاجه */
+  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max" data-cxmax aria-pressed="${cxMax}"
+      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${cxMax ? CX_MAX_IC.in : CX_MAX_IC.out}</button></span>`;
+  /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
+  const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
+    && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
+  /* مَن المُمرَّر الآن؟ في المكبَّر جوفُ الشجرة، وإلّا النافذة */
+  function cmScroller() {
+    const b = document.getElementById('cm-body');
+    return b && b.classList.contains('is-cxmax') ? (b.querySelector('#cm-cards') || b) : b;
+  }
+  /* التبديل: أصنافٌ تُبدَّل في مكانها بلا إعادة رسم — فلا يضيع مؤشّرُ الكتابة ولا التمرير */
+  function cxMaxSet(on) {
+    const body = document.getElementById('cm-body');
+    if (!body) return;
+    on = !!on && cxMaxOk();
+    if (on === cxMax && body.classList.contains('is-cxmax') === on) return;
+    if (on) cxMaxY = body.scrollTop;
+    cxMax = on;
+    const card = body.querySelector('.pk--edit[data-sub="cards"]');
+    const fx = !bkReduce() && card;
+    body.classList.toggle('is-cxmax', on);
+    if (card) {
+      card.classList.toggle('pk--max', on);
+      const dock = card.querySelector('.pk-maxdock');
+      if (dock) dock.outerHTML = cxMaxBtn();
+    }
+    if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
+    requestAnimationFrame(() => {
+      if (!on) body.scrollTop = cxMaxY;
+      else body.scrollTop = 0;
+      cxNameFit(); cxRailFit();
+    });
+  }
+
   function cardEditCard(p, i) {
     const d = p.data;
-    return `<div class="post pk pk--peek pk--edit pk--pack" data-pi="${i}" data-sub="cards">
+    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}" data-pi="${i}" data-sub="cards">
+      ${cxMaxBtn()}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -20031,6 +20086,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   chPick.type = 'file'; chPick.accept = 'application/pdf,.pdf'; chPick.hidden = true;
   document.body.appendChild(chPick);
   chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
+  /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('#cm-body [data-cxmax]');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    cxMaxSet(!cxMax);
+  }, true);
+  /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape' || !cxMax) return;
+    /* ونوافذُ البطائق (‎cdWins‎) نسخٌ من قالبٍ واحد، فتُسأل بحالها لا بمعرّفها */
+    const other = [...document.querySelectorAll('[id$="-modal"]:not([hidden])')].some(m => m.id !== 'course-modal')
+      || cdWins.some(w => !w.min);
+    if (other) return;
+    /* ويقف الضغطُ ههنا: لـ‎Esc‎ معنًى آخرُ في الموقع (يُغلق لوحَ المادّة كلَّه)،
+       فلولا الإيقافُ لَصغُر المربّعُ واختفت المادّةُ معًا بضغطةٍ واحدة */
+    e.preventDefault(); e.stopPropagation();
+    cxMaxSet(false);
+  }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   const chPickCov = document.createElement('input');
   chPickCov.type = 'file'; chPickCov.accept = 'image/*,application/pdf,.pdf'; chPickCov.hidden = true;
   document.body.appendChild(chPickCov);
@@ -20046,6 +20120,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   function fillCourseUI(code) {
     if (cmCode && cmCode !== code) cleanupEmptyMine();   /* تبديل مادة ومحرر المادة السابقة مفتوح */
+    if (cmCode !== code) cxMax = false;                  /* والتكبيرُ حالُ مساهمةٍ في مادّةٍ بعينها */
     cxSel.clear();   /* التحديدُ حالُ جلسةٍ في مادّةٍ بعينها — ولا يُورَّث لمادّةٍ أخرى */
     cmCode = code;
     cdMinScope();    /* وألسنةُ المطويّات تتبع المادّة: تظهر ألسنةُ هذه وتُحجب ألسنةُ غيرها */
@@ -31234,9 +31309,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وإعادةُ الرسم تحفظ موضعَ التمرير: الشجرةُ تُبنى من جديد، ولولا حفظُه لَعاد
      المستخدمُ بعد الاختبار فوجد القسمَ قد قفز إلى أوّله */
   function xtLive() {
-    const y = (document.getElementById('cm-body') || {}).scrollTop || 0;
+    /* والمُمرَّرُ قد يكون جوفَ المكبَّر لا النافذة — يُسأل عنه ولا يُفترض */
+    const y = (cmScroller() || {}).scrollTop || 0;
     renderCmSection();
-    const p = document.getElementById('cm-body');
+    const p = cmScroller();
     if (p) p.scrollTop = y;
     xtWrote = false;
   }
