@@ -16230,3 +16230,25 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--hdup .post-react, .pk--hdup .post-menu { display: none; }
 .pk--hdanim > .post-yt { transition: margin-top .22s ease; }
 @media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt { transition: none; } .pk-hdline__grip { transition: none; } }
+
+/* ===== شريطُ طرق العرض (يسار سهم الطيّ في رأس المساهمة) =====
+   أربعةُ مفاتيحَ متلاصقةٍ في كبسولةٍ واحدة: النشِطُ بذهب القوس المكتوم، والقادمةُ أخفت */
+.pk-vbar {
+  flex: none; display: inline-flex; align-items: center; gap: 1px; padding: 2px;
+  border-radius: 9px; border: 1px solid var(--u-line); background: color-mix(in srgb, currentColor 4%, transparent);
+}
+.pk-vbar__b {
+  display: grid; place-items: center; width: 26px; height: 22px; padding: 0; border: 0; border-radius: 7px;
+  background: none; color: var(--u-mut); cursor: pointer; transition: background .15s, color .15s;
+}
+.pk-vbar__b svg { width: 15px; height: 15px; }
+.pk-vbar__b:hover { background: var(--u-hov); color: var(--u-gold, #c9a25c); }
+.pk-vbar__b.on { background: rgba(201, 162, 92, .2); color: #a9852f; }
+html[data-theme="dark"] .pk-vbar__b.on { background: rgba(225, 193, 114, .18); color: #d4b36a; }
+.pk-vbar__b.is-soon { opacity: .55; }
+.pk-vbar__b.is-soon:hover { opacity: .85; }
+.pk-vbar__b:focus-visible { outline: 2px solid rgba(201, 162, 92, .6); outline-offset: 1px; }
+/* وإن ضاق الصفُّ نزل الشريطُ إلى سطرٍ تحته ولا يُزيح العنوان — والالتفافُ في الرأس الذي
+   فيه الشريطُ وحده، فرؤوسُ الشروح وغيرُها كما كانت. والالتفافُ يُقاس بقدّ العناصر الطبيعيّ
+   قبل أن ينكمش أيٌّ منها، فيلتفّ الشريطُ (آخرُ الصفّ) قبل أن يُقصّ العنوان */
+.x3-pkhd:has(> .pk-vbar) { flex-wrap: wrap; row-gap: 6px; }
