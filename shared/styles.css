@@ -16088,7 +16088,7 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
    مكبَّرًا فلا يُقصّ */
 /* المرساة: أوّلُ ما في المربّع، بلا قامة، تلصق بأعلى النافذة إذا مُرِّر المربّعُ عنها.
    والزرُّ منها على الزاوية: فوقَها بحشوة المربّع (‎10‎) ونصفِ الزرّ (‎11‎)، وجانبَها كذلك */
-.pk-maxdock { position: sticky; top: 22px; z-index: 3; display: block; height: 0; }
+.pk-maxdock { position: sticky; top: 11px; z-index: 3; display: block; height: 0; }
 .pk-max {
   position: absolute; top: -21px; inset-inline-start: -23px;
   display: grid; place-items: center; width: 24px; height: 24px; padding: 0;
@@ -16123,7 +16123,9 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 /* القوس: على زاوية المربّع العليا (اليمنى في العربيّة) — المرساةُ عند حشوة المربّع،
    فيُزاح القوسُ بقدرها ليلتصق بالحافّة نفسِها */
 .pk-max.pk-max--curve {
-  top: -12px; inset-inline-start: -16px; width: 44px; height: 44px;
+  /* ضيّقةً: المرساةُ عند حشوة المربّع (‎10 · 12‎) وحدِّه (‎1‎) — فيُزاح القوسُ بقدرهما ليلتصق
+     بالزاوية. ولاصقةً (‎top: 11px‎) يحتضن القوسُ أعلى النافذة حين تُمرَّر المساهمةُ الطويلة */
+  top: -11px; inset-inline-start: -13px; width: 44px; height: 44px;
   border: 0; border-radius: 0; background: none; box-shadow: none; padding: 0;
   /* هادئ: ذهبُ الموقع المكتوم (‎--c-gold‎) بنصف حضوره — لا يصرخ وهو ساكن،
      ويستعيد لونَه كاملًا عند المرور فيُعرف أنّه يُنقر */
@@ -16132,6 +16134,7 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 html[data-theme="dark"] .pk-max.pk-max--curve { color: rgba(225, 193, 114, .42); }
 /* والمكبَّرُ لا يُمرَّر فلا لصقَ للمرساة: لولا هذا لدفعها ‎top: 22px‎ عن الزاوية */
 .pk--max .pk-maxdock { position: relative; top: 0; }
+.pk--max .pk-max.pk-max--curve { top: -12px; inset-inline-start: -16px; }   /* مكبَّرةً: حشوةٌ ‎12 · 16‎ بلا حدّ */
 .pk-max--curve svg { width: 44px; height: 44px; overflow: visible; display: block; }
 html[data-lang="en"] .pk-max--curve svg { transform: scaleX(-1); }   /* الزاويةُ اليسرى في الإنجليزيّة */
 .pk-curve__hit { fill: none; stroke: transparent; stroke-width: 16; stroke-linecap: round; pointer-events: stroke; cursor: pointer; }
@@ -16149,7 +16152,9 @@ html[data-theme="dark"] .pk-max--curve:hover .pk-curve__arc { stroke: #d4b36a; }
 .pk-max--curve:hover .pk-curve__grip, .pk-max--curve:focus-visible .pk-curve__grip { stroke: rgba(20, 35, 63, .32); }
 html[data-theme="dark"] .pk-max--curve:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .42); }
 .pk-max--curve:hover .pk-curve__dots, .pk-max--curve:focus-visible .pk-curve__dots { opacity: .8; }
-.pk-max--curve:hover .pk-curve__g, .pk-max--curve:focus-visible .pk-curve__g { transform: translate(-2px, 2px); }
+/* الانزلاقُ يقول ما سيحدث: للخارج وهي ضيّقة (ستتّسع)، وللداخل وهي مكبَّرة (ستضيق) */
+.pk-max--curve:hover .pk-curve__g, .pk-max--curve:focus-visible .pk-curve__g { transform: translate(2px, -2px); }
+.pk-max--curve[aria-pressed="true"]:hover .pk-curve__g, .pk-max--curve[aria-pressed="true"]:focus-visible .pk-curve__g { transform: translate(-2px, 2px); }
 @media (prefers-reduced-motion: reduce) { .pk-curve__g { transition: none; } }
 .pk-max--curve:focus-visible { outline: none; }
 @keyframes pkMaxIn { from { opacity: .55; transform: scale(.985); } }

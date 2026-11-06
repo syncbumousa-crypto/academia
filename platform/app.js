@@ -18814,8 +18814,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     + '<path class="pk-curve__grip" d="M28.01 5.03A15.5 15.5 0 0 1 38.97 15.99"/>'
     + '<g class="pk-curve__dots"><circle cx="29.93" cy="5.68" r="1.2"/><circle cx="34.96" cy="9.04" r="1.2"/>'
     + '<circle cx="38.32" cy="14.07" r="1.2"/></g></g></svg>';
-  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max${cxMax ? ' pk-max--curve' : ''}" data-cxmax aria-pressed="${cxMax}"
-      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${cxMax ? CX_CURVE : CX_MAX_IC.out}</button></span>`;
+  /* والزرُّ واحدٌ في الحالين: القوسُ نفسُه على الزاوية، ضيّقةً كانت المساهمةُ أو مكبَّرة —
+     ويفترقان بجهة الانزلاق عند المرور وحدها (للخارج: سيتّسع · للداخل: سيضيق) */
+  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="${cxMax}"
+      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${CX_CURVE}</button></span>`;
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
   const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
     && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
