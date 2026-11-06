@@ -18876,9 +18876,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!card) return;
     const ln = card.querySelector('.pk-hdline'), yt = card.querySelector('.post-yt');
     if (!ln || !yt) return;
-    const pad = parseFloat(getComputedStyle(card).paddingTop) || 0;
-    const h = ln.getBoundingClientRect().top - yt.getBoundingClientRect().top + pad - 3;
-    card.style.setProperty('--hdh', Math.max(0, Math.round(h)) + 'px');
+    const cs = getComputedStyle(card), pad = parseFloat(cs.paddingTop) || 0;
+    const lr = ln.getBoundingClientRect(), cr = card.getBoundingClientRect();
+    /* ===== مرفوعًا يستمرّ الخطُّ في ذراع القوس =====
+       ذراعُ القوس العليا مركزُها على ‎4.5px‎ من أعلى المربّع (‎CX_CURVE‎: ‎M6 4.5H24‎)،
+       فيُرفع المقبضُ حتى يقع مركزُ خطّه هناك — ويُمدّ نحو الزاوية حتى يلقى طرفَ الذراع
+       (‎38px‎ من الحافّة: عرضُ القوس ‎44‎ إلّا مبدأ ذراعه ‎6‎). فيصيران خطًّا واحدًا يلتفّ على الزاوية */
+    const target = 4.5 - lr.height / 2;
+    const h = lr.top - yt.getBoundingClientRect().top + pad - target;
+    card.style.setProperty('--hdh', Math.max(0, Math.round(h * 2) / 2) + 'px');
+    const gap = cs.direction === 'rtl' ? cr.right - lr.right : lr.left - cr.left;
+    card.style.setProperty('--hdext', Math.max(0, Math.round(gap - 38)) + 'px');
   }
   function cxHdSet(up) {
     const card = document.querySelector('#cm-body .pk--max');
