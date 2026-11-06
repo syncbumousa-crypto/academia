@@ -18801,8 +18801,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* ‏‎.pk-maxdock‎ مرساةٌ لاصقةٌ بلا قامة: الزرُّ على زاوية المربّع ما دام رأسُه ظاهرًا،
      فإذا مرّرتَ في مساهمةٍ طويلة لصق بأعلى النافذة — فلا يفرّ منك حيث تحتاجه */
-  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max" data-cxmax aria-pressed="${cxMax}"
-      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${cxMax ? CX_MAX_IC.in : CX_MAX_IC.out}</button></span>`;
+  /* ===== ومكبَّرًا: قوسٌ سميكٌ يحتضن الزاوية لا زرٌّ مستدير =====
+     المربّعُ صار النافذةَ نفسَها، فالزرُّ العائمُ على حافّته لا مكانَ له. فيصير
+     **الزاويةُ نفسُها** هي المقبض: قوسٌ ذهبيٌّ على انحنائها (نصفُ قطره نصفُ قطر النافذة)،
+     ونقرُه يُعيد المساهمةَ إلى حجمها. ومسارٌ شفّافٌ أعرضُ تحته يوسّع موضعَ النقر */
+  const CX_CURVE = '<svg viewBox="0 0 44 44" aria-hidden="true">'
+    + '<path class="pk-curve__hit" d="M6 4.5H24A15.5 15.5 0 0 1 39.5 20V38"/>'
+    + '<path class="pk-curve__arc" d="M6 4.5H24A15.5 15.5 0 0 1 39.5 20V38"/></svg>';
+  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max${cxMax ? ' pk-max--curve' : ''}" data-cxmax aria-pressed="${cxMax}"
+      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${cxMax ? CX_CURVE : CX_MAX_IC.out}</button></span>`;
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
   const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
     && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
