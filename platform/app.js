@@ -3982,12 +3982,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويُلبَس في موضعٍ واحد (‎renderCmSection‎) لأنّ الرسمَ يمحو ‎#cm-body‎ في كلّ نقرة */
   let cxMax = false;
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
+  let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
 
   function showCmTab(t) {
     cleanupEmptyMine();   /* الخروج من محرر بلا كتابة لا يترك مشاركة فارغة */
     cxRoadSel = false;    /* ومغادرةُ الرَّكن تردّ التحديدَ إلى أشجار المساهمات */
     cmTabSel = t;
     cxMax = false;        /* التكبيرُ لا يُورَّث لتبويبٍ آخر */
+    cxMaxPub = null;
     cmView = { mode: 'list', pi: 0, di: 0 };
     cmOpen = new Set();   /* كومنتات المادة/الدكاترة تعود مسفوطة عند تبديل التبويب */
     dtAbs = new Set();    /* ومفاتيح التاريخ تعود إلى الزمن النسبيّ */
@@ -6467,7 +6469,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
        حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
     if (cxMax && !cxMaxOk()) cxMax = false;
-    $('#cm-body').classList.toggle('is-cxmax', cxMax);
+    /* والمنشورةُ المكبَّرة: تبقى ما دامت في «البطائق» خارج التحرير وما دامت قائمةً على الشاشة */
+    if (cxMaxPub && !(cmTabSel === 'cards' && cmView.mode !== 'edit' && !$('#cm-body').closest('#jri-body')
+        && document.querySelector('#cm-body .pk--maxpub'))) {
+      cxMaxPub = null;
+      if (cmTabSel === 'cards' && cmView.mode !== 'edit') { renderCmSection(); return; }   /* تُرسم ضيّقةً من جديد */
+    }
+    $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
@@ -8921,7 +8929,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ترويسة الرزمة: غلافها ← عدّاداتها ← سهم التوسيع · ويفصلها خطٌّ عمّا تحتها حين تُفتح.
      هوية المساهم وتاريخه ليسا هنا: مكانهما صفُّ الكومنت بجانب صورته فوق — الغلاف غلاف الرزمة لا صورة صاحبها */
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
-      ${x3ArtHTML(p, kind, deck)}
+      ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
+        ? `<span class="x3-artwrap">${x3ArtHTML(p, kind, deck)}${cxMaxMini(p.id)}</span>`
+        : x3ArtHTML(p, kind, deck)}
       <!-- ===== «ابدأ» — كلمةٌ على مفتاح، في صدر العنوان =====
            كان في **البطائق وحدَها**، وحجّتُه أنّ «زرًّا يَعِد بفعلٍ لا يقع أسوأُ من زرٍّ
            لا يكون». وقد صار في «الشروح» كذلك بحكم صاحب الموقع — وفعلُه فيهما يفترق:
@@ -9143,7 +9153,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function packCard(p, pi, deck, kind) {
     const sub = kind === 'c' ? 'cards' : 'videos';
     const V = kind === 'c' ? cardView : vidView;
-    const open = V.open === p.id;
+    const maxd = kind === 'c' && cxMaxPub === p.id;   /* المكبَّرةُ مفتوحةٌ أبدًا: التكبيرُ لقراءة جوفها */
+    const open = V.open === p.id || maxd;
     const likeAttr = `data-like="${pi}" data-sub="${sub}"`;
     /* مفتاح فتح الرزمة يفرّق بينهما في المستمع العام: data-ck للبطائق و data-pk للشروح */
     const idAttr = kind === 'c' ? `data-ck="${p.id}"` : `data-pk="${p.id}"`;
@@ -9163,7 +9174,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoDot = kind === 'c' ? packEntered(deck) : true;
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+      ${maxd ? cxMaxPubBtn(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -18818,6 +18830,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويفترقان بجهة الانزلاق عند المرور وحدها (للخارج: سيتّسع · للداخل: سيضيق) */
   const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="${cxMax}"
       title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${CX_CURVE}</button></span>`;
+  /* ===== وفي النشر: قوسٌ صغيرٌ على زاوية الغلاف (ROADMAP-EXPAND · الاقتراح ١) =====
+     القوسُ نفسُه مصغّرًا على زاوية مستطيل الغلاف — فالغلافُ صار المقبض. ونقرُه يفتح
+     المساهمةَ ويكبّرها، والمكبَّرةُ تُصغَّر بالقوس الكبير نفسِه الذي في التحرير */
+  const CX_MINI = '<svg viewBox="0 0 22 22" aria-hidden="true"><g class="pk-curve__g">'
+    + '<path class="pk-curve__hit" d="M3 2.5H11A8 8 0 0 1 19 10.5V19"/>'
+    + '<path class="pk-curve__arc" d="M3 2.5H11A8 8 0 0 1 19 10.5V19"/>'
+    + '<path class="pk-curve__grip" d="M13.3 2.8A8 8 0 0 1 18.7 8.2"/>'
+    + '<g class="pk-curve__dots"><circle cx="14.1" cy="3.1" r=".75"/><circle cx="16.66" cy="4.84" r=".75"/>'
+    + '<circle cx="18.4" cy="7.4" r=".75"/></g></g></svg>';
+  const cxMaxMini = id => `<button type="button" class="pk-maxmini" data-cxmaxpub="${esc(id)}" aria-pressed="false"
+      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_MINI}</button>`;
+  const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" aria-pressed="true"
+      title="${esc(T().cxMaxOff)}" aria-label="${esc(T().cxMaxOff)}">${CX_CURVE}</button></span>`;
+  /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
+  function cxPubMaxSet(id) {
+    const body = document.getElementById('cm-body');
+    if (!body) return;
+    if (id) {
+      cxMaxY = body.scrollTop;
+      cxMaxPub = id;
+      if (cardView.open !== id) cardView = { open: id, fold: {} };
+    } else cxMaxPub = null;
+    renderCmSection();
+    const b2 = document.getElementById('cm-body');
+    const card = b2 && b2.querySelector('.pk--maxpub');
+    if (card && !bkReduce()) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
+    requestAnimationFrame(() => { if (b2) b2.scrollTop = id ? 0 : cxMaxY; cxNameFit(); cxRailFit(); });
+  }
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
   const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
     && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
@@ -20103,6 +20143,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
   /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
   document.addEventListener('click', e => {
+    const pb = e.target.closest('#cm-body [data-cxmaxpub]');
+    if (pb) {   /* المنشورة: القوسُ الصغيرُ يكبّر، والكبيرُ (‎aria-pressed‎) يصغّر */
+      e.preventDefault(); e.stopPropagation();
+      cxPubMaxSet(pb.getAttribute('aria-pressed') === 'true' ? null : pb.dataset.cxmaxpub);
+      return;
+    }
     const b = e.target.closest('#cm-body [data-cxmax]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
@@ -20110,7 +20156,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);
   /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
   document.addEventListener('keydown', e => {
-    if (e.key !== 'Escape' || !cxMax) return;
+    if (e.key !== 'Escape' || !(cxMax || cxMaxPub)) return;
     /* ونوافذُ البطائق (‎cdWins‎) نسخٌ من قالبٍ واحد، فتُسأل بحالها لا بمعرّفها */
     const other = [...document.querySelectorAll('[id$="-modal"]:not([hidden])')].some(m => m.id !== 'course-modal')
       || cdWins.some(w => !w.min);
@@ -20118,7 +20164,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ويقف الضغطُ ههنا: لـ‎Esc‎ معنًى آخرُ في الموقع (يُغلق لوحَ المادّة كلَّه)،
        فلولا الإيقافُ لَصغُر المربّعُ واختفت المادّةُ معًا بضغطةٍ واحدة */
     e.preventDefault(); e.stopPropagation();
-    cxMaxSet(false);
+    if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   const chPickCov = document.createElement('input');
   chPickCov.type = 'file'; chPickCov.accept = 'image/*,application/pdf,.pdf'; chPickCov.hidden = true;
@@ -20135,7 +20181,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   function fillCourseUI(code) {
     if (cmCode && cmCode !== code) cleanupEmptyMine();   /* تبديل مادة ومحرر المادة السابقة مفتوح */
-    if (cmCode !== code) cxMax = false;                  /* والتكبيرُ حالُ مساهمةٍ في مادّةٍ بعينها */
+    if (cmCode !== code) { cxMax = false; cxMaxPub = null; }   /* والتكبيرُ حالُ مساهمةٍ في مادّةٍ بعينها */
     cxSel.clear();   /* التحديدُ حالُ جلسةٍ في مادّةٍ بعينها — ولا يُورَّث لمادّةٍ أخرى */
     cmCode = code;
     cdMinScope();    /* وألسنةُ المطويّات تتبع المادّة: تظهر ألسنةُ هذه وتُحجب ألسنةُ غيرها */

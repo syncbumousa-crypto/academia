@@ -16159,3 +16159,32 @@ html[data-theme="dark"] .pk-max--curve:hover .pk-curve__grip { stroke: rgba(255,
 .pk-max--curve:focus-visible { outline: none; }
 @keyframes pkMaxIn { from { opacity: .55; transform: scale(.985); } }
 @media (prefers-reduced-motion: reduce) { .pk--maxfx { animation: none; } .pk-max { transition: none; } }
+
+/* ===== المنشورة المكبَّرة (ROADMAP-EXPAND · الاقتراح ١) =====
+   قوسٌ صغيرٌ على زاوية مستطيل الغلاف، وألوانُه ألوانُ القوس الكبير ومسكتُه ونقاطُه */
+.x3-artwrap { position: relative; display: inline-flex; flex: none; }
+.pk-maxmini {
+  position: absolute; top: -7px; inset-inline-start: -7px; z-index: 2;
+  width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer;
+  color: rgba(201, 162, 92, .7); pointer-events: none;
+}
+html[data-theme="dark"] .pk-maxmini { color: rgba(225, 193, 114, .55); }
+.pk-maxmini svg { width: 22px; height: 22px; display: block; overflow: visible; }
+html[data-lang="en"] .pk-maxmini svg { transform: scaleX(-1); }
+.pk-maxmini .pk-curve__hit { stroke-width: 9; }
+.pk-maxmini .pk-curve__arc { stroke-width: 3; }
+.pk-maxmini .pk-curve__grip { stroke-width: 1.6; }
+.pk-maxmini:hover .pk-curve__arc, .pk-maxmini:focus-visible .pk-curve__arc { stroke-width: 3.6; stroke: #c9a25c; }
+.pk-maxmini:hover .pk-curve__dots { opacity: .8; }
+.pk-maxmini:hover .pk-curve__g, .pk-maxmini:focus-visible .pk-curve__g { transform: translate(1.5px, -1.5px); }
+.pk-maxmini:focus-visible { outline: none; }
+/* والمكبَّرةُ المنشورة: سطحٌ يملأ النافذة، والشجرةُ وحدها تُمرَّر، وصفُّ التقييم ثابتٌ تحتها */
+.pk--maxpub { position: relative; background: var(--u-surf); }
+.pk--maxpub .post-ytmain > .x3 {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
+  margin-inline-end: -6px; padding-inline-end: 6px;
+  scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent;
+}
+.pk--maxpub .post-ytmain > .x3::-webkit-scrollbar { width: 8px; }
+.pk--maxpub .post-ytmain > .x3::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+.pk--maxpub .post-ytmain > :not(.x3) { flex: none; }
