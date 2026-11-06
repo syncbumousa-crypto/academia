@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -3983,6 +3983,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxMax = false;
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
   let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
+  let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
 
   function showCmTab(t) {
     cleanupEmptyMine();   /* الخروج من محرر بلا كتابة لا يترك مشاركة فارغة */
@@ -6476,12 +6477,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (cmTabSel === 'cards' && cmView.mode !== 'edit') { renderCmSection(); return; }   /* تُرسم ضيّقةً من جديد */
     }
     $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
+    if (!cxMax && !cxMaxPub) cxHdUp = false;
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
       else editorMount(cmView.sub || sec);
     }
     if (cxMax && cxY) { const cc = document.querySelector('#cm-body #cm-cards'); if (cc) cc.scrollTop = cxY; }
+    if (cxMax || cxMaxPub) cxHdMeasure();   /* قامةُ الرأس بعد كلّ رسم — قبل أن يُرى */
     document.querySelectorAll('#cm-body textarea.chipe-in').forEach(autoGrow);   /* ارتفاع حقول تحرير المادة يتبع محتواها */
     fitGradeLabels($('#cm-body'));   /* دلالات شريط الدرجة داخل الحدود */
     /* حالة أزرار الشريط الواحد: المفعّل فقط */
@@ -9174,7 +9177,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoDot = kind === 'c' ? packEntered(deck) : true;
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -9184,6 +9187,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
+          ${maxd ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
                قواعدُ الرحلة (القضيبُ والدوائرُ ومواضعُها ومقاساتُها) معلّقةٌ بـ
                ‎:is(.x3.cx-ro, .x3.cx-tree)‎ — شجرتَي البطائق. وشجرةُ نشر الشروح ‎.x3‎
@@ -18851,13 +18855,56 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cxMaxY = body.scrollTop;
       cxMaxPub = id;
       if (cardView.open !== id) cardView = { open: id, fold: {} };
-    } else cxMaxPub = null;
+    } else { cxMaxPub = null; cxHdUp = false; }
     renderCmSection();
     const b2 = document.getElementById('cm-body');
     const card = b2 && b2.querySelector('.pk--maxpub');
     if (card && !bkReduce()) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => { if (b2) b2.scrollTop = id ? 0 : cxMaxY; cxNameFit(); cxRailFit(); });
   }
+  /* ===== المقبضُ بين الرأس والجوف (ROADMAP-HEADFOLD) =====
+     في المكبَّر وحده يصير خطُّ الرأس عنصرًا يُنقر: خطٌّ بذهب القوس المكتوم، وفي وسطه مسكتُه
+     ونقاطُه الثلاث. نقرُه يرفع الرأسَ خلف حدّ المربّع فيلصق الخطُّ بأعلاه، ونقرُه ثانيةً يُنزله */
+  const cxHdLine = () => `<button type="button" class="pk-hdline" data-hdfold aria-expanded="${!cxHdUp}"
+      title="${esc(cxHdUp ? T().hdDown : T().hdUp)}" aria-label="${esc(cxHdUp ? T().hdDown : T().hdUp)}">
+      <span class="pk-hdline__ln"></span><span class="pk-hdline__grip"><i></i><i></i><i></i></span></button>`;
+  /* قامةُ ما فوق الخطّ تُقاس ولا تُكتب: عنوانٌ يلتفّ أو شاشةٌ تضيق تُطيلها. ويُضاف إليها
+     حشوُ المربّع العلويّ إلّا ثلاثةَ بكسلات — فيصل الخطُّ إلى حافّة المربّع ولا يبقى
+     من الرأس شريطٌ في الحشو (القصُّ عند حدّ الحشو لا عند حدّ المحتوى) */
+  function cxHdMeasure() {
+    const card = document.querySelector('#cm-body .pk--max');
+    if (!card) return;
+    const ln = card.querySelector('.pk-hdline'), yt = card.querySelector('.post-yt');
+    if (!ln || !yt) return;
+    const pad = parseFloat(getComputedStyle(card).paddingTop) || 0;
+    const h = ln.getBoundingClientRect().top - yt.getBoundingClientRect().top + pad - 3;
+    card.style.setProperty('--hdh', Math.max(0, Math.round(h)) + 'px');
+  }
+  function cxHdSet(up) {
+    const card = document.querySelector('#cm-body .pk--max');
+    if (!card) { cxHdUp = false; return; }
+    up = !!up;
+    /* لا يبقى التركيزُ في حقلٍ سيختفي، ولا منسدلٌ مُعلَّقٌ بعنصرٍ سيصعد */
+    const ae = document.activeElement;
+    if (up && ae && card.contains(ae) && !ae.closest('.pk-hdline, #cm-cards, .x3')) ae.blur();
+    cxHdUp = up;
+    cxHdMeasure();
+    if (!bkReduce()) {
+      card.classList.add('pk--hdanim');
+      clearTimeout(cxHdSet.t);
+      cxHdSet.t = setTimeout(() => card.classList.remove('pk--hdanim'), 260);
+    }
+    card.classList.toggle('pk--hdup', up);
+    const ln = card.querySelector('.pk-hdline');
+    if (ln) {
+      ln.setAttribute('aria-expanded', String(!up));
+      const t = up ? T().hdDown : T().hdUp;
+      ln.title = t; ln.setAttribute('aria-label', t);
+      ln.focus({ preventScroll: true });
+    }
+    requestAnimationFrame(() => { cxNameFit(); cxRailFit(); });
+  }
+  window.addEventListener('resize', () => { if (cxMax || cxMaxPub) cxHdMeasure(); });
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
   const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
     && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
@@ -18877,22 +18924,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const card = body.querySelector('.pk--edit[data-sub="cards"]');
     const fx = !bkReduce() && card;
     body.classList.toggle('is-cxmax', on);
+    if (!on) cxHdUp = false;   /* المكبَّرُ يُفتح دائمًا ورأسُه ظاهر */
     if (card) {
       card.classList.toggle('pk--max', on);
+      card.classList.remove('pk--hdup', 'pk--hdanim');
       const dock = card.querySelector('.pk-maxdock');
       if (dock) dock.outerHTML = cxMaxBtn();
+      /* والتبديلُ في مكانه بلا رسم — فالمقبضُ يُغرس بعد الرأس أو يُنزع بيدٍ ههنا */
+      const old = card.querySelector('.pk-hdline');
+      if (old) old.remove();
+      const hd = card.querySelector('.x3-pkhd');
+      if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
       if (!on) body.scrollTop = cxMaxY;
       else body.scrollTop = 0;
-      cxNameFit(); cxRailFit();
+      cxNameFit(); cxRailFit(); cxHdMeasure();
     });
   }
 
   function cardEditCard(p, i) {
     const d = p.data;
-    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}" data-pi="${i}" data-sub="cards">
+    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -18907,6 +18961,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <!-- وخبرُ المساهمة كلِّها: يسارَ شارات الأنواع، وهو مجموعُ الشجرة -->
             <span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>
           </div>
+          ${cxMax ? cxHdLine() : ''}
           <div id="cm-cards"></div>
           ${cxFoot(d)}
         </div>
@@ -20143,6 +20198,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
   /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
   document.addEventListener('click', e => {
+    const hl = e.target.closest('#cm-body [data-hdfold]');
+    if (hl) { e.preventDefault(); e.stopPropagation(); cxHdSet(!cxHdUp); return; }
     const pb = e.target.closest('#cm-body [data-cxmaxpub]');
     if (pb) {   /* المنشورة: القوسُ الصغيرُ يكبّر، والكبيرُ (‎aria-pressed‎) يصغّر */
       e.preventDefault(); e.stopPropagation();
@@ -20164,6 +20221,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ويقف الضغطُ ههنا: لـ‎Esc‎ معنًى آخرُ في الموقع (يُغلق لوحَ المادّة كلَّه)،
        فلولا الإيقافُ لَصغُر المربّعُ واختفت المادّةُ معًا بضغطةٍ واحدة */
     e.preventDefault(); e.stopPropagation();
+    /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
+    if (cxHdUp) { cxHdSet(false); return; }
     if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   const chPickCov = document.createElement('input');

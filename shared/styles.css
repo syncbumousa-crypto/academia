@@ -16188,3 +16188,42 @@ html[data-lang="en"] .pk-maxmini svg { transform: scaleX(-1); }
 .pk--maxpub .post-ytmain > .x3::-webkit-scrollbar { width: 8px; }
 .pk--maxpub .post-ytmain > .x3::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
 .pk--maxpub .post-ytmain > :not(.x3) { flex: none; }
+
+/* ============================================================
+   طيُّ الرأس (ROADMAP-HEADFOLD) — خطُّ المكبَّرة مقبضٌ يرفع رأسَها
+   ============================================================
+   في المكبَّر يُنزع حدُّ ‎.x3-pkhd.on‎ ويحلّ محلَّه ‎.pk-hdline‎: خطٌّ بذهب القوس المكتوم
+   وفي وسطه مسكةٌ رماديّةٌ ونقاطٌ ثلاث — المقبضُ الذي على القوس ممدودًا أفقيًّا */
+.pk--max .x3-pkhd.on { border-bottom: 0; padding-bottom: 4px; }
+.pk--max { overflow: hidden; }
+.pk-hdline {
+  position: relative; display: flex; align-items: center; justify-content: center; flex: none;
+  width: 100%; height: 14px; margin: 2px 0 8px; padding: 0; border: 0; background: none; cursor: pointer;
+  color: rgba(201, 162, 92, .45);
+}
+html[data-theme="dark"] .pk-hdline { color: rgba(225, 193, 114, .38); }
+@media (pointer: coarse) { .pk-hdline { height: 24px; } }
+.pk-hdline__ln {
+  position: absolute; inset-inline: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px;
+  background: currentColor; transition: height .15s, margin-top .15s, background .15s;
+}
+.pk-hdline__grip {
+  position: relative; display: flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 99px;
+  background: linear-gradient(rgba(20, 35, 63, .1), rgba(20, 35, 63, .1)), var(--u-surf);
+  transition: transform .18s ease-out, background .15s;
+}
+html[data-theme="dark"] .pk-hdline__grip { background: linear-gradient(rgba(255, 255, 255, .12), rgba(255, 255, 255, .12)), var(--u-surf); }
+.pk-hdline__grip i { width: 3px; height: 3px; border-radius: 99px; background: #14233f; opacity: .45; transition: opacity .15s; }
+html[data-theme="dark"] .pk-hdline__grip i { background: #e7eff0; opacity: .5; }
+/* المرور: يستعيد ذهبَه ويسمك، وتنزلق المسكةُ في جهة ما سيحدث (للأعلى نازلًا · للأسفل مرفوعًا) */
+.pk-hdline:hover, .pk-hdline:focus-visible { color: #c9a25c; outline: none; }
+html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
+.pk-hdline:hover .pk-hdline__ln, .pk-hdline:focus-visible .pk-hdline__ln { height: 3px; margin-top: -1.5px; }
+.pk-hdline:hover .pk-hdline__grip i, .pk-hdline:focus-visible .pk-hdline__grip i { opacity: .8; }
+.pk-hdline:hover .pk-hdline__grip { transform: translateY(-2px); }
+.pk--hdup .pk-hdline:hover .pk-hdline__grip { transform: translateY(2px); }
+/* الرفع: ‎.post-yt‎ كلُّه يصعد بقامة الرأس المقيسة، والمربّعُ يقصّ ما فوق حدّه، والجوفُ يتمدّد.
+   والحركةُ في التبديل وحده (‎pk--hdanim‎) — لو دامت لرقص الرأسُ مع كلّ رسم */
+.pk--hdup > .post-yt { margin-top: calc(-1 * var(--hdh, 0px)); }
+.pk--hdanim > .post-yt { transition: margin-top .22s ease; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt { transition: none; } .pk-hdline__grip { transition: none; } }
