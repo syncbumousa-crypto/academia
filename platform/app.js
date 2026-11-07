@@ -9504,7 +9504,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const lab = pkLab(), ed = lab && editable;
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
-    if (!folds.length && v === 'source') return pkSrcView(id, ed);
+    if (!folds.length && v === 'source') {
+      /* ولا قسمةَ بلا مجلدات: لا يكون للجار ما يعرضه، فيُنقل العرضُ إليه وحدَه (فيُرى تلميحُ «أضف مجلدًا»)
+         بدل زرٍّ مضيءٍ لا جانبَ له */
+      if (pkSplit[id]) { pkVw[id] = pkSplit[id]; delete pkSplit[id]; return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`; }
+      return pkSrcView(id, ed);
+    }
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -21667,6 +21672,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       } else if (cur === 'source' && PK_SPLIT_VIEWS.includes(to) && pkLab()) {
         pkSplitRecord(id); pkSplit[id] = to; pkSplitAnim[id] = true; renderCmSection();
       } else if (cur !== to) { pkVw[id] = to; renderCmSection(); }
+      /* والتركيزُ لا يضيع: الزرُّ المنقورُ أُعيد بناؤه مع الرسم، فيُعطى نظيرُه الجديدُ التركيزَ إن كان في الشريط */
+      const ae = document.activeElement;
+      if (!ae || ae === document.body || !ae.isConnected) {
+        const nb = document.querySelector(`#cm-body [data-pkview="${CSS.escape(to)}"][data-pkid="${CSS.escape(id)}"]`);
+        if (nb) nb.focus({ preventScroll: true });
+      }
       return;
     }
     if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
@@ -21753,11 +21764,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);
   /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
   document.addEventListener('keydown', e => {
-    if (e.key !== 'Escape' || !(cxMax || cxMaxPub)) return;
+    if (e.key !== 'Escape') return;
+    /* ‏ROADMAP-SPLIT · المرحلة ٤: والقسمةُ أوّلُ ما يُغلقه ‎Esc‎ — جارُ الكتاب (بحركته)، قبل خطوات التصغير.
+       ولا يُؤخذ إن كان التركيزُ في حقلٍ يُكتب فيه: ‎Esc‎ هناك يُنهي الكتابة */
+    const spl = document.querySelector('#cm-body .post-ytmain > .pk-split:not(.pk-ghost)');
+    if (!spl && !(cxMax || cxMaxPub)) return;
     /* ونوافذُ البطائق (‎cdWins‎) نسخٌ من قالبٍ واحد، فتُسأل بحالها لا بمعرّفها */
     const other = [...document.querySelectorAll('[id$="-modal"]:not([hidden])')].some(m => m.id !== 'course-modal')
       || cdWins.some(w => !w.min);
     if (other) return;
+    if (spl) {
+      /* يُسأل هدفُ الضغطة لا التركيزُ الحاليّ: حقلُ الخليّة يُفلت تركيزَه بالضغطة نفسِها قبل أن نُسأل */
+      const tg = e.target;
+      if (tg && tg.nodeType === 1 && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
+      const post = spl.closest('.post'), btn = post && [...post.querySelectorAll('.pk-vbar__b.on[data-pkview]')].find(b => b.dataset.pkview !== 'source');
+      if (btn) { e.preventDefault(); e.stopPropagation(); btn.click(); return; }
+    }
+    if (!(cxMax || cxMaxPub)) return;
     /* ويقف الضغطُ ههنا: لـ‎Esc‎ معنًى آخرُ في الموقع (يُغلق لوحَ المادّة كلَّه)،
        فلولا الإيقافُ لَصغُر المربّعُ واختفت المادّةُ معًا بضغطةٍ واحدة */
     e.preventDefault(); e.stopPropagation();

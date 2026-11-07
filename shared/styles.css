@@ -16856,6 +16856,17 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk--max .pk-split { min-height: 0; }
 .pk--max .pk-split > .kt-view--tree .kcv { min-height: 0; }
 .pk--max .pk-split .kt-view--tree > .kt-add { flex: none; }
+/* ===== ROADMAP-SPLIT · المرحلة ٤: العرضُ الضيّق (الجوّال) — قسمةٌ عموديّة =====
+   الكتابُ فوق بقامةٍ محدودة، والجارُ تحته يأخذ الباقي — بدل جانبين يختنق فيهما الاثنان */
+@media (max-width: 760px) {
+  .pk-split { flex-direction: column; gap: 12px; }
+  .pk-split > .pk-src { flex: none; height: min(48vh, 380px); }
+  .pk-split > .kt-view { flex: 1 1 auto; min-height: 300px; }
+  .pk--max .pk-split > .kt-view { min-height: 0; }
+  .pk-split > .kt-view:not(.kt-view--tree) { max-height: none; }
+  .pk-split > .kt-view--tree .kcv { min-height: 300px; }
+  .pk--max .pk-split > .kt-view--tree .kcv { min-height: 0; }
+}
 /* اللوحُ يظهر من جهته (اليسار) وهو يتّضح، والكتابُ ينتقل إليه انتقالًا (‎FLIP‎ في ‎bkFlipFrom‎) */
 .pk-split.is-in > .kt-view { animation: pkSplitIn .5s cubic-bezier(.2, .8, .2, 1) both; }
 @keyframes pkSplitIn { from { opacity: 0; transform: translateX(-28px); } }
