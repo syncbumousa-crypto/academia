@@ -4834,6 +4834,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     return box.innerHTML.split(ZWSP).join('').trim() ? `<div class="v-desc v-rich">${box.innerHTML}</div>` : '';
   }
+  /* ===== وملفٌّ من جدول الوسائط يُنزَّل باسمه =====
+     ‏‎download‎ لا يعمل على رابطٍ من نطاقٍ آخر: المتصفّحُ يتجاهله فينزل الملفُّ باسم مفتاحه
+     (‎sha256‎ طويل) بدل اسمه. والوسائطُ على نطاق الخادم لا الموقع، والخادمُ يأذن للكلّ
+     (‎access-control-allow-origin: *‎). فيُجلب الملفُّ ويُنزَّل من ‎blob‎ باسمه. وإن تعثّر
+     الجلبُ تُرك الرابطُ يعمل كما كان: ينزل بلا اسمه خيرٌ من ألّا ينزل */
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a.src-fbadge[download]');
+    if (!a || !/^https?:/i.test(a.href || '')) return;
+    let cross = true;
+    try { cross = new URL(a.href).origin !== location.origin; } catch (er) {}
+    if (!cross) return;
+    e.preventDefault(); e.stopPropagation();
+    const name = a.getAttribute('download') || '';
+    fetch(a.href).then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then(b => {
+      const u = URL.createObjectURL(b), t = document.createElement('a');
+      t.href = u; t.download = name; document.body.appendChild(t); t.click(); t.remove();
+      setTimeout(() => URL.revokeObjectURL(u), 30000);
+    }).catch(() => { location.href = a.href; });
+  }, true);
   /* سهم التوسيع إنلاين — نفس زرّ «الدكاترة» حرفيًّا (يأتي بعد آخر كلمة ظاهرة) */
   const inlineTogHTML = open => `<button type="button" class="pk-toggle pk-toggle--inline" title="${open ? T().pkCollapse : T().pkExpand}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>`;
   /* ملخّص «المصادر» المطويّ: نفس منطق قصّ انطباع «الدكتور» (حدّ حروف + كسر عند مسافة + «…»)،
