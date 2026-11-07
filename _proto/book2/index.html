@@ -2,13 +2,15 @@
 <html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <style>
   html, body { margin: 0; height: 100%; background: #f1f4f5; }
+  body.dark { background: #1b1f24; }
   #book { position: fixed; inset: 20px 20px 70px; }
 </style></head><body>
 <div id="book"></div>
 <script src="./pdfjs/pdf.min.js"></script>
 <script type="module">
   import { mountBook2 } from './book2.js';
-  window.__bk = await mountBook2(document.getElementById('book'), './src12.pdf', { spread: 2 });
+  const dark = location.search.includes('dark'); if (dark) document.body.classList.add('dark');
+  window.__bk = await mountBook2(document.getElementById('book'), './src12.pdf', { spread: 2, theme: dark ? 'dark' : 'light' });
   window.__ready = 1;
 </script>
 </body></html>
