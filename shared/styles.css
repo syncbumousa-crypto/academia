@@ -16879,7 +16879,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
    كانت القاماتُ الدنيا (‎.pk-src‎ ‎340‎ لزرَّي الرفع · اللوحُ ‎280‎) تدفع الجانبين خارجَ القسمة فيركبان الذيل
    في الشاشات القصيرة. فداخلَ القسمة: لا قامةَ دنيا، والجانبان صندوقان متساويان يبدآن وينتهيان معًا،
    والكتابُ يُحسب من قامة جانبه بعد اقتطاع أزراره (‎bkLayout‎) — فيصغُر ولا يفيض */
-.pk-split > .pk-src, .pk-split > .kt-view { margin: 0 !important; }
+#cm-body .pk-split > .pk-src, #cm-body .pk-split > .kt-view { margin: 0; }   /* بلا ‎!important‎: تلك تعلو على الحركة فتُبطل تضيُّقَ الجار وهو يتحرّك */
 .pk-split > .pk-src { min-height: 0; padding: 0; }
 .pk-split .pk-src--book { padding: 0; align-items: stretch; }
 .pk-split .pk-src--book > .pk-src__view { min-height: 0; }

@@ -21690,6 +21690,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* «المصدر» مفتاحُ الكتاب: يُدخله بجانب العرض (ومن بنك الأسئلة إلى آخر عرضٍ من الثلاثة) ويُخرجه.
          وغيرُه من الثلاثة يبدّل الجار والكتابُ باقٍ. ونقرُ العرض المضيء نفسِه لا يفعل شيئًا */
       let enter = false;
+      /* مستطيلُ العرض قبل دخول الكتاب — منه يتضيّق إلى مكانه الجديد */
+      const before = !part && to === 'source' && post ? post.querySelector('.post-ytmain > .kt-view') : null;
+      const beforeR = before ? before.getBoundingClientRect() : null;
       if (to === 'source') {
         if (part) pkSplit[id] = false;
         else { pkSplit[id] = true; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
@@ -21704,7 +21707,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* دخولُ الكتاب: ينزلق من حافّة المساهمة إلى مكانه، ويُقصّ عند الحافّة فيبدو أنّه دخلها من خارجها */
         const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`);
         const post2 = ctl && ctl.closest('.post'), pane = post2 && post2.querySelector('.post-ytmain > .pk-split > .pk-src');
+        /* والعرضُ يتضيّق بنعومة (طلبُ صاحب الموقع): يبدأ بعرضه القديم ممتدًّا تحت الكتاب الداخل، ثمّ ينكمش إلى مكانه —
+           هامشٌ سالبٌ في جهة الكتاب يذوب إلى صفر، وحافّتُه الأخرى ثابتة. والكتابُ فوقه أثناء ذلك */
+        const nv = post2 && post2.querySelector('.post-ytmain > .pk-split > .kt-view');
+        if (nv && beforeR) {
+          const n = nv.getBoundingClientRect(), en = state.lang === 'en';
+          const d = Math.round(en ? n.left - beforeR.left : beforeR.right - n.right);
+          if (d > 1) nv.animate([{ marginInlineStart: -d + 'px' }, { marginInlineStart: '0px' }],
+            { duration: 520, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+        }
         if (pane) {
+          pane.style.position = 'relative'; pane.style.zIndex = '2';
+          setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, 560);
           const pr = pane.getBoundingClientRect(), cr = post2.getBoundingClientRect(), en = state.lang === 'en';
           const gap = Math.max(0, en ? pr.left - cr.left - 1 : cr.right - 1 - pr.right);
           const dist = pr.width + gap + 8, f = Math.min(1, (pr.width + 8) / dist);
