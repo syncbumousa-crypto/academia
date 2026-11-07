@@ -14,10 +14,13 @@ uniform float uTilt;     // ميلُ خطّ الالتفاف (راديان)
 uniform float uLift0;    // ارتفاعُ الورقة في كومة اليسار
 uniform float uLift1;    // ارتفاعُها في كومة اليمين
 uniform float uStiff;    // صلابةُ الورقة: الغلافُ لا ينثني كالورق
+uniform float uFloorL;   // أعلى ما تحت الورقة في كومة اليسار (‎-1‎ لا شيء)
+uniform float uFloorR;   // وفي كومة اليمين
 uniform vec2  uSize;     // عرضُ الورقة وقامتُها
 attribute vec2 aSheet;   // ‎(u, v)‎ في ‎0..1‎ — ‎u‎ من الكعب إلى الحرف
 varying vec2 vSheet;
 const float PI = 3.14159265;
+float bulgeAt(float sx) { return 0.012 * uSize.x * sin(clamp(sx / 0.18, 0.0, 1.0) * PI * 0.5) * (1.0 - 0.6 * sx); }
 vec3 sheetPoint(vec2 s) {
   float W = uSize.x, H = uSize.y;
   float u = s.x * W, v = (s.y - 0.5) * H;
@@ -36,8 +39,13 @@ vec3 sheetPoint(vec2 s) {
   vec2 en = vec2(sin(th), cos(th));
   vec2 xz = x * eu + zc * en;
   float lift = mix(uLift0, uLift1, smoothstep(0.0, 1.0, uP));
-  float bulge = (1.0 - uStiff) * 0.012 * W * sin(clamp(s.x / 0.18, 0.0, 1.0) * PI * 0.5) * (1.0 - 0.6 * s.x);
-  return vec3(xz.x, y, xz.y + lift + bulge * (1.0 - sin(th)));
+  // انتفاخُ الورق قرب الكعب واحدٌ لكلّ الأوراق والغلاف — وإلّا علت الصفحةُ الأولى على الغلاف فحجبته
+  float z = xz.y + lift + bulgeAt(s.x) * (1.0 - sin(th));
+  // لا تنزل الورقةُ تحت سطح الكومة التي فوقها: التفافُها قرب الهبوط أو مع التحويم كان يغوص في الأوراق تحتها
+  float sx = clamp(abs(xz.x) / W, 0.0, 1.0);
+  float fl = xz.x < 0.0 ? uFloorL : uFloorR;
+  if (fl > -0.5) z = max(z, fl + bulgeAt(sx) + 0.0006);
+  return vec3(xz.x, y, z);
 }
 `;
 const PAPER_GLSL = /* glsl */`
@@ -170,7 +178,7 @@ export function createBook2(THREE, host, cfg) {
   const sheets = [];
   for (let i = 0; i < S; i++) {
     const isCover = i === 0 || i === S - 1;
-    const u = { uP: { value: 0 }, uBend: { value: 0 }, uTilt: { value: 0 }, uLift0: { value: 0 }, uLift1: { value: 0 }, uStiff: { value: isCover ? 0.85 : 0 }, uSize: { value: new THREE.Vector2(W, H) } };
+    const u = { uP: { value: 0 }, uBend: { value: 0 }, uTilt: { value: 0 }, uLift0: { value: 0 }, uLift1: { value: 0 }, uFloorL: { value: -1 }, uFloorR: { value: -1 }, uStiff: { value: isCover ? 0.85 : 0 }, uSize: { value: new THREE.Vector2(W, H) } };
     /* ‏‎u‎ يتّجه إلى ‎−x‎ ساكنًا فينقلب ترتيبُ الرؤوس: الوجهُ مادّتُه ‎BackSide‎ والظهرُ ‎FrontSide‎، وكلاهما بعموديٍّ معكوس */
     const mk = (side, mirror, flipThru) => {
       const mt = patch(new THREE.MeshStandardMaterial({ side, roughness: isCover ? 0.7 : 0.86, metalness: 0, color: '#ffffff' }), true, -1, true);
@@ -268,6 +276,7 @@ export function createBook2(THREE, host, cfg) {
       } else if (s.drag != null) {
         s.p += (s.drag - s.p) * (1 - Math.exp(-dt / T.follow)); moving = true;
       } else {
+        s.dir = s.target === 0 ? 1 : -1;   /* الساكنةُ (والمرفوعةُ بالتحويم) تلتفّ بعيدًا عن كومتها، لا نحوها */
         let goal = s.target;
         if (s.i === hover) goal = s.target === 0 ? T.hoverLift : 1 - T.hoverLift;
         if (active && active !== s && !s.isCover && !active.isCover) {
@@ -280,9 +289,13 @@ export function createBook2(THREE, host, cfg) {
         if (Math.abs(goal - s.p) > 1e-4) { s.p += (goal - s.p) * (1 - Math.exp(-dt / T.settle)); moving = true; } else s.p = goal;
       }
       s.tilt += (s.tiltT - s.tilt) * (1 - Math.exp(-dt / 0.15));
-      s.u.uP.value = s.p; s.u.uBend.value = Math.sin(s.p * Math.PI) * 2.1 * s.dir; s.u.uTilt.value = s.tilt * Math.sin(s.p * Math.PI);
+      s.u.uP.value = s.p; /* الحرفُ يتقدّم في النصف الأوّل ويتأخّر في الثاني (كالورق يسقط على كومته) — فلا يغوص التفافُه في الأوراق التي يهبط عليها */
+      const q = s.dir > 0 ? s.p : 1 - s.p;
+      s.u.uBend.value = Math.sin(s.p * Math.PI) * Math.cos(q * Math.PI * 0.9) * 2.8 * s.dir; s.u.uTilt.value = s.tilt * Math.sin(s.p * Math.PI);
       s.u.uLift0.value = (S - s.i) * STACK;
       s.u.uLift1.value = (s.i + 1) * STACK;
+      s.u.uFloorL.value = s.i < S - 1 ? (S - s.i - 1) * STACK : -1;
+      s.u.uFloorR.value = s.i > 0 ? s.i * STACK : -1;
       const cast = s.anim != null || s.drag != null || (s.p > 0.002 && s.p < 0.998) || Math.abs(s.i + 0.5 - A) < 2;
       if (s.cast !== cast) { s.cast = cast; for (const mh of s.meshes) mh.castShadow = cast; }
     }
