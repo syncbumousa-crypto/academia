@@ -3849,7 +3849,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <div class="post__top">
           <span class="post-av post-av--sm">${avatarHTML(p)}</span>
           <div class="post-meta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             <span class="post-date">${agoTxt(p.ts)}</span>
           </div>
           <span class="wlikes">♥ ${p.likes || 0}</span>
@@ -5507,7 +5507,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const foot = `<div class="post__top">
         <span class="post-av post-av--sm">${avatarHTML(p)}</span>
         <div class="post-meta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, key)}
           <button type="button" class="post-like post-like--bare ${p.liked ? 'on' : ''}" ${likeAttr}><span class="lk-h">♥</span><span class="lk-n">${p.likes || 0}</span></button>
         </div>
@@ -5517,7 +5517,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        وعلى يسارها عمود = [اسم · تاريخ · قائمة النقاط] ثم المحتوى ثم إبهاما مفيد/غير مفيد */
     if (sec === 'info' || sec === 'doc' || sec === 'abs' || sec === 'grade' || isSrc) {
       const meta = `<div class="post-ytmeta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, key)}${pinBadge(p)}
         </div>`;
       /* مؤشّر اكتمال المساهمة (المادة والدكتور): يمين الإبهام = أول عنصر في صفّ التفاعل RTL
@@ -5611,6 +5611,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const k = pstOf(p), o = PST()[k];
     return `<span class="pst-badge pst-badge--post is-${k}"
         title="${esc(o.n)} — ${esc(o.d)}" aria-label="${esc(o.n)}">${o.ic}</span>`;
+  }
+  /* ===== شارة «منقولة» =====
+     مساهمةٌ نُقلت من موقعٍ قديم (مجتمع STKFUPM) تحمل أصلَها في ‎data.imp‎:
+       { src: 'stkfupm', url, user, ts }
+     فيُكتب بجانب الاسم «from» وشعارُ الموقع، والضغطُ يفتح الموضوعَ الأصليّ.
+     والاسمُ والصورةُ اسمُ كاتبها هناك وصورتُه — حسابٌ مستورَد (‎uid = stk-…‎)
+     لا يدخل أحدٌ به. */
+  const IMP_SRC = {
+    stkfupm: { n: 'STKFUPM', logo: 'assets/brand/stkfupm-logo.svg', t: 'منقولة من مجتمع STKFUPM' },
+  };
+  function impBadge(p) {
+    const im = p && p.data && p.data.imp;
+    const o = im && IMP_SRC[im.src];
+    if (!o) return '';
+    const url = /^https:\/\//.test(im.url || '') ? im.url : '';
+    const tip = o.t + (im.user ? ' — @' + im.user : '') +
+      (im.ts ? ' · ' + new Date(im.ts).getFullYear() : '');
+    const inner = `<i class="imp-badge__f">from</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
+    return url
+      ? `<a class="imp-badge" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</a>`
+      : `<span class="imp-badge" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</span>`;
   }
   /* شارة الوضع يمين زرّ الإرسال: تُقرأ دائمًا، وتُضغط ليُبدَّل الوضع من القائمة نفسها */
   /* المساهمة المفتوحة خاويةٌ؟ فلا وضعَ يُعلن ولا شيءَ يُنشر — الأيقونتان تُخفيان معًا */
@@ -5786,7 +5807,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('info', d)}
         </div>
@@ -5819,7 +5840,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('grade', p.data)}
         </div>
@@ -5850,7 +5871,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('abs', p.data)}
         </div>
@@ -5874,7 +5895,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot(area, p.data)}
         </div>
@@ -5889,7 +5910,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post__top">
         <span class="post-av post-av--sm">${avatarHTML(p)}</span>
         <div class="post-meta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, `${sec}:${i}`)}
         </div>
         <div class="post-side">
@@ -6292,7 +6313,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${head}
           ${editActsFoot('doc', d)}
         </div>
@@ -6453,7 +6474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       inner = `<div class="cm-back">
           <button type="button" class="cm-backbtn" id="cm-back">← ${T().backToList}</button>
           <span class="post-av post-av--sm">${avatarHTML(p)}</span>
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, `${sec}:${cmView.pi}`)}
           <button type="button" class="post-like ${p.liked ? 'on' : ''}" data-like="${cmView.pi}">♥ ${p.likes || 0}</button>
         </div>` + viewHTML(sec, p.data);
@@ -9448,7 +9469,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
@@ -9500,7 +9521,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           <div class="x3-pkhd on">
             ${x3ArtEdit(p, 'v')}
             <span class="vt-grow x3-ttlwrap${d.title ? '' : ' is-ph'}" data-v="${esc(d.title || '') || T().pkTitlePh}">
@@ -19224,7 +19245,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           <div class="x3-pkhd on">
             ${x3ArtEdit(p, 'c', d.deck)}
             <span class="vt-grow x3-ttlwrap${d.title ? '' : ' is-ph'}" data-v="${esc(d.title || '') || T().pkTitlePh}">
@@ -25268,7 +25289,7 @@ void main() {
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             <span class="post-date">${agoTxt(p.ts)}</span>${pinBadge(p)}
           </div>
           ${body}
@@ -27798,6 +27819,12 @@ void main() {
   const srvGot = {};
   const srvSeen = code => !SRV_ON() || !!srvGot[code];
 
+  /* ===== تاريخُ المساهمة من الخادم: بالمللي =====
+     الخادمُ يحفظ ‎ts‎ كما أرسله العميل (‎Date.now()‎ = مللي)، وكان يُضرب هنا في ألفٍ
+     كأنّه ثوانٍ — فيقع التاريخُ بعد آلاف السنين، و‎agoTxt‎ يقصّه إلى صفر: «اليوم»
+     على كلّ مساهمةٍ جاءت من الخادم. فيُقرأ بوحدته: ما دون ‎1e12‎ ثوانٍ قديمةٌ تُضرب،
+     وما فوقه مللي يُترك. (والتعليقاتُ تُختم بـ‎now()‎ ثوانيَ على الخادم، فضربُها صحيح.) */
+  const srvMs = t => { t = +t || 0; return t && t < 1e12 ? t * 1000 : t; };
   async function srvPull(code, force) {
     if (!SRV_ON() || !code) return;
     if (!force && Date.now() - (srvPulled[code] || 0) < SRV_FRESH) return;
@@ -27939,7 +27966,7 @@ void main() {
              بمعرّفها، فتبديلُ معرّفها يجعلها ضرّةً لنفسها */
           if (postEmpty(mine) && !mine.srvH) {
             mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
-            if (r.ts) mine.ts = r.ts * 1000;
+            if (r.ts) mine.ts = srvMs(r.ts);
             mine.st = r.st || 'pub'; delete mine.srvH; delete mine.srvBig;
             cut++; return;
           }
@@ -27956,7 +27983,7 @@ void main() {
           id: r.id, uid: r.uid, me: true, st: r.st || 'pub',
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
-          ts: (r.ts || 0) * 1000 || Date.now(),
+          ts: srvMs(r.ts) || Date.now(),
           pin: r.pin ? 1 : 0,
           data: r.data,
         });
@@ -27976,7 +28003,7 @@ void main() {
         me: false,                            /* الختمُ: محسوبٌ لا مقروء */
         u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
         likes: r.likes | 0, liked: !!r.liked,   /* العدُّ من الخادم — يُقرأ ولا يُخترع */
-        ts: (r.ts || 0) * 1000 || Date.now(),
+        ts: srvMs(r.ts) || Date.now(),
         /* ===== والتثبيتُ صار يسافر =====
            كان يُستنتج من الشكل («مساهمةُ الموقع فيها غلافٌ ⇒ مثبَّتة») لأنّه لم
            يكن عمودًا. فما ثُبّت بعد ذلك لم يُعرف تثبيتُه فلم يصر غلافًا أبدًا.

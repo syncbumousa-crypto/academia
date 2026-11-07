@@ -443,7 +443,7 @@
     const foot = `<div class="post__top">
         <span class="post-av post-av--sm">${avatarHTML(p)}</span>
         <div class="post-meta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, key)}
           <button type="button" class="post-like post-like--bare ${p.liked ? 'on' : ''}" ${likeAttr}><span class="lk-h">♥</span><span class="lk-n">${p.likes || 0}</span></button>
         </div>
@@ -453,7 +453,7 @@
        وعلى يسارها عمود = [اسم · تاريخ · قائمة النقاط] ثم المحتوى ثم إبهاما مفيد/غير مفيد */
     if (sec === 'info' || sec === 'doc' || sec === 'abs' || sec === 'grade' || isSrc) {
       const meta = `<div class="post-ytmeta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, key)}${pinBadge(p)}
         </div>`;
       /* مؤشّر اكتمال المساهمة (المادة والدكتور): يمين الإبهام = أول عنصر في صفّ التفاعل RTL
@@ -547,6 +547,27 @@
     const k = pstOf(p), o = PST()[k];
     return `<span class="pst-badge pst-badge--post is-${k}"
         title="${esc(o.n)} — ${esc(o.d)}" aria-label="${esc(o.n)}">${o.ic}</span>`;
+  }
+  /* ===== شارة «منقولة» =====
+     مساهمةٌ نُقلت من موقعٍ قديم (مجتمع STKFUPM) تحمل أصلَها في ‎data.imp‎:
+       { src: 'stkfupm', url, user, ts }
+     فيُكتب بجانب الاسم «from» وشعارُ الموقع، والضغطُ يفتح الموضوعَ الأصليّ.
+     والاسمُ والصورةُ اسمُ كاتبها هناك وصورتُه — حسابٌ مستورَد (‎uid = stk-…‎)
+     لا يدخل أحدٌ به. */
+  const IMP_SRC = {
+    stkfupm: { n: 'STKFUPM', logo: 'assets/brand/stkfupm-logo.svg', t: 'منقولة من مجتمع STKFUPM' },
+  };
+  function impBadge(p) {
+    const im = p && p.data && p.data.imp;
+    const o = im && IMP_SRC[im.src];
+    if (!o) return '';
+    const url = /^https:\/\//.test(im.url || '') ? im.url : '';
+    const tip = o.t + (im.user ? ' — @' + im.user : '') +
+      (im.ts ? ' · ' + new Date(im.ts).getFullYear() : '');
+    const inner = `<i class="imp-badge__f">from</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
+    return url
+      ? `<a class="imp-badge" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</a>`
+      : `<span class="imp-badge" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</span>`;
   }
   /* شارة الوضع يمين زرّ الإرسال: تُقرأ دائمًا، وتُضغط ليُبدَّل الوضع من القائمة نفسها */
   /* المساهمة المفتوحة خاويةٌ؟ فلا وضعَ يُعلن ولا شيءَ يُنشر — الأيقونتان تُخفيان معًا */
@@ -709,7 +730,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('info', d)}
         </div>
@@ -742,7 +763,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('grade', p.data)}
         </div>
@@ -773,7 +794,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot('abs', p.data)}
         </div>
@@ -797,7 +818,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${fields}
           ${editActsFoot(area, p.data)}
         </div>
@@ -812,7 +833,7 @@
       <div class="post__top">
         <span class="post-av post-av--sm">${avatarHTML(p)}</span>
         <div class="post-meta">
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, `${sec}:${i}`)}
         </div>
         <div class="post-side">
@@ -1067,7 +1088,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           ${head}
           ${editActsFoot('doc', d)}
         </div>
@@ -1224,7 +1245,7 @@
       inner = `<div class="cm-back">
           <button type="button" class="cm-backbtn" id="cm-back">← ${T().backToList}</button>
           <span class="post-av post-av--sm">${avatarHTML(p)}</span>
-          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+          ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
           ${dateBtnHTML(p, `${sec}:${cmView.pi}`)}
           <button type="button" class="post-like ${p.liked ? 'on' : ''}" data-like="${cmView.pi}">♥ ${p.likes || 0}</button>
         </div>` + viewHTML(sec, p.data);
