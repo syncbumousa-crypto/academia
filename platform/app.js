@@ -9147,7 +9147,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const KT_NEW = () => ({ id: 'kt' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), rows: [T().ktHead.slice(), T().ktRow.slice()] });
   const ktHost = sel => { const pk = edPack(); if (!pk) return null; if (sel === '') return pk; const h = findNode(pk.deck, sel); return h ? h.n : null; };
   /* الخانةُ نفسُها هي الحقل (لا مربّعٌ داخل مربّع): ‎th/td‎ تُحرَّر كلُّها، فيُنقر في أيّ موضعٍ منها */
-  const ktEd = (r, c) => ` contenteditable="plaintext-only" spellcheck="false" dir="auto" data-ktr="${r}" data-ktc="${c}"`;
+  /* لا ‎dir=auto‎ على الخانة: اتّجاهُها اتّجاهُ الجدول (فتستقيم حدودُها وانحناءاتُها المنطقيّة)، ونصُّها
+     يأخذ اتّجاهَه بـ‎unicode-bidi: plaintext‎ */
+  const ktEd = (r, c) => ` contenteditable="plaintext-only" spellcheck="false" data-ktr="${r}" data-ktc="${c}"`;
   const ktOk = on => `<button type="button" class="kt-ok${on ? ' on' : ''}" data-ktok aria-pressed="${on}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   function ktViewHTML(id, sel) {
     const host = ktHost(sel), tabs = (host && host.kt) || [];

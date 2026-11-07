@@ -16440,19 +16440,21 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
    بسطح الحقول وحروف التسميات، والمصطلحُ بحرف القيم، والمعنى في مربّعٍ متقطّعٍ كحقول التحرير، وعلامةُ ✓
    بأخضر «اكتمل» الهادئ، وزرُّ الإضافة بذهب أزرار الإضافة. وكلُّ خانةٍ نصٌّ يُحرَّر في مكانه */
 .kt-view { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+/* الرأسُ وصفُّ «١» شريطان منفصلان (بطلب صاحب الموقع): بينهما فسحة، ولكلٍّ منهما حدُّه وانحناءُ طرفيه */
 .kt {
-  width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; overflow: hidden;
-  border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); border-radius: 14px;
-  background: transparent; color: var(--u-tx, #14233f); font-size: 13.5px;
+  --kt-l: 1px solid var(--u-line, rgba(44, 94, 101, .18));
+  width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0 8px; margin: -8px 0;
+  border: 0; background: transparent; color: var(--u-tx, #14233f); font-size: 13.5px;
 }
-.kt th, .kt td { vertical-align: top; text-align: start; border: 0; border-inline-start: 1px solid var(--u-line, rgba(44, 94, 101, .18)); }
-.kt th:first-child, .kt td:first-child { border-inline-start: 0; }
-.kt th { background: var(--u-surf, rgba(44, 94, 101, .06)); padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--u-lab, #5d6b82); border-bottom: 1px solid var(--u-line, rgba(44, 94, 101, .18)); }
+.kt th, .kt td { vertical-align: top; text-align: start; border: 0; border-top: var(--kt-l); border-bottom: var(--kt-l); border-inline-start: var(--kt-l); }
+.kt th:first-child, .kt td:first-child { border-start-start-radius: 12px; border-end-start-radius: 12px; }
+.kt th:last-child, .kt td:last-child { border-inline-end: var(--kt-l); border-start-end-radius: 12px; border-end-end-radius: 12px; }
+.kt th { background: var(--u-surf, rgba(44, 94, 101, .06)); padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--u-lab, #5d6b82); }
 .kt td { padding: 12px 14px; }
 .kt .kt-c0 { width: 64px; text-align: center; }
 .kt .kt-c1 { width: 28%; }
 .kt .kt-c3 { width: 72px; text-align: center; vertical-align: middle; }
-.kt-t { line-height: 1.6; outline: none; word-break: break-word; white-space: pre-wrap; cursor: text; }
+.kt-t { line-height: 1.6; outline: none; word-break: break-word; white-space: pre-wrap; cursor: text; unicode-bidi: plaintext; }
 span.kt-t { display: block; min-height: 1.6em; border-radius: 6px; }
 /* الخانةُ المحرَّرة تُعرف بإطارٍ ذهبيٍّ داخليّ وأرضيّةِ الحقول — فهي الحقلُ نفسُه */
 th.kt-t:focus, td.kt-t:focus { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); background: var(--u-in-bg, #fff); }
