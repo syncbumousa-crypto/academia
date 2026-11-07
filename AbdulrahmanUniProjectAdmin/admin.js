@@ -145,8 +145,13 @@
   if (!cat || !Array.isArray(cat.courses)) seedCatalog();
   cat.tags = cat.tags || [];
   cat.courses = cat.courses || [];
-  /* ترقية الكتالوج (٢): وسوم الكليات الثلاث تُستبدل بتخصص واحد «نظم المعلومات» على كل المواد */
-  if (cat.v !== 2) {
+  /* ترقية الكتالوج (٢): وسوم الكليات الثلاث تُستبدل بتخصص واحد «نظم المعلومات» على كل المواد
+     ===== وتقع على ما قبل (٢) وحدَه =====
+     كان الشرطُ ‎cat.v !== 2‎. لكنّ النشرَ يكتب ‎v = Date.now()‎، والخادمُ يردّ ‎v‎ رقمَ
+     نسخته (‎catalog_rev‎، وقتٌ بالمللي). فكلُّ كتالوجٍ نُشر مرّةً كان «ليس ٢» —
+     فتُردّ تخصّصاتُه كلُّها إلى «نظم المعلومات» عند أوّل فتحٍ للوحة، ثمّ يُنشر ذلك.
+     وهي علّةُ «أضفتُ تخصّصاتٍ فذهبت». فما بلغ (٢) أو جاوزه لا يُرقّى */
+  if (!(Number(cat.v) >= 2)) {
     cat.tags = [Object.assign({}, MIS)];
     cat.courses.forEach(c => { c.tags = [MIS.id]; });
     cat.v = 2;
@@ -1280,5 +1285,55 @@
      فتح اللوحةَ ولم يضغطه بقي المحرّكُ بلا هويّة — وحينئذٍ تُجذب مساهماتُه
      كأنّها لغيره فلا تُحرَّر. وهي العلّةُ التي بقيت بعد إصلاح الجسر. */
   whoPaint();
+
+  /* ============================================================
+     نسختُك المعلّقة ونسخةُ الخادم الأحدث
+     ============================================================
+     ما حُرِّر ولم يبلغ الخادمَ يبقى ‎dirty‎، والموقعُ لا يسحب فوقه (وهذا صوابٌ: لا
+     يُمحى عملٌ بلا كلمة). لكنّ الخادمَ قد يتبدّل في الأثناء — تخصّصاتٌ أُضيفت من
+     القاعدة مثلًا — فأوّلُ نشرٍ بعدها يكتب النسخةَ المعلّقةَ كلَّها فوقه ويمحو ما
+     أُضيف هناك. فيُقال لصاحب اللوحة ويختار:
+       · ادمج: تخصّصاتُ الخادم تبقى، ويُضاف إليها ما عندك ممّا ليس فيها (بالاسم
+         العربيّ)، وموادُّ الخادم الغائبةُ عندك تُضاف — ثمّ يُنشر الكلّ
+       · خذ نسخة الخادم: تُترك المعلّقةُ ويُؤخذ ما على الخادم */
+  (async function catDrift() {
+    if (!cat || !cat.dirty) return;
+    let j = null;
+    try { const r = await fetch('/api/catalog', { cache: 'no-store' }); j = r.ok ? await r.json() : null; } catch (e) {}
+    if (!j || !Array.isArray(j.tags) || !Array.isArray(j.courses) || String(j.v) === String(cat.v)) return;
+    const bar = document.createElement('div');
+    bar.id = 'cat-drift';
+    bar.setAttribute('style', 'position:fixed;inset-inline:16px;bottom:16px;z-index:9999;max-width:560px;margin-inline:auto;'
+      + 'background:#fff7e6;color:#5a3d00;border:1px solid #e8c77a;border-radius:14px;padding:14px 16px;'
+      + 'box-shadow:0 10px 30px rgba(0,0,0,.15);font-size:13.5px;line-height:1.8');
+    const mine = (cat.tags || []).filter(t => !j.tags.some(x => x.ar === t.ar));
+    bar.innerHTML = '<b>عندك تعديلاتٌ على الكتالوج ما وصلت الخادم، والخادمُ فيه نسخةٌ أحدث</b>'
+      + '<div>على الخادم ' + j.tags.length + ' تخصّصًا. ' + (mine.length ? 'وعندك ' + mine.length + ' ليست فيه: ' + mine.map(t => t.ar).join('، ') : 'وكلُّ تخصّصاتك موجودةٌ فيه') + '.</div>'
+      + '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
+      + '<button type="button" data-k="merge" style="font:inherit;font-weight:700;padding:8px 14px;border-radius:10px;border:0;background:#2c5e65;color:#fff;cursor:pointer">ادمج وانشر</button>'
+      + '<button type="button" data-k="take" style="font:inherit;padding:8px 14px;border-radius:10px;border:1px solid #c9a24a;background:transparent;color:inherit;cursor:pointer">خذ نسخة الخادم</button></div>';
+    document.body.appendChild(bar);
+    bar.addEventListener('click', async e => {
+      const k = e.target && e.target.dataset && e.target.dataset.k;
+      if (!k) return;
+      if (k === 'take') {
+        cat = { v: j.v, tags: j.tags, courses: j.courses };
+      } else {
+        const tags = j.tags.slice();
+        mine.forEach(t => tags.push(t));
+        const courses = (cat.courses || []).slice();
+        j.courses.forEach(c => {
+          const have = courses.find(x => x.code === c.code);
+          if (!have) { courses.push(c); return; }
+          /* ووسومُ المادّة تُجمع: ما وسمه الخادمُ يبقى موسومًا */
+          have.tags = Array.from(new Set([...(have.tags || []), ...(c.tags || [])]));
+        });
+        cat = { v: cat.v, tags, courses, dirty: 1 };
+      }
+      try { localStorage.setItem(LS_CAT, JSON.stringify(cat)); } catch (er) {}
+      if (k === 'merge') await catPublish();
+      location.reload();
+    });
+  })();
 
 })();

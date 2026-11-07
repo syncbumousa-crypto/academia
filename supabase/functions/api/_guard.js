@@ -42,7 +42,10 @@ export const SEC = {
   'referrer-policy': 'same-origin',
   'x-frame-options': 'SAMEORIGIN',
   'access-control-allow-origin': '*',
-  'access-control-allow-headers': 'content-type, authorization, x-as',
+  /* ‏‎x-alock‎: رمزُ قفل اللوحة — يقرؤه ‎lock.js‎ و‎admin.js‎ و‎catalog.js‎، ويرسله ‎api-base.js‎
+     مع كلّ نداءٍ بعد فتح القفل. فإن لم يُذكر ههنا ردّ المتصفّحُ النداءَ كلَّه قبل أن يبلغ
+     الخادم — فاللوحةُ تقول «تعذّر الوصول إلى الخادم» لكلّ من فتحها مرّةً */
+  'access-control-allow-headers': 'content-type, authorization, x-as, x-alock',
   'access-control-allow-methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
   'access-control-expose-headers': 'content-type',
   'access-control-max-age': '86400',
