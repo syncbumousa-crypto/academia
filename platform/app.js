@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -8941,10 +8941,48 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ['cards', '<rect x="3" y="7.5" width="13" height="12.5" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v11"/>'],
     ['table', '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/>'],
   ];
-  const pkViewBar = where => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">${PK_VIEWS.map(([k, ic]) =>
-    `<button type="button" class="pk-vbar__b${k === 'folder' ? ' on' : ' is-soon'}" data-pkview="${k}" aria-pressed="${k === 'folder'}"
-      title="${esc(T()['pkView_' + k] + (k === 'folder' ? '' : ' — ' + T().pkViewSoon))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`).join('')}</span>`;
+  /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
+     حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
+  const pkVw = {}, pkFo = {}, pkFs = {};
+  const pkVwOf = id => pkVw[id] || 'folder';
+  const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">${PK_VIEWS.map(([k, ic]) => {
+    const on = pkVwOf(id) === k;
+    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
+      title="${esc(T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`; }).join('')}</span>`;
+  /* ===== شريطُ المجلدات في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) =====
+     هو مربّعاتُ «ورقة الملخّص» بعينها (ROADMAP-FOLDERS): صفٌّ أفقيٌّ، والمتوسِّعُ أبناؤه
+     **في جوفه**، وواحدٌ متوسِّعٌ في الصفّ. شجرتُه من ‎pgFolds‎ وأصنافُه ‎.pg-*‎ نفسُها —
+     فالشكلُ واحدٌ في الموضعين. ويفترق عنها بشيءٍ واحد: **الاختيار**. فكلُّ مربّعٍ زرٌّ
+     (والساكنُ هناك يُختار ههنا)، والمختارُ يُوسم، وهو المجلدُ الذي يُعرض جوفُه تحته */
+  function pkBoxHTML(nodes, open, parentKey, sel) {
+    if (!nodes || !nodes.length) return '';
+    const openId = open.get(parentKey);
+    return '<div class="pg-row">' + nodes.map(k => {
+      const has = k.kids && k.kids.length, wide = has && k.id === openId;
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '">'
+        + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
+        + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
+        + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
+        + '</div>';
+    }).join('') + '</div>';
+  }
+  /* اسمُ المجلد المختار — يُبحث في الشجرة كلّها، والجذرُ ‎''‎ */
+  function pkFoldName(folds, id) {
+    let hit = null;
+    (function walk(a) { (a || []).forEach(k => { if (!hit && k.id === id) hit = k; if (!hit) walk(k.kids); }); })(folds);
+    return hit ? hit.name : '';
+  }
+  function pkAltView(id, deck) {
+    const folds = pgFolds(deck), v = pkVwOf(id);
+    if (!folds.length) return `<div class="pk-vwph">${esc(T().pkStripEmpty)}</div>`;
+    if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
+    const open = pkFo[id] || (pkFo[id] = new Map());
+    const sel = pkFs[id];
+    return `<div class="pg-folds pk-fstrip" data-pkid="${esc(id)}">${pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
+      + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
+  }
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
       ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
         ? `<span class="x3-artwrap">${x3ArtHTML(p, kind, deck)}${cxMaxMini(p.id)}</span>`
@@ -8991,7 +9029,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      ${kind === 'c' && open ? pkViewBar() : ''}   <!-- طرقُ العرض تخصّ الجوف: لا تُعرض والرزمةُ مطويّة -->
+      ${kind === 'c' && open ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض تخصّ الجوف: لا تُعرض والرزمةُ مطويّة -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
      اسم البطاقة هو وجهها — أي السؤال المكتوب فيها */
@@ -9210,7 +9248,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                ولا تُعار ‎cx-ro‎: تلك تحمل مع الهندسة **حكمَ التحديد** (‎cxSelSync‎ تبحث
                عن ‎.x3.cx-ro‎ لتعرف شجرةَ النشر)، فلو لبستها الشروحُ لَالتبست الشجرتان
                في آلةٍ لا تخصّ الهندسة. فوسمٌ ثالثٌ يحمل الهندسةَ وحدَها -->
-          ${open ? `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>` : ''}
+          ${open && kind === 'c' && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck)
+            : open ? `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>` : ''}
           ${reactRowHTML(p, likeAttr, '')}
         </div>
         ${postMenuHTML(p, likeAttr, `data-sub="${sub}"`)}
@@ -18967,7 +19006,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   function cardEditCard(p, i) {
     const d = p.data;
-    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}" data-pi="${i}" data-sub="cards">
+    const vwAlt = pkVwOf(p.id) !== 'folder';
+    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -18982,9 +19022,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <!-- وخبرُ المساهمة كلِّها: يسارَ شارات الأنواع، وهو مجموعُ الشجرة -->
             <span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>
             <!-- وشريطُ طرق العرض في التحرير كذلك، يسارَ أيقونة التعليقات مباشرةً -->
-            ${pkViewBar('edit')}
+            ${pkViewBar('edit', p.id)}
           </div>
           ${cxMax ? cxHdLine() : ''}
+          ${vwAlt ? pkAltView(p.id, d.deck) : ''}
           <div id="cm-cards"></div>
           ${cxFoot(d)}
         </div>
@@ -20222,9 +20263,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
   document.addEventListener('click', e => {
     const pv = e.target.closest('#cm-body [data-pkview]');
-    if (pv) {   /* شريطُ طرق العرض: المجلّديُّ قائم، والبقيّةُ «قريبًا» — ولا يُطوى الرأسُ بنقرةٍ عليه */
+    if (pv) {   /* شريطُ طرق العرض: يُبدّل عرضَ هذه المساهمة وحدَها — ولا يُطوى الرأسُ بنقرةٍ عليه */
       e.preventDefault(); e.stopPropagation();
-      if (pv.dataset.pkview !== 'folder') toast(`${T()['pkView_' + pv.dataset.pkview]} — ${T().pkViewSoon}`);
+      const id = pv.dataset.pkid;
+      if (id && pkVwOf(id) !== pv.dataset.pkview) { pkVw[id] = pv.dataset.pkview; renderCmSection(); }
+      return;
+    }
+    const pf = e.target.closest('#cm-body .pk-fstrip [data-pkf]');
+    if (pf) {
+      /* مربّعٌ في الشريط: يُختار — وإن كان له بنون فُتح جوفُه في صفّه (وأُغلق أخوه)،
+         ونقرُ المختار المفتوح يطويه. البابُ الذي يفتح هو الذي يُغلق (ROADMAP-FOLDERS ق٦) */
+      e.preventDefault(); e.stopPropagation();
+      const id = pf.closest('.pk-fstrip').dataset.pkid, f = pf.dataset.pkf, par = pf.dataset.pkp;
+      const open = pkFo[id] || (pkFo[id] = new Map());
+      if (pf.hasAttribute('aria-expanded')) {
+        if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
+      }
+      pkFs[id] = f;
+      renderCmSection();
       return;
     }
     const hl = e.target.closest('#cm-body [data-hdfold]');
