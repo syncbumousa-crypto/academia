@@ -16441,6 +16441,7 @@ html[data-theme="dark"] .pk-src--book .chtools .pk-lnk.is-open { background: lin
 .pk-src--book .chtools.is-wide { width: 300px; }
 /* وفي النشر (لا عمودَ أدوات): الكتابُ كبيرٌ **في الوسط** (طلبُ صاحب الموقع) — والحشوةُ موزّعةٌ على الجهتين */
 .pk-src--ro .cbk-stage { justify-items: center; padding-inline: 13px; }
+.pk-src--ro .cbk-nav { margin-inline: auto; }   /* وأزرارُ التقليب تحته في الوسط معه — لا على حشوة الكتاب المُلصَق يمينًا */
 .pk-lnk { border-radius: 10px; border: 1.5px dashed rgba(201, 162, 77, .7); background: rgba(225, 193, 114, .07); overflow: hidden; transition: background .15s; }
 .pk-lnk:not(.is-open):hover { background: rgba(225, 193, 114, .16); }
 .pk-lnk.is-open { border-style: solid; border-color: rgba(201, 162, 77, .55); background: var(--u-surf); box-shadow: 0 10px 26px rgba(20, 35, 63, .12); }
