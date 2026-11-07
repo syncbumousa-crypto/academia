@@ -16435,13 +16435,19 @@ html[data-theme="dark"] .pk-src--book .chtools .pk-lnk.is-open { background: lin
   position: relative; display: flex; align-items: center; gap: 6px; height: 30px; border-radius: 7px; cursor: pointer;
   padding-inline: calc(6px + var(--lv) * 18px) 6px; font-size: 12.5px;
 }
-.pk-lnk__r:hover { background: var(--u-hov); }
-.pk-lnk__r.on { background: rgba(225, 193, 114, .2); }
 .pk-lnk__r:focus-visible { outline: 2px solid rgba(201, 162, 92, .6); outline-offset: -2px; }
 /* خطُّ الإرشاد: يمين الابن، تحت مثلّث أبيه */
-.pk-lnk__g { position: absolute; top: 0; bottom: 0; inset-inline-start: calc(12px + (var(--lv) - 1) * 18px); border-inline-start: 1px solid var(--u-line); }
-.pk-lnk__tw { width: 12px; flex: none; text-align: center; font-size: 10px; color: var(--u-mut); }
+/* مثلّثُ الطيّ: مثلّثُ مجلدات الموقع بجانب أيقونة المجلد (‎CX_TRI‎ · ‎.cx-fold--tri‎) —
+   مصمتٌ بلونٍ مكتومٍ واحد، والدورانُ وحدَه يقول حالَه: جانبيٌّ مطويًّا، ونازلٌ مفتوحًا */
+.pk-lnk__tw {
+  flex: none; display: grid; place-items: center; width: 20px; height: 20px; color: var(--u-mut);
+  transform: rotate(90deg); transition: transform .18s;
+}
+html[data-lang="en"] .pk-lnk__tw { transform: rotate(-90deg); }
+.pk-lnk__tw.is-open, html[data-lang="en"] .pk-lnk__tw.is-open { transform: rotate(0deg); }
 .pk-lnk__tw[data-pklnkfold] { cursor: pointer; }
+.pk-lnk__tw.is-void { visibility: hidden; }
+.pk-lnk__tw svg { width: 18px; height: 18px; }
 .pk-lnk__r .pk-fi { width: 16px; height: 16px; flex: none; }
 .pk-lnk__nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pk-lnk__rg { flex: none; padding: 1px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; background: rgba(44, 94, 101, .08); white-space: nowrap; }
