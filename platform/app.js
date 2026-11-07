@@ -8991,7 +8991,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      ${kind === 'c' ? pkViewBar() : ''}
+      ${kind === 'c' && open ? pkViewBar() : ''}   <!-- طرقُ العرض تخصّ الجوف: لا تُعرض والرزمةُ مطويّة -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
      اسم البطاقة هو وجهها — أي السؤال المكتوب فيها */
