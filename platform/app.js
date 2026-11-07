@@ -9232,7 +9232,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const b = pkSrcBk[id], pp = pkLnkPages(b), max = b && b.n ? b.n : '';
     const a = n.pg ? n.pg.a : pp ? pp[0] : '', z = n.pg ? n.pg.z : pp ? pp[1] : '';
     return `<div class="pk-lnk__pop" data-pkid="${esc(id)}" data-fid="${esc(n.id)}" role="dialog" aria-label="${esc(n.name || '')}">
-        <span class="pk-lnk__pnm">${pkFi(folderColor(n))}<b>${esc(n.name || T().pkTitlePh)}</b></span>
         <label>${T().pkLnkFromL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${a}" data-pklnkin="a"></label>
         <label>${T().pkLnkToL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${z}" data-pklnkin="z"></label>
         <button type="button" class="pk-lnk__ok" data-pklnkok data-pkid="${esc(id)}">${T().pkLnkSave}</button>
@@ -9244,14 +9243,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وتنقلب فوقه إن ضاق ما تحته. فلا يقصّها المربّعُ ولا يُزاح بها ما تحتها */
   const pkLnkPlace = () => {
     const L = document.getElementById('pk-lnk-layer'); if (!L) return;
-    const row = document.querySelector(`#cm-body .pk-lnk__r[data-pkid="${CSS.escape(L.dataset.pkid)}"][data-pklnkrow="${CSS.escape(L.dataset.fid)}"]`);
-    if (!row) { L.remove(); return; }
-    const r = row.getBoundingClientRect(), w = L.offsetWidth, h = L.offsetHeight, vw = innerWidth, vh = innerHeight;
-    let left = state.lang === 'en' ? r.left : r.right - w;
-    left = Math.max(8, Math.min(vw - w - 8, left));
-    let top = r.bottom + 6;
-    if (top + h > vh - 8) top = Math.max(8, r.top - h - 6);
-    L.style.left = left + 'px'; L.style.top = top + 'px';
+    /* تخرج من زرّ «اربط» نفسِه: يسارَه (يمينَه في الإنجليزيّة) ووسطُها على وسطه، وسهمُها يشير إليه */
+    const btn = document.querySelector(`#cm-body .pk-lnk__r[data-pkid="${CSS.escape(L.dataset.pkid)}"] [data-pklnkpop="${CSS.escape(L.dataset.fid)}"]`);
+    document.querySelectorAll('#cm-body [data-pklnkpop].is-on').forEach(x => { if (x !== btn) x.classList.remove('is-on'); });
+    if (!btn) { L.remove(); return; }
+    btn.classList.add('is-on');
+    const r = btn.getBoundingClientRect(), w = L.offsetWidth, h = L.offsetHeight;
+    const en = state.lang === 'en';
+    const left = en ? r.right + 10 : r.left - w - 10;
+    const top = r.top + r.height / 2 - h / 2;   /* تلزم زرَّها ولو خرج عن الشاشة — فهي منه لا من الشاشة */
+    L.style.left = Math.round(left) + 'px'; L.style.top = Math.round(top) + 'px';
+    L.style.setProperty('--ay', Math.round(r.top + r.height / 2 - top) + 'px');
   };
   const pkLnkPopShow = () => {
     const old = document.getElementById('pk-lnk-layer'); if (old) old.remove();
@@ -9266,7 +9268,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   window.addEventListener('scroll', pkLnkPlace, true);
   window.addEventListener('resize', pkLnkPlace);
-  const pkLnkClose = () => { let any = false; Object.keys(pkLnk.pop).forEach(k => { if (pkLnk.pop[k]) any = true; pkLnk.pop[k] = null; }); const L = document.getElementById('pk-lnk-layer'); if (L) L.remove(); return any; };
+  const pkLnkClose = () => { document.querySelectorAll('#cm-body [data-pklnkpop].is-on').forEach(x => x.classList.remove('is-on')); let any = false; Object.keys(pkLnk.pop).forEach(k => { if (pkLnk.pop[k]) any = true; pkLnk.pop[k] = null; }); const L = document.getElementById('pk-lnk-layer'); if (L) L.remove(); return any; };
   /* نقراتُ الطبقة: «اربط» تحفظ، و✕ يُزيل، وما سواهما داخلها لا يُغلقها. والنقرُ خارجها يُغلقها
      (ونقرُ حبّة مجلدٍ آخرَ يفتح نافذتَه — يُترك لمستمع الشجرة) */
   document.addEventListener('click', e => {
@@ -9441,6 +9443,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const k = tl.children; if (!k.length) return;   /* قامةُ الزرّين لا قامةُ العمود (العمودُ ممدودٌ بطول الصفّ) */
           const h = k[k.length - 1].getBoundingClientRect().bottom - k[0].getBoundingClientRect().top;
           tl.style.paddingTop = Math.max(0, Math.round(br.top + br.height / 2 - vt - h / 2)) + 'px';
+          pkLnkPlace();   /* والعمودُ تحرّك: نافذةُ «اربط» تلحق زرَّها */
         },
       });
     });
@@ -21514,7 +21517,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const fid = lp.dataset.pklnkpop;
       pkLnk.pop[id] = pkLnk.pop[id] === fid ? null : fid;
       renderCmSection();
-      if (pkLnk.pop[id]) { const f = document.querySelector('#pk-lnk-layer [data-pklnkin=a]'); if (f) { f.focus(); f.select(); } }
+      if (pkLnk.pop[id]) { const f = document.querySelector('#pk-lnk-layer [data-pklnkin=a]'); if (f) { f.focus({ preventScroll: true }); f.select(); } }
       return;
     }
     const lk = e.target.closest('#cm-body [data-pklnk], #cm-body [data-pklnkfold], #cm-body [data-pklnkrow]');
