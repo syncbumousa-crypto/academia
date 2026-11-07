@@ -4198,14 +4198,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const nameOf = p => (p.me ? esc(state.profile.name || '') : esc((p.u && p.u.name) || '')) || T().meName;
 
   /* تاريخ المشاركة بصيغة هادئة: اليوم/أمس/قبل N أيام، وبعدها التاريخ الكامل */
+  /* ===== وتاريخٌ ضُرب في ألفٍ مرّتين يُردّ =====
+     كان الجذبُ يضرب ‎ts‎ الخادمِ (وهو مللي) في ألف، فيقع بعد آلاف السنين، ويقرؤه
+     ‎agoTxt‎ «اليوم». أُصلح الجذبُ (‎srvMs‎)، لكنّ ما حُفظ في الدرج قبل الإصلاح بقي
+     كما هو — صفوفُ الدكاترة خاصّةً، فهي تُحفظ تحت الدكتور ولا تُعاد من الخادم.
+     فما جاوز اليومَ بسنةٍ فهو ذاك الخطأ لا غير: يُقسم على ألفٍ عند العرض. */
+  const tsFix = ts => (ts && ts > Date.now() + 365 * 86400000) ? Math.round(ts / 1000) : ts;
   const agoTxt = ts => {
+    ts = tsFix(ts);
     if (!ts) return '';
     const n = Math.max(0, Math.floor((Date.now() - ts) / 86400000));
     const rel = T().ago(n);
     return rel || fmtDate(new Date(ts).toISOString().slice(0, 10));
   };
   /* التاريخ الرقمي المطلق (يوم/شهر/سنة) — يظهر بدل النسبي عند ضغط مفتاح التاريخ */
-  const absDateTxt = ts => ts ? fmtDate(new Date(ts).toISOString().slice(0, 10)) : '';
+  const absDateTxt = ts => (ts = tsFix(ts)) ? fmtDate(new Date(ts).toISOString().slice(0, 10)) : '';
 
   /* ---------- مفتاح التاريخ: التاريخ نفسه هو الزرّ ----------
      نقطة صغيرة تسبق التاريخ: مجوّفة والزمن نسبيّ («قبل ٣ أيام»)، وتمتلئ ذهبًا
@@ -4328,7 +4335,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                           u: post.u || { name: T().docByAnon }, likes: 0, liked: false,
                           ts: (d.imp && d.imp.ts) || post.ts || Date.now(), data });
           hit++;
-        } else if (JSON.stringify(p.data) !== JSON.stringify(data)) { p.data = data; hit++; }
+        } else {
+          if (JSON.stringify(p.data) !== JSON.stringify(data)) { p.data = data; hit++; }
+          /* والتاريخُ يُحدَّث كالمتن: صفٌّ حُفظ بتاريخٍ خاطئ (جذبٌ قديمٌ ضرب المللي في
+             ألف) لا يُصلحه إلّا أن يُكتب من جديد كلّما جاء من الخادم */
+          const want = (d.imp && d.imp.ts) || post.ts;
+          if (want && p.ts !== want) { p.ts = want; hit++; }
+        }
+        if (dr.ts && dr.ts > Date.now() + 365 * 86400000 && post.ts) { dr.ts = post.ts; hit++; }
       });
     });
     return hit;
