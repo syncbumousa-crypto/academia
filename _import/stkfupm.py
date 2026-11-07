@@ -20,7 +20,7 @@ from datetime import datetime
 BASE = 'https://community.stkfupm.com'
 ROOT = os.path.dirname(os.path.abspath(__file__))
 MEDIA_URL = 'https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/'
-INLINE_MAX = 200 * 1024          # ما دونه يسكن المتنَ ‎data:‎، وما فوقه جدولَ الوسائط
+INLINE_MAX = 64 * 1024           # ما دونه يسكن المتنَ ‎data:‎، وما فوقه جدولَ الوسائط (يُنزَّل حين يُضغط لا مع كلّ فتحٍ للمادّة)
 MIME = {'.pdf': 'application/pdf', '.doc': 'application/msword', '.ppt': 'application/vnd.ms-powerpoint',
         '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -56,6 +56,17 @@ PICK = {
     (172733, 1,  '', None),                                   # Rygart (2016): صارت ميدترم وفاينل من 151
     (115213, 8,  '', None),                                   # Brain_Man (2011): الـ A+ من 95
   ],
+  # ‏‎ENGL 101‎ «مهارات الخطاب الأكاديمي» — اسمُها لم يتغيّر
+  'ENGL 101': [
+    (120478, 8,  '', None), (120478, 11, '', None), (120478, 13, '', None),   # موضوعُ تقييم المقرّر
+    (120478, 16, '', None), (120478, 18, '', None), (120478, 19, '', None),
+    (120478, 21, '', None), (120478, 22, '', None), (120478, 23, '', None),
+    (120478, 25, '', None), (120478, 26, '', None), (120478, 27, '', None),
+    (120478, 28, '', None),
+    (102863, 1,  '', (r'^انجلش 101', 19)),                    # student_NZ (2011): قسمُ 101 من شرحه للكورسات الثلاثة
+    (102863, 42, '', (r'^101 عندك', 1)),                      # equal (2011): سطرُ 101 من مقارنته
+    (86478,  1,  '', None),                                   # Phenomenon (2010): انطباعُه عن الميدترم
+  ],
 }
 
 # ===== المصادر =====
@@ -86,6 +97,33 @@ PICK_SRC = {
     ('srcP', 132383, 2,  []),    # KeMoOo (2012): old exams + read the book
     ('srcP', 156412, 5,  []),    # Medoalkebsi (2014): احفظ الأولد اقزامز
   ],
+  'ENGL 101': [
+    ('srcU', 117681, 1,  [('The Science Behind Diet and Cancer(Tran).doc', 'stkfupm-117681-1-The Science Behind Diet and Cancer(Tran).doc', r'^The Science Behind Diet'), ('Omega Oil(Trans) .doc', 'stkfupm-117681-1-Omega Oil(Trans) .doc', r'Omega Oil\(Trans')]),   # scorbion (2012): قطعُ الريدنق مترجمةَ الكلمات
+    ('srcU', 123055, 8,  [('READING Mosquitos.doc', 'stkfupm-123055-8-READING Mosquitos.doc', r'^READING Mosquitos'), ('READING Osteoporosis.doc', 'stkfupm-123055-8-READING Osteoporosis.doc', r'^READING Osteoporosis')]),   # user7909 (2012): قطعتا ريدنق الميدترم
+    ('srcU', 113856, 3,  [('Words.doc', 'stkfupm-113856-3-Words.doc', r'^Words\.doc')]),       # Opalmax (2011): AWL Sub-list 1 من أ. جوش بيلام
+    ('srcU', 141950, 8,  [('ENGLISH 101 MIDTERM EXAMINATION.doc', 'stkfupm-141950-8-ENGLISH 101 MIDTERM EXAMINATION.doc', r'^ENGLISH 101 MIDTERM EXAMINATION\.doc')]),       # Exuse_Me (2013): قطعةُ الميدترم مترجمة
+    ('srcU', 88996,  10, [('PORTFOLIO.doc', 'stkfupm-88996-10-PORTFOLIO.doc', r'^PORTFOLIO\.doc')]),       # Abu_3zzoz (2010): متطلّبات البورتفوليو
+    ('srcU', 120478, 5,  [('101 Course Components - Sem 112.doc', 'stkfupm-120478-5-101 Course Components - Sem 112.doc', r'^101 Cours')]),       # ISEngineer210 (2012): مكوّناتُ المقرّر ترم 112 (ودرجاتُه في توزيع الدرجات)
+    ('srcU', 117533, 4,  []),         # user7562 (2012): نقاطُ القرامر المطلوبة
+    ('srcU', 117533, 9,  []),         # ll_M_ll (2012): مواقعُ تشرح القرامر نفسَه
+    ('srcU', 122997, 14, []),         # NASSER_9X (2012): المذاكرةُ للميدترم من واقع تجربة
+    ('srcU', 122997, 17, []),         # 3loole (2012): القطعتان والورد لست والوحدات
+    ('srcU', 122997, 5,  []),         # Brilliant_Ac (2012): افهم القطعتين كاملتين
+    ('srcU', 141950, 2,  []),         # user9537 (2013): كيف أخذ A في الميدترم
+    ('srcU', 157782, 3,  []),         # mountine_man (2014): تقسيمُ القطعة ومعلوماتُها المهمّة
+    ('srcU', 150792, 9,  []),         # user8581 (2013): ما في الميدترم
+    ('srcU', 132327, 5,  []),         # abu_khaled (2012): البريزنتيشن
+    ('srcP', 104715, 1,  [('Water Resources Comp 1.doc', 'stkfupm-104715-1-Water Resources Comp 1.doc', r'^Water Resources Comp 1\.doc'), ('Water Resources Comp 2.doc', 'stkfupm-104715-1-Water Resources Comp 2.doc', r'^Water Resources Comp 2\.doc'), ('Water Resources Vocabulary.doc', 'stkfupm-104715-1-Water Resources Vocabulary.doc', r'^Water Resources Vocabulary\.doc'),
+                          ('CO2 Capture and Storage - Vocab Quiz.doc', 'stkfupm-104715-16-CO2 Capture and Storage - Vocab Quiz.doc', None),
+                          ('Biodiversity Comp 1.doc', 'stkfupm-104715-21-Biodiversity Comp 1.doc', None),
+                          ('Facts on Biodiversity Vocab Quiz.doc', 'stkfupm-104715-21-Facts on Biodiversity Vocab Quiz.doc', None),
+                          ('Agriculture and Development Vocab Quiz.doc', 'stkfupm-104715-26-Agriculture and Development Vocab Quiz.doc', None)]),
+                                      # Ca2oom (2011): حلولُ كويزات الريدنق والفوكاب كلُّها (رفعها على أربع دفعات)
+    ('srcP', 104715, 29, [('4th Agriculture and Development Comp 1.doc', 'stkfupm-104715-29-4th Agriculture and Development Comp 1.doc', r'^4th Agriculture and Development Comp 1\.doc')]),       # user4591 (2011): حلُّ 4th Agriculture and Development Comp 1
+    ('srcP', 114904, 1,  [('Midterm English 101 term 111.zip', 'stkfupm-114904-3-Midterm English 101 term 111.zip', None)]),
+                                      # user7909 (2011): نبذةُ الميدترم وملفُّه
+    ('srcP', 141082, 2,  [('101-RQ2txt.pdf', 'stkfupm-141082-2-101-RQ2txt.pdf', r'^101-RQ2txt')]),       # 7_M_o_o_D (2013): نصوصُ Reading Quiz 2
+  ],
 }
 
 # ===== توزيعُ الدرجات و«المواضيع» =====
@@ -107,6 +145,11 @@ PICK_DATA = {
                               'الإيمان باليوم الآخر 125-138',
                               'الإيمان بقضاء الله وقدره 140-162',
                               'ثمرات الإيمان الاجتماعية: الإيمان وحماية الأمن والأوطان، الإيمان والوقاية من الخمور والمخدرات 301-353']),
+  ],
+  'ENGL 101': [
+    ('grade',   120478, 5,   [('REFLECTIONS ON ENGLISH LEARNING', 5), ('VOCABULARY QUIZZES', 5), ('READING TESTS', 10),
+                              ('WRITING TASKS', 40), ('ORAL PRESENTATIONS', 10), ('MIDTERM EXAMINATION', 15),
+                              ('FINAL EXAMINATION', 15)]),                    # ISEngineer210: مكوّناتُ المقرّر ترم 112
   ],
 }
 
@@ -130,6 +173,30 @@ DOCTORS = {
   'stk-dr-dakheel':  'د. سلمان الدخيل',
   'stk-dr-shalhoub': 'د. صلاح الشلهوب',
   'stk-dr-sulami':   'د. موسى السلمي',
+  # ‏‎ENGL 101‎ — مدرّسو قسم الإنجليزي بأسماء صفحاتهم (والمعرّفُ رقمُ صفحته في الموقع القديم)
+  'stk-dr-en68428': 'Mr. Paul Nicholas',
+  'stk-dr-en68435': 'Mr. Ahmed Daud Ismail',
+  'stk-dr-en68438': 'Mr. Christopher Morris',
+  'stk-dr-en68439': 'Mr. Anthony Donovan',
+  'stk-dr-en68440': 'Mr. Roger Horn',
+  'stk-dr-en68441': 'Mr. Timothy Nelson',
+  'stk-dr-en68442': 'Mr. Kevan Moore',
+  'stk-dr-en68443': 'Mr. John Williams',
+  'stk-dr-en68444': 'Mr. Jeffrey Jameson',
+  'stk-dr-en68447': 'Mr. Thomas Telfer',
+  'stk-dr-en68495': 'Mr. Ralph Kraft',
+  'stk-dr-en68516': 'Mr. Dana Ebbett',
+  'stk-dr-en68556': 'Mr. John Carey',
+  'stk-dr-en68614': 'Mr. Ian Davison',
+  'stk-dr-en69101': 'Mr. Anthony Gibson',
+  'stk-dr-en74185': 'Mr. Savino Sfregola',
+  'stk-dr-en76546': 'Mr. Josh Billam',
+  'stk-dr-en92113': 'Mr. Michael Hartley',
+  'stk-dr-en94806': 'Mr. Jonathan Marquis',
+  'stk-dr-en94986': 'Mr. Tom Daly',
+  'stk-dr-en96633': 'Mr. Lance King',
+  'stk-dr-en118628': 'Mr. Gordon Blazenko',
+  'stk-dr-en118979': 'Mr. Michael Stowe',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
@@ -173,6 +240,31 @@ PICK_DOC = {
     # sulami
     (83818, 13, 'stk-dr-sulami'), (83818, 24, 'stk-dr-sulami'), (83818, 29, 'stk-dr-sulami'), (83818, 30, 'stk-dr-sulami'), (83818, 36, 'stk-dr-sulami'), (83818, 37, 'stk-dr-sulami'), (83818, 38, 'stk-dr-sulami'), (83818, 44, 'stk-dr-sulami'), (83818, 46, 'stk-dr-sulami'), (83818, 47, 'stk-dr-sulami'), (83818, 48, 'stk-dr-sulami'), (83818, 49, 'stk-dr-sulami'), (83818, 50, 'stk-dr-sulami'), (83818, 51, 'stk-dr-sulami'), (83818, 52, 'stk-dr-sulami'), (83818, 54, 'stk-dr-sulami'), (83818, 55, 'stk-dr-sulami'), (83818, 57, 'stk-dr-sulami'), (83818, 58, 'stk-dr-sulami'), (83818, 59, 'stk-dr-sulami'), (83818, 60, 'stk-dr-sulami'), (83818, 65, 'stk-dr-sulami'), (83818, 68, 'stk-dr-sulami'), (83818, 69, 'stk-dr-sulami'), (83818, 70, 'stk-dr-sulami'),
   ],
+  'ENGL 101': [
+    (68428, 16, 'stk-dr-en68428'), (68428, 50, 'stk-dr-en68428'), (68428, 55, 'stk-dr-en68428'),
+    (68435, 4, 'stk-dr-en68435'), (68435, 25, 'stk-dr-en68435'), (68435, 31, 'stk-dr-en68435'), (68435, 35, 'stk-dr-en68435'), (68435, 48, 'stk-dr-en68435'), (68435, 49, 'stk-dr-en68435'), (68435, 51, 'stk-dr-en68435'),
+    (68438, 3, 'stk-dr-en68438'), (68438, 13, 'stk-dr-en68438'), (68438, 27, 'stk-dr-en68438'), (68438, 28, 'stk-dr-en68438'), (68438, 38, 'stk-dr-en68438'),
+    (68439, 3, 'stk-dr-en68439'), (68439, 9, 'stk-dr-en68439'), (68439, 10, 'stk-dr-en68439'), (68439, 11, 'stk-dr-en68439'), (68439, 13, 'stk-dr-en68439'), (68439, 34, 'stk-dr-en68439'), (68439, 35, 'stk-dr-en68439'), (68439, 36, 'stk-dr-en68439'), (68439, 40, 'stk-dr-en68439'), (68439, 46, 'stk-dr-en68439'), (68439, 47, 'stk-dr-en68439'), (68439, 48, 'stk-dr-en68439'), (68439, 58, 'stk-dr-en68439'),
+    (68440, 5, 'stk-dr-en68440'), (68440, 11, 'stk-dr-en68440'), (68440, 17, 'stk-dr-en68440'), (68440, 21, 'stk-dr-en68440'), (68440, 22, 'stk-dr-en68440'), (68440, 24, 'stk-dr-en68440'), (68440, 27, 'stk-dr-en68440'), (68440, 29, 'stk-dr-en68440'), (68440, 47, 'stk-dr-en68440'),
+    (68441, 22, 'stk-dr-en68441'), (68441, 28, 'stk-dr-en68441'), (68441, 30, 'stk-dr-en68441'), (68441, 31, 'stk-dr-en68441'), (68441, 38, 'stk-dr-en68441'), (68441, 39, 'stk-dr-en68441'),
+    (68442, 11, 'stk-dr-en68442'), (68442, 16, 'stk-dr-en68442'), (68442, 17, 'stk-dr-en68442'), (68442, 23, 'stk-dr-en68442'), (68442, 30, 'stk-dr-en68442'),
+    (68443, 11, 'stk-dr-en68443'), (68443, 30, 'stk-dr-en68443'), (68443, 34, 'stk-dr-en68443'), (68443, 35, 'stk-dr-en68443'),
+    (68444, 10, 'stk-dr-en68444'), (68444, 46, 'stk-dr-en68444'), (68444, 87, 'stk-dr-en68444'), (68444, 89, 'stk-dr-en68444'),
+    (68447, 7, 'stk-dr-en68447'), (68447, 8, 'stk-dr-en68447'), (68447, 25, 'stk-dr-en68447'), (68447, 41, 'stk-dr-en68447'), (68447, 52, 'stk-dr-en68447'), (68447, 53, 'stk-dr-en68447'), (68447, 61, 'stk-dr-en68447'),
+    (68495, 4, 'stk-dr-en68495'), (68495, 5, 'stk-dr-en68495'), (68495, 27, 'stk-dr-en68495'), (68495, 35, 'stk-dr-en68495'),
+    (68516, 16, 'stk-dr-en68516'), (68516, 18, 'stk-dr-en68516'), (68516, 20, 'stk-dr-en68516'),
+    (68556, 23, 'stk-dr-en68556'),
+    (68614, 53, 'stk-dr-en68614'), (68614, 59, 'stk-dr-en68614'), (68614, 60, 'stk-dr-en68614'), (68614, 63, 'stk-dr-en68614'), (68614, 64, 'stk-dr-en68614'),
+    (69101, 47, 'stk-dr-en69101'), (69101, 50, 'stk-dr-en69101'), (69101, 52, 'stk-dr-en69101'), (69101, 53, 'stk-dr-en69101'),
+    (74185, 6, 'stk-dr-en74185'), (74185, 9, 'stk-dr-en74185'), (74185, 49, 'stk-dr-en74185'), (74185, 74, 'stk-dr-en74185'),
+    (76546, 24, 'stk-dr-en76546'), (76546, 39, 'stk-dr-en76546'), (76546, 68, 'stk-dr-en76546'), (76546, 97, 'stk-dr-en76546'), (76546, 100, 'stk-dr-en76546'),
+    (92113, 10, 'stk-dr-en92113'), (92113, 14, 'stk-dr-en92113'), (92113, 57, 'stk-dr-en92113'), (92113, 68, 'stk-dr-en92113'), (92113, 73, 'stk-dr-en92113'),
+    (94806, 23, 'stk-dr-en94806'), (94806, 24, 'stk-dr-en94806'), (94806, 28, 'stk-dr-en94806'), (94806, 29, 'stk-dr-en94806'), (94806, 30, 'stk-dr-en94806'), (94806, 31, 'stk-dr-en94806'), (94806, 34, 'stk-dr-en94806'),
+    (94986, 16, 'stk-dr-en94986'), (94986, 27, 'stk-dr-en94986'), (94986, 32, 'stk-dr-en94986'), (94986, 34, 'stk-dr-en94986'), (94986, 37, 'stk-dr-en94986'), (94986, 42, 'stk-dr-en94986'), (94986, 44, 'stk-dr-en94986'), (94986, 46, 'stk-dr-en94986'),
+    (96633, 31, 'stk-dr-en96633'), (96633, 41, 'stk-dr-en96633'), (96633, 48, 'stk-dr-en96633'), (96633, 52, 'stk-dr-en96633'), (96633, 59, 'stk-dr-en96633'), (96633, 61, 'stk-dr-en96633'),
+    (118628, 14, 'stk-dr-en118628'), (118628, 16, 'stk-dr-en118628'), (118628, 21, 'stk-dr-en118628'), (118628, 28, 'stk-dr-en118628'), (118628, 31, 'stk-dr-en118628'), (118628, 35, 'stk-dr-en118628'), (118628, 38, 'stk-dr-en118628'), (118628, 39, 'stk-dr-en118628'),
+    (118979, 14, 'stk-dr-en118979'), (118979, 24, 'stk-dr-en118979'), (118979, 27, 'stk-dr-en118979'), (118979, 28, 'stk-dr-en118979'),
+  ],
 }
 
 EMOJI = {'slight_smile': '🙂', 'smile': '😄', 'smiley': '😃', 'grinning': '😀', 'laughing': '😆',
@@ -185,7 +277,8 @@ EMOJI = {'slight_smile': '🙂', 'smile': '😄', 'smiley': '😃', 'grinning': 
          'point_up': '☝️', 'crazy_face': '🤪', 'cowboy_hat_face': '🤠',
          'person_with_crown': '🤴', 'hibiscus': '🌺', 'smiling_face_with_three_hearts': '🥰',
          'astonished': '😲', 'thumbsdown': '👎', '-1': '👎', 'clap': '👏',
-         'boxing_glove': '🥊', 'nerd_face': '🤓',
+         'boxing_glove': '🥊', 'nerd_face': '🤓', 'face_with_rolling_eyes': '🙄', 'smoking': '🚬',
+         'smirk': '😏', 'heart_eyes': '😍', 'wave': '👋',
          'confused-11': '😕'}   # ‏‎confused-11‎ رمزُ منتدى vBulletin القديم، بقي نصًّا في ديسكورس
 
 def emoji_of(tag):
@@ -214,6 +307,14 @@ def text_of(cooked):
     t = re.sub(r':([a-z_+\-0-9]+):', lambda m: EMOJI.get(m.group(1), m.group(0)), t)
     t = '\n'.join(re.sub(r'[ \t]+', ' ', l).strip() for l in t.split('\n'))
     return re.sub(r'\n{3,}', '\n\n', t).strip()
+
+# سطرُ مرفقٍ في ديسكورس: «اسمُ الملف (12 KB)» أو «صورة.png589×515 13.7 KB»
+ATT_LINE = re.compile(r'^\S.*\.(zip|rar|xls|xlsx|doc|docx|pdf|ppt|pptx|pps|png|jpe?g|gif)(\s*\([\d.]+\s*[KM]B\)|\d+×\d+\s+[\d.]+\s*[KM]B)$', re.I)
+
+def strip_att(t):
+    """في نصٍّ لا ملفَّ معه (التجربة والتقييم) يُحذف سطرُ المرفق: يُشير إلى ملفٍّ لم يُنقل —
+    وقد يكون ملفَّ درجاتٍ تُرك عمدًا. وفي المصادر يحلّ الملفُّ نفسُه محلَّ سطره."""
+    return re.sub(r'\n{3,}', '\n\n', '\n'.join(l for l in t.split('\n') if not ATT_LINE.match(l.strip()))).strip()
 
 def avatar(tpl):
     return BASE + tpl.replace('{size}', '144') if tpl.startswith('/') else tpl
@@ -258,7 +359,7 @@ def main(src):
             t, p = load_post(src, cache, tid, num)
             uid = author(users, p)
             imp = imp_of(t, p)
-            desc = text_of(p['cooked'])
+            desc = strip_att(text_of(p['cooked']))
             if keep:
                 ls = desc.split('\n')
                 i = next(k for k, l in enumerate(ls) if re.search(keep[0], l, re.I))
@@ -274,7 +375,9 @@ def main(src):
             lines = text_of(p['cooked']).split('\n')
             html, fobj = [], {}
             for line in lines:
-                hit = next((f for f in files if re.search(f[2], line)), None)
+                # ‏وكلُّ ملفٍّ يحلّ محلَّ سطرٍ واحد: سطرُ نصٍّ يشبه اسمَه لا يأخذه مرّةً ثانية
+                used = {v['name'] for v in fobj.values()}
+                hit = next((f for f in files if f[2] and f[0] not in used and re.search(f[2], line)), None)
                 if hit:
                     fid = 'stk-f%d-%d' % (p['id'], len(fobj))
                     raw = open(os.path.join(ROOT, 'files', hit[1]), 'rb').read()
@@ -293,6 +396,17 @@ def main(src):
                     html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
                 else:
                     html.append(H.escape(line, quote=False))
+            # ‏ملفٌّ رفعه الكاتبُ نفسُه في ردٍّ آخر من الموضوع (نمطُه ‎None‎): يُلحق بآخر مساهمته
+            for hit in [f for f in files if f[2] is None]:
+                fid = 'stk-f%d-%d' % (p['id'], len(fobj))
+                raw = open(os.path.join(ROOT, 'files', hit[1]), 'rb').read()
+                mime = MIME.get(os.path.splitext(hit[0])[1].lower(), 'application/octet-stream')
+                if len(raw) <= INLINE_MAX:
+                    v = 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())
+                else:
+                    k = hashlib.sha256(raw).hexdigest(); media[k] = (mime, raw, uid); v = MEDIA_URL + k
+                fobj[fid] = {'name': hit[0], 'v': v}
+                html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
             missing = [f[0] for f in files if not any(f[0] == v['name'] for v in fobj.values())]
             if missing: sys.exit('لم يُعثر على سطر المرفق %s في %d#%d' % (missing, tid, num))
             posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': sec,
@@ -325,7 +439,7 @@ def main(src):
             if any(r['id'] == dr for r in have):
                 sys.exit('%s كتب عن %s مرّتين في %s: صفٌّ واحدٌ للدكتور في المساهمة' % (uid, dr, code))
             have.append({'id': dr, 'n': DOCTORS[dr], 'en': '', 'img': '', 'e': '', 'bld': '', 'room': '',
-                         'd': text_of(p['cooked']), 'hours': [], 'teach': 0, 'grade': 0,
+                         'd': strip_att(text_of(p['cooked'])), 'hours': [], 'teach': 0, 'grade': 0,
                          'pid': 'stk-p%d' % p['id'], 'imp': imp})
         for uid, rs in rows.items():
             rs.sort(key=lambda r: r['imp']['ts'])
