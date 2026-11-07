@@ -177,7 +177,7 @@
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
@@ -227,7 +227,7 @@
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
-          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b></div>
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
           <div class="x3-pkhd on">
             ${x3ArtEdit(p, 'v')}
             <span class="vt-grow x3-ttlwrap${d.title ? '' : ' is-ph'}" data-v="${esc(d.title || '') || T().pkTitlePh}">
