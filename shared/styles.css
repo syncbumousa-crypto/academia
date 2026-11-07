@@ -16822,7 +16822,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .kcv-ui .kcv-fit { font-size: 12px; }
 .kcv-zl { min-width: 44px; text-align: center; font-size: 12px; color: var(--u-lab, #5d6b82); font-variant-numeric: tabular-nums; }
 /* في المساهمة المكبَّرة يأخذ اللوحُ ما بقي من الصفحة كلَّه */
-.pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; }
+.pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; margin-bottom: 26px; }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
 .pk--max .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 280px; }
 /* المرحلة ٢: المحدَّدُ بإطارٍ ذهبيّ، والبطاقةُ تُمسك وتُسحب، والنصُّ يُحرَّر بالنقر المزدوج */
 .kcv-card { cursor: grab; user-select: none; }
