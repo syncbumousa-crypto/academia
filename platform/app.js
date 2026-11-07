@@ -9056,7 +9056,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (LGX.cache.has(key)) return LGX.cache.get(key);
     const D = 2, W = w * D, H = h * D, r = h / 2;
     const T = Math.min(16, r), IOR = 1.5, REFR = 6, ZK = 1 - 1 / zoom, EFMAX = 1 / Math.tan(Math.asin(1 / IOR));
-    const L = -115 * Math.PI / 180;
+    const L = Math.atan2(-.9, -.45);
     // مسافةُ نقطةٍ عن كبسولةٍ أفقيّة: بُعدُها عن قطعة المحور ناقصًا نصفَ القطر
     const sdf = (x, y) => { const ax = Math.min(Math.max(x, r), w - r); return Math.hypot(x - ax, y - r) - r; };
     const dc = document.createElement('canvas'), sc = document.createElement('canvas');
@@ -9078,7 +9078,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const dir = Math.cos(Math.atan2(ny, nx) - L), lit = Math.pow(Math.max(dir, 0), 2), back = Math.pow(Math.max(-dir, 0), 3) * .6;
       const rim = Math.pow(Math.max(0, 1 - nd / 1.25), 1.5), fr = Math.pow(Math.max(0, 1 - nd / Math.min(T * .6, h / 5)), 2.2) * .12;
       const gw = Math.pow(Math.max(0, 1 - nd / (T * .5)), 2.5);
-      const A = Math.min(1, fr + rim * (.35 + .65 * Math.max(lit, back)) + gw * (lit * .85 + back * .5) * 1.2) * a;
+      const A = Math.min(1, fr + gw * (lit * .35 + back * .2) + rim * .08) * a;   /* الحافّةُ المضيئةُ نفسُها من ‎--lgx-rim‎ المتحرّك */
       sI.data[k * 4] = sI.data[k * 4 + 1] = sI.data[k * 4 + 2] = 255; sI.data[k * 4 + 3] = A * 255;
     }
     for (let k = 0; k < W * H; k++) {
@@ -20535,6 +20535,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وعند الإفلات تُبتلع القطرةُ في الهدف ثمّ يرتجّ ارتجاجةَ هلام. والإفلاتُ في فراغ الشريط
      يُخرج المجلدَ إلى الطبقة العليا كما كان؛ وفي غير مَهبطٍ تعود القطرةُ إلى مكانها */
   const PKG = { s: null, eat: false };
+  /* ===== ضوءٌ يتحرّك: اللمعانُ على حوافّ الزجاج يميل مع المؤشّر =====
+     كما يميل ضوءُ Liquid Glass مع ميل الجهاز. الضوءُ من فوقُ دائمًا، ويدور حتى ٥٥° يمينًا
+     ويسارًا مع موضع المؤشّر، ويلحقه بنعومة (تخفيفٌ أُسّيّ) لا قفزًا */
+  const PKL = { ang: Math.atan2(-.9, -.45), want: Math.atan2(-.9, -.45), raf: 0 };
+  const pkLight = () => {
+    PKL.raf = 0;
+    PKL.ang += (PKL.want - PKL.ang) * .18;
+    const st = document.documentElement.style;
+    st.setProperty('--lx', Math.cos(PKL.ang).toFixed(3)); st.setProperty('--ly', Math.sin(PKL.ang).toFixed(3));
+    if (Math.abs(PKL.want - PKL.ang) > .002) PKL.raf = requestAnimationFrame(pkLight);
+  };
+  document.addEventListener('pointermove', e => {
+    if (!document.querySelector('#cm-body .pk-lg')) return;
+    const vw = window.innerWidth || 1, vh = window.innerHeight || 1;
+    PKL.want = -Math.PI / 2 + (e.clientX / vw - .5) * 1.9 + (e.clientY / vh - .5) * .25;
+    if (!PKL.raf) PKL.raf = requestAnimationFrame(pkLight);
+  }, { passive: true });
   const pkDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
   const pkCap = (x, y, b) => {   // كبسولةٌ في المستطيل ‎b‎: [المسافة، العموديّ]
     const r = b.h / 2, cy = b.y + r, ax = Math.min(Math.max(x, b.x + r), b.x + b.w - r);
@@ -20550,7 +20567,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
     cv.style.cssText = 'display:block;left:' + x0 + 'px;top:' + y0 + 'px;width:' + (x1 - x0) + 'px;height:' + (y1 - y0) + 'px';
     const ctx = cv.getContext('2d'), img = ctx.createImageData(W, H), dd = img.data;
-    const dark = pkDark(), tintA = dark ? .12 : .4, L = -115 * Math.PI / 180, T = 12;
+    const dark = pkDark(), tintA = dark ? .06 : .4, L = PKL.ang, T = 12;
     for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
       const x = x0 + (i + .5) / D, y = y0 + (j + .5) / D;
       const A = pkCap(x, y, g), B = pkCap(x, y, t);
@@ -20558,13 +20575,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const d = B[0] * (1 - hh) + A[0] * hh - k * hh * (1 - hh);
       if (d > 1.5) continue;
       const o = (j * W + i) * 4, a = Math.min(Math.max(.5 - d * D, 0), 1);
-      if (a < .5) { dd[o + 3] = (dark ? 90 : 34) * (1 - Math.max(d, 0) / 1.5); continue; }   // حدٌّ رفيعٌ خارجيّ
+      if (a < .5) { dd[o + 3] = (dark ? 70 : 34) * (1 - Math.max(d, 0) / 1.5); continue; }   // حدٌّ رفيعٌ خارجيّ
       let nx = B[1] * (1 - hh) + A[1] * hh, ny = B[2] * (1 - hh) + A[2] * hh;
       const ln = Math.hypot(nx, ny) || 1; nx /= ln; ny /= ln;
       const nd = Math.max(-d, 0), dir = Math.cos(Math.atan2(ny, nx) - L);
       const lit = Math.pow(Math.max(dir, 0), 2), back = Math.pow(Math.max(-dir, 0), 3) * .6;
       const rim = Math.pow(Math.max(0, 1 - nd / 1.25), 1.5), gw = Math.pow(Math.max(0, 1 - nd / (T * .5)), 2.5);
-      const sp = Math.min(1, rim * (.35 + .65 * Math.max(lit, back)) + gw * (lit * .85 + back * .5) * (dark ? .7 : 1.1));
+      const sp = Math.min(1, rim * (.35 + .65 * Math.max(lit, back)) + gw * (lit * .85 + back * .5) * (dark ? .16 : 1.1));
       dd[o] = dd[o + 1] = dd[o + 2] = 255; dd[o + 3] = (1 - (1 - tintA) * (1 - sp)) * a * 255;
     }
     ctx.putImageData(img, 0, 0);

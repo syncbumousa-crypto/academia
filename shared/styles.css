@@ -16302,16 +16302,28 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
    والمتوسِّعُ لوحٌ زجاجيّ يحمل أبناءه. لا تدرّجَ ولا توهّج: سطحٌ شفّافٌ مسطّح، وحافّةٌ
    مضيئةٌ رفيعة من جهة الضوء، وظلٌّ رماديّ. واللونُ في أيقونة المجلد وحدها.
    والمختارُ تعلوه قطرةٌ تكسر ما تحتها وتكبّره (‎lgxPaint‎ في app.js) */
+:root {
+  /* اتّجاهُ الضوء على الزجاج: يميل مع المؤشّر (‎pkLight‎) فيتحرّك اللمعانُ على الحوافّ ولا يثبت */
+  --lx: -.45; --ly: -.9;
+  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .4); --lgx-hair: rgba(255, 255, 255, .55);
+  --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi),
+             inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2),
+             inset 0 0 0 .5px var(--lgx-hair);
+  --lgx-so: 1;
+}
+html[data-theme="dark"] {
+  /* في الداكن: لمعانٌ خافتٌ جدًّا — الزجاجُ الداكنُ يعكس قليلًا */
+  --lgx-hi: rgba(255, 255, 255, .13); --lgx-hi2: rgba(255, 255, 255, .035); --lgx-hair: rgba(255, 255, 255, .05);
+  --lgx-so: .35;
+}
 .pk-fstrip.pk-lg {
   --lgx-bg: rgba(255, 255, 255, .55);
-  --lgx-rim: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(255, 255, 255, .45), inset 0 0 0 .5px rgba(255, 255, 255, .6);
   --lgx-edge: 0 0 0 .5px rgba(20, 35, 63, .09), 0 6px 18px -8px rgba(20, 35, 63, .22);
   --lgx-ink: #14233f;
   padding: 2px 2px 10px; overflow: auto;
 }
 html[data-theme="dark"] .pk-fstrip.pk-lg {
   --lgx-bg: rgba(255, 255, 255, .05);
-  --lgx-rim: inset 0 1px 0 rgba(255, 255, 255, .2), inset 0 -1px 0 rgba(255, 255, 255, .07), inset 0 0 0 .5px rgba(255, 255, 255, .08);
   --lgx-edge: 0 0 0 .5px rgba(255, 255, 255, .1), 0 8px 20px -8px rgba(0, 0, 0, .7);
   --lgx-ink: #eef2f3;
 }
@@ -16355,12 +16367,13 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
   position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: 999px;
   -webkit-backdrop-filter: saturate(1.5);
   backdrop-filter: var(--lgx-f, none) saturate(1.5) brightness(1.03);
-  background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(20, 35, 63, .07);
-  box-shadow: 0 4px 12px -4px rgba(20, 35, 63, .3), 0 0 0 .5px rgba(20, 35, 63, .08);
+  background: rgba(20, 35, 63, .07);
+  box-shadow: var(--lgx-rim), 0 4px 12px -4px rgba(20, 35, 63, .3), 0 0 0 .5px rgba(20, 35, 63, .08);
 }
+.lgx-drop::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat; opacity: var(--lgx-so); }
 html[data-theme="dark"] .lgx-drop {
-  background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .07);
-  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, .8), 0 0 0 .5px rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .045);
+  box-shadow: var(--lgx-rim), 0 4px 14px -4px rgba(0, 0, 0, .7), 0 0 0 .5px rgba(0, 0, 0, .35);
 }
 /* السحبُ والإفلاتُ في الزجاج: الهدفُ يُطوَّق ولا يُصبغ */
 .pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; background: transparent; }
@@ -16377,8 +16390,8 @@ html[data-theme="dark"] .lgx-drop {
   transform-origin: 50% 50%; overflow: visible;
 }
 .lgx-ghost.is-dark { color: #eef2f3; }
-.lgx-ghost > .lgx-drop { inset: 0; transition: opacity .12s ease; box-shadow: 0 12px 26px -10px rgba(20, 35, 63, .45), 0 0 0 .5px rgba(20, 35, 63, .1); background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .18); }
-.lgx-ghost.is-dark > .lgx-drop { background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .06); box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .8), 0 0 0 .5px rgba(255, 255, 255, .14); }
+.lgx-ghost > .lgx-drop { inset: 0; transition: opacity .12s ease; box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .45), 0 0 0 .5px rgba(20, 35, 63, .1); background: rgba(255, 255, 255, .18); }
+.lgx-ghost.is-dark > .lgx-drop { background: rgba(255, 255, 255, .04); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .75), 0 0 0 .5px rgba(0, 0, 0, .35); }
 .lgx-ghost.is-merge > .lgx-drop { opacity: 0; }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
