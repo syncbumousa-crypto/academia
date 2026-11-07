@@ -16407,7 +16407,7 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-we
 .lgx-gb { position: absolute; inset: 0; border-radius: 999px; pointer-events: none; }
 .lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .45); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .35); }
 .lgx-ghost.no-gl.is-dark > .lgx-gb { background: rgba(255, 255, 255, .07); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .6); }
-.lgx-merge { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; }
+.lgx-merge { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; will-change: transform; }
 html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-select: none !important; }
 .pk-fstrip.pk-lg .pg-box.is-drag { opacity: .4; }
 .pk-fstrip.pk-lg .pg-face.lgx-near { transform: scale(1.05); }

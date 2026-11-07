@@ -9119,7 +9119,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
-    if (lab) { pkFitSoon(); pkFlipRecord(id); }
+    if (lab) {
+      pkFitSoon(); pkFlipRecord(id);
+      /* يُهيَّأ لوحُ السحب في وقت الفراغ، فلا يدفع أوّلُ سحبٍ ثمنَ بنائه */
+      if (ed && PKG.R === undefined) (window.requestIdleCallback || setTimeout)(() => {
+        if (PKG.R === undefined) { const c = document.createElement('canvas'); c.className = 'lgx-merge'; c.setAttribute('aria-hidden', 'true'); PKG.R = pkGl(c); }
+      });
+      /* التركيزُ على مجلدٍ في الشريط يُحفظ ويُردّ بعد إعادة البناء */
+      const af = pkFaceOf(document.activeElement);
+      if (af && pkFocusKeep == null) pkFocusKeep = af.dataset.pkf;
+      if (pkFocusKeep != null) queueMicrotask(() => {
+        const k = pkFocusKeep; pkFocusKeep = null;
+        const nf = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"] .pg-face[data-pkf="' + CSS.escape(k) + '"]');
+        if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
+      });
+    }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
@@ -20477,7 +20491,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      «الجذر» فيعود إلى الطبقة العليا. ولا يُفلت مجلدٌ في نفسه ولا في أحد أحفاده — ذاك
      حلقةٌ تُسقط الشجرةَ كلَّها. وبعد النقل يُفتح مسارُ الهدف في الشريط ويُختار المنقول،
      فيُرى حيث نزل */
-  let pkDrag = null;
   const pkDropOk = (dragId, targetId) => {
     if (!dragId || dragId === targetId) return false;
     const deck = edPack().deck, hit = findNode(deck, dragId);
@@ -20487,37 +20500,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   const pkDropClear = () => document.querySelectorAll('#cm-body .pk-fstrip .is-drop, #cm-body .pk-fstrip .is-drag, #cm-body .pk-fstrip.is-drop')
     .forEach(x => x.classList.remove('is-drop', 'is-drag'));
-  document.addEventListener('dragstart', e => {
-    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[draggable="true"]');
-    if (!f) return;
-    pkDrag = f.dataset.pkf;
-    e.dataTransfer.effectAllowed = 'move';
-    try { e.dataTransfer.setData('text/plain', pkDrag); } catch (err) { /* بعض المتصفّحات */ }
-    f.closest('.pg-box').classList.add('is-drag');
-  });
-  document.addEventListener('dragover', e => {
-    if (pkDrag == null) return;
-    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
-    /* فراغُ الشريط (لا وجهَ مربّعٍ تحت المؤشّر) مَهبطٌ إلى الطبقة العليا */
-    const strip = !f && e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed');
-    const box = f && f.closest('.pg-box');
-    document.querySelectorAll('#cm-body .pk-fstrip .is-drop').forEach(x => { if (x !== box && x !== strip) x.classList.remove('is-drop'); });
-    const to = f ? f.dataset.pkf : strip ? '' : null;
-    if (to == null || !pkDropOk(pkDrag, to)) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    (box || strip).classList.add('is-drop');
-  });
-  document.addEventListener('drop', e => {
-    if (pkDrag == null) return;
-    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
-    const strip = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed');
-    const dragId = pkDrag; pkDrag = null; pkDropClear();
-    const to = f ? f.dataset.pkf : strip ? '' : null;
-    if (to == null || !pkDropOk(dragId, to)) return;
-    e.preventDefault();
-    pkMove(strip.dataset.pkid, dragId, to);
-  });
+  /* (كان هنا سحبُ المتصفّح الأصليّ ‎dragstart/dragover/drop‎ — نُزع في المرحلة ٥ من ROADMAP-GLASS-STRIP:
+     لم يبقَ وجهٌ ‎draggable‎، والسحبُ كلُّه بالمؤشّر في «السحب الزجاجيّ» تحت) */
   function pkMove(id, dragId, to) {
     const deck = edPack().deck, hit = findNode(deck, dragId);
     hit.arr.splice(hit.i, 1);
@@ -20532,7 +20516,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkFs[id] = dragId;
     renderCmSection();
   }
-  document.addEventListener('dragend', () => { pkDrag = null; pkDropClear(); });
   document.addEventListener('dblclick', e => {
     const nm = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[aria-expanded] > .pg-nm');
     if (!nm) return;
@@ -20568,7 +20551,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (Math.abs(PKL.want - PKL.ang) > .01) PKL.raf = requestAnimationFrame(pkLight);
   };
   document.addEventListener('pointermove', e => {
-    if (!pkLab()) return;
+    if (!pkLab() || (PKG.s && PKG.s.on)) return;   /* أثناء السحب يثبت الضوء: لا يُعاد رسمُ الشريط تحت القطرة */
     const vw = window.innerWidth || 1, vh = window.innerHeight || 1;
     PKL.want = -Math.PI / 2 + (e.clientX / vw - .5) * 1.9 + (e.clientY / vh - .5) * .25;
     if (!PKL.raf) PKL.raf = requestAnimationFrame(pkLight);
@@ -20656,10 +20639,22 @@ void main() {
   function pkMergePaint(st, g, t, k) {
     const R = st.gl;
     if (!R) return;
-    const D = Math.min(window.devicePixelRatio || 1, 3), W = Math.round(innerWidth * D), H = Math.round(innerHeight * D);
-    if (R.cv.width !== W || R.cv.height !== H) { R.cv.width = W; R.cv.height = H; }
+    /* اللوحُ على قدر القطرة وهدفها لا على قدر الشاشة (بقِطَعٍ من ‎64px‎ فلا يُعاد حجزُه مع كلّ حركة) */
+    const D = Math.min(window.devicePixelRatio || 1, 3), pad = 26, q = 64;
+    const x0 = Math.floor(Math.min(g.x, t ? t.x : g.x) - pad), y0 = Math.floor(Math.min(g.y, t ? t.y : g.y) - pad);
+    const bw = Math.ceil((Math.max(g.x + g.w, t ? t.x + t.w : 0) + pad - x0) / q) * q, bh = Math.ceil((Math.max(g.y + g.h, t ? t.y + t.h : 0) + pad - y0) / q) * q;
+    /* وإعادةُ حجز لوح ‎WebGL‎ غاليةٌ: فلا يكبر إلّا إذا لزم (بفضلٍ لما بعده) ولا يصغر أثناء السحب،
+       ويُرسم في ركنه الأعلى بقدر الحاجة */
+    const cv = R.cv;
+    if (bw > (R.bw || 0) || bh > (R.bh || 0)) {
+      R.bw = Math.max(bw, R.bw || 0) + 128; R.bh = Math.max(bh, R.bh || 0) + 64;
+      cv.width = Math.round(R.bw * D); cv.height = Math.round(R.bh * D); cv.style.width = R.bw + 'px'; cv.style.height = R.bh + 'px';
+    }
+    const W = cv.width, H = cv.height;
+    cv.style.transform = 'translate(' + x0 + 'px,' + y0 + 'px)';
     const gl = R.g; gl.disable(gl.SCISSOR_TEST); gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-    pkGlDraw(R, W, H, D, { ...g, r: g.h / 2, base: pkBase('cap') * (pkDark() ? 1.2 : .85), B: t && { ...t, r: t.h / 2 }, k, sh: 1 });
+    const sh = r => ({ ...r, x: r.x - x0, y: r.y - y0 });
+    pkGlDraw(R, W, H, D, { ...sh(g), r: g.h / 2, base: pkBase('cap') * (pkDark() ? 1.2 : .85), B: t && { ...sh(t), r: t.h / 2 }, k, sh: 1 });
   }
   function pkDragStart(st, e) {
     const f = st.face, r = f.getBoundingClientRect(), strip = f.closest('.pk-fstrip');
@@ -20670,10 +20665,13 @@ void main() {
     gh.style.width = r.width + 'px'; gh.style.height = r.height + 'px';
     if (pkDark()) gh.classList.add('is-dark');
     gh.style.setProperty('--lx', PKL.lx || '-.45'); gh.style.setProperty('--ly', PKL.ly || '-.9');
-    const cv = document.createElement('canvas'); cv.className = 'lgx-merge'; cv.setAttribute('aria-hidden', 'true');
+    /* سياقُ ‎WebGL‎ ولوحُه يُبنيان مرّةً ويُعادان مع كلّ سحب — بناءُ السياق وترجمةُ الظلّ أبطأُ ما في السحب */
+    if (PKG.R === undefined) { const c = document.createElement('canvas'); c.className = 'lgx-merge'; c.setAttribute('aria-hidden', 'true'); PKG.R = pkGl(c); }
+    const gl = PKG.R, cv = gl ? gl.cv : document.createElement('canvas');
+    if (gl) { const c2 = gl.g; c2.viewport(0, 0, cv.width, cv.height); c2.clearColor(0, 0, 0, 0); c2.disable(c2.SCISSOR_TEST); c2.clear(c2.COLOR_BUFFER_BIT); }
+    cv.style.opacity = '';
     document.body.append(cv, gh);
-    const gl = pkGl(cv);
-    if (!gl) { cv.remove(); gh.classList.add('no-gl'); }
+    if (!gl) gh.classList.add('no-gl');
     Object.assign(st, { gl,
       on: true, gh, cv, strip, w: r.width, h: r.height, ox: e.clientX - r.left, oy: e.clientY - r.top, home: r,
       x: r.left, y: r.top, vx: 0, vy: 0, sx: 1, sy: 1, to: null, tEl: null, k: 0,
@@ -20778,16 +20776,40 @@ void main() {
   /* النقرُ الذي يلي السحبَ ليس اختيارًا */
   document.addEventListener('click', e => { if (PKG.eat) { PKG.eat = false; e.preventDefault(); e.stopPropagation(); } }, true);
 
-  /* والحقلُ في مربّعٍ يُسحب: ما دام التركيزُ فيه لا يُسحب المربّع، فيُحدَّد النصُّ بالفأرة */
-  document.addEventListener('focusin', e => {
-    const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
-    if (fi) { const f = fi.closest('.pg-face'); if (f && f.hasAttribute('draggable')) f.setAttribute('draggable', 'false'); }
-  });
+  /* ===== لوحةُ المفاتيح في الشريط (ROADMAP-GLASS-STRIP · المرحلة ٥) =====
+     الأسهمُ الأفقيّةُ بين الإخوة (والصفحةُ من اليمين: السهمُ الأيسر إلى التالي)، و‎Home/End‎ أوّلُهم وآخرُهم،
+     والسهمُ النازلُ إلى أوّل أبناء المفتوح، والصاعدُ إلى أبيه، و‎Esc‎ يُغلق المفتوحَ الذي فيه التركيز (أو أباه)
+     ويبقى التركيزُ عليه. وإعادةُ البناء لا تُضيّع التركيز: يُردّ إلى المجلد نفسِه (‎pkFocusKeep‎) */
+  let pkFocusKeep = null;
+  const pkFaceOf = el => el && el.closest && el.closest('#cm-body .pk-lg .pg-face[data-pkf]');
+  document.addEventListener('keydown', e => {
+    const f = pkFaceOf(e.target);
+    if (!f || e.target !== f || e.altKey || e.ctrlKey || e.metaKey) return;
+    const box = f.parentElement, row = box.parentElement;
+    const sibs = [...row.children].filter(c => c.classList.contains('pg-box')).map(c => c.querySelector(':scope > .pg-face'));
+    const i = sibs.indexOf(f), rtl = getComputedStyle(row).direction === 'rtl';
+    let to = null;
+    if (e.key === 'ArrowLeft') to = sibs[i + (rtl ? 1 : -1)];
+    else if (e.key === 'ArrowRight') to = sibs[i + (rtl ? -1 : 1)];
+    else if (e.key === 'Home') to = sibs[0];
+    else if (e.key === 'End') to = sibs[sibs.length - 1];
+    else if (e.key === 'ArrowDown') to = box.classList.contains('is-wide') ? box.querySelector(':scope > .pg-in .pg-face') : null;
+    else if (e.key === 'ArrowUp') { const pb = row.closest('.pg-box'); to = pb && pb.querySelector(':scope > .pg-face'); }
+    else if (e.key === 'Escape') {
+      const target = box.classList.contains('is-wide') ? f : (row.closest('.pg-box') || {}).querySelector && row.closest('.pg-box').querySelector(':scope > .pg-face');
+      if (!target) return;
+      e.preventDefault(); e.stopPropagation();
+      pkFocusKeep = target.dataset.pkf; target.click();
+      return;
+    } else return;
+    e.preventDefault();
+    if (to) { to.focus({ preventScroll: true }); to.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+  }, true);
   /* ومربّعاتُ المختبر ‎div[role=button]‎ — فتُعطى ما يُعطاه الزرُّ من لوحة المفاتيح */
   document.addEventListener('keydown', e => {
     const fb = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[role="button"]');
     if (!fb || e.target !== fb || (e.key !== 'Enter' && e.key !== ' ')) return;
-    e.preventDefault(); fb.click();
+    e.preventDefault(); pkFocusKeep = fb.dataset.pkf; fb.click();
   });
   document.addEventListener('keydown', e => {
     const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
