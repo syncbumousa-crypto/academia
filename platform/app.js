@@ -20340,8 +20340,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.preventDefault(); e.stopPropagation();
       const id = pf.closest('.pk-fstrip').dataset.pkid, f = pf.dataset.pkf, par = pf.dataset.pkp;
       const open = pkFo[id] || (pkFo[id] = new Map());
+      /* المفتوحُ يُغلق بنقره مرّةً أخرى — ولو كان المختارُ أحدَ أبنائه (بطلب صاحب الموقع) */
       if (pf.hasAttribute('aria-expanded')) {
-        if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
+        if (open.get(par) === f) open.delete(par); else open.set(par, f);
       }
       pkFs[id] = f;
       renderCmSection();
@@ -20589,6 +20590,11 @@ void main() {
     strip.__lgxShapes.forEach(o => pkGlDraw(R, W, H, D, o, o.clip));
     if (!own) { const ctx = out.getContext('2d'); ctx.clearRect(0, 0, W, H); ctx.drawImage(R.cv, 0, 0); }
   }
+  /* المغلقُ الذي طال بطول أخيه المفتوح: انحناؤه انحناءُ أخيه، فيتّسق الصفّ */
+  const pksRowR = box => {
+    const w = box.parentElement && box.parentElement.querySelector(':scope > .pg-box.is-wide');
+    return (w && parseFloat(getComputedStyle(w).getPropertyValue('--r'))) || 24;
+  };
   function pksMeasure(strip) {
     const sr = strip.getBoundingClientRect(), list = [];
     const ox = sr.left - strip.scrollLeft, oy = sr.top - strip.scrollTop;
@@ -20603,7 +20609,8 @@ void main() {
       const clip = cr && { x: cr.x - 12, y: b.y - 12, w: cr.w + 24, h: b.h + 28 };   /* بقدر الظلّ حول الصفّ */
       const col = pkRgb(box.dataset.c);
       list.push({
-        clip, ...b, r: wide ? parseFloat(getComputedStyle(box).getPropertyValue('--r')) || 24 : b.h / 2,
+        clip, ...b, r: wide ? parseFloat(getComputedStyle(box).getPropertyValue('--r')) || 24
+          : isFace || b.h < 46 ? b.h / 2 : pksRowR(box),
         base: pkBase(wide ? 'tray' : sel ? 'sel' : 'cap'),
         fade: box.classList.contains('is-drag') ? .35 : 1,
         ring: sel ? [col[0], col[1], col[2], .9] : null,

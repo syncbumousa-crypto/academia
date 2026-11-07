@@ -16329,7 +16329,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 /* كلُّ كبسولةٍ تكبر لتملأ الصفّ؛ وإن اتّسع فيه مجلد أخذ هو الباقي وبقيت أخواتُه على قدر أسمائها */
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
-  flex: 1 1 auto; min-width: max-content; max-width: none; overflow: visible; align-self: flex-start;
+  flex: 1 1 auto; min-width: max-content; max-width: none; overflow: visible; align-self: stretch;
   border: 0; border-radius: 999px; background: transparent; box-shadow: none;
 }
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex-grow: 0; }
@@ -16391,3 +16391,8 @@ html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-selec
 html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box,
 html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box.is-wide { background: transparent; }
 .pk-fstrip.pk-lg .pg-box.is-drag { opacity: 1; }
+/* المغلقُ يطول بطول أخيه المفتوح (الصفُّ يمدّه)، ووجهُه يملؤه كلَّه فيُنقر في أيّ موضعٍ منه،
+   واسمُه في أعلاه على سطر رأس المفتوح */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 4px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { border-radius: 19px; }
