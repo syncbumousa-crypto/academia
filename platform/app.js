@@ -8941,7 +8941,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ['cards', '<rect x="3" y="7.5" width="13" height="12.5" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v11"/>'],
     ['table', '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/>'],
   ];
-  const pkViewBar = () => `<span class="pk-vbar" role="group" aria-label="${esc(T().pkViewBar)}">${PK_VIEWS.map(([k, ic]) =>
+  const pkViewBar = where => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">${PK_VIEWS.map(([k, ic]) =>
     `<button type="button" class="pk-vbar__b${k === 'folder' ? ' on' : ' is-soon'}" data-pkview="${k}" aria-pressed="${k === 'folder'}"
       title="${esc(T()['pkView_' + k] + (k === 'folder' ? '' : ' — ' + T().pkViewSoon))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`).join('')}</span>`;
@@ -18981,6 +18981,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span>
             <!-- وخبرُ المساهمة كلِّها: يسارَ شارات الأنواع، وهو مجموعُ الشجرة -->
             <span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>
+            <!-- وشريطُ طرق العرض في التحرير كذلك، أقصى يسار الرأس (لا سهمَ طيٍّ ههنا يجاوره) -->
+            ${pkViewBar('edit')}
           </div>
           ${cxMax ? cxHdLine() : ''}
           <div id="cm-cards"></div>
