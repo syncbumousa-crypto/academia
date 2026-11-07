@@ -21066,7 +21066,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        وإلّا صغُر في المكبَّرة (القصيرةِ القامة) عمّا هو في الضيّقة، وهو عكسُ ما يُكبَّر له */
     const W = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H = b.wide ? b.stage.clientHeight - 44 : (b.stage.clientHeight - 64) * 0.9;
     if (W <= 0 || H <= 0) return;
-    b.single = W < 620;
+    b.single = W < (b.wide ? 360 : 620);   /* وكتابُ «المصدر» يبقى صفحتين ولو في نصف المساهمة (القسمة) — لا ينفرد إلّا حين يضيق جدًّا */
     const cols = b.single ? 1 : 2;
     let ph = H, pw = ph * b.ar;
     if (pw * cols > W) { pw = W / cols; ph = pw / b.ar; }

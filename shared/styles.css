@@ -16825,7 +16825,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; margin-bottom: 26px; }
 /* ===== «المصدر» و«الشجريّ» معًا: الكتابُ يمينًا واللوحُ يسارَه ===== */
 .pk-split { display: flex; gap: 14px; align-items: stretch; min-height: 0; }
-.pk-split > .pk-src { flex: 1 1 0; min-width: 0; }
+.pk-split > .pk-src { flex: 1.3 1 0; min-width: 0; }   /* الكتابُ صفحتان فيأخذ نصيبًا أكبرَ قليلًا من اللوح */
 .pk-split > .kt-view--tree { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; margin-bottom: 0; }
 .pk-split > .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 420px; }
 .pk--max .post-ytmain > .pk-split { flex: 1 1 auto; margin-bottom: 26px; }
