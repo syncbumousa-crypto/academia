@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -6485,6 +6485,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (cxMax && cxY) { const cc = document.querySelector('#cm-body #cm-cards'); if (cc) cc.scrollTop = cxY; }
     if (cxMax || cxMaxPub) cxHdMeasure();   /* قامةُ الرأس بعد كلّ رسم — قبل أن يُرى */
+    if (pkFocusNew) {   /* المجلدُ المضافُ للتوّ: حقلُ اسمه مُركَّزٌ ونصُّه محدَّد فيُكتب فوقه */
+      const fi = document.querySelector(`#cm-body .pk-fnm[data-pkfn="${CSS.escape(pkFocusNew)}"]`);
+      pkFocusNew = null;
+      if (fi) { fi.focus({ preventScroll: true }); fi.select(); }
+    }
     document.querySelectorAll('#cm-body textarea.chipe-in').forEach(autoGrow);   /* ارتفاع حقول تحرير المادة يتبع محتواها */
     fitGradeLabels($('#cm-body'));   /* دلالات شريط الدرجة داخل الحدود */
     /* حالة أزرار الشريط الواحد: المفعّل فقط */
@@ -8974,13 +8979,45 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     (function walk(a) { (a || []).forEach(k => { if (!hit && k.id === id) hit = k; if (!hit) walk(k.kids); }); })(folds);
     return hit ? hit.name : '';
   }
-  function pkAltView(id, deck) {
-    const folds = pgFolds(deck), v = pkVwOf(id);
-    if (!folds.length) return `<div class="pk-vwph">${esc(T().pkStripEmpty)}</div>`;
+  /* ===== مختبرُ «رياضيات 105» (‎pkLab‎) — يُجرَّب فيه الجديدُ قبل أن يمسّ البطائق كلَّها =====
+     في المختبر يُظهر الشريطُ **كلَّ** المجلدات ولو خلت (المجلدُ الجديدُ خاوٍ بطبعه، وهو
+     المقصود أن يُرى)، وفي التحرير يُسمّى المجلدُ المختارُ في مربّعه نفسِه.
+     وخارج المختبر يبقى كلُّ شيءٍ كما شُحن: ‎pgFolds‎ بلا الفارغة ولا تحرير */
+  const pkLab = () => cmCode === 'MATH 105';
+  let pkFocusNew = null;   // مجلدٌ أُضيف للتوّ — يُركَّز حقلُ اسمه ويُحدَّد نصُّه بعد الرسم
+  const pkKidsAll = f => (f.ch || []).filter(x => x.t === 'f')
+    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', kids: pkKidsAll(x) }));
+  function pgFoldsAll(deck) {
+    const out = [];
+    if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
+    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', kids: pkKidsAll(f) }));
+    return out;
+  }
+  /* مربّعاتُ المختبر في التحرير: المختارُ وجهُه حقلُ اسمٍ (والجذرُ لا يُسمّى — ليس مجلدًا)،
+     والوجهُ ‎div[role=button]‎ لا ‎<button>‎: لا يحوي زرٌّ حقلَ كتابة */
+  function pkBoxEdHTML(nodes, open, parentKey, sel) {
+    if (!nodes || !nodes.length) return '';
+    const openId = open.get(parentKey);
+    return '<div class="pg-row">' + nodes.map(k => {
+      const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
+      const face = isSel && k.id !== ''
+        ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
+        : '<span class="pg-nm">' + esc(k.name) + '</span>';
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '">'
+        + '<div class="pg-face" role="button" tabindex="0" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
+        + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
+        + (has ? '<div class="pg-in">' + pkBoxEdHTML(k.kids, open, k.id, sel) + '</div>' : '')
+        + '</div>';
+    }).join('') + '</div>';
+  }
+  function pkAltView(id, deck, editable) {
+    const lab = pkLab(), ed = lab && editable;
+    const folds = lab ? pgFoldsAll(deck) : pgFolds(deck), v = pkVwOf(id);
+    if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
-    return `<div class="pg-folds pk-fstrip" data-pkid="${esc(id)}">${pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
+    return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
@@ -19025,7 +19062,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${pkViewBar('edit', p.id)}
           </div>
           ${cxMax ? cxHdLine() : ''}
-          ${vwAlt ? pkAltView(p.id, d.deck) : ''}
+          ${vwAlt ? pkAltView(p.id, d.deck, true) : ''}
           <div id="cm-cards"></div>
           ${cxFoot(d)}
         </div>
@@ -20269,6 +20306,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (id && pkVwOf(id) !== pv.dataset.pkview) { pkVw[id] = pv.dataset.pkview; renderCmSection(); }
       return;
     }
+    if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
     const pf = e.target.closest('#cm-body .pk-fstrip [data-pkf]');
     if (pf) {
       /* مربّعٌ في الشريط: يُختار — وإن كان له بنون فُتح جوفُه في صفّه (وأُغلق أخوه)،
@@ -20310,6 +20348,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (cxHdUp) { cxHdSet(false); return; }
     if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
+  /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
+     و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
+  document.addEventListener('input', e => {
+    const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
+    if (!fi) return;
+    const hit = findNode(edPack().deck, fi.dataset.pkfn);
+    if (!hit) return;
+    hit.n.name = fi.value;
+    save();
+    /* واسمُ المختار في مكان العرض تحته يتبع الكتابةَ حرفًا بحرف — لا ينتظر الخروج من الحقل */
+    const ph = document.querySelector('#cm-body .pk-vwph span');
+    if (ph) ph.textContent = fi.value || T().pkTitlePh;
+  });
+  /* ومربّعاتُ المختبر ‎div[role=button]‎ — فتُعطى ما يُعطاه الزرُّ من لوحة المفاتيح */
+  document.addEventListener('keydown', e => {
+    const fb = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[role="button"]');
+    if (!fb || e.target !== fb || (e.key !== 'Enter' && e.key !== ' ')) return;
+    e.preventDefault(); fb.click();
+  });
+  document.addEventListener('keydown', e => {
+    const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
+    if (!fi || (e.key !== 'Enter' && e.key !== 'Escape')) return;
+    e.preventDefault(); e.stopPropagation();
+    fi.blur();
+  }, true);
+  document.addEventListener('focusout', e => {
+    if (!(e.target.closest && e.target.closest('#cm-body .pk-fnm'))) return;
+    /* بعد أن يستقرّ التركيزُ حيث ذهب: إن ذهب إلى حقلٍ آخرَ في الشريط فلا رسم يسرقه */
+    setTimeout(() => { if (!document.activeElement || !document.activeElement.closest('#cm-body .pk-fnm')) renderCmSection(); }, 0);
+  });
   const chPickCov = document.createElement('input');
   chPickCov.type = 'file'; chPickCov.accept = 'image/*,application/pdf,.pdf'; chPickCov.hidden = true;
   document.body.appendChild(chPickCov);
@@ -28094,12 +28162,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const holder = wrap.dataset.pid ? findNode(d.deck, wrap.dataset.pid) : null;
       const arr = holder ? (holder.n.ch = holder.n.ch || []) : d.deck;
       /* سؤال الاختيار من متعدّد عقدة 'q' في الشجرة نفسها — نصّه في f كالبطاقة، وخياراته تأتي لاحقًا */
-      arr.push(cxa.classList.contains('cx-addf')
+      const nn = cxa.classList.contains('cx-addf')
         ? { id: newId(), t: 'f', name: nextFolderName(d.deck), ci: pickFolderColor(d.deck), open: true, ch: [] }
         : cxa.classList.contains('cx-addq')
           ? { id: newId(), t: 'q', f: '', b: '' }
-          : { id: newId(), t: 'c', f: '', b: '' });
-      save(); edRender(); return;
+          : { id: newId(), t: 'c', f: '', b: '' };
+      arr.push(nn);
+      save();
+      /* ===== مختبرُ «رياضيات 105»: المجلدُ الجديدُ يظهر في الشريط العلويّ مختارًا واسمُه يُحرَّر =====
+         في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) يُرسم القسمُ كلُّه لا الشجرةُ وحدها — فالشريطُ
+         في القالب لا في ‎#cm-cards‎. ويُفتح مسارُ أبيه في الشريط ليُرى حيث وُضع */
+      const me = postsOf(cmCode, 'cards').find(x => x.me);
+      if (nn.t === 'f' && pkLab() && me && pkVwOf(me.id) !== 'folder') {
+        pkFs[me.id] = nn.id;
+        const open = pkFo[me.id] || (pkFo[me.id] = new Map());
+        if (holder) {
+          const trail = (cxTrail(d.deck, holder.n.id) || []).concat([holder.n.id]);
+          trail.forEach((fid, k) => open.set(k ? trail[k - 1] : PG_TOP, fid));
+        }
+        pkFocusNew = nn.id;
+        renderCmSection();
+        return;
+      }
+      edRender(); return;
     }
     const vta = e.target.closest('.vt-addv');
     if (vta) {

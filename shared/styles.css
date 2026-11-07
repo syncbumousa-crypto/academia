@@ -16274,3 +16274,13 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk--max .post-ytmain > .pk-vwph { flex: 1 1 auto; }
 /* وفي التحرير يُخفى جوفُ المجلّديّ ما دام عرضٌ آخر مختارًا (ويبقى في الصفحة ليُرسم فيه) */
 .pk--vwalt #cm-cards { display: none; }
+
+/* ===== مختبر «رياضيات 105»: اسمُ المجلد يُحرَّر في مربّعه =====
+   حقلٌ بلا إطار يأخذ مكانَ الاسم في المربّع المختار، ويُعرف بخطٍّ ذهبيٍّ تحته */
+.pk-fstrip--ed .pg-face { cursor: pointer; }
+.pk-fnm {
+  flex: 1 1 auto; min-width: 0; width: 100%; padding: 0 0 1px; border: 0; border-bottom: 1.5px solid rgba(201, 162, 92, .7);
+  background: transparent; color: inherit; font: inherit; font-weight: 700; outline: none;
+}
+.pk-fnm:focus { border-bottom-color: #c9a25c; }
+.pk-fnm::placeholder { color: inherit; opacity: .45; font-weight: 400; }
