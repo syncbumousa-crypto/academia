@@ -16297,112 +16297,86 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk-fstrip.is-drop { outline: 2px dashed #c9a25c; outline-offset: 2px; border-radius: 12px; }
 .pk-fstrip--ed { padding-bottom: 8px; }   /* فراغٌ تحت المربّعات يُفلَت عليه */
 
-/* ===== مختبر «رياضيات 105»: شريطٌ زجاجيّ وقطرة (Liquid Glass) =====
-   كلُّ صفٍّ شريطٌ من زجاجٍ صافٍ (كبسولةٌ ما لم يتّسع فيه مجلد، ولوحٌ بزوايا ٢٠ إن اتّسع)،
-   والمتوسِّعُ لوحٌ زجاجيّ يحمل أبناءه. لا تدرّجَ ولا توهّج: سطحٌ شفّافٌ مسطّح، وحافّةٌ
-   مضيئةٌ رفيعة من جهة الضوء، وظلٌّ رماديّ. واللونُ في أيقونة المجلد وحدها.
-   والمختارُ تعلوه قطرةٌ تكسر ما تحتها وتكبّره (‎lgxPaint‎ في app.js) */
-:root {
-  /* اتّجاهُ الضوء على الزجاج: يميل مع المؤشّر (‎pkLight‎) فيتحرّك اللمعانُ على الحوافّ ولا يثبت */
-  --lx: -.45; --ly: -.9;
-  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .4); --lgx-hair: rgba(255, 255, 255, .55);
-}
-/* يُعاد تعريفُه حيث يُكتب الضوءُ (‎--lx/--ly‎ على الشريط والقطرة) — المتغيّرُ المركّب يُحسب
-   حيث عُرِّف، فلو بقي على ‎:root‎ وحده لما رأى الضوءَ المتحرّك */
-:root, .pk-fstrip.pk-lg, .lgx-ghost {
-  --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi),
-             inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2),
-             inset 0 0 0 .5px var(--lgx-hair);
-}
-html[data-theme="dark"] {
-  /* في الداكن: لمعانٌ خافتٌ جدًّا — الزجاجُ الداكنُ يعكس قليلًا */
-  --lgx-hi: rgba(255, 255, 255, .13); --lgx-hi2: rgba(255, 255, 255, .035); --lgx-hair: rgba(255, 255, 255, .05);
-}
+/* ===== مختبر «رياضيات 105»: كبسولاتُ زجاجٍ وألواح (Liquid Glass) =====
+   كلُّ مجلدٍ كبسولةٌ زجاجيّةٌ مستقلّة تملأ نصيبَها من عرض الصفّ (فلا هامشَ فارغًا)، والمتوسِّعُ
+   لوحٌ زجاجيّ يحمل أبناءه بانحناءاتٍ متّحدة المركز (‎--r‎ من ‎pkBoxAt‎). والزجاجُ نفسُه —
+   الحافّةُ المضيئةُ التي تميل مع المؤشّر، وانحناءُ السطح، والظلُّ الناعم، وحلقةُ المختار
+   بلون مجلده — يرسمه ‎pksPaint‎ على كرت الشاشة في لوحٍ خلف المربّعات (‎.lgx-bg‎).
+   وما دام ‎WebGL‎ غائبًا (‎:not(.has-gl)‎) تُرسم الألواحُ بـ‎CSS‎ وحده — بلا حدٍّ أسود */
+:root { --lx: -.45; --ly: -.9; }
 .pk-fstrip.pk-lg {
-  --lgx-bg: rgba(255, 255, 255, .55);
-  --lgx-edge: 0 0 0 .5px rgba(20, 35, 63, .09), 0 6px 18px -8px rgba(20, 35, 63, .22);
-  --lgx-ink: #14233f;
-  padding: 2px 2px 10px; overflow: auto;
+  --lgx-bg: rgba(255, 255, 255, .55); --lgx-ink: #14233f;
+  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .4);
+  --lgx-sh: 0 1px 2px rgba(20, 35, 63, .06), 0 6px 16px -8px rgba(20, 35, 63, .2);
+  position: relative; padding: 2px 2px 12px; overflow: auto;
 }
 html[data-theme="dark"] .pk-fstrip.pk-lg {
-  --lgx-bg: rgba(255, 255, 255, .05);
-  --lgx-edge: 0 0 0 .5px rgba(255, 255, 255, .1), 0 8px 20px -8px rgba(0, 0, 0, .7);
-  --lgx-ink: #eef2f3;
+  --lgx-bg: rgba(255, 255, 255, .06); --lgx-ink: #eef2f3;
+  --lgx-hi: rgba(255, 255, 255, .14); --lgx-hi2: rgba(255, 255, 255, .04);
+  --lgx-sh: 0 6px 16px -8px rgba(0, 0, 0, .55);
 }
+.pk-fstrip.pk-lg, .lgx-ghost {
+  --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi), inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2);
+}
+.lgx-bg { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; }
+.pk-fstrip.pk-lg > .pg-row { position: relative; z-index: 1; }
+/* الصفوفُ تخطيطٌ لا زجاج */
 .pk-fstrip.pk-lg .pg-row {
-  display: flex; align-items: flex-start; gap: 4px; padding: 4px; overflow-x: auto;
-  border-radius: var(--r, 21px); background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-edge);
+  display: flex; align-items: stretch; gap: 6px; padding: 0; overflow-x: auto;
+  border-radius: 0; background: transparent; box-shadow: none;
 }
-/* الصفُّ الداخليُّ تخطيطٌ لا زجاج: اللوحُ المتّسعُ هو الزجاج، فلا يُرسم حدّان بينهما ٤ */
-.pk-fstrip.pk-lg .pg-in .pg-row { background: transparent; box-shadow: none; }
+.pk-fstrip.pk-lg .pg-in .pg-row { padding: 0; }
+/* كلُّ كبسولةٍ تكبر لتملأ الصفّ؛ وإن اتّسع فيه مجلد أخذ هو الباقي وبقيت أخواتُه على قدر أسمائها */
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
-  flex: 0 0 auto; min-width: 0; max-width: 220px; overflow: visible;
+  flex: 1 1 auto; min-width: max-content; max-width: none; overflow: visible; align-self: flex-start;
   border: 0; border-radius: 999px; background: transparent; box-shadow: none;
 }
-.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide,
-.pk-fstrip.pk-lg .pg-box.is-wide {
-  flex: 1 1 auto; max-width: none; min-width: 0; border-radius: calc(var(--r, 21px) - 4px);
-  background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-edge);
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex-grow: 0; }
+.pk-fstrip.pk-lg .pg-box.is-wide,
+.pk-fstrip.pk-lg .pg-in .pg-box.is-wide,
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide {
+  flex: 1 1 auto; min-width: 0; align-self: stretch; border-radius: var(--r, 24px);
 }
+.pk-fstrip.pk-lg:not(.has-gl) .pg-box { background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-sh); }
+.pk-fstrip.pk-lg:not(.has-gl) .pg-box.is-sel:not(.is-wide) { background: color-mix(in srgb, var(--lgx-bg) 60%, var(--lgx-ink) 8%); box-shadow: var(--lgx-rim), var(--lgx-sh), inset 0 0 0 1.5px var(--c-sel, rgba(127, 127, 127, .5)); }
 .pk-fstrip.pk-lg .pg-face,
 .pk-fstrip.pk-lg .pg-in .pg-face {
-  position: relative; align-items: center; gap: 7px; height: 34px; padding: 0 14px; border-radius: 999px;
-  font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--lgx-ink);
+  position: relative; align-items: center; justify-content: flex-start; gap: 8px; height: 38px; padding: 0 16px; border-radius: 999px;
+  font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--lgx-ink); user-select: none;
 }
-/* النصُّ والأيقونةُ فوق القطرة لا تحتها: الزجاجُ يكسر ما وراءه، والحرفُ يبقى حادًّا */
-.pk-fstrip.pk-lg .pg-face > .pg-nm,
-.pk-fstrip.pk-lg .pg-face > .pk-fi,
-.pk-fstrip.pk-lg .pg-face > .pk-fnm { position: relative; z-index: 1; }
-.pk-fstrip.pk-lg .pg-nm { line-height: 1.7; padding-block: 1px; }
-.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 10px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .1); }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .09); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
-.pk-fstrip.pk-lg .pg-in .pg-box.is-wide > .pg-in { padding: 0 4px 4px; }
+.pk-fstrip.pk-lg .pg-in .pg-box.is-wide > .pg-in { padding: 0 6px 6px; }
+.pk-fstrip.pk-lg .pg-face > .pg-nm, .pk-fstrip.pk-lg .pg-face > .pk-fi, .pk-fstrip.pk-lg .pg-face > .pk-fnm { position: relative; z-index: 1; }
+.pk-fstrip.pk-lg .pg-nm { flex: 0 1 auto; line-height: 1.7; padding-block: 1px; }
 .pk-fstrip.pk-lg .pk-fi { width: 16px; height: 16px; flex: none; color: var(--u-mut, #8a97a3); }
-/* المختار: لا ذهبَ ولا إطار — القطرةُ وحدها تَسِمُه */
-.pk-fstrip.pk-lg .pg-box.is-sel { border: 0; box-shadow: none; }
-.pk-fstrip.pk-lg .pg-box.is-wide.is-sel { box-shadow: var(--lgx-rim), var(--lgx-edge); }
 html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
+.pk-fstrip.pk-lg .pg-box.is-sel { border: 0; }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
-.lgx-drop {
-  position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: 999px;
-  background: rgba(20, 35, 63, .07);
-  box-shadow: var(--lgx-rim), 0 4px 12px -4px rgba(20, 35, 63, .3), 0 0 0 .5px rgba(20, 35, 63, .08);
-}
-html[data-theme="dark"] .lgx-drop {
-  background: rgba(255, 255, 255, .045);
-  box-shadow: var(--lgx-rim), 0 4px 14px -4px rgba(0, 0, 0, .7), 0 0 0 .5px rgba(0, 0, 0, .35);
-}
-/* السحبُ والإفلاتُ في الزجاج: الهدفُ يُطوَّق ولا يُصبغ */
 .pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; background: transparent; }
 .pk-fstrip.pk-lg.is-drop { border-radius: 24px; }
 .pk-fstrip.pk-lg .pk-fnm { font-weight: 700; }
-/* السحبُ الزجاجيّ: القطرةُ الممسوكة، ولوحُ الاندماج، وانتفاخُ الهدف، وارتجاجُ الابتلاع */
+
+/* السحبُ الزجاجيّ: القطرةُ الممسوكة (حرفُها وظلُّها؛ جسمُها في لوح ‎WebGL‎)، وانتفاخُ الهدف، وارتجاجُ الابتلاع */
 .lgx-ghost {
   position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform;
-  display: flex; align-items: center; gap: 7px; padding: 0 14px; box-sizing: border-box; border-radius: 999px;
+  display: flex; align-items: center; gap: 8px; padding: 0 16px; box-sizing: border-box; border-radius: 999px;
   font-family: inherit; font-size: 13px; font-weight: 700; line-height: 1.7; color: #14233f; white-space: nowrap;
   transform-origin: 50% 50%; overflow: visible;
 }
 .lgx-ghost.is-dark { color: #eef2f3; }
-/* ظلُّ القطرة وحده — جسمُها وحافّتُها واندماجُها في لوح ‎WebGL‎ تحت حرفها */
-.lgx-gb {
-  position: absolute; inset: 0; border-radius: 999px; pointer-events: none;
-  box-shadow: 0 12px 26px -10px rgba(20, 35, 63, .4);
-}
-.lgx-ghost.is-dark > .lgx-gb { box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .7); }
-.lgx-gb { transition: opacity .15s ease; }
-.lgx-ghost.is-merge > .lgx-gb { opacity: 0; }   /* في الاندماج لا ظلَّ لكبسولةٍ ذابت في غيرها */
-.lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .35); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .4), 0 0 0 .5px rgba(20, 35, 63, .1); }
-.lgx-ghost.no-gl.is-dark > .lgx-gb { background: rgba(255, 255, 255, .05); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .7), 0 0 0 .5px rgba(0, 0, 0, .35); }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
 .lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
 .lgx-ghost > .pg-nm { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.lgx-gb { position: absolute; inset: 0; border-radius: 999px; pointer-events: none; }
+.lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .45); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .35); }
+.lgx-ghost.no-gl.is-dark > .lgx-gb { background: rgba(255, 255, 255, .07); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .6); }
 .lgx-merge { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; }
 html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-select: none !important; }
-.pk-fstrip.pk-lg .pg-box.is-drag { opacity: .3; }
+.pk-fstrip.pk-lg .pg-box.is-drag > .pg-face { opacity: .35; }
 .pk-fstrip.pk-lg .pg-face { transition: transform .22s cubic-bezier(.3, 1.5, .5, 1); }
 .pk-fstrip.pk-lg .pg-face.lgx-near { transform: scale(1.05); }
 .pk-fstrip.pk-lg .pg-face.lgx-gulp { animation: lgx-gulp .62s cubic-bezier(.3, 1.4, .5, 1); }
@@ -16413,3 +16387,7 @@ html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-selec
 @media (prefers-reduced-motion: reduce) {
   .pk-fstrip.pk-lg .pg-face, .pk-fstrip.pk-lg .pg-face.lgx-gulp { transition: none; animation: none; }
 }
+/* يُلغى ما رُسم للشريط القديم تحت المختبر (أرضيّاتُ الأجواف وخفوتُ الممسوك) — الزجاجُ يرسمه وحده */
+html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box,
+html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box.is-wide { background: transparent; }
+.pk-fstrip.pk-lg .pg-box.is-drag { opacity: 1; }

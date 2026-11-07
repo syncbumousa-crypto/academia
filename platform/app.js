@@ -8960,30 +8960,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      **في جوفه**، وواحدٌ متوسِّعٌ في الصفّ. شجرتُه من ‎pgFolds‎ وأصنافُه ‎.pg-*‎ نفسُها —
      فالشكلُ واحدٌ في الموضعين. ويفترق عنها بشيءٍ واحد: **الاختيار**. فكلُّ مربّعٍ زرٌّ
      (والساكنُ هناك يُختار ههنا)، والمختارُ يُوسم، وهو المجلدُ الذي يُعرض جوفُه تحته */
-  /* ===== زجاجُ المختبر: «شريطٌ زجاجيّ وقطرة» (اعتمده صاحب الموقع) =====
-     كلُّ صفٍّ شريطٌ من زجاجٍ صافٍ، والمتوسِّعُ لوحٌ زجاجيّ يحمل أبناءه، واللونُ في أيقونة
-     المجلد وحدها — لا تدرّجَ ولا توهّج. والمختارُ تعلوه «قطرةٌ» تكسر ما تحتها وتكبّره،
-     يرسمها ‎lgxPaint‎ (انكسارُ سنيل وفرينل من liquid-glass-studio) */
+  /* ===== زجاجُ المختبر: كبسولاتٌ وألواح (Liquid Glass) =====
+     كلُّ مجلدٍ كبسولةُ زجاجٍ مستقلّة تملأ نصيبَها من الصفّ، والمتوسِّعُ لوحٌ زجاجيّ يحمل
+     أبناءه، واللونُ في أيقونة المجلد وفي حلقة المختار وحدهما. والزجاجُ نفسُه — حافّتُه
+     المضيئةُ مع الضوء، وانحناءُ سطحه، وظلُّه الناعم — يرسمه ‎pksPaint‎ على كرت الشاشة */
   const pkFi = c => '<svg class="pk-fi" viewBox="0 0 24 24" aria-hidden="true"' + (c ? ' style="color:' + c + '"' : '') + '><path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h4.3c.66 0 1.3.26 1.77.73L11.9 6h7.6A2.5 2.5 0 0 1 22 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5z"/></svg>';
-  const pkDrop = '<i class="lgx-drop" aria-hidden="true"></i>';
-  /* انحناءاتٌ متّحدةُ المركز: كلُّ لوحٍ داخلَ آخر نصفُ قطره نصفُ قطرِ أبيه ناقصًا الحشوة (٤)،
-     فتجري الحوافُّ متوازية. ويُحسب من الأسفل: الصفُّ الذي لا يتّسع فيه شيء كبسولةٌ (٢١ =
-     ١٧ للكبسولة الداخلة + ٤)، وكلُّ طبقةٍ متّسعةٍ تحته تزيده ٨ (لوحٌ + صفّ) */
+  /* انحناءاتٌ متّحدةُ المركز: اللوحُ نصفُ قطره نصفُ قطرِ ما في داخله زائدًا حشوتَه (٦)،
+     فتجري الحوافُّ متوازية. ويُحسب من الأسفل: لوحٌ لا يتّسع فيه شيء ٢٤ (١٨ للكبسولة + ٦)،
+     وكلُّ لوحٍ متّسعٍ داخله يزيده ٦ */
   const pkChain = (nodes, open, key) => {
     const o = open.get(key), n = (nodes || []).find(k => k.id === o && k.kids && k.kids.length);
     return n ? 1 + pkChain(n.kids, open, n.id) : 0;
   };
-  const pkRowOpen = (nodes, open, key) => pkLab()
-    ? '<div class="pg-row" style="--r:' + (21 + 8 * pkChain(nodes, open, key)) + 'px">' : '<div class="pg-row">';
+  const pkBoxAt = (k, wide, open) => !pkLab() ? ''
+    : ' data-c="' + esc(k.c || '') + '"' + (wide ? ' style="--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px"' : '');
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
-    return pkRowOpen(nodes, open, parentKey) + nodes.map(k => {
+    return '<div class="pg-row">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId;
-      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '">'
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() && k.id === sel ? pkDrop : '') + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -9019,12 +9018,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkBoxEdHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
-    return pkRowOpen(nodes, open, parentKey) + nodes.map(k => {
+    return '<div class="pg-row">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : (isSel ? pkDrop : '') + pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>';
-      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '">'
+        : pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>';
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
         + (has ? '<div class="pg-in">' + pkBoxEdHTML(k.kids, open, k.id, sel) + '</div>' : '')
@@ -20466,10 +20465,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkLight = () => {
     PKL.raf = 0;
     PKL.ang += (PKL.want - PKL.ang) * .2;
-    const lx = Math.cos(PKL.ang).toFixed(2), ly = Math.sin(PKL.ang).toFixed(2);
+    /* بخطواتٍ من ٠٫٠٣ — فيُعاد رسمُ الزجاج حين يتغيّر شيءٌ تراه العين لا مع كلّ بكسل */
+    const q = v => (Math.round(v / .03) * .03).toFixed(2);
+    const lx = q(Math.cos(PKL.ang)), ly = q(Math.sin(PKL.ang));
     if (lx !== PKL.lx || ly !== PKL.ly) {
       PKL.lx = lx; PKL.ly = ly;
       document.querySelectorAll('#cm-body .pk-lg, .lgx-ghost').forEach(el => { el.style.setProperty('--lx', lx); el.style.setProperty('--ly', ly); });
+      if (!(PKG.s && PKG.s.on)) pksSoon();   /* أثناء السحب يكفي لوحُ القطرة */
     }
     if (Math.abs(PKL.want - PKL.ang) > .01) PKL.raf = requestAnimationFrame(pkLight);
   };
@@ -20486,28 +20488,46 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return [l - r, dx / l, dy / l];
   };
   const pkGap = (a, b) => Math.hypot(Math.max(0, a.x - (b.x + b.w), b.x - (a.x + a.w)), Math.max(0, a.y - (b.y + b.h), b.y - (a.y + a.h)));
-  /* لوحُ الزجاج أثناء السحب يُرسم على كرت الشاشة (‎WebGL‎): شكلُ القطرة، ومعه الهدفُ
-     مدموجَين بـ‎smin‎، وحافّةٌ مضيئةٌ تتبع الضوء، وحدٌّ رفيع — بدقّة الشاشة كاملةً وفي كلّ
-     إطار، فلا بكسلةَ ولا ثقل. وإن لم يتوفّر ‎WebGL‎ بقيت القطرةُ بزجاج ‎CSS‎ وحده */
+  /* ===== الزجاجُ على كرت الشاشة (‎WebGL‎) — ظلٌّ واحدٌ لكلّ ما في الشريط وللقطرة الممسوكة =====
+     كلُّ سطحٍ مستطيلٌ مدوَّرٌ بدالّة مسافة، ويُظلَّل كلوحٍ زجاجيٍّ محدَّب:
+       · حافّةٌ مضيئةٌ رفيعة، أقواها في جهة الضوء (والضوءُ يميل مع المؤشّر — ‎PKL‎)،
+       · انحناءُ السطح قرب الحافّة: يضيء في جهة الضوء ويخفت قليلًا في مقابلها،
+       · وظلٌّ ناعمٌ تحته — لا خطَّ أسودَ حوله.
+     والقطرةُ الممسوكةُ تُدمج بالهدف بـ‎smin‎ (دمجُ liquid-glass-studio) في الظلّ نفسِه.
+     يُرسم بدقّة الشاشة كاملة، والحرفُ ‎DOM‎ فوقه فيبقى حادًّا */
   const PK_GLSL = `precision highp float;
-uniform vec2 res; uniform float dpr; uniform vec4 A; uniform vec4 B; uniform float hasB; uniform float k; uniform float ang; uniform float dark;
-float cap(vec2 p, vec4 b, out vec2 n) { float r = b.w * .5; vec2 c = vec2(clamp(p.x, b.x + r, b.x + b.z - r), b.y + r); vec2 d = p - c; float l = max(length(d), 1e-4); n = d / l; return l - r; }
+uniform vec2 res; uniform float dpr; uniform vec4 A; uniform float Ar; uniform vec4 B; uniform float Br; uniform float hasB; uniform float k;
+uniform float ang; uniform float dark; uniform float base; uniform float fade; uniform vec4 ring; uniform float shOn;
+float rr(vec2 p, vec4 b, float r, out vec2 n) {
+  vec2 hs = b.zw * .5, d = p - (b.xy + hs); r = min(r, min(hs.x, hs.y));
+  vec2 q = abs(d) - (hs - r), s = vec2(d.x < 0. ? -1. : 1., d.y < 0. ? -1. : 1.);
+  if (q.x > 0. && q.y > 0.) n = normalize(q) * s; else if (q.x > q.y) n = vec2(s.x, 0.); else n = vec2(0., s.y);
+  return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - r;
+}
+float sm(float a, float b, out float h) { h = clamp(.5 + .5 * (b - a) / k, 0., 1.); return mix(b, a, h) - k * h * (1. - h); }
 void main() {
   vec2 p = vec2(gl_FragCoord.x, res.y - gl_FragCoord.y) / dpr;
-  vec2 na, nb; float d = cap(p, A, na); vec2 n = na;
-  if (hasB > .5) { float db = cap(p, B, nb); float h = clamp(.5 + .5 * (db - d) / k, 0., 1.); d = mix(db, d, h) - k * h * (1. - h); n = normalize(mix(nb, na, h) + 1e-5); }
-  if (d > 2.) discard;
-  float aa = .75 / dpr, inside = 1. - smoothstep(-aa, aa, d), nd = max(-d, 0.);
-  float dir = dot(n, vec2(cos(ang), sin(ang)));
-  float lit = pow(max(dir, 0.), 2.), back = pow(max(-dir, 0.), 3.) * .6;
-  float rim = pow(max(0., 1. - nd / 1.4), 1.6), sheen = pow(max(0., 1. - nd / 7.), 2.4);
-  float hi = (rim * (lit * .9 + back * .35 + .08) + sheen * (lit * .28 + back * .1)) * mix(1., .2, dark);
-  float a = clamp(mix(.34, .05, dark) + hi, 0., 1.) * inside;
-  float ring = (1. - smoothstep(0., 1.4, d)) * (1. - inside) * mix(.12, .4, dark);
-  gl_FragColor = vec4(vec3(a), a + ring * (1. - a));
+  vec2 na, nb, n2; float h; float d = rr(p, A, Ar, na); vec2 n = na;
+  if (hasB > .5) { float db = rr(p, B, Br, nb); d = sm(d, db, h); n = normalize(mix(nb, na, h) + 1e-5); }
+  float ds = rr(p - vec2(0., 3.), A, Ar, n2);
+  if (hasB > .5) { float dbs = rr(p - vec2(0., 3.), B, Br, n2); ds = sm(ds, dbs, h); }
+  float aa = .7 / dpr, inside = 1. - smoothstep(-aa, aa, d);
+  float sh = shOn * (1. - smoothstep(-3., 10., ds)) * mix(.09, .26, dark) * (1. - inside) * fade;
+  if (inside <= 0. && sh <= .002) discard;
+  float nd = max(-d, 0.), L = dot(n, vec2(cos(ang), sin(ang))), lit = max(L, 0.), far = max(-L, 0.);
+  float rim = exp(-nd / .8), bev = 1. - smoothstep(0., 10., nd);
+  float wA = base + rim * (mix(.6, .2, dark) * (.25 + .75 * lit) + mix(.2, .06, dark) * far)
+           + bev * bev * mix(.2, .06, dark) * lit + bev * bev * bev * mix(.07, .025, dark);
+  float bA = bev * bev * far * mix(.05, .14, dark);
+  wA = clamp(wA, 0., 1.) * inside * fade; bA = clamp(bA, 0., 1.) * inside * fade;
+  float rg = ring.a * (1. - smoothstep(1.3, 2.1, nd)) * inside * fade;
+  vec3 c = vec3(wA * (1. - bA)); float a = wA + bA * (1. - wA);
+  c = c * (1. - rg) + ring.rgb * rg; a = a * (1. - rg) + rg;
+  gl_FragColor = vec4(c, a + sh * (1. - a));
 }`;
-  function pkGl(cv) {
-    const g = cv.getContext('webgl', { premultipliedAlpha: true, antialias: false, alpha: true });
+  const PK_U = ['res', 'dpr', 'A', 'Ar', 'B', 'Br', 'hasB', 'k', 'ang', 'dark', 'base', 'fade', 'ring', 'shOn'];
+  function pkGl(cv, keep) {
+    const g = cv.getContext('webgl', { premultipliedAlpha: true, antialias: false, alpha: true, preserveDrawingBuffer: !!keep });
     if (!g) return null;
     const sh = (t, src) => { const o = g.createShader(t); g.shaderSource(o, src); g.compileShader(o); return o; };
     const pr = g.createProgram();
@@ -20519,24 +20539,105 @@ void main() {
     g.bindBuffer(g.ARRAY_BUFFER, g.createBuffer());
     g.bufferData(g.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), g.STATIC_DRAW);
     const v = g.getAttribLocation(pr, 'v'); g.enableVertexAttribArray(v); g.vertexAttribPointer(v, 2, g.FLOAT, false, 0, 0);
-    const u = {}; ['res', 'dpr', 'A', 'B', 'hasB', 'k', 'ang', 'dark'].forEach(n => { u[n] = g.getUniformLocation(pr, n); });
+    const u = {}; PK_U.forEach(nm => { u[nm] = g.getUniformLocation(pr, nm); });
     g.enable(g.BLEND); g.blendFunc(g.ONE, g.ONE_MINUS_SRC_ALPHA);
-    return { g, u };
+    return { g, u, cv };
   }
+  const pkRgb = c => { const m = /^#?([0-9a-f]{6})$/i.exec(c || ''); if (!m) return [0, 0, 0]; const n = parseInt(m[1], 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; };
+  /* سطحٌ واحد: ‎o = {x,y,w,h,r, base, fade, ring:[r,g,b,a], sh, B?, Br?, k?}‎ */
+  function pkGlDraw(R, W, H, D, o, clip) {
+    const { g, u } = R;
+    if (clip) { g.enable(g.SCISSOR_TEST); g.scissor(Math.floor(clip.x * D), Math.floor(H - (clip.y + clip.h) * D), Math.ceil(clip.w * D), Math.ceil(clip.h * D)); }
+    else g.disable(g.SCISSOR_TEST);
+    g.uniform2f(u.res, W, H); g.uniform1f(u.dpr, D);
+    g.uniform4f(u.A, o.x, o.y, o.w, o.h); g.uniform1f(u.Ar, o.r);
+    const B = o.B;
+    g.uniform4f(u.B, B ? B.x : 0, B ? B.y : 0, B ? B.w : 1, B ? B.h : 1); g.uniform1f(u.Br, B ? B.r : 0);
+    g.uniform1f(u.hasB, B ? 1 : 0); g.uniform1f(u.k, Math.max(o.k || 1, 1));
+    g.uniform1f(u.ang, PKL.ang); g.uniform1f(u.dark, pkDark() ? 1 : 0);
+    g.uniform1f(u.base, o.base); g.uniform1f(u.fade, o.fade == null ? 1 : o.fade);
+    const rg = o.ring || [0, 0, 0, 0]; g.uniform4f(u.ring, rg[0], rg[1], rg[2], rg[3]);
+    g.uniform1f(u.shOn, o.sh == null ? 1 : o.sh);
+    g.drawArrays(g.TRIANGLES, 0, 3);
+  }
+  const pkBase = kind => pkDark() ? { cap: .065, tray: .045, sel: .15 }[kind] : { cap: .52, tray: .36, sel: .9 }[kind];
+  /* ===== ‎pksPaint‎ — زجاجُ الشريط الساكن =====
+     سياقُ ‎WebGL‎ واحدٌ مشترك يرسم الشريطَ ثمّ يُنسخ إلى لوحٍ ثنائيّ الأبعاد خلف مربّعاته
+     (المتصفّحُ يحدّ عددَ سياقات ‎WebGL‎، والشريطُ يُعاد بناؤه مع كلّ رسم). ويُعاد الرسمُ إذا
+     تغيّر مقاسُ الشريط أو مُرّر صفٌّ فيه أو مال الضوء أو أُعيد بناؤه — في إطارٍ واحدٍ مجمَّع */
+  const PKS = { R: null, tried: false, raf: 0, ro: null, mo: null, dirty: new Set() };
+  const pksDirty = () => document.querySelectorAll('#cm-body .pk-lg').forEach(s => PKS.dirty.add(s));
+  function pksPaint(strip) {
+    if (!PKS.R && !PKS.tried) { PKS.tried = true; PKS.R = pkGl(document.createElement('canvas'), true); }
+    const R = PKS.R;
+    strip.classList.toggle('has-gl', !!R);
+    if (!R) return;
+    /* لوحُ ‎WebGL‎ نفسُه يوضع في الشريط الأوّل (بلا نسخ)، وما زاد من الأشرطة يُنسخ إليه */
+    const own = !R.cv.isConnected || R.cv.parentElement === strip || !R.cv.closest('#cm-body');
+    let out = own ? R.cv : strip.querySelector(':scope > .lgx-bg');
+    if (own && R.cv.parentElement !== strip) { R.cv.className = 'lgx-bg'; R.cv.setAttribute('aria-hidden', 'true'); strip.prepend(R.cv); }
+    if (!out) { out = document.createElement('canvas'); out.className = 'lgx-bg'; out.setAttribute('aria-hidden', 'true'); strip.prepend(out); }
+    const sr = strip.getBoundingClientRect(), D = Math.min(window.devicePixelRatio || 1, 2);
+    const cw = strip.scrollWidth, ch = strip.scrollHeight;
+    const W = Math.max(1, Math.round(cw * D)), H = Math.max(1, Math.round(ch * D));
+    if (R.cv.width !== W || R.cv.height !== H) { R.cv.width = W; R.cv.height = H; }
+    if (!own && (out.width !== W || out.height !== H)) { out.width = W; out.height = H; }
+    out.style.width = cw + 'px'; out.style.height = ch + 'px';
+    const g = R.g; g.disable(g.SCISSOR_TEST); g.viewport(0, 0, W, H); g.clearColor(0, 0, 0, 0); g.clear(g.COLOR_BUFFER_BIT);
+    /* القياسُ يُحفظ: ميلُ الضوء وحده لا يغيّر شيئًا من المواضع، فلا يُعاد قياسُها له */
+    if (!strip.__lgxShapes || PKS.dirty.has(strip)) { strip.__lgxShapes = pksMeasure(strip); PKS.dirty.delete(strip); }
+    strip.__lgxShapes.forEach(o => pkGlDraw(R, W, H, D, o, o.clip));
+    if (!own) { const ctx = out.getContext('2d'); ctx.clearRect(0, 0, W, H); ctx.drawImage(R.cv, 0, 0); }
+  }
+  function pksMeasure(strip) {
+    const sr = strip.getBoundingClientRect(), list = [];
+    const ox = sr.left - strip.scrollLeft, oy = sr.top - strip.scrollTop;
+    const rel = b => ({ x: b.left - ox, y: b.top - oy, w: b.width, h: b.height });
+    strip.querySelectorAll('.pg-box, .pg-box.is-wide.is-sel > .pg-face').forEach(el => {
+      if (!el.offsetParent) return;
+      const isFace = el.classList.contains('pg-face'), box = isFace ? el.parentElement : el;
+      const wide = !isFace && box.classList.contains('is-wide'), sel = box.classList.contains('is-sel') && (isFace || !wide);
+      const b = rel(el.getBoundingClientRect());
+      const row = box.parentElement && box.parentElement.closest('.pg-row');
+      const cr = row ? rel(row.getBoundingClientRect()) : null;
+      const clip = cr && { x: cr.x - 12, y: b.y - 12, w: cr.w + 24, h: b.h + 28 };   /* بقدر الظلّ حول الصفّ */
+      const col = pkRgb(box.dataset.c);
+      list.push({
+        clip, ...b, r: wide ? parseFloat(getComputedStyle(box).getPropertyValue('--r')) || 24 : b.h / 2,
+        base: pkBase(wide ? 'tray' : sel ? 'sel' : 'cap'),
+        fade: box.classList.contains('is-drag') ? .35 : 1,
+        ring: sel ? [col[0], col[1], col[2], .9] : null,
+        sh: isFace ? 0 : 1,
+      });
+    });
+    return list;
+  }
+  const pksAll = () => { PKS.raf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pksPaint); };
+  const pksSoon = () => { if (!PKS.raf) PKS.raf = requestAnimationFrame(pksAll); };
+  function pksWatch() {
+    if (PKS.mo || typeof MutationObserver === 'undefined') return;
+    const cm = () => document.getElementById('cm-body');
+    PKS.ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { pksDirty(); pksSoon(); }) : null;
+    /* بناءُ شريطٍ جديد: يُرصد مقاسُه ويُرسم — ولا يُرسم لغير شريطٍ جديد (الكتابةُ في البطائق
+       تُطلق تغييراتٍ كثيرة لا شأنَ للزجاج بها) */
+    PKS.mo = new MutationObserver(() => {
+      const fresh = document.querySelectorAll('#cm-body .pk-lg:not([data-lgs])');
+      if (!fresh.length) return;
+      fresh.forEach(s => { s.dataset.lgs = '1'; PKS.dirty.add(s); if (PKS.ro) PKS.ro.observe(s); });
+      pksSoon();
+    });
+    PKS.mo.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener('scroll', e => { if (e.target && e.target.closest && e.target.closest('#cm-body .pk-lg')) { pksDirty(); pksSoon(); } }, true);
+    if (cm() && cm().querySelector('.pk-lg')) pksSoon();
+  }
+  if (document.body) pksWatch(); else document.addEventListener('DOMContentLoaded', pksWatch);
   function pkMergePaint(st, g, t, k) {
     const R = st.gl;
     if (!R) return;
-    const cv = st.cv, D = Math.min(window.devicePixelRatio || 1, 3);
-    const W = Math.round(innerWidth * D), H = Math.round(innerHeight * D);
-    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-    const { g: gl, u } = R;
-    gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniform2f(u.res, W, H); gl.uniform1f(u.dpr, D);
-    gl.uniform4f(u.A, g.x, g.y, g.w, g.h);
-    gl.uniform4f(u.B, t ? t.x : 0, t ? t.y : 0, t ? t.w : 1, t ? t.h : 1);
-    gl.uniform1f(u.hasB, t ? 1 : 0); gl.uniform1f(u.k, Math.max(k, 1));
-    gl.uniform1f(u.ang, PKL.ang); gl.uniform1f(u.dark, pkDark() ? 1 : 0);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    const D = Math.min(window.devicePixelRatio || 1, 3), W = Math.round(innerWidth * D), H = Math.round(innerHeight * D);
+    if (R.cv.width !== W || R.cv.height !== H) { R.cv.width = W; R.cv.height = H; }
+    const gl = R.g; gl.disable(gl.SCISSOR_TEST); gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    pkGlDraw(R, W, H, D, { ...g, r: g.h / 2, base: pkBase('cap') * (pkDark() ? 1.2 : .85), B: t && { ...t, r: t.h / 2 }, k, sh: 1 });
   }
   function pkDragStart(st, e) {
     const f = st.face, r = f.getBoundingClientRect(), strip = f.closest('.pk-fstrip');
@@ -20559,6 +20660,7 @@ void main() {
     });
     f.closest('.pg-box').classList.add('is-drag');
     document.documentElement.classList.add('lgx-dragging');
+    pksDirty(); pksSoon();
   }
   function pkDragFrame(st) {
     const g = { x: st.x, y: st.y, w: st.w, h: st.h };
@@ -20595,6 +20697,7 @@ void main() {
       document.documentElement.classList.remove('lgx-dragging');
       if (st.tEl) st.tEl.classList.remove('lgx-near');
       pkDropClear();
+      pksDirty(); pksSoon();
       if (to != null) {
         pkMove(id, st.id, to);
         if (to !== '') requestAnimationFrame(() => {
