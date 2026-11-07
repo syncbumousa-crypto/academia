@@ -9453,22 +9453,45 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
       }
       pkSrcSelSeen[id] = sel;
+      const cv = pkSrcCovMeta(id);
+      /* ===== ROADMAP-SPLIT · المرحلة ٣: الكتابُ لا يُبنى مرّتين =====
+         كلُّ رسمةٍ تبني الجوفَ من جديد، فكان الكتابُ يُركَّب من الصفر (ومضةٌ، وورقةٌ تُقلَب تضيع، وصورُ صفحاتٍ تُطلب).
+         فإن كان الكتابُ المركَّبُ قبلُ للملفّ نفسِه والغلافِ نفسِه، نُقلت عناصرُه كما هي إلى الوعاء الجديد،
+         وأُعيدت مراقبةُ مقاسه، ولحق موضعَه الجديدَ بـ‎FLIP‎ إن كان له موضعٌ قديم */
+      const old = pkSrcBk[id], covKey = cv ? pkSrcCovKey(id) : null;
+      if (old && old.el && old.view === view && old.el.isConnected) return;   /* مركَّبٌ هنا أصلًا */
+      if (old && old.el && old.doc === doc && old.covKey === covKey && old.view && old.view !== view && !old.view.isConnected) {
+        view.innerHTML = '';
+        while (old.view.firstChild) view.appendChild(old.view.firstChild);
+        old.view.style.transform = '';
+        old.view = view;
+        const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
+        const moved = wantClosed !== !!old.closed || wantPos !== old.pos;
+        if (moved) { if (old.leaf) bkLeafDrop(old); old.closed = wantClosed; old.pos = wantPos; }
+        old.flip = (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })();
+        try { old.ro.disconnect(); } catch (e) {}
+        old.ro.observe(old.stage);
+        const same = old.stage.clientWidth === old.stW && old.stage.clientHeight === old.stH;
+        if (!same || old.flip || moved) { if (old.leaf && old.leaf.mode !== 'rest') bkLeafDrop(old); bkLayout(old); }
+        else old.flip = null;
+        return;
+      }
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
-      const cv = pkSrcCovMeta(id);
       bkMount(view, pkSrcBk[id] = {
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
         closed: !meta || meta.closed !== false,
-        covKey: cv ? pkSrcCovKey(id) : null,
+        covKey,
         wide: true,
         flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
         /* عمودُ الغلاف والملفّ في **منتصف** الكتاب عموديًّا (طلبُ صاحب الموقع) — لا أعلاه */
         onLayout: bb => {
-          const tl = view.parentElement && view.parentElement.querySelector('.chtools');
+          const vw = bb.view;   /* الوعاءُ الحاليّ — يتبدّل إذا نُقل الكتابُ بين الرسمات */
+          const tl = vw.parentElement && vw.parentElement.querySelector('.chtools');
           if (!tl) return;
-          const br = bb.el.getBoundingClientRect(), vt = view.getBoundingClientRect().top;
+          const br = bb.el.getBoundingClientRect(), vt = vw.getBoundingClientRect().top;
           const k = tl.children; if (!k.length) return;   /* قامةُ الزرّين لا قامةُ العمود (العمودُ ممدودٌ بطول الصفّ) */
           const h = k[k.length - 1].getBoundingClientRect().bottom - k[0].getBoundingClientRect().top;
           tl.style.paddingTop = Math.max(0, Math.round(br.top + br.height / 2 - vt - h / 2)) + 'px';
@@ -21065,6 +21088,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let raf = 0;
     b.ro = new ResizeObserver(() => {
       if (!b.el.isConnected) { b.ro.disconnect(); return; }
+      /* لا يُعاد الحسابُ إن لم يتغيّر المقاس — فلا تُقطع ورقةٌ في منتصف تقليبها (نقلُ الكتاب بين الرسمات) */
+      if (b.stage.clientWidth === b.stW && b.stage.clientHeight === b.stH) return;
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => { bkLeafDrop(b); bkLayout(b); });
     });
@@ -21101,6 +21126,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const inSplit = !!(b.view && b.view.closest('.pk-split'));
     const W0 = inSplit ? b.stage.clientWidth - 30 : (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H0 = b.wide ? b.stage.clientHeight - 44 : (b.stage.clientHeight - 64) * 0.9;
     const W = W0, H = H0;
+    b.stW = b.stage.clientWidth; b.stH = b.stage.clientHeight;   /* المقاسُ الذي حُسب عليه — يُقارَن به قبل أيّ إعادة */
     if (W <= 0 || H <= 0) return;
     b.single = W0 < (inSplit ? 240 : b.wide ? 360 : 620);   /* وكتابُ «المصدر» يبقى صفحتين ولو في نصف المساهمة (القسمة) — لا ينفرد إلّا حين يضيق جدًّا */
     /* وفي القسمة: إن كانت الصفحتان ستصغُران دون قامةٍ تُقرأ (‎200px‎) والصفحةُ الواحدةُ أكبرُ منهما بيّنًا،
