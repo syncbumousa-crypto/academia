@@ -4317,10 +4317,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         let p = (dr.posts || []).find(x => x && !x.me && key(x) === who);
         const data = {};
         DOC_WIRE.forEach(k => { if (d[k] !== undefined) data[k] = d[k]; });
+        /* ===== والمنقولُ يحمل أصلَه وتاريخَه =====
+           صفٌّ نُقل من موقعٍ قديم يحمل ‎imp‎ (شارة «from» ورابطُ الأصل)، فيُنسخ معه.
+           وتاريخُه تاريخُ كتابته هناك لا تاريخُ المساهمة: كاتبٌ واحدٌ قيّم دكتورين
+           في سنتين، وصفّاه في مساهمةٍ واحدة */
+        if (d.imp) data.imp = d.imp;
         if (!p) {
           dr.posts.push({ id: d.pid || newId(), me: false, uid: post.uid || '',
                           u: post.u || { name: T().docByAnon }, likes: 0, liked: false,
-                          ts: post.ts || Date.now(), data });
+                          ts: (d.imp && d.imp.ts) || post.ts || Date.now(), data });
           hit++;
         } else if (JSON.stringify(p.data) !== JSON.stringify(data)) { p.data = data; hit++; }
       });
