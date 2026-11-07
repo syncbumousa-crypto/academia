@@ -16960,3 +16960,11 @@ html[data-theme="dark"] .kcv-lab { background: #3a4246; }
 .kcv.is-ro .kcv-card { cursor: default; user-select: text; }
 .kcv.is-ro .kcv-link, .kcv.is-ro .kcv-lab { cursor: default; pointer-events: none; }
 .kt-view.is-ro .kt-ok { cursor: default; }
+
+/* ===== «الكتاب ٢» (ROADMAP-BOOK2 · المرحلة ٣) — كتابُ «المصدر» بـWebGL =====
+   اللوحةُ تملأ مسرحَ الكتاب كلَّه (هامشُها للظلّ)، والـ‎.cbk‎ صندوقٌ شفّافٌ على مستطيل الفتحة: منه تُحاذى الأدواتُ ويُقاس ‎FLIP‎ */
+.cbk-stage--gl { display: block; padding: 0; perspective: none; cursor: auto; }
+.cbk-stage--gl:active { cursor: auto; }
+.cbk-stage--gl > .bk2-gl { position: absolute; inset: 0; display: block; outline: none; }
+.cbk--gl { position: absolute; pointer-events: none; transform-style: flat; }
+#cm-body .pk-src--book .cbk-stage--gl { padding-inline: 0; }

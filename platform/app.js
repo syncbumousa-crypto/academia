@@ -9484,7 +9484,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
-      bkMount(view, pkSrcBk[id] = {
+      (bk2Ok() ? bk2Mount : bkMount)(view, pkSrcBk[id] = {
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
@@ -21065,6 +21065,153 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        وفي الصفحة الواحدة رقمُ الصفحة الظاهرة من ‎1‎.
      · والمغلقُ يقف حيث تقف الصفحةُ اليمنى (‎translateX(pw)‎) فيبقى ملصقًا باليمين،
        ويرجع إلى مكانه مع دوران الغلاف حين يُفتح */
+  /* ===== «الكتاب ٢» (ROADMAP-BOOK2 · المرحلة ٣) =====
+     كتابُ «المصدر» يُرسم بـWebGL: ورقةٌ تلتفّ حقًّا، وسماءٌ وشمسٌ تُلقي ظلًّا خفيفًا، وورقٌ بحُبيبات — والتقليبُ من أيّ
+     نقطةٍ في نصف الكتاب (‎platform/book2.js‎). ويُحمَّل Three.js مع أوّل فتحٍ للكتاب لا مع الموقع.
+     · الواجهةُ واجهةُ الكتاب القديم: ‎b.pos/b.closed‎ والغلافُ وأزرارُ التنقّل والمؤشّر وتذكّرُ الموضع و‎onShow/onLayout‎،
+       فـ«ربطُ الصفحات» والقسمةُ والأحجامُ الثلاثة لا تدري بالفرق.
+     · ‏‎A‎ في المحرّك عددُ الأوراق المقلَّبة (الغلافُ ورقة): ‎0‎ مغلق، و‎A‎ فتحةٌ يمينُها ‎2(A−1)‎.
+     · ومتصفّحٌ بلا WebGL (أو تعذّر التحميل) يبقى على المحرّك القديم */
+  let bk2LibP = null, bk2No = false;
+  const bk2Ok = () => {
+    if (bk2No || window.AC_BOOK2 === false) return false;
+    try { const c = document.createElement('canvas'); if (!(c.getContext('webgl2') || c.getContext('webgl'))) bk2No = true; } catch (e) { bk2No = true; }
+    return !bk2No;
+  };
+  function bk2Lib() {
+    if (!bk2LibP) bk2LibP = Promise.all([
+      import(assetURL('assets/vendor/three/three.module.min.js')),
+      import(assetURL('platform/book2.js?v=' + (window.AC_VER || 0))),
+    ]).catch(e => { bk2LibP = null; throw e; });
+    return bk2LibP;
+  }
+  const bk2A = b => b.closed ? 0 : Math.floor(b.pos / 2) + 1;
+  /* صورةُ صفحةٍ بالدقّة التي يطلبها المحرّك — والغلافُ صورتُه المرفوعة تملأ الصفحةَ ولا تتشوّه، وإلّا الصفحةُ الأولى */
+  async function bk2Tex(b, k, w) {
+    if (k === 'cover' && b.covKey) {
+      try {
+        const blob = await chIdb('readonly', b.covKey);
+        if (blob) {
+          const bmp = await createImageBitmap(blob);
+          const cv = document.createElement('canvas');
+          cv.width = w; cv.height = Math.round(w / b.ar);
+          const s = Math.max(cv.width / bmp.width, cv.height / bmp.height), dw = bmp.width * s, dh = bmp.height * s;
+          cv.getContext('2d').drawImage(bmp, (cv.width - dw) / 2, (cv.height - dh) / 2, dw, dh);
+          bmp.close && bmp.close();
+          return cv;
+        }
+      } catch (e) {}
+    }
+    const pg = await b.doc.getPage(k === 'cover' ? 1 : k);
+    const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w / v1.width });
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+    const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    return cv;
+  }
+  function bk2Mount(view, b) {
+    view.innerHTML = `
+      <div class="cbk-stage cbk-stage--gl" tabindex="0" data-bkstage><div class="cbk cbk--gl" data-bk></div></div>
+      <div class="cbk-nav">
+        <button type="button" class="cbk-nav__b" data-bknav="-1" aria-label="prev">${BK_ARR('M9 6l6 6-6 6')}</button>
+        <span class="cbk-nav__i" data-bkind></span>
+        <button type="button" class="cbk-nav__b" data-bknav="1" aria-label="next">${BK_ARR('M15 6l-6 6 6 6')}</button>
+        <button type="button" class="cbk-nav__b cbk-nav__close" data-bkclose title="${esc(T().bkClose)}" aria-label="${esc(T().bkClose)}">${BK_ARR('M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3')}</button>
+      </div>`;
+    b.stage = view.querySelector('[data-bkstage]');
+    b.el = view.querySelector('[data-bk]');
+    b.ind = view.querySelector('[data-bkind]');
+    b.nav = view.querySelector('.cbk-nav');
+    b.view = view; b.leaf = null; b.single = false;
+    b.pos = Math.max(0, b.pos - (b.pos % 2));
+    b.gl = null;   /* المحرّكُ بعد التحميل */
+    b.dark = pkDark();
+    let raf = 0;
+    b.ro = new ResizeObserver(() => {
+      if (!b.el.isConnected) { b.ro.disconnect(); return; }
+      if (b.stage.clientWidth === b.stW && b.stage.clientHeight === b.stH) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => bkLayout(b));
+    });
+    b.ro.observe(b.stage);
+    const st = b.stage;
+    /* قبل أن يُحمَّل المحرّك يُكتب الموضعُ وحدَه، فيُفتح عليه حين يجهز */
+    const turnTo = A => {
+      A = Math.max(0, Math.min(Math.floor(b.n / 2) + 1, A));
+      if (b.gl) return b.gl.goTo(A);
+      b.closed = A === 0; b.pos = A === 0 ? 0 : 2 * (A - 1);
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      bk2Show(b);
+    };
+    const step = d => b.gl ? b.gl.flip(d) : turnTo(bk2A(b) + d);
+    st.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); step(1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); step(-1); }
+      else if (e.key === 'Escape' && !b.closed) { e.preventDefault(); turnTo(0); }
+    });
+    view.querySelectorAll('[data-bknav]').forEach(btn => btn.addEventListener('click', () => step(+btn.dataset.bknav)));
+    view.querySelector('[data-bkclose]').addEventListener('click', () => turnTo(0));
+    bk2Layout(b);
+    bk2Lib().then(([THREE, M]) => {
+      if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
+      b.gl = M.createBook2(THREE, b.stage, {
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light',
+        tex: (k, w) => bk2Tex(b, k, w),
+        onGrab: () => st.focus({ preventScroll: true }),
+        onTurn: A => {
+          b.closed = A === 0; b.pos = A === 0 ? 0 : 2 * (A - 1);
+          if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+          bk2Show(b);
+        },
+      });
+      /* تبدُّلُ الجلد (فاتح/داكن) يصل الكتابَ ولو لم يُعَد رسمُه */
+      const mo = new MutationObserver(() => {
+        if (!b.gl || b.gl.dead) return mo.disconnect();
+        const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; b.gl.setTheme(dk ? 'dark' : 'light'); }
+      });
+      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+      bk2Layout(b);
+    }).catch(() => {
+      /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
+      bk2No = true;
+      try { b.ro.disconnect(); } catch (e) {}
+      delete b.gl;
+      if (b.view.isConnected) bkMount(b.view, b);
+    });
+  }
+  function bk2Layout(b) {
+    b.stW = b.stage.clientWidth; b.stH = b.stage.clientHeight;
+    if (!b.stW || !b.stH) return;
+    const g = b.gl;
+    if (g) {
+      const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
+      g.resize();
+    }
+    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=1.06 · MY=1.1‎، والكاميرا ترفع الكتابَ ‎4%‎) — ولو قبل تحميله،
+       فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
+    const H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.1), b.stW / (2 * 1.06));
+    const w = 2 * ppu, h = H * ppu, x = b.stW / 2 - ppu, y = b.stH / 2 - h * 0.54;
+    b.pw = Math.floor(ppu); b.ph = Math.floor(h);
+    Object.assign(b.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
+    b.nav.style.width = Math.round(w) + 'px';
+    bk2Show(b);
+    if (b.onLayout) b.onLayout(b);
+    if (b.flip) { const f = b.flip; b.flip = null; bkFlipFrom(b, f); }
+  }
+  function bk2Show(b) {
+    const g = b.gl, p = b.pos;
+    /* موضعٌ كُتب من خارج (اختيارُ مجلدٍ مربوط · ‎pkLnkGo‎): المحرّكُ يقلّب إليه */
+    if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
+    const A = bk2A(b), maxA = Math.floor(b.n / 2) + 1;
+    b.ind.textContent = b.closed ? T().bkCover : p === 0 ? `1 / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    if (b.onShow) b.onShow(b);
+    b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;
+    b.view.querySelector('[data-bknav="-1"]').disabled = A <= 0;
+    b.view.querySelector('[data-bkclose]').hidden = !!b.closed;
+    return Promise.resolve();
+  }
+
   function bkMount(view, b) {
     view.innerHTML = `
       <div class="cbk-stage" tabindex="0" data-bkstage>
@@ -21124,6 +21271,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   function bkLayout(b) {
+    if (b.gl !== undefined) return bk2Layout(b);
     /* أصغرُ قليلًا ممّا يسع (‎82%‎)، ويُلصق باليمين — ويبقى اليسارُ لما يأتي بعدُ */
     /* وكتابُ «المصدر» في المساهمة (‎b.wide‎) يأخذ عرضَ وعائه كلَّه: عمودُ الغلاف والملفّ بجانبه أخذ نصيبَه */
     /* وفي القامة كذلك: لا يُترك له إلّا ما يسع حافّةَ الغلاف (‎11px‎ فوق و‎24px‎ تحت) وظلَّه —
@@ -21191,6 +21339,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   function bkShow(b) {
+    if (b.gl !== undefined) return bk2Show(b);
     const p = b.pos;
     b.el.classList.toggle('cbk--closed', !!b.closed);
     b.el.classList.remove('cbk--moving');
@@ -21644,6 +21793,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (bookEl && !bkReduce()) {
             const card = bookEl.closest('.post');
             fly = { r: bookEl.getBoundingClientRect(), node: bookEl.cloneNode(true), c: card ? card.getBoundingClientRect() : null };
+            /* لوحةُ WebGL تُنسخ فارغة: تُرسم الآن في لوحةٍ عاديّةٍ مكانَها */
+            const g = pkSrcBk[id] && pkSrcBk[id].gl, cl = fly.node.querySelector('canvas.bk2-gl');
+            if (g && cl) { const c2 = document.createElement('canvas'); c2.className = 'bk2-gl'; c2.style.cssText = cl.style.cssText; try { g.snapshot(c2); } catch (e) {} cl.replaceWith(c2); }
           }
           grow = partEl && partEl.getBoundingClientRect();
         }
