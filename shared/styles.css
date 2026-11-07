@@ -16123,6 +16123,21 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
 #cm-body.is-cxmax { overflow: hidden; display: flex; flex-direction: column; padding: 0; }
 #cm-body.is-cxmax > :not(.pk--max) { display: none !important; }
 #cm-body.is-cxmax > .pk--max { flex: 1 1 auto; min-height: 0; margin: 0; border: 0; border-radius: 14px; padding: 12px 16px; }
+#cm-body.is-cxmax > .pk--max { position: relative; }
+/* ===== قوسُ التضييق: القوسُ نفسُه مقلوبًا في الزاوية السفلى المقابلة =====
+   يُدار نصفَ دورة فتنقلب زاويتُه، ويستقرّ على حدّي المربّع كما يستقرّ قوسُ التوسيع فوق —
+   خطُّه على ‎4.5px‎ داخلَ الحدّ ونصفُ قطره متّحدُ المركز مع زاوية ‎14‎. و‎aria-pressed‎ يجعل
+   انزلاقَه عند المرور «إلى الداخل» (والدورانُ يقلبه إلى الأعلى نحو قلب المربّع) */
+#cm-body .pk-max.pk-max--curve.pk-shrink { top: auto; bottom: 0; inset-inline-start: auto; inset-inline-end: 0; z-index: 4; transform: rotate(180deg); }
+/* ===== الدرجةُ الثالثة: الشاشةُ كلُّها =====
+   اللوحُ نفسُه (‎#cm-body‎ وفيه المساهمةُ وحدَها) يُثبَّت فوق كلّ شيء بهامشٍ صغير، وما خلفه يُعتَم.
+   وقوسُ التوسيع يغيب فيها — لا أوسعَ منها — ويبقى قوسُ التضييق */
+#cm-body.is-cxfull {
+  position: fixed; inset: 10px; z-index: 4000; height: auto; max-height: none; margin: 0;
+  background: var(--u-surf2, #fff); box-shadow: 0 0 0 100vmax rgba(10, 18, 30, .45), 0 24px 60px rgba(0, 0, 0, .35);
+}
+html[data-theme="dark"] #cm-body.is-cxfull { background: #1f2a31; }
+#cm-body.is-cxfull .pk-max.pk-max--curve:not(.pk-shrink) { display: none; }
 .pk--max > .post-yt { flex: 1 1 auto; min-height: 0; }
 .pk--max .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
 .pk--max #cm-cards {
@@ -16214,7 +16229,7 @@ html[data-lang="en"] .pk-maxmini svg { transform: scaleX(-1); }
    في المكبَّر يُنزع حدُّ ‎.x3-pkhd.on‎ ويحلّ محلَّه ‎.pk-hdline‎: خطٌّ بذهب القوس المكتوم
    وفي وسطه مسكةٌ رماديّةٌ ونقاطٌ ثلاث — المقبضُ الذي على القوس ممدودًا أفقيًّا */
 .pk--max .x3-pkhd.on { border-bottom: 0; padding-bottom: 4px; }
-.pk--max { overflow: hidden; }
+.pk--max { overflow: hidden; overflow: clip; }   /* ‎clip‎ لا يُمرَّر برمجيًّا (تركيزٌ أو ‎scrollIntoView‎) فلا يزيح قوسَ التضييق عن زاويته */
 .pk-hdline {
   position: relative; display: flex; align-items: center; justify-content: center; flex: none;
   width: 100%; height: 14px; margin: 2px 0 8px; padding: 0; border: 0; background: none; cursor: pointer;

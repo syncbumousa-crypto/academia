@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -3984,7 +3984,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
   let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
-  let cxFtDn = false;                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
+  let cxFtDn = false;
+  let cxFull = false;                      // والمكبَّرةُ تملأ الشاشةَ كلَّها (درجةٌ ثالثة) — حالُ نظرة                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
 
   function showCmTab(t) {
     cleanupEmptyMine();   /* الخروج من محرر بلا كتابة لا يترك مشاركة فارغة */
@@ -6538,7 +6539,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (cmTabSel === 'cards' && cmView.mode !== 'edit') { renderCmSection(); return; }   /* تُرسم ضيّقةً من جديد */
     }
     $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
-    if (!cxMax && !cxMaxPub) { cxHdUp = false; cxFtDn = false; }
+    if (!cxMax && !cxMaxPub) { cxHdUp = false; cxFtDn = false; cxFull = false; }
+    $('#cm-body').classList.toggle('is-cxfull', cxFull && (cxMax || !!cxMaxPub));
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     pkSrcPaint();   /* وكتابُ «المصدر» في المساهمة كذلك */
     if (cmView.mode === 'edit') {
@@ -10410,7 +10412,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
-      ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
+      ${maxd ? cxMaxPubBtn(p.id) + cxShrinkBtn() : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -20070,8 +20072,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     + '<circle cx="38.78" cy="10.36" r="1.1"/></g></g></svg>';
   /* والزرُّ واحدٌ في الحالين: القوسُ نفسُه على الزاوية، ضيّقةً كانت المساهمةُ أو مكبَّرة —
      ويفترقان بجهة الانزلاق عند المرور وحدها (للخارج: سيتّسع · للداخل: سيضيق) */
-  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="${cxMax}"
-      title="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxMaxOff : T().cxMaxOn)}">${CX_CURVE}</button></span>`;
+  /* ===== ثلاثُ درجات: ضيّقة ← واسعة ← الشاشةُ كلُّها (طلبُ صاحب الموقع) =====
+     القوسُ فوقُ يُوسّع درجةً كلَّ نقرة (ويغيب في الشاشة الكاملة: لا أوسعَ منها)، وقوسٌ مثلُه
+     مقلوبٌ في الزاوية السفلى المقابلة يُضيّق درجةً — من الشاشة الكاملة إلى الواسعة، ومنها إلى الضيّقة */
+  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"
+      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${CX_CURVE}</button></span>`;
+  const cxShrinkBtn = () => `<button type="button" class="pk-max pk-max--curve pk-shrink" data-cxshrink aria-pressed="true"
+      title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_CURVE}</button>`;
+  function cxFullSet(on) {
+    const body = document.getElementById('cm-body');
+    cxFull = !!on && !!(cxMax || cxMaxPub);
+    if (body) body.classList.toggle('is-cxfull', cxFull);
+    requestAnimationFrame(() => { cxHdMeasure(); cxNameFit(); cxRailFit(); });
+  }
   /* ===== وفي النشر: قوسٌ صغيرٌ على زاوية الغلاف (ROADMAP-EXPAND · الاقتراح ١) =====
      القوسُ نفسُه مصغّرًا على زاوية مستطيل الغلاف — فالغلافُ صار المقبض. ونقرُه يفتح
      المساهمةَ ويكبّرها، والمكبَّرةُ تُصغَّر بالقوس الكبير نفسِه الذي في التحرير */
@@ -20087,8 +20100,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كما في التحرير (طلبُ صاحب الموقع) — بدل القوس الصغير الذي كان على زاوية الغلاف */
   const cxMaxPubCorner = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve pk-max--pubc" data-cxmaxpub="${esc(id)}" aria-pressed="false"
       title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_CURVE}</button></span>`;
-  const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" aria-pressed="true"
-      title="${esc(T().cxMaxOff)}" aria-label="${esc(T().cxMaxOff)}">${CX_CURVE}</button></span>`;
+  const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" data-cxup aria-pressed="false"
+      title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_CURVE}</button></span>`;
   /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
   function cxPubMaxSet(id) {
     const body = document.getElementById('cm-body');
@@ -20097,7 +20110,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cxMaxY = body.scrollTop;
       cxMaxPub = id;
       if (cardView.open !== id) cardView = { open: id, fold: {} };
-    } else { cxMaxPub = null; cxHdUp = false; cxFtDn = false; }
+    } else { cxMaxPub = null; cxHdUp = false; cxFtDn = false; cxFull = false; }
     renderCmSection();
     const b2 = document.getElementById('cm-body');
     const card = b2 && b2.querySelector('.pk--maxpub');
@@ -20203,7 +20216,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const card = body.querySelector('.pk--edit[data-sub="cards"]');
     const fx = !bkReduce() && card;
     body.classList.toggle('is-cxmax', on);
-    if (!on) { cxHdUp = false; cxFtDn = false; }   /* المكبَّرُ يُفتح دائمًا ورأسُه وقاعُه ظاهران */
+    if (!on) { cxHdUp = false; cxFtDn = false; cxFull = false; body.classList.remove('is-cxfull'); }   /* المكبَّرُ يُفتح دائمًا ورأسُه وقاعُه ظاهران */
     if (card) {
       card.classList.toggle('pk--max', on);
       card.classList.remove('pk--hdup', 'pk--hdanim', 'pk--ftdn', 'pk--ftanim');
@@ -20215,6 +20228,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
       const ft = card.querySelector('.vt-foot');
       if (on && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
+      card.querySelectorAll('.pk-shrink').forEach(x => x.remove());
+      if (on) card.insertAdjacentHTML('beforeend', cxShrinkBtn());
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
@@ -20228,7 +20243,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const d = p.data;
     const vwAlt = pkVwOf(p.id) !== 'folder';
     return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${cxMax && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
-      ${cxMaxBtn()}
+      ${cxMaxBtn()}${cxMax ? cxShrinkBtn() : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -21563,15 +21578,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fl = e.target.closest('#cm-body [data-ftfold]');
     if (fl) { e.preventDefault(); e.stopPropagation(); cxFtSet(!cxFtDn); return; }
     const pb = e.target.closest('#cm-body [data-cxmaxpub]');
-    if (pb) {   /* المنشورة: القوسُ الصغيرُ يكبّر، والكبيرُ (‎aria-pressed‎) يصغّر */
+    if (pb) {   /* المنشورة: ضيّقةً يُوسّعها، وواسعةً يملأ بها الشاشة */
       e.preventDefault(); e.stopPropagation();
-      cxPubMaxSet(pb.getAttribute('aria-pressed') === 'true' ? null : pb.dataset.cxmaxpub);
+      if (cxMaxPub === pb.dataset.cxmaxpub) cxFullSet(true); else cxPubMaxSet(pb.dataset.cxmaxpub);
+      return;
+    }
+    const sh = e.target.closest('#cm-body [data-cxshrink]');
+    if (sh) {   /* التضييقُ درجةً: الشاشةُ الكاملة ← الواسعة ← الضيّقة */
+      e.preventDefault(); e.stopPropagation();
+      if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
       return;
     }
     const b = e.target.closest('#cm-body [data-cxmax]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    cxMaxSet(!cxMax);
+    if (!cxMax) cxMaxSet(true); else cxFullSet(true);
   }, true);
   /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
   document.addEventListener('keydown', e => {
@@ -21586,6 +21607,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
     if (cxHdUp) { cxHdSet(false); return; }
     if (cxFtDn) { cxFtSet(false); return; }
+    if (cxFull) { cxFullSet(false); return; }
     if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
