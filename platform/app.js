@@ -10165,9 +10165,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (e.key === 'Enter' && !e.shiftKey && c.dataset.kfld !== 'b') { e.preventDefault(); c.blur(); }
   }, true);
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
-      ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
-        ? `<span class="x3-artwrap">${x3ArtHTML(p, kind, deck)}${cxMaxMini(p.id)}</span>`
-        : x3ArtHTML(p, kind, deck)}
+      ${x3ArtHTML(p, kind, deck)}
       <!-- ===== «ابدأ» — كلمةٌ على مفتاح، في صدر العنوان =====
            كان في **البطائق وحدَها**، وحجّتُه أنّ «زرًّا يَعِد بفعلٍ لا يقع أسوأُ من زرٍّ
            لا يكون». وقد صار في «الشروح» كذلك بحكم صاحب الموقع — وفعلُه فيهما يفترق:
@@ -10412,7 +10410,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
-      ${maxd ? cxMaxPubBtn(p.id) : ''}
+      ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -20081,6 +20079,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     + '<circle cx="18.4" cy="7.4" r=".75"/></g></g></svg>';
   const cxMaxMini = id => `<button type="button" class="pk-maxmini" data-cxmaxpub="${esc(id)}" aria-pressed="false"
       title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_MINI}</button>`;
+  /* ===== وفي النشر ضيّقةً: القوسُ الكبيرُ نفسُه على زاوية المساهمة فوق يمين صورة البروفايل =====
+     كما في التحرير (طلبُ صاحب الموقع) — بدل القوس الصغير الذي كان على زاوية الغلاف */
+  const cxMaxPubCorner = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve pk-max--pubc" data-cxmaxpub="${esc(id)}" aria-pressed="false"
+      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_CURVE}</button></span>`;
   const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" aria-pressed="true"
       title="${esc(T().cxMaxOff)}" aria-label="${esc(T().cxMaxOff)}">${CX_CURVE}</button></span>`;
   /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
