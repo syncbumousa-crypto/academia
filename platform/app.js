@@ -8994,12 +8994,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        من الأعلى إلى الأسفل: تسطيحُ الأب يوسّع الابن، فقد لا يحتاج هو إليه */
     strip.querySelectorAll('.pg-box.is-flat').forEach(w => w.classList.remove('is-flat'));
     strip.querySelectorAll('.pg-box.is-wide').forEach(w => {
-      if (w.offsetParent && w.getBoundingClientRect().width < 360) w.classList.add('is-flat');
+      /* ‎offsetWidth‎ لا ‎getBoundingClientRect‎: هذا عرضُ التخطيط، وذاك يقيس اللوحَ وهو في منتصف حركته (مصغَّرًا) */
+      if (w.offsetParent && w.offsetWidth < 360) w.classList.add('is-flat');
     });
     strip.querySelectorAll('.pg-row').forEach(row => {
       if (!row.offsetParent || row.scrollWidth <= row.clientWidth + 1) return;
       const t = row.querySelector(':scope > .pg-box.is-wide') || row.querySelector(':scope > .pg-box.is-sel');
-      if (!t) return;
+      if (!t || (t.getAnimations && t.getAnimations().length)) return;   /* في منتصف حركته يُقاس مزاحًا */
       const rr = row.getBoundingClientRect(), br = t.getBoundingClientRect(), pad = 10;
       if (br.left < rr.left + pad) row.scrollLeft -= rr.left + pad - br.left;
       else if (br.right > rr.right - pad) row.scrollLeft += br.right - (rr.right - pad);
@@ -9016,6 +9017,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault();
     row.scrollLeft -= e.deltaY;
   }, { passive: false });
+  /* ===== الحركة (ROADMAP-GLASS-STRIP ق٦ · المرحلة ٤) — ‎FLIP‎ =====
+     الشريطُ يُبنى من جديد مع كلّ نقرة، فيقفز ما فيه. فقبل البناء يُحفظ مستطيلُ كلّ مجلد (بمعرّفه)،
+     وبعده مباشرةً (في ‎microtask‎ قبل أن يُرسم شيء) يُقاس الجديد ويُبدأ كلٌّ من مكانه القديم وقدره
+     ثمّ يمضي إلى الجديد بـ‎transform‎ وحده — على كرت الشاشة، لا تخطيطَ في كلّ إطار:
+       · ما تغيّر موضعُه أو قدرُه ينزلق إليه، ويُعاكَس قياسُ وجهه فلا يتمطّط الحرف،
+       · وما في جوف مجلدٍ يتمدّد لا يُحرَّك وحده (يتحرّك مع أبيه) بل يظهر ظهورًا،
+       · وما وُلد الآن (أبناءُ المفتوح) يظهر بعد أبيه بقليل. */
+  const PKF = { prev: new Map() };
+  const pkReduce = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pkFlipRecord(id) {
+    const old = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"]');
+    if (!old || pkReduce() || (PKG.s && PKG.s.on)) return;
+    const m = new Map();
+    old.querySelectorAll('.pg-face[data-pkf]').forEach(f => { const b = f.parentElement; if (b.offsetParent) m.set(f.dataset.pkf, b.getBoundingClientRect()); });
+    PKF.prev.set(id, m);
+    queueMicrotask(() => pkFlipPlay(id));
+  }
+  function pkFlipPlay(id) {
+    const m = PKF.prev.get(id); PKF.prev.delete(id);
+    const strip = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"]');
+    if (!m || !strip || !strip.animate) return;
+    pkFit(strip);
+    const E = 'cubic-bezier(.2, .8, .2, 1)', T = 260, moved = new Set();
+    strip.querySelectorAll('.pg-face[data-pkf]').forEach(f => {
+      const b = f.parentElement; if (!b.offsetParent) return;
+      const o = m.get(f.dataset.pkf), n = b.getBoundingClientRect();
+      const par = b.parentElement.closest('.pg-box');
+      if (par && moved.has(par)) { if (!o) b.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, delay: 90, easing: 'ease-out', fill: 'backwards' }); return; }
+      if (!o) { b.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 200, delay: 90, easing: E, fill: 'backwards' }); return; }
+      const dx = o.right - n.right, dy = o.top - n.top, sx = o.width / n.width, sy = o.height / n.height;
+      if (Math.abs(dx) < .5 && Math.abs(dy) < .5 && Math.abs(sx - 1) < .01 && Math.abs(sy - 1) < .01) return;
+      moved.add(b);
+      b.animate([{ transformOrigin: 'right top', transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` }, { transformOrigin: 'right top', transform: 'none' }], { duration: T, easing: E });
+      if (Math.abs(sx - 1) > .01 || Math.abs(sy - 1) > .01)
+        f.animate([{ transformOrigin: 'right top', transform: `scale(${1 / sx}, ${1 / sy})` }, { transformOrigin: 'right top', transform: 'none' }], { duration: T, easing: E });
+    });
+  }
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
   function pkBoxHTML(nodes, open, parentKey, sel) {
@@ -9081,7 +9119,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
-    if (lab) pkFitSoon();
+    if (lab) { pkFitSoon(); pkFlipRecord(id); }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
