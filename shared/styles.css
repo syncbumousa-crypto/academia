@@ -16452,22 +16452,28 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
 .kt .kt-c0 { width: 64px; text-align: center; }
 .kt .kt-c1 { width: 28%; }
 .kt .kt-c3 { width: 72px; text-align: center; vertical-align: middle; }
-.kt-t { display: block; min-height: 1.6em; line-height: 1.6; outline: none; border-radius: 6px; word-break: break-word; white-space: pre-wrap; cursor: text; }
-.kt-t:focus { box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
-.kt th .kt-t:empty::before { content: '\200b'; }
+.kt-t { line-height: 1.6; outline: none; word-break: break-word; white-space: pre-wrap; cursor: text; }
+span.kt-t { display: block; min-height: 1.6em; border-radius: 6px; }
+/* الخانةُ المحرَّرة تُعرف بإطارٍ ذهبيٍّ داخليّ وأرضيّةِ الحقول — فهي الحقلُ نفسُه */
+th.kt-t:focus, td.kt-t:focus { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); background: var(--u-in-bg, #fff); }
+span.kt-t:focus { box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); }
+td.kt-t:hover:not(:focus) { background: var(--u-hov, rgba(44, 94, 101, .05)); }
+.kt tbody tr { height: 104px; }
 .kt-num { font-size: 14px; font-weight: 700; color: var(--u-tx-strong, #14233f); }
 .kt-tools { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 8px; color: var(--u-fade, #8a97a3); opacity: .7; }
 .kt-tools i { font-style: normal; letter-spacing: 2px; line-height: .6; font-size: 12px; }
 .kt-tools svg { width: 13px; height: 13px; }
 .kt-term { font-size: 14px; font-weight: 700; color: var(--u-tx-strong, #14233f); }
-.kt-box { min-height: 76px; border: 1px dashed var(--u-dash, rgba(44, 94, 101, .35)); border-radius: 10px; background: var(--u-in-bg, rgba(44, 94, 101, .04)); padding: 8px 10px; box-sizing: border-box; display: flex; }
-.kt-box > .kt-mean { flex: 1; min-height: 58px; font-size: 13.5px; line-height: 1.75; }
+.kt-mean { font-size: 13.5px; line-height: 1.75; }
 .kt-ok {
-  display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 6px; box-sizing: border-box; border-radius: 9px;
-  background: color-mix(in srgb, var(--u-good, #3f9a5a) 20%, transparent); border: 1px solid color-mix(in srgb, var(--u-good, #3f9a5a) 55%, transparent);
-  color: var(--u-good, #2f7d4a); font-size: 15px; font-weight: 800; line-height: 1;
+  display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; box-sizing: border-box; border-radius: 9px; cursor: pointer;
+  background: transparent; border: 1.5px dashed var(--u-dash, rgba(44, 94, 101, .38)); color: transparent;
+  transition: background .12s ease, border-color .12s ease, color .12s ease;
 }
-.kt-ok:empty { background: transparent; border-style: dashed; border-color: var(--u-dash, rgba(44, 94, 101, .35)); }
+.kt-ok svg { width: 18px; height: 18px; }
+.kt-ok:hover { background: var(--u-hov, rgba(44, 94, 101, .06)); }
+.kt-ok.on { background: color-mix(in srgb, var(--u-good, #2f8a53) 20%, transparent); border: 1.5px solid color-mix(in srgb, var(--u-good, #2f8a53) 60%, transparent); color: var(--u-good, #2f8a53); }
+.kt-ok:focus-visible { outline: 2px solid color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); outline-offset: 2px; }
 /* زرُّ الإضافة: مستطيلٌ متقطّعٌ بعرض الجدول، بذهب أزرار الإضافة في الموقع */
 .kt-add {
   display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 44px;

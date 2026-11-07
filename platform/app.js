@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', '✓'], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', '✓'], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9146,19 +9146,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والجدولُ الجديدُ بلغة الموقع: عربيٌّ يبدأ من اليمين، وإنجليزيٌّ من اليسار */
   const KT_NEW = () => ({ id: 'kt' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), rows: [T().ktHead.slice(), T().ktRow.slice()] });
   const ktHost = sel => { const pk = edPack(); if (!pk) return null; if (sel === '') return pk; const h = findNode(pk.deck, sel); return h ? h.n : null; };
-  const ktCell = (r, c, txt, cls) => `<span class="kt-t${cls ? ' ' + cls : ''}" contenteditable="plaintext-only" spellcheck="false" dir="auto" data-ktr="${r}" data-ktc="${c}">${esc(txt || '')}</span>`;
+  /* الخانةُ نفسُها هي الحقل (لا مربّعٌ داخل مربّع): ‎th/td‎ تُحرَّر كلُّها، فيُنقر في أيّ موضعٍ منها */
+  const ktEd = (r, c) => ` contenteditable="plaintext-only" spellcheck="false" dir="auto" data-ktr="${r}" data-ktc="${c}"`;
+  const ktOk = on => `<button type="button" class="kt-ok${on ? ' on' : ''}" data-ktok aria-pressed="${on}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   function ktViewHTML(id, sel) {
     const host = ktHost(sel), tabs = (host && host.kt) || [];
     const t = tabs.map(tb => {
       const [h, r] = tb.rows;
       /* اتّجاهُ الجدول اتّجاهُ الموقع (بالعربيّة من اليمين — بحكم صاحب الموقع)، وكلُّ خانةٍ نصُّها باتّجاهه */
       return `<table class="kt" data-kt="${esc(tb.id)}"><thead><tr>`
-        + h.map((x, c) => `<th class="kt-c${c}">${ktCell(0, c, x)}</th>`).join('')
+        + h.map((x, c) => `<th class="kt-c${c} kt-t"${ktEd(0, c)}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody><tr>`
-        + `<td class="kt-c0">${ktCell(1, 0, r[0], 'kt-num')}<span class="kt-tools" aria-hidden="true"><i>⋯</i><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></svg></span></td>`
-        + `<td class="kt-c1">${ktCell(1, 1, r[1], 'kt-term')}</td>`
-        + `<td class="kt-c2"><div class="kt-box">${ktCell(1, 2, r[2], 'kt-mean')}</div></td>`
-        + `<td class="kt-c3">${ktCell(1, 3, r[3], 'kt-ok')}</td>`
+        + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(1, 0)}>${esc(r[0] || '')}</span><span class="kt-tools" aria-hidden="true"><i>⋯</i><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></svg></span></td>`
+        + `<td class="kt-c1 kt-t kt-term"${ktEd(1, 1)}>${esc(r[1] || '')}</td>`
+        + `<td class="kt-c2 kt-t kt-mean"${ktEd(1, 2)}>${esc(r[2] || '')}</td>`
+        + `<td class="kt-c3">${ktOk(!!(r[3] || '').trim())}</td>`
         + `</tr></tbody></table>`;
     }).join('');
     return `<div class="kt-view" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${t}`
@@ -9178,6 +9180,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const term = last && last.querySelector('.kt-term');
       if (term) { term.focus(); const r = document.createRange(); r.selectNodeContents(term); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
     });
+  }, true);
+  /* علامةُ ✓ مفتاح: نقرُها يضعها، ونقرُها ثانيةً يرفعها — وتُحفظ في مكانها بلا إعادة رسم */
+  document.addEventListener('click', e => {
+    const k = e.target.closest && e.target.closest('#cm-body .kt-view [data-ktok]');
+    if (!k) return;
+    e.preventDefault(); e.stopPropagation();
+    const v = k.closest('.kt-view'), host = ktHost(v.dataset.ktf), tid = k.closest('.kt').dataset.kt;
+    const tb = host && (host.kt || []).find(x => x.id === tid);
+    if (!tb) return;
+    const on = !(tb.rows[1][3] || '').trim();
+    tb.rows[1][3] = on ? '✓' : '';
+    k.classList.toggle('on', on); k.setAttribute('aria-pressed', String(on));
+    save();
   }, true);
   let ktSaveT = 0;
   document.addEventListener('input', e => {
