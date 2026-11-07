@@ -16526,7 +16526,7 @@ td.kt-t:hover:not(:focus) { background: var(--u-hov, rgba(44, 94, 101, .05)); }
 .kcv:focus-visible { box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
 .kcv.is-panning { cursor: grabbing; }
 .kcv.is-panning * { user-select: none; }
-.kcv-world { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+.kcv-world { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; }
 .kcv-links { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
 .kcv-card {
   position: absolute; width: 240px; box-sizing: border-box; border-radius: 12px; cursor: default; overflow: hidden;
@@ -16552,3 +16552,10 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 /* في المساهمة المكبَّرة يأخذ اللوحُ ما بقي من الصفحة كلَّه */
 .pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; }
 .pk--max .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 280px; }
+/* المرحلة ٢: المحدَّدُ بإطارٍ ذهبيّ، والبطاقةُ تُمسك وتُسحب، والنصُّ يُحرَّر بالنقر المزدوج */
+.kcv-card { cursor: grab; user-select: none; }
+.kcv.is-dragging, .kcv.is-dragging .kcv-card { cursor: grabbing; }
+.kcv-card.is-sel { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 85%, transparent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 45%, transparent), 0 8px 20px -10px rgba(20, 35, 63, .35); }
+.kcv.is-dragging .kcv-card.is-sel { box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 45%, transparent), 0 16px 30px -12px rgba(20, 35, 63, .45); }
+.kcv-card .kt-t[contenteditable] { cursor: text; user-select: text; background: var(--u-in-bg, #fff); }
+.kcv-marq { position: absolute; z-index: 3; pointer-events: none; border: 1px solid color-mix(in srgb, var(--u-gold, #c9a25c) 80%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 12%, transparent); border-radius: 4px; }

@@ -9210,8 +9210,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"></svg>`
       + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
           + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
-          + `<div${ktEd(n.id, 'f', 'kt-t kcv-f')}>${esc(n.f || '')}</div>`
-          + `<div${ktEd(n.id, 'b', 'kt-t kcv-b')}>${esc(n.b || '')}</div></div>`).join('')
+          + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
+          + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div></div>`).join('')
       + `</div>`
       + `<div class="kcv-ui" role="toolbar">`
       + `<button type="button" data-kcvz="out" aria-label="−">−</button><span class="kcv-zl">100%</span>`
@@ -9262,6 +9262,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cv.dataset.kcvm = '1';
       kcvLayout(cv);
       if (kcvView(cv)) kcvApply(cv); else kcvFit(cv, true);
+      const sel = KCVS.get(cv.dataset.kcv);
+      if (sel) cv.querySelectorAll('.kcv-card').forEach(c => c.classList.toggle('is-sel', sel.has(c.dataset.kcard)));
+      if (KCVS.edit) { const e = KCVS.edit; KCVS.edit = null; const t = cv.querySelector('[data-kc="' + CSS.escape(e.id) + '"][data-kfld="' + e.fld + '"]'); if (t) kcvEdit(t); }
     });
   }
   /* التكبيرُ حول نقطةٍ ثابتةٍ على الشاشة (المؤشّر أو وسط النظر) */
@@ -9279,19 +9282,40 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!cv || e.target.closest('.kcv-card, .kcv-ui')) return;
     const V = kcvView(cv); if (!V) return;
     if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.kcv-card')) document.activeElement.blur();
-    KCVP.s = { cv, sx: e.clientX, sy: e.clientY, vx: V.x, vy: V.y, pid: e.pointerId };
-    cv.classList.add('is-panning'); cv.focus({ preventScroll: true });
+    cv.focus({ preventScroll: true });
     e.preventDefault();
+    if (e.shiftKey) {   /* ‎Shift‎ + سحبُ الفراغ: إطارُ تحديد */
+      const r = cv.getBoundingClientRect(), m = document.createElement('div');
+      m.className = 'kcv-marq'; cv.appendChild(m);
+      KCVP.s = { cv, marq: m, r, sx: e.clientX, sy: e.clientY, pid: e.pointerId, base: new Set(KCVS.get(cv.dataset.kcv) || []) };
+      return;
+    }
+    KCVP.s = { cv, sx: e.clientX, sy: e.clientY, vx: V.x, vy: V.y, pid: e.pointerId };
+    cv.classList.add('is-panning');
   });
   document.addEventListener('pointermove', e => {
     const s = KCVP.s; if (!s || e.pointerId !== s.pid) return;
     s.ex = e.clientX; s.ey = e.clientY;
     if (!KCVP.raf) KCVP.raf = requestAnimationFrame(() => {
       KCVP.raf = 0; const t = KCVP.s; if (!t) return;
+      if (t.marq) {
+        const x0 = Math.min(t.sx, t.ex), y0 = Math.min(t.sy, t.ey), x1 = Math.max(t.sx, t.ex), y1 = Math.max(t.sy, t.ey);
+        Object.assign(t.marq.style, { left: (x0 - t.r.left) + 'px', top: (y0 - t.r.top) + 'px', width: (x1 - x0) + 'px', height: (y1 - y0) + 'px' });
+        const sel = new Set(t.base);
+        t.cv.querySelectorAll('.kcv-card').forEach(c => { const b = c.getBoundingClientRect(); if (b.left < x1 && b.right > x0 && b.top < y1 && b.bottom > y0) sel.add(c.dataset.kcard); });
+        kcvSelect(t.cv, sel);
+        return;
+      }
+      t.moved = t.moved || Math.hypot(t.ex - t.sx, t.ey - t.sy) > 3;
       const V = kcvView(t.cv); V.x = t.vx + t.ex - t.sx; V.y = t.vy + t.ey - t.sy; kcvApply(t.cv);
     });
   });
-  const kcvPanEnd = () => { if (KCVP.s) { KCVP.s.cv.classList.remove('is-panning'); KCVP.s = null; } };
+  const kcvPanEnd = () => {
+    const t = KCVP.s; if (!t) return;
+    KCVP.s = null; t.cv.classList.remove('is-panning');
+    if (t.marq) { t.marq.remove(); return; }
+    if (!t.moved) kcvSelect(t.cv, new Set());   /* نقرُ الفراغ يُلغي التحديد */
+  };
   document.addEventListener('pointerup', kcvPanEnd);
   document.addEventListener('pointercancel', kcvPanEnd);
   /* العجلة: تُزيح اللوح (ولا تُمرّر الصفحة من تحته)، ومع ‎Ctrl/⌘‎ (وقرصُ لوحة اللمس) تكبّر نحو المؤشّر */
@@ -9319,6 +9343,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!cv || e.target !== cv || e.ctrlKey || e.metaKey || e.altKey) return;
     const V = kcvView(cv); if (!V) return;
     const cx = cv.clientWidth / 2, cy = cv.clientHeight / 2, st = e.shiftKey ? 160 : 48;
+    const sel = KCVS.get(cv.dataset.kcv);
+    if (sel && sel.size) {   /* المحدَّدُ يتحرّك بالأسهم على الشبكة (‎Shift‎: خمسُ خطوات) */
+      const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+      if (d) { e.preventDefault(); const k = KCV.SNAP * (e.shiftKey ? 5 : 1); kcvMoveBy(cv, sel, d[0] * k, d[1] * k); return; }
+      if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); kcvSelect(cv, new Set()); return; }
+    }
     if (e.key === '+' || e.key === '=') kcvZoom(cv, V.z * 1.2, cx, cy);
     else if (e.key === '-' || e.key === '_') kcvZoom(cv, V.z / 1.2, cx, cy);
     else if (e.key === '0') kcvFit(cv);
@@ -9329,12 +9359,120 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     else return;
     e.preventDefault();
   });
+  /* ===== المرحلة ٢ — التحديدُ والسحبُ والتحرير والإضافة =====
+     نقرةٌ تحدّد (و‎Shift‎ يضيف أو يُسقط)، وسحبُ المحدَّد يحرّكه كلَّه على شبكة ‎8px‎ (‎Alt‎ يُفلته منها)، والنقرُ
+     المزدوجُ يحرّر الوجهَ أو الظهر في مكانه، والنقرُ المزدوجُ في الفراغ يضيف بطاقةً هناك. والمواضعُ تُكتب في
+     البطائق (‎n.pos‎) بلا إعادة رسم. وأوّلُ تحريكٍ في لوحٍ يثبّت مواضعَ بطائقه المرتّبة آليًّا كما تُرى — فلا
+     يُعاد ترتيبُها من تحت يد صاحبها في الرسم التالي */
+  KCV.SNAP = 8;
+  const KCVS = new Map();   // مفتاحُ اللوح ← مجموعةُ المحدَّد
+  function kcvSelect(cv, set) {
+    KCVS.set(cv.dataset.kcv, set);
+    cv.querySelectorAll('.kcv-card').forEach(c => c.classList.toggle('is-sel', set.has(c.dataset.kcard)));
+  }
+  const kcvSnap = (v, free) => free ? Math.round(v) : Math.round(v / KCV.SNAP) * KCV.SNAP;
+  function kcvCommit(cv, ids) {
+    const fix = cv.querySelector('.kcv-card[data-auto]') ? [...cv.querySelectorAll('.kcv-card')] : cv.querySelectorAll('.kcv-card');
+    fix.forEach(c => {
+      if (!c.hasAttribute('data-auto') && !ids.has(c.dataset.kcard)) return;
+      const n = ktCardOf(c, c.dataset.kcard); if (!n) return;
+      n.pos = { x: c.offsetLeft, y: c.offsetTop }; c.removeAttribute('data-auto');
+    });
+    save();
+  }
+  function kcvMoveBy(cv, ids, dx, dy) {
+    cv.querySelectorAll('.kcv-card').forEach(c => { if (!ids.has(c.dataset.kcard)) return; c.style.left = (c.offsetLeft + dx) + 'px'; c.style.top = (c.offsetTop + dy) + 'px'; });
+    kcvCommit(cv, ids);
+  }
+  /* تحريرُ نصّ البطاقة: يصير الحقلُ قابلًا للكتابة ويوضع المؤشّرُ حيث نُقر، ويعود ساكنًا حين يُترك */
+  function kcvEdit(t, x, y) {
+    t.setAttribute('contenteditable', 'plaintext-only'); t.setAttribute('spellcheck', 'false');
+    t.focus({ preventScroll: true });
+    const r = x != null && document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null;
+    const sl = getSelection(); sl.removeAllRanges();
+    if (r && t.contains(r.startContainer)) sl.addRange(r);
+    else { const rr = document.createRange(); rr.selectNodeContents(t); rr.collapse(false); sl.addRange(rr); }
+  }
+  document.addEventListener('focusout', e => {
+    const t = e.target.closest && e.target.closest('#cm-body .kcv .kt-t[contenteditable]');
+    if (!t) return;
+    t.removeAttribute('contenteditable'); clearTimeout(ktSaveT); save();
+    /* بطاقةٌ أُنشئت في اللوح ثمّ تُركت فارغةً (نقرٌ مزدوجٌ عابر) تُزال — إلّا إن انتقل التركيزُ إلى ظهرها */
+    const card = t.closest('.kcv-card'), id = card && card.dataset.kcard;
+    if (!id || KCVS.fresh !== id) return;
+    setTimeout(() => {
+      if (card.contains(document.activeElement)) return;
+      const n = ktCardOf(card, id);
+      KCVS.fresh = null;
+      if (!n || (n.f || '').trim() || (n.b || '').trim()) return;
+      const host = ktHost(card.closest('.kt-view').dataset.ktf), i = host ? host.arr.indexOf(n) : -1;
+      if (i >= 0) { host.arr.splice(i, 1); card.remove(); save(); }
+    }, 0);
+  });
+  const KCVD = { s: null, raf: 0 };
+  document.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    const card = e.target.closest && e.target.closest('#cm-body .kcv .kcv-card');
+    if (!card || e.target.closest('[contenteditable]')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب */
+    const cv = card.closest('.kcv'), id = card.dataset.kcard;
+    e.preventDefault(); cv.focus({ preventScroll: true });
+    if (document.activeElement && document.activeElement.isContentEditable) document.activeElement.blur();
+    const sel = new Set(KCVS.get(cv.dataset.kcv) || []);
+    if (e.shiftKey) { sel.has(id) ? sel.delete(id) : sel.add(id); kcvSelect(cv, sel); return; }
+    if (!sel.has(id)) kcvSelect(cv, new Set([id]));
+    const ids = KCVS.get(cv.dataset.kcv), V = kcvView(cv);
+    const start = new Map(); cv.querySelectorAll('.kcv-card').forEach(c => { if (ids.has(c.dataset.kcard)) start.set(c, [c.offsetLeft, c.offsetTop]); });
+    KCVD.s = { cv, id, ids, start, sx: e.clientX, sy: e.clientY, z: V.z, pid: e.pointerId, moved: false };
+  });
+  document.addEventListener('pointermove', e => {
+    const s = KCVD.s; if (!s || e.pointerId !== s.pid) return;
+    s.ex = e.clientX; s.ey = e.clientY; s.alt = e.altKey;
+    if (!s.moved && Math.hypot(s.ex - s.sx, s.ey - s.sy) < 3) return;
+    if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); }
+    if (!KCVD.raf) KCVD.raf = requestAnimationFrame(() => {
+      KCVD.raf = 0; const t = KCVD.s; if (!t) return;
+      const dx = (t.ex - t.sx) / t.z, dy = (t.ey - t.sy) / t.z;
+      t.start.forEach(([x, y], c) => { c.style.left = kcvSnap(x + dx, t.alt) + 'px'; c.style.top = kcvSnap(y + dy, t.alt) + 'px'; });
+      if (typeof kcvLinksFor === 'function') kcvLinksFor(t.cv, t.ids);
+    });
+  });
+  const kcvDragEnd = () => {
+    const s = KCVD.s; if (!s) return;
+    KCVD.s = null; s.cv.classList.remove('is-dragging');
+    if (s.moved) kcvCommit(s.cv, s.ids);
+    else kcvSelect(s.cv, new Set([s.id]));   /* نقرةٌ بلا سحب: هذه وحدها */
+  };
+  document.addEventListener('pointerup', kcvDragEnd);
+  document.addEventListener('pointercancel', kcvDragEnd);
+  /* النقرُ المزدوج: على نصّ بطاقةٍ يحرّره، وفي الفراغ يضيف بطاقةً هناك */
+  document.addEventListener('dblclick', e => {
+    const cv = e.target.closest && e.target.closest('#cm-body .kcv');
+    if (!cv || e.target.closest('.kcv-ui')) return;
+    const t = e.target.closest('.kcv-card .kt-t');
+    if (t) { e.preventDefault(); kcvEdit(t, e.clientX, e.clientY); return; }
+    if (e.target.closest('.kcv-card')) return;
+    e.preventDefault();
+    const r = cv.getBoundingClientRect(), V = kcvView(cv);
+    kcvAddAt(cv, (e.clientX - r.left - V.x) / V.z - KCV.W / 2, (e.clientY - r.top - V.y) / V.z - 20);
+  });
+  function kcvAddAt(cv, x, y) {
+    const v = cv.closest('.kt-view'), host = ktHost(v.dataset.ktf);
+    if (!host) return;
+    kcvCommit(cv, new Set());   /* يثبت ما رُتّب آليًّا قبل أن يُضاف جديدٌ فيُعاد الترتيب */
+    const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x), y: kcvSnap(y) } };
+    host.arr.push(nn);
+    KCVS.set(cv.dataset.kcv, new Set([nn.id]));
+    KCVS.edit = { id: nn.id, fld: 'f' }; KCVS.fresh = nn.id;
+    save(); renderCmSection();
+  }
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body .kt-view [data-ktadd]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
+    const cvw = b.closest('.kt-view').querySelector('.kcv');
+    if (cvw && kcvView(cvw)) { const V = kcvView(cvw); return kcvAddAt(cvw, (cvw.clientWidth / 2 - V.x) / V.z - KCV.W / 2, (cvw.clientHeight / 2 - V.y) / V.z - 40); }
     const host = ktHost(b.closest('.kt-view').dataset.ktf);
     if (!host) return;
     const nn = { id: newId(), t: 'c', f: '', b: '' };
