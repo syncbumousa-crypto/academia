@@ -16421,9 +16421,8 @@ html[data-theme="dark"] .pk-src--book .chtools .chtool:hover, html[data-theme="d
 html[data-theme="dark"] .pk-src--book .chtools .pk-lnk.is-open { background: linear-gradient(rgba(40, 52, 60, .92), rgba(34, 44, 52, .9)); }
 
 .pk-src--book .chtools.is-wide { width: 300px; }
-/* وفي النشر (لا عمودَ أدوات): الكتابُ كبيرٌ على اليسار كما في التحرير (طلبُ صاحب الموقع) —
-   والحشوةُ التي تسع حافّةَ الغلاف تنتقل إلى جهته */
-.pk-src--ro .cbk-stage { justify-items: end; padding-inline-start: 0; padding-inline-end: 26px; }
+/* وفي النشر (لا عمودَ أدوات): الكتابُ كبيرٌ **في الوسط** (طلبُ صاحب الموقع) — والحشوةُ موزّعةٌ على الجهتين */
+.pk-src--ro .cbk-stage { justify-items: center; padding-inline: 13px; }
 .pk-lnk { border-radius: 10px; border: 1.5px dashed rgba(201, 162, 77, .7); background: rgba(225, 193, 114, .07); overflow: hidden; transition: background .15s; }
 .pk-lnk:not(.is-open):hover { background: rgba(225, 193, 114, .16); }
 .pk-lnk.is-open { border-style: solid; border-color: rgba(201, 162, 77, .55); background: var(--u-surf); box-shadow: 0 10px 26px rgba(20, 35, 63, .12); }
