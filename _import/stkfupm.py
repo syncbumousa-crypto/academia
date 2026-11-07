@@ -14,11 +14,18 @@ r"""
 والاختيارُ يدويٌّ في ‎PICK‎: ما فيه خبرةٌ أو معلومة. والأسئلةُ بلا جواب، والمكرَّر،
 والروابطُ الميّتة (mediafire)، والشتائمُ — لا تُنقل.
 """
-import io, os, re, sys, json, base64, html as H
+import io, os, re, sys, json, base64, hashlib, html as H
 from datetime import datetime
 
 BASE = 'https://community.stkfupm.com'
 ROOT = os.path.dirname(os.path.abspath(__file__))
+MEDIA_URL = 'https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/'
+INLINE_MAX = 200 * 1024          # ما دونه يسكن المتنَ ‎data:‎، وما فوقه جدولَ الوسائط
+MIME = {'.pdf': 'application/pdf', '.doc': 'application/msword', '.ppt': 'application/vnd.ms-powerpoint',
+        '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif',
+        '.zip': 'application/zip', '.rar': 'application/vnd.rar'}
 OUT  = os.path.join(ROOT, 'out')
 
 # code ⇐ [(topic id, post_number, book?)]
@@ -143,8 +150,15 @@ def q(s):
     return "'" + str(s).replace("'", "''") + "'"
 
 def load_post(src, cache, tid, num):
+    """‏‎src‎ مجلّدٌ أو أكثر بينها ‎os.pathsep‎ — يُؤخذ الموضوعُ من أوّل مجلّدٍ فيه."""
     if tid not in cache:
-        cache[tid] = json.load(open(os.path.join(src, '%d.json' % tid), encoding='utf-8'))
+        for d in src.split(os.pathsep):
+            f = os.path.join(d, '%d.json' % tid)
+            if os.path.exists(f):
+                cache[tid] = json.load(open(f, encoding='utf-8'))
+                break
+        else:
+            sys.exit('الموضوع %d ليس في %s' % (tid, src))
     t = cache[tid]
     return t, next(x for x in t['post_stream']['posts'] if x['post_number'] == num)
 
@@ -163,7 +177,7 @@ def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}
     for code in sorted(set(PICK) | set(PICK_DOC)):
-        users, posts = {}, []
+        users, posts, media = {}, [], {}
         # ---- «المادة»: مساهمةٌ لكلّ مشاركة
         for tid, num, book, keep in PICK.get(code, []):
             t, p = load_post(src, cache, tid, num)
@@ -189,8 +203,18 @@ def main(src):
                 if hit:
                     fid = 'stk-f%d-%d' % (p['id'], len(fobj))
                     raw = open(os.path.join(ROOT, 'files', hit[1]), 'rb').read()
-                    mime = 'application/pdf' if hit[0].lower().endswith('.pdf') else 'application/octet-stream'
-                    fobj[fid] = {'name': hit[0], 'v': 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())}
+                    mime = MIME.get(os.path.splitext(hit[0])[1].lower(), 'application/octet-stream')
+                    if len(raw) <= INLINE_MAX:
+                        v = 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())
+                    else:
+                        # ===== والكبيرُ إلى جدول الوسائط =====
+                        # متنُ المساهمة يُجذب مع كلّ فتحٍ للمادّة، فملفٌّ بمئات الكيلوهات فيه يُثقل
+                        # على كلّ قارئ. فيُكتب في ‎media‎ بمفتاحه ‎sha256‎ (كما يرفع الموقعُ صورَه)،
+                        # ويحمل المتنُ عنوانَه وحدَه
+                        k = hashlib.sha256(raw).hexdigest()
+                        media[k] = (mime, raw, uid)
+                        v = MEDIA_URL + k
+                    fobj[fid] = {'name': hit[0], 'v': v}
                     html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
                 else:
                     html.append(H.escape(line, quote=False))
@@ -229,6 +253,9 @@ def main(src):
         now = int(datetime.now().timestamp())
         L = ['-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · %s · ولَّده _import/stkfupm.py' % code,
              '-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.', 'BEGIN;']
+        for k, (mime, raw, uid) in media.items():
+            L.append("INSERT INTO media (k, mime, size, bytes, uid, ts) VALUES (%s, %s, %d, decode(%s, 'base64'), 'u-academia', %d) "
+                     "ON CONFLICT (k) DO NOTHING;" % (q(k), q(mime), len(raw), q(base64.b64encode(raw).decode()), now))
         for u in users.values():
             L.append("INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) "
                      "VALUES (%s, %s, %s, %s, '', '', 0, 0, %d, %d) "
