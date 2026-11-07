@@ -20441,7 +20441,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* المفتوحُ يُغلق بنقره مرّةً أخرى — ولو كان المختارُ أحدَ أبنائه (بطلب صاحب الموقع) */
       if (pf.hasAttribute('aria-expanded')) {
         if (open.get(par) === f) open.delete(par); else open.set(par, f);
-      }
+      } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       renderCmSection();
       return;
