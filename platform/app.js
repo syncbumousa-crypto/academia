@@ -9282,6 +9282,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
         closed: !meta || meta.closed !== false,
         covKey: cv ? pkSrcCovKey(id) : null,
+        wide: true,
+        /* عمودُ الغلاف والملفّ يبدأ من أعلى غلاف الكتاب (الغلافُ يفيض ‎11px‎ فوق الورق) */
+        onLayout: bb => {
+          const tl = view.parentElement && view.parentElement.querySelector('.chtools');
+          if (tl) tl.style.paddingTop = Math.max(0, Math.round(bb.el.getBoundingClientRect().top - view.getBoundingClientRect().top - 11)) + 'px';
+        },
       });
     });
   }
@@ -20832,7 +20838,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   function bkLayout(b) {
     /* أصغرُ قليلًا ممّا يسع (‎82%‎)، ويُلصق باليمين — ويبقى اليسارُ لما يأتي بعدُ */
-    const W = (b.stage.clientWidth - 56) * 0.82, H = (b.stage.clientHeight - 64) * 0.9;
+    /* وكتابُ «المصدر» في المساهمة (‎b.wide‎) يأخذ عرضَ وعائه كلَّه: عمودُ الغلاف والملفّ بجانبه أخذ نصيبَه */
+    const W = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H = (b.stage.clientHeight - 64) * 0.9;
     if (W <= 0 || H <= 0) return;
     b.single = W < 620;
     const cols = b.single ? 1 : 2;
@@ -20849,6 +20856,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.nav.style.width = b.pw * cols + 'px';   /* والتنقّلُ تحت الكتاب لا في وسط الوعاء */
     b.coverP = null;                          /* وجهُ الغلاف يُرسم بمقاس الصفحة الجديد */
     bkShow(b);
+    if (b.onLayout) b.onLayout(b);            /* ومن يجاور الكتابَ يُحاذيه (عمودُ الغلاف والملفّ في «المصدر») */
   }
 
   /* وجهُ الغلاف بمقاس الصفحة تمامًا: صورةُ الغلاف المرفوعة (تملأ ولا تتشوّه)، وإلّا
