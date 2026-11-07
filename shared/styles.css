@@ -16461,13 +16461,20 @@ html[data-lang="en"] .pk-lnk-layer { direction: ltr; }
   animation: pkLnkPop .14s ease-out; transform-origin: right center;
 }
 html[data-lang="en"] .pk-lnk__pop { transform-origin: left center; }
-/* السهم: معيّنٌ بلون النافذة وحدّها، نصفُه خارجها على جهة الزرّ */
-.pk-lnk__pop::after {
-  content: ''; position: absolute; top: var(--ay, 50%); right: -5px; width: 9px; height: 9px; margin-top: -5px;
-  background: inherit; border: inherit; border-left: 0; border-bottom: 0; transform: rotate(45deg);
+/* الذيل: لسانٌ منحنٍ يخرج من حدّ النافذة نحو الزرّ (كذيل نوافذ iOS) — جانباه مقعّران يذوبان في الحدّ،
+   ورأسُه مدوَّر. طبقتان بالشكل نفسِه: ‎::before‎ بلون الحدّ أكبرُ بنصف بكسل، و‎::after‎ بلون النافذة
+   فوقه يغطّي الحدَّ عند منبته — فلا خطَّ يقطع الذيلَ عن جسدها */
+.pk-lnk__pop { --pop-bg: #fff; --pop-bd: rgba(201, 162, 77, .55); background: var(--pop-bg); border-color: var(--pop-bd); }
+.pk-lnk__pop::before, .pk-lnk__pop::after {
+  content: ''; position: absolute; top: var(--ay, 50%); pointer-events: none;
+  clip-path: path('M0 0C1.6 5.2 4.6 8.2 8.6 10.1C10.6 11 10.6 13 8.6 13.9C4.6 15.8 1.6 18.8 0 24Z');
 }
-html[data-lang="en"] .pk-lnk__pop::after { right: auto; left: -5px; transform: rotate(-135deg); }
-html[data-theme="dark"] .pk-lnk__pop { background: #26323a; border-color: rgba(225, 193, 114, .45); color: #e7eff0; box-shadow: 0 12px 28px -10px rgba(0, 0, 0, .7); }
+.pk-lnk__pop::before { right: -10px; width: 11px; height: 24px; margin-top: -12px; background: var(--pop-bd); }
+.pk-lnk__pop::after { right: -9px; width: 11px; height: 24px; margin-top: -12px; background: var(--pop-bg); transform: scale(.94); transform-origin: left center; }
+html[data-lang="en"] .pk-lnk__pop::before, html[data-lang="en"] .pk-lnk__pop::after { right: auto; transform: scaleX(-1); }
+html[data-lang="en"] .pk-lnk__pop::before { left: -10px; }
+html[data-lang="en"] .pk-lnk__pop::after { left: -9px; transform: scale(-.94, .94); transform-origin: right center; }
+html[data-theme="dark"] .pk-lnk__pop { --pop-bg: #26323a; --pop-bd: rgba(225, 193, 114, .45); color: #e7eff0; box-shadow: 0 12px 28px -10px rgba(0, 0, 0, .7); }
 @keyframes pkLnkPop { from { opacity: 0; transform: scale(.92); } }
 @media (prefers-reduced-motion: reduce) { .pk-lnk__pop { animation: none; } }
 /* والزرُّ الذي خرجت منه يبقى مضيئًا ما دامت مفتوحة */
