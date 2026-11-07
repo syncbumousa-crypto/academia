@@ -8960,6 +8960,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      **في جوفه**، وواحدٌ متوسِّعٌ في الصفّ. شجرتُه من ‎pgFolds‎ وأصنافُه ‎.pg-*‎ نفسُها —
      فالشكلُ واحدٌ في الموضعين. ويفترق عنها بشيءٍ واحد: **الاختيار**. فكلُّ مربّعٍ زرٌّ
      (والساكنُ هناك يُختار ههنا)، والمختارُ يُوسم، وهو المجلدُ الذي يُعرض جوفُه تحته */
+  /* ===== زجاجُ المختبر: «شريطٌ زجاجيّ وقطرة» (اعتمده صاحب الموقع) =====
+     كلُّ صفٍّ شريطٌ من زجاجٍ صافٍ، والمتوسِّعُ لوحٌ زجاجيّ يحمل أبناءه، واللونُ في أيقونة
+     المجلد وحدها — لا تدرّجَ ولا توهّج. والمختارُ تعلوه «قطرةٌ» تكسر ما تحتها وتكبّره،
+     يرسمها ‎lgxPaint‎ (انكسارُ سنيل وفرينل من liquid-glass-studio) */
+  const pkFi = c => '<svg class="pk-fi" viewBox="0 0 24 24" aria-hidden="true"' + (c ? ' style="color:' + c + '"' : '') + '><path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h4.3c.66 0 1.3.26 1.77.73L11.9 6h7.6A2.5 2.5 0 0 1 22 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5z"/></svg>';
+  const pkDrop = '<i class="lgx-drop" aria-hidden="true"></i>';
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
@@ -8968,7 +8974,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '">'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span>' + (pkLab() && k.id === sel ? pkDrop : '') + '</button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -8990,13 +8996,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      دائمًا لَما أُمسك أبدًا */
   let pkNaming = null;
   const pkKidsAll = f => (f.ch || []).filter(x => x.t === 'f')
-    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', kids: pkKidsAll(x) }));
+    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', c: folderColor(x), kids: pkKidsAll(x) }));
   function pgFoldsAll(deck, ed) {
     const out = [];
     /* «الجذر» لا يظهر إلّا لبطائقَ خارج المجلدات (كما في ورقة الملخّص) — لا مَهبطًا للسحب:
        الإخراجُ إلى الطبقة العليا يكون بالإفلات على **فراغ الشريط** نفسِه (بطلب صاحب الموقع) */
     if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
-    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', kids: pkKidsAll(f) }));
+    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', c: folderColor(f), kids: pkKidsAll(f) }));
     return out;
   }
   /* مربّعاتُ المختبر في التحرير: المختارُ وجهُه حقلُ اسمٍ (والجذرُ لا يُسمّى — ليس مجلدًا)،
@@ -9008,7 +9014,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : '<span class="pg-nm">' + esc(k.name) + '</span>';
+        : pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>' + (isSel ? pkDrop : '');
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '">'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' draggable="true"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
@@ -9023,9 +9029,86 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
-    return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
+    return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
+  /* ===== ‎lgxPaint‎ — قطرةُ الزجاج السائل =====
+     منقولٌ عن ‎fragment-main.glsl‎ في liquid-glass-studio إلى ‎canvas‎ يُرسم مرّةً لكلّ مقاس:
+       · شكلُ الكبسولة دالّةُ مسافة (‎SDF‎) دقيقة،
+       · حافّتُها عدسةٌ محدّبة: زاويةُ الورود ‎asin((1-d/T)²)‎ وانكسارُ سنيل بمعامل ١٫٥،
+         ووسطُها يكبّر ما تحته ‎×1.12‎ — فتُعطي خريطةَ إزاحةٍ لـ‎feDisplacementMap‎،
+       · ولمعانُها: خطُّ حافّةٍ رفيع، وفرينل خفيف، ووهجٌ من جهة الضوء وأخفُّ منه في مقابلها.
+     والفلترُ يُطبَّق في ‎backdrop-filter‎ (كروم وإيدج)؛ وما لا يدعمه يبقى له اللمعانُ والظلّ.
+     والقطرةُ تُرصد بـ‎ResizeObserver‎ فتُعاد إن تغيّر مقاسُها، والمقاسُ الواحدُ يُخبَّأ فلا يُعاد
+     حسابُه مع كلّ رسمٍ لـ‎#cm-body‎ */
+  const LGX = { cache: new Map(), svg: null, n: 0, ro: null };
+  function lgxBuild(w, h) {
+    const key = w + 'x' + h;
+    if (LGX.cache.has(key)) return LGX.cache.get(key);
+    const D = 2, W = w * D, H = h * D, r = h / 2;
+    const T = Math.min(16, r), IOR = 1.5, REFR = 6, ZK = 1 - 1 / 1.12, EFMAX = 1 / Math.tan(Math.asin(1 / IOR));
+    const L = -115 * Math.PI / 180;
+    // مسافةُ نقطةٍ عن كبسولةٍ أفقيّة: بُعدُها عن قطعة المحور ناقصًا نصفَ القطر
+    const sdf = (x, y) => { const ax = Math.min(Math.max(x, r), w - r); return Math.hypot(x - ax, y - r) - r; };
+    const dc = document.createElement('canvas'), sc = document.createElement('canvas');
+    dc.width = sc.width = W; dc.height = sc.height = H;
+    const dI = dc.getContext('2d').createImageData(W, H), sI = sc.getContext('2d').createImageData(W, H);
+    const fx = new Float32Array(W * H), fy = new Float32Array(W * H);
+    let S = 0.001;
+    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+      const x = (i + .5) / D, y = (j + .5) / D, d = sdf(x, y), k = j * W + i;
+      if (d > .5) continue;
+      const ax = Math.min(Math.max(x, r), w - r);
+      let nx = x - ax, ny = y - r; const ln = Math.hypot(nx, ny) || 1; nx /= ln; ny /= ln;
+      const nd = Math.max(-d, 0);
+      let ef = 0;
+      if (nd < T) { const q = 1 - nd / T, ti = Math.asin(Math.min(q * q, 1)), tt = Math.asin(Math.sin(ti) / IOR); ef = -Math.tan(tt - ti) / EFMAX * REFR; }
+      fx[k] = -nx * ef + (w / 2 - x) * ZK; fy[k] = -ny * ef + (h / 2 - y) * ZK;
+      S = Math.max(S, Math.abs(fx[k]), Math.abs(fy[k]));
+      const a = Math.min(Math.max(.5 - d * D, 0), 1);
+      const dir = Math.cos(Math.atan2(ny, nx) - L), lit = Math.pow(Math.max(dir, 0), 2), back = Math.pow(Math.max(-dir, 0), 3) * .6;
+      const rim = Math.pow(Math.max(0, 1 - nd / 1.25), 1.5), fr = Math.pow(Math.max(0, 1 - nd / Math.min(T * .6, h / 5)), 2.2) * .12;
+      const gw = Math.pow(Math.max(0, 1 - nd / (T * .5)), 2.5);
+      const A = Math.min(1, fr + rim * (.35 + .65 * Math.max(lit, back)) + gw * (lit * .85 + back * .5) * 1.2) * a;
+      sI.data[k * 4] = sI.data[k * 4 + 1] = sI.data[k * 4 + 2] = 255; sI.data[k * 4 + 3] = A * 255;
+    }
+    for (let k = 0; k < W * H; k++) {
+      dI.data[k * 4] = 128 + fx[k] / S * 127; dI.data[k * 4 + 1] = 128 + fy[k] / S * 127; dI.data[k * 4 + 2] = 128; dI.data[k * 4 + 3] = 255;
+    }
+    dc.getContext('2d').putImageData(dI, 0, 0); sc.getContext('2d').putImageData(sI, 0, 0);
+    if (!LGX.svg) {
+      LGX.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      LGX.svg.setAttribute('width', '0'); LGX.svg.setAttribute('height', '0'); LGX.svg.setAttribute('aria-hidden', 'true');
+      LGX.svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+      document.body.appendChild(LGX.svg);
+    }
+    const id = 'lgx' + (++LGX.n);
+    const f = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+    f.setAttribute('id', id); f.setAttribute('x', '0'); f.setAttribute('y', '0'); f.setAttribute('width', '100%'); f.setAttribute('height', '100%');
+    f.setAttribute('color-interpolation-filters', 'sRGB');
+    f.innerHTML = '<feImage href="' + dc.toDataURL() + '" x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" result="m"/>'
+      + '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + (S * 2).toFixed(2) + '" xChannelSelector="R" yChannelSelector="G"/>';
+    LGX.svg.appendChild(f);
+    const out = { f: 'url(#' + id + ')', spec: 'url(' + sc.toDataURL() + ')' };
+    LGX.cache.set(key, out);
+    return out;
+  }
+  function lgxApply(el) {
+    const w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
+    if (!w || !h || el.dataset.lgx === w + 'x' + h) return;
+    const g = lgxBuild(w, h);
+    el.dataset.lgx = w + 'x' + h;
+    el.style.setProperty('--lgx-f', g.f);
+    el.style.setProperty('--lgx-spec', g.spec);
+  }
+  function lgxWatch() {
+    if (LGX.ro || typeof ResizeObserver === 'undefined' || typeof MutationObserver === 'undefined') return;
+    LGX.ro = new ResizeObserver(es => es.forEach(e => lgxApply(e.target)));
+    const scan = () => document.querySelectorAll('.lgx-drop:not([data-lgxw])').forEach(el => { el.dataset.lgxw = '1'; LGX.ro.observe(el); });
+    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+    scan();
+  }
+  if (document.body) lgxWatch(); else document.addEventListener('DOMContentLoaded', lgxWatch);
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
       ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
         ? `<span class="x3-artwrap">${x3ArtHTML(p, kind, deck)}${cxMaxMini(p.id)}</span>`
