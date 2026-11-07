@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -8986,13 +8986,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
   };
   /* «المصدر» — المصدرُ العلميُّ لا مصدرُ الشيفرة: كبسولةٌ وحدَها يمينَ الثلاثة (طلبُ صاحب الموقع)،
-     رمزُها علامتا الاقتباس (اختيارُه من أربعة). فعلُه لم يُقرَّر بعد: زرٌّ بلا عرضٍ وراءه
-     (‎data-pksrc‎ لا ‎data-pkview‎) فلا يُبدّل الجوف */
+     رمزُها علامتا الاقتباس (اختيارُه من أربعة). وهو عرضٌ كالبقيّة (‎pkVw = 'source'‎): يُبدّل الجوفَ
+     إلى زرٍّ في وسطه «حمّل ملف المصدر PDF» — للمساهمة كلِّها لا لمجلد، فلا شريطَ مجلداتٍ فوقه */
   const PK_SRC_IC = '<path d="M4 11.5h4.5V17H4v-5.5C4 8.5 5.5 6.5 8 6"/><path d="M13.5 11.5H18V17h-4.5v-5.5c0-3 1.5-5 4-5.5"/>';
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
-    <span class="pk-vbar__cap pk-vbar__cap--solo"><button type="button" class="pk-vbar__b" data-pksrc data-pkid="${esc(id)}"
-      title="${esc(T().pkView_source)}" aria-label="${esc(T().pkView_source)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${PK_SRC_IC}</svg></button></span>
+    <span class="pk-vbar__cap pk-vbar__cap--solo">${pkVbBtn(id, 'source', PK_SRC_IC)}</span>
     <span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>`;
   /* ===== شريطُ المجلدات في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) =====
@@ -9152,8 +9150,31 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + '</div>';
     }).join('') + '</div>';
   }
+  /* جوفُ «المصدر»: زرٌّ في الوسط. في التحرير يفتح منتقيَ الملفات (‎PDF‎ وحده) ويُري اسمَ المختار —
+     ولا يُحفظ الملفُّ بعد (مكانُه في الخادم لم يُقرَّر). وفي النشر الزرُّ نفسُه معطَّلًا: لا ملفَّ ليُحمَّل */
+  const pkSrcPick = {};
+  const pkSrcView = (id, ed) => `<div class="pk-src" data-pkid="${esc(id)}">
+      <button type="button" class="pk-src__btn" ${ed ? 'data-pksrcpick' : 'disabled'} data-pkid="${esc(id)}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
+        <span>${esc(T().pkSrcBtn)}</span></button>
+      ${ed && pkSrcPick[id] ? `<small class="pk-src__nm">${esc(pkSrcPick[id])}</small>` : ''}
+    </div>`;
+  /* منتقٍ واحدٌ خارجَ الجوف: الجوفُ يُعاد رسمُه مع النقرات، فمنتقٍ فيه قد يُنزع قبل أن يُختار الملف */
+  const pkSrcIn = (() => {
+    const i = document.createElement('input');
+    i.type = 'file'; i.accept = 'application/pdf,.pdf'; i.hidden = true; i.className = 'pk-src__in';
+    i.addEventListener('change', () => {
+      const f = i.files && i.files[0], id = i.dataset.pkid; i.value = '';
+      if (!f || !id || !(f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) return;
+      pkSrcPick[id] = f.name;
+      renderCmSection();
+    });
+    document.body.appendChild(i);
+    return i;
+  })();
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
+    if (pkVwOf(id) === 'source') return pkSrcView(id, ed);
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
@@ -21203,6 +21224,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     const hl = e.target.closest('#cm-body [data-hdfold]');
     if (hl) { e.preventDefault(); e.stopPropagation(); cxHdSet(!cxHdUp); return; }
+    const sp = e.target.closest('#cm-body [data-pksrcpick]');
+    if (sp) { pkSrcIn.dataset.pkid = sp.dataset.pkid; pkSrcIn.click(); return; }
     const fl = e.target.closest('#cm-body [data-ftfold]');
     if (fl) { e.preventDefault(); e.stopPropagation(); cxFtSet(!cxFtDn); return; }
     const pb = e.target.closest('#cm-body [data-cxmaxpub]');
