@@ -21589,6 +21589,46 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!id) return;
       if ((cur === 'folder') !== (to === 'folder') && pkLab()) cxSel.clear();   /* شجرتان منفصلتان: لا يعبر التحديدُ بينهما */
       const part = pkSplitOn(id);
+      /* ===== ROADMAP-SPLIT · المرحلة ٢: الإغلاقُ متحرّكٌ كالفتح =====
+         ما يغادر يُستنسخ قبل الرسم «شبحًا» يُثبَّت فوق موضعه ثمّ ينزلق خارجًا ويتلاشى، والجانبُ الباقي يتّسع
+         من مستطيله القديم إلى الجديد (يُكشف بقصٍّ يتراخى). والكتابُ إذا بقي يعود بـ‎FLIP‎ القائم */
+      const post = pv.closest('.post'), sp = post && post.querySelector('.pk-split');
+      const ghosts = [];
+      const mkGhost = (el, dx, ms) => {
+        if (!el || bkReduce()) return;
+        const r = el.getBoundingClientRect(), w = document.createElement('div');
+        w.className = 'pk-split pk-ghost';
+        w.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:6;pointer-events:none`;
+        const c = el.cloneNode(true); c.querySelectorAll('[id]').forEach(x => x.removeAttribute('id')); c.removeAttribute('id');
+        w.appendChild(c); ghosts.push({ w, dx, ms });
+      };
+      const side = state.lang === 'en' ? -1 : 1;   /* الكتابُ يمينًا في العربيّة، والجارُ يسارًا */
+      let grow = null;
+      if (part && sp) {
+        const bookEl = sp.querySelector(':scope > .pk-src'), partEl = sp.querySelector(':scope > .kt-view');
+        if (to === 'source') { mkGhost(bookEl, 56 * side, 450); grow = partEl && partEl.getBoundingClientRect(); }
+        else if (to === part) mkGhost(partEl, -56 * side, 450);
+        else if (PK_SPLIT_VIEWS.includes(to)) mkGhost(partEl, 0, 260);
+      }
+      const playGhosts = () => {
+        if (!ghosts.length && !grow) return;
+        const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`);
+        const host = ctl && ctl.closest('.post') && ctl.closest('.post').querySelector('.post-ytmain');
+        if (!host) return;
+        ghosts.forEach(({ w, dx, ms }) => {
+          host.appendChild(w);
+          w.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${dx}px)` }],
+            { duration: ms, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }).finished.then(() => w.remove(), () => w.remove());
+        });
+        if (grow) {
+          const nv = host.querySelector(':scope > .kt-view');
+          if (nv) {
+            const n = nv.getBoundingClientRect(), px = v => Math.max(0, Math.round(v)) + 'px';
+            const from = `inset(${px(grow.top - n.top)} ${px(n.right - grow.right)} ${px(n.bottom - grow.bottom)} ${px(grow.left - n.left)} round 14px)`;
+            nv.animate([{ clipPath: from }, { clipPath: 'inset(0 0 0 0 round 14px)' }], { duration: 450, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+          }
+        }
+      };
       if (part) {
         /* في القسمة: الزرّان المضيئان يُغلق كلٌّ جانبَه، وعرضٌ آخرُ من الثلاثة يحلّ محلّ الجار
            والكتابُ باقٍ، والمجلّديُّ يُنهيها */
@@ -21597,6 +21637,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         else if (PK_SPLIT_VIEWS.includes(to)) { pkSplit[id] = to; pkSplitAnim[id] = true; }
         else { delete pkSplit[id]; pkVw[id] = to; }
         renderCmSection();
+        playGhosts();
       } else if (cur === 'source' && PK_SPLIT_VIEWS.includes(to) && pkLab()) {
         pkSplitRecord(id); pkSplit[id] = to; pkSplitAnim[id] = true; renderCmSection();
       } else if (cur !== to) { pkVw[id] = to; renderCmSection(); }
