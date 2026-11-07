@@ -16392,6 +16392,34 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk-src--book .chtool__x { width: 20px; height: 20px; inset-inline-end: 4px; }
 .pk-src--book .pk-src__view { flex: 1 1 auto; min-width: 0; overflow-x: clip; }   /* لا يفيض صندوقُ الكتاب (ولو خاويَ النصف مغلقًا) على عمود الأدوات فيحجب نقره */
 /* ===== «ربط المواضيع»: مطويًّا بقدّ الزرّين فوقه، ومفتوحًا يتّسع العمودُ وتظهر شجرةُ المجلدات ===== */
+/* ===== كبسولاتٌ زجاجيّة (اختيارُ صاحب الموقع «ج») — بدل الإطار المنقّط =====
+   الزجاجُ لغةُ شريط المجلدات نفسِه: سطحٌ شفيفٌ يموّه ما خلفه، وحافّةٌ عليا مضيئة، وظلٌّ ناعمٌ تحته.
+   والمطويُّ كبسولةٌ تامّةُ الاستدارة، والمفتوحُ (لوحُ الشجرة) لوحٌ زجاجيٌّ بانحناءٍ أهدأ */
+.pk-src--book .chtools .chtool, .pk-src--book .chtools .pk-lnk {
+  border: 1px solid rgba(255, 255, 255, .75); border-radius: 999px;
+  background: linear-gradient(rgba(255, 255, 255, .62), rgba(255, 255, 255, .42));
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 -1px 0 rgba(20, 35, 63, .06), 0 8px 22px -10px rgba(20, 35, 63, .35);
+  transition: background .15s, box-shadow .15s;
+}
+.pk-src--book .chtools .chtool { padding: 8px 12px; }
+.pk-src--book .chtools .chtool--on { padding-inline-end: 34px; }
+.pk-src--book .chtools .chtool__x { inset-inline-end: 8px; }
+.pk-src--book .chtools .chtool:hover, .pk-src--book .chtools .pk-lnk:not(.is-open):hover {
+  background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .58));
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(20, 35, 63, .06), 0 10px 26px -10px rgba(20, 35, 63, .42);
+}
+.pk-src--book .chtools .pk-lnk__hd { padding: 8px 12px; }
+.pk-src--book .chtools .pk-lnk.is-open { border-radius: 18px; background: linear-gradient(rgba(255, 255, 255, .82), rgba(255, 255, 255, .66)); }
+.pk-src--book .chtools .pk-lnk.is-open .pk-lnk__act { background: rgba(225, 193, 114, .1); }
+html[data-theme="dark"] .pk-src--book .chtools .chtool, html[data-theme="dark"] .pk-src--book .chtools .pk-lnk {
+  border-color: rgba(255, 255, 255, .14);
+  background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 8px 22px -10px rgba(0, 0, 0, .6);
+}
+html[data-theme="dark"] .pk-src--book .chtools .chtool:hover, html[data-theme="dark"] .pk-src--book .chtools .pk-lnk:not(.is-open):hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
+html[data-theme="dark"] .pk-src--book .chtools .pk-lnk.is-open { background: linear-gradient(rgba(40, 52, 60, .92), rgba(34, 44, 52, .9)); }
+
 .pk-src--book .chtools.is-wide { width: 300px; }
 /* وفي النشر (لا عمودَ أدوات): الكتابُ كبيرٌ على اليسار كما في التحرير (طلبُ صاحب الموقع) —
    والحشوةُ التي تسع حافّةَ الغلاف تنتقل إلى جهته */
