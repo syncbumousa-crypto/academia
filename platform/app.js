@@ -9466,7 +9466,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          وأُعيدت مراقبةُ مقاسه، ولحق موضعَه الجديدَ بـ‎FLIP‎ إن كان له موضعٌ قديم */
       const old = pkSrcBk[id], covKey = cv ? pkSrcCovKey(id) : null;
       if (old && old.el && old.view === view && old.el.isConnected) return;   /* مركَّبٌ هنا أصلًا */
-      if (old && old.el && old.doc === doc && old.covKey === covKey && old.view && old.view !== view && !old.view.isConnected) {
+      /* وكتابُ WebGL الذي أُطفئ بعد طول غيابه لا يُنقل: يُبنى من جديد على موضعه المحفوظ */
+      if (old && old.el && old.doc === doc && old.covKey === covKey && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead)) {
         view.innerHTML = '';
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
         old.view.style.transform = '';

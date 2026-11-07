@@ -237,6 +237,7 @@ export function createBook2(THREE, host, cfg) {
   keepNear();
 
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
+  let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
   const MX = 1.06, MY = 1.1;
   function resize() {
@@ -251,7 +252,8 @@ export function createBook2(THREE, host, cfg) {
     const ppu = h / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
     fit = { w: 2 * W * ppu, h: H * ppu, x: w / 2 - W * ppu, y: h / 2 - H * ppu / 2 };
     retex(Math.min(2048, Math.max(512, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) / 256) * 256)));
-    needs = true;
+    /* تغييرُ المقاس يمسح اللوحة: تُرسم الآن في الإطار نفسِه، وإلّا ظهرت فارغةً إطارًا بعد كلّ إطارٍ والقسمةُ تتحرّك (وميض) */
+    if (!dead && typeof frameNow === 'function') frameNow(); else needs = true;
   }
   resize();
 
@@ -309,6 +311,7 @@ export function createBook2(THREE, host, cfg) {
     if (idle && !wasIdle && cfg.onIdle) cfg.onIdle();
   }
   raf = requestAnimationFrame(frame);
+  frameNow = () => { if (el.isConnected) { renderer.render(scene, camera); needs = false; } else needs = true; };
 
   const cosE = k => 0.5 - 0.5 * Math.cos(Math.PI * k);
   /* الإفلاتُ يحمل سرعةَ اليد: منحنى ‎Hermite‎ يبدأ بميلٍ = السرعة × المدّة، وينتهي ساكنًا */
