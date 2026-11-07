@@ -293,9 +293,18 @@ html[data-lang="en"] .sidebar .tabs button { direction: ltr; }
 html[dir="ltr"] .fcol-wrap::before, html[data-lang="en"] .fcol-wrap::before { background: linear-gradient(to right, var(--fade), transparent); }
 html[dir="ltr"] .fcol-wrap::after,  html[data-lang="en"] .fcol-wrap::after  { background: linear-gradient(to left, var(--fade), transparent); }
 .fcol-wrap.is-start::before, .fcol-wrap.is-end::after { opacity: 0; }
-.fcol-bar { position: relative; height: 3px; border-radius: 3px; background: #eef2f7; }
 .fcol-bar[hidden] { display: none; }
-.fcol-bar i { position: absolute; top: 0; height: 100%; border-radius: 3px; background: #e1c172; transition: left .12s, right .12s; }
+/* ‏شريطُ الصفّ بمقاس شريط الصفحة (‎#xscroll‎) ولونه: ٨ بكسل، وإبهامٌ بتروليٌّ مدوّر
+   يُمسك ويُسحب. والمسارُ أعلى قليلًا من الإبهام ليُصاب بالمؤشّر بسهولة */
+.fcol-bar { position: relative; height: 8px; margin-top: 2px; cursor: pointer; touch-action: none; }
+.fcol-bar i {
+  position: absolute; top: 1px; bottom: 1px; min-width: 30px;
+  border-radius: 5px; background: #2c5e65; cursor: grab;
+  transition: background .15s, left .12s, right .12s;
+}
+.fcol-bar i:hover { background: #244c52; }
+.fcol-bar.is-drag i { background: #1c3f45; cursor: grabbing; transition: background .15s; }
+.fcol-bar.is-drag { cursor: grabbing; }
 .fcol-none { margin: 2px 0 0; font-size: 12px; color: var(--c-ink-soft); }
 .fchip {
   border: 1.5px solid #d7dee8; background: #fff; cursor: pointer;
@@ -9293,7 +9302,9 @@ html[data-theme="dark"] :is(.fpanel, .btn-filter, .fchip:not(.on), .tpill:not(.o
 }
 html[data-theme="dark"] .fcol-search { background: rgba(255, 255, 255, .04); border-color: var(--border); }
 html[data-theme="dark"] .fcol-wrap::before, html[data-theme="dark"] .fcol-wrap::after { --fade: var(--surface); }
-html[data-theme="dark"] .fcol-bar { background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] .fcol-bar i { background: #34676f; }
+html[data-theme="dark"] .fcol-bar i:hover { background: #3f7b85; }
+html[data-theme="dark"] .fcol-bar.is-drag i { background: #4a8d96; }
 html[data-theme="dark"] .search { background: var(--surface); border-color: var(--border); color: var(--c-ink); }
 html[data-theme="dark"] .search::placeholder { color: var(--placeholder); }
 /* دائرة الإتقان في الداكن: مسارها سطح داكن وحدّها ذهبي خافت (السائل ذهبي كما هو) */
