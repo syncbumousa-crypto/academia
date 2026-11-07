@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9219,9 +9219,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           + ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('') + `</div>`).join('')
       + `</div>`
       + `<div class="kcv-ui" role="toolbar">`
-      + `<button type="button" data-kcvz="out" aria-label="−">−</button><span class="kcv-zl">100%</span>`
+      + `<button type="button" data-kcvz="out" aria-label="−">−</button><button type="button" class="kcv-zl" data-kcvz="one" title="100%">100%</button>`
       + `<button type="button" data-kcvz="in" aria-label="+">+</button><button type="button" data-kcvz="fit" class="kcv-fit">${esc(T().kcvFit)}</button>`
-      + `</div></div>`;
+      + `</div><canvas class="kcv-map" width="1" height="1" aria-hidden="true"></canvas></div>`;
   }
   const kcvView = cv => PKCV.get(cv.dataset.kcv);
   function kcvApply(cv) {
@@ -9231,6 +9231,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cv.style.backgroundSize = `${20 * V.z}px ${20 * V.z}px`;
     cv.style.backgroundPosition = `${V.x}px ${V.y}px`;
     const zl = cv.querySelector('.kcv-zl'); if (zl) zl.textContent = Math.round(V.z * 100) + '%';
+    kcvMapSoon(cv);
   }
   /* حدودُ ما في العالم (لملاءمة الكلّ) — من مواضع البطائق وقاماتها، بلا ‎getBoundingClientRect‎ المتأثّر بالتكبير */
   const kcvBox = cv => {
@@ -9342,19 +9343,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     const cv = b.closest('.kcv'), V = kcvView(cv), k = b.dataset.kcvz;
     if (k === 'fit') return kcvFit(cv);
+    if (k === 'one') return kcvZoom(cv, 1, cv.clientWidth / 2, cv.clientHeight / 2);
     kcvZoom(cv, V.z * (k === 'in' ? 1.2 : 1 / 1.2), cv.clientWidth / 2, cv.clientHeight / 2);
   }, true);
   /* لوحةُ المفاتيح (والتركيزُ على اللوح لا في نصّ بطاقة): ‎+ − 0‎ للتكبير والملاءمة، والأسهمُ للإزاحة */
   document.addEventListener('keydown', e => {
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target !== cv || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (!cv || e.target !== cv || e.altKey) return;
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z' || e.key === 'y' || e.key === 'Y')) {
+      e.preventDefault(); kcvUndo(cv, e.key === 'y' || e.key === 'Y' || e.shiftKey); return;
+    }
+    if (e.ctrlKey || e.metaKey) return;
     const V = kcvView(cv); if (!V) return;
     const cx = cv.clientWidth / 2, cy = cv.clientHeight / 2, st = e.shiftKey ? 160 : 48;
-    if ((e.key === 'Delete' || e.key === 'Backspace') && KCVL.sel && KCVL.sel.cv === cv) { e.preventDefault(); kcvLinkDel(cv, KCVL.sel.id); return; }
+    if ((e.key === 'Delete' || e.key === 'Backspace') && KCVL.sel && KCVL.sel.cv === cv) { e.preventDefault(); kcvUndoPush(cv); kcvLinkDel(cv, KCVL.sel.id); return; }
+    if ((e.key === 'Delete' || e.key === 'Backspace') && (KCVS.get(cv.dataset.kcv) || new Set()).size) { e.preventDefault(); kcvDelCards(cv); return; }
     const sel = KCVS.get(cv.dataset.kcv);
     if (sel && sel.size) {   /* المحدَّدُ يتحرّك بالأسهم على الشبكة (‎Shift‎: خمسُ خطوات) */
       const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
-      if (d) { e.preventDefault(); const k = KCV.SNAP * (e.shiftKey ? 5 : 1); kcvMoveBy(cv, sel, d[0] * k, d[1] * k); return; }
+      if (d) { e.preventDefault(); const k = KCV.SNAP * (e.shiftKey ? 5 : 1); kcvUndoPush(cv, 'nudge'); kcvMoveBy(cv, sel, d[0] * k, d[1] * k); return; }
       if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); kcvSelect(cv, new Set()); return; }
     }
     if (e.key === '+' || e.key === '=') kcvZoom(cv, V.z * 1.2, cx, cy);
@@ -9394,6 +9401,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* تحريرُ نصّ البطاقة: يصير الحقلُ قابلًا للكتابة ويوضع المؤشّرُ حيث نُقر، ويعود ساكنًا حين يُترك */
   function kcvEdit(t, x, y) {
+    /* بطاقةٌ أُضيفت للتوّ: تسميتُها جزءٌ من إضافتها — خطوةٌ واحدةٌ في التراجع لا اثنتان */
+    const cv0 = t.closest('.kcv'), fresh = KCVS.fresh && t.closest('.kcv-card') && t.closest('.kcv-card').dataset.kcard === KCVS.fresh;
+    KCVU.edit = { cv: cv0, t, txt: t.textContent, snap: fresh ? null : kcvShot(cv0) };
     t.setAttribute('contenteditable', 'plaintext-only'); t.setAttribute('spellcheck', 'false');
     t.focus({ preventScroll: true });
     const r = x != null && document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null;
@@ -9405,6 +9415,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t = e.target.closest && e.target.closest('#cm-body .kcv .kt-t[contenteditable]');
     if (!t) return;
     t.removeAttribute('contenteditable'); clearTimeout(ktSaveT); save();
+    if (KCVU.edit && KCVU.edit.t === t) { const ed = KCVU.edit; KCVU.edit = null; if (t.textContent !== ed.txt && ed.snap) kcvUndoPush(ed.cv, null, ed.snap); }
     /* بطاقةٌ أُنشئت في اللوح ثمّ تُركت فارغةً (نقرٌ مزدوجٌ عابر) تُزال — إلّا إن انتقل التركيزُ إلى ظهرها */
     const card = t.closest('.kcv-card'), id = card && card.dataset.kcard;
     if (!id || KCVS.fresh !== id) return;
@@ -9437,7 +9448,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = KCVD.s; if (!s || e.pointerId !== s.pid) return;
     s.ex = e.clientX; s.ey = e.clientY; s.alt = e.altKey;
     if (!s.moved && Math.hypot(s.ex - s.sx, s.ey - s.sy) < 3) return;
-    if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); }
+    if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); kcvUndoPush(s.cv); }
     if (!KCVD.raf) KCVD.raf = requestAnimationFrame(() => {
       KCVD.raf = 0; const t = KCVD.s; if (!t) return;
       const dx = (t.ex - t.sx) / t.z, dy = (t.ey - t.sy) / t.z;
@@ -9467,6 +9478,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function kcvAddAt(cv, x, y) {
     const v = cv.closest('.kt-view'), host = ktHost(v.dataset.ktf);
     if (!host) return;
+    kcvUndoPush(cv);
     kcvCommit(cv, new Set());   /* يثبت ما رُتّب آليًّا قبل أن يُضاف جديدٌ فيُعاد الترتيب */
     const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x), y: kcvSnap(y) } };
     host.arr.push(nn);
@@ -9566,6 +9578,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const host = ktHost(s.cv.closest('.kt-view').dataset.ktf); if (!host) return;
     const L = host.holder.links || (host.holder.links = []);
     if (a === b || L.some(l => l.a === a && l.b === b)) return;
+    kcvUndoPush(s.cv);
     const l = { id: newId(), a, b }; L.push(l); save();
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     g.setAttribute('class', 'kcv-link'); g.dataset.klink = l.id; g.dataset.a = a; g.dataset.b = b;
@@ -9574,6 +9587,90 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   document.addEventListener('pointerup', kcvLinkEnd);
   document.addEventListener('pointercancel', kcvLinkEnd);
+  /* ===== المرحلة ٤ — التراجعُ والإعادة · حذفُ البطائق · الخريطةُ المصغّرة =====
+     التراجعُ بلقطاتٍ لا بأوامر: قبل كلّ تغييرٍ (سحب · أسهم · إضافة · وصل · حذف · كتابةٌ غيّرت نصًّا) تُحفظ لقطةٌ من
+     بطائق المجلد (وجهٌ · ظهر · ✓ · موضع · ترتيب) ووصلاته، وتُستعاد كما هي — فما يُتراجع عنه يعود بايتًا ببايت.
+     ولا تمسّ اللقطةُ المجلداتِ الفرعيّةَ ولا الأسئلة: تُعاد البطائقُ وحدها إلى مكانها بينها.
+     و‎Ctrl/⌘+Z‎ يتراجع، و‎Ctrl/⌘+Shift+Z‎ أو ‎Ctrl+Y‎ يعيد (والتركيزُ على اللوح؛ وفي نصٍّ يُكتب يبقى تراجعُ المتصفّح) */
+  const KCVU = { stacks: new Map(), edit: null, lastNudge: 0 };
+  const kcvStack = cv => { const k = cv.dataset.kcv; if (!KCVU.stacks.has(k)) KCVU.stacks.set(k, { u: [], r: [] }); return KCVU.stacks.get(k); };
+  function kcvShot(cv) {
+    const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return null;
+    return JSON.stringify({ cards: ktCards(host), links: host.holder.links || [] });
+  }
+  function kcvUndoPush(cv, kind, snap) {
+    /* أسهمٌ متتالية خطوةٌ واحدة في التراجع (لا عشرون) */
+    const now = Date.now();
+    if (kind === 'nudge' && now - KCVU.lastNudge < 800) { KCVU.lastNudge = now; return; }
+    KCVU.lastNudge = kind === 'nudge' ? now : 0;
+    const st = kcvStack(cv), sn = snap || kcvShot(cv); if (!sn) return;
+    st.u.push(sn); if (st.u.length > 60) st.u.shift(); st.r.length = 0;
+  }
+  function kcvRestore(cv, sn) {
+    const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
+    const d = JSON.parse(sn), arr = host.arr;
+    const at = arr.findIndex(n => n.t === 'c');
+    const rest = arr.filter(n => n.t !== 'c');
+    const i0 = at < 0 ? rest.length : arr.slice(0, at).filter(n => n.t !== 'c').length;
+    arr.splice(0, arr.length, ...rest.slice(0, i0), ...d.cards, ...rest.slice(i0));
+    host.holder.links = d.links;
+    KCVS.set(cv.dataset.kcv, new Set()); KCVL.sel = null;
+    save(); renderCmSection();
+  }
+  function kcvUndo(cv, redo) {
+    const st = kcvStack(cv), from = redo ? st.r : st.u, to = redo ? st.u : st.r;
+    if (!from.length) return;
+    const cur = kcvShot(cv); to.push(cur);
+    kcvRestore(cv, from.pop());
+  }
+  /* حذفُ المحدَّد: من كلّ مكان (البطاقةُ هي هي في الجدول والبطاقيّ)، ومعه أسهمُه — ويُسأل إن كان أكثرَ من واحدة */
+  function kcvDelCards(cv) {
+    const ids = KCVS.get(cv.dataset.kcv); if (!ids || !ids.size) return;
+    if (ids.size > 1 && !window.confirm(T().kcvDelMany.replace('{n}', ids.size))) return;
+    const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
+    kcvUndoPush(cv);
+    for (let i = host.arr.length - 1; i >= 0; i--) if (host.arr[i].t === 'c' && ids.has(host.arr[i].id)) host.arr.splice(i, 1);
+    host.holder.links = (host.holder.links || []).filter(l => !ids.has(l.a) && !ids.has(l.b));
+    KCVS.set(cv.dataset.kcv, new Set());
+    save(); renderCmSection();
+  }
+  /* الخريطةُ المصغّرة: تظهر حين لا يسع النظرُ البطائقَ كلَّها — مستطيلاتٌ للبطائق، وإطارٌ لما يُرى الآن،
+     ونقرُها أو سحبُ الإطار فيها يقلّب النظر */
+  const KCVM = { raf: new Map() };
+  const kcvMapSoon = cv => { if (!KCVM.raf.get(cv)) KCVM.raf.set(cv, requestAnimationFrame(() => { KCVM.raf.delete(cv); kcvMap(cv); })); };
+  function kcvMap(cv) {
+    const m = cv.querySelector('.kcv-map'), V = kcvView(cv), b = kcvBox(cv);
+    if (!m || !V) return;
+    const cw = cv.clientWidth, ch = cv.clientHeight;
+    const vx0 = -V.x / V.z, vy0 = -V.y / V.z, vw = cw / V.z, vh = ch / V.z;
+    const all = !b || (b.x >= vx0 && b.y >= vy0 && b.x + b.w <= vx0 + vw && b.y + b.h <= vy0 + vh);
+    m.classList.toggle('on', !all);
+    if (all) return;
+    const MW = 168, MH = 112, D = Math.min(window.devicePixelRatio || 1, 2);
+    if (m.width !== MW * D) { m.width = MW * D; m.height = MH * D; }
+    const x0 = Math.min(b.x, vx0), y0 = Math.min(b.y, vy0), x1 = Math.max(b.x + b.w, vx0 + vw), y1 = Math.max(b.y + b.h, vy0 + vh);
+    const sc = Math.min((MW - 12) / (x1 - x0), (MH - 12) / (y1 - y0)), ox = (MW - (x1 - x0) * sc) / 2 - x0 * sc, oy = (MH - (y1 - y0) * sc) / 2 - y0 * sc;
+    m.__map = { sc, ox, oy };
+    const g = m.getContext('2d'), cs = getComputedStyle(cv);
+    g.setTransform(D, 0, 0, D, 0, 0); g.clearRect(0, 0, MW, MH);
+    g.fillStyle = cs.getPropertyValue('--u-dash').trim() || 'rgba(44,94,101,.38)';
+    cv.querySelectorAll('.kcv-card').forEach(c => { g.fillRect(ox + c.offsetLeft * sc, oy + c.offsetTop * sc, Math.max(2, c.offsetWidth * sc), Math.max(2, c.offsetHeight * sc)); });
+    g.strokeStyle = cs.getPropertyValue('--u-gold').trim() || '#c9a25c'; g.lineWidth = 1.5;
+    g.strokeRect(ox + vx0 * sc, oy + vy0 * sc, vw * sc, vh * sc);
+  }
+  const kcvMapGo = (cv, e) => {
+    const m = cv.querySelector('.kcv-map'), mp = m.__map, V = kcvView(cv); if (!mp || !V) return;
+    const r = m.getBoundingClientRect(), wx = (e.clientX - r.left - mp.ox) / mp.sc, wy = (e.clientY - r.top - mp.oy) / mp.sc;
+    V.x = cv.clientWidth / 2 - wx * V.z; V.y = cv.clientHeight / 2 - wy * V.z; kcvApply(cv);
+  };
+  document.addEventListener('pointerdown', e => {
+    const m = e.target.closest && e.target.closest('#cm-body .kcv .kcv-map.on');
+    if (!m || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const cv = m.closest('.kcv'); kcvMapGo(cv, e);
+    const mv = ev => kcvMapGo(cv, ev), up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); };
+    document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
+  }, true);
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {

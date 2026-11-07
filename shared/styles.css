@@ -16584,3 +16584,12 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .kcv.is-dragging .kcv-port, .kcv.is-panning .kcv-port { opacity: 0 !important; }
 .kcv.is-linking .kcv-card:not(.is-target) .kcv-port { opacity: 0; }
 .kcv-card.is-target { border-color: var(--u-gold, #c9a25c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--u-gold, #c9a25c) 35%, transparent); }
+/* المرحلة ٤: الخريطةُ المصغّرة (في الزاوية المقابلة لأزرار النظر) ونسبةُ التكبير زرٌّ يردّ إلى ‎100%‎ */
+.kcv-map {
+  position: absolute; inset-inline-end: 10px; bottom: 10px; width: 168px; height: 112px; display: none; cursor: pointer;
+  border-radius: 10px; border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); background: var(--u-in-bg, #fff);
+  box-shadow: 0 4px 12px -8px rgba(20, 35, 63, .3);
+}
+html[data-theme="dark"] .kcv-map { background: #3a4246; }
+.kcv-map.on { display: block; }
+.kcv-ui .kcv-zl { font-size: 12px; font-weight: 400; color: var(--u-lab, #5d6b82); min-width: 48px; }
