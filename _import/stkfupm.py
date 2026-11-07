@@ -25,7 +25,7 @@ OUT  = os.path.join(ROOT, 'out')
 PICK = {
   'ACCT 210': [
     (120957, 5,  ''),                                         # وصف المقرّر ومخرجاته من السيلابس
-    (120957, 8,  'Managerial Accounting — Braun & Tietz, 3rd Ed.'),  # الكتاب الجديد
+    (120957, 8,  'Managerial Accounting Braun and tietz 3rd Edition'),  # الكتاب الجديد — بلفظه
     (120957, 9,  ''),                                         # تجربة ترم 141
     (120957, 11, ''),                                         # تجربة ترم 142 — أطولها وأنفعها
     (120957, 12, ''),                                         # تجربة ترم 162
@@ -34,15 +34,21 @@ PICK = {
 }
 
 def text_of(cooked):
-    """HTML ديسكورس ⇐ نصٌّ عاديّ بأسطره (حقل ‎desc‎ نصٌّ يُهرَّب ويُعرض pre-wrap)."""
+    """HTML ديسكورس ⇐ نصٌّ عاديّ (حقل ‎desc‎ نصٌّ يُهرَّب ويُعرض pre-wrap).
+
+    ===== وبأسلوب كاتبه لا بأسلوبنا =====
+    لا يُضاف حرفٌ ليس منه: لا شرطةٌ ولا نقطةٌ ولا تنسيق. فسطرُه (‎<br>‎) سطر،
+    وفقرتُه (‎</p>‎) فراغٌ بين فقرتين — كما قسّمها هو. ولا يُحذف إلّا ما ليس
+    كلامَه: الاقتباسُ من غيره، وأسطرُ HTML الخام."""
     t = re.sub(r'<aside class="quote".*?</aside>', '', cooked, flags=re.S)   # الاقتباسُ ليس كلامَه
+    t = t.replace('\n', '')                                  # أسطرُ HTML الخام ليست أسطرَه
     t = re.sub(r'<br\s*/?>', '\n', t)
-    t = re.sub(r'</(p|li|h\d|div)>', '\n', t)
-    t = re.sub(r'<li[^>]*>', '• ', t)
+    t = re.sub(r'</(p|div|h\d|blockquote)>', '\n\n', t)
+    t = re.sub(r'</li>', '\n', t)
     t = re.sub(r'<[^>]+>', '', t)
-    t = H.unescape(t).replace(' ', ' ')
+    t = H.unescape(t).replace('\u00a0', ' ')
     t = '\n'.join(re.sub(r'[ \t]+', ' ', l).strip() for l in t.split('\n'))
-    return re.sub(r'\n{2,}', '\n', t).strip()   # ديسكورس يجعل كلَّ سطرٍ فقرةً: فراغٌ بين كلّ سطرين
+    return re.sub(r'\n{3,}', '\n\n', t).strip()
 
 def avatar(tpl):
     return BASE + tpl.replace('{size}', '144') if tpl.startswith('/') else tpl
