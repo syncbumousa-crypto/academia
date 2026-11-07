@@ -16151,7 +16151,8 @@ html[data-theme="dark"] .pk-max.pk-max--curve { color: rgba(225, 193, 114, .42);
 /* والمكبَّرُ لا يُمرَّر فلا لصقَ للمرساة: لولا هذا لدفعها ‎top: 22px‎ عن الزاوية */
 .pk--max .pk-maxdock { position: relative; top: 0; }
 /* والمنشورةُ الضيّقة: القوسُ يحتضن صورةَ البروفايل من فوقها ويمينها (طلبُ صاحب الموقع) —
-   والصورةُ فيها أقربُ إلى الزاوية من صورة التحرير، فيُترك على مرساته فلا يركبها */
+   ويُقرَّب منها خمسًا في الجهتين (طلبُ صاحب الموقع: كان بعيدًا عنها) */
+.pk-max.pk-max--curve.pk-max--pubc { top: -6px; inset-inline-start: -8px; }
 .pk--max .pk-max.pk-max--curve { top: -12px; inset-inline-start: -16px; }   /* مكبَّرةً: حشوةٌ ‎12 · 16‎ بلا حدّ */
 .pk-max--curve svg { width: 44px; height: 44px; overflow: visible; display: block; }
 html[data-lang="en"] .pk-max--curve svg { transform: scaleX(-1); }   /* الزاويةُ اليسرى في الإنجليزيّة */
