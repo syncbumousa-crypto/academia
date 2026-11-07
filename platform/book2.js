@@ -278,8 +278,9 @@ export function createBook2(THREE, host, cfg) {
       } else {
         s.dir = s.target === 0 ? 1 : -1;   /* الساكنةُ (والمرفوعةُ بالتحويم) تلتفّ بعيدًا عن كومتها، لا نحوها */
         let goal = s.target;
-        if (s.i === hover) goal = s.target === 0 ? T.hoverLift : 1 - T.hoverLift;
-        if (active && active !== s && !s.isCover && !active.isCover) {
+        if (s.i === hover && !active) goal = s.target === 0 ? T.hoverLift : 1 - T.hoverLift;
+        /* الانفراجُ في الكومة التي تغادرها الورقةُ وحدها — كومةُ الهبوط ساكنةٌ تنتظرها، وإلّا ارتفعت إليها فتداخلتا */
+        if (active && active !== s && !s.isCover && !active.isCover && s.target === (active.dir > 0 ? 0 : 1)) {
           const d = s.target === 0 ? s.i - active.i : active.i - s.i;
           if (d >= 1 && d <= 2) {
             const lift = (s.target === 0 ? active.p : 1 - active.p) * T.fan / d;
@@ -322,7 +323,9 @@ export function createBook2(THREE, host, cfg) {
     s.anim = { from: s.p, to, t0: performance.now() + delay, dur: dur * 1000, ease: m0 > 0.05 ? hermite(m0) : cosE };
   }
   const turnable = dir => dir > 0 ? A < maxA : A > 0;
-  const commit = () => { keepNear(); if (cfg.onTurn) cfg.onTurn(A); };
+  /* بعد كلّ تقليبة يُنسى المرفوعُ بالتحويم: كان رقمُه يبقى على الورقة نفسِها بعد هبوطها يمينًا فترتفع هناك.
+     ويُحسب من جديد مع أوّل حركةٍ للفأرة */
+  const commit = () => { hover = -1; keepNear(); if (cfg.onTurn) cfg.onTurn(A); };
   function flip(dir) {
     if (!turnable(dir)) return false;
     const s = sheets[dir > 0 ? A : A - 1];
