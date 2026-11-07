@@ -16434,3 +16434,52 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
 .pk-fstrip.pk-lg .pg-box.is-wide { cursor: pointer; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: transparent; }
 .pk-fstrip.pk-lg .pg-box.is-wide:hover:not(:has(.pg-in .pg-box:hover)) { background-image: linear-gradient(var(--lgx-hov), var(--lgx-hov)); }
+
+/* ===== جداولُ «المعرفة» — العرضُ الجدوليّ في تحرير مختبر «رياضيات 105» =====
+   الشكلُ كما رسمه صاحبُ الموقع: رأسٌ رماديٌّ بحروفٍ كبيرةٍ متباعدة، وخطوطُ شبكةٍ فاتحة، وخانةُ الرقم
+   وتحته نقاطٌ وقلم، والمصطلحُ عريضٌ رماديّ، والمعنى في مربّعٍ متقطّع الحدّ، وعلامةُ ✓ في مربّعٍ أخضر.
+   وكلُّ خانةٍ نصٌّ يُحرَّر في مكانه */
+.kt-view {
+  --kt-line: rgba(20, 35, 63, .28); --kt-head: #e6ebee; --kt-cell: #fbfcfc; --kt-ink: #14233f; --kt-dim: #6b7787;
+  --kt-box: rgba(20, 35, 63, .3); --kt-boxbg: rgba(20, 35, 63, .03);
+  display: flex; flex-direction: column; gap: 14px; margin-top: 4px;
+}
+html[data-theme="dark"] .kt-view {
+  --kt-line: rgba(255, 255, 255, .85); --kt-head: #3b3b3b; --kt-cell: #1e1e1f; --kt-ink: #f2f2f2; --kt-dim: #b5b5b5;
+  --kt-box: rgba(255, 255, 255, .28); --kt-boxbg: #1b1b1d;
+}
+.kt {
+  width: 100%; border-collapse: collapse; table-layout: fixed; background: var(--kt-cell); color: var(--kt-ink);
+  border: 2px solid var(--kt-line);
+}
+.kt th, .kt td { border: 2px solid var(--kt-line); vertical-align: top; text-align: start; }
+.kt th { background: var(--kt-head); padding: 16px 20px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--kt-ink); }
+.kt td { padding: 14px 20px; }
+.kt .kt-c0 { width: 88px; text-align: center; }
+.kt .kt-c1 { width: 30%; }
+.kt .kt-c3 { width: 88px; text-align: center; vertical-align: middle; }
+html[data-theme="dark"] .kt td.kt-c3 { background: #000; }
+.kt-t { display: block; min-height: 1.4em; outline: none; border-radius: 4px; word-break: break-word; white-space: pre-wrap; cursor: text; }
+.kt-t:focus { box-shadow: 0 0 0 2px rgba(74, 111, 165, .45); }
+.kt th .kt-t:empty::before { content: '\200b'; }
+.kt-num { font-size: 17px; font-weight: 700; }
+.kt-tools { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 10px; color: var(--kt-dim); opacity: .55; }
+.kt-tools i { font-style: normal; letter-spacing: 2px; line-height: .6; }
+.kt-tools svg { width: 16px; height: 16px; }
+.kt-term { font-size: 17px; font-weight: 700; color: var(--kt-dim); }
+.kt-box { min-height: 112px; border: 1.5px dashed var(--kt-box); border-radius: 10px; background: var(--kt-boxbg); padding: 10px 12px; box-sizing: border-box; display: flex; }
+.kt-box > .kt-mean { flex: 1; min-height: 90px; }
+.kt-ok {
+  display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 6px; box-sizing: border-box; border-radius: 7px;
+  background: #5cb85c; border: 2px solid #3f9b45; color: #0b2a0d; font-size: 24px; font-weight: 900; line-height: 1;
+}
+.kt-ok:empty { background: transparent; border-style: dashed; border-color: var(--kt-box); }
+/* زرُّ الإضافة: مستطيلٌ متقطّعٌ بعرض الجدول */
+.kt-add {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px;
+  border: 1.5px dashed var(--kt-box); border-radius: 12px; background: transparent; color: var(--kt-dim);
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .12s ease, color .12s ease, border-color .12s ease;
+}
+.kt-add span { font-size: 20px; line-height: 1; }
+.kt-add:hover { background: var(--kt-boxbg); color: var(--kt-ink); border-color: var(--kt-line); }
+.kt-add:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 2px; }
