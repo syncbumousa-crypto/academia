@@ -16225,11 +16225,16 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 /* الرفع: ‎.post-yt‎ كلُّه يصعد بقامة الرأس المقيسة، والمربّعُ يقصّ ما فوق حدّه، والجوفُ يتمدّد.
    والحركةُ في التبديل وحده (‎pk--hdanim‎) — لو دامت لرقص الرأسُ مع كلّ رسم */
 .pk--hdup > .post-yt { margin-top: calc(-1 * var(--hdh, 0px)); }
+/* ومع الرأس يرحل عمودُ الصورة: الجوفُ كلُّه للمحتوى، فلا يبقى بيمينه هامشُ الصورة (‎32px‎ والفجوة ‎10px‎)
+   فارغًا. تُزاح الصورةُ خارجَ الحدّ (والمربّعُ يقصّ) فيتمدّد الجوفُ إلى حافّته — المجلداتُ والجدولُ واللوحُ معًا */
+.pk--max > .post-yt > .post-av--yt { visibility: visible; }
+.pk--hdup > .post-yt > .post-av--yt { margin-inline-start: -42px; visibility: hidden; }
 /* والمنشورةُ المكبَّرةُ تخلو للجوف من أوّل لحظة: يغيب صفُّ «مفيد / غير مفيد» تحتها
    وقائمةُ ⋮ بجانبها بمجرّد التكبير — لا بانتظار رفع الرأس (طلبُ صاحب الموقع) */
 .pk--maxpub .post-react, .pk--maxpub .post-menu { display: none; }
 .pk--hdanim > .post-yt { transition: margin-top .22s ease; }
-@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt { transition: none; } .pk-hdline__grip { transition: none; } }
+.pk--hdanim > .post-yt > .post-av--yt { transition: margin-inline-start .22s ease, visibility .22s; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt, .pk--hdanim > .post-yt > .post-av--yt { transition: none; } .pk-hdline__grip { transition: none; } }
 
 /* ===== شريطُ طرق العرض (يسار سهم الطيّ في رأس المساهمة) =====
    أربعةُ مفاتيحَ متلاصقةٍ في كبسولةٍ واحدة: النشِطُ بذهب القوس المكتوم، والقادمةُ أخفت */
