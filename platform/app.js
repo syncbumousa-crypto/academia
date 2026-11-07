@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -3984,6 +3984,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
   let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
+  let cxFtDn = false;                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
 
   function showCmTab(t) {
     cleanupEmptyMine();   /* الخروج من محرر بلا كتابة لا يترك مشاركة فارغة */
@@ -6477,7 +6478,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (cmTabSel === 'cards' && cmView.mode !== 'edit') { renderCmSection(); return; }   /* تُرسم ضيّقةً من جديد */
     }
     $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
-    if (!cxMax && !cxMaxPub) cxHdUp = false;
+    if (!cxMax && !cxMaxPub) { cxHdUp = false; cxFtDn = false; }
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
@@ -19757,10 +19758,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* قامةُ ما فوق الخطّ تُقاس ولا تُكتب: عنوانٌ يلتفّ أو شاشةٌ تضيق تُطيلها. ويُضاف إليها
      حشوُ المربّع العلويّ إلّا ثلاثةَ بكسلات — فيصل الخطُّ إلى حافّة المربّع ولا يبقى
      من الرأس شريطٌ في الحشو (القصُّ عند حدّ الحشو لا عند حدّ المحتوى) */
+  /* ===== القاعُ مرآةُ الرأس (اقتراحُ «مرآة الخطّ العلويّ» — اختيارُ صاحب الموقع) =====
+     في المكبَّر: خطٌّ ذهبيٌّ بمسكةٍ فوق أزرار القاع (الإضافة · قائمة/رحلة · الحذف والنشر)،
+     ونقرُه يطوي الأزرارَ تحته فيبقى الخطُّ وحده على حافّة المربّع — كما يرفع العلويُّ الرأس */
+  const cxFtLine = () => `<button type="button" class="pk-hdline pk-ftline" data-ftfold aria-expanded="${!cxFtDn}"
+      title="${esc(cxFtDn ? T().ftUp : T().ftDown)}" aria-label="${esc(cxFtDn ? T().ftUp : T().ftDown)}">
+      <span class="pk-hdline__ln"></span><span class="pk-hdline__grip"><i></i><i></i><i></i></span></button>`;
+  function cxFtSet(dn) {
+    const card = document.querySelector('#cm-body .pk--max');
+    if (!card) { cxFtDn = false; return; }
+    dn = !!dn;
+    const ae = document.activeElement;
+    if (dn && ae && ae.closest && ae.closest('.vt-foot')) ae.blur();
+    cxFtDn = dn;
+    if (!bkReduce()) {
+      card.classList.add('pk--ftanim');
+      clearTimeout(cxFtSet.t);
+      cxFtSet.t = setTimeout(() => card.classList.remove('pk--ftanim'), 260);
+    }
+    card.classList.toggle('pk--ftdn', dn);
+    const ln = card.querySelector('.pk-ftline');
+    if (ln) {
+      ln.setAttribute('aria-expanded', String(!dn));
+      const t = dn ? T().ftUp : T().ftDown;
+      ln.title = t; ln.setAttribute('aria-label', t);
+      ln.focus({ preventScroll: true });
+    }
+  }
   function cxHdMeasure() {
     const card = document.querySelector('#cm-body .pk--max');
     if (!card) return;
-    const ln = card.querySelector('.pk-hdline'), yt = card.querySelector('.post-yt');
+    const ln = card.querySelector('.pk-hdline:not(.pk-ftline)'), yt = card.querySelector('.post-yt');
     if (!ln || !yt) return;
     const cs = getComputedStyle(card), pad = parseFloat(cs.paddingTop) || 0;
     const lr = ln.getBoundingClientRect();
@@ -19787,7 +19815,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cxHdSet.t = setTimeout(() => card.classList.remove('pk--hdanim'), 260);
     }
     card.classList.toggle('pk--hdup', up);
-    const ln = card.querySelector('.pk-hdline');
+    const ln = card.querySelector('.pk-hdline:not(.pk-ftline)');
     if (ln) {
       ln.setAttribute('aria-expanded', String(!up));
       const t = up ? T().hdDown : T().hdUp;
@@ -19816,17 +19844,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const card = body.querySelector('.pk--edit[data-sub="cards"]');
     const fx = !bkReduce() && card;
     body.classList.toggle('is-cxmax', on);
-    if (!on) cxHdUp = false;   /* المكبَّرُ يُفتح دائمًا ورأسُه ظاهر */
+    if (!on) { cxHdUp = false; cxFtDn = false; }   /* المكبَّرُ يُفتح دائمًا ورأسُه وقاعُه ظاهران */
     if (card) {
       card.classList.toggle('pk--max', on);
-      card.classList.remove('pk--hdup', 'pk--hdanim');
+      card.classList.remove('pk--hdup', 'pk--hdanim', 'pk--ftdn', 'pk--ftanim');
       const dock = card.querySelector('.pk-maxdock');
       if (dock) dock.outerHTML = cxMaxBtn();
       /* والتبديلُ في مكانه بلا رسم — فالمقبضُ يُغرس بعد الرأس أو يُنزع بيدٍ ههنا */
-      const old = card.querySelector('.pk-hdline');
-      if (old) old.remove();
+      card.querySelectorAll('.pk-hdline').forEach(x => x.remove());   /* الخطّان معًا: الرأسُ والقاع */
       const hd = card.querySelector('.x3-pkhd');
       if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
+      const ft = card.querySelector('.vt-foot');
+      if (on && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
@@ -19839,7 +19868,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function cardEditCard(p, i) {
     const d = p.data;
     const vwAlt = pkVwOf(p.id) !== 'folder';
-    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
+    return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${cxMax && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -19859,6 +19888,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           ${cxMax ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, d.deck, true) : ''}
           <div id="cm-cards"></div>
+          ${cxMax ? cxFtLine() : ''}
           ${cxFoot(d)}
         </div>
       </div>
@@ -21129,6 +21159,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     const hl = e.target.closest('#cm-body [data-hdfold]');
     if (hl) { e.preventDefault(); e.stopPropagation(); cxHdSet(!cxHdUp); return; }
+    const fl = e.target.closest('#cm-body [data-ftfold]');
+    if (fl) { e.preventDefault(); e.stopPropagation(); cxFtSet(!cxFtDn); return; }
     const pb = e.target.closest('#cm-body [data-cxmaxpub]');
     if (pb) {   /* المنشورة: القوسُ الصغيرُ يكبّر، والكبيرُ (‎aria-pressed‎) يصغّر */
       e.preventDefault(); e.stopPropagation();
@@ -21152,6 +21184,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
     if (cxHdUp) { cxHdSet(false); return; }
+    if (cxFtDn && !cxMaxPub) { cxFtSet(false); return; }
     if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
