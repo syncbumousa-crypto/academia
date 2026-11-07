@@ -16839,9 +16839,39 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk-split > .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 420px; }
 .pk--max .post-ytmain > .pk-split { flex: 1 1 auto; margin-bottom: 26px; }
 .pk--max .pk-split > .pk-src .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
-/* ونصفُ العرض لا يسع الكتابَ وعمودَ أدواته معًا: يُخفى العمودُ في القسمة (الغلافُ والملفّ وربطُ الصفحات
-   تعود بإغلاق اللوح) — فيأخذ الكتابُ جانبَه كلَّه */
-.pk-split .pk-src--book > .chtools { display: none; }
+/* ونصفُ العرض لا يسع الكتابَ وعمودَ أدواته جنبًا إلى جنب، والكتابُ لا يظهر إلّا في القسمة —
+   فالأدواتُ (الغلافُ والصفحاتُ وربطُ الصفحات) صفٌّ مضغوطٌ فوق الكتاب، و«ربطُ الصفحات» مفتوحًا لوحٌ يطفو فوقه */
+.pk-split .pk-src--book { flex-direction: column; gap: 8px; }
+.pk-split .pk-src--book > .chtools {
+  flex: none; width: auto !important; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px;
+  padding-top: 0 !important; position: relative; z-index: 3;
+}
+.pk-split .pk-src--book .chtools .chtool, .pk-split .pk-src--book .chtools .pk-lnk { width: auto; min-width: 0; max-width: none; }
+.pk-split .pk-src--book .chtools .chtool { padding: 5px 10px; gap: 6px; }
+.pk-split .pk-src--book .chtools .chtool--on { padding-inline-end: 28px; }
+.pk-split .pk-src--book .chtools .chtool__txt small { display: none; }
+.pk-split .pk-src--book .chtools .chtool__txt b { font-size: 11.5px; white-space: nowrap; }
+.pk-split .pk-src--book .chtools .chtool__thumb { width: 16px; height: 21px; margin: 1px; }
+.pk-split .pk-src--book .chtools .pk-lnk__hd { padding: 5px 10px; }
+.pk-split .pk-src--book .chtools .pk-lnk.is-open { position: absolute; top: 0; inset-inline: 0; z-index: 20; max-height: 70vh; overflow: auto; }
+/* وقبل رفع الملفّ: زرّا الرفع على عرض الجانب الضيّق */
+.pk-split > .pk-src:not(.pk-src--book) { justify-content: center; padding: 12px; gap: 10px; }
+.pk-split .pk-src__btn { min-width: 0; width: 100%; height: 64px; padding: 0 14px; font-size: 15px; gap: 10px; }
+.pk-split .pk-src__btn svg { width: 24px; height: 24px; }
+.pk-split .pk-src__btn--cov { height: 48px; font-size: 13.5px; }
+.pk-split > .pk-src:not(.pk-src--book) .chtool { min-width: 0; max-width: none; width: 100%; }
+.pk-split > .pk-split__ph { display: grid; }
+/* وفي المساهمة الضيّقة (غير المكبَّرة) قامةُ الكتاب معقولة لا ‎72vh‎ — فلا فراغَ كبيرٌ فوقه وتحته */
+.pk-split .pk-src--book > .pk-src__view { flex: none; height: clamp(300px, 40vh, 420px); }
+.pk--max .pk-split .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; }
+/* وفي المكبَّرة القصيرة (قامةُ الشاشة ‎≤ 820‎): صفُّ الأدوات أيقوناتٌ بلا أسماء، فلا يأكل من قامة الكتاب */
+@media (max-height: 820px) {
+  .pk--max .pk-split .pk-src--book > .chtools { flex-wrap: nowrap; gap: 4px; }
+  .pk--max .pk-split .pk-src--book .chtools .chtool__txt { display: none; }
+  .pk--max .pk-split .pk-src--book .chtools .chtool, .pk--max .pk-split .pk-src--book .chtools .pk-lnk__hd { padding: 5px 8px; }
+  .pk--max .pk-split .pk-src--book .chtools .chtool--on { padding-inline-end: 26px; }
+  .pk--max .pk-split .pk-src--book .chtools .pk-lnk.is-open .chtool__txt { display: flex; }
+}
 /* والكتابُ في القسمة في وسط جانبه — لا مُلصقًا بطرفه */
 .pk-split .pk-src--book .cbk-stage { justify-items: center; padding-inline: 6px; }
 .pk-split .pk-src--book .cbk-nav { margin-inline: auto; }

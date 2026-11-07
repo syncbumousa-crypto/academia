@@ -9018,7 +9018,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والمجلّديُّ مفصولٌ في كبسولةٍ وحدَه يسارَ الثلاثة (طلبُ صاحب الموقع): هو العرضُ الأصل،
      والثلاثةُ عروضُ المعرفة — فالمجموعةُ واحدةٌ (‎role=group‎) والكبسولتان شكلٌ لا معنى */
   const pkVbBtn = (id, k, ic) => {
-    const on = pkVwOf(id) === k || pkSplitOn(id) === k;
+    const on = k === 'source' ? !!pkSplitOn(id) : pkVwOf(id) === k;
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
       title="${esc(k === 'folder' && pkLab() ? T().pkViewQb : T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
@@ -9223,8 +9223,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وتعمّ العروضَ الثلاثة (طلبُ صاحب الموقع): ‎pkSplit[id]‎ هو العرضُ الذي بجانب الكتاب — شجريٌّ أو بطاقيٌّ
      أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
   const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
-  const pkSplit = {}, pkSplitFlip = {}, pkSplitAnim = {};
-  const pkSplitOn = id => (pkSplit[id] && pkVwOf(id) === 'source' && pkLab()) ? pkSplit[id] : null;
+  /* ===== ونُسخ (طلبُ صاحب الموقع): لا كتابَ وحدَه =====
+     الأساسُ أحدُ العروض الثلاثة دائمًا، و«المصدر» مفتاحٌ يُدخل الكتابَ بجانبه ويُخرجه — لا عرضٌ قائمٌ بذاته.
+     ‏‎pkSplit[id]‎ = الكتابُ ظاهرٌ بجانب العرض، وهو باقٍ إن ذهبتَ إلى بنك الأسئلة فيعود معك حين ترجع */
+  const pkSplit = {}, pkSplitFlip = {}, pkSplitAnim = {}, pkLastKn = {};
+  const pkSplitOn = id => (pkSplit[id] && PK_SPLIT_VIEWS.includes(pkVwOf(id)) && pkLab()) ? pkVwOf(id) : null;
   const pkSplitRecord = id => {
     const v = document.querySelector(`#cm-body [data-pksrcview][data-pkid="${CSS.escape(id)}"] .cbk`);
     if (v) pkSplitFlip[id] = v.getBoundingClientRect();
@@ -9504,12 +9507,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const lab = pkLab(), ed = lab && editable;
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
-    if (!folds.length && v === 'source') {
-      /* ولا قسمةَ بلا مجلدات: لا يكون للجار ما يعرضه، فيُنقل العرضُ إليه وحدَه (فيُرى تلميحُ «أضف مجلدًا»)
-         بدل زرٍّ مضيءٍ لا جانبَ له */
-      if (pkSplit[id]) { pkVw[id] = pkSplit[id]; delete pkSplit[id]; return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`; }
-      return pkSrcView(id, ed);
-    }
+    /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
+    if (!folds.length && pkSplitOn(id)) return `<div class="pk-split">${pkSrcView(id, ed)}<div class="kt-view pk-split__ph"><div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div></div></div>`;
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -9530,8 +9529,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (v === 'source' && pkSplitOn(id) ? (anim => `<div class="pk-split pk-split--${pkSplit[id]}${anim ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, pkSplit[id], folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`)((() => { const a = pkSplitAnim[id]; delete pkSplitAnim[id]; return a; })())
-        : v === 'source' ? pkSrcView(id, ed)
+      + (pkSplitOn(id) ? (anim => `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`)((() => { const a = pkSplitAnim[id]; delete pkSplitAnim[id]; return a; })())
         : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
   }
@@ -21637,7 +21635,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       let grow = null, fly = null;
       if (part && sp) {
         const bookEl = sp.querySelector(':scope > .pk-src'), partEl = sp.querySelector(':scope > .kt-view');
-        if (to === 'source') {
+        if (to === 'source') {   /* الكتابُ يخرج */
           /* خروجُ الكتاب عكسُ دخوله (طلبُ صاحب الموقع): ينزلق بأزراره إلى اليمين حتى يخرج من حافّة المساهمة —
              بلا تلاشٍ ولا تصغير. يُقصّ عند حافّة المربّع الداخليّة فيبدو أنّه غادره */
           if (bookEl && !bkReduce()) {
@@ -21646,8 +21644,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           }
           grow = partEl && partEl.getBoundingClientRect();
         }
-        else if (to === part) mkGhost(partEl, -56 * side, 450);
-        else if (PK_SPLIT_VIEWS.includes(to)) mkGhost(partEl, 0, 260);
+        else if (PK_SPLIT_VIEWS.includes(to) && to !== part) mkGhost(partEl, 0, 260);   /* الجارُ يتبدّل والكتابُ باقٍ */
       }
       const playGhosts = () => {
         if (fly) {
@@ -21687,18 +21684,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           }
         }
       };
-      if (part) {
-        /* في القسمة: الزرّان المضيئان يُغلق كلٌّ جانبَه، وعرضٌ آخرُ من الثلاثة يحلّ محلّ الجار
-           والكتابُ باقٍ، والمجلّديُّ يُنهيها */
-        if (to === part) { pkSplitRecord(id); delete pkSplit[id]; }
-        else if (to === 'source') { delete pkSplit[id]; pkVw[id] = part; }
-        else if (PK_SPLIT_VIEWS.includes(to)) { pkSplit[id] = to; pkSplitAnim[id] = true; }
-        else { delete pkSplit[id]; pkVw[id] = to; }
-        renderCmSection();
-        playGhosts();
-      } else if (cur === 'source' && PK_SPLIT_VIEWS.includes(to) && pkLab()) {
-        pkSplitRecord(id); pkSplit[id] = to; pkSplitAnim[id] = true; renderCmSection();
-      } else if (cur !== to) { pkVw[id] = to; renderCmSection(); }
+      /* «المصدر» مفتاحُ الكتاب: يُدخله بجانب العرض (ومن بنك الأسئلة إلى آخر عرضٍ من الثلاثة) ويُخرجه.
+         وغيرُه من الثلاثة يبدّل الجار والكتابُ باقٍ. ونقرُ العرض المضيء نفسِه لا يفعل شيئًا */
+      let enter = false;
+      if (to === 'source') {
+        if (part) pkSplit[id] = false;
+        else { pkSplit[id] = true; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
+      } else if (to !== cur) {
+        pkVw[id] = to;
+        if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
+      } else return;
+      if (PK_SPLIT_VIEWS.includes(pkVwOf(id))) pkLastKn[id] = pkVwOf(id);
+      renderCmSection();
+      playGhosts();
+      if (enter && !bkReduce()) {
+        /* دخولُ الكتاب: ينزلق من حافّة المساهمة إلى مكانه، ويُقصّ عند الحافّة فيبدو أنّه دخلها من خارجها */
+        const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`);
+        const post2 = ctl && ctl.closest('.post'), pane = post2 && post2.querySelector('.post-ytmain > .pk-split > .pk-src');
+        if (pane) {
+          const pr = pane.getBoundingClientRect(), cr = post2.getBoundingClientRect(), en = state.lang === 'en';
+          const gap = Math.max(0, en ? pr.left - cr.left - 1 : cr.right - 1 - pr.right);
+          const dist = pr.width + gap + 8, f = Math.min(1, (pr.width + 8) / dist);
+          const tx = d => `translateX(${en ? -d : d}px)`;
+          const clip0 = en ? `inset(0 0 0 ${pr.width}px)` : `inset(0 ${pr.width}px 0 0)`;
+          pane.animate([
+            { transform: tx(dist), clipPath: clip0, offset: 0 },
+            { transform: tx(dist - pr.width - 8), clipPath: 'inset(0 0 0 0)', offset: f },
+            { transform: 'translateX(0)', clipPath: 'inset(0 0 0 0)', offset: 1 },
+          ], { duration: 520, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+        }
+      }
       /* والتركيزُ لا يضيع: الزرُّ المنقورُ أُعيد بناؤه مع الرسم، فيُعطى نظيرُه الجديدُ التركيزَ إن كان في الشريط */
       const ae = document.activeElement;
       if (!ae || ae === document.body || !ae.isConnected) {
@@ -21804,7 +21819,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* يُسأل هدفُ الضغطة لا التركيزُ الحاليّ: حقلُ الخليّة يُفلت تركيزَه بالضغطة نفسِها قبل أن نُسأل */
       const tg = e.target;
       if (tg && tg.nodeType === 1 && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
-      const post = spl.closest('.post'), btn = post && [...post.querySelectorAll('.pk-vbar__b.on[data-pkview]')].find(b => b.dataset.pkview !== 'source');
+      const post = spl.closest('.post'), btn = post && post.querySelector('.pk-vbar__b.on[data-pkview="source"]');   /* ‏Esc يُخرج الكتاب */
       if (btn) { e.preventDefault(); e.stopPropagation(); btn.click(); return; }
     }
     if (!(cxMax || cxMaxPub)) return;
