@@ -55,6 +55,7 @@ const _same = (a, b) => {
   return d === 0;
 };
 
+const request_alock = req => (req.headers.get('x-alock') ? [0, req.headers.get('x-alock')] : null);
 async function boss(db, req) {
   const ck = req.headers.get('cookie') || '';
   const m = ck.match(/(?:^|;\s*)sid=([^;]+)/);
@@ -65,7 +66,9 @@ async function boss(db, req) {
       .bind(await _sha(m[1]), Math.floor(Date.now() / 1000)).first();
     if (r && r.admin) return r;
   }
-  const L = ck.match(/(?:^|;\s*)alock=([^;]+)/);
+  /* والقفلُ رمزٌ في ‎x-alock‎ حين يفترق أصلُ الصفحة عن الخادم (كأخواتها ‎lock.js‎ و‎admin.js‎) —
+     وإلّا لم تنشر اللوحةُ كتالوجًا قطّ من GitHub Pages */
+  const L = request_alock(req) || ck.match(/(?:^|;\s*)alock=([^;]+)/);
   if (!L) return null;
   const g = async k => {
     const r = await db.prepare('SELECT v FROM meta WHERE k = ?').bind(k).first();
