@@ -21064,9 +21064,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وكتابُ «المصدر» في المساهمة (‎b.wide‎) يأخذ عرضَ وعائه كلَّه: عمودُ الغلاف والملفّ بجانبه أخذ نصيبَه */
     /* وفي القامة كذلك: لا يُترك له إلّا ما يسع حافّةَ الغلاف (‎11px‎ فوق و‎24px‎ تحت) وظلَّه —
        وإلّا صغُر في المكبَّرة (القصيرةِ القامة) عمّا هو في الضيّقة، وهو عكسُ ما يُكبَّر له */
-    const W = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H = b.wide ? b.stage.clientHeight - 44 : (b.stage.clientHeight - 64) * 0.9;
+    const W0 = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H0 = b.wide ? b.stage.clientHeight - 44 : (b.stage.clientHeight - 64) * 0.9;
+    /* وفي القسمة (بجانب اللوح) أصغرُ بدرجة — يترك حولَه فسحةً ولا يزاحم اللوح (طلبُ صاحب الموقع) */
+    const sk = b.view && b.view.closest('.pk-split') ? 0.78 : 1, W = W0 * sk, H = H0 * sk;
     if (W <= 0 || H <= 0) return;
-    b.single = W < (b.wide ? 360 : 620);   /* وكتابُ «المصدر» يبقى صفحتين ولو في نصف المساهمة (القسمة) — لا ينفرد إلّا حين يضيق جدًّا */
+    b.single = W0 < (b.wide ? 360 : 620);   /* وكتابُ «المصدر» يبقى صفحتين ولو في نصف المساهمة (القسمة) — لا ينفرد إلّا حين يضيق جدًّا */
     const cols = b.single ? 1 : 2;
     let ph = H, pw = ph * b.ar;
     if (pw * cols > W) { pw = W / cols; ph = pw / b.ar; }
