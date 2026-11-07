@@ -9112,7 +9112,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + '</div>';
     }).join('') + '</div>';
   }
-  function pkAltView(id, deck, editable) {
+  function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
@@ -9135,7 +9135,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (ed && v !== 'folder' ? ktViewHTML(id, sel, v, folds)
+      + (lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
   }
   /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
@@ -9147,8 +9147,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        · الشجريّ: المجلدُ أصلٌ، ولكلّ بطاقةٍ مربّعٌ فيه وجهُها وظهرُها معًا، موصولٌ بفرع.
      و«+ معرفة» في كلٍّ منها يضيف بطاقةً (صفًّا). وكلُّ نصٍّ يُحرَّر في مكانه (‎plaintext-only‎) ويُحفظ مع
      الكتابة دون إعادة رسمٍ تسرق المؤشّر. والجداولُ المنفصلةُ القديمة (‎kt‎) تُنقل إلى بطائق مرّةً واحدة */
-  const ktHost = sel => {
-    const pk = edPack(); if (!pk) return null;
+  const ktHost = (sel, pack) => {
+    const pk = pack || edPack(); if (!pk) return null;
     if (sel === '') return { holder: pk, arr: pk.deck || (pk.deck = []) };
     const h = findNode(pk.deck, sel); if (!h) return null;
     return { holder: h.n, arr: h.n.ch || (h.n.ch = []) };
@@ -9163,19 +9163,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     delete H.kt; save();
   }
   const ktCards = host => host.arr.filter(n => n.t === 'c');
-  const ktEd = (cid, fld, cls) => ` class="${cls}" contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`;
-  const ktOk = n => `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  /* المنشورةُ تُقرأ ولا تُحرَّر (‎KTRO‎ أثناء رسمها): لا حقولَ ولا مفاتيحَ ولا إضافة */
+  let KTRO = false;
+  const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
+  const ktOk = n => KTRO ? `<span class="kt-ok${n.ok ? ' on' : ''}" aria-label="${n.ok ? '✓' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
-  function ktViewHTML(id, sel, v, folds) {
-    const host = ktHost(sel);
+  function ktViewHTML(id, sel, v, folds, pack, ro) {
+    KTRO = !!ro;
+    try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; }
+  }
+  function ktViewInner(id, sel, v, folds, pack, ro) {
+    const host = ktHost(sel, pack);
     if (!host) return '';
-    ktMigrate(host);
+    if (!ro) ktMigrate(host);
     const cards = ktCards(host);
     let body = '';
     if (v === 'table') {
       const h = host.holder.kth || T().ktHead;
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
-        + h.map((x, c) => `<th class="kt-c${c} kt-t" contenteditable="plaintext-only" spellcheck="false" data-kth="${c}">${esc(x || '')}</th>`).join('')
+        + h.map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
         + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num">${k + 1}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
@@ -9190,9 +9196,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `</article>`).join('') + `</div>`;
     } else {
       /* العرضُ الشجريّ لوحٌ حرّ (ROADMAP-CANVAS) — ‎kcvHTML‎ */
-      body = kcvHTML(id, sel, host, cards);
+      body = kcvHTML(id, sel, host, cards, ro);
     }
-    return `<div class="kt-view kt-view--${v}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${ktAddBtn()}</div>`;
+    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${ro ? (cards.length ? '' : `<div class="pk-vwph">${esc(T().ktEmpty)}</div>`) : ktAddBtn()}</div>`;
   }
   /* ===== اللوحُ الحرّ — العرضُ الشجريّ (ROADMAP-CANVAS · المرحلة ١) =====
      إطارٌ (‎.kcv‎) يقصّ ويلتقط المؤشّر، وفيه «عالمٌ» (‎.kcv-world‎) يتحرّك بـ‎transform‎ وحده (إزاحةٌ وتكبير)،
@@ -9202,21 +9208,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PKCV = new Map();
   const KCV = { W: 240, GX: 36, GY: 28, PAD: 24, ZMIN: .25, ZMAX: 2 };
   const kcvKey = (id, sel) => id + '|' + sel;
-  function kcvHTML(id, sel, host, cards) {
+  function kcvHTML(id, sel, host, cards, ro) {
     const key = kcvKey(id, sel), V = PKCV.get(key);
     queueMicrotask(kcvMountAll);
-    return `<div class="kcv" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
+    const links = kcvLinkData(host, cards, ro);
+    return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
       + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"><defs>`
       + `<marker id="kcv-ar" class="kcv-ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `<marker id="kcv-ar-sel" class="kcv-ar kcv-ar--sel" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
-      + `</defs>` + kcvLinkData(host, cards).map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
+      + `</defs>` + links.map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
       + `</svg>`
       + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
           + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
           + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
-          + ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('') + `</div>`).join('')
+          + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + `</div>`).join('')
+      + links.filter(l => l.label).map(l => `<div class="kcv-lab" data-klab="${esc(l.id)}">${esc(l.label)}</div>`).join('')
+      + `<i class="kcv-guide kcv-guide--v" aria-hidden="true"></i><i class="kcv-guide kcv-guide--h" aria-hidden="true"></i>`
       + `</div>`
       + `<div class="kcv-ui" role="toolbar">`
       + `<button type="button" data-kcvz="out" aria-label="−">−</button><button type="button" class="kcv-zl" data-kcvz="one" title="100%">100%</button>`
@@ -9282,17 +9291,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     kcvApply(cv);
   }
   /* الإزاحة: سحبُ الفراغ (لا البطاقة ولا الأزرار) */
-  const KCVP = { s: null, raf: 0 };
+  const KCVP = { s: null, raf: 0, pts: new Map(), pinch: null };
+  function kcvPinchStart(cv) {
+    const [a, b] = [...KCVP.pts.values()], r = cv.getBoundingClientRect(), V = kcvView(cv);
+    if (KCVP.s) { KCVP.s.cv.classList.remove('is-panning'); KCVP.s = null; }
+    const mx = (a.x + b.x) / 2 - r.left, my = (a.y + b.y) / 2 - r.top;
+    KCVP.pinch = { cv, d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, z0: V.z, wx: (mx - V.x) / V.z, wy: (my - V.y) / V.z };
+  }
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link')) return;
+    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link, .kcv-lab, .kcv-map')) return;
     const V = kcvView(cv); if (!V) return;
+    /* إصبعٌ ثانٍ على اللوح: قرصٌ يكبّر (ويُلغي الإزاحة) */
+    KCVP.pts.set(e.pointerId, { x: e.clientX, y: e.clientY, cv });
+    if (KCVP.pts.size === 2 && e.pointerType === 'touch') { kcvPinchStart(cv); e.preventDefault(); return; }
     if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.kcv-card')) document.activeElement.blur();
     cv.focus({ preventScroll: true });
     e.preventDefault();
     kcvLinkSel(null);
-    if (e.shiftKey) {   /* ‎Shift‎ + سحبُ الفراغ: إطارُ تحديد */
+    if (e.shiftKey && !cv.classList.contains('is-ro')) {   /* ‎Shift‎ + سحبُ الفراغ: إطارُ تحديد */
       const r = cv.getBoundingClientRect(), m = document.createElement('div');
       m.className = 'kcv-marq'; cv.appendChild(m);
       KCVP.s = { cv, marq: m, r, sx: e.clientX, sy: e.clientY, pid: e.pointerId, base: new Set(KCVS.get(cv.dataset.kcv) || []) };
@@ -9302,6 +9320,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cv.classList.add('is-panning');
   });
   document.addEventListener('pointermove', e => {
+    if (KCVP.pts.has(e.pointerId)) KCVP.pts.get(e.pointerId).x = e.clientX, KCVP.pts.get(e.pointerId).y = e.clientY;
+    if (KCVP.pinch && KCVP.pts.size === 2) {
+      const P = KCVP.pinch, [a, b] = [...KCVP.pts.values()], r = P.cv.getBoundingClientRect(), V = kcvView(P.cv);
+      const z = Math.max(KCV.ZMIN, Math.min(KCV.ZMAX, P.z0 * Math.hypot(a.x - b.x, a.y - b.y) / P.d0));
+      const mx = (a.x + b.x) / 2 - r.left, my = (a.y + b.y) / 2 - r.top;
+      V.z = z; V.x = mx - P.wx * z; V.y = my - P.wy * z; kcvApply(P.cv);
+      return;
+    }
     const s = KCVP.s; if (!s || e.pointerId !== s.pid) return;
     s.ex = e.clientX; s.ey = e.clientY;
     if (!KCVP.raf) KCVP.raf = requestAnimationFrame(() => {
@@ -9318,8 +9344,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const V = kcvView(t.cv); V.x = t.vx + t.ex - t.sx; V.y = t.vy + t.ey - t.sy; kcvApply(t.cv);
     });
   });
-  const kcvPanEnd = () => {
+  const kcvPanEnd = e => {
+    if (e && e.pointerId != null) KCVP.pts.delete(e.pointerId);
+    if (KCVP.pinch) { if (KCVP.pts.size < 2) KCVP.pinch = null; return; }
     const t = KCVP.s; if (!t) return;
+    if (e && e.pointerId != null && e.pointerId !== t.pid) return;
     KCVP.s = null; t.cv.classList.remove('is-panning');
     if (t.marq) { t.marq.remove(); return; }
     if (!t.moved) kcvSelect(t.cv, new Set());   /* نقرُ الفراغ يُلغي التحديد */
@@ -9350,6 +9379,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('keydown', e => {
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
     if (!cv || e.target !== cv || e.altKey) return;
+    if (cv.classList.contains('is-ro') && !/^(\+|=|-|_|0|Arrow.*)$/.test(e.key)) return;
     if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z' || e.key === 'y' || e.key === 'Y')) {
       e.preventDefault(); kcvUndo(cv, e.key === 'y' || e.key === 'Y' || e.shiftKey); return;
     }
@@ -9358,7 +9388,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cx = cv.clientWidth / 2, cy = cv.clientHeight / 2, st = e.shiftKey ? 160 : 48;
     if ((e.key === 'Delete' || e.key === 'Backspace') && KCVL.sel && KCVL.sel.cv === cv) { e.preventDefault(); kcvUndoPush(cv); kcvLinkDel(cv, KCVL.sel.id); return; }
     if ((e.key === 'Delete' || e.key === 'Backspace') && (KCVS.get(cv.dataset.kcv) || new Set()).size) { e.preventDefault(); kcvDelCards(cv); return; }
-    const sel = KCVS.get(cv.dataset.kcv);
+    const sel = cv.classList.contains('is-ro') ? null : KCVS.get(cv.dataset.kcv);
     if (sel && sel.size) {   /* المحدَّدُ يتحرّك بالأسهم على الشبكة (‎Shift‎: خمسُ خطوات) */
       const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
       if (d) { e.preventDefault(); const k = KCV.SNAP * (e.shiftKey ? 5 : 1); kcvUndoPush(cv, 'nudge'); kcvMoveBy(cv, sel, d[0] * k, d[1] * k); return; }
@@ -9432,7 +9462,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const card = e.target.closest && e.target.closest('#cm-body .kcv .kcv-card');
-    if (!card || e.target.closest('[contenteditable], .kcv-port')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب · ومن النقطة: وصل */
+    if (!card || e.target.closest('[contenteditable], .kcv-port') || card.closest('.kcv.is-ro')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب · ومن النقطة: وصل · والمنشورُ يُقرأ */
     kcvLinkSel(null);
     const cv = card.closest('.kcv'), id = card.dataset.kcard;
     e.preventDefault(); cv.focus({ preventScroll: true });
@@ -9442,7 +9472,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!sel.has(id)) kcvSelect(cv, new Set([id]));
     const ids = KCVS.get(cv.dataset.kcv), V = kcvView(cv);
     const start = new Map(); cv.querySelectorAll('.kcv-card').forEach(c => { if (ids.has(c.dataset.kcard)) start.set(c, [c.offsetLeft, c.offsetTop]); });
-    KCVD.s = { cv, id, ids, start, sx: e.clientX, sy: e.clientY, z: V.z, pid: e.pointerId, moved: false };
+    const others = [...cv.querySelectorAll('.kcv-card')].filter(c => !ids.has(c.dataset.kcard)).map(kcvRect);
+    KCVD.s = { cv, id, ids, start, others, sx: e.clientX, sy: e.clientY, z: V.z, pid: e.pointerId, moved: false };
   });
   document.addEventListener('pointermove', e => {
     const s = KCVD.s; if (!s || e.pointerId !== s.pid) return;
@@ -9451,14 +9482,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); kcvUndoPush(s.cv); }
     if (!KCVD.raf) KCVD.raf = requestAnimationFrame(() => {
       KCVD.raf = 0; const t = KCVD.s; if (!t) return;
-      const dx = (t.ex - t.sx) / t.z, dy = (t.ey - t.sy) / t.z;
-      t.start.forEach(([x, y], c) => { c.style.left = kcvSnap(x + dx, t.alt) + 'px'; c.style.top = kcvSnap(y + dy, t.alt) + 'px'; });
+      let dx = (t.ex - t.sx) / t.z, dy = (t.ey - t.sy) / t.z;
+      /* خطوطُ المحاذاة: حافّةُ البطاقة الممسوكة أو منتصفُها إن دنا من حافّة أخرى أو منتصفِها (‎6px‎ على الشاشة) التصق به
+         وظهر خطٌّ ذهبيّ — وتتبعه البطائقُ المحدَّدةُ معها. و‎Alt‎ يُفلت من الشبكة والمحاذاة معًا */
+      const main = t.cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(t.id) + '"]'), m0 = main && t.start.get(main);
+      const gv = t.cv.querySelector('.kcv-guide--v'), gh = t.cv.querySelector('.kcv-guide--h');
+      let gx = null, gy = null;
+      if (m0 && !t.alt) {
+        /* يُقارَن الموضعُ الخام (قبل الشبكة): البطائقُ المرتّبةُ آليًّا ليست على الشبكة، فلو قورن المُلتقَطُ لفاته قربُها */
+        const w = main.offsetWidth, h = main.offsetHeight, nx = m0[0] + dx, ny = m0[1] + dy, tol = 6 / t.z;
+        let bx = tol, by = tol, ax = null, ay = null;
+        t.others.forEach(o => {
+          [[nx, o.x], [nx, o.x + o.w - w], [nx + w / 2, o.x + o.w / 2], [nx + w, o.x + o.w], [nx + w, o.x], [nx, o.x + o.w]].forEach(([p, q], i) => {
+            const dd = Math.abs(p - q); if (dd < bx) { bx = dd; ax = q - p; gx = { x: [o.x, o.x + o.w - w + w, o.x + o.w / 2, o.x + o.w, o.x, o.x + o.w][i], o }; } });
+          [[ny, o.y], [ny + h / 2, o.y + o.h / 2], [ny + h, o.y + o.h], [ny + h, o.y], [ny, o.y + o.h]].forEach(([p, q], i) => {
+            const dd = Math.abs(p - q); if (dd < by) { by = dd; ay = q - p; gy = { y: [o.y, o.y + o.h / 2, o.y + o.h, o.y, o.y + o.h][i], o }; } });
+        });
+        dx = (ax == null ? kcvSnap(nx) : nx + ax) - m0[0]; dy = (ay == null ? kcvSnap(ny) : ny + ay) - m0[1];
+        t.start.forEach(([x, y], c) => { c.style.left = Math.round(x + dx) + 'px'; c.style.top = Math.round(y + dy) + 'px'; });
+        const r = { x: m0[0] + dx, y: m0[1] + dy, w, h };
+        if (gx) { const y0 = Math.min(r.y, gx.o.y), y1 = Math.max(r.y + h, gx.o.y + gx.o.h); Object.assign(gv.style, { display: 'block', left: gx.x + 'px', top: (y0 - 12) + 'px', height: (y1 - y0 + 24) + 'px' }); } else gv.style.display = '';
+        if (gy) { const x0 = Math.min(r.x, gy.o.x), x1 = Math.max(r.x + w, gy.o.x + gy.o.w); Object.assign(gh.style, { display: 'block', top: gy.y + 'px', left: (x0 - 12) + 'px', width: (x1 - x0 + 24) + 'px' }); } else gh.style.display = '';
+      } else {
+        t.start.forEach(([x, y], c) => { c.style.left = kcvSnap(x + dx, t.alt) + 'px'; c.style.top = kcvSnap(y + dy, t.alt) + 'px'; });
+        if (gv) gv.style.display = ''; if (gh) gh.style.display = '';
+      }
       if (typeof kcvLinksFor === 'function') kcvLinksFor(t.cv, t.ids);
     });
   });
   const kcvDragEnd = () => {
     const s = KCVD.s; if (!s) return;
     KCVD.s = null; s.cv.classList.remove('is-dragging');
+    s.cv.querySelectorAll('.kcv-guide').forEach(g => { g.style.display = ''; });
     if (s.moved) kcvCommit(s.cv, s.ids);
     else kcvSelect(s.cv, new Set([s.id]));   /* نقرةٌ بلا سحب: هذه وحدها */
   };
@@ -9467,7 +9522,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* النقرُ المزدوج: على نصّ بطاقةٍ يحرّره، وفي الفراغ يضيف بطاقةً هناك */
   document.addEventListener('dblclick', e => {
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target.closest('.kcv-ui')) return;
+    if (!cv || e.target.closest('.kcv-ui, .kcv-map') || cv.classList.contains('is-ro')) return;
+    const lk = e.target.closest('.kcv-link, .kcv-lab');
+    if (lk) { e.preventDefault(); kcvLabelEdit(cv, lk.dataset.klink || lk.dataset.klab); return; }
     const t = e.target.closest('.kcv-card .kt-t');
     if (t) { e.preventDefault(); kcvEdit(t, e.clientX, e.clientY); return; }
     if (e.target.closest('.kcv-card')) return;
@@ -9492,10 +9549,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      السحب. وتُصنع بالسحب من إحدى نقاط الحافّة الأربع (تظهر عند التحويم) إلى بطاقةٍ أخرى، وتُحدَّد بنقرةٍ
      وتُحذف بـ‎Delete‎. ولا وصلةَ من بطاقةٍ إلى نفسها ولا تكرارَ لوصلةٍ قائمة، وما فقد أحدَ طرفيه يسقط */
   const KCVL = { sel: null, s: null, raf: 0 };
-  function kcvLinkData(host, cards) {
+  function kcvLinkData(host, cards, ro) {
     const H = host.holder, ids = new Set(cards.map(n => n.id));
     const ok = (H.links || []).filter(l => ids.has(l.a) && ids.has(l.b) && l.a !== l.b);
-    if (H.links && ok.length !== H.links.length) { H.links = ok; queueMicrotask(save); }
+    if (!ro && H.links && ok.length !== H.links.length) { H.links = ok; queueMicrotask(save); }
     return ok;
   }
   const kcvRect = c => ({ x: c.offsetLeft, y: c.offsetTop, w: c.offsetWidth, h: c.offsetHeight });
@@ -9519,6 +9576,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ra = kcvRect(ca), rb = kcvRect(cb), [sa, sb] = kcvSides(ra, rb);
     const d = kcvPath(kcvAnchor(ra, sa), kcvAnchor(rb, sb), sa, sb);
     g.querySelectorAll('path').forEach(p => p.setAttribute('d', d));
+    const lab = cv.querySelector('.kcv-lab[data-klab="' + CSS.escape(g.dataset.klink) + '"]');
+    if (lab) { const pth = g.querySelector('.kcv-line'), L = pth.getTotalLength(), pt = pth.getPointAtLength(L / 2); lab.style.left = pt.x + 'px'; lab.style.top = pt.y + 'px'; }
   }
   function kcvLinksFor(cv, ids) {
     cv.querySelectorAll('.kcv-link').forEach(g => { if (!ids || ids.has(g.dataset.a) || ids.has(g.dataset.b)) kcvRoute(cv, g); });
@@ -9538,11 +9597,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* نقرُ الوصلة يحدّدها (والمساحةُ المنقورةُ خطٌّ عريضٌ خفيّ حول الخطّ المرئيّ) */
   document.addEventListener('pointerdown', e => {
-    const g = e.target.closest && e.target.closest('#cm-body .kcv .kcv-link');
-    if (!g || e.button !== 0) return;
+    const g = e.target.closest && e.target.closest('#cm-body .kcv .kcv-link, #cm-body .kcv .kcv-lab');
+    if (!g || e.button !== 0 || g.closest('.kcv.is-ro') || e.target.closest('[contenteditable]')) return;
     e.preventDefault(); e.stopPropagation();
     const cv = g.closest('.kcv'); cv.focus({ preventScroll: true });
-    kcvSelect(cv, new Set()); kcvLinkSel(cv, g.dataset.klink);
+    kcvSelect(cv, new Set()); kcvLinkSel(cv, g.dataset.klink || g.dataset.klab);
   }, true);
   /* السحبُ من نقطة الحافّة: خطٌّ مؤقّت يتبع المؤشّر، والبطاقةُ الصالحةُ تحته تُبرز */
   document.addEventListener('pointerdown', e => {
@@ -9670,6 +9729,40 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cv = m.closest('.kcv'); kcvMapGo(cv, e);
     const mv = ev => kcvMapGo(cv, ev), up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); };
     document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
+  }, true);
+  /* ===== كلمةٌ على السهم =====
+     النقرُ المزدوجُ على سهمٍ يضع عليه كلمةً تُكتب في مكانها (وسطَه)، وتتبعه حيث مال. وتُحفظ في الوصلة (‎label‎)،
+     وإن مُحيت سقطت. وتدخل التراجع كسائر التغييرات */
+  function kcvLabelEdit(cv, id) {
+    const host = ktHost(cv.closest('.kt-view').dataset.ktf), l = host && (host.holder.links || []).find(x => x.id === id);
+    if (!l) return;
+    let lab = cv.querySelector('.kcv-lab[data-klab="' + CSS.escape(id) + '"]');
+    if (!lab) {
+      lab = document.createElement('div'); lab.className = 'kcv-lab'; lab.dataset.klab = id;
+      cv.querySelector('.kcv-world').appendChild(lab);
+      const g = cv.querySelector('.kcv-link[data-klink="' + CSS.escape(id) + '"]'); if (g) kcvRoute(cv, g);
+    }
+    lab.__snap = kcvShot(cv); lab.__txt = l.label || '';
+    lab.setAttribute('contenteditable', 'plaintext-only'); lab.setAttribute('spellcheck', 'false');
+    lab.focus(); const r = document.createRange(); r.selectNodeContents(lab); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r);
+  }
+  document.addEventListener('focusout', e => {
+    const lab = e.target.closest && e.target.closest('#cm-body .kcv .kcv-lab[contenteditable]');
+    if (!lab) return;
+    lab.removeAttribute('contenteditable');
+    const cv = lab.closest('.kcv'), host = ktHost(cv.closest('.kt-view').dataset.ktf);
+    const l = host && (host.holder.links || []).find(x => x.id === lab.dataset.klab);
+    if (!l) return;
+    const txt = lab.textContent.trim();
+    if (txt === lab.__txt) { if (!txt) lab.remove(); return; }
+    if (lab.__snap) kcvUndoPush(cv, null, lab.__snap);
+    if (txt) l.label = txt; else { delete l.label; lab.remove(); }
+    save();
+  });
+  document.addEventListener('keydown', e => {
+    const lab = e.target.closest && e.target.closest('#cm-body .kcv .kcv-lab[contenteditable]');
+    if (!lab) return;
+    if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); lab.closest('.kcv').focus({ preventScroll: true }); }
   }, true);
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
@@ -9987,7 +10080,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                ولا تُعار ‎cx-ro‎: تلك تحمل مع الهندسة **حكمَ التحديد** (‎cxSelSync‎ تبحث
                عن ‎.x3.cx-ro‎ لتعرف شجرةَ النشر)، فلو لبستها الشروحُ لَالتبست الشجرتان
                في آلةٍ لا تخصّ الهندسة. فوسمٌ ثالثٌ يحمل الهندسةَ وحدَها -->
-          ${open && kind === 'c' && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck)
+          ${open && kind === 'c' && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
             : open ? `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>` : ''}
           ${reactRowHTML(p, likeAttr, '')}
         </div>

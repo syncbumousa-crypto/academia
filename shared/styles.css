@@ -16593,3 +16593,18 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 html[data-theme="dark"] .kcv-map { background: #3a4246; }
 .kcv-map.on { display: block; }
 .kcv-ui .kcv-zl { font-size: 12px; font-weight: 400; color: var(--u-lab, #5d6b82); min-width: 48px; }
+/* المرحلة ٥: كلمةُ السهم · خطوطُ المحاذاة · المنشورُ يُقرأ */
+.kcv-lab {
+  position: absolute; z-index: 1; transform: translate(-50%, -50%); max-width: 180px; padding: 2px 8px; border-radius: 999px;
+  background: var(--u-in-bg, #fff); border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); white-space: pre-wrap; text-align: center;
+  font-size: 12px; font-weight: 700; color: var(--u-lab, #5d6b82); cursor: pointer; unicode-bidi: plaintext;
+}
+html[data-theme="dark"] .kcv-lab { background: #3a4246; }
+.kcv-lab[contenteditable] { cursor: text; outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); min-width: 40px; }
+.kcv-lab:empty::before { content: '\200b'; }
+.kcv-guide { position: absolute; z-index: 3; display: none; pointer-events: none; background: var(--u-gold, #c9a25c); }
+.kcv-guide--v { width: 1px; }
+.kcv-guide--h { height: 1px; }
+.kcv.is-ro .kcv-card { cursor: default; user-select: text; }
+.kcv.is-ro .kcv-link, .kcv.is-ro .kcv-lab { cursor: default; pointer-events: none; }
+.kt-view.is-ro .kt-ok { cursor: default; }
