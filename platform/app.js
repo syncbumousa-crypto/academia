@@ -8975,13 +8975,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   const pkBoxAt = (k, wide, open) => !pkLab() ? ''
     : ' data-c="' + esc(k.c || '') + '" style="--c:' + esc(k.c || '#8a97a3') + (wide ? ';--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px' : '') + '"';
+  /* ===== ‎pkFit‎ — نموذجُ العرض (ROADMAP-GLASS-STRIP ق١–ق٤) =====
+     ‎CSS‎ يقسم الصفّ (بالتساوي بلا مفتوح · الباقي للمفتوح · الالتفاف)، وهذا يُكمل ما لا يسعه:
+       ١. قدرُ اسم كلّ مغلق (‎--pk-need‎): لا ينزل عنه، والطويلُ جدًّا يُختصر عند حدّه.
+       ٢. ق٣: إن لم يبقَ للمفتوح حدُّه في سطر إخوته صاروا رقائق (أيقونةٌ وحدها)؛ فإن لم يكفِ
+          ذلك عادوا كما كانوا ونزل المفتوحُ إلى سطرٍ وحده.
+     يُحسب بعد كلّ رسمٍ للشريط وعند تغيّر النافذة وبعد تحميل الخطّ — من الأعلى إلى الأسفل، لأنّ
+     عرضَ اللوح يحدّد ما في داخله */
+  let pkFitRaf = 0;
+  const pkFitSoon = () => { if (!pkFitRaf) pkFitRaf = requestAnimationFrame(() => { pkFitRaf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pkFit); }); };
+  function pkFit(strip) {
+    strip.querySelectorAll('.pg-box.is-chip').forEach(b => b.classList.remove('is-chip'));
+    strip.querySelectorAll('.pg-box:not(.is-wide)').forEach(b => {
+      const nm = b.querySelector(':scope > .pg-face > .pg-nm');
+      if (nm) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 1) + 'px');
+    });
+    /* صفٌّ فيه مفتوحٌ يجب أن يكون سطرًا واحدًا: المفتوحُ وإخوتُه جنبه. فإن لم يسعهم:
+       رقائقُ أوّلًا، فإن لم يكفِ: المفتوحُ في سطرٍ وحده تحتهم (‎is-solo‎) وإخوتُه يملؤون ما فوقه
+       بالتساوي كصفٍّ لا مفتوحَ فيه — فلا يبقى سطرٌ ناقصٌ ولا هامشٌ فارغ */
+    const lines = row => new Set([...row.children].map(c => c.offsetTop)).size;
+    strip.querySelectorAll('.pg-row').forEach(row => {
+      row.classList.remove('is-solo');
+      const w = row.querySelector(':scope > .pg-box.is-wide');
+      if (!w || !row.offsetParent || lines(row) < 2) return;
+      const sib = [...row.children].filter(c => c !== w && c.classList.contains('pg-box'));
+      /* الرقائقُ تُخفي الأسماء، والاسمُ هو ما يُتنقّل به: فلا تُستعمل إلّا لأخٍ أو أخوين (تُوفّر سطرًا
+         كاملًا بثمنٍ صغير). وما زاد فالمفتوحُ في سطرٍ وحده والأسماءُ ظاهرة */
+      if (sib.length <= 2) {
+        sib.forEach(c => c.classList.add('is-chip'));
+        if (lines(row) < 2) return;
+        sib.forEach(c => c.classList.remove('is-chip'));
+      }
+      row.classList.add('is-solo');
+    });
+  }
+  window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
     return '<div class="pg-row">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId;
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
-        + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
+        + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
         + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
@@ -9025,7 +9061,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
         : pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>';
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
-        + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
+        + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
         + (has ? '<div class="pg-in">' + pkBoxEdHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
@@ -9038,6 +9074,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
+    if (lab) pkFitSoon();
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
