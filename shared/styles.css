@@ -16872,7 +16872,10 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 @keyframes pkSplitIn { from { opacity: 0; transform: translateX(-28px); } }
 html[data-lang="en"] .pk-split.is-in > .kt-view { animation-name: pkSplitInEn; }
 @keyframes pkSplitInEn { from { opacity: 0; transform: translateX(28px); } }
-@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view { animation: none; } }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
+@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view { animation: none; } }
+/* الكتابُ الطائرُ إلى زرّ «المصدر» حين يُغلق: نسخةٌ ثابتةٌ فوق كلّ شيء، تصغُر حول وسطها */
+.pk-bkfly { transform-origin: 50% 50%; perspective: 2600px; will-change: transform, opacity; }
+.pk-bkfly > .cbk { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
 .pk--max .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 280px; }
 /* المرحلة ٢: المحدَّدُ بإطارٍ ذهبيّ، والبطاقةُ تُمسك وتُسحب، والنصُّ يُحرَّر بالنقر المزدوج */
 .kcv-card { cursor: grab; user-select: none; }

@@ -21634,14 +21634,42 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         w.appendChild(c); ghosts.push({ w, dx, ms });
       };
       const side = state.lang === 'en' ? -1 : 1;   /* الكتابُ يمينًا في العربيّة، والجارُ يسارًا */
-      let grow = null;
+      let grow = null, fly = null;
       if (part && sp) {
         const bookEl = sp.querySelector(':scope > .pk-src'), partEl = sp.querySelector(':scope > .kt-view');
-        if (to === 'source') { mkGhost(bookEl, 56 * side, 450); grow = partEl && partEl.getBoundingClientRect(); }
+        if (to === 'source') {
+          /* خروجُ الكتاب ديناميكيٌّ كدخوله (طلبُ صاحب الموقع): يصغُر ويطير إلى زرّ «المصدر» الذي نُقر — لا ينزلق ويتلاشى */
+          const cbk = bookEl && bookEl.querySelector('.cbk');
+          if (cbk && !bkReduce()) fly = { r: cbk.getBoundingClientRect(), node: cbk.cloneNode(true) };
+          grow = partEl && partEl.getBoundingClientRect();
+        }
         else if (to === part) mkGhost(partEl, -56 * side, 450);
         else if (PK_SPLIT_VIEWS.includes(to)) mkGhost(partEl, 0, 260);
       }
       const playGhosts = () => {
+        if (fly) {
+          const btn = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`);
+          if (btn) {
+            const { r, node } = fly, br = btn.getBoundingClientRect();
+            const w = document.createElement('div');
+            w.className = 'cbk-stage pk-bkfly';
+            w.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;padding:0;z-index:4100;pointer-events:none;display:block`;
+            node.style.transform = 'none'; node.style.margin = '0';
+            w.appendChild(node); document.body.appendChild(w);
+            const dx = (br.left + br.width / 2) - (r.left + r.width / 2), dy = (br.top + br.height / 2) - (r.top + r.height / 2);
+            const k = Math.max(0.04, br.width / r.width);
+            /* ينطلق ببطءٍ ثمّ يتسارع نحو الزرّ (عكسُ دخوله الذي يبدأ سريعًا ويستقرّ)، ويخفت في آخر مسيره */
+            w.animate([
+              { transform: 'translate(0, 0) scale(1)', opacity: 1, offset: 0 },
+              { transform: `translate(${dx * 0.18}px, ${dy * 0.18}px) scale(${1 - (1 - k) * 0.12})`, opacity: 1, offset: 0.25 },
+              { transform: `translate(${dx}px, ${dy}px) scale(${k})`, opacity: 0.15, offset: 1 },
+            ], { duration: 560, easing: 'cubic-bezier(.55, 0, .35, 1)', fill: 'forwards' }).finished.then(() => {
+              w.remove();
+              const b2 = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`);
+              if (b2) b2.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
+            }, () => w.remove());
+          }
+        }
         if (!ghosts.length && !grow) return;
         const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`);
         const host = ctl && ctl.closest('.post') && ctl.closest('.post').querySelector('.post-ytmain');
