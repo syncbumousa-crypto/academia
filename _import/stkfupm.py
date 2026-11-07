@@ -14,7 +14,7 @@ r"""
 والاختيارُ يدويٌّ في ‎PICK‎: ما فيه خبرةٌ أو معلومة. والأسئلةُ بلا جواب، والمكرَّر،
 والروابطُ الميّتة (mediafire)، والشتائمُ — لا تُنقل.
 """
-import io, os, re, sys, json, html as H
+import io, os, re, sys, json, base64, html as H
 from datetime import datetime
 
 BASE = 'https://community.stkfupm.com'
@@ -22,14 +22,38 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT  = os.path.join(ROOT, 'out')
 
 # code ⇐ [(topic id, post_number, book?)]
+# code ⇐ [(topic id, post_number, book, keep)]
+# ‏‎keep‎: مشاركةٌ تتكلّم عن موادَّ كثيرة يُؤخذ منها سطرُ هذه المادّة وحدَه، بلفظه:
+#   ‎(نمطُ أوّلِ سطر, عددُ الأسطر)‎ — ولا يُضاف إليه حرف.
+# ‏‎ACCT 202‎ هي ‎ACCT 210‎ باسمها القديم («210 = 202 سابقا»)، فتُجمع معها.
 PICK = {
   'ACCT 210': [
-    (120957, 5,  ''),                                         # وصف المقرّر ومخرجاته من السيلابس
-    (120957, 8,  'Managerial Accounting Braun and tietz 3rd Edition'),  # الكتاب الجديد — بلفظه
-    (120957, 9,  ''),                                         # تجربة ترم 141
-    (120957, 11, ''),                                         # تجربة ترم 142 — أطولها وأنفعها
-    (120957, 12, ''),                                         # تجربة ترم 162
-    (120957, 13, ''),                                         # تجربة ترم 192
+    (120957, 5,  '', None),                                   # وصف المقرّر ومخرجاته من السيلابس
+    (120957, 8,  'Managerial Accounting Braun and tietz 3rd Edition', None),  # الكتاب الجديد — بلفظه
+    (120957, 9,  '', None),                                   # تجربة ترم 141
+    (120957, 11, '', None),                                   # تجربة ترم 142 — أطولها وأنفعها
+    (120957, 12, '', None),                                   # تجربة ترم 162
+    (120957, 13, '', None),                                   # تجربة ترم 192
+    (107923, 1,  '', None),                                   # فاينل 202 (2011): صعبٌ وفيه تريكات
+    (114257, 10, '', None),                                   # 9ami (2012): المادّة تحتاج متابعةً ومسائل
+    (50950,  2,  '', (r'^acct202', 1)),                       # 2006: سطرُ 202 من ردٍّ عن أربع مواد
+    (88402,  10, '', (r'^Acct 202', 2)),                      # 2010: سطرا 202 من ردٍّ عن أربع مواد
+  ],
+}
+
+# ===== المصادر =====
+# code ⇐ [(sec, topic id, post_number, files)] — ‏‎srcU‎ مصادرُ الفهم، و‎srcP‎ مصادرُ الممارسة.
+# ‏‎files‎: ‎[(اسمُ الملف, مسارُه في _import/files, سطرُ المرفق في النصّ)]‎ — يحلّ الملفُّ
+# محلَّ سطرِ مرفقه في ديسكورس، فيبقى حيث وضعه كاتبُه.
+PICK_SRC = {
+  'ACCT 210': [
+    ('srcU', 114257, 6,  []),    # 9ami (2011): توتوريال وايلي بلس شابترًا شابترًا
+    ('srcU', 114257, 7,  []),    # Anoosh (2011): الكتاب + وايلي بلس يغنيانك عن مدرّس
+    ('srcU', 114257, 8,  []),    # user8337 (2011): اقرأ الكتاب
+    ('srcU', 154985, 2,  []),    # FIN_Analyst (2014): ما تحتاجه من الأساسيات قبل المادّة
+    ('srcU', 176349, 2,  []),    # HARD-WORKER (2017): السلايدات ثمّ المسائل ثمّ الأونلاين هوموورك
+    ('srcP', 172455, 2,  []),    # Practice (2016): مسائل السيلابس واختياراتُ آخر الشابتر
+    ('srcP', 89593,  3,  [('final acc.pdf', 'stkfupm-89593-final acc.pdf', r'^final acc\.pdf')]),  # صفحةُ فاينل 202 (2010)
   ],
 }
 
@@ -43,6 +67,7 @@ DOCTORS = {
   'stk-dr-amr':      'Dr. M. Amr',
   'stk-dr-alhazmi':  'Dr. Muhammad Alhazmi',
   'stk-dr-nainar':   'Dr. S M Khalid Nainar',
+  'stk-dr-kurdi':    'Dr. Ammr Kurdi',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
@@ -61,6 +86,12 @@ PICK_DOC = {
     (98415, 11, 'stk-dr-alhazmi'),
     (177580, 2, 'stk-dr-nainar'), (177580, 3, 'stk-dr-nainar'), (177580, 5, 'stk-dr-nainar'),
     (177580, 6, 'stk-dr-nainar'), (177580, 7, 'stk-dr-nainar'),
+    # موضوعُ «ميرغني ولا حيدر مدني (اكاونتنق 210)»: الجوابان اللذان يقيّمان
+    (124547, 2, 'stk-dr-mirghani'), (124547, 6, 'stk-dr-mirghani'),
+    # ‏‎ACCT 202‎ — المادّةُ نفسُها باسمها القديم
+    (98438, 4, 'stk-dr-mirghani'), (56719, 4, 'stk-dr-mirghani'),
+    (98443, 10, 'stk-dr-madani'),
+    (99892, 10, 'stk-dr-kurdi'), (99531, 3, 'stk-dr-kurdi'),
   ],
 }
 
@@ -71,7 +102,10 @@ EMOJI = {'slight_smile': '🙂', 'smile': '😄', 'smiley': '😃', 'grinning': 
          'rofl': '🤣', 'roll_eyes': '🙄', 'stuck_out_tongue': '😛', 'sunglasses': '😎',
          'flushed': '😳', 'scream': '😱', 'innocent': '😇', 'unamused': '😒', 'expressionless': '😑',
          'frowning': '😦', 'arrow_down': '⬇️', 'grin': '😁', 'rose': '🌹', 'eyes': '👀',
-         'point_up': '☝️', 'crazy_face': '🤪', 'cowboy_hat_face': '🤠'}
+         'point_up': '☝️', 'crazy_face': '🤪', 'cowboy_hat_face': '🤠',
+         'person_with_crown': '🤴', 'hibiscus': '🌺', 'smiling_face_with_three_hearts': '🥰',
+         'astonished': '😲', 'thumbsdown': '👎', '-1': '👎', 'clap': '👏',
+         'confused-11': '😕'}   # ‏‎confused-11‎ رمزُ منتدى vBulletin القديم، بقي نصًّا في ديسكورس
 
 def emoji_of(tag):
     m = re.search(r'title=":([^":]+):"', tag)
@@ -94,6 +128,8 @@ def text_of(cooked):
     t = re.sub(r'</li>', '\n', t)
     t = re.sub(r'<[^>]+>', '', t)
     t = H.unescape(t).replace('\u00a0', ' ')
+    # ورمزٌ بقي نصًّا (‎:clap:‎) هو وجهٌ لم يُرسم — يُرسم إن عُرف، ويبقى كما هو إن لم يُعرف
+    t = re.sub(r':([a-z_+\-0-9]+):', lambda m: EMOJI.get(m.group(1), m.group(0)), t)
     t = '\n'.join(re.sub(r'[ \t]+', ' ', l).strip() for l in t.split('\n'))
     return re.sub(r'\n{3,}', '\n\n', t).strip()
 
@@ -129,13 +165,40 @@ def main(src):
     for code in sorted(set(PICK) | set(PICK_DOC)):
         users, posts = {}, []
         # ---- «المادة»: مساهمةٌ لكلّ مشاركة
-        for tid, num, book in PICK.get(code, []):
+        for tid, num, book, keep in PICK.get(code, []):
             t, p = load_post(src, cache, tid, num)
             uid = author(users, p)
             imp = imp_of(t, p)
-            data = {'desc': text_of(p['cooked']), 'type': '', 'rel': 0, 'lang': '', 'book': book, 'imp': imp}
+            desc = text_of(p['cooked'])
+            if keep:
+                ls = desc.split('\n')
+                i = next(k for k, l in enumerate(ls) if re.search(keep[0], l, re.I))
+                desc = '\n'.join(ls[i:i + keep[1]])
+            data = {'desc': desc, 'type': '', 'rel': 0, 'lang': '', 'book': book, 'imp': imp}
             posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': 'info',
                           'ts': imp['ts'], 'st': 'pub', 'data': data})
+        # ---- «المصادر»: نصُّ الكاتب أسطرًا، وملفُّه في موضع مرفقه
+        for sec, tid, num, files in PICK_SRC.get(code, []):
+            t, p = load_post(src, cache, tid, num)
+            uid = author(users, p)
+            imp = imp_of(t, p)
+            lines = text_of(p['cooked']).split('\n')
+            html, fobj = [], {}
+            for line in lines:
+                hit = next((f for f in files if re.search(f[2], line)), None)
+                if hit:
+                    fid = 'stk-f%d-%d' % (p['id'], len(fobj))
+                    raw = open(os.path.join(ROOT, 'files', hit[1]), 'rb').read()
+                    mime = 'application/pdf' if hit[0].lower().endswith('.pdf') else 'application/octet-stream'
+                    fobj[fid] = {'name': hit[0], 'v': 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())}
+                    html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
+                else:
+                    html.append(H.escape(line, quote=False))
+            missing = [f[0] for f in files if not any(f[0] == v['name'] for v in fobj.values())]
+            if missing: sys.exit('لم يُعثر على سطر المرفق %s في %d#%d' % (missing, tid, num))
+            posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': sec,
+                          'ts': imp['ts'], 'st': 'pub',
+                          'data': {'html': '<br>'.join(html), 'files': fobj, 'imp': imp}})
         # ---- «الدكاترة»: مساهمةٌ واحدةٌ لكلّ كاتب (‎UNIQUE(uid, code, sec)‎)، وصفٌّ لكلّ دكتورٍ قيّمه
         rows = {}
         for tid, num, dr in PICK_DOC.get(code, []):
@@ -153,6 +216,12 @@ def main(src):
             posts.append({'id': 'stk-doc-%s-%s' % (uid[4:], code.replace(' ', '').lower()), 'uid': uid,
                           'code': code, 'sec': 'doc', 'ts': rs[0]['imp']['ts'], 'st': 'pub',
                           'data': {'docs': rs}})
+        seen = {}
+        for p in posts:
+            k = (p['uid'], p['sec'])
+            if k in seen: sys.exit('%s له مساهمتان في %s · %s: ‎UNIQUE(uid, code, sec)‎ يردّ الثانية (%s و %s)'
+                                   % (p['uid'], code, p['sec'], seen[k], p['id']))
+            seen[k] = p['id']
         slug = code.replace(' ', '')
         json.dump({'code': code, 'users': list(users.values()), 'posts': posts},
                   io.open(os.path.join(OUT, slug + '.json'), 'w', encoding='utf-8'),
