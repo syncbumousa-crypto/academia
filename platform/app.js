@@ -9161,7 +9161,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `</tr></thead><tbody>`
         /* صفوفُ البيانات كلُّها (الأوّلُ رأس) — كلُّ صفٍّ شريطٌ منفصل */
         + tb.rows.slice(1).map((r, k) => { const i = k + 1; return `<tr>`
-          + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(i, 0)}>${esc(r[0] || '')}</span><span class="kt-tools" aria-hidden="true"><i>⋯</i><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></svg></span></td>`
+          + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(i, 0)}>${esc(r[0] || '')}</span></td>`
           + `<td class="kt-c1 kt-t kt-term"${ktEd(i, 1)}>${esc(r[1] || '')}</td>`
           + `<td class="kt-c2 kt-t kt-mean"${ktEd(i, 2)}>${esc(r[2] || '')}</td>`
           + `<td class="kt-c3">${ktOk(!!(r[3] || '').trim(), i)}</td>`
