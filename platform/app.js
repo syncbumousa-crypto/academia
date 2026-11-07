@@ -8985,9 +8985,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       title="${esc(T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
   };
-  /* «المصدر» — كبسولةٌ وحدَها يمينَ الثلاثة (طلبُ صاحب الموقع)، رمزُها قوسا الشيفرة ‎</>‎.
-     فعلُه لم يُقرَّر بعد: زرٌّ بلا عرضٍ وراءه (‎data-pksrc‎ لا ‎data-pkview‎) فلا يُبدّل الجوف */
-  const PK_SRC_IC = '<path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.5 5l-3 14"/>';
+  /* «المصدر» — المصدرُ العلميُّ لا مصدرُ الشيفرة: كبسولةٌ وحدَها يمينَ الثلاثة (طلبُ صاحب الموقع)،
+     رمزُها علامتا الاقتباس (اختيارُه من أربعة). فعلُه لم يُقرَّر بعد: زرٌّ بلا عرضٍ وراءه
+     (‎data-pksrc‎ لا ‎data-pkview‎) فلا يُبدّل الجوف */
+  const PK_SRC_IC = '<path d="M4 11.5h4.5V17H4v-5.5C4 8.5 5.5 6.5 8 6"/><path d="M13.5 11.5H18V17h-4.5v-5.5c0-3 1.5-5 4-5.5"/>';
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo"><button type="button" class="pk-vbar__b" data-pksrc data-pkid="${esc(id)}"
       title="${esc(T().pkView_source)}" aria-label="${esc(T().pkView_source)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
