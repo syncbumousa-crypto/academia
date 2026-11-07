@@ -171,7 +171,7 @@
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             <span class="post-date">${agoTxt(p.ts)}</span>${pinBadge(p)}
           </div>
           ${body}
@@ -2248,6 +2248,12 @@
   const srvPulled = {};        /* آخرُ جذبٍ لكلّ مادّة — لا يُعاد في كلّ فتحة */
   const SRV_FRESH = 60000;
 
+  /* ===== تاريخُ المساهمة من الخادم: بالمللي =====
+     الخادمُ يحفظ ‎ts‎ كما أرسله العميل (‎Date.now()‎ = مللي)، وكان يُضرب هنا في ألفٍ
+     كأنّه ثوانٍ — فيقع التاريخُ بعد آلاف السنين، و‎agoTxt‎ يقصّه إلى صفر: «اليوم»
+     على كلّ مساهمةٍ جاءت من الخادم. فيُقرأ بوحدته: ما دون ‎1e12‎ ثوانٍ قديمةٌ تُضرب،
+     وما فوقه مللي يُترك. (والتعليقاتُ تُختم بـ‎now()‎ ثوانيَ على الخادم، فضربُها صحيح.) */
+  const srvMs = t => { t = +t || 0; return t && t < 1e12 ? t * 1000 : t; };
   async function srvPull(code, force) {
     if (!SRV_ON() || !code) return;
     if (!force && Date.now() - (srvPulled[code] || 0) < SRV_FRESH) return;
@@ -2358,7 +2364,7 @@
              بمعرّفها، فتبديلُ معرّفها يجعلها ضرّةً لنفسها */
           if (postEmpty(mine) && !mine.srvH) {
             mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
-            if (r.ts) mine.ts = r.ts * 1000;
+            if (r.ts) mine.ts = srvMs(r.ts);
             mine.st = r.st || 'pub'; delete mine.srvH; delete mine.srvBig;
             cut++; return;
           }
@@ -2375,7 +2381,7 @@
           id: r.id, uid: r.uid, me: true, st: r.st || 'pub',
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
-          ts: (r.ts || 0) * 1000 || Date.now(),
+          ts: srvMs(r.ts) || Date.now(),
           pin: (r.uid === SITE_UID && r.data && r.data.bookImg) ? 1 : 0,
           data: r.data,
         });
@@ -2389,7 +2395,7 @@
         me: false,                            /* الختمُ: محسوبٌ لا مقروء */
         u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
         likes: r.likes | 0, liked: !!r.liked,   /* العدُّ من الخادم — يُقرأ ولا يُخترع */
-        ts: (r.ts || 0) * 1000 || Date.now(),
+        ts: srvMs(r.ts) || Date.now(),
         /* ===== والتثبيتُ يُستنتج من الشكل لا يُنقل =====
            ‎pin‎ أخُو ‎data‎ لا ابنُه، والدفعُ لا يرفع إلّا ‎data‎ — فلا يعود من
            الخادم أبدًا. ولو تُرك لَسقط غلافُ الكتاب من صدر بنده يومَ حلّ الوافدُ

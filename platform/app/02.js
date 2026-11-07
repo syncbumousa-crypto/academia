@@ -512,7 +512,7 @@
         <div class="post__top">
           <span class="post-av post-av--sm">${avatarHTML(p)}</span>
           <div class="post-meta">
-            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>
+            ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             <span class="post-date">${agoTxt(p.ts)}</span>
           </div>
           <span class="wlikes">♥ ${p.likes || 0}</span>
