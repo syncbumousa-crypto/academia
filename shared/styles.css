@@ -16331,12 +16331,18 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
              inset calc(var(--lx) * 7px) calc(var(--ly) * 7px) 12px -8px var(--lgx-bev2);
 }
 /* الصفوفُ تخطيطٌ لا زجاج. ويُفسح فيها لظلّ الكبسولات فلا يُقصّ (والحشوةُ تُستردّ بهامشٍ سالب) */
-/* ق٤: الصفُّ يلتفّ إلى سطرٍ ثانٍ ولا يُمرَّر — فيُرى كلُّ مجلدٍ دائمًا، ولا يُقصّ ظلّ */
+/* ق٤ (بحكم صاحب الموقع): الصفُّ **سطرٌ واحدٌ دائمًا**. فإن زادت المجلداتُ عن عرضه مضت يسارًا وظهر
+   شريطُ تمريرٍ أفقيٌّ رفيع (وعجلةُ الفأرة تمرّره أفقيًّا — ‎pkWheel‎). والحشوةُ تحت الكبسولات مُفسحٌ
+   لظلّها كي لا يقصّه التمرير، وتُستردّ بهامشٍ سالب */
 .pk-fstrip.pk-lg .pg-row,
 .pk-fstrip.pk-lg .pg-in .pg-row {
-  display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; overflow: visible;
-  padding: 0; margin: 0; border-radius: 0; background: transparent; box-shadow: none;
+  display: flex; flex-wrap: nowrap; align-items: stretch; gap: 6px; overflow-x: auto; overflow-y: hidden;
+  padding: 3px 6px 12px; margin: -3px -6px -12px; border-radius: 0; background: transparent; box-shadow: none;
+  scrollbar-width: thin; scrollbar-color: rgba(127, 127, 127, .35) transparent;
 }
+.pk-fstrip.pk-lg .pg-row::-webkit-scrollbar { height: 5px; }
+.pk-fstrip.pk-lg .pg-row::-webkit-scrollbar-thumb { background: rgba(127, 127, 127, .35); border-radius: 99px; }
+.pk-fstrip.pk-lg .pg-row::-webkit-scrollbar-track { background: transparent; }
 /* الكبسولة */
 /* ق١: لا مفتوحَ في الصفّ ⇐ الإخوةُ يقتسمون العرضَ بالتساوي ويملؤونه كلَّه، ولا ينزل أحدُهم عن قدر
    اسمه — إلّا الاسمَ الطويلَ جدًّا فيُختصر عند ‎220px‎ (ويُقرأ كاملًا عند التحويم) */
@@ -16345,15 +16351,8 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
   --pk-need: 140px; flex: 1 1 0; min-width: min(var(--pk-need), 220px); max-width: 100%; overflow: visible; align-self: stretch;
   border: 0; border-radius: 19px; background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-out);
 }
-/* ق٢: مفتوحٌ في الصفّ ⇐ إخوتُه مضغوطون على قدر أسمائهم حتى ‎160px‎، وهو يأخذ الباقي */
-.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex: 0 1 auto; min-width: min(var(--pk-need), 110px); max-width: 160px; }
-/* ق٣ (الخطوة الأولى): إن لم يبقَ للمفتوح حدُّه صار إخوتُه رقائقَ — أيقونةٌ بلون المجلد وحدها
-   (‎pkFit‎ يقرّر بعد القياس). وإن لم يكفِ ذلك نزل المفتوحُ إلى سطرٍ وحده (الالتفاف) */
-.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-chip:not(.is-wide) { flex: 0 0 auto; min-width: 0; max-width: none; }
-.pk-fstrip.pk-lg .pg-box.is-chip > .pg-face { padding-inline: 11px; }
-.pk-fstrip.pk-lg .pg-row.is-solo:has(> .pg-box.is-wide) > .pg-box.is-wide { order: 99; flex: 1 1 100%; }
-.pk-fstrip.pk-lg .pg-row.is-solo:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex: 1 1 0; min-width: min(var(--pk-need), 220px); max-width: 100%; }
-.pk-fstrip.pk-lg .pg-box.is-chip > .pg-face > .pg-nm { display: none; }
+/* ق٢: مفتوحٌ في الصفّ ⇐ إخوتُه على قدر أسمائهم حتى ‎160px‎ (لا تُضغط: إن لم يسعهم الصفُّ مُرِّر)، وهو يأخذ الباقي */
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex: 0 0 auto; min-width: 0; max-width: 160px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { min-width: 0; }
 /* المختارُ: أصفى، ومطوَّقٌ بلون مجلده */
@@ -16362,7 +16361,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 .pk-fstrip.pk-lg .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide {
-  flex: 1 1 320px; min-width: min(320px, 100%); max-width: 100%; align-self: stretch; border-radius: var(--r, 24px);
+  flex: 1 1 420px; min-width: min(420px, 100%); max-width: 100%; align-self: stretch; border-radius: var(--r, 24px);
   background: var(--lgx-bg-tray); box-shadow: var(--lgx-rim), inset 0 0 0 1.5px color-mix(in srgb, var(--c) 50%, transparent), var(--lgx-out);
 }
 .pk-fstrip.pk-lg .pg-box.is-wide.is-sel { box-shadow: var(--lgx-rim), inset 0 0 0 1.5px var(--c), var(--lgx-out); }

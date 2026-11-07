@@ -8976,39 +8976,39 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkBoxAt = (k, wide, open) => !pkLab() ? ''
     : ' data-c="' + esc(k.c || '') + '" style="--c:' + esc(k.c || '#8a97a3') + (wide ? ';--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px' : '') + '"';
   /* ===== ‎pkFit‎ — نموذجُ العرض (ROADMAP-GLASS-STRIP ق١–ق٤) =====
-     ‎CSS‎ يقسم الصفّ (بالتساوي بلا مفتوح · الباقي للمفتوح · الالتفاف)، وهذا يُكمل ما لا يسعه:
+     ‎CSS‎ يقسم الصفّ (بالتساوي بلا مفتوح · الباقي للمفتوح · سطرٌ واحدٌ يُمرَّر أفقيًّا إن زاد)،
+     وهذا يُكمل ما لا يسعه:
        ١. قدرُ اسم كلّ مغلق (‎--pk-need‎): لا ينزل عنه، والطويلُ جدًّا يُختصر عند حدّه.
-       ٢. ق٣: إن لم يبقَ للمفتوح حدُّه في سطر إخوته صاروا رقائق (أيقونةٌ وحدها)؛ فإن لم يكفِ
-          ذلك عادوا كما كانوا ونزل المفتوحُ إلى سطرٍ وحده.
-     يُحسب بعد كلّ رسمٍ للشريط وعند تغيّر النافذة وبعد تحميل الخطّ — من الأعلى إلى الأسفل، لأنّ
-     عرضَ اللوح يحدّد ما في داخله */
+       ٢. المفتوحُ والمختارُ يُجلبان إلى المرئيّ من صفّهما إن كانا خلف حافّته — فالرسمُ الجديدُ يبدأ
+          الصفَّ من أوّله، ولا يضيع ما اختير خلف التمرير.
+     يُحسب بعد كلّ رسمٍ للشريط وعند تغيّر النافذة وبعد تحميل الخطّ */
   let pkFitRaf = 0;
   const pkFitSoon = () => { if (!pkFitRaf) pkFitRaf = requestAnimationFrame(() => { pkFitRaf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pkFit); }); };
   function pkFit(strip) {
-    strip.querySelectorAll('.pg-box.is-chip').forEach(b => b.classList.remove('is-chip'));
     strip.querySelectorAll('.pg-box:not(.is-wide)').forEach(b => {
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
       if (nm) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 1) + 'px');
     });
-    /* صفٌّ فيه مفتوحٌ يجب أن يكون سطرًا واحدًا: المفتوحُ وإخوتُه جنبه. فإن لم يسعهم:
-       رقائقُ أوّلًا، فإن لم يكفِ: المفتوحُ في سطرٍ وحده تحتهم (‎is-solo‎) وإخوتُه يملؤون ما فوقه
-       بالتساوي كصفٍّ لا مفتوحَ فيه — فلا يبقى سطرٌ ناقصٌ ولا هامشٌ فارغ */
-    const lines = row => new Set([...row.children].map(c => c.offsetTop)).size;
     strip.querySelectorAll('.pg-row').forEach(row => {
-      row.classList.remove('is-solo');
-      const w = row.querySelector(':scope > .pg-box.is-wide');
-      if (!w || !row.offsetParent || lines(row) < 2) return;
-      const sib = [...row.children].filter(c => c !== w && c.classList.contains('pg-box'));
-      /* الرقائقُ تُخفي الأسماء، والاسمُ هو ما يُتنقّل به: فلا تُستعمل إلّا لأخٍ أو أخوين (تُوفّر سطرًا
-         كاملًا بثمنٍ صغير). وما زاد فالمفتوحُ في سطرٍ وحده والأسماءُ ظاهرة */
-      if (sib.length <= 2) {
-        sib.forEach(c => c.classList.add('is-chip'));
-        if (lines(row) < 2) return;
-        sib.forEach(c => c.classList.remove('is-chip'));
-      }
-      row.classList.add('is-solo');
+      if (!row.offsetParent || row.scrollWidth <= row.clientWidth + 1) return;
+      const t = row.querySelector(':scope > .pg-box.is-wide') || row.querySelector(':scope > .pg-box.is-sel');
+      if (!t) return;
+      const rr = row.getBoundingClientRect(), br = t.getBoundingClientRect(), pad = 10;
+      if (br.left < rr.left + pad) row.scrollLeft -= rr.left + pad - br.left;
+      else if (br.right > rr.right - pad) row.scrollLeft += br.right - (rr.right - pad);
     });
   }
+  /* عجلةُ الفأرة فوق صفٍّ يفيض: تمرّره أفقيًّا (نزولُ العجلة يمضي إلى آخره — يسارًا). وإن بلغ طرفَه
+     تُركت العجلةُ للصفحة */
+  document.addEventListener('wheel', e => {
+    if (!e.deltaY || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    const row = e.target.closest && e.target.closest('#cm-body .pk-lg .pg-row');
+    if (!row || row.scrollWidth <= row.clientWidth + 1) return;
+    const max = row.scrollWidth - row.clientWidth, cur = Math.abs(row.scrollLeft);
+    if ((e.deltaY > 0 && cur >= max - 1) || (e.deltaY < 0 && cur <= 0)) return;
+    e.preventDefault();
+    row.scrollLeft -= e.deltaY;
+  }, { passive: false });
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
   function pkBoxHTML(nodes, open, parentKey, sel) {
