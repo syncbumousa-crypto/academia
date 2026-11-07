@@ -16419,3 +16419,13 @@ html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-selec
 @media (prefers-reduced-motion: reduce) {
   .pk-fstrip.pk-lg .pg-face, .pk-fstrip.pk-lg .pg-face.lgx-gulp { transition: none; animation: none; }
 }
+/* ق٥: اللوحُ المسطَّح — حين يضيق المفتوحُ عن ‎360px‎ (جوّالٌ أو عمقٌ رابع) يسقط سطحُه وحشوتُه،
+   ويبقى خيطٌ بلونه على جانبه يصل به أبناءه، فيأخذون عرضَه كلَّه ولا يختنق العمق */
+html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat,
+html .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide.is-flat {
+  background: transparent; box-shadow: none; border-radius: 0; min-width: 100%; flex-basis: 100%;
+  border-inline-start: 2px solid color-mix(in srgb, var(--c) 70%, transparent);
+}
+html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color: var(--c); }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-flat > .pg-face { padding-inline: 8px; }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-flat > .pg-in { padding: 0 0 2px 0; padding-inline-start: 6px; }

@@ -8989,6 +8989,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
       if (nm) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 1) + 'px');
     });
+    /* ق٥: كلُّ لوحٍ يأكل ‎12px‎ من عرض ما فيه، فيختنق العمقُ في الجوّال. فاللوحُ الذي ضاق عن ‎360px‎
+       يُسطَّح (‎is-flat‎): لا سطحَ ولا حشوة، وخيطٌ بلونه على جانبه يصل أبناءه به — فيأخذون عرضَه كلَّه.
+       من الأعلى إلى الأسفل: تسطيحُ الأب يوسّع الابن، فقد لا يحتاج هو إليه */
+    strip.querySelectorAll('.pg-box.is-flat').forEach(w => w.classList.remove('is-flat'));
+    strip.querySelectorAll('.pg-box.is-wide').forEach(w => {
+      if (w.offsetParent && w.getBoundingClientRect().width < 360) w.classList.add('is-flat');
+    });
     strip.querySelectorAll('.pg-row').forEach(row => {
       if (!row.offsetParent || row.scrollWidth <= row.clientWidth + 1) return;
       const t = row.querySelector(':scope > .pg-box.is-wide') || row.querySelector(':scope > .pg-box.is-sel');
