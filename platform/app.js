@@ -20431,16 +20431,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const f = nm.parentElement.dataset.pkf;
       if (f !== '') { e.preventDefault(); e.stopPropagation(); pkNaming = f; pkFocusNew = f; renderCmSection(); return; }
     }
-    const pf = e.target.closest('#cm-body .pk-fstrip [data-pkf]');
+    /* في المختبر: النقرُ في أيّ موضعٍ من اللوح المفتوح (لا على أحد أبنائه) نقرٌ عليه هو */
+    const tray = !e.target.closest('#cm-body .pk-fstrip [data-pkf]') && e.target.closest('#cm-body .pk-lg .pg-box.is-wide');
+    const pf = tray ? tray.querySelector(':scope > .pg-face') : e.target.closest('#cm-body .pk-fstrip [data-pkf]');
     if (pf) {
       /* مربّعٌ في الشريط: يُختار — وإن كان له بنون فُتح جوفُه في صفّه (وأُغلق أخوه)،
          ونقرُ المختار المفتوح يطويه. البابُ الذي يفتح هو الذي يُغلق (ROADMAP-FOLDERS ق٦) */
       e.preventDefault(); e.stopPropagation();
       const id = pf.closest('.pk-fstrip').dataset.pkid, f = pf.dataset.pkf, par = pf.dataset.pkp;
       const open = pkFo[id] || (pkFo[id] = new Map());
-      /* المفتوحُ يُغلق بنقره مرّةً أخرى — ولو كان المختارُ أحدَ أبنائه (بطلب صاحب الموقع) */
+      /* المفتوحُ المختارُ يُغلق بنقره مرّةً أخرى؛ أمّا إن كان المختارُ أحدَ أبنائه فنقرُه يختاره ويبقى
+         مفتوحًا (بطلب صاحب الموقع) */
       if (pf.hasAttribute('aria-expanded')) {
-        if (open.get(par) === f) open.delete(par); else open.set(par, f);
+        if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
       } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       renderCmSection();
@@ -20799,6 +20802,8 @@ void main() {
       const target = box.classList.contains('is-wide') ? f : (row.closest('.pg-box') || {}).querySelector && row.closest('.pg-box').querySelector(':scope > .pg-face');
       if (!target) return;
       e.preventDefault(); e.stopPropagation();
+      /* ‎Esc‎ يُغلق دائمًا: يُختار المفتوحُ أوّلًا فيصير نقرُه إغلاقًا (نقرُ مفتوحٍ غير مختارٍ يختاره فقط) */
+      pkFs[target.closest('.pk-fstrip').dataset.pkid] = target.dataset.pkf;
       pkFocusKeep = target.dataset.pkf; target.click();
       return;
     } else return;

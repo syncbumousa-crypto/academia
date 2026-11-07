@@ -16429,3 +16429,8 @@ html .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide.is-flat {
 html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color: var(--c); }
 .pk-fstrip.pk-lg .pg-box.is-wide.is-flat > .pg-face { padding-inline: 8px; }
 .pk-fstrip.pk-lg .pg-box.is-wide.is-flat > .pg-in { padding: 0 0 2px 0; padding-inline-start: 6px; }
+/* اللوحُ المفتوحُ كلُّه يُنقر ويُحوَّم عليه (لا رأسُه وحده) — والوميضُ لأعمق لوحٍ تحت المؤشّر وحده،
+   ولا يكون إذا كان المؤشّرُ على أحد أبنائه */
+.pk-fstrip.pk-lg .pg-box.is-wide { cursor: pointer; }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: transparent; }
+.pk-fstrip.pk-lg .pg-box.is-wide:hover:not(:has(.pg-in .pg-box:hover)) { background-image: linear-gradient(var(--lgx-hov), var(--lgx-hov)); }
