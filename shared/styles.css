@@ -16288,6 +16288,22 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--ftdn .pk-pubfoot { max-height: 0; padding-top: 0; opacity: 0; visibility: hidden; overflow: hidden; }
 .pk--ftanim .pk-pubfoot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .pk--ftanim .pk-pubfoot { transition: none; } }
+
+/* ===== المقابضُ بلا خطّ (طلبُ صاحب الموقع) =====
+   القوسُ في الزاوية (الكبيرُ والصغير) وخطّا الرأس والقاع: يُنزع الخطُّ الذهبيُّ منها كلِّها،
+   ويبقى الجزءُ الذي فوقه — المسكةُ بنقاطها الثلاث — وحدَه. ومسكةُ القوس كانت شريطًا رفيعًا
+   على الذهب، فتُعطى قامةَ مسكة الخطّ (‎7px‎) ولونَها لتُقرأ وحدها؛ والمرورُ يُغمقها */
+.pk-curve__arc, .pk-hdline__ln { display: none; }
+.pk-max--curve .pk-curve__grip { stroke: rgba(20, 35, 63, .1); stroke-width: 7; }
+html[data-theme="dark"] .pk-max--curve .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+.pk-max--curve:hover .pk-curve__grip, .pk-max--curve:focus-visible .pk-curve__grip { stroke: rgba(20, 35, 63, .2); }
+html[data-theme="dark"] .pk-max--curve:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .24); }
+.pk-maxmini .pk-curve__grip { stroke: rgba(20, 35, 63, .1); stroke-width: 4; }
+html[data-theme="dark"] .pk-maxmini .pk-curve__grip { stroke: rgba(255, 255, 255, .14); }
+.pk-maxmini:hover .pk-curve__grip, .pk-maxmini:focus-visible .pk-curve__grip { stroke: rgba(20, 35, 63, .2); }
+html[data-theme="dark"] .pk-maxmini:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .26); }
+.pk-hdline:hover .pk-hdline__grip, .pk-hdline:focus-visible .pk-hdline__grip { background: linear-gradient(rgba(20, 35, 63, .18), rgba(20, 35, 63, .18)), var(--u-surf); }
+html[data-theme="dark"] .pk-hdline:hover .pk-hdline__grip { background: linear-gradient(rgba(255, 255, 255, .22), rgba(255, 255, 255, .22)), var(--u-surf); }
 .pk--hdanim > .post-yt > .post-av--yt { transition: margin-inline-start .22s ease, visibility .22s; }
 @media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt, .pk--hdanim > .post-yt > .post-av--yt { transition: none; } .pk-hdline__grip { transition: none; } }
 
