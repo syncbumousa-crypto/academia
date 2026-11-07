@@ -20599,10 +20599,12 @@ void main() {
     const sr = strip.getBoundingClientRect(), list = [];
     const ox = sr.left - strip.scrollLeft, oy = sr.top - strip.scrollTop;
     const rel = b => ({ x: b.left - ox, y: b.top - oy, w: b.width, h: b.height });
-    strip.querySelectorAll('.pg-box, .pg-box.is-wide.is-sel > .pg-face').forEach(el => {
+    /* المفتوحُ يُطوَّق كلُّه بلون مجلده (لا رأسُه وحده): فيُرى أنّه مفتوحٌ وأنّ ما فيه منه.
+       والمختارُ أشدُّ حلقةً، والمفتوحُ الذي اختير أحدُ أبنائه أخفّ — فيُقرأ المسارُ من الحلقات */
+    strip.querySelectorAll('.pg-box').forEach(el => {
       if (!el.offsetParent) return;
-      const isFace = el.classList.contains('pg-face'), box = isFace ? el.parentElement : el;
-      const wide = !isFace && box.classList.contains('is-wide'), sel = box.classList.contains('is-sel') && (isFace || !wide);
+      const isFace = false, box = el;
+      const wide = box.classList.contains('is-wide'), sel = box.classList.contains('is-sel');
       const b = rel(el.getBoundingClientRect());
       const row = box.parentElement && box.parentElement.closest('.pg-row');
       const cr = row ? rel(row.getBoundingClientRect()) : null;
@@ -20613,7 +20615,7 @@ void main() {
           : isFace || b.h < 46 ? b.h / 2 : pksRowR(box),
         base: pkBase(wide ? 'tray' : sel ? 'sel' : 'cap'),
         fade: box.classList.contains('is-drag') ? .35 : 1,
-        ring: sel ? [col[0], col[1], col[2], .9] : null,
+        ring: sel ? [col[0], col[1], col[2], .9] : wide ? [col[0], col[1], col[2], .5] : null,
         sh: isFace ? 0 : 1,
       });
     });
