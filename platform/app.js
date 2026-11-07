@@ -9207,11 +9207,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     queueMicrotask(kcvMountAll);
     return `<div class="kcv" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
-      + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"></svg>`
+      + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"><defs>`
+      + `<marker id="kcv-ar" class="kcv-ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
+      + `<marker id="kcv-ar-sel" class="kcv-ar kcv-ar--sel" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
+      + `</defs>` + kcvLinkData(host, cards).map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
+      + `</svg>`
       + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
           + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
-          + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div></div>`).join('')
+          + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
+          + ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('') + `</div>`).join('')
       + `</div>`
       + `<div class="kcv-ui" role="toolbar">`
       + `<button type="button" data-kcvz="out" aria-label="−">−</button><span class="kcv-zl">100%</span>`
@@ -9261,6 +9266,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     document.querySelectorAll('#cm-body .kcv:not([data-kcvm])').forEach(cv => {
       cv.dataset.kcvm = '1';
       kcvLayout(cv);
+      kcvLinksFor(cv);
       if (kcvView(cv)) kcvApply(cv); else kcvFit(cv, true);
       const sel = KCVS.get(cv.dataset.kcv);
       if (sel) cv.querySelectorAll('.kcv-card').forEach(c => c.classList.toggle('is-sel', sel.has(c.dataset.kcard)));
@@ -9279,11 +9285,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target.closest('.kcv-card, .kcv-ui')) return;
+    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link')) return;
     const V = kcvView(cv); if (!V) return;
     if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.kcv-card')) document.activeElement.blur();
     cv.focus({ preventScroll: true });
     e.preventDefault();
+    kcvLinkSel(null);
     if (e.shiftKey) {   /* ‎Shift‎ + سحبُ الفراغ: إطارُ تحديد */
       const r = cv.getBoundingClientRect(), m = document.createElement('div');
       m.className = 'kcv-marq'; cv.appendChild(m);
@@ -9343,6 +9350,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!cv || e.target !== cv || e.ctrlKey || e.metaKey || e.altKey) return;
     const V = kcvView(cv); if (!V) return;
     const cx = cv.clientWidth / 2, cy = cv.clientHeight / 2, st = e.shiftKey ? 160 : 48;
+    if ((e.key === 'Delete' || e.key === 'Backspace') && KCVL.sel && KCVL.sel.cv === cv) { e.preventDefault(); kcvLinkDel(cv, KCVL.sel.id); return; }
     const sel = KCVS.get(cv.dataset.kcv);
     if (sel && sel.size) {   /* المحدَّدُ يتحرّك بالأسهم على الشبكة (‎Shift‎: خمسُ خطوات) */
       const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
@@ -9413,7 +9421,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const card = e.target.closest && e.target.closest('#cm-body .kcv .kcv-card');
-    if (!card || e.target.closest('[contenteditable]')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب */
+    if (!card || e.target.closest('[contenteditable], .kcv-port')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب · ومن النقطة: وصل */
+    kcvLinkSel(null);
     const cv = card.closest('.kcv'), id = card.dataset.kcard;
     e.preventDefault(); cv.focus({ preventScroll: true });
     if (document.activeElement && document.activeElement.isContentEditable) document.activeElement.blur();
@@ -9465,6 +9474,106 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     KCVS.edit = { id: nn.id, fld: 'f' }; KCVS.fresh = nn.id;
     save(); renderCmSection();
   }
+  /* ===== المرحلة ٣ — الوصل =====
+     الوصلةُ سهمٌ من بطاقةٍ إلى أخرى في المجلد نفسِه (‎holder.links = [{id,a,b}]‎). تُرسم منحنًى ناعمًا بين أقرب
+     حافّتين متقابلتين (أفقيًّا إن كان البُعدُ أفقيًّا أغلب، وإلّا عموديًّا)، وتتبع البطاقتين في كلّ إطارٍ أثناء
+     السحب. وتُصنع بالسحب من إحدى نقاط الحافّة الأربع (تظهر عند التحويم) إلى بطاقةٍ أخرى، وتُحدَّد بنقرةٍ
+     وتُحذف بـ‎Delete‎. ولا وصلةَ من بطاقةٍ إلى نفسها ولا تكرارَ لوصلةٍ قائمة، وما فقد أحدَ طرفيه يسقط */
+  const KCVL = { sel: null, s: null, raf: 0 };
+  function kcvLinkData(host, cards) {
+    const H = host.holder, ids = new Set(cards.map(n => n.id));
+    const ok = (H.links || []).filter(l => ids.has(l.a) && ids.has(l.b) && l.a !== l.b);
+    if (H.links && ok.length !== H.links.length) { H.links = ok; queueMicrotask(save); }
+    return ok;
+  }
+  const kcvRect = c => ({ x: c.offsetLeft, y: c.offsetTop, w: c.offsetWidth, h: c.offsetHeight });
+  const KCV_SIDE = { t: [0, -1], r: [1, 0], b: [0, 1], l: [-1, 0] };
+  const kcvAnchor = (r, sd) => sd === 't' ? [r.x + r.w / 2, r.y] : sd === 'b' ? [r.x + r.w / 2, r.y + r.h] : sd === 'l' ? [r.x, r.y + r.h / 2] : [r.x + r.w, r.y + r.h / 2];
+  function kcvPath(A, B, sa, sb) {
+    const [ax, ay] = A, [bx, by] = B, na = KCV_SIDE[sa], nb = KCV_SIDE[sb];
+    const k = Math.max(14, Math.min(140, Math.hypot(bx - ax, by - ay) / 2.6));   /* انحناءٌ بقدر المسافة: لا عُروةَ بين بطاقتين متقاربتين */
+    return `M${ax},${ay} C${ax + na[0] * k},${ay + na[1] * k} ${bx + nb[0] * k},${by + nb[1] * k} ${bx},${by}`;
+  }
+  function kcvSides(ra, rb) {
+    const dx = (rb.x + rb.w / 2) - (ra.x + ra.w / 2), dy = (rb.y + rb.h / 2) - (ra.y + ra.h / 2);
+    /* أفقيًّا إن لم تتراكبا أفقيًّا، وإلّا عموديًّا */
+    const gapX = Math.max(rb.x - (ra.x + ra.w), ra.x - (rb.x + rb.w)), gapY = Math.max(rb.y - (ra.y + ra.h), ra.y - (rb.y + rb.h));
+    if (gapX > 0 && (gapX >= gapY || Math.abs(dx) > Math.abs(dy))) return dx > 0 ? ['r', 'l'] : ['l', 'r'];
+    return dy > 0 ? ['b', 't'] : ['t', 'b'];
+  }
+  function kcvRoute(cv, g) {
+    const ca = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.a) + '"]'), cb = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.b) + '"]');
+    if (!ca || !cb) return;
+    const ra = kcvRect(ca), rb = kcvRect(cb), [sa, sb] = kcvSides(ra, rb);
+    const d = kcvPath(kcvAnchor(ra, sa), kcvAnchor(rb, sb), sa, sb);
+    g.querySelectorAll('path').forEach(p => p.setAttribute('d', d));
+  }
+  function kcvLinksFor(cv, ids) {
+    cv.querySelectorAll('.kcv-link').forEach(g => { if (!ids || ids.has(g.dataset.a) || ids.has(g.dataset.b)) kcvRoute(cv, g); });
+  }
+  function kcvLinkSel(cv, id) {
+    document.querySelectorAll('#cm-body .kcv-link.is-sel').forEach(g => { g.classList.remove('is-sel'); g.querySelector('.kcv-line').setAttribute('marker-end', 'url(#kcv-ar)'); });
+    KCVL.sel = cv && id ? { cv, id } : null;
+    if (!KCVL.sel) return;
+    const g = cv.querySelector('.kcv-link[data-klink="' + CSS.escape(id) + '"]');
+    if (g) { g.classList.add('is-sel'); g.querySelector('.kcv-line').setAttribute('marker-end', 'url(#kcv-ar-sel)'); }
+  }
+  function kcvLinkDel(cv, id) {
+    const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
+    host.holder.links = (host.holder.links || []).filter(l => l.id !== id);
+    const g = cv.querySelector('.kcv-link[data-klink="' + CSS.escape(id) + '"]'); if (g) g.remove();
+    KCVL.sel = null; save();
+  }
+  /* نقرُ الوصلة يحدّدها (والمساحةُ المنقورةُ خطٌّ عريضٌ خفيّ حول الخطّ المرئيّ) */
+  document.addEventListener('pointerdown', e => {
+    const g = e.target.closest && e.target.closest('#cm-body .kcv .kcv-link');
+    if (!g || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const cv = g.closest('.kcv'); cv.focus({ preventScroll: true });
+    kcvSelect(cv, new Set()); kcvLinkSel(cv, g.dataset.klink);
+  }, true);
+  /* السحبُ من نقطة الحافّة: خطٌّ مؤقّت يتبع المؤشّر، والبطاقةُ الصالحةُ تحته تُبرز */
+  document.addEventListener('pointerdown', e => {
+    const port = e.target.closest && e.target.closest('#cm-body .kcv .kcv-port');
+    if (!port || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const card = port.closest('.kcv-card'), cv = card.closest('.kcv'), svg = cv.querySelector('.kcv-links');
+    const tmp = document.createElementNS('http://www.w3.org/2000/svg', 'path'); tmp.setAttribute('class', 'kcv-tmp'); tmp.setAttribute('marker-end', 'url(#kcv-ar-sel)'); svg.appendChild(tmp);
+    kcvLinkSel(null); cv.classList.add('is-linking');
+    KCVL.s = { cv, card, side: port.dataset.port, tmp, pid: e.pointerId, target: null };
+  }, true);
+  document.addEventListener('pointermove', e => {
+    const s = KCVL.s; if (!s || e.pointerId !== s.pid) return;
+    s.ex = e.clientX; s.ey = e.clientY;
+    if (!KCVL.raf) KCVL.raf = requestAnimationFrame(() => {
+      KCVL.raf = 0; const t = KCVL.s; if (!t) return;
+      const V = kcvView(t.cv), r = t.cv.getBoundingClientRect();
+      const P = [(t.ex - r.left - V.x) / V.z, (t.ey - r.top - V.y) / V.z];
+      const hit = document.elementFromPoint(t.ex, t.ey), tc = hit && hit.closest('.kcv-card');
+      const ok = tc && tc !== t.card && tc.closest('.kcv') === t.cv ? tc : null;
+      if (t.target !== ok) { if (t.target) t.target.classList.remove('is-target'); t.target = ok; if (ok) ok.classList.add('is-target'); }
+      const ra = kcvRect(t.card);
+      if (ok) { const rb = kcvRect(ok), [sa, sb] = kcvSides(ra, rb); t.tmp.setAttribute('d', kcvPath(kcvAnchor(ra, sa), kcvAnchor(rb, sb), sa, sb)); }
+      else { const A = kcvAnchor(ra, t.side), n = KCV_SIDE[t.side]; t.tmp.setAttribute('d', `M${A[0]},${A[1]} C${A[0] + n[0] * 50},${A[1] + n[1] * 50} ${P[0]},${P[1]} ${P[0]},${P[1]}`); }
+    });
+  });
+  const kcvLinkEnd = () => {
+    const s = KCVL.s; if (!s) return;
+    KCVL.s = null; s.tmp.remove(); s.cv.classList.remove('is-linking');
+    if (s.target) s.target.classList.remove('is-target');
+    if (!s.target) return;
+    const a = s.card.dataset.kcard, b = s.target.dataset.kcard;
+    const host = ktHost(s.cv.closest('.kt-view').dataset.ktf); if (!host) return;
+    const L = host.holder.links || (host.holder.links = []);
+    if (a === b || L.some(l => l.a === a && l.b === b)) return;
+    const l = { id: newId(), a, b }; L.push(l); save();
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'kcv-link'); g.dataset.klink = l.id; g.dataset.a = a; g.dataset.b = b;
+    g.innerHTML = '<path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/>';
+    s.cv.querySelector('.kcv-links').appendChild(g); kcvRoute(s.cv, g);
+  };
+  document.addEventListener('pointerup', kcvLinkEnd);
+  document.addEventListener('pointercancel', kcvLinkEnd);
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {

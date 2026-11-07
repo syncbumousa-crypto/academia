@@ -16559,3 +16559,28 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .kcv.is-dragging .kcv-card.is-sel { box-shadow: 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 45%, transparent), 0 16px 30px -12px rgba(20, 35, 63, .45); }
 .kcv-card .kt-t[contenteditable] { cursor: text; user-select: text; background: var(--u-in-bg, #fff); }
 .kcv-marq { position: absolute; z-index: 3; pointer-events: none; border: 1px solid color-mix(in srgb, var(--u-gold, #c9a25c) 80%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 12%, transparent); border-radius: 4px; }
+/* المرحلة ٣: الوصلاتُ ونقاطُ الحافّة */
+.kcv-card { overflow: visible; }
+.kcv-card > .kcv-f { border-radius: 12px 12px 0 0; }
+.kcv-card > .kcv-b { border-radius: 0 0 12px 12px; }
+.kcv-link { pointer-events: visibleStroke; cursor: pointer; }
+.kcv-link .kcv-hit { fill: none; stroke: transparent; stroke-width: 14; }
+.kcv-link .kcv-line, .kcv-tmp { fill: none; stroke: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); stroke-width: 1.75; stroke-linecap: round; }
+.kcv-link:hover .kcv-line { stroke: color-mix(in srgb, var(--u-tx, #35455c) 70%, transparent); }
+.kcv-link.is-sel .kcv-line, .kcv-tmp { stroke: var(--u-gold, #c9a25c); stroke-width: 2.25; }
+.kcv-tmp { stroke-dasharray: 6 5; pointer-events: none; }
+.kcv-ar path { fill: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); }
+.kcv-ar--sel path { fill: var(--u-gold, #c9a25c); }
+/* نقاطُ الحافّة: تظهر عند التحويم على البطاقة أو تحديدها، وأثناء الوصل على كلّ البطائق */
+.kcv-port {
+  position: absolute; z-index: 2; width: 12px; height: 12px; margin: -6px; border-radius: 50%; box-sizing: border-box; cursor: crosshair;
+  background: var(--u-in-bg, #fff); border: 2px solid var(--u-gold, #c9a25c); opacity: 0; transform: scale(.6);
+  transition: opacity .12s ease, transform .12s ease;
+}
+.kcv-port--t { top: 0; left: 50%; } .kcv-port--b { top: 100%; left: 50%; }
+.kcv-port--l { top: 50%; left: 0; } .kcv-port--r { top: 50%; left: 100%; }
+.kcv-card:hover .kcv-port, .kcv-card.is-sel .kcv-port { opacity: 1; transform: none; }
+.kcv-port:hover { transform: scale(1.3) !important; background: var(--u-gold, #c9a25c); }
+.kcv.is-dragging .kcv-port, .kcv.is-panning .kcv-port { opacity: 0 !important; }
+.kcv.is-linking .kcv-card:not(.is-target) .kcv-port { opacity: 0; }
+.kcv-card.is-target { border-color: var(--u-gold, #c9a25c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--u-gold, #c9a25c) 35%, transparent); }
