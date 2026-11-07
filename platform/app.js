@@ -8977,11 +8977,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
   const pkVw = {}, pkFo = {}, pkFs = {};
   const pkVwOf = id => pkVw[id] || 'folder';
-  const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">${PK_VIEWS.map(([k, ic]) => {
+  /* والمجلّديُّ مفصولٌ في كبسولةٍ وحدَه يمينَ الثلاثة (طلبُ صاحب الموقع): هو العرضُ الأصل،
+     والثلاثةُ عروضُ المعرفة — فالمجموعةُ واحدةٌ (‎role=group‎) والكبسولتان شكلٌ لا معنى */
+  const pkVbBtn = (id, k, ic) => {
     const on = pkVwOf(id) === k;
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
       title="${esc(T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`; }).join('')}</span>`;
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
+  };
+  const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
+    <span class="pk-vbar__cap pk-vbar__cap--solo">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span>
+    <span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>`;
   /* ===== شريطُ المجلدات في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) =====
      هو مربّعاتُ «ورقة الملخّص» بعينها (ROADMAP-FOLDERS): صفٌّ أفقيٌّ، والمتوسِّعُ أبناؤه
      **في جوفه**، وواحدٌ متوسِّعٌ في الصفّ. شجرتُه من ‎pgFolds‎ وأصنافُه ‎.pg-*‎ نفسُها —
