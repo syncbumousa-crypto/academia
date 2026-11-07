@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9189,16 +9189,146 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `<div${ktEd(n.id, 'b', 'kt-t kc-b')}>${esc(n.b || '')}</div>`
         + `</article>`).join('') + `</div>`;
     } else {
-      /* بلا مربّعٍ للمجلد (بطلب صاحب الموقع): المجلدُ مختارٌ في الشريط فوقه، والشجرةُ فروعُ بطائقه وحدها */
-      body = `<div class="ktr">`
-        + (cards.length ? `<ul class="ktr-list">` + cards.map(n => `<li class="ktr-li"><div class="ktr-box${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
-          + `<div${ktEd(n.id, 'f', 'kt-t ktr-f')}>${esc(n.f || '')}</div>`
-          + `<div${ktEd(n.id, 'b', 'kt-t ktr-b')}>${esc(n.b || '')}</div>`
-          + `</div></li>`).join('') + `</ul>` : '')
-        + `</div>`;
+      /* العرضُ الشجريّ لوحٌ حرّ (ROADMAP-CANVAS) — ‎kcvHTML‎ */
+      body = kcvHTML(id, sel, host, cards);
     }
     return `<div class="kt-view kt-view--${v}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${ktAddBtn()}</div>`;
   }
+  /* ===== اللوحُ الحرّ — العرضُ الشجريّ (ROADMAP-CANVAS · المرحلة ١) =====
+     إطارٌ (‎.kcv‎) يقصّ ويلتقط المؤشّر، وفيه «عالمٌ» (‎.kcv-world‎) يتحرّك بـ‎transform‎ وحده (إزاحةٌ وتكبير)،
+     وفي العالم طبقةُ الوصلات (‎svg‎) والبطائقُ في مواضعها. إحداثيّاتُ العالم مطلقة (‎x‎ من اليسار) كما في Miro،
+     وأصلُها على يمين النظر: البطائقُ التي لا موضعَ لها تُرتَّب أعمدةً تمتدّ يسارًا منه (الموقعُ من اليمين)،
+     ولا يُكتب موضعُها حتى يحرّكها صاحبُها. وحالُ النظر لكلّ مجلدٍ في الذاكرة (‎PKCV‎) — لا في الرزمة */
+  const PKCV = new Map();
+  const KCV = { W: 240, GX: 36, GY: 28, PAD: 24, ZMIN: .25, ZMAX: 2 };
+  const kcvKey = (id, sel) => id + '|' + sel;
+  function kcvHTML(id, sel, host, cards) {
+    const key = kcvKey(id, sel), V = PKCV.get(key);
+    queueMicrotask(kcvMountAll);
+    return `<div class="kcv" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
+      + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
+      + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"></svg>`
+      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
+          + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
+          + `<div${ktEd(n.id, 'f', 'kt-t kcv-f')}>${esc(n.f || '')}</div>`
+          + `<div${ktEd(n.id, 'b', 'kt-t kcv-b')}>${esc(n.b || '')}</div></div>`).join('')
+      + `</div>`
+      + `<div class="kcv-ui" role="toolbar">`
+      + `<button type="button" data-kcvz="out" aria-label="−">−</button><span class="kcv-zl">100%</span>`
+      + `<button type="button" data-kcvz="in" aria-label="+">+</button><button type="button" data-kcvz="fit" class="kcv-fit">${esc(T().kcvFit)}</button>`
+      + `</div></div>`;
+  }
+  const kcvView = cv => PKCV.get(cv.dataset.kcv);
+  function kcvApply(cv) {
+    const V = kcvView(cv), w = cv.querySelector('.kcv-world');
+    if (!V || !w) return;
+    w.style.transform = `translate(${V.x}px,${V.y}px) scale(${V.z})`; w.style.visibility = '';
+    cv.style.backgroundSize = `${20 * V.z}px ${20 * V.z}px`;
+    cv.style.backgroundPosition = `${V.x}px ${V.y}px`;
+    const zl = cv.querySelector('.kcv-zl'); if (zl) zl.textContent = Math.round(V.z * 100) + '%';
+  }
+  /* حدودُ ما في العالم (لملاءمة الكلّ) — من مواضع البطائق وقاماتها، بلا ‎getBoundingClientRect‎ المتأثّر بالتكبير */
+  const kcvBox = cv => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    cv.querySelectorAll('.kcv-card').forEach(c => { const x = c.offsetLeft, y = c.offsetTop; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x + c.offsetWidth); y1 = Math.max(y1, y + c.offsetHeight); });
+    return x0 === Infinity ? null : { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  };
+  function kcvFit(cv, keep100) {
+    const b = kcvBox(cv), cw = cv.clientWidth, ch = cv.clientHeight, P = KCV.PAD;
+    if (!b) { PKCV.set(cv.dataset.kcv, { x: cw - P, y: P, z: 1 }); return kcvApply(cv); }
+    let z = Math.min(1, (cw - 2 * P) / b.w, (ch - 2 * P) / b.h);
+    if (keep100 && z >= 1) z = 1;
+    z = Math.max(KCV.ZMIN, Math.min(KCV.ZMAX, z));
+    /* من اليمين ومن الأعلى (الموقعُ من اليمين)، ويتوسّط إن صغر عن النظر */
+    const x = b.w * z < cw - 2 * P ? cw - P - (b.x + b.w) * z : (cw - b.w * z) / 2 - b.x * z;
+    PKCV.set(cv.dataset.kcv, { x, y: P - b.y * z, z });
+    kcvApply(cv);
+  }
+  function kcvLayout(cv) {
+    const auto = [...cv.querySelectorAll('.kcv-card[data-auto]')];
+    if (!auto.length) return;
+    const placed = [...cv.querySelectorAll('.kcv-card:not([data-auto])')];
+    const top = placed.length ? Math.max(...placed.map(c => c.offsetTop + c.offsetHeight)) + KCV.GY * 2 : 0;
+    const cols = Math.max(1, Math.floor((cv.clientWidth - 2 * KCV.PAD + KCV.GX) / (KCV.W + KCV.GX)));
+    const ys = new Array(cols).fill(top);
+    auto.forEach(c => {
+      let k = 0; for (let i = 1; i < cols; i++) if (ys[i] < ys[k] - 1) k = i;
+      c.style.left = (-(k + 1) * KCV.W - k * KCV.GX) + 'px'; c.style.top = ys[k] + 'px';
+      ys[k] += c.offsetHeight + KCV.GY;
+    });
+  }
+  function kcvMountAll() {
+    document.querySelectorAll('#cm-body .kcv:not([data-kcvm])').forEach(cv => {
+      cv.dataset.kcvm = '1';
+      kcvLayout(cv);
+      if (kcvView(cv)) kcvApply(cv); else kcvFit(cv, true);
+    });
+  }
+  /* التكبيرُ حول نقطةٍ ثابتةٍ على الشاشة (المؤشّر أو وسط النظر) */
+  function kcvZoom(cv, nz, mx, my) {
+    const V = kcvView(cv); if (!V) return;
+    nz = Math.max(KCV.ZMIN, Math.min(KCV.ZMAX, nz));
+    V.x = mx - (mx - V.x) * nz / V.z; V.y = my - (my - V.y) * nz / V.z; V.z = nz;
+    kcvApply(cv);
+  }
+  /* الإزاحة: سحبُ الفراغ (لا البطاقة ولا الأزرار) */
+  const KCVP = { s: null, raf: 0 };
+  document.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    const cv = e.target.closest && e.target.closest('#cm-body .kcv');
+    if (!cv || e.target.closest('.kcv-card, .kcv-ui')) return;
+    const V = kcvView(cv); if (!V) return;
+    if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.kcv-card')) document.activeElement.blur();
+    KCVP.s = { cv, sx: e.clientX, sy: e.clientY, vx: V.x, vy: V.y, pid: e.pointerId };
+    cv.classList.add('is-panning'); cv.focus({ preventScroll: true });
+    e.preventDefault();
+  });
+  document.addEventListener('pointermove', e => {
+    const s = KCVP.s; if (!s || e.pointerId !== s.pid) return;
+    s.ex = e.clientX; s.ey = e.clientY;
+    if (!KCVP.raf) KCVP.raf = requestAnimationFrame(() => {
+      KCVP.raf = 0; const t = KCVP.s; if (!t) return;
+      const V = kcvView(t.cv); V.x = t.vx + t.ex - t.sx; V.y = t.vy + t.ey - t.sy; kcvApply(t.cv);
+    });
+  });
+  const kcvPanEnd = () => { if (KCVP.s) { KCVP.s.cv.classList.remove('is-panning'); KCVP.s = null; } };
+  document.addEventListener('pointerup', kcvPanEnd);
+  document.addEventListener('pointercancel', kcvPanEnd);
+  /* العجلة: تُزيح اللوح (ولا تُمرّر الصفحة من تحته)، ومع ‎Ctrl/⌘‎ (وقرصُ لوحة اللمس) تكبّر نحو المؤشّر */
+  document.addEventListener('wheel', e => {
+    const cv = e.target.closest && e.target.closest('#cm-body .kcv');
+    if (!cv || !kcvView(cv)) return;
+    e.preventDefault();
+    const V = kcvView(cv);
+    if (e.ctrlKey || e.metaKey) {
+      const r = cv.getBoundingClientRect();
+      kcvZoom(cv, V.z * Math.exp(-e.deltaY * .0025), e.clientX - r.left, e.clientY - r.top);
+    } else { V.x -= e.deltaX; V.y -= e.deltaY; kcvApply(cv); }
+  }, { passive: false });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body .kcv [data-kcvz]');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const cv = b.closest('.kcv'), V = kcvView(cv), k = b.dataset.kcvz;
+    if (k === 'fit') return kcvFit(cv);
+    kcvZoom(cv, V.z * (k === 'in' ? 1.2 : 1 / 1.2), cv.clientWidth / 2, cv.clientHeight / 2);
+  }, true);
+  /* لوحةُ المفاتيح (والتركيزُ على اللوح لا في نصّ بطاقة): ‎+ − 0‎ للتكبير والملاءمة، والأسهمُ للإزاحة */
+  document.addEventListener('keydown', e => {
+    const cv = e.target.closest && e.target.closest('#cm-body .kcv');
+    if (!cv || e.target !== cv || e.ctrlKey || e.metaKey || e.altKey) return;
+    const V = kcvView(cv); if (!V) return;
+    const cx = cv.clientWidth / 2, cy = cv.clientHeight / 2, st = e.shiftKey ? 160 : 48;
+    if (e.key === '+' || e.key === '=') kcvZoom(cv, V.z * 1.2, cx, cy);
+    else if (e.key === '-' || e.key === '_') kcvZoom(cv, V.z / 1.2, cx, cy);
+    else if (e.key === '0') kcvFit(cv);
+    else if (e.key === 'ArrowLeft') { V.x += st; kcvApply(cv); }
+    else if (e.key === 'ArrowRight') { V.x -= st; kcvApply(cv); }
+    else if (e.key === 'ArrowUp') { V.y += st; kcvApply(cv); }
+    else if (e.key === 'ArrowDown') { V.y -= st; kcvApply(cv); }
+    else return;
+    e.preventDefault();
+  });
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
