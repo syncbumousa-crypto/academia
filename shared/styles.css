@@ -16497,7 +16497,11 @@ td.kt-t:hover:not(:focus) { background: var(--u-hov, rgba(44, 94, 101, .05)); }
 .ktr { display: flex; flex-direction: column; }
 .ktr-root { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); background: var(--u-surf, rgba(44, 94, 101, .06)); font-size: 13px; font-weight: 700; color: var(--u-tx-strong, #14233f); }
 .ktr-root .pk-fi { width: 16px; height: 16px; flex: none; color: var(--u-mut, #8a97a3); }
-.ktr-list { list-style: none; margin: 0; padding: 0; padding-inline-start: 22px; position: relative; }
+.ktr-list { list-style: none; margin: 0; padding: 0; padding-inline-start: 4px; position: relative; }
+.ktr-li:first-child { padding-top: 0; }
+.ktr-li:first-child::before { top: 22px; }
+.ktr-li:first-child::after { top: 22px; }
+.ktr-li:only-child::before { display: none; }
 .ktr-li { position: relative; padding-top: 10px; padding-inline-start: 18px; }
 /* الجذعُ: خطٌّ عموديٌّ من الأصل حتى منتصف آخر مربّع، والغصنُ: خطٌّ أفقيٌّ إلى كلّ مربّع */
 .ktr-li::before { content: ''; position: absolute; inset-inline-start: 0; top: 0; bottom: 0; border-inline-start: 1.5px solid var(--u-dash, rgba(44, 94, 101, .38)); }

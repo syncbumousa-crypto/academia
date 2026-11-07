@@ -9189,9 +9189,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `<div${ktEd(n.id, 'b', 'kt-t kc-b')}>${esc(n.b || '')}</div>`
         + `</article>`).join('') + `</div>`;
     } else {
-      const name = sel === '' ? T().shRoot : pkFoldName(folds, sel);
-      const col = sel === '' ? '' : (folderColor(host.holder) || '');
-      body = `<div class="ktr"><div class="ktr-root">${pkFi(col)}<span>${esc(name)}</span></div>`
+      /* بلا مربّعٍ للمجلد (بطلب صاحب الموقع): المجلدُ مختارٌ في الشريط فوقه، والشجرةُ فروعُ بطائقه وحدها */
+      body = `<div class="ktr">`
         + (cards.length ? `<ul class="ktr-list">` + cards.map(n => `<li class="ktr-li"><div class="ktr-box${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
           + `<div${ktEd(n.id, 'f', 'kt-t ktr-f')}>${esc(n.f || '')}</div>`
           + `<div${ktEd(n.id, 'b', 'kt-t ktr-b')}>${esc(n.b || '')}</div>`
