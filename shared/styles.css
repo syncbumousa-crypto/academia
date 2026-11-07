@@ -16342,6 +16342,9 @@ html[data-theme="dark"] .pk-hdline:hover .pk-hdline__grip { background: linear-g
 /* ===== شريطُ طرق العرض (يسار سهم الطيّ في رأس المساهمة) =====
    أربعةُ مفاتيحَ متلاصقةٍ في كبسولةٍ واحدة: النشِطُ بذهب القوس المكتوم، والقادمةُ أخفت */
 .pk-vbar { flex: none; display: inline-flex; align-items: center; gap: 6px; }
+/* زرُّ المجلدات منفصلٌ عن الثلاثة انفصالًا بيّنًا (طلبُ صاحب الموقع): هو لبنوك الأسئلة، والثلاثةُ
+   تعرض المعلومات والملخّصات نفسَها — فبينهما فُرجةٌ وخطٌّ رأسيٌّ رفيع */
+.pk-vbar__sep { flex: none; width: 1px; height: 20px; margin-inline: 10px; background: var(--u-line); border-radius: 1px; }
 .pk-vbar__cap {
   display: inline-flex; align-items: center; gap: 1px; padding: 2px;
   border-radius: 9px; border: 1px solid var(--u-line); background: color-mix(in srgb, currentColor 4%, transparent);

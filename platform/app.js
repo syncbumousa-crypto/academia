@@ -9029,7 +9029,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo">${pkVbBtn(id, 'source', PK_SRC_IC)}</span>
     <span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>`;
+    <span class="pk-vbar__sep" aria-hidden="true"></span>
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>`;
   /* ===== شريطُ المجلدات في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) =====
      هو مربّعاتُ «ورقة الملخّص» بعينها (ROADMAP-FOLDERS): صفٌّ أفقيٌّ، والمتوسِّعُ أبناؤه
      **في جوفه**، وواحدٌ متوسِّعٌ في الصفّ. شجرتُه من ‎pgFolds‎ وأصنافُه ‎.pg-*‎ نفسُها —
