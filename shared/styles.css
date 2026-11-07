@@ -16297,76 +16297,97 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk-fstrip.is-drop { outline: 2px dashed #c9a25c; outline-offset: 2px; border-radius: 12px; }
 .pk-fstrip--ed { padding-bottom: 8px; }   /* فراغٌ تحت المربّعات يُفلَت عليه */
 
-/* ===== مختبر «رياضيات 105»: كبسولاتُ زجاجٍ وألواح (Liquid Glass) =====
-   كلُّ مجلدٍ كبسولةٌ زجاجيّةٌ مستقلّة تملأ نصيبَها من عرض الصفّ (فلا هامشَ فارغًا)، والمتوسِّعُ
-   لوحٌ زجاجيّ يحمل أبناءه بانحناءاتٍ متّحدة المركز (‎--r‎ من ‎pkBoxAt‎). والزجاجُ نفسُه —
-   الحافّةُ المضيئةُ التي تميل مع المؤشّر، وانحناءُ السطح، والظلُّ الناعم، وحلقةُ المختار
-   بلون مجلده — يرسمه ‎pksPaint‎ على كرت الشاشة في لوحٍ خلف المربّعات (‎.lgx-bg‎).
-   وما دام ‎WebGL‎ غائبًا (‎:not(.has-gl)‎) تُرسم الألواحُ بـ‎CSS‎ وحده — بلا حدٍّ أسود */
+/* ===== مختبر «رياضيات 105»: كبسولاتُ زجاجٍ وألواح (Liquid Glass) — ROADMAP-GLASS-STRIP =====
+   مصدرٌ واحدٌ للحقيقة: الزجاجُ مرسومٌ على العنصر نفسِه بـ‎CSS‎، فما يُرى هو ما يُحوَّم عليه ويُنقر،
+   ويتحرّك معه أينما تحرّك. كلُّ مجلدٍ كبسولةٌ تملأ نصيبَها من الصفّ، والمفتوحُ لوحٌ يحمل أبناءه
+   بانحناءٍ متّحد المركز (‎--r‎)، ويُطوَّق كلُّه بلونه (‎--c‎).
+   والزجاجُ طبقات ‎box-shadow‎ كلُّها على كرت الشاشة:
+     · حافّةٌ مضيئةٌ رفيعة تميل مع الضوء (‎--lx/--ly‎ يكتبها ‎pkLight‎ على الشريط وحده)،
+     · وانحناءُ السطح: ضوءٌ مموَّهٌ داخلَ الحافّة المضاءة، وظلٌّ أنعمُ داخلَ مقابلتها،
+     · وظلٌّ خارجيٌّ ناعم — لا خطَّ أسودَ حوله.
+   والشريطُ لا يُمرَّر عموديًّا أبدًا: يطول بطول ما فيه، والصفحةُ هي التي تُمرَّر */
 :root { --lx: -.45; --ly: -.9; }
 .pk-fstrip.pk-lg {
-  --lgx-bg: rgba(255, 255, 255, .55); --lgx-ink: #14233f;
-  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .4);
-  --lgx-sh: 0 1px 2px rgba(20, 35, 63, .06), 0 6px 16px -8px rgba(20, 35, 63, .2);
-  position: relative; padding: 2px 2px 12px; overflow: auto;
+  --lgx-bg: rgba(255, 255, 255, .5); --lgx-bg-sel: rgba(255, 255, 255, .88); --lgx-bg-tray: rgba(255, 255, 255, .34);
+  --lgx-ink: #14233f;
+  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .45);
+  --lgx-bev: rgba(255, 255, 255, .55); --lgx-bev2: rgba(20, 35, 63, .06);
+  --lgx-out: 0 1px 2px rgba(20, 35, 63, .06), 0 6px 16px -8px rgba(20, 35, 63, .2);
+  --lgx-hov: rgba(20, 35, 63, .05);
+  position: relative; padding: 3px 6px 12px; margin: 0 -6px 6px; overflow: visible; max-height: none;
 }
 html[data-theme="dark"] .pk-fstrip.pk-lg {
-  --lgx-bg: rgba(255, 255, 255, .06); --lgx-ink: #eef2f3;
-  --lgx-hi: rgba(255, 255, 255, .14); --lgx-hi2: rgba(255, 255, 255, .04);
-  --lgx-sh: 0 6px 16px -8px rgba(0, 0, 0, .55);
+  --lgx-bg: rgba(255, 255, 255, .065); --lgx-bg-sel: rgba(255, 255, 255, .15); --lgx-bg-tray: rgba(255, 255, 255, .045);
+  --lgx-ink: #eef2f3;
+  --lgx-hi: rgba(255, 255, 255, .15); --lgx-hi2: rgba(255, 255, 255, .045);
+  --lgx-bev: rgba(255, 255, 255, .06); --lgx-bev2: rgba(0, 0, 0, .16);
+  --lgx-out: 0 6px 16px -8px rgba(0, 0, 0, .55);
+  --lgx-hov: rgba(255, 255, 255, .05);
 }
 .pk-fstrip.pk-lg, .lgx-ghost {
-  --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi), inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2);
+  --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi),
+             inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2),
+             inset calc(var(--lx) * -7px) calc(var(--ly) * -7px) 12px -8px var(--lgx-bev),
+             inset calc(var(--lx) * 7px) calc(var(--ly) * 7px) 12px -8px var(--lgx-bev2);
 }
-.lgx-bg { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; }
-.pk-fstrip.pk-lg > .pg-row { position: relative; z-index: 1; }
-/* الصفوفُ تخطيطٌ لا زجاج */
+/* الصفوفُ تخطيطٌ لا زجاج. ويُفسح فيها لظلّ الكبسولات فلا يُقصّ (والحشوةُ تُستردّ بهامشٍ سالب) */
 .pk-fstrip.pk-lg .pg-row {
-  display: flex; align-items: stretch; gap: 6px; padding: 0; overflow-x: auto;
-  border-radius: 0; background: transparent; box-shadow: none;
+  display: flex; align-items: stretch; gap: 6px; overflow-x: auto; overflow-y: hidden;
+  padding: 3px 6px 12px; margin: -3px -6px -12px; border-radius: 0; background: transparent; box-shadow: none;
 }
-.pk-fstrip.pk-lg .pg-in .pg-row { padding: 0; }
-/* كلُّ كبسولةٍ تكبر لتملأ الصفّ؛ وإن اتّسع فيه مجلد أخذ هو الباقي وبقيت أخواتُه على قدر أسمائها */
+.pk-fstrip.pk-lg .pg-in .pg-row { padding: 3px 6px 12px; margin: -3px -6px -12px; }
+/* الكبسولة */
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
   flex: 1 1 auto; min-width: max-content; max-width: none; overflow: visible; align-self: stretch;
-  border: 0; border-radius: 999px; background: transparent; box-shadow: none;
+  border: 0; border-radius: 19px; background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-out);
 }
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { flex-grow: 0; }
+/* المختارُ: أصفى، ومطوَّقٌ بلون مجلده */
+.pk-fstrip.pk-lg .pg-box.is-sel:not(.is-wide) { background: var(--lgx-bg-sel); box-shadow: var(--lgx-rim), inset 0 0 0 1.5px var(--c), var(--lgx-out); }
+/* اللوحُ المفتوح: يُطوَّق كلُّه بلونه — أشدَّ إن كان هو المختار */
 .pk-fstrip.pk-lg .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide {
   flex: 1 1 auto; min-width: 0; align-self: stretch; border-radius: var(--r, 24px);
+  background: var(--lgx-bg-tray); box-shadow: var(--lgx-rim), inset 0 0 0 1.5px color-mix(in srgb, var(--c) 50%, transparent), var(--lgx-out);
 }
-.pk-fstrip.pk-lg:not(.has-gl) .pg-box { background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-sh); }
-.pk-fstrip.pk-lg:not(.has-gl) .pg-box.is-sel:not(.is-wide) { background: color-mix(in srgb, var(--lgx-bg) 60%, var(--lgx-ink) 8%); box-shadow: var(--lgx-rim), var(--lgx-sh), inset 0 0 0 1.5px var(--c-sel, rgba(127, 127, 127, .5)); }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-sel { box-shadow: var(--lgx-rim), inset 0 0 0 1.5px var(--c), var(--lgx-out); }
+html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box:not(.is-wide) { background: var(--lgx-bg); }
+html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-sel:not(.is-wide) { background: var(--lgx-bg-sel); }
+html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { background: var(--lgx-bg-tray); }
+/* الوجه: يملأ الكبسولةَ كلَّها بانحنائها نفسِه (‎inherit‎) — فوميضُ التحويم هو الكبسولةُ عينُها */
 .pk-fstrip.pk-lg .pg-face,
 .pk-fstrip.pk-lg .pg-in .pg-face {
-  position: relative; align-items: center; justify-content: flex-start; gap: 8px; height: 38px; padding: 0 16px; border-radius: 999px;
-  font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--lgx-ink); user-select: none;
+  position: relative; align-items: center; justify-content: flex-start; gap: 8px; height: 38px; padding: 0 16px;
+  border-radius: inherit; font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--lgx-ink); user-select: none;
+  transition: background .12s ease, transform .22s cubic-bezier(.3, 1.5, .5, 1);
 }
-.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .09); }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 4px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: var(--lgx-hov); }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; border-radius: 19px; }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: var(--lgx-hov); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide > .pg-in { padding: 0 6px 6px; }
-.pk-fstrip.pk-lg .pg-face > .pg-nm, .pk-fstrip.pk-lg .pg-face > .pk-fi, .pk-fstrip.pk-lg .pg-face > .pk-fnm { position: relative; z-index: 1; }
 .pk-fstrip.pk-lg .pg-nm { flex: 0 1 auto; line-height: 1.7; padding-block: 1px; }
 .pk-fstrip.pk-lg .pk-fi { width: 16px; height: 16px; flex: none; color: var(--u-mut, #8a97a3); }
-html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
-.pk-fstrip.pk-lg .pg-box.is-sel { border: 0; }
+html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-weight: 700; }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
-.pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; background: transparent; }
+.pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; }
 .pk-fstrip.pk-lg.is-drop { border-radius: 24px; }
 .pk-fstrip.pk-lg .pk-fnm { font-weight: 700; }
 
-/* السحبُ الزجاجيّ: القطرةُ الممسوكة (حرفُها وظلُّها؛ جسمُها في لوح ‎WebGL‎)، وانتفاخُ الهدف، وارتجاجُ الابتلاع */
+/* السحبُ الزجاجيّ: القطرةُ الممسوكة (حرفُها وظلُّها؛ جسمُها وجسرُها في لوح ‎WebGL‎ يعيش زمنَ السحب)،
+   وانتفاخُ الهدف، وارتجاجُ الابتلاع */
 .lgx-ghost {
   position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform;
   display: flex; align-items: center; gap: 8px; padding: 0 16px; box-sizing: border-box; border-radius: 999px;
   font-family: inherit; font-size: 13px; font-weight: 700; line-height: 1.7; color: #14233f; white-space: nowrap;
   transform-origin: 50% 50%; overflow: visible;
+  --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .45); --lgx-bev: rgba(255, 255, 255, .55); --lgx-bev2: rgba(20, 35, 63, .06);
 }
-.lgx-ghost.is-dark { color: #eef2f3; }
+.lgx-ghost.is-dark { color: #eef2f3; --lgx-hi: rgba(255, 255, 255, .15); --lgx-hi2: rgba(255, 255, 255, .045); --lgx-bev: rgba(255, 255, 255, .06); --lgx-bev2: rgba(0, 0, 0, .16); }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
 .lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
@@ -16376,8 +16397,7 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
 .lgx-ghost.no-gl.is-dark > .lgx-gb { background: rgba(255, 255, 255, .07); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .6); }
 .lgx-merge { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; }
 html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-select: none !important; }
-.pk-fstrip.pk-lg .pg-box.is-drag > .pg-face { opacity: .35; }
-.pk-fstrip.pk-lg .pg-face { transition: transform .22s cubic-bezier(.3, 1.5, .5, 1); }
+.pk-fstrip.pk-lg .pg-box.is-drag { opacity: .4; }
 .pk-fstrip.pk-lg .pg-face.lgx-near { transform: scale(1.05); }
 .pk-fstrip.pk-lg .pg-face.lgx-gulp { animation: lgx-gulp .62s cubic-bezier(.3, 1.4, .5, 1); }
 @keyframes lgx-gulp {
@@ -16387,12 +16407,3 @@ html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-selec
 @media (prefers-reduced-motion: reduce) {
   .pk-fstrip.pk-lg .pg-face, .pk-fstrip.pk-lg .pg-face.lgx-gulp { transition: none; animation: none; }
 }
-/* يُلغى ما رُسم للشريط القديم تحت المختبر (أرضيّاتُ الأجواف وخفوتُ الممسوك) — الزجاجُ يرسمه وحده */
-html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box,
-html .pk-fstrip.pk-lg.has-gl .pg-in .pg-box.is-wide { background: transparent; }
-.pk-fstrip.pk-lg .pg-box.is-drag { opacity: 1; }
-/* المغلقُ يطول بطول أخيه المفتوح (الصفُّ يمدّه)، ووجهُه يملؤه كلَّه فيُنقر في أيّ موضعٍ منه،
-   واسمُه في أعلاه على سطر رأس المفتوح */
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 4px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { border-radius: 19px; }

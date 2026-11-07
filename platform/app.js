@@ -8963,7 +8963,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== زجاجُ المختبر: كبسولاتٌ وألواح (Liquid Glass) =====
      كلُّ مجلدٍ كبسولةُ زجاجٍ مستقلّة تملأ نصيبَها من الصفّ، والمتوسِّعُ لوحٌ زجاجيّ يحمل
      أبناءه، واللونُ في أيقونة المجلد وفي حلقة المختار وحدهما. والزجاجُ نفسُه — حافّتُه
-     المضيئةُ مع الضوء، وانحناءُ سطحه، وظلُّه الناعم — يرسمه ‎pksPaint‎ على كرت الشاشة */
+     المضيئةُ مع الضوء، وانحناءُ سطحه، وظلُّه الناعم — ‎CSS‎ على العنصر نفسِه (ROADMAP-GLASS-STRIP ق٣):
+     مصدرٌ واحدٌ للحقيقة، فما يُرى هو ما يُحوَّم عليه ويُنقر */
   const pkFi = c => '<svg class="pk-fi" viewBox="0 0 24 24" aria-hidden="true"' + (c ? ' style="color:' + c + '"' : '') + '><path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h4.3c.66 0 1.3.26 1.77.73L11.9 6h7.6A2.5 2.5 0 0 1 22 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5z"/></svg>';
   /* انحناءاتٌ متّحدةُ المركز: اللوحُ نصفُ قطره نصفُ قطرِ ما في داخله زائدًا حشوتَه (٦)،
      فتجري الحوافُّ متوازية. ويُحسب من الأسفل: لوحٌ لا يتّسع فيه شيء ٢٤ (١٨ للكبسولة + ٦)،
@@ -8973,7 +8974,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return n ? 1 + pkChain(n.kids, open, n.id) : 0;
   };
   const pkBoxAt = (k, wide, open) => !pkLab() ? ''
-    : ' data-c="' + esc(k.c || '') + '"' + (wide ? ' style="--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px"' : '');
+    : ' data-c="' + esc(k.c || '') + '" style="--c:' + esc(k.c || '#8a97a3') + (wide ? ';--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px' : '') + '"';
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
@@ -20328,7 +20329,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
     /* نقرُ اسمِ المختار في المختبر: يُفتح حقلُ تسميته (والجذرُ لا يُسمّى) */
-    const nm = e.target.closest('#cm-body .pk-fstrip--ed .pg-box.is-sel > .pg-face > .pg-nm');
+    /* والمجلدُ الذي فيه مجلداتٌ نقرُه يفتح ويُغلق (بطلب صاحب الموقع)، فتسميتُه بالنقر المزدوج */
+    const nm = e.target.closest('#cm-body .pk-fstrip--ed .pg-box.is-sel > .pg-face:not([aria-expanded]) > .pg-nm');
     if (nm) {
       const f = nm.parentElement.dataset.pkf;
       if (f !== '') { e.preventDefault(); e.stopPropagation(); pkNaming = f; pkFocusNew = f; renderCmSection(); return; }
@@ -20449,6 +20451,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     renderCmSection();
   }
   document.addEventListener('dragend', () => { pkDrag = null; pkDropClear(); });
+  document.addEventListener('dblclick', e => {
+    const nm = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[aria-expanded] > .pg-nm');
+    if (!nm) return;
+    const face = nm.parentElement, f = face.dataset.pkf, id = face.closest('.pk-fstrip').dataset.pkid;
+    if (f === '') return;
+    e.preventDefault();
+    pkFs[id] = f; pkNaming = f; pkFocusNew = f; renderCmSection();
+  });
   /* ===== السحبُ الزجاجيّ — مختبر «رياضيات 105» =====
      لا سحبُ المتصفّح (صورتُه الشبحيّةُ لا تُرسم بشيء): المجلدُ الممسوكُ يصير قطرةَ زجاجٍ
      تتبع المؤشّرَ وتكسر ما تمرّ فوقه وتكبّره، وتتمطّط مع سرعتها كالسائل.
@@ -20472,7 +20482,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (lx !== PKL.lx || ly !== PKL.ly) {
       PKL.lx = lx; PKL.ly = ly;
       document.querySelectorAll('#cm-body .pk-lg, .lgx-ghost').forEach(el => { el.style.setProperty('--lx', lx); el.style.setProperty('--ly', ly); });
-      if (!(PKG.s && PKG.s.on)) pksSoon();   /* أثناء السحب يكفي لوحُ القطرة */
     }
     if (Math.abs(PKL.want - PKL.ang) > .01) PKL.raf = requestAnimationFrame(pkLight);
   };
@@ -20562,84 +20571,6 @@ void main() {
     g.drawArrays(g.TRIANGLES, 0, 3);
   }
   const pkBase = kind => pkDark() ? { cap: .065, tray: .045, sel: .15 }[kind] : { cap: .52, tray: .36, sel: .9 }[kind];
-  /* ===== ‎pksPaint‎ — زجاجُ الشريط الساكن =====
-     سياقُ ‎WebGL‎ واحدٌ مشترك يرسم الشريطَ ثمّ يُنسخ إلى لوحٍ ثنائيّ الأبعاد خلف مربّعاته
-     (المتصفّحُ يحدّ عددَ سياقات ‎WebGL‎، والشريطُ يُعاد بناؤه مع كلّ رسم). ويُعاد الرسمُ إذا
-     تغيّر مقاسُ الشريط أو مُرّر صفٌّ فيه أو مال الضوء أو أُعيد بناؤه — في إطارٍ واحدٍ مجمَّع */
-  const PKS = { R: null, tried: false, raf: 0, ro: null, mo: null, dirty: new Set() };
-  const pksDirty = () => document.querySelectorAll('#cm-body .pk-lg').forEach(s => PKS.dirty.add(s));
-  function pksPaint(strip) {
-    if (!PKS.R && !PKS.tried) { PKS.tried = true; PKS.R = pkGl(document.createElement('canvas'), true); }
-    const R = PKS.R;
-    strip.classList.toggle('has-gl', !!R);
-    if (!R) return;
-    /* لوحُ ‎WebGL‎ نفسُه يوضع في الشريط الأوّل (بلا نسخ)، وما زاد من الأشرطة يُنسخ إليه */
-    const own = !R.cv.isConnected || R.cv.parentElement === strip || !R.cv.closest('#cm-body');
-    let out = own ? R.cv : strip.querySelector(':scope > .lgx-bg');
-    if (own && R.cv.parentElement !== strip) { R.cv.className = 'lgx-bg'; R.cv.setAttribute('aria-hidden', 'true'); strip.prepend(R.cv); }
-    if (!out) { out = document.createElement('canvas'); out.className = 'lgx-bg'; out.setAttribute('aria-hidden', 'true'); strip.prepend(out); }
-    const sr = strip.getBoundingClientRect(), D = Math.min(window.devicePixelRatio || 1, 2);
-    const cw = strip.scrollWidth, ch = strip.scrollHeight;
-    const W = Math.max(1, Math.round(cw * D)), H = Math.max(1, Math.round(ch * D));
-    if (R.cv.width !== W || R.cv.height !== H) { R.cv.width = W; R.cv.height = H; }
-    if (!own && (out.width !== W || out.height !== H)) { out.width = W; out.height = H; }
-    out.style.width = cw + 'px'; out.style.height = ch + 'px';
-    const g = R.g; g.disable(g.SCISSOR_TEST); g.viewport(0, 0, W, H); g.clearColor(0, 0, 0, 0); g.clear(g.COLOR_BUFFER_BIT);
-    /* القياسُ يُحفظ: ميلُ الضوء وحده لا يغيّر شيئًا من المواضع، فلا يُعاد قياسُها له */
-    if (!strip.__lgxShapes || PKS.dirty.has(strip)) { strip.__lgxShapes = pksMeasure(strip); PKS.dirty.delete(strip); }
-    strip.__lgxShapes.forEach(o => pkGlDraw(R, W, H, D, o, o.clip));
-    if (!own) { const ctx = out.getContext('2d'); ctx.clearRect(0, 0, W, H); ctx.drawImage(R.cv, 0, 0); }
-  }
-  /* المغلقُ الذي طال بطول أخيه المفتوح: انحناؤه انحناءُ أخيه، فيتّسق الصفّ */
-  const pksRowR = box => {
-    const w = box.parentElement && box.parentElement.querySelector(':scope > .pg-box.is-wide');
-    return (w && parseFloat(getComputedStyle(w).getPropertyValue('--r'))) || 24;
-  };
-  function pksMeasure(strip) {
-    const sr = strip.getBoundingClientRect(), list = [];
-    const ox = sr.left - strip.scrollLeft, oy = sr.top - strip.scrollTop;
-    const rel = b => ({ x: b.left - ox, y: b.top - oy, w: b.width, h: b.height });
-    /* المفتوحُ يُطوَّق كلُّه بلون مجلده (لا رأسُه وحده): فيُرى أنّه مفتوحٌ وأنّ ما فيه منه.
-       والمختارُ أشدُّ حلقةً، والمفتوحُ الذي اختير أحدُ أبنائه أخفّ — فيُقرأ المسارُ من الحلقات */
-    strip.querySelectorAll('.pg-box').forEach(el => {
-      if (!el.offsetParent) return;
-      const isFace = false, box = el;
-      const wide = box.classList.contains('is-wide'), sel = box.classList.contains('is-sel');
-      const b = rel(el.getBoundingClientRect());
-      const row = box.parentElement && box.parentElement.closest('.pg-row');
-      const cr = row ? rel(row.getBoundingClientRect()) : null;
-      const clip = cr && { x: cr.x - 12, y: b.y - 12, w: cr.w + 24, h: b.h + 28 };   /* بقدر الظلّ حول الصفّ */
-      const col = pkRgb(box.dataset.c);
-      list.push({
-        clip, ...b, r: wide ? parseFloat(getComputedStyle(box).getPropertyValue('--r')) || 24
-          : isFace || b.h < 46 ? b.h / 2 : pksRowR(box),
-        base: pkBase(wide ? 'tray' : sel ? 'sel' : 'cap'),
-        fade: box.classList.contains('is-drag') ? .35 : 1,
-        ring: sel ? [col[0], col[1], col[2], .9] : wide ? [col[0], col[1], col[2], .5] : null,
-        sh: isFace ? 0 : 1,
-      });
-    });
-    return list;
-  }
-  const pksAll = () => { PKS.raf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pksPaint); };
-  const pksSoon = () => { if (!PKS.raf) PKS.raf = requestAnimationFrame(pksAll); };
-  function pksWatch() {
-    if (PKS.mo || typeof MutationObserver === 'undefined') return;
-    const cm = () => document.getElementById('cm-body');
-    PKS.ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { pksDirty(); pksSoon(); }) : null;
-    /* بناءُ شريطٍ جديد: يُرصد مقاسُه ويُرسم — ولا يُرسم لغير شريطٍ جديد (الكتابةُ في البطائق
-       تُطلق تغييراتٍ كثيرة لا شأنَ للزجاج بها) */
-    PKS.mo = new MutationObserver(() => {
-      const fresh = document.querySelectorAll('#cm-body .pk-lg:not([data-lgs])');
-      if (!fresh.length) return;
-      fresh.forEach(s => { s.dataset.lgs = '1'; PKS.dirty.add(s); if (PKS.ro) PKS.ro.observe(s); });
-      pksSoon();
-    });
-    PKS.mo.observe(document.body, { childList: true, subtree: true });
-    document.addEventListener('scroll', e => { if (e.target && e.target.closest && e.target.closest('#cm-body .pk-lg')) { pksDirty(); pksSoon(); } }, true);
-    if (cm() && cm().querySelector('.pk-lg')) pksSoon();
-  }
-  if (document.body) pksWatch(); else document.addEventListener('DOMContentLoaded', pksWatch);
   function pkMergePaint(st, g, t, k) {
     const R = st.gl;
     if (!R) return;
@@ -20669,7 +20600,6 @@ void main() {
     });
     f.closest('.pg-box').classList.add('is-drag');
     document.documentElement.classList.add('lgx-dragging');
-    pksDirty(); pksSoon();
   }
   function pkDragFrame(st) {
     const g = { x: st.x, y: st.y, w: st.w, h: st.h };
@@ -20706,7 +20636,6 @@ void main() {
       document.documentElement.classList.remove('lgx-dragging');
       if (st.tEl) st.tEl.classList.remove('lgx-near');
       pkDropClear();
-      pksDirty(); pksSoon();
       if (to != null) {
         pkMove(id, st.id, to);
         if (to !== '') requestAnimationFrame(() => {
