@@ -9210,7 +9210,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وتضغط «من صفحة ‎N‎» ثمّ «إلى صفحة ‎M‎». والمدى في العقدة نفسِها (‎n.pg = {a, z}‎) فيُنشر مع
      المساهمة. واختيارُ مجلدٍ مربوطٍ يقلب الكتابَ إلى أوّل صفحاته */
   const pkLnk = { open: {}, sel: {}, fold: {}, pop: {} };
-  const pkSrcBk = {};
+  const pkSrcBk = {}, pkSrcSelSeen = {};
   const PK_LNK_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="M9.5 9h5M9.5 12.5h3"/></svg>';
   const pkLnkDeck = id => { const p = postsOf(cmCode, 'cards').find(x => x.id === id); return p ? (p.data.deck || []) : []; };
   const pkLnkFolders = (deck, lv = 0, out = []) => {
@@ -9425,6 +9425,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
+      /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
+         فلا يُنتزع القارئُ من صفحته مع كلّ رسمة */
+      const sel = pkFs[id];
+      if (sel !== undefined && pkSrcSelSeen[id] !== undefined && sel !== pkSrcSelSeen[id] && meta) {
+        const r = sel && findNode(pkLnkDeck(id), sel);
+        if (r && r.n.pg) {
+          const single = pkSrcBk[id] ? pkSrcBk[id].single : false;
+          meta.pos = single ? r.n.pg.a : r.n.pg.a - (r.n.pg.a % 2); meta.closed = false; save();
+        }
+      }
+      pkSrcSelSeen[id] = sel;
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
       const cv = pkSrcCovMeta(id);
@@ -9450,8 +9461,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
-    if (pkVwOf(id) === 'source') return pkSrcView(id, ed);
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
+    /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
+    if (!folds.length && v === 'source') return pkSrcView(id, ed);
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -9472,7 +9484,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
+      + (v === 'source' ? pkSrcView(id, ed)
+        : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
   }
   /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
