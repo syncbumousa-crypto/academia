@@ -9227,6 +9227,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الأساسُ أحدُ العروض الثلاثة دائمًا، و«المصدر» مفتاحٌ يُدخل الكتابَ بجانبه ويُخرجه — لا عرضٌ قائمٌ بذاته.
      ‏‎pkSplit[id]‎ = الكتابُ ظاهرٌ بجانب العرض، وهو باقٍ إن ذهبتَ إلى بنك الأسئلة فيعود معك حين ترجع */
   const pkSplit = {}, pkSplitFlip = {}, pkSplitAnim = {}, pkLastKn = {};
+  /* توقيتٌ واحدٌ للكتاب وجاره في الدخول والخروج: المدّةُ والمنحنى والمسافةُ نفسُها — فتلتصق حافّتاهما
+     طوال الحركة بفُرجتهما الثابتة، ولا يدخل أحدُهما على الآخر (طلبُ صاحب الموقع) */
+  const SPL_MS = 500, SPL_EASE = 'cubic-bezier(.2, .8, .2, 1)';
   const pkSplitOn = id => (pkSplit[id] && PK_SPLIT_VIEWS.includes(pkVwOf(id)) && pkLab()) ? pkVwOf(id) : null;
   const pkSplitRecord = id => {
     const v = document.querySelector(`#cm-body [data-pksrcview][data-pkid="${CSS.escape(id)}"] .cbk`);
@@ -21651,19 +21654,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`);
           const host = ctl && ctl.closest('.post') && ctl.closest('.post').querySelector('.post-ytmain');
           if (host) {
-            const { r, node, c } = fly, en = state.lang === 'en';
-            /* نافذةٌ ثابتةٌ من الكتاب إلى حافّة المربّع في جهة خروجه، تقصّ ما يتجاوزها */
-            const edge = c ? (en ? c.left + 1 : c.right - 1) : (en ? 0 : innerWidth);
-            const left = en ? edge : r.left, width = en ? r.right - edge : edge - r.left;
+            const { r, node } = fly, en = state.lang === 'en';
+            /* الكتابُ يتراجع بقدر ما يتّسع جارُه بالضبط (عرضُه والفُرجة)، ويُقصّ عند حافّته الخارجيّة — فحافّتُه الداخليّة
+               تبقى ملاصقةً لحافّة الجار المتّسع في كلّ إطار */
+            const nv0 = host.querySelector(':scope > .kt-view'), n0 = nv0 && nv0.getBoundingClientRect();
+            /* المسافةُ نفسُها التي يتّسع بها الجار (‎grow‎ مستطيلُه القديم) — فتثبت الفُرجةُ بينهما */
+            const d = n0 && grow ? Math.max(0, Math.round(en ? grow.left - n0.left : n0.right - grow.right)) : r.width + 14;
             const w = document.createElement('div');
             w.className = 'pk-split pk-bkout';
-            w.style.cssText = `position:fixed;left:${left}px;top:${r.top}px;width:${Math.max(0, width)}px;height:${r.height}px;margin:0;z-index:6;pointer-events:none;overflow:hidden;display:block`;
+            w.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:6;pointer-events:none;overflow:hidden;display:block`;
             node.querySelectorAll('[id]').forEach(x => x.removeAttribute('id'));
-            node.style.cssText += `;position:absolute;top:0;${en ? 'right' : 'left'}:0;width:${r.width}px;height:${r.height}px;margin:0`;
+            node.style.cssText += `;position:absolute;top:0;left:0;width:${r.width}px;height:${r.height}px;margin:0`;
             w.appendChild(node); host.appendChild(w);
-            const dist = width + 8;
-            node.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${en ? -dist : dist}px)` }],
-              { duration: 520, easing: 'cubic-bezier(.55, 0, .2, 1)', fill: 'forwards' }).finished.then(() => w.remove(), () => w.remove());
+            node.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${en ? -d : d}px)` }],
+              { duration: SPL_MS, easing: SPL_EASE, fill: 'forwards' }).finished.then(() => w.remove(), () => w.remove());
           }
         }
         if (!ghosts.length && !grow) return;
@@ -21683,7 +21687,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             const n = nv.getBoundingClientRect(), en = state.lang === 'en';
             const d = Math.max(0, Math.round(en ? grow.left - n.left : n.right - grow.right));
             if (d > 1) nv.animate([{ marginInlineStart: d + 'px' }, { marginInlineStart: '0px' }],
-              { duration: 480, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+              { duration: SPL_MS, easing: SPL_EASE });
           }
         }
       };
@@ -21710,25 +21714,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* والعرضُ يتضيّق بنعومة (طلبُ صاحب الموقع): يبدأ بعرضه القديم ممتدًّا تحت الكتاب الداخل، ثمّ ينكمش إلى مكانه —
            هامشٌ سالبٌ في جهة الكتاب يذوب إلى صفر، وحافّتُه الأخرى ثابتة. والكتابُ فوقه أثناء ذلك */
         const nv = post2 && post2.querySelector('.post-ytmain > .pk-split > .kt-view');
-        if (nv && beforeR) {
-          const n = nv.getBoundingClientRect(), en = state.lang === 'en';
-          const d = Math.round(en ? n.left - beforeR.left : beforeR.right - n.right);
-          if (d > 1) nv.animate([{ marginInlineStart: -d + 'px' }, { marginInlineStart: '0px' }],
-            { duration: 520, easing: 'cubic-bezier(.2, .8, .2, 1)' });
-        }
         if (pane) {
+          /* ‏‎d‎ = ما يتضيّقه الجارُ = عرضُ الكتاب والفُرجة. الجارُ يبدأ ممتدًّا بقدره، والكتابُ يبدأ مزاحًا بقدره ومقصوصًا عند
+             حافّته الخارجيّة — ثمّ يرجعان معًا بالمنحنى نفسِه، فتبقى بينهما الفُرجةُ نفسُها طوالَ الحركة */
+          const pr = pane.getBoundingClientRect(), en = state.lang === 'en';
+          const n = nv ? nv.getBoundingClientRect() : null;
+          const d = Math.max(1, Math.round(n ? (en ? n.left - pr.left : pr.right - n.right) : pr.width + 14));
           pane.style.position = 'relative'; pane.style.zIndex = '2';
-          setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, 560);
-          const pr = pane.getBoundingClientRect(), cr = post2.getBoundingClientRect(), en = state.lang === 'en';
-          const gap = Math.max(0, en ? pr.left - cr.left - 1 : cr.right - 1 - pr.right);
-          const dist = pr.width + gap + 8, f = Math.min(1, (pr.width + 8) / dist);
-          const tx = d => `translateX(${en ? -d : d}px)`;
-          const clip0 = en ? `inset(0 0 0 ${pr.width}px)` : `inset(0 ${pr.width}px 0 0)`;
+          setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, SPL_MS + 40);
           pane.animate([
-            { transform: tx(dist), clipPath: clip0, offset: 0 },
-            { transform: tx(dist - pr.width - 8), clipPath: 'inset(0 0 0 0)', offset: f },
-            { transform: 'translateX(0)', clipPath: 'inset(0 0 0 0)', offset: 1 },
-          ], { duration: 520, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+            { transform: `translateX(${en ? -d : d}px)`, clipPath: en ? `inset(0 0 0 ${d}px)` : `inset(0 ${d}px 0 0)` },
+            { transform: 'translateX(0)', clipPath: 'inset(0 0 0 0)' },
+          ], { duration: SPL_MS, easing: SPL_EASE });
+          if (nv) nv.animate([{ marginInlineStart: -d + 'px' }, { marginInlineStart: '0px' }], { duration: SPL_MS, easing: SPL_EASE });
         }
       }
       /* والتركيزُ لا يضيع: الزرُّ المنقورُ أُعيد بناؤه مع الرسم، فيُعطى نظيرُه الجديدُ التركيزَ إن كان في الشريط */
