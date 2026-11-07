@@ -9017,7 +9017,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والمجلّديُّ مفصولٌ في كبسولةٍ وحدَه يسارَ الثلاثة (طلبُ صاحب الموقع): هو العرضُ الأصل،
      والثلاثةُ عروضُ المعرفة — فالمجموعةُ واحدةٌ (‎role=group‎) والكبسولتان شكلٌ لا معنى */
   const pkVbBtn = (id, k, ic) => {
-    const on = pkVwOf(id) === k;
+    const on = pkVwOf(id) === k || (k === 'tree' && pkSplitOn(id));
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
       title="${esc(T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
@@ -9213,6 +9213,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المساهمة. واختيارُ مجلدٍ مربوطٍ يقلب الكتابَ إلى أوّل صفحاته */
   const pkLnk = { open: {}, sel: {}, fold: {}, pop: {} };
   const pkSrcBk = {}, pkSrcSelSeen = {};
+  /* ===== «المصدر» و«الشجريّ» جنبًا إلى جنب (طلبُ صاحب الموقع) =====
+     من الكتاب يُضغط «الشجريّ» فينتقل الكتابُ بأزراره إلى اليمين ويظهر اللوحُ يسارَه.
+     ‎pkSplit[id]‎ علامتُه، والعرضُ نفسُه يبقى ‎'source'‎. ونقرُ أحدِ الزرّين المضيئين يُغلق جانبَه
+     ويبقى الآخر، ونقرُ أيِّ عرضٍ ثالثٍ يُنهي القسمة. والانتقالُ ‎FLIP‎: يُقاس الكتابُ قبل الرسم
+     ويُقاس بعد تركيبه، ثمّ يُحرَّك من موضعه القديم إلى الجديد */
+  const pkSplit = {}, pkSplitFlip = {};
+  const pkSplitOn = id => !!pkSplit[id] && pkVwOf(id) === 'source' && pkLab();
+  const pkSplitRecord = id => {
+    const v = document.querySelector(`#cm-body [data-pksrcview][data-pkid="${CSS.escape(id)}"] .cbk`);
+    if (v) pkSplitFlip[id] = v.getBoundingClientRect();
+  };
   const PK_LNK_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="M9.5 9h5M9.5 12.5h3"/></svg>';
   const pkLnkDeck = id => { const p = postsOf(cmCode, 'cards').find(x => x.id === id); return p ? (p.data.deck || []) : []; };
   const pkLnkFolders = (deck, lv = 0, out = []) => {
@@ -9447,6 +9458,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         closed: !meta || meta.closed !== false,
         covKey: cv ? pkSrcCovKey(id) : null,
         wide: true,
+        flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
         /* عمودُ الغلاف والملفّ في **منتصف** الكتاب عموديًّا (طلبُ صاحب الموقع) — لا أعلاه */
         onLayout: bb => {
           const tl = view.parentElement && view.parentElement.querySelector('.chtools');
@@ -9485,7 +9497,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (v === 'source' ? pkSrcView(id, ed)
+      + (v === 'source' && pkSplitOn(id) ? `<div class="pk-split${pkSplitFlip[id] && pkSplit[id] === 'in' ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, 'tree', folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`
+        : v === 'source' ? pkSrcView(id, ed)
         : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
   }
@@ -21026,6 +21039,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkWire(b);
   }
 
+  /* ===== انتقالُ الكتاب من موضعه القديم (‎FLIP‎) =====
+     يُعطى مستطيلَ الكتاب قبل الرسم، فيُحرَّك الوعاءُ كلُّه (الكتابُ وأزرارُه) بتحويلٍ يضعه هناك،
+     ثمّ يُترك يعود إلى مكانه الجديد — فيبدو أنّه انتقل لا أنّه وُلد ثانيةً */
+  function bkFlipFrom(b, old) {
+    if (bkReduce()) return;
+    const nw = b.el.getBoundingClientRect(), view = b.view, vr = view.getBoundingClientRect();
+    if (!nw.width || !old.width) return;
+    const k = old.width / nw.width;
+    const ox = nw.left - vr.left, oy = nw.top - vr.top;
+    const tx = old.left - vr.left - k * ox, ty = old.top - vr.top - k * oy;
+    view.style.transformOrigin = '0 0';
+    view.style.transition = 'none';
+    view.style.transform = `translate(${tx}px, ${ty}px) scale(${k})`;
+    view.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      view.style.transition = 'transform .5s cubic-bezier(.2, .8, .2, 1)';
+      view.style.transform = '';
+      setTimeout(() => { view.style.transition = ''; view.style.transformOrigin = ''; }, 560);
+    });
+  }
   function bkLayout(b) {
     /* أصغرُ قليلًا ممّا يسع (‎82%‎)، ويُلصق باليمين — ويبقى اليسارُ لما يأتي بعدُ */
     /* وكتابُ «المصدر» في المساهمة (‎b.wide‎) يأخذ عرضَ وعائه كلَّه: عمودُ الغلاف والملفّ بجانبه أخذ نصيبَه */
@@ -21049,6 +21082,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.coverP = null;                          /* وجهُ الغلاف يُرسم بمقاس الصفحة الجديد */
     bkShow(b);
     if (b.onLayout) b.onLayout(b);            /* ومن يجاور الكتابَ يُحاذيه (عمودُ الغلاف والملفّ في «المصدر») */
+    if (b.flip) { const f = b.flip; b.flip = null; bkFlipFrom(b, f); }
   }
 
   /* وجهُ الغلاف بمقاس الصفحة تمامًا: صورةُ الغلاف المرفوعة (تملأ ولا تتشوّه)، وإلّا
@@ -21509,7 +21543,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pv) {   /* شريطُ طرق العرض: يُبدّل عرضَ هذه المساهمة وحدَها — ولا يُطوى الرأسُ بنقرةٍ عليه */
       e.preventDefault(); e.stopPropagation();
       const id = pv.dataset.pkid;
-      if (id && pkVwOf(id) !== pv.dataset.pkview) { pkVw[id] = pv.dataset.pkview; renderCmSection(); }
+      const to = pv.dataset.pkview, cur = pkVwOf(id);
+      if (!id) return;
+      if (pkSplitOn(id)) {
+        /* في القسمة: الزرّان المضيئان يُغلق كلٌّ جانبَه، وغيرُهما يُنهيها إلى عرضه */
+        if (to === 'tree') { pkSplitRecord(id); pkSplit[id] = 'out'; delete pkSplit[id]; }
+        else if (to === 'source') { pkSplit[id] = false; pkVw[id] = 'tree'; }
+        else { pkSplit[id] = false; pkVw[id] = to; }
+        renderCmSection();
+      } else if (cur === 'source' && to === 'tree' && pkLab()) {
+        pkSplitRecord(id); pkSplit[id] = 'in'; renderCmSection();
+      } else if (cur !== to) { pkVw[id] = to; renderCmSection(); }
       return;
     }
     if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
