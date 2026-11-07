@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkLnk: 'ربط المواضيع', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkLnk: 'ربط المواضيع', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'اربط', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkLnk: 'Link topics', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkLnk: 'Link topics', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Link', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9209,7 +9209,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      **بيد المحرّر** (لا يُحسب الأبُ من أبنائه: قرارُ صاحب الموقع). تختار الصفّ، وتقلّب الكتاب،
      وتضغط «من صفحة ‎N‎» ثمّ «إلى صفحة ‎M‎». والمدى في العقدة نفسِها (‎n.pg = {a, z}‎) فيُنشر مع
      المساهمة. واختيارُ مجلدٍ مربوطٍ يقلب الكتابَ إلى أوّل صفحاته */
-  const pkLnk = { open: {}, sel: {}, fold: {} };
+  const pkLnk = { open: {}, sel: {}, fold: {}, pop: {} };
   const pkSrcBk = {};
   const PK_LNK_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="M9.5 9h5M9.5 12.5h3"/></svg>';
   const pkLnkDeck = id => { const p = postsOf(cmCode, 'cards').find(x => x.id === id); return p ? (p.data.deck || []) : []; };
@@ -9226,17 +9226,35 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const a = Math.max(1, b.pos), z = Math.min(b.n, b.pos + 1);
     return a <= z ? [a, z] : null;
   };
-  const pkLnkActs = (id, n) => {
-    const pp = pkLnkPages(pkSrcBk[id]);
-    return `<div class="pk-lnk__act" data-pkid="${esc(id)}">
-        <span class="pk-lnk__on">${pkFi(folderColor(n))}<b>${esc(n.name || T().pkTitlePh)}</b></span>
-        <span class="pk-lnk__btns">
-          <button type="button" class="pk-lnk__b" data-pklnkset="a" data-pkid="${esc(id)}" ${pp ? '' : 'disabled'}>${T().pkLnkFrom} ${pp ? pkLnkNum(pp[0]) : '…'}</button>
-          <button type="button" class="pk-lnk__b" data-pklnkset="z" data-pkid="${esc(id)}" ${pp ? '' : 'disabled'}>${T().pkLnkTo} ${pp ? pkLnkNum(pp[1]) : '…'}</button>
-          ${n.pg ? `<button type="button" class="pk-lnk__clr" data-pklnkclr data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>` : ''}
-        </span>
-        ${pp ? '' : `<small class="pk-lnk__hint">${T().pkLnkOpenBook}</small>`}
+  /* نافذةُ «اربط» الصغيرة تحت صفّ المجلد: «من» و«إلى» تُكتبان بيد المحرّر (طلبُ صاحب الموقع).
+     تُملآن بمدى المجلد إن رُبط، وإلّا بالصفحتين الظاهرتين في الكتاب */
+  const pkLnkPop = (id, n, lv) => {
+    const b = pkSrcBk[id], pp = pkLnkPages(b), max = b && b.n ? b.n : '';
+    const a = n.pg ? n.pg.a : pp ? pp[0] : '', z = n.pg ? n.pg.z : pp ? pp[1] : '';
+    return `<div class="pk-lnk__pop" style="--lv:${lv || 0}" data-pkid="${esc(id)}" data-fid="${esc(n.id)}" role="dialog" aria-label="${esc(n.name || '')}">
+        <label>${T().pkLnkFromL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${a}" data-pklnkin="a"></label>
+        <label>${T().pkLnkToL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${z}" data-pklnkin="z"></label>
+        <button type="button" class="pk-lnk__ok" data-pklnkok data-pkid="${esc(id)}">${T().pkLnkSave}</button>
+        ${n.pg ? `<button type="button" class="pk-lnk__clr" data-pklnkclr data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>` : ''}
       </div>`;
+  };
+  document.addEventListener('keydown', e => {
+    const inp = e.target.closest && e.target.closest('#cm-body .pk-lnk__pop input');
+    if (!inp) return;
+    if (e.key === 'Enter') { e.preventDefault(); pkLnkSave(inp.closest('.pk-lnk__pop')); }
+    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); const id = inp.closest('.pk-lnk__pop').dataset.pkid; pkLnk.pop[id] = null; renderCmSection(); }
+  }, true);
+  const pkLnkSave = pop => {
+    const id = pop.dataset.pkid, r = findNode(pkLnkDeck(id), pop.dataset.fid); if (!r) return;
+    const n = (pkSrcBk[id] || {}).n || Infinity;
+    let a = parseInt(pop.querySelector('[data-pklnkin=a]').value, 10), z = parseInt(pop.querySelector('[data-pklnkin=z]').value, 10);
+    if (!a && !z) return;
+    if (!a) a = z; if (!z) z = a;
+    if (a > z) [a, z] = [z, a];
+    a = Math.max(1, Math.min(n, a)); z = Math.max(1, Math.min(n, z));
+    r.n.pg = { a, z };
+    pkLnk.pop[id] = null;
+    save(); renderCmSection();
   };
   const pkLnkHTML = id => {
     const fs = pkLnkFolders(pkLnkDeck(id)), open = !!pkLnk.open[id];
@@ -9247,16 +9265,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fold = pkLnk.fold[id] || (pkLnk.fold[id] = new Set());
     const hidden = new Set();
     (function hide(deck, h) { (deck || []).forEach(n => { if (n.t !== 'f') return; if (h) hidden.add(n.id); hide(n.ch, h || fold.has(n.id)); }); })(pkLnkDeck(id), false);
-    const sel = fs.find(f => f.n.id === pkLnk.sel[id]);
     const rows = fs.filter(f => !hidden.has(f.n.id)).map(({ n, lv, kids }) => `<div class="pk-lnk__r${n.id === pkLnk.sel[id] ? ' on' : ''}" style="--lv:${lv}" data-pklnkrow="${esc(n.id)}" data-pkid="${esc(id)}" role="button" tabindex="0">
         ${lv ? '<i class="pk-lnk__g"></i>' : ''}
         <span class="pk-lnk__tw"${kids ? ` data-pklnkfold="${esc(n.id)}"` : ''}>${kids ? (fold.has(n.id) ? '◂' : '▾') : ''}</span>
         ${pkFi(folderColor(n))}<span class="pk-lnk__nm">${esc(n.name || T().pkTitlePh)}</span>
-        <span class="pk-lnk__rg${n.pg ? '' : ' is-none'}">${n.pg ? pkLnkRg(n.pg) : T().pkLnkAdd}</span>
-      </div>`).join('');
+        <button type="button" class="pk-lnk__rg${n.pg ? '' : ' is-none'}" data-pklnkpop="${esc(n.id)}" data-pkid="${esc(id)}">${n.pg ? pkLnkRg(n.pg) : T().pkLnkAdd}</button>
+      </div>${pkLnk.pop[id] === n.id ? pkLnkPop(id, n, lv) : ''}`).join('');
     return `<div class="pk-lnk is-open">${head}
         <div class="pk-lnk__tree">${rows || `<p class="pk-lnk__empty">${T().pkLnkNone}</p>`}</div>
-        ${sel ? pkLnkActs(id, sel.n) : ''}
       </div>`;
   };
   /* قلبُ الكتاب إلى صفحةٍ بعينها (اختيارُ مجلدٍ مربوط) */
@@ -9370,16 +9386,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         closed: !meta || meta.closed !== false,
         covKey: cv ? pkSrcCovKey(id) : null,
         wide: true,
-        onShow: bb => {   /* زرّا «من / إلى» يقرآن الصفحتين الظاهرتين */
-          const act = view.parentElement && view.parentElement.querySelector('.pk-lnk__act[data-pkid]');
-          if (!act) return;
-          const pp = pkLnkPages(bb);
-          act.querySelectorAll('[data-pklnkset]').forEach(x => {
-            x.disabled = !pp;
-            x.textContent = (x.dataset.pklnkset === 'a' ? T().pkLnkFrom : T().pkLnkTo) + ' ' + (pp ? pkLnkNum(pp[x.dataset.pklnkset === 'a' ? 0 : 1]) : '…');
-          });
-          const h = act.querySelector('.pk-lnk__hint'); if (h) h.hidden = !!pp;
-        },
         /* عمودُ الغلاف والملفّ في **منتصف** الكتاب عموديًّا (طلبُ صاحب الموقع) — لا أعلاه */
         onLayout: bb => {
           const tl = view.parentElement && view.parentElement.querySelector('.chtools');
@@ -21454,7 +21460,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = e.target.closest('#cm-body [data-pksrcpick]');
     const sx = e.target.closest('#cm-body [data-pksrcdel], #cm-body [data-pksrccovdel]');
     if (sx) { e.stopPropagation(); if (sx.hasAttribute('data-pksrcdel')) pkSrcDel(sx.dataset.pkid); else pkSrcCovDel(sx.dataset.pkid); return; }
-    const lk = e.target.closest('#cm-body [data-pklnk], #cm-body [data-pklnkfold], #cm-body [data-pklnkrow], #cm-body [data-pklnkset], #cm-body [data-pklnkclr]');
+    const lp = e.target.closest('#cm-body [data-pklnkpop], #cm-body [data-pklnkok]');
+    if (lp) {
+      e.stopPropagation();
+      const id = lp.dataset.pkid;
+      if (lp.hasAttribute('data-pklnkok')) { pkLnkSave(lp.closest('.pk-lnk__pop')); return; }
+      const fid = lp.dataset.pklnkpop;
+      pkLnk.pop[id] = pkLnk.pop[id] === fid ? null : fid;
+      renderCmSection();
+      if (pkLnk.pop[id]) { const f = document.querySelector('#cm-body .pk-lnk__pop [data-pklnkin=a]'); if (f) { f.focus(); f.select(); } }
+      return;
+    }
+    if (e.target.closest('#cm-body .pk-lnk__pop')) {
+      if (!e.target.closest('[data-pklnkclr]')) return;
+    } else if (Object.values(pkLnk.pop).some(Boolean) && e.target.closest('#cm-body')) {
+      /* نقرةٌ خارج النافذة تُغلقها */
+      Object.keys(pkLnk.pop).forEach(k => { pkLnk.pop[k] = null; });
+      if (!e.target.closest('[data-pklnkrow]')) { renderCmSection(); return; }
+    }
+    const lk = e.target.closest('#cm-body [data-pklnk], #cm-body [data-pklnkfold], #cm-body [data-pklnkrow], #cm-body [data-pklnkclr]');
     if (lk) {
       const id = lk.dataset.pkid || (lk.closest('[data-pkid]') || {}).dataset.pkid;
       if (lk.hasAttribute('data-pklnk')) { pkLnk.open[id] = !pkLnk.open[id]; renderCmSection(); return; }
@@ -21471,15 +21495,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         renderCmSection();
         return;
       }
-      const r = findNode(pkLnkDeck(id), pkLnk.sel[id]); if (!r) return;
-      if (lk.hasAttribute('data-pklnkclr')) delete r.n.pg;
-      else {
-        const pp = pkLnkPages(pkSrcBk[id]); if (!pp) return;
-        const pg = r.n.pg ? { a: r.n.pg.a, z: r.n.pg.z } : { a: pp[0], z: pp[1] };
-        if (lk.dataset.pklnkset === 'a') { pg.a = pp[0]; if (pg.z < pg.a) pg.z = pp[1]; }
-        else { pg.z = pp[1]; if (pg.a > pg.z) pg.a = pp[0]; }
-        r.n.pg = pg;
-      }
+      /* ✕ في النافذة: يُزيل ربطَ مجلدها */
+      const pop = lk.closest('.pk-lnk__pop');
+      const r = findNode(pkLnkDeck(id), pop ? pop.dataset.fid : pkLnk.sel[id]); if (!r) return;
+      delete r.n.pg; pkLnk.pop[id] = null;
       save(); renderCmSection(); return;
     }
     const sc = e.target.closest('#cm-body [data-pksrccov]');
