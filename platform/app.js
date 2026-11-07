@@ -9231,18 +9231,64 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkLnkPop = (id, n, lv) => {
     const b = pkSrcBk[id], pp = pkLnkPages(b), max = b && b.n ? b.n : '';
     const a = n.pg ? n.pg.a : pp ? pp[0] : '', z = n.pg ? n.pg.z : pp ? pp[1] : '';
-    return `<div class="pk-lnk__pop" style="--lv:${lv || 0}" data-pkid="${esc(id)}" data-fid="${esc(n.id)}" role="dialog" aria-label="${esc(n.name || '')}">
+    return `<div class="pk-lnk__pop" data-pkid="${esc(id)}" data-fid="${esc(n.id)}" role="dialog" aria-label="${esc(n.name || '')}">
+        <span class="pk-lnk__pnm">${pkFi(folderColor(n))}<b>${esc(n.name || T().pkTitlePh)}</b></span>
         <label>${T().pkLnkFromL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${a}" data-pklnkin="a"></label>
         <label>${T().pkLnkToL}<input type="number" inputmode="numeric" min="1" ${max ? `max="${max}"` : ''} value="${z}" data-pklnkin="z"></label>
         <button type="button" class="pk-lnk__ok" data-pklnkok data-pkid="${esc(id)}">${T().pkLnkSave}</button>
         ${n.pg ? `<button type="button" class="pk-lnk__clr" data-pklnkclr data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>` : ''}
       </div>`;
   };
+  /* ===== النافذةُ طبقةٌ فوق المربّع لا في جوفه (طلبُ صاحب الموقع) =====
+     تُبنى في ‎body‎ بعد كلّ رسمة (‎position: fixed‎)، وتُعلَّق تحت صفّ مجلدها وتتبعه إن مُرِّر،
+     وتنقلب فوقه إن ضاق ما تحته. فلا يقصّها المربّعُ ولا يُزاح بها ما تحتها */
+  const pkLnkPlace = () => {
+    const L = document.getElementById('pk-lnk-layer'); if (!L) return;
+    const row = document.querySelector(`#cm-body .pk-lnk__r[data-pkid="${CSS.escape(L.dataset.pkid)}"][data-pklnkrow="${CSS.escape(L.dataset.fid)}"]`);
+    if (!row) { L.remove(); return; }
+    const r = row.getBoundingClientRect(), w = L.offsetWidth, h = L.offsetHeight, vw = innerWidth, vh = innerHeight;
+    let left = state.lang === 'en' ? r.left : r.right - w;
+    left = Math.max(8, Math.min(vw - w - 8, left));
+    let top = r.bottom + 6;
+    if (top + h > vh - 8) top = Math.max(8, r.top - h - 6);
+    L.style.left = left + 'px'; L.style.top = top + 'px';
+  };
+  const pkLnkPopShow = () => {
+    const old = document.getElementById('pk-lnk-layer'); if (old) old.remove();
+    const id = Object.keys(pkLnk.pop).find(k => pkLnk.pop[k]); if (!id) return;
+    const r = findNode(pkLnkDeck(id), pkLnk.pop[id]);
+    if (!r || !pkLnk.open[id] || !document.querySelector(`#cm-body .pk-lnk__r[data-pklnkrow="${CSS.escape(r.n.id)}"]`)) { pkLnk.pop[id] = null; return; }
+    const L = document.createElement('div');
+    L.id = 'pk-lnk-layer'; L.className = 'pk-lnk-layer'; L.dataset.pkid = id; L.dataset.fid = r.n.id;
+    L.innerHTML = pkLnkPop(id, r.n);
+    document.body.appendChild(L);
+    pkLnkPlace();
+  };
+  window.addEventListener('scroll', pkLnkPlace, true);
+  window.addEventListener('resize', pkLnkPlace);
+  const pkLnkClose = () => { let any = false; Object.keys(pkLnk.pop).forEach(k => { if (pkLnk.pop[k]) any = true; pkLnk.pop[k] = null; }); const L = document.getElementById('pk-lnk-layer'); if (L) L.remove(); return any; };
+  /* نقراتُ الطبقة: «اربط» تحفظ، و✕ يُزيل، وما سواهما داخلها لا يُغلقها. والنقرُ خارجها يُغلقها
+     (ونقرُ حبّة مجلدٍ آخرَ يفتح نافذتَه — يُترك لمستمع الشجرة) */
+  document.addEventListener('click', e => {
+    const L = document.getElementById('pk-lnk-layer'); if (!L) return;
+    if (L.contains(e.target)) {
+      e.stopPropagation();
+      if (e.target.closest('[data-pklnkok]')) pkLnkSave(L.querySelector('.pk-lnk__pop'));
+      else if (e.target.closest('[data-pklnkclr]')) {
+        const id = L.dataset.pkid, r = findNode(pkLnkDeck(id), L.dataset.fid);
+        if (r) delete r.n.pg;
+        pkLnkClose(); save(); renderCmSection();
+      }
+      return;
+    }
+    if (e.target.closest('#cm-body [data-pklnkpop]')) return;
+    pkLnkClose();
+  }, true);
   document.addEventListener('keydown', e => {
-    const inp = e.target.closest && e.target.closest('#cm-body .pk-lnk__pop input');
+    const inp = e.target.closest && e.target.closest('.pk-lnk__pop input');
     if (!inp) return;
     if (e.key === 'Enter') { e.preventDefault(); pkLnkSave(inp.closest('.pk-lnk__pop')); }
-    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); const id = inp.closest('.pk-lnk__pop').dataset.pkid; pkLnk.pop[id] = null; renderCmSection(); }
+    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); pkLnkClose(); }
   }, true);
   const pkLnkSave = pop => {
     const id = pop.dataset.pkid, r = findNode(pkLnkDeck(id), pop.dataset.fid); if (!r) return;
@@ -9253,7 +9299,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a > z) [a, z] = [z, a];
     a = Math.max(1, Math.min(n, a)); z = Math.max(1, Math.min(n, z));
     r.n.pg = { a, z };
-    pkLnk.pop[id] = null;
+    pkLnkClose();
     save(); renderCmSection();
   };
   const pkLnkHTML = id => {
@@ -9270,7 +9316,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <span class="pk-lnk__tw"${kids ? ` data-pklnkfold="${esc(n.id)}"` : ''}>${kids ? (fold.has(n.id) ? '◂' : '▾') : ''}</span>
         ${pkFi(folderColor(n))}<span class="pk-lnk__nm">${esc(n.name || T().pkTitlePh)}</span>
         <button type="button" class="pk-lnk__rg${n.pg ? '' : ' is-none'}" data-pklnkpop="${esc(n.id)}" data-pkid="${esc(id)}">${n.pg ? pkLnkRg(n.pg) : T().pkLnkAdd}</button>
-      </div>${pkLnk.pop[id] === n.id ? pkLnkPop(id, n, lv) : ''}`).join('');
+      </div>`).join('');
     return `<div class="pk-lnk is-open">${head}
         <div class="pk-lnk__tree">${rows || `<p class="pk-lnk__empty">${T().pkLnkNone}</p>`}</div>
       </div>`;
@@ -9364,6 +9410,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
   async function pkSrcPaint() {
+    pkLnkPopShow();
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
       const key = pkSrcCovKey(img.dataset.pksrccovimg);
       if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
@@ -21460,25 +21507,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = e.target.closest('#cm-body [data-pksrcpick]');
     const sx = e.target.closest('#cm-body [data-pksrcdel], #cm-body [data-pksrccovdel]');
     if (sx) { e.stopPropagation(); if (sx.hasAttribute('data-pksrcdel')) pkSrcDel(sx.dataset.pkid); else pkSrcCovDel(sx.dataset.pkid); return; }
-    const lp = e.target.closest('#cm-body [data-pklnkpop], #cm-body [data-pklnkok]');
+    const lp = e.target.closest('#cm-body [data-pklnkpop]');
     if (lp) {
       e.stopPropagation();
       const id = lp.dataset.pkid;
-      if (lp.hasAttribute('data-pklnkok')) { pkLnkSave(lp.closest('.pk-lnk__pop')); return; }
       const fid = lp.dataset.pklnkpop;
       pkLnk.pop[id] = pkLnk.pop[id] === fid ? null : fid;
       renderCmSection();
-      if (pkLnk.pop[id]) { const f = document.querySelector('#cm-body .pk-lnk__pop [data-pklnkin=a]'); if (f) { f.focus(); f.select(); } }
+      if (pkLnk.pop[id]) { const f = document.querySelector('#pk-lnk-layer [data-pklnkin=a]'); if (f) { f.focus(); f.select(); } }
       return;
     }
-    if (e.target.closest('#cm-body .pk-lnk__pop')) {
-      if (!e.target.closest('[data-pklnkclr]')) return;
-    } else if (Object.values(pkLnk.pop).some(Boolean) && e.target.closest('#cm-body')) {
-      /* نقرةٌ خارج النافذة تُغلقها */
-      Object.keys(pkLnk.pop).forEach(k => { pkLnk.pop[k] = null; });
-      if (!e.target.closest('[data-pklnkrow]')) { renderCmSection(); return; }
-    }
-    const lk = e.target.closest('#cm-body [data-pklnk], #cm-body [data-pklnkfold], #cm-body [data-pklnkrow], #cm-body [data-pklnkclr]');
+    const lk = e.target.closest('#cm-body [data-pklnk], #cm-body [data-pklnkfold], #cm-body [data-pklnkrow]');
     if (lk) {
       const id = lk.dataset.pkid || (lk.closest('[data-pkid]') || {}).dataset.pkid;
       if (lk.hasAttribute('data-pklnk')) { pkLnk.open[id] = !pkLnk.open[id]; renderCmSection(); return; }
@@ -21495,11 +21534,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         renderCmSection();
         return;
       }
-      /* ✕ في النافذة: يُزيل ربطَ مجلدها */
-      const pop = lk.closest('.pk-lnk__pop');
-      const r = findNode(pkLnkDeck(id), pop ? pop.dataset.fid : pkLnk.sel[id]); if (!r) return;
-      delete r.n.pg; pkLnk.pop[id] = null;
-      save(); renderCmSection(); return;
+      return;
     }
     const sc = e.target.closest('#cm-body [data-pksrccov]');
     if (sc) { pkSrcCovIn.dataset.pkid = sc.dataset.pkid; pkSrcCovIn.click(); return; }

@@ -16451,13 +16451,19 @@ html[data-theme="dark"] .pk-lnk__rg { background: rgba(255, 255, 255, .08); }
 button.pk-lnk__rg { font: inherit; font-size: 11px; font-weight: 600; color: inherit; border: 0; cursor: pointer; }
 button.pk-lnk__rg.is-none { color: #a8813a; border: 1px dashed rgba(201, 162, 77, .6); }
 button.pk-lnk__rg:hover { background: rgba(225, 193, 114, .22); }
-/* نافذةُ «اربط»: تحت صفّ مجلدها مباشرةً، زجاجٌ كالكبسولات */
+/* نافذةُ «اربط»: طبقةٌ عائمةٌ فوق المربّع (في ‎body‎)، تحت صفّ مجلدها */
+.pk-lnk-layer { position: fixed; z-index: 1200; width: 270px; direction: rtl; font-family: inherit; }
+html[data-lang="en"] .pk-lnk-layer { direction: ltr; }
 .pk-lnk__pop {
-  display: flex; align-items: center; gap: 8px; margin: 2px 6px 8px; padding: 8px 10px; border-radius: 14px;
-  margin-inline-start: calc(6px + var(--lv, 0) * 18px);
-  background: var(--u-surf); border: 1px solid rgba(201, 162, 77, .5);
-  box-shadow: 0 10px 24px -10px rgba(20, 35, 63, .35); font-size: 12px; animation: pkLnkPop .14s ease-out;
+  display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 16px; color: var(--u-ink, #14233f);
+  background: #fff; border: 1px solid rgba(201, 162, 77, .5);
+  box-shadow: 0 2px 6px rgba(20, 35, 63, .08), 0 18px 40px -12px rgba(20, 35, 63, .4); font-size: 12px; animation: pkLnkPop .14s ease-out;
 }
+.pk-lnk__pop { flex-wrap: wrap; }
+.pk-lnk__pnm { flex: 1 1 100%; display: flex; align-items: center; gap: 6px; padding-bottom: 8px; margin-bottom: 2px; border-bottom: 1px solid var(--u-line); font-size: 12.5px; min-width: 0; }
+.pk-lnk__pnm .pk-fi { width: 16px; height: 16px; flex: none; }
+.pk-lnk__pnm b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-theme="dark"] .pk-lnk__pop { background: #26323a; border-color: rgba(225, 193, 114, .4); color: #e7eff0; box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .7); }
 @keyframes pkLnkPop { from { opacity: 0; transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) { .pk-lnk__pop { animation: none; } }
 .pk-lnk__pop label { display: inline-flex; align-items: center; gap: 5px; color: var(--u-mut); }
