@@ -16306,15 +16306,17 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
   /* اتّجاهُ الضوء على الزجاج: يميل مع المؤشّر (‎pkLight‎) فيتحرّك اللمعانُ على الحوافّ ولا يثبت */
   --lx: -.45; --ly: -.9;
   --lgx-hi: rgba(255, 255, 255, .95); --lgx-hi2: rgba(255, 255, 255, .4); --lgx-hair: rgba(255, 255, 255, .55);
+}
+/* يُعاد تعريفُه حيث يُكتب الضوءُ (‎--lx/--ly‎ على الشريط والقطرة) — المتغيّرُ المركّب يُحسب
+   حيث عُرِّف، فلو بقي على ‎:root‎ وحده لما رأى الضوءَ المتحرّك */
+:root, .pk-fstrip.pk-lg, .lgx-ghost {
   --lgx-rim: inset calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 -.2px var(--lgx-hi),
              inset calc(var(--lx) * .8px) calc(var(--ly) * .8px) 0 -.2px var(--lgx-hi2),
              inset 0 0 0 .5px var(--lgx-hair);
-  --lgx-so: 1;
 }
 html[data-theme="dark"] {
   /* في الداكن: لمعانٌ خافتٌ جدًّا — الزجاجُ الداكنُ يعكس قليلًا */
   --lgx-hi: rgba(255, 255, 255, .13); --lgx-hi2: rgba(255, 255, 255, .035); --lgx-hair: rgba(255, 255, 255, .05);
-  --lgx-so: .35;
 }
 .pk-fstrip.pk-lg {
   --lgx-bg: rgba(255, 255, 255, .55);
@@ -16365,12 +16367,9 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
 .lgx-drop {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: 999px;
-  -webkit-backdrop-filter: saturate(1.5);
-  backdrop-filter: var(--lgx-f, none) saturate(1.5) brightness(1.03);
   background: rgba(20, 35, 63, .07);
   box-shadow: var(--lgx-rim), 0 4px 12px -4px rgba(20, 35, 63, .3), 0 0 0 .5px rgba(20, 35, 63, .08);
 }
-.lgx-drop::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat; opacity: var(--lgx-so); }
 html[data-theme="dark"] .lgx-drop {
   background: rgba(255, 255, 255, .045);
   box-shadow: var(--lgx-rim), 0 4px 14px -4px rgba(0, 0, 0, .7), 0 0 0 .5px rgba(0, 0, 0, .35);
@@ -16379,9 +16378,6 @@ html[data-theme="dark"] .lgx-drop {
 .pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; background: transparent; }
 .pk-fstrip.pk-lg.is-drop { border-radius: 24px; }
 .pk-fstrip.pk-lg .pk-fnm { font-weight: 700; }
-@media (prefers-reduced-transparency: reduce) {
-  .lgx-drop { backdrop-filter: none; -webkit-backdrop-filter: none; }
-}
 /* السحبُ الزجاجيّ: القطرةُ الممسوكة، ولوحُ الاندماج، وانتفاخُ الهدف، وارتجاجُ الابتلاع */
 .lgx-ghost {
   position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform;
@@ -16390,14 +16386,21 @@ html[data-theme="dark"] .lgx-drop {
   transform-origin: 50% 50%; overflow: visible;
 }
 .lgx-ghost.is-dark { color: #eef2f3; }
-.lgx-ghost > .lgx-drop { inset: 0; transition: opacity .12s ease; box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .45), 0 0 0 .5px rgba(20, 35, 63, .1); background: rgba(255, 255, 255, .18); }
-.lgx-ghost.is-dark > .lgx-drop { background: rgba(255, 255, 255, .04); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .75), 0 0 0 .5px rgba(0, 0, 0, .35); }
-.lgx-ghost.is-merge > .lgx-drop { opacity: 0; }
+/* ظلُّ القطرة وحده — جسمُها وحافّتُها واندماجُها في لوح ‎WebGL‎ تحت حرفها */
+.lgx-gb {
+  position: absolute; inset: 0; border-radius: 999px; pointer-events: none;
+  box-shadow: 0 12px 26px -10px rgba(20, 35, 63, .4);
+}
+.lgx-ghost.is-dark > .lgx-gb { box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .7); }
+.lgx-gb { transition: opacity .15s ease; }
+.lgx-ghost.is-merge > .lgx-gb { opacity: 0; }   /* في الاندماج لا ظلَّ لكبسولةٍ ذابت في غيرها */
+.lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .35); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .4), 0 0 0 .5px rgba(20, 35, 63, .1); }
+.lgx-ghost.no-gl.is-dark > .lgx-gb { background: rgba(255, 255, 255, .05); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(0, 0, 0, .7), 0 0 0 .5px rgba(0, 0, 0, .35); }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
 .lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
 .lgx-ghost > .pg-nm { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.lgx-merge { position: fixed; z-index: 9999; pointer-events: none; display: none; filter: drop-shadow(0 6px 10px rgba(20, 35, 63, .18)); }
+.lgx-merge { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; }
 html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-select: none !important; }
 .pk-fstrip.pk-lg .pg-box.is-drag { opacity: .3; }
 .pk-fstrip.pk-lg .pg-face { transition: transform .22s cubic-bezier(.3, 1.5, .5, 1); }

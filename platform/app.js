@@ -9041,84 +9041,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`;
   }
-  /* ===== ‎lgxPaint‎ — قطرةُ الزجاج السائل =====
-     منقولٌ عن ‎fragment-main.glsl‎ في liquid-glass-studio إلى ‎canvas‎ يُرسم مرّةً لكلّ مقاس:
-       · شكلُ الكبسولة دالّةُ مسافة (‎SDF‎) دقيقة،
-       · حافّتُها عدسةٌ محدّبة: زاويةُ الورود ‎asin((1-d/T)²)‎ وانكسارُ سنيل بمعامل ١٫٥،
-         ووسطُها يكبّر ما تحته ‎×1.12‎ — فتُعطي خريطةَ إزاحةٍ لـ‎feDisplacementMap‎،
-       · ولمعانُها: خطُّ حافّةٍ رفيع، وفرينل خفيف، ووهجٌ من جهة الضوء وأخفُّ منه في مقابلها.
-     والفلترُ يُطبَّق في ‎backdrop-filter‎ (كروم وإيدج)؛ وما لا يدعمه يبقى له اللمعانُ والظلّ.
-     والقطرةُ تُرصد بـ‎ResizeObserver‎ فتُعاد إن تغيّر مقاسُها، والمقاسُ الواحدُ يُخبَّأ فلا يُعاد
-     حسابُه مع كلّ رسمٍ لـ‎#cm-body‎ */
-  const LGX = { cache: new Map(), svg: null, n: 0, ro: null };
-  function lgxBuild(w, h, zoom = 1) {
-    const key = w + 'x' + h + '@' + zoom;
-    if (LGX.cache.has(key)) return LGX.cache.get(key);
-    const D = 2, W = w * D, H = h * D, r = h / 2;
-    const T = Math.min(16, r), IOR = 1.5, REFR = 6, ZK = 1 - 1 / zoom, EFMAX = 1 / Math.tan(Math.asin(1 / IOR));
-    const L = Math.atan2(-.9, -.45);
-    // مسافةُ نقطةٍ عن كبسولةٍ أفقيّة: بُعدُها عن قطعة المحور ناقصًا نصفَ القطر
-    const sdf = (x, y) => { const ax = Math.min(Math.max(x, r), w - r); return Math.hypot(x - ax, y - r) - r; };
-    const dc = document.createElement('canvas'), sc = document.createElement('canvas');
-    dc.width = sc.width = W; dc.height = sc.height = H;
-    const dI = dc.getContext('2d').createImageData(W, H), sI = sc.getContext('2d').createImageData(W, H);
-    const fx = new Float32Array(W * H), fy = new Float32Array(W * H);
-    let S = 0.001;
-    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
-      const x = (i + .5) / D, y = (j + .5) / D, d = sdf(x, y), k = j * W + i;
-      if (d > .5) continue;
-      const ax = Math.min(Math.max(x, r), w - r);
-      let nx = x - ax, ny = y - r; const ln = Math.hypot(nx, ny) || 1; nx /= ln; ny /= ln;
-      const nd = Math.max(-d, 0);
-      let ef = 0;
-      if (nd < T) { const q = 1 - nd / T, ti = Math.asin(Math.min(q * q, 1)), tt = Math.asin(Math.sin(ti) / IOR); ef = -Math.tan(tt - ti) / EFMAX * REFR; }
-      fx[k] = -nx * ef + (w / 2 - x) * ZK; fy[k] = -ny * ef + (h / 2 - y) * ZK;
-      S = Math.max(S, Math.abs(fx[k]), Math.abs(fy[k]));
-      const a = Math.min(Math.max(.5 - d * D, 0), 1);
-      const dir = Math.cos(Math.atan2(ny, nx) - L), lit = Math.pow(Math.max(dir, 0), 2), back = Math.pow(Math.max(-dir, 0), 3) * .6;
-      const rim = Math.pow(Math.max(0, 1 - nd / 1.25), 1.5), fr = Math.pow(Math.max(0, 1 - nd / Math.min(T * .6, h / 5)), 2.2) * .12;
-      const gw = Math.pow(Math.max(0, 1 - nd / (T * .5)), 2.5);
-      const A = Math.min(1, fr + gw * (lit * .35 + back * .2) + rim * .08) * a;   /* الحافّةُ المضيئةُ نفسُها من ‎--lgx-rim‎ المتحرّك */
-      sI.data[k * 4] = sI.data[k * 4 + 1] = sI.data[k * 4 + 2] = 255; sI.data[k * 4 + 3] = A * 255;
-    }
-    for (let k = 0; k < W * H; k++) {
-      dI.data[k * 4] = 128 + fx[k] / S * 127; dI.data[k * 4 + 1] = 128 + fy[k] / S * 127; dI.data[k * 4 + 2] = 128; dI.data[k * 4 + 3] = 255;
-    }
-    dc.getContext('2d').putImageData(dI, 0, 0); sc.getContext('2d').putImageData(sI, 0, 0);
-    if (!LGX.svg) {
-      LGX.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      LGX.svg.setAttribute('width', '0'); LGX.svg.setAttribute('height', '0'); LGX.svg.setAttribute('aria-hidden', 'true');
-      LGX.svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
-      document.body.appendChild(LGX.svg);
-    }
-    const id = 'lgx' + (++LGX.n);
-    const f = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    f.setAttribute('id', id); f.setAttribute('x', '0'); f.setAttribute('y', '0'); f.setAttribute('width', '100%'); f.setAttribute('height', '100%');
-    f.setAttribute('color-interpolation-filters', 'sRGB');
-    f.innerHTML = '<feImage href="' + dc.toDataURL() + '" x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" result="m"/>'
-      + '<feDisplacementMap in="SourceGraphic" in2="m" scale="' + (S * 2).toFixed(2) + '" xChannelSelector="R" yChannelSelector="G"/>';
-    LGX.svg.appendChild(f);
-    const out = { f: 'url(#' + id + ')', spec: 'url(' + sc.toDataURL() + ')' };
-    LGX.cache.set(key, out);
-    return out;
-  }
-  function lgxApply(el) {
-    const w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
-    const z = +el.dataset.lgxz || 1;
-    if (!w || !h || el.dataset.lgx === w + 'x' + h + '@' + z) return;
-    const g = lgxBuild(w, h, z);
-    el.dataset.lgx = w + 'x' + h + '@' + z;
-    el.style.setProperty('--lgx-f', g.f);
-    el.style.setProperty('--lgx-spec', g.spec);
-  }
-  function lgxWatch() {
-    if (LGX.ro || typeof ResizeObserver === 'undefined' || typeof MutationObserver === 'undefined') return;
-    LGX.ro = new ResizeObserver(es => es.forEach(e => lgxApply(e.target)));
-    const scan = () => document.querySelectorAll('.lgx-drop:not([data-lgxw])').forEach(el => { el.dataset.lgxw = '1'; LGX.ro.observe(el); });
-    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
-    scan();
-  }
-  if (document.body) lgxWatch(); else document.addEventListener('DOMContentLoaded', lgxWatch);
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
       ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
         ? `<span class="x3-artwrap">${x3ArtHTML(p, kind, deck)}${cxMaxMini(p.id)}</span>`
@@ -20539,15 +20461,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كما يميل ضوءُ Liquid Glass مع ميل الجهاز. الضوءُ من فوقُ دائمًا، ويدور حتى ٥٥° يمينًا
      ويسارًا مع موضع المؤشّر، ويلحقه بنعومة (تخفيفٌ أُسّيّ) لا قفزًا */
   const PKL = { ang: Math.atan2(-.9, -.45), want: Math.atan2(-.9, -.45), raf: 0 };
+  /* والمتغيّرُ يُكتب على الشريط وحده (والقطرةِ الممسوكة) لا على الصفحة: كتابتُه على ‎html‎
+     كانت تُعيد حسابَ أنماط الصفحة كلِّها مع كلّ حركة. ولا يُكتب إلّا إن تغيّر فعلًا */
   const pkLight = () => {
     PKL.raf = 0;
-    PKL.ang += (PKL.want - PKL.ang) * .18;
-    const st = document.documentElement.style;
-    st.setProperty('--lx', Math.cos(PKL.ang).toFixed(3)); st.setProperty('--ly', Math.sin(PKL.ang).toFixed(3));
-    if (Math.abs(PKL.want - PKL.ang) > .002) PKL.raf = requestAnimationFrame(pkLight);
+    PKL.ang += (PKL.want - PKL.ang) * .2;
+    const lx = Math.cos(PKL.ang).toFixed(2), ly = Math.sin(PKL.ang).toFixed(2);
+    if (lx !== PKL.lx || ly !== PKL.ly) {
+      PKL.lx = lx; PKL.ly = ly;
+      document.querySelectorAll('#cm-body .pk-lg, .lgx-ghost').forEach(el => { el.style.setProperty('--lx', lx); el.style.setProperty('--ly', ly); });
+    }
+    if (Math.abs(PKL.want - PKL.ang) > .01) PKL.raf = requestAnimationFrame(pkLight);
   };
   document.addEventListener('pointermove', e => {
-    if (!document.querySelector('#cm-body .pk-lg')) return;
+    if (!pkLab()) return;
     const vw = window.innerWidth || 1, vh = window.innerHeight || 1;
     PKL.want = -Math.PI / 2 + (e.clientX / vw - .5) * 1.9 + (e.clientY / vh - .5) * .25;
     if (!PKL.raf) PKL.raf = requestAnimationFrame(pkLight);
@@ -20559,45 +20486,72 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return [l - r, dx / l, dy / l];
   };
   const pkGap = (a, b) => Math.hypot(Math.max(0, a.x - (b.x + b.w), b.x - (a.x + a.w)), Math.max(0, a.y - (b.y + b.h), b.y - (a.y + a.h)));
-  function pkMergePaint(cv, g, t, k) {
-    if (!t) { cv.style.display = 'none'; return; }
-    const pad = 6, x0 = Math.floor(Math.min(g.x, t.x) - pad), y0 = Math.floor(Math.min(g.y, t.y) - pad);
-    const x1 = Math.ceil(Math.max(g.x + g.w, t.x + t.w) + pad), y1 = Math.ceil(Math.max(g.y + g.h, t.y + t.h) + pad);
-    const D = Math.min(window.devicePixelRatio || 1, 1.5), W = Math.max(1, Math.round((x1 - x0) * D)), H = Math.max(1, Math.round((y1 - y0) * D));
+  /* لوحُ الزجاج أثناء السحب يُرسم على كرت الشاشة (‎WebGL‎): شكلُ القطرة، ومعه الهدفُ
+     مدموجَين بـ‎smin‎، وحافّةٌ مضيئةٌ تتبع الضوء، وحدٌّ رفيع — بدقّة الشاشة كاملةً وفي كلّ
+     إطار، فلا بكسلةَ ولا ثقل. وإن لم يتوفّر ‎WebGL‎ بقيت القطرةُ بزجاج ‎CSS‎ وحده */
+  const PK_GLSL = `precision highp float;
+uniform vec2 res; uniform float dpr; uniform vec4 A; uniform vec4 B; uniform float hasB; uniform float k; uniform float ang; uniform float dark;
+float cap(vec2 p, vec4 b, out vec2 n) { float r = b.w * .5; vec2 c = vec2(clamp(p.x, b.x + r, b.x + b.z - r), b.y + r); vec2 d = p - c; float l = max(length(d), 1e-4); n = d / l; return l - r; }
+void main() {
+  vec2 p = vec2(gl_FragCoord.x, res.y - gl_FragCoord.y) / dpr;
+  vec2 na, nb; float d = cap(p, A, na); vec2 n = na;
+  if (hasB > .5) { float db = cap(p, B, nb); float h = clamp(.5 + .5 * (db - d) / k, 0., 1.); d = mix(db, d, h) - k * h * (1. - h); n = normalize(mix(nb, na, h) + 1e-5); }
+  if (d > 2.) discard;
+  float aa = .75 / dpr, inside = 1. - smoothstep(-aa, aa, d), nd = max(-d, 0.);
+  float dir = dot(n, vec2(cos(ang), sin(ang)));
+  float lit = pow(max(dir, 0.), 2.), back = pow(max(-dir, 0.), 3.) * .6;
+  float rim = pow(max(0., 1. - nd / 1.4), 1.6), sheen = pow(max(0., 1. - nd / 7.), 2.4);
+  float hi = (rim * (lit * .9 + back * .35 + .08) + sheen * (lit * .28 + back * .1)) * mix(1., .2, dark);
+  float a = clamp(mix(.34, .05, dark) + hi, 0., 1.) * inside;
+  float ring = (1. - smoothstep(0., 1.4, d)) * (1. - inside) * mix(.12, .4, dark);
+  gl_FragColor = vec4(vec3(a), a + ring * (1. - a));
+}`;
+  function pkGl(cv) {
+    const g = cv.getContext('webgl', { premultipliedAlpha: true, antialias: false, alpha: true });
+    if (!g) return null;
+    const sh = (t, src) => { const o = g.createShader(t); g.shaderSource(o, src); g.compileShader(o); return o; };
+    const pr = g.createProgram();
+    g.attachShader(pr, sh(g.VERTEX_SHADER, 'attribute vec2 v;void main(){gl_Position=vec4(v,0.,1.);}'));
+    g.attachShader(pr, sh(g.FRAGMENT_SHADER, PK_GLSL));
+    g.linkProgram(pr);
+    if (!g.getProgramParameter(pr, g.LINK_STATUS)) return null;
+    g.useProgram(pr);
+    g.bindBuffer(g.ARRAY_BUFFER, g.createBuffer());
+    g.bufferData(g.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), g.STATIC_DRAW);
+    const v = g.getAttribLocation(pr, 'v'); g.enableVertexAttribArray(v); g.vertexAttribPointer(v, 2, g.FLOAT, false, 0, 0);
+    const u = {}; ['res', 'dpr', 'A', 'B', 'hasB', 'k', 'ang', 'dark'].forEach(n => { u[n] = g.getUniformLocation(pr, n); });
+    g.enable(g.BLEND); g.blendFunc(g.ONE, g.ONE_MINUS_SRC_ALPHA);
+    return { g, u };
+  }
+  function pkMergePaint(st, g, t, k) {
+    const R = st.gl;
+    if (!R) return;
+    const cv = st.cv, D = Math.min(window.devicePixelRatio || 1, 3);
+    const W = Math.round(innerWidth * D), H = Math.round(innerHeight * D);
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-    cv.style.cssText = 'display:block;left:' + x0 + 'px;top:' + y0 + 'px;width:' + (x1 - x0) + 'px;height:' + (y1 - y0) + 'px';
-    const ctx = cv.getContext('2d'), img = ctx.createImageData(W, H), dd = img.data;
-    const dark = pkDark(), tintA = dark ? .06 : .4, L = PKL.ang, T = 12;
-    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
-      const x = x0 + (i + .5) / D, y = y0 + (j + .5) / D;
-      const A = pkCap(x, y, g), B = pkCap(x, y, t);
-      const hh = Math.min(Math.max(.5 + .5 * (B[0] - A[0]) / k, 0), 1);
-      const d = B[0] * (1 - hh) + A[0] * hh - k * hh * (1 - hh);
-      if (d > 1.5) continue;
-      const o = (j * W + i) * 4, a = Math.min(Math.max(.5 - d * D, 0), 1);
-      if (a < .5) { dd[o + 3] = (dark ? 70 : 34) * (1 - Math.max(d, 0) / 1.5); continue; }   // حدٌّ رفيعٌ خارجيّ
-      let nx = B[1] * (1 - hh) + A[1] * hh, ny = B[2] * (1 - hh) + A[2] * hh;
-      const ln = Math.hypot(nx, ny) || 1; nx /= ln; ny /= ln;
-      const nd = Math.max(-d, 0), dir = Math.cos(Math.atan2(ny, nx) - L);
-      const lit = Math.pow(Math.max(dir, 0), 2), back = Math.pow(Math.max(-dir, 0), 3) * .6;
-      const rim = Math.pow(Math.max(0, 1 - nd / 1.25), 1.5), gw = Math.pow(Math.max(0, 1 - nd / (T * .5)), 2.5);
-      const sp = Math.min(1, rim * (.35 + .65 * Math.max(lit, back)) + gw * (lit * .85 + back * .5) * (dark ? .16 : 1.1));
-      dd[o] = dd[o + 1] = dd[o + 2] = 255; dd[o + 3] = (1 - (1 - tintA) * (1 - sp)) * a * 255;
-    }
-    ctx.putImageData(img, 0, 0);
+    const { g: gl, u } = R;
+    gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform2f(u.res, W, H); gl.uniform1f(u.dpr, D);
+    gl.uniform4f(u.A, g.x, g.y, g.w, g.h);
+    gl.uniform4f(u.B, t ? t.x : 0, t ? t.y : 0, t ? t.w : 1, t ? t.h : 1);
+    gl.uniform1f(u.hasB, t ? 1 : 0); gl.uniform1f(u.k, Math.max(k, 1));
+    gl.uniform1f(u.ang, PKL.ang); gl.uniform1f(u.dark, pkDark() ? 1 : 0);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
   function pkDragStart(st, e) {
     const f = st.face, r = f.getBoundingClientRect(), strip = f.closest('.pk-fstrip');
     const gh = document.createElement('div');
     gh.className = 'lgx-ghost';
-    gh.innerHTML = '<i class="lgx-drop" data-lgxz="1.18" aria-hidden="true"></i>'
+    gh.innerHTML = '<i class="lgx-gb" aria-hidden="true"></i>'
       + [...f.querySelectorAll(':scope > .pk-fi, :scope > .pg-nm')].map(n => n.outerHTML).join('');
     gh.style.width = r.width + 'px'; gh.style.height = r.height + 'px';
     if (pkDark()) gh.classList.add('is-dark');
+    gh.style.setProperty('--lx', PKL.lx || '-.45'); gh.style.setProperty('--ly', PKL.ly || '-.9');
     const cv = document.createElement('canvas'); cv.className = 'lgx-merge'; cv.setAttribute('aria-hidden', 'true');
     document.body.append(cv, gh);
-    lgxApply(gh.firstChild);
-    Object.assign(st, {
+    const gl = pkGl(cv);
+    if (!gl) { cv.remove(); gh.classList.add('no-gl'); }
+    Object.assign(st, { gl,
       on: true, gh, cv, strip, w: r.width, h: r.height, ox: e.clientX - r.left, oy: e.clientY - r.top, home: r,
       x: r.left, y: r.top, vx: 0, vy: 0, sx: 1, sy: 1, to: null, tEl: null, k: 0,
       cands: [...strip.querySelectorAll('.pg-face[data-pkf]')].filter(x => x !== f && pkDropOk(st.id, x.dataset.pkf))
@@ -20630,7 +20584,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.gh.classList.toggle('is-under', !!under);   /* فوق الهدف: يذوب حرفُه فيه فلا يتراكب الاسمان */
     const tk = best ? 10 + 22 * (1 - bg / 34) : 0;
     st.k += (tk - st.k) * .35;
-    pkMergePaint(st.cv, g, best && { x: best.r.left, y: best.r.top, w: best.r.width, h: best.r.height }, Math.max(st.k, 1));
+    /* القطرةُ في اللوح بتمطّطها نفسِه حول مركزها */
+    const gw = st.w * st.sx, gh = st.h * st.sy;
+    pkMergePaint(st, { x: st.x + (st.w - gw) / 2, y: st.y + (st.h - gh) / 2, w: gw, h: gh }, best && { x: best.r.left, y: best.r.top, w: best.r.width, h: best.r.height }, Math.max(st.k, 1));
   }
   function pkDragEnd(st, cancel) {
     const strip = st.strip, id = strip.dataset.pkid, to = cancel ? null : st.to, tb = st.tb;
@@ -20653,13 +20609,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const step = now => {
       const q = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - q, 3);
       let x = x0, y = y0, w = w0, h = h0;
-      if (to == null) { x = x0 + (st.home.left - x0) * e; y = y0 + (st.home.top - y0) * e; }
+      if (to == null) { x = x0 + (st.home.left - x0) * e; y = y0 + (st.home.top - y0) * e; pkMergePaint(st, { x, y, w, h }, null, 1); }
       else if (tr) {
         w = w0 + (tr.width * .55 - w0) * e; h = h0 + (tr.height * .7 - h0) * e;
         x = x0 + (tr.left + (tr.width - w) / 2 - x0) * e; y = y0 + (tr.top + (tr.height - h) / 2 - y0) * e;
         st.gh.style.opacity = String(1 - e);
-        pkMergePaint(st.cv, { x, y, w, h }, { x: tr.left, y: tr.top, w: tr.width, h: tr.height }, 10 + 22 * (1 - e * .4));
-      } else st.gh.style.opacity = String(1 - e);
+        pkMergePaint(st, { x, y, w, h }, { x: tr.left, y: tr.top, w: tr.width, h: tr.height }, 10 + 22 * (1 - e * .4));
+      } else { st.gh.style.opacity = st.cv.style.opacity = String(1 - e); pkMergePaint(st, { x, y, w, h }, null, 1); }
       st.gh.style.width = w + 'px'; st.gh.style.height = h + 'px';
       st.gh.style.transform = 'translate(' + x + 'px,' + y + 'px)';
       if (q < 1) requestAnimationFrame(step); else done();
