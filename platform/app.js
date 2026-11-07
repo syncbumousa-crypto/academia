@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcCovBtn: 'حمّل غلاف المصدر', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcCovBtn: 'Upload the source cover', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -5649,6 +5649,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sec === 'cards' || sec === 'videos') {
       /* الغلاف جزءٌ من الرزمة كبنودها: صورتُه أو عنوانُه وحدهما يكفيان */
       if (String(d.title || '').trim() || String(d.img || '').trim()) return true;
+      if (d.src) return true;   /* ومصدرٌ مرفوعٌ (ملفُّه أو غلافُه) بدايةُ مساهمةٍ كذلك */
       const ns = Array.isArray(d.deck) ? d.deck
         : Object.values(d.decks || d.vids || {}).flat();
       let found = false;
@@ -6506,6 +6507,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
     if (!cxMax && !cxMaxPub) { cxHdUp = false; cxFtDn = false; }
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
+    pkSrcPaint();   /* وكتابُ «المصدر» في المساهمة كذلك */
     if (cmView.mode === 'edit') {
       if (sec === 'doc') { if (cmView.sub === 'abs') editorMount('abs'); }   /* الدكتور المحرر ذاتي الترتيب عدا الغياب */
       else editorMount(cmView.sub || sec);
@@ -9150,28 +9152,125 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + '</div>';
     }).join('') + '</div>';
   }
-  /* جوفُ «المصدر»: زرٌّ في الوسط. في التحرير يفتح منتقيَ الملفات (‎PDF‎ وحده) ويُري اسمَ المختار —
-     ولا يُحفظ الملفُّ بعد (مكانُه في الخادم لم يُقرَّر). وفي النشر الزرُّ نفسُه معطَّلًا: لا ملفَّ ليُحمَّل */
-  const pkSrcPick = {};
-  const pkSrcView = (id, ed) => `<div class="pk-src" data-pkid="${esc(id)}">
-      <button type="button" class="pk-src__btn" ${ed ? 'data-pksrcpick' : 'disabled'} data-pkid="${esc(id)}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
-        <span>${esc(T().pkSrcBtn)}</span></button>
-      ${ed && pkSrcPick[id] ? `<small class="pk-src__nm">${esc(pkSrcPick[id])}</small>` : ''}
+  /* ===== جوفُ «المصدر»: ملفُّ PDF يصير كتابًا يُقلَّب (كتابُ شابترات ‎IAS 111‎ بعينه) =====
+     قبل الرفع: زرّان كبيران في الوسط — «حمّل ملف المصدر PDF» وتحته «حمّل غلاف المصدر».
+     وبعده: الكتابُ نفسُه (‎bkMount‎) وفوقه زرّا الغلاف والصفحات للاستبدال والإزالة.
+     أيُّ ملفٍّ PDF يصير كتابًا — كتابًا كان في أصله أو أوراقًا.
+     البِتاتُ في ‎IndexedDB‎ (مخزنُ مصادر الشابترات نفسُه) بمفتاح المساهمة، والوصفُ في
+     ‎state.pkSrc / state.pkSrcCov‎ — فهو **في هذا المتصفّح وحده** حتى يُقرَّر مكانُه في الخادم */
+  const pkSrcKey = id => `pksrc:${id}`, pkSrcCovKey = id => `pksrccov:${id}`;
+  const pkSrcMeta = id => (state.pkSrc || {})[id] || null;
+  const pkSrcCovMeta = id => (state.pkSrcCov || {})[id] || null;
+  const PK_SRC_FILE_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>';
+  const PK_SRC_COV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/></svg>';
+  const pkSrcCovTool = (id, cv) => cv
+    ? `<div class="chtool chtool--on" data-pksrccov data-pkid="${esc(id)}" title="${esc(T().chCovReplace)}">
+        <span class="chtool__thumb" style="--sw:${cv.color || 'transparent'}"><img alt="" data-pksrccovimg="${esc(id)}"></span>
+        <span class="chtool__txt"><b>${T().chCov}</b><small>${esc(cv.name)}</small></span>
+        <button type="button" class="chtool__x" data-pksrccovdel data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
+      </div>`
+    : '';
+  const pkSrcView = (id, ed) => {
+    const m = pkSrcMeta(id), cv = pkSrcCovMeta(id);
+    if (m) return `<div class="pk-src pk-src--book" data-pkid="${esc(id)}">
+        ${ed ? `<div class="chtools">
+          ${cv ? pkSrcCovTool(id, cv) : `<button type="button" class="chtool" data-pksrccov data-pkid="${esc(id)}">${CH_IC.cover}<span class="chtool__txt"><b>${T().chCovAdd}</b><small>${T().chCovHint}</small></span></button>`}
+          <div class="chtool chtool--on" data-pksrcpick data-pkid="${esc(id)}" title="${esc(T().chReplace)}">${CH_IC.pages}
+            <span class="chtool__txt"><b>${T().chPages}</b><small>${esc(m.name)} · ${chSize(m.size || 0)}</small></span>
+            <button type="button" class="chtool__x" data-pksrcdel data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
+          </div></div>` : ''}
+        <div class="chsrc__view pk-src__view" data-pksrcview data-pkid="${esc(id)}"><p class="v-none">${T().chLoading}</p></div>
+      </div>`;
+    return `<div class="pk-src" data-pkid="${esc(id)}">
+      <button type="button" class="pk-src__btn" ${ed ? 'data-pksrcpick' : 'disabled'} data-pkid="${esc(id)}">${PK_SRC_FILE_IC}<span>${esc(T().pkSrcBtn)}</span></button>
+      ${ed ? (cv ? pkSrcCovTool(id, cv)
+        : `<button type="button" class="pk-src__btn pk-src__btn--cov" data-pksrccov data-pkid="${esc(id)}">${PK_SRC_COV_IC}<span>${esc(T().pkSrcCovBtn)}</span></button>`) : ''}
     </div>`;
+  };
   /* منتقٍ واحدٌ خارجَ الجوف: الجوفُ يُعاد رسمُه مع النقرات، فمنتقٍ فيه قد يُنزع قبل أن يُختار الملف */
-  const pkSrcIn = (() => {
+  const pkSrcPicker = (accept, fn) => {
     const i = document.createElement('input');
-    i.type = 'file'; i.accept = 'application/pdf,.pdf'; i.hidden = true; i.className = 'pk-src__in';
-    i.addEventListener('change', () => {
-      const f = i.files && i.files[0], id = i.dataset.pkid; i.value = '';
-      if (!f || !id || !(f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) return;
-      pkSrcPick[id] = f.name;
-      renderCmSection();
-    });
+    i.type = 'file'; i.accept = accept; i.hidden = true; i.className = 'pk-src__in';
+    i.addEventListener('change', () => { const f = i.files && i.files[0], id = i.dataset.pkid; i.value = ''; if (f && id) fn(id, f); });
     document.body.appendChild(i);
     return i;
-  })();
+  };
+  const pkSrcIn = pkSrcPicker('application/pdf,.pdf', (id, f) => pkSrcSet(id, f));
+  const pkSrcCovIn = pkSrcPicker('image/*,application/pdf,.pdf', (id, f) => pkSrcCovSet(id, f));
+  /* علامةُ المصدر في بيانات المساهمة نفسِها (‎d.src‎): بها تُعدّ مساهمةً قائمةً فلا تُكنس فارغةً
+     — والميزانُ (‎editHasInput‎) يقرأ البيانات لا المعرّف */
+  const pkSrcMark = id => {
+    const p = postsOf(cmCode, 'cards').find(x => x.id === id);
+    if (!p) return;
+    const on = !!(pkSrcMeta(id) || pkSrcCovMeta(id));
+    if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null };
+    else delete p.data.src;
+  };
+  async function pkSrcSet(id, file) {
+    if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) { toast(T().chNotPdf); return; }
+    const key = pkSrcKey(id);
+    if (!await chIdb('readwrite', key, file)) { toast(T().chSaveFail); return; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    bkForget(key);
+    (state.pkSrc = state.pkSrc || {})[id] = { name: file.name, size: file.size, ts: Date.now() };
+    pkSrcMark(id); save(); renderCmSection();
+  }
+  async function pkSrcDel(id) {
+    const key = pkSrcKey(id);
+    await chIdb('readwrite', key, null);
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    bkForget(key);
+    if (state.pkSrc) delete state.pkSrc[id];
+    pkSrcMark(id); save(); renderCmSection();
+  }
+  const pkSrcCovUrl = {};
+  async function pkSrcCovSet(id, file) {
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf && !/^image\//.test(file.type)) { toast(T().chCovBad); return; }
+    let color = null, img = null;
+    try {
+      color = chEdgeColor(await chCovCanvas(file, 96));
+      img = isPdf ? await new Promise(async r => (await chCovCanvas(file, 1200)).toBlob(r, 'image/jpeg', 0.9)) : file;
+    } catch (e) { toast(T().chCovBad); return; }
+    const key = pkSrcCovKey(id);
+    if (!await chIdb('readwrite', key, img)) { toast(T().chSaveFail); return; }
+    if (pkSrcCovUrl[key]) { URL.revokeObjectURL(pkSrcCovUrl[key]); delete pkSrcCovUrl[key]; }
+    (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, ts: Date.now() };
+    pkSrcMark(id); save(); renderCmSection();
+  }
+  async function pkSrcCovDel(id) {
+    const key = pkSrcCovKey(id);
+    await chIdb('readwrite', key, null);
+    if (pkSrcCovUrl[key]) { URL.revokeObjectURL(pkSrcCovUrl[key]); delete pkSrcCovUrl[key]; }
+    if (state.pkSrcCov) delete state.pkSrcCov[id];
+    pkSrcMark(id); save(); renderCmSection();
+  }
+  /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
+  async function pkSrcPaint() {
+    document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
+      const key = pkSrcCovKey(img.dataset.pksrccovimg);
+      if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
+      if (img.isConnected) img.src = pkSrcCovUrl[key];
+    });
+    document.querySelectorAll('#cm-body [data-pksrcview]').forEach(async view => {
+      const id = view.dataset.pkid, key = pkSrcKey(id), meta = pkSrcMeta(id);
+      let doc;
+      try { doc = await chPdfOpen(key); } catch (e) { doc = undefined; }
+      if (!view.isConnected) return;
+      if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
+      const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
+      if (!view.isConnected) return;
+      const cv = pkSrcCovMeta(id);
+      bkMount(view, {
+        doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
+        cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
+        pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
+        closed: !meta || meta.closed !== false,
+        covKey: cv ? pkSrcCovKey(id) : null,
+      });
+    });
+  }
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
     if (pkVwOf(id) === 'source') return pkSrcView(id, ed);
@@ -21225,6 +21324,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const hl = e.target.closest('#cm-body [data-hdfold]');
     if (hl) { e.preventDefault(); e.stopPropagation(); cxHdSet(!cxHdUp); return; }
     const sp = e.target.closest('#cm-body [data-pksrcpick]');
+    const sx = e.target.closest('#cm-body [data-pksrcdel], #cm-body [data-pksrccovdel]');
+    if (sx) { e.stopPropagation(); if (sx.hasAttribute('data-pksrcdel')) pkSrcDel(sx.dataset.pkid); else pkSrcCovDel(sx.dataset.pkid); return; }
+    const sc = e.target.closest('#cm-body [data-pksrccov]');
+    if (sc) { pkSrcCovIn.dataset.pkid = sc.dataset.pkid; pkSrcCovIn.click(); return; }
     if (sp) { pkSrcIn.dataset.pkid = sp.dataset.pkid; pkSrcIn.click(); return; }
     const fl = e.target.closest('#cm-body [data-ftfold]');
     if (fl) { e.preventDefault(); e.stopPropagation(); cxFtSet(!cxFtDn); return; }
