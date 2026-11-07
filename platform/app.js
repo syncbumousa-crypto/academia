@@ -9017,7 +9017,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والمجلّديُّ مفصولٌ في كبسولةٍ وحدَه يسارَ الثلاثة (طلبُ صاحب الموقع): هو العرضُ الأصل،
      والثلاثةُ عروضُ المعرفة — فالمجموعةُ واحدةٌ (‎role=group‎) والكبسولتان شكلٌ لا معنى */
   const pkVbBtn = (id, k, ic) => {
-    const on = pkVwOf(id) === k || (k === 'tree' && pkSplitOn(id));
+    const on = pkVwOf(id) === k || pkSplitOn(id) === k;
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
       title="${esc(T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
@@ -9218,8 +9218,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ‎pkSplit[id]‎ علامتُه، والعرضُ نفسُه يبقى ‎'source'‎. ونقرُ أحدِ الزرّين المضيئين يُغلق جانبَه
      ويبقى الآخر، ونقرُ أيِّ عرضٍ ثالثٍ يُنهي القسمة. والانتقالُ ‎FLIP‎: يُقاس الكتابُ قبل الرسم
      ويُقاس بعد تركيبه، ثمّ يُحرَّك من موضعه القديم إلى الجديد */
-  const pkSplit = {}, pkSplitFlip = {};
-  const pkSplitOn = id => !!pkSplit[id] && pkVwOf(id) === 'source' && pkLab();
+  /* وتعمّ العروضَ الثلاثة (طلبُ صاحب الموقع): ‎pkSplit[id]‎ هو العرضُ الذي بجانب الكتاب — شجريٌّ أو بطاقيٌّ
+     أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
+  const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
+  const pkSplit = {}, pkSplitFlip = {}, pkSplitAnim = {};
+  const pkSplitOn = id => (pkSplit[id] && pkVwOf(id) === 'source' && pkLab()) ? pkSplit[id] : null;
   const pkSplitRecord = id => {
     const v = document.querySelector(`#cm-body [data-pksrcview][data-pkid="${CSS.escape(id)}"] .cbk`);
     if (v) pkSplitFlip[id] = v.getBoundingClientRect();
@@ -9497,7 +9500,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (v === 'source' && pkSplitOn(id) ? `<div class="pk-split${pkSplitFlip[id] && pkSplit[id] === 'in' ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, 'tree', folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`
+      + (v === 'source' && pkSplitOn(id) ? (anim => `<div class="pk-split pk-split--${pkSplit[id]}${anim ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, pkSplit[id], folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`)((() => { const a = pkSplitAnim[id]; delete pkSplitAnim[id]; return a; })())
         : v === 'source' ? pkSrcView(id, ed)
         : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
@@ -21548,14 +21551,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const id = pv.dataset.pkid;
       const to = pv.dataset.pkview, cur = pkVwOf(id);
       if (!id) return;
-      if (pkSplitOn(id)) {
-        /* في القسمة: الزرّان المضيئان يُغلق كلٌّ جانبَه، وغيرُهما يُنهيها إلى عرضه */
-        if (to === 'tree') { pkSplitRecord(id); pkSplit[id] = 'out'; delete pkSplit[id]; }
-        else if (to === 'source') { pkSplit[id] = false; pkVw[id] = 'tree'; }
-        else { pkSplit[id] = false; pkVw[id] = to; }
+      const part = pkSplitOn(id);
+      if (part) {
+        /* في القسمة: الزرّان المضيئان يُغلق كلٌّ جانبَه، وعرضٌ آخرُ من الثلاثة يحلّ محلّ الجار
+           والكتابُ باقٍ، والمجلّديُّ يُنهيها */
+        if (to === part) { pkSplitRecord(id); delete pkSplit[id]; }
+        else if (to === 'source') { delete pkSplit[id]; pkVw[id] = part; }
+        else if (PK_SPLIT_VIEWS.includes(to)) { pkSplit[id] = to; pkSplitAnim[id] = true; }
+        else { delete pkSplit[id]; pkVw[id] = to; }
         renderCmSection();
-      } else if (cur === 'source' && to === 'tree' && pkLab()) {
-        pkSplitRecord(id); pkSplit[id] = 'in'; renderCmSection();
+      } else if (cur === 'source' && PK_SPLIT_VIEWS.includes(to) && pkLab()) {
+        pkSplitRecord(id); pkSplit[id] = to; pkSplitAnim[id] = true; renderCmSection();
       } else if (cur !== to) { pkVw[id] = to; renderCmSection(); }
       return;
     }

@@ -16827,6 +16827,12 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk-split { display: flex; gap: 14px; align-items: stretch; min-height: 0; }
 .pk-split > .pk-src { flex: .62 1 0; min-width: 0; }   /* الكتابُ على قدّه، واللوحُ يأخذ الباقي */
 .pk-split > .kt-view--tree { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; margin-bottom: 0; }
+/* والبطاقيُّ والجدوليُّ جارين: يُمرَّران في جانبهما ولا يُطيلان القسمة */
+.pk-split > .kt-view:not(.kt-view--tree) {
+  flex: 1 1 0; min-width: 0; margin: 0; max-height: 72vh; overflow-y: auto; overflow-x: hidden;
+  padding-inline-end: 4px; scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent;
+}
+.pk--max .pk-split > .kt-view:not(.kt-view--tree) { max-height: none; min-height: 0; }
 .pk-split > .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 420px; }
 .pk--max .post-ytmain > .pk-split { flex: 1 1 auto; margin-bottom: 26px; }
 .pk--max .pk-split > .pk-src .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
@@ -16837,11 +16843,11 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk-split .pk-src--book .cbk-stage { justify-items: center; padding-inline: 6px; }
 .pk-split .pk-src--book .cbk-nav { margin-inline: auto; }
 /* اللوحُ يظهر من جهته (اليسار) وهو يتّضح، والكتابُ ينتقل إليه انتقالًا (‎FLIP‎ في ‎bkFlipFrom‎) */
-.pk-split.is-in > .kt-view--tree { animation: pkSplitIn .5s cubic-bezier(.2, .8, .2, 1) both; }
+.pk-split.is-in > .kt-view { animation: pkSplitIn .5s cubic-bezier(.2, .8, .2, 1) both; }
 @keyframes pkSplitIn { from { opacity: 0; transform: translateX(-28px); } }
-html[data-lang="en"] .pk-split.is-in > .kt-view--tree { animation-name: pkSplitInEn; }
+html[data-lang="en"] .pk-split.is-in > .kt-view { animation-name: pkSplitInEn; }
 @keyframes pkSplitInEn { from { opacity: 0; transform: translateX(28px); } }
-@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view--tree { animation: none; } }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
+@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view { animation: none; } }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
 .pk--max .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 280px; }
 /* المرحلة ٢: المحدَّدُ بإطارٍ ذهبيّ، والبطاقةُ تُمسك وتُسحب، والنصُّ يُحرَّر بالنقر المزدوج */
 .kcv-card { cursor: grab; user-select: none; }
