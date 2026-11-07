@@ -20940,7 +20940,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkLayout(b) {
     /* أصغرُ قليلًا ممّا يسع (‎82%‎)، ويُلصق باليمين — ويبقى اليسارُ لما يأتي بعدُ */
     /* وكتابُ «المصدر» في المساهمة (‎b.wide‎) يأخذ عرضَ وعائه كلَّه: عمودُ الغلاف والملفّ بجانبه أخذ نصيبَه */
-    const W = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H = (b.stage.clientHeight - 64) * 0.9;
+    /* وفي القامة كذلك: لا يُترك له إلّا ما يسع حافّةَ الغلاف (‎11px‎ فوق و‎24px‎ تحت) وظلَّه —
+       وإلّا صغُر في المكبَّرة (القصيرةِ القامة) عمّا هو في الضيّقة، وهو عكسُ ما يُكبَّر له */
+    const W = (b.stage.clientWidth - 56) * (b.wide ? 1 : 0.82), H = b.wide ? b.stage.clientHeight - 44 : (b.stage.clientHeight - 64) * 0.9;
     if (W <= 0 || H <= 0) return;
     b.single = W < 620;
     const cols = b.single ? 1 : 2;
