@@ -16259,6 +16259,19 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--ftanim .vt-foot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
 .pk--ftanim .pk-ftline { transition: margin .22s ease; }
 @media (prefers-reduced-motion: reduce) { .pk--ftanim .vt-foot, .pk--ftanim .pk-ftline { transition: none; } }
+/* قاعُ المنشورة المكبَّرة: «إخفاء الكل» تحت الخطّ، يلزم اليمين كما تلزمه الإضافةُ في التحرير */
+.pk--maxpub .post-ytmain > .kt-view--tree { flex: 1 1 auto; min-height: 0; }   /* اللوحُ يملأ ما بين الرأس والقاع كما في التحرير */
+.pk-pubfoot { flex: none; display: flex; align-items: center; padding-top: 4px; max-height: 64px; }
+.pk-hideall {
+  height: 30px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--u-line);
+  background: color-mix(in srgb, currentColor 4%, transparent); color: inherit;
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.pk-hideall:hover { border-color: rgba(201, 162, 92, .6); }
+.pk-hideall:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
+.pk--ftdn .pk-pubfoot { max-height: 0; padding-top: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+.pk--ftanim .pk-pubfoot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .pk--ftanim .pk-pubfoot { transition: none; } }
 .pk--hdanim > .post-yt > .post-av--yt { transition: margin-inline-start .22s ease, visibility .22s; }
 @media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt, .pk--hdanim > .post-yt > .post-av--yt { transition: none; } .pk-hdline__grip { transition: none; } }
 
