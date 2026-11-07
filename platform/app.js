@@ -8993,10 +8993,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', kids: pkKidsAll(x) }));
   function pgFoldsAll(deck, ed) {
     const out = [];
-    /* و«الجذر» مَهبطٌ في التحرير متى كان مجلدٌ في جوف آخر — وإلّا لم يبقَ ما يُفلَت عليه
-       مجلدٌ يُراد إخراجُه إلى الطبقة العليا */
-    const nested = (deck || []).some(n => n.t === 'f' && (n.ch || []).some(x => x.t === 'f'));
-    if ((deck || []).some(n => n.t !== 'f') || (ed && nested)) out.push({ id: '', name: T().shRoot, kids: [] });
+    /* «الجذر» لا يظهر إلّا لبطائقَ خارج المجلدات (كما في ورقة الملخّص) — لا مَهبطًا للسحب:
+       الإخراجُ إلى الطبقة العليا يكون بالإفلات على **فراغ الشريط** نفسِه (بطلب صاحب الموقع) */
+    if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
     (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', kids: pkKidsAll(f) }));
     return out;
   }
@@ -20387,7 +20386,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (targetId === '') return hit.arr !== deck;                 /* إلى الجذر: إلّا إن كان فيه */
     return !findNode(hit.n.ch, targetId);                          /* لا في أحد أحفاده */
   };
-  const pkDropClear = () => document.querySelectorAll('#cm-body .pk-fstrip .is-drop, #cm-body .pk-fstrip .is-drag')
+  const pkDropClear = () => document.querySelectorAll('#cm-body .pk-fstrip .is-drop, #cm-body .pk-fstrip .is-drag, #cm-body .pk-fstrip.is-drop')
     .forEach(x => x.classList.remove('is-drop', 'is-drag'));
   document.addEventListener('dragstart', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[draggable="true"]');
@@ -20400,24 +20399,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('dragover', e => {
     if (pkDrag == null) return;
     const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
-    document.querySelectorAll('#cm-body .pk-fstrip .is-drop').forEach(x => { if (!f || x !== f.closest('.pg-box')) x.classList.remove('is-drop'); });
-    if (!f || !pkDropOk(pkDrag, f.dataset.pkf)) return;
+    /* فراغُ الشريط (لا وجهَ مربّعٍ تحت المؤشّر) مَهبطٌ إلى الطبقة العليا */
+    const strip = !f && e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed');
+    const box = f && f.closest('.pg-box');
+    document.querySelectorAll('#cm-body .pk-fstrip .is-drop').forEach(x => { if (x !== box && x !== strip) x.classList.remove('is-drop'); });
+    const to = f ? f.dataset.pkf : strip ? '' : null;
+    if (to == null || !pkDropOk(pkDrag, to)) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-    f.closest('.pg-box').classList.add('is-drop');
+    (box || strip).classList.add('is-drop');
   });
   document.addEventListener('drop', e => {
     if (pkDrag == null) return;
     const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
+    const strip = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed');
     const dragId = pkDrag; pkDrag = null; pkDropClear();
-    if (!f || !pkDropOk(dragId, f.dataset.pkf)) return;
+    const to = f ? f.dataset.pkf : strip ? '' : null;
+    if (to == null || !pkDropOk(dragId, to)) return;
     e.preventDefault();
-    const deck = edPack().deck, hit = findNode(deck, dragId), to = f.dataset.pkf;
+    const deck = edPack().deck, hit = findNode(deck, dragId);
     hit.arr.splice(hit.i, 1);
     if (to === '') deck.push(hit.n);
     else { const t = findNode(deck, to); (t.n.ch = t.n.ch || []).push(hit.n); t.n.open = true; }
     save();
-    const id = f.closest('.pk-fstrip').dataset.pkid;
+    const id = strip.dataset.pkid;
     const open = pkFo[id] || (pkFo[id] = new Map());
     if (to !== '') {
       const trail = (cxTrail(deck, to) || []).concat([to]);

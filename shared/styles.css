@@ -16293,3 +16293,6 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk-fstrip .pg-box.is-drag { opacity: .45; }
 .pk-fstrip .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: -2px; background: rgba(201, 162, 92, .14); }
 .pk-fstrip--ed .pg-box.is-sel > .pg-face > .pg-nm { cursor: text; }   /* اسمُ المختار يُنقر فيُسمّى */
+/* فراغُ الشريط مَهبطًا إلى الطبقة العليا: يُطوَّق الشريطُ كلُّه */
+.pk-fstrip.is-drop { outline: 2px dashed #c9a25c; outline-offset: 2px; border-radius: 12px; }
+.pk-fstrip--ed { padding-bottom: 8px; }   /* فراغٌ تحت المربّعات يُفلَت عليه */
