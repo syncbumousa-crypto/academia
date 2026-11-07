@@ -9150,20 +9150,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* لا ‎dir=auto‎ على الخانة: اتّجاهُها اتّجاهُ الجدول (فتستقيم حدودُها وانحناءاتُها المنطقيّة)، ونصُّها
      يأخذ اتّجاهَه بـ‎unicode-bidi: plaintext‎ */
   const ktEd = (r, c) => ` contenteditable="plaintext-only" spellcheck="false" data-ktr="${r}" data-ktc="${c}"`;
-  const ktOk = on => `<button type="button" class="kt-ok${on ? ' on' : ''}" data-ktok aria-pressed="${on}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  const ktOk = (on, r) => `<button type="button" class="kt-ok${on ? ' on' : ''}" data-ktok data-ktr="${r}" aria-pressed="${on}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   function ktViewHTML(id, sel) {
     const host = ktHost(sel), tabs = (host && host.kt) || [];
     const t = tabs.map(tb => {
-      const [h, r] = tb.rows;
+      const h = tb.rows[0];
       /* اتّجاهُ الجدول اتّجاهُ الموقع (بالعربيّة من اليمين — بحكم صاحب الموقع)، وكلُّ خانةٍ نصُّها باتّجاهه */
       return `<table class="kt" data-kt="${esc(tb.id)}"><thead><tr>`
         + h.map((x, c) => `<th class="kt-c${c} kt-t"${ktEd(0, c)}>${esc(x || '')}</th>`).join('')
-        + `</tr></thead><tbody><tr>`
-        + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(1, 0)}>${esc(r[0] || '')}</span><span class="kt-tools" aria-hidden="true"><i>⋯</i><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></svg></span></td>`
-        + `<td class="kt-c1 kt-t kt-term"${ktEd(1, 1)}>${esc(r[1] || '')}</td>`
-        + `<td class="kt-c2 kt-t kt-mean"${ktEd(1, 2)}>${esc(r[2] || '')}</td>`
-        + `<td class="kt-c3">${ktOk(!!(r[3] || '').trim())}</td>`
-        + `</tr></tbody></table>`;
+        + `</tr></thead><tbody>`
+        /* صفوفُ البيانات كلُّها (الأوّلُ رأس) — كلُّ صفٍّ شريطٌ منفصل */
+        + tb.rows.slice(1).map((r, k) => { const i = k + 1; return `<tr>`
+          + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(i, 0)}>${esc(r[0] || '')}</span><span class="kt-tools" aria-hidden="true"><i>⋯</i><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></svg></span></td>`
+          + `<td class="kt-c1 kt-t kt-term"${ktEd(i, 1)}>${esc(r[1] || '')}</td>`
+          + `<td class="kt-c2 kt-t kt-mean"${ktEd(i, 2)}>${esc(r[2] || '')}</td>`
+          + `<td class="kt-c3">${ktOk(!!(r[3] || '').trim(), i)}</td>`
+          + `</tr>`; }).join('')
+        + `</tbody></table>`;
     }).join('');
     return `<div class="kt-view" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${t}`
       + `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button></div>`;
@@ -9191,8 +9194,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const v = k.closest('.kt-view'), host = ktHost(v.dataset.ktf), tid = k.closest('.kt').dataset.kt;
     const tb = host && (host.kt || []).find(x => x.id === tid);
     if (!tb) return;
-    const on = !(tb.rows[1][3] || '').trim();
-    tb.rows[1][3] = on ? '✓' : '';
+    const ri = +k.dataset.ktr || 1, on = !(tb.rows[ri][3] || '').trim();
+    tb.rows[ri][3] = on ? '✓' : '';
     k.classList.toggle('on', on); k.setAttribute('aria-pressed', String(on));
     save();
   }, true);
