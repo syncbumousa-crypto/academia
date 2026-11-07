@@ -16279,8 +16279,17 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
    حقلٌ بلا إطار يأخذ مكانَ الاسم في المربّع المختار، ويُعرف بخطٍّ ذهبيٍّ تحته */
 .pk-fstrip--ed .pg-face { cursor: pointer; }
 .pk-fnm {
-  flex: 1 1 auto; min-width: 0; width: 100%; padding: 0 0 1px; border: 0; border-bottom: 1.5px solid rgba(201, 162, 92, .7);
+  /* الخطُّ تحت الاسم وقتَ الكتابة وحدَه — فإذا انتهت صار الاسمُ نصًّا كإخوته */
+  flex: 1 1 auto; min-width: 0; width: 100%; padding: 0 0 1px; border: 0; border-bottom: 1.5px solid transparent;
+  cursor: text;
   background: transparent; color: inherit; font: inherit; font-weight: 700; outline: none;
 }
 .pk-fnm:focus { border-bottom-color: #c9a25c; }
 .pk-fnm::placeholder { color: inherit; opacity: .45; font-weight: 400; }
+
+/* السحب: المربّعُ الممسوكُ يخفت، والهدفُ الصالحُ يُطوَّق بذهبٍ متقطّع */
+.pk-fstrip--ed .pg-face[draggable="true"] { cursor: grab; }
+.pk-fstrip--ed .pg-face[draggable="true"]:active { cursor: grabbing; }
+.pk-fstrip .pg-box.is-drag { opacity: .45; }
+.pk-fstrip .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: -2px; background: rgba(201, 162, 92, .14); }
+.pk-fstrip--ed .pg-box.is-sel > .pg-face > .pg-nm { cursor: text; }   /* اسمُ المختار يُنقر فيُسمّى */

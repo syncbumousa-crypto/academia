@@ -8985,11 +8985,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وخارج المختبر يبقى كلُّ شيءٍ كما شُحن: ‎pgFolds‎ بلا الفارغة ولا تحرير */
   const pkLab = () => cmCode === 'MATH 105';
   let pkFocusNew = null;   // مجلدٌ أُضيف للتوّ — يُركَّز حقلُ اسمه ويُحدَّد نصُّه بعد الرسم
+  /* المجلدُ الذي يُسمّى الآن — وحده وجهُه حقل. فالمختارُ نصٌّ يُسحب كإخوته، ونقرُ اسمه
+     (وهو مختار) يفتح الحقل: المتصفّحُ لا يبدأ سحبًا من حقل كتابة، فلو كان المختارُ حقلًا
+     دائمًا لَما أُمسك أبدًا */
+  let pkNaming = null;
   const pkKidsAll = f => (f.ch || []).filter(x => x.t === 'f')
     .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', kids: pkKidsAll(x) }));
-  function pgFoldsAll(deck) {
+  function pgFoldsAll(deck, ed) {
     const out = [];
-    if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
+    /* و«الجذر» مَهبطٌ في التحرير متى كان مجلدٌ في جوف آخر — وإلّا لم يبقَ ما يُفلَت عليه
+       مجلدٌ يُراد إخراجُه إلى الطبقة العليا */
+    const nested = (deck || []).some(n => n.t === 'f' && (n.ch || []).some(x => x.t === 'f'));
+    if ((deck || []).some(n => n.t !== 'f') || (ed && nested)) out.push({ id: '', name: T().shRoot, kids: [] });
     (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', kids: pkKidsAll(f) }));
     return out;
   }
@@ -9000,11 +9007,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const openId = open.get(parentKey);
     return '<div class="pg-row">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
-      const face = isSel && k.id !== ''
+      const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
         : '<span class="pg-nm">' + esc(k.name) + '</span>';
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '">'
-        + '<div class="pg-face" role="button" tabindex="0" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
+        + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' draggable="true"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
         + (has ? '<div class="pg-in">' + pkBoxEdHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
@@ -9012,7 +9019,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkAltView(id, deck, editable) {
     const lab = pkLab(), ed = lab && editable;
-    const folds = lab ? pgFoldsAll(deck) : pgFolds(deck), v = pkVwOf(id);
+    const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -20307,6 +20314,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return;
     }
     if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
+    /* نقرُ اسمِ المختار في المختبر: يُفتح حقلُ تسميته (والجذرُ لا يُسمّى) */
+    const nm = e.target.closest('#cm-body .pk-fstrip--ed .pg-box.is-sel > .pg-face > .pg-nm');
+    if (nm) {
+      const f = nm.parentElement.dataset.pkf;
+      if (f !== '') { e.preventDefault(); e.stopPropagation(); pkNaming = f; pkFocusNew = f; renderCmSection(); return; }
+    }
     const pf = e.target.closest('#cm-body .pk-fstrip [data-pkf]');
     if (pf) {
       /* مربّعٌ في الشريط: يُختار — وإن كان له بنون فُتح جوفُه في صفّه (وأُغلق أخوه)،
@@ -20361,6 +20374,64 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ph = document.querySelector('#cm-body .pk-vwph span');
     if (ph) ph.textContent = fi.value || T().pkTitlePh;
   });
+  /* ===== نقلُ مجلدٍ إلى جوف آخر بالسحب (مختبر «رياضيات 105») =====
+     يُمسك المربّعُ ويُفلت على مربّعٍ آخر فيصير المجلدُ **ابنًا** له (آخرَ بنيه)، ويُفلت على
+     «الجذر» فيعود إلى الطبقة العليا. ولا يُفلت مجلدٌ في نفسه ولا في أحد أحفاده — ذاك
+     حلقةٌ تُسقط الشجرةَ كلَّها. وبعد النقل يُفتح مسارُ الهدف في الشريط ويُختار المنقول،
+     فيُرى حيث نزل */
+  let pkDrag = null;
+  const pkDropOk = (dragId, targetId) => {
+    if (!dragId || dragId === targetId) return false;
+    const deck = edPack().deck, hit = findNode(deck, dragId);
+    if (!hit) return false;
+    if (targetId === '') return hit.arr !== deck;                 /* إلى الجذر: إلّا إن كان فيه */
+    return !findNode(hit.n.ch, targetId);                          /* لا في أحد أحفاده */
+  };
+  const pkDropClear = () => document.querySelectorAll('#cm-body .pk-fstrip .is-drop, #cm-body .pk-fstrip .is-drag')
+    .forEach(x => x.classList.remove('is-drop', 'is-drag'));
+  document.addEventListener('dragstart', e => {
+    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[draggable="true"]');
+    if (!f) return;
+    pkDrag = f.dataset.pkf;
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', pkDrag); } catch (err) { /* بعض المتصفّحات */ }
+    f.closest('.pg-box').classList.add('is-drag');
+  });
+  document.addEventListener('dragover', e => {
+    if (pkDrag == null) return;
+    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
+    document.querySelectorAll('#cm-body .pk-fstrip .is-drop').forEach(x => { if (!f || x !== f.closest('.pg-box')) x.classList.remove('is-drop'); });
+    if (!f || !pkDropOk(pkDrag, f.dataset.pkf)) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    f.closest('.pg-box').classList.add('is-drop');
+  });
+  document.addEventListener('drop', e => {
+    if (pkDrag == null) return;
+    const f = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[data-pkf]');
+    const dragId = pkDrag; pkDrag = null; pkDropClear();
+    if (!f || !pkDropOk(dragId, f.dataset.pkf)) return;
+    e.preventDefault();
+    const deck = edPack().deck, hit = findNode(deck, dragId), to = f.dataset.pkf;
+    hit.arr.splice(hit.i, 1);
+    if (to === '') deck.push(hit.n);
+    else { const t = findNode(deck, to); (t.n.ch = t.n.ch || []).push(hit.n); t.n.open = true; }
+    save();
+    const id = f.closest('.pk-fstrip').dataset.pkid;
+    const open = pkFo[id] || (pkFo[id] = new Map());
+    if (to !== '') {
+      const trail = (cxTrail(deck, to) || []).concat([to]);
+      trail.forEach((fid, k) => open.set(k ? trail[k - 1] : PG_TOP, fid));
+    }
+    pkFs[id] = dragId;
+    renderCmSection();
+  });
+  document.addEventListener('dragend', () => { pkDrag = null; pkDropClear(); });
+  /* والحقلُ في مربّعٍ يُسحب: ما دام التركيزُ فيه لا يُسحب المربّع، فيُحدَّد النصُّ بالفأرة */
+  document.addEventListener('focusin', e => {
+    const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
+    if (fi) { const f = fi.closest('.pg-face'); if (f && f.hasAttribute('draggable')) f.setAttribute('draggable', 'false'); }
+  });
   /* ومربّعاتُ المختبر ‎div[role=button]‎ — فتُعطى ما يُعطاه الزرُّ من لوحة المفاتيح */
   document.addEventListener('keydown', e => {
     const fb = e.target.closest && e.target.closest('#cm-body .pk-fstrip--ed .pg-face[role="button"]');
@@ -20376,7 +20447,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('focusout', e => {
     if (!(e.target.closest && e.target.closest('#cm-body .pk-fnm'))) return;
     /* بعد أن يستقرّ التركيزُ حيث ذهب: إن ذهب إلى حقلٍ آخرَ في الشريط فلا رسم يسرقه */
-    setTimeout(() => { if (!document.activeElement || !document.activeElement.closest('#cm-body .pk-fnm')) renderCmSection(); }, 0);
+    setTimeout(() => { if (!document.activeElement || !document.activeElement.closest('#cm-body .pk-fnm')) { pkNaming = null; renderCmSection(); } }, 0);
   });
   const chPickCov = document.createElement('input');
   chPickCov.type = 'file'; chPickCov.accept = 'image/*,application/pdf,.pdf'; chPickCov.hidden = true;
@@ -28180,7 +28251,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const trail = (cxTrail(d.deck, holder.n.id) || []).concat([holder.n.id]);
           trail.forEach((fid, k) => open.set(k ? trail[k - 1] : PG_TOP, fid));
         }
-        pkFocusNew = nn.id;
+        pkFocusNew = nn.id; pkNaming = nn.id;
         renderCmSection();
         return;
       }
