@@ -9283,10 +9283,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         closed: !meta || meta.closed !== false,
         covKey: cv ? pkSrcCovKey(id) : null,
         wide: true,
-        /* عمودُ الغلاف والملفّ يبدأ من أعلى غلاف الكتاب (الغلافُ يفيض ‎11px‎ فوق الورق) */
+        /* عمودُ الغلاف والملفّ في **منتصف** الكتاب عموديًّا (طلبُ صاحب الموقع) — لا أعلاه */
         onLayout: bb => {
           const tl = view.parentElement && view.parentElement.querySelector('.chtools');
-          if (tl) tl.style.paddingTop = Math.max(0, Math.round(bb.el.getBoundingClientRect().top - view.getBoundingClientRect().top - 11)) + 'px';
+          if (!tl) return;
+          const br = bb.el.getBoundingClientRect(), vt = view.getBoundingClientRect().top;
+          const k = tl.children; if (!k.length) return;   /* قامةُ الزرّين لا قامةُ العمود (العمودُ ممدودٌ بطول الصفّ) */
+          const h = k[k.length - 1].getBoundingClientRect().bottom - k[0].getBoundingClientRect().top;
+          tl.style.paddingTop = Math.max(0, Math.round(br.top + br.height / 2 - vt - h / 2)) + 'px';
         },
       });
     });
