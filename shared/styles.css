@@ -1816,7 +1816,7 @@ html[data-lang="en"] .market-course textarea { direction: ltr; }
   padding: 14px 15px;
   background: var(--u-in-bg);
   border: 1px solid var(--u-line);
-  border-radius: 13px;
+  border-radius: 14px;
   /* شريط التمرير: على اليسار مع العربية (حاوية rtl) — وعلى اليمين مع الإنجليزية (مطابقًا لشريط الصفحة) */
   direction: rtl;
   scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent;
@@ -1885,9 +1885,9 @@ html[data-theme="light"]::-webkit-scrollbar-thumb:hover { background: #234a50; }
 .cm-panel .cm-tabs button { border-radius: 8px 8px 0 0; }
 .cm-panel .cm-tabs button.on { position: relative; z-index: 2; margin-bottom: -1px; }
 .cm-panel .cm-tabs button.on::before,
-.cm-panel .cm-tabs button.on::after { content: ''; position: absolute; bottom: 0; width: 10px; height: 10px; background: #e1c172; }
-.cm-panel .cm-tabs button.on::before { right: -10px; background: radial-gradient(circle at top right, transparent 10px, #e1c172 10px); }
-.cm-panel .cm-tabs button.on::after { left: -10px; background: radial-gradient(circle at top left, transparent 10px, #e1c172 10px); }
+.cm-panel .cm-tabs button.on::after { content: ''; position: absolute; bottom: 0; width: 8px; height: 8px; background: #e1c172; }
+.cm-panel .cm-tabs button.on::before { right: -8px; background: radial-gradient(circle at top right, transparent 8px, #e1c172 8px); }   /* الكتفُ بنصف قطر رأس التبويب (‎8‎) */
+.cm-panel .cm-tabs button.on::after { left: -8px; background: radial-gradient(circle at top left, transparent 8px, #e1c172 8px); }
 
 /* رفّ «الموارد»: يضمّ آخر أربعة تبويبات (فهم/ممارسة/شروح/بطائق) على سطحٍ مرفوعٍ بظلّ (بلا عنوان) */
 .cm-panel .cm-tabs .cm-res {
@@ -2667,7 +2667,7 @@ html[data-theme="dark"] .gedit .gbar__rest { color: rgba(255, 255, 255, .6); }
   display: flex; flex-direction: column; align-items: stretch;
   background: var(--u-surf);
   border: 1px solid var(--u-line);
-  border-radius: 12px; padding: 10px 12px;
+  border-radius: 14px; padding: 10px 12px;   /* سُلّمُ الزوايا: ‎8‎ للتبويبات · ‎14‎ للرفّ واللوح والمساهمة */
 }
 .post + .post { margin-top: 8px; }
 /* شريط الهوية أسفل المساهمة — مضغوط الارتفاع */
@@ -16122,7 +16122,7 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
    وانحناؤه انحناؤها من الداخل — فيصيران سطحًا واحدًا */
 #cm-body.is-cxmax { overflow: hidden; display: flex; flex-direction: column; padding: 0; }
 #cm-body.is-cxmax > :not(.pk--max) { display: none !important; }
-#cm-body.is-cxmax > .pk--max { flex: 1 1 auto; min-height: 0; margin: 0; border: 0; border-radius: 12px; padding: 12px 16px; }
+#cm-body.is-cxmax > .pk--max { flex: 1 1 auto; min-height: 0; margin: 0; border: 0; border-radius: 14px; padding: 12px 16px; }
 .pk--max > .post-yt { flex: 1 1 auto; min-height: 0; }
 .pk--max .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
 .pk--max #cm-cards {
