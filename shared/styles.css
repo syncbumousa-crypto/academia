@@ -16288,8 +16288,8 @@ html[data-theme="dark"] .pk-fstrip .pg-box.is-sel > .pg-face { color: #d4b36a; }
 .pk-fnm::placeholder { color: inherit; opacity: .45; font-weight: 400; }
 
 /* السحب: المربّعُ الممسوكُ يخفت، والهدفُ الصالحُ يُطوَّق بذهبٍ متقطّع */
-.pk-fstrip--ed .pg-face[draggable="true"] { cursor: grab; }
-.pk-fstrip--ed .pg-face[draggable="true"]:active { cursor: grabbing; }
+.pk-fstrip--ed .pg-face[data-pkdrag] { cursor: grab; }
+.pk-fstrip--ed .pg-face[data-pkdrag]:active { cursor: grabbing; }
 .pk-fstrip .pg-box.is-drag { opacity: .45; }
 .pk-fstrip .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: -2px; background: rgba(201, 162, 92, .14); }
 .pk-fstrip--ed .pg-box.is-sel > .pg-face > .pg-nm { cursor: text; }   /* اسمُ المختار يُنقر فيُسمّى */
@@ -16317,9 +16317,10 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 }
 .pk-fstrip.pk-lg .pg-row {
   display: flex; align-items: flex-start; gap: 4px; padding: 4px; overflow-x: auto;
-  border-radius: 999px; background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-edge);
+  border-radius: var(--r, 21px); background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-edge);
 }
-.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) { border-radius: 20px; }
+/* الصفُّ الداخليُّ تخطيطٌ لا زجاج: اللوحُ المتّسعُ هو الزجاج، فلا يُرسم حدّان بينهما ٤ */
+.pk-fstrip.pk-lg .pg-in .pg-row { background: transparent; box-shadow: none; }
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
   flex: 0 0 auto; min-width: 0; max-width: 220px; overflow: visible;
@@ -16327,14 +16328,19 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 }
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-box.is-wide {
-  flex: 1 1 auto; max-width: none; min-width: 0; border-radius: 18px;
+  flex: 1 1 auto; max-width: none; min-width: 0; border-radius: calc(var(--r, 21px) - 4px);
   background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-edge);
 }
 .pk-fstrip.pk-lg .pg-face,
 .pk-fstrip.pk-lg .pg-in .pg-face {
   position: relative; align-items: center; gap: 7px; height: 34px; padding: 0 14px; border-radius: 999px;
-  font-size: 13px; font-weight: 700; line-height: 1; color: var(--lgx-ink);
+  font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--lgx-ink);
 }
+/* النصُّ والأيقونةُ فوق القطرة لا تحتها: الزجاجُ يكسر ما وراءه، والحرفُ يبقى حادًّا */
+.pk-fstrip.pk-lg .pg-face > .pg-nm,
+.pk-fstrip.pk-lg .pg-face > .pk-fi,
+.pk-fstrip.pk-lg .pg-face > .pk-fnm { position: relative; z-index: 1; }
+.pk-fstrip.pk-lg .pg-nm { line-height: 1.7; padding-block: 1px; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 10px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: rgba(127, 127, 127, .1); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
@@ -16346,7 +16352,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
 .lgx-drop {
-  position: absolute; inset: -1px -3px; z-index: 2; pointer-events: none; border-radius: 999px;
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: 999px;
   -webkit-backdrop-filter: saturate(1.5);
   backdrop-filter: var(--lgx-f, none) saturate(1.5) brightness(1.03);
   background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(20, 35, 63, .07);
@@ -16362,4 +16368,32 @@ html[data-theme="dark"] .lgx-drop {
 .pk-fstrip.pk-lg .pk-fnm { font-weight: 700; }
 @media (prefers-reduced-transparency: reduce) {
   .lgx-drop { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+/* السحبُ الزجاجيّ: القطرةُ الممسوكة، ولوحُ الاندماج، وانتفاخُ الهدف، وارتجاجُ الابتلاع */
+.lgx-ghost {
+  position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform;
+  display: flex; align-items: center; gap: 7px; padding: 0 14px; box-sizing: border-box; border-radius: 999px;
+  font-family: inherit; font-size: 13px; font-weight: 700; line-height: 1.7; color: #14233f; white-space: nowrap;
+  transform-origin: 50% 50%; overflow: visible;
+}
+.lgx-ghost.is-dark { color: #eef2f3; }
+.lgx-ghost > .lgx-drop { inset: 0; transition: opacity .12s ease; box-shadow: 0 12px 26px -10px rgba(20, 35, 63, .45), 0 0 0 .5px rgba(20, 35, 63, .1); background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .18); }
+.lgx-ghost.is-dark > .lgx-drop { background: var(--lgx-spec, none) 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .06); box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .8), 0 0 0 .5px rgba(255, 255, 255, .14); }
+.lgx-ghost.is-merge > .lgx-drop { opacity: 0; }
+.lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
+.lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
+.lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
+.lgx-ghost > .pg-nm { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.lgx-merge { position: fixed; z-index: 9999; pointer-events: none; display: none; filter: drop-shadow(0 6px 10px rgba(20, 35, 63, .18)); }
+html.lgx-dragging, html.lgx-dragging * { cursor: grabbing !important; user-select: none !important; }
+.pk-fstrip.pk-lg .pg-box.is-drag { opacity: .3; }
+.pk-fstrip.pk-lg .pg-face { transition: transform .22s cubic-bezier(.3, 1.5, .5, 1); }
+.pk-fstrip.pk-lg .pg-face.lgx-near { transform: scale(1.05); }
+.pk-fstrip.pk-lg .pg-face.lgx-gulp { animation: lgx-gulp .62s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes lgx-gulp {
+  0% { transform: scale(1.14, .9); } 30% { transform: scale(.94, 1.06); }
+  55% { transform: scale(1.04, .97); } 100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pk-fstrip.pk-lg .pg-face, .pk-fstrip.pk-lg .pg-face.lgx-gulp { transition: none; animation: none; }
 }
