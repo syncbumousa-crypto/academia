@@ -2170,20 +2170,62 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     colNone.hidden = true;
     colWrap.appendChild(colNone);
     const colRtl = () => getComputedStyle(colBox).direction === 'rtl';
-    /* الشريطُ والطرفان: يُقرآن من موضع التمرير، والعربيُّ يتمرّر بالسالب */
-    function colEdges() {
+    /* الشريطُ والطرفان: يُقرآن من موضع التمرير، والعربيُّ يتمرّر بالسالب.
+       ‏والإبهامُ بالبكسل لا بالنسبة: له أدنى عرضٍ (٣٠ كإبهام الصفحة) فلا يضيع
+       حين يطول الصفّ، فيُحسب مسارُه ممّا بقي بعده */
+    const COL_THUMB_MIN = 30;
+    function colGeo() {
       const max = colBox.scrollWidth - colBox.clientWidth;
+      const track = colBar.clientWidth;
+      const tw = Math.max(COL_THUMB_MIN, track * colBox.clientWidth / (colBox.scrollWidth || 1));
+      return { max, track, tw, travel: Math.max(1, track - tw) };
+    }
+    function colEdges() {
+      const { max, tw, travel } = colGeo();
       const x = Math.abs(colBox.scrollLeft);
       colWrap.classList.toggle('is-start', x < 4);
       colWrap.classList.toggle('is-end', x > max - 4);
       colBar.hidden = max < 4;
-      const vis = colBox.clientWidth / (colBox.scrollWidth || 1);
-      const pos = (max > 0 ? x / max * (1 - vis) * 100 : 0) + '%';
+      const pos = (max > 0 ? x / max * travel : 0) + 'px';
       const bar = colBar.firstChild;
-      bar.style.width = (vis * 100) + '%';
+      bar.style.width = tw + 'px';
       bar.style.right = colRtl() ? pos : '';
       bar.style.left = colRtl() ? '' : pos;
     }
+    /* ===== والإبهامُ يُمسك ويُسحب — كشريط الصفحة =====
+       ‏سحبُ الإبهام يُحرّك الصفَّ بقدر ما يقطعه من مساره، والنقرُ على المسار
+       يقفز بالإبهام إلى موضع النقر. والتمريرُ الناعمُ يُوقف أثناءهما: السحبُ
+       يتبع الإصبعَ لحظةً بلحظة، والناعمُ يجعله يلحق متأخّرًا */
+    const colTo = x => {
+      const { max } = colGeo();
+      x = Math.max(0, Math.min(max, x));
+      colBox.scrollLeft = colRtl() ? -x : x;
+    };
+    colBar.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      const thumb = colBar.firstChild;
+      const { max, tw, travel } = colGeo();
+      const bx = colBar.getBoundingClientRect();
+      /* ‏موضعُ المؤشّر على المسار مقيسًا من البداية: اليمينُ في العربيّ */
+      const along = cx => (colRtl() ? bx.right - cx : cx - bx.left);
+      colBox.style.scrollBehavior = 'auto';
+      colBar.classList.add('is-drag');
+      if (e.target !== thumb) colTo((along(e.clientX) - tw / 2) / travel * max);   /* نقرةٌ على المسار */
+      const x0 = Math.abs(colBox.scrollLeft), p0 = along(e.clientX);
+      colBar.setPointerCapture(e.pointerId);
+      const move = ev => colTo(x0 + (along(ev.clientX) - p0) / travel * max);
+      const up = () => {
+        colBar.removeEventListener('pointermove', move);
+        colBar.removeEventListener('pointerup', up);
+        colBar.removeEventListener('pointercancel', up);
+        colBar.classList.remove('is-drag');
+        colBox.style.scrollBehavior = '';
+      };
+      colBar.addEventListener('pointermove', move);
+      colBar.addEventListener('pointerup', up);
+      colBar.addEventListener('pointercancel', up);
+    });
     function colFilter() {
       const q = colIn.value.trim().toLowerCase();
       let n = 0;
@@ -2208,7 +2250,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       colBox.scrollLeft += colRtl() ? -e.deltaY : e.deltaY;
       e.preventDefault();
     }, { passive: false });
-    if (window.ResizeObserver) new ResizeObserver(colEdges).observe(colBox);
+    /* ‏واللوحُ مخفيٌّ حين يُرسم أوّلَ مرّة: لا مسارَ يُقاس فيُحسب الإبهامُ بأدنى عرضه.
+       فيُعاد حين يتبدّل مقاسُ الصفّ أو مسارِه — ومنه لحظةُ فتح اللوح */
+    if (window.ResizeObserver) { const ro = new ResizeObserver(() => colEdges()); ro.observe(colBox); ro.observe(colBar); }
     let query = '';
     const fHours = new Set();          // فارغة = الكل
     const fCols  = new Set();
@@ -2278,7 +2322,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
 
     el('search').addEventListener('input', e => { query = e.target.value; render(); });
-    el('btn-filter').addEventListener('click', () => { panel.hidden = !panel.hidden; });
+    el('btn-filter').addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) requestAnimationFrame(colEdges);
+    });
     /* ===== والنقرةُ على زرٍّ في اللوح لا تُغلقه =====
        الزرُّ يُعاد رسمُه في مستمعه قبل أن تبلغ النقرةُ هذا المستمع، فيصل الهدفُ
        منفصلًا عن الصفحة — و‎wrap.contains‎ تقول «خارج اللوح»، فيُغلق مع كلّ اختيار.
