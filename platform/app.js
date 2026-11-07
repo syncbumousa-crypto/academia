@@ -18981,7 +18981,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span>
             <!-- وخبرُ المساهمة كلِّها: يسارَ شارات الأنواع، وهو مجموعُ الشجرة -->
             <span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>
-            <!-- وشريطُ طرق العرض في التحرير كذلك، أقصى يسار الرأس (لا سهمَ طيٍّ ههنا يجاوره) -->
+            <!-- وشريطُ طرق العرض في التحرير كذلك، يسارَ أيقونة التعليقات مباشرةً -->
             ${pkViewBar('edit')}
           </div>
           ${cxMax ? cxHdLine() : ''}
