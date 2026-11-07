@@ -9861,7 +9861,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      ${kind === 'c' && open ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض تخصّ الجوف: لا تُعرض والرزمةُ مطويّة -->
+      ${kind === 'c' && open && cxMaxPub === p.id ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
      اسم البطاقة هو وجهها — أي السؤال المكتوب فيها */
@@ -10080,7 +10080,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                ولا تُعار ‎cx-ro‎: تلك تحمل مع الهندسة **حكمَ التحديد** (‎cxSelSync‎ تبحث
                عن ‎.x3.cx-ro‎ لتعرف شجرةَ النشر)، فلو لبستها الشروحُ لَالتبست الشجرتان
                في آلةٍ لا تخصّ الهندسة. فوسمٌ ثالثٌ يحمل الهندسةَ وحدَها -->
-          ${open && kind === 'c' && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
+          ${maxd && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
             : open ? `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>` : ''}
           ${reactRowHTML(p, likeAttr, '')}
         </div>
