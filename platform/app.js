@@ -21676,11 +21676,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             { duration: ms, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }).finished.then(() => w.remove(), () => w.remove());
         });
         if (grow) {
+          /* الجارُ يتّسع فعلًا (طلبُ صاحب الموقع): يبدأ بعرضه القديم ويمتدّ إلى مكان الكتاب — وما فيه (اللوحُ
+             والبطائقُ والجدول) يتّسع معه. والامتدادُ هامشٌ في جهة الكتاب يذوب إلى صفر، فتبقى حافّتُه الأخرى ثابتة */
           const nv = host.querySelector(':scope > .kt-view');
           if (nv) {
-            const n = nv.getBoundingClientRect(), px = v => Math.max(0, Math.round(v)) + 'px';
-            const from = `inset(${px(grow.top - n.top)} ${px(n.right - grow.right)} ${px(n.bottom - grow.bottom)} ${px(grow.left - n.left)} round 14px)`;
-            nv.animate([{ clipPath: from }, { clipPath: 'inset(0 0 0 0 round 14px)' }], { duration: 450, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+            const n = nv.getBoundingClientRect(), en = state.lang === 'en';
+            const d = Math.max(0, Math.round(en ? grow.left - n.left : n.right - grow.right));
+            if (d > 1) nv.animate([{ marginInlineStart: d + 'px' }, { marginInlineStart: '0px' }],
+              { duration: 480, easing: 'cubic-bezier(.2, .8, .2, 1)' });
           }
         }
       };
