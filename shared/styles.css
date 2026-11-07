@@ -16289,6 +16289,20 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--ftanim .pk-pubfoot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .pk--ftanim .pk-pubfoot { transition: none; } }
 
+/* ===== رأسُ المكبَّرة وذيلُها شريطان أغمقُ بدرجة (الاقتراحُ ٣ — اختيارُ صاحب الموقع) =====
+   كأشرطة الأدوات: الرأسُ من حافّة المربّع إلى منتصف مسكته العليا، والذيلُ من منتصف مسكته
+   السفلى إلى الحافّة، وبين كلٍّ والجوفِ خطٌّ شعريّ. والشريطُ ظهرُ المسكة نفسِها (‎::before‎)
+   ممدودًا خلف الرأس أو تحت الذيل — فيتبعها بلا قياس حين يُرفع الرأسُ أو يُطوى الذيل،
+   والمربّعُ يقصّ ما فاض (‎overflow: hidden‎). و‎isolation‎ تُبقي ‎z-index: -1‎ فوق أرضيّته */
+.pk--max { isolation: isolate; --pk-band: color-mix(in srgb, #14233f 5%, var(--u-surf)); }
+html[data-theme="dark"] .pk--max { --pk-band: color-mix(in srgb, #000 22%, var(--u-surf)); }
+.pk--max .pk-hdline::before {
+  content: ''; position: absolute; z-index: -1; inset-inline: -100vmax; pointer-events: none;
+  background: var(--pk-band);
+}
+.pk--max .pk-hdline:not(.pk-ftline)::before { bottom: 50%; height: 100vmax; border-bottom: 1px solid var(--u-line); }
+.pk--max .pk-ftline::before { top: 50%; height: 100vmax; border-top: 1px solid var(--u-line); }
+
 /* ===== المقابضُ بلا خطّ (طلبُ صاحب الموقع) =====
    القوسُ في الزاوية (الكبيرُ والصغير) وخطّا الرأس والقاع: يُنزع الخطُّ الذهبيُّ منها كلِّها،
    ويبقى الجزءُ الذي فوقه — المسكةُ بنقاطها الثلاث — وحدَه. ومسكةُ القوس كانت شريطًا رفيعًا
