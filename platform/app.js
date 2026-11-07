@@ -9135,86 +9135,119 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (ed && v === 'table' ? ktViewHTML(id, sel)
+      + (ed && v !== 'folder' ? ktViewHTML(id, sel, v, folds)
         : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
   }
-  /* ===== جداولُ «المعرفة» — العرضُ الجدوليّ في تحرير المختبر =====
-     تحت الشريط مستطيلٌ «+ معرفة»: نقرُه يضيف للمجلد المختار جدولًا من صفّين وأربعة أعمدة (رأسٌ: # ·
-     المصطلح · معناه · وخانةُ علامة؛ وصفّ: الرقم · المصطلح · مربّعُ المعنى · علامةُ ✓). وكلُّ خانةٍ نصٌّ
-     يُحرَّر في مكانه (‎contenteditable="plaintext-only"‎ فلا تدخله تنسيقات)، ويُحفظ مع الكتابة دون إعادة
-     رسمٍ تسرق المؤشّر. والجداولُ في عقدة المجلد (‎n.kt‎)، وجداولُ «الجذر» في الرزمة نفسِها */
-  /* والجدولُ الجديدُ بلغة الموقع: عربيٌّ يبدأ من اليمين، وإنجليزيٌّ من اليسار */
-  const KT_NEW = () => ({ id: 'kt' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), rows: [T().ktHead.slice(), T().ktRow.slice()] });
-  const ktHost = sel => { const pk = edPack(); if (!pk) return null; if (sel === '') return pk; const h = findNode(pk.deck, sel); return h ? h.n : null; };
-  /* الخانةُ نفسُها هي الحقل (لا مربّعٌ داخل مربّع): ‎th/td‎ تُحرَّر كلُّها، فيُنقر في أيّ موضعٍ منها */
-  /* لا ‎dir=auto‎ على الخانة: اتّجاهُها اتّجاهُ الجدول (فتستقيم حدودُها وانحناءاتُها المنطقيّة)، ونصُّها
-     يأخذ اتّجاهَه بـ‎unicode-bidi: plaintext‎ */
-  const ktEd = (r, c) => ` contenteditable="plaintext-only" spellcheck="false" data-ktr="${r}" data-ktc="${c}"`;
-  const ktOk = (on, r) => `<button type="button" class="kt-ok${on ? ' on' : ''}" data-ktok data-ktr="${r}" aria-pressed="${on}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
-  function ktViewHTML(id, sel) {
-    const host = ktHost(sel), tabs = (host && host.kt) || [];
-    const t = tabs.map(tb => {
-      const h = tb.rows[0];
-      /* اتّجاهُ الجدول اتّجاهُ الموقع (بالعربيّة من اليمين — بحكم صاحب الموقع)، وكلُّ خانةٍ نصُّها باتّجاهه */
-      return `<table class="kt" data-kt="${esc(tb.id)}"><thead><tr>`
-        + h.map((x, c) => `<th class="kt-c${c} kt-t"${ktEd(0, c)}>${esc(x || '')}</th>`).join('')
-        + `</tr></thead><tbody>`
-        /* صفوفُ البيانات كلُّها (الأوّلُ رأس) — كلُّ صفٍّ شريطٌ منفصل */
-        + tb.rows.slice(1).map((r, k) => { const i = k + 1; return `<tr>`
-          + `<td class="kt-c0"><span class="kt-t kt-num"${ktEd(i, 0)}>${esc(r[0] || '')}</span></td>`
-          + `<td class="kt-c1 kt-t kt-term"${ktEd(i, 1)}>${esc(r[1] || '')}</td>`
-          + `<td class="kt-c2 kt-t kt-mean"${ktEd(i, 2)}>${esc(r[2] || '')}</td>`
-          + `<td class="kt-c3">${ktOk(!!(r[3] || '').trim(), i)}</td>`
-          + `</tr>`; }).join('')
-        + `</tbody></table>`;
-    }).join('');
-    return `<div class="kt-view" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${t}`
-      + `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button></div>`;
+  /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
+     كلُّ صفٍّ في الجدول **بطاقةٌ حقيقيّة** في المجلد المختار (‎{t:'c', f, b}‎): المصطلحُ وجهُها والمعنى
+     ظهرُها، وعلامةُ ✓ حقلٌ فيها (‎ok‎). فالجدوليُّ والبطاقيُّ والشجريُّ ثلاثُ نظراتٍ إلى البطائق نفسِها —
+     ما يُضاف أو يُكتب في أحدها يظهر في الآخرَين وفي العرض المجلّديّ، لا نسخٌ منفصلة.
+       · الجدوليّ: ترويسةٌ واحدةٌ للمجلد (‎kth‎ في عقدته) وتحتها صفٌّ لكلّ بطاقة.
+       · البطاقيّ: بطاقةٌ لكلّ صفّ — وجهُها في أعلاها وظهرُها تحت خطّ.
+       · الشجريّ: المجلدُ أصلٌ، ولكلّ بطاقةٍ مربّعٌ فيه وجهُها وظهرُها معًا، موصولٌ بفرع.
+     و«+ معرفة» في كلٍّ منها يضيف بطاقةً (صفًّا). وكلُّ نصٍّ يُحرَّر في مكانه (‎plaintext-only‎) ويُحفظ مع
+     الكتابة دون إعادة رسمٍ تسرق المؤشّر. والجداولُ المنفصلةُ القديمة (‎kt‎) تُنقل إلى بطائق مرّةً واحدة */
+  const ktHost = sel => {
+    const pk = edPack(); if (!pk) return null;
+    if (sel === '') return { holder: pk, arr: pk.deck || (pk.deck = []) };
+    const h = findNode(pk.deck, sel); if (!h) return null;
+    return { holder: h.n, arr: h.n.ch || (h.n.ch = []) };
+  };
+  function ktMigrate(host) {
+    const H = host.holder;
+    if (!Array.isArray(H.kt) || !H.kt.length) { if (H.kt) delete H.kt; return; }
+    H.kt.forEach(tb => {
+      if (!H.kth && tb.rows && tb.rows[0]) H.kth = tb.rows[0].slice();
+      (tb.rows || []).slice(1).forEach(r => host.arr.push({ id: newId(), t: 'c', f: r[1] || '', b: r[2] || '', ok: !!(r[3] || '').trim() }));
+    });
+    delete H.kt; save();
   }
+  const ktCards = host => host.arr.filter(n => n.t === 'c');
+  const ktEd = (cid, fld, cls) => ` class="${cls}" contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`;
+  const ktOk = n => `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
+  function ktViewHTML(id, sel, v, folds) {
+    const host = ktHost(sel);
+    if (!host) return '';
+    ktMigrate(host);
+    const cards = ktCards(host);
+    let body = '';
+    if (v === 'table') {
+      const h = host.holder.kth || T().ktHead;
+      body = !cards.length ? '' : `<table class="kt"><thead><tr>`
+        + h.map((x, c) => `<th class="kt-c${c} kt-t" contenteditable="plaintext-only" spellcheck="false" data-kth="${c}">${esc(x || '')}</th>`).join('')
+        + `</tr></thead><tbody>`
+        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num">${k + 1}</span></td>`
+          + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
+          + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
+          + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
+        + `</tbody></table>`;
+    } else if (v === 'cards') {
+      body = !cards.length ? '' : `<div class="kc-grid">` + cards.map(n => `<article class="kc${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
+        + `<div class="kc-top">${ktOk(n)}</div>`
+        + `<div${ktEd(n.id, 'f', 'kt-t kc-f')}>${esc(n.f || '')}</div>`
+        + `<div${ktEd(n.id, 'b', 'kt-t kc-b')}>${esc(n.b || '')}</div>`
+        + `</article>`).join('') + `</div>`;
+    } else {
+      const name = sel === '' ? T().shRoot : pkFoldName(folds, sel);
+      const col = sel === '' ? '' : (folderColor(host.holder) || '');
+      body = `<div class="ktr"><div class="ktr-root">${pkFi(col)}<span>${esc(name)}</span></div>`
+        + (cards.length ? `<ul class="ktr-list">` + cards.map(n => `<li class="ktr-li"><div class="ktr-box${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
+          + `<div${ktEd(n.id, 'f', 'kt-t ktr-f')}>${esc(n.f || '')}</div>`
+          + `<div${ktEd(n.id, 'b', 'kt-t ktr-b')}>${esc(n.b || '')}</div>`
+          + `</div></li>`).join('') + `</ul>` : '')
+        + `</div>`;
+    }
+    return `<div class="kt-view kt-view--${v}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${ktAddBtn()}</div>`;
+  }
+  const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
+  /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body .kt-view [data-ktadd]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    const v = b.closest('.kt-view'), host = ktHost(v.dataset.ktf);
+    const host = ktHost(b.closest('.kt-view').dataset.ktf);
     if (!host) return;
-    (host.kt = host.kt || []).push(KT_NEW());
+    const nn = { id: newId(), t: 'c', f: '', b: '' };
+    host.arr.push(nn);
     save(); renderCmSection();
-    /* يُركَّز المصطلحُ في الجدول الجديد ويُحدَّد نصُّه — يُكتب فوقه مباشرة */
     requestAnimationFrame(() => {
-      const ts = document.querySelectorAll('#cm-body .kt-view .kt'), last = ts[ts.length - 1];
-      const term = last && last.querySelector('.kt-term');
-      if (term) { term.focus(); const r = document.createRange(); r.selectNodeContents(term); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      const f = document.querySelector('#cm-body .kt-view [data-kc="' + CSS.escape(nn.id) + '"][data-kfld="f"]');
+      if (f) f.focus();
     });
   }, true);
-  /* علامةُ ✓ مفتاح: نقرُها يضعها، ونقرُها ثانيةً يرفعها — وتُحفظ في مكانها بلا إعادة رسم */
+  /* علامةُ ✓ مفتاح: نقرُها يضعها ونقرُها ثانيةً يرفعها — وتُحفظ في البطاقة بلا إعادة رسم */
   document.addEventListener('click', e => {
-    const k = e.target.closest && e.target.closest('#cm-body .kt-view [data-ktok]');
+    const k = e.target.closest && e.target.closest('#cm-body .kt-view [data-kok]');
     if (!k) return;
     e.preventDefault(); e.stopPropagation();
-    const v = k.closest('.kt-view'), host = ktHost(v.dataset.ktf), tid = k.closest('.kt').dataset.kt;
-    const tb = host && (host.kt || []).find(x => x.id === tid);
-    if (!tb) return;
-    const ri = +k.dataset.ktr || 1, on = !(tb.rows[ri][3] || '').trim();
-    tb.rows[ri][3] = on ? '✓' : '';
-    k.classList.toggle('on', on); k.setAttribute('aria-pressed', String(on));
+    const n = ktCardOf(k, k.dataset.kok);
+    if (!n) return;
+    n.ok = !n.ok;
+    k.classList.toggle('on', n.ok); k.setAttribute('aria-pressed', String(n.ok));
+    const holder = k.closest('[data-kcard]'); if (holder) holder.classList.toggle('is-ok', n.ok);
     save();
   }, true);
   let ktSaveT = 0;
   document.addEventListener('input', e => {
     const c = e.target.closest && e.target.closest('#cm-body .kt-view .kt-t');
     if (!c) return;
-    const v = c.closest('.kt-view'), host = ktHost(v.dataset.ktf), tid = c.closest('.kt').dataset.kt;
-    const tb = host && (host.kt || []).find(x => x.id === tid);
-    if (!tb) return;
-    tb.rows[+c.dataset.ktr][+c.dataset.ktc] = c.textContent;
+    if (c.dataset.kth != null) {
+      const host = ktHost(c.closest('.kt-view').dataset.ktf); if (!host) return;
+      const h = host.holder.kth || (host.holder.kth = T().ktHead.slice());
+      h[+c.dataset.kth] = c.textContent;
+    } else {
+      const n = ktCardOf(c, c.dataset.kc); if (!n) return;
+      n[c.dataset.kfld === 'b' ? 'b' : 'f'] = c.textContent;
+    }
     clearTimeout(ktSaveT); ktSaveT = setTimeout(save, 300);
   });
-  /* ‎Enter‎ في خانةٍ قصيرة لا يكسر سطرًا بل يُنهي التحرير؛ وفي مربّع المعنى يكسر السطر كعادته */
+  /* ‎Enter‎ في الوجه أو الترويسة يُنهي التحرير؛ وفي الظهر (المعنى) يكسر السطر كعادته */
   document.addEventListener('keydown', e => {
     const c = e.target.closest && e.target.closest('#cm-body .kt-view .kt-t');
     if (!c) return;
     if (e.key === 'Escape') { e.stopPropagation(); c.blur(); return; }
-    if (e.key === 'Enter' && !e.shiftKey && !c.classList.contains('kt-mean')) { e.preventDefault(); c.blur(); }
+    if (e.key === 'Enter' && !e.shiftKey && c.dataset.kfld !== 'b') { e.preventDefault(); c.blur(); }
   }, true);
   const x3PkHead = (p, deck, open, kind) => `<div class="x3-pkhd${open ? ' on' : ''}">
       ${kind === 'c' && cxRoPub && cxMaxPub !== p.id
