@@ -16845,6 +16845,17 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 /* والكتابُ في القسمة في وسط جانبه — لا مُلصقًا بطرفه */
 .pk-split .pk-src--book .cbk-stage { justify-items: center; padding-inline: 6px; }
 .pk-split .pk-src--book .cbk-nav { margin-inline: auto; }
+/* ===== ROADMAP-SPLIT · المرحلة ١: القسمةُ تسع ما أُعطيت =====
+   كانت القاماتُ الدنيا (‎.pk-src‎ ‎340‎ لزرَّي الرفع · اللوحُ ‎280‎) تدفع الجانبين خارجَ القسمة فيركبان الذيل
+   في الشاشات القصيرة. فداخلَ القسمة: لا قامةَ دنيا، والجانبان صندوقان متساويان يبدآن وينتهيان معًا،
+   والكتابُ يُحسب من قامة جانبه بعد اقتطاع أزراره (‎bkLayout‎) — فيصغُر ولا يفيض */
+.pk-split > .pk-src, .pk-split > .kt-view { margin: 0 !important; }
+.pk-split > .pk-src { min-height: 0; padding: 0; }
+.pk-split .pk-src--book { padding: 0; align-items: stretch; }
+.pk-split .pk-src--book > .pk-src__view { min-height: 0; }
+.pk--max .pk-split { min-height: 0; }
+.pk--max .pk-split > .kt-view--tree .kcv { min-height: 0; }
+.pk--max .pk-split .kt-view--tree > .kt-add { flex: none; }
 /* اللوحُ يظهر من جهته (اليسار) وهو يتّضح، والكتابُ ينتقل إليه انتقالًا (‎FLIP‎ في ‎bkFlipFrom‎) */
 .pk-split.is-in > .kt-view { animation: pkSplitIn .5s cubic-bezier(.2, .8, .2, 1) both; }
 @keyframes pkSplitIn { from { opacity: 0; transform: translateX(-28px); } }

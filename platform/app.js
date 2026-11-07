@@ -21103,6 +21103,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const W = W0, H = H0;
     if (W <= 0 || H <= 0) return;
     b.single = W0 < (inSplit ? 240 : b.wide ? 360 : 620);   /* وكتابُ «المصدر» يبقى صفحتين ولو في نصف المساهمة (القسمة) — لا ينفرد إلّا حين يضيق جدًّا */
+    /* وفي القسمة: إن كانت الصفحتان ستصغُران دون قامةٍ تُقرأ (‎200px‎) والصفحةُ الواحدةُ أكبرُ منهما بيّنًا،
+       فصفحةٌ واحدةٌ أوّلًا قبل أن يصغُر الكتابُ أكثر (قرارُ الخارطة ٢) */
+    if (inSplit && !b.single) {
+      const ph2 = Math.min(H, W / (2 * b.ar)), ph1 = Math.min(H, W / b.ar);
+      if (ph2 < 200 && ph1 > ph2 * 1.25) b.single = true;
+    }
     const cols = b.single ? 1 : 2;
     let ph = H, pw = ph * b.ar;
     if (pw * cols > W) { pw = W / cols; ph = pw / b.ar; }
