@@ -14,11 +14,18 @@ r"""
 والاختيارُ يدويٌّ في ‎PICK‎: ما فيه خبرةٌ أو معلومة. والأسئلةُ بلا جواب، والمكرَّر،
 والروابطُ الميّتة (mediafire)، والشتائمُ — لا تُنقل.
 """
-import io, os, re, sys, json, base64, html as H
+import io, os, re, sys, json, base64, hashlib, html as H
 from datetime import datetime
 
 BASE = 'https://community.stkfupm.com'
 ROOT = os.path.dirname(os.path.abspath(__file__))
+MEDIA_URL = 'https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/'
+INLINE_MAX = 200 * 1024          # ما دونه يسكن المتنَ ‎data:‎، وما فوقه جدولَ الوسائط
+MIME = {'.pdf': 'application/pdf', '.doc': 'application/msword', '.ppt': 'application/vnd.ms-powerpoint',
+        '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif',
+        '.zip': 'application/zip', '.rar': 'application/vnd.rar'}
 OUT  = os.path.join(ROOT, 'out')
 
 # code ⇐ [(topic id, post_number, book?)]
@@ -39,6 +46,16 @@ PICK = {
     (50950,  2,  '', (r'^acct202', 1)),                       # 2006: سطرُ 202 من ردٍّ عن أربع مواد
     (88402,  10, '', (r'^Acct 202', 2)),                      # 2010: سطرا 202 من ردٍّ عن أربع مواد
   ],
+  # ‏‎IAS 111‎ «الإيمان» — اسمُها لم يتغيّر (و‎IAS 101‎ مادّةُ العربي، غيرُها)
+  'IAS 111': [
+    (120491, 2,  '', None), (120491, 3,  '', None), (120491, 5,  '', None),   # موضوعُ تقييم المقرّر
+    (120491, 7,  '', None), (120491, 8,  '', None), (120491, 10, '', None),
+    (120491, 11, '', None), (120491, 12, '', None), (120491, 13, '', None),
+    (104452, 3,  '', None),                                   # Euler (2011): طريقةُ الأسئلة
+    (104452, 4,  '', None),                                   # The_Marvel (2011): «يسألون أحيانا عكس»
+    (172733, 1,  '', None),                                   # Rygart (2016): صارت ميدترم وفاينل من 151
+    (115213, 8,  '', None),                                   # Brain_Man (2011): الـ A+ من 95
+  ],
 }
 
 # ===== المصادر =====
@@ -55,6 +72,42 @@ PICK_SRC = {
     ('srcP', 172455, 2,  []),    # Practice (2016): مسائل السيلابس واختياراتُ آخر الشابتر
     ('srcP', 89593,  3,  [('final acc.pdf', 'stkfupm-89593-final acc.pdf', r'^final acc\.pdf')]),  # صفحةُ فاينل 202 (2010)
   ],
+  'IAS 111': [
+    ('srcU', 113042, 1,  [('ias111.doc', 'stkfupm-113042-ias111.doc', r'^ias111\.doc')]),  # سيلابس 121: الوصف والدرجات والمفردات بالصفحات
+    ('srcU', 136894, 7,  [('IAS 111.png', 'stkfupm-136894-IAS 111.png', r'^IAS 111\.png')]),  # جدولُ الماتيريال (2012)
+    ('srcU', 173230, 5,  [('image.jpg', 'stkfupm-173230-image.jpg', r'^image\.jpg')]),        # جدولُ الماتيريال (2016)
+    ('srcU', 96870,  2,  []),    # user3794 (2010): ذاكر من الكتاب، وفيه من بين السطور
+    ('srcU', 159664, 3,  []),    # user9202 (2014): اقرأ وكأنك تستفيد، ثمّ الأولد اقزامز
+    ('srcU', 165971, 3,  []),    # user10175 (2014): الكتاب ثمّ الأولد اقزام والتأكّد من الكتاب
+    ('srcU', 165971, 4,  []),    # abo_yazeed6 (2014): الكتاب ثمّ الأولد اقزامز
+    ('srcP', 100900, 6,  [('ias 111 072 first exam.pdf', 'stkfupm-100900-ias 111 072 first exam.pdf', r'^ias 111 072 first exam\.pdf'),
+                          ('ias 111 072 second exam.pdf', 'stkfupm-100900-ias 111 072 second exam.pdf', r'^ias 111 072 second exam\.pdf')]),
+    ('srcP', 104646, 8,  []),    # user6605 (2011): الفاينل جاء من أولد 072 بنصّه
+    ('srcP', 132383, 2,  []),    # KeMoOo (2012): old exams + read the book
+    ('srcP', 156412, 5,  []),    # Medoalkebsi (2014): احفظ الأولد اقزامز
+  ],
+}
+
+# ===== توزيعُ الدرجات و«المواضيع» =====
+# بندان بياناتُهما أرقامٌ وقوائمُ لا نصّ، فتُنقل كما ذكرها كاتبُها بألفاظه — لا تُستنتج.
+# ‏‎grade‎: ‎[(اسمُ البند, النسبة)]‎ · ‏‎lessons‎: ‎[اسمُ الموضوع]‎ أو ‎(نمطُ أوّلِ سطر, عددُ الأسطر)‎ من نصّه
+PICK_DATA = {
+  'IAS 111': [
+    ('grade',   113042, 1,   [('الامتحان الأول', 20), ('الامتحان الثاني', 25), ('الامتحان النهائي', 35),
+                              ('الأعمال الفصلية', 20)]),                     # سيلابس 121 (ملفُّه في مصادر الفهم)
+    ('grade',   68638,  108, [('ميدتيرم', 30), ('فاينال', 40), ('بيد الدكتور', 30)]),   # fay16 (151)
+    ('lessons', 100900, 2,   (r'^دلائل وجود الله', 12)),                     # AlRoosi (2011): المواضيع بصفحاتها
+    ('lessons', 113042, 1,   ['مقدمة حول أهمية المقرر وأهداف تدريسها',
+                              'أركان الإيمان: الإيمان بالله - أدلة وجود الله: دليل الفطرة، دليل الهداية، دليل الإتقان، دليل البحث العلمي 15-34',
+                              'منهج القرآن في إثبات حقيقة وجود الله - فضائل التوحيد وأهميته 35-46',
+                              'أنواع التوحيد ونواقضه 47-68',
+                              'الإيمان بالملائكة عليهم السلام 70-78',
+                              'الإيمان بالكتب السماوية 80-98',
+                              'الإيمان بالرسل 100-122',
+                              'الإيمان باليوم الآخر 125-138',
+                              'الإيمان بقضاء الله وقدره 140-162',
+                              'ثمرات الإيمان الاجتماعية: الإيمان وحماية الأمن والأوطان، الإيمان والوقاية من الخمور والمخدرات 301-353']),
+  ],
 }
 
 # ===== الدكاترة =====
@@ -68,6 +121,15 @@ DOCTORS = {
   'stk-dr-alhazmi':  'Dr. Muhammad Alhazmi',
   'stk-dr-nainar':   'Dr. S M Khalid Nainar',
   'stk-dr-kurdi':    'Dr. Ammr Kurdi',
+  # ‏‎IAS 111‎ — بأسماء قائمة المادّة العربيّة (‎د. …‎)
+  'stk-dr-abusaqr':  'د. عبدالعزيز أبو صقر',
+  'stk-dr-abri':     'د. خالد العبري',
+  'stk-dr-suliman':  'أ. خالد آل سليمان',
+  'stk-dr-hawsawi':  'د. عبدالرحمن هوساوي',
+  'stk-dr-qahtani':  'د. سعيد القحطاني',
+  'stk-dr-dakheel':  'د. سلمان الدخيل',
+  'stk-dr-shalhoub': 'د. صلاح الشلهوب',
+  'stk-dr-sulami':   'د. موسى السلمي',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
@@ -93,6 +155,24 @@ PICK_DOC = {
     (98443, 10, 'stk-dr-madani'),
     (99892, 10, 'stk-dr-kurdi'), (99531, 3, 'stk-dr-kurdi'),
   ],
+  'IAS 111': [
+    # abusaqr
+    (34805, 20, 'stk-dr-abusaqr'), (68638, 3, 'stk-dr-abusaqr'), (68638, 7, 'stk-dr-abusaqr'), (68638, 11, 'stk-dr-abusaqr'), (68638, 45, 'stk-dr-abusaqr'), (68638, 76, 'stk-dr-abusaqr'), (68638, 78, 'stk-dr-abusaqr'), (68638, 80, 'stk-dr-abusaqr'), (68638, 83, 'stk-dr-abusaqr'), (68638, 90, 'stk-dr-abusaqr'), (68638, 96, 'stk-dr-abusaqr'), (68638, 101, 'stk-dr-abusaqr'), (68638, 102, 'stk-dr-abusaqr'), (68638, 107, 'stk-dr-abusaqr'), (68638, 108, 'stk-dr-abusaqr'), (68638, 110, 'stk-dr-abusaqr'), (68638, 111, 'stk-dr-abusaqr'), (68638, 112, 'stk-dr-abusaqr'),
+    # abri
+    (34805, 33, 'stk-dr-abri'), (34805, 128, 'stk-dr-abri'), (68615, 27, 'stk-dr-abri'), (68615, 28, 'stk-dr-abri'), (68615, 31, 'stk-dr-abri'), (68615, 32, 'stk-dr-abri'), (68615, 33, 'stk-dr-abri'), (68615, 37, 'stk-dr-abri'), (68615, 40, 'stk-dr-abri'), (68615, 41, 'stk-dr-abri'), (68615, 42, 'stk-dr-abri'), (68615, 43, 'stk-dr-abri'), (68615, 44, 'stk-dr-abri'), (68615, 45, 'stk-dr-abri'),
+    # suliman
+    (34805, 167, 'stk-dr-suliman'), (34805, 195, 'stk-dr-suliman'), (68637, 7, 'stk-dr-suliman'), (68637, 48, 'stk-dr-suliman'), (68637, 57, 'stk-dr-suliman'), (96004, 5, 'stk-dr-suliman'), (99182, 2, 'stk-dr-suliman'), (99182, 4, 'stk-dr-suliman'), (99182, 6, 'stk-dr-suliman'), (99182, 8, 'stk-dr-suliman'),
+    # hawsawi
+    (68626, 25, 'stk-dr-hawsawi'), (68626, 35, 'stk-dr-hawsawi'),
+    # qahtani
+    (68630, 2, 'stk-dr-qahtani'), (68630, 10, 'stk-dr-qahtani'), (68630, 45, 'stk-dr-qahtani'), (68630, 46, 'stk-dr-qahtani'), (68630, 49, 'stk-dr-qahtani'), (68630, 54, 'stk-dr-qahtani'), (68630, 55, 'stk-dr-qahtani'), (68630, 56, 'stk-dr-qahtani'), (68630, 57, 'stk-dr-qahtani'),
+    # dakheel
+    (68634, 5, 'stk-dr-dakheel'), (68634, 10, 'stk-dr-dakheel'),
+    # shalhoub
+    (68635, 3, 'stk-dr-shalhoub'),
+    # sulami
+    (83818, 13, 'stk-dr-sulami'), (83818, 24, 'stk-dr-sulami'), (83818, 29, 'stk-dr-sulami'), (83818, 30, 'stk-dr-sulami'), (83818, 36, 'stk-dr-sulami'), (83818, 37, 'stk-dr-sulami'), (83818, 38, 'stk-dr-sulami'), (83818, 44, 'stk-dr-sulami'), (83818, 46, 'stk-dr-sulami'), (83818, 47, 'stk-dr-sulami'), (83818, 48, 'stk-dr-sulami'), (83818, 49, 'stk-dr-sulami'), (83818, 50, 'stk-dr-sulami'), (83818, 51, 'stk-dr-sulami'), (83818, 52, 'stk-dr-sulami'), (83818, 54, 'stk-dr-sulami'), (83818, 55, 'stk-dr-sulami'), (83818, 57, 'stk-dr-sulami'), (83818, 58, 'stk-dr-sulami'), (83818, 59, 'stk-dr-sulami'), (83818, 60, 'stk-dr-sulami'), (83818, 65, 'stk-dr-sulami'), (83818, 68, 'stk-dr-sulami'), (83818, 69, 'stk-dr-sulami'), (83818, 70, 'stk-dr-sulami'),
+  ],
 }
 
 EMOJI = {'slight_smile': '🙂', 'smile': '😄', 'smiley': '😃', 'grinning': '😀', 'laughing': '😆',
@@ -105,6 +185,7 @@ EMOJI = {'slight_smile': '🙂', 'smile': '😄', 'smiley': '😃', 'grinning': 
          'point_up': '☝️', 'crazy_face': '🤪', 'cowboy_hat_face': '🤠',
          'person_with_crown': '🤴', 'hibiscus': '🌺', 'smiling_face_with_three_hearts': '🥰',
          'astonished': '😲', 'thumbsdown': '👎', '-1': '👎', 'clap': '👏',
+         'boxing_glove': '🥊', 'nerd_face': '🤓',
          'confused-11': '😕'}   # ‏‎confused-11‎ رمزُ منتدى vBulletin القديم، بقي نصًّا في ديسكورس
 
 def emoji_of(tag):
@@ -127,6 +208,7 @@ def text_of(cooked):
     t = re.sub(r'</(p|div|h\d|blockquote)>', '\n\n', t)
     t = re.sub(r'</li>', '\n', t)
     t = re.sub(r'<[^>]+>', '', t)
+    t = re.sub(r'\[attach\][^\[]*\[/attach\]', '', t)      # مرفقُ vBulletin الميّت: وسمٌ لا كلام
     t = H.unescape(t).replace('\u00a0', ' ')
     # ورمزٌ بقي نصًّا (‎:clap:‎) هو وجهٌ لم يُرسم — يُرسم إن عُرف، ويبقى كما هو إن لم يُعرف
     t = re.sub(r':([a-z_+\-0-9]+):', lambda m: EMOJI.get(m.group(1), m.group(0)), t)
@@ -143,8 +225,15 @@ def q(s):
     return "'" + str(s).replace("'", "''") + "'"
 
 def load_post(src, cache, tid, num):
+    """‏‎src‎ مجلّدٌ أو أكثر بينها ‎os.pathsep‎ — يُؤخذ الموضوعُ من أوّل مجلّدٍ فيه."""
     if tid not in cache:
-        cache[tid] = json.load(open(os.path.join(src, '%d.json' % tid), encoding='utf-8'))
+        for d in src.split(os.pathsep):
+            f = os.path.join(d, '%d.json' % tid)
+            if os.path.exists(f):
+                cache[tid] = json.load(open(f, encoding='utf-8'))
+                break
+        else:
+            sys.exit('الموضوع %d ليس في %s' % (tid, src))
     t = cache[tid]
     return t, next(x for x in t['post_stream']['posts'] if x['post_number'] == num)
 
@@ -162,8 +251,8 @@ def imp_of(t, p):
 def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}
-    for code in sorted(set(PICK) | set(PICK_DOC)):
-        users, posts = {}, []
+    for code in sorted(set(PICK) | set(PICK_DOC) | set(PICK_SRC) | set(PICK_DATA)):
+        users, posts, media = {}, [], {}
         # ---- «المادة»: مساهمةٌ لكلّ مشاركة
         for tid, num, book, keep in PICK.get(code, []):
             t, p = load_post(src, cache, tid, num)
@@ -189,8 +278,18 @@ def main(src):
                 if hit:
                     fid = 'stk-f%d-%d' % (p['id'], len(fobj))
                     raw = open(os.path.join(ROOT, 'files', hit[1]), 'rb').read()
-                    mime = 'application/pdf' if hit[0].lower().endswith('.pdf') else 'application/octet-stream'
-                    fobj[fid] = {'name': hit[0], 'v': 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())}
+                    mime = MIME.get(os.path.splitext(hit[0])[1].lower(), 'application/octet-stream')
+                    if len(raw) <= INLINE_MAX:
+                        v = 'data:%s;base64,%s' % (mime, base64.b64encode(raw).decode())
+                    else:
+                        # ===== والكبيرُ إلى جدول الوسائط =====
+                        # متنُ المساهمة يُجذب مع كلّ فتحٍ للمادّة، فملفٌّ بمئات الكيلوهات فيه يُثقل
+                        # على كلّ قارئ. فيُكتب في ‎media‎ بمفتاحه ‎sha256‎ (كما يرفع الموقعُ صورَه)،
+                        # ويحمل المتنُ عنوانَه وحدَه
+                        k = hashlib.sha256(raw).hexdigest()
+                        media[k] = (mime, raw, uid)
+                        v = MEDIA_URL + k
+                    fobj[fid] = {'name': hit[0], 'v': v}
                     html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
                 else:
                     html.append(H.escape(line, quote=False))
@@ -199,6 +298,23 @@ def main(src):
             posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': sec,
                           'ts': imp['ts'], 'st': 'pub',
                           'data': {'html': '<br>'.join(html), 'files': fobj, 'imp': imp}})
+        # ---- «توزيع الدرجات» و«المواضيع»: بيانُ الكاتب بألفاظه
+        for sec, tid, num, spec in PICK_DATA.get(code, []):
+            t, p = load_post(src, cache, tid, num)
+            uid = author(users, p)
+            imp = imp_of(t, p)
+            if sec == 'grade':
+                data = {'method': 'avg', 'items': [{'name': n, 'pct': v} for n, v in spec], 'imp': imp}
+            else:
+                if isinstance(spec, tuple):
+                    ls = text_of(p['cooked']).split('\n')
+                    i = next(k for k, l in enumerate(ls) if re.search(spec[0], l))
+                    names = [l for l in ls[i:i + spec[1]] if l.strip()]
+                else:
+                    names = spec
+                data = {'items': [{'num': '', 'name': n} for n in names], 'imp': imp}
+            posts.append({'id': 'stk-%s-p%d' % (sec, p['id']), 'uid': uid, 'code': code, 'sec': sec,
+                          'ts': imp['ts'], 'st': 'pub', 'data': data})
         # ---- «الدكاترة»: مساهمةٌ واحدةٌ لكلّ كاتب (‎UNIQUE(uid, code, sec)‎)، وصفٌّ لكلّ دكتورٍ قيّمه
         rows = {}
         for tid, num, dr in PICK_DOC.get(code, []):
@@ -229,6 +345,9 @@ def main(src):
         now = int(datetime.now().timestamp())
         L = ['-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · %s · ولَّده _import/stkfupm.py' % code,
              '-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.', 'BEGIN;']
+        for k, (mime, raw, uid) in media.items():
+            L.append("INSERT INTO media (k, mime, size, bytes, uid, ts) VALUES (%s, %s, %d, decode(%s, 'base64'), 'u-academia', %d) "
+                     "ON CONFLICT (k) DO NOTHING;" % (q(k), q(mime), len(raw), q(base64.b64encode(raw).decode()), now))
         for u in users.values():
             L.append("INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) "
                      "VALUES (%s, %s, %s, %s, '', '', 0, 0, %d, %d) "
