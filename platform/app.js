@@ -21618,22 +21618,28 @@ void main() {
     /* والتبويبُ النشطُ يُصالَح: من دخل مادّةَ الشابترات على «المادّة» نُقل إلى أوّل
        شابتر، ومن غادرها على شابترٍ رُدّ إلى «المادّة» — فلا يرث شريطٌ تبويبًا ليس فيه.
        وزرُّ الشابتر بلا ‎.cm-faces‎: لا مساهماتِ له بعد، فلا دوائرَ ولا «+» */
-    const chs = chTabsOf(code);
-    if (chs) {
-      if (!isChTab(cmTabSel) || +cmTabSel.slice(2) > chs.length) cmTabSel = 'ch1';
-      $('#cm-tabs').innerHTML = chs.map((name, i) =>
-        `<button type="button" class="cm-chtab" data-tab="ch${i + 1}" title="${esc(name)}">`
-        + `<span class="cm-chnum">${i + 1}</span>${T().chapter} ${i + 1}<small class="cm-chname">${esc(name)}</small></button>`
-      ).join('');
-      renderCmSection();
-      return;
-    }
-    if (isChTab(cmTabSel)) cmTabSel = 'info';
-    $('#cm-tabs').innerHTML =
+    const secTabs = () =>
       [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].map(cmTab).join('')
       + `<div class="cm-res">`
       + XT_RES().map(cmTab).join('')
       + `</div>`;
+    const chs = chTabsOf(code);
+    if (chs) {
+      /* ===== والأقسامُ تبقى بجانب الشابترات — مؤقّتًا =====
+         كان شريطُ مادّة الشابترات شابتراتِها وحدَها، فما في أقسامها من مساهماتٍ (المادّة
+         والدكاترة والمصادر — ومنها المنقولُ من مجتمع STKFUPM) لا يُرى. فتُلحق الأقسامُ
+         بعد الشابترات حتّى تتّسع الشابتراتُ لها، والتبويبُ المختارُ يبقى ما دام في الشريط:
+         شابترٌ موجود أو قسمٌ من الأقسام */
+      if (isChTab(cmTabSel) ? +cmTabSel.slice(2) > chs.length : !TAB_IC[cmTabSel]) cmTabSel = 'ch1';
+      $('#cm-tabs').innerHTML = chs.map((name, i) =>
+        `<button type="button" class="cm-chtab" data-tab="ch${i + 1}" title="${esc(name)}">`
+        + `<span class="cm-chnum">${i + 1}</span>${T().chapter} ${i + 1}<small class="cm-chname">${esc(name)}</small></button>`
+      ).join('') + `<span class="cm-chsep" aria-hidden="true"></span>` + secTabs();
+      renderCmSection();
+      return;
+    }
+    if (isChTab(cmTabSel)) cmTabSel = 'info';
+    $('#cm-tabs').innerHTML = secTabs();
     renderCmSection();   /* يفتح النافذة على القسم النشط */
   }
 
