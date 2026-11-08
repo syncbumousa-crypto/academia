@@ -17281,3 +17281,43 @@ html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
 .pk--fxrun .pk-split > .pk-splh { opacity: 0 !important; transition: none; }
 /* أدواتُ الذيل القديمةُ تخفت فوق الجديدة وهي تظهر (ROADMAP-PANEFX ق٣) — صورةٌ لا تُنقر */
 .cx-acttools--old { pointer-events: none; }
+
+/* ===== المساهمةُ الجديدة: المساحاتُ الثلاث تنادي صاحبَها (‎.pk-es‎) =====
+   رسمةٌ بخطوطٍ مسطّحة ولمسةٍ ذهبيّة، وعنوانٌ وسطرُ شرحٍ وزرُّ البداية */
+.pk-es { --es-tx: #1f2a2d; --es-mut: #6b777b; --es-ln: #cfd6d8; --es-bg: #fff; --es-g: #b8862b; --es-gb: rgba(184, 134, 43, .08);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; height: 100%; min-height: 380px; padding: 24px 20px; box-sizing: border-box; text-align: center; container-type: inline-size; }
+html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #465255; --es-bg: #2a3234; --es-g: #e1c172; --es-gb: rgba(225, 193, 114, .08); }
+.pk-es__art { width: 190px; height: 120px; margin-bottom: 4px; flex: none; }
+.pk-es--qb .pk-es__art { width: 132px; height: 112px; }
+.pk-es__art svg { width: 100%; height: 100%; display: block; }
+.pk-es .es-f { fill: var(--es-bg); stroke: var(--es-ln); }
+.pk-es .es-fg { fill: var(--es-bg); stroke: var(--es-g); }
+.pk-es .es-gb { fill: var(--es-gb); stroke: var(--es-g); }
+.pk-es .es-l { stroke: var(--es-ln); }
+.pk-es .es-g { stroke: var(--es-g); }
+.pk-es .es-t { fill: var(--es-g); font-family: inherit; }
+.pk-es .es-dot { fill: var(--es-g); }
+.pk-es__t { margin: 0; font-size: 18px; font-weight: 800; color: var(--es-tx); }
+.pk-es__p { margin: 0; max-width: 270px; font-size: 13px; line-height: 1.75; color: var(--es-mut); }
+.pk-es__b { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 10px 20px; border: 0; border-radius: 999px;
+  background: var(--es-g); color: #1d2426; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; transition: transform .15s, filter .15s; }
+.pk-es__b:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.pk-es__b:active { transform: none; }
+.pk-es__b svg { width: 16px; height: 16px; flex: none; }
+@container (max-width: 230px) { .pk-es__art { display: none; } .pk-es__p { font-size: 12px; } }
+/* وعاءُ المصدر الفارغ والوسطُ الفارغ: الرسمةُ في الوسط بلا إطارٍ مرقّط */
+.pk-src.pk-src--es { display: flex; padding: 0; }
+.pk-split__ph--es { display: flex; }
+/* البنك: تُرى ما دام محرّرُه فارغًا */
+.pk-bank > .pk-es { display: none; }
+.pk-bank:not(:has(#cm-cards .x3 > *)) > .pk-es { display: flex; }
+.pk-bank:not(:has(#cm-cards .x3 > *)) > #cm-cards { display: none; }
+/* ومساهمةٌ لم يُكتب فيها شيء: لا عدّاداتِ أصفار في رأسها */
+.pk--edit:has(.pk-split__ph--es) .x3-pkhd :is(.x3-trio, .cs) { display: none; }
+/* وأدواتُ القاع («+» وغيرُه) لا تظهر ما دامت المساحةُ النشِطة فارغةً (طلبُ صاحب الموقع): زرُّ البداية في وسطها يكفي.
+   ‏‎visibility‎ لا ‎display‎: فلا يتبدّل قاعُ البطاقة ولا لسانُها */
+.pk--edit:is(.pk-act--mid, :not([class*="pk-act--"])):has(.pk-split__ph--es) .cx-acttools > *,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards:empty) .cx-acttools > *,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > *,
+.pk--edit.pk-act--book:has(.pk-src--es) .cx-acttools > * { visibility: hidden; pointer-events: none; }
