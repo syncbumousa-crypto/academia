@@ -20330,6 +20330,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function cxPubMaxSet(id) {
     const body = document.getElementById('cm-body');
     if (!body) return;
+    /* ‏ROADMAP-MORPH · المرحلة ٣: المربّعُ نفسُه — القائمةُ تُبنى من جديد (الشجرةُ تُفتح)، لكنّ مربّعَ المساهمة القديمَ
+       يُعاد إلى مكانه ويلبس جوفَ الجديد وأصنافَه، فالعقدةُ التي تكبر وتصغر هي هي (وتتحرّك من مستطيلها · ‎cxMorph‎) */
+    const key = id || cxMaxPub, old = key && body.querySelector(`.post[data-ck="${CSS.escape(key)}"]`);
     if (id) {
       cxMaxY = body.scrollTop;
       cxMaxPub = id;
@@ -20337,6 +20340,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     } else { cxMaxPub = null; cxHdUp = false; cxFtDn = false; cxFull = false; }
     renderCmSection();
     const b2 = document.getElementById('cm-body');
+    const nw = old && b2 && b2.querySelector(`.post[data-ck="${CSS.escape(key)}"]`);
+    if (nw && nw !== old) {
+      [...old.attributes].forEach(x => old.removeAttribute(x.name));
+      [...nw.attributes].forEach(x => old.setAttribute(x.name, x.value));
+      old.replaceChildren(...nw.childNodes);
+      nw.replaceWith(old);
+    }
     const card = b2 && b2.querySelector('.pk--maxpub');
     if (card && !bkReduce()) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => { if (b2) b2.scrollTop = id ? 0 : cxMaxY; cxNameFit(); cxRailFit(); });
