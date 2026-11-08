@@ -16320,7 +16320,11 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--hdup > .post-yt > .post-av--yt { margin-inline-start: -42px; visibility: hidden; }
 /* والمنشورةُ المكبَّرةُ تخلو للجوف من أوّل لحظة: يغيب صفُّ «مفيد / غير مفيد» تحتها
    وقائمةُ ⋮ بجانبها بمجرّد التكبير — لا بانتظار رفع الرأس (طلبُ صاحب الموقع) */
-.pk--maxpub .post-react, .pk--maxpub .post-menu { display: none; }
+.pk--maxpub .post-react { display: none; }
+/* وقائمةُ ⋮ (تعديل · حذف · إبلاغ) باقيةٌ في المكبَّرة المنشورة: في أعلى الترويسة أقصى اليسار (طلبُ صاحب الموقع) —
+   تُعلَّق بأعلى الجوف فتصعد مع الرأس إذا رُفع وتغيب معه */
+.pk--maxpub > .post-yt { position: relative; }
+.pk--maxpub > .post-yt > .post-menu { display: block; position: absolute; top: -4px; inset-inline-end: -6px; z-index: 3; }
 .pk--hdanim > .post-yt { transition: margin-top .22s ease; }
 
 /* ===== القاعُ مرآةُ الرأس (المكبَّرة) =====
