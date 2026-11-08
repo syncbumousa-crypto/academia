@@ -9837,6 +9837,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* ROADMAP-SMOOTH ق٢: الكتابُ يُبنى بعد أن تقف الحركة (لا أثناءها فتسقط إطاراتُها)، ويظهر بتلاشٍ قصير */
       if (document.querySelector('#cm-body .pk--fxrun')) {
         await new Promise(res => { const chk = () => document.querySelector('#cm-body .pk--fxrun') ? setTimeout(chk, 50) : res(); chk(); });
+        /* وبعد وقوفها ينتظر فراغَ المتصفّح (إطارُ النهاية يُطلى أوّلًا) */
+        await new Promise(res => (window.requestIdleCallback ? requestIdleCallback(() => res(), { timeout: 300 }) : setTimeout(res, 60)));
         if (!view.isConnected || (pkSrcBk[id] && pkSrcBk[id].view === view)) return;
         if (!bkReduce()) view.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' });
       }
