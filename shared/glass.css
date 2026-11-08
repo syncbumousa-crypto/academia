@@ -418,42 +418,35 @@ html[data-lang="en"] .side-handle {
 .market-tools { --lg-tint: var(--glass, #eef3f4); --lg-ink: var(--glass-ink, #14233f);
                 --lg-cast: var(--glass-cast, rgba(13,42,72,.16)); --lg-h: 44px; gap: 10px; }
 
+/* ===== وصبغتُه صبغةُ الشريط الجانبيّ حرفًا بحرف =====
+   كانت عليه طبقةٌ بيضاءُ لامعةٌ وتعتيمٌ آخر (٥٢٪)، فبدا أبيضَ مزرقًّا لا من
+   الموقع. فصار يأخذ ما يأخذه الشريط: ‎--glass‎ بقدر ‎--glass-mix‎، وتمويه ٢٠
+   مع تشبيع ١٧٠، وحرفُه ‎--glass-edge‎ وظلُّه ‎--glass-cast‎ — فيتبدّلان معًا
+   في الفاتح والداكن، وفي المسلخ بتيله وفي الجذر بحبره */
 html:root .market-tools .search,
 html:root .market-tools .filterwrap::before,
 html:root .market-tools .fpanel {
   border: 0;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 58%),
-    color-mix(in srgb, var(--lg-tint) 52%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.75),
-    inset 0 0 0 1px color-mix(in srgb, var(--lg-ink) 9%, transparent),
-    0 10px 28px -12px var(--lg-cast);
-}
-html[data-theme="dark"]:root .market-tools .search,
-html[data-theme="dark"]:root .market-tools .filterwrap::before,
-html[data-theme="dark"]:root .market-tools .fpanel {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 58%),
-    color-mix(in srgb, var(--lg-tint) 62%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    0 12px 30px -12px var(--lg-cast);
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .market-tools .search, .market-tools .filterwrap::before {
-    -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%); }
-  .market-tools .fpanel {
-    -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); }
+  .market-tools .search, .market-tools .filterwrap::before, .market-tools .fpanel {
+    -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
-/* اللوحُ أكثفُ: عليه أسماءٌ تُقرأ */
-html:root .market-tools .fpanel { background:
-    linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,0) 40%),
-    color-mix(in srgb, var(--lg-tint) 80%, transparent); }
-html[data-theme="dark"]:root .market-tools .fpanel { background:
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 40%),
-    color-mix(in srgb, var(--lg-tint) 86%, transparent); }
+/* ونافذةُ المكتبة في الفاتح كانت تُصمِت البحثَ والزرَّ أبيضَ بقاعدةٍ فيها معرّفٌ
+   (‎html[data-theme="light"] #market-modal .search‎) تغلب ما سبق، فيُعاد لهما الزجاجُ
+   بمعرّفٍ مثله */
+html:root #market-modal .market-tools .search {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+}
+html:root #market-modal .market-tools .btn-filter { background: transparent; border-color: transparent; }
+html:root #market-modal .market-tools .filterwrap:not(.has-f) .btn-filter:hover { background: color-mix(in srgb, var(--glass-ink) 7%, transparent); }
+html:root #market-modal .market-tools .filterwrap.has-f .btn-filter:hover { background: transparent; }
+
+/* واللوحُ أكثفُ بالصبغة نفسِها: عليه أسماءٌ تُقرأ */
+html:root .market-tools .fpanel { background: color-mix(in srgb, var(--glass) 84%, transparent); }
 
 /* البحث: كبسولة */
 html:root .market-tools .search {
@@ -462,10 +455,9 @@ html:root .market-tools .search {
 }
 html:root .market-tools .search:focus {
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.75),
     inset 0 0 0 1.5px color-mix(in srgb, var(--c-kfupm, #2c5e65) 55%, transparent),
-    0 0 0 4px color-mix(in srgb, var(--c-kfupm, #2c5e65) 14%, transparent),
-    0 10px 28px -12px var(--lg-cast);
+    0 0 0 4px color-mix(in srgb, var(--c-kfupm, #2c5e65) 12%, transparent),
+    0 10px 28px -12px var(--glass-cast);
 }
 
 /* قرصُ التصنيفات: دائرةٌ تتّسع كبسولة.
@@ -496,6 +488,14 @@ html:root .market-tools .btn-filter svg { width: 19px; height: 19px; }
 html:root .market-tools .btn-filter > span:not(.fbadge),
 html:root .market-tools .btn-filter .fbadge { display: none; }
 html:root .market-tools .filterwrap.is-open .btn-filter { background: color-mix(in srgb, var(--lg-ink) 9%, transparent); }
+/* وفي الكبسولة لا دائرةَ حول الأيقونة عند المرور ولا عند الفتح: الأيقونةُ وحدَها
+   يتبدّل لونُها — باهتةٌ ساكنة، وبلون الهويّة تحت المؤشّر أو واللوحُ مفتوح */
+html:root .market-tools .filterwrap.has-f .btn-filter,
+html:root .market-tools .filterwrap.has-f .btn-filter:hover,
+html:root .market-tools .filterwrap.has-f.is-open .btn-filter { background: transparent; transform: none; }
+html:root .market-tools .filterwrap.has-f .btn-filter { color: color-mix(in srgb, var(--lg-ink) 60%, transparent); transition: color .15s; }
+html:root .market-tools .filterwrap.has-f .btn-filter:hover,
+html:root .market-tools .filterwrap.has-f.is-open .btn-filter { color: var(--c-kfupm, #2c5e65); }
 
 /* الرقاقاتُ المختارة في جوف القرص: صفٌّ واحدٌ ينزلق إن طال */
 html:root .market-tools .filterwrap .factive {
@@ -505,12 +505,59 @@ html:root .market-tools .filterwrap .factive {
   transition: max-width .42s cubic-bezier(.2,.9,.25,1.05), opacity .25s, padding .3s;
 }
 html:root .market-tools .filterwrap .factive::-webkit-scrollbar { display: none; }
-html:root .market-tools .filterwrap.has-f .factive { max-width: 100vw; opacity: 1; padding-inline-end: 6px; }
-html:root .market-tools .fact {
-  flex: none; height: 32px; padding: 0 12px; border-radius: 999px; white-space: nowrap;
-  background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 13%, transparent);
+html:root .market-tools .filterwrap.has-f .factive { max-width: 100vw; opacity: 1; padding-inline-end: 12px; }
+/* وعاءُ الرقاقات: يقصّها داخل الكبسولة فلا تخرج رقاقةٌ عن حدّها، وطرفاه يذوبان
+   ما بقي فيهما ما يُمرَّر إليه، وتحته شريطٌ رفيعٌ يظهر إذا ضاقت عنها */
+html:root .market-tools .fact-scroll {
+  position: relative; display: flex; align-items: center; align-self: stretch;
+  flex: 0 1 auto; min-width: 0; overflow: hidden;
+  border-start-end-radius: 999px; border-end-end-radius: 999px;
 }
-html:root .market-tools .fact:hover { background: color-mix(in srgb, #b3433c 15%, transparent); }
+html:root .market-tools .fact-scroll.is-over .factive {
+  --fs: 22px; --fe: 22px;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 var(--fs), #000 calc(100% - var(--fe)), transparent 100%);
+          mask-image: linear-gradient(to left, transparent 0, #000 var(--fs), #000 calc(100% - var(--fe)), transparent 100%);
+}
+html[dir="ltr"]:root .market-tools .fact-scroll.is-over .factive,
+html[data-lang="en"]:root .market-tools .fact-scroll.is-over .factive {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fs), #000 calc(100% - var(--fe)), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 var(--fs), #000 calc(100% - var(--fe)), transparent 100%);
+}
+html:root .market-tools .fact-scroll.is-start .factive { --fs: 0px; }
+html:root .market-tools .fact-scroll.is-end .factive { --fe: 0px; }
+html:root .market-tools .fact-scroll .fact-bar {
+  position: absolute; bottom: 3px; inset-inline: 8px 16px; height: 4px; margin: 0;
+}
+html:root .market-tools .fact-scroll .fact-bar i { height: 4px; top: 0; border-radius: 999px; }
+/* وإذا ظهر الشريطُ ارتفعت الرقاقاتُ له — ولا يتغيّر عرضُها. كانت تصغر حين يظهر،
+   فتتّسع لها الكبسولةُ فيختفي، فتكبر فتضيق فيظهر… فتنبض بلا توقّف عند الحدّ.
+   فالشريطُ لا يمسّ إلّا الموضعَ العموديّ، وما يقيسه (العرض) لا يتبدّل به */
+html:root .market-tools .fact-scroll.is-over .factive { align-self: flex-start; padding-top: 4px; }
+html:root .market-tools .fact {
+  flex: none; height: 28px; padding: 0 11px; font-size: 12px; border-radius: 999px; white-space: nowrap;
+}
+/* ===== لونُ الرقاقات في الكبسولة =====
+   الفاتح: زجاجٌ مرفوعٌ فوق زجاج — أبيضُ شفّافٌ بظلٍّ خفيف، كأزرار أبل.
+   الداكن: ذهبُ الشعار خفيفًا، والنصُّ ذهبيٌّ ممزوجٌ بالحبر فيُقرأ.
+   والمعرّفُ ‎#market-modal‎ مع كلٍّ منهما: لنافذة المكتبة قاعدةٌ بمعرّفٍ تُلوّن رقاقاتها */
+html:root .market-tools .filterwrap .fact,
+html:root #market-modal .market-tools .filterwrap .fact {
+  background: color-mix(in srgb, #fff 70%, transparent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), inset 0 0 0 1px rgba(255, 255, 255, .6);
+}
+html[data-theme="dark"]:root .market-tools .filterwrap .fact,
+html[data-theme="dark"]:root #market-modal .market-tools .filterwrap .fact {
+  background: color-mix(in srgb, var(--c-gold, #c8a24a) 22%, transparent);
+  color: color-mix(in srgb, var(--c-gold, #c8a24a) 70%, var(--c-ink));
+  box-shadow: none;
+}
+/* والحذفُ عند المرور يبقى أحمرَ في الحالين */
+html:root .market-tools .filterwrap .fact:hover,
+html:root #market-modal .market-tools .filterwrap .fact:hover {
+  background: color-mix(in srgb, #b3433c 15%, transparent); color: #b3433c; box-shadow: none;
+}
+html[data-theme="dark"]:root .market-tools .filterwrap .fact:hover,
+html[data-theme="dark"]:root #market-modal .market-tools .filterwrap .fact:hover { color: #e48a84; }
 
 /* اللوح: زجاجٌ بزاويةٍ واسعة، يتفتّح من تحت القرص */
 /* والقرصُ آخرَ الصفّ (يسارَه بالعربيّ، يمينَه بالإنجليزيّ)، فاللوحُ يُفتح

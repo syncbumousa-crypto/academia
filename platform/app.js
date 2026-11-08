@@ -2132,6 +2132,60 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const statTx = v => v === 'todo' ? T().statTodo : v === 'prog' ? T().statProg : T().statDone;
 
   /* ---------- مصنع عرض السوق: بحث + تصنيفات + شبكة (p = بادئة المعرّفات m/mm) ---------- */
+  /* ===== شريطُ تمريرٍ أفقيٌّ لصفٍّ من الرقاقات =====
+     إبهامٌ بالبكسل (أدناه ٣٠)، يُسحب ويُنقر مسارُه، والعجلةُ العموديّةُ تُمرّر
+     الصفَّ أفقيًّا، والعربيُّ يتمرّر بالسالب. ويُعلَّم الوعاءُ بـ‎is-start‎
+     و‎is-end‎ ليبهت الطرفُ الذي بقي فيه ما يُرى. يُعيد دالّةَ التحديث */
+  function hScrollBar(box, bar, host) {
+    const MIN = 30;
+    const rtl = () => getComputedStyle(box).direction === 'rtl';
+    const geo = () => {
+      const max = box.scrollWidth - box.clientWidth, track = bar.clientWidth;
+      const tw = Math.max(MIN, track * box.clientWidth / (box.scrollWidth || 1));
+      return { max, tw, travel: Math.max(1, track - tw) };
+    };
+    function edges() {
+      const max = box.scrollWidth - box.clientWidth;
+      bar.hidden = max < 4;
+      host.classList.toggle('is-over', max >= 4);
+      if (max < 4) { host.classList.add('is-start', 'is-end'); return; }
+      const { tw, travel } = geo(), x = Math.abs(box.scrollLeft);
+      host.classList.toggle('is-start', x < 4);
+      host.classList.toggle('is-end', x > max - 4);
+      const t = bar.firstChild, pos = (x / max * travel) + 'px';
+      t.style.width = tw + 'px';
+      t.style.right = rtl() ? pos : '';
+      t.style.left = rtl() ? '' : pos;
+    }
+    const to = x => { const { max } = geo(); x = Math.max(0, Math.min(max, x)); box.scrollLeft = rtl() ? -x : x; };
+    bar.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      e.preventDefault(); e.stopPropagation();
+      const { max, tw, travel } = geo(), bx = bar.getBoundingClientRect();
+      const along = cx => (rtl() ? bx.right - cx : cx - bx.left);
+      box.style.scrollBehavior = 'auto';
+      bar.classList.add('is-drag');
+      if (e.target !== bar.firstChild) to((along(e.clientX) - tw / 2) / travel * max);
+      const x0 = Math.abs(box.scrollLeft), p0 = along(e.clientX);
+      bar.setPointerCapture(e.pointerId);
+      const move = ev => to(x0 + (along(ev.clientX) - p0) / travel * max);
+      const up = () => {
+        bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up);
+        bar.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); box.style.scrollBehavior = '';
+      };
+      bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up); bar.addEventListener('pointercancel', up);
+    });
+    bar.addEventListener('click', e => e.stopPropagation());
+    box.addEventListener('wheel', e => {
+      if (box.scrollWidth <= box.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      box.scrollLeft += rtl() ? -e.deltaY : e.deltaY;
+    }, { passive: false });
+    box.addEventListener('scroll', edges, { passive: true });
+    if (window.ResizeObserver) { const ro = new ResizeObserver(edges); ro.observe(box); ro.observe(bar); }
+    return edges;
+  }
+
   function marketView(p, mode, onList) {
     const el = id => document.getElementById(`${p}-${id}`);
     const panel = el('fpanel');
@@ -2140,7 +2194,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        بلا فلاتر: دائرةٌ فيها أيقونةُ التصنيف وحدَها. فإذا اختير فلترٌ اتّسعت
        الدائرةُ كبسولةً، وصارت رقاقاتُ الفلاتر المختارة داخلها يسارَ الأيقونة —
        فتُنقل ‎factive‎ من آخر الصفّ إلى جوف الزرّ نفسِه */
-    wrap.insertBefore(el('factive'), panel);
+    /* والرقاقاتُ في وعاءٍ يقصّها ولا يُخرجها من الكبسولة، وتحتها شريطٌ كشريط
+       التخصّصات يظهر إذا ضاقت عنها: يُسحب، ويُنقر مسارُه، وتُمرِّرها العجلة */
+    const factWrap = document.createElement('div');
+    factWrap.className = 'fact-scroll';
+    wrap.insertBefore(factWrap, panel);
+    factWrap.appendChild(el('factive'));
+    const factBar = document.createElement('div');
+    factBar.className = 'fcol-bar fact-bar';
+    factBar.hidden = true;
+    factBar.innerHTML = '<i></i>';
+    factWrap.appendChild(factBar);
+    const factEdges = hScrollBar(el('factive'), factBar, factWrap);
     el('btn-filter').setAttribute('aria-label', el('f-label').textContent.trim());
     /* والقرصُ يعرف أنّ لوحه مفتوح — أيًّا كان من فتحه أو أغلقه */
     new MutationObserver(() => wrap.classList.toggle('is-open', !panel.hidden))
@@ -2370,6 +2435,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       fKind.forEach(v => items.push(['k', v, kindTx(v)]));
       fStat.forEach(v => items.push(['s', v, statTx(v)]));
       fAct.forEach(v => items.push(['a', v, v === 'lec' ? T().lecChip : T().labChip]));
+      requestAnimationFrame(factEdges);
       el('factive').innerHTML = items.map(([k, v, txt]) =>
         `<button type="button" class="fact" data-k="${k}" data-v="${v}">${txt}<span class="fact-x">✕</span></button>`
       ).join('');
