@@ -108,6 +108,7 @@ export async function onRequestPut({ request, env }) {
       h: Math.max(0, Math.min(30, parseInt(c.h, 10) || 0)),
       lab: c.lab ? 1 : 0,
       tags: Array.isArray(c.tags) ? c.tags.map(String) : [],
+      kinds: (c.kinds && typeof c.kinds === 'object') ? c.kinds : {},
     });
   }
   if (!rows.length) return J({ error: 'empty' }, 400);
@@ -120,6 +121,15 @@ export async function onRequestPut({ request, env }) {
     tagIds.add(id);
     tagRows.push([id, String(t.ar || '').slice(0, 80), String(t.en || '').slice(0, 80), i]);
   });
+
+  /* نوعيّةُ المادّة في التخصص (تخصص/كلية/مشتركة/اختيارية): ما جاء من اللوحة،
+     وإلّا ما كان محفوظًا — فنسخةٌ قديمةٌ في متصفّح المشرف لا تمحوها */
+  const KINDS = new Set(['major', 'college', 'common', 'elective']);
+  const oldKind = new Map();
+  try {
+    const ok = await db.prepare('SELECT code, tag_id, kind FROM course_tags').all();
+    for (const r of (ok.results || [])) if (r.kind) oldKind.set(r.code + '|' + r.tag_id, r.kind);
+  } catch (e) { /* عمودٌ لم يُنشأ بعد */ }
 
   const rev = String(b.v || Date.now());
   const st = [];
@@ -135,7 +145,8 @@ export async function onRequestPut({ request, env }) {
   rows.forEach(r => r.tags.forEach(tg => {
     if (!tagIds.has(tg)) return;                 /* وسمٌ لا تعريفَ له يُترك */
     links++;
-    st.push(db.prepare('INSERT INTO course_tags (code, tag_id) VALUES (?,?)').bind(r.code, tg));
+    const k = KINDS.has(r.kinds[tg]) ? r.kinds[tg] : (oldKind.get(r.code + '|' + tg) || null);
+    st.push(db.prepare('INSERT INTO course_tags (code, tag_id, kind) VALUES (?,?,?)').bind(r.code, tg, k));
   }));
   st.push(db.prepare("UPDATE meta SET v = ? WHERE k = 'catalog_rev'").bind(rev));
 
@@ -151,11 +162,12 @@ export async function onRequestGet({ env }) {
       db.prepare("SELECT v FROM meta WHERE k = 'catalog_rev'").first(),
     ]);
     /* والوصلُ يُقرأ مرّةً ويُوزَّع — لا استعلامَ لكلّ مادّة */
-    const link = await db.prepare('SELECT code, tag_id FROM course_tags').all();
-    const byCode = new Map();
+    const link = await db.prepare('SELECT code, tag_id, kind FROM course_tags').all();
+    const byCode = new Map(), kindOf = new Map();
     for (const r of (link.results || [])) {
-      if (!byCode.has(r.code)) byCode.set(r.code, []);
+      if (!byCode.has(r.code)) { byCode.set(r.code, []); kindOf.set(r.code, {}); }
       byCode.get(r.code).push(r.tag_id);
+      if (r.kind) kindOf.get(r.code)[r.tag_id] = r.kind;
     }
 
     const body = {
@@ -168,6 +180,7 @@ export async function onRequestGet({ env }) {
         h: c.h | 0,
         lab: !!c.lab,                 /* سِكوَيْل يردّ 0/1 والموقعُ ينتظر بولين */
         tags: byCode.get(c.code) || [],
+        kinds: kindOf.get(c.code) || {},   /* ‎{tag: major|college|common|elective}‎ */
       })),
     };
     return new Response(JSON.stringify(body), { headers: JSON_HEADERS });

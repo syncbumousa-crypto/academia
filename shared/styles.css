@@ -297,6 +297,11 @@ html[dir="ltr"] .fcol-wrap::after,  html[data-lang="en"] .fcol-wrap::after  { ba
 /* ‏شريطُ الصفّ بمقاس شريط الصفحة (‎#xscroll‎) ولونه: ٨ بكسل، وإبهامٌ بتروليٌّ مدوّر
    يُمسك ويُسحب. والمسارُ أعلى قليلًا من الإبهام ليُصاب بالمؤشّر بسهولة */
 .fcol-bar { position: relative; height: 8px; margin-top: 2px; cursor: pointer; touch-action: none; }
+/* نوعيّةُ المواد: تظهر تحت التخصّص ما اختير تخصّص */
+.fkind { margin-top: 10px; padding: 9px 10px 10px; border-radius: 10px; background: rgba(44, 94, 101, .06); }
+.fkind[hidden] { display: none; }
+.fkind__t { margin: 0 0 7px; font-size: 11.5px; font-weight: 700; color: var(--c-ink-soft); }
+html[data-theme="dark"] .fkind { background: rgba(255, 255, 255, .05); }
 .fcol-bar i {
   position: absolute; top: 1px; bottom: 1px; min-width: 30px;
   border-radius: 5px; background: #2c5e65; cursor: grab;
