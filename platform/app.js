@@ -9364,7 +9364,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post.querySelector('.post-ytmain > .pk-split > :is(.pk-src, .pk-bank)')) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
-    if (!post.classList.contains('pk--max')) return;
+    if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
     /* ===== ROADMAP-PANEFX ق٣: الكتلةُ تنتقل بالنقر — القديمةُ تنزل في الذيل والجديدةُ تصعد منه معًا (القرار ٤) ===== */
     const sp = post.querySelector('.post-ytmain > .pk-split');
@@ -9385,7 +9385,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
-    const pane = e.target.closest && e.target.closest('#cm-body .pk--max .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
+    const pane = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
     if (!pane) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
     if (!ctl) return;
@@ -21181,7 +21181,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const r = Math.min(PK_BAND_R, (t.x1 - t.x0) / 2, hgt);
       /* الزاويتان المقعّرتان نصفُ قطرهما رقم (‎cl · cr‎: ‎14‎ أو صفر أو ما بينهما في الحركة)، ولا تزيدان على ما بقي من قامة اللسان */
       const cR = Math.max(0, Math.min(+t.cr || 0, hgt - r)), cL = Math.max(0, Math.min(+t.cl || 0, hgt - r));
-      d += `M${f(t.x0)} ${f(t.top + r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x0 + r)} ${f(t.top)}H${f(t.x1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x1)} ${f(t.top + r)}`;
+      const rL = t.sqL ? 0 : r, rR = t.sqR ? 0 : r;   /* الطرفُ الممدودُ إلى الحافّة بلا انحناء */
+      d += `M${f(t.x0)} ${f(t.top + rL)}${rL ? `A${f(rL)} ${f(rL)} 0 0 1 ${f(t.x0 + rL)} ${f(t.top)}` : ''}H${f(t.x1 - rR)}${rR ? `A${f(rR)} ${f(rR)} 0 0 1 ${f(t.x1)} ${f(t.top + rR)}` : ''}`;
       d += cR > .2 ? `V${f(ft - cR)}A${f(cR)} ${f(cR)} 0 0 0 ${f(t.x1 + cR)} ${f(ft)}V${f(ft + 1)}` : `V${f(ft + 1)}`;
       d += cL > .2 ? `H${f(t.x0 - cL)}V${f(ft)}A${f(cL)} ${f(cL)} 0 0 0 ${f(t.x0)} ${f(ft - cL)}Z` : `H${f(t.x0)}Z`;
     }
@@ -21191,8 +21192,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkBandTongue(card, sp, pane) {
     const cr = card.getBoundingClientRect(), ox = cr.left + card.clientLeft, oy = cr.top + card.clientTop;
     const p = pane.getBoundingClientRect(), s = sp.getBoundingClientRect();
-    return { x0: p.left - PK_BAND_PAD - ox, x1: p.right + PK_BAND_PAD - ox, top: p.top - PK_BAND_PAD - oy,
-      cl: p.left - s.left > 4 ? PK_BAND_C : 0, cr: s.right - p.right > 4 ? PK_BAND_C : 0 };
+    /* المنطقةُ على طرف القسمة تمتدّ إلى حافّة المربّع نفسِها (طلبُ صاحب الموقع): لا هامشَ غيرَ مظلَّلٍ بينها وبين الحافّة،
+       وزاويتُها هناك مربّعةٌ يقصّها انحناءُ المربّع */
+    const eL = p.left - s.left <= 4, eR = s.right - p.right <= 4;
+    return { x0: eL ? -2 : p.left - PK_BAND_PAD - ox, x1: eR ? card.clientWidth + 2 : p.right + PK_BAND_PAD - ox, top: p.top - PK_BAND_PAD - oy,
+      cl: eL ? 0 : PK_BAND_C, cr: eR ? 0 : PK_BAND_C, sqL: eL, sqR: eR };
   }
   function pkBandFit(card) {
     const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
