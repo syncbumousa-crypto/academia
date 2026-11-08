@@ -16889,7 +16889,9 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; margin-bottom: 26px; }
 /* ===== «المصدر» و«الشجريّ» معًا: الكتابُ يمينًا واللوحُ يسارَه ===== */
 .pk-split { display: flex; gap: 14px; align-items: stretch; min-height: 0; }
-.pk-split > .pk-src { flex: .62 1 0; min-width: 0; }   /* الكتابُ على قدّه، واللوحُ يأخذ الباقي */
+/* حصّةُ الكتاب ‎--spl‎ من العرض بعد الفُرجة (افتراضُها ‎.383‎ = ‎.62 : 1‎ كما كانت) — يغيّرها خطُّ الفاصل (ROADMAP-SPLITTER) */
+.pk-split { position: relative; }
+.pk-split > .pk-src { flex: 0 0 calc((100% - 14px) * var(--spl, .383)); min-width: 0; }   /* الكتابُ على حصّته، واللوحُ يأخذ الباقي */
 .pk-split > .kt-view--tree { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; margin-bottom: 0; }
 /* والبطاقيُّ والجدوليُّ جارين: يُمرَّران في جانبهما ولا يُطيلان القسمة */
 .pk-split > .kt-view:not(.kt-view--tree) {
@@ -17074,3 +17076,25 @@ html[data-lang="en"] .cx-midadd { transform: translate(-50%, -50%); }
 .cx-midadd:hover { background: color-mix(in srgb, var(--u-gold, #c9a25c) 22%, var(--u-surf, #fff)); border-color: var(--u-gold, #c9a25c); }
 .cx-midadd:focus-visible { outline: 2px solid color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); outline-offset: 2px; }
 html[data-theme="dark"] .cx-midadd { color: #d4b36a; background: color-mix(in srgb, #d4b36a 12%, transparent); }
+
+/* ===== خطُّ الفاصل بين الكتاب وجاره (ROADMAP-SPLITTER) =====
+   في الفُرجة نفسِها (‎14px‎) مطلقُ الموضع فلا يزيدها: خطٌّ رفيعٌ هادئ، وعند المرور أو السحب يذهب ذهبيًّا
+   وتظهر في وسطه مسكةٌ بثلاث نقاط كمسكات الموقع */
+.pk-splh {
+  position: absolute; z-index: 3; inset-block: 0; width: 14px;
+  inset-inline-start: calc((100% - 14px) * var(--spl, .383));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  cursor: col-resize; touch-action: none; outline: none;
+}
+.pk-splh::before {
+  content: ''; position: absolute; inset-block: 8px; inset-inline-start: 6px; width: 2px; border-radius: 2px;
+  background: var(--u-line, rgba(127, 127, 127, .25)); transition: background .15s, width .15s, inset-inline-start .15s;
+}
+.pk-splh i { position: relative; width: 4px; height: 4px; border-radius: 50%; background: #a9852f; opacity: 0; transition: opacity .15s; }
+.pk-splh:hover::before, .pk-splh.is-drag::before, .pk-splh:focus-visible::before { width: 4px; inset-inline-start: 5px; background: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
+.pk-splh:hover i, .pk-splh.is-drag i, .pk-splh:focus-visible i { opacity: .9; }
+html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
+/* أثناء السحب: لا يُحدَّد نصٌّ ولا تلتقط العروضُ المؤشّر */
+.pk-split.is-spldrag { user-select: none; -webkit-user-select: none; cursor: col-resize; }
+.pk-split.is-spldrag > :not(.pk-splh) { pointer-events: none; }
+@media (max-width: 760px) { .pk-splh { display: none; } }
