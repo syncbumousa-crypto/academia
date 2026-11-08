@@ -17058,3 +17058,19 @@ html[data-theme="dark"] .pk-max--curve.pk-shrink:hover .pk-curve__grip { stroke:
 /* المنشورةُ بلا كتاب: المربّعُ المرقّطُ يملأ مكانَ الكتاب كلَّه وفي وسطه «لا يوجد مصادر» */
 #cm-body .pk-src.pk-src--none { padding: 0; align-items: stretch; }
 .pk-src--none > .pk-vwph { flex: 1 1 auto; font-size: 14px; }
+/* «إخفاء الكل» في وسط تذييل المنشورة المكبَّرة (طلبُ صاحب الموقع) */
+.pk-pubfoot { justify-content: center; }
+/* زرُّ «+» الثابت في وسط تذييل التحرير — دائرةٌ ذهبيّةٌ هادئةٌ على محور التذييل، لا يزاحم أزراره يمينًا ويسارًا */
+.vt-foot { position: relative; }
+.cx-midadd {
+  position: absolute; inset-inline-start: 50%; top: 50%; transform: translate(50%, -50%);
+  display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent);
+  background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, var(--u-surf, #fff)); color: #a9852f;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+html[data-lang="en"] .cx-midadd { transform: translate(-50%, -50%); }
+.cx-midadd svg { width: 16px; height: 16px; }
+.cx-midadd:hover { background: color-mix(in srgb, var(--u-gold, #c9a25c) 22%, var(--u-surf, #fff)); border-color: var(--u-gold, #c9a25c); }
+.cx-midadd:focus-visible { outline: 2px solid color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); outline-offset: 2px; }
+html[data-theme="dark"] .cx-midadd { color: #d4b36a; background: color-mix(in srgb, #d4b36a 12%, transparent); }

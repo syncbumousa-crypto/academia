@@ -10310,12 +10310,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
-    const b = e.target.closest && e.target.closest('#cm-body .kt-view [data-ktadd]');
+    const mid = e.target.closest && e.target.closest('#cm-body [data-cxmidadd]');
+    const b = (e.target.closest && e.target.closest('#cm-body .kt-view [data-ktadd]')) || mid;
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    const cvw = b.closest('.kt-view').querySelector('.kcv');
+    const kv = b.closest('.kt-view') || (b.closest('.post') && b.closest('.post').querySelector('.post-ytmain .kt-view:not(.pk-ghost)'));
+    if (!kv || !kv.dataset.ktf) { const tg = b.closest('.post') && b.closest('.post').querySelector('.vt-foot .cx-tg'); if (tg) tg.click(); return; }
+    const cvw = kv.querySelector('.kcv');
     if (cvw && kcvView(cvw)) { const V = kcvView(cvw); return kcvAddAt(cvw, (cvw.clientWidth / 2 - V.x) / V.z - KCV.W / 2, (cvw.clientHeight / 2 - V.y) / V.z - 40); }
-    const host = ktHost(b.closest('.kt-view').dataset.ktf);
+    const host = ktHost(kv.dataset.ktf);
     if (!host) return;
     const nn = { id: newId(), t: 'c', f: '', b: '' };
     host.arr.push(nn);
@@ -20636,7 +20639,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     </span>`;
   };
 
+  /* زرُّ «+» ثابتٌ في وسط التذييل (طلبُ صاحب الموقع): يضيف بطاقةَ معرفةٍ إلى المجلد المختار في العرض الظاهر
+     (مكانُ «+ معرفة» الجديد)، وفي العرض المجلّديّ يفتح قائمةَ الإضافة */
+  const cxMidAdd = () => `<button type="button" class="cx-midadd" data-cxmidadd title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>`;
   const cxFoot = d => `<div class="edit-acts edit-acts--foot vt-foot">
+      ${cxMidAdd()}
       ${completeGlyph(completenessOf('cards', d))}
       ${cxAddBtns()}
       <!-- الفاصل نفسه الذي في «الشروح»: يمين ✕، بين أدوات الإضافة وأزرار المساهمة -->
