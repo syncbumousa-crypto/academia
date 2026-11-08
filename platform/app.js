@@ -9734,7 +9734,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* العرضُ الشجريّ لوحٌ حرّ (ROADMAP-CANVAS) — ‎kcvHTML‎ */
       body = kcvHTML(id, sel, host, cards, ro);
     }
-    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${ro ? (cards.length ? '' : `<div class="pk-vwph">${esc(T().ktEmpty)}</div>`) : ktAddBtn()}</div>`;
+    /* الفارغُ بلا كلام (طلبُ صاحب الموقع) — في التحرير والنشر سواء: الشجريُّ لوحُه وحدَه، والبطاقيُّ والجدوليُّ مربّعٌ مرقّطٌ خالٍ.
+       وزرُّ «+ معرفة» شِيل حتى يُقرَّر مكانُه الجديد (‎ktAddBtn‎ باقيةٌ له) */
+    const empty = v !== 'tree' && !cards.length ? `<div class="pk-vwph kt-empty" aria-hidden="true"></div>` : '';
+    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${empty}</div>`;
   }
   /* ===== اللوحُ الحرّ — العرضُ الشجريّ (ROADMAP-CANVAS · المرحلة ١) =====
      إطارٌ (‎.kcv‎) يقصّ ويلتقط المؤشّر، وفيه «عالمٌ» (‎.kcv-world‎) يتحرّك بـ‎transform‎ وحده (إزاحةٌ وتكبير)،

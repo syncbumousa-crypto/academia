@@ -17023,3 +17023,6 @@ html[data-theme="dark"] .kcv-lab { background: #3a4246; }
 .cbk-stage--gl > .bk2-gl { position: absolute; inset: 0; display: block; outline: none; }
 .cbk--gl { position: absolute; pointer-events: none; transform-style: flat; }
 #cm-body .pk-src--book .cbk-stage--gl { padding-inline: 0; }
+/* البطاقيُّ والجدوليُّ الفارغان: مربّعٌ مرقّطٌ خالٍ يملأ مكانَ العرض في المكبَّرة */
+.kt-view > .kt-empty { min-height: 160px; }
+.pk--max .kt-view > .kt-empty { flex: 1 1 auto; }
