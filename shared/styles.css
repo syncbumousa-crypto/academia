@@ -17341,3 +17341,6 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 /* بالعربيّة تُقرأ من اليمين: «من» ثمّ الشعار */
 html:not([data-lang="en"]) .imp-badge { direction: rtl; padding: 0 7px 0 6px; }
 html:not([data-lang="en"]) .imp-badge__f { font-size: 11px; font-weight: 700; letter-spacing: 0; }
+/* والمنشورةُ المكبَّرةُ تلبس سطحَ التحرير نفسَه (طلبُ صاحب الموقع): كانت المناطقُ غيرُ النشِطة بلا لونٍ فتبدو عارية،
+   وفي التحرير لها لونُ سطح البطاقة. والمنشورةُ في السيل تبقى بلا سطح — لا مناطقَ فيها */
+.post.pk--maxpub { background: var(--u-surf); }
