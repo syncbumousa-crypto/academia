@@ -258,6 +258,143 @@
    "202610"
   ]
  },
+ "AS 201": {
+  "name": "Financial Mathematics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AS 251": {
+  "name": "Maths of Financial Derivatives",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AS 289": {
+  "name": "Actuarial Science ProblemLab I",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AS 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "AS 380": {
+  "name": "Actuarial Contingencies I",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AS 389": {
+  "name": "Actuarial Science Problem Lab II",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AS 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AS 411": {
+  "name": "Senior Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AS 412": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AS 450": {
+  "name": "Risk Modeling",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AS 481": {
+  "name": "Actuarial Contingencies II",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "AS 484": {
+  "name": "Actuarial Risk Theory and Credibility",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AS 490": {
+  "name": "Topics in Actuarial Science and Financial Mathematics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AS 491": {
+  "name": "Topics in AS & Fin. Math. II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
  "BAI 220": {
   "name": "Business Info. & Digital Sys.",
   "act": [
@@ -347,6 +484,854 @@
   "terms": [
    "202520",
    "202610"
+  ]
+ },
+ "COE 202": {
+  "name": "Digital Logic Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 203": {
+  "name": "Digital Logic Laboratory",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 233": {
+  "name": "Digital Logic & Computer Org.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 241": {
+  "name": "Data & Comp. Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 292": {
+  "name": "Introduction to AI",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "COE 301": {
+  "name": "Computer Organization",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 302": {
+  "name": "Dsgn & Modeling of Digital Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 306": {
+  "name": "Intro. to Embedded Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 344": {
+  "name": "Computer Networks",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 346": {
+  "name": "Computer & Network Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "COE 351": {
+  "name": "Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "COE 353": {
+  "name": "Fundamentals of Computer Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 384": {
+  "name": "Fundamentals of COE Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "COE 403": {
+  "name": "Computer Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 407": {
+  "name": "System-on-Chip Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 426": {
+  "name": "Data Privacy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 427": {
+  "name": "Distributed Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 444": {
+  "name": "Network Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 446": {
+  "name": "Mobile Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 449": {
+  "name": "Sp Tp: Comp Comm & Networking",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "COE 450": {
+  "name": "Introduction to Smart Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 452": {
+  "name": "Principles of Cloud-based Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 453": {
+  "name": "Cloud and Edge Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 454": {
+  "name": "Internet of Things",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 461": {
+  "name": "Principles of VLSI Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 464": {
+  "name": "Testing of Digital Circuits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "COE 465": {
+  "name": "VLSI System Design Methodology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 497": {
+  "name": "Undergraduate Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 501": {
+  "name": "Computer Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 502": {
+  "name": "Parallel Processing Architectures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 504": {
+  "name": "Heterogeneous Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 506": {
+  "name": "GPU Programing and Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 509": {
+  "name": "Special Topics in Computer Architecture and HPC",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 510": {
+  "name": "Programming Methods for Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 511": {
+  "name": "Multi-agent Robotic Networks",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 512": {
+  "name": "Sensing and Actuation for Intelligent Robots",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 515": {
+  "name": "Introduction to Smart Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 516": {
+  "name": "Internet of Things Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 523": {
+  "name": "Distributed Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 526": {
+  "name": "Data Privacy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 530": {
+  "name": "Quantum Computer& Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 531": {
+  "name": "Advanced Quantum Computing and Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 532": {
+  "name": "Emerging Quantum Technologies",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 540": {
+  "name": "Computer Networks",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 543": {
+  "name": "Mobile Computing and Wireless Networks",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 546": {
+  "name": "Computer Network Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 547": {
+  "name": "Network Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 548": {
+  "name": "Cloud-based Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 550": {
+  "name": "Internet of Things: App & Impl",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "COE 551": {
+  "name": "Computer and Network Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 555": {
+  "name": "Network Management & Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 556": {
+  "name": "Internet of Things- Wireless Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 557": {
+  "name": "Emerging Networks Technologies",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 558": {
+  "name": "Cloud and Edge Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 559": {
+  "name": "ST. in Comp. Networks & Secu.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 561": {
+  "name": "Digital Sys Design & Synthesis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 562": {
+  "name": "VLSI System Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 566": {
+  "name": "VLSI ASIC Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 571": {
+  "name": "Digital System Testing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "COE 581": {
+  "name": "Digital Forensics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 587": {
+  "name": "Performance Evaluation/Analys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 588": {
+  "name": "Modeling and Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "COE 589": {
+  "name": "ST:Computer Syst/Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 592": {
+  "name": "Machine Learning on Embedded Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 595": {
+  "name": "Advanced Computer Vision Proce",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "COE 597": {
+  "name": "Real Time Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 610": {
+  "name": "COE Master Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 661": {
+  "name": "System-On-Chip Modeling & Dsg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 691": {
+  "name": "Special Topics in Computer Engineering - I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "COE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "COE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "COE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "COE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "DATA 201": {
+  "name": "Probability for Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "DATA 211": {
+  "name": "Introduction to Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "DATA 341": {
+  "name": "Stat. Methods for Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
   ]
  },
  "ECON 101": {
@@ -1091,6 +2076,625 @@
    "202630"
   ]
  },
+ "ICS 104": {
+  "name": "Intro. to Prog. in Python & C",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ICS 108": {
+  "name": "Object-Oriented Programming",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 202": {
+  "name": "Data Structures and Algorithms",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 253": {
+  "name": "Discrete Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 321": {
+  "name": "Database Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 343": {
+  "name": "Fund. of Computer Networks",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 344": {
+  "name": "Information Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "ICS 353": {
+  "name": "Design/Analysis of Algorithms",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 381": {
+  "name": "Princ. Artificial Intelligence",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ICS 410": {
+  "name": "Programming Languages",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 413": {
+  "name": "Senior Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 414": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 433": {
+  "name": "Operating Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 440": {
+  "name": "Cryptography and Blockchain Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 442": {
+  "name": "Penetration Test.& Ethical Hac",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 445": {
+  "name": "Network Management & Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 471": {
+  "name": "Deep Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 472": {
+  "name": "Natural Language Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 474": {
+  "name": "Big Data Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 480": {
+  "name": "Reverse Engg. & Exploitation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 483": {
+  "name": "Computer Vision",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 485": {
+  "name": "Machine Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 487": {
+  "name": "Intelligent Decision Support Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ICS 500": {
+  "name": "Res. Meth. & Exp. Dsgn In Comp",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 501": {
+  "name": "Foundations of Artificial Intelligence",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 502": {
+  "name": "Machine Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 503": {
+  "name": "Evolutionary Comp & Global Opt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 504": {
+  "name": "Deep Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 505": {
+  "name": "Computer Vision",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 506": {
+  "name": "Natural Language Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 507": {
+  "name": "Design & Anals of Parallel Alg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 520": {
+  "name": "Artificial Intelligence and Machine learning for Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 531": {
+  "name": "Advanced Operating Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 535": {
+  "name": "Des & Impl Of Prog Languages",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 544": {
+  "name": "Interactive Computer Graphics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ICS 553": {
+  "name": "Algorithms and Complexity",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 555": {
+  "name": "Data Security and Encryption",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ICS 557": {
+  "name": "Advanced Machine Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 560": {
+  "name": "Foundations of Quantum Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 561": {
+  "name": "Quantum Algorithms",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 562": {
+  "name": "Quantum Cryptography",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ICS 574": {
+  "name": "Big Data Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 582": {
+  "name": "Natural Language Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 589": {
+  "name": "ST:Artificial Intelligence",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ICS 590": {
+  "name": "Special Topics in Deep Reinforcement Learning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 611": {
+  "name": "Combinatorial, Approximation & Probabilistic Algorithms",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ICS 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 702": {
+  "name": "Directed Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 711": {
+  "name": "PhD Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ICS 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
  "ISE 205": {
   "name": "Engg Prob & Stat",
   "act": [
@@ -1712,6 +3316,556 @@
   ]
  },
  "ISE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 101": {
+  "name": "Calculus I",
+  "act": [
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "MATH 102": {
+  "name": "Calculus II",
+  "act": [
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "MATH 105": {
+  "name": "Finite Mathematics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 106": {
+  "name": "Applied Calculus",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 201": {
+  "name": "Calculus III",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "MATH 208": {
+  "name": "Differen. Eq & Linear Algebra",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "MATH 210": {
+  "name": "Discrete Mathematics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 225": {
+  "name": "Introduction to Linear Algebra",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 315": {
+  "name": "Development of Mathematics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 323": {
+  "name": "Algebra I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 333": {
+  "name": "Methods of Applied Mathematics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 341": {
+  "name": "Real Analysis I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 371": {
+  "name": "Numerical Computing",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "MATH 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MATH 405": {
+  "name": "Learning from Data",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 407": {
+  "name": "Applied Game Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 413": {
+  "name": "Senior Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 414": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 427": {
+  "name": "Number Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 434": {
+  "name": "Calc-Variations & Optimal Ctrl",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 441": {
+  "name": "Real Analysis II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 445": {
+  "name": "Intro. to Complex Variables",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 453": {
+  "name": "Digital Topology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 463": {
+  "name": "Applied Combinatorics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MATH 490": {
+  "name": "Seminar in Mathematics",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 498": {
+  "name": "Topics in Mathematics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MATH 503": {
+  "name": "Mathematics for Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 506": {
+  "name": "Fundamentals of Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 513": {
+  "name": "Math Methods for Engineers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 521": {
+  "name": "General Topology I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 525": {
+  "name": "Graph Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 528": {
+  "name": "Mathematics for Visual Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 531": {
+  "name": "Real Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 533": {
+  "name": "Complex Variables I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 535": {
+  "name": "Functional Analysis I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MATH 550": {
+  "name": "Linear Algebra",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 557": {
+  "name": "Applied Linear Algebra",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 568": {
+  "name": "Advanced Partial Differential Equations I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 571": {
+  "name": "Num Anal Ord Diff Equations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MATH 572": {
+  "name": "Num Anal Part Diff Equations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 576": {
+  "name": "Applied Numerical Methods I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 578": {
+  "name": "Applied Numerical Methods II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 584": {
+  "name": "Comp Graph : Animation & Simul",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 585": {
+  "name": "Computational Inverse Problem",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 587": {
+  "name": "Advanced Applied Regression",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 601": {
+  "name": "Introduction to Stochastic Differential Equations and Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MATH 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 640": {
+  "name": "Calculus of Variations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MATH 645": {
+  "name": "Combinatorics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MATH 674": {
+  "name": "Numerical Functional Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MATH 681": {
+  "name": "Topics in Math Programming",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MATH 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MATH 712": {
   "name": "PhD. Dissertation",
   "act": [
    "DIS"
@@ -2621,6 +4775,587 @@
   "name": "Spl Tps in Supply Chain Mgt.-I",
   "act": [
    "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SEC 511": {
+  "name": "Principles of Info. Assu & Sec",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SEC 521": {
+  "name": "Network Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SEC 524": {
+  "name": "Computer & Network Forensics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SEC 528": {
+  "name": "Security in Wireless Networks",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEC 540": {
+  "name": "Cryptography and Blockchain Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SEC 542": {
+  "name": "Penet. Test. & Ethical Hacking",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEC 595": {
+  "name": "Special Topics in Information Assurance & Security",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "SEC 599": {
+  "name": "Graduate Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SEC 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SEC 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SEC 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "STAT 201": {
+  "name": "Probability and Statistics for Engineers and Scientists",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "STAT 214": {
+  "name": "Actuarial & Business Stats.",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "STAT 301": {
+  "name": "Intro to Probability Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "STAT 302": {
+  "name": "Statistical Inference",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 310": {
+  "name": "Regression Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 413": {
+  "name": "Statistical Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "STAT 416": {
+  "name": "Stochastic Processes for Actuaries",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "STAT 460": {
+  "name": "Time Series",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "STAT 501": {
+  "name": "Probability and Mathematical Statistics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 502": {
+  "name": "Statistical Inference",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "STAT 503": {
+  "name": "Probability & Stats for Data S",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "STAT 510": {
+  "name": "Regression",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 511": {
+  "name": "Applied Regression and Experimental Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 512": {
+  "name": "Demographic Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "STAT 513": {
+  "name": "Statistical Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 516": {
+  "name": "Stochastic Processes in Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 523": {
+  "name": "Forecasting Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "STAT 530": {
+  "name": "Design and Analysis of Experiments",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "STAT 565": {
+  "name": "Sampling Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "STAT 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "STAT 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "SWE 206": {
+  "name": "Introduction to Software Engg",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 216": {
+  "name": "Software Requirements Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 316": {
+  "name": "Software Design and Const",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 326": {
+  "name": "Software Testing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 363": {
+  "name": "Web Engineering & Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 387": {
+  "name": "Software Project Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "SWE 402": {
+  "name": "Game Programming",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "SWE 412": {
+  "name": "Software Engg. Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "SWE 413": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 414": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 422": {
+  "name": "Usability Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 439": {
+  "name": "Software Quality Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 445": {
+  "name": "Secure Software Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SWE 455": {
+  "name": "Cloud Applications Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SWE 463": {
+  "name": "Mobile Application Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SWE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SWE 516": {
+  "name": "Software Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "SWE 526": {
+  "name": "Software Validation, Verification, and Quality Assurance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SWE 539": {
+  "name": "Software metrics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SWE 545": {
+  "name": "Secure Software Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SWE 555": {
+  "name": "Embedded Software Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SWE 595": {
+  "name": "Special Topics in Software Engineering: Mining Software Repositories",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SWE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SWE 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
   ],
   "terms": [
    "202620"
