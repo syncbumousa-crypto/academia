@@ -57,7 +57,7 @@ for code, tags in J('out', 'business_2026.json')['links'].items():
     for tag in tags:
         core[tag].add(code)
 core['dsmm'].discard('DSMM 465')          # the one elective the DSMM plan names
-core['mis'] |= set(SECT['_mis_core'])
+core['mis'] |= set(SECT['_mis_core']) | set(J('data', 'plans_mis_bulletin.json')['mis']['core'])
 
 college_of = {t: i for i, g in enumerate(COLLEGES) for t in g}
 MAJORS = [t for g in COLLEGES for t in g]
