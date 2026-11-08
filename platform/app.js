@@ -21173,6 +21173,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الجارُ ‎N‎ يبدأ ممتدًّا فوق مكان الداخلة ‎E‎ (عرضُها والفُرجة) ثمّ يتضيّق إلى مكانه — هامشٌ سالبٌ في جهتها يذوب */
   /* ===== ROADMAP-SMOOTH ق٥ (القرار ١): في الضيّقة (لا كتلة) تنبسط الداخلةُ في مكانها الحقيقيّ من عرضٍ صفر — والجارُ يتضيّق
      بنفسه لأنّه يأخذ الباقي — بلا نسخٍ ولا قصّ ===== */
+  /* وقامةُ القسمة في الضيّقة يحدّدها الكتاب (لا تملأ المربّعَ كما في المكبَّرة): تنتقل من قامتها القديمة إلى الجديدة بنعومة */
+  function pkFxHeight(sp, h0, dur) {
+    if (!sp || h0 == null || bkReduce()) return;
+    const h1 = sp.getBoundingClientRect().height;
+    if (Math.abs(h1 - h0) < 2) return;
+    sp.style.overflow = 'hidden';
+    const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
+  }
   function pkPaneGrow(E, N) {
     const sp = E.parentElement;
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') return false;
@@ -21263,8 +21272,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const slot = card.querySelector('.cx-acttools');
     const sa = slot ? [slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, delay: D * .2, easing: 'ease-out', fill: 'forwards' })] : [];
     const anims = sp.getAnimations({ subtree: true }).concat(sa);
+    const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
     pkBandRun(card, tracks, D, () => {
       commit();
+      if (narrow) pkFxHeight(document.querySelector('#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
       /* وأدواتُ الذيل الجديدة تظهر بعد الرسم */
       const c2 = document.querySelector('#cm-body .pk--max .cx-acttools');
       if (c2 && !bkReduce()) c2.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140, easing: 'ease-out' });
@@ -22938,6 +22949,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
     const bookR0 = pkLab() && post ? (post.querySelector('.post-ytmain > .pk-split > .pk-src') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
     const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
+    const bankSpH0 = act0 === null && post && post.querySelector('.post-ytmain > .pk-split') ? post.querySelector('.post-ytmain > .pk-split').getBoundingClientRect().height : null;
     const viewOf = pst => pst && pst.querySelector('.post-ytmain > .pk-split > .kt-view, .post-ytmain > .kt-view');
     const v0 = viewOf(post), r0 = v0 ? v0.getBoundingClientRect() : null, en = state.lang === 'en';
     let fly = null;
@@ -22967,6 +22979,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return;
         }
         if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+          pkFxHeight(pane.parentElement, bankSpH0, PKFX.IN * .8);
           const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
           if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
           pkPaneEnter(post2, pane, nv, 'x', null, () => { cxSel.clear(); pkBank[id] = false; renderCmSection(); });
@@ -23120,6 +23133,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
       const bankW0 = pkLab() && sp ? (sp.querySelector(':scope > .pk-bank') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
       const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
+      const spH0 = act0 === null && sp ? sp.getBoundingClientRect().height : null;
       let enter = false;
       /* مستطيلُ العرض قبل دخول الكتاب — منه يتضيّق إلى مكانه الجديد */
       const before = !part && to === 'source' && post ? post.querySelector('.post-ytmain > .kt-view') : null;
@@ -23159,6 +23173,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             return;
           }
           if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+            pkFxHeight(pane.parentElement, spH0, PKFX.IN * .8);
             const bk1 = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
             if (bk1 && bankW0) pkFxFlex(bk1, bankW0.width, bk1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
             pkPaneEnter(post2, pane, nv, 'x', null, () => { pkSplit[id] = false; renderCmSection(); });
