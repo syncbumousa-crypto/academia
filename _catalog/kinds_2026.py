@@ -24,8 +24,9 @@ bulletin), data/plans_ccm_bulletin.json, data/plans_colleges_bulletin.json,
 data/plans_oldbiz_bulletin.json,
 out/business_2026.json.
 
-  python3 _catalog/kinds_2026.py <live_catalog.json>
-  -> _catalog/out/kinds_2026.{json,sql}
+  python3 _catalog/kinds_2026.py <live_catalog.json> [--dry]
+  -> _catalog/out/kinds_2026.{json,sql}, then run the .sql on the database
+     (--dry: preview only, writes nothing in out/)
 """
 import json, os, sys, time, collections
 
@@ -35,7 +36,11 @@ SECT = J('data', 'plan_sections_bulletin.json')
 LIVE = J(sys.argv[1]) if os.path.isabs(sys.argv[1]) else json.load(open(sys.argv[1], encoding='utf-8'))
 
 COLLEGES = [
-    ['mis', 'acf', 'ffe', 'dsmm', 'fte', 'baai', 'osc', 'acct', 'fin', 'mgt', 'mkt', 'hrm'],
+    # the Business School has two generations of plans, each with its own shared core
+    # (BAI 220/221/300, MGT 475 in 2026; MGT 210/355/449, ECON 306, OM 210 before),
+    # so "most majors of the college" is counted within each generation
+    ['acf', 'ffe', 'dsmm', 'fte', 'baai', 'osc'],
+    ['mis', 'acct', 'fin', 'mgt', 'mkt', 'hrm'],
     ['cs', 'swe', 'coe', 'ise', 'amai', 'dse', 'sde', 'aics', 'math', 'asfm'],
     ['che', 'mse', 'chem', 'bioe', 'bioepm'],
     ['pete', 'geop', 'geol', 'mine'],
@@ -127,6 +132,10 @@ for (t, k), codes in sorted(by.items()):
 sql += ["UPDATE meta SET v = '%d' WHERE k = 'catalog_rev';" % (time.time() * 1000), 'COMMIT;']
 
 out = os.path.join(HERE, 'out')
+# out/kinds_2026.json must stay what the database has (it is how hand edits are told apart),
+# so a preview writes nowhere: python3 _catalog/kinds_2026.py live.json --dry
+if '--dry' in sys.argv:
+    out = os.path.join(os.environ.get('TMPDIR', '/tmp'))
 json.dump([list(r) for r in rows], open(os.path.join(out, 'kinds_2026.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 open(os.path.join(out, 'kinds_2026.sql'), 'w', encoding='utf-8').write('\n'.join(sql) + '\n')
 tab = collections.defaultdict(collections.Counter)

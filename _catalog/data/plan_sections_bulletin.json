@@ -1235,6 +1235,7 @@
    "IAS 111",
    "IAS 121",
    "IAS 212",
+   "IAS 418",
    "CGS 392",
    "PE 101"
   ],
@@ -1243,6 +1244,39 @@
    "ISE 291",
    "COE 292",
    "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "MIS Major Requirements": [
+   "MIS 301",
+   "MIS 311",
+   "MIS 405",
+   "COE 353",
+   "MIS 410"
+  ],
+  "Internship": [
+   "MIS 398"
   ]
  },
  "_mis_core": {
