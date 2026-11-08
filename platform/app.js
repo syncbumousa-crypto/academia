@@ -32218,8 +32218,14 @@ void main() {
     document.documentElement.dataset.lang = state.lang;
     /* التخطيط ثابت دائمًا (dir=rtl لا يتغيّر): تغيير اللغة يبدّل النصوص فقط.
        الاستثناء الوحيد: اتجاه بطاقة المادة (الصورة يمين/يسار) عبر CSS على data-lang. */
-    document.title = t.title;
-    { const lg = $('.side-logo'); if (lg) lg.textContent = t.siteName; }
+    /* وعنوانُ اللسان كذلك: للصفحة أن تُسمّيه (‎<html data-title data-title-en>‎) */
+    { const H = document.documentElement.dataset;
+      document.title = (state.lang === 'en' ? H.titleEn : H.title) || t.title; }
+    /* واسمُ الموقع في الشريط: لصفحةٍ أن تُسمّي نفسها (‎data-brand‎ / ‎data-brand-en‎) —
+       المسلخ «المسلخ» لا «أكاديميا». ولا يُمسّ ‎siteName‎ نفسُه: هو اسمُ حساب الموقع
+       في المساهمات المزروعة أيضًا */
+    { const lg = $('.side-logo');
+      if (lg) lg.textContent = (state.lang === 'en' ? lg.dataset.brandEn : lg.dataset.brand) || t.siteName; }
     /* نافذة «عبّئ من السيلبوس»: نصوصُها الساكنة */
     [['#syl-s1', t.sylS1], ['#syl-s2', t.sylS2], ['#syl-copy', t.sylCopy],
      ['#syl-drop-t', t.sylDropT], ['#syl-pick', t.sylPick],
