@@ -294,6 +294,13 @@ body.side-rail .side-brand { gap: 0; }
   overflow-x: hidden;
 }
 html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
+/* ورأسُ المحتوى (البحث والتصنيفات، أو عنوانُ الصفحة) على حافّة الشريط العليا نفسِها:
+   الشريطُ يبدأ بعد ‎--glass-gap‎ من أعلى الشاشة، فاللوحةُ تبدأ بعدها كذلك، والمقبضُ معها */
+.panel { padding-top: var(--glass-gap); }
+/* ولوحةُ السوق تملأ العرضَ حتّى المقبض: كانت تقف عند ١١٨٠ في الوسط، فيبعد البحثُ عن
+   المقبض بقدر ما زادت الشاشة (٩٧ على ١٦٠٠، و٢٥٧ على ١٩٢٠) والممرُّ على الجهة الأخرى ١٠.
+   فيبقى بينه وبين البحث ما بينه وبين الشريط */
+#panel-market { max-width: none; }
 /* والمحتوى يُفسح للوح وفجوته */
 body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
 html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
@@ -315,7 +322,7 @@ html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) +
      ٤٤ وأيقونته ١٩، وزجاجُ الشريط نفسُه، ويقف في صفّ البحث (مركزُه مركزُه).
      وموضعُه منتصفُ الممرّ بين حرف اللوح وبداية المحتوى، محسوبًا لا مقدَّرًا. */
   width: var(--hdl); height: var(--hdl); border-radius: 50%; padding: 0; border: 0;
-  top: calc(var(--glass-gap) + 9px); transform: none;
+  top: var(--glass-gap); transform: none;
   right: calc(var(--side-w) + var(--glass-gap)
               + (var(--glass-gap) + var(--pnl-pad) + var(--hdl-room)) / 2 - var(--hdl) / 2);
   background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
