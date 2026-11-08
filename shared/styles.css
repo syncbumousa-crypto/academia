@@ -17315,3 +17315,9 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .pk-bank:not(:has(#cm-cards .x3 > *)) > #cm-cards { display: none; }
 /* ومساهمةٌ لم يُكتب فيها شيء: لا عدّاداتِ أصفار في رأسها */
 .pk--edit:has(.pk-split__ph--es) .x3-pkhd :is(.x3-trio, .cs) { display: none; }
+/* وأدواتُ القاع («+» وغيرُه) لا تظهر ما دامت المساحةُ النشِطة فارغةً (طلبُ صاحب الموقع): زرُّ البداية في وسطها يكفي.
+   ‏‎visibility‎ لا ‎display‎: فلا يتبدّل قاعُ البطاقة ولا لسانُها */
+.pk--edit:is(.pk-act--mid, :not([class*="pk-act--"])):has(.pk-split__ph--es) .cx-acttools > *,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards:empty) .cx-acttools > *,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > *,
+.pk--edit.pk-act--book:has(.pk-src--es) .cx-acttools > * { visibility: hidden; pointer-events: none; }
