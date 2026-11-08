@@ -17320,3 +17320,15 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .pk--edit.pk-act--bank:has(.pk-bank #cm-cards:empty) .cx-acttools > *,
 .pk--edit.pk-act--bank:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > *,
 .pk--edit.pk-act--book:has(.pk-src--es) .cx-acttools > * { visibility: hidden; pointer-events: none; }
+
+/* ===== لا مربّعَ كبيرًا تحت الأقسام (طلبُ صاحب الموقع) =====
+   المساهماتُ على لوح الموقع نفسِه: يُنزع سطحُ ‎.cm-pane‎ (الخلفيّةُ والحدُّ والانحناءُ) وقامتُه الثابتة وتمريرُه
+   الداخليّ — فتمرّ الصفحةُ كلُّها بشريطها الواحد. والمكبَّرُ وحده يُبقي القامةَ: المساهمةُ تملأ ما أُعطيت */
+.lib-course .cm-pane, .market-course .cm-pane { background: none; border: 0; border-radius: 0; }
+.lib-course .cm-pane:not(.is-cxmax), .market-course .cm-pane:not(.is-cxmax) {
+  height: auto; min-height: 240px; max-height: none; overflow: visible; padding: 14px 0 0;
+}
+/* والتبويبُ المختارُ كان رأسَ ذلك المربّع بكتفين ينسابان إلى حافّته — ولا مربّعَ الآن، فهو زرٌّ قائمٌ بزواياه الأربع */
+:is(.lib-course, .market-course) .cm-panel .cm-tabs button.on { border-radius: 10px; margin-bottom: 0; }
+:is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::before,
+:is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::after { display: none; }
