@@ -9872,7 +9872,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والملخّصُ الفارغ: مكانُ العرض بلا كلام (طلبُ صاحب الموقع) */
     /* ===== ROADMAP-SMOOTH ق١: في المكبَّرة القسمةُ قائمةٌ دائمًا — ولو كان الوسطُ وحدَه — فلا يتبدّل الهيكلُ (ولا قامةُ الوسط)
        حين تدخل أوّلُ منطقةٍ أو تخرج آخرُها، والمربّعُ المرقّطُ في وعاء الوسط نفسِه فيتحرّك معه ===== */
-    const wrap = pkSplitOn(id) || pkBankOn(id) || (lab && (cxMax || cxMaxPub) && PK_SPLIT_VIEWS.includes(v));
+    const wrap = pkSplitOn(id) || pkBankOn(id) || (lab && PK_SPLIT_VIEWS.includes(v));   /* والضيّقةُ كذلك: قامةُ الوسط لا تتبدّل */
     /* والكتابُ يُمهَّد في وقت الفراغ (محرّكُه ‎three.js‎) إن كان للفصل ملفّ — فلا يدفع أوّلُ دخولٍ ثمنَ تحميله أثناء الحركة */
     if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
     if (!folds.length && wrap) return pkSplitWrap(id, v, ed, `<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div>`, pack);
