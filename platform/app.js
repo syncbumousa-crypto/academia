@@ -9217,7 +9217,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkAct[id] = a;
     const now = pkActOf(id);
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
-    if (post.querySelector('.post-ytmain > .pk-split')) post.classList.add('pk-act--' + now);
+    if (post.querySelector('.post-ytmain > .pk-split > :is(.pk-src, .pk-bank)')) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
     if (!post.classList.contains('pk--max')) return;
@@ -9834,6 +9834,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
+      /* ROADMAP-SMOOTH ق٢: الكتابُ يُبنى بعد أن تقف الحركة (لا أثناءها فتسقط إطاراتُها)، ويظهر بتلاشٍ قصير */
+      if (document.querySelector('#cm-body .pk--fxrun')) {
+        await new Promise(res => { const chk = () => document.querySelector('#cm-body .pk--fxrun') ? setTimeout(chk, 50) : res(); chk(); });
+        if (!view.isConnected || (pkSrcBk[id] && pkSrcBk[id].view === view)) return;
+        if (!bkReduce()) view.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' });
+      }
       (bk2Ok() ? bk2Mount : bkMount)(view, pkSrcBk[id] = {
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
@@ -9862,7 +9868,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
     /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
     /* والملخّصُ الفارغ: مكانُ العرض بلا كلام (طلبُ صاحب الموقع) */
-    if (!folds.length && (pkSplitOn(id) || pkBankOn(id))) return pkSplitWrap(id, v, ed, `<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div>`, pack);
+    /* ===== ROADMAP-SMOOTH ق١: في المكبَّرة القسمةُ قائمةٌ دائمًا — ولو كان الوسطُ وحدَه — فلا يتبدّل الهيكلُ (ولا قامةُ الوسط)
+       حين تدخل أوّلُ منطقةٍ أو تخرج آخرُها، والمربّعُ المرقّطُ في وعاء الوسط نفسِه فيتحرّك معه ===== */
+    const wrap = pkSplitOn(id) || pkBankOn(id) || (lab && (cxMax || cxMaxPub) && PK_SPLIT_VIEWS.includes(v));
+    /* والكتابُ يُمهَّد في وقت الفراغ (محرّكُه ‎three.js‎) إن كان للفصل ملفّ — فلا يدفع أوّلُ دخولٍ ثمنَ تحميله أثناء الحركة */
+    if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
+    if (!folds.length && wrap) return pkSplitWrap(id, v, ed, `<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div>`, pack);
     if (!folds.length) return `<div class="pk-vwph" aria-hidden="true"></div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -9883,7 +9894,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + ((viewH => (pkSplitOn(id) || pkBankOn(id)) ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
+      + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
@@ -21108,7 +21119,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       else stop();
     };
     st.stop = stop; st.draw = draw;
-    st.frame(st.start);
+    /* ===== ROADMAP-SMOOTH: ساعةُ الحركة تبدأ من أوّل إطارٍ يُرى =====
+       النقرةُ قد ترسم المربّعَ كلَّه (ومعه الكتاب) في مهمّةٍ طويلة؛ فإن بدأت الساعةُ معها ضاع أكثرُ الحركة قبل أوّل طلاء وقفز كلُّ شيء.
+       فيُرسم موضعُ البداية الآن، وتُوقَف حركاتُ ‎WAAPI‎ على بدايتها، وتنطلق كلُّها معًا في الإطار التالي */
+    st.anims.forEach(a => { try { a.pause(); a.currentTime = 0; } catch (e) {} });
+    draw(st.from);
+    st.raf = requestAnimationFrame(() => {
+      if (card.pkBandAnim !== st) return;
+      st.start = performance.now();
+      st.anims.forEach(a => { try { a.play(); } catch (e) {} });
+      st.frame(st.start);
+    });
     return st;
   }
   /* عكسُ الجارية من موضعها: اللسانُ يرجع بالمنحنى نفسِه، وحركاتُ ‎WAAPI‎ تُعكس (‎reverse‎) فتعود ممّا بلغت — ثمّ ‎onRev‎ */
@@ -21248,8 +21269,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxHdMeasure();
     if (!bkReduce()) {
       card.classList.add('pk--hdanim');
+      /* الكتابُ يُجمَّد أثناء الطيّ (يتغيّر مقاسُه في كلّ إطار) ويُرسم مرّةً حين يقف — ROADMAP-SMOOTH */
+      cxMorphBusy = true;
       clearTimeout(cxHdSet.t);
-      cxHdSet.t = setTimeout(() => card.classList.remove('pk--hdanim'), 260);
+      cxHdSet.t = setTimeout(() => { card.classList.remove('pk--hdanim'); cxMorphSettle(); }, 260);
     }
     card.classList.toggle('pk--hdup', up);
     const ln = card.querySelector('.pk-hdline:not(.pk-ftline)');
@@ -22949,7 +22972,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       if (d > 1) nv.animate([{ marginInlineEnd: d + 'px' }, { marginInlineEnd: '0px' }], { duration: SPL_MS, easing: SPL_EASE });
     }
+    pkAnimsNextFrame(post2);
     if (ctl) ctl.focus({ preventScroll: true });
+  }
+  /* ROADMAP-SMOOTH: حركاتُ ‎WAAPI‎ التي أُنشئت في نقرةٍ طويلة (رسمُ المربّع) تبدأ من أوّل إطارٍ يُرى — لا من النقرة */
+  function pkAnimsNextFrame(root) {
+    if (!root || !root.getAnimations) return;
+    const an = root.getAnimations({ subtree: true }).concat([...document.querySelectorAll('#cm-body .pk-ghost, #cm-body .pk-bkout')].flatMap(x => x.getAnimations({ subtree: true })));
+    if (!an.length) return;
+    an.forEach(a => { try { a.pause(); } catch (e) {} });
+    requestAnimationFrame(() => an.forEach(a => { try { a.play(); } catch (e) {} }));
   }
   /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
   document.addEventListener('click', e => {
@@ -23111,6 +23143,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (nv) nv.animate([{ marginInlineStart: -d + 'px' }, { marginInlineStart: '0px' }], { duration: SPL_MS, easing: SPL_EASE });
         }
       }
+      { const pc = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`); pkAnimsNextFrame(pc && pc.closest('.post')); }
       /* والتركيزُ لا يضيع: الزرُّ المنقورُ أُعيد بناؤه مع الرسم، فيُعطى نظيرُه الجديدُ التركيزَ إن كان في الشريط */
       const ae = document.activeElement;
       if (!ae || ae === document.body || !ae.isConnected) {
