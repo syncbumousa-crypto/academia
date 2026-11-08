@@ -16183,7 +16183,7 @@ html[data-theme="dark"] .gb-h { color: #9dc3ca; }
    يُدار نصفَ دورة فتنقلب زاويتُه، ويستقرّ على حدّي المربّع كما يستقرّ قوسُ التوسيع فوق —
    خطُّه على ‎4.5px‎ داخلَ الحدّ ونصفُ قطره متّحدُ المركز مع زاوية ‎14‎. و‎aria-pressed‎ يجعل
    انزلاقَه عند المرور «إلى الداخل» (والدورانُ يقلبه إلى الأعلى نحو قلب المربّع) */
-#cm-body .pk-max.pk-max--curve.pk-shrink { top: auto; bottom: 0; inset-inline-start: auto; inset-inline-end: 0; z-index: 4; transform: rotate(180deg); }
+/* (كان قوسُ التضييق مقلوبًا في الزاوية السفلى — صار مسكةً بجانب التوسيع على الزاوية العليا: آخرَ الملفّ) */
 /* ===== الدرجةُ الثالثة: الشاشةُ كلُّها =====
    اللوحُ نفسُه (‎#cm-body‎ وفيه المساهمةُ وحدَها) يُثبَّت فوق كلّ شيء بهامشٍ صغير، وما خلفه يُعتَم.
    وقوسُ التوسيع يغيب فيها — لا أوسعَ منها — ويبقى قوسُ التضييق */
@@ -17026,3 +17026,21 @@ html[data-theme="dark"] .kcv-lab { background: #3a4246; }
 /* البطاقيُّ والجدوليُّ الفارغان: مربّعٌ مرقّطٌ خالٍ يملأ مكانَ العرض في المكبَّرة */
 .kt-view > .kt-empty { min-height: 160px; }
 .pk--max .kt-view > .kt-empty { flex: 1 1 auto; }
+
+/* ===== مسكتا الزاوية: التوسيعُ ذهبيٌّ على الحدّ الأعلى، والتضييقُ بتروليٌّ بجانبه على الحدّ الجانبيّ =====
+   بنقطتين لكلٍّ وأقصرُ من المسكة القديمة (طلبُ صاحب الموقع). الزرّان مكدّسان على المرساة نفسِها،
+   ولا يلتقط النقرَ من كلٍّ إلّا مسكتُه (‎.pk-curve__hit‎) — فلا يحجب أحدُهما الآخر */
+.pk-max--curve .pk-curve__hit { stroke-width: 12; }
+.pk-max--curve .pk-curve__grip { stroke-width: 6; stroke: rgba(201, 162, 92, .2); }
+.pk-max--curve .pk-curve__dots { fill: #a9852f; opacity: .7; }
+.pk-max--curve:hover .pk-curve__grip, .pk-max--curve:focus-visible .pk-curve__grip { stroke: rgba(201, 162, 92, .38); }
+.pk-max--curve:hover .pk-curve__dots, .pk-max--curve:focus-visible .pk-curve__dots { opacity: 1; }
+html[data-theme="dark"] .pk-max--curve .pk-curve__grip { stroke: rgba(225, 193, 114, .2); }
+html[data-theme="dark"] .pk-max--curve .pk-curve__dots { fill: #d4b36a; }
+html[data-theme="dark"] .pk-max--curve:hover .pk-curve__grip { stroke: rgba(225, 193, 114, .36); }
+.pk-max--curve.pk-shrink .pk-curve__grip { stroke: rgba(44, 94, 101, .18); }
+.pk-max--curve.pk-shrink .pk-curve__dots { fill: #2c5e65; }
+.pk-max--curve.pk-shrink:hover .pk-curve__grip, .pk-max--curve.pk-shrink:focus-visible .pk-curve__grip { stroke: rgba(44, 94, 101, .34); }
+html[data-theme="dark"] .pk-max--curve.pk-shrink .pk-curve__grip { stroke: rgba(120, 186, 191, .2); }
+html[data-theme="dark"] .pk-max--curve.pk-shrink .pk-curve__dots { fill: #8cc7cb; }
+html[data-theme="dark"] .pk-max--curve.pk-shrink:hover .pk-curve__grip { stroke: rgba(120, 186, 191, .36); }

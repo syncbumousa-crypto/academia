@@ -10600,7 +10600,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
-      ${maxd ? cxMaxPubBtn(p.id) + cxShrinkBtn() : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
+      ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
@@ -20279,21 +20279,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الخطُّ يجري على ‎4.5px‎ داخلَ حدّ المربّع، والمربّعُ نصفُ قطر زاويته ‎14‎ — فنصفُ قطر القوس
      ‎14 − 4.5 = 9.5‎، ومركزُه مركزُ الزاوية نفسُه (‎30 · 14‎). والمسكةُ والنقاطُ على زواياها كما كانت
      (‎75° → 15°‎ · ‎67.5° · 45° · 22.5°‎) محسوبةً على القوس الجديد */
-  const CX_CURVE = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
-    + '<path class="pk-curve__hit" d="M6 4.5H30A9.5 9.5 0 0 1 39.5 14V38"/>'
-    + '<path class="pk-curve__arc" d="M6 4.5H30A9.5 9.5 0 0 1 39.5 14V38"/>'
-    + '<path class="pk-curve__grip" d="M32.46 4.82A9.5 9.5 0 0 1 39.18 11.54"/>'
-    + '<g class="pk-curve__dots"><circle cx="33.64" cy="5.22" r="1.1"/><circle cx="36.72" cy="7.28" r="1.1"/>'
-    + '<circle cx="38.78" cy="10.36" r="1.1"/></g></g></svg>';
   /* والزرُّ واحدٌ في الحالين: القوسُ نفسُه على الزاوية، ضيّقةً كانت المساهمةُ أو مكبَّرة —
      ويفترقان بجهة الانزلاق عند المرور وحدها (للخارج: سيتّسع · للداخل: سيضيق) */
   /* ===== ثلاثُ درجات: ضيّقة ← واسعة ← الشاشةُ كلُّها (طلبُ صاحب الموقع) =====
      القوسُ فوقُ يُوسّع درجةً كلَّ نقرة (ويغيب في الشاشة الكاملة: لا أوسعَ منها)، وقوسٌ مثلُه
      مقلوبٌ في الزاوية السفلى المقابلة يُضيّق درجةً — من الشاشة الكاملة إلى الواسعة، ومنها إلى الضيّقة */
-  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"
-      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${CX_CURVE}</button></span>`;
+  /* ===== زرّان على الزاوية نفسِها جنبًا إلى جنب (طلبُ صاحب الموقع) =====
+     كان التوسيعُ فوقُ يمينًا والتضييقُ مقلوبًا تحتُ يسارًا. فصارا مسكتين قصيرتين على قوس الزاوية العليا،
+     بنقطتين لكلٍّ: التوسيعُ على الحدّ الأعلى (ذهبيّ)، والتضييقُ بجانبه على الحدّ الجانبيّ (بتروليّ).
+     ونقطتا كلٍّ على ثلثي مسكته. ‏(مركزُ القوس ‎30 · 14‎ ونصفُ قطره ‎9.5‎، والفُرجةُ بينهما ‎46°‎ من القوس) */
+  const CX_GROW = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
+    + '<path class="pk-curve__hit" d="M26 4.5H30A9.5 9.5 0 0 1 33.56 5.19"/>'
+    + '<path class="pk-curve__grip" d="M26 4.5H30A9.5 9.5 0 0 1 33.56 5.19"/>'
+    + '<g class="pk-curve__dots"><circle cx="28.55" cy="4.5" r="1.1"/><circle cx="31.09" cy="4.56" r="1.1"/></g></g></svg>';
+  const CX_SHRINK = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
+    + '<path class="pk-curve__hit" d="M38.81 10.44A9.5 9.5 0 0 1 39.5 14V18"/>'
+    + '<path class="pk-curve__grip" d="M38.81 10.44A9.5 9.5 0 0 1 39.5 14V18"/>'
+    + '<g class="pk-curve__dots"><circle cx="39.44" cy="12.91" r="1.1"/><circle cx="39.5" cy="15.45" r="1.1"/></g></g></svg>';
   const cxShrinkBtn = () => `<button type="button" class="pk-max pk-max--curve pk-shrink" data-cxshrink aria-pressed="true"
-      title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_CURVE}</button>`;
+      title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_SHRINK}</button>`;
+  const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"
+      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${CX_GROW}</button>${cxMax ? cxShrinkBtn() : ''}</span>`;
   function cxFullSet(on) {
     const body = document.getElementById('cm-body');
     cxFull = !!on && !!(cxMax || cxMaxPub);
@@ -20314,9 +20320,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== وفي النشر ضيّقةً: القوسُ الكبيرُ نفسُه على زاوية المساهمة فوق يمين صورة البروفايل =====
      كما في التحرير (طلبُ صاحب الموقع) — بدل القوس الصغير الذي كان على زاوية الغلاف */
   const cxMaxPubCorner = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve pk-max--pubc" data-cxmaxpub="${esc(id)}" aria-pressed="false"
-      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_CURVE}</button></span>`;
+      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_GROW}</button></span>`;
   const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" data-cxup aria-pressed="false"
-      title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_CURVE}</button></span>`;
+      title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_GROW}</button>${cxShrinkBtn()}</span>`;
   /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
   function cxPubMaxSet(id) {
     const body = document.getElementById('cm-body');
@@ -20443,8 +20449,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
       const ft = card.querySelector('.vt-foot');
       if (on && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
-      card.querySelectorAll('.pk-shrink').forEach(x => x.remove());
-      if (on) card.insertAdjacentHTML('beforeend', cxShrinkBtn());
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
@@ -20459,7 +20463,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ المساهمة (الغلافُ والشاراتُ والأخبار) يعدّ الشجرةَ المعروضة: البنكَ في المجلّديّ */
     const d = pkQbOn(cmCode, p) ? pkQbView(p.data) : p.data;
     return `<div class="post pk pk--peek pk--edit pk--pack${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${cxMax && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
-      ${cxMaxBtn()}${cxMax ? cxShrinkBtn() : ''}
+      ${cxMaxBtn()}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
