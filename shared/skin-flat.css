@@ -169,3 +169,7 @@ html[data-skin="flat"] body kbd,
 html[data-skin="flat"] body samp {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+
+/* الرقاقةُ المختارةُ في الداكن: لونُ الهويّة صار فاتحًا (‎#e6e6e4‎)، والنصُّ عليها كان أبيضَ
+   فلا يُرى. فحبرُها لونُ الخلفيّة الداكن */
+html[data-skin="flat"][data-theme="dark"] .fchip.on { color: var(--bg); }

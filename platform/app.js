@@ -2136,6 +2136,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const el = id => document.getElementById(`${p}-${id}`);
     const panel = el('fpanel');
     const wrap = panel.closest('.filterwrap');
+    /* ===== زرُّ التصنيفات قرصٌ يتّسع =====
+       بلا فلاتر: دائرةٌ فيها أيقونةُ التصنيف وحدَها. فإذا اختير فلترٌ اتّسعت
+       الدائرةُ كبسولةً، وصارت رقاقاتُ الفلاتر المختارة داخلها يسارَ الأيقونة —
+       فتُنقل ‎factive‎ من آخر الصفّ إلى جوف الزرّ نفسِه */
+    wrap.insertBefore(el('factive'), panel);
+    el('btn-filter').setAttribute('aria-label', el('f-label').textContent.trim());
+    /* والقرصُ يعرف أنّ لوحه مفتوح — أيًّا كان من فتحه أو أغلقه */
+    new MutationObserver(() => wrap.classList.toggle('is-open', !panel.hidden))
+      .observe(panel, { attributes: true, attributeFilter: ['hidden'] });
 
     /* ============================================================
        التخصّص: صفٌّ أفقيٌّ واحد، وبحثٌ يسارَ عنوانه
@@ -2346,6 +2355,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el('f-act').innerHTML = [['lec', T().lecChip], ['lab', T().labChip]]
         .map(([v, txt]) => chip(v, txt, fAct.has(v), nOf(N.a, v))).join('');
       const n = fHours.size + fCols.size + fKind.size + fStat.size + fAct.size;
+      wrap.classList.toggle('has-f', n > 0);
       const badge = el('fbadge');
       badge.hidden = !n;
       badge.textContent = n;
@@ -2426,6 +2436,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     function applyTexts() {
       el('search').placeholder = T().search;
       el('f-label').textContent = T().filters;
+      el('btn-filter').setAttribute('aria-label', T().filters);
       el('fg-hours').textContent = T().hoursGroup;
       el('fg-col').textContent = T().collegeGroup;
       colIn.placeholder = T().colSearch;
