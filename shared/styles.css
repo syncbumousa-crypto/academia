@@ -17336,3 +17336,6 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on { margin-bottom: 0; }
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::before,
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::after { display: none; }
+/* بالعربيّة تُقرأ من اليمين: «من» ثمّ الشعار */
+html:not([data-lang="en"]) .imp-badge { direction: rtl; padding: 0 7px 0 6px; }
+html:not([data-lang="en"]) .imp-badge__f { font-size: 11px; letter-spacing: 0; }
