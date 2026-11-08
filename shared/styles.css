@@ -319,6 +319,10 @@ html[data-theme="dark"] .fkind { background: rgba(255, 255, 255, .05); }
 }
 .fchip:hover { border-color: var(--c-kfupm); color: var(--c-kfupm); }
 .fchip.on { background: var(--c-kfupm); border-color: var(--c-kfupm); color: #fff; }
+/* عددُ ما يُظهره الفلتر إن ضُغط: باهتٌ لا يزاحم الاسم */
+.fchip__n { margin-inline-start: 5px; font-size: .86em; font-weight: 400; opacity: .45; font-variant-numeric: tabular-nums; }
+.fchip.on .fchip__n { opacity: .7; }
+.fchip.is-zero { opacity: .55; }
 
 /* ---------- شبكة المواد (كثيفة — الكتاب هو البطل، اتجاه E) ---------- */
 .cgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 24px 16px; }
