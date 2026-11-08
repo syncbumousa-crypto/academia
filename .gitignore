@@ -5,3 +5,4 @@ desktop.ini
 # مُجهَّزُ النشر (يبدأ بنقطة فيستثنيه git والتجهيز معًا)
 .stage/
 __pycache__/
+_catalog/plans/
