@@ -17235,3 +17235,62 @@ html[data-theme="dark"] .cx-plus__it { background: #2f3b45; color: #e6ecef; bord
 html[data-theme="dark"] .cx-plus__it:hover, html[data-theme="dark"] .cx-plus__it:focus-visible { background: color-mix(in srgb, #d4b36a 16%, #2f3b45); }
 /* والقائمةُ المفتوحةُ فوق خطوط الفاصل (‎z-index: 3‎ داخل القسمة) — الخانةُ نفسُها ترتفع ما دامت مفتوحة */
 .cx-acttools:has(.cx-plus.is-open) { z-index: 30; }
+
+/* ===== ROADMAP-PAPERS: العرضُ البطاقيُّ رزمةُ أوراقٍ سادة (من «ورقات») =====
+   الورقُ لونٌ واحدٌ هادئٌ وحافّةٌ رفيعة، والنصُّ بخطّ الموقع: المصطلحُ على الوجه ومعناه على الظهر.
+   والرزمةُ في وسط مكانها، والمكبَّرةُ تملأ قامتَها */
+.pk-split > .kt-view--cards, .kt-view--cards { overflow: visible; }
+.pk-split > .kt-view.kt-view--cards { max-height: none; }
+.pp-host { position: relative; display: grid; place-items: center; min-height: 220px; --pp-paper: #fbfaf5; --pp-edge: #e4dfd2; --pp-ink: #1c2947; --pp-soft: #8a91a0; --pp-shadow: rgba(30, 40, 54, .42); }
+html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp-ink: #1c2947; --pp-soft: #6b7180; --pp-shadow: rgba(0, 0, 0, .7); }
+.pk--max .kt-view--cards { display: flex; flex-direction: column; }
+.pk--max .kt-view--cards > .pp-host { flex: 1 1 auto; min-height: 0; }
+.pp-stage { position: relative; perspective: 1300px; }
+.pp-pile { position: absolute; inset: 0; }
+.pp-layer, .pp-face {
+  background: var(--pp-paper); color: var(--pp-ink); container-type: size; overflow: hidden; border-radius: 3px;
+  box-shadow: inset 0 0 0 .5px var(--pp-edge);
+}
+.pp-layer { position: absolute; inset: 0; box-shadow: inset 0 0 0 .5px var(--pp-edge), 0 .5px 0 var(--pp-edge), 0 1px 1.5px rgba(20, 28, 40, .16);
+  transition: transform .5s cubic-bezier(.25, .8, .3, 1), filter .5s ease; }
+.pp-layer.instant { transition: none; }
+.pp-shadow { position: absolute; inset: 8% 5%; border-radius: 14px; background: var(--pp-shadow); filter: blur(16px); opacity: .5; pointer-events: none; will-change: transform, opacity; }
+.pp-card { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; cursor: grab; touch-action: none; outline: none; }
+.pp-card:active { cursor: grabbing; }
+.pp-card:focus-visible .pp-face { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--u-gold, #c9a25c) 70%, transparent); }
+.pp-strip { position: absolute; top: 0; left: 50%; height: 100%; width: var(--sw, 30px); transform-origin: 0 50%; transform-style: preserve-3d; will-change: transform; }
+.pp-slice { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.pp-slice.b { transform: rotateY(180deg); }
+.pp-face { position: absolute; top: 0; left: 0; height: 100%; width: var(--W, 400px); }
+.pp-shade { position: absolute; inset: -1px; pointer-events: none; background: linear-gradient(90deg, rgba(18, 24, 40, var(--s0, 0)), rgba(18, 24, 40, var(--s1, 0))); }
+.pp-word, .pp-mean {
+  position: absolute; inset: 14cqh 10cqh; display: grid; place-items: center; text-align: center;
+  font-size: var(--fs, 14cqh); line-height: 1.35; font-weight: 700; user-select: none; overflow-wrap: anywhere; overflow: hidden;
+}
+.pp-mean { font-weight: 500; }
+.pp-num { position: absolute; top: 6cqh; inset-inline-end: 7cqh; font-size: 4.2cqh; color: var(--pp-soft); direction: ltr; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.pp-ok { position: absolute; top: 5cqh; inset-inline-start: 6cqh; width: 7cqh; height: 7cqh; border-radius: 50%; border: .5cqh dashed color-mix(in srgb, var(--pp-soft) 70%, transparent); cursor: pointer; }
+.pp-ok.on { border: 0; background: #3f9a5c url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 12.5l4 4L18 8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / 70% no-repeat; }
+.pp-layer .pp-ok { display: none; }
+/* الكتابةُ على الوجه الظاهر: طبقةٌ مسطّحةٌ فوق الورقة الساكنة بخطّها وقدّها */
+.pp-edit {
+  position: absolute; inset: 0; z-index: 99; display: grid; place-items: center; text-align: center; padding: 12% 10%;
+  background: var(--pp-paper); color: var(--pp-ink); border-radius: 3px; outline: 2px solid color-mix(in srgb, var(--u-gold, #c9a25c) 65%, transparent);
+  font-size: clamp(16px, 7%, 30px); font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; cursor: text;
+}
+.pp-edit.is-back { font-weight: 500; }
+.pp-edit:empty::before { content: attr(data-ph); color: var(--pp-soft); }
+.pp-card.is-editing { visibility: hidden; }
+.pp-stage { container-type: size; }
+.pp-edit { font-size: 9cqh; }
+.pp-edit.is-back { font-size: 7cqh; }
+.pp-pen { position: absolute; bottom: 5cqh; inset-inline-start: 6cqh; width: 8cqh; height: 8cqh; padding: 1.6cqh; border-radius: 50%; cursor: pointer; color: var(--pp-soft); opacity: .55; transition: opacity .15s, background .15s; }
+.pp-pen svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pp-pen:hover { opacity: 1; background: rgba(28, 41, 71, .07); color: var(--pp-ink); }
+.pp-layer .pp-pen { display: none; }
+/* الرقمُ اتّجاهُه ‎ltr‎ فتنقلب عنده الجهاتُ المنطقيّة: مواضعُ مادّيّةٌ — الرقمُ يسارًا أعلى، و✓ يمينًا أعلى، والقلمُ يمينًا أسفل */
+.pp-num { inset-inline-end: auto; left: 7cqh; right: auto; }
+.pp-ok { inset-inline-start: auto; right: 6cqh; left: auto; }
+.pp-pen { inset-inline-start: auto; right: 6cqh; left: auto; }
+html[data-lang="en"] .pp-num { left: auto; right: 7cqh; }
+html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6cqh; }

@@ -1111,7 +1111,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1581,7 +1581,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9931,6 +9931,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
         + `</tbody></table>`;
+    } else if (v === 'cards' && pkLab()) {
+      /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
+      const key = id + '|' + sel;
+      PPDATA.set(key, { sel, pack, ro: !!ro });
+      if (cards.length) queueMicrotask(ppMountAll);
+      body = !cards.length ? '' : `<div class="pp-host" data-pp="${esc(key)}"></div>`;
     } else if (v === 'cards') {
       body = !cards.length ? '' : `<div class="kc-grid">` + cards.map(n => `<article class="kc${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
         + `<div class="kc-top">${ktOk(n)}</div>`
@@ -9946,6 +9952,305 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const empty = v !== 'tree' && !cards.length ? `<div class="pk-vwph kt-empty" aria-hidden="true"></div>` : '';
     return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${empty}</div>`;
   }
+
+  /* ===== ROADMAP-PAPERS: العرضُ البطاقيُّ رزمةُ أوراق (من «ورقات» — كودُ صاحب الموقع) =====
+     الورقةُ العليا ‎18‎ شريحةً عموديّة لكلٍّ وجهٌ وظهر، فتنثني حين تُقلب؛ وخلفها ورقةٌ حقيقيّةٌ لكلّ بطاقة بإزاحةٍ وميلٍ ثابتين.
+     والفيزياءُ نوابضُ كما في المرجع سطرًا بسطر (بإعداده الافتراضيّ). وشِيل منه بطلب صاحب الموقع: الأصواتُ وزرُّها ورمزُ النطق
+     وخطوطُ الدفتر والحُبيباتُ والمطبوعُ ولوحُ الضبط وخطوطُ اليد — فالورقةُ سادة: المصطلحُ على وجهها ومعناه على ظهرها.
+     وحلقتُها لا تدور إلّا والورقةُ تتحرّك (تسكن فتقف، وتوقظها اليدُ أو الفأرة) */
+  const PPDATA = new Map(), PPORD = new Map();
+  let ppEditNew = null;   /* بطاقةٌ أُضيفت للتوّ: تصعد على الرزمة ووجهُها مفتوحٌ للكتابة */
+  function ppMountAll() {
+    document.querySelectorAll('#cm-body .pp-host:not([data-ppm])').forEach(host => {
+      host.dataset.ppm = '1';
+      const d = PPDATA.get(host.dataset.pp); if (!d) return;
+      ppMount(host, d);
+    });
+  }
+  function ppMount(host, D) {
+    const key = host.dataset.pp;
+    const hostOf = () => ktHost(D.sel, D.pack);
+    const cardsOf = () => { const h = hostOf(); return h ? ktCards(h) : []; };
+    let CARDS = cardsOf();
+    const N = CARDS.length; if (!N) return;
+    /* الترتيبُ يبقى عبر إعادة الرسم (معرّفات البطائق) */
+    let ids = PPORD.get(key) || [];
+    ids = ids.filter(x => CARDS.some(c => c.id === x));
+    CARDS.forEach(c => { if (!ids.includes(c.id)) ids.push(c.id); });
+    if (ppEditNew && ids.includes(ppEditNew)) ids = [ppEditNew].concat(ids.filter(x => x !== ppEditNew));
+    PPORD.set(key, ids);
+    const byId = id => CARDS.find(c => c.id === id);
+    let order = ids.map(id => CARDS.indexOf(byId(id)));
+    const pad = n => String(n).padStart(2, '0');
+    const ro = D.ro;
+    host.innerHTML = `<div class="pp-stage"><div class="pp-pile" aria-hidden="true"></div><div class="pp-shadow"></div>
+      <div class="pp-card" tabindex="0" role="button"></div></div>`;
+    const stage = host.querySelector('.pp-stage'), pile = host.querySelector('.pp-pile'), shadow = host.querySelector('.pp-shadow'), card = host.querySelector('.pp-card');
+    /* في التحرير: ✓ في زاوية الوجه، وقلمٌ صغيرٌ في الزاوية السفلى يفتح نصَّ الوجه الظاهر (النقرُ يقلب كما في المرجع، فلا نقرتين) */
+    const PEN = '<span class="pp-pen" data-pppen><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span>';
+    const faceF = () => `<div class="pp-face pp-front"><span class="pp-num"></span>${ro ? '' : '<span class="pp-ok" data-ppok></span>' + PEN}<div class="pp-word"></div></div>`;
+    const faceB = () => `<div class="pp-face pp-back"><span class="pp-num"></span>${ro ? '' : PEN}<div class="pp-mean"></div></div>`;
+    const NS = 18, strips = [], fronts = [], backs = [], shadesF = [], shadesB = [];
+    for (let i = 0; i < NS; i++) {
+      const s_ = document.createElement('div'); s_.className = 'pp-strip';
+      const sf = document.createElement('div'); sf.className = 'pp-slice f';
+      const sb = document.createElement('div'); sb.className = 'pp-slice b';
+      sf.innerHTML = faceF() + '<i class="pp-shade"></i>'; sb.innerHTML = faceB() + '<i class="pp-shade"></i>';
+      s_.append(sf, sb); card.appendChild(s_);
+      strips.push(s_); fronts.push(sf.firstElementChild); backs.push(sb.firstElementChild);
+      shadesF.push(sf.lastElementChild); shadesB.push(sb.lastElementChild);
+    }
+    let W = 400, SW = 400 / NS;
+    /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة (المكبَّرة)، وحدٌّ أقصى ‎440‎ */
+    function size() {
+      const fill = !!host.closest('.pk--max'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      host.style.height = fill ? '' : host.style.height;
+      const s = Math.max(160, Math.min(440, w * 0.84, h * 0.84 - 30));
+      stage.style.width = stage.style.height = s + 'px';
+      if (!isFinite(h)) host.style.height = (s + 64) + 'px';
+    }
+    function measure() {
+      size();
+      W = card.clientWidth || 400; SW = W / NS;
+      card.style.setProperty('--W', W + 'px'); card.style.setProperty('--sw', (SW + .8) + 'px');
+      for (let i = 0; i < NS; i++) { fronts[i].style.left = (-i * SW) + 'px'; backs[i].style.left = (-(W - (i + 1) * SW) - .8) + 'px'; }
+      wake();
+    }
+    const all = sel => card.querySelectorAll(sel);
+    const reduce = bkReduce();
+    /* الرزمة: ورقةٌ لكلّ بطاقة */
+    const DY = Math.min(4, 36 / Math.max(1, N - 1));
+    const seed = i => { const x = Math.sin(i * 12.9898 + 4.1) * 43758.5453; return x - Math.floor(x); };
+    const rotOf = i => (seed(i) - .5) * 3.4, xOf = i => (seed(i + 50) - .5) * 5;
+    const slotPose = (k, i) => k === 0 ? { x: 0, y: 0, r: 0 } : { x: xOf(i), y: k * DY, r: rotOf(i) };
+    const fit = (el, txt, k) => el.style.setProperty('--fs', Math.max(6, Math.min(k[0], k[1] / Math.max(1, Math.sqrt(txt.length * 3)))) + 'cqh');
+    const layers = CARDS.map((c, i) => {
+      const d = document.createElement('div'); d.className = 'pp-layer';
+      d.innerHTML = `<span class="pp-num"></span><div class="pp-word"></div>`;
+      d.querySelector('.pp-num').textContent = pad(i + 1) + ' / ' + pad(N);
+      const w = d.querySelector('.pp-word'); w.textContent = c.f || ''; fit(w, c.f || '', [16, 70]);
+      pile.appendChild(d); return d;
+    });
+    function placeLayers(shift) {
+      order.forEach((ci, k) => {
+        const el = layers[ci];
+        if (k === 0) { el.style.visibility = 'hidden'; return; }
+        el.style.visibility = '';
+        const kk = k - shift, p = slotPose(kk, ci);
+        el.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.r}deg)`;
+        el.style.zIndex = String(N - kk);
+        el.style.filter = `brightness(${(1 - kk * .014).toFixed(3)})`;
+      });
+    }
+    const setBehind = on => { card.style.zIndex = on ? '0' : String(N + 2); };
+    shadow.style.zIndex = String(N + 1); setBehind(false);
+    let idx = order[0];
+    function render() {
+      const c = CARDS[idx], num = pad(order.indexOf(idx) + 1) + ' / ' + pad(N);
+      all('.pp-word').forEach(el => { el.textContent = c.f || ''; fit(el, c.f || '', [16, 70]); });
+      all('.pp-mean').forEach(el => { el.textContent = c.b || ''; fit(el, c.b || '', [9, 60]); });
+      all('.pp-num').forEach(el => { el.textContent = pad(idx + 1) + ' / ' + pad(N); });
+      all('.pp-ok').forEach(el => el.classList.toggle('on', !!c.ok));
+      card.setAttribute('aria-label', showingBack() ? (c.b || '') : (c.f || ''));
+    }
+    /* الفيزياء — كما في المرجع */
+    const T = { bend: 2, flutter: 1, sag: 2, speed: .75 };
+    const st = { a: 0, va: 0, target: 0, lift: 0, vl: 0, rz: 0, vrz: 0, x: 0, y: 0, vx: 0, vy: 0, enter: 1, ve: 0, D: 0, vD: 0, B: 0, vB: 0, hx: 0, hy: 0, hxT: 0, hyT: 0, mode: 'idle' };
+    const K = reduce ? { a: [320, 36], lift: [260, 32], rz: [300, 40], pos: [300, 36], enter: [200, 30] }
+                     : { a: [125, 14], lift: [170, 20], rz: [210, 7], pos: [230, 21], enter: [95, 15] };
+    const spring = (p, v, to, [k, c], dt) => { const acc = k * (to - p) - c * v; v += acc * dt; return [p + v * dt, v]; };
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    function showingBack() { return (((Math.round(st.target / 180) % 2) + 2) % 2) === 1; }
+    let drag = null, raf = 0, last = 0, still = 0;
+    function wake() { if (!raf && host.isConnected) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+    function flip(dir) { st.target = Math.round(st.target / 180) * 180 + 180 * dir; st.va += 240 * dir; wake(); }
+    function toss() {
+      if (st.mode !== 'idle' || N < 2) return;
+      st.mode = 'toss'; st.phase = 'up'; st.vy = Math.min(st.vy, -900);
+      st.vrz += (Math.random() < .5 ? -1 : 1) * 60; wake();
+    }
+    function nextCard() {
+      const gone = layers[order[0]];
+      gone.classList.add('instant');
+      order.push(order.shift());
+      PPORD.set(key, order.map(i => CARDS[i].id));
+      placeLayers(0); void gone.offsetWidth;
+      requestAnimationFrame(() => gone.classList.remove('instant'));
+      idx = order[0];
+      st.a = st.target = st.va = 0; setBehind(false);
+      st.x = st.y = st.vx = st.vy = 0; st.rz = st.vrz = 0; st.enter = 1; st.ve = 0; st.lift = st.vl = 0; st.mode = 'idle';
+      render();
+    }
+    /* الإدخال */
+    card.addEventListener('pointerdown', e => {
+      if (st.mode !== 'idle' || e.button > 0 || ppEditing) return;
+      if (e.target.closest('[data-ppok], [data-pppen]')) return;
+      card.setPointerCapture(e.pointerId);
+      const now = performance.now();
+      drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, a0: st.a, axis: null, moved: false, lt: now, t0: now };
+      st.va = 0; wake();
+    });
+    card.addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
+      const dx = e.clientX - drag.x0, dy = e.clientY - drag.y0;
+      if (!drag.axis && Math.hypot(dx, dy) > 7) { drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; drag.moved = true; }
+      if (drag.axis === 'x') {
+        const na = drag.a0 + dx * (180 / (card.clientWidth * .85));
+        const v = (na - st.a) / dt; st.va = st.va * .55 + v * .45; st.a = na; st.target = na;
+      } else if (drag.axis === 'y') {
+        const ny = dy < 0 ? dy : dy * .25;
+        st.vy = st.vy * .5 + ((ny - st.y) / dt) * .5; st.vx = st.vx * .5 + ((dx * .35 - st.x) / dt) * .5;
+        st.y = ny; st.x = dx * .35; st.rz = dx * .03;
+      }
+      drag.lt = now; wake();
+    });
+    function endDrag(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      const d = drag; drag = null;
+      if (!d.moved && performance.now() - d.t0 < 600) {
+        const r = card.getBoundingClientRect();
+        flip(e.clientX > r.left + r.width / 2 ? 1 : -1); return;
+      }
+      if (d.axis === 'x') {
+        const base = Math.round(d.a0 / 180) * 180, proj = st.a + st.va * .12;
+        st.target = clamp(Math.round(proj / 180) * 180, base - 180, base + 180);
+      } else if (d.axis === 'y') { if (st.y < -90 || st.vy < -900) toss(); }
+      wake();
+    }
+    card.addEventListener('pointerup', endDrag); card.addEventListener('pointercancel', endDrag);
+    card.addEventListener('keydown', e => {
+      if (ppEditing) return;
+      if (e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); flip(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); flip(-1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); toss(); }
+      else if (e.key === 'Enter' && !ro) { e.preventDefault(); editFace(); }
+      else if ((e.key === 'Delete' || e.key === 'Backspace') && !ro) { e.preventDefault(); delCard(); }
+    });
+    if (!reduce) {
+      stage.addEventListener('pointermove', e => {
+        if (drag || e.pointerType !== 'mouse') return;
+        const r = stage.getBoundingClientRect();
+        st.hxT = ((e.clientX - r.left) / r.width - .5) * 9; st.hyT = -((e.clientY - r.top) / r.height - .5) * 8; wake();
+      });
+      stage.addEventListener('pointerleave', () => { st.hxT = st.hyT = 0; wake(); });
+    }
+    /* ✓ عرفتُها: في زاوية الوجه */
+    card.addEventListener('click', e => {
+      if (ro) return;
+      if (e.target.closest('[data-pppen]')) { e.stopPropagation(); editFace(); return; }
+      const ok = e.target.closest('[data-ppok]'); if (!ok) return;
+      e.stopPropagation(); const c = CARDS[idx]; c.ok = !c.ok; save(); render();
+    });
+    /* ===== التحرير (المرحلة ٢): نقرتان على الورقة الساكنة تفتحان نصَّ وجهها الظاهر في مكانه ===== */
+    function editFace() {
+      if (ro || st.mode !== 'idle' || Math.abs(st.a - st.target) > 2) return;
+      const back = showingBack(), c = CARDS[idx], fld = back ? 'b' : 'f';
+      const ed = document.createElement('div');
+      ed.className = 'pp-edit ' + (back ? 'is-back' : 'is-front');
+      ed.contentEditable = 'plaintext-only'; ed.spellcheck = false; ed.textContent = c[fld] || '';
+      ed.dataset.ph = back ? T_().ktHead[2] : T_().ktHead[1];
+      stage.appendChild(ed); ppEditing = true; card.classList.add('is-editing');
+      ed.focus();
+      const sel = getSelection(), rg = document.createRange(); rg.selectNodeContents(ed); rg.collapse(false); sel.removeAllRanges(); sel.addRange(rg);
+      let fin = false;
+      const done = keep => {
+        if (fin || !ed.isConnected) return; fin = true;
+        if (keep) { c[fld] = ed.textContent.trim(); save(); }
+        ed.remove(); ppEditing = false; card.classList.remove('is-editing');
+        render(); const lw = layers[idx] && layers[idx].querySelector('.pp-word'); if (lw) { lw.textContent = c.f || ''; fit(lw, c.f || '', [16, 70]); }
+        card.focus({ preventScroll: true });
+      };
+      ed.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); done(true); }
+        else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); }
+      });
+      ed.addEventListener('blur', () => done(true));
+    }
+
+    function delCard() {
+      const c = CARDS[idx], h = hostOf(); if (!h) return;
+      if (!confirm(T_().ppDel)) return;
+      const i = h.arr.indexOf(c); if (i >= 0) h.arr.splice(i, 1);
+      save(); renderCmSection();
+    }
+    /* الإطار — كما في المرجع، ويقف إذا سكنت الورقة */
+    function frame(now) {
+      raf = 0;
+      if (!host.isConnected) return;
+      const dt = Math.min(1 / 30, (now - last) / 1000); last = now;
+      const rad = st.a * Math.PI / 180;
+      if (!drag || drag.axis !== 'x') { if (st.mode !== 'toss') [st.a, st.va] = spring(st.a, st.va, st.target, reduce ? K.a : [125 * T.speed * T.speed, 14 * T.speed], dt); }
+      else st.va *= Math.pow(.02, dt);
+      const diff = st.a - st.target;
+      if (!drag && st.mode === 'idle' && Math.abs(diff) < 2 && Math.abs(st.va) > 160 && !reduce) { /* هبوطٌ يهزّها قليلًا */ }
+      const flipLift = Math.abs(Math.sin(rad));
+      const liftTo = Math.max(drag ? .5 : 0, flipLift * .9, st.mode === 'toss' && st.phase === 'up' ? .8 : 0);
+      [st.lift, st.vl] = spring(st.lift, st.vl, liftTo, K.lift, dt);
+      [st.rz, st.vrz] = spring(st.rz, st.vrz, 0, K.rz, dt);
+      [st.enter, st.ve] = spring(st.enter, st.ve, 1, K.enter, dt);
+      if (st.mode === 'toss') {
+        const h = card.clientHeight;
+        if (st.phase === 'up') {
+          [st.y, st.vy] = spring(st.y, st.vy, -h * 1.12, [240, 20], dt);
+          [st.x, st.vx] = spring(st.x, st.vx, 0, K.pos, dt);
+          if (st.y < -h * .95) { st.phase = 'down'; st.t = 0; setBehind(true); placeLayers(1); }
+        } else {
+          st.t += dt;
+          const ci = order[0], end = slotPose(N - 1, ci);
+          [st.y, st.vy] = spring(st.y, st.vy, end.y, [150, 19], dt);
+          [st.x, st.vx] = spring(st.x, st.vx, end.x, K.pos, dt);
+          st.rz += (end.r - st.rz) * Math.min(1, dt * 7);
+          st.hxT = st.hyT = 0;
+          if (st.t > .62) nextCard();
+        }
+      } else if (!drag || drag.axis !== 'y') {
+        [st.x, st.vx] = spring(st.x, st.vx, 0, K.pos, dt);
+        [st.y, st.vy] = spring(st.y, st.vy, 0, K.pos, dt);
+      }
+      st.hx += (st.hxT - st.hx) * Math.min(1, dt * 7); st.hy += (st.hyT - st.hy) * Math.min(1, dt * 7);
+      const L = clamp(st.lift, 0, 1.2), en = clamp(st.enter, 0, 1.1);
+      card.style.transform = `translate3d(${st.x}px, ${st.y - L * 10 + (1 - en) * 13}px, ${L * 70}px)`
+        + ` rotateX(${st.hy + L * 3}deg) rotateY(${st.hx}deg) rotateZ(${st.rz}deg) scale(${(.955 + .045 * en) * (1 + L * .03)})`;
+      const tossing = st.mode === 'toss';
+      const Dt = reduce ? 0 : clamp(st.va * .00062 * T.bend, -1.4, 1.4) + (tossing ? .12 * T.bend : 0);
+      const Bt = reduce ? 0 : T.sag * (L * .16 + (tossing ? .22 : 0) + (drag && drag.axis === 'y' ? clamp(-st.y / 600, 0, .25) : 0));
+      [st.D, st.vD] = spring(st.D, st.vD, Dt, [95, 16 - 13.5 * T.flutter], dt);
+      [st.B, st.vB] = spring(st.B, st.vB, Bt, [140, 18 - 12 * T.flutter], dt);
+      const A = rad, half = NS / 2, phi = new Array(NS), px = new Array(NS + 1), pz = new Array(NS + 1);
+      for (let i = 0; i < NS; i++) { const u = ((i + .5) - half) / half; phi[i] = A + st.B * u - st.D * u * u; }
+      px[half] = 0; pz[half] = 0;
+      for (let j = half + 1; j <= NS; j++) { px[j] = px[j - 1] + SW * Math.cos(phi[j - 1]); pz[j] = pz[j - 1] - SW * Math.sin(phi[j - 1]); }
+      for (let j = half - 1; j >= 0; j--) { px[j] = px[j + 1] - SW * Math.cos(phi[j]); pz[j] = pz[j + 1] + SW * Math.sin(phi[j]); }
+      const fF = a => clamp(.55 * (1 - Math.cos(a + .35)), 0, .6).toFixed(3);
+      const fB = a => clamp(.55 * (1 - Math.cos(a - Math.PI - .35)), 0, .6).toFixed(3);
+      const nphi = j => j === 0 ? phi[0] : j === NS ? phi[NS - 1] : (phi[j - 1] + phi[j]) / 2;
+      let minX = 1e9, maxX = -1e9;
+      for (let i = 0; i < NS; i++) {
+        strips[i].style.transform = `translate3d(${px[i].toFixed(2)}px,0,${pz[i].toFixed(2)}px) rotateY(${phi[i].toFixed(4)}rad)`;
+        const a0 = nphi(i), a1 = nphi(i + 1);
+        shadesF[i].style.setProperty('--s0', fF(a0)); shadesF[i].style.setProperty('--s1', fF(a1));
+        shadesB[i].style.setProperty('--s0', fB(a1)); shadesB[i].style.setProperty('--s1', fB(a0));
+        minX = Math.min(minX, px[i]); maxX = Math.max(maxX, px[i]);
+      }
+      minX = Math.min(minX, px[NS]); maxX = Math.max(maxX, px[NS]);
+      const span = clamp((maxX - minX) / W, .2, 1), away = clamp(1 + st.y / 320, 0, 1);
+      shadow.style.transform = `translate3d(${st.x * .85 + (maxX + minX) / 2}px, ${st.y * .85 + 12 + L * 26}px, 0) scale(${span * (1 + L * .1)}, ${1 + L * .06})`;
+      const behind = st.mode === 'toss' && st.phase === 'down';
+      shadow.style.opacity = behind ? '0' : ((.52 - L * .24) * Math.max(away, .35) * (.4 + .6 * en)).toFixed(3);
+      /* السكون: لا يدٌ ولا رميةٌ والسرعاتُ كلُّها صغيرة — فتقف الحلقة */
+      const calm = !drag && st.mode === 'idle' && Math.abs(st.va) < .5 && Math.abs(st.a - st.target) < .05 && Math.abs(st.vl) < .002 && Math.abs(st.lift - liftTo) < .002
+        && Math.abs(st.vrz) < .01 && Math.abs(st.vx) + Math.abs(st.vy) < .05 && Math.abs(st.x) + Math.abs(st.y) < .05 && Math.abs(st.vD) + Math.abs(st.vB) < .002
+        && Math.abs(st.D - Dt) + Math.abs(st.B - Bt) < .002 && Math.abs(st.hx - st.hxT) + Math.abs(st.hy - st.hyT) < .02 && Math.abs(st.enter - 1) < .002;
+      still = calm ? still + 1 : 0;
+      if (still < 3) raf = requestAnimationFrame(frame);
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(() => { if (host.isConnected) measure(); }).observe(host);
+    placeLayers(0); render(); measure();
+    if (ppEditNew && CARDS[idx] && CARDS[idx].id === ppEditNew) { ppEditNew = null; st.enter = 0; requestAnimationFrame(() => editFace()); }
+  }
+  let ppEditing = false;
+  const T_ = () => T();
   /* ===== اللوحُ الحرّ — العرضُ الشجريّ (ROADMAP-CANVAS · المرحلة ١) =====
      إطارٌ (‎.kcv‎) يقصّ ويلتقط المؤشّر، وفيه «عالمٌ» (‎.kcv-world‎) يتحرّك بـ‎transform‎ وحده (إزاحةٌ وتكبير)،
      وفي العالم طبقةُ الوصلات (‎svg‎) والبطائقُ في مواضعها. إحداثيّاتُ العالم مطلقة (‎x‎ من اليسار) كما في Miro،
@@ -10526,6 +10831,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!host) return;
     const nn = { id: newId(), t: 'c', f: '', b: '' };
     host.arr.push(nn);
+    if (kv.classList.contains('kt-view--cards') && pkLab()) ppEditNew = nn.id;   /* الأوراق: تصعد على الرزمة ووجهُها مفتوح */
     save(); renderCmSection();
     requestAnimationFrame(() => {
       const f = document.querySelector('#cm-body .kt-view [data-kc="' + CSS.escape(nn.id) + '"][data-kfld="f"]');
