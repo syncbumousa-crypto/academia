@@ -17203,3 +17203,35 @@ html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(i
 .pk--max > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; z-index: 3; margin: 0;
   /* على مستوى صفّ الأدوات في الرأس (شريطُ العرض والشارات) — منتصفُه ‎--hdh / 2‎ تحت أعلى الجوف (‎--hdh‎ يقيسه ‎cxHdMeasure‎) */
   top: calc(var(--hdh, 68px) / 2); transform: translateY(-50%); }
+/* ===== «+» الوسط ينفتح عن خيارين يطفوان فوقه ===== */
+.cx-plus { position: relative; display: inline-grid; place-items: center; }
+.cx-plus .cx-plus__tg { position: static; transform: none; transition: background .15s, border-color .15s, transform .2s cubic-bezier(.2, .8, .2, 1); }
+.cx-plus.is-open .cx-plus__tg { transform: rotate(45deg); background: color-mix(in srgb, var(--u-gold, #c9a25c) 22%, var(--u-surf, #fff)); }
+.cx-plus__menu {
+  position: absolute; bottom: calc(100% + 10px); inset-inline-start: 50%; transform: translate(50%, 6px);
+  display: flex; gap: 8px; padding: 6px; border-radius: 999px; white-space: nowrap;
+  background: var(--u-surf2, #fff); border: 1px solid var(--u-line); box-shadow: 0 8px 24px rgba(20, 35, 63, .14);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease, transform .2s cubic-bezier(.2, .8, .2, 1), visibility .2s;
+  z-index: 20;
+}
+html[data-lang="en"] .cx-plus__menu { transform: translate(-50%, 6px); }
+html[data-theme="dark"] .cx-plus__menu { background: #26313a; box-shadow: 0 8px 24px rgba(0, 0, 0, .4); }
+.cx-plus.is-open .cx-plus__menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(50%, 0); }
+html[data-lang="en"] .cx-plus.is-open .cx-plus__menu { transform: translate(-50%, 0); }
+.cx-plus__it {
+  display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px 0 12px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--u-line); background: var(--u-surf, #fff); color: var(--u-ink, #14233f); font: inherit; font-size: 13px; font-weight: 600;
+  transition: border-color .15s, background .15s;
+}
+.cx-plus__it:hover, .cx-plus__it:focus-visible { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 65%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, var(--u-surf, #fff)); outline: none; }
+.cx-plus__it svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; }
+html[data-theme="dark"] .cx-plus__it svg { color: #d4b36a; }
+@media (prefers-reduced-motion: reduce) { .cx-plus__menu, .cx-plus .cx-plus__tg { transition: none; } }
+/* سطوحٌ مصمتةٌ لا شفّافة (كانت خطوطُ ما خلفها تُرى)، وحبرٌ فاتحٌ في الداكن */
+.cx-plus__menu { background: #fff; }
+.cx-plus__it { background: #fff; color: #14233f; }
+html[data-theme="dark"] .cx-plus__menu { background: #26313a; border-color: rgba(255, 255, 255, .1); }
+html[data-theme="dark"] .cx-plus__it { background: #2f3b45; color: #e6ecef; border-color: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .cx-plus__it:hover, html[data-theme="dark"] .cx-plus__it:focus-visible { background: color-mix(in srgb, #d4b36a 16%, #2f3b45); }
+/* والقائمةُ المفتوحةُ فوق خطوط الفاصل (‎z-index: 3‎ داخل القسمة) — الخانةُ نفسُها ترتفع ما دامت مفتوحة */
+.cx-acttools:has(.cx-plus.is-open) { z-index: 30; }
