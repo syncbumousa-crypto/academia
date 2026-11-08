@@ -16370,7 +16370,7 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk-hideall:hover { border-color: rgba(201, 162, 92, .6); }
 .pk-hideall:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
 .pk--ftdn .pk-pubfoot { max-height: 0; padding-top: 0; opacity: 0; visibility: hidden; overflow: hidden; }
-.pk--ftanim .pk-pubfoot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
+.pk--ftanim .pk-pubfoot { transition: max-height .22s ease, min-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }   /* ‎min-height‎ معها (ROADMAP-SMOOTH: كان يقفز ‎34px‎) */
 @media (prefers-reduced-motion: reduce) { .pk--ftanim .pk-pubfoot { transition: none; } }
 
 /* ===== رأسُ المكبَّرة وذيلُها شريطان أغمقُ بدرجة (الاقتراحُ ٣ — اختيارُ صاحب الموقع) =====
@@ -16966,10 +16966,10 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
   .pk--max .pk-split > .kt-view--tree .kcv { min-height: 0; }
 }
 /* اللوحُ يظهر من جهته (اليسار) وهو يتّضح، والكتابُ ينتقل إليه انتقالًا (‎FLIP‎ في ‎bkFlipFrom‎) */
-.pk-split.is-in > .kt-view { animation: pkSplitIn .5s cubic-bezier(.2, .8, .2, 1) both; }
-@keyframes pkSplitIn { from { opacity: 0; transform: translateX(-28px); } }
+.pk-split.is-in > .kt-view { animation: pkSplitIn .44s cubic-bezier(.2, .8, .2, 1) both; }   /* ROADMAP-SMOOTH: ‎12px‎ و‎440ms‎ (كانت ‎28px · 500ms‎) */
+@keyframes pkSplitIn { from { opacity: 0; transform: translateX(-12px); } }
 html[data-lang="en"] .pk-split.is-in > .kt-view { animation-name: pkSplitInEn; }
-@keyframes pkSplitInEn { from { opacity: 0; transform: translateX(28px); } }
+@keyframes pkSplitInEn { from { opacity: 0; transform: translateX(12px); } }
 @media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view { animation: none; } }   /* هامشٌ تحت اللوح يكافئ ما فوقه (بينه وبين شريط المجلدات) — فلا يلتصق بخطّ الذيل */
 .pk--max .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 280px; }
 /* المرحلة ٢: المحدَّدُ بإطارٍ ذهبيّ، والبطاقةُ تُمسك وتُسحب، والنصُّ يُحرَّر بالنقر المزدوج */
