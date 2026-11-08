@@ -2361,10 +2361,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       fHours.has(v) ? fHours.delete(v) : fHours.add(v);
       renderPanel(); render();
     });
+    /* والتخصّصُ واحد: اختيارُ تخصّصٍ يحلّ محلّ ما قبله. كان يُضاف إليه، فإذا بقي
+       «نظم المعلومات» مختارًا من قبلُ ثم اختير «المالية» ظهرت «موادّ التخصّص» للاثنين
+       معًا — موادُّ النظم في المالية. ونوعيّةُ الموادّ لا تُقرأ إلّا لتخصّصٍ بعينه */
     el('f-col').addEventListener('click', e => {
       const b = e.target.closest('.fchip'); if (!b) return;
       const v = b.dataset.v;
-      fCols.has(v) ? fCols.delete(v) : fCols.add(v);
+      const had = fCols.has(v);
+      fCols.clear();
+      if (!had) fCols.add(v);
       renderPanel(); render();
     });
     kindChips.addEventListener('click', e => {
