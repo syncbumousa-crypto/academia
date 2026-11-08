@@ -1,0 +1,2609 @@
+{
+ "pool": [
+  "ACCT 300",
+  "ACCT 301",
+  "ACCT 302",
+  "ACCT 303",
+  "ACCT 304",
+  "ACCT 305",
+  "ACCT 306",
+  "ACCT 307",
+  "ACCT 311",
+  "ACCT 314",
+  "ACCT 321",
+  "ACCT 401",
+  "ACCT 402",
+  "ACCT 403",
+  "ACCT 404",
+  "ACCT 405",
+  "ACCT 406",
+  "ACCT 407",
+  "ACCT 408",
+  "ACCT 409",
+  "ACCT 410",
+  "ACCT 411",
+  "ACCT 420",
+  "ACCT 421",
+  "ACCT 495",
+  "ACCT 499",
+  "BAI 300",
+  "BAI 311",
+  "BAI 312",
+  "BAI 321",
+  "BAI 331",
+  "BAI 332",
+  "BAI 404",
+  "BAI 420",
+  "BAI 421",
+  "BAI 422",
+  "BAI 431",
+  "BAI 432",
+  "BAI 433",
+  "BAI 434",
+  "BAI 460",
+  "DSMM 302",
+  "DSMM 305",
+  "DSMM 310",
+  "DSMM 320",
+  "DSMM 330",
+  "DSMM 340",
+  "DSMM 365",
+  "DSMM 400",
+  "DSMM 410",
+  "DSMM 465",
+  "DSMM 475",
+  "ECON 301",
+  "ECON 302",
+  "ECON 305",
+  "ECON 306",
+  "ECON 330",
+  "ECON 401",
+  "ECON 403",
+  "ECON 405",
+  "ECON 410",
+  "ECON 415",
+  "ECON 420",
+  "ECON 425",
+  "ECON 450",
+  "ECON 475",
+  "ECON 495",
+  "ENTR 310",
+  "ENTR 320",
+  "ENTR 322",
+  "ENTR 410",
+  "ENTR 413",
+  "ENTR 415",
+  "ENTR 416",
+  "ENTR 420",
+  "ENTR 423",
+  "ENTR 495",
+  "FFE 320",
+  "FFE 333",
+  "FFE 335",
+  "FFE 336",
+  "FFE 337",
+  "FFE 338",
+  "FFE 440",
+  "FIN 301",
+  "FIN 302",
+  "FIN 310",
+  "FIN 315",
+  "FIN 320",
+  "FIN 321",
+  "FIN 410",
+  "FIN 415",
+  "FIN 416",
+  "FIN 420",
+  "FIN 421",
+  "FIN 422",
+  "FIN 423",
+  "FIN 424",
+  "FIN 425",
+  "FIN 430",
+  "FIN 435",
+  "FIN 440",
+  "FIN 441",
+  "FIN 442",
+  "FIN 443",
+  "FIN 445",
+  "FIN 450",
+  "FIN 460",
+  "FIN 470",
+  "FIN 480",
+  "FIN 495",
+  "FNT 330",
+  "FNT 340",
+  "FNT 360",
+  "FNT 430",
+  "HRM 301",
+  "HRM 312",
+  "HRM 390",
+  "HRM 401",
+  "HRM 402",
+  "HRM 403",
+  "HRM 406",
+  "HRM 411",
+  "HRM 450",
+  "HRM 495",
+  "MGT 301",
+  "MGT 310",
+  "MGT 311",
+  "MGT 312",
+  "MGT 313",
+  "MGT 355",
+  "MGT 401",
+  "MGT 405",
+  "MGT 410",
+  "MGT 411",
+  "MGT 412",
+  "MGT 413",
+  "MGT 415",
+  "MGT 420",
+  "MGT 425",
+  "MGT 430",
+  "MGT 440",
+  "MGT 448",
+  "MGT 449",
+  "MGT 450",
+  "MGT 475",
+  "MGT 495",
+  "MIS 300",
+  "MIS 301",
+  "MIS 302",
+  "MIS 311",
+  "MIS 315",
+  "MIS 320",
+  "MIS 325",
+  "MIS 341",
+  "MIS 345",
+  "MIS 355",
+  "MIS 365",
+  "MIS 375",
+  "MIS 380",
+  "MIS 393",
+  "MIS 400",
+  "MIS 401",
+  "MIS 402",
+  "MIS 405",
+  "MIS 410",
+  "MIS 411",
+  "MIS 415",
+  "MIS 420",
+  "MIS 425",
+  "MIS 442",
+  "MIS 490",
+  "MIS 495",
+  "MIS 499",
+  "MKT 301",
+  "MKT 313",
+  "MKT 320",
+  "MKT 330",
+  "MKT 340",
+  "MKT 345",
+  "MKT 360",
+  "MKT 370",
+  "MKT 380",
+  "MKT 390",
+  "MKT 400",
+  "MKT 410",
+  "MKT 420",
+  "MKT 430",
+  "MKT 440",
+  "MKT 450",
+  "MKT 460",
+  "MKT 470",
+  "MKT 480",
+  "MKT 485",
+  "MKT 490",
+  "MKT 495",
+  "OM 310",
+  "OM 311",
+  "OM 320",
+  "OM 321",
+  "OM 322",
+  "OM 323",
+  "OM 405",
+  "OM 407",
+  "OM 420",
+  "OM 421",
+  "OM 423",
+  "OM 430",
+  "OSC 310",
+  "OSC 320",
+  "OSC 331",
+  "OSC 340",
+  "OSC 410",
+  "OSC 450",
+  "OSC 460"
+ ],
+ "links": [
+  [
+   "ACCT 300",
+   "baai"
+  ],
+  [
+   "ACCT 300",
+   "dsmm"
+  ],
+  [
+   "ACCT 300",
+   "fte"
+  ],
+  [
+   "ACCT 301",
+   "baai"
+  ],
+  [
+   "ACCT 301",
+   "dsmm"
+  ],
+  [
+   "ACCT 301",
+   "fte"
+  ],
+  [
+   "ACCT 302",
+   "baai"
+  ],
+  [
+   "ACCT 302",
+   "dsmm"
+  ],
+  [
+   "ACCT 302",
+   "fte"
+  ],
+  [
+   "ACCT 303",
+   "baai"
+  ],
+  [
+   "ACCT 303",
+   "dsmm"
+  ],
+  [
+   "ACCT 303",
+   "fte"
+  ],
+  [
+   "ACCT 304",
+   "baai"
+  ],
+  [
+   "ACCT 304",
+   "dsmm"
+  ],
+  [
+   "ACCT 304",
+   "fte"
+  ],
+  [
+   "ACCT 305",
+   "baai"
+  ],
+  [
+   "ACCT 305",
+   "dsmm"
+  ],
+  [
+   "ACCT 305",
+   "fte"
+  ],
+  [
+   "ACCT 306",
+   "baai"
+  ],
+  [
+   "ACCT 306",
+   "dsmm"
+  ],
+  [
+   "ACCT 306",
+   "fte"
+  ],
+  [
+   "ACCT 307",
+   "baai"
+  ],
+  [
+   "ACCT 307",
+   "dsmm"
+  ],
+  [
+   "ACCT 307",
+   "fte"
+  ],
+  [
+   "ACCT 311",
+   "baai"
+  ],
+  [
+   "ACCT 311",
+   "dsmm"
+  ],
+  [
+   "ACCT 311",
+   "fte"
+  ],
+  [
+   "ACCT 314",
+   "baai"
+  ],
+  [
+   "ACCT 314",
+   "dsmm"
+  ],
+  [
+   "ACCT 314",
+   "fte"
+  ],
+  [
+   "ACCT 321",
+   "baai"
+  ],
+  [
+   "ACCT 321",
+   "dsmm"
+  ],
+  [
+   "ACCT 321",
+   "fte"
+  ],
+  [
+   "ACCT 401",
+   "baai"
+  ],
+  [
+   "ACCT 401",
+   "dsmm"
+  ],
+  [
+   "ACCT 401",
+   "fte"
+  ],
+  [
+   "ACCT 402",
+   "baai"
+  ],
+  [
+   "ACCT 402",
+   "dsmm"
+  ],
+  [
+   "ACCT 402",
+   "fte"
+  ],
+  [
+   "ACCT 403",
+   "baai"
+  ],
+  [
+   "ACCT 403",
+   "dsmm"
+  ],
+  [
+   "ACCT 403",
+   "fte"
+  ],
+  [
+   "ACCT 404",
+   "baai"
+  ],
+  [
+   "ACCT 404",
+   "dsmm"
+  ],
+  [
+   "ACCT 404",
+   "fte"
+  ],
+  [
+   "ACCT 405",
+   "baai"
+  ],
+  [
+   "ACCT 405",
+   "dsmm"
+  ],
+  [
+   "ACCT 405",
+   "fte"
+  ],
+  [
+   "ACCT 406",
+   "baai"
+  ],
+  [
+   "ACCT 406",
+   "dsmm"
+  ],
+  [
+   "ACCT 406",
+   "fte"
+  ],
+  [
+   "ACCT 407",
+   "baai"
+  ],
+  [
+   "ACCT 407",
+   "dsmm"
+  ],
+  [
+   "ACCT 407",
+   "fte"
+  ],
+  [
+   "ACCT 408",
+   "baai"
+  ],
+  [
+   "ACCT 408",
+   "dsmm"
+  ],
+  [
+   "ACCT 408",
+   "fte"
+  ],
+  [
+   "ACCT 409",
+   "baai"
+  ],
+  [
+   "ACCT 409",
+   "dsmm"
+  ],
+  [
+   "ACCT 409",
+   "fte"
+  ],
+  [
+   "ACCT 410",
+   "dsmm"
+  ],
+  [
+   "ACCT 410",
+   "fte"
+  ],
+  [
+   "ACCT 411",
+   "baai"
+  ],
+  [
+   "ACCT 411",
+   "dsmm"
+  ],
+  [
+   "ACCT 411",
+   "fte"
+  ],
+  [
+   "ACCT 420",
+   "baai"
+  ],
+  [
+   "ACCT 420",
+   "dsmm"
+  ],
+  [
+   "ACCT 420",
+   "fte"
+  ],
+  [
+   "ACCT 421",
+   "baai"
+  ],
+  [
+   "ACCT 421",
+   "dsmm"
+  ],
+  [
+   "ACCT 421",
+   "fte"
+  ],
+  [
+   "ACCT 495",
+   "baai"
+  ],
+  [
+   "ACCT 495",
+   "dsmm"
+  ],
+  [
+   "ACCT 495",
+   "fte"
+  ],
+  [
+   "ACCT 499",
+   "baai"
+  ],
+  [
+   "ACCT 499",
+   "dsmm"
+  ],
+  [
+   "ACCT 499",
+   "fte"
+  ],
+  [
+   "BAI 311",
+   "dsmm"
+  ],
+  [
+   "BAI 311",
+   "fte"
+  ],
+  [
+   "BAI 312",
+   "dsmm"
+  ],
+  [
+   "BAI 312",
+   "fte"
+  ],
+  [
+   "BAI 321",
+   "dsmm"
+  ],
+  [
+   "BAI 321",
+   "fte"
+  ],
+  [
+   "BAI 331",
+   "dsmm"
+  ],
+  [
+   "BAI 331",
+   "fte"
+  ],
+  [
+   "BAI 332",
+   "dsmm"
+  ],
+  [
+   "BAI 332",
+   "fte"
+  ],
+  [
+   "BAI 404",
+   "dsmm"
+  ],
+  [
+   "BAI 420",
+   "dsmm"
+  ],
+  [
+   "BAI 420",
+   "fte"
+  ],
+  [
+   "BAI 421",
+   "dsmm"
+  ],
+  [
+   "BAI 421",
+   "fte"
+  ],
+  [
+   "BAI 422",
+   "dsmm"
+  ],
+  [
+   "BAI 422",
+   "fte"
+  ],
+  [
+   "BAI 431",
+   "dsmm"
+  ],
+  [
+   "BAI 431",
+   "fte"
+  ],
+  [
+   "BAI 432",
+   "dsmm"
+  ],
+  [
+   "BAI 432",
+   "fte"
+  ],
+  [
+   "BAI 433",
+   "dsmm"
+  ],
+  [
+   "BAI 433",
+   "fte"
+  ],
+  [
+   "BAI 434",
+   "dsmm"
+  ],
+  [
+   "BAI 434",
+   "fte"
+  ],
+  [
+   "BAI 460",
+   "dsmm"
+  ],
+  [
+   "BAI 460",
+   "fte"
+  ],
+  [
+   "DSMM 302",
+   "baai"
+  ],
+  [
+   "DSMM 305",
+   "baai"
+  ],
+  [
+   "DSMM 305",
+   "fte"
+  ],
+  [
+   "DSMM 310",
+   "baai"
+  ],
+  [
+   "DSMM 310",
+   "fte"
+  ],
+  [
+   "DSMM 320",
+   "baai"
+  ],
+  [
+   "DSMM 320",
+   "fte"
+  ],
+  [
+   "DSMM 330",
+   "baai"
+  ],
+  [
+   "DSMM 330",
+   "fte"
+  ],
+  [
+   "DSMM 340",
+   "baai"
+  ],
+  [
+   "DSMM 340",
+   "fte"
+  ],
+  [
+   "DSMM 365",
+   "baai"
+  ],
+  [
+   "DSMM 365",
+   "fte"
+  ],
+  [
+   "DSMM 400",
+   "baai"
+  ],
+  [
+   "DSMM 400",
+   "fte"
+  ],
+  [
+   "DSMM 410",
+   "baai"
+  ],
+  [
+   "DSMM 410",
+   "fte"
+  ],
+  [
+   "DSMM 465",
+   "baai"
+  ],
+  [
+   "DSMM 465",
+   "fte"
+  ],
+  [
+   "DSMM 475",
+   "baai"
+  ],
+  [
+   "DSMM 475",
+   "fte"
+  ],
+  [
+   "ECON 301",
+   "baai"
+  ],
+  [
+   "ECON 301",
+   "dsmm"
+  ],
+  [
+   "ECON 301",
+   "fte"
+  ],
+  [
+   "ECON 302",
+   "baai"
+  ],
+  [
+   "ECON 302",
+   "dsmm"
+  ],
+  [
+   "ECON 302",
+   "fte"
+  ],
+  [
+   "ECON 305",
+   "baai"
+  ],
+  [
+   "ECON 305",
+   "dsmm"
+  ],
+  [
+   "ECON 305",
+   "fte"
+  ],
+  [
+   "ECON 306",
+   "baai"
+  ],
+  [
+   "ECON 306",
+   "dsmm"
+  ],
+  [
+   "ECON 306",
+   "fte"
+  ],
+  [
+   "ECON 330",
+   "baai"
+  ],
+  [
+   "ECON 330",
+   "dsmm"
+  ],
+  [
+   "ECON 330",
+   "fte"
+  ],
+  [
+   "ECON 401",
+   "baai"
+  ],
+  [
+   "ECON 401",
+   "dsmm"
+  ],
+  [
+   "ECON 401",
+   "fte"
+  ],
+  [
+   "ECON 403",
+   "baai"
+  ],
+  [
+   "ECON 403",
+   "dsmm"
+  ],
+  [
+   "ECON 403",
+   "fte"
+  ],
+  [
+   "ECON 405",
+   "baai"
+  ],
+  [
+   "ECON 405",
+   "dsmm"
+  ],
+  [
+   "ECON 405",
+   "fte"
+  ],
+  [
+   "ECON 410",
+   "baai"
+  ],
+  [
+   "ECON 410",
+   "dsmm"
+  ],
+  [
+   "ECON 410",
+   "fte"
+  ],
+  [
+   "ECON 415",
+   "baai"
+  ],
+  [
+   "ECON 415",
+   "dsmm"
+  ],
+  [
+   "ECON 415",
+   "fte"
+  ],
+  [
+   "ECON 420",
+   "baai"
+  ],
+  [
+   "ECON 420",
+   "dsmm"
+  ],
+  [
+   "ECON 420",
+   "fte"
+  ],
+  [
+   "ECON 425",
+   "baai"
+  ],
+  [
+   "ECON 425",
+   "dsmm"
+  ],
+  [
+   "ECON 425",
+   "fte"
+  ],
+  [
+   "ECON 450",
+   "baai"
+  ],
+  [
+   "ECON 450",
+   "dsmm"
+  ],
+  [
+   "ECON 450",
+   "fte"
+  ],
+  [
+   "ECON 475",
+   "baai"
+  ],
+  [
+   "ECON 475",
+   "dsmm"
+  ],
+  [
+   "ECON 475",
+   "fte"
+  ],
+  [
+   "ECON 495",
+   "baai"
+  ],
+  [
+   "ECON 495",
+   "dsmm"
+  ],
+  [
+   "ECON 495",
+   "fte"
+  ],
+  [
+   "ENTR 310",
+   "baai"
+  ],
+  [
+   "ENTR 310",
+   "dsmm"
+  ],
+  [
+   "ENTR 320",
+   "baai"
+  ],
+  [
+   "ENTR 322",
+   "baai"
+  ],
+  [
+   "ENTR 322",
+   "dsmm"
+  ],
+  [
+   "ENTR 322",
+   "fte"
+  ],
+  [
+   "ENTR 410",
+   "baai"
+  ],
+  [
+   "ENTR 410",
+   "dsmm"
+  ],
+  [
+   "ENTR 413",
+   "baai"
+  ],
+  [
+   "ENTR 413",
+   "dsmm"
+  ],
+  [
+   "ENTR 413",
+   "fte"
+  ],
+  [
+   "ENTR 415",
+   "baai"
+  ],
+  [
+   "ENTR 415",
+   "dsmm"
+  ],
+  [
+   "ENTR 415",
+   "fte"
+  ],
+  [
+   "ENTR 416",
+   "baai"
+  ],
+  [
+   "ENTR 416",
+   "dsmm"
+  ],
+  [
+   "ENTR 416",
+   "fte"
+  ],
+  [
+   "ENTR 420",
+   "baai"
+  ],
+  [
+   "ENTR 420",
+   "dsmm"
+  ],
+  [
+   "ENTR 423",
+   "baai"
+  ],
+  [
+   "ENTR 423",
+   "dsmm"
+  ],
+  [
+   "ENTR 423",
+   "fte"
+  ],
+  [
+   "ENTR 495",
+   "baai"
+  ],
+  [
+   "ENTR 495",
+   "dsmm"
+  ],
+  [
+   "ENTR 495",
+   "fte"
+  ],
+  [
+   "FFE 320",
+   "baai"
+  ],
+  [
+   "FFE 320",
+   "dsmm"
+  ],
+  [
+   "FFE 320",
+   "fte"
+  ],
+  [
+   "FFE 333",
+   "baai"
+  ],
+  [
+   "FFE 333",
+   "dsmm"
+  ],
+  [
+   "FFE 333",
+   "fte"
+  ],
+  [
+   "FFE 335",
+   "baai"
+  ],
+  [
+   "FFE 335",
+   "dsmm"
+  ],
+  [
+   "FFE 335",
+   "fte"
+  ],
+  [
+   "FFE 336",
+   "baai"
+  ],
+  [
+   "FFE 336",
+   "dsmm"
+  ],
+  [
+   "FFE 336",
+   "fte"
+  ],
+  [
+   "FFE 337",
+   "baai"
+  ],
+  [
+   "FFE 337",
+   "dsmm"
+  ],
+  [
+   "FFE 337",
+   "fte"
+  ],
+  [
+   "FFE 338",
+   "baai"
+  ],
+  [
+   "FFE 338",
+   "dsmm"
+  ],
+  [
+   "FFE 338",
+   "fte"
+  ],
+  [
+   "FFE 440",
+   "baai"
+  ],
+  [
+   "FFE 440",
+   "dsmm"
+  ],
+  [
+   "FFE 440",
+   "fte"
+  ],
+  [
+   "FIN 301",
+   "baai"
+  ],
+  [
+   "FIN 301",
+   "dsmm"
+  ],
+  [
+   "FIN 301",
+   "fte"
+  ],
+  [
+   "FIN 302",
+   "baai"
+  ],
+  [
+   "FIN 302",
+   "dsmm"
+  ],
+  [
+   "FIN 302",
+   "fte"
+  ],
+  [
+   "FIN 310",
+   "baai"
+  ],
+  [
+   "FIN 310",
+   "dsmm"
+  ],
+  [
+   "FIN 310",
+   "fte"
+  ],
+  [
+   "FIN 315",
+   "baai"
+  ],
+  [
+   "FIN 315",
+   "dsmm"
+  ],
+  [
+   "FIN 315",
+   "fte"
+  ],
+  [
+   "FIN 320",
+   "baai"
+  ],
+  [
+   "FIN 320",
+   "dsmm"
+  ],
+  [
+   "FIN 321",
+   "baai"
+  ],
+  [
+   "FIN 321",
+   "dsmm"
+  ],
+  [
+   "FIN 321",
+   "fte"
+  ],
+  [
+   "FIN 410",
+   "baai"
+  ],
+  [
+   "FIN 410",
+   "dsmm"
+  ],
+  [
+   "FIN 410",
+   "fte"
+  ],
+  [
+   "FIN 415",
+   "baai"
+  ],
+  [
+   "FIN 415",
+   "dsmm"
+  ],
+  [
+   "FIN 415",
+   "fte"
+  ],
+  [
+   "FIN 416",
+   "baai"
+  ],
+  [
+   "FIN 416",
+   "dsmm"
+  ],
+  [
+   "FIN 416",
+   "fte"
+  ],
+  [
+   "FIN 420",
+   "baai"
+  ],
+  [
+   "FIN 420",
+   "dsmm"
+  ],
+  [
+   "FIN 420",
+   "fte"
+  ],
+  [
+   "FIN 421",
+   "baai"
+  ],
+  [
+   "FIN 421",
+   "dsmm"
+  ],
+  [
+   "FIN 421",
+   "fte"
+  ],
+  [
+   "FIN 422",
+   "baai"
+  ],
+  [
+   "FIN 422",
+   "dsmm"
+  ],
+  [
+   "FIN 422",
+   "fte"
+  ],
+  [
+   "FIN 423",
+   "baai"
+  ],
+  [
+   "FIN 423",
+   "dsmm"
+  ],
+  [
+   "FIN 423",
+   "fte"
+  ],
+  [
+   "FIN 424",
+   "baai"
+  ],
+  [
+   "FIN 424",
+   "dsmm"
+  ],
+  [
+   "FIN 424",
+   "fte"
+  ],
+  [
+   "FIN 425",
+   "baai"
+  ],
+  [
+   "FIN 425",
+   "dsmm"
+  ],
+  [
+   "FIN 425",
+   "fte"
+  ],
+  [
+   "FIN 430",
+   "baai"
+  ],
+  [
+   "FIN 430",
+   "dsmm"
+  ],
+  [
+   "FIN 430",
+   "fte"
+  ],
+  [
+   "FIN 435",
+   "baai"
+  ],
+  [
+   "FIN 435",
+   "dsmm"
+  ],
+  [
+   "FIN 435",
+   "fte"
+  ],
+  [
+   "FIN 440",
+   "baai"
+  ],
+  [
+   "FIN 440",
+   "dsmm"
+  ],
+  [
+   "FIN 440",
+   "fte"
+  ],
+  [
+   "FIN 441",
+   "baai"
+  ],
+  [
+   "FIN 441",
+   "dsmm"
+  ],
+  [
+   "FIN 441",
+   "fte"
+  ],
+  [
+   "FIN 442",
+   "baai"
+  ],
+  [
+   "FIN 442",
+   "dsmm"
+  ],
+  [
+   "FIN 442",
+   "fte"
+  ],
+  [
+   "FIN 443",
+   "baai"
+  ],
+  [
+   "FIN 443",
+   "dsmm"
+  ],
+  [
+   "FIN 443",
+   "fte"
+  ],
+  [
+   "FIN 445",
+   "baai"
+  ],
+  [
+   "FIN 445",
+   "dsmm"
+  ],
+  [
+   "FIN 445",
+   "fte"
+  ],
+  [
+   "FIN 450",
+   "baai"
+  ],
+  [
+   "FIN 450",
+   "dsmm"
+  ],
+  [
+   "FIN 450",
+   "fte"
+  ],
+  [
+   "FIN 460",
+   "baai"
+  ],
+  [
+   "FIN 460",
+   "dsmm"
+  ],
+  [
+   "FIN 460",
+   "fte"
+  ],
+  [
+   "FIN 470",
+   "baai"
+  ],
+  [
+   "FIN 470",
+   "dsmm"
+  ],
+  [
+   "FIN 470",
+   "fte"
+  ],
+  [
+   "FIN 480",
+   "baai"
+  ],
+  [
+   "FIN 480",
+   "dsmm"
+  ],
+  [
+   "FIN 480",
+   "fte"
+  ],
+  [
+   "FIN 495",
+   "baai"
+  ],
+  [
+   "FIN 495",
+   "dsmm"
+  ],
+  [
+   "FIN 495",
+   "fte"
+  ],
+  [
+   "FNT 330",
+   "baai"
+  ],
+  [
+   "FNT 330",
+   "dsmm"
+  ],
+  [
+   "FNT 340",
+   "baai"
+  ],
+  [
+   "FNT 340",
+   "dsmm"
+  ],
+  [
+   "FNT 360",
+   "baai"
+  ],
+  [
+   "FNT 360",
+   "dsmm"
+  ],
+  [
+   "FNT 430",
+   "baai"
+  ],
+  [
+   "FNT 430",
+   "dsmm"
+  ],
+  [
+   "HRM 301",
+   "baai"
+  ],
+  [
+   "HRM 301",
+   "dsmm"
+  ],
+  [
+   "HRM 301",
+   "fte"
+  ],
+  [
+   "HRM 312",
+   "baai"
+  ],
+  [
+   "HRM 312",
+   "dsmm"
+  ],
+  [
+   "HRM 312",
+   "fte"
+  ],
+  [
+   "HRM 390",
+   "baai"
+  ],
+  [
+   "HRM 390",
+   "dsmm"
+  ],
+  [
+   "HRM 390",
+   "fte"
+  ],
+  [
+   "HRM 401",
+   "baai"
+  ],
+  [
+   "HRM 401",
+   "dsmm"
+  ],
+  [
+   "HRM 401",
+   "fte"
+  ],
+  [
+   "HRM 402",
+   "baai"
+  ],
+  [
+   "HRM 402",
+   "dsmm"
+  ],
+  [
+   "HRM 402",
+   "fte"
+  ],
+  [
+   "HRM 403",
+   "baai"
+  ],
+  [
+   "HRM 403",
+   "dsmm"
+  ],
+  [
+   "HRM 403",
+   "fte"
+  ],
+  [
+   "HRM 406",
+   "baai"
+  ],
+  [
+   "HRM 406",
+   "dsmm"
+  ],
+  [
+   "HRM 406",
+   "fte"
+  ],
+  [
+   "HRM 411",
+   "baai"
+  ],
+  [
+   "HRM 411",
+   "dsmm"
+  ],
+  [
+   "HRM 411",
+   "fte"
+  ],
+  [
+   "HRM 450",
+   "baai"
+  ],
+  [
+   "HRM 450",
+   "dsmm"
+  ],
+  [
+   "HRM 450",
+   "fte"
+  ],
+  [
+   "HRM 495",
+   "baai"
+  ],
+  [
+   "HRM 495",
+   "dsmm"
+  ],
+  [
+   "HRM 495",
+   "fte"
+  ],
+  [
+   "MGT 301",
+   "baai"
+  ],
+  [
+   "MGT 301",
+   "dsmm"
+  ],
+  [
+   "MGT 301",
+   "fte"
+  ],
+  [
+   "MGT 311",
+   "fte"
+  ],
+  [
+   "MGT 312",
+   "baai"
+  ],
+  [
+   "MGT 312",
+   "dsmm"
+  ],
+  [
+   "MGT 312",
+   "fte"
+  ],
+  [
+   "MGT 313",
+   "baai"
+  ],
+  [
+   "MGT 313",
+   "dsmm"
+  ],
+  [
+   "MGT 313",
+   "fte"
+  ],
+  [
+   "MGT 355",
+   "baai"
+  ],
+  [
+   "MGT 355",
+   "dsmm"
+  ],
+  [
+   "MGT 355",
+   "fte"
+  ],
+  [
+   "MGT 401",
+   "baai"
+  ],
+  [
+   "MGT 401",
+   "dsmm"
+  ],
+  [
+   "MGT 401",
+   "fte"
+  ],
+  [
+   "MGT 405",
+   "baai"
+  ],
+  [
+   "MGT 405",
+   "dsmm"
+  ],
+  [
+   "MGT 405",
+   "fte"
+  ],
+  [
+   "MGT 410",
+   "baai"
+  ],
+  [
+   "MGT 410",
+   "dsmm"
+  ],
+  [
+   "MGT 410",
+   "fte"
+  ],
+  [
+   "MGT 411",
+   "baai"
+  ],
+  [
+   "MGT 411",
+   "dsmm"
+  ],
+  [
+   "MGT 411",
+   "fte"
+  ],
+  [
+   "MGT 412",
+   "baai"
+  ],
+  [
+   "MGT 412",
+   "dsmm"
+  ],
+  [
+   "MGT 412",
+   "fte"
+  ],
+  [
+   "MGT 413",
+   "baai"
+  ],
+  [
+   "MGT 413",
+   "dsmm"
+  ],
+  [
+   "MGT 413",
+   "fte"
+  ],
+  [
+   "MGT 415",
+   "baai"
+  ],
+  [
+   "MGT 415",
+   "dsmm"
+  ],
+  [
+   "MGT 415",
+   "fte"
+  ],
+  [
+   "MGT 420",
+   "baai"
+  ],
+  [
+   "MGT 420",
+   "dsmm"
+  ],
+  [
+   "MGT 420",
+   "fte"
+  ],
+  [
+   "MGT 425",
+   "baai"
+  ],
+  [
+   "MGT 425",
+   "dsmm"
+  ],
+  [
+   "MGT 425",
+   "fte"
+  ],
+  [
+   "MGT 430",
+   "baai"
+  ],
+  [
+   "MGT 430",
+   "dsmm"
+  ],
+  [
+   "MGT 430",
+   "fte"
+  ],
+  [
+   "MGT 440",
+   "baai"
+  ],
+  [
+   "MGT 440",
+   "dsmm"
+  ],
+  [
+   "MGT 440",
+   "fte"
+  ],
+  [
+   "MGT 448",
+   "baai"
+  ],
+  [
+   "MGT 448",
+   "dsmm"
+  ],
+  [
+   "MGT 448",
+   "fte"
+  ],
+  [
+   "MGT 449",
+   "baai"
+  ],
+  [
+   "MGT 449",
+   "dsmm"
+  ],
+  [
+   "MGT 449",
+   "fte"
+  ],
+  [
+   "MGT 450",
+   "baai"
+  ],
+  [
+   "MGT 450",
+   "dsmm"
+  ],
+  [
+   "MGT 450",
+   "fte"
+  ],
+  [
+   "MGT 475",
+   "fte"
+  ],
+  [
+   "MGT 495",
+   "baai"
+  ],
+  [
+   "MGT 495",
+   "dsmm"
+  ],
+  [
+   "MGT 495",
+   "fte"
+  ],
+  [
+   "MIS 300",
+   "baai"
+  ],
+  [
+   "MIS 300",
+   "dsmm"
+  ],
+  [
+   "MIS 300",
+   "fte"
+  ],
+  [
+   "MIS 301",
+   "baai"
+  ],
+  [
+   "MIS 301",
+   "dsmm"
+  ],
+  [
+   "MIS 301",
+   "fte"
+  ],
+  [
+   "MIS 302",
+   "baai"
+  ],
+  [
+   "MIS 302",
+   "dsmm"
+  ],
+  [
+   "MIS 302",
+   "fte"
+  ],
+  [
+   "MIS 311",
+   "baai"
+  ],
+  [
+   "MIS 311",
+   "dsmm"
+  ],
+  [
+   "MIS 311",
+   "fte"
+  ],
+  [
+   "MIS 315",
+   "baai"
+  ],
+  [
+   "MIS 315",
+   "dsmm"
+  ],
+  [
+   "MIS 315",
+   "fte"
+  ],
+  [
+   "MIS 320",
+   "baai"
+  ],
+  [
+   "MIS 320",
+   "dsmm"
+  ],
+  [
+   "MIS 320",
+   "fte"
+  ],
+  [
+   "MIS 325",
+   "baai"
+  ],
+  [
+   "MIS 325",
+   "dsmm"
+  ],
+  [
+   "MIS 325",
+   "fte"
+  ],
+  [
+   "MIS 341",
+   "baai"
+  ],
+  [
+   "MIS 341",
+   "dsmm"
+  ],
+  [
+   "MIS 341",
+   "fte"
+  ],
+  [
+   "MIS 345",
+   "baai"
+  ],
+  [
+   "MIS 345",
+   "dsmm"
+  ],
+  [
+   "MIS 345",
+   "fte"
+  ],
+  [
+   "MIS 355",
+   "baai"
+  ],
+  [
+   "MIS 355",
+   "dsmm"
+  ],
+  [
+   "MIS 355",
+   "fte"
+  ],
+  [
+   "MIS 365",
+   "baai"
+  ],
+  [
+   "MIS 365",
+   "dsmm"
+  ],
+  [
+   "MIS 365",
+   "fte"
+  ],
+  [
+   "MIS 375",
+   "baai"
+  ],
+  [
+   "MIS 375",
+   "dsmm"
+  ],
+  [
+   "MIS 375",
+   "fte"
+  ],
+  [
+   "MIS 380",
+   "baai"
+  ],
+  [
+   "MIS 380",
+   "dsmm"
+  ],
+  [
+   "MIS 380",
+   "fte"
+  ],
+  [
+   "MIS 393",
+   "baai"
+  ],
+  [
+   "MIS 393",
+   "dsmm"
+  ],
+  [
+   "MIS 393",
+   "fte"
+  ],
+  [
+   "MIS 400",
+   "baai"
+  ],
+  [
+   "MIS 400",
+   "dsmm"
+  ],
+  [
+   "MIS 400",
+   "fte"
+  ],
+  [
+   "MIS 401",
+   "baai"
+  ],
+  [
+   "MIS 401",
+   "dsmm"
+  ],
+  [
+   "MIS 401",
+   "fte"
+  ],
+  [
+   "MIS 402",
+   "baai"
+  ],
+  [
+   "MIS 402",
+   "dsmm"
+  ],
+  [
+   "MIS 402",
+   "fte"
+  ],
+  [
+   "MIS 405",
+   "baai"
+  ],
+  [
+   "MIS 405",
+   "dsmm"
+  ],
+  [
+   "MIS 405",
+   "fte"
+  ],
+  [
+   "MIS 410",
+   "baai"
+  ],
+  [
+   "MIS 410",
+   "dsmm"
+  ],
+  [
+   "MIS 410",
+   "fte"
+  ],
+  [
+   "MIS 411",
+   "baai"
+  ],
+  [
+   "MIS 411",
+   "dsmm"
+  ],
+  [
+   "MIS 411",
+   "fte"
+  ],
+  [
+   "MIS 415",
+   "baai"
+  ],
+  [
+   "MIS 415",
+   "dsmm"
+  ],
+  [
+   "MIS 415",
+   "fte"
+  ],
+  [
+   "MIS 420",
+   "baai"
+  ],
+  [
+   "MIS 420",
+   "dsmm"
+  ],
+  [
+   "MIS 420",
+   "fte"
+  ],
+  [
+   "MIS 425",
+   "baai"
+  ],
+  [
+   "MIS 425",
+   "dsmm"
+  ],
+  [
+   "MIS 425",
+   "fte"
+  ],
+  [
+   "MIS 442",
+   "baai"
+  ],
+  [
+   "MIS 442",
+   "dsmm"
+  ],
+  [
+   "MIS 442",
+   "fte"
+  ],
+  [
+   "MIS 490",
+   "baai"
+  ],
+  [
+   "MIS 490",
+   "dsmm"
+  ],
+  [
+   "MIS 490",
+   "fte"
+  ],
+  [
+   "MIS 495",
+   "baai"
+  ],
+  [
+   "MIS 495",
+   "dsmm"
+  ],
+  [
+   "MIS 495",
+   "fte"
+  ],
+  [
+   "MIS 499",
+   "baai"
+  ],
+  [
+   "MIS 499",
+   "dsmm"
+  ],
+  [
+   "MIS 499",
+   "fte"
+  ],
+  [
+   "MKT 301",
+   "baai"
+  ],
+  [
+   "MKT 301",
+   "dsmm"
+  ],
+  [
+   "MKT 301",
+   "fte"
+  ],
+  [
+   "MKT 313",
+   "baai"
+  ],
+  [
+   "MKT 313",
+   "dsmm"
+  ],
+  [
+   "MKT 313",
+   "fte"
+  ],
+  [
+   "MKT 320",
+   "baai"
+  ],
+  [
+   "MKT 320",
+   "dsmm"
+  ],
+  [
+   "MKT 320",
+   "fte"
+  ],
+  [
+   "MKT 330",
+   "baai"
+  ],
+  [
+   "MKT 330",
+   "dsmm"
+  ],
+  [
+   "MKT 330",
+   "fte"
+  ],
+  [
+   "MKT 340",
+   "baai"
+  ],
+  [
+   "MKT 340",
+   "dsmm"
+  ],
+  [
+   "MKT 340",
+   "fte"
+  ],
+  [
+   "MKT 345",
+   "baai"
+  ],
+  [
+   "MKT 345",
+   "dsmm"
+  ],
+  [
+   "MKT 345",
+   "fte"
+  ],
+  [
+   "MKT 360",
+   "baai"
+  ],
+  [
+   "MKT 360",
+   "dsmm"
+  ],
+  [
+   "MKT 360",
+   "fte"
+  ],
+  [
+   "MKT 370",
+   "baai"
+  ],
+  [
+   "MKT 370",
+   "dsmm"
+  ],
+  [
+   "MKT 370",
+   "fte"
+  ],
+  [
+   "MKT 380",
+   "baai"
+  ],
+  [
+   "MKT 380",
+   "dsmm"
+  ],
+  [
+   "MKT 380",
+   "fte"
+  ],
+  [
+   "MKT 390",
+   "baai"
+  ],
+  [
+   "MKT 390",
+   "dsmm"
+  ],
+  [
+   "MKT 390",
+   "fte"
+  ],
+  [
+   "MKT 400",
+   "baai"
+  ],
+  [
+   "MKT 400",
+   "dsmm"
+  ],
+  [
+   "MKT 400",
+   "fte"
+  ],
+  [
+   "MKT 410",
+   "baai"
+  ],
+  [
+   "MKT 410",
+   "dsmm"
+  ],
+  [
+   "MKT 410",
+   "fte"
+  ],
+  [
+   "MKT 420",
+   "baai"
+  ],
+  [
+   "MKT 420",
+   "dsmm"
+  ],
+  [
+   "MKT 420",
+   "fte"
+  ],
+  [
+   "MKT 430",
+   "baai"
+  ],
+  [
+   "MKT 430",
+   "dsmm"
+  ],
+  [
+   "MKT 430",
+   "fte"
+  ],
+  [
+   "MKT 440",
+   "baai"
+  ],
+  [
+   "MKT 440",
+   "dsmm"
+  ],
+  [
+   "MKT 440",
+   "fte"
+  ],
+  [
+   "MKT 450",
+   "baai"
+  ],
+  [
+   "MKT 450",
+   "dsmm"
+  ],
+  [
+   "MKT 450",
+   "fte"
+  ],
+  [
+   "MKT 460",
+   "baai"
+  ],
+  [
+   "MKT 460",
+   "dsmm"
+  ],
+  [
+   "MKT 460",
+   "fte"
+  ],
+  [
+   "MKT 470",
+   "baai"
+  ],
+  [
+   "MKT 470",
+   "dsmm"
+  ],
+  [
+   "MKT 470",
+   "fte"
+  ],
+  [
+   "MKT 480",
+   "baai"
+  ],
+  [
+   "MKT 480",
+   "dsmm"
+  ],
+  [
+   "MKT 480",
+   "fte"
+  ],
+  [
+   "MKT 485",
+   "baai"
+  ],
+  [
+   "MKT 485",
+   "dsmm"
+  ],
+  [
+   "MKT 485",
+   "fte"
+  ],
+  [
+   "MKT 490",
+   "baai"
+  ],
+  [
+   "MKT 490",
+   "dsmm"
+  ],
+  [
+   "MKT 490",
+   "fte"
+  ],
+  [
+   "MKT 495",
+   "baai"
+  ],
+  [
+   "MKT 495",
+   "dsmm"
+  ],
+  [
+   "MKT 495",
+   "fte"
+  ],
+  [
+   "OM 310",
+   "baai"
+  ],
+  [
+   "OM 310",
+   "dsmm"
+  ],
+  [
+   "OM 310",
+   "fte"
+  ],
+  [
+   "OM 311",
+   "baai"
+  ],
+  [
+   "OM 311",
+   "dsmm"
+  ],
+  [
+   "OM 311",
+   "fte"
+  ],
+  [
+   "OM 320",
+   "baai"
+  ],
+  [
+   "OM 320",
+   "dsmm"
+  ],
+  [
+   "OM 320",
+   "fte"
+  ],
+  [
+   "OM 321",
+   "baai"
+  ],
+  [
+   "OM 321",
+   "dsmm"
+  ],
+  [
+   "OM 321",
+   "fte"
+  ],
+  [
+   "OM 322",
+   "baai"
+  ],
+  [
+   "OM 322",
+   "dsmm"
+  ],
+  [
+   "OM 322",
+   "fte"
+  ],
+  [
+   "OM 323",
+   "baai"
+  ],
+  [
+   "OM 323",
+   "dsmm"
+  ],
+  [
+   "OM 323",
+   "fte"
+  ],
+  [
+   "OM 405",
+   "baai"
+  ],
+  [
+   "OM 405",
+   "dsmm"
+  ],
+  [
+   "OM 405",
+   "fte"
+  ],
+  [
+   "OM 407",
+   "baai"
+  ],
+  [
+   "OM 407",
+   "dsmm"
+  ],
+  [
+   "OM 407",
+   "fte"
+  ],
+  [
+   "OM 420",
+   "baai"
+  ],
+  [
+   "OM 420",
+   "dsmm"
+  ],
+  [
+   "OM 420",
+   "fte"
+  ],
+  [
+   "OM 421",
+   "baai"
+  ],
+  [
+   "OM 421",
+   "dsmm"
+  ],
+  [
+   "OM 421",
+   "fte"
+  ],
+  [
+   "OM 423",
+   "baai"
+  ],
+  [
+   "OM 423",
+   "dsmm"
+  ],
+  [
+   "OM 423",
+   "fte"
+  ],
+  [
+   "OM 430",
+   "baai"
+  ],
+  [
+   "OM 430",
+   "dsmm"
+  ],
+  [
+   "OM 430",
+   "fte"
+  ],
+  [
+   "OSC 310",
+   "baai"
+  ],
+  [
+   "OSC 310",
+   "dsmm"
+  ],
+  [
+   "OSC 310",
+   "fte"
+  ],
+  [
+   "OSC 320",
+   "baai"
+  ],
+  [
+   "OSC 320",
+   "dsmm"
+  ],
+  [
+   "OSC 320",
+   "fte"
+  ],
+  [
+   "OSC 331",
+   "baai"
+  ],
+  [
+   "OSC 331",
+   "dsmm"
+  ],
+  [
+   "OSC 331",
+   "fte"
+  ],
+  [
+   "OSC 340",
+   "baai"
+  ],
+  [
+   "OSC 340",
+   "dsmm"
+  ],
+  [
+   "OSC 340",
+   "fte"
+  ],
+  [
+   "OSC 410",
+   "baai"
+  ],
+  [
+   "OSC 410",
+   "dsmm"
+  ],
+  [
+   "OSC 410",
+   "fte"
+  ],
+  [
+   "OSC 450",
+   "baai"
+  ],
+  [
+   "OSC 450",
+   "dsmm"
+  ],
+  [
+   "OSC 450",
+   "fte"
+  ],
+  [
+   "OSC 460",
+   "baai"
+  ],
+  [
+   "OSC 460",
+   "dsmm"
+  ],
+  [
+   "OSC 460",
+   "fte"
+  ]
+ ]
+}

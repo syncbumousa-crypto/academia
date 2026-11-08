@@ -1,0 +1,2629 @@
+{
+ "ACCT 110": {
+  "name": "Intro. to Financial Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 210": {
+  "name": "Intro to Managerial Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 300": {
+  "name": "Accounting Information Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ACCT 301": {
+  "name": "Intermediate Accounting I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 302": {
+  "name": "Intermediate Accounting II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ACCT 311": {
+  "name": "Auditing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ACCT 321": {
+  "name": "Data Analytics for Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "ACCT 351": {
+  "name": "Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ACCT 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ACCT 403": {
+  "name": "Advanced Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 406": {
+  "name": "Internal Auditing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ACCT 407": {
+  "name": "Financial Statement Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 410": {
+  "name": "Costing, Budgeting & Perf. Ana",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 477": {
+  "name": "Senior Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 478": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ACCT 504": {
+  "name": "Adv International Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ACCT 507": {
+  "name": "Financial Accounting for Decision Makers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ACCT 508": {
+  "name": "Financial Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ACCT 509": {
+  "name": "Financial Reporting & Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ACCT 510": {
+  "name": "Managerial Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ACCT 532": {
+  "name": "Auditing and Assurance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ACCT 551": {
+  "name": "Financial Accounting & Reporting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ACCT 552": {
+  "name": "Managerial Accounting",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ACCT 651": {
+  "name": "Financial Accounting Research",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BAI 220": {
+  "name": "Business Info. & Digital Sys.",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BUS 200": {
+  "name": "Business & Entrepreneurship",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "BUS 300": {
+  "name": "Career Essentials",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202620",
+   "202630"
+  ]
+ },
+ "BUS 500": {
+  "name": "Business Fundamentals",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BUS 505": {
+  "name": "Multivariate DA for Business",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BUS 506": {
+  "name": "Research Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BUS 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BUS 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "BUS 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ECON 101": {
+  "name": "Principles Of Microeconomics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ECON 102": {
+  "name": "Principles of Macroeconomics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ECON 306": {
+  "name": "Economy of Saudi Arabia",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ECON 405": {
+  "name": "Introduction to Econometrics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ECON 475": {
+  "name": "Introduction to Energy Markets, Policies and Regulations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ECON 510": {
+  "name": "Managerial Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ECON 513": {
+  "name": "Financial Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ECON 551": {
+  "name": "Managerial Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ECON 561": {
+  "name": "The Macro Environment of Business",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ECON 575": {
+  "name": "Energy Markets, Policies & Reg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ENTR 410": {
+  "name": "CS in FinTech & Venture Creati",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ENTR 464": {
+  "name": "Video Game Entrepreneurship",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "FIN 250": {
+  "name": "Financial Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 315": {
+  "name": "Corporate Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 320": {
+  "name": "Investments Mgt & Cptl Markets",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "FIN 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "FIN 415": {
+  "name": "Management of Financial Inst.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 421": {
+  "name": "Security Analysis and Portfolio Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "FIN 425": {
+  "name": "Financial Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 440": {
+  "name": "Islamic Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "FIN 450": {
+  "name": "Financial Policy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 460": {
+  "name": "Futures and Options Markets",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 477": {
+  "name": "Senior Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 478": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "FIN 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "FIN 510": {
+  "name": "Managerial Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 511": {
+  "name": "Corporate Finance: Theory and Practice",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "FIN 523": {
+  "name": "Investment Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 524": {
+  "name": "Fin. Derivatives & Risk Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 527": {
+  "name": "Fixed Income Securities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "FIN 540": {
+  "name": "Fin Mkt & Investment Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 545": {
+  "name": "Fin Econometrics & Inference",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "FIN 554": {
+  "name": "Managerial Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 562": {
+  "name": "Strategic Corporate Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "FIN 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "FIN 651": {
+  "name": "Advanced Corporate Finance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GS 318": {
+  "name": "World Civilizations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "GS 321": {
+  "name": "Principles of Human Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 342": {
+  "name": "International Relations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 355": {
+  "name": "Cultural Anthropology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GS 357": {
+  "name": "AI & Society",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 363": {
+  "name": "Introduction to Leadership",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "GS 372": {
+  "name": "Principles of Nonprofit Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 424": {
+  "name": "Business Psychology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 445": {
+  "name": "Energy Management and Policies",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GS 447": {
+  "name": "Globalization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "GS 495": {
+  "name": "ST II : Ethics of AI",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "HRM 301": {
+  "name": "Human Resources Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "HRM 390": {
+  "name": "Performance Appraisal & Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "HRM 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "HRM 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "HRM 401": {
+  "name": "Staffing & Selection",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "HRM 402": {
+  "name": "Training & Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "HRM 403": {
+  "name": "Compensation and Benefits Mgt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "HRM 520": {
+  "name": "Human Resource Planning and Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "HRM 521": {
+  "name": "Managerial Communication and Negotiation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "HRM 523": {
+  "name": "Human Resource Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "HRM 524": {
+  "name": "Recruitment and Selection",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "HRM 525": {
+  "name": "Performance and Compensation Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "HRM 526": {
+  "name": "Labor Laws and Regulations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "HRM 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "IAS 111": {
+  "name": "Belief and its Consequences",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 121": {
+  "name": "Language Foundation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 131": {
+  "name": "Reading and Writing",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "IAS 212": {
+  "name": "Professional Ethics/Governance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 321": {
+  "name": "Effective Lang. Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 322": {
+  "name": "Human Rights in Islam",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 330": {
+  "name": "Introduction to Justice & Law",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "IAS 430": {
+  "name": "Jurisprudence/Entrepreneurship",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ISE 205": {
+  "name": "Engg Prob & Stat",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 291": {
+  "name": "Introduction to Data Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ISE 303": {
+  "name": "Operation Research I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 307": {
+  "name": "Engineering Economic Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ISE 315": {
+  "name": "Engineering Statistics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 320": {
+  "name": "Quality Control & Ind Stat",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 321": {
+  "name": "Optimization Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 324": {
+  "name": "Work and Process Improvements",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 352": {
+  "name": "End Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ISE 391": {
+  "name": "Industrial Engineering Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ISE 402": {
+  "name": "Production Systems & Inv Cntl",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 405": {
+  "name": "Stochastic Systems Simulation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 420": {
+  "name": "Quality Improvement Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 422": {
+  "name": "Facility Layout and Location",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 440": {
+  "name": "Engineering Project Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ISE 443": {
+  "name": "Human Factors Engineering",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 447": {
+  "name": "Decision Making",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 449": {
+  "name": "SP in Ind Engg Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 453": {
+  "name": "Design Optimization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ISE 455": {
+  "name": "Applied Models for Optimal Dec",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 460": {
+  "name": "Industrial Process Re-Engineer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 465": {
+  "name": "Industrial Safety",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 468": {
+  "name": "Introduction to Machine Learning and Data Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 470": {
+  "name": "Supply Chain Sys Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 472": {
+  "name": "Logistics & Transportation Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 487": {
+  "name": "Predictive AnalyticsTechniques",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 491": {
+  "name": "Special Topics in Operations Research",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ISE 499": {
+  "name": "Seminars",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 502": {
+  "name": "Probabilistic Modelling in ISE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 503": {
+  "name": "Linear Programming and Applications - I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 505": {
+  "name": "Supply chain management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ISE 506": {
+  "name": "Advance Reliability Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 508": {
+  "name": "Advanced Production Systems & Inventory Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 510": {
+  "name": "Maintenance Systems Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 515": {
+  "name": "Opti. & Simula. of Maint. Sys.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 517": {
+  "name": "Logistics and Distribution",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 518": {
+  "name": "Data analytics for Reliability and Maintenance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 521": {
+  "name": "Non-Linear Programming & App I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 522": {
+  "name": "Advanced Stochastic Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ISE 527": {
+  "name": "Decision Making",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ISE 528": {
+  "name": "IDSS for Process Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ISE 530": {
+  "name": "Quality Mgt. in Supply ChainSy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 545": {
+  "name": "Turnaround & Shutdown Maintena",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ISE 548": {
+  "name": "Sequencing and Scheduling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ISE 550": {
+  "name": "Logistics Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 571": {
+  "name": "Heuristic Search Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ISE 581": {
+  "name": "Human Factors in Safety Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 582": {
+  "name": "Decision Making & Safety Econo",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 590": {
+  "name": "Special Topics in ISE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ISE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202620",
+   "202630"
+  ]
+ },
+ "ISE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ISE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ISE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ISE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 210": {
+  "name": "Business Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 301": {
+  "name": "Principles of Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 310": {
+  "name": "Organization Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 311": {
+  "name": "Legal Environment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MGT 351": {
+  "name": "Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 355": {
+  "name": "Business Research Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MGT 430": {
+  "name": "Organizational Leadership",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 440": {
+  "name": "International Business",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MGT 449": {
+  "name": "Strategic Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 450": {
+  "name": "Mgt of Innovation and Change",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 495": {
+  "name": "Special Topics in Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MGT 511": {
+  "name": "Organizational Theory & Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MGT 512": {
+  "name": "Leadership & Organiz. Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MGT 551": {
+  "name": "Behavior and Organization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MGT 554": {
+  "name": "Business Negotiations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MGT 560": {
+  "name": "Ethics and Leadership",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MGT 561": {
+  "name": "International Business & Globalization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MGT 562": {
+  "name": "Strategic Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MGT 564": {
+  "name": "Corporate Governance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MGT 580": {
+  "name": "Strategic Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MGT 651": {
+  "name": "Theories in Org Beh & Leadersh",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MGT 652": {
+  "name": "Theories in Human Resource Mng",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MGT 690": {
+  "name": "Special Topics in Management I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MIS 250": {
+  "name": "Management Information Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 301": {
+  "name": "Systems Analysis & Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 302": {
+  "name": "Business Applications Develmnt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 311": {
+  "name": "Business Data Management",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 315": {
+  "name": "MIS Innovation and New Tech",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MIS 341": {
+  "name": "Introduction to Data Analytics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MIS 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "MIS 351": {
+  "name": "Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MIS 365": {
+  "name": "Blockchain Fundamentals in Bus",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MIS 393": {
+  "name": "Digital Transform. in Business",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MIS 405": {
+  "name": "IS Project Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 442": {
+  "name": "Data Analytics Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MIS 477": {
+  "name": "Team Design I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 478": {
+  "name": "Senior Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 511": {
+  "name": "Information Technology in Organizations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MIS 512": {
+  "name": "Data Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MIS 517": {
+  "name": "Arti Intelligence for Business",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 541": {
+  "name": "Introduction to Business Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MIS 542": {
+  "name": "Advanced Business Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MIS 545": {
+  "name": "Programming in R & Python",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MIS 564": {
+  "name": "Electronic Business Strategy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MIS 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MIS 651": {
+  "name": "IS Theories & Emerging IS Phen",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 250": {
+  "name": "Principles of Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MKT 345": {
+  "name": "Marketing Research",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MKT 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "MKT 351": {
+  "name": "Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MKT 352": {
+  "name": "End Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "MKT 360": {
+  "name": "Product & Brand Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 370": {
+  "name": "Integrated Marketing Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MKT 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MKT 410": {
+  "name": "Consumer Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MKT 420": {
+  "name": "International Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 430": {
+  "name": "Services Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MKT 450": {
+  "name": "Strategic Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MKT 485": {
+  "name": "Digital Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MKT 490": {
+  "name": "Business-to-Business Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 510": {
+  "name": "Marketing Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 521": {
+  "name": "Buyer Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MKT 526": {
+  "name": "Services Marketing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MKT 561": {
+  "name": "Strategic Marketing Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MKT 651": {
+  "name": "Theories in Marketing Strategy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MKT 652": {
+  "name": "Theories in Consumer Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 210": {
+  "name": "Operations Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 311": {
+  "name": "Business Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 421": {
+  "name": "Procurement and Suppliers Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 423": {
+  "name": "Logistics & Transportation Mgt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "OM 430": {
+  "name": "Supply Chain Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 509": {
+  "name": "Statistical Foundation for Business Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 511": {
+  "name": "Management Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 513": {
+  "name": "Operations & Supply Chain Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "OM 514": {
+  "name": "Supply Chain Inventory Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 530": {
+  "name": "Supply Chain Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 531": {
+  "name": "Strategic Sourcing and Procure",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "OM 532": {
+  "name": "ERP for  Supply Chains",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 545": {
+  "name": "Supply Chain Strategy & Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 551": {
+  "name": "Quantitative Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 552": {
+  "name": "Operations Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "OM 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "OM 651": {
+  "name": "Supply Chain Strategy & Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "OM 652": {
+  "name": "Operations Mgnt. & Logistics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "OM 690": {
+  "name": "Spl Tps in Supply Chain Mgt.-I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ }
+}

@@ -1,0 +1,1736 @@
+{
+"ECON 101": {
+"name": "Principles Of Microeconomics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 102": {
+"name": "Principles of Macroeconomics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 202": {
+"name": "Principles of Economics II (MACROECONOMICS)",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 205": {
+"name": "Foundations of Econometrics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 206": {
+"name": "Economy of Saudi Arabia",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 301": {
+"name": "Intermediate Microeconomic Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 302": {
+"name": "Intermediate Macroeconomic Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 305": {
+"name": "Money & Banking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 306": {
+"name": "Economy of Saudi Arabia",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 330": {
+"name": "Labor Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 401": {
+"name": "Managerial Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 403": {
+"name": "Engineering Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 405": {
+"name": "Introduction to Econometrics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 410": {
+"name": "International Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 415": {
+"name": "Public Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 420": {
+"name": "Islamic Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 425": {
+"name": "Economic Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 450": {
+"name": "Introduction to Energy Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 475": {
+"name": "Introduction to Energy Markets, Policies and Regulations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ECON 495": {
+"name": "Special Topics in Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 100": {
+"name": "Introduction to Technology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 201": {
+"name": "Introduction to Industrial and  Systems Engineering",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"ISE 205": {
+"name": "Engineering Probability and Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 291": {
+"name": "Introduction to Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 303": {
+"name": "Operation Research I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 304": {
+"name": "Principles of Industrial Costing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 305": {
+"name": "Optimization Methods",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 307": {
+"name": "Engineering Economic Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 315": {
+"name": "Engineering Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 320": {
+"name": "Quality Control and Industrial Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 321": {
+"name": "Optimization Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 322": {
+"name": "Manufacturing Technology",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ISE 323": {
+"name": "Work and Process Improvements",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 324": {
+"name": "Work and Process Improvements",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ISE 325": {
+"name": "Engineering Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ISE 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"ISE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ISE 361": {
+"name": "Fundamentals of Data Base Systems",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 365": {
+"name": "Information Systems for Industrial and Systems Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 390": {
+"name": "Seminars",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ISE 391": {
+"name": "Industrial Engineering Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ISE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ISE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ISE 402": {
+"name": "Production Systems and Inventory Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 405": {
+"name": "Stochastic Systems Simulation",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ISE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ISE 413": {
+"name": "Productivity Engineering and Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 420": {
+"name": "Quality Improvement Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 421": {
+"name": "Operation Research II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 422": {
+"name": "Facility Layout and Location",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 425": {
+"name": "Queuing Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 426": {
+"name": "Operations Research II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 429": {
+"name": "Maintenance Planning and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 430": {
+"name": "Industrial Engineering in Healthcare Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 440": {
+"name": "Engineering Project Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 443": {
+"name": "Human Factors Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 447": {
+"name": "Decision Making",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 448": {
+"name": "Sequencing and Scheduling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 449": {
+"name": "Special Topics in Industrial Engineering Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 453": {
+"name": "Design Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 455": {
+"name": "Applied Models for Optimal Decisions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 460": {
+"name": "Industrial Process Re-Engineer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 461": {
+"name": "Computer Aided Manufacturing and Robotics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 463": {
+"name": "Theory of Stochastic Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 464": {
+"name": "Industrial Information Systems",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ISE 465": {
+"name": "Industrial Safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 468": {
+"name": "Introduction to Machine Learning and Data Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 470": {
+"name": "Supply Chain Systems Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 472": {
+"name": "Logistics and Transportation Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 480": {
+"name": "Reliability & Maintainability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 482": {
+"name": "Senior Design Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"ISE 487": {
+"name": "Predictive Analytics Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 490": {
+"name": "Senior Design Project",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ISE 491": {
+"name": "Special Topics in Operations Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 492": {
+"name": "Special Topics in Production and Quality Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 493": {
+"name": "Special Topics in IE/OR",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ISE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ISE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ISE 499": {
+"name": "Seminars",
+"lt": 1,
+"lb": 0,
+"cr": 0
+},
+"OSC 210": {
+"name": "Introduction to Operations and Supply Chain",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 310": {
+"name": "AI for Forecasting and Operations Planning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 320": {
+"name": "Intelligent Enterprise Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 331": {
+"name": "Sourcing and Procurement",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 340": {
+"name": "Decision and Risk Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"OSC 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"OSC 410": {
+"name": "Analytics for Performance Excellence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"OSC 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"OSC 450": {
+"name": "Sustainable Operations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"OSC 460": {
+"name": "Case Studies in Operations and Supply Chain",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 250": {
+"name": "Lean Startup & Business Model Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 310": {
+"name": "Startup Financing, Venture Capital, and Exit Strategies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 320": {
+"name": "Product and Growth Strategy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 322": {
+"name": "Introduction to Entrepreneurship",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 6,
+"cr": 6
+},
+"ENTR 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ENTR 410": {
+"name": "Case Studies in FinTech & Venture Creation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ENTR 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ENTR 413": {
+"name": "Entrepreneurial Marketing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 415": {
+"name": "Social Entrepreneurship",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 416": {
+"name": "Entrepreneurship and New Venture Creation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 420": {
+"name": "Venture Launch Innovation Lab",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"ENTR 423": {
+"name": "Small and Medium Enterprise Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 464": {
+"name": "Video Game Entrepreneurship",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENTR 495": {
+"name": "Special Topics in Entrepreneurship",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 302": {
+"name": "Digital and Social Media Marketing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 305": {
+"name": "Consumer Behavior in the Digital Age",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 310": {
+"name": "Viral Marketing & Digital Influence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 320": {
+"name": "Social Media Crises Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 330": {
+"name": "Marketing Analytics and Computational Decision Making",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 340": {
+"name": "Content Engineering & Digital Brand Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 365": {
+"name": "Creating Digital Experiences & Journeys",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 6,
+"cr": 6
+},
+"DSMM 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"DSMM 400": {
+"name": "Social Media and Digital Marketing Strategy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 410": {
+"name": "Case studies in Digital and Social Media Marketing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"DSMM 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"DSMM 465": {
+"name": "E-Tailing & Omnichannel Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DSMM 475": {
+"name": "Integrated Marketing and Performance Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 110": {
+"name": "Introduction to Financial Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 201": {
+"name": "Principles of Accounting I",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ACCT 202": {
+"name": "Principles of Accounting II",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ACCT 210": {
+"name": "Introduction to Managerial Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 300": {
+"name": "Accounting Information Systems",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ACCT 301": {
+"name": "Intermediate Accounting I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 302": {
+"name": "Intermediate Accounting II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 303": {
+"name": "Computer Control and Audit",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 304": {
+"name": "International Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 305": {
+"name": "Accounting for Governmental & Non-Profit Entities",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 306": {
+"name": "Zakat & Income Tax Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 307": {
+"name": "Islamic Financial Jurisprudence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 311": {
+"name": "Auditing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 314": {
+"name": "Computer Control and Audit",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 321": {
+"name": "Data Analytics for Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ACCT 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ACCT 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ACCT 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ACCT 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ACCT 401": {
+"name": "Cost Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 402": {
+"name": "Managerial Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 403": {
+"name": "Advanced Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 404": {
+"name": "Auditing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 405": {
+"name": "Accounting Theory & Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 406": {
+"name": "Internal Auditing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 407": {
+"name": "Financial Statement Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 408": {
+"name": "Zakat and Business Tax Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 409": {
+"name": "International BusinessTaxation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 410": {
+"name": "Costing, Budgeting & Performance Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 411": {
+"name": "Cost Management & Management Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 420": {
+"name": "Petroleum Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 421": {
+"name": "Oil & Gas Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 477": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ACCT 478": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ACCT 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ACCT 495": {
+"name": "Special topics in Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ACCT 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ACCT 499": {
+"name": "Special topics in Accounting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"IAS 101": {
+"name": "Practical Grammar",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 111": {
+"name": "Belief and its Consequences",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 121": {
+"name": "Language Foundation",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 131": {
+"name": "Reading and Writing",
+"lt": 2,
+"lb": 3,
+"cr": 2
+},
+"IAS 201": {
+"name": "Writing for Professional Needs",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 211": {
+"name": "Ethics in Islam",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 212": {
+"name": "Professional Ethics and Governance",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 231": {
+"name": "Grammar and Composition",
+"lt": 1,
+"lb": 2,
+"cr": 2
+},
+"IAS 301": {
+"name": "Oral Communication Skills",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 311": {
+"name": "Islamic Shariah",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 321": {
+"name": "Effective Language Communication",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 322": {
+"name": "Human Rights in Islam",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 330": {
+"name": "Introduction to Justice & Law",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"IAS 331": {
+"name": "Literature and Text",
+"lt": 2,
+"lb": 3,
+"cr": 2
+},
+"IAS 411": {
+"name": "Contemporary Islamic World",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 416": {
+"name": "As-Sirah An-Nabawiyyah",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 417": {
+"name": "Inimitability of Al-Quran and Al-Sunnah",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"IAS 418": {
+"name": "Contemporary Financial Transactions in Islam",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 419": {
+"name": "Inimitability of Al-Quran",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"IAS 430": {
+"name": "Jurisprudence of Entrepreneurship",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"FFE 320": {
+"name": "Time Series Analysis and Statistical Arbitrage",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"FFE 333": {
+"name": "Machine Learning in Finance",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"FFE 335": {
+"name": "Security Analysis and Portfolio Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FFE 336": {
+"name": "Interest Rates and Credit Risk Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FFE 337": {
+"name": "Case Studies in investment and technical analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FFE 338": {
+"name": "Quantitative Risk Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FFE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"FFE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"FFE 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"FFE 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"FFE 440": {
+"name": "Market Microstructure and Algo Trading",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 220": {
+"name": "Information Searching Skills",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"GS 221": {
+"name": "Work & Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 318": {
+"name": "World Civilizations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 321": {
+"name": "Principles of Human Behavior",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 332": {
+"name": "Principles of Sociology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 336": {
+"name": "Work & Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 342": {
+"name": "International Relations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 355": {
+"name": "Cultural Anthropology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 357": {
+"name": "AI & Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 363": {
+"name": "Introduction to Leadership",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 372": {
+"name": "Principles of Nonprofit Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 420": {
+"name": "Personality Psychology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 423": {
+"name": "International Relations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 424": {
+"name": "Business Psychology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 426": {
+"name": "Social psychology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 427": {
+"name": "Man and Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 434": {
+"name": "Mass Media & Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 437": {
+"name": "Work and Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 445": {
+"name": "Energy Management and Policies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 447": {
+"name": "Globalization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 454": {
+"name": "Anthropology of Travel",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 456": {
+"name": "Science, Technology & Society",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 457": {
+"name": "Social Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 494": {
+"name": "Special Topics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 495": {
+"name": "Special Topics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GS 496": {
+"name": "Special Topics III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 200": {
+"name": "Introduction to Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 250": {
+"name": "Financial Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 301": {
+"name": "Financial Management I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 302": {
+"name": "Financial Management II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 310": {
+"name": "Intermediate Financial Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 315": {
+"name": "Corporate Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 320": {
+"name": "Investments Management and Capital Markets",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 321": {
+"name": "Financial Econometrics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"FIN 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"FIN 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"FIN 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"FIN 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"FIN 410": {
+"name": "International Financial Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 415": {
+"name": "Management of Financial Institutions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 416": {
+"name": "Entrepreneurial Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 420": {
+"name": "Investments",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 421": {
+"name": "Security Analysis and Portfolio Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 422": {
+"name": "Financial Risk Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 423": {
+"name": "Fixed Income Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 424": {
+"name": "Investment Valuation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 425": {
+"name": "Financial Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 430": {
+"name": "Risk Management, Conventional and Islamic Insurance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 435": {
+"name": "Real Estate and Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 440": {
+"name": "Islamic Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 441": {
+"name": "Governance of Islamic Financial Institutions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 442": {
+"name": "Islamic Capital Markets",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 443": {
+"name": "Accounting of Islamic Financial Institutions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 445": {
+"name": "Big Data in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 450": {
+"name": "Case Studies in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 460": {
+"name": "Futures and Options Markets",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 470": {
+"name": "Financial Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 477": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"FIN 478": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"FIN 480": {
+"name": "Special Topics in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"FIN 495": {
+"name": "Special Topics in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FIN 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ACF 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ACF 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ACF 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ACF 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"BAI 220": {
+"name": "Business Information & Digital Systems",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"BAI 221": {
+"name": "Business Analytics Foundations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 300": {
+"name": "Applied AI for Business",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 311": {
+"name": "Data Visualization & Storytelling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 312": {
+"name": "Business Intelligence Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 321": {
+"name": "Performance Analytics with Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 331": {
+"name": "Target Setting & Performance Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 332": {
+"name": "Workforce Analytics and Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"BAI 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"BAI 404": {
+"name": "Cybersecurity in Business",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"BAI 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"BAI 420": {
+"name": "Performance Data Governance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 421": {
+"name": "Responsible AI for Decision Support",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 422": {
+"name": "Platform Performance Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 431": {
+"name": "Analytics Strategy & Performance Transformation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 432": {
+"name": "Risk & Compliance Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 433": {
+"name": "Process Performance Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 434": {
+"name": "Experiment Design & Causal Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BAI 460": {
+"name": "Case studies in Business Analytics & AI",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FNT 230": {
+"name": "Introduction to FinTech",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FNT 330": {
+"name": "FinTech Regulation & Compliance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FNT 340": {
+"name": "Financial Modeling & Simulatio",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"FNT 360": {
+"name": "Decentralized Finance, Blockchain & FinTech Platforms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FNT 430": {
+"name": "Behavioral Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"FNT 495": {
+"name": "Special Topics in FinTech",
+"lt": 3,
+"lb": 0,
+"cr": 3
+}
+}
