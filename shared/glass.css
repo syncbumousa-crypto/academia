@@ -301,6 +301,9 @@ html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
    المقبض بقدر ما زادت الشاشة (٩٧ على ١٦٠٠، و٢٥٧ على ١٩٢٠) والممرُّ على الجهة الأخرى ١٠.
    فيبقى بينه وبين البحث ما بينه وبين الشريط */
 #panel-market { max-width: none; }
+/* وبين البحث وأعلى الكتاب المتوسّط ٥٣ وهو ساكن (كان ٦٤)، و٤٧–٥٣ وهو يطفو
+   (يرتفع ستًّا في ‎reel-bob‎). والهامشُ تحت شريط الأدوات هو ما يحمله */
+#panel-market .market-tools { margin-bottom: calc(clamp(16px, 2vw, 24px) - 10.8px); }
 /* والمحتوى يُفسح للوح وفجوته */
 body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
 html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
