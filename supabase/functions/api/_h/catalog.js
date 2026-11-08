@@ -125,10 +125,15 @@ export async function onRequestPut({ request, env }) {
   /* نوعيّةُ المادّة في التخصص (تخصص/كلية/مشتركة/اختيارية): ما جاء من اللوحة،
      وإلّا ما كان محفوظًا — فنسخةٌ قديمةٌ في متصفّح المشرف لا تمحوها */
   const KINDS = new Set(['major', 'college', 'common', 'elective']);
-  const oldKind = new Map();
+  /* وبجانبها ‎kind_auto‎: ما حسبه سكربتُ التصنيف. فما خالفه ‎kind‎ فهو تعديلُ المشرف بيده،
+     ويبقى إن أُعيد التصنيف — فلا يُمحى ‎kind_auto‎ بنشرٍ من اللوحة */
+  const oldKind = new Map(), oldAuto = new Map();
   try {
-    const ok = await db.prepare('SELECT code, tag_id, kind FROM course_tags').all();
-    for (const r of (ok.results || [])) if (r.kind) oldKind.set(r.code + '|' + r.tag_id, r.kind);
+    const ok = await db.prepare('SELECT code, tag_id, kind, kind_auto FROM course_tags').all();
+    for (const r of (ok.results || [])) {
+      if (r.kind) oldKind.set(r.code + '|' + r.tag_id, r.kind);
+      if (r.kind_auto) oldAuto.set(r.code + '|' + r.tag_id, r.kind_auto);
+    }
   } catch (e) { /* عمودٌ لم يُنشأ بعد */ }
 
   const rev = String(b.v || Date.now());
@@ -146,7 +151,8 @@ export async function onRequestPut({ request, env }) {
     if (!tagIds.has(tg)) return;                 /* وسمٌ لا تعريفَ له يُترك */
     links++;
     const k = KINDS.has(r.kinds[tg]) ? r.kinds[tg] : (oldKind.get(r.code + '|' + tg) || null);
-    st.push(db.prepare('INSERT INTO course_tags (code, tag_id, kind) VALUES (?,?,?)').bind(r.code, tg, k));
+    st.push(db.prepare('INSERT INTO course_tags (code, tag_id, kind, kind_auto) VALUES (?,?,?,?)')
+      .bind(r.code, tg, k, oldAuto.get(r.code + '|' + tg) || null));
   }));
   st.push(db.prepare("UPDATE meta SET v = ? WHERE k = 'catalog_rev'").bind(rev));
 

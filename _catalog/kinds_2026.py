@@ -1,59 +1,57 @@
 """Course type per major ("نوعية المواد") for every catalog link.
 
-Counted, not read from the plans' headings (which differ from plan to
-plan): how many majors require the course.
+A course's type is decided for the course within its college, not for
+each major on its own: one major's plan missing a section can no longer
+make MGT 210 a college course for Accounting and a major course for MIS.
 
   common   مواد مشتركة  required by at least two thirds of all majors
                         (ENGL, IAS 111/121/212, MATH 101/102, PE 101, ...)
-  college  مواد كلية    not common, and: required by more than half the
-                        majors of the same college; or a 100/200-level
-                        math/science course (MATH, STAT, PHYS, CHEM, BIOL);
-                        or listed in the plan's own college section
-                        ("College Core Requirements", "Math & Science
-                        Requirements", "General Engineering Fundamentals")
-  major    مواد تخصص    the rest of the major's plan, and any plan course from
-                        the major's own subject (HOME), even a common or
-                        college one: MKT 250 is a college course, but a major
-                        course for Marketing; MATH 101 is common, but a major
-                        course for Mathematics
+  college  مواد كلية    a college course: not common, and in the college
+                        at least one of
+                          · required by at least half the majors of a
+                            generation of its plans (majors.COLLEGES)
+                          · a 100/200-level math/science course
+                          · in the college section ("College Core / Math &
+                            Science Requirements / General Engineering
+                            Fundamentals") of ANY plan of the college
+                        and so a college course for every major of the
+                        college whose plan has it
+  major    مواد تخصص    the rest of the major's plan, and any plan course of
+                        the major's own subject (majors.HOME), even a common
+                        or college one (MATH 101 for Mathematics)
   elective مواد اختيارية linked to the major but not in its plan
-  OVERRIDE              decisions taken by hand on the borderline cases
 
-Plans: data/plan_sections_bulletin.json (sections + MIS plan from the
-bulletin), data/plans_ccm_bulletin.json, data/plans_colleges_bulletin.json,
-data/plans_oldbiz_bulletin.json,
-out/business_2026.json.
+Hand edits from the admin panel are kept: the database stores, beside each
+link's type (kind), the type this script computed (kind_auto); a link
+whose kind differs from its kind_auto was set by hand and is left alone.
 
-  python3 _catalog/kinds_2026.py <live_catalog.json> [--dry]
-  -> _catalog/out/kinds_2026.{json,sql}, then run the .sql on the database
-     (--dry: preview only, writes nothing in out/)
+  python3 _catalog/kinds_2026.py            preview: what would change
+  python3 _catalog/kinds_2026.py --apply    write it, then run the checks
+
+The database is read and written through the Supabase Management API
+(the proxy adds the credential). out/kinds_2026.{json,sql} record the last
+applied run.
 """
-import json, os, sys, time, collections
+import collections, json, os, subprocess, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from majors import COLLEGES, COLLEGE_OF, MAJORS, SCIENCE, is_home   # noqa: E402
+
 J = lambda *p: json.load(open(os.path.join(HERE, *p), encoding='utf-8'))
 SECT = J('data', 'plan_sections_bulletin.json')
-LIVE = J(sys.argv[1]) if os.path.isabs(sys.argv[1]) else json.load(open(sys.argv[1], encoding='utf-8'))
+COLLEGE_SECTIONS = {'College Core Requirements', 'Math & Science Requirements', 'General Engineering Fundamentals'}
+DB = 'https://api.supabase.com/v1/projects/cyuufavrbqyqywhftbjw/database/query'
 
-COLLEGES = [
-    # the Business School has two generations of plans, each with its own shared core
-    # (BAI 220/221/300, MGT 475 in 2026; MGT 210/355/449, ECON 306, OM 210 before),
-    # so "most majors of the college" is counted within each generation
-    ['acf', 'ffe', 'dsmm', 'fte', 'baai', 'osc'],
-    ['mis', 'acct', 'fin', 'mgt', 'mkt', 'hrm'],
-    ['cs', 'swe', 'coe', 'ise', 'amai', 'dse', 'sde', 'aics', 'math', 'asfm'],
-    ['che', 'mse', 'chem', 'bioe', 'bioepm'],
-    ['pete', 'geop', 'geol', 'mine'],
-    ['ce', 'are', 'idsn', 'ssc', 'ese'],
-    ['ae', 'ee', 'me', 'phys', 'cie', 'eep'],
-]
-COMMON_SECTIONS = {'General Studies Requirements', 'Digital/Business Foundation'}
-COLLEGE_SECTIONS = {'College Core Requirements', 'Math & Science Requirements',
-                    'General Engineering Fundamentals'}
-ELECTIVE_SECTIONS = {'Electives'}
-SCIENCE = {'MATH', 'STAT', 'PHYS', 'CHEM', 'BIOL'}   # math & science, where a plan has no sections
 
-# plan (required) courses per major
+def query(sql):
+    req = urllib.request.Request(DB, data=json.dumps({'query': sql}).encode(), method='POST',
+                                 headers={'Authorization': 'Bearer proxy-injected', 'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return json.load(r)
+
+
+# ---------- plans: the required courses of each major ----------
 core = collections.defaultdict(set)
 for f in ('plans_ccm_bulletin.json', 'plans_colleges_bulletin.json', 'plans_oldbiz_bulletin.json'):
     for tag, plan in J('data', f).items():
@@ -63,83 +61,85 @@ for code, tags in J('out', 'business_2026.json')['links'].items():
         core[tag].add(code)
 core['dsmm'].discard('DSMM 465')          # the one elective the DSMM plan names
 core['mis'] |= set(SECT['_mis_core']) | set(J('data', 'plans_mis_bulletin.json')['mis']['core'])
+missing = [t for t in MAJORS if not core[t]]
+if missing:
+    sys.exit('no plan for: ' + ', '.join(missing))
 
-college_of = {t: i for i, g in enumerate(COLLEGES) for t in g}
-MAJORS = [t for g in COLLEGES for t in g]
+# ---------- common: most of the university ----------
 uni = collections.Counter(c for t in MAJORS for c in core[t])
-share = collections.Counter((college_of[t], c) for t in MAJORS for c in core[t])
 COMMON = {c for c, n in uni.items() if 3 * n >= 2 * len(MAJORS)}
-OVERRIDE = {}   # (code, tag) -> kind, or (code, '*') for every major
-# the major's own subject prefixes: a college course from them is the major's own course
-# (MKT 250 is a college course for Business majors, a major course for Marketing)
-HOME = {'mis': ['MIS'], 'acf': ['ACF', 'ACCT'], 'ffe': ['FFE', 'FIN'], 'dsmm': ['DSMM', 'MKT'], 'fte': ['FNT', 'ENTR'],
-        'baai': ['BAI'], 'osc': ['OSC', 'OM'], 'acct': ['ACCT'], 'fin': ['FIN'], 'mgt': ['MGT'], 'mkt': ['MKT'],
-        'hrm': ['HRM'], 'cs': ['ICS'], 'swe': ['SWE'], 'coe': ['COE'], 'ise': ['ISE'], 'amai': ['MATH'],
-        'dse': ['DATA'], 'sde': ['SDE'], 'aics': ['AISC'], 'math': ['MATH'], 'asfm': ['AS'], 'che': ['CHE'],
-        'mse': ['MSE'], 'chem': ['CHEM'], 'bioe': ['BIOE'], 'bioepm': ['BIOE'], 'pete': ['PETE'], 'geop': ['GEOP'],
-        'geol': ['GEOL'], 'mine': ['MINE'], 'ce': ['CE'], 'are': ['ARE'], 'idsn': ['ITD'], 'ssc': ['SSC'],
-        'ese': ['ESE'], 'ae': ['AE'], 'ee': ['EE'], 'me': ['ME'], 'phys': ['PHYS'], 'cie': ['CIE'],
-        'eep': ['EE', 'PHYS']}
 
-
-def in_college_section(code, tag):
-    return any(name in COLLEGE_SECTIONS and code in codes for name, codes in SECT.get(tag, {}).items())
+# ---------- college courses: a property of the course within the college ----------
+COLLEGE_SET = {}
+for college, gens in COLLEGES.items():
+    s = set()
+    for g in gens:
+        n = collections.Counter(c for t in g for c in core[t])
+        s |= {c for c, k in n.items() if 2 * k >= len(g)}
+        for t in g:
+            s |= {c for c in core[t] if c.split()[0] in SCIENCE and c.split()[1][0] in '12'}
+            s |= {c for name, codes in SECT.get(t, {}).items() if name in COLLEGE_SECTIONS
+                  for c in codes if c in core[t]}
+    COLLEGE_SET[college] = s - COMMON
 
 
 def kind(code, tag):
-    k = OVERRIDE.get((code, tag)) or OVERRIDE.get((code, '*'))
-    if k and (k == 'elective' or code in core[tag]):
-        return k
     if code not in core[tag]:
         return 'elective'
-    g = college_of[tag]
-    p, n = code.split()
-    if p in HOME[tag]:          # before common: MATH 101 is a major course for Mathematics
+    if is_home(code, tag):
         return 'major'
     if code in COMMON:
         return 'common'
-    if (share[(g, code)] * 2 > len(COLLEGES[g]) or (p in SCIENCE and n[0] in '12')
-            or in_college_section(code, tag)):
+    if code in COLLEGE_SET[COLLEGE_OF[tag]]:
         return 'college'
     return 'major'
 
 
-# ===== وما غيّره المشرفُ بيده من اللوحة يبقى =====
-# a stored type that differs from what this script wrote last time (out/kinds_2026.json),
-# or that a link got without this script, was set by hand in the admin panel: keep it
-PREV_PATH = os.path.join(HERE, 'out', 'kinds_2026.json')
-PREV = {(c, t): k for c, t, k in json.load(open(PREV_PATH, encoding='utf-8'))} if os.path.exists(PREV_PATH) else {}
-rows, manual = [], []
-for c in LIVE['courses']:
-    for t in c['tags']:
-        now = (c.get('kinds') or {}).get(t)
-        was = PREV.get((c['code'], t))
-        if now and now != was and (was or PREV):
-            rows.append((c['code'], t, now)); manual.append((c['code'], t, now))
-        else:
-            rows.append((c['code'], t, kind(c['code'], t)))
+# ---------- the database now ----------
+query('ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind TEXT; '
+      'ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind_auto TEXT;')
+links = query('SELECT code, tag_id, kind, kind_auto FROM course_tags')
+unknown = sorted({r['tag_id'] for r in links} - set(MAJORS))
+if unknown:
+    sys.exit('majors not in majors.py: ' + ', '.join(unknown))
+
+rows, manual, changes = [], [], []
+for r in links:
+    code, t, now, auto = r['code'], r['tag_id'], r['kind'], r['kind_auto']
+    k = kind(code, t)
+    if now and auto and now != auto:            # set by hand in the admin panel
+        manual.append((code, t, now))
+        rows.append((code, t, now, k))
+    else:
+        rows.append((code, t, k, k))
+        if now != k:
+            changes.append((code, t, now, k))
+
+print(f'{len(rows)} links · {len(changes)} to change · {len(manual)} hand-set kept')
+for c in changes[:40]:
+    print('  %-9s %-6s %s -> %s' % c)
+if len(changes) > 40:
+    print(f'  … {len(changes) - 40} more')
 if manual:
     print('kept from the admin panel:', manual)
 
+if '--apply' not in sys.argv:
+    print('preview only — run with --apply to write it')
+    sys.exit(0)
+
 q = lambda s: "'" + s.replace("'", "''") + "'"
-sql = ['BEGIN;', 'ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind TEXT;']
 by = collections.defaultdict(list)
-for code, t, k in rows:
-    by[(t, k)].append(code)
-for (t, k), codes in sorted(by.items()):
-    sql.append('UPDATE course_tags SET kind = %s WHERE tag_id = %s AND code IN (%s);'
-               % (q(k), q(t), ', '.join(q(c) for c in codes)))
+for code, t, k, a in rows:
+    by[(t, k, a)].append(code)
+sql = ['BEGIN;']
+for (t, k, a), codes in sorted(by.items()):
+    sql.append('UPDATE course_tags SET kind = %s, kind_auto = %s WHERE tag_id = %s AND code IN (%s);'
+               % (q(k), q(a), q(t), ', '.join(q(c) for c in codes)))
 sql += ["UPDATE meta SET v = '%d' WHERE k = 'catalog_rev';" % (time.time() * 1000), 'COMMIT;']
+query('\n'.join(sql))
 
 out = os.path.join(HERE, 'out')
-# out/kinds_2026.json must stay what the database has (it is how hand edits are told apart),
-# so a preview writes nowhere: python3 _catalog/kinds_2026.py live.json --dry
-if '--dry' in sys.argv:
-    out = os.path.join(os.environ.get('TMPDIR', '/tmp'))
-json.dump([list(r) for r in rows], open(os.path.join(out, 'kinds_2026.json'), 'w', encoding='utf-8'), ensure_ascii=False)
+json.dump(sorted([list(r) for r in rows]), open(os.path.join(out, 'kinds_2026.json'), 'w', encoding='utf-8'), ensure_ascii=False)
 open(os.path.join(out, 'kinds_2026.sql'), 'w', encoding='utf-8').write('\n'.join(sql) + '\n')
-tab = collections.defaultdict(collections.Counter)
-for _, t, k in rows:
-    tab[t][k] += 1
-for t in [x for g in COLLEGES for x in g]:
-    print(t, dict(tab[t]))
+print('applied; checking the published catalog …')
+sys.exit(subprocess.call([sys.executable, os.path.join(HERE, 'check_catalog.py')]))
