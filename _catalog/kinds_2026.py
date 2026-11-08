@@ -99,10 +99,22 @@ def kind(code, tag):
     return 'major'
 
 
-rows = []
+# ===== وما غيّره المشرفُ بيده من اللوحة يبقى =====
+# a stored type that differs from what this script wrote last time (out/kinds_2026.json),
+# or that a link got without this script, was set by hand in the admin panel: keep it
+PREV_PATH = os.path.join(HERE, 'out', 'kinds_2026.json')
+PREV = {(c, t): k for c, t, k in json.load(open(PREV_PATH, encoding='utf-8'))} if os.path.exists(PREV_PATH) else {}
+rows, manual = [], []
 for c in LIVE['courses']:
     for t in c['tags']:
-        rows.append((c['code'], t, kind(c['code'], t)))
+        now = (c.get('kinds') or {}).get(t)
+        was = PREV.get((c['code'], t))
+        if now and now != was and (was or PREV):
+            rows.append((c['code'], t, now)); manual.append((c['code'], t, now))
+        else:
+            rows.append((c['code'], t, kind(c['code'], t)))
+if manual:
+    print('kept from the admin panel:', manual)
 
 q = lambda s: "'" + s.replace("'", "''") + "'"
 sql = ['BEGIN;', 'ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind TEXT;']

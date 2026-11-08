@@ -434,7 +434,26 @@
 
   /* وسوم التخصصات داخل نموذج المادة */
   let pickedTags = [];
+  /* ونوعيّةُ المادّة في كلّ تخصّصٍ اختير: تُرسَل مع الكتالوج، فإن لم تُختر
+     بقي على الخادم ما كان محفوظًا */
+  let pickedKinds = {};
+  const KINDS = [['major', 'مواد تخصص'], ['college', 'مواد كلية'], ['common', 'مواد مشتركة'], ['elective', 'مواد اختيارية']];
+  const kindName = k => (KINDS.find(x => x[0] === k) || [, ''])[1];
+  function renderKinds() {
+    $('#c-kinds').innerHTML = pickedTags.length
+      ? '<span class="a-kinds__t">نوعيّة المادّة في كلّ تخصّص</span>' + pickedTags.map(id =>
+          `<label class="a-kind"><span>${esc(tagName(id))}</span><select data-ktag="${esc(id)}">` +
+          `<option value="">— دون تغيير —</option>` +
+          KINDS.map(([v, t]) => `<option value="${v}"${pickedKinds[id] === v ? ' selected' : ''}>${t}</option>`).join('') +
+          `</select></label>`).join('')
+      : '';
+  }
+  $('#c-kinds').addEventListener('change', e => {
+    const s = e.target.closest('[data-ktag]'); if (!s) return;
+    if (s.value) pickedKinds[s.dataset.ktag] = s.value; else delete pickedKinds[s.dataset.ktag];
+  });
   function renderTagChips() {
+    renderKinds();
     $('#c-tags').innerHTML = cat.tags.length
       ? cat.tags.map(t => `<button type="button" class="a-chip${pickedTags.includes(t.id) ? ' on' : ''}" data-tid="${esc(t.id)}">${esc(t.ar)}</button>`).join('')
       : `<span class="a-none">لا تخصصات بعد — أضِفها من تبويب «التخصصات».</span>`;
@@ -458,8 +477,10 @@
     document.querySelectorAll('#c-act .a-seg').forEach(x => x.classList.toggle('on', x === b));
   });
 
+  const keptKinds = () => Object.fromEntries(pickedTags.filter(t => pickedKinds[t]).map(t => [t, pickedKinds[t]]));
+
   function resetCourseForm() {
-    courseEdit = null; pickedTags = []; actLab = false;
+    courseEdit = null; pickedTags = []; pickedKinds = {}; actLab = false;
     $('#c-ar').value = ''; $('#c-en').value = ''; $('#c-h').value = 3;
     document.querySelectorAll('#c-act .a-seg').forEach((x, i) => x.classList.toggle('on', i === 0));
     $('#c-save').textContent = 'إضافة المادة';
@@ -479,11 +500,11 @@
       if (!c) return;
       if (code !== courseEdit && dup) { toast('الاسم الإنجليزي مستعمل في مادة أخرى'); return; }
       if (code !== courseEdit) migrateCode(courseEdit, code);
-      Object.assign(c, { code, ar, h, lab: actLab, tags: pickedTags.slice() });
+      Object.assign(c, { code, ar, h, lab: actLab, tags: pickedTags.slice(), kinds: keptKinds() });
       toast('حُدّثت المادة');
     } else {
       if (dup) { toast('هذه المادة موجودة'); return; }
-      cat.courses.push({ code, ar, full: '', h, lab: actLab, tags: pickedTags.slice() });
+      cat.courses.push({ code, ar, full: '', h, lab: actLab, tags: pickedTags.slice(), kinds: keptKinds() });
       toast(`أُضيفت «${ar}»`);
     }
     saveCat(); resetCourseForm(); renderCourses(); fillCourseSelects();
@@ -515,7 +536,7 @@
             <span class="a-item__sub">
               <span class="a-h">${c.h} س</span>
               ${c.lab ? `<span class="a-lab">معمل</span>` : ''}
-              ${(c.tags || []).map(t => `<span class="a-tag">${esc(tagName(t))}</span>`).join('')}
+              ${(c.tags || []).map(t => `<span class="a-tag">${esc(tagName(t))}${(c.kinds || {})[t] ? `<i class="a-tag__k">${kindName(c.kinds[t])}</i>` : ''}</span>`).join('')}
             </span>
           </div>
           <div class="a-acts">
@@ -534,7 +555,7 @@
     const act = (e.target.closest('[data-act]') || {}).dataset;
     if (!c || !act) return;
     if (act.act === 'edit') {
-      courseEdit = code; pickedTags = (c.tags || []).slice(); actLab = !!c.lab;
+      courseEdit = code; pickedTags = (c.tags || []).slice(); pickedKinds = Object.assign({}, c.kinds || {}); actLab = !!c.lab;
       $('#c-ar').value = c.ar; $('#c-en').value = c.code; $('#c-h').value = c.h;
       document.querySelectorAll('#c-act .a-seg').forEach(x => x.classList.toggle('on', (x.dataset.act === 'lab') === actLab));
       $('#c-save').textContent = 'حفظ التعديل';
