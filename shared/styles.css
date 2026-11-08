@@ -17303,3 +17303,11 @@ html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6
 .pk-pubfoot { position: relative; min-height: 34px; }
 .pk--ftdn .pk-pubfoot { min-height: 0; }
 .pk-pubfoot > .cx-acttools { top: calc(50% + 2px); }
+/* لونُ الكتلة مُصمَتٌ (لا شفافيّة) والقطعُ تتراكب ‎2px‎: في الشاشات المقرَّبة (‎125%‎ مثلًا) كانت حدودُ القطع الشفّافة
+   تقع على كسور البكسل فيظهر بينها خطٌّ رفيع. والمُصمَتُ يتراكب بلا أن يغمق — فلا خطَّ أيًّا كان التقريب */
+.pk--max { --pk-band: #e7ebed; }
+html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src,
+.pk--max.pk-act--mid .post-ytmain > .pk-split > .kt-view,
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank { box-shadow: 0 0 0 8px var(--pk-band), 0 3px 0 8px var(--pk-band); }
+.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline::before { top: calc(50% - 1px); }
