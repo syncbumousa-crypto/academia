@@ -17052,3 +17052,12 @@ html[data-theme="dark"] .pk-max--curve.pk-shrink:hover .pk-curve__grip { stroke:
 .pk-shrink .pk-sh--solo { display: none; }
 #cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
 #cm-body.is-cxfull .pk-shrink .pk-sh--solo { display: block; }
+/* انتقالُ المساهمة بين الدرجات الثلاث: تتمدّد من مستطيلها القديم إلى الجديد (‎cxSmooth‎).
+   صورتاها القديمةُ والجديدةُ تملآن المستطيلَ المتحرّك من أعلاه فلا تنضغطان، وما حولها يتلاشى بالمدّة نفسِها */
+::view-transition-group(cxcard) { animation-duration: .42s; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+::view-transition-old(cxcard), ::view-transition-new(cxcard) {
+  animation-duration: .42s; height: 100%; width: 100%; object-fit: cover; object-position: 50% 0;
+}
+/* وما حولها لا يتلاشى (كان يُبيِّض الشاشةَ في منتصف الحركة): يقف على حاله الجديدة فورًا، والمساهمةُ وحدَها تتحرّك فوقه */
+html.cx-vt::view-transition-old(root) { animation: none; opacity: 0; }
+html.cx-vt::view-transition-new(root) { animation: none; }

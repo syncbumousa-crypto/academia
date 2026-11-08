@@ -20430,6 +20430,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return b && b.classList.contains('is-cxmax') ? (b.querySelector('#cm-cards') || b) : b;
   }
   /* التبديل: أصنافٌ تُبدَّل في مكانها بلا إعادة رسم — فلا يضيع مؤشّرُ الكتابة ولا التمرير */
+  /* ===== التكبيرُ والتصغيرُ بنعومة (طلبُ صاحب الموقع) =====
+     الدرجاتُ الثلاث (ضيّقة ⇄ واسعة ⇄ الشاشةُ كلُّها) كانت تقفز. فيُلفّ التبديلُ بـ‎View Transitions‎:
+     تُلتقط المساهمةُ قبلُ وبعدُ باسمٍ واحد (‎cxcard‎) فتنتقل من مستطيلها القديم إلى الجديد حجمًا وموضعًا،
+     وما حولها (بقيّةُ المساهمات · عتمةُ الشاشة الكاملة) يتلاشى ويظهر. والمتصفّحُ الذي لا يعرفها يقفز كما كان */
+  const cxCardEl = key => key === 'edit' ? document.querySelector('#cm-body .pk--edit[data-sub="cards"]')
+    : document.querySelector(`#cm-body .post[data-ck="${CSS.escape(key)}"]`);
+  function cxSmooth(from, fn) {
+    if (!document.startViewTransition || bkReduce()) { fn(); return; }
+    const card = from && from.closest && from.closest('#cm-body .post') || document.querySelector('#cm-body .pk--max');
+    const key = card ? (card.classList.contains('pk--edit') ? 'edit' : card.dataset.ck) : null;
+    if (!key) { fn(); return; }
+    card.style.viewTransitionName = 'cxcard';
+    document.documentElement.classList.add('cx-vt');
+    const vt = document.startViewTransition(() => {
+      card.style.viewTransitionName = '';
+      fn();
+      const nc = cxCardEl(key);
+      if (nc) { nc.style.viewTransitionName = 'cxcard'; nc.classList.remove('pk--maxfx'); }
+    });
+    vt.finished.finally(() => {
+      document.documentElement.classList.remove('cx-vt');
+      const nc = cxCardEl(key); if (nc) nc.style.viewTransitionName = '';
+    });
+  }
   function cxMaxSet(on) {
     const body = document.getElementById('cm-body');
     if (!body) return;
@@ -22105,19 +22129,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pb = e.target.closest('#cm-body [data-cxmaxpub]');
     if (pb) {   /* المنشورة: ضيّقةً يُوسّعها، وواسعةً يملأ بها الشاشة */
       e.preventDefault(); e.stopPropagation();
-      if (cxMaxPub === pb.dataset.cxmaxpub) cxFullSet(true); else cxPubMaxSet(pb.dataset.cxmaxpub);
+      const id = pb.dataset.cxmaxpub;
+      cxSmooth(pb, () => { if (cxMaxPub === id) cxFullSet(true); else cxPubMaxSet(id); });
       return;
     }
     const sh = e.target.closest('#cm-body [data-cxshrink]');
     if (sh) {   /* التضييقُ درجةً: الشاشةُ الكاملة ← الواسعة ← الضيّقة */
       e.preventDefault(); e.stopPropagation();
-      if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
+      cxSmooth(sh, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
       return;
     }
     const b = e.target.closest('#cm-body [data-cxmax]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    if (!cxMax) cxMaxSet(true); else cxFullSet(true);
+    cxSmooth(b, () => { if (!cxMax) cxMaxSet(true); else cxFullSet(true); });
   }, true);
   /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
   document.addEventListener('keydown', e => {
@@ -22144,8 +22169,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
     if (cxHdUp) { cxHdSet(false); return; }
     if (cxFtDn) { cxFtSet(false); return; }
-    if (cxFull) { cxFullSet(false); return; }
-    if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false);
+    cxSmooth(null, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
      و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
