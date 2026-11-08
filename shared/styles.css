@@ -17201,5 +17201,5 @@ html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(i
 .cx-globs .infoedit-del { margin-inline-start: 0; }
 .pk--max.pk--edit > .post-yt { position: relative; }
 .pk--max > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; z-index: 3; margin: 0;
-  /* في منتصف شريط الرأس قامةً: الشريطُ من حافّة المربّع إلى منتصف مسكته (‎--hdh‎ يقيسه ‎cxHdMeasure‎) */
-  top: calc(var(--hdh, 68px) / 2 - 10px); transform: translateY(-50%); }
+  /* على مستوى صفّ الأدوات في الرأس (شريطُ العرض والشارات) — منتصفُه ‎--hdh / 2‎ تحت أعلى الجوف (‎--hdh‎ يقيسه ‎cxHdMeasure‎) */
+  top: calc(var(--hdh, 68px) / 2); transform: translateY(-50%); }
