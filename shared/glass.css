@@ -418,42 +418,35 @@ html[data-lang="en"] .side-handle {
 .market-tools { --lg-tint: var(--glass, #eef3f4); --lg-ink: var(--glass-ink, #14233f);
                 --lg-cast: var(--glass-cast, rgba(13,42,72,.16)); --lg-h: 44px; gap: 10px; }
 
+/* ===== وصبغتُه صبغةُ الشريط الجانبيّ حرفًا بحرف =====
+   كانت عليه طبقةٌ بيضاءُ لامعةٌ وتعتيمٌ آخر (٥٢٪)، فبدا أبيضَ مزرقًّا لا من
+   الموقع. فصار يأخذ ما يأخذه الشريط: ‎--glass‎ بقدر ‎--glass-mix‎، وتمويه ٢٠
+   مع تشبيع ١٧٠، وحرفُه ‎--glass-edge‎ وظلُّه ‎--glass-cast‎ — فيتبدّلان معًا
+   في الفاتح والداكن، وفي المسلخ بتيله وفي الجذر بحبره */
 html:root .market-tools .search,
 html:root .market-tools .filterwrap::before,
 html:root .market-tools .fpanel {
   border: 0;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 58%),
-    color-mix(in srgb, var(--lg-tint) 52%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.75),
-    inset 0 0 0 1px color-mix(in srgb, var(--lg-ink) 9%, transparent),
-    0 10px 28px -12px var(--lg-cast);
-}
-html[data-theme="dark"]:root .market-tools .search,
-html[data-theme="dark"]:root .market-tools .filterwrap::before,
-html[data-theme="dark"]:root .market-tools .fpanel {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 58%),
-    color-mix(in srgb, var(--lg-tint) 62%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    0 12px 30px -12px var(--lg-cast);
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .market-tools .search, .market-tools .filterwrap::before {
-    -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%); }
-  .market-tools .fpanel {
-    -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); }
+  .market-tools .search, .market-tools .filterwrap::before, .market-tools .fpanel {
+    -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
-/* اللوحُ أكثفُ: عليه أسماءٌ تُقرأ */
-html:root .market-tools .fpanel { background:
-    linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,0) 40%),
-    color-mix(in srgb, var(--lg-tint) 80%, transparent); }
-html[data-theme="dark"]:root .market-tools .fpanel { background:
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 40%),
-    color-mix(in srgb, var(--lg-tint) 86%, transparent); }
+/* ونافذةُ المكتبة في الفاتح كانت تُصمِت البحثَ والزرَّ أبيضَ بقاعدةٍ فيها معرّفٌ
+   (‎html[data-theme="light"] #market-modal .search‎) تغلب ما سبق، فيُعاد لهما الزجاجُ
+   بمعرّفٍ مثله */
+html:root #market-modal .market-tools .search {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+}
+html:root #market-modal .market-tools .btn-filter { background: transparent; border-color: transparent; }
+html:root #market-modal .market-tools .filterwrap:not(.has-f) .btn-filter:hover { background: color-mix(in srgb, var(--glass-ink) 7%, transparent); }
+html:root #market-modal .market-tools .filterwrap.has-f .btn-filter:hover { background: transparent; }
+
+/* واللوحُ أكثفُ بالصبغة نفسِها: عليه أسماءٌ تُقرأ */
+html:root .market-tools .fpanel { background: color-mix(in srgb, var(--glass) 84%, transparent); }
 
 /* البحث: كبسولة */
 html:root .market-tools .search {
@@ -462,10 +455,9 @@ html:root .market-tools .search {
 }
 html:root .market-tools .search:focus {
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.75),
     inset 0 0 0 1.5px color-mix(in srgb, var(--c-kfupm, #2c5e65) 55%, transparent),
-    0 0 0 4px color-mix(in srgb, var(--c-kfupm, #2c5e65) 14%, transparent),
-    0 10px 28px -12px var(--lg-cast);
+    0 0 0 4px color-mix(in srgb, var(--c-kfupm, #2c5e65) 12%, transparent),
+    0 10px 28px -12px var(--glass-cast);
 }
 
 /* قرصُ التصنيفات: دائرةٌ تتّسع كبسولة.
