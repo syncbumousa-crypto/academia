@@ -9576,7 +9576,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSplit = {}, pkSplitFlip = {}, pkSplitAnim = {}, pkLastKn = {};
   /* توقيتٌ واحدٌ للكتاب وجاره في الدخول والخروج: المدّةُ والمنحنى والمسافةُ نفسُها — فتلتصق حافّتاهما
      طوال الحركة بفُرجتهما الثابتة، ولا يدخل أحدُهما على الآخر (طلبُ صاحب الموقع) */
-  const SPL_MS = 500, SPL_EASE = 'cubic-bezier(.2, .8, .2, 1)';
+  const SPL_MS = 440, SPL_EASE = 'cubic-bezier(.2, .8, .2, 1)';
   const pkSplitOn = id => (pkSplit[id] && PK_SPLIT_VIEWS.includes(pkVwOf(id)) && pkLab()) ? pkVwOf(id) : null;
   const pkSplitRecord = id => {
     const v = document.querySelector(`#cm-body [data-pksrcview][data-pkid="${CSS.escape(id)}"] .cbk`);
@@ -9841,6 +9841,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         await new Promise(res => (window.requestIdleCallback ? requestIdleCallback(() => res(), { timeout: 300 }) : setTimeout(res, 60)));
         if (!view.isConnected || (pkSrcBk[id] && pkSrcBk[id].view === view)) return;
         if (!bkReduce()) view.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' });
+        /* وما يضيفه الكتابُ إلى قامة القسمة في الضيّقة (أزرارُ التقليب تحته) ينبسط بنعومة لا في إطار */
+        const sp0 = view.closest('.pk-split'), h0 = sp0 ? sp0.getBoundingClientRect().height : null;
+        queueMicrotask(() => pkFxHeight(sp0, h0, 200));
       }
       (bk2Ok() ? bk2Mount : bkMount)(view, pkSrcBk[id] = {
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
