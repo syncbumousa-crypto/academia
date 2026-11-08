@@ -496,6 +496,14 @@ html:root .market-tools .btn-filter svg { width: 19px; height: 19px; }
 html:root .market-tools .btn-filter > span:not(.fbadge),
 html:root .market-tools .btn-filter .fbadge { display: none; }
 html:root .market-tools .filterwrap.is-open .btn-filter { background: color-mix(in srgb, var(--lg-ink) 9%, transparent); }
+/* وفي الكبسولة لا دائرةَ حول الأيقونة عند المرور ولا عند الفتح: الأيقونةُ وحدَها
+   يتبدّل لونُها — باهتةٌ ساكنة، وبلون الهويّة تحت المؤشّر أو واللوحُ مفتوح */
+html:root .market-tools .filterwrap.has-f .btn-filter,
+html:root .market-tools .filterwrap.has-f .btn-filter:hover,
+html:root .market-tools .filterwrap.has-f.is-open .btn-filter { background: transparent; transform: none; }
+html:root .market-tools .filterwrap.has-f .btn-filter { color: color-mix(in srgb, var(--lg-ink) 60%, transparent); transition: color .15s; }
+html:root .market-tools .filterwrap.has-f .btn-filter:hover,
+html:root .market-tools .filterwrap.has-f.is-open .btn-filter { color: var(--c-kfupm, #2c5e65); }
 
 /* الرقاقاتُ المختارة في جوف القرص: صفٌّ واحدٌ ينزلق إن طال */
 html:root .market-tools .filterwrap .factive {
