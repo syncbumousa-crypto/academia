@@ -535,9 +535,29 @@ html:root .market-tools .fact-scroll .fact-bar i { height: 4px; top: 0; border-r
 html:root .market-tools .fact-scroll.is-over .factive { align-self: flex-start; padding-top: 4px; }
 html:root .market-tools .fact {
   flex: none; height: 28px; padding: 0 11px; font-size: 12px; border-radius: 999px; white-space: nowrap;
-  background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 13%, transparent);
 }
-html:root .market-tools .fact:hover { background: color-mix(in srgb, #b3433c 15%, transparent); }
+/* ===== لونُ الرقاقات في الكبسولة =====
+   الفاتح: زجاجٌ مرفوعٌ فوق زجاج — أبيضُ شفّافٌ بظلٍّ خفيف، كأزرار أبل.
+   الداكن: ذهبُ الشعار خفيفًا، والنصُّ ذهبيٌّ ممزوجٌ بالحبر فيُقرأ.
+   والمعرّفُ ‎#market-modal‎ مع كلٍّ منهما: لنافذة المكتبة قاعدةٌ بمعرّفٍ تُلوّن رقاقاتها */
+html:root .market-tools .filterwrap .fact,
+html:root #market-modal .market-tools .filterwrap .fact {
+  background: color-mix(in srgb, #fff 70%, transparent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), inset 0 0 0 1px rgba(255, 255, 255, .6);
+}
+html[data-theme="dark"]:root .market-tools .filterwrap .fact,
+html[data-theme="dark"]:root #market-modal .market-tools .filterwrap .fact {
+  background: color-mix(in srgb, var(--c-gold, #c8a24a) 22%, transparent);
+  color: color-mix(in srgb, var(--c-gold, #c8a24a) 70%, var(--c-ink));
+  box-shadow: none;
+}
+/* والحذفُ عند المرور يبقى أحمرَ في الحالين */
+html:root .market-tools .filterwrap .fact:hover,
+html:root #market-modal .market-tools .filterwrap .fact:hover {
+  background: color-mix(in srgb, #b3433c 15%, transparent); color: #b3433c; box-shadow: none;
+}
+html[data-theme="dark"]:root .market-tools .filterwrap .fact:hover,
+html[data-theme="dark"]:root #market-modal .market-tools .filterwrap .fact:hover { color: #e48a84; }
 
 /* اللوح: زجاجٌ بزاويةٍ واسعة، يتفتّح من تحت القرص */
 /* والقرصُ آخرَ الصفّ (يسارَه بالعربيّ، يمينَه بالإنجليزيّ)، فاللوحُ يُفتح
