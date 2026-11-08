@@ -17117,3 +17117,10 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 @media (max-width: 760px) {
   .pk-split > .pk-bank { flex: none; max-height: 60vh; }
 }
+/* ولا حاشيةَ يمينَ مجلدات البنك (طلبُ صاحب الموقع): لمحةُ قضيب الرحلة (‎.jr-peek‎ ثلاثُ ثوانٍ بعد كلّ فتح) لا تُفتح في منطقته —
+   كانت تترك فراغًا ‎30px‎ يمينَ المجلدات في كلّ مرّةٍ تدخل فيها المنطقة */
+.pk--edit .pk-bank .x3.jr-peek { --jr-op: 0; padding-inline-start: 0; }
+/* وصدرُ صفّ المجلد في البنك يبدأ بالاسم: مقبضُ السحب (لا يظهر إلّا بالمرور) يُنقل إلى آخر الصفّ،
+   ومثلّثُ الفتح لا يحجز مكانًا في مجلدٍ لا أبناءَ له — فلا حاشيةَ فارغةَ يمينَ المجلدات */
+.pk-bank .x3-hd > .vt-grab { order: 99; margin-inline-start: 4px; }
+.pk-bank .x3-hd > .x3-tg.is-void { display: none; }
