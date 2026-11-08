@@ -4494,15 +4494,17 @@ body.cd-sizing #card-modal .cd-stage, body.cd-sizing #card-modal .cd-stage * {
 .imp-badge {
   display: inline-flex; align-items: center; gap: 4px; align-self: center;
   height: 18px; padding: 0 6px 0 7px; border-radius: 999px;
-  background: #f4f1ea; border: 1px solid rgba(0,0,0,.08);
-  color: #6b6458; text-decoration: none; line-height: 1; flex: none;
+  background: rgba(0, 109, 119, .08); border: 1px solid rgba(0, 109, 119, .16);
+  color: #3f6f73; text-decoration: none; line-height: 1; flex: none;
   direction: ltr;
 }
-a.imp-badge:hover { background: #ebe5d8; }
-.imp-badge__f { font-style: normal; font-size: 10px; font-weight: 500; letter-spacing: .02em; }
+a.imp-badge:hover { background: rgba(0, 109, 119, .14); }
+.imp-badge__f { font-style: normal; font-size: 10px; font-weight: 500; letter-spacing: .02em; font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
 .imp-badge__logo { height: 11px; width: auto; display: block; }
-html[data-theme="dark"] .imp-badge { background: #ece7dc; border-color: transparent; color: #5e574b; }
-html[data-theme="dark"] a.imp-badge:hover { background: #fff; }
+/* الداكن: صبغةٌ خفيفةٌ من لون الشعار نفسِه بدل الكبسولة الكريميّة (الاقتراحُ «ج» — اختيارُ صاحب الموقع) */
+html[data-theme="dark"] .imp-badge { background: rgba(131, 197, 190, .08); border-color: rgba(131, 197, 190, .18); color: #9cc7c2; }
+html[data-theme="dark"] a.imp-badge:hover { background: rgba(131, 197, 190, .14); }
+html[data-theme="dark"] .imp-badge__logo { filter: brightness(1.25) saturate(.8); }
 .pst-badge--post.is-unlist:hover { color: #48a05e; }
 .pst-badge--post.is-pub:hover { color: #3f8fb8; }
 /* ألوان الأوضاع الثلاثة: أخضرُ لغير المدرجة · أزرقُ من أسرة البترولي للعامّة · رماديٌّ للخاصّة.
@@ -17338,4 +17340,4 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::after { display: none; }
 /* بالعربيّة تُقرأ من اليمين: «من» ثمّ الشعار */
 html:not([data-lang="en"]) .imp-badge { direction: rtl; padding: 0 7px 0 6px; }
-html:not([data-lang="en"]) .imp-badge__f { font-size: 11px; letter-spacing: 0; }
+html:not([data-lang="en"]) .imp-badge__f { font-size: 11px; font-weight: 700; letter-spacing: 0; }
