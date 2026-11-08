@@ -17055,3 +17055,6 @@ html[data-theme="dark"] .pk-max--curve.pk-shrink:hover .pk-curve__grip { stroke:
 #cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
 #cm-body.is-cxfull .pk-shrink .pk-sh--solo { display: block; }
 /* (كانت هنا قواعدُ ‎View Transitions‎ لـ‎cxSmooth‎ — حلّ محلَّها ‎cxMorph‎: المربّعُ الحقيقيُّ يتحرّك · ROADMAP-MORPH) */
+/* المنشورةُ بلا كتاب: المربّعُ المرقّطُ يملأ مكانَ الكتاب كلَّه وفي وسطه «لا يوجد مصادر» */
+#cm-body .pk-src.pk-src--none { padding: 0; align-items: stretch; }
+.pk-src--none > .pk-vwph { flex: 1 1 auto; font-size: 14px; }
