@@ -40,11 +40,11 @@
 
 /* م١ · الصفوفُ تمرّ تحت الشريط */
 #panel-explore .ex-strip {
-  margin-inline-start:  calc((var(--side-w) + var(--pnl-pad)) * -1);
-  padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+  margin-inline-start:  calc((var(--side-w) + var(--pnl-pad) + var(--hdl-room)) * -1);
+  padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
   /* والالتقاطُ يحترم الحَشْو: بدونه يَجذب البطاقةَ الأولى إلى حافّة
      الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
-  scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad));
+  scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
 }
 
 
@@ -279,7 +279,13 @@ body.side-rail .side-brand { gap: 0; }
    كان يلصق بالحافّات الثلاث فلا حرفَ له يُرى. وزجاجٌ بلا حرفٍ لا يُرى
    أنّه زجاج. فصار **بطاقةً** تطفو بفجوةٍ من كلّ جانب، بحوافَّ ناعمةٍ
    كأمثلة ‎glassapp‎، فيَظهر سمكُها ولمعةُ حرفها وظلُّها على ما تحتها. */
-:root { --glass-gap: 14px; --glass-r: 26px; }
+:root { --glass-gap: 14px; --glass-r: 26px;
+  /* المقبضُ قرصٌ بقدر قرص التصنيفات (٤٤)، والممرُّ بين اللوح والمحتوى يتّسع له:
+     ‎--hdl-room‎ ما يُزاد على الممرّ ليبقى حولَ القرص عشرةٌ من كلّ جهة —
+     وصفرٌ إن كان الممرُّ واسعًا أصلًا */
+  --hdl: 44px;
+  --hdl-room: max(0px, calc(var(--hdl) + 20px - var(--glass-gap) - var(--pnl-pad, 32px)));
+}
 
 .sidebar {
   top: var(--glass-gap); bottom: var(--glass-gap);
@@ -289,8 +295,8 @@ body.side-rail .side-brand { gap: 0; }
 }
 html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
 /* والمحتوى يُفسح للوح وفجوته */
-body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2); }
-html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2); }
+body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
+html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
 /* والمطويُّ يخرج كلَّه ومعه فجوتُه */
 
 /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
@@ -304,30 +310,35 @@ html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) +
    المقبض: دائرةٌ فيها أيقونةُ شريط، لا لسانٌ ملتصقٌ بسهم
    ============================================================ */
 .side-handle {
-  /* أصغرُ وفي الأعلى: يحاذي رأسَ اللوح لا وسطَه — فالوسطُ موضعُ مرورٍ
-     لا موضعُ أمر، والرأسُ حيث تبدأ العينُ في الشريط. */
-  width: 30px; height: 30px; border-radius: 50%; padding: 0; border: 0;
-  top: calc(var(--glass-gap) + 8px); transform: none;
-  /* مفتوحًا: في منتصف الممرّ بين حرف اللوح وأوّل عنوانٍ في المحتوى.
-     والممرُّ محسوبٌ لا مقدَّر — حرفُ اللوح عند ‎side-w + gap‎، وطرفُ
-     العنوان عند ‎side-w + 2gap + حشو اللوحة‎. فالمركزُ منتصفُهما،
-     ناقصًا نصفَ قطر الدائرة. فتتبع أيَّ تغييرٍ في العرض أو الفجوة. */
-  right: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
+  /* ===== قرصٌ كقرص التصنيفات =====
+     كان ٣٠ وأيقونته ١٥ وزجاجُه غيرَ زجاج الشريط. فصار مثلَ قرص التصنيفات:
+     ٤٤ وأيقونته ١٩، وزجاجُ الشريط نفسُه، ويقف في صفّ البحث (مركزُه مركزُه).
+     وموضعُه منتصفُ الممرّ بين حرف اللوح وبداية المحتوى، محسوبًا لا مقدَّرًا. */
+  width: var(--hdl); height: var(--hdl); border-radius: 50%; padding: 0; border: 0;
+  top: calc(var(--glass-gap) + 9px); transform: none;
+  right: calc(var(--side-w) + var(--glass-gap)
+              + (var(--glass-gap) + var(--pnl-pad) + var(--hdl-room)) / 2 - var(--hdl) / 2);
   background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
   color: var(--glass-ink);
-  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
-  transition: right .25s ease, left .25s ease, color .15s, transform .15s;
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  transition: right .25s ease, left .25s ease, background .15s, color .15s, transform .15s;
 }
 html[data-lang="en"] .side-handle {
-  right: auto; left: calc(var(--side-w) + var(--glass-gap) * 1.5 + var(--pnl-pad) / 2 - 15px);
+  right: auto;
+  left: calc(var(--side-w) + var(--glass-gap)
+             + (var(--glass-gap) + var(--pnl-pad) + var(--hdl-room)) / 2 - var(--hdl) / 2);
   border: 0; border-radius: 50%;
-  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 8px 22px var(--glass-cast);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
-.side-handle:hover { background: color-mix(in srgb, var(--glass) 92%, transparent); transform: scale(1.09); }
+.side-handle:hover {
+  background: color-mix(in srgb, color-mix(in srgb, var(--glass-ink) 7%, var(--glass)) var(--glass-mix), transparent);
+  transform: none;
+}
+.side-handle:active { transform: scale(.94); }
 /* الأيقونةُ ثابتةٌ لا تدور: هي تقول «شريط» لا «اتّجاه» */
-.side-handle svg { width: 15px; height: 15px; transform: none !important; }
+.side-handle svg { width: 19px; height: 19px; transform: none !important; }
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .side-handle { -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); }
+  .side-handle { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
 
 /* ===== مقايضةٌ مقيسة =====

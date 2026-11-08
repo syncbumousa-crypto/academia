@@ -3,11 +3,11 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-glass="liquid">
+<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-glass="liquid" data-title="المسلخ" data-title-en="Almaslakh">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>أكاديميا</title>
+  <title>المسلخ</title>
 
   <!-- ===== أيقونةُ اللسان =====
        ثلاثةُ مقاساتٍ مصرَّحة، ولكلٍّ قصُّه: ‎١٦‎ مقصوصةٌ إلى ‎٧٢٪‎ لأنّ هامشَ
@@ -24,7 +24,7 @@
 
   <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
        — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
-  <link rel="stylesheet" href="../shared/glass.css?v=16">
+  <link rel="stylesheet" href="../shared/glass.css?v=17">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -161,7 +161,7 @@
       padding: 4px; border: 0; border-radius: 12px;
       background: transparent;   /* م٦: لا سطحَ مصمتًا داخل الزجاج */
     }
-    .sc-menu[hidden] { display: none; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
+    .sc-menu[hidden], .side-com[hidden] { display: none !important; }   /* ‎display:flex‎ يغلب ‎[hidden]‎ لولا هذا */
 
     .sc-item {
       border: 0; border-radius: 8px; background: transparent; cursor: pointer;
@@ -216,10 +216,12 @@
             <path d="M-140.75,148.39 A54.25,54.25 0 1,1 -50.37,91.6 A54.25,54.25 0 0,1 50.38,91.6 A54.25,54.25 0 1,1 140.75,148.39 L0,302 Z"/>
           </svg>
         </a>
-        <div class="side-logo">أكاديميا</div>
+        <div class="side-logo" data-brand="المسلخ" data-brand-en="Almaslakh">المسلخ</div>
       </div>
 
-      <div class="side-com" id="side-com">
+      <!-- مبدِّلُ المجتمع مخفيٌّ الآن: المسلخُ وحدَه في هذه المرحلة. والعناصرُ ومنطقُها
+           باقيان كما هما (ورابطُ «أكاديميا» فيه) — يُظهَر بنزع ‎hidden‎ يومَ التوسّع -->
+      <div class="side-com" id="side-com" hidden>
         <!-- السهمُ أوّلَ العنصرين فيقع يمينَ النصّ في العربيّة، وينقلب مع اللغة -->
         <button class="sc-now" id="sc-now" type="button" aria-expanded="false" aria-controls="sc-menu">
           <svg class="sc-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>

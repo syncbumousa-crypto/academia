@@ -1,0 +1,1331 @@
+{
+  "code": "FIN 250",
+  "users": [
+    {
+      "id": "stk-practice",
+      "name": "Practice",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/practice/144/2043_2.png",
+      "email": "practice@import.stkfupm.invalid",
+      "user": "Practice"
+    },
+    {
+      "id": "stk-user9840",
+      "name": "توحيد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9840/144/2074_2.png",
+      "email": "user9840@import.stkfupm.invalid",
+      "user": "user9840"
+    },
+    {
+      "id": "stk-fin_analyst",
+      "name": "FIN Analyst",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/e274bd/144.png",
+      "email": "fin_analyst@import.stkfupm.invalid",
+      "user": "FIN_Analyst"
+    },
+    {
+      "id": "stk-almax",
+      "name": "almax",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/almax/144/1559_2.png",
+      "email": "almax@import.stkfupm.invalid",
+      "user": "almax"
+    },
+    {
+      "id": "stk-9ami",
+      "name": "9ami",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/9/22d042/144.png",
+      "email": "9ami@import.stkfupm.invalid",
+      "user": "9ami"
+    },
+    {
+      "id": "stk-mhm14",
+      "name": "MHM14",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mhm14/144/2091_2.png",
+      "email": "mhm14@import.stkfupm.invalid",
+      "user": "MHM14"
+    },
+    {
+      "id": "stk-anoosh",
+      "name": "Anoosh",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/anoosh/144/1389_2.png",
+      "email": "anoosh@import.stkfupm.invalid",
+      "user": "Anoosh"
+    },
+    {
+      "id": "stk-user4307",
+      "name": "عبدالرحمن جبرتي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/df705f/144.png",
+      "email": "user4307@import.stkfupm.invalid",
+      "user": "user4307"
+    },
+    {
+      "id": "stk-fin.1000",
+      "name": "Fin.1000",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/c77e96/144.png",
+      "email": "fin.1000@import.stkfupm.invalid",
+      "user": "Fin.1000"
+    },
+    {
+      "id": "stk-abo.saud",
+      "name": "abo.saud",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/22d042/144.png",
+      "email": "abo.saud@import.stkfupm.invalid",
+      "user": "abo.saud"
+    },
+    {
+      "id": "stk-_182",
+      "name": "عبدالرحمن18",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/90ced4/144.png",
+      "email": "_182@import.stkfupm.invalid",
+      "user": "_182"
+    },
+    {
+      "id": "stk-aziz33",
+      "name": "aziz33",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f07891/144.png",
+      "email": "aziz33@import.stkfupm.invalid",
+      "user": "aziz33"
+    },
+    {
+      "id": "stk-hard-worker",
+      "name": "HARD-WORKER",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hard-worker/144/2192_2.png",
+      "email": "hard-worker@import.stkfupm.invalid",
+      "user": "HARD-WORKER"
+    },
+    {
+      "id": "stk-phenomenon",
+      "name": "Phenomenon",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/p/9fc348/144.png",
+      "email": "phenomenon@import.stkfupm.invalid",
+      "user": "Phenomenon"
+    },
+    {
+      "id": "stk-mansooor",
+      "name": "mansooor",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b4bc9f/144.png",
+      "email": "mansooor@import.stkfupm.invalid",
+      "user": "mansooor"
+    },
+    {
+      "id": "stk-user3139",
+      "name": "دولار",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/7ba0ec/144.png",
+      "email": "user3139@import.stkfupm.invalid",
+      "user": "user3139"
+    },
+    {
+      "id": "stk-the_kid",
+      "name": "the kid",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/6de8d8/144.png",
+      "email": "the_kid@import.stkfupm.invalid",
+      "user": "the_kid"
+    },
+    {
+      "id": "stk-al3aneed1100",
+      "name": "al3aneed1100",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/3da27b/144.png",
+      "email": "al3aneed1100@import.stkfupm.invalid",
+      "user": "al3aneed1100"
+    },
+    {
+      "id": "stk-user8843",
+      "name": "نبض الشوق",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8843/144/1920_2.png",
+      "email": "user8843@import.stkfupm.invalid",
+      "user": "user8843"
+    },
+    {
+      "id": "stk-user10207",
+      "name": "بروتوكول",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10207/144/2111_2.png",
+      "email": "user10207@import.stkfupm.invalid",
+      "user": "user10207"
+    },
+    {
+      "id": "stk-azooz_jk",
+      "name": "Azooz Jk",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f4b2a3/144.png",
+      "email": "azooz_jk@import.stkfupm.invalid",
+      "user": "Azooz_Jk"
+    },
+    {
+      "id": "stk-sultan_salman_1419",
+      "name": "sultan salman 1419",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/e47c2d/144.png",
+      "email": "sultan_salman_1419@import.stkfupm.invalid",
+      "user": "sultan_salman_1419"
+    },
+    {
+      "id": "stk-khdsa2022",
+      "name": "Khdsa2022",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/khdsa2022/144/2326_2.png",
+      "email": "khdsa2022@import.stkfupm.invalid",
+      "user": "Khdsa2022"
+    },
+    {
+      "id": "stk-brbrtoo",
+      "name": "Brbrtoo",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/b5e925/144.png",
+      "email": "brbrtoo@import.stkfupm.invalid",
+      "user": "Brbrtoo"
+    },
+    {
+      "id": "stk-waleedx11",
+      "name": "waleedx11",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/6bbea6/144.png",
+      "email": "waleedx11@import.stkfupm.invalid",
+      "user": "waleedx11"
+    },
+    {
+      "id": "stk-khalid_jassim",
+      "name": "Khalid Jassim",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/khalid_jassim/144/2292_2.png",
+      "email": "khalid_jassim@import.stkfupm.invalid",
+      "user": "Khalid_Jassim"
+    },
+    {
+      "id": "stk-kbsc",
+      "name": "KBSC",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/kbsc/144/2474_2.png",
+      "email": "kbsc@import.stkfupm.invalid",
+      "user": "KBSC"
+    },
+    {
+      "id": "stk-husn99",
+      "name": "husn99",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/dec6dc/144.png",
+      "email": "husn99@import.stkfupm.invalid",
+      "user": "husn99"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1438312",
+      "uid": "stk-practice",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1452335207000,
+      "st": "pub",
+      "data": {
+        "desc": "الكورس يعطي مقدمة عن الفايننس بشكل عام\n\nFinancial management\nBonds\nStocks\nTime value of money اللي هو شابتر 5 وتراه اهم شابتر ولازم تفهمه مضبوط اذا انك فايننس\nCapital budgeting\nCost of capital\nFinancial statements analysis : شابتر 14 باكاونتنق 210 اللي كله قوانين بيتكرر هنا\nCash flow statement بشكل مركز\n\nهذا اللي يحضرني حاليا وبشكل عام الكورس بسيط والكتاب جدا ممتاز",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-250-financial-management-i/121018/3",
+          "user": "Practice",
+          "ts": 1452335207000,
+          "tid": 121018,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1503966",
+      "uid": "stk-user9840",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1545556072000,
+      "st": "pub",
+      "data": {
+        "desc": "الكورس جميل ورائع لكن اعتبره ثقيل\nيعطيك مقدمة عن الفايننس وشغله في الشركة وبعدها يدخلك في طرق حساب PV و NVP وطرق تقييم الستكس والديفدندس والبوندس والانفسمنت وكيف تقارن بين مشروعين وايهم افضل .\nيعني مفيييد جدا في حياتك العملية والشخصية . بعد هالكورس راح تبدا تنظر للأمور بطريقة مختلفة.\n\nCHs:\n\nThe Role of Managerial Finance\nThe Financial Market Environment\nFinancial Statements and Ratio Analysis\nTime Value of Money.\nCash Flow and Financial Planning\nInterest Rates and Bond Valuation\nStock Valuation\nRisk and Return\nThe Cost of Capital\nCapital Budgeting Techniques\nCapital Budgeting Cash Flows\nWorking Capital and Current Asset Management",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-250-financial-management-i/121018/4",
+          "user": "user9840",
+          "ts": 1545556072000,
+          "tid": 121018,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1315780",
+      "uid": "stk-fin_analyst",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1388968074000,
+      "st": "pub",
+      "data": {
+        "desc": "لا الكورسين مايعتمدو على بعض\n\nلكن في بعض المواضيع المشتركة …\n\nفكرة عامة عن الكورس:\n\nالكورس يبدأ بتعريف تخصص الادارة المالية والفرق بينه وبين المحاسبة والاقتصاد…بعدين يعطيك فكرة عن الاسواق المالية وفايدتها وكيف الشركات تاخد تمويل عن طريق الاكتتاب… وبعدها بتاخد شابتر عن تحليل القوائم المالية ( نفسه موجود في acct210 ) …وبعدين شابتر يعرفك عن مبدأ time value of money - …وبعدين بتدرس كيف تقيم الاسهم والسندات…،وحساب تكلفة راس المال … وايضا يتطرق الكورس لموضوع الـ capital budgeting وهو ببساطة على اي اساس تتخذ قرار بخصوص بروجكت او مشروع ومتى تقبله او توقفه.\n\nكل الكلام هذا بشكل مبسط نسبياً وطلاب التخصص المالية بيدرسوه ثاني في 310 و320 بشكل اعمق\n\nالكورس مو صعب لكن يعتمد عالدكتور… بعض المدرسين يطالبوك بآلة حاسبة لستهيل الحسابات …اما مثلا د.الموسى مايعترف فيها وبتضطر تحفظ القوانين\n\nبخصوص البتشن … مااقدر افيدك والله يعتمد على التشيرمان",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin250/154981/2",
+          "user": "FIN_Analyst",
+          "ts": 1388968074000,
+          "tid": 154981,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1316425",
+      "uid": "stk-almax",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1389063427000,
+      "st": "pub",
+      "data": {
+        "desc": "انا اخذتهم مع بعض صدقني ما بتواجه اي مشاكل لان الرابط الي بينهم كلشششش بسيط و يمديك تضبط امورك",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin250/154981/4",
+          "user": "almax",
+          "ts": 1389063427000,
+          "tid": 154981,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1077848",
+      "uid": "stk-9ami",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1344443943000,
+      "st": "pub",
+      "data": {
+        "desc": "from the portal\n\nPrerequisites:\n(Undergraduate level ACCT 201 Minimum Grade of D or Undergraduate level ACCT 110 Minimum Grade of D)\nand Undergraduate level ECON 101 Minimum Grade of D and (Undergraduate level ECON 102 Minimum Grade of D or Undergraduate level ECON 202 Minimum Grade of D)\n\n* عشان تعرف المتطلب لأي مادة … ادخل من الـ course offerings ويطلع اسم المادة\n\nبعد كدا تضغط على اي CRN وبتلاقي اسم المادة اضغط عليه او على view catalog entry",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/pre-request-for-fin250/129942/2",
+          "user": "9ami",
+          "ts": 1344443943000,
+          "tid": 129942,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1416371",
+      "uid": "stk-mhm14",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1417275604000,
+      "st": "pub",
+      "data": {
+        "desc": "3- نزل الـfin 250 قبل الـmgt301 لأنها مادة سفمور و مرتبطة بنفس مواضيع acct210 و حط في بالك إنه acct 301 & 302 ما هم سهلين يبغالهم جهد كبييير و إذا نزلت fin معاهم بيكون شغل مضاعف",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/167746/3",
+          "user": "MHM14",
+          "ts": 1417275604000,
+          "tid": 167746,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p908837",
+      "uid": "stk-anoosh",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1317023716000,
+      "st": "pub",
+      "data": {
+        "desc": "في الادارة في كورسين الفايننس FIN 301,302\nراح يدمجونها بكورس واحد جديد FIN 250 ويبدأ من الصيف القادم “كورس بالتخصص الجديد”\n\nالمفروض التخصص يتبع كلية الادارة 😆",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/112603/44",
+          "user": "Anoosh",
+          "ts": 1317023716000,
+          "tid": 112603,
+          "pn": 44
+        }
+      }
+    },
+    {
+      "id": "stk-p1017885",
+      "uid": "stk-user4307",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1333444940000,
+      "st": "pub",
+      "data": {
+        "desc": "fin 301 >> fin 250",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/finance-curriculum/122149/184",
+          "user": "user4307",
+          "ts": 1333444940000,
+          "tid": 122149,
+          "pn": 184
+        }
+      }
+    },
+    {
+      "id": "stk-p100337",
+      "uid": "stk-fin.1000",
+      "code": "FIN 250",
+      "sec": "info",
+      "ts": 1149730733000,
+      "st": "pub",
+      "data": {
+        "desc": "هذي ماده في غايه الاهميه, لاااازم اذا كنت طالب فاينانس تذاكرها زين و تركز على الكتاب لأن كل شي فيها بيمر عليك مره ثانيه فلازم تخلي أساسك قوي,",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/50803/7",
+          "user": "Fin.1000",
+          "ts": 1149730733000,
+          "tid": 50803,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1021100",
+      "uid": "stk-abo.saud",
+      "code": "FIN 250",
+      "sec": "srcU",
+      "ts": 1334223567000,
+      "st": "pub",
+      "data": {
+        "html": "اله تغنيك عن حفظ كم هائل من المعادلات تستطيع من خلالها ان تحصل على ناتج العمليات الحسابية<br>الخاصة بالدراسات المالية مثل حساب PV, FV, PMT, I, N, IRR, NPV وغير ذالك<br>عن طريق ادخال المعلومات الموجودة في السؤال ليخرج لك الجواب في غمضة عين<br>ومن افضل الانواع الموجودة هو<br>http://www.easydeal.pk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/2/0/203472126.jpg<br>ويمكنك شرائها من جرير وهي مصرح باستخدامها في اختبار CFA",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ibrahim-al-naeem/107073/17",
+          "user": "abo.saud",
+          "ts": 1334223567000,
+          "tid": 107073,
+          "pn": 17
+        }
+      }
+    },
+    {
+      "id": "stk-p1509723",
+      "uid": "stk-_182",
+      "code": "FIN 250",
+      "sec": "srcU",
+      "ts": 1557845517000,
+      "st": "pub",
+      "data": {
+        "html": "FIN250-182<br>مرفق مع الرد منهج المادة<br>​<span data-fid=\"stk-f1509723-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1509723-0": {
+            "name": "Fin 250 Syllabus 182 Section 01 - Hesham.docx",
+            "v": "data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,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"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/hesham-merdad/180463/3",
+          "user": "_182",
+          "ts": 1557845517000,
+          "tid": 180463,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1354487",
+      "uid": "stk-aziz33",
+      "code": "FIN 250",
+      "sec": "srcP",
+      "ts": 1397937012000,
+      "st": "pub",
+      "data": {
+        "html": "نصيحة بخصوص التيبي لهالمواد المهمة لا تصير بس تحفظ وتسمع بالميجر<br>ذاكر الكتاب وخل التيبي مراجعة فقط وافهم السؤال واعرف كيف حله",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/test-bank-fin-250/128803/8",
+          "user": "aziz33",
+          "ts": 1397937012000,
+          "tid": 128803,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-grade-p1509723",
+      "uid": "stk-_182",
+      "code": "FIN 250",
+      "sec": "grade",
+      "ts": 1557845517000,
+      "st": "pub",
+      "data": {
+        "method": "avg",
+        "items": [
+          {
+            "name": "First Major Exam",
+            "pct": 20
+          },
+          {
+            "name": "Second Major Exam",
+            "pct": 25
+          },
+          {
+            "name": "Quizzes (6)",
+            "pct": 15
+          },
+          {
+            "name": "Homework (MyFinanceLab)",
+            "pct": 5
+          },
+          {
+            "name": "Final Examination (Comprehensive)",
+            "pct": 35
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/hesham-merdad/180463/3",
+          "user": "_182",
+          "ts": 1557845517000,
+          "tid": 180463,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-grade-p1464161",
+      "uid": "stk-hard-worker",
+      "code": "FIN 250",
+      "sec": "grade",
+      "ts": 1481374971000,
+      "st": "pub",
+      "data": {
+        "method": "avg",
+        "items": [
+          {
+            "name": "10 كويزات وهومورك",
+            "pct": 10
+          },
+          {
+            "name": "ميدتيرم",
+            "pct": 45
+          },
+          {
+            "name": "فاينل",
+            "pct": 45
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/dr-khaled-m-albinali/98270/6",
+          "user": "HARD-WORKER",
+          "ts": 1481374971000,
+          "tid": 98270,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-lessons-p1503966",
+      "uid": "stk-user9840",
+      "code": "FIN 250",
+      "sec": "lessons",
+      "ts": 1545556072000,
+      "st": "pub",
+      "data": {
+        "items": [
+          {
+            "num": "",
+            "name": "The Role of Managerial Finance"
+          },
+          {
+            "num": "",
+            "name": "The Financial Market Environment"
+          },
+          {
+            "num": "",
+            "name": "Financial Statements and Ratio Analysis"
+          },
+          {
+            "num": "",
+            "name": "Time Value of Money."
+          },
+          {
+            "num": "",
+            "name": "Cash Flow and Financial Planning"
+          },
+          {
+            "num": "",
+            "name": "Interest Rates and Bond Valuation"
+          },
+          {
+            "num": "",
+            "name": "Stock Valuation"
+          },
+          {
+            "num": "",
+            "name": "Risk and Return"
+          },
+          {
+            "num": "",
+            "name": "The Cost of Capital"
+          },
+          {
+            "num": "",
+            "name": "Capital Budgeting Techniques"
+          },
+          {
+            "num": "",
+            "name": "Capital Budgeting Cash Flows"
+          },
+          {
+            "num": "",
+            "name": "Working Capital and Current Asset Management"
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-250-financial-management-i/121018/4",
+          "user": "user9840",
+          "ts": 1545556072000,
+          "tid": 121018,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-doc-phenomenon-fin250",
+      "uid": "stk-phenomenon",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1304359845000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alnaeem",
+            "n": "Dr. Ibrahim Al-Naeem",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : أحيانا … وما يمانع التأخير\nطريقة الشرح : جيده … يعطيك نوت على الويب سي تي بس ماتغني عن الكتاب وبنفس الوقت يشرح بالكلاس ويحاول يوصل المعلومه قد ما يقدر على السبوره …\nالكويزات : سهله الى متوسطه …\nالمياجر: كلها اختيارات … وسهله وخصوصا للي يذاكر ، بس عيبها الوقت غير كافي … ينتهي الوقت وباقي لك أكثر من سؤال\nالفاينلات : نفس المياجر\nالقريد النهائي: B\nالصوت: واضح … ولو ان انجليزيته مضروبه شوي\nإضافات : الدكتور توه شباب ومتحمس … وحبيييييييب لأبعد درجه لكن مثل ما قلت مجتهد في الشرح وليس ممتاز\nوحاول قد ما تقدر تخليه يعرفك بالاسم وتروح له الاوفيس أور … طبعا ماعنده هوموركات … وبعض الاحيان يسحب على الكلاس بدون مايعطيك خبر …\nوأفضل مافيه واللي يميزه عن محمد الموسى أنه يخليك تستخدم الفايننشال كالكوليتر … ويقولون محمد موسى يشطح كثيييييير ويسولف بجميع قضايا الأمه ولا يشرح الا آخر 10 دقايق من الكلاس وكل اختباراته بروبلم سولفنق…\n\nأتمنى أني أفدتكم … وبالتوفيق 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p840010",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibrahim-al-naeem/107073/5",
+              "user": "Phenomenon",
+              "ts": 1304359845000,
+              "tid": 107073,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mansooor-fin250",
+      "uid": "stk-mansooor",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1304700969000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alnaeem",
+            "n": "Dr. Ibrahim Al-Naeem",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يحضر يوميا وفيه درجات على الحضور والمشاركة 10%\nطريقة الشرح : سلايدات وشوية امثلة على السبورة … بس عموما شرحه يوصل 40% من المعلومة … و 60% عليك\nالكويزات : 4 كويزات وياخذ أفضل 3 منهم\nالمياجر: الميرجر الاول كان الوقت ما يكفي أبداً … والاختبار من متوسط إلى صعب … الاختبار الثاني كان سهل والوقت كافي جداً\nالفاينلات : متوسط …\nالقريد النهائي: B\nالصوت: عادي جداً + الإنجليزي عنده نصه عربي ونص الكلمات نطقها غلط … بس مشو حالكم\nإضافات : يعطيك حقك تقريبا … بدون زيادة أو نقصان",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p841281",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibrahim-al-naeem/107073/7",
+              "user": "mansooor",
+              "ts": 1304700969000,
+              "tid": 107073,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abo.saud-fin250",
+      "uid": "stk-abo.saud",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1326961654000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alnaeem",
+            "n": "Dr. Ibrahim Al-Naeem",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : اغلب الاحيان يحضر بداية الكلاس واحيانا ينسى يحضر\nطريقة الشرح : يشرح سلايدات ويحل عالصبورة اذا منتبه بتفهم ٩٠٪ بالراحة\nالكويزات : mc او حل مسائل، سهلة الى متوسطة الصعوبة\nالمياجر: mc متوسطة مهيب ذيك الصعوبة اذا مذاكر تجيب ٨٠ وفوق بالراااااحة\nالفاينلات : نفس المياجر بالضبط\nالقريد النهائي: B+\nالصوت: واضح يشرح بالانجليزي ويوضح بالعربي\nإضافات : الدكتور اخلاق وطيب بالمرة\n______",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p970815",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibrahim-al-naeem/107073/11",
+              "user": "abo.saud",
+              "ts": 1326961654000,
+              "tid": 107073,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3139-fin250",
+      "uid": "stk-user3139",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1334404234000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alnaeem",
+            "n": "Dr. Ibrahim Al-Naeem",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ياخي من جدكم تقارونوا الموسى بالنعيم\n\nالموسى رجال حقاني و يخاف الله و يعطيك حقك و زيادة صحيح انه ما يشرح أغلب وقت الكلاس ولكن يعامل الطلاب باحترام و لا يزيد طلاب عن طلاب\n\nعكس النعيم ( تضبطه يعطيك قريد اما غير كذا مالك الا سي و سي بلس و لا شرح و لا فايدة )\n\nفي النهاية لاحد ينزل عند الموسى ويجيني يقول ما فهمت أنا قلتها ان الموسى يشرح قليل لكن تفهم اما النعيم شرح مشي حالك لدرجة أنك لو ما تنتبه معاه يمكن تذاكر بنفسك أما لو اعتمدت على شرحة راح تضيع ضياع لا مثيل له بين طلاب الفايننس و احتمال تكره الفايننس و بتحس نفسك ودك تحول لأنه كرهك في المادة و بتندم على اليوم الي دخلت فيه فايننس",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1022143",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibrahim-al-naeem/107073/18",
+              "user": "user3139",
+              "ts": 1334404234000,
+              "tid": 107073,
+              "pn": 18
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-anoosh-fin250",
+      "uid": "stk-anoosh",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1327594975000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-khalifa",
+            "n": "Dr. Ahmed Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "fin 301\n\nالتحضير :\nيومي وما يهتم فيه كثير\n\nطريقة الشرح :\nممتازة ويركز على المواضيع المهمة وراح تلاحظ عليها اسئلة كثير في الاختبارات\n\nالكويزات :\nسهلة جدا ويعطي هوموركات على الفايننس لاب\n\nالمياجر:\nاختيارات كلها تي بي سهلة جدا\n\nالفاينلات :\nاختيارات تي بي وفي اسئلة جت من المياجر\n\nالقريد النهائي:\n+a\n\nالصوت:\nواضح\n\nإضافات :\nدكتور اخلاق وتعامل ويشجع الطلاب يجتهدوا معه\nنزل معه وانت تضحك لأنك راح تفهم الاشياء المهمة في الكورس + تاخذ قريد",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p974240",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ahmed-khalifa/99893/9",
+              "user": "Anoosh",
+              "ts": 1327594975000,
+              "tid": 99893,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-fin_analyst-fin250",
+      "uid": "stk-fin_analyst",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1364925183000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-khalifa",
+            "n": "Dr. Ahmed Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الـ stat212 يبغالها شغل طبعا… لكنها بوجهة نظري اسهل من stat211\n\nلكن كصيف يمكن يكون تكون ثقيلة شوي ويبغالك تتابع اول باول\n\nالفايننس معاها بتحتاج شوية مجهود … لكن المشجع في حالتك ان الصيف الماضي درسها احمد خليفة واحتمال كبير هو اللي بيدرسها الصيف هذا\n\nالدكتور ذا شريح وحسب كلام الطلاب يمديك تطلع معاه بقريد في الصيف …\n\nغير كذا دكاترة المادة في الترم العادي مو ذاك المستوى… النعيم وموسى…\n\nفانا لو مكانك باخذها مع احمد خليفة، خاصة لو تخصصك فايننس لو مو فايننس وماتبي كورس صعب خذ شي ثاني اسهل مع الستات … او انك تخلي الفايننس وتحذف الستات وتاخذ شي ثاني\n\nحط ببالك لو اخذتهم ماراح يكون صيف سهل لكن يمديك عليه اذا بذلت مجهود متوسط الى فوق المتوسط وان شاء الله بترتاح الاترام القادمة من ناحيتين : اولا حتاخذ الفايننس مع دكتور ممتاز لا يتوافر في الاترام العادية(اذا كان خليفة) , ثانياً راح تكون الاترام اخف كونك افتكيت من الستات",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1204928",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/fin-250/142602/2",
+              "user": "FIN_Analyst",
+              "ts": 1364925183000,
+              "tid": 142602,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-the_kid-fin250",
+      "uid": "stk-the_kid",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1365677682000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-khalifa",
+            "n": "Dr. Ahmed Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اذا احمد خليفه منزل الفايننس 250 في الصيف انصحك بقوه تنزل عنده لانه في الترم العادي الدكاتره سيئين\nاذا غير احمد خليفه لاتنزل\nبالنسبه الى الستات راح يكون التركيز كله على الستات وانصحك تذاكر اول باول وتركز عليها\nالفايننس سهالات مع احمد خليفه التركيز بيكون بس في الستات\nهذا رأيي وانت بكيفك\nبالتوفيق عزيزي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1208728",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/fin-250/142602/5",
+              "user": "the_kid",
+              "ts": 1365677682000,
+              "tid": 142602,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-al3aneed1100-fin250",
+      "uid": "stk-al3aneed1100",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1359795015000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-musa",
+            "n": "Dr. Mohammed Musa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ركز بالحضور وتعرف وش يبغى\nالدكتور جدا متساهل ميجر ون يجيب ملتبلشويز\nميجر 2 كله مسائل\nوالفانيل كله مسائل\nالحضور ثم الحضور ثم الحضور",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1175013",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/fin-250/139690/2",
+              "user": "al3aneed1100",
+              "ts": 1359795015000,
+              "tid": 139690,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8843-fin250",
+      "uid": "stk-user8843",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1397585164000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-jyousif",
+            "n": "Mr. Jassim Yousif",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "j yousif\n\nاسمه جاسم\n\nالتحضير في بداية الكلاس , شرح ممتاز ,\n\nالكوزات سهله الى متوسطة غالبا تكون من الواجبات\n\nالمياجر متوسطة\n\nالمدرس ممتاز و انصح فيه\n\nانا منزل معاه fin 250 هذا الترم",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1352691",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/j-yousif-y-al-nafjan/148047/7",
+              "user": "user8843",
+              "ts": 1397585164000,
+              "tid": 148047,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user10207-fin250",
+      "uid": "stk-user10207",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1459273728000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-qidong",
+            "n": "Dr. Qi Dong",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Qi dong درس الترم الماضي نفس المادة. يقولون عادي ومايعرف يشرح بس الاسئلة جداً سهلة في المياجر والفاينل.\n\nAli-al elg دكتور وشرحه ممتاز. الاسئلة متوسطة الى سهلة. الافرج عنده c+. محترم بس المشكلة انه يتكلم طول الكلاس وكلاسه يطفش.\n\nالمهم عندك قروب كلية الادارة بالفيسبوك راح يفيدونك اكثر.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1445262",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-qi-dong-fin250/172767/2",
+              "user": "user10207",
+              "ts": 1459273728000,
+              "tid": 172767,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-azooz_jk-fin250",
+      "uid": "stk-azooz_jk",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1460581177000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alelg",
+            "n": "Dr. Ali Habib Al-Elg",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "مانصح بيلو في 250\n\nشرحو ممل جداا وماتفهم شيئ وكل شوية كويزات وهومركات\n\nمتعاون جدا …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1446611",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ali-habib-al-elg/98255/9",
+              "user": "Azooz_Jk",
+              "ts": 1460581177000,
+              "tid": 98255,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-sultan_salman_1419-fin250",
+      "uid": "stk-sultan_salman_1419",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1545744943000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alelg",
+            "n": "Dr. Ali Habib Al-Elg",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Fin 250 … Term 181\n\nالتحضير : مرات في البداية ومرات في النهاية … بالنسبة للميك اب الأحظ وجود طلاب من سكاشن مختلفة موجودة في سكشني … ولكن للإحاطة بلغه وهو ما راح يقصر معك\n\nطريقة الشرح : شرح من أول الحصة إلى نهايتها بدون توقف عبارة عن شرح للسلايدات … أشوفه ممل … راح تواجه صعوبة في فهم الشرح لذلك تحتاج تركيز مضاعف\n\nالكويزات : تقريبا 8 أو 9 كويزات إن ما خاب ظني … من متوسطة إلى صعبة … وتحتاج إلى مذاكرة … ولا تستهين فيها عليها 15/100\n\nالمياجر: الأول متوسط والثاني صعب … أفرج الأول كان حول 70% … والثاني حول 58%\n\nالفاينلات : صعب ويحتاج إلى مذاكرة\n\nالقريد النهائي: +C\n\nالصوت: متوسط … لو تجلس قدام يكون أفضل\n\nإضافات :\n\n1- مدرس محترم وطيب ومتعاون في الاوفيس اور\n\n2- في الغالب المحاضرة ما راح تخلص في وقتها المفترض … أقل شي 5 - 10 دقائق زيادة عن الوقت\n\n3- في الغالب بتضطر على الاعتماد على نفسك في المذاكرة لأن شرح الدكتور غير جيد نوعا ما\n\n4- توزيع القريدات أشوفه جيد جدا نوعا ما … أغلب الطلاب بين B إلى C … وراح أرفق ملف يبين كيفية توزيع القريدات\n\n5- ما أنصحك تحطه خيار أول إذا يهمك الشرح",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504047",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ali-habib-al-elg/98255/10",
+              "user": "sultan_salman_1419",
+              "ts": 1545744943000,
+              "tid": 98255,
+              "pn": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-khdsa2022-fin250",
+      "uid": "stk-khdsa2022",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1578313202000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alelg",
+            "n": "Dr. Ali Habib Al-Elg",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "BY WHATSAPP\nاسم الدكتور : al elg العلق\nالمادة: Fin 250\nالفصل الدراسي: 191\nبنود التقييم ⬇️⬇️⬇️\n\nالتحضير : يحضر بنفسه ينادي الأسماء بس متساهل (لو تجيه بنص الكلاس ولا بنهايته يحضرك)\nطريقة الشرح : أغلب السمستر كان البروجيكتر خربان فكان يقرأ من السلايدات وبعض الأحيان يكتب في السبورة ، بالنسبة لي شرحه ما أستفدت منه أبد مشيتها سيلف ستدي\n\nالكويزات : ٤ او ٥ كويزات إختياري بنفس مستوى أسئلة المياجر وكان الآفرج نازل\n\nالمياجر: كومن ، وسهلة ، خيارات\nالفاينلات :كومن ، خيارات\nالقريد النهائي: B+\nالصوت:صوته واضح بس لهجته قطيفية بزيادة والآكسنت حقه مرة سيئ\nإضافات : شخص حبيب في التحضير وكم مرة يمددلنا الأونلاين هومورك بس شخصيا الكلاس كان ممل جدا وما أستفدت منه ومشيتها سيلف ستدي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1518862",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ali-habib-al-elg/98255/11",
+              "user": "Khdsa2022",
+              "ts": 1578313202000,
+              "tid": 98255,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-hard-worker-fin250",
+      "uid": "stk-hard-worker",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1481374971000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-albinali",
+            "n": "Dr. Khaled M. Albinali",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "161 -- FIN250\nأسوأ دكتور مر علي خلال دراستي في الجامعة …\nيشرح وهو قاعد أقصد يقرأ رؤوس الأقلام لأن مايشرح صراحة يفك اللابتوب ويقول للطلاب تبعو معي السلايدات من جوالاتكم أو اللي بيجيب لابتوب يجيبه ( مادري ليش مايستخدم البروجيكتر ) … اختباراته يجيبها خيارات من التيست بانك ويعدل على بعض الأسئلة شوي …\nمن رأيي لو توفر لأي طالب دكتور غيره مهما كان ينزل عنده بدون أي تردد لأن أضمن لك أي شخص بيدرس المادة بيكون أحسن من البنعلي\nأفرج الميدتيرم 57 من 100\nباقي الفاينل\nتوزيع الدرجات 10 كويزات وهومورك 45 ميدتيرم 45 فاينل",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1464161",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-khaled-m-albinali/98270/6",
+              "user": "HARD-WORKER",
+              "ts": 1481374971000,
+              "tid": 98270,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-brbrtoo-fin250",
+      "uid": "stk-brbrtoo",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1481619611000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-albinali",
+            "n": "Dr. Khaled M. Albinali",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اتفق معاك بس حبيت اطمن اللي بينزل عنده عشان القريد غير كذا انا نادم اني نزلت معاه fin250 لاني طلعت من الكورس ومو فاهم حااااججججججه في الماده وخصوصا ان الكتاب كان سيء",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1464414",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-khaled-m-albinali/98270/9",
+              "user": "Brbrtoo",
+              "ts": 1481619611000,
+              "tid": 98270,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-waleedx11-fin250",
+      "uid": "stk-waleedx11",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1515094002000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alotaibi",
+            "n": "Dr. Khaled Al-Otaibi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "FIN250 TERM171\n\nالتحضير : بالأسماء في بداية الكلاس وبعض المرات من خلال الكويز يعني اذا اختبرته ذاك اليوم فأنت محضر.\n\nطريقة الشرح : من السلايدات ، يشرح أهم النقاط في التشابتر ويحل عليها أمثلة ويتقبل الأسئلة في نص الشرح على عكس دكاترة كثير وبعدين بعد كل فكرة يعطينا مسألة من نهاية التشابتر كل واحد يحلها مع اللي جنبه عشان نكون فاهمين الدرس بشكل كويس … و بداية كل كلاس يسوي مراجعه بسيطة بحيث انه يكتب مسألة من الدرس الماضي عالسبورة ويطلب من كل طالب يحلها بورقة ( ماعليها قريدات ولا شيء بس للفايدة).\n\nالكويزات : متنوعة ، مرات سؤالين الى ثلاث ملتبل تشويس وثلاث أسئلة حل مرات كله حل ومرات كله ملتبل تشويس ( على حسب ستايل التشابتر ).\n\nالمياجر: ميجرين ، كل واحد عليه 25% ، يجيب لك 30 ملتبل تشويس و 5 أسئلة حل. ( مهي بذيك السهولة ويبغالها جهد ).\n\nالفاينلات : الفاينل عليه 35% , عطانا 35 ملتبل شويس وكان يبيله شغل برضو ( حاول تحل أكبر قدر من مسائل نهاية التشابتر ).\n\nالقريد النهائي: يستاهل A\n\nالصوت: مش مرة عالي ولكن بقدر مسموع يعني.\n\nإضافات :\n1- أول ترم له في التدريس كان هذا الترم، وماشاء الله بدأ يكتسب الثقة والخبرة مع مرور الترم بشكل واضح.\n2- محترم جدا جدا ومتساعد ومتعاون جدا يسوي اللي عليه وزيادة عشان يفيد الطلاب وتحسه قريب من الطلاب نظرا لصغر سنه.\n3- عطانا بونص اساينمنت عليه 5% تنوخذ من الميجر الاول ( يعني يصير الميجر الاول عليه 20% ) تسويه على مدى 5 أسابيع ( طبعا اختياري وليس اجباري ) وأنصح أي طالب فايننس انه يسوي لأن بيفيده على المدى البعيد.\n4- الهومووركات في المادة حلها أول بأول ولا تخليها لل due date لأن بعضها طويييييييييييل ومرهق جدًا.\n5- فيه شوية كرف من ناحية أنو تقريبًا كل أسبوع في كويز وهوموورك بس لو اشتغلت صح بتاخذ اللي يسرك.\n6- مرن ومتعاون في مواعيد الاوفس آور ويرد على الايميلات بسرعة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1485509",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/khaled-al-otaibi/178388/2",
+              "user": "waleedx11",
+              "ts": 1515094002000,
+              "tid": 178388,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9840-fin250",
+      "uid": "stk-user9840",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1545749952000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alotaibi",
+            "n": "Dr. Khaled Al-Otaibi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Fin 250-181\n\nبنود التقييم :\n\nالتحضير : بداية كل كلاس ولا يسمح بالميك اب\n\nطريقة الشرح :سلايدات ويستخدم السبورة لحل المسائل… شرحه مش التوب لكن جيد، الشيء الكويس ان باب النقاش في الكلاس مفتوح بينه وبين الطلاب فانت تستفيد من اللي يقولونه الطلاب كثير وهالشيء يحسب له .\n\nالكويزات :10 كويزات يمكن او اكثر الزبدة متعبة جداً جداً، تخيل تختبر كويز الثلاثاء يجيك ويقول لك يلا استعدوا لكويز يوم الخميس . صعبة والافرج غالبا 5 من 10. وعليها 15%\n\nالمياجر:كومن (صعبة)\nالاول 68\nالثاني 58\nالفاينلات :نفس المياجر\nالقريد النهائي: B+\nالصوت:جيد\nإضافات :\nانا اخذت معه Econ 102 اول ماجا الجامعة وكان متعااااااون جدا لكن في Fin 250 دوخنا وهذا ماعندنا بروجكت لو عندنا بروجكت كان علوووم بعد . لكنه انسان محترم جدا وطيب ويعاملك كأخ .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504051",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/khaled-al-otaibi/178388/5",
+              "user": "user9840",
+              "ts": 1545749952000,
+              "tid": 178388,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-khalid_jassim-fin250",
+      "uid": "stk-khalid_jassim",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1546290919000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-alotaibi",
+            "n": "Dr. Khaled Al-Otaibi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "FIN 250 TERM 181\nالتحضير : يوميا\nطريقة الشرح : يشرح من السلايدات لكن في آخر اسبوعين صار يشرح بدونهم و صار يستخدم السبورة أكثر\nيحاول بقدر المستطاع إنه يوصل المعلومة لكن الكورس نفسه مستواه صعب لذلك تلقى كثير من الطلاب يشتكون من شرحه لكن أنا عن نفسي أشوف شرحه جيد.\nالكويزات : حوالي 10 كويزات مستواها متوسط إلى صعب, عطانا كويز بونص و حذف أسوأ كويز و الكويز الأخير كان جدا سهل.\nالمياجر: كومون و مستواها صعب.\nالفاينلات : كومون, الكلام حول الفاينل متفاوت بين من يقول سهل و من يقول صعب جدا لكن أنا أشوفه كان أسهل من المياجر و واضح انهم كانوا يبون يرفعون الآفرج\nالقريد النهائي: A\nالصوت: جيد يميل للمنخفض\nإضافات : الدكتور متعاون مع الطلاب و يسمح بتأجيل الكويزات و الهومووركات في أوقات الضغوط و متعاون في الأوفيس أور و سريع التجاوب على الأيميل و يرسل درجات الكويزات و الحلول بسرعة (فيه ناس يشوفونه بطيء) و أخلاقه جدا عالية.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504322",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/khaled-al-otaibi/178388/6",
+              "user": "Khalid_Jassim",
+              "ts": 1546290919000,
+              "tid": 178388,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-kbsc-fin250",
+      "uid": "stk-kbsc",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1552816921000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-merdad",
+            "n": "Dr. Hesham Merdad",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اسم الدكتور : *\n\nهشام مرداد\nالمادة: *\n\nFIN250\nطريقة الشرح : *\n\nجيدة ، سريع جداً بالشرح ( التيربو شغال دائماً )\nالكويزات :\n\nصعبة جداً جداً لدرجة كويز من الكويزات واحد الاسئلة طالب واحد فقط الا جاوب عالسؤال ، و يوم الكويز على كل طالب يظرب حسابه انه راح يتاخر على الكلاس اللي بعده لانه الكويز يكون اخر الكلاس و الوقت ما يكفي فراح يأخذه من وقت البريك + كلاس اللي بعده\nالمياجر/ميد:\n\nكومن ، صعب مائل للسهولة القليلة لبعض الاسئلة\nالفاينل :\n\nمثل المياجر\nطريقة التحضير :\n\nاخر الكلاس و ياخذ من وقت البريك\nالقريد النهائي الخاص بك :\n\nC+\nاضافات:\n\nالدكتور حبوب غير اوقت الكلاس",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1507361",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hesham-merdad/180463/2",
+              "user": "KBSC",
+              "ts": 1552816921000,
+              "tid": 180463,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_182-fin250",
+      "uid": "stk-_182",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1557845517000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-merdad",
+            "n": "Dr. Hesham Merdad",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "FIN250-182\nمرفق مع الرد منهج المادة\n\nالتحضير: آخر المحاضرة ينادي على الأسماء\nطريقة الشرح: سلايدات يستعرضها ثم يبدأ بالتفصيل وذكر أمثلة، شرح ممتاز وواضح\nالكويزات: 4 كويزّات، بعض الأسئلة فيها تحدّي، وأغلبها تكون مشابهة لفكرة أسئلة ينزلها في البلاكبورد، الكويز يكون آخر 10 دقائق من المحاضرة، ويعطيكم وقت زيادة (اللي عنده محاضرة بعدها ممكن يواجه مشكلة)\nالمياجر: موحدة\nالفاينلات: موحدة\nالقريد النهائي: +A\nالصوت: واضح، واللغة الإنجليزية ممتازة، البعض يشوفه يتكلم بسرعة\nإضافات:\n\n- رأيي أنه أفضل من يمكن يدرس 250 للطلاب، أسلوبه ومستوى شرحه يضمن -إن شاء الله- للطالب فهم راسخ لمبادئ الماليّة\n- يستقبل الأسئلة ويناقش بصدر رحب\n- انتبه تستخدم جوالك وهو يشرح، إذا مضطر استأذن واطلع، ولا تسولف مع خويّك وهو يشرح\n- متجاوب مع الإيميلات، الساعات المكتبية أوقات ما يكون متواجد نظرًا لأنه عميد فتحصل عنده اجتماعات\n- يحب يشوف الطلاب مجتهدين، ومستعد للمساعدة في أي شيء ينفع الطالب\n\nأنصح فيه كخيار أول",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1509723",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hesham-merdad/180463/3",
+              "user": "_182",
+              "ts": 1557845517000,
+              "tid": 180463,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-husn99-fin250",
+      "uid": "stk-husn99",
+      "code": "FIN 250",
+      "sec": "doc",
+      "ts": 1608659664000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "p8mupxfw8a79m",
+            "n": "Mansour Alsahlawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اخر مدرس تفكر فيه ومن وجهت نظري اخر المادة ولا تاخذها عنده\nكنت عنده في مادة fin250 واخلاقة كلش سيء لأبعد درجة مايحترم الطلاب ولي يقول شرحة زين اهو زين ولكن مايحترم أحد ويعاملك على حسب نفسيته واذا جه زهقان يقرأ السليدات ولا تفهم شيء لا انصح لا انصح لا انصح",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527212",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mansour-al-sahlawi/182901/5",
+              "user": "husn99",
+              "ts": 1608659664000,
+              "tid": 182901,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
