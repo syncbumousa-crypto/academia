@@ -1,20 +1,20 @@
 """Course type per major ("نوعية المواد") for every catalog link.
 
-  common   مواد مشتركة  the university-wide requirements: the bulletin's
-                        "General Studies Requirements" and
-                        "Digital/Business Foundation" (ENGL, IAS 111/121/212,
-                        CGS 392, PE 101, ICS 104, ISE 291, COE 292, BUS 200)
-  college  مواد كلية    the plan's college-level sections ("Math & Science
-                        Requirements", "General Engineering Fundamentals",
-                        ...); for plans without sections (the 2026 Business
-                        School PDFs, SSC, BIOE PreMed) a required course that
-                        is required by at least half the majors of the same
-                        college
-  major    مواد تخصص    the rest of the plan's required courses
-                        ("Core Requirements", summer training, internship, ...)
-  elective مواد اختيارية every course linked to the major that is not in its
-                        plan (elective slots, the Business Elective pool, MIS's
-                        seed list)
+Counted, not read from the plans' headings (which differ from plan to
+plan): how many majors require the course.
+
+  common   مواد مشتركة  required by at least two thirds of all majors
+                        (ENGL, IAS 111/121/212, MATH 101/102, PE 101, ...)
+  college  مواد كلية    not common, and: required by more than half the
+                        majors of the same college; or a 100/200-level
+                        math/science course (MATH, STAT, PHYS, CHEM, BIOL)
+                        outside the major's own department;
+                        or listed in the plan's own college section
+                        ("College Core Requirements", "Math & Science
+                        Requirements", "General Engineering Fundamentals")
+  major    مواد تخصص    the rest of the major's plan
+  elective مواد اختيارية linked to the major but not in its plan
+  OVERRIDE              decisions taken by hand on the borderline cases
 
 Plans: data/plan_sections_bulletin.json (sections + MIS plan from the
 bulletin), data/plans_ccm_bulletin.json, data/plans_colleges_bulletin.json,
@@ -40,8 +40,8 @@ COLLEGES = [
     ['ae', 'ee', 'me', 'phys', 'cie', 'eep'],
 ]
 COMMON_SECTIONS = {'General Studies Requirements', 'Digital/Business Foundation'}
-COLLEGE_SECTIONS = {'College Core Requirements', 'Math & Science Requirements', 'General Engineering Fundamentals',
-                    'Math, Science & Physics', 'Economics & Accounting'}
+COLLEGE_SECTIONS = {'College Core Requirements', 'Math & Science Requirements',
+                    'General Engineering Fundamentals'}
 ELECTIVE_SECTIONS = {'Electives'}
 SCIENCE = {'MATH', 'STAT', 'PHYS', 'CHEM', 'BIOL'}   # math & science, where a plan has no sections
 
@@ -56,39 +56,34 @@ for code, tags in J('out', 'business_2026.json')['links'].items():
 core['dsmm'].discard('DSMM 465')          # the one elective the DSMM plan names
 core['mis'] |= set(SECT['_mis_core'])
 
-COMMON = set()
-for tag, secs in SECT.items():
-    if tag.startswith('_'):
-        continue
-    for name, codes in secs.items():
-        if name in COMMON_SECTIONS:
-            COMMON |= set(codes)
-
 college_of = {t: i for i, g in enumerate(COLLEGES) for t in g}
-share = collections.Counter()               # (college, code) -> majors requiring it
-for tag, codes in core.items():
-    for c in codes:
-        share[(college_of[tag], c)] += 1
+MAJORS = [t for g in COLLEGES for t in g]
+uni = collections.Counter(c for t in MAJORS for c in core[t])
+share = collections.Counter((college_of[t], c) for t in MAJORS for c in core[t])
+COMMON = {c for c, n in uni.items() if 3 * n >= 2 * len(MAJORS)}
+OVERRIDE = {}   # (code, tag) -> kind, or (code, '*') for every major
+# the major's own science department: its 100/200 courses are the major's, not the college's
+OWN = {'math': 'MATH', 'amai': 'MATH', 'phys': 'PHYS', 'eep': 'PHYS', 'chem': 'CHEM'}
+
+
+def in_college_section(code, tag):
+    return any(name in COLLEGE_SECTIONS and code in codes for name, codes in SECT.get(tag, {}).items())
 
 
 def kind(code, tag):
+    k = OVERRIDE.get((code, tag)) or OVERRIDE.get((code, '*'))
+    if k and (k == 'elective' or code in core[tag]):
+        return k
     if code not in core[tag]:
         return 'elective'
     if code in COMMON:
         return 'common'
-    secs = SECT.get(tag, {})
-    for name, codes in secs.items():
-        if code in codes:
-            if name in COLLEGE_SECTIONS:
-                return 'college'
-            if name in ELECTIVE_SECTIONS:
-                return 'elective'
-            if name not in COMMON_SECTIONS:
-                return 'major'
-    if code.split()[0] in SCIENCE:
-        return 'college'
     g = college_of[tag]
-    return 'college' if share[(g, code)] * 2 >= len(COLLEGES[g]) else 'major'
+    p, n = code.split()
+    if (share[(g, code)] * 2 > len(COLLEGES[g]) or (p in SCIENCE and n[0] in '12' and OWN.get(tag) != p)
+            or in_college_section(code, tag)):
+        return 'college'
+    return 'major'
 
 
 rows = []
