@@ -9649,8 +9649,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
     /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
-    if (!folds.length && pkSplitOn(id)) return `<div class="pk-split">${pkSrcView(id, ed)}<div class="kt-view pk-split__ph"><div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div></div></div>`;
-    if (!folds.length) return `<div class="pk-vwph">${esc(lab && editable ? T().pkStripAddHint : T().pkStripEmpty)}</div>`;
+    /* والملخّصُ الفارغ: مكانُ العرض بلا كلام (طلبُ صاحب الموقع) */
+    if (!folds.length && pkSplitOn(id)) return `<div class="pk-split">${pkSrcView(id, ed)}<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div></div>`;
+    if (!folds.length) return `<div class="pk-vwph" aria-hidden="true"></div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
@@ -9672,7 +9673,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
       + (pkSplitOn(id) ? (anim => `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}">${pkSrcView(id, ed)}${ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`)((() => { const a = pkSplitAnim[id]; delete pkSplitAnim[id]; return a; })())
         : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
-        : `<div class="pk-vwph"><b>${esc(T()['pkView_' + v])}</b><span>${esc(pkFoldName(folds, sel))}</span><small>${esc(T().pkViewSoon)}</small></div>`);
+        /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
+        : `<div class="pk-vwph" aria-hidden="true"></div>`);
   }
   /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
      كلُّ صفٍّ في الجدول **بطاقةٌ حقيقيّة** في المجلد المختار (‎{t:'c', f, b}‎): المصطلحُ وجهُها والمعنى
