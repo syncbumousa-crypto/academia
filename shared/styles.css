@@ -17328,7 +17328,11 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .lib-course .cm-pane:not(.is-cxmax), .market-course .cm-pane:not(.is-cxmax) {
   height: auto; min-height: 240px; max-height: none; overflow: visible; padding: 14px 0 0;
 }
-/* والتبويبُ المختارُ كان رأسَ ذلك المربّع بكتفين ينسابان إلى حافّته — ولا مربّعَ الآن، فهو زرٌّ قائمٌ بزواياه الأربع */
-:is(.lib-course, .market-course) .cm-panel .cm-tabs button.on { border-radius: 10px; margin-bottom: 0; }
+/* والتبويبُ المختارُ كان رأسَ ذلك المربّع بكتفين ينسابان إلى حافّته — ولا مربّعَ الآن: خطٌّ شعريٌّ على عرض الصفحة
+   يمسك التبويبات (الاقتراحُ «أ» — اختيارُ صاحب الموقع)، والتبويباتُ واقفةٌ عليه بزوايا علويّةٍ وحدَها */
+:is(.lib-course, .market-course) .cm-panel .cm-tabs { position: relative; padding-bottom: 0; }
+:is(.lib-course, .market-course) .cm-panel .cm-tabs::after { content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: var(--u-line); pointer-events: none; }
+:is(.lib-course, .market-course) .cm-panel .cm-tabs button { border-radius: 10px 10px 0 0; }
+:is(.lib-course, .market-course) .cm-panel .cm-tabs button.on { margin-bottom: 0; }
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::before,
 :is(.lib-course, .market-course) .cm-panel .cm-tabs button.on::after { display: none; }
