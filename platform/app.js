@@ -30536,6 +30536,12 @@ void main() {
     /* تعديل/حذف مشاركتي */
     const pe = e.target.closest('.post-edit');
     if (pe) {
+      /* التحريرُ يرث حجمَ المنشورة (طلبُ صاحب الموقع): مكبَّرةٌ ⇠ مكبَّرة، وملءُ الشاشة ⇠ ملءُ الشاشة، والضيّقةُ ضيّقة */
+      if (pe.dataset.dr == null && (pe.dataset.sub || cmTabSel) === 'cards') {
+        const mine = postsOf(cmCode, 'cards').find(x => x.me);
+        if (mine && cxMaxPub === mine.id) { cxMax = true; cxMaxPub = null; cxHdUp = false; cxFtDn = false; }
+        else { cxMax = false; cxFull = false; }
+      }
       cmView = pe.dataset.dr != null
         ? { mode: 'edit', pi: 0, di: +pe.dataset.dr }
         : { mode: 'edit', pi: 0, sub: pe.dataset.sub };
