@@ -14,10 +14,11 @@
        الأيقونة يأكل ثلثَ بكسلاتها في ذلك الحجم فتذوب العلامات، و‎٣٢‎ فما فوق
        كما رُسمت. والمتصفّحُ ينتقي الأقربَ إلى ما يطلب، فيُعطى مضبوطًا لا مُصغَّرًا.
        و‎favicon.ico‎ في الجذر لمن لا يقرأ الوسمَ ويطلبه بالعادة. -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/icon-16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/icon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/icon-180.png">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/heart/heart-white.svg?v=heart1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/heart/heart-white-16.png?v=heart1">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/heart/heart-white-32.png?v=heart1">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/heart/heart-white-192.png?v=heart1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/heart/heart-white-180.png?v=heart1">
 
   <link rel="stylesheet" href="../shared/styles.css?v=1">
   <!-- جلدُ الجذر: رماديٌّ مسطَّح. يُحمَّل بعد الأمّ فيغلب توكناتِها -->
@@ -218,6 +219,10 @@
     #xscroll #xthumb { background: color-mix(in srgb, var(--glass-ink) 40%, transparent); }
     #xscroll #xthumb:hover  { background: color-mix(in srgb, var(--glass-ink) 60%, transparent); }
     #xscroll #xthumb:active { background: color-mix(in srgb, var(--glass-ink) 76%, transparent); }
+    /* وشريطُ صفّ التخصّصات في «تصنيفات» يتبع شريطَ الصفحة ههنا: حبرٌ لا بترول */
+    html:root:root .fcol-bar i { background: color-mix(in srgb, var(--glass-ink) 40%, transparent); }
+    html:root:root .fcol-bar i:hover { background: color-mix(in srgb, var(--glass-ink) 60%, transparent); }
+    html:root:root .fcol-bar.is-drag i { background: color-mix(in srgb, var(--glass-ink) 76%, transparent); }
     #xscroll #xup, #xscroll #xdown { color: color-mix(in srgb, var(--glass-ink) 45%, transparent); }
     #xscroll #xup:hover, #xscroll #xdown:hover { color: var(--glass-ink); }
     /* وشريطُ اللوح نفسِه إن فاض محتواه — بتروليٌّ كذلك في المشترك */

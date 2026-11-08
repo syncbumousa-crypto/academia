@@ -1100,7 +1100,7 @@
       title: 'أكاديميا',
       tabMarket: 'المكتبة', tabLibrary: 'الركن',
       search: 'ابحث عن مادة…', filters: 'تصنيفات',
-      hoursGroup: 'عدد الساعات', collegeGroup: 'التخصص',
+      hoursGroup: 'عدد الساعات', collegeGroup: 'التخصص', colSearch: 'ابحث…', colNone: 'لا تخصّص بهذا الاسم',
       hoursChip: h => `${h} ساعات`, hUnit: 'س',
       statGroup: 'حالة المادة', statTodo: 'متبقية — لم تبدأ بعد', statProg: 'قيد التقدم',
       statDone: 'مكتملة ✓',
@@ -1570,7 +1570,7 @@
       title: 'Academia',
       tabMarket: 'Library', tabLibrary: 'Nook',
       search: 'Search for a course…', filters: 'Filters',
-      hoursGroup: 'Credit hours', collegeGroup: 'Specialization',
+      hoursGroup: 'Credit hours', collegeGroup: 'Specialization', colSearch: 'Search…', colNone: 'No major by that name',
       hoursChip: h => h === 1 ? '1 hour' : `${h} hours`, hUnit: 'h',
       statGroup: 'Course status', statTodo: 'Remaining — not started', statProg: 'In progress',
       statDone: 'Done ✓',
@@ -2133,6 +2133,126 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const el = id => document.getElementById(`${p}-${id}`);
     const panel = el('fpanel');
     const wrap = panel.closest('.filterwrap');
+
+    /* ============================================================
+       التخصّص: صفٌّ أفقيٌّ واحد، وبحثٌ يسارَ عنوانه
+       ============================================================
+       كانت التخصّصاتُ أزرارًا تلتفّ أسطرًا، فلمّا صارت خمسةً وثلاثين صار
+       اللوحُ أطولَ من الشاشة. فصارت صفًّا واحدًا يُمرَّر أفقيًّا — بإصبعين على
+       لوحة اللمس، أو بعجلة الماوس (تُحوَّل أفقيّةً ههنا) — وتحته شريطٌ يقول أين
+       أنت منه، وطرفاه يبهتان ما بقي فيهما ما يُمرَّر إليه. والبحثُ بالعربيّ
+       والإنجليزيّ والاختصار (‎swe‎).
+       ===== ويُبنى مرّةً لا مع كلّ رسمة =====
+       ‏‎renderPanel‎ تُعاد مع كلّ نقرة، فلو كان البحثُ في جوفها لَضاع ما كُتب فيه
+       وعاد الصفُّ إلى أوّله مع كلّ اختيار. فالعنوانُ والبحثُ والشريطُ ثابتة،
+       ولا يُعاد إلّا الأزرار — ويُحفظ موضعُ التمرير حولها */
+    const colBox = el('f-col');
+    const colHead = document.createElement('div');
+    colHead.className = 'fcol-head';
+    el('fg-col').before(colHead);
+    colHead.appendChild(el('fg-col'));
+    const colSearch = document.createElement('label');
+    colSearch.className = 'fcol-search';
+    colSearch.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" autocomplete="off" spellcheck="false">';
+    colHead.appendChild(colSearch);
+    const colIn = colSearch.querySelector('input');
+    const colWrap = document.createElement('div');
+    colWrap.className = 'fcol-wrap';
+    colBox.before(colWrap);
+    colWrap.appendChild(colBox);
+    colBox.classList.add('fcol-row');
+    const colBar = document.createElement('div');
+    colBar.className = 'fcol-bar';
+    colBar.innerHTML = '<i></i>';
+    colWrap.appendChild(colBar);
+    const colNone = document.createElement('p');
+    colNone.className = 'fcol-none';
+    colNone.hidden = true;
+    colWrap.appendChild(colNone);
+    const colRtl = () => getComputedStyle(colBox).direction === 'rtl';
+    /* الشريطُ والطرفان: يُقرآن من موضع التمرير، والعربيُّ يتمرّر بالسالب.
+       ‏والإبهامُ بالبكسل لا بالنسبة: له أدنى عرضٍ (٣٠ كإبهام الصفحة) فلا يضيع
+       حين يطول الصفّ، فيُحسب مسارُه ممّا بقي بعده */
+    const COL_THUMB_MIN = 30;
+    function colGeo() {
+      const max = colBox.scrollWidth - colBox.clientWidth;
+      const track = colBar.clientWidth;
+      const tw = Math.max(COL_THUMB_MIN, track * colBox.clientWidth / (colBox.scrollWidth || 1));
+      return { max, track, tw, travel: Math.max(1, track - tw) };
+    }
+    function colEdges() {
+      const { max, tw, travel } = colGeo();
+      const x = Math.abs(colBox.scrollLeft);
+      colWrap.classList.toggle('is-start', x < 4);
+      colWrap.classList.toggle('is-end', x > max - 4);
+      colBar.hidden = max < 4;
+      const pos = (max > 0 ? x / max * travel : 0) + 'px';
+      const bar = colBar.firstChild;
+      bar.style.width = tw + 'px';
+      bar.style.right = colRtl() ? pos : '';
+      bar.style.left = colRtl() ? '' : pos;
+    }
+    /* ===== والإبهامُ يُمسك ويُسحب — كشريط الصفحة =====
+       ‏سحبُ الإبهام يُحرّك الصفَّ بقدر ما يقطعه من مساره، والنقرُ على المسار
+       يقفز بالإبهام إلى موضع النقر. والتمريرُ الناعمُ يُوقف أثناءهما: السحبُ
+       يتبع الإصبعَ لحظةً بلحظة، والناعمُ يجعله يلحق متأخّرًا */
+    const colTo = x => {
+      const { max } = colGeo();
+      x = Math.max(0, Math.min(max, x));
+      colBox.scrollLeft = colRtl() ? -x : x;
+    };
+    colBar.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      const thumb = colBar.firstChild;
+      const { max, tw, travel } = colGeo();
+      const bx = colBar.getBoundingClientRect();
+      /* ‏موضعُ المؤشّر على المسار مقيسًا من البداية: اليمينُ في العربيّ */
+      const along = cx => (colRtl() ? bx.right - cx : cx - bx.left);
+      colBox.style.scrollBehavior = 'auto';
+      colBar.classList.add('is-drag');
+      if (e.target !== thumb) colTo((along(e.clientX) - tw / 2) / travel * max);   /* نقرةٌ على المسار */
+      const x0 = Math.abs(colBox.scrollLeft), p0 = along(e.clientX);
+      colBar.setPointerCapture(e.pointerId);
+      const move = ev => colTo(x0 + (along(ev.clientX) - p0) / travel * max);
+      const up = () => {
+        colBar.removeEventListener('pointermove', move);
+        colBar.removeEventListener('pointerup', up);
+        colBar.removeEventListener('pointercancel', up);
+        colBar.classList.remove('is-drag');
+        colBox.style.scrollBehavior = '';
+      };
+      colBar.addEventListener('pointermove', move);
+      colBar.addEventListener('pointerup', up);
+      colBar.addEventListener('pointercancel', up);
+    });
+    function colFilter() {
+      const q = colIn.value.trim().toLowerCase();
+      let n = 0;
+      colBox.querySelectorAll('.fchip').forEach(b => {
+        const hit = !q || b.textContent.toLowerCase().includes(q)
+          || (b.dataset.en || '').toLowerCase().includes(q) || String(b.dataset.v).toLowerCase().includes(q);
+        b.hidden = !hit;
+        if (hit) n++;
+      });
+      colNone.hidden = !!n;
+      colNone.textContent = T().colNone;
+    }
+    colIn.addEventListener('input', () => {
+      colFilter();
+      colBox.style.scrollBehavior = 'auto'; colBox.scrollLeft = 0; colBox.style.scrollBehavior = '';
+      colEdges();
+    });
+    colBox.addEventListener('scroll', colEdges, { passive: true });
+    /* عجلةٌ عموديّةٌ على الصفّ تُصرف أفقيّة؛ والأفقيّةُ (إصبعا لوحة اللمس) يتركها المتصفّحُ لنفسه */
+    colBox.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || colBox.scrollWidth <= colBox.clientWidth) return;
+      colBox.scrollLeft += colRtl() ? -e.deltaY : e.deltaY;
+      e.preventDefault();
+    }, { passive: false });
+    /* ‏واللوحُ مخفيٌّ حين يُرسم أوّلَ مرّة: لا مسارَ يُقاس فيُحسب الإبهامُ بأدنى عرضه.
+       فيُعاد حين يتبدّل مقاسُ الصفّ أو مسارِه — ومنه لحظةُ فتح اللوح */
+    if (window.ResizeObserver) { const ro = new ResizeObserver(() => colEdges()); ro.observe(colBox); ro.observe(colBar); }
     let query = '';
     const fHours = new Set();          // فارغة = الكل
     const fCols  = new Set();
@@ -2159,7 +2279,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const hoursVals = [...new Set(CLIST.map(c => c.h))].sort((a, b) => a - b);
       el('f-hours').innerHTML = hoursVals.map(h => chip(h, T().hoursChip(h), fHours.has(h))).join('');
       /* التخصصات: من كتالوج الأدمن — أي تخصص يضيفه هناك يظهر هنا تلقائيًّا */
-      el('f-col').innerHTML = TAGS.map(t => chip(t.id, (state.lang === 'en' && t.en) ? t.en : t.ar, fCols.has(t.id))).join('');
+      const colX = colBox.scrollLeft;
+      colBox.innerHTML = TAGS.map(t => chip(t.id, (state.lang === 'en' && t.en) ? t.en : t.ar, fCols.has(t.id))
+        .replace('<button', `<button data-en="${esc((state.lang === 'en' ? t.ar : t.en) || '')}"`)).join('');
+      colFilter();
+      /* والرجوعُ إلى الموضع فوريٌّ: التمريرُ الناعمُ يبدأ من أوّل الصفّ (أُعيد بناؤه
+         توًّا) فتنقلب الرجعةُ رحلةً، ورسمةٌ تالية تقرأ موضعًا لم يصل بعد */
+      colBox.style.scrollBehavior = 'auto';
+      colBox.scrollLeft = colX;
+      colBox.style.scrollBehavior = '';
+      colEdges();
       /* والترتيبُ سُلَّمٌ: ما لم يبدأ، فما هو فيه، فما انتهى */
       el('f-stat').innerHTML = STAT_KEYS.map(v => chip(v, statTx(v), fStat.has(v))).join('');
       el('f-act').innerHTML = [['lec', T().lecChip], ['lab', T().labChip]]
@@ -2193,9 +2322,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
 
     el('search').addEventListener('input', e => { query = e.target.value; render(); });
-    el('btn-filter').addEventListener('click', () => { panel.hidden = !panel.hidden; });
+    el('btn-filter').addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) requestAnimationFrame(colEdges);
+    });
+    /* ===== والنقرةُ على زرٍّ في اللوح لا تُغلقه =====
+       الزرُّ يُعاد رسمُه في مستمعه قبل أن تبلغ النقرةُ هذا المستمع، فيصل الهدفُ
+       منفصلًا عن الصفحة — و‎wrap.contains‎ تقول «خارج اللوح»، فيُغلق مع كلّ اختيار.
+       فما انفصل عن الصفحة ليس نقرةً خارجه */
     document.addEventListener('click', e => {
-      if (!panel.hidden && !wrap.contains(e.target)) panel.hidden = true;
+      if (!panel.hidden && e.target.isConnected && !wrap.contains(e.target)) panel.hidden = true;
     });
     el('f-hours').addEventListener('click', e => {
       const b = e.target.closest('.fchip'); if (!b) return;
@@ -2227,6 +2363,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el('f-label').textContent = T().filters;
       el('fg-hours').textContent = T().hoursGroup;
       el('fg-col').textContent = T().collegeGroup;
+      colIn.placeholder = T().colSearch;
       el('fg-stat').textContent = T().statGroup;
       el('fg-act').textContent = T().actGroup;
       renderPanel();
