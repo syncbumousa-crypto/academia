@@ -5948,7 +5948,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const url = /^https:\/\//.test(im.url || '') ? im.url : '';
     const tip = o.t + (im.user ? '، كتبها @' + im.user : '') +
       (im.ts ? ' سنة ' + new Date(im.ts).getFullYear() : '');
-    const inner = `<i class="imp-badge__f">from</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
+    /* «من» بالعربيّة و«from» بالإنجليزيّة (طلبُ صاحب الموقع) */
+    const inner = `<i class="imp-badge__f">${document.documentElement.dataset.lang === 'en' ? 'from' : 'من'}</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
     return url
       ? `<a class="imp-badge" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</a>`
       : `<span class="imp-badge" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</span>`;
