@@ -9217,6 +9217,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post.querySelector('.post-ytmain > .pk-split')) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools');
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
+    if (post.classList.contains('pk--max')) pkBandFit(post);
   }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
@@ -20930,6 +20931,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const target = 4.5 - lr.height / 2;
     const h = lr.top - yt.getBoundingClientRect().top + pad - target;
     card.style.setProperty('--hdh', Math.max(0, Math.round(h * 2) / 2) + 'px');
+    pkBandFit(card);
+  }
+  /* ===== امتدادُ الكتلة يُقاس لا يُفترض (طلبُ صاحب الموقع: «لا زال فيه خط») =====
+     كان امتدادُ المنطقة النشِطة إلى الذيل ثابتًا (‎33px‎ = هامشُ القسمة ‎26‎ + نصفُ المسكة ‎7‎) — فإن اختلف ما بينهما
+     في محتوًى أو حجمٍ أو تقريبٍ بقي فراغٌ بلون المربّع بين الكتلة والذيل. فيُقاس: من قاع المنطقة النشِطة إلى أعلى شريط الذيل
+     (منتصفُ مسكته)، ويُعاد القياسُ كلّما تغيّر حجمُ القسمة أو المربّع */
+  const PK_PANE = { book: '.pk-src', mid: '.kt-view', bank: '.pk-bank' };
+  const pkBandRO = typeof ResizeObserver === 'function'
+    ? new ResizeObserver(() => requestAnimationFrame(() => { const c = document.querySelector('#cm-body .pk--max'); if (c) pkBandFit(c); })) : null;
+  function pkBandFit(card) {
+    const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
+    const sp = card.querySelector('.post-ytmain > .pk-split'), ft = card.querySelector('.pk-ftline');
+    if (pkBandRO && sp && pkBandFit.sp !== sp) { pkBandRO.disconnect(); pkBandRO.observe(sp); pkBandRO.observe(card); pkBandFit.sp = sp; }
+    if (!a || !sp || !ft) return;
+    const pane = sp.querySelector(':scope > ' + PK_PANE[a]);
+    if (!pane) return;
+    const fr = ft.getBoundingClientRect(), band = fr.top + fr.height / 2;
+    const pb = pane.getBoundingClientRect().bottom, sb = sp.getBoundingClientRect().bottom;
+    card.style.setProperty('--pkext', Math.max(0, band - pb - 8).toFixed(2) + 'px');
+    card.style.setProperty('--pkmt', (pb - sb + 8).toFixed(2) + 'px');
   }
   function cxHdSet(up) {
     const card = document.querySelector('#cm-body .pk--max');

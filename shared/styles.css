@@ -17311,3 +17311,7 @@ html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
 .pk--max.pk-act--mid .post-ytmain > .pk-split > .kt-view,
 .pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank { box-shadow: 0 0 0 8px var(--pk-band), 0 3px 0 8px var(--pk-band); }
 .pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline::before { top: calc(50% - 1px); }
+/* الامتدادُ بقامته المقيسة (‎pkBandFit‎): من قاع المنطقة النشِطة إلى أعلى شريط الذيل، أيًّا كان ما بينهما */
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after,
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { height: var(--pkext, 33px); }
+.pk--max.pk-act--mid .post-ytmain > .pk-split::after { top: calc(100% + var(--pkmt, 8px)); height: var(--pkext, 33px); }
