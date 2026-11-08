@@ -21090,7 +21090,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ‏‎anims‎ حركاتُ ‎WAAPI‎ المصاحبة (هوامشُ الجار وعروضُ المناطق والمحتوى) تُعكس وتُنهى معها */
   function pkBandRun(card, tracks, dur, done, extra) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
-    if (!sp || !card.querySelector(':scope > .pk-band')) { done && done(); return null; }
+    /* وبلا كتلة (الضيّقة) تجري الحركةُ نفسُها بلا لسان: الساعةُ والعكسُ والإنهاءُ واحدة */
+    if (!sp) { done && done(); return null; }
     if (card.pkBandAnim) cancelAnimationFrame(card.pkBandAnim.raf);
     const st = Object.assign({ raf: 0, from: 0, to: 1, start: performance.now(), span: dur, dur, t: 0, tracks, end: done, anims: [] }, extra || {});
     card.pkBandAnim = st;
@@ -21168,6 +21169,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الجهةُ (فعليًّا: يسارٌ أو يمين) التي تواجه فيها المنطقةُ ‎a‎ المنطقةَ ‎b‎ */
   const pkFxSide = (a, b) => a.getBoundingClientRect().left < b.getBoundingClientRect().left ? 'r' : 'l';
   /* الجارُ ‎N‎ يبدأ ممتدًّا فوق مكان الداخلة ‎E‎ (عرضُها والفُرجة) ثمّ يتضيّق إلى مكانه — هامشٌ سالبٌ في جهتها يذوب */
+  /* ===== ROADMAP-SMOOTH ق٥ (القرار ١): في الضيّقة (لا كتلة) تنبسط الداخلةُ في مكانها الحقيقيّ من عرضٍ صفر — والجارُ يتضيّق
+     بنفسه لأنّه يأخذ الباقي — بلا نسخٍ ولا قصّ ===== */
+  function pkPaneGrow(E, N) {
+    const sp = E.parentElement;
+    if (!sp || getComputedStyle(sp).flexDirection !== 'row') return false;
+    const w = E.getBoundingClientRect().width, m = N && pkFxSide(E, N) === 'l' ? 'marginLeft' : 'marginRight';
+    E.style.overflow = 'hidden';
+    const a = E.animate([{ flexBasis: '0px', [m]: -(parseFloat(getComputedStyle(sp).columnGap) || 14) + 'px' }, { flexBasis: w + 'px', [m]: '0px' }],
+      { duration: PKFX.IN * .8, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    a.finished.then(() => { E.style.overflow = ''; }, () => { E.style.overflow = ''; });
+    return true;
+  }
   function pkFxMargin(N, E) {
     const n = N.getBoundingClientRect(), e = E.getBoundingClientRect(), side = pkFxSide(N, E);
     const d = Math.max(1, Math.round(side === 'r' ? e.right - n.right : n.left - e.left));
@@ -21177,7 +21190,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الدخول: ‎card‎ المربّعُ بعد الرسم، ‎E‎ المنطقةُ الداخلة، ‎N‎ جارُها (يتضيّق بهامشٍ يذوب)، ‎A0‎ اسمُ النشِطة قبلها */
   function pkPaneEnter(card, E, N, A0, slot0, undo) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
-    if (!sp || !card.querySelector(':scope > .pk-band')) return;
+    if (!sp) return;
     const side = N ? pkFxSide(E, N) : null;
     const tracks = [{ pane: E, lv: [0, 1, 0, .7, PKFX_EOUT], side, pad: [0, PK_BAND_PAD, .6, 1], c: [0, PK_BAND_C, .6, 1], clamp: N }];
     const old = A0 && A0 !== 'x' ? sp.querySelector(':scope > ' + PK_PANE[A0]) : null;
@@ -21212,7 +21225,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkPaneExit(card, L, commit, other) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
-    if (!sp || !card.querySelector(':scope > .pk-band')) { commit(); return; }
+    if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
     const isBook = L.classList.contains('pk-src'), D = PKFX.OUT;
     const actL = card.classList.contains(isBook ? 'pk-act--book' : 'pk-act--bank');
     const N = sp.querySelector(':scope > .kt-view');
@@ -22908,7 +22921,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
     }
     /* ===== ROADMAP-PANEFX: في المكبَّرة يعود البنكُ إلى الذيل في مكانه الحقيقيّ ثمّ يُرسم ===== */
-    if (on && post && post.classList.contains('pk--bandfx') && !bkReduce()) {
+    if (on && post && pkLab() && !bkReduce()) {
       const bk = post.querySelector('.post-ytmain > .pk-split > .pk-bank');
       if (bk) {
         pkPaneExit(post, bk, () => {
@@ -22921,7 +22934,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
     }
     const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
-    const bookR0 = act0 && post ? (post.querySelector('.post-ytmain > .pk-split > .pk-src') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
+    const bookR0 = pkLab() && post ? (post.querySelector('.post-ytmain > .pk-split > .pk-src') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
     const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
     const viewOf = pst => pst && pst.querySelector('.post-ytmain > .pk-split > .kt-view, .post-ytmain > .kt-view');
     const v0 = viewOf(post), r0 = v0 ? v0.getBoundingClientRect() : null, en = state.lang === 'en';
@@ -22948,6 +22961,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
           if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN, 0, 'cubic-bezier(.2, .8, .2, 1)');
           pkPaneEnter(post2, pane, nv, act0, slot0, () => { cxSel.clear(); pkBank[id] = false; renderCmSection(); });
+          if (ctl) ctl.focus({ preventScroll: true });
+          return;
+        }
+        if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+          const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
+          if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
+          pkPaneEnter(post2, pane, nv, 'x', null, () => { cxSel.clear(); pkBank[id] = false; renderCmSection(); });
           if (ctl) ctl.focus({ preventScroll: true });
           return;
         }
@@ -23082,7 +23102,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* «المصدر» مفتاحُ الكتاب: يُدخله بجانب العرض (ومن بنك الأسئلة إلى آخر عرضٍ من الثلاثة) ويُخرجه.
          وغيرُه من الثلاثة يبدّل الجار والكتابُ باقٍ. ونقرُ العرض المضيء نفسِه لا يفعل شيئًا */
       /* ===== ROADMAP-PANEFX: في المكبَّرة (الكتلةُ قائمة) يعود الكتابُ إلى الذيل في مكانه الحقيقيّ ثمّ يُرسم — بلا نسخ ===== */
-      if (part && to === 'source' && post && post.classList.contains('pk--bandfx') && !bkReduce()) {
+      if (part && to === 'source' && post && pkLab() && !bkReduce()) {
         const bookEl = sp && sp.querySelector(':scope > .pk-src');
         if (bookEl) {
           pkPaneExit(post, bookEl, () => {
@@ -23096,7 +23116,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
       }
       const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
-      const bankW0 = act0 && sp ? (sp.querySelector(':scope > .pk-bank') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
+      const bankW0 = pkLab() && sp ? (sp.querySelector(':scope > .pk-bank') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
       const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
       let enter = false;
       /* مستطيلُ العرض قبل دخول الكتاب — منه يتضيّق إلى مكانه الجديد */
@@ -23134,6 +23154,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             pkPaneEnter(post2, pane, nv, act0, slot0, () => { pkSplit[id] = false; renderCmSection(); });
             const ae = document.activeElement;
             if (!ae || ae === document.body || !ae.isConnected) { const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`); if (nb) nb.focus({ preventScroll: true }); }
+            return;
+          }
+          if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+            const bk1 = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
+            if (bk1 && bankW0) pkFxFlex(bk1, bankW0.width, bk1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
+            pkPaneEnter(post2, pane, nv, 'x', null, () => { pkSplit[id] = false; renderCmSection(); });
             return;
           }
           pane.style.position = 'relative'; pane.style.zIndex = '2';
