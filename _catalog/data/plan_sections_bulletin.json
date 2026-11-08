@@ -1468,5 +1468,233 @@
    "lb": 6,
    "cr": 3
   }
+ },
+ "acct": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ISE 291",
+   "COE 292",
+   "BUS 200",
+   "ICS 104"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Accounting Major Requirements": [
+   "ACCT 300",
+   "ACCT 301",
+   "ACCT 302",
+   "ACCT 311",
+   "ACCT 403",
+   "ACCT 410"
+  ],
+  "Internship": [
+   "ACCT 398"
+  ]
+ },
+ "fin": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Finance Major Requirements": [
+   "ACCT 301",
+   "FIN 315",
+   "FIN 320",
+   "FIN 425",
+   "FIN 450"
+  ],
+  "Internship": [
+   "FIN 398"
+  ]
+ },
+ "mgt": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Management Major Requirements": [
+   "HRM 301",
+   "MGT 430",
+   "MGT 310",
+   "MGT 440",
+   "MGT 450"
+  ],
+  "Internship": [
+   "MGT 398"
+  ]
+ },
+ "mkt": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Marketing Major Requirements": [
+   "MKT 360",
+   "MKT 345",
+   "MKT 370",
+   "MKT 410",
+   "MKT 450",
+   "MKT 485"
+  ],
+  "Internship": [
+   "MKT 398"
+  ]
+ },
+ "hrm": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
  }
 }
