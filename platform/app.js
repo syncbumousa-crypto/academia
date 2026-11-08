@@ -20449,6 +20449,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · وفي الشاشة الكاملة يتحرّك الصندوقُ (‎#cm-body‎) نفسُه، والعتمةُ خلفه تظهر وتغيب معه.
      · ‏‎position: fixed‎ قد يُحسب من سلفٍ محوَّل لا من النافذة — فيُقاس الفرقُ بعد التثبيت ويُطرح */
   const CX_MS = 420, CX_EASE = 'cubic-bezier(.2, .8, .2, 1)';
+  /* وما يثقل الحركة هو الكتاب (‎WebGL‎): كان يُعاد رسمُه كاملًا في كلّ إطار (‎184‎ رسمةً في أربع حركات) — فيُجمَّد أثناءها:
+     لوحتُه على آخر رسمة، تُكبَّر وتُصغَّر صورةً بنسبتها حول وسطها، ويُرسم مرّةً واحدةً بالمقاس الجديد حين تقف */
+  let cxMorphBusy = false;
+  const cxMorphSettle = () => {
+    cxMorphBusy = false;
+    Object.values(pkSrcBk).forEach(b => {
+      if (!b || b.gl === undefined || !b.el || !b.el.isConnected) return;
+      if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' });
+      bkLayout(b);
+    });
+  };
   let cxMorphing = null;   /* الحركةُ الجارية ‎{ a, el, end }‎: نقرةٌ في منتصفها تبدأ التاليةَ من حيث المربّعُ الآن لا من آخر الأولى */
   const cxCardEl = key => key === 'edit' ? document.querySelector('#cm-body .pk--edit[data-sub="cards"]')
     : document.querySelector(`#cm-body .post[data-ck="${CSS.escape(key)}"]`);
@@ -20476,10 +20487,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* حركةٌ جارية: يُؤخذ موضعُ ما يتحرّك الآن، ثمّ تُوقَف ويُنظَّف بعدها — فتبدأ التاليةُ منه بلا قفزة */
     let now = null;
     if (cxMorphing) { const m = cxMorphing; now = { el: m.el, r: cxRect(m.el) }; cxMorphing = null; m.a.cancel(); m.end(); }
-    if (!body || bkReduce() || !Element.prototype.animate) { fn(); return; }
+    cxMorphBusy = !bkReduce();
+    if (!body || bkReduce() || !Element.prototype.animate) { cxMorphBusy = false; fn(); return; }
     const card0 = (from && from.closest && from.closest('#cm-body .post')) || body.querySelector('.pk--max');
     const key = card0 ? (card0.classList.contains('pk--edit') ? 'edit' : card0.dataset.ck) : null;
-    if (!card0 || !key) { fn(); return; }
+    if (!card0 || !key) { cxMorphBusy = false; fn(); return; }
     const full0 = body.classList.contains('is-cxfull');
     const b0 = now && now.el === body ? now.r : cxRect(body), r0 = now && now.el === card0 ? now.r : cxRect(card0);
     const rad0 = getComputedStyle(full0 ? body : card0).borderRadius;
@@ -20494,19 +20506,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const fr = (r, shd) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', boxShadow: shd });
       const a = body.animate([fr(b0, full1 ? clear : dark), fr(b1, full1 ? dark : clear)], { duration: CX_MS, easing: CX_EASE });
       let ended = false;
-      const end = () => { if (ended) return; ended = true; cxUnpin(body); if (ph) ph.remove(); cxHdMeasure(); cxNameFit(); cxRailFit(); };
+      const end = () => { if (ended) return; ended = true; cxUnpin(body); if (ph) ph.remove(); cxMorphSettle(); cxHdMeasure(); cxNameFit(); cxRailFit(); };
       cxMorphing = { a, el: body, end };
       a.finished.then(() => { if (cxMorphing && cxMorphing.a === a) cxMorphing = null; end(); }, () => {});
       return;
     }
     /* ===== الدرجةُ الوسطى: المربّعُ يتحرّك داخل الصندوق ===== */
     const card = cxCardEl(key);
-    if (!card) return;
+    if (!card) { cxMorphSettle(); return; }
     card.classList.remove('pk--maxfx');
     const wide = body.classList.contains('is-cxmax');
     body.scrollTop = wide ? 0 : cxMaxY;   /* التمريرُ يُردّ قبل القياس لا بعده، فلا يقفز ‎R1‎ */
     const r1 = cxRect(card), rad1 = getComputedStyle(card).borderRadius;
-    if (Math.abs(r1.width - r0.width) < 1 && Math.abs(r1.height - r0.height) < 1 && Math.abs(r1.top - r0.top) < 1) return;
+    if (Math.abs(r1.width - r0.width) < 1 && Math.abs(r1.height - r0.height) < 1 && Math.abs(r1.top - r0.top) < 1) { cxMorphSettle(); return; }
     const ph = wide ? null : cxHold(card, r1);
     const off = cxPin(card, r1);
     const fr = (r, rad) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: rad });
@@ -20514,7 +20526,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وما حول المربّع في القائمة يظهر وهو يصغر إلى مكانه (ويختفي فورًا وهو يكبر: يغطّيه الصندوق) */
     if (!wide) [...body.children].forEach(x => { if (x !== card && x !== ph) x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CX_MS, easing: 'ease-out' }); });
     let ended = false;
-    const end = () => { if (ended) return; ended = true; cxUnpin(card); if (ph) ph.remove(); if (!wide) body.scrollTop = cxMaxY; cxHdMeasure(); cxNameFit(); cxRailFit(); };
+    const end = () => { if (ended) return; ended = true; cxUnpin(card); if (ph) ph.remove(); if (!wide) body.scrollTop = cxMaxY; cxMorphSettle(); cxHdMeasure(); cxNameFit(); cxRailFit(); };
     cxMorphing = { a, el: card, end };
     a.finished.then(() => { if (cxMorphing && cxMorphing.a === a) cxMorphing = null; end(); }, () => {});
   }
@@ -21367,6 +21379,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.ro = new ResizeObserver(() => {
       if (!b.el.isConnected) { b.ro.disconnect(); return; }
       if (b.stage.clientWidth === b.stW && b.stage.clientHeight === b.stH) return;
+      /* المربّعُ يكبر أو يصغر (‎cxMorph‎): اللوحةُ تُحجَّم صورةً حول وسطها بلا رسمٍ ولا ترتيب — ويُرسم الكتابُ مرّةً حين تقف */
+      if (cxMorphBusy && b.gl && b.stW && b.stH) {
+        const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
+        Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
+        return;
+      }
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => bkLayout(b));
     });
