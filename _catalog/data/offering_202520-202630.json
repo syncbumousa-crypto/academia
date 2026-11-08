@@ -258,6 +258,1311 @@
    "202610"
   ]
  },
+ "AE 211": {
+  "name": "Fundamentals of Thermo-Fluids",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 222": {
+  "name": "Introduction to Aerospace Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 223": {
+  "name": "Fluid Mechanics Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 228": {
+  "name": "Intro to AE Struct & Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 314": {
+  "name": "Systems and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 315": {
+  "name": "Systems and Control Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 321": {
+  "name": "Structures and Materials Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 325": {
+  "name": "Gas Dynamics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 328": {
+  "name": "Flight Structures I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 333": {
+  "name": "Aerodynamics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "AE 351": {
+  "name": "Aerospace Engineering Cooperative  Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AE 358": {
+  "name": "Computer Aided Engineering Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "AE 402": {
+  "name": "Aerospace Avionics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "AE 403": {
+  "name": "Aerospace Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "AE 410": {
+  "name": "Astronautics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 415": {
+  "name": "Flight and Aviation Safety",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AE 422": {
+  "name": "Flight Propulsion I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 423": {
+  "name": "Aerodynamic and Propulsion Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 426": {
+  "name": "Flight Dynamics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 427": {
+  "name": "Aerospace Vehicle Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 433": {
+  "name": "Aerodynamics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 449": {
+  "name": "Funda. of Unmanned Aerial Sys.",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 454": {
+  "name": "UAS Design and Integration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 461": {
+  "name": "Spacecraft Guid., Navi & Cntl",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AE 490": {
+  "name": "ST in AE II: High Speed Aerospace Combustion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "AE 491": {
+  "name": "ST in AE II: High Speed Aerospace Combustion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "AE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "AE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 512": {
+  "name": "Turbine Engine Aerothermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 520": {
+  "name": "Aerodynamics of Compressible Flow",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 530": {
+  "name": "Advanced Flight Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 531": {
+  "name": "Manuf. of Aerosp Struc & Mate.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 534": {
+  "name": "Space structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 540": {
+  "name": "Flight Dynamics and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 541": {
+  "name": "Digital Twin in Modern Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 542": {
+  "name": "Spacecraft Attitude Dyna & Cnt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 543": {
+  "name": "Aerospace Modern Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AE 575": {
+  "name": "Introduction to Unmanned Aircraft Flight",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 576": {
+  "name": "UAS Design and Technology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 577": {
+  "name": "Digital Techniques for UAS App",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 578": {
+  "name": "Future Trends in Drones & App",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "AE 581": {
+  "name": "Introduction to Robotics & Autonomous System",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 582": {
+  "name": "Satellite Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "AE 610": {
+  "name": "M.S Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 630": {
+  "name": "Design & Analysis of Aerospace Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 646": {
+  "name": "Orbital Analysis & Determinati",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AE 699": {
+  "name": "PhD Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 702": {
+  "name": "Directed Research Il",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "AECM 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "AECM 701": {
+  "name": "Directed Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "AECM 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ARC 307": {
+  "name": "Architectural Design Studio VI",
+  "act": [
+   "STD"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 316": {
+  "name": "Digital Architectural Photograph",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 345": {
+  "name": "Working Drawings",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 356": {
+  "name": "Principles of Sustainable Dsgn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 357": {
+  "name": "Urban Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 358": {
+  "name": "Real Estate and Housing Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530"
+  ]
+ },
+ "ARC 401": {
+  "name": "Senior Project Preparation and Programming",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 402": {
+  "name": "Architectural Design Studio VII",
+  "act": [
+   "STD"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 403": {
+  "name": "Arc Dsg Std VIII: Senior Prj",
+  "act": [
+   "STD"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 409": {
+  "name": "Arch.Design StudioVIII: Sr.Prj",
+  "act": [
+   "STD"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 455": {
+  "name": "Crit.Creat.Thinking/Designers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 461": {
+  "name": "Special Topics in Islamic Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 492": {
+  "name": "Professional Practice and Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 500": {
+  "name": "Research Methods in Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 501": {
+  "name": "Fundamentals of Sustainable Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 502": {
+  "name": "Integ. Proc. Dsgn. & Bldg. Del",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 510": {
+  "name": "Energy-Efficient Buildings",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARC 514": {
+  "name": "Sustainable Neighborhood & Urb",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 531": {
+  "name": "Advanced Topics in Digital and Parametric Design",
+  "act": [
+   "LAB",
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 532": {
+  "name": "Behaviorally Informed Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 535": {
+  "name": "Theory & Methods of Urban Dsgn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 590": {
+  "name": "Special Topics in Sustainable Architecture",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARC 599": {
+  "name": "Graduate Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARC 610": {
+  "name": "Master Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 201": {
+  "name": "Architectural Graphics",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 202": {
+  "name": "Architectural Design & History",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 220": {
+  "name": "Fundamentals of Thermal Sci.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 230": {
+  "name": "Building Materials and Construction Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 301": {
+  "name": "Architectural Design",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 303": {
+  "name": "Working Drawings",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 322": {
+  "name": "Building Mechanical Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 323": {
+  "name": "Principles of HVAC",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 328": {
+  "name": "Arch Acoustics & Illumination",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARE 330": {
+  "name": "Construction Management and Estimating",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 331": {
+  "name": "Construction Economy & Eqpt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "ARE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ARE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 421": {
+  "name": "Building Energy Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 425": {
+  "name": "Architectural Acoustics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARE 430": {
+  "name": "Contracts and Specifications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARE 438": {
+  "name": "Facilities Planning and Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 460": {
+  "name": "Green and Sustainable Building",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 461": {
+  "name": "Applications of AI in Smart Bd",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 463": {
+  "name": "Sustainable Energy Solutions",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 501": {
+  "name": "MEP Systems Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARE 504": {
+  "name": "Deep Renovation for HP Buildings",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 508": {
+  "name": "Building Physics and Green Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 513": {
+  "name": "Build Systems Eval/Selection",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ARE 528": {
+  "name": "Prin of Sustainable Bldg. Dsgn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 529": {
+  "name": "Indoor Environmental Quality",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 530": {
+  "name": "Building Science",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ARE 533": {
+  "name": "Energy Modeling and Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 535": {
+  "name": "HVAC Systems Design & Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 537": {
+  "name": "Building Envelope Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 539": {
+  "name": "Renewable Energy Sys for Bldgs",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ARE 549": {
+  "name": "Sustainable Built Environment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 550": {
+  "name": "Essentials of Facilities Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 551": {
+  "name": "High Performance Building Design and Evaluation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 552": {
+  "name": "Safety, Ergonomics and Risks Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 553": {
+  "name": "Real Estate Property Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 554": {
+  "name": "Bldg. Operations & Maintenance",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 555": {
+  "name": "Smart & Sustainable Facilities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ARE 599": {
+  "name": "Research Seminar in ARE",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ARE 610": {
+  "name": "Master Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 619": {
+  "name": "Research Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620"
+  ]
+ },
+ "ARE 632": {
+  "name": "Integrated Building Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
  "AS 201": {
   "name": "Financial Mathematics",
   "act": [
@@ -405,6 +1710,448 @@
    "202620"
   ]
  },
+ "BIOE 201": {
+  "name": "Biology for Engineers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 202": {
+  "name": "Biology for Engineers Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 211": {
+  "name": "Fundamentals of Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 303": {
+  "name": "Cell Biology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 311": {
+  "name": "Bioinstrumentation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 312": {
+  "name": "Bioinstrumentation Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 316": {
+  "name": "Ethics and Safety in Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 320": {
+  "name": "Molecular Biology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 321": {
+  "name": "Cell and Molecular Biology Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 337": {
+  "name": "Applied Physiology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 355": {
+  "name": "Biomimicry Dsgn & Modeling Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 370": {
+  "name": "Bioengineering Thermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 377": {
+  "name": "Marine Pollution & Mitigation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "BIOE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 440": {
+  "name": "Molecular Biotechnology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 445": {
+  "name": "Enzyme Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 455": {
+  "name": "Transport Phenomenon in Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 460": {
+  "name": "Biomaterials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 480": {
+  "name": "Biomechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 483": {
+  "name": "Genomics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 485": {
+  "name": "Electrophysiology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 486": {
+  "name": "Nanobiotechnology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 501": {
+  "name": "Cellular and Molecular Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 502": {
+  "name": "Anatomy & Physiology for Engrs",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 503": {
+  "name": "Concepts in Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 504": {
+  "name": "Statistics for Bioengineers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 505": {
+  "name": "Modeling of Biological Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 511": {
+  "name": "Design & Use of Biomaterials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 513": {
+  "name": "Principles and Applications of Tissue Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 514": {
+  "name": "Drug and Gene Delivery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 532": {
+  "name": "Biophotonics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 533": {
+  "name": "Biomedical Instrumentation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "BIOE 552": {
+  "name": "Bioprocess and Bioreaction",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 553": {
+  "name": "Biological Environmental Proce",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "BIOE 590": {
+  "name": "Special Topics in Bioengineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "BIOE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "BIOE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "BIOE 711": {
+  "name": "Ph.D. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
  "BUS 200": {
   "name": "Business & Entrepreneurship",
   "act": [
@@ -483,6 +2230,2722 @@
   ],
   "terms": [
    "202520",
+   "202610"
+  ]
+ },
+ "CE 101": {
+  "name": "Engineering Graphics",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 201": {
+  "name": "Statics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 202": {
+  "name": "Statics & Strength of Material",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 203": {
+  "name": "Structural Mechanics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 204": {
+  "name": "Civil Engineering Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 206": {
+  "name": "Civil Engg. Materials Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 216": {
+  "name": "Computer Graphics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 230": {
+  "name": "Engineering Fluid Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 261": {
+  "name": "Surveying I",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 305": {
+  "name": "Structural Analysis I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 315": {
+  "name": "Reinforced Concrete I",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 318": {
+  "name": "Numerical & Statistical Method",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 330": {
+  "name": "Environmental Engg. Principles",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 335": {
+  "name": "Engineering Hydrology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 341": {
+  "name": "Transportation Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 343": {
+  "name": "Transportation Engineering Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "CE 351": {
+  "name": "Civil Engineering Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 354": {
+  "name": "Intro. to Geotechnical Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 356": {
+  "name": "Geotechnical Engineering Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 375": {
+  "name": "Environmental Chemistry Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "CE 406": {
+  "name": "Structural Mechanics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 408": {
+  "name": "Steel Design I",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 410": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 422": {
+  "name": "Construction Mgt. & Economy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 437": {
+  "name": "Applied Hydraulic Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 441": {
+  "name": "Design of Pavement",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 455": {
+  "name": "Fnd & Earth Structure Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 462": {
+  "name": "Advanced Building Materials and Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 476": {
+  "name": "Industrial Hazardous Waste Management & Treatment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 478": {
+  "name": "Climate Resilient Infra & Adap",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CE 501": {
+  "name": "Concrete Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 504": {
+  "name": "Corrosion in Reinforced Concrete",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 510": {
+  "name": "Advanced Structural Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 511": {
+  "name": "Adv. Structural Analysis & Vib",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 512": {
+  "name": "Elasticity and Plasticity I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 513": {
+  "name": "Plates and Shells",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 515": {
+  "name": "Structural Dynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 517": {
+  "name": "Finite Element Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 521": {
+  "name": "Reinforced Concrete Behavior and Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 522": {
+  "name": "Prestressed Concrete",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 525": {
+  "name": "Fundamentals of Environmental Science and Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 526": {
+  "name": "Environmental Data Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 527": {
+  "name": "Physicochemical Envir. Proces.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202620",
+   "202630"
+  ]
+ },
+ "CE 528": {
+  "name": "Climate Change Eff & Sust Adap",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 531": {
+  "name": "Advanced Engineering Hydrology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 533": {
+  "name": "Groundwater Flow/Cont Transprt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 535": {
+  "name": "Design of Dams and Hydraulic Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 536": {
+  "name": "GIS Applications in Water Res.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 541": {
+  "name": "Chem in Environmental Engr",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 543": {
+  "name": "Air Pollution Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 545": {
+  "name": "Wastewater Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 548": {
+  "name": "Biological Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CE 550": {
+  "name": "Nature of Behavior of Soils",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 552": {
+  "name": "Foundation Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 553": {
+  "name": "Soil and Site Improvement",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 555": {
+  "name": "Modeling in Geomechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CE 559": {
+  "name": "Rock Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 561": {
+  "name": "Advanced Soil Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 571": {
+  "name": "Urban Transportation Planning & Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 574": {
+  "name": "Pavement Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 575": {
+  "name": "Pavement Evaluation, Maintenance and Rehabilitation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 576": {
+  "name": "Geometric Design of Highways",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 579": {
+  "name": "Pavement Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 582": {
+  "name": "Traffic Flow Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 584": {
+  "name": "Intelligent Transportation Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 585": {
+  "name": "Human factors inTraffic Safety",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 593": {
+  "name": "AT: Transportation Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CE 594": {
+  "name": "Transportation Data Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 596": {
+  "name": "ML in Civil & Envr. Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 597": {
+  "name": "Quantitative Sustainab. Asses.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 601": {
+  "name": "Advanced Concrete Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 603": {
+  "name": "Repair and Rehabilitation of Concrete Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CE 615": {
+  "name": "Earthquake Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "CE 641": {
+  "name": "Chem Proc Environmental Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 647": {
+  "name": "Municipal Solid Waste Managmnt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 665": {
+  "name": "Geotechnical Earthquake Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CE 677": {
+  "name": "Traffic Control and Operation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 678": {
+  "name": "Transportation Safety Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 683": {
+  "name": "Highway Safety Analytics & Mod",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CEM 510": {
+  "name": "Project Planning and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CEM 511": {
+  "name": "Cost Engg. & M L Apps.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CEM 513": {
+  "name": "Construction Productivity & Quality Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CEM 519": {
+  "name": "Sustainable Construction",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CEM 520": {
+  "name": "Construction Contracting/Admin",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CEM 521": {
+  "name": "Construction Engg.& Cost Estim",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CEM 523": {
+  "name": "Portfolio & Global ProjS. Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CEM 530": {
+  "name": "Construction Robotics and Autonomous Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CEM 535": {
+  "name": "Project Procurement & Q A",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CEM 547": {
+  "name": "BIM, Lean Construction & Digital Transformation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CEM 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CEM 619": {
+  "name": "Research Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202620"
+  ]
+ },
+ "CHE 200": {
+  "name": "Principles of Chemical Engg.",
+  "act": [
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 204": {
+  "name": "Fluid Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 212": {
+  "name": "Intro. to CHE Computing",
+  "act": [
+   "LAB",
+   "LEC",
+   "LLB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 300": {
+  "name": "Heat Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 303": {
+  "name": "Chem Engr Thermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 304": {
+  "name": "Mass Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 306": {
+  "name": "Separation Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 309": {
+  "name": "Chemical Engineering Lab I",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "CHE 351": {
+  "name": "Applied Chemical Engineering Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHE 360": {
+  "name": "Numerical Methods in CHE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "CHE 401": {
+  "name": "Process Dynamics and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 402": {
+  "name": "Kinetics and Reactor Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 404": {
+  "name": "Hydrogen production & storage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 405": {
+  "name": "Process Design and Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 409": {
+  "name": "Chemical Engineering Lab II",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 424": {
+  "name": "Funda. of Renewable En. Proce.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 431": {
+  "name": "Membrane Processes Technology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 440": {
+  "name": "Catalysis/Catalytic Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CHE 444": {
+  "name": "Fuel Cells, Batteries and Supercapacitors",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 458": {
+  "name": "Process Safety Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 461": {
+  "name": "Petroleum Refining",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 462": {
+  "name": "Petrochemical Industries",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 463": {
+  "name": "Polymer Technology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 464": {
+  "name": "Refining & PetroChem. Tech & E",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 465": {
+  "name": "Process Integration and Optimization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHE 472": {
+  "name": "Corrosion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 475": {
+  "name": "Climate Change Effects & Mitig",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 484": {
+  "name": "Polymer Composites & Apps.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 486": {
+  "name": "Nuclear Power Plant Operations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 501": {
+  "name": "Transport Phenomena",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 513": {
+  "name": "Advanced Thermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 516": {
+  "name": "Fundamentals and Applications of Gas Hydrates",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 527": {
+  "name": "Petrol. Refin. & Petrochem. Pr",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 528": {
+  "name": "Crude Oil to Chemicals",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 530": {
+  "name": "Advanced Reaction Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 532": {
+  "name": "Heterogeneous Catalysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CHE 538": {
+  "name": "O & S  of Nuclear Power Plants",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 540": {
+  "name": "Applied Polymer Rheology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 541": {
+  "name": "Polymer Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 542": {
+  "name": "Nanotech: Syn & App of nanomat",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 543": {
+  "name": "Polymeric Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 545": {
+  "name": "Corrosion Science and Engineeering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 555": {
+  "name": "Industrial Fluidized Bed Chemical Reactor Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 558": {
+  "name": "Quantitative Process Risk Anal",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 560": {
+  "name": "Numerical Methods in CHE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 565": {
+  "name": "Modeling of Pet. & Petchem Flu",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 566": {
+  "name": "Process Synthesis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 568": {
+  "name": "Petrochemical Processes Design & Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 573": {
+  "name": "Process Air Pollution Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 578": {
+  "name": "Adv Carbon Utilization & Conve",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 579": {
+  "name": "Decarbonization in O & G Indus",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHE 581": {
+  "name": "Process Safety Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CHE 582": {
+  "name": "Occupational Safety Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 583": {
+  "name": "Proc Hzd Analy & Incident Inve",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 584": {
+  "name": "Fire & Toxic Release Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 585": {
+  "name": "Quantitative Risk Analysis in Process Safety",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHE 586": {
+  "name": "Active Safeguard Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 625": {
+  "name": "Adsorption",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHE 637": {
+  "name": "Advanced Reactor Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CHE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 101": {
+  "name": "Prin. of Chemical Science I",
+  "act": [
+   "LAB",
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "CHEM 102": {
+  "name": "Prin. of Chemical Science II",
+  "act": [
+   "LAB",
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 201": {
+  "name": "Organic Chemistry I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 202": {
+  "name": "Organic Chemistry Laboratory",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 204": {
+  "name": "Organic Chemistry II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 212": {
+  "name": "Phy Chemistry I: CHE Thermodyn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 213": {
+  "name": "Chemical Thermodynamics Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 221": {
+  "name": "Quantitative Chemical Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 222": {
+  "name": "Quantitative Chemical Analysis Laboratory",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 305": {
+  "name": "Organic Synthesis & Chara. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 311": {
+  "name": "Phy Chem II: Kine &Spect'scopy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 312": {
+  "name": "Kinetics and Spectroscopy Lab.",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 321": {
+  "name": "Instrumental Analysis for Engineers",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHEM 324": {
+  "name": "Instrumental Chemical Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 325": {
+  "name": "Instrumental Chemical Analysis Laboratory",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 327": {
+  "name": "Environmental Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 335": {
+  "name": "Fundamentals of Inorganic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 336": {
+  "name": "Advanced  Inorganic  Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 337": {
+  "name": "Inorganic Syn & Charac Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 363": {
+  "name": "Biochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "CHEM 403": {
+  "name": "Synthetic Organic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 406": {
+  "name": "Spectro ID of Organic Compound",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 454": {
+  "name": "Chemistry of Corrosion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 457": {
+  "name": "Polymer Characterization & Ana",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 458": {
+  "name": "Materials Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 459": {
+  "name": "Material Synthesis & Charc Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 463": {
+  "name": "Industrial Catalysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 479": {
+  "name": "Chemistry Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 488": {
+  "name": "Undergraduate Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 501": {
+  "name": "Physical Chemistry: A Molecular Approach",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 502": {
+  "name": "Chem of Coordination Compounds",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CHEM 503": {
+  "name": "Organic Reactions: Mech.& Reac",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 504": {
+  "name": "Advanced Analytical Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 514": {
+  "name": "Electrochemical Corrosion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 517": {
+  "name": "Computational Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 520": {
+  "name": "Physical Methods in Inorganic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 522": {
+  "name": "Organometallic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 529": {
+  "name": "Catalysis in Polymerization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 530": {
+  "name": "Polymers in Oil and Gas Industries",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHEM 531": {
+  "name": "Functional Polymers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 532": {
+  "name": "Synthetic Organic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 536": {
+  "name": "Spectro Ident/Organic Compound",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 537": {
+  "name": "Polymer Synthesis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "CHEM 542": {
+  "name": "Electroanalytical Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 545": {
+  "name": "Environmental Chemical Analysis: Advanced Instrumentation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 560": {
+  "name": "Materials and Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 591": {
+  "name": "Special Topics in Inorganic Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 599": {
+  "name": "Graduate (M.S.) Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 617": {
+  "name": "Chem. & Phys. of Nanomaterials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 621": {
+  "name": "Heterogeneous Catalysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 625": {
+  "name": "Homogeneous Catalysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CHEM 630": {
+  "name": "Phys Chem/Character Polymers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 633": {
+  "name": "Polymeric Drug Delivery Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CHEM 640": {
+  "name": "Analytical Spectroscopy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 643": {
+  "name": "Environmental Analytical Chem",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CHEM 699": {
+  "name": "Graduate (Ph.D.) Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CHEM 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 204": {
+  "name": "Digital Systems Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 301": {
+  "name": "Numerical Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "CIE 305": {
+  "name": "Linear Control Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 306": {
+  "name": "Linear Control Systems Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 312": {
+  "name": "Instrumentation Engineering",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 315": {
+  "name": "Signals and Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 316": {
+  "name": "Control Systems Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 318": {
+  "name": "Computer Control Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 390": {
+  "name": "Seminars",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 399": {
+  "name": "Summer training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "CIE 410": {
+  "name": "Automation Devices and Electronics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 412": {
+  "name": "Mechatronics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 413": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CIE 418": {
+  "name": "Industrial Process Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 423": {
+  "name": "Model Predictive Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CIE 435": {
+  "name": "Distributed Computer Cntl Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CIE 438": {
+  "name": "Instrumentation for Procs Cntl",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 445": {
+  "name": "Control of Mechatronic Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 449": {
+  "name": "ST: Robotics – Fundamentals of Manipulator:\nModeling, Motion, and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 464": {
+  "name": "Indus Internet of Things Tech.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 480": {
+  "name": "Introduction to Robotics & Autonomous System",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 481": {
+  "name": "Applied Control for Robotic Sy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 482": {
+  "name": "Path Plan. & Nav for Mob. Robo",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CIE 483": {
+  "name": "Artificial Intelligence and Machine Learning for Robots",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CIE 486": {
+  "name": "Autonomy and Decision Making",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "CIE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
    "202610"
   ]
  },
@@ -1305,6 +5768,125 @@
    "202620"
   ]
  },
+ "CPG 199": {
+  "name": "Summer Camp",
+  "act": [
+   "FLD"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "CPG 498": {
+  "name": "Integrated Reservoir Studies",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CPG 555": {
+  "name": "AI Apps - PETE & Geoscientists",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CRP 505": {
+  "name": "Statistical Analysis Planning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CRP 506": {
+  "name": "Urban Planning Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "CRP 514": {
+  "name": "Geographic Information Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "CRP 580": {
+  "name": "Fundamentals of Smart and Sustainable Cities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CRP 581": {
+  "name": "Environmental Economics and Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CRP 582": {
+  "name": "Quantitative Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "CRP 583": {
+  "name": "Urban Informatics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "CRP 584": {
+  "name": "Sustainable Infra. & Ren En.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202630"
+  ]
+ },
+ "CRP 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202620",
+   "202630"
+  ]
+ },
  "DATA 201": {
   "name": "Probability for Data Science",
   "act": [
@@ -1434,6 +6016,1405 @@
    "202620"
   ]
  },
+ "EE 201": {
+  "name": "Electric Circuits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EE 203": {
+  "name": "Electronics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 207": {
+  "name": "Signals and Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 213": {
+  "name": "Electrical Circuits II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 236": {
+  "name": "Electronic Circuits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EE 237": {
+  "name": "Electronic Circuits Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EE 271": {
+  "name": "Electrical Circuits Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EE 272": {
+  "name": "Analog & Digital Electro. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 303": {
+  "name": "Electronics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 304": {
+  "name": "Electronics II Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 307": {
+  "name": "Digital Signal Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 310": {
+  "name": "Fundamentals of EE Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 311": {
+  "name": "Fundamentals of EE Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 312": {
+  "name": "Electrical Systems & Lighting",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "EE 315": {
+  "name": "Probabilistic Methods in EE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 340": {
+  "name": "Electromagnetic Waves and Apps",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 341": {
+  "name": "Electromagnetics Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "EE 351": {
+  "name": "Electrical Engineering Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 360": {
+  "name": "Electric Energy Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 361": {
+  "name": "Electric Energy Engg. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 370": {
+  "name": "Communications Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 371": {
+  "name": "Communications Engineering Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 380": {
+  "name": "Control Engineering I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 381": {
+  "name": "Control Engineering I Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 390": {
+  "name": "Digital Systems Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 391": {
+  "name": "Digital Systems Engg. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "EE 400": {
+  "name": "Telecommunication Networks",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 406": {
+  "name": "Digital Signal Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 407": {
+  "name": "Microwave Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 411": {
+  "name": "Senior Design Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 413": {
+  "name": "Applied Digi Signal Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 417": {
+  "name": "Modern Digital Communication Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 419": {
+  "name": "Wireless Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 420": {
+  "name": "Optical Fiber Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 422": {
+  "name": "Antenna Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 425": {
+  "name": "Integrated Circuits Anal & Dsg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 427": {
+  "name": "Bioelectronics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 432": {
+  "name": "Digital Control Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 433": {
+  "name": "Applied Control Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 436": {
+  "name": "Intro Micro & Nano-Electronics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 445": {
+  "name": "Industrial Electronics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 458": {
+  "name": "Hydrogen and Electricity Infrastructures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 459": {
+  "name": "Electrical Energy Efficiency",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 460": {
+  "name": "Power Electronics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 462": {
+  "name": "Electrical Machines",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 463": {
+  "name": "Power System Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 465": {
+  "name": "Power Transmission/Distributn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 466": {
+  "name": "Power System Protection",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 468": {
+  "name": "Renewable Energy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 471": {
+  "name": "Telecommunication Networks Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 474": {
+  "name": "Optical Fiber Communications Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 475": {
+  "name": "Antenna Theory Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 479": {
+  "name": "Industrial Electronics Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 481": {
+  "name": "Power Electronics Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 482": {
+  "name": "Electrical Machines Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 485": {
+  "name": "Applied Digi. Sig Process. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 490": {
+  "name": "ST: Robotics – Fundamentals of Manipulator:\nModeling, Motion, and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 520": {
+  "name": "Power Systs Steady State Anal",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 522": {
+  "name": "Power System Dynamic Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 524": {
+  "name": "Bulk Power System Planning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 527": {
+  "name": "Reliability Assessment of Power Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 530": {
+  "name": "Radiation and Propagation of Electromagnetic Waves",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 532": {
+  "name": "Antenna Theory & Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 533": {
+  "name": "Microwave Integrated Circuits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 534": {
+  "name": "Optical Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 535": {
+  "name": "Optics and Photonics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 541": {
+  "name": "Design of Digital Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 542": {
+  "name": "Analog Integrated Circuit Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 545": {
+  "name": "Advanced Analog Electronics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 546": {
+  "name": "Semiconductor Device Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 550": {
+  "name": "Linear Control Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 551": {
+  "name": "System Identification",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 552": {
+  "name": "Optimal Control Theory and Applications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 555": {
+  "name": "Neural Ntwks Theory & Appls",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 556": {
+  "name": "Intelligence Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 562": {
+  "name": "Digital Signal Processing I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 570": {
+  "name": "Stochastic Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 571": {
+  "name": "Digital Communications I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 572": {
+  "name": "Principles of Digital Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 573": {
+  "name": "Digital Communications II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 574": {
+  "name": "Detection and Estimation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 575": {
+  "name": "Information Theory",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 577": {
+  "name": "Wireless and Personal Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 579": {
+  "name": "Wireless Communications II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 580": {
+  "name": "Sustainable and Renewable Energy Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 581": {
+  "name": "Renewable Energy Integration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "EE 582": {
+  "name": "Solar Photovoltaic Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 583": {
+  "name": "Energy Storage & Hydrogen Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 584": {
+  "name": "Spectrum Regul. Mgt & Policies",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 600": {
+  "name": "Electrical Engineering Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 608": {
+  "name": "ST in EE: Quantum Communications",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 609": {
+  "name": "ST: Electrical Engineering Research Methodology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EE 620": {
+  "name": "High Voltage Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 622": {
+  "name": "Power System Operations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 623": {
+  "name": "HVDC Transmission System",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 624": {
+  "name": "Smart Grids",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 625": {
+  "name": "Power System Protection",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 633": {
+  "name": "Optical Fiber Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 642": {
+  "name": "Analog VLSI Circuit Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 652": {
+  "name": "Nonlinear Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 656": {
+  "name": "Robotics & Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "EE 659": {
+  "name": "Special Topics in Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "EE 661": {
+  "name": "Digital Signal Processing II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EE 662": {
+  "name": "Adaptive Filtering/Application",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 663": {
+  "name": "Image Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 679": {
+  "name": "Special Topics:Communication",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EM 502": {
+  "name": "Data Analy. for Deci. Sup. Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EM 510": {
+  "name": "Advanced Engineering Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EM 515": {
+  "name": "Quality Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "EM 520": {
+  "name": "Quant Methods in Engg Mgt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EM 530": {
+  "name": "Decision Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EM 545": {
+  "name": "Environmental Sustainability Principles",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EM 550": {
+  "name": "Engg. Project Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EM 551": {
+  "name": "Project Leadership & Comm. Mgt",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EM 554": {
+  "name": "Sustainable  & Agile Prj Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "EM 560": {
+  "name": "Manu.Sys & Supply Chain Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EM 569": {
+  "name": "Computers App in Proj. Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EM 573": {
+  "name": "Loss Prevention & Risk Mgt.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "EM 575": {
+  "name": "Prin of Safety & Envr. Mgt Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "EM 578": {
+  "name": "Greenhouse Gas Emissions Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EM 599": {
+  "name": "Research Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EM 600": {
+  "name": "Master of Engg Report",
+  "act": [
+   "MR"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "EM 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202620"
+  ]
+ },
+ "EM 621": {
+  "name": "Design of Experiments and Engineering Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "EM 630": {
+  "name": "Comput. Intel & Decision Analy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
  "ENTR 410": {
   "name": "CS in FinTech & Venture Creati",
   "act": [
@@ -1450,6 +7431,169 @@
   ],
   "terms": [
    "202620"
+  ]
+ },
+ "ENVS 510": {
+  "name": "ADV Environmental Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ENVS 515": {
+  "name": "Environmental Hydrogeology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ENVS 522": {
+  "name": "Environmental Chemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ENVS 523": {
+  "name": "Adv. Analytical Geochemistry",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ENVS 525": {
+  "name": "Adv. Environmental Pollution",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ENVS 532": {
+  "name": "Environmental Biology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ENVS 535": {
+  "name": "Environmental Biotechnology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ENVS 542": {
+  "name": "Concepts of Environmental Mang",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ENVS 546": {
+  "name": "ENV Impact Assessment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ENVS 550": {
+  "name": "Sustainability and Environmental Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ENVS 573": {
+  "name": "Water Resources & Water Pollut",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ENVS 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ENVS 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ENVS 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ESE 231": {
+  "name": "Fundamentals of ESE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ESE 371": {
+  "name": "Environmental Engineering Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ESE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202630"
   ]
  },
  "FIN 250": {
@@ -1717,6 +7861,1022 @@
   ],
   "terms": [
    "202610"
+  ]
+ },
+ "GEO 366": {
+  "name": "Envr. Mgt. & Climate Change",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOL 102": {
+  "name": "Principles of Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 103": {
+  "name": "Principles of Geology - Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 202": {
+  "name": "Appl Geosci/Sci & Engineering",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOL 204": {
+  "name": "Mining Geoscience - I",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 213": {
+  "name": "Earth History and Paleontology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 217": {
+  "name": "Mineralogy and Optical Mineralogy",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 220": {
+  "name": "Petrology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 270": {
+  "name": "Sedimentology & Stratigraphy",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 305": {
+  "name": "Structural Geology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 314": {
+  "name": "Mining Geoscience - II",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 315": {
+  "name": "Petroleum Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 318": {
+  "name": "Regional Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 345": {
+  "name": "Integrated Petroleum Geology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "GEOL 354": {
+  "name": "Computational Methods in Geology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 364": {
+  "name": "Carbonate Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOL 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "GEOL 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 430": {
+  "name": "Field Geology",
+  "act": [
+   "FLD"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "GEOL 434": {
+  "name": "Marine Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 436": {
+  "name": "Oceanography",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOL 444": {
+  "name": "Undergraduate Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 450": {
+  "name": "Biostratigraphy of the Arabian Plate",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOL 455": {
+  "name": "Applied Geochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 457": {
+  "name": "Geology of Ore Deposits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 459": {
+  "name": "Life of Mine - 24827 - GEOL 459 - 01",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 465": {
+  "name": "Subsurface Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 470": {
+  "name": "Geology of Unconventional Reservoirs",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 499": {
+  "name": "Geology Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 501": {
+  "name": "Geology of the Middle East",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 502": {
+  "name": "Advanced Structural Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 505": {
+  "name": "Basin & Petroleum Sys Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOL 506": {
+  "name": "Advanced Field Methods in Sedimentary Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 511": {
+  "name": "Fundamentals of Ichnology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOL 512": {
+  "name": "Micropaleontology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 515": {
+  "name": "Carbonate & Evaporite Sedimen.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOL 521": {
+  "name": "Advanced Petroleum Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 522": {
+  "name": "Micropaleontology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 525": {
+  "name": "Isotope Geochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 531": {
+  "name": "Advanced Stratigraphy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 532": {
+  "name": "Advanced Sedimentology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 533": {
+  "name": "Carbonates and Evaporites",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOL 543": {
+  "name": "Geology of Mineral Deposits",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOL 551": {
+  "name": "Organic Geochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 590": {
+  "name": "Independent Studies",
+  "act": [
+   "IND"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 591": {
+  "name": "Sp.Topics: Sedimentary Geology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "GEOL 593": {
+  "name": "Special Topics in Geochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 601": {
+  "name": "Carbonate Sedimentology & Diagenesis",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 602": {
+  "name": "Global & Regional Tectonics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 640": {
+  "name": "Clastic Sedimentology & Diagenesis",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOL 690": {
+  "name": "Petrophysics and Well Log Inte",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOL 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOL 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 102": {
+  "name": "Essentials of Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 204": {
+  "name": "Introduction to Seismology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 205": {
+  "name": "Computational Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 215": {
+  "name": "Introduction to Seismic Exploration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 304": {
+  "name": "Gravity & Magnetic Exploration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 320": {
+  "name": "Seismic Data Processing",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 353": {
+  "name": "Electrical & Electromagn. Exp.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "GEOP 411": {
+  "name": "Senior Design Project i",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 416": {
+  "name": "Seismic Data Interpretation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 421": {
+  "name": "Explo & Dev of Geothermal Ener",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 440": {
+  "name": "Geophysics for Petroleum Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 458": {
+  "name": "Geosci Pract. in the Mini. Ind",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 475": {
+  "name": "Environmental Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 480": {
+  "name": "ST. Carbon Capture & Storage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 490": {
+  "name": "Geophysics Field Camp",
+  "act": [
+   "FLD"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "GEOP 497": {
+  "name": "Undergraduate Research",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 499": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 501": {
+  "name": "Reflection Seismology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 502": {
+  "name": "Potential Theory Methods",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 503": {
+  "name": "Solid Earth Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 510": {
+  "name": "Seismic Data Analysis",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 521": {
+  "name": "Applied Geostatistics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 522": {
+  "name": "Reservoir Data Analytics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOP 590": {
+  "name": "Special Topics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "GEOP 591": {
+  "name": "Special Topics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOP 592": {
+  "name": "Special Topics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 602": {
+  "name": "Geophysical Wave Propagation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 603": {
+  "name": "Numerical Modeling in Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 604": {
+  "name": "Geophysical Signal Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "GEOP 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 613": {
+  "name": "Multiscale rock physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 618": {
+  "name": "Microseismic geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "GEOP 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 642": {
+  "name": "Near-surface field Geophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "GEOP 690": {
+  "name": "Special Topics in Geophysics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 691": {
+  "name": "Spcl Topics in Geophysics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 701": {
+  "name": "Direcred Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "GEOP 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "GEOP 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
   ]
  },
  "GS 318": {
@@ -3326,6 +10486,279 @@
    "202620"
   ]
  },
+ "ITD 101": {
+  "name": "Design Survey",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 202": {
+  "name": "Design Ideation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 203": {
+  "name": "Design Application",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 211": {
+  "name": "Digital Visualization I",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 212": {
+  "name": "Digital Visualization II",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 304": {
+  "name": "Function & Usability",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 305": {
+  "name": "Emotional Dsgn & Dsg for Aging",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 313": {
+  "name": "Prototyping and Fabrication",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 314": {
+  "name": "XR Representations I",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ITD 406": {
+  "name": "Sandbox Exploration",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 407": {
+  "name": "Design for Social Innovation",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ITD 415": {
+  "name": "XR representations II",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 420": {
+  "name": "Creative Thinking Techniques",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 460": {
+  "name": "Storytelling and Character Design",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ITD 461": {
+  "name": "Games Assets and Mechanics",
+  "act": [
+   "LLB"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ITD 491": {
+  "name": "Special Topics in Digital ITD",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ITD 521": {
+  "name": "Digital Visualization for Visual Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "LS 521": {
+  "name": "Biochemistry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "LS 530": {
+  "name": "Biomaterials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "LS 542": {
+  "name": "Biotechnology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "LS 546": {
+  "name": "Techniques in Biology",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "LS 551": {
+  "name": "Ecology and Evolution",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "LS 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "LS 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "LS 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
  "MATH 101": {
   "name": "Calculus I",
   "act": [
@@ -3876,6 +11309,1212 @@
    "202620"
   ]
  },
+ "ME 201": {
+  "name": "Dynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 203": {
+  "name": "Thermodynamics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 204": {
+  "name": "Thermodynamics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 210": {
+  "name": "ME Drawing and Graphics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 218": {
+  "name": "Introduction to ME Design",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 301": {
+  "name": "Machine Design I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 302": {
+  "name": "Machine Design II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 303": {
+  "name": "Mechanical System Design Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 311": {
+  "name": "Fluid Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 312": {
+  "name": "Thermofluids Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 315": {
+  "name": "Heat Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 316": {
+  "name": "Thermo-Fluid Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 322": {
+  "name": "Manufacturing Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ME 323": {
+  "name": "Manufacturing Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ME 350": {
+  "name": "Begin Cooperative Work",
+  "act": [
+   "COP"
+  ],
+  "terms": [
+   "202630"
+  ]
+ },
+ "ME 398": {
+  "name": "Internship",
+  "act": [
+   "INT"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "ME 401": {
+  "name": "System Dynamics & Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ME 402": {
+  "name": "Measurements and Control Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "ME 403": {
+  "name": "The Design Process",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 404": {
+  "name": "Design for Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 408": {
+  "name": "Rapid Prototyping and Digital Manufacturing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 417": {
+  "name": "Mechanics of Machines",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 418": {
+  "name": "Adv. Manufacturing and Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 420": {
+  "name": "Materials Selection and Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 421": {
+  "name": "Automotive Design & Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 423": {
+  "name": "Energy Conversion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 427": {
+  "name": "Turbomachinery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 428": {
+  "name": "Structures of Flight Vehicles",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 429": {
+  "name": "Energy Efficiency and Auditing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 430": {
+  "name": "Air Conditioning",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 432": {
+  "name": "Internal Combustion Engines",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 438": {
+  "name": "Pumping Machinery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 439": {
+  "name": "Solar Energy Conversion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 441": {
+  "name": "Energy and the Environment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 443": {
+  "name": "Mechanics of Robotic Manipulators",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 447": {
+  "name": "Intelligent Energy Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 448": {
+  "name": "Engineering of Nuclear Reactor",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 453": {
+  "name": "Polymer Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 454": {
+  "name": "Materials in Nuclear Power Plants",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 455": {
+  "name": "Mechatronic Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 456": {
+  "name": "Fund. of Nondestructive Eval.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 457": {
+  "name": "Failure of Materials & Prevent",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 458": {
+  "name": "Design of Thermo-Fluid Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ME 459": {
+  "name": "Design of Renewable Energy Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 460": {
+  "name": "Thermal Desalination Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 461": {
+  "name": "Risk Mgt Tool in Sys Dsgn & Op",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 462": {
+  "name": "Products & Systems Reliability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 472": {
+  "name": "Corrosion Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 476": {
+  "name": "Non-Metallic Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 480": {
+  "name": "Plastics Materials &Processing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ME 482": {
+  "name": "Mechanical Vibrations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 489": {
+  "name": "Finite Element Anal:Mech Desgn",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 491": {
+  "name": "Special Topics in Energy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 492": {
+  "name": "ST: Microsystems: Principles and Practice",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ME 496": {
+  "name": "Undergraduate Thesis Il",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 501": {
+  "name": "Numerical Methods in Mech Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 504": {
+  "name": "Nuclear Energy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 505": {
+  "name": "Computational Fluid Dynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 507": {
+  "name": "Reactor Core Thermal-hydraulic",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 508": {
+  "name": "Unconventional Water Resources",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 521": {
+  "name": "Principles of Nuclear Thermal-Hydraulics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 522": {
+  "name": "Nuclear reactors & fuel cycle",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 523": {
+  "name": "Advanced Energy Conversion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 525": {
+  "name": "Renewable Energy Management",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 526": {
+  "name": "Wind Energy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 527": {
+  "name": "Carbon Capture & Utilization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 528": {
+  "name": "Energy Storage Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 529": {
+  "name": "Advanced Thermal Desalination",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 531": {
+  "name": "Advanced Thermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 532": {
+  "name": "Advanced Fluid Mechanics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 534": {
+  "name": "Conduction Heat Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 535": {
+  "name": "Radiation Heat Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "ME 536": {
+  "name": "Convection Heat Transfer",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 539": {
+  "name": "Solar Energy Utilization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 545": {
+  "name": "Membrane Based Desalination",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 548": {
+  "name": "Combustion Phenomena",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 549": {
+  "name": "Thermal Design of Heat Exch.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 551": {
+  "name": "Continuum Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 552": {
+  "name": "Advanced Dynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 553": {
+  "name": "Advanced Vibrations",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 556": {
+  "name": "Nonlinear Finite Element Anly.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 560": {
+  "name": "Smart Materials and Structures",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 561": {
+  "name": "Dynamics of MEMS & Microsystem",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ME 563": {
+  "name": "Wave Propagation in Solids",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 567": {
+  "name": "Advanced Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 568": {
+  "name": "Fracture Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ME 571": {
+  "name": "Advanced Machining Processes",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 572": {
+  "name": "Analysis of Manufac. Process",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 575": {
+  "name": "Advanced Corrosion Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 576": {
+  "name": "Tribology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 577": {
+  "name": "Deform, Fatigue & Fract. of EM",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 578": {
+  "name": "Mech. Prop. of Engg. Polymers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 579": {
+  "name": "Adv. Mech. Behavior of Mtrls.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "ME 582": {
+  "name": "Design for Manufacturing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 585": {
+  "name": "Advanced Physical Metallurgy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 586": {
+  "name": "Finite Element Analysis in Metal Forming",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 587": {
+  "name": "Additive Manufacturing Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 591": {
+  "name": "ST Thermofluid Sciences: Laser Diagnostics in Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 595": {
+  "name": "ST: Numerical Optimization for Engineers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 597": {
+  "name": "ST in Materials and Manufacturing: Applied AI for Manufacturing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 600": {
+  "name": "Engineering Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "ME 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 612": {
+  "name": "Phs Chg Heat Tran/Two Phs Flow",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "ME 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 690": {
+  "name": "Special Topics III: Intelligent Systems Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 691": {
+  "name": "Sp Tp Thermofluid Sc: Spray Combustion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 695": {
+  "name": "Special Topics: Vibration of Continuous Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "ME 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "ME 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
  "MGT 210": {
   "name": "Business Communication",
   "act": [
@@ -4129,6 +12768,168 @@
  },
  "MGT 690": {
   "name": "Special Topics in Management I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 200": {
+  "name": "Introduction to Mining Industry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 201": {
+  "name": "MINE 201: Introduction to Mine Design Platform",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MINE 202": {
+  "name": "Introductory Stat & Grde Estim",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MINE 304": {
+  "name": "Electricity in Mines",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 305": {
+  "name": "Mine Plant Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MINE 306": {
+  "name": "MINE-306 Mining Geomechanics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 334": {
+  "name": "Mine Surveying",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 348": {
+  "name": "MINE 348 - Surface Mine Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MINE 353": {
+  "name": "MINE 353: Underground Mine Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MINE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MINE 402": {
+  "name": "Mine Ventilation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 405": {
+  "name": "Sustainable Mining",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MINE 409": {
+  "name": "Mine Health & Safety",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MINE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MINE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MINE 481": {
+  "name": "Resource Estimation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MINE 492": {
+  "name": "Drilling and Blasting",
   "act": [
    "LEC"
   ],
@@ -4595,6 +13396,532 @@
    "202610"
   ]
  },
+ "MSE 201": {
+  "name": "Introduction to Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 202": {
+  "name": "Materials Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 203": {
+  "name": "Thermodynamics of Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 204": {
+  "name": "Materials Structure and Defect",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 205": {
+  "name": "Diffusion & Kinetics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 206": {
+  "name": "Materials Characterization",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 207": {
+  "name": "Materials Science for CHE",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 301": {
+  "name": "Engineering Metallic Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 302": {
+  "name": "Polymeric Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 303": {
+  "name": "Materials Synthesis Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 304": {
+  "name": "Engineering Ceramics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 305": {
+  "name": "Composite Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 306": {
+  "name": "Failure of Materials & Prevent",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 307": {
+  "name": "Mate. Processing & Prop. Lab",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "MSE 401": {
+  "name": "Electronic,Optical & Mag. Prop",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 402": {
+  "name": "Materials Selection & Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 420": {
+  "name": "Degradation of Polymers",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 434": {
+  "name": "Mechanical Failure of Material",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 435": {
+  "name": "Corrosion Preven., Cntr.,& Mon",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 436": {
+  "name": "Mineral Processing",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "MSE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 500": {
+  "name": "Survey of Materials Sci & Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 501": {
+  "name": "Materials Structure & Defects",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 502": {
+  "name": "Thermodynamics of Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 503": {
+  "name": "Materials Characterization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 509": {
+  "name": "Circular Materials Economy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 510": {
+  "name": "Nuclear Power Plants Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 511": {
+  "name": "Corrosion in Oil  & Petrochem.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 520": {
+  "name": "Microstructure & Prop of Steel",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 531": {
+  "name": "Engineering Nanomaterials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 533": {
+  "name": "Coatings and Surface Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 534": {
+  "name": "Engg. Composite Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 540": {
+  "name": "Advanced Semiconductor Mtrls",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MSE 541": {
+  "name": "Electronic, Optical and Magnetic Properties of Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "MSE 543": {
+  "name": "Welding Process. & Metallurgy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 549": {
+  "name": "Intro. to Atomistic Simulation",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 550": {
+  "name": "Polymer Science & Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 551": {
+  "name": "Electrochemical Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "MSE 553": {
+  "name": "Al for Mtrls Synth.& Discovery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "MSE 591": {
+  "name": "ST II: Materials For Water Purification Membrane",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "MSE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 711": {
+  "name": "Ph.D. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "MSE 712": {
+  "name": "Ph.D. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
  "OM 210": {
   "name": "Operations Management",
   "act": [
@@ -4780,6 +14107,1621 @@
    "202620"
   ]
  },
+ "PETE 101": {
+  "name": "Introduction to the Petroleum Industry",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 202": {
+  "name": "Phase Behavior",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 206": {
+  "name": "Rock and Fluid Properties",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 301": {
+  "name": "Reservoir Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 302": {
+  "name": "Well Completion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 306": {
+  "name": "Well Testing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 311": {
+  "name": "Drilling Engineering",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 313": {
+  "name": "Well Logging",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 315": {
+  "name": "Reservoir Description",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "PETE 402": {
+  "name": "Reservoir Simulation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 403": {
+  "name": "Petroleum Production Engg",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 407": {
+  "name": "Natural Resources Economics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 414": {
+  "name": "Formation Damage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 422": {
+  "name": "Well Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 424": {
+  "name": "Rock Mechanics for PETE Engrs",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "PETE 432": {
+  "name": "Water Flooding",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 453": {
+  "name": "Production Logging",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 461": {
+  "name": "Chemical Enhanced Oil Recovery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 462": {
+  "name": "Thermal Enhanced Oil Recovery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 463": {
+  "name": "Miscible Enhanced Oil Recovery",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 464": {
+  "name": "Energy Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 465": {
+  "name": "Carbon Capture, Utilization and Sequestration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 466": {
+  "name": "Hydrogen Geostorage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 471": {
+  "name": "Introduction to  Unconventional Resources",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 472": {
+  "name": "Unconventional Resources Stimu",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 473": {
+  "name": "Unconventional Resources Evalu",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 495": {
+  "name": "Directed UG Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "PETE 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 500": {
+  "name": "Global Energy Sustainability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 512": {
+  "name": "Advanced Drilling Engineering I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 513": {
+  "name": "Advanced Drilling Fluids",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 514": {
+  "name": "Complex Fluids and Rheology",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 515": {
+  "name": "Advanced Reservoir Description",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 517": {
+  "name": "Fundamentals of Oilfield Chem.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 519": {
+  "name": "Digital Rock Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 522": {
+  "name": "Geomech & Petrophys of U H R",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 524": {
+  "name": "Advanced Well Logging",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 525": {
+  "name": "Advanced Petrophysics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 530": {
+  "name": "Multiphase Flow",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 533": {
+  "name": "Surface Production Facilities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 535": {
+  "name": "Production Optimization of Unconventional Hydrocarbon Resources",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 544": {
+  "name": "Advanced Natural Gas Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 546": {
+  "name": "Well Test Analysis",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 547": {
+  "name": "Computational Multiphysics Modeling",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 548": {
+  "name": "Advanced Reservoir Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 549": {
+  "name": "Advanced Reservoir Simulation I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 550": {
+  "name": "Smart Wells & Reservoir Monit.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 555": {
+  "name": "Res Esti & Prod Forecas of UHR",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 560": {
+  "name": "Mathematical Methods in Petroleum Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 591": {
+  "name": "ST in PETE I: Advanced Formation Damage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 593": {
+  "name": "ST in PETE IV: Reserves Est. & Prod. Forecasting for Geothermal, CO2 Sequestration, & Shale Oil & G",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 594": {
+  "name": "ST: Circular Carbon Economy in Petroleum Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 600": {
+  "name": "Professional Engg. Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "PETE 610": {
+  "name": "M.S. Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 611": {
+  "name": "Adv.Fluid Pro &.Thermodynamics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 623": {
+  "name": "Advanced Well Cementing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 624": {
+  "name": "Advanced Well Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 633": {
+  "name": "Adv. Carbon Storage & Utilizat",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 637": {
+  "name": "Applied Hydraulic Fracturing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 643": {
+  "name": "Mole. Simulation for Engg App.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PETE 645": {
+  "name": "Fluid Flow in Porous Media",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 648": {
+  "name": "Enhanced Oil Recovery I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PETE 655": {
+  "name": "Artificial Intelligence in Petroleum Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 656": {
+  "name": "Uncertainty Quantifi. in Engg.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PETE 670": {
+  "name": "Reservoir Rock Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PETE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "PETE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "PETE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PETE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 101": {
+  "name": "General Physics I",
+  "act": [
+   "LAB",
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 102": {
+  "name": "General Physics II",
+  "act": [
+   "LAB",
+   "LEC",
+   "REC"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "PHYS 204": {
+  "name": "General Physics III",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 205": {
+  "name": "General Physics III LAB",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 210": {
+  "name": "Methods of Theoretical Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 213": {
+  "name": "Modern Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 215": {
+  "name": "Introduction to Astronomy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 300": {
+  "name": "Classical Mechanics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 301": {
+  "name": "Classical Mechanics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 302": {
+  "name": "Classical Mechanics II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 305": {
+  "name": "Electricity and Magnetism I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 306": {
+  "name": "Electricity and Magnetism II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 308": {
+  "name": "Electronics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 309": {
+  "name": "Experimental Physics",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 310": {
+  "name": "Quantum Mech. & Applications I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 311": {
+  "name": "Optics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 336": {
+  "name": "Physics of Semiconductor Devices",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "PHYS 403": {
+  "name": "Senior Physics Laboratory",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 410": {
+  "name": "Quantum Mechanics and Applications II",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 417": {
+  "name": "Intro. to General Relativity",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 423": {
+  "name": "Physics of Nuclear Reactors",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 430": {
+  "name": "Thermal & Statistical Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 432": {
+  "name": "Introduction to Solid State Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 441": {
+  "name": "Particle Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PHYS 498": {
+  "name": "Undergraduate Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PHYS 499": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 501": {
+  "name": "Quantum Mechanics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 505": {
+  "name": "Classical Electrodynamics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 507": {
+  "name": "Classical Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 512": {
+  "name": "Introduction to Quantum Information and Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 514": {
+  "name": "Quantum Hardware",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 516": {
+  "name": "Magnetism & Magnetic Materials",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "PHYS 521": {
+  "name": "Advanced Nuclear Physics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 525": {
+  "name": "Physics of Nuclear Fission and Fusion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 530": {
+  "name": "Statistical Mechanics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 532": {
+  "name": "Solid State Physics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 551": {
+  "name": "Atomic & Molecular Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "PHYS 561": {
+  "name": "Plasma Physics I",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 571": {
+  "name": "Advanced Methods of Theoretical Physics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 590": {
+  "name": "Advanced Topics of Quantum Computing",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "PHYS 608": {
+  "name": "Laser Spectroscopy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 632": {
+  "name": "Quantum Theory of Solids",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "PHYS 699": {
+  "name": "Physics Seminars",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "PHYS 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 507": {
+  "name": "Linear Multivariable Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 513": {
+  "name": "System Identification",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 514": {
+  "name": "Optimal and Robust Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 517": {
+  "name": "Control of Nonlinear Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 520": {
+  "name": "Introduction to Intelligent Process Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 527": {
+  "name": "Adaptive Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 529": {
+  "name": "Decentralized Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SCE 543": {
+  "name": "Applied AI in Cond. based Main",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 545": {
+  "name": "Instrumentation & Ctrl Network",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520"
+  ]
+ },
+ "SCE 547": {
+  "name": "Cybersecurity of Ind. Cntl Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 548": {
+  "name": "Industrial Internet of Things",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 560": {
+  "name": "Soft Comp. for Control & Auto.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 562": {
+  "name": "Intelligent Systems and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 565": {
+  "name": "Soft Computing for Identification",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 566": {
+  "name": "Optimal and Learning-based Process Control Design",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 567": {
+  "name": "Applied AI in Process Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 571": {
+  "name": "Robot Dynamics and Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 575": {
+  "name": "Applied Control for Robotic Sy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 576": {
+  "name": "Path Plan. & Nav for Mob. Robo",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 578": {
+  "name": "Human Robot Interaction",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "SCE 594": {
+  "name": "ST in Intell. Auto. & Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 599": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 606": {
+  "name": "Independent Research",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SCE 610": {
+  "name": "Thesis",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 614": {
+  "name": "Robust Control Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 619": {
+  "name": "Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202520",
+   "202530",
+   "202610",
+   "202620",
+   "202630"
+  ]
+ },
+ "SCE 668": {
+  "name": "Guided Systems Control",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 672": {
+  "name": "Advanced Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 694": {
+  "name": "Sp. Tp. Intell Auto & Robotics",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SCE 699": {
+  "name": "Seminar",
+  "act": [
+   "SEM"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 701": {
+  "name": "Directed Research I",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 702": {
+  "name": "Directed Research II",
+  "act": [
+   "RES"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 711": {
+  "name": "PhD. Pre-Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
+ "SCE 712": {
+  "name": "PhD. Dissertation",
+  "act": [
+   "DIS"
+  ],
+  "terms": [
+   "202520",
+   "202610",
+   "202620"
+  ]
+ },
  "SEC 511": {
   "name": "Principles of Info. Assu & Sec",
   "act": [
@@ -4887,6 +15829,320 @@
   "terms": [
    "202520",
    "202610",
+   "202620"
+  ]
+ },
+ "SEN 540": {
+  "name": "Electric Energy Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SEN 541": {
+  "name": "Sustainable and Renewable Energy Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SEN 542": {
+  "name": "Advanced Energy Conversion",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SEN 543": {
+  "name": "Renewable Energy Integration",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEN 544": {
+  "name": "Solar Photovoltaic Systems",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEN 545": {
+  "name": "Energy Econ, Policies & Regul.",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEN 551": {
+  "name": "Nuclear Engineering",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SEN 555": {
+  "name": "Energy efficiency",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SEN 556": {
+  "name": "Energy Storage",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202610"
+  ]
+ },
+ "SEN 600": {
+  "name": "Sustainable and Renewable Energy Project",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 200": {
+  "name": "Visual Communication for Urban Planners",
+  "act": [
+   "LAB"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 201": {
+  "name": "Introduction to Smart & Sustainable Cities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 202": {
+  "name": "Sustainable Urbanization",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 203": {
+  "name": "Humanizing the Smart City",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 211": {
+  "name": "Land Use & Environment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 212": {
+  "name": "Urban Information Systems",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 304": {
+  "name": "City Design I:Spatial Analysis",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 305": {
+  "name": "CD II: Urban Form & Formation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 313": {
+  "name": "Urban System Modeling and Simulation",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 314": {
+  "name": "Urban Indicators Assessment",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 321": {
+  "name": "Circular Economy",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202520",
+   "202620"
+  ]
+ },
+ "SSC 331": {
+  "name": "Sustainable Infrastructure Sys",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 399": {
+  "name": "Summer Training",
+  "act": [
+   "ST"
+  ],
+  "terms": [
+   "202530",
+   "202630"
+  ]
+ },
+ "SSC 406": {
+  "name": "City Dsg III: Digi. Urban Twin",
+  "act": [
+   "LAB",
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 411": {
+  "name": "Senior Design Project I",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 412": {
+  "name": "Senior Design Project II",
+  "act": [
+   "PRJ"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SSC 422": {
+  "name": "Mgt of Smart Cities & Governan",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SSC 426": {
+  "name": "City Business Development",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 433": {
+  "name": "Smart Mobility",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 434": {
+  "name": "Dgtl. Transformation of Cities",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202620"
+  ]
+ },
+ "SSC 471": {
+  "name": "Urban Livability",
+  "act": [
+   "LEC"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 494": {
+  "name": "Undergraduate Thesis I",
+  "act": [
+   "THS"
+  ],
+  "terms": [
+   "202610"
+  ]
+ },
+ "SSC 496": {
+  "name": "Undergraduate Thesis II",
+  "act": [
+   "THS"
+  ],
+  "terms": [
    "202620"
   ]
  },
