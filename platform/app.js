@@ -9459,7 +9459,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      في المختبر يُظهر الشريطُ **كلَّ** المجلدات ولو خلت (المجلدُ الجديدُ خاوٍ بطبعه، وهو
      المقصود أن يُرى)، وفي التحرير يُسمّى المجلدُ المختارُ في مربّعه نفسِه.
      وخارج المختبر يبقى كلُّ شيءٍ كما شُحن: ‎pgFolds‎ بلا الفارغة ولا تحرير */
-  const pkLab = () => cmCode === 'MATH 105';
+  /* والمختبرُ يتّسع (طلبُ صاحب الموقع): «مالية 250» معه في زرّ «البطائق والملخصات» */
+  const PK_LAB = new Set(['MATH 105', 'FIN 250']);
+  const pkLab = () => PK_LAB.has(cmCode);
   let pkFocusNew = null;   // مجلدٌ أُضيف للتوّ — يُركَّز حقلُ اسمه ويُحدَّد نصُّه بعد الرسم
   /* المجلدُ الذي يُسمّى الآن — وحده وجهُه حقل. فالمختارُ نصٌّ يُسحب كإخوته، ونقرُ اسمه
      (وهو مختار) يفتح الحقل: المتصفّحُ لا يبدأ سحبًا من حقل كتابة، فلو كان المختارُ حقلًا
@@ -11472,7 +11474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* أيُّ شجرةٍ يحرّر المحرّرُ (‎#cm-cards‎ ونوافذُه وأزرارُه): البنكُ حين تكون منطقتُه مفتوحة — والمعرفةُ (العروضُ الثلاثة)
      تبلغ شجرتَها مباشرةً (‎cardDataRaw‎ في ‎ktHost‎)، فتُحرَّر الشجرتان على الشاشة معًا ولا تتسرّب عقدةٌ بينهما */
-  const pkQbOn = (code, p) => code === 'MATH 105' && !!p && !!pkBank[p.id];
+  const pkQbOn = (code, p) => PK_LAB.has(code) && !!p && !!pkBank[p.id];
   const cardData = code => {
     const p = myPost(code, 'cards'), d = migPackC(code, p);
     d.deck = d.deck || [];
