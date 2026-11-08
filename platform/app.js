@@ -20288,18 +20288,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كان التوسيعُ فوقُ يمينًا والتضييقُ مقلوبًا تحتُ يسارًا. فصارا مسكتين قصيرتين على قوس الزاوية العليا،
      بنقطتين لكلٍّ: التوسيعُ على الحدّ الأعلى (ذهبيّ)، والتضييقُ بجانبه على الحدّ الجانبيّ (بتروليّ).
      ونقطتا كلٍّ على ثلثي مسكته. ‏(مركزُ القوس ‎30 · 14‎ ونصفُ قطره ‎9.5‎، والفُرجةُ بينهما ‎46°‎ من القوس) */
-  const CX_GROW = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
-    + '<path class="pk-curve__hit" d="M26 4.5H30A9.5 9.5 0 0 1 33.56 5.19"/>'
-    + '<path class="pk-curve__grip" d="M26 4.5H30A9.5 9.5 0 0 1 33.56 5.19"/>'
-    + '<g class="pk-curve__dots"><circle cx="28.55" cy="4.5" r="1.1"/><circle cx="31.09" cy="4.56" r="1.1"/></g></g></svg>';
-  const CX_SHRINK = '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
-    + '<path class="pk-curve__hit" d="M38.81 10.44A9.5 9.5 0 0 1 39.5 14V18"/>'
-    + '<path class="pk-curve__grip" d="M38.81 10.44A9.5 9.5 0 0 1 39.5 14V18"/>'
-    + '<g class="pk-curve__dots"><circle cx="39.44" cy="12.91" r="1.1"/><circle cx="39.5" cy="15.45" r="1.1"/></g></g></svg>';
+  const CX_SVG = (d, dots) => '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
+    + `<path class="pk-curve__hit" d="${d}"/><path class="pk-curve__grip" d="${d}"/>`
+    + '<g class="pk-curve__dots">' + dots.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.35"/>`).join('') + '</g></g></svg>';
+  /* وحدَه (ضيّقةً، بجانب صورة البروفايل): في وسط قوس الزاوية كما كان (‎80° → 10°‎) */
+  const CX_GROW1 = CX_SVG('M31.65 4.64A9.5 9.5 0 0 1 39.36 12.35', [[35.03, 5.94], [38.06, 8.97]]);
+  /* ومع التضييق (مكبَّرةً): على الحدّ الأعلى حتى ‎70°‎، والتضييقُ مرآتُه على الحدّ الجانبيّ من ‎20°‎ */
+  const CX_GROW = CX_SVG('M21 4.5H30A9.5 9.5 0 0 1 33.25 5.07', [[25.5, 4.5], [29.8, 4.5]]);
+  const CX_SHRINK = CX_SVG('M38.93 10.75A9.5 9.5 0 0 1 39.5 14V23', [[39.5, 14.2], [39.5, 18.5]]);
   const cxShrinkBtn = () => `<button type="button" class="pk-max pk-max--curve pk-shrink" data-cxshrink aria-pressed="true"
       title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_SHRINK}</button>`;
   const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"
-      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${CX_GROW}</button>${cxMax ? cxShrinkBtn() : ''}</span>`;
+      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${cxMax ? CX_GROW : CX_GROW1}</button>${cxMax ? cxShrinkBtn() : ''}</span>`;
   function cxFullSet(on) {
     const body = document.getElementById('cm-body');
     cxFull = !!on && !!(cxMax || cxMaxPub);
@@ -20320,7 +20320,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== وفي النشر ضيّقةً: القوسُ الكبيرُ نفسُه على زاوية المساهمة فوق يمين صورة البروفايل =====
      كما في التحرير (طلبُ صاحب الموقع) — بدل القوس الصغير الذي كان على زاوية الغلاف */
   const cxMaxPubCorner = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve pk-max--pubc" data-cxmaxpub="${esc(id)}" aria-pressed="false"
-      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_GROW}</button></span>`;
+      title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_GROW1}</button></span>`;
   const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" data-cxup aria-pressed="false"
       title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_GROW}</button>${cxShrinkBtn()}</span>`;
   /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
