@@ -12,8 +12,10 @@ plan): how many majors require the course.
                         ("College Core Requirements", "Math & Science
                         Requirements", "General Engineering Fundamentals")
   major    مواد تخصص    the rest of the major's plan, and any plan course from
-                        the major's own subject (HOME): MKT 250 is a college
-                        course, but a major course for Marketing
+                        the major's own subject (HOME), even a common or
+                        college one: MKT 250 is a college course, but a major
+                        course for Marketing; MATH 101 is common, but a major
+                        course for Mathematics
   elective مواد اختيارية linked to the major but not in its plan
   OVERRIDE              decisions taken by hand on the borderline cases
 
@@ -85,12 +87,12 @@ def kind(code, tag):
         return k
     if code not in core[tag]:
         return 'elective'
-    if code in COMMON:
-        return 'common'
     g = college_of[tag]
     p, n = code.split()
-    if p in HOME[tag]:
+    if p in HOME[tag]:          # before common: MATH 101 is a major course for Mathematics
         return 'major'
+    if code in COMMON:
+        return 'common'
     if (share[(g, code)] * 2 > len(COLLEGES[g]) or (p in SCIENCE and n[0] in '12')
             or in_college_section(code, tag)):
         return 'college'
