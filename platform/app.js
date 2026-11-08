@@ -9508,8 +9508,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المقصود أن يُرى)، وفي التحرير يُسمّى المجلدُ المختارُ في مربّعه نفسِه.
      وخارج المختبر يبقى كلُّ شيءٍ كما شُحن: ‎pgFolds‎ بلا الفارغة ولا تحرير */
   /* والمختبرُ يتّسع (طلبُ صاحب الموقع): «مالية 250» معه في زرّ «البطائق والملخصات» */
-  const PK_LAB = new Set(['MATH 105', 'FIN 250']);
-  const pkLab = () => PK_LAB.has(cmCode);
+  /* المختبرُ صار الطريقةَ الأساسيّة لتبويب «البطائق والملخّصات» في كلّ المواد */
+  const pkLab = () => !!cmCode;
   let pkFocusNew = null;   // مجلدٌ أُضيف للتوّ — يُركَّز حقلُ اسمه ويُحدَّد نصُّه بعد الرسم
   /* المجلدُ الذي يُسمّى الآن — وحده وجهُه حقل. فالمختارُ نصٌّ يُسحب كإخوته، ونقرُ اسمه
      (وهو مختار) يفتح الحقل: المتصفّحُ لا يبدأ سحبًا من حقل كتابة، فلو كان المختارُ حقلًا
@@ -11522,7 +11522,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* أيُّ شجرةٍ يحرّر المحرّرُ (‎#cm-cards‎ ونوافذُه وأزرارُه): البنكُ حين تكون منطقتُه مفتوحة — والمعرفةُ (العروضُ الثلاثة)
      تبلغ شجرتَها مباشرةً (‎cardDataRaw‎ في ‎ktHost‎)، فتُحرَّر الشجرتان على الشاشة معًا ولا تتسرّب عقدةٌ بينهما */
-  const pkQbOn = (code, p) => PK_LAB.has(code) && !!p && !!pkBank[p.id];
+  const pkQbOn = (code, p) => !!code && !!p && !!pkBank[p.id];
   const cardData = code => {
     const p = myPost(code, 'cards'), d = migPackC(code, p);
     d.deck = d.deck || [];
@@ -22083,13 +22083,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والعناوينُ نفسُها التي في بذرة مواضيع ‎IAS 111‎.
      دوالُّ مُعلَنةٌ لا ثوابت: ‎renderCmSection‎ و‎showCmTab‎ تسألانها من أعلى الملفّ،
      والمُعلَنةُ تُرفع والثابتُ لا يُرفع */
-  function chTabsOf(code) {
-    return code === 'IAS 111' ? [
-      'مفهوم العقيدة وأهميتها', 'مصادر العقيدة', 'توحيد الربوبية', 'توحيد الألوهية',
-      'الأسماء والصفات', 'الإيمان بالملائكة', 'الإيمان بالكتب والرسل',
-      'الإيمان باليوم الآخر', 'الإيمان بالقضاء والقدر',
-    ] : null;
-  }
   function isChTab(t) { return /^ch\d+$/.test(t || ''); }
 
   /* ===== مصدرُ الشابتر: ملفُّ PDF لكلّ شابترٍ وحده =====
@@ -23782,21 +23775,6 @@ void main() {
       + `<div class="cm-res">`
       + XT_RES().map(cmTab).join('')
       + `</div>`;
-    const chs = chTabsOf(code);
-    if (chs) {
-      /* ===== والأقسامُ تبقى بجانب الشابترات — مؤقّتًا =====
-         كان شريطُ مادّة الشابترات شابتراتِها وحدَها، فما في أقسامها من مساهماتٍ (المادّة
-         والدكاترة والمصادر — ومنها المنقولُ من مجتمع STKFUPM) لا يُرى. فتُلحق الأقسامُ
-         بعد الشابترات حتّى تتّسع الشابتراتُ لها، والتبويبُ المختارُ يبقى ما دام في الشريط:
-         شابترٌ موجود أو قسمٌ من الأقسام */
-      if (isChTab(cmTabSel) ? +cmTabSel.slice(2) > chs.length : !TAB_IC[cmTabSel]) cmTabSel = 'ch1';
-      $('#cm-tabs').innerHTML = chs.map((name, i) =>
-        `<button type="button" class="cm-chtab" data-tab="ch${i + 1}" title="${esc(name)}">`
-        + `<span class="cm-chnum">${i + 1}</span>${T().chapter} ${i + 1}<small class="cm-chname">${esc(name)}</small></button>`
-      ).join('') + `<span class="cm-chsep" aria-hidden="true"></span>` + secTabs();
-      renderCmSection();
-      return;
-    }
     if (isChTab(cmTabSel)) cmTabSel = 'info';
     $('#cm-tabs').innerHTML = secTabs();
     renderCmSection();   /* يفتح النافذة على القسم النشط */
