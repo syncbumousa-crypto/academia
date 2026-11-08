@@ -2042,5 +2042,478 @@
    "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|",
    "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
   ]
+ },
+ "math": {
+  "core": {
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 210": {
+    "name": "Discrete Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 202": {
+    "name": "Elements of Differential Equations",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 225": {
+    "name": "Introduction to Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 333": {
+    "name": "Methods of Applied Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 341": {
+    "name": "Real Analysis I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 323": {
+    "name": "Algebra I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 441": {
+    "name": "Real Analysis II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MATH 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 413": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MATH 445": {
+    "name": "Introduction to Complex Variables",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 414": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "MATH 453": {
+    "name": "Digital Topology",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 490": {
+    "name": "Seminar in Mathematics",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "MATH xxx | MATH Elective I",
+   "MATH xxx | MATH Elective II",
+   "MATH xxx | MATH Elective III",
+   "MATH xxx | MATH Elective IV",
+   "XE xxx | Engineering Elective",
+   "XXX xxx | Free Elective",
+   "XXX xxx | MATH 451 or STAT 301*",
+   "XXX xxx | Science Elective",
+   "XXX xxx | Technical Elective I",
+   "XXX xxx | Technical Elective II"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Science Elective|XXX xxx Science Elective|3|Total|29|Mathematics Core Requirements|Title|Courses|Credit Hours|Discrete Mathematics|MATH 210|3|Introduction to Linear Algebra|MATH 225|3|Algebra I|MATH 323|3|Methods of Applied Mathematics|MATH 333|3|Real Analysis I|MATH 341|3|Numerical Computing|MATH 371|3|Real Analysis II|MATH 441|3|Introduction to Complex Variables|MATH 445|3|Digital Topology|MATH 453|3|Seminar in Mathematics|MATH 490|1|Probability and Statistics for Engineers and Scientists|STAT 201|3|One Course from|{MATH 451, STAT 301}|3|Senior Project|MATH 413, 414|3|Total|37|Electives|Title|Courses|Credit Hours|Math Electives|Four MATH xxx Courses|12|Engineering Elective|One XE xxx Engineering Course (From approved list)|3|Technical Electives|Two XXX xxx Courses (From approved list)|6|Free elective|One XXX xxx Course|3|Total|24|Summer Training|Title|Courses|Credit Hours|Summer Training|MATH 399|2|Total|2|"
+  ]
+ },
+ "asfm": {
+  "core": {
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 201": {
+    "name": "Financial Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 214": {
+    "name": "Actuaries and Business Statistics",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 289": {
+    "name": "Actuarial Science Problem Lab I",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "AS 251": {
+    "name": "Maths of Financial Derivatives",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 301": {
+    "name": "Probability Theory and Mathematical Statistics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 320": {
+    "name": "Investments Management and Capital Markets",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 380": {
+    "name": "Actuarial Contingencies I",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "MATH 371": {
+    "name": "Numerical Computing",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "STAT 302": {
+    "name": "Statistical Inference",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 310": {
+    "name": "Regression Analysis",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   },
+   "AS 411": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "STAT 416": {
+    "name": "Stochastic Processes for Actuaries",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 389": {
+    "name": "Actuarial Science Problem Lab II",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "AS 484": {
+    "name": "Actuarial Risk Theory and Credibility",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 412": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "AS 481": {
+    "name": "Actuarial Contingencies II",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "FIN 440": {
+    "name": "Islamic Finance",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 460": {
+    "name": "Time Series",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "AS xxx | AS Elective I",
+   "AS xxx | AS Elective II",
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XXX xxx | Technical Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Total|14|Economics & Accounting|Title|Courses|Credit Hours|Accounting|ACCT 110, 210|6|Economics|ECON 101, 102|6|Total|12|Core Requirements|Title|Courses|Credit Hours|Maths of Financial Derivatives|AS 251|3|Actuarial Science Problem Lab|AS 289, 389|2|Actuarial Contingencies|AS 380, 481|7|Actuarial Risk Theory and Credibility|AS 484|4|Financial Management|FIN 250|3|Investments Management and Capital Markets|FIN 320|3|Islamic Finance|FIN 440|3|Numerical Computing|MATH 371|3|Actuaries and Business Statistics|STAT 214|4|Probability Theory and Mathematical Statistics|STAT 301|3|Statistical Inference|STAT 302|3|Regression Analysis|STAT 310|3|Stochastic Processes for Actuaries|STAT 416|3|Time Series|STAT 460|3|Financial Mathematics|AS 201|3|Senior Project|AS 411, 412|3|Total|53|Electives|Title|Courses|Credit Hours|Technical Elective|One Course from STAT xxx, MATH xxx, FIN 3/4xx, ICS xxx, or ISE xxx|3|AS Electives|Two AS xxx Courses from AS 450, 460, 476, 490, 491, STAT 436|6|Total|9|Internship|Title|Courses|Credit Hours|Internship|AS 398|6|Total|6|"
+  ]
  }
 }

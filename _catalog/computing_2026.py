@@ -5,7 +5,8 @@ Plans: the undergraduate bulletin's program pages
 internship and summer-training options where a program has two:
 
   cs 101,102 · swe 119 · coe 99,100 · ise 109,110 · amai 1164
-  dse 1157 · sde 1159 · aics 1160,1161     -> data/plans_ccm_bulletin.json
+  dse 1157 · sde 1159 · aics 1160,1161 · math 115 · asfm 85
+                                           -> data/plans_ccm_bulletin.json
 
 Every course in a plan is linked to its major. Elective slots name a prefix
 and (sometimes) a level only; each is filled with the courses of the
@@ -17,6 +18,8 @@ seminar:
   coe      COE 4xx      ise   ISE 4xx
   amai     MATH xxx     -> MATH 3xx/4xx
   dse      DATA xxx     -> DATA 3xx/4xx (offering + bulletin: new prefix)
+  math     MATH xxx -> MATH 3xx/4xx, plus "MATH 451 or STAT 301"
+  asfm     AS xxx   -> AS 3xx/4xx
   all      IAS xxx      -> IAS 3xx/4xx, and GS xxx -> any GS
 
 "XE xxx" (Technical Elective) and "XXX xxx" (Science/Free/Technical
@@ -37,17 +40,28 @@ SLOTS = {
     'cs': [('ICS', '34'), ('SWE', '34')], 'swe': [('ICS', '34'), ('SWE', '34')],
     'coe': [('COE', '4')], 'ise': [('ISE', '4')], 'amai': [('MATH', '34')],
     'dse': [('DATA', '34')], 'sde': [], 'aics': [],
+    'math': [('MATH', '34')], 'asfm': [('AS', '34')],
 }
+NAMED = {'math': ['MATH 451', 'STAT 301']}   # "XXX xxx: MATH 451 or STAT 301*"
 FROM_BULLETIN = {'DATA'}
 REGULAR = {'LEC', 'LAB', 'LLB'}
 NOT_ELECTIVE = re.compile(r'senior|internship|summer training|cooperative|co-op|thesis|seminar|independent|team design', re.I)
 
-DEPT_AR = {'AISC': 'ذكاء وأمن', 'CE': 'مدنية', 'CHEM': 'كيمياء', 'CIE': 'تحكم', 'COE': 'هندسة حاسب',
+DEPT_AR = {'AS': 'اكتواري', 'AISC': 'ذكاء وأمن', 'CE': 'مدنية', 'CHEM': 'كيمياء', 'CIE': 'تحكم', 'COE': 'هندسة حاسب',
            'DATA': 'بيانات', 'EE': 'كهربائية', 'ICS': 'حاسب', 'ISE': 'صناعية', 'MATH': 'رياضيات',
            'ME': 'ميكانيكية', 'MSE': 'مواد', 'PHYS': 'فيزياء', 'SDE': 'أشباه موصلات', 'STAT': 'احصاء',
            'SWE': 'برمجيات'}
 TRAIN = {'398': 'التدريب التعاوني', '399': 'التدريب الصيفي'}
 FULL_AR = {
+    'AS 201': 'الرياضيات المالية', 'AS 251': 'رياضيات المشتقات المالية', 'AS 289': 'معمل مسائل العلوم الاكتوارية ١',
+    'AS 380': 'الطوارئ الاكتوارية ١', 'AS 389': 'معمل مسائل العلوم الاكتوارية ٢', 'AS 411': 'مشروع التخرّج ١',
+    'AS 412': 'مشروع التخرّج ٢', 'AS 450': 'نمذجة المخاطر', 'AS 481': 'الطوارئ الاكتوارية ٢',
+    'AS 484': 'نظرية المخاطر الاكتوارية والمصداقية', 'AS 490': 'موضوعات في العلوم الاكتوارية والرياضيات المالية ١',
+    'AS 491': 'موضوعات في العلوم الاكتوارية والرياضيات المالية ٢',
+    'MATH 202': 'أساسيات المعادلات التفاضلية', 'MATH 225': 'مقدّمة في الجبر الخطي', 'MATH 451': 'الهندسة التفاضلية',
+    'MATH 490': 'سمنار في الرياضيات',
+    'STAT 301': 'نظرية الاحتمالات والإحصاء الرياضي', 'STAT 302': 'الاستدلال الإحصائي', 'STAT 310': 'تحليل الانحدار',
+    'STAT 416': 'العمليات العشوائية للاكتواريين',
     'AISC 411': 'مشروع التخرّج ١', 'AISC 412': 'مشروع التخرّج ٢',
     'CE 101': 'الرسم الهندسي',
     'CHEM 101': 'مبادئ العلوم الكيميائية ١',
@@ -127,6 +141,8 @@ for tag, plan in PLANS.items():
         if NOT_ELECTIVE.search((OFF.get(code) or BUL.get(code))['name']):
             continue
         links.setdefault(code, set()).add(tag)
+    for code in NAMED.get(tag, []):
+        links.setdefault(code, set()).add(tag)
 
 new, rows, missing = [], [], []
 for code in sorted(links):
@@ -146,7 +162,15 @@ if missing:
     sys.exit('missing name/hours: ' + ', '.join(missing))
 
 q = lambda s: "'" + s.replace("'", "''") + "'"
+# majors added with this script: after AI & Cybersecurity in the filter
+NEW_TAGS = [('math', 'الرياضيات', 'Mathematics'),
+            ('asfm', 'العلوم الاكتوارية والرياضيات المالية', 'Actuarial Science and Financial Mathematics')]
 sql = ['BEGIN;']
+sql.append("UPDATE tags SET ord = ord + %d WHERE ord > (SELECT ord FROM tags WHERE id = 'aics') AND NOT EXISTS (SELECT 1 FROM tags WHERE id = %s);"
+           % (len(NEW_TAGS), q(NEW_TAGS[0][0])))
+for i, (tid, ar, en) in enumerate(NEW_TAGS, 1):
+    sql.append("INSERT INTO tags (id, ar, en, ord) SELECT %s, %s, %s, ord + %d FROM tags WHERE id = 'aics' ON CONFLICT (id) DO NOTHING;"
+               % (q(tid), q(ar), q(en), i))
 sql += ['INSERT INTO courses (code, ar, "full", h, lab) VALUES (%s, %s, %s, %d, %d) ON CONFLICT (code) DO NOTHING;'
         % (q(c['code']), q(c['ar']), q(c['full']), c['h'], c['lab']) for c in new]
 sql += ['INSERT INTO course_tags (code, tag_id) VALUES (%s, %s) ON CONFLICT DO NOTHING;' % (q(a), q(b)) for a, b in rows]

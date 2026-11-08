@@ -1667,6 +1667,186 @@
 "lb": 0,
 "cr": 0
 },
+"AS 201": {
+"name": "Financial Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 250": {
+"name": "Quantitative Financial Models for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 251": {
+"name": "Maths of Financial Derivatives",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 288": {
+"name": "Actuarial Science Problem Lab I",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"AS 289": {
+"name": "Actuarial Science Problem Lab I",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"AS 322": {
+"name": "Numerical Methods for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AS 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"AS 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AS 380": {
+"name": "Actuarial Contingencies I",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 381": {
+"name": "Actuarial Contingencies I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 388": {
+"name": "Actuarial Science Prob Lab II",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"AS 389": {
+"name": "Actuarial Science Problem Lab II",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"AS 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"AS 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"AS 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"AS 450": {
+"name": "Risk Modeling",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 460": {
+"name": "Enterprise Risk Analysis",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 470": {
+"name": "Models for Risk Managing Financial Options and Derivatives",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 475": {
+"name": "Survival Models for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 476": {
+"name": "Survival Models for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 481": {
+"name": "Actuarial Contingencies II",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"AS 482": {
+"name": "Actuarial Contingencies II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 483": {
+"name": "Actuarial Risk Theory and Credibility",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 484": {
+"name": "Actuarial Risk Theory and Credibility",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"AS 490": {
+"name": "Topics in Actuarial Science and Financial Mathematics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 491": {
+"name": "Topics in Actuarial Science and Financial Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AS 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AS 498": {
+"name": "Topics in AS & Financial Math",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "OSC 210": {
 "name": "Introduction to Operations and Supply Chain",
 "lt": 3,
