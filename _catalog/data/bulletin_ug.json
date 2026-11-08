@@ -119,6 +119,1188 @@
 "lb": 0,
 "cr": 3
 },
+"STAT 201": {
+"name": "Probability and Statistics for Engineers and Scientists",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"STAT 211": {
+"name": "Statistics for Business I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 212": {
+"name": "Statistics for Business II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 213": {
+"name": "Statistical Methods for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 214": {
+"name": "Actuaries and Business Statistics",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"STAT 220": {
+"name": "Statistical Computing Software",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 301": {
+"name": "Probability Theory and Mathematical Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 302": {
+"name": "Statistical Inference",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 310": {
+"name": "Regression Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 319": {
+"name": "Probability and Statistics for Engineers and Scientists",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"STAT 320": {
+"name": "Statistical Quality Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 325": {
+"name": "Nonparametric Statistical Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 342": {
+"name": "Applied Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 355": {
+"name": "Demographic Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 361": {
+"name": "Operations Research I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 365": {
+"name": "Data Collection and Sampling Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 375": {
+"name": "Categorical Data Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"STAT 413": {
+"name": "Statistical Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 415": {
+"name": "Stochastic Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 416": {
+"name": "Stochastic Processes for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 430": {
+"name": "Experimental Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 435": {
+"name": "Linear Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 436": {
+"name": "Generalized Linear Models",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 440": {
+"name": "Multivariate Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 460": {
+"name": "Time Series",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 461": {
+"name": "Operations Research II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 470": {
+"name": "Senior Project in Statistics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"STAT 475": {
+"name": "Statistical Models for Lifetime Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 499": {
+"name": "Topics in Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 101": {
+"name": "Computer Programming",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 102": {
+"name": "Introduction to Computing I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 103": {
+"name": "Computer Programming in C",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 104": {
+"name": "Introduction to Programming in Python and C",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 108": {
+"name": "Object-Oriented Programming",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 201": {
+"name": "Introduction to Computing II",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 202": {
+"name": "Data Structures and Algorithms",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 233": {
+"name": "Computer Architecture & Assembly Language",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 253": {
+"name": "Discrete Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 254": {
+"name": "Discrete Structures II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 309": {
+"name": "Computing & Society",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ICS 321": {
+"name": "Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 324": {
+"name": "Database Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 343": {
+"name": "Fundamentals of Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 344": {
+"name": "Information Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ICS 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"ICS 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ICS 353": {
+"name": "Design and Analysis of Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 355": {
+"name": "Theory of Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 381": {
+"name": "Principles of Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ICS 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ICS 410": {
+"name": "Programming Languages",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 411": {
+"name": "Senior Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"ICS 412": {
+"name": "Compiler Construction Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 413": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ICS 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ICS 415": {
+"name": "Computer Graphics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 424": {
+"name": "Advanced Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 426": {
+"name": "Data Warehousing & Data Mining",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 431": {
+"name": "Operating Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 433": {
+"name": "Operating Systems",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"ICS 436": {
+"name": "Systems & Network Administration",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 437": {
+"name": "Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 439": {
+"name": "Cryptography in Quantum Era",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 440": {
+"name": "Cryptography and Blockchain Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 441": {
+"name": "Digital Forensics Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 442": {
+"name": "Penetration Testing and Ethical Hacking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 443": {
+"name": "Network Design & Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 444": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 445": {
+"name": "Network Management and Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 446": {
+"name": "Cluster Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 447": {
+"name": "Computer Network Technologies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 448": {
+"name": "Network and Security Administration",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 454": {
+"name": "Principles of Cryptography",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 467": {
+"name": "Security in Artificial Intelligence Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 471": {
+"name": "Deep Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 472": {
+"name": "Natural Language Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 473": {
+"name": "Bioinformatics Mining and Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 474": {
+"name": "Big Data Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 476": {
+"name": "Artificial Intelligence for Cybersecurity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 477": {
+"name": "AI-Driven Computational Forensics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 478": {
+"name": "Data-Driven Cybersecurity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 479": {
+"name": "Cyber-Physical System Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 480": {
+"name": "Reverse Engineering and Exploitation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 481": {
+"name": "Artificial Neural Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 482": {
+"name": "Natural Language Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 483": {
+"name": "Computer Vision",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 484": {
+"name": "Arabic Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 485": {
+"name": "Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 486": {
+"name": "Agent-Based Systems and Swarm Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 487": {
+"name": "Intelligent Decision Support Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 488": {
+"name": "Knowledge Based System and Soft Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 489": {
+"name": "Applications of Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 490": {
+"name": "Special Topics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 491": {
+"name": "Special Topics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ICS 497": {
+"name": "Directed Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 200": {
+"name": "Fundamentals of Computer Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 202": {
+"name": "Digital Logic Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 203": {
+"name": "Digital Logic Laboratory",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"COE 205": {
+"name": "Computer Organization and Assembly Language",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 233": {
+"name": "Digital Logic & Computer Organization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 241": {
+"name": "Data and Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 292": {
+"name": "Introduction to Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 300": {
+"name": "Principles of Computer Engineering Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"COE 301": {
+"name": "Computer Organization",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 302": {
+"name": "Design and Modeling of Digital Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 305": {
+"name": "Microcomputer System Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 306": {
+"name": "Introduction to Embedded Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 307": {
+"name": "Computer Hardware",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 308": {
+"name": "Computer Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 341": {
+"name": "Data & Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 342": {
+"name": "Data & Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 344": {
+"name": "Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 346": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"COE 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"COE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"COE 353": {
+"name": "Fundamentals of Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 360": {
+"name": "Principles of VLSI Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 384": {
+"name": "Fundamentals of Computer Engineering Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 385": {
+"name": "Personal Computers",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"COE 390": {
+"name": "Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"COE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"COE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"COE 400": {
+"name": "System Design Laboratory",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"COE 401": {
+"name": "Modeling and Simulation of Computer and Network Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 402": {
+"name": "Computer System Performance Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 403": {
+"name": "Computer Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 405": {
+"name": "Design and Modeling of Digital Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 406": {
+"name": "RISC Architectures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 407": {
+"name": "System-on-Chip Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 408": {
+"name": "Reconfigurable Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 409": {
+"name": "Special Topics in Computer Architecture and Digital Systems Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 410": {
+"name": "Design of Sequential Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"COE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"COE 413": {
+"name": "SoC Tapeout",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 420": {
+"name": "Parallel Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 421": {
+"name": "Fault Tolerant Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 422": {
+"name": "Real Time Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 423": {
+"name": "Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 424": {
+"name": "Introduction to Smart Cards & RFID Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 425": {
+"name": "Data Management Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 426": {
+"name": "Data Privacy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 427": {
+"name": "Distributed Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 429": {
+"name": "Special Topics in Parallel and Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 441": {
+"name": "Local Area Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 442": {
+"name": "Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 443": {
+"name": "High Speed Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 444": {
+"name": "Network Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 445": {
+"name": "Internet Information Services",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 446": {
+"name": "Mobile Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 447": {
+"name": "Fundamentals of Optical Networking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 449": {
+"name": "Special Topics in Computer Communications & Networking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 450": {
+"name": "Introduction to Smart Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 451": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 452": {
+"name": "Principles of Cloud-based Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 453": {
+"name": "Cloud and Edge Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 454": {
+"name": "Internet of Things",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 456": {
+"name": "Wireless Sensor Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 458": {
+"name": "Internet of Drones",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 460": {
+"name": "Advanced Digital Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 461": {
+"name": "Principles of VLSI Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 462": {
+"name": "Design Automation of VLSI Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 464": {
+"name": "Testing of Digital Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 465": {
+"name": "VLSI System Design Methodology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 466": {
+"name": "Quantum Architecture and Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 469": {
+"name": "Special Topics in VLSI and Design Automation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 482": {
+"name": "Pervasive and Ubiquitous Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 484": {
+"name": "Introduction to Robotics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 485": {
+"name": "Senior Design Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"COE 487": {
+"name": "Computer Vision Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 488": {
+"name": "Data Acquisition Interfacing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"COE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"COE 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 499": {
+"name": "Special Topics in Computer Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 201": {
+"name": "Probability for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 211": {
+"name": "Introduction to Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 301": {
+"name": "Data, Inference, and Decisions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 311": {
+"name": "Data Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 321": {
+"name": "Matrix Theory for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 322": {
+"name": "Mathematical Modeling for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 341": {
+"name": "Statistical Methods for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 361": {
+"name": "Fundamentals of Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 391": {
+"name": "Human Contexts and Ethics of Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"DATA 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"DATA 412": {
+"name": "Senior Design Project Il",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"DATA 421": {
+"name": "Optimization for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 431": {
+"name": "Blockchain & Cryptocurrencies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 441": {
+"name": "Large Language Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 442": {
+"name": "Generative AI and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 471": {
+"name": "Big Data Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "ISE 100": {
 "name": "Introduction to Technology",
 "lt": 2,
@@ -1547,6 +2729,264 @@
 "lb": 0,
 "cr": 3
 },
+"SWE 205": {
+"name": "Introduction to Software Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 206": {
+"name": "Introduction to Software Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 214": {
+"name": "Introduction to Software Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"SWE 215": {
+"name": "Software Requirements Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 216": {
+"name": "Software Requirements Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 302": {
+"name": "Game Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 311": {
+"name": "Principes of Software Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"SWE 312": {
+"name": "User-Interface Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 316": {
+"name": "Software Design and Construction",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 321": {
+"name": "Formal Methods and Models in Software Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 322": {
+"name": "Principles of Concurrent Software Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 326": {
+"name": "Software Testing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 344": {
+"name": "Internet Protocols and Client-Server Programming",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 363": {
+"name": "Web Engineering & Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 387": {
+"name": "Software Project Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"SWE 402": {
+"name": "Game Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 411": {
+"name": "Software Engineering Project I",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"SWE 412": {
+"name": "Software Engineering Project II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"SWE 413": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"SWE 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"SWE 415": {
+"name": "Software Testing and Quality Assurance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 416": {
+"name": "Software Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 417": {
+"name": "Software Engineering Project I",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"SWE 418": {
+"name": "Software Engineering Project II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"SWE 421": {
+"name": "Principles of Information Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 422": {
+"name": "Usability Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 423": {
+"name": "Multimedia Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 436": {
+"name": "Object-Oriented Design Patterns",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 439": {
+"name": "Software Quality Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 440": {
+"name": "Information Security Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 444": {
+"name": "Internet and Web Applications Deveopment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 445": {
+"name": "Secure Software Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 446": {
+"name": "Selected Topics on Emerging Internet Technologies",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 455": {
+"name": "Cloud Applications Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 463": {
+"name": "Mobile Application Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 469": {
+"name": "Software Metrics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 487": {
+"name": "Software Processes and Process Improvements",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 490": {
+"name": "Special Topics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 491": {
+"name": "Special Topics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"SWE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"SWE 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "ACF 398": {
 "name": "Internship",
 "lt": 0,
@@ -1569,6 +3009,636 @@
 "name": "Senior Project II",
 "lt": 0,
 "lb": 6,
+"cr": 3
+},
+"MATH 101": {
+"name": "Calculus I",
+"lt": 4,
+"lb": 0,
+"cr": 4
+},
+"MATH 102": {
+"name": "Calculus II",
+"lt": 4,
+"lb": 0,
+"cr": 4
+},
+"MATH 105": {
+"name": "Finite Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 106": {
+"name": "Calculus for Business",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 131": {
+"name": "Finite Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 132": {
+"name": "Applied Calculus",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 201": {
+"name": "Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 202": {
+"name": "Elements of Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 208": {
+"name": "Differential Equations and Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 210": {
+"name": "Discrete Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 225": {
+"name": "Introduction to Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 232": {
+"name": "Introduction to Sets and Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 260": {
+"name": "Introduction to Differential Equations & Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 280": {
+"name": "Introduction to Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 301": {
+"name": "Methods of Applied Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 302": {
+"name": "Engineering Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 305": {
+"name": "Development of Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 310": {
+"name": "Logic and Set Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 311": {
+"name": "Advanced Calculus I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 315": {
+"name": "Development of Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 320": {
+"name": "Mathematics for Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 321": {
+"name": "Introduction to Numerical Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 322": {
+"name": "Quantitative Methods for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 323": {
+"name": "Algebra I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 325": {
+"name": "Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 330": {
+"name": "Euclidean and Non-Euclidean Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 333": {
+"name": "Methods of Applied Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 335": {
+"name": "Mathematical Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 336": {
+"name": "Mathematical Models in Biology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 341": {
+"name": "Real Analysis I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 345": {
+"name": "Modern Algebra I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 353": {
+"name": "Euclidean and Non-Euclidean Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 355": {
+"name": "Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 371": {
+"name": "Numerical Computing",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"MATH 372": {
+"name": "Quantitative Methods for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 373": {
+"name": "Numerical Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"MATH 401": {
+"name": "Methods of Applied Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 405": {
+"name": "Learning from Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 407": {
+"name": "Applied Game Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 411": {
+"name": "Advanced Calculus II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 412": {
+"name": "Advanced Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 413": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"MATH 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"MATH 416": {
+"name": "Stochastic Processes in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 421": {
+"name": "Introduction to Topology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 423": {
+"name": "Algebra II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 424": {
+"name": "Applied Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 425": {
+"name": "Graph theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 427": {
+"name": "Number Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 428": {
+"name": "Introduction to Cryptography",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 429": {
+"name": "Coding Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 430": {
+"name": "Introduction to Complex Variables",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 431": {
+"name": "Introduction to Measure Theory and Functional Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 432": {
+"name": "Applied Matrix Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 433": {
+"name": "Methods of Applied Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 434": {
+"name": "Calculus of Variations and Optimal Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 435": {
+"name": "Ordinary Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 436": {
+"name": "Discrete Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 437": {
+"name": "Partial Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 440": {
+"name": "Differential Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 441": {
+"name": "Real Analysis II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 442": {
+"name": "Calculus of Variations and Optimal Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 443": {
+"name": "Advanced Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 445": {
+"name": "Introduction to Complex Variables",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 450": {
+"name": "Modern Algebra II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 451": {
+"name": "Differentia Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 452": {
+"name": "Applied Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 453": {
+"name": "Digital Topology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 455": {
+"name": "Number Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 460": {
+"name": "Applied Matrix Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 463": {
+"name": "Applied Combinatorics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 465": {
+"name": "Ordinary Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 467": {
+"name": "Graph Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 470": {
+"name": "Partial Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 471": {
+"name": "Numerical Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 472": {
+"name": "Numerical Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 474": {
+"name": "Linear & Nonlinear Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 475": {
+"name": "Engineering Design Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 476": {
+"name": "Computational Methods in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 477": {
+"name": "Foundation of Scientific Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 480": {
+"name": "Linear & Nonlinear Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 485": {
+"name": "Computational Inverse Problem",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 490": {
+"name": "Seminar in Mathematics",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"MATH 493": {
+"name": "Special Topic I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MATH 495": {
+"name": "Special Topic II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MATH 498": {
+"name": "Topics in Mathematics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 499": {
+"name": "Topics in Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"XE 100": {
+"name": "UG Exchange Student",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 112": {
+"name": "MAKE-UP HRS ELECTIVE",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"XE 198": {
+"name": "Dummy Course",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 301": {
+"name": "MATH ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 310": {
+"name": "TECHNICAL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 312": {
+"name": "TECHNICAL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 314": {
+"name": "TECHNICAL ELECTIVE III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 316": {
+"name": "TECHNICAL ELECTIVE V",
+"lt": 0,
+"lb": 0,
+"cr": 4
+},
+"XE 321": {
+"name": "Techincal Elective I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 323": {
+"name": "Technical Elective III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 325": {
+"name": "Technical Elective V",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 327": {
+"name": "FREE ELECTIVE III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 399": {
+"name": "SUMMER WORK IN INDUSTRY",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 436": {
+"name": "GEOL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 450": {
+"name": "APPLIED EE ELECTIVE I",
+"lt": 0,
+"lb": 0,
 "cr": 3
 },
 "BAI 220": {
