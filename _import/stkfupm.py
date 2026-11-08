@@ -67,10 +67,23 @@ PICK = {
     (102863, 42, '', (r'^101 عندك', 1)),                      # equal (2011): سطرُ 101 من مقارنته
     (86478,  1,  '', None),                                   # Phenomenon (2010): انطباعُه عن الميدترم
   ],
+  # ‏‎FIN 250‎ «الإدارة المالية» — اسمُها القديم ‎FIN 301‎ («fin 301 >> fin 250»)، فتُجمع معها
+  'FIN 250': [
+    (121018, 3,  '', None),                                   # Practice (2016): مواضيعُ المقرّر، والكتاب «جدا ممتاز»
+    (121018, 4,  '', None),                                   # user9840 (2018): انطباعُه وشباترُه
+    (154981, 2,  '', None),                                   # FIN_Analyst (2014): فكرةٌ عامّةٌ عن الكورس
+    (154981, 4,  '', None),                                   # almax (2014): أخذها مع ACCT 210 بلا مشاكل
+    (129942, 2,  '', None),                                   # 9ami (2012): متطلّباتُها من البوّابة
+    (167746, 3,  '', (r'^3- نزل الـfin 250', 1)),             # MHM14 (2014): سطرُ 250 من نصائحه
+    (112603, 44, '', None),                                   # Anoosh (2011): ‎FIN 301/302‎ تُدمجان في ‎FIN 250‎
+    (122149, 184, '', (r'^fin 301 >> fin 250', 1)),           # user4307 (2012): الاسمُ الجديد
+    (50803,  7,  '', (r'^هذي ماده في غايه الاهميه', 1)),      # Fin.1000 (2006): سطرُ المادّة (‎FIN 301‎) من ردٍّ عن أربع مواد
+  ],
 }
 
 # ===== المصادر =====
-# code ⇐ [(sec, topic id, post_number, files)] — ‏‎srcU‎ مصادرُ الفهم، و‎srcP‎ مصادرُ الممارسة.
+# code ⇐ [(sec, topic id, post_number, files[, keep])] — ‏‎srcU‎ مصادرُ الفهم، و‎srcP‎ مصادرُ الممارسة.
+# ‏‎keep‎ اختياريّ كما في ‎PICK‎: ‎(نمطُ أوّلِ سطر, عددُ الأسطر)‎ — لمرفقٍ في ردٍّ موضوعُه غيرُه.
 # ‏‎files‎: ‎[(اسمُ الملف, مسارُه في _import/files, سطرُ المرفق في النصّ)]‎ — يحلّ الملفُّ
 # محلَّ سطرِ مرفقه في ديسكورس، فيبقى حيث وضعه كاتبُه.
 PICK_SRC = {
@@ -124,12 +137,25 @@ PICK_SRC = {
                                       # user7909 (2011): نبذةُ الميدترم وملفُّه
     ('srcP', 141082, 2,  [('101-RQ2txt.pdf', 'stkfupm-141082-2-101-RQ2txt.pdf', r'^101-RQ2txt')]),       # 7_M_o_o_D (2013): نصوصُ Reading Quiz 2
   ],
+  'FIN 250': [
+    ('srcU', 107073, 17, []),    # abo.saud (2012): الآلةُ الحاسبةُ الماليّة ولمَ تغنيك
+    ('srcU', 180463, 3,  [('Fin 250 Syllabus 182 Section 01 - Hesham.docx',
+                           'fin250/Fin 250 Syllabus 182 Section 01 - Hesham.docx', None)],
+     (r'^FIN250-182', 2)),       # _182 (2019): «مرفق مع الرد منهج المادة» — سطراه وملفُّه، لا تقييمُه للدكتور
+    ('srcP', 128803, 8,  []),    # aziz33 (2014): التيست بانك مراجعةٌ لا بديلٌ عن الكتاب
+  ],
 }
 
 # ===== توزيعُ الدرجات و«المواضيع» =====
 # بندان بياناتُهما أرقامٌ وقوائمُ لا نصّ، فتُنقل كما ذكرها كاتبُها بألفاظه — لا تُستنتج.
 # ‏‎grade‎: ‎[(اسمُ البند, النسبة)]‎ · ‏‎lessons‎: ‎[اسمُ الموضوع]‎ أو ‎(نمطُ أوّلِ سطر, عددُ الأسطر)‎ من نصّه
 PICK_DATA = {
+  'FIN 250': [
+    ('grade',   180463, 3,   [('First Major Exam', 20), ('Second Major Exam', 25), ('Quizzes (6)', 15),
+                              ('Homework (MyFinanceLab)', 5), ('Final Examination (Comprehensive)', 35)]),  # سيلابس 182 (ملفُّه في مصادر الفهم)
+    ('grade',   98270,  6,   [('10 كويزات وهومورك', 10), ('ميدتيرم', 45), ('فاينل', 45)]),               # HARD-WORKER (161)
+    ('lessons', 121018, 4,   (r'^The Role of Managerial Finance', 12)),                                  # user9840 (2018): الشباتر
+  ],
   'IAS 111': [
     ('grade',   113042, 1,   [('الامتحان الأول', 20), ('الامتحان الثاني', 25), ('الامتحان النهائي', 35),
                               ('الأعمال الفصلية', 20)]),                     # سيلابس 121 (ملفُّه في مصادر الفهم)
@@ -197,10 +223,38 @@ DOCTORS = {
   'stk-dr-en96633': 'Mr. Lance King',
   'stk-dr-en118628': 'Mr. Gordon Blazenko',
   'stk-dr-en118979': 'Mr. Michael Stowe',
+  # ‏‎FIN 250‎ (و‎FIN 301‎ قبلها) — بأسماء صفحاتهم في الموقع القديم
+  'stk-dr-alnaeem':   'Dr. Ibrahim Al-Naeem',
+  'stk-dr-khalifa':   'Dr. Ahmed Khalifa',
+  'stk-dr-musa':      'Dr. Mohammed Musa',
+  'stk-dr-jyousif':   'Mr. Jassim Yousif',
+  'stk-dr-qidong':    'Dr. Qi Dong',
+  'stk-dr-alelg':     'Dr. Ali Habib Al-Elg',
+  'stk-dr-albinali':  'Dr. Khaled M. Albinali',
+  'stk-dr-alotaibi':  'Dr. Khaled Al-Otaibi',
+  'stk-dr-merdad':    'Dr. Hesham Merdad',
+  # ومن كان في قائمة المادّة قبل النقل يُلحَق بصفّه هو (معرّفُه واسمُه هناك) لا يُكرَّر
+  'p8mupxfw8a79m':    'Mansour Alsahlawi',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
 PICK_DOC = {
+  'FIN 250': [
+    # ‏‎FIN 301‎ (2011–2012) — المادّةُ نفسُها باسمها القديم
+    (107073, 5, 'stk-dr-alnaeem'), (107073, 7, 'stk-dr-alnaeem'), (107073, 11, 'stk-dr-alnaeem'),
+    (107073, 18, 'stk-dr-alnaeem'),                         # يقارنه بالموسى، في صفحته
+    (99893, 9, 'stk-dr-khalifa'),
+    # ‏‎FIN 250‎
+    (142602, 2, 'stk-dr-khalifa'), (142602, 5, 'stk-dr-khalifa'),   # صيف 2012/2013: «خذها مع احمد خليفة»
+    (139690, 2, 'stk-dr-musa'),
+    (148047, 7, 'stk-dr-jyousif'),
+    (172767, 2, 'stk-dr-qidong'),                           # ويذكر العلق في سطرٍ بعده
+    (98255, 9, 'stk-dr-alelg'), (98255, 10, 'stk-dr-alelg'), (98255, 11, 'stk-dr-alelg'),
+    (98270, 6, 'stk-dr-albinali'), (98270, 9, 'stk-dr-albinali'),
+    (178388, 2, 'stk-dr-alotaibi'), (178388, 5, 'stk-dr-alotaibi'), (178388, 6, 'stk-dr-alotaibi'),
+    (180463, 2, 'stk-dr-merdad'), (180463, 3, 'stk-dr-merdad'),
+    (182901, 5, 'p8mupxfw8a79m'),                          # منصور السهلاوي — صفُّه الموجود في المادّة
+  ],
   'ACCT 210': [
     (98438, 12, 'stk-dr-mirghani'), (98438, 22, 'stk-dr-mirghani'), (98438, 23, 'stk-dr-mirghani'),
     (98438, 24, 'stk-dr-mirghani'), (98438, 25, 'stk-dr-mirghani'), (98438, 26, 'stk-dr-mirghani'),
@@ -368,11 +422,16 @@ def main(src):
             posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': 'info',
                           'ts': imp['ts'], 'st': 'pub', 'data': data})
         # ---- «المصادر»: نصُّ الكاتب أسطرًا، وملفُّه في موضع مرفقه
-        for sec, tid, num, files in PICK_SRC.get(code, []):
+        for ent in PICK_SRC.get(code, []):
+            sec, tid, num, files = ent[:4]
+            keep = ent[4] if len(ent) > 4 else None
             t, p = load_post(src, cache, tid, num)
             uid = author(users, p)
             imp = imp_of(t, p)
             lines = text_of(p['cooked']).split('\n')
+            if keep:
+                i = next(k for k, l in enumerate(lines) if re.search(keep[0], l, re.I))
+                lines = lines[i:i + keep[1]]
             html, fobj = [], {}
             for line in lines:
                 # ‏وكلُّ ملفٍّ يحلّ محلَّ سطرٍ واحد: سطرُ نصٍّ يشبه اسمَه لا يأخذه مرّةً ثانية
