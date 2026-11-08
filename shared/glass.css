@@ -297,6 +297,10 @@ html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
 /* ورأسُ المحتوى (البحث والتصنيفات، أو عنوانُ الصفحة) على حافّة الشريط العليا نفسِها:
    الشريطُ يبدأ بعد ‎--glass-gap‎ من أعلى الشاشة، فاللوحةُ تبدأ بعدها كذلك، والمقبضُ معها */
 .panel { padding-top: var(--glass-gap); }
+/* ولوحةُ السوق تملأ العرضَ حتّى المقبض: كانت تقف عند ١١٨٠ في الوسط، فيبعد البحثُ عن
+   المقبض بقدر ما زادت الشاشة (٩٧ على ١٦٠٠، و٢٥٧ على ١٩٢٠) والممرُّ على الجهة الأخرى ١٠.
+   فيبقى بينه وبين البحث ما بينه وبين الشريط */
+#panel-market { max-width: none; }
 /* والمحتوى يُفسح للوح وفجوته */
 body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
 html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
