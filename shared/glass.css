@@ -532,7 +532,10 @@ html:root .market-tools .fact-scroll .fact-bar i { height: 4px; top: 0; border-r
 /* وإذا ظهر الشريطُ ارتفعت الرقاقاتُ له — ولا يتغيّر عرضُها. كانت تصغر حين يظهر،
    فتتّسع لها الكبسولةُ فيختفي، فتكبر فتضيق فيظهر… فتنبض بلا توقّف عند الحدّ.
    فالشريطُ لا يمسّ إلّا الموضعَ العموديّ، وما يقيسه (العرض) لا يتبدّل به */
-html:root .market-tools .fact-scroll.is-over .factive { align-self: flex-start; padding-top: 4px; }
+/* والوعاءُ يقصّ ما يخرج عنه، فكان ظلُّ الرقاقات يُقصّ من تحتها: ارتفاعُه كان
+   ارتفاعَها بالضبط. فله فسحةٌ فوقها وتحتها بقدر الظلّ */
+html:root .market-tools .filterwrap .factive { padding-block: 4px 5px; }
+html:root .market-tools .fact-scroll.is-over .factive { align-self: flex-start; padding-block: 2px 5px; }
 html:root .market-tools .fact {
   flex: none; height: 28px; padding: 0 11px; font-size: 12px; border-radius: 999px; white-space: nowrap;
 }
