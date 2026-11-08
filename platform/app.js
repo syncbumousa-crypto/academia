@@ -20430,29 +20430,83 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return b && b.classList.contains('is-cxmax') ? (b.querySelector('#cm-cards') || b) : b;
   }
   /* التبديل: أصنافٌ تُبدَّل في مكانها بلا إعادة رسم — فلا يضيع مؤشّرُ الكتابة ولا التمرير */
-  /* ===== التكبيرُ والتصغيرُ بنعومة (طلبُ صاحب الموقع) =====
-     الدرجاتُ الثلاث (ضيّقة ⇄ واسعة ⇄ الشاشةُ كلُّها) كانت تقفز. فيُلفّ التبديلُ بـ‎View Transitions‎:
-     تُلتقط المساهمةُ قبلُ وبعدُ باسمٍ واحد (‎cxcard‎) فتنتقل من مستطيلها القديم إلى الجديد حجمًا وموضعًا،
-     وما حولها (بقيّةُ المساهمات · عتمةُ الشاشة الكاملة) يتلاشى ويظهر. والمتصفّحُ الذي لا يعرفها يقفز كما كان */
+  /* ===== ROADMAP-MORPH: المربّعُ نفسُه يكبر ويصغر =====
+     كان ‎View Transitions‎ يلتقط صورتين للمربّع ويحرّكهما فوق الصفحة — فبدا «نسخةً من جنب» (شكوى صاحب الموقع).
+     فصار العنصرُ الحقيقيُّ هو ما يتحرّك (‎FLIP‎ بالمقاس لا بالصورة):
+     يُقاس مستطيلُه قبلُ (‎R0‎)، ويُبدَّل الحالُ كما كان، ويُقاس بعدُ (‎R1‎)، ثمّ يُثبَّت المربّعُ نفسُه على ‎R0‎ ويُحرَّك
+     موضعُه وعرضُه وقامتُه وزواياه إلى ‎R1‎ — والمحتوى يُرتَّب حيًّا في كلّ إطار، فلا مطَّ ولا صورتين.
+     · في الدرجة الوسطى (ضيّقة ⇄ واسعة) يتحرّك المربّعُ داخل الصندوق، ومكانُه في القائمة محجوزٌ بفراغٍ بقامته فلا تقفز.
+     · وفي الشاشة الكاملة يتحرّك الصندوقُ (‎#cm-body‎) نفسُه، والعتمةُ خلفه تظهر وتغيب معه.
+     · ‏‎position: fixed‎ قد يُحسب من سلفٍ محوَّل لا من النافذة — فيُقاس الفرقُ بعد التثبيت ويُطرح */
+  const CX_MS = 420, CX_EASE = 'cubic-bezier(.2, .8, .2, 1)';
+  let cxMorphing = null;   /* الحركةُ الجارية ‎{ a, el, end }‎: نقرةٌ في منتصفها تبدأ التاليةَ من حيث المربّعُ الآن لا من آخر الأولى */
   const cxCardEl = key => key === 'edit' ? document.querySelector('#cm-body .pk--edit[data-sub="cards"]')
     : document.querySelector(`#cm-body .post[data-ck="${CSS.escape(key)}"]`);
-  function cxSmooth(from, fn) {
-    if (!document.startViewTransition || bkReduce()) { fn(); return; }
-    const card = from && from.closest && from.closest('#cm-body .post') || document.querySelector('#cm-body .pk--max');
-    const key = card ? (card.classList.contains('pk--edit') ? 'edit' : card.dataset.ck) : null;
-    if (!key) { fn(); return; }
-    card.style.viewTransitionName = 'cxcard';
-    document.documentElement.classList.add('cx-vt');
-    const vt = document.startViewTransition(() => {
-      card.style.viewTransitionName = '';
-      fn();
-      const nc = cxCardEl(key);
-      if (nc) { nc.style.viewTransitionName = 'cxcard'; nc.classList.remove('pk--maxfx'); }
-    });
-    vt.finished.finally(() => {
-      document.documentElement.classList.remove('cx-vt');
-      const nc = cxCardEl(key); if (nc) nc.style.viewTransitionName = '';
-    });
+  const cxRect = el => { const r = el.getBoundingClientRect(); return { top: r.top, left: r.left, width: r.width, height: r.height }; };
+  /* يثبّت العنصرَ على مستطيلٍ بالنافذة ويُرجع فرقَ سلفه المحوَّل (إن وُجد) */
+  function cxPin(el, r) {
+    Object.assign(el.style, { position: 'fixed', top: r.top + 'px', left: r.left + 'px', width: r.width + 'px', height: r.height + 'px',
+      margin: '0', boxSizing: 'border-box', zIndex: el.id === 'cm-body' ? '4000' : '6', right: 'auto', bottom: 'auto' });
+    const a = el.getBoundingClientRect();
+    return { dx: a.left - r.left, dy: a.top - r.top };
+  }
+  const cxUnpin = el => ['position', 'top', 'left', 'width', 'height', 'margin', 'boxSizing', 'zIndex', 'right', 'bottom', 'borderRadius', 'boxShadow']
+    .forEach(k => { el.style[k] = ''; });
+  /* فراغٌ بقامة العنصر في مكانه، فلا يقفز ما حوله وهو مثبَّتٌ فوقه */
+  function cxHold(el, r) {
+    const cs = getComputedStyle(el), ph = document.createElement('div');
+    ph.className = 'cx-morph-ph';
+    Object.assign(ph.style, { height: r.height + 'px', width: el.id === 'cm-body' ? r.width + 'px' : '', flex: 'none',
+      marginTop: cs.marginTop, marginBottom: cs.marginBottom, pointerEvents: 'none' });
+    el.before(ph);
+    return ph;
+  }
+  function cxMorph(from, fn) {
+    const body = document.getElementById('cm-body');
+    /* حركةٌ جارية: يُؤخذ موضعُ ما يتحرّك الآن، ثمّ تُوقَف ويُنظَّف بعدها — فتبدأ التاليةُ منه بلا قفزة */
+    let now = null;
+    if (cxMorphing) { const m = cxMorphing; now = { el: m.el, r: cxRect(m.el) }; cxMorphing = null; m.a.cancel(); m.end(); }
+    if (!body || bkReduce() || !Element.prototype.animate) { fn(); return; }
+    const card0 = (from && from.closest && from.closest('#cm-body .post')) || body.querySelector('.pk--max');
+    const key = card0 ? (card0.classList.contains('pk--edit') ? 'edit' : card0.dataset.ck) : null;
+    if (!card0 || !key) { fn(); return; }
+    const full0 = body.classList.contains('is-cxfull');
+    const b0 = now && now.el === body ? now.r : cxRect(body), r0 = now && now.el === card0 ? now.r : cxRect(card0);
+    const rad0 = getComputedStyle(full0 ? body : card0).borderRadius;
+    fn();
+    const full1 = body.classList.contains('is-cxfull');
+    /* ===== الشاشةُ الكاملة: الصندوقُ نفسُه يتحرّك ===== */
+    if (full0 !== full1) {
+      const b1 = cxRect(body);
+      const ph = full1 ? null : cxHold(body, b1);   /* الخارجُ منها يعود إلى مكانه في اللوح: يُحجز له */
+      const off = cxPin(body, b1);
+      const dark = '0 0 0 100vmax rgba(10, 18, 30, .45), 0 24px 60px rgba(0, 0, 0, .35)', clear = '0 0 0 100vmax rgba(10, 18, 30, 0), 0 24px 60px rgba(0, 0, 0, 0)';
+      const fr = (r, shd) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', boxShadow: shd });
+      const a = body.animate([fr(b0, full1 ? clear : dark), fr(b1, full1 ? dark : clear)], { duration: CX_MS, easing: CX_EASE });
+      let ended = false;
+      const end = () => { if (ended) return; ended = true; cxUnpin(body); if (ph) ph.remove(); cxHdMeasure(); cxNameFit(); cxRailFit(); };
+      cxMorphing = { a, el: body, end };
+      a.finished.then(() => { if (cxMorphing && cxMorphing.a === a) cxMorphing = null; end(); }, () => {});
+      return;
+    }
+    /* ===== الدرجةُ الوسطى: المربّعُ يتحرّك داخل الصندوق ===== */
+    const card = cxCardEl(key);
+    if (!card) return;
+    card.classList.remove('pk--maxfx');
+    const wide = body.classList.contains('is-cxmax');
+    body.scrollTop = wide ? 0 : cxMaxY;   /* التمريرُ يُردّ قبل القياس لا بعده، فلا يقفز ‎R1‎ */
+    const r1 = cxRect(card), rad1 = getComputedStyle(card).borderRadius;
+    if (Math.abs(r1.width - r0.width) < 1 && Math.abs(r1.height - r0.height) < 1 && Math.abs(r1.top - r0.top) < 1) return;
+    const ph = wide ? null : cxHold(card, r1);
+    const off = cxPin(card, r1);
+    const fr = (r, rad) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: rad });
+    const a = card.animate([fr(r0, rad0), fr(r1, rad1)], { duration: CX_MS, easing: CX_EASE });
+    /* وما حول المربّع في القائمة يظهر وهو يصغر إلى مكانه (ويختفي فورًا وهو يكبر: يغطّيه الصندوق) */
+    if (!wide) [...body.children].forEach(x => { if (x !== card && x !== ph) x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: CX_MS, easing: 'ease-out' }); });
+    let ended = false;
+    const end = () => { if (ended) return; ended = true; cxUnpin(card); if (ph) ph.remove(); if (!wide) body.scrollTop = cxMaxY; cxHdMeasure(); cxNameFit(); cxRailFit(); };
+    cxMorphing = { a, el: card, end };
+    a.finished.then(() => { if (cxMorphing && cxMorphing.a === a) cxMorphing = null; end(); }, () => {});
   }
   function cxMaxSet(on) {
     const body = document.getElementById('cm-body');
@@ -22130,19 +22184,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pb) {   /* المنشورة: ضيّقةً يُوسّعها، وواسعةً يملأ بها الشاشة */
       e.preventDefault(); e.stopPropagation();
       const id = pb.dataset.cxmaxpub;
-      cxSmooth(pb, () => { if (cxMaxPub === id) cxFullSet(true); else cxPubMaxSet(id); });
+      cxMorph(pb, () => { if (cxMaxPub === id) cxFullSet(true); else cxPubMaxSet(id); });
       return;
     }
     const sh = e.target.closest('#cm-body [data-cxshrink]');
     if (sh) {   /* التضييقُ درجةً: الشاشةُ الكاملة ← الواسعة ← الضيّقة */
       e.preventDefault(); e.stopPropagation();
-      cxSmooth(sh, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
+      cxMorph(sh, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
       return;
     }
     const b = e.target.closest('#cm-body [data-cxmax]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    cxSmooth(b, () => { if (!cxMax) cxMaxSet(true); else cxFullSet(true); });
+    cxMorph(b, () => { if (!cxMax) cxMaxSet(true); else cxFullSet(true); });
   }, true);
   /* و‎Esc‎ يُصغّر — ما لم تكن نافذةٌ أخرى مفتوحةً فوقه (محرّرُ بطاقةٍ أو غيرُه) */
   document.addEventListener('keydown', e => {
@@ -22169,7 +22223,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
     if (cxHdUp) { cxHdSet(false); return; }
     if (cxFtDn) { cxFtSet(false); return; }
-    cxSmooth(null, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
+    cxMorph(null, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
      و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
