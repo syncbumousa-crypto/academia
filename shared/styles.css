@@ -17315,3 +17315,15 @@ html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
 .pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after,
 .pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { height: var(--pkext, 33px); }
 .pk--max.pk-act--mid .post-ytmain > .pk-split::after { top: calc(100% + var(--pkmt, 8px)); height: var(--pkext, 33px); }
+
+/* ===== الكتلةُ شكلٌ واحد (ROADMAP-PANEFX · المرحلة ٠) =====
+   طبقةُ ‎.pk-band‎ (مسارٌ واحد: شريطُ الذيل ولسانُ المنطقة النشِطة) خلف المحتوى وأمام أرضيّة المربّع — فتُرفع القطعُ القديمة:
+   خلفيّةُ المنطقة وظلُّها الممتدّ، وامتدادُها (‎::after‎ على المنطقة والقسمة)، وخلفيّةُ شريط الذيل */
+.pk-band { position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; overflow: visible; }
+.pk-band path { fill: var(--pk-band); }
+.pk--bandfx.pk-act--book .post-ytmain > .pk-split > .pk-src,
+.pk--bandfx.pk-act--mid .post-ytmain > .pk-split > .kt-view,
+.pk--bandfx.pk-act--bank .post-ytmain > .pk-split > .pk-bank { background: transparent; box-shadow: none; }
+.pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank)::after,
+.pk--bandfx .post-ytmain > .pk-split::after { content: none; display: none; }
+.pk--bandfx .pk-ftline::before { background: transparent; }

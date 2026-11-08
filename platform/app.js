@@ -20938,19 +20938,66 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      في محتوًى أو حجمٍ أو تقريبٍ بقي فراغٌ بلون المربّع بين الكتلة والذيل. فيُقاس: من قاع المنطقة النشِطة إلى أعلى شريط الذيل
      (منتصفُ مسكته)، ويُعاد القياسُ كلّما تغيّر حجمُ القسمة أو المربّع */
   const PK_PANE = { book: '.pk-src', mid: '.kt-view', bank: '.pk-bank' };
+  /* يُرسم في نداء المراقب نفسِه (قبل الطلاء، في الإطار ذاته) — لا في الإطار التالي فتتأخّر الكتلةُ عن مكانها إطارًا */
   const pkBandRO = typeof ResizeObserver === 'function'
-    ? new ResizeObserver(() => requestAnimationFrame(() => { const c = document.querySelector('#cm-body .pk--max'); if (c) pkBandFit(c); })) : null;
+    ? new ResizeObserver(() => { const c = document.querySelector('#cm-body .pk--max'); if (c) pkBandFit(c); }) : null;
+  /* ===== الكتلةُ شكلٌ واحد (ROADMAP-PANEFX · المرحلة ٠) =====
+     شريطُ الذيل ولسانُ المنطقة النشِطة **مسارٌ واحد** في طبقةٍ واحدة (‎.pk-band‎) خلف المحتوى — لا قطعٌ تتبع صناديقَ مختلفة
+     (ظلٌّ ممتدّ وعناصرُ وهميّة)، فلا حدودَ بينها يظهر منها خطٌّ في أيّ تقريب، ويُحرَّك اللسانُ وحدَه في الدخول والخروج.
+     اللسان: المنطقةُ بحاشيةٍ ‎8px‎ وزاويتين علويّتين ‎14px‎، ممدودًا إلى أعلى شريط الذيل (منتصفُ مسكته)، وعند الالتقاء زاويتان
+     مقعّرتان ‎14px‎ — إلّا في الجهة التي تلامس فيها المنطقةُ طرفَ القسمة (الكتابُ أو البنكُ أو الوسطُ وحدَه في جهته) */
+  const PK_BAND_R = 14, PK_BAND_C = 14, PK_BAND_PAD = 8;
+  const pkBandOff = () => document.documentElement.dataset.pkband === 'off';   /* للمقارنة بالقطع القديمة في الفحص */
+  function pkBandPath(W, H, ft, tongues) {
+    const f = n => Math.round(n * 100) / 100;
+    let d = `M0 ${f(ft)}H${f(W)}V${f(H)}H0Z`;
+    for (const t of tongues) {
+      const hgt = ft - t.top;
+      if (hgt < .5 || t.x1 - t.x0 < 1) continue;
+      const r = Math.min(PK_BAND_R, (t.x1 - t.x0) / 2, hgt);
+      const c = Math.max(0, Math.min(PK_BAND_C, hgt - r));
+      d += `M${f(t.x0)} ${f(t.top + r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x0 + r)} ${f(t.top)}H${f(t.x1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x1)} ${f(t.top + r)}`;
+      d += t.cr && c > 0 ? `V${f(ft - c)}A${f(c)} ${f(c)} 0 0 0 ${f(t.x1 + c)} ${f(ft)}V${f(ft + 1)}` : `V${f(ft + 1)}`;
+      d += t.cl && c > 0 ? `H${f(t.x0 - c)}V${f(ft)}A${f(c)} ${f(c)} 0 0 0 ${f(t.x0)} ${f(ft - c)}Z` : `H${f(t.x0)}Z`;
+    }
+    return d;
+  }
+  /* هندسةُ لسان منطقةٍ بإحداثيّات المربّع (حافّةُ حشوه) — ‎top‎ قامتُه الكاملة */
+  function pkBandTongue(card, sp, pane) {
+    const cr = card.getBoundingClientRect(), ox = cr.left + card.clientLeft, oy = cr.top + card.clientTop;
+    const p = pane.getBoundingClientRect(), s = sp.getBoundingClientRect();
+    return { x0: p.left - PK_BAND_PAD - ox, x1: p.right + PK_BAND_PAD - ox, top: p.top - PK_BAND_PAD - oy,
+      cl: p.left - s.left > 4, cr: s.right - p.right > 4 };
+  }
   function pkBandFit(card) {
     const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
     const sp = card.querySelector('.post-ytmain > .pk-split'), ft = card.querySelector('.pk-ftline');
-    if (pkBandRO && sp && pkBandFit.sp !== sp) { pkBandRO.disconnect(); pkBandRO.observe(sp); pkBandRO.observe(card); pkBandFit.sp = sp; }
-    if (!a || !sp || !ft) return;
-    const pane = sp.querySelector(':scope > ' + PK_PANE[a]);
-    if (!pane) return;
-    const fr = ft.getBoundingClientRect(), band = fr.top + fr.height / 2;
-    const pb = pane.getBoundingClientRect().bottom, sb = sp.getBoundingClientRect().bottom;
-    card.style.setProperty('--pkext', Math.max(0, band - pb - 8).toFixed(2) + 'px');
-    card.style.setProperty('--pkmt', (pb - sb + 8).toFixed(2) + 'px');
+    if (pkBandRO && sp && pkBandFit.sp !== sp) {
+      pkBandRO.disconnect(); pkBandRO.observe(sp); pkBandRO.observe(card);
+      [...sp.children].forEach(x => pkBandRO.observe(x));
+      pkBandFit.sp = sp;
+    }
+    let svg = card.querySelector(':scope > .pk-band');
+    const pane = a && sp && ft && sp.querySelector(':scope > ' + PK_PANE[a]);
+    if (!pane || pkBandOff() || !pkLab()) { if (svg) svg.remove(); card.classList.remove('pk--bandfx'); return; }
+    if (card.pkBandAnim) return;   /* أثناء الحركة يرسمها محرّكُها */
+    if (!svg) {
+      svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'pk-band'); svg.setAttribute('aria-hidden', 'true');
+      svg.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+      card.prepend(svg);
+    }
+    card.classList.add('pk--bandfx');
+    pkBandDraw(card, [pkBandTongue(card, sp, pane)]);
+  }
+  /* شريطُ الذيل وألسنتُه في المسار — منتصفُ مسكة الذيل أعلاه، والمربّعُ يقصّ ما دون حافّته */
+  function pkBandDraw(card, tongues) {
+    const svg = card.querySelector(':scope > .pk-band'), ft = card.querySelector('.pk-ftline');
+    if (!svg || !ft) return;
+    const W = card.clientWidth, H = card.clientHeight;
+    const fr = ft.getBoundingClientRect(), y = fr.top + fr.height / 2 - 1 - card.getBoundingClientRect().top - card.clientTop;   /* كشريط الذيل القديم (‎50% − 1px‎) */
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.firstChild.setAttribute('d', pkBandPath(W, H, y, tongues));
   }
   function cxHdSet(up) {
     const card = document.querySelector('#cm-body .pk--max');
