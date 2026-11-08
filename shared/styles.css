@@ -16374,7 +16374,7 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
    ممدودًا خلف الرأس أو تحت الذيل — فيتبعها بلا قياس حين يُرفع الرأسُ أو يُطوى الذيل،
    والمربّعُ يقصّ ما فاض (‎overflow: hidden‎). و‎isolation‎ تُبقي ‎z-index: -1‎ فوق أرضيّته */
 .pk--max { isolation: isolate; --pk-band: color-mix(in srgb, #14233f 5%, var(--u-surf)); }
-html[data-theme="dark"] .pk--max { --pk-band: color-mix(in srgb, #000 22%, var(--u-surf)); }
+html[data-theme="dark"] .pk--max { --pk-band: rgba(0, 0, 0, .2); }   /* أوضحُ في الداكن: الكتلةُ والرأسُ والذيلُ تُرى بجانب الجوف */
 .pk--max .pk-hdline::before {
   content: ''; position: absolute; z-index: -1; inset-inline: -100vmax; pointer-events: none;
   background: var(--pk-band);
@@ -17124,3 +17124,74 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
    في كلّ صفٍّ وإن خلا — فتصطفّ الأسماءُ على خطٍّ واحدٍ ما كان للمجلد أبناءٌ أو لم يكن، والحاشيةُ قدرُ المثلّث وحدَه */
 .pk-bank .x3-hd > .vt-grab { order: 99; margin-inline-start: 4px; }
 .pk-bank > #cm-cards, .pk-bank > .x3 { padding-inline-start: 6px; }   /* فُسحةٌ بين المثلّث وخطّ الفاصل */
+
+/* ===== الكتلة: المنطقةُ النشِطة والذيلُ سطحٌ واحد (طلبُ صاحب الموقع) =====
+   لونان فقط: لونُ الذيل (‎--pk-band‎) للمنطقة النشِطة وللذيل، ولونُ المربّع لما سواهما. المنطقةُ تلبس لونَ الذيل
+   بحاشيةٍ ‎8px‎ (ظلٌّ ممتدّ لا يغيّر التخطيط)، وتمتدّ إلى أسفل حتى منتصف مسكة الذيل حيث يبدأ شريطُه — فلا خطَّ بينهما —
+   وعند الالتقاء زاويتان مقعّرتان تصلانها بالذيل. وفي الطرفين (الكتابُ أو البنك) تُسقط الزاويةُ الخارجيّة */
+.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline .pk-hdline__grip { position: relative; z-index: 2; }
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src,
+.pk--max.pk-act--mid .post-ytmain > .pk-split > .kt-view,
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank {
+  position: relative; z-index: 1;
+  background: var(--pk-band); box-shadow: 0 0 0 8px var(--pk-band); border-radius: 6px 6px 0 0;
+  --cxl: radial-gradient(circle at 0 0, transparent 13.5px, var(--pk-band) 14px) 0 100% / 14px 14px no-repeat;
+  --cxr: radial-gradient(circle at 100% 0, transparent 13.5px, var(--pk-band) 14px) 100% 100% / 14px 14px no-repeat;
+  --cxm: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 28px) 100% no-repeat;
+}
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank { overflow: visible; }   /* يُمرَّر جوفُه (‎#cm-cards‎) لا هو */
+/* والوسطُ يُمرَّر هو نفسُه (البطاقيّ والجدوليّ) فيقصّ ما تحته: امتدادُه يُرسم من القسمة، بعرض الوسط المحسوب من الحصّتين */
+.pk-split { --bkw: 0px; --qbw: 0px; }
+.pk-split.has-book { --bkw: calc((100% - var(--g, 14px)) * var(--spl, .383) + 14px); }
+.pk-split.has-bank { --qbw: calc((100% - var(--g, 14px)) * var(--sqb, .383) + 14px); }
+.pk--max.pk-act--mid .post-ytmain > .pk-split::after {
+  content: ''; position: absolute; z-index: 1; top: calc(100% + 8px); height: 33px; pointer-events: none;
+  inset-inline-start: calc(var(--bkw) - 22px); inset-inline-end: calc(var(--qbw) - 22px);
+  background: var(--cxm2), var(--cxl2), var(--cxr2);
+  --cxl2: radial-gradient(circle at 0 0, transparent 13.5px, var(--pk-band) 14px) 0 100% / 14px 14px no-repeat;
+  --cxr2: radial-gradient(circle at 100% 0, transparent 13.5px, var(--pk-band) 14px) 100% 100% / 14px 14px no-repeat;
+  --cxm2: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 28px) 100% no-repeat;
+}
+/* الوسطُ طرفٌ إن غاب الكتابُ (أو البنك): تسقط الزاويةُ في تلك الجهة */
+.pk--max.pk-act--mid .post-ytmain > .pk-split:not(.has-book)::after { inset-inline-start: -8px; --cxr2: none; --cxm2: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 14px) 100% no-repeat; }
+.pk--max.pk-act--mid .post-ytmain > .pk-split:not(.has-bank)::after { inset-inline-end: -8px; --cxl2: none; --cxm2: linear-gradient(var(--pk-band), var(--pk-band)) 0 0 / calc(100% - 14px) 100% no-repeat; }
+html[data-lang="en"] .pk--max.pk-act--mid .post-ytmain > .pk-split:not(.has-book)::after { --cxr2: radial-gradient(circle at 100% 0, transparent 13.5px, var(--pk-band) 14px) 100% 100% / 14px 14px no-repeat; --cxl2: none; --cxm2: linear-gradient(var(--pk-band), var(--pk-band)) 0 0 / calc(100% - 14px) 100% no-repeat; }
+html[data-lang="en"] .pk--max.pk-act--mid .post-ytmain > .pk-split:not(.has-bank)::after { --cxl2: radial-gradient(circle at 0 0, transparent 13.5px, var(--pk-band) 14px) 0 100% / 14px 14px no-repeat; --cxr2: none; --cxm2: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 14px) 100% no-repeat; }
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after,
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after {
+  content: ''; position: absolute; top: calc(100% + 8px); height: 33px; inset-inline: -22px; pointer-events: none;
+  background: var(--cxm), var(--cxl), var(--cxr);
+}
+/* الطرفان: الزاويةُ الخارجيّةُ تسقط والشريطُ يمتدّ إلى الحافّة (الكتابُ يمينًا والبنكُ يسارًا في العربيّة) */
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after { background: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 14px) 100% no-repeat, var(--cxl); }
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { background: linear-gradient(var(--pk-band), var(--pk-band)) 0 0 / calc(100% - 14px) 100% no-repeat, var(--cxr); }
+html[data-lang="en"] .pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after { background: linear-gradient(var(--pk-band), var(--pk-band)) 0 0 / calc(100% - 14px) 100% no-repeat, var(--cxr); }
+html[data-lang="en"] .pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { background: linear-gradient(var(--pk-band), var(--pk-band)) 14px 0 / calc(100% - 14px) 100% no-repeat, var(--cxl); }
+/* وأزرارُ الكتاب انتقلت إلى خانة الذيل: لا تُكرَّر تحته في المكبَّرة */
+.pk--max .post-ytmain > .pk-split > .pk-src .cbk-nav { display: none; }
+
+/* خانةُ الذيل الثابتة في وسطه: أدواتُ المنطقة النشِطة */
+.cx-acttools {
+  position: absolute; inset-inline-start: 50%; top: 50%; transform: translate(50%, -50%);
+  display: flex; align-items: center; gap: 8px; z-index: 1;
+}
+html[data-lang="en"] .cx-acttools { transform: translate(-50%, -50%); }
+.cx-acttools .cx-midadd { position: static; transform: none; }
+.cx-actb {
+  display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--u-line); background: var(--u-surf, #fff); color: var(--u-ink, #14233f);
+  transition: background .15s, border-color .15s;
+}
+.cx-actb svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cx-actb:hover { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); }
+.cx-actb:disabled { opacity: .4; cursor: default; }
+.cx-actb--gold { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, var(--u-surf, #fff)); color: #a9852f; }
+html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(in srgb, #d4b36a 12%, transparent); }
+.cx-actind { min-width: 74px; text-align: center; font-size: 13px; font-weight: 600; color: var(--u-mut, #7c8a96); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* لونُ الذيل شفّافٌ قليلًا (‎--u-surf‎ بألفا): ما يتراكب منه يغمق — فالامتدادُ يبدأ بعد حاشية المنطقة (‎8px‎) وينتهي حيث يبدأ شريطُ
+   الذيل (‎41px‎ تحت القسمة = هامشُها ‎26‎ وحاشيةٌ ‎8‎ ونصفُ المسكة ‎7‎) بلا تراكب، وخطُّ الذيل الشعريُّ يُرفع ما دامت كتلة —
+   فتنساب المنطقةُ فيه بلا خطّ */
+.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline::before { border-top-color: transparent; }
+/* والطرفُ الخارجيُّ للكتاب والبنك لا يتجاوز حاشيتَهما (‎8px‎) — كان يبرز مربّعًا صغيرًا عند حافّة المربّع */
+.pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after { inset-inline-start: -8px; }
+.pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { inset-inline-end: -8px; }
