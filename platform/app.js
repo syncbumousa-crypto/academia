@@ -850,6 +850,7 @@
         h: +c.h || 0,
         col: (ORIG[c.code] || {}).col || 'biz',
         tags: c.tags || [],
+        kinds: c.kinds || {},   /* نوعيّتُها في كلّ تخصّص: major · college · common · elective */
         lab: !!c.lab,
       }))
     : COURSES.map(c => Object.assign({}, c, { tags: [], lab: LAB_COURSES.has(c.code) }));
@@ -1101,6 +1102,7 @@
       tabMarket: 'المكتبة', tabLibrary: 'الركن',
       search: 'ابحث عن مادة…', filters: 'تصنيفات',
       hoursGroup: 'عدد الساعات', collegeGroup: 'التخصص', colSearch: 'ابحث…', colNone: 'لا تخصّص بهذا الاسم',
+      kindGroup: 'نوعية المواد', kindMajor: 'مواد تخصص', kindCollege: 'مواد كلية', kindCommon: 'مواد مشتركة', kindElective: 'مواد اختيارية',
       hoursChip: h => `${h} ساعات`, hUnit: 'س',
       statGroup: 'حالة المادة', statTodo: 'متبقية — لم تبدأ بعد', statProg: 'قيد التقدم',
       statDone: 'مكتملة ✓',
@@ -1571,6 +1573,7 @@
       tabMarket: 'Library', tabLibrary: 'Nook',
       search: 'Search for a course…', filters: 'Filters',
       hoursGroup: 'Credit hours', collegeGroup: 'Specialization', colSearch: 'Search…', colNone: 'No major by that name',
+      kindGroup: 'Course type', kindMajor: 'Major', kindCollege: 'College', kindCommon: 'Common', kindElective: 'Elective',
       hoursChip: h => h === 1 ? '1 hour' : `${h} hours`, hUnit: 'h',
       statGroup: 'Course status', statTodo: 'Remaining — not started', statProg: 'In progress',
       statDone: 'Done ✓',
@@ -2165,6 +2168,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     colBar.className = 'fcol-bar';
     colBar.innerHTML = '<i></i>';
     colWrap.appendChild(colBar);
+    /* ===== ونوعيّةُ المواد تحت التخصّص =====
+       لا معنى لها قبل اختيار تخصّص: المادّةُ «مادّةُ تخصّص» في تخصّصٍ و«اختياريّةٌ»
+       في غيره. فتظهر ما اختير تخصّصٌ، وتُطبَّق عليه وحده: المادّةُ تبقى إن كانت
+       في أحد التخصّصات المختارة بإحدى النوعيّات المختارة */
+    const kindBox = document.createElement('div');
+    kindBox.className = 'fkind';
+    kindBox.hidden = true;
+    kindBox.innerHTML = '<p class="fkind__t"></p><div class="fchips"></div>';
+    colWrap.after(kindBox);
+    const kindChips = kindBox.querySelector('.fchips');
+    const KIND_KEYS = ['major', 'college', 'common', 'elective'];
+    const kindTx = v => T()['kind' + v[0].toUpperCase() + v.slice(1)];
     const colNone = document.createElement('p');
     colNone.className = 'fcol-none';
     colNone.hidden = true;
@@ -2258,6 +2273,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fCols  = new Set();
     const fStat  = new Set(['todo']);  // «متبقية» مطبق افتراضيًا دائمًا — ويُحذف بالنقر على رقاقته
     const fAct   = new Set();           // النشاط: lec (محاضرة فقط) · lab (لها معمل) — فارغة = الكل
+    const fKind  = new Set();           // نوعيّة المواد في التخصّصات المختارة — فارغة = الكل
+    const inCols = c => (c.tags || []).some(t => fCols.has(t) && (!fKind.size || fKind.has((c.kinds || {})[t])));
 
     function render() {
       csMemo.clear();   /* حالُ المواد تُقرأ من جديد: ما حُفظ كان لرسمةٍ مضت */
@@ -2265,7 +2282,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const list = CLIST.filter(c =>
         (!q || c.code.toLowerCase().includes(q) || c.ar.includes(query.trim()) || arShort(c).includes(query.trim())) &&
         (!fHours.size || fHours.has(c.h)) &&
-        (!fCols.size  || (c.tags || []).some(t => fCols.has(t))) &&
+        (!fCols.size  || inCols(c)) &&
         (!fStat.size  || fStat.has(courseStatus(c.code))) &&
         (!fAct.size   || fAct.has(isLab(c.code) ? 'lab' : 'lec'))
       );
@@ -2283,6 +2300,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       colBox.innerHTML = TAGS.map(t => chip(t.id, (state.lang === 'en' && t.en) ? t.en : t.ar, fCols.has(t.id))
         .replace('<button', `<button data-en="${esc((state.lang === 'en' ? t.ar : t.en) || '')}"`)).join('');
       colFilter();
+      if (!fCols.size) fKind.clear();
+      kindBox.hidden = !fCols.size;
+      kindChips.innerHTML = KIND_KEYS.map(v => chip(v, kindTx(v), fKind.has(v))).join('');
       /* والرجوعُ إلى الموضع فوريٌّ: التمريرُ الناعمُ يبدأ من أوّل الصفّ (أُعيد بناؤه
          توًّا) فتنقلب الرجعةُ رحلةً، ورسمةٌ تالية تقرأ موضعًا لم يصل بعد */
       colBox.style.scrollBehavior = 'auto';
@@ -2293,7 +2313,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el('f-stat').innerHTML = STAT_KEYS.map(v => chip(v, statTx(v), fStat.has(v))).join('');
       el('f-act').innerHTML = [['lec', T().lecChip], ['lab', T().labChip]]
         .map(([v, txt]) => chip(v, txt, fAct.has(v))).join('');
-      const n = fHours.size + fCols.size + fStat.size + fAct.size;
+      const n = fHours.size + fCols.size + fKind.size + fStat.size + fAct.size;
       const badge = el('fbadge');
       badge.hidden = !n;
       badge.textContent = n;
@@ -2305,6 +2325,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const items = [];
       fHours.forEach(h => items.push(['h', h, T().hoursChip(h)]));
       fCols.forEach(k => { const t = TAGS.find(x => x.id === k); items.push(['c', k, t ? ((state.lang === 'en' && t.en) ? t.en : t.ar) : k]); });
+      fKind.forEach(v => items.push(['k', v, kindTx(v)]));
       fStat.forEach(v => items.push(['s', v, statTx(v)]));
       fAct.forEach(v => items.push(['a', v, v === 'lec' ? T().lecChip : T().labChip]));
       el('factive').innerHTML = items.map(([k, v, txt]) =>
@@ -2316,6 +2337,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const { k, v } = b.dataset;
       if (k === 'h') fHours.delete(Number(v));
       else if (k === 'c') fCols.delete(v);
+      else if (k === 'k') fKind.delete(v);
       else if (k === 's') fStat.delete(v);
       else fAct.delete(v);
       renderPanel(); render();
@@ -2345,6 +2367,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       fCols.has(v) ? fCols.delete(v) : fCols.add(v);
       renderPanel(); render();
     });
+    kindChips.addEventListener('click', e => {
+      const b = e.target.closest('.fchip'); if (!b) return;
+      const v = b.dataset.v;
+      fKind.has(v) ? fKind.delete(v) : fKind.add(v);
+      renderPanel(); render();
+    });
     el('f-stat').addEventListener('click', e => {
       const b = e.target.closest('.fchip'); if (!b) return;
       const v = b.dataset.v;
@@ -2364,6 +2392,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el('fg-hours').textContent = T().hoursGroup;
       el('fg-col').textContent = T().collegeGroup;
       colIn.placeholder = T().colSearch;
+      kindBox.querySelector('.fkind__t').textContent = T().kindGroup;
       el('fg-stat').textContent = T().statGroup;
       el('fg-act').textContent = T().actGroup;
       renderPanel();
