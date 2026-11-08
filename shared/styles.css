@@ -16200,7 +16200,7 @@ html[data-theme="dark"] #cm-body.is-cxfull { background: #1f2a31; }
 .pk--max #cm-cards::-webkit-scrollbar { width: 8px; }
 .pk--max #cm-cards::-webkit-scrollbar-track { background: transparent; }
 .pk--max #cm-cards::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
-.pk--max .vt-foot { flex: none; }
+:is(.pk--max, .pk--frame) .vt-foot { flex: none; }
 /* الحركة: يمتدّ بلا قفزة — والمقلِّلُ للحركة يراه فوريًّا */
 .pk--maxfx { animation: pkMaxIn .2s ease-out; }
 /* القوس: على زاوية المربّع العليا (اليمنى في العربيّة) — المرساةُ عند حشوة المربّع،
@@ -16282,8 +16282,8 @@ html[data-lang="en"] .pk-maxmini svg { transform: scaleX(-1); }
    ============================================================
    في المكبَّر يُنزع حدُّ ‎.x3-pkhd.on‎ ويحلّ محلَّه ‎.pk-hdline‎: خطٌّ بذهب القوس المكتوم
    وفي وسطه مسكةٌ رماديّةٌ ونقاطٌ ثلاث — المقبضُ الذي على القوس ممدودًا أفقيًّا */
-.pk--max .x3-pkhd.on { border-bottom: 0; padding-bottom: 4px; }
-.pk--max { overflow: hidden; overflow: clip; }   /* ‎clip‎ لا يُمرَّر برمجيًّا (تركيزٌ أو ‎scrollIntoView‎) فلا يزيح قوسَ التضييق عن زاويته */
+:is(.pk--max, .pk--frame) .x3-pkhd.on { border-bottom: 0; padding-bottom: 4px; }
+:is(.pk--max, .pk--frame) { overflow: hidden; overflow: clip; }   /* ‎clip‎ لا يُمرَّر برمجيًّا (تركيزٌ أو ‎scrollIntoView‎) فلا يزيح قوسَ التضييق عن زاويته */
 .pk-hdline {
   position: relative; display: flex; align-items: center; justify-content: center; flex: none;
   width: 100%; height: 14px; margin: 2px 0 8px; padding: 0; border: 0; background: none; cursor: pointer;
@@ -16338,14 +16338,14 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar { width: 8px; }
 .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
 .pk-ftline { margin: 8px 0 2px; flex: none; }
-.pk--max .vt-foot { flex: none; margin-top: 0; padding-top: 4px; border-top: 0; }
-.pk--max .vt-foot > .src-tools__sep:not(.src-tools__sep--solo) { margin-inline-start: auto; visibility: hidden; }
-.pk--max .vt-foot > .cx-add { margin-inline-start: 0; }   /* لا يقاسم الفُرجةَ: الإضافةُ تلزم اليمين */
+:is(.pk--max, .pk--frame) .vt-foot { flex: none; margin-top: 0; padding-top: 4px; border-top: 0; }
+:is(.pk--max, .pk--frame) .vt-foot > .src-tools__sep:not(.src-tools__sep--solo) { margin-inline-start: auto; visibility: hidden; }
+:is(.pk--max, .pk--frame) .vt-foot > .cx-add { margin-inline-start: 0; }   /* لا يقاسم الفُرجةَ: الإضافةُ تلزم اليمين */
 /* المرور: المسكةُ تنزلق في جهة ما سيحدث — للأسفل ظاهرًا (سيُطوى) وللأعلى مطويًّا (سيظهر) */
 .pk-ftline:hover .pk-hdline__grip, .pk-ftline:focus-visible .pk-hdline__grip { transform: translateY(2px); }
 .pk--ftdn .pk-ftline:hover .pk-hdline__grip, .pk--ftdn .pk-ftline:focus-visible .pk-hdline__grip { transform: translateY(-2px); }
 /* الطيّ: تنزل الأزرارُ تحت حدّ المربّع (والمربّعُ يقصّ)، فيبقى الخطُّ على القاع */
-.pk--max .vt-foot { max-height: 64px; }
+:is(.pk--max, .pk--frame) .vt-foot { max-height: 64px; }
 .pk--ftdn .vt-foot { max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; opacity: 0; visibility: hidden; overflow: hidden; }
 .pk--ftdn .pk-ftline { margin-bottom: -6px; }
 .pk--ftanim .vt-foot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
@@ -16370,14 +16370,14 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
    السفلى إلى الحافّة، وبين كلٍّ والجوفِ خطٌّ شعريّ. والشريطُ ظهرُ المسكة نفسِها (‎::before‎)
    ممدودًا خلف الرأس أو تحت الذيل — فيتبعها بلا قياس حين يُرفع الرأسُ أو يُطوى الذيل،
    والمربّعُ يقصّ ما فاض (‎overflow: hidden‎). و‎isolation‎ تُبقي ‎z-index: -1‎ فوق أرضيّته */
-.pk--max { isolation: isolate; --pk-band: color-mix(in srgb, #14233f 5%, var(--u-surf)); }
-html[data-theme="dark"] .pk--max { --pk-band: rgba(0, 0, 0, .2); }   /* أوضحُ في الداكن: الكتلةُ والرأسُ والذيلُ تُرى بجانب الجوف */
-.pk--max .pk-hdline::before {
+:is(.pk--max, .pk--frame) { isolation: isolate; --pk-band: color-mix(in srgb, #14233f 5%, var(--u-surf)); }
+html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-band: rgba(0, 0, 0, .2); }   /* أوضحُ في الداكن: الكتلةُ والرأسُ والذيلُ تُرى بجانب الجوف */
+:is(.pk--max, .pk--frame) .pk-hdline::before {
   content: ''; position: absolute; z-index: -1; inset-inline: -100vmax; pointer-events: none;
   background: var(--pk-band);
 }
-.pk--max .pk-hdline:not(.pk-ftline)::before { bottom: 50%; height: 100vmax; border-bottom: 1px solid var(--u-line); }
-.pk--max .pk-ftline::before { top: 50%; height: 100vmax; border-top: 1px solid var(--u-line); }
+:is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { bottom: 50%; height: 100vmax; border-bottom: 1px solid var(--u-line); }
+:is(.pk--max, .pk--frame) .pk-ftline::before { top: 50%; height: 100vmax; border-top: 1px solid var(--u-line); }
 
 /* ===== المقابضُ بلا خطّ (طلبُ صاحب الموقع) =====
    القوسُ في الزاوية (الكبيرُ والصغير) وخطّا الرأس والقاع: يُنزع الخطُّ الذهبيُّ منها كلِّها،
@@ -17126,7 +17126,7 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
    لونان فقط: لونُ الذيل (‎--pk-band‎) للمنطقة النشِطة وللذيل، ولونُ المربّع لما سواهما. المنطقةُ تلبس لونَ الذيل
    بحاشيةٍ ‎8px‎ (ظلٌّ ممتدّ لا يغيّر التخطيط)، وتمتدّ إلى أسفل حتى منتصف مسكة الذيل حيث يبدأ شريطُه — فلا خطَّ بينهما —
    وعند الالتقاء زاويتان مقعّرتان تصلانها بالذيل. وفي الطرفين (الكتابُ أو البنك) تُسقط الزاويةُ الخارجيّة */
-.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline .pk-hdline__grip { position: relative; z-index: 2; }
+:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline .pk-hdline__grip { position: relative; z-index: 2; }
 .pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank { overflow: visible; }   /* يُمرَّر جوفُه (‎#cm-cards‎) لا هو */
 /* وأزرارُ الكتاب انتقلت إلى خانة الذيل: لا تُكرَّر تحته في المكبَّرة */
 .pk--max .post-ytmain > .pk-split > .pk-src .cbk-nav { display: none; }
@@ -17152,13 +17152,13 @@ html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(i
 /* لونُ الذيل شفّافٌ قليلًا (‎--u-surf‎ بألفا): ما يتراكب منه يغمق — فالامتدادُ يبدأ بعد حاشية المنطقة (‎8px‎) وينتهي حيث يبدأ شريطُ
    الذيل (‎41px‎ تحت القسمة = هامشُها ‎26‎ وحاشيةٌ ‎8‎ ونصفُ المسكة ‎7‎) بلا تراكب، وخطُّ الذيل الشعريُّ يُرفع ما دامت كتلة —
    فتنساب المنطقةُ فيه بلا خطّ */
-.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline::before { border-top-color: transparent; }
+:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline::before { border-top-color: transparent; }
 /* «حذف · خاص · تم»: وعاءٌ واحدٌ يحمل صنفَ الذيل (فلا تتغيّر هيئتُها). في الذيل يُدفع إلى آخره،
    وفي ترويسة المكبَّرة يقف في زاويتها اليسرى أعلى (يصعد مع الرأس إن رُفع ويغيب معه) */
 .cx-globs { display: flex; align-items: center; gap: 13px; margin: 0 0 0 0; margin-inline-start: auto; }
 .cx-globs .infoedit-del { margin-inline-start: 0; }
-.pk--max.pk--edit > .post-yt { position: relative; }
-.pk--max > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; z-index: 3; margin: 0;
+:is(.pk--max, .pk--frame).pk--edit > .post-yt { position: relative; }
+:is(.pk--max, .pk--frame) > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; z-index: 3; margin: 0;
   /* على مستوى صفّ الأدوات في الرأس (شريطُ العرض والشارات) — منتصفُه ‎--hdh / 2‎ تحت أعلى الجوف (‎--hdh‎ يقيسه ‎cxHdMeasure‎) */
   top: calc(var(--hdh, 68px) / 2); transform: translateY(-50%); }
 /* ===== «+» الوسط ينفتح عن خيارين يطفوان فوقه ===== */
@@ -17255,16 +17255,16 @@ html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6
 
 /* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
    مسكةُ طيّ الذيل كانت شريطًا أفقيًّا على موضع الالتقاء نفسِه فتقطع الكتلة: تُخفى ما دامت كتلة، وتظهر عند المرور أو التركيز */
-.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip { background: transparent; }
-.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip i { opacity: 0; }
+:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip { background: transparent; }
+:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip i { opacity: 0; }
 /* والنشرُ: خانةُ الكتلة في وسط ذيله كما في التحرير */
 .pk-pubfoot { position: relative; min-height: 34px; }
 .pk--ftdn .pk-pubfoot { min-height: 0; }
 .pk-pubfoot > .cx-acttools { top: calc(50% + 2px); }
 /* لونُ الكتلة مُصمَتٌ (لا شفافيّة) والقطعُ تتراكب ‎2px‎: في الشاشات المقرَّبة (‎125%‎ مثلًا) كانت حدودُ القطع الشفّافة
    تقع على كسور البكسل فيظهر بينها خطٌّ رفيع. والمُصمَتُ يتراكب بلا أن يغمق — فلا خطَّ أيًّا كان التقريب */
-.pk--max { --pk-band: #e7ebed; }
-html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
+:is(.pk--max, .pk--frame) { --pk-band: #e7ebed; }
+html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-band: #1d2426; }
 
 /* ===== الكتلةُ شكلٌ واحد (ROADMAP-PANEFX · المرحلة ٠) =====
    طبقةُ ‎.pk-band‎ (مسارٌ واحد: شريطُ الذيل ولسانُ المنطقة النشِطة) خلف المحتوى وأمام أرضيّة المربّع — فتُرفع القطعُ القديمة:
