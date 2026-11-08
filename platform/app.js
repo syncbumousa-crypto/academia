@@ -9181,7 +9181,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
     }
-    if (a === 'bank') return pkActB('data-actqb="c"', PK_ACT_IC.plus, T().pkActQ, ' cx-actb--gold') + pkActB('data-actqb="f"', PK_ACT_IC.fold, T().pkActF);
+    /* ومقسومُ «قائمة · رحلة» يخصّ شجرةَ البنك وحدها: في الخانة مع أدواته، ولا يظهر إلّا والبنكُ نشِط (طلبُ صاحب الموقع) */
+    if (a === 'bank') return cxJrSeg(cardData(cmCode)) + pkActB('data-actqb="c"', PK_ACT_IC.plus, T().pkActQ, ' cx-actb--gold') + pkActB('data-actqb="f"', PK_ACT_IC.fold, T().pkActF);
     return cxMidAdd();
   }
   /* تبديلُ المنطقة النشِطة بلا إعادة رسم: صنفُ المربّع وخانةُ الذيل وحدهما */
@@ -20823,8 +20824,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <!-- مقسومُ الرحلة بين الفاصلين: السميكُ (‎--solo‎ بلون ‎--u-in-line‎) يمينَه لأنّه أوّلُ
            في المرتّب والصفُّ ‎rtl‎، والنحيفُ (‎--u-line‎) يسارَه يفصله عن السلّة. وهما
            صنفان قائمان في المفردات، لا ثالثَ يُخترع -->
-      ${cxJrSeg(d)}
-      <span class="src-tools__sep"></span>
+      ${pkLab() ? '' : cxJrSeg(d) + '<span class="src-tools__sep"></span>'}
       <button type="button" class="infoedit-del" title="${T().delPost}" aria-label="${T().delPost}">${TRASH_IC}</button>
       ${pstBadge()}
       <button type="button" class="info-sharebtn${shareOff()}" id="cm-info-share" title="${T().doneBtn}">${T().doneBtn}</button>
