@@ -75,15 +75,7 @@
               -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
-/* شريطُ أدوات المكتبة: بحثٌ وتصنيفاتٌ يطفوان فوق رفّ الكتب */
-#panel-market #m-search,
-#panel-market .btn-filter { background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
-  border-color: transparent;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent); }
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  #panel-market #m-search, #panel-market .btn-filter {
-    -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
-}
+/* شريطُ أدوات المكتبة: صار في قسمه آخرَ الورقة («البحثُ والتصنيفات: زجاجٌ سائل») */
 
 /* وأسهمُ الصفوف: أقراصٌ زجاجيّةٌ كقرص الطيّ، لا دوائرُ مصمتة */
 #panel-explore .ex-nav {
@@ -97,7 +89,7 @@
                            backdrop-filter: blur(14px) saturate(160%); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  #panel-market #m-search, #panel-market .btn-filter, #panel-explore .ex-nav {
+  #panel-explore .ex-nav {
     background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
@@ -410,3 +402,164 @@ html[data-lang="en"] .side-handle {
 .ex-nav--s { inset-inline-start: -8px; }
 .ex-nav--e { inset-inline-end: -8px; }
 
+
+/* ============================================================
+   البحثُ والتصنيفات: زجاجٌ سائلٌ بزوايا أبل
+   ============================================================
+   ثلاثُ قطعٍ تطفو فوق رفّ الكتب: البحث، وقرصُ التصنيفات، ولوحُه.
+   · الزوايا: كبسولةٌ لما هو سطرٌ واحد (البحث، الرقاقات)، ودائرةٌ للقرص،
+     ونصفُ قطرٍ واسعٌ (٢٦) للّوح — كما في أبل: الزاويةُ تتبع الارتفاع
+     ولا تُعطى رقمًا واحدًا للجميع.
+   · الزجاج: صبغةُ الموقع نفسُها (‎--glass‎) معتَّمةً، وتمويهٌ مع تشبيع،
+     ولمعةٌ على الحرف الأعلى، وظلٌّ ليّن. واللوحُ أكثفُ من الشريط: عليه
+     نصٌّ يُقرأ، والزجاجُ تحت النصّ يُصفّى لا يُعتَّم.
+   · القرص: بلا فلاتر دائرةٌ فيها أيقونةٌ وحدَها، وبفلاترَ يتّسع كبسولةً
+     والرقاقاتُ في جوفه يسارَ الأيقونة (‎.has-f‎ من ‎renderPanel‎). */
+.market-tools { --lg-tint: var(--glass, #eef3f4); --lg-ink: var(--glass-ink, #14233f);
+                --lg-cast: var(--glass-cast, rgba(13,42,72,.16)); --lg-h: 44px; gap: 10px; }
+
+html:root .market-tools .search,
+html:root .market-tools .filterwrap::before,
+html:root .market-tools .fpanel {
+  border: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 58%),
+    color-mix(in srgb, var(--lg-tint) 52%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    inset 0 0 0 1px color-mix(in srgb, var(--lg-ink) 9%, transparent),
+    0 10px 28px -12px var(--lg-cast);
+}
+html[data-theme="dark"]:root .market-tools .search,
+html[data-theme="dark"]:root .market-tools .filterwrap::before,
+html[data-theme="dark"]:root .market-tools .fpanel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 58%),
+    color-mix(in srgb, var(--lg-tint) 62%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 12px 30px -12px var(--lg-cast);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  .market-tools .search, .market-tools .filterwrap::before {
+    -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%); }
+  .market-tools .fpanel {
+    -webkit-backdrop-filter: blur(30px) saturate(190%); backdrop-filter: blur(30px) saturate(190%); }
+}
+/* اللوحُ أكثفُ: عليه أسماءٌ تُقرأ */
+html:root .market-tools .fpanel { background:
+    linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,0) 40%),
+    color-mix(in srgb, var(--lg-tint) 80%, transparent); }
+html[data-theme="dark"]:root .market-tools .fpanel { background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 40%),
+    color-mix(in srgb, var(--lg-tint) 86%, transparent); }
+
+/* البحث: كبسولة */
+html:root .market-tools .search {
+  height: var(--lg-h); border-radius: 999px; padding: 0 20px;
+  transition: box-shadow .2s;
+}
+html:root .market-tools .search:focus {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    inset 0 0 0 1.5px color-mix(in srgb, var(--c-kfupm, #2c5e65) 55%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--c-kfupm, #2c5e65) 14%, transparent),
+    0 10px 28px -12px var(--lg-cast);
+}
+
+/* قرصُ التصنيفات: دائرةٌ تتّسع كبسولة.
+   وزجاجُه في طبقةٍ تحته (‎::before‎) لا عليه: ما عليه ‎backdrop-filter‎ يصير
+   «جذرَ خلفيّة» لكلّ ما في جوفه، فاللوحُ — وهو ابنُه — كان لا يرى تحته إلّا
+   القرصَ نفسَه، فلا يُموِّه الصفحةَ وتظهر أغلفةُ الكتب صافيةً خلف النصّ */
+html:root .market-tools .filterwrap {
+  display: flex; align-items: center; flex-direction: row; isolation: isolate;
+  /* والعزلُ يحبس ‎z-index‎ اللوح (٣٠) في جوف القرص، فيُرفع القرصُ نفسُه
+     فوق المحتوى — وإلّا علا رفُّ الكتب اللوحَ في نافذة المكتبة وابتلع النقر */
+  z-index: 30;
+  min-width: var(--lg-h); height: var(--lg-h); border-radius: 999px;
+  max-width: 62%; background: none; box-shadow: none;
+}
+html:root .market-tools .filterwrap::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+}
+html:root .market-tools .btn-filter {
+  flex: none; width: var(--lg-h); height: var(--lg-h); padding: 0; gap: 0;
+  justify-content: center; border: 0; border-radius: 50%;
+  background: transparent; box-shadow: none; color: var(--lg-ink);
+  transition: background .15s, transform .15s;
+}
+html:root .market-tools .btn-filter:hover { background: color-mix(in srgb, var(--lg-ink) 7%, transparent); }
+html:root .market-tools .btn-filter:active { transform: scale(.94); }
+html:root .market-tools .btn-filter svg { width: 19px; height: 19px; }
+/* الاسمُ والعدّادُ لا يُرَيان: الرقاقاتُ في الجوف تقول ما اختير، والاسمُ يُقرأ للقارئ الآليّ */
+html:root .market-tools .btn-filter > span:not(.fbadge),
+html:root .market-tools .btn-filter .fbadge { display: none; }
+html:root .market-tools .filterwrap.is-open .btn-filter { background: color-mix(in srgb, var(--lg-ink) 9%, transparent); }
+
+/* الرقاقاتُ المختارة في جوف القرص: صفٌّ واحدٌ ينزلق إن طال */
+html:root .market-tools .filterwrap .factive {
+  flex: 0 1 auto; flex-wrap: nowrap; gap: 5px; min-width: 0;
+  max-width: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  opacity: 0; padding: 0;
+  transition: max-width .42s cubic-bezier(.2,.9,.25,1.05), opacity .25s, padding .3s;
+}
+html:root .market-tools .filterwrap .factive::-webkit-scrollbar { display: none; }
+html:root .market-tools .filterwrap.has-f .factive { max-width: 100vw; opacity: 1; padding-inline-end: 6px; }
+html:root .market-tools .fact {
+  flex: none; height: 32px; padding: 0 12px; border-radius: 999px; white-space: nowrap;
+  background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 13%, transparent);
+}
+html:root .market-tools .fact:hover { background: color-mix(in srgb, #b3433c 15%, transparent); }
+
+/* اللوح: زجاجٌ بزاويةٍ واسعة، يتفتّح من تحت القرص */
+/* والقرصُ آخرَ الصفّ (يسارَه بالعربيّ، يمينَه بالإنجليزيّ)، فاللوحُ يُفتح
+   نحو البحث لا نحو حافّة الشاشة: يُلصق بالطرف الخارجيّ للقرص */
+html:root .market-tools .fpanel {
+  left: 0; right: auto; top: calc(100% + 10px);
+  border-radius: 26px; padding: 16px 18px;
+  transform-origin: top left;
+}
+html[dir="ltr"]:root .market-tools .fpanel, html[data-lang="en"]:root .market-tools .fpanel {
+  left: auto; right: 0; transform-origin: top right; }
+@media (prefers-reduced-motion: no-preference) {
+  html:root .market-tools .fpanel:not([hidden]) { animation: lg-pop .26s cubic-bezier(.2,.9,.25,1.08); }
+  @keyframes lg-pop { from { opacity: 0; transform: scale(.94) translateY(-4px); } }
+}
+html:root .market-tools .fgroup + .fgroup { border-top-color: color-mix(in srgb, var(--lg-ink) 8%, transparent); }
+
+/* الرقاقاتُ وما في اللوح: كبسولاتٌ وزوايا أبل */
+html:root .market-tools .fchip { border-radius: 999px; padding: 6px 13px; }
+html:root .market-tools .fchip:not(.on) {
+  border-color: color-mix(in srgb, var(--lg-ink) 12%, transparent);
+  background: color-mix(in srgb, #fff 55%, transparent);
+}
+html[data-theme="dark"]:root .market-tools .fchip:not(.on) { background: rgba(255,255,255,.06); }
+/* والمختارُ يبقى بلونِ كلِّ موقع (البتروليّ في المسلخ، والحبرُ في الجذر) — لا يُفرض لونٌ واحد */
+html:root .market-tools .fchip.on { border-color: transparent; }
+html:root .market-tools .fcol-search,
+html:root .market-tools .fcol-search input { border-radius: 999px; }
+html:root .market-tools .fkind { border-radius: 18px; background: color-mix(in srgb, var(--lg-ink) 5%, transparent); }
+
+/* وطرفا صفّ التخصّصات يذوبان في الزجاج لا في أبيضَ مصمت: كان التلاشي طبقةً
+   بلون اللوح القديم (‎#fff‎)، فصار مستطيلًا أبيضَ فوق الزجاج. فصار قناعًا
+   يُشفّف الصفَّ نفسَه، فيظهر تحته ما تحت اللوح أيًّا كان */
+html:root .market-tools .fcol-wrap::before,
+html:root .market-tools .fcol-wrap::after { display: none; }
+html:root .market-tools .fcol-row {
+  --ms: 28px; --me: 28px;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 var(--ms), #000 calc(100% - var(--me)), transparent 100%);
+          mask-image: linear-gradient(to left, transparent 0, #000 var(--ms), #000 calc(100% - var(--me)), transparent 100%);
+}
+html[dir="ltr"]:root .market-tools .fcol-row, html[data-lang="en"]:root .market-tools .fcol-row {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--ms), #000 calc(100% - var(--me)), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 var(--ms), #000 calc(100% - var(--me)), transparent 100%);
+}
+html:root .market-tools .fcol-wrap.is-start .fcol-row { --ms: 0px; }
+html:root .market-tools .fcol-wrap.is-end .fcol-row { --me: 0px; }
+
+/* ولا شفافيّةَ لمن لا يريدها */
+@media (prefers-reduced-transparency: reduce) {
+  html:root .market-tools :is(.search, .filterwrap, .fpanel) {
+    background: var(--lg-tint); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

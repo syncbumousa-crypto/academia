@@ -2136,6 +2136,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const el = id => document.getElementById(`${p}-${id}`);
     const panel = el('fpanel');
     const wrap = panel.closest('.filterwrap');
+    /* ===== زرُّ التصنيفات قرصٌ يتّسع =====
+       بلا فلاتر: دائرةٌ فيها أيقونةُ التصنيف وحدَها. فإذا اختير فلترٌ اتّسعت
+       الدائرةُ كبسولةً، وصارت رقاقاتُ الفلاتر المختارة داخلها يسارَ الأيقونة —
+       فتُنقل ‎factive‎ من آخر الصفّ إلى جوف الزرّ نفسِه */
+    wrap.insertBefore(el('factive'), panel);
+    el('btn-filter').setAttribute('aria-label', el('f-label').textContent.trim());
+    /* والقرصُ يعرف أنّ لوحه مفتوح — أيًّا كان من فتحه أو أغلقه */
+    new MutationObserver(() => wrap.classList.toggle('is-open', !panel.hidden))
+      .observe(panel, { attributes: true, attributeFilter: ['hidden'] });
 
     /* ============================================================
        التخصّص: صفٌّ أفقيٌّ واحد، وبحثٌ يسارَ عنوانه
@@ -2245,7 +2254,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const q = colIn.value.trim().toLowerCase();
       let n = 0;
       colBox.querySelectorAll('.fchip').forEach(b => {
-        const hit = !q || b.textContent.toLowerCase().includes(q)
+        const hit = !q || (b.querySelector('.fchip__t') || b).textContent.toLowerCase().includes(q)
           || (b.dataset.en || '').toLowerCase().includes(q) || String(b.dataset.v).toLowerCase().includes(q);
         b.hidden = !hit;
         if (hit) n++;
@@ -2276,11 +2285,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fKind  = new Set();           // نوعيّة المواد في التخصّصات المختارة — فارغة = الكل
     const inCols = c => (c.tags || []).some(t => fCols.has(t) && (!fKind.size || fKind.has((c.kinds || {})[t])));
 
+    const qHit = c => {
+      const q = query.trim();
+      return !q || c.code.toLowerCase().includes(q.toLowerCase()) || c.ar.includes(q) || arShort(c).includes(q);
+    };
     function render() {
       csMemo.clear();   /* حالُ المواد تُقرأ من جديد: ما حُفظ كان لرسمةٍ مضت */
-      const q = query.trim().toLowerCase();
       const list = CLIST.filter(c =>
-        (!q || c.code.toLowerCase().includes(q) || c.ar.includes(query.trim()) || arShort(c).includes(query.trim())) &&
+        qHit(c) &&
         (!fHours.size || fHours.has(c.h)) &&
         (!fCols.size  || inCols(c)) &&
         (!fStat.size  || fStat.has(courseStatus(c.code))) &&
@@ -2291,18 +2303,47 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el('grid').innerHTML = list.map(c => cardHTML(c, mode)).join('') || `<p class="m-none">${T().none}</p>`;
     }
 
-    function chip(v, txt, on) { return `<button class="fchip ${on ? 'on' : ''}" data-v="${v}">${txt}</button>`; }
+    /* ===== وبجانب كلّ فلترٍ عددُ ما يُظهره إن ضُغط =====
+       ذكيٌّ: يُحسب مع كلّ ما اختير غيرَه (البحثُ والفلاترُ الأخرى ونوعيّةُ الموادّ)،
+       لا عددًا ثابتًا في الكتالوج. وفي المجموعة نفسها لا يُحسب ما اختير منها:
+       الساعةُ تُضاف إلى أخواتها، والتخصّصُ يحلّ محلّ صاحبه */
+    function facets() {
+      const N = { h: new Map(), c: new Map(), k: new Map(), s: new Map(), a: new Map() };
+      const inc = (m, v) => m.set(v, (m.get(v) || 0) + 1);
+      for (const c of CLIST) {
+        if (!qHit(c)) continue;
+        const st = courseStatus(c.code), ac = isLab(c.code) ? 'lab' : 'lec';
+        const ph = !fHours.size || fHours.has(c.h), pc = !fCols.size || inCols(c);
+        const ps = !fStat.size || fStat.has(st), pa = !fAct.size || fAct.has(ac);
+        if (pc && ps && pa) inc(N.h, c.h);
+        if (ph && ps && pa) {
+          for (const t of (c.tags || [])) if (!fKind.size || fKind.has((c.kinds || {})[t])) inc(N.c, t);
+          const ks = new Set((c.tags || []).filter(t => fCols.has(t)).map(t => (c.kinds || {})[t]).filter(Boolean));
+          ks.forEach(k => inc(N.k, k));
+        }
+        if (ph && pc && pa) inc(N.s, st);
+        if (ph && pc && ps) inc(N.a, ac);
+      }
+      return N;
+    }
+    function chip(v, txt, on, n) {
+      const cnt = n === undefined ? '' : `<span class="fchip__n">(${n})</span>`;
+      return `<button class="fchip ${on ? 'on' : ''}${n === 0 && !on ? ' is-zero' : ''}" data-v="${v}"><span class="fchip__t">${txt}</span>${cnt}</button>`;
+    }
     function renderPanel() {
+      csMemo.clear();
+      const N = facets();
+      const nOf = (m, v) => m.get(v) || 0;
       const hoursVals = [...new Set(CLIST.map(c => c.h))].sort((a, b) => a - b);
-      el('f-hours').innerHTML = hoursVals.map(h => chip(h, T().hoursChip(h), fHours.has(h))).join('');
+      el('f-hours').innerHTML = hoursVals.map(h => chip(h, T().hoursChip(h), fHours.has(h), nOf(N.h, h))).join('');
       /* التخصصات: من كتالوج الأدمن — أي تخصص يضيفه هناك يظهر هنا تلقائيًّا */
       const colX = colBox.scrollLeft;
-      colBox.innerHTML = TAGS.map(t => chip(t.id, (state.lang === 'en' && t.en) ? t.en : t.ar, fCols.has(t.id))
+      colBox.innerHTML = TAGS.map(t => chip(t.id, (state.lang === 'en' && t.en) ? t.en : t.ar, fCols.has(t.id), nOf(N.c, t.id))
         .replace('<button', `<button data-en="${esc((state.lang === 'en' ? t.ar : t.en) || '')}"`)).join('');
       colFilter();
       if (!fCols.size) fKind.clear();
       kindBox.hidden = !fCols.size;
-      kindChips.innerHTML = KIND_KEYS.map(v => chip(v, kindTx(v), fKind.has(v))).join('');
+      kindChips.innerHTML = KIND_KEYS.map(v => chip(v, kindTx(v), fKind.has(v), nOf(N.k, v))).join('');
       /* والرجوعُ إلى الموضع فوريٌّ: التمريرُ الناعمُ يبدأ من أوّل الصفّ (أُعيد بناؤه
          توًّا) فتنقلب الرجعةُ رحلةً، ورسمةٌ تالية تقرأ موضعًا لم يصل بعد */
       colBox.style.scrollBehavior = 'auto';
@@ -2310,10 +2351,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       colBox.style.scrollBehavior = '';
       colEdges();
       /* والترتيبُ سُلَّمٌ: ما لم يبدأ، فما هو فيه، فما انتهى */
-      el('f-stat').innerHTML = STAT_KEYS.map(v => chip(v, statTx(v), fStat.has(v))).join('');
+      el('f-stat').innerHTML = STAT_KEYS.map(v => chip(v, statTx(v), fStat.has(v), nOf(N.s, v))).join('');
       el('f-act').innerHTML = [['lec', T().lecChip], ['lab', T().labChip]]
-        .map(([v, txt]) => chip(v, txt, fAct.has(v))).join('');
+        .map(([v, txt]) => chip(v, txt, fAct.has(v), nOf(N.a, v))).join('');
       const n = fHours.size + fCols.size + fKind.size + fStat.size + fAct.size;
+      wrap.classList.toggle('has-f', n > 0);
       const badge = el('fbadge');
       badge.hidden = !n;
       badge.textContent = n;
@@ -2343,7 +2385,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       renderPanel(); render();
     });
 
-    el('search').addEventListener('input', e => { query = e.target.value; render(); });
+    el('search').addEventListener('input', e => { query = e.target.value; render(); renderPanel(); });
     el('btn-filter').addEventListener('click', () => {
       panel.hidden = !panel.hidden;
       if (!panel.hidden) requestAnimationFrame(colEdges);
@@ -2361,10 +2403,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       fHours.has(v) ? fHours.delete(v) : fHours.add(v);
       renderPanel(); render();
     });
+    /* والتخصّصُ واحد: اختيارُ تخصّصٍ يحلّ محلّ ما قبله. كان يُضاف إليه، فإذا بقي
+       «نظم المعلومات» مختارًا من قبلُ ثم اختير «المالية» ظهرت «موادّ التخصّص» للاثنين
+       معًا — موادُّ النظم في المالية. ونوعيّةُ الموادّ لا تُقرأ إلّا لتخصّصٍ بعينه */
     el('f-col').addEventListener('click', e => {
       const b = e.target.closest('.fchip'); if (!b) return;
       const v = b.dataset.v;
-      fCols.has(v) ? fCols.delete(v) : fCols.add(v);
+      const had = fCols.has(v);
+      fCols.clear();
+      if (!had) fCols.add(v);
       renderPanel(); render();
     });
     kindChips.addEventListener('click', e => {
@@ -2389,6 +2436,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     function applyTexts() {
       el('search').placeholder = T().search;
       el('f-label').textContent = T().filters;
+      el('btn-filter').setAttribute('aria-label', T().filters);
       el('fg-hours').textContent = T().hoursGroup;
       el('fg-col').textContent = T().collegeGroup;
       colIn.placeholder = T().colSearch;
