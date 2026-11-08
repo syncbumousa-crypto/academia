@@ -20731,6 +20731,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
       const ft = card.querySelector('.vt-foot');
       if (on && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
+      cxGlobsPlace(card);   /* «حذف · خاص · تم» إلى الترويسة مكبَّرةً وإلى الذيل ضيّقةً */
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
@@ -20748,6 +20749,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="post pk pk--peek pk--edit pk--pack${act}${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${cxMax && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
+        ${cxMax ? cxGlobs() : ''}
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
@@ -20825,10 +20827,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
            في المرتّب والصفُّ ‎rtl‎، والنحيفُ (‎--u-line‎) يسارَه يفصله عن السلّة. وهما
            صنفان قائمان في المفردات، لا ثالثَ يُخترع -->
       ${pkLab() ? '' : cxJrSeg(d) + '<span class="src-tools__sep"></span>'}
+      ${cxMax ? '' : cxGlobs()}
+    </div>`;
+  /* «حذف» و«خاص» و«تم» — أزرارُ المساهمة كلِّها: في الذيل ضيّقةً، وفي ترويسة المكبَّرة بزاويتها اليسرى (طلبُ صاحب الموقع).
+     الوعاءُ يحمل صنفَ الذيل فتبقى هيئتُها حيث كانت، ويُنقل هو نفسُه بين الموضعين مع التكبير (لا يُنسخ: ‎#cm-info-share‎ واحد) */
+  const cxGlobs = () => `<span class="cx-globs edit-acts--foot">
       <button type="button" class="infoedit-del" title="${T().delPost}" aria-label="${T().delPost}">${TRASH_IC}</button>
       ${pstBadge()}
       <button type="button" class="info-sharebtn${shareOff()}" id="cm-info-share" title="${T().doneBtn}">${T().doneBtn}</button>
-    </div>`;
+    </span>`;
+  const cxGlobsPlace = card => {
+    const g = card && card.querySelector('.cx-globs'); if (!g) return;
+    const max = card.classList.contains('pk--max');
+    const host = max ? card.querySelector('.post-yt') : card.querySelector('.vt-foot');
+    if (host && g.parentElement !== host) host.appendChild(g);
+  };
 
   /* ---------- عرض «البطائق»: سيل كومنتات رزم مطوية (كالشروح) ---------- */
   let cardView = { open: null, fold: {} };   /* الكومنت المفتوح + حالة طي مجلداته (عرض فقط) */

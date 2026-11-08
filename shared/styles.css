@@ -17195,3 +17195,9 @@ html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(i
 /* والطرفُ الخارجيُّ للكتاب والبنك لا يتجاوز حاشيتَهما (‎8px‎) — كان يبرز مربّعًا صغيرًا عند حافّة المربّع */
 .pk--max.pk-act--book .post-ytmain > .pk-split > .pk-src::after { inset-inline-start: -8px; }
 .pk--max.pk-act--bank .post-ytmain > .pk-split > .pk-bank::after { inset-inline-end: -8px; }
+/* «حذف · خاص · تم»: وعاءٌ واحدٌ يحمل صنفَ الذيل (فلا تتغيّر هيئتُها). في الذيل يُدفع إلى آخره،
+   وفي ترويسة المكبَّرة يقف في زاويتها اليسرى أعلى (يصعد مع الرأس إن رُفع ويغيب معه) */
+.cx-globs { display: flex; align-items: center; gap: 13px; margin: 0 0 0 0; margin-inline-start: auto; }
+.cx-globs .infoedit-del { margin-inline-start: 0; }
+.pk--max.pk--edit > .post-yt { position: relative; }
+.pk--max > .post-yt > .cx-globs { position: absolute; top: 0; inset-inline-end: 0; z-index: 3; margin: 0; }
