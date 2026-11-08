@@ -1,0 +1,1111 @@
+{
+ "new": {
+  "ACF 398": {
+   "code": "ACF 398",
+   "ar": "محاسبة وتمويل 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "ACF 399": {
+   "code": "ACF 399",
+   "ar": "محاسبة وتمويل 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "ACF 411": {
+   "code": "ACF 411",
+   "ar": "محاسبة وتمويل 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "ACF 412": {
+   "code": "ACF 412",
+   "ar": "محاسبة وتمويل 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 220": {
+   "code": "BAI 220",
+   "ar": "تحليلات 220",
+   "full": "نظم معلومات الأعمال والأنظمة الرقمية",
+   "en": "Business Information & Digital Systems",
+   "h": 3,
+   "lab": 1
+  },
+  "BAI 221": {
+   "code": "BAI 221",
+   "ar": "تحليلات 221",
+   "full": "أساسيات تحليلات الأعمال",
+   "en": "Business Analytics Foundations",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 300": {
+   "code": "BAI 300",
+   "ar": "تحليلات 300",
+   "full": "الذكاء الاصطناعي التطبيقي في الأعمال",
+   "en": "Applied AI for Business",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 311": {
+   "code": "BAI 311",
+   "ar": "تحليلات 311",
+   "full": "تصوير البيانات وسرد القصص بها",
+   "en": "Data Visualization & Storytelling",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 312": {
+   "code": "BAI 312",
+   "ar": "تحليلات 312",
+   "full": "نظم ذكاء الأعمال",
+   "en": "Business Intelligence Systems",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 321": {
+   "code": "BAI 321",
+   "ar": "تحليلات 321",
+   "full": "تحليلات الأداء بالذكاء الاصطناعي",
+   "en": "Performance Analytics with AI",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 331": {
+   "code": "BAI 331",
+   "ar": "تحليلات 331",
+   "full": "التخطيط الاستراتيجي للأهداف",
+   "en": "Strategic Target Setting",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 332": {
+   "code": "BAI 332",
+   "ar": "تحليلات 332",
+   "full": "تحليلات القوى العاملة والذكاء الاصطناعي",
+   "en": "Workforce Analytics & AI",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 398": {
+   "code": "BAI 398",
+   "ar": "تحليلات 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "BAI 399": {
+   "code": "BAI 399",
+   "ar": "تحليلات 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "BAI 404": {
+   "code": "BAI 404",
+   "ar": "تحليلات 404",
+   "full": "الأمن السيبراني في الأعمال",
+   "en": "Cybersecurity in Business",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 411": {
+   "code": "BAI 411",
+   "ar": "تحليلات 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "BAI 412": {
+   "code": "BAI 412",
+   "ar": "تحليلات 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 421": {
+   "code": "BAI 421",
+   "ar": "تحليلات 421",
+   "full": "الذكاء الاصطناعي المسؤول",
+   "en": "Responsible AI",
+   "h": 3,
+   "lab": 0
+  },
+  "BAI 460": {
+   "code": "BAI 460",
+   "ar": "تحليلات 460",
+   "full": "دراسات حالة في تحليلات الأعمال",
+   "en": "Case Studies in Business Analytics",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 302": {
+   "code": "DSMM 302",
+   "ar": "تسويق رقمي 302",
+   "full": "أساسيات التسويق الرقمي وعبر وسائل التواصل",
+   "en": "Fundamentals of Digital and Social Media Marketing",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 305": {
+   "code": "DSMM 305",
+   "ar": "تسويق رقمي 305",
+   "full": "سلوك المستهلك في العصر الرقمي",
+   "en": "Consumer Behavior in the Digital Age",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 310": {
+   "code": "DSMM 310",
+   "ar": "تسويق رقمي 310",
+   "full": "التسويق الفيروسي والتأثير الرقمي",
+   "en": "Viral Marketing & Digital Influence",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 320": {
+   "code": "DSMM 320",
+   "ar": "تسويق رقمي 320",
+   "full": "إدارة أزمات وسائل التواصل الاجتماعي",
+   "en": "Social Media Crisis Management",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 330": {
+   "code": "DSMM 330",
+   "ar": "تسويق رقمي 330",
+   "full": "تحليلات التسويق واتخاذ القرار الحسابي",
+   "en": "Marketing Analytics & Computational Decision Making",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 340": {
+   "code": "DSMM 340",
+   "ar": "تسويق رقمي 340",
+   "full": "هندسة المحتوى وإدارة العلامة الرقمية",
+   "en": "Content Engineering & Digital Brand Management",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 365": {
+   "code": "DSMM 365",
+   "ar": "تسويق رقمي 365",
+   "full": "تصميم التجارب والرحلات الرقمية",
+   "en": "Creating Digital Experiences & Journeys",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 398": {
+   "code": "DSMM 398",
+   "ar": "تسويق رقمي 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "DSMM 399": {
+   "code": "DSMM 399",
+   "ar": "تسويق رقمي 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "DSMM 400": {
+   "code": "DSMM 400",
+   "ar": "تسويق رقمي 400",
+   "full": "استراتيجية التسويق الرقمي وعبر وسائل التواصل",
+   "en": "Social Media & Digital Marketing Strategy",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 410": {
+   "code": "DSMM 410",
+   "ar": "تسويق رقمي 410",
+   "full": "دراسات حالة في التسويق الرقمي",
+   "en": "Case studies in Digital & Social Media Marketing",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 411": {
+   "code": "DSMM 411",
+   "ar": "تسويق رقمي 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "DSMM 412": {
+   "code": "DSMM 412",
+   "ar": "تسويق رقمي 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 465": {
+   "code": "DSMM 465",
+   "ar": "تسويق رقمي 465",
+   "full": "التجارة الإلكترونية وإدارة القنوات المتعددة",
+   "en": "E-Tailing & Omni channel Management",
+   "h": 3,
+   "lab": 0
+  },
+  "DSMM 475": {
+   "code": "DSMM 475",
+   "ar": "تسويق رقمي 475",
+   "full": "الاتصالات التسويقية المتكاملة وإدارة الأداء",
+   "en": "Integrated Marketing Communication and Performance Management",
+   "h": 3,
+   "lab": 0
+  },
+  "ECON 205": {
+   "code": "ECON 205",
+   "ar": "اقتصاد 205",
+   "full": "أسس الاقتصاد القياسي",
+   "en": "Foundations of Econometrics",
+   "h": 3,
+   "lab": 0
+  },
+  "ENTR 250": {
+   "code": "ENTR 250",
+   "ar": "ريادة 250",
+   "full": "الشركات الناشئة الرشيقة: التعهيد الجماعي وتصميم نموذج العمل",
+   "en": "Lean Startup: Crowdsourcing & Business Model Design",
+   "h": 3,
+   "lab": 0
+  },
+  "ENTR 399": {
+   "code": "ENTR 399",
+   "ar": "ريادة 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "ENTR 411": {
+   "code": "ENTR 411",
+   "ar": "ريادة 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "ENTR 412": {
+   "code": "ENTR 412",
+   "ar": "ريادة 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 320": {
+   "code": "FFE 320",
+   "ar": "هندسة مالية 320",
+   "full": "تحليل السلاسل الزمنية والمراجحة الإحصائية",
+   "en": "Time Series Analysis & Statistical Arbitrage",
+   "h": 4,
+   "lab": 1
+  },
+  "FFE 333": {
+   "code": "FFE 333",
+   "ar": "هندسة مالية 333",
+   "full": "تعلّم الآلة في المالية",
+   "en": "Machine Learning in Finance",
+   "h": 3,
+   "lab": 1
+  },
+  "FFE 335": {
+   "code": "FFE 335",
+   "ar": "هندسة مالية 335",
+   "full": "تحليل الأوراق المالية وتحسين المحافظ",
+   "en": "Security Analysis and Portfolio Optimization",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 336": {
+   "code": "FFE 336",
+   "ar": "هندسة مالية 336",
+   "full": "نمذجة أسعار الفائدة ومخاطر الائتمان",
+   "en": "Interest Rates and Credit Risk Modeling",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 337": {
+   "code": "FFE 337",
+   "ar": "هندسة مالية 337",
+   "full": "دراسات حالة في الاستثمار والتحليل الفني",
+   "en": "Cases studies in Investment and Technical Analysis",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 338": {
+   "code": "FFE 338",
+   "ar": "هندسة مالية 338",
+   "full": "إدارة المخاطر الكمية",
+   "en": "Quantitative Risk Management",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 398": {
+   "code": "FFE 398",
+   "ar": "هندسة مالية 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "FFE 399": {
+   "code": "FFE 399",
+   "ar": "هندسة مالية 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "FFE 411": {
+   "code": "FFE 411",
+   "ar": "هندسة مالية 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "FFE 412": {
+   "code": "FFE 412",
+   "ar": "هندسة مالية 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "FFE 440": {
+   "code": "FFE 440",
+   "ar": "هندسة مالية 440",
+   "full": "البنية الدقيقة للأسواق والتداول الخوارزمي",
+   "en": "Market Microstructure and Algo Trading",
+   "h": 3,
+   "lab": 0
+  },
+  "FNT 230": {
+   "code": "FNT 230",
+   "ar": "تقنية مالية 230",
+   "full": "مقدمة في التقنية المالية",
+   "en": "Intro. To Fintech",
+   "h": 3,
+   "lab": 0
+  },
+  "FNT 330": {
+   "code": "FNT 330",
+   "ar": "تقنية مالية 330",
+   "full": "تنظيمات التقنية المالية والامتثال",
+   "en": "Fintech Regulation & Compliance",
+   "h": 3,
+   "lab": 0
+  },
+  "FNT 340": {
+   "code": "FNT 340",
+   "ar": "تقنية مالية 340",
+   "full": "النمذجة المالية والمحاكاة",
+   "en": "Financial Modeling and Simulation",
+   "h": 3,
+   "lab": 1
+  },
+  "FNT 360": {
+   "code": "FNT 360",
+   "ar": "تقنية مالية 360",
+   "full": "التمويل اللامركزي والبلوك تشين ومنصات التقنية المالية",
+   "en": "Decentralized Finance, Blockchain & Finance Tech Platforms",
+   "h": 3,
+   "lab": 0
+  },
+  "FNT 398": {
+   "code": "FNT 398",
+   "ar": "تقنية مالية 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "FNT 430": {
+   "code": "FNT 430",
+   "ar": "تقنية مالية 430",
+   "full": "التمويل السلوكي",
+   "en": "Behavioral Finance",
+   "h": 3,
+   "lab": 0
+  },
+  "IAS 121": {
+   "code": "IAS 121",
+   "ar": "اسلامي 121",
+   "full": "أسس اللغة",
+   "en": "Language Foundation",
+   "h": 2,
+   "lab": 0
+  },
+  "ISE 402": {
+   "code": "ISE 402",
+   "ar": "صناعية 402",
+   "full": "أنظمة الإنتاج ومراقبة المخزون",
+   "en": "Production Systems and Inventory Control",
+   "h": 3,
+   "lab": 0
+  },
+  "ISE 443": {
+   "code": "ISE 443",
+   "ar": "صناعية 443",
+   "full": "هندسة العوامل البشرية",
+   "en": "Human Factors Engineering",
+   "h": 3,
+   "lab": 1
+  },
+  "ISE 470": {
+   "code": "ISE 470",
+   "ar": "صناعية 470",
+   "full": "نمذجة أنظمة سلاسل الإمداد",
+   "en": "Supply Chain Systems Modelling",
+   "h": 3,
+   "lab": 0
+  },
+  "MATH 101": {
+   "code": "MATH 101",
+   "ar": "رياضيات 101",
+   "full": "حساب التفاضل والتكامل ١",
+   "en": "Calculus I",
+   "h": 4,
+   "lab": 0
+  },
+  "MATH 102": {
+   "code": "MATH 102",
+   "ar": "رياضيات 102",
+   "full": "حساب التفاضل والتكامل ٢",
+   "en": "Calculus II",
+   "h": 4,
+   "lab": 0
+  },
+  "MATH 208": {
+   "code": "MATH 208",
+   "ar": "رياضيات 208",
+   "full": "المعادلات التفاضلية والجبر الخطي",
+   "en": "Differential Equations and Linear Algebra",
+   "h": 3,
+   "lab": 0
+  },
+  "MATH 210": {
+   "code": "MATH 210",
+   "ar": "رياضيات 210",
+   "full": "الرياضيات المتقطعة",
+   "en": "Discrete Mathematics",
+   "h": 3,
+   "lab": 0
+  },
+  "MATH 416": {
+   "code": "MATH 416",
+   "ar": "رياضيات 416",
+   "full": "العمليات العشوائية في المالية",
+   "en": "Stochastic Processes in Finance",
+   "h": 3,
+   "lab": 0
+  },
+  "MATH 476": {
+   "code": "MATH 476",
+   "ar": "رياضيات 476",
+   "full": "الطرق الحسابية في المالية",
+   "en": "Computational Methods in Finance",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 210": {
+   "code": "OSC 210",
+   "ar": "سلاسل إمداد 210",
+   "full": "مقدمة في العمليات وسلاسل الإمداد",
+   "en": "Into. To Operations and supply chain",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 310": {
+   "code": "OSC 310",
+   "ar": "سلاسل إمداد 310",
+   "full": "الذكاء الاصطناعي للتنبؤ وتخطيط العمليات",
+   "en": "AI for Forecasting and Operations Planning",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 320": {
+   "code": "OSC 320",
+   "ar": "سلاسل إمداد 320",
+   "full": "أنظمة المؤسسات الذكية",
+   "en": "Intelligent Enterprise Systems",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 331": {
+   "code": "OSC 331",
+   "ar": "سلاسل إمداد 331",
+   "full": "التوريد والمشتريات",
+   "en": "Sourcing and Procurement",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 340": {
+   "code": "OSC 340",
+   "ar": "سلاسل إمداد 340",
+   "full": "تحليلات القرار والمخاطر",
+   "en": "Decision and Risk Analytics",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 398": {
+   "code": "OSC 398",
+   "ar": "سلاسل إمداد 398",
+   "full": "التدريب التعاوني",
+   "en": "Internship",
+   "h": 6,
+   "lab": 0
+  },
+  "OSC 399": {
+   "code": "OSC 399",
+   "ar": "سلاسل إمداد 399",
+   "full": "التدريب الصيفي",
+   "en": "Summer Training",
+   "h": 1,
+   "lab": 0
+  },
+  "OSC 410": {
+   "code": "OSC 410",
+   "ar": "سلاسل إمداد 410",
+   "full": "تحليلات التميّز في الأداء",
+   "en": "Analytics for Performance Excellence",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 411": {
+   "code": "OSC 411",
+   "ar": "سلاسل إمداد 411",
+   "full": "مشروع التخرّج ١",
+   "en": "Senior Project I",
+   "h": 0,
+   "lab": 0
+  },
+  "OSC 412": {
+   "code": "OSC 412",
+   "ar": "سلاسل إمداد 412",
+   "full": "مشروع التخرّج ٢",
+   "en": "Senior Project II",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 450": {
+   "code": "OSC 450",
+   "ar": "سلاسل إمداد 450",
+   "full": "العمليات المستدامة",
+   "en": "Sustainable Operations",
+   "h": 3,
+   "lab": 0
+  },
+  "OSC 460": {
+   "code": "OSC 460",
+   "ar": "سلاسل إمداد 460",
+   "full": "دراسات حالة في العمليات وسلاسل الإمداد",
+   "en": "Case Studies in OSC",
+   "h": 3,
+   "lab": 0
+  }
+ },
+ "links": {
+  "ACF 399": [
+   "acf"
+  ],
+  "FIN 415": [
+   "acf"
+  ],
+  "ACCT 302": [
+   "acf"
+  ],
+  "ACCT 311": [
+   "acf"
+  ],
+  "ACCT 321": [
+   "acf"
+  ],
+  "FIN 425": [
+   "acf"
+  ],
+  "CGS 392": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "FIN 315": [
+   "acf",
+   "ffe"
+  ],
+  "BAI 300": [
+   "acf",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "BAI 221": [
+   "acf",
+   "dsmm",
+   "fte",
+   "baai"
+  ],
+  "FIN 320": [
+   "acf",
+   "fte"
+  ],
+  "ACCT 301": [
+   "acf"
+  ],
+  "BAI 220": [
+   "acf",
+   "dsmm",
+   "baai",
+   "osc"
+  ],
+  "FIN 250": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "MKT 250": [
+   "acf",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "MGT 310": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "COE 292": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ENGL 214": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "STAT 214": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "IAS 212": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ACCT 210": [
+   "acf",
+   "baai",
+   "osc"
+  ],
+  "ISE 291": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ENGL 102": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "MATH 102": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "IAS 121": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "PE 101": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ACCT 110": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ECON 102": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ENGL 101": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "MATH 101": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "IAS 111": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ECON 101": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ICS 104": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "BUS 200": [
+   "acf",
+   "ffe",
+   "dsmm",
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ACCT 403": [
+   "acf"
+  ],
+  "FIN 450": [
+   "acf"
+  ],
+  "ACF 412": [
+   "acf"
+  ],
+  "FIN 445": [
+   "acf"
+  ],
+  "ACCT 410": [
+   "acf",
+   "baai"
+  ],
+  "ACF 411": [
+   "acf"
+  ],
+  "ACF 398": [
+   "acf"
+  ],
+  "FFE 399": [
+   "ffe"
+  ],
+  "FFE 320": [
+   "ffe"
+  ],
+  "FFE 336": [
+   "ffe"
+  ],
+  "FFE 337": [
+   "ffe"
+  ],
+  "FFE 338": [
+   "ffe"
+  ],
+  "FFE 333": [
+   "ffe"
+  ],
+  "FNT 360": [
+   "ffe",
+   "fte"
+  ],
+  "FFE 335": [
+   "ffe"
+  ],
+  "ECON 205": [
+   "ffe"
+  ],
+  "MATH 208": [
+   "ffe"
+  ],
+  "MATH 210": [
+   "ffe"
+  ],
+  "FFE 440": [
+   "ffe"
+  ],
+  "FFE 412": [
+   "ffe"
+  ],
+  "MATH 476": [
+   "ffe"
+  ],
+  "FIN 460": [
+   "ffe"
+  ],
+  "FFE 411": [
+   "ffe"
+  ],
+  "MATH 416": [
+   "ffe"
+  ],
+  "FFE 398": [
+   "ffe"
+  ],
+  "DSMM 399": [
+   "dsmm"
+  ],
+  "DSMM 330": [
+   "dsmm"
+  ],
+  "DSMM 340": [
+   "dsmm"
+  ],
+  "DSMM 365": [
+   "dsmm"
+  ],
+  "MGT 311": [
+   "dsmm",
+   "baai"
+  ],
+  "DSMM 310": [
+   "dsmm"
+  ],
+  "DSMM 320": [
+   "dsmm"
+  ],
+  "ENTR 320": [
+   "dsmm",
+   "fte"
+  ],
+  "DSMM 302": [
+   "dsmm",
+   "fte"
+  ],
+  "DSMM 305": [
+   "dsmm"
+  ],
+  "DSMM 475": [
+   "dsmm"
+  ],
+  "DSMM 412": [
+   "dsmm"
+  ],
+  "MGT 475": [
+   "dsmm",
+   "baai",
+   "osc"
+  ],
+  "DSMM 400": [
+   "dsmm"
+  ],
+  "DSMM 410": [
+   "dsmm"
+  ],
+  "DSMM 411": [
+   "dsmm"
+  ],
+  "DSMM 398": [
+   "dsmm"
+  ],
+  "DSMM 465": [
+   "dsmm"
+  ],
+  "ENTR 399": [
+   "fte"
+  ],
+  "FNT 340": [
+   "fte"
+  ],
+  "ENTR 310": [
+   "fte"
+  ],
+  "FNT 330": [
+   "fte"
+  ],
+  "FNT 230": [
+   "fte"
+  ],
+  "ENTR 250": [
+   "fte"
+  ],
+  "OSC 210": [
+   "fte",
+   "baai",
+   "osc"
+  ],
+  "ENTR 420": [
+   "fte"
+  ],
+  "ENTR 412": [
+   "fte"
+  ],
+  "FNT 430": [
+   "fte"
+  ],
+  "ENTR 411": [
+   "fte"
+  ],
+  "BAI 404": [
+   "fte"
+  ],
+  "ENTR 410": [
+   "fte"
+  ],
+  "FNT 398": [
+   "fte"
+  ],
+  "BAI 399": [
+   "baai"
+  ],
+  "BAI 311": [
+   "baai"
+  ],
+  "BAI 312": [
+   "baai"
+  ],
+  "BAI 321": [
+   "baai"
+  ],
+  "BAI 331": [
+   "baai"
+  ],
+  "BAI 332": [
+   "baai"
+  ],
+  "BAI 421": [
+   "baai"
+  ],
+  "BAI 411": [
+   "baai"
+  ],
+  "ICS 474": [
+   "baai"
+  ],
+  "BAI 460": [
+   "baai"
+  ],
+  "BAI 412": [
+   "baai"
+  ],
+  "BAI 398": [
+   "baai"
+  ],
+  "OSC 399": [
+   "osc"
+  ],
+  "ISE 402": [
+   "osc"
+  ],
+  "OSC 331": [
+   "osc"
+  ],
+  "OSC 340": [
+   "osc"
+  ],
+  "OSC 410": [
+   "osc"
+  ],
+  "OM 311": [
+   "osc"
+  ],
+  "OSC 310": [
+   "osc"
+  ],
+  "OSC 320": [
+   "osc"
+  ],
+  "ISE 470": [
+   "osc"
+  ],
+  "OSC 460": [
+   "osc"
+  ],
+  "OSC 412": [
+   "osc"
+  ],
+  "ISE 443": [
+   "osc"
+  ],
+  "OSC 450": [
+   "osc"
+  ],
+  "OSC 411": [
+   "osc"
+  ],
+  "OSC 398": [
+   "osc"
+  ]
+ }
+}
