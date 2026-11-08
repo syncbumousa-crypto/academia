@@ -6829,7 +6829,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       else editorMount(cmView.sub || sec);
     }
     if (cxMax && cxY) { const cc = document.querySelector('#cm-body #cm-cards'); if (cc) cc.scrollTop = cxY; }
-    if (cxMax || cxMaxPub) cxHdMeasure();   /* قامةُ الرأس بعد كلّ رسم — قبل أن يُرى */
+    if (cxMax || cxMaxPub || document.querySelector('#cm-body .pk--frame')) cxHdMeasure();   /* قامةُ الرأس بعد كلّ رسم — قبل أن يُرى (والتحريرُ الضيّقُ في إطاره كذلك) */
     if (pkFocusNew) {   /* المجلدُ المضافُ للتوّ: حقلُ اسمه مُركَّزٌ ونصُّه محدَّد فيُكتب فوقه */
       const fi = document.querySelector(`#cm-body .pk-fnm[data-pkfn="${CSS.escape(pkFocusNew)}"]`);
       pkFocusNew = null;
@@ -21120,7 +21120,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`}
     </div>`;
   function cxFtSet(dn) {
-    const card = document.querySelector('#cm-body .pk--max');
+    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) { cxFtDn = false; return; }
     dn = !!dn;
     const ae = document.activeElement;
@@ -21141,7 +21141,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
   }
   function cxHdMeasure() {
-    const card = document.querySelector('#cm-body .pk--max');
+    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) return;
     const ln = card.querySelector('.pk-hdline:not(.pk-ftline)'), yt = card.querySelector('.post-yt');
     if (!ln || !yt) return;
@@ -21163,7 +21163,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PK_PANE = { book: '.pk-src', mid: '.kt-view', bank: '.pk-bank' };
   /* يُرسم في نداء المراقب نفسِه (قبل الطلاء، في الإطار ذاته) — لا في الإطار التالي فتتأخّر الكتلةُ عن مكانها إطارًا */
   const pkBandRO = typeof ResizeObserver === 'function'
-    ? new ResizeObserver(() => { const c = document.querySelector('#cm-body .pk--max'); if (c) pkBandFit(c); }) : null;
+    ? new ResizeObserver(() => { const c = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame'); if (c) pkBandFit(c); }) : null;
   /* ===== الكتلةُ شكلٌ واحد (ROADMAP-PANEFX · المرحلة ٠) =====
      شريطُ الذيل ولسانُ المنطقة النشِطة **مسارٌ واحد** في طبقةٍ واحدة (‎.pk-band‎) خلف المحتوى — لا قطعٌ تتبع صناديقَ مختلفة
      (ظلٌّ ممتدّ وعناصرُ وهميّة)، فلا حدودَ بينها يظهر منها خطٌّ في أيّ تقريب، ويُحرَّك اللسانُ وحدَه في الدخول والخروج.
@@ -21477,7 +21477,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     } });
   }
   function cxHdSet(up) {
-    const card = document.querySelector('#cm-body .pk--max');
+    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) { cxHdUp = false; return; }
     up = !!up;
     /* لا يبقى التركيزُ في حقلٍ سيختفي، ولا منسدلٌ مُعلَّقٌ بعنصرٍ سيصعد */
@@ -21502,7 +21502,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     requestAnimationFrame(() => { cxNameFit(); cxRailFit(); });
   }
-  window.addEventListener('resize', () => { if (cxMax || cxMaxPub) cxHdMeasure(); });
+  window.addEventListener('resize', () => { if (cxMax || cxMaxPub || document.querySelector('#cm-body .pk--frame')) cxHdMeasure(); });
   /* هل يصحّ التكبيرُ الآن؟ تحريرُ البطائق، وحاضنٌ له قامة (نافذةُ الاستيراد بلا قامة) */
   const cxMaxOk = () => cmTabSel === 'cards' && cmView.mode === 'edit'
     && !!document.getElementById('cm-body') && !document.getElementById('cm-body').closest('#jri-body');
@@ -21620,10 +21620,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (dock) dock.outerHTML = cxMaxBtn();
       /* والتبديلُ في مكانه بلا رسم — فالمقبضُ يُغرس بعد الرأس أو يُنزع بيدٍ ههنا */
       card.querySelectorAll('.pk-hdline').forEach(x => x.remove());   /* الخطّان معًا: الرأسُ والقاع */
+      const fr = on || card.classList.contains('pk--frame');   /* والتحريرُ الضيّقُ له الخطّان كذلك (طلبُ صاحب الموقع) */
       const hd = card.querySelector('.x3-pkhd');
-      if (on && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
+      if (fr && hd) hd.insertAdjacentHTML('afterend', cxHdLine());
       const ft = card.querySelector('.vt-foot');
-      if (on && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
+      if (fr && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
       cxGlobsPlace(card);   /* «حذف · خاص · تم» إلى الترويسة مكبَّرةً وإلى الذيل ضيّقةً */
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
@@ -21640,10 +21641,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ المساهمة (الغلافُ والشاراتُ والأخبار) يعدّ الشجرةَ المعروضة: البنكَ في المجلّديّ */
     const d = pkQbOn(cmCode, p) ? pkQbView(p.data) : p.data;
     const act = (pkSplitOn(p.id) || pkBankOn(p.id)) ? ' pk-act--' + pkActOf(p.id) : '';
-    return `<div class="post pk pk--peek pk--edit pk--pack${act}${cxMax ? ' pk--max' : ''}${cxMax && cxHdUp ? ' pk--hdup' : ''}${cxMax && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
+    /* ===== التحريرُ الضيّقُ في إطار المكبَّر (طلبُ صاحب الموقع): ترويسةٌ وتذييلٌ بمقبضيهما، والحذفُ والنشرُ فوق ===== */
+    const fr = cxMax || pkLab();
+    return `<div class="post pk pk--peek pk--edit pk--pack${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
-        ${cxMax ? cxGlobs() : ''}
+        ${fr ? cxGlobs() : ''}
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
@@ -21658,10 +21661,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <!-- وشريطُ طرق العرض في التحرير كذلك، يسارَ أيقونة التعليقات مباشرةً -->
             ${pkViewBar('edit', p.id)}
           </div>
-          ${cxMax ? cxHdLine() : ''}
+          ${fr ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}
           ${pkBankOn(p.id) ? '' : '<div id="cm-cards"></div>'}
-          ${cxMax ? cxFtLine() : ''}
+          ${fr ? cxFtLine() : ''}
           ${cxFoot(d, p.id)}
         </div>
       </div>
@@ -21720,7 +21723,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
            في المرتّب والصفُّ ‎rtl‎، والنحيفُ (‎--u-line‎) يسارَه يفصله عن السلّة. وهما
            صنفان قائمان في المفردات، لا ثالثَ يُخترع -->
       ${pkLab() ? '' : cxJrSeg(d) + '<span class="src-tools__sep"></span>'}
-      ${cxMax ? '' : cxGlobs()}
+      ${cxMax || pkLab() ? '' : cxGlobs()}
     </div>`;
   /* «حذف» و«خاص» و«تم» — أزرارُ المساهمة كلِّها: في الذيل ضيّقةً، وفي ترويسة المكبَّرة بزاويتها اليسرى (طلبُ صاحب الموقع).
      الوعاءُ يحمل صنفَ الذيل فتبقى هيئتُها حيث كانت، ويُنقل هو نفسُه بين الموضعين مع التكبير (لا يُنسخ: ‎#cm-info-share‎ واحد) */
@@ -21731,7 +21734,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     </span>`;
   const cxGlobsPlace = card => {
     const g = card && card.querySelector('.cx-globs'); if (!g) return;
-    const max = card.classList.contains('pk--max');
+    const max = card.classList.contains('pk--max') || card.classList.contains('pk--frame');   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     const host = max ? card.querySelector('.post-yt') : card.querySelector('.vt-foot');
     if (host && g.parentElement !== host) host.appendChild(g);
   };
