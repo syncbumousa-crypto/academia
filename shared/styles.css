@@ -16277,6 +16277,8 @@ html[data-lang="en"] .pk-maxmini svg { transform: scaleX(-1); }
 .pk--maxpub .post-ytmain > .x3::-webkit-scrollbar { width: 8px; }
 .pk--maxpub .post-ytmain > .x3::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .65); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
 .pk--maxpub .post-ytmain > :not(.x3) { flex: none; }
+/* والبنكُ الفارغ يملأ الوسطَ كالشجرة — وإلّا امتدّ شريطُ القاع في الفراغ تحته (طلبُ صاحب الموقع) */
+.pk--maxpub .post-ytmain > .pk-qbempty { flex: 1 1 auto; min-height: 0; margin: 0; }
 
 /* ============================================================
    طيُّ الرأس (ROADMAP-HEADFOLD) — خطُّ المكبَّرة مقبضٌ يرفع رأسَها
