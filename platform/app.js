@@ -20288,14 +20288,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كان التوسيعُ فوقُ يمينًا والتضييقُ مقلوبًا تحتُ يسارًا. فصارا مسكتين قصيرتين على قوس الزاوية العليا،
      بنقطتين لكلٍّ: التوسيعُ على الحدّ الأعلى (ذهبيّ)، والتضييقُ بجانبه على الحدّ الجانبيّ (بتروليّ).
      ونقطتا كلٍّ على ثلثي مسكته. ‏(مركزُ القوس ‎30 · 14‎ ونصفُ قطره ‎9.5‎، والفُرجةُ بينهما ‎46°‎ من القوس) */
-  const CX_SVG = (d, dots) => '<svg viewBox="0 0 44 44" aria-hidden="true"><g class="pk-curve__g">'
+  const CX_SVG = (d, dots, cls = '') => `<svg viewBox="0 0 44 44" aria-hidden="true"${cls ? ` class="${cls}"` : ''}><g class="pk-curve__g">`
     + `<path class="pk-curve__hit" d="${d}"/><path class="pk-curve__grip" d="${d}"/>`
     + '<g class="pk-curve__dots">' + dots.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.35"/>`).join('') + '</g></g></svg>';
   /* وحدَه (ضيّقةً، بجانب صورة البروفايل): في وسط قوس الزاوية كما كان (‎80° → 10°‎) */
   const CX_GROW1 = CX_SVG('M31.65 4.64A9.5 9.5 0 0 1 39.36 12.35', [[35.03, 5.94], [38.06, 8.97]]);
   /* ومع التضييق (مكبَّرةً): على الحدّ الأعلى حتى ‎70°‎، والتضييقُ مرآتُه على الحدّ الجانبيّ من ‎20°‎ */
   const CX_GROW = CX_SVG('M21 4.5H30A9.5 9.5 0 0 1 33.25 5.07', [[25.5, 4.5], [29.8, 4.5]]);
-  const CX_SHRINK = CX_SVG('M38.93 10.75A9.5 9.5 0 0 1 39.5 14V23', [[39.5, 14.2], [39.5, 18.5]]);
+  /* والتضييقُ في الشاشة الكاملة وحدَه (لا توسيعَ بعدها): يعود إلى وسط القوس كالتوسيع الوحيد.
+     والشكلان في الزرّ معًا ويُختار أحدُهما بـ‎.is-cxfull‎ — فدخولُ الشاشة الكاملة لا يُعيد الرسم */
+  const CX_SHRINK = CX_SVG('M38.93 10.75A9.5 9.5 0 0 1 39.5 14V23', [[39.5, 14.2], [39.5, 18.5]], 'pk-sh--side')
+    + CX_SVG('M31.65 4.64A9.5 9.5 0 0 1 39.36 12.35', [[35.03, 5.94], [38.06, 8.97]], 'pk-sh--solo');
   const cxShrinkBtn = () => `<button type="button" class="pk-max pk-max--curve pk-shrink" data-cxshrink aria-pressed="true"
       title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_SHRINK}</button>`;
   const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"

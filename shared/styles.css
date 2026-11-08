@@ -17048,3 +17048,7 @@ html[data-theme="dark"] .pk-max--curve:hover .pk-curve__grip { stroke: rgba(108,
 html[data-theme="dark"] .pk-max--curve.pk-shrink .pk-curve__grip { stroke: rgba(224, 123, 111, .24); }
 html[data-theme="dark"] .pk-max--curve.pk-shrink .pk-curve__dots { fill: #e07b6f; }
 html[data-theme="dark"] .pk-max--curve.pk-shrink:hover .pk-curve__grip { stroke: rgba(224, 123, 111, .42); }
+/* التضييقُ وحدَه في الشاشة الكاملة: في وسط قوس الزاوية — وبجانب التوسيع على الحدّ الجانبيّ فيما سواها */
+.pk-shrink .pk-sh--solo { display: none; }
+#cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
+#cm-body.is-cxfull .pk-shrink .pk-sh--solo { display: block; }
