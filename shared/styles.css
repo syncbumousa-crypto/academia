@@ -17327,3 +17327,5 @@ html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank)::after,
 .pk--bandfx .post-ytmain > .pk-split::after { content: none; display: none; }
 .pk--bandfx .pk-ftline::before { background: transparent; }
+/* أثناء الانطلاق والعودة: خطّا الفاصل (موضعُهما من الحصص الجديدة) يغيبان ويعودان بعدها — لا يقفان في غير مكانهما */
+.pk--fxrun .pk-split > .pk-splh { opacity: 0 !important; transition: none; }

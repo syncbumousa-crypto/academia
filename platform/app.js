@@ -20955,10 +20955,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const hgt = ft - t.top;
       if (hgt < .5 || t.x1 - t.x0 < 1) continue;
       const r = Math.min(PK_BAND_R, (t.x1 - t.x0) / 2, hgt);
-      const c = Math.max(0, Math.min(PK_BAND_C, hgt - r));
+      /* الزاويتان المقعّرتان نصفُ قطرهما رقم (‎cl · cr‎: ‎14‎ أو صفر أو ما بينهما في الحركة)، ولا تزيدان على ما بقي من قامة اللسان */
+      const cR = Math.max(0, Math.min(+t.cr || 0, hgt - r)), cL = Math.max(0, Math.min(+t.cl || 0, hgt - r));
       d += `M${f(t.x0)} ${f(t.top + r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x0 + r)} ${f(t.top)}H${f(t.x1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(t.x1)} ${f(t.top + r)}`;
-      d += t.cr && c > 0 ? `V${f(ft - c)}A${f(c)} ${f(c)} 0 0 0 ${f(t.x1 + c)} ${f(ft)}V${f(ft + 1)}` : `V${f(ft + 1)}`;
-      d += t.cl && c > 0 ? `H${f(t.x0 - c)}V${f(ft)}A${f(c)} ${f(c)} 0 0 0 ${f(t.x0)} ${f(ft - c)}Z` : `H${f(t.x0)}Z`;
+      d += cR > .2 ? `V${f(ft - cR)}A${f(cR)} ${f(cR)} 0 0 0 ${f(t.x1 + cR)} ${f(ft)}V${f(ft + 1)}` : `V${f(ft + 1)}`;
+      d += cL > .2 ? `H${f(t.x0 - cL)}V${f(ft)}A${f(cL)} ${f(cL)} 0 0 0 ${f(t.x0)} ${f(ft - cL)}Z` : `H${f(t.x0)}Z`;
     }
     return d;
   }
@@ -20967,7 +20968,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cr = card.getBoundingClientRect(), ox = cr.left + card.clientLeft, oy = cr.top + card.clientTop;
     const p = pane.getBoundingClientRect(), s = sp.getBoundingClientRect();
     return { x0: p.left - PK_BAND_PAD - ox, x1: p.right + PK_BAND_PAD - ox, top: p.top - PK_BAND_PAD - oy,
-      cl: p.left - s.left > 4, cr: s.right - p.right > 4 };
+      cl: p.left - s.left > 4 ? PK_BAND_C : 0, cr: s.right - p.right > 4 ? PK_BAND_C : 0 };
   }
   function pkBandFit(card) {
     const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
@@ -20997,7 +20998,161 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const W = card.clientWidth, H = card.clientHeight;
     const fr = ft.getBoundingClientRect(), y = fr.top + fr.height / 2 - 1 - card.getBoundingClientRect().top - card.clientTop;   /* كشريط الذيل القديم (‎50% − 1px‎) */
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
-    svg.firstChild.setAttribute('d', pkBandPath(W, H, y, tongues));
+    /* ما يظهر بتلاشٍ (منطقةٌ خارجةٌ لم تكن نشِطة تلبس لونَ الكتلة) في مسارٍ ثانٍ بشفافيّته — واللونُ مُصمَتٌ فلا يغمق ما تراكب */
+    card.pkFxLast = tongues;   /* للفحص: آخرُ ما رُسم */
+    const solid = tongues.filter(t => t.op == null || t.op >= 1), soft = tongues.filter(t => t.op != null && t.op < 1 && t.op > 0);
+    svg.firstChild.setAttribute('d', pkBandPath(W, H, y, solid));
+    let p2 = svg.childNodes[1];
+    if (soft.length) {
+      if (!p2) { p2 = document.createElementNS('http://www.w3.org/2000/svg', 'path'); svg.appendChild(p2); }
+      p2.setAttribute('d', pkBandPath(W, H, y, soft).replace(/^M[^M]*Z/, ''));
+      p2.style.opacity = soft[0].op;
+    } else if (p2) p2.remove();
+  }
+  /* ===== الانطلاقُ من الذيل والعودةُ إليه (ROADMAP-PANEFX · المرحلتان ١–٢) =====
+     محرّكٌ واحد: حلقةُ ‎requestAnimationFrame‎ قصيرةٌ تحسب لكلّ منطقةٍ لسانَها في كلّ إطار — قامتُه (‎lv‎: صفرٌ في الذيل، وواحدٌ قامتُه
+     الكاملة) وحاشيتُه وزاويتُه المقعّرة في جهة جارها — من مستطيلها الحيّ (فيتبع الجارَ وهو يتّسع أو يتضيّق)، وتكتب المسارَ مرّةً،
+     وتقف حين تنتهي. والمحتوى بالشفافيّة والإزاحة وحدهما */
+  /* ‏‎__pkfxSlow‎ يُبطئ الحركة كلَّها بقدرٍ واحد (للفحص إطارًا إطارًا) */
+  const PKFX = { get IN() { return 440 * (window.__pkfxSlow || 1); }, get OUT() { return 360 * (window.__pkfxSlow || 1); } };
+  const pkBez = (x1, y1, x2, y2) => t => {
+    if (t <= 0) return 0; if (t >= 1) return 1;
+    let u = t;
+    for (let i = 0; i < 8; i++) {
+      const x = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u - t;
+      const dx = 3 * (1 - u) * (1 - u) * x1 + 6 * (1 - u) * u * (x2 - x1) + 3 * u * u * (1 - x2);
+      if (Math.abs(x) < 1e-4 || !dx) break;
+      u = Math.min(1, Math.max(0, u - x / dx));
+    }
+    return 3 * (1 - u) * (1 - u) * u * y1 + 3 * (1 - u) * u * u * y2 + u * u * u;
+  };
+  const PKFX_EOUT = pkBez(.2, .8, .2, 1), PKFX_EIO = pkBez(.4, 0, .6, 1);
+  /* قيمةٌ متحرّكة: ‎[من، إلى، بدءٌ، نهايةٌ (كسرٌ من المدّة)، منحنى]‎ — أو رقمٌ ثابت */
+  const pkFxV = (v, t) => {
+    if (!Array.isArray(v)) return v;
+    const [a, b, t0 = 0, t1 = 1, ez = PKFX_EIO] = v;
+    return a + (b - a) * ez(Math.min(1, Math.max(0, (t - t0) / ((t1 - t0) || 1))));
+  };
+  /* لسانُ مسار ‎tr‎ في اللحظة ‎t‎: ‎{ pane, lv, op, side: 'l'|'r', pad, c, clamp }‎ — ‎side‎ جهةُ الجار المعنيّة بالحركة،
+     و‎pad · c‎ حاشيتُها وزاويتُها هناك (والجهةُ الأخرى على حالها)، و‎clamp‎ جارٌ لا يتجاوز اللسانُ حافّتَه الحيّة (‎+14‎) */
+  function pkFxTongue(card, sp, tr, t) {
+    const g = pkBandTongue(card, sp, tr.pane), lv = pkFxV(tr.lv, t);
+    const ox = card.getBoundingClientRect().left + card.clientLeft;
+    if (tr.side) {
+      const pad = pkFxV(tr.pad != null ? tr.pad : PK_BAND_PAD, t), c = tr.c != null ? pkFxV(tr.c, t) : null;
+      const p = tr.pane.getBoundingClientRect();
+      let edge = tr.side === 'l' ? p.left - ox : p.right - ox;
+      if (tr.clamp) {
+        const n = tr.clamp.getBoundingClientRect();
+        edge = tr.side === 'l' ? Math.max(edge, n.right - ox + 14) : Math.min(edge, n.left - ox - 14);
+      }
+      if (tr.side === 'l') { g.x0 = edge - pad; if (c != null) g.cl = c; }
+      else { g.x1 = edge + pad; if (c != null) g.cr = c; }
+    }
+    g.lvl = lv;
+    if (tr.op != null) g.op = pkFxV(tr.op, t);
+    return g;
+  }
+  function pkBandRun(card, tracks, dur, done) {
+    const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || !card.querySelector(':scope > .pk-band')) { done && done(); return; }
+    if (card.pkBandAnim) cancelAnimationFrame(card.pkBandAnim.raf);
+    const st = { raf: 0, t0: performance.now() };
+    card.pkBandAnim = st;
+    card.classList.add('pk--fxrun');
+    /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف */
+    if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
+    const frame = now => {
+      if (card.pkBandAnim !== st || !card.isConnected) return;
+      const t = Math.min(1, (now - st.t0) / dur);
+      const ft = card.querySelector('.pk-ftline'), fr = ft.getBoundingClientRect();
+      const y = fr.top + fr.height / 2 - 1 - card.getBoundingClientRect().top - card.clientTop;
+      const tg = tracks.filter(tr => tr.pane.isConnected).map(tr => {
+        const g = pkFxTongue(card, sp, tr, t);
+        g.top = y + (g.top - y) * g.lvl;
+        return g;
+      });
+      pkBandDraw(card, tg);
+      if (t < 1) st.raf = requestAnimationFrame(frame);
+      else {
+        card.pkBandAnim = null; card.classList.remove('pk--fxrun');
+        if (done) done(); else pkBandFit(card);
+        if (st.busy) cxMorphSettle();
+      }
+    };
+    frame(st.t0);
+  }
+  /* الجهةُ (فعليًّا: يسارٌ أو يمين) التي تواجه فيها المنطقةُ ‎a‎ المنطقةَ ‎b‎ */
+  const pkFxSide = (a, b) => a.getBoundingClientRect().left < b.getBoundingClientRect().left ? 'r' : 'l';
+  /* الدخول: ‎card‎ المربّعُ بعد الرسم، ‎E‎ المنطقةُ الداخلة، ‎N‎ جارُها (يتضيّق بهامشٍ يذوب)، ‎A0‎ اسمُ النشِطة قبلها */
+  function pkPaneEnter(card, E, N, A0) {
+    const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || !card.querySelector(':scope > .pk-band')) return;
+    const side = N ? pkFxSide(E, N) : null;
+    const tracks = [{ pane: E, lv: [0, 1, 0, .7, PKFX_EOUT], side, pad: [0, PK_BAND_PAD, .6, 1], c: [0, PK_BAND_C, .6, 1], clamp: N }];
+    const old = A0 && A0 !== 'x' ? sp.querySelector(':scope > ' + PK_PANE[A0]) : null;
+    if (old && old !== E) {
+      const tr = { pane: old, lv: [1, 0, 0, .6] };
+      if (old === N) { tr.side = pkFxSide(N, E); tr.c = [PK_BAND_C, 0, 0, .25]; }
+      tracks.push(tr);
+    }
+    E.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
+      { duration: PKFX.IN * .55, delay: PKFX.IN * .45, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' });
+    pkBandRun(card, tracks, PKFX.IN);
+  }
+  /* الخروج بلا نسخ: ‎L‎ المنطقةُ الخارجةُ في مكانها الحقيقيّ — محتواها يخفت ويهبط، ولسانُها ينزل في الذيل، وعرضُها ينطوي إلى طرف
+     القسمة فيتّسع الجار؛ ثمّ ‎commit‎ يغيّر الحالَ ويرسم (والرسمُ الساكنُ هو آخرُ إطار) */
+  /* حصّةُ الطرف الآخر تتغيّر بعدد المناطق (‎.383‎ لاثنتين و‎.3‎ لثلاث): تُقرأ بالحال الجديدة مؤقّتًا ⇠ عرضُه بعد التغيير */
+  function pkFxOtherW(sp, id, isBook, after) {
+    const other = sp.querySelector(isBook ? ':scope > .pk-bank' : ':scope > .pk-src');
+    if (!other) return null;
+    const keep = isBook ? pkSplit[id] : pkBank[id];
+    if (isBook) pkSplit[id] = after; else pkBank[id] = after;
+    const share = isBook ? pkSqbR(id) : pkSplR(id);
+    if (isBook) pkSplit[id] = keep; else pkBank[id] = keep;
+    return { pane: other, share };
+  }
+  /* الطرفُ الآخرُ يبلغ عرضَه الجديد بنعومة (لا يقفز في أوّل الحركة أو آخرها) */
+  function pkFxFlex(pane, w0, w1, dur, delay, ez) {
+    if (Math.abs(w0 - w1) < .5) return;
+    pane.animate([{ flexBasis: w0 + 'px' }, { flexBasis: w1 + 'px' }], { duration: dur, delay: delay || 0, easing: ez, fill: delay ? 'both' : 'none' });
+  }
+  function pkPaneExit(card, L, commit, other) {
+    const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || !card.querySelector(':scope > .pk-band') || card.pkBandAnim) { commit(); return; }
+    const isBook = L.classList.contains('pk-src'), D = PKFX.OUT;
+    const actL = card.classList.contains(isBook ? 'pk-act--book' : 'pk-act--bank');
+    const N = sp.querySelector(':scope > .kt-view');
+    const hd = sp.querySelector(isBook ? ':scope > .pk-splh:not(.pk-splh--b)' : ':scope > .pk-splh--b');
+    if (hd) hd.style.opacity = '0';
+    const w = L.getBoundingClientRect().width, mIn = isBook ? 'marginInlineEnd' : 'marginInlineStart';
+    L.style.overflow = 'hidden';
+    L.firstElementChild && [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(12px)' }],
+      { duration: D * .4, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
+    L.animate([{ flexBasis: w + 'px', [mIn]: '0px' }, { flexBasis: '0px', [mIn]: -(parseFloat(getComputedStyle(sp).columnGap) || 14) + 'px' }],
+      { duration: D * .7, delay: D * .3, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
+    if (other) {
+      const ow = other.pane.getBoundingClientRect().width, sw = sp.getBoundingClientRect().width;
+      other.pane.animate([{ flexBasis: ow + 'px' }, { flexBasis: (sw - 14) * other.share + 'px' }],
+        { duration: D * .7, delay: D * .3, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
+    }
+    /* وإن لم يبقَ بعده غيرُ الوسط فلا كتلةَ بعده: الوسطُ لا يصعد */
+    const rest = [...sp.children].filter(x => x !== L && x !== N && x.matches('.pk-src, .pk-bank')).length;
+    const tracks = [];
+    const tl = { pane: L, lv: [1, 0, .25, 1] };
+    if (N) { tl.side = pkFxSide(L, N); tl.pad = [PK_BAND_PAD, 0, 0, .25]; tl.c = [PK_BAND_C, 0, 0, .25]; }
+    if (!actL) tl.op = [0, 1, 0, .25];   /* القرار ٣: الخارجةُ تلبس لونَ الكتلة وهي تنزل */
+    tracks.push(tl);
+    for (const k of ['book', 'mid', 'bank']) {
+      const P = sp.querySelector(':scope > ' + PK_PANE[k]);
+      if (!P || P === L) continue;
+      const act = card.classList.contains('pk-act--' + k);
+      if (!act && !(actL && k === 'mid' && rest)) continue;
+      const tr = { pane: P, lv: act ? 1 : [0, 1, .4, 1, PKFX_EOUT] };
+      if (P === N) { tr.side = pkFxSide(N, L); tr.c = [act ? PK_BAND_C : 0, 0, 0, .25]; }
+      tracks.push(tr);
+    }
+    pkBandRun(card, tracks, D, () => { commit(); });
   }
   function cxHdSet(up) {
     const card = document.querySelector('#cm-body .pk--max');
@@ -22644,6 +22799,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         return;
       }
     }
+    /* ===== ROADMAP-PANEFX: في المكبَّرة يعود البنكُ إلى الذيل في مكانه الحقيقيّ ثمّ يُرسم ===== */
+    if (on && post && post.classList.contains('pk--bandfx') && !bkReduce()) {
+      const bk = post.querySelector('.post-ytmain > .pk-split > .pk-bank');
+      if (bk) {
+        pkPaneExit(post, bk, () => {
+          cxSel.clear(); pkBank[id] = false;
+          renderCmSection();
+          const c2 = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
+          if (c2) c2.focus({ preventScroll: true });
+        }, pkFxOtherW(bk.parentElement, id, false, false));
+        return;
+      }
+    }
+    const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
+    const bookR0 = act0 && post ? (post.querySelector('.post-ytmain > .pk-split > .pk-src') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
     const viewOf = pst => pst && pst.querySelector('.post-ytmain > .pk-split > .kt-view, .post-ytmain > .kt-view');
     const v0 = viewOf(post), r0 = v0 ? v0.getBoundingClientRect() : null, en = state.lang === 'en';
     let fly = null;
@@ -22664,6 +22834,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const pane = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
       if (pane) {
         const d = Math.max(1, Math.round(en ? r0.right - n.right : n.left - r0.left));
+        if (post2.classList.contains('pk--bandfx') && act0) {
+          nv.animate([{ marginInlineEnd: -d + 'px' }, { marginInlineEnd: '0px' }], { duration: PKFX.IN, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+          const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
+          if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN, 0, 'cubic-bezier(.2, .8, .2, 1)');
+          pkPaneEnter(post2, pane, nv, act0);
+          if (ctl) ctl.focus({ preventScroll: true });
+          return;
+        }
         pane.style.position = 'relative'; pane.style.zIndex = '2';
         setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, SPL_MS + 40);
         pane.animate([
@@ -22774,6 +22952,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       };
       /* «المصدر» مفتاحُ الكتاب: يُدخله بجانب العرض (ومن بنك الأسئلة إلى آخر عرضٍ من الثلاثة) ويُخرجه.
          وغيرُه من الثلاثة يبدّل الجار والكتابُ باقٍ. ونقرُ العرض المضيء نفسِه لا يفعل شيئًا */
+      /* ===== ROADMAP-PANEFX: في المكبَّرة (الكتلةُ قائمة) يعود الكتابُ إلى الذيل في مكانه الحقيقيّ ثمّ يُرسم — بلا نسخ ===== */
+      if (part && to === 'source' && post && post.classList.contains('pk--bandfx') && !bkReduce()) {
+        const bookEl = sp && sp.querySelector(':scope > .pk-src');
+        if (bookEl) {
+          pkPaneExit(post, bookEl, () => {
+            pkSplit[id] = false;
+            if (PK_SPLIT_VIEWS.includes(pkVwOf(id))) pkLastKn[id] = pkVwOf(id);
+            renderCmSection();
+            const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`);
+            if (nb) nb.focus({ preventScroll: true });
+          }, pkFxOtherW(sp, id, true, false));
+          return;
+        }
+      }
+      const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
+      const bankW0 = act0 && sp ? (sp.querySelector(':scope > .pk-bank') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
       let enter = false;
       /* مستطيلُ العرض قبل دخول الكتاب — منه يتضيّق إلى مكانه الجديد */
       const before = !part && to === 'source' && post ? post.querySelector('.post-ytmain > .kt-view') : null;
@@ -22801,6 +22995,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const pr = pane.getBoundingClientRect(), en = state.lang === 'en';
           const n = nv ? nv.getBoundingClientRect() : null;
           const d = Math.max(1, Math.round(n ? (en ? n.left - pr.left : pr.right - n.right) : pr.width + 14));
+          /* ROADMAP-PANEFX: في المكبَّرة لا ينزلق — يصعد لسانُه من الذيل والجارُ يفسح له، ثمّ يظهر محتواه */
+          if (post2.classList.contains('pk--bandfx') && act0) {
+            if (nv) nv.animate([{ marginInlineStart: -d + 'px' }, { marginInlineStart: '0px' }], { duration: PKFX.IN, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+            const bk1 = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
+            if (bk1 && bankW0) pkFxFlex(bk1, bankW0.width, bk1.getBoundingClientRect().width, PKFX.IN, 0, 'cubic-bezier(.2, .8, .2, 1)');
+            pkPaneEnter(post2, pane, nv, act0);
+            const ae = document.activeElement;
+            if (!ae || ae === document.body || !ae.isConnected) { const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`); if (nb) nb.focus({ preventScroll: true }); }
+            return;
+          }
           pane.style.position = 'relative'; pane.style.zIndex = '2';
           setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, SPL_MS + 40);
           pane.animate([
