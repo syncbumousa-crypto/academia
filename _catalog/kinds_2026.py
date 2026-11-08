@@ -7,12 +7,13 @@ plan): how many majors require the course.
                         (ENGL, IAS 111/121/212, MATH 101/102, PE 101, ...)
   college  مواد كلية    not common, and: required by more than half the
                         majors of the same college; or a 100/200-level
-                        math/science course (MATH, STAT, PHYS, CHEM, BIOL)
-                        outside the major's own department;
+                        math/science course (MATH, STAT, PHYS, CHEM, BIOL);
                         or listed in the plan's own college section
                         ("College Core Requirements", "Math & Science
                         Requirements", "General Engineering Fundamentals")
-  major    مواد تخصص    the rest of the major's plan
+  major    مواد تخصص    the rest of the major's plan, and any plan course from
+                        the major's own subject (HOME): MKT 250 is a college
+                        course, but a major course for Marketing
   elective مواد اختيارية linked to the major but not in its plan
   OVERRIDE              decisions taken by hand on the borderline cases
 
@@ -62,8 +63,16 @@ uni = collections.Counter(c for t in MAJORS for c in core[t])
 share = collections.Counter((college_of[t], c) for t in MAJORS for c in core[t])
 COMMON = {c for c, n in uni.items() if 3 * n >= 2 * len(MAJORS)}
 OVERRIDE = {}   # (code, tag) -> kind, or (code, '*') for every major
-# the major's own science department: its 100/200 courses are the major's, not the college's
-OWN = {'math': 'MATH', 'amai': 'MATH', 'phys': 'PHYS', 'eep': 'PHYS', 'chem': 'CHEM'}
+# the major's own subject prefixes: a college course from them is the major's own course
+# (MKT 250 is a college course for Business majors, a major course for Marketing)
+HOME = {'mis': ['MIS'], 'acf': ['ACF', 'ACCT'], 'ffe': ['FFE', 'FIN'], 'dsmm': ['DSMM', 'MKT'], 'fte': ['FNT', 'ENTR'],
+        'baai': ['BAI'], 'osc': ['OSC', 'OM'], 'acct': ['ACCT'], 'fin': ['FIN'], 'mgt': ['MGT'], 'mkt': ['MKT'],
+        'hrm': ['HRM'], 'cs': ['ICS'], 'swe': ['SWE'], 'coe': ['COE'], 'ise': ['ISE'], 'amai': ['MATH'],
+        'dse': ['DATA'], 'sde': ['SDE'], 'aics': ['AISC'], 'math': ['MATH'], 'asfm': ['AS'], 'che': ['CHE'],
+        'mse': ['MSE'], 'chem': ['CHEM'], 'bioe': ['BIOE'], 'bioepm': ['BIOE'], 'pete': ['PETE'], 'geop': ['GEOP'],
+        'geol': ['GEOL'], 'mine': ['MINE'], 'ce': ['CE'], 'are': ['ARE'], 'idsn': ['ITD'], 'ssc': ['SSC'],
+        'ese': ['ESE'], 'ae': ['AE'], 'ee': ['EE'], 'me': ['ME'], 'phys': ['PHYS'], 'cie': ['CIE'],
+        'eep': ['EE', 'PHYS']}
 
 
 def in_college_section(code, tag):
@@ -80,7 +89,9 @@ def kind(code, tag):
         return 'common'
     g = college_of[tag]
     p, n = code.split()
-    if (share[(g, code)] * 2 > len(COLLEGES[g]) or (p in SCIENCE and n[0] in '12' and OWN.get(tag) != p)
+    if p in HOME[tag]:
+        return 'major'
+    if (share[(g, code)] * 2 > len(COLLEGES[g]) or (p in SCIENCE and n[0] in '12')
             or in_college_section(code, tag)):
         return 'college'
     return 'major'
