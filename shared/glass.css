@@ -537,11 +537,12 @@ html:root .market-tools .fact-scroll .fact-bar {
   position: absolute; bottom: 3px; inset-inline: 8px 16px; height: 4px; margin: 0;
 }
 html:root .market-tools .fact-scroll .fact-bar i { height: 4px; top: 0; border-radius: 999px; }
-/* وإذا ظهر الشريطُ أفسحت له الرقاقاتُ: تصغر قليلًا وترتفع، فلا يمسّ حرفَها */
+/* وإذا ظهر الشريطُ ارتفعت الرقاقاتُ له — ولا يتغيّر عرضُها. كانت تصغر حين يظهر،
+   فتتّسع لها الكبسولةُ فيختفي، فتكبر فتضيق فيظهر… فتنبض بلا توقّف عند الحدّ.
+   فالشريطُ لا يمسّ إلّا الموضعَ العموديّ، وما يقيسه (العرض) لا يتبدّل به */
 html:root .market-tools .fact-scroll.is-over .factive { align-self: flex-start; padding-top: 4px; }
-html:root .market-tools .fact-scroll.is-over .fact { height: 27px; padding: 0 10px; font-size: 11.5px; }
 html:root .market-tools .fact {
-  flex: none; height: 32px; padding: 0 12px; border-radius: 999px; white-space: nowrap;
+  flex: none; height: 28px; padding: 0 11px; font-size: 12px; border-radius: 999px; white-space: nowrap;
   background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 13%, transparent);
 }
 html:root .market-tools .fact:hover { background: color-mix(in srgb, #b3433c 15%, transparent); }
