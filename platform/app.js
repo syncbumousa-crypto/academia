@@ -21099,7 +21099,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف */
     if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
     const draw = t => {
-      const ft = card.querySelector('.pk-ftline'), fr = ft.getBoundingClientRect();
+      const ft = card.querySelector('.pk-ftline');
+      if (!ft || !card.querySelector(':scope > .pk-band')) return;   /* الضيّقة: لا ذيلَ ولا كتلة — الحركةُ بلا لسان */
+      const fr = ft.getBoundingClientRect();
       const y = fr.top + fr.height / 2 - 1 - card.getBoundingClientRect().top - card.clientTop;
       pkBandDraw(card, st.tracks.filter(tr => tr.pane.isConnected).map(tr => {
         const g = pkFxTongue(card, sp, tr, t);
