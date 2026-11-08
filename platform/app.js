@@ -9175,13 +9175,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     card: '<rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M12 9v6M9 12h6"/>',
   };
   const pkActB = (attr, ic, tip, cls = '') => `<button type="button" class="cx-actb${cls}" ${attr} title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></button>`;
-  function pkActTools(id) {
+  function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
     if (a === 'book') {
       const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
     }
+    /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
+    if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;
     /* ومقسومُ «قائمة · رحلة» يخصّ شجرةَ البنك وحدها: في الخانة مع أدواته، ولا يظهر إلّا والبنكُ نشِط (طلبُ صاحب الموقع) */
     if (a === 'bank') return cxJrSeg(cardData(cmCode)) + pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]]);
     return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC]]);
@@ -9214,11 +9216,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (post.querySelector('.post-ytmain > .pk-split')) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools');
-    if (slot) slot.innerHTML = pkActTools(id);
+    if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
   }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
-    const pane = e.target.closest && e.target.closest('#cm-body .pk--edit .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
+    const pane = e.target.closest && e.target.closest('#cm-body .pk--max .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
     if (!pane) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
     if (!ctl) return;
@@ -11116,7 +11118,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoDot = kind === 'c' ? packEntered(deck) : true;
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roAct = maxd && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) ? ' pk-act--' + pkActOf(p.id) : '';
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -11140,7 +11143,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                 ? `<div class="x3 cx-ro${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(p.data.qb, V.fold, 0, kind)}</div>`
                 : `<p class="v-none pk-qbempty">${esc(T().pkQbEmpty)}</p>`)
               : `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>`) : ''}
-          ${maxd ? cxFtLine() + cxPubFoot() : ''}
+          ${maxd ? cxFtLine() + cxPubFoot(kind === 'c' ? p.id : '') : ''}
           ${reactRowHTML(p, likeAttr, '')}
         </div>
         ${postMenuHTML(p, likeAttr, `data-sub="${sub}"`)}
@@ -20887,8 +20890,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       title="${esc(cxFtDn ? T().ftUp : T().ftDown)}" aria-label="${esc(cxFtDn ? T().ftUp : T().ftDown)}">
       <span class="pk-hdline__ln"></span><span class="pk-hdline__grip"><i></i><i></i><i></i></span></button>`;
   /* وقاعُ المنشورة المكبَّرة: الخطُّ نفسُه، وتحته «إخفاء الكل» (فعلُه يجيء لاحقًا بشرح صاحب الموقع) */
-  const cxPubFoot = () => `<div class="pk-pubfoot">
-      <button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>
+  /* وفي المختبر خانةُ الكتلة نفسُها (‎cx-acttools‎) — فأدواتُ الكتاب في وسط الذيل حين يكون نشِطًا كما في التحرير */
+  const cxPubFoot = id => `<div class="pk-pubfoot">
+      ${id && pkLab() ? `<div class="cx-acttools" data-pkid="${esc(id)}">${pkActTools(id, true)}</div>`
+        : `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`}
     </div>`;
   function cxFtSet(dn) {
     const card = document.querySelector('#cm-body .pk--max');

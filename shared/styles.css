@@ -17294,3 +17294,12 @@ html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp
 .pp-pen { inset-inline-start: auto; right: 6cqh; left: auto; }
 html[data-lang="en"] .pp-num { left: auto; right: 7cqh; }
 html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6cqh; }
+
+/* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
+   مسكةُ طيّ الذيل كانت شريطًا أفقيًّا على موضع الالتقاء نفسِه فتقطع الكتلة: تُخفى ما دامت كتلة، وتظهر عند المرور أو التركيز */
+.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip { background: transparent; }
+.pk--max:is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip i { opacity: 0; }
+/* والنشرُ: خانةُ الكتلة في وسط ذيله كما في التحرير */
+.pk-pubfoot { position: relative; min-height: 34px; }
+.pk--ftdn .pk-pubfoot { min-height: 0; }
+.pk-pubfoot > .cx-acttools { top: calc(50% + 2px); }
