@@ -17286,10 +17286,10 @@ html[data-theme="dark"] .pk--max { --pk-band: #1d2426; }
    رسمةٌ بخطوطٍ مسطّحة ولمسةٍ ذهبيّة، وعنوانٌ وسطرُ شرحٍ وزرُّ البداية */
 .pk-es { --es-tx: #1f2a2d; --es-mut: #6b777b; --es-ln: #cfd6d8; --es-bg: #fff; --es-g: #b8862b; --es-gb: rgba(184, 134, 43, .08);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  width: 100%; height: 100%; min-height: 380px; padding: 24px 20px; box-sizing: border-box; text-align: center; container-type: inline-size; }
+  width: 100%; height: 100%; min-height: 380px; padding: 24px 20px; box-sizing: border-box; text-align: center; }
 html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #465255; --es-bg: #2a3234; --es-g: #e1c172; --es-gb: rgba(225, 193, 114, .08); }
-.pk-es__art { width: 190px; height: 120px; margin-bottom: 4px; flex: none; }
-.pk-es--qb .pk-es__art { width: 132px; height: 112px; }
+.pk-es__art { width: min(190px, 100%); aspect-ratio: 190 / 120; margin-bottom: 4px; flex: none; }   /* تصغُر مع ضيق المساحة ولا تختفي */
+.pk-es--qb .pk-es__art { width: min(132px, 100%); aspect-ratio: 132 / 112; }
 .pk-es__art svg { width: 100%; height: 100%; display: block; }
 .pk-es .es-f { fill: var(--es-bg); stroke: var(--es-ln); }
 .pk-es .es-fg { fill: var(--es-bg); stroke: var(--es-g); }
@@ -17305,7 +17305,6 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .pk-es__b:hover { filter: brightness(1.06); transform: translateY(-1px); }
 .pk-es__b:active { transform: none; }
 .pk-es__b svg { width: 16px; height: 16px; flex: none; }
-@container (max-width: 230px) { .pk-es__art { display: none; } .pk-es__p { font-size: 12px; } }
 /* وعاءُ المصدر الفارغ والوسطُ الفارغ: الرسمةُ في الوسط بلا إطارٍ مرقّط */
 .pk-src.pk-src--es { display: flex; padding: 0; }
 .pk-split__ph--es { display: flex; }
