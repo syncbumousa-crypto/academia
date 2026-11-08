@@ -1,0 +1,1267 @@
+{
+ "acct": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 106": {
+    "name": "Calculus for Business",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 105": {
+    "name": "Finite Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 214": {
+    "name": "Actuaries and Business Statistics",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 250": {
+    "name": "Principles of Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 210": {
+    "name": "Business Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MIS 250": {
+    "name": "Management Information Systems",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "OM 210": {
+    "name": "Operations Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 310": {
+    "name": "Organization Behavior",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 306": {
+    "name": "Economy of Saudi Arabia",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 300": {
+    "name": "Accounting Information Systems",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "ACCT 301": {
+    "name": "Intermediate Accounting I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 355": {
+    "name": "Business Research Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "OM 311": {
+    "name": "Business Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 302": {
+    "name": "Intermediate Accounting II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 410": {
+    "name": "Costing, Budgeting & Performance Analysis",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "ACCT 311": {
+    "name": "Auditing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 321": {
+    "name": "Data Analytics for Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 477": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MGT 449": {
+    "name": "Strategic Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 403": {
+    "name": "Advanced Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 478": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "ACCT 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "ACCT 3/4xx | ACCT Elective 1",
+   "ACCT 3/4xx | ACCT Elective 2",
+   "GS xxx | GS Elective",
+   "IAS 3/4xx | Islamic/Arabic Elective",
+   "MGT 311/313 | Legal Environment/Int. Legal Envir.",
+   "XXX 3/4xx | Business Elective I",
+   "XXX 3/4xx | Business Elective II",
+   "XXX 3/4xx | Business Elective III"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, 418|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Introduction to Programming in Python and C|ICS 104|3|Total|12|College Core Requirements|Title|Courses|Credit Hours|Math|MATH 105, 106|6|Statistics|STAT 211, 212|6|Accounting|ACCT 110, 210|6|Business Communication|MGT 210|3|Economics|ECON 101, 102, 306|9|Management|MGT 301, (311 or 313), 449|9|Management Information Systems|MIS 101, 215|4|Principles of Marketing|MKT 250|3|Financial Management|FIN 250|3|Operations Management|OM 210, 311|6|Business Research Methods|MGT 355|3|Business Electives|Two XXX 3/4xx Courses|6|Total|64|Accounting Major Requirements|Title|Courses|Credit Hours|Accounting Information Systems|ACCT 300|3|Intermediate Accounting I|ACCT 301|3|Intermediate Accounting II|ACCT 302|3|Auditing|ACCT 311|3|Advanced Accounting|ACCT 403|3|Costing, Budgeting & Performance Analysis|ACCT 410|3|ACCT Electives|Two ACCT 3/4xx Courses|6|Total|24|Internship|Title|Courses|Credit Hours|Internship|ACCT 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "fin": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 214": {
+    "name": "Actuaries and Business Statistics",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 250": {
+    "name": "Principles of Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 210": {
+    "name": "Business Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MIS 250": {
+    "name": "Management Information Systems",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "OM 210": {
+    "name": "Operations Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 306": {
+    "name": "Economy of Saudi Arabia",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 301": {
+    "name": "Intermediate Accounting I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 315": {
+    "name": "Corporate Finance",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "OM 311": {
+    "name": "Business Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 310": {
+    "name": "Organization Behavior",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 320": {
+    "name": "Investments Management and Capital Markets",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 415": {
+    "name": "Management of Financial Institutions",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "FIN 425": {
+    "name": "Financial Modeling",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 477": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MGT 449": {
+    "name": "Strategic Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 450": {
+    "name": "Case Studies in Finance",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 478": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "OM 201": {
+    "name": "Statistic Methods for Management I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "ECON 3/4xx | ECON Elective",
+   "FIN 3/4xx | FIN Elective I",
+   "FIN 3/4xx | FIN Elective II",
+   "GS xxx | GS Elective",
+   "IAS 3/4xx | Islamic/Arabic Elective",
+   "MGT 311/313 | Legal Environment/Int. Legal Envir.",
+   "XXX 3/4xx | Business Elective I",
+   "XXX 3/4xx | Business Elective II",
+   "XXX 3/4xx | Business Elective III"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, 418|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|College Core Requirements|Title|Courses|Credit Hours|Math|MATH 105, 106|6|Statistics|STAT 211, 212|6|Accounting|ACCT 110, 210|6|Business Communication|MGT 210|3|Economics|ECON 101, 102, 306|9|Management|MGT 301, (311 or 313), 449|9|Management Information Systems|MIS 101, 215|4|Principles of Marketing|MKT 250|3|Financial Management|FIN 250|3|Operations Management|OM 210, 311|6|Business Research Methods|MGT 355|3|Business Electives|Two XXX 3/4xx Courses|6|Total|64|Finance Major Requirements|Title|Courses|Credit Hours|Intermediate Accounting I|ACCT 301|3|Corporate Finance|FIN 315|3|Investments Management and Capital Markets|FIN 320|3|Financial Modeling|FIN 425|3|Case Studies in Finance|FIN 450|3|FIN Elective|Two FIN 3/4xx Courses|6|ECON Elective|ECON 3/4xx|3|Total|24|Internship|Title|Courses|Credit Hours|Internship|FIN 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "mgt": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 105": {
+    "name": "Finite Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MIS 101": {
+    "name": "Business Computing",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 106": {
+    "name": "Calculus for Business",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MIS 215": {
+    "name": "Principles of Management Information Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 211": {
+    "name": "Statistics for Business I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MGT 301": {
+    "name": "Principles of Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 250": {
+    "name": "Principles of Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MGT 210": {
+    "name": "Business Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 212": {
+    "name": "Statistics for Business II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "OM 210": {
+    "name": "Operations Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 301": {
+    "name": "Human Resources Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 310": {
+    "name": "Organization Behavior",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 430": {
+    "name": "Organizational Leadership",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MGT 355": {
+    "name": "Business Research Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 306": {
+    "name": "Economy of Saudi Arabia",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "OM 311": {
+    "name": "Business Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "MGT 440": {
+    "name": "International Business",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 449": {
+    "name": "Strategic Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 450": {
+    "name": "Management of Innovation and Change",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS 3/4xx | Islamic/Arabic Elective",
+   "MGT 3/4xx | MGT  Elective 3",
+   "MGT 3/4xx | MGT Elective 1",
+   "MGT 3/4xx | MGT Elective 2",
+   "MGT 311/313 | Legal Environment/Int. Legal Envir.",
+   "XXX 3/4xx | Business Elective I",
+   "XXX 3/4xx | Business Elective II",
+   "XXX 3/4xx | Business Elective III",
+   "XXX 3/4xx | Business Elective IV"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, 418|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|College Core Requirements|Title|Courses|Credit Hours|Math|MATH 105, 106|6|Statistics|STAT 211, 212|6|Accounting|ACCT 110, 210|6|Business Communication|MGT 210|3|Economics|ECON 101, 102, 306|9|Management|MGT 301, (311 or 313), 449|9|Management Information Systems|MIS 101, 215|4|Principles of Marketing|MKT 250|3|Financial Management|FIN 250|3|Operations Management|OM 210, 311|6|Business Research Methods|MGT 355|3|Business Electives|Two XXX 3/4xx|6|Total|64|Management Major Requirements|Title|Courses|Credit Hours|Human Resources Management|HRM 301|3|Organizational Leadership|MGT 430|3|Organization Behavior|MGT 310|3|International Business|MGT 440|3|Management of Innovation and Change|MGT 450|3|MGT Electives|Three MGT 3/4xx Courses|9|Total|24|Internship|Title|Courses|Credit Hours|Internship|MGT 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "mkt": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 105": {
+    "name": "Finite Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MIS 101": {
+    "name": "Business Computing",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 106": {
+    "name": "Calculus for Business",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MIS 215": {
+    "name": "Principles of Management Information Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 211": {
+    "name": "Statistics for Business I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MKT 250": {
+    "name": "Principles of Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 212": {
+    "name": "Statistics for Business II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 210": {
+    "name": "Business Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MGT 301": {
+    "name": "Principles of Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 306": {
+    "name": "Economy of Saudi Arabia",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 355": {
+    "name": "Business Research Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 360": {
+    "name": "Product & Brand Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 370": {
+    "name": "Integrated Marketing Communications",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "OM 210": {
+    "name": "Operations Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MKT 345": {
+    "name": "Marketing Research",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 485": {
+    "name": "Digital Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "OM 311": {
+    "name": "Business Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 449": {
+    "name": "Strategic Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 410": {
+    "name": "Consumer Behavior",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 450": {
+    "name": "Strategic Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS 3/4xx | Islamic/Arabic Elective",
+   "MGT 311/313 | Legal Environment/Int. Legal Envir.",
+   "MKT 3/4xx | MKT Elective 1",
+   "MKT 3/4xx | MKT Elective 2",
+   "XXX 3/4xx | Business Elective I",
+   "XXX 3/4xx | Business Elective II",
+   "XXX 3/4xx | Business Elective III",
+   "XXX 3/4xx | Business Elective IV"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, 418|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|College Core Requirements|Title|Courses|Credit Hours|Math|MATH 105, 106|6|Statistics|STAT 211, 212|6|Accounting|ACCT 110, 210|6|Business Communication|MGT 210|3|Economics|ECON 101, 102, 306|9|Management|MGT 301, (311 or 313), 449|9|Management Information Systems|MIS 101, 215|4|Principles of Marketing|MKT 250|3|Financial Management|FIN 250|3|Operations Management|OM 210, 311|6|Business Research Methods|MGT 355|3|Business Electives|Two XXX 3/4xx|6|Total|64|Marketing Major Requirements|Title|Courses|Credit Hours|Product & Brand Management|MKT 360|3|Marketing Research|MKT 345|3|Integrated Marketing Communications|MKT 370|3|Consumer Behavior|MKT 410|3|Strategic Marketing|MKT 450|3|Digital Marketing|MKT 485|3|MKT Electives|Two MKT 3/4xx|6|Total|24|Internship|Title|Courses|Credit Hours|Internship|MKT 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "hrm": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 106": {
+    "name": "Calculus for Business",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 105": {
+    "name": "Finite Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 214": {
+    "name": "Actuaries and Business Statistics",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 301": {
+    "name": "Human Resources Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 210": {
+    "name": "Business Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MIS 250": {
+    "name": "Management Information Systems",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "OM 210": {
+    "name": "Operations Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MKT 250": {
+    "name": "Principles of Marketing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 312": {
+    "name": "Employment Law",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 310": {
+    "name": "Organization Behavior",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 401": {
+    "name": "Staffing & Selection",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MGT 355": {
+    "name": "Business Research Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "OM 311": {
+    "name": "Business Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ECON 306": {
+    "name": "Economy of Saudi Arabia",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 403": {
+    "name": "Compensation and Benefits Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "HRM 402": {
+    "name": "Training & Development",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 477": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MGT 449": {
+    "name": "Strategic Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 450": {
+    "name": "Strategic Human Resource Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "HRM 478": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "HRM 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "HRM 3/4xx | HRM Elective 1",
+   "HRM 3/4xx | HRM Elective 2",
+   "IAS 3/4xx | Islamic/Arabic Elective",
+   "MGT 311/313 | Legal Environment/Int. Legal Envir.",
+   "XXX 3/4xx | Business Elective I",
+   "XXX 3/4xx | Business Elective II",
+   "XXX 3/4xx | Business Elective III",
+   "XXX 3/4xx | Business Elective IV"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ }
+}

@@ -18,6 +18,7 @@
 
 Plans: data/plan_sections_bulletin.json (sections + MIS plan from the
 bulletin), data/plans_ccm_bulletin.json, data/plans_colleges_bulletin.json,
+data/plans_oldbiz_bulletin.json,
 out/business_2026.json.
 
   python3 _catalog/kinds_2026.py <live_catalog.json>
@@ -31,7 +32,7 @@ SECT = J('data', 'plan_sections_bulletin.json')
 LIVE = J(sys.argv[1]) if os.path.isabs(sys.argv[1]) else json.load(open(sys.argv[1], encoding='utf-8'))
 
 COLLEGES = [
-    ['mis', 'acf', 'ffe', 'dsmm', 'fte', 'baai', 'osc'],
+    ['mis', 'acf', 'ffe', 'dsmm', 'fte', 'baai', 'osc', 'acct', 'fin', 'mgt', 'mkt', 'hrm'],
     ['cs', 'swe', 'coe', 'ise', 'amai', 'dse', 'sde', 'aics', 'math', 'asfm'],
     ['che', 'mse', 'chem', 'bioe', 'bioepm'],
     ['pete', 'geop', 'geol', 'mine'],
@@ -39,14 +40,14 @@ COLLEGES = [
     ['ae', 'ee', 'me', 'phys', 'cie', 'eep'],
 ]
 COMMON_SECTIONS = {'General Studies Requirements', 'Digital/Business Foundation'}
-COLLEGE_SECTIONS = {'Math & Science Requirements', 'General Engineering Fundamentals',
+COLLEGE_SECTIONS = {'College Core Requirements', 'Math & Science Requirements', 'General Engineering Fundamentals',
                     'Math, Science & Physics', 'Economics & Accounting'}
 ELECTIVE_SECTIONS = {'Electives'}
 SCIENCE = {'MATH', 'STAT', 'PHYS', 'CHEM', 'BIOL'}   # math & science, where a plan has no sections
 
 # plan (required) courses per major
 core = collections.defaultdict(set)
-for f in ('plans_ccm_bulletin.json', 'plans_colleges_bulletin.json'):
+for f in ('plans_ccm_bulletin.json', 'plans_colleges_bulletin.json', 'plans_oldbiz_bulletin.json'):
     for tag, plan in J('data', f).items():
         core[tag] |= set(plan['core'])
 for code, tags in J('out', 'business_2026.json')['links'].items():
