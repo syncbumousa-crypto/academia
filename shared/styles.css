@@ -17104,8 +17104,9 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
    (‎#cm-cards‎ — يُظهَر هنا وإن أخفته العروضُ الثلاثة)، وفي النشر شجرةُ البنك قراءةً. تُمرَّر في جوفها ولا تُطيل القسمة */
 .pk-split > .pk-bank {
   flex: 0 0 calc((100% - var(--g, 14px)) * var(--sqb, .383)); min-width: 0; min-height: 0;
-  display: flex; flex-direction: column; padding: 10px 12px; border-radius: 14px;
-  border: 1.5px solid var(--u-line, rgba(127, 127, 127, .2)); background: var(--u-surf, transparent); overflow: hidden;
+  display: flex; flex-direction: column; padding: 0; overflow: hidden;
+  /* بلا مربّعٍ خاصّ (طلبُ صاحب الموقع): المجلداتُ على المربّع الأساسيّ مباشرةً، كما كانت في العرض المجلّديّ */
+  border: 0; border-radius: 0; background: none;
 }
 .pk-split > .pk-splh--b { inset-inline-start: auto; inset-inline-end: calc((100% - var(--g, 14px)) * var(--sqb, .383)); }
 .pk--vwalt .pk-bank #cm-cards { display: block; }
