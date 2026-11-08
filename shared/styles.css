@@ -16365,7 +16365,7 @@ html[data-theme="dark"] .pk-hdline:hover { color: #d4b36a; }
 .pk-hideall:hover { border-color: rgba(201, 162, 92, .6); }
 .pk-hideall:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
 .pk--ftdn .pk-pubfoot { max-height: 0; padding-top: 0; opacity: 0; visibility: hidden; overflow: hidden; }
-.pk--ftanim .pk-pubfoot { transition: max-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }
+.pk--ftanim .pk-pubfoot { transition: max-height .22s ease, min-height .22s ease, opacity .18s ease, padding .22s ease, visibility .22s; overflow: hidden; }   /* ‎min-height‎ معها (ROADMAP-SMOOTH: كان يقفز ‎34px‎) */
 @media (prefers-reduced-motion: reduce) { .pk--ftanim .pk-pubfoot { transition: none; } }
 
 /* ===== رأسُ المكبَّرة وذيلُها شريطان أغمقُ بدرجة (الاقتراحُ ٣ — اختيارُ صاحب الموقع) =====

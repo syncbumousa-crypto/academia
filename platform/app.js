@@ -23038,8 +23038,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const st = runPost.pkBandAnim, sel = to === 'source' ? '.pk-src' : '.pk-bank';
         if (st.pane && st.pane.matches(sel) && st.onRev && pkFxReverse(runPost)) return;
         pkFxFinish(runPost);
-        const nb = document.querySelector(`#cm-body [data-pkview="${CSS.escape(to)}"][data-pkid="${CSS.escape(id)}"]`);
-        if (nb) nb.click();
+        /* بعد انتهاء هذه النقرة: ‎click()‎ على الزرّ نفسِه أثناء نقرته يتجاهلها المتصفّح (‎click in progress‎) */
+        setTimeout(() => { const nb = document.querySelector(`#cm-body [data-pkview="${CSS.escape(to)}"][data-pkid="${CSS.escape(id)}"]`); if (nb) nb.click(); }, 0);
         return;
       }
       if (to === 'folder' && pkLab()) { pkBankToggle(id, pv); return; }   /* أيقونةُ المجلد مفتاحُ منطقة البنك (ROADMAP-BANKPANE) */
