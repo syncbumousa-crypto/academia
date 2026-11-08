@@ -16891,7 +16891,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk-split { display: flex; gap: 14px; align-items: stretch; min-height: 0; }
 /* حصّةُ الكتاب ‎--spl‎ من العرض بعد الفُرجة (افتراضُها ‎.383‎ = ‎.62 : 1‎ كما كانت) — يغيّرها خطُّ الفاصل (ROADMAP-SPLITTER) */
 .pk-split { position: relative; }
-.pk-split > .pk-src { flex: 0 0 calc((100% - 14px) * var(--spl, .383)); min-width: 0; }   /* الكتابُ على حصّته، واللوحُ يأخذ الباقي */
+.pk-split > .pk-src { flex: 0 0 calc((100% - var(--g, 14px)) * var(--spl, .383)); min-width: 0; }   /* الكتابُ على حصّته، واللوحُ يأخذ الباقي */
 .pk-split > .kt-view--tree { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; margin-bottom: 0; }
 /* والبطاقيُّ والجدوليُّ جارين: يُمرَّران في جانبهما ولا يُطيلان القسمة */
 .pk-split > .kt-view:not(.kt-view--tree) {
@@ -17082,7 +17082,7 @@ html[data-theme="dark"] .cx-midadd { color: #d4b36a; background: color-mix(in sr
    وتظهر في وسطه مسكةٌ بثلاث نقاط كمسكات الموقع */
 .pk-splh {
   position: absolute; z-index: 3; inset-block: 0; width: 14px;
-  inset-inline-start: calc((100% - 14px) * var(--spl, .383));
+  inset-inline-start: calc((100% - var(--g, 14px)) * var(--spl, .383));
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
   cursor: col-resize; touch-action: none; outline: none;
 }
@@ -17098,3 +17098,21 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 .pk-split.is-spldrag { user-select: none; -webkit-user-select: none; cursor: col-resize; }
 .pk-split.is-spldrag > :not(.pk-splh) { pointer-events: none; }
 @media (max-width: 760px) { .pk-splh { display: none; } }
+
+/* ===== منطقةُ البنك يسارًا (ROADMAP-BANKPANE) =====
+   حصّتُها ‎--sqb‎ من العرض بعد الفُرَج، وخطُّها عند حافّتها الداخليّة (من نهاية الصفّ). وفيها في التحرير وعاءُ المحرّر
+   (‎#cm-cards‎ — يُظهَر هنا وإن أخفته العروضُ الثلاثة)، وفي النشر شجرةُ البنك قراءةً. تُمرَّر في جوفها ولا تُطيل القسمة */
+.pk-split > .pk-bank {
+  flex: 0 0 calc((100% - var(--g, 14px)) * var(--sqb, .383)); min-width: 0; min-height: 0;
+  display: flex; flex-direction: column; padding: 10px 12px; border-radius: 14px;
+  border: 1.5px solid var(--u-line, rgba(127, 127, 127, .2)); background: var(--u-surf, transparent); overflow: hidden;
+}
+.pk-split > .pk-splh--b { inset-inline-start: auto; inset-inline-end: calc((100% - var(--g, 14px)) * var(--sqb, .383)); }
+.pk--vwalt .pk-bank #cm-cards { display: block; }
+.pk-bank > #cm-cards, .pk-bank > .x3 { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; margin: 0; padding-inline-end: 4px;
+  scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent; }
+.pk-split:not(.pk--max *) > .pk-bank { max-height: 72vh; }
+.pk-bank > .pk-qbempty { margin: auto; }
+@media (max-width: 760px) {
+  .pk-split > .pk-bank { flex: none; max-height: 60vh; }
+}

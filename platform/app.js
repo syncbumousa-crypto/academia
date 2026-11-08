@@ -9151,11 +9151,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
   const pkVw = {}, pkFo = {}, pkFs = {};
-  const pkVwOf = id => pkVw[id] || 'folder';
+  /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
+     في المختبر لا عرضَ مجلّديًّا قائمًا بذاته: العرضُ الأصلُ أحدُ الثلاثة دائمًا، وأيقونةُ المجلد مفتاحُ منطقة البنك
+     يسارًا (‎pkBank[id]‎) كما «المصدر» مفتاحُ الكتاب يمينًا. ومن كان على المجلّديّ صار على آخر عروضه والبنكُ مفتوح */
+  const pkBank = {}, pkPaneLast = {};
+  const pkVwOf = id => {
+    const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
+    if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || 'tree'; pkBank[id] = true; return pkVw[id]; }
+    return v;
+  };
+  const pkBankOn = id => !!(pkLab() && pkBank[id]);
   /* والمجلّديُّ مفصولٌ في كبسولةٍ وحدَه يسارَ الثلاثة (طلبُ صاحب الموقع): هو العرضُ الأصل،
      والثلاثةُ عروضُ المعرفة — فالمجموعةُ واحدةٌ (‎role=group‎) والكبسولتان شكلٌ لا معنى */
   const pkVbBtn = (id, k, ic) => {
-    const on = k === 'source' ? !!pkSplitOn(id) : pkVwOf(id) === k;
+    const on = k === 'source' ? !!pkSplitOn(id) : k === 'folder' && pkLab() ? pkBankOn(id) : pkVwOf(id) === k;
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}"
       title="${esc(k === 'folder' && pkLab() ? T().pkViewQb : T()['pkView_' + k])}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></button>`;
@@ -9364,21 +9373,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      حصّةُ الكتاب من عرض القسمة (بعد الفُرجة) متغيّرٌ ‎--spl‎، افتراضُه ‎.383‎ (ما كانت عليه: ‎.62 : 1‎).
      والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR‎).
      الحدّان: الكتابُ ‎≥ 240px‎ والجارُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
-  const PK_SPL_DEF = 0.383, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
-  const pkSplR = id => { const r = ((state.pkSplR || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : PK_SPL_DEF; };
-  const pkSplH = id => `<div class="pk-splh" role="separator" aria-orientation="vertical" tabindex="0" data-pksplh data-pkid="${esc(id)}"
-      aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pkSplR(id) * 100)}" title="${esc(T().pkSplTip)}" aria-label="${esc(T().pkSplTip)}"><i></i><i></i><i></i></div>`;
-  /* الحصّةُ ضمن حدَّي العرض الحاليّ */
-  const pkSplClamp = (sp, f) => {
-    const w = sp.clientWidth - PK_SPL_GAP;
-    if (w <= PK_SPL_MINB + PK_SPL_MINP) return Math.min(Math.max(f, 0.2), 0.8);
-    return Math.min(Math.max(f, PK_SPL_MINB / w), 1 - PK_SPL_MINP / w);
+  const PK_SPL_DEF = 0.383, PK_SPL_DEF3 = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
+  /* الحصّتان: المحفوظةُ لكلّ مساهمة، وإلّا الافتراض — ‎.383‎ لمنطقتين و‎.3‎ لكلٍّ من الطرفين في ثلاث */
+  const pkSplGet = (key, id, three) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : three ? PK_SPL_DEF3 : PK_SPL_DEF; };
+  const pkSplR = id => pkSplGet('pkSplR', id, pkBankOn(id));
+  const pkSqbR = id => pkSplGet('pkSqbR', id, !!pkSplitOn(id));
+  /* ‏‎k‎: ‎'a'‎ خطُّ الكتاب، و‎'b'‎ خطُّ البنك */
+  const pkSplH = (id, k = 'a') => `<div class="pk-splh${k === 'b' ? ' pk-splh--b' : ''}" role="separator" aria-orientation="vertical" tabindex="0" data-pksplh="${k}" data-pkid="${esc(id)}"
+      aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round((k === 'b' ? pkSqbR(id) : pkSplR(id)) * 100)}" title="${esc(T().pkSplTip)}" aria-label="${esc(T().pkSplTip)}"><i></i><i></i><i></i></div>`;
+  const pkSplVar = k => k === 'b' ? '--sqb' : '--spl';
+  const pkSplGapOf = sp => parseFloat(sp.style.getPropertyValue('--g')) || PK_SPL_GAP;
+  /* الحصّةُ ضمن حدودها: طرفُها ‎≥ 240px‎، والوسطُ ‎≥ 260px‎ بعد حصّة الطرف الآخر إن ظهر */
+  const pkSplClamp = (sp, f, k = 'a') => {
+    const w = sp.clientWidth - pkSplGapOf(sp);
+    const otherK = k === 'b' ? 'a' : 'b', other = sp.querySelector(`:scope > [data-pksplh="${otherK}"]`) ? (parseFloat(sp.style.getPropertyValue(pkSplVar(otherK))) || 0) : 0;
+    const minF = PK_SPL_MINB / w, maxF = 1 - other - PK_SPL_MINP / w;
+    if (maxF <= minF) return Math.min(Math.max(f, 0.15), Math.max(0.15, 1 - other - 0.2));
+    return Math.min(Math.max(f, minF), maxF);
   };
-  const pkSplSet = (sp, id, f, keep) => {
-    f = pkSplClamp(sp, f);
-    sp.style.setProperty('--spl', f.toFixed(4));
-    const h = sp.querySelector(':scope > .pk-splh'); if (h) h.setAttribute('aria-valuenow', Math.round(f * 100));
-    if (keep) { (state.pkSplR = state.pkSplR || {})[id] = +f.toFixed(4); save(); }
+  const pkSplSet = (sp, id, f, keep, k = 'a') => {
+    f = pkSplClamp(sp, f, k);
+    sp.style.setProperty(pkSplVar(k), f.toFixed(4));
+    const h = sp.querySelector(`:scope > [data-pksplh="${k}"]`); if (h) h.setAttribute('aria-valuenow', Math.round(f * 100));
+    if (keep) { const key = k === 'b' ? 'pkSqbR' : 'pkSplR'; (state[key] = state[key] || {})[id] = +f.toFixed(4); save(); }
     return f;
   };
   /* الكتابُ يُرسم من جديد بعد أن يقف الخطّ (لا في كلّ إطار) */
@@ -9386,19 +9403,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h || e.button !== 0) return;
-    const sp = h.parentElement, id = h.dataset.pkid;
+    const sp = h.parentElement, id = h.dataset.pkid, k = h.dataset.pksplh || 'a';
     e.preventDefault(); h.setPointerCapture(e.pointerId); h.classList.add('is-drag'); sp.classList.add('is-spldrag');
     const en = getComputedStyle(sp).direction === 'ltr';
     cxMorphBusy = true;   /* الكتابُ يُجمَّد ويُحجَّم صورةً حتى يُفلت الخطّ (‎cxMorphBusy‎ كالتكبير) */
     const move = ev => {
-      const r = sp.getBoundingClientRect(), w = r.width - PK_SPL_GAP;
-      const x = en ? ev.clientX - r.left - PK_SPL_GAP / 2 : r.right - ev.clientX - PK_SPL_GAP / 2;
-      pkSplSet(sp, id, x / w, false);
+      const r = sp.getBoundingClientRect(), w = r.width - pkSplGapOf(sp);
+      /* خطُّ الكتاب يُقاس من حافّة الكتاب (البداية)، وخطُّ البنك من حافّة البنك (النهاية) */
+      const fromStart = en ? ev.clientX - r.left : r.right - ev.clientX;
+      const x = k === 'b' ? (r.width - fromStart) - PK_SPL_GAP / 2 : fromStart - PK_SPL_GAP / 2;
+      pkSplSet(sp, id, x / w, false, k);
     };
     const up = ev => {
       h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
       h.classList.remove('is-drag'); sp.classList.remove('is-spldrag');
-      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue('--spl')) || PK_SPL_DEF, true);
+      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF, true, k);
       cxMorphBusy = false; pkSplBook(id);
     };
     h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
@@ -9406,20 +9425,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('dblclick', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    pkSplSet(h.parentElement, h.dataset.pkid, PK_SPL_DEF, true); pkSplBook(h.dataset.pkid);
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement, three = !!sp.querySelector(':scope > [data-pksplh="a"]') && !!sp.querySelector(':scope > [data-pksplh="b"]');
+    pkSplSet(sp, h.dataset.pkid, three ? PK_SPL_DEF3 : PK_SPL_DEF, true, k); pkSplBook(h.dataset.pkid);
   });
   document.addEventListener('keydown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    const sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue('--spl')) || PK_SPL_DEF;
-    /* السهمُ يحرّك الخطَّ في جهته: في العربيّة الكتابُ يمينًا، فالسهمُ الأيسرُ يوسّعه */
-    const grow = en ? 'ArrowRight' : 'ArrowLeft', shrink = en ? 'ArrowLeft' : 'ArrowRight';
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF;
+    /* السهمُ يحرّك الخطَّ في جهته: في العربيّة الكتابُ يمينًا فالسهمُ الأيسرُ يوسّعه، والبنكُ يسارًا فالأيمنُ يوسّعه */
+    const fwd = (k === 'b') !== en;
+    const grow = fwd ? 'ArrowRight' : 'ArrowLeft', shrink = fwd ? 'ArrowLeft' : 'ArrowRight';
     let f = null;
     if (e.key === grow) f = cur + 0.02; else if (e.key === shrink) f = cur - 0.02;
     else if (e.key === 'Home') f = 0; else if (e.key === 'End') f = 1;
     if (f == null) return;
     e.preventDefault(); e.stopPropagation();
-    pkSplSet(sp, h.dataset.pkid, f, true); pkSplBook(h.dataset.pkid);
+    pkSplSet(sp, h.dataset.pkid, f, true, k); pkSplBook(h.dataset.pkid);
   }, true);
   /* ===== ونُسخ (طلبُ صاحب الموقع): لا كتابَ وحدَه =====
      الأساسُ أحدُ العروض الثلاثة دائمًا، و«المصدر» مفتاحٌ يُدخل الكتابَ بجانبه ويُخرجه — لا عرضٌ قائمٌ بذاته.
@@ -9713,7 +9734,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
     /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
     /* والملخّصُ الفارغ: مكانُ العرض بلا كلام (طلبُ صاحب الموقع) */
-    if (!folds.length && pkSplitOn(id)) return `<div class="pk-split" style="--spl:${pkSplR(id)}">${pkSrcView(id, ed)}${pkSplH(id)}<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div></div>`;
+    if (!folds.length && (pkSplitOn(id) || pkBankOn(id))) return pkSplitWrap(id, v, ed, `<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div>`, pack);
     if (!folds.length) return `<div class="pk-vwph" aria-hidden="true"></div>`;
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
@@ -9734,10 +9755,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
     return `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`
-      + (pkSplitOn(id) ? (anim => `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}" style="--spl:${pkSplR(id)}">${pkSrcView(id, ed)}${pkSplH(id)}${ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)}</div>`)((() => { const a = pkSplitAnim[id]; delete pkSplitAnim[id]; return a; })())
-        : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
+      + ((viewH => (pkSplitOn(id) || pkBankOn(id)) ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
+        lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
-        : `<div class="pk-vwph" aria-hidden="true"></div>`);
+        : `<div class="pk-vwph" aria-hidden="true"></div>`));
+  }
+  /* ===== القسمة: الكتابُ يمينًا (إن ظهر) · العرضُ وسطًا · البنكُ يسارًا (إن ظهر) — وبين كلّ جارين خطٌّ يُسحب =====
+     ‏‎--g‎ مجموعُ الفُرَج (‎14‎ لجارين و‎28‎ لثلاثة)، و‎--spl‎ حصّةُ الكتاب و‎--sqb‎ حصّةُ البنك من العرض بعد الفُرَج */
+  function pkSplitWrap(id, v, ed, viewH, pack) {
+    const anim = pkSplitAnim[id]; delete pkSplitAnim[id];
+    const book = !!pkSplitOn(id), bank = pkBankOn(id);
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)};--g:${book && bank ? 28 : 14}px">`
+      + (book ? pkSrcView(id, ed) + pkSplH(id) : '') + viewH + (bank ? pkSplH(id, 'b') + pkBankHTML(id, ed, pack) : '') + `</div>`;
+  }
+  /* منطقةُ البنك: في التحرير وعاءُ المحرّر نفسِه (‎#cm-cards‎ — شجرةُ البنك بأبوابها كلِّها)، وفي النشر شجرتُه قراءةً */
+  function pkBankHTML(id, ed, pack) {
+    if (ed) return `<div class="pk-bank" data-pkid="${esc(id)}"><div id="cm-cards"></div></div>`;
+    const qb = (pack && pack.qb) || [];
+    return `<div class="pk-bank is-ro" data-pkid="${esc(id)}">${qb.length
+      ? `<div class="x3 cx-ro${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(qb, cardView.fold, 0, 'c')}</div>`
+      : `<p class="v-none pk-qbempty">${esc(T().pkQbEmpty)}</p>`}</div>`;
   }
   /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
      كلُّ صفٍّ في الجدول **بطاقةٌ حقيقيّة** في المجلد المختار (‎{t:'c', f, b}‎): المصطلحُ وجهُها والمعنى
@@ -9749,7 +9786,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      و«+ معرفة» في كلٍّ منها يضيف بطاقةً (صفًّا). وكلُّ نصٍّ يُحرَّر في مكانه (‎plaintext-only‎) ويُحفظ مع
      الكتابة دون إعادة رسمٍ تسرق المؤشّر. والجداولُ المنفصلةُ القديمة (‎kt‎) تُنقل إلى بطائق مرّةً واحدة */
   const ktHost = (sel, pack) => {
-    const pk = pack || edPack(); if (!pk) return null;
+    const pk = pack || cardDataRaw(cmCode); if (!pk) return null;   /* المعرفةُ دائمًا — لا البنك (ROADMAP-BANKPANE) */
     if (sel === '') return { holder: pk, arr: pk.deck || (pk.deck = []) };
     const h = findNode(pk.deck, sel); if (!h) return null;
     return { holder: h.n, arr: h.n.ch || (h.n.ch = []) };
@@ -10952,12 +10989,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     return v;
   };
-  const pkQbOn = (code, p) => code === 'MATH 105' && !!p && pkVwOf(p.id) === 'folder';
+  /* أيُّ شجرةٍ يحرّر المحرّرُ (‎#cm-cards‎ ونوافذُه وأزرارُه): البنكُ حين تكون منطقتُه مفتوحة — والمعرفةُ (العروضُ الثلاثة)
+     تبلغ شجرتَها مباشرةً (‎cardDataRaw‎ في ‎ktHost‎)، فتُحرَّر الشجرتان على الشاشة معًا ولا تتسرّب عقدةٌ بينهما */
+  const pkQbOn = (code, p) => code === 'MATH 105' && !!p && !!pkBank[p.id];
   const cardData = code => {
     const p = myPost(code, 'cards'), d = migPackC(code, p);
     d.deck = d.deck || [];
     return pkQbOn(code, p) ? pkQbView(d) : d;
   };
+  const cardDataRaw = code => { const p = myPost(code, 'cards'), d = migPackC(code, p); d.deck = d.deck || []; return d; };
   /* إيجاد عقدة بهويتها داخل الشجرة — يعيد {arr,i,n} للحذف والتحرير */
   function findNode(nodes, id) {
     for (let i = 0; i < (nodes || []).length; i++) {
@@ -20651,8 +20691,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${pkViewBar('edit', p.id)}
           </div>
           ${cxMax ? cxHdLine() : ''}
-          ${vwAlt ? pkAltView(p.id, d.deck, true) : ''}
-          <div id="cm-cards"></div>
+          ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}
+          ${pkBankOn(p.id) ? '' : '<div id="cm-cards"></div>'}
           ${cxMax ? cxFtLine() : ''}
           ${cxFoot(d)}
         </div>
@@ -22086,6 +22126,71 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   chPick.type = 'file'; chPick.accept = 'application/pdf,.pdf'; chPick.hidden = true;
   document.body.appendChild(chPick);
   chPick.addEventListener('change', () => { const f = chPick.files && chPick.files[0]; chPick.value = ''; chPdfSet(f); });
+  /* ===== منطقةُ البنك تدخل من اليسار وتخرج إليه (ROADMAP-BANKPANE · المرحلة ٢) =====
+     مرآةُ دخول الكتاب من اليمين: المنطقةُ تنزلق من حافّة المساهمة مقصوصةً عندها، والعرضُ يتضيّق بهامشٍ في جهتها يذوب —
+     والخروجُ عكسُه: نسخةٌ من المنطقة تنزلق خارجةً والعرضُ يتّسع بقدرها. بالمدّة والمنحنى والمسافة نفسِها فتثبت الفُرجة */
+  function pkBankToggle(id, btn) {
+    const on = pkBankOn(id), post = btn.closest('.post');
+    /* المرحلة ٥: الضيّقةُ لا تسع المناطقَ بحدودها (الكتابُ ‎240‎ · الوسطُ ‎260‎ · البنكُ ‎240‎ والفُرَج) — فتحُ البنك فيها يكبّرها
+       إلى الواسعة أوّلًا بحركة التكبير نفسِها (قرارُ صاحب الموقع) */
+    if (!on && post && post.classList.contains('pk--edit') && !cxMax) {
+      const main = post.querySelector('.post-ytmain'), need = pkSplitOn(id) ? PK_SPL_MINB * 2 + PK_SPL_MINP + 28 : PK_SPL_MINB + PK_SPL_MINP + 14;
+      if (main && main.clientWidth < need && cxMaxOk()) {
+        cxMorph(btn, () => {
+          const body = document.getElementById('cm-body');
+          cxSel.clear(); pkBank[id] = true; pkPaneLast[id] = 'bank';
+          if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+          if (body) cxMaxY = body.scrollTop;
+          cxMax = true; renderCmSection();
+        });
+        return;
+      }
+    }
+    const viewOf = pst => pst && pst.querySelector('.post-ytmain > .pk-split > .kt-view, .post-ytmain > .kt-view');
+    const v0 = viewOf(post), r0 = v0 ? v0.getBoundingClientRect() : null, en = state.lang === 'en';
+    let fly = null;
+    if (on && !bkReduce()) {
+      const bk = post && post.querySelector('.post-ytmain > .pk-split > .pk-bank');
+      if (bk) fly = { r: bk.getBoundingClientRect(), node: bk.cloneNode(true) };
+    }
+    cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
+    pkBank[id] = !on;
+    if (!on) pkPaneLast[id] = 'bank';
+    if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    renderCmSection();
+    const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
+    const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
+    if (bkReduce() || !nv || !r0) { if (ctl) ctl.focus({ preventScroll: true }); return; }
+    const n = nv.getBoundingClientRect();
+    if (!on) {
+      const pane = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
+      if (pane) {
+        const d = Math.max(1, Math.round(en ? r0.right - n.right : n.left - r0.left));
+        pane.style.position = 'relative'; pane.style.zIndex = '2';
+        setTimeout(() => { pane.style.zIndex = ''; pane.style.position = ''; }, SPL_MS + 40);
+        pane.animate([
+          { transform: `translateX(${en ? d : -d}px)`, clipPath: en ? `inset(0 ${d}px 0 0)` : `inset(0 0 0 ${d}px)` },
+          { transform: 'translateX(0)', clipPath: 'inset(0 0 0 0)' },
+        ], { duration: SPL_MS, easing: SPL_EASE });
+        nv.animate([{ marginInlineEnd: -d + 'px' }, { marginInlineEnd: '0px' }], { duration: SPL_MS, easing: SPL_EASE });
+      }
+    } else {
+      const d = Math.max(0, Math.round(en ? n.right - r0.right : r0.left - n.left));
+      const host = post2.querySelector('.post-ytmain');
+      if (fly && host) {
+        const { r, node } = fly, w = document.createElement('div');
+        w.className = 'pk-split pk-bkout';
+        w.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:6;pointer-events:none;overflow:hidden;display:block`;
+        node.querySelectorAll('[id]').forEach(x => x.removeAttribute('id'));
+        node.style.cssText += `;position:absolute;top:0;left:0;width:${r.width}px;height:${r.height}px;margin:0`;
+        w.appendChild(node); host.appendChild(w);
+        node.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${en ? d : -d}px)` }],
+          { duration: SPL_MS, easing: SPL_EASE, fill: 'forwards' }).finished.then(() => w.remove(), () => w.remove());
+      }
+      if (d > 1) nv.animate([{ marginInlineEnd: d + 'px' }, { marginInlineEnd: '0px' }], { duration: SPL_MS, easing: SPL_EASE });
+    }
+    if (ctl) ctl.focus({ preventScroll: true });
+  }
   /* زرُّ التكبير — مفوَّضٌ على المستند: المربّعُ يُبنى من جديد كلَّ رسمة */
   document.addEventListener('click', e => {
     const pv = e.target.closest('#cm-body [data-pkview]');
@@ -22094,7 +22199,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const id = pv.dataset.pkid;
       const to = pv.dataset.pkview, cur = pkVwOf(id);
       if (!id) return;
-      if ((cur === 'folder') !== (to === 'folder') && pkLab()) cxSel.clear();   /* شجرتان منفصلتان: لا يعبر التحديدُ بينهما */
+      if (to === 'folder' && pkLab()) { pkBankToggle(id, pv); return; }   /* أيقونةُ المجلد مفتاحُ منطقة البنك (ROADMAP-BANKPANE) */
       const part = pkSplitOn(id);
       /* ===== ROADMAP-SPLIT · المرحلة ٢: الإغلاقُ متحرّكٌ كالفتح =====
          ما يغادر يُستنسخ قبل الرسم «شبحًا» يُثبَّت فوق موضعه ثمّ ينزلق خارجًا ويتلاشى، والجانبُ الباقي يتّسع
@@ -22177,7 +22282,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const beforeR = before ? before.getBoundingClientRect() : null;
       if (to === 'source') {
         if (part) pkSplit[id] = false;
-        else { pkSplit[id] = true; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
+        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
       } else if (to !== cur) {
         pkVw[id] = to;
         if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
@@ -22313,7 +22418,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* يُسأل هدفُ الضغطة لا التركيزُ الحاليّ: حقلُ الخليّة يُفلت تركيزَه بالضغطة نفسِها قبل أن نُسأل */
       const tg = e.target;
       if (tg && tg.nodeType === 1 && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
-      const post = spl.closest('.post'), btn = post && post.querySelector('.pk-vbar__b.on[data-pkview="source"]');   /* ‏Esc يُخرج الكتاب */
+      /* ‏Esc يُخرج آخرَ ما دخل: البنكَ أو الكتاب (ROADMAP-BANKPANE) */
+      const post = spl.closest('.post'), qbB = post && post.querySelector('.pk-vbar__b.on[data-pkview="folder"]'), bkB = post && post.querySelector('.pk-vbar__b.on[data-pkview="source"]');
+      const btn = qbB && bkB ? (pkPaneLast[qbB.dataset.pkid] === 'book' ? bkB : qbB) : (qbB || bkB);
       if (btn) { e.preventDefault(); e.stopPropagation(); btn.click(); return; }
     }
     if (!(cxMax || cxMaxPub)) return;
@@ -30483,7 +30590,7 @@ void main() {
          في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) يُرسم القسمُ كلُّه لا الشجرةُ وحدها — فالشريطُ
          في القالب لا في ‎#cm-cards‎. ويُفتح مسارُ أبيه في الشريط ليُرى حيث وُضع */
       const me = postsOf(cmCode, 'cards').find(x => x.me);
-      if (nn.t === 'f' && pkLab() && me && pkVwOf(me.id) !== 'folder') {
+      if (nn.t === 'f' && pkLab() && me && !pkBankOn(me.id)) {
         pkFs[me.id] = nn.id;
         const open = pkFo[me.id] || (pkFo[me.id] = new Map());
         if (holder) {
