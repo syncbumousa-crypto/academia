@@ -1,0 +1,1700 @@
+{
+ "cs": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "ICS 253",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "ICS 108",
+   "ICS 202",
+   "ICS 321",
+   "ICS 343",
+   "ICS 344",
+   "ICS 353",
+   "ICS 381",
+   "ICS 410",
+   "ICS 413",
+   "ICS 414",
+   "ICS 433",
+   "COE 202",
+   "COE 203",
+   "COE 301",
+   "SWE 206",
+   "SWE 363"
+  ],
+  "Electives": [],
+  "Internship": [
+   "ICS 398"
+  ],
+  "Summer Training": [
+   "ICS 399"
+  ]
+ },
+ "swe": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "ICS 253",
+   "PHYS 101",
+   "PHYS 102"
+  ],
+  "Core Requirements": [
+   "SWE 206",
+   "SWE 216",
+   "SWE 316",
+   "SWE 326",
+   "SWE 363",
+   "SWE 387",
+   "SWE 413",
+   "SWE 414",
+   "SWE 439",
+   "ICS 108",
+   "ICS 202",
+   "ICS 321",
+   "ICS 343",
+   "ICS 344",
+   "ICS 353",
+   "ICS 433",
+   "COE 233"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "SWE 399"
+  ]
+ },
+ "coe": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "ICS 253",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "COE 202",
+   "COE 203",
+   "COE 241",
+   "COE 301",
+   "COE 302",
+   "COE 306",
+   "COE 344",
+   "COE 346",
+   "COE 384",
+   "COE 411",
+   "COE 412",
+   "ICS 108",
+   "ICS 202",
+   "ICS 433",
+   "EE 236",
+   "EE 237"
+  ],
+  "Electives": [],
+  "Internship": [
+   "COE 398"
+  ],
+  "Summer Training": [
+   "COE 399"
+  ]
+ },
+ "ise": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "General Engineering Fundamentals": [
+   "CE 101",
+   "EE 236",
+   "ISE 205",
+   "MSE 201",
+   "MSE 202",
+   "ME 322",
+   "ME 323"
+  ],
+  "Core Requirements": [
+   "CIE 301",
+   "CIE 305",
+   "ISE 303",
+   "ISE 307",
+   "ISE 315",
+   "ISE 321",
+   "ISE 320",
+   "ISE 324",
+   "ISE 291",
+   "ISE 402",
+   "ISE 405",
+   "ISE 422",
+   "ISE 411",
+   "ISE 412",
+   "ISE 499",
+   "ISE 391"
+  ],
+  "Electives": [],
+  "Internship": [
+   "ISE 398"
+  ],
+  "Summer Training": [
+   "ISE 399"
+  ]
+ },
+ "amai": {},
+ "dse": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
+ },
+ "sde": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
+ },
+ "aics": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
+ },
+ "math": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Mathematics Core Requirements": [
+   "MATH 210",
+   "MATH 225",
+   "MATH 323",
+   "MATH 333",
+   "MATH 341",
+   "MATH 371",
+   "MATH 441",
+   "MATH 445",
+   "MATH 453",
+   "MATH 490",
+   "STAT 201",
+   "MATH 451",
+   "STAT 301",
+   "MATH 413",
+   "MATH 414"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "MATH 399"
+  ]
+ },
+ "asfm": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208"
+  ],
+  "Economics & Accounting": [
+   "ACCT 110",
+   "ACCT 210",
+   "ECON 101",
+   "ECON 102"
+  ],
+  "Core Requirements": [
+   "AS 251",
+   "AS 289",
+   "AS 389",
+   "AS 380",
+   "AS 481",
+   "AS 484",
+   "FIN 250",
+   "FIN 320",
+   "FIN 440",
+   "MATH 371",
+   "STAT 214",
+   "STAT 301",
+   "STAT 302",
+   "STAT 310",
+   "STAT 416",
+   "STAT 460",
+   "AS 201",
+   "AS 411",
+   "AS 412"
+  ],
+  "Electives": [
+   "AS 450",
+   "AS 460",
+   "AS 476",
+   "AS 490",
+   "AS 491",
+   "STAT 436"
+  ],
+  "Internship": [
+   "AS 398"
+  ]
+ },
+ "che": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101",
+   "CHEM 102"
+  ],
+  "Advanced Chemical Sciences Requirements": [
+   "MSE 207",
+   "CHEM 201",
+   "CHEM 311"
+  ],
+  "Core Requirements": [
+   "CHE 200",
+   "CHE 212",
+   "CHE 204",
+   "CHE 300",
+   "CHE 304",
+   "CHE 303",
+   "CHE 306",
+   "CHE 309",
+   "CHE 409",
+   "CHE 360",
+   "CHE 401",
+   "CHE 402",
+   "CHE 405",
+   "CHE 411",
+   "CHE 412"
+  ],
+  "Electives": [],
+  "Internship": [
+   "CHE 398"
+  ],
+  "Summer Training": [
+   "CHE 399"
+  ]
+ },
+ "mse": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101",
+   "CHEM 102"
+  ],
+  "Core Requirements": [
+   "CE 202",
+   "EE 236",
+   "EE 237",
+   "MSE 201",
+   "MSE 202",
+   "MSE 203",
+   "MSE 204",
+   "MSE 205",
+   "MSE 206",
+   "MSE 301",
+   "MSE 302",
+   "MSE 303",
+   "MSE 304",
+   "MSE 305",
+   "MSE 306",
+   "MSE 307",
+   "MSE 401",
+   "MSE 402",
+   "MSE 411",
+   "MSE 412"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "MSE 399"
+  ]
+ },
+ "chem": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "PHYS 101",
+   "PHYS 102",
+   "MATH 202",
+   "MATH 208",
+   "MATH 225",
+   "STAT 319"
+  ],
+  "Core Requirements": [
+   "CHEM 101",
+   "CHEM 102",
+   "CHEM 221",
+   "CHEM 222",
+   "CHEM 324",
+   "CHEM 325",
+   "CHEM 363",
+   "CHEM 335",
+   "CHEM 336",
+   "CHEM 337",
+   "CHEM 201",
+   "CHEM 202",
+   "CHEM 204",
+   "CHEM 305",
+   "CHEM 212",
+   "CHEM 213",
+   "CHEM 311",
+   "CHEM 312",
+   "CHEM 458",
+   "CHEM 459",
+   "CHEM 479",
+   "CHEM 488"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "CHEM 399"
+  ]
+ },
+ "bioe": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101",
+   "CHEM 102",
+   "CHEM 201",
+   "CHEM 202"
+  ],
+  "Core Requirements": [
+   "BIOE 201",
+   "BIOE 202",
+   "BIOE 211",
+   "BIOE 303",
+   "BIOE 311",
+   "BIOE 312",
+   "BIOE 316",
+   "BIOE 320",
+   "BIOE 321",
+   "BIOE 337",
+   "BIOE 355",
+   "BIOE 370",
+   "BIOE 411",
+   "BIOE 412",
+   "BIOE 440",
+   "BIOE 455",
+   "BIOE 460",
+   "BIOE 480",
+   "EE 236",
+   "EE 237"
+  ],
+  "Electives": [],
+  "Internship": [
+   "BIOE 398"
+  ],
+  "Summer Training": [
+   "BIOE 399"
+  ]
+ },
+ "pete": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "General Engineering Fundamentals": [
+   "CE 202",
+   "CHE 204"
+  ],
+  "Core Requirements": [
+   "GEOL 102",
+   "PETE 101",
+   "GEOP 102",
+   "CPG 498",
+   "PETE 411",
+   "PETE 412",
+   "PETE 202",
+   "PETE 206",
+   "PETE 301",
+   "PETE 302",
+   "PETE 306",
+   "PETE 311",
+   "PETE 313",
+   "PETE 315",
+   "PETE 402",
+   "PETE 403",
+   "PETE 407",
+   "GEOL 345"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "CPG 199",
+   "PETE 399"
+  ]
+ },
+ "geop": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 202",
+   "PHYS 101",
+   "PHYS 102",
+   "PHYS 204",
+   "PHYS 205",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "GEOL 102",
+   "GEOL 103",
+   "PETE 101",
+   "GEOP 102",
+   "CPG 498",
+   "GEOP 204",
+   "GEOP 205",
+   "GEOP 215",
+   "GEOP 304",
+   "GEOP 320",
+   "GEOP 353",
+   "GEOP 499",
+   "GEOL 305",
+   "GEOL 345",
+   "PHYS 210",
+   "PHYS 305",
+   "GEOP 411",
+   "GEOP 412"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "CPG 199",
+   "GEOP 399",
+   "GEOP 490"
+  ]
+ },
+ "geol": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101",
+   "CHEM 102"
+  ],
+  "Core Requirements": [
+   "GEOL 102",
+   "GEOL 103",
+   "PETE 101",
+   "GEOP 102",
+   "CPG 498",
+   "GEOL 213",
+   "GEOL 217",
+   "GEOL 220",
+   "GEOL 270",
+   "GEOL 305",
+   "GEOL 315",
+   "GEOL 318",
+   "GEOL 354",
+   "GEOL 499",
+   "GEOL 465",
+   "GEOP 416",
+   "GEOL 411",
+   "GEOL 412"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "CPG 199",
+   "GEOL 399",
+   "GEOL 430"
+  ]
+ },
+ "mine": {},
+ "ce": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101",
+   "CGS 292"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "CE 318",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "CE 216",
+   "CE 261",
+   "CE 201",
+   "CE 203",
+   "CE 305",
+   "CE 315",
+   "CE 204",
+   "CE 206",
+   "CE 354",
+   "CE 356",
+   "CE 341",
+   "CE 343",
+   "CE 230",
+   "CE 330",
+   "CE 335",
+   "CE 375",
+   "CE 422",
+   "CE 410",
+   "CE 412"
+  ],
+  "Electives": [],
+  "Internship": [
+   "CE 398"
+  ],
+  "Summer Training": [
+   "CE 399"
+  ]
+ },
+ "are": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "ARE 201",
+   "ARE 202",
+   "ARE 301",
+   "ARE 230",
+   "ARE 303",
+   "CE 202",
+   "CE 305",
+   "CE 315",
+   "EE 236",
+   "EE 312",
+   "ARE 220",
+   "ARE 322",
+   "ARE 323",
+   "ARE 330",
+   "ARE 331",
+   "ARE 411",
+   "ARE 412"
+  ],
+  "Electives": [],
+  "Internship": [
+   "ARE 398"
+  ],
+  "Summer Training": [
+   "ARE 399"
+  ]
+ },
+ "idsn": {},
+ "ese": {},
+ "ae": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "MATH 371",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "CE 201",
+   "ME 201",
+   "ME 210",
+   "AE 211",
+   "AE 222",
+   "AE 223",
+   "AE 228",
+   "AE 314",
+   "AE 315",
+   "AE 321",
+   "AE 325",
+   "AE 328",
+   "AE 333",
+   "AE 358",
+   "AE 411",
+   "AE 412",
+   "AE 423",
+   "AE 422",
+   "AE 426",
+   "AE 427"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "AE 399"
+  ],
+  "Internship": [
+   "AE 398"
+  ]
+ },
+ "ee": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "EE 315",
+   "PHYS 101",
+   "PHYS 102",
+   "PHYS 305",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "EE 201",
+   "EE 213",
+   "EE 271",
+   "EE 203",
+   "EE 272",
+   "EE 303",
+   "EE 207",
+   "EE 360",
+   "EE 390",
+   "EE 311",
+   "EE 340",
+   "EE 370",
+   "EE 380",
+   "EE 411",
+   "EE 412",
+   "COE 202"
+  ],
+  "Electives": [],
+  "Internship": [
+   "EE 398"
+  ],
+  "Summer Training": [
+   "EE 399"
+  ]
+ },
+ "me": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "MATH 371",
+   "STAT 201",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Requirements": [
+   "EE 236",
+   "EE 237",
+   "ME 210",
+   "ME 218",
+   "ME 201",
+   "ME 401",
+   "ME 203",
+   "ME 204",
+   "ME 301",
+   "ME 302",
+   "ME 303",
+   "MSE 201",
+   "MSE 202",
+   "ME 322",
+   "ME 323",
+   "ME 311",
+   "ME 315",
+   "ME 316",
+   "ME 402",
+   "ME 411",
+   "ME 412",
+   "CE 202"
+  ],
+  "Electives": [],
+  "Internship": [
+   "ME 398"
+  ],
+  "Summer Training": [
+   "ME 399"
+  ]
+ },
+ "phys": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "STAT 201",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "Core Courses": [
+   "PHYS 204",
+   "PHYS 205",
+   "PHYS 210",
+   "PHYS 213",
+   "PHYS 301",
+   "PHYS 302",
+   "PHYS 305",
+   "PHYS 306",
+   "PHYS 308",
+   "PHYS 309",
+   "PHYS 403",
+   "PHYS 310",
+   "PHYS 410",
+   "PHYS 499",
+   "PHYS 411",
+   "PHYS 412",
+   "PHYS 430",
+   "PHYS 311"
+  ],
+  "Electives": [],
+  "Summer Training": [
+   "PHYS 399"
+  ]
+ },
+ "cie": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math & Science Requirements": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "PHYS 101",
+   "PHYS 102",
+   "CHEM 101"
+  ],
+  "General Engineering Fundamentals": [
+   "ISE 205",
+   "ISE 307",
+   "EE 201",
+   "ME 203",
+   "EE 203",
+   "EE 237",
+   "CIE 301"
+  ],
+  "Core Requirements": [
+   "CIE 305",
+   "CIE 306",
+   "CIE 204",
+   "CIE 312",
+   "CIE 315",
+   "CIE 316",
+   "CIE 318",
+   "CIE 390",
+   "CIE 410",
+   "CIE 412",
+   "CIE 418",
+   "CIE 438",
+   "CIE 411",
+   "CIE 413"
+  ],
+  "Electives": [],
+  "Internship": [
+   "CIE 398"
+  ],
+  "Summer Training": [
+   "CIE 399"
+  ]
+ },
+ "eep": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "Math, Science & Physics": [
+   "MATH 101",
+   "MATH 102",
+   "MATH 201",
+   "MATH 208",
+   "CHEM 101",
+   "PHYS 101",
+   "PHYS 102",
+   "PHYS 204",
+   "PHYS 205",
+   "PHYS 300",
+   "PHYS 305",
+   "PHYS 310",
+   "PHYS 403",
+   "PHYS 430"
+  ],
+  "Electrical Engineering and Design": [
+   "EE 207",
+   "COE 202",
+   "EE 201",
+   "EE 203",
+   "EE 272",
+   "EE 213",
+   "EE 311",
+   "EE 315",
+   "EE 303",
+   "EE 340",
+   "EE 390",
+   "EE 411"
+  ],
+  "Electives": [
+   "EE 360",
+   "EE 370"
+  ],
+  "Summer Training": [
+   "EE 399"
+  ]
+ },
+ "mis": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
+ },
+ "_mis_core": {
+  "ENGL 101": {
+   "name": "Introduction to Academic Discourse",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MATH 106": {
+   "name": "Calculus for Business",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "PE 101": {
+   "name": "Physical Education III",
+   "lt": 0,
+   "lb": 2,
+   "cr": 1
+  },
+  "ECON 101": {
+   "name": "Principles Of Microeconomics",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "ICS 104": {
+   "name": "Introduction to Programming in Python and C",
+   "lt": 2,
+   "lb": 3,
+   "cr": 3
+  },
+  "BUS 200": {
+   "name": "Business & Entrepreneurship",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "ENGL 102": {
+   "name": "Introduction to Argument Writing",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MATH 105": {
+   "name": "Finite Mathematics",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "IAS 111": {
+   "name": "Belief and its Consequences",
+   "lt": 2,
+   "lb": 0,
+   "cr": 2
+  },
+  "ACCT 110": {
+   "name": "Introduction to Financial Accounting",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "ECON 102": {
+   "name": "Principles of Macroeconomics",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "ISE 291": {
+   "name": "Introduction to Data Science",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "ENGL 214": {
+   "name": "Academic & Professional Communication",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "STAT 214": {
+   "name": "Actuaries and Business Statistics",
+   "lt": 3,
+   "lb": 2,
+   "cr": 4
+  },
+  "IAS 121": {
+   "name": "Language Foundation",
+   "lt": 2,
+   "lb": 0,
+   "cr": 2
+  },
+  "ACCT 210": {
+   "name": "Introduction to Managerial Accounting",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "COE 292": {
+   "name": "Introduction to Artificial Intelligence",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "IAS 212": {
+   "name": "Professional Ethics and Governance",
+   "lt": 2,
+   "lb": 0,
+   "cr": 2
+  },
+  "FIN 250": {
+   "name": "Financial Management",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MKT 250": {
+   "name": "Principles of Marketing",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "OM 210": {
+   "name": "Operations Management",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MGT 210": {
+   "name": "Business Communication",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 301": {
+   "name": "Systems Analysis & Design",
+   "lt": 2,
+   "lb": 2,
+   "cr": 3
+  },
+  "MGT 310": {
+   "name": "Organization Behavior",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "OM 311": {
+   "name": "Business Analytics",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 311": {
+   "name": "Business Data Management",
+   "lt": 2,
+   "lb": 2,
+   "cr": 3
+  },
+  "COE 353": {
+   "name": "Fundamentals of Computer Communications",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 302": {
+   "name": "Business Applications Development",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "CGS 392": {
+   "name": "Career Essentials",
+   "lt": 0,
+   "lb": 2,
+   "cr": 1
+  },
+  "MGT 355": {
+   "name": "Business Research Methods",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 405": {
+   "name": "IS Project Management",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 393": {
+   "name": "Digital Transformation in Business",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 398": {
+   "name": "Internship",
+   "lt": 0,
+   "lb": 0,
+   "cr": 6
+  },
+  "MIS 477": {
+   "name": "Senior Project I",
+   "lt": 0,
+   "lb": 1,
+   "cr": 0
+  },
+  "ECON 306": {
+   "name": "Economy of Saudi Arabia",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MGT 449": {
+   "name": "Strategic Management",
+   "lt": 3,
+   "lb": 0,
+   "cr": 3
+  },
+  "MIS 478": {
+   "name": "Senior Project II",
+   "lt": 0,
+   "lb": 6,
+   "cr": 3
+  }
+ },
+ "acct": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ISE 291",
+   "COE 292",
+   "BUS 200",
+   "ICS 104"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Accounting Major Requirements": [
+   "ACCT 300",
+   "ACCT 301",
+   "ACCT 302",
+   "ACCT 311",
+   "ACCT 403",
+   "ACCT 410"
+  ],
+  "Internship": [
+   "ACCT 398"
+  ]
+ },
+ "fin": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Finance Major Requirements": [
+   "ACCT 301",
+   "FIN 315",
+   "FIN 320",
+   "FIN 425",
+   "FIN 450"
+  ],
+  "Internship": [
+   "FIN 398"
+  ]
+ },
+ "mgt": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Management Major Requirements": [
+   "HRM 301",
+   "MGT 430",
+   "MGT 310",
+   "MGT 440",
+   "MGT 450"
+  ],
+  "Internship": [
+   "MGT 398"
+  ]
+ },
+ "mkt": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "IAS 418",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ],
+  "College Core Requirements": [
+   "MATH 105",
+   "MATH 106",
+   "STAT 211",
+   "STAT 212",
+   "ACCT 110",
+   "ACCT 210",
+   "MGT 210",
+   "ECON 101",
+   "ECON 102",
+   "ECON 306",
+   "MGT 301",
+   "MGT 311",
+   "MGT 313",
+   "MGT 449",
+   "MIS 101",
+   "MIS 215",
+   "MKT 250",
+   "FIN 250",
+   "OM 210",
+   "OM 311",
+   "MGT 355"
+  ],
+  "Marketing Major Requirements": [
+   "MKT 360",
+   "MKT 345",
+   "MKT 370",
+   "MKT 410",
+   "MKT 450",
+   "MKT 485"
+  ],
+  "Internship": [
+   "MKT 398"
+  ]
+ },
+ "hrm": {
+  "General Studies Requirements": [
+   "ENGL 101",
+   "ENGL 102",
+   "ENGL 214",
+   "IAS 111",
+   "IAS 121",
+   "IAS 212",
+   "CGS 392",
+   "PE 101"
+  ],
+  "Digital/Business Foundation": [
+   "ICS 104",
+   "ISE 291",
+   "COE 292",
+   "BUS 200"
+  ]
+ }
+}

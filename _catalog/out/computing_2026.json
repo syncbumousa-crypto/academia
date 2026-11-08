@@ -1,0 +1,1714 @@
+{
+ "new": [
+  {
+   "code": "AS 201",
+   "ar": "اكتواري 201",
+   "full": "الرياضيات المالية",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "AS 251",
+   "ar": "اكتواري 251",
+   "full": "رياضيات المشتقات المالية",
+   "h": 3,
+   "lab": 1
+  },
+  {
+   "code": "AS 289",
+   "ar": "اكتواري 289",
+   "full": "معمل مسائل العلوم الاكتوارية ١",
+   "h": 1,
+   "lab": 0
+  },
+  {
+   "code": "AS 380",
+   "ar": "اكتواري 380",
+   "full": "الطوارئ الاكتوارية ١",
+   "h": 3,
+   "lab": 1
+  },
+  {
+   "code": "AS 389",
+   "ar": "اكتواري 389",
+   "full": "معمل مسائل العلوم الاكتوارية ٢",
+   "h": 1,
+   "lab": 0
+  },
+  {
+   "code": "AS 398",
+   "ar": "اكتواري 398",
+   "full": "التدريب التعاوني",
+   "h": 6,
+   "lab": 0
+  },
+  {
+   "code": "AS 411",
+   "ar": "اكتواري 411",
+   "full": "مشروع التخرّج ١",
+   "h": 0,
+   "lab": 0
+  },
+  {
+   "code": "AS 412",
+   "ar": "اكتواري 412",
+   "full": "مشروع التخرّج ٢",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "AS 450",
+   "ar": "اكتواري 450",
+   "full": "نمذجة المخاطر",
+   "h": 3,
+   "lab": 1
+  },
+  {
+   "code": "AS 481",
+   "ar": "اكتواري 481",
+   "full": "الطوارئ الاكتوارية ٢",
+   "h": 4,
+   "lab": 1
+  },
+  {
+   "code": "AS 484",
+   "ar": "اكتواري 484",
+   "full": "نظرية المخاطر الاكتوارية والمصداقية",
+   "h": 4,
+   "lab": 1
+  },
+  {
+   "code": "AS 490",
+   "ar": "اكتواري 490",
+   "full": "موضوعات في العلوم الاكتوارية والرياضيات المالية ١",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "AS 491",
+   "ar": "اكتواري 491",
+   "full": "موضوعات في العلوم الاكتوارية والرياضيات المالية ٢",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "MATH 202",
+   "ar": "رياضيات 202",
+   "full": "أساسيات المعادلات التفاضلية",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "MATH 225",
+   "ar": "رياضيات 225",
+   "full": "مقدّمة في الجبر الخطي",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "MATH 451",
+   "ar": "رياضيات 451",
+   "full": "الهندسة التفاضلية",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "MATH 490",
+   "ar": "رياضيات 490",
+   "full": "سمنار في الرياضيات",
+   "h": 1,
+   "lab": 0
+  },
+  {
+   "code": "STAT 301",
+   "ar": "احصاء 301",
+   "full": "نظرية الاحتمالات والإحصاء الرياضي",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "STAT 302",
+   "ar": "احصاء 302",
+   "full": "الاستدلال الإحصائي",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "STAT 310",
+   "ar": "احصاء 310",
+   "full": "تحليل الانحدار",
+   "h": 3,
+   "lab": 0
+  },
+  {
+   "code": "STAT 416",
+   "ar": "احصاء 416",
+   "full": "العمليات العشوائية للاكتواريين",
+   "h": 3,
+   "lab": 0
+  }
+ ],
+ "links": [
+  [
+   "ACCT 110",
+   "asfm"
+  ],
+  [
+   "ACCT 210",
+   "asfm"
+  ],
+  [
+   "AS 201",
+   "asfm"
+  ],
+  [
+   "AS 251",
+   "asfm"
+  ],
+  [
+   "AS 289",
+   "asfm"
+  ],
+  [
+   "AS 380",
+   "asfm"
+  ],
+  [
+   "AS 389",
+   "asfm"
+  ],
+  [
+   "AS 398",
+   "asfm"
+  ],
+  [
+   "AS 411",
+   "asfm"
+  ],
+  [
+   "AS 412",
+   "asfm"
+  ],
+  [
+   "AS 450",
+   "asfm"
+  ],
+  [
+   "AS 481",
+   "asfm"
+  ],
+  [
+   "AS 484",
+   "asfm"
+  ],
+  [
+   "AS 490",
+   "asfm"
+  ],
+  [
+   "AS 491",
+   "asfm"
+  ],
+  [
+   "BUS 200",
+   "asfm"
+  ],
+  [
+   "BUS 200",
+   "math"
+  ],
+  [
+   "CGS 392",
+   "asfm"
+  ],
+  [
+   "CGS 392",
+   "math"
+  ],
+  [
+   "CHEM 101",
+   "math"
+  ],
+  [
+   "COE 292",
+   "asfm"
+  ],
+  [
+   "COE 292",
+   "math"
+  ],
+  [
+   "ECON 101",
+   "asfm"
+  ],
+  [
+   "ECON 102",
+   "asfm"
+  ],
+  [
+   "ENGL 101",
+   "asfm"
+  ],
+  [
+   "ENGL 101",
+   "math"
+  ],
+  [
+   "ENGL 102",
+   "asfm"
+  ],
+  [
+   "ENGL 102",
+   "math"
+  ],
+  [
+   "ENGL 214",
+   "asfm"
+  ],
+  [
+   "ENGL 214",
+   "math"
+  ],
+  [
+   "FIN 250",
+   "asfm"
+  ],
+  [
+   "FIN 320",
+   "asfm"
+  ],
+  [
+   "FIN 440",
+   "asfm"
+  ],
+  [
+   "GS 318",
+   "asfm"
+  ],
+  [
+   "GS 318",
+   "math"
+  ],
+  [
+   "GS 321",
+   "asfm"
+  ],
+  [
+   "GS 321",
+   "math"
+  ],
+  [
+   "GS 342",
+   "asfm"
+  ],
+  [
+   "GS 342",
+   "math"
+  ],
+  [
+   "GS 355",
+   "asfm"
+  ],
+  [
+   "GS 355",
+   "math"
+  ],
+  [
+   "GS 357",
+   "asfm"
+  ],
+  [
+   "GS 357",
+   "math"
+  ],
+  [
+   "GS 363",
+   "asfm"
+  ],
+  [
+   "GS 363",
+   "math"
+  ],
+  [
+   "GS 372",
+   "asfm"
+  ],
+  [
+   "GS 372",
+   "math"
+  ],
+  [
+   "GS 424",
+   "asfm"
+  ],
+  [
+   "GS 424",
+   "math"
+  ],
+  [
+   "GS 445",
+   "asfm"
+  ],
+  [
+   "GS 445",
+   "math"
+  ],
+  [
+   "GS 447",
+   "asfm"
+  ],
+  [
+   "GS 447",
+   "math"
+  ],
+  [
+   "GS 495",
+   "asfm"
+  ],
+  [
+   "GS 495",
+   "math"
+  ],
+  [
+   "IAS 111",
+   "asfm"
+  ],
+  [
+   "IAS 111",
+   "math"
+  ],
+  [
+   "IAS 121",
+   "asfm"
+  ],
+  [
+   "IAS 121",
+   "math"
+  ],
+  [
+   "IAS 212",
+   "asfm"
+  ],
+  [
+   "IAS 212",
+   "math"
+  ],
+  [
+   "IAS 321",
+   "asfm"
+  ],
+  [
+   "IAS 321",
+   "math"
+  ],
+  [
+   "IAS 322",
+   "asfm"
+  ],
+  [
+   "IAS 322",
+   "math"
+  ],
+  [
+   "IAS 330",
+   "asfm"
+  ],
+  [
+   "IAS 330",
+   "math"
+  ],
+  [
+   "IAS 430",
+   "asfm"
+  ],
+  [
+   "IAS 430",
+   "math"
+  ],
+  [
+   "ICS 104",
+   "asfm"
+  ],
+  [
+   "ICS 104",
+   "math"
+  ],
+  [
+   "ISE 291",
+   "asfm"
+  ],
+  [
+   "ISE 291",
+   "math"
+  ],
+  [
+   "MATH 101",
+   "asfm"
+  ],
+  [
+   "MATH 101",
+   "math"
+  ],
+  [
+   "MATH 102",
+   "asfm"
+  ],
+  [
+   "MATH 102",
+   "math"
+  ],
+  [
+   "MATH 201",
+   "asfm"
+  ],
+  [
+   "MATH 201",
+   "math"
+  ],
+  [
+   "MATH 202",
+   "math"
+  ],
+  [
+   "MATH 208",
+   "asfm"
+  ],
+  [
+   "MATH 208",
+   "math"
+  ],
+  [
+   "MATH 210",
+   "math"
+  ],
+  [
+   "MATH 225",
+   "math"
+  ],
+  [
+   "MATH 315",
+   "math"
+  ],
+  [
+   "MATH 323",
+   "math"
+  ],
+  [
+   "MATH 333",
+   "math"
+  ],
+  [
+   "MATH 341",
+   "math"
+  ],
+  [
+   "MATH 371",
+   "asfm"
+  ],
+  [
+   "MATH 371",
+   "math"
+  ],
+  [
+   "MATH 399",
+   "math"
+  ],
+  [
+   "MATH 405",
+   "math"
+  ],
+  [
+   "MATH 407",
+   "math"
+  ],
+  [
+   "MATH 413",
+   "math"
+  ],
+  [
+   "MATH 414",
+   "math"
+  ],
+  [
+   "MATH 427",
+   "math"
+  ],
+  [
+   "MATH 434",
+   "math"
+  ],
+  [
+   "MATH 441",
+   "math"
+  ],
+  [
+   "MATH 445",
+   "math"
+  ],
+  [
+   "MATH 451",
+   "math"
+  ],
+  [
+   "MATH 453",
+   "math"
+  ],
+  [
+   "MATH 463",
+   "math"
+  ],
+  [
+   "MATH 490",
+   "math"
+  ],
+  [
+   "MATH 498",
+   "math"
+  ],
+  [
+   "PE 101",
+   "asfm"
+  ],
+  [
+   "PE 101",
+   "math"
+  ],
+  [
+   "PHYS 101",
+   "math"
+  ],
+  [
+   "PHYS 102",
+   "math"
+  ],
+  [
+   "STAT 201",
+   "math"
+  ],
+  [
+   "STAT 214",
+   "asfm"
+  ],
+  [
+   "STAT 301",
+   "asfm"
+  ],
+  [
+   "STAT 301",
+   "math"
+  ],
+  [
+   "STAT 302",
+   "asfm"
+  ],
+  [
+   "STAT 310",
+   "asfm"
+  ],
+  [
+   "STAT 416",
+   "asfm"
+  ],
+  [
+   "STAT 460",
+   "asfm"
+  ]
+ ],
+ "by_course": {
+  "ENGL 101": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 121": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 104": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "MATH 101": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "PE 101": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "PHYS 101": [
+   "coe",
+   "cs",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ENGL 102": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 111": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 108": [
+   "aics",
+   "amai",
+   "coe",
+   "cs",
+   "dse",
+   "sde",
+   "swe"
+  ],
+  "MATH 102": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "PHYS 102": [
+   "coe",
+   "cs",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "COE 202": [
+   "coe",
+   "cs",
+   "sde"
+  ],
+  "COE 203": [
+   "coe",
+   "cs"
+  ],
+  "ISE 291": [
+   "asfm",
+   "coe",
+   "cs",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 202": [
+   "aics",
+   "amai",
+   "coe",
+   "cs",
+   "dse",
+   "sde",
+   "swe"
+  ],
+  "MATH 208": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "SWE 206": [
+   "aics",
+   "cs",
+   "dse",
+   "swe"
+  ],
+  "CHEM 101": [
+   "coe",
+   "cs",
+   "ise",
+   "math",
+   "sde"
+  ],
+  "COE 301": [
+   "coe",
+   "cs",
+   "sde"
+  ],
+  "COE 292": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 253": [
+   "aics",
+   "coe",
+   "cs",
+   "swe"
+  ],
+  "MATH 201": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ENGL 214": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 212": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 321": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 343": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "STAT 201": [
+   "aics",
+   "amai",
+   "coe",
+   "cs",
+   "dse",
+   "math",
+   "swe"
+  ],
+  "SWE 363": [
+   "cs",
+   "dse",
+   "swe"
+  ],
+  "BUS 200": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 344": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 353": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 381": [
+   "aics",
+   "amai",
+   "cs",
+   "swe"
+  ],
+  "CGS 392": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 398": [
+   "cs"
+  ],
+  "ICS 413": [
+   "cs"
+  ],
+  "ICS 410": [
+   "cs",
+   "swe"
+  ],
+  "ICS 414": [
+   "cs"
+  ],
+  "ICS 433": [
+   "aics",
+   "coe",
+   "cs",
+   "swe"
+  ],
+  "ICS 399": [
+   "cs"
+  ],
+  "GS 318": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 321": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 342": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 355": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 357": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 363": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 372": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 424": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 445": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 447": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "GS 495": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 321": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 322": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 330": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "IAS 430": [
+   "aics",
+   "amai",
+   "asfm",
+   "coe",
+   "cs",
+   "dse",
+   "ise",
+   "math",
+   "sde",
+   "swe"
+  ],
+  "ICS 440": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 442": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 445": [
+   "cs",
+   "swe"
+  ],
+  "ICS 471": [
+   "aics",
+   "amai",
+   "cs",
+   "swe"
+  ],
+  "ICS 472": [
+   "aics",
+   "amai",
+   "cs",
+   "swe"
+  ],
+  "ICS 474": [
+   "cs",
+   "swe"
+  ],
+  "ICS 480": [
+   "cs",
+   "swe"
+  ],
+  "ICS 483": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "ICS 485": [
+   "aics",
+   "amai",
+   "cs",
+   "dse",
+   "swe"
+  ],
+  "ICS 487": [
+   "cs",
+   "swe"
+  ],
+  "SWE 316": [
+   "cs",
+   "swe"
+  ],
+  "SWE 326": [
+   "cs",
+   "swe"
+  ],
+  "SWE 387": [
+   "cs",
+   "swe"
+  ],
+  "SWE 402": [
+   "cs",
+   "swe"
+  ],
+  "SWE 422": [
+   "cs",
+   "swe"
+  ],
+  "SWE 439": [
+   "cs",
+   "swe"
+  ],
+  "SWE 445": [
+   "aics",
+   "cs",
+   "swe"
+  ],
+  "SWE 455": [
+   "cs",
+   "swe"
+  ],
+  "SWE 463": [
+   "cs",
+   "swe"
+  ],
+  "COE 233": [
+   "aics",
+   "swe"
+  ],
+  "SWE 216": [
+   "swe"
+  ],
+  "SWE 399": [
+   "swe"
+  ],
+  "SWE 413": [
+   "swe"
+  ],
+  "SWE 414": [
+   "swe"
+  ],
+  "COE 241": [
+   "coe"
+  ],
+  "COE 302": [
+   "coe",
+   "sde"
+  ],
+  "COE 344": [
+   "coe"
+  ],
+  "EE 236": [
+   "coe",
+   "ise"
+  ],
+  "EE 237": [
+   "coe"
+  ],
+  "COE 306": [
+   "coe",
+   "sde"
+  ],
+  "COE 346": [
+   "coe"
+  ],
+  "COE 384": [
+   "coe"
+  ],
+  "COE 398": [
+   "coe"
+  ],
+  "COE 411": [
+   "coe"
+  ],
+  "COE 412": [
+   "coe"
+  ],
+  "COE 399": [
+   "coe"
+  ],
+  "COE 403": [
+   "coe",
+   "sde"
+  ],
+  "COE 407": [
+   "coe",
+   "sde"
+  ],
+  "COE 426": [
+   "aics",
+   "coe"
+  ],
+  "COE 427": [
+   "coe"
+  ],
+  "COE 444": [
+   "coe"
+  ],
+  "COE 446": [
+   "coe"
+  ],
+  "COE 449": [
+   "coe"
+  ],
+  "COE 450": [
+   "coe"
+  ],
+  "COE 452": [
+   "coe"
+  ],
+  "COE 453": [
+   "coe"
+  ],
+  "COE 454": [
+   "coe"
+  ],
+  "COE 461": [
+   "coe"
+  ],
+  "COE 464": [
+   "coe"
+  ],
+  "COE 465": [
+   "coe",
+   "sde"
+  ],
+  "CE 101": [
+   "ise"
+  ],
+  "MSE 201": [
+   "ise"
+  ],
+  "MSE 202": [
+   "ise"
+  ],
+  "ISE 205": [
+   "ise"
+  ],
+  "ME 322": [
+   "ise"
+  ],
+  "ME 323": [
+   "ise"
+  ],
+  "ISE 315": [
+   "ise"
+  ],
+  "ISE 303": [
+   "ise"
+  ],
+  "ISE 320": [
+   "ise"
+  ],
+  "CIE 301": [
+   "ise"
+  ],
+  "CIE 305": [
+   "ise"
+  ],
+  "ISE 499": [
+   "ise"
+  ],
+  "ISE 307": [
+   "ise"
+  ],
+  "ISE 321": [
+   "ise"
+  ],
+  "ISE 324": [
+   "ise"
+  ],
+  "ISE 391": [
+   "ise"
+  ],
+  "ISE 402": [
+   "ise"
+  ],
+  "ISE 398": [
+   "ise"
+  ],
+  "ISE 411": [
+   "ise"
+  ],
+  "ISE 405": [
+   "ise"
+  ],
+  "ISE 422": [
+   "ise"
+  ],
+  "ISE 412": [
+   "ise"
+  ],
+  "ISE 399": [
+   "ise"
+  ],
+  "ISE 420": [
+   "ise"
+  ],
+  "ISE 440": [
+   "ise"
+  ],
+  "ISE 443": [
+   "ise"
+  ],
+  "ISE 447": [
+   "ise"
+  ],
+  "ISE 449": [
+   "ise"
+  ],
+  "ISE 453": [
+   "ise"
+  ],
+  "ISE 455": [
+   "ise"
+  ],
+  "ISE 460": [
+   "ise"
+  ],
+  "ISE 465": [
+   "ise"
+  ],
+  "ISE 468": [
+   "ise"
+  ],
+  "ISE 470": [
+   "ise"
+  ],
+  "ISE 472": [
+   "ise"
+  ],
+  "ISE 487": [
+   "ise"
+  ],
+  "ISE 491": [
+   "ise"
+  ],
+  "DATA 211": [
+   "aics",
+   "amai",
+   "dse"
+  ],
+  "MATH 210": [
+   "amai",
+   "dse",
+   "math"
+  ],
+  "MATH 333": [
+   "amai",
+   "math"
+  ],
+  "DATA 201": [
+   "amai",
+   "dse"
+  ],
+  "DATA 391": [
+   "aics",
+   "amai",
+   "dse"
+  ],
+  "MATH 320": [
+   "amai"
+  ],
+  "MATH 373": [
+   "amai"
+  ],
+  "MATH 335": [
+   "amai"
+  ],
+  "DATA 301": [
+   "amai",
+   "dse"
+  ],
+  "MATH 399": [
+   "amai",
+   "math"
+  ],
+  "DATA 471": [
+   "amai",
+   "dse"
+  ],
+  "MATH 428": [
+   "amai"
+  ],
+  "MATH 429": [
+   "amai"
+  ],
+  "MATH 413": [
+   "amai",
+   "math"
+  ],
+  "MATH 475": [
+   "amai"
+  ],
+  "DATA 431": [
+   "amai",
+   "dse"
+  ],
+  "DATA 441": [
+   "amai",
+   "dse"
+  ],
+  "MATH 414": [
+   "amai",
+   "math"
+  ],
+  "MATH 315": [
+   "amai",
+   "math"
+  ],
+  "MATH 323": [
+   "amai",
+   "math"
+  ],
+  "MATH 341": [
+   "amai",
+   "math"
+  ],
+  "MATH 371": [
+   "amai",
+   "asfm",
+   "math"
+  ],
+  "MATH 405": [
+   "amai",
+   "math"
+  ],
+  "MATH 407": [
+   "amai",
+   "math"
+  ],
+  "MATH 427": [
+   "amai",
+   "math"
+  ],
+  "MATH 434": [
+   "amai",
+   "math"
+  ],
+  "MATH 441": [
+   "amai",
+   "math"
+  ],
+  "MATH 445": [
+   "amai",
+   "math"
+  ],
+  "MATH 453": [
+   "amai",
+   "math"
+  ],
+  "MATH 463": [
+   "amai",
+   "math"
+  ],
+  "MATH 498": [
+   "amai",
+   "math"
+  ],
+  "DATA 311": [
+   "dse"
+  ],
+  "DATA 321": [
+   "dse"
+  ],
+  "DATA 361": [
+   "dse"
+  ],
+  "DATA 322": [
+   "dse"
+  ],
+  "DATA 341": [
+   "dse"
+  ],
+  "DATA 399": [
+   "dse"
+  ],
+  "DATA 411": [
+   "dse"
+  ],
+  "DATA 421": [
+   "dse"
+  ],
+  "DATA 412": [
+   "dse"
+  ],
+  "STAT 460": [
+   "asfm",
+   "dse"
+  ],
+  "DATA 442": [
+   "dse"
+  ],
+  "EE 201": [
+   "sde"
+  ],
+  "EE 203": [
+   "sde"
+  ],
+  "EE 272": [
+   "sde"
+  ],
+  "EE 207": [
+   "sde"
+  ],
+  "EE 303": [
+   "sde"
+  ],
+  "PHYS 336": [
+   "sde"
+  ],
+  "EE 315": [
+   "sde"
+  ],
+  "EE 425": [
+   "sde"
+  ],
+  "SDE 399": [
+   "sde"
+  ],
+  "SDE 411": [
+   "sde"
+  ],
+  "SDE 412": [
+   "sde"
+  ],
+  "COE 413": [
+   "sde"
+  ],
+  "AISC 399": [
+   "aics"
+  ],
+  "AISC 411": [
+   "aics"
+  ],
+  "ICS 467": [
+   "aics"
+  ],
+  "AISC 412": [
+   "aics"
+  ],
+  "ICS 476": [
+   "aics"
+  ],
+  "AISC 398": [
+   "aics"
+  ],
+  "MATH 202": [
+   "math"
+  ],
+  "MATH 225": [
+   "math"
+  ],
+  "MATH 490": [
+   "math"
+  ],
+  "MATH 451": [
+   "math"
+  ],
+  "STAT 301": [
+   "asfm",
+   "math"
+  ],
+  "ECON 101": [
+   "asfm"
+  ],
+  "ACCT 110": [
+   "asfm"
+  ],
+  "ECON 102": [
+   "asfm"
+  ],
+  "ACCT 210": [
+   "asfm"
+  ],
+  "AS 201": [
+   "asfm"
+  ],
+  "STAT 214": [
+   "asfm"
+  ],
+  "FIN 250": [
+   "asfm"
+  ],
+  "AS 289": [
+   "asfm"
+  ],
+  "AS 251": [
+   "asfm"
+  ],
+  "FIN 320": [
+   "asfm"
+  ],
+  "AS 380": [
+   "asfm"
+  ],
+  "STAT 302": [
+   "asfm"
+  ],
+  "STAT 310": [
+   "asfm"
+  ],
+  "AS 398": [
+   "asfm"
+  ],
+  "AS 411": [
+   "asfm"
+  ],
+  "STAT 416": [
+   "asfm"
+  ],
+  "AS 389": [
+   "asfm"
+  ],
+  "AS 484": [
+   "asfm"
+  ],
+  "AS 412": [
+   "asfm"
+  ],
+  "AS 481": [
+   "asfm"
+  ],
+  "FIN 440": [
+   "asfm"
+  ],
+  "AS 450": [
+   "asfm"
+  ],
+  "AS 490": [
+   "asfm"
+  ],
+  "AS 491": [
+   "asfm"
+  ]
+ }
+}

@@ -119,6 +119,1242 @@
 "lb": 0,
 "cr": 3
 },
+"STAT 201": {
+"name": "Probability and Statistics for Engineers and Scientists",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"STAT 211": {
+"name": "Statistics for Business I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 212": {
+"name": "Statistics for Business II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 213": {
+"name": "Statistical Methods for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 214": {
+"name": "Actuaries and Business Statistics",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"STAT 220": {
+"name": "Statistical Computing Software",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 301": {
+"name": "Probability Theory and Mathematical Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 302": {
+"name": "Statistical Inference",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 310": {
+"name": "Regression Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 319": {
+"name": "Probability and Statistics for Engineers and Scientists",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"STAT 320": {
+"name": "Statistical Quality Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 325": {
+"name": "Nonparametric Statistical Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 342": {
+"name": "Applied Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 355": {
+"name": "Demographic Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 361": {
+"name": "Operations Research I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 365": {
+"name": "Data Collection and Sampling Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 375": {
+"name": "Categorical Data Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"STAT 413": {
+"name": "Statistical Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 415": {
+"name": "Stochastic Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 416": {
+"name": "Stochastic Processes for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 430": {
+"name": "Experimental Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 435": {
+"name": "Linear Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 436": {
+"name": "Generalized Linear Models",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"STAT 440": {
+"name": "Multivariate Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 460": {
+"name": "Time Series",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 461": {
+"name": "Operations Research II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 470": {
+"name": "Senior Project in Statistics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"STAT 475": {
+"name": "Statistical Models for Lifetime Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"STAT 499": {
+"name": "Topics in Statistics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PE 101": {
+"name": "Physical Education III",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PE 102": {
+"name": "Health & Physical Education II",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PE 201": {
+"name": "Physical Education III",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PE 202": {
+"name": "Physical Education IV",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PE 301": {
+"name": "Elce 1 (For Team Members)",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PE 303": {
+"name": "Elec 3 (For Team Members)",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"GEO 366": {
+"name": "Environmental Management & Climate Change",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEO 401": {
+"name": "Fundamentals of Climate Change",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEO 466": {
+"name": "Principles of Environmental Impact Assessment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 101": {
+"name": "Computer Programming",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 102": {
+"name": "Introduction to Computing I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 103": {
+"name": "Computer Programming in C",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 104": {
+"name": "Introduction to Programming in Python and C",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 108": {
+"name": "Object-Oriented Programming",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 201": {
+"name": "Introduction to Computing II",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 202": {
+"name": "Data Structures and Algorithms",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 233": {
+"name": "Computer Architecture & Assembly Language",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 253": {
+"name": "Discrete Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 254": {
+"name": "Discrete Structures II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 309": {
+"name": "Computing & Society",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ICS 321": {
+"name": "Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 324": {
+"name": "Database Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 343": {
+"name": "Fundamentals of Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 344": {
+"name": "Information Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ICS 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"ICS 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ICS 353": {
+"name": "Design and Analysis of Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 355": {
+"name": "Theory of Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 381": {
+"name": "Principles of Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ICS 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ICS 410": {
+"name": "Programming Languages",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 411": {
+"name": "Senior Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"ICS 412": {
+"name": "Compiler Construction Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 413": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ICS 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ICS 415": {
+"name": "Computer Graphics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 424": {
+"name": "Advanced Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 426": {
+"name": "Data Warehousing & Data Mining",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 431": {
+"name": "Operating Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ICS 433": {
+"name": "Operating Systems",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"ICS 436": {
+"name": "Systems & Network Administration",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 437": {
+"name": "Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 439": {
+"name": "Cryptography in Quantum Era",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 440": {
+"name": "Cryptography and Blockchain Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 441": {
+"name": "Digital Forensics Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 442": {
+"name": "Penetration Testing and Ethical Hacking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 443": {
+"name": "Network Design & Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 444": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 445": {
+"name": "Network Management and Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 446": {
+"name": "Cluster Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 447": {
+"name": "Computer Network Technologies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 448": {
+"name": "Network and Security Administration",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ICS 454": {
+"name": "Principles of Cryptography",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 467": {
+"name": "Security in Artificial Intelligence Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 471": {
+"name": "Deep Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 472": {
+"name": "Natural Language Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 473": {
+"name": "Bioinformatics Mining and Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 474": {
+"name": "Big Data Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 476": {
+"name": "Artificial Intelligence for Cybersecurity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 477": {
+"name": "AI-Driven Computational Forensics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 478": {
+"name": "Data-Driven Cybersecurity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 479": {
+"name": "Cyber-Physical System Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 480": {
+"name": "Reverse Engineering and Exploitation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 481": {
+"name": "Artificial Neural Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 482": {
+"name": "Natural Language Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 483": {
+"name": "Computer Vision",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 484": {
+"name": "Arabic Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 485": {
+"name": "Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 486": {
+"name": "Agent-Based Systems and Swarm Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 487": {
+"name": "Intelligent Decision Support Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 488": {
+"name": "Knowledge Based System and Soft Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 489": {
+"name": "Applications of Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 490": {
+"name": "Special Topics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 491": {
+"name": "Special Topics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ICS 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ICS 497": {
+"name": "Directed Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 200": {
+"name": "Fundamentals of Computer Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 202": {
+"name": "Digital Logic Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 203": {
+"name": "Digital Logic Laboratory",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"COE 205": {
+"name": "Computer Organization and Assembly Language",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 233": {
+"name": "Digital Logic & Computer Organization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 241": {
+"name": "Data and Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 292": {
+"name": "Introduction to Artificial Intelligence",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 300": {
+"name": "Principles of Computer Engineering Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"COE 301": {
+"name": "Computer Organization",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 302": {
+"name": "Design and Modeling of Digital Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 305": {
+"name": "Microcomputer System Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 306": {
+"name": "Introduction to Embedded Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 307": {
+"name": "Computer Hardware",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 308": {
+"name": "Computer Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 341": {
+"name": "Data & Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 342": {
+"name": "Data & Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 344": {
+"name": "Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 346": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"COE 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"COE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"COE 353": {
+"name": "Fundamentals of Computer Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 360": {
+"name": "Principles of VLSI Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 384": {
+"name": "Fundamentals of Computer Engineering Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 385": {
+"name": "Personal Computers",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"COE 390": {
+"name": "Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"COE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"COE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"COE 400": {
+"name": "System Design Laboratory",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"COE 401": {
+"name": "Modeling and Simulation of Computer and Network Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 402": {
+"name": "Computer System Performance Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 403": {
+"name": "Computer Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 405": {
+"name": "Design and Modeling of Digital Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 406": {
+"name": "RISC Architectures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 407": {
+"name": "System-on-Chip Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 408": {
+"name": "Reconfigurable Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 409": {
+"name": "Special Topics in Computer Architecture and Digital Systems Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 410": {
+"name": "Design of Sequential Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"COE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"COE 413": {
+"name": "SoC Tapeout",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 420": {
+"name": "Parallel Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 421": {
+"name": "Fault Tolerant Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 422": {
+"name": "Real Time Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 423": {
+"name": "Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 424": {
+"name": "Introduction to Smart Cards & RFID Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 425": {
+"name": "Data Management Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 426": {
+"name": "Data Privacy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 427": {
+"name": "Distributed Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 429": {
+"name": "Special Topics in Parallel and Distributed Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 441": {
+"name": "Local Area Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 442": {
+"name": "Computer Networks",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"COE 443": {
+"name": "High Speed Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 444": {
+"name": "Network Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 445": {
+"name": "Internet Information Services",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 446": {
+"name": "Mobile Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 447": {
+"name": "Fundamentals of Optical Networking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 449": {
+"name": "Special Topics in Computer Communications & Networking",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 450": {
+"name": "Introduction to Smart Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 451": {
+"name": "Computer & Network Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 452": {
+"name": "Principles of Cloud-based Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 453": {
+"name": "Cloud and Edge Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 454": {
+"name": "Internet of Things",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 456": {
+"name": "Wireless Sensor Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 458": {
+"name": "Internet of Drones",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 460": {
+"name": "Advanced Digital Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 461": {
+"name": "Principles of VLSI Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 462": {
+"name": "Design Automation of VLSI Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 464": {
+"name": "Testing of Digital Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 465": {
+"name": "VLSI System Design Methodology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 466": {
+"name": "Quantum Architecture and Algorithms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 469": {
+"name": "Special Topics in VLSI and Design Automation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 482": {
+"name": "Pervasive and Ubiquitous Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 484": {
+"name": "Introduction to Robotics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 485": {
+"name": "Senior Design Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"COE 487": {
+"name": "Computer Vision Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 488": {
+"name": "Data Acquisition Interfacing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"COE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"COE 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"COE 499": {
+"name": "Special Topics in Computer Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 201": {
+"name": "Probability for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 211": {
+"name": "Introduction to Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 301": {
+"name": "Data, Inference, and Decisions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 311": {
+"name": "Data Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 321": {
+"name": "Matrix Theory for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 322": {
+"name": "Mathematical Modeling for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 341": {
+"name": "Statistical Methods for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 361": {
+"name": "Fundamentals of Database Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 391": {
+"name": "Human Contexts and Ethics of Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"DATA 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"DATA 412": {
+"name": "Senior Design Project Il",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"DATA 421": {
+"name": "Optimization for Data Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 431": {
+"name": "Blockchain & Cryptocurrencies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 441": {
+"name": "Large Language Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 442": {
+"name": "Generative AI and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"DATA 471": {
+"name": "Big Data Analytics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "ISE 100": {
 "name": "Introduction to Technology",
 "lt": 2,
@@ -485,6 +1721,660 @@
 "lb": 0,
 "cr": 0
 },
+"ARE 100": {
+"name": "Introduction to Architectural Engineering",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"ARE 101": {
+"name": "Architectural Graphics",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"ARE 201": {
+"name": "Architectural Graphics",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"ARE 202": {
+"name": "Architectural Design & History",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"ARE 211": {
+"name": "Building Materials",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARE 212": {
+"name": "Construction Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 220": {
+"name": "Fundamentals of Thermal Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 221": {
+"name": "Computer Applications in Building Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARE 222": {
+"name": "Computer Applications in Building Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARE 230": {
+"name": "Building Materials and Construction Systems",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ARE 301": {
+"name": "Architectural Design",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"ARE 303": {
+"name": "Working Drawings",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"ARE 320": {
+"name": "Architectural Acoustics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARE 322": {
+"name": "Building Mechanical Systems",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARE 323": {
+"name": "Principles of Heating, Ventilating, and Air-Conditioning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 325": {
+"name": "Building Illumination",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARE 328": {
+"name": "Architectural Acoustics & Illumination",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 330": {
+"name": "Construction Management and Estimating",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 331": {
+"name": "Construction Economy and Equipment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 342": {
+"name": "Principles of Heating, Ventilating, and Air-Conditioning",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARE 345": {
+"name": "Heating,Ventilating & AC",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ARE 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"ARE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ARE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"ARE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ARE 400": {
+"name": "Senior Design Project",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ARE 410": {
+"name": "Introduction to Senior Design Project",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"ARE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ARE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARE 413": {
+"name": "Construction Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 416": {
+"name": "Planning and Design of Structural Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 417": {
+"name": "Innovative Building Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 418": {
+"name": "Structural Design of High-Rise Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 420": {
+"name": "Solar Energy in Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 421": {
+"name": "Building Energy Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 422": {
+"name": "Advanced Building Envelopes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 423": {
+"name": "Building Performance Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 424": {
+"name": "Indoor Air Quality and Ventilation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 425": {
+"name": "Architectural Acoustics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 426": {
+"name": "Room Acoustics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 427": {
+"name": "Noise Control in Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 428": {
+"name": "Design of Plumbing and Fire Suppression Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 429": {
+"name": "Safety and Security Systems in Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 430": {
+"name": "Contracts and Specifications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 431": {
+"name": "Building Economy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 432": {
+"name": "Construction Planning and Scheduling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 433": {
+"name": "Building Cost Estimation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 434": {
+"name": "Building Economy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 435": {
+"name": "Construction Safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 436": {
+"name": "Fire Safety Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 437": {
+"name": "Decision Analysis and Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 438": {
+"name": "Facilities Planning and Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 439": {
+"name": "Introduction to Building Maintenance Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 440": {
+"name": "Solar Energy in Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 442": {
+"name": "Building Energy Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 443": {
+"name": "Computer-Aided Building Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARE 444": {
+"name": "Knowledge-Based Systems in Buildings",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARE 445": {
+"name": "Artificial Lighting Systems Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 446": {
+"name": "Daylighting Analysis and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 447": {
+"name": "Automation and Control of Building Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 450": {
+"name": "Artificial Lighting Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 452": {
+"name": "Daylighting Analysis & Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 455": {
+"name": "Room Acoustics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 456": {
+"name": "Noise Control in Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 457": {
+"name": "Introduction to Building Maintenance Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 458": {
+"name": "Quantitative Methods in Construction Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 459": {
+"name": "Contracts and Specifications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 460": {
+"name": "Green and Sustainable Building",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 461": {
+"name": "Applications of AI in Smart Buildings",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 463": {
+"name": "Sustainable Energy Solutions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 465": {
+"name": "Construction Processes and Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 466": {
+"name": "Applied Machine Learning in Construction",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 490": {
+"name": "Special Topics in Architectural Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 491": {
+"name": "Sp. Topics in Fire Safety Mgt.",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 492": {
+"name": "Mosque Systems and Operation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ARE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ARE 497": {
+"name": "Undergraduate Research",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"AS 201": {
+"name": "Financial Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 250": {
+"name": "Quantitative Financial Models for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 251": {
+"name": "Maths of Financial Derivatives",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 288": {
+"name": "Actuarial Science Problem Lab I",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"AS 289": {
+"name": "Actuarial Science Problem Lab I",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"AS 322": {
+"name": "Numerical Methods for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AS 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"AS 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AS 380": {
+"name": "Actuarial Contingencies I",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 381": {
+"name": "Actuarial Contingencies I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 388": {
+"name": "Actuarial Science Prob Lab II",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"AS 389": {
+"name": "Actuarial Science Problem Lab II",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"AS 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"AS 411": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"AS 412": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"AS 450": {
+"name": "Risk Modeling",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 460": {
+"name": "Enterprise Risk Analysis",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 470": {
+"name": "Models for Risk Managing Financial Options and Derivatives",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 475": {
+"name": "Survival Models for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 476": {
+"name": "Survival Models for Actuaries",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"AS 481": {
+"name": "Actuarial Contingencies II",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"AS 482": {
+"name": "Actuarial Contingencies II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 483": {
+"name": "Actuarial Risk Theory and Credibility",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 484": {
+"name": "Actuarial Risk Theory and Credibility",
+"lt": 3,
+"lb": 2,
+"cr": 4
+},
+"AS 490": {
+"name": "Topics in Actuarial Science and Financial Mathematics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 491": {
+"name": "Topics in Actuarial Science and Financial Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AS 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AS 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AS 498": {
+"name": "Topics in AS & Financial Math",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "OSC 210": {
 "name": "Introduction to Operations and Supply Chain",
 "lt": 3,
@@ -555,6 +2445,594 @@
 "name": "Case Studies in Operations and Supply Chain",
 "lt": 3,
 "lb": 0,
+"cr": 3
+},
+"CE 100": {
+"name": "Intro to Civil Engineering",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"CE 101": {
+"name": "Engineering Graphics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"CE 201": {
+"name": "Statics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 202": {
+"name": "Statics & Strength of Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 203": {
+"name": "Structural Mechanics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 204": {
+"name": "Civil Engineering Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 206": {
+"name": "Civil Engineering Materials Laboratory",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"CE 211": {
+"name": "Descriptive and Computer Graphics",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"CE 213": {
+"name": "Computer Graphics",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"CE 215": {
+"name": "Computer Graphics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 216": {
+"name": "Computer Graphics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"CE 230": {
+"name": "Engineering Fluid Mechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 260": {
+"name": "Surveying I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 261": {
+"name": "Surveying I",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"CE 262": {
+"name": "Surveying",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 303": {
+"name": "Structural Materials",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CE 305": {
+"name": "Structural Analysis I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 312": {
+"name": "Introduction to CE Design",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"CE 315": {
+"name": "Reinforced Concrete I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 317": {
+"name": "Computer Methods in Civil Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 318": {
+"name": "Numerical & Statistical Methodes in Civil Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 330": {
+"name": "Environmental Engineering Principles",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 331": {
+"name": "Engineering Hydrology I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 332": {
+"name": "Engineering Hydrology and Hydraulics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 335": {
+"name": "Engineering Hydrology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 340": {
+"name": "Transportation Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CE 341": {
+"name": "Transportation Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 343": {
+"name": "Transportation Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"CE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"CE 351": {
+"name": "Civil Engineering Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"CE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"CE 353": {
+"name": "Geotechnical Engineering I",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CE 354": {
+"name": "Introduction to Geotechnical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 356": {
+"name": "Geotechnical Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"CE 370": {
+"name": "Water & Wastewater Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CE 375": {
+"name": "Environmental Chemistry Laboratory",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"CE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"CE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"CE 401": {
+"name": "Concrete Technology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 402": {
+"name": "Durability, Evaluation and Repair of Concrete Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 403": {
+"name": "Characterization of Marine Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 404": {
+"name": "Climate Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 405": {
+"name": "Structural Analysis II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 406": {
+"name": "Structural Mechanics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 407": {
+"name": "Introduction to Marine Structures and Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 408": {
+"name": "Steel Design I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 409": {
+"name": "Assessment and Maintenance of Marine Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 410": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"CE 411": {
+"name": "Senior Design Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"CE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"CE 413": {
+"name": "Applied Design Project",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"CE 415": {
+"name": "Reinforced Concrete II",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 417": {
+"name": "Reinforced Concrete III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 418": {
+"name": "Steel Design II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 420": {
+"name": "Construction Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 421": {
+"name": "Construction Methods and Mgt",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 422": {
+"name": "Construction Management and Economy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 430": {
+"name": "Engineering Hydrology II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 431": {
+"name": "Hydrologic Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 432": {
+"name": "Hydraulic Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 433": {
+"name": "Ground Water Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 434": {
+"name": "Irrigation Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 435": {
+"name": "Theory and Design of Water Wells",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 436": {
+"name": "Open Channel Hydraulics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 437": {
+"name": "Applied Hydraulic Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 438": {
+"name": "Hydraulic Systems Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 439": {
+"name": "Civil Engineering Systems Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 440": {
+"name": "Highway and Airport Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 441": {
+"name": "Design of Pavement",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 442": {
+"name": "Construction and Maintenance of Highways and Airports",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 443": {
+"name": "Highway Planning and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 444": {
+"name": "Traffic Engineering and Roadway Safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 445": {
+"name": "Introduction to Traffic Engineering and Safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 453": {
+"name": "Geotechnical Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 454": {
+"name": "Soil Stabilization and Site Improvement",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 455": {
+"name": "Foundation and Earth Structure Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 456": {
+"name": "Seepage Analysis & Its Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 457": {
+"name": "Advanced Geotechnical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 460": {
+"name": "Remote Sensing Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 461": {
+"name": "Geodesy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 462": {
+"name": "Advanced Building Materials and Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 463": {
+"name": "Theory of Errors and Adjustment Computations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 464": {
+"name": "Project Surveying",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 471": {
+"name": "Water and Wastewater: Treatment and Reuse",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 472": {
+"name": "Environmental Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 473": {
+"name": "Design & Operation of Water & Wastewater Treatment Plants",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 474": {
+"name": "Municipal Solid Waste Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 475": {
+"name": "Water Distribution and Wastewater Collection System",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 476": {
+"name": "Industrial Hazardous Waste Management & Treatment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 478": {
+"name": "Climate Resilient Infrastructure and Adaptation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 479": {
+"name": "Air Quality in Building and Construction Sites",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 481": {
+"name": "Intelligent Transportation System",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 482": {
+"name": "Geometric Design of Highways",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CE 490": {
+"name": "Civil Engineering Seminar",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"CE 491": {
+"name": "Special Topics in Civil Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"CE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"CE 497": {
+"name": "Undergraduate Research",
+"lt": 1,
+"lb": 6,
 "cr": 3
 },
 "ENTR 250": {
@@ -653,6 +3131,306 @@
 "lb": 0,
 "cr": 3
 },
+"MSE 201": {
+"name": "Introduction to Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 202": {
+"name": "Materials Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"MSE 203": {
+"name": "Thermodynamics of Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 204": {
+"name": "Materials Structure and Defect",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 205": {
+"name": "Diffusion & Kinetics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 206": {
+"name": "Materials Characterization",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"MSE 207": {
+"name": "Materials Science for CHE",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"MSE 301": {
+"name": "Engineering Metallic Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 302": {
+"name": "Polymeric Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 303": {
+"name": "Materials Synthesis Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"MSE 304": {
+"name": "Engineering Ceramics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 305": {
+"name": "Composite Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 306": {
+"name": "Failure of Materials & Prevention",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 307": {
+"name": "Materials Processing & Properties Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"MSE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"MSE 401": {
+"name": "Electronic,Optical & Mag. Prop",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 402": {
+"name": "Materials Selection & Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"MSE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"MSE 413": {
+"name": "Materials ¿ Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 414": {
+"name": "Materials Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 415": {
+"name": "Modeling in Materials Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 416": {
+"name": "Introduction to Atomistic Simulations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 417": {
+"name": "Introduction to Nanomaterials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 418": {
+"name": "Corrosion Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 419": {
+"name": "Corrosion in Oil and Petrochemical Industries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 420": {
+"name": "Degradation of Polymers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 421": {
+"name": "Electrochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 422": {
+"name": "Nondestructive Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 423": {
+"name": "Introduction to Semiconductor and Micro/Nano Fabrication",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 424": {
+"name": "Introduction to Computational Materials Science",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 425": {
+"name": "Polymer Characterization and Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 426": {
+"name": "Principles of Metal Heat Treatment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 427": {
+"name": "Welding Processes and Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 428": {
+"name": "Physical Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 429": {
+"name": "Non-Ferrous Extractive Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 430": {
+"name": "Iron and Steel Making",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 431": {
+"name": "Materials for Clean Water",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 432": {
+"name": "Materials and Sustainable Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 433": {
+"name": "Electrochemical Engineering Fundamentals",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 434": {
+"name": "Mechanical Failure of Material",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 435": {
+"name": "Corrosion Prevention, Control and Monitoring",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 436": {
+"name": "Mineral Processing",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"MSE 490": {
+"name": "Special Topics in Materials Science and Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 491": {
+"name": "Special Topics in Materials Synthesis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 492": {
+"name": "Special Topics in Materials Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 493": {
+"name": "Special Topics in Advanced Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MSE 495": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MSE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
 "DSMM 302": {
 "name": "Digital and Social Media Marketing",
 "lt": 3,
@@ -739,6 +3517,966 @@
 },
 "DSMM 475": {
 "name": "Integrated Marketing and Performance Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 211": {
+"name": "Fundamentals of Thermo-Fluids",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 220": {
+"name": "Introduction to Aerospace Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 221": {
+"name": "Introduction to Aerospace Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"AE 222": {
+"name": "Introduction to Aerospace Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 223": {
+"name": "Fluid Mechanics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 228": {
+"name": "Introduction to AE Structures and Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 230": {
+"name": "AE Vehicle Performance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 240": {
+"name": "AE Design",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"AE 312": {
+"name": "Fundamentals of AE Design",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"AE 313": {
+"name": "AE Systems and Control",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"AE 314": {
+"name": "Systems and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 315": {
+"name": "Systems and Control Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 320": {
+"name": "Aerospace Engineering Lab I",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 321": {
+"name": "Structures and Materials Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 325": {
+"name": "Gas Dynamics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 328": {
+"name": "Flight Structures I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 333": {
+"name": "Aerodynamics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AE 351": {
+"name": "Aerospace Engineering Cooperative  Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"AE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"AE 355": {
+"name": "Experimental & Computational Methods for Aerospace Engineering",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 357": {
+"name": "AE Numerical Methods Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 358": {
+"name": "Computer Aided Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 398": {
+"name": "Aerospace Engineering Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"AE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"AE 401": {
+"name": "Aerospace Systems and Maintenance",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"AE 402": {
+"name": "Aerospace Avionics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"AE 403": {
+"name": "Aerospace Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 410": {
+"name": "Astronautics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"AE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"AE 414": {
+"name": "Flight and Air Traffic Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 415": {
+"name": "Flight and Aviation Safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 416": {
+"name": "Flight and Aviation Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 417": {
+"name": "Flight and Aviation Law",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 418": {
+"name": "Flight and Aviation Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 420": {
+"name": "Aerospace Engineering Lab I",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 421": {
+"name": "Aerospace Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 422": {
+"name": "Flight Propulsion I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 423": {
+"name": "Aerodynamic and Propulsion Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 426": {
+"name": "Flight Dynamics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 427": {
+"name": "Aerospace Vehicle Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 428": {
+"name": "Flight Structures II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 429": {
+"name": "Gas Dynamics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 433": {
+"name": "Aerodynamics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 442": {
+"name": "Flight Propulsion II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 446": {
+"name": "Flight Dynamics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 448": {
+"name": "Fundamentals of Helicopter",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 449": {
+"name": "Fundamentals of Unmanned Aerial Systems",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"AE 450": {
+"name": "Computational Methods for Aerospace Engineering",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"AE 454": {
+"name": "UAS Design and Integration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 461": {
+"name": "Spacecraft Guidance, Navigation, and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 490": {
+"name": "Special Topics in Aerospace Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 491": {
+"name": "Special Topics in Aerospace Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"AE 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"AE 499": {
+"name": "Special Topics in Aerospace Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 102": {
+"name": "Essentials of Geophysics",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"GEOP 202": {
+"name": "Introduction to Geophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 204": {
+"name": "Introduction to Seismology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 205": {
+"name": "Computational Geophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 215": {
+"name": "Introduction to Seismic Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 304": {
+"name": "Gravity and Magnetic Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 315": {
+"name": "Seismic Exploration I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOP 320": {
+"name": "Seismic Data Processing",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOP 340": {
+"name": "Borehole Geophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 353": {
+"name": "Electrical and Electromagnetic Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"GEOP 402": {
+"name": "Senior Project",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"GEOP 404": {
+"name": "Gravity & Magnetic Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 405": {
+"name": "Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"GEOP 411": {
+"name": "Senior Design Project i",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"GEOP 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"GEOP 415": {
+"name": "Seismic Exploration II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 416": {
+"name": "Seismic Data Interpretation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 420": {
+"name": "Current Topics in Geosciences",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 421": {
+"name": "Exploration and Development of Geothermal Energy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 422": {
+"name": "Remote Sensing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 430": {
+"name": "Geophysical Well Logging",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOP 440": {
+"name": "Geophysics for Petroleum Engg",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 450": {
+"name": "Electrical Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 455": {
+"name": "Geodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 458": {
+"name": "Geoscience Practices in the Mining Industry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 465": {
+"name": "Paleomagnetism",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 470": {
+"name": "Geophysical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 472": {
+"name": "Meteorology & Climatology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 475": {
+"name": "Environmental Geophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 478": {
+"name": "Data Inversion in Geophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 480": {
+"name": "Special Topics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 488": {
+"name": "Petrophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 490": {
+"name": "Geophysics Field Camp",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"GEOP 495": {
+"name": "Advanced Reservoir Characterization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOP 499": {
+"name": "Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"BUS 200": {
+"name": "Business & Entrepreneurship",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BUS 300": {
+"name": "Career Essentials",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PETE 101": {
+"name": "Introduction to the Petroleum Industry",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"PETE 201": {
+"name": "Introduction to Petroleum Engineering",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"PETE 202": {
+"name": "Phase Behavior",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 203": {
+"name": "Drilling Engineering I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PETE 204": {
+"name": "Reservoir Rock Properties",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PETE 205": {
+"name": "Petroleum Fluid Properties",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PETE 206": {
+"name": "Rock and Fluid Properties",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PETE 301": {
+"name": "Reservoir Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 302": {
+"name": "Well Completion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 303": {
+"name": "Well Logging",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PETE 304": {
+"name": "Drilling Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 305": {
+"name": "Reservoir Description",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 306": {
+"name": "Well Testing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 311": {
+"name": "Drilling Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PETE 313": {
+"name": "Well Logging",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 315": {
+"name": "Reservoir Description",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"PETE 351": {
+"name": "Cooperative Work",
+"lt": 0,
+"lb": 9,
+"cr": 9
+},
+"PETE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"PETE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"PETE 400": {
+"name": "Special Topics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 401": {
+"name": "Reservoir Description",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 402": {
+"name": "Reservoir Simulation",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PETE 403": {
+"name": "Petroleum Production Engg",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 404": {
+"name": "Production Facilities Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PETE 405": {
+"name": "Water Flooding",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"PETE 406": {
+"name": "Improved Oil Recovery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 407": {
+"name": "Natural Resources Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 408": {
+"name": "Seminar",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"PETE 409": {
+"name": "Artificial Lift",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 410": {
+"name": "Natural Gas Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"PETE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"PETE 414": {
+"name": "Formation Damage",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 417": {
+"name": "Surface Facilities",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 418": {
+"name": "Modern Petroleum Production",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 421": {
+"name": "Directional Drilling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 422": {
+"name": "Well Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 424": {
+"name": "Rock Mechanics for Petroleum Engineers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 431": {
+"name": "Reservoir Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 432": {
+"name": "Water Flooding",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 452": {
+"name": "Naturally-Fractured Reservoirs",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 453": {
+"name": "Production Logging",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 461": {
+"name": "Chemical Enhanced Oil Recovery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 462": {
+"name": "Thermal Enhanced Oil Recovery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 463": {
+"name": "Miscible Enhanced Oil Recovery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 464": {
+"name": "Energy Sustainability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 465": {
+"name": "Carbon Capture, Utilization and Sequestration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 466": {
+"name": "Hydrogen Geostorage",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 471": {
+"name": "Introduction to  Unconventional Resources",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 472": {
+"name": "Unconventional Resources Stimulation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 473": {
+"name": "Unconventional Resources Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 490": {
+"name": "Special Topics in Petroleum Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 491": {
+"name": "Special Topics in Petroleum Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PETE 495": {
+"name": "Directed Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PETE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"BIOL 101": {
+"name": "Introduction to Biology",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"BIOL 102": {
+"name": "Ecology and Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOL 201": {
+"name": "Microbiology",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"BIOL 202": {
+"name": "Physiology",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"BIOL 233": {
+"name": "Biology for Engineers",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"BIOL 301": {
+"name": "Biochemistry",
 "lt": 3,
 "lb": 0,
 "cr": 3
@@ -974,6 +4712,258 @@
 "ACCT 499": {
 "name": "Special topics in Accounting",
 "lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 201": {
+"name": "Biology for Engineers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 202": {
+"name": "Biology for Engineers Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"BIOE 211": {
+"name": "Fundamentals of Bioengineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 303": {
+"name": "Cell Biology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 311": {
+"name": "Bioinstrumentation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 312": {
+"name": "Bioinstrumentation lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"BIOE 316": {
+"name": "Ethics and Safety in Bioengineering",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"BIOE 320": {
+"name": "Molecular Biology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 321": {
+"name": "Cell and Molecular Biology Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"BIOE 337": {
+"name": "Applied Physiology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 355": {
+"name": "Biomimicry Design and Modeling Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"BIOE 370": {
+"name": "Bioengineering Thermodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 377": {
+"name": "Marine Pollution & Mitigation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"BIOE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"BIOE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"BIOE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"BIOE 434": {
+"name": "Introduction to Biosensors",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 440": {
+"name": "Molecular Biotechnology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 445": {
+"name": "Enzyme Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 455": {
+"name": "Transport Phenomenon in Bioengineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 460": {
+"name": "Biomaterials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 475": {
+"name": "Cell Biology and Bioelectricity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 480": {
+"name": "Biomechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 483": {
+"name": "Genomics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 484": {
+"name": "Introduction to Genetic Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 485": {
+"name": "Electrophysiology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 486": {
+"name": "Nanobiotechnology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 487": {
+"name": "Bioinformatics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 488": {
+"name": "Introduction to Modeling of Biological Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 490": {
+"name": "Special Topics in Bioengineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"BIOE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"BIOE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ESE 231": {
+"name": "Fundamentals of Environmental Science and Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ESE 371": {
+"name": "Environmental Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ESE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ESE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ESE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ESE 431": {
+"name": "Water Treatment & Reuse",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ESE 432": {
+"name": "Solid & Hazardous Waste Mgmt.",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ESE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ESE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
 "lb": 0,
 "cr": 3
 },
@@ -1319,6 +5309,1086 @@
 "lb": 0,
 "cr": 3
 },
+"EE 200": {
+"name": "Digital Logic Circuit Design",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"EE 201": {
+"name": "Electric Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 202": {
+"name": "Electrical Circuits I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 203": {
+"name": "Electronics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 204": {
+"name": "Fundamentals of Electrical Circuits (Non EE students)",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"EE 205": {
+"name": "Electric Circuits II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 206": {
+"name": "Introduction to Electrical Systems and Computations",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"EE 207": {
+"name": "Signals and Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 208": {
+"name": "Electrical Systems (Architectural Engineering students)",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"EE 210": {
+"name": "Intro. to Electrical Engg",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"EE 211": {
+"name": "Electrical Circuits I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 212": {
+"name": "Electrical Circuits Laboratory (Non-EE students)",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 213": {
+"name": "Electrical Circuits II",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"EE 234": {
+"name": "Electronics and Microcontrollers  (Non-EE students)",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 235": {
+"name": "Electronics and Microcontrollers Lab (Non-EE students)",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 236": {
+"name": "Electronic Circuits (Non-EE students)",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 237": {
+"name": "Electronic Circuits Lab (Non-EE students)",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 271": {
+"name": "Electrical Circuits Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 272": {
+"name": "Analog and Digital Electronics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 303": {
+"name": "Electronics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 304": {
+"name": "Electronics II Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 306": {
+"name": "Electromechanical Devices (Non-EE Students)",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"EE 307": {
+"name": "Digital Signal Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 308": {
+"name": "Building Electrical Systems",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"EE 310": {
+"name": "Fundamentals of Electrical Engineering Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"EE 311": {
+"name": "Fundamentals of EE Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 312": {
+"name": "Electrical Systems & Lighting (ARE Students only)",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"EE 315": {
+"name": "Probabilistic Methods in Electrical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 340": {
+"name": "Electromagnetic Waves and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 341": {
+"name": "Electromagnetics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"EE 351": {
+"name": "Electrical Engineering Cooperative Work",
+"lt": 0,
+"lb": 9,
+"cr": 9
+},
+"EE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"EE 360": {
+"name": "Electric Energy Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 361": {
+"name": "Electric Energy Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 370": {
+"name": "Communications Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 371": {
+"name": "Communications Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 380": {
+"name": "Control Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 381": {
+"name": "Control Engineering I Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 390": {
+"name": "Digital Systems Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 391": {
+"name": "Digital Systems Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 398": {
+"name": "Electrical Engineering Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"EE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"EE 400": {
+"name": "Telecommunication Networks",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 402": {
+"name": "Control Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 403": {
+"name": "Semiconductor Devices",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 405": {
+"name": "Microwave Transmission",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 406": {
+"name": "Digital Signal Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 407": {
+"name": "Microwave Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 408": {
+"name": "Exploration Seismic Signal Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 409": {
+"name": "Image Processing for Seismic Interpretation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 410": {
+"name": "Digital Image Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"EE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"EE 413": {
+"name": "Applied Digital Signal Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 415": {
+"name": "Analog Integrated Circuits Analysis and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 416": {
+"name": "Introduction to Radar",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 417": {
+"name": "Modern Digital Communication Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 418": {
+"name": "Introduction to Satellite Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 419": {
+"name": "Wireless Communication",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 420": {
+"name": "Optical Fiber Communications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 421": {
+"name": "Optics and Photonics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 422": {
+"name": "Antenna Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 425": {
+"name": "Integrated Circuits Analysis and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 426": {
+"name": "Mixed Mode Signal Processing Circuits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 427": {
+"name": "Bioelectronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 429": {
+"name": "Microcomputer Organization",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"EE 430": {
+"name": "Information Theory and Coding",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 432": {
+"name": "Digital Control Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 433": {
+"name": "Applied Control Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 434": {
+"name": "Industrial Instrumentation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 436": {
+"name": "Introduction to Micro and Nano-Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 437": {
+"name": "Energy Harvesting Circuits and Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 439": {
+"name": "Micro/Nanotechnology and Biosensors",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 441": {
+"name": "RF and Microwave Transceivers Design and Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 445": {
+"name": "Industrial Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 446": {
+"name": "Programmable Logic Controllers",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"EE 455": {
+"name": "Analog Communication Electronics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"EE 456": {
+"name": "Digital Communication Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 457": {
+"name": "Electrical Utilization System Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 458": {
+"name": "Hydrogen and Electricity Infrastructures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 459": {
+"name": "Electrical Energy Efficiency",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 460": {
+"name": "Power Electronics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 461": {
+"name": "Smart Grids",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 462": {
+"name": "Electrical Machines",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 463": {
+"name": "Power System Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 464": {
+"name": "High Voltage Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 465": {
+"name": "Power Transmission and Distribution",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 466": {
+"name": "Power System Protection",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 467": {
+"name": "Power System Planning & Operation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 468": {
+"name": "Renewable Energy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 469": {
+"name": "Introduction to Nuclear Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 470": {
+"name": "Optoelectronic Devices",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 471": {
+"name": "Telecommunication Networks Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 472": {
+"name": "Microwave Transmission Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 473": {
+"name": "Microwave Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 474": {
+"name": "Optical Fiber Communications Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 475": {
+"name": "Antenna Theory Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 476": {
+"name": "Digital Control Systems Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 477": {
+"name": "Applied Control Engineering Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 478": {
+"name": "Industrial Instrumentation Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 479": {
+"name": "Industrial Electronics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 480": {
+"name": "Digital Communication Electronics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 481": {
+"name": "Power Electronics Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 482": {
+"name": "Electrical Machines Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 483": {
+"name": "Power System Protection lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 484": {
+"name": "Renewable Energy lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 485": {
+"name": "Applied Digital Signal Processing Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"EE 490": {
+"name": "Special Topics in Electrical Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 491": {
+"name": "Special Topics in Electrical Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 492": {
+"name": "Special Topics in Electrical Engineering III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"EE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"EE 497": {
+"name": "Undergraduate research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 498": {
+"name": "Special Topics in EE II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"EE 499": {
+"name": "Special Topics in Electrical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENGL 101": {
+"name": "Introduction to Academic Discourse",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENGL 102": {
+"name": "Introduction to Argument Writing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ENGL 214": {
+"name": "Academic & Professional Communication",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 101": {
+"name": "Principles of Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 102": {
+"name": "Principles of Geology",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"GEOL 103": {
+"name": "Principles of Geology - Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"GEOL 201": {
+"name": "Physical Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 202": {
+"name": "Applied Geosciences for Scientists and Engineers",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 203": {
+"name": "Historical Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 204": {
+"name": "Mining Geoscience - I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 213": {
+"name": "Earth History and Paleontology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 214": {
+"name": "Paleontology & Biostratigraphy",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 216": {
+"name": "Mineralogy and Optics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"GEOL 217": {
+"name": "Mineralogy and Optical Mineralogy",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 220": {
+"name": "Petrology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 270": {
+"name": "Sedimentology & Stratigraphy",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 303": {
+"name": "Sustaining The Earth",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 305": {
+"name": "Structural Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 307": {
+"name": "Sedimentation & Stratigraphy",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"GEOL 312": {
+"name": "Remote Sensing and GIS Applications in Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 314": {
+"name": "Mining Geoscience - II",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 315": {
+"name": "Petroleum Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 318": {
+"name": "Regional Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 320": {
+"name": "Petrology",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"GEOL 328": {
+"name": "Geological Mapping Techniques",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 341": {
+"name": "Engineering Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 345": {
+"name": "Integrated Petroleum Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 354": {
+"name": "Computational Methods in Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 355": {
+"name": "Geochemistry",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 356": {
+"name": "Fundamentals of Geochemistry",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 357": {
+"name": "Stable Isotope Geochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 364": {
+"name": "Carbonate Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"GEOL 409": {
+"name": "Geology Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"GEOL 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"GEOL 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"GEOL 415": {
+"name": "Petroleum Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 420": {
+"name": "Geotectonics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 423": {
+"name": "Hydrogeology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 430": {
+"name": "Field Geology",
+"lt": 0,
+"lb": 12,
+"cr": 4
+},
+"GEOL 431": {
+"name": "Geomorphology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 434": {
+"name": "Marine Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 435": {
+"name": "Petroleum Geochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 436": {
+"name": "Oceanography",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 440": {
+"name": "Sedimentology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 441": {
+"name": "Techniques in Sediment Analysis",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 444": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 446": {
+"name": "Environmental Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 447": {
+"name": "Energy and the Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 450": {
+"name": "Biostratigraphy of the Arabian Plate",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 454": {
+"name": "Computational Methods in Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 455": {
+"name": "Applied Geochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 456": {
+"name": "Economic Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 457": {
+"name": "Geology of Ore Deposits",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 459": {
+"name": "Life of Mine",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 460": {
+"name": "Mining Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 461": {
+"name": "Mineral Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 464": {
+"name": "Carbonate Geology",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"GEOL 465": {
+"name": "Subsurface Geology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 470": {
+"name": "Geology of Unconventional Reservoirs",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 480": {
+"name": "Special Topics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 482": {
+"name": "Current Topics in Geosciences",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 490": {
+"name": "Special Topics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"GEOL 499": {
+"name": "Geology Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
 "FIN 200": {
 "name": "Introduction to Finance",
 "lt": 3,
@@ -1547,6 +6617,264 @@
 "lb": 0,
 "cr": 3
 },
+"SWE 205": {
+"name": "Introduction to Software Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 206": {
+"name": "Introduction to Software Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 214": {
+"name": "Introduction to Software Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"SWE 215": {
+"name": "Software Requirements Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 216": {
+"name": "Software Requirements Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 302": {
+"name": "Game Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 311": {
+"name": "Principes of Software Engineering",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"SWE 312": {
+"name": "User-Interface Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 316": {
+"name": "Software Design and Construction",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 321": {
+"name": "Formal Methods and Models in Software Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 322": {
+"name": "Principles of Concurrent Software Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 326": {
+"name": "Software Testing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 344": {
+"name": "Internet Protocols and Client-Server Programming",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 363": {
+"name": "Web Engineering & Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 387": {
+"name": "Software Project Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"SWE 402": {
+"name": "Game Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 411": {
+"name": "Software Engineering Project I",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"SWE 412": {
+"name": "Software Engineering Project II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"SWE 413": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"SWE 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"SWE 415": {
+"name": "Software Testing and Quality Assurance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 416": {
+"name": "Software Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 417": {
+"name": "Software Engineering Project I",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"SWE 418": {
+"name": "Software Engineering Project II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"SWE 421": {
+"name": "Principles of Information Security",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 422": {
+"name": "Usability Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 423": {
+"name": "Multimedia Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 436": {
+"name": "Object-Oriented Design Patterns",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 439": {
+"name": "Software Quality Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 440": {
+"name": "Information Security Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 444": {
+"name": "Internet and Web Applications Deveopment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 445": {
+"name": "Secure Software Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 446": {
+"name": "Selected Topics on Emerging Internet Technologies",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"SWE 455": {
+"name": "Cloud Applications Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 463": {
+"name": "Mobile Application Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 469": {
+"name": "Software Metrics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 487": {
+"name": "Software Processes and Process Improvements",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 490": {
+"name": "Special Topics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 491": {
+"name": "Special Topics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SWE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"SWE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"SWE 497": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
 "ACF 398": {
 "name": "Internship",
 "lt": 0,
@@ -1569,6 +6897,3444 @@
 "name": "Senior Project II",
 "lt": 0,
 "lb": 6,
+"cr": 3
+},
+"CHE 200": {
+"name": "Principles of Chemical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 201": {
+"name": "Introduction to Chemical Engineering",
+"lt": 3,
+"lb": 2,
+"cr": 3
+},
+"CHE 202": {
+"name": "Principles of Chem. Engg. II",
+"lt": 2,
+"lb": 2,
+"cr": 2
+},
+"CHE 203": {
+"name": "Chemical Engineering Thermodynamics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 204": {
+"name": "Fluid Mechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 212": {
+"name": "Introduction to Chemical Engineering Computing",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"CHE 300": {
+"name": "Heat Transfer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 303": {
+"name": "Chemical Engineering Thermodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 304": {
+"name": "Mass Transfer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 306": {
+"name": "Separation Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 309": {
+"name": "Chemical Engineering Laboratory I",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"CHE 311": {
+"name": "Chemical Process Industries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 312": {
+"name": "Surface Petroleum Operations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 320": {
+"name": "Introduction to Chemical Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 325": {
+"name": "Chemical Engineering Computing Laboratory",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"CHE 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"CHE 351": {
+"name": "Applied Chemical Engineering Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"CHE 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"CHE 360": {
+"name": "Numerical Methods in Chemical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"CHE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"CHE 401": {
+"name": "Process Dynamics and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 402": {
+"name": "Kinetics and Reactor Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 404": {
+"name": "Hydrogen production and storage",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 405": {
+"name": "Process Design and Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 409": {
+"name": "Chemical Engineering Laboratory II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"CHE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"CHE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"CHE 422": {
+"name": "Properties of Fluids",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 424": {
+"name": "Fundamentals of Renewable Energy Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 425": {
+"name": "Engineering Economics and Design Principles",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 430": {
+"name": "Rate-Based Separation Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 431": {
+"name": "Membrane Processes Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 432": {
+"name": "Principles of Heat Exchanger Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 440": {
+"name": "Catalysis and Catalytic Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 444": {
+"name": "Fuel Cells, Batteries and Supercapacitors",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 449": {
+"name": "Biochemical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 453": {
+"name": "Mathematical Methods in Chemical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 455": {
+"name": "Chemical Process Simulation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 456": {
+"name": "Industrial Process Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 458": {
+"name": "Process Safety Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 461": {
+"name": "Petroleum Refining",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 462": {
+"name": "Petrochemical Industries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 463": {
+"name": "Polymer Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 464": {
+"name": "Refining and Petrochemicals Technology and Economics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 465": {
+"name": "Process Integration and Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 470": {
+"name": "Process Air Pollution Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 471": {
+"name": "Industrial Wastewater Treatment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 472": {
+"name": "Corrosion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 473": {
+"name": "Desalination",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 475": {
+"name": "Climate Change Effects and Mitigation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 477": {
+"name": "Materials Evaluation and Selection",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 480": {
+"name": "Energy Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 484": {
+"name": "Polymer Composites and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 485": {
+"name": "Fundamentals of Radioactive Waste Management and safety",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 486": {
+"name": "Nuclear Power Plant Operations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 490": {
+"name": "Special Topics in Chemical Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 491": {
+"name": "Materials Evaluation and Selection",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 492": {
+"name": "Special Topics in Chemical Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"CHE 495": {
+"name": "Integrated Design Course",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"CHE 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"CHE 497": {
+"name": "Chemical Engineering Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 498": {
+"name": "Special Topics in Chemical Engineering I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHE 499": {
+"name": "Special Topics in Chemical Engineering II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CPG 199": {
+"name": "Summer Camp",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"CPG 415": {
+"name": "UAV Applications",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CPG 498": {
+"name": "Integrated Reservoir Studies",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"CPG 499": {
+"name": "Integrated Design II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"ARC 100": {
+"name": "Architectural Graphics",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 101": {
+"name": "Design Studio-I: Design Principles",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 102": {
+"name": "Design Studio I",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 103": {
+"name": "Design Studio II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 105": {
+"name": "Engineering Graphics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARC 110": {
+"name": "History of Architecture-I",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 112": {
+"name": "History of Architecture-II",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 113": {
+"name": "Architectural Communication I",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 114": {
+"name": "Architectural Communication II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 121": {
+"name": "Hisrory of Architecture I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 122": {
+"name": "Historyof Architecture II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 124": {
+"name": "Computer Aided Architectural Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARC 132": {
+"name": "Man and Built Environment",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 202": {
+"name": "Design Studio-II Space & Order",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 203": {
+"name": "Design Studio-III Site, Context & Form",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 204": {
+"name": "Architecrural Design Studio lll",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 205": {
+"name": "Architectural Design Studio lV",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 210": {
+"name": "History of Architecture-III",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 213": {
+"name": "Digital Communication I",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 214": {
+"name": "Digital Communication ll",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 221": {
+"name": "Structures in Architecture-I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 222": {
+"name": "Structures in Architecture-II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 225": {
+"name": "Virtual Reality in Architecture",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ARC 226": {
+"name": "Theory of Archirecrure I",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 227": {
+"name": "Theory of Architecture II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 228": {
+"name": "Architecture of Saudi Arabia",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 229": {
+"name": "Theory of Architecture II",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 231": {
+"name": "Structure in Architecture I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 232": {
+"name": "Structure in Architecture II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 251": {
+"name": "Introduction to Urban Design Concepts",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 281": {
+"name": "Architecture of Saudi Arabia",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 300": {
+"name": "Workshop/Summer Internship",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 304": {
+"name": "Design Studio-IV Analysis and Synthesis",
+"lt": 0,
+"lb": 12,
+"cr": 6
+},
+"ARC 305": {
+"name": "Design Studio-V: Virtual Design Studio",
+"lt": 0,
+"lb": 12,
+"cr": 6
+},
+"ARC 306": {
+"name": "Architectural Design Studio V",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 307": {
+"name": "Architectural Design Studio VI",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 308": {
+"name": "Community Design Exploration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 309": {
+"name": "international Studio",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 313": {
+"name": "Theory of Architecture-I",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 314": {
+"name": "Theory of Architecture-II",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 315": {
+"name": "Perception, Geometry and Color in Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 316": {
+"name": "Digital Architectural Photograph",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"ARC 319": {
+"name": "Special Topics in Computer Applications",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"ARC 323": {
+"name": "Structures in Architecture-III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 329": {
+"name": "Special Topics in lslamic Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 341": {
+"name": "Freehand Drawings",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 342": {
+"name": "Computer Presentation Techniques",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 343": {
+"name": "Creative Design Workshop",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 344": {
+"name": "Architectural Photography",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 345": {
+"name": "Working Drawings",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 349": {
+"name": "Local Materials in Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 353": {
+"name": "Housing Policy and Design",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 354": {
+"name": "Landscape Design",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ARC 355": {
+"name": "Human Factors in Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 356": {
+"name": "Principles of Sustainable Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 357": {
+"name": "Urban Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 358": {
+"name": "Real Estate and Housing Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 359": {
+"name": "Design Determinants of Arid Region",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 360": {
+"name": "Advanced Topics in Sustainable Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 361": {
+"name": "Introduction to Landscape Plants",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 362": {
+"name": "Introduction to Landscape Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 363": {
+"name": "Introduction to Ecological Analysis",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 364": {
+"name": "Specific Open Spaces Design Workshop",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 371": {
+"name": "Introduction to Interior Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 372": {
+"name": "Furnishing Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 373": {
+"name": "Commercial Interiors",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ARC 374": {
+"name": "History of Interior Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"ARC 400": {
+"name": "Senior Project Preparation and Programming",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 401": {
+"name": "Senior Project Preparation and Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 402": {
+"name": "Architectural Design Studio VII",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 403": {
+"name": "Architectural Design Studio VIII: Senior Project",
+"lt": 0,
+"lb": 10,
+"cr": 5
+},
+"ARC 405": {
+"name": "Architectural Design StudioVII",
+"lt": 0,
+"lb": 12,
+"cr": 6
+},
+"ARC 406": {
+"name": "Design Studio VI:Comprehensive Design Project",
+"lt": 0,
+"lb": 12,
+"cr": 6
+},
+"ARC 407": {
+"name": "Construction Documents",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ARC 408": {
+"name": "Senior Project",
+"lt": 0,
+"lb": 14,
+"cr": 7
+},
+"ARC 409": {
+"name": "Architectural Design Studio Vlll: Senior Project",
+"lt": 0,
+"lb": 12,
+"cr": 6
+},
+"ARC 416": {
+"name": "Specific Topics on Islamic Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 419": {
+"name": "Parametric Design",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"ARC 426": {
+"name": "Professional Practice",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 429": {
+"name": "Special Topics in Regional Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 431": {
+"name": "Safety in Building Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 435": {
+"name": "Design Determinants for Arid Regions",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 440": {
+"name": "Architectural Conservation and Preservation",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 442": {
+"name": "Knowledge-Based Systems in Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 449": {
+"name": "Special Topics in Computer Aided Design",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 453": {
+"name": "Urban Design Theory",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 454": {
+"name": "Methods of Urban Design Analysis",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 455": {
+"name": "Critical and Creative Thinking for Designers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 456": {
+"name": "Advanced Sustainable Design Workshop",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 457": {
+"name": "Topics in Mosque Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 458": {
+"name": "Advanced Topics in Housing",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 459": {
+"name": "Special Topics in Urban Design",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 461": {
+"name": "Special Topics in Islamic Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 462": {
+"name": "Special Topics in Local and Regional Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 463": {
+"name": "Architectural Conservation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 480": {
+"name": "Creative Design Workshop",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"ARC 481": {
+"name": "Introduction to Interior Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 482": {
+"name": "Socio-Cultural Factors in Design",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 483": {
+"name": "Architectural Conservation and Preservation",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 489": {
+"name": "Special Topics in Regional Architecture",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ARC 491": {
+"name": "Professional Practice",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 492": {
+"name": "Professional Practice and Management",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ARC 499": {
+"name": "Special Topics in Architecture",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 101": {
+"name": "Calculus I",
+"lt": 4,
+"lb": 0,
+"cr": 4
+},
+"MATH 102": {
+"name": "Calculus II",
+"lt": 4,
+"lb": 0,
+"cr": 4
+},
+"MATH 105": {
+"name": "Finite Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 106": {
+"name": "Calculus for Business",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 131": {
+"name": "Finite Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 132": {
+"name": "Applied Calculus",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 201": {
+"name": "Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 202": {
+"name": "Elements of Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 208": {
+"name": "Differential Equations and Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 210": {
+"name": "Discrete Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 225": {
+"name": "Introduction to Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 232": {
+"name": "Introduction to Sets and Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 260": {
+"name": "Introduction to Differential Equations & Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 280": {
+"name": "Introduction to Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 301": {
+"name": "Methods of Applied Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 302": {
+"name": "Engineering Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 305": {
+"name": "Development of Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 310": {
+"name": "Logic and Set Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 311": {
+"name": "Advanced Calculus I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 315": {
+"name": "Development of Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 320": {
+"name": "Mathematics for Machine Learning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 321": {
+"name": "Introduction to Numerical Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 322": {
+"name": "Quantitative Methods for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 323": {
+"name": "Algebra I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 325": {
+"name": "Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 330": {
+"name": "Euclidean and Non-Euclidean Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 333": {
+"name": "Methods of Applied Mathematics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 335": {
+"name": "Mathematical Modeling",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 336": {
+"name": "Mathematical Models in Biology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 341": {
+"name": "Real Analysis I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 345": {
+"name": "Modern Algebra I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 353": {
+"name": "Euclidean and Non-Euclidean Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 355": {
+"name": "Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 371": {
+"name": "Numerical Computing",
+"lt": 3,
+"lb": 1,
+"cr": 3
+},
+"MATH 372": {
+"name": "Quantitative Methods for Actuaries",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 373": {
+"name": "Numerical Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"MATH 401": {
+"name": "Methods of Applied Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 405": {
+"name": "Learning from Data",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 407": {
+"name": "Applied Game Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 411": {
+"name": "Advanced Calculus II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 412": {
+"name": "Advanced Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 413": {
+"name": "Senior Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"MATH 414": {
+"name": "Senior Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"MATH 416": {
+"name": "Stochastic Processes in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 421": {
+"name": "Introduction to Topology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 423": {
+"name": "Algebra II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 424": {
+"name": "Applied Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 425": {
+"name": "Graph theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 427": {
+"name": "Number Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 428": {
+"name": "Introduction to Cryptography",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 429": {
+"name": "Coding Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 430": {
+"name": "Introduction to Complex Variables",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 431": {
+"name": "Introduction to Measure Theory and Functional Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 432": {
+"name": "Applied Matrix Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 433": {
+"name": "Methods of Applied Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 434": {
+"name": "Calculus of Variations and Optimal Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 435": {
+"name": "Ordinary Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 436": {
+"name": "Discrete Models",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 437": {
+"name": "Partial Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 440": {
+"name": "Differential Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 441": {
+"name": "Real Analysis II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 442": {
+"name": "Calculus of Variations and Optimal Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 443": {
+"name": "Advanced Calculus III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 445": {
+"name": "Introduction to Complex Variables",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 450": {
+"name": "Modern Algebra II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 451": {
+"name": "Differentia Geometry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 452": {
+"name": "Applied Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 453": {
+"name": "Digital Topology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 455": {
+"name": "Number Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 460": {
+"name": "Applied Matrix Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 463": {
+"name": "Applied Combinatorics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 465": {
+"name": "Ordinary Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 467": {
+"name": "Graph Theory",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 470": {
+"name": "Partial Differential Equations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 471": {
+"name": "Numerical Linear Algebra",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 472": {
+"name": "Numerical Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 474": {
+"name": "Linear & Nonlinear Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 475": {
+"name": "Engineering Design Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 476": {
+"name": "Computational Methods in Finance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 477": {
+"name": "Foundation of Scientific Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 480": {
+"name": "Linear & Nonlinear Programming",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 485": {
+"name": "Computational Inverse Problem",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 490": {
+"name": "Seminar in Mathematics",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"MATH 493": {
+"name": "Special Topic I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MATH 495": {
+"name": "Special Topic II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MATH 498": {
+"name": "Topics in Mathematics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MATH 499": {
+"name": "Topics in Mathematics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 201": {
+"name": "Introduction to Control and Instrumentation",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"CIE 204": {
+"name": "Digital Systems Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 209": {
+"name": "Introduction to Information Technology",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"CIE 301": {
+"name": "Numerical Methods",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 305": {
+"name": "Linear Control Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 306": {
+"name": "Linear Control Systems Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"CIE 312": {
+"name": "Instrumentation Engineering",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 315": {
+"name": "Signals and Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 316": {
+"name": "Control Systems Design",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 318": {
+"name": "Computer Control Systems",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 390": {
+"name": "Seminars",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"CIE 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 0,
+"cr": 6
+},
+"CIE 399": {
+"name": "Summer training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"CIE 410": {
+"name": "Automation Devices and Electronics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"CIE 412": {
+"name": "Mechatronics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 413": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"CIE 418": {
+"name": "Industrial Process Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 421": {
+"name": "Simulation and Control for Process Industry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 422": {
+"name": "Intelligent  Controllers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 423": {
+"name": "Model Predictive Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 424": {
+"name": "Identification of Linear Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 431": {
+"name": "Industrial Automation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 432": {
+"name": "Digital Signal Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 433": {
+"name": "Condition-based Maintenance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 434": {
+"name": "Computer Numerical Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 435": {
+"name": "Distributed Computer Control Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 438": {
+"name": "Instrumentation for Process Control",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 439": {
+"name": "Special Topics in Instrumentation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 441": {
+"name": "Linear Optimal  Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 442": {
+"name": "Stochastic Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 443": {
+"name": "Introduction to Robust Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 445": {
+"name": "Control of Mechatronic Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 449": {
+"name": "Special Topics in Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 451": {
+"name": "Introduction to Biomedical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 452": {
+"name": "Theory of Stochastic Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 453": {
+"name": "Methodology for Large Scale Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 454": {
+"name": "Computer-Aided Manufacturing and Robotics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"CIE 455": {
+"name": "Advanced Instrumentation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 456": {
+"name": "Safety and Reliability of Control Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 457": {
+"name": "Industrial Communication Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 458": {
+"name": "Advanced Process Modeling and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 459": {
+"name": "Special Topics In Automation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 460": {
+"name": "Monitoring and Detection",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 461": {
+"name": "Intelligent Instrumentation Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 462": {
+"name": "Safety Instrumented Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 463": {
+"name": "Guided Systems Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 464": {
+"name": "Industrial Internet of Things (IoT) Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 468": {
+"name": "Introduction to Convex Optimization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 470": {
+"name": "Soft Computing for Control and Automation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 480": {
+"name": "Introduction to Robotics & Autonomous System",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 481": {
+"name": "Applied Control for Robotic Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 482": {
+"name": "Path Planning and Navigation for Mobile Robot",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 483": {
+"name": "Artificial Intelligence and Machine Learning for Robots",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 486": {
+"name": "Autonomy and Decision Making",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CIE 490": {
+"name": "Senior Design Project",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"CIE 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"MINE 200": {
+"name": "Introduction to Mining Industry",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"MINE 201": {
+"name": "Intro to Mine Design Platform",
+"lt": 0,
+"lb": 1,
+"cr": 1
+},
+"MINE 202": {
+"name": "Introductory Statistics and Grade Estimation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 304": {
+"name": "Electricity in Mines",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"MINE 305": {
+"name": "Mine Plant Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 306": {
+"name": "Mining Geomechanics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"MINE 334": {
+"name": "Mine Surveying",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"MINE 348": {
+"name": "Surface Mine Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 353": {
+"name": "Underground Mine Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"MINE 402": {
+"name": "Mine Ventilation",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"MINE 405": {
+"name": "Sustainable Mining",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"MINE 409": {
+"name": "Mine Health & Safety",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"MINE 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"MINE 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"MINE 481": {
+"name": "Resource Estimation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 482": {
+"name": "Mine Systems Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 491": {
+"name": "Database Systems and Utilization in Mining",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"MINE 492": {
+"name": "Drilling and Blasting",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 001": {
+"name": "Preparatory Graphics",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"ME 002": {
+"name": "Preparatory Shop",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"ME 201": {
+"name": "Dynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 203": {
+"name": "Thermodynamics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 204": {
+"name": "Thermodynamics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 205": {
+"name": "Materials Science",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 206": {
+"name": "Manufacturing Processes I",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ME 207": {
+"name": "Materials Science for CHE",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"ME 210": {
+"name": "Mechanical Engineering Drawing and Graphics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 215": {
+"name": "Material Science for ME",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ME 216": {
+"name": "Materials Science and Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 217": {
+"name": "Materials Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 218": {
+"name": "Introduction to ME Design",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"ME 301": {
+"name": "Machine Design I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 302": {
+"name": "Machine Design II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 303": {
+"name": "Mechanical System Design Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 306": {
+"name": "Manufacturing Processes II",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 307": {
+"name": "Machine Design I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 308": {
+"name": "Machine Design II",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"ME 309": {
+"name": "Mechanics of Machines",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 311": {
+"name": "Fluid Mechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 312": {
+"name": "Thermofluids Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 315": {
+"name": "Heat Transfer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 316": {
+"name": "Thermo-Fluid Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 320": {
+"name": "Introduction to Aeronautics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 322": {
+"name": "Manufacturing Processes",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 323": {
+"name": "Manufacturing Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 350": {
+"name": "Begin Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ME 351": {
+"name": "Applied Mechanical Engineering Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 9
+},
+"ME 352": {
+"name": "End Cooperative Work",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"ME 398": {
+"name": "Internship",
+"lt": 0,
+"lb": 6,
+"cr": 6
+},
+"ME 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ME 401": {
+"name": "System Dynamics & Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 402": {
+"name": "Measurements and Control Laboratory",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 403": {
+"name": "The Design Process",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 404": {
+"name": "Design for Sustainability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 406": {
+"name": "Manufacturing and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 407": {
+"name": "Advanced Manufacturing Lab",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 408": {
+"name": "Rapid Prototyping and Digital Manufacturing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 409": {
+"name": "Design and Manufacturing of Composite Structures",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 410": {
+"name": "Introduction to Ceramics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ME 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ME 413": {
+"name": "Systems Dynamics and Control",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 414": {
+"name": "Design Project I",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"ME 415": {
+"name": "Senior Design Project",
+"lt": 0,
+"lb": 9,
+"cr": 3
+},
+"ME 416": {
+"name": "Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"ME 417": {
+"name": "Mechanics of Machines",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 418": {
+"name": "Advanced Manufacturing and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 420": {
+"name": "Materials Selection and Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 421": {
+"name": "Automotive Design and Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 422": {
+"name": "Propulsion Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 423": {
+"name": "Energy Conversion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 424": {
+"name": "Maintenance Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 425": {
+"name": "Compressible Fluid Flow",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 426": {
+"name": "Energy Management and Policies",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 427": {
+"name": "Turbomachinery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 428": {
+"name": "Structures of Flight Vehicles",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 429": {
+"name": "Energy Auditing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 430": {
+"name": "Air Conditioning",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 431": {
+"name": "Refrigeration",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 432": {
+"name": "Internal Combustion Engines",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 433": {
+"name": "Fundamentals of Combustion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 434": {
+"name": "Wind Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 435": {
+"name": "Thermal Power Plants",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 436": {
+"name": "Fluid Power Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 437": {
+"name": "Design and Rating of Heat Exchangers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 438": {
+"name": "Pumping Machinery",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 439": {
+"name": "Solar Energy Conversion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 440": {
+"name": "Convective Heat and Mass Transfer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 441": {
+"name": "Energy and the Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 442": {
+"name": "Design of PV-Solar Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 443": {
+"name": "Mechanics of Robotic Manipulators",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 444": {
+"name": "Introduction to Mechatronics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 445": {
+"name": "Principles of Nanostructure Materials & Sensor Technology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 446": {
+"name": "Computational Fluid Dynamics and Heat Transfer",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 447": {
+"name": "Intelligent Energy Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 448": {
+"name": "Engineering of Nuclear Reactor",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 449": {
+"name": "Introduction to Atomistic Simulations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 450": {
+"name": "Mechanical Engineering Experimentation",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 451": {
+"name": "Design and Analysis of Engineering Experiments",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 452": {
+"name": "Measurements and Lab Project",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"ME 453": {
+"name": "Polymer Sustainability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 454": {
+"name": "Materials in Nuclear Power Plants",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 455": {
+"name": "Mechatronic Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 456": {
+"name": "Fundamentals of Nondestructive Evaluation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 457": {
+"name": "Failure of Materials and Prevention",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 458": {
+"name": "Design of Thermo-Fluid Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 459": {
+"name": "Design of Renewable Energy Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 460": {
+"name": "Thermal Desalination Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 461": {
+"name": "Risk Management Tools In Systems Design and Operation",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 462": {
+"name": "Products and Systems Reliability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 463": {
+"name": "Tool Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 464": {
+"name": "Quality in Manufacturing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 465": {
+"name": "Designing Robust Products & Sy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 466": {
+"name": "Fundamentals of Heat Treatment",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 467": {
+"name": "Tribology in Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 468": {
+"name": "Casting and Welding Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 469": {
+"name": "Computer-Aided Manufacturing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 470": {
+"name": "Product Design and Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 471": {
+"name": "Mechanical Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 472": {
+"name": "Corrosion Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 473": {
+"name": "Corrosion Engineering II",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 474": {
+"name": "Physical Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 475": {
+"name": "Mechanical Behavior of Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 476": {
+"name": "Non-Metallic Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 477": {
+"name": "Non-Ferrous Extractive Metallurgy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 478": {
+"name": "Iron and Steel Making",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 479": {
+"name": "Modern Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 480": {
+"name": "Plastics Materials and Processing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 481": {
+"name": "Advanced Dynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 482": {
+"name": "Mechanical Vibrations",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 483": {
+"name": "Mechanisms",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"ME 484": {
+"name": "Acoustics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 485": {
+"name": "Mechanical System Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 486": {
+"name": "Optimization of Mechanical Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 487": {
+"name": "Mechanics of Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 488": {
+"name": "Systems Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 489": {
+"name": "Finite Element Analysis in Mechanical Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 490": {
+"name": "Special Topics in Mechanical Engineering",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 491": {
+"name": "Special Topics in Energy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 492": {
+"name": "Special Topics in Dynamics & Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 493": {
+"name": "Special Topics in Materials & Manufacturing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ME 495": {
+"name": "Undergraduate Research",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ME 496": {
+"name": "Undergraduate Thesis Il",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ME 497": {
+"name": "Special Topics in Dynamics and Control",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CGS 392": {
+"name": "Career Essentials",
+"lt": 0,
+"lb": 2,
+"cr": 1
+},
+"XE 100": {
+"name": "UG Exchange Student",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 112": {
+"name": "MAKE-UP HRS ELECTIVE",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"XE 198": {
+"name": "Dummy Course",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 301": {
+"name": "MATH ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 310": {
+"name": "TECHNICAL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 312": {
+"name": "TECHNICAL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 314": {
+"name": "TECHNICAL ELECTIVE III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 316": {
+"name": "TECHNICAL ELECTIVE V",
+"lt": 0,
+"lb": 0,
+"cr": 4
+},
+"XE 321": {
+"name": "Techincal Elective I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 323": {
+"name": "Technical Elective III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 325": {
+"name": "Technical Elective V",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 327": {
+"name": "FREE ELECTIVE III",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 399": {
+"name": "SUMMER WORK IN INDUSTRY",
+"lt": 0,
+"lb": 0,
+"cr": 0
+},
+"XE 436": {
+"name": "GEOL ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"XE 450": {
+"name": "APPLIED EE ELECTIVE I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"CHEM 101": {
+"name": "Principles of Chemical Science I",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CHEM 102": {
+"name": "Principles of Chemical Science II",
+"lt": 3,
+"lb": 4,
+"cr": 4
+},
+"CHEM 105": {
+"name": "General Chemistry for Engineers",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"CHEM 111": {
+"name": "Basics of Environmental Chemistry",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"CHEM 201": {
+"name": "Organic Chemistry I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 202": {
+"name": "Organic Chemistry Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 204": {
+"name": "Organic Chemistry II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 212": {
+"name": "Physical Chemistry I: Chemical Thermodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 213": {
+"name": "Chemical Thermodynamics Lab",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 221": {
+"name": "Quantitative Chemical Analysis",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"CHEM 222": {
+"name": "Quantitative Chemical Analysis Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 223": {
+"name": "Quantitative Methods of Chemical Analysis",
+"lt": 1,
+"lb": 4,
+"cr": 2
+},
+"CHEM 236": {
+"name": "Inorganic Chemistry I",
+"lt": 3,
+"lb": 4,
+"cr": 4
+},
+"CHEM 303": {
+"name": "Spectroscopic and Qualitative Organic Chemistry",
+"lt": 2,
+"lb": 4,
+"cr": 3
+},
+"CHEM 305": {
+"name": "Organic Synthesis & Characterization Laboratory",
+"lt": 0,
+"lb": 8,
+"cr": 2
+},
+"CHEM 311": {
+"name": "Physical Chemistry II: Kinetics and Spectroscopy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 312": {
+"name": "Kinetics and Spectroscopy Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 313": {
+"name": "Introduction to Computational Chemistry",
+"lt": 2,
+"lb": 4,
+"cr": 3
+},
+"CHEM 314": {
+"name": "Computer Applications in Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 315": {
+"name": "Chemical Kinetics and Reaction Mechanisms",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 321": {
+"name": "Instrumental Analysis for Engineers",
+"lt": 2,
+"lb": 4,
+"cr": 3
+},
+"CHEM 323": {
+"name": "Instrumental Chemical Analysis",
+"lt": 2,
+"lb": 4,
+"cr": 3
+},
+"CHEM 324": {
+"name": "Instrumental Chemical Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 325": {
+"name": "Instrumental Chemical Analysis Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 327": {
+"name": "Environmental Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 331": {
+"name": "Inorganic Chemistry",
+"lt": 3,
+"lb": 4,
+"cr": 4
+},
+"CHEM 332": {
+"name": "Advanced Inorganic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 335": {
+"name": "Fundamentals of Inorganic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 336": {
+"name": "Advanced  Inorganic  Chemistry",
+"lt": 2,
+"lb": 0,
+"cr": 2
+},
+"CHEM 337": {
+"name": "Inorganic Synthesis & Characterization  Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 355": {
+"name": "Industrial Catalysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 363": {
+"name": "Biochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 388": {
+"name": "Chemistry Research I",
+"lt": 0,
+"lb": 8,
+"cr": 2
+},
+"CHEM 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"CHEM 401": {
+"name": "Special Topics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 402": {
+"name": "Structure and Mechanisms in Organic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 403": {
+"name": "Synthetic Organic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 406": {
+"name": "Spectroscopic Identification of Organic Compounds",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"CHEM 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"CHEM 415": {
+"name": "Molecular Spectroscopy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 416": {
+"name": "Photochemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 417": {
+"name": "Introduction to Statistical Thermodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 418": {
+"name": "Quantum Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 424": {
+"name": "Environmental Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 425": {
+"name": "Trace Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 426": {
+"name": "Advanced Instrumental Analysis Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 427": {
+"name": "Quality Assurance in Chemical Laboratories",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 428": {
+"name": "Separation Science and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 431": {
+"name": "Chemistry of the Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 436": {
+"name": "Application of Group Theory to Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 450": {
+"name": "Polymer Chemistry",
+"lt": 3,
+"lb": 4,
+"cr": 4
+},
+"CHEM 451": {
+"name": "Polymer Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 452": {
+"name": "Polymer Chemistry Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 453": {
+"name": "Chemistry of Petroleum Processes",
+"lt": 2,
+"lb": 4,
+"cr": 3
+},
+"CHEM 454": {
+"name": "Chemistry of Corrosion",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 455": {
+"name": "Industrial Inorganic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 456": {
+"name": "Industrial Organic Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 457": {
+"name": "Polymer Characterization and Analysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 458": {
+"name": "Materials Chemistry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 459": {
+"name": "Material Synthesis & Characterization Laboratory",
+"lt": 0,
+"lb": 4,
+"cr": 1
+},
+"CHEM 461": {
+"name": "Fundamentals of Petrochemical Industry",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 462": {
+"name": "Spectroscopy in Catalysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 463": {
+"name": "Industrial Catalysis",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"CHEM 471": {
+"name": "Chemistry Senior Project I",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"CHEM 472": {
+"name": "Chemistry Senior Project II",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"CHEM 479": {
+"name": "Chemistry Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"CHEM 488": {
+"name": "Undergraduate Research",
+"lt": 0,
+"lb": 8,
+"cr": 2
+},
+"CHEM 489": {
+"name": "Chemistry Research Experience",
+"lt": 0,
+"lb": 12,
+"cr": 3
+},
+"ITD 101": {
+"name": "Design Survey",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 202": {
+"name": "Design Ideation",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 203": {
+"name": "Design Application",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 211": {
+"name": "Digital Visualization I",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 212": {
+"name": "Digital Visualization II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 304": {
+"name": "Function & Usability",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 305": {
+"name": "Emotional Design and Design for Aging",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 313": {
+"name": "Prototyping and Fabrication",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 314": {
+"name": "XR Representations I",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"ITD 406": {
+"name": "Sandbox Exploration",
+"lt": 2,
+"lb": 4,
+"cr": 4
+},
+"ITD 407": {
+"name": "Design for Social Innovation",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ITD 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"ITD 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 415": {
+"name": "XR representations II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"ITD 420": {
+"name": "Creative Thinking Techniques",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ITD 460": {
+"name": "Storytelling and Character Design",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ITD 461": {
+"name": "Games Assets and Mechanics",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"ITD 490": {
+"name": "Special Topics in Integrated Design Solutions",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ITD 491": {
+"name": "Special Topics in Digital Integrated Design",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"ITD 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"ITD 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
 "cr": 3
 },
 "BAI 220": {
@@ -1732,5 +10498,617 @@
 "lt": 3,
 "lb": 0,
 "cr": 3
+},
+"SSC 200": {
+"name": "Visual Communication for Urban Planners",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"SSC 201": {
+"name": "Introduction to Smart & Sustainable Cities",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 202": {
+"name": "Sustainable Urbanization",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 203": {
+"name": "Humanizing the Smart City",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 211": {
+"name": "Land Use & Environment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 212": {
+"name": "Urban Information Systems",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"SSC 304": {
+"name": "City Design I: Spatial Analysis",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"SSC 305": {
+"name": "City Design II: Urban Form and Formation",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"SSC 313": {
+"name": "Urban System Modeling and Simulation",
+"lt": 2,
+"lb": 2,
+"cr": 3
+},
+"SSC 314": {
+"name": "Urban Indicators Assessment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 321": {
+"name": "Circular Economy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 331": {
+"name": "Sustainable Infrastructure Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 1
+},
+"SSC 406": {
+"name": "City Design III: Digital Urban Twin",
+"lt": 1,
+"lb": 4,
+"cr": 3
+},
+"SSC 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"SSC 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"SSC 419": {
+"name": "Urban Code Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 422": {
+"name": "Management of Smart Cities & Governance",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 423": {
+"name": "Urban Policy Development & Enactment",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 425": {
+"name": "City Resilience & Climate Change",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 426": {
+"name": "City Business Development",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 433": {
+"name": "Smart Mobility",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 434": {
+"name": "Digital Transformation of Cities",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 435": {
+"name": "Sustainable Waste Recycling Systems",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 441": {
+"name": "Plan Evaluation and Appraisal",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 471": {
+"name": "Urban Livability",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 481": {
+"name": "Urban Ecology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 491": {
+"name": "Artificial Intelligence in Smart Cities",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"SSC 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"SSC 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PHYS 101": {
+"name": "General Physics I",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 102": {
+"name": "General Physics II",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 133": {
+"name": "Principles of Physics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 201": {
+"name": "General Physics III",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 203": {
+"name": "Electrical and Magnetic Properties of Materials",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 204": {
+"name": "General Physics III",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 205": {
+"name": "General Physics III LAB",
+"lt": 0,
+"lb": 3,
+"cr": 1
+},
+"PHYS 210": {
+"name": "Methods of Theoretical Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 211": {
+"name": "Optics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PHYS 212": {
+"name": "Modern Physics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 213": {
+"name": "Modern Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 215": {
+"name": "Introduction to Astronomy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 234": {
+"name": "The Physics of How Things Work",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 261": {
+"name": "Energy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 271": {
+"name": "Introduction to Special Relativity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 300": {
+"name": "Classical Mechanics I",
+"lt": 4,
+"lb": 0,
+"cr": 4
+},
+"PHYS 301": {
+"name": "Classical Mechanics I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 302": {
+"name": "Classical Mechanics II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 303": {
+"name": "Experimental Physics I",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PHYS 304": {
+"name": "Experimental Physics II",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"PHYS 305": {
+"name": "Electricity and Magnetism I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 306": {
+"name": "Electricity and Magnetism II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 307": {
+"name": "Laser Molecular Spectroscopy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 308": {
+"name": "Electronics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 309": {
+"name": "Experimental Physics",
+"lt": 1,
+"lb": 3,
+"cr": 2
+},
+"PHYS 310": {
+"name": "Quantum Mechanics and Applications I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 311": {
+"name": "Optics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 315": {
+"name": "Astrophysics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 317": {
+"name": "Introduction to Special Relativity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 323": {
+"name": "Physics of Nuclear Reactors",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 336": {
+"name": "Physics of Semiconductor Devices",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 353": {
+"name": "Radiation and Health Physics",
+"lt": 3,
+"lb": 3,
+"cr": 4
+},
+"PHYS 361": {
+"name": "Energy",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 365": {
+"name": "Introduction to Medical Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 371": {
+"name": "Methods of Theoretical Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 373": {
+"name": "Intro to Computational Physics",
+"lt": 2,
+"lb": 3,
+"cr": 3
+},
+"PHYS 399": {
+"name": "Summer Training",
+"lt": 0,
+"lb": 0,
+"cr": 2
+},
+"PHYS 401": {
+"name": "Quantum Mechanics and Applications I",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 402": {
+"name": "Quantum Mechanics and Applications II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 403": {
+"name": "Senior Physics Laboratory",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"PHYS 404": {
+"name": "Physics Project Laboratory",
+"lt": 0,
+"lb": 6,
+"cr": 2
+},
+"PHYS 405": {
+"name": "Physics Project Laboratory",
+"lt": 1,
+"lb": 6,
+"cr": 3
+},
+"PHYS 409": {
+"name": "Physics Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"PHYS 410": {
+"name": "Quantum Mechanics and Applications II",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 411": {
+"name": "Senior Design Project I",
+"lt": 0,
+"lb": 1,
+"cr": 0
+},
+"PHYS 412": {
+"name": "Senior Design Project II",
+"lt": 0,
+"lb": 6,
+"cr": 3
+},
+"PHYS 413": {
+"name": "Advanced Optics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 414": {
+"name": "Physics of Lasers",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 415": {
+"name": "Laser and Applications",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 416": {
+"name": "Cosmology & the Early Universe",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 417": {
+"name": "Introduction to General Relativity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 422": {
+"name": "Nuclear Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 423": {
+"name": "Physics of Nuclear Reactors",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 430": {
+"name": "Thermal & Statistical Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 431": {
+"name": "Monte Carlo Simulations in Statistical Mechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 432": {
+"name": "Introduction to Solid State Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 434": {
+"name": "Introduction to the Physics of Surface",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 435": {
+"name": "Superconductivity",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 441": {
+"name": "Particle Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 442": {
+"name": "Relativistic Quantum Mechanics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 451": {
+"name": "Nanophysics and Nanotechnology",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 461": {
+"name": "Introduction to Plasma Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 471": {
+"name": "Introduction to Quantum Information and Computing",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 472": {
+"name": "Qubits and Circuit Quantum Electrodynamics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 473": {
+"name": "Materials Informatics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 493": {
+"name": "Selected Topics in Physics",
+"lt": 3,
+"lb": 0,
+"cr": 3
+},
+"PHYS 494": {
+"name": "Undergraduate Thesis I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PHYS 495": {
+"name": "Guided Studies",
+"lt": 1,
+"lb": 0,
+"cr": 1
+},
+"PHYS 496": {
+"name": "Undergraduate Thesis II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PHYS 497": {
+"name": "Undergraduate Research I",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PHYS 498": {
+"name": "Undergraduate Research II",
+"lt": 0,
+"lb": 0,
+"cr": 3
+},
+"PHYS 499": {
+"name": "Seminar",
+"lt": 1,
+"lb": 0,
+"cr": 1
 }
 }

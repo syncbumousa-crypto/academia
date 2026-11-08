@@ -38,6 +38,7 @@ CREATE TABLE courses (
 CREATE TABLE course_tags (
   code   TEXT NOT NULL REFERENCES courses(code) ON DELETE CASCADE,
   tag_id TEXT NOT NULL REFERENCES tags(id)      ON DELETE CASCADE,
+  kind   TEXT,   -- نوعيّةُ المادّة في هذا التخصص: major | college | common | elective
   PRIMARY KEY (code, tag_id)
 );
 

@@ -1,0 +1,2519 @@
+{
+ "cs": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 202": {
+    "name": "Digital Logic Design",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 203": {
+    "name": "Digital Logic Laboratory",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 206": {
+    "name": "Introduction to Software Engineering",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 301": {
+    "name": "Computer Organization",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 253": {
+    "name": "Discrete Structures",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 321": {
+    "name": "Database Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 343": {
+    "name": "Fundamentals of Computer Networks",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "SWE 363": {
+    "name": "Web Engineering & Development",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 344": {
+    "name": "Information Security",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 353": {
+    "name": "Design and Analysis of Algorithms",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 381": {
+    "name": "Principles of Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ICS 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   },
+   "ICS 413": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "ICS 410": {
+    "name": "Programming Languages",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 414": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "ICS 433": {
+    "name": "Operating Systems",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "ICS 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "ICS xxx | Major Elective I",
+   "ICS xxx | Major Elective II",
+   "ICS xxx | Major Elective III",
+   "ICS/SWE xxx | Major Elective I",
+   "ICS/SWE xxx | Major Elective II",
+   "ICS/SWE xxx | Major Elective III",
+   "ICS/SWE xxx | Major Elective IV",
+   "XE xxx | Technical Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208, STAT 201, ICS 253|20|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|32|Core Requirements|Title|Courses|Credit Hours|ICS|ICS 108, 202, 321, 343, 344, 353, 381, 410, 413, 414, 433|33|COE|COE 202, 203, 301|8|SWE|SWE 206, 363|6|Total|47|Electives|Title|Courses|Credit Hours|ICS Electives|Three ICS/SWE xxx Courses|9|Total|9|Internship|Title|Courses|Credit Hours|Internship|ICS 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208, STAT 201, ICS 253|20|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|32|Core Requirements|Title|Courses|Credit Hours|ICS|ICS 108, 202, 321, 343, 344, 353, 381, 410, 413, 414, 433|33|COE|COE 202, 203, 301|8|SWE|SWE 206, 363|6|Total|47|Electives|Title|Courses|Credit Hours|ICS Electives|Four ICS/SWE xxx Courses|12|Technical Elective|One XE xxx Course|3|Total|15|Summer Training|Title|Courses|Credit Hours|Summer Training|ICS 399|1|Total|1|"
+  ]
+ },
+ "swe": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 206": {
+    "name": "Introduction to Software Engineering",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 233": {
+    "name": "Digital Logic & Computer Organization",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 253": {
+    "name": "Discrete Structures",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 216": {
+    "name": "Software Requirements Engineering",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 321": {
+    "name": "Database Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 343": {
+    "name": "Fundamentals of Computer Networks",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "SWE 316": {
+    "name": "Software Design and Construction",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 387": {
+    "name": "Software Project Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 344": {
+    "name": "Information Security",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 326": {
+    "name": "Software Testing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 363": {
+    "name": "Web Engineering & Development",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "SWE 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "SWE 413": {
+    "name": "Senior Design Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "SWE 439": {
+    "name": "Software Quality Engineering",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 353": {
+    "name": "Design and Analysis of Algorithms",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 414": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "ICS 433": {
+    "name": "Operating Systems",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "ICS/SWE xxx | Major Elective I",
+   "ICS/SWE xxx | Major Elective II",
+   "ICS/SWE xxx | Major Elective III",
+   "ICS/SWE xxx | Major Elective IV",
+   "XXX xxx | Science Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208, STAT 201, ICS 253|20|Physics|PHYS 101, 102|8|Science Elective|XXX xxx|3|Total|31|Core Requirements|Title|Courses|Credit Hours|SWE|SWE 206, 216, 316, 326, 363, 387, 413, 414, 439|24|ICS|ICS 108, 202, 321, 343, 344, 353, 433|24|Digital Logic & Computer Organization|COE 233|3|Total|51|Electives|Title|Courses|Credit Hours|SWE Electives|Four SWE/ICS xxx Courses|12|Total|12|Summer Training|Title|Courses|Credit Hours|Summer Training|SWE 399|1|Total|1|"
+  ]
+ },
+ "coe": {
+  "core": {
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 202": {
+    "name": "Digital Logic Design",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 203": {
+    "name": "Digital Logic Laboratory",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 301": {
+    "name": "Computer Organization",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 241": {
+    "name": "Data and Computer Communications",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "ICS 253": {
+    "name": "Discrete Structures",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "COE 302": {
+    "name": "Design and Modeling of Digital Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 344": {
+    "name": "Computer Networks",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 236": {
+    "name": "Electronic Circuits (Non-EE students)",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 237": {
+    "name": "Electronic Circuits Lab (Non-EE students)",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 306": {
+    "name": "Introduction to Embedded Systems",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 346": {
+    "name": "Computer & Network Security",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 384": {
+    "name": "Fundamentals of Computer Engineering Design",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "COE 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   },
+   "COE 411": {
+    "name": "Senior Design Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "COE 412": {
+    "name": "Senior Design Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "ICS 433": {
+    "name": "Operating Systems",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "COE 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   }
+  },
+  "slots": [
+   "COE 4xx | Major Elective I",
+   "COE 4xx | Major Elective II",
+   "COE 4xx | Major Elective III",
+   "COE 4xx | Major Elective IV",
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XXX xxx | Free Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208, STAT 201, ICS 253|20|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|32|Core Requirements|Title|Courses|Credit Hours|COE|COE 202, 203, 241, 301, 302, 306, 344, 346, 384, 411, 412|32|ICS|ICS 108, 202, 433|11|EE|EE 236, 237|4|Total|47|Electives|Title|Courses|Credit Hours|COE Electives|Three COE 4xx Courses|9|Total|9|Internship|Title|Courses|Credit Hours|Internship|COE 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208, STAT 201, ICS 253|20|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|32|Core Requirements|Title|Courses|Credit Hours|ICS|ICS 108, 202, 433|11|EE|EE 236, 237|4|COE|COE 202, 203, 241, 301, 302, 306, 344, 346, 384, 411, 412|32|Total|47|Electives|Title|Courses|Credit Hours|Free Elective|One XXX xxx Course from Department’s List|3|COE Electives|Four COE 4xx Courses|12|Total|15|Summer Training|Title|Courses|Credit Hours|Summer Training|COE 399|1|Total|1|"
+  ]
+ },
+ "ise": {
+  "core": {
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "CE 101": {
+    "name": "Engineering Graphics",
+    "lt": 1,
+    "lb": 3,
+    "cr": 2
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MSE 201": {
+    "name": "Introduction to Materials",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MSE 202": {
+    "name": "Materials Lab",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 205": {
+    "name": "Engineering Probability and Statistics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ME 322": {
+    "name": "Manufacturing Processes",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ME 323": {
+    "name": "Manufacturing Lab",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "ISE 315": {
+    "name": "Engineering Statistics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 236": {
+    "name": "Electronic Circuits (Non-EE students)",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ISE 303": {
+    "name": "Operation Research I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 320": {
+    "name": "Quality Control and Industrial Statistics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CIE 301": {
+    "name": "Numerical Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CIE 305": {
+    "name": "Linear Control Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 499": {
+    "name": "Seminars",
+    "lt": 1,
+    "lb": 0,
+    "cr": 0
+   },
+   "ISE 307": {
+    "name": "Engineering Economic Analysis",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 321": {
+    "name": "Optimization Methods",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 324": {
+    "name": "Work and Process Improvements",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ISE 391": {
+    "name": "Industrial Engineering Design",
+    "lt": 1,
+    "lb": 3,
+    "cr": 2
+   },
+   "ISE 402": {
+    "name": "Production Systems and Inventory Control",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ISE 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   },
+   "ISE 411": {
+    "name": "Senior Design Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "ISE 405": {
+    "name": "Stochastic Systems Simulation",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "ISE 422": {
+    "name": "Facility Layout and Location",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 412": {
+    "name": "Senior Design Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "ISE 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "ISE 4xx | ISE Elective I",
+   "ISE 4xx | ISE Elective II",
+   "ISE 4xx | ISE Elective III",
+   "ISE 4xx | ISE Elective IV",
+   "XE xxx | Technical Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|26|General Engineering Fundamentals|Title|Courses|Credit Hours|Engineering Graphics|CE 101|2|Electronic Circuits (Non-EE students)|EE 236|3|Engineering Probability and Statistics|ISE 205|3|Materials Science|MSE 201, 202|4|Manufacturing Processes|ME 322, 323|4|Total|16|Core Requirements|Title|Courses|Credit Hours|Numerical Methods|CIE 301|3|Linear Control Systems|CIE 305|3|Operation Research I|ISE 303|3|Engineering Economic Analysis|ISE 307|3|Engineering Statistics|ISE 315|3|Optimization Methods|ISE 321|3|Quality Control and Industrial Statistics|ISE 320|3|Work and Process Improvements|ISE 324|2|Introduction to Data Science|ISE 291|2|Production Systems and Inventory Control|ISE 402|3|Stochastic Systems Simulation|ISE 405|3|Facility Layout and Location|ISE 422|3|Senior Design Project|ISE 411, 412|3|Seminars|ISE 499|0|Total|37|Electives|Title|Courses|Credit Hours|ISE Electives|Two ISE 4xx Courses|6|Technical Elective|One XE xxx Course|3|Total|9|Internship|Title|Courses|Credit Hours|Internship|ISE 398|6|Total|6|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Total|26|General Engineering Fundamentals|Title|Courses|Credit Hours|Engineering Graphics|CE 101|2|Electronic Circuits (Non-EE students)|EE 236|3|Engineering Probability and Statistics|ISE 205|3|Materials Science|MSE 201, 202|4|Manufacturing Processes|ME 322, 323|4|Total|16|Core Requirements|Title|Courses|Credit Hours|Numerical Methods|CIE 301|3|Linear Control Systems|CIE 305|3|Operation Research I|ISE 303|3|Engineering Economic Analysis|ISE 307|3|Engineering Statistics|ISE 315|3|Optimization Methods|ISE 321|3|Quality Control and Industrial Statistics|ISE 320|3|Work and Process Improvements|ISE 324|2|Industrial Engineering Design|ISE 391|2|Production Systems and Inventory Control|ISE 402|3|Stochastic Systems Simulation|ISE 405|3|Facility Layout and Location|ISE 422|3|Senior Design Project|ISE 411, 412|3|Seminars|ISE 499|0|Total|37|Electives|Title|Courses|Credit Hours|ISE Electives|Four ISE 4xx Courses|12|Technical Elective|One XE xxx Course|3|Total|15|Summer Training|Title|Courses|Credit Hours|Summer Training|ISE 399|1|Total|1|"
+  ]
+ },
+ "amai": {
+  "core": {
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "DATA 211": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 210": {
+    "name": "Discrete Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MATH 333": {
+    "name": "Methods of Applied Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "DATA 201": {
+    "name": "Probability for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 391": {
+    "name": "Human Contexts and Ethics of Data",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 381": {
+    "name": "Principles of Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 320": {
+    "name": "Mathematics for Machine Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 373": {
+    "name": "Numerical Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 485": {
+    "name": "Machine Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 471": {
+    "name": "Deep Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 335": {
+    "name": "Mathematical Modeling",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 301": {
+    "name": "Data, Inference, and Decisions",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "ICS 472": {
+    "name": "Natural Language Processing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 471": {
+    "name": "Big Data Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 428": {
+    "name": "Introduction to Cryptography",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 429": {
+    "name": "Coding Theory",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 413": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MATH 475": {
+    "name": "Engineering Design Optimization",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 431": {
+    "name": "Blockchain & Cryptocurrencies",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 441": {
+    "name": "Large Language Models",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 414": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "MATH xxx | Major Elective I",
+   "MATH xxx | Major Elective II",
+   "XXX xxx | Technical Elective I",
+   "XXX xxx | Technical Elective II"
+  ],
+  "req": [
+   "|KFUPM Bulletin|KFUPM|Contact Us|-->|Home|Colleges|Programs|Undergraduate Programs|Graduate Programs|MS (Project-Based) Programs|CX Programs|BS-X Program|Courses|Undergraduate Courses|Graduate Courses|Academic Regulations|Undergraduate Regulations|Graduate Regulations|Applied Mathematics and AI|-->|';\" aria-label=\"breadcrumb\">|Programs|Undergraduate|Applied Mathematics and AI|Program Search|Select College|College of Computing and Mathematics|College of Petroleum Engineering and Geosciences|College of Engineering and Physics|College of Chemicals and Materials|College of Design and Built Environment|KFUPM Business School|College of General Studies|Please select a College|Select Program|Undergraduate|Graduate|Please select a Program|-->|Bachelor of Science in Applied Mathematics and AI|Overview|Application|Requirements|Degree Plan|Degree Awarded|Bsc|Duration|4 Years +1 prep required|How To Apply|Apply through qabool.kfupm.edu.sa|Application Dates|Early Admission|To be Announced|Olympiad|To be Announced|SAT|To be Announced|Description|Contact Details|-->|Department|Mathematics Department|SAT Track|This admission track allows local and international students who have scored 1350 or above in the SAT exam to apply for enrollment. No Achievement Test (Tahsili) or General Aptitude Test (Qudurat) is required.|SAT|1350\t\t\tor above|Qudurat|Not\t\t\trequired|Tahsili|Not\t\t\trequired|Admission Requirements:|The applicant must be a high school graduate (General, Computer Science and Engineering, Health and Life) or international school graduate (Natural Sciences) in the current year or the previous year.|A minimum SAT score of 1350 is required to apply. Meeting the minimum score does not ensure admission. Admissions are competitive.|SAT scores must be directly sent to King Fahd University of Petroleum and Minerals from the SAT Test Center.|Early Admission Track|The Early Admissions Track serves as an entry point for students in their final year of high school who want to jumpstart their university journey.|Admission Requirements:|Students must be Saudi nationals or Non-Saudi with a Saudi mother.|The student must currently be in the final year of high school (Please note, final high school grades must be submitted once released).|An English language proficiency test is mandatory. Applicants should score at least 55 in the STEP test or its equivalent in TOEFL or IELTS.|Apply for the KFUPM early admission test arranged by the Qiyas Center. The test is available for those studying in their final year of high school.|Regular Admission Track|The admission for this track depends on the comparison between applicants based on the weighted score, which is calculated in the following way:|Qudurat|50%|Tahsili|40%|High\t\t\tSchool Grade|10%|The admission scores will be announced following the release of the second Achievement Test (Tahsili) results.|Admission Requirements:|The applicant must be a high school graduate (General, Computer Science and Engineering, Health and Life) or international school graduate (Natural Sciences) in the current year or the previous year.|The student must submit a General Aptitude Test (Qudrat) score; the student is entitled to use the test result obtained in the year of admission or the previous two years.|The student must submit an Achievement Test (Tahisili) score; the student is entitled to use the test result obtained in the year of admission or the previous year.|The student must submit an English language test and obtain a score of 55 or above in the STEP test or its equivalent in the TOEFL or IELTS tests.|Olympiad winners Admissions Track|The Science Olympiad Track is a specialized admission pathway for students with exceptional aptitude and achievement in science competitions.|Admission Requirements:|The applicant must be a high school graduate (General, Computer Science and Engineering, Health and Life) or international school graduate (Natural Sciences) in the current year or the previous year.|Students should be Saudi nationals or non-Saudis with a Saudi mother.|Students must be high school graduates (Natural Sciences) in the current year or the previous year.|The student should have achieved a winning position in the specified International Olympiad competitions, as specified in the application form.|Competitions approved in the direct admission program:|Competition\t\t\tName|Code|Asia-Pacific\t\t\tInformatics Olympiad|APIO|International\t\t\tOlympiad in Informatics|IOI|International\t\t\tMendeleev Chemistry Olympiad|IMChO|International\t\t\tChemistry Olympiads|IChO|Asian\t\t\tPhysics Olympiad|APhO|European\t\t\tPhysics Olympiad|EuPho|International\t\t\tPhysics Olympiad|IPhO|European\t\t\tGirls' Mathematical Olympiad|EGMO|Asian\t\t\tPacific Mathematical Olympiad|APMO|International\t\t\tMathematical Olympiad|IMO|Balkan\t\t\tMathematical Olympiad|BMOS/BMOC|Junior\t\t\tBalkan Mathematical Olympiad|JBMO|Nordic-Baltic\t\t\tPhysics Olympiad|NBPhO|International\t\t\tJunior Science Olympiad|IJSO|International\t\t\tScience and Engineering Fair|ISEF|International\t\t\tBiology Olympiad|IBO|European\t\t\tGirls' Olympiad in Informatics|EGOI|For more information about the Olympiad admissions track, please visit the website:|Olympiad Students Registration|SkipPrep|KFUPM cares about its students and likes to expedite their academic journey by focusing only on activities that are essential to their journey. Many bright students do not need the Prep Year or need only a part of it, hence the introduction of the SkipPrep program. The objective of this program is to help KFUPM students bypass or skip all or the majority of the Preparatory Year.|For detailed information about how to apply for SkipPrep, please visit: Guide to|SkipPrep|Fees and Funding|Saudi\t\t\tNationals|or With Saudi Mothers|No\t\t\tfees are charged|Non-Saudi\t\t\t(local)|10,000\t\t\tSAR per academic year\t\t\t5,000\t\t\tSAR|2,666 USD per\t\t\tsemester|Scholarships/sponsorships|KFUPM is committed to attracting and supporting the very best students. We have a focus on nurturing talent and ability and we want to make sure that you have the opportunity to study here, regardless of your financial circumstances.|For information about scholarships and bursaries please visit our undergraduate student finance pages.|Admission Procedures|Fill out the application for admission to the university through the website of the Admissions Department.|Applications are available online only and at the time of registration following information required (Student Civil ID / Iqama details, Student's mobile number, Father mobile number, Student's email, Choice of major.|University will receive the results of the secondary school from the Ministry of Education and the results of the General Aptitude Test and Achievement Test from the National Center for Measurement and Evaluation (QIYAS).|After your registration, you will receive a message confirming your registration via email and mobile registered with us in the registration form.|Students must obtain a certificate from the school they have enrolled in and must be attested by the Ministry of Education (If the grade is in letters, official documents must be attached to the grade equivalency in percentage terms).|Non-Saudi students from Saudi mothers are treated as Saudi students in terms of university admission procedures, according to the official instructions regulating this.|If you are accepted, you must confirm your desire to join the university by filling out the required data and submitting the required documents, by accessing your|https://qabool.kfupm.edu.sa/en|.|Important Notes|The result of the admission process will be published on the website.|Ensure that your email and mobile phone are entered correctly.|You must attend the introductory program for new students as scheduled.|The new student is accepted in the preparatory year program for one academic year, after which the student is allowed to enroll in one of the disciplines offered by the university colleges.|-->|Every student of Bachelor of Science in Applied Mathematics and AI program must complete the following curriculum|-->|"
+  ]
+ },
+ "dse": {
+  "core": {
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "MATH 210": {
+    "name": "Discrete Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "DATA 211": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "SWE 206": {
+    "name": "Introduction to Software Engineering",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "DATA 201": {
+    "name": "Probability for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 301": {
+    "name": "Data, Inference, and Decisions",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 311": {
+    "name": "Data Engineering",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 321": {
+    "name": "Matrix Theory for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 361": {
+    "name": "Fundamentals of Database Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "SWE 363": {
+    "name": "Web Engineering & Development",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 322": {
+    "name": "Mathematical Modeling for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 341": {
+    "name": "Statistical Methods for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 391": {
+    "name": "Human Contexts and Ethics of Data",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "DATA 411": {
+    "name": "Senior Design Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "ICS 485": {
+    "name": "Machine Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 421": {
+    "name": "Optimization for Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 412": {
+    "name": "Senior Design Project Il",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "STAT 460": {
+    "name": "Time Series",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "DATA 471": {
+    "name": "Big Data Analytics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "DATA xxx | Data Science Elective II",
+   "DATA xxx | Data Science Elective III",
+   "DATA xxx | Date Science Elective I",
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XE xxx | Technical Elective I",
+   "XE xxx | Technical Elective II",
+   "XE xxx | Technical Elective III",
+   "XE xxx | Technical Elective IV"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "sde": {
+  "core": {
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 202": {
+    "name": "Digital Logic Design",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 201": {
+    "name": "Electric Circuits",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 203": {
+    "name": "Electronics I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 272": {
+    "name": "Analog and Digital Electronics Lab",
+    "lt": 0,
+    "lb": 3,
+    "cr": 1
+   },
+   "EE 207": {
+    "name": "Signals and Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "EE 303": {
+    "name": "Electronics II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 301": {
+    "name": "Computer Organization",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "COE 302": {
+    "name": "Design and Modeling of Digital Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PHYS 336": {
+    "name": "Physics of Semiconductor Devices",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 306": {
+    "name": "Introduction to Embedded Systems",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "EE 315": {
+    "name": "Probabilistic Methods in Electrical Engineering",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "EE 425": {
+    "name": "Integrated Circuits Analysis and Design",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 465": {
+    "name": "VLSI System Design Methodology",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "SDE 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "SDE 411": {
+    "name": "Senior Design Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "COE 403": {
+    "name": "Computer Architecture",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 407": {
+    "name": "System-on-Chip Design",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "SDE 412": {
+    "name": "Senior Design Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "COE 413": {
+    "name": "SoC Tapeout",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XE xxx | Technical Elective I",
+   "XE xxx | Technical Elective II",
+   "XE xxx | Technical Elective III"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "aics": {
+  "core": {
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 108": {
+    "name": "Object-Oriented Programming",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ICS 253": {
+    "name": "Discrete Structures",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 202": {
+    "name": "Data Structures and Algorithms",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "SWE 206": {
+    "name": "Introduction to Software Engineering",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "DATA 211": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 233": {
+    "name": "Digital Logic & Computer Organization",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 343": {
+    "name": "Fundamentals of Computer Networks",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 344": {
+    "name": "Information Security",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 381": {
+    "name": "Principles of Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 440": {
+    "name": "Cryptography and Blockchain Applications",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 471": {
+    "name": "Deep Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 485": {
+    "name": "Machine Learning",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 321": {
+    "name": "Database Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 353": {
+    "name": "Design and Analysis of Algorithms",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 442": {
+    "name": "Penetration Testing and Ethical Hacking",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "DATA 391": {
+    "name": "Human Contexts and Ethics of Data",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AISC 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   },
+   "AISC 411": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "ICS 433": {
+    "name": "Operating Systems",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "COE 426": {
+    "name": "Data Privacy",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 483": {
+    "name": "Computer Vision",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 467": {
+    "name": "Security in Artificial Intelligence Systems",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AISC 412": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "SWE 445": {
+    "name": "Secure Software Development",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 472": {
+    "name": "Natural Language Processing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ICS 476": {
+    "name": "Artificial Intelligence for Cybersecurity",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AISC 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XE xxx | Technical Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|",
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|"
+  ]
+ },
+ "math": {
+  "core": {
+   "CHEM 101": {
+    "name": "Principles of Chemical Science I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "PHYS 101": {
+    "name": "General Physics I",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "PHYS 102": {
+    "name": "General Physics II",
+    "lt": 3,
+    "lb": 3,
+    "cr": 4
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 210": {
+    "name": "Discrete Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 202": {
+    "name": "Elements of Differential Equations",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 225": {
+    "name": "Introduction to Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 201": {
+    "name": "Probability and Statistics for Engineers and Scientists",
+    "lt": 3,
+    "lb": 1,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 333": {
+    "name": "Methods of Applied Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 341": {
+    "name": "Real Analysis I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 323": {
+    "name": "Algebra I",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 441": {
+    "name": "Real Analysis II",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "MATH 399": {
+    "name": "Summer Training",
+    "lt": 0,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 413": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "MATH 445": {
+    "name": "Introduction to Complex Variables",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 414": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "MATH 453": {
+    "name": "Digital Topology",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "MATH 490": {
+    "name": "Seminar in Mathematics",
+    "lt": 0,
+    "lb": 0,
+    "cr": 1
+   }
+  },
+  "slots": [
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "MATH xxx | MATH Elective I",
+   "MATH xxx | MATH Elective II",
+   "MATH xxx | MATH Elective III",
+   "MATH xxx | MATH Elective IV",
+   "XE xxx | Engineering Elective",
+   "XXX xxx | Free Elective",
+   "XXX xxx | MATH 451 or STAT 301*",
+   "XXX xxx | Science Elective",
+   "XXX xxx | Technical Elective I",
+   "XXX xxx | Technical Elective II"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Physics|PHYS 101, 102|8|Principles of Chemical Science I|CHEM 101|4|Science Elective|XXX xxx Science Elective|3|Total|29|Mathematics Core Requirements|Title|Courses|Credit Hours|Discrete Mathematics|MATH 210|3|Introduction to Linear Algebra|MATH 225|3|Algebra I|MATH 323|3|Methods of Applied Mathematics|MATH 333|3|Real Analysis I|MATH 341|3|Numerical Computing|MATH 371|3|Real Analysis II|MATH 441|3|Introduction to Complex Variables|MATH 445|3|Digital Topology|MATH 453|3|Seminar in Mathematics|MATH 490|1|Probability and Statistics for Engineers and Scientists|STAT 201|3|One Course from|{MATH 451, STAT 301}|3|Senior Project|MATH 413, 414|3|Total|37|Electives|Title|Courses|Credit Hours|Math Electives|Four MATH xxx Courses|12|Engineering Elective|One XE xxx Engineering Course (From approved list)|3|Technical Electives|Two XXX xxx Courses (From approved list)|6|Free elective|One XXX xxx Course|3|Total|24|Summer Training|Title|Courses|Credit Hours|Summer Training|MATH 399|2|Total|2|"
+  ]
+ },
+ "asfm": {
+  "core": {
+   "ECON 101": {
+    "name": "Principles Of Microeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 101": {
+    "name": "Introduction to Academic Discourse",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 110": {
+    "name": "Introduction to Financial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 121": {
+    "name": "Language Foundation",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 101": {
+    "name": "Calculus I",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "PE 101": {
+    "name": "Physical Education III",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "ECON 102": {
+    "name": "Principles of Macroeconomics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 102": {
+    "name": "Introduction to Argument Writing",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ACCT 210": {
+    "name": "Introduction to Managerial Accounting",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 111": {
+    "name": "Belief and its Consequences",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 102": {
+    "name": "Calculus II",
+    "lt": 4,
+    "lb": 0,
+    "cr": 4
+   },
+   "ICS 104": {
+    "name": "Introduction to Programming in Python and C",
+    "lt": 2,
+    "lb": 3,
+    "cr": 3
+   },
+   "BUS 200": {
+    "name": "Business & Entrepreneurship",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 201": {
+    "name": "Financial Mathematics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ISE 291": {
+    "name": "Introduction to Data Science",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "IAS 212": {
+    "name": "Professional Ethics and Governance",
+    "lt": 2,
+    "lb": 0,
+    "cr": 2
+   },
+   "MATH 201": {
+    "name": "Calculus III",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 214": {
+    "name": "Actuaries and Business Statistics",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "FIN 250": {
+    "name": "Financial Management",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 289": {
+    "name": "Actuarial Science Problem Lab I",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "AS 251": {
+    "name": "Maths of Financial Derivatives",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "MATH 208": {
+    "name": "Differential Equations and Linear Algebra",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 301": {
+    "name": "Probability Theory and Mathematical Statistics",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "ENGL 214": {
+    "name": "Academic & Professional Communication",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "FIN 320": {
+    "name": "Investments Management and Capital Markets",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 380": {
+    "name": "Actuarial Contingencies I",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "MATH 371": {
+    "name": "Numerical Computing",
+    "lt": 2,
+    "lb": 2,
+    "cr": 3
+   },
+   "CGS 392": {
+    "name": "Career Essentials",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "STAT 302": {
+    "name": "Statistical Inference",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 310": {
+    "name": "Regression Analysis",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 398": {
+    "name": "Internship",
+    "lt": 0,
+    "lb": 0,
+    "cr": 6
+   },
+   "AS 411": {
+    "name": "Senior Project I",
+    "lt": 0,
+    "lb": 1,
+    "cr": 0
+   },
+   "STAT 416": {
+    "name": "Stochastic Processes for Actuaries",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 389": {
+    "name": "Actuarial Science Problem Lab II",
+    "lt": 0,
+    "lb": 2,
+    "cr": 1
+   },
+   "AS 484": {
+    "name": "Actuarial Risk Theory and Credibility",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "COE 292": {
+    "name": "Introduction to Artificial Intelligence",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "AS 412": {
+    "name": "Senior Project II",
+    "lt": 0,
+    "lb": 6,
+    "cr": 3
+   },
+   "AS 481": {
+    "name": "Actuarial Contingencies II",
+    "lt": 3,
+    "lb": 2,
+    "cr": 4
+   },
+   "FIN 440": {
+    "name": "Islamic Finance",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   },
+   "STAT 460": {
+    "name": "Time Series",
+    "lt": 3,
+    "lb": 0,
+    "cr": 3
+   }
+  },
+  "slots": [
+   "AS xxx | AS Elective I",
+   "AS xxx | AS Elective II",
+   "GS xxx | GS Elective",
+   "IAS xxx | Islamic/Arabic Elective",
+   "XXX xxx | Technical Elective"
+  ],
+  "req": [
+   "iculum|-->|General Studies Requirements|Title|Courses|Credit Hours|English|ENGL 101, 102, 214|9|Islamic & Arabic Studies|IAS 111, 121, 212, xxx|8|Global Studies|GS xxx|3|Career Essentials|CGS 392|1|Physical Education III|PE 101|1|Total|22|Digital/Business Foundation|Title|Courses|Credit Hours|Introduction to Programming in Python and C|ICS 104|3|Introduction to Data Science|ISE 291|3|Introduction to Artificial Intelligence|COE 292|3|Business & Entrepreneurship|BUS 200|3|Total|12|Math & Science Requirements|Title|Courses|Credit Hours|Math|MATH 101, 102, 201, 208|14|Total|14|Economics & Accounting|Title|Courses|Credit Hours|Accounting|ACCT 110, 210|6|Economics|ECON 101, 102|6|Total|12|Core Requirements|Title|Courses|Credit Hours|Maths of Financial Derivatives|AS 251|3|Actuarial Science Problem Lab|AS 289, 389|2|Actuarial Contingencies|AS 380, 481|7|Actuarial Risk Theory and Credibility|AS 484|4|Financial Management|FIN 250|3|Investments Management and Capital Markets|FIN 320|3|Islamic Finance|FIN 440|3|Numerical Computing|MATH 371|3|Actuaries and Business Statistics|STAT 214|4|Probability Theory and Mathematical Statistics|STAT 301|3|Statistical Inference|STAT 302|3|Regression Analysis|STAT 310|3|Stochastic Processes for Actuaries|STAT 416|3|Time Series|STAT 460|3|Financial Mathematics|AS 201|3|Senior Project|AS 411, 412|3|Total|53|Electives|Title|Courses|Credit Hours|Technical Elective|One Course from STAT xxx, MATH xxx, FIN 3/4xx, ICS xxx, or ISE xxx|3|AS Electives|Two AS xxx Courses from AS 450, 460, 476, 490, 491, STAT 436|6|Total|9|Internship|Title|Courses|Credit Hours|Internship|AS 398|6|Total|6|"
+  ]
+ }
+}
