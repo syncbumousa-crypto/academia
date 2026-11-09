@@ -17588,3 +17588,5 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 html[data-theme="dark"] .pk-vbar--row .pk-vbar__b:hover { color: #d4b36a; }
 /* المنشورةُ المفتوحةُ في موضعها بإطار: مرجعُ طبقة الكتل وسياقُها (وإلّا رُسمت الكتلُ على أوّل سلفٍ مموضَع — فوق التبويبات) */
 #cm-body .pk--framepub { position: relative; isolation: isolate; }
+/* وإطارُها مدوَّرُ الزوايا (طلبُ صاحب الموقع): ما يملأ الرأسَ والذيل (‎100vmax‎) يُقصّ عند حافّته */
+#cm-body .pk--framepub { border-radius: 16px; overflow: hidden; border: 1px solid var(--u-line); margin-block: 6px; padding: 10px 12px 8px; }   /* والصورةُ وما حولها داخلَه لا على حافّته */
