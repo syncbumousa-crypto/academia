@@ -9644,6 +9644,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   /* ‏‎extra‎: ما يُغرس في كبسولة البنك يسارَ اسمه — عدّاداتُ المساهمة (طلبُ صاحب الموقع) */
+  /* ===== مفاتيحُ المساحات في رأس المساهمة المطويّة (طلبُ صاحب الموقع) =====
+     مصادرُ التلخيص · الملخّص · بنكُ الأسئلة — نقرُ أحدها يفتح تلك المساحةَ وحدَها ويكبّر المساهمة (رأسٌ وذيل) */
+  const pkRowBar = id => {
+    const sv = ic => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg>`;
+    const b = (k, ic, nm) => `<span class="pk-vbar__cap pk-vbar__cap--nm"><button type="button" class="pk-vbar__b" data-pkopen="${k}" data-pkid="${esc(id)}" title="${esc(nm)}">${ic}<span class="pk-vbar__nm">${esc(nm)}</span></button></span>`;
+    return `<span class="pk-vbar pk-vbar--row" role="group" aria-label="${esc(T().pkViewBar)}">`
+      + b('source', sv(PK_SRC_IC), T().pkEsSrcT) + b('mid', pkMidIc(id), T().pkEsMidT) + b('bank', sv(pkQbIc()), T().pkEsQbT) + `</span>`;
+  };
+  window.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body [data-pkopen]');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const id = b.dataset.pkid, k = b.dataset.pkopen;
+    pkSplit[id] = k === 'source';
+    if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
+    pkBank[id] = k === 'bank';
+    if (k === 'source' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    cxMorph(b, () => cxPubMaxSet(id));
+  }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
@@ -11344,6 +11363,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         ? `<button type="button" class="cx-pktest" title="${esc(kind === 'c' ? T().pkGoT : T().pkGoV)}"
              ><span>${esc(T().pkGo)}</span></button>` : ''}
       ${x3TtlHTML(p)}
+      <!-- ومفاتيحُ المساحات الثلاث يسارَ العنوان (طلبُ صاحب الموقع): نقرُ أحدها يكبّر المساهمةَ برأسها وذيلها على ما اختير -->
+      ${kind === 'c' && pkLab() && !(open && cxMaxPub === p.id) ? pkRowBar(p.id) : ''}
       <!-- ===== ودائرةُ الرزمة كلِّها يسارَ عنوانها =====
            هي دائرةُ المجلد بعينها ونفسُ حسابها (‎x3Ans‎)، لكنّ مداها **الرزمةُ كلُّها**
            لا مجلدًا فيها: ماءٌ يرتفع بقدر ما أُجيب منها، ولونُه بقدر ما أُصيب.

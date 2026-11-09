@@ -17581,3 +17581,8 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 .pk-vbar__stats { display: inline-flex; align-items: center; gap: 2px; padding-inline: 4px 8px; white-space: nowrap; color: var(--u-mut); font-size: 12px; }
 .pk-vbar__stats > span { display: inline-flex; align-items: center; }
 .pk--edit .pk-vbar__stats :is(.x3-trio, .cs) { display: flex !important; }   /* ظاهرةٌ في الكبسولة دائمًا، ولو في وضع الاستقبال */
+/* مفاتيحُ المساحات في رأس المساهمة المطويّة: يسارَ العنوان */
+.pk-vbar--row { flex: none; margin-inline: 10px 4px; gap: 6px; }
+.pk-vbar--row .pk-vbar__b { color: var(--u-mut); }
+.pk-vbar--row .pk-vbar__b:hover { color: #a9852f; }
+html[data-theme="dark"] .pk-vbar--row .pk-vbar__b:hover { color: #d4b36a; }
