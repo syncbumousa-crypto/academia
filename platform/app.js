@@ -21703,8 +21703,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وقامةُ القسمة في الضيّقة يحدّدها الكتاب (لا تملأ المربّعَ كما في المكبَّرة): تنتقل من قامتها القديمة إلى الجديدة بنعومة */
   function pkFxHeight(sp, h0, dur) {
     if (!sp || h0 == null || bkReduce()) return;
-    const h1 = sp.getBoundingClientRect().height;
-    if (Math.abs(h1 - h0) < 2) return;
+    /* والقامةُ الأخيرةُ تُقرأ قبل أن تبدأ حركةُ العرض (‎pkPaneGrow‎ تحفظها): بعدها تكون المنطقةُ بعرضٍ صفرٍ فتُقرأ خطأ */
+    const h1 = sp.pkH1 != null ? sp.pkH1 : sp.getBoundingClientRect().height;
+    sp.pkH1 = null;
+    /* ولو تساوت القامتان تُثبَّت طوالَ الحركة: محتوى المنطقة (الكتابُ بنسبة صفحته) يطول ويقصر مع عرضها وهو يتّسع —
+       فبلا تثبيتٍ تقفز قامةُ المساهمة وتعود (شكوى صاحب الموقع) */
     sp.style.overflow = 'hidden';
     const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
     a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
@@ -21718,6 +21721,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') return false;
     const D = PKFX.IN * .8, ez = 'cubic-bezier(.2, .8, .2, 1)';
     const os = (others || []).filter(([el, w0]) => el && w0 != null).map(([el, w0]) => [el, w0, el.getBoundingClientRect().width]);
+    sp.pkH1 = sp.getBoundingClientRect().height;   /* قامةُ القسمة الأخيرة — لـ‎pkFxHeight‎ */
     const w = E.getBoundingClientRect().width, m = pkFxOuter(E, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
@@ -21853,6 +21857,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
     if (slot) slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' });
     const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
+    /* والقامةُ مثبّتةٌ وهي تنطوي: محتواها يقصر ويطول مع عرضها فلا تقفز المساهمة (ثمّ تنتقل إلى قامتها الجديدة بعد الرسم) */
+    if (narrow) { sp.style.height = spH + 'px'; sp.style.overflow = 'hidden'; }
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
       commit();
       if (narrow) pkFxHeight(document.querySelector('#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
