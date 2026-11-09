@@ -9690,6 +9690,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowSep = {};   /* وفواصلُه */
+  const pkIcRowArtSh = {};   /* وظلُّ رزمته */
   const pkIcRowGoAt = {};   /* وموضعُ «ابدأ بـ» */
   const pkIcRowTtl = {};   /* وموضعُ عنوانه */
   const pkIcRowM = {};   /* وهوامشُه */
@@ -9703,6 +9705,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!g) return null;
     const en = state.lang === 'en', w = document.createElement('div'); w.innerHTML = g.html; const el = w.firstElementChild; if (!el) return null;
     Object.assign(el.style, { position: 'fixed', left: (en ? main.left + g.x : main.right + g.xr - g.w) + 'px', top: (top + g.y) + 'px', margin: 0, font: g.font, color: g.color, zIndex: 60, pointerEvents: 'none', whiteSpace: 'nowrap' });
+    if (g.h) { el.style.width = g.w + 'px'; el.style.height = g.h + 'px'; }
     document.body.appendChild(el); return el;
   }
   function pkIcExpand(id, k, post0) {
@@ -9718,13 +9721,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       pkIcRowTtl[id] = tt0 ? (() => { const q = tt0.getBoundingClientRect(); return { x: q.left - m0.left, xr: q.right - m0.right, r: q }; })() : null;   /* وموضعُ العنوان (تفسح له الأيقوناتُ في سطره) */
       { const g0 = post0.querySelector('.pk-icrow > .pk-icgo');   /* و«ابدأ بـ»: موضعُها وهيئتُها (تغيب عند الاتّساع وتعود في آخر الطيّ) */
         pkIcRowGoAt[id] = g0 ? (() => { const q = g0.getBoundingClientRect(), cs = getComputedStyle(g0); return { x: q.left - m0.left, xr: q.right - m0.right, y: q.top - r0.top, w: q.width, h: q.height, html: g0.outerHTML, font: cs.font, color: cs.color }; })() : null; }
+      /* وفواصلُ «/» بين الأيقونات (‎::before‎) وظلُّ الرزمة تحت الغلاف — تغيب وتعود بلطفٍ معها */
+      pkIcRowSep[id] = [...post0.querySelectorAll('.pk-icrow > .pk-ic + .pk-ic')].map(x => { const q = x.getBoundingClientRect(), cs = getComputedStyle(x, '::before');
+        if (!cs || cs.content === 'none') return null;
+        const w = parseFloat(cs.width) || 12, rtl = getComputedStyle(x).direction === 'rtl', l = rtl ? q.right : q.left - w;
+        return { x: l - m0.left, xr: l + w - m0.right, y: q.top - r0.top, w, h: q.height, html: `<span style="display:grid;place-items:center">/</span>`, font: cs.font, color: cs.color }; }).filter(Boolean);
+      { const a0 = post0.querySelector('.x3-pkhd > .x3-art'); pkIcRowArtSh[id] = a0 ? getComputedStyle(a0).boxShadow : null; }
       pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
     pkIcSet(id, k);
-    const goFly = pkIcGoFly(pkIcRowGoAt[id], post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), post0.getBoundingClientRect().top);
+    const mainR0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), top0 = post0.getBoundingClientRect().top;
+    const goFly = pkIcGoFly(pkIcRowGoAt[id], mainR0, top0), sepFly = (pkIcRowSep[id] || []).map(g => pkIcGoFly(g, mainR0, top0)).filter(Boolean);
     renderCmSection();
     if (goFly) goFly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' }).finished.then(() => goFly.remove(), () => goFly.remove());
+    sepFly.forEach(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' }).finished.then(() => x.remove(), () => x.remove()));
+    { const art = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"] .x3-pkhd > .x3-art`), sh = pkIcRowArtSh[id];
+      if (art && sh) art.animate([{ boxShadow: sh }, { boxShadow: getComputedStyle(art).boxShadow }], { duration: 260 * (window.__pkfxSlow || 1), easing: 'ease-out' }); }
     const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
     if (fp && pkIcRowM[id]) pkIcRowM[id].dT = pkIcRowM[id].top - fp.getBoundingClientRect().top;
     if (!fp || bkReduce()) return;
@@ -9818,6 +9831,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (Math.abs(dx) > .5) an.push(tt.animate([{ transform: 'none' }, { transform: `translateX(${dx}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })); } }
     /* ٣. الأيقوناتُ إلى سطرها */
     const flies = [];
+    (pkIcRowSep[id] || []).forEach(g => { const sf = pkIcGoFly(g, main, fr.top + dT);
+      if (sf) { flies.push(sf); an.push(sf.animate([{ opacity: 0 }, { opacity: 0, offset: .6 }, { opacity: 1 }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'both' })); } });
+    { const art = fp.querySelector('.x3-pkhd > .x3-art'), sh = pkIcRowArtSh[id];
+      if (art && sh) { const s0 = getComputedStyle(art).boxShadow; an.push(art.animate([{ boxShadow: s0 }, { boxShadow: s0, offset: .5 }, { boxShadow: sh }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'forwards' })); } }
     { const gf = pkIcGoFly(pkIcRowGoAt[id], main, fr.top + dT);
       if (gf) { flies.push(gf); an.push(gf.animate([{ opacity: 0 }, { opacity: 0, offset: .55 }, { opacity: 1 }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'both' })); } }
     PK_IC_KEYS.forEach((q, i) => {
