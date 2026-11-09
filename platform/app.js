@@ -9672,6 +9672,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* مستطيلٌ بإحداثيّات المربّع */
   const pkIcRel = (card, r) => { const c = card.getBoundingClientRect(); return { x: r.left - c.left - card.clientLeft, y: r.top - c.top - card.clientTop, w: r.width, h: r.height }; };
   /* ===== ومن الصفّ الضيّق: تتّسع المساهمةُ في موضعها (خلفيّةُ الترويسة ثمّ الانبساط) ومربّعُ المساحة يكبر من أيقونتها ===== */
+  /* شبحُ المربّع: نسخةٌ من مساره نفسِه (بفجواته) في طبقةٍ بمقاس طبقة الكتل — يُحرَّك بتحويلٍ أصلُه زاويةُ المربّع العليا */
+  function pkIcGhost(card, blk, bb) {
+    const band = card.querySelector(':scope > .pk-band');
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    g.setAttribute('class', 'pk-band pk-icghost-svg'); g.setAttribute('aria-hidden', 'true');
+    ['width', 'height', 'viewBox'].forEach(a => { if (band.getAttribute(a)) g.setAttribute(a, band.getAttribute(a)); });
+    const pth = blk.cloneNode(false); pth.style.opacity = ''; g.appendChild(pth);
+    g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
+    return g;
+  }
   function pkIcExpand(id, k, post0) {
     const h0 = post0.getBoundingClientRect().height, before = {};
     post0.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { before[x.dataset.pkic] = x.getBoundingClientRect(); });
@@ -9712,8 +9722,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
     if (blk && band && before[k]) {
       const bb = blk.getBBox(), a = pkIcRel(fp, before[k]);
-      const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
-      Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+      const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
       band.after(g); blk.style.opacity = '0';
       const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: 0 },
         { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: o1 },
@@ -9751,8 +9760,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r0 = slot(PK_IC_KEYS.indexOf(k));
     if (blk && band) {
       const bb = blk.getBBox(), a = pkIcRel(fp, r0);
-      const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
-      Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+      const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
       band.after(g); blk.style.opacity = '0';
       an.push(g.animate([{ transform: 'none', borderRadius: '16px', opacity: 1 },
         { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', opacity: 1, offset: o1 },
@@ -9824,8 +9832,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const r0 = before[k];
         if (blk && band && r0) {
           const bb = blk.getBBox(), a = pkIcRel(post, r0);
-          const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
-          Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+          const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
           band.after(g);
           band.style.opacity = '0';
           const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px' },
@@ -9850,8 +9857,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         .map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-in', fill: 'forwards' }));
       if (blk && band) {
         const bb = blk.getBBox(), ic = oldPane.querySelector('.pk-blkh__ic'), r = pkIcRel(post0, (ic || oldPane).getBoundingClientRect());
-        const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
-        Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+        const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
         band.after(g); band.style.opacity = '0';
         fade.push(g.animate([{ transform: 'none', opacity: 1 }, { transform: `translate(${r.x - bb.x}px, ${r.y - bb.y}px) scale(${r.w / bb.width}, ${r.h / bb.height})`, opacity: .2 }],
           { duration: D * .6, delay: D * .15, easing: 'cubic-bezier(.5, 0, .3, 1)', fill: 'forwards' }));
