@@ -9491,7 +9491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) return;
       post.pkMidRun = true;
-      const D = closing ? PKFX.OUT : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      const D = closing ? PKFX.OUT * .78 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
       const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
       /* العروضُ الجديدة تُقاس كلُّها قبل أيّ حركة: حركةُ الأوّل تغيّر ما يبقى للثاني فيُقاس أعرضَ من حقّه */
       const w1s = [book, bank].map(el => el ? el.getBoundingClientRect().width : 0);
@@ -9550,7 +9550,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cr = R(post0), ox = cr.left + post0.clientLeft, oy = cr.top + post0.clientTop;
     let barR = null;
     const fade = (els, d) => [...els].map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d * slow, easing: 'ease-out', fill: 'forwards' }));
-    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 150)).then(() => {
+    let barFade = Promise.resolve();
+    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 100)).then(() => {
       if (!mp || !kv0) return;
       const bb = mp.getBBox(), k = R(kv0), spT = R(sp0).top - oy;
       const bar = { x: bb.x, y: bb.y, w: bb.width, h: Math.max(0, spT - 12 - bb.y) };
@@ -9559,7 +9560,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
       /* والجاران يتّسعان أفقيًّا معه إلى عرضيهما الأخيرين (نصفين، أو القسمةَ كلَّها لواحد)، والعمودُ يضيق بينهما وهو يصعد —
          فلا يتراكبان. والكتلُ تُرسم حيّةً، وعمودُ الملخّص يُرسم فوقها بقامته الصاعدة */
-      const D = 300 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
+      const D = 220 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
+      /* ومحتوى السقف يبدأ خفوتَه والعمودُ في آخر صعوده — مراحلُ متداخلةٌ قليلًا لا متتابعةٌ بفراغ */
+      barFade = new Promise(r => setTimeout(r, D * .55)).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 110)));
       const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
       const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
       const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
@@ -9580,7 +9583,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         };
         requestAnimationFrame(step);
       });
-    }).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 150)))
+    }).then(() => barFade)
       .then(() => { post0.pkMidRun = false; post0.pkBlkHold = false; run(); });
   }
   document.addEventListener('click', e => {
