@@ -9925,7 +9925,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     const go = () => {
       delete pkNotchSt[id];   /* الفجواتُ في الحال الجديدة قائمةٌ من أوّل إطار (كالاتّساع من الصفّ) */
-      if (k) pkIcSet(id, k); else { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = id; }
+      /* (وفي الواسع لا يُعلَّم «طازجًا»: فإذا صُغِّر بلا مساحةٍ عاد صفًّا لا إطارًا خاويًا) */
+      if (k) pkIcSet(id, k); else { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = post0.classList.contains('pk--maxpub') ? null : id; }
       renderCmSection();
       const post = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
       goTxt.forEach(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 * S, easing: 'ease-out', fill: 'forwards' }).finished.then(() => x.remove(), () => x.remove()));
@@ -24442,6 +24443,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tg = e.target;
       if (tg && tg.nodeType === 1 && (tg.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName))) return;
       /* ‏Esc يُخرج آخرَ ما دخل: البنكَ أو الكتاب (ROADMAP-BANKPANE) */
+      /* وفي كونسبت الأيقونات (الضيّقُ المتّسع والواسع): ‏‎Esc‎ يُغلق آخرَ مساحةٍ فُتحت بحركات الأيقونات نفسِها (ROADMAP-MAXICX) */
+      { const pi = spl.closest('.post');
+        if (pi && pi.classList.contains('pk--icx') && pi.dataset.ck) {
+          const open = pkIcOpenSet(pi.dataset.ck), last = pkPaneLast[pi.dataset.ck];
+          const k = open.includes(last) ? last : open[open.length - 1];
+          if (k) { e.preventDefault(); e.stopPropagation(); if (!pi.pkIcBusy) pkIcToggle(pi, k); return; }
+        } }
       const post = spl.closest('.post'), qbB = post && post.querySelector('.pk-vbar__b.on[data-pkview="folder"]'), bkB = post && post.querySelector('.pk-vbar__b.on[data-pkview="source"]');
       const btn = qbB && bkB ? (pkPaneLast[qbB.dataset.pkid] === 'book' ? bkB : qbB) : (qbB || bkB);
       if (btn) { e.preventDefault(); e.stopPropagation(); btn.click(); return; }
