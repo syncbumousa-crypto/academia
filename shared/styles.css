@@ -17568,3 +17568,12 @@ html[data-theme="dark"] .pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color
 .pk-midghost { position: absolute; inset: 0; z-index: -1; pointer-events: none; transform-origin: 50% 40%; }
 .pk-midghost > i { position: absolute; border-radius: 16px; background: var(--pk-blk); }
 .pk-midghost.is-on > i { background: var(--pk-blk-on); }
+/* رسماتُ الاستقبال محايدةٌ باهتة، وذهبيّةٌ في المساحة الملموسة وحدها (طلبُ صاحب الموقع) */
+.pk-es { --es-g0: var(--es-g); }
+.pk--edit .pk-es { --es-g: #a9b3b6; --es-gb: rgba(120, 132, 136, .06); }
+html[data-theme="dark"] .pk--edit .pk-es { --es-g: #5f6c70; --es-gb: rgba(255, 255, 255, .03); }
+.pk--edit .pk-es__art { opacity: .6; transition: opacity .2s; }
+.pk--edit .pk-es .es-fg, .pk--edit .pk-es .es-gb, .pk--edit .pk-es .es-g, .pk--edit .pk-es .es-t, .pk--edit .pk-es .es-dot { transition: stroke .2s, fill .2s; }
+.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb { --es-g: #b8862b; --es-gb: rgba(184, 134, 43, .08); }
+html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) { --es-g: #e1c172; --es-gb: rgba(225, 193, 114, .08); }
+:is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) .pk-es__art { opacity: 1; }
