@@ -9689,12 +9689,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowRe = {};   /* وموضعُ الإعجاب فيه */
   const pkIcRowH = {};   /* قامةُ الصفّ الضيّق لكلّ مساهمة (تُحفظ عند الاتّساع ليُطوى إليها تمامًا) */
   const PK_IC_EZ = 'cubic-bezier(.32, .72, 0, 1)';
   const pkIcInset = (W, H, r, rad) => `inset(${r.y}px ${Math.max(0, W - r.x - r.w)}px ${Math.max(0, H - r.y - r.h)}px ${r.x}px round ${rad}px)`;
   function pkIcExpand(id, k, post0) {
     const h0 = post0.getBoundingClientRect().height, before = {};
     pkIcRowH[id] = h0;
+    { const r0 = post0.getBoundingClientRect(), rr = post0.querySelector('.post-ytmain > .post-react');
+      if (rr) { const q = rr.getBoundingClientRect(); pkIcRowRe[id] = { xr: q.right - r0.right, y: q.top - r0.top }; } }
     post0.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { before[x.dataset.pkic] = x.getBoundingClientRect(); });
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
@@ -9767,8 +9770,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
     an.push(fp.animate([{ height: h1 + 'px' }, { height: h0 + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
-      an.push(x.animate([{ transform: 'none' }, { transform: `translateY(${h0 - h1}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
+    /* خطُّ التذييل وأدواتُه وحافّتُه في الرسم تغيب مع المحتوى (لا تُرفع فوق الترويسة)، وتنزل مع الحافّة ما دامت ظاهرة */
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
+      an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
+    /* والإعجابُ يمضي مباشرةً إلى موضعه في الصفّ على منحنى القامة نفسِه، فلا يعلو ولا يُقصّ */
+    fp.querySelectorAll('.post-ytmain > .post-react').forEach(x => {
+      const q = x.getBoundingClientRect(), t = pkIcRowRe[id];
+      const dx = 0, dy = t ? t.y - (q.top - fr.top) : h0 - h1;
+      x.style.position = 'relative'; x.style.zIndex = '3';
+      an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+    });
     /* ٣. الأيقوناتُ إلى سطرها */
     PK_IC_KEYS.forEach((q, i) => {
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
