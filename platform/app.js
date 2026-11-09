@@ -5002,6 +5002,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       [...node.childNodes].forEach(ch => {
         if (ch.nodeType === 3) return;                       /* نصّ: يُترك */
         if (ch.nodeType !== 1) { ch.remove(); return; }       /* تعليق/غيره: يُحذف */
+        /* صورةُ إيموجي رسمها ‎emojify‎: تعود حرفَها — المخزَّنُ نصٌّ لا صورة */
+        if (ch.tagName === 'IMG' && ch.classList.contains('emo')) { ch.replaceWith(document.createTextNode(ch.dataset.e || ch.alt || '')); return; }
         /* شريحة ملف: تُبقى مُطبَّعة وتُفرَّغ — محتواها عرضٌ يُبنى وقت الرسم من files */
         if (ch.tagName === 'SPAN' && ch.dataset && ch.dataset.fid) {
           const fid = ch.dataset.fid;
@@ -13507,6 +13509,66 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* خريطة الشريحة ⇦ اسم الملفّ تُبنى مرّةً: الرسمُ يسأل عنها في كلّ صفّ، والمسحُ في كلّ مرّة ١٨٠٧ */
   const EM_BY = (() => { const m = {}; EM_LIST.forEach(n => { m[emSlug(n)] = n; }); return m; })();
   const emURL = slug => EM_BY[slug] ? assetURL('assets/emoji/' + EM_BY[slug] + '.png') : '';
+  /* ===== إيموجي النصوص: صورُ أبل نفسُها التي في منتقي وجه المجلد =====
+     الحرفُ في المساهمة يُرسم بخطّ جهاز القارئ: أبل عند هذا، وأندرويد ووندوز عند ذاك.
+     فيُبدَّل وقتَ العرض بصورته من ‎assets/emoji‎ — والمخزَّنُ يبقى حرفًا كما كُتب.
+     والمفتاحُ نقاطُ الترميز بلا ‎FE0F‎ (يُكتب الحرفُ بها وبدونها)، ولونُ البشرة يسقط إلى
+     الأصل لأنّ الرزمة بلا تنويعاته. وما ليس في الرزمة يبقى حرفًا */
+  const EMO_FILE = (() => {
+    const m = {};
+    EM_LIST.forEach(n => { const cp = String(n).split('_').pop(); m[cp.replace(/-fe0f/g, '')] = n; });
+    return m;
+  })();
+  const EMO_RE = /(?:[#*0-9]️?⃣|[\u{1F1E6}-\u{1F1FF}]{2}|\p{Extended_Pictographic}[️\u{1F3FB}-\u{1F3FF}]*(?:‍\p{Extended_Pictographic}[️\u{1F3FB}-\u{1F3FF}]*)*)/gu;
+  const emoKey = (ch, tone) => [...ch].map(c => c.codePointAt(0))
+    .filter(c => c !== 0xFE0F && (tone || c < 0x1F3FB || c > 0x1F3FF))
+    .map(c => c.toString(16)).join('-');
+  const emoFile = ch => EMO_FILE[emoKey(ch, 1)] || EMO_FILE[emoKey(ch, 0)] || '';
+  /* ‏لا يُمسّ ما يُكتب فيه: صورةٌ في محرّرٍ تصير جزءًا ممّا يُحفظ */
+  const EMO_SKIP = 'textarea,input,select,option,script,style,svg,code,pre,[contenteditable="true"],[contenteditable=""],.no-emo';
+  function emojifyText(t) {
+    const s = t.nodeValue;
+    EMO_RE.lastIndex = 0;
+    if (!EMO_RE.test(s)) return;
+    EMO_RE.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0, hit = 0, m;
+    while ((m = EMO_RE.exec(s))) {
+      const f = emoFile(m[0]);
+      if (!f) continue;
+      if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+      const img = document.createElement('img');
+      img.className = 'emo'; img.alt = m[0]; img.dataset.e = m[0];
+      img.draggable = false; img.decoding = 'async';
+      img.src = assetURL('assets/emoji/' + f + '.png');
+      frag.appendChild(img);
+      last = m.index + m[0].length; hit = 1;
+    }
+    if (!hit) return;
+    if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+    t.replaceWith(frag);
+  }
+  function emojify(root) {
+    if (!root || !EM_LIST.length) return;
+    if (root.nodeType === 3) { const p = root.parentElement; if (p && !p.closest(EMO_SKIP)) emojifyText(root); return; }
+    if (root.nodeType !== 1 || root.closest(EMO_SKIP)) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => (n.parentElement && !n.parentElement.closest(EMO_SKIP)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT });
+    const list = []; let n; while ((n = w.nextNode())) list.push(n);
+    list.forEach(emojifyText);
+  }
+  /* ‏كلُّ ما يُرسم بعدُ يمرّ به: المساهماتُ تُبنى في مواضعَ كثيرة (المادة · المصادر · الدكاترة ·
+     المعاينة · التعليقات)، ومراقبٌ واحدٌ أضمنُ من نداءٍ في كلٍّ منها يُنسى في الجديد */
+  if (typeof MutationObserver !== 'undefined' && EM_LIST.length) {
+    const emoMO = new MutationObserver(recs => {
+      recs.forEach(r => {
+        if (r.type === 'characterData') emojify(r.target);
+        else r.addedNodes.forEach(emojify);
+      });
+    });
+    const emoGo = () => { emojify(document.body); emoMO.observe(document.body, { childList: true, subtree: true, characterData: true }); };
+    if (document.body) emoGo(); else document.addEventListener('DOMContentLoaded', emoGo);
+  }
   /* ===== الأسماء العربيّة =====
      مصدرها ‎Unicode CLDR‎ (‎annotations/ar.xml‎ + المشتقّة) — الاسمُ أوّلًا ثمّ كلماتُه بـ‎|‎،
      وتغطيتُها ١٨٠٢ من ١٨٠٢. وهي في مصفوفةٍ **موازيةٍ** لا مدموجةٍ بالأسماء: الفصلُ يُبقي
