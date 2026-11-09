@@ -17700,3 +17700,16 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-icgo { color: rgba(225, 193, 114, 
 #cm-body .pk--icx.pk--icrow .post-ytmain > .post-react { margin-top: 34px; }
 /* والصفُّ يبدأ حيث يبدأ إطارُه المتّسع (هامشٌ أصغر وحشوٌ أكبر — والترويسةُ في موضعها): فلا يتحرّك أعلاه عند الاتّساع ولا يجرّ التمريرَ معه */
 #cm-body .post.pk--icx.pk--icrow { margin-top: 7px; padding-top: 11px; }
+/* الغلافُ رزمةٌ: تحته في الصفّ طبقتان كحوافّ بطائقَ تحت أولاها، فيملأ ما تحته بلا أن يكبر (طلبُ صاحب الموقع) —
+   ظلالٌ مصمتةٌ متناقصةُ العرض، لا عناصرَ زائدة */
+#cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 5px 0 -2px rgba(255, 255, 255, .11), 0 10px 0 -4px rgba(255, 255, 255, .055), 0 12px 10px -6px rgba(0, 0, 0, .45);
+}
+html:not([data-theme="dark"]) #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 5px 0 -2px rgba(20, 35, 63, .13), 0 10px 0 -4px rgba(20, 35, 63, .07), 0 12px 10px -6px rgba(20, 35, 63, .25);
+}
+/* وأعلى العنوان على أعلى الغلاف: الغلافُ ينزل قليلًا والعنوانُ يعلو قليلًا (وما تحته معه في الصفّ) */
+#cm-body .pk--icx .x3-pkhd > .x3-art { position: relative; top: 3px; }
+#cm-body .pk--icx .x3-pkhd > .x3-pkttl { position: relative; top: -4px; }
+#cm-body .pk--icx.pk--icrow .pk-icrow { top: 43px; }
+#cm-body .pk--icx.pk--icrow .post-ytmain > .post-react { margin-top: 30px; }
