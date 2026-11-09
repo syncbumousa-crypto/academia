@@ -9463,11 +9463,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== شريطُ الرأس: مفاتيحُ المساحات الثلاث بترتيبها (المصادر · الملخّص · البنك) — وطرقُ عرض الملخّص انتقلت إلى الذيل (طلبُ صاحب الموقع) ===== */
   /* أيقونةُ الملخّص: نصٌّ — سطورٌ تقصر من جهة البداية (طلبُ صاحب الموقع) */
   const PK_MID_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M8 10.5h12M4 15h16M11 19.5h9"/></svg>';
+  /* ===== سهمٌ في مفتاح الملخّص يفتح قائمةً بطرق عرضه (طلبُ صاحب الموقع) ===== */
+  const pkViewDD = id => `<button type="button" class="pk-vbar__b pk-vbar__dd" data-pkvdd aria-expanded="false" aria-haspopup="menu" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}">`
+    + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>`
+    + `<span class="pk-vmenu" role="menu">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => { const on = pkVwOf(id) === k && !pkMidOff[id];
+      return `<button type="button" role="menuitemradio" aria-checked="${on}" class="pk-vmenu__it${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}">`
+        + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg><span>${esc(T()['pkView_' + k])}</span></button>`; }).join('')}</span>`;
+  const pkVddClose = except => document.querySelectorAll('#cm-body .pk-vbar__cap--dd.is-open').forEach(c => { if (c !== except) { c.classList.remove('is-open'); const b = c.querySelector('[data-pkvdd]'); if (b) b.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body [data-pkvdd]');
+    if (b) {
+      e.preventDefault(); e.stopPropagation();
+      const cap = b.closest('.pk-vbar__cap--dd'), open = !cap.classList.contains('is-open');
+      pkVddClose(cap); cap.classList.toggle('is-open', open); b.setAttribute('aria-expanded', String(open));
+      return;
+    }
+    if (!(e.target.closest && e.target.closest('#cm-body .pk-vmenu'))) pkVddClose();
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') pkVddClose(); });
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${PK_MID_IC}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkMidBtn(id)}</span>
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}</span></span>`;
   const pkViewSeg = id => id && pkLab() && !pkMidOff[id] ? `<span class="pk-vbar pk-vbar--foot" role="group" aria-label="${esc(T().pkViewBar)}"><span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>` : '';
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */

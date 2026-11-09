@@ -17458,3 +17458,22 @@ html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible)
 /* مفاتيحُ المساحات في الرأس بأسمائها (طلبُ صاحب الموقع) */
 .pk-vbar__cap--nm .pk-vbar__b { width: auto; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px 0 9px; font: 700 12px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
 .pk-vbar__nm { display: inline-block; }
+/* سهمُ الملخّص وقائمتُه */
+.pk-vbar__cap--dd { position: relative; gap: 0; }
+.pk-vbar__cap--dd > .pk-vbar__b:first-child { border-start-end-radius: 0; border-end-end-radius: 0; }
+.pk-vbar__dd { width: 22px !important; padding: 0 !important; border-start-start-radius: 0 !important; border-end-start-radius: 0 !important;
+  border-inline-start: 1px solid var(--u-line) !important; color: var(--u-mut); }
+.pk-vbar__dd svg { width: 13px; height: 13px; transition: transform .15s; }
+.pk-vbar__cap--dd.is-open .pk-vbar__dd svg { transform: rotate(180deg); }
+.pk-vmenu { position: absolute; top: calc(100% + 6px); inset-inline-start: 0; z-index: 20; display: none; flex-direction: column; gap: 2px;
+  min-width: 170px; padding: 5px; border-radius: 12px; background: var(--u-in-bg, #fff);
+  box-shadow: 0 16px 36px -10px rgba(20, 35, 63, .35), 0 0 0 1px var(--u-line); }
+html[data-theme="dark"] .pk-vmenu { background: #2b3437; box-shadow: 0 16px 36px -10px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .08); }
+.pk-vbar__cap--dd.is-open > .pk-vmenu { display: flex; }
+.pk-vmenu__it { display: flex; align-items: center; gap: 9px; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px; background: none; cursor: pointer;
+  font: 700 12.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: var(--u-btntx); text-align: start; white-space: nowrap; }
+.pk-vmenu__it svg { width: 16px; height: 16px; color: var(--u-mut); flex: none; }
+.pk-vmenu__it:hover { background: var(--u-hov); }
+.pk-vmenu__it.on { background: rgba(201, 162, 92, .18); }
+.pk-vmenu__it.on svg { color: #a9852f; }
+html[data-theme="dark"] .pk-vmenu__it.on svg { color: #e1c172; }
