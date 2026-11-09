@@ -17397,3 +17397,10 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-gap: transparent; --pk-
 .pk-blkh__x { width: 26px; height: 26px; border: 0; background: color-mix(in srgb, var(--u-btntx) 6%, transparent); }
 .pk-blkh__x svg { width: 12px; height: 12px; }
 .post-ytmain > .pk-blkh--mid { margin: 2px 10px 4px; }
+/* بلا مربّعٍ خلفهما (طلبُ صاحب الموقع): الأيقونةُ بلون الذهب، و× خافتٌ يقوى عند المرور */
+.pk-blkh__ic { background: none; color: #a9852f; }
+html[data-theme="dark"] .pk-blkh__ic { color: #e1c172; }
+.pk-blkh__ic svg { width: 18px; height: 18px; }
+.pk-blkh__x { background: none; color: var(--u-mut); }
+.pk-blkh__x svg { width: 13px; height: 13px; }
+.pk-blkh__x:hover { background: none; color: var(--u-btntx); }
