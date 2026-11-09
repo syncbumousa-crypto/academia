@@ -21652,15 +21652,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
     a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
   }
-  function pkPaneGrow(E, N) {
+  /* ===== دخولُ مساحةٍ طرفيّة بجانب غيرها (طلبُ صاحب الموقع): تنبسط أفقيًّا من حافّة القسمة الخارجيّة =====
+     لا تصعد ولا تنزل، والفُرجةُ بينها وبين جارها ثابتةٌ طوالَ الحركة: الهامشُ السالبُ في جهتها الخارجيّة (لا جهةِ الجار).
+     ‏‎others‎: ‎[عنصرٌ، عرضُه القديم]‎ — الطرفُ الآخرُ يبلغ عرضَه الجديد معها. والعروضُ الجديدة تُقاس كلُّها قبل أيّ حركة */
+  const pkFxOuter = (E, sp) => { const e = E.getBoundingClientRect(), r = sp.getBoundingClientRect(); return e.left + e.width / 2 < r.left + r.width / 2 ? 'marginLeft' : 'marginRight'; };
+  function pkPaneGrow(E, N, others) {
     const sp = E.parentElement;
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') return false;
-    const w = E.getBoundingClientRect().width, m = N && pkFxSide(E, N) === 'l' ? 'marginLeft' : 'marginRight';
+    const D = PKFX.IN * .8, ez = 'cubic-bezier(.2, .8, .2, 1)';
+    const os = (others || []).filter(([el, w0]) => el && w0 != null).map(([el, w0]) => [el, w0, el.getBoundingClientRect().width]);
+    const w = E.getBoundingClientRect().width, m = pkFxOuter(E, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
+    const sized = [E, ...os.map(o => o[0])];
+    sized.forEach(x => { x.style.boxSizing = 'border-box'; });
     E.style.overflow = 'hidden';
-    const a = E.animate([{ flexBasis: '0px', [m]: -(parseFloat(getComputedStyle(sp).columnGap) || 14) + 'px' }, { flexBasis: w + 'px', [m]: '0px' }],
-      { duration: PKFX.IN * .8, easing: 'cubic-bezier(.2, .8, .2, 1)' });
-    a.finished.then(() => { E.style.overflow = ''; }, () => { E.style.overflow = ''; });
+    const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px' }], { duration: D, easing: ez })];
+    os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); });
     return true;
+  }
+  /* الكتلُ تُرسم من المواضع الحيّة كلَّ إطارٍ ما دامت حركاتُ القسمة جارية، ثمّ ساكنةً (أو ‎done‎) */
+  function pkLiveBand(card, anims, done) {
+    card.pkBlkHold = false; pkBandFit(card); card.pkBlkHold = true;
+    let live = true;
+    const loop = () => { if (!live || !card.isConnected) return; pkBandDraw(card, []); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    Promise.all(anims.map(a => a.finished.catch(() => {}))).then(() => {
+      live = false; card.pkBlkHold = false;
+      if (done) done(); else if (card.isConnected) pkBandFit(card);
+    });
   }
   function pkFxMargin(N, E) {
     const n = N.getBoundingClientRect(), e = E.getBoundingClientRect(), side = pkFxSide(N, E);
@@ -21669,23 +21688,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     N.animate([{ [prop]: -d + 'px' }, { [prop]: '0px' }], { duration: PKFX.IN, easing: 'cubic-bezier(.2, .8, .2, 1)' });
   }
   /* الدخول: ‎card‎ المربّعُ بعد الرسم، ‎E‎ المنطقةُ الداخلة، ‎N‎ جارُها (يتضيّق بهامشٍ يذوب)، ‎A0‎ اسمُ النشِطة قبلها */
-  function pkPaneEnter(card, E, N, A0, slot0, undo) {
+  function pkPaneEnter(card, E) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
     if (!sp) return;
-    const side = N ? pkFxSide(E, N) : null;
-    const tracks = [{ pane: E, lv: [0, 1, 0, .7, PKFX_EOUT], side, pad: [0, PK_BAND_PAD, .6, 1], c: [0, PK_BAND_C, .6, 1], clamp: N }];
-    const old = A0 && A0 !== 'x' ? sp.querySelector(':scope > ' + PK_PANE[A0]) : null;
-    if (old && old !== E) {
-      const tr = { pane: old, lv: [1, 0, 0, .6] };
-      if (old === N) { tr.side = pkFxSide(N, E); tr.c = [PK_BAND_C, 0, 0, .25]; }
-      tracks.push(tr);
-    }
-    E.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
-      { duration: PKFX.IN * .55, delay: PKFX.IN * .45, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' });
-    const sl = pkFxSlot(card, slot0, .6, PKFX.IN);
-    /* حركاتُ القسمة كلُّها (هامشُ الجار وعرضُ الطرف الآخر وظهورُ المحتوى) تُعكس معه إن نُقر المفتاحُ أثناءها */
-    const anims = sp.getAnimations({ subtree: true }).concat(sl);
-    pkBandRun(card, tracks, PKFX.IN, null, { anims, pane: E, onRev: undo });
+    /* محتواها يظهر بعد أن تنبسط — هو لا هي (الكتلةُ تُقاس منها فلا تُزاح) */
+    [...E.children].forEach(c => c.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }],
+      { duration: PKFX.IN * .5, delay: PKFX.IN * .4, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' }));
+    pkLiveBand(card, sp.getAnimations({ subtree: true }));
+    pkAnimsNextFrame(card);
   }
   /* الخروج بلا نسخ: ‎L‎ المنطقةُ الخارجةُ في مكانها الحقيقيّ — محتواها يخفت ويهبط، ولسانُها ينزل في الذيل، وعرضُها ينطوي إلى طرف
      القسمة فيتّسع الجار؛ ثمّ ‎commit‎ يغيّر الحالَ ويرسم (والرسمُ الساكنُ هو آخرُ إطار) */
@@ -21758,54 +21768,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = card.querySelector('.post-ytmain > .pk-split');
     if (sp && ![...sp.children].some(x => x !== L && x.matches('.pk-src, .kt-view, .pk-bank'))) return pkSoloExit(card, commit);
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
-    const isBook = L.classList.contains('pk-src'), D = PKFX.OUT;
-    const actL = card.classList.contains(isBook ? 'pk-act--book' : 'pk-act--bank');
-    const N = sp.querySelector(':scope > .kt-view');
+    /* تنطوي أفقيًّا إلى حافّة القسمة الخارجيّة (لا تنزل)، والفُرجةُ بينها وبين جارها ثابتة: هامشُها الخارجيُّ يبتلع فُرجتَها في آخرها */
+    const D = PKFX.OUT, isBook = L.classList.contains('pk-src');
     const hd = sp.querySelector(isBook ? ':scope > .pk-splh:not(.pk-splh--b)' : ':scope > .pk-splh--b');
     if (hd) hd.style.opacity = '0';
-    const w = L.getBoundingClientRect().width, mIn = N && pkFxSide(L, N) === 'l' ? 'marginLeft' : 'marginRight';
-    L.style.overflow = 'hidden';
-    L.firstElementChild && [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(12px)' }],
-      { duration: D * .4, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
-    L.animate([{ flexBasis: w + 'px', [mIn]: '0px' }, { flexBasis: '0px', [mIn]: -(parseFloat(getComputedStyle(sp).columnGap) || 14) + 'px' }],
-      { duration: D * .7, delay: D * .3, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
+    const w = L.getBoundingClientRect().width, m = pkFxOuter(L, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
+    const ow = other ? other.pane.getBoundingClientRect().width : 0, sw = sp.getBoundingClientRect().width;
+    L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
+    [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
+      { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
+    L.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px' }, { flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px' }],
+      { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
-      const ow = other.pane.getBoundingClientRect().width, sw = sp.getBoundingClientRect().width;
-      other.pane.animate([{ flexBasis: ow + 'px' }, { flexBasis: (sw - 14) * other.share + 'px' }],
-        { duration: D * .7, delay: D * .3, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
+      other.pane.style.boxSizing = 'border-box';
+      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (sw - g) * other.share + 'px' }],
+        { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
     }
-    /* وإن لم يبقَ بعده غيرُ الوسط فلا كتلةَ بعده: الوسطُ لا يصعد */
-    const rest = [...sp.children].filter(x => x !== L && x !== N && x.matches('.pk-src, .pk-bank')).length;
-    const tracks = [];
-    const tl = { pane: L, lv: [1, 0, .25, 1] };
-    if (N) { tl.side = pkFxSide(L, N); tl.pad = [PK_BAND_PAD, 0, 0, .25]; tl.c = [PK_BAND_C, 0, 0, .25]; }
-    if (!actL) tl.op = [0, 1, 0, .25];   /* القرار ٣: الخارجةُ تلبس لونَ الكتلة وهي تنزل */
-    tracks.push(tl);
-    for (const k of ['book', 'mid', 'bank']) {
-      const P = sp.querySelector(':scope > ' + PK_PANE[k]);
-      if (!P || P === L) continue;
-      const act = card.classList.contains('pk-act--' + k);
-      if (!act && !(actL && k === 'mid' && rest)) continue;
-      const tr = { pane: P, lv: act ? 1 : [0, 1, .4, 1, PKFX_EOUT] };
-      if (P === N) { tr.side = pkFxSide(N, L); tr.c = [act ? PK_BAND_C : 0, 0, 0, .25]; }
-      tracks.push(tr);
-    }
-    const slot = card.querySelector('.cx-acttools');
-    const sa = slot ? [slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, delay: D * .2, easing: 'ease-out', fill: 'forwards' })] : [];
-    const anims = sp.getAnimations({ subtree: true }).concat(sa);
+    const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
+    if (slot) slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' });
     const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
-    pkBandRun(card, tracks, D, () => {
+    pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
       commit();
       if (narrow) pkFxHeight(document.querySelector('#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
-      /* وأدواتُ الذيل الجديدة تظهر بعد الرسم */
-      const c2 = document.querySelector('#cm-body .pk--max .cx-acttools');
-      if (c2 && !bkReduce()) c2.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140, easing: 'ease-out' });
-    }, { anims, pane: L, onRev: () => {
-      /* عكسُ الخروج: المنطقةُ عادت كما كانت — تُرفع حركاتُها وتُرسم الكتلةُ ساكنة */
-      anims.forEach(a => { try { a.cancel(); } catch (e) {} });
-      L.style.overflow = ''; if (hd) hd.style.opacity = '';
-      pkBandFit(card);
-    } });
+    });
   }
   function cxHdSet(up) {
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
@@ -23491,18 +23476,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (pane) {
         const d = Math.max(1, Math.round(en ? r0.right - n.right : n.left - r0.left));
         if (post2.classList.contains('pk--bandfx') && act0) {
-          pkFxMargin(nv, pane);
-          const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
-          if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN, 0, 'cubic-bezier(.2, .8, .2, 1)');
-          pkPaneEnter(post2, pane, nv, act0, slot0, () => { cxSel.clear(); pkBank[id] = false; renderCmSection(); });
+          pkPaneGrow(pane, nv, [[post2.querySelector('.post-ytmain > .pk-split > .pk-src'), bookR0 && bookR0.width]]);
+          pkPaneEnter(post2, pane);
           if (ctl) ctl.focus({ preventScroll: true });
           return;
         }
-        if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+        if (pkLab() && act0 === null && pkPaneGrow(pane, nv, [[post2.querySelector('.post-ytmain > .pk-split > .pk-src'), bookR0 && bookR0.width]])) {
           pkFxHeight(pane.parentElement, bankSpH0, PKFX.IN * .8);
-          const bo1 = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
-          if (bo1 && bookR0) pkFxFlex(bo1, bookR0.width, bo1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
-          pkPaneEnter(post2, pane, nv, 'x', null, () => { cxSel.clear(); pkBank[id] = false; renderCmSection(); });
+          pkPaneEnter(post2, pane);
           if (ctl) ctl.focus({ preventScroll: true });
           return;
         }
@@ -23684,19 +23665,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* ROADMAP-PANEFX: في المكبَّرة لا ينزلق — يصعد لسانُه من الذيل والجارُ يفسح له، ثمّ يظهر محتواه */
           if (post2.classList.contains('pk--bandfx') && act0) {
             /* الجهاتُ فعليّةٌ من المواضع (الكتابُ يمينٌ والبنكُ يسارٌ في اللغتين — القسمةُ لا تنعكس) */
-            if (nv) pkFxMargin(nv, pane);
-            const bk1 = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
-            if (bk1 && bankW0) pkFxFlex(bk1, bankW0.width, bk1.getBoundingClientRect().width, PKFX.IN, 0, 'cubic-bezier(.2, .8, .2, 1)');
-            pkPaneEnter(post2, pane, nv, act0, slot0, () => { pkSplit[id] = false; renderCmSection(); });
+            pkPaneGrow(pane, nv, [[post2.querySelector('.post-ytmain > .pk-split > .pk-bank'), bankW0 && bankW0.width]]);
+            pkPaneEnter(post2, pane);
             const ae = document.activeElement;
             if (!ae || ae === document.body || !ae.isConnected) { const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`); if (nb) nb.focus({ preventScroll: true }); }
             return;
           }
-          if (pkLab() && act0 === null && pkPaneGrow(pane, nv)) {
+          if (pkLab() && act0 === null && pkPaneGrow(pane, nv, [[post2.querySelector('.post-ytmain > .pk-split > .pk-bank'), bankW0 && bankW0.width]])) {
             pkFxHeight(pane.parentElement, spH0, PKFX.IN * .8);
-            const bk1 = post2.querySelector('.post-ytmain > .pk-split > .pk-bank');
-            if (bk1 && bankW0) pkFxFlex(bk1, bankW0.width, bk1.getBoundingClientRect().width, PKFX.IN * .8, 0, 'cubic-bezier(.2, .8, .2, 1)');
-            pkPaneEnter(post2, pane, nv, 'x', null, () => { pkSplit[id] = false; renderCmSection(); });
+            pkPaneEnter(post2, pane);
             return;
           }
           pane.style.position = 'relative'; pane.style.zIndex = '2';
