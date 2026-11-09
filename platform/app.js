@@ -9474,7 +9474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
     const closing = !pkMidOff[id];
     if (bkReduce() || !pkLab() || !sp0 || sp0.classList.contains('pk-split--none') || getComputedStyle(sp0).flexDirection !== 'row') return commit();
-    if (closing && !pkSplitOn(id) && !pkBankOn(id)) { if (!post0.pkMidRun) { post0.pkMidRun = true; pkSoloExit(post0, commit); } return; }   /* وحدَه: يخرج كتلةً واحدة */
+    if (closing && !pkSplitOn(id) && !pkBankOn(id)) { if (!post0.pkMidRun) { post0.pkMidRun = true; pkSoloExit(post0, commit, 'mid'); } return; }   /* وحدَه: يخرج كتلةً واحدة */
     if (post0.pkBandAnim) pkFxFinish(post0);
     if (post0.pkMidRun) return;
     const R = el => el ? el.getBoundingClientRect() : null;
@@ -21702,24 +21702,67 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (Math.abs(w0 - w1) < .5) return;
     pane.animate([{ flexBasis: w0 + 'px' }, { flexBasis: w1 + 'px' }], { duration: dur, delay: delay || 0, easing: ez, fill: delay ? 'both' : 'none' });
   }
-  /* ===== خروجُ المساحة المفتوحة وحدَها (طلبُ صاحب الموقع): لا جارَ يتّسع إليها — فتخرج كتلةً واحدة =====
-     الكتلةُ ومحتواها والذيلُ يخفتون وينزلون معًا (عكسُ الدخول من «لا مساحة»)، ثمّ تظهر رسالةُ «اختر ما تريد العمل عليه» */
-  function pkSoloExit(card, commit) {
+  /* ===== خروجُ المساحة المفتوحة وحدَها (طلبُ صاحب الموقع): تعود إلى زرّها =====
+     لا جارَ يتّسع إليها، فلا تذوب في مكانها: محتواها يخفت أوّلًا، والتذييلُ يغوص وحدَه (أدواتُه واحدةً بعد أخرى ثمّ مسكتُه)،
+     ثمّ الكتلةُ نفسُها — بشكلها (والملخّصُ بحرف الـT) — تنكمش وتطير إلى زرّها في الرأس فتذوب تحته، والزرُّ ينبض حين تبلغه.
+     فلكلّ مساحةٍ طريقُها: المصادرُ إلى زرّها يمينًا، والملخّصُ إلى الوسط، والبنكُ يسارًا */
+  const PK_SOLO_BTN = { book: '[data-pkview="source"]', mid: '[data-pkmidx]', bank: '[data-pkview="folder"]' };
+  function pkSoloExit(card, commit, kind) {
     if (bkReduce()) return commit();
-    const els = [...card.querySelectorAll(':scope > .pk-band, :scope > .pk-midghost, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .vt-foot, .pk-pubfoot)')];
+    const slow = window.__pkfxSlow || 1, R = el => el.getBoundingClientRect();
+    const band = card.querySelector(':scope > .pk-band'), blk = band && band.querySelector('path.pk-blk');
+    const btn = card.querySelector('.post-yt .pk-vbar ' + (PK_SOLO_BTN[kind] || PK_SOLO_BTN.mid));
+    const cap = btn && (btn.closest('.pk-vbar__cap') || btn);
     card.pkBlkHold = true;
-    const an = els.map(e => e.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }],
-      { duration: PKFX.OUT * .75, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
+    const an = [];
+    /* ١. المحتوى يخفت وينكمش قليلًا نحو وسطه */
+    card.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph), .post-ytmain > .pk-split > * > *').forEach(x =>
+      an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.97)' }], { duration: 150 * slow, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' })));
+    /* ٢. التذييلُ يغوص وحدَه: أدواتُه واحدةً بعد أخرى، ثمّ مسكتُه */
+    const tools = [...card.querySelectorAll('.vt-foot .cx-acttools > *, .vt-foot > :not(.cx-acttools):not(.src-tools__sep), .pk-pubfoot > *')];
+    tools.forEach((x, i) => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(14px)' }],
+      { duration: 200 * slow, delay: (20 + i * 35) * slow, easing: 'cubic-bezier(.5, 0, .75, 0)', fill: 'forwards' })));
+    const grip = card.querySelector('.pk-ftline');
+    if (grip) an.push(grip.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }],
+      { duration: 200 * slow, delay: (60 + tools.length * 35) * slow, easing: 'cubic-bezier(.5, 0, .75, 0)', fill: 'forwards' }));
+    /* ٣. الكتلةُ تطير إلى زرّها */
+    if (band && blk && cap) {
+      const bb = blk.getBBox(), cr = R(card), c = R(cap);
+      const tx = c.left - cr.left - card.clientLeft, ty = c.top - cr.top - card.clientTop;
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      g.setAttribute('class', 'pk-band pk-band--fly'); g.setAttribute('aria-hidden', 'true');
+      g.setAttribute('width', band.getAttribute('width') || ''); g.setAttribute('height', band.getAttribute('height') || '');
+      if (band.getAttribute('viewBox')) g.setAttribute('viewBox', band.getAttribute('viewBox'));
+      g.style.cssText = band.style.cssText; g.style.zIndex = '6';   /* فوق الرأس: تُرى وهي تبلغ زرَّها */
+      const pc = blk.cloneNode(true); pc.classList.add('is-on'); g.appendChild(pc);
+      band.after(g);
+      blk.style.opacity = '0';
+      g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
+      const D = 420 * slow, t0 = 110 * slow;
+      an.push(g.animate([
+        { transform: 'none', opacity: 1, offset: 0 },
+        { transform: `translate(${(tx - bb.x) * .08}px, ${(ty - bb.y) * .02}px) scale(.94, .9)`, opacity: 1, offset: .25 },
+        { opacity: 1, offset: .7 },   /* تبقى ظاهرةً حتى تقارب زرَّها */
+        { transform: `translate(${tx - bb.x}px, ${ty - bb.y}px) scale(${c.width / bb.width}, ${c.height / bb.height})`, opacity: 0, offset: 1 },
+      ], { duration: D, delay: t0, easing: 'cubic-bezier(.55, 0, .25, 1)', fill: 'forwards' }));
+      /* وأرضيّةُ الكتل حولها تذوب معها */
+      band.querySelectorAll('.pk-band__gap, .pk-band__foot').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .6, delay: t0 + D * .4, fill: 'forwards' })));
+    } else card.querySelectorAll(':scope > .pk-band, .post-ytmain > .pk-split').forEach(x =>
+      an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300 * slow, delay: 100 * slow, fill: 'forwards' })));
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
       card.pkBlkHold = false;
       commit();
+      /* الزرُّ ينبض حين تبلغه، ورسالةُ «اختر ما تريد» تظهر */
+      const b2 = document.querySelector('#cm-body .post-yt .pk-vbar ' + (PK_SOLO_BTN[kind] || PK_SOLO_BTN.mid));
+      const c2 = b2 && (b2.closest('.pk-vbar__cap') || b2);
+      if (c2) c2.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)', offset: .35 }, { transform: 'scale(1)' }], { duration: 320 * slow, easing: 'cubic-bezier(.2, .8, .2, 1)' });
       const n = document.querySelector('#cm-body .pk-split--none > .pk-none');
-      if (n) n.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+      if (n) n.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 300 * slow, delay: 60 * slow, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' });
     });
   }
   function pkPaneExit(card, L, commit, other) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
-    if (sp && ![...sp.children].some(x => x !== L && x.matches('.pk-src, .kt-view, .pk-bank'))) return pkSoloExit(card, commit);
+    if (sp && ![...sp.children].some(x => x !== L && x.matches('.pk-src, .kt-view, .pk-bank'))) return pkSoloExit(card, commit, L.matches('.pk-src') ? 'book' : L.matches('.pk-bank') ? 'bank' : 'mid');
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
     const isBook = L.classList.contains('pk-src'), D = PKFX.OUT;
     const actL = card.classList.contains(isBook ? 'pk-act--book' : 'pk-act--bank');
