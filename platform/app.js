@@ -21494,6 +21494,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return { x0: eL ? -2 : p.left - PK_BAND_PAD - ox, x1: eR ? card.clientWidth + 2 : p.right + PK_BAND_PAD - ox, top: p.top - PK_BAND_PAD - oy,
       cl: eL ? 0 : PK_BAND_C, cr: eR ? 0 : PK_BAND_C, sqL: eL, sqR: eR };
   }
+  /* ===== وانزلاقُ العرض حين يُبدَّل (‎pkSplitIn‎ — حركةُ ‎CSS‎) يُتبَع =====
+     تبديلُ طريقة عرض الملخّص يُدخل اللوحَ منزلقًا قليلًا؛ والكتلُ تُقاس من مستطيله، فكانت تُرسم وهو مُزاحٌ ثمّ لا تُعاد —
+     فيبقى عمودُ الـT أعرضَ من جهةٍ ويدخل على جاره (شكوى صاحب الموقع). فتُرسم حيّةً ما دام ينزلق، ثمّ ساكنةً حين يقف */
+  document.addEventListener('animationstart', e => {
+    if (!/^pkSplitIn/.test(e.animationName)) return;
+    const card = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame)');
+    if (!card || card.pkSlideLive) return;
+    card.pkSlideLive = true;
+    const loop = () => { if (!card.pkSlideLive || !card.isConnected) return; if (!card.pkBandAnim && !card.pkBlkHold) pkBandDraw(card, []); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }, true);
+  const pkSlideEnd = e => {
+    if (!/^pkSplitIn/.test(e.animationName)) return;
+    const card = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame)');
+    if (!card) return;
+    card.pkSlideLive = false;
+    requestAnimationFrame(() => { if (card.isConnected) pkBandFit(card); });
+  };
+  document.addEventListener('animationend', pkSlideEnd, true);
+  document.addEventListener('animationcancel', pkSlideEnd, true);
   function pkBandFit(card) {
     const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
     const sp = card.querySelector('.post-ytmain > .pk-split'), ft = card.querySelector('.pk-ftline');
