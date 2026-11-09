@@ -9376,7 +9376,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
-    if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
+    if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
     /* ===== ROADMAP-PANEFX ق٣: الكتلةُ تنتقل بالنقر — القديمةُ تنزل في الذيل والجديدةُ تصعد منه معًا (القرار ٤) ===== */

@@ -17655,3 +17655,8 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__ic { border-radius: 7px; transition: color .15s, background .15s, box-shadow .15s; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { background: var(--u-hov, rgba(20, 35, 63, .07)); box-shadow: 0 0 0 4px var(--u-hov, rgba(20, 35, 63, .07)); color: #a9852f; }
 html[data-theme="dark"] #cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { color: #d4b36a; }
+/* الكونسبت: خطٌّ تحت مسكة الترويسة ومثلُه عند مسكة التذييل — دائمًا، أيًّا كانت المساحةُ الملموسة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-hdline:not(.pk-ftline)::before { border-bottom: 1px solid var(--u-line) !important; }
+#cm-body .pk--icx .pk-ftline::before { border-top: 1px solid var(--u-line) !important; }
+/* والملموسةُ بيضاءُ كالصفحة (لا أرضيّةَ للمساهمة في الكونسبت): يحدّها خطٌّ رفيع فلا تذوب فيها */
+html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { stroke: var(--u-line); stroke-width: 1; }
