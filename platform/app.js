@@ -9703,13 +9703,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (rr) { const q = rr.getBoundingClientRect(); pkIcRowRe[id] = { xr: q.right - r0.right, y: q.top - r0.top }; }
       /* ومواضعُ الأيقونات في سطرها بالضبط (ليرجع إليها الطيُّ بلا قفزةٍ في آخره) */
       const m0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), c0 = getComputedStyle(post0);
-      pkIcRowM[id] = { mt: parseFloat(c0.marginTop) || 0, mb: parseFloat(c0.marginBottom) || 0 };   /* وهوامشُه (الإطارُ هوامشُه غيرُها) */
+      pkIcRowM[id] = { mt: parseFloat(c0.marginTop) || 0, mb: parseFloat(c0.marginBottom) || 0, top: r0.top };   /* وهوامشُه وموضعُه (الإطارُ يبدأ أعلى منه بقدر فرق الهوامش، ومحتواه في موضعه) */
       pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
     pkIcSet(id, k);
     renderCmSection();
     const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
+    if (fp && pkIcRowM[id]) pkIcRowM[id].dT = pkIcRowM[id].top - fp.getBoundingClientRect().top;
     if (!fp || bkReduce()) return;
     cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
     const D = 560 * (window.__pkfxSlow || 1), ez = PK_IC_EZ, an = [];
@@ -9758,7 +9759,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const h0 = pkIcRowH[id] || (hd ? hd.getBoundingClientRect().bottom - fr.top + 30 : 90);
     const main = fp.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), en = state.lang === 'en';
     const at = pkIcRowAt[id] || {};
-    const slot = i => { const q = at[PK_IC_KEYS[i]]; if (q) return { left: en ? main.left + q.x : main.right + q.xr - q.w, top: fr.top + q.y, width: q.w, height: q.h };
+    const cs0 = getComputedStyle(fp), mB = parseFloat(cs0.marginBottom) || 0, rm = pkIcRowM[id] || { mb: mB }, dT = rm.dT || 0;
+    const hT = h0 + dT;   /* حتى تقع حافّتُه السفلى (وما بعده) حيث تقع حافّةُ الصفّ (الهامشُ السفليّ يندمج بهامش التالي) */
+    const slot = i => { const q = at[PK_IC_KEYS[i]]; if (q) return { left: en ? main.left + q.x : main.right + q.xr - q.w, top: fr.top + dT + q.y, width: q.w, height: q.h };
       const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
     /* ١. المحتوى يغيب أوّلًا */
@@ -9777,16 +9780,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     }
     /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
-    /* وهوامشُ الإطار تعود إلى هوامش الصفّ معها، فلا يقفز الصفُّ كلُّه في آخر الطيّ (الأيقوناتُ والإعجابُ أعلى بقدر الفرق ثمّ تنزل) */
-    const cs0 = getComputedStyle(fp), mT = parseFloat(cs0.marginTop) || 0, mB = parseFloat(cs0.marginBottom) || 0, rm = pkIcRowM[id] || { mt: mT, mb: mB }, dm = rm.mt - mT;
-    an.push(fp.animate([{ height: h1 + 'px', marginTop: mT + 'px', marginBottom: mB + 'px' }, { height: h0 + 'px', marginTop: rm.mt + 'px', marginBottom: rm.mb + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+    /* الإطارُ يبدأ أعلى من الصفّ بقدر فرق الهوامش (ومحتواه — الترويسةُ — في الموضع نفسِه): فلا تُمسّ الهوامشُ ولا يتحرّك شيءٌ من الترويسة،
+       وتُحسب المواضعُ والقامةُ بذلك الفرق، فتبلغ الأيقوناتُ والإعجابُ والمساهمةُ التاليةُ مواضعَها في الصفّ بلا قفزة */
+    an.push(fp.animate([{ height: h1 + 'px' }, { height: hT + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     /* خطُّ التذييل وأدواتُه وحافّتُه في الرسم تغيب مع المحتوى (لا تُرفع فوق الترويسة)، وتنزل مع الحافّة ما دامت ظاهرة */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
       an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
     /* والإعجابُ يمضي مباشرةً إلى موضعه في الصفّ على منحنى القامة نفسِه، فلا يعلو ولا يُقصّ */
     fp.querySelectorAll('.post-ytmain > .post-react').forEach(x => {
       const q = x.getBoundingClientRect(), t = pkIcRowRe[id];
-      const dx = 0, dy = t ? t.y - (q.top - fr.top) : h0 - h1;
+      const dx = 0, dy = t ? t.y + dT - (q.top - fr.top) : h0 - h1;
       x.style.position = 'relative'; x.style.zIndex = '3';
       an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
@@ -9809,11 +9812,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         Object.assign(mv.style, { position: 'fixed', left: (r.left - (bm ? bm.e : 0)) + 'px', top: (r.top - (bm ? bm.f : 0)) + 'px', width: r.width + 'px', height: r.height + 'px',
           display: 'grid', placeItems: 'center', color: cs.color, zIndex: 60, pointerEvents: 'none', margin: 0 });
         document.body.appendChild(mv); flies.push(mv); el.style.visibility = 'hidden';
-        dy += dm;   /* النسخةُ الطائرة ثابتةٌ في الصفحة لا تنزل مع المساهمة */
+        /* وإن كان لأحد الآباء تحويلٌ فإنّ ‎fixed‎ لا يُقاس بالنافذة: يُصحَّح موضعُها بالقياس */
+        { const mr = mv.getBoundingClientRect(), wl = r.left - (bm ? bm.e : 0), wt = r.top - (bm ? bm.f : 0);
+          if (Math.abs(mr.left - wl) > .5 || Math.abs(mr.top - wt) > .5) { mv.style.left = (parseFloat(mv.style.left) + wl - mr.left) + 'px'; mv.style.top = (parseFloat(mv.style.top) + wt - mr.top) + 'px'; } }
       }
       an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
-    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { done(); flies.forEach(x => x.remove()); });
+    /* والنسخةُ الطائرة ثابتةٌ في النافذة: إن تحرّكت المساهمةُ (يتقلّص ما تحت التمرير فيُقصَر مداه) تتبعها */
+    let live = true;
+    if (flies.length) { const y0 = fr.top; const follow = () => { if (!live) return; const d = fp.getBoundingClientRect().top - y0; flies.forEach(x => { x.style.translate = `0px ${d}px`; }); requestAnimationFrame(follow); }; requestAnimationFrame(follow); }
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { live = false; done(); flies.forEach(x => x.remove()); });
   }
   function pkIcToggle(post, k) {
     const id = post.dataset.ck, open = pkIcOpenSet(id);
