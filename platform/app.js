@@ -21845,7 +21845,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const act = (pkSplitOn(p.id) || pkBankOn(p.id)) ? ' pk-act--' + pkActOf(p.id) : '';
     /* ===== التحريرُ الضيّقُ في إطار المكبَّر (طلبُ صاحب الموقع): ترويسةٌ وتذييلٌ بمقبضيهما، والحذفُ والنشرُ فوق ===== */
     const fr = cxMax || pkLab();
-    return `<div class="post pk pk--peek pk--edit pk--pack${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
+    /* ولم يُعبَّأ بعدُ شيء: قامةُ المساهمة ثابتةٌ مهما فُتح من المساحات وأُغلق (طلبُ صاحب الموقع) */
+    const blank = fr && !cxMax && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcMeta(p.id);
+    return `<div class="post pk pk--peek pk--edit pk--pack${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards">
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}

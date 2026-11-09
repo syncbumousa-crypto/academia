@@ -17556,3 +17556,11 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--dd:has(> .pk-vb
 html[data-theme="dark"] .pk-act--book .pk-vbar__cap--nm > [data-pkview="source"].on,
 html[data-theme="dark"] .pk-act--mid .pk-vbar__cap--dd > .pk-vbar__b.on,
 html[data-theme="dark"] .pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color: #d4b36a !important; }
+/* المساهمةُ الفارغة في التحرير الضيّق: قامةٌ ثابتة مهما فُتح من المساحات وأُغلق (طلبُ صاحب الموقع) —
+   قامةُ المساحات الثلاث مفتوحةً، والمساحاتُ تملأ ما بين الرأس والذيل كما في المكبَّر */
+@media (min-width: 760px) {
+  #cm-body .pk--frame.pk--blank { height: 626px; display: flex; flex-direction: column; }
+  .pk--frame.pk--blank > .post-yt { flex: 1 1 auto; min-height: 0; }
+  .pk--frame.pk--blank .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+  .pk--frame.pk--blank .post-ytmain > .pk-split { flex: 1 1 auto; min-height: 0; }
+}
