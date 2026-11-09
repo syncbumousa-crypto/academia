@@ -17388,3 +17388,23 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-gap: transparent; --pk-
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) { justify-content: flex-start; }
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > :is(.pk-es, .pk-vwph, .pk-src__view, .pk-qbempty) { flex: 1 1 auto; min-height: 0; height: auto; }
 .pk-blkh > .pk-vbar--foot { margin-inline-start: 6px; font-weight: 400; }
+
+/* ===== رأسُ المساحة لسانٌ يطلع من كتلتها (طلبُ صاحب الموقع: عمقٌ مختلف بلا أن يأكل من قامة المحتوى) =====
+   الأيقونةُ والاسمُ و× فقط، في لسانٍ ترسمه ‎pkBandDraw‎ مع الكتلة نفسِها وتصبغه بذهبٍ خفيف */
+.pk-blkh { height: 28px; margin: 0; padding: 0 12px; gap: 7px; width: max-content; align-self: flex-start; font-size: 12.5px; }
+.pk-blkh__n { display: none; }
+.pk-blkh__ic { background: none; width: auto; height: auto; color: #a9852f; }
+html[data-theme="dark"] .pk-blkh__ic { color: #e1c172; }
+.pk-blkh__ic svg { width: 15px; height: 15px; }
+.pk-blkh__x { margin-inline-start: 2px; width: 20px; height: 20px; border: 0; border-radius: 6px; }
+.pk-blkh__x svg { width: 11px; height: 11px; }
+.pk-blkh .pk-vbar__b { width: 24px; height: 20px; }
+.pk-blkh .pk-vbar__b svg { width: 13px; height: 13px; }
+.post-ytmain > .pk-blkh--mid { margin: 6px 0 3px; }
+.pk--bandfx .post-ytmain > .pk-fstrip { margin-top: 12px; }
+.pk--bandfx .post-ytmain > .pk-split { margin-top: 50px; }
+.pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) { overflow: visible; position: relative; }
+.pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > .pk-blkh { position: absolute; top: -32px; inset-inline-start: 0; margin: 0; z-index: 2; }
+.pk--bandfx .post-ytmain > .pk-split > .pk-bank > #cm-cards { overflow-y: auto; }
+.pk-band path.pk-blk__tab { fill: rgba(201, 162, 92, .16); }
+html[data-theme="dark"] .pk-band path.pk-blk__tab { fill: rgba(225, 193, 114, .1); }

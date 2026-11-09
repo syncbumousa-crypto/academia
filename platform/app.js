@@ -21273,35 +21273,59 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
     const act = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k)) || 'mid';
     const s = R(sp), col = getComputedStyle(sp).flexDirection.startsWith('column');
-    const RD = 16, CC = 14;
-    const box = (x0, y0, x1, y1) => {
+    const RD = 16, CC = 14, SH = 10;
+    /* لسانُ الرأس (طلبُ صاحب الموقع: رأسٌ له عمقٌ ولا يأكل من قامة المحتوى): يطلع من حافّة الكتلة العليا بكتفين مقعّرين،
+       وإن لاصق طرفَها صار ركنُها ركنَه */
+    const tabOf = el => { if (!el) return null; const h = R(el); return h.w > 4 ? { a: h.l, b: h.r, t: h.t - 3 } : null; };
+    const topEdge = (x0, x1, y, r, tab) => {
+      if (!tab) return `M${f(x0)} ${f(y + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(y + r)}`;
+      let { a, b: z, t } = tab; const R2 = Math.min(12, (z - a) / 2);
+      const atL = a - x0 < r + SH, atR = x1 - z < r + SH; if (atL) a = x0; if (atR) z = x1;
+      let d = atL ? `M${f(a)} ${f(t + R2)}A${R2} ${R2} 0 0 1 ${f(a + R2)} ${f(t)}`
+        : `M${f(x0)} ${f(y + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y)}H${f(a - SH)}A${SH} ${SH} 0 0 0 ${f(a)} ${f(y - SH)}V${f(t + R2)}A${R2} ${R2} 0 0 1 ${f(a + R2)} ${f(t)}`;
+      d += `H${f(z - R2)}A${R2} ${R2} 0 0 1 ${f(z)} ${f(t + R2)}`;
+      if (!atR) d += `V${f(y - SH)}A${SH} ${SH} 0 0 0 ${f(z + SH)} ${f(y)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(y + r)}`;
+      return d;
+    };
+    const tabTint = (tab, y, x0, x1, r) => {
+      if (!tab) return '';
+      let { a, b: z, t } = tab; const R2 = Math.min(12, (z - a) / 2);
+      const atL = a - x0 < r + SH, atR = x1 - z < r + SH; if (atL) a = x0; if (atR) z = x1;
+      return `<path class="pk-blk__tab" d="M${f(a)} ${f(y)}V${f(t + R2)}A${R2} ${R2} 0 0 1 ${f(a + R2)} ${f(t)}H${f(z - R2)}A${R2} ${R2} 0 0 1 ${f(z)} ${f(t + R2)}V${f(y)}Z"/>`;
+    };
+    const box = (x0, y0, x1, y1, tab) => {
       const w = x1 - x0, h = y1 - y0; if (w < 2 || h < 2) return '';
       const r = Math.min(RD, w / 2, h / 2);
-      return `M${f(x0)} ${f(y0 + r)}A${f(r)} ${f(r)} 0 0 1 ${f(x0 + r)} ${f(y0)}H${f(x1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1)} ${f(y0 + r)}V${f(y1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + r)}A${f(r)} ${f(r)} 0 0 1 ${f(x0)} ${f(y1 - r)}Z`;
+      return topEdge(x0, x1, y0, r, tab) + `V${f(y1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + r)}A${f(r)} ${f(r)} 0 0 1 ${f(x0)} ${f(y1 - r)}Z`;
     };
     const blk = (k, d) => d ? `<path class="pk-blk${k === act ? ' is-on' : ''}" d="${d}"/>` : '';
     const mid = sp.querySelector(':scope > .kt-view'), src = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank');
     const head = card.querySelector('.post-ytmain > .pk-blkh--mid');
-    let out = '', top = s.t;
+    const tSrc = tabOf(src && src.querySelector(':scope > .pk-blkh')), tBank = tabOf(bank && bank.querySelector(':scope > .pk-blkh'));
+    let out = '', tints = '', top = s.t;
+    if (src) { const r = R(src); out += blk('book', box(r.l, r.t, r.r, r.b, tSrc)); tints += tabTint(tSrc, r.t, r.l, r.r, RD); if (tSrc) top = Math.min(top, tSrc.t); }
+    if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b, tBank)); tints += tabTint(tBank, r.t, r.l, r.r, RD); if (tBank) top = Math.min(top, tBank.t); }
     if (mid) {
       const m = R(mid);
       if (head) {
-        const barT = R(head).t - 8, barB = Math.max(barT + 2 * RD, s.t - 12), x0 = s.l, x1 = s.r;
-        top = barT;
+        const tMid = tabOf(head), hb = R(head);
+        const barT = hb.b + 3, sideTop = Math.min(s.t, tSrc ? tSrc.t : s.t, tBank ? tBank.t : s.t);
+        const barB = Math.max(barT + 2 * RD, sideTop - 10), x0 = s.l, x1 = s.r;
+        top = Math.min(top, tMid ? tMid.t : barT);
         const lN = !col && m.l - x0 > RD + CC + 2, rN = !col && x1 - m.r > RD + CC + 2;
-        if (col) out += blk('mid', box(x0, barT, x1, barB)) + blk('mid', box(m.l, m.t, m.r, m.b));
+        if (col) out += blk('mid', box(x0, barT, x1, barB, tMid)) + blk('mid', box(m.l, m.t, m.r, m.b));
         else {
           const cL = lN ? m.l : x0, cR = rN ? m.r : x1, bot = m.b, r = RD;
-          let d = `M${f(x0)} ${f(barT + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(barT)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(barT + r)}`;
+          let d = topEdge(x0, x1, barT, r, tMid);
           d += rN ? `V${f(barB - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(barB)}H${f(cR + CC)}A${CC} ${CC} 0 0 0 ${f(cR)} ${f(barB + CC)}V${f(bot - r)}` : `V${f(bot - r)}`;
           d += `A${r} ${r} 0 0 1 ${f(cR - r)} ${f(bot)}H${f(cL + r)}A${r} ${r} 0 0 1 ${f(cL)} ${f(bot - r)}`;
-          d += lN ? `V${f(barB + CC)}A${CC} ${CC} 0 0 0 ${f(cL - CC)} ${f(barB)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(barB - r)}Z` : `V${f(barT + r)}Z`;
+          d += lN ? `V${f(barB + CC)}A${CC} ${CC} 0 0 0 ${f(cL - CC)} ${f(barB)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(barB - r)}Z` : `Z`;
           out += blk('mid', d);
         }
+        tints += tabTint(tMid, barT, x0, x1, RD);
       } else out += blk('mid', box(m.l, m.t, m.r, m.b));
     }
-    if (src) { const r = R(src); out += blk('book', box(r.l, r.t, r.r, r.b)); }
-    if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b)); }
+    out += tints;
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(top - 12)}" width="${W}" height="${f(Math.max(0, fy - top + 12))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
   }
