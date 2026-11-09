@@ -17602,3 +17602,12 @@ html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInE
 /* وطيُّ الرأس: هوامشُ الموازنة تنتقل بخطى عمود الصورة نفسها (‎.22s ease‎) — كانت تقفز فيميل بطنُ المساهمة ثمّ يعود (شكوى صاحب الموقع) */
 .pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: margin-inline-start .22s ease; }
 @media (prefers-reduced-motion: reduce) { .pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: none; } }
+/* ===== والمتّسعةُ لا يتزحزح فيها شيءٌ عن موضعه في الصفّ الضيّق (طلبُ صاحب الموقع) =====
+   الإطارُ (حشوتُه وحدُّه) يُبسط إلى الخارج بهامشٍ سالب، فتبقى الصورةُ والاسمُ والعنوانُ والإعجابُ حيث كانت */
+#cm-body .pk--framepub { margin-inline: -11px; margin-top: 7px; }
+#cm-body .pk--framepub .x3-pkhd.on { padding-bottom: 0; }
+#cm-body .pk--framepub > .post-yt > .post-menu { top: 22px; inset-inline-end: 0; }
+#cm-body .pk--framepub { box-sizing: border-box; }   /* قامتُها تُحرَّك كلّيّةً (من قامة الصفّ الضيّق) */
+/* خلفيّةُ الترويسة ومسكتُها تظهران خلف ما فيها حين تتّسع */
+#cm-body .pk--framepub .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub .pk-hdline:not(.pk-ftline) .pk-hdline__grip { transition: opacity .18s ease-out; }
+#cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: none; }

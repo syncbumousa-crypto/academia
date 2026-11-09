@@ -32249,6 +32249,7 @@ void main() {
     const pt = e.target.closest('.pk-toggle');
     if (pt) {
       const pk = pt.closest('.post.pk');
+      const h0 = pk.getBoundingClientRect().height;   /* قامةُ الصفّ الضيّق — منها تنبسط المتّسعة */
       let nowOpen;
       if (pk.classList.contains('pk--fold')) {   /* المادة/الدكتور: توسيع/تضييق إنلاين، حالة الطي في cmOpen */
         const key = pk.dataset.dr != null
@@ -32280,12 +32281,26 @@ void main() {
       const dk = pk.dataset.dkey;
       if (dk) { if (nowOpen) dtAbs.add(dk); else dtAbs.delete(dk); }
       renderCmSection();
-      /* والمتّسعةُ بإطار: رأسُها وذيلُها ومساحاتُها تظهر بحركة، والكتلُ تُرسم من مواضعها الأخيرة */
+      /* ===== والمتّسعةُ بإطار (طلبُ صاحب الموقع): لا يتزحزح فيها شيء — خلفيّةُ الترويسة تظهر خلفها، ثمّ أزرارُها، ثمّ تنبسط
+         إلى الأسفل بسلاسة. والكتلُ مرسومةٌ بمواضعها الأخيرة، والإطارُ يقصّ ما لم ينبسط بعد ===== */
       const fp = nowOpen && pk.dataset.ck != null && document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(pk.dataset.ck)}"]`);
       if (fp && !bkReduce()) {
         cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
-        const an = [...fp.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-hdline, .pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)')]
-          .map(x => x.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
+        const fr = fp.getBoundingClientRect(), hl = fp.querySelector('.pk-hdline:not(.pk-ftline)');
+        const h1 = fr.height, hH = hl ? hl.getBoundingClientRect().bottom - fr.top + 2 : h0;
+        const D = 520 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)', an = [];
+        const cs = getComputedStyle(fp);
+        an.push(fp.animate([{ height: h0 + 'px', backgroundColor: 'transparent', borderColor: 'transparent' },
+          { height: hH + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, offset: .3 },
+          { height: h1 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor }], { duration: D, easing: ez }));
+        /* خلفيّةُ الترويسة (مسكتُها وما يملأ فوقها) تظهر أوّلًا، ثمّ أزرارُ المساحات */
+        /* (بصنفٍ يُرفع لا بحركةٍ على العنصر: حركةُ الشفافيّة تجعله طبقةً فوق الرأس فيغطّي الاسمَ والصورة وهو يظهر) */
+        fp.classList.add('pk--frin'); requestAnimationFrame(() => requestAnimationFrame(() => fp.classList.remove('pk--frin')));
+        fp.querySelectorAll('.x3-pkhd > .pk-vbar, .pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(-4px)' }, { opacity: 1, transform: 'none' }],
+          { duration: D * .3, delay: D * .15, easing: 'ease-out', fill: 'backwards' })));
+        /* ثمّ البطنُ ينبسط إلى الأسفل ويظهر ما فيه */
+        fp.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)').forEach(x =>
+          an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .55, delay: D * .35, easing: 'ease-out', fill: 'backwards' })));
         Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
       }
       return;
