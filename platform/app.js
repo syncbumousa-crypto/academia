@@ -9487,12 +9487,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const old = { book: R(sp0.querySelector(':scope > .pk-src')), bank: R(sp0.querySelector(':scope > .pk-bank')), top: R(sp0).top };
       const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
       const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
+      const cardH0 = post0.getBoundingClientRect().height;
       commit();
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) return;
       post.pkMidRun = true;
       const D = closing ? PKFX.OUT * .62 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
+      if (post.classList.contains('pk--framepub')) {
+        const cardH1 = post.getBoundingClientRect().height;
+        if (Math.abs(cardH1 - cardH0) > 2) an.push(post.animate([{ height: cardH0 + 'px' }, { height: cardH1 + 'px' }], { duration: D, easing: ez }));
+      }
       const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
       /* العروضُ الجديدة تُقاس كلُّها قبل أيّ حركة: حركةُ الأوّل تغيّر ما يبقى للثاني فيُقاس أعرضَ من حقّه */
       const w1s = [book, bank].map(el => el ? el.getBoundingClientRect().width : 0);
@@ -11822,7 +11828,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -21906,7 +21912,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (card.classList.contains('pk--icR') !== notchR) card.classList.toggle('pk--icR', notchR);
     /* وما في المربّعات ينتهي فوق الفجوات السفلى */
     const notchB = card.classList.contains('pk--ic1') && !!card.querySelector('.pk-icrow [data-pkic]:not(.is-on)');
-    if (card.classList.contains('pk--icB') !== notchB) card.classList.toggle('pk--icB', notchB);
+    if (card.classList.contains('pk--icB') !== notchB) {
+      /* ===== وزيادةُ القامة لأجل الفجوات (أو نقصانُها) تنتقل بنعومة لا قفزًا (طلبُ صاحب الموقع) =====
+         تُقرأ القامةُ الجاريةُ قبلُ (ولو كانت حركةٌ تمسكها)، وتُرفع حركاتُ القامة القائمة، ثمّ تُحرَّك القسمةُ إلى قامتها الجديدة */
+      const h0 = sp.getBoundingClientRect().height;
+      sp.getAnimations().forEach(a => { const kf = a.effect && a.effect.getKeyframes ? a.effect.getKeyframes() : []; if (kf.some(k => k.height != null)) a.cancel(); });
+      const lockH = sp.style.height; sp.style.height = '';
+      card.classList.toggle('pk--icB', notchB);
+      const h1 = sp.getBoundingClientRect().height;
+      if (lockH) sp.style.height = lockH;
+      if (!bkReduce() && Math.abs(h1 - h0) > 1 && !lockH) {
+        sp.style.overflow = 'hidden';
+        const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: 300 * (window.__pkfxSlow || 1), easing: 'cubic-bezier(.3, .7, .2, 1)' });
+        a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
+      }
+    }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
   }
@@ -22202,7 +22222,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (narrow) { sp.style.height = spH + 'px'; sp.style.overflow = 'hidden'; }
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
       commit();
-      if (narrow) pkFxHeight(document.querySelector('#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
+      /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
+      const ck = card.dataset.ck;
+      if (narrow) pkFxHeight(document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
     });
   }
   function cxHdSet(up) {
