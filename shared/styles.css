@@ -17503,3 +17503,6 @@ html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__d
 .pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-split, :is(.pk--max, .pk--frame):not(.pk--hdup) .post-ytmain > .pk-split--none { margin-inline-start: -42px; }
 .pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-fstrip { margin-inline-start: -12px; }
 .pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-blkh--mid { margin-inline-start: -32px; }
+/* الأيقونةُ داخل انحناء زاوية الكتلة لا فوقه، وقوسُ الإغلاق على الزاوية نفسِها */
+.pk-blkh__ic { margin-inline-start: -2px; transform: translateY(-2px); }
+.post-ytmain > .pk-blkh--mid > .pk-blkh__x { top: -8px; }
