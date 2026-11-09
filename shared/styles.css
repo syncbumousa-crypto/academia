@@ -17594,3 +17594,8 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 /* والمتّسعةُ في موضعها: قوسُ التكبير على زاوية إطارها (حشوتُه ‎10 · 12‎ وحدُّه) لا خلف الصورة */
 #cm-body .pk--framepub > .pk-maxdock { position: absolute; top: 0; inset-inline: 0; height: 0; z-index: 6; }
 #cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: -1px; inset-inline-start: -1px; }   /* على حافّة الإطار نفسِها */
+/* تبديلُ طريقة العرض: الكتلةُ (اللوحُ نفسُه) ثابتة، والمحتوى الجديد وحدَه يدخل منزلقًا (طلبُ صاحب الموقع) */
+.pk-split.is-in > .kt-view, html[data-lang="en"] .pk-split.is-in > .kt-view { animation: none; }
+.pk-split.is-in > .kt-view > * { animation: pkSplitIn .34s cubic-bezier(.2, .8, .2, 1) both; }
+html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInEn; }
+@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view > * { animation: none; } }

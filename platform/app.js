@@ -23739,6 +23739,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (part) pkSplit[id] = false;
         else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
       } else if (to !== cur) {
+        /* ===== تبديلُ طريقة العرض: الكتلةُ ثابتة، ومحتواها وحدَه يخرج ثمّ يدخل الجديد (طلبُ صاحب الموقع) ===== */
+        const kv0 = part && sp && sp.querySelector(':scope > .kt-view');
+        if (kv0 && PK_SPLIT_VIEWS.includes(to) && !bkReduce()) {
+          if (kv0.pkOut) return;
+          kv0.pkOut = true;
+          const dx = state.lang === 'en' ? -12 : 12;
+          const an = [...kv0.children].map(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${dx}px)` }],
+            { duration: 140, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
+          Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
+            pkVw[id] = to; pkSplitAnim[id] = true; pkLastKn[id] = to;
+            renderCmSection(); playGhosts();
+          });
+          return;
+        }
         pkVw[id] = to;
         if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
       } else return;
