@@ -17506,3 +17506,14 @@ html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__d
 /* الأيقونةُ داخل انحناء زاوية الكتلة لا فوقه، وقوسُ الإغلاق على الزاوية نفسِها */
 .pk-blkh__ic { margin-inline-start: -2px; transform: translateY(-2px); }
 .post-ytmain > .pk-blkh--mid > .pk-blkh__x { top: -8px; }
+/* منطقةُ مجلدات الملخّص فارغة */
+.pk-fstrip-ph { display: flex; align-items: center; justify-content: center; gap: 8px; height: 40px; margin: 0 30px 0; box-sizing: border-box;
+  border: 1.5px dashed var(--u-line); border-radius: 20px; background: none; color: var(--u-mut);
+  font: 600 12.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-fstrip-ph { margin-inline-start: -12px; }
+.pk-fstrip-ph svg { width: 16px; height: 16px; opacity: .8; }
+button.pk-fstrip-ph { cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+button.pk-fstrip-ph:hover { border-color: rgba(201, 162, 92, .7); color: #a9852f; background: rgba(201, 162, 92, .06); }
+html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
+.pk--bandfx .post-ytmain > .pk-fstrip-ph + .pk-split { margin-top: 22px; }
+.pk-fstrip-ph { width: -webkit-fill-available; width: -moz-available; width: stretch; }
