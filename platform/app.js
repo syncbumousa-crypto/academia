@@ -21665,7 +21665,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
     E.style.overflow = 'hidden';
-    const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px' }], { duration: D, easing: ez })];
+    const cs = getComputedStyle(E), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
+    const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
+    /* من عرضٍ صفرٍ حقًّا: الحاشيةُ تنبسط معها (وإلّا بدأت بعرض الحاشية) */
+    const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); });
     return true;
@@ -21777,7 +21780,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
-    L.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px' }, { flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px' }],
+    /* وحاشيتُها تنطوي معها (وإلّا وقفت عند عرض الحاشية ثمّ قفز جارُها بقدرها حين تُرسم) */
+    const cs = getComputedStyle(L), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
+    const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
+    L.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }, { flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }],
       { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
       other.pane.style.boxSizing = 'border-box';
