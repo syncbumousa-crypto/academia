@@ -17713,3 +17713,10 @@ html:not([data-theme="dark"]) #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
 #cm-body .pk--icx .x3-pkhd > .x3-pkttl { position: relative; top: -4px; }
 #cm-body .pk--icx.pk--icrow .pk-icrow { top: 43px; }
 #cm-body .pk--icx.pk--icrow .post-ytmain > .post-react { margin-top: 30px; }
+/* وبين أيقونات «ابدأ بـ» فاصلٌ «/» خافت: «ابدأ بـ المصادر / الملخص / الأسئلة» (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic { position: relative; margin-inline-start: 12px; overflow: visible; }
+#cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::before {
+  content: '/'; position: absolute; inset-inline-start: -12px; top: 50%; transform: translateY(-50%); width: 12px; text-align: center;
+  font: 400 15px/1 'IBM Plex Sans Arabic', sans-serif; color: rgba(20, 35, 63, .3); pointer-events: none;
+}
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::before { color: rgba(255, 255, 255, .28); }
