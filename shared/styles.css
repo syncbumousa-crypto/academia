@@ -17484,3 +17484,9 @@ html[data-theme="dark"] .pk-vmenu__it.on svg { color: #e1c172; }
 .pk--bandfx .post-ytmain > .pk-split { margin-top: 8px; }
 /* وبلا مجلدات: سقفُ الـT يبقى بقامته (لا تتراكب عليه كتلتا الجانبين) */
 .pk--bandfx .post-ytmain > .pk-blkh--mid + .pk-split { margin-top: 40px; }
+/* قوسُ إغلاق المساحة رماديٌّ محايد، ويحمرّ عند المرور وحده (طلبُ صاحب الموقع) */
+.pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(20, 35, 63, .1); }
+.pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #14233f; opacity: .45; }
+html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #e7eff0; opacity: .5; }
+.pk-blkh__x .pk-curve__grip, .pk-blkh__x .pk-curve__dots { transition: stroke .15s, fill .15s, opacity .15s; }
