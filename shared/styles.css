@@ -17675,4 +17675,9 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 /* كونسبت الأيقونات: لوحُ الملخص يمتدّ إلى قاع مساحته ذاتِ الفجوات السفلية ويُقصّ على شكلها (‎pkKcvNotch‎) */
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .kt-view--tree { padding-bottom: 12px; }
 #cm-body .pk--icx.pk--icB .pk-split > .kt-view--tree .kcv { min-height: 448px; }
-#cm-body .pk--icx .kcv.is-notched { border-color: transparent; }
+#cm-body .pk--icx .is-notched { border-color: transparent !important; }
+#cm-body .pk--icx .pk-vwph.is-notched { position: relative; }
+#cm-body .pk--icx .pk-nclip { position: absolute; inset: 0; width: auto; height: auto; pointer-events: none; overflow: visible; }
+/* ومربّعُ «لا يوجد» في المصادر والبنك كذلك: يمتدّ إلى القاع، ونصُّه يبقى في وسط ما بين الفجوتين وأعلاه */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank):has(> .pk-vwph) { padding-bottom: 12px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > .pk-vwph { padding-bottom: 46px; }

@@ -21796,28 +21796,47 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* اللوحُ (‎.kcv‎) في مساحة الملخص ذاتِ الفجوات السفلية: يمتدّ إلى قاعها ويُقصّ على شكلها نفسِه
      (زواياه مستديرة، وفجوتا الأيقونتين مقطوعتان منه بالقدر الذي انفتحتا به) — فلا يبقى تحته هامشٌ فارغ */
   function pkKcvNotch(card, ns) {
-    const kcv = card.querySelector('.post-ytmain > .pk-split > .kt-view--tree > .kcv');
-    if (!kcv) return;
-    const ui = [...kcv.querySelectorAll(':scope > .kcv-ui, :scope > .kcv-map')];
-    if (!card.classList.contains('pk--icB') || !ns.length) {
-      if (kcv.style.clipPath) { kcv.style.clipPath = ''; kcv.classList.remove('is-notched'); ui.forEach(x => { x.style.marginLeft = x.style.marginRight = ''; }); }
-      return;
-    }
-    const w = kcv.offsetWidth, h = kcv.offsetHeight, f = n => Math.round(n * 100) / 100;
-    const L = ns.find(n => n.sd !== 'r'), Rn = ns.find(n => n.sd === 'r'), R = 14;
-    let d = `M0 ${R}A${R} ${R} 0 0 1 ${R} 0H${f(w - R)}A${R} ${R} 0 0 1 ${w} ${R}`;
-    if (Rn) { const cw = Rn.nw, ch = Rn.nh, c = Math.min(Rn.c, cw / 2, ch / 2), r = Math.min(R, cw / 2 + 1, ch / 2 + 1);
-      d += `V${f(h - ch - r)}A${r} ${r} 0 0 1 ${f(w - r)} ${f(h - ch)}H${f(w - cw + c)}A${c} ${c} 0 0 0 ${f(w - cw)} ${f(h - ch + c)}V${f(h - R)}A${R} ${R} 0 0 1 ${f(w - cw - R)} ${h}`;
-    } else d += `V${h - R}A${R} ${R} 0 0 1 ${w - R} ${h}`;
-    if (L) { const cw = L.nw, ch = L.nh, c = Math.min(L.c, cw / 2, ch / 2), r = Math.min(R, cw / 2 + 1, ch / 2 + 1);
-      d += `H${f(cw + R)}A${R} ${R} 0 0 1 ${f(cw)} ${f(h - R)}V${f(h - ch + c)}A${c} ${c} 0 0 0 ${f(cw - c)} ${f(h - ch)}H${r}A${r} ${r} 0 0 1 0 ${f(h - ch - r)}`;
-    } else d += `H${R}A${R} ${R} 0 0 1 0 ${h - R}`;
-    kcv.style.clipPath = `path('${d}Z')`; kcv.classList.add('is-notched');
-    /* وأزرارُ النظر والخريطةُ تتنحّى عن الفجوة التي في زاويتها */
-    const kr = kcv.getBoundingClientRect();
-    ui.forEach(x => { const r = x.getBoundingClientRect(); if (!r.width) return;
-      const right = r.left + r.width / 2 > kr.left + kr.width / 2;
-      x.style.marginRight = right && Rn ? f(Rn.nw) + 'px' : ''; x.style.marginLeft = !right && L ? f(L.nw) + 'px' : ''; });
+    const TG = { mid: '.kt-view--tree > .kcv', book: '.pk-src > .pk-vwph', bank: '.pk-bank > .pk-vwph' };
+    const f = n => Math.round(n * 100) / 100, R = 14, on = card.classList.contains('pk--icB');
+    Object.keys(TG).forEach(k => {
+      const el = card.querySelector('.post-ytmain > .pk-split > ' + TG[k]);
+      if (!el) return;
+      const ui = [...el.querySelectorAll(':scope > .kcv-ui, :scope > .kcv-map')];
+      const mine = ns.filter(n => n.k === k);
+      if (!on || !mine.length) {
+        if (el.classList.contains('is-notched')) { el.style.clipPath = ''; el.classList.remove('is-notched'); el.querySelector(':scope > .pk-nclip')?.remove(); ui.forEach(x => { x.style.marginLeft = x.style.marginRight = ''; }); }
+        return;
+      }
+      /* حدُّه يُرسم على الشكل المقصوص نفسِه (بلونه ونمطه)، لا يبقى مستطيلًا مقطوعًا عند الفجوتين */
+      let sv = el.querySelector(':scope > .pk-nclip');
+      if (!sv) {
+        const cs = getComputedStyle(el), bw = parseFloat(cs.borderTopWidth) || 0;
+        sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); sv.setAttribute('class', 'pk-nclip'); sv.setAttribute('aria-hidden', 'true'); sv.style.inset = `-${bw}px`;
+        const pth = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pth.setAttribute('fill', 'none'); pth.setAttribute('stroke', cs.borderTopColor); pth.setAttribute('stroke-width', String(bw * 2));
+        if (cs.borderTopStyle === 'dashed') pth.setAttribute('stroke-dasharray', `${bw * 3} ${bw * 2.6}`);
+        if (!bw || cs.borderTopStyle === 'none') pth.setAttribute('stroke', 'none');
+        sv.appendChild(pth); el.prepend(sv);
+      }
+      el.classList.add('is-notched');
+      const w = el.offsetWidth, h = el.offsetHeight;
+      const L = mine.find(n => n.sd !== 'r'), Rn = mine.find(n => n.sd === 'r');
+      let d = `M0 ${R}A${R} ${R} 0 0 1 ${R} 0H${f(w - R)}A${R} ${R} 0 0 1 ${w} ${R}`;
+      if (Rn) { const cw = Rn.nw, ch = Rn.nh, c = Math.min(Rn.c, cw / 2, ch / 2), r = Math.min(R, cw / 2 + 1, ch / 2 + 1);
+        d += `V${f(h - ch - r)}A${r} ${r} 0 0 1 ${f(w - r)} ${f(h - ch)}H${f(w - cw + c)}A${c} ${c} 0 0 0 ${f(w - cw)} ${f(h - ch + c)}V${f(h - R)}A${R} ${R} 0 0 1 ${f(w - cw - R)} ${h}`;
+      } else d += `V${h - R}A${R} ${R} 0 0 1 ${w - R} ${h}`;
+      if (L) { const cw = L.nw, ch = L.nh, c = Math.min(L.c, cw / 2, ch / 2), r = Math.min(R, cw / 2 + 1, ch / 2 + 1);
+        d += `H${f(cw + R)}A${R} ${R} 0 0 1 ${f(cw)} ${f(h - R)}V${f(h - ch + c)}A${c} ${c} 0 0 0 ${f(cw - c)} ${f(h - ch)}H${r}A${r} ${r} 0 0 1 0 ${f(h - ch - r)}`;
+      } else d += `H${R}A${R} ${R} 0 0 1 0 ${h - R}`;
+      d += 'Z';
+      el.style.clipPath = `path('${d}')`;
+      sv.setAttribute('viewBox', `0 0 ${w} ${h}`); sv.firstChild.setAttribute('d', d);
+      /* وأزرارُ النظر والخريطةُ تتنحّى عن الفجوة التي في زاويتها */
+      const kr = el.getBoundingClientRect();
+      ui.forEach(x => { const r = x.getBoundingClientRect(); if (!r.width) return;
+        const right = r.left + r.width / 2 > kr.left + kr.width / 2;
+        x.style.marginRight = right && Rn ? f(Rn.nw) + 'px' : ''; x.style.marginLeft = !right && L ? f(L.nw) + 'px' : ''; });
+    });
   }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
@@ -21828,7 +21847,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const keys = () => Object.keys(st).filter(x => x !== '_seen');
     keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now }; } });
     tasks.forEach(t => { const key = t.k + '|' + t.sd, e = st[key]; if (!e) st[key] = { from: first ? 1 : 0, to: 1, t0: now }; else if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now }; });
-    let busy = false; const kcvN = [];
+    let busy = false; const nchN = [];
     keys().forEach(key => {
       const e = st[key], v = val(e), [k, sd] = key.split('|');
       if (v < 1 && v > 0 && e.to === e.from) {}   /* (ثابت) */
@@ -21837,7 +21856,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!alive(k)) { delete st[key]; return; }
       const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
       const t = tasks.find(x => x.k + '|' + x.sd === key);
-      if (k === 'mid') kcvN.push({ sd, nw, nh, c });
+      nchN.push({ k, sd, nw, nh, c });
       apply(k, d => {
         const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
         let mm, hit = null;
@@ -21858,7 +21877,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         return d.replace(hit[0], seg);
       });
     });
-    pkKcvNotch(card, kcvN);
+    pkKcvNotch(card, nchN);
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
   }
   function pkBandDraw(card, tongues) {
