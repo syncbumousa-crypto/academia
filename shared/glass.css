@@ -637,3 +637,13 @@ html:root .market-tools .fcol-wrap.is-end .fcol-row { --me: 0px; }
   html:root .market-tools :is(.search, .filterwrap, .fpanel) {
     background: var(--lg-tint); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* ===== إيموجي النصوص (‎emojify‎ في app.js): صورُ أبل بحجم الحرف وعلى سطره ===== */
+img.emo {
+  display: inline-block;
+  width: 1.2em; height: 1.2em;
+  margin: 0 .05em;
+  vertical-align: -.22em;
+  object-fit: contain;
+  user-select: text;
+}
