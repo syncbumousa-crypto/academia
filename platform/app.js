@@ -9756,8 +9756,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
       const el = inRow && inRow.offsetParent ? inRow : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`) || (q === 'mid' && fp.querySelector('.pk-blkh--mid .pk-blkh__ic'));
       if (!el) return;
-      const r1 = el.getBoundingClientRect();
-      an.push(el.animate([{ transform: `translate(${(r0.left + r0.width / 2) - (r1.left + r1.width / 2)}px, ${(r0.top + r0.height / 2) - (r1.top + r1.height / 2)}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
+      /* وإزاحتُها الأصليّة (أيقونةُ رأس المساحة ‎translateY(-2px)‎) تبقى في آخر الحركة — فلا تنزل ثمّ تقفز إليها —
+         وحجمُها يبدأ من حجم السطر ويصغر إلى حجم رأس المساحة */
+      const r1 = el.getBoundingClientRect(), cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;
+      const sc = r1.width ? r0.width / r1.width : 1;
+      const dx = (r0.left + r0.width / 2) - (r1.left + r1.width / 2 - (bm ? bm.e : 0)), dy = (r0.top + r0.height / 2) - (r1.top + r1.height / 2 - (bm ? bm.f : 0));
+      an.push(el.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${sc})` }, { transform: bm ? cs.transform : 'none' }], { duration: D, easing: ez }));
     });
     /* والعنوانُ كان مُزاحًا في الصفّ لتسع الأيقوناتُ سطرَه: يعود إلى موضعه على المنحنى نفسِه */
     { const t0 = pkIcRowTtl[id], tt = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd > .x3-pkttl');
@@ -9773,7 +9777,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ga.finished.then(() => { blk.style.opacity = ''; g.remove(); }, () => { blk.style.opacity = ''; g.remove(); });
     }
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
+    /* ورأسُ الملخّص يظهر بما فيه عدا أيقونته — فهي تطير إلى موضعها فيه، ولو تحرّك الرأسُ لحملها معه فتنزل ثمّ تعلو */
+    const midHd = fp.querySelector('.post-ytmain > .pk-blkh--mid');
+    [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...fp.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
       .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
