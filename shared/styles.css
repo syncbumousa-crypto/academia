@@ -17726,9 +17726,9 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::b
 /* ===== ROADMAP-MAXICX · الواسعُ كالضيّق (النشر) =====
    الواسعُ يلبس ‎pk--icx‎: لا ترويسةَ أزرار، وخلفيّةُ الكتلة شفّافة (ويبقى لونُ المساهمة نفسِها لأنّها تملأ الشاشة)،
    و⋮ أصغر، وبلا مساحةٍ مفتوحة: «ابدأ بـ» والأيقوناتُ تحت العنوان كما في الصفّ (‎pk--icnone‎) */
-#cm-body .pk--icx.pk--maxpub { --pk-band: transparent; --pk-gap: transparent; }
-#cm-body .pk--icx.pk--maxpub > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
-#cm-body .pk--icx.pk--maxpub .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
+#cm-body .pk--icx.pk--max { --pk-band: transparent; --pk-gap: transparent; }
+#cm-body .pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
+#cm-body .pk--icx.pk--max .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
 #cm-body .pk--icx.pk--icnone .x3-pkhd { margin-bottom: 34px; }
 #cm-body .pk--icx.pk--icnone .pk-icrow { top: 43px; inset-inline-start: 60px; align-items: center; gap: 4px; }
 #cm-body .pk--icx.pk--icnone .pk-ic { width: 26px; height: 26px; color: #35455c; }
