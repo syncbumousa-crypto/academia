@@ -17530,3 +17530,13 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 :is(.pk--max, .pk--frame).pk--ftdn .post-ytmain > .pk-split { margin-bottom: 0; }
 :is(.pk--max, .pk--frame).pk--ftdn .pk-ftline { margin-top: 8px; margin-bottom: -14px; }
 .pk--ftanim .post-ytmain > .pk-split { transition: margin .22s ease; }
+/* مفاتيحُ المساحات في الرأس بألوان كتلها (طلبُ صاحب الموقع): المفتوحةُ بلون الكتلة، والنشِطةُ بلون الكتلة النشِطة،
+   والمغلقةُ كما هي */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:has(> .pk-vbar__b.on) { background: var(--pk-blk); border-color: transparent; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on { background: transparent; }
+.pk-act--book .pk-vbar__cap--nm:has(> [data-pkview="source"].on),
+.pk-act--mid .pk-vbar__cap--dd:has(> .pk-vbar__b.on),
+.pk-act--bank .pk-vbar__cap--qb:has(> .pk-vbar__b.on) { background: var(--pk-blk-on) !important; box-shadow: 0 1px 3px rgba(20, 35, 63, .1); }
+html[data-theme="dark"] :is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-vbar__cap--nm { box-shadow: none; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm { transition: background .2s, border-color .2s; }
