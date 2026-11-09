@@ -9422,12 +9422,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (me) { pkFs[me.id] = nn.id; pkFocusNew = nn.id; pkNaming = nn.id; }
     renderCmSection();
   }
+  /* ===== الدخولُ من «لا مساحةَ مفتوحة» (طلبُ صاحب الموقع: كانت حركتُه سيّئة) =====
+     لا ذيلَ هناك تنطلق منه المنطقة، فيُرسم الجديدُ في مكانه ثمّ يظهر هو وكتلتُه معًا: يتلاشى إلى الظهور صاعدًا قليلًا */
+  const pkFromNoneCheck = el => { const post = el.closest && el.closest('.post'); return !!(post && post.querySelector('.post-ytmain > .pk-split--none')); };
+  function pkFromNoneRender(id) {
+    renderCmSection();
+    if (bkReduce()) return;
+    const ctl = document.querySelector(`#cm-body [data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
+    if (!post) return;
+    const els = [...post.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-split, .pk-ftline, .vt-foot, .pk-pubfoot)')];
+    els.forEach(e => e.animate([{ opacity: 0, transform: 'translateY(10px) scale(.985)' }, { opacity: 1, transform: 'none' }],
+      { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
+    pkAnimsNextFrame(post);
+  }
+  /* والنقرُ على مفتاح المصادر أو البنك في تلك الحال: قبل محرّك الحركة (على النافذة في طور الالتقاط) */
+  window.addEventListener('click', e => {
+    const pv = e.target.closest && e.target.closest('#cm-body [data-pkview="source"], #cm-body [data-pkview="folder"]');
+    if (!pv || !pkFromNoneCheck(pv)) return;
+    const id = pv.dataset.pkid; if (!id) return;
+    e.preventDefault(); e.stopPropagation();
+    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; pkAct[id] = 'book'; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree'; }
+    else { pkBank[id] = true; pkAct[id] = 'bank'; }
+    pkFromNoneRender(id);
+  }, true);
   /* إغلاقُ الملخّص وفتحُه (‎×‎ في ترويسته أو مفتاحُه في الرأس) */
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-pkmidx]');
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
     const id = b.dataset.pkid; if (!id) return;
+    if (pkFromNoneCheck(b)) { delete pkMidOff[id]; pkAct[id] = 'mid'; return pkFromNoneRender(id); }
     if (pkMidOff[id]) delete pkMidOff[id];
     else { pkMidOff[id] = true; if ((pkAct[id] || 'mid') === 'mid' && (pkSplitOn(id) || pkBankOn(id))) pkAct[id] = pkSplitOn(id) ? 'book' : 'bank'; }
     renderCmSection();

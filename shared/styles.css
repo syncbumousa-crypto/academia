@@ -17499,3 +17499,7 @@ html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__d
 .pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden; pointer-events: none; }
 /* لا مساحةَ مفتوحة: المساهمةُ بلا تذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame):has(.pk-split--none) :is(.pk-ftline, .vt-foot, .pk-pubfoot) { display: none; }
+/* الكتلُ تمتدّ تحت عمود الصورة أيضًا (طلبُ صاحب الموقع): لا تلتزم بمحاذاة رأس المساهمة، فتتوازن حافّتاها في المربّع */
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-split, :is(.pk--max, .pk--frame):not(.pk--hdup) .post-ytmain > .pk-split--none { margin-inline-start: -42px; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-fstrip { margin-inline-start: -12px; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-blkh--mid { margin-inline-start: -32px; }
