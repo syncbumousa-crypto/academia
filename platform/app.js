@@ -9639,10 +9639,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   /* ‏‎extra‎: ما يُغرس في كبسولة البنك يسارَ اسمه — عدّاداتُ المساهمة (طلبُ صاحب الموقع) */
+  /* والعدّاداتُ مطويّةٌ في الكبسولة: نقرُها يبسطها عشرَ ثوانٍ ثمّ تنطوي (طلبُ صاحب الموقع) — والموعدُ يعبر إعادةَ الرسم */
+  let pkStatsT = 0, pkStatsTm = 0;
+  window.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body .pk-vbar__cap--qb');
+    if (!b || !b.querySelector('.pk-vbar__stats')) return;
+    pkStatsT = Date.now() + 10000;
+    const on = () => document.querySelectorAll('#cm-body .pk-vbar__cap--qb').forEach(c => c.classList.toggle('is-stats', Date.now() < pkStatsT));
+    requestAnimationFrame(on); setTimeout(on, 60);
+    clearTimeout(pkStatsTm); pkStatsTm = setTimeout(on, 10050);
+  }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k]) => pkVbBtn(id, k, pkQbIc()).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}${extra ? `<span class="pk-vbar__stats">${extra}</span>` : ''}</span></span>`;
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm${extra && Date.now() < pkStatsT ? ' is-stats' : ''}">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k]) => pkVbBtn(id, k, pkQbIc()).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}${extra ? `<span class="pk-vbar__stats">${extra}</span>` : ''}</span></span>`;
   const pkViewSeg = id => id && pkLab() && !pkMidOff[id] ? `<span class="pk-vbar pk-vbar--foot" role="group" aria-label="${esc(T().pkViewBar)}"><span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>` : '';
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
