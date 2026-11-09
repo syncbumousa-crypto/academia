@@ -79,6 +79,18 @@ PICK = {
     (122149, 184, '', (r'^fin 301 >> fin 250', 1)),           # user4307 (2012): الاسمُ الجديد
     (50803,  7,  '', (r'^هذي ماده في غايه الاهميه', 1)),      # Fin.1000 (2006): سطرُ المادّة (‎FIN 301‎) من ردٍّ عن أربع مواد
   ],
+  # ‏‎ENGL 102‎ «مدخلٌ إلى كتابة التقارير» — اسمُها لم يتغيّر
+  'ENGL 102': [
+    (120479, 12, '', None), (120479, 13, '', None), (120479, 16, '', None),   # موضوعُ تقييم المقرّر
+    (120479, 17, '', None), (120479, 19, '', None), (120479, 20, '', None),
+    (120479, 21, '', None), (120479, 23, '', None), (120479, 24, '', None),
+    (120479, 25, '', None), (120479, 26, '', None), (120479, 27, '', None),
+    (120479, 28, '', None), (120479, 29, '', None),
+    (120479, 10, '', None), (120479, 18, '', None), (120479, 22, '', None),   # ودرجاتُها في توزيع الدرجات
+    (102863, 1,  '', (r'^انجلش 102', 31)),                    # student_NZ (2011): قسمُ 102 من شرحه للكورسات الثلاثة
+    (152978, 1,  '', None),                                   # user9292 (2013): شرطُ أخذها في الصيف من البلاك بورد
+    (144371, 7,  '', None),                                   # abdullah.d (2013): شكلُ الفاينل
+  ],
 }
 
 # ===== المصادر =====
@@ -144,6 +156,19 @@ PICK_SRC = {
      (r'^FIN250-182', 2)),       # _182 (2019): «مرفق مع الرد منهج المادة» — سطراه وملفُّه، لا تقييمُه للدكتور
     ('srcP', 128803, 8,  []),    # aziz33 (2014): التيست بانك مراجعةٌ لا بديلٌ عن الكتاب
   ],
+  'ENGL 102': [
+    ('srcU', 102863, 2,  []),    # student_NZ (2011): كيف تكتب الفيرست درافت للريبورت
+    ('srcU', 117638, 3,  []),    # user5571 (2012): وصفُ الفاينل من القسم (بارافريز وسمري)
+    ('srcU', 108227, 3,  []),    # Abu_3zzoz (2011): وصفُ فاينل ترم 102
+    ('srcU', 126436, 1,  []),    # sooonah (2012): خطواتُ السمري والبارافريز
+    ('srcU', 128226, 8,  []),    # _SpEcIaL_OnE (2012): السورسات من مكتبة الجامعة أونلاين
+    ('srcU', 172092, 3,  []),    # user10207 (2016): اختر موضوعًا يعجبك وابدأ بدري
+    ('srcU', 172092, 5,  []),    # user9248 (2016): موضوعٌ له علاقةٌ بتخصّصك
+    ('srcU', 123053, 4,  [('298667394001.doc', 'stkfupm-123053-4-298667394001.doc', r'^298667394001')]),   # user8554 (2012): مثالُ سورس إيفاليويشن كتبه
+    ('srcU', 136288, 21, [('102-S.Eval.Sheet by typing.doc', 'stkfupm-136288-21-102-S.Eval.Sheet by typing.doc', r'^102-S\.Eval')]),   # user4492 (2012): ورقةُ السورس إيفاليويشن
+    ('srcP', 108227, 2,  [('A Problem With Wind Power - summary practice.doc', 'stkfupm-108227-2-A Problem With Wind Power - summary practice.doc', r'^A%20Problem')]),   # user6095 (2011): تدريبُ سمري وبارافريز بنموذج حلّه (من كيفن مور)
+    ('srcP', 108227, 6,  [('Final Exam.zip', 'stkfupm-108227-6-Final Exam.zip', r'^Final Exam\.zip')]),   # AlRoosi (2011): سلايدُ الفاينل من سكشن جوش بيلام
+  ],
 }
 
 # ===== توزيعُ الدرجات و«المواضيع» =====
@@ -176,6 +201,14 @@ PICK_DATA = {
     ('grade',   120478, 5,   [('REFLECTIONS ON ENGLISH LEARNING', 5), ('VOCABULARY QUIZZES', 5), ('READING TESTS', 10),
                               ('WRITING TASKS', 40), ('ORAL PRESENTATIONS', 10), ('MIDTERM EXAMINATION', 15),
                               ('FINAL EXAMINATION', 15)]),                    # ISEngineer210: مكوّناتُ المقرّر ترم 112
+  ],
+  'ENGL 102': [
+    ('grade',   120479, 10,  [('ثلاثة ريدنق كوز', 15), ('ثلاثة رايتنق تاسك', 25), ('مدترم', 15), ('فاينل', 15),
+                              ('شغل الريبورت توتال', 20), ('برزنتيشن', 10)]),             # alhakem (122)
+    ('grade',   120479, 18,  [('3 كوزات ريدنق', 15), ('3 كوزات رايتنق', 30), ('ميدترم(ريدنق)', 10),
+                              ('الريبورت', 20), ('برزنتيشن', 10), ('فاينل.(ريدنق)', 15)]),  # Medoalkebsi (2014)
+    ('grade',   120479, 22,  [('Report', 20), ('Writing Tasks', 20), ('Midterm Exam', 15), ('RQs', 10),
+                              ('Presentation', 10), ('FE', 25)]),                           # osamah56 (152)
   ],
 }
 
@@ -235,10 +268,46 @@ DOCTORS = {
   'stk-dr-merdad':    'Dr. Hesham Merdad',
   # ومن كان في قائمة المادّة قبل النقل يُلحَق بصفّه هو (معرّفُه واسمُه هناك) لا يُكرَّر
   'p8mupxfw8a79m':    'Mansour Alsahlawi',
+  # ‏‎ENGL 102‎ — ومن لم يكن في ‎ENGL 101‎ بأسماء صفحاتهم في الموقع القديم
+  'stk-dr-en68613':  'Mr. Antonio Ellison',
+  'stk-dr-en115421': 'Mr. Keith Pearson',
+  'stk-dr-en179113': 'Mr. Jordan Hicks',
+  'stk-dr-en182475': 'Mr. Christopher Bartle',
+  'stk-dr-en183514': 'Mr. M. Aurelius',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
 PICK_DOC = {
+  # ‏‎ENGL 102‎ — من صفحات المدرّسين: ما صرّح كاتبُه أنّه عن 102 (لا «ترم 102» في مادّةٍ أخرى)
+  'ENGL 102': [
+    (68428, 29, 'stk-dr-en68428'), (68428, 41, 'stk-dr-en68428'), (68428, 42, 'stk-dr-en68428'), (68428, 44, 'stk-dr-en68428'), (68428, 45, 'stk-dr-en68428'), (68428, 51, 'stk-dr-en68428'), (68428, 52, 'stk-dr-en68428'), (68428, 59, 'stk-dr-en68428'),
+    (68435, 4, 'stk-dr-en68435'), (68435, 13, 'stk-dr-en68435'), (68435, 27, 'stk-dr-en68435'), (68435, 28, 'stk-dr-en68435'), (68435, 29, 'stk-dr-en68435'), (68435, 42, 'stk-dr-en68435'), (68435, 45, 'stk-dr-en68435'), (68435, 47, 'stk-dr-en68435'),
+    (68438, 6, 'stk-dr-en68438'), (68438, 22, 'stk-dr-en68438'),
+    (68439, 2, 'stk-dr-en68439'), (68439, 5, 'stk-dr-en68439'), (68439, 7, 'stk-dr-en68439'), (68439, 20, 'stk-dr-en68439'), (68439, 21, 'stk-dr-en68439'), (68439, 36, 'stk-dr-en68439'), (68439, 42, 'stk-dr-en68439'), (68439, 43, 'stk-dr-en68439'),
+    (68440, 20, 'stk-dr-en68440'), (68440, 24, 'stk-dr-en68440'), (68440, 26, 'stk-dr-en68440'), (68440, 27, 'stk-dr-en68440'), (68440, 29, 'stk-dr-en68440'), (68440, 47, 'stk-dr-en68440'),
+    (68441, 3, 'stk-dr-en68441'), (68441, 5, 'stk-dr-en68441'), (68441, 6, 'stk-dr-en68441'), (68441, 37, 'stk-dr-en68441'),
+    (68442, 39, 'stk-dr-en68442'),
+    (68443, 5, 'stk-dr-en68443'), (68443, 15, 'stk-dr-en68443'), (68443, 17, 'stk-dr-en68443'), (68443, 32, 'stk-dr-en68443'), (68443, 39, 'stk-dr-en68443'),
+    (68444, 61, 'stk-dr-en68444'), (68444, 69, 'stk-dr-en68444'), (68444, 71, 'stk-dr-en68444'), (68444, 89, 'stk-dr-en68444'), (68444, 90, 'stk-dr-en68444'), (68444, 92, 'stk-dr-en68444'),
+    (68447, 5, 'stk-dr-en68447'), (68447, 14, 'stk-dr-en68447'), (68447, 24, 'stk-dr-en68447'), (68447, 36, 'stk-dr-en68447'), (68447, 37, 'stk-dr-en68447'),
+    (68495, 2, 'stk-dr-en68495'), (68495, 33, 'stk-dr-en68495'),
+    (68516, 12, 'stk-dr-en68516'), (68516, 26, 'stk-dr-en68516'), (68516, 27, 'stk-dr-en68516'),
+    (68613, 28, 'stk-dr-en68613'), (68613, 37, 'stk-dr-en68613'), (68613, 53, 'stk-dr-en68613'),
+    (68614, 34, 'stk-dr-en68614'), (68614, 38, 'stk-dr-en68614'), (68614, 49, 'stk-dr-en68614'), (68614, 61, 'stk-dr-en68614'), (68614, 62, 'stk-dr-en68614'),
+    (69101, 44, 'stk-dr-en69101'), (69101, 51, 'stk-dr-en69101'),
+    (74185, 76, 'stk-dr-en74185'),
+    (76546, 84, 'stk-dr-en76546'), (76546, 85, 'stk-dr-en76546'), (76546, 100, 'stk-dr-en76546'), (76546, 112, 'stk-dr-en76546'), (76546, 113, 'stk-dr-en76546'),
+    (92113, 41, 'stk-dr-en92113'), (92113, 60, 'stk-dr-en92113'), (92113, 75, 'stk-dr-en92113'), (92113, 76, 'stk-dr-en92113'),
+    (94806, 31, 'stk-dr-en94806'), (94806, 34, 'stk-dr-en94806'),
+    (94986, 24, 'stk-dr-en94986'), (94986, 30, 'stk-dr-en94986'), (94986, 33, 'stk-dr-en94986'), (94986, 35, 'stk-dr-en94986'), (94986, 41, 'stk-dr-en94986'),
+    (96633, 16, 'stk-dr-en96633'), (96633, 29, 'stk-dr-en96633'), (96633, 33, 'stk-dr-en96633'), (96633, 63, 'stk-dr-en96633'), (96633, 68, 'stk-dr-en96633'),
+    (115421, 2, 'stk-dr-en115421'), (115421, 8, 'stk-dr-en115421'), (115421, 9, 'stk-dr-en115421'), (115421, 14, 'stk-dr-en115421'), (115421, 19, 'stk-dr-en115421'), (115421, 23, 'stk-dr-en115421'), (115421, 24, 'stk-dr-en115421'), (115421, 30, 'stk-dr-en115421'), (115421, 34, 'stk-dr-en115421'), (115421, 35, 'stk-dr-en115421'), (115421, 36, 'stk-dr-en115421'), (115421, 39, 'stk-dr-en115421'), (115421, 40, 'stk-dr-en115421'), (115421, 41, 'stk-dr-en115421'),
+    (118628, 20, 'stk-dr-en118628'), (118628, 32, 'stk-dr-en118628'), (118628, 36, 'stk-dr-en118628'), (118628, 37, 'stk-dr-en118628'),
+    (118979, 19, 'stk-dr-en118979'), (118979, 23, 'stk-dr-en118979'), (118979, 28, 'stk-dr-en118979'),
+    (179113, 2, 'stk-dr-en179113'), (179113, 3, 'stk-dr-en179113'), (179113, 4, 'stk-dr-en179113'), (179113, 6, 'stk-dr-en179113'), (179113, 8, 'stk-dr-en179113'), (179113, 13, 'stk-dr-en179113'), (179113, 15, 'stk-dr-en179113'), (179113, 16, 'stk-dr-en179113'),
+    (182475, 2, 'stk-dr-en182475'), (182475, 3, 'stk-dr-en182475'), (182475, 10, 'stk-dr-en182475'),
+    (183514, 6, 'stk-dr-en183514'),
+  ],
   'FIN 250': [
     # ‏‎FIN 301‎ (2011–2012) — المادّةُ نفسُها باسمها القديم
     (107073, 5, 'stk-dr-alnaeem'), (107073, 7, 'stk-dr-alnaeem'), (107073, 11, 'stk-dr-alnaeem'),
@@ -403,6 +472,15 @@ def imp_of(t, p):
     return {'src': 'stkfupm', 'url': '%s/t/%s/%d/%d' % (BASE, t['slug'], t['id'], p['post_number']),
             'user': p['username'], 'ts': ms(p['created_at']), 'tid': t['id'], 'pn': p['post_number']}
 
+# ===== معرّفُ المساهمة =====
+# مشاركةٌ تتكلّم عن موادَّ كثيرة قد تُنقل إلى أكثر من مادّة (ردُّ student_NZ عن 101 و102 و214)،
+# و‎ON CONFLICT (id)‎ يكتب فوق الأولى ولا يُنشئ الثانية. فالموادُّ التي نُقلت قبل هذا تبقى بمعرّفاتها
+# (‎stk-p<id>‎)، وما بعدها يحمل رمزَ مادّته (‎stk-p<id>-engl102‎).
+LEGACY = {'ACCT 210', 'IAS 111', 'ENGL 101', 'FIN 250'}
+
+def pid_of(code, p, pre='stk-p'):
+    return pre + str(p['id']) + ('' if code in LEGACY else '-' + code.replace(' ', '').lower())
+
 def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}
@@ -419,7 +497,7 @@ def main(src):
                 i = next(k for k, l in enumerate(ls) if re.search(keep[0], l, re.I))
                 desc = '\n'.join(ls[i:i + keep[1]])
             data = {'desc': desc, 'type': '', 'rel': 0, 'lang': '', 'book': book, 'imp': imp}
-            posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': 'info',
+            posts.append({'id': pid_of(code, p), 'uid': uid, 'code': code, 'sec': 'info',
                           'ts': imp['ts'], 'st': 'pub', 'data': data})
         # ---- «المصادر»: نصُّ الكاتب أسطرًا، وملفُّه في موضع مرفقه
         for ent in PICK_SRC.get(code, []):
@@ -468,7 +546,7 @@ def main(src):
                 html.append('\u200b<span data-fid="%s" class="src-fchip" contenteditable="false"></span>\u200b' % fid)
             missing = [f[0] for f in files if not any(f[0] == v['name'] for v in fobj.values())]
             if missing: sys.exit('لم يُعثر على سطر المرفق %s في %d#%d' % (missing, tid, num))
-            posts.append({'id': 'stk-p%d' % p['id'], 'uid': uid, 'code': code, 'sec': sec,
+            posts.append({'id': pid_of(code, p), 'uid': uid, 'code': code, 'sec': sec,
                           'ts': imp['ts'], 'st': 'pub',
                           'data': {'html': '<br>'.join(html), 'files': fobj, 'imp': imp}})
         # ---- «توزيع الدرجات» و«المواضيع»: بيانُ الكاتب بألفاظه
@@ -486,7 +564,7 @@ def main(src):
                 else:
                     names = spec
                 data = {'items': [{'num': '', 'name': n} for n in names], 'imp': imp}
-            posts.append({'id': 'stk-%s-p%d' % (sec, p['id']), 'uid': uid, 'code': code, 'sec': sec,
+            posts.append({'id': pid_of(code, p, 'stk-%s-p' % sec), 'uid': uid, 'code': code, 'sec': sec,
                           'ts': imp['ts'], 'st': 'pub', 'data': data})
         # ---- «الدكاترة»: مساهمةٌ واحدةٌ لكلّ كاتب (‎UNIQUE(uid, code, sec)‎)، وصفٌّ لكلّ دكتورٍ قيّمه
         rows = {}
@@ -499,7 +577,7 @@ def main(src):
                 sys.exit('%s كتب عن %s مرّتين في %s: صفٌّ واحدٌ للدكتور في المساهمة' % (uid, dr, code))
             have.append({'id': dr, 'n': DOCTORS[dr], 'en': '', 'img': '', 'e': '', 'bld': '', 'room': '',
                          'd': strip_att(text_of(p['cooked'])), 'hours': [], 'teach': 0, 'grade': 0,
-                         'pid': 'stk-p%d' % p['id'], 'imp': imp})
+                         'pid': pid_of(code, p), 'imp': imp})
         for uid, rs in rows.items():
             rs.sort(key=lambda r: r['imp']['ts'])
             posts.append({'id': 'stk-doc-%s-%s' % (uid[4:], code.replace(' ', '').lower()), 'uid': uid,
