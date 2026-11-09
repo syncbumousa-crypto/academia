@@ -21844,9 +21844,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         closed.forEach(x => { const q = x.dataset.pkic; if (q === inR) side.r = x; else if (q === inL) side.l = x; });
         closed.forEach(x => { if (x.dataset.pkic === 'mid') { if (!side.l) side.l = x; else side.r = x; } });
         const NW = 40, NH = 36, c = 12;
-        ['l', 'r'].forEach(sd => {
-          const bt = side[sd]; if (!bt) return;
-          const k = pick(sd);
+        /* والمصادرُ والبنكُ مفتوحان وحدَهما: الملخّصُ في زاوية مربّع البنك السفلى اليمنى — بينهما، حيث يدخل (طلبُ صاحب الموقع) */
+        const tasks = [];
+        const midBt = closed.find(x => x.dataset.pkic === 'mid');
+        if (midBt && src && bank && !mid) tasks.push({ bt: midBt, sd: 'r', k: 'bank' });
+        else ['l', 'r'].forEach(sd => { if (side[sd]) tasks.push({ bt: side[sd], sd, k: pick(sd) }); });
+        tasks.forEach(({ bt, sd, k }) => {
           out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => {
             /* الحافّةُ السفلى: قوسٌ ينتهي عند القاع ثمّ ‎H‎ يسارًا ثمّ قوسٌ يصعد */
             const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
