@@ -9645,6 +9645,114 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   /* ‏‎extra‎: ما يُغرس في كبسولة البنك يسارَ اسمه — عدّاداتُ المساهمة (طلبُ صاحب الموقع) */
+  /* ============================================================
+     كونسبت تجريبيّ (طلبُ صاحب الموقع، فرعٌ مستقلّ): مفاتيحُ المساحات أيقوناتٌ عارية
+     ============================================================
+     في المتّسعة في موضعها: الأيقوناتُ الثلاث بلا أسماءٍ ولا مربّعات، في السطر الثاني تحت العنوان. ونقرُ إحداها
+     يُنبت مربّعَ مساحتها من خلفها (يكبر منها إلى موضعه)، وتستقرّ هي في زاويته — والأُخريان تخرجان إلى خارج
+     المربّع في زاويته العليا اليسرى. ونقرُ إحداهما يبدّل المساحة، وإغلاقُ المساحة يُعيد الأيقونات إلى سطرها */
+  const PK_ICX = true;
+  const PK_IC_KEYS = ['book', 'mid', 'bank'];
+  const pkIcOpenK = id => pkSplitOn(id) ? 'book' : pkBankOn(id) ? 'bank' : !pkMidOff[id] ? 'mid' : null;
+  const pkIcOne = id => !!pkIcOpenK(id);
+  const pkIcSvg = (k, id) => k === 'mid' ? pkMidIc(id)
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${k === 'book' ? PK_SRC_IC : pkQbIc()}</svg>`;
+  const pkIcRow = id => {
+    const on = pkIcOpenK(id);
+    return `<div class="pk-icrow" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
+      `<button type="button" class="pk-ic${k === on ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
+  };
+  const pkIcSet = (id, k) => {
+    pkSplit[id] = k === 'book'; pkBank[id] = k === 'bank';
+    if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
+    if (k === 'book' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    cxRowFresh = id;   /* خلوُّها في هذا الكونسبت عودةٌ إلى الأيقونات، لا طيّ */
+  };
+  /* مستطيلٌ بإحداثيّات المربّع */
+  const pkIcRel = (card, r) => { const c = card.getBoundingClientRect(); return { x: r.left - c.left - card.clientLeft, y: r.top - c.top - card.clientTop, w: r.width, h: r.height }; };
+  function pkIcGo(id, k, from) {
+    const post0 = from.closest('.post');
+    const D = 460 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)';
+    /* مواضعُ الأيقونات قبلُ (في سطرها، أو في الزاوية، أو في ترويسة المساحة المفتوحة) */
+    const before = {};
+    PK_IC_KEYS.forEach(q => {
+      const inRow = post0.querySelector(`.pk-icrow [data-pkic="${q}"]`);
+      const vis = inRow && inRow.offsetParent ? inRow : post0.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`);
+      if (vis) before[q] = vis.getBoundingClientRect();
+    });
+    const old = pkIcOpenK(id);
+    const oldPane = old && post0.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[old]}`);
+    const start = () => {
+      if (k) pkIcSet(id, k); else { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = id; }
+      renderCmSection();
+      const post = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
+      if (!post || bkReduce()) return;
+      const an = [];
+      /* الأيقوناتُ تنتقل من مواضعها القديمة إلى الجديدة (‎FLIP‎) */
+      PK_IC_KEYS.forEach(q => {
+        const r0 = before[q]; if (!r0) return;
+        const inRow = post.querySelector(`.pk-icrow [data-pkic="${q}"]`);
+        const el = inRow && inRow.offsetParent ? inRow : post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`);
+        if (!el) return;
+        const r1 = el.getBoundingClientRect();
+        const dx = (r0.left + r0.width / 2) - (r1.left + r1.width / 2), dy = (r0.top + r0.height / 2) - (r1.top + r1.height / 2);
+        if (Math.abs(dx) + Math.abs(dy) < 1) return;
+        an.push(el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
+      });
+      if (k) {
+        /* مربّعُ المساحة يكبر من خلف أيقونتها إلى موضعه، ثمّ يظهر ما فيه */
+        const blk = post.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = post.querySelector(':scope > .pk-band');
+        const r0 = before[k];
+        if (blk && band && r0) {
+          const bb = blk.getBBox(), a = pkIcRel(post, r0);
+          const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
+          Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+          band.after(g);
+          band.style.opacity = '0';
+          const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px' },
+            { transform: 'none', borderRadius: '16px' }], { duration: D, easing: ez });
+          an.push(ga);
+          ga.finished.then(() => { band.style.opacity = ''; g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).finished.then(() => g.remove(), () => g.remove()); }, () => { band.style.opacity = ''; g.remove(); });
+          const pane = post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
+          post.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .45, delay: D * .6, easing: 'ease-out', fill: 'backwards' })));
+          if (pane) [...pane.children].forEach(x => { if (!x.classList.contains('pk-blkh')) an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .45, delay: D * .6, easing: 'ease-out', fill: 'backwards' })); });
+        }
+      } else {
+        const msg = post.querySelector('.pk-split--none > .pk-none');
+        if (msg) an.push(msg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .5, delay: D * .4, easing: 'ease-out', fill: 'backwards' }));
+      }
+    };
+    /* المساحةُ القديمةُ تنكمش إلى أيقونتها أوّلًا (إن كانت) */
+    if (oldPane && !bkReduce()) {
+      const blk = post0.querySelector(`:scope > .pk-band path.pk-blk[data-k="${old}"]`), band = post0.querySelector(':scope > .pk-band');
+      const tgt = k ? null : post0.querySelector(`.pk-icrow [data-pkic="${old}"]`);
+      post0.pkBlkHold = true;
+      const fade = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...oldPane.children]
+        .map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-in', fill: 'forwards' }));
+      if (blk && band) {
+        const bb = blk.getBBox(), ic = oldPane.querySelector('.pk-blkh__ic'), r = pkIcRel(post0, (ic || oldPane).getBoundingClientRect());
+        const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
+        Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+        band.after(g); band.style.opacity = '0';
+        fade.push(g.animate([{ transform: 'none', opacity: 1 }, { transform: `translate(${r.x - bb.x}px, ${r.y - bb.y}px) scale(${r.w / bb.width}, ${r.h / bb.height})`, opacity: .2 }],
+          { duration: D * .6, delay: D * .15, easing: 'cubic-bezier(.5, 0, .3, 1)', fill: 'forwards' }));
+      }
+      Promise.all(fade.map(a => a.finished.catch(() => {}))).then(start);
+      return;
+    }
+    start();
+  }
+  window.addEventListener('click', e => {   /* على النافذة: قبل مستمعي إغلاق المساحات */
+    const b = e.target.closest && e.target.closest('#cm-body .pk--icx [data-pkic]');
+    const x = !b && e.target.closest && e.target.closest('#cm-body .pk--icx .pk-blkh__x');
+    if (!b && !x) return;
+    e.preventDefault(); e.stopPropagation();
+    const post = (b || x).closest('.post'), id = post && post.dataset.ck;
+    if (!id || post.pkIcBusy) return;
+    post.pkIcBusy = true;
+    if (b) { const k = b.dataset.pkic; pkIcGo(id, k === pkIcOpenK(id) ? null : k, b); }
+    else pkIcGo(id, null, x);
+  }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
@@ -11579,7 +11687,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' : '') : '') : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -11589,7 +11697,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
-          ${framed ? reactRowHTML(p, likeAttr, '') : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
+          ${framed ? reactRowHTML(p, likeAttr, '') : ''}
+          ${framed && PK_ICX ? pkIcRow(p.id) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
                قواعدُ الرحلة (القضيبُ والدوائرُ ومواضعُها ومقاساتُها) معلّقةٌ بـ
