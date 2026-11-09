@@ -9655,12 +9655,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PK_IC_KEYS = ['book', 'mid', 'bank'];
   const pkIcOpenK = id => pkSplitOn(id) ? 'book' : pkBankOn(id) ? 'bank' : !pkMidOff[id] ? 'mid' : null;
   const pkIcOne = id => !!pkIcOpenK(id);
+  const pkIcOpenSet = id => PK_IC_KEYS.filter(k => k === 'book' ? pkSplitOn(id) : k === 'bank' ? pkBankOn(id) : !pkMidOff[id]);
   const pkIcSvg = (k, id) => k === 'mid' ? pkMidIc(id)
     : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${k === 'book' ? PK_SRC_IC : pkQbIc()}</svg>`;
   const pkIcRow = (id, row) => {
-    const on = row ? null : pkIcOpenK(id);   /* في الصفّ الضيّق لا مفتوحَ — الثلاثُ ظاهرة */
+    const on = row ? [] : pkIcOpenSet(id);   /* في الصفّ الضيّق لا مفتوحَ — الثلاثُ ظاهرة */
     return `<div class="pk-icrow" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
-      `<button type="button" class="pk-ic${k === on ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
+      `<button type="button" class="pk-ic${on.includes(k) ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
   };
   const pkIcSet = (id, k) => {
     pkSplit[id] = k === 'book'; pkBank[id] = k === 'bank';
@@ -9776,6 +9777,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     setTimeout(() => fp.classList.add('pk--frout'), D * .8);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(done);
   }
+  /* ===== وأكثرُ من مساحةٍ معًا (طلبُ صاحب الموقع): أيقونةُ المغلقة تضيفها، وأيقونةُ المفتوحة (في زاوية مربّعها) تُغلقها —
+     بحركات الدخول والخروج نفسها (مفاتيحُ الرأس الخفيّة تُنقر). وإغلاقُ الأخيرة يُعيد المساهمةَ صفًّا ===== */
+  function pkIcToggle(post, k) {
+    const id = post.dataset.ck, open = pkIcOpenSet(id);
+    if (open.includes(k) && open.length === 1) { post.pkIcBusy = true; return pkIcCollapse(id, post); }
+    if (!open.length) { post.pkIcBusy = true; return pkIcGo(id, k, post.querySelector(`.pk-icrow [data-pkic="${k}"]`) || post); }
+    const key = k === 'book' ? '[data-pkview="source"]' : k === 'bank' ? '[data-pkview="folder"]' : '[data-pkmidx]';
+    const tg = post.querySelector('.x3-pkhd > .pk-vbar ' + key);
+    cxRowFresh = id;   /* لا يُطوى بخلوٍّ عابر */
+    if (tg) tg.click();
+    /* والأيقوناتُ تظهر في مواضعها الجديدة */
+    requestAnimationFrame(() => {
+      const p2 = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
+      if (p2 && !bkReduce()) p2.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { if (x.offsetParent) x.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2, .8, .2, 1)' }); });
+    });
+  }
   function pkIcGo(id, k, from) {
     const post0 = from.closest('.post');
     const D = 460 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)';
@@ -9854,7 +9871,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (ic) {
       e.preventDefault(); e.stopPropagation();
       const post = ic.closest('.post');
-      if (post && !post.pkIcBusy) { post.pkIcBusy = true; pkIcCollapse(post.dataset.ck, post); }
+      const k = ic.closest('.pk-src') ? 'book' : ic.closest('.pk-bank') ? 'bank' : 'mid';
+      if (post && !post.pkIcBusy) pkIcToggle(post, k);
       return;
     }
     const b = e.target.closest && e.target.closest('#cm-body .pk--icx [data-pkic]');
@@ -9865,7 +9883,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!id || post.pkIcBusy) return;
     post.pkIcBusy = true;
     if (b && post.classList.contains('pk--icrow')) return pkIcExpand(id, b.dataset.pkic, post);   /* من الصفّ الضيّق: تتّسع على مساحتها */
-    if (b) { const k = b.dataset.pkic; pkIcGo(id, k === pkIcOpenK(id) ? null : k, b); }
+    if (b) { post.pkIcBusy = false; return pkIcToggle(post, b.dataset.pkic); }
     else pkIcGo(id, null, x);
   }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
@@ -21810,23 +21828,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b)); }
     /* الأرضيّةُ تبدأ من خطّ الرأس نفسِه (منتصفِ مسكته، حيث ينتهي شريطُه) — فلا يبقى بينهما شريطٌ بلون المربّع */
     const hdl = card.querySelector('.pk-hdline:not(.pk-ftline)'), gT = hdl ? (h => h.t + h.h / 2)(R(hdl)) : top - 12;
-    /* ===== كونسبت الأيقونات: مربّعُ المساحة الوحيدة فيه فجوةٌ في زاويته العليا اليسرى تسكنها الأيقونتان الأُخريان (طلبُ صاحب الموقع) ===== */
+    /* ===== كونسبت الأيقونات: المربّعُ الذي في الزاوية العليا اليسرى فيه فجوةٌ تسكنها أيقوناتُ المغلقة (طلبُ صاحب الموقع) =====
+       (والمفتوحُ أكثرُ من واحدة: الفجوةُ في أيسرها — وسقفُ الـT إن كان الملخّصُ مفتوحًا — وتتّسع بقدر ما أُغلق) */
     if (card.classList.contains('pk--ic1')) {
-      const one = [mid && 'mid', src && 'book', bank && 'bank'].filter(Boolean);
-      const row = card.querySelector('.pk-icrow');
-      if (one.length === 1 && row) {
-        const k = one[0], el = k === 'mid' ? mid : k === 'book' ? src : bank, e = R(el);
-        const x0 = (k === 'mid' && head) ? s.l : e.l, x1 = (k === 'mid' && head) ? s.r : e.r, y0 = (k === 'mid' && head) ? top : e.t, y1 = e.b;
-        const NW = 66, NH = 34, r = RD, c = 12;
-        const d = `M${f(x0 + NW + r)} ${f(y0)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(y0 + r)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}`
-          + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}V${f(y0 + NH + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y0 + NH)}`
-          + `H${f(x0 + NW - c)}A${c} ${c} 0 0 0 ${f(x0 + NW)} ${f(y0 + NH - c)}V${f(y0 + r)}A${r} ${r} 0 0 1 ${f(x0 + NW + r)} ${f(y0)}Z`;
-        out = out.replace(/<path class="pk-blk([^"]*)" data-k="[^"]*" d="[^"]*"\/>/, `<path class="pk-blk$1" data-k="${k}" d="${d}"/>`);
-        /* والأيقونتان في وسط الفجوة */
-        const pr = row.offsetParent ? row.offsetParent.getBoundingClientRect() : cb;
-        const rw = row.offsetWidth, rh = row.offsetHeight;
-        row.style.left = f(ox + x0 + (NW - rw) / 2 - 2 - pr.left) + 'px';
-        row.style.top = f(oy + y0 + (NH - rh) / 2 - 2 - pr.top) + 'px';
+      const row = card.querySelector('.pk-icrow'), vis = row ? [...row.querySelectorAll('[data-pkic]')].filter(x => !x.classList.contains('is-on')).length : 0;
+      if (row && vis) {
+        const cand = [mid && head && 'mid', src && 'book', bank && 'bank', mid && !head && 'mid'].filter(Boolean);
+        const k = mid && head ? 'mid' : cand.sort((p, q) => R(p === 'book' ? src : p === 'bank' ? bank : mid).l - R(q === 'book' ? src : q === 'bank' ? bank : mid).l)[0];
+        const NW = 12 + vis * 28, NH = 34, c = 12;
+        out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => {
+          const mm = d.match(/^M([\d.-]+) ([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/);
+          if (!mm) return m0;
+          const x0 = +mm[1], r = +mm[3], y0 = +mm[5];
+          let body = d.slice(mm[0].length).replace(/V[\d.-]+Z$/, '').replace(/Z$/, '');
+          const nd = `M${f(x0 + NW + r)} ${f(y0)}` + body
+            + `V${f(y0 + NH + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y0 + NH)}H${f(x0 + NW - c)}A${c} ${c} 0 0 0 ${f(x0 + NW)} ${f(y0 + NH - c)}V${f(y0 + r)}A${r} ${r} 0 0 1 ${f(x0 + NW + r)} ${f(y0)}Z`;
+          const pr = row.offsetParent ? row.offsetParent.getBoundingClientRect() : cb;
+          row.style.left = f(ox + x0 + (NW - row.offsetWidth) / 2 - 2 - pr.left) + 'px';
+          row.style.top = f(oy + y0 + (NH - row.offsetHeight) / 2 - 2 - pr.top) + 'px';
+          return `<path class="pk-blk${cls}" data-k="${k}" d="${nd}"/>`;
+        });
       }
     }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
