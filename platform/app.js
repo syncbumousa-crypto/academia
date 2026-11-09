@@ -11621,9 +11621,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
            حرفٌ مرئيٌّ صارت ضارّة — الاسمُ المتاحُ يصير «اختبر هذه الرزمة كلَّها» ولا يحوي
            «ابدأ» التي يراها الناظر، فمن نادى الزرَّ باسمه المرئيّ (تحكُّمًا بالصوت) لم يُصبه.
            فالاسمُ الآنَ متنُ الزرّ، و‎title‎ وصفُه. -->
-      ${countLeaf(deck)
-        ? `<button type="button" class="cx-pktest" title="${esc(kind === 'c' ? T().pkGoT : T().pkGoV)}"
-             ><span>${esc(T().pkGo)}</span></button>` : ''}
+      <!-- (وقد شِيل «ابدأ» من المساهمات بطلب صاحب الموقع) -->
       ${x3TtlHTML(p)}
 
       <!-- ===== ودائرةُ الرزمة كلِّها يسارَ عنوانها =====
