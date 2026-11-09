@@ -9725,6 +9725,57 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       .forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .35, delay: D * .7, easing: 'ease-out', fill: 'backwards' })));
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
+  /* ===== والإغلاقُ عكسُ الانقسام: المربّعُ ينكمش إلى أيقونته، والتذييلُ يصعد إلى الترويسة فيلتئمان صفًّا، والأيقوناتُ
+     تعود إلى سطرها تحت العنوان — ثمّ يُرسم الصفُّ الضيّق (والمواضعُ هي هي) ===== */
+  function pkIcCollapse(id, fp) {
+    const k = pkIcOpenK(id);
+    const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; renderCmSection(); };
+    if (!k || bkReduce()) return done();
+    fp.pkBlkHold = true;
+    const D = 560 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.4, 0, .2, 1)', an = [];
+    const fr = fp.getBoundingClientRect(), h1 = fr.height, cs = getComputedStyle(fp);
+    const hl = fp.querySelector('.pk-hdline:not(.pk-ftline)'), fl = fp.querySelector('.pk-ftline'), rr = fp.querySelector('.post-yt > .post-ytmain > .post-react');
+    const hH = hl ? hl.getBoundingClientRect().top + hl.offsetHeight / 2 - fr.top : h1;
+    const fH = fl ? fr.bottom - (fl.getBoundingClientRect().top + fl.offsetHeight / 2) : 0;
+    const h0 = rr ? rr.getBoundingClientRect().bottom - fr.top + 4 : hH, hs = Math.max(h0, hH + fH), o1 = .82;
+    /* مواضعُ الأيقونات في سطرها (‎.pk-icrow‎ في الصفّ: تحت العنوان، بإزاحته من بداية العمود) */
+    const main = fp.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), en = state.lang === 'en';
+    const slot = i => { const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
+    /* المحتوى يخفت أوّلًا */
+    const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
+      .forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
+    /* المربّعُ ينكمش إلى موضع أيقونته في السطر */
+    const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
+    const r0 = slot(PK_IC_KEYS.indexOf(k));
+    if (blk && band) {
+      const bb = blk.getBBox(), a = pkIcRel(fp, r0);
+      const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
+      Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+      band.after(g); blk.style.opacity = '0';
+      an.push(g.animate([{ transform: 'none', borderRadius: '16px', opacity: 1 },
+        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', opacity: 1, offset: o1 },
+        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', opacity: 0 }], { duration: D, easing: ez, fill: 'forwards' }));
+    }
+    /* المربّعُ (المساهمة) يقصر حتى يلتصق التذييلُ بالترويسة، ثمّ يلتئمان صفًّا — والتذييلُ يلزم حافّته السفلى */
+    an.push(fp.animate([{ height: h1 + 'px', easing: ez }, { height: hs + 'px', offset: o1, easing: 'ease-in' }, { height: h0 + 'px' }], { duration: D, fill: 'forwards' }));
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
+      an.push(x.animate([{ transform: 'none', easing: ez }, { transform: `translateY(${hs - h1}px)`, offset: o1, easing: 'ease-in' }, { transform: `translateY(${h0 - h1}px)` }], { duration: D, fill: 'forwards' })));
+    /* وأدواتُ التذييل تخفت أوّلَ الصعود فلا تعلو على الترويسة */
+    fp.querySelectorAll('.post-ytmain > .pk-pubfoot > *, .post-ytmain > .pk-ftline .pk-hdline__grip').forEach(x =>
+      an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-in', fill: 'forwards' })));
+    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, delay: D * .5, fill: 'forwards' })));
+    /* الأيقوناتُ إلى سطرها: صاحبةُ المربّع من زاويته، والأُخريان من خارجه */
+    PK_IC_KEYS.forEach((q, i) => {
+      const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
+      const el = inRow && inRow.offsetParent ? inRow : (pane && q === k ? (pane.querySelector('.pk-blkh__ic') || fp.querySelector('.pk-blkh--mid .pk-blkh__ic')) : fp.querySelector('.pk-blkh--mid .pk-blkh__ic'));
+      if (!el) return;
+      const r = el.getBoundingClientRect(), t = slot(i);
+      an.push(el.animate([{ transform: 'none' }, { transform: `translate(${(t.left + 12) - (r.left + r.width / 2)}px, ${(t.top + 12) - (r.top + r.height / 2)}px)` }], { duration: D, easing: ez, fill: 'forwards' }));
+    });
+    setTimeout(() => fp.classList.add('pk--frout'), D * .8);
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(done);
+  }
   function pkIcGo(id, k, from) {
     const post0 = from.closest('.post');
     const D = 460 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)';
@@ -9798,6 +9849,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     start();
   }
   window.addEventListener('click', e => {   /* على النافذة: قبل مستمعي إغلاق المساحات */
+    /* أيقونةُ المساحة المفتوحة (في زاوية مربّعها) تُغلقه عكسَ ما فُتح: إلى الصفّ الضيّق والأيقوناتُ في سطرها */
+    const ic = e.target.closest && e.target.closest('#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-split .pk-blkh__ic, #cm-body .pk--icx.pk--ic1 .pk-blkh--mid .pk-blkh__ic');
+    if (ic) {
+      e.preventDefault(); e.stopPropagation();
+      const post = ic.closest('.post');
+      if (post && !post.pkIcBusy) { post.pkIcBusy = true; pkIcCollapse(post.dataset.ck, post); }
+      return;
+    }
     const b = e.target.closest && e.target.closest('#cm-body .pk--icx [data-pkic]');
     const x = !b && e.target.closest && e.target.closest('#cm-body .pk--icx .pk-blkh__x');
     if (!b && !x) return;
