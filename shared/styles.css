@@ -17720,3 +17720,5 @@ html:not([data-theme="dark"]) #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
   font: 400 15px/1 'IBM Plex Sans Arabic', sans-serif; color: rgba(20, 35, 63, .3); pointer-events: none;
 }
 html[data-theme="dark"] #cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::before { color: rgba(255, 255, 255, .28); }
+/* وفي الوضع الواسع (ملء الشاشة) لا أزرارَ إغلاقٍ في زوايا المساحات (طلبُ صاحب الموقع) — تُغلق من أزرارها في الترويسة */
+#cm-body :is(.pk--max, .pk--maxpub) .pk-blkh__x { display: none !important; }
