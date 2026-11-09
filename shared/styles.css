@@ -17599,3 +17599,6 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 .pk-split.is-in > .kt-view > * { animation: pkSplitIn .34s cubic-bezier(.2, .8, .2, 1) both; }
 html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInEn; }
 @media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view > * { animation: none; } }
+/* وطيُّ الرأس: هوامشُ الموازنة تنتقل بخطى عمود الصورة نفسها (‎.22s ease‎) — كانت تقفز فيميل بطنُ المساهمة ثمّ يعود (شكوى صاحب الموقع) */
+.pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: margin-inline-start .22s ease; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: none; } }
