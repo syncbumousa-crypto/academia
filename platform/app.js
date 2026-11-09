@@ -9524,9 +9524,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (band) band.after(gh); else post.prepend(gh);
         /* ٤. السقفُ ينكمش أفقيًّا وعموديًّا إلى وسطه، والجاران يصعدان ويتّسعان إليه */
         const i = gh.firstElementChild, b = ghost.bar;
-        gh.style.transformOrigin = `${(b.left + b.right) / 2 - cr.left - post.clientLeft}px ${(b.top + b.bottom) / 2 - cr.top - post.clientTop}px`;
-        an.push(gh.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6, .2)', opacity: 1, offset: .7 }, { transform: 'scale(.4, 0)', opacity: 0 }],
-          { duration: D, easing: 'cubic-bezier(.55, 0, .3, 1)', fill: 'forwards' }));
+        /* من حافّته العليا: قاعُه يصعد بخطى الجارَين وهما يصعدان (المنحنى نفسُه والمدّةُ نفسُها) فلا يتراكبان */
+        gh.style.transformOrigin = `${(b.left + b.right) / 2 - cr.left - post.clientLeft}px ${b.top - cr.top - post.clientTop}px`;
+        an.push(gh.animate([{ transform: 'scale(1, 1)', opacity: 1 }, { transform: 'scale(.3, 0)', opacity: .6 }], { duration: D, easing: ez, fill: 'forwards' }));
       }
       /* الكتلُ تُرسم من موضع البداية (والحركاتُ قائمةٌ عليه) ثمّ تُثبَّت — لا إطارَ واحدًا بالحال الأخيرة قبلها */
       post.pkBlkHold = false; pkBandFit(post); post.pkBlkHold = true;
@@ -9555,13 +9555,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const st = { x: k.left - ox, y: bar.y + bar.h - 16, w: k.width, h: bb.y + bb.height - (bar.y + bar.h - 16) };
       barR = { left: bar.x + ox, right: bar.x + bar.w + ox, top: bar.y + oy, bottom: bar.y + bar.h + oy };
       const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
-      const g = mp.cloneNode(false); mp.after(g); mp.style.opacity = '0';
-      const D = 300 * slow, ez = pkBez(.65, 0, .35, 1), t0 = performance.now();
+      /* والجاران يتّسعان أفقيًّا معه إلى عرضيهما الأخيرين (نصفين، أو القسمةَ كلَّها لواحد)، والعمودُ يضيق بينهما وهو يصعد —
+         فلا يتراكبان. والكتلُ تُرسم حيّةً، وعمودُ الملخّص يُرسم فوقها بقامته الصاعدة */
+      const D = 300 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
+      const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
+      const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
+      const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
+      sides.forEach((x, i) => { x.style.boxSizing = 'border-box';
+        x.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ws[i] + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: wF + 'px' }], { duration: D, easing: cz, fill: 'forwards' }); });
+      kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
+      kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginLeft: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
+        { flexGrow: 0, flexShrink: 0, flexBasis: '0px', marginLeft: -gp + 'px', minWidth: '0px', paddingLeft: '0px', paddingRight: '0px' }], { duration: D, easing: cz, fill: 'forwards' });
+      const t0 = performance.now();
       return new Promise(res => {
         const step = now => {
-          const e = ez(Math.min(1, (now - t0) / D)), h = Math.max(16, st.h) * (1 - e) + 16 * e;
-          g.setAttribute('d', rr(bar.x, bar.y, bar.w, bar.h) + rr(st.x, st.y, st.w, h));
-          if (e < 1 && g.isConnected) requestAnimationFrame(step); else res();
+          if (!post0.isConnected) return res();
+          const e = ez(Math.min(1, (now - t0) / D)), h = Math.max(16, st.h) * (1 - e) + 16 * e, kk = R(kv0);
+          pkBandDraw(post0, []);
+          const m2 = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]');
+          if (m2) m2.setAttribute('d', rr(bar.x, bar.y, bar.w, bar.h) + (e < 1 ? rr(kk.left - ox, st.y, kk.width, h) : ''));
+          if (e < 1) requestAnimationFrame(step); else res();
         };
         requestAnimationFrame(step);
       });
