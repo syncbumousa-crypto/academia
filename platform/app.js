@@ -9677,8 +9677,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* مستطيلٌ بإحداثيّات المربّع */
   const pkIcRel = (card, r) => { const c = card.getBoundingClientRect(); return { x: r.left - c.left - card.clientLeft, y: r.top - c.top - card.clientTop, w: r.width, h: r.height }; };
-  /* ===== ومن الصفّ الضيّق: تتّسع المساهمةُ في موضعها (خلفيّةُ الترويسة ثمّ الانبساط) ومربّعُ المساحة يكبر من أيقونتها ===== */
-  /* شبحُ المربّع: نسخةٌ من مساره نفسِه (بفجواته) في طبقةٍ بمقاس طبقة الكتل — يُحرَّك بتحويلٍ أصلُه زاويةُ المربّع العليا */
+  /* ===== حركةُ الاتّساع من الصفّ الضيّق والطيِّ إليه (طلبُ صاحب الموقع: أوضحُ وأسلس) =====
+     مبدأٌ واحد: المربّعُ يُكشف من داخل أيقونته بقصٍّ يتّسع (‎clip-path‎) — شكلُه الحقيقيُّ بفجواته لا يُمطّ ولا يُشوَّه —
+     وقامةُ المساهمة والتذييلُ والأيقوناتُ تمضي معه على منحنًى واحدٍ ومدّةٍ واحدة، والمحتوى يظهر في آخره (ويغيب في أوّل الطيّ) */
   function pkIcGhost(card, blk, bb) {
     const band = card.querySelector(':scope > .pk-band');
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -9688,8 +9689,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowH = {};   /* قامةُ الصفّ الضيّق لكلّ مساهمة (تُحفظ عند الاتّساع ليُطوى إليها تمامًا) */
+  const PK_IC_EZ = 'cubic-bezier(.32, .72, 0, 1)';
+  const pkIcInset = (W, H, r, rad) => `inset(${r.y}px ${Math.max(0, W - r.x - r.w)}px ${Math.max(0, H - r.y - r.h)}px ${r.x}px round ${rad}px)`;
   function pkIcExpand(id, k, post0) {
     const h0 = post0.getBoundingClientRect().height, before = {};
+    pkIcRowH[id] = h0;
     post0.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { before[x.dataset.pkic] = x.getBoundingClientRect(); });
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
@@ -9698,101 +9703,82 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
     if (!fp || bkReduce()) return;
     cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
-    /* ===== الترويسةُ تنقسم (طلبُ صاحب الموقع): نصفُها الأعلى يبقى ترويسة، ونصفُها الأسفل ينزل فيصير تذييلًا،
-       ومربّعُ المساحة الأبيض يخرج بينهما من أيقونتها ===== */
-    const D = 620 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)', an = [];
-    const fr = fp.getBoundingClientRect(), h1 = fr.height, cs = getComputedStyle(fp);
-    const hl = fp.querySelector('.pk-hdline:not(.pk-ftline)'), fl = fp.querySelector('.pk-ftline');
-    const hH = hl ? hl.getBoundingClientRect().top + hl.offsetHeight / 2 - fr.top : h0;
-    const fH = fl ? fr.bottom - (fl.getBoundingClientRect().top + fl.offsetHeight / 2) : 0;
-    const hs = Math.max(h0, hH + fH);   /* الصفُّ يغلظ أوّلًا إلى ترويسةٍ وتذييلٍ ملتصقَين، ثمّ ينفصلان */
-    const o1 = .18;
-    an.push(fp.animate([{ height: h0 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, easing: 'ease-out' },
-      { height: hs + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, offset: o1, easing: ez },
-      { height: h1 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor }], { duration: D }));
-    /* التذييلُ (مسكتُه وأدواتُه وأرضيّتُه في طبقة الكتل) يلزم حافّةَ المربّع السفلى وهي تنزل */
-    const ty = [h0 - h1, hs - h1];
-    const foot = [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')];
-    foot.forEach(x => an.push(x.animate([{ transform: `translateY(${ty[0]}px)`, easing: 'ease-out' }, { transform: `translateY(${ty[1]}px)`, offset: o1, easing: ez }, { transform: 'none' }], { duration: D })));
-    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .2, fill: 'backwards' })));
-    /* الأيقوناتُ من سطرها إلى مواضعها: صاحبتُها إلى زاوية مربّعها، والأُخريان إلى خارجه */
+    const D = 560 * (window.__pkfxSlow || 1), ez = PK_IC_EZ, an = [];
+    const h1 = fp.getBoundingClientRect().height;
+    an.push(fp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: ez }));
+    /* التذييلُ يلزم الحافّةَ السفلى وهي تنزل */
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
+      an.push(x.animate([{ transform: `translateY(${h0 - h1}px)` }, { transform: 'none' }], { duration: D, easing: ez })));
+    fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .45, easing: 'ease-out', fill: 'backwards' })));
+    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .3, fill: 'backwards' })));
+    /* الأيقوناتُ من سطرها إلى مواضعها، على المنحنى نفسِه */
     PK_IC_KEYS.forEach(q => {
       const r0 = before[q]; if (!r0) return;
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
-      const el = inRow && inRow.offsetParent ? inRow : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`);
+      const el = inRow && inRow.offsetParent ? inRow : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`) || (q === 'mid' && fp.querySelector('.pk-blkh--mid .pk-blkh__ic'));
       if (!el) return;
       const r1 = el.getBoundingClientRect();
       an.push(el.animate([{ transform: `translate(${(r0.left + r0.width / 2) - (r1.left + r1.width / 2)}px, ${(r0.top + r0.height / 2) - (r1.top + r1.height / 2)}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
     });
-    /* والمربّعُ الأبيضُ يخرج من الأيقونة: شبحٌ بلونه يكبر منها، وكتلتُه الحقيقيّةُ مخفيّةٌ حتى يبلغها */
+    /* المربّعُ يُكشف من داخل أيقونته */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
     if (blk && band && before[k]) {
-      const bb = blk.getBBox(), a = pkIcRel(fp, before[k]);
-      const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
+      const bb = blk.getBBox(), a = pkIcRel(fp, before[k]), W = +band.getAttribute('width') || fp.clientWidth, H = +band.getAttribute('height') || fp.clientHeight;
+      const g = pkIcGhost(fp, blk, bb); g.style.transformOrigin = '';
       band.after(g); blk.style.opacity = '0';
-      const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: 0 },
-        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: o1 },
-        { transform: 'none', borderRadius: '16px' }], { duration: D, easing: ez });
+      const ga = g.animate([{ clipPath: pkIcInset(W, H, a, 8) }, { clipPath: pkIcInset(W, H, { x: bb.x - 1, y: bb.y - 1, w: bb.width + 2, h: bb.height + 2 }, 16) }], { duration: D, easing: ez });
       an.push(ga);
-      ga.finished.then(() => { blk.style.opacity = ''; g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).finished.then(() => g.remove(), () => g.remove()); }, () => { blk.style.opacity = ''; g.remove(); });
+      ga.finished.then(() => { blk.style.opacity = ''; g.remove(); }, () => { blk.style.opacity = ''; g.remove(); });
     }
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .35, delay: D * .7, easing: 'ease-out', fill: 'backwards' })));
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
+      .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
-  /* ===== والإغلاقُ عكسُ الانقسام: المربّعُ ينكمش إلى أيقونته، والتذييلُ يصعد إلى الترويسة فيلتئمان صفًّا، والأيقوناتُ
-     تعود إلى سطرها تحت العنوان — ثمّ يُرسم الصفُّ الضيّق (والمواضعُ هي هي) ===== */
+  /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
   function pkIcCollapse(id, fp) {
     const k = pkIcOpenK(id);
     const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; delete pkNotchSt[id]; renderCmSection(); };
     if (!k || bkReduce()) return done();
     fp.pkBlkHold = true;
-    const D = 560 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.4, 0, .2, 1)', an = [];
-    const fr = fp.getBoundingClientRect(), h1 = fr.height, cs = getComputedStyle(fp);
-    const hl = fp.querySelector('.pk-hdline:not(.pk-ftline)'), fl = fp.querySelector('.pk-ftline'), rr = fp.querySelector('.post-yt > .post-ytmain > .post-react');
-    const hH = hl ? hl.getBoundingClientRect().top + hl.offsetHeight / 2 - fr.top : h1;
-    const fH = fl ? fr.bottom - (fl.getBoundingClientRect().top + fl.offsetHeight / 2) : 0;
-    const h0 = rr ? rr.getBoundingClientRect().bottom - fr.top + 4 : hH, hs = Math.max(h0, hH + fH), o1 = .82;
-    /* مواضعُ الأيقونات في سطرها (‎.pk-icrow‎ في الصفّ: تحت العنوان، بإزاحته من بداية العمود) */
+    /* الطيُّ ليّنُ البدء والختام (لا يقفز في أوّله كما يقفز الاتّساعُ المنطلق) */
+    const D = 540 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.6, 0, .25, 1)', an = [];
+    const fr = fp.getBoundingClientRect(), h1 = fr.height;
+    /* قامةُ الصفّ الضيّق: ترويستُه وسطرُ أيقوناته وإعجابُه (كما في الصفّ) */
+    const hd = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd');
+    const h0 = pkIcRowH[id] || (hd ? hd.getBoundingClientRect().bottom - fr.top + 30 : 90);
     const main = fp.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), en = state.lang === 'en';
     const slot = i => { const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
-    /* المحتوى يخفت أوّلًا */
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
+    /* ١. المحتوى يغيب أوّلًا */
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
+      ...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *'), ...fp.querySelectorAll('.post-ytmain > .pk-hdline:not(.pk-ftline)')]
       .forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
-    /* المربّعُ ينكمش إلى موضع أيقونته في السطر */
+    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, fill: 'forwards' })));
+    /* ٢. المربّعُ ينطوي إلى أيقونته */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
-    const r0 = slot(PK_IC_KEYS.indexOf(k));
     if (blk && band) {
-      const bb = blk.getBBox(), a = pkIcRel(fp, r0);
-      const g = pkIcGhost(band.parentElement, blk, bb);   /* المربّعُ بشكله (فجواتُه مقطوعةٌ من أوّله) */
+      const bb = blk.getBBox(), W = +band.getAttribute('width') || fp.clientWidth, H = +band.getAttribute('height') || fp.clientHeight;
+      const a = pkIcRel(fp, slot(PK_IC_KEYS.indexOf(k)));
+      const g = pkIcGhost(fp, blk, bb); g.style.transformOrigin = '';
       band.after(g); blk.style.opacity = '0';
-      an.push(g.animate([{ transform: 'none', borderRadius: '16px', opacity: 1 },
-        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', opacity: 1, offset: o1 },
-        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', opacity: 0 }], { duration: D, easing: ez, fill: 'forwards' }));
+      an.push(g.animate([{ clipPath: pkIcInset(W, H, { x: bb.x - 1, y: bb.y - 1, w: bb.width + 2, h: bb.height + 2 }, 16), opacity: 1 },
+        { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     }
-    /* المربّعُ (المساهمة) يقصر حتى يلتصق التذييلُ بالترويسة، ثمّ يلتئمان صفًّا — والتذييلُ يلزم حافّته السفلى */
-    an.push(fp.animate([{ height: h1 + 'px', easing: ez }, { height: hs + 'px', offset: o1, easing: 'ease-in' }, { height: h0 + 'px' }], { duration: D, fill: 'forwards' }));
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
-      an.push(x.animate([{ transform: 'none', easing: ez }, { transform: `translateY(${hs - h1}px)`, offset: o1, easing: 'ease-in' }, { transform: `translateY(${h0 - h1}px)` }], { duration: D, fill: 'forwards' })));
-    /* وأدواتُ التذييل تخفت أوّلَ الصعود فلا تعلو على الترويسة */
-    fp.querySelectorAll('.post-ytmain > .pk-pubfoot > *, .post-ytmain > .pk-ftline .pk-hdline__grip').forEach(x =>
-      an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-in', fill: 'forwards' })));
-    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, delay: D * .5, fill: 'forwards' })));
-    /* الأيقوناتُ إلى سطرها: صاحبةُ المربّع من زاويته، والأُخريان من خارجه */
+    /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
+    an.push(fp.animate([{ height: h1 + 'px' }, { height: h0 + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
+      an.push(x.animate([{ transform: 'none' }, { transform: `translateY(${h0 - h1}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
+    /* ٣. الأيقوناتُ إلى سطرها */
     PK_IC_KEYS.forEach((q, i) => {
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
-      const el = inRow && inRow.offsetParent ? inRow : (pane && q === k ? (pane.querySelector('.pk-blkh__ic') || fp.querySelector('.pk-blkh--mid .pk-blkh__ic')) : fp.querySelector('.pk-blkh--mid .pk-blkh__ic'));
+      const el = inRow && inRow.offsetParent ? inRow : (q === 'mid' ? fp.querySelector('.pk-blkh--mid .pk-blkh__ic') : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`));
       if (!el) return;
       const r = el.getBoundingClientRect(), t = slot(i);
-      an.push(el.animate([{ transform: 'none' }, { transform: `translate(${(t.left + 12) - (r.left + r.width / 2)}px, ${(t.top + 12) - (r.top + r.height / 2)}px)` }], { duration: D, easing: ez, fill: 'forwards' }));
+      an.push(el.animate([{ transform: 'none', opacity: getComputedStyle(el).opacity }, { transform: `translate(${(t.left + 12) - (r.left + r.width / 2)}px, ${(t.top + 12) - (r.top + r.height / 2)}px)`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
-    setTimeout(() => fp.classList.add('pk--frout'), D * .8);
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(done);
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(done);
   }
-  /* ===== وأكثرُ من مساحةٍ معًا (طلبُ صاحب الموقع): أيقونةُ المغلقة تضيفها، وأيقونةُ المفتوحة (في زاوية مربّعها) تُغلقها —
-     بحركات الدخول والخروج نفسها (مفاتيحُ الرأس الخفيّة تُنقر). وإغلاقُ الأخيرة يُعيد المساهمةَ صفًّا ===== */
   function pkIcToggle(post, k) {
     const id = post.dataset.ck, open = pkIcOpenSet(id);
     if (open.includes(k) && open.length === 1) { post.pkIcBusy = true; return pkIcCollapse(id, post); }
