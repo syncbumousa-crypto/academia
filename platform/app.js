@@ -9730,7 +9730,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      تعود إلى سطرها تحت العنوان — ثمّ يُرسم الصفُّ الضيّق (والمواضعُ هي هي) ===== */
   function pkIcCollapse(id, fp) {
     const k = pkIcOpenK(id);
-    const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; renderCmSection(); };
+    const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; delete pkNotchSt[id]; renderCmSection(); };
     if (!k || bkReduce()) return done();
     fp.pkBlkHold = true;
     const D = 560 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.4, 0, .2, 1)', an = [];
@@ -21784,6 +21784,46 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الملخّصُ كتلةٌ على شكل حرف ‎T‎: سقفُها بعرض القسمة يحمل ترويستَه ومجلداتِه، وعمودُها نازلٌ في الوسط — وبين السقف والعمود
      زاويتان مقعّرتان. والمصادرُ والبنكُ كتلتان مستقلّتان تحت جناحَي السقف. كلُّها مدوّرةُ الزوايا ولا تتّصل بالذيل،
      والمختارةُ (‎pk-act--*‎) لونُها أفتح. تُقرأ من مستطيلات المناطق الحيّة — فترسمها حلقةُ الحركة كلَّ إطارٍ وهي تتّسع وتضيق */
+  /* ===== فجواتُ الكونسبت تنفتح وتلتئم بحركة (طلبُ صاحب الموقع) =====
+     كلُّ فجوةٍ (مربّعُها وجهتُها) لها مقدارٌ من صفرٍ إلى واحدٍ يُحفظ للمساهمة (يعبر إعادةَ الرسم): يُقبل إليه حين تُطلب ويُدبر عنه
+     حين تذهب أيقونتُها إلى مساحتها — فترجع الكتلةُ إلى زاويتها تُرسم أمامك */
+  const pkNotchSt = {};
+  function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
+    const id = card.dataset.ck || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
+    const now = performance.now(), DUR = 340 * (window.__pkfxSlow || 1), ez = pkBez(.3, .7, .2, 1);
+    const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
+    const want = new Set(tasks.map(t => t.k + '|' + t.sd));
+    const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
+    const keys = () => Object.keys(st).filter(x => x !== '_seen');
+    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now }; } });
+    tasks.forEach(t => { const key = t.k + '|' + t.sd, e = st[key]; if (!e) st[key] = { from: first ? 1 : 0, to: 1, t0: now }; else if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now }; });
+    let busy = false;
+    keys().forEach(key => {
+      const e = st[key], v = val(e), [k, sd] = key.split('|');
+      if (v < 1 && v > 0 && e.to === e.from) {}   /* (ثابت) */
+      if ((now - e.t0) < DUR) busy = true;
+      if (v <= .01) { if (e.to === 0 && now - e.t0 >= DUR) delete st[key]; return; }
+      if (!alive(k)) { delete st[key]; return; }
+      const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
+      const t = tasks.find(x => x.k + '|' + x.sd === key);
+      apply(k, d => {
+        const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
+        let mm, hit = null;
+        while ((mm = re.exec(d))) { if (+mm[5] < +mm[3]) { hit = mm; break; } }
+        if (!hit) return d;
+        const r = +hit[2], y1 = +hit[4], x1 = +hit[3] + r, x0 = +hit[6];
+        const seg = sd === 'r'
+          ? `V${f(y1 - nh - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1 - nh)}H${f(x1 - nw + c)}A${c} ${c} 0 0 0 ${f(x1 - nw)} ${f(y1 - nh + c)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - nw - r)} ${f(y1)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}`
+          : `V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + nw + r)}A${r} ${r} 0 0 1 ${f(x0 + nw)} ${f(y1 - r)}V${f(y1 - nh + c)}A${c} ${c} 0 0 0 ${f(x0 + nw - c)} ${f(y1 - nh)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - nh - r)}`;
+        if (t && pr) {
+          const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
+          t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
+        }
+        return d.replace(hit[0], seg);
+      });
+    });
+    if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
+  }
   function pkBandDraw(card, tongues) {
     const svg = card.querySelector(':scope > .pk-band'), ft = card.querySelector('.pk-ftline');
     const sp = card.querySelector('.post-ytmain > .pk-split');
@@ -21849,27 +21889,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const midBt = closed.find(x => x.dataset.pkic === 'mid');
         if (midBt && src && bank && !mid) tasks.push({ bt: midBt, sd: 'r', k: 'bank' });
         else ['l', 'r'].forEach(sd => { if (side[sd]) tasks.push({ bt: side[sd], sd, k: pick(sd) }); });
-        tasks.forEach(({ bt, sd, k }) => {
-          out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => {
-            /* الحافّةُ السفلى: قوسٌ ينتهي عند القاع ثمّ ‎H‎ يسارًا ثمّ قوسٌ يصعد */
-            const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
-            let mm, hit = null;
-            while ((mm = re.exec(d))) { if (+mm[5] < +mm[3]) { hit = mm; break; } }
-            if (!hit) return m0;
-            const r = +hit[2], y1 = +hit[4], x1 = +hit[3] + r, x0 = +hit[6];
-            let seg;
-            if (sd === 'r') seg = `V${f(y1 - NH - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1 - NH)}H${f(x1 - NW + c)}A${c} ${c} 0 0 0 ${f(x1 - NW)} ${f(y1 - NH + c)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - NW - r)} ${f(y1)}`
-              + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}`;
-            else seg = `V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + NW + r)}A${r} ${r} 0 0 1 ${f(x0 + NW)} ${f(y1 - r)}V${f(y1 - NH + c)}A${c} ${c} 0 0 0 ${f(x0 + NW - c)} ${f(y1 - NH)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - NH - r)}`;
-            /* (إن كانت في الجهتين على المربّع نفسِه: الثانيةُ تُبنى على ما خلّفته الأولى) */
-            d = d.replace(hit[0], seg);
-            const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
-            bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
-            return `<path class="pk-blk${cls}" data-k="${k}" d="${d}"/>`;
-          });
-        });
+        pkNotchDraw(card, tasks, NW, NH, c, (k, fn) => { out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => `<path class="pk-blk${cls}" data-k="${k}" d="${fn(d)}"/>`); },
+          k => !!elOf(k) && (k !== 'mid' || !!mid), ox, oy, pr, f);
       }
     }
+    if (card.classList.contains('pk--ic1') && !(card.querySelector('.pk-icrow [data-pkic]:not(.is-on)'))) pkNotchDraw(card, [], 40, 36, 12, (k, fn) => {
+      out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => `<path class="pk-blk${cls}" data-k="${k}" d="${fn(d)}"/>`); },
+      k => k === 'book' ? !!src : k === 'bank' ? !!bank : !!mid, ox, oy, null, f);
     /* وشريطُ المجلدات يُفسح لأيقونة الملخّص وقد تنحّت عن فجوة المصادر */
     if (card.classList.contains('pk--icR') !== notchR) card.classList.toggle('pk--icR', notchR);
     /* وما في المربّعات ينتهي فوق الفجوات السفلى */
