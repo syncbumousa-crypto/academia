@@ -9309,11 +9309,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkAct = {};
   /* والملخّصُ يُغلق كأخويه (طلبُ صاحب الموقع): ‎pkMidOff[id]‎ — ولا يُغلق وهو وحده */
   const pkMidOff = {};
+  /* ولا نشِطةَ إلّا ما لمسه المستخدم (طلبُ صاحب الموقع): الفتحُ من الرأس يضيف المساحةَ ولا يُنشِّطها، وإغلاقُ النشِطة
+     لا ينقل اللمسَ إلى غيرها — فتبقى بلا نشِطة حتى يلمس أخرى */
   const pkActOf = id => {
-    let a = pkAct[id] || 'mid';
-    if (a === 'mid' && pkMidOff[id]) a = pkSplitOn(id) ? 'book' : 'bank';
-    if (a === 'book' && !pkSplitOn(id)) return 'mid';
-    if (a === 'bank' && !pkBankOn(id)) return 'mid';
+    const a = pkAct[id];
+    if (!a) return null;
+    if (!(a === 'book' ? pkSplitOn(id) : a === 'bank' ? pkBankOn(id) : !pkMidOff[id])) { delete pkAct[id]; return null; }
     return a;
   };
   const PK_ACT_IC = {
@@ -9326,6 +9327,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkActB = (attr, ic, tip, cls = '') => `<button type="button" class="cx-actb${cls}" ${attr} title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></button>`;
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
+    if (!a) return pub ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* لا نشِطة: لا أدوات */
     if (a === 'book' && !pub && !pkSrcMeta(id)) return pkActB(`data-pksrcpick data-pkid="${esc(id)}"`, PK_ACT_IC.plus, T().pkSrcBtn, ' cx-actb--gold');
     if (a === 'book') {
       const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
@@ -9369,7 +9371,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkAct[id] = a;
     const now = pkActOf(id);
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
-    if (post.querySelector('.post-ytmain > .pk-split > :is(.pk-src, .pk-bank)')) post.classList.add('pk-act--' + now);
+    if (now) post.classList.add('pk-act--' + now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub'));
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
@@ -9449,8 +9451,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pv || !pkFromNoneCheck(pv)) return;
     const id = pv.dataset.pkid; if (!id) return;
     e.preventDefault(); e.stopPropagation();
-    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; pkAct[id] = 'book'; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree'; }
-    else { pkBank[id] = true; pkAct[id] = 'bank'; }
+    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree'; }
+    else pkBank[id] = true;
     pkFromNoneRender(id);
   }, true);
   /* إغلاقُ الملخّص وفتحُه (‎×‎ في ترويسته أو مفتاحُه في الرأس) */
@@ -9459,10 +9461,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!b) return;
     e.preventDefault(); e.stopPropagation();
     const id = b.dataset.pkid; if (!id) return;
-    if (pkFromNoneCheck(b)) { delete pkMidOff[id]; pkAct[id] = 'mid'; return pkFromNoneRender(id); }
+    if (pkFromNoneCheck(b)) { delete pkMidOff[id]; return pkFromNoneRender(id); }
     pkMidFx(id, b, () => {
-      if (pkMidOff[id]) { delete pkMidOff[id]; pkAct[id] = 'mid'; }   /* ما يُفتح يصير النشِط — كالمصادر والبنك */
-      else { pkMidOff[id] = true; if ((pkAct[id] || 'mid') === 'mid' && (pkSplitOn(id) || pkBankOn(id))) pkAct[id] = pkSplitOn(id) ? 'book' : 'bank'; }
+      if (pkMidOff[id]) delete pkMidOff[id];   /* يُضاف ولا يُنشَّط */
+      else pkMidOff[id] = true;               /* ولا ينتقل اللمسُ إلى غيره */
       renderCmSection();
     });
   }, true);
@@ -11520,7 +11522,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoDot = kind === 'c' ? packEntered(deck) : true;
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
-    const roAct = maxd && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) ? ' pk-act--' + pkActOf(p.id) : '';
+    const roAct = maxd && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
     const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
@@ -21474,7 +21476,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const f = n => Math.round(n * 100) / 100;
     const fr = R(ft), fy = fr.t + fr.h / 2 - 1;
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
-    const act = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k)) || 'mid';
+    const act = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k)) || null;   /* ولا نشِطة: كلُّها بلون الكتلة */
     const s = R(sp), col = getComputedStyle(sp).flexDirection.startsWith('column');
     const RD = 16, CC = 14;
     const box = (x0, y0, x1, y1) => {
@@ -21726,7 +21728,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let fold = Promise.resolve();
     if (band && blk) {
       const bb = blk.getBBox();
-      const p = blk.cloneNode(false); p.classList.add('is-on'); p.style.opacity = ''; blk.after(p); blk.style.opacity = '0';
+      const p = blk.cloneNode(false); p.style.opacity = '';   /* بلونها كما هي: نشِطةً أو لا */ blk.after(p); blk.style.opacity = '0';
       const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
       const ez = pkBez(.65, 0, .35, 1), D = 380 * slow, t0 = C * .85;
       p.setAttribute('d', rr(bb.x, bb.y, bb.width, bb.height));
@@ -21969,7 +21971,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const vwAlt = pkVwOf(p.id) !== 'folder';
     /* ورأسُ المساهمة (الغلافُ والشاراتُ والأخبار) يعدّ الشجرةَ المعروضة: البنكَ في المجلّديّ */
     const d = pkQbOn(cmCode, p) ? pkQbView(p.data) : p.data;
-    const act = (pkSplitOn(p.id) || pkBankOn(p.id)) ? ' pk-act--' + pkActOf(p.id) : '';
+    const act = pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
     /* ===== التحريرُ الضيّقُ في إطار المكبَّر (طلبُ صاحب الموقع): ترويسةٌ وتذييلٌ بمقبضيهما، والحذفُ والنشرُ فوق ===== */
     const fr = cxMax || pkLab();
     /* ولم يُعبَّأ بعدُ شيء: قامةُ المساهمة ثابتةٌ مهما فُتح من المساحات وأُغلق (طلبُ صاحب الموقع) */
@@ -23464,7 +23466,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         return;
       }
     }
-    const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
+    const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) || 'x' : 'x') : null;
     const bookR0 = pkLab() && post ? (post.querySelector('.post-ytmain > .pk-split > .pk-src') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
     const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
     const bankSpH0 = act0 === null && post && post.querySelector('.post-ytmain > .pk-split') ? post.querySelector('.post-ytmain > .pk-split').getBoundingClientRect().height : null;
@@ -23477,7 +23479,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
     pkBank[id] = !on;
-    if (!on) { pkPaneLast[id] = 'bank'; pkAct[id] = 'bank'; }   /* ما يُفتح يصير المنطقةَ النشِطة */
+    if (!on) pkPaneLast[id] = 'bank';   /* يُضاف ولا يُنشَّط (طلبُ صاحب الموقع) */
     if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
     renderCmSection();
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
@@ -23648,7 +23650,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return;
         }
       }
-      const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) : 'x') : null;
+      const act0 = post && post.classList.contains('pk--max') && pkLab() ? (post.classList.contains('pk--bandfx') ? pkActOf(id) || 'x' : 'x') : null;
       const bankW0 = pkLab() && sp ? (sp.querySelector(':scope > .pk-bank') || { getBoundingClientRect: () => null }).getBoundingClientRect() : null;
       const slot0 = act0 && post.querySelector('.cx-acttools') ? post.querySelector('.cx-acttools').innerHTML : null;
       const spH0 = act0 === null && sp ? sp.getBoundingClientRect().height : null;
@@ -23658,7 +23660,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const beforeR = before ? before.getBoundingClientRect() : null;
       if (to === 'source') {
         if (part) pkSplit[id] = false;
-        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; pkAct[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
+        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
       } else if (to !== cur) {
         pkVw[id] = to;
         if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
