@@ -17540,3 +17540,19 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__
 .pk-act--bank .pk-vbar__cap--qb:has(> .pk-vbar__b.on) { background: var(--pk-blk-on) !important; box-shadow: 0 1px 3px rgba(20, 35, 63, .1); }
 html[data-theme="dark"] :is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-vbar__cap--nm { box-shadow: none; }
 :is(.pk--max, .pk--frame) .pk-vbar__cap--nm { transition: background .2s, border-color .2s; }
+/* المغلقةُ نصٌّ بلا كبسولة، والكبسولةُ نفسُها علامةُ الفتح (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) { background: transparent; border-color: transparent; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) .pk-vbar__b { color: var(--u-mut); opacity: .75; transition: background .15s, color .15s, opacity .15s; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) .pk-vbar__b:hover { opacity: 1; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--dd:not(:has(> .pk-vbar__b.on)) .pk-vbar__dd { border-inline-start-color: transparent !important; }
+/* الذهبيُّ للنشِطة وحدها (طلبُ صاحب الموقع): المفتوحةُ غيرُ النشِطة بلون النصّ */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+:is(.pk--max, .pk--frame) .pk-vbar__cap--dd:has(> .pk-vbar__b.on) > .pk-vbar__dd { color: var(--u-ink, #14233f) !important; }
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--dd:has(> .pk-vbar__b.on) > .pk-vbar__dd { color: #e7eff0 !important; }
+.pk-act--book .pk-vbar__cap--nm > [data-pkview="source"].on,
+.pk-act--mid .pk-vbar__cap--dd > .pk-vbar__b.on,
+.pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color: #a9852f !important; }
+html[data-theme="dark"] .pk-act--book .pk-vbar__cap--nm > [data-pkview="source"].on,
+html[data-theme="dark"] .pk-act--mid .pk-vbar__cap--dd > .pk-vbar__b.on,
+html[data-theme="dark"] .pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color: #d4b36a !important; }
