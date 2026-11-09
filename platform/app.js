@@ -9464,11 +9464,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* أيقونةُ الملخّص: نصٌّ — سطورٌ تقصر من جهة البداية (طلبُ صاحب الموقع) */
   const PK_MID_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M8 10.5h12M4 15h16M11 19.5h9"/></svg>';
   const pkMidBtn = id => { const on = !pkMidOff[id];
-    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${PK_MID_IC}</button>`; };
+    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${PK_MID_IC}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
-    <span class="pk-vbar__cap pk-vbar__cap--solo">${pkVbBtn(id, 'source', PK_SRC_IC)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo">${pkMidBtn(id)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>`;
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkMidBtn(id)}</span>
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}</span></span>`;
   const pkViewSeg = id => id && pkLab() && !pkMidOff[id] ? `<span class="pk-vbar pk-vbar--foot" role="group" aria-label="${esc(T().pkViewBar)}"><span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>` : '';
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
