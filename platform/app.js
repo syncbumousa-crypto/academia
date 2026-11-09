@@ -9473,8 +9473,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkMidFx(id, btn, commit) {
     const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
     const closing = !pkMidOff[id];
-    if (bkReduce() || !pkLab() || !sp0 || sp0.classList.contains('pk-split--none') || getComputedStyle(sp0).flexDirection !== 'row'
-      || (closing && !pkSplitOn(id) && !pkBankOn(id))) return commit();
+    if (bkReduce() || !pkLab() || !sp0 || sp0.classList.contains('pk-split--none') || getComputedStyle(sp0).flexDirection !== 'row') return commit();
+    if (closing && !pkSplitOn(id) && !pkBankOn(id)) { if (!post0.pkMidRun) { post0.pkMidRun = true; pkSoloExit(post0, commit); } return; }   /* وحدَه: يخرج كتلةً واحدة */
     if (post0.pkBandAnim) pkFxFinish(post0);
     if (post0.pkMidRun) return;
     const R = el => el ? el.getBoundingClientRect() : null;
@@ -21702,8 +21702,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (Math.abs(w0 - w1) < .5) return;
     pane.animate([{ flexBasis: w0 + 'px' }, { flexBasis: w1 + 'px' }], { duration: dur, delay: delay || 0, easing: ez, fill: delay ? 'both' : 'none' });
   }
+  /* ===== خروجُ المساحة المفتوحة وحدَها (طلبُ صاحب الموقع): لا جارَ يتّسع إليها — فتخرج كتلةً واحدة =====
+     الكتلةُ ومحتواها والذيلُ يخفتون وينزلون معًا (عكسُ الدخول من «لا مساحة»)، ثمّ تظهر رسالةُ «اختر ما تريد العمل عليه» */
+  function pkSoloExit(card, commit) {
+    if (bkReduce()) return commit();
+    const els = [...card.querySelectorAll(':scope > .pk-band, :scope > .pk-midghost, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .vt-foot, .pk-pubfoot)')];
+    card.pkBlkHold = true;
+    const an = els.map(e => e.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }],
+      { duration: PKFX.OUT * .75, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
+      card.pkBlkHold = false;
+      commit();
+      const n = document.querySelector('#cm-body .pk-split--none > .pk-none');
+      if (n) n.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    });
+  }
   function pkPaneExit(card, L, commit, other) {
     const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (sp && ![...sp.children].some(x => x !== L && x.matches('.pk-src, .kt-view, .pk-bank'))) return pkSoloExit(card, commit);
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
     const isBook = L.classList.contains('pk-src'), D = PKFX.OUT;
     const actL = card.classList.contains(isBook ? 'pk-act--book' : 'pk-act--bank');
