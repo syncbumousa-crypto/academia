@@ -6825,6 +6825,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     $('#cm-body').classList.toggle('is-cxmax', cxMax || !!cxMaxPub);
     if (!cxMax && !cxMaxPub) { cxHdUp = false; cxFtDn = false; cxFull = false; }
+    else cxFull = true;   /* لا توسيعَ متوسّط (طلبُ صاحب الموقع): المكبَّرةُ تملأ الشاشةَ كلَّها، في التحرير والنشر */
     $('#cm-body').classList.toggle('is-cxfull', cxFull && (cxMax || !!cxMaxPub));
     if (isChTab(sec)) { chPdfPaint(); chCovPaint(); }   /* ومصدرُ الشابتر يُستدعى من مخزنه بعد أن يُبنى وعاؤه */
     pkSrcPaint();   /* وكتابُ «المصدر» في المساهمة كذلك */
@@ -21708,7 +21709,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = id || cxMaxPub, old = key && body.querySelector(`.post[data-ck="${CSS.escape(key)}"]`);
     if (id) {
       cxMaxY = body.scrollTop;
-      cxMaxPub = id;
+      cxMaxPub = id; cxFull = true;
       if (cardView.open !== id) cardView = { open: id, fold: {} };
     } else { cxMaxPub = null; cxHdUp = false; cxFtDn = false; cxFull = false; }
     renderCmSection();
@@ -22505,6 +22506,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fx = !bkReduce() && card;
     body.classList.toggle('is-cxmax', on);
     if (!on) { cxHdUp = false; cxFtDn = false; cxFull = false; body.classList.remove('is-cxfull'); }   /* المكبَّرُ يُفتح دائمًا ورأسُه وقاعُه ظاهران */
+    else { cxFull = true; body.classList.add('is-cxfull'); }   /* ويملأ الشاشةَ من أوّله — لا درجةَ وسطى */
     if (card) {
       card.classList.toggle('pk--max', on);
       card.classList.remove('pk--hdup', 'pk--hdanim', 'pk--ftdn', 'pk--ftanim');
@@ -24376,13 +24378,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pb) {   /* المنشورة: ضيّقةً يُوسّعها، وواسعةً يملأ بها الشاشة */
       e.preventDefault(); e.stopPropagation();
       const id = pb.dataset.cxmaxpub;
-      cxMorph(pb, () => { if (cxMaxPub === id) cxFullSet(true); else cxPubMaxSet(id); });
+      cxMorph(pb, () => { if (cxMaxPub !== id) cxPubMaxSet(id); else cxFullSet(true); });
       return;
     }
     const sh = e.target.closest('#cm-body [data-cxshrink]');
     if (sh) {   /* التضييقُ درجةً: الشاشةُ الكاملة ← الواسعة ← الضيّقة */
       e.preventDefault(); e.stopPropagation();
-      cxMorph(sh, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
+      cxMorph(sh, () => { if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });   /* من الشاشة الكاملة إلى الضيّقة مباشرةً */
       return;
     }
     const b = e.target.closest('#cm-body [data-cxmax]');
@@ -24417,7 +24419,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* درجتان: الرأسُ المرفوعُ يَنزل أوّلًا، ثمّ يُصغَّر المربّع — فلا يضيعان بضغطةٍ واحدة */
     if (cxHdUp) { cxHdSet(false); return; }
     if (cxFtDn) { cxFtSet(false); return; }
-    cxMorph(null, () => { if (cxFull) cxFullSet(false); else if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
+    cxMorph(null, () => { if (cxMaxPub) cxPubMaxSet(null); else cxMaxSet(false); });
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
      و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
