@@ -17256,9 +17256,7 @@ html[data-lang="en"] .pp-num { left: auto; right: 7cqh; }
 html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6cqh; }
 
 /* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
-   مسكةُ طيّ الذيل كانت شريطًا أفقيًّا على موضع الالتقاء نفسِه فتقطع الكتلة: تُخفى ما دامت كتلة، وتظهر عند المرور أو التركيز */
-:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip { background: transparent; }
-:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip i { opacity: 0; }
+   مسكةُ طيّ الذيل ظاهرةٌ دائمًا (طلبُ صاحب الموقع) — الكتلُ لم تعد تتّصل بالذيل فلا تقطعها */
 /* والنشرُ: خانةُ الكتلة في وسط ذيله كما في التحرير */
 .pk-pubfoot { position: relative; min-height: 34px; }
 .pk--ftdn .pk-pubfoot { min-height: 0; }
@@ -17520,3 +17518,6 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 /* زرُّ «أوّل …» رُفع من المساحات الفارغة، فأدواتُ الذيل تظهر فيها (طلبُ صاحب الموقع) — إلّا ولا مساحةَ مفتوحة */
 #cm-body .pk--edit .cx-acttools > * { visibility: visible !important; pointer-events: auto !important; }
 #cm-body .pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden !important; pointer-events: none !important; }
+/* مسكةُ الذيل ظاهرةٌ دائمًا: للذيل ارتفاعُ خانة الأدوات فتنزل تحت المسكة ولا تتراكب عليها */
+:is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
+.pk--ftdn .vt-foot { min-height: 0; }
