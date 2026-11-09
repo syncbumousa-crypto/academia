@@ -17687,3 +17687,5 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 #cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-blkh .pk-blkh__ic { pointer-events: auto; }
 #cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 97px; box-sizing: border-box; }
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 125px; }
+/* ومربّعُ «لا يوجد مجلدات» يمتدّ إلى يسار كتلته (الهامشُ هناك كان لأيقونةٍ صارت في الزوايا السفلى) */
+#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip-ph { margin-inline-end: 12px; }
