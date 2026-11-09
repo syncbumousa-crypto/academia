@@ -21810,6 +21810,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b)); }
     /* الأرضيّةُ تبدأ من خطّ الرأس نفسِه (منتصفِ مسكته، حيث ينتهي شريطُه) — فلا يبقى بينهما شريطٌ بلون المربّع */
     const hdl = card.querySelector('.pk-hdline:not(.pk-ftline)'), gT = hdl ? (h => h.t + h.h / 2)(R(hdl)) : top - 12;
+    /* ===== كونسبت الأيقونات: مربّعُ المساحة الوحيدة فيه فجوةٌ في زاويته العليا اليسرى تسكنها الأيقونتان الأُخريان (طلبُ صاحب الموقع) ===== */
+    if (card.classList.contains('pk--ic1')) {
+      const one = [mid && 'mid', src && 'book', bank && 'bank'].filter(Boolean);
+      const row = card.querySelector('.pk-icrow');
+      if (one.length === 1 && row) {
+        const k = one[0], el = k === 'mid' ? mid : k === 'book' ? src : bank, e = R(el);
+        const x0 = (k === 'mid' && head) ? s.l : e.l, x1 = (k === 'mid' && head) ? s.r : e.r, y0 = (k === 'mid' && head) ? top : e.t, y1 = e.b;
+        const NW = 66, NH = 34, r = RD, c = 12;
+        const d = `M${f(x0 + NW + r)} ${f(y0)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(y0 + r)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}`
+          + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}V${f(y0 + NH + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y0 + NH)}`
+          + `H${f(x0 + NW - c)}A${c} ${c} 0 0 0 ${f(x0 + NW)} ${f(y0 + NH - c)}V${f(y0 + r)}A${r} ${r} 0 0 1 ${f(x0 + NW + r)} ${f(y0)}Z`;
+        out = out.replace(/<path class="pk-blk([^"]*)" data-k="[^"]*" d="[^"]*"\/>/, `<path class="pk-blk$1" data-k="${k}" d="${d}"/>`);
+        /* والأيقونتان في وسط الفجوة */
+        const pr = row.offsetParent ? row.offsetParent.getBoundingClientRect() : cb;
+        const rw = row.offsetWidth, rh = row.offsetHeight;
+        row.style.left = f(ox + x0 + (NW - rw) / 2 - 2 - pr.left) + 'px';
+        row.style.top = f(oy + y0 + (NH - rh) / 2 - 2 - pr.top) + 'px';
+      }
+    }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
   }

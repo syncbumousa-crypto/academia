@@ -17640,3 +17640,7 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 /* والمربّعُ ينفتح «داخل الترويسة» (طلبُ صاحب الموقع): ما خلفه بلونها نفسِه، لا أرضيّةٌ أخرى */
 #cm-body .pk--icx.pk--framepub { --pk-gap: var(--pk-band); background-color: var(--pk-band); }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__ic { cursor: pointer; }   /* أيقونةُ المساحة المفتوحة تُغلقها */
+/* والفجوةُ: الأيقونتان فيها (تضعهما ‎pkBandDraw‎)، وإغلاقُ المساحة بأيقونتها لا بالقوس (مكانُه صار الفجوة)، وشريطُ المجلدات يُفسح لها */
+#cm-body .pk--icx.pk--ic1 .pk-icrow { inset-inline: auto; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__x { display: none; }
+#cm-body .pk--icx.pk--ic1 .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-end: 54px; }
