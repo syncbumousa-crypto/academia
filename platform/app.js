@@ -11394,9 +11394,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <!-- وسهمُ الطيّ رُدَّ إلى زاويته الأولى: جُرّب قوسًا (‏‎chev-match-lab#p8‎) حين كانت
            الحبّةُ تلاصقه في ذيل الصفّ فيُوازن كتلتَها، ثمّ انتقلت الحبّةُ إلى صدر الصفّ
            فذهب سببُ القوس — وبقي السهمُ سهمَ ملاحةٍ بين أرقام، فرُدَّ رسمُه ووزنُه وقدُّه -->
-      <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
+      <!-- وفي «الملخصات وبنوك الأسئلة» لا توسيعَ بالسهم (طلبُ صاحب الموقع): التوسيعُ بمفاتيح المساحات، والسهمُ يبقى للطيّ وحدَه -->
+      ${kind === 'c' && pkLab() && !open ? '' : `<button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
+      </button>`}
       ${kind === 'c' && open && (cxMaxPub === p.id || (cxRowPub === p.id && cardView.open === p.id && pkLab())) ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
