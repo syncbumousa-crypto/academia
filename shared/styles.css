@@ -17645,3 +17645,5 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 #cm-body .pk--icx.pk--ic1 .pk-icrow { inset-inline: auto; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__x { display: none; }
 #cm-body .pk--icx.pk--ic1 .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-end: 54px; }
+/* والإعجابُ نزل إلى الأسفل: سطرُ الترويسة الثاني يبقى للأيقونات (فلا تسقط تحت مسكة الترويسة) */
+#cm-body .pk--icx.pk--framepub .x3-pkhd { margin-bottom: 26px; }

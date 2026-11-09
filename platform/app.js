@@ -11812,7 +11812,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
-          ${framed ? reactRowHTML(p, likeAttr, '') : ''}
+          ${framed && !PK_ICX ? reactRowHTML(p, likeAttr, '') : ''}
           ${PK_ICX && kind === 'c' && pkLab() && !maxd && (framed || !open) ? pkIcRow(p.id, !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
@@ -11829,7 +11829,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                 : `<p class="v-none pk-qbempty">${esc(T().pkQbEmpty)}</p>`)
               : `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>`) : ''}
           ${big ? cxFtLine() + cxPubFoot(kind === 'c' ? p.id : '') : ''}
-          ${framed ? '' : reactRowHTML(p, likeAttr, '')}
+          ${framed && !PK_ICX ? '' : reactRowHTML(p, likeAttr, '')}   <!-- (والكونسبت: الإعجابُ تحتُ، بطلبه) -->
         </div>
         ${postMenuHTML(p, likeAttr, `data-sub="${sub}"`)}
       </div>
