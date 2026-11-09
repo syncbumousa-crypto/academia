@@ -17477,3 +17477,11 @@ html[data-theme="dark"] .pk-vmenu { background: #2b3437; box-shadow: 0 16px 36px
 .pk-vmenu__it.on { background: rgba(201, 162, 92, .18); }
 .pk-vmenu__it.on svg { color: #a9852f; }
 html[data-theme="dark"] .pk-vmenu__it.on svg { color: #e1c172; }
+/* ===== مستطيلُ المجلد على قدر اسمه، والشريطُ يصعد إلى أعلى سقف الـT بلا هامش (طلبُ صاحب الموقع) =====
+   رأسُ الملخّص صار خطًّا بلا قامة: أيقونتُه وقوسُ إغلاقه يطفوان في زاويتي السقف، والشريطُ بينهما */
+.pk--bandfx .pk-fstrip.pk-lg .pg-row > .pg-box:not(.is-wide) { flex: 0 1 auto; min-width: 0; max-width: 220px; }
+.pk--bandfx .post-ytmain > .pk-blkh--mid { height: 0; margin: 8px 10px 0; align-items: flex-start; }
+.pk--bandfx .post-ytmain > .pk-fstrip { margin-top: 0; margin-inline: 30px; }
+.pk--bandfx .post-ytmain > .pk-split { margin-top: 8px; }
+/* وبلا مجلدات: سقفُ الـT يبقى بقامته (لا تتراكب عليه كتلتا الجانبين) */
+.pk--bandfx .post-ytmain > .pk-blkh--mid + .pk-split { margin-top: 40px; }
