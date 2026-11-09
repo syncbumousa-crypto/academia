@@ -9329,6 +9329,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
     if (!a) return pub ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* لا نشِطة: لا أدوات */
+    /* وفي النشر بلا مصادر: لا كتابَ يُقلَّب، فلا أدواتَ له (كانت أزرارُ التقليب تظهر دوائرَ خاوية) */
+    if (a === 'book' && pub && !pkSrcMeta(id)) return '';
     if (a === 'book' && !pub && !pkSrcMeta(id)) return pkActB(`data-pksrcpick data-pkid="${esc(id)}"`, PK_ACT_IC.plus, T().pkSrcBtn, ' cx-actb--gold');
     if (a === 'book') {
       const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
