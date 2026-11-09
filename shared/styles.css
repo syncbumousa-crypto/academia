@@ -17417,3 +17417,9 @@ html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(255, 255, 255
 html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .26); }
 html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e7eff0; }
 .pk-blkh__x:focus-visible { outline: none; }
+/* قوسُ الإغلاق أحمر (طلبُ صاحب الموقع) */
+.pk-blkh__x .pk-curve__grip { stroke: rgba(214, 69, 69, .55); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(232, 96, 96, .6); }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: #d64545; }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: #e86060; }
+.pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #fff; opacity: .9; }
