@@ -17517,3 +17517,6 @@ button.pk-fstrip-ph:hover { border-color: rgba(201, 162, 92, .7); color: #a9852f
 html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 .pk--bandfx .post-ytmain > .pk-fstrip-ph + .pk-split { margin-top: 22px; }
 .pk-fstrip-ph { width: -webkit-fill-available; width: -moz-available; width: stretch; }
+/* زرُّ «أوّل …» رُفع من المساحات الفارغة، فأدواتُ الذيل تظهر فيها (طلبُ صاحب الموقع) — إلّا ولا مساحةَ مفتوحة */
+#cm-body .pk--edit .cx-acttools > * { visibility: visible !important; pointer-events: auto !important; }
+#cm-body .pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden !important; pointer-events: none !important; }

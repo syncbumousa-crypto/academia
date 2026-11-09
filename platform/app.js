@@ -9326,6 +9326,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkActB = (attr, ic, tip, cls = '') => `<button type="button" class="cx-actb${cls}" ${attr} title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></button>`;
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
+    if (a === 'book' && !pub && !pkSrcMeta(id)) return pkActB(`data-pksrcpick data-pkid="${esc(id)}"`, PK_ACT_IC.plus, T().pkSrcBtn, ' cx-actb--gold');
     if (a === 'book') {
       const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
@@ -9971,7 +9972,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const K = { src: 'Src', mid: 'Mid', qb: 'Qb' }[k];
     return `<div class="pk-es pk-es--${k}"><div class="pk-es__art" aria-hidden="true">${PK_ES_ART[k]}</div>
       <h4 class="pk-es__t">${esc(T()['pkEs' + K + 'T'])}</h4><p class="pk-es__p">${esc(T()['pkEs' + K + 'P'])}</p>
-      <button type="button" class="pk-es__b" ${act}>${PK_ES_PLUS}<span>${esc(T()['pkEs' + K + 'B'])}</span></button></div>`;
+      </div>`;   /* بلا زرّ «أوّل …» (طلبُ صاحب الموقع): الإضافةُ من «+» الذيل */
   };
   const pkSrcView = (id, ed) => {
     const m = pkSrcMeta(id), cv = pkSrcCovMeta(id);
@@ -10152,9 +10153,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
     const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, flatCards(deck).length) : '';
     /* ومنطقةُ المجلدات وهي فارغة: مكانٌ مرقّطٌ يقول إنّها لمجلدات الملخّص (طلبُ صاحب الموقع) — وفي التحرير ينقر فيضيف أوّلَ فصل */
-    const fph = midH ? (ed ? `<button type="button" class="pk-fstrip-ph" data-actkf>` : `<div class="pk-fstrip-ph">`)
+    const fph = midH ? `<div class="pk-fstrip-ph">`
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>`
-      + `<span>${esc(T().pkFoldPh)}</span>` + (ed ? `</button>` : `</div>`) : '';
+      + `<span>${esc(T().pkFoldPh)}</span></div>` : '';
     if (!folds.length && wrap) return midH + fph + pkSplitWrap(id, v, ed, ed ? `<div class="kt-view pk-split__ph pk-split__ph--es">${pkEs('mid', 'data-actkf')}</div>`
       : `<div class="kt-view pk-split__ph"><div class="pk-vwph" aria-hidden="true"></div></div>`, pack);
     if (!folds.length) return `<div class="pk-vwph" aria-hidden="true"></div>`;
