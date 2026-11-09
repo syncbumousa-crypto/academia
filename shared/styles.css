@@ -17660,3 +17660,8 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { color: #d
 #cm-body .pk--icx .pk-ftline::before { border-top: 1px solid var(--u-line) !important; }
 /* والملموسةُ بيضاءُ كالصفحة (لا أرضيّةَ للمساهمة في الكونسبت): يحدّها خطٌّ رفيع فلا تذوب فيها */
 html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { stroke: var(--u-line); stroke-width: 1; }
+/* والمساحةُ مفتوحة: الأيقوناتُ في الفجوة لا تحت العنوان — فلا يُحجز لها سطر، ويقرب خطُّ الترويسة منها (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--framepub.pk--ic1 .x3-pkhd { margin-bottom: 0; }
+#cm-body .pk--icx.pk--framepub .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
+/* ونقاطُ التعديل أصغر */
+#cm-body .pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
