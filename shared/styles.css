@@ -17387,3 +17387,4 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-gap: transparent; --pk-
 /* الترويسةُ أعلى المساحة والمحتوى يملأ ما تحتها (كان التوسيطُ يدفعها فوق الحافّة فيقصّها) */
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) { justify-content: flex-start; }
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > :is(.pk-es, .pk-vwph, .pk-src__view, .pk-qbempty) { flex: 1 1 auto; min-height: 0; height: auto; }
+.pk-blkh > .pk-vbar--foot { margin-inline-start: 6px; font-weight: 400; }

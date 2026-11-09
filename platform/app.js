@@ -9475,6 +9475,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const x = k === 'book' ? 'data-pkview="source"' : k === 'bank' ? 'data-pkview="folder"' : 'data-pkmidx';
     return `<div class="pk-blkh pk-blkh--${k}"><span class="pk-blkh__ic" aria-hidden="true">${ic}</span><b class="pk-blkh__nm">${esc(nm)}</b>`
       + (n ? `<span class="pk-blkh__n">${n}</span>` : '')
+      + (k === 'mid' ? pkViewSeg(id) : '')   /* طرقُ عرض الملخّص يسارَ اسمه (طلبُ صاحب الموقع) */
       + (noX ? '' : `<button type="button" class="pk-blkh__x" ${x} data-pkid="${esc(id)}" title="${esc(T().pkBlkClose)}" aria-label="${esc(T().pkBlkClose)}">${PK_BLK_X}</button>`) + `</div>`;
   };
   const pkBlkIn = (html, h) => html.replace('>', '>' + h);
@@ -21150,7 +21151,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <span class="pk-hdline__ln"></span><span class="pk-hdline__grip"><i></i><i></i><i></i></span></button>`;
   /* وقاعُ المنشورة المكبَّرة: الخطُّ نفسُه، وتحته «إخفاء الكل» (فعلُه يجيء لاحقًا بشرح صاحب الموقع) */
   /* وفي المختبر خانةُ الكتلة نفسُها (‎cx-acttools‎) — فأدواتُ الكتاب في وسط الذيل حين يكون نشِطًا كما في التحرير */
-  const cxPubFoot = id => `<div class="pk-pubfoot">${pkViewSeg(id)}
+  const cxPubFoot = id => `<div class="pk-pubfoot">
       ${id && pkLab() ? `<div class="cx-acttools" data-pkid="${esc(id)}">${pkActTools(id, true)}</div>`
         : `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`}
     </div>`;
@@ -21787,7 +21788,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (مكانُ «+ معرفة» الجديد)، وفي العرض المجلّديّ يفتح قائمةَ الإضافة */
   const cxMidAdd = () => `<button type="button" class="cx-midadd" data-cxmidadd title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>`;
   const cxFoot = (d, id) => `<div class="edit-acts edit-acts--foot vt-foot">
-      ${pkViewSeg(id)}
       <div class="cx-acttools" data-pkid="${esc(id || '')}">${pkActTools(id)}</div>
       ${completeGlyph(completenessOf('cards', d))}
       ${pkLab() ? `<span class="cx-addhide" hidden>${cxAddBtns()}</span>` : cxAddBtns() + '<span class="src-tools__sep src-tools__sep--solo"></span>'}
