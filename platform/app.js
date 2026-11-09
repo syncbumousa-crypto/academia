@@ -9645,34 +9645,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   /* ‏‎extra‎: ما يُغرس في كبسولة البنك يسارَ اسمه — عدّاداتُ المساهمة (طلبُ صاحب الموقع) */
-  /* ===== مفاتيحُ المساحات في رأس المساهمة المطويّة (طلبُ صاحب الموقع) =====
-     مصادرُ التلخيص · الملخّص · بنكُ الأسئلة — نقرُ أحدها يفتح تلك المساحةَ وحدَها ويكبّر المساهمة (رأسٌ وذيل) */
-  const pkRowBar = id => {
-    const sv = ic => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg>`;
-    const b = (k, ic, nm) => `<span class="pk-vbar__cap pk-vbar__cap--nm"><button type="button" class="pk-vbar__b" data-pkopen="${k}" data-pkid="${esc(id)}" title="${esc(nm)}">${ic}<span class="pk-vbar__nm">${esc(nm)}</span></button></span>`;
-    return `<span class="pk-vbar pk-vbar--row" role="group" aria-label="${esc(T().pkViewBar)}">`
-      + b('source', sv(PK_SRC_IC), T().pkEsSrcT) + b('mid', pkMidIc(id), T().pkEsMidT) + b('bank', sv(pkQbIc()), T().pkEsQbT) + `</span>`;
-  };
-  window.addEventListener('click', e => {
-    const b = e.target.closest && e.target.closest('#cm-body [data-pkopen]');
-    if (!b) return;
-    e.preventDefault(); e.stopPropagation();
-    const id = b.dataset.pkid, k = b.dataset.pkopen;
-    pkSplit[id] = k === 'source';
-    if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
-    pkBank[id] = k === 'bank';
-    if (k === 'source' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
-    /* تتّسع في موضعها بين أخواتها (طلبُ صاحب الموقع) — لا تكبيرَ يُخفي ما سواها */
-    cxRowPub = id; cardView = { open: id, fold: {} }; cxHdUp = false; cxFtDn = false;
-    renderCmSection();
-    const post = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
-    if (!post || bkReduce()) return;
-    cxHdMeasure();
-    const els = [...post.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-hdline, .pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)')];
-    pkBandFit(post); post.pkBlkHold = true;
-    const an = els.map(x => x.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { post.pkBlkHold = false; if (post.isConnected) pkBandFit(post); });
-  }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
@@ -11373,8 +11345,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         ? `<button type="button" class="cx-pktest" title="${esc(kind === 'c' ? T().pkGoT : T().pkGoV)}"
              ><span>${esc(T().pkGo)}</span></button>` : ''}
       ${x3TtlHTML(p)}
-      <!-- ومفاتيحُ المساحات الثلاث يسارَ العنوان (طلبُ صاحب الموقع): نقرُ أحدها يكبّر المساهمةَ برأسها وذيلها على ما اختير -->
-      ${kind === 'c' && pkLab() && !(open && (cxMaxPub === p.id || cxRowPub === p.id)) ? pkRowBar(p.id) : ''}
+
       <!-- ===== ودائرةُ الرزمة كلِّها يسارَ عنوانها =====
            هي دائرةُ المجلد بعينها ونفسُ حسابها (‎x3Ans‎)، لكنّ مداها **الرزمةُ كلُّها**
            لا مجلدًا فيها: ماءٌ يرتفع بقدر ما أُجيب منها، ولونُه بقدر ما أُصيب.
@@ -11394,10 +11365,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <!-- وسهمُ الطيّ رُدَّ إلى زاويته الأولى: جُرّب قوسًا (‏‎chev-match-lab#p8‎) حين كانت
            الحبّةُ تلاصقه في ذيل الصفّ فيُوازن كتلتَها، ثمّ انتقلت الحبّةُ إلى صدر الصفّ
            فذهب سببُ القوس — وبقي السهمُ سهمَ ملاحةٍ بين أرقام، فرُدَّ رسمُه ووزنُه وقدُّه -->
-      <!-- وفي «الملخصات وبنوك الأسئلة» لا توسيعَ بالسهم (طلبُ صاحب الموقع): التوسيعُ بمفاتيح المساحات، والسهمُ يبقى للطيّ وحدَه -->
-      ${kind === 'c' && pkLab() && !open ? '' : `<button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
+      <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </button>`}
+      </button>
       ${kind === 'c' && open && (cxMaxPub === p.id || (cxRowPub === p.id && cardView.open === p.id && pkLab())) ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
@@ -32250,12 +32220,29 @@ void main() {
         if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
         cardView = { open: cardView.open === id ? null : id, fold: {} };
         nowOpen = cardView.open === id;
+        /* ===== وفي «الملخصات وبنوك الأسئلة»: السهمُ يتّسع بها في موضعها بإطار (طلبُ صاحب الموقع) =====
+           رأسٌ فيه مفاتيحُ المساحات، وذيلٌ — والملخّصُ مفتوحٌ إن لم تكن فيها مساحةٌ مفتوحة. ونقرةٌ ثانيةٌ تُعيدها صفًّا */
+        if (pkLab()) {
+          if (nowOpen) {
+            cxRowPub = id; cxHdUp = false; cxFtDn = false;
+            if (!pkSplitOn(id) && !pkBankOn(id) && pkMidOff[id]) delete pkMidOff[id];
+          } else if (cxRowPub === id) cxRowPub = null;
+        }
       }
       /* الربط باتجاه واحد: توسيع المساهمة يضغط مفتاح التاريخ معه (فيمتلئ ويصير رقميًّا)
          وتضييقها يرجعه — أما ضغط التاريخ وحده فلا يمسّ النصّ */
       const dk = pk.dataset.dkey;
       if (dk) { if (nowOpen) dtAbs.add(dk); else dtAbs.delete(dk); }
-      renderCmSection(); return;
+      renderCmSection();
+      /* والمتّسعةُ بإطار: رأسُها وذيلُها ومساحاتُها تظهر بحركة، والكتلُ تُرسم من مواضعها الأخيرة */
+      const fp = nowOpen && pk.dataset.ck != null && document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(pk.dataset.ck)}"]`);
+      if (fp && !bkReduce()) {
+        cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
+        const an = [...fp.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-hdline, .pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)')]
+          .map(x => x.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
+        Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
+      }
+      return;
     }
     /* المصادر: اختيار قناة فهم/ممارسة → مساهماتها · رجوع → التقسيم */
     const shalf = e.target.closest('.srchalf');
