@@ -9689,6 +9689,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowAt = {};   /* ومواضعُ أيقوناته */
   const pkIcRowRe = {};   /* وموضعُ الإعجاب فيه */
   const pkIcRowH = {};   /* قامةُ الصفّ الضيّق لكلّ مساهمة (تُحفظ عند الاتّساع ليُطوى إليها تمامًا) */
   const PK_IC_EZ = 'cubic-bezier(.32, .72, 0, 1)';
@@ -9696,9 +9697,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkIcExpand(id, k, post0) {
     const h0 = post0.getBoundingClientRect().height, before = {};
     pkIcRowH[id] = h0;
-    { const r0 = post0.getBoundingClientRect(), rr = post0.querySelector('.post-ytmain > .post-react');
-      if (rr) { const q = rr.getBoundingClientRect(); pkIcRowRe[id] = { xr: q.right - r0.right, y: q.top - r0.top }; } }
     post0.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { before[x.dataset.pkic] = x.getBoundingClientRect(); });
+    { const r0 = post0.getBoundingClientRect(), rr = post0.querySelector('.post-ytmain > .post-react');
+      if (rr) { const q = rr.getBoundingClientRect(); pkIcRowRe[id] = { xr: q.right - r0.right, y: q.top - r0.top }; }
+      /* ومواضعُ الأيقونات في سطرها بالضبط (ليرجع إليها الطيُّ بلا قفزةٍ في آخره) */
+      const m0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect();
+      pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
     pkIcSet(id, k);
@@ -9751,7 +9755,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const hd = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd');
     const h0 = pkIcRowH[id] || (hd ? hd.getBoundingClientRect().bottom - fr.top + 30 : 90);
     const main = fp.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), en = state.lang === 'en';
-    const slot = i => { const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
+    const at = pkIcRowAt[id] || {};
+    const slot = i => { const q = at[PK_IC_KEYS[i]]; if (q) return { left: en ? main.left + q.x : main.right + q.xr - q.w, top: fr.top + q.y, width: q.w, height: q.h };
+      const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
     /* ١. المحتوى يغيب أوّلًا */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
@@ -9781,14 +9787,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
     /* ٣. الأيقوناتُ إلى سطرها */
+    const flies = [];
     PK_IC_KEYS.forEach((q, i) => {
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
       const el = inRow && inRow.offsetParent ? inRow : (q === 'mid' ? fp.querySelector('.pk-blkh--mid .pk-blkh__ic') : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`));
       if (!el) return;
-      const r = el.getBoundingClientRect(), t = slot(i);
-      an.push(el.animate([{ transform: 'none', opacity: getComputedStyle(el).opacity }, { transform: `translate(${(t.left + 12) - (r.left + r.width / 2)}px, ${(t.top + 12) - (r.top + r.height / 2)}px)`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      const r = el.getBoundingClientRect(), t = slot(i), sc = r.width ? t.width / r.width : 1;   /* وبحجمها في السطر (أيقونةُ رأس المساحة أصغر) */
+      const cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;   /* وإزاحتُها الأصليّة (‎translateY(-2px)‎) تُحسب */
+      const dx = (t.left + t.width / 2) - (r.left + r.width / 2 - (bm ? bm.e : 0)), dy = (t.top + t.height / 2) - (r.top + r.height / 2 - (bm ? bm.f : 0));
+      let mv = el;
+      /* أيقونةُ رأس المساحة داخلَ مساحةٍ تنطوي وتُقصّ: تطير نسخةٌ منها فوق الصفحة، فلا تختفي في الطريق ثمّ تظهر فجأة */
+      if (el !== inRow) {
+        mv = document.createElement('span'); mv.className = 'pk-icfly'; mv.setAttribute('aria-hidden', 'true');
+        const sv = el.querySelector('svg'), sr = sv && sv.getBoundingClientRect();
+        if (sv) { const c2 = sv.cloneNode(true); c2.style.width = sr.width + 'px'; c2.style.height = sr.height + 'px'; mv.appendChild(c2); }
+        Object.assign(mv.style, { position: 'fixed', left: (r.left - (bm ? bm.e : 0)) + 'px', top: (r.top - (bm ? bm.f : 0)) + 'px', width: r.width + 'px', height: r.height + 'px',
+          display: 'grid', placeItems: 'center', color: cs.color, zIndex: 60, pointerEvents: 'none', margin: 0 });
+        document.body.appendChild(mv); flies.push(mv); el.style.visibility = 'hidden';
+      }
+      an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
-    Promise.all(an.map(x => x.finished.catch(() => {}))).then(done);
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { done(); flies.forEach(x => x.remove()); });
   }
   function pkIcToggle(post, k) {
     const id = post.dataset.ck, open = pkIcOpenSet(id);
