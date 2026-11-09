@@ -17613,3 +17613,13 @@ html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInE
 #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: none; }
 /* والطيّ: خلفيّةُ الترويسة ومسكتُها تخفتان في آخره */
 #cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: opacity .16s ease-in; }
+/* ===== وطيُّ الرأس: عناصرُ الترويسة ثابتةٌ في مواضعها، والترويسةُ تضيق وحدَها (طلبُ صاحب الموقع) =====
+   عمودُ الصورة ينسحب (‎-42px‎) فيتّسع ما بجانبه نحوه — فيُردّ إليها هامشٌ بقدره وبخطاه نفسها فلا تميل */
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { margin-inline-start: 42px; }
+.pk--hdanim > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { transition: margin-inline-start .22s ease; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { transition: none; } }
+/* والصورةُ كذلك: تخفت في موضعها ولا تنزلق مع انسحاب عمودها */
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-av--yt { transform: translateX(-42px); opacity: 0; }
+html[data-lang="en"] :is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-av--yt { transform: translateX(42px); }
+.pk--hdanim > .post-yt > .post-av--yt { transition: margin-inline-start .22s ease, transform .22s ease, opacity .18s ease, visibility .22s; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt > .post-av--yt { transition: none; } }
