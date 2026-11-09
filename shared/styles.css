@@ -17526,3 +17526,7 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 #cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > .cx-jrseg { display: none !important; }
 /* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
+/* التذييلُ المطويّ بطول الترويسة المطويّة (طلبُ صاحب الموقع): ‎20px‎ بين الكتل وحافّة المربّع، والمسكةُ على الحافّة كمسكة الرأس */
+:is(.pk--max, .pk--frame).pk--ftdn .post-ytmain > .pk-split { margin-bottom: 0; }
+:is(.pk--max, .pk--frame).pk--ftdn .pk-ftline { margin-top: 8px; margin-bottom: -14px; }
+.pk--ftanim .post-ytmain > .pk-split { transition: margin .22s ease; }
