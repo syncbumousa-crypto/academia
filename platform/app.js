@@ -9657,8 +9657,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkIcOne = id => !!pkIcOpenK(id);
   const pkIcSvg = (k, id) => k === 'mid' ? pkMidIc(id)
     : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${k === 'book' ? PK_SRC_IC : pkQbIc()}</svg>`;
-  const pkIcRow = id => {
-    const on = pkIcOpenK(id);
+  const pkIcRow = (id, row) => {
+    const on = row ? null : pkIcOpenK(id);   /* في الصفّ الضيّق لا مفتوحَ — الثلاثُ ظاهرة */
     return `<div class="pk-icrow" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
       `<button type="button" class="pk-ic${k === on ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
   };
@@ -9670,6 +9670,48 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* مستطيلٌ بإحداثيّات المربّع */
   const pkIcRel = (card, r) => { const c = card.getBoundingClientRect(); return { x: r.left - c.left - card.clientLeft, y: r.top - c.top - card.clientTop, w: r.width, h: r.height }; };
+  /* ===== ومن الصفّ الضيّق: تتّسع المساهمةُ في موضعها (خلفيّةُ الترويسة ثمّ الانبساط) ومربّعُ المساحة يكبر من أيقونتها ===== */
+  function pkIcExpand(id, k, post0) {
+    const h0 = post0.getBoundingClientRect().height, before = {};
+    post0.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { before[x.dataset.pkic] = x.getBoundingClientRect(); });
+    if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
+    cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
+    pkIcSet(id, k);
+    renderCmSection();
+    const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
+    if (!fp || bkReduce()) return;
+    cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
+    const D = 560 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)', an = [];
+    const fr = fp.getBoundingClientRect(), h1 = fr.height, cs = getComputedStyle(fp);
+    an.push(fp.animate([{ height: h0 + 'px', backgroundColor: 'transparent', borderColor: 'transparent' },
+      { height: h1 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor }], { duration: D, easing: ez }));
+    fp.classList.add('pk--frin'); requestAnimationFrame(() => requestAnimationFrame(() => fp.classList.remove('pk--frin')));
+    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .2, fill: 'backwards' })));
+    /* الأيقوناتُ من سطرها إلى مواضعها: صاحبتُها إلى زاوية مربّعها، والأُخريان إلى خارجه */
+    PK_IC_KEYS.forEach(q => {
+      const r0 = before[q]; if (!r0) return;
+      const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
+      const el = inRow && inRow.offsetParent ? inRow : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`);
+      if (!el) return;
+      const r1 = el.getBoundingClientRect();
+      an.push(el.animate([{ transform: `translate(${(r0.left + r0.width / 2) - (r1.left + r1.width / 2)}px, ${(r0.top + r0.height / 2) - (r1.top + r1.height / 2)}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
+    });
+    const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
+    if (blk && band && before[k]) {
+      const bb = blk.getBBox(), a = pkIcRel(fp, before[k]);
+      const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
+      Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+      band.after(g); band.style.opacity = '0';
+      const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px' },
+        { transform: 'none', borderRadius: '16px' }], { duration: D, easing: ez });
+      an.push(ga);
+      ga.finished.then(() => { band.style.opacity = ''; g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).finished.then(() => g.remove(), () => g.remove()); }, () => { band.style.opacity = ''; g.remove(); });
+    }
+    const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-ftline, .pk-pubfoot)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
+      .forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .65, easing: 'ease-out', fill: 'backwards' })));
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
+  }
   function pkIcGo(id, k, from) {
     const post0 = from.closest('.post');
     const D = 460 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)';
@@ -9750,6 +9792,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post = (b || x).closest('.post'), id = post && post.dataset.ck;
     if (!id || post.pkIcBusy) return;
     post.pkIcBusy = true;
+    if (b && post.classList.contains('pk--icrow')) return pkIcExpand(id, b.dataset.pkic, post);   /* من الصفّ الضيّق: تتّسع على مساحتها */
     if (b) { const k = b.dataset.pkic; pkIcGo(id, k === pkIcOpenK(id) ? null : k, b); }
     else pkIcGo(id, null, x);
   }, true);
@@ -11687,7 +11730,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' : '') : '') : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -11698,7 +11741,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           </div>
           ${x3PkHead(p, deck, open, kind)}
           ${framed ? reactRowHTML(p, likeAttr, '') : ''}
-          ${framed && PK_ICX ? pkIcRow(p.id) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
+          ${PK_ICX && kind === 'c' && pkLab() && !maxd && (framed || !open) ? pkIcRow(p.id, !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
                قواعدُ الرحلة (القضيبُ والدوائرُ ومواضعُها ومقاساتُها) معلّقةٌ بـ

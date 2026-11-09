@@ -17635,3 +17635,5 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 #cm-body .pk--icx.pk--ic1 .pk-icrow { top: 70px; inset-inline-start: auto; inset-inline-end: 0; gap: 4px; }
 #cm-body .pk--icx .pk-ic.is-on { display: none; }
 .pk-icghost { position: absolute; z-index: -1; border-radius: 16px; background: var(--pk-blk); transform-origin: 0 0; pointer-events: none; }
+/* والصفّ الضيّق: الأيقوناتُ تحت العنوان كذلك */
+#cm-body .pk--icrow > .post-yt > .post-ytmain { position: relative; }
