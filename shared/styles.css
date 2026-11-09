@@ -17649,3 +17649,9 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 #cm-body .pk--icx.pk--framepub .x3-pkhd { margin-bottom: 26px; }
 /* وفي الكونسبت لا سهمَ توسيع: الأيقوناتُ تفتح، وإغلاقُ آخرِ مساحةٍ يطوي (طلبُ صاحب الموقع) */
 #cm-body .pk--icx .x3-pktg { display: none; }
+/* مربّعٌ خلف الأيقونة حين يُمرَّر عليها — في سطرها وفي الفجوة وفي زاوية مربّعها (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-ic { transition: color .15s, background .15s; }
+#cm-body .pk--icx .pk-ic:hover, #cm-body .pk--icx .pk-ic:focus-visible { background: var(--u-hov, rgba(20, 35, 63, .07)); }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic { border-radius: 7px; transition: color .15s, background .15s, box-shadow .15s; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { background: var(--u-hov, rgba(20, 35, 63, .07)); box-shadow: 0 0 0 4px var(--u-hov, rgba(20, 35, 63, .07)); color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { color: #d4b36a; }
