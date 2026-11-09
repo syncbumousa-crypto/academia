@@ -17423,3 +17423,12 @@ html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(232, 96, 96, 
 .pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: #d64545; }
 html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: #e86060; }
 .pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #fff; opacity: .9; }
+/* بل أحمرُ قوس التضييق في زاوية المساهمة نفسُه (طلبُ صاحب الموقع) */
+.pk-blkh__x .pk-curve__grip { stroke: rgba(192, 86, 75, .22); }
+.pk-blkh__x .pk-curve__dots { fill: #b5483c; opacity: .45; }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: rgba(192, 86, 75, .4); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(224, 123, 111, .24); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e07b6f; opacity: .45; }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(224, 123, 111, .42); }
+.pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { opacity: .8; }
+.pk-blkh__x:hover .pk-curve__dots, .pk-blkh__x:focus-visible .pk-curve__dots { opacity: 1; }
