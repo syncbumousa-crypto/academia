@@ -17453,3 +17453,5 @@ html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible)
 html[data-theme="dark"] .pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__dots,
 html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #e7eff0; opacity: .5; }
 .pk-max--curve .pk-curve__grip, .pk-max--curve .pk-curve__dots { transition: stroke .15s, fill .15s, opacity .15s; }
+/* أيقوناتُ المساحات رماديّةٌ محايدة (طلبُ صاحب الموقع) */
+.pk-blkh__ic, html[data-theme="dark"] .pk-blkh__ic { color: var(--u-mut); }
