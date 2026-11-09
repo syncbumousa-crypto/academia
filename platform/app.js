@@ -23827,7 +23827,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
       } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
+      /* ===== وقامةُ الشريط تنتقل بنعومة (طلبُ صاحب الموقع) =====
+         فتحُ مجلدٍ فيه مجلداتٌ يُطيل الشريطَ (ومعه المساهمة) وإغلاقُه يُقصّره — كانا يقفزان. فتُقاس القامةُ قبلُ وبعدُ،
+         ويُحرَّك الشريطُ بينهما (يُقصّ ما لم يبلغه)، والكتلُ تُرسم حيّةً معه */
+      const st0 = pf.closest('.pk-fstrip'), h0 = st0 ? st0.getBoundingClientRect().height : null;
       renderCmSection();
+      const st1 = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"]`);
+      if (st1 && h0 != null && !bkReduce()) {
+        const h1 = st1.getBoundingClientRect().height;
+        if (Math.abs(h1 - h0) > 1) {
+          const card = st1.closest('.post'), D = 300 * (window.__pkfxSlow || 1);
+          st1.style.overflow = 'hidden';
+          const a = st1.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: 'cubic-bezier(.3, .7, .2, 1)' });
+          const an = [a];
+          if (h1 > h0) st1.querySelectorAll('.pg-box.is-wide .pg-kids, .pg-box.is-wide > :not(.pg-face)').forEach(x =>
+            an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .7, delay: D * .2, easing: 'ease-out', fill: 'backwards' })));
+          const done = () => { st1.style.overflow = ''; };
+          if (card && card.querySelector(':scope > .pk-band')) pkLiveBand(card, an, () => { done(); if (card.isConnected) pkBandFit(card); });
+          else Promise.all(an.map(x => x.finished.catch(() => {}))).then(done);
+        }
+      }
       return;
     }
     const hl = e.target.closest('#cm-body [data-hdfold]');
