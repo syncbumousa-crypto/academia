@@ -9493,6 +9493,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* أيقونةُ الملخّص: نصٌّ — سطورٌ تقصر من جهة البداية (طلبُ صاحب الموقع) */
   const PK_MID_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M8 10.5h12M4 15h16M11 19.5h9"/></svg>';
   /* ===== سهمٌ في مفتاح الملخّص يفتح قائمةً بطرق عرضه (طلبُ صاحب الموقع) ===== */
+  /* أيقونةُ بنك الأسئلة: بطاقةٌ عليها استفهام — يُعكس بالعربيّة فيصير «؟» (طلبُ صاحب الموقع) */
+  const pkQbIc = () => '<rect x="4" y="3.5" width="16" height="17" rx="2.5"/>'
+    + `<g${document.documentElement.dataset.lang === 'en' ? '' : ' transform="matrix(-1 0 0 1 24 0)"'}><path d="M9.8 9.2a2.3 2.3 0 0 1 4.4.9c0 1.5-2.2 2-2.2 3.3"/><path d="M12 16.6h.01"/></g>`;
   const pkViewDD = id => `<button type="button" class="pk-vbar__b pk-vbar__dd" data-pkvdd aria-expanded="false" aria-haspopup="menu" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}">`
     + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>`
     + `<span class="pk-vmenu" role="menu">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => { const on = pkVwOf(id) === k && !pkMidOff[id];
@@ -9518,13 +9521,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k, ic]) => pkVbBtn(id, k, ic).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}</span></span>`;
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k]) => pkVbBtn(id, k, pkQbIc()).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}</span></span>`;
   const pkViewSeg = id => id && pkLab() && !pkMidOff[id] ? `<span class="pk-vbar pk-vbar--foot" role="group" aria-label="${esc(T().pkViewBar)}"><span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>` : '';
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
   const pkBlkH = (k, id, n, noX) => {
     const ic = k === 'book' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_SRC_IC}</svg>`
-      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>` : pkMidIc(id);
+      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${pkQbIc()}</svg>` : pkMidIc(id);
     const nm = T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'];
     const x = k === 'book' ? 'data-pkview="source"' : k === 'bank' ? 'data-pkview="folder"' : 'data-pkmidx';
     return `<div class="pk-blkh pk-blkh--${k}"><span class="pk-blkh__ic" aria-hidden="true">${ic}</span><b class="pk-blkh__nm">${esc(nm)}</b>`
