@@ -17680,5 +17680,5 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 #cm-body .pk--icx .pk-nclip { position: absolute; inset: 0; width: auto; height: auto; pointer-events: none; overflow: visible; }
 /* ومربّعُ «لا يوجد» في المصادر والبنك كذلك: يمتدّ إلى القاع، ونصُّه يبقى في وسط ما بين الفجوتين وأعلاه */
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank):has(> .pk-vwph) { padding-bottom: 12px; }
-#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > .pk-vwph.is-notched { padding-bottom: 46px; }
 .pk-bank--none > .pk-vwph { flex: 1 1 auto; font-size: 14px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > .pk-vwph.is-notched { min-height: 87px; box-sizing: border-box; }
