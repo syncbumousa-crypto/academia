@@ -9476,7 +9476,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pk-blkh pk-blkh--${k}"><span class="pk-blkh__ic" aria-hidden="true">${ic}</span><b class="pk-blkh__nm">${esc(nm)}</b>`
       + (n ? `<span class="pk-blkh__n">${n}</span>` : '')
       + (k === 'mid' ? pkViewSeg(id) : '')   /* طرقُ عرض الملخّص يسارَ اسمه (طلبُ صاحب الموقع) */
-      + (noX ? '' : `<button type="button" class="pk-blkh__x" ${x} data-pkid="${esc(id)}" title="${esc(T().pkBlkClose)}" aria-label="${esc(T().pkBlkClose)}">${PK_BLK_X}</button>`) + `</div>`;
+      + (noX ? '' : `<button type="button" class="pk-blkh__x" ${x} data-pkid="${esc(id)}" title="${esc(T().pkBlkClose)}" aria-label="${esc(T().pkBlkClose)}">${CX_GROW1}</button>`) + `</div>`;
   };
   const pkBlkIn = (html, h) => html.replace('>', '>' + h);
   /* ===== شريطُ المجلدات في العروض الثلاثة (شجريّ · بطاقيّ · جدوليّ) =====

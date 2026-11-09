@@ -17404,3 +17404,16 @@ html[data-theme="dark"] .pk-blkh__ic { color: #e1c172; }
 .pk-blkh__x { background: none; color: var(--u-mut); }
 .pk-blkh__x svg { width: 13px; height: 13px; }
 .pk-blkh__x:hover { background: none; color: var(--u-btntx); }
+/* و× المساحة صار قوسَ الزاوية بنقطتين — كقوس المساهمة في زاويتها (طلبُ صاحب الموقع): على زاوية الكتلة العليا اليسرى، وقطرُه قطرُها (‎16‎) */
+.pk-blkh { position: relative; }
+.pk-blkh__x { position: absolute; top: -8px; inset-inline-end: -10px; width: 50px; height: 50px; padding: 0; border: 0; background: none; margin: 0; }
+.post-ytmain > .pk-blkh--mid > .pk-blkh__x { top: -10px; }
+.pk-blkh__x:hover { background: none; }
+.pk-blkh__x svg { width: 50px; height: 50px; overflow: visible; display: block; }
+html:not([data-lang="en"]) .pk-blkh__x svg { transform: scaleX(-1); }
+.pk-blkh__x .pk-curve__grip { stroke: rgba(20, 35, 63, .1); stroke-width: 7; }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: rgba(20, 35, 63, .22); }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .26); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e7eff0; }
+.pk-blkh__x:focus-visible { outline: none; }
