@@ -17443,3 +17443,13 @@ html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }
 .pk-blkh__ic { margin-top: -14px; }
 .pk-blkh__ic { margin-top: 0; align-self: flex-start; transform: translateY(-8px); }
 .pk-blkh__ic { transform: translateY(-5px); }
+/* ===== قوسا التكبير والتضييق رماديّان محايدان، ولونُهما (الأخضرُ والأحمر) عند المرور وحده (طلبُ صاحب الموقع) ===== */
+.pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__grip,
+.pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(20, 35, 63, .1); }
+.pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__dots,
+.pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #14233f; opacity: .45; }
+html[data-theme="dark"] .pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__grip,
+html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__dots,
+html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #e7eff0; opacity: .5; }
+.pk-max--curve .pk-curve__grip, .pk-max--curve .pk-curve__dots { transition: stroke .15s, fill .15s, opacity .15s; }
