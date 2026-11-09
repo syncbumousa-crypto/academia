@@ -21331,7 +21331,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let svg = card.querySelector(':scope > .pk-band');
     /* ===== كتلُ المساحات (طلبُ صاحب الموقع: «الـT»): تُرسم ما وُجدت القسمةُ وخطُّ الذيل — ولو كان الوسطُ وحدَه ===== */
     const pane = sp && ft && (sp.querySelector(':scope > ' + PK_PANE[a || 'mid']) || sp.firstElementChild);
-    if (!pane || pkBandOff() || !pkLab()) { if (svg) svg.remove(); card.classList.remove('pk--bandfx'); return; }
+    /* ولا مساحةَ مفتوحة: لا كتلَ ولا ذيل (طلبُ صاحب الموقع) */
+    if (!pane || pkBandOff() || !pkLab() || sp.classList.contains('pk-split--none')) { if (svg) svg.remove(); card.classList.remove('pk--bandfx'); return; }
     if (card.pkBandAnim) return;   /* أثناء الحركة يرسمها محرّكُها */
     if (!svg) {
       svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
