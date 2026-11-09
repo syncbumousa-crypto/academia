@@ -9486,19 +9486,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) return;
-      pkBandFit(post); post.pkBlkHold = true; post.pkMidRun = true;
+      post.pkMidRun = true;
       const D = closing ? PKFX.OUT : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
-      const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view');
-      [[book, old.book], [bank, old.bank]].forEach(([el, r]) => {
+      const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
+      /* العروضُ الجديدة تُقاس كلُّها قبل أيّ حركة: حركةُ الأوّل تغيّر ما يبقى للثاني فيُقاس أعرضَ من حقّه */
+      const w1s = [book, bank].map(el => el ? el.getBoundingClientRect().width : 0);
+      [[book, old.book, w1s[0]], [bank, old.bank, w1s[1]]].forEach(([el, r, w1]) => {
         if (!el || !r) return;
-        const w1 = el.getBoundingClientRect().width;
-        if (Math.abs(w1 - r.width) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: r.width + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez }));
+        /* العرضُ المقيس يشمل الحاشية: فيُحرَّك العرضُ الكلّيّ (‎border-box‎) لا عرضُ المحتوى — وإلّا زاد بقدرها فتجاوز حدَّ القسمة */
+        if (Math.abs(w1 - r.width) > .5) { el.style.boxSizing = 'border-box'; sized.push(el);
+          an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: r.width + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); }
       });
       if (closing) sp.style.justifyContent = book && bank ? 'space-between' : bank ? 'flex-end' : '';
       else if (kv) {
         kv.style.overflow = 'hidden';
+        /* العمودُ يبدأ بلا عرض، والجاران بعرضيهما القديمين: ما يفيض عن القسمة (الفُرجةُ الزائدة) يُطوى بهامشٍ سالبٍ يذوب */
+        const kids = [...sp.children].filter(x => getComputedStyle(x).position !== 'absolute').map(x => x.getBoundingClientRect());
+        const spr = R(sp), over = Math.max(0, Math.max(...kids.map(r => r.right)) - Math.min(...kids.map(r => r.left)) - spr.width);
         const m = book ? 'marginInlineStart' : 'marginInlineEnd';
-        an.push(kv.animate([{ [m]: '-14px' }, { [m]: '0px' }], { duration: D, easing: ez }));
+        if (over > .5) an.push(kv.animate([{ [m]: -over + 'px' }, { [m]: '0px' }], { duration: D, easing: ez }));
         /* المحتوى لا العمودُ نفسُه: الكتلُ تُقاس من العمود، فلا يُزاح */
         [...kv.children].forEach(c => an.push(c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: D * .55, delay: D * .45, easing: ez, fill: 'backwards' })));
         post.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)').forEach(x =>
@@ -9516,12 +9522,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (band) band.after(gh); else post.prepend(gh);
         an.push(gh.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.98)' }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }));
       }
+      /* الكتلُ تُرسم من موضع البداية (والحركاتُ قائمةٌ عليه) ثمّ تُثبَّت — لا إطارَ واحدًا بالحال الأخيرة قبلها */
+      post.pkBlkHold = false; pkBandFit(post); post.pkBlkHold = true;
       let live = true;
       const loop = () => { if (!live || !post.isConnected) return; pkBandDraw(post, []); requestAnimationFrame(loop); };
       pkAnimsNextFrame(post);
       requestAnimationFrame(loop);
       Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
-        live = false; sp.style.justifyContent = ''; if (kv) kv.style.overflow = ''; if (gh) gh.remove();
+        live = false; sp.style.justifyContent = ''; sized.forEach(x => { x.style.boxSizing = ''; }); if (kv) kv.style.overflow = ''; if (gh) gh.remove();
         post.pkBlkHold = false; post.pkMidRun = false; if (post.isConnected) pkBandFit(post);
       });
     };
