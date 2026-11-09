@@ -17665,3 +17665,8 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 #cm-body .pk--icx.pk--framepub .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
 /* ونقاطُ التعديل أصغر */
 #cm-body .pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
+/* والمغلقةُ كلٌّ في فجوتها: تُوضع منفردةً (تضعها ‎pkBandDraw‎) */
+#cm-body .pk--icx.pk--ic1 .pk-icrow { left: 0 !important; top: 0 !important; width: 0; height: 0; }
+#cm-body .pk--icx.pk--ic1 .pk-icrow .pk-ic { position: absolute; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic { transition: transform .2s ease, color .15s, background .15s, box-shadow .15s; }
+#cm-body .pk--icx.pk--icR .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-start: 34px; }
