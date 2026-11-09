@@ -9460,10 +9460,78 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     const id = b.dataset.pkid; if (!id) return;
     if (pkFromNoneCheck(b)) { delete pkMidOff[id]; pkAct[id] = 'mid'; return pkFromNoneRender(id); }
-    if (pkMidOff[id]) delete pkMidOff[id];
-    else { pkMidOff[id] = true; if ((pkAct[id] || 'mid') === 'mid' && (pkSplitOn(id) || pkBankOn(id))) pkAct[id] = pkSplitOn(id) ? 'book' : 'bank'; }
-    renderCmSection();
+    pkMidFx(id, b, () => {
+      if (pkMidOff[id]) { delete pkMidOff[id]; pkAct[id] = 'mid'; }   /* ما يُفتح يصير النشِط — كالمصادر والبنك */
+      else { pkMidOff[id] = true; if ((pkAct[id] || 'mid') === 'mid' && (pkSplitOn(id) || pkBankOn(id))) pkAct[id] = pkSplitOn(id) ? 'book' : 'bank'; }
+      renderCmSection();
+    });
   }, true);
+  /* ===== دخولُ الملخّص وخروجُه بحركة (طلبُ صاحب الموقع) — كالمصادر والبنك =====
+     الخروج: محتواه يخفت، ثمّ يُرسم الحالُ الجديد وكتلةُ الـT شبحٌ بلونها يذوب مكانَها، والجاران يتّسعان إليه من عرضيهما القديمين،
+     والقسمةُ تصعد إلى مكان سقفه. والدخول عكسُه: الجاران يتضيّقان، وعمودُه ينبسط بينهما، والقسمةُ تنزل تحت سقفه وهو يظهر.
+     والكتلُ تُرسم من المواضع الحيّة كلَّ إطار، وتُثبَّت ثمّ تُرسم ساكنةً حين تقف */
+  function pkMidFx(id, btn, commit) {
+    const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
+    const closing = !pkMidOff[id];
+    if (bkReduce() || !pkLab() || !sp0 || sp0.classList.contains('pk-split--none') || getComputedStyle(sp0).flexDirection !== 'row'
+      || (closing && !pkSplitOn(id) && !pkBankOn(id))) return commit();
+    if (post0.pkBandAnim) pkFxFinish(post0);
+    if (post0.pkMidRun) return;
+    const R = el => el ? el.getBoundingClientRect() : null;
+    const run = () => {
+      const old = { book: R(sp0.querySelector(':scope > .pk-src')), bank: R(sp0.querySelector(':scope > .pk-bank')), top: R(sp0).top };
+      const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
+      const ghost = closing && kv0 ? { on: post0.classList.contains('pk-act--mid'), stem: R(kv0), bar: hd0 ? { top: R(hd0).top - 8, bottom: R(kv0).top - 12, left: R(sp0).left, right: R(sp0).right } : null } : null;
+      commit();
+      const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
+      const sp = post && post.querySelector('.post-ytmain > .pk-split');
+      if (!sp || sp.classList.contains('pk-split--none')) return;
+      pkBandFit(post); post.pkBlkHold = true; post.pkMidRun = true;
+      const D = closing ? PKFX.OUT : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view');
+      [[book, old.book], [bank, old.bank]].forEach(([el, r]) => {
+        if (!el || !r) return;
+        const w1 = el.getBoundingClientRect().width;
+        if (Math.abs(w1 - r.width) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: r.width + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez }));
+      });
+      if (closing) sp.style.justifyContent = book && bank ? 'space-between' : bank ? 'flex-end' : '';
+      else if (kv) {
+        kv.style.overflow = 'hidden';
+        const m = book ? 'marginInlineStart' : 'marginInlineEnd';
+        an.push(kv.animate([{ [m]: '-14px' }, { [m]: '0px' }], { duration: D, easing: ez }));
+        /* المحتوى لا العمودُ نفسُه: الكتلُ تُقاس من العمود، فلا يُزاح */
+        [...kv.children].forEach(c => an.push(c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: D * .55, delay: D * .45, easing: ez, fill: 'backwards' })));
+        post.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)').forEach(x =>
+          an.push(x.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .6, delay: D * .3, easing: ez, fill: 'backwards' })));
+      }
+      const dTop = old.top - R(sp).top;
+      if (Math.abs(dTop) > 1) { const mt = parseFloat(getComputedStyle(sp).marginTop) || 0; an.push(sp.animate([{ marginTop: (mt + dTop) + 'px' }, { marginTop: mt + 'px' }], { duration: D, easing: ez })); }
+      let gh = null;
+      if (ghost) {
+        const cr = post.getBoundingClientRect();
+        gh = document.createElement('div'); gh.className = 'pk-midghost' + (ghost.on ? ' is-on' : ''); gh.setAttribute('aria-hidden', 'true');
+        const box = r => `<i style="left:${r.left - cr.left - post.clientLeft}px;top:${r.top - cr.top - post.clientTop}px;width:${r.right - r.left}px;height:${Math.max(0, r.bottom - r.top)}px"></i>`;
+        gh.innerHTML = (ghost.bar ? box(ghost.bar) : '') + box(ghost.stem);
+        const band = post.querySelector(':scope > .pk-band');
+        if (band) band.after(gh); else post.prepend(gh);
+        an.push(gh.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.98)' }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }));
+      }
+      let live = true;
+      const loop = () => { if (!live || !post.isConnected) return; pkBandDraw(post, []); requestAnimationFrame(loop); };
+      pkAnimsNextFrame(post);
+      requestAnimationFrame(loop);
+      Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
+        live = false; sp.style.justifyContent = ''; if (kv) kv.style.overflow = ''; if (gh) gh.remove();
+        post.pkBlkHold = false; post.pkMidRun = false; if (post.isConnected) pkBandFit(post);
+      });
+    };
+    if (!closing) return run();
+    /* الخروج: محتواه يخفت أوّلًا */
+    const fade = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph), .post-ytmain > .pk-split > .kt-view > *')];
+    post0.pkMidRun = true;
+    const fa = fade.map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease-out', fill: 'forwards' }));
+    Promise.all(fa.map(a => a.finished.catch(() => {}))).then(() => { post0.pkMidRun = false; run(); });
+  }
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-actkf]');
     if (!b) return;

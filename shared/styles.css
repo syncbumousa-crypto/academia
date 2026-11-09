@@ -17564,3 +17564,7 @@ html[data-theme="dark"] .pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color
   .pk--frame.pk--blank .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
   .pk--frame.pk--blank .post-ytmain > .pk-split { flex: 1 1 auto; min-height: 0; }
 }
+/* شبحُ كتلة الملخّص وهو يخرج: بلونها خلف المحتوى، يذوب مكانَه */
+.pk-midghost { position: absolute; inset: 0; z-index: -1; pointer-events: none; transform-origin: 50% 40%; }
+.pk-midghost > i { position: absolute; border-radius: 16px; background: var(--pk-blk); }
+.pk-midghost.is-on > i { background: var(--pk-blk-on); }
