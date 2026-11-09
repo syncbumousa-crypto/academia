@@ -17703,10 +17703,10 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-icgo { color: rgba(225, 193, 114, 
 /* الغلافُ رزمةٌ: تحته في الصفّ طبقتان كحوافّ بطائقَ تحت أولاها، فيملأ ما تحته بلا أن يكبر (طلبُ صاحب الموقع) —
    ظلالٌ مصمتةٌ متناقصةُ العرض، لا عناصرَ زائدة */
 #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 5px 0 -2px rgba(255, 255, 255, .11), 0 10px 0 -4px rgba(255, 255, 255, .055), 0 12px 10px -6px rgba(0, 0, 0, .45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 8px 0 -2px rgba(255, 255, 255, .12), 0 16px 0 -4px rgba(255, 255, 255, .075), 0 24px 0 -6px rgba(255, 255, 255, .04), 0 26px 10px -8px rgba(0, 0, 0, .4);
 }
 html:not([data-theme="dark"]) #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 5px 0 -2px rgba(20, 35, 63, .13), 0 10px 0 -4px rgba(20, 35, 63, .07), 0 12px 10px -6px rgba(20, 35, 63, .25);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 8px 0 -2px rgba(20, 35, 63, .14), 0 16px 0 -4px rgba(20, 35, 63, .09), 0 24px 0 -6px rgba(20, 35, 63, .05), 0 26px 10px -8px rgba(20, 35, 63, .2);
 }
 /* وأعلى العنوان على أعلى الغلاف: الغلافُ ينزل قليلًا والعنوانُ يعلو قليلًا (وما تحته معه في الصفّ) */
 #cm-body .pk--icx .x3-pkhd > .x3-art { position: relative; top: 3px; }
