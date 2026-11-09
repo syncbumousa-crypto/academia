@@ -17681,4 +17681,9 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 /* ومربّعُ «لا يوجد» في المصادر والبنك كذلك: يمتدّ إلى القاع، ونصُّه يبقى في وسط ما بين الفجوتين وأعلاه */
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank):has(> .pk-vwph) { padding-bottom: 12px; }
 .pk-bank--none > .pk-vwph { flex: 1 1 auto; font-size: 14px; }
-#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > .pk-vwph.is-notched { min-height: 87px; box-sizing: border-box; }
+/* ومربّعُ «لا يوجد» يصعد إلى رأس مساحته (رأسُها — أيقونتُها — يطفو فوقه في زاويته، والمربّعُ مقطوعٌ حولها) */
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) { position: relative; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-blkh { position: absolute; top: 8px; inset-inline: 10px; margin: 0; z-index: 2; pointer-events: none; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-blkh .pk-blkh__ic { pointer-events: auto; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 97px; box-sizing: border-box; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 125px; }

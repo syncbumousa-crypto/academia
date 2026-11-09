@@ -21803,12 +21803,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const el = card.querySelector('.post-ytmain > .pk-split > ' + TG[k]);
       if (!el) return;
       const ui = [...el.querySelectorAll(':scope > .kcv-ui, :scope > .kcv-map')];
-      const mine = ns.filter(n => n.k === k);
-      if (!on || !mine.length) {
+      const mine = on ? ns.filter(n => n.k === k) : [];
+      /* وفي أعلاه: مربّعُ «لا يوجد» يصعد إلى رأس مساحته، فتُقطع من زاويته العليا فجوةٌ لأيقونة المساحة */
+      let T = null;
+      if (k !== 'mid' && card.classList.contains('pk--icx')) {
+        const ic = el.parentElement.querySelector(':scope > .pk-blkh .pk-blkh__ic');
+        const ir = ic && ic.getBoundingClientRect(), er = el.getBoundingClientRect();
+        if (ir && ir.width && ir.bottom > er.top) {
+          const right = ir.left + ir.width / 2 > er.left + er.width / 2, G = 9;
+          T = { right, tw: right ? er.right - ir.left + G : ir.right - er.left + G, th: ir.bottom - er.top + G };
+        }
+      }
+      if (!mine.length && !T) {
         if (el.classList.contains('is-notched')) { el.style.clipPath = ''; el.classList.remove('is-notched'); el.querySelector(':scope > .pk-nclip')?.remove(); ui.forEach(x => { x.style.marginLeft = x.style.marginRight = ''; }); }
         return;
       }
-      /* حدُّه يُرسم على الشكل المقصوص نفسِه (بلونه ونمطه)، لا يبقى مستطيلًا مقطوعًا عند الفجوتين */
+      /* حدُّه يُرسم على الشكل المقصوص نفسِه (بلونه ونمطه)، لا يبقى مستطيلًا مقطوعًا عند الفجوات */
       let sv = el.querySelector(':scope > .pk-nclip');
       if (!sv) {
         const cs = getComputedStyle(el), bw = parseFloat(cs.borderTopWidth) || 0;
@@ -21822,7 +21832,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el.classList.add('is-notched');
       const w = el.offsetWidth, h = el.offsetHeight;
       const L = mine.find(n => n.sd !== 'r'), Rn = mine.find(n => n.sd === 'r');
-      let d = `M0 ${R}A${R} ${R} 0 0 1 ${R} 0H${f(w - R)}A${R} ${R} 0 0 1 ${w} ${R}`;
+      const tc = 10, tr = T ? Math.min(R, T.tw / 2 + 1, T.th / 2 + 1) : R;
+      let d;
+      if (T && !T.right) d = `M0 ${f(T.th + tr)}A${tr} ${tr} 0 0 1 ${tr} ${f(T.th)}H${f(T.tw - tc)}A${tc} ${tc} 0 0 0 ${f(T.tw)} ${f(T.th - tc)}V${R}A${R} ${R} 0 0 1 ${f(T.tw + R)} 0`;
+      else d = `M0 ${R}A${R} ${R} 0 0 1 ${R} 0`;
+      if (T && T.right) d += `H${f(w - T.tw - R)}A${R} ${R} 0 0 1 ${f(w - T.tw)} ${R}V${f(T.th - tc)}A${tc} ${tc} 0 0 0 ${f(w - T.tw + tc)} ${f(T.th)}H${f(w - tr)}A${tr} ${tr} 0 0 1 ${w} ${f(T.th + tr)}`;
+      else d += `H${f(w - R)}A${R} ${R} 0 0 1 ${w} ${R}`;
       if (Rn) { const cw = Rn.nw, ch = Rn.nh, c = Math.min(Rn.c, cw / 2, ch / 2), r = Math.min(R, cw / 2 + 1, ch / 2 + 1);
         d += `V${f(h - ch - r)}A${r} ${r} 0 0 1 ${f(w - r)} ${f(h - ch)}H${f(w - cw + c)}A${c} ${c} 0 0 0 ${f(w - cw)} ${f(h - ch + c)}V${f(h - R)}A${R} ${R} 0 0 1 ${f(w - cw - R)} ${h}`;
       } else d += `V${h - R}A${R} ${R} 0 0 1 ${w - R} ${h}`;
