@@ -17388,3 +17388,12 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-gap: transparent; --pk-
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) { justify-content: flex-start; }
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > :is(.pk-es, .pk-vwph, .pk-src__view, .pk-qbempty) { flex: 1 1 auto; min-height: 0; height: auto; }
 .pk-blkh > .pk-vbar--foot { margin-inline-start: 6px; font-weight: 400; }
+
+/* ===== رأسُ المساحة: أيقونتُها في الزاوية العليا اليمنى و× في اليسرى — لا اسمَ ولا شريط (طلبُ صاحب الموقع) ===== */
+.pk-blkh { width: auto; align-self: stretch; height: 26px; margin: -4px -4px 6px; gap: 6px; }
+.pk-blkh__nm, .pk-blkh__n { display: none; }
+.pk-blkh__ic { width: 26px; height: 26px; border-radius: 8px; }
+.pk-blkh__ic svg { width: 15px; height: 15px; }
+.pk-blkh__x { width: 26px; height: 26px; border: 0; background: color-mix(in srgb, var(--u-btntx) 6%, transparent); }
+.pk-blkh__x svg { width: 12px; height: 12px; }
+.post-ytmain > .pk-blkh--mid { margin: 2px 10px 4px; }
