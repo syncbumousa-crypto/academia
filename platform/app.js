@@ -9689,6 +9689,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowM = {};   /* وهوامشُه */
   const pkIcRowAt = {};   /* ومواضعُ أيقوناته */
   const pkIcRowRe = {};   /* وموضعُ الإعجاب فيه */
   const pkIcRowH = {};   /* قامةُ الصفّ الضيّق لكلّ مساهمة (تُحفظ عند الاتّساع ليُطوى إليها تمامًا) */
@@ -9701,7 +9702,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     { const r0 = post0.getBoundingClientRect(), rr = post0.querySelector('.post-ytmain > .post-react');
       if (rr) { const q = rr.getBoundingClientRect(); pkIcRowRe[id] = { xr: q.right - r0.right, y: q.top - r0.top }; }
       /* ومواضعُ الأيقونات في سطرها بالضبط (ليرجع إليها الطيُّ بلا قفزةٍ في آخره) */
-      const m0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect();
+      const m0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), c0 = getComputedStyle(post0);
+      pkIcRowM[id] = { mt: parseFloat(c0.marginTop) || 0, mb: parseFloat(c0.marginBottom) || 0 };   /* وهوامشُه (الإطارُ هوامشُه غيرُها) */
       pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
@@ -9775,7 +9777,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     }
     /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
-    an.push(fp.animate([{ height: h1 + 'px' }, { height: h0 + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+    /* وهوامشُ الإطار تعود إلى هوامش الصفّ معها، فلا يقفز الصفُّ كلُّه في آخر الطيّ (الأيقوناتُ والإعجابُ أعلى بقدر الفرق ثمّ تنزل) */
+    const cs0 = getComputedStyle(fp), mT = parseFloat(cs0.marginTop) || 0, mB = parseFloat(cs0.marginBottom) || 0, rm = pkIcRowM[id] || { mt: mT, mb: mB }, dm = rm.mt - mT;
+    an.push(fp.animate([{ height: h1 + 'px', marginTop: mT + 'px', marginBottom: mB + 'px' }, { height: h0 + 'px', marginTop: rm.mt + 'px', marginBottom: rm.mb + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     /* خطُّ التذييل وأدواتُه وحافّتُه في الرسم تغيب مع المحتوى (لا تُرفع فوق الترويسة)، وتنزل مع الحافّة ما دامت ظاهرة */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
       an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
@@ -9794,7 +9798,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!el) return;
       const r = el.getBoundingClientRect(), t = slot(i), sc = r.width ? t.width / r.width : 1;   /* وبحجمها في السطر (أيقونةُ رأس المساحة أصغر) */
       const cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;   /* وإزاحتُها الأصليّة (‎translateY(-2px)‎) تُحسب */
-      const dx = (t.left + t.width / 2) - (r.left + r.width / 2 - (bm ? bm.e : 0)), dy = (t.top + t.height / 2) - (r.top + r.height / 2 - (bm ? bm.f : 0));
+      const dx = (t.left + t.width / 2) - (r.left + r.width / 2 - (bm ? bm.e : 0));
+      let dy = (t.top + t.height / 2) - (r.top + r.height / 2 - (bm ? bm.f : 0));
       let mv = el;
       /* أيقونةُ رأس المساحة داخلَ مساحةٍ تنطوي وتُقصّ: تطير نسخةٌ منها فوق الصفحة، فلا تختفي في الطريق ثمّ تظهر فجأة */
       if (el !== inRow) {
@@ -9804,6 +9809,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         Object.assign(mv.style, { position: 'fixed', left: (r.left - (bm ? bm.e : 0)) + 'px', top: (r.top - (bm ? bm.f : 0)) + 'px', width: r.width + 'px', height: r.height + 'px',
           display: 'grid', placeItems: 'center', color: cs.color, zIndex: 60, pointerEvents: 'none', margin: 0 });
         document.body.appendChild(mv); flies.push(mv); el.style.visibility = 'hidden';
+        dy += dm;   /* النسخةُ الطائرة ثابتةٌ في الصفحة لا تنزل مع المساهمة */
       }
       an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
