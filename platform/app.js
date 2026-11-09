@@ -9681,11 +9681,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
     if (!fp || bkReduce()) return;
     cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
-    const D = 560 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)', an = [];
+    /* ===== الترويسةُ تنقسم (طلبُ صاحب الموقع): نصفُها الأعلى يبقى ترويسة، ونصفُها الأسفل ينزل فيصير تذييلًا،
+       ومربّعُ المساحة الأبيض يخرج بينهما من أيقونتها ===== */
+    const D = 620 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.3, .7, .2, 1)', an = [];
     const fr = fp.getBoundingClientRect(), h1 = fr.height, cs = getComputedStyle(fp);
-    an.push(fp.animate([{ height: h0 + 'px', backgroundColor: 'transparent', borderColor: 'transparent' },
-      { height: h1 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor }], { duration: D, easing: ez }));
-    fp.classList.add('pk--frin'); requestAnimationFrame(() => requestAnimationFrame(() => fp.classList.remove('pk--frin')));
+    const hl = fp.querySelector('.pk-hdline:not(.pk-ftline)'), fl = fp.querySelector('.pk-ftline');
+    const hH = hl ? hl.getBoundingClientRect().top + hl.offsetHeight / 2 - fr.top : h0;
+    const fH = fl ? fr.bottom - (fl.getBoundingClientRect().top + fl.offsetHeight / 2) : 0;
+    const hs = Math.max(h0, hH + fH);   /* الصفُّ يغلظ أوّلًا إلى ترويسةٍ وتذييلٍ ملتصقَين، ثمّ ينفصلان */
+    const o1 = .18;
+    an.push(fp.animate([{ height: h0 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, easing: 'ease-out' },
+      { height: hs + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, offset: o1, easing: ez },
+      { height: h1 + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor }], { duration: D }));
+    /* التذييلُ (مسكتُه وأدواتُه وأرضيّتُه في طبقة الكتل) يلزم حافّةَ المربّع السفلى وهي تنزل */
+    const ty = [h0 - h1, hs - h1];
+    const foot = [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')];
+    foot.forEach(x => an.push(x.animate([{ transform: `translateY(${ty[0]}px)`, easing: 'ease-out' }, { transform: `translateY(${ty[1]}px)`, offset: o1, easing: ez }, { transform: 'none' }], { duration: D })));
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .2, fill: 'backwards' })));
     /* الأيقوناتُ من سطرها إلى مواضعها: صاحبتُها إلى زاوية مربّعها، والأُخريان إلى خارجه */
     PK_IC_KEYS.forEach(q => {
@@ -9696,20 +9707,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const r1 = el.getBoundingClientRect();
       an.push(el.animate([{ transform: `translate(${(r0.left + r0.width / 2) - (r1.left + r1.width / 2)}px, ${(r0.top + r0.height / 2) - (r1.top + r1.height / 2)}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
     });
+    /* والمربّعُ الأبيضُ يخرج من الأيقونة: شبحٌ بلونه يكبر منها، وكتلتُه الحقيقيّةُ مخفيّةٌ حتى يبلغها */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
     if (blk && band && before[k]) {
       const bb = blk.getBBox(), a = pkIcRel(fp, before[k]);
       const g = document.createElement('div'); g.className = 'pk-icghost'; g.setAttribute('aria-hidden', 'true');
       Object.assign(g.style, { left: bb.x + 'px', top: bb.y + 'px', width: bb.width + 'px', height: bb.height + 'px' });
-      band.after(g); band.style.opacity = '0';
-      const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px' },
+      band.after(g); blk.style.opacity = '0';
+      const ga = g.animate([{ transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: 0 },
+        { transform: `translate(${a.x - bb.x}px, ${a.y - bb.y}px) scale(${a.w / bb.width}, ${a.h / bb.height})`, borderRadius: '10px', offset: o1 },
         { transform: 'none', borderRadius: '16px' }], { duration: D, easing: ez });
       an.push(ga);
-      ga.finished.then(() => { band.style.opacity = ''; g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).finished.then(() => g.remove(), () => g.remove()); }, () => { band.style.opacity = ''; g.remove(); });
+      ga.finished.then(() => { blk.style.opacity = ''; g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 }).finished.then(() => g.remove(), () => g.remove()); }, () => { blk.style.opacity = ''; g.remove(); });
     }
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-ftline, .pk-pubfoot)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .65, easing: 'ease-out', fill: 'backwards' })));
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
+      .forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .35, delay: D * .7, easing: 'ease-out', fill: 'backwards' })));
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
   function pkIcGo(id, k, from) {
