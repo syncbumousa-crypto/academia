@@ -17524,3 +17524,5 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 /* «قائمة · رحلة» لا يظهر والبنكُ فارغ — يظهر حالَ إضافة أوّل شيء (طلبُ صاحب الموقع) */
 #cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > .cx-jrseg,
 #cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > .cx-jrseg { display: none !important; }
+/* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
