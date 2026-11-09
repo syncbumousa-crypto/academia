@@ -17432,3 +17432,8 @@ html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e07b6f; opacity: .4
 html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(224, 123, 111, .42); }
 .pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { opacity: .8; }
 .pk-blkh__x:hover .pk-curve__dots, .pk-blkh__x:focus-visible .pk-curve__dots { opacity: 1; }
+/* ===== زرُّ التضييق الأحمر في الزاوية العليا اليسرى من المساهمة (طلبُ صاحب الموقع) — والتوسيعُ وحدَه في اليمنى على وسط قوسها ===== */
+.pk--max .pk-max.pk-max--curve.pk-shrink { inset-inline-start: auto; inset-inline-end: -16px; }
+.pk-shrink .pk-sh--side, #cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
+.pk-shrink .pk-sh--solo { display: block; transform: scaleX(-1); }
+html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }

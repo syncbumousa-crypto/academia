@@ -21085,7 +21085,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const cxShrinkBtn = () => `<button type="button" class="pk-max pk-max--curve pk-shrink" data-cxshrink aria-pressed="true"
       title="${esc(T().cxShrink)}" aria-label="${esc(T().cxShrink)}">${CX_SHRINK}</button>`;
   const cxMaxBtn = () => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmax aria-pressed="false"
-      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${cxMax ? CX_GROW : CX_GROW1}</button>${cxMax ? cxShrinkBtn() : ''}</span>`;
+      title="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}" aria-label="${esc(cxMax ? T().cxFullOn : T().cxMaxOn)}">${CX_GROW1}</button>${cxMax ? cxShrinkBtn() : ''}</span>`;
   function cxFullSet(on) {
     const body = document.getElementById('cm-body');
     cxFull = !!on && !!(cxMax || cxMaxPub);
@@ -21108,7 +21108,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const cxMaxPubCorner = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve pk-max--pubc" data-cxmaxpub="${esc(id)}" aria-pressed="false"
       title="${esc(T().cxMaxOn)}" aria-label="${esc(T().cxMaxOn)}">${CX_GROW1}</button></span>`;
   const cxMaxPubBtn = id => `<span class="pk-maxdock"><button type="button" class="pk-max pk-max--curve" data-cxmaxpub="${esc(id)}" data-cxup aria-pressed="false"
-      title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_GROW}</button>${cxShrinkBtn()}</span>`;
+      title="${esc(T().cxFullOn)}" aria-label="${esc(T().cxFullOn)}">${CX_GROW1}</button>${cxShrinkBtn()}</span>`;
   /* تكبيرُ المنشورة وتصغيرُها: يُعاد الرسمُ (الشجرةُ تُفتح)، ويُحفظ تمريرُ النافذة ويُردّ */
   function cxPubMaxSet(id) {
     const body = document.getElementById('cm-body');
