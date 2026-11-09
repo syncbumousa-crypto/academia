@@ -9335,7 +9335,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
     if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;
     /* ومقسومُ «قائمة · رحلة» يخصّ شجرةَ البنك وحدها: في الخانة مع أدواته، ولا يظهر إلّا والبنكُ نشِط (طلبُ صاحب الموقع) */
-    if (a === 'bank') return cxJrSeg(cardData(cmCode)) + pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]]);
+    /* والمقسومُ يسارَ «+» (بعده في الترتيب)، ولا يظهر إلّا وفي البنك شيء (طلبُ صاحب الموقع) */
+    if (a === 'bank') return pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]])
+      + cxJrSeg(cardData(cmCode));   /* يُخفى بالأنماط ما دام البنكُ فارغًا: فيظهر حالَ الإضافة بلا إعادة رسم */
     return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC]]);
   }
   /* ===== «+» واحدٌ في الوسط ينفتح عن خيارين (طلبُ صاحب الموقع) =====
