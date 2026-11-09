@@ -9459,8 +9459,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      إلى زرٍّ في وسطه «حمّل ملف المصدر PDF» — للمساهمة كلِّها لا لمجلد، فلا شريطَ مجلداتٍ فوقه */
   const PK_SRC_IC = '<path d="M4 11.5h4.5V17H4v-5.5C4 8.5 5.5 6.5 8 6"/><path d="M13.5 11.5H18V17h-4.5v-5.5c0-3 1.5-5 4-5.5"/>';
   /* ===== شريطُ الرأس: مفاتيحُ المساحات الثلاث بترتيبها (المصادر · الملخّص · البنك) — وطرقُ عرض الملخّص انتقلت إلى الذيل (طلبُ صاحب الموقع) ===== */
+  /* أيقونةُ الملخّص: نصٌّ — سطورٌ تقصر من جهة البداية (طلبُ صاحب الموقع) */
+  const PK_MID_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M8 10.5h12M4 15h16M11 19.5h9"/></svg>';
   const pkMidBtn = id => { const on = !pkMidOff[id];
-    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${TAB_IC.cards}</button>`; };
+    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${PK_MID_IC}</button>`; };
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo">${pkVbBtn(id, 'source', PK_SRC_IC)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo">${pkMidBtn(id)}</span>
@@ -9470,7 +9472,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
   const pkBlkH = (k, id, n, noX) => {
     const ic = k === 'book' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_SRC_IC}</svg>`
-      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>` : TAB_IC.cards;
+      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>` : PK_MID_IC;
     const nm = T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'];
     const x = k === 'book' ? 'data-pkview="source"' : k === 'bank' ? 'data-pkview="folder"' : 'data-pkmidx';
     return `<div class="pk-blkh pk-blkh--${k}"><span class="pk-blkh__ic" aria-hidden="true">${ic}</span><b class="pk-blkh__nm">${esc(nm)}</b>`
