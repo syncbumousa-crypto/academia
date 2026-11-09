@@ -9742,16 +9742,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
-  /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
+  /* والطيُّ — مراحلُ متتابعةٌ سريعة (طلبُ صاحب الموقع):
+     ١. عناصرُ المساحة تغيب  ٢. ثمّ خلفيّتُها (ومعها خطُّ التذييل وأدواتُه)  ٣. ثمّ الأيقوناتُ تتجمّع جنبًا إلى جنب
+     ٤. ثمّ خطُّ الترويسة يغيب  ٥. ثمّ تصعد الأيقوناتُ إلى سطرها وتستقرّ، والمساهمةُ تقصر معها والإعجابُ يصعد إلى موضعه */
   function pkIcCollapse(id, fp) {
     const k = pkIcOpenK(id);
     const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; delete pkNotchSt[id]; renderCmSection(); };
     if (!k || bkReduce()) return done();
     fp.pkBlkHold = true;
-    /* الطيُّ ليّنُ البدء والختام (لا يقفز في أوّله كما يقفز الاتّساعُ المنطلق) */
-    const D = 540 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.6, 0, .25, 1)', an = [];
+    const S = window.__pkfxSlow || 1, ms = x => x * S, an = [];
+    const T1 = [0, 130], T2 = [110, 260], T3 = [250, 480], T4 = [460, 560], T5 = [540, 900], TT = T5[1];
+    const o = t => t / TT;
+    const EZ_IO = 'cubic-bezier(.4, 0, .2, 1)', EZ_UP = 'cubic-bezier(.25, .8, .3, 1)', EZ_SET = 'cubic-bezier(.3, 1.25, .45, 1)';
+    const fade = (els, [t0, t1]) => els.forEach(x => an.push(x.animate([{ opacity: getComputedStyle(x).opacity }, { opacity: 0 }], { duration: ms(t1 - t0), delay: ms(t0), easing: 'ease-out', fill: 'forwards' })));
     const fr = fp.getBoundingClientRect(), h1 = fr.height;
-    /* قامةُ الصفّ الضيّق: ترويستُه وسطرُ أيقوناته وإعجابُه (كما في الصفّ) */
     const hd = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd');
     const h0 = pkIcRowH[id] || (hd ? hd.getBoundingClientRect().bottom - fr.top + 30 : 90);
     const main = fp.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), en = state.lang === 'en';
@@ -9759,44 +9763,42 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const slot = i => { const q = at[PK_IC_KEYS[i]]; if (q) return { left: en ? main.left + q.x : main.right + q.xr - q.w, top: fr.top + q.y, width: q.w, height: q.h };
       const x0 = en ? main.left + 101 + i * 30 : main.right - 101 - 24 - i * 30; return { left: x0, top: main.top + 54, width: 24, height: 24 }; };
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
-    /* ١. المحتوى يغيب أوّلًا */
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
-      ...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *'), ...fp.querySelectorAll('.post-ytmain > .pk-hdline:not(.pk-ftline)')]
-      .forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
-    fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, fill: 'forwards' })));
-    /* ٢. المربّعُ ينطوي إلى أيقونته */
+    /* ١. عناصرُ المساحة */
+    fade([...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
+      ...fp.querySelectorAll('.pk-maxdock')], T1);
+    /* ٢. خلفيّتُها، وخطُّ التذييل وأدواتُه وحافّتُه في الرسم */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
     if (blk && band) {
-      const bb = blk.getBBox(), W = +band.getAttribute('width') || fp.clientWidth, H = +band.getAttribute('height') || fp.clientHeight;
-      const a = pkIcRel(fp, slot(PK_IC_KEYS.indexOf(k)));
-      const g = pkIcGhost(fp, blk, bb); g.style.transformOrigin = '';
+      const g = pkIcGhost(fp, blk, blk.getBBox()); g.style.transformOrigin = 'center';
       band.after(g); blk.style.opacity = '0';
-      an.push(g.animate([{ clipPath: pkIcInset(W, H, { x: bb.x - 1, y: bb.y - 1, w: bb.width + 2, h: bb.height + 2 }, 16), opacity: 1 },
-        { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      an.push(g.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.985)' }], { duration: ms(T2[1] - T2[0]), delay: ms(T2[0]), easing: 'ease-in', fill: 'forwards' }));
     }
-    /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
-    an.push(fp.animate([{ height: h1 + 'px' }, { height: h0 + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
-    /* خطُّ التذييل وأدواتُه وحافّتُه في الرسم تغيب مع المحتوى (لا تُرفع فوق الترويسة)، وتنزل مع الحافّة ما دامت ظاهرة */
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
-      an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
-    /* والإعجابُ يمضي مباشرةً إلى موضعه في الصفّ على منحنى القامة نفسِه، فلا يعلو ولا يُقصّ */
+    fade([...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')], T2);
+    /* ٤. خطُّ الترويسة */
+    fade([...fp.querySelectorAll('.post-ytmain > .pk-hdline:not(.pk-ftline)')], T4);
+    /* ٥. المساهمةُ تقصر، والإعجابُ يصعد إلى موضعه */
+    const hold = (a0, a1) => [{ ...a0, offset: 0 }, { ...a0, offset: o(T5[0]), easing: EZ_UP }, { ...a1, offset: 1 }];
+    an.push(fp.animate(hold({ height: h1 + 'px' }, { height: h0 + 'px' }), { duration: ms(TT), fill: 'forwards' }));
     fp.querySelectorAll('.post-ytmain > .post-react').forEach(x => {
-      const q = x.getBoundingClientRect(), t = pkIcRowRe[id];
-      const dx = 0, dy = t ? t.y - (q.top - fr.top) : h0 - h1;
+      const q = x.getBoundingClientRect(), t = pkIcRowRe[id], dy = t ? t.y - (q.top - fr.top) : h0 - h1;
       x.style.position = 'relative'; x.style.zIndex = '3';
-      an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      an.push(x.animate(hold({ transform: 'none' }, { transform: `translateY(${dy}px)` }), { duration: ms(TT), fill: 'forwards' }));
     });
-    /* ٣. الأيقوناتُ إلى سطرها */
-    const flies = [];
+    /* ٣ و٥. الأيقونات: تتجمّع جنبًا إلى جنب (في مواضعها من السطر أفقيًّا، عند أدنى أيقونةٍ منها) ثمّ تصعد وتستقرّ */
+    const flies = [], ics = [];
     PK_IC_KEYS.forEach((q, i) => {
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
       const el = inRow && inRow.offsetParent ? inRow : (q === 'mid' ? fp.querySelector('.pk-blkh--mid .pk-blkh__ic') : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`));
       if (!el) return;
-      const r = el.getBoundingClientRect(), t = slot(i), sc = r.width ? t.width / r.width : 1;   /* وبحجمها في السطر (أيقونةُ رأس المساحة أصغر) */
-      const cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;   /* وإزاحتُها الأصليّة (‎translateY(-2px)‎) تُحسب */
-      const dx = (t.left + t.width / 2) - (r.left + r.width / 2 - (bm ? bm.e : 0)), dy = (t.top + t.height / 2) - (r.top + r.height / 2 - (bm ? bm.f : 0));
+      const r = el.getBoundingClientRect(), cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;
+      ics.push({ i, el, inRow, r, cs, bm, cx: r.left + r.width / 2 - (bm ? bm.e : 0), cy: r.top + r.height / 2 - (bm ? bm.f : 0) });
+    });
+    const gy = Math.max(...ics.map(c => c.r.top + c.r.height / 2));
+    ics.forEach(({ i, el, inRow, r, cs, bm, cx, cy }) => {
+      const t = slot(i), sc = r.width ? t.width / r.width : 1;   /* وبحجمها في السطر (أيقونةُ رأس المساحة أصغر) */
+      const dx = t.left + t.width / 2 - cx, dy = t.top + t.height / 2 - cy, gdy = gy - cy;
       let mv = el;
-      /* أيقونةُ رأس المساحة داخلَ مساحةٍ تنطوي وتُقصّ: تطير نسخةٌ منها فوق الصفحة، فلا تختفي في الطريق ثمّ تظهر فجأة */
+      /* أيقونةُ رأس المساحة داخلَ مساحةٍ تُقصّ: تطير نسخةٌ منها فوق الصفحة، فلا تنقطع في الطريق */
       if (el !== inRow) {
         mv = document.createElement('span'); mv.className = 'pk-icfly'; mv.setAttribute('aria-hidden', 'true');
         const sv = el.querySelector('svg'), sr = sv && sv.getBoundingClientRect();
@@ -9805,7 +9807,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           display: 'grid', placeItems: 'center', color: cs.color, zIndex: 60, pointerEvents: 'none', margin: 0 });
         document.body.appendChild(mv); flies.push(mv); el.style.visibility = 'hidden';
       }
-      an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      const b0 = bm ? cs.transform : 'none', gat = `translate(${dx}px, ${gdy}px) scale(${sc})`;
+      an.push(mv.animate([
+        { transform: b0, opacity: cs.opacity, offset: 0 },
+        { transform: b0, opacity: cs.opacity, offset: o(T3[0]), easing: EZ_IO },
+        { transform: gat, opacity: 1, offset: o(T3[1]) },
+        { transform: gat, opacity: 1, offset: o(T5[0]), easing: EZ_SET },
+        { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1, offset: 1 }], { duration: ms(TT), fill: 'forwards' }));
     });
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { done(); flies.forEach(x => x.remove()); });
   }
