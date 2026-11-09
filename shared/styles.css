@@ -17611,3 +17611,5 @@ html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInE
 /* خلفيّةُ الترويسة ومسكتُها تظهران خلف ما فيها حين تتّسع */
 #cm-body .pk--framepub .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub .pk-hdline:not(.pk-ftline) .pk-hdline__grip { transition: opacity .18s ease-out; }
 #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: none; }
+/* والطيّ: خلفيّةُ الترويسة ومسكتُها تخفتان في آخره */
+#cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: opacity .16s ease-in; }

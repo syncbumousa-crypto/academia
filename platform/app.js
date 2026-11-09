@@ -32249,6 +32249,27 @@ void main() {
     const pt = e.target.closest('.pk-toggle');
     if (pt) {
       const pk = pt.closest('.post.pk');
+      /* ===== والطيُّ بالسهم عكسُ الاتّساع (طلبُ صاحب الموقع): البطنُ يخفت ويرتفع إلى الترويسة، ثمّ تخفت أزرارُها وخلفيّتُها
+         وتنضمّ إلى الصفّ الضيّق — ثمّ يُرسم الحال ===== */
+      if (pk.classList.contains('pk--framepub') && !pk.pkFoldGo && !bkReduce()) {
+        if (pk.pkFolding) return;
+        pk.pkFolding = true; pk.pkBlkHold = true;
+        const D = 440 * (window.__pkfxSlow || 1), an = [];
+        const fr = pk.getBoundingClientRect(), hl = pk.querySelector('.pk-hdline:not(.pk-ftline)'), rr = pk.querySelector('.post-yt > .post-ytmain > .post-react');
+        const hH = hl ? hl.getBoundingClientRect().bottom - fr.top + 2 : fr.height;
+        const hC = rr ? rr.getBoundingClientRect().bottom - fr.top + 4 : hH;
+        pk.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)').forEach(x =>
+          an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .35, easing: 'ease-in', fill: 'forwards' })));
+        pk.querySelectorAll('.x3-pkhd > .pk-vbar, .pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0, transform: 'translateY(-4px)' }],
+          { duration: D * .25, delay: D * .55, easing: 'ease-in', fill: 'forwards' })));
+        const cs = getComputedStyle(pk);
+        an.push(pk.animate([{ height: fr.height + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor },
+          { height: hH + 'px', backgroundColor: cs.backgroundColor, borderColor: cs.borderTopColor, offset: .6 },
+          { height: hC + 'px', backgroundColor: 'transparent', borderColor: 'transparent' }], { duration: D, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }));
+        setTimeout(() => pk.classList.add('pk--frout'), D * .6);
+        Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { pk.pkFoldGo = true; pt.click(); });
+        return;
+      }
       const h0 = pk.getBoundingClientRect().height;   /* قامةُ الصفّ الضيّق — منها تنبسط المتّسعة */
       let nowOpen;
       if (pk.classList.contains('pk--fold')) {   /* المادة/الدكتور: توسيع/تضييق إنلاين، حالة الطي في cmOpen */
