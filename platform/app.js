@@ -9787,11 +9787,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tg = post.querySelector('.x3-pkhd > .pk-vbar ' + key);
     cxRowFresh = id;   /* لا يُطوى بخلوٍّ عابر */
     if (tg) tg.click();
-    /* والأيقوناتُ تظهر في مواضعها الجديدة */
-    requestAnimationFrame(() => {
-      const p2 = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
-      if (p2 && !bkReduce()) p2.querySelectorAll('.pk-icrow [data-pkic]').forEach(x => { if (x.offsetParent) x.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2, .8, .2, 1)' }); });
-    });
+    /* (والأيقوناتُ تنبت في فجواتها مع انفتاحها — ‎pkNotchDraw‎) */
   }
   function pkIcGo(id, k, from) {
     const post0 = from.closest('.post');
@@ -21818,6 +21814,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (t && pr) {
           const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
           t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
+          /* والأيقونةُ لا تظهر قبل أن تكتمل فجوتُها: تنبت فيها في آخر انفتاحها */
+          const q = Math.max(0, Math.min(1, (v - .55) / .45));
+          t.bt.style.opacity = q < 1 ? f(q) : '';
+          t.bt.style.transform = q < 1 ? `scale(${f(.55 + .45 * q)})` : '';
         }
         return d.replace(hit[0], seg);
       });
