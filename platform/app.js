@@ -9430,9 +9430,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bkReduce()) return;
     const ctl = document.querySelector(`#cm-body [data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
     if (!post) return;
+    /* الكتلُ تُرسم الآن من مواضعها النهائيّة، ولا يُعاد رسمُها والعناصرُ مُزاحةٌ في الحركة (كانت تُقاس مُزاحةً فتبقى أصغرَ وأنزلَ
+       من مناطقها، وتخرج الأيقونةُ وقوسُ الإغلاق عنها) — ثمّ تُرسم مرّةً أخيرةً حين تقف */
+    pkBandFit(post); post.pkBlkHold = true;
     const els = [...post.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-split, .pk-ftline, .vt-foot, .pk-pubfoot)')];
-    els.forEach(e => e.animate([{ opacity: 0, transform: 'translateY(10px) scale(.985)' }, { opacity: 1, transform: 'none' }],
+    const an = els.map(e => e.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
       { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
+    const done = () => { post.pkBlkHold = false; if (post.isConnected) pkBandFit(post); };
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(done);
     pkAnimsNextFrame(post);
   }
   /* والنقرُ على مفتاح المصادر أو البنك في تلك الحال: قبل محرّك الحركة (على النافذة في طور الالتقاط) */
@@ -21357,7 +21362,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pane = sp && ft && (sp.querySelector(':scope > ' + PK_PANE[a || 'mid']) || sp.firstElementChild);
     /* ولا مساحةَ مفتوحة: لا كتلَ ولا ذيل (طلبُ صاحب الموقع) */
     if (!pane || pkBandOff() || !pkLab() || sp.classList.contains('pk-split--none')) { if (svg) svg.remove(); card.classList.remove('pk--bandfx'); return; }
-    if (card.pkBandAnim) return;   /* أثناء الحركة يرسمها محرّكُها */
+    if (card.pkBandAnim || card.pkBlkHold) return;   /* أثناء الحركة يرسمها محرّكُها (أو تُثبَّت حتى تقف) */
     if (!svg) {
       svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.setAttribute('class', 'pk-band'); svg.setAttribute('aria-hidden', 'true');
