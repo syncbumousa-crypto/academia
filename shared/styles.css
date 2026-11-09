@@ -17670,3 +17670,4 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 #cm-body .pk--icx.pk--ic1 .pk-icrow .pk-ic { position: absolute; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__ic { transition: transform .2s ease, color .15s, background .15s, box-shadow .15s; }
 #cm-body .pk--icx.pk--icR .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-start: 34px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.kt-view, .pk-src, .pk-bank) { padding-bottom: 40px; box-sizing: border-box; }

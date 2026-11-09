@@ -21828,10 +21828,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b)); }
     /* الأرضيّةُ تبدأ من خطّ الرأس نفسِه (منتصفِ مسكته، حيث ينتهي شريطُه) — فلا يبقى بينهما شريطٌ بلون المربّع */
     const hdl = card.querySelector('.pk-hdline:not(.pk-ftline)'), gT = hdl ? (h => h.t + h.h / 2)(R(hdl)) : top - 12;
-    /* ===== كونسبت الأيقونات: فجواتٌ في زوايا المربّعات العليا تسكنها أيقوناتُ المغلقة (طلبُ صاحب الموقع) =====
-       مصادرُ التلخيص في فجوةٍ بالزاوية العليا اليمنى (من حيث تدخل)، والباقيتان في فجوةٍ بالزاوية العليا اليسرى. والفجوةُ في سقف الـT
-       إن كان الملخّصُ مفتوحًا، وإلّا في أقصى مربّعٍ في جهتها. وأيقونةُ المربّع نفسِه تُفسح لفجوة جهتها */
-    card.querySelectorAll('.post-ytmain > .pk-split .pk-blkh__ic, .post-ytmain > .pk-blkh--mid .pk-blkh__ic').forEach(x => { x.style.transform = ''; });
+    /* ===== كونسبت الأيقونات: أيقوناتُ المغلقة في فجواتٍ بالزاويتين السفليّتين (طلبُ صاحب الموقع) =====
+       مصادرُ التلخيص يمينًا (من حيث تدخل) والبنكُ يسارًا، والملخّصُ في الزاوية الخالية — كلٌّ في فجوةٍ بأقصى مربّعٍ في جهته */
     let notchR = false;
     if (card.classList.contains('pk--ic1')) {
       const row = card.querySelector('.pk-icrow');
@@ -21840,34 +21838,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const pr = row.offsetParent ? row.offsetParent.getBoundingClientRect() : cb;
         const elOf = q => q === 'book' ? src : q === 'bank' ? bank : mid;
         const ks = [mid && 'mid', src && 'book', bank && 'bank'].filter(Boolean);
-        const pick = side => mid && head ? 'mid' : ks.slice().sort((p, q) => side === 'l' ? R(elOf(p)).l - R(elOf(q)).l : R(elOf(q)).r - R(elOf(p)).r)[0];
-        const NH = 34, c = 12, en = state.lang === 'en';
-        const groups = { r: closed.filter(x => x.dataset.pkic === 'book'), l: closed.filter(x => x.dataset.pkic !== 'book') };
-        if (en) { const t = groups.r; groups.r = groups.l; groups.l = t; }
-        ['l', 'r'].forEach(side => {
-          const btns = groups[side]; if (!btns.length) return;
-          const k = pick(side), NW = 12 + btns.length * 28;
+        const pick = side => ks.slice().sort((p, q) => side === 'l' ? R(elOf(p)).l - R(elOf(q)).l : R(elOf(q)).r - R(elOf(p)).r)[0];
+        const en = state.lang === 'en', inR = en ? 'bank' : 'book', inL = en ? 'book' : 'bank';
+        const side = {};
+        closed.forEach(x => { const q = x.dataset.pkic; if (q === inR) side.r = x; else if (q === inL) side.l = x; });
+        closed.forEach(x => { if (x.dataset.pkic === 'mid') { if (!side.l) side.l = x; else side.r = x; } });
+        const NW = 40, NH = 36, c = 12;
+        ['l', 'r'].forEach(sd => {
+          const bt = side[sd]; if (!bt) return;
+          const k = pick(sd);
           out = out.replace(new RegExp(`<path class="pk-blk([^"]*)" data-k="${k}" d="([^"]*)"/>`), (m0, cls, d) => {
-            let x0, y0, x1, r;
-            if (side === 'l') {
-              const mm = d.match(/^M([\d.-]+) ([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/);
-              if (!mm) return m0;
-              x0 = +mm[1]; r = +mm[3]; y0 = +mm[5];
-              const body = d.slice(mm[0].length).replace(/V[\d.-]+Z$/, '').replace(/Z$/, '');
-              d = `M${f(x0 + NW + r)} ${f(y0)}` + body
-                + `V${f(y0 + NH + r)}A${r} ${r} 0 0 1 ${f(x0 + r)} ${f(y0 + NH)}H${f(x0 + NW - c)}A${c} ${c} 0 0 0 ${f(x0 + NW)} ${f(y0 + NH - c)}V${f(y0 + r)}A${r} ${r} 0 0 1 ${f(x0 + NW + r)} ${f(y0)}Z`;
-              btns.forEach((bt, i) => { bt.style.left = f(ox + x0 + 8 + i * 28 - pr.left) + 'px'; bt.style.top = f(oy + y0 + (NH - 24) / 2 - 2 - pr.top) + 'px'; });
-            } else {
-              const mm = d.match(/H([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/);
-              if (!mm) return m0;
-              r = +mm[2]; x1 = +mm[3]; y0 = +mm[4] - r;
-              d = d.replace(mm[0], `H${f(x1 - NW - r)}A${r} ${r} 0 0 1 ${f(x1 - NW)} ${f(y0 + r)}V${f(y0 + NH - c)}A${c} ${c} 0 0 0 ${f(x1 - NW + c)} ${f(y0 + NH)}H${f(x1 - r)}A${r} ${r} 0 0 1 ${f(x1)} ${f(y0 + NH + r)}`);
-              btns.forEach((bt, i) => { bt.style.left = f(ox + x1 - NW + 4 + i * 28 - pr.left) + 'px'; bt.style.top = f(oy + y0 + (NH - 24) / 2 - 2 - pr.top) + 'px'; });
-              /* وأيقونةُ المربّع (في زاويته اليمنى) تتنحّى عن الفجوة */
-              const own = k === 'mid' ? card.querySelector('.post-ytmain > .pk-blkh--mid .pk-blkh__ic') : elOf(k).querySelector('.pk-blkh__ic');
-              if (own) own.style.transform = `translateX(${en ? NW : -NW}px)`;
-              notchR = k === 'mid';
-            }
+            /* الحافّةُ السفلى: قوسٌ ينتهي عند القاع ثمّ ‎H‎ يسارًا ثمّ قوسٌ يصعد */
+            const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
+            let mm, hit = null;
+            while ((mm = re.exec(d))) { if (+mm[5] < +mm[3]) { hit = mm; break; } }
+            if (!hit) return m0;
+            const r = +hit[2], y1 = +hit[4], x1 = +hit[3] + r, x0 = +hit[6];
+            let seg;
+            if (sd === 'r') seg = `V${f(y1 - NH - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1 - NH)}H${f(x1 - NW + c)}A${c} ${c} 0 0 0 ${f(x1 - NW)} ${f(y1 - NH + c)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - NW - r)} ${f(y1)}`
+              + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}`;
+            else seg = `V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + NW + r)}A${r} ${r} 0 0 1 ${f(x0 + NW)} ${f(y1 - r)}V${f(y1 - NH + c)}A${c} ${c} 0 0 0 ${f(x0 + NW - c)} ${f(y1 - NH)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - NH - r)}`;
+            /* (إن كانت في الجهتين على المربّع نفسِه: الثانيةُ تُبنى على ما خلّفته الأولى) */
+            d = d.replace(hit[0], seg);
+            const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
+            bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
             return `<path class="pk-blk${cls}" data-k="${k}" d="${d}"/>`;
           });
         });
@@ -21875,6 +21869,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* وشريطُ المجلدات يُفسح لأيقونة الملخّص وقد تنحّت عن فجوة المصادر */
     if (card.classList.contains('pk--icR') !== notchR) card.classList.toggle('pk--icR', notchR);
+    /* وما في المربّعات ينتهي فوق الفجوات السفلى */
+    const notchB = card.classList.contains('pk--ic1') && !!card.querySelector('.pk-icrow [data-pkic]:not(.is-on)');
+    if (card.classList.contains('pk--icB') !== notchB) card.classList.toggle('pk--icB', notchB);
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
   }
