@@ -4263,6 +4263,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxMax = false;
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
   let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
+  let cxRowPub = null;                     // والمفتوحةُ في موضعها بإطارٍ (رأسٌ وذيل) من مفاتيح المساحات — بين أخواتها
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
   let cxFtDn = false;
   let cxFull = false;                      // والمكبَّرةُ تملأ الشاشةَ كلَّها (درجةٌ ثالثة) — حالُ نظرة                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
@@ -9661,7 +9662,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
     pkBank[id] = k === 'bank';
     if (k === 'source' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
-    cxMorph(b, () => cxPubMaxSet(id));
+    /* تتّسع في موضعها بين أخواتها (طلبُ صاحب الموقع) — لا تكبيرَ يُخفي ما سواها */
+    cxRowPub = id; cardView = { open: id, fold: {} }; cxHdUp = false; cxFtDn = false;
+    renderCmSection();
+    const post = document.querySelector(`#cm-body .post[data-ck="${CSS.escape(id)}"]`);
+    if (!post || bkReduce()) return;
+    cxHdMeasure();
+    const els = [...post.querySelectorAll(':scope > .pk-band, .post-ytmain > :is(.pk-hdline, .pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph, .pk-split, .pk-ftline, .pk-pubfoot)')];
+    pkBandFit(post); post.pkBlkHold = true;
+    const an = els.map(x => x.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2, .8, .2, 1)' }));
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { post.pkBlkHold = false; if (post.isConnected) pkBandFit(post); });
   }, true);
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
@@ -11364,7 +11374,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
              ><span>${esc(T().pkGo)}</span></button>` : ''}
       ${x3TtlHTML(p)}
       <!-- ومفاتيحُ المساحات الثلاث يسارَ العنوان (طلبُ صاحب الموقع): نقرُ أحدها يكبّر المساهمةَ برأسها وذيلها على ما اختير -->
-      ${kind === 'c' && pkLab() && !(open && cxMaxPub === p.id) ? pkRowBar(p.id) : ''}
+      ${kind === 'c' && pkLab() && !(open && (cxMaxPub === p.id || cxRowPub === p.id)) ? pkRowBar(p.id) : ''}
       <!-- ===== ودائرةُ الرزمة كلِّها يسارَ عنوانها =====
            هي دائرةُ المجلد بعينها ونفسُ حسابها (‎x3Ans‎)، لكنّ مداها **الرزمةُ كلُّها**
            لا مجلدًا فيها: ماءٌ يرتفع بقدر ما أُجيب منها، ولونُه بقدر ما أُصيب.
@@ -11387,7 +11397,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      ${kind === 'c' && open && cxMaxPub === p.id ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
+      ${kind === 'c' && open && (cxMaxPub === p.id || (cxRowPub === p.id && cardView.open === p.id && pkLab())) ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
      اسم البطاقة هو وجهها — أي السؤال المكتوب فيها */
@@ -11568,6 +11578,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sub = kind === 'c' ? 'cards' : 'videos';
     const V = kind === 'c' ? cardView : vidView;
     const maxd = kind === 'c' && cxMaxPub === p.id;   /* المكبَّرةُ مفتوحةٌ أبدًا: التكبيرُ لقراءة جوفها */
+    /* والمفتوحةُ في موضعها بإطار (طلبُ صاحب الموقع): رأسٌ وذيلٌ ومساحاتٌ كالمكبَّرة، وهي بين أخواتها */
+    const framed = !maxd && kind === 'c' && pkLab() && cxRowPub === p.id && V.open === p.id;
+    const big = maxd || framed;
     const open = V.open === p.id || maxd;
     const likeAttr = `data-like="${pi}" data-sub="${sub}"`;
     /* مفتاح فتح الرزمة يفرّق بينهما في المستمع العام: data-ck للبطائق و data-pk للشروح */
@@ -11588,8 +11601,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoDot = kind === 'c' ? packEntered(deck) : true;
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
-    const roAct = maxd && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${maxd && cxHdUp ? ' pk--hdup' : ''}${maxd && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' : ''}${framed ? ' pk--frame pk--framepub' : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' ? cxMaxPubCorner(p.id) : ''}
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -11599,7 +11612,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
           ${x3PkHead(p, deck, open, kind)}
-          ${maxd ? cxHdLine() : ''}
+          ${big ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
                قواعدُ الرحلة (القضيبُ والدوائرُ ومواضعُها ومقاساتُها) معلّقةٌ بـ
                ‎:is(.x3.cx-ro, .x3.cx-tree)‎ — شجرتَي البطائق. وشجرةُ نشر الشروح ‎.x3‎
@@ -11607,13 +11620,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                ولا تُعار ‎cx-ro‎: تلك تحمل مع الهندسة **حكمَ التحديد** (‎cxSelSync‎ تبحث
                عن ‎.x3.cx-ro‎ لتعرف شجرةَ النشر)، فلو لبستها الشروحُ لَالتبست الشجرتان
                في آلةٍ لا تخصّ الهندسة. فوسمٌ ثالثٌ يحمل الهندسةَ وحدَها -->
-          ${maxd && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
+          ${big && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
             : open ? (kind === 'c' && pkLab()
               ? ((p.data.qb || []).length
                 ? `<div class="x3 cx-ro${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(p.data.qb, V.fold, 0, kind)}</div>`
                 : `<p class="v-none pk-qbempty">${esc(T().pkQbEmpty)}</p>`)
               : `<div class="x3${kind === 'c' ? ' cx-ro' : ' cx-vo'}${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(deck, V.fold, 0, kind)}</div>`) : ''}
-          ${maxd ? cxFtLine() + cxPubFoot(kind === 'c' ? p.id : '') : ''}
+          ${big ? cxFtLine() + cxPubFoot(kind === 'c' ? p.id : '') : ''}
           ${reactRowHTML(p, likeAttr, '')}
         </div>
         ${postMenuHTML(p, likeAttr, `data-sub="${sub}"`)}

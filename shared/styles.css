@@ -17586,3 +17586,5 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 .pk-vbar--row .pk-vbar__b { color: var(--u-mut); }
 .pk-vbar--row .pk-vbar__b:hover { color: #a9852f; }
 html[data-theme="dark"] .pk-vbar--row .pk-vbar__b:hover { color: #d4b36a; }
+/* المنشورةُ المفتوحةُ في موضعها بإطار: مرجعُ طبقة الكتل وسياقُها (وإلّا رُسمت الكتلُ على أوّل سلفٍ مموضَع — فوق التبويبات) */
+#cm-body .pk--framepub { position: relative; isolation: isolate; }
