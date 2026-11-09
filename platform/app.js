@@ -9689,6 +9689,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.style.transformOrigin = `${bb.x}px ${bb.y}px`;
     return g;
   }
+  const pkIcRowTtl = {};   /* وموضعُ عنوانه */
   const pkIcRowM = {};   /* وهوامشُه */
   const pkIcRowAt = {};   /* ومواضعُ أيقوناته */
   const pkIcRowRe = {};   /* وموضعُ الإعجاب فيه */
@@ -9704,6 +9705,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* ومواضعُ الأيقونات في سطرها بالضبط (ليرجع إليها الطيُّ بلا قفزةٍ في آخره) */
       const m0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), c0 = getComputedStyle(post0);
       pkIcRowM[id] = { mt: parseFloat(c0.marginTop) || 0, mb: parseFloat(c0.marginBottom) || 0, top: r0.top };   /* وهوامشُه وموضعُه (الإطارُ يبدأ أعلى منه بقدر فرق الهوامش، ومحتواه في موضعه) */
+      const tt0 = post0.querySelector('.x3-pkhd > .x3-pkttl');
+      pkIcRowTtl[id] = tt0 ? (() => { const q = tt0.getBoundingClientRect(); return { x: q.left - m0.left, xr: q.right - m0.right, r: q }; })() : null;   /* وموضعُ العنوان (تفسح له الأيقوناتُ في سطره) */
       pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
@@ -9730,6 +9733,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const r1 = el.getBoundingClientRect();
       an.push(el.animate([{ transform: `translate(${(r0.left + r0.width / 2) - (r1.left + r1.width / 2)}px, ${(r0.top + r0.height / 2) - (r1.top + r1.height / 2)}px)` }, { transform: 'none' }], { duration: D, easing: ez }));
     });
+    /* والعنوانُ كان مُزاحًا في الصفّ لتسع الأيقوناتُ سطرَه: يعود إلى موضعه على المنحنى نفسِه */
+    { const t0 = pkIcRowTtl[id], tt = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd > .x3-pkttl');
+      if (t0 && tt) { const r1 = tt.getBoundingClientRect(), dx = t0.r.left - r1.left; if (Math.abs(dx) > .5) an.push(tt.animate([{ transform: `translateX(${dx}px)` }, { transform: 'none' }], { duration: D, easing: ez })); } }
     /* المربّعُ يُكشف من داخل أيقونته */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
     if (blk && band && before[k]) {
@@ -9793,6 +9799,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       x.style.position = 'relative'; x.style.zIndex = '3';
       an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
+    /* والعنوانُ يُفسح للأيقونات في سطره (موضعُه في الصفّ) */
+    { const t0 = pkIcRowTtl[id], tt = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd > .x3-pkttl');
+      if (t0 && tt) { const r1 = tt.getBoundingClientRect(), dx = (en ? main.left + t0.x : main.right + t0.xr - t0.r.width) - r1.left;
+        if (Math.abs(dx) > .5) an.push(tt.animate([{ transform: 'none' }, { transform: `translateX(${dx}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })); } }
     /* ٣. الأيقوناتُ إلى سطرها */
     const flies = [];
     PK_IC_KEYS.forEach((q, i) => {

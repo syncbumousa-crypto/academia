@@ -17689,3 +17689,8 @@ html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { str
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 125px; }
 /* ومربّعُ «لا يوجد مجلدات» يمتدّ إلى يسار كتلته (الهامشُ هناك كان لأيقونةٍ صارت في الزوايا السفلى) */
 #cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip-ph { margin-inline-end: 12px; }
+/* أيقوناتُ المساحات الثلاث في سطر العنوان، بين الغلاف والعنوان (طلبُ صاحب الموقع) — والعنوانُ يُفسح لها */
+#cm-body .pk--icx.pk--icrow .pk-icrow { top: 22px; inset-inline-start: 60px; }
+#cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-pkttl { margin-inline-start: 92px; }
+/* والصفُّ يبدأ حيث يبدأ إطارُه المتّسع (هامشٌ أصغر وحشوٌ أكبر — والترويسةُ في موضعها): فلا يتحرّك أعلاه عند الاتّساع ولا يجرّ التمريرَ معه */
+#cm-body .post.pk--icx.pk--icrow { margin-top: 7px; padding-top: 11px; }
