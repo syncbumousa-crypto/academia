@@ -17440,3 +17440,5 @@ html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }
 /* أيقونةُ المساحة أصغرُ وأقربُ إلى زاويتها العليا اليمنى (طلبُ صاحب الموقع) */
 .pk-blkh__ic { width: 18px; height: 18px; margin-inline-start: -6px; margin-top: -6px; }
 .pk-blkh__ic svg { width: 14px; height: 14px; }
+.pk-blkh__ic { margin-top: -14px; }
+.pk-blkh__ic { margin-top: 0; align-self: flex-start; transform: translateY(-8px); }
