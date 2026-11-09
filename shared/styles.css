@@ -17437,3 +17437,6 @@ html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(224, 12
 .pk-shrink .pk-sh--side, #cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
 .pk-shrink .pk-sh--solo { display: block; transform: scaleX(-1); }
 html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }
+/* أيقونةُ المساحة أصغرُ وأقربُ إلى زاويتها العليا اليمنى (طلبُ صاحب الموقع) */
+.pk-blkh__ic { width: 18px; height: 18px; margin-inline-start: -6px; margin-top: -6px; }
+.pk-blkh__ic svg { width: 14px; height: 14px; }
