@@ -11580,7 +11580,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const V = kind === 'c' ? cardView : vidView;
     const maxd = kind === 'c' && cxMaxPub === p.id;   /* المكبَّرةُ مفتوحةٌ أبدًا: التكبيرُ لقراءة جوفها */
     /* والمفتوحةُ في موضعها بإطار (طلبُ صاحب الموقع): رأسٌ وذيلٌ ومساحاتٌ كالمكبَّرة، وهي بين أخواتها */
-    const framed = !maxd && kind === 'c' && pkLab() && cxRowPub === p.id && V.open === p.id;
+    let framed = !maxd && kind === 'c' && pkLab() && cxRowPub === p.id && V.open === p.id;
+    /* ولا مساحةَ مفتوحةً فيها: يُلغى التوسيعُ فتعود صفًّا بين أخواتها (طلبُ صاحب الموقع) */
+    if (framed && !pkSplitOn(p.id) && !pkBankOn(p.id) && pkMidOff[p.id]) { framed = false; cxRowPub = null; V.open = null; }
     const big = maxd || framed;
     const open = V.open === p.id || maxd;
     const likeAttr = `data-like="${pi}" data-sub="${sub}"`;
