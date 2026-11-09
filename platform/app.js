@@ -9638,10 +9638,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return v ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${v[1]}</svg>` : PK_MID_IC; };
   const pkMidBtn = id => { const on = !pkMidOff[id];
     return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
-  const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
+  /* ‏‎extra‎: ما يُغرس في كبسولة البنك يسارَ اسمه — عدّاداتُ المساهمة (طلبُ صاحب الموقع) */
+  const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
-    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k]) => pkVbBtn(id, k, pkQbIc()).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}</span></span>`;
+    <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--qb pk-vbar__cap--nm">${PK_VIEWS.filter(v => v[0] === 'folder').map(([k]) => pkVbBtn(id, k, pkQbIc()).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsQbT)}</span></button>`)).join('')}${extra ? `<span class="pk-vbar__stats">${extra}</span>` : ''}</span></span>`;
   const pkViewSeg = id => id && pkLab() && !pkMidOff[id] ? `<span class="pk-vbar pk-vbar--foot" role="group" aria-label="${esc(T().pkViewBar)}"><span class="pk-vbar__cap">${PK_VIEWS.filter(v => v[0] !== 'folder').map(([k, ic]) => pkVbBtn(id, k, ic)).join('')}</span></span>` : '';
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
@@ -22018,11 +22019,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <span class="vt-grow x3-ttlwrap${d.title ? '' : ' is-ph'}" data-v="${esc(d.title || '') || T().pkTitlePh}">
               <input class="x3-ttlin" id="cm-vtitle" size="1" placeholder="${T().pkTitlePh}" value="${esc(d.title || '')}">
             </span>
-            <span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span>
-            <!-- وخبرُ المساهمة كلِّها: يسارَ شارات الأنواع، وهو مجموعُ الشجرة -->
-            <span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>
-            <!-- وشريطُ طرق العرض في التحرير كذلك، يسارَ أيقونة التعليقات مباشرةً -->
-            ${pkViewBar('edit', p.id)}
+            <!-- وشريطُ طرق العرض في التحرير، وعدّاداتُ المساهمة (شاراتُ الأنواع وخبرُها) في كبسولة البنك يسارَ اسمه (طلبُ صاحب الموقع) -->
+            ${pkViewBar('edit', p.id, `<span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span><span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>`)}
           </div>
           ${fr ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}

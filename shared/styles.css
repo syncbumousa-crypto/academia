@@ -17577,3 +17577,7 @@ html[data-theme="dark"] .pk--edit .pk-es { --es-g: #5f6c70; --es-gb: rgba(255, 2
 .pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb { --es-g: #b8862b; --es-gb: rgba(184, 134, 43, .08); }
 html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) { --es-g: #e1c172; --es-gb: rgba(225, 193, 114, .08); }
 :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) .pk-es__art { opacity: 1; }
+/* عدّاداتُ المساهمة داخل كبسولة البنك، يسارَ اسمه (طلبُ صاحب الموقع) */
+.pk-vbar__stats { display: inline-flex; align-items: center; gap: 2px; padding-inline: 4px 8px; white-space: nowrap; color: var(--u-mut); font-size: 12px; }
+.pk-vbar__stats > span { display: inline-flex; align-items: center; }
+.pk--edit .pk-vbar__stats :is(.x3-trio, .cs) { display: flex !important; }   /* ظاهرةٌ في الكبسولة دائمًا، ولو في وضع الاستقبال */
