@@ -9479,7 +9479,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
     const closing = !pkMidOff[id];
     if (bkReduce() || !pkLab() || !sp0 || sp0.classList.contains('pk-split--none') || getComputedStyle(sp0).flexDirection !== 'row') return commit();
-    if (closing && !pkSplitOn(id) && !pkBankOn(id)) { if (!post0.pkMidRun) { post0.pkMidRun = true; pkSoloExit(post0, commit); } return; }   /* وحدَه: يخرج كتلةً واحدة */
+    if (closing && !pkSplitOn(id) && !pkBankOn(id)) { if (!post0.pkMidRun) { post0.pkMidRun = true; pkSoloExit(post0, commit, .75); } return; }   /* وحدَه: يخرج كتلةً واحدة */
     if (post0.pkBandAnim) pkFxFinish(post0);
     if (post0.pkMidRun) return;
     const R = el => el ? el.getBoundingClientRect() : null;
@@ -9492,7 +9492,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) return;
       post.pkMidRun = true;
-      const D = closing ? PKFX.OUT * .78 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      const D = closing ? PKFX.OUT * .62 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
       const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
       /* العروضُ الجديدة تُقاس كلُّها قبل أيّ حركة: حركةُ الأوّل تغيّر ما يبقى للثاني فيُقاس أعرضَ من حقّه */
       const w1s = [book, bank].map(el => el ? el.getBoundingClientRect().width : 0);
@@ -9552,7 +9552,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let barR = null;
     const fade = (els, d) => [...els].map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d * slow, easing: 'ease-out', fill: 'forwards' }));
     let barFade = Promise.resolve();
-    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 100)).then(() => {
+    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 80)).then(() => {
       if (!mp || !kv0) return;
       const bb = mp.getBBox(), k = R(kv0), spT = R(sp0).top - oy;
       const bar = { x: bb.x, y: bb.y, w: bb.width, h: Math.max(0, spT - 12 - bb.y) };
@@ -9561,9 +9561,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
       /* والجاران يتّسعان أفقيًّا معه إلى عرضيهما الأخيرين (نصفين، أو القسمةَ كلَّها لواحد)، والعمودُ يضيق بينهما وهو يصعد —
          فلا يتراكبان. والكتلُ تُرسم حيّةً، وعمودُ الملخّص يُرسم فوقها بقامته الصاعدة */
-      const D = 220 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
+      const D = 170 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
       /* ومحتوى السقف يبدأ خفوتَه والعمودُ في آخر صعوده — مراحلُ متداخلةٌ قليلًا لا متتابعةٌ بفراغ */
-      barFade = new Promise(r => setTimeout(r, D * .55)).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 110)));
+      barFade = new Promise(r => setTimeout(r, D * .45)).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 90)));
       const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
       const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
       const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
@@ -21777,9 +21777,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== خروجُ المساحة المفتوحة وحدَها (طلبُ صاحب الموقع): تنطوي إلى رأسها كستارةٍ ترتفع =====
      محتواها يخفت أوّلًا، ثمّ الكتلةُ نفسُها تنطوي من قاعها صاعدةً إلى حافّتها العليا (وزواياها مدوّرةٌ وهي تقصر)،
      والتذييلُ يغوص وحدَه في الأثناء: أدواتُه واحدةً بعد أخرى ثمّ مسكتُه. ثمّ تظهر رسالةُ «اختر ما تريد العمل عليه» */
-  function pkSoloExit(card, commit) {
+  function pkSoloExit(card, commit, fast) {
     if (bkReduce()) return commit();
-    const slow = window.__pkfxSlow || 1;
+    const slow = (window.__pkfxSlow || 1) * (fast || 1);   /* ‏‎fast‎ < 1 يسرّعها (الملخّص — طلبُ صاحب الموقع) */
     const band = card.querySelector(':scope > .pk-band'), blk = band && band.querySelector('path.pk-blk');
     card.pkBlkHold = true;
     const an = [];
