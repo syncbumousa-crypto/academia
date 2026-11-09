@@ -17581,7 +17581,3 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 .pk-vbar__stats { display: inline-flex; align-items: center; gap: 2px; padding-inline: 4px 8px; white-space: nowrap; color: var(--u-mut); font-size: 12px; }
 .pk-vbar__stats > span { display: inline-flex; align-items: center; }
 .pk--edit .pk-vbar__stats :is(.x3-trio, .cs) { display: flex !important; }   /* ظاهرةٌ في الكبسولة دائمًا، ولو في وضع الاستقبال */
-/* مطويّةٌ حتى تُنقر الكبسولة، فتنبسط عشرَ ثوانٍ ثمّ تنطوي */
-.pk-vbar__stats { max-width: 0; opacity: 0; overflow: hidden; padding-inline: 0; transition: max-width .45s cubic-bezier(.2, .8, .2, 1), opacity .3s ease, padding .45s cubic-bezier(.2, .8, .2, 1); }
-.pk-vbar__cap--qb.is-stats .pk-vbar__stats { max-width: 520px; opacity: 1; padding-inline: 4px 8px; }
-:is(.pk--max, .pk--frame) .pk-vbar__cap--qb.is-stats:not(:has(> .pk-vbar__b.on)) { background: var(--pk-blk); }   /* ومقفلًا: تظهر الكبسولةُ ما دامت منبسطة */
