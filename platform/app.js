@@ -9478,11 +9478,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       pkVddClose(cap); cap.classList.toggle('is-open', open); b.setAttribute('aria-expanded', String(open));
       return;
     }
-    if (!(e.target.closest && e.target.closest('#cm-body .pk-vmenu'))) pkVddClose();
+    pkVddClose();   /* نقرةٌ خارجها أو على أحد بنودها (ولو كان المختارَ نفسَه) تطويها */
   }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') pkVddClose(); });
+  /* وأيقونتُه تتبع طريقةَ العرض المختارة (طلبُ صاحب الموقع): شجريٌّ · بطاقيٌّ · جدوليّ */
+  const pkMidIc = id => { const v = PK_VIEWS.find(x => x[0] === pkVwOf(id) && x[0] !== 'folder');
+    return v ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${v[1]}</svg>` : PK_MID_IC; };
   const pkMidBtn = id => { const on = !pkMidOff[id];
-    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${PK_MID_IC}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
+    return `<button type="button" class="pk-vbar__b${on ? ' on' : ''}" data-pkmidx data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T().pkEsMidT)}">${pkMidIc(id)}<span class="pk-vbar__nm">${esc(T().pkEsMidT)}</span></button>`; };
   const pkViewBar = (where, id) => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
@@ -9492,7 +9495,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
   const pkBlkH = (k, id, n, noX) => {
     const ic = k === 'book' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_SRC_IC}</svg>`
-      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>` : PK_MID_IC;
+      : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>` : pkMidIc(id);
     const nm = T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'];
     const x = k === 'book' ? 'data-pkview="source"' : k === 'bank' ? 'data-pkview="folder"' : 'data-pkmidx';
     return `<div class="pk-blkh pk-blkh--${k}"><span class="pk-blkh__ic" aria-hidden="true">${ic}</span><b class="pk-blkh__nm">${esc(nm)}</b>`
