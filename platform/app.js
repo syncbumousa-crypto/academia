@@ -21832,6 +21832,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (hd) hd.style.opacity = '0';
     const w = L.getBoundingClientRect().width, m = pkFxOuter(L, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const ow = other ? other.pane.getBoundingClientRect().width : 0, sw = sp.getBoundingClientRect().width;
+    /* ولا ملخّصَ بينهما: الآخرُ يأخذ القسمةَ كلَّها، وكلٌّ يلزم حافّتَه (الخارجةُ تنطوي إلى حافّتها لا نحوه) */
+    const noMid = !sp.querySelector(':scope > .kt-view');
+    if (noMid && other) sp.style.justifyContent = 'space-between';
     L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
@@ -21842,7 +21845,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
       other.pane.style.boxSizing = 'border-box';
-      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (sw - g) * other.share + 'px' }],
+      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - g) * other.share) + 'px' }],
         { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
     }
     const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
@@ -23527,6 +23530,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     renderCmSection();
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
     const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
+    /* ولا ملخّصَ مفتوح (المصادرُ وحدَها): ينبسط البنكُ من حافّته اليسرى والمصادرُ تتضيّق له — كدخوله بجانب الملخّص */
+    if (!on && !nv && pkLab() && !bkReduce() && post2) {
+      const pane = post2.querySelector('.post-ytmain > .pk-split > .pk-bank'), bo = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
+      if (pane && bo && bookR0 && pkPaneGrow(pane, bo, [[bo, bookR0.width]])) pkPaneEnter(post2, pane);
+      if (ctl) ctl.focus({ preventScroll: true });
+      return;
+    }
     if (bkReduce() || !nv || !r0) { if (ctl) ctl.focus({ preventScroll: true }); return; }
     const n = nv.getBoundingClientRect();
     if (!on) {
