@@ -21389,7 +21389,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (src) { const r = R(src); out += blk('book', box(r.l, r.t, r.r, r.b)); }
     if (bank) { const r = R(bank); out += blk('bank', box(r.l, r.t, r.r, r.b)); }
-    svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(top - 12)}" width="${W}" height="${f(Math.max(0, fy - top + 12))}"/>`
+    /* الأرضيّةُ تبدأ من خطّ الرأس نفسِه (منتصفِ مسكته، حيث ينتهي شريطُه) — فلا يبقى بينهما شريطٌ بلون المربّع */
+    const hdl = card.querySelector('.pk-hdline:not(.pk-ftline)'), gT = hdl ? (h => h.t + h.h / 2)(R(hdl)) : top - 12;
+    svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
   }
   /* ===== الانطلاقُ من الذيل والعودةُ إليه (ROADMAP-PANEFX · المرحلتان ١–٢) =====
