@@ -9340,6 +9340,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والمقسومُ يسارَ «+» (بعده في الترتيب)، ولا يظهر إلّا وفي البنك شيء (طلبُ صاحب الموقع) */
     if (a === 'bank') return pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]])
       + cxJrSeg(cardData(cmCode));   /* يُخفى بالأنماط ما دام البنكُ فارغًا: فيظهر حالَ الإضافة بلا إعادة رسم */
+    /* والملخّصُ بلا مجلدات (الاستقبال): «+» يضيف مجلدًا مباشرةً بلا خيارين (طلبُ صاحب الموقع) */
+    if (!pub && !((cardDataRaw(cmCode) || {}).deck || []).length) return `<span class="cx-plus"><button type="button" class="cx-midadd cx-plus__tg" data-actkf title="${esc(T().pkPlusKF)}" aria-label="${esc(T().pkPlusKF)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></span>`;
     return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC]]);
   }
   /* ===== «+» واحدٌ في الوسط ينفتح عن خيارين (طلبُ صاحب الموقع) =====
