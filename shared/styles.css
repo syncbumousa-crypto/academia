@@ -17637,3 +17637,5 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 .pk-icghost { position: absolute; z-index: -1; border-radius: 16px; background: var(--pk-blk); transform-origin: 0 0; pointer-events: none; }
 /* والصفّ الضيّق: الأيقوناتُ تحت العنوان كذلك */
 #cm-body .pk--icrow > .post-yt > .post-ytmain { position: relative; }
+/* والمربّعُ ينفتح «داخل الترويسة» (طلبُ صاحب الموقع): ما خلفه بلونها نفسِه، لا أرضيّةٌ أخرى */
+#cm-body .pk--icx.pk--framepub { --pk-gap: var(--pk-band); background-color: var(--pk-band); }
