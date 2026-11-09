@@ -17442,3 +17442,4 @@ html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }
 .pk-blkh__ic svg { width: 14px; height: 14px; }
 .pk-blkh__ic { margin-top: -14px; }
 .pk-blkh__ic { margin-top: 0; align-self: flex-start; transform: translateY(-8px); }
+.pk-blkh__ic { transform: translateY(-5px); }
