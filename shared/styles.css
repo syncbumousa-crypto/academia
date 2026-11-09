@@ -17592,5 +17592,5 @@ html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid,
 #cm-body .pk--framepub > .post-yt > .post-menu { position: absolute; top: 20px; inset-inline-end: -4px; z-index: 3; align-self: auto; }
 #cm-body .pk--framepub .x3-pkhd { padding-inline-end: 28px; }
 /* والمتّسعةُ في موضعها: قوسُ التكبير على زاوية إطارها (حشوتُه ‎10 · 12‎ وحدُّه) لا خلف الصورة */
-#cm-body .pk--framepub > .pk-maxdock { z-index: 6; }
-#cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: -11px; inset-inline-start: -13px; }
+#cm-body .pk--framepub > .pk-maxdock { position: absolute; top: 0; inset-inline: 0; height: 0; z-index: 6; }
+#cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: -1px; inset-inline-start: -1px; }   /* على حافّة الإطار نفسِها */
