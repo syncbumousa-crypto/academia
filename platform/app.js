@@ -9483,7 +9483,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const run = () => {
       const old = { book: R(sp0.querySelector(':scope > .pk-src')), bank: R(sp0.querySelector(':scope > .pk-bank')), top: R(sp0).top };
       const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
-      const ghost = closing && kv0 ? { on: post0.classList.contains('pk-act--mid'), stem: R(kv0), bar: hd0 ? { top: R(hd0).top - 8, bottom: R(kv0).top - 12, left: R(sp0).left, right: R(sp0).right } : null } : null;
+      const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
       commit();
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
@@ -9519,10 +9519,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const cr = post.getBoundingClientRect();
         gh = document.createElement('div'); gh.className = 'pk-midghost' + (ghost.on ? ' is-on' : ''); gh.setAttribute('aria-hidden', 'true');
         const box = r => `<i style="left:${r.left - cr.left - post.clientLeft}px;top:${r.top - cr.top - post.clientTop}px;width:${r.right - r.left}px;height:${Math.max(0, r.bottom - r.top)}px"></i>`;
-        gh.innerHTML = (ghost.bar ? box(ghost.bar) : '') + box(ghost.stem);
+        gh.innerHTML = box(ghost.bar);
         const band = post.querySelector(':scope > .pk-band');
         if (band) band.after(gh); else post.prepend(gh);
-        an.push(gh.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.98)' }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }));
+        /* ٤. السقفُ ينكمش أفقيًّا وعموديًّا إلى وسطه، والجاران يصعدان ويتّسعان إليه */
+        const i = gh.firstElementChild, b = ghost.bar;
+        gh.style.transformOrigin = `${(b.left + b.right) / 2 - cr.left - post.clientLeft}px ${(b.top + b.bottom) / 2 - cr.top - post.clientTop}px`;
+        an.push(gh.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6, .2)', opacity: 1, offset: .7 }, { transform: 'scale(.4, 0)', opacity: 0 }],
+          { duration: D, easing: 'cubic-bezier(.55, 0, .3, 1)', fill: 'forwards' }));
       }
       /* الكتلُ تُرسم من موضع البداية (والحركاتُ قائمةٌ عليه) ثمّ تُثبَّت — لا إطارَ واحدًا بالحال الأخيرة قبلها */
       post.pkBlkHold = false; pkBandFit(post); post.pkBlkHold = true;
@@ -9536,11 +9540,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     };
     if (!closing) return run();
-    /* الخروج: محتواه يخفت أوّلًا */
-    const fade = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph), .post-ytmain > .pk-split > .kt-view > *')];
-    post0.pkMidRun = true;
-    const fa = fade.map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease-out', fill: 'forwards' }));
-    Promise.all(fa.map(a => a.finished.catch(() => {}))).then(() => { post0.pkMidRun = false; run(); });
+    /* ===== الخروج بجانب غيره (طلبُ صاحب الموقع): مراحلُ أربع =====
+       ١. محتوى العمود يخفت · ٢. العمودُ يتقلّص صاعدًا إلى السقف · ٣. محتوى السقف يخفت · ٤. السقفُ ينكمش إلى وسطه والجاران يأخذان مكانه */
+    post0.pkMidRun = true; post0.pkBlkHold = true;
+    const slow = window.__pkfxSlow || 1, wait = an => Promise.all(an.map(a => a.finished.catch(() => {})));
+    const kv0 = sp0.querySelector(':scope > .kt-view'), band = post0.querySelector(':scope > .pk-band'), mp = band && band.querySelector('path.pk-blk[data-k="mid"]');
+    const cr = R(post0), ox = cr.left + post0.clientLeft, oy = cr.top + post0.clientTop;
+    let barR = null;
+    const fade = (els, d) => [...els].map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d * slow, easing: 'ease-out', fill: 'forwards' }));
+    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 150)).then(() => {
+      if (!mp || !kv0) return;
+      const bb = mp.getBBox(), k = R(kv0), spT = R(sp0).top - oy;
+      const bar = { x: bb.x, y: bb.y, w: bb.width, h: Math.max(0, spT - 12 - bb.y) };
+      const st = { x: k.left - ox, y: bar.y + bar.h - 16, w: k.width, h: bb.y + bb.height - (bar.y + bar.h - 16) };
+      barR = { left: bar.x + ox, right: bar.x + bar.w + ox, top: bar.y + oy, bottom: bar.y + bar.h + oy };
+      const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
+      const g = mp.cloneNode(false); mp.after(g); mp.style.opacity = '0';
+      const D = 300 * slow, ez = pkBez(.65, 0, .35, 1), t0 = performance.now();
+      return new Promise(res => {
+        const step = now => {
+          const e = ez(Math.min(1, (now - t0) / D)), h = Math.max(16, st.h) * (1 - e) + 16 * e;
+          g.setAttribute('d', rr(bar.x, bar.y, bar.w, bar.h) + rr(st.x, st.y, st.w, h));
+          if (e < 1 && g.isConnected) requestAnimationFrame(step); else res();
+        };
+        requestAnimationFrame(step);
+      });
+    }).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 150)))
+      .then(() => { post0.pkMidRun = false; post0.pkBlkHold = false; run(); });
   }
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-actkf]');
@@ -21484,7 +21510,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const r = Math.min(RD, w / 2, h / 2);
       return `M${f(x0)} ${f(y0 + r)}A${f(r)} ${f(r)} 0 0 1 ${f(x0 + r)} ${f(y0)}H${f(x1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1)} ${f(y0 + r)}V${f(y1 - r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + r)}A${f(r)} ${f(r)} 0 0 1 ${f(x0)} ${f(y1 - r)}Z`;
     };
-    const blk = (k, d) => d ? `<path class="pk-blk${k === act ? ' is-on' : ''}" d="${d}"/>` : '';
+    const blk = (k, d) => d ? `<path class="pk-blk${k === act ? ' is-on' : ''}" data-k="${k}" d="${d}"/>` : '';
     const mid = sp.querySelector(':scope > .kt-view'), src = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank');
     const head = card.querySelector('.post-ytmain > .pk-blkh--mid');
     let out = '', top = s.t;
