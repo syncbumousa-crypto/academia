@@ -1,0 +1,482 @@
+{"id":988,"verdict":"keep","why":"Describes writing portfolio component of course","segs":[{"sec":"info","from":1,"to":7}]}
+{"id":1005,"verdict":"needs_parent","why":"Draft-file workflow, answers confusion in parent","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":3742,"verdict":"keep","why":"Standalone midterm study method","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":3770,"verdict":"keep","why":"Reading prep via reading portfolio","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":5097,"verdict":"needs_parent","why":"Instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":5,"doctor":"MAHIR GAZDAR"}]}
+{"id":5464,"verdict":"keep","why":"Midterm study sources per section","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":5721,"verdict":"keep","why":"Writing portfolio requirements explained","segs":[{"sec":"info","from":1,"to":14}]}
+{"id":6395,"verdict":"needs_parent","why":"Reading-question tip, question type undefined alone","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":7155,"verdict":"keep","why":"How to prepare vocab and reading for final","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":7192,"verdict":"keep","why":"Study method per skill","segs":[{"sec":"srcU","from":1,"to":13}]}
+{"id":7200,"verdict":"keep","why":"Where to practice grammar, vocab, reading","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":7556,"verdict":"drop","why":"Undefined referent, no parent, fragment","segs":[]}
+{"id":8964,"verdict":"keep","why":"Clear counter-argument example","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":9836,"verdict":"keep","why":"General course difficulty and grade ceiling","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":11042,"verdict":"keep","why":"Grammar practice quiz link","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":11948,"verdict":"drop","why":"Chatty gossip about unnamed instructor","segs":[]}
+{"id":13098,"verdict":"keep","why":"Reading question-type strategies","segs":[{"sec":"srcU","from":1,"to":9}]}
+{"id":13099,"verdict":"keep","why":"Reading MCQ option strategy","segs":[{"sec":"srcU","from":1,"to":18}]}
+{"id":14292,"verdict":"keep","why":"Full weights and grade scale","segs":[{"sec":"grade","from":1,"to":18,"items":[["Writing 1",15],["Writing 2",15],["Writing 3",15],["Med",15],["Final",15],["Final writing",15],["Reading portfolio",5],["Writing portfolio",5]],"note_from":10,"note_to":18}]}
+{"id":15397,"verdict":"needs_parent","why":"Instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":1,"doctor":"Adil Mahmood"}]}
+{"id":15724,"verdict":"keep","why":"Course covers three essay types","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":15852,"verdict":"keep","why":"Detailed named instructor review","segs":[{"sec":"doc","from":1,"to":28,"doctor":"تيسير"}]}
+{"id":15881,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":16,"doctor":"ميقن"}]}
+{"id":15888,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":16,"doctor":"باميلا"}]}
+{"id":16271,"verdict":"keep","why":"Study method per skill and portfolios","segs":[{"sec":"srcU","from":1,"to":16}]}
+{"id":16340,"verdict":"keep","why":"Named instructor review, name in body","segs":[{"sec":"doc","from":1,"to":20,"doctor":"باميلا"}]}
+{"id":16454,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":16,"doctor":"ادم خان"}]}
+{"id":16487,"verdict":"keep","why":"Detailed named instructor review","segs":[{"sec":"doc","from":1,"to":29,"doctor":"باميلا"}]}
+{"id":16663,"verdict":"keep","why":"Course weight breakdown","segs":[{"sec":"grade","from":1,"to":7,"items":[["رايتنق",60],["ميد",15],["فاينل",15],["بورتفوليووز",10]],"note_from":6,"note_to":7}]}
+{"id":16694,"verdict":"keep","why":"Writing test format and timing","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":17324,"verdict":"keep","why":"Concise tips for good grade","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":17347,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":18,"doctor":"ادم خان"}]}
+{"id":17955,"verdict":"keep","why":"List of essay types","segs":[{"sec":"lessons","from":1,"to":6}]}
+{"id":18020,"verdict":"keep","why":"Full weight breakdown","segs":[{"sec":"grade","from":1,"to":9,"items":[["compare and contrast",15],["cause and effect",15],["argumentative",15],["argumentative with a counter argument ( final exam)",15],["Final OMR",15],["Mid OMR",15],["Writing/reading portfolios",10]]}]}
+{"id":20555,"verdict":"needs_parent","why":"Explains writing portfolio; subject named only in parent","segs":[{"sec":"info","from":1,"to":15}]}
+{"id":21151,"verdict":"keep","why":"Vocab lists and how to study them","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":21152,"verdict":"keep","why":"Grammar topics file and links","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":21909,"verdict":"keep","why":"Empty message","segs":[],"fileOnly":true}
+{"id":22239,"verdict":"needs_parent","why":"Vocab question format; subject only in parent","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":22480,"verdict":"keep","why":"What to study from per section","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":22534,"verdict":"keep","why":"How to do reading portfolio","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":22729,"verdict":"keep","why":"Self-revision method for drafts","segs":[{"sec":"srcU","from":1,"to":15}]}
+{"id":23012,"verdict":"keep","why":"Detailed writing test preparation method","segs":[{"sec":"srcU","from":1,"to":23}]}
+{"id":23022,"verdict":"keep","why":"Pre-test guide tip","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":23419,"verdict":"keep","why":"How to start the course, organisation advice","segs":[{"sec":"srcU","from":1,"to":10}]}
+{"id":25346,"verdict":"keep","why":"Study time planning per section","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":27078,"verdict":"drop","why":"Group chatter about office hours","segs":[]}
+{"id":30011,"verdict":"keep","why":"Empty message","segs":[],"fileOnly":true}
+{"id":38206,"verdict":"keep","why":"Standalone in/on/at grammar explanation","segs":[{"sec":"srcU","from":1,"to":14}]}
+{"id":38307,"verdict":"drop","why":"Vague generic language tip, chatty","segs":[]}
+{"id":38334,"verdict":"keep","why":"Curated English learning resources","segs":[{"sec":"srcU","from":1,"to":39}]}
+{"id":39342,"verdict":"needs_parent","why":"Cause-effect practice topics; purpose only in parent","segs":[{"sec":"srcP","from":1,"to":17}]}
+{"id":39475,"verdict":"drop","why":"Generic one-line advice","segs":[]}
+{"id":40603,"verdict":"drop","why":"Instructor review with no name anywhere","segs":[]}
+{"id":40679,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":3,"doctor":"Owen"}]}
+{"id":45107,"verdict":"needs_parent","why":"explains peanut-butter repetition term asked in parent","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":45117,"verdict":"needs_parent","why":"draft sequence list answers how many drafts","segs":[{"sec":"info","from":1,"to":6}]}
+{"id":45940,"verdict":"keep","why":"standalone advice on timed handwriting and planning","segs":[{"sec":"srcU","from":1,"to":11}]}
+{"id":46903,"verdict":"needs_parent","why":"drive link; parent says final exam samples","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":49834,"verdict":"needs_parent","why":"bare grammar exercise link, parent gives context","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":50331,"verdict":"keep","why":"exam mark breakdown by section, self-contained","segs":[{"sec":"grade","from":1,"to":7}]}
+{"id":51741,"verdict":"drop","why":"refers to undefined things, no parent, vague","segs":[]}
+{"id":52900,"verdict":"keep","why":"Grammarly and practice tip for writing","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":52903,"verdict":"drop","why":"personal anecdote fragment continuing earlier message","segs":[]}
+{"id":53119,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":14,"doctor":"MAHIR GAZDAR"}]}
+{"id":53122,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":21,"doctor":"Joseph Mark Cameron"}]}
+{"id":53133,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":26,"doctor":"Peter McLaren"}]}
+{"id":53134,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":16,"doctor":"Adil Mahmood"}]}
+{"id":53143,"verdict":"keep","why":"general tip: use office hours to raise grade","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":53157,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":18,"doctor":"Pamela"}]}
+{"id":53164,"verdict":"keep","why":"detailed review of named instructor incl. portfolio tips","segs":[{"sec":"doc","from":1,"to":49,"doctor":"Timothy Hampson"}]}
+{"id":53181,"verdict":"keep","why":"full review of named instructor","segs":[{"sec":"doc","from":1,"to":16,"doctor":"تيسير"}]}
+{"id":53469,"verdict":"keep","why":"assessment weights, self-contained though hedged","segs":[{"sec":"grade","from":1,"to":10,"items":[["رايتنق ١",15],["رايتنق ٢",15],["رايتنق ٣",15],["رايتنق الفاينل",15],["الريدنق (ملفين)",5],["الرايتنق برتفليو",5]],"note_from":8,"note_to":10}]}
+{"id":54602,"verdict":"keep","why":"midterm and final exam structure","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":55058,"verdict":"drop","why":"re-quote duplicate of message 53119","segs":[]}
+{"id":58860,"verdict":"needs_parent","why":"explains portfolios; term only in parent","segs":[{"sec":"info","from":1,"to":9}]}
+{"id":66627,"verdict":"keep","why":"course difficulty: writing task hardest part","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":66980,"verdict":"keep","why":"tip: memorize essay skeleton and adapt","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":66984,"verdict":"needs_parent","why":"writing-task prep advice; subject in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":68492,"verdict":"keep","why":"tip: mid and final easy, compensate there","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":69101,"verdict":"keep","why":"clear defining vs non-defining clause test","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":69457,"verdict":"keep","why":"official description of exam format","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":69788,"verdict":"keep","why":"midterm study order advice, self-contained","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":73765,"verdict":"keep","why":"video summarizing all tenses","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":74491,"verdict":"keep","why":"must vs have to explanation with examples","segs":[{"sec":"srcU","from":1,"to":14}]}
+{"id":76099,"verdict":"needs_parent","why":"parallel-structure link; context in parent","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":76461,"verdict":"keep","why":"points per question by exam section","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":77676,"verdict":"drop","why":"caption for missing file, fragment","segs":[]}
+{"id":78859,"verdict":"keep","why":"letter grade cut-off scale","segs":[{"sec":"grade","from":1,"to":6}]}
+{"id":80558,"verdict":"keep","why":"tip: vary grammar and vocab in writing","segs":[{"sec":"srcU","from":1,"to":8}]}
+{"id":82348,"verdict":"drop","why":"encouragement anecdote, no concrete course info","segs":[]}
+{"id":83581,"verdict":"needs_parent","why":"answers whether course is writing only","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":84431,"verdict":"keep","why":"short grading-strictness warning on named instructor","segs":[{"sec":"doc","from":1,"to":1,"doctor":"Steven less"}]}
+{"id":84483,"verdict":"keep","why":"character evaluation of named instructor","segs":[{"sec":"doc","from":1,"to":4,"doctor":"لوفتس"}]}
+{"id":84556,"verdict":"needs_parent","why":"rebuts parent; rubric and office-hours advice","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":86929,"verdict":"keep","why":"how to choose causes vs effects in exam","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":87253,"verdict":"keep","why":"cause/effect essay structure template","segs":[{"sec":"srcU","from":1,"to":27}]}
+{"id":87914,"verdict":"drop","why":"week-specific reminder, unclear which portfolio","segs":[]}
+{"id":89972,"verdict":"keep","why":"grades and teaching of named instructor","segs":[{"sec":"doc","from":1,"to":2,"doctor":"لوفتس"}]}
+{"id":90737,"verdict":"drop","why":"rambling opinion, no usable information","segs":[]}
+{"id":91076,"verdict":"keep","why":"tip: study department slides for essay parts","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":91122,"verdict":"needs_parent","why":"lists what raised writing grade; question in parent","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":91165,"verdict":"keep","why":"tip: read sample essay in slides for structure","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":91186,"verdict":"needs_parent","why":"personal writing-practice method answering parent","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":92741,"verdict":"keep","why":"evaluation of named instructor","segs":[{"sec":"doc","from":1,"to":5,"doctor":"Adam khan"}]}
+{"id":93832,"verdict":"keep","why":"AWL word meanings list","segs":[{"sec":"srcP","from":1,"to":19}]}
+{"id":96858,"verdict":"needs_parent","why":"precise-word advice; refers to words in parent","segs":[{"sec":"srcU","from":1,"to":8}]}
+{"id":97093,"verdict":"keep","why":"clear explanation of the four drafts","segs":[{"sec":"info","from":1,"to":4}]}
+{"id":98907,"verdict":"needs_parent","why":"brief study plan answering how to start","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":100089,"verdict":"keep","why":"Quizlet flashcards of hardest list words","segs":[{"sec":"srcP","from":1,"to":6}]}
+{"id":103463,"verdict":"keep","why":"standalone advice: follow the structure in writing","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":103784,"verdict":"needs_parent","why":"bare list of practice writing prompts","segs":[{"sec":"srcP","from":1,"to":7}]}
+{"id":109918,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":7,"doctor":"جوزيف مارك كاميرون"}]}
+{"id":111547,"verdict":"needs_parent","why":"tips answering can-I-get-B question","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":112372,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":2,"doctor":"Samuel Harrison"}]}
+{"id":112532,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":1,"doctor":"تيسير"}]}
+{"id":113192,"verdict":"keep","why":"named instructor grading evaluation","segs":[{"sec":"doc","from":1,"to":1,"doctor":"تيسير"}]}
+{"id":113447,"verdict":"keep","why":"standalone vocab and grammar study method","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":114001,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":4,"doctor":"آدم خان"}]}
+{"id":114009,"verdict":"keep","why":"named instructor grading evaluation","segs":[{"sec":"doc","from":1,"to":2,"doctor":"John Loftus"}]}
+{"id":114090,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":2,"doctor":"تيموثي"}]}
+{"id":114416,"verdict":"keep","why":"full structured review of named instructor","segs":[{"sec":"doc","from":1,"to":13,"doctor":"JONATHAN OWEN"}]}
+{"id":114577,"verdict":"keep","why":"standalone tip: prepare template before exam","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":114627,"verdict":"keep","why":"explains reading and writing portfolios","segs":[{"sec":"info","from":1,"to":5}]}
+{"id":114746,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":1,"doctor":"SAM DOUGLAS VERNON"}]}
+{"id":115271,"verdict":"needs_parent","why":"instructor grading review, name only in parent","segs":[{"sec":"doc","from":1,"to":5,"doctor":"جون لوفتس"}]}
+{"id":115554,"verdict":"keep","why":"named instructor evaluation","segs":[{"sec":"doc","from":1,"to":1,"doctor":"ميقن"}]}
+{"id":115746,"verdict":"needs_parent","why":"explains English lab; subject set by parent","segs":[{"sec":"info","from":1,"to":3}]}
+{"id":115898,"verdict":"needs_parent","why":"instructor review, name only in parent","segs":[{"sec":"doc","from":1,"to":5,"doctor":"ماهر"}]}
+{"id":117134,"verdict":"keep","why":"full grade distribution","segs":[{"sec":"grade","from":1,"to":10,"items":[["رايت تست 1",15],["رايت تست 2",15],["المد",25],["الفاينل - الرايت",25],["الفاينل - القرامر و الريد و الفوكاب",20]],"note_from":5,"note_to":5}]}
+{"id":117221,"verdict":"keep","why":"portfolio weights moved to final, now 45%","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":117984,"verdict":"keep","why":"clear description of both portfolios","segs":[{"sec":"info","from":1,"to":6}]}
+{"id":118813,"verdict":"keep","why":"problem-solution essay structure outline","segs":[{"sec":"srcU","from":1,"to":13}]}
+{"id":119048,"verdict":"keep","why":"what to study per exam section","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":120002,"verdict":"keep","why":"exams reported as letter grades only","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":120174,"verdict":"keep","why":"reading portfolio ungraded; its texts appear in exams","segs":[{"sec":"grade","from":1,"to":8}]}
+{"id":121675,"verdict":"needs_parent","why":"example continuing a tip; starts mid-thought","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":121785,"verdict":"keep","why":"comparison essay intro and conclusion outline","segs":[{"sec":"srcU","from":1,"to":11}]}
+{"id":122143,"verdict":"needs_parent","why":"past writing test prompts, bare list","segs":[{"sec":"srcP","from":1,"to":4}]}
+{"id":122238,"verdict":"needs_parent","why":"past writing test prompts, bare list","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":122439,"verdict":"keep","why":"past comparison writing prompts","segs":[{"sec":"srcP","from":1,"to":2}]}
+{"id":122488,"verdict":"needs_parent","why":"past writing test prompts, bare list","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":122863,"verdict":"drop","why":"week-specific guess, generic advice","segs":[]}
+{"id":124135,"verdict":"keep","why":"how to prepare for reading section","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":124398,"verdict":"keep","why":"translated vocab file; useful only with attachment","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":124912,"verdict":"keep","why":"reading prep: solve portfolio texts","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":127338,"verdict":"keep","why":"general picture of course difficulty and grades","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":128249,"verdict":"keep","why":"advice: learn instructor expectations, use office hours","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":128612,"verdict":"keep","why":"exam time allocation tip","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":130462,"verdict":"keep","why":"exam order tip: grammar/vocab first then reading","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":131045,"verdict":"keep","why":"grammar study method","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":131059,"verdict":"keep","why":"question counts and points per section","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":131073,"verdict":"keep","why":"study method using slides and instructor feedback","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":131135,"verdict":"needs_parent","why":"grammar practice method; subject only in parent","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":131394,"verdict":"needs_parent","why":"when coordinator re-marks; answers parent question","segs":[{"sec":"grade","from":1,"to":5}]}
+{"id":131455,"verdict":"keep","why":"attendance deduction starts at fifth absence","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":131974,"verdict":"needs_parent","why":"conclusion structure; topic only in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":132154,"verdict":"needs_parent","why":"intro writing steps answering parent question","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":132159,"verdict":"needs_parent","why":"body paragraph structure; topic only in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":132277,"verdict":"needs_parent","why":"causes of non-unified paragraph; question in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":133037,"verdict":"keep","why":"cause/effect essay structure outline","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":134466,"verdict":"needs_parent","why":"grammar study method; subject in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":134538,"verdict":"keep","why":"detailed writing practice method with drafts and feedback","segs":[{"sec":"srcU","from":1,"to":18}]}
+{"id":134539,"verdict":"keep","why":"tip: prepare fixed flexible structure beforehand","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":134548,"verdict":"keep","why":"reading practice via reading portfolio","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":134858,"verdict":"keep","why":"Standalone advice on getting writing feedback","segs":[{"sec":"srcU","from":1,"to":13}]}
+{"id":136149,"verdict":"needs_parent","why":"Answers for/against question about argument essay","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":136486,"verdict":"keep","why":"AWL midterm lists and translations links","segs":[{"sec":"srcP","from":1,"to":12}]}
+{"id":136706,"verdict":"keep","why":"Quizlet flashcards AWL 4-6","segs":[{"sec":"srcP","from":1,"to":15}]}
+{"id":137498,"verdict":"keep","why":"Tip: practice writing on the eight reading topics","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":137574,"verdict":"keep","why":"Grammar practice quiz link","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":137768,"verdict":"needs_parent","why":"Exam section-order tip, opens as rebuttal","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":138091,"verdict":"needs_parent","why":"Writing prep advice; subject defined in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":138247,"verdict":"keep","why":"Explains argumentative bodies and counterargument","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":138281,"verdict":"needs_parent","why":"Rebuttal paragraph explanation, starts mid-thought","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":138304,"verdict":"needs_parent","why":"Final study plan; context only in question","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":138672,"verdict":"needs_parent","why":"Thesis wording advice answering a question","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":139343,"verdict":"needs_parent","why":"Title not graded; answer starts with no","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":140721,"verdict":"drop","why":"Vague, confusing time-management remark","segs":[]}
+{"id":140732,"verdict":"keep","why":"Standalone tip: three feedbacks before exam","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":142755,"verdict":"keep","why":"Official double-marking, no regrade policy","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":143236,"verdict":"needs_parent","why":"Writing improvement tip answering request","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":143252,"verdict":"keep","why":"Standalone advice: office hours, take practice seriously","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":143277,"verdict":"keep","why":"Advice per skill for future students","segs":[{"sec":"srcU","from":1,"to":9}]}
+{"id":143288,"verdict":"keep","why":"Named instructor evaluation","segs":[{"sec":"doc","from":1,"to":2,"doctor":"Keith Pearson"}]}
+{"id":143309,"verdict":"keep","why":"Standalone writing feedback advice","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":143368,"verdict":"keep","why":"Course picture: class time only for writing","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":143374,"verdict":"keep","why":"Reading improvement and portfolio advice","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":144852,"verdict":"keep","why":"Instructor review plus study method","segs":[{"sec":"doc","from":1,"to":12,"doctor":"عادل محمود"},{"sec":"srcU","from":13,"to":26}]}
+{"id":144901,"verdict":"keep","why":"Instructor review plus study method","segs":[{"sec":"doc","from":1,"to":10,"doctor":"Stephen watts"},{"sec":"srcU","from":11,"to":21}]}
+{"id":144950,"verdict":"keep","why":"Midterm and final material links","segs":[{"sec":"srcP","from":1,"to":12}]}
+{"id":145031,"verdict":"keep","why":"Standalone emphasis on reading portfolio practice","segs":[{"sec":"srcU","from":1,"to":15}]}
+{"id":145050,"verdict":"keep","why":"Explains reading portfolio role in course","segs":[{"sec":"info","from":1,"to":9},{"sec":"srcU","from":10,"to":11}]}
+{"id":145115,"verdict":"keep","why":"Detailed study method with instructor evaluation","segs":[{"sec":"srcU","from":1,"to":44},{"sec":"doc","from":45,"to":50,"doctor":"عادل محمود"},{"sec":"srcU","from":51,"to":63}]}
+{"id":145122,"verdict":"keep","why":"Describes the three writing task types","segs":[{"sec":"info","from":1,"to":12}]}
+{"id":145456,"verdict":"needs_parent","why":"Portfolio explanation; subject only in parent","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":146205,"verdict":"keep","why":"Full course experience and study method","segs":[{"sec":"info","from":1,"to":15},{"sec":"srcU","from":16,"to":33}]}
+{"id":149444,"verdict":"keep","why":"General picture of course goals","segs":[{"sec":"info","from":1,"to":3}]}
+{"id":150181,"verdict":"keep","why":"Explains what drafts 1,2,3 mean","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":151603,"verdict":"keep","why":"Quizlet AWL 1-3 midterm list","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":151687,"verdict":"needs_parent","why":"Writing task practice tip; object in parent","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":151906,"verdict":"keep","why":"Explains compare essay two-factor structure","segs":[{"sec":"srcU","from":1,"to":9}]}
+{"id":152728,"verdict":"needs_parent","why":"Midterm coverage list answering question, hedged","segs":[{"sec":"lessons","from":1,"to":2}]}
+{"id":154428,"verdict":"keep","why":"Explains three-draft writing process","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":154857,"verdict":"needs_parent","why":"Comparison body advice answering specific question","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":154871,"verdict":"needs_parent","why":"Stated vs revealed approach; starts with yes","segs":[{"sec":"srcU","from":1,"to":8}]}
+{"id":156508,"verdict":"keep","why":"Final writing is argumentative, tied to readings","segs":[{"sec":"info","from":1,"to":4}]}
+{"id":156740,"verdict":"needs_parent","why":"Choosing aspects advice; refers to earlier context","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":157420,"verdict":"keep","why":"Video on comma usage","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":158938,"verdict":"keep","why":"Compare essay sentence template","segs":[{"sec":"srcU","from":1,"to":31}]}
+{"id":160386,"verdict":"keep","why":"Quizlet AWL flashcards","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":161021,"verdict":"needs_parent","why":"Reading/vocab exam tips; starts with yes","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":161323,"verdict":"needs_parent","why":"Study sources list answering question","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":161648,"verdict":"keep","why":"Grammar summary file caption (attachment not in text)","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":162183,"verdict":"drop","why":"Unlabelled video links, parent is voice message","segs":[]}
+{"id":162516,"verdict":"drop","why":"Ambiguous personal method, subject undefined","segs":[]}
+{"id":162563,"verdict":"keep","why":"Grammar summaries links","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":163907,"verdict":"needs_parent","why":"Text 3 question form; opens as reply","segs":[{"sec":"srcP","from":1,"to":4}]}
+{"id":164690,"verdict":"needs_parent","why":"Grammar study answer; subject in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":167787,"verdict":"needs_parent","why":"Comma rule for \u0027for example\u0027; refers to unseen sentence","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":168924,"verdict":"keep","why":"Self-contained explanation of relative clause commas","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":169594,"verdict":"drop","why":"Unconfirmed question about one semester\u0027s portfolio topics","segs":[]}
+{"id":175063,"verdict":"keep","why":"How midterm and writing grades are displayed","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":177666,"verdict":"keep","why":"Explains letter-grade breakdown for midterm and writing","segs":[{"sec":"grade","from":1,"to":17}]}
+{"id":179494,"verdict":"keep","why":"Study tips per section, readable alone","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":181166,"verdict":"keep","why":"Reading exam strategy tips","segs":[{"sec":"srcU","from":1,"to":9}]}
+{"id":181971,"verdict":"keep","why":"Midterm grade scale cut-offs","segs":[{"sec":"grade","from":1,"to":11}]}
+{"id":183519,"verdict":"keep","why":"Resource folder and YouTube explanations","segs":[{"sec":"srcU","from":1,"to":12}]}
+{"id":183552,"verdict":"keep","why":"Past writing task 2 prompts list","segs":[{"sec":"srcP","from":1,"to":29}]}
+{"id":183944,"verdict":"needs_parent","why":"Conclusion contents, answers parent question","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":184791,"verdict":"needs_parent","why":"Video link on fragments, topic only in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":185427,"verdict":"keep","why":"Writing task 2 structure file link","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":185516,"verdict":"needs_parent","why":"Recorded session explaining the parent\u0027s file","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":185580,"verdict":"keep","why":"Body and conclusion structure outline","segs":[{"sec":"srcU","from":1,"to":26}]}
+{"id":187261,"verdict":"keep","why":"Cause/effect essay structure outline","segs":[{"sec":"srcU","from":1,"to":17}]}
+{"id":187707,"verdict":"keep","why":"Writing time-management strategy","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":188853,"verdict":"keep","why":"Explains average/upgrade grading rule","segs":[{"sec":"grade","from":1,"to":6}]}
+{"id":188927,"verdict":"needs_parent","why":"Grammar study method, subject only in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":189453,"verdict":"needs_parent","why":"Answers difficulty and weekly study question","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":190212,"verdict":"keep","why":"Writing grade scale cut-offs","segs":[{"sec":"grade","from":1,"to":11}]}
+{"id":191316,"verdict":"needs_parent","why":"Average vs standard answer, starts \u0027both\u0027","segs":[{"sec":"grade","from":1,"to":12}]}
+{"id":191406,"verdict":"needs_parent","why":"Exam duration and question counts, answers parent","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":193603,"verdict":"keep","why":"Full argumentative essay structure walkthrough","segs":[{"sec":"srcU","from":1,"to":57}]}
+{"id":193674,"verdict":"keep","why":"Practice argumentative prompts","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":194092,"verdict":"needs_parent","why":"Final study steps, context in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":194136,"verdict":"keep","why":"Quizlet AWL 4-6 flashcards","segs":[{"sec":"srcP","from":1,"to":5}]}
+{"id":194370,"verdict":"keep","why":"Channel with final and writing files","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":195056,"verdict":"keep","why":"Quizlet final vocabulary folder","segs":[{"sec":"srcP","from":1,"to":2}]}
+{"id":195137,"verdict":"keep","why":"Quizlet AWL 1-6 folder","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":196278,"verdict":"needs_parent","why":"Starts \u0027that is right\u0027, counterargument in conclusion","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":196377,"verdict":"keep","why":"Grammar summary and tests channel link","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":198247,"verdict":"keep","why":"Portfolio-related final writing prompts","segs":[{"sec":"srcP","from":1,"to":15}]}
+{"id":200568,"verdict":"needs_parent","why":"Drive link for practice, context in parent","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":203569,"verdict":"needs_parent","why":"Which exam section to start, answers parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":206268,"verdict":"needs_parent","why":"Starts \u0027no\u0027, explains average and upgrade","segs":[{"sec":"grade","from":1,"to":4}]}
+{"id":206539,"verdict":"needs_parent","why":"Consequences of F, answers parent","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":207045,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":7,"doctor":"Steven Lees"}]}
+{"id":207091,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":5,"doctor":"Saddia"}]}
+{"id":207106,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":3,"doctor":"جوزيف ماكرون"}]}
+{"id":207162,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":1,"doctor":"لانس كنق"}]}
+{"id":210821,"verdict":"keep","why":"Advice to work hard from first writing","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":210848,"verdict":"keep","why":"Reading improvement advice, readable alone","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":212303,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":2,"doctor":"جيمس جوزيف"}]}
+{"id":214050,"verdict":"keep","why":"Structured instructor review","segs":[{"sec":"doc","from":1,"to":12,"doctor":"اوستن كوك Austin Cook"}]}
+{"id":214876,"verdict":"keep","why":"General study tips","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":215031,"verdict":"keep","why":"Course experience with per-section study method","segs":[{"sec":"info","from":1,"to":2},{"sec":"srcU","from":3,"to":10}]}
+{"id":215111,"verdict":"keep","why":"Named instructor review","segs":[{"sec":"doc","from":1,"to":2,"doctor":"جوزيف كاميرون"}]}
+{"id":215578,"verdict":"keep","why":"Structured instructor review","segs":[{"sec":"doc","from":1,"to":12,"doctor":"ماهر قازدار"}]}
+{"id":215660,"verdict":"keep","why":"Advice on sample essays and AI use","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":215894,"verdict":"keep","why":"Structured instructor review","segs":[{"sec":"doc","from":1,"to":14,"doctor":"أوستن كوك"}]}
+{"id":215895,"verdict":"keep","why":"Structured instructor review","segs":[{"sec":"doc","from":1,"to":18,"doctor":"Mahir gazdar"}]}
+{"id":215896,"verdict":"keep","why":"Course picture then detailed study method","segs":[{"sec":"info","from":1,"to":7},{"sec":"srcU","from":8,"to":46}]}
+{"id":215912,"verdict":"keep","why":"Instructor review, course picture, study method","segs":[{"sec":"doc","from":1,"to":8,"doctor":"TAISEER"},{"sec":"info","from":9,"to":9},{"sec":"srcU","from":10,"to":37}]}
+{"id":217347,"verdict":"keep","why":"Structured instructor review","segs":[{"sec":"doc","from":1,"to":17,"doctor":"ادم خان"}]}
+{"id":217593,"verdict":"needs_parent","why":"Describes reading portfolio, named only in parent","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":218309,"verdict":"needs_parent","why":"Midterm study method; exam context only in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":218720,"verdict":"keep","why":"Standalone advice on essay word count","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":219672,"verdict":"needs_parent","why":"Compares 101 with 04; answers parent question","segs":[{"sec":"info","from":1,"to":5}]}
+{"id":221251,"verdict":"needs_parent","why":"Paragraph length advice; 47 words defined in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":221379,"verdict":"keep","why":"Standalone word-count guidance for writing","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":222142,"verdict":"drop","why":"Refers to someone\u0027s specific essay, unclear alone","segs":[]}
+{"id":222399,"verdict":"keep","why":"Standalone advice on reading preparation time","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":222970,"verdict":"keep","why":"Complete essay structure and timing plan","segs":[{"sec":"srcU","from":1,"to":19}]}
+{"id":224865,"verdict":"keep","why":"Clear midterm study plan per section","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":224883,"verdict":"keep","why":"Explains grammar question format in exam","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":224958,"verdict":"needs_parent","why":"Exam time-split tips; midterm named only in parent","segs":[{"sec":"srcU","from":1,"to":8}]}
+{"id":225165,"verdict":"keep","why":"Quizlet folder link for ENGL101 practice","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":225485,"verdict":"keep","why":"Reading portfolio practice form links","segs":[{"sec":"srcP","from":1,"to":11}]}
+{"id":229463,"verdict":"keep","why":"Grammar explanation of could/should/would have","segs":[{"sec":"srcU","from":1,"to":15}]}
+{"id":229637,"verdict":"keep","why":"Standalone reading-solving strategy","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":230972,"verdict":"keep","why":"Points per question by section","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":232343,"verdict":"drop","why":"Grade scale without stating which assessment","segs":[]}
+{"id":232837,"verdict":"keep","why":"Explains how WT1 and MTE grades are shown","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":233886,"verdict":"needs_parent","why":"Midterm grade scale; midterm named only in parent","segs":[{"sec":"grade","from":1,"to":11}]}
+{"id":234091,"verdict":"needs_parent","why":"Extra reading practice source; \u0027it\u0027 is portfolio in parent","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":236192,"verdict":"needs_parent","why":"Exam timing breakdown answering duration question","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":236229,"verdict":"keep","why":"Standalone advice on writing time management","segs":[{"sec":"srcU","from":1,"to":8}]}
+{"id":236967,"verdict":"needs_parent","why":"Conclusion structure; conclusion named in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":239378,"verdict":"needs_parent","why":"Explains upgrade mechanism, answers parent question","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":239455,"verdict":"keep","why":"Task 3 preparation tips, reading-based prompts","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":239574,"verdict":"keep","why":"Advice: follow slides structure, get feedback","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":239577,"verdict":"needs_parent","why":"Compares task 3/final writing difficulty; answers parent","segs":[{"sec":"srcU","from":1,"to":12}]}
+{"id":240097,"verdict":"needs_parent","why":"Final exam structure; starts with yes","segs":[{"sec":"grade","from":1,"to":4}]}
+{"id":240103,"verdict":"keep","why":"Standalone tip: learn instructor preferences, office hours","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":240533,"verdict":"needs_parent","why":"Instructor review; name only in parent","segs":[{"sec":"doc","from":1,"to":8,"doctor":"Stephen Watts"}]}
+{"id":242881,"verdict":"keep","why":"Quizlet final vocabulary folder link","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":243202,"verdict":"keep","why":"Full explanation of defining/non-defining relative clauses","segs":[{"sec":"srcU","from":1,"to":36}]}
+{"id":243782,"verdict":"needs_parent","why":"Past writing prompts; context only in parent","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":243843,"verdict":"drop","why":"Mid-thread hearsay about upgrade luck","segs":[]}
+{"id":244491,"verdict":"keep","why":"Short tip to read the portfolio","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":244835,"verdict":"keep","why":"Standalone reading exam strategy","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":245108,"verdict":"needs_parent","why":"Counter-argument feedback on sentence quoted in parent","segs":[{"sec":"srcU","from":1,"to":15}]}
+{"id":245569,"verdict":"drop","why":"Exam coverage fragment, exam unspecified even with parent","segs":[]}
+{"id":245706,"verdict":"keep","why":"List of the eight portfolio text titles","segs":[{"sec":"lessons","from":1,"to":15}]}
+{"id":245796,"verdict":"keep","why":"Worked counter-argument example, self-explanatory","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":246837,"verdict":"needs_parent","why":"Instructor review; name only in parent","segs":[{"sec":"doc","from":1,"to":1,"doctor":"Stephen Watts"}]}
+{"id":248841,"verdict":"keep","why":"Grade calculator link and letter-grade example","segs":[{"sec":"grade","from":1,"to":11}]}
+{"id":250521,"verdict":"keep","why":"Course overview by skill plus experience advice","segs":[{"sec":"info","from":1,"to":8},{"sec":"srcU","from":9,"to":16}]}
+{"id":250753,"verdict":"needs_parent","why":"Differences from orientation English; answers parent","segs":[{"sec":"info","from":1,"to":4}]}
+{"id":250755,"verdict":"needs_parent","why":"Comparison with orientation English; answers parent","segs":[{"sec":"info","from":1,"to":4}]}
+{"id":250768,"verdict":"keep","why":"Full course experience: overview, tasks, exams, study method","segs":[{"sec":"info","from":1,"to":15},{"sec":"lessons","from":16,"to":28},{"sec":"srcU","from":29,"to":47},{"sec":"grade","from":48,"to":58},{"sec":"srcU","from":59,"to":69},{"sec":"lessons","from":70,"to":74},{"sec":"srcU","from":75,"to":88}]}
+{"id":251200,"verdict":"needs_parent","why":"Exam format answer; starts with one-word reply","segs":[{"sec":"grade","from":1,"to":7}]}
+{"id":252571,"verdict":"keep","why":"Final writing prompt structure","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":256144,"verdict":"keep","why":"Midterm reading has two texts, one from portfolio","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":256314,"verdict":"keep","why":"Standalone writing advice on natural flow","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":256530,"verdict":"keep","why":"Syllabus attendance policy and DN rule","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":257125,"verdict":"needs_parent","why":"Explains what the portfolio is; term in parent","segs":[{"sec":"info","from":1,"to":4}]}
+{"id":257749,"verdict":"drop","why":"Hedged hearsay study hints, author unsure","segs":[]}
+{"id":259655,"verdict":"needs_parent","why":"Idea-generation and avoid-facts tip; answers parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":261096,"verdict":"keep","why":"Custom GPT guide link for compare-contrast essay","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":264135,"verdict":"keep","why":"explains why reading portfolio helps for exams","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":264412,"verdict":"keep","why":"vocab question format in exam","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":265048,"verdict":"needs_parent","why":"writing prep checklist; \u0027it\u0027 is writing from parent","segs":[{"sec":"srcU","from":1,"to":10}]}
+{"id":265509,"verdict":"keep","why":"list of past compare/contrast writing prompts","segs":[{"sec":"srcP","from":1,"to":35}]}
+{"id":267648,"verdict":"drop","why":"duplicate subset of message 265509","segs":[]}
+{"id":268282,"verdict":"keep","why":"self-contained explanation of essay introduction parts","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":268378,"verdict":"needs_parent","why":"writing prep advice; context only in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":268672,"verdict":"keep","why":"essay tip: opinion only in conclusion","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":268845,"verdict":"keep","why":"writing rules checklist","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":268859,"verdict":"keep","why":"full compare/contrast essay structure summary","segs":[{"sec":"srcU","from":1,"to":100}]}
+{"id":269718,"verdict":"keep","why":"list of compare/contrast writing prompts","segs":[{"sec":"srcP","from":1,"to":26}]}
+{"id":270511,"verdict":"needs_parent","why":"midterm study advice; exam named only in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":270778,"verdict":"keep","why":"writing tip on agent and critical thinking","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":272771,"verdict":"keep","why":"list of grammar topics G1-G8","segs":[{"sec":"lessons","from":1,"to":9}]}
+{"id":273424,"verdict":"drop","why":"muddled mid-thread fragment, parent uninformative","segs":[]}
+{"id":273430,"verdict":"keep","why":"Quizlet flashcards for AWL 1-3","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":273559,"verdict":"keep","why":"vocab section structure and question counts","segs":[{"sec":"grade","from":1,"to":9}]}
+{"id":274778,"verdict":"keep","why":"MCQ practice forms for reading portfolio","segs":[{"sec":"srcP","from":1,"to":14}]}
+{"id":275141,"verdict":"needs_parent","why":"midterm study sources; question in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":275216,"verdict":"needs_parent","why":"refers to guidelines file in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":275272,"verdict":"keep","why":"reading exam structure: two passages","segs":[{"sec":"grade","from":1,"to":6}]}
+{"id":276071,"verdict":"keep","why":"what to study for midterm per section","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":276683,"verdict":"needs_parent","why":"exam time split; answers parent question","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":277949,"verdict":"drop","why":"refers to attached file not present","segs":[]}
+{"id":278146,"verdict":"keep","why":"vocab study method using ChatGPT","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":280075,"verdict":"keep","why":"grammar explanation of \u0027that\u0027 and commas","segs":[{"sec":"srcU","from":1,"to":12}]}
+{"id":280534,"verdict":"keep","why":"reading section strategy","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":280627,"verdict":"needs_parent","why":"midterm cramming advice; context in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":280832,"verdict":"keep","why":"AWL vocabulary site link","segs":[{"sec":"srcP","from":1,"to":1}]}
+{"id":282187,"verdict":"keep","why":"exam time allocation from mock exam","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":284543,"verdict":"keep","why":"that vs which grammar explanation","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":291999,"verdict":"keep","why":"general picture of course difficulty and disorganisation","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":293916,"verdict":"keep","why":"regrade procedure: instructor then coordinator","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":294532,"verdict":"drop","why":"personal chit-chat about failing writing","segs":[]}
+{"id":294611,"verdict":"keep","why":"word count tip for good writing grade","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":295571,"verdict":"keep","why":"explains writing task letter-grade criteria order","segs":[{"sec":"grade","from":1,"to":8}]}
+{"id":295677,"verdict":"drop","why":"vulgar wording; same point covered elsewhere","segs":[]}
+{"id":297947,"verdict":"needs_parent","why":"disagrees with parent advice on reading focus","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":298505,"verdict":"needs_parent","why":"writing grade cap rule; starts with \u0027no\u0027","segs":[{"sec":"grade","from":1,"to":5}]}
+{"id":298609,"verdict":"keep","why":"grammar study resources and site link","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":299393,"verdict":"needs_parent","why":"writing practice draft process; answers parent","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":300360,"verdict":"keep","why":"course picture: writing-centred, improves later","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":300514,"verdict":"keep","why":"how to handle agent in essay prompt","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":300875,"verdict":"keep","why":"help session recording playlist link","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":300888,"verdict":"keep","why":"final and midterm weights stated","segs":[{"sec":"grade","from":1,"to":4,"items":[["الفاينل",20],["الميد",25]],"note_from":4,"note_to":4}]}
+{"id":301171,"verdict":"needs_parent","why":"explains implication; term only in parent","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":301337,"verdict":"drop","why":"instructor reportedly left; vague review","segs":[]}
+{"id":301470,"verdict":"keep","why":"two up-grade types: attendance and average","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":301617,"verdict":"needs_parent","why":"agent in cause-effect; answers parent question","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":302031,"verdict":"keep","why":"sample cause-effect essay shared as example","segs":[{"sec":"srcP","from":1,"to":7}]}
+{"id":302474,"verdict":"needs_parent","why":"absence penalty thresholds; topic in parent","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":303411,"verdict":"needs_parent","why":"final grammar/reading prep; answers parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":308004,"verdict":"keep","why":"custom GPT link for argumentative essay","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":308007,"verdict":"keep","why":"advice to improve writing via portfolio topics","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":309204,"verdict":"keep","why":"grammar study method with forms and ChatGPT","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":311513,"verdict":"needs_parent","why":"Explains audience/agent choice; needs the question","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":311854,"verdict":"needs_parent","why":"Final study advice; answers how-to-study question","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":312553,"verdict":"keep","why":"Empty message","segs":[],"fileOnly":true}
+{"id":312670,"verdict":"keep","why":"Elaboration methods tip for writing","segs":[{"sec":"srcU","from":1,"to":10}]}
+{"id":314114,"verdict":"needs_parent","why":"Grammar study steps; topic clear only with parent","segs":[{"sec":"srcU","from":1,"to":7}]}
+{"id":317807,"verdict":"needs_parent","why":"Synonyms tip refers to repeated words in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":318456,"verdict":"keep","why":"Summaries of reading texts 5-8","segs":[{"sec":"srcU","from":1,"to":27}]}
+{"id":318553,"verdict":"keep","why":"Past final writing prompts","segs":[{"sec":"srcP","from":1,"to":7}]}
+{"id":318866,"verdict":"keep","why":"Final exam timing and structure","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":321661,"verdict":"keep","why":"Course components plus how to study each","segs":[{"sec":"info","from":1,"to":1},{"sec":"srcU","from":2,"to":5}]}
+{"id":321676,"verdict":"keep","why":"Short picture of effort each part needs","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":322254,"verdict":"keep","why":"Midterm drives final grade more than writing tasks","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":322261,"verdict":"keep","why":"Final writing usually graded higher than class tasks","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":323626,"verdict":"drop","why":"Vague instructor remark, parent unavailable","segs":[]}
+{"id":323767,"verdict":"needs_parent","why":"Pros/cons of skipping prep via TOEFL","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":324791,"verdict":"keep","why":"Named instructor evaluation: grading good, teaching weaker","segs":[{"sec":"doc","from":1,"to":2,"doctor":"ديفيد فلورس"}]}
+{"id":330488,"verdict":"keep","why":"Drive folder link, no description given","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":331049,"verdict":"keep","why":"Grade calculator and upgrade conditions","segs":[{"sec":"grade","from":1,"to":7}]}
+{"id":331195,"verdict":"keep","why":"How to study writing: structure, rubric, feedback","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":331831,"verdict":"keep","why":"Advice: continuous feedback and practice","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":331834,"verdict":"keep","why":"Reading practice tip, reading weight in midterm","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":332119,"verdict":"keep","why":"Detailed writing experience and essay tips","segs":[{"sec":"srcU","from":1,"to":18}]}
+{"id":332368,"verdict":"keep","why":"Which parts are self-study","segs":[{"sec":"info","from":1,"to":3}]}
+{"id":334319,"verdict":"keep","why":"Brainstorming method for writing","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":335772,"verdict":"keep","why":"Questions and points per exam section","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":336104,"verdict":"keep","why":"Grammar and AWL practice quiz links","segs":[{"sec":"srcP","from":1,"to":19}]}
+{"id":336607,"verdict":"needs_parent","why":"Grammar study steps; grammar named only in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":337296,"verdict":"keep","why":"Explains fragments and run-on sentences","segs":[{"sec":"srcU","from":1,"to":9}]}
+{"id":337801,"verdict":"needs_parent","why":"Reading difficulty comment; subject in parent","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":337953,"verdict":"keep","why":"Explains relative clause comma rule","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":338431,"verdict":"keep","why":"Advice: prioritize reading, grammar repeats examples","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":340043,"verdict":"keep","why":"Rubric word-count grade thresholds","segs":[{"sec":"grade","from":1,"to":3}]}
+{"id":341092,"verdict":"keep","why":"Instructor notice on grade release, averages, feedback policy","segs":[{"sec":"grade","from":1,"to":9}]}
+{"id":342874,"verdict":"needs_parent","why":"Reading study advice answering what to study","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":343230,"verdict":"needs_parent","why":"Clarifies purpose of office hours vs parent claim","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":347459,"verdict":"keep","why":"How to study grammar rules for final","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":348719,"verdict":"keep","why":"Absence limit for upgrade eligibility","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":349199,"verdict":"keep","why":"Grammar study resources and steps","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":349300,"verdict":"keep","why":"Planning method for faster writing","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":349402,"verdict":"needs_parent","why":"Final exam content; context only in parent","segs":[{"sec":"grade","from":1,"to":6}]}
+{"id":350074,"verdict":"needs_parent","why":"Untitled list of reading portfolio texts","segs":[{"sec":"lessons","from":1,"to":9}]}
+{"id":356003,"verdict":"needs_parent","why":"Reading passages count; reading named in parent","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":357732,"verdict":"keep","why":"Course experience with writing example tips","segs":[{"sec":"srcU","from":1,"to":26}]}
+{"id":359214,"verdict":"keep","why":"Instructor review plus detailed study experience","segs":[{"sec":"doc","from":1,"to":17,"doctor":"Lance King"},{"sec":"srcU","from":18,"to":52}]}
+{"id":359218,"verdict":"keep","why":"Explains reading portfolio as practice material","segs":[{"sec":"srcP","from":1,"to":4}]}
+{"id":359272,"verdict":"keep","why":"Which readings appear in midterm/final, writing topics","segs":[{"sec":"grade","from":1,"to":7}]}
+{"id":360504,"verdict":"needs_parent","why":"Answer about appealing WT1 grade","segs":[{"sec":"grade","from":1,"to":2}]}
+{"id":361556,"verdict":"needs_parent","why":"Opinion on memorizing template; needs question","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":361831,"verdict":"keep","why":"Full course experience with section-by-section tips","segs":[{"sec":"info","from":1,"to":8},{"sec":"srcU","from":9,"to":28}]}
+{"id":362258,"verdict":"keep","why":"Tip: MCQ exams can rescue grade","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":362638,"verdict":"keep","why":"Standard grade scale with upgrade","segs":[{"sec":"grade","from":1,"to":4}]}
+{"id":362688,"verdict":"keep","why":"Course difficulty depends on writing grading","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":362859,"verdict":"keep","why":"Reading portfolio exists, ungraded","segs":[{"sec":"info","from":1,"to":1}]}
+{"id":363428,"verdict":"keep","why":"Advice: use office hours and feedback","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":364738,"verdict":"needs_parent","why":"Instructor opinion; name only in parent","segs":[{"sec":"doc","from":1,"to":5,"doctor":"kristian kirkwood"}]}
+{"id":364816,"verdict":"keep","why":"course components and AWL split mid/final","segs":[{"sec":"info","from":1,"to":5}]}
+{"id":365688,"verdict":"needs_parent","why":"midterm study method, exam only named in parent","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":365898,"verdict":"keep","why":"standalone study-rhythm advice","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":366066,"verdict":"drop","why":"curve rumour, parent is voice message","segs":[]}
+{"id":367384,"verdict":"keep","why":"assessment structure of the course","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":367572,"verdict":"keep","why":"writing task durations and word minimums","segs":[{"sec":"grade","from":1,"to":5}]}
+{"id":368105,"verdict":"keep","why":"AWL flashcard sets","segs":[{"sec":"srcP","from":1,"to":14}]}
+{"id":368245,"verdict":"keep","why":"past writing task 2 prompts","segs":[{"sec":"srcP","from":1,"to":31}]}
+{"id":370179,"verdict":"keep","why":"full midterm format walkthrough","segs":[{"sec":"grade","from":1,"to":27},{"sec":"srcP","from":28,"to":28}]}
+{"id":370234,"verdict":"needs_parent","why":"answers agent question; starts with yes","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":374580,"verdict":"keep","why":"midterm coverage, time and format","segs":[{"sec":"grade","from":1,"to":7}]}
+{"id":374978,"verdict":"keep","why":"grammar and AWL practice form links","segs":[{"sec":"srcP","from":1,"to":19}]}
+{"id":375426,"verdict":"keep","why":"standalone exam preparation tips","segs":[{"sec":"srcU","from":1,"to":3}]}
+{"id":375455,"verdict":"keep","why":"how portfolio topic reappears in exam reading","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":375472,"verdict":"keep","why":"exam duration and question counts per section","segs":[{"sec":"grade","from":1,"to":4}]}
+{"id":375607,"verdict":"keep","why":"preparation tips for future students","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":375620,"verdict":"keep","why":"writing advice: clean grammar over fancy vocab","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":375755,"verdict":"needs_parent","why":"grammar study method; grammar named only in parent","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":376054,"verdict":"needs_parent","why":"midterm study sources answer","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":376899,"verdict":"keep","why":"reading tip: answers may be in graphs","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":377359,"verdict":"needs_parent","why":"where to study for midterm","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":377362,"verdict":"needs_parent","why":"extra practice advice, vague alone","segs":[{"sec":"srcP","from":1,"to":2}]}
+{"id":377644,"verdict":"keep","why":"AWL 1-3 Quizlet links","segs":[{"sec":"srcP","from":1,"to":15}]}
+{"id":378010,"verdict":"keep","why":"reading text titles list","segs":[{"sec":"lessons","from":1,"to":4}]}
+{"id":378312,"verdict":"needs_parent","why":"which exam section to start with","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":378348,"verdict":"needs_parent","why":"exam reading vs portfolio; portfolio only in parent","segs":[{"sec":"grade","from":1,"to":1}]}
+{"id":380948,"verdict":"needs_parent","why":"writing advice; writing named only in parent","segs":[{"sec":"srcU","from":1,"to":2}]}
+{"id":381570,"verdict":"keep","why":"named instructor teaching style review","segs":[{"sec":"doc","from":1,"to":2,"doctor":"العبري"}]}
+{"id":381956,"verdict":"drop","why":"refers to unseen forms, parent unavailable","segs":[]}
+{"id":384644,"verdict":"drop","why":"no substance, instructor apparently teaches another course","segs":[]}
+{"id":384652,"verdict":"drop","why":"thin praise, semester-specific instructor change","segs":[]}
+{"id":385821,"verdict":"keep","why":"cause/effect essay structure explained","segs":[{"sec":"srcU","from":1,"to":4}]}
+{"id":387768,"verdict":"drop","why":"guess about grade cut-offs","segs":[]}
+{"id":388062,"verdict":"keep","why":"reading practice method, self-explanatory","segs":[{"sec":"srcU","from":1,"to":6}]}
+{"id":388214,"verdict":"needs_parent","why":"study order for starting from zero","segs":[{"sec":"srcU","from":1,"to":5}]}
+{"id":390187,"verdict":"needs_parent","why":"midterm points per section; midterm only in parent","segs":[{"sec":"grade","from":1,"to":4}]}
+{"id":390873,"verdict":"keep","why":"vocab practice links inside AWL course","segs":[{"sec":"srcP","from":1,"to":3}]}
+{"id":391212,"verdict":"keep","why":"concise study checklist","segs":[{"sec":"srcU","from":1,"to":1}]}
+{"id":393721,"verdict":"keep","why":"full course grade weights","segs":[{"sec":"grade","from":1,"to":6,"items":[["رايتنق ون",15],["رايتنق تو",15],["ميد",25],["فاينل",45]],"note_from":6,"note_to":6}]}
+{"id":394429,"verdict":"needs_parent","why":"course requirements: absences limit and drafts","segs":[{"sec":"info","from":1,"to":2}]}
+{"id":395341,"verdict":"keep","why":"named instructor review plus grading strictness","segs":[{"sec":"doc","from":1,"to":2,"doctor":"كريستان كيرك وود"},{"sec":"grade","from":3,"to":3}]}
+{"id":397501,"verdict":"keep","why":"practise writing early, learn structure","segs":[{"sec":"srcU","from":1,"to":1}]}

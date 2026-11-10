@@ -17761,3 +17761,6 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 /* ملاحظة «توزيع الدرجات» (data.note): نصٌّ كما كُتب تحت الشريط */
 .gnote { white-space: pre-wrap; margin-top: 8px; line-height: 1.75; font-size: .92em; overflow-wrap: anywhere; unicode-bidi: plaintext; text-align: start; }
 .gnote-in { display: block; width: 100%; margin-top: 8px; min-height: 2.6em; }
+/* اقتباسُ السؤال فوق مساهمةٍ منقولةٍ كانت ردًّا (impQ) */
+.imp-q { display: block; border-inline-start: 3px solid rgba(0, 109, 119, .45); padding-inline-start: 8px; margin: 2px 0 5px; opacity: .72; font-size: .92em; unicode-bidi: plaintext; text-align: start; white-space: normal; }
+html[data-theme="dark"] .imp-q { border-inline-start-color: rgba(131, 197, 190, .5); }

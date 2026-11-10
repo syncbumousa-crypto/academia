@@ -5182,7 +5182,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       walk(root);
     }
     if (!flat && isLong) host.insertAdjacentHTML('beforeend', inlineTogHTML(open));
-    return box.innerHTML;
+    return impQ(box.innerHTML);
   }
   /* ملء شرائح html من خريطة files — للعرض في المحرّر */
   function srcFillChips(html, files, area) {
@@ -5308,7 +5308,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بنيةُ اختبار. نصٌّ كما كُتب، تحت الشريط إن وُجد وحدَه إن لم يوجد */
   function gNoteHTML(note) {
     const t = String(note || '').trim();
-    return t ? `<div class="gnote" dir="auto">${esc(t)}</div>` : '';
+    return t ? `<div class="gnote" dir="auto">${impQ(esc(t))}</div>` : '';
+  }
+  /* ===== اقتباسُ السؤال في المنقول =====
+     مساهمةٌ نُقلت من محادثة (تيليقرام) كانت ردًّا، ولا تُفهم بلا سؤالها. فيسبقها في متنها سطرُ السؤال
+     بين علامتين غير مرئيّتين (‎U+2063‎)، ويُرسم هنا اقتباسًا فوق كلام الكاتب — فلا يُظنّ من كلامه.
+     يُطبَّق على نصٍّ **بعد** ‎esc‎ أو على ‎html‎ منظَّف، والاقتباسُ سطرٌ واحد بلا وسوم. ومن لم يمرّ
+     بهذه الدالّة من العروض يقرأ السطر نصًّا أوّلُه «↩» — يُفهم ولا ينكسر. والقصُّ قد يقطع علامةَ
+     الإغلاق، فنهايةُ النصّ تُغلقه */
+  const IMPQ_RE = /⁣([^⁣<]*)(?:⁣|(?=<)|$)(?:\n|<br\s*\/?>)?/g;
+  function impQ(html) {
+    const h = String(html == null ? '' : html);
+    return h.indexOf('⁣') < 0 ? h : h.replace(IMPQ_RE, (m, q) => `<span class="imp-q">${q.replace(/^???\s*/, '')}</span>`);
   }
   function gDistHTML(items) {
     const rem = Math.max(0, 100 - items.reduce((s, x) => s + x.pct, 0));
@@ -5697,7 +5708,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       /* سهم التوسيع إنلاين آخر النص (مثل «المادة») — لا يُرسم إلا حين يكون الانطباع مقصوصًا فعلًا */
       const inlineTog = (flat || !isLong) ? '' : inlineTogHTML(open);
-      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? esc(shownDesc) : ''}${inlineTog}</span>`;
+      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? impQ(esc(shownDesc)) : ''}${inlineTog}</span>`;
       if (!items.length && !fullDesc) return `<span class="peek-tx peek-none">${T().noData}</span>`;
       /* الشارات = عناصر flex بعرض محتواها؛ تنمو بالتساوي لملء صفّها (justify).
          «الحشوة» تمتصّ فراغ الصفّ الأخير فلا يتمدّد، والانطباع صفّ كامل العرض تحته */
@@ -5870,7 +5881,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* «لا توجد معلومات» تظهر فقط إذا خلَت المساهمة من كل شيء — لا مع مساهمة فيها شارات (كغلاف كتاب) */
         const chipsHTML = infoChips(dd);
         const txHTML = fullDesc
-          ? `<span class="peek-tx">${esc(shownDesc)}</span>`
+          ? `<span class="peek-tx">${impQ(esc(shownDesc))}</span>`
           : (chipsHTML ? '' : `<span class="peek-tx peek-none">${T().noData}</span>`);
         /* السهم للنصّ وحده: لا يُرسم إلا حين يوجد نصٌّ مقصوص فعلًا (وإلا فلا شيء يوسّعه) */
         const inlineTog = isLong ? inlineTogHTML(open) : '';
