@@ -17745,3 +17745,15 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 /* ومربّعُ «لا يوجد ملخص» كمربّعَي المصادر والبنك: يمتدّ إلى قاع مساحته ويُقصّ على فجواتها */
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .kt-view.pk-split__ph:has(> .pk-vwph) { padding-bottom: 12px; }
 #cm-body .pk--icx .post-ytmain > .pk-split > .kt-view.pk-split__ph > .pk-vwph { align-self: stretch; box-sizing: border-box; }
+/* ===== مساهمةُ التحرير الضيّقة بلا مساحة: صفٌّ كالمنشورة (طلبُ صاحب الموقع) — ترويستُها و«ابدأ بـ» وحدهما ===== */
+#cm-body .pk--edit.pk--icx.pk--icrow .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid, .kt-view, #cm-cards, .vt-foot, .pk-hdline) { display: none !important; }
+#cm-body .pk--edit.pk--icx.pk--icrow .post-ytmain { padding-bottom: 24px; }
+#cm-body .post.pk--edit.pk--icx.pk--icrow { background: transparent; border-color: transparent; box-shadow: none; }
+#cm-body .pk--edit.pk--icx.pk--icrow .x3-pkhd.on { border-bottom-color: transparent; }
+/* و«حذف · خاص · تم» في صفّ التحرير المطويّ حيث هي في المتّسع: في الطرف الأيسر */
+#cm-body .pk--edit.pk--icx.pk--icrow > .post-yt { position: relative; }
+#cm-body .pk--edit.pk--icx.pk--icrow > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; top: 24px; z-index: 3; margin: 0; }
+/* وزرُّ التكبير للمتّسعة وحدَها لا للصفّ المطويّ — كالمنشورة (طلبُ صاحب الموقع) */
+#cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
+/* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
+#cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }

@@ -9735,16 +9735,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       { const a0 = post0.querySelector('.x3-pkhd > .x3-art'); pkIcRowArtSh[id] = a0 ? getComputedStyle(a0).boxShadow : null; }
       pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
-    cardView = { open: id, fold: {} }; cxRowPub = id; cxHdUp = false; cxFtDn = false; delete pkAct[id];
+    const isEd = post0.classList.contains('pk--edit');   /* مساهمةُ التحرير تتّسع في موضعها كذلك، بلا حال القائمة */
+    if (!isEd) { cardView = { open: id, fold: {} }; cxRowPub = id; }
+    cxHdUp = false; cxFtDn = false; delete pkAct[id];
     pkIcSet(id, k);
     const mainR0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), top0 = post0.getBoundingClientRect().top;
     const goFly = pkIcGoFly(pkIcRowGoAt[id], mainR0, top0), sepFly = (pkIcRowSep[id] || []).map(g => pkIcGoFly(g, mainR0, top0)).filter(Boolean);
     renderCmSection();
     if (goFly) goFly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' }).finished.then(() => goFly.remove(), () => goFly.remove());
     sepFly.forEach(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' }).finished.then(() => x.remove(), () => x.remove()));
-    { const art = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"] .x3-pkhd > .x3-art`), sh = pkIcRowArtSh[id];
+    { const art = (pkIcPost(id) || document).querySelector('.x3-pkhd > .x3-art'), sh = pkIcRowArtSh[id];
       if (art && sh) art.animate([{ boxShadow: sh }, { boxShadow: getComputedStyle(art).boxShadow }], { duration: 260 * (window.__pkfxSlow || 1), easing: 'ease-out' }); }
-    const fp = document.querySelector(`#cm-body .pk--framepub[data-ck="${CSS.escape(id)}"]`);
+    const fp = pkIcPost(id);
     if (fp && pkIcRowM[id]) pkIcRowM[id].dT = pkIcRowM[id].top - fp.getBoundingClientRect().top;
     if (!fp || bkReduce()) return;
     cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
@@ -9752,9 +9754,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const h1 = fp.getBoundingClientRect().height;
     an.push(fp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: ez }));
     /* التذييلُ يلزم الحافّةَ السفلى وهي تنزل */
-    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
+    [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react, .vt-foot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
       an.push(x.animate([{ transform: `translateY(${h0 - h1}px)` }, { transform: 'none' }], { duration: D, easing: ez })));
-    fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .45, easing: 'ease-out', fill: 'backwards' })));
+    fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .vt-foot) *').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .45, easing: 'ease-out', fill: 'backwards' })));
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .3, fill: 'backwards' })));
     /* الأيقوناتُ من سطرها إلى مواضعها، على المنحنى نفسِه */
     PK_IC_KEYS.forEach(q => {
@@ -9880,7 +9882,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkIcToggle(post, k) {
     const id = pkIcId(post), open = pkIcOpenSet(id);
     /* وفي الواسع لا يُطوى إلى الصفّ: آخرُ مساحةٍ تنطوي إلى أيقونتها ويبقى الواسعُ و«ابدأ بـ» تحت عنوانه (ROADMAP-MAXICX · القرار ١) */
-    if (open.includes(k) && open.length === 1 && post.classList.contains('pk--max')) { post.pkIcBusy = true; return pkIcGo(id, null, post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]} .pk-blkh__ic`) || (k === 'mid' && post.querySelector('.pk-blkh--mid .pk-blkh__ic')) || post); }
+    if (open.includes(k) && open.length === 1 && (post.classList.contains('pk--max') || post.classList.contains('pk--edit'))) { post.pkIcBusy = true; return pkIcGo(id, null, post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]} .pk-blkh__ic`) || (k === 'mid' && post.querySelector('.pk-blkh--mid .pk-blkh__ic')) || post); }
     if (open.includes(k) && open.length === 1) { post.pkIcBusy = true; return pkIcCollapse(id, post); }
     if (!open.length) { post.pkIcBusy = true; return pkIcGo(id, k, post.querySelector(`.pk-icrow [data-pkic="${k}"]`) || post); }
     const key = k === 'book' ? '[data-pkview="source"]' : k === 'bank' ? '[data-pkview="folder"]' : '[data-pkmidx]';
@@ -9907,6 +9909,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     const old = k ? null : pkIcOpenK(id);
     const oldPane = old && post0.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[old]}`);
+    const h1 = post0.getBoundingClientRect().height, tall = !post0.classList.contains('pk--max');   /* خارجَ الواسع تتغيّر القامة: تُحرَّك */
     /* «ابدأ بـ» وفواصلُها قبل الفتح: نسخٌ تغيب بلطف */
     const goTxt = [];
     if (k && !bkReduce()) {
@@ -9929,14 +9932,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const go = () => {
       delete pkNotchSt[id];   /* الفجواتُ في الحال الجديدة قائمةٌ من أوّل إطار (كالاتّساع من الصفّ) */
       /* (وفي الواسع لا يُعلَّم «طازجًا»: فإذا صُغِّر بلا مساحةٍ عاد صفًّا لا إطارًا خاويًا) */
-      if (k) pkIcSet(id, k); else { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = post0.classList.contains('pk--max') ? null : id; }
+      if (k) pkIcSet(id, k); else { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = post0.classList.contains('pk--max') || post0.classList.contains('pk--edit') ? null : id; }
+      const scrs = [document.getElementById('cm-body'), document.scrollingElement, document.body].filter((x, i, a) => x && a.indexOf(x) === i).map(x => [x, x.scrollTop]);
       renderCmSection();
       const post = pkIcPost(id);
+      /* القامةُ القديمةُ تُثبَّت قبل أن يُقاس شيء، ويُردّ التمرير: فلا يقفز ما فوقها حين تقصر المساهمةُ في آخر الصفحة */
+      let h0n = null;
+      if (post && tall) { h0n = post.getBoundingClientRect().height; post.style.height = h1 + 'px'; scrs.forEach(([x, t]) => { x.scrollTop = t; }); }
       goTxt.forEach(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 * S, easing: 'ease-out', fill: 'forwards' }).finished.then(() => x.remove(), () => x.remove()));
-      if (!post || bkReduce()) return;
+      if (!post || bkReduce()) { if (post) post.style.height = ''; return; }
       cxHdMeasure(); pkBandFit(post);   /* الفجواتُ تُرسم وأيقوناتُها تُوضع فيها قبل القياس */
       post.pkBlkHold = true;
       const an = [];
+      if (tall && h0n != null) { const h0 = h0n;
+        if (Math.abs(h0 - h1) > 1) { post.style.overflow = 'hidden'; const ha = post.animate([{ height: h1 + 'px' }, { height: h0 + 'px' }], { duration: D, easing: ez }); an.push(ha);
+          const fin = () => { post.style.overflow = ''; post.style.height = ''; }; ha.finished.then(fin, fin); }
+        else post.style.height = ''; }
       /* الأيقوناتُ: من مواضعها القديمة إلى الجديدة، بإزاحتها الأصليّة وحجمِ موضعها الجديد */
       PK_IC_KEYS.forEach(q => {
         const r0 = before[q]; if (!r0) return;
@@ -22559,15 +22570,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const ft = card.querySelector('.vt-foot');
       if (fr && ft) ft.insertAdjacentHTML('beforebegin', cxFtLine());
       cxGlobsPlace(card);   /* «حذف · خاص · تم» إلى الترويسة مكبَّرةً وإلى الذيل ضيّقةً */
-      /* وكونسبتُ الأيقونات يُلبَس ويُخلع في مكانه كذلك (ROADMAP-MAXICX · ٥) */
-      card.classList.remove('pk--icx', 'pk--ic1', 'pk--icB', 'pk--icnone', 'pk--icR'); card.querySelectorAll(':scope .post-ytmain > .pk-icrow').forEach(x => x.remove());
-      delete card.dataset.pkicid;
-      const eid = (card.querySelector('[data-pkid]') || {}).dataset?.pkid;
-      if (on && PK_ICX && pkLab() && eid && hd) {
-        card.classList.add('pk--icx', ...(pkIcOne(eid) ? ['pk--ic1', ...(pkIcOpenSet(eid).length < 3 ? ['pk--icB'] : [])] : ['pk--icnone']));
-        card.dataset.pkicid = eid; delete pkNotchSt[eid];
-        hd.insertAdjacentHTML('afterend', pkIcRow(eid, !pkIcOne(eid)));
-      }
+      /* وكونسبتُ الأيقونات (‎pk--icx‎) يختلف بين الواسع والضيّق (الضيّقُ بلا مساحةٍ صفٌّ مطويّ): تُعاد بناءُ المساهمة —
+         والحركةُ في الشاشة الكاملة على اللوح نفسِه لا على المساهمة، فلا يضرّها البناء (ROADMAP-MAXICX · ٥) */
+      if (PK_ICX && pkLab()) renderCmSection();
     }
     if (fx) { card.classList.remove('pk--maxfx'); void card.offsetWidth; card.classList.add('pk--maxfx'); }
     requestAnimationFrame(() => {
@@ -22586,10 +22591,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== التحريرُ الضيّقُ في إطار المكبَّر (طلبُ صاحب الموقع): ترويسةٌ وتذييلٌ بمقبضيهما، والحذفُ والنشرُ فوق ===== */
     const fr = cxMax || pkLab();
     /* ولم يُعبَّأ بعدُ شيء: قامةُ المساهمة ثابتةٌ مهما فُتح من المساحات وأُغلق (طلبُ صاحب الموقع) */
-    const blank = fr && !cxMax && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcMeta(p.id);
-    /* والواسعُ في التحرير يلبس كونسبت الأيقونات كالنشر (ROADMAP-MAXICX · ٥) */
-    const icx = cxMax && PK_ICX && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '';
-    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
+    /* والتحريرُ يلبس كونسبت الأيقونات كالنشر (ROADMAP-MAXICX · ٥ وطلبُ صاحب الموقع): الواسعُ بلا مساحةٍ يبقى و«ابدأ بـ» تحت عنوانه،
+       والضيّقُ بلا مساحةٍ ينطوي صفًّا كالمنشورة (‎pk--icrow‎) ويتّسع في موضعه بالأيقونات */
+    const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
+    const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
+    const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcMeta(p.id);
+    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}
@@ -22604,11 +22611,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <!-- وشريطُ طرق العرض في التحرير، وعدّاداتُ المساهمة (شاراتُ الأنواع وخبرُها) في كبسولة البنك يسارَ اسمه (طلبُ صاحب الموقع) -->
             ${pkViewBar('edit', p.id, `<span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span><span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>`)}
           </div>
-          ${icx ? pkIcRow(p.id, !pkIcOne(p.id)) : ''}
-          ${fr ? cxHdLine() : ''}
+          ${icx ? pkIcRow(p.id, !one) : ''}
+          ${fr && !edRow ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}
           ${pkBankOn(p.id) ? '' : '<div id="cm-cards"></div>'}
-          ${fr ? cxFtLine() : ''}
+          ${fr && !edRow ? cxFtLine() : ''}
           ${cxFoot(d, p.id)}
         </div>
       </div>
