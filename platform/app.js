@@ -5319,7 +5319,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const IMPQ_RE = /⁣([^⁣<]*)(?:⁣|(?=<)|$)(?:\n|<br\s*\/?>)?/g;
   function impQ(html) {
     const h = String(html == null ? '' : html);
-    return h.indexOf('⁣') < 0 ? h : h.replace(IMPQ_RE, (m, q) => `<span class="imp-q">${q.replace(/^???\s*/, '')}</span>`);
+    return h.indexOf('⁣') < 0 ? h : h.replace(IMPQ_RE, (m, q) => `<span class="imp-q">${q.charCodeAt(0) === 8617 ? q.slice(1).trimStart() : q}</span>`);
   }
   function gDistHTML(items) {
     const rem = Math.max(0, 100 - items.reduce((s, x) => s + x.pct, 0));
