@@ -1,0 +1,4088 @@
+{
+  "code": "ENGL 214",
+  "users": [
+    {
+      "id": "stk-user4492",
+      "name": "فالح الهاجري",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4492/144/15185_2.png",
+      "email": "user4492@import.stkfupm.invalid",
+      "user": "user4492"
+    },
+    {
+      "id": "stk-medoalkebsi",
+      "name": "Medoalkebsi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b3f665/144.png",
+      "email": "medoalkebsi@import.stkfupm.invalid",
+      "user": "Medoalkebsi"
+    },
+    {
+      "id": "stk-abo_ali",
+      "name": "Abo Ali",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abo_ali/144/1589_2.png",
+      "email": "abo_ali@import.stkfupm.invalid",
+      "user": "Abo_Ali"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-user9534",
+      "name": "حكاية رجل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9534/144/2047_2.png",
+      "email": "user9534@import.stkfupm.invalid",
+      "user": "user9534"
+    },
+    {
+      "id": "stk-m_nd_m",
+      "name": "M nd m",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/m_nd_m/144/2140_2.png",
+      "email": "m_nd_m@import.stkfupm.invalid",
+      "user": "M_nd_m"
+    },
+    {
+      "id": "stk-nasalmz",
+      "name": "Nasalmz",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/a9adbd/144.png",
+      "email": "nasalmz@import.stkfupm.invalid",
+      "user": "Nasalmz"
+    },
+    {
+      "id": "stk-user11942",
+      "name": "فيصل الفاهد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11942/144/2544_2.png",
+      "email": "user11942@import.stkfupm.invalid",
+      "user": "user11942"
+    },
+    {
+      "id": "stk-user11724",
+      "name": "ركاد الوافي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/8491ac/144.png",
+      "email": "user11724@import.stkfupm.invalid",
+      "user": "user11724"
+    },
+    {
+      "id": "stk-student_nz",
+      "name": "student NZ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ba9def/144.png",
+      "email": "student_nz@import.stkfupm.invalid",
+      "user": "student_NZ"
+    },
+    {
+      "id": "stk-user5216",
+      "name": "الرقمي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5216/144/1003_2.png",
+      "email": "user5216@import.stkfupm.invalid",
+      "user": "user5216"
+    },
+    {
+      "id": "stk-mahdi_sahel",
+      "name": "Mahdi Sahel",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/5f9b8f/144.png",
+      "email": "mahdi_sahel@import.stkfupm.invalid",
+      "user": "Mahdi_Sahel"
+    },
+    {
+      "id": "stk-rockwentz",
+      "name": "RockWentz",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/rockwentz/144/1561_2.png",
+      "email": "rockwentz@import.stkfupm.invalid",
+      "user": "RockWentz"
+    },
+    {
+      "id": "stk-salehmm",
+      "name": "salehmm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/919ad9/144.png",
+      "email": "salehmm@import.stkfupm.invalid",
+      "user": "salehmm"
+    },
+    {
+      "id": "stk-asem007",
+      "name": "asem007",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/c68b51/144.png",
+      "email": "asem007@import.stkfupm.invalid",
+      "user": "asem007"
+    },
+    {
+      "id": "stk-3boody830",
+      "name": "3boody830",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/3/6de8d8/144.png",
+      "email": "3boody830@import.stkfupm.invalid",
+      "user": "3boody830"
+    },
+    {
+      "id": "stk-mu7md",
+      "name": "mu7md",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mu7md/144/1417_2.png",
+      "email": "mu7md@import.stkfupm.invalid",
+      "user": "mu7md"
+    },
+    {
+      "id": "stk-aflatoon",
+      "name": "AFLATOON",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/73ab20/144.png",
+      "email": "aflatoon@import.stkfupm.invalid",
+      "user": "AFLATOON"
+    },
+    {
+      "id": "stk-metallic",
+      "name": "METALLIC",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/5e9695/144.png",
+      "email": "metallic@import.stkfupm.invalid",
+      "user": "METALLIC"
+    },
+    {
+      "id": "stk-m_o_h_a_m_e_d",
+      "name": "M O H A M E D",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/m_o_h_a_m_e_d/144/780_2.png",
+      "email": "m_o_h_a_m_e_d@import.stkfupm.invalid",
+      "user": "M_O_H_A_M_E_D"
+    },
+    {
+      "id": "stk-big_h",
+      "name": "Big H",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/dc4da7/144.png",
+      "email": "big_h@import.stkfupm.invalid",
+      "user": "Big_H"
+    },
+    {
+      "id": "stk-stu2009",
+      "name": "stu2009",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/13edae/144.png",
+      "email": "stu2009@import.stkfupm.invalid",
+      "user": "stu2009"
+    },
+    {
+      "id": "stk-user4325",
+      "name": "غروب الشمس",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4325/144/674_2.png",
+      "email": "user4325@import.stkfupm.invalid",
+      "user": "user4325"
+    },
+    {
+      "id": "stk-abo-da7m",
+      "name": "abo-da7m",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/54ee81/144.png",
+      "email": "abo-da7m@import.stkfupm.invalid",
+      "user": "abo-da7m"
+    },
+    {
+      "id": "stk-cs_scientist",
+      "name": "CS Scientist",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/cs_scientist/144/2096_2.png",
+      "email": "cs_scientist@import.stkfupm.invalid",
+      "user": "CS_Scientist"
+    },
+    {
+      "id": "stk-_pen",
+      "name": "!! Pen !!",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/_pen/144/324_2.png",
+      "email": "_pen@import.stkfupm.invalid",
+      "user": "_Pen"
+    },
+    {
+      "id": "stk-rytamu",
+      "name": "Rytamu",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/rytamu/144/389_2.png",
+      "email": "rytamu@import.stkfupm.invalid",
+      "user": "Rytamu"
+    },
+    {
+      "id": "stk-jaunty",
+      "name": "jaunty",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/j/3da27b/144.png",
+      "email": "jaunty@import.stkfupm.invalid",
+      "user": "jaunty"
+    },
+    {
+      "id": "stk-user5635",
+      "name": "..رايق..",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/c77e96/144.png",
+      "email": "user5635@import.stkfupm.invalid",
+      "user": "user5635"
+    },
+    {
+      "id": "stk-abo_taleb",
+      "name": "Abo Taleb",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abo_taleb/144/956_2.png",
+      "email": "abo_taleb@import.stkfupm.invalid",
+      "user": "Abo_Taleb"
+    },
+    {
+      "id": "stk-abu_abdullah",
+      "name": "Abu Abdullah",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/b5e925/144.png",
+      "email": "abu_abdullah@import.stkfupm.invalid",
+      "user": "Abu_Abdullah"
+    },
+    {
+      "id": "stk-chemist",
+      "name": "Chemist",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/chemist/144/1482_2.png",
+      "email": "chemist@import.stkfupm.invalid",
+      "user": "Chemist"
+    },
+    {
+      "id": "stk-user7389",
+      "name": "عازف !",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f4b2a3/144.png",
+      "email": "user7389@import.stkfupm.invalid",
+      "user": "user7389"
+    },
+    {
+      "id": "stk-user10207",
+      "name": "بروتوكول",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10207/144/2111_2.png",
+      "email": "user10207@import.stkfupm.invalid",
+      "user": "user10207"
+    },
+    {
+      "id": "stk-abu_ali_20",
+      "name": "ABU ALI 20",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/c6cbf5/144.png",
+      "email": "abu_ali_20@import.stkfupm.invalid",
+      "user": "ABU_ALI_20"
+    },
+    {
+      "id": "stk-bo_rayan",
+      "name": "Bo Rayan",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/bo_rayan/144/2084_2.png",
+      "email": "bo_rayan@import.stkfupm.invalid",
+      "user": "Bo_Rayan"
+    },
+    {
+      "id": "stk-memet",
+      "name": "MEMET",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/memet/144/727_2.png",
+      "email": "memet@import.stkfupm.invalid",
+      "user": "MEMET"
+    },
+    {
+      "id": "stk-user3354",
+      "name": "ميموو",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3354/144/447_2.png",
+      "email": "user3354@import.stkfupm.invalid",
+      "user": "user3354"
+    },
+    {
+      "id": "stk-eng.3booodii",
+      "name": "eng.3boOodii",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/eng.3booodii/144/726_2.png",
+      "email": "eng.3booodii@import.stkfupm.invalid",
+      "user": "eng.3boOodii"
+    },
+    {
+      "id": "stk-mysterious",
+      "name": "Mysterious",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ecb155/144.png",
+      "email": "mysterious@import.stkfupm.invalid",
+      "user": "Mysterious"
+    },
+    {
+      "id": "stk-s.a.l.m.a.n",
+      "name": "S.a.l.m.a.n",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/858c86/144.png",
+      "email": "s.a.l.m.a.n@import.stkfupm.invalid",
+      "user": "S.a.l.m.a.n"
+    },
+    {
+      "id": "stk-abdulla_yahia",
+      "name": "Abdulla Yahia",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/a4c791/144.png",
+      "email": "abdulla_yahia@import.stkfupm.invalid",
+      "user": "Abdulla_Yahia"
+    },
+    {
+      "id": "stk-242424",
+      "name": "242424",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/242424/144/158_2.png",
+      "email": "242424@import.stkfupm.invalid",
+      "user": "242424"
+    },
+    {
+      "id": "stk-user2685",
+      "name": "هتان فلمبان",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2685/144/290_2.png",
+      "email": "user2685@import.stkfupm.invalid",
+      "user": "user2685"
+    },
+    {
+      "id": "stk-user2039",
+      "name": "خالد المحاسبي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2039/144/168_2.png",
+      "email": "user2039@import.stkfupm.invalid",
+      "user": "user2039"
+    },
+    {
+      "id": "stk-alihr",
+      "name": "alihr",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/8dc957/144.png",
+      "email": "alihr@import.stkfupm.invalid",
+      "user": "alihr"
+    },
+    {
+      "id": "stk-user6824",
+      "name": "كريمر",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/c68b51/144.png",
+      "email": "user6824@import.stkfupm.invalid",
+      "user": "user6824"
+    },
+    {
+      "id": "stk-expert87",
+      "name": "Expert87",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/85e7bf/144.png",
+      "email": "expert87@import.stkfupm.invalid",
+      "user": "Expert87"
+    },
+    {
+      "id": "stk-user8305",
+      "name": "انت ايش دراك",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/c37758/144.png",
+      "email": "user8305@import.stkfupm.invalid",
+      "user": "user8305"
+    },
+    {
+      "id": "stk-_3111",
+      "name": "أبو خلدون 3",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/a587f6/144.png",
+      "email": "_3111@import.stkfupm.invalid",
+      "user": "_3111"
+    },
+    {
+      "id": "stk-john_silver",
+      "name": "JOHN SILVER",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/john_silver/144/2119_2.png",
+      "email": "john_silver@import.stkfupm.invalid",
+      "user": "JOHN_SILVER"
+    },
+    {
+      "id": "stk-user9921",
+      "name": "أمير الشعراء",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9921/144/2082_2.png",
+      "email": "user9921@import.stkfupm.invalid",
+      "user": "user9921"
+    },
+    {
+      "id": "stk-faisal_19",
+      "name": "Faisal_19",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/faisal_19/144/2227_2.png",
+      "email": "faisal_19@import.stkfupm.invalid",
+      "user": "Faisal_19"
+    },
+    {
+      "id": "stk-user3985",
+      "name": "عاشق الهم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/9de053/144.png",
+      "email": "user3985@import.stkfupm.invalid",
+      "user": "user3985"
+    },
+    {
+      "id": "stk-user3489",
+      "name": "كلبش برتقالي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f0a364/144.png",
+      "email": "user3489@import.stkfupm.invalid",
+      "user": "user3489"
+    },
+    {
+      "id": "stk-quick",
+      "name": "Quick",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/q/c68b51/144.png",
+      "email": "quick@import.stkfupm.invalid",
+      "user": "Quick"
+    },
+    {
+      "id": "stk-user2526",
+      "name": "ملك العز",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/4491bb/144.png",
+      "email": "user2526@import.stkfupm.invalid",
+      "user": "user2526"
+    },
+    {
+      "id": "stk-equal",
+      "name": "equal",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/e5b9ba/144.png",
+      "email": "equal@import.stkfupm.invalid",
+      "user": "equal"
+    },
+    {
+      "id": "stk-khalid-f10",
+      "name": "khalid-f10",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/khalid-f10/144/1440_2.png",
+      "email": "khalid-f10@import.stkfupm.invalid",
+      "user": "khalid-f10"
+    },
+    {
+      "id": "stk-a_o_s_ll",
+      "name": "ĄЪŐ..Şαļļў",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/a_o_s_ll/144/446_2.png",
+      "email": "a_o_s_ll@import.stkfupm.invalid",
+      "user": "A_O_S_ll"
+    },
+    {
+      "id": "stk-penc1l",
+      "name": "Penc1l",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/penc1l/144/677_2.png",
+      "email": "penc1l@import.stkfupm.invalid",
+      "user": "Penc1l"
+    },
+    {
+      "id": "stk-user2967",
+      "name": "صقر السعودية",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/cc9497/144.png",
+      "email": "user2967@import.stkfupm.invalid",
+      "user": "user2967"
+    },
+    {
+      "id": "stk-bo_yosef",
+      "name": "bo_yosef",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/51bf81/144.png",
+      "email": "bo_yosef@import.stkfupm.invalid",
+      "user": "bo_yosef"
+    },
+    {
+      "id": "stk-mr.fabulous",
+      "name": "Mr.Fabulous",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mr.fabulous/144/1128_2.png",
+      "email": "mr.fabulous@import.stkfupm.invalid",
+      "user": "Mr.Fabulous"
+    },
+    {
+      "id": "stk-coengineer",
+      "name": "COEngineer",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/f6c823/144.png",
+      "email": "coengineer@import.stkfupm.invalid",
+      "user": "COEngineer"
+    },
+    {
+      "id": "stk-user5643",
+      "name": "ابو شووووق",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5643/144/1141_2.png",
+      "email": "user5643@import.stkfupm.invalid",
+      "user": "user5643"
+    },
+    {
+      "id": "stk-phenomenon",
+      "name": "Phenomenon",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/p/9fc348/144.png",
+      "email": "phenomenon@import.stkfupm.invalid",
+      "user": "Phenomenon"
+    },
+    {
+      "id": "stk-abodi660",
+      "name": "abodi660",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/ac8455/144.png",
+      "email": "abodi660@import.stkfupm.invalid",
+      "user": "abodi660"
+    },
+    {
+      "id": "stk-user5812",
+      "name": "فيصل النويمي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5812/144/1176_2.png",
+      "email": "user5812@import.stkfupm.invalid",
+      "user": "user5812"
+    },
+    {
+      "id": "stk-menoo",
+      "name": "Menoo",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/menoo/144/1790_2.png",
+      "email": "menoo@import.stkfupm.invalid",
+      "user": "Menoo"
+    },
+    {
+      "id": "stk-user8552",
+      "name": "طكمنتال",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ea5d25/144.png",
+      "email": "user8552@import.stkfupm.invalid",
+      "user": "user8552"
+    },
+    {
+      "id": "stk-user8718",
+      "name": "معاذ كوثر",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/13edae/144.png",
+      "email": "user8718@import.stkfupm.invalid",
+      "user": "user8718"
+    },
+    {
+      "id": "stk-abo_yazeed6",
+      "name": "abo_yazeed6",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/c2a13f/144.png",
+      "email": "abo_yazeed6@import.stkfupm.invalid",
+      "user": "abo_yazeed6"
+    },
+    {
+      "id": "stk-jafar_15",
+      "name": "Jafar 15",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/j/aeb1de/144.png",
+      "email": "jafar_15@import.stkfupm.invalid",
+      "user": "Jafar_15"
+    },
+    {
+      "id": "stk-mkd",
+      "name": "MKD",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
+      "email": "mkd@import.stkfupm.invalid",
+      "user": "MKD"
+    },
+    {
+      "id": "stk-user4578",
+      "name": "عبدالعزيز الشهراني",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4578/144/761_2.png",
+      "email": "user4578@import.stkfupm.invalid",
+      "user": "user4578"
+    },
+    {
+      "id": "stk-user6686",
+      "name": "هـــآوي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e9bcb4/144.png",
+      "email": "user6686@import.stkfupm.invalid",
+      "user": "user6686"
+    },
+    {
+      "id": "stk-user6687",
+      "name": "رابط خربان",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/b2d939/144.png",
+      "email": "user6687@import.stkfupm.invalid",
+      "user": "user6687"
+    },
+    {
+      "id": "stk-user6605",
+      "name": "أحمد الراجحي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6605/144/1383_2.png",
+      "email": "user6605@import.stkfupm.invalid",
+      "user": "user6605"
+    },
+    {
+      "id": "stk-user8697",
+      "name": "الحاائر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8697/144/1880_2.png",
+      "email": "user8697@import.stkfupm.invalid",
+      "user": "user8697"
+    },
+    {
+      "id": "stk-computist",
+      "name": "Computist",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
+      "email": "computist@import.stkfupm.invalid",
+      "user": "Computist"
+    },
+    {
+      "id": "stk-user9305",
+      "name": "أبو طلحة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a88e57/144.png",
+      "email": "user9305@import.stkfupm.invalid",
+      "user": "user9305"
+    },
+    {
+      "id": "stk-practice",
+      "name": "Practice",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/practice/144/2043_2.png",
+      "email": "practice@import.stkfupm.invalid",
+      "user": "Practice"
+    },
+    {
+      "id": "stk-abdelaziz",
+      "name": "Abdelaziz",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdelaziz/144/2081_2.png",
+      "email": "abdelaziz@import.stkfupm.invalid",
+      "user": "Abdelaziz"
+    },
+    {
+      "id": "stk-playa",
+      "name": "PLAYA",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/p/2acd7d/144.png",
+      "email": "playa@import.stkfupm.invalid",
+      "user": "PLAYA"
+    },
+    {
+      "id": "stk-aziz99",
+      "name": "aziz99",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9a140/144.png",
+      "email": "aziz99@import.stkfupm.invalid",
+      "user": "aziz99"
+    },
+    {
+      "id": "stk-waleedx11",
+      "name": "waleedx11",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/6bbea6/144.png",
+      "email": "waleedx11@import.stkfupm.invalid",
+      "user": "waleedx11"
+    },
+    {
+      "id": "stk-breaktheunbreakable",
+      "name": "BreakTheUnbreakable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
+      "email": "breaktheunbreakable@import.stkfupm.invalid",
+      "user": "BreakTheUnbreakable"
+    },
+    {
+      "id": "stk-guest",
+      "name": "Guest",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8dc957/144.png",
+      "email": "guest@import.stkfupm.invalid",
+      "user": "Guest"
+    },
+    {
+      "id": "stk-sadguts",
+      "name": "SadGuts",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/sadguts/144/2512_2.png",
+      "email": "sadguts@import.stkfupm.invalid",
+      "user": "SadGuts"
+    },
+    {
+      "id": "stk-mr_exceptional_stude",
+      "name": "Mr. Exceptional Student",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b3f665/144.png",
+      "email": "mr_exceptional_stude@import.stkfupm.invalid",
+      "user": "Mr_Exceptional_Stude"
+    },
+    {
+      "id": "stk-ahmed1",
+      "name": "Ahmed#",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/6f9a4e/144.png",
+      "email": "ahmed1@import.stkfupm.invalid",
+      "user": "Ahmed1"
+    },
+    {
+      "id": "stk-mohammed_mag",
+      "name": "Mohammed Mag",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
+      "email": "mohammed_mag@import.stkfupm.invalid",
+      "user": "Mohammed_Mag"
+    },
+    {
+      "id": "stk-makkahboy",
+      "name": "makkahboy",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b5e925/144.png",
+      "email": "makkahboy@import.stkfupm.invalid",
+      "user": "makkahboy"
+    },
+    {
+      "id": "stk-maan_al-raddadi",
+      "name": "Maan Al-Raddadi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/e56c9b/144.png",
+      "email": "maan_al-raddadi@import.stkfupm.invalid",
+      "user": "Maan_Al-Raddadi"
+    },
+    {
+      "id": "stk-majed_hq",
+      "name": "Majed_HQ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c4cdca/144.png",
+      "email": "majed_hq@import.stkfupm.invalid",
+      "user": "Majed_HQ"
+    },
+    {
+      "id": "stk-xelko",
+      "name": "Xelko",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/x/50afbb/144.png",
+      "email": "xelko@import.stkfupm.invalid",
+      "user": "Xelko"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1251064-engl214",
+      "uid": "stk-user4492",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1375447184000,
+      "st": "pub",
+      "data": {
+        "desc": "أول كورس إنجلش طلعت منه بفائدة ،\nينفعك في كيفية كتابة الCV وفي المقابلات في المستقبل إن شاء الله ،\nالكورس خفيف وممتع أكثر من 102 - 101 !\nمافيه تاسكات، تكتب عدة رسائل و ريزومي وريبورت وبرزنتيشن !\nوأشوف إن المدرسين متساهلين فيه أكثر من المادتين اللي راحت ،\nأو يمكن علشانه بالسمر ويبون يفتكون 😆\n\nبالتوفيق ❤️",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/6",
+          "user": "user4492",
+          "ts": 1375447184000,
+          "tid": 120480,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1371745-engl214",
+      "uid": "stk-medoalkebsi",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1401087342000,
+      "st": "pub",
+      "data": {
+        "desc": "**جودة المقرر بشكل عام : جيدة****المواضيع التي يغطيها المقرر :** **30% MAJOR REPORT** الريبورت ينقسم قسمين \" الريسيرتش والدرافتنق\" كل واحد عليها 15%\nالريسرتش تتضمن السورسات + الافالويشن حق السورسات + البروقراس ريبورت\nالدرافتنق \" الي تكون كتابه داخل الكلاس وتسمى درافت 1 + الكتابه النهائيه للريبورت وتسمى درافت 2 + الفاينل ريبورت والي يكون فيه كل شي بالتعديلات والاضافات إلخ ويسمى فاينل درافت \"\n15% RECRUITMENT\n\"هذي خاصه بالتوظيف تتضمن : كتابه السي في + الكفر لتر + المقابله الشخصيه \"\n10% CORRESPONDENCE\nعباره عن رسالتين تكتبها كل وحده عليها 5% , يكون اختبار داخل الكلاس يعطيك الدكتور رساله وترد عليها , او انك ترسل رساله طلب\nPRESENTATIONS 10%\n15% MIDTERM EXAM\nعباره عن افالويتنق سورس , يعطونك سورس والاوت لاين حق ريبورت ويقولولك سوي له افالويشن\n10% FINAL EXAM\nعباره ان اختبار مبنى على الحفظ , 45 سؤال . الاسئله من الاشياء الي درستها خلال الفصل الدراسي , طبعا يحددون لكم صفحات من الكتاب واوراق ع البلاك بورد تذاكرونها.\nمثال على الاختبار\n\nIf you know your reader well through business relations, you should NOT close a letter with __________ (p.101)\nA. Best wishes, B. Cordially, C. Forever yours, D. Regards,\n\nQuizzes=10%\nتختلف من كل مدرس , في مدرسين يسوي كوزات اختيارات من الفاينل , وفي مدرسين مثل حقي يخليه كتابه. ويكون 3 كوزات , واحد بـ 5% والبقيه من 2.5%",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/13",
+          "user": "Medoalkebsi",
+          "ts": 1401087342000,
+          "tid": 120480,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p1390294-engl214",
+      "uid": "stk-abo_ali",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1408232455000,
+      "st": "pub",
+      "data": {
+        "desc": "ماشاء الله تبارك الرحمن\n\nالشباب ما قصروا ،،، بينوا كل شي عن المادة\n\nاما بس حبيت اضيف ان المادة ذي بالصيف بطللللله\nيعني لا تخاف تجيب اقل من c ،،، والدف على كيف كيفك\n\nفأنصحكم بالصيف",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/14",
+          "user": "Abo_Ali",
+          "ts": 1408232455000,
+          "tid": 120480,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p1422988-engl214",
+      "uid": "stk-user8581",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1437936032000,
+      "st": "pub",
+      "data": {
+        "desc": "- المواضيع الي فيه مهمة وراح تستفيد اكثر لو كنت عند دكتور ممتاز …\n- يفضل تاخذه في الصيف وبخصوص الشرط فهو يتغير كل سمستر مثلا هذا الصيف 143 عشان يسمح لك تنزل الكورس لازم تكون ماخذ C او اكثر في 102 احيانا يتغاضون عن هذا الشرط لو كان عندك سبب مقنع\n\n- الريبورت يكون تحت موضوع \" Theme \" معين يختاره القسم مثلا هذا السمستر 142 كان عن CHINA و المطلوب منك تختار موضوع يرتبط بالصين وتخصصك و يكون الريبورت عنه وفي نهاية السمستر تقدم برزنتيشن عن الريبورت .\n- حاول تستفيد من هالكورس سواء عن طريق الدكتور او الكتاب لأن المواضيع الي يغطيها اشوفها مهمة .\n- الكتاب صحيح فيه حشو كلام بعض الأحيان لكن بشكل عام جيد و اسئلة الفاينل غالبا تكون منه .\nهذا الملف فيه ملخص لماتيريال الفاينل + مع بعض التدريبات + اولداقزام للميدتيرم والفاينل\n**https://www.mediafire.com/?ali2q92k5la2bc6**\nبالتوفيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/15",
+          "user": "user8581",
+          "ts": 1437936032000,
+          "tid": 120480,
+          "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-p1458849-engl214",
+      "uid": "stk-user9534",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1474911438000,
+      "st": "pub",
+      "data": {
+        "desc": "مادة ثقيلة بالترم العادي وبطلة جداً جداً في الترم الصيفي : يكون الأفرج B والمدرسين يتساهلون فيها بالصيف ويدفونك بالدرجات\n\nأنصحك وبقوة فيها بالصيف عشان القريد . إذا اضطريت تنزلها بالترم العادي دور المدرس اللي مايكرف , أهم شيء في ذي المادة هو المدرس",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/19",
+          "user": "user9534",
+          "ts": 1474911438000,
+          "tid": 120480,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p1467690-engl214",
+      "uid": "stk-m_nd_m",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1486314946000,
+      "st": "pub",
+      "data": {
+        "desc": "T161\n\nجودة المقرر بشكل عام\nالمقرر ممتاز و مفيد جدًا من الناحية التطبيقية… الدكتور يقولنا عندهم بإنجلترا ماعندهم مثل هالكورس و أننا محظوظين أنه عندنا كورس مثله\n\nالمواضيع التي يغطيها المقرر\nالكورس مقسم إلى أكثر من جزء\n1-الريبورت (35%)… و هو 80% مثل ريبورت 102 اللهم في كم شغلة زيادة/غير مثلًا هنا نستخدم الـAPA بدل الـMLA\n\n2- المدترم (15%) عبارة عن سورس ايفاليويشن باختصار… يعطونك مقال فيه كل المعلومات مثل اسم الكاتب جهة الإصدار التاريخ و و و و و…الخ و أنت لازم تكتب Full APA Citation & Summary & Evaluation\n\n3- المقابلات (15%)… عبارة عن مقابلة يجريها لك الدكتور (أو الطلاب في حالات نادرة مثل عند الدكتور King Lance) و أيضًا لازم تسوي CV خاص بك و تجيبه معك المقابلة و عليه نسبة قليلة من الـ15%\n\n4- برزنتيشن (10%)… مافي شي جديد اللهم لازم تسويه على الـPowerPoint\n\n5- Correspondence letter (10%)… هذه يمكن اعتباره الكويز الوحيد بالكورس… الزبدة أنه تتعلم كيف ترسل رسائل أغلبها لها علاقة بالتعامل مع الزبون… و في أشياء كثير لازم تنتبه لها مثل الـYou Attiude\n\n6- فاينل (15%)… عبارة عن ثمان أسئلة مقسمة إلى أربعة أقسام و لازم تختار سؤال واحد من كل قسم يعني المجموع 4 أسئلة… و لازم تكتب باراجراف أبو 70-100 كلمة بالكثير… بحط الفاينل اللي جانا الترم الماضي (161) تحت\n\nالكتاب المستخدم للمقرر\nhttp://prodimage.images-bn.com/pimages/9780495901945_p0_v1_s1200x630.jpg\nالكتاب بشكل عام ما يستخدم إلا للـCorrespondence و الفاينل\n\nالأسئلة والأمثلة المستخدمة في المقرر\n-----\n\nمدى فائدته في الناحية التطبيقية\nمثل ما سبق و ذكرت… أعطي الكورس حقه و نزل عنده دكتور ممتاز بتستفيد منه خصوصًا جزئية الـInterviews\n\nبالنسبة للقريدات… بعض الشباب يقولون في تساهل و ما إلى ذلك… للأمانة ما شفت شي من هذا القبيل\n\nوالكورس كان أخف كورس إنجلش للإمانة… و أكيد الدكتور لعب دور بهذا الشيء\n\nالسيلابس و بعض السلايدات المهمة الـInterviews و غيرها و فاينل 161 بالرابط هذا:\nENGL214 FILES | تحميل\n\nالـCV و الريبورت حقي للفائدة: (لا أنصح بنسخ أي شيء من الريبورت لأنه تم إدخاله ببرنامج الـTurn it in)\nReport&CV | تحميل\n\n***أتمنى إعلامي في حالة عدم الرابط\n\nدعواتكم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/20",
+          "user": "M_nd_m",
+          "ts": 1486314946000,
+          "tid": 120480,
+          "pn": 20
+        }
+      }
+    },
+    {
+      "id": "stk-p1522381-engl214",
+      "uid": "stk-nasalmz",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1590426901000,
+      "st": "pub",
+      "data": {
+        "desc": "term 191\n\nالكورس تحس ان القسم حاطينه عشان يقروشون الطالب.\nالشي الوحيد اللي ممكن تطلع منه بفايدة هو السي في و الكوفر لتر فقط\n\nوزي اي كورس انقلش سو اللي يبيه دكتورك والامور سهالات",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/22",
+          "user": "Nasalmz",
+          "ts": 1590426901000,
+          "tid": 120480,
+          "pn": 22
+        }
+      }
+    },
+    {
+      "id": "stk-p1524499-engl214",
+      "uid": "stk-user11942",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1596721471000,
+      "st": "pub",
+      "data": {
+        "desc": "مادة مفيدة جداً جداً. في لقاء مدير جامعتنا الدكتور محمد السقاف مع ديبارمنت Eng214 قالهم إن هذا الكورس فاده كثير. راح تعيش الجو الأكاديمي البحت من تقديم أكثر من موضوع للدراسة الي بتشتغل عليها حتى تأخذ ابروفال من محاضر المادة وبعدين تروح تبحث عن مصادرك ( لازم اثنين academic source ) وتسوي APA عليهم. وبعدها تقدم ( progress report) و ( Source evaluation )وهذه كلها عليها تقييم وفي drafts كثيرة وعليها تقييم أيضاً. وبالأخير تسوي ( presentation ). وهي تشبه كثير لكورسEng102 لكن في زيادات على طريقة كتابة التقرير بشكل أكاديمي أكثر. وزيادة في المواضيع مثل خذينا ليكتشر عن technical writing والفروقات بين المصادر الأولية ( غالباً person with direct knowledge ) والمصادر الثانوية وغيرها.وفي theme معين لازم تربط موضوع ريبورتك معه وفي ترمنا كان GCC counties .\n\nوقسم من المادة يخص jobs يعني تسوي CV و Resume و Cover letter . وراح تسوون job interview.\n\nوطبعاً في فرق كبير بين CV و Resume كثير من الطلاب يظنون إنها نفس الشيء.\n\nالمد تيرم عبارة Full APA Citation & Summary & Evaluation وطبعاً هم راح يوفرون لك المصادر. المتعب كيف تثبت إن صاحب المصدر متحيز أو لا .\n\nعشان كذا من الأفضل إنك تأخذ المادة قبل الكو أب أو السمر ترينج. للأسف أنا ماسويت ذا الشيء.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/23",
+          "user": "user11942",
+          "ts": 1596721471000,
+          "tid": 120480,
+          "pn": 23
+        }
+      }
+    },
+    {
+      "id": "stk-p1526521-engl214",
+      "uid": "stk-user11724",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1604558504000,
+      "st": "pub",
+      "data": {
+        "desc": "ENG214-Term201\n\nمثل اي كورس انقلش، حاول تكون عند دكتور كويس يبسط لك الامور وما يقروشك زيادة، الكورس كويس وفيه اشياء مفيدة، راح تتعلم كيف تكتب CV وApplication letter والمقابلة ويكون عليها 20% وهذي عموما جزئية سهلة لا تضيع درجاتها، والريبورت عليه 35% ولازم تلتزم بالثيم الي يعطونك اياه (في 201 كان GLOBAL CONNECTIONS) وتربطه بشيء في تخصصك، وهنا المشكلة ممكن تصعب لكثير لان الاغلب ياخذها في السفمور وما يكون يعرف كثير في التخصص، وبعد ما تخلص الريبورت فيه برزنتيشن عليه 15% على الريبورت حقك، المد عليه 15% وفيه راح تحلل سورس هم يعطونك اياه وليش اخذته وتقيس بعض المعايير الي راح يعلمونك عليها، والفاينل عليه 15%، وضع المادة في الاونلاين ممتاز لان الانقلش مايحتاج شرح جبار او شيء تسويه حضوريا، لا تأجل الاشياء وتسويها في اخر لحظة لان المتطلبات تاخذ وقت مو قليل ولكن عموما الكورس ما يحسسك بضغط كبير، كل ماكانت انجليزيتك افضل كل ما كانت المادة اسهل.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/26",
+          "user": "user11724",
+          "ts": 1604558504000,
+          "tid": 120480,
+          "pn": 26
+        }
+      }
+    },
+    {
+      "id": "stk-p789197-engl214",
+      "uid": "stk-student_nz",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1297628617000,
+      "st": "pub",
+      "data": {
+        "desc": "انجلش 214\nهذا الكورس يعتبر ثقيل شوية عشان كذا اذا كان عندك مواد كثيرة نصيحتي\nلا تنزل مع مواد عليها ضغط عن نفسي انا استعجلت عليه وخلصت في اول 30 ساعة لي\nفي الاخير هيا ترجع للشخص نفسه\n\nتقسيم الكورس\nالريبورت 45 %\n** الريبورت 20%\n** الاوت لاين 5 %\n** التتوريال 10 %\n** السورس ايفالويشن 10%\n\nالسي في 5%\nالسي في مدرسك راح يعلمك ايش تسوي فيها يعني انا ما ودي اتكلم فيها لانه كل مدرس يبغى من طلابه حاجة معينه\nانترفيو 5 %\nنفس كلام السي في\n\nتوتريال ما اذكر كم عليها بالزبط\nالتوتريال هوا زي ما تقول بريزينتاشين يكون مع مدرسك انت والقروب حقك تجتمعوا في وقت الحصة\nويكون بقية الطلاب غايبين وتسوي بريزنتايشن عن الريبورت حقك وعن ايش و ليش اخترت الموضوع هذا\nواشياء زي كذا طبعا انتبه للمدرس حقك لانه يطلب اشياء معينه مثلا يطلب thesis statement و السورسات هذولا طبعا امثلة شوف المدرس حقك ايش يبغى وممكن ما يطلب شي انا ما ادري\n\nميد تيرم 10%\nرايتنق\nفاينل 10%\nرايتنق\n\nتوفل 10%\n\nبري زينتاشين 5%\nلكل الطلاب انت تسويه العادة يكون نقطة من الريبورت حقك\nتاخذه وتتكلم عن بتفصيل\n\nطبعا نلاحظ انه ما في اي رايتنق تاسك\n\nالكورس بشكل ينفع تاخذه في الصيف بشرط انك تاخذ B وفوق في ال102",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/101-102-214/102863/1",
+          "user": "student_NZ",
+          "ts": 1297628617000,
+          "tid": 102863,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p656565-engl214",
+      "uid": "stk-user5216",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1278936499000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته :.\n\nلايسمح بتسجيل الـ Eng214 في الصيف الا لمن حصل على تقدير B او فوق في Eng102 😐\nاليوم ياشباب وصل الايميل الي فيه القرار على الايميل الجامعي …\n\nالصراحه القرار غير مدروس وغير عادل ايضا … طيب وش ذنبي اذا مدرسي في eng 102 ما يعطي فوق C+ ولو اني ادري بهالقرار كان شفت حل معه وجبت الي يبونه … لكن كذا مااقدر اسوي شي\nوهذا غير اني ضبطت جدولي الي التخرج والانقلش 214 مالها مكان الا الصيف\n\nاترك لكم التعليق\n\n* نسخة من الايميل في المرفقات",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/eng214/91933/1",
+          "user": "user5216",
+          "ts": 1278936499000,
+          "tid": 91933,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1421906-engl214",
+      "uid": "stk-mahdi_sahel",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1422123281000,
+      "st": "pub",
+      "data": {
+        "desc": "عادة يكون شرطهم انك ماخذ في الانجلش ١٠٢ +c وفوق عشان تاخذ ال٢١٤ في الصيف، لكن الصيف الماضي كان اي واحد ماخذ c يقدر يسجل.\n\nوفي حالة ثانية عشان تاخذ ال٢١٤ في الصيف، اللي هي: انك ماخذ ال ١٠٢ قبل ثلاثة اترام من الصيف المطلوب(بدون الصيف).\nمثلا لو انت ماخذ ال١٠٢ في ترم ١٣٢ او قبل ف تقدر تاخذها في صيف ١٤٣\nوفي الحالة الثانية ماتفرق اش جبت قريد في ال١٠٢\n\nو هذا العلم اللي عندي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/english-214/168904/2",
+          "user": "Mahdi_Sahel",
+          "ts": 1422123281000,
+          "tid": 168904,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1378436-engl214",
+      "uid": "stk-rockwentz",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1402243734000,
+      "st": "pub",
+      "data": {
+        "desc": "1- المادة فعلًا تصير خفيفة جدًا في الصيف والتسليك يكون كثير\nأهم شيء تخلص اللي عليك وقت ما تقدر وما تأجل\n\n2- وبالنسبة لموضوع التخصص فما تفرق كثير لأن الموضوع بيكون متعلق شيء بسيييط بالتخصص\nأنا كهرب واخترت nanotechnology 🤠 ، وكان الوضع كله تسليك مع إني ما أعرف أي شيء عن الموضوع\n\n3- بالنسبة لجفري جيمسون فما أدري أنا أخذتها معاه الصيف الماضي 123 وكان نص الكورس معاه والنص الثاني مع جوش بيلام\nلكن درجاته كانت حلوة ولو تروحله المكتب كثير يزبطك بالراحة\n\nالخلاصة إني أنصح الجميع بأخذها في الصيف لأن الشغل في السمستر العادي بيكون ثقيل جدًا\n\n🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl214/162380/5",
+          "user": "RockWentz",
+          "ts": 1402243734000,
+          "tid": 162380,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1448851-engl214",
+      "uid": "stk-salehmm",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1463134465000,
+      "st": "pub",
+      "data": {
+        "desc": "The final exam has four sections with two questions in each. You should choose one question from each section to answer (four in total). The answers should be approximately 80 words. The sections are 1) Report, 2) Correspondence, 3) Getting a Job, 4) Presentations. To revise for the final exam you should look in the “Syllabus” folder on Blackboard (top folder). There are four PDFs to revise the report, and one PPT for each of correspondence, getting a job and presentations.\n\nهذي رساله من مدرسنا\nبالتوفيق للجميع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214/173018/11",
+          "user": "salehmm",
+          "ts": 1463134465000,
+          "tid": 173018,
+          "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1146608-engl214",
+      "uid": "stk-asem007",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1356290761000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار خيارات 45 سؤال\nتذاكر من الكتاب ومن الماتيريال الموجود في الوب سيتي\nاعتقد ان المواضيع محدده في الويب سيتي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/136825/2",
+          "user": "asem007",
+          "ts": 1356290761000,
+          "tid": 136825,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1311837-engl214",
+      "uid": "stk-3boody830",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1388403459000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار خيارات تقريبا 40 سؤال لمدة 50 دقيقة\n\nالاسئلة راح تكون عن الريبورت أكثر شي وعن الانترفيو وعن البرزنتيشن, يعني عن اللي كنا ندرسه طول السمستر…\n\nووقت ومكان الاختبار تحصله بموقع الرجسترار",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl214/154392/2",
+          "user": "3boody830",
+          "ts": 1388403459000,
+          "tid": 154392,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p961027-engl214",
+      "uid": "stk-mu7md",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1325945705000,
+      "st": "pub",
+      "data": {
+        "desc": "احنا قالنا بتكون وحدة من خمسة …\n\nLetter of Inquiry\nReply to letter of inquiry\nLetter of complaint\nLetter of adjustment\nJob application letter",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214/117655/3",
+          "user": "mu7md",
+          "ts": 1325945705000,
+          "tid": 117655,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p768760-engl214",
+      "uid": "stk-aflatoon",
+      "code": "ENGL 214",
+      "sec": "info",
+      "ts": 1295640982000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار رسالتين ياباشا …\nرسالة شكوى … ورسالة رد على شكوى …\nرسالة الشكوى ماتزيد عن 150 كلمة\nرسالة الرد على الشكوى نفس الشي …\n\nيعني رسالتين كل وحدة لاتزيد عن 150 كلمة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214/100996/2",
+          "user": "AFLATOON",
+          "ts": 1295640982000,
+          "tid": 100996,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1016886-engl214",
+      "uid": "stk-metallic",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1333303799000,
+      "st": "pub",
+      "data": {
+        "html": "مستحيل أنك تتغلب على البرنامج … المطلوب طال عمرك تكتب واحد جديد وبنفسك … حتى اذا جيت تأخذ معلومات من السورسات لازم ما تنسخ، وتعيد كتابتها بأسلوبك الخاص … نصيحتي لا تضيع وقتك وتدور طريقة أنك تتغلب على هالبرنامج … ترى الريبورت أمره سهل … أول ماتجي تكتبه بتحس أن 1500 كلمة كثير … بس اذا مشيت شوي ما انت شايل همها أبداً … لاتعقد الأمور على نفسك وتأجل ابدأ في أقرب وقت ممكن … أنا بديت الريورت حقي يوم الاثنين قبل الإجازة ويوم الثلاثاء بالليل خلصت منه … بس الصحيح أني ضغطت على نفسي … وأهم شي عندم هو الاوت لاين كلما ضبطت الاوت لاين كلما تحسن عندك الريبورت وحتى انك اذا جيت تدور المعلومات عن نقطة معينة تسهل عليك مرة …<br><br>موفق 🌹",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/123720/2",
+          "user": "METALLIC",
+          "ts": 1333303799000,
+          "tid": 123720,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1020182-engl214",
+      "uid": "stk-m_o_h_a_m_e_d",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1333751809000,
+      "st": "pub",
+      "data": {
+        "html": "كويس هههههه<br><br>أنا عند جون هاميلتون وآخر موعد كآن الأربعاء الماضي !<br><br>عموماً ، يفترض يكون عندك ع الويب ستي اثنين Turnitin :<br><br>الأول /<br><br>ترفع عليه ريبورتك - مرة كل 24 ساعة - عشان تشوف نسبة الـ plagiarism عندك<br>والبرنامج راح يقارن ريبورتك بملايين السورسات في العالم بما فيها ريبورتات الطلاب الآخرين<br>مثلاً : رفعت الريبورت اليوم ، راح يبين لك النسبة مع تحديد أماكن البليجرزم في الريبورت<br>تروح تعدل الأماكن وترفع الملف بعد 24 ساعة وتتأكد ، وهكذا حتى يصير ريبورتك نظيف<br>( عند مدرسنا ، نظيف = 1 - 7% تقريباً ، بعض المدرسين ماعنده مشكلة للـ 20 % ! )<br><br>الثاني /<br><br>ترفع عليه الفاينل ريبورت مرة واحدة فقط ، مهم جداً وعليه درجات<br><br>طريقة رفع الريبورت سهلة وواضحة<br><br>أتمنى أكون أفدتك 🌹",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/123720/11",
+          "user": "M_O_H_A_M_E_D",
+          "ts": 1333751809000,
+          "tid": 123720,
+          "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1180136-engl214",
+      "uid": "stk-big_h",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1360519550000,
+      "st": "pub",
+      "data": {
+        "html": "فكر فموضوع وروح للمدرس في الساعات المكتبية اتكلم معاه عن الموضوع الي فبالك , وخليه يساعدك فيه لين ما تكتب عنوان احترافي , واتكلم معاه عن المصادر وشوف الحاجات الي يبغاها منك المدرس<br>انا سويت شي زي كدا واستفدت كثير , لان المدرسين يختلفو في طريقة التصحيح<br>عشان كدا اشوف انك تروح وتتفاهم مع مدرسك يكون احسن<br>موفق ان شالله",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/eng-214/140186/3",
+          "user": "Big_H",
+          "ts": 1360519550000,
+          "tid": 140186,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1065863-engl214",
+      "uid": "stk-stu2009",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1341913159000,
+      "st": "pub",
+      "data": {
+        "html": "دور مقالات من المواقع الصحفيه وغيرها مثل ال bbc وغيرها…يعني عادة لما يجيبوا مقالات في مواضيع معينه يجيبوا خبراء في موضوع المقال وياخذوا أقوالهم…<br>اذا بيرفضها فالله يعينك مالك الا المكتبه أو انك تشوف أبحاث منشوره ومقالات منشوره عن موضوع تقريرك في مواقع الجامعات الأجنبيه 😐<br>بالتوفيق 🌹 🌹",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/128602/2",
+          "user": "stu2009",
+          "ts": 1341913159000,
+          "tid": 128602,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p961499-engl214",
+      "uid": "stk-user4325",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1325982273000,
+      "st": "pub",
+      "data": {
+        "html": "شباب …حصلت لكم موقع جدا رائع و يعطيك وش تقدر تكتب و يعلمك كل شي تحتاحه عن كل هالرسائل 🙂<br><br>جدا جدا جدا رائع<br><br>http://www2.elc.polyu.edu.hk/cill/eiw/<br><br>و دعاوتكم لي بهالفاينلات",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214/117655/19",
+          "user": "user4325",
+          "ts": 1325982273000,
+          "tid": 117655,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p1447076-engl214",
+      "uid": "stk-abo-da7m",
+      "code": "ENGL 214",
+      "sec": "srcU",
+      "ts": 1461077719000,
+      "st": "pub",
+      "data": {
+        "html": "أنا ماخذه الترم ذا ، وعلى كلام مدرسنا الفاينل بيكون نسخة جديدة موب خيارات<br><br>محتار مثلك<br><br>عطانا دكتورنا نسخة مخططة للكتاب ومثال على بعض أنواع الأسئلة اللي ممكن تجي<br><br>شفهن هنا ممكن يفيدنك :<br><br>Successful Writing at Work (Kolin, 2011).pdf - Google Drive<br><br>Writing clear paragraphs.docx - Google Drive",
+        "files": {},
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214/173018/4",
+          "user": "abo-da7m",
+          "ts": 1461077719000,
+          "tid": 173018,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1478856-engl214",
+      "uid": "stk-cs_scientist",
+      "code": "ENGL 214",
+      "sec": "srcP",
+      "ts": 1503165492000,
+      "st": "pub",
+      "data": {
+        "html": "السلام عليكم<br><br>هذا الملف بالمرفقات بما إن الرابط السابق تعطل<br><br>​<span data-fid=\"stk-f1478856-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1478856-0": {
+            "name": "ENGL214 Final T133 FINAL VERSION NEW (3).docx",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/5eb4aeef22fd1d20895bbc9b79d63ac85765ad667bb71df49e9695cae39c1904"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/english-214-midterm-and-final-exams/162403/15",
+          "user": "CS_Scientist",
+          "ts": 1503165492000,
+          "tid": 162403,
+          "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-grade-p1371745-engl214",
+      "uid": "stk-medoalkebsi",
+      "code": "ENGL 214",
+      "sec": "grade",
+      "ts": 1401087342000,
+      "st": "pub",
+      "data": {
+        "method": "avg",
+        "items": [
+          {
+            "name": "MAJOR REPORT",
+            "pct": 30
+          },
+          {
+            "name": "RECRUITMENT",
+            "pct": 15
+          },
+          {
+            "name": "CORRESPONDENCE",
+            "pct": 10
+          },
+          {
+            "name": "PRESENTATIONS",
+            "pct": 10
+          },
+          {
+            "name": "MIDTERM EXAM",
+            "pct": 15
+          },
+          {
+            "name": "FINAL EXAM",
+            "pct": 10
+          },
+          {
+            "name": "Quizzes",
+            "pct": 10
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/13",
+          "user": "Medoalkebsi",
+          "ts": 1401087342000,
+          "tid": 120480,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-grade-p1467690-engl214",
+      "uid": "stk-m_nd_m",
+      "code": "ENGL 214",
+      "sec": "grade",
+      "ts": 1486314946000,
+      "st": "pub",
+      "data": {
+        "method": "avg",
+        "items": [
+          {
+            "name": "الريبورت",
+            "pct": 35
+          },
+          {
+            "name": "المدترم",
+            "pct": 15
+          },
+          {
+            "name": "المقابلات",
+            "pct": 15
+          },
+          {
+            "name": "برزنتيشن",
+            "pct": 10
+          },
+          {
+            "name": "Correspondence letter",
+            "pct": 10
+          },
+          {
+            "name": "فاينل",
+            "pct": 15
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/20",
+          "user": "M_nd_m",
+          "ts": 1486314946000,
+          "tid": 120480,
+          "pn": 20
+        }
+      }
+    },
+    {
+      "id": "stk-grade-p1526521-engl214",
+      "uid": "stk-user11724",
+      "code": "ENGL 214",
+      "sec": "grade",
+      "ts": 1604558504000,
+      "st": "pub",
+      "data": {
+        "method": "avg",
+        "items": [
+          {
+            "name": "CV وApplication letter والمقابلة",
+            "pct": 20
+          },
+          {
+            "name": "الريبورت",
+            "pct": 35
+          },
+          {
+            "name": "برزنتيشن",
+            "pct": 15
+          },
+          {
+            "name": "المد",
+            "pct": 15
+          },
+          {
+            "name": "الفاينل",
+            "pct": 15
+          }
+        ],
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/engl-214-academic-professional-communication/120480/26",
+          "user": "user11724",
+          "ts": 1604558504000,
+          "tid": 120480,
+          "pn": 26
+        }
+      }
+    },
+    {
+      "id": "stk-doc-_pen-engl214",
+      "uid": "stk-_pen",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1265998356000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68435",
+            "n": "Mr. Ahmed Daud Ismail",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "هههههههه …\nهالمدرس فله أخذت عنده 102 و 214 … لانـه يريحني طوووووووووووووول الترم وماتحس انه معاك مادة انجلش !\nيقبل الاعذار احيانا لو تاخرت في تسليم شي …\nيضحك كثير بالكلاس …\nيحضر نص الترم وبعدها يوقف …\nوفي الاخير الـسي والسي بلس وفيه شوية بي … وواحد a ! ,\nيعني انصحك اذا كنت منزل ساعات كثير نزل عنده عشان تفلها والقريد 80 بالميه سي او سي بلس 🙂 !\nمايعرف ايش يبغى في الكلاس مررره … تحس انه ملخبط مررره …\n\nاعطيه … +c",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p542143-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ismail-ahmed-daud/68435/13",
+              "user": "_Pen",
+              "ts": 1265998356000,
+              "tid": 68435,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-rytamu-engl214",
+      "uid": "stk-rytamu",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1277135032000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68439",
+            "n": "Mr. Anthony Donovan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بعد ما خذيت معه 214 في سمستر 092 …\n\n…\n\nاشوف انه ممتاز , قريد حلو بدون تعب واهم شيء لا تغيب لأنكـ بعدم غيابكـ بيرفعكـ قريد …\n\n…\n\nالكلاس كله سوالف ويحاول يشغلنا كم مرة بالريدنق …\n\n…\n\nمن الاسبوع الرابع يقول لكـ ابدا بالبورتفوليو والريبورت اللي يجب تسليمهم في الاسبوع 13 …\n\n…\n\nمن الاسبوع الرابع الى 13 كله سوالف او ريدنق او كتابة رسائل وعليهم كويزات , عادي جدا يمر عليك اسبوعين بدون شيء …\n\n…\n\nكلاسنا كان 19 طالب\n\nواحد +A\nاثنين +b\nثلاثة B\nواحد D\nالباقي C,C+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p641170-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/donovan-anthony-francis/68439/19",
+              "user": "Rytamu",
+              "ts": 1277135032000,
+              "tid": 68439,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-jaunty-engl214",
+      "uid": "stk-jaunty",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1266916779000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "- ميزته يقولك شنو بسوي او يبي في لكلاسات الجايه … يوم السبت يكتب الك جدول الاسبوع\n\n- التحضير من البداية … وأول سبوع يحضر برضو … من الاسبوع الثاني يحفظ الطلاب .\n\n- ادا تبي ترفع قريدك … حاول تتواصل معاه بلإيميل والؤفس … يستانس ادا شافك مهتم\n\n- ادا صلح الك شيي وفيه اخطاء حاول تعدله وترجعه اله بعد التصحيح\n\n- نصيحة مجرب … ادا بتنزل انقلش نزل عند نفس المدرس الكورسات كلهم … عشان تلم بالطريقة الي يمشي عليها وترتاح برضو …\n\n- انا اخذت معه 102 و 214 … ارتحت الى طريقته … الكورس الاول اخذت سي + والثاني بي +\n\nموفقين انشاء الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p549298-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/20",
+              "user": "jaunty",
+              "ts": 1266916779000,
+              "tid": 68440,
+              "pn": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5635-engl214",
+      "uid": "stk-user5635",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1297612703000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "101\n\n102\n\n214\n\nاشوف انه من افضل السيئين واغلب الكرف اللي الشباب يشتكون منه بالكلااااس وبس طبعا ماعدا الريبورت لانه يبي له بحث وتدريب لكن برضو الدرافت حق الريبورت تكتبو في الكلاس ويقيمك على تعبك مو ع اساس انك متحدث فصيح على قولتهم .\n\nمثل ماقال واحد من الشباب اذا لغتك جيدة ((و عندك ثقافة او لقافة)) نزل معاه يحب السوالف واللي يعطيه جوه ويضحك على النكت اللي يقولها بس مو تسمجها وتخليه هو والكلاس كلو يكرهونك هههههههاي.\n\nشغله نظيييف ومرتب من اول السمستر تعرف وش بتسوي كل اسبوع ,وكل يوم تعرف بالضبط وش بتسوون الكلاسين الجاية.\n\nمو بس يحب الا يموت بالاوفيس اور والايميلات لو بس تستفسر عن شي وانت اصلا عارفو.\n\nانا كان يعطيني درجات مو بذاك الزود لكن مع الفاينلات الحمد لله ترتفع شوي .\n\nالقريد النهائي لكورساتي معاه +c\n\nاسف ع التاخير والعذر والسموحة .\n\nملاحظة اخيرة :: انا نزلت معاه عشان ارتاح والحمد لله كانت كورساته ممتعة لحد ما ومريحة جدا لانه متفهم ومرن نوعا ما . (( اعجبتني لحد ما ونوعا ما خخخخ )) واخر شي ما اشوف انو كريف ابدا .\n\nخذوه واهذرو معاه وتواصلو وسوو اللي يبي وفالكم +b بدون طمع .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p788812-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/29",
+              "user": "user5635",
+              "ts": 1297612703000,
+              "tid": 68440,
+              "pn": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5216-engl214",
+      "uid": "stk-user5216",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1308565453000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "السمستر 102 … Engl214\n\nالتحضير : باخر الكلاس … ويسمح بالتاخير … واخر الترم قالنا تراي ماخصمت على احد حق الغيابات\n\nطريقة الشرح : بالسلايدات واحيانا يستخدم السبورة بكل كلاس يجيبلنا هاند اووت يموت على الهانداوت ( اوراق ) عندي تقريبا ملف فيه حول 50 ورقه معطينا اياها … بكل كلاس 1 او 2\n\nالكويزات : مافيــــــــــــه ( وهذا احلى مافيه مريحنا من هالناحية )\n\nالمياجر: كومن ( نصف فصل )\n\nالفاينلات : كومن ( هو الي يصحح ) و اذا سويت الي يقولك عليه يعطيك درجه كويسة\n\nالقريد النهائي: C+\n\nالصوت: واضح ولهجه بريطانية\n\nإضافات : المدرس هذا يمووت على شي اسمه ايميل …\nكل ماارسلت له اكثر كل ما ضمنت قريد اعلى … عليه طلعات احيانا غبيه …\nيعتبر افضل السيئين و اذا مالقيت احد كويس غيره ( من الي تقييمه كويس ) توكل على الله ونزل معه … لانه مايكرف ويريحك على الاخر ودرجاته النهائية معقوله … ويمكن يزيدك بعد في القريد النهائي اذا ضبطته بالايميلات والزيارات المكتبية ,\n\nفي الترم ريبورت يخسف بالدرجات خسف مو طبيعي … كل الشباب خسف فيهم … وبالنسبة للتاسكات سو الي يبيه وتضمن شي طيب … وتنبيه اخير … المدرس من النوع الي ياخذ فكره عن الطلاب اول الترم … يعني ضبط عمرك اول الترم يضبطك …\n\nويقدر الطلاب الي يجيبون معهم highlighter القلم الاصفر",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p855990-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/32",
+              "user": "user5216",
+              "ts": 1308565453000,
+              "tid": 68440,
+              "pn": 32
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abo_taleb-engl214",
+      "uid": "stk-abo_taleb",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1338419123000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Eng 214 - ترم 112\n\nالرجال راعـي كررررف !!\n\nوخصوصا في بداية السمستر !\n\nملاحظتي عليه انه ياخذ فكرة عالطالب من أول اسبوعين , وما بتتغير فكرته عنك بسهولة !!\n\nيعني حاول تكون منضبط معاه وخصوصا في (البداية) عشان ياخذ فكرة حلوة عنك …\n\nولكن ان اشتغلت معاه زي ما يبي وكنت ملتزم باللي يقوله بتطلع من هالمادة بقريد محترم ❤️ …\n\nعن نفسي في بداية السمستر ما كنت مرتاحله وحسيت انه مُعقد بزيادة ولكن بعد نهاية الترم تغيرت فكرتي وما ندمت ابداً اني نزلت معه …\n\nعلى فكرة تراه (يقدس) حركة انك تزوره بالمكتب خلال الأوفيس أورز , ومتواصل بشكل رهيب من خلال الإيميل …\n\nيعني ان ارسلت له رسالة فلا تستغرب انه يرد عليك بعد دقيقتين ويمكن اقل بعد !\n\nعالعموم اعطيه b , وأنصح فيه (بشرط) انك تكون ملتزم ومنضبط معاه …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1048317-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/36",
+              "user": "Abo_Taleb",
+              "ts": 1338419123000,
+              "tid": 68440,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abu_abdullah-engl214",
+      "uid": "stk-abu_abdullah",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1338482927000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "طيب أنا أول أسبوعين كنت سحّيب … وبعدها أنضبطت معاه … وقسم بالله رايتينق تاسكات كنت أتعب عليها تعب غير طبيعي … وساعات أحفظ نفس المثال اللي يعطينياه و أكتبة في الرايتينق تاسك و أغير الكلمات … لكن ولا مرررة عطاني فوق سي بلس !!\n\nالرجل مزاجي بدرجة كبيرة … طيب ياخي أنا عندي ستايل معين في الكتابة وستايلك مخيس … يعني لازم أكتب مثلك مثلا ؟؟ طريقتك موب عاجبتني !!\n\nتخيلوا يرسل لنا على الأيميل يستهبل علينا و يتوعدنا أننا مانجي نطالبه في درجاتنا … يقول من اللحين لحد يفكر مثلا يغير درجتة من سي إلى سي بلس أو يرفعها لأي سبب كان …\n\nوفي النهاية أرسل لنا رسالة وقال أنا رفعتكم أب قريد … وهو والله خاسفنا يكفي أن كل شغلة ستاندرد … يعطي اللي يسلكون له درجات عالية و حنا ماغير سي وسي بلس !!\n\nو أنا متأكد أن شغلي أحسن منهم … وعارف مستواي أصلاً في كورسات الإنجلش لكن قسم تعبان و مريض من آوله لآخرة … يدورون لهم على سُلطة ويستمتعون دايم بآخر الترم بخسف الطلاب بالقريدات …\n\nعلى فكرة درجاتي في المجموع النهائي 45% سي بلس و الباقي سي ووحدة دي … ويقول لي أنا أستحق دي بلس ورفعني لسي … خخخخخخ يحسبنا هنود 😆\n\nيوم راسلتة وقلت له ليش تعطيني سي و أنا شغّال معاك … قال لي لحظة خلني أنزلها لدي بلص … < يهددني يوم أني أعترض عليه 😞\n\nاللي يبي يستمتع بسماجتة بكيفة وهو حر …\nبالنسبة لي … أنا أكتفيت من كورس الإنجلش و إن شاء الله ماني منزل الـ 214 إلا قبل الكوأب … كفاية إحباط من قسم الخواجات 🤠",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1048621-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/37",
+              "user": "Abu_Abdullah",
+              "ts": 1338482927000,
+              "tid": 68440,
+              "pn": 37
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-chemist-engl214",
+      "uid": "stk-chemist",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1354810365000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": ":ENGL 214 Term 111\n\nالتحضير:\nكل يوم ويسمح بتأخير ومتساهل في قضية التأخير\n\nالشرح:\nيشرح لك المطلوب منك بالحرف الواحد بس للأسف شرحه ونكته (اعذروني) بايخه وسامجه وكلاسه يالله يعدي بس امانة في الله الرجال يقول اللي يبي بالضبط دون لف ودوران لكن طريقة عرضه للمادة مملة\n\nالكويزات:\nسهلة نوع ما\n\nالتاسكات:\nكنا نسويها في الفصل والأمانة ان الرجال يعطي قريد كويس جدا اذا اتبعت اللي يقول لك عليه بالحرف الواحد احس انه مايهمه القرامر وتركيب الجمله اهم شي عنده انك تتبع مايقوله بالحرف الواحد صدقني راح تأخذ قريد عالي في التاسكات مجرب 👍\n\nمميزاته:\n1) يعطيك الزبدة واللي يبيه هو بضبط\n2) انسان مرتب جدا جدا جدا وهذا راح يريحك انت كطالب صراحة في حياتي كلها ماشفت انسان مثل ترتيبه ماشاء الله عليه\n3) مو مستحيل عنده القريدات العالية اذا اتبعت مايقوله في الحرف الواحد\n\nسلبياته:\nبعض سوالفه ونكته سامجه جداجدا وهذا يخليك تحسب ل كلاسه متى يخلص بس\n\nالقريد النهائي:\n+C",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1133255-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/39",
+              "user": "Chemist",
+              "ts": 1354810365000,
+              "tid": 68440,
+              "pn": 39
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user7389-engl214",
+      "uid": "stk-user7389",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1389155798000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجلش 214 - سمستر 131\n\nالتحضير :\nفي كل كلاس …\n\nطريقة الشرح :\nعادية من السلايدات …\n\nالكويزات :\nثلاثه كوزات ديفنشنز يحددلكم هيا .\n\nالمياجر:\nميد ترم كومون سورس ايفالويشن و سامري …\n\nالفاينلات :\n45 سؤال اختياري في ماتيريال المنهج …\n\nالقريد النهائي:\nالمدرس اعطيه a …\n\nالصوت:\nواضح …\n\nإضافات :\nنجي للمهم , بالنسبة ليا المدرس جدا كويس كان , مرتب ومنظم ويعطيك الزبد … وتعرف ايش المطلوب منك طول السمستر … انا اخذت في الكورس +b , لكن للامانه مستواي في الانجلش شويا كويس بس هوا بيعط يدرجات عموما … بالنسبة لغياب ارسلنا قال انو ما خصم عليه … يسمح بالميك اب والتحضير يحضرك حتى لو جيت متأخر … انصح بيه الي ييبغى يرتاح وما يتعب في السمستر وما يشيل هم الانجلش … واهم شي انو خلصنا الانجلش الغثى ولله الحمد …\n\nوشكرا …\n\n🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1317089-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/43",
+              "user": "user7389",
+              "ts": 1389155798000,
+              "tid": 68440,
+              "pn": 43
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user10207-engl214",
+      "uid": "stk-user10207",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1452110024000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214 - Term 151\n- التحضير: يحضر كل كلاس.\n- طريقة شرحة للمادة مملة. (بوربوينت).\n- يعطي اوراق كثيرة (هاندوات)، في كل محاضرة. ويشرح عليها.\n- جداً منظم ومرتب.\n- يستخدم البلاكبورد بطريقة ممتازة. فيها جميع الملفات والدرجات.\n- يرصد الدرجات بشكل سريع.\n- يتواصل مع الطلاب بالايميل ودائماً يرد بسرعة.\n- موجود بالساعات المكتبية.\n- يحفظ اسامي الطلاب من بداية السمستر.\n- يشرح وهو يسولف مع الطلاب ويخليهم يشاركون معه.\n- يسمح لك انك تحضر بشعبة ثانية.\n- صوته مش واضح بالنسبة لي حتى لو اجلس قدام.\n- يكرف الطلاب كثير.\n- الريبورت تسلمه قبله باسبوع من السكاشن الثانية ، هالشيء ضغطني كثير.\n- طريقة تسليم الريبورت معقدة اكثر من المدرسين الثانين.\n- يبدأ الكلاس على الوقت وينتهي على الوقت.\n- يجي الكلاس بدري ويكتب على السبورة وش الاشياء الي بتاخذها اليوم والايام الي بعدها والاشياء الي لازم تسلمها.\n- الايام الي فيها كتابة بالكلاس يخليك تخلص بسرعة.\n- لازم تسلم الاشياء الي طلبها منك في نفس اليوم والا يخصم عليك.\n- مايعطي F في القريد النهائي.\n- ماعنده مشكلة بالتأخر. يحضرك.\n- الدرجات حسب كلامه دائما يقول الافرج عالي. في كل شيء.\n- يصحح اوراقك ويرجعها لك بسرعة.\n- مااتوقع خصم على الحضور.\n- الريبورت يعطيك درجته على نهاية الترم.\n- قبل المدترم والفاينل، يسوي مراجعة.\n- المقابلة الشخصية يخليك تكتبها على ورق تجاوب عليها لانه مافيه وقت يسوي مقابلات.\n- البرزنتيشن عنده تتكلم عن جزء بسيط من الريبورت تبعك.\n- بخصوص القريد النهائي، يمكن يكون اعلى من الي تتوقعه.\n- حتى لو كان قريداتك C, C+ و قليل B يمكن تاخذ B.\n- فعشان كذا شد حيلك في كتابة الريبورت والاختبار النهائي.\n- الدرجات عنده بالقريدات مثل A, B, C مش أرقام.\n- المدرس بريطاني ويتكلم معك كأنك native speaker.\n- المدرس موجود في السعودية ويدرس الكورس من 20 سنة، فاهم بمواضيعها اكثر من المدرسين الثانين.\n- جداً محترم وأنصح به.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1438186-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/44",
+              "user": "user10207",
+              "ts": 1452110024000,
+              "tid": 68440,
+              "pn": 44
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abu_ali_20-engl214",
+      "uid": "stk-abu_ali_20",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1452599731000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "214\nالتحضير : يحضر كل كلاس ويحفظ اسماء الطلاب بعد فترة\nطريقة الشرح : شرح عادي جدا لكن حاول تكتب نوت ادا تكلم عن طريقة الكوزات … لان ادا سويت مثل ما يقول في ال quizzes\nراح يعطيك grade كويس\nونفس الكلام بالنسبة ل midterm\nالكويزات : سهلة\nالمياجر: كومون\nالفاينلات :كومون\nالقريد النهائي: +B\nالصوت: مو واضح … حاول تجلس في الصف الاول عشان تسمعه\nإضافات :\nالمدرس كويس مو الأفضل من ناحية الشرح لكن مو بطال …\nالقريدات يعطيكم حقك وممكن اكثر\nانصح فيه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1438692-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/45",
+              "user": "ABU_ALI_20",
+              "ts": 1452599731000,
+              "tid": 68440,
+              "pn": 45
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-bo_rayan-engl214",
+      "uid": "stk-bo_rayan",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1463649201000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68440",
+            "n": "Mr. Roger Horn",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "T152 ENGL214\n\nالتحضير :\nكل يوم وما يحاسب ع التأخير… طلاب كثير كانت غياباتهم فوق الـ 5 لكن نهاية السمستر أرسل رسالة قال أكثر واحد غياباته 4 🙂\n\nطريقة الشرح :\nمن السلايدز وعادية جدا ً … أهم شي جيب معك نوت لأنه ينتبه وياخذ فكرة كويسة عنك\n\nالكويزات :\nركز ع الي يقوله بالضبط وسجله وما راح تنزل عن B+ … تاسكاته سهلة بس لازم تحضر لها وتصحيحه لها أشوف مررة كويس\nتصحيحه أشوفه أحسن من غيره … أنا كنت عند congreve وكنت يادوب أطلع بـ B بس معاه صرت أجيب A بأريحية\n\nالمياجر:\nالمدتيرم كان سهل… كان يقولنا ما رح التزم بالمودل أنسر سووا الي أقولكم عليه عشان تاخذوا قريد عالي… وبالفعل هذا الي صار 🙂\n\nالفاينلات :\nتصحيحه للفاينل نفس المدتيرم\n\nالقريد النهائي: أعطيه A\n\nالصوت: واضح بس يحتاج يعلي الـ volume شوي 🙂\n\nإضافات :\nأشوفه جدا محترم وبصراحة كلاسه كان بالنسبة لي ممتع\nأهم شي لازم تركز معه وتكتب وراه وش يبي عشان تضمن قريد طيب\nأنا أخذت عنده ENGL102 وطلعت بـ B لأني كنت متساهل ومو مركز\nجيب السمستر ذا وسويت كل شي يبيه بالضبططططط وطلعني ب A\nأنصح فيه لأنه واضح\nببساطة سوي الي يقولك عليه ورح تطلع بقريد يعجبك ان شاء الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1449628-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/horn-roger-alan/68440/46",
+              "user": "Bo_Rayan",
+              "ts": 1463649201000,
+              "tid": 68440,
+              "pn": 46
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-memet-engl214",
+      "uid": "stk-memet",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1265703034000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68441",
+            "n": "Mr. Timothy Nelson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير: لا يحضر الا ما ندر\nالاخلاق: محترم جدا وراعي تنكيت وضحك\nالتصحيح: عادل جدا واذا ما زادك ما يظلمك انت بس سو اللي يقول عليه بالملي وابشر بسعدك\nالقريد النهائي: +a\nالتقييم ل engl 214 في 091",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p540545-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nelson-timothy-andrew/68441/12",
+              "user": "MEMET",
+              "ts": 1265703034000,
+              "tid": 68441,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3354-engl214",
+      "uid": "stk-user3354",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1277430222000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68441",
+            "n": "Mr. Timothy Nelson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ههههههههههههههه يانيلسون شكله بالصورة كااااااااي غير الواقع\n\nاتكلم عن 214\n\nالتحضير : مايحضر بالورقة الا نادرا ولكن يحضر بالنظر ويعرف اللي يجي واللي مايجي\n\nطريقة الشرح : على الويب سيتي كل شي ويشرح على سلايدات غالبا ولكنه جدا واضح\n\nيشرحلك اللي يبغاه بالضبط واذا اتبعته بالضبط تاخذ درجة التاسك كاااااملة\n\nبالنسبة للتيرم ريبورت كان الثيم تبع السمستر هو الـ transportation ويخليك تختار انت وقروبك\n\nاي توبيك يعجبك ولازم يكون فيه تنسيق بين اعشاء القروب بالنسبة للتوبيكات لان في الاخير بيجمع\n\nالانديفيجوال ريبورت لكل طالب ويعطيها القروب ليدر ويسويها على ريبورت واحد …\n\nالكويزات : باول السمستر يحط كوزات ريدينق على الويب شيتي مواضيعها هي الاشياء\n\nالمهمة اللي يبغى الطلاب يركزوا عليها\n\nالمياجر: تصحيحه بالمياجر عااادل جدا\n\nالفاينلات : مافي\n\nالقريد النهائي:بطل الى ابعد درجه\n\nالصوت: واضح\n\nإضافات : المدرس هذا عادل جدا بالتصحيح ويهتم كثثييييييييييييييييييييييييييييييييييييير\n\nبالتنظيم في الكتابة يعني اتبع كلامه بالتنظيم والـ organization وتاخذ درجة التاسك كامله\n\nاخلاق ومرح بالكلاس يتغاضى عن التاخير ولكنه لايرتاح للي يغيب كثير ويتذكره اخر السمستر بالقريدات\n\nيهتم بالقروب وورك والتشات اللي يحطها على الويب سي تي للقروبات يراقبها كل يوم ويقيم الطلاب عليها\n\nخلك معاه بالتاسكات اول باول ولاتغيب واتبع كلامه اضمنك +B وفوق… باذن الله\n\nافضل مدرس انقلش بالجبل بالقريدات",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p643753-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nelson-timothy-andrew/68441/15",
+              "user": "user3354",
+              "ts": 1277430222000,
+              "tid": 68441,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-eng.3booodii-engl214",
+      "uid": "stk-eng.3booodii",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1307963185000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68441",
+            "n": "Mr. Timothy Nelson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "english 214\n\nبنود التقييم :\n\nالتحضير : يحضر نهاية الكلاس وقليل ما يحضر\nطريقة الشرح : يفتح الكمبيوتر ويفك الملفات ويشرح\nالكويزات : مافي كويزات إلا ع الويب سي تي\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: B\nالصوت: واضح\nإضافات : الدكتور منظم ومحترم ومثقف - لكن ما يخلو من نظرات الخبث حقهم - لكنه دقيق فـ كتابة الريبورتات والرسائل … يعني يركز كثير ع الأفكار ومدى جودة أفكارك وهل إنت فـ كل براجراف كتبت فكرة ولا أكثر من فكرة … غير كذا الوقت فـ البريزنتيشن … يخسسسف بك لو نقصت أو زودت فـ الوقت … أنا زودت نص دقيقة ونزلني من +c إلى +d\nبالنسبة لتصحيح التاسك وتعديله ترا مرة ما تفرق … هو يقسم التاسك قسمين 5 5 … يصحح لك أول شي ويعطيك من 5 وبعدين تعدله ويعطيك النسبة الثانية ( أفلقني لو أتغيرت ذاك الشي )",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p852234-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nelson-timothy-andrew/68441/19",
+              "user": "eng.3boOodii",
+              "ts": 1307963185000,
+              "tid": 68441,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mysterious-engl214",
+      "uid": "stk-mysterious",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1400019617000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68441",
+            "n": "Mr. Timothy Nelson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله الرحمن الرحيم ,\n\nمن وين أبدأ ومن وين أنتهي 🥰\n\nمحدّثكم أخذ الهاترك مع المدرس Timothy Andrew Nelson ❤️\n\nقريداتي معه كانت كلها بي بلس ,\n\nهي كانت الهايست عنده في كل سكاشنه ,\n\nيعطي A مرة كل 3 سنوات تقريباً 😐\n\nصفاته كالتالي :\n\nفللللللللللللة ورررررررررررررراحة باختصار ,\n\nغثّة قسم الإنجلش مب عنده أبد أبد ,\n\nما يعطي F أبد (في الفاينل قريد) , لذلك من النادر جداً يعطي A , < سلبيته الوحيدة 😐\n\nيطلب مواصفات دقيقة للي يبغاه في الريبورت والتاسكات ,\n\nما تمشي عليها يعطيك D 🙂\n\nأنا عرفت وش يبغى في الريبورت وعطاني A+ في 102 ,\n\nوسوّيت نفس اللي يبغاه تماماً في 214 وعطاني A+ أيضاً , << نادررررر جداً تلقى مدرس إنجلش يعطي إي بلس في الريبورت ,\n\nالبرزنتيشن حقه لازم ما يتعدى 5 دقايق ولا يقل عن 4 ,\n\nيصوّر بكاميرا فيديو ,\n\nما يبغاك تطالع السبورة إلا نادر ,\n\nفي الريبورت يطلب صور كثير , وهذا يخلي ريبورتك سهل ,\n\nأيضاً يطلب نسبة +15% Direct qoutation , يعني يبيك تنقش بأدب 😆\n\n----\n\nأنا ندمت إن كورسات الإنجلش خلّصت ولا كان نزّلت معه 😭 ❤️\n\nأعطيه A+++++\n\nNelson ❤️",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1364508-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nelson-timothy-andrew/68441/37",
+              "user": "Mysterious",
+              "ts": 1400019617000,
+              "tid": 68441,
+              "pn": 37
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-student_nz-engl214",
+      "uid": "stk-student_nz",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1296333254000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68442",
+            "n": "Mr. Kevan Moore",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "سمستر 101 انجلش 214\n\nالتحضير :\nكل كلاس و لو كان باقي لك غياب على الدي ان\nواخر يوم غبت خلاص دي ان >> انتبه من هذا الشي\n\nطريقة الشرح :\n\nممتازة ينكت و ممتعه جدا\n\nالكويزات :\nما كان عندنا كوزات في الكورس\n\nالمياجر:\nكومن\n\nالفاينلات :\nكومن\n\nالقريد النهائي:\nA\n\nالصوت:\nوا ضح\n\nإضافات :\nكان عندنا توقل عليه 10 بالميه\nاهتم بالريبورت\nحاول اول شي تسلمه له و يكون على قريد\nانه يكون احسن شي لانه هذا هوا الانطباع حقه\n\nما راح يكرفك طوووووووووووووول الترم لين اخر شي\nيطلب منك الريبورت و بريشنتاشين\n\nبالنسبة لي احسن من غيره بمراحل\n\nالحمد لله اخذت معاه 101 قبل\nوالحين 214\n\nو خلصنا كورسات الانجلش في اقل من سنة\n\nهذا والله اعلم وصلى الله وسلم على نبينا محمد وعلى اله وصحبه\nاجمعين",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p778487-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/moore-kevan/68442/32",
+              "user": "student_NZ",
+              "ts": 1296333254000,
+              "tid": 68442,
+              "pn": 32
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-s.a.l.m.a.n-engl214",
+      "uid": "stk-s.a.l.m.a.n",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1329235542000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68442",
+            "n": "Mr. Kevan Moore",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "جيت بكتب تقييمي لكني قريت في الردود انه بيترك الجامعه\n\nتحية وشكر لـ كيفن مور , كورس 214 كان احد اكثر الكورسات متعه معآه , درسني في سمستر 102\n\n🌹 🌹 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p985898-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/moore-kevan/68442/46",
+              "user": "S.a.l.m.a.n",
+              "ts": 1329235542000,
+              "tid": 68442,
+              "pn": 46
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abdulla_yahia-engl214",
+      "uid": "stk-abdulla_yahia",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1422284906000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68442",
+            "n": "Mr. Kevan Moore",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أ. كيفن مور ]\n\nENGL 214 - Term 141\n- التحضير : دايماً - في البداية ينادي بالأسامي بعدين يحفظها - ما يدقق مرة على التأخير …\n\n- طريقة الشرح : يشرح على السبورة + السلايدات - شرح ممتاز و واضح …\n\n- الكويزات : أعطانا 3 كويزات تشبه الأنشطة الي يعطيها في الكلاس …\n\n- المياجر : كومن …\n\n- الفاينلات : كومن …\n\n- القريد النهائي : B\n\n- الصوت : واضح و سلس …\n\n- إضافات : الدكتور محترم و بشوش + متحفظ في التصحيح بالذات للي لغته مو مرة + متساهل في الديدلاين …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1422455-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/moore-kevan/68442/55",
+              "user": "Abdulla_Yahia",
+              "ts": 1422284906000,
+              "tid": 68442,
+              "pn": 55
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-242424-engl214",
+      "uid": "stk-242424",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1230057274000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يحضر يوميا\nطريقة الشرح : سلايدات و السبورة\nالكويزات : سهلة مرة\nالمياجر: ميد تير كومن\nالفاينلات : لا يوجد فاينل في 214 ولكن في في 101 و 102 كومن\nالقريد النهائي: يعطيك حقك لا زيادة ولا نقصان\nالصوت: منخفظ لكن اذا الصف صغير زي اللي كنت فيه مافي مشاكل\nإضافات :سجل عندة وانت مغمض و اذا اخذت درجة نزيله عنده اعرف ان الخطا من عندك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p342992-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/2",
+              "user": "242424",
+              "ts": 1230057274000,
+              "tid": 68444,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2685-engl214",
+      "uid": "stk-user2685",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1231002523000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : نفس اللي فوق\nطريقة الشرح : بالويب سيتي ويفهك اللي لازم تكتبه مزبوط\nالكويزات : كان كوز واحد اللي هو تكتب job application\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: A\nالصوت: نفس اللي فوق\nإضافات : أنا أنصح به بشدة خاصة في كورس 214 فالكورس مفيد لحياتك الجامعية وبعد الجامعية من كتابة السيرة الذاتية والرسائل الرسمية والتقارير\nوهذا المدرس يدرسك هذي الأشياء من واقع خبرته الطويلة وليس من الكتب\n\nوبالنسبة للفارس ال102 أقرب لل214 من ال101 وهو له فترة ما نزل 102\n\n^\n\nطبعًا الرد لل 214",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p347220-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/11",
+              "user": "user2685",
+              "ts": 1231002523000,
+              "tid": 68444,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2039-engl214",
+      "uid": "stk-user2039",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1231770661000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بطل بطل…\nحبوب جداً…\nسوي اللي يقوله ووريه انت ايش استفدت منه…\nوابشر بالدرجة اللي تحب…\nماذكر عنده غير الريبورت 214 درست معه بالصيف…\nكان كورس ممتع… تحس انك مع واحد ينبسط وياك…\nوبالآخر احلى جريد خذته بالانجلش كورسز كلها… وماقد اخذت احسن منه الا في pe",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p351075-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/14",
+              "user": "user2039",
+              "ts": 1231770661000,
+              "tid": 68444,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-alihr-engl214",
+      "uid": "stk-alihr",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1267003790000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انا خذيت 214 معه\nقبل ما اخذا الكورس في اخويائي قالولي انه اوكي ويدفك دف اليم ، بس والله ما ادري ايش سارله السميستر هذا ، انا اعطاني c+ ، بس والله انه اقل جريد يمكن اخذه هو B\nمن ناحية الحصة ، المدرس اروع ما يكون ، شرح جيد مررة ، طيب جدا المدرس ، ويهتم بالغيابات ، ويحفظ اشكالكم واسمائكم من اول اسبوع او اقل حتى",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p550075-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/30",
+              "user": "alihr",
+              "ts": 1267003790000,
+              "tid": 68444,
+              "pn": 30
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6824-engl214",
+      "uid": "stk-user6824",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1277312751000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بتكلم عن الـ214 الترم هذا\n\nالتحضير :يهتم كثيرا بالتحضير (5%) على الحضور و ممكن يعطي 0 اذا كثرت غيابات.\nطريقة الشرح : على البروجكتر, ملفات يفتحها من الويب سيتي و يشرح عليها و يعطي مجال كبير للاسئله و يجيب عليها بوضوح و يهتم بفهم الطلاب للموضوع,\nفي الويب سيتي يضع جدول واضح للترم كامل و يعدل فيه كثير حسب رغبة الطلاب (مرن جداً مع مواعيد التسليم), ايضاً يضع مجلد لكل شي في الكورس, مثلا الريبورت يضع له مجلد بداخله ملفات مساعده و خطه واضحه للاشياء اللي لازم تسويها خطوه بخطوه…\nالكويزات :مافيه كويزات, بعض الاحيان يسوي براكتس في الكلاس و يجمع الاوراق بس بدون قريد.\nالمياجر:كومن و يخصص كلاسين الى ثلاثه للاستعداد, و يضع ملفات مساعده في الويب سيتي.\nالفاينلات :نفس المياجر.\nالقريد النهائي:a+\nالصوت:ممتاز جداً و واضح\nإضافات : مدرس رائع جداً, متفهم لمشاكل الطلاب, يعطي اكثر من القريد المستحق اذا اشتغلت معاه و اذا كنت تزوره في المكتب << يهتم كثيرا بهذه النقطه و يشجع الطلاب لزيارته, كلاسه ممتع جداً و يمر الوقت فيه بسرعه.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p642920-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/36",
+              "user": "user6824",
+              "ts": 1277312751000,
+              "tid": 68444,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-expert87-engl214",
+      "uid": "stk-expert87",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1307990941000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بما ان الاكثرية تمدح فيه بضيف الاشيا اللي ما ذكروها -اذا خلو شي-\nاخدت معه 214\nالمادة لها كتاب على ما اذكر لكن يشتغل من عنده ويرجع للكتاب قليل لكن يخليك تشتغل 2 ريبورت\nيبغاك تركز اكثر على 214 و تترك ال 102 بمعنى\nتركز اكثر على شرح حلول لاي مشكلة بتعرضها …يبغى يشوف الشارت حق الاوت لاين مليان من ناحية الحلول.\nيحدد مواعيد ثابتة من اول السمستر ويرسلها للكل…انتبه تتاخر عن موعد او تسحب…ماعنده مزح\nتعامله طيب ولو تروح له المكتب تتونس معاه ما عنده مشكلة.\nتصحيحه جيد…\nحاول دايم تستخدم كلمات قوية ومو مستخدمة بكثرة…دور في الوورد الخدمة حقت استبدال الكلمات synonyms\nبس انتبه لا تبدلها بكلمة معناها ثاني هع\n\nيطلب على كل شي يدرسه مثلا الرسائل وكذا انك تشتغل عليهم وتسوي مثلهم وتجيبهم معك المحاضرة اللي بعدها\n\nيكره اسلوب اللف والدوران في المواعيد تحديدا\nصراحة انا اخدت معه B+ وكلمته وقلت له انت تشهد انه انجليزيتي ممتازة…واللي يشوف الجريد ما يعرف هالشي بس يحكم من الجريد…رفع الكل جريد واحد الظاهر لانهم اغلبهم راسلوه وصرت A\n\nيحب يشطح احيانا…يذكر قصة مدري وين كان هو وولده وكان في جنود وحرب وهم الاجانب الوحيدين اللي في المنطقة وولده ياشر عليهم ويتكلم بصوت عالي ومدري ايش سوا…دايم يحب يقولها",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p852380-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/68",
+              "user": "Expert87",
+              "ts": 1307990941000,
+              "tid": 68444,
+              "pn": 68
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8305-engl214",
+      "uid": "stk-user8305",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1338172345000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "كلام ابو شووق صحيح\n\nالدكتور قريداته ما تتغير لو تشد او تهمل\n\nيعني اللي يبي ياخذ c+ بدون تعب ياخذهاا اماا الناس اللي يبون قريدات عالية اقول لااااااااااا تاخذ معه\n\nوالمدرس ما يكرف مقارنة بغيرة ( طبعا 214 )\n\nوالسلام مسك الختام",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1046617-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/76",
+              "user": "user8305",
+              "ts": 1338172345000,
+              "tid": 68444,
+              "pn": 76
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4492-engl214",
+      "uid": "stk-user4492",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1375445165000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "❤️ ❤️\n\n214 - سمستر 123 ، أول شهر ]\n\nينحط على الجرح يبرى ،\nكـ شرح فـ هو شريييح ، يشرح من سلايدات ،\nويهتم اذا الطلاب فهموا معه أو ضاعوا ،يسأل بنهاية الكلاس الكل فهم ولا لا !\nيحفظ إسمك من ثاني يوم ، ولو تروح له الأوفس تراجع أي شيء معه يزودك قريد فيه،\nيحب إنك تكون متواصل معه بالوبستي وتسأله عن الكورس ،\nنجي للفلة : خفففففففففففففففيف دم ومرح بشكل ينسيك إنك منزل إنجلش 😆\nعيبه يحب كل شيء على ورق وبالكلاس بعكس Josh Billam المودرن على قولته 😆\n\nمن مميزاته وخاصة بالصيف :\nإن قريداته للطلاب ماتقل عن B وبالمدترم يمكن واحد أو اثنين بس خذى C+ ،،\nالقريد النهائي عند كان جوش 😆\n\nأفضل مدرس إنجلش مر علي\nنزل عنده وأنت مغمض ❤️\n\nللي يسأل عن ديانته فهو يهودي بأخلاق مسلم !",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1251050-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/83",
+              "user": "user4492",
+              "ts": 1375445165000,
+              "tid": 68444,
+              "pn": 83
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_3111-engl214",
+      "uid": "stk-_3111",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1439512225000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجلش 214- ترم 141\n\nمن غير تفاصيل كثير الرجال جيد للي مستواه متوسط الى منخفض غير كذا راح يظلمك، انا كنت أعلى من غيري في اغلب الاشياء : الريبورت والواجبات والكويزز الخ وكنت اروح المكتب وكل شي لكن في نهاية عطاني قريد مثلي مثل 5 غيري وأشوف أنه ظلمني فيه بصراحة",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1423922-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/86",
+              "user": "_3111",
+              "ts": 1439512225000,
+              "tid": 68444,
+              "pn": 86
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-john_silver-engl214",
+      "uid": "stk-john_silver",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1473654340000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "جيفري ❤️ ❤️\nكنت محظوظ واخذت عنده 102&214 (للمعلوميه من ناحية الريبورت يعاملهم كانهم كورس واحد ونفس المتطلبات.)\nافضل شخص ممكن تنزل عنده من ناحية الدرجات.\nالتحضير: يومي اخر كلاس ومايخلص اول اسبوع الا وهو حافظكم كلكم.\nالديد لاين للمتطلبات: متسااااااااااااااهل جدااااااااااااااااااا مايعترف فيها اصلااا (ماعدا في الصيف 214 لان الوقت كان ضيق جدا)\nالشرح: مايشرح ومايحتاج شرح يعلمكم بس وش يبغى تسوون وبس.\nالطلبات والواجبات والكويزات: للامانه يطلب كل شيء مفروض عليك يمشي على النظام ما يحذف سورس افاليويشن او شيء\nالدرجات: الدرجاااااااات شيء مجنوووون كببببي درجات خصوصا بالصيف الكلاس كان 48 طالب 7 فقط تحت ال B بالميد واقل بالفاينل.\n\nبالنهايه بغض النظر عن كل شيء اسئل الله ان يهديه ويشرح قلبه للاسلام. رغم انه يهودي لكن بالله وآياته ان اخلاقه عن 1000 مسلم ❤️",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1457486-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/90",
+              "user": "JOHN_SILVER",
+              "ts": 1473654340000,
+              "tid": 68444,
+              "pn": 90
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9921-engl214",
+      "uid": "stk-user9921",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1484613005000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Engl 214 Term 161\nالتحضير :\nنهاية الكلاس يحضّر خلال ثواني لأنه يحفظ الطلاب ،\n\nطريقة الشرح :\nعلى البروجكتر طبعاً يشرح الأفكار ويحط أمثلة ويوصّل كل فكرة بتطبيقها\n\nالكويزات :\nيحدّدها قبل بوقت وتكون مشابهة لأمثلة موجودة في البلاك بورد ، أحياناً تسليم الكويزات بالإيميل\n\nالمياجر:\nكومن\n\nالفاينلات :\nكومن\n\nالقريد النهائي:\nA\n\nالصوت: واضح ومفهوم وهو يوضّح أي كلمة ممكن تكون مش مفهومة\n\nإضافات :\nدكتور طيب ومتعاون ، امش معاه في الأوقات اللي يحطها وحيبسطك\n+ درجات سكشننا",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466396-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/91",
+              "user": "user9921",
+              "ts": 1484613005000,
+              "tid": 68444,
+              "pn": 91
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-faisal_19-engl214",
+      "uid": "stk-faisal_19",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1526390949000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68444",
+            "n": "Mr. Jeffrey Jameson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "172 English-214 Term\n\nالافضل في قسم الانجليزي، شخص متفهم ويراعي الطلاب وفاهم انهم مسجلين مواد غيره.\nللأسف هذا الترم كان اخر ترم له في الجامعة وفي التدريس.\nالحمدلله كنت احد المحظوظين اللي درسوا عنده.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492417-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameson-jeffrey/68444/94",
+              "user": "Faisal_19",
+              "ts": 1526390949000,
+              "tid": 68444,
+              "pn": 94
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3985-engl214",
+      "uid": "stk-user3985",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1277863190000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68447",
+            "n": "Mr. Thomas Telfer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انا اخدت معه 214 في 092 لكن والله انشغينا فيه\n\nمميزاته: ماعنده شي اسمه deadline ولا تحضير وطيب ومتساهل لابعد الحدود\n\nلكن مابتفهم ولا حاجه ابدا ولابتدري ويش يبي اصلا. تصوروا يوم اختبار التوفل اللي يراقب علينا كل شوي يقول لنا بعض القوانين للاختبار ويقول ماقال لكم مدرسكم ونقول له ماندري. يسمح بتسليم كثير من التاسكات مرتين (ادا كنت فاضي له) يعني خلي الاول مثل الدرافت.لو ماسويت كدا اعرف ان القريد زفت لانك ماتدري ويش يبي ولا الفورمات فبتاخد درجه زفته",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p648206-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/telfer-thomas-ronald/68447/40",
+              "user": "user3985",
+              "ts": 1277863190000,
+              "tid": 68447,
+              "pn": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3489-engl214",
+      "uid": "stk-user3489",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1292267357000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68447",
+            "n": "Mr. Thomas Telfer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "نزلت معه 214 في صيف …\n\nالتحضير :\nبداية السمستر… دائما …\nوسط السمستر… أحيانا إلى نادرا …\nنهاية السمستر … أبدا ما يحضر << على كلام الشباب أنا مدري لأني سحبت آخر أسبوعين أصلا … 🙂 …\nوطبعا ما عنده مشكلة تتأخر …\n\nطريقة الشرح :\nأحيانا مملة وأحيانا ممتعة … عموما انجليزي ما فيه شرح …\n\nالكويزات :\nمعقولة …\nو شديد في التصحيح مثل غيره …\n\nالمياجر: كومن …\n\nالفاينلات :\nمعقولة أيضا …\n\nالقريد النهائي:\nB …\n\nالصوت:\nواضح …\n\nإضافات :\n-خلوق جدا …\n-بداية السمستر قالنا ترا هالسمستر ما راح أسمح لأحد يتأخر بالتسليم مثل السمسترات الماضية … لكن في النهاية … كل واحد سلم على كيفه … حتى بعض الشباب الله يهديهم ما سلموا التيرم ريبورت إلا وقت الفاينلات … فما أمداه يطلع القريدات إلا صباح آخر يوم لتسليم القريدات … بالتالي نزلها على طول في الترانسكربت… حسبي الله << الى الحين مقهور …\n\n-بالنسبة للشباب اللي يقولون إنه يعطي قريدات … أتوقع والله العالم إن الكلام هذا زمان … قبل ما يخربوه ديبارتمنت الانجلش … الحين مثله مثل غيره من ناحية القريدات … واحد أو اثنين بالسكشن اللي ياخذون a … حوالي 4 b والباقي بين السي والدي … أتكلم عن سكشن فيه أكثر من 30 طاالب …\n\nيعني بالمختصر … طيب وماعندك مشكلة الديدلاينز … لكن قريداته مثل غيره …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p743509-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/telfer-thomas-ronald/68447/48",
+              "user": "user3489",
+              "ts": 1292267357000,
+              "tid": 68447,
+              "pn": 48
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-quick-engl214",
+      "uid": "stk-quick",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1307218180000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68447",
+            "n": "Mr. Thomas Telfer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "engl 214 -semester 102\n\nاسوء مدرس درسني في الجامعه و المره الوحيده الي ماني متاكد اني اعدي الماده.\n\nكل شي اسلمه في الوقت تقريبا ودرجاتي بين D , D+ , C وكل ما اسئل احد معنا في السكشن يقولي نفس الدرجات.\n\nعذره على الدرجات الخايسه هو الافرج مرتفع!!!.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p846575-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/telfer-thomas-ronald/68447/59",
+              "user": "Quick",
+              "ts": 1307218180000,
+              "tid": 68447,
+              "pn": 59
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2526-engl214",
+      "uid": "stk-user2526",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1315528912000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68447",
+            "n": "Mr. Thomas Telfer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "engl 214\n\nانا نزلت الكورس في سمستر 092 و كان الرجال تقريبا ما يحضر و تسليم الريبورت على راحتك و شرح يمشي الحال بس احسن ما عنده انه لا يعطي هوموركات و لا كوزات و لاشي يعني يريحك بصريح العبارة و لا كأن عندك انجلش بالاضافة انه محترم في التعامل و حبوب\n\nمشكلته في الدرجات يعني انا كانت درجاتي بين A+ و B بس الفاينال جريد عطاني c\nيعتبر احسن من غيره من المدرسين اقلها ما يكرفك و الانجلش معروف انه مادة السي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p896937-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/telfer-thomas-ronald/68447/67",
+              "user": "user2526",
+              "ts": 1315528912000,
+              "tid": 68447,
+              "pn": 67
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-equal-engl214",
+      "uid": "stk-equal",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1315628588000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en68447",
+            "n": "Mr. Thomas Telfer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ما يحضّر … طيّب حبتين … محاضراته تقدر تقول ما فيها شيء جديد … ثقافته عالية … الدكتور كويّس ومتعاون في الساعات المكتبية … يقدّر اللي يشتغلون معه … تصحيحه حقّك وعلى الديدلاين … أنصح فيه بشكل عام وفي 214 بالذات اذا كان دكتورك في 102 جيّد …\n\nواضيف انه دكتور الانقلش الوحيد اللي درسني وكان يعطي فيدباك بدون ما تسأله وبشكل مستمر! لاحظته حريص على الشيء هذا … وهذي تُحسب له وتفيدك انت في انك تعرف هل وضعك في السليم او لا … ومنها تطوّر لغتك في نفس الوقت …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p897868-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/telfer-thomas-ronald/68447/68",
+              "user": "equal",
+              "ts": 1315628588000,
+              "tid": 68447,
+              "pn": 68
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-khalid-f10-engl214",
+      "uid": "stk-khalid-f10",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1353778839000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en69101",
+            "n": "Mr. Anthony Gibson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله\n\nترم 121- انجلش 214\n\nبنود التقييم :\n\nالتحضير :\n\nالتحضير يكون في كل كلاس بس ما يدقق ابدا ابدا على التاخير حتى لو تجي بعد نص ساعة ما عنده مشكلة يحضرك وخلاص\n\nلو في سكشن ثاني وتبي تحضر عنده ما عنده اي مشكلة يوافق بدون استقعاد\n\nطريقة الشرح :\nاكثر كلامه شفهي يعني تقريبا من بداية الترم كان يتكلم عن الريبورت\nيفتح ملفات ال pdf يشوف المعلومة الرئيسية ويقعد يتكلم عنها طول الوقت\n\nقد يستخدم السلايدات بس نادرا وحتى لو استخدمها زي ما قلت ما يركز عليها\n\nالكويزات :\nعدد الكويزات محدد من القسم\nلحد الان اخذنا كويزين بس\nواسئلته سهللللللللة ويلمح\nيقول يمكن اسالكم عن كذا وكذا\nيعني يجي الكويز وانت فاهم وش يبي\nالكويز الثاني عطانا 4 اسئلة وقال حلوا ثلاثة\n\nالمياجر:\nما في مياجر فقط مدتيرم كومون\nالفاينلات :\nكومون\n\nالقريد النهائي:\nA\n\nالصوت:\nهادئ وممكن تجد صعوبة في فهم ما يريد\n\nإضافات :\n\nالمدرس حبيييييييييييييييييييييييييييب على الاخر ومرح\nدايما يقعد ينكت يعني الصراحة بالنسبة لي انبسطت معه على الاخر\n\nنقطة ثانية , انسان مرن جدا\nيعني تخيل لحد الان ما سلمنا الريبورت بنسلمه الاربعاء الجاي ان شاء الله\nيعني دائما اذا قلنا له ياجل شي ياجله بدون مشاكل\nوحتى لو ما اجله للكلاس الكامل انت رح كلمه وانك تبي تاجل اللي تبي\nمثلا في احد الايام اللي نكتب الفرست الدرافت جوه طلاب قالوا انهم مو مستعدين ويبغون يجونه في الاوفس اور عشان يكتبون وافق\n\nايضا اول حصتين كتابة ما كان يعطي قريدات لانه قال ادري انكم بتسوون اخطاء فظيعة فابغاكم تتعلمون\n\nبالنسبة للقريدات اشوفها نوعا ما عادلة ليست بالممتازة كعادة قسم الانجلش\nوزي ما قال واحد من الشباب هنا ان المدرس يهتم بمدى تطورك جدا\nيعني لو بديت ب F وتحسن مستواك ما بيحسبك لك F لانو قال ان يعجبني التطوير\n\nاخر حاجة مهمة\nالمدرس قال لنا انا ما اعطي احد F في الكورس كامل هذي تعتبر ميزة له\n\nاتمنى اني كفيت ووفيت واذا في اي استفسار انا حاضر\n\nبالتوفيق",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1123093-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/gibson-anthony/69101/23",
+              "user": "khalid-f10",
+              "ts": 1353778839000,
+              "tid": 69101,
+              "pn": 23
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a_o_s_ll-engl214",
+      "uid": "stk-a_o_s_ll",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1353937880000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en69101",
+            "n": "Mr. Anthony Gibson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انا معه الحين وكلمة بطل ما توفيه حقه\n\nاول شيء هو التشيرمان السابق وهو الدايركتر لقسم الانجلش سواءً بالاوريا او الجبل\nالرجل ايرلندي… ونيس واول مدرس انجليزي يكون بطل + كلاسه يكون ممتع\nالرجل مرن جدا جدا ومتساهل ومتسامح كثير…\nتخيلوا… السكاشن الثانية مطلوب عليهم اربع او خمس مرات درافت بالكلاس بتصحيح مباشر\nاما هو بس ثلاث مرات… واول “درافتين” ما اخذ درجته قال عدلوه ورجعوه والدرافت الثالث\nهو الوحيد اللي خذا درجته… متساهل بمسألة الديدلاين “بحدود المعقول يعني”\nكرف ما يكرف ابدا بمعنى ان تقريبا ما تشتغل عالكورس الا مرة كل اسبوعين تقريبا…\nتصحيحه جيد جدا ويحب الطلاب اللي يكتبون بإيجاز بمعنى انك تعطي اكثر قدر من\nالمعلومات بأقل قدر من الفلسفة… يقدس هالنوعية بدرجة كبيرة…\n\nاضافة اخيرة مثل ما قال خالد… الرجل من اول كلاس قال انا ما اعطي f بال214 ابدا\n\n+\nممكن البعض شايل عليه ايام ما كان التشيرمان ومسألة الابروفل “مثلي خخخ”\nلكن والله شخصيته عكس اللي مرسومة عند الكثير…",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1124336-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/gibson-anthony/69101/31",
+              "user": "A_O_S_ll",
+              "ts": 1353937880000,
+              "tid": 69101,
+              "pn": 31
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-penc1l-engl214",
+      "uid": "stk-penc1l",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1390403958000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en69101",
+            "n": "Mr. Anthony Gibson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENG 214 Term 122\n\nلايعتبر من التب\nلاتخليه اول خياراتك\nلم تعجبني طريقة تقيمه بشكل عام في الريبورت او البرزنتيشن او غيره\nاعتبر كرفه متوسط\nمتساهل في الديد لاين\nمتساهل في الليت وفي الميك اب\nالرجال مرح وكلاسة غير ممل ويجي منه تنكيت\nفي الأخير انا غسلت يدي من دبارتمنت الأنغلش معى بخسهم في القريدات في الأخير افرج السكشن حول C\n\nفي المرفقات كشف الدرحات",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1321368-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/gibson-anthony/69101/38",
+              "user": "Penc1l",
+              "ts": 1390403958000,
+              "tid": 69101,
+              "pn": 38
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-medoalkebsi-engl214",
+      "uid": "stk-medoalkebsi",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1401041502000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en69101",
+            "n": "Mr. Anthony Gibson",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجليزي 214 ترم 132\nبنود التقييم :\n\nالتحضير : يومي بدايه الكلاس\nطريقة الشرح : يجلس يتكلم كثير ويستخدم الكمبيوتر اوقات.\nالكويزات : 3 كوزات رايتنق , يكون قبل بأسبوع تقريبا يرسل المتيريل كامل حق الكوز ويقول لكم راح يجي 4 تكتب عن 3 اذا كتبت عند 4 راح يختار لك افضل ثلاثه.\nالمياجر: الميترم كومون بس الدكتور راح يحل معكم 3 او 4 من القديمه ويعطيكم افكار في الكتابه للميترم تساعدكم كثييييير\nالفاينلات : كومون , من نفس الكلام الي يقوله بالكلاس يعني لو تركز معه مايحتاج تذاكر للفاينل\nالقريد النهائي: الدكتور بالنسبه لي جدآ ممتاز , يعطيك الطالب حقه من نص السمستر يقول لي انت طالب مستواك B+ , واليوم اجي احصل درجتي B+ مثل ما قال لي .\nالصوت:الصوت واضح جدآ\nإضافات : الريبورت جدآ متشدد فيه , لدرجه انه الدرافت الي تكتبه في الكلاس تحصله معطيك D و C وتحس بالتحطيم , بس بالاخير تحصل معطيك الفاينل قريد A على اريبورت 🤠 .\nيحب الطالب الي يكتب كلام كثير ويفتي ! يعني اذا تحب تألف كلام من عقلك الدكتور هذا جدآ مناسب.\n\nبالنسبه للراينتق , عنده نظام عيد الكتابه ويعدل لك الدرجه.\n\nالافرج عند الكتور 75 .\n\nعنده 15 طالب ماخذين من B وفوق .\nعنده 27 طالب ماخذين C و C+\nعنده 9 طلاب D و D+\n\nنقطع اخير , في يوم البرزنتيشن انا جبت العيد مع اني الحمدلله دأيم ابدع فيها , بس كنت تعبان وجبت العيد , بالاخير اعطاني B , قال لي انا اعرف مستواك بالاسبيكنق .\n\nالزبده انصح فيه للناس الي تحب تتفلسف في الكتابه .\nيحب الريبورت يكون مليان كلام . انا كتبت له حول 3200 كلمه.\n\nواذا في احد يحتاج اي استفسار انا حاظر , وبالتوفيق … 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1371343-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/gibson-anthony/69101/43",
+              "user": "Medoalkebsi",
+              "ts": 1401041502000,
+              "tid": 69101,
+              "pn": 43
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2967-engl214",
+      "uid": "stk-user2967",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1308609794000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en74185",
+            "n": "Mr. Savino Sfregola",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Engl 214 - 101\n\nالتحضير : يحفظ فيسك اول اسبوع وبعدها كل كلاس يقر الاسماء ويحضر بنفسه\nطريقة الشرح : ع الكمبيوتر … سلاديات او pdf … بالشرح مايقصر نفهم معاه والله\nالكويزات : مافيه\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: a كشرح … d كقريد\nالصوت: واضح\nإضافات :\n* شبه اسبوعي يعطيك شغله تسويه يا outlinem, pre-report or… etc\nطبعا يرشح له طول السبوع ويطلبها منك يوم الخميس\n* ماعندها مشكلة تاخير يوم يومين … حتى في شباب كلموه عن هوم وورك قديم قال ماعندي مشكلة انا جاي ادرسك مو اعاقبك\n*بخصوص القريد النهائي الرجال ظلمني كثير … رحت له بالاوفس استفسر بخصوص القريد قال اغلب قريداتك سي … قلت مو صحيح اغلب درجاتي بين a والb واللي عليها نسب كبيره هي اللي محصل فيه قريدان طيبه\nقال ماقدر اعطيك قريد افضل من c\nقلت له مو صحيح درجاتي بين a و b\nقال خلاص عطيت طلاب a و b وماقدر ازيدهم\nوماودي اصير زي الترم الماضي اوزع درجات\nيوم شفت رده كذا … عرفت ان الشغلة شغلة نفسيه وانس تعدل قريدك\n\nاللي طلب القريدات … تلقاها بالمرفقات\n\nوموفقين يارب",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p856496-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/savino-sfregola/74185/40",
+              "user": "user2967",
+              "ts": 1308609794000,
+              "tid": 74185,
+              "pn": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-bo_yosef-engl214",
+      "uid": "stk-bo_yosef",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1365585665000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en74185",
+            "n": "Mr. Savino Sfregola",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بخصوص الكوزات و طريقة الشرح…الخ\nفالطلاب ما قصروا ووضحوا طريقته.\n\nEnglish 214\n\nبعطيكم انطباعي عنه.\n\nاولاً: طلاب دفعات 07 و 08 و 09 كان فيهم طلاب غشاشين وورانا شغلهم وشغل النسخ واللصق. ورانا ايضا مستوى بعض الطلاب وبصراحة كانوا سيئين للغاية لدرجة اني لو كنت مدرس كان ما نجحتهم. فاتوقع ان الطلاب اللي اشتكوا فالمنتدى هم هؤلاء الطلاب فتجاهلوا كلامهم وخذوا رايي الحيادي.\n\nثانياً:\n\nانا اتفق مع الطلاب بانه ظالم في القريدات، مهب لاني شايف اني استحق اكثر، لا. لانه بعض الطلاب معنا كانوا يشتكون فالحصة بخصوص قريدات تاسكاتهم ويقوم يورينا شغلهم ويعيب عليه وبصراحة بعضهم كان يستحق اكثر مما اعطاهم وكانت شكواهم في محلها. وبالنسبة للكرف فهو عادي لان الانجلش معروف انه كرف.\n\nاخلاق المدرس ممتازة وعالل العال. ينكت ووسيع صدر.\n\nبالنسبة ليش هو كذا ظالم فالقريدات، فهذا تحليل الشخصي لنفسيته بناءاً على قصص كان يقولنا عنها فالكلاس!\n\nدرّس في كمبوديا وهدده اخو بنت كان يدرسها بالسلاح انه يغير درجتها. ودرس في باكستان واظن انه حصل له شي مشابه. اشتغل في بنجلادش لboss نفسية واخلاقه زفت. وعمل عنده 3 سنوات ثم سمع عن وظيفة في بنجلادش مرتبها 30,000 الف ريال. قدم عليها وفي سيرته الذاتية حط عناوين الاماكن اللي اشتغل فيها ومنها عنوان هالبوس. من سوء حظه، اصحاب الوظيفة دقوا على هالبوس وسبه سب وخسره الوظيفة.\n\nاستنتاجي هو انه هالمواقف التعيسة اللي صارت له في حياته وحظه السيء في الحياة ومع الناس خلاه نفسية وحقود على الناس من الداخل بالرغم من انه يضحك ويسولف لكن جروح القلب ما تبرى. وبالفعل تقدر تشوف هالشي في ملامح وجهه وبالاخص جزء الجبهة. حزن على تعاسة على شكوك على هموم.\n\nلكنه شخصية عظيمة صراحة بس قريد، مافي. لا تحلم.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1208357-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/savino-sfregola/74185/61",
+              "user": "bo_yosef",
+              "ts": 1365585665000,
+              "tid": 74185,
+              "pn": 61
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mr.fabulous-engl214",
+      "uid": "stk-mr.fabulous",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1368271060000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en74185",
+            "n": "Mr. Savino Sfregola",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انا رجعت واخذت English 214 عنده …\nوارجعوا لردودي في اول صفحة وثالث صفحة عشان تاخذون تقييم من وجهة نظر مختلفه\n\nبختصار شديد!!!\nلولا الله ثم سافينو كان أنا أخذت ديسمس ثاني من الجامعه!!!\n\nبكون حقاني شوي سافينو اعتفس علي في English214 لأن متطلبات الكورس كثيره ويبيها بشكل دقيق جدا وانا ما عطيته حقه صراحه وكان قريدي الأخير قبل دخوله البورتال D+ ومعروف أنه عند سافينو استحاله استحاله يتغير القريد ولكن انا شرحت له وضعي وارسلت له ايميل طويل ورد علي (بحاول اعيد تجميع الدرجات بس نو بروميسيس)\nيوم دخلت للبورتال لقيت القريد C بفضل من الله ثم مساعدة سافينو…\n\nلازلت اقول الدكتور عطه جوه ويمشيك!!",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1221079-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/savino-sfregola/74185/63",
+              "user": "Mr.Fabulous",
+              "ts": 1368271060000,
+              "tid": 74185,
+              "pn": 63
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-coengineer-engl214",
+      "uid": "stk-coengineer",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1385676318000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en74185",
+            "n": "Mr. Savino Sfregola",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "غريبه ، ادرس عنده الترم هذا واشوف ان الدكتور محترم جداً\n\nوقريداته معاكم انه شوية شديد حتى الريبورت مو مسموح لك تجيب سورسات ولا اي شي\nيمشي مع الانظمة كل شي بوقته ما عنده شي اسمه تمديد ، بس الاسبوع هذا مدد لنا تاسك اول مره\nوالتاسكات اول تاسك ما سلمته ، وقالي خلاص ما باحسبه لك من ضمن القريد.\n\nينكت في الكلاس ويعطي قصص عن تجاربه ، والحضور ما يهم متى تجي يحضرك بس لاتغيب اهم شي\nوالكويزات اخذ فيها a بس اغلب الطلاب قريداتهم c و d ، لأن مستوى اللغة لك عليه\nمو كل الطلاب عندهم مهارة بالكتابة ، والكورس يعتمد عالكتابة مهما تجتهد فيه\nاذا لغتك مو قد كذا وما تقدر تتفلسف كتابياً بتاخذ قريد يوازي مستواك.\n\nابتسم للدكتور واضحك معاه يعاملك ملك ، وهو بشكل عام محترم جداً ويرحب بكل واحد يدخل ويناديه باسمه\nحتى واحنا طالعين ، بس بعض الشباب الملتزمين يطالع فيه بنظرة تقول بيقتله\nفاهمين الدين خطأ ، واحد يعطيك الحب والاحترام تبادله الكره باسم الدين ؟!!\nوتتوقع منه يستمر معاك باسلوبه !\n\n214",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1296412-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/savino-sfregola/74185/73",
+              "user": "COEngineer",
+              "ts": 1385676318000,
+              "tid": 74185,
+              "pn": 73
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5643-engl214",
+      "uid": "stk-user5643",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1308362028000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "English 214\n\nالتحضير :\n\nيوميا … م يحضر اذا شاف غياب كثير بسبب الجو او اي شي … بس يعطي الحاضرين بونس …يسمح تجي باي سكشن … يقول\n\nIf you have less than 2 abcences then you are one of the VIP students who have the advantage of getting an upgrade if their they are 1.5 less than the following grade\n\nالشرح :\n\nسلايدت متعوب عليها … مستحييييييييل يمدد الديد لاين … يمزح مع الطلاب بس اي كلمه منك يفهمها انك تحاول تشبكه … دايم كلامه وسسسسخ مره … مزوح وسيع صدر … يبين لك وش يبي منك بالضبط … 5 بالميه على تفاعلك بالويب سيتي …\n\nالقريدات :\n\nدايم كل تاسك الافرج حقها لازم 73\n\nيعني افرج قريداته سي … هو حبيب بس من كلامه الدفعات الي قبل استغلو طيبته\n\nمن مميزاته الريبورت تخلص منه بنص السميستر\n\nاحيانا يسوي انا الي قافله معي تراني معصب لا تكلموني عن شي\n\nمدري وش اقول … بس تراه تغير عن قبل … يعني لا تغركم الردود الاولى\n\nيبقى احسن من غيره … لان القسم كله حقير …\n\nانا ما حبيت هالانسان صراحه … للمعلوميه اخذت عنده بي بلص … بس مدري هو مزاجي مره\n\nخذ معه عموما او مع نيلسون او مع كيفن مور لانهم هو التوب\n\nوهو انسان يكرف تاسكات وغيره",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p854648-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/57",
+              "user": "user5643",
+              "ts": 1308362028000,
+              "tid": 76546,
+              "pn": 57
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-phenomenon-engl214",
+      "uid": "stk-phenomenon",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1314133002000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "8\n8\nاذا شفت اسمه … نزل معه وبس ❤️\nهذا أفضل مدرس انجليزي ممكن يمر عليك في حياتك كلها\n\nأنا سبق وقيّمته لأني أخذت معه 101 … والحين خلصت 214 معه بالصيف بعد\nصراحه ماراح ألقى كلمه توصفه أو توفيه حقه …\nوبالصيف كان فلّه زياده لأنه درسنا الشهر الثاني وكان توه مخلص شهر العسل 🤠\n\nالمهم … اللي يشوف سكشنه فاتح ولا ينزّل معه … هذا مرتكب جريمه في حق نفسه وبس 🤪\nوهذي قريداته للصيف :\n\nالمجموع الكلي للي خذوا A يتراوح بين الـ88 والـ89\nالمجموع الكلي للي خذوا +B يتراوح بين الـ 84 والـ86\nالمجموع الكلي للي خذوا B يتراوح بين الـ 78 والـ84\nالقريدات الباقيه ستاندرد …\n\nA\nA\nA\nB+\nB+\nB\nB\nB\nB\nB\nB\nB\nB\nB\nB\nC+\nC+\nC+\nC+\nC+\nC+\nC+\nC\nC\nC\nD\nF\n\nطبعا القريدات هذي طلعت بالويب سيتي …\nيوم نزلت لي بالبورتال سوا لي أب قريد ❤️ ما أدري عن باقي الطلاب\n\nوإضافة إلى أن نصف الشغل كان عند رون تلفر (55%) بما انهم تقاسمو الصيفي …\nتلفر خسف بكثير من الطلاب في السورس ايفالويشن لكن جوش كالعاده كريم بالقريدات للي يشتغل 👍",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p891004-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/68",
+              "user": "Phenomenon",
+              "ts": 1314133002000,
+              "tid": 76546,
+              "pn": 68
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abodi660-engl214",
+      "uid": "stk-abodi660",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1326111995000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "جوش بيلام مرة ممتاز في 214\nمن ميزاته:\n1-أنه تقريبا فيه 6 كلاسات أوف عندك !! يعني فيه أسبوعين مطلوب من الطلاب يسوون بريزنتيشن يقول احضر البرزنتيشن حقك وكلاسين إضافية تحضرها والباقي لا تجي فيها يعني 3 كلاسات أوف عندك على سبيل المثال.\n2- في النص الترم بعد ميجر ون على الاجازة اللي في نص الترم تكون سلمت الريبورت حقك وهذا يريح الطالب كثير خصوصا في اخر السميستر.\n3- في الدرجات متعاون جدا في رأيي.\n\nأنصح فيه وبقوة!!",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p962649-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/82",
+              "user": "abodi660",
+              "ts": 1326111995000,
+              "tid": 76546,
+              "pn": 82
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5812-engl214",
+      "uid": "stk-user5812",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1327333964000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بطل بطل بطل … درست عنده 214 في الصيف … وكان من أبطل ما يكون الله يجزاه عنا خير ويهديه للإسلام 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p972686-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/83",
+              "user": "user5812",
+              "ts": 1327333964000,
+              "tid": 76546,
+              "pn": 83
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-menoo-engl214",
+      "uid": "stk-menoo",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1343255573000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "صيف 113 … انقلش 214\n\nمدرس بطل … من أريح كورسات الانقلش اللي مرت علي …\nلو مشيت ع كلامه خطوه خطوه بترتاح في النهايه …\nبغض النظر عن القريد النهائي بما ان الصيف باقي ما انتهى …\nانا انسان ابي اخلص من هالكورس ، وماظني بلقى مثل هالنهايه الحلوه مع هالانسان",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1072005-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/88",
+              "user": "Menoo",
+              "ts": 1343255573000,
+              "tid": 76546,
+              "pn": 88
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8552-engl214",
+      "uid": "stk-user8552",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1375366307000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "214\nterm 123\n\nدرس نص سمستر بعد جيفري جيمسن\n\nإنسان فاهم شغله صح يشرح إلي تحتاج بدون هذرة زايدة\n\nما تشيل هم الكورس ممعاه سهالات بس وقت التسليم ما يتساهل\n\nمنظم جدًأ جدًأ\n\nفي القريدات كان أفضل من جيفري جيمسون\nهذا ملخص للفاينل قريد في الصيف الأفرج واضح B\nA/A+ 3\nB/B+ 17\nC/C+ 4\nD 0\nF 0",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1250910-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/93",
+              "user": "user8552",
+              "ts": 1375366307000,
+              "tid": 76546,
+              "pn": 93
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8718-engl214",
+      "uid": "stk-user8718",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1399804216000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "English 214\nالتحضير :\nبداية الكلاس ويرجع يحضر مرة تانية نهاية الكلاس\nمتساهل جدا جدا في التأخير\nيسمح ب الحضور في اي سكشن\n\nطريقة الشرح :\nسلايدات هوة مسويها ممتازة جدا جدا … تفهمك المطلوب خطوة خطوة وبالتفصيل\n\nالكويزات :\nسهلة وبسيطة … غالبا يقلك المطلوب الكلاس الي قبل الكويز\nتصحيحه للكويزات بطل\n\nالقريد النهائي:\n\nA+\n\nالصوت:\nواضح جدا ومفهوم - اكسنت استرالي\n\nإضافات :\n\nأفضل مدرس انجليزي مر علي من جميع النواحي …\nالآدمي جدا خلوق ومحترم وطيب … ينكت ويسمج احيانا …متفهم ومرن جدا في ناحية المواعيد … لكن لو حط ديد لاين انسى يغيره .\nالشرح جدا ممتاز وبالتفصيل الممل احيانا - منظم في المواعيد\nيعطيك مواعيد التسليم لمتطلبات المادة من بداية الكورس … مريح جدا\nحاطط في البلاك بورد وسائل مساعدة مرة مرة كثيرة + السلايدات + اشياء تواصل ونقاش\nيتواصل بشكل شبه يومي على البلاك بورد … رسائل كثيرة فيها كل المعلومات للكلاسات والكويزات والقريدات وأشياء تانية … يعني لو غبت عن كلاس ماراح يفوتك شي .\nالبريزنتيشن قللنا احضرو اليوم الي حتقدمو فيه وبقية الايام بكيفكم\nبالنسبة للقريدات… الآن اسبوع قبل الفاينلات ولسة بدري ع القريدات … لكن الكويزات عموما قريداتها عالية وأتوقع يزبطنا في القريدات النهائية 👍\n\nأنصح فيه بشدة … أبطل مدرس في الحياة",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1363615-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/95",
+              "user": "user8718",
+              "ts": 1399804216000,
+              "tid": 76546,
+              "pn": 95
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abo_yazeed6-engl214",
+      "uid": "stk-abo_yazeed6",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1409327921000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "133-english 214\n\nبو بيلام هو الدكتور الي غير نظرتي السلبية لدكاترة الانجلش.\n\nانسان فكاهي ,ما يكرف ,يتجاوب معك في الويب سيتي ويراعي ظروف الطلاب\"أخر موعد تسليم الريبورت لبعد الاجازة على سبيل المثال\"\n\nوفوق هذا قريدات بطلة ,خصوصا بالصيف أغلب الطلاب في الكويزات والاختبارات ياخذون B والباقي موزعين يا فوقها يا تحتها ,لكن نادر تشوف أحد ياخذ d ولا +d عنده.\n\nنزل معاه وأنت مغمض ,هذا إذا لحقت عليه 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1394481-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/101",
+              "user": "abo_yazeed6",
+              "ts": 1409327921000,
+              "tid": 76546,
+              "pn": 101
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-cs_scientist-engl214",
+      "uid": "stk-cs_scientist",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1439380831000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Engl214 - 143\n\nخسارة أبو بيلام بيمشي من الجامعة بعد ذا الترم، خسارة كبيرة لقسم الإنقلش صراحة\nأخذت منه 214 ذا السمر و كان أفضل كورس إنقلش أخذته و برضو هو أعلى كورس إنقلش بالدرجات\nعشانه سمر + جوش يعرف كيف يوزع الدرجات صح\na+ قليلة عليه\nأتمنى يرجع للجامعة، قسم الإنقلش يحتاجه بحيث إن فيه كثار مدرسين سيئين",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1423794-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/102",
+              "user": "CS_Scientist",
+              "ts": 1439380831000,
+              "tid": 76546,
+              "pn": 102
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-jafar_15-engl214",
+      "uid": "stk-jafar_15",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1515516608000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214-171\n\nالتحضير : بداية كل كلاس ، واللي يتأخر عادي يحضره نهاية الكلاس\nيقبل الميكب حتى لو طول الترم تحضر في اي سكشن ماعنده مشكلة\n\nطريقة الشرح : يشغل السلايدات ويتكلم ويشرح عنها، بشكل عام المادة مافيها شرح وحتى لو ماحضرت اللكتشر تقدر تفهم شالمطلوب من السلايدات\n\nالمياجر: مد ترم كومن عن سورس ايفاليويشن\n\nالفاينلات : كومن ، شوف لك الاولد الاقزام القديمة تتكرر\n\nالصوت: واضح\n\nإضافات : الدكتور بشكل عام ممتاز. اغلب قريداته من B+ الى C+. في المرفقات درجات الطلاب لكل السكاشن لهذا الترم 171. درجات الريبورت والرسالة ماعطانا اياها الا بعد الفاينل. في عندك حدود 12 كلاس تقدر تعتبرها اوف من عنده تكون مثلا بسبب العرض تحضر يومك المحدد ومايحتاج تحضر الايام الثانية، غير الكلاسات اللي يسميها workshop مايحتاج تحضرها. كل شي يحطه في البلاكبورد من بداية الترم عشان تكون في الصورة وتعرف كل كلاس ووش المطلوب ووش بيتكلم عنه.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1485838-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/109",
+              "user": "Jafar_15",
+              "ts": 1515516608000,
+              "tid": 76546,
+              "pn": 109
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mkd-engl214",
+      "uid": "stk-mkd",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1547534546000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en76546",
+            "n": "Mr. Josh Billam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "خذت معه 214 بترم 173\n\nإنسان رهيب إلى أبعد درجة من أفضل ما قابلت من دكاترة بالجامعة\n\nمشكلته يحضر أول الكلاس ويليّت ، غيرها الآدمي ممتاز بشكل ما تتصورونه ( شرحه ممتع ، يعطيك الزبدة ، يحرص انه يفهمك ، ما يلعب بالكلام يخليك ما تدري وش السالفة زي كثير من دكاترة الانقلش الثانين )\n\nيسمح بالميك اب اذا السكشن اللي أنت ناوي تحضر عنده ما هو زحمة ، غيرها إحضر زي ما تبي\n\nنزل معه بدون ما تفكر ولا دقيقة\n\nأنا أخرت ال214 إلى آخر ترم قبل الكواب بترمين والحمدالله تيسرت ونزلت معه ، لو يمديك تأجل ال214 عشانه أنا الآن أقولك يستاهل\n\nنصيحة : اذا تبي قريد عالي بالكورس ، خله يشوف إنك حريص وخله يعرف انك ودك بA+ وغيرها ما ترضى ومن هالكلام\n\nبالنسبة للريبورت سويه من بددررري عشان يشوفه بدري هو ، اعرف اغلاطك وعدلها بعدين وريه اياه مرة الثانية الين يعدلك كل الأغلاط بالريبورت\n\nلو الديو لاين بعد اسبوعين ، خلك مخلصه قبله باسبوع ويصير هذا الوقت الفاضي تراجعه فيه كل يومين عان يعدلك لو فيه شي غلط وبعدين توريه التعديل وتتاكد إنه زي ما يبي هو\n\nأهم أهم شي إحرص من البداية انه يعرفك انك فلان الفلاني الطالب الحريص 🙂 واشتغل معاه وبتنصدم بقريدك زي ما انصدمت انا 🙂 🙂 🙂\n\nالله يذكر ايام ال214 بالخير بس 3>",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504950-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/billam-josh/76546/110",
+              "user": "MKD",
+              "ts": 1547534546000,
+              "tid": 76546,
+              "pn": 110
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4578-engl214",
+      "uid": "stk-user4578",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1322146381000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا عنده السمستر هذا “111” كورس 214\nبإختصار ملك\nما يكرف و يفيدك في المادة\nيعطيك المختصر وما يطلبك أكثر من اللي أعطاك\nالريبورت في بدايت السمستر وتسليم الفيرست درافت قبل الميدتيرم <<<يعني ما أدري كيف تصحيحه إلى الأن\nيطلب منك تجيه المكتب على الأقل 5 مرات طوال الترم\nبالعربي نزل عنده وأنت مرتاح",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p936355-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/43",
+              "user": "user4578",
+              "ts": 1322146381000,
+              "tid": 92113,
+              "pn": 43
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-stu2009-engl214",
+      "uid": "stk-stu2009",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1322151233000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجلش214 سمستر 111\nأنا بالنسبه لي الدكتور زين وأفضل من أكثر مدرسي الانجلش\nولكن لاحظت عليه انه صعب تاخذ معاه اي أو اي بلص يعني لو انت دافور انجلش ابعد عنه لأن بيعطيك أقل من حقك ولو كنت مش ولا بد يعني ضعيف والله متوسط وبتشتغل شوي معاه خذ معاه لأنه أحسه يدف الطلاب الضعاف على حساب الطلاب الممتازين في لكلاس…\nطبعا ما أخذت منه الا درجة الميدترم على أساسها حكمت يعني يمكن الرجال يفرق بعدين…\nلي رجعه ان شاء الله نهاية السمستر وراح أحاول أفيدكم أكثر",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p936423-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/47",
+              "user": "stu2009",
+              "ts": 1322151233000,
+              "tid": 92113,
+              "pn": 47
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6686-engl214",
+      "uid": "stk-user6686",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1329226596000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اخذت معه 102 و 214\n\nهالادمي اسطورة بديبارتمنت الانقلش …\n\nحبيب ومتساعد وكل شي …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p985758-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/60",
+              "user": "user6686",
+              "ts": 1329226596000,
+              "tid": 92113,
+              "pn": 60
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6687-engl214",
+      "uid": "stk-user6687",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1352391897000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجلش 214\n\nمريــــــــــــــح جدا ماعنده طلبات واجد\nفلللله وخفيف دم\nالديد لاين مايهم واجد عنده\n\nسحبت على البرزنتيشن اخر الترم وجا يقلي تكفا سو البرزنتيشن هههههه\nحددت وقت من راسي وسويته في الاوفيس معه\n\nلاحظت عنده نظام\nيحكم على قريدك من اول تاسكات\nيعني انا كل الي سلمته له اعطاني سي بلس فيها والقريد النهائي سي بلس\nفيه بعضها متأكد اني استاهل عالاقل بي بلص وبعضها قلت بيعطيني دي بس في النهايه كلها سي بلص\n\nطيب في التحضير ويمشيلك اي عذر\n\nلو انا باريح راسي وانزل عنده\nاقل مجهود وراحة بال وافتك من الماده",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1114130-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/61",
+              "user": "user6687",
+              "ts": 1352391897000,
+              "tid": 92113,
+              "pn": 61
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6605-engl214",
+      "uid": "stk-user6605",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1391348724000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "HARTLEY, MICHAEL\n\nEnglish 214\n\nالتحضير: يومـيّاً ينادي بالأسمـاء ويتغـاضى عن التأخير\n\nطريقة الشرح: يستخدم السلايدات ، ويوصلك الفكـرة سريع سريع ، وكلاسه جدّاً ممتع رغم انه كان 75 دقيقة يومين في الأسبوع إلّا إنه كان أفضـل كلاس عندي\n\nالكويزات: 3 كوزات وتكون عمّا درسته\n\nالمياجر: الميدتيرم كومن\n\nالفاينلات: كومن\n\nالقريد النهائي: أعطـيه A+ وقلـيلة عليه\n\nالصوت: جدّاً واضـح\n\nإضافات: هـذا أبطـل مدرس إنجلش درسني من بين كل مدرسين الانجلش من 001 إلى 214 ، ما أدري وين كان مختفي ولا أسمع عنه 😦 ، المدرس متعاون جدّاً في مواعيد التسليم بس لا تمصّخها واجد ، والجيد فيه إنه ما يـلتزم بأول قريد يعطيك إياه مثل غالبية المدرسين … بل يعطيك على قد شغلك ولا يبخسك بالإضافة إلى إنه واضح جدّاً في حسبة القريد النهائي ، ولو فيه كورس إنجلش بعد 214 ولو كان إلكتف لأخذته معه ❤️",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1325525-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/64",
+              "user": "user6605",
+              "ts": 1391348724000,
+              "tid": 92113,
+              "pn": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8697-engl214",
+      "uid": "stk-user8697",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1407935351000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "English 214-133\n\nالتحضير : يوميا ونادرا ما ينسى وما يهتم بالتاخير\n\nطريقة الشرح :سلايدات وكلام زيه زي غيره لكنه يقتل الملل\n\nالكويزات : متوسطة\n\nالمياجر: كومون\nالفاينلات :\n\nالقريد النهائي: A\n\nالصوت: واضح نسبيا\n\nإضافات :\n\nبريطاني + فلة … الاكسنت ماهو صعب … متساهل كثيرا … يعطي قريدات كويسة … ممكن يحشك فاذا بتزعل لا تنزل معاه …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1389567-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/69",
+              "user": "user8697",
+              "ts": 1407935351000,
+              "tid": 92113,
+              "pn": 69
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-computist-engl214",
+      "uid": "stk-computist",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1408715550000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en92113",
+            "n": "Mr. Michael Hartley",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "TERM 133 - SUMMER 2014\nENGL214\n\nالتحضير : أغلب الأحيان في بداية الكلاس، وألاحظ ما يمانع تحظر في كلاس ثاني\n\nطريقة الشرح : ممتعة، يعطي قصصه وتجاربه المتعلقة بالدرس وسأل الطلاب عن رأيهم ومعلوماتهم في الموضوع. السلايدات جاهزة ما عليك إلا تراجها وأحيانا يكتب بعض الملاحظات في السبورة فالأفضل يكون عندك قلم وورقة\n\nالكويزات : سهلة. 3 كوزات كتابية عن ما فهمته من المنهج عليها 10%\n\nالمدترم: كان كتابي أيضا عن source evaluation وكان تقريبا 15%\n\nالفاينال : كان مثل الكوزات ولكن ربما أطول والوقت ساعة عليه 10%\n\nالصوت: واضح جدا\n\nإضافات : الدكتور (بريطاني أظن) حبوب متعاون ويحاول يساعدك بقدر المستطاع، الكورس كان الزبدة فيه الربورت 30%، فكان ربما زياراتي المتكررة وأهتمامي بالمادة خلاه يعطيني فيه A على الرغم أني أعتقد ما أتجاوز B في الربورت. من أمثلة تساهله مع الطلاب أنه الي يفكر مثلا ما يجي الخميس فيكلمه يعطيه الكوز أبكر. كذلك في أيام الكتابة للربورت كانت اسبوع، فقال الي يقدر يخلص كتابة الربورت في أقل من خمسة أيام البقية free يعني لو تقدر تكتب 1500-2000 في يومين مثلا بقية الاسبوع ما لازم تحظر.\n\nجزء من شخصية الدكور أنه يمزح ويبسط الأمور وأحيانا يسميها junk ،،،، ولكن في نفس الوقت يحذر من التهاون والمماطلة وسهولة الخطأ وفقدان الدرجات\n\nربما السلبية اللي لاحظتها فيه أنه أذا راسلته بالئيميل آغلب الأحيان يجاوبك في الكلاس الجاي أو إذا زرته في مكتبه، ويعلل أنه يعطي معلومات أكثر في الحوار بدل الإيميل\n\nالقريد النهائي: B+ - A",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1392166-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/hartley-michael/92113/71",
+              "user": "Computist",
+              "ts": 1408715550000,
+              "tid": 92113,
+              "pn": 71
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9305-engl214",
+      "uid": "stk-user9305",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1417540536000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en94806",
+            "n": "Mr. Jonathan Marquis",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Jonathan Marquis\n\nنزلت عنده 101 في ترم 131 ، 102 في ترم 133 و 214 في ترم 141\n\nفي الصيف كنت منزل معه وكان كلاسه الساعة 7 الصباح وكنت منزل برمجة الساعة 1 الظهر، كنت اقدر انزل انجلش الساعة 11 مع مدرس ثاني لكني اعتقد ان الدراسة مع Marquis تستاهل التضحية هذي.\n\nحبيب ومرح وكلاسه غير ممل إطلاقاً، ما يعترف بشيء اسمه واجبات، غالباً ما يرفع آفرج السكشن في الرايتنق لأقصى حد ممكن وهو 76، وفي بعض كوزات الريدنق يكون الافرج منخفض فيزود كل الطلاب من عنده شان يرفعه، اللي يجتهد عنده يعطيه حقه بدون بخس. ما يتعرض للأديان ولا العادات في كلامه مطلقاً. يحب الطلاب يجونه في المكتب “مع اني ما رحت لمه ولا مرة” لكنه دائماً ما يقول اللي ما فهم شيء ولا عنده مشكلة يمرني في المكتب لأن هذا هو السبب اللي يخلي الجامعة تدفع لي راتبي.\n\nأوقات المياجر دائماً يخفف من الكلاسات يخليها سريعة وبعض الأحيان يلغيها، ومتفهم جداً لو رحت كلمته عن الغياب لو عندك ميجر او مشكلة. يحضر في آخر المحاضرة بالاسامي ويتغاضى عن التأخير في أغلب الاحيان، وإذا مرة فلوها الطلاب ما يعطيهم في الوجه، يجيبها بطريقة مزح.\n\nإذا تبي نصيحتي، لا تتردد انك تنزل معه ابداً لو لقيت مكانه عنده.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1417215-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/marquis-jonathan/94806/31",
+              "user": "user9305",
+              "ts": 1417540536000,
+              "tid": 94806,
+              "pn": 31
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-practice-engl214",
+      "uid": "stk-practice",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1438166059000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en94806",
+            "n": "Mr. Jonathan Marquis",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 122 - Engl101\nTerm 123 - Engl102\nTerm 142 - Engl214\n\n1- يشرح شرح مبسط ويعطيك الزبدة ويهمه انك تتعلم وعادي يقعد معاك لين تفهم\n2- ما يهتم بعدد غياباتك ، ما عنده Dn الا لو فليتها بزيادة ( هذا الترم 142 معانا طالب غايب ثلاثة شهور ولا حضر ولا تاسك ، الدكتور اتصل عليه يقول له تعال وقله سوي الريبورت وبنجحك على الاقل وفعلا اعطاه D )\n3- حبيب جدا ولا عمره زعق\n4- متفهم للظروف ويحذف كلاسات كثير اوقات المياجر ويغير اوقات التاسكات اذا طلبنا منه وغالبا يطلعنا بدري\n5- ما تحس بالمادة معاه ابدا\n6- قريداته جدا حلوة وافرج الكلاس 75 في كل التاسكات\n7- انا اشوفه افضل دكتور انقلش بحكم تجربة غيره بترم 131 و 132 و 133 و 141 وكلها دروب ! يمكن لاني جربته قبل عشان كذا ما جازو لي الباقين\n8 - انصح به وبشدة ولا راح تندم بس سوي زي ما يقولك بالملي وبتطلع بقريد ما تتوقعه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1423113-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/marquis-jonathan/94806/34",
+              "user": "Practice",
+              "ts": 1438166059000,
+              "tid": 94806,
+              "pn": 34
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abdelaziz-engl214",
+      "uid": "stk-abdelaziz",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1474082859000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en94806",
+            "n": "Mr. Jonathan Marquis",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214 - 153\n\nالتحضير :\nمتساااهل جداً في التحضير ماعنده DN يعطيك غيابات مجانية ولا يحاسب على التأخير\nنهاية الكلاس يحضر بالسيريال نمبر.\n\nطريقة الشرح :\nيشرح من سلايدات ولا يتشعب فيها كثير يعطيك المهم ويقول لك ذاكره\n\nالكويزات :\nبالصيف كان مافي\n\nالمياجر:\nكانت ميدترم كومن\n\nالفاينلات :\nكومن\n\nالقريد النهائي: +B\n\nالصوت:\nواااضح ولغته سهلة ومفهومة\n\nإضافات :\n* المدرس حبيب جداً ومتساعد مع الطلاب في الاوفس وبره الاوفس\n* احياناً قبل الديدلاين حق الاسايمنت تروح له ويصحح لك أخطائك عشان تجيب درجة زينة\n* أحسن شي فيه انه يعطيك الزبدة ولا يتفلسف وطلباته بسيطة يعطيك اكزامبل للاسايمنت ويقول لك أمشي عليه وتاخذ الدرجة\n* تصحيحة في البداية كان كريم يعطي A في الاسايمنتس بعدين صار ناااادراً ما يعطي A … حشر اغلب الطلاب بين B & +B( ما ادري ليش بس يمكن عشان الصيف والافرج بيخليه B )\n* يتفهم ظروف الطلاب واوقات المياجر مايحط اسايمنتس ولا يضغط عليهم حتى أحياناً يقول لا تجون ❤️\nمشكلة وحيدة أنه مو متساهل مع الديدلاينز اذا ما سلمت المطلوب منك بتاخذ خصم.\n\nوشكراً.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1457758-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/marquis-jonathan/94806/36",
+              "user": "Abdelaziz",
+              "ts": 1474082859000,
+              "tid": 94806,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-playa-engl214",
+      "uid": "stk-playa",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1451381360000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en94986",
+            "n": "Mr. Tom Daly",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انجلش 214 - 151\n\nصراحه استغرب من ردود الناس المدرس لطيف وسلس بالدرجات ويحاول يزيد قد مايقدر , الكويزات بسيطه جدا ويعطي hints قبلها بالاضافة انو يراعي الطلاب جدا في اوقات المياجر وتسليم الدرافتز ومزوح والكلاس معه ممتع.\nانا اعطيه A+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1437304-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/daly-tom/94986/31",
+              "user": "PLAYA",
+              "ts": 1451381360000,
+              "tid": 94986,
+              "pn": 31
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-aziz99-engl214",
+      "uid": "stk-aziz99",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1448635273000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "انا معاه الحين والرجال طيب ومتسامح وشرحة ممتاز\nالتحضير بداية الكلاس\nالاختبارات والكوزات سهلة نوعا ما\nتعامله ممتاز\nانقلش 214 ترم 151",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1434697-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/57",
+              "user": "aziz99",
+              "ts": 1448635273000,
+              "tid": 96633,
+              "pn": 57
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m_nd_m-engl214",
+      "uid": "stk-m_nd_m",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1484777234000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "T161 - ENGL214\n\nالتحضير : ينادي الأسماء بداية الكلاس و بعض الأحيان يتأخر كم دقيقة ينتظر الطلاب يحضرون… ينسى يحضر مرات و مرات ما يحضر عمدًا… ماعنده مشكلة تحضر مع سكشن ثاني لكنه يفضل تحضر بسكشنك\n\nطريقة الشرح : على السلايدات و يكتب النقاط المهمة (Bullet Points) على السبورة <----- لا تخافوا ما يجيب النوم\n\nالكويزات : بـ214 هو كويز واحد فعليًا عن الـCORRESPONDENCE و وقتها حدد لنا من الكتاب أكثر من نوع letter ممكن تجي بالأختبار\n\nالمياجر: -\n\nالفاينلات : -\n\nالقريد النهائي: أترك القريد لكم… عشان ما يسير تضارب\n\nالصوت: واضح جدًا… ماعنده أكسنت بريطانية قوية\n\nإضافات :\nإيجابياته:\nحبيب و خصيصًا بالأوفس أورز\nنظامه رهيب بالبرنتيشنز و المقابلات… يقسم الكلاس لـ5 مجموعات… كل مجموعة لازم تحضر مرتين:\nبرنتيشن: المرة الأولى تحضر تسوي البرنتيشن حقك و الثانية تجي تقعد بس (Audience)\nمقابلات: المرة الأولى أنت تكون مانجر و تسوي المقابلة و الثانية أنت اللي يسوونلك المقابلة… يعني الدكتور مو هو اللي يسويلك المقابلة و للأمانة الحركة هذه مفيدة جدًا… خصوصًا أنه عنده خبرة كبيرة بالمجال هذا\nو باقي الأيام مو لازم تحضرها… يعني تغيب ما مجموعه 6 أيام !\nيعطينا وقت إضافي دائمًا لتسليم الملفات المطلوبة\nإذا تأخرت يوم بالDrafting يعطيك فرصة بالكلاس اللي بعده تكتب اللي فاتك\nبعض الأحيان يمشينا بدري\n\nسلبياته:\nيخصم 5% على كل يوم تتأخر فيه بتسليم الملفات المطلوبة\nتاخذ حقك بالتصحيح… و يتأخر كثير بالتصحيح\nيسولف كثير… شخصيًا أشوفها إيجابية لأنه تغير الجو شوي لكن الأغلبية يشوفها سلبية و مضيعة وقت\n\nالقريدات للسكشنين:\nhttp://a.top4top.net/p_383icfcv1.png http://b.top4top.net/p_383hwqr92.png\n\n*لاحظوا لا يوجد أي D+ D or F\n\nأي معلومات أخرى بخصوص الكورس تلقونها بموضوع تقييم الكورس (سأضيف تقييمي له لاحقًا)",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466565-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/62",
+              "user": "M_nd_m",
+              "ts": 1484777234000,
+              "tid": 96633,
+              "pn": 62
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-waleedx11-engl214",
+      "uid": "stk-waleedx11",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1497359227000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENG214 Term162\n\nالتحضير : ناااااااااادراً ما يحضر ومتعاون جدا في التحضير.\n\nطريقة الشرح : رائعة جدا طريقة نقاشه مع الطلاب وطرح الأمثلة وفكاهي بعض الأحيان لدرجة يخليك تفك ضحك 😂\n\nالكويزات : في 214 كويز واحد فقط اسمه correspondance عليه 10% يعلمك كيف تكتب رسالة شكوى من عميل أو رسالة الرد على الشكوى من شركة أو مؤسسة الخ… وهو يعلمك من فين تذاكرلها في الكتاب لأن في أمثلة كويسة عليها في الكتاب.\n\nالمياجر : هو ميدتيرم ( Source evaluation ) كومون وعليه 15% .\n\nالفاينلات : كومون عليها 15% ، يعلمك برضو من فين تذاكرلها من الكتاب.\n\nالقريد النهائي: أعطيه A لأن فعلا دكتور يعجبني كلاسه وخفيف لطيف.\n\nالصوت: واضح ، على الرغم انه بريطاني بس لكنته أمريكية لأنه كان عايش في أمريكا من زمممماااان فالكلام جدا واضح.\n\nإضافات :\n1- الدكتور كلاسه خفيف لطيف ، ما اذكر مرة قعدنا الكلاس كامل ، يقولك اللي لك واللي عليك ويطلعك قبلها بربع ساعة وبعض المرات أكثر.\n2- في شي اسمه Recruitment بالمادة عليه أظن 15% يخليك تجي اليوم اللي تكون فيه متقدم للوظيفة واليوم اللي تكون فيه manager باللجنة والايام اللي مهي لك غياااب. ❤️\n3- يوم البريزينتيشن برضو تجي اليوم اللي حتقدم فيه واليوم اللي حتكون فيه كمستمع ( Audience ) والايام اللي ماهي لك غياب.\n4- الدكتور لا تنتظر منه يعطيك درجة باردة مبردة بس لو تبعت معه وسويت اللي يقولك عليه بحذافيره ساعتها أبشر باللي يسرك والله.\n5- مش من الدكاترة اللي يطلبون أشياء واجد ، فالكورس ان شاء الله بيكون خفيف عنده.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1475076-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/65",
+              "user": "waleedx11",
+              "ts": 1497359227000,
+              "tid": 96633,
+              "pn": 65
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-breaktheunbreakable-engl214",
+      "uid": "stk-breaktheunbreakable",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1558773528000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENG214 Term181\n\nالتحضير : يحضل نهاية الكلاس أتوقع. متساهل فيه\nطريقة الشرح : ما يشرح كل شيء يريده بالتفصيل، ويسولف بشكل زايد عن اللزوم\nالكويزات : ما أذكر في كويز\nالمياجر : مدترم كومن\nالفاينلات : كومن\nالقريد النهائي: أعطيه B.\nالصوت: واضح ومفهوم\n\nإضافات :\n1- ما يعجبني تصحيحه، تغلط في شيء بسيط أو كلمة ينقصك قريد أو قريدين كاملين عشانها. لازم تطبق كل شيء يريده بالحرف\n2- في الريكرمنت تجي يوم تقابل، ويوم انترفيو وباقي الأيام إجازة\n3- في البرزنتيشن تجي يوم تقديم وحضور، وباقي الأيام إجازة\n4- ما يناقش الدرجات ولا يغيرها",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1510178-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/67",
+              "user": "BreakTheUnbreakable",
+              "ts": 1558773528000,
+              "tid": 96633,
+              "pn": 67
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-guest-engl214",
+      "uid": "stk-guest",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1591127539000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Eng 214 - term 173\nالتحضير :\nبشكل يومي\n\nطريقة الشرح :\nيشرح من السلايدات و كانت اول مرة اشوف واحد يشرح كورس انقليزي 😅\n\nالمياجر:\nكان تصحيح المد ممتاز جدا وماشي على كرايتريا معينه.\n\nالقريد النهائي: C\n\nالصوت:\nواضح اكسنت بريطاني\n\nإضافات :\nالمد صححه بشكل سريع وعطانا درجات رفيعه لاكن بعدها كان يأجل تصحيح كل شي الى اخر اسبوع في السمستر ومامدانا نراجعه لدرجاتنا.\nبالنسبة للدكتور كنت اشوفه مزاجي مرات يدقق ومرات لا مثلا في البرزن تيشن عديت الوقت ب اقل من 30 ثانية قالي you deserve +B but you will get +C. وعلى اني كنت اكتب على الشروط الي حاطها لاكن عطاني C للريبورت وكنت جايب A+ في المد :zipper_mouth_face:.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1522573-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/69",
+              "user": "Guest",
+              "ts": 1591127539000,
+              "tid": 96633,
+              "pn": 69
+            }
+          },
+          {
+            "id": "stk-dr-en118628",
+            "n": "Mr. Gordon Blazenko",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL214 Term 201\nالدكتور أسطورة ولحد يتردد ينزل عنده هذا اذا أساساً لحقت تنزل عنده، المواعيد كل ما تطلبه يأجل شيء ما يقول لا ، اتذكر اقل واحد بالسكشن جاب C+ والاغلبية B ،اذا طموحك A+ ف هوا نادراً ما يعطي A+ وبالمقابل الطلاب اللي اقل من افرج يرفعهم ل C+ ، واللي يبغى B او B+ ومستواه كويس حتكون مرة سهلة بس سوي زي ما يقول، التحضير نهاية الكلاس ينادي اسامي وما يحشر في نص الكلاس وينادي احد اذا موجود او لا\nتقييمي له A+ افضل دكتور انجلش مر علية",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527593-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-blazenko-gordon/118628/42",
+              "user": "Guest",
+              "ts": 1609821083000,
+              "tid": 118628,
+              "pn": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-sadguts-engl214",
+      "uid": "stk-sadguts",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1630066292000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214 - 203\nاشوفه اصعب انقلش صراحه مدري السبب اني اخذته صيف وكان ضغط او الدكتور كان يحط كل شيء بدري او الريبورت حقه\n\nالكورس بشكل عام بعد ماتخلص الريبورت يصير سهل بس ليش الريبورت صعب مو زي 102؟ لانه عن تخصصك وعن ثيم معين\nمن حسن حظي انا جاني الثيم انترنت ف قدرت اربطه بتخصصي بسهوله (ومع ذلك عانيت) بس تخيل يجي الثيم عن شيء بعيد\n\nبس تخلص الريبورت يجي الشيء المفيد من الكورس تسوي سي في كانك بتقدم ع وظيفه (ومعه كفر ليتر وحاجات كذا تتعلمه وببتسوي انترفيو) اشوفه شيء جامد\n\nالميدتيرم: كان غبي صراحه مو انه صعب كثر ماهو غبي يعطيك معلومات عن سورس وتقييمه وتحلله زين يعني تقول هل الكاتب خبير ف المجال هل السورس جديد هل المواضيع الي غطاها تقدر تربطها في الريبورت (في الميد كانك طالب يبغى يكتب ريبورت) هل المكان الي اشتغل فيه يدعم اجنده معينه بحيث تصير كتابته متحيزه\n\nالفاينل: طول الترم مافكينا الكتاب فجاه قالوا لنا فيه متيريل لازم تحفظونه المتيريل حق الحفظ مو صعب بس طويل\nالنكته ان الفاينل جاء مره سهل حرفيا نسخ لصق من اولد ١٩٢ يمكن ٤٠ سوال من ٥٥ وال١٥ الباقيه حسب الحفظ\n------------------------\nلانس كنق صراحه كان كويس وماقصر الشيء الايجابي فيه ان المعايير حقته واضحه خصوصا ف الجوب سكلز كان يقول بالضبط وش يبغى وكيف يبغاه ف كان يعلمنا كيف السي في المثالي والانترفيو الاسئله ووضح كيف يبغاه فكان سهل تجيب قريد ف الجوب سكلز\n\nالريبورت بشكل عام بس كان فيه الدرافتس الي كان يعلمنا وش نسوي بالضبط ف فالدرافتات وضح كيف نكتب انترو وكنكلوجن الباقي انت ومهارتك ف الكتابه\n\nالميدتيرم تصحيحه كان كويس والاغلب اخذ درجات حلوه تكتب زين يكافئك بقريد ولايهمه الافرج الدكتور (اول مره اشوف دكتور يعطي فوق ٩٥)\n\nالبرزنتيشن غالب السكشن اخذ بي او بي بلس وفوق\n\nالفاينل mcq\n\n--------\nقريداته للسكشنين:\nC+\nB\nC+\nC+\nB\nB+\nB+\nB+\nB+\nB\nB+\nB+\nB+\nA\nB+\nC+\nC+\nC\nA\nA\nC+\nC+\nB\nB\nB\nB+\nB+\nB\nB+\nB\nB\nC+\nB+\nB+\nC+\nC+\nC\nB+\nB\nA\nA+\nA",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1531521-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/70",
+              "user": "SadGuts",
+              "ts": 1630066292000,
+              "tid": 96633,
+              "pn": 70
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mr_exceptional_stude-engl214",
+      "uid": "stk-mr_exceptional_stude",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1641495734000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Engl 214 - Term 211\n\nالتحضير : ما هو مهتم بالتحضير، مرات قليلة حضر ببداية الكلاس وبنهاية الترم محد من الطلاب راح عليه الأبقريد بسبب غيابات\nطريقة الشرح: المادة ما تحتاج شرح كثير ولو تقرا بنفسك ماتيريال المادة بتفهم لكن الدكتور يستخدم سلايدات وميزته في هالمادة بالذات إنها نوعاً ما تتعلق بمهارات العمل وغيرها وهو له خبرة سابقة بالمجال فيعطيك قصص وأحداث حقيقية ومفيدة له.\nالكويزات : ما فيه\nالمياجر: كومن\nالفاينلات : كومن\nالصوت: واضح جداً\nالقريد النهائي: ++++++++A\nإضافات: الدكتور مثالي في كل شي، أنصحك تنزل عنده قد ما تقدر. ميزته خبرته طويلة وبالتالي يعرف بالضبط وش تحتاج ويعطيك إياه، يعني مثلاً بالريبورت أو قبل الميد وغيره يقول لك بالضبط كيف تجيب قريد وبعد ما تخلص التسليمات هذي تكتشف إن كلامه كان صحيح ودقيق. كذلك تعامله رهيب ويحاول يساعد الطالب ويتساهل معه قد ما يقدر بالغياب مثلاً وتأخير التسليم والتصحيح والبونس وكل شي.\n\nقريدات سكشني:",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533338-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/71",
+              "user": "Mr_Exceptional_Stude",
+              "ts": 1641495734000,
+              "tid": 96633,
+              "pn": 71
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ahmed1-engl214",
+      "uid": "stk-ahmed1",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1671672029000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "English 214 - Term 221\n\nالتحضير : بشكل يومي تقريبا\nطريقة الشرح: الصراحة شرحه ما استفدت منه الا في الجوب سكلز كان يتكلم عن تجاربه ومواقفه والاخطاء الشائعة في المقابلات عدا ذلك قراية سلايدات.\nالصوت: واضح\nالقريد النهائي: +A\nإضافات: الدكتور اشوفه افضل دكتور للكورس هذا بالذات، مو متطلب واجد ويعطي قريدات كويسة انا مستواي افرج تقريبا وفي الفاينل ريبورت عطاني A 👍.\nحاول قد ما تقدر تنزل عنده لانه بيريحك مرة مرة مرة خلال السمستر وما بيغثك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536046-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/72",
+              "user": "Ahmed1",
+              "ts": 1671672029000,
+              "tid": 96633,
+              "pn": 72
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mohammed_mag-engl214",
+      "uid": "stk-mohammed_mag",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1685666959000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en96633",
+            "n": "Mr. Lance King",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214 - Lecture\n\nالتحضير : يوميا بدايه الكلاس ينادي الاسامي ويحضر، قال ان تغير النظام من الكوردنيتر وزادو التشدد.\n\nطريقة الشرح : يشرح من سلايدات الكوردنيتر، ويرفعها بالبلاكبورد، البلاكبورد سكشن حقه جدا مرتب، رافع فيه كل المصادر الي ممكن تساعدك مع هالكورس .\n\nالكويزات : مافي كويزات، بس فيه متطلبات تسلمها متعلقه بالريبورت والمهارات العمل، كثيره بس بسيطه .\n\nالصوت : واضح و أكسنت مفهوم .\n\nإضافات :\nالدكتور جدا حبيب ومتساعد، ماتوقعت فيه دكتور زي كذا في ديبارتمنت الانقلش.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536730-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/lance-king/96633/73",
+              "user": "Mohammed_Mag",
+              "ts": 1685666959000,
+              "tid": 96633,
+              "pn": 73
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-makkahboy-engl214",
+      "uid": "stk-makkahboy",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1528084297000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en118628",
+            "n": "Mr. Gordon Blazenko",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGL 214- 172\n\nالتحضير: في نهاية الكلاس بالأسماء من عنده\n\nطريقة الشرح: يفتح ملف الورد حق الدرس (مثلا d1) ويقرأ منه ويشرح. شرحه طيب وتحسه فاهم ويقدر يوصل لك الزبدة. ويجيب أمثلة ممتازة\n\nالكويزات: كومن ويدربك عليها بشكل جيد قبل مايختبرك ويحدد لك المهم\n\nالمياجر: ميدتيرم واحد ويذاكر لك إياه بشكل طيب ويعطيك ملخص ويقولك ايش المهم\n\nالفاينل: كومن ويعطيك أيضا ملخص مثل الميد\n\nالصوت: صوته واضح وممتاز\n\n-مايركز أبدا أبدا على التأخير ولا تضايق أبدا.\n-بعض الأحيان يخلص الكلاس بدري ويمشينا\n-متعاون جدا ويحاول يفهمك ويسهل لك الأمور وما يعقدها. ويقولك ايش يبا بالضبط وعلى وش يقيمك\n- إذا تأخرت بتسليم اسايمنت في الكلاس ، يأخره لك إلى آخر كلاساته أو بعض الأحيان يقولك جيبه المكتب\n- دكتور بطططل صراحة وانصح فيه\n\nالقريد النهائي: A",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1493677-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-blazenko-gordon/118628/33",
+              "user": "makkahboy",
+              "ts": 1528084297000,
+              "tid": 118628,
+              "pn": 33
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-maan_al-raddadi-engl214",
+      "uid": "stk-maan_al-raddadi",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1545830384000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en118628",
+            "n": "Mr. Gordon Blazenko",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": ".ENGL-102, Term 172. & ENGL-214, Term 181\n\nالتحضير:\nيحضر نهاية الكلاس و لا يزعجه التاخير ابد.\n\nطريقة الشرح:\nواضحة و يعطيك زبدة اللي يبيه. بمعنى يقولك لو سويت كذا بتاخذ القريد الفلاني و على هالنظام. في 214 كان في كثير من الكلاسات يطلعنا بدري الا ان كان فيه شغل, يعني مرة طلعنا بعد 20 دقيقة من بداية الكلاس.\n\nالتقييم النهائي : A+\n\nملاحظات :\nالدكتور صراحة في رأيي من افضل دكاترة القسم نظرا لتصحيحه و عدم اهتمامه بحكاية الافرج, تشتغل تاخذ ما تشتغل تحمل. و زي ما قلت واضح في اللي يبيه و متعاون لابعد درجة و تأخير الديدلاينز عنده بريال ان كان السكشنين يبون و فيه مقدرة. هو اخر لنا هالترم اكثر من شي لكن بسبة التاخير تورطنا لان سارت الديدلاينز الجديدة مع المياجر و ما قدر يعدل عليها فتورطنا, بس عموما ممتاز الدكتور.\n\nو فالكم التوفيق ان شاء الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504109-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-blazenko-gordon/118628/36",
+              "user": "Maan_Al-Raddadi",
+              "ts": 1545830384000,
+              "tid": 118628,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-majed_hq-engl214",
+      "uid": "stk-majed_hq",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1589860940000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en118628",
+            "n": "Mr. Gordon Blazenko",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ENGLISH214-192\n\nالتحضير :\nيحضر في نهاية المحاضرة ومتسامح في التأخير\n\nطريقة الشرح :\nالدكتور منظم جداً، دائماً يرسل ايميل قبل كل محاضرة عن ايش بناخذ\nطريقة الدكتور في الشرح هي انه يفتح ملفات الورد حقت المادة ويوقف في النقاط المهمة\n\nالصوت:\nواضح\n\nإضافات : الدكتور متساهل جدًا من ناحيه اوقات التسليم، ما عندة مشكله في التأجيل.\nالدكتور واضح ويشرح المطلوب منك بالضبط\nانت سو اللي يبيه وهو ما راح يقصر معك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1522151-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-blazenko-gordon/118628/40",
+              "user": "Majed_HQ",
+              "ts": 1589860940000,
+              "tid": 118628,
+              "pn": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-xelko-engl214",
+      "uid": "stk-xelko",
+      "code": "ENGL 214",
+      "sec": "doc",
+      "ts": 1630097536000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-en184166",
+            "n": "Mr. Dragos Brad",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "English 214- T203 (Online)\nالتحضير : ياخذه عن طريق تيمز\nطريقة الشرح : عن طريق سلايدات Josh Billam، يبدأ بالنقاط الاساسية ويشرح كل سلايدة بتفصيل ممل بعض الاحيان، لكنه ممتاز ويوضح المطلوب بشكل جيد جداً.\nالكويزات : لايوجد\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: B+\nالصوت: واضح\nإضافات :\n-الدكتور متساعد بالاوفيس اور.\n-يشجع الطلاب على المشاركة.\n-يعطي feedback تفصيلي على كل assignment تقريباً.\nالدكتور ماعنده طريقة تصحيح واضحة، يعني ممكن يخسفك لانك ما مشيت على اللي يقوله، حتى لو اللي يقوله ماله وجود بالروبرك!",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1531538-engl214",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dragos-brad/184166/2",
+              "user": "Xelko",
+              "ts": 1630097536000,
+              "tid": 184166,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
