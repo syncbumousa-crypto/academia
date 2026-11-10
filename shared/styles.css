@@ -17256,9 +17256,7 @@ html[data-lang="en"] .pp-num { left: auto; right: 7cqh; }
 html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6cqh; }
 
 /* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
-   مسكةُ طيّ الذيل كانت شريطًا أفقيًّا على موضع الالتقاء نفسِه فتقطع الكتلة: تُخفى ما دامت كتلة، وتظهر عند المرور أو التركيز */
-:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip { background: transparent; }
-:is(.pk--max, .pk--frame):is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-ftline:not(:hover):not(:focus-visible) .pk-hdline__grip i { opacity: 0; }
+   مسكةُ طيّ الذيل ظاهرةٌ دائمًا (طلبُ صاحب الموقع) — الكتلُ لم تعد تتّصل بالذيل فلا تقطعها */
 /* والنشرُ: خانةُ الكتلة في وسط ذيله كما في التحرير */
 .pk-pubfoot { position: relative; min-height: 34px; }
 .pk--ftdn .pk-pubfoot { min-height: 0; }
@@ -17387,3 +17385,375 @@ html[data-theme="dark"] :is(.pk--max, .pk--frame) { --pk-gap: transparent; --pk-
 /* الترويسةُ أعلى المساحة والمحتوى يملأ ما تحتها (كان التوسيطُ يدفعها فوق الحافّة فيقصّها) */
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) { justify-content: flex-start; }
 .pk--bandfx .post-ytmain > .pk-split > :is(.pk-src, .pk-bank) > :is(.pk-es, .pk-vwph, .pk-src__view, .pk-qbempty) { flex: 1 1 auto; min-height: 0; height: auto; }
+.pk-blkh > .pk-vbar--foot { margin-inline-start: 6px; font-weight: 400; }
+
+/* ===== رأسُ المساحة: أيقونتُها في الزاوية العليا اليمنى و× في اليسرى — لا اسمَ ولا شريط (طلبُ صاحب الموقع) ===== */
+.pk-blkh { width: auto; align-self: stretch; height: 26px; margin: -4px -4px 6px; gap: 6px; }
+.pk-blkh__nm, .pk-blkh__n { display: none; }
+.pk-blkh__ic { width: 26px; height: 26px; border-radius: 8px; }
+.pk-blkh__ic svg { width: 15px; height: 15px; }
+.pk-blkh__x { width: 26px; height: 26px; border: 0; background: color-mix(in srgb, var(--u-btntx) 6%, transparent); }
+.pk-blkh__x svg { width: 12px; height: 12px; }
+.post-ytmain > .pk-blkh--mid { margin: 2px 10px 4px; }
+/* بلا مربّعٍ خلفهما (طلبُ صاحب الموقع): الأيقونةُ بلون الذهب، و× خافتٌ يقوى عند المرور */
+.pk-blkh__ic { background: none; color: #a9852f; }
+html[data-theme="dark"] .pk-blkh__ic { color: #e1c172; }
+.pk-blkh__ic svg { width: 18px; height: 18px; }
+.pk-blkh__x { background: none; color: var(--u-mut); }
+.pk-blkh__x svg { width: 13px; height: 13px; }
+.pk-blkh__x:hover { background: none; color: var(--u-btntx); }
+/* و× المساحة صار قوسَ الزاوية بنقطتين — كقوس المساهمة في زاويتها (طلبُ صاحب الموقع): على زاوية الكتلة العليا اليسرى، وقطرُه قطرُها (‎16‎) */
+.pk-blkh { position: relative; }
+.pk-blkh__x { position: absolute; top: -8px; inset-inline-end: -10px; width: 50px; height: 50px; padding: 0; border: 0; background: none; margin: 0; }
+.post-ytmain > .pk-blkh--mid > .pk-blkh__x { top: -10px; }
+.pk-blkh__x:hover { background: none; }
+.pk-blkh__x svg { width: 50px; height: 50px; overflow: visible; display: block; }
+html:not([data-lang="en"]) .pk-blkh__x svg { transform: scaleX(-1); }
+.pk-blkh__x .pk-curve__grip { stroke: rgba(20, 35, 63, .1); stroke-width: 7; }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: rgba(20, 35, 63, .22); }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(255, 255, 255, .26); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e7eff0; }
+.pk-blkh__x:focus-visible { outline: none; }
+/* قوسُ الإغلاق أحمر (طلبُ صاحب الموقع) */
+.pk-blkh__x .pk-curve__grip { stroke: rgba(214, 69, 69, .55); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(232, 96, 96, .6); }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: #d64545; }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: #e86060; }
+.pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #fff; opacity: .9; }
+/* بل أحمرُ قوس التضييق في زاوية المساهمة نفسُه (طلبُ صاحب الموقع) */
+.pk-blkh__x .pk-curve__grip { stroke: rgba(192, 86, 75, .22); }
+.pk-blkh__x .pk-curve__dots { fill: #b5483c; opacity: .45; }
+.pk-blkh__x:hover .pk-curve__grip, .pk-blkh__x:focus-visible .pk-curve__grip { stroke: rgba(192, 86, 75, .4); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__grip { stroke: rgba(224, 123, 111, .24); }
+html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { fill: #e07b6f; opacity: .45; }
+html[data-theme="dark"] .pk-blkh__x:hover .pk-curve__grip { stroke: rgba(224, 123, 111, .42); }
+.pk-blkh__x .pk-curve__dots, html[data-theme="dark"] .pk-blkh__x .pk-curve__dots { opacity: .8; }
+.pk-blkh__x:hover .pk-curve__dots, .pk-blkh__x:focus-visible .pk-curve__dots { opacity: 1; }
+/* ===== زرُّ التضييق الأحمر في الزاوية العليا اليسرى من المساهمة (طلبُ صاحب الموقع) — والتوسيعُ وحدَه في اليمنى على وسط قوسها ===== */
+.pk--max .pk-max.pk-max--curve.pk-shrink { inset-inline-start: auto; inset-inline-end: -16px; }
+.pk-shrink .pk-sh--side, #cm-body.is-cxfull .pk-shrink .pk-sh--side { display: none; }
+.pk-shrink .pk-sh--solo { display: block; transform: scaleX(-1); }
+html[data-lang="en"] .pk-shrink .pk-sh--solo { transform: none; }
+/* أيقونةُ المساحة أصغرُ وأقربُ إلى زاويتها العليا اليمنى (طلبُ صاحب الموقع) */
+.pk-blkh__ic { width: 18px; height: 18px; margin-inline-start: -6px; margin-top: -6px; }
+.pk-blkh__ic svg { width: 14px; height: 14px; }
+.pk-blkh__ic { margin-top: -14px; }
+.pk-blkh__ic { margin-top: 0; align-self: flex-start; transform: translateY(-8px); }
+.pk-blkh__ic { transform: translateY(-5px); }
+/* ===== قوسا التكبير والتضييق رماديّان محايدان، ولونُهما (الأخضرُ والأحمر) عند المرور وحده (طلبُ صاحب الموقع) ===== */
+.pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__grip,
+.pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(20, 35, 63, .1); }
+.pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__dots,
+.pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #14233f; opacity: .45; }
+html[data-theme="dark"] .pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__grip,
+html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .pk-max--curve:not(:hover):not(:focus-visible) .pk-curve__dots,
+html[data-theme="dark"] .pk-max--curve.pk-shrink:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #e7eff0; opacity: .5; }
+.pk-max--curve .pk-curve__grip, .pk-max--curve .pk-curve__dots { transition: stroke .15s, fill .15s, opacity .15s; }
+/* أيقوناتُ المساحات رماديّةٌ محايدة (طلبُ صاحب الموقع) */
+.pk-blkh__ic, html[data-theme="dark"] .pk-blkh__ic { color: var(--u-mut); }
+/* مفاتيحُ المساحات في الرأس بأسمائها (طلبُ صاحب الموقع) */
+.pk-vbar__cap--nm .pk-vbar__b { width: auto; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px 0 9px; font: 700 12px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
+.pk-vbar__nm { display: inline-block; }
+/* سهمُ الملخّص وقائمتُه */
+.pk-vbar__cap--dd { position: relative; gap: 0; }
+.pk-vbar__cap--dd > .pk-vbar__b:first-child { border-start-end-radius: 0; border-end-end-radius: 0; }
+.pk-vbar__dd { width: 22px !important; padding: 0 !important; border-start-start-radius: 0 !important; border-end-start-radius: 0 !important;
+  border-inline-start: 1px solid var(--u-line) !important; color: var(--u-mut); }
+.pk-vbar__dd svg { width: 13px; height: 13px; transition: transform .15s; }
+.pk-vbar__cap--dd.is-open .pk-vbar__dd svg { transform: rotate(180deg); }
+.pk-vmenu { position: absolute; top: calc(100% + 6px); inset-inline-start: 0; z-index: 20; display: none; flex-direction: column; gap: 2px;
+  min-width: 170px; padding: 5px; border-radius: 12px; background: var(--u-in-bg, #fff);
+  box-shadow: 0 16px 36px -10px rgba(20, 35, 63, .35), 0 0 0 1px var(--u-line); }
+html[data-theme="dark"] .pk-vmenu { background: #2b3437; box-shadow: 0 16px 36px -10px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .08); }
+.pk-vbar__cap--dd.is-open > .pk-vmenu { display: flex; }
+.pk-vmenu__it { display: flex; align-items: center; gap: 9px; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px; background: none; cursor: pointer;
+  font: 700 12.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: var(--u-btntx); text-align: start; white-space: nowrap; }
+.pk-vmenu__it svg { width: 16px; height: 16px; color: var(--u-mut); flex: none; }
+.pk-vmenu__it:hover { background: var(--u-hov); }
+.pk-vmenu__it.on { background: rgba(201, 162, 92, .18); }
+.pk-vmenu__it.on svg { color: #a9852f; }
+html[data-theme="dark"] .pk-vmenu__it.on svg { color: #e1c172; }
+/* ===== المستطيلاتُ على منطقها الأوّل (تمتدّ من اليمين إلى اليسار)، والشريطُ يصعد إلى أعلى سقف الـT بلا هامش (طلبُ صاحب الموقع) =====
+   رأسُ الملخّص صار خطًّا بلا قامة: أيقونتُه وقوسُ إغلاقه يطفوان في زاويتي السقف، والشريطُ بينهما */
+.pk--bandfx .post-ytmain > .pk-blkh--mid { height: 0; margin: 8px 10px 0; align-items: flex-start; }
+.pk--bandfx .post-ytmain > .pk-fstrip { margin-top: 0; margin-inline: 30px; }
+.pk--bandfx .post-ytmain > .pk-split { margin-top: 8px; }
+/* وبلا مجلدات: سقفُ الـT يبقى بقامته (لا تتراكب عليه كتلتا الجانبين) */
+.pk--bandfx .post-ytmain > .pk-blkh--mid + .pk-split { margin-top: 40px; }
+/* قوسُ إغلاق المساحة رماديٌّ محايد، ويحمرّ عند المرور وحده (طلبُ صاحب الموقع) */
+.pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(20, 35, 63, .1); }
+.pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #14233f; opacity: .45; }
+html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__dots { fill: #e7eff0; opacity: .5; }
+.pk-blkh__x .pk-curve__grip, .pk-blkh__x .pk-curve__dots { transition: stroke .15s, fill .15s, opacity .15s; }
+/* لا مساحةَ مفتوحة */
+.pk-split.pk-split--none { min-height: 320px; }
+.pk--max .pk-split.pk-split--none { flex: 1 1 auto; }
+.pk-none { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  color: var(--u-mut); font: 600 14px/1.6 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; text-align: center; }
+.pk-none svg { width: 22px; height: 22px; opacity: .7; }
+.pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden; pointer-events: none; }
+/* لا مساحةَ مفتوحة: المساهمةُ بلا تذييل (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame):has(.pk-split--none) :is(.pk-ftline, .vt-foot, .pk-pubfoot) { display: none; }
+/* الكتلُ تمتدّ تحت عمود الصورة أيضًا (طلبُ صاحب الموقع): لا تلتزم بمحاذاة رأس المساهمة، فتتوازن حافّتاها في المربّع */
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-split, :is(.pk--max, .pk--frame):not(.pk--hdup) .post-ytmain > .pk-split--none { margin-inline-start: -42px; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-fstrip { margin-inline-start: -12px; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-blkh--mid { margin-inline-start: -32px; }
+/* الأيقونةُ داخل انحناء زاوية الكتلة لا فوقه، وقوسُ الإغلاق على الزاوية نفسِها */
+.pk-blkh__ic { margin-inline-start: -2px; transform: translateY(-2px); }
+.post-ytmain > .pk-blkh--mid > .pk-blkh__x { top: -8px; }
+/* منطقةُ مجلدات الملخّص فارغة */
+.pk-fstrip-ph { display: flex; align-items: center; justify-content: center; gap: 8px; height: 40px; margin: 0 30px 0; box-sizing: border-box;
+  border: 1.5px dashed var(--u-line); border-radius: 20px; background: none; color: var(--u-mut);
+  font: 600 12.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+.pk--bandfx:not(.pk--hdup) .post-ytmain > .pk-fstrip-ph { margin-inline-start: -12px; }
+.pk-fstrip-ph svg { width: 16px; height: 16px; opacity: .8; }
+button.pk-fstrip-ph { cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+button.pk-fstrip-ph:hover { border-color: rgba(201, 162, 92, .7); color: #a9852f; background: rgba(201, 162, 92, .06); }
+html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
+.pk--bandfx .post-ytmain > .pk-fstrip-ph + .pk-split { margin-top: 22px; }
+.pk-fstrip-ph { width: -webkit-fill-available; width: -moz-available; width: stretch; }
+/* زرُّ «أوّل …» رُفع من المساحات الفارغة، فأدواتُ الذيل تظهر فيها (طلبُ صاحب الموقع) — إلّا ولا مساحةَ مفتوحة */
+#cm-body .pk--edit .cx-acttools > * { visibility: visible !important; pointer-events: auto !important; }
+#cm-body .pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden !important; pointer-events: none !important; }
+/* مسكةُ الذيل ظاهرةٌ دائمًا: للذيل ارتفاعُ خانة الأدوات فتنزل تحت المسكة ولا تتراكب عليها */
+:is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
+.pk--ftdn .vt-foot { min-height: 0; }
+/* «قائمة · رحلة» لا يظهر والبنكُ فارغ — يظهر حالَ إضافة أوّل شيء (طلبُ صاحب الموقع) */
+#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > .cx-jrseg,
+#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > .cx-jrseg { display: none !important; }
+/* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
+/* التذييلُ المطويّ بطول الترويسة المطويّة (طلبُ صاحب الموقع): ‎20px‎ بين الكتل وحافّة المربّع، والمسكةُ على الحافّة كمسكة الرأس */
+:is(.pk--max, .pk--frame).pk--ftdn .post-ytmain > .pk-split { margin-bottom: 0; }
+:is(.pk--max, .pk--frame).pk--ftdn .pk-ftline { margin-top: 8px; margin-bottom: -14px; }
+.pk--ftanim .post-ytmain > .pk-split { transition: margin .22s ease; }
+/* مفاتيحُ المساحات في الرأس بألوان كتلها (طلبُ صاحب الموقع): المفتوحةُ بلون الكتلة، والنشِطةُ بلون الكتلة النشِطة،
+   والمغلقةُ كما هي */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:has(> .pk-vbar__b.on) { background: var(--pk-blk); border-color: transparent; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on { background: transparent; }
+.pk-act--book .pk-vbar__cap--nm:has(> [data-pkview="source"].on),
+.pk-act--mid .pk-vbar__cap--dd:has(> .pk-vbar__b.on),
+.pk-act--bank .pk-vbar__cap--qb:has(> .pk-vbar__b.on) { background: var(--pk-blk-on) !important; box-shadow: 0 1px 3px rgba(20, 35, 63, .1); }
+html[data-theme="dark"] :is(.pk-act--book, .pk-act--mid, .pk-act--bank) .pk-vbar__cap--nm { box-shadow: none; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm { transition: background .2s, border-color .2s; }
+/* المغلقةُ نصٌّ بلا كبسولة، والكبسولةُ نفسُها علامةُ الفتح (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) { background: transparent; border-color: transparent; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) .pk-vbar__b { color: var(--u-mut); opacity: .75; transition: background .15s, color .15s, opacity .15s; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm:not(:has(> .pk-vbar__b.on)) .pk-vbar__b:hover { opacity: 1; }
+:is(.pk--max, .pk--frame) .pk-vbar__cap--dd:not(:has(> .pk-vbar__b.on)) .pk-vbar__dd { border-inline-start-color: transparent !important; }
+/* الذهبيُّ للنشِطة وحدها (طلبُ صاحب الموقع): المفتوحةُ غيرُ النشِطة بلون النصّ */
+:is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+:is(.pk--max, .pk--frame) .pk-vbar__cap--dd:has(> .pk-vbar__b.on) > .pk-vbar__dd { color: var(--u-ink, #14233f) !important; }
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--nm > .pk-vbar__b.on,
+html[data-theme="dark"] :is(.pk--max, .pk--frame) .pk-vbar__cap--dd:has(> .pk-vbar__b.on) > .pk-vbar__dd { color: #e7eff0 !important; }
+.pk-act--book .pk-vbar__cap--nm > [data-pkview="source"].on,
+.pk-act--mid .pk-vbar__cap--dd > .pk-vbar__b.on,
+.pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color: #a9852f !important; }
+html[data-theme="dark"] .pk-act--book .pk-vbar__cap--nm > [data-pkview="source"].on,
+html[data-theme="dark"] .pk-act--mid .pk-vbar__cap--dd > .pk-vbar__b.on,
+html[data-theme="dark"] .pk-act--bank .pk-vbar__cap--qb > .pk-vbar__b.on { color: #d4b36a !important; }
+/* المساهمةُ الفارغة في التحرير الضيّق: قامةٌ ثابتة مهما فُتح من المساحات وأُغلق (طلبُ صاحب الموقع) —
+   قامةُ المساحات الثلاث مفتوحةً، والمساحاتُ تملأ ما بين الرأس والذيل كما في المكبَّر */
+@media (min-width: 760px) {
+  #cm-body .pk--frame.pk--blank { height: 626px; display: flex; flex-direction: column; }
+  .pk--frame.pk--blank > .post-yt { flex: 1 1 auto; min-height: 0; }
+  .pk--frame.pk--blank .post-ytmain { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+  .pk--frame.pk--blank .post-ytmain > .pk-split { flex: 1 1 auto; min-height: 0; }
+}
+/* شبحُ كتلة الملخّص وهو يخرج: بلونها خلف المحتوى، يذوب مكانَه */
+.pk-midghost { position: absolute; inset: 0; z-index: -1; pointer-events: none; transform-origin: 50% 40%; }
+.pk-midghost > i { position: absolute; border-radius: 16px; background: var(--pk-blk); }
+.pk-midghost.is-on > i { background: var(--pk-blk-on); }
+/* رسماتُ الاستقبال محايدةٌ باهتة، وذهبيّةٌ في المساحة الملموسة وحدها (طلبُ صاحب الموقع) */
+.pk-es { --es-g0: var(--es-g); }
+.pk--edit .pk-es { --es-g: #a9b3b6; --es-gb: rgba(120, 132, 136, .06); }
+html[data-theme="dark"] .pk--edit .pk-es { --es-g: #5f6c70; --es-gb: rgba(255, 255, 255, .03); }
+.pk--edit .pk-es__art { opacity: .6; transition: opacity .2s; }
+.pk--edit .pk-es .es-fg, .pk--edit .pk-es .es-gb, .pk--edit .pk-es .es-g, .pk--edit .pk-es .es-t, .pk--edit .pk-es .es-dot { transition: stroke .2s, fill .2s; }
+.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb { --es-g: #b8862b; --es-gb: rgba(184, 134, 43, .08); }
+html[data-theme="dark"] :is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) { --es-g: #e1c172; --es-gb: rgba(225, 193, 114, .08); }
+:is(.pk-act--book .pk-es--src, .pk-act--mid .pk-es--mid, .pk-act--bank .pk-es--qb) .pk-es__art { opacity: 1; }
+/* عدّاداتُ المساهمة داخل كبسولة البنك، يسارَ اسمه (طلبُ صاحب الموقع) */
+.pk-vbar__stats { display: inline-flex; align-items: center; gap: 2px; padding-inline: 4px 8px; white-space: nowrap; color: var(--u-mut); font-size: 12px; }
+.pk-vbar__stats > span { display: inline-flex; align-items: center; }
+.pk--edit .pk-vbar__stats :is(.x3-trio, .cs) { display: flex !important; }   /* ظاهرةٌ في الكبسولة دائمًا، ولو في وضع الاستقبال */
+/* المنشورةُ المفتوحةُ في موضعها بإطار: مرجعُ طبقة الكتل وسياقُها (وإلّا رُسمت الكتلُ على أوّل سلفٍ مموضَع — فوق التبويبات) */
+#cm-body .pk--framepub { position: relative; isolation: isolate; }
+/* وإطارُها مدوَّرُ الزوايا (طلبُ صاحب الموقع): ما يملأ الرأسَ والذيل (‎100vmax‎) يُقصّ عند حافّته */
+#cm-body .pk--framepub { border-radius: 16px; overflow: hidden; border: 1px solid var(--u-line); margin-block: 6px; padding: 10px 12px 8px; }   /* والصورةُ وما حولها داخلَه لا على حافّته */
+/* والمتّسعةُ في موضعها بلا مساحة: أقصرُ (طلبُ صاحب الموقع) — دعوةٌ إلى الأزرار لا لوحٌ فارغ */
+#cm-body .pk--framepub .pk-split.pk-split--none { min-height: 210px; }
+/* ونقاطُ التعديل في ترويستها، أقصى اليسار على سطر العنوان (طلبُ صاحب الموقع) */
+#cm-body .pk--framepub > .post-yt { position: relative; }
+#cm-body .pk--framepub > .post-yt > .post-menu { position: absolute; top: 20px; inset-inline-end: -4px; z-index: 3; align-self: auto; }
+#cm-body .pk--framepub .x3-pkhd { padding-inline-end: 28px; }
+/* والمتّسعةُ في موضعها: قوسُ التكبير على زاوية إطارها (حشوتُه ‎10 · 12‎ وحدُّه) لا خلف الصورة */
+#cm-body .pk--framepub > .pk-maxdock { position: absolute; top: 0; inset-inline: 0; height: 0; z-index: 6; }
+#cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: -1px; inset-inline-start: -1px; }   /* على حافّة الإطار نفسِها */
+/* تبديلُ طريقة العرض: الكتلةُ (اللوحُ نفسُه) ثابتة، والمحتوى الجديد وحدَه يدخل منزلقًا (طلبُ صاحب الموقع) */
+.pk-split.is-in > .kt-view, html[data-lang="en"] .pk-split.is-in > .kt-view { animation: none; }
+.pk-split.is-in > .kt-view > * { animation: pkSplitIn .34s cubic-bezier(.2, .8, .2, 1) both; }
+html[data-lang="en"] .pk-split.is-in > .kt-view > * { animation-name: pkSplitInEn; }
+@media (prefers-reduced-motion: reduce) { .pk-split.is-in > .kt-view > * { animation: none; } }
+/* وطيُّ الرأس: هوامشُ الموازنة تنتقل بخطى عمود الصورة نفسها (‎.22s ease‎) — كانت تقفز فيميل بطنُ المساهمة ثمّ يعود (شكوى صاحب الموقع) */
+.pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: margin-inline-start .22s ease; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid) { transition: none; } }
+/* ===== والمتّسعةُ لا يتزحزح فيها شيءٌ عن موضعه في الصفّ الضيّق (طلبُ صاحب الموقع) =====
+   الإطارُ (حشوتُه وحدُّه) يُبسط إلى الخارج بهامشٍ سالب، فتبقى الصورةُ والاسمُ والعنوانُ والإعجابُ حيث كانت */
+#cm-body .pk--framepub { margin-inline: -11px; margin-top: 7px; }
+#cm-body .pk--framepub .x3-pkhd.on { padding-bottom: 0; }
+#cm-body .pk--framepub > .post-yt > .post-menu { top: 22px; inset-inline-end: 0; }
+#cm-body .pk--framepub { box-sizing: border-box; }   /* قامتُها تُحرَّك كلّيّةً (من قامة الصفّ الضيّق) */
+/* خلفيّةُ الترويسة ومسكتُها تظهران خلف ما فيها حين تتّسع */
+#cm-body .pk--framepub .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub .pk-hdline:not(.pk-ftline) .pk-hdline__grip { transition: opacity .18s ease-out; }
+#cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frin .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: none; }
+/* والطيّ: خلفيّةُ الترويسة ومسكتُها تخفتان في آخره */
+#cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline)::before, #cm-body .pk--framepub.pk--frout .pk-hdline:not(.pk-ftline) .pk-hdline__grip { opacity: 0; transition: opacity .16s ease-in; }
+/* ===== وطيُّ الرأس: عناصرُ الترويسة ثابتةٌ في مواضعها، والترويسةُ تضيق وحدَها (طلبُ صاحب الموقع) =====
+   عمودُ الصورة ينسحب (‎-42px‎) فيتّسع ما بجانبه نحوه — فيُردّ إليها هامشٌ بقدره وبخطاه نفسها فلا تميل */
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { margin-inline-start: 42px; }
+.pk--hdanim > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { transition: margin-inline-start .22s ease; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt > .post-ytmain > :is(.post-ytmeta, .x3-pkhd, .post-react) { transition: none; } }
+/* والصورةُ كذلك: تخفت في موضعها ولا تنزلق مع انسحاب عمودها */
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-av--yt { transform: translateX(-42px); opacity: 0; }
+html[data-lang="en"] :is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-av--yt { transform: translateX(42px); }
+.pk--hdanim > .post-yt > .post-av--yt { transition: margin-inline-start .22s ease, transform .22s ease, opacity .18s ease, visibility .22s; }
+@media (prefers-reduced-motion: reduce) { .pk--hdanim > .post-yt > .post-av--yt { transition: none; } }
+/* ===== كونسبت الأيقونات العارية (فرعٌ تجريبيّ) ===== */
+#cm-body .pk--icx .x3-pkhd > .pk-vbar { display: none; }
+#cm-body .pk--icx > .post-yt > .post-ytmain { position: relative; }
+#cm-body .pk--icx .pk-icrow { position: absolute; top: 54px; inset-inline-start: 101px; display: flex; gap: 6px; z-index: 4; }
+#cm-body .pk--icx .pk-ic { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 7px; background: none; color: var(--u-mut); cursor: pointer; transition: color .15s; }
+#cm-body .pk--icx .pk-ic svg { width: 17px; height: 17px; }
+#cm-body .pk--icx .pk-ic:hover { color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
+/* مساحةٌ مفتوحة: الأُخريان خارج مربّعها في زاويته العليا اليسرى، وأيقونتُها في ترويستها */
+#cm-body .pk--icx.pk--ic1 .pk-icrow { top: 70px; inset-inline-start: auto; inset-inline-end: 0; gap: 4px; }
+#cm-body .pk--icx .pk-ic.is-on { display: none; }
+.pk-icghost { position: absolute; z-index: -1; border-radius: 16px; background: var(--pk-blk); transform-origin: 0 0; pointer-events: none; }
+/* والصفّ الضيّق: الأيقوناتُ تحت العنوان كذلك */
+#cm-body .pk--icrow > .post-yt > .post-ytmain { position: relative; }
+/* والمربّعُ ينفتح «داخل الترويسة» (طلبُ صاحب الموقع): ما خلفه بلونها نفسِه، لا أرضيّةٌ أخرى */
+/* (ثمّ بطلبه: لا لونَ للمساهمة كلِّها — تبقى كما هي في الصفّ، والمربّعُ وحدَه يظهر) */
+#cm-body .pk--icx.pk--framepub { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic { cursor: pointer; }   /* أيقونةُ المساحة المفتوحة تُغلقها */
+/* والفجوةُ: الأيقونتان فيها (تضعهما ‎pkBandDraw‎)، وإغلاقُ المساحة بأيقونتها لا بالقوس (مكانُه صار الفجوة)، وشريطُ المجلدات يُفسح لها */
+#cm-body .pk--icx.pk--ic1 .pk-icrow { inset-inline: auto; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__x { display: none; }
+#cm-body .pk--icx.pk--ic1 .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-end: 54px; }
+/* والإعجابُ نزل إلى الأسفل: سطرُ الترويسة الثاني يبقى للأيقونات (فلا تسقط تحت مسكة الترويسة) */
+#cm-body .pk--icx.pk--framepub .x3-pkhd { margin-bottom: 26px; }
+/* وفي الكونسبت لا سهمَ توسيع: الأيقوناتُ تفتح، وإغلاقُ آخرِ مساحةٍ يطوي (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .x3-pktg { display: none; }
+/* مربّعٌ خلف الأيقونة حين يُمرَّر عليها — في سطرها وفي الفجوة وفي زاوية مربّعها (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-ic { transition: color .15s, background .15s; }
+#cm-body .pk--icx .pk-ic:hover, #cm-body .pk--icx .pk-ic:focus-visible { background: var(--u-hov, rgba(20, 35, 63, .07)); }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic { border-radius: 7px; transition: color .15s, background .15s, box-shadow .15s; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { background: var(--u-hov, rgba(20, 35, 63, .07)); box-shadow: 0 0 0 4px var(--u-hov, rgba(20, 35, 63, .07)); color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--ic1 .pk-blkh__ic:hover { color: #d4b36a; }
+/* الكونسبت: خطٌّ تحت مسكة الترويسة ومثلُه عند مسكة التذييل — دائمًا، أيًّا كانت المساحةُ الملموسة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-hdline:not(.pk-ftline)::before { border-bottom: 1px solid var(--u-line) !important; }
+#cm-body .pk--icx .pk-ftline::before { border-top: 1px solid var(--u-line) !important; }
+/* والملموسةُ بيضاءُ كالصفحة (لا أرضيّةَ للمساهمة في الكونسبت): يحدّها خطٌّ رفيع فلا تذوب فيها */
+html:not([data-theme="dark"]) #cm-body .pk--icx .pk-band path.pk-blk.is-on { stroke: var(--u-line); stroke-width: 1; }
+/* والمساحةُ مفتوحة: الأيقوناتُ في الفجوة لا تحت العنوان — فلا يُحجز لها سطر، ويقرب خطُّ الترويسة منها (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--framepub.pk--ic1 .x3-pkhd { margin-bottom: 0; }
+#cm-body .pk--icx.pk--framepub .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
+/* ونقاطُ التعديل أصغر */
+#cm-body .pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
+/* والمغلقةُ كلٌّ في فجوتها: تُوضع منفردةً (تضعها ‎pkBandDraw‎) */
+#cm-body .pk--icx.pk--ic1 .pk-icrow { left: 0 !important; top: 0 !important; width: 0; height: 0; }
+#cm-body .pk--icx.pk--ic1 .pk-icrow .pk-ic { position: absolute; }
+#cm-body .pk--icx.pk--ic1 .pk-blkh__ic { transition: transform .2s ease, color .15s, background .15s, box-shadow .15s; }
+#cm-body .pk--icx.pk--icR .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-start: 34px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.kt-view, .pk-src, .pk-bank) { padding-bottom: 40px; box-sizing: border-box; }
+
+/* كونسبت الأيقونات: لوحُ الملخص يمتدّ إلى قاع مساحته ذاتِ الفجوات السفلية ويُقصّ على شكلها (‎pkKcvNotch‎) */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .kt-view--tree { padding-bottom: 12px; }
+#cm-body .pk--icx.pk--icB .pk-split > .kt-view--tree .kcv { min-height: 448px; }
+#cm-body .pk--icx .is-notched { border-color: transparent !important; }
+#cm-body .pk--icx .pk-vwph.is-notched { position: relative; }
+#cm-body .pk--icx .pk-nclip { position: absolute; inset: 0; width: auto; height: auto; pointer-events: none; overflow: visible; }
+/* ومربّعُ «لا يوجد» في المصادر والبنك كذلك: يمتدّ إلى القاع، ونصُّه يبقى في وسط ما بين الفجوتين وأعلاه */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src, .pk-bank):has(> .pk-vwph) { padding-bottom: 12px; }
+.pk-bank--none > .pk-vwph { flex: 1 1 auto; font-size: 14px; }
+/* ومربّعُ «لا يوجد» يصعد إلى رأس مساحته (رأسُها — أيقونتُها — يطفو فوقه في زاويته، والمربّعُ مقطوعٌ حولها) */
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) { position: relative; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-blkh { position: absolute; top: 8px; inset-inline: 10px; margin: 0; z-index: 2; pointer-events: none; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-blkh .pk-blkh__ic { pointer-events: auto; }
+#cm-body .pk--icx .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 97px; box-sizing: border-box; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > :is(.pk-src--none, .pk-bank--none) > .pk-vwph { min-height: 125px; }
+/* ومربّعُ «لا يوجد مجلدات» يمتدّ إلى يسار كتلته (الهامشُ هناك كان لأيقونةٍ صارت في الزوايا السفلى) */
+#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip-ph { margin-inline-end: 12px; }
+/* «ابدأ بـ» وأيقوناتُ المساحات الثلاث في سطرٍ تحت العنوان، على محاذاة بدايته، والإعجابُ تحتها (طلبُ صاحب الموقع) —
+   هادئةٌ لأنّها في كلّ مساهمة: الكلمةُ وحدها ذهبيّةٌ بخطّ KFUPM، والأيقوناتُ بلا إطار */
+#cm-body .pk--icx.pk--icrow .pk-icrow { top: 47px; inset-inline-start: 60px; align-items: center; gap: 4px; }
+#cm-body .pk--icx.pk--icrow .pk-ic { width: 26px; height: 26px; color: #35455c; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow .pk-ic { color: rgba(255, 255, 255, .82); }
+#cm-body .pk--icx .pk-icgo { margin-inline-end: 4px; white-space: nowrap; font: 700 12px/1 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx .pk-icgo { color: rgba(225, 193, 114, .85); }
+#cm-body .pk--icx.pk--ic1 .pk-icgo { display: none; }
+#cm-body .pk--icx.pk--icrow .post-ytmain > .post-react { margin-top: 34px; }
+/* والصفُّ يبدأ حيث يبدأ إطارُه المتّسع (هامشٌ أصغر وحشوٌ أكبر — والترويسةُ في موضعها): فلا يتحرّك أعلاه عند الاتّساع ولا يجرّ التمريرَ معه */
+#cm-body .post.pk--icx.pk--icrow { margin-top: 7px; padding-top: 11px; }
+/* الغلافُ رزمةٌ: تحته في الصفّ طبقتان كحوافّ بطائقَ تحت أولاها، فيملأ ما تحته بلا أن يكبر (طلبُ صاحب الموقع) —
+   ظلالٌ مصمتةٌ متناقصةُ العرض، لا عناصرَ زائدة */
+#cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 8px 0 -2px rgba(255, 255, 255, .12), 0 16px 0 -4px rgba(255, 255, 255, .075), 0 24px 0 -6px rgba(255, 255, 255, .04), 0 26px 10px -8px rgba(0, 0, 0, .4);
+}
+html:not([data-theme="dark"]) #cm-body .pk--icx.pk--icrow .x3-pkhd > .x3-art {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 8px 0 -2px rgba(20, 35, 63, .14), 0 16px 0 -4px rgba(20, 35, 63, .09), 0 24px 0 -6px rgba(20, 35, 63, .05), 0 26px 10px -8px rgba(20, 35, 63, .2);
+}
+/* وأعلى العنوان على أعلى الغلاف: الغلافُ ينزل قليلًا والعنوانُ يعلو قليلًا (وما تحته معه في الصفّ) */
+#cm-body .pk--icx .x3-pkhd > .x3-art { position: relative; top: 3px; }
+#cm-body .pk--icx .x3-pkhd > .x3-pkttl { position: relative; top: -4px; }
+#cm-body .pk--icx.pk--icrow .pk-icrow { top: 43px; }
+#cm-body .pk--icx.pk--icrow .post-ytmain > .post-react { margin-top: 30px; }
+/* وبين أيقونات «ابدأ بـ» فاصلٌ «/» خافت: «ابدأ بـ المصادر / الملخص / الأسئلة» (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic { position: relative; margin-inline-start: 12px; overflow: visible; }
+#cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::before {
+  content: '/'; position: absolute; inset-inline-start: -12px; top: 50%; transform: translateY(-50%); width: 12px; text-align: center;
+  font: 400 15px/1 'IBM Plex Sans Arabic', sans-serif; color: rgba(20, 35, 63, .3); pointer-events: none;
+}
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow .pk-icrow .pk-ic + .pk-ic::before { color: rgba(255, 255, 255, .28); }
+/* وفي الوضع الواسع (ملء الشاشة) لا أزرارَ إغلاقٍ في زوايا المساحات (طلبُ صاحب الموقع) — تُغلق من أزرارها في الترويسة */
+#cm-body :is(.pk--max, .pk--maxpub) .pk-blkh__x { display: none !important; }
+
+/* ===== ROADMAP-MAXICX · الواسعُ كالضيّق (النشر) =====
+   الواسعُ يلبس ‎pk--icx‎: لا ترويسةَ أزرار، وخلفيّةُ الكتلة شفّافة (ويبقى لونُ المساهمة نفسِها لأنّها تملأ الشاشة)،
+   و⋮ أصغر، وبلا مساحةٍ مفتوحة: «ابدأ بـ» والأيقوناتُ تحت العنوان كما في الصفّ (‎pk--icnone‎) */
+#cm-body .pk--icx.pk--max { --pk-band: transparent; --pk-gap: transparent; }
+#cm-body .pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: scale(.72); transform-origin: center; }
+#cm-body .pk--icx.pk--max .post-ytmain > .pk-hdline:not(.pk-ftline) { margin-top: 0; }
+#cm-body .pk--icx.pk--icnone .x3-pkhd { margin-bottom: 34px; }
+#cm-body .pk--icx.pk--icnone .pk-icrow { top: 43px; inset-inline-start: 60px; align-items: center; gap: 4px; }
+#cm-body .pk--icx.pk--icnone .pk-ic { width: 26px; height: 26px; color: #35455c; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-ic { color: rgba(255, 255, 255, .82); }
+#cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic { position: relative; margin-inline-start: 12px; overflow: visible; }
+#cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::before {
+  content: '/'; position: absolute; inset-inline-start: -12px; top: 50%; transform: translateY(-50%); width: 12px; text-align: center;
+  font: 400 15px/1 'IBM Plex Sans Arabic', sans-serif; color: rgba(20, 35, 63, .3); pointer-events: none;
+}
+html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::before { color: rgba(255, 255, 255, .28); }
+/* وفواصلُ «/» تعود بلطفٍ في آخر طيّ آخر مساحة (‎pkIcGo‎) */
+#cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::before { transition: opacity .25s ease-out; }
+#cm-body .pk--icx.pk--sephide .pk-icrow .pk-ic + .pk-ic::before { opacity: 0; }
+/* ومربّعُ «لا يوجد ملخص» كمربّعَي المصادر والبنك: يمتدّ إلى قاع مساحته ويُقصّ على فجواتها */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .kt-view.pk-split__ph:has(> .pk-vwph) { padding-bottom: 12px; }
+#cm-body .pk--icx .post-ytmain > .pk-split > .kt-view.pk-split__ph > .pk-vwph { align-self: stretch; box-sizing: border-box; }
+/* ===== مساهمةُ التحرير الضيّقة بلا مساحة: صفٌّ كالمنشورة (طلبُ صاحب الموقع) — ترويستُها و«ابدأ بـ» وحدهما ===== */
+#cm-body .pk--edit.pk--icx.pk--icrow .post-ytmain > :is(.pk-split, .pk-fstrip, .pk-fstrip-ph, .pk-blkh--mid, .kt-view, #cm-cards, .vt-foot, .pk-hdline) { display: none !important; }
+#cm-body .pk--edit.pk--icx.pk--icrow .post-ytmain { padding-bottom: 24px; }
+#cm-body .post.pk--edit.pk--icx.pk--icrow { background: transparent; border-color: transparent; box-shadow: none; }
+#cm-body .pk--edit.pk--icx.pk--icrow .x3-pkhd.on { border-bottom-color: transparent; }
+/* و«حذف · خاص · تم» في صفّ التحرير المطويّ حيث هي في المتّسع: في الطرف الأيسر */
+#cm-body .pk--edit.pk--icx.pk--icrow > .post-yt { position: relative; }
+#cm-body .pk--edit.pk--icx.pk--icrow > .post-yt > .cx-globs { position: absolute; inset-inline-end: 0; top: 24px; z-index: 3; margin: 0; }
+/* وزرُّ التكبير للمتّسعة وحدَها لا للصفّ المطويّ — كالمنشورة (طلبُ صاحب الموقع) */
+#cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
+/* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
+#cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
