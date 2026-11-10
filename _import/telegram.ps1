@@ -74,6 +74,18 @@ Map 'tg-dr-kirkwood' 364738, 395341
 Map 'tg-dr-abri' 381570
 Map 'tg-dr-booth' 384644
 
+# ===== الملفّات =====
+# ما فُتح وفُحص فلم يكن فيه رقمُ طالبٍ ولا درجةُ أحد. وما دون ‎64KB‎ يسكن المتن، وما فوقه جدولَ ‎media‎ بمفتاحه ‎sha256‎
+$FILES_OK = @(21909, 30011, 58951, 58952, 77676, 124398, 161648, 185580, 277949, 312553, 337953)
+$MEDIA_URL = 'https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/'
+$INLINE_MAX = 64 * 1024
+$MIME = @{ '.pdf' = 'application/pdf'; '.doc' = 'application/msword'; '.rtf' = 'application/rtf'; '.jpg' = 'image/jpeg'; '.png' = 'image/png'
+           '.docx' = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+           '.pptx' = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+           '.xlsx' = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
+$filesDir = '\\?\' + (Join-Path $here 'files')
+$sha = [Security.Cryptography.SHA256]::Create(); $media = [ordered]@{}
+
 # ===== الكتّاب والرسائل =====
 $raw = [IO.File]::ReadAllText((Join-Path $in 'authors.tsv'), [Text.Encoding]::UTF8) -replace "`r", ''
 $parts = $raw -split "#USERS`n"
@@ -92,11 +104,17 @@ foreach ($o in ($sel | Sort-Object { [int]$_.id })) {
     if ($U[$x.from].del) { $skip.deleted++; continue }
     if ($x.fwd -or $m.fwd) { $skip.fwd++; continue }
     $sec = $(if ($TOINFO -contains $id) { 'info' } else { $o.sec })
-    if ($x.media -in 'messageMediaDocument', 'messageMediaPhoto' -or $m.media) { $pending.Add("$id`t$sec`tmedia`t$($m.media) $($m.mtitle)"); continue }
+    $file = $null
+    if ($x.media -in 'messageMediaDocument', 'messageMediaPhoto' -or $m.media) {
+        # الملفُّ يُنقل في المصادر وحدها، وبعد أن يُفتح ويُفحص (‎$FILES_OK‎) — وهو في ‎_import\files\telegram-<id>-<اسمه>‎
+        $hit = @(Get-ChildItem -LiteralPath $filesDir -Filter "telegram-$id-*")
+        if ($sec -like 'src*' -and $FILES_OK -contains $id -and $hit.Count -eq 1) { $file = $hit[0] }
+        else { $pending.Add("$id`t$sec`tmedia`t$($m.media) $($m.mtitle)"); continue }
+    }
     $hidden = @($m.links | Where-Object { $m.text.IndexOf($_.TrimEnd('/')) -lt 0 })
     if ($hidden.Count) { $pending.Add("$id`t$sec`thidden-link`t$(([uri]$hidden[0]).Host)"); continue }
-    if (-not $m.text.Trim()) { $pending.Add("$id`t$sec`tempty`t"); continue }
-    $keep += [pscustomobject]@{ id = $id; sec = $sec; from = $x.from; ts = $x.ts; text = $m.text }
+    if (-not $m.text.Trim() -and -not $file) { $pending.Add("$id`t$sec`tempty`t"); continue }
+    $keep += [pscustomobject]@{ id = $id; sec = $sec; from = $x.from; ts = $x.ts; text = $m.text; file = $file }
 }
 
 $users = [ordered]@{}
@@ -119,9 +137,26 @@ foreach ($sec in 'info', 'srcU', 'srcP') {
     foreach ($g in ($keep | Where-Object { $_.sec -eq $sec } | Group-Object from)) {
         $rs = @($g.Group | Sort-Object id); $uid = Author $g.Name; $imp = Imp $rs[0]
         if ($rs.Count -gt 1) { $imp.mids = @($rs | ForEach-Object { $_.id }) }
-        $text = ($rs | ForEach-Object { $_.text }) -join "`n`n"
-        $data = $(if ($sec -eq 'info') { [ordered]@{ desc = $text; type = ''; rel = 0; lang = ''; book = ''; imp = $imp } }
-                  else { [ordered]@{ html = ((Esc $text) -split "`n") -join '<br>'; files = @{}; imp = $imp } })
+        if ($sec -eq 'info') {
+            $data = [ordered]@{ desc = (($rs | ForEach-Object { $_.text }) -join "`n`n"); type = ''; rel = 0; lang = ''; book = ''; imp = $imp }
+        } else {
+            # نصُّ الرسالة أسطرًا، وملفُّها بعده (في تيليقرام الملفُّ والتعليقُ رسالةٌ واحدة)
+            $fobj = [ordered]@{}; $parts = New-Object 'System.Collections.Generic.List[string]'
+            foreach ($r in $rs) {
+                $h = @(); if ($r.text.Trim()) { $h += ((Esc $r.text) -split "`n") -join '<br>' }
+                if ($r.file) {
+                    $fid = "tg-f$($r.id)-0"; $raw = [IO.File]::ReadAllBytes($r.file.FullName)
+                    $name = $r.file.Name -replace '^telegram-\d+-', ''
+                    $mt = $MIME[$r.file.Extension.ToLower()]; if (-not $mt) { $mt = 'application/octet-stream' }
+                    if ($raw.Length -le $INLINE_MAX) { $v = "data:$mt;base64," + [Convert]::ToBase64String($raw) }
+                    else { $k = -join ($sha.ComputeHash($raw) | ForEach-Object { $_.ToString('x2') }); $media[$k] = @{ mime = $mt; raw = $raw }; $v = $MEDIA_URL + $k }
+                    $fobj[$fid] = [ordered]@{ name = $name; v = $v }
+                    $h += [char]0x200b + "<span data-fid=`"$fid`" class=`"src-fchip`" contenteditable=`"false`"></span>" + [char]0x200b
+                }
+                $parts.Add($h -join '<br><br>')
+            }
+            $data = [ordered]@{ html = ($parts -join '<br><br>'); files = $fobj; imp = $imp }
+        }
         $posts.Add([ordered]@{ id = "tg-p$($rs[0].id)-$lc"; uid = $uid; code = $Code; sec = $sec; ts = $rs[0].ts; st = 'pub'; data = $data })
     }
 }
@@ -175,6 +210,22 @@ foreach ($p in $posts) {
 $L.Add('COMMIT;')
 [IO.File]::WriteAllText((Join-Path $out "$slug-tg.sql"), (($L -join "`n") + "`n"), $enc)
 [IO.File]::WriteAllLines((Join-Path $in 'pending.tsv'), $pending, $enc)
+# ‏والوسائطُ في ملفّاتٍ وحدَها — كلُّ ملفٍّ عبارةٌ مستقلّة، فتُرسَل واحدةً واحدة (الكبيرُ لا يدخل دفعةَ ‎900KB‎)
+Get-ChildItem $out -Filter "$slug-tg-media-*.sql" | Remove-Item
+$i = 0
+foreach ($k in $media.Keys) {
+    $i++; $x = $media[$k]
+    # محرّرُ ‎SQL‎ في لوحة ‎Supabase‎ يردّ ما فوق ‎1MB‎ تقريبًا: فالملفُّ قطعٌ من ‎540KB‎ — الأولى تُنشئ الصفّ، وكلُّ تاليةٍ
+    # تُلحق بشرط أن يكون طولُ الموجود هو موضعَها بالضبط، فإعادةُ تشغيل قطعةٍ لا تكرّرها
+    $step = 540000; $p = 0
+    for ($off = 0; $off -lt $x.raw.Length; $off += $step) {
+        $p++; $n = [Math]::Min($step, $x.raw.Length - $off); $b64 = [Convert]::ToBase64String($x.raw, $off, $n)
+        $s = $(if ($off -eq 0) { "INSERT INTO media (k, mime, size, bytes, uid, ts) VALUES ($(Q $k), $(Q $x.mime), $($x.raw.Length), decode($(Q $b64), 'base64'), 'u-academia', $now) ON CONFLICT (k) DO NOTHING;" }
+               else { "UPDATE media SET bytes = bytes || decode($(Q $b64), 'base64') WHERE k = $(Q $k) AND octet_length(bytes) = $off;" })
+        [IO.File]::WriteAllText((Join-Path $out ("$slug-tg-media-{0:d2}-{1:d2}.sql" -f $i, $p)), $s + "`n", $enc)
+    }
+}
+"media files: $($media.Count)"
 
 "selected: $($sel.Count)  kept: $($keep.Count)  pending: $($pending.Count)  skipped: deleted=$($skip.deleted) anon=$($skip.anon) fwd=$($skip.fwd) drop=$($skip.drop)"
 "pending by reason: " + (($pending | ForEach-Object { ($_ -split "`t")[2] } | Group-Object | ForEach-Object { "$($_.Name)=$($_.Count)" }) -join ' ')
