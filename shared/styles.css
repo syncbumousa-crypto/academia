@@ -17742,3 +17742,6 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 /* وفواصلُ «/» تعود بلطفٍ في آخر طيّ آخر مساحة (‎pkIcGo‎) */
 #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::before { transition: opacity .25s ease-out; }
 #cm-body .pk--icx.pk--sephide .pk-icrow .pk-ic + .pk-ic::before { opacity: 0; }
+/* ومربّعُ «لا يوجد ملخص» كمربّعَي المصادر والبنك: يمتدّ إلى قاع مساحته ويُقصّ على فجواتها */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .kt-view.pk-split__ph:has(> .pk-vwph) { padding-bottom: 12px; }
+#cm-body .pk--icx .post-ytmain > .pk-split > .kt-view.pk-split__ph > .pk-vwph { align-self: stretch; box-sizing: border-box; }
