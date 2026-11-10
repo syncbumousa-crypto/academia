@@ -106,6 +106,16 @@ PICK = {
     (117655, 3,  '', None),                                   # mu7md (2012): أنواعُ الرسائل في الفاينل
     (100996, 2,  '', None),                                   # AFLATOON (2011): رسالةُ شكوى وردُّها
   ],
+  # ‏‎IAS 212‎ «الأخلاق المهنيّة» — بالرقم نفسه منذ 2008 (و‎IAS 211‎ في الخطط القديمة هي هي: «211 المفروض 212»)
+  'IAS 212': [
+    (120494, 3,  '', None), (120494, 7,  '', None), (120494, 8,  '', None),   # موضوعُ تقييم المقرّر
+    (120494, 9,  '', None), (120494, 12, '', None), (120494, 14, '', None),
+    (120494, 16, '', None), (120494, 18, '', None), (120494, 22, '', None),
+    (120494, 23, '', None),
+    (110802, 4,  '', None),                                   # mr-3b0d (2011): الفاينل أصعب من المياجر
+    (89385,  4,  '', None),                                   # the_champion (2010): القريدات ستاندرد في مواد IAS
+    (107153, 2,  '', None),                                   # The_Marvel (2011): ‏‎IAS 211‎ في الخطّة هي ‎IAS 212‎
+  ],
 }
 
 # ===== المصادر =====
@@ -192,6 +202,20 @@ PICK_SRC = {
     ('srcU', 117655, 19, []),    # user4325 (2012): موقعٌ يعلّمك أنواعَ الرسائل
     ('srcU', 173018, 4,  []),    # abo-da7m (2016): الكتاب وأمثلةُ أسئلة الفاينل
     ('srcP', 162403, 15, [('ENGL214 Final T133 FINAL VERSION NEW (3).docx', 'stkfupm-162403-15-ENGL214 Final T133 FINAL VERSION NEW (3).docx', r'^ENGL214 Final T133')]),   # CS_Scientist (2017): فاينل صيف 133
+  ],
+  'IAS 212': [
+    ('srcU', 69958,  9,  [('الأخلاق المذمومة.doc', 'stkfupm-69958-9-الأخلاق المذمومة.doc', r'^الأخلاق المذمومة\.doc'),
+                          ('الأخلاق المهنية في الأنظمة السعودية.doc', 'stkfupm-69958-9-الأخلاق المهنية في الأنظمة السعودية.doc', r'^الأخلاق المهنية في الأنظمة'),
+                          ('المخالفات المهنية ووسائل التغلب عليها.doc', 'stkfupm-69958-9-المخالفات المهنية ووسائل التغلب عليها.doc', r'^المخالفات المهنية')]),   # user3270 (2009): ملخّصاتٌ أعطاه إيّاها الدكتور
+    ('srcU', 104553, 1,  []),    # AFLATOON (2011): نوتةُ الميجر الأوّل وما فيها
+    ('srcP', 118021, 1,  []),    # 27Mansour (2012): أسئلةُ الفاينلات السابقة بأجوبتها
+    ('srcP', 146339, 2,  []),    # Guest (2013): أسئلةُ مراجعةٍ بأجوبتها
+    ('srcP', 170592, 3,  []),    # F.TORRES (2015): الاختبارُ النصفيّ ترم 131
+    ('srcP', 100780, 4,  []),    # user6441 (2011): فاينل 93 بأجوبته
+    ('srcP', 100780, 22, [('فاينل 93.doc', 'stkfupm-100780-22-فاينل 93.doc', r'^فاينل 93\.doc')]),   # EvErEst (2011): فاينل 93 في ملفّ
+    ('srcP', 100780, 35, [('ias 212 old exams.zip', 'stkfupm-100780-35-ias 212 old exams.zip', r'ias 212 old exams\.zip')]),   # equal (2011): اختباراتٌ قديمة من 072 إلى 093
+    ('srcP', 100780, 51, [('أسئلة الاختبار النهائي.docx', 'stkfupm-100780-51-أسئلة الاختبار النهائي.docx', r'^أسئلة الاختبار النهائي')]),   # ME_I10 (2012): فاينل 103
+    ('srcP', 97134,  5,  [('نموذج الاختبار.doc', 'stkfupm-97134-5-نموذج الاختبار ال.doc', r'^%d9%86')]),   # user6801 (2010): نموذجُ اختبار
   ],
 }
 
@@ -307,10 +331,46 @@ DOCTORS = {
   'stk-dr-en182475': 'Mr. Christopher Bartle',
   'stk-dr-en183514': 'Mr. M. Aurelius',
   'stk-dr-en184166': 'Mr. Dragos Brad',
+  # ‏‎IAS 212‎ و‎IAS 121‎ — بأسماء صفحاتهم، بصيغة قائمة المادّة العربيّة
+  'stk-dr-mashookhi': 'د. عبدالله المشوخي',
+  'stk-dr-sendi':     'د. حسن سندي',
+  'stk-dr-humaidan':  'د. عصام الحميدان',
+  'stk-dr-muzeini':   'د. خالد المزيني',
+  'stk-dr-afzal':     'د. حافظ أفضل',
+  'stk-dr-yzahrani':  'أ. يحيى الزهراني',
+  'stk-dr-enaizan':   'د. أحمد العنيزان',
+  'stk-dr-khushaim':  'د. فهد الخشيم الدوسري',
+  'stk-dr-khaldi':    'د. عبدالرحمن الخالدي',
+  'stk-dr-rharbi':    'د. راكان الحربي',
+  'stk-dr-shebl':     'د. رامي الشبل',
+  'stk-dr-aomar':     'د. أحمد العمر',
+  'stk-dr-aibrahim':  'د. عبدالله إبراهيم',
+  'stk-dr-jurayan':   'د. خالد الجريان',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
 PICK_DOC = {
+  # ‏‎IAS 212‎ — من صفحات المدرّسين: ما صرّح كاتبُه أنّه عن 212
+  'IAS 212': [
+    (68621, 21, 'stk-dr-mashookhi'), (68621, 24, 'stk-dr-mashookhi'), (68621, 57, 'stk-dr-mashookhi'), (68621, 58, 'stk-dr-mashookhi'), (68621, 64, 'stk-dr-mashookhi'), (68621, 68, 'stk-dr-mashookhi'),
+    (68622, 25, 'stk-dr-sendi'), (68622, 27, 'stk-dr-sendi'), (68622, 28, 'stk-dr-sendi'), (68622, 35, 'stk-dr-sendi'), (68622, 36, 'stk-dr-sendi'), (68622, 45, 'stk-dr-sendi'), (68622, 46, 'stk-dr-sendi'), (68622, 47, 'stk-dr-sendi'), (68622, 48, 'stk-dr-sendi'), (68622, 61, 'stk-dr-sendi'),
+    (68628, 39, 'stk-dr-humaidan'), (68628, 56, 'stk-dr-humaidan'), (68628, 60, 'stk-dr-humaidan'), (68628, 61, 'stk-dr-humaidan'), (68628, 64, 'stk-dr-humaidan'), (68628, 66, 'stk-dr-humaidan'), (68628, 80, 'stk-dr-humaidan'), (68628, 81, 'stk-dr-humaidan'), (68628, 83, 'stk-dr-humaidan'), (68628, 84, 'stk-dr-humaidan'), (68628, 86, 'stk-dr-humaidan'),
+    (68633, 27, 'stk-dr-muzeini'), (68633, 30, 'stk-dr-muzeini'), (68633, 32, 'stk-dr-muzeini'), (68633, 33, 'stk-dr-muzeini'), (68633, 34, 'stk-dr-muzeini'), (68633, 36, 'stk-dr-muzeini'),
+    (68637, 71, 'stk-dr-suliman'), (68637, 72, 'stk-dr-suliman'),
+    (68639, 34, 'stk-dr-afzal'), (68639, 52, 'stk-dr-afzal'),
+    (148170, 5, 'stk-dr-yzahrani'), (148170, 6, 'stk-dr-yzahrani'), (148170, 9, 'stk-dr-yzahrani'), (148170, 10, 'stk-dr-yzahrani'), (148170, 11, 'stk-dr-yzahrani'), (148170, 12, 'stk-dr-yzahrani'), (148170, 13, 'stk-dr-yzahrani'),
+    (148171, 11, 'stk-dr-enaizan'),
+    (148173, 2, 'stk-dr-khushaim'), (148173, 3, 'stk-dr-khushaim'), (148173, 9, 'stk-dr-khushaim'), (148173, 10, 'stk-dr-khushaim'),
+    (148174, 19, 'stk-dr-khaldi'), (148174, 21, 'stk-dr-khaldi'), (148174, 22, 'stk-dr-khaldi'), (148174, 23, 'stk-dr-khaldi'), (148174, 24, 'stk-dr-khaldi'), (148174, 25, 'stk-dr-khaldi'), (148174, 26, 'stk-dr-khaldi'), (148174, 28, 'stk-dr-khaldi'), (148174, 31, 'stk-dr-khaldi'), (148174, 32, 'stk-dr-khaldi'), (148174, 34, 'stk-dr-khaldi'), (148174, 37, 'stk-dr-khaldi'), (148174, 38, 'stk-dr-khaldi'), (148174, 39, 'stk-dr-khaldi'),
+    (179107, 3, 'stk-dr-rharbi'), (179107, 4, 'stk-dr-rharbi'), (179107, 9, 'stk-dr-rharbi'), (179107, 13, 'stk-dr-rharbi'), (179107, 14, 'stk-dr-rharbi'),
+    (180680, 2, 'stk-dr-shebl'), (180680, 5, 'stk-dr-shebl'),
+    (183545, 6, 'stk-dr-aomar'), (183545, 7, 'stk-dr-aomar'), (183545, 8, 'stk-dr-aomar'), (183545, 9, 'stk-dr-aomar'), (183545, 10, 'stk-dr-aomar'), (183545, 11, 'stk-dr-aomar'), (183545, 12, 'stk-dr-aomar'), (183545, 13, 'stk-dr-aomar'), (183545, 14, 'stk-dr-aomar'),
+  ],
+  # ‏‎IAS 121‎ «أسس اللغة» — جديدة (منذ 2019)، وما في المنتدى عنها إلّا تقييماتُ مدرّسيها
+  'IAS 121': [
+    (68612, 88, 'stk-dr-aibrahim'), (68612, 89, 'stk-dr-aibrahim'), (68612, 90, 'stk-dr-aibrahim'),
+    (172426, 34, 'stk-dr-jurayan'),
+  ],
   # ‏‎ENGL 214‎ — من صفحات المدرّسين: ما صرّح كاتبُه أنّه عن 214
   'ENGL 214': [
     (68435, 13, 'stk-dr-en68435'),
