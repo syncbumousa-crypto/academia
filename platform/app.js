@@ -5943,6 +5943,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لا يدخل أحدٌ به. */
   const IMP_SRC = {
     stkfupm: { n: 'STKFUPM', logo: 'assets/brand/stkfupm-logo.svg', t: 'منقولة من مجتمع STKFUPM' },
+    telegram: { n: 'Telegram', logo: 'assets/brand/telegram-logo.svg', t: 'منقولة من قروب تيليقرام' },
   };
   function impBadge(p) {
     const im = p && p.data && p.data.imp;
