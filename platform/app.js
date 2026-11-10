@@ -1141,7 +1141,7 @@
       teach: 'الشرح', grade: 'سخاء وعدل تصحيحه', gradeS: 'سخاء وعدل تصحيحه',
       days: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       daysShort: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس'],
-      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم',
+      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم', gradeNotePh: 'ملاحظة عن الدرجات: سلّم التقديرات، درجة كل سؤال… (اختياري)',
       distTitle: 'توزيع الدرجة (100%)', distShort: 'توزيع الدرجة', addItem: 'إضافة بند', itemPh: 'اسم البند…',
       remaining: n => `المتبقي ${n}%`, complete: 'اكتمل التوزيع ✓',
       absSec: 'الغياب والتأخير', subAbsence: 'الغياب', subLate: 'التأخير', absPolicy: 'سياسة الغياب والتأخير', expandPost: 'توسيع', collapsePost: 'طيّ',
@@ -1603,7 +1603,7 @@
       teach: 'Teaching', grade: 'Grading generosity & fairness', gradeS: 'Grading generosity & fairness',
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
       daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
-      gradeSec: 'Grade breakdown', methodLabel: 'Grading method',
+      gradeSec: 'Grade breakdown', methodLabel: 'Grading method', gradeNotePh: 'A note on grading: grade scale, points per question… (optional)',
       distTitle: 'Grade breakdown (100%)', distShort: 'Grade breakdown', addItem: 'Add item', itemPh: 'Item name…',
       remaining: n => `${n}% left`, complete: 'Fully allocated ✓',
       absSec: 'Absence & lates', subAbsence: 'Absence', subLate: 'Lates', absPolicy: 'Absence & lateness policy', expandPost: 'Expand', collapsePost: 'Collapse',
@@ -4333,7 +4333,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     switch (sec) {
       case 'info':  return { desc: '', type: '', rel: 0, lang: '', book: '' };   // «المادة»: النوعية + اللغة + الترابط + اسم الكتاب + الوصف
       case 'doc':   return { docs: [] };
-      case 'grade': return { method: 'avg', items: [] };
+      case 'grade': return { method: 'avg', items: [], note: '' };   // ‎note‎: كلامٌ عن الدرجات لا يُجدول نِسَبًا
       case 'abs':   return { free: 0, dedFrom: 0, dedAmt: 0, dn: 0, late: 0 };   // الغياب والتأخير معًا
       case 'srcU':  case 'srcP': return { html: '', files: {} };
       case 'lessons': return { items: [] };   // درس: {num: رقم الشابتر, name: اسمه} والترتيب = موقعه
@@ -5304,6 +5304,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* شريط توزيع الدرجة + اسم كل بند عند لونه، متناوبًا فوق البار وتحته (يمين→يسار: الأول تحت، الثاني فوق، …)
      لمنع التداخل. صفّا التسميات (علوي/سفلي) يطابقان عرض الشرائح فيحاذي كلٌّ لونه، تصله ساق ملوّنة */
+  /* ملاحظةُ التقييم (‎data.note‎): كلامٌ عن الدرجات لا يصير جدولَ نِسَب — سلّمُ تقديرات، درجةُ كلّ سؤال،
+     بنيةُ اختبار. نصٌّ كما كُتب، تحت الشريط إن وُجد وحدَه إن لم يوجد */
+  function gNoteHTML(note) {
+    const t = String(note || '').trim();
+    return t ? `<div class="gnote" dir="auto">${esc(t)}</div>` : '';
+  }
   function gDistHTML(items) {
     const rem = Math.max(0, 100 - items.reduce((s, x) => s + x.pct, 0));
     const segs = items.map((x, i) =>
@@ -5411,8 +5417,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
-        return gDistHTML(items) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
+        return gDistHTML(items) + gNoteHTML(d.note) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
       }
       case 'abs': {
         const A = d;
@@ -5507,9 +5513,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
         /* توزيع الدرجة أولًا، ثم طريقة التقييم أسفله */
-        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) +
+        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) + gNoteHTML(d.note) +
           kv(T().methodLabel + ':', `<span class="v-badge v-badge--g">${d.method === 'avg' ? 'Average' : 'Standard'}</span>`);
       }
       case 'abs': {
@@ -5559,7 +5565,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function isEmptyData(sec, d) {
     switch (sec) {
       case 'info':  return !d.desc && !d.type && !(d.rel > 0) && !d.lang && !d.book;
-      case 'grade': return !(d.items && d.items.length);
+      case 'grade': return !(d.items && d.items.length) && !String(d.note || '').trim();
       case 'abs':   return !(d.free || d.dedFrom || d.dedAmt || d.dn || d.late);
       case 'srcU':  case 'srcP': {
         const doc = srcDocOf(d);
@@ -5886,7 +5892,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const distChip = `<span class="v-badge v-badge--g grade-chip"><i class="v-lab">${T().distShort}</i>${gItems.length ? `<span class="grade-chip__bar">${gBarHTML(gItems)}</span>` : `<b class="v-val">—</b>`}</span>`;
         const methodChip = gd.method ? `<span class="v-badge v-badge--g"><i class="v-lab">${T().methodLabel}</i><b class="v-val">${gd.method === 'avg' ? 'Average' : 'Standard'}</b></span>` : '';
         /* بلا سهم: المستطيلان يعرضان كل ما في المساهمة، فلا نصّ وراءهما يُوسَّع */
-        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>`;
+        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>${gNoteHTML(gd.note)}`;
       }
       return `<div class="post pk pk--fold pk--info${open ? ' pk--open' : ''} pk--peek" ${dataAttr}>
         <div class="post-yt">
@@ -6162,6 +6168,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${mdropHTML('gmethod', 'gmethod', g.method || 'avg', [['avg', 'Average'], ['std', 'Standard']])}
           </span>
         </div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(g.note || '')}</textarea>
       </div>`;
     return `<div class="post pk pk--peek pk--edit" data-pi="${i}" data-sub="grade">
       <div class="post-yt">
@@ -6880,7 +6887,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           <span class="cm-k">${T().distTitle}</span>
           <button type="button" class="cm-adddoc" id="cm-additem" title="${T().addItem}">+</button>
         </div>
-        <div id="cm-gbody"></div>`;
+        <div id="cm-gbody"></div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(gradingOf(cmCode).note || '')}</textarea>`;
       case 'abs': return `
         <p class="cm-sec__t">${T().absSec}</p>
         <div id="cm-abs"></div>`;
@@ -32384,6 +32392,7 @@ void main() {
       return;
     }
     /* بنود التقييم: الاسم يُحفظ مباشرة، والسلايدر يحدّث الشريط حيًّا بلا إعادة رسم (حتى لا ينقطع السحب) */
+    if (e.target.id === 'cm-gnote') { gradingOf(cmCode).note = e.target.value; save(); return; }
     if (e.target.classList.contains('gi-name')) {
       const g = gradingOf(cmCode);
       g.items[+e.target.closest('.gitem').dataset.i].name = e.target.value;

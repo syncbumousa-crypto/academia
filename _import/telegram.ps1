@@ -33,6 +33,7 @@ $GRADE = @{
   117134 = @(@('رايت تست', 15), @('رايت تست', 15), @('المد', 25), @('الفاينل: الرايت', 25), @('الفاينل: القرامر و الريد و الفوكاب', 20))
   393721 = @(@('رايتنق ون', 15), @('رايتنق تو', 15), @('ميد', 25), @('فاينل', 45))
 }
+$GRADE_NOTE = @{ 14292 = '^D 60%' }   # سلّمُ التقديرات الذي أتبعه بالتوزيع
 # ‏‎lessons‎: نمطُ الأسطر التي تُؤخذ من نصّ الكاتب
 $LESSONS = @{ 17955 = '^(Compare|Cause|Argumentative)'; 245706 = '^Text \d'; 378010 = '^TEXT \d'; 272771 = '^G\d'; 350074 = '^\d\.' }
 $DOCTORS = [ordered]@{
@@ -165,7 +166,14 @@ foreach ($r in ($keep | Where-Object { $_.sec -in 'grade', 'lessons' })) {
     $uid = Author $r.from; $imp = Imp $r
     if ($r.sec -eq 'grade') {
         if (-not $GRADE.ContainsKey($r.id)) { throw "grade $($r.id) has no spec: add it to `$GRADE or `$TOINFO" }
-        $data = [ordered]@{ method = 'avg'; items = @($GRADE[$r.id] | ForEach-Object { [ordered]@{ name = $_[0]; pct = $_[1] } }); imp = $imp }
+        # ‏‎note‎: ما بقي من كلامه عن الدرجات مما لا يُجدول (سلّمُ تقديرات…) — من أوّل سطرٍ يطابق النمط إلى آخر رسالته
+        $note = ''
+        if ($GRADE_NOTE.ContainsKey($r.id)) {
+            $ls = $r.text -split "`n"; $k = 0; while ($k -lt $ls.Count -and $ls[$k] -notmatch $GRADE_NOTE[$r.id]) { $k++ }
+            if ($k -ge $ls.Count) { throw "grade note pattern not found in $($r.id)" }
+            $note = ($ls[$k..($ls.Count - 1)] -join "`n").Trim()
+        }
+        $data = [ordered]@{ method = 'avg'; items = @($GRADE[$r.id] | ForEach-Object { [ordered]@{ name = $_[0]; pct = $_[1] } }); note = $note; imp = $imp }
     } else {
         if (-not $LESSONS.ContainsKey($r.id)) { throw "lessons $($r.id) has no spec: add it to `$LESSONS or `$TOINFO" }
         $names = New-Object 'System.Collections.Generic.List[string]'

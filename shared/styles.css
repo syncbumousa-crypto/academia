@@ -17757,3 +17757,7 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 #cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
 /* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
 #cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
+
+/* ملاحظة «توزيع الدرجات» (data.note): نصٌّ كما كُتب تحت الشريط */
+.gnote { white-space: pre-wrap; margin-top: 8px; line-height: 1.75; font-size: .92em; overflow-wrap: anywhere; unicode-bidi: plaintext; text-align: start; }
+.gnote-in { display: block; width: 100%; margin-top: 8px; min-height: 2.6em; }
