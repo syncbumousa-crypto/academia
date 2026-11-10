@@ -38,7 +38,8 @@ $DOCTORS = [ordered]@{
   'tg-dr-vernon' = 'Sam Douglas Vernon'; 'tg-dr-watts' = 'Stephen Watts'; 'tg-dr-saddia' = 'Saddia'
   'tg-dr-jamesjoseph' = 'James Joseph'; 'tg-dr-cook' = 'Austin Cook'; 'tg-dr-ross' = 'Ross Martin'; 'tg-dr-tylor' = 'Tylor'
   'tg-dr-flores' = 'David Flores'; 'tg-dr-kirkwood' = 'Kristian Kirkwood'; 'tg-dr-abri' = 'العبري'; 'tg-dr-booth' = 'Dawn Booth'
-  'stk-dr-en115421' = 'Mr. Keith Pearson'; 'stk-dr-en96633' = 'Mr. Lance King'   # في قائمة المادّة من نقل STKFUPM
+  'tg-dr-arnolds' = 'Keith Arnolds'; 'tg-dr-pits' = 'Jamy Pits'; 'tg-dr-brookshire' = 'Barret Brookshire'
+  'stk-dr-en179113' = 'Mr. Jordan Hicks'; 'stk-dr-en115421' = 'Mr. Keith Pearson'; 'stk-dr-en96633' = 'Mr. Lance King'   # في قائمة المادّة من نقل STKFUPM
 }
 $DOCOF = @{}
 function Map($k, $ids) { foreach ($i in $ids) { $script:DOCOF[$i] = $k } }
@@ -91,11 +92,11 @@ $meta = @{}; foreach ($l in ($parts[0] -split "`n")) { $c = $l -split "`t"; if (
 $U = @{}; foreach ($l in ($parts[1] -split "`n")) { $c = $l -split "`t"; if ($c.Count -ge 4) { $U[$c[0]] = @{ user = $c[1]; del = $c[2] -eq '1'; photo = $c[3] -eq '1'; name = $(if ($c.Count -gt 4) { $c[4] } else { '' }) } } }
 $sel = [IO.File]::ReadAllLines((Join-Path $in 'selected.jsonl'), [Text.Encoding]::UTF8) | Where-Object { $_.Trim() } | ForEach-Object { $_ | ConvertFrom-Json }
 
-$pass = [IO.File]::ReadAllLines((Join-Path $in 'pass2.jsonl'), [Text.Encoding]::UTF8) | Where-Object { $_.Trim() } | ForEach-Object { $_ | ConvertFrom-Json }
+$pass = [IO.File]::ReadAllLines((Join-Path $in 'pass3.jsonl'), [Text.Encoding]::UTF8) | Where-Object { $_.Trim() } | ForEach-Object { $_ | ConvertFrom-Json }
 $selSec = @{}; foreach ($o in $sel) { $selSec[[int]$o.id] = $o.sec }
 # ‏ما اختير ولم يمرّ بالمرور الثاني (مؤجَّلٌ لملفّه، أو صفٌّ ثانٍ دُمج) يدخل بتبويبه الأوّل قطعةً واحدة — فتجري عليه القواعدُ نفسُها
 $inPass = @{}; foreach ($o in $pass) { $inPass[[int]$o.id] = 1 }
-$pass = @($pass) + @($sel | Where-Object { -not $inPass[[int]$_.id] } | ForEach-Object {
+$pass = @($pass) + @($sel | Where-Object { -not $inPass[[int]$_.id] -and $FILES_OK -contains [int]$_.id } | ForEach-Object {
     [pscustomobject]@{ id = [int]$_.id; verdict = 'keep'; segs = @([pscustomobject]@{ sec = $_.sec; from = 1; to = ($by[[int]$_.id].text -split "`n").Count; doctor = $_.doctor }) } })
 
 # ===== من الرسالة إلى قِطَع =====
@@ -148,7 +149,7 @@ foreach ($o in ($pass | Sort-Object { [int]$_.id })) {
         $sec = $s.sec
         if ($sec -eq 'lessons' -and $q) { $sec = 'info' }   # قائمةُ المواضيع بنودٌ لا نصّ: لا موضعَ فيها لسؤال، فتُقرأ في «المادة» مع سؤالها
         $f = $null; if ($file -and -not $fileUsed -and $sec -like 'src*') { $f = $file; $fileUsed = $true }
-        $pieces.Add([pscustomobject]@{ id = $id; sec = $sec; from = $x.from; ts = $x.ts; text = $t; q = $q; file = $f; items = $s.items })
+        $pieces.Add([pscustomobject]@{ id = $id; sec = $sec; from = $x.from; ts = $x.ts; text = $t; q = $q; file = $f; items = $s.items; dname = [string]$s.doctor; qid = [int]$o.q })
     }
     if ($file -and -not $fileUsed) { $pending.Add("$id`t$osec`tfile-without-source-text`t$($m.mtitle)") }
 }
@@ -173,6 +174,30 @@ function Esc($s) { $s.Replace('&', '&amp;').Replace('<', '&lt;').Replace('>', '&
 function Body($r) { $(if ($r.q) { $r.q + "`n" } else { '' }) + $r.text }
 # معرّفُ المساهمة ثابتٌ بكاتبها وتبويبها (‎UNIQUE(uid, code, sec)‎) لا برسالتها الأولى: إعادةُ الفرز لا تبدّله
 function Pid($uid, $sec) { "tg-$sec-$($uid.Substring(3))-$lc" }
+
+# ===== أيُّ دكتور؟ =====
+# ما كُتب بالعين (‎$DOCOF‎) أوّلًا. ثمّ الاسمُ الذي سمّاه المرورُ، ثمّ ما في نصّ الرسالة نفسها، ثمّ ما في سؤالها —
+# والسؤالُ الذي يسمّي أكثر من دكتور لا يحسم شيئًا. «كيث» وحدَه اسمان (‎Pearson‎ و‎Arnolds‎) فلا يُحسم
+$normT = { param($s) ((([string]$s).ToLower() -replace '[ً-ْـ]', '') -replace '[أإآ]', 'ا' -replace 'ة', 'ه' -replace 'ى', 'ي') }
+$DRNAME = @(
+  @('gazdar|قازدار|غازدار|mahir|ماهر', 'tg-dr-gazdar'), @('taiseer|تيسير', 'tg-dr-taiseer'), @('adil|عادل محمود', 'tg-dr-adil'),
+  @('megan|ميقن|ميقان|ميغن', 'tg-dr-megan'), @('pamela|باميلا', 'tg-dr-pamela'), @('adam ?khan|ادم خان', 'tg-dr-adamkhan'),
+  @('owen|اوين|jonathan|جونثان|جوناثان', 'tg-dr-owen'), @('cameron|كاميرون|ماكرون|joseph mark', 'tg-dr-cameron'),
+  @('mclaren|مكلارن|ماكلارن', 'tg-dr-mclaren'), @('hampson|timothy|تيموثي', 'tg-dr-hampson'), @('steven lees|\blees\b', 'tg-dr-lees'),
+  @('loftus|لوفتس', 'tg-dr-loftus'), @('harrison|هاريسون', 'tg-dr-harrison'), @('vernon|sam douglas', 'tg-dr-vernon'),
+  @('pearson|بيرسون', 'stk-dr-en115421'), @('arnolds|ارنولدز', 'tg-dr-arnolds'), @('watts|واتس', 'tg-dr-watts'), @('saddia', 'tg-dr-saddia'),
+  @('lance king|\blance\b|لانس', 'stk-dr-en96633'), @('james joseph', 'tg-dr-jamesjoseph'), @('austin|اوستن', 'tg-dr-cook'),
+  @('\bross\b|روس ', 'tg-dr-ross'), @('tylor|taylor|تايلور', 'tg-dr-tylor'), @('flores|فلورس', 'tg-dr-flores'),
+  @('kirkwood|كيرك|kristian|كريستان', 'tg-dr-kirkwood'), @('booth', 'tg-dr-booth'), @('jamy|pits', 'tg-dr-pits'),
+  @('brookshire|barret', 'tg-dr-brookshire'), @('hicks', 'stk-dr-en179113')
+)
+function Names($s) { $n = & $normT $s; @($DRNAME | Where-Object { $n -match $_[0] } | ForEach-Object { $_[1] } | Select-Object -Unique) }
+function DocOf($r) {
+    if ($DOCOF.ContainsKey($r.id)) { return $DOCOF[$r.id] }
+    foreach ($src in @($r.dname, $r.text)) { $k = @(Names $src); if ($k.Count -eq 1) { return $k[0] }; if ($k.Count -gt 1) { return $null } }
+    foreach ($qid in @($by[$r.id].reply, $r.qid)) { if ($qid -and $by.ContainsKey([int]$qid)) { $k = @(Names $by[[int]$qid].text); if ($k.Count -eq 1) { return $k[0] } } }
+    $null
+}
 
 $posts = New-Object 'System.Collections.Generic.List[object]'
 foreach ($g in ($pieces | Group-Object from, sec)) {
@@ -218,21 +243,24 @@ foreach ($g in ($pieces | Group-Object from, sec)) {
                 }
                 $notes += Body $r
             }
-            $data = [ordered]@{ method = 'avg'; items = $(if ($items) { $items } else { @() }); note = ($notes -join "`n`n"); imp = $imp }
+            # ‏(مصفوفةٌ صريحة: ‎$(if … else { @() })‎ يُخرج «لا شيء» فيُكتب ‎{}‎ لا ‎[]‎ — والواجهةُ تنهار على ‎items.reduce‎)
+            $itemArr = New-Object 'System.Collections.Generic.List[object]'; if ($items) { foreach ($it in $items) { $itemArr.Add($it) } }
+            $data = [ordered]@{ method = 'avg'; items = $itemArr.ToArray(); note = ($notes -join "`n`n"); imp = $imp }
         }
         'doc' {
             $rows = New-Object 'System.Collections.Generic.List[object]'
             foreach ($r in $rs) {
-                if (-not $DOCOF.ContainsKey($r.id)) { throw "doc $($r.id) has no doctor: add it with Map" }
-                $dr = $DOCOF[$r.id]; $have = $rows | Where-Object { $_.id -eq $dr }
+                $dr = DocOf $r
+                if (-not $dr) { $pending.Add("$($r.id)`tdoc`tdoctor-unknown`t"); continue }
+                $have = $rows | Where-Object { $_.id -eq $dr }
                 if ($have) { $have.d = $have.d + "`n`n" + (Body $r); continue }
                 $rows.Add([ordered]@{ id = $dr; n = $DOCTORS[$dr]; en = ''; img = ''; e = ''; bld = ''; room = ''; d = (Body $r); hours = @(); teach = 0; grade = 0
                     pid = "tg-p$($r.id)-$lc"; imp = (Imp @($r)) })
             }
-            $data = [ordered]@{ docs = $rows.ToArray() }
+            if ($rows.Count) { $data = [ordered]@{ docs = $rows.ToArray() }; $imp = $rows[0].imp }
         }
     }
-    $posts.Add([ordered]@{ id = (Pid $uid $sec); uid = $uid; code = $Code; sec = $sec; ts = $rs[0].ts; st = 'pub'; data = $data })
+    if ($data) { $posts.Add([ordered]@{ id = (Pid $uid $sec); uid = $uid; code = $Code; sec = $sec; ts = $(if ($sec -eq 'doc') { $imp.ts } else { $rs[0].ts }); st = 'pub'; data = $data }) }
 }
 $seen = @{}
 foreach ($p in $posts) { if ($seen[$p.id]) { throw "duplicate post id $($p.id)" }; $seen[$p.id] = 1 }
