@@ -9764,7 +9764,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
   /* نقطتان فوق ونقطةٌ تحتهما، والضغطُ في أيّ موضعٍ منها ينقل إلى العرض التالي (طلبُ صاحب الموقع) — زرٌّ واحدٌ بـ‎data-pkview‎ التالي.
      والذهبيّةُ علامةٌ مستقلّةٌ تنزلق من نقطة العرض السابق إلى الجديد بحركةٍ مرنة (‎pkVdPrev‎ يحفظ السابق) */
-  const PK_VD_POS = [[1.5, 1.5], [11.5, 1.5], [6.5, 8]];
+  const PK_VD_POS = [[2.5, 1.5], [9.5, 1.5], [6, 7]];
   const pkVdPrev = {};
   const pkVDots = id => {
     const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];

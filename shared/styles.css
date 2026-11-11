@@ -18230,3 +18230,6 @@ html[data-theme="dark"] .pk-vdots__m { background: #d4b36a; }
 @keyframes pk-vd-glow { 40% { box-shadow: 0 0 0 3px rgba(201, 162, 39, .28); } 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); } }
 .pk-vdots:hover .pk-vdots__m { transform: scale(1.18); transition: transform .15s; }
 @media (prefers-reduced-motion: reduce) { .pk-vdots__m.is-move { animation: none; } }
+/* أصغرُ قليلًا، والمسافةُ بين العلويّتين أقلّ */
+.pk-vdots { width: 16px; height: 12px; inset-inline-start: -1px; }
+.pk-vdots__d, .pk-vdots__m { width: 4px; height: 4px; }
