@@ -18248,3 +18248,5 @@ html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
 @keyframes pk-vd-glow2 { 40% { filter: drop-shadow(0 0 1.6px rgba(201, 162, 39, .9)); } 100% { filter: none; } }
 .pk-vdots:hover .pk-vdots__s .pk-vdots__m { transform: scale(1.18); }
 @media (prefers-reduced-motion: reduce) { .pk-vdots__s .pk-vdots__m.is-move { animation: none; } }
+/* أقربُ إلى الأيقونة رأسيًّا (طلبُ صاحب الموقع) */
+.pk-vdots { top: 16px; }
