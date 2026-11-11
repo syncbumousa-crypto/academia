@@ -38734,10 +38734,38 @@ void main() {
      ويُفكّ في **كلّ** فتحة. وهي تُقرأ مرّةً واحدةً في عمر المتصفّح ثمّ يُرفع
      ‎ankiRedo1‎ فلا تُقرأ أبدًا — فالثمنُ يُدفع كلَّ يومٍ لعملٍ وقع مرّة.
      فتُجلب عند الحاجة وحدَها، وما بعدها يُنتظر جلبَها. */
+  /* ===== مساهمةٌ تجريبيّةٌ في ‎ACCT 301‎ فيها الكتابُ التجريبيّ (طلبُ صاحب الموقع) =====
+     تُبذر مرّةً واحدةً في متصفّح صاحب الموقع وحده (‎state.uid === OWNER.uid‎): مساهمتُه هو في المادّة (‎myPost‎)،
+     ومصدرُها كتابٌ يُجلب من الموقع (‎assets/samples‎) إلى مخزن المتصفّح كما لو رُفع بيده.
+     ولا تُبذر لغيره: المساهمةُ تُنسب إلى من تُكتب في متصفّحه */
+  async function seedAcctBook() {
+    if (state.seedAcctBook1 || state.uid !== OWNER.uid) return;
+    const code = 'ACCT 301';
+    if (!CM[code]) return;
+    const p = myPost(code, 'cards');
+    if (pkSrcList(p.id).length) { state.seedAcctBook1 = 1; save(); return; }
+    let blob;
+    try {
+      const r = await fetch(assetURL('assets/samples/acct-managerial-accounting.pdf'), { cache: 'no-store' });
+      if (!r.ok) return;
+      blob = await r.blob();
+    } catch (e) { return; }
+    const name = 'المحاسبة الإدارية — كتاب تجريبي.pdf';
+    if (!await chIdb('readwrite', pkSrcKey(p.id), new File([blob], name, { type: 'application/pdf' }))) return;
+    (state.pkSrc = state.pkSrc || {})[p.id] = { name, size: blob.size, ts: Date.now(), type: 'book' };
+    /* العلامةُ تُكتب هنا لا بـ‎pkSrcMark‎: تلك تبحث في المادّة المفتوحة (‎cmCode‎) وقد لا تكون هذه —
+       وبلا علامةٍ تُعدّ المساهمةُ فارغةً فتُكنس */
+    p.data.src = { pdf: name, cover: null };
+    if (!String(p.data.title || '').trim()) p.data.title = 'المحاسبة الإدارية — كتاب تجريبي';
+    state.seedAcctBook1 = 1;
+    save();
+    if (cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
   function ankiChain() {
     ankiRedo();
     ankiHandBack();   /* وما نُسب إليك من بطائق الموقع يُردّ إليه */
     ankiToOwner();    /* ثمّ يُنسب إلى مؤلّفه: صاحبُ الموقع لا الموقع */
+    seedAcctBook();   /* والكتابُ التجريبيّ في ‎ACCT 301‎ — لصاحب الموقع وحده */
     cardsPub();       /* وتُوسَم للنشر: فيصير المعروضُ والمُسجَّلُ شيئًا واحدًا */
   }
   if (state.ankiRedo1 || window.ANKI_IMPORT) {
