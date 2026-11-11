@@ -17763,3 +17763,8 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
   border-radius: 999px;
   font: 700 12.5px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
 .cx-midadd.cx-addpill svg { width: 15px; height: 15px; flex: none; }
+/* ومقبضا الترويسة والتذييل وأدواتُ التذييل يمتدّ وعاؤها تحت عمود الصورة كالمساحات (‎-42px‎) وإن لم تُطوَ الترويسة —
+   فمنتصفُها ثابتٌ في الحالين، ولا تميل حين تُطوى الترويسةُ وتُبسط (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame):not(.pk--hdup) > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { margin-inline-start: -42px; width: calc(100% + 42px); box-sizing: border-box; }
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { width: 100%; box-sizing: border-box; }
+.pk--hdanim > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { transition: margin-inline-start .22s ease, width .22s ease; }
