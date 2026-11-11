@@ -1,0 +1,1924 @@
+{
+  "code": "MATH 208",
+  "users": [
+    {
+      "id": "stk-cortex",
+      "name": "cortex",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/cortex/144/946_2.png",
+      "email": "cortex@import.stkfupm.invalid",
+      "user": "cortex"
+    },
+    {
+      "id": "stk-a_dulaziz",
+      "name": "AβĐUŁAZIZ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/59ef9b/144.png",
+      "email": "a_dulaziz@import.stkfupm.invalid",
+      "user": "A_DULAZIZ"
+    },
+    {
+      "id": "stk-gravity",
+      "name": "Gravity",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8e7dd6/144.png",
+      "email": "gravity@import.stkfupm.invalid",
+      "user": "Gravity"
+    },
+    {
+      "id": "stk-computist",
+      "name": "Computist",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
+      "email": "computist@import.stkfupm.invalid",
+      "user": "Computist"
+    },
+    {
+      "id": "stk-the_doctor",
+      "name": "the doctor",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/839c29/144.png",
+      "email": "the_doctor@import.stkfupm.invalid",
+      "user": "the_doctor"
+    },
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-s2012055",
+      "name": "s2012055",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/f475e1/144.png",
+      "email": "s2012055@import.stkfupm.invalid",
+      "user": "s2012055"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-ak-95",
+      "name": "AK-95",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/71e660/144.png",
+      "email": "ak-95@import.stkfupm.invalid",
+      "user": "AK-95"
+    },
+    {
+      "id": "stk-user9929",
+      "name": "برق الجنوب",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/5f9b8f/144.png",
+      "email": "user9929@import.stkfupm.invalid",
+      "user": "user9929"
+    },
+    {
+      "id": "stk-mkd",
+      "name": "MKD",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
+      "email": "mkd@import.stkfupm.invalid",
+      "user": "MKD"
+    },
+    {
+      "id": "stk-breaktheunbreakable",
+      "name": "BreakTheUnbreakable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
+      "email": "breaktheunbreakable@import.stkfupm.invalid",
+      "user": "BreakTheUnbreakable"
+    },
+    {
+      "id": "stk-user11151",
+      "name": "عزّام العُمري",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11151/144/2374_2.png",
+      "email": "user11151@import.stkfupm.invalid",
+      "user": "user11151"
+    },
+    {
+      "id": "stk-posty",
+      "name": "Posty",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/posty/144/2606_2.png",
+      "email": "posty@import.stkfupm.invalid",
+      "user": "Posty"
+    },
+    {
+      "id": "stk-user4992",
+      "name": "الفتى المهجول",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/aeb1de/144.png",
+      "email": "user4992@import.stkfupm.invalid",
+      "user": "user4992"
+    },
+    {
+      "id": "stk-ismailmudhafar",
+      "name": "ismailmudhafar",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/a88e4f/144.png",
+      "email": "ismailmudhafar@import.stkfupm.invalid",
+      "user": "ismailmudhafar"
+    },
+    {
+      "id": "stk-krooom",
+      "name": "Krooom",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/9de0a6/144.png",
+      "email": "krooom@import.stkfupm.invalid",
+      "user": "Krooom"
+    },
+    {
+      "id": "stk-orientation14",
+      "name": "orientation14",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/o/a88e4f/144.png",
+      "email": "orientation14@import.stkfupm.invalid",
+      "user": "orientation14"
+    },
+    {
+      "id": "stk-user8697",
+      "name": "الحاائر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8697/144/1880_2.png",
+      "email": "user8697@import.stkfupm.invalid",
+      "user": "user8697"
+    },
+    {
+      "id": "stk-guest",
+      "name": "Guest",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8dc957/144.png",
+      "email": "guest@import.stkfupm.invalid",
+      "user": "Guest"
+    },
+    {
+      "id": "stk-dark_side",
+      "name": "Dark_Side",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/dark_side/144/14626_2.png",
+      "email": "dark_side@import.stkfupm.invalid",
+      "user": "Dark_Side"
+    },
+    {
+      "id": "stk-user12137",
+      "name": "السلام عليكم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/958977/144.png",
+      "email": "user12137@import.stkfupm.invalid",
+      "user": "user12137"
+    },
+    {
+      "id": "stk-user8681",
+      "name": "المزركش",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/41988e/144.png",
+      "email": "user8681@import.stkfupm.invalid",
+      "user": "user8681"
+    },
+    {
+      "id": "stk-someone33",
+      "name": "SomeOne33",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/e0b2c6/144.png",
+      "email": "someone33@import.stkfupm.invalid",
+      "user": "SomeOne33"
+    },
+    {
+      "id": "stk-user3193",
+      "name": "لافت نظر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3193/144/388_2.png",
+      "email": "user3193@import.stkfupm.invalid",
+      "user": "user3193"
+    },
+    {
+      "id": "stk-ad0rs",
+      "name": "ad0rs",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f475e1/144.png",
+      "email": "ad0rs@import.stkfupm.invalid",
+      "user": "ad0rs"
+    },
+    {
+      "id": "stk-saleh1417_2015",
+      "name": "Saleh1417_2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ec9cab/144.png",
+      "email": "saleh1417_2015@import.stkfupm.invalid",
+      "user": "Saleh1417_2015"
+    },
+    {
+      "id": "stk-faisal_2015",
+      "name": "Faisal 2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/3be4f8/144.png",
+      "email": "faisal_2015@import.stkfupm.invalid",
+      "user": "Faisal_2015"
+    },
+    {
+      "id": "stk-user10843",
+      "name": "ابو مليحة",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10843/144/2273_2.png",
+      "email": "user10843@import.stkfupm.invalid",
+      "user": "user10843"
+    },
+    {
+      "id": "stk-nvm",
+      "name": "nvm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/a88e57/144.png",
+      "email": "nvm@import.stkfupm.invalid",
+      "user": "nvm"
+    },
+    {
+      "id": "stk-bader_alqahtani",
+      "name": "Bader Alqahtani",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/ac91a4/144.png",
+      "email": "bader_alqahtani@import.stkfupm.invalid",
+      "user": "Bader_Alqahtani"
+    },
+    {
+      "id": "stk-abubakermt",
+      "name": "AbubakerMT",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abubakermt/144/2596_2.png",
+      "email": "abubakermt@import.stkfupm.invalid",
+      "user": "AbubakerMT"
+    },
+    {
+      "id": "stk-m.hussain",
+      "name": "M.Hussain",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b2d939/144.png",
+      "email": "m.hussain@import.stkfupm.invalid",
+      "user": "M.Hussain"
+    },
+    {
+      "id": "stk-user1853",
+      "name": "أبـو فـوِاز",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user1853/144/144_2.png",
+      "email": "user1853@import.stkfupm.invalid",
+      "user": "user1853"
+    },
+    {
+      "id": "stk-abu_fras",
+      "name": "ABU FRAS",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abu_fras/144/1934_2.png",
+      "email": "abu_fras@import.stkfupm.invalid",
+      "user": "ABU_FRAS"
+    },
+    {
+      "id": "stk-mohammed_mag",
+      "name": "Mohammed Mag",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
+      "email": "mohammed_mag@import.stkfupm.invalid",
+      "user": "Mohammed_Mag"
+    },
+    {
+      "id": "stk-amrfa",
+      "name": "amrfa",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/59ef9b/144.png",
+      "email": "amrfa@import.stkfupm.invalid",
+      "user": "amrfa"
+    },
+    {
+      "id": "stk-ria",
+      "name": "RIA",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ria/144/2564_2.png",
+      "email": "ria@import.stkfupm.invalid",
+      "user": "RIA"
+    },
+    {
+      "id": "stk-khalid205",
+      "name": "Khalid205",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/ac8455/144.png",
+      "email": "khalid205@import.stkfupm.invalid",
+      "user": "Khalid205"
+    },
+    {
+      "id": "stk-cs_scientist",
+      "name": "CS Scientist",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/cs_scientist/144/2096_2.png",
+      "email": "cs_scientist@import.stkfupm.invalid",
+      "user": "CS_Scientist"
+    },
+    {
+      "id": "stk-feras-mtn",
+      "name": "Feras-MTN",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/cc9497/144.png",
+      "email": "feras-mtn@import.stkfupm.invalid",
+      "user": "Feras-MTN"
+    },
+    {
+      "id": "stk-yousifrh",
+      "name": "YousifRH",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/y/71e660/144.png",
+      "email": "yousifrh@import.stkfupm.invalid",
+      "user": "YousifRH"
+    },
+    {
+      "id": "stk-user12081",
+      "name": "رفيع الشأن",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user12081/144/2582_2.png",
+      "email": "user12081@import.stkfupm.invalid",
+      "user": "user12081"
+    },
+    {
+      "id": "stk-mzd",
+      "name": "MZD",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/54ee81/144.png",
+      "email": "mzd@import.stkfupm.invalid",
+      "user": "MZD"
+    },
+    {
+      "id": "stk-yousef_alamoudi_4507",
+      "name": "yousef_Alamoudi^45073",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/yousef_alamoudi_4507/144/2500_2.png",
+      "email": "yousef_alamoudi_4507@import.stkfupm.invalid",
+      "user": "yousef_Alamoudi_4507"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1028857-math208",
+      "uid": "stk-cortex",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1335447203000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام:\nانا مسجل المادة الترم هذا ولا خلصتها لسا , لكن بشكل عام المقرر سهل و مباشر ولا يحتاج فهم عميق عشان تحل !! أغلبها أشياء مكررة من ماث 002 و 101 و 102. لكن الترم هذا الدكاتره سيئين و ما عندهم شرح كويس و هذا يفسر الآفرجات الحالية .\nالمواضيع التي يغطيها المقرر :\n\nالمقرر يغطي المصفوفات بشكل أعمق من اللي أخذناه , و يعلمك عن الفكتورز في أكثر من بعد بشكل أفضل من اللي تم تدريسه في الـ 201 . و يتكلم بعمق عن فرع من الرياضيات اسمه الـ Differential Equations . هو أشوفه أكثر قسم من المنهج يحتاج مراعاة.\nالكتاب المستخدم للمقرر:\n\nالترم هذا 112 نستخدم كتاب سيء إلى أبعد حدّ ولا يفهم و أمثلته سطحية و طباعته سيئة .\nهذا غلافه :\n\nhttp://covers.openlibrary.org/b/id/135687-M.jpg\n\nالأترام اللي قبله الناس كانوا ياخذون المادة من هالكتاب :\nhttp://images.pearsoned-ema.com/jpeg/large/9780138141028.jpg\n\nو أكثر من شخص مدح لي الكتاب الأحمر هذا . بس ترتيب المتيريال يختلف هنا و هناك .\nالأسئلة والأمثلة المستخدمة في المقرر:\n\nسهله بشكل عام و صعب تخرج من الإطار العامل للفكرة الرئيسية . ممكن يتفننون في المشتقات و التكاملات , ما أعتقد يقدرون يلعبون في عوامل ثانية\nمدى فائدته في الناحية التطبيقية\n\nالكورس بشكل عام مختص بطلاب الكمبيوتر و الهندسة الصناعية . الكورس بشكل عام سهل لكنه ماهوب ممتع زي بقية كورسات الماث .\n\nمن الناحية التطبيقية فالكورس أفادني في مواد اخرى جالس أخذها حالياً لذلك أعتبره ممتاز في الجانب التطبيقي .\n\nموفقين 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/2",
+          "user": "cortex",
+          "ts": 1335447203000,
+          "tid": 120617,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1156367-math208",
+      "uid": "stk-a_dulaziz",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1357437451000,
+      "st": "pub",
+      "data": {
+        "desc": "term 121\n\nالمواضيع التي يغطيها المقرر\n\nDifferential Equations & Linear Algebra\n\nالكتاب المستخدم للمقرر\n\nسيئ جدا إلى درجة أنه الأصدار الأول من عام 2002 مدري 2001\n\nما في له سلوشن\n\nمدرسنا الدكتور بدر الحميدي كان يستخدم أحياننا أمثل خارجية خصوصا بالدفرنشل يستخدم\nأمثلة كتاب 202\n\nبشكل عام المقرر سهل لاكن مشكلته مختلف عن 101 و 102\nأسلوب الدروس نوعا ما حفظ\n\nقوانين وتطبيق\n\nأغلب التركات الي تجي من مناهج قديمه يا أنتجريشن أو فاكتورايزيشن",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/3",
+          "user": "A_DULAZIZ",
+          "ts": 1357437451000,
+          "tid": 120617,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1232568-math208",
+      "uid": "stk-gravity",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1370594953000,
+      "st": "pub",
+      "data": {
+        "desc": "كورس رائع جدا…\n\n(الجزء الأول ) يتكلم عن كيفية حل معادلات الاشتقاق من الدرجة الاولى أو الثانية أو غيرها .\n(الجزء الثاني ) يتكلم عن حل المصفوفات والمحددات وخصائصها بشكل مفصل .\n(الجزء الثالث ) يتكلم عن eigenvalue وكيفية حلها بالمصفوفات وهي جدا مهمة .\n\nالكورس رائع جدا وسهل …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/5",
+          "user": "Gravity",
+          "ts": 1370594953000,
+          "tid": 120617,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1296482-math208",
+      "uid": "stk-computist",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1385710958000,
+      "st": "pub",
+      "data": {
+        "desc": "Talks about Differential Equations + Linear Algebra\n\nHow to find solutions to differential equations of first, second and generally n order\nand applications to first order D.E in real life\n\nLinear Algebra: review about matrices determinants and more stuff about them + vector spaces R1, R2, R3 and generally Rn + applications of matrices in finding solutions to D.E\n\nThe course requires attention from the student from the first day\nIt requires a lot to understand but the majors are rather easier than the book problems",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/9",
+          "user": "Computist",
+          "ts": 1385710958000,
+          "tid": 120617,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p1303279-math208",
+      "uid": "stk-the_doctor",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1386625038000,
+      "st": "pub",
+      "data": {
+        "desc": "^^^\n\nانا قاعد اخذها ذا احين … تفاجأت الكل قال الكورس سهل وزي المويه لكن مو ذاك السهولة … والدليل الافرج حق المياجر . المادة يبيلها شغل شويتين . طبعا أسهل من ماث 201 … مع ذلك أحسها حلوة بالصيف",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/14",
+          "user": "the_doctor",
+          "ts": 1386625038000,
+          "tid": 120617,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p1373099-math208",
+      "uid": "stk-user2352",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1401264703000,
+      "st": "pub",
+      "data": {
+        "desc": "هذا الكورس ماث260 انصح بدراسته في أي صيفي\nلأنه متوسط الصعوبة وإذا أنت فاهم ماث102 راح يسهل عليك الكثير خاصة الكورس سلف ستدي من وجهة نظري وما يفرق الدكتور كثير\nلأنك تحتاج طرق التكامل وكيفية حل المعادلات التفاضلية de\nوبقية الدروس يعيبها إن الحل طويل شوي ولكنها مو ذيك الصعبة\nأغلبها افهم الطريقة وطبقها على مسائل الكتاب والمياجر السابقة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/16",
+          "user": "user2352",
+          "ts": 1401264703000,
+          "tid": 120617,
+          "pn": 16
+        }
+      }
+    },
+    {
+      "id": "stk-p1391628-math208",
+      "uid": "stk-s2012055",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1408614860000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة من أسهل مواد الماث, تعتمد:\n\n1- فهم الكونسبت جيدا\n\n2- ماث 102\n\n3- حل مسائل الكتاب والاولد اكزامز\n\nالمادة فيها جمع وطرح وفاكتورايزينغ كثيير\n\nالكتاب ممتاز الى حد ما, والمادة تعتمد على المدرس بس مو مررة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/18",
+          "user": "s2012055",
+          "ts": 1408614860000,
+          "tid": 120617,
+          "pn": 18
+        }
+      }
+    },
+    {
+      "id": "stk-p1422984-math208",
+      "uid": "stk-user8581",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1437935763000,
+      "st": "pub",
+      "data": {
+        "desc": "math 260\nمقارنة بـ 102 و 101 و 201 فالكورس سهل و ينفع سيلف ستدي لو ماتوفقت في دكتور ممتاز\nلكن خصوصا بعد الميجر الأول الماتيريال يصير غثيث وحل المسائل يكون طويل\nالمياجر ريتين والفاينل ماتيريال بعد الميجر الثاني يكون ريتين والي قبل عليه 5 MCQ\nفحاول تنزل مع دكتور متساهل في التصحيح\n…\nالكتاب في الشباتر الاخيرة اشوفه سيئ واحيانا يطول السالفة وهي قصيرة لكن اذ مافهمت الدرس عندك اليوتيوب … ولو نزلت عندك دكتور ممتاز راح يسهل عليك المادة ومايبقى عليك الا حل بعض مسائل الكتاب\nهالكورس لمفروض اقل قريد تطلع فيه b+ بشرط ان توزيع القريدات يكون عادل ومنطقي عكس سمستر 142 كان التوزيع سيئ\n!!",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/19",
+          "user": "user8581",
+          "ts": 1437935763000,
+          "tid": 120617,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p1431860-math208",
+      "uid": "stk-ak-95",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1446476436000,
+      "st": "pub",
+      "data": {
+        "desc": "ترم 151 ، هذا الكتاب :\n\nالمنهج سهل بشكل عام ، لكن الكتاب سيء جدا في الشرح وتسلسل الأفكار .\nالآن أعاني في شابتر 4 (Vector spaces) جدا ، عرض القواعد بشكل ملخبط ومكرر ومختلف …\n\nمن الأخير ، Patrick هو الحل 🙂\nhttps://www.youtube.com/user/patrickJMT",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/20",
+          "user": "AK-95",
+          "ts": 1446476436000,
+          "tid": 120617,
+          "pn": 20
+        }
+      }
+    },
+    {
+      "id": "stk-p1433388-math208",
+      "uid": "stk-user9929",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1447604912000,
+      "st": "pub",
+      "data": {
+        "desc": "الله يجزاك خير اخوي ويعطيك العافية\nوضعي ما يسمح انزل كورسين بعض في نفس الترم\n\nCE 318 Numerical & Statistical Methods in Civil Engineering (2-3-3)\nIntroduction to numerical methods; error analysis; solution of system of linear and nonlinear\nequations; numerical integration; numerical solutions of ordinary differential equations; curve\nfitting and interpolation; statistical methods, descriptive statistics, probability distributions,\nanalysis of variance and regression; introduction to linear programming and optimization\nproblems; development and application of computer programs to case studies derived from civil\nengineering practices.\nPrerequisite: ICS 103 (or e quivalent) , MATH 260",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/25",
+          "user": "user9929",
+          "ts": 1447604912000,
+          "tid": 120617,
+          "pn": 25
+        }
+      }
+    },
+    {
+      "id": "stk-p1458092-math208",
+      "uid": "stk-mkd",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1474291509000,
+      "st": "pub",
+      "data": {
+        "desc": "Term 153\n\nخذته مع العراجي ABDALLAH LARADJI\n\nالكورس رهيب وحق قريد … تجيب أقل من B+ بأفقع وجهك 🙂 بس يحتاج متابعة وزي ما قالوا اللي فوق تحتاج انتقريشن بشكل متوسط\n\nمنب متكلم عن الماتيريال ، بشكل عام مفهوم وحلو\n\nالمشكلة الوحيدة هذي اخر شابتر بالكورس شابتر 7 ، خصوصا 7.5 !! تقريبا 40% من الفاينل كان عن هذا الشابتر !! جدا مهم والصراحة أعتبره أصعب شابتر وتحتاج تحل أكبر عدد تقدر عليه ( حرفيا ) !!\n\nركز عليه قبل الفاينل ولو تحل أسئلة قديمة وتوريها دكتورك قبل الفاينل أفضل وأفضل عشان تتأكد انك ما تجيب العيد ، لأن خطا بسيط جدا في حل سؤال يخلي حلك غلط في غلط 🙂\n\nأنصحك تاخذه مع العراجي بدون ما تفكر . تصحيح رهيب وشرح جيد و جدا جدا حبيب ( كيف السجع ) =)\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/27",
+          "user": "MKD",
+          "ts": 1474291509000,
+          "tid": 120617,
+          "pn": 27
+        }
+      }
+    },
+    {
+      "id": "stk-p1492309-math208",
+      "uid": "stk-breaktheunbreakable",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1526272546000,
+      "st": "pub",
+      "data": {
+        "desc": "مادة حلوة تتابع فيها أضمن لك تحصل فيها B+ بالراحة. المادة عبارة عن خليط بين Math 002 و Math 102 وتتعلموا أشياء جديدة وكيف تستعمل اللي تعلمته في الماث لتحل أنظمة دفرنشل انكويشنز.\nالكورس في الصيف مشابه للترم العادي، المادة ما يقدروا يصعبوها كثير لأن ما بها تركات بس تطبيق للكونسبت.\nأعطي المادة حقها ووقتها لا تعاملها كأنها مادة ثانوية، ذا الشيء بينزل درجاتك فيها.\nأنصح بالمادة إذا كنت بتاخذها إلكتف.\nتقدر تذاكر من نوتات الدراجي أو التتار، الكتاب بعض الأحيان عبيط ويشرح أشياء ما لها داعي.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/30",
+          "user": "BreakTheUnbreakable",
+          "ts": 1526272546000,
+          "tid": 120617,
+          "pn": 30
+        }
+      }
+    },
+    {
+      "id": "stk-p1522207-math208",
+      "uid": "stk-user11151",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1590008175000,
+      "st": "pub",
+      "data": {
+        "desc": "عبدالإله قادري - ١٩٢\n\nباختصار المادة سهلة جدا جدا وسهل تحصل فيها درجة ممتازة بشرط تعطيها حقها.\nنصيحة لا تأجلها وتتأخر خذها مباشرة بعد ما تخلص موا الرياضيات اللي عندك عشان ما تطلع من الجو.\n\nإذا نزلتها عند عبدالإله قادري، فأبشرك هو شخص عسل ورائع ولكن خله يشوف فيك الحرص والاهتمام.\nاطبع المذكرات اللي يرسلها فيها كل شي تحتاجه -قصيرة ماهي طويلة- ووقت المحاضرة خطط عشان تفهم إذا رجعت لها.\n\nذاكر للاختبارات زين وإذا جاط وقت الميجر ما تحتاج إلا أنك تحل اختبارات قديمة وبكذا تقدر تجيب درجة كاملة بإذن الله.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/31",
+          "user": "user11151",
+          "ts": 1590008175000,
+          "tid": 120617,
+          "pn": 31
+        }
+      }
+    },
+    {
+      "id": "stk-p1533225-math208",
+      "uid": "stk-posty",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1640990048000,
+      "st": "pub",
+      "data": {
+        "desc": "Term 211\n\nالمادة الكونسبت حقها نوعا ما جديد مقارنة ب الكورسات الي قبل، الكورس يجمع مابين الديفرنشل ايكويشنز و اللينير الجبرا (لا يغرك اسم لينير الجيبرا تراها اصعب جزء في الكورس) بس بالمجمل المادة مو صعبه لاكن تبقى ماث ولازم تعطيها حقها، هي اسهل من ماث ٢٠١، اما مقارنة ب ١٠١-١٠٢ صعبه تحديد صعوبتها بينهم، الكورس ميزته دروسه قليله مقارنة بالكورسات الي قبل، والافكار محاولين مايتعمقون فيها بحكم انها كونسبت جديد\n\nالاختبارات مع هذا الترم بادين يحولونها لاختياري بدال الريتن وللاسف مع كذا الكورس راح يصير ظلم كبير، الميد كان ٤ اسئلة اختياري و ٤ رتن وللاسف سؤال الاختياري الواحد كان عليه ٣ درجات اما الريتن كانت بين ٣-٤ درجات وعليها بارشل بحكم انها ريتن، والفاينل كان كله اختيارات",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-208-introduction-to-differential-equations-linear-algebra/120617/32",
+          "user": "Posty",
+          "ts": 1640990048000,
+          "tid": 120617,
+          "pn": 32
+        }
+      }
+    },
+    {
+      "id": "stk-doc-user4992-math208",
+      "uid": "stk-user4992",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1277447280000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68348",
+            "n": "Dr. Abdallah Laradji",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يحضر عالووقت ويمكن قبل لكن يحفظ الي متاخر بزياده ويحطه ليت اذا تاخرت بشي معقول او عندك عذر يحظرك عادي …\n\nطريقة الشرح : طبعا يكتب نووت واغلب كوزاته من النووت … نوته لا باس فيه … انا اخذت معه ماث 260 نوته صراحه كان افضل من الكتاب … يعمل مجهوده بالنسبه للشرح لكن مدري احس تصويله للمعلومه مو ذاك الزود وبعض الاحيان تحس ودك تناااام … يبيلك تركز معاه زين … وهذي صعبه للي يبي يكتب معه ويركز بالشرح في نفس الوقت … لان شغلله سرريع …\n\nالكويزات : كانت الكوزات تيك هوم … بسبب المكان كان ضيق والوقت على قولته … كانت متوسطه يحط افكار لكن اغلبها لا باس فيها متوسطة المستوى … كان الافرج فيها حوال الـ 11 \\ 20 … على حسب كلامه عشان فيه ناس كثير ماسلّمو …\n\nالمياجر: كومووون …\n\nالفاينلات : كومووون … بس مدري ليه احس ان الفاينل 260 - 092 احس انه هو الي حط الاسئله طبعا كانت الاسئله حررريقه …\n\nالقريد النهائي: اعطيه b\n\nالصوت: عاادي\n\nإضافات : القريدات كان افرجها حوول +c … وبالكلاس وورك حسب التقسيم تاخذ حقك …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p643809-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdallah-laradji/68348/12",
+              "user": "user4992",
+              "ts": 1277447280000,
+              "tid": 68348,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ismailmudhafar-math208",
+      "uid": "stk-ismailmudhafar",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1446741958000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68348",
+            "n": "Dr. Abdallah Laradji",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "دائما ارفض اسوي تقييم للدكاترة في المنتدى واول مره اسوي تقييم …\nانا اخذ المادة(math260) حاليا مع الدكتور عبدالله العراجي … شهادة لله أنه افضل دكتور ماث درسني الى الان … شريييييييييييييييح … ويعرف يوصل المعلومة بسهولة .\nكوزاته سهله الى متوسطه المذاكر يحلها ب 5 دقائق .\nالتحضير … يحضر يوميا …\nبشكل عام الدكتور أخلاقه عالية وشرحه ممتاز وبدرجة كبيرة بالتالي أنصح فيه .\nبالنسبة لتصحيح المياجر يعطيك حقك بلا زيادة ولا نقصان .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1432221-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdallah-laradji/68348/37",
+              "user": "ismailmudhafar",
+              "ts": 1446741958000,
+              "tid": 68348,
+              "pn": 37
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mkd-math208",
+      "uid": "stk-mkd",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1474292064000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68348",
+            "n": "Dr. Abdallah Laradji",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 153 , Math 260\n\nالتحضير : يوميا سيريال نمبرز ونادر ينسى\nطريقة الشرح : يشرح الكونسبت بعدين أسئلة الكتاب . غالبا بالشرح ما يطلع عنها ، صوته هادي , لو تحب المدرس اللي يخليك صاحي من صوته = ابعد عنه ، شخصيا كان جدا مناسب ومفهوم صوته\nالكويزات : قليلة ، يوم خذتها عنده عطانا كوزين بس وفجأة آخر 4 أيام عطانا كوزين بعد ! ، عموما قليلة بالمجمل\nالمياجر: الكورس ما كان كورينيتد بالصيف ، كان سهلة الى متوسطه وتصحيح رااااقي ي عالم أتعب وأنا أقول راقي … أقسم بالله استحيت بالميجر الثاني اني اراجعه حتى من كثر ما كان كريم … شكرته ومشيت 🙂\nالفاينلات : للأسف عطانا فاينل من متوسط الى صعب … توقعته بيكون أسهل من كذا لكن الأفرج المرعب قبل الفاينل ممكن حتّم عليه إنه يخليه صعب … الله يسامحك ي دكتور 😦\nالقريد النهائي: A\nالصوت: هادي زي ما قلت فوق\nإضافات : رح له بالاوفيس أور ، خله يعرفك زين خصوصا قبل المياجر\n\nولو ناوي تاخذ الـ 260 لا تاخذها الا معه نصيحة\n\nأنا لو نزل أي كورس ماث غير الماثات اللي خذتها من قبل بنزلها معه إن شاء الله وأنا مغمض لو الكتف يبوي =)",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1458097-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdallah-laradji/68348/42",
+              "user": "MKD",
+              "ts": 1474292064000,
+              "tid": 68348,
+              "pn": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-krooom-math208",
+      "uid": "stk-krooom",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1485514051000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68348",
+            "n": "Dr. Abdallah Laradji",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 161 , Math 260\n\nالتحضير : يوميا سيريال نمبرز ونادر ينسى ويحضر اخر الكلاس\nطريقة الشرح : يشرح الكونسبت بعدين أسئلة الكتاب . غالبا بالشرح ما يطلع عنها ، صوته هادي , لو تحب المدرس اللي يخليك صاحي من صوته = ابعد عنه ، شخصيا كان جدا مناسب ومفهوم صوته\nالكويزات : قليلة ، يوم خذتها عنده عطانا كوزين بس وفجأة آخر 4 أيام عطانا كوزين بعد ! ، عموما قليلة بالمجمل وسهلة جدا\nالمياجر: المياجر كانت نسبيا متوسطة افرج الاول 73 والثاني 68 لسكشنا , ولكن تصحييه شديد جدا يمشي على مفتاح الحل بالتمام وازود يمكن ويقول اللي بيناقشني على الاختبار يجي و ما قد سمعت احد قالي انه زوده ( مثلا اذا غلطت اول خطوة ومشيت عليها والطريقة صح ينقصك وهذا الشي ما يكون موضح بمفتاح الحل , هذا عتبي الوحيد )\nالفاينلات : كومون\nالقريد النهائي: A\nالصوت: هادي\nإضافات : المادة اسهل من مواد الماث الباقية لو تعطيها شوية جهد",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1467079-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdallah-laradji/68348/43",
+              "user": "Krooom",
+              "ts": 1485514051000,
+              "tid": 68348,
+              "pn": 43
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-orientation14-math208",
+      "uid": "stk-orientation14",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1496070137000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68348",
+            "n": "Dr. Abdallah Laradji",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم : Math260-162\n\nالتحضير : الدكنور يجي فبل المحاضرة ويحضر بالنظر وبعد نهاية المحاضرة يحضر بالسيريال\nطريقة الشرح : ممتازة. يشرح المفاهيم وبعدها امثلة كثيرة\nالكويزات : قليلة ومستواها متوسط\nالمياجر: كومن وأشوفه كريم في التصحيح\nالفاينلات : كومن وماشفت الوقة فلذلك ما أقدر أحكم على التصحيح\nالقريد النهائي: أعطيه A+\nالصوت: واضح ولهجته مفهومة\nإضافات : دكتور رائع أنصح به",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1474068-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdallah-laradji/68348/44",
+              "user": "orientation14",
+              "ts": 1496070137000,
+              "tid": 68348,
+              "pn": 44
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8697-math208",
+      "uid": "stk-user8697",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1408099648000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68373",
+            "n": "Dr. Abdeslam Mimouni",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math260-133\n\nالتحضير : يومي آخر الكلاس\n\nطريقة الشرح : ممتازة جدا لكن عيبه انه ما يمشي بترتيب الكتاب تماما\n\nالكويزات : سهلة واغلبها يكون سبق شرحها او حلها عالسبورة\n\nالمياجر: متوسطة وتحتوي على هدايا وتحتوي على صعب\n\nالفاينلات : الفاينال شفته سهل مع ضعف استعدادي\n\nالقريد النهائي: A\n\nالصوت: واضح\n\nإضافات : بقتبس كلام واحد من الاخوان\n\nاهم شي تكون مركز معاه ، اذا شافك نايم ولا سرحان الله يعينك منه ، يعني يعصب و يبدأ يتكلم عن الاطفال الصغار وانهم ماينامون في حصصهم في المدرسة… ولاتسأله كمان سؤال بايخ او سؤال بديهي المفروض انك تعرف جوابه ، حيبدأ يهزء ويقول ان جدته وهي غير متعلمة تعرف حل هالسؤال… في ماعدا هذا فهو مدرس جيد صراحة …\n\nخليك حبيب ومركز مع الدكتور وما راح تشوف منه الا كل خير\n\nوبالنسبة للتصحيح … يمشي عالكي سلوشن بالتمام",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1389932-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdeslam-mimouni/68373/38",
+              "user": "user8697",
+              "ts": 1408099648000,
+              "tid": 68373,
+              "pn": 38
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-guest-math208",
+      "uid": "stk-guest",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1599021959000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "دكتور اشفاق بخاري | T183 MATH 208\n\nالتحضير :\nيحضر يومياً بورقة تمرعالطلاب.\n\nطريقة الشرح :\nممتازة وتفاعلية، يبدأ الدكتور بمقدمة عن الدرس ويعطي مثال من واقع الحياة على الشيء الي بيشرحه لتقريب الفكرة، ثم يبدأ بشرح المفهوم الرياضي بطريقة جميلة وفعالة، يستخدم السيرفس حقه للشرح ويحل بالخطوات بالتفصيل الممل، ان تبعت معه ما بتضيع وغصب تفهم.\nالكويزات :\nسهلة جدا ومضمونة بمجرد انك تكون مركز معاه وتحل الواجبات بنفسك.\nالمياجر:\nسهلة وبنفس مستوى شرحه ونوتته الخاصة ( طبعا كان في الصيف مافي الا هو، ممكن الوضع يختلف اذا كان في اكثر من دكتور )\nالفاينلات :\nمتوسط الصعوبة، ويعيبه انه كان MCQ بعكس المياجر رتن، مع ذلك مستوى الأسئلة كان مقبول جداً ومتنوع بين السهل والمتوسط والصعب.\nالقريد النهائي:\nA بالراحة والدكتور مظلوم من الطلاب السابقين، من افضل الدكاترة الي مرو علي\nالصوت:\nواضح ويغير جو بين الحين والآخر\nإضافات :\nالدكتور اشتغل على نفسه، وطريقة شرحه تحسنت كثير\nانا لما نزلت الكورس قالو لي أجله ولا تنزل عند بخاري!!! ، الحمد لله اني ما سمعتهم ودرست عنده وطلعت بـ A+ ولله الحمد معه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1525310-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/46",
+              "user": "Guest",
+              "ts": 1599021959000,
+              "tid": 68404,
+              "pn": 46
+            }
+          },
+          {
+            "id": "stk-dr-m68373",
+            "n": "Dr. Abdeslam Mimouni",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math 208 - 201\n\nالتحضير:\nكان نهاية الكلاس يصور الحضور بجواله ويسجل الغياب.\n\nطريقة الشرح:\nكان يسوي مشاركة للشاشة ويجلس يكتب عالبورد\nيوضح في البداية اهداف الدرس وبعدها يشرح الكونسبت\nوبعدها يعطيك خطوات تسويها علشان تحل اي سؤال على هذا الدرس (How to solve)\nوعلى كل نقطة شرحها يعطيك اسئلة متنوعة من الكتاب او الاولد اقزام.\nويحب يتطرق لأخطاء الطلاب علشان تتجنبها.\n\nإضافات:\n1- بخصوص الاختبارات (الاسايمنت او الميد) كان يعطينا اليوم اللي قبل الإختبار هيلب سيشن يحل فيه اسئلة ويركز على نقاط معينة وتجي نسخ لصق في الاختبار\n2- الدكتور ينحرق دمه ويفصل اذا حصل الطلاب مافهموا شغله او ماكانوا مركزين معه , من الدكاترة القلة المخلصين جدا في عملهم, برضه يبغى الكل يتفاعل معه وكل شوي يسأل انتم معي وتراك بتقول Yes كثييييييييييييييييييييييييييييير.\n3- الدكتور كان الكوردنيتر فكان يسمع للطلاب واغلب الاشياء اللي اقترحوها الطلاب سواها مثل:\nتحويل الاختبارات لريتن بدلا من الفاينل انسر , اضافة كويز اضافي وحذف اسوأ كويز .\n4- بخصوص تصحيحه , لين الميد كان يعطيك بالملي وتاخذ حقك ولكن بعد الميد صار متساهل بشكل اكبر وفي الفاينل ماقصر مع الجميع والاغلب اخذ فوق حقه .\n5- نقطة مهمة الدكتور نوتاته كانت حوسة ومليانه أغلاط.\n6- الدكتور مايسجل المحاضرات\n7- في الأوفيس اور مايقصر ابدا ومستعد يشرح لك اي شيء .\n\nهذي النقاط من وجهة نظري المتواضعة خلال ترم كامل مع البروفيسور عبدالسلام ميموني, كان احد أفضل وأمتع الكلاسات اللي حضرتها هالترم من ناحية شرح الدكتور الممتاز ومن ناحية طيبته وحرصه عالطلاب وحبه اضافة لبعض الفكاهة والمتعة في محاضراته, ولو تتاح لي فرصة اني أخذ كورس اخر معه لن اتردد ابدا.\nجزاه الله خير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527837-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdeslam-mimouni/68373/48",
+              "user": "Guest",
+              "ts": 1610484175000,
+              "tid": 68373,
+              "pn": 48
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-dark_side-math208",
+      "uid": "stk-dark_side",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1686238632000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68373",
+            "n": "Dr. Abdeslam Mimouni",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math 208 - Term 222\nالتحضير:\nالدكتور يحضر اخر الكلاس غالبا او ب نص الكلاس، ومب كل الايام يحضر كثير ايام ماحضر فيها. طريقة التحضير ب الباركود من التطبيق\n\nطريقة الشرح:\n\nالدكتور يعتمد اعتماد تام على الشرح ب الكتابه على السبوره، يكتب لك الانترودكشن و الاوبجكتف و يعطيك نبذه عن الدرس بعدين يبدأ يحل لك مسائل، يبدا يحل ب السهل و يتدرج لين مايوصل ل اسئلة الاولد او اسئلة مستواها صعب او فيها تريكات. الدكتور يهتم جدا جدا جدا ب فهم الطالب ومثل ماقالوا اللي قبلي ب تقول yes كثييير.\nطريقة شرحه بالنسبه لي واضحه، الدكتور من الاخر شريييييييح.\n\nالكويزات:\nمستوى كويزاته متوسط, بالعاده يعطينا سؤالين سؤال مستواه بسيط و سؤال فيه لكاعه شوي.\nالدكتور عطانا ٦ كويزات و حذف لنا اسوء كويزين (الشغله كلها تعتمد على الافرج حق الكلاس اذا كان مرتفع مب حاذف لكم شيء واذا كان نازل بيقعد يحذف لكم كويزات لين يدخل ال range اللي يبيه)\n\nإضافات:\nالدكتور طيب وحبيب لكن تراه مايداني يشوف واحد على جواله ب الكلاس او نايم واذا شافك ممكن يزبد لك او يمزح معك على حسب المود، لكن اذا تكررت اعرف انك بتنكرش من الكلاس\n\nالكورس ماكان فيه مصادر الصراحه ف كنت مكتفي اني اصور السبوره بعد مايكتب عليه و طلعت من الكورس ب قريد طيب و الكلاس حقنا اعتقد كان ٣٣ طالب ١١ منهم اخذوا A+ ف اذا انت تدور قريد الدكتور يناسبك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536745-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdeslam-mimouni/68373/49",
+              "user": "Dark_Side",
+              "ts": 1686238632000,
+              "tid": 68373,
+              "pn": 49
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user12137-math208",
+      "uid": "stk-user12137",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1693315842000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68373",
+            "n": "Dr. Abdeslam Mimouni",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math 208 - Term 223\n\nالتحضير : يحضر اخر الكلاس ،وكثير أيام ما حضر فيها وطريقة التحضير بالباركود من التطبيق\n\nطريقة الشرح : يكتب بالسبورة الانترودكشن والاوبجكتف ثم يشرح الكونسبت خطوة خطوة بشكل متسلسل ومرتب كتابة على السبورة ويعطي مثال او مثالين على كل فكرة ثم نهاية الدرس يعطي سؤال او سؤالين اولد اقزام, ودائما بيكرر عليكم عبارته الايقونية YES OR NOOO?!!!!!! ولازم تقولوا YES ولا بيعيد شرح النقطة مرة ثانية واذا حس ان الyes تبعكم ضعيفة ممكن يعيد شرح النقطة مرة ثانية بعد\n\nالكويزات : اغلب كويزاته مستواها من سهل الى وسط وزي ما قال الي فوقي يعطي 6 كويزات ويحذف اسوء 2 (يعني بيدبرها في مصلحتك)\n\nالقريد النهائي: A+\n\nالصوت: عالي جدا وواضح أشد الوضوح ولهجته واضحة جدا لدرجة ما بتفكره مغربي\n\nإضافات :\n-الدكتور طيب ويهتم بالطلاب أشد اهتمام وتقدر تسأله بعد الكلاس ويسحبك لأقرب غرفة فاضية ويشرح لك على انفراد لين ما تفهم وحاضر في الاوفيس والتيمز ويسوي هيلب سيشنز للطلاب اونلاين او حضروي حسب رغبتكم\n-ومن الصورة والكلام في البداية بتحسبه عصبي بس والله انه فرفوش ويحب ينكت ويسولف, بس لا تستعمل الجوال يرحملي والديك ولا بيطردك\n-الكورس توه حدثوه فما كان فيه مصادر عدلة؛ فكان الكلاس كامل وأنا منهم نسوي زي الي فوقي نصور السبورة (كتابته على السبورة جدا سهلة الفهم ومرتبة وتغطي كل شيء في الميتيريال وأشوفها أفضل من نوتاته الي صايرة ملخبطة شوي وتضيع الواحد), و9 طلاب جابوا A+ و3 جابوا A (وأنا منهم بدون ما أشد حيلي, وكنت قريب من الA+) من أصل 22 واحد تقريبا في الكلاس\n-من ناحية الحل كنت أعتمد على اولد “جست مياو” من أفضل الاولدات انصح به بشدة جزاها الله خير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536919-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdeslam-mimouni/68373/50",
+              "user": "user12137",
+              "ts": 1693315842000,
+              "tid": 68373,
+              "pn": 50
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2352-math208",
+      "uid": "stk-user2352",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1316622744000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68381",
+            "n": "Dr. Jaafar Al-Mutawa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الدكتور للأسف الشديد سيء للغاية تذاكر وتحل مسائلوتتفاجئ بالقريد ا،،\n\nوأذكر انه اعطى 7 طلاب قريد f للأسف الشديد في ماث260",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p906444-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jaafar-al-mutawa/68381/33",
+              "user": "user2352",
+              "ts": 1316622744000,
+              "tid": 68381,
+              "pn": 33
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8681-math208",
+      "uid": "stk-user8681",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1327391958000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68381",
+            "n": "Dr. Jaafar Al-Mutawa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ترم 111 ماث 260\nاذا عنده اكثر من سكشن, يسمح بالميك اب\nالشرح ممتاز جدا لو تنتبه معاه وتكتب نوت, والمياجر تصحيحه فيها شوية خسف 😦\nالكويزات اسئلته سهلة نسبيا بس فيها تركات, والفاينل قريد احس انه انظلم فيها طلاب كثير وانا منهم 😦\nاذا شفته منزل اي كورس نزل معاه… اعطيه b+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p972954-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jaafar-al-mutawa/68381/36",
+              "user": "user8681",
+              "ts": 1327391958000,
+              "tid": 68381,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-someone33-math208",
+      "uid": "stk-someone33",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1660607188000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68381",
+            "n": "Dr. Jaafar Al-Mutawa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "From Telegram\nMath208 Term212\n\nالتحضير : يعطي الورقة الطلاب وهم يحضرون نفسهم، وبعض الاحيان مايحضر\nطريقة الشرح : على السبورة، ويشرح كل شي خطوة بخطوة، اعطيه 10/10\nالكويزات : عطانا ٤ كوزات مستواهم متوسط\nالصوت: منخفض\nإضافات :الدكتور حليو ووسيع صدر وتصحيحه في المياجر حليو\nالتقييم النهائي : 10/10",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1535034-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jaafar-al-mutawa/68381/65",
+              "user": "SomeOne33",
+              "ts": 1660607188000,
+              "tid": 68381,
+              "pn": 65
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3193-math208",
+      "uid": "stk-user3193",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1266035688000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68400",
+            "n": "Dr. Mohammed Salem Samman",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اخوي متفائل انا نزلت معاه 260 في ترم 91\n\nالدكتور شريييييح درجة اولى ويحب يوصل المعلومة للطلاب ومهتم جدا جدا بفهم الطالب حتى كل شوي يسأل في سؤال هنا قبل انتقل للفقرة الثانية يعني دكتور يشرح من قلب ويبغى الطلاب يستفيدون هذا عن الشرح\n\nوالنوت مثل ماقالوا الشباب الكتابة معه كثيرة يعني من اول الكلاس الى اخره تقريبا 35 دقيقة كتابة لكن النوت الي تكتبه من ذهب انا عن نفسي كتبت معه في ال 260 والي ناقص كملته من اخوياي والحمدلله طلعت بقريد احلى من الحلو واقول لك يمكن في السكشن اكثر من 5 اخذوا اي واي بلس معه\n\nاما عن الكوزات هو قال لنا في بداية السمستر ان فيه كوزات مفاجأة بدون لايقول لنا وقال ان هذا من القسم لكن الحمدلله خلصنا القسم ولا عطانا ولا كوز مفاجئ واغلب الكوزات الي ناخذها في الغالب الطلاب هم الي يحددون يعني اذكر يمكن مرتين الي غيرنا موعد الكوز وفيه خويي سحب عن كوز وبدون عذر وراح له بالاوفس اور وقال له انه راحت عليه نومه وكذا وسمح له الدكتور وعطاه الافرج وانا محدثك في واجب مات لاب عليه 2 % ماسلمته ويوم جاء الواجب الثاني رحت وكلمت الدكتور وقلت له انا ماسلمت الاول وتعرف يادكتور 2 % على الواجب الواحد كثيرة المهم قال خلاص سلمه مع الواجب الثاني\n\nالهوموركات غالبا كل يوم اثنين وفيه بعض الطلاب يسلمونها الاربعاء وانا من اكثر الطلاب الي ماعمري سلمت هومورك في موعده يعني مثل الاسبوع الجابتر الاول اسلم الجابتر الاول مع الثاني في الاسبوع الثاني ويقبل الدكتور مدري من الدكتور او من المصحح المهم اني الحمدلله طلعت بالاخير من الكورس بدرجة ممتازة جدا\n\nبالنسبة للتعريفات والصح والخطا الي ذكروها الشباب انا شفتها في مياجر قديمة يمكن ميجر 71 لكن في مياجرنا ماجاب ولا تعريف ولا صح وخطا ولو جابها كلها موجودة بالنوت حقه بالنص الواحد والتعريفات الي يكتبها بالنوت تكفيك لفهم الموضوع بدل من البحث من الكتاب او سوال الصديق يعني يكتب الشرح على شكل تعريف وعشان كذا الكتابة طويلة معه 🙂\n\nوالكوزات اشوف انها سهله وتقيس فهم الطالب وتصحيح الدكتور والله احلى من العسل\n\nالمياجر\n\nميجر ون سهل جدا\nميجر تو سهل جدا جدا جدا جدا جدا الافرج 85 🙂\nالفاينل صعب\n\nالقريد النهائي : A++++++\n\nمن المواقف الي اذكرها مع الدكتور جيته بعد الميجر ون في الاوفس وعندي سؤالين ابغى يشوف توزيع الدرجات الي حصلت عليها في السؤالين المهم الدكتور حاول يقنعني ان حلي مو كامل ونقص علي على ان حلي مو كامل مرة المهم ان الي خلاني اطلع من عنده وانا راضي انه جالس نص ساعه يحاول يفهمني ليه نقص علي وليه حلي ناقص وشرح لي المسالة من الى وكلامه طيب ويشجع الطالب ويحاول يقنعي وهو يبتسم ونفسه طيبه مو مثل بعض الدكاترة الباقين\n\nتذكر كلامي كان في سمستر 91 في ماث 260 وكان الكوردينيتر وقتها هو الدكتور وكان فيه 4 سكاشن هو يدرس 3 وسكشن واحد يدرسه دكتور ثاني 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p542321-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mohammed-salem-samman/68400/20",
+              "user": "user3193",
+              "ts": 1266035688000,
+              "tid": 68400,
+              "pn": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ad0rs-math208",
+      "uid": "stk-ad0rs",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1453413857000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math260 - t151\n\nالتحضير :\nورقة تمر عالطلاب بس بعدين صار يحظر بنفسه عشان الطلاب اللي يجوا قبل نهاية الكلاس بدقايق\nطريقة الشرح :\nشرحه ممتاز ونوته منظم\nالكويزات :\nمتوسطة مائلة للصعوبة واذا طريقة كتابتك منظمة يعطيك بونص\nالمياجر:\nكومون\nالفاينلات :\nكومون\nالقريد النهائي:\nB\nالصوت:\nواضح\nإضافات :\n1- يشطح كثير ويجيب شعر اردو أو نصايح\n2- اكتب معه في الكلاس لأنك ممكن تتنكب معه في ميجر 2 والفاينل\nمايعترف بالكتاب واحتمال لو حليت ب طريقة الكتاب ينقصك عشان كذا اكتب معه وذاكر من نوته",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1440112-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/36",
+              "user": "ad0rs",
+              "ts": 1453413857000,
+              "tid": 68404,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-saleh1417_2015-math208",
+      "uid": "stk-saleh1417_2015",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1515448459000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH260-171\n\nالتحضير :\nورقة تمر على الطلاب ويوقعون عليها طبعا نظام اللي بالقروب\"بالله من عند بخاري الحين يحضرني يدخل خااص\" ف كل واحد مزبط خويه\n\nطريقة الشرح :\nيجيب نوتته معاه وينقل منها ويشرح على السبورة و شرحه للأمانه يتعمق بالموضوع بشكل كبييير ويعظم المسألة بس ترجع تذاكرها لحالك تشوفها بسيطه زي المويه.\n\nالكويزات :\nالله يهديه ويصلحه الدكتور عنده عاده سيئة وهي ان غالبا يحط اسئلة تعتمد على بعض يعني اذا ماعرفت بالاول ماراح تجاوب الثاني .\n\nالمياجر:\nكومن لكن بترمنا كان هو الكوردنيتر المياجر كنا نشوفه اسهل من كوزاته 🤪 بتصحيح المياجر اذا مافهم جوابك يعطيك صفر ماعنده وقت 😄 ويقول احيانا اعطيك صفر بالسؤال عشان تجي لمي وتراجع معي بالمكتب وتعرف اخطائك وتستفيد !\n\nالفاينلات :\nكومن ونكبونا في سالفة الريتن اسميها “نكبة كانون الثاني” المادة هذي منذ الأزل والفاينل رتن الا بهالترم هذا قالو لضيق وقت التصحيح يبي يصير الفاينل MCQ و ١٤ سوال كل سوال 10 points 😐\n\nالقريد النهائي:\nتقيمي للدكتور صراحة فوق C+ بشوي واللي يعجبك فيه اخلاقه وطيبته.\n\nالصوت:\nاكسنت بكستاني لكن الصوت مسموع بشكل كبير\n\nإضافات :\n\nطريقة توزيعه للدرجات سقيمه صراحةً يكب عشاك بورقة التحضير وهي تمر بين الطلاب والبلاك بورد مايحط فيه شي ا ب د ا الا السيلابوس فقط !\nبالنهاية الدكتور هذا اذا انت سيلف ستدي ممتاز لك غير كذا لاتحرص تسجل معه الا للضرورة\n\n*الدكتور له ولد بكندا من الحين اقولك ترا بتسمع عنننه واجد ويمدحه انه طالب مجتهد ويذاكر ويحضر المحاضرات مايغيب 👏 👏",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1485774-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/40",
+              "user": "Saleh1417_2015",
+              "ts": 1515448459000,
+              "tid": 68404,
+              "pn": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-faisal_2015-math208",
+      "uid": "stk-faisal_2015",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1546298618000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ماث 208 ترم 181\nالتحضير اخر الكلاس و نادر ما يعطي ليت\nالشرح يشهد الله حاولت افهم منه لكن ما قدرت معاه جهاز يكتب فيه ولا يطالع الطلاب ربع ساعة و يصارخ بشكل غريب مافي الا 3 معاه\nالكويزات كان مستواها علي\nالتصحيح ميجر 1 و2 كان شديد في اسئلة اخذت فيها 4 و 6 من 14 لان الخطوة الثانية غلط وضرني كثير مع ان باقي الخطوات صح اما الفاينل جزاه الله خير لكن الشق اكبر من الرقعة\nقريد اعطيه C كمدرس و A كأب يتعامل معك\nملاحظة الدكتور عنده كل احد واجب يتسلم والكلاس ورك كان جيد لكن لا انصح فيه بكورس مثل 208 ينفع ل 101 &102",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1504329-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/41",
+              "user": "Faisal_2015",
+              "ts": 1546298618000,
+              "tid": 68404,
+              "pn": 41
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user10843-math208",
+      "uid": "stk-user10843",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1553593993000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH208, Term:182\n\nيشرح وهو جالس لانه يعاني من اصابة في ظهره، يكتب على التابلت ويوصله بالبروجكتر، وبالنهاية يرسل الملف للطلاب.\nبداية يشرح فكرة الدرس، ثم يشتق القوانين ثم يحل تدريبات من الكتاب ويوضح الحل خطوة بخطوة، شرحه جيد جدا، توقعته بيكون سيء جدا ولا ينفهم منه بعد ماسمعت كلام الطلاب، يعيبه فقط انه صعب التركيز معه بما انه يشرح وهو جالس، لكن يرمي ذبات وسوالف حلوة بنص الشرح تخليك ترجع تركز معه 🙂\n\nكان يحضر نهاية المحاضرة ومايقول شيء عالتأخير، لكن شاف الطلاب استغلوه وصاروا يحضرون بعد نص ساعة فصار يحضر بعد ١٠ دقايق. طبعا مرة يحّضر وعشرة لا، ولا لو هو يحضر يوميا قدني اخذت Dn وماقعدت اقيمه 🙂\nسألته بعد الميجر الثاني عن غياباتي، قال ماعليك ماراح اعطيك DN الحين، لو بعطيك عطيتك من الميجر الاول.\nكويزاته سهلة، يعطي ٥ كويزات تقريبا طول الترم وتكون على ٣-٤ دروس سوا\n\nالمياجر طبعا ريتن، وتصحيحه شوي شديد، بالميجر الاول نقصني على سؤال ٦ درجات رغم ان اجابتي صحيحة، لكن الطريقة كانت غلط، يوم راجعته بالمكتب عطاني ٣ درجات زيادة، فالواضح انه شديد بالتصحيح لكن لو راجعته وكان كلامك صحيح راح يزودك\nفيه سؤال ثاني نقص علي درجتين، لاني مابسطت الجواب، لكن قالي انه الدكاترة اتفقوا على كذا ومايقدر يسوي شيء، فما اقدر الومه.\nالخلاصة: شرحه جيد، مايهتم كثير بالتحضير، شديد شوي بالتصحيح، حبيب جدا جدا ويحترم الطلاب ❤️",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1507851-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/42",
+              "user": "user10843",
+              "ts": 1553593993000,
+              "tid": 68404,
+              "pn": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-nvm-math208",
+      "uid": "stk-nvm",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1556804889000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Math 208 - 182\n\nالتحضير : غريب نظامه هالترم، اول اسبوع ماحضر، ومن بعدها للميجر الاول يحضر، بعد الميجر الاول ماصار يحضر وبعدين شاف الطلاب مايحضرون فرجع يحضر، وبنفس الوقت تسأله يقول ماهتم للتحضير وبنفس الوقت يزعل اذا مافيه احد يحضر.\nغالبا مايحاسب عالتأخير (الى نص ساعة)\n\nطريقة الشرح : وهو جالس يكتب عالتابلت ومعروض على البروجكتر، طريقة حلوة بالنسبة لي وبتفهم اذا انت مركز معه، حاول ماتغيب كثير لانه كثير من دروس الميجر الثاني والفاينل يستغني عن الكتاب أو بمعنى اصح طريقته تكون ابسط بكثير عن الكتاب فإذا فهمتها منه فبتكون اسهل عليك بميه مرة.\n\nالكويزات : عطانا ٥ كويزات سهلة ونفس اسئلة الهومورك.\nالهومورك هو عبارة عن السجستد بروبلمز الموجودة بالسيلبس وطويلة جدًا لكني اعتبرتها تجهيز للمياجر.\nالمياجر: كومن\nالفاينلات : كومن\nأشوفه تصحيحه عادل والميجر الثاني كانوا يبون افرج نازل بعكس افرج الميجر الاول (85) فالتصحيح كان شوي شديد.\nالقريد النهائي: 9/10\nالصوت: فيه اكسنت خفيفة وصوت واضح\nإضافات : نقصته الواحد هذا لطريقه استقباله لي فالاوفس اورز، اول شي لطعني ربع ساعة فحاول ماتجي ببداية الاوفس اورز لانه مايبدأ عالوقت، وثاني شي كان ماله خلق ويقول انه تعبان ومافادني 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1509281-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/43",
+              "user": "nvm",
+              "ts": 1556804889000,
+              "tid": 68404,
+              "pn": 43
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-bader_alqahtani-math208",
+      "uid": "stk-bader_alqahtani",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1589341216000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68404",
+            "n": "Dr. A Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH208-191\nالشرح :يشرح على جهاز تابلت و يحل قدامك بالخطوات التركيز معه و كتابة الموت تكفي انك تطلع من الكلاس فاهم اللهم تروح تطبق و نهاية الدرس اذا خلص السكشن يرسل النوت لطلاب نوتته حلوة بس لابد انك تركز و تكتب معه عشان تكون مذاكر اول ب اول\n\nالتعامل :تعامله اشوفه عادي و يعامل الطالب كانه ولده\n\nالكوزات :تكون سهلة و من الكتاب اغلبها و مرات بيحل الكوز قدام الطلاب و الكل بيكون عالجوال و بيجيبه 🙂 صارت لنا .\n\nالواجبات:الي سلم و الي م سلم نفس الشي عطانا ١٣/١٥\n\nالتصحيح :شديييد والله بدون مبالغة يخصم على اي شي عكس اي دكتور ثاني يتساعد معك ذا لا يعاملك كانه الة كان دايم افرج سكاشنه نازل بسبب تصحيحه السيء .\n\nالتحضير:ورقة تمر و تقدر تخلي خويك يحضرك و الدكتور م عطا احد دي ان\n\nملاحظة :خله اخر خياراتك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1522000-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-bokhari/68404/45",
+              "user": "Bader_Alqahtani",
+              "ts": 1589341216000,
+              "tid": 68404,
+              "pn": 45
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ak-95-math208",
+      "uid": "stk-ak-95",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1453148187000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68411",
+            "n": "Dr. Muhammad Bokhari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ماث 260 سمستر 151\n\nالتحضير : أحيانا ورقة تمر على الطلاب، وأحيانا ينادي على الأسماء نهاية الكلاس، ما يدقق كثير على التأخير\n\nطريقة الشرح : نقل نسخ لصق من نوتاته، بما فيها من أخطاء ( وما أكثرها) ، يبدأ أولا بكتابة ال objectives ، بعدين القوانين بشكل مرتب ومبسط ، ثم يحل أكبر قدر ممكن من أسئلة الكتاب، طريقة الشرح مملة لأنها مثل ما ذكرت عبارة عن نسخ ولصق ، وثلث الكلاس يروح في تصحيح الأخطاء من الطلاب\n\nالكويزات: سهلة إلى متوسطة\n\nالمياجر ، الفاينلات: كومون، ميجر 1 و 2 لطيفين ، ثم جاء الفاينل فجعل عاليها سافلها، خسف فيني 😦\n\nالصوت: واضح\n\nإضافات :\n- حبيب وأخلاق لأبعد درجة ، ما مر علي مثله في الأخلاق ، حريص جدا على الطالب، ويتكلم معاه كأخ\n- تصحيحه عادي ، لكن روح له بالأوفس أور بعد الميجر، يمكن يدفك كم درجة\n- الدكتور متمكن من المادة ، لكن المشكلة بصراحة إن المادة نفسها غبية 🤪 ، لما تحل المسألة ما تعرف ليش تحلها كذا وليش تسوي كذا ، فقط تتبع الخطوات بالنص ويطلع لك الجواب ، ما طلعت من المادة كاستفادة إلا يمكن في ال Matrices ، الباقي كله حفظ للخطوات فقط ، وكتاب المادة أيضا سيء ومعقد وغير واضح وملخبط\n- مهم جدا إنك تكتب نوت مع الدكتور أو تصور السبورة عالأقل ، لأني أعتقد إنك ما راح تفهم شي من الكتاب ، والدكتور غالبا في اختباراته يطلب طريقة الحل اللي هو شرحها.\n\nالقريد النهائي:\nB",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1439617-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/muhammad-bokhari/68411/32",
+              "user": "AK-95",
+              "ts": 1453148187000,
+              "tid": 68411,
+              "pn": 32
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abubakermt-math208",
+      "uid": "stk-abubakermt",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1717082421000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68413",
+            "n": "Dr. Naseer-Eddine Tatar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH208 Term232\n\nالتحضير: اول عشر دقايق متساهل الباقي احيان يحجر و احيان لا انت و حظك.\n\nطريقة الشرح: عادية، مشكلته يشرح بالسبورة بس و شويييي من الكتاب، فما راح يكون عندك سلايدات او مرجع ترجع لها.\n\nالكويزات: صعبة حبتين لدرجة ان النورم زادني 6 درجات، بس ترا اغلب الاسئلة من الكتاب.\n\nالصوت: واضح و مفهوم.\n\nالقريد النهائي: B\n\nإضافات: الدكتور ما كان نفس ما توقعته ابدا، حسب الكلام اللي قريته هنا توقعت اني بدرس اسوأ كورس، لكن الدكتور كان طيب والله و متعاون و مرن بخصوص الكويزات و مستعد يشرح لك اكثر من مرة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1537327-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/naseer-eddine-tatar/68413/53",
+              "user": "AbubakerMT",
+              "ts": 1717082421000,
+              "tid": 68413,
+              "pn": 53
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m.hussain-math208",
+      "uid": "stk-m.hussain",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1386090596000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68472",
+            "n": "Dr. Stephen Binns",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ماث 260 ترم 131\nالتحضير بالارقام في نهاية الكلاس وعادي لو تتأخر او تسوي ميك اب\nالشرح ممتاز بس عيبه ان ما يقول شنو قاعد يشرح واي سكشن موجود\nالتصحيح فوق الممتاز بالنسبة للمياجر والكوزات\nالميجر والفاينل كومون\nالصوت متوسط ولهجة واضحة جدا\nقمة في الاخلاق ويتسامح في تأخير تسليم الواجب ويعطي احيانا اساينمنت نحله في البيت يعتبره كوز ويكون في مواضيع من بره المتريال لكنها متعلقة فيه وسهلة\n\nالقريد a",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1299787-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/stephen-binns/68472/42",
+              "user": "M.Hussain",
+              "ts": 1386090596000,
+              "tid": 68472,
+              "pn": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user1853-math208",
+      "uid": "stk-user1853",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1230076611000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68565",
+            "n": "Dr. Muhammad Aslam Chaudhry",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يحضر ولكن ! مو مهم مره عنده لانه بالاخير (يمكن) تجيك درجه الحضور كامله !\nطريقة الشرح : وناسه . وأهم شي المعلومه توصل للطالب . وحصته غير ملله ابدا\nالكويزات : تاخذها معك للبيت وتحلها وتردها له\nالمياجر: اذا كانت بيده المياجر . فهي من النوت حقه\nالفاينلات : هههههههه اذكر بالصيف درسنا math260 وكان الفاينل تاخذه وتحله ببيتكم وترجعه له … الله يجزاه ألف خير … وهذا الفاينل الوحيد اللي اخذته مع هالدكتور\nالقريد النهائي: حقك وزياااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااااده\nالصوت: 8.5 اذا كانت الماده كومون … عشره على عشره اذا كانت بيده\nإضافات :\n\nأفضل دكتور مر عليّ … واحسنهم بالاخلاق … الله يذكرك بالخير ياشودري وتستاهل بوسه على راسك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p343154-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/muhammad-aslam-chaudhry/68565/2",
+              "user": "user1853",
+              "ts": 1230076611000,
+              "tid": 68565,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abu_fras-math208",
+      "uid": "stk-abu_fras",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1370369540000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68568",
+            "n": "Dr. Husain Al-Attas",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ماث 260 ترم 122\nالصوت : واضح ( يشرح عربي وانجليزي )\nالشرح :\nسرييييييييييييييع ماتلحق تفهم وتتكتب معاه 😐\nالكويزات :\nيختار الأسئلة الطويلة ( عطانا اثنين بس وما صحح الاول الى نهاية الترم بس يعطيك السليوشن )\n\nاضافات : المدرس باااارد جدا اعطانا الكلاس ورك قبل الفانيل بيومين او ثلاث (لكن يدف )\nالقريد النهائي\nc",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1231946-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/husain-al-attas/68568/26",
+              "user": "ABU_FRAS",
+              "ts": 1370369540000,
+              "tid": 68568,
+              "pn": 26
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mohammed_mag-math208",
+      "uid": "stk-mohammed_mag",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1653828172000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68569",
+            "n": "Dr. Ibrahim Al-Rasasi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH 208 - TERM 212 حضوري\n\nالتحضير :\nيحضر الدكتور اخر الكلاس, ومتسامح مع التأخير\n\nطريقة الشرح : طريقه شرح الدكتور جدا ممتازه وسلايداته ممتازه, لكن صوته جدا ضعيف ويفضل تجي بدري تلحق على الصفوف القدام وتسمع كويس.\n\nالكويزات :\n5 اختبارات كان يحط من ضمنها سؤال هوموورك, سوا نورملايز بالنهايه لأن الافرج كان نازل\n\nالمياجر: كومن\n\nالفاينلات : كومن\n\nالقريد النهائي: B\n\nالصوت: ضعيف\n\nإضافات : الدكتور تعامله جدا جميل ومن افضل الدكاتره اخلاق,\nالماده بعض الاحيان بيقولون لك ماده قريد لكن لازم تعامله زي اي ماده ماث مب IAS , علشان ماتلقم مثلي.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1534498-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibrahim-al-rasasi/68569/74",
+              "user": "Mohammed_Mag",
+              "ts": 1653828172000,
+              "tid": 68569,
+              "pn": 74
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-amrfa-math208",
+      "uid": "stk-amrfa",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1367524922000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m68677",
+            "n": "Dr. M Al-Shahrani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "math260 term 122\n\nالتحضير :نهاية كل محاضرة\nطريقة الشرح : ممتآآآآآآآآآزة\nالكويزات : متوسطة الى صعبة 😕\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: A\nالصوت:واضح جدا\nإضافات : الكلام اللي منتشر عن تصحيحه انه مررررة شديد , غلط و بقوة انا خوفوني من كلامهم و جربت بنفسي و كان مزبوووط",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1218334-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/m-al-shahrani/68677/39",
+              "user": "amrfa",
+              "ts": 1367524922000,
+              "tid": 68677,
+              "pn": 39
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ria-math208",
+      "uid": "stk-ria",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1648347567000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m70511",
+            "n": "Dr. Ahmad Bonfoh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH 208-212\nالتحضير : ينادي وتقدر تحضر لاي احد لانه ما يطالع بوجيه الطلاب (وتقدر تحضر مع اي سكشن مراح يقلك شيء) + يقول لو غيباتك واجد بيرسلك ايمل يقولك انتبه ترا بتاخذ حرمان لكن اغلب اللي بالكلاس غيباتهم نص السميستر ولا ارسل لاحد اميل ولا اي شيء لحد اللحين\nطريقة الشرح : يشرح من نوتاته لكن مشكلته انه خطه صعب تقراءه ومب الكل يفهم من شرحه ومنهم انا بس اجي احضر واذاكر مواد ثانية\nالكويزات : كويزات سهلة الى متوسطه\nالمياجر: كومن\nالفاينلات :كومن\nالقريد النهائي: A+\nالصوت: واضح وينكت واجد بالكلاس بس يبيلك تتعود علي الاكسنت حقه\nإضافات : دكتور احمد مناسب جدا للمادة( MATH 208 او اي MATH كورس مهب معقد) هذا انا اخذت لحد الان ميجرين معه جالس يحاول يزود الطلاب علي قد ما يقدر اذا انت حلك غلط مستحيل يعطيك صفر بيحاول يلقالك شيء عشان يعطيك درجة, انا عن نفسي اخطيت بالميجر الاول من ناحية الجواب النهائي او خطوه بس وصلت للجواب الدكتور عدالي ايها وعطاني فل (طول ما هو شايف انك فاهم بيعطيك فل) + لو تروحله اوفس اور وتناقشه عن الدرجة بيحاول يزودك علي قد ما يقدر",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1534009-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ahmad-bonfoh/70511/38",
+              "user": "RIA",
+              "ts": 1648347567000,
+              "tid": 70511,
+              "pn": 38
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-khalid205-math208",
+      "uid": "stk-khalid205",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1338232086000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m78126",
+            "n": "Dr. E Echi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : غالبا في نهاية الكلاس و احيانا ما يحضر\nطريقة الشرح : بصراحة سيئة جدا و النوت حقتو مو مرة جيدة … ماسك الورق و ال50 دقيقة كلها كتابة و تنمسح السبورة اكثر من 3 مرات و ما تلحق عليه\nالكويزات : معظمها من النوت … مو صعبة\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: D\nالصوت: صوته واضح\nإضافات : يصراحة لو يخرج طالب و يشرح بداله … احتمال كبير نفهم من الطالب اكثر … الشخص ما يعرف يوصل المعلومة و تعامله مع الطالب مو جيد حتى في الاوفس لو رحتله … بصراحة حتى لو اني مضطر اخد المادة و ما في غيره … ما حنزل معاه ابدا\n\nاخذت معاه ماث 260 و ندمت ندم غير طبيعي 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1047008-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/e-echi/78126/12",
+              "user": "Khalid205",
+              "ts": 1338232086000,
+              "tid": 78126,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-cs_scientist-math208",
+      "uid": "stk-cs_scientist",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1464143782000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m94260",
+            "n": "Dr. Ahmet Tatar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH260-152\nالتحضير :\nمتساهل جدًا في التحضير، كنت أشوف طلاب يحضرون 40 دقيقة متأخر و يحضرهم عادي، و يسمح بالميك أب\n\nطريقة الشرح :\nشرحه ممتاز ما شاء الله، النوتات اللي يكتبها جبّارة، عن نفسي ما استعنت بالكتاب أبدًا ولله الحمد، كله من نوتاته\nأول شيء يشرح الكونسبت، بعدها يعطي أمثلة ممتازة و توصل الفكرة، و إذا قرب ميجر ولا فاينل يحل اختبارات قديمة، و إذا ما كفّى الوقت سوا help session\n\nالكويزات :\nالكويزات هي النقطة اللي ما عجبتني بالدكتور، الكويز عادة يكون بمستوى الميجر أو أسهل شوي، بس كويزاته أشوفها أصعب من الميجر\nأغلب كويزاته كانت متوسطة تميل للصعوبة، و فيه اثنين منها سهلين\n\nالمياجر:\nكومون\n\nالفاينلات :\nكومون\n\nالقريد النهائي:\nB\n\nالصوت:\nواضح، و إنقليزية واضحة\n\nإضافات :\nالدكتور حبيب والله، و أخلاقه حلوة و يساعد الطالب بشرح الدرس قد ما يقدر\nممكن بالكلاس ما يجاوبك عدل إذا هو متأخر و يبي يلحق يخلص المنهج، بس تعال له في office hour و ما بيقصر\nالشيء الثاني اللي ما أعجبني فيه إنه ما يتساعد بالتصحيح، يعطيك حقّك بالملي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1450324-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ahmet-tatar/94260/39",
+              "user": "CS_Scientist",
+              "ts": 1464143782000,
+              "tid": 94260,
+              "pn": 39
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-breaktheunbreakable-math208",
+      "uid": "stk-breaktheunbreakable",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1526272947000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m94260",
+            "n": "Dr. Ahmet Tatar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم :\nMATH 260 - 172\nMATH 201 - 171\nالتحضير :\nنص الكلاس يحضر الكل. يسمح بالتأخير.\nطريقة الشرح :\nيستعمل نوتات والسبورة ويجاوب على الطلاب. شرحه بعض الأحيان ممل ويخليك تستعمل جوالك.\nالكويزات :\nمتوسطة مائلة للسهولة. مرة يمكن أو مرتين جاب لنا أسئلة صعبة. ياخذ في النهاية أفضل 5 كوزات من 6.\nالمياجر:\ncommon\nالفاينلات :\ncommon\nالقريد النهائي:\nB\nالصوت:\nواضح بس عيب الدكتور لغته وإيصاله للمعلومة. بعض الأحيان مش ذاك الزود…\nإضافات:\nطيب جدا جدا جدا. التتار مثال على التفاني والأخلاق الرفيعة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492311-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ahmet-tatar/94260/54",
+              "user": "BreakTheUnbreakable",
+              "ts": 1526272947000,
+              "tid": 94260,
+              "pn": 54
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8581-math208",
+      "uid": "stk-user8581",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1437935646000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m94443",
+            "n": "Dr. Nadeem Malik",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH 260 TERM 142\n\nالتحضير : اول الاسابيع كانت ورقة تمر على الطلاب بعدها هون ما قام يحضر احيانا الي يحضرون يمكن 6 ولا 7 . متساهل كثير في التحضير ولو تجي قبل 5 دقايق من نهاية الكلاس ماعنده مشكلة . وللأمانة جات فترة شدد على التحضير والسبب درجاتنا في الميجر الثاني كانت دمار لكن بعدها بكم يوم ما قام يحضر + يسمح الميك اب\n\nطريقة الشرح : من الكتاب يقعد يحل الامثلة ويشخبط على السبورة وماتدري وش السالفة ومرة شرح درس برا المنهج … الرجال يحاول يوصل المعلومة لكن للأسف مافي امل … يقعد يحل الامثلة وكل ساعة يرجع للكتاب ويشوف حله صح او لا وغالبا خطأ يطلع …\nالزبدة يحل المسائل لنفسه و الطلاب يسلكون …\n\nالكويزات : هذا الميزة الوحيد الي فيه وهي ان كل كويزاته take home وكلها من اسئلة الكتاب فيعني لاتضيع الكلاس ورك\nلكن لاتنسى انه الكلاس ورك افرج وراح ينقصك خصوصا لو كان افرج عال في المياجر والفاينل … السمستر الماضي نكبنا الله يهديه عطانا المجموع النهاية مع الفاينل ووقبل اعلان توزيع القريدات نقص كل الطلاب 10 الى 15 درجة في الكلاس ورك …\nالهوموركات : بداية الاسبوع لازم تسلمه لكن الاغلب يتأخر والرجال مايقول شي …والصراحة اشك انه يهتم فيها .\nالمياجر**:** كومون\nالفاينلات : كومون\nالقريد النهائي**: a+ كأخلاق وتعاون لكن** كشرح للأسف D\nالصوت**:** الاكسنت بريطاني وصوته جيد لكن وش الفايدة اذا شرحه مب ذاك الزود\nإضافات :\n- اذا انت تعتمد على الدكتور في كورسات الماث فنصيحة دور غيره اما اذا بتاخذها سيلف ستدي فيمكن الوضع يمشي معاك لكن اذا كان الكورس صعب و كومون شف لك دكتور غيره.\n\n- ما شاء الله عليه يرجع الميجر والفانيل بسرعة يعني الميجر الاول خذ يومين تقريبا ورجع الاوراق لنا اما الفاينل في نفس اليوم رسل الدرجات + تصحيحه عادي ماهو بالشديد ولا هو بالي يدف حيل .\n\nخله اخر اخر اخر خياراتك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1422983-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nadeem-malik/94443/21",
+              "user": "user8581",
+              "ts": 1437935646000,
+              "tid": 94443,
+              "pn": 21
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-feras-mtn-math208",
+      "uid": "stk-feras-mtn",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1577768718000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m118565",
+            "n": "Dr. Abdulilah Kadri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH-208-191\n(Math-260 سابقاً)\n\nالتحضير : يوزع ورقة بين الطلاب وأيام ماكان يوزعها لكن في اخر اسبوعين ماصار يوزعهم وقال اللي بيحضر يتعلم بيحضر (ومع ذلك كان كلاسه شبه فل)\nطريقة الشرح :\nشرحه رهيييييييب … الدكتور درسني Math 102 ترم 172 وما اترددت انزل معه Math208 … غصب يفهمك ويسهلك ربط المعلومات ومعه نوتاات بطططلة واعتبرها افضل نوته ممكن تحصلها لهذا الكورس\nطريقته جدا ممتازة واللي كثيير من دكاترة الماث مايطبقونها وهي انه يعطي مسائل ويخلي الطلاب يحلونها وقت الكلاس (فمابيكون بس شرح)\nالكويزات :\nمتوسطة\nالمياجر:\nتصحيييحه بططططلللل\nالفاينلات :\nكومون - الفاينل غيروه خلوه ملتبل تشويس 20 سؤال للاسف\nالقريد النهائي:\nA+++++++++++\nالصوت:\nاكسنت امريكي رهييب\nإضافات :\nمن افضل الدكاترة اللي درسوني في الجامعة وخليه خيارك الاول … وبالنسبة للكلاس وورك نهاية السمستر بيظبطكم ويجبر الفواصل بس يعني مثلا جبت في الكويزات 7.0001 و الهوم وورك 4.16 تصير 8 و 5\n\nونقطة اخيرة ما انصحك تمسك الجوال بالكلاس",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1518494-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulilah-kadri/118565/25",
+              "user": "Feras-MTN",
+              "ts": 1577768718000,
+              "tid": 118565,
+              "pn": 25
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-yousifrh-math208",
+      "uid": "stk-yousifrh",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1588645416000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m118565",
+            "n": "Dr. Abdulilah Kadri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "192-MATH208\n\nالتحضير : كان يوزع ورقة تمشي على الطلاب وياخذها اخر شي\n\nطريقة الشرح : شرح الدكتور اسطوري يبدا بالكونسبت اول شي ويفصله تفصيل وبعدين يبدا بأمثلة بالتدريج ( من الصعب الى السهل ) وبداية كل كلاس يلخص اللي قاله بالكلاس اللي قبل\n\nالكويزات : متوسطة على قد مستوى الشرح اذا ذاكرت النوتة وحليت اسئلة الكتاب امورك في السليم\n\nالمياجر: كومن\n\nالفاينلات : كومن\n\nالقريد النهائي: A++\n\nالصوت: ممتاز\n\nإضافات : المادة بشكل عام مادة قريد وانصح اللي ينزل هالكورس ينزل عند القادري بدون مايتردد حتى",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1521777-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulilah-kadri/118565/26",
+              "user": "YousifRH",
+              "ts": 1588645416000,
+              "tid": 118565,
+              "pn": 26
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-posty-math208",
+      "uid": "stk-posty",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1636488002000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m118565",
+            "n": "Dr. Abdulilah Kadri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH 208-211\n\nالتحضير : بلاكبورد في وسط المحاضره، مايحب انك تتاخر ولو دخلت متاخر ب الغالب بيوقف الشرح ويسالك ليه تاخرت و وش عذرك، بشكل عام حاول تجي مبكر\nطريقة الشرح : الدكتور فاهم الماده وشريح وتحسه يشرح بشغف لاكن الله يهديه يطول الحاجة وهي قصيرة وقد قالها لنا لو بشرح لكم الكورس بقدر اخلصه في ١٠ اسابيع بس، بس لازم اعلمكم ماوراء هذي الدروس ويفصل في اشياء مالها داعي وماعجبني هذا الشيء بالرغم اني مهتم في مواضيع الكورس بس المفروض ما يدمجهم مع بعض\nالكويزات : كل كويز عبارة عن سؤالين ريتن ويعطي بارتشل وتصحيحه حلو\nالمياجر: كومن ٤ اسئلة MCQ و ٤ ريتن وزي ماقلت تصحيحه حلو\nالفاينلات :كومن\nالقريد النهائي:بين B+-A\nالصوت: ضعيف شوي يفضل تجلس قدام اذا تبي تركز وتفهم معه\nإضافات : الدكتور خيار جدا ممتاز ومن خيرة الدكاترة لاكن عليه اشياء مالها داعي زي مره وقف الدرس لانه شاف طالب جديد في ثاني اسبوع وقال مين انت اول مره اشوفك، ولا يوقف المحاضرة علشان واحد مسك جواله ويقعد يتكلم عن الجوالات ونفس الشيء مع التاخير وينفس مره بسببهم بشكل غريب",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1532696-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulilah-kadri/118565/29",
+              "user": "Posty",
+              "ts": 1636488002000,
+              "tid": 118565,
+              "pn": 29
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user12081-math208",
+      "uid": "stk-user12081",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1641138343000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m118565",
+            "n": "Dr. Abdulilah Kadri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ABDULILAH KADRI\nMATH208- T211\nبنود التقييم :\n\nالتحضير:\nيحط اسايمنت بالبلاكبورد والطلاب يسجلون , اذا عندك اي عذر يمشيك على طول.\nطريقة الشرح:\nللامانة الدكتور ما توفق في هذي المادة خصوصاً , عنده طريقة شرح يسميها هو الـ Big pictures. هالطريقة مب دايم طيبة, الدكتور يجلس يتكلم لك عن الموضوع مباشرة بدون اي مقدمات على البق بكتشر وانت تهز راسك ومحد بالكلاس فاهم الين يبدا فعلا بالشرح الصحيح بدون هالطريقة اللي مالها سنع.\nالكويزات:\nمستواها متوسط, يحذف اسوء كويز نهاية السمستر.\nالمياجر:\nكومون\nالفاينلات:\nكومون\nالقريد النهائي:\nB\nاضافات:\nالدكتور عسللل في التعامل, لكن وضعه في المادة هذي واحد من اثنين , اما انه ضايع ومب فاهم الشغلة, او اما انه دارس شيء معقد ومب عارف شلون يوصل الافكار صح, مع انه اللي يتمكن من فهم شيء بيكون قادر على تبسيطه. الدكتور هو الكوردنيتر هالترم , اجرم اجرام في توزيع القريدات. الحمد لله على كل حال.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533253-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulilah-kadri/118565/30",
+              "user": "user12081",
+              "ts": 1641138343000,
+              "tid": 118565,
+              "pn": 30
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mzd-math208",
+      "uid": "stk-mzd",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1653728466000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m118579",
+            "n": "Dr. W Al-Khulaifi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "T-212 & T-211 Math208 & Math201\n\nالتحضير : يحضر في نص المحاضرة او في نهاية المحاضرة، يحضر كل يوم ولا يقبل الميك اب.\n\nطريقة الشرح : بداية المحاضرة يعطيك مقدمة لدرس واش راح ندرس، وبعدها يبداء يشرح من سلايداته ويستخدم السبورة لحل لامثلة وشرح القوانين، بعد ما يحل كل سؤال يعطي الطلاب وقت لكي يصورو الصبورة (حل السؤال) لانه يضع الجواب النهائي فقط في سلايداته عشان كذا انت لازم تكتب معه او تصور الصبورة. الشرح جدا بطل.\nالكويزات : صعبة الى متوسطة\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: A+\nالصوت: واضح جدا\nإضافات :\n- الدكتور حبيب واخلاقه حلوة.\n- يعتبر من افضل الدكاترة الا درسوني في الجامعة.\n- هلي الدكتور خيارك الاول.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1534482-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/w-al-khulaifi/118579/26",
+              "user": "MZD",
+              "ts": 1653728466000,
+              "tid": 118579,
+              "pn": 26
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-yousef_alamoudi_4507-math208",
+      "uid": "stk-yousef_alamoudi_4507",
+      "code": "MATH 208",
+      "sec": "doc",
+      "ts": 1640182222000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-m152151",
+            "n": "Dr. J Al-Smail",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MATH208 - Term 211\n\nالتحضير: اغلب الايام ما كان يحضر بس اذا حضر فانه يحضر بالسيريال نمبر (يحدده بداية الترم) نهاية الكلاس.\n\nطريقة الشرح: يكتب الكونسبت في الون نوت و يحل امثلة الكتاب عشان تثبت الكونسبت، بس جا كم كلاس كان يكتب عالسبورة عشان نغير جو شوي.\n\nالكويزات: اتوقع اعطى حول 5 الى 7 بالكثير، غير كان في كلاس تستين قبل كل ميجر، دفيف في التصحيح ما شاء الله.\n\nالمياجر: كومن.\n\nالفاينل: كومن و الله ييسره.\n\nالقريد النهائي : ∞+ و قليلة بحقه.\n\nالصوت: واضح جدا\n\nاضافات: من قوة انه خرافي ما راح اتكلم عنه لاني داري اني ما راح اوفي حقه لو كتبت من اليوم لبكرة.\n\nنصيحتي لو لقيته اي كورس ماث انك تنزل معاه و انت مغمض.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533139-math208",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/j-al-smail/152151/22",
+              "user": "yousef_Alamoudi_4507",
+              "ts": 1640182222000,
+              "tid": 152151,
+              "pn": 22
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -977,7 +977,11 @@
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
   let saveBad = false, lastCore = '';
+  /* saveHold: a pass over many courses (the admin boot publish) saves once at the end, not once per course --
+     each save serialises the whole state, and ~800 of them froze the panel for minutes. */
+  let saveHold = 0, saveLate = false;
   const save = () => {
+    if (saveHold) { saveLate = true; return; }
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
@@ -1141,7 +1145,7 @@
       teach: 'الشرح', grade: 'سخاء وعدل تصحيحه', gradeS: 'سخاء وعدل تصحيحه',
       days: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       daysShort: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس'],
-      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم',
+      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم', gradeNotePh: 'ملاحظة عن الدرجات: سلّم التقديرات، درجة كل سؤال… (اختياري)',
       distTitle: 'توزيع الدرجة (100%)', distShort: 'توزيع الدرجة', addItem: 'إضافة بند', itemPh: 'اسم البند…',
       remaining: n => `المتبقي ${n}%`, complete: 'اكتمل التوزيع ✓',
       absSec: 'الغياب والتأخير', subAbsence: 'الغياب', subLate: 'التأخير', absPolicy: 'سياسة الغياب والتأخير', expandPost: 'توسيع', collapsePost: 'طيّ',
@@ -1603,7 +1607,7 @@
       teach: 'Teaching', grade: 'Grading generosity & fairness', gradeS: 'Grading generosity & fairness',
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
       daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
-      gradeSec: 'Grade breakdown', methodLabel: 'Grading method',
+      gradeSec: 'Grade breakdown', methodLabel: 'Grading method', gradeNotePh: 'A note on grading: grade scale, points per question… (optional)',
       distTitle: 'Grade breakdown (100%)', distShort: 'Grade breakdown', addItem: 'Add item', itemPh: 'Item name…',
       remaining: n => `${n}% left`, complete: 'Fully allocated ✓',
       absSec: 'Absence & lates', subAbsence: 'Absence', subLate: 'Lates', absPolicy: 'Absence & lateness policy', expandPost: 'Expand', collapsePost: 'Collapse',
@@ -4333,7 +4337,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     switch (sec) {
       case 'info':  return { desc: '', type: '', rel: 0, lang: '', book: '' };   // «المادة»: النوعية + اللغة + الترابط + اسم الكتاب + الوصف
       case 'doc':   return { docs: [] };
-      case 'grade': return { method: 'avg', items: [] };
+      case 'grade': return { method: 'avg', items: [], note: '' };   // ‎note‎: كلامٌ عن الدرجات لا يُجدول نِسَبًا
       case 'abs':   return { free: 0, dedFrom: 0, dedAmt: 0, dn: 0, late: 0 };   // الغياب والتأخير معًا
       case 'srcU':  case 'srcP': return { html: '', files: {} };
       case 'lessons': return { items: [] };   // درس: {num: رقم الشابتر, name: اسمه} والترتيب = موقعه
@@ -4538,16 +4542,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function docLink(p, row) {
     if (!p || !row || p.data === row) return 0;
     const old = p.data || {};
+    let ch = 0;
     DOC_WIRE.forEach(k => {
       const v = old[k], cur = row[k];
       const bare = cur === undefined || cur === '' || cur === 0
                 || (Array.isArray(cur) && !cur.length);
       const has = v !== undefined && v !== '' && v !== 0
                && !(Array.isArray(v) && !v.length);
-      if (bare && has) row[k] = v;
+      if (bare && has) { row[k] = v; ch = 1; }
     });
+    /* After a reload the post and its row are two equal copies: relinking them changes nothing, so it is not a
+       hit. Counting it made every doctor a change on every pass -- a full save and push per course. */
+    const same = !ch && JSON.stringify(old) === JSON.stringify(row);
     p.data = row;
-    return 1;
+    return same ? 0 : 1;
   }
 
   function docAbsorb(code, info, seen) {
@@ -4573,7 +4581,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (!mine && post.uid && d.id && seen) seen[d.id] = 1;
         /* ومن جاء بلا معرّفٍ فمن نموذجٍ أقدم: يُعرَّف بالاسم مرّةً ثمّ يحمل معرّفَه */
         let dr = (d.id && info.doctors.find(x => x.id === d.id))
-              || info.doctors.find(x => !x.id && x.name === (d.n || ''));
+              || info.doctors.find(x => (!x.id || !d.id) && x.name === (d.n || ''));   /* id-less row: match by name, never spawn a new doctor each pass */
         if (!dr) {
           dr = { id: d.id || newId(), name: d.n || '', en: d.en || '', img: d.img || '',
                  me: mine, u: post.u || { name: T().docByAnon },
@@ -4589,6 +4597,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (!dr.fromId && d.fromId) { dr.fromId = d.fromId; hit++; }
           if (!dr.by && d.by) { dr.by = d.by; hit++; }
         }
+        /* Published: this row came from the server, so the panel need not publish it again (see dr.pub). */
+        if (d.id && dr.id === d.id && !dr.pub && (post.srv || post.srvH)) { dr.pub = 1; hit++; }
         /* ===== ومساهمتي تُوصَل ولا تُنسخ =====
            النسخُ ههنا يردّ ما كُتب قبل أن يُدفع. والوصلُ لازمٌ في هذا الموضع
            بعينه: متصفّحٌ جديدٌ يستقبل مساهمتي من الخادم ولا مساهمةَ محلّيّةً
@@ -4656,7 +4666,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const rows = (((coursePosts(code).doc || []).find(isMine) || {}).data || {}).docs || [];
       info.doctors.forEach(dr => {
         if (!dr.id) { dr.id = newId(); hit++; }
-        if (seen[dr.id]) return;
+        if (seen[dr.id] || dr.pub) return;   /* dr.pub: its row is on the server (set on push / absorb); an edit clears it */
         if (!rows.some(x => x && x.id === dr.id)) { docRow(code, dr); hit++; }
       });
     }
@@ -4745,16 +4755,39 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الدرجَ بنفسه: مادّةٌ فيها دكاترةٌ تُقرأ فتُفتح لهم صفوفُهم، ثمّ يُدفع.
      ومرّتان: الأولى للدرج المحفوظ، والثانية لِما وصل من الحساب بعده.
      ولا ضررَ في التكرار: ‎doctorsOf‎ لا تفتح صفًّا موجودًا. */
+  /* Every course with doctors, in one pass: one save at the end and one push sweep, not one per course. */
+  window.acDocPubAll = () => {
+    let n = 0, bad = 0;
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
+    if (n && typeof srvPushSoon === 'function') srvPushSoon();
+    if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
+    return n;
+  };
   if (ADMIN) [2500, 9000].forEach(ms => setTimeout(() => {
     /* ===== والحارسُ حول المادّة الواحدة لا حول المسح كلِّه =====
        كان ‎try‎ يلفّ الحلقةَ، فمادّةٌ واحدةٌ تُلقي تُسقط كلَّ ما بعدها صامتةً —
        ولا يُرى منها إلّا أنّ بعضَ المواد نُشرت وبعضَها لا، بلا قاعدةٍ تُفهم.
        فيُلَفّ كلٌّ بحارسه: ما سقط سقط وحدَه، ويُعدّ الساقطُ في الدفتر */
     let n = 0, bad = 0;
-    Object.keys(state.cinfo || {}).forEach(code => {
-      if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
-      try { doctorsOf(code); n++; } catch (e) { bad++; }
-    });
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
     if (n && typeof srvPushSoon === 'function') srvPushSoon();
     if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
   }, ms));
@@ -5182,7 +5215,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       walk(root);
     }
     if (!flat && isLong) host.insertAdjacentHTML('beforeend', inlineTogHTML(open));
-    return box.innerHTML;
+    return impQ(box.innerHTML);
   }
   /* ملء شرائح html من خريطة files — للعرض في المحرّر */
   function srcFillChips(html, files, area) {
@@ -5304,6 +5337,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* شريط توزيع الدرجة + اسم كل بند عند لونه، متناوبًا فوق البار وتحته (يمين→يسار: الأول تحت، الثاني فوق، …)
      لمنع التداخل. صفّا التسميات (علوي/سفلي) يطابقان عرض الشرائح فيحاذي كلٌّ لونه، تصله ساق ملوّنة */
+  /* ملاحظةُ التقييم (‎data.note‎): كلامٌ عن الدرجات لا يصير جدولَ نِسَب — سلّمُ تقديرات، درجةُ كلّ سؤال،
+     بنيةُ اختبار. نصٌّ كما كُتب، تحت الشريط إن وُجد وحدَه إن لم يوجد */
+  function gNoteHTML(note) {
+    const t = String(note || '').trim();
+    return t ? `<div class="gnote" dir="auto">${impQ(esc(t))}</div>` : '';
+  }
+  /* ===== اقتباسُ السؤال في المنقول =====
+     مساهمةٌ نُقلت من محادثة (تيليقرام) كانت ردًّا، ولا تُفهم بلا سؤالها. فيسبقها في متنها سطرُ السؤال
+     بين علامتين غير مرئيّتين (‎U+2063‎)، ويُرسم هنا اقتباسًا فوق كلام الكاتب — فلا يُظنّ من كلامه.
+     يُطبَّق على نصٍّ **بعد** ‎esc‎ أو على ‎html‎ منظَّف، والاقتباسُ سطرٌ واحد بلا وسوم. ومن لم يمرّ
+     بهذه الدالّة من العروض يقرأ السطر نصًّا أوّلُه «↩» — يُفهم ولا ينكسر. والقصُّ قد يقطع علامةَ
+     الإغلاق، فنهايةُ النصّ تُغلقه */
+  const IMPQ_RE = /⁣([^⁣<]*)(?:⁣|(?=<)|$)(?:\n|<br\s*\/?>)?/g;
+  function impQ(html) {
+    const h = String(html == null ? '' : html);
+    return h.indexOf('⁣') < 0 ? h : h.replace(IMPQ_RE, (m, q) => `<span class="imp-q">${q.charCodeAt(0) === 8617 ? q.slice(1).trimStart() : q}</span>`);
+  }
   function gDistHTML(items) {
     const rem = Math.max(0, 100 - items.reduce((s, x) => s + x.pct, 0));
     const segs = items.map((x, i) =>
@@ -5411,8 +5461,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
-        return gDistHTML(items) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
+        return gDistHTML(items) + gNoteHTML(d.note) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
       }
       case 'abs': {
         const A = d;
@@ -5507,9 +5557,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
         /* توزيع الدرجة أولًا، ثم طريقة التقييم أسفله */
-        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) +
+        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) + gNoteHTML(d.note) +
           kv(T().methodLabel + ':', `<span class="v-badge v-badge--g">${d.method === 'avg' ? 'Average' : 'Standard'}</span>`);
       }
       case 'abs': {
@@ -5559,7 +5609,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function isEmptyData(sec, d) {
     switch (sec) {
       case 'info':  return !d.desc && !d.type && !(d.rel > 0) && !d.lang && !d.book;
-      case 'grade': return !(d.items && d.items.length);
+      case 'grade': return !(d.items && d.items.length) && !String(d.note || '').trim();
       case 'abs':   return !(d.free || d.dedFrom || d.dedAmt || d.dn || d.late);
       case 'srcU':  case 'srcP': {
         const doc = srcDocOf(d);
@@ -5691,7 +5741,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       /* سهم التوسيع إنلاين آخر النص (مثل «المادة») — لا يُرسم إلا حين يكون الانطباع مقصوصًا فعلًا */
       const inlineTog = (flat || !isLong) ? '' : inlineTogHTML(open);
-      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? esc(shownDesc) : ''}${inlineTog}</span>`;
+      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? impQ(esc(shownDesc)) : ''}${inlineTog}</span>`;
       if (!items.length && !fullDesc) return `<span class="peek-tx peek-none">${T().noData}</span>`;
       /* الشارات = عناصر flex بعرض محتواها؛ تنمو بالتساوي لملء صفّها (justify).
          «الحشوة» تمتصّ فراغ الصفّ الأخير فلا يتمدّد، والانطباع صفّ كامل العرض تحته */
@@ -5864,7 +5914,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* «لا توجد معلومات» تظهر فقط إذا خلَت المساهمة من كل شيء — لا مع مساهمة فيها شارات (كغلاف كتاب) */
         const chipsHTML = infoChips(dd);
         const txHTML = fullDesc
-          ? `<span class="peek-tx">${esc(shownDesc)}</span>`
+          ? `<span class="peek-tx">${impQ(esc(shownDesc))}</span>`
           : (chipsHTML ? '' : `<span class="peek-tx peek-none">${T().noData}</span>`);
         /* السهم للنصّ وحده: لا يُرسم إلا حين يوجد نصٌّ مقصوص فعلًا (وإلا فلا شيء يوسّعه) */
         const inlineTog = isLong ? inlineTogHTML(open) : '';
@@ -5886,7 +5936,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const distChip = `<span class="v-badge v-badge--g grade-chip"><i class="v-lab">${T().distShort}</i>${gItems.length ? `<span class="grade-chip__bar">${gBarHTML(gItems)}</span>` : `<b class="v-val">—</b>`}</span>`;
         const methodChip = gd.method ? `<span class="v-badge v-badge--g"><i class="v-lab">${T().methodLabel}</i><b class="v-val">${gd.method === 'avg' ? 'Average' : 'Standard'}</b></span>` : '';
         /* بلا سهم: المستطيلان يعرضان كل ما في المساهمة، فلا نصّ وراءهما يُوسَّع */
-        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>`;
+        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>${gNoteHTML(gd.note)}`;
       }
       return `<div class="post pk pk--fold pk--info${open ? ' pk--open' : ''} pk--peek" ${dataAttr}>
         <div class="post-yt">
@@ -5943,6 +5993,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لا يدخل أحدٌ به. */
   const IMP_SRC = {
     stkfupm: { n: 'STKFUPM', logo: 'assets/brand/stkfupm-logo.svg', t: 'منقولة من مجتمع STKFUPM' },
+    telegram: { n: 'Telegram', logo: 'assets/brand/telegram-logo.svg', t: 'منقولة من قروب تيليقرام' },
   };
   function impBadge(p) {
     const im = p && p.data && p.data.imp;
@@ -6161,6 +6212,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${mdropHTML('gmethod', 'gmethod', g.method || 'avg', [['avg', 'Average'], ['std', 'Standard']])}
           </span>
         </div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(g.note || '')}</textarea>
       </div>`;
     return `<div class="post pk pk--peek pk--edit" data-pi="${i}" data-sub="grade">
       <div class="post-yt">
@@ -6879,7 +6931,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           <span class="cm-k">${T().distTitle}</span>
           <button type="button" class="cm-adddoc" id="cm-additem" title="${T().addItem}">+</button>
         </div>
-        <div id="cm-gbody"></div>`;
+        <div id="cm-gbody"></div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(gradingOf(cmCode).note || '')}</textarea>`;
       case 'abs': return `
         <p class="cm-sec__t">${T().absSec}</p>
         <div id="cm-abs"></div>`;
@@ -30824,7 +30877,15 @@ void main() {
      can silently replace the other's session, so we check before writing.
      Asked at most once every few seconds — this sits in the save path. */
   let sesUid = null, sesAt = 0;
-  async function fixSession() {
+  /* One identity check at a time: a save sweeps every post of the account, and each push asked the
+     server 'who am I' before the first answer came back -- hundreds of /auth/me at once exhausted
+     the database connection pool. Concurrent callers now share the check in flight. */
+  let sesInFlight = null;
+  function fixSession() {
+    if (!sesInFlight) sesInFlight = fixSessionOnce().finally(() => { sesInFlight = null; });
+    return sesInFlight;
+  }
+  async function fixSessionOnce() {
     const want = actingAs();
     if (!want) return false;                       /* nobody signed in */
     if (sesUid === want && Date.now() - sesAt < 5000) return false;
@@ -31159,6 +31220,10 @@ void main() {
       }
       if (!r.ok) { bootMark('push:' + r.status); return; }
       srv429 = 0;
+      if (sec === 'doc') {
+        const ids = new Set(((p.data || {}).docs || []).map(x => x && x.id).filter(Boolean));
+        (((state.cinfo || {})[code] || {}).doctors || []).forEach(dr => { if (dr && ids.has(dr.id)) dr.pub = 1; });
+      }
       p.srvH = h;
       /* وبصمةُ المتن كما بلغ الخادمَ: بها يُعرف ما تبدّل بعده فلا يُسقط من الدرج */
       try { p.srvD = srvHash(JSON.stringify(p.data || {})); } catch (e) { delete p.srvD; }
@@ -31197,13 +31262,19 @@ void main() {
   function srvPushSoon() {
     if (!SRV_ON() || isGuest()) return;
     clearTimeout(srvT);
+    /* At most 3 pushes in flight: a sweep over hundreds of posts used to fire them all at once and exhaust
+       the database connection pool (and the server's 120-pushes-an-hour limit). */
     srvT = setTimeout(() => {
+      const jobs = [];
       Object.keys(state.cinfo || {}).forEach(code => {
         const ps = (state.cinfo[code] || {}).posts || {};
         Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
-          if (p && p.me) srvPush(p, code, sec);   /* المسوّدةُ كالمنشور: كلاهما عملُك */
+          if (p && p.me) jobs.push([p, code, sec]);
         }));
       });
+      let k = 0;
+      const lane = async () => { while (k < jobs.length) { const j = jobs[k++]; try { await srvPush(j[0], j[1], j[2]); } catch (e) {} } };
+      for (let i = 0; i < 3; i++) lane();
     }, 4000);
   }
 
@@ -31995,7 +32066,16 @@ void main() {
             cut++; return;
           }
           /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
-          if (!mine.srvH) { mine.id = r.id; cut++; }
+          if (!mine.srvH) {
+            mine.id = r.id; cut++;
+            /* A doc post rebuilt locally (after the synced copy was dropped from storage) holds only the rows this
+               browser knows. Pushing it as is would replace the server's list, so the server's rows are kept. */
+            if (r.sec === 'doc' && mine.data && r.data && Array.isArray(r.data.docs)) {
+              const docs = Array.isArray(mine.data.docs) ? mine.data.docs : (mine.data.docs = []);
+              const have = new Set(docs.map(x => x && x.id));
+              r.data.docs.forEach(x => { if (x && x.id && !have.has(x.id)) docs.push(x); });
+            }
+          }
           return;
         }
         /* ===== وما ليس عندي منها شيءٌ يُستردّ =====
@@ -32484,6 +32564,7 @@ void main() {
       return;
     }
     /* بنود التقييم: الاسم يُحفظ مباشرة، والسلايدر يحدّث الشريط حيًّا بلا إعادة رسم (حتى لا ينقطع السحب) */
+    if (e.target.id === 'cm-gnote') { gradingOf(cmCode).note = e.target.value; save(); return; }
     if (e.target.classList.contains('gi-name')) {
       const g = gradingOf(cmCode);
       g.items[+e.target.closest('.gitem').dataset.i].name = e.target.value;
