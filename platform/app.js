@@ -10818,7 +10818,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const L = pkSrcList(id);
     if (!L.length) return '';   /* والمساحةُ فارغة: لا زرَّ فوق — الإضافةُ من التذييل */
     if (!ed && L.length < 2) return `<span class="pk-srchd pk-srchd--ro"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></span>`;
-    return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
+    return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><i class="pk-srchd__ty" style="--c:${pkSrcTy(pkSrcCurOf(id))[2]}">${pkSrcSvg(pkSrcTy(pkSrcCurOf(id))[3])}</i><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
   };
   /* صورٌ صغيرةٌ لصفحات المصدر (للغلاف المصغّر ومعاينته) — مخزنٌ بالمعرّف والصفحة */
   const pkSrcPgU = {};
@@ -10935,7 +10935,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r = b.closest('[data-sid]'), s = r ? r.dataset.sid : pkSP.sid, k = b.dataset.psp;
     if (k === 'go') { const id = pkSP.id; pkSrcCur[id] = s; pkSrcScroll = s; pkSrcPopClose(); renderCmSection(); return; }
     if (k === 'cov' || k === 'type' || k === 'more') { const same = pkSP.sid === s && pkSP.sub === k; pkSP.sub = same ? null : k; pkSP.sid = same ? null : s; pkSP.conf = null; pkSP.pg = 0; pkSrcPopShow(); if (pkSP.sub === 'cov') { const i = document.querySelector('#pk-srcpop [data-pspnum]'); if (i) i.select(); } return; }
-    if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; pkSrcPopShow(); return; }
+    if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
     if (k === 'upcov') { pkSrcCovIn.dataset.pkid = s; pkSrcCovIn.click(); return; }
     if (k === 'swap') { pkSrcIn.dataset.pkid = s; pkSrcIn.click(); return; }
