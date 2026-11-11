@@ -18165,3 +18165,7 @@ html:root .psp-box { padding: 5px; }
 .psp-r { border-radius: 13px; }
 html:root .psp-sub { padding: 4px; }
 .psp-it { border-radius: 11px; }
+/* خلفيةُ «⋯» متّسقةٌ مع زاوية صفّها: تبعد عن حوافّه بالقدر نفسه، ونصفُ قطرها = نصفُ قطر الصفّ − ذلك البُعد */
+.psp-r { padding: 4px 4px 4px 5px; }
+html[data-lang="en"] .psp-r { padding: 4px 5px 4px 4px; }
+html:root .psp-more { width: 23px; height: 23px; border-radius: 9px !important; }
