@@ -17810,19 +17810,7 @@ html[data-theme="dark"] .cx-acttools .cx-srctools ~ .cx-actb { color: rgba(255, 
 html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill { color: rgba(255, 255, 255, .92); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
 html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill svg { color: #d4b36a; }
 html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
-/* ===== أكثرُ من مصدر (طلبُ صاحب الموقع): كلُّ كتابٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ لمصدرٍ آخر ===== */
-.pk-src--book > .pk-src__slot {
-  position: relative; border-radius: 18px; padding: 8px;
-  background: linear-gradient(180deg, rgba(20, 40, 46, .035), rgba(20, 40, 46, .06));
-  box-shadow: inset 0 1px 3px rgba(20, 40, 46, .1), inset 0 0 0 1px rgba(20, 40, 46, .06);
-  transition: box-shadow .2s ease;
-}
-html[data-theme="dark"] .pk-src--book > .pk-src__slot {
-  background: linear-gradient(180deg, rgba(0, 0, 0, .16), rgba(0, 0, 0, .24));
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .05);
-}
-.pk-src--multi > .pk-src__slot.is-cur { box-shadow: inset 0 1px 3px rgba(20, 40, 46, .1), inset 0 0 0 1.5px rgba(169, 133, 47, .55); }
-html[data-theme="dark"] .pk-src--multi > .pk-src__slot.is-cur { box-shadow: inset 0 1px 4px rgba(0, 0, 0, .35), inset 0 0 0 1.5px rgba(212, 179, 106, .55); }
+/* ===== أكثرُ من مصدر (طلبُ صاحب الموقع): الكتابُ في مكانه بلا مربّع، والثاني تحته، ومربّعٌ مرقّطٌ لمصدرٍ آخر تحتها كلّها ===== */
 .pk-src__more {
   flex: none; display: flex; align-items: center; justify-content: center; gap: 8px;
   height: 52px; width: 100%; border-radius: 18px; cursor: pointer;
