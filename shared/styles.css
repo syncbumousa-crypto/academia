@@ -18252,7 +18252,7 @@ html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
 .pk-vdots { top: 16px; }
 .pk-vdots { top: 14px; }
 /* ===== قوسُ طرق العرض على زاوية أيقونة الملخّص فوق يمين (اختيارُ صاحب الموقع) ===== */
-.pk-vdots.pk-varc { position: absolute; top: -8px; inset-inline-start: -8px; width: 30px; height: 30px; padding: 0; border: 0; background: none; pointer-events: none; z-index: 20; transform: none; }
+.pk-vdots.pk-varc { position: absolute; top: -6px; inset-inline-start: -6px; width: 30px; height: 30px; padding: 0; border: 0; background: none; pointer-events: none; z-index: 20; transform: none; }
 html[data-lang="en"] .pk-varc__s { transform: scaleX(-1); }
 .pk-varc::after { display: none; }
 .pk-varc:active { transform: none; }
