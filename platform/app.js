@@ -10395,6 +10395,40 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let n = 2; while (pkSrcMeta(id + PK_SID + n)) n++;
     return id + PK_SID + n;
   };
+  /* ===== المصادرُ تتبع المساهمةَ إذا بدّلت معرّفَها =====
+     مساهمتي المحلّيّة تتبنّى معرّفَ نسختها على الخادم عند المصالحة (قيدُ ‎(uid, code, sec)‎). وكانت المصادرُ
+     (الملفُّ في المخزن ووصفُه في ‎state.pkSrc‎) مفاتيحُها المعرّفُ القديم — فيضيع الكتابُ والمساهمةُ قائمة.
+     فتُنقل كلُّها مع المعرّف: الأوّلُ والإضافيّةُ (‎id~2…‎) وأغلفتُها وقائمتُها */
+  function pkSrcRekey(from, to) {
+    if (!from || !to || from === to) return;
+    const moved = [];
+    const mv = (bag, a, b) => { if (state[bag] && state[bag][a] && !state[bag][b]) { state[bag][b] = state[bag][a]; delete state[bag][a]; return true; } return false; };
+    const sids = [from, ...(((state.pkSrcX || {})[from]) || [])];
+    sids.forEach(sid => {
+      const nsid = sid === from ? to : to + sid.slice(from.length);
+      if (mv('pkSrc', sid, nsid)) moved.push([pkSrcKey(sid), pkSrcKey(nsid)]);
+      if (mv('pkSrcCov', sid, nsid)) moved.push([pkSrcCovKey(sid), pkSrcCovKey(nsid)]);
+    });
+    if (state.pkSrcX && state.pkSrcX[from]) { state.pkSrcX[to] = state.pkSrcX[from].map(x => to + x.slice(from.length)); delete state.pkSrcX[from]; }
+    moved.forEach(async ([a, b]) => { try { const blob = await chIdb('readonly', a); if (blob && await chIdb('readwrite', b, blob)) await chIdb('readwrite', a, null); } catch (e) {} });
+    if (moved.length) save();
+  }
+  /* ومن ضاع كتابُه قبل هذا الإصلاح: مساهمةٌ عليها علامةُ مصدرٍ (‎data.src‎) ولا وصفَ له، ووصفٌ يتيمٌ
+     لا مساهمةَ له باسمه نفسِه — فيُردّ إليها (مرّةً عند الإقلاع) */
+  function pkSrcHeal() {
+    const S = state.pkSrc || {}, live = new Set();
+    eachPost(p => live.add(p.id));
+    const orphans = Object.keys(S).filter(k => !k.includes(PK_SID) && !live.has(k));
+    if (!orphans.length) return;
+    eachPost((p, code, sec) => {
+      const d = p.data || {};
+      if (sec !== 'cards' || !d.src || !d.src.pdf || S[p.id]) return;
+      const k = orphans.find(o => S[o] && S[o].name === d.src.pdf);
+      if (!k) return;
+      orphans.splice(orphans.indexOf(k), 1);
+      pkSrcRekey(k, p.id);
+    });
+  }
   const pkSrcCur = {};
   let pkSrcScroll = null;   /* المصدرُ المضافُ للتوّ: تُمرَّر مساحتُه إليه بعد الرسم */
   const pkSrcCurOf = id => { const l = pkSrcList(id); return l.includes(pkSrcCur[id]) ? pkSrcCur[id] : (l[0] || id); };
@@ -32371,13 +32405,15 @@ void main() {
           /* ولا تُمَسّ مساهمةٌ بلغت الخادمَ من قبل (‎srvH‎): هي القائمةُ هناك
              بمعرّفها، فتبديلُ معرّفها يجعلها ضرّةً لنفسها */
           if (postEmpty(mine) && !mine.srvH) {
-            mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
+            pkSrcRekey(mine.id, r.id);   /* ومصادرُها (الكتب) تتبع المعرّفَ الجديد */
+            mine.id = r.id; mine.uid = r.uid; mine.data = Object.assign(r.data || {}, mine.data && mine.data.src ? { src: mine.data.src } : {});
             if (r.ts) mine.ts = srvMs(r.ts);
             mine.st = r.st || 'pub'; delete mine.srvH; delete mine.srvBig;
             cut++; return;
           }
           /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
           if (!mine.srvH) {
+            pkSrcRekey(mine.id, r.id);
             mine.id = r.id; cut++;
             /* A doc post rebuilt locally (after the synced copy was dropped from storage) holds only the rows this
                browser knows. Pushing it as is would replace the server's list, so the server's rows are kept. */
@@ -38766,6 +38802,7 @@ void main() {
     ankiHandBack();   /* وما نُسب إليك من بطائق الموقع يُردّ إليه */
     ankiToOwner();    /* ثمّ يُنسب إلى مؤلّفه: صاحبُ الموقع لا الموقع */
     seedAcctBook();   /* والكتابُ التجريبيّ في ‎ACCT 301‎ — لصاحب الموقع وحده */
+    pkSrcHeal();      /* وكتابٌ ضاع حين بدّلت مساهمتُه معرّفَها: يُردّ إليها */
     cardsPub();       /* وتُوسَم للنشر: فيصير المعروضُ والمُسجَّلُ شيئًا واحدًا */
   }
   if (state.ankiRedo1 || window.ANKI_IMPORT) {
