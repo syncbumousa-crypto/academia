@@ -17836,13 +17836,13 @@ html[data-theme="dark"] .pk-src__more:hover { background: rgba(212, 179, 106, .1
 #cm-body .pk-split > .pk-src--multi { position: relative; }
 #cm-body .pk-src--multi > .pk-src__list { scrollbar-width: none; padding-left: 10px; }
 .pk-src__list::-webkit-scrollbar { width: 0; height: 0; display: none; }
-.pk-srcbar { position: absolute; left: 2px; width: 4px; z-index: 4; cursor: pointer; touch-action: none; border-radius: 99px; background: rgba(44, 94, 101, .05); }
+.pk-srcbar { position: absolute; left: 2px; width: 4px; z-index: 4; cursor: pointer; touch-action: none; border-radius: 99px; background: transparent; }
 .pk-srcbar::before { content: ""; position: absolute; inset: 0 -8px 0 -2px; }   /* حرمٌ أعرض للمؤشّر من الخطّ النحيل */
 .pk-srcbar[hidden] { display: none; }
 .pk-srcbar > i { position: absolute; top: 0; left: 0; right: 0; border-radius: 99px; background: rgba(44, 94, 101, .22); cursor: grab; transition: background .2s; }
 .pk-srcbar:hover > i { background: rgba(44, 94, 101, .38); }
 .pk-srcbar.is-drag > i { background: rgba(44, 94, 101, .5); cursor: grabbing; }
-html[data-theme="dark"] .pk-srcbar { background: rgba(255, 255, 255, .03); }
+html[data-theme="dark"] .pk-srcbar { background: transparent; }
 html[data-theme="dark"] .pk-srcbar > i { background: rgba(255, 255, 255, .16); }
 html[data-theme="dark"] .pk-srcbar:hover > i { background: rgba(255, 255, 255, .28); }
 html[data-theme="dark"] .pk-srcbar.is-drag > i { background: rgba(255, 255, 255, .36); }
