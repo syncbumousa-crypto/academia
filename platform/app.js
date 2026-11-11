@@ -9768,7 +9768,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ربعُ دائرةٍ حول الأيقونة (من أعلاها إلى يمينها) مقسومٌ أثلاثًا. والذهبيّةُ قطعةٌ واحدةٌ تدور على المركز إلى ثلثها
      فتنزلق على القوس انزلاقًا (‎pkVdPrev‎ يحفظ السابق فتبدأ منه). والنقرُ على القوس وحده (خطٌّ عريضٌ شفّاف) يبدّل؛
      والأيقونةُ نفسُها تبقى تُغلق المساحة */
-  const PK_VA_R = 12.5, PK_VA_GAP = 10;
+  const PK_VA_R = 12.5, PK_VA_GAP = 17;
   const pkVaPt = a => [15 + PK_VA_R * Math.cos(a * Math.PI / 180), 15 + PK_VA_R * Math.sin(a * Math.PI / 180)];
   const pkVaArc = (a0, a1) => { const [x0, y0] = pkVaPt(a0), [x1, y1] = pkVaPt(a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${PK_VA_R} ${PK_VA_R} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
   const pkVdPrev = {};

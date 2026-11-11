@@ -18258,13 +18258,13 @@ html[data-lang="en"] .pk-varc__s { transform: scaleX(-1); }
 .pk-varc:active { transform: none; }
 .pk-varc__s { display: block; width: 30px; height: 30px; overflow: visible; fill: none; stroke-linecap: round; }
 .pk-varc__hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: pointer; }
-.pk-varc__d { stroke: rgba(20, 40, 46, .26); stroke-width: 2.2; transition: stroke .15s; pointer-events: none; }
+.pk-varc__d { stroke: rgba(20, 40, 46, .26); stroke-width: 3.2; transition: stroke .15s; pointer-events: none; }
 .pk-varc:hover .pk-varc__d { stroke: rgba(20, 40, 46, .42); }
-.pk-varc__m { stroke: #a9852f; stroke-width: 2.4; pointer-events: none; transform-box: view-box; transform-origin: 15px 15px; transform: rotate(var(--r1)); }
+.pk-varc__m { stroke: #a9852f; stroke-width: 3.4; pointer-events: none; transform-box: view-box; transform-origin: 15px 15px; transform: rotate(var(--r1)); }
 .pk-varc__m[data-move] { animation: pk-varc-move .5s cubic-bezier(.3, 1.35, .5, 1) both; }
 @keyframes pk-varc-move { from { transform: rotate(var(--r0)); } to { transform: rotate(var(--r1)); } }
-.pk-varc:hover .pk-varc__m { stroke-width: 2.8; }
-.pk-varc:active .pk-varc__m { stroke-width: 3.2; }
+.pk-varc:hover .pk-varc__m { stroke-width: 3.8; }
+.pk-varc:active .pk-varc__m { stroke-width: 4.2; }
 html[data-theme="dark"] .pk-varc__d { stroke: rgba(230, 236, 239, .28); }
 html[data-theme="dark"] .pk-varc:hover .pk-varc__d { stroke: rgba(230, 236, 239, .48); }
 html[data-theme="dark"] .pk-varc__m { stroke: #d4b36a; }
