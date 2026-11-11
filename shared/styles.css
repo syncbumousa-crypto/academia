@@ -18131,3 +18131,10 @@ html[data-theme="dark"] .pk-srchd__ty { filter: brightness(1.7) saturate(.8); }
 html[data-lang="en"] .psp-sub::before { left: -6px; right: auto; }
 html[data-theme="dark"] .psp-sub::before { right: -7.5px; }
 html[data-theme="dark"][data-lang="en"] .psp-sub::before { left: -7.5px; right: auto; }
+/* قائمةُ المصادر تنزل حتى الحافّة السفلى ولو حُجزت فسحةُ أيقونات المساحات المغلقة (‎pk--icB · ‎40px‎):
+   تمتدّ تحتها، وفسحتُها في جوفها فيُبلغ آخرُها بالتمرير (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { margin-bottom: -40px; padding-bottom: 54px; }
+/* ومساحةُ المصادر وحدَها في الضيّقة: لا جارَ يحدّ قامتها، فللقائمة قامةٌ معلومة لا تنضغط إلى لا شيء */
+#cm-body .post:not(.pk--max) .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--multi > .pk-src__list { flex: none; height: clamp(360px, 62vh, 600px); }
+/* واسمُ المصدر وأيقونةُ نوعه في وسط المساحة أفقيًّا (طلبُ صاحب الموقع) — وأيقونةُ المساحة في زاويتها */
+.pk-blkh--book > .pk-srchd { position: absolute; left: 50%; top: 0; margin: 0; transform: translate(-50%, -6px); max-width: 72%; z-index: 2; }
