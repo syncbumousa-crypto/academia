@@ -18086,3 +18086,6 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 .pk-blkh--book > .pk-srchd svg { width: 11px; height: 11px; }
 /* والاسمُ على سطر الأيقونة نفسِه، بجانبها لا تحتها (طلبُ صاحب الموقع) */
 .pk-blkh--book > .pk-srchd { transform: translateY(-6px); }
+/* الأيقونةُ والاسمُ منفصلان (طلبُ صاحب الموقع): الأيقونةُ تُغلق المساحةَ كما كانت، والاسمُ زرٌّ مستقلٌّ بجانبها */
+.pk-blkh--book:has(> .pk-srchd) > .pk-blkh__ic { pointer-events: auto; }
+.pk-blkh--book > .pk-srchd { margin-inline-start: -2px; padding-inline-start: 5px; }
