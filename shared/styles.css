@@ -17768,3 +17768,11 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 :is(.pk--max, .pk--frame):not(.pk--hdup) > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { margin-inline-start: -42px; width: calc(100% + 42px); box-sizing: border-box; }
 :is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { width: 100%; box-sizing: border-box; }
 .pk--hdanim > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { transition: margin-inline-start .22s ease, width .22s ease; }
+/* والمساحةُ الملموسةُ (النشِطة) أيقونتُها في زاويتها ذهبيّة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-blkh__ic { transition: color .2s ease, background .15s, box-shadow .15s, transform .2s ease; }
+#cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #d4b36a; }
