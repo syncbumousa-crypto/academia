@@ -18324,3 +18324,13 @@ html[data-theme="dark"] .cx-hlc.is-in { box-shadow: 0 0 0 2.5px #1b2529, 0 0 0 4
 html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
 /* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
 .bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
+/* الدوائرُ صفوفُ الجدول: صفٌّ بلا تظليلٍ دائرةٌ بحدٍّ فقط، والمربوطُ ممتلئٌ بلون التظليل، و«+» صفٌّ جديد. والشريطُ يُمرَّر أفقيًّا إن كثرت */
+.cx-hlbar { max-width: min(44vw, 440px); overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.cx-hlbar::-webkit-scrollbar { display: none; }
+.cx-hlc { flex: none; }
+.cx-hlc.is-row { background: transparent; border: 1.5px solid var(--u-line); color: var(--u-ink, #14233f); }
+.cx-hlc.is-next { font-size: 14px; }
+html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
+/* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
+.kt-num.has-hl { background: #f3d27a; color: #3a2c0b; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
+.kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }

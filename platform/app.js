@@ -6838,6 +6838,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
+    try { return renderCmSection0(); } finally { try { hlAfterRender(); } catch (e) {} }
+  }
+  function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
@@ -11262,7 +11265,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
         + h.map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
-        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num">${k + 1}</span></td>`
+        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${hlUsed(id).has(n.id) ? ' has-hl' : ''}">${k + 1}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
@@ -23928,24 +23931,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     hlPaint(b, k, cv);
     return cv;
   }
-  /* ===== رحلةُ التحديد: تظليلٌ ثابت، وأرقامٌ في شريط التذييل (ROADMAP-HL · كونسبت صاحب الموقع) =====
-     · ما يحدّده المستخدمُ يصير تظليلًا ثابتًا فورًا (خلفَ الكلام) — بلا سؤالٍ ولا رقمٍ لازم.
-     · وفي التذييل شريطُ دوائر: المملوءةُ أرقامٌ فيها تظليلات، وبعدها دائرةٌ فارغةٌ جاهزةٌ للرقم التالي.
-     · التظليلُ «المختار» (آخرُ ما ظُلِّل، أو ما نُقر في الكتاب) يُضاف إلى الدائرة التي تُضغط (ويُرفع منها بضغطها ثانيةً) —
-       والتظليلُ الواحدُ قد يكون في أكثر من رقم.
-     · ولا مختار: ضغطُ الدائرة «يشغّلها» فكلُّ تظليلٍ بعدها يدخلها حتى تُطفأ (ضغطُها ثانيةً أو Esc).
-     · فإذا دخل الدائرةَ الفارغةَ أوّلُ تظليلٍ امتلأت، وظهرت بعدها فارغةٌ للرقم الذي يليها.
-     · Delete يحذف التظليلَ المختار.
-     تُحفظ في المساهمة ‏‎p.data.hl = { seq, nums: { n: { c, card } }, marks: [{ id, s, k, n: [..], bars: [[l,r,t,b]..], d, tx }] }‎ —
-     ‏‎s‎ لاحقةُ المصدر بعد معرّف المساهمة (‎'' · ~2‎)، ‏‎k‎ الصفحة، والمواضعُ كسورٌ من الصفحة، ‏‎d‎ ‏‎'r'‎ للسطر العربيّ.
-     وتُطلى على وجه الورقة (تتحرّك معها في التقليب)، والمختارُ إطارٌ في طبقة النصّ فوقها */
-  const hlArm = {};   /* ‏‎postId → n‎ الدائرةُ الشغّالة */
+  /* ===== رحلةُ التحديد: التظليلُ يُربط بصفوف جدول الملخّص (ROADMAP-HL · كونسبت صاحب الموقع) =====
+     · دوائرُ التذييل هي صفوفُ جدول الملخّص في المجلد المختار: ‎14‎ صفًّا ⇐ ‎14‎ دائرة، رقمُ الدائرة رقمُ الصفّ، وبعدها دائرةٌ
+       فارغةٌ لصفٍّ جديد (يُنشأ في الجدول حين يدخلها أوّلُ تظليل).
+     · التحديدُ عابرٌ حتى يدخل دائرة: تُضغط فيثبت تظليلًا مربوطًا بصفّها، ويُنقر بعيدًا (أو Esc) فيختفي.
+       ودائرةٌ «شغّالة» (تُضغط بلا تحديد) يدخلها كلُّ تحديدٍ فورًا حتى تُطفأ.
+     · نقرُ تظليلٍ في الكتاب يختاره: الدوائرُ تُضيفه إلى صفّها أو ترفعه منه، وDelete يحذفه.
+     · والصفُّ في الجدول يُعلَّم رقمُه بلون التظليل، ونقرُه يقلّب الكتابَ إلى تظليله.
+     يُحفظ الربطُ بمعرّف البطاقة (‎m.c‎) لا برقمها، فيبقى مع الصفّ ولو تبدّل ترتيبُه — والرقمُ المرسوم رقمُ الصفّ الآن.
+     ‏‎p.data.hl = { marks: [{ id, s, k, c: [cardId..], bars: [[l,r,t,b]..], d, tx }] }‎ — ‏‎s‎ لاحقةُ المصدر، ‏‎k‎ الصفحة، والمواضعُ كسورٌ منها */
+  const hlArm = {};   /* ‏‎postId → cardId‎ الدائرةُ الشغّالة */
   let hlCur = null;   /* ‏‎{ id: postId, m: markId }‎ التظليلُ المختار */
   const hlPost = id => (postsOf(cmCode, 'cards') || []).find(x => x.id === id) || null;
   function hlData(id, make) {
     const p = hlPost(id); if (!p || !p.data) return null;
-    if (!p.data.hl && make) p.data.hl = { seq: 0, nums: {}, marks: [] };
-    return p.data.hl || null;
+    if (!p.data.hl && make) p.data.hl = { marks: [] };
+    const H = p.data.hl || null;
+    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; });
+    return H;
   }
   const hlSidOf = b => String((b && b.key) || '').replace(/^pksrc:/, '');
   function hlMarksOn(b, k) {
@@ -23954,38 +23957,46 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = sid.slice(id.length);
     return H.marks.filter(m => m.s === s && m.k === k);
   }
+  /* رقمُ كلّ بطاقةٍ في مجلدها (ترتيبُها بين بطائقه) — هو رقمُ صفّها في الجدول */
+  function hlRowMap() {
+    const map = new Map(), pk = cardDataRaw(cmCode);
+    const walk = arr => { (arr || []).filter(n => n.t === 'c').forEach((n, i) => map.set(n.id, i + 1)); (arr || []).filter(n => n.t === 'f').forEach(f => walk(f.ch)); };
+    if (pk) walk(pk.deck);
+    return map;
+  }
+  /* صفوفُ المجلد المختار في الملخّص (بطائقُه بترتيبها) */
+  function hlRows(id) {
+    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
+  }
   const HL_YEL = 'rgb(246, 214, 120)';
-  /* دوائرُ أرقام التظليل: قبل أوّل الشريط الأوّل (يمينَه في العربيّ) عند أعلى السطر — كالحاشية، متجاورةً إن كانت أكثر من رقم */
-  function hlDots(m, W, Hh) {
+  /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
+  function hlDots(m, W, Hh, rows) {
     const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
-    return (m.n || []).map((n, i) => ({ n, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
+    return m.c.map(cid => ({ cid, n: rows.get(cid) })).filter(o => o.n).map((o, i) => ({ ...o, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
   }
   function hlPaint(b, k, cv) {
     const ms = hlMarksOn(b, k); if (!ms.length) return;
-    const id = pkSrcBase(hlSidOf(b)), H = hlData(id), c = cv.getContext('2d'), W = cv.width, Hh = cv.height;
-    c.globalCompositeOperation = 'multiply';
-    for (const m of ms) {
-      c.fillStyle = ((H.nums[(m.n || [])[0]] || {}).c) || HL_YEL;
-      for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh);
-    }
+    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
+    c.globalCompositeOperation = 'multiply'; c.fillStyle = HL_YEL;
+    for (const m of ms) for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh);
     c.globalCompositeOperation = 'source-over';
-    for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh)) {
+    for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
       c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
-      c.fillStyle = (H.nums[n] || {}).c || '#f3d27a'; c.fill();
+      c.fillStyle = '#f3d27a'; c.fill();
       c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(120, 92, 25, .55)'; c.stroke();
-      c.fillStyle = '#3a2c0b'; c.font = `700 ${Math.round(R * 1.2)}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillStyle = '#3a2c0b'; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillText(String(n), x, y + R * 0.06);
     }
   }
-  /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل رقمها)، وإطارُ التظليل المختار */
+  /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل صفَّها)، وإطارُ التظليل المختار */
   function hlSpots(b, d) {
     d.querySelectorAll('.bk-hlnum, .bk-hlcur').forEach(x => x.remove());
     const k = +d.dataset.k, ms = hlMarksOn(b, k); if (!ms.length) return;
-    const W = 1000, Hh = 1000 / b.ar;
+    const W = 1000, Hh = 1000 / b.ar, rows = hlRowMap();
     for (const m of ms) {
-      for (const { n, x, y, R } of hlDots(m, W, Hh)) {
+      for (const { cid, n, x, y, R } of hlDots(m, W, Hh, rows)) {
         const e = document.createElement('button');
-        e.type = 'button'; e.className = 'bk-hlnum'; e.dataset.hln = n;
+        e.type = 'button'; e.className = 'bk-hlnum'; e.dataset.hlcid = cid;
         e.title = T().hlArmT.replace('{n}', n); e.setAttribute('aria-label', e.title);
         Object.assign(e.style, { left: (x - R * 1.4) / W * 100 + '%', top: (y - R * 1.4) / Hh * 100 + '%', width: R * 2.8 / W * 100 + '%', height: R * 2.8 / Hh * 100 + '%' });
         d.appendChild(e);
@@ -24004,8 +24015,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (paint && b.gl && b.gl.refreshPage) b.gl.refreshPage(k);
     if (b.tlPages) { const d = b.tlPages.get(k); if (d) hlSpots(b, d); }
   }
-  /* يُرسم التظليلُ من جديد حيث هو (صفحتُه في كتابه) */
   function hlRefreshMark(id, m, paint = true) { hlRefresh(bkOfSid(id + m.s), m.k, paint); }
+  /* تبدّلت الصفوف (أُضيف صفٌّ أو تبدّل المجلد): الأرقامُ المرسومةُ على كلّ صفحةٍ ظاهرة تُعاد */
+  function hlRepaintAll(id) {
+    const H = hlData(id); if (!H) return;
+    const seen = new Set();
+    H.marks.forEach(m => { const key = m.s + '|' + m.k; if (!seen.has(key)) { seen.add(key); hlRefreshMark(id, m); } });
+  }
   /* من يملك أن يظلّل: صاحبُ المساهمة في التحرير */
   function hlCan(el) {
     const b = bkOfEl(el); if (!b || !b.view || !b.view.closest('.pk--edit')) return null;
@@ -24020,85 +24036,120 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (prev && prev.id !== id) hlBarSync(prev.id);
     if (id) hlBarSync(id);
   }
-  /* الرقمُ يمتلئ بأوّل تظليلٍ يدخله، فيصير ‎seq‎ آخرَ رقمٍ ممتلئ وتظهر بعده فارغة */
-  function hlAddTo(H, m, n) {
-    if (!H.nums[n]) H.nums[n] = { c: null, card: null };
-    if (!m.n.includes(n)) m.n.push(n);
-    if (n > H.seq) H.seq = n;
+  /* الدائرةُ الفارغة: صفٌّ جديدٌ في المجلد المختار (بطاقةٌ فارغةٌ تُكتب في الجدول) */
+  function hlNewRow(id) {
+    const R = hlRows(id); if (!R) return null;
+    const nn = { id: newId(), t: 'c', f: '', b: '' };
+    R.host.arr.push(nn);
+    return nn.id;
   }
-  /* تحديدٌ اكتمل: يصير تظليلًا ثابتًا، ويدخل الدائرةَ الشغّالة إن كانت، ويصير المختار */
-  function hlCreate(sel, num) {
+  /* تحديدٌ يثبت تظليلًا مربوطًا بصفّ (‎cid‎ أو الشغّال) */
+  function hlCreate(sel, cid) {
     const c = hlCan(sel.d); if (!c) return false;
     const { b, sid, id } = c, H = hlData(id, true);
-    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, n: [], d: sel.rtl ? 'r' : 'l',
+    let row = cid || hlArm[id] || null, grew = false;
+    if (row === 'new') { row = hlNewRow(id); grew = !!row; if (hlArm[id] === 'new') hlArm[id] = row; }
+    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l',
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
-    if (num || hlArm[id]) hlAddTo(H, m, num || hlArm[id]);
     save();
     bkTLClear();
     hlRefresh(b, sel.k); hlSetCur(id, m.id);
+    if (grew) hlRowsChanged();
     return true;
   }
-  /* نقرةٌ (بلا سحب) على تظليلٍ في الصفحة تختاره، وعلى غيره تُلغي الاختيار */
+  /* صفٌّ أُضيف: يُرسم الجدولُ من جديد (فيظهر الصفّ) */
+  function hlRowsChanged() { try { renderCmSection(); } catch (e) {} }
+  /* البطائقُ المربوطةُ بتظليلٍ في مساهمة */
+  function hlUsed(id) {
+    const u = new Set();
+    try { const H = hlData(id); (H ? H.marks : []).forEach(x => (x.c || []).forEach(c => u.add(c))); } catch (e) {}
+    return u;
+  }
+  /* بعد كلّ رسم: إن تبدّلت أرقامُ الصفوف (صفٌّ أُضيف أو حُذف أو رُتّب) أُعيد طلاءُ أرقامها على الصفحات الظاهرة */
+  let hlRowSig = '';
+  function hlAfterRender() {
+    const pk = cardDataRaw(cmCode); if (!pk) return;
+    const sig = [...hlRowMap()].map(([k, v]) => k + ':' + v).join(',');
+    if (sig === hlRowSig) return;
+    const first = !hlRowSig; hlRowSig = sig;
+    if (first) return;
+    (postsOf(cmCode, 'cards') || []).forEach(p => { if (p.data && p.data.hl && p.data.hl.marks.length) hlRepaintAll(p.id); });
+  }
   function hlPick(d, e) {
     const c = hlCan(d); if (!c) return;
     const R = d.getBoundingClientRect(), x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
     const m = hlMarksOn(c.b, +d.dataset.k).find(m => m.bars.some(([l, r, t, bb]) => x >= l && x <= r && y >= t && y <= bb));
     hlSetCur(c.id, m ? m.id : null);
   }
-  /* ضغطُ دائرةٍ في الشريط: مع مختارٍ يضيفه إليها أو يرفعه منها · بلا مختارٍ يشغّلها أو يطفئها */
-  function hlCircle(id, n) {
-    /* تحديدٌ عابرٌ في هذا الكتاب: يثبت في الدائرة */
-    if (bkTLSel && bkTLSel.d.isConnected) { const c = hlCan(bkTLSel.d); if (c && c.id === id) { hlCreate(bkTLSel, n); hlBarSync(id); return; } }
-    const H = hlData(id, true);
+  /* ضغطُ دائرة: مع تحديدٍ عابرٍ يُثبَّت فيها · مع تظليلٍ مختارٍ يُضاف إلى صفّها أو يُرفع منه · وإلّا تُشغَّل أو تُطفأ */
+  function hlCircle(id, cid) {
+    if (bkTLSel && bkTLSel.d.isConnected) { const c = hlCan(bkTLSel.d); if (c && c.id === id) { hlCreate(bkTLSel, cid); hlBarSync(id); return; } }
     const m = hlCur && hlCur.id === id && hlMark(id, hlCur.m);
     if (m) {
-      if (m.n.includes(n)) m.n = m.n.filter(x => x !== n); else hlAddTo(H, m, n);
-      save(); hlRefreshMark(id, m);
-    } else hlArm[id] = hlArm[id] === n ? 0 : n;
-    hlBarSync(id);
+      let row = cid, grew = false;
+      if (row === 'new') { row = hlNewRow(id); grew = !!row; }
+      if (!row) return;
+      if (m.c.includes(row)) m.c = m.c.filter(x => x !== row); else m.c.push(row);
+      save(); hlRefreshMark(id, m); hlBarSync(id);
+      if (grew) hlRowsChanged();
+    } else { hlArm[id] = hlArm[id] === cid ? 0 : cid; hlBarSync(id); }
   }
   function hlDelete(id, mid) {
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
-    save(); hlRefreshMark(id, m); hlBarSync(id);
+    save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
-  /* شريطُ الدوائر في التذييل: الممتلئةُ (آخرُها ثمانٍ) ثمّ فارغةٌ للتالي. الشغّالةُ بحلقةٍ ذهبيّة،
-     ومع تظليلٍ مختارٍ تُعلَّم دوائرُه، وتدعو الباقيةُ إلى الإضافة */
+  /* شريطُ الدوائر: صفوفُ المجلد المختار (الممتلئةُ ما رُبط به تظليل)، ثمّ فارغةٌ لصفٍّ جديد */
   function hlBarHTML(id) {
-    const H = hlData(id), seq = H ? H.seq : 0, arm = hlArm[id] || 0;
+    const R = hlRows(id), H = hlData(id), arm = hlArm[id] || 0;
+    const cards = R ? R.cards : [];
     const m = hlCur && hlCur.id === id && H ? H.marks.find(x => x.id === hlCur.m) : null;
     let pend = false; try { pend = !!(bkTLSel && bkTLSel.d.isConnected && (hlCan(bkTLSel.d) || {}).id === id); } catch (e) {}
-    const from = Math.max(1, seq - 7), dots = [];
-    for (let n = from; n <= seq + 1; n++) {
-      /* الرقمُ ممتلئٌ ما دام فيه تظليل — فإن حُذفت تظليلاتُه بقي برقمه فارغًا */
-      const has = n <= seq && H.marks.some(x => x.n.includes(n)), c = has && H.nums[n] && H.nums[n].c;
-      const cls = 'cx-hlc' + (has ? '' : ' is-next') + (arm === n ? ' is-arm' : '') + (m && m.n.includes(n) ? ' is-in' : '');
-      const tip = pend ? T().hlIn : m ? (m.n.includes(n) ? T().hlOut : T().hlIn) : arm === n ? T().hlArmOff : T().hlArmT;
-      dots.push(`<button type="button" class="${cls}" data-hlc="${n}"${c ? ` style="--hc:${c}"` : ''} title="${esc(tip.replace('{n}', n))}">${n}</button>`);
-    }
-    const more = from > 1 ? `<span class="cx-hlmore">${from - 1}+</span>` : '';
-    return `<span class="cx-hlbar${m || pend ? ' has-cur' : ''}${pend ? ' has-pend' : ''}" data-hlwrap data-pkid="${esc(id)}">${more}${dots.join('')}</span>`;
+    const used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    const dot = (cid, n, next) => {
+      const cls = 'cx-hlc' + (next ? ' is-next' : used.has(cid) ? '' : ' is-row') + (arm === cid ? ' is-arm' : '') + (m && m.c.includes(cid) ? ' is-in' : '');
+      const tip = (pend ? T().hlIn : m ? (m.c.includes(cid) ? T().hlOut : T().hlIn) : arm === cid ? T().hlArmOff : T().hlArmT).replace('{n}', n);
+      return `<button type="button" class="${cls}" data-hlcid="${esc(cid)}" title="${esc(tip)}">${next ? '+' : n}</button>`;
+    };
+    const dots = cards.map((c, i) => dot(c.id, i + 1, false)).join('') + (R ? dot('new', cards.length + 1, true) : '');
+    return `<span class="cx-hlbar${m || pend ? ' has-cur' : ''}" data-hlwrap data-pkid="${esc(id)}">${dots}</span>`;
   }
-
   function hlBarSync(id) {
     document.querySelectorAll(`[data-hlwrap][data-pkid="${CSS.escape(id)}"]`).forEach(x => { x.outerHTML = hlBarHTML(id); });
+    hlRowMarksSync(id);
+  }
+  /* في الجدول: رقمُ الصفّ المربوطِ بتظليلٍ يتلوّن، ونقرُه يقلّب الكتابَ إلى أوّل تظليلاته */
+  function hlRowMarksSync(id) {
+    const H = hlData(id), used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    document.querySelectorAll(`#cm-body .kt-view[data-pkid="${CSS.escape(id)}"] tr[data-kcard]`).forEach(tr => {
+      const n = tr.querySelector('.kt-num'); if (n) n.classList.toggle('has-hl', used.has(tr.dataset.kcard));
+    });
   }
   document.addEventListener('click', e => {
-    const t = e.target.closest && e.target.closest('[data-hlc], .bk-hlnum');
+    const num = e.target.closest && e.target.closest('#cm-body .kt-view tr[data-kcard] .kt-num.has-hl');
+    if (num) {
+      const kv = num.closest('.kt-view'), id = kv.dataset.pkid, cid = num.closest('tr').dataset.kcard, H = hlData(id);
+      const m = H && H.marks.find(x => x.c.includes(cid)); if (!m) return;
+      e.preventDefault(); e.stopPropagation();
+      if (!pkSplitOn(id)) return;
+      pkLnkGo(id + m.s, m.k); hlSetCur(id, m.id);
+      return;
+    }
+    const t = e.target.closest && e.target.closest('[data-hlcid]');
     if (!t) return;
     e.preventDefault(); e.stopPropagation();
     if (t.classList.contains('bk-hlnum')) {
       const c = hlCan(t); if (!c) return;
-      const n = +t.dataset.hln; hlSetCur(c.id, null); hlArm[c.id] = hlArm[c.id] === n ? 0 : n; hlBarSync(c.id);
+      const cid = t.dataset.hlcid; hlSetCur(c.id, null); hlArm[c.id] = hlArm[c.id] === cid ? 0 : cid; hlBarSync(c.id);
       return;
     }
-    const w = t.closest('[data-hlwrap]'); if (w) hlCircle(w.dataset.pkid, +t.dataset.hlc);
+    const w = t.closest('[data-hlwrap]'); if (w) hlCircle(w.dataset.pkid, t.dataset.hlcid);
   }, true);
   /* Esc: يُلغى التحديدُ القائم أوّلًا، ثمّ الاختيار، ثمّ تُطفأ الدائرةُ الشغّالة · Delete يحذف المختار */
   document.addEventListener('keydown', e => {
-    if (e.target.closest && e.target.closest('input, textarea, [contenteditable="true"]')) return;
+    if (e.target.closest && e.target.closest('input, textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')) return;
     if (e.key === 'Escape') {
       if (hlCur) { const id = hlCur.id; hlSetCur(id, null); e.preventDefault(); e.stopImmediatePropagation(); return; }
       const ids = Object.keys(hlArm).filter(id => hlArm[id] && document.querySelector(`#cm-body [data-hlwrap][data-pkid="${CSS.escape(id)}"]`));
@@ -24335,7 +24386,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkTLClear() { if (bkTLSel) { const c = hlCan(bkTLSel.d); bkTLDraw(bkTLSel.d, null); bkTLSel = null; if (c) hlBarSync(c.id); } }
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlc]'))) bkTLClear(); return; }
+    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
     if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
