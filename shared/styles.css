@@ -18321,3 +18321,17 @@ html[data-theme="dark"] .cx-hldot:not(.is-ghost) { background: var(--hc, #dfe6e6
 /* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
 .bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
 .bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
+/* زرُّ القرار بعد التحديد: يطفو تحت آخره بزجاج الموقع */
+.bk-tl .bk-hlask { position: absolute; margin-top: 7px; display: flex; gap: 3px; padding: 3px; border-radius: 999px; z-index: 4; pointer-events: auto; white-space: nowrap;
+  background: color-mix(in srgb, var(--glass, #fff) 88%, transparent); border: 0; color: var(--glass-ink, inherit);
+  box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08)), 0 10px 26px -12px var(--glass-cast, rgba(20, 40, 46, .3));
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); }
+.bk-hlask__b { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 4px; padding-inline: 4px 10px; border: 0; border-radius: 999px;
+  background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+.bk-hlask__b:hover { background: var(--u-hov, rgba(0,0,0,.06)); }
+.bk-hlask__b.is-main { background: rgba(169, 133, 47, .12); }
+.bk-hlask__b.is-main:hover { background: rgba(169, 133, 47, .2); }
+.bk-hlask .cx-hldot { width: 20px; height: 20px; font-size: 11px; }
+html[data-theme="dark"] .bk-hlask__b.is-main { background: rgba(212, 179, 106, .16); }
+/* أنماطُ كلمات الطبقة (شفّافةٌ مطلقةُ الموضع) لا تصيب نصَّ الزرّ */
+.bk-tl .bk-hlask span { position: static; color: inherit; white-space: nowrap; cursor: pointer; transform: none; pointer-events: none; }
