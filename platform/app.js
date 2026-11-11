@@ -9390,7 +9390,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a === 'book') {
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
-      if (!pub) return pkSrcTools(id, s) + '<span class="cx-srcsep"></span>' + pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next');
+      if (!pub) return pkSrcTools(id, s) + pkAddPill(`data-pksrcpick data-pkid="${esc(pkSrcNext(id))}"`, T().pkAddOtherSrc) + '<span class="cx-srcsep"></span>' + pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next');
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
     }
@@ -10584,8 +10584,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (L.length) {
       const cur = pkSrcCurOf(id), many = L.length > 1;
       /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
-      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('')
-        + (ed ? `<button type="button" class="pk-src__more" data-pksrcpick data-pkid="${esc(pkSrcNext(id))}">${PK_PLUS_SVG}<span>${esc(T().pkAddOtherSrc)}</span></button>` : '');
+      /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
+      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
         + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
     }
