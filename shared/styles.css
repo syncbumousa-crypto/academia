@@ -18250,3 +18250,4 @@ html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
 @media (prefers-reduced-motion: reduce) { .pk-vdots__s .pk-vdots__m.is-move { animation: none; } }
 /* أقربُ إلى الأيقونة رأسيًّا (طلبُ صاحب الموقع) */
 .pk-vdots { top: 16px; }
+.pk-vdots { top: 14px; }
