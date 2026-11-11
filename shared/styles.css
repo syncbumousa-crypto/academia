@@ -18081,3 +18081,6 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 .pk-blkh--book:has(> .pk-srchd) > .pk-blkh__ic { position: relative; z-index: 1; pointer-events: none; }
 .pk-blkh--book > .pk-srchd { position: relative; z-index: 0; margin-inline-start: -30px; padding-inline-start: 32px; padding-inline-end: 8px; gap: 4px; height: 26px; font-size: 12px; }
 .pk-blkh--book > .pk-srchd svg { width: 12px; height: 12px; }
+.pk-blkh--book > .pk-srchd { padding-inline-start: 25px; font-size: 11px; gap: 3px; white-space: nowrap; flex-wrap: nowrap; }
+.pk-blkh--book > .pk-srchd > span { white-space: nowrap; }
+.pk-blkh--book > .pk-srchd svg { width: 11px; height: 11px; }
