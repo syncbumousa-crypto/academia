@@ -9766,7 +9766,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والذهبيّةُ علامةٌ مستقلّةٌ تنزلق من نقطة العرض السابق إلى الجديد بحركةٍ مرنة (‎pkVdPrev‎ يحفظ السابق) */
   /* مراكزُ الدوائر (من جهة البداية) في مربّع ‎16×11‎ — ‎3.5px‎ متقاربة: ‎1.5‎ أفقيًّا و‎1‎ رأسيًّا (اختيارُ صاحب الموقع).
      تُرسم ‎SVG‎ لا عناصرَ مُموضَعة: الكسورُ في المواضع كانت تقصّ الدوائرَ فتبدو بيضاويّة */
-  const PK_VD_C = [[5.5, 3.25], [10.5, 3.25], [8, 7.75]], PK_VD_R = 1.75;
+  const PK_VD_C = [[5.75, 3], [10.25, 3], [8, 7]], PK_VD_R = 1.5;   /* ‎3px‎ (طلبُ صاحب الموقع: أصغر) */
   const pkVdPrev = {};
   const pkVDots = id => {
     const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
