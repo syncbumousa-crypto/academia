@@ -17887,7 +17887,7 @@ html[data-theme="dark"] .cx-srcm__it:hover, html[data-theme="dark"] .cx-srcm__it
 html[data-theme="dark"] .cx-srcm__it.is-red, html[data-theme="dark"] .cx-srcm__it.is-red svg { color: #e08377; }
 html[data-theme="dark"] .cx-plus__menu.cx-srcm__menu { box-shadow: 0 14px 36px rgba(0, 0, 0, .45); }
 /* ===== زرُّ المصدر فوق جنب أيقونة المساحة، وقائمةُ المصادر الطافية (طلبُ صاحب الموقع) ===== */
-.pk-srchd { display: inline-flex; align-items: center; gap: 5px; height: 26px; min-width: 0; max-width: 220px; padding: 0 9px 0 7px; border: 0; border-radius: 99px;
+.pk-srchd { display: inline-flex; align-items: center; gap: 5px; height: 26px; min-width: 0; max-width: 220px; padding: 0 7px 0 9px; border: 0; border-radius: 99px;
   background: transparent; color: #3d4b50; font: 700 13px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; cursor: pointer; white-space: nowrap; }
 .pk-srchd > span { overflow: hidden; text-overflow: ellipsis; }
 .pk-srchd svg { flex: none; width: 13px; height: 13px; fill: none; stroke: #a9852f; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s ease; }

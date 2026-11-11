@@ -10776,7 +10776,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const L = pkSrcList(id);
     if (!L.length) return ed ? `<button type="button" class="pk-srchd pk-srchd--add" data-pksrcpick data-pkid="${esc(id)}">${pkSrcSvg(PK_SP_IC.plus)}<span>${esc(T().pkSrcAdd)}</span></button>` : '';
     if (!ed && L.length < 2) return `<span class="pk-srchd pk-srchd--ro"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></span>`;
-    return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}">${pkSrcSvg(PK_SP_IC.chev)}<span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></button>`;
+    return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
   };
   /* صورٌ صغيرةٌ لصفحات المصدر (للغلاف المصغّر ومعاينته) — مخزنٌ بالمعرّف والصفحة */
   const pkSrcPgU = {};
