@@ -242,6 +242,48 @@
   state.lang = state.lang === 'en' ? 'en' : 'ar';
   state.terms = Array.isArray(state.terms) ? state.terms : [];
   state.libs = state.libs || {};             // { اسم الترم: [{code, picks}] } — picks = اختيارات «نسختي» (ROADMAP-PICKS)
+  /* ===== Merged courses: one course that changed its code between plans =====
+     The old code is gone from the catalog; its data lives under the new code, and the old code is
+     shown under the name, small and faded ("before ACCT 314"). A plan that still holds the old code
+     is moved to the new one here, once per load; the student's own unsent contributions follow it.
+     Lists that came from the server are not carried: the server already holds them under the new code. */
+  const COURSE_PREV = { 'ACCT 303': 'ACCT 314', 'ACCT 306': 'ACCT 408', 'ACCT 404': 'ACCT 311', 'PHYS 300': 'PHYS 301', 'EE 307': 'EE 406' };
+  const COURSE_NEXT = {}; Object.keys(COURSE_PREV).forEach(n => { COURSE_NEXT[COURSE_PREV[n]] = n; });
+  {
+    let moved = 0;
+    const codeOf = e => (typeof e === 'string' ? e : (e && e.code));
+    Object.keys(state.libs).forEach(t => {
+      const arr = state.libs[t]; if (!Array.isArray(arr) || !arr.some(e => COURSE_NEXT[codeOf(e)])) return;
+      const seen = new Set();
+      state.libs[t] = arr.map(e => {
+        const n = COURSE_NEXT[codeOf(e)]; if (!n) return e;
+        moved++; return typeof e === 'string' ? n : Object.assign({}, e, { code: n });
+      }).filter(e => { const c = codeOf(e); if (seen.has(c)) return false; seen.add(c); return true; });
+    });
+    const ci = state.cinfo || {};
+    Object.keys(COURSE_NEXT).forEach(o => {
+      if (!ci[o]) return;
+      const n = COURSE_NEXT[o], from = ci[o].posts || {};
+      Object.keys(from).forEach(sec => {
+        if (sec === 'doc') return;
+        const mine = (from[sec] || []).filter(p => p && p.me);
+        if (!mine.length) return;
+        const to = ci[n] || (ci[n] = {}), tp = to.posts || (to.posts = {});
+        tp[sec] = (tp[sec] || []).concat(mine.filter(p => !(tp[sec] || []).some(x => x && x.id === p.id)));
+      });
+      delete ci[o]; moved++;
+    });
+    if (moved) state.mergedCodes1 = Date.now();
+  }
+  function coursePrevHTML(code) {
+    const o = COURSE_PREV[code]; if (!o) return '';
+    const sp = o.indexOf(' '), dept = o.slice(0, sp), num = o.slice(sp + 1);
+    const ar = state.lang === 'ar';
+    /* the Arabic department word comes from the new course's own short name (same department) */
+    const arPre = ((CM[code] || {}).arName || '').replace(/\s*\d+\s*$/, '');
+    const lab = ar ? (arPre || (typeof DEPT_AR !== 'undefined' && DEPT_AR[dept]) || dept) : dept;
+    return '<span class="cprev">' + (ar ? '\u0633\u0627\u0628\u0642\u064b\u0627 ' : 'before ') + esc(lab + ' ' + num) + '</span>';
+  }
   state.termDates = state.termDates || {};   // { اسم الترم: { s: 'YYYY-MM-DD', e: 'YYYY-MM-DD' } }
   state.pid = state.pid || 0;                // عدّاد معرفات المساهمات الثابتة
   /* ============================================================
@@ -2109,7 +2151,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         ? `<span class="prep">${T().prepBadge}</span>` : '';
       return `<div class="crow bundle ${bAdded ? 'is-added' : ''}"${bAttrs}>
         <span class="bundle-books">${bundleBookHTML(c, 'محاضرة', bStat('محاضرة'))}${bundleBookHTML(c, 'معمل', bStat('معمل'))}</span>
-        <span class="cname" title="${esc(c.ar)}">${name}</span>
+        <span class="cname" title="${esc(c.ar)}">${name}</span>${coursePrevHTML(c.code)}
         <span class="chours">${c.h}<span class="hu">${T().hUnit}</span></span>
         ${bPrep}
       </div>`;
@@ -2143,7 +2185,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ? `<span class="prep">${T().prepBadge}</span>` : '';
     return `<div class="crow ${added ? 'is-added' : ''}"${attrs}>
       ${imgBox}
-      <span class="cname" title="${esc(c.ar)}">${name}</span>
+      <span class="cname" title="${esc(c.ar)}">${name}</span>${coursePrevHTML(c.code)}
       <span class="chours">${c.h}<span class="hu">${T().hUnit}</span></span>
       ${prep}
     </div>`;
@@ -2394,7 +2436,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
     const qHit = c => {
       const q = query.trim();
-      return !q || c.code.toLowerCase().includes(q.toLowerCase()) || c.ar.includes(q) || arShort(c).includes(q);
+      return !q || c.code.toLowerCase().includes(q.toLowerCase()) || c.ar.includes(q) || arShort(c).includes(q) || (COURSE_PREV[c.code] || '').toLowerCase().includes(q.toLowerCase());
     };
     function render() {
       csMemo.clear();   /* حالُ المواد تُقرأ من جديد: ما حُفظ كان لرسمةٍ مضت */
@@ -25260,6 +25302,7 @@ void main() {
     srvPull(code);       /* ومنشوراتُ غيرك: تُجذب في الخلفيّة وتُحقن ثمّ تُعاد الشاشة */
     const actLbl = c.act ? ` — ${c.act}` : '';   /* نشاط المعمل يظهر في العنوان لتمييز خيطه */
     $('#cm-title').textContent = (state.lang === 'ar' ? `${arShort(c)}${actLbl} (${c.h})` : `${c.code}${actLbl} (${c.h})`);
+    if (COURSE_PREV[code]) $('#cm-title').insertAdjacentHTML('beforeend', coursePrevHTML(code));
     /* مربع صورة المادة يمين الاسم بالعنوان */
     $('#cm-timg').innerHTML = imgOf(code)
       ? `<img src="${imgOf(code)}" alt="">`
