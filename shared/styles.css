@@ -18299,41 +18299,28 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 /* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
 .bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
 html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
-/* ===== رحلةُ التحديد: كبسولةُ الرقم في التذييل، ودوائرُ الأرقام ===== */
-.cx-hl { display: inline-flex; align-items: center; gap: 6px; }
-.cx-hlcap { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 10px 0 4px; padding-inline: 4px 10px; border-radius: 999px;
-  border: 1.5px dashed var(--u-line); color: var(--u-muted, #5b6b72); font-size: 12.5px; white-space: nowrap; }
-.cx-hlcap.is-on { border-style: solid; border-color: rgba(169, 133, 47, .7); background: rgba(169, 133, 47, .08); color: var(--u-ink, #14233f); padding-inline-end: 4px; }
-.cx-hlcap__t { font-weight: 600; }
-.cx-hlcap kbd { font: 600 10.5px/1 system-ui, sans-serif; padding: 3px 5px; border-radius: 5px; border: 1px solid var(--u-line); color: var(--u-muted, #5b6b72); background: var(--u-surf, #fff); }
-.cx-hldot { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font: 700 11.5px/1 system-ui, sans-serif;
-  background: var(--hc, #eef2f2); color: #1d3a3f; border: 1.5px solid var(--hc, #2c5e65); box-sizing: border-box; }
-.cx-hldot.is-ghost { background: transparent; border-style: dashed; border-color: var(--u-line); color: var(--u-muted, #5b6b72); }
-.cx-hlx { display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--u-muted, #5b6b72); cursor: pointer; }
-.cx-hlx:hover { background: var(--u-hov, rgba(0,0,0,.06)); color: var(--u-ink, #14233f); }
-.cx-hlx svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
-.cx-hlnums { display: inline-flex; align-items: center; gap: 3px; height: 30px; padding: 0 4px; border-radius: 999px; border: 1.5px solid var(--u-line); }
-.cx-hlnum { padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; }
-.cx-hlnum:hover .cx-hldot { box-shadow: 0 0 0 2px rgba(169, 133, 47, .35); }
-.cx-hlmore { font-size: 11.5px; color: var(--u-muted, #5b6b72); padding-inline: 2px 4px; }
-html[data-theme="dark"] .cx-hlcap.is-on { background: rgba(212, 179, 106, .1); border-color: rgba(212, 179, 106, .6); color: #f1ead8; }
-html[data-theme="dark"] .cx-hldot:not(.is-ghost) { background: var(--hc, #dfe6e6); }
 /* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
 .bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
 .bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
-/* زرُّ القرار بعد التحديد: يطفو تحت آخره بزجاج الموقع */
-.bk-tl .bk-hlask { position: absolute; margin-top: 7px; display: flex; gap: 3px; padding: 3px; border-radius: 999px; z-index: 4; pointer-events: auto; white-space: nowrap;
-  background: color-mix(in srgb, var(--glass, #fff) 88%, transparent); border: 0; color: var(--glass-ink, inherit);
-  box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08)), 0 10px 26px -12px var(--glass-cast, rgba(20, 40, 46, .3));
-  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); }
-.bk-hlask__b { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 4px; padding-inline: 4px 10px; border: 0; border-radius: 999px;
-  background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
-.bk-hlask__b:hover { background: var(--u-hov, rgba(0,0,0,.06)); }
-.bk-hlask__b.is-main { background: rgba(169, 133, 47, .12); }
-.bk-hlask__b.is-main:hover { background: rgba(169, 133, 47, .2); }
-.bk-hlask .cx-hldot { width: 20px; height: 20px; font-size: 11px; }
-html[data-theme="dark"] .bk-hlask__b.is-main { background: rgba(212, 179, 106, .16); }
-/* أنماطُ كلمات الطبقة (شفّافةٌ مطلقةُ الموضع) لا تصيب نصَّ الزرّ */
-.bk-tl .bk-hlask span { position: static; color: inherit; white-space: nowrap; cursor: pointer; transform: none; pointer-events: none; }
 /* والكتابُ وحده في الضيّقة (الملخّصُ والبنكُ مغلقان): لا جارَ يعطي القسمةَ قامتَها فكان وعاؤه صفرًا — قامةٌ له كقامة المصادر المتعدّدة */
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--book > .pk-src__view { flex: none; height: clamp(360px, 62vh, 600px); }
+/* ===== شريطُ الأرقام في التذييل: دوائرُ ممتلئةٌ ثمّ فارغةٌ للتالي ===== */
+.cx-hlbar { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 5px; border-radius: 999px; border: 1.5px solid var(--u-line); }
+.cx-hlc { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; cursor: pointer; box-sizing: border-box;
+  font: 700 11.5px/1 system-ui, sans-serif; color: #3a2c0b; background: var(--hc, #f3d27a); border: 1.5px solid rgba(120, 92, 25, .45);
+  transition: transform .15s, box-shadow .15s, background .15s; }
+.cx-hlc:hover { transform: scale(1.08); }
+.cx-hlc.is-next { background: transparent; border: 1.5px dashed var(--u-line); color: var(--u-muted, #5b6b72); }
+.cx-hlc.is-arm { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4.5px #a9852f; animation: cx-hlarm 1.6s ease-in-out infinite; }
+.cx-hlc.is-next.is-arm { border-style: solid; border-color: #a9852f; color: #a9852f; }
+.cx-hlc.is-in { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4px var(--u-ink, #14233f); }
+.cx-hlbar.has-cur .cx-hlc:not(.is-in) { opacity: .75; }
+.cx-hlbar.has-cur .cx-hlc:not(.is-in):hover { opacity: 1; }
+@keyframes cx-hlarm { 50% { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 6px rgba(169, 133, 47, .45); } }
+@media (prefers-reduced-motion: reduce) { .cx-hlc.is-arm { animation: none; } }
+.cx-hlmore { font-size: 11px; color: var(--u-muted, #5b6b72); padding-inline: 2px; }
+html[data-theme="dark"] .cx-hlc.is-arm, html[data-theme="dark"] .cx-hlc.is-in { --u-surf: #1b2529; }
+html[data-theme="dark"] .cx-hlc.is-in { box-shadow: 0 0 0 2.5px #1b2529, 0 0 0 4px #eef1f2; }
+html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
+/* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
+.bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
