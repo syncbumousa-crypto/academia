@@ -18233,3 +18233,18 @@ html[data-theme="dark"] .pk-vdots__m { background: #d4b36a; }
 /* أصغرُ قليلًا، والمسافةُ بين العلويّتين أقلّ */
 .pk-vdots { width: 16px; height: 12px; inset-inline-start: -1px; }
 .pk-vdots__d, .pk-vdots__m { width: 4px; height: 4px; }
+/* دوائرُ ‎3.5px‎ متقاربةٌ ككتلةٍ واحدة (اختيارُ صاحب الموقع) */
+.pk-vdots { height: 11px; }
+.pk-vdots__d, .pk-vdots__m { width: 3.5px; height: 3.5px; }
+/* الدوائرُ ‎SVG‎: مستديرةٌ دائمًا مهما كانت الكسور */
+.pk-vdots__s { display: block; width: 16px; height: 11px; overflow: visible; }
+.pk-vdots__s .pk-vdots__d { fill: rgba(20, 40, 46, .24); width: auto; height: auto; position: static; transition: fill .15s; }
+.pk-vdots:hover .pk-vdots__s .pk-vdots__d { fill: rgba(20, 40, 46, .42); }
+.pk-vdots__s .pk-vdots__m { fill: #a9852f; width: auto; height: auto; position: static; transform-box: fill-box; transform-origin: center; box-shadow: none; }
+html[data-theme="dark"] .pk-vdots__s .pk-vdots__d { fill: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots:hover .pk-vdots__s .pk-vdots__d { fill: rgba(255, 255, 255, .5); }
+html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
+.pk-vdots__s .pk-vdots__m.is-move { animation: pk-vd-move .52s cubic-bezier(.3, 1.45, .5, 1) both, pk-vd-glow2 .6s ease-out both; }
+@keyframes pk-vd-glow2 { 40% { filter: drop-shadow(0 0 1.6px rgba(201, 162, 39, .9)); } 100% { filter: none; } }
+.pk-vdots:hover .pk-vdots__s .pk-vdots__m { transform: scale(1.18); }
+@media (prefers-reduced-motion: reduce) { .pk-vdots__s .pk-vdots__m.is-move { animation: none; } }

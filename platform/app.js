@@ -9764,21 +9764,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
   /* نقطتان فوق ونقطةٌ تحتهما، والضغطُ في أيّ موضعٍ منها ينقل إلى العرض التالي (طلبُ صاحب الموقع) — زرٌّ واحدٌ بـ‎data-pkview‎ التالي.
      والذهبيّةُ علامةٌ مستقلّةٌ تنزلق من نقطة العرض السابق إلى الجديد بحركةٍ مرنة (‎pkVdPrev‎ يحفظ السابق) */
-  const PK_VD_POS = [[2.5, 1.5], [9.5, 1.5], [6, 7]];
+  /* مراكزُ الدوائر (من جهة البداية) في مربّع ‎16×11‎ — ‎3.5px‎ متقاربة: ‎1.5‎ أفقيًّا و‎1‎ رأسيًّا (اختيارُ صاحب الموقع).
+     تُرسم ‎SVG‎ لا عناصرَ مُموضَعة: الكسورُ في المواضع كانت تقصّ الدوائرَ فتبدو بيضاويّة */
+  const PK_VD_C = [[5.5, 3.25], [10.5, 3.25], [8, 7.75]], PK_VD_R = 1.75;
   const pkVdPrev = {};
   const pkVDots = id => {
     const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
     const prev = pkVdPrev[id], rtl = document.documentElement.dataset.lang !== 'en';
     pkVdPrev[id] = cur;
+    const X = x => rtl ? 16 - x : x, C = PK_VD_C.map(([x, y]) => [X(x), y]);
     let mv = '';
-    if (prev !== undefined && prev !== cur && !bkReduce()) {
-      const dx = (PK_VD_POS[prev][0] - PK_VD_POS[cur][0]) * (rtl ? -1 : 1), dy = PK_VD_POS[prev][1] - PK_VD_POS[cur][1];
-      mv = `;--dx:${dx}px;--dy:${dy}px`;
-    }
-    const [mx, my] = PK_VD_POS[cur];
+    if (prev !== undefined && prev !== cur && !bkReduce()) mv = ` class="pk-vdots__m is-move" style="--dx:${C[prev][0] - C[cur][0]}px;--dy:${C[prev][1] - C[cur][1]}px"`;
     return `<button type="button" class="pk-vdots" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
-      + PK_VD_POS.map(([x, y], i) => `<i class="pk-vdots__d" style="inset-inline-start:${x}px;top:${y}px"></i>`).join('')
-      + `<i class="pk-vdots__m${mv ? ' is-move' : ''}" style="inset-inline-start:${mx}px;top:${my}px${mv}"></i></button>`;
+      + `<svg class="pk-vdots__s" viewBox="0 0 16 11" aria-hidden="true">${C.map(([x, y]) => `<circle class="pk-vdots__d" cx="${x}" cy="${y}" r="${PK_VD_R}"/>`).join('')}`
+      + `<circle${mv || ' class="pk-vdots__m"'} cx="${C[cur][0]}" cy="${C[cur][1]}" r="${PK_VD_R}"/></svg></button>`;
   };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
