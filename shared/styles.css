@@ -18138,3 +18138,25 @@ html[data-theme="dark"][data-lang="en"] .psp-sub::before { left: -7.5px; right: 
 #cm-body .post:not(.pk--max) .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--multi > .pk-src__list { flex: none; height: clamp(360px, 62vh, 600px); }
 /* واسمُ المصدر وأيقونةُ نوعه في وسط المساحة أفقيًّا (طلبُ صاحب الموقع) — وأيقونةُ المساحة في زاويتها */
 .pk-blkh--book > .pk-srchd { position: absolute; left: 50%; top: 0; margin: 0; transform: translate(-50%, -6px); max-width: 72%; z-index: 2; }
+/* ===== قائمةُ المصادر زجاجٌ سائلٌ كلوحة فلاتر البحث (‎glass.css · .market-tools .fpanel‎ · طلبُ صاحب الموقع) =====
+   الصبغةُ نفسُها (‎--glass‎ بكثافة ‎84%‎) ولمعةُ الحرف (‎--glass-edge‎) وظلُّها (‎--glass-cast‎) وتصنيرُ ما خلفها */
+html:root .psp-box, html:root .psp-sub, html:root .psp-sub::before {
+  background: color-mix(in srgb, var(--glass, #fff) 84%, transparent) !important; border: 0 !important; color: var(--glass-ink, inherit);
+}
+html:root .psp-box, html:root .psp-sub { box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08)), 0 10px 28px -12px var(--glass-cast, rgba(20, 40, 46, .3)) !important; filter: none !important; }
+html:root .psp-box { border-radius: 18px; }
+html:root .psp-sub { border-radius: 15px; background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; }
+html:root .psp-sub::before { background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; box-shadow: inset -1px 1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); right: -6px !important; }
+html[data-lang="en"]:root .psp-sub::before { box-shadow: inset 1px -1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); left: -6px !important; right: auto !important; }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .psp-box { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+}
+html:root .psp-r:hover, html:root .psp-it:hover, html:root .psp-more:hover, html:root .psp-more.is-on, html:root .psp-r.is-sub, html:root .psp-r.is-sub:hover { background: color-mix(in srgb, var(--glass-ink, #14233f) 8%, transparent) !important; }
+html:root .psp-it.is-on:hover { background: color-mix(in srgb, var(--glass-ink, #14233f) 8%, transparent) !important; }
+html:root .psp-add, html:root .psp-up { border-top-color: color-mix(in srgb, var(--glass-ink, #14233f) 10%, transparent) !important; }
+html:root .psp-sep { background: color-mix(in srgb, var(--glass-ink, #14233f) 10%, transparent); }
+html:root .psp-nm, html:root .psp-it { color: color-mix(in srgb, var(--glass-ink, #14233f) 82%, transparent) !important; }
+html:root .psp-r.is-cur .psp-nm, html:root .psp-it.is-on { color: var(--glass-ink, #14233f) !important; }
+html:root .psp-del { color: #c0564b !important; }
+html[data-theme="dark"]:root .psp-del { color: #e08377 !important; }
+html:root .psp-num, html:root .psp-ar { background: color-mix(in srgb, var(--glass-ink, #14233f) 6%, transparent) !important; border-color: color-mix(in srgb, var(--glass-ink, #14233f) 14%, transparent); box-shadow: none; color: var(--glass-ink, #14233f) !important; }
