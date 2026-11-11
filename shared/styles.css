@@ -17757,3 +17757,7 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 #cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
 /* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
 #cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
+/* ===== «+» الذيل مستطيلٌ بزوايا مستديرة فيه نصُّه (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» أو «إضافة» ===== */
+.cx-midadd.cx-addpill { width: auto; height: 32px; padding: 0 14px 0 12px; gap: 7px; display: inline-flex; align-items: center; border-radius: 10px;
+  font: 700 12.5px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
+.cx-midadd.cx-addpill svg { width: 15px; height: 15px; flex: none; }
