@@ -9466,7 +9466,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وفي النشر بلا مصادر: لا كتابَ يُقلَّب، فلا أدواتَ له (كانت أزرارُ التقليب تظهر دوائرَ خاوية) */
     if (a === 'book' && pub && !pkSrcAny(id)) return '';
     /* والإضافةُ مستطيلٌ بزوايا مستديرة ونصُّه بحسب المساحة الملموسة (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» */
-    if (a === 'book' && !pub && !pkSrcAny(id)) return '';   /* والإضافةُ فوق، جنب أيقونة المساحة (طلبُ صاحب الموقع) */
+    if (a === 'book' && !pub && !pkSrcAny(id)) return pkAddPill(`data-pksrcpick data-pkid="${esc(id)}"`, T().pkAddFirstSrc);   /* الإضافةُ الأولى في التذييل (طلبُ صاحب الموقع) */
     if (a === 'book') {
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
@@ -10816,7 +10816,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pkSP = { id: null, sub: null, sid: null, conf: null, ed: false };
   const pkSrcHd = (id, ed) => {
     const L = pkSrcList(id);
-    if (!L.length) return ed ? `<button type="button" class="pk-srchd pk-srchd--add" data-pksrcpick data-pkid="${esc(id)}">${pkSrcSvg(PK_SP_IC.plus)}<span>${esc(T().pkSrcAdd)}</span></button>` : '';
+    if (!L.length) return '';   /* والمساحةُ فارغة: لا زرَّ فوق — الإضافةُ من التذييل */
     if (!ed && L.length < 2) return `<span class="pk-srchd pk-srchd--ro"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></span>`;
     return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
   };
