@@ -17847,3 +17847,6 @@ html[data-theme="dark"] .pk-srcbar > i { background: rgba(255, 255, 255, .16); }
 html[data-theme="dark"] .pk-srcbar:hover > i { background: rgba(255, 255, 255, .28); }
 html[data-theme="dark"] .pk-srcbar.is-drag > i { background: rgba(255, 255, 255, .36); }
 #cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi { contain: size; }
+/* والقائمةُ تنزل حتى حافّة المساحة السفلى (لا هامشَ ميّتٌ تحتها تُحجب الرؤيةُ خلفه) — والفسحةُ في جوفها، وتُقصّ على الزاوية المستديرة */
+#cm-body .pk-split > .pk-src--multi { padding-bottom: 0; overflow: clip; }
+#cm-body .pk-src--multi > .pk-src__list { padding-bottom: 14px; }

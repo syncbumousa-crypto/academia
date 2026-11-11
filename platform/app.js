@@ -10614,13 +10614,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSrcBarUp = ls => {
     const pane = ls.parentElement, bar = pane && pane.querySelector(':scope > .pk-srcbar'), th = bar && bar.firstElementChild;
     if (!th) return;
-    const ch = ls.clientHeight, sh = ls.scrollHeight;
-    bar.style.top = ls.offsetTop + 'px'; bar.style.height = ch + 'px';
+    const ch = ls.clientHeight, sh = ls.scrollHeight, bh = Math.max(40, ch - 16);   /* والشريطُ يقف قبل الزاوية المستديرة تحت */
+    bar.style.top = ls.offsetTop + 'px'; bar.style.height = bh + 'px';
     if (sh <= ch + 2) { bar.hidden = true; return; }
     bar.hidden = false;
-    const thH = Math.max(30, Math.round(ch * ch / sh));
+    const thH = Math.max(30, Math.round(bh * ch / sh));
     th.style.height = thH + 'px';
-    th.style.transform = `translateY(${Math.round((ch - thH) * ls.scrollTop / (sh - ch))}px)`;
+    th.style.transform = `translateY(${Math.round((bh - thH) * ls.scrollTop / (sh - ch))}px)`;
   };
   const pkSrcBarRo = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => pkSrcBarUp(e.target))) : null;
   const pkSrcBarInit = () => document.querySelectorAll('#cm-body [data-pksrclist]:not([data-pkbar])').forEach(ls => {
@@ -10631,7 +10631,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     th.addEventListener('pointerdown', e => {
       e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); bar.classList.add('is-drag');
       const y0 = e.clientY, s0 = ls.scrollTop;
-      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((ls.clientHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
+      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((bar.offsetHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
       const up = () => { th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); };
       th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
     });
@@ -10639,7 +10639,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.target === th) return;
       e.preventDefault(); e.stopPropagation();
       const y = e.clientY - bar.getBoundingClientRect().top - th.offsetHeight / 2;
-      ls.scrollTo({ top: y / ((ls.clientHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
+      ls.scrollTo({ top: y / ((bar.offsetHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
     });
     pkSrcBarUp(ls);
   });
