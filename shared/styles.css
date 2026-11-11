@@ -18067,3 +18067,8 @@ html[data-theme="dark"] .psp-sub { filter: drop-shadow(0 12px 24px rgba(0, 0, 0,
 html[data-theme="dark"] .psp-sub::before { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); border-bottom: 0; border-left: 0; right: -8.5px; }
 html[data-theme="dark"][data-lang="en"] .psp-sub::before { border: 1.5px solid var(--border, #2a4249); border-top: 0; border-right: 0; left: -8.5px; right: auto; }
 html[data-theme="dark"] .psp-r.is-sub, html[data-theme="dark"] .psp-r.is-sub:hover { background: rgba(127, 179, 187, .1) !important; }
+/* المختارُ في قائمة الأنواع لا خلفيةَ له — علامتُه ✓ وخطُّه الأثقل — فلا يلتصق بتمرير ما بجانبه، وبين البنود فسحة (طلبُ صاحب الموقع) */
+.psp-list { display: flex; flex-direction: column; gap: 2px; }
+.psp-it.is-on, html[data-theme="dark"] .psp-it.is-on { background: none !important; font-weight: 700; }
+.psp-it.is-on:hover, html[data-theme="dark"] .psp-it.is-on:hover { background: #f3f5f6 !important; }
+html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .08) !important; }
