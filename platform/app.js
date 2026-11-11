@@ -9781,7 +9781,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<button type="button" class="pk-vdots pk-varc" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
       + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
       + `<path class="pk-varc__hit" d="${pkVaArc(PK_VA_A0 - 3, PK_VA_A0 + 3 * PK_VA_S + 3)}"/>`
-      + [0, 1, 2].map(i => `<path class="pk-varc__d" d="${seg(i)}"/>`).join('')
+      + `<path class="pk-varc__bg" d="${pkVaArc(PK_VA_A0 + PK_VA_GAP / 2, PK_VA_A0 + 3 * PK_VA_S - PK_VA_GAP / 2)}"/>`
+      + [0, 1, 2].map(i => `<path class="pk-varc__d"${i === (cur + 1) % 3 ? ' data-nx="1"' : ''} d="${seg(i)}"/>`).join('')
       + `<path class="pk-varc__m" d="${seg(0)}" style="--r0:${from * PK_VA_S}deg;--r1:${cur * PK_VA_S}deg"${from !== cur ? ' data-move="1"' : ''}/></svg></button>`;
   };
   const pkVwOf = id => {
