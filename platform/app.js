@@ -9336,6 +9336,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a === 'book' && !pub && !pkSrcMeta(id)) return pkAddPill(`data-pksrcpick data-pkid="${esc(id)}"`, T().pkAddFirstSrc);
     if (a === 'book') {
       const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
+      /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
+      if (!pub) return pkSrcTools(id) + '<span class="cx-srcsep"></span>' + pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next');
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
     }
@@ -10483,15 +10485,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <h4 class="pk-es__t">${esc(T()['pkEs' + K + 'T'])}</h4><p class="pk-es__p">${esc(T()['pkEs' + K + 'P'])}</p>
       </div>`;   /* بلا زرّ «أوّل …» (طلبُ صاحب الموقع): الإضافةُ من «+» الذيل */
   };
-  const pkSrcView = (id, ed) => {
-    const m = pkSrcMeta(id), cv = pkSrcCovMeta(id);
-    if (m) return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}" data-pkid="${esc(id)}">
-        ${ed ? `<div class="chtools${pkLnk.open[id] ? ' is-wide' : ''}">
+  const pkSrcTools = id => {
+    const m = pkSrcMeta(id), cv = pkSrcCovMeta(id); if (!m) return '';
+    return `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">
           ${cv ? pkSrcCovTool(id, cv) : `<button type="button" class="chtool" data-pksrccov data-pkid="${esc(id)}">${CH_IC.cover}<span class="chtool__txt"><b>${T().pkSrcCovAdd}</b><small>${T().chCovHint}</small></span></button>`}
           <div class="chtool chtool--on" data-pksrcpick data-pkid="${esc(id)}" title="${esc(T().chReplace)}">${CH_IC.pages}
             <span class="chtool__txt"><b>${T().pkSrcPagesT}</b><small>${esc(m.name)} · ${chSize(m.size || 0)}</small></span>
             <button type="button" class="chtool__x" data-pksrcdel data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
-          </div>${pkLnkHTML(id)}</div>` : ''}
+          </div>${pkLnkHTML(id)}</div>`;
+  };
+  const pkSrcView = (id, ed) => {
+    const m = pkSrcMeta(id), cv = pkSrcCovMeta(id);
+    /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
+    if (m) return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}" data-pkid="${esc(id)}">
         <div class="chsrc__view pk-src__view" data-pksrcview data-pkid="${esc(id)}"><p class="v-none">${T().chLoading}</p></div>
       </div>`;
     /* والمنشورةُ بلا كتاب: مربّعٌ مرقّطٌ يقول ذلك (طلبُ صاحب الموقع) — لا زرَّ رفعٍ معطّل */

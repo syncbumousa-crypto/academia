@@ -17776,3 +17776,29 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 html[data-theme="dark"] #cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
 html[data-theme="dark"] #cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
 html[data-theme="dark"] #cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #d4b36a; }
+/* ===== أدواتُ المصدر في التذييل (طلبُ صاحب الموقع): الغلاف · صفحاتُ المصدر · ربطُ الصفحات — كبسولاتٌ في صفّ،
+   والمربّعُ فوقها فيه المصدرُ وحدَه؛ وشجرةُ «ربط الصفحات» تطفو فوق التذييل ===== */
+.cx-acttools .cx-srctools { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; width: auto; margin: 0; }
+.cx-srctools .chtool, .cx-srctools .pk-lnk {
+  border: 1px solid var(--u-line); border-radius: 999px; background: var(--u-surf, #fff);
+  box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); transition: background .15s, box-shadow .15s;
+}
+html[data-theme="dark"] .cx-srctools .chtool, html[data-theme="dark"] .cx-srctools .pk-lnk { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-srctools .chtool { position: relative; padding: 6px 12px; min-width: 0; width: auto; height: 34px; box-sizing: border-box; }
+.cx-srctools .chtool--on { padding-inline-end: 32px; }
+.cx-srctools .chtool__x { inset-inline-end: 7px; width: 20px; height: 20px; }
+.cx-srctools .chtool__txt small { display: none; }
+.cx-srctools .chtool__txt b { font-size: 12px; white-space: nowrap; }
+.cx-srctools .chtool__thumb { width: 18px; height: 24px; margin: 0; }
+.cx-srctools .pk-lnk { position: relative; overflow: visible; border-style: solid; }
+.cx-srctools .pk-lnk__hd { padding: 6px 12px; height: 34px; box-sizing: border-box; }
+.cx-srctools .pk-lnk__tree { position: absolute; bottom: calc(100% + 10px); inset-inline-end: 0; width: 340px; max-height: 50vh; overflow: auto; z-index: 30;
+  padding: 8px; border-radius: 14px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 18px 40px -14px rgba(20, 35, 63, .45); }
+html[data-theme="dark"] .cx-srctools .pk-lnk__tree { background: #232d33; border-color: rgba(255, 255, 255, .14); box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .7); }
+.cx-srcsep { width: 1px; height: 20px; background: var(--u-line); flex: none; }
+/* وفي التحرير يُخفى تقليبُ الكتاب من تحته: زرّاه في التذييل (طلبُ صاحب الموقع) */
+#cm-body .pk--edit .pk-split > .pk-src--book .cbk-nav { display: none; }
+/* وزرّا التصفّح في التذييل بلغة كبسولات المصدر جنبهما (واضحان في الداكن) */
+.cx-acttools .cx-srctools ~ .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+html[data-theme="dark"] .cx-acttools .cx-srctools ~ .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-acttools .cx-srctools ~ .cx-actb:disabled { opacity: .35; }
