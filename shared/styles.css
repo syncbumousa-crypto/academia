@@ -18253,16 +18253,15 @@ html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
 .pk-vdots { top: 14px; }
 /* ===== قوسُ طرق العرض على زاوية أيقونة الملخّص فوق يمين (اختيارُ صاحب الموقع) ===== */
 .pk-vdots.pk-varc { position: absolute; top: -6px; inset-inline-start: -6px; width: 30px; height: 30px; padding: 0; border: 0; background: none; pointer-events: none; z-index: 20; transform: none; }
-html[data-lang="en"] .pk-varc__s { transform: scaleX(-1); }
 .pk-varc::after { display: none; }
 .pk-varc:active { transform: none; }
 .pk-varc__s { display: block; width: 30px; height: 30px; overflow: visible; fill: none; stroke-linecap: round; }
-.pk-varc__hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: pointer; }
+.pk-varc__hit { stroke: transparent; stroke-width: 11; pointer-events: stroke; cursor: pointer; }
 .pk-varc__d { stroke: rgba(20, 40, 46, .26); stroke-width: 3.2; transition: stroke .15s; pointer-events: none; }
 .pk-varc:hover .pk-varc__d { stroke: rgba(20, 40, 46, .42); }
-.pk-varc__m { stroke: #a9852f; stroke-width: 3.4; pointer-events: none; transform-box: view-box; transform-origin: 15px 15px; transform: rotate(var(--r1)); }
+.pk-varc__m { stroke: #a9852f; stroke-width: 3.4; pointer-events: none; }
 .pk-varc__m[data-move] { animation: pk-varc-move .5s cubic-bezier(.3, 1.35, .5, 1) both; }
-@keyframes pk-varc-move { from { transform: rotate(var(--r0)); } to { transform: rotate(var(--r1)); } }
+@keyframes pk-varc-move { from { stroke-dashoffset: var(--o0); } to { stroke-dashoffset: var(--o1); } }
 .pk-varc:hover .pk-varc__m { stroke-width: 3.8; }
 .pk-varc:active .pk-varc__m { stroke-width: 4.2; }
 html[data-theme="dark"] .pk-varc__d { stroke: rgba(230, 236, 239, .28); }
@@ -18270,9 +18269,10 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d { stroke: rgba(230, 236, 239,
 html[data-theme="dark"] .pk-varc__m { stroke: #d4b36a; }
 @media (prefers-reduced-motion: reduce) { .pk-varc__m[data-move] { animation: none; } }
 /* Summary view arc: a soft track always sits behind the three dashes; on hover the next dash takes a faint gold. */
-.pk-varc__bg { stroke: rgba(20, 40, 46, .07); stroke-width: 9; pointer-events: none; transition: stroke .15s; }
+.pk-varc__bg { stroke: rgba(20, 40, 46, .07); stroke-width: 7; pointer-events: none; transition: stroke .15s; }
 .pk-varc:hover .pk-varc__bg { stroke: rgba(20, 40, 46, .14); }
 .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(169, 133, 47, .5); }
 html[data-theme="dark"] .pk-varc__bg { stroke: rgba(230, 236, 239, .08); }
 html[data-theme="dark"] .pk-varc:hover .pk-varc__bg { stroke: rgba(230, 236, 239, .17); }
 html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 179, 106, .5); }
+.pk-varc__d, .pk-varc__m { stroke-linecap: butt; }

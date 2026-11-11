@@ -9768,22 +9768,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ربعُ دائرةٍ حول الأيقونة (من أعلاها إلى يمينها) مقسومٌ أثلاثًا. والذهبيّةُ قطعةٌ واحدةٌ تدور على المركز إلى ثلثها
      فتنزلق على القوس انزلاقًا (‎pkVdPrev‎ يحفظ السابق فتبدأ منه). والنقرُ على القوس وحده (خطٌّ عريضٌ شفّاف) يبدّل؛
      والأيقونةُ نفسُها تبقى تُغلق المساحة */
-  const PK_VA_R = 13.5, PK_VA_GAP = 18, PK_VA_S = 40, PK_VA_A0 = -45 - 1.5 * 40;
-  const pkVaPt = a => [15 + PK_VA_R * Math.cos(a * Math.PI / 180), 15 + PK_VA_R * Math.sin(a * Math.PI / 180)];
-  const pkVaArc = (a0, a1) => { const [x0, y0] = pkVaPt(a0), [x1, y1] = pkVaPt(a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${PK_VA_R} ${PK_VA_R} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
+  // The arc follows the summary block's own top-right corner (PK_BAND_R = 14): a short run along the top edge, the corner
+  // itself, then a short run down the side, all inset from the block's edge. Button-local coords: the block corner sits at (34,-2).
+  const PK_VA_IN = 3.6, PK_VA_RUN = 6.5, PK_VA_GAP = 24;
+  const PK_VA_D = (() => { const r = 14 - PK_VA_IN, cx = 34 - 14, cy = -2 + 14, t = cy - r, x = cx + r;
+    return `M${cx - PK_VA_RUN} ${t}H${cx}A${r} ${r} 0 0 1 ${x} ${cy}V${cy + PK_VA_RUN}`; })();
+  const pkVaDash = i => `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};stroke-dashoffset:${-(i * 100 + PK_VA_GAP / 2)}`;
   const pkVdPrev = {};
   const pkVDots = id => {
     const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
     const prev = pkVdPrev[id];
     pkVdPrev[id] = cur;
-    const seg = i => pkVaArc(PK_VA_A0 + i * PK_VA_S + PK_VA_GAP / 2, PK_VA_A0 + (i + 1) * PK_VA_S - PK_VA_GAP / 2);
     const from = prev !== undefined && prev !== cur && !bkReduce() ? prev : cur;
+    const P = (cls, st, extra = '') => `<path class="${cls}" pathLength="300" d="${PK_VA_D}"${st ? ` style="${st}"` : ''}${extra}/>`;
     return `<button type="button" class="pk-vdots pk-varc" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
       + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
-      + `<path class="pk-varc__hit" d="${pkVaArc(PK_VA_A0 - 3, PK_VA_A0 + 3 * PK_VA_S + 3)}"/>`
-      + `<path class="pk-varc__bg" d="${pkVaArc(PK_VA_A0 + PK_VA_GAP / 2, PK_VA_A0 + 3 * PK_VA_S - PK_VA_GAP / 2)}"/>`
-      + [0, 1, 2].map(i => `<path class="pk-varc__d"${i === (cur + 1) % 3 ? ' data-nx="1"' : ''} d="${seg(i)}"/>`).join('')
-      + `<path class="pk-varc__m" d="${seg(0)}" style="--r0:${from * PK_VA_S}deg;--r1:${cur * PK_VA_S}deg"${from !== cur ? ' data-move="1"' : ''}/></svg></button>`;
+      + P('pk-varc__hit') + P('pk-varc__bg')
+      + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
+      + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(from * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, from !== cur ? ' data-move="1"' : '')
+      + `</svg></button>`;
   };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
