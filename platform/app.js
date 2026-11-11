@@ -279,7 +279,9 @@
     const o = COURSE_PREV[code]; if (!o) return '';
     const sp = o.indexOf(' '), dept = o.slice(0, sp), num = o.slice(sp + 1);
     const ar = state.lang === 'ar';
-    const lab = ar ? ((typeof DEPT_AR !== 'undefined' && DEPT_AR[dept]) || dept) : dept;
+    /* the Arabic department word comes from the new course's own short name (same department) */
+    const arPre = ((CM[code] || {}).arName || '').replace(/\s*\d+\s*$/, '');
+    const lab = ar ? (arPre || (typeof DEPT_AR !== 'undefined' && DEPT_AR[dept]) || dept) : dept;
     return '<span class="cprev">' + (ar ? '\u0633\u0627\u0628\u0642\u064b\u0627 ' : 'before ') + esc(lab + ' ' + num) + '</span>';
   }
   state.termDates = state.termDates || {};   // { اسم الترم: { s: 'YYYY-MM-DD', e: 'YYYY-MM-DD' } }
