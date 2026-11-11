@@ -24027,13 +24027,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (n > H.seq) H.seq = n;
   }
   /* تحديدٌ اكتمل: يصير تظليلًا ثابتًا، ويدخل الدائرةَ الشغّالة إن كانت، ويصير المختار */
-  function hlCreate(sel) {
+  function hlCreate(sel, num) {
     const c = hlCan(sel.d); if (!c) return false;
     const { b, sid, id } = c, H = hlData(id, true);
     const m = { id: newId(), s: sid.slice(id.length), k: sel.k, n: [], d: sel.rtl ? 'r' : 'l',
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
-    if (hlArm[id]) hlAddTo(H, m, hlArm[id]);
+    if (num || hlArm[id]) hlAddTo(H, m, num || hlArm[id]);
     save();
     bkTLClear();
     hlRefresh(b, sel.k); hlSetCur(id, m.id);
@@ -24048,6 +24048,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* ضغطُ دائرةٍ في الشريط: مع مختارٍ يضيفه إليها أو يرفعه منها · بلا مختارٍ يشغّلها أو يطفئها */
   function hlCircle(id, n) {
+    /* تحديدٌ عابرٌ في هذا الكتاب: يثبت في الدائرة */
+    if (bkTLSel && bkTLSel.d.isConnected) { const c = hlCan(bkTLSel.d); if (c && c.id === id) { hlCreate(bkTLSel, n); hlBarSync(id); return; } }
     const H = hlData(id, true);
     const m = hlCur && hlCur.id === id && hlMark(id, hlCur.m);
     if (m) {
@@ -24067,16 +24069,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlBarHTML(id) {
     const H = hlData(id), seq = H ? H.seq : 0, arm = hlArm[id] || 0;
     const m = hlCur && hlCur.id === id && H ? H.marks.find(x => x.id === hlCur.m) : null;
+    let pend = false; try { pend = !!(bkTLSel && bkTLSel.d.isConnected && (hlCan(bkTLSel.d) || {}).id === id); } catch (e) {}
     const from = Math.max(1, seq - 7), dots = [];
     for (let n = from; n <= seq + 1; n++) {
       /* الرقمُ ممتلئٌ ما دام فيه تظليل — فإن حُذفت تظليلاتُه بقي برقمه فارغًا */
       const has = n <= seq && H.marks.some(x => x.n.includes(n)), c = has && H.nums[n] && H.nums[n].c;
       const cls = 'cx-hlc' + (has ? '' : ' is-next') + (arm === n ? ' is-arm' : '') + (m && m.n.includes(n) ? ' is-in' : '');
-      const tip = m ? (m.n.includes(n) ? T().hlOut : T().hlIn) : arm === n ? T().hlArmOff : T().hlArmT;
+      const tip = pend ? T().hlIn : m ? (m.n.includes(n) ? T().hlOut : T().hlIn) : arm === n ? T().hlArmOff : T().hlArmT;
       dots.push(`<button type="button" class="${cls}" data-hlc="${n}"${c ? ` style="--hc:${c}"` : ''} title="${esc(tip.replace('{n}', n))}">${n}</button>`);
     }
     const more = from > 1 ? `<span class="cx-hlmore">${from - 1}+</span>` : '';
-    return `<span class="cx-hlbar${m ? ' has-cur' : ''}" data-hlwrap data-pkid="${esc(id)}">${more}${dots.join('')}</span>`;
+    return `<span class="cx-hlbar${m || pend ? ' has-cur' : ''}${pend ? ' has-pend' : ''}" data-hlwrap data-pkid="${esc(id)}">${more}${dots.join('')}</span>`;
   }
 
   function hlBarSync(id) {
@@ -24329,10 +24332,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* التحديدُ الحاليّ ‏‎bkTLSel = { b, d, k, bars, text }‎ — والخطوةُ التالية (الأرقام) تبني عليه */
   let bkTLSel = null, bkTLDrag = null;
-  function bkTLClear() { if (bkTLSel) { bkTLDraw(bkTLSel.d, null); bkTLSel = null; } }
+  function bkTLClear() { if (bkTLSel) { const c = hlCan(bkTLSel.d); bkTLDraw(bkTLSel.d, null); bkTLSel = null; if (c) hlBarSync(c.id); } }
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage'))) bkTLClear(); return; }
+    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlc]'))) bkTLClear(); return; }
     if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
@@ -24354,8 +24357,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const bars = bkTLBars(g.d, g.a, g.z);
     if (!bars.length) { bkTLDraw(g.d, null); return; }
     bkTLSel = { d: g.d, k: +g.d.dataset.k, rtl: g.d._rows[bars[0].ri].rtl, bars: bars.map(({ l, r, t, b }) => ({ l, r, t, b })), text: bkTLText(g.d, bars) };
-    /* ما يحدّده صاحبُ المساهمة يصير تظليلًا ثابتًا فورًا — وعند غيره يبقى تحديدًا عابرًا */
-    hlCreate(bkTLSel);
+    /* التحديدُ عابرٌ حتى يدخل دائرة (طلبُ صاحب الموقع): مع دائرةٍ شغّالةٍ يثبت فيها فورًا، وإلّا يبقى تحديدًا
+       تُضغط دائرةٌ فيثبت فيها، أو يُنقر بعيدًا عنه (أو Esc) فيختفي */
+    const c = hlCan(g.d);
+    if (c && hlArm[c.id]) hlCreate(bkTLSel);
+    else if (c) { if (hlCur) hlSetCur(hlCur.id, null); hlBarSync(c.id); }
   };
   document.addEventListener('pointerup', bkTLUp, true);
   document.addEventListener('pointercancel', bkTLUp, true);
