@@ -17894,3 +17894,7 @@ html[data-theme="dark"] .imp-q { border-inline-start-color: rgba(131, 197, 190, 
 html[data-theme="dark"] .bk--b-s { --b-band: #e1c172; --b-op: .16; --b-ring: none; }
 html[data-theme="dark"] .bk--b-c { --b-band: #cfd8dc; --b-op: .16; --b-ring: none; }
 html[data-theme="dark"] .bk--b-g { --b-ring: none; }
+
+/* Merged courses: the old code under the new name, small and faded */
+.cprev { display: block; font-size: 10.5px; font-weight: 500; opacity: .55; line-height: 1.2; margin-top: 1px; }
+#cm-title .cprev { display: inline; font-size: .62em; margin-inline-start: 8px; vertical-align: middle; }
