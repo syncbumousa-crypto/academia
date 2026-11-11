@@ -4573,7 +4573,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (!mine && post.uid && d.id && seen) seen[d.id] = 1;
         /* ومن جاء بلا معرّفٍ فمن نموذجٍ أقدم: يُعرَّف بالاسم مرّةً ثمّ يحمل معرّفَه */
         let dr = (d.id && info.doctors.find(x => x.id === d.id))
-              || info.doctors.find(x => !x.id && x.name === (d.n || ''));
+              || info.doctors.find(x => (!x.id || !d.id) && x.name === (d.n || ''));   /* id-less row: match by name, never spawn a new doctor each pass */
         if (!dr) {
           dr = { id: d.id || newId(), name: d.n || '', en: d.en || '', img: d.img || '',
                  me: mine, u: post.u || { name: T().docByAnon },
