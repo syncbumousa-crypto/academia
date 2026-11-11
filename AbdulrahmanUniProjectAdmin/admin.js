@@ -910,7 +910,7 @@
     const s = app(), list = docsOf(s, code);
     if (docEdit != null) {
       const d = list[docEdit];
-      if (d) { d.name = name; d.en = en; if (docImg) d.img = docImg; }
+      if (d) { d.name = name; d.en = en; if (docImg) d.img = docImg; delete d.pub; }   /* edited: publish again */
       toast('حُدّث الدكتور');
     } else {
       list.push({

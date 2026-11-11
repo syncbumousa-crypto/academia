@@ -977,7 +977,11 @@
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
   let saveBad = false, lastCore = '';
+  /* saveHold: a pass over many courses (the admin boot publish) saves once at the end, not once per course --
+     each save serialises the whole state, and ~800 of them froze the panel for minutes. */
+  let saveHold = 0, saveLate = false;
   const save = () => {
+    if (saveHold) { saveLate = true; return; }
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
@@ -4589,6 +4593,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (!dr.fromId && d.fromId) { dr.fromId = d.fromId; hit++; }
           if (!dr.by && d.by) { dr.by = d.by; hit++; }
         }
+        /* Published: this row came from the server, so the panel need not publish it again (see dr.pub). */
+        if (d.id && dr.id === d.id && !dr.pub && (post.srv || post.srvH)) { dr.pub = 1; hit++; }
         /* ===== ومساهمتي تُوصَل ولا تُنسخ =====
            النسخُ ههنا يردّ ما كُتب قبل أن يُدفع. والوصلُ لازمٌ في هذا الموضع
            بعينه: متصفّحٌ جديدٌ يستقبل مساهمتي من الخادم ولا مساهمةَ محلّيّةً
@@ -4656,7 +4662,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const rows = (((coursePosts(code).doc || []).find(isMine) || {}).data || {}).docs || [];
       info.doctors.forEach(dr => {
         if (!dr.id) { dr.id = newId(); hit++; }
-        if (seen[dr.id]) return;
+        if (seen[dr.id] || dr.pub) return;   /* dr.pub: its row is on the server (set on push / absorb); an edit clears it */
         if (!rows.some(x => x && x.id === dr.id)) { docRow(code, dr); hit++; }
       });
     }
@@ -4751,10 +4757,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        ولا يُرى منها إلّا أنّ بعضَ المواد نُشرت وبعضَها لا، بلا قاعدةٍ تُفهم.
        فيُلَفّ كلٌّ بحارسه: ما سقط سقط وحدَه، ويُعدّ الساقطُ في الدفتر */
     let n = 0, bad = 0;
-    Object.keys(state.cinfo || {}).forEach(code => {
-      if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
-      try { doctorsOf(code); n++; } catch (e) { bad++; }
-    });
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
     if (n && typeof srvPushSoon === 'function') srvPushSoon();
     if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
   }, ms));
@@ -31086,6 +31098,10 @@ void main() {
       }
       if (!r.ok) { bootMark('push:' + r.status); return; }
       srv429 = 0;
+      if (sec === 'doc') {
+        const ids = new Set(((p.data || {}).docs || []).map(x => x && x.id).filter(Boolean));
+        (((state.cinfo || {})[code] || {}).doctors || []).forEach(dr => { if (dr && ids.has(dr.id)) dr.pub = 1; });
+      }
       p.srvH = h;
       /* وبصمةُ المتن كما بلغ الخادمَ: بها يُعرف ما تبدّل بعده فلا يُسقط من الدرج */
       try { p.srvD = srvHash(JSON.stringify(p.data || {})); } catch (e) { delete p.srvD; }
@@ -31124,13 +31140,19 @@ void main() {
   function srvPushSoon() {
     if (!SRV_ON() || isGuest()) return;
     clearTimeout(srvT);
+    /* At most 3 pushes in flight: a sweep over hundreds of posts used to fire them all at once and exhaust
+       the database connection pool (and the server's 120-pushes-an-hour limit). */
     srvT = setTimeout(() => {
+      const jobs = [];
       Object.keys(state.cinfo || {}).forEach(code => {
         const ps = (state.cinfo[code] || {}).posts || {};
         Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
-          if (p && p.me) srvPush(p, code, sec);   /* المسوّدةُ كالمنشور: كلاهما عملُك */
+          if (p && p.me) jobs.push([p, code, sec]);
         }));
       });
+      let k = 0;
+      const lane = async () => { while (k < jobs.length) { const j = jobs[k++]; try { await srvPush(j[0], j[1], j[2]); } catch (e) {} } };
+      for (let i = 0; i < 3; i++) lane();
     }, 4000);
   }
 
@@ -31922,7 +31944,16 @@ void main() {
             cut++; return;
           }
           /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
-          if (!mine.srvH) { mine.id = r.id; cut++; }
+          if (!mine.srvH) {
+            mine.id = r.id; cut++;
+            /* A doc post rebuilt locally (after the synced copy was dropped from storage) holds only the rows this
+               browser knows. Pushing it as is would replace the server's list, so the server's rows are kept. */
+            if (r.sec === 'doc' && mine.data && r.data && Array.isArray(r.data.docs)) {
+              const docs = Array.isArray(mine.data.docs) ? mine.data.docs : (mine.data.docs = []);
+              const have = new Set(docs.map(x => x && x.id));
+              r.data.docs.forEach(x => { if (x && x.id && !have.has(x.id)) docs.push(x); });
+            }
+          }
           return;
         }
         /* ===== وما ليس عندي منها شيءٌ يُستردّ =====
