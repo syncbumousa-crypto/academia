@@ -18335,3 +18335,5 @@ html[data-theme="dark"] .cx-hldot:not(.is-ghost) { background: var(--hc, #dfe6e6
 html[data-theme="dark"] .bk-hlask__b.is-main { background: rgba(212, 179, 106, .16); }
 /* أنماطُ كلمات الطبقة (شفّافةٌ مطلقةُ الموضع) لا تصيب نصَّ الزرّ */
 .bk-tl .bk-hlask span { position: static; color: inherit; white-space: nowrap; cursor: pointer; transform: none; pointer-events: none; }
+/* والكتابُ وحده في الضيّقة (الملخّصُ والبنكُ مغلقان): لا جارَ يعطي القسمةَ قامتَها فكان وعاؤه صفرًا — قامةٌ له كقامة المصادر المتعدّدة */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--book > .pk-src__view { flex: none; height: clamp(360px, 62vh, 600px); }
