@@ -16,6 +16,7 @@ uniform float uLift1;    // ارتفاعُها في كومة اليمين
 uniform float uStiff;    // صلابةُ الورقة: الغلافُ لا ينثني كالورق
 uniform float uFloorL;   // أعلى ما تحت الورقة في كومة اليسار (‎-1‎ لا شيء)
 uniform float uFloorR;   // وفي كومة اليمين
+uniform float uSpan;     // ‎1‎ تقليبٌ إلى اليمين (‎180°‎) · ‎2‎ طيٌّ حول الكعب إلى ما وراء الكتاب (‎360°‎ — وضعُ الصفحة الواحدة)
 uniform vec2  uSize;     // عرضُ الورقة وقامتُها
 attribute vec2 aSheet;   // ‎(u, v)‎ في ‎0..1‎ — ‎u‎ من الكعب إلى الحرف
 varying vec2 vSheet;
@@ -34,7 +35,7 @@ vec3 sheetPoint(vec2 s) {
   float zc = abs(bend) < 1e-4 ? 0.0 : span / bend * (1.0 - cos(ang));
   if (a < a0) ap = a;
   float x = ap * c - b * sn, y = ap * sn + b * c;
-  float th = uP * PI;
+  float th = uP * PI * uSpan;
   vec2 eu = vec2(-cos(th), sin(th));
   vec2 en = vec2(sin(th), cos(th));
   vec2 xz = x * eu + zc * en;
@@ -44,7 +45,8 @@ vec3 sheetPoint(vec2 s) {
   // لا تنزل الورقةُ تحت سطح الكومة التي فوقها: التفافُها قرب الهبوط أو مع التحويم كان يغوص في الأوراق تحتها
   float sx = clamp(abs(xz.x) / W, 0.0, 1.0);
   float fl = xz.x < 0.0 ? uFloorL : uFloorR;
-  if (fl > -0.5) z = max(z, fl + bulgeAt(sx) + 0.0006);
+  // والمطويّةُ وراء الكتاب لا أرضَ لها: بعد ربع دورتها تمضي خلفه
+  if (fl > -0.5 && (uSpan < 1.5 || th < PI * 0.5)) z = max(z, fl + bulgeAt(sx) + 0.0006);
   return vec3(xz.x, y, z);
 }
 `;
@@ -118,8 +120,11 @@ const LIGHTS = {
  */
 export function createBook2(THREE, host, cfg) {
   const AR = 1 / cfg.ar, W = 1, H = AR;
-  const m = Math.ceil(cfg.n / 2), S = m + 2;
-  const maxA = Math.min(S - 1, Math.floor(cfg.n / 2) + 1);
+  /* ‏‎cfg.one‎: صفحةٌ واحدةٌ أمامك — كلُّ صفحةٍ ورقةٌ وحدها (ظهرُها ورقٌ يشفّ عن وجهها كالمطبوع على وجهٍ واحد)،
+     والمقلَّبةُ تُطوى حول الكعب إلى ما وراء الكتاب. ‏‎A‎ فيه رقمُ الصفحة الظاهرة (‎0‎ الغلاف) */
+  const ONE = !!cfg.one;
+  const m = ONE ? cfg.n : Math.ceil(cfg.n / 2), S = m + 2;
+  const maxA = ONE ? cfg.n : Math.min(S - 1, Math.floor(cfg.n / 2) + 1);
   let A = Math.max(0, Math.min(maxA, cfg.A | 0));
   let needs = true, dead = false;
 
@@ -144,7 +149,8 @@ export function createBook2(THREE, host, cfg) {
   sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.012; sun.shadow.radius = 12;
   scene.add(sun);
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: 0.12 }));
-  ground.position.z = -0.004; ground.receiveShadow = true; scene.add(ground);
+  /* وفي الصفحة الواحدة تحت الكتاب ما طُوي وراءه: الأرضُ تحتها جميعًا */
+  ground.position.z = ONE ? -(S + 2) * 0.0016 - 0.004 : -0.004; ground.receiveShadow = true; scene.add(ground);
 
   const geo = new THREE.PlaneGeometry(1, 1, 48, Math.round(48 * AR));
   geo.setAttribute('aSheet', geo.attributes.uv.clone());
@@ -161,6 +167,7 @@ export function createBook2(THREE, host, cfg) {
   function texFor(k) {
     if (k === 'inside') return inside;
     if (k === 'back') return outsideBack;
+    if (k === 'blank') return blank;
     if (k !== 'cover' && (k < 1 || k > cfg.n)) return blank;
     if (pageTex.has(k)) return pageTex.get(k);
     const tex = new THREE.Texture();
@@ -173,17 +180,17 @@ export function createBook2(THREE, host, cfg) {
     pageTex.set(k, tex);
     return tex;
   }
-  const faces = i => i === 0 ? ['cover', 'inside'] : i === S - 1 ? ['inside', 'back'] : [2 * i - 1, 2 * i];
+  const faces = i => i === 0 ? ['cover', 'inside'] : i === S - 1 ? ['inside', 'back'] : ONE ? [i, 'blank'] : [2 * i - 1, 2 * i];
 
   const sheets = [];
   for (let i = 0; i < S; i++) {
     const isCover = i === 0 || i === S - 1;
-    const u = { uP: { value: 0 }, uBend: { value: 0 }, uTilt: { value: 0 }, uLift0: { value: 0 }, uLift1: { value: 0 }, uFloorL: { value: -1 }, uFloorR: { value: -1 }, uStiff: { value: isCover ? 0.85 : 0 }, uSize: { value: new THREE.Vector2(W, H) } };
+    const u = { uP: { value: 0 }, uBend: { value: 0 }, uTilt: { value: 0 }, uLift0: { value: 0 }, uLift1: { value: 0 }, uFloorL: { value: -1 }, uFloorR: { value: -1 }, uSpan: { value: ONE ? 2 : 1 }, uStiff: { value: isCover ? 0.85 : 0 }, uSize: { value: new THREE.Vector2(W, H) } };
     /* ‏‎u‎ يتّجه إلى ‎−x‎ ساكنًا فينقلب ترتيبُ الرؤوس: الوجهُ مادّتُه ‎BackSide‎ والظهرُ ‎FrontSide‎، وكلاهما بعموديٍّ معكوس */
     const mk = (side, mirror, flipThru) => {
       const mt = patch(new THREE.MeshStandardMaterial({ side, roughness: isCover ? 0.7 : 0.86, metalness: 0, color: '#ffffff' }), true, -1, true);
       mt.userData.u = u; mt.userData.mirror = mirror;
-      mt.userData.x = { uThru: { value: blank }, uThruFlip: { value: flipThru }, uThruAmt: { value: isCover ? 0 : 0.07 },
+      mt.userData.x = { uThru: { value: blank }, uThruFlip: { value: flipThru }, uThruAmt: { value: isCover ? 0 : ONE ? 0.11 : 0.07 },
         uGrain: { value: grain }, uGrainRep: { value: new THREE.Vector2(3, 3 * AR) }, uGrainAmt: { value: isCover ? 0.04 : 0.07 },
         uPaper: { value: new THREE.Vector3(1, 1, 1) } };
       return mt;
@@ -239,19 +246,25 @@ export function createBook2(THREE, host, cfg) {
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
-  const MX = 1.06, MY = 1.1;
+  const MX = 1.06, MY = 1.1, DOLLY = 0.5;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
   let camOpen = -1;
   function frameCam() {
-    const o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
+    /* والصفحةُ الواحدة عرضُها ورقةٌ — والكعبُ على حافّة الإطار، فإذا طُويت ورقةٌ تراجعت الكاميرا قليلًا نحو الكعب
+       (يبقى حرفُ الصفحة الأيسرُ مكانه) فيُرى التفافُها حوله إلى ما وراء الكتاب، ثمّ تعود */
+    let o;
+    if (ONE) { o = 0; for (const s of sheets) if (s.p > 1e-3 && s.p < 1 - 1e-3) o = Math.max(o, Math.sin(s.p * Math.PI)); }
+    else o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
     if (Math.abs(o - camOpen) < 1e-4) return false;
     camOpen = o;
     const tn = Math.tan(camera.fov * Math.PI / 360);
-    const dist = Math.max(H * MY / 2 / tn, W * (1 + o) * MX / 2 / tn / camera.aspect);
-    camera.position.set(0, -0.04 * H, dist); camera.lookAt(0, -0.04 * H, 0); camera.updateProjectionMatrix();
+    const span = ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = ONE ? W * DOLLY * o / 2 : 0;
+    const dist = Math.max(H * MY / 2 / tn, span * MX / 2 / tn / camera.aspect);
+    camera.position.set(cx, -0.04 * H, dist); camera.lookAt(cx, -0.04 * H, 0); camera.updateProjectionMatrix();
     const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
-    fit = { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };
+    fit = ONE ? { w: W * ppu, h: H * ppu, x: cw / 2 + (-W / 2 - cx) * ppu, y: ch / 2 - H * ppu / 2 }
+      : { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };
     return true;
   }
   function resize() {
@@ -292,7 +305,7 @@ export function createBook2(THREE, host, cfg) {
       } else {
         s.dir = s.target === 0 ? 1 : -1;   /* الساكنةُ (والمرفوعةُ بالتحويم) تلتفّ بعيدًا عن كومتها، لا نحوها */
         let goal = s.target;
-        if (s.i === hover && !active) goal = s.target === 0 ? T.hoverLift : 1 - T.hoverLift;
+        if (s.i === hover && !active) goal = s.target === 0 ? T.hoverLift / (ONE ? 2 : 1) : 1 - T.hoverLift;
         /* الانفراجُ في الكومة التي تغادرها الورقةُ وحدها — كومةُ الهبوط ساكنةٌ تنتظرها، وإلّا ارتفعت إليها فتداخلتا */
         if (active && active !== s && !s.isCover && !active.isCover && s.target === (active.dir > 0 ? 0 : 1)) {
           const d = s.target === 0 ? s.i - active.i : active.i - s.i;
@@ -308,15 +321,16 @@ export function createBook2(THREE, host, cfg) {
       const q = s.dir > 0 ? s.p : 1 - s.p;
       s.u.uBend.value = Math.sin(s.p * Math.PI) * Math.cos(q * Math.PI * 0.9) * 2.8 * s.dir; s.u.uTilt.value = s.tilt * Math.sin(s.p * Math.PI);
       s.u.uLift0.value = (S - s.i) * STACK;
-      s.u.uLift1.value = (s.i + 1) * STACK;
+      /* وراء الكتاب: الأحدثُ طيًّا أقربُ إلى ظهره */
+      s.u.uLift1.value = ONE ? -(S - s.i) * STACK - 0.002 : (s.i + 1) * STACK;
       s.u.uFloorL.value = s.i < S - 1 ? (S - s.i - 1) * STACK : -1;
-      s.u.uFloorR.value = s.i > 0 ? s.i * STACK : -1;
+      s.u.uFloorR.value = !ONE && s.i > 0 ? s.i * STACK : -1;
       const cast = s.anim != null || s.drag != null || (s.p > 0.002 && s.p < 0.998) || Math.abs(s.i + 0.5 - A) < 2;
       if (s.cast !== cast) { s.cast = cast; for (const mh of s.meshes) mh.castShadow = cast; }
     }
     /* المغلقُ يقف في الوسط: الكتابُ كلُّه ينزاح نصفَ ورقةٍ مع الغلاف (وكذا في آخره مع الغلاف الخلفيّ) */
     const pc = sheets[0].p;
-    const x = W / 2 * (1 - pc);
+    const x = ONE ? W / 2 : W / 2 * (1 - pc);
     if (Math.abs(book.position.x - x) > 1e-5) { book.position.x = x; moving = true; }
     if (frameCam()) moving = true;
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
@@ -333,7 +347,7 @@ export function createBook2(THREE, host, cfg) {
     const dist = Math.abs(to - s.p);
     s.target = to;
     if (dist < 1e-4) { s.p = to; s.anim = null; return; }
-    const dur = Math.max(0.22, T.flip * durK * Math.sqrt(dist) * (s.isCover ? 1.15 : 1));
+    const dur = Math.max(0.22, T.flip * durK * Math.sqrt(dist) * (s.isCover ? 1.15 : 1) * (ONE ? 1.45 : 1));
     const towards = (to - s.p) * v > 0 ? Math.abs(v) : 0;
     const m0 = Math.min(2, towards * dur / dist);
     s.anim = { from: s.p, to, t0: performance.now() + delay, dur: dur * 1000, ease: m0 > 0.05 ? hermite(m0) : cosE };
@@ -371,6 +385,7 @@ export function createBook2(THREE, host, cfg) {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     if (y < fit.y || y > fit.y + fit.h) return null;
     /* المغلقُ ورقةٌ واحدةٌ في الوسط تُفتح كلُّها */
+    if (ONE) return x < fit.x || x > fit.x + fit.w ? null : { fwd: A === 0 || x < fit.x + fit.w / 2, yN: (y - fit.y) / fit.h - 0.5 };
     if (A === 0) return x >= fit.x + fit.w / 4 && x <= fit.x + fit.w * 3 / 4 ? { fwd: true, yN: (y - fit.y) / fit.h - 0.5 } : null;
     if (x < fit.x || x > fit.x + fit.w) return null;
     return { fwd: x < fit.x + fit.w / 2, yN: (y - fit.y) / fit.h - 0.5 };
@@ -400,7 +415,8 @@ export function createBook2(THREE, host, cfg) {
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
-      const g = at(e), h = g && turnable(g.fwd ? 1 : -1) ? (g.fwd ? A : A - 1) : -1;
+      /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
+      const g = at(e), h = g && turnable(g.fwd ? 1 : -1) && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
       if (h !== hover) { hover = h; needs = true; setCursor(); }
       return;
     }
@@ -452,7 +468,7 @@ export function createBook2(THREE, host, cfg) {
   }
 
   return {
-    el, flip, goTo, resize, setTheme, dispose, turnable,
+    el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get settled() { return idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,

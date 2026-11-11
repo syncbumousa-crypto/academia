@@ -18275,3 +18275,5 @@ html[data-theme="dark"] .pk-varc__m { stroke: #d4b36a; }
 html[data-theme="dark"] .pk-varc__bg { stroke: rgba(230, 236, 239, .08); }
 html[data-theme="dark"] .pk-varc:hover .pk-varc__bg { stroke: rgba(230, 236, 239, .17); }
 html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 179, 106, .5); }
+/* زرُّ «صفحة واحدة ⇄ صفحتان» (تحت الكتاب وفي التذييل) */
+.cbk-nav__mode svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
