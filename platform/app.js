@@ -24053,27 +24053,120 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.tlBox.hidden = false;
     b.tlPages.forEach(d => { if (!d._lines) bkTLLines(d); });
   }
-  /* خانةٌ شفّافةٌ على عرض كلّ سطر خلف كلماته: الكلامُ العربيّ في الملفّ يأتي قِطعًا بينها فُرَج، والضغطةُ في فُرجةٍ
-     كانت تصل الكتابَ فتقلّبه بدل أن تبدأ التحديد. والهوامشُ وما بين الفقرات تبقى للتقليب. تُقاس والطبقةُ ظاهرة */
+  /* ===== التحديدُ في الكتاب: هندسيٌّ لا تحديدُ المتصفّح (طلبُ صاحب الموقع) =====
+     تحديدُ المتصفّح يمشي بترتيب النصّ في الملفّ، وكثيرٌ من ملفّات PDF العربيّة تحفظه قِطعًا بترتيب الرسم (يسارًا إلى يمين)،
+     فكان السحبُ من يمين السطر يُحدِّد ما لا يُرى. فيُبنى من الطبقة نموذجٌ للصفحة: أسطرٌ، ولكلّ سطرٍ حروفُه بمواضعها
+     (‎Range.getClientRects‎ لكلّ حرف) واتّجاهُه. والسحبُ يمشي باتّجاه القراءة من نقطةٍ إلى نقطة ويلتصق بحدود الحروف،
+     ويُرسم لكلّ سطرٍ شريطٌ واحدٌ بلونٍ واحد وقامةِ السطر (وسيطِ قطعه، فلا ترفعه الحركات).
+     والمحفوظُ مواضعُ على الصفحة (كسورٌ من عرضها وقامتها) — لا يتعلّق بترتيب النصّ في الملفّ */
+  const BK_AR = /[֐-ࣿיִ-﷿ﹰ-﻿]/;
   function bkTLLines(d) {
     const R = d.getBoundingClientRect(); if (!R.width) return;
-    const sp = [...d.querySelectorAll(':scope > span, :scope span:not(.markedContent)')].map(e => e.getBoundingClientRect()).filter(r => r.width > 0 && r.height > 0)
-      .sort((a, b) => a.top - b.top);
-    const rows = [];
+    const fx = x => (x - R.left) / R.width, fy = y => (y - R.top) / R.height;
+    const spans = [...d.querySelectorAll('span')].filter(e => !e.classList.contains('markedContent') && e.firstChild && e.firstChild.nodeType === 3);
+    const sp = spans.map(e => e.getBoundingClientRect()).filter(r => r.width > 0 && r.height > 0).sort((a, b) => a.top - b.top);
+    /* السطرُ يُعرف بنطاق أوّل قطعةٍ فيه (لا يتمدّد بالقطع الطويلة فيبتلع السطرَ التالي)، وقامتُه وسيطُ قطعه */
+    const rows = [], med = a => { a = a.slice().sort((x, y) => x - y); return a[a.length >> 1]; };
     for (const r of sp) {
-      const m = r.top + r.height / 2, row = rows.find(o => m > o.t && m < o.b);
-      if (row) { row.l = Math.min(row.l, r.left); row.r = Math.max(row.r, r.right); row.t = Math.min(row.t, r.top); row.b = Math.max(row.b, r.bottom); }
-      else rows.push({ l: r.left, r: r.right, t: r.top, b: r.bottom });
+      const m = r.top + r.height / 2, row = rows.find(o => m > o.c0 && m < o.c1);
+      if (row) { row.l = Math.min(row.l, r.left); row.r = Math.max(row.r, r.right); row.ts.push(r.top); row.bs.push(r.bottom); }
+      else rows.push({ l: r.left, r: r.right, c0: r.top, c1: r.bottom, ts: [r.top], bs: [r.bottom] });
+    }
+    rows.forEach(o => { o.t = med(o.ts); o.b = med(o.bs); o.ch = []; o.ar = 0; o.lt = 0; });
+    /* الحروف: موضعُ كلٍّ منها، ويُنسب إلى السطر الذي يقع فيه وسطُه */
+    const rg = document.createRange();
+    for (const e of spans) {
+      const t = e.firstChild, s = t.data;
+      for (let i = 0; i < s.length; i++) {
+        if (/\s/.test(s[i])) continue;
+        rg.setStart(t, i); rg.setEnd(t, i + 1);
+        const q = rg.getClientRects()[0]; if (!q || q.width <= 0) continue;
+        const m = q.top + q.height / 2, row = rows.find(o => m > o.c0 - 2 && m < o.c1 + 2); if (!row) continue;
+        row.ch.push({ x0: fx(q.left), x1: fx(q.right), c: s[i] });
+        if (BK_AR.test(s[i])) row.ar++; else if (/[A-Za-z0-9]/.test(s[i])) row.lt++;
+      }
     }
     const f = document.createDocumentFragment();
-    for (const o of rows) {
+    d._rows = rows.filter(o => o.ch.length).map((o, i) => {
       const x = document.createElement('i'); x.className = 'bk-tl__ln';
-      Object.assign(x.style, { left: (o.l - R.left - 3) / R.width * 100 + '%', width: (o.r - o.l + 6) / R.width * 100 + '%', top: (o.t - R.top - 1) / R.height * 100 + '%', height: (o.b - o.t + 2) / R.height * 100 + '%' });
+      Object.assign(x.style, { left: (fx(o.l) - 3 / R.width) * 100 + '%', width: ((o.r - o.l + 6) / R.width) * 100 + '%', top: (fy(o.t) - 1 / R.height) * 100 + '%', height: ((o.b - o.t + 2) / R.height) * 100 + '%' });
       f.appendChild(x);
-    }
+      const ch = o.ch.sort((a, b) => a.x0 - b.x0), ed = [...new Set(ch.flatMap(c => [c.x0, c.x1]))].sort((a, b) => a - b);
+      return { i, t: fy(o.t), b: fy(o.b), l: ch[0].x0, r: Math.max(...ch.map(c => c.x1)), rtl: o.ar >= o.lt, ch, ed };
+    });
     d.insertBefore(f, d.firstChild);
     d._lines = true;
   }
+  /* الموضعُ تحت المؤشّر: أقربُ سطرٍ عموديًّا، وأقربُ حدِّ حرفٍ فيه */
+  function bkTLAt(d, e) {
+    const R = d.getBoundingClientRect(), rows = d._rows || []; if (!rows.length || !R.width) return null;
+    const x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
+    let ri = 0, best = 1e9;
+    rows.forEach((o, i) => { const dd = y < o.t ? o.t - y : y > o.b ? y - o.b : 0; if (dd < best) { best = dd; ri = i; } });
+    const ed = rows[ri].ed; let ex = ed[0];
+    for (const v of ed) if (Math.abs(v - x) < Math.abs(ex - x)) ex = v;
+    return { ri, x: ex };
+  }
+  /* تقدّمُ القراءة: سطرٌ بعد سطر، وفي السطر العربيّ من اليمين إلى اليسار */
+  const bkTLOrd = (d, p) => p.ri * 4 + (d._rows[p.ri].rtl ? 1 - p.x : p.x) * 2;
+  function bkTLBars(d, a, z) {
+    if (bkTLOrd(d, a) > bkTLOrd(d, z)) [a, z] = [z, a];
+    const out = [];
+    for (let i = a.ri; i <= z.ri; i++) {
+      const o = d._rows[i];
+      let l = o.l, r = o.r;
+      if (i === a.ri) { if (o.rtl) r = a.x; else l = a.x; }
+      if (i === z.ri) { if (o.rtl) l = z.x; else r = z.x; }
+      if (r - l > 0.002) out.push({ ri: i, l, r, t: o.t, b: o.b });
+    }
+    return out;
+  }
+  /* نصُّ المحدَّد بترتيب القراءة (يُعاد إلى أشكال الحروف الأصليّة: ‎NFKC‎) — يُحفظ مع التحديد للعرض فقط */
+  function bkTLText(d, bars) {
+    return bars.map(br => {
+      const o = d._rows[br.ri], cs = o.ch.filter(c => (c.x0 + c.x1) / 2 >= br.l && (c.x0 + c.x1) / 2 <= br.r);
+      if (o.rtl) cs.reverse();
+      return cs.map(c => c.c).join('');
+    }).join(' ').normalize('NFKC').replace(/\s+/g, ' ').trim();
+  }
+  function bkTLDraw(d, bars) {
+    d.querySelectorAll('.bk-tl__sel').forEach(x => x.remove());
+    for (const o of bars || []) {
+      const x = document.createElement('i'); x.className = 'bk-tl__sel';
+      Object.assign(x.style, { left: o.l * 100 + '%', width: (o.r - o.l) * 100 + '%', top: o.t * 100 + '%', height: (o.b - o.t) * 100 + '%' });
+      d.insertBefore(x, d.firstChild);
+    }
+  }
+  /* التحديدُ الحاليّ ‏‎bkTLSel = { b, d, k, bars, text }‎ — والخطوةُ التالية (الأرقام) تبني عليه */
+  let bkTLSel = null, bkTLDrag = null;
+  function bkTLClear() { if (bkTLSel) { bkTLDraw(bkTLSel.d, null); bkTLSel = null; } }
+  document.addEventListener('pointerdown', e => {
+    const d = e.target.closest && e.target.closest('.bk-tl');
+    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage'))) bkTLClear(); return; }
+    if (e.button !== 0 || !d._rows) return;
+    const p = bkTLAt(d, e); if (!p) return;
+    e.preventDefault();
+    bkTLClear();
+    bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
+    try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
+    const z = bkTLAt(bkTLDrag.d, e); if (!z) return;
+    bkTLDrag.z = z; bkTLDrag.moved = true;
+    bkTLDraw(bkTLDrag.d, bkTLBars(bkTLDrag.d, bkTLDrag.a, z));
+  }, true);
+  const bkTLUp = e => {
+    if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
+    const g = bkTLDrag; bkTLDrag = null;
+    if (!g.moved || !g.z) { bkTLDraw(g.d, null); return; }
+    const bars = bkTLBars(g.d, g.a, g.z);
+    if (!bars.length) { bkTLDraw(g.d, null); return; }
+    bkTLSel = { d: g.d, k: +g.d.dataset.k, bars: bars.map(({ l, r, t, b }) => ({ l, r, t, b })), text: bkTLText(g.d, bars) };
+  };
+  document.addEventListener('pointerup', bkTLUp, true);
+  document.addEventListener('pointercancel', bkTLUp, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && bkTLSel) { bkTLClear(); e.stopImmediatePropagation(); } }, true);
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
   function bk2Engine(b) {
     const st = b.stage;
@@ -24086,6 +24179,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         onGrab: () => st.focus({ preventScroll: true }),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShow(b),
+        /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
+        interceptDown: () => { if (bkTLSel && bkTLSel.d.isConnected && b.stage.contains(bkTLSel.d)) { bkTLClear(); return true; } return false; },
         onBusy: () => bkTLHide(b),
         onTurn: A => {
           b.closed = A === 0; b.pos = bk2PosOf(b, A);

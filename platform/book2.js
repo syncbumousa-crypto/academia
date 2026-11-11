@@ -406,6 +406,7 @@ export function createBook2(THREE, host, cfg) {
     /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
+    if (cfg.interceptDown && cfg.interceptDown()) return;
     const g = at(e); if (!g) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
