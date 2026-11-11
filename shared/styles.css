@@ -18056,12 +18056,14 @@ html[data-theme="dark"] .psp-del.is-conf { background: #b34e44 !important; color
 html[data-theme="dark"] .pk-srchd svg { stroke: var(--brand-tx, #7fb3bb); }
 html[data-theme="dark"] .pk-srchd--add { color: var(--brand-tx, #7fb3bb); }
 html[data-theme="dark"] .pk-srchd:hover, html[data-theme="dark"] .pk-srchd.is-open { background: rgba(127, 179, 187, .08); }
-/* الوصلةُ بين القائمة ولوحتها الجانبيّة (طلبُ صاحب الموقع: كانت ضعيفة): صفُّ المصدر يتلوّن، ويمتدّ لونُه جسرًا
-   يعبر الفاصلَ ويدخل تحت اللوحة — فيُقرأ الصفُّ واللوحةُ قطعةً واحدة. واللوحةُ بحدٍّ رقيقٍ بلونه */
-.psp-sub::before { display: none; }
-.psp-r.is-sub, .psp-r.is-sub:hover { background: #e2ebed; }
-.psp-r.is-sub::after { content: ""; position: absolute; z-index: 1; top: 3px; bottom: 3px; inset-inline-start: calc(100% - 4px); width: 22px; background: #e2ebed; }
-.psp-sub { z-index: 2; box-shadow: 0 10px 26px rgba(20, 40, 46, .16), 0 0 0 2px #e2ebed; }
-html[data-theme="dark"] .psp-r.is-sub, html[data-theme="dark"] .psp-r.is-sub:hover { background: #1f3a42 !important; }
-html[data-theme="dark"] .psp-r.is-sub::after { background: #1f3a42; }
-html[data-theme="dark"] .psp-sub { border-color: #1f3a42 !important; box-shadow: 0 16px 38px -16px rgba(0, 0, 0, .7), 0 0 0 1px #1f3a42; border-width: 1.5px; }
+/* الوصلةُ بين القائمة ولوحتها الجانبيّة (طلبُ صاحب الموقع): مثلّثٌ بارزٌ من جانب اللوحة نحو المصدر، رأسُه ناعم —
+   واللوحةُ مستقلّةٌ عن القائمة. والظلُّ ‎drop-shadow‎ على اللوحة فيشمل المثلّث معها */
+.psp-sub { box-shadow: none !important; filter: drop-shadow(0 8px 20px rgba(20, 40, 46, .16)) drop-shadow(0 0 .6px rgba(20, 40, 46, .25)); }
+.psp-sub::before { display: block; width: 16px; height: 16px; margin-top: -8px; top: 50%; inset-inline-start: auto; right: -7px; left: auto;
+  background: #fff; transform: rotate(45deg); border-radius: 0 4px 0 0; }
+html[data-lang="en"] .psp-sub::before { right: auto; left: -7px; border-radius: 0 0 0 4px; }
+.psp-r.is-sub { background: #f3f6f7; }
+html[data-theme="dark"] .psp-sub { filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .5)); }
+html[data-theme="dark"] .psp-sub::before { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); border-bottom: 0; border-left: 0; right: -8.5px; }
+html[data-theme="dark"][data-lang="en"] .psp-sub::before { border: 1.5px solid var(--border, #2a4249); border-top: 0; border-right: 0; left: -8.5px; right: auto; }
+html[data-theme="dark"] .psp-r.is-sub, html[data-theme="dark"] .psp-r.is-sub:hover { background: rgba(127, 179, 187, .1) !important; }
