@@ -9416,7 +9416,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sl && pkSrcCurOf(ctl.dataset.pkid) !== sl.dataset.pksid) {
       const id = ctl.dataset.pkid;
       pkSrcCur[id] = sl.dataset.pksid;
-      if (pane.classList.contains('pk-src--multi')) pane.querySelectorAll(':scope > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === sl));
+      if (pane.classList.contains('pk-src--multi')) pane.querySelectorAll('.pk-src__list > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === sl));
       const t = post.querySelector('.cx-acttools');
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
@@ -10530,10 +10530,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const L = pkSrcList(id);
     if (L.length) {
       const cur = pkSrcCurOf(id), many = L.length > 1;
+      /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
+      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('')
+        + (ed ? `<button type="button" class="pk-src__more" data-pksrcpick data-pkid="${esc(pkSrcNext(id))}">${PK_PLUS_SVG}<span>${esc(T().pkAddOtherSrc)}</span></button>` : '');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
-        + L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('')
-        + (ed ? `<button type="button" class="pk-src__more" data-pksrcpick data-pkid="${esc(pkSrcNext(id))}">${PK_PLUS_SVG}<span>${esc(T().pkAddOtherSrc)}</span></button>` : '')
-        + `</div>`;
+        + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
     }
     /* والمنشورةُ بلا كتاب: مربّعٌ مرقّطٌ يقول ذلك (طلبُ صاحب الموقع) — لا زرَّ رفعٍ معطّل */
     if (!ed) return `<div class="pk-src pk-src--none" data-pkid="${esc(id)}"><div class="pk-vwph">${esc(T().pkSrcNone)}</div></div>`;
@@ -10609,11 +10610,45 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkSrcMark(id); save(); renderCmSection();
   }
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
+  /* ===== شريطُ قائمة المصادر يسارًا بثيم الموقع (طلبُ صاحب الموقع) — كشريط الصفحة ‎#xscroll‎: مسارٌ وإبهامٌ بتروليٌّ يُسحب ===== */
+  const pkSrcBarUp = ls => {
+    const pane = ls.parentElement, bar = pane && pane.querySelector(':scope > .pk-srcbar'), th = bar && bar.firstElementChild;
+    if (!th) return;
+    const ch = ls.clientHeight, sh = ls.scrollHeight;
+    bar.style.top = ls.offsetTop + 'px'; bar.style.height = ch + 'px';
+    if (sh <= ch + 2) { bar.hidden = true; return; }
+    bar.hidden = false;
+    const thH = Math.max(30, Math.round(ch * ch / sh));
+    th.style.height = thH + 'px';
+    th.style.transform = `translateY(${Math.round((ch - thH) * ls.scrollTop / (sh - ch))}px)`;
+  };
+  const pkSrcBarRo = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => pkSrcBarUp(e.target))) : null;
+  const pkSrcBarInit = () => document.querySelectorAll('#cm-body [data-pksrclist]:not([data-pkbar])').forEach(ls => {
+    ls.dataset.pkbar = '1';
+    ls.addEventListener('scroll', () => pkSrcBarUp(ls), { passive: true });
+    if (pkSrcBarRo) pkSrcBarRo.observe(ls);
+    const bar = ls.parentElement.querySelector(':scope > .pk-srcbar'), th = bar.firstElementChild;
+    th.addEventListener('pointerdown', e => {
+      e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); bar.classList.add('is-drag');
+      const y0 = e.clientY, s0 = ls.scrollTop;
+      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((ls.clientHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
+      const up = () => { th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); };
+      th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
+    });
+    bar.addEventListener('pointerdown', e => {
+      if (e.target === th) return;
+      e.preventDefault(); e.stopPropagation();
+      const y = e.clientY - bar.getBoundingClientRect().top - th.offsetHeight / 2;
+      ls.scrollTo({ top: y / ((ls.clientHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
+    });
+    pkSrcBarUp(ls);
+  });
   async function pkSrcPaint() {
     pkLnkPopShow();
+    pkSrcBarInit();
     if (pkSrcScroll) {
-      const v = document.querySelector(`#cm-body [data-pksid="${CSS.escape(pkSrcScroll)}"]`), pane = v && v.closest('.pk-src--multi');
-      if (pane) pane.scrollTo({ top: v.offsetTop - pane.firstElementChild.offsetHeight - 8, behavior: bkReduce() ? 'auto' : 'smooth' });
+      const v = document.querySelector(`#cm-body [data-pksid="${CSS.escape(pkSrcScroll)}"]`), ls = v && v.closest('.pk-src__list');
+      if (ls) ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' });
       pkSrcScroll = null;
     }
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
