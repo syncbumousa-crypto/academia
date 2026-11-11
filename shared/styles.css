@@ -17759,7 +17759,7 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 #cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
 /* ===== «+» الذيل مستطيلٌ بزوايا مستديرة فيه نصُّه (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» أو «إضافة» ===== */
 .cx-midadd.cx-addpill { width: auto; height: 32px; padding: 0 14px 0 12px; gap: 7px; display: inline-flex; align-items: center; border-radius: 10px;
-  /* زوايا «آبل» المتّصلة (طلبُ صاحب الموقع): ‎corner-shape: squircle‎ حيث يُدعم، وإلّا زاويةٌ مستديرةٌ عاديّة */
-  border-radius: 14px; corner-shape: squircle;
+  /* وطرفاه نصفا دائرة كمستطيل البحث عن المواد (‎.search‎ · طلبُ صاحب الموقع) */
+  border-radius: 999px;
   font: 700 12.5px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
 .cx-midadd.cx-addpill svg { width: 15px; height: 15px; flex: none; }
