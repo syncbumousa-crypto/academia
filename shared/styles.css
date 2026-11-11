@@ -17812,13 +17812,13 @@ html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill svg { color: #d4b36a; }
 html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
 /* ===== أكثرُ من مصدر (طلبُ صاحب الموقع): الكتابُ في مكانه بلا مربّع، والثاني تحته، ومربّعٌ مرقّطٌ لمصدرٍ آخر تحتها كلّها ===== */
 .pk-src__more {
-  flex: none; display: flex; align-items: center; justify-content: center; gap: 8px;
-  height: 52px; width: 100%; border-radius: 18px; cursor: pointer;
-  border: 1.5px dashed rgba(169, 133, 47, .45); background: rgba(225, 193, 114, .04);
-  color: var(--u-mut); font: inherit; font-size: 13.5px; font-weight: 600;
+  flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  height: 28px; width: auto; padding: 0 12px; border-radius: 99px; cursor: pointer;
+  border: 1px dashed rgba(169, 133, 47, .5); background: rgba(225, 193, 114, .04);
+  color: var(--u-mut); font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap;
   transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
-.pk-src__more svg { width: 16px; height: 16px; color: #a9852f; }
+.pk-src__more svg { width: 12px; height: 12px; color: #a9852f; }
 .pk-src__more:hover { background: rgba(225, 193, 114, .12); border-color: rgba(169, 133, 47, .8); color: var(--u-ink, inherit); }
 .pk-src__more:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 2px; }
 html[data-theme="dark"] .pk-src__more { border-color: rgba(212, 179, 106, .4); background: rgba(212, 179, 106, .04); }
@@ -17827,8 +17827,8 @@ html[data-theme="dark"] .pk-src__more:hover { background: rgba(212, 179, 106, .1
 /* وفي المكبَّرة: مصدرٌ واحدٌ يملأ ما فوق المربّع المرقّط، وأكثرُ يتتابع وتُمرَّر المساحة */
 #cm-body .pk-split > .pk-src--multi { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 #cm-body .pk-split > .pk-src--multi > .pk-src__view { flex: none; height: clamp(300px, 40vh, 420px); min-height: 0; }
-#cm-body .pk--max .pk-split > .pk-src--multi > .pk-src__view { height: calc(100% - 70px); min-height: 320px; }
+#cm-body .pk--max .pk-split > .pk-src--multi > .pk-src__view { height: calc(100% - 90px); min-height: 320px; }
 /* وما دامت بجانبه مساحةٌ أخرى: لا يطول عنها — قامتُه قامةُ الصفّ، والمصادرُ تُمرَّر فيه */
 #cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi { contain: size; }
 /* وما تحت الأوّل يطلّ من أسفل المساحة: يُعرف أنّ هناك مصدرًا آخر */
-#cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi > .pk-src__view { height: max(240px, calc(100% - 130px)); }
+#cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi > .pk-src__view { height: max(240px, calc(100% - 100px)); }
