@@ -240,18 +240,30 @@ export function createBook2(THREE, host, cfg) {
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
   const MX = 1.06, MY = 1.1;
+  /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
+     ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
+  let camOpen = -1;
+  function frameCam() {
+    const o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
+    if (Math.abs(o - camOpen) < 1e-4) return false;
+    camOpen = o;
+    const tn = Math.tan(camera.fov * Math.PI / 360);
+    const dist = Math.max(H * MY / 2 / tn, W * (1 + o) * MX / 2 / tn / camera.aspect);
+    camera.position.set(0, -0.04 * H, dist); camera.lookAt(0, -0.04 * H, 0); camera.updateProjectionMatrix();
+    const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
+    fit = { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };
+    return true;
+  }
   function resize() {
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
     if (w === cw && h === ch) return;
     cw = w; ch = h;
     renderer.setSize(w, h, false); el.style.width = w + 'px'; el.style.height = h + 'px';
     camera.aspect = w / h;
-    const tn = Math.tan(camera.fov * Math.PI / 360);
-    const dist = Math.max(H * MY / 2 / tn, 2 * W * MX / 2 / tn / camera.aspect);
-    camera.position.set(0, -0.04 * H, dist); camera.lookAt(0, -0.04 * H, 0); camera.updateProjectionMatrix();
-    const ppu = h / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
-    fit = { w: 2 * W * ppu, h: H * ppu, x: w / 2 - W * ppu, y: h / 2 - H * ppu / 2 };
-    retex(Math.min(2048, Math.max(512, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) / 256) * 256)));
+    camOpen = -1; frameCam();
+    /* الدقّةُ على أكبر قدرٍ تبلغه الصفحة (المغلقُ يُقرَّب) */
+    const tn = Math.tan(camera.fov * Math.PI / 360), dMin = Math.max(H * MY / 2 / tn, W * MX / 2 / tn / camera.aspect);
+    retex(Math.min(2048, Math.max(512, Math.ceil(W * (h / (2 * dMin * tn)) * Math.min(devicePixelRatio || 1, 2) / 256) * 256)));
     /* تغييرُ المقاس يمسح اللوحة: تُرسم الآن في الإطار نفسِه، وإلّا ظهرت فارغةً إطارًا بعد كلّ إطارٍ والقسمةُ تتحرّك (وميض) */
     if (!dead && typeof frameNow === 'function') frameNow(); else needs = true;
   }
@@ -306,6 +318,7 @@ export function createBook2(THREE, host, cfg) {
     const pc = sheets[0].p;
     const x = W / 2 * (1 - pc);
     if (Math.abs(book.position.x - x) > 1e-5) { book.position.x = x; moving = true; }
+    if (frameCam()) moving = true;
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
     const wasIdle = idle; idle = !moving && !drag;
     if (idle && !wasIdle && cfg.onIdle) cfg.onIdle();

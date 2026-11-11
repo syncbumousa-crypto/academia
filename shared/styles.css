@@ -17757,6 +17757,99 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 #cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
 /* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
 #cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
+/* ===== «+» الذيل مستطيلٌ بزوايا مستديرة فيه نصُّه (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» أو «إضافة» ===== */
+.cx-midadd.cx-addpill { width: auto; height: 32px; padding: 0 14px 0 12px; gap: 7px; display: inline-flex; align-items: center; border-radius: 10px;
+  /* وطرفاه نصفا دائرة كمستطيل البحث عن المواد (‎.search‎ · طلبُ صاحب الموقع) */
+  border-radius: 999px;
+  font: 700 12.5px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
+.cx-midadd.cx-addpill svg { width: 15px; height: 15px; flex: none; }
+/* ومقبضا الترويسة والتذييل وأدواتُ التذييل يمتدّ وعاؤها تحت عمود الصورة كالمساحات (‎-42px‎) وإن لم تُطوَ الترويسة —
+   فمنتصفُها ثابتٌ في الحالين، ولا تميل حين تُطوى الترويسةُ وتُبسط (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame):not(.pk--hdup) > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { margin-inline-start: -42px; width: calc(100% + 42px); box-sizing: border-box; }
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { width: 100%; box-sizing: border-box; }
+.pk--hdanim > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { transition: margin-inline-start .22s ease, width .22s ease; }
+/* والمساحةُ الملموسةُ (النشِطة) أيقونتُها في زاويتها ذهبيّة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-blkh__ic { transition: color .2s ease, background .15s, box-shadow .15s, transform .2s ease; }
+#cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #d4b36a; }
+/* ===== أدواتُ المصدر في التذييل (طلبُ صاحب الموقع): الغلاف · صفحاتُ المصدر · ربطُ الصفحات — كبسولاتٌ في صفّ،
+   والمربّعُ فوقها فيه المصدرُ وحدَه؛ وشجرةُ «ربط الصفحات» تطفو فوق التذييل ===== */
+.cx-acttools .cx-srctools { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; width: auto; margin: 0; }
+.cx-srctools .chtool, .cx-srctools .pk-lnk {
+  border: 1px solid var(--u-line); border-radius: 999px; background: var(--u-surf, #fff);
+  box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); transition: background .15s, box-shadow .15s;
+}
+html[data-theme="dark"] .cx-srctools .chtool, html[data-theme="dark"] .cx-srctools .pk-lnk { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-srctools .chtool { position: relative; padding: 6px 12px; min-width: 0; width: auto; height: 34px; box-sizing: border-box; }
+.cx-srctools .chtool--on { padding-inline-end: 32px; }
+.cx-srctools .chtool__x { inset-inline-end: 7px; width: 20px; height: 20px; }
+.cx-srctools .chtool__txt small { display: none; }
+.cx-srctools .chtool__txt b { font-size: 12px; white-space: nowrap; }
+.cx-srctools .chtool__thumb { width: 18px; height: 24px; margin: 0; }
+.cx-srctools .pk-lnk { position: relative; overflow: visible; border-style: solid; }
+.cx-srctools .pk-lnk__hd { padding: 6px 12px; height: 34px; box-sizing: border-box; }
+.cx-srctools .pk-lnk__tree { position: absolute; bottom: calc(100% + 10px); inset-inline-end: 0; width: 340px; max-height: 50vh; overflow: auto; z-index: 30;
+  padding: 8px; border-radius: 14px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 18px 40px -14px rgba(20, 35, 63, .45); }
+html[data-theme="dark"] .cx-srctools .pk-lnk__tree { background: #232d33; border-color: rgba(255, 255, 255, .14); box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .7); }
+.cx-srcsep { width: 1px; height: 20px; background: var(--u-line); flex: none; }
+/* وفي التحرير يُخفى تقليبُ الكتاب من تحته: زرّاه في التذييل (طلبُ صاحب الموقع) */
+#cm-body .pk--edit .pk-split > .pk-src--book .cbk-nav { display: none; }
+/* وزرّا التصفّح في التذييل بلغة كبسولات المصدر جنبهما (واضحان في الداكن) */
+.cx-acttools .cx-srctools ~ .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+html[data-theme="dark"] .cx-acttools .cx-srctools ~ .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-acttools .cx-srctools ~ .cx-actb:disabled { opacity: .35; }
+/* وزرُّ الإضافة بلغة كبسولات أدوات المصدر نفسِها (طلبُ صاحب الموقع): سطحٌ محايدٌ وحدٌّ رفيع، والأيقونةُ ذهبيّة والنصُّ بلون الحبر */
+#cm-body .cx-midadd.cx-addpill { height: 34px; padding: 0 14px 0 12px; border: 1px solid var(--u-line); border-radius: 999px;
+  background: var(--u-surf, #fff); color: var(--u-ink, #14233f); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+#cm-body .cx-midadd.cx-addpill svg { color: #a9852f; width: 17px; height: 17px; }
+#cm-body .cx-midadd.cx-addpill:hover { background: var(--u-surf, #fff); border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill { color: rgba(255, 255, 255, .92); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill svg { color: #d4b36a; }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
+/* ===== أكثرُ من مصدر (طلبُ صاحب الموقع): الكتابُ في مكانه بلا مربّع، والثاني تحته، ومربّعٌ مرقّطٌ لمصدرٍ آخر تحتها كلّها ===== */
+.pk-src__more {
+  flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  height: 28px; width: auto; padding: 0 12px; border-radius: 99px; cursor: pointer;
+  border: 1px dashed rgba(169, 133, 47, .5); background: rgba(225, 193, 114, .04);
+  color: var(--u-mut); font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.pk-src__more svg { width: 12px; height: 12px; color: #a9852f; }
+.pk-src__more:hover { background: rgba(225, 193, 114, .12); border-color: rgba(169, 133, 47, .8); color: var(--u-ink, inherit); }
+.pk-src__more:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 2px; }
+html[data-theme="dark"] .pk-src__more { border-color: rgba(212, 179, 106, .4); background: rgba(212, 179, 106, .04); }
+html[data-theme="dark"] .pk-src__more svg { color: #d4b36a; }
+html[data-theme="dark"] .pk-src__more:hover { background: rgba(212, 179, 106, .12); border-color: rgba(212, 179, 106, .75); color: #f1ead8; }
+/* وفي المكبَّرة: مصدرٌ واحدٌ يملأ ما فوق المربّع المرقّط، وأكثرُ يتتابع وتُمرَّر المساحة */
+#cm-body .pk-split > .pk-src--multi > .pk-src__list {
+  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+#cm-body .pk-split > .pk-src--multi > .pk-src__view { flex: none; }
+#cm-body .pk-src--multi > .pk-src__list > .pk-src__view { flex: none; height: max(240px, calc(100% - 46px)); min-height: 0; }
+#cm-body .pk--max .pk-src--multi > .pk-src__list > .pk-src__view { min-height: 320px; }
+/* والشريطُ بثيم الموقع (كشريط الصفحة ‎#xscroll‎): الأصليُّ مُخمَد، ومسارٌ ‎8px‎ يسارًا وإبهامٌ بتروليٌّ مدوّر يُسحب */
+#cm-body .pk-split > .pk-src--multi { position: relative; }
+#cm-body .pk-src--multi > .pk-src__list { scrollbar-width: none; padding-left: 10px; }
+.pk-src__list::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.pk-srcbar { position: absolute; left: 2px; width: 2.5px; z-index: 4; cursor: pointer; touch-action: none; border-radius: 99px; background: transparent; }
+.pk-srcbar::before { content: ""; position: absolute; inset: 0 -8px 0 -2px; }   /* حرمٌ أعرض للمؤشّر من الخطّ النحيل */
+.pk-srcbar[hidden] { display: none; }
+.pk-srcbar > i { position: absolute; top: 0; left: 0; right: 0; border-radius: 99px; background: rgba(44, 94, 101, .22); cursor: grab; transition: background .2s; }
+.pk-srcbar:hover > i { background: rgba(44, 94, 101, .38); }
+.pk-srcbar.is-drag > i { background: rgba(44, 94, 101, .5); cursor: grabbing; }
+html[data-theme="dark"] .pk-srcbar { background: transparent; }
+html[data-theme="dark"] .pk-srcbar > i { background: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] .pk-srcbar:hover > i { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-srcbar.is-drag > i { background: rgba(255, 255, 255, .36); }
+#cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi { contain: size; }
+/* والقائمةُ تنزل حتى حافّة المساحة السفلى (لا هامشَ ميّتٌ تحتها تُحجب الرؤيةُ خلفه) — والفسحةُ في جوفها، وتُقصّ على الزاوية المستديرة */
+#cm-body .pk-split > .pk-src--multi { padding-bottom: 0; overflow: clip; }
+#cm-body .pk-src--multi > .pk-src__list { padding-bottom: 14px; }
 
 /* ملاحظة «توزيع الدرجات» (data.note): نصٌّ كما كُتب تحت الشريط */
 .gnote { white-space: pre-wrap; margin-top: 8px; line-height: 1.75; font-size: .92em; overflow-wrap: anywhere; unicode-bidi: plaintext; text-align: start; }
