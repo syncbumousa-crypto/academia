@@ -9762,10 +9762,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* ===== ثلاثُ نقاطٍ تحت أيقونة الملخّص: كلُّ نقطةٍ طريقةُ عرض (شجريّ · بطاقيّ · جدوليّ) والذهبيّةُ الحاليّة (طلبُ صاحب الموقع)
      — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
-  const pkVDots = id => `<span class="pk-vdots" role="group" aria-label="${esc(T().pkViewBar)}">${['tree', 'cards', 'table'].map(k => {
-    const on = pkVwOf(id) === k;
-    return `<button type="button" class="pk-vdots__d${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T()['pkView_' + k])}" aria-label="${esc(T()['pkView_' + k])}"></button>`;
-  }).join('')}</span>`;
+  /* نقطتان فوق ونقطةٌ تحتهما، والضغطُ في أيّ موضعٍ منها ينقل إلى العرض التالي (طلبُ صاحب الموقع) — زرٌّ واحدٌ بـ‎data-pkview‎ التالي.
+     والذهبيّةُ علامةٌ مستقلّةٌ تنزلق من نقطة العرض السابق إلى الجديد بحركةٍ مرنة (‎pkVdPrev‎ يحفظ السابق) */
+  const PK_VD_POS = [[1.5, 1.5], [11.5, 1.5], [6.5, 8]];
+  const pkVdPrev = {};
+  const pkVDots = id => {
+    const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
+    const prev = pkVdPrev[id], rtl = document.documentElement.dataset.lang !== 'en';
+    pkVdPrev[id] = cur;
+    let mv = '';
+    if (prev !== undefined && prev !== cur && !bkReduce()) {
+      const dx = (PK_VD_POS[prev][0] - PK_VD_POS[cur][0]) * (rtl ? -1 : 1), dy = PK_VD_POS[prev][1] - PK_VD_POS[cur][1];
+      mv = `;--dx:${dx}px;--dy:${dy}px`;
+    }
+    const [mx, my] = PK_VD_POS[cur];
+    return `<button type="button" class="pk-vdots" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
+      + PK_VD_POS.map(([x, y], i) => `<i class="pk-vdots__d" style="inset-inline-start:${x}px;top:${y}px"></i>`).join('')
+      + `<i class="pk-vdots__m${mv ? ' is-move' : ''}" style="inset-inline-start:${mx}px;top:${my}px${mv}"></i></button>`;
+  };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
     if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || 'tree'; pkBank[id] = true; return pkVw[id]; }

@@ -18199,3 +18199,34 @@ html[data-theme="dark"] .pk-vdots__d.on::before { background: #d4b36a; }
 .pk-vdots__d { width: 6px; height: 9px; }
 .pk-vdots__d::before { display: block; box-sizing: border-box; flex: none; width: 4px !important; height: 4px !important; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; position: static; transform: none; }
 .pk-vdots__d:hover::before { transform: none; }
+/* ===== نقاطُ طرق العرض: نقطتان فوق وواحدةٌ تحت، أكبر وأقرب، والزرُّ كلُّه يبدّل (طلبُ صاحب الموقع) ===== */
+.pk-vdots { position: absolute; top: 18px; inset-inline-start: -1px; width: 16px; height: 13px; padding: 0; border: 0; background: none; cursor: pointer; z-index: 20; display: block; border-radius: 5px; }
+.pk-vdots__d { position: absolute; width: 5px; height: 5px; border-radius: 99px; background: rgba(20, 40, 46, .24); transition: background .15s; }
+.pk-vdots__d::before { display: none !important; }
+.pk-vdots__d--0 { top: 1.5px; inset-inline-start: 2.5px; }
+.pk-vdots__d--1 { top: 1.5px; inset-inline-start: 8.5px; }
+.pk-vdots__d--2 { top: 7px; inset-inline-start: 5.5px; }
+.pk-vdots__d.on { background: #a9852f; }
+.pk-vdots:hover .pk-vdots__d:not(.on) { background: rgba(20, 40, 46, .42); }
+.pk-vdots:focus-visible { outline: 1.5px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
+html[data-theme="dark"] .pk-vdots__d { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots:hover .pk-vdots__d:not(.on) { background: rgba(255, 255, 255, .5); }
+html[data-theme="dark"] .pk-vdots__d.on { background: #d4b36a; }
+.pk-vdots { border-radius: 0; }
+.pk-vdots::after { content: ""; position: absolute; inset: -3px; }
+/* النقاطُ أوسعُ بين علويّتيها، والذهبيّةُ علامةٌ تنزلق إلى موضعها الجديد، والزرُّ ينضغط تحت الإصبع */
+.pk-vdots { width: 18px; height: 14px; inset-inline-start: -2px; transition: transform .14s cubic-bezier(.3, .7, .4, 1); }
+.pk-vdots:active { transform: scale(.86); }
+.pk-vdots__d.on { background: rgba(20, 40, 46, .24); }
+html[data-theme="dark"] .pk-vdots__d.on { background: rgba(255, 255, 255, .28); }
+.pk-vdots__m { position: absolute; width: 5px; height: 5px; border-radius: 99px; background: #a9852f; box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); z-index: 1; }
+html[data-theme="dark"] .pk-vdots__m { background: #d4b36a; }
+.pk-vdots__m.is-move { animation: pk-vd-move .52s cubic-bezier(.3, 1.45, .5, 1) both, pk-vd-glow .6s ease-out both; }
+@keyframes pk-vd-move {
+  0% { transform: translate(var(--dx), var(--dy)) scale(1); }
+  35% { transform: translate(calc(var(--dx) * .45), calc(var(--dy) * .45)) scale(1.35, .8); }
+  100% { transform: none; }
+}
+@keyframes pk-vd-glow { 40% { box-shadow: 0 0 0 3px rgba(201, 162, 39, .28); } 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); } }
+.pk-vdots:hover .pk-vdots__m { transform: scale(1.18); transition: transform .15s; }
+@media (prefers-reduced-motion: reduce) { .pk-vdots__m.is-move { animation: none; } }
