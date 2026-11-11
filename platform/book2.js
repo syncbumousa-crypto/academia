@@ -150,7 +150,7 @@ export function createBook2(THREE, host, cfg) {
   scene.add(sun);
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: 0.12 }));
   /* وفي الصفحة الواحدة تحت الكتاب ما طُوي وراءه: الأرضُ تحتها جميعًا */
-  ground.position.z = ONE ? -(S + 2) * 0.0016 - 0.004 : -0.004; ground.receiveShadow = true; scene.add(ground);
+  ground.position.z = ONE ? -(S + 2) * 0.0008 - 0.004 : -0.004; ground.receiveShadow = true; scene.add(ground);
 
   const geo = new THREE.PlaneGeometry(1, 1, 48, Math.round(48 * AR));
   geo.setAttribute('aSheet', geo.attributes.uv.clone());
@@ -285,7 +285,8 @@ export function createBook2(THREE, host, cfg) {
 
   // ===== الحركة =====
   let last = performance.now(), idle = false, hover = -1, raf = 0, goneAt = 0;
-  const STACK = 0.0016;
+  /* وفي الصفحة الواحدة كلُّ صفحةٍ ورقة: نصفُ السماكة، فلا يتضاعف سُمكُ الكتاب */
+  const STACK = ONE ? 0.0008 : 0.0016;
   const T = { follow: 0.07, settle: 0.12, flip: 0.8, hoverLift: 0.035, fan: 0.05 };
   function frame(now) {
     raf = requestAnimationFrame(frame);
@@ -337,6 +338,7 @@ export function createBook2(THREE, host, cfg) {
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
     const wasIdle = idle; idle = !moving && !drag;
     if (idle && !wasIdle && cfg.onIdle) cfg.onIdle();
+    if (!idle && wasIdle && cfg.onBusy) cfg.onBusy();
   }
   raf = requestAnimationFrame(frame);
   frameNow = () => { if (el.isConnected) { renderer.render(scene, camera); needs = false; } else needs = true; };
@@ -391,11 +393,19 @@ export function createBook2(THREE, host, cfg) {
     if (x < fit.x || x > fit.x + fit.w) return null;
     return { fwd: x < fit.x + fit.w / 2, yN: (y - fit.y) / fit.h - 0.5 };
   };
+  const nearEdge = (e, fwd) => {
+    if (A === 0) return true;
+    const r = el.getBoundingClientRect(), x = e.clientX - r.left, pw = ONE ? fit.w : fit.w / 2, k = 0.2 * pw;
+    return fwd ? x <= fit.x + k : x >= fit.x + fit.w - k;
+  };
   let drag = null, hold = null;
   const stopHold = () => { if (hold) { clearTimeout(hold.timer); hold = null; } };
   const setCursor = () => { el.style.cursor = drag ? 'grabbing' : hover >= 0 ? 'grab' : ''; };
   const onDown = e => {
     if (e.button !== 0) return;
+    /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
+    const sel = window.getSelection && window.getSelection();
+    if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
     const g = at(e); if (!g) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
@@ -417,7 +427,8 @@ export function createBook2(THREE, host, cfg) {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      const g = at(e), h = g && turnable(g.fwd ? 1 : -1) && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
+      /* ولا ترتفع إلّا قرب حرفها الخارجيّ (حيث تُمسك لتُقلَب) — وإلّا مالت الصفحةُ تحت من يحدّد نصًّا فيها */
+      const g = at(e), h = g && turnable(g.fwd ? 1 : -1) && (g.fwd || !ONE) && nearEdge(e, g.fwd) ? (g.fwd ? A : A - 1) : -1;
       if (h !== hover) { hover = h; needs = true; setCursor(); }
       return;
     }
@@ -473,6 +484,24 @@ export function createBook2(THREE, host, cfg) {
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get settled() { return idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
+    /* الصفحاتُ الساكنةُ الظاهرة ومستطيلاتُها على اللوحة (بكسل CSS) — تُسقَط زواياها من موضعها الحقيقيّ (فوق كومتها) بالكاميرا نفسِها،
+       فتنطبق عليها طبقةُ النصّ. ‏‎k‎ رقمُ الصفحة في الملفّ */
+    pageRects() {
+      if (A === 0) return [];
+      const v = new THREE.Vector3(), out = [];
+      const proj = (x, y, z) => { v.set(x + book.position.x, y, z).project(camera); return [(v.x + 1) / 2 * cw, (1 - v.y) / 2 * ch]; };
+      const face = (k, x0, x1, z) => {
+        if (!(k >= 1 && k <= cfg.n)) return;
+        const [ax, ay] = proj(x0, H / 2, z), [bx, by] = proj(x1, -H / 2, z);
+        out.push({ k, x: Math.min(ax, bx), y: Math.min(ay, by), w: Math.abs(bx - ax), h: Math.abs(by - ay) });
+      };
+      if (ONE) { if (A < S - 1) face(A, -W, 0, (S - A) * STACK); }
+      else {
+        if (A < S - 1) face(2 * A - 1, -W, 0, (S - A) * STACK);
+        face(2 * (A - 1), 0, W, A * STACK);
+      }
+      return out;
+    },
     ready: () => Promise.all([...pageTex.values()].map(t => t.userData.ready)),
     /* لقطةٌ للّوحة (للشبح الذي يخرج به الكتابُ في القسمة) — تُرسم الآن فتُقرأ قبل أن يُمسح المخزن */
     snapshot(cv) { renderer.render(scene, camera); const c = cv.getContext('2d'); cv.width = el.width; cv.height = el.height; c.drawImage(el, 0, 0); },

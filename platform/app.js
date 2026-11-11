@@ -23943,6 +23943,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (cxMorphBusy && b.gl && b.stW && b.stH) {
         const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
         Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
+        bkTLHide(b);
         return;
       }
       cancelAnimationFrame(raf);
@@ -23992,6 +23993,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (g) g.dispose();
     b.gl = null;
+    if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.one = b.single = one;
     b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
     if (b.meta) { b.meta.pos = b.pos; save(); }
@@ -24010,6 +24012,68 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sv = x.querySelector('svg'); if (sv) sv.innerHTML = bkModeIc(to);
     });
   }
+  /* ===== طبقةُ النصّ فوق الكتاب (أساسُ التحديد) =====
+     الصفحةُ في الكتاب رسمٌ على وجه الورقة، والرسمُ لا يُحدَّد منه نصّ. فإذا سكنت الصفحة وُضعت فوقها طبقةٌ شفّافة
+     بكلمات الملفّ نفسِه في مواضعها (‎pdf.js renderTextLayer‎) — لا نسخةَ صورٍ ولا نصٍّ تُحفظ، كلُّه من الـPDF.
+     تُخفى مع أوّل حركة (تقليبٌ أو سحبٌ أو تحويمٌ عند الحرف) وتعود حين يسكن. والفراغُ بين الكلمات يمرّر النقرَ للكتاب فيُقلَّب */
+  function bkTLHide(b) { if (b && b.tlBox) b.tlBox.hidden = true; }
+  async function bkTLShow(b) {
+    const g = b && b.gl;
+    if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc) return;
+    if (!b.tlBox || !b.tlBox.isConnected) {
+      b.tlBox = document.createElement('div'); b.tlBox.className = 'bk-tlbox'; b.tlBox.hidden = true;
+      b.stage.appendChild(b.tlBox); b.tlPages = new Map(); b.tlText = b.tlText || new Map();
+    }
+    const A = g.A, rects = g.pageRects(), want = new Set(rects.map(r => r.k));
+    b.tlPages.forEach((d, k) => { if (!want.has(k)) { d.remove(); b.tlPages.delete(k); } });
+    const tok = b.tlTok = (b.tlTok || 0) + 1;
+    for (const r of rects) {
+      let d = b.tlPages.get(r.k);
+      const W = Math.round(r.w);
+      if (!d || d.dataset.w !== String(W)) {
+        if (d) d.remove();
+        d = document.createElement('div'); d.className = 'bk-tl'; d.dataset.k = r.k; d.dataset.w = W; d.dir = 'ltr';
+        b.tlBox.appendChild(d); b.tlPages.set(r.k, d);
+        /* البناءُ وعدٌ على الطبقة نفسِها: نداءٌ ثانٍ في أثنائه ينتظره ولا يجدها نصفَ مبنيّة */
+        d._p = (async (d, k, w) => {
+          const pg = await b.doc.getPage(k);
+          const vp = pg.getViewport({ scale: w / pg.getViewport({ scale: 1 }).width });
+          d.style.setProperty('--scale-factor', vp.scale);
+          let tc = b.tlText.get(k);
+          if (!tc) { tc = await pg.getTextContent(); b.tlText.set(k, tc); if (b.tlText.size > 12) b.tlText.delete(b.tlText.keys().next().value); }
+          await pdfjsLib.renderTextLayer({ textContentSource: tc, container: d, viewport: vp, textDivs: [] }).promise;
+        })(d, r.k, r.w);
+      }
+      try { await d._p; } catch (e) { if (b.tlPages.get(r.k) === d) { d.remove(); b.tlPages.delete(r.k); } continue; }
+      if (tok !== b.tlTok) return;
+      Object.assign(d.style, { left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px' });
+    }
+    /* تحرّك شيءٌ أثناء البناء: لا تُظهَر */
+    if (tok !== b.tlTok || b.gl !== g || g.A !== A || !g.settled) return;
+    b.tlBox.hidden = false;
+    b.tlPages.forEach(d => { if (!d._lines) bkTLLines(d); });
+  }
+  /* خانةٌ شفّافةٌ على عرض كلّ سطر خلف كلماته: الكلامُ العربيّ في الملفّ يأتي قِطعًا بينها فُرَج، والضغطةُ في فُرجةٍ
+     كانت تصل الكتابَ فتقلّبه بدل أن تبدأ التحديد. والهوامشُ وما بين الفقرات تبقى للتقليب. تُقاس والطبقةُ ظاهرة */
+  function bkTLLines(d) {
+    const R = d.getBoundingClientRect(); if (!R.width) return;
+    const sp = [...d.querySelectorAll(':scope > span, :scope span:not(.markedContent)')].map(e => e.getBoundingClientRect()).filter(r => r.width > 0 && r.height > 0)
+      .sort((a, b) => a.top - b.top);
+    const rows = [];
+    for (const r of sp) {
+      const m = r.top + r.height / 2, row = rows.find(o => m > o.t && m < o.b);
+      if (row) { row.l = Math.min(row.l, r.left); row.r = Math.max(row.r, r.right); row.t = Math.min(row.t, r.top); row.b = Math.max(row.b, r.bottom); }
+      else rows.push({ l: r.left, r: r.right, t: r.top, b: r.bottom });
+    }
+    const f = document.createDocumentFragment();
+    for (const o of rows) {
+      const x = document.createElement('i'); x.className = 'bk-tl__ln';
+      Object.assign(x.style, { left: (o.l - R.left - 3) / R.width * 100 + '%', width: (o.r - o.l + 6) / R.width * 100 + '%', top: (o.t - R.top - 1) / R.height * 100 + '%', height: (o.b - o.t + 2) / R.height * 100 + '%' });
+      f.appendChild(x);
+    }
+    d.insertBefore(f, d.firstChild);
+    d._lines = true;
+  }
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
   function bk2Engine(b) {
     const st = b.stage;
@@ -24020,6 +24084,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
+        /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
+        onIdle: () => bkTLShow(b),
+        onBusy: () => bkTLHide(b),
         onTurn: A => {
           b.closed = A === 0; b.pos = bk2PosOf(b, A);
           if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
@@ -24048,6 +24115,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (g) {
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
       g.resize();
+      /* تغيّر المقاس: طبقةُ النصّ تُعاد على المستطيل الجديد بعد أن يقف */
+      bkTLHide(b); clearTimeout(b.tlT); b.tlT = setTimeout(() => { if (b.gl === g && g.settled) bkTLShow(b); }, 160);
     }
     /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=MY=1.04‎، والكاميرا ترفع الكتابَ ‎1%‎) — ولو قبل تحميله،
        فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
