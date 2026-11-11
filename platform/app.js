@@ -21925,6 +21925,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كلُّ فجوةٍ (مربّعُها وجهتُها) لها مقدارٌ من صفرٍ إلى واحدٍ يُحفظ للمساهمة (يعبر إعادةَ الرسم): يُقبل إليه حين تُطلب ويُدبر عنه
      حين تذهب أيقونتُها إلى مساحتها — فترجع الكتلةُ إلى زاويتها تُرسم أمامك */
   const pkNotchSt = {};
+  if (typeof window !== 'undefined') window.__pkNotchSt = pkNotchSt;   /* (للفحص) */
   /* اللوحُ (‎.kcv‎) في مساحة الملخص ذاتِ الفجوات السفلية: يمتدّ إلى قاعها ويُقصّ على شكلها نفسِه
      (زواياه مستديرة، وفجوتا الأيقونتين مقطوعتان منه بالقدر الذي انفتحتا به) — فلا يبقى تحته هامشٌ فارغ */
   function pkKcvNotch(card, ns) {
@@ -21988,7 +21989,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
-    const now = performance.now(), DUR = 340 * (window.__pkfxSlow || 1), ez = pkBez(.3, .7, .2, 1);
+    /* والفجوةُ تُنحت أمام العين: لينةُ البدء والختام (لا تقفز في أوّلها) */
+    const now = performance.now(), DUR = 420 * (window.__pkfxSlow || 1), ez = pkBez(.45, 0, .25, 1);
     const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.k + '|' + t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
@@ -22254,7 +22256,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ROADMAP-SMOOTH ق٥ (القرار ١): في الضيّقة (لا كتلة) تنبسط الداخلةُ في مكانها الحقيقيّ من عرضٍ صفر — والجارُ يتضيّق
      بنفسه لأنّه يأخذ الباقي — بلا نسخٍ ولا قصّ ===== */
   /* وقامةُ القسمة في الضيّقة يحدّدها الكتاب (لا تملأ المربّعَ كما في المكبَّرة): تنتقل من قامتها القديمة إلى الجديدة بنعومة */
-  function pkFxHeight(sp, h0, dur) {
+  function pkFxHeight(sp, h0, dur, ease) {
     if (!sp || h0 == null || bkReduce()) return;
     /* والقامةُ الأخيرةُ تُقرأ قبل أن تبدأ حركةُ العرض (‎pkPaneGrow‎ تحفظها): بعدها تكون المنطقةُ بعرضٍ صفرٍ فتُقرأ خطأ */
     const h1 = sp.pkH1 != null ? sp.pkH1 : sp.getBoundingClientRect().height;
@@ -22262,7 +22264,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ولو تساوت القامتان تُثبَّت طوالَ الحركة: محتوى المنطقة (الكتابُ بنسبة صفحته) يطول ويقصر مع عرضها وهو يتّسع —
        فبلا تثبيتٍ تقفز قامةُ المساهمة وتعود (شكوى صاحب الموقع) */
     sp.style.overflow = 'hidden';
-    const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: ease || 'cubic-bezier(.2, .8, .2, 1)' });
     a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
   }
   /* ===== دخولُ مساحةٍ طرفيّة بجانب غيرها (طلبُ صاحب الموقع): تنبسط أفقيًّا من حافّة القسمة الخارجيّة =====
@@ -22416,7 +22418,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       commit();
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
-      if (narrow) pkFxHeight(document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
+      const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
+      if (narrow) pkFxHeight(sp1, spH, 420 * (window.__pkfxSlow || 1), 'cubic-bezier(.45, 0, .25, 1)');   /* مع نحت الفجوة: لينةٌ مثلُها */
+      /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
+         إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
+      const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
     });
   }
   function cxHdSet(up) {
