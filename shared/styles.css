@@ -18096,3 +18096,11 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 html[data-theme="dark"] .pk-srchd__ty { filter: brightness(1.7) saturate(.8); }
 /* سهمُ زرّ المصدر بلون الاسم المحايد لا ذهبيًّا (طلبُ صاحب الموقع) */
 .pk-srchd > svg:last-child, html[data-theme="dark"] .pk-srchd > svg:last-child { stroke: currentColor; opacity: .7; }
+/* نصوصُ القائمة بقدّ اسم المصدر فوق (‎11px‎) لا أكبر منه (طلبُ صاحب الموقع) */
+.psp-box { font-size: 11px; }
+.psp-nm { font-size: 11px !important; }
+.psp-it { font-size: 11px !important; height: 26px; }
+.psp-add { font-size: 11px; }
+.psp-up { font-size: 10.5px !important; }
+.psp-num { font-size: 11.5px; }
+.psp-list { width: 136px; }
