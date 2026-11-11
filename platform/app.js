@@ -4542,16 +4542,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function docLink(p, row) {
     if (!p || !row || p.data === row) return 0;
     const old = p.data || {};
+    let ch = 0;
     DOC_WIRE.forEach(k => {
       const v = old[k], cur = row[k];
       const bare = cur === undefined || cur === '' || cur === 0
                 || (Array.isArray(cur) && !cur.length);
       const has = v !== undefined && v !== '' && v !== 0
                && !(Array.isArray(v) && !v.length);
-      if (bare && has) row[k] = v;
+      if (bare && has) { row[k] = v; ch = 1; }
     });
+    /* After a reload the post and its row are two equal copies: relinking them changes nothing, so it is not a
+       hit. Counting it made every doctor a change on every pass -- a full save and push per course. */
+    const same = !ch && JSON.stringify(old) === JSON.stringify(row);
     p.data = row;
-    return 1;
+    return same ? 0 : 1;
   }
 
   function docAbsorb(code, info, seen) {
@@ -4751,6 +4755,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الدرجَ بنفسه: مادّةٌ فيها دكاترةٌ تُقرأ فتُفتح لهم صفوفُهم، ثمّ يُدفع.
      ومرّتان: الأولى للدرج المحفوظ، والثانية لِما وصل من الحساب بعده.
      ولا ضررَ في التكرار: ‎doctorsOf‎ لا تفتح صفًّا موجودًا. */
+  /* Every course with doctors, in one pass: one save at the end and one push sweep, not one per course. */
+  window.acDocPubAll = () => {
+    let n = 0, bad = 0;
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
+    if (n && typeof srvPushSoon === 'function') srvPushSoon();
+    if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
+    return n;
+  };
   if (ADMIN) [2500, 9000].forEach(ms => setTimeout(() => {
     /* ===== والحارسُ حول المادّة الواحدة لا حول المسح كلِّه =====
        كان ‎try‎ يلفّ الحلقةَ، فمادّةٌ واحدةٌ تُلقي تُسقط كلَّ ما بعدها صامتةً —

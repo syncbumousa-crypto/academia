@@ -825,6 +825,7 @@
   function docPubAll() {
     if (docSwept || typeof window.acDocPub !== 'function') return;
     docSwept = 1;
+    if (typeof window.acDocPubAll === 'function') { try { window.acDocPubAll(); } catch (e) {} return; }   /* one held pass */
     const s = app(), C = (s && s.cinfo) || {};
     Object.keys(C).forEach(k => {
       if (!(((C[k] || {}).doctors) || []).length) return;
