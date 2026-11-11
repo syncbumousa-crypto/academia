@@ -18285,7 +18285,8 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 #cm-body .pk-split > .pk-src--book > .pk-blkh > * { pointer-events: auto; }
 /* ===== طبقةُ النصّ فوق كتاب WebGL: كلماتُ الـPDF شفّافةً في مواضعها، تُحدَّد ولا تُرى (‎bkTLShow‎) ===== */
 .cbk-stage--gl { position: relative; }
-.bk-tlbox { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+/* بلا ‎z-index‎: لا سياقَ تكديسٍ يعزل شرائطَ التحديد عن الكتاب تحتها، فتمتزج به (‎multiply‎) — والطبقةُ بعد اللوحة في الترتيب فتعلوها */
+.bk-tlbox { position: absolute; inset: 0; pointer-events: none; }
 .bk-tlbox[hidden] { display: none; }
 .bk-tl { position: absolute; overflow: hidden; line-height: 1; text-size-adjust: none; -webkit-text-size-adjust: none; forced-color-adjust: none; pointer-events: none; }
 .bk-tl span, .bk-tl br { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0% 0%; pointer-events: auto; }
@@ -18295,5 +18296,6 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 .bk-tl ::selection { background: transparent; color: transparent; }
 .cbk-stage .bk-tl, .cbk-stage .bk-tl span { user-select: none; -webkit-user-select: none; }
 .bk-tl .bk-tl__ln { position: absolute; display: block; pointer-events: auto; cursor: text; }
-.bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgba(169, 133, 47, .3); border-radius: 3px; }
-html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgba(212, 179, 106, .34); }
+/* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
+.bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
+html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
