@@ -18277,3 +18277,9 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__bg { stroke: rgba(230, 236, 239
 html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 179, 106, .5); }
 /* زرُّ «صفحة واحدة ⇄ صفحتان» (تحت الكتاب وفي التذييل) */
 .cbk-nav__mode svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+/* والكتابُ لا يترك قاعَ مساحته لفجوة الأيقونات: الفجوةُ في المساحة اليسرى، وما دام بعده مساحةٌ فليست فيه (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--book:has(~ .kt-view, ~ .pk-bank) { padding-bottom: 6px; }
+/* ورأسُ مساحة المصادر (أيقونتُها في الزاوية) يطفو فوق الكتاب ولا يأخذ سطرًا من قامته (طلبُ صاحب الموقع) */
+#cm-body .pk-split > .pk-src--book { position: relative; }
+#cm-body .pk-split > .pk-src--book > .pk-blkh { position: absolute; top: 10px; inset-inline: 14px; margin: 0; z-index: 3; pointer-events: none; }
+#cm-body .pk-split > .pk-src--book > .pk-blkh > * { pointer-events: auto; }

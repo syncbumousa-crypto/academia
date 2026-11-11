@@ -246,7 +246,8 @@ export function createBook2(THREE, host, cfg) {
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
-  const MX = 1.06, MY = 1.1, DOLLY = 0.5;
+  /* هامشُ الإطار: الكتابُ يملأ مساحتَه إلّا قليلًا (طلبُ صاحب الموقع) — ‏‎LIFT‎ رفعُه عن الوسط ليُرى ظلُّه تحته */
+  const MX = 1.04, MY = 1.04, DOLLY = 0.5, LIFT = 0.01;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
   let camOpen = -1;
@@ -261,7 +262,7 @@ export function createBook2(THREE, host, cfg) {
     const tn = Math.tan(camera.fov * Math.PI / 360);
     const span = ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = ONE ? W * DOLLY * o / 2 : 0;
     const dist = Math.max(H * MY / 2 / tn, span * MX / 2 / tn / camera.aspect);
-    camera.position.set(cx, -0.04 * H, dist); camera.lookAt(cx, -0.04 * H, 0); camera.updateProjectionMatrix();
+    camera.position.set(cx, -LIFT * H, dist); camera.lookAt(cx, -LIFT * H, 0); camera.updateProjectionMatrix();
     const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
     fit = ONE ? { w: W * ppu, h: H * ppu, x: cw / 2 + (-W / 2 - cx) * ppu, y: ch / 2 - H * ppu / 2 }
       : { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };

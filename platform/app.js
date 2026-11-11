@@ -24049,10 +24049,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
       g.resize();
     }
-    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=1.06 · MY=1.1‎، والكاميرا ترفع الكتابَ ‎4%‎) — ولو قبل تحميله،
+    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=MY=1.04‎، والكاميرا ترفع الكتابَ ‎1%‎) — ولو قبل تحميله،
        فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
-    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.1), b.stW / (cols * 1.06));
-    const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * 0.54;
+    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.04), b.stW / (cols * 1.04));
+    const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * 0.51;
     b.pw = Math.floor(ppu); b.ph = Math.floor(h);
     Object.assign(b.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
     b.nav.style.width = Math.round(w) + 'px';
