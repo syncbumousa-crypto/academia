@@ -18169,3 +18169,9 @@ html:root .psp-sub { padding: 4px; }
 .psp-r { padding: 4px 4px 4px 5px; }
 html[data-lang="en"] .psp-r { padding: 4px 5px 4px 4px; }
 html:root .psp-more { width: 23px; height: 23px; border-radius: 9px !important; }
+/* تأكيدُ الحذف أحمرُ ممتلئٌ ونصُّه أبيضُ على سطرٍ واحد، والقائمةُ تتّسع له (بعد الزجاج غلبت ألوانُه الحمرة) */
+html:root .psp-list { width: auto; min-width: 122px; }
+html:root .psp-it { white-space: nowrap; }
+html:root .psp-del.is-conf, html:root .psp-del.is-conf:hover { background: #c0564b !important; color: #fff !important; }
+html[data-theme="dark"]:root .psp-del.is-conf, html[data-theme="dark"]:root .psp-del.is-conf:hover { background: #b34e44 !important; color: #fff !important; }
+html:root .psp-del.is-conf svg { stroke: #fff; }
