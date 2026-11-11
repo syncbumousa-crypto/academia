@@ -18076,3 +18076,8 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 /* Merged courses: the old code under the new name, small and faded */
 .cprev { display: block; font-size: 10.5px; font-weight: 500; opacity: .55; line-height: 1.2; margin-top: 1px; }
 #cm-title .cprev { display: inline; font-size: .62em; margin-inline-start: 8px; vertical-align: middle; }
+/* اسمُ المصدر أصغرُ وأقربُ لأيقونة المساحة، والأيقونةُ داخلةٌ في مساحة الضغط (طلبُ صاحب الموقع): الزرُّ يمتدّ تحتها،
+   والأيقونةُ فوقه لا تلتقط النقر فيصل إليه */
+.pk-blkh--book:has(> .pk-srchd) > .pk-blkh__ic { position: relative; z-index: 1; pointer-events: none; }
+.pk-blkh--book > .pk-srchd { position: relative; z-index: 0; margin-inline-start: -30px; padding-inline-start: 32px; padding-inline-end: 8px; gap: 4px; height: 26px; font-size: 12px; }
+.pk-blkh--book > .pk-srchd svg { width: 12px; height: 12px; }

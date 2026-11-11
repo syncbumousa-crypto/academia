@@ -10944,7 +10944,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('input', e => { const i = e.target.closest && e.target.closest('#pk-srcpop [data-pspnum]'); if (!i) return; i.value = i.value.replace(/[^0-9٠-٩]/g, '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); if (+i.value) pkSrcCovPg(pkSP.sid, +i.value); });
   document.addEventListener('keydown', e => {
     if (!document.getElementById('pk-srcpop')) return;
-    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (pkSP.sub) { pkSP.sub = null; pkSP.sid = null; pkSrcPopShow(); } else pkSrcPopClose(); }
+    if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (pkSP.sub) { pkSP.sub = null; pkSP.sid = null; pkSrcPopShow(); } else pkSrcPopClose(); }
     else if (e.key === 'Enter' && e.target.matches && e.target.matches('[data-pspnum]')) { e.preventDefault(); pkSrcCovPg(pkSP.sid, +e.target.value || 1); }
   }, true);
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
