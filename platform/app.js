@@ -9768,7 +9768,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ربعُ دائرةٍ حول الأيقونة (من أعلاها إلى يمينها) مقسومٌ أثلاثًا. والذهبيّةُ قطعةٌ واحدةٌ تدور على المركز إلى ثلثها
      فتنزلق على القوس انزلاقًا (‎pkVdPrev‎ يحفظ السابق فتبدأ منه). والنقرُ على القوس وحده (خطٌّ عريضٌ شفّاف) يبدّل؛
      والأيقونةُ نفسُها تبقى تُغلق المساحة */
-  const PK_VA_R = 12.5, PK_VA_GAP = 17;
+  const PK_VA_R = 13.5, PK_VA_GAP = 18, PK_VA_S = 40, PK_VA_A0 = -45 - 1.5 * 40;
   const pkVaPt = a => [15 + PK_VA_R * Math.cos(a * Math.PI / 180), 15 + PK_VA_R * Math.sin(a * Math.PI / 180)];
   const pkVaArc = (a0, a1) => { const [x0, y0] = pkVaPt(a0), [x1, y1] = pkVaPt(a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${PK_VA_R} ${PK_VA_R} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
   const pkVdPrev = {};
@@ -9776,13 +9776,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
     const prev = pkVdPrev[id];
     pkVdPrev[id] = cur;
-    const seg = i => pkVaArc(-90 + i * 30 + PK_VA_GAP / 2, -90 + (i + 1) * 30 - PK_VA_GAP / 2);
+    const seg = i => pkVaArc(PK_VA_A0 + i * PK_VA_S + PK_VA_GAP / 2, PK_VA_A0 + (i + 1) * PK_VA_S - PK_VA_GAP / 2);
     const from = prev !== undefined && prev !== cur && !bkReduce() ? prev : cur;
     return `<button type="button" class="pk-vdots pk-varc" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
       + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
-      + `<path class="pk-varc__hit" d="${pkVaArc(-92, 2)}"/>`
+      + `<path class="pk-varc__hit" d="${pkVaArc(PK_VA_A0 - 3, PK_VA_A0 + 3 * PK_VA_S + 3)}"/>`
       + [0, 1, 2].map(i => `<path class="pk-varc__d" d="${seg(i)}"/>`).join('')
-      + `<path class="pk-varc__m" d="${seg(0)}" style="--r0:${from * 30}deg;--r1:${cur * 30}deg"${from !== cur ? ' data-move="1"' : ''}/></svg></button>`;
+      + `<path class="pk-varc__m" d="${seg(0)}" style="--r0:${from * PK_VA_S}deg;--r1:${cur * PK_VA_S}deg"${from !== cur ? ' data-move="1"' : ''}/></svg></button>`;
   };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
