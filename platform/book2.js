@@ -262,6 +262,10 @@ export function createBook2(THREE, host, cfg) {
     const tn = Math.tan(camera.fov * Math.PI / 360);
     const span = ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = ONE ? W * DOLLY * o / 2 : 0;
     const dist = Math.max(H * MY / 2 / tn, span * MX / 2 / tn / camera.aspect);
+    /* مستوى القرب والبعد يلفّان الكتابَ وحده (ورقةٌ تقف نحو الكاميرا تبلغ عرضَها، والمطويّةُ وراءه كذلك): دقّةُ العمق
+       تتوزّع على ما بينهما. كانا ‎0.1 · 20‎ فتقاربت الأوراقُ المتراصّة عند بطاقات العمق الخشنة (‎16bit‎ في هواتفَ كثيرة)
+       فغلبت الورقةُ التي تحتُ التي فوقها */
+    camera.near = Math.max(0.1, dist - W * 1.35); camera.far = dist + W * 1.6;
     camera.position.set(cx, -LIFT * H, dist); camera.lookAt(cx, -LIFT * H, 0); camera.updateProjectionMatrix();
     const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
     fit = ONE ? { w: W * ppu, h: H * ppu, x: cw / 2 + (-W / 2 - cx) * ppu, y: ch / 2 - H * ppu / 2 }
@@ -482,6 +486,11 @@ export function createBook2(THREE, host, cfg) {
 
   return {
     el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
+    /* صفحةٌ تغيّر ما يُرسم عليها (تحديداتٌ وأرقام): تُطلب صورتُها من جديد إن كانت محمَّلة */
+    refreshPage(k) {
+      const t = pageTex.get(k); if (!t) return;
+      Promise.resolve(cfg.tex(k, texW)).then(cv => { if (dead || !cv) return; t.image = cv; t.needsUpdate = true; needs = true; }).catch(() => {});
+    },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get settled() { return idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
