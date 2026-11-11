@@ -18175,3 +18175,11 @@ html:root .psp-it { white-space: nowrap; }
 html:root .psp-del.is-conf, html:root .psp-del.is-conf:hover { background: #c0564b !important; color: #fff !important; }
 html[data-theme="dark"]:root .psp-del.is-conf, html[data-theme="dark"]:root .psp-del.is-conf:hover { background: #b34e44 !important; color: #fff !important; }
 html:root .psp-del.is-conf svg { stroke: #fff; }
+/* زرُّ المصدر في التذييل: رقاقةٌ كأختها «ربط الصفحات» — أيقونةُ النوع والاسمُ والسهم */
+.cx-acttools .pk-srchd { position: static; transform: none; margin: 0; max-width: 220px; height: 34px; padding: 0 12px; gap: 6px;
+  font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: var(--u-ink, #14233f); }
+.cx-acttools .pk-srchd .pk-srchd__ty svg { width: 15px; height: 15px; }
+.cx-acttools .pk-srchd > svg:last-child { width: 13px; height: 13px; transform: rotate(180deg); }
+.cx-acttools .pk-srchd.is-open > svg:last-child { transform: none; }
+.cx-acttools .pk-srchd--ro { cursor: default; }
+html[data-theme="dark"] .cx-acttools .pk-srchd { color: #e6ecef; }

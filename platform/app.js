@@ -9470,9 +9470,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a === 'book') {
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
-      if (!pub) return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + (pkSrcMeta(id) ? '<span class="cx-srcsep"></span>' + `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkLnkHTML(id)}</div>` : '');
+      if (!pub) return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + '<span class="cx-srcsep"></span>' + `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcHd(id, true)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
-        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
+        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose)
+        + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
     if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;
@@ -10818,7 +10819,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const L = pkSrcList(id);
     if (!L.length) return '';   /* والمساحةُ فارغة: لا زرَّ فوق — الإضافةُ من التذييل */
     if (!ed && L.length < 2) return `<span class="pk-srchd pk-srchd--ro"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></span>`;
-    return `<button type="button" class="pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><i class="pk-srchd__ty" style="--c:${pkSrcTy(pkSrcCurOf(id))[2]}">${pkSrcSvg(pkSrcTy(pkSrcCurOf(id))[3])}</i><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
+    return `<button type="button" class="chtool pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><i class="pk-srchd__ty" style="--c:${pkSrcTy(pkSrcCurOf(id))[2]}">${pkSrcSvg(pkSrcTy(pkSrcCurOf(id))[3])}</i><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
   };
   /* صورٌ صغيرةٌ لصفحات المصدر (للغلاف المصغّر ومعاينته) — مخزنٌ بالمعرّف والصفحة */
   const pkSrcPgU = {};
@@ -10884,7 +10885,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* زاويةُ القائمة العليا اليمنى تحت السهم الذي فتحها (طلبُ صاحب الموقع) */
     const r = a.getBoundingClientRect(), ch = a.querySelector(':scope > svg:last-child'), cr = ch ? ch.getBoundingClientRect() : r;
     const rtl = getComputedStyle(a).direction !== 'ltr', w = P.offsetWidth || 200;
-    P.style.top = Math.round(r.bottom + 6) + 'px';
+    const up = !!a.closest('.cx-acttools');   /* في التذييل: تنفتح القائمةُ فوقه */
+    if (up) { P.style.top = ''; P.style.bottom = Math.round(innerHeight - r.top + 8) + 'px'; }
+    else { P.style.bottom = ''; P.style.top = Math.round(r.bottom + 6) + 'px'; }
     if (rtl) { P.style.right = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, innerWidth - cr.right - 4))) + 'px'; P.style.left = ''; }
     else { P.style.left = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, cr.left - 4))) + 'px'; P.style.right = ''; }
   };
@@ -11135,7 +11138,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>`
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
-    const hB = pkBlkH('book', id, pkSrcList(id).length).replace('</span>', '</span>' + pkSrcHd(id, ed)), hQ = pkBlkH('bank', id, flatCards(qb).length);
+    const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
     return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)};--g:${book && bank ? 28 : 14}px">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
