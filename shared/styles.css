@@ -18084,3 +18084,5 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 .pk-blkh--book > .pk-srchd { padding-inline-start: 25px; font-size: 11px; gap: 3px; white-space: nowrap; flex-wrap: nowrap; }
 .pk-blkh--book > .pk-srchd > span { white-space: nowrap; }
 .pk-blkh--book > .pk-srchd svg { width: 11px; height: 11px; }
+/* والاسمُ على سطر الأيقونة نفسِه، بجانبها لا تحتها (طلبُ صاحب الموقع) */
+.pk-blkh--book > .pk-srchd { transform: translateY(-6px); }
