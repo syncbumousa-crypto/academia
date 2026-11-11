@@ -18094,3 +18094,5 @@ html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .0
 .pk-srchd__ty { display: grid; place-items: center; flex: none; color: var(--c); font-style: normal; }
 .pk-srchd .pk-srchd__ty svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 1.9; transform: none !important; }
 html[data-theme="dark"] .pk-srchd__ty { filter: brightness(1.7) saturate(.8); }
+/* سهمُ زرّ المصدر بلون الاسم المحايد لا ذهبيًّا (طلبُ صاحب الموقع) */
+.pk-srchd > svg:last-child, html[data-theme="dark"] .pk-srchd > svg:last-child { stroke: currentColor; opacity: .7; }
