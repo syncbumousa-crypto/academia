@@ -17764,3 +17764,40 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 /* اقتباسُ السؤال فوق مساهمةٍ منقولةٍ كانت ردًّا (impQ) */
 .imp-q { display: block; border-inline-start: 3px solid rgba(0, 109, 119, .45); padding-inline-start: 8px; margin: 2px 0 5px; opacity: .72; font-size: .92em; unicode-bidi: plaintext; text-align: start; white-space: normal; }
 html[data-theme="dark"] .imp-q { border-inline-start-color: rgba(131, 197, 190, .5); }
+
+/* ===== Training badges (summer x399 / co-op x398 / senior project): an employee badge instead of a book =====
+   Same footprint as a book. The clip slot is a real hole (mask on the face and the back plate), so the page
+   shows through it. Light: dark header + thin accent frame. Dark: accent header. Graduation: all black. */
+.bk.bk--badge { --thk: 5px; --r: 11px;
+  --b-hole: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 100' preserveAspectRatio='none'%3E%3Cpath fill-rule='evenodd' d='M0 0H68V100H0Z M27 6.7H41A2.35 2.35 0 0 1 41 11.4H27A2.35 2.35 0 0 1 27 6.7Z'/%3E%3C/svg%3E"); }
+.bk--badge > .bkface { aspect-ratio: .68 !important; border-radius: 11px !important; background: var(--b-body) !important;
+  position: relative; overflow: hidden; padding-top: 29% !important; box-shadow: var(--b-ring, none) !important;
+  -webkit-mask: var(--b-hole) 0 0 / 100% 100% no-repeat; mask: var(--b-hole) 0 0 / 100% 100% no-repeat; }
+.bk.bk--badge::after { background: var(--b-edge) !important; border-radius: 11px !important;
+  -webkit-mask: var(--b-hole) 0 0 / 100% 100% no-repeat; mask: var(--b-hole) 0 0 / 100% 100% no-repeat; }
+.bk.bk--badge::before { background: var(--b-edge) !important; top: 11px; bottom: 11px; }
+.bk--badge > .bkface b { color: var(--b-sub) !important; position: relative; z-index: 1; opacity: 1 !important; }
+.bk--badge > .bkface i { color: var(--b-num) !important; position: relative; z-index: 1; }
+.bk--badge .bg-band { position: absolute; left: 0; right: 0; top: 0; height: 24%; background: var(--b-band); }
+.bk--badge .bg-wm { position: absolute; z-index: 0; height: auto; opacity: var(--b-op); color: var(--b-wm); pointer-events: none; }
+.bk--b-s .bg-wm { left: -43%; top: 33%; width: 86%; }
+.bk--b-c .bg-wm { left: -64%; top: 28%; width: 100%; }
+.bk--b-g .bg-wm { left: -46%; bottom: 6%; width: 92%; }
+.bk--badge .bg-shine { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 236, 170, .16) 46%, rgba(255, 255, 255, .06) 49%, transparent 64%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 62%); mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 62%); }
+.bk--badge .bg-clip { position: absolute; left: 50%; top: -15px; width: 16px; height: 26px; margin-left: -8px; box-sizing: border-box;
+  border: 3.5px solid #b4b2a9; border-bottom: 0; border-radius: 8px 8px 0 0; transform: translateZ(1px); z-index: 3; pointer-events: none; }
+.bk--badge .bg-clip::after { content: ''; position: absolute; left: -9px; right: -9px; top: -9px; height: 9px; background: #888780; border-radius: 3px; }
+.bk--xs.bk--badge .bg-clip { display: none; }
+.bk--xs.bk--badge > .bkface { padding-top: 22% !important; }
+
+.bk--b-s { --b-body: linear-gradient(150deg, #3a6f76, #22454b); --b-band: #1c3f45; --b-edge: #10242b; --b-num: #e1c172; --b-sub: #eef3f3;
+  --b-wm: #e1c172; --b-op: .14; --b-ring: inset 0 0 0 1.5px rgba(225, 193, 114, .65); }
+.bk--b-c { --b-body: linear-gradient(150deg, #3a6f76, #22454b); --b-band: #1c3f45; --b-edge: #10242b; --b-num: #cfd8dc; --b-sub: #eef3f3;
+  --b-wm: #cfd8dc; --b-op: .14; --b-ring: inset 0 0 0 1.5px rgba(207, 216, 220, .65); }
+.bk--b-g { --b-body: linear-gradient(150deg, #2b2b2b, #0a0a0a); --b-band: #0a0a0a; --b-edge: #000; --b-num: #e1c172; --b-sub: #e1c172;
+  --b-wm: #c9a25c; --b-op: .26; --b-ring: inset 0 0 0 1.5px rgba(201, 162, 92, .7); }
+html[data-theme="dark"] .bk--b-s { --b-band: #e1c172; --b-op: .16; --b-ring: none; }
+html[data-theme="dark"] .bk--b-c { --b-band: #cfd8dc; --b-op: .16; --b-ring: none; }
+html[data-theme="dark"] .bk--b-g { --b-ring: none; }

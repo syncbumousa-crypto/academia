@@ -584,8 +584,44 @@
     return '<b>' + esc(lab) + '</b><i>' + esc(num) + '</i>';
   }
   /* ‎o = { size: 'xs'|'lg'|'' , inner: وسمٌ داخل الوجه , after: وسمٌ أخو الوجه }‎ */
-  function bookHTML(code, img, o) {
-    const op = o || {};
+  /* ============================================================
+     Training badges: summer training (x399), co-op / internship (x398) and the senior
+     (graduation) project wear an employee badge instead of a book. Same size and place in
+     the shelf as a book; colours and icons live in shared/styles.css (.bk--badge).
+     The graduation project has no common number (411/412, 413/414, 477/478, 410/412 ...),
+     so it is an explicit list taken from the course names in the bulletin.
+     ============================================================ */
+  const BADGE_GRAD = new Set(('ACCT 477|ACCT 478|ACF 411|ACF 412|AE 411|AE 412|ARE 411|ARE 412|AS 411|AS 412|BAI 411|BAI 412|'
+    + 'BIOE 411|BIOE 412|CE 410|CE 412|CHE 411|CHE 412|CIE 411|CIE 413|COE 411|COE 412|DATA 411|DATA 412|DSMM 411|DSMM 412|'
+    + 'EE 411|EE 412|ENTR 411|ENTR 412|ESE 411|ESE 412|FFE 411|FFE 412|FIN 477|FIN 478|GEOL 411|GEOL 412|GEOP 411|GEOP 412|'
+    + 'ICS 413|ICS 414|ISE 411|ISE 412|MATH 413|MATH 414|ME 411|ME 412|MINE 411|MINE 412|MSE 411|MSE 412|OSC 411|OSC 412|'
+    + 'PETE 411|PETE 412|PHYS 411|PHYS 412|SWE 413|SWE 414').split('|'));
+  function badgeKind(code) {
+    const c = String(code || '');
+    if (/ 399$/.test(c)) return 's';
+    if (/ 398$/.test(c)) return 'c';
+    return BADGE_GRAD.has(c) ? 'g' : '';
+  }
+  const BADGE_ICON = {
+    s: '<circle cx="50" cy="50" r="19" fill="currentColor"/>' + [0, 1, 2, 3, 4, 5, 6, 7].map(i => {
+      const a = i * Math.PI / 4, c = Math.cos(a), s = Math.sin(a);
+      return '<line x1="' + (50 + c * 32) + '" y1="' + (50 + s * 32) + '" x2="' + (50 + c * 40) + '" y2="' + (50 + s * 40)
+        + '" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>';
+    }).join(''),
+    c: '<g transform="rotate(-22 50 50)"><path d="M4 50 A46 13 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="7"/></g>'
+      + '<circle cx="50" cy="50" r="27" fill="currentColor"/>'
+      + '<g transform="rotate(-22 50 50)"><path d="M4 50 A46 13 0 0 0 96 50" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></g>',
+    g: '<polygon points="50,24 92,42 50,60 8,42" fill="currentColor"/>'
+      + '<path d="M50 42 L82 50 V68" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>'
+      + '<circle cx="82" cy="72" r="5" fill="currentColor"/>',
+  };
+  function badgeHTML(code, kind, op, sz) {
+    return '<span class="bk' + sz + ' bk--ph bk--badge bk--b-' + kind + '"><span class="bkface">'
+      + '<span class="bg-band"></span><svg class="bg-wm" viewBox="0 0 100 100" aria-hidden="true">' + BADGE_ICON[kind] + '</svg>'
+      + (kind === 'g' ? '<span class="bg-shine"></span>' : '')
+      + bookFace(baseOf(code)) + (op.inner || '') + '</span><span class="bg-clip"></span>' + (op.after || '') + '</span>';
+  }
+  function bookHTML(code, img, o) {    const op = o || {};
     const sz = op.size ? ' bk--' + op.size : '';
     const inner = op.inner || '';
     /* ‏‎this.parentNode.remove()‎ لا ‎this.remove()‎: يُنزع الوجهُ المصوَّر كلُّه
@@ -597,6 +633,8 @@
        فتُقلب الطبقتان: الصورةُ في السَّيل تعطي القدَّ، والمرسومُ **خلفها** يملأ
        ما تحتها فيُرى قبل أن تصل. وإن سقطت نُزع صنفُ ‎bk--img‎ فعاد المرسومُ إلى
        السَّيل وأعطى القدَّ — فلا ينهار الصندوق. */
+    const bkind = badgeKind(baseOf(code));
+    if (bkind) return badgeHTML(code, bkind, op, sz);
     const face = '<span class="bkface">' + bookFace(baseOf(code)) + (img ? '' : inner) + '</span>';
     const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
                + ' this.parentNode.remove()';
