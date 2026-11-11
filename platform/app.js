@@ -30743,7 +30743,15 @@ void main() {
      can silently replace the other's session, so we check before writing.
      Asked at most once every few seconds — this sits in the save path. */
   let sesUid = null, sesAt = 0;
-  async function fixSession() {
+  /* One identity check at a time: a save sweeps every post of the account, and each push asked the
+     server 'who am I' before the first answer came back -- hundreds of /auth/me at once exhausted
+     the database connection pool. Concurrent callers now share the check in flight. */
+  let sesInFlight = null;
+  function fixSession() {
+    if (!sesInFlight) sesInFlight = fixSessionOnce().finally(() => { sesInFlight = null; });
+    return sesInFlight;
+  }
+  async function fixSessionOnce() {
     const want = actingAs();
     if (!want) return false;                       /* nobody signed in */
     if (sesUid === want && Date.now() - sesAt < 5000) return false;
