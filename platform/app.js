@@ -10881,11 +10881,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const P = document.getElementById('pk-srcpop'); if (!P) return;
     const a = document.querySelector(`#cm-body [data-pksrchd="${CSS.escape(pkSP.id || '')}"]`);
     if (!a) { P.remove(); return; }
-    const r = a.getBoundingClientRect(), hd = a.closest('.pk-blkh'), hr = hd ? hd.getBoundingClientRect() : r;
-    const rtl = getComputedStyle(a).direction !== 'ltr';
+    /* زاويةُ القائمة العليا اليمنى تحت السهم الذي فتحها (طلبُ صاحب الموقع) */
+    const r = a.getBoundingClientRect(), ch = a.querySelector(':scope > svg:last-child'), cr = ch ? ch.getBoundingClientRect() : r;
+    const rtl = getComputedStyle(a).direction !== 'ltr', w = P.offsetWidth || 200;
     P.style.top = Math.round(r.bottom + 6) + 'px';
-    if (rtl) { P.style.right = Math.max(8, Math.round(innerWidth - hr.right)) + 'px'; P.style.left = ''; }
-    else { P.style.left = Math.max(8, Math.round(hr.left)) + 'px'; P.style.right = ''; }
+    if (rtl) { P.style.right = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, innerWidth - cr.right - 4))) + 'px'; P.style.left = ''; }
+    else { P.style.left = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, cr.left - 4))) + 'px'; P.style.right = ''; }
   };
   const pkSrcPopFill = P => {
     P.querySelectorAll('[data-pspcv]').forEach(async img => { const u = await pkSrcCovURL(img.dataset.pspcv); if (u && img.isConnected) img.src = u; });
