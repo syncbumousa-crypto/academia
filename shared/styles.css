@@ -18027,3 +18027,32 @@ html[data-theme="dark"] .bk--b-g { --b-ring: none; }
 .psp-of { font-size: 10px; margin-top: 3px; }
 .psp-up { margin-top: 6px; padding-top: 6px !important; gap: 4px; font-size: 11px !important; }
 .psp-up svg { width: 11px; height: 11px; }
+/* قائمةُ المصادر في الداكن بثيم الموقع — كلوحة فلاتر البحث (‎.fpanel‎): سطحٌ بتروليٌّ داكن وحدٌّ بتروليّ ولمساتٌ بتروليّةٌ فاتحة */
+html[data-theme="dark"] .psp-box, html[data-theme="dark"] .psp-sub { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); box-shadow: 0 16px 38px -16px rgba(0, 0, 0, .7); color: var(--c-ink, #e6ecef); }
+html[data-theme="dark"] .psp-sub::before { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); border-top: 0; border-left: 0; }
+html[data-theme="dark"] .psp-sub::before { inset-inline-start: -6.5px; }
+html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { background: rgba(127, 179, 187, .08) !important; }
+html[data-theme="dark"] .psp-it.is-on { background: rgba(127, 179, 187, .13) !important; color: var(--c-ink, #e6ecef) !important; }
+html[data-theme="dark"] .psp-nm { color: #b8c7cb !important; }
+html[data-theme="dark"] .psp-r.is-cur .psp-nm { color: var(--c-ink, #f1f4f5) !important; }
+html[data-theme="dark"] .psp-it { color: #c9d6d9; }
+html[data-theme="dark"] .psp-more { color: var(--placeholder, #62808d) !important; }
+html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { color: var(--brand-tx, #7fb3bb) !important; }
+html[data-theme="dark"] .psp-ck { color: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .psp-cv.is-on, html[data-theme="dark"] .psp-ti.is-on { box-shadow: 0 0 0 1.5px var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .psp-ti.is-on { background: rgba(127, 179, 187, .1); }
+html[data-theme="dark"] .psp-ti { filter: brightness(1.7) saturate(.8); }
+html[data-theme="dark"] .psp-add { color: var(--placeholder, #62808d); border-top-color: var(--border, #2a4249) !important; }
+html[data-theme="dark"] .psp-add:hover { color: var(--brand-tx, #7fb3bb) !important; }
+html[data-theme="dark"] .psp-sep { background: var(--border, #2a4249); }
+html[data-theme="dark"] .psp-up { color: var(--brand-tx, #7fb3bb) !important; border-top-color: var(--border, #2a4249) !important; }
+html[data-theme="dark"] .psp-ar { background: rgba(255, 255, 255, .04) !important; color: var(--brand-tx, #7fb3bb) !important; box-shadow: inset 0 0 0 1px var(--border, #2a4249); }
+html[data-theme="dark"] .psp-num { background: rgba(255, 255, 255, .04); border-color: var(--border, #2a4249); color: var(--c-ink, #e6ecef) !important; }
+html[data-theme="dark"] .psp-num:focus { border-color: var(--brand-tx, #7fb3bb); box-shadow: 0 0 0 3px rgba(127, 179, 187, .18); }
+html[data-theme="dark"] .psp-of { color: var(--placeholder, #62808d); }
+html[data-theme="dark"] .psp-pv { background: rgba(255, 255, 255, .04); box-shadow: 0 0 0 1px var(--border, #2a4249); }
+html[data-theme="dark"] .psp-del { color: #e08377 !important; } html[data-theme="dark"] .psp-del svg { stroke: #e08377; }
+html[data-theme="dark"] .psp-del.is-conf { background: #b34e44 !important; color: #fff !important; } html[data-theme="dark"] .psp-del.is-conf svg { stroke: #fff; }
+html[data-theme="dark"] .pk-srchd svg { stroke: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .pk-srchd--add { color: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .pk-srchd:hover, html[data-theme="dark"] .pk-srchd.is-open { background: rgba(127, 179, 187, .08); }
