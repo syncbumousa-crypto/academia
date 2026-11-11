@@ -17802,3 +17802,11 @@ html[data-theme="dark"] .cx-srctools .pk-lnk__tree { background: #232d33; border
 .cx-acttools .cx-srctools ~ .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
 html[data-theme="dark"] .cx-acttools .cx-srctools ~ .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
 .cx-acttools .cx-srctools ~ .cx-actb:disabled { opacity: .35; }
+/* وزرُّ الإضافة بلغة كبسولات أدوات المصدر نفسِها (طلبُ صاحب الموقع): سطحٌ محايدٌ وحدٌّ رفيع، والأيقونةُ ذهبيّة والنصُّ بلون الحبر */
+#cm-body .cx-midadd.cx-addpill { height: 34px; padding: 0 14px 0 12px; border: 1px solid var(--u-line); border-radius: 999px;
+  background: var(--u-surf, #fff); color: var(--u-ink, #14233f); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+#cm-body .cx-midadd.cx-addpill svg { color: #a9852f; width: 17px; height: 17px; }
+#cm-body .cx-midadd.cx-addpill:hover { background: var(--u-surf, #fff); border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill { color: rgba(255, 255, 255, .92); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill svg { color: #d4b36a; }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
