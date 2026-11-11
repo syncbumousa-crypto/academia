@@ -9770,7 +9770,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والأيقونةُ نفسُها تبقى تُغلق المساحة */
   // The arc follows the summary block's own top-right corner (PK_BAND_R = 14): a short run along the top edge, the corner
   // itself, then a short run down the side, all inset from the block's edge. Button-local coords: the block corner sits at (34,-2).
-  const PK_VA_IN = 3.6, PK_VA_RUN = 6.5, PK_VA_GAP = 24;
+  const PK_VA_IN = 3.6, PK_VA_RUN = 8.5, PK_VA_GAP = 46;
   const PK_VA_D = (() => { const r = 14 - PK_VA_IN, cx = 34 - 14, cy = -2 + 14, t = cy - r, x = cx + r;
     return `M${cx - PK_VA_RUN} ${t}H${cx}A${r} ${r} 0 0 1 ${x} ${cy}V${cy + PK_VA_RUN}`; })();
   const pkVaDash = i => `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};stroke-dashoffset:${-(i * 100 + PK_VA_GAP / 2)}`;
