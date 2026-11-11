@@ -18183,3 +18183,19 @@ html:root .psp-del.is-conf svg { stroke: #fff; }
 .cx-acttools .pk-srchd.is-open > svg:last-child { transform: none; }
 .cx-acttools .pk-srchd--ro { cursor: default; }
 html[data-theme="dark"] .cx-acttools .pk-srchd { color: #e6ecef; }
+/* ثلاثُ نقاطِ طرق العرض تحت أيقونة الملخّص — والنقطةُ الذهبيّةُ الحاليّة (طلبُ صاحب الموقع) */
+.pk-blkh--mid { position: relative; }
+.pk-vdots { position: absolute; top: 21px; inset-inline-start: 0; width: 26px; display: flex; justify-content: center; gap: 0; z-index: 3; }
+.pk-vdots__d { width: 9px; height: 10px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.pk-vdots__d::before { content: ""; width: 3.5px; height: 3.5px; border-radius: 99px; background: rgba(20, 40, 46, .24); transition: background .15s, transform .15s; }
+.pk-vdots__d:hover::before { background: rgba(20, 40, 46, .5); transform: scale(1.25); }
+.pk-vdots__d.on::before { background: #a9852f; }
+.pk-vdots__d:focus-visible { outline: 1.5px solid rgba(201, 162, 92, .7); outline-offset: 0; border-radius: 3px; }
+html[data-theme="dark"] .pk-vdots__d::before { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots__d:hover::before { background: rgba(255, 255, 255, .55); }
+html[data-theme="dark"] .pk-vdots__d.on::before { background: #d4b36a; }
+/* محاذاةُ النقاط تحت مركز الأيقونة تمامًا، وفوق شريط المجلدات فلا يقصّها */
+.pk-vdots { top: 19px; inset-inline-start: -2px; width: 18px; z-index: 20; }
+.pk-vdots__d { width: 6px; height: 9px; }
+.pk-vdots__d::before { display: block; box-sizing: border-box; flex: none; width: 4px !important; height: 4px !important; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; position: static; transform: none; }
+.pk-vdots__d:hover::before { transform: none; }

@@ -9760,6 +9760,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post = b && b.view && b.view.closest('.post'), el = post && post.querySelector('[data-actind]');
     if (el && b.ind) el.textContent = b.ind.textContent;
   };
+  /* ===== ثلاثُ نقاطٍ تحت أيقونة الملخّص: كلُّ نقطةٍ طريقةُ عرض (شجريّ · بطاقيّ · جدوليّ) والذهبيّةُ الحاليّة (طلبُ صاحب الموقع)
+     — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
+  const pkVDots = id => `<span class="pk-vdots" role="group" aria-label="${esc(T().pkViewBar)}">${['tree', 'cards', 'table'].map(k => {
+    const on = pkVwOf(id) === k;
+    return `<button type="button" class="pk-vdots__d${on ? ' on' : ''}" data-pkview="${k}" data-pkid="${esc(id)}" aria-pressed="${on}" title="${esc(T()['pkView_' + k])}" aria-label="${esc(T()['pkView_' + k])}"></button>`;
+  }).join('')}</span>`;
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
     if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || 'tree'; pkBank[id] = true; return pkVw[id]; }
@@ -11095,7 +11101,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const wrap = pkSplitOn(id) || pkBankOn(id) || (lab && PK_SPLIT_VIEWS.includes(v));   /* والضيّقةُ كذلك: قامةُ الوسط لا تتبدّل */
     /* والكتابُ يُمهَّد في وقت الفراغ (محرّكُه ‎three.js‎) إن كان للفصل ملفّ — فلا يدفع أوّلُ دخولٍ ثمنَ تحميله أثناء الحركة */
     if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
-    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, flatCards(deck).length) : '';
+    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, flatCards(deck).length).replace('</span>', '</span>' + pkVDots(id)) : '';
     /* ومنطقةُ المجلدات وهي فارغة: مكانٌ مرقّطٌ يقول إنّها لمجلدات الملخّص (طلبُ صاحب الموقع) — وفي التحرير ينقر فيضيف أوّلَ فصل */
     const fph = midH ? `<div class="pk-fstrip-ph">`
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>`
