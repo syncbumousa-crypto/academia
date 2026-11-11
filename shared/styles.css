@@ -18160,3 +18160,8 @@ html:root .psp-r.is-cur .psp-nm, html:root .psp-it.is-on { color: var(--glass-in
 html:root .psp-del { color: #c0564b !important; }
 html[data-theme="dark"]:root .psp-del { color: #e08377 !important; }
 html:root .psp-num, html:root .psp-ar { background: color-mix(in srgb, var(--glass-ink, #14233f) 6%, transparent) !important; border-color: color-mix(in srgb, var(--glass-ink, #14233f) 14%, transparent); box-shadow: none; color: var(--glass-ink, #14233f) !important; }
+/* زوايا التمرير متّسقةٌ مع زاوية القائمة: نصفُ قطرها = نصفُ قطر القائمة − حشوتُها (طلبُ صاحب الموقع) */
+html:root .psp-box { padding: 5px; }
+.psp-r { border-radius: 13px; }
+html:root .psp-sub { padding: 4px; }
+.psp-it { border-radius: 11px; }
