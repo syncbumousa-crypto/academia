@@ -8,7 +8,8 @@
    الجانبيّ المخفيّ (التبويبات · المظهر · اللغة)، فيجري ما كان يجري هناك
    بعينه، ويقرأ حالَه من هناك. فلا يُمسّ ‎app.js‎ ولا يُعاد دمجُه.
 
-   والترتيبُ من اليمين: الشعارُ واسمُ الموقع · المكتبة · الركن · الاختبارات · صورتُك (الإعدادات).
+   والترتيبُ من اليمين: الشعارُ واسمُ الموقع · المكتبة · الركن · الاختبارات · صورتُك (ملفُّك الشخصيّ،
+   وفي ذيله المظهرُ واللغة).
    («إحصائياتي» غائبةٌ عن الشريط عمدًا.)
 
    ===== ولا يراه إلّا مَن طلبه =====
@@ -47,12 +48,13 @@
   var TAB_EN = { market: 'Library', library: 'Nook', past: 'Exams' };
 
   var ICON = {
+    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>',
     gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>',
     globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
   };
 
-  var bar = null, page = null, onSettings = false, watchers = [];
+  var bar = null, page = null, watchers = [];
 
   function lang() { return root.getAttribute('data-lang') === 'en' ? 'en' : 'ar'; }
   function src(tab) { return document.querySelector('.sidebar .tabs [data-tab="' + tab + '"]'); }
@@ -84,7 +86,6 @@
       b.dataset.tab = tab;
       b.appendChild(document.createElement('span'));
       b.addEventListener('click', function () {
-        showSettings(false);
         s.click();
         window.scrollTo(0, 0);
       });
@@ -95,14 +96,20 @@
     var g = document.createElement('button');
     g.type = 'button';
     g.className = 'm-tab m-me';
-    g.dataset.tab = 'settings';
+    g.dataset.tab = 'account';
     g.innerHTML = '<span class="m-me-av"></span><span></span>';
-    g.addEventListener('click', function () { showSettings(!onSettings); });
+    // صورتُك: ملفُّك الشخصيّ (صفحةُ الحساب)؛ وللزائر بابُ الدخول — وكلاهما يسكن ‎#panel-account‎
+    g.addEventListener('click', function () {
+      var guest = document.body.classList.contains('is-guest');
+      var t = document.getElementById(guest ? 'side-login' : 'side-profile');
+      if (t) t.click();
+      window.scrollTo(0, 0);
+      sync();
+    });
     bar.appendChild(g);
 
     page = document.createElement('section');
     page.className = 'm-settings';
-    page.hidden = true;
     page.innerHTML =
       '<h1 data-t="settings"></h1>' +
       '<div class="m-group-title" data-t="look"></div>' +
@@ -134,11 +141,11 @@
     document.body.appendChild(bar);
   }
 
-  function showSettings(on) {
-    onSettings = on;
-    if (page) page.hidden = !on;
-    if (on) page.scrollTop = 0;
-    sync();
+  /* المظهرُ واللغةُ في ذيل صفحة الحساب (ملفُّك أو بابُ الدخول): المحرّكُ يعيد رسمَها
+     بـ‎innerHTML‎ فيمحو ما فيها، فتُعاد إليها كلّما رُسمت */
+  function attachSettings() {
+    var acct = document.getElementById('panel-account');
+    if (page && acct && page.parentNode !== acct) acct.appendChild(page);
   }
 
   /* ---------- المزامنة: كلُّ حالٍ يُقرأ من مصدره ---------- */
@@ -147,16 +154,17 @@
     var t = TX[lang()];
     bar.querySelectorAll('.m-tab').forEach(function (b) {
       var tab = b.dataset.tab, label = b.querySelector('span');
-      if (tab === 'settings') {
-        label.textContent = t.settings;
-        b.classList.toggle('is-on', onSettings);
+      if (tab === 'account') {
+        var acct = document.getElementById('panel-account');
+        label.textContent = document.body.classList.contains('is-guest') ? (lang() === 'en' ? 'Sign in' : 'تسجيل الدخول') : (lang() === 'en' ? 'Profile' : 'الملف الشخصي');
+        b.classList.toggle('is-on', !!acct && !acct.hidden);
       } else {
         var s = src(tab);
         var tx = s && s.querySelector('.tab-tx');
         var name = tx ? tx.textContent : '';
         if (lang() === 'en' && /[\u0600-\u06FF]/.test(name)) name = TAB_EN[tab];
         label.textContent = name;
-        b.classList.toggle('is-on', !onSettings && !!s && s.classList.contains('is-active'));
+        b.classList.toggle('is-on', !!s && s.classList.contains('is-active'));
       }
     });
     // اسمُ الموقع كما يكتبه المحرّكُ في الشريط الجانبيّ (يتبع اللغة)
@@ -167,7 +175,8 @@
     var av = document.querySelector('#side-profile .sp-av');
     var meAv = bar.querySelector('.m-me-av');
     var guest = document.body.classList.contains('is-guest');
-    var html = (!guest && av && av.innerHTML.trim()) ? av.innerHTML : ICON.gear;
+    var html = (!guest && av && av.innerHTML.trim()) ? av.innerHTML : ICON.person;
+    attachSettings();
     if (meAv && meAv.innerHTML !== html) meAv.innerHTML = html;
     page.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t[el.dataset.t]; });
     var theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -189,6 +198,8 @@
     mo3.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     var logo = document.querySelector('.sidebar .side-logo');
     if (logo) mo3.observe(logo, { childList: true, characterData: true, subtree: true });
+    var acctP = document.getElementById('panel-account');
+    if (acctP) mo3.observe(acctP, { childList: true, attributes: true, attributeFilter: ['hidden'] });
     watchers = [mo, mo2, mo3];
   }
 
@@ -296,7 +307,6 @@
       bar.remove(); page.remove();
       bar = page = null;
       stopCards();
-      onSettings = false;
     }
   }
 
