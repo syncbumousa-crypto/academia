@@ -17757,3 +17757,587 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icnone .pk-icrow .pk-ic + .pk-ic::
 #cm-body .pk--edit.pk--icx.pk--icrow .pk-maxdock { display: none; }
 /* والمتّسعةُ في التحرير كالمنشورة المتّسعة: لا لونَ للمساهمة ولا للترويسة، والكتلُ وحدها (طلبُ صاحب الموقع) */
 #cm-body .post.pk--edit.pk--icx.pk--frame { --pk-band: transparent; --pk-gap: transparent; background-color: transparent; border-color: transparent; box-shadow: none; }
+/* ===== «+» الذيل مستطيلٌ بزوايا مستديرة فيه نصُّه (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» أو «إضافة» ===== */
+.cx-midadd.cx-addpill { width: auto; height: 32px; padding: 0 14px 0 12px; gap: 7px; display: inline-flex; align-items: center; border-radius: 10px;
+  /* وطرفاه نصفا دائرة كمستطيل البحث عن المواد (‎.search‎ · طلبُ صاحب الموقع) */
+  border-radius: 999px;
+  font: 700 12.5px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; white-space: nowrap; }
+.cx-midadd.cx-addpill svg { width: 15px; height: 15px; flex: none; }
+/* ومقبضا الترويسة والتذييل وأدواتُ التذييل يمتدّ وعاؤها تحت عمود الصورة كالمساحات (‎-42px‎) وإن لم تُطوَ الترويسة —
+   فمنتصفُها ثابتٌ في الحالين، ولا تميل حين تُطوى الترويسةُ وتُبسط (طلبُ صاحب الموقع) */
+:is(.pk--max, .pk--frame):not(.pk--hdup) > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { margin-inline-start: -42px; width: calc(100% + 42px); box-sizing: border-box; }
+:is(.pk--max, .pk--frame).pk--hdup > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { width: 100%; box-sizing: border-box; }
+.pk--hdanim > .post-yt > .post-ytmain > :is(.pk-hdline, .vt-foot, .pk-pubfoot) { transition: margin-inline-start .22s ease, width .22s ease; }
+/* والمساحةُ الملموسةُ (النشِطة) أيقونتُها في زاويتها ذهبيّة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx .pk-blkh__ic { transition: color .2s ease, background .15s, box-shadow .15s, transform .2s ease; }
+#cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+#cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #a9852f; }
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--book .post-ytmain > .pk-split > .pk-src .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--bank .post-ytmain > .pk-split > .pk-bank .pk-blkh__ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk-act--mid .post-ytmain > .pk-blkh--mid .pk-blkh__ic { color: #d4b36a; }
+/* ===== أدواتُ المصدر في التذييل (طلبُ صاحب الموقع): الغلاف · صفحاتُ المصدر · ربطُ الصفحات — كبسولاتٌ في صفّ،
+   والمربّعُ فوقها فيه المصدرُ وحدَه؛ وشجرةُ «ربط الصفحات» تطفو فوق التذييل ===== */
+.cx-acttools .cx-srctools { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; width: auto; margin: 0; }
+.cx-srctools .chtool, .cx-srctools .pk-lnk {
+  border: 1px solid var(--u-line); border-radius: 999px; background: var(--u-surf, #fff);
+  box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); transition: background .15s, box-shadow .15s;
+}
+html[data-theme="dark"] .cx-srctools .chtool, html[data-theme="dark"] .cx-srctools .pk-lnk { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-srctools .chtool { position: relative; padding: 6px 12px; min-width: 0; width: auto; height: 34px; box-sizing: border-box; }
+.cx-srctools .chtool--on { padding-inline-end: 32px; }
+.cx-srctools .chtool__x { inset-inline-end: 7px; width: 20px; height: 20px; }
+.cx-srctools .chtool__txt small { display: none; }
+.cx-srctools .chtool__txt b { font-size: 12px; white-space: nowrap; }
+.cx-srctools .chtool__thumb { width: 18px; height: 24px; margin: 0; }
+.cx-srctools .pk-lnk { position: relative; overflow: visible; border-style: solid; }
+.cx-srctools .pk-lnk__hd { padding: 6px 12px; height: 34px; box-sizing: border-box; }
+.cx-srctools .pk-lnk__tree { position: absolute; bottom: calc(100% + 10px); inset-inline-end: 0; width: 340px; max-height: 50vh; overflow: auto; z-index: 30;
+  padding: 8px; border-radius: 14px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 18px 40px -14px rgba(20, 35, 63, .45); }
+html[data-theme="dark"] .cx-srctools .pk-lnk__tree { background: #232d33; border-color: rgba(255, 255, 255, .14); box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .7); }
+.cx-srcsep { width: 1px; height: 20px; background: var(--u-line); flex: none; }
+/* وفي التحرير يُخفى تقليبُ الكتاب من تحته: زرّاه في التذييل (طلبُ صاحب الموقع) */
+#cm-body .pk--edit .pk-split > .pk-src--book .cbk-nav { display: none; }
+/* وزرّا التصفّح في التذييل بلغة كبسولات المصدر جنبهما (واضحان في الداكن) */
+.cx-acttools .cx-srctools ~ .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+html[data-theme="dark"] .cx-acttools .cx-srctools ~ .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-acttools .cx-srctools ~ .cx-actb:disabled { opacity: .35; }
+/* وزرُّ الإضافة بلغة كبسولات أدوات المصدر نفسِها (طلبُ صاحب الموقع): سطحٌ محايدٌ وحدٌّ رفيع، والأيقونةُ ذهبيّة والنصُّ بلون الحبر */
+#cm-body .cx-midadd.cx-addpill { height: 34px; padding: 0 14px 0 12px; border: 1px solid var(--u-line); border-radius: 999px;
+  background: var(--u-surf, #fff); color: var(--u-ink, #14233f); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+#cm-body .cx-midadd.cx-addpill svg { color: #a9852f; width: 17px; height: 17px; }
+#cm-body .cx-midadd.cx-addpill:hover { background: var(--u-surf, #fff); border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill { color: rgba(255, 255, 255, .92); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill svg { color: #d4b36a; }
+html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
+/* ===== أكثرُ من مصدر (طلبُ صاحب الموقع): الكتابُ في مكانه بلا مربّع، والثاني تحته، ومربّعٌ مرقّطٌ لمصدرٍ آخر تحتها كلّها ===== */
+.pk-src__more {
+  flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  height: 28px; width: auto; padding: 0 12px; border-radius: 99px; cursor: pointer;
+  border: 1px dashed rgba(169, 133, 47, .5); background: rgba(225, 193, 114, .04);
+  color: var(--u-mut); font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.pk-src__more svg { width: 12px; height: 12px; color: #a9852f; }
+.pk-src__more:hover { background: rgba(225, 193, 114, .12); border-color: rgba(169, 133, 47, .8); color: var(--u-ink, inherit); }
+.pk-src__more:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 2px; }
+html[data-theme="dark"] .pk-src__more { border-color: rgba(212, 179, 106, .4); background: rgba(212, 179, 106, .04); }
+html[data-theme="dark"] .pk-src__more svg { color: #d4b36a; }
+html[data-theme="dark"] .pk-src__more:hover { background: rgba(212, 179, 106, .12); border-color: rgba(212, 179, 106, .75); color: #f1ead8; }
+/* وفي المكبَّرة: مصدرٌ واحدٌ يملأ ما فوق المربّع المرقّط، وأكثرُ يتتابع وتُمرَّر المساحة */
+#cm-body .pk-split > .pk-src--multi > .pk-src__list {
+  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+#cm-body .pk-split > .pk-src--multi > .pk-src__view { flex: none; }
+#cm-body .pk-src--multi > .pk-src__list > .pk-src__view { flex: none; height: max(240px, calc(100% - 46px)); min-height: 0; }
+#cm-body .pk--max .pk-src--multi > .pk-src__list > .pk-src__view { min-height: 320px; }
+/* والشريطُ بثيم الموقع (كشريط الصفحة ‎#xscroll‎): الأصليُّ مُخمَد، ومسارٌ ‎8px‎ يسارًا وإبهامٌ بتروليٌّ مدوّر يُسحب */
+#cm-body .pk-split > .pk-src--multi { position: relative; }
+#cm-body .pk-src--multi > .pk-src__list { scrollbar-width: none; padding-left: 10px; }
+.pk-src__list::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.pk-srcbar { position: absolute; left: 2px; width: 2.5px; z-index: 4; cursor: pointer; touch-action: none; border-radius: 99px; background: transparent; }
+.pk-srcbar::before { content: ""; position: absolute; inset: 0 -8px 0 -2px; }   /* حرمٌ أعرض للمؤشّر من الخطّ النحيل */
+.pk-srcbar[hidden] { display: none; }
+.pk-srcbar > i { position: absolute; top: 0; left: 0; right: 0; border-radius: 99px; background: rgba(44, 94, 101, .22); cursor: grab; transition: background .2s; }
+.pk-srcbar:hover > i { background: rgba(44, 94, 101, .38); }
+.pk-srcbar.is-drag > i { background: rgba(44, 94, 101, .5); cursor: grabbing; }
+html[data-theme="dark"] .pk-srcbar { background: transparent; }
+html[data-theme="dark"] .pk-srcbar > i { background: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] .pk-srcbar:hover > i { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-srcbar.is-drag > i { background: rgba(255, 255, 255, .36); }
+#cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi { contain: size; }
+/* والقائمةُ تنزل حتى حافّة المساحة السفلى (لا هامشَ ميّتٌ تحتها تُحجب الرؤيةُ خلفه) — والفسحةُ في جوفها، وتُقصّ على الزاوية المستديرة */
+#cm-body .pk-split > .pk-src--multi { padding-bottom: 0; overflow: clip; }
+#cm-body .pk-src--multi > .pk-src__list { padding-bottom: 14px; }
+
+/* ملاحظة «توزيع الدرجات» (data.note): نصٌّ كما كُتب تحت الشريط */
+.gnote { white-space: pre-wrap; margin-top: 8px; line-height: 1.75; font-size: .92em; overflow-wrap: anywhere; unicode-bidi: plaintext; text-align: start; }
+.gnote-in { display: block; width: 100%; margin-top: 8px; min-height: 2.6em; }
+/* اقتباسُ السؤال فوق مساهمةٍ منقولةٍ كانت ردًّا (impQ) */
+.imp-q { display: block; border-inline-start: 3px solid rgba(0, 109, 119, .45); padding-inline-start: 8px; margin: 2px 0 5px; opacity: .72; font-size: .92em; unicode-bidi: plaintext; text-align: start; white-space: normal; }
+html[data-theme="dark"] .imp-q { border-inline-start-color: rgba(131, 197, 190, .5); }
+/* ===== قائمةُ المصادر في التذييل (التوجّهُ الأوّل): زرٌّ باسم المصدر ▾ وبطاقةٌ عموديّة فوقه ===== */
+.cx-srcm .cx-srcm__tg { gap: 8px; }
+.cx-plus.cx-srcm.is-open .cx-plus__tg { transform: none; }
+.cx-srcm__tg .chtool__txt b { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.cx-srcm__chev { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; transition: transform .2s ease; }
+.cx-srcm.is-open .cx-srcm__chev { transform: rotate(180deg); }
+.cx-plus__menu.cx-srcm__menu {
+  flex-direction: column; align-items: stretch; gap: 1px; padding: 6px; min-width: 236px; border-radius: 16px;
+  box-shadow: 0 14px 36px rgba(20, 40, 46, .16), 0 2px 6px rgba(20, 40, 46, .06);
+}
+.cx-srcm__h { padding: 7px 10px 4px; font-size: 11px; font-weight: 700; color: var(--u-mut, #7a8a8e); text-align: start; }
+.cx-srcm__sep { height: 1px; margin: 4px 6px; background: var(--u-line, rgba(20, 40, 46, .08)); }
+.cx-srcm__it {
+  display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 10px; border: 0; border-radius: 10px;
+  background: transparent; color: var(--u-ink, #14233f); font: inherit; font-size: 13px; font-weight: 600; text-align: start; cursor: pointer;
+}
+.cx-srcm__it:hover, .cx-srcm__it:focus-visible { background: rgba(225, 193, 114, .12); outline: none; }
+.cx-srcm__it.is-cur { background: rgba(225, 193, 114, .16); }
+.cx-srcm__it svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; }
+.cx-srcm__lab { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cx-srcm__it small { flex: none; max-width: 90px; overflow: hidden; text-overflow: ellipsis; color: var(--u-mut, #7a8a8e); font-size: 11.5px; font-weight: 500; }
+.cx-srcm__ck { flex: none; color: #a9852f; font-weight: 800; }
+.cx-srcm__it.is-red, .cx-srcm__it.is-red svg { color: #c0564b; }
+.cx-srcm__it.is-red:hover { background: rgba(192, 86, 75, .1); }
+html[data-theme="dark"] .cx-srcm__it { color: #e6ecef; }
+html[data-theme="dark"] .cx-srcm__it svg, html[data-theme="dark"] .cx-srcm__ck, html[data-theme="dark"] .cx-srcm__chev { color: #d4b36a; }
+html[data-theme="dark"] .cx-srcm__it:hover, html[data-theme="dark"] .cx-srcm__it.is-cur { background: rgba(212, 179, 106, .14); }
+html[data-theme="dark"] .cx-srcm__it.is-red, html[data-theme="dark"] .cx-srcm__it.is-red svg { color: #e08377; }
+html[data-theme="dark"] .cx-plus__menu.cx-srcm__menu { box-shadow: 0 14px 36px rgba(0, 0, 0, .45); }
+/* ===== زرُّ المصدر فوق جنب أيقونة المساحة، وقائمةُ المصادر الطافية (طلبُ صاحب الموقع) ===== */
+.pk-srchd { display: inline-flex; align-items: center; gap: 5px; height: 26px; min-width: 0; max-width: 220px; padding: 0 7px 0 9px; border: 0; border-radius: 99px;
+  background: transparent; color: #3d4b50; font: 700 13px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; cursor: pointer; white-space: nowrap; }
+.pk-srchd > span { overflow: hidden; text-overflow: ellipsis; }
+.pk-srchd svg { flex: none; width: 13px; height: 13px; fill: none; stroke: #a9852f; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s ease; }
+.pk-srchd:hover { background: rgba(20, 40, 46, .05); }
+.pk-srchd.is-open { background: rgba(20, 40, 46, .06); color: #1c2b30; }
+.pk-srchd.is-open svg { transform: rotate(180deg); }
+.pk-srchd--add { color: #8a6c22; }
+.pk-srchd--add svg { stroke-width: 2.4; }
+.pk-srchd--ro { cursor: default; }
+.pk-srchd--ro:hover { background: none; }
+.pk-srchd:focus-visible { outline: 2px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
+html[data-theme="dark"] .pk-srchd { color: #e6ecef; }
+html[data-theme="dark"] .pk-srchd svg { stroke: #d4b36a; }
+html[data-theme="dark"] .pk-srchd--add { color: #e1c172; }
+html[data-theme="dark"] .pk-srchd:hover, html[data-theme="dark"] .pk-srchd.is-open { background: rgba(255, 255, 255, .07); }
+.pk-blkh--book .pk-srchd { margin-inline-start: 2px; }
+.pk-srcpop { position: fixed; z-index: 1200; direction: inherit; }
+.psp-box { width: 300px; background: #fff; border-radius: 16px; padding: 6px; box-shadow: 0 10px 30px rgba(20, 40, 46, .14); border: 1px solid rgba(20, 40, 46, .06);
+  font: 600 13px/1.2 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: #3d4b50; }
+.psp-r { position: relative; display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 11px; }
+.psp-r:hover { background: #f6f8f8; }
+.psp-r button { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+.psp-r button:disabled { cursor: default; }
+.psp-cv { flex: none; width: 28px; height: 37px; border-radius: 3px 5px 5px 3px; overflow: hidden; background: #eef2f3; box-shadow: inset 3px 0 0 rgba(0, 0, 0, .12), 0 1px 4px rgba(20, 40, 46, .18); }
+.psp-cv img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.psp-cv.is-on { box-shadow: 0 0 0 2px #a9852f; }
+.psp-ti { flex: none; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; color: var(--c); margin-inline-end: -3px; }
+.psp-ti svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.psp-ti.is-on { background: color-mix(in srgb, var(--c) 12%, #fff); box-shadow: 0 0 0 1.5px #a9852f; }
+.psp-nm { flex: 1 1 auto; min-width: 0; text-align: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 6px 2px !important; font-size: 13.5px !important; }
+.psp-r.is-cur .psp-nm { color: #1c2b30; font-weight: 700; }
+.psp-more { flex: none; width: 28px; height: 28px; border-radius: 8px !important; display: grid; place-items: center; color: #9aa6a9 !important; }
+.psp-more svg { width: 15px; height: 15px; fill: currentColor; }
+.psp-more:hover, .psp-more.is-on { background: #eef2f3 !important; color: #3d4b50 !important; }
+.psp-add { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: 4px; padding: 9px 10px 7px; border: 0; border-top: 1px solid rgba(20, 40, 46, .06); background: none;
+  color: #9aa6a9; font: inherit; font-size: 12.5px; cursor: pointer; }
+.psp-add:hover { color: #8a6c22; }
+.psp-add svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.psp-sub { position: absolute; z-index: 2; top: 50%; inset-inline-start: calc(100% + 14px); transform: translateY(-50%); background: #fff; border-radius: 12px; padding: 4px;
+  box-shadow: 0 10px 26px rgba(20, 40, 46, .16); cursor: default; }
+.psp-sub::before { content: ""; position: absolute; top: 50%; inset-inline-start: -6px; width: 12px; height: 12px; margin-top: -6px; background: #fff; transform: rotate(45deg); }
+.psp-list { width: 180px; }
+.psp-it { position: relative; display: flex !important; align-items: center; gap: 8px; width: 100%; height: 32px; padding: 0 9px !important; border-radius: 8px; font-size: 12.5px !important; text-align: start; }
+.psp-it:hover { background: #f3f5f6 !important; }
+.psp-it svg { width: 14px; height: 14px; flex: none; fill: none; stroke: var(--c, #9aa6a9); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.psp-it.is-on { background: #f3f5f6 !important; color: #1c2b30 !important; }
+.psp-ck { margin-inline-start: auto; color: #a9852f; font-size: 12px; }
+.psp-sep { display: block; height: 1px; margin: 3px 6px; background: rgba(20, 40, 46, .07); }
+.psp-del { color: #c0564b !important; }
+.psp-del svg { stroke: #c0564b; }
+.psp-del.is-conf { background: #c0564b !important; color: #fff !important; }
+.psp-del.is-conf svg { stroke: #fff; }
+.psp-cov { width: 140px; padding: 10px 10px 8px; text-align: center; }
+.psp-pv { display: block; width: 84px; height: 112px; margin: 0 auto; object-fit: cover; border-radius: 4px; background: #f3f5f6; box-shadow: inset 0 0 0 1px rgba(20, 40, 46, .1), 0 4px 12px rgba(20, 40, 46, .1); }
+.psp-stp { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-top: 8px; }
+.psp-ar { width: 26px; height: 26px; border-radius: 99px !important; background: #f3f5f6 !important; display: grid; place-items: center; color: #5d6b70 !important; }
+.psp-ar svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.psp-num { width: 46px; height: 30px; border-radius: 9px; border: 1.5px solid rgba(20, 40, 46, .14); text-align: center; font: 700 13.5px/1 'IBM Plex Sans Arabic', sans-serif; color: #1c2b30; background: #fff; padding: 0; }
+.psp-num:focus { outline: none; border-color: #a9852f; box-shadow: 0 0 0 3px rgba(225, 193, 114, .25); }
+.psp-of { margin-top: 4px; font-size: 11px; color: #9aa6a9; display: none; }
+.psp-cov:focus-within .psp-of { display: block; }
+.psp-up { display: flex !important; align-items: center; justify-content: center; gap: 6px; width: 100%; margin-top: 8px; padding-top: 8px !important; border-top: 1px solid rgba(20, 40, 46, .07) !important; font-size: 12px !important; color: #8a6c22 !important; }
+.psp-up svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+html[data-theme="dark"] .psp-box, html[data-theme="dark"] .psp-sub, html[data-theme="dark"] .psp-sub::before { background: #26313a; }
+html[data-theme="dark"] .psp-box { border-color: rgba(255, 255, 255, .08); box-shadow: 0 12px 32px rgba(0, 0, 0, .45); color: #c9d3d6; }
+html[data-theme="dark"] .psp-sub { box-shadow: 0 12px 28px rgba(0, 0, 0, .45); }
+html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-it.is-on, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on, html[data-theme="dark"] .psp-ar { background: rgba(255, 255, 255, .07) !important; }
+html[data-theme="dark"] .psp-r.is-cur .psp-nm, html[data-theme="dark"] .psp-it.is-on, html[data-theme="dark"] .psp-num { color: #f1f4f5 !important; }
+html[data-theme="dark"] .psp-it { color: #c9d3d6; }
+html[data-theme="dark"] .psp-ti { filter: brightness(1.5); }
+html[data-theme="dark"] .psp-ti.is-on { background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] .psp-num { background: #1d262d; border-color: rgba(255, 255, 255, .14); }
+html[data-theme="dark"] .psp-add, html[data-theme="dark"] .psp-up, html[data-theme="dark"] .psp-sep { border-color: rgba(255, 255, 255, .08) !important; }
+html[data-theme="dark"] .psp-sep { background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] .psp-up, html[data-theme="dark"] .psp-add:hover { color: #e1c172 !important; }
+html[data-theme="dark"] .psp-del.is-conf { background: #c0564b !important; color: #fff !important; }
+
+/* ===== Training badges (summer x399 / co-op x398 / senior project): an employee badge instead of a book =====
+   Same footprint as a book. The clip slot is a real hole (mask on the face and the back plate), so the page
+   shows through it. Light: dark header + thin accent frame. Dark: accent header. Graduation: all black. */
+.bk.bk--badge { --thk: 5px; --r: 11px;
+  --b-hole: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 100' preserveAspectRatio='none'%3E%3Cpath fill-rule='evenodd' d='M0 0H68V100H0Z M27 6.7H41A2.35 2.35 0 0 1 41 11.4H27A2.35 2.35 0 0 1 27 6.7Z'/%3E%3C/svg%3E"); }
+.bk--badge > .bkface { aspect-ratio: .68 !important; border-radius: 11px !important; background: var(--b-body) !important;
+  position: relative; overflow: hidden; padding-top: 29% !important; box-shadow: var(--b-ring, none) !important;
+  -webkit-mask: var(--b-hole) 0 0 / 100% 100% no-repeat; mask: var(--b-hole) 0 0 / 100% 100% no-repeat; }
+.bk.bk--badge::after { background: var(--b-edge) !important; border-radius: 11px !important;
+  -webkit-mask: var(--b-hole) 0 0 / 100% 100% no-repeat; mask: var(--b-hole) 0 0 / 100% 100% no-repeat; }
+.bk.bk--badge::before { background: var(--b-edge) !important; top: 11px; bottom: 11px; }
+.bk--badge > .bkface b { color: var(--b-sub) !important; position: relative; z-index: 1; opacity: 1 !important; }
+.bk--badge > .bkface i { color: var(--b-num) !important; position: relative; z-index: 1; }
+.bk--badge .bg-band { position: absolute; left: 0; right: 0; top: 0; height: 24%; background: var(--b-band); }
+.bk--badge .bg-wm { position: absolute; z-index: 0; height: auto; opacity: var(--b-op); color: var(--b-wm); pointer-events: none; }
+.bk--b-s .bg-wm { left: -43%; top: 33%; width: 86%; }
+.bk--b-c .bg-wm { left: -64%; top: 28%; width: 100%; }
+.bk--b-g .bg-wm { left: -46%; bottom: 6%; width: 92%; }
+.bk--badge .bg-shine { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 236, 170, .16) 46%, rgba(255, 255, 255, .06) 49%, transparent 64%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 62%); mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 62%); }
+.bk--badge .bg-clip { position: absolute; left: 50%; top: -15px; width: 16px; height: 26px; margin-left: -8px; box-sizing: border-box;
+  border: 3.5px solid #b4b2a9; border-bottom: 0; border-radius: 8px 8px 0 0; transform: translateZ(1px); z-index: 3; pointer-events: none; }
+.bk--badge .bg-clip::after { content: ''; position: absolute; left: -9px; right: -9px; top: -9px; height: 9px; background: #888780; border-radius: 3px; }
+.bk--xs.bk--badge .bg-clip { display: none; }
+.bk--xs.bk--badge > .bkface { padding-top: 22% !important; }
+
+.bk--b-s { --b-body: linear-gradient(150deg, #3a6f76, #22454b); --b-band: #1c3f45; --b-edge: #10242b; --b-num: #e1c172; --b-sub: #eef3f3;
+  --b-wm: #e1c172; --b-op: .14; --b-ring: inset 0 0 0 1.5px rgba(225, 193, 114, .65); }
+.bk--b-c { --b-body: linear-gradient(150deg, #3a6f76, #22454b); --b-band: #1c3f45; --b-edge: #10242b; --b-num: #cfd8dc; --b-sub: #eef3f3;
+  --b-wm: #cfd8dc; --b-op: .14; --b-ring: inset 0 0 0 1.5px rgba(207, 216, 220, .65); }
+.bk--b-g { --b-body: linear-gradient(150deg, #2b2b2b, #0a0a0a); --b-band: #0a0a0a; --b-edge: #000; --b-num: #e1c172; --b-sub: #e1c172;
+  --b-wm: #c9a25c; --b-op: .26; --b-ring: inset 0 0 0 1.5px rgba(201, 162, 92, .7); }
+html[data-theme="dark"] .bk--b-s { --b-band: #e1c172; --b-op: .16; --b-ring: none; }
+html[data-theme="dark"] .bk--b-c { --b-band: #cfd8dc; --b-op: .16; --b-ring: none; }
+html[data-theme="dark"] .bk--b-g { --b-ring: none; }
+/* قائمةُ المصادر وما يتفرّع منها أصغر (طلبُ صاحب الموقع) */
+.psp-box { width: 236px; padding: 4px; border-radius: 13px; font-size: 12px; }
+.psp-r { gap: 5px; padding: 4px 6px; border-radius: 9px; }
+.psp-cv { width: 21px; height: 28px; border-radius: 2px 4px 4px 2px; }
+.psp-ti { width: 18px; height: 18px; border-radius: 6px; margin-inline-end: -2px; }
+.psp-ti svg { width: 13px; height: 13px; }
+.psp-nm { padding: 4px 2px !important; font-size: 12.5px !important; }
+.psp-more { width: 22px; height: 22px; border-radius: 6px !important; }
+.psp-more svg { width: 13px; height: 13px; }
+.psp-add { gap: 6px; margin-top: 3px; padding: 7px 8px 5px; font-size: 11.5px; }
+.psp-add svg { width: 12px; height: 12px; }
+.psp-sub { inset-inline-start: calc(100% + 10px); border-radius: 10px; padding: 3px; }
+.psp-sub::before { width: 10px; height: 10px; margin-top: -5px; inset-inline-start: -5px; }
+.psp-list { width: 144px; }
+.psp-it { height: 27px; gap: 7px; padding: 0 8px !important; border-radius: 7px; font-size: 11.5px !important; }
+.psp-it svg { width: 12px; height: 12px; }
+.psp-ck { font-size: 11px; }
+.psp-cov { width: 108px; padding: 8px 8px 6px; }
+.psp-pv { width: 62px; height: 83px; border-radius: 3px; }
+.psp-stp { margin-top: 6px; gap: 3px; }
+.psp-ar { width: 21px; height: 21px; }
+.psp-ar svg { width: 11px; height: 11px; }
+.psp-num { width: 36px; height: 24px; border-radius: 7px; font-size: 12px; }
+.psp-of { font-size: 10px; margin-top: 3px; }
+.psp-up { margin-top: 6px; padding-top: 6px !important; gap: 4px; font-size: 11px !important; }
+.psp-up svg { width: 11px; height: 11px; }
+/* قائمةُ المصادر في الداكن بثيم الموقع — كلوحة فلاتر البحث (‎.fpanel‎): سطحٌ بتروليٌّ داكن وحدٌّ بتروليّ ولمساتٌ بتروليّةٌ فاتحة */
+html[data-theme="dark"] .psp-box, html[data-theme="dark"] .psp-sub { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); box-shadow: 0 16px 38px -16px rgba(0, 0, 0, .7); color: var(--c-ink, #e6ecef); }
+html[data-theme="dark"] .psp-sub::before { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); border-top: 0; border-left: 0; }
+html[data-theme="dark"] .psp-sub::before { inset-inline-start: -6.5px; }
+html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { background: rgba(127, 179, 187, .08) !important; }
+html[data-theme="dark"] .psp-it.is-on { background: rgba(127, 179, 187, .13) !important; color: var(--c-ink, #e6ecef) !important; }
+html[data-theme="dark"] .psp-nm { color: #b8c7cb !important; }
+html[data-theme="dark"] .psp-r.is-cur .psp-nm { color: var(--c-ink, #f1f4f5) !important; }
+html[data-theme="dark"] .psp-it { color: #c9d6d9; }
+html[data-theme="dark"] .psp-more { color: var(--placeholder, #62808d) !important; }
+html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { color: var(--brand-tx, #7fb3bb) !important; }
+html[data-theme="dark"] .psp-ck { color: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .psp-cv.is-on, html[data-theme="dark"] .psp-ti.is-on { box-shadow: 0 0 0 1.5px var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .psp-ti.is-on { background: rgba(127, 179, 187, .1); }
+html[data-theme="dark"] .psp-ti { filter: brightness(1.7) saturate(.8); }
+html[data-theme="dark"] .psp-add { color: var(--placeholder, #62808d); border-top-color: var(--border, #2a4249) !important; }
+html[data-theme="dark"] .psp-add:hover { color: var(--brand-tx, #7fb3bb) !important; }
+html[data-theme="dark"] .psp-sep { background: var(--border, #2a4249); }
+html[data-theme="dark"] .psp-up { color: var(--brand-tx, #7fb3bb) !important; border-top-color: var(--border, #2a4249) !important; }
+html[data-theme="dark"] .psp-ar { background: rgba(255, 255, 255, .04) !important; color: var(--brand-tx, #7fb3bb) !important; box-shadow: inset 0 0 0 1px var(--border, #2a4249); }
+html[data-theme="dark"] .psp-num { background: rgba(255, 255, 255, .04); border-color: var(--border, #2a4249); color: var(--c-ink, #e6ecef) !important; }
+html[data-theme="dark"] .psp-num:focus { border-color: var(--brand-tx, #7fb3bb); box-shadow: 0 0 0 3px rgba(127, 179, 187, .18); }
+html[data-theme="dark"] .psp-of { color: var(--placeholder, #62808d); }
+html[data-theme="dark"] .psp-pv { background: rgba(255, 255, 255, .04); box-shadow: 0 0 0 1px var(--border, #2a4249); }
+html[data-theme="dark"] .psp-del { color: #e08377 !important; } html[data-theme="dark"] .psp-del svg { stroke: #e08377; }
+html[data-theme="dark"] .psp-del.is-conf { background: #b34e44 !important; color: #fff !important; } html[data-theme="dark"] .psp-del.is-conf svg { stroke: #fff; }
+html[data-theme="dark"] .pk-srchd svg { stroke: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .pk-srchd--add { color: var(--brand-tx, #7fb3bb); }
+html[data-theme="dark"] .pk-srchd:hover, html[data-theme="dark"] .pk-srchd.is-open { background: rgba(127, 179, 187, .08); }
+/* الوصلةُ بين القائمة ولوحتها الجانبيّة (طلبُ صاحب الموقع): مثلّثٌ بارزٌ من جانب اللوحة نحو المصدر، رأسُه ناعم —
+   واللوحةُ مستقلّةٌ عن القائمة. والظلُّ ‎drop-shadow‎ على اللوحة فيشمل المثلّث معها */
+.psp-sub { box-shadow: none !important; filter: drop-shadow(0 8px 20px rgba(20, 40, 46, .16)) drop-shadow(0 0 .6px rgba(20, 40, 46, .25)); }
+.psp-sub::before { display: block; width: 16px; height: 16px; margin-top: -8px; top: 50%; inset-inline-start: auto; right: -7px; left: auto;
+  background: #fff; transform: rotate(45deg); border-radius: 0 4px 0 0; }
+html[data-lang="en"] .psp-sub::before { right: auto; left: -7px; border-radius: 0 0 0 4px; }
+.psp-r.is-sub { background: #f3f6f7; }
+html[data-theme="dark"] .psp-sub { filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .5)); }
+html[data-theme="dark"] .psp-sub::before { background: var(--surface, #16252b); border: 1.5px solid var(--border, #2a4249); border-bottom: 0; border-left: 0; right: -8.5px; }
+html[data-theme="dark"][data-lang="en"] .psp-sub::before { border: 1.5px solid var(--border, #2a4249); border-top: 0; border-right: 0; left: -8.5px; right: auto; }
+html[data-theme="dark"] .psp-r.is-sub, html[data-theme="dark"] .psp-r.is-sub:hover { background: rgba(127, 179, 187, .1) !important; }
+/* المختارُ في قائمة الأنواع لا خلفيةَ له — علامتُه ✓ وخطُّه الأثقل — فلا يلتصق بتمرير ما بجانبه، وبين البنود فسحة (طلبُ صاحب الموقع) */
+.psp-list { display: flex; flex-direction: column; gap: 2px; }
+.psp-it.is-on, html[data-theme="dark"] .psp-it.is-on { background: none !important; font-weight: 700; }
+.psp-it.is-on:hover, html[data-theme="dark"] .psp-it.is-on:hover { background: #f3f5f6 !important; }
+html[data-theme="dark"] .psp-it.is-on:hover { background: rgba(127, 179, 187, .08) !important; }
+
+/* Merged courses: the old code under the new name, small and faded */
+.cprev { display: block; font-size: 10.5px; font-weight: 500; opacity: .55; line-height: 1.2; margin-top: 1px; }
+#cm-title .cprev { display: inline; font-size: .62em; margin-inline-start: 8px; vertical-align: middle; }
+/* اسمُ المصدر أصغرُ وأقربُ لأيقونة المساحة، والأيقونةُ داخلةٌ في مساحة الضغط (طلبُ صاحب الموقع): الزرُّ يمتدّ تحتها،
+   والأيقونةُ فوقه لا تلتقط النقر فيصل إليه */
+.pk-blkh--book:has(> .pk-srchd) > .pk-blkh__ic { position: relative; z-index: 1; pointer-events: none; }
+.pk-blkh--book > .pk-srchd { position: relative; z-index: 0; margin-inline-start: -30px; padding-inline-start: 32px; padding-inline-end: 8px; gap: 4px; height: 26px; font-size: 12px; }
+.pk-blkh--book > .pk-srchd svg { width: 12px; height: 12px; }
+.pk-blkh--book > .pk-srchd { padding-inline-start: 25px; font-size: 11px; gap: 3px; white-space: nowrap; flex-wrap: nowrap; }
+.pk-blkh--book > .pk-srchd > span { white-space: nowrap; }
+.pk-blkh--book > .pk-srchd svg { width: 11px; height: 11px; }
+/* والاسمُ على سطر الأيقونة نفسِه، بجانبها لا تحتها (طلبُ صاحب الموقع) */
+.pk-blkh--book > .pk-srchd { transform: translateY(-6px); }
+/* الأيقونةُ والاسمُ منفصلان (طلبُ صاحب الموقع): الأيقونةُ تُغلق المساحةَ كما كانت، والاسمُ زرٌّ مستقلٌّ بجانبها */
+.pk-blkh--book:has(> .pk-srchd) > .pk-blkh__ic { pointer-events: auto; }
+.pk-blkh--book > .pk-srchd { margin-inline-start: -2px; padding-inline-start: 5px; }
+/* أيقونةُ نوع المصدر يمينَ اسمه، والزرُّ كلُّه أبعدُ قليلًا عن أيقونة المساحة (طلبُ صاحب الموقع) */
+.pk-blkh--book > .pk-srchd { margin-inline-start: 10px; padding-inline-start: 6px; }
+.pk-srchd__ty { display: grid; place-items: center; flex: none; color: var(--c); font-style: normal; }
+.pk-srchd .pk-srchd__ty svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 1.9; transform: none !important; }
+html[data-theme="dark"] .pk-srchd__ty { filter: brightness(1.7) saturate(.8); }
+/* سهمُ زرّ المصدر بلون الاسم المحايد لا ذهبيًّا (طلبُ صاحب الموقع) */
+.pk-srchd > svg:last-child, html[data-theme="dark"] .pk-srchd > svg:last-child { stroke: currentColor; opacity: .7; }
+/* نصوصُ القائمة بقدّ اسم المصدر فوق (‎11px‎) لا أكبر منه (طلبُ صاحب الموقع) */
+.psp-box { font-size: 11px; }
+.psp-nm { font-size: 11px !important; }
+.psp-it { font-size: 11px !important; height: 26px; }
+.psp-add { font-size: 11px; }
+.psp-up { font-size: 10.5px !important; }
+.psp-num { font-size: 11.5px; }
+.psp-list { width: 136px; }
+/* القائمةُ كلُّها أصغر (طلبُ صاحب الموقع) */
+.psp-box { width: 200px; padding: 3px; border-radius: 11px; }
+.psp-r { gap: 4px; padding: 3px 5px; border-radius: 8px; }
+.psp-cv { width: 17px; height: 23px; }
+.psp-ti { width: 16px; height: 16px; }
+.psp-ti svg { width: 12px; height: 12px; }
+.psp-nm { padding: 3px 1px !important; }
+.psp-more { width: 20px; height: 20px; }
+.psp-more svg { width: 12px; height: 12px; }
+.psp-add { padding: 5px 7px 4px; margin-top: 2px; gap: 5px; }
+.psp-add svg { width: 11px; height: 11px; }
+.psp-sub { padding: 2px; border-radius: 9px; inset-inline-start: calc(100% + 9px); }
+.psp-list { width: 122px; gap: 1px; }
+.psp-it { height: 23px; gap: 6px; padding: 0 7px !important; border-radius: 6px; }
+.psp-it svg { width: 11px; height: 11px; }
+.psp-sep { margin: 2px 5px; }
+.psp-cov { width: 94px; padding: 6px 6px 5px; }
+.psp-pv { width: 54px; height: 72px; }
+.psp-stp { margin-top: 5px; }
+.psp-ar { width: 19px; height: 19px; }
+.psp-ar svg { width: 10px; height: 10px; }
+.psp-num { width: 32px; height: 21px; border-radius: 6px; font-size: 11px; }
+.psp-up { margin-top: 5px; padding-top: 5px !important; font-size: 10px !important; }
+.psp-sub::before { width: 13px; height: 13px; margin-top: -6.5px; right: -6px; }
+html[data-lang="en"] .psp-sub::before { left: -6px; right: auto; }
+html[data-theme="dark"] .psp-sub::before { right: -7.5px; }
+html[data-theme="dark"][data-lang="en"] .psp-sub::before { left: -7.5px; right: auto; }
+/* قائمةُ المصادر تنزل حتى الحافّة السفلى ولو حُجزت فسحةُ أيقونات المساحات المغلقة (‎pk--icB · ‎40px‎):
+   تمتدّ تحتها، وفسحتُها في جوفها فيُبلغ آخرُها بالتمرير (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { margin-bottom: -40px; padding-bottom: 54px; }
+/* ومساحةُ المصادر وحدَها في الضيّقة: لا جارَ يحدّ قامتها، فللقائمة قامةٌ معلومة لا تنضغط إلى لا شيء */
+#cm-body .post:not(.pk--max) .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--multi > .pk-src__list { flex: none; height: clamp(360px, 62vh, 600px); }
+/* واسمُ المصدر وأيقونةُ نوعه في وسط المساحة أفقيًّا (طلبُ صاحب الموقع) — وأيقونةُ المساحة في زاويتها */
+.pk-blkh--book > .pk-srchd { position: absolute; left: 50%; top: 0; margin: 0; transform: translate(-50%, -6px); max-width: 72%; z-index: 2; }
+/* ===== قائمةُ المصادر زجاجٌ سائلٌ كلوحة فلاتر البحث (‎glass.css · .market-tools .fpanel‎ · طلبُ صاحب الموقع) =====
+   الصبغةُ نفسُها (‎--glass‎ بكثافة ‎84%‎) ولمعةُ الحرف (‎--glass-edge‎) وظلُّها (‎--glass-cast‎) وتصنيرُ ما خلفها */
+html:root .psp-box, html:root .psp-sub, html:root .psp-sub::before {
+  background: color-mix(in srgb, var(--glass, #fff) 84%, transparent) !important; border: 0 !important; color: var(--glass-ink, inherit);
+}
+html:root .psp-box, html:root .psp-sub { box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08)), 0 10px 28px -12px var(--glass-cast, rgba(20, 40, 46, .3)) !important; filter: none !important; }
+html:root .psp-box { border-radius: 18px; }
+html:root .psp-sub { border-radius: 15px; background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; }
+html:root .psp-sub::before { background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; box-shadow: inset -1px 1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); right: -6px !important; }
+html[data-lang="en"]:root .psp-sub::before { box-shadow: inset 1px -1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); left: -6px !important; right: auto !important; }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .psp-box { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+}
+html:root .psp-r:hover, html:root .psp-it:hover, html:root .psp-more:hover, html:root .psp-more.is-on, html:root .psp-r.is-sub, html:root .psp-r.is-sub:hover { background: color-mix(in srgb, var(--glass-ink, #14233f) 8%, transparent) !important; }
+html:root .psp-it.is-on:hover { background: color-mix(in srgb, var(--glass-ink, #14233f) 8%, transparent) !important; }
+html:root .psp-add, html:root .psp-up { border-top-color: color-mix(in srgb, var(--glass-ink, #14233f) 10%, transparent) !important; }
+html:root .psp-sep { background: color-mix(in srgb, var(--glass-ink, #14233f) 10%, transparent); }
+html:root .psp-nm, html:root .psp-it { color: color-mix(in srgb, var(--glass-ink, #14233f) 82%, transparent) !important; }
+html:root .psp-r.is-cur .psp-nm, html:root .psp-it.is-on { color: var(--glass-ink, #14233f) !important; }
+html:root .psp-del { color: #c0564b !important; }
+html[data-theme="dark"]:root .psp-del { color: #e08377 !important; }
+html:root .psp-num, html:root .psp-ar { background: color-mix(in srgb, var(--glass-ink, #14233f) 6%, transparent) !important; border-color: color-mix(in srgb, var(--glass-ink, #14233f) 14%, transparent); box-shadow: none; color: var(--glass-ink, #14233f) !important; }
+/* زوايا التمرير متّسقةٌ مع زاوية القائمة: نصفُ قطرها = نصفُ قطر القائمة − حشوتُها (طلبُ صاحب الموقع) */
+html:root .psp-box { padding: 5px; }
+.psp-r { border-radius: 13px; }
+html:root .psp-sub { padding: 4px; }
+.psp-it { border-radius: 11px; }
+/* خلفيةُ «⋯» متّسقةٌ مع زاوية صفّها: تبعد عن حوافّه بالقدر نفسه، ونصفُ قطرها = نصفُ قطر الصفّ − ذلك البُعد */
+.psp-r { padding: 4px 4px 4px 5px; }
+html[data-lang="en"] .psp-r { padding: 4px 5px 4px 4px; }
+html:root .psp-more { width: 23px; height: 23px; border-radius: 9px !important; }
+/* تأكيدُ الحذف أحمرُ ممتلئٌ ونصُّه أبيضُ على سطرٍ واحد، والقائمةُ تتّسع له (بعد الزجاج غلبت ألوانُه الحمرة) */
+html:root .psp-list { width: auto; min-width: 122px; }
+html:root .psp-it { white-space: nowrap; }
+html:root .psp-del.is-conf, html:root .psp-del.is-conf:hover { background: #c0564b !important; color: #fff !important; }
+html[data-theme="dark"]:root .psp-del.is-conf, html[data-theme="dark"]:root .psp-del.is-conf:hover { background: #b34e44 !important; color: #fff !important; }
+html:root .psp-del.is-conf svg { stroke: #fff; }
+/* زرُّ المصدر في التذييل: رقاقةٌ كأختها «ربط الصفحات» — أيقونةُ النوع والاسمُ والسهم */
+.cx-acttools .pk-srchd { position: static; transform: none; margin: 0; max-width: 220px; height: 34px; padding: 0 12px; gap: 6px;
+  font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; color: var(--u-ink, #14233f); }
+.cx-acttools .pk-srchd .pk-srchd__ty svg { width: 15px; height: 15px; }
+.cx-acttools .pk-srchd > svg:last-child { width: 13px; height: 13px; transform: rotate(180deg); }
+.cx-acttools .pk-srchd.is-open > svg:last-child { transform: none; }
+.cx-acttools .pk-srchd--ro { cursor: default; }
+html[data-theme="dark"] .cx-acttools .pk-srchd { color: #e6ecef; }
+/* ثلاثُ نقاطِ طرق العرض تحت أيقونة الملخّص — والنقطةُ الذهبيّةُ الحاليّة (طلبُ صاحب الموقع) */
+.pk-blkh--mid { position: relative; }
+.pk-vdots { position: absolute; top: 21px; inset-inline-start: 0; width: 26px; display: flex; justify-content: center; gap: 0; z-index: 3; }
+.pk-vdots__d { width: 9px; height: 10px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.pk-vdots__d::before { content: ""; width: 3.5px; height: 3.5px; border-radius: 99px; background: rgba(20, 40, 46, .24); transition: background .15s, transform .15s; }
+.pk-vdots__d:hover::before { background: rgba(20, 40, 46, .5); transform: scale(1.25); }
+.pk-vdots__d.on::before { background: #a9852f; }
+.pk-vdots__d:focus-visible { outline: 1.5px solid rgba(201, 162, 92, .7); outline-offset: 0; border-radius: 3px; }
+html[data-theme="dark"] .pk-vdots__d::before { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots__d:hover::before { background: rgba(255, 255, 255, .55); }
+html[data-theme="dark"] .pk-vdots__d.on::before { background: #d4b36a; }
+/* محاذاةُ النقاط تحت مركز الأيقونة تمامًا، وفوق شريط المجلدات فلا يقصّها */
+.pk-vdots { top: 19px; inset-inline-start: -2px; width: 18px; z-index: 20; }
+.pk-vdots__d { width: 6px; height: 9px; }
+.pk-vdots__d::before { display: block; box-sizing: border-box; flex: none; width: 4px !important; height: 4px !important; min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; position: static; transform: none; }
+.pk-vdots__d:hover::before { transform: none; }
+/* ===== نقاطُ طرق العرض: نقطتان فوق وواحدةٌ تحت، أكبر وأقرب، والزرُّ كلُّه يبدّل (طلبُ صاحب الموقع) ===== */
+.pk-vdots { position: absolute; top: 18px; inset-inline-start: -1px; width: 16px; height: 13px; padding: 0; border: 0; background: none; cursor: pointer; z-index: 20; display: block; border-radius: 5px; }
+.pk-vdots__d { position: absolute; width: 5px; height: 5px; border-radius: 99px; background: rgba(20, 40, 46, .24); transition: background .15s; }
+.pk-vdots__d::before { display: none !important; }
+.pk-vdots__d--0 { top: 1.5px; inset-inline-start: 2.5px; }
+.pk-vdots__d--1 { top: 1.5px; inset-inline-start: 8.5px; }
+.pk-vdots__d--2 { top: 7px; inset-inline-start: 5.5px; }
+.pk-vdots__d.on { background: #a9852f; }
+.pk-vdots:hover .pk-vdots__d:not(.on) { background: rgba(20, 40, 46, .42); }
+.pk-vdots:focus-visible { outline: 1.5px solid rgba(201, 162, 92, .7); outline-offset: 1px; }
+html[data-theme="dark"] .pk-vdots__d { background: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots:hover .pk-vdots__d:not(.on) { background: rgba(255, 255, 255, .5); }
+html[data-theme="dark"] .pk-vdots__d.on { background: #d4b36a; }
+.pk-vdots { border-radius: 0; }
+.pk-vdots::after { content: ""; position: absolute; inset: -3px; }
+/* النقاطُ أوسعُ بين علويّتيها، والذهبيّةُ علامةٌ تنزلق إلى موضعها الجديد، والزرُّ ينضغط تحت الإصبع */
+.pk-vdots { width: 18px; height: 14px; inset-inline-start: -2px; transition: transform .14s cubic-bezier(.3, .7, .4, 1); }
+.pk-vdots:active { transform: scale(.86); }
+.pk-vdots__d.on { background: rgba(20, 40, 46, .24); }
+html[data-theme="dark"] .pk-vdots__d.on { background: rgba(255, 255, 255, .28); }
+.pk-vdots__m { position: absolute; width: 5px; height: 5px; border-radius: 99px; background: #a9852f; box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); z-index: 1; }
+html[data-theme="dark"] .pk-vdots__m { background: #d4b36a; }
+.pk-vdots__m.is-move { animation: pk-vd-move .52s cubic-bezier(.3, 1.45, .5, 1) both, pk-vd-glow .6s ease-out both; }
+@keyframes pk-vd-move {
+  0% { transform: translate(var(--dx), var(--dy)) scale(1); }
+  35% { transform: translate(calc(var(--dx) * .45), calc(var(--dy) * .45)) scale(1.35, .8); }
+  100% { transform: none; }
+}
+@keyframes pk-vd-glow { 40% { box-shadow: 0 0 0 3px rgba(201, 162, 39, .28); } 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); } }
+.pk-vdots:hover .pk-vdots__m { transform: scale(1.18); transition: transform .15s; }
+@media (prefers-reduced-motion: reduce) { .pk-vdots__m.is-move { animation: none; } }
+/* أصغرُ قليلًا، والمسافةُ بين العلويّتين أقلّ */
+.pk-vdots { width: 16px; height: 12px; inset-inline-start: -1px; }
+.pk-vdots__d, .pk-vdots__m { width: 4px; height: 4px; }
+/* دوائرُ ‎3.5px‎ متقاربةٌ ككتلةٍ واحدة (اختيارُ صاحب الموقع) */
+.pk-vdots { height: 11px; }
+.pk-vdots__d, .pk-vdots__m { width: 3.5px; height: 3.5px; }
+/* الدوائرُ ‎SVG‎: مستديرةٌ دائمًا مهما كانت الكسور */
+.pk-vdots__s { display: block; width: 16px; height: 11px; overflow: visible; }
+.pk-vdots__s .pk-vdots__d { fill: rgba(20, 40, 46, .24); width: auto; height: auto; position: static; transition: fill .15s; }
+.pk-vdots:hover .pk-vdots__s .pk-vdots__d { fill: rgba(20, 40, 46, .42); }
+.pk-vdots__s .pk-vdots__m { fill: #a9852f; width: auto; height: auto; position: static; transform-box: fill-box; transform-origin: center; box-shadow: none; }
+html[data-theme="dark"] .pk-vdots__s .pk-vdots__d { fill: rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .pk-vdots:hover .pk-vdots__s .pk-vdots__d { fill: rgba(255, 255, 255, .5); }
+html[data-theme="dark"] .pk-vdots__s .pk-vdots__m { fill: #d4b36a; }
+.pk-vdots__s .pk-vdots__m.is-move { animation: pk-vd-move .52s cubic-bezier(.3, 1.45, .5, 1) both, pk-vd-glow2 .6s ease-out both; }
+@keyframes pk-vd-glow2 { 40% { filter: drop-shadow(0 0 1.6px rgba(201, 162, 39, .9)); } 100% { filter: none; } }
+.pk-vdots:hover .pk-vdots__s .pk-vdots__m { transform: scale(1.18); }
+@media (prefers-reduced-motion: reduce) { .pk-vdots__s .pk-vdots__m.is-move { animation: none; } }
+/* أقربُ إلى الأيقونة رأسيًّا (طلبُ صاحب الموقع) */
+.pk-vdots { top: 16px; }
+.pk-vdots { top: 14px; }
+/* ===== قوسُ طرق العرض على زاوية أيقونة الملخّص فوق يمين (اختيارُ صاحب الموقع) ===== */
+.pk-vdots.pk-varc { position: absolute; top: -6px; inset-inline-start: -6px; width: 30px; height: 30px; padding: 0; border: 0; background: none; pointer-events: none; z-index: 20; transform: none; }
+.pk-varc::after { display: none; }
+.pk-varc:active { transform: none; }
+.pk-varc__s { display: block; width: 30px; height: 30px; overflow: visible; fill: none; stroke-linecap: round; }
+.pk-varc__hit { stroke: transparent; stroke-width: 11; pointer-events: stroke; cursor: pointer; }
+.pk-varc__d { stroke: rgba(20, 40, 46, .26); stroke-width: 3.2; transition: stroke .15s; pointer-events: none; }
+.pk-varc:hover .pk-varc__d { stroke: rgba(20, 40, 46, .42); }
+.pk-varc__m { stroke: #a9852f; stroke-width: 3.4; pointer-events: none; }
+.pk-varc__m[data-move] { animation: pk-varc-move .5s cubic-bezier(.3, 1.35, .5, 1) both; }
+@keyframes pk-varc-move { from { stroke-dashoffset: var(--o0); } to { stroke-dashoffset: var(--o1); } }
+.pk-varc:hover .pk-varc__m { stroke-width: 3.8; }
+.pk-varc:active .pk-varc__m { stroke-width: 4.2; }
+html[data-theme="dark"] .pk-varc__d { stroke: rgba(230, 236, 239, .28); }
+html[data-theme="dark"] .pk-varc:hover .pk-varc__d { stroke: rgba(230, 236, 239, .48); }
+html[data-theme="dark"] .pk-varc__m { stroke: #d4b36a; }
+@media (prefers-reduced-motion: reduce) { .pk-varc__m[data-move] { animation: none; } }
+/* Summary view arc: a soft track always sits behind the three dashes; on hover the next dash takes a faint gold. */
+.pk-varc__bg { stroke: rgba(20, 40, 46, .07); stroke-width: 7; pointer-events: none; transition: stroke .15s; }
+.pk-varc:hover .pk-varc__bg { stroke: rgba(20, 40, 46, .14); }
+.pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(169, 133, 47, .5); }
+html[data-theme="dark"] .pk-varc__bg { stroke: rgba(230, 236, 239, .08); }
+html[data-theme="dark"] .pk-varc:hover .pk-varc__bg { stroke: rgba(230, 236, 239, .17); }
+html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 179, 106, .5); }
+/* زرُّ «صفحة واحدة ⇄ صفحتان» (تحت الكتاب وفي التذييل) */
+.cbk-nav__mode svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+/* والكتابُ لا يترك قاعَ مساحته لفجوة الأيقونات: الفجوةُ في المساحة اليسرى، وما دام بعده مساحةٌ فليست فيه (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--book:has(~ .kt-view, ~ .pk-bank) { padding-bottom: 6px; }
+/* ورأسُ مساحة المصادر (أيقونتُها في الزاوية) يطفو فوق الكتاب ولا يأخذ سطرًا من قامته (طلبُ صاحب الموقع) */
+#cm-body .pk-split > .pk-src--book { position: relative; }
+#cm-body .pk-split > .pk-src--book > .pk-blkh { position: absolute; top: 10px; inset-inline: 14px; margin: 0; z-index: 3; pointer-events: none; }
+#cm-body .pk-split > .pk-src--book > .pk-blkh > * { pointer-events: auto; }
+/* ===== طبقةُ النصّ فوق كتاب WebGL: كلماتُ الـPDF شفّافةً في مواضعها، تُحدَّد ولا تُرى (‎bkTLShow‎) ===== */
+.cbk-stage--gl { position: relative; }
+/* بلا ‎z-index‎: لا سياقَ تكديسٍ يعزل شرائطَ التحديد عن الكتاب تحتها، فتمتزج به (‎multiply‎) — والطبقةُ بعد اللوحة في الترتيب فتعلوها */
+.bk-tlbox { position: absolute; inset: 0; pointer-events: none; }
+.bk-tlbox[hidden] { display: none; }
+.bk-tl { position: absolute; overflow: hidden; line-height: 1; text-size-adjust: none; -webkit-text-size-adjust: none; forced-color-adjust: none; pointer-events: none; }
+.bk-tl span, .bk-tl br { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0% 0%; pointer-events: auto; }
+.bk-tl span.markedContent { top: 0; height: 0; }
+.bk-tl .endOfContent { display: block; position: absolute; inset: 100% 0 0; z-index: -1; cursor: default; user-select: none; }
+.bk-tl.selecting .endOfContent { top: 0; }
+.bk-tl ::selection { background: transparent; color: transparent; }
+.cbk-stage .bk-tl, .cbk-stage .bk-tl span { user-select: none; -webkit-user-select: none; }
+.bk-tl .bk-tl__ln { position: absolute; display: block; pointer-events: auto; cursor: text; }
+/* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
+.bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
+html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
+/* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
+.bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
+.bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
+/* ===== شريطُ الأرقام في التذييل: دوائرُ ممتلئةٌ ثمّ فارغةٌ للتالي ===== */
+.cx-hlbar { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 5px; border-radius: 999px; border: 1.5px solid var(--u-line); }
+.cx-hlc { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; cursor: pointer; box-sizing: border-box;
+  font: 700 11.5px/1 system-ui, sans-serif; color: #3a2c0b; background: var(--hc, #f3d27a); border: 1.5px solid rgba(120, 92, 25, .45);
+  transition: transform .15s, box-shadow .15s, background .15s; }
+.cx-hlc:hover { transform: scale(1.08); }
+.cx-hlc.is-next { background: transparent; border: 1.5px dashed var(--u-line); color: var(--u-muted, #5b6b72); }
+.cx-hlc.is-arm { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4.5px #a9852f; animation: cx-hlarm 1.6s ease-in-out infinite; }
+.cx-hlc.is-next.is-arm { border-style: solid; border-color: #a9852f; color: #a9852f; }
+.cx-hlc.is-in { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4px var(--u-ink, #14233f); }
+.cx-hlbar.has-cur .cx-hlc:not(.is-in) { opacity: .75; }
+.cx-hlbar.has-cur .cx-hlc:not(.is-in):hover { opacity: 1; }
+@keyframes cx-hlarm { 50% { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 6px rgba(169, 133, 47, .45); } }
+@media (prefers-reduced-motion: reduce) { .cx-hlc.is-arm { animation: none; } }
+.cx-hlmore { font-size: 11px; color: var(--u-muted, #5b6b72); padding-inline: 2px; }
+html[data-theme="dark"] .cx-hlc.is-arm, html[data-theme="dark"] .cx-hlc.is-in { --u-surf: #1b2529; }
+html[data-theme="dark"] .cx-hlc.is-in { box-shadow: 0 0 0 2.5px #1b2529, 0 0 0 4px #eef1f2; }
+html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
+/* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
+.bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
+/* الدوائرُ صفوفُ الجدول: صفٌّ بلا تظليلٍ دائرةٌ بحدٍّ فقط، والمربوطُ ممتلئٌ بلون التظليل، و«+» صفٌّ جديد. والشريطُ يُمرَّر أفقيًّا إن كثرت */
+.cx-hlbar { max-width: min(44vw, 440px); overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.cx-hlbar::-webkit-scrollbar { display: none; }
+.cx-hlc { flex: none; }
+.cx-hlc.is-row { background: transparent; border: 1.5px solid var(--u-line); color: var(--u-ink, #14233f); }
+.cx-hlc.is-next { font-size: 14px; }
+html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
+/* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
+.kt-num.has-hl { background: #f3d27a; color: #3a2c0b; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
+.kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }
+/* ===== المساحاتُ في المساهمة الضيّقة بقامةٍ ثابتة (طلبُ صاحب الموقع) =====
+   كانت القسمةُ تأخذ قامتَها من محتوى جيرانها، فتتبدّل مع تبديل عرض الملخّص (شجريّ · بطاقيّ · جدوليّ)، وتنضغط إن قصُر جارٌ
+   («لا يوجد ملخص») أو انعدم (الكتابُ وحده). فلها الآن قامةٌ واحدةٌ على قدر الشاشة في التحرير والنشر، والمساحاتُ تمتدّ إليها،
+   وما طال من محتواها يُمرَّر في داخلها */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) { height: clamp(440px, 60vh, 600px); box-sizing: border-box; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view, .pk-bank, .pk-src) { min-height: 0; max-height: 100%; box-sizing: border-box; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view--table, .kt-view--cards, .pk-bank) { overflow-y: auto; overscroll-behavior: contain; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { flex: 1 1 auto; height: auto; min-height: 0; }

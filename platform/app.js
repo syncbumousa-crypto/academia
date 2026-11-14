@@ -242,6 +242,48 @@
   state.lang = state.lang === 'en' ? 'en' : 'ar';
   state.terms = Array.isArray(state.terms) ? state.terms : [];
   state.libs = state.libs || {};             // { اسم الترم: [{code, picks}] } — picks = اختيارات «نسختي» (ROADMAP-PICKS)
+  /* ===== Merged courses: one course that changed its code between plans =====
+     The old code is gone from the catalog; its data lives under the new code, and the old code is
+     shown under the name, small and faded ("before ACCT 314"). A plan that still holds the old code
+     is moved to the new one here, once per load; the student's own unsent contributions follow it.
+     Lists that came from the server are not carried: the server already holds them under the new code. */
+  const COURSE_PREV = { 'ACCT 303': 'ACCT 314', 'ACCT 306': 'ACCT 408', 'ACCT 404': 'ACCT 311', 'PHYS 300': 'PHYS 301', 'EE 307': 'EE 406' };
+  const COURSE_NEXT = {}; Object.keys(COURSE_PREV).forEach(n => { COURSE_NEXT[COURSE_PREV[n]] = n; });
+  {
+    let moved = 0;
+    const codeOf = e => (typeof e === 'string' ? e : (e && e.code));
+    Object.keys(state.libs).forEach(t => {
+      const arr = state.libs[t]; if (!Array.isArray(arr) || !arr.some(e => COURSE_NEXT[codeOf(e)])) return;
+      const seen = new Set();
+      state.libs[t] = arr.map(e => {
+        const n = COURSE_NEXT[codeOf(e)]; if (!n) return e;
+        moved++; return typeof e === 'string' ? n : Object.assign({}, e, { code: n });
+      }).filter(e => { const c = codeOf(e); if (seen.has(c)) return false; seen.add(c); return true; });
+    });
+    const ci = state.cinfo || {};
+    Object.keys(COURSE_NEXT).forEach(o => {
+      if (!ci[o]) return;
+      const n = COURSE_NEXT[o], from = ci[o].posts || {};
+      Object.keys(from).forEach(sec => {
+        if (sec === 'doc') return;
+        const mine = (from[sec] || []).filter(p => p && p.me);
+        if (!mine.length) return;
+        const to = ci[n] || (ci[n] = {}), tp = to.posts || (to.posts = {});
+        tp[sec] = (tp[sec] || []).concat(mine.filter(p => !(tp[sec] || []).some(x => x && x.id === p.id)));
+      });
+      delete ci[o]; moved++;
+    });
+    if (moved) state.mergedCodes1 = Date.now();
+  }
+  function coursePrevHTML(code) {
+    const o = COURSE_PREV[code]; if (!o) return '';
+    const sp = o.indexOf(' '), dept = o.slice(0, sp), num = o.slice(sp + 1);
+    const ar = state.lang === 'ar';
+    /* the Arabic department word comes from the new course's own short name (same department) */
+    const arPre = ((CM[code] || {}).arName || '').replace(/\s*\d+\s*$/, '');
+    const lab = ar ? (arPre || (typeof DEPT_AR !== 'undefined' && DEPT_AR[dept]) || dept) : dept;
+    return '<span class="cprev">' + (ar ? '\u0633\u0627\u0628\u0642\u064b\u0627 ' : 'before ') + esc(lab + ' ' + num) + '</span>';
+  }
   state.termDates = state.termDates || {};   // { اسم الترم: { s: 'YYYY-MM-DD', e: 'YYYY-MM-DD' } }
   state.pid = state.pid || 0;                // عدّاد معرفات المساهمات الثابتة
   /* ============================================================
@@ -584,8 +626,44 @@
     return '<b>' + esc(lab) + '</b><i>' + esc(num) + '</i>';
   }
   /* ‎o = { size: 'xs'|'lg'|'' , inner: وسمٌ داخل الوجه , after: وسمٌ أخو الوجه }‎ */
-  function bookHTML(code, img, o) {
-    const op = o || {};
+  /* ============================================================
+     Training badges: summer training (x399), co-op / internship (x398) and the senior
+     (graduation) project wear an employee badge instead of a book. Same size and place in
+     the shelf as a book; colours and icons live in shared/styles.css (.bk--badge).
+     The graduation project has no common number (411/412, 413/414, 477/478, 410/412 ...),
+     so it is an explicit list taken from the course names in the bulletin.
+     ============================================================ */
+  const BADGE_GRAD = new Set(('ACCT 477|ACCT 478|ACF 411|ACF 412|AE 411|AE 412|ARE 411|ARE 412|AS 411|AS 412|BAI 411|BAI 412|'
+    + 'BIOE 411|BIOE 412|CE 410|CE 412|CHE 411|CHE 412|CIE 411|CIE 413|COE 411|COE 412|DATA 411|DATA 412|DSMM 411|DSMM 412|'
+    + 'EE 411|EE 412|ENTR 411|ENTR 412|ESE 411|ESE 412|FFE 411|FFE 412|FIN 477|FIN 478|GEOL 411|GEOL 412|GEOP 411|GEOP 412|'
+    + 'ICS 413|ICS 414|ISE 411|ISE 412|MATH 413|MATH 414|ME 411|ME 412|MINE 411|MINE 412|MSE 411|MSE 412|OSC 411|OSC 412|'
+    + 'PETE 411|PETE 412|PHYS 411|PHYS 412|SWE 413|SWE 414').split('|'));
+  function badgeKind(code) {
+    const c = String(code || '');
+    if (/ 399$/.test(c)) return 's';
+    if (/ 398$/.test(c)) return 'c';
+    return BADGE_GRAD.has(c) ? 'g' : '';
+  }
+  const BADGE_ICON = {
+    s: '<circle cx="50" cy="50" r="19" fill="currentColor"/>' + [0, 1, 2, 3, 4, 5, 6, 7].map(i => {
+      const a = i * Math.PI / 4, c = Math.cos(a), s = Math.sin(a);
+      return '<line x1="' + (50 + c * 32) + '" y1="' + (50 + s * 32) + '" x2="' + (50 + c * 40) + '" y2="' + (50 + s * 40)
+        + '" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>';
+    }).join(''),
+    c: '<g transform="rotate(-22 50 50)"><path d="M4 50 A46 13 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="7"/></g>'
+      + '<circle cx="50" cy="50" r="27" fill="currentColor"/>'
+      + '<g transform="rotate(-22 50 50)"><path d="M4 50 A46 13 0 0 0 96 50" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></g>',
+    g: '<polygon points="50,24 92,42 50,60 8,42" fill="currentColor"/>'
+      + '<path d="M50 42 L82 50 V68" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>'
+      + '<circle cx="82" cy="72" r="5" fill="currentColor"/>',
+  };
+  function badgeHTML(code, kind, op, sz) {
+    return '<span class="bk' + sz + ' bk--ph bk--badge bk--b-' + kind + '"><span class="bkface">'
+      + '<span class="bg-band"></span><svg class="bg-wm" viewBox="0 0 100 100" aria-hidden="true">' + BADGE_ICON[kind] + '</svg>'
+      + (kind === 'g' ? '<span class="bg-shine"></span>' : '')
+      + bookFace(baseOf(code)) + (op.inner || '') + '</span><span class="bg-clip"></span>' + (op.after || '') + '</span>';
+  }
+  function bookHTML(code, img, o) {    const op = o || {};
     const sz = op.size ? ' bk--' + op.size : '';
     const inner = op.inner || '';
     /* ‏‎this.parentNode.remove()‎ لا ‎this.remove()‎: يُنزع الوجهُ المصوَّر كلُّه
@@ -597,6 +675,8 @@
        فتُقلب الطبقتان: الصورةُ في السَّيل تعطي القدَّ، والمرسومُ **خلفها** يملأ
        ما تحتها فيُرى قبل أن تصل. وإن سقطت نُزع صنفُ ‎bk--img‎ فعاد المرسومُ إلى
        السَّيل وأعطى القدَّ — فلا ينهار الصندوق. */
+    const bkind = badgeKind(baseOf(code));
+    if (bkind) return badgeHTML(code, bkind, op, sz);
     const face = '<span class="bkface">' + bookFace(baseOf(code)) + (img ? '' : inner) + '</span>';
     const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
                + ' this.parentNode.remove()';
@@ -977,7 +1057,11 @@
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
   let saveBad = false, lastCore = '';
+  /* saveHold: a pass over many courses (the admin boot publish) saves once at the end, not once per course --
+     each save serialises the whole state, and ~800 of them froze the panel for minutes. */
+  let saveHold = 0, saveLate = false;
   const save = () => {
+    if (saveHold) { saveLate = true; return; }
     /* ===== ودرجٌ لم يُقرأ لا يُكتب =====
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
@@ -1113,7 +1197,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'اضغط ثم ظلّل — ما تظلّله يدخل {n}', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1141,7 +1225,7 @@
       teach: 'الشرح', grade: 'سخاء وعدل تصحيحه', gradeS: 'سخاء وعدل تصحيحه',
       days: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       daysShort: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس'],
-      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم',
+      gradeSec: 'توزيع الدرجات', methodLabel: 'طريقة التقييم', gradeNotePh: 'ملاحظة عن الدرجات: سلّم التقديرات، درجة كل سؤال… (اختياري)',
       distTitle: 'توزيع الدرجة (100%)', distShort: 'توزيع الدرجة', addItem: 'إضافة بند', itemPh: 'اسم البند…',
       remaining: n => `المتبقي ${n}%`, complete: 'اكتمل التوزيع ✓',
       absSec: 'الغياب والتأخير', subAbsence: 'الغياب', subLate: 'التأخير', absPolicy: 'سياسة الغياب والتأخير', expandPost: 'توسيع', collapsePost: 'طيّ',
@@ -1584,7 +1668,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Press, then highlight — highlights go to {n}', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -1603,7 +1687,7 @@
       teach: 'Teaching', grade: 'Grading generosity & fairness', gradeS: 'Grading generosity & fairness',
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
       daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
-      gradeSec: 'Grade breakdown', methodLabel: 'Grading method',
+      gradeSec: 'Grade breakdown', methodLabel: 'Grading method', gradeNotePh: 'A note on grading: grade scale, points per question… (optional)',
       distTitle: 'Grade breakdown (100%)', distShort: 'Grade breakdown', addItem: 'Add item', itemPh: 'Item name…',
       remaining: n => `${n}% left`, complete: 'Fully allocated ✓',
       absSec: 'Absence & lates', subAbsence: 'Absence', subLate: 'Lates', absPolicy: 'Absence & lateness policy', expandPost: 'Expand', collapsePost: 'Collapse',
@@ -2067,7 +2151,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         ? `<span class="prep">${T().prepBadge}</span>` : '';
       return `<div class="crow bundle ${bAdded ? 'is-added' : ''}"${bAttrs}>
         <span class="bundle-books">${bundleBookHTML(c, 'محاضرة', bStat('محاضرة'))}${bundleBookHTML(c, 'معمل', bStat('معمل'))}</span>
-        <span class="cname" title="${esc(c.ar)}">${name}</span>
+        <span class="cname" title="${esc(c.ar)}">${name}</span>${coursePrevHTML(c.code)}
         <span class="chours">${c.h}<span class="hu">${T().hUnit}</span></span>
         ${bPrep}
       </div>`;
@@ -2101,7 +2185,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ? `<span class="prep">${T().prepBadge}</span>` : '';
     return `<div class="crow ${added ? 'is-added' : ''}"${attrs}>
       ${imgBox}
-      <span class="cname" title="${esc(c.ar)}">${name}</span>
+      <span class="cname" title="${esc(c.ar)}">${name}</span>${coursePrevHTML(c.code)}
       <span class="chours">${c.h}<span class="hu">${T().hUnit}</span></span>
       ${prep}
     </div>`;
@@ -2352,7 +2436,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
     const qHit = c => {
       const q = query.trim();
-      return !q || c.code.toLowerCase().includes(q.toLowerCase()) || c.ar.includes(q) || arShort(c).includes(q);
+      return !q || c.code.toLowerCase().includes(q.toLowerCase()) || c.ar.includes(q) || arShort(c).includes(q) || (COURSE_PREV[c.code] || '').toLowerCase().includes(q.toLowerCase());
     };
     function render() {
       csMemo.clear();   /* حالُ المواد تُقرأ من جديد: ما حُفظ كان لرسمةٍ مضت */
@@ -4333,7 +4417,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     switch (sec) {
       case 'info':  return { desc: '', type: '', rel: 0, lang: '', book: '' };   // «المادة»: النوعية + اللغة + الترابط + اسم الكتاب + الوصف
       case 'doc':   return { docs: [] };
-      case 'grade': return { method: 'avg', items: [] };
+      case 'grade': return { method: 'avg', items: [], note: '' };   // ‎note‎: كلامٌ عن الدرجات لا يُجدول نِسَبًا
       case 'abs':   return { free: 0, dedFrom: 0, dedAmt: 0, dn: 0, late: 0 };   // الغياب والتأخير معًا
       case 'srcU':  case 'srcP': return { html: '', files: {} };
       case 'lessons': return { items: [] };   // درس: {num: رقم الشابتر, name: اسمه} والترتيب = موقعه
@@ -4538,16 +4622,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function docLink(p, row) {
     if (!p || !row || p.data === row) return 0;
     const old = p.data || {};
+    let ch = 0;
     DOC_WIRE.forEach(k => {
       const v = old[k], cur = row[k];
       const bare = cur === undefined || cur === '' || cur === 0
                 || (Array.isArray(cur) && !cur.length);
       const has = v !== undefined && v !== '' && v !== 0
                && !(Array.isArray(v) && !v.length);
-      if (bare && has) row[k] = v;
+      if (bare && has) { row[k] = v; ch = 1; }
     });
+    /* After a reload the post and its row are two equal copies: relinking them changes nothing, so it is not a
+       hit. Counting it made every doctor a change on every pass -- a full save and push per course. */
+    const same = !ch && JSON.stringify(old) === JSON.stringify(row);
     p.data = row;
-    return 1;
+    return same ? 0 : 1;
   }
 
   function docAbsorb(code, info, seen) {
@@ -4573,7 +4661,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (!mine && post.uid && d.id && seen) seen[d.id] = 1;
         /* ومن جاء بلا معرّفٍ فمن نموذجٍ أقدم: يُعرَّف بالاسم مرّةً ثمّ يحمل معرّفَه */
         let dr = (d.id && info.doctors.find(x => x.id === d.id))
-              || info.doctors.find(x => !x.id && x.name === (d.n || ''));
+              || info.doctors.find(x => (!x.id || !d.id) && x.name === (d.n || ''));   /* id-less row: match by name, never spawn a new doctor each pass */
         if (!dr) {
           dr = { id: d.id || newId(), name: d.n || '', en: d.en || '', img: d.img || '',
                  me: mine, u: post.u || { name: T().docByAnon },
@@ -4589,6 +4677,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (!dr.fromId && d.fromId) { dr.fromId = d.fromId; hit++; }
           if (!dr.by && d.by) { dr.by = d.by; hit++; }
         }
+        /* Published: this row came from the server, so the panel need not publish it again (see dr.pub). */
+        if (d.id && dr.id === d.id && !dr.pub && (post.srv || post.srvH)) { dr.pub = 1; hit++; }
         /* ===== ومساهمتي تُوصَل ولا تُنسخ =====
            النسخُ ههنا يردّ ما كُتب قبل أن يُدفع. والوصلُ لازمٌ في هذا الموضع
            بعينه: متصفّحٌ جديدٌ يستقبل مساهمتي من الخادم ولا مساهمةَ محلّيّةً
@@ -4656,7 +4746,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const rows = (((coursePosts(code).doc || []).find(isMine) || {}).data || {}).docs || [];
       info.doctors.forEach(dr => {
         if (!dr.id) { dr.id = newId(); hit++; }
-        if (seen[dr.id]) return;
+        if (seen[dr.id] || dr.pub) return;   /* dr.pub: its row is on the server (set on push / absorb); an edit clears it */
         if (!rows.some(x => x && x.id === dr.id)) { docRow(code, dr); hit++; }
       });
     }
@@ -4745,16 +4835,39 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الدرجَ بنفسه: مادّةٌ فيها دكاترةٌ تُقرأ فتُفتح لهم صفوفُهم، ثمّ يُدفع.
      ومرّتان: الأولى للدرج المحفوظ، والثانية لِما وصل من الحساب بعده.
      ولا ضررَ في التكرار: ‎doctorsOf‎ لا تفتح صفًّا موجودًا. */
+  /* Every course with doctors, in one pass: one save at the end and one push sweep, not one per course. */
+  window.acDocPubAll = () => {
+    let n = 0, bad = 0;
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
+    if (n && typeof srvPushSoon === 'function') srvPushSoon();
+    if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
+    return n;
+  };
   if (ADMIN) [2500, 9000].forEach(ms => setTimeout(() => {
     /* ===== والحارسُ حول المادّة الواحدة لا حول المسح كلِّه =====
        كان ‎try‎ يلفّ الحلقةَ، فمادّةٌ واحدةٌ تُلقي تُسقط كلَّ ما بعدها صامتةً —
        ولا يُرى منها إلّا أنّ بعضَ المواد نُشرت وبعضَها لا، بلا قاعدةٍ تُفهم.
        فيُلَفّ كلٌّ بحارسه: ما سقط سقط وحدَه، ويُعدّ الساقطُ في الدفتر */
     let n = 0, bad = 0;
-    Object.keys(state.cinfo || {}).forEach(code => {
-      if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
-      try { doctorsOf(code); n++; } catch (e) { bad++; }
-    });
+    saveHold++;
+    try {
+      Object.keys(state.cinfo || {}).forEach(code => {
+        if (!(((state.cinfo[code] || {}).doctors) || []).length) return;
+        try { doctorsOf(code); n++; } catch (e) { bad++; }
+      });
+    } finally {
+      saveHold--;
+      if (!saveHold && saveLate) { saveLate = false; save(); }
+    }
     if (n && typeof srvPushSoon === 'function') srvPushSoon();
     if ((n || bad) && typeof bootMark === 'function') bootMark('docPub:' + n + '/' + bad);
   }, ms));
@@ -5182,7 +5295,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       walk(root);
     }
     if (!flat && isLong) host.insertAdjacentHTML('beforeend', inlineTogHTML(open));
-    return box.innerHTML;
+    return impQ(box.innerHTML);
   }
   /* ملء شرائح html من خريطة files — للعرض في المحرّر */
   function srcFillChips(html, files, area) {
@@ -5304,6 +5417,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* شريط توزيع الدرجة + اسم كل بند عند لونه، متناوبًا فوق البار وتحته (يمين→يسار: الأول تحت، الثاني فوق، …)
      لمنع التداخل. صفّا التسميات (علوي/سفلي) يطابقان عرض الشرائح فيحاذي كلٌّ لونه، تصله ساق ملوّنة */
+  /* ملاحظةُ التقييم (‎data.note‎): كلامٌ عن الدرجات لا يصير جدولَ نِسَب — سلّمُ تقديرات، درجةُ كلّ سؤال،
+     بنيةُ اختبار. نصٌّ كما كُتب، تحت الشريط إن وُجد وحدَه إن لم يوجد */
+  function gNoteHTML(note) {
+    const t = String(note || '').trim();
+    return t ? `<div class="gnote" dir="auto">${impQ(esc(t))}</div>` : '';
+  }
+  /* ===== اقتباسُ السؤال في المنقول =====
+     مساهمةٌ نُقلت من محادثة (تيليقرام) كانت ردًّا، ولا تُفهم بلا سؤالها. فيسبقها في متنها سطرُ السؤال
+     بين علامتين غير مرئيّتين (‎U+2063‎)، ويُرسم هنا اقتباسًا فوق كلام الكاتب — فلا يُظنّ من كلامه.
+     يُطبَّق على نصٍّ **بعد** ‎esc‎ أو على ‎html‎ منظَّف، والاقتباسُ سطرٌ واحد بلا وسوم. ومن لم يمرّ
+     بهذه الدالّة من العروض يقرأ السطر نصًّا أوّلُه «↩» — يُفهم ولا ينكسر. والقصُّ قد يقطع علامةَ
+     الإغلاق، فنهايةُ النصّ تُغلقه */
+  const IMPQ_RE = /⁣([^⁣<]*)(?:⁣|(?=<)|$)(?:\n|<br\s*\/?>)?/g;
+  function impQ(html) {
+    const h = String(html == null ? '' : html);
+    return h.indexOf('⁣') < 0 ? h : h.replace(IMPQ_RE, (m, q) => `<span class="imp-q">${q.charCodeAt(0) === 8617 ? q.slice(1).trimStart() : q}</span>`);
+  }
   function gDistHTML(items) {
     const rem = Math.max(0, 100 - items.reduce((s, x) => s + x.pct, 0));
     const segs = items.map((x, i) =>
@@ -5411,8 +5541,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
-        return gDistHTML(items) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
+        return gDistHTML(items) + gNoteHTML(d.note) + `<div class="cm-row" style="margin-top:12px"><span class="cm-k">${T().methodLabel}:</span><span class="v-badge v-badge--g" style="margin-inline-start:8px">${d.method === 'avg' ? 'Average' : 'Standard'}</span></div>`;
       }
       case 'abs': {
         const A = d;
@@ -5507,9 +5637,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       case 'grade': {
         const items = d.items || [];
-        if (!items.length) return none;
+        if (!items.length) return d.note ? gNoteHTML(d.note) : none;
         /* توزيع الدرجة أولًا، ثم طريقة التقييم أسفله */
-        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) +
+        return `<p class="pb-row"><span class="cm-k">${T().distTitle}:</span></p>` + gDistHTML(items) + gNoteHTML(d.note) +
           kv(T().methodLabel + ':', `<span class="v-badge v-badge--g">${d.method === 'avg' ? 'Average' : 'Standard'}</span>`);
       }
       case 'abs': {
@@ -5559,7 +5689,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function isEmptyData(sec, d) {
     switch (sec) {
       case 'info':  return !d.desc && !d.type && !(d.rel > 0) && !d.lang && !d.book;
-      case 'grade': return !(d.items && d.items.length);
+      case 'grade': return !(d.items && d.items.length) && !String(d.note || '').trim();
       case 'abs':   return !(d.free || d.dedFrom || d.dedAmt || d.dn || d.late);
       case 'srcU':  case 'srcP': {
         const doc = srcDocOf(d);
@@ -5691,7 +5821,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       /* سهم التوسيع إنلاين آخر النص (مثل «المادة») — لا يُرسم إلا حين يكون الانطباع مقصوصًا فعلًا */
       const inlineTog = (flat || !isLong) ? '' : inlineTogHTML(open);
-      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? esc(shownDesc) : ''}${inlineTog}</span>`;
+      const descHTML = `<span class="peek-tx peek-descflow"${fullDesc ? dg('d') : ''}>${fullDesc ? impQ(esc(shownDesc)) : ''}${inlineTog}</span>`;
       if (!items.length && !fullDesc) return `<span class="peek-tx peek-none">${T().noData}</span>`;
       /* الشارات = عناصر flex بعرض محتواها؛ تنمو بالتساوي لملء صفّها (justify).
          «الحشوة» تمتصّ فراغ الصفّ الأخير فلا يتمدّد، والانطباع صفّ كامل العرض تحته */
@@ -5864,7 +5994,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* «لا توجد معلومات» تظهر فقط إذا خلَت المساهمة من كل شيء — لا مع مساهمة فيها شارات (كغلاف كتاب) */
         const chipsHTML = infoChips(dd);
         const txHTML = fullDesc
-          ? `<span class="peek-tx">${esc(shownDesc)}</span>`
+          ? `<span class="peek-tx">${impQ(esc(shownDesc))}</span>`
           : (chipsHTML ? '' : `<span class="peek-tx peek-none">${T().noData}</span>`);
         /* السهم للنصّ وحده: لا يُرسم إلا حين يوجد نصٌّ مقصوص فعلًا (وإلا فلا شيء يوسّعه) */
         const inlineTog = isLong ? inlineTogHTML(open) : '';
@@ -5886,7 +6016,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const distChip = `<span class="v-badge v-badge--g grade-chip"><i class="v-lab">${T().distShort}</i>${gItems.length ? `<span class="grade-chip__bar">${gBarHTML(gItems)}</span>` : `<b class="v-val">—</b>`}</span>`;
         const methodChip = gd.method ? `<span class="v-badge v-badge--g"><i class="v-lab">${T().methodLabel}</i><b class="v-val">${gd.method === 'avg' ? 'Average' : 'Standard'}</b></span>` : '';
         /* بلا سهم: المستطيلان يعرضان كل ما في المساهمة، فلا نصّ وراءهما يُوسَّع */
-        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>`;
+        content = `<div class="pk-head"><div class="fold-peek pk-gradebody">${distChip}${methodChip}</div></div>${gNoteHTML(gd.note)}`;
       }
       return `<div class="post pk pk--fold pk--info${open ? ' pk--open' : ''} pk--peek" ${dataAttr}>
         <div class="post-yt">
@@ -5943,6 +6073,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لا يدخل أحدٌ به. */
   const IMP_SRC = {
     stkfupm: { n: 'STKFUPM', logo: 'assets/brand/stkfupm-logo.svg', t: 'منقولة من مجتمع STKFUPM' },
+    telegram: { n: 'Telegram', logo: 'assets/brand/telegram-logo.svg', t: 'منقولة من قروب تيليقرام' },
   };
   function impBadge(p) {
     const im = p && p.data && p.data.imp;
@@ -6161,6 +6292,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${mdropHTML('gmethod', 'gmethod', g.method || 'avg', [['avg', 'Average'], ['std', 'Standard']])}
           </span>
         </div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(g.note || '')}</textarea>
       </div>`;
     return `<div class="post pk pk--peek pk--edit" data-pi="${i}" data-sub="grade">
       <div class="post-yt">
@@ -6706,6 +6838,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
+    try { return renderCmSection0(); } finally { try { hlAfterRender(); } catch (e) {} }
+  }
+  function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
@@ -6879,7 +7014,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           <span class="cm-k">${T().distTitle}</span>
           <button type="button" class="cm-adddoc" id="cm-additem" title="${T().addItem}">+</button>
         </div>
-        <div id="cm-gbody"></div>`;
+        <div id="cm-gbody"></div>
+        <textarea id="cm-gnote" class="chipe-in chipe-in--desc gnote-in" rows="2" dir="auto" placeholder="${T().gradeNotePh}">${esc(gradingOf(cmCode).note || '')}</textarea>`;
       case 'abs': return `
         <p class="cm-sec__t">${T().absSec}</p>
         <div id="cm-abs"></div>`;
@@ -9327,33 +9463,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     card: '<rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M12 9v6M9 12h6"/>',
   };
   const pkActB = (attr, ic, tip, cls = '') => `<button type="button" class="cx-actb${cls}" ${attr} title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></button>`;
+  /* زرُّ «صفحة واحدة ⇄ صفحتان» في التذييل — لكتاب WebGL وحده (القديمُ يختار بعرضه) */
+  function pkActHl(id) { try { return pkActMode() ? hlBarHTML(id) : ''; } catch (e) { return ''; } }
+  function pkActMode() { try { if (bk2No || window.AC_BOOK2 === false) return ''; } catch (e) { return ''; } return bkModeBtn('cx-actb cx-actmode', 'data-actbk="mode"'); }
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
     if (!a) return pub ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* لا نشِطة: لا أدوات */
     /* وفي النشر بلا مصادر: لا كتابَ يُقلَّب، فلا أدواتَ له (كانت أزرارُ التقليب تظهر دوائرَ خاوية) */
-    if (a === 'book' && pub && !pkSrcMeta(id)) return '';
-    if (a === 'book' && !pub && !pkSrcMeta(id)) return pkActB(`data-pksrcpick data-pkid="${esc(id)}"`, PK_ACT_IC.plus, T().pkSrcBtn, ' cx-actb--gold');
+    if (a === 'book' && pub && !pkSrcAny(id)) return '';
+    /* والإضافةُ مستطيلٌ بزوايا مستديرة ونصُّه بحسب المساحة الملموسة (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» */
+    if (a === 'book' && !pub && !pkSrcAny(id)) return pkAddPill(`data-pksrcpick data-pkid="${esc(id)}"`, T().pkAddFirstSrc);   /* الإضافةُ الأولى في التذييل (طلبُ صاحب الموقع) */
     if (a === 'book') {
-      const b = pkSrcBk[id], ind = b && b.ind ? b.ind.textContent : '';
+      const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
+      /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
+      if (!pub) return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActMode() + pkActHl(id) + '<span class="cx-srcsep"></span>' + `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcHd(id, true)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
-        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose);
+        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
+        + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
     if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;
     /* ومقسومُ «قائمة · رحلة» يخصّ شجرةَ البنك وحدها: في الخانة مع أدواته، ولا يظهر إلّا والبنكُ نشِط (طلبُ صاحب الموقع) */
     /* والمقسومُ يسارَ «+» (بعده في الترتيب)، ولا يظهر إلّا وفي البنك شيء (طلبُ صاحب الموقع) */
-    if (a === 'bank') return pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]])
+    if (a === 'bank' && !((cardDataRaw(cmCode) || {}).qb || []).length) return pkAddPill('data-actqb="c"', T().pkAddFirstQ) + cxJrSeg(cardData(cmCode));
+    if (a === 'bank') return pkPlus([['data-actqb="f"', PK_ACT_IC.fold, T().pkPlusQF], ['data-actqb="c"', PK_ACT_IC.card, T().pkPlusQC]], T().pkAddMore)
       + cxJrSeg(cardData(cmCode));   /* يُخفى بالأنماط ما دام البنكُ فارغًا: فيظهر حالَ الإضافة بلا إعادة رسم */
     /* والملخّصُ بلا مجلدات (الاستقبال): «+» يضيف مجلدًا مباشرةً بلا خيارين (طلبُ صاحب الموقع) */
-    if (!pub && !((cardDataRaw(cmCode) || {}).deck || []).length) return `<span class="cx-plus"><button type="button" class="cx-midadd cx-plus__tg" data-actkf title="${esc(T().pkPlusKF)}" aria-label="${esc(T().pkPlusKF)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></span>`;
-    return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC]]);
+    if (!pub && !((cardDataRaw(cmCode) || {}).deck || []).length) return pkAddPill('data-actkf', T().pkAddFirstFold);
+    return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC]], T().pkAddMore);
   }
   /* ===== «+» واحدٌ في الوسط ينفتح عن خيارين (طلبُ صاحب الموقع) =====
      في المعرفة: مجلدُ معرفة · بطاقةُ معرفة — وفي البنك: مجلدُ أسئلة · بطاقةُ مسألة. يطفوان فوقه، ويُطويان
      باختيار أحدهما أو بنقرٍ خارجه أو ‎Esc‎ */
-  const pkPlus = items => `<span class="cx-plus">
+  const PK_PLUS_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  const pkAddPill = (attr, lab) => `<span class="cx-plus"><button type="button" class="cx-midadd cx-plus__tg cx-addpill" ${attr} title="${esc(lab)}">${PK_PLUS_SVG}<span>${esc(lab)}</span></button></span>`;
+  const pkPlus = (items, lab) => `<span class="cx-plus">
       <span class="cx-plus__menu" role="menu">${items.map(([attr, ic, lab]) => `<button type="button" class="cx-plus__it" role="menuitem" ${attr}><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg><span>${esc(lab)}</span></button>`).join('')}</span>
-      <button type="button" class="cx-midadd cx-plus__tg" data-plus aria-expanded="false" title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+      <button type="button" class="cx-midadd cx-plus__tg${lab ? ' cx-addpill' : ''}" data-plus aria-expanded="false" title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}">${PK_PLUS_SVG}${lab ? `<span>${esc(lab)}</span>` : ''}</button>
     </span>`;
   const pkPlusClose = except => document.querySelectorAll('#cm-body .cx-plus.is-open').forEach(x => { if (x !== except) { x.classList.remove('is-open'); const t = x.querySelector('[data-plus]'); if (t) t.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => {
@@ -9405,6 +9551,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pane) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
     if (!ctl) return;
+    /* لمسُ أحد المصادر يجعله الملموسَ: إطارُه، وأدواتُه في التذييل */
+    const sl = e.target.closest('[data-pksid]');
+    if (sl && pkSrcCurOf(ctl.dataset.pkid) !== sl.dataset.pksid) {
+      const id = ctl.dataset.pkid;
+      pkSrcCur[id] = sl.dataset.pksid;
+      if (pane.classList.contains('pk-src--multi')) pane.querySelectorAll('.pk-src__list > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === sl));
+      const t = post.querySelector('.cx-acttools');
+      if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
+    }
     pkActSet(post, ctl.dataset.pkid, pane.classList.contains('pk-src') ? 'book' : pane.classList.contains('pk-bank') ? 'bank' : 'mid');
   };
   /* على النافذة قبل المستند: محرّراتُ الجوف (اللوحُ والجدولُ والشجرة) قد توقف الحدثَ في طور الالتقاء على المستند */
@@ -9418,7 +9573,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     const post = (bk || qb).closest('.post');
     if (bk) {
-      const v = bk.dataset.actbk, t = post && post.querySelector(v === 'close' ? '.pk-split [data-bkclose]' : `.pk-split [data-bknav="${v}"]`);
+      /* والتقليبُ للمصدر الملموس (أكثرُ من مصدر) */
+      const ctl = post && post.querySelector('[data-pkview][data-pkid]'), s = ctl && pkSrcCurOf(ctl.dataset.pkid);
+      const root = (s && post.querySelector(`.pk-split [data-pksid="${CSS.escape(s)}"]`)) || (post && post.querySelector('.pk-split')) || post;
+      const v = bk.dataset.actbk, t = root && root.querySelector(v === 'close' ? '[data-bkclose]' : v === 'mode' ? '[data-bkmode]' : `[data-bknav="${v}"]`);
       if (t) t.click();
       return;
     }
@@ -9603,8 +9761,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);
   /* ومؤشّرُ الصفحة في الخانة يتبع الكتاب */
   const pkActInd = b => {
+    const sid = b && b.key ? String(b.key).replace(/^pksrc:/, '') : null;
+    if (sid && pkSrcCurOf(pkSrcBase(sid)) !== sid) return;   /* مؤشّرُ المصدر الملموس وحده */
     const post = b && b.view && b.view.closest('.post'), el = post && post.querySelector('[data-actind]');
     if (el && b.ind) el.textContent = b.ind.textContent;
+  };
+  /* ===== ثلاثُ نقاطٍ تحت أيقونة الملخّص: كلُّ نقطةٍ طريقةُ عرض (شجريّ · بطاقيّ · جدوليّ) والذهبيّةُ الحاليّة (طلبُ صاحب الموقع)
+     — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
+  /* نقطتان فوق ونقطةٌ تحتهما، والضغطُ في أيّ موضعٍ منها ينقل إلى العرض التالي (طلبُ صاحب الموقع) — زرٌّ واحدٌ بـ‎data-pkview‎ التالي.
+     والذهبيّةُ علامةٌ مستقلّةٌ تنزلق من نقطة العرض السابق إلى الجديد بحركةٍ مرنة (‎pkVdPrev‎ يحفظ السابق) */
+  /* ===== قوسٌ على زاوية أيقونة الملخّص فوق يمين: ثلاثُ قطعٍ لطرق العرض، والذهبيّةُ الحاليّة (اختيارُ صاحب الموقع) =====
+     ربعُ دائرةٍ حول الأيقونة (من أعلاها إلى يمينها) مقسومٌ أثلاثًا. والذهبيّةُ قطعةٌ واحدةٌ تدور على المركز إلى ثلثها
+     فتنزلق على القوس انزلاقًا (‎pkVdPrev‎ يحفظ السابق فتبدأ منه). والنقرُ على القوس وحده (خطٌّ عريضٌ شفّاف) يبدّل؛
+     والأيقونةُ نفسُها تبقى تُغلق المساحة */
+  // The arc follows the summary block's own top-right corner (PK_BAND_R = 14): a short run along the top edge, the corner
+  // itself, then a short run down the side, all inset from the block's edge. Button-local coords: the block corner sits at (34,-2).
+  const PK_VA_IN = 3.6, PK_VA_RUN = 8.5, PK_VA_GAP = 46;
+  const PK_VA_D = (() => { const r = 14 - PK_VA_IN, cx = 34 - 14, cy = -2 + 14, t = cy - r, x = cx + r;
+    return `M${cx - PK_VA_RUN} ${t}H${cx}A${r} ${r} 0 0 1 ${x} ${cy}V${cy + PK_VA_RUN}`; })();
+  const pkVaDash = i => `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};stroke-dashoffset:${-(i * 100 + PK_VA_GAP / 2)}`;
+  const pkVdPrev = {};
+  const pkVDots = id => {
+    const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
+    const prev = pkVdPrev[id];
+    pkVdPrev[id] = cur;
+    const from = prev !== undefined && prev !== cur && !bkReduce() ? prev : cur;
+    const P = (cls, st, extra = '') => `<path class="${cls}" pathLength="300" d="${PK_VA_D}"${st ? ` style="${st}"` : ''}${extra}/>`;
+    return `<button type="button" class="pk-vdots pk-varc" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
+      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + P('pk-varc__hit') + P('pk-varc__bg')
+      + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
+      + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(from * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, from !== cur ? ' data-move="1"' : '')
+      + `</svg></button>`;
   };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
@@ -10209,6 +10397,56 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSrcKey = id => `pksrc:${id}`, pkSrcCovKey = id => `pksrccov:${id}`;
   const pkSrcMeta = id => (state.pkSrc || {})[id] || null;
   const pkSrcCovMeta = id => (state.pkSrcCov || {})[id] || null;
+  /* ===== أكثرُ من مصدر (طلبُ صاحب الموقع) =====
+     لكلّ مصدرٍ معرّفُه (‎sid‎): الأوّلُ معرّفُ المساهمة نفسُه (فلا يتغيّر ما حُفظ قبل)، والإضافيّةُ ‎id~2 · id~3‎…
+     وقائمتُها في ‎state.pkSrcX[id]‎. وكلُّ ما للمصدر (الملفّ · الغلاف · الكتاب المركَّب) مفتاحُه الـ‎sid‎،
+     والتذييلُ يحمل أدواتِ المصدر **الملموس** (‎pkSrcCur‎)، وربطُ الصفحات للأوّل وحده */
+  const PK_SID = '~';
+  const pkSrcBase = s => String(s).split(PK_SID)[0];
+  const pkSrcList = id => [id, ...((state.pkSrcX || {})[id] || [])].filter(s => pkSrcMeta(s));
+  const pkSrcAny = id => pkSrcList(id).length > 0;
+  const pkSrcNext = id => {
+    if (!pkSrcMeta(id)) return id;
+    let n = 2; while (pkSrcMeta(id + PK_SID + n)) n++;
+    return id + PK_SID + n;
+  };
+  /* ===== المصادرُ تتبع المساهمةَ إذا بدّلت معرّفَها =====
+     مساهمتي المحلّيّة تتبنّى معرّفَ نسختها على الخادم عند المصالحة (قيدُ ‎(uid, code, sec)‎). وكانت المصادرُ
+     (الملفُّ في المخزن ووصفُه في ‎state.pkSrc‎) مفاتيحُها المعرّفُ القديم — فيضيع الكتابُ والمساهمةُ قائمة.
+     فتُنقل كلُّها مع المعرّف: الأوّلُ والإضافيّةُ (‎id~2…‎) وأغلفتُها وقائمتُها */
+  function pkSrcRekey(from, to) {
+    if (!from || !to || from === to) return;
+    const moved = [];
+    const mv = (bag, a, b) => { if (state[bag] && state[bag][a] && !state[bag][b]) { state[bag][b] = state[bag][a]; delete state[bag][a]; return true; } return false; };
+    const sids = [from, ...(((state.pkSrcX || {})[from]) || [])];
+    sids.forEach(sid => {
+      const nsid = sid === from ? to : to + sid.slice(from.length);
+      if (mv('pkSrc', sid, nsid)) moved.push([pkSrcKey(sid), pkSrcKey(nsid)]);
+      if (mv('pkSrcCov', sid, nsid)) moved.push([pkSrcCovKey(sid), pkSrcCovKey(nsid)]);
+    });
+    if (state.pkSrcX && state.pkSrcX[from]) { state.pkSrcX[to] = state.pkSrcX[from].map(x => to + x.slice(from.length)); delete state.pkSrcX[from]; }
+    moved.forEach(async ([a, b]) => { try { const blob = await chIdb('readonly', a); if (blob && await chIdb('readwrite', b, blob)) await chIdb('readwrite', a, null); } catch (e) {} });
+    if (moved.length) save();
+  }
+  /* ومن ضاع كتابُه قبل هذا الإصلاح: مساهمةٌ عليها علامةُ مصدرٍ (‎data.src‎) ولا وصفَ له، ووصفٌ يتيمٌ
+     لا مساهمةَ له باسمه نفسِه — فيُردّ إليها (مرّةً عند الإقلاع) */
+  function pkSrcHeal() {
+    const S = state.pkSrc || {}, live = new Set();
+    eachPost(p => live.add(p.id));
+    const orphans = Object.keys(S).filter(k => !k.includes(PK_SID) && !live.has(k));
+    if (!orphans.length) return;
+    eachPost((p, code, sec) => {
+      const d = p.data || {};
+      if (sec !== 'cards' || !d.src || !d.src.pdf || S[p.id]) return;
+      const k = orphans.find(o => S[o] && S[o].name === d.src.pdf);
+      if (!k) return;
+      orphans.splice(orphans.indexOf(k), 1);
+      pkSrcRekey(k, p.id);
+    });
+  }
+  const pkSrcCur = {};
+  let pkSrcScroll = null;   /* المصدرُ المضافُ للتوّ: تُمرَّر مساحتُه إليه بعد الرسم */
+  const pkSrcCurOf = id => { const l = pkSrcList(id); return l.includes(pkSrcCur[id]) ? pkSrcCur[id] : (l[0] || id); };
   const PK_SRC_FILE_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>';
   const PK_SRC_COV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/></svg>';
   const pkSrcCovTool = (id, cv) => cv
@@ -10479,17 +10717,66 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <h4 class="pk-es__t">${esc(T()['pkEs' + K + 'T'])}</h4><p class="pk-es__p">${esc(T()['pkEs' + K + 'P'])}</p>
       </div>`;   /* بلا زرّ «أوّل …» (طلبُ صاحب الموقع): الإضافةُ من «+» الذيل */
   };
+  /* ===== تذييلُ المصادر (طلبُ صاحب الموقع · التوجّهُ الأوّل) =====
+     زرٌّ واحدٌ باسم المصدر الملموس ▾ تنفتح منه قائمة: المصادرُ كلُّها (والملموسُ عليه ✓ · ونقرُ غيره ينقل إليه)
+     و«إضافة مصدر آخر»، ثمّ أدواتُ هذا المصدر: الغلاف · استبدالُ الملف · الحذف. و«ربطُ الصفحات» زرٌّ مستقلٌّ بجانبه */
+  const PK_SRCM_IC = {
+    book: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    cov: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 8v6M9 11h6"/>',
+    swap: '<path d="M4 9h13l-3-3M20 15H7l3 3"/>',
+    trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+    chev: '<path d="M6 9l6 6 6-6"/>',
+  };
+  const pkSrcMenu = (id, s) => {
+    const L = pkSrcList(id), m = pkSrcMeta(s), cv = pkSrcCovMeta(s); if (!m) return '';
+    const ic = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${PK_SRCM_IC[k]}</svg>`;
+    const it = (attr, k, lab, x = '', cls = '') => `<button type="button" class="cx-srcm__it${cls}" role="menuitem" ${attr}>${ic(k)}<span class="cx-srcm__lab">${esc(lab)}</span>${x}</button>`;
+    const srcs = L.map(x => it(`data-pksrcgo="${esc(x)}"`, 'book', pkSrcMeta(x).name, x === s ? '<span class="cx-srcm__ck" aria-hidden="true">✓</span>' : '', x === s ? ' is-cur' : '')).join('');
+    return `<span class="cx-plus cx-srcm">
+        <span class="cx-plus__menu cx-srcm__menu" role="menu">
+          <span class="cx-srcm__h">${esc(T().pkSrcAll)}</span>${srcs}
+          ${it(`data-pksrcpick data-pkid="${esc(pkSrcNext(id))}"`, 'plus', T().pkAddOtherSrc, '', ' cx-srcm__add')}
+          <span class="cx-srcm__sep"></span><span class="cx-srcm__h">${esc(T().pkSrcThis)}</span>
+          ${it(`data-pksrccov data-pkid="${esc(s)}"`, 'cov', cv ? T().chCovReplace : T().pkSrcCovAdd, cv ? `<small>${esc(cv.name)}</small>` : '')}
+          ${cv ? it(`data-pksrccovdel data-pkid="${esc(s)}"`, 'trash', T().pkSrcCovDel) : ''}
+          ${it(`data-pksrcpick data-pkid="${esc(s)}"`, 'swap', T().pkSrcSwap, `<small>${chSize(m.size || 0)}</small>`)}
+          <span class="cx-srcm__sep"></span>
+          ${it(`data-pksrcdel data-pkid="${esc(s)}"`, 'trash', T().pkSrcDelT, '', ' is-red')}
+        </span>
+        <button type="button" class="chtool cx-plus__tg cx-srcm__tg" data-plus aria-expanded="false" title="${esc(m.name)}">${CH_IC.pages}
+          <span class="chtool__txt"><b>${esc(m.name)}</b></span><svg class="cx-srcm__chev" viewBox="0 0 24 24" aria-hidden="true">${PK_SRCM_IC.chev}</svg></button>
+      </span>`;
+  };
+  const pkSrcTools = (id, s = id) => {
+    if (!pkSrcMeta(s)) return '';
+    return `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcMenu(id, s)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;
+  };
+  /* اختيارُ مصدرٍ من القائمة: يصير الملموس، وتُمرَّر القائمةُ إليه */
+  document.addEventListener('click', e => {
+    const g = e.target.closest && e.target.closest('#cm-body [data-pksrcgo]');
+    if (!g) return;
+    e.preventDefault(); e.stopPropagation();
+    const sid = g.dataset.pksrcgo, id = pkSrcBase(sid), post = g.closest('.post');
+    pkSrcCur[id] = sid; pkPlusClose(null);
+    if (!post) return;
+    const v = post.querySelector(`.pk-src__list > [data-pksid="${CSS.escape(sid)}"]`), ls = v && v.parentElement;
+    if (ls) { ls.querySelectorAll(':scope > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === v)); ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' }); }
+    const t = post.querySelector('.cx-acttools');
+    if (t) t.innerHTML = pkActTools(id, false);
+  }, true);
   const pkSrcView = (id, ed) => {
-    const m = pkSrcMeta(id), cv = pkSrcCovMeta(id);
-    if (m) return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}" data-pkid="${esc(id)}">
-        ${ed ? `<div class="chtools${pkLnk.open[id] ? ' is-wide' : ''}">
-          ${cv ? pkSrcCovTool(id, cv) : `<button type="button" class="chtool" data-pksrccov data-pkid="${esc(id)}">${CH_IC.cover}<span class="chtool__txt"><b>${T().pkSrcCovAdd}</b><small>${T().chCovHint}</small></span></button>`}
-          <div class="chtool chtool--on" data-pksrcpick data-pkid="${esc(id)}" title="${esc(T().chReplace)}">${CH_IC.pages}
-            <span class="chtool__txt"><b>${T().pkSrcPagesT}</b><small>${esc(m.name)} · ${chSize(m.size || 0)}</small></span>
-            <button type="button" class="chtool__x" data-pksrcdel data-pkid="${esc(id)}" title="${esc(T().chRemove)}" aria-label="${esc(T().chRemove)}">${CH_IC.x}</button>
-          </div>${pkLnkHTML(id)}</div>` : ''}
-        <div class="chsrc__view pk-src__view" data-pksrcview data-pkid="${esc(id)}"><p class="v-none">${T().chLoading}</p></div>
-      </div>`;
+    /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
+    /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
+    const L = pkSrcList(id);
+    if (L.length) {
+      const cur = pkSrcCurOf(id), many = L.length > 1;
+      /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
+      /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
+      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('');
+      return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
+        + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
+    }
     /* والمنشورةُ بلا كتاب: مربّعٌ مرقّطٌ يقول ذلك (طلبُ صاحب الموقع) — لا زرَّ رفعٍ معطّل */
     if (!ed) return `<div class="pk-src pk-src--none" data-pkid="${esc(id)}"><div class="pk-vwph">${esc(T().pkSrcNone)}</div></div>`;
     /* والغلافُ يُؤجَّل (طلبُ صاحب الموقع): زرُّ «أول مصدر» وحده */
@@ -10507,11 +10794,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSrcCovIn = pkSrcPicker('image/*,application/pdf,.pdf', (id, f) => pkSrcCovSet(id, f));
   /* علامةُ المصدر في بيانات المساهمة نفسِها (‎d.src‎): بها تُعدّ مساهمةً قائمةً فلا تُكنس فارغةً
      — والميزانُ (‎editHasInput‎) يقرأ البيانات لا المعرّف */
-  const pkSrcMark = id => {
+  const pkSrcMark = sid => {
+    const id = pkSrcBase(sid);
     const p = postsOf(cmCode, 'cards').find(x => x.id === id);
     if (!p) return;
-    const on = !!(pkSrcMeta(id) || pkSrcCovMeta(id));
-    if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null };
+    const L = pkSrcList(id), on = !!(L.length || pkSrcCovMeta(id));
+    if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null, ...(L.length > 1 ? { all: L.map(s => pkSrcMeta(s).name) } : {}) };
     else delete p.data.src;
   };
   async function pkSrcSet(id, file) {
@@ -10520,7 +10808,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!await chIdb('readwrite', key, file)) { toast(T().chSaveFail); return; }
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
     bkForget(key);
-    (state.pkSrc = state.pkSrc || {})[id] = { name: file.name, size: file.size, ts: Date.now() };
+    const was = pkSrcMeta(id);
+    (state.pkSrc = state.pkSrc || {})[id] = { name: file.name, size: file.size, ts: Date.now(), type: was ? was.type : pkSrcGuess(file.name) };
+    pkSrcPgDrop(id);
+    const base = pkSrcBase(id);
+    if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
+    pkSrcCur[base] = id; if (id !== base) pkSrcScroll = id;
+    if (!was && pkLab()) pkSP = { id: base, sub: 'type', sid: id, conf: null, ed: true };   /* الجديدُ تنفتح له الأنواعُ ليُحدَّد نوعُه */
     pkSrcMark(id); save(); renderCmSection();
   }
   async function pkSrcDel(id) {
@@ -10529,6 +10823,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
     bkForget(key);
     if (state.pkSrc) delete state.pkSrc[id];
+    const base = pkSrcBase(id);
+    if (id !== base) {
+      if (state.pkSrcX && state.pkSrcX[base]) { state.pkSrcX[base] = state.pkSrcX[base].filter(x => x !== id); if (!state.pkSrcX[base].length) delete state.pkSrcX[base]; }
+      if (pkSrcCovMeta(id)) { await chIdb('readwrite', pkSrcCovKey(id), null); delete state.pkSrcCov[id]; }
+    }
+    if (pkSrcCur[base] === id) delete pkSrcCur[base];
     pkSrcMark(id); save(); renderCmSection();
   }
   const pkSrcCovUrl = {};
@@ -10553,9 +10853,215 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (state.pkSrcCov) delete state.pkSrcCov[id];
     pkSrcMark(id); save(); renderCmSection();
   }
+  /* ===== قائمةُ المصادر فوق، جنب أيقونة المساحة (طلبُ صاحب الموقع) =====
+     زرٌّ باسم المصدر الملموس ▾ (أو «+ إضافة مصدر» والمساحةُ فارغة) تنزل منه قائمةٌ هادئة: لكلّ مصدرٍ غلافُه المصغّر
+     وأيقونةُ نوعه واسمُه و«⋯». والغلافُ والنوعُ و«⋯» تفتح لوحاتٍ صغيرةً يسارَ القائمة. والقائمةُ طبقةٌ على الصفحة
+     (‎#pk-srcpop‎) لا في الجوف — فلا تقصّها حدودُ المساحة — وحالُها في ‎pkSP‎ فتبقى مفتوحةً عبر الرسمات */
+  const PK_SRC_TY = [
+    ['book', 'pkTyBook', '#2c5e65', '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>'],
+    ['q', 'pkTyQ', '#8a6c22', '<path d="M4 5h16v11H9l-5 4z"/><path d="M10 9a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6 1V12M12 14h.01"/>'],
+    ['note', 'pkTyNote', '#4f6f96', '<path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/>'],
+    ['slide', 'pkTySlide', '#b0623a', '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/>'],
+    ['exam', 'pkTyExam', '#4f7f4a', '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 12l2 2 4-4"/>'],
+    ['other', 'pkTyOther', '#6d7d82', '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>'],
+  ];
+  const pkSrcTy = sid => { const m = pkSrcMeta(sid), k = (m && m.type) || 'book'; return PK_SRC_TY.find(t => t[0] === k) || PK_SRC_TY[0]; };
+  /* تخمينُ النوع من اسم الملف — والمستخدمُ يؤكّده أو يغيّره (قائمةُ الأنواع تنفتح للجديد) */
+  const pkSrcGuess = n => {
+    n = String(n || '').toLowerCase();
+    if (/bank|بنك|question|اسئلة|أسئلة/.test(n)) return 'q';
+    if (/final|midterm|exam|quiz|اختبار|نهائي|ميد/.test(n)) return 'exam';
+    if (/slide|lecture|ppt|شرائح|محاضرة/.test(n)) return 'slide';
+    if (/note|ملزم|مذكر|summary|ملخص/.test(n)) return 'note';
+    return 'book';
+  };
+  const pkSrcSvg = (d, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+  const PK_SP_IC = {
+    chev: '<path d="M6 9l6 6 6-6"/>', plus: '<path d="M12 5v14M5 12h14"/>', dots: '<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>',
+    img: '<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="M20 15l-4.5-4.5L6 20"/>', tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>',
+    swap: '<path d="M4 9h13l-3-3M20 15H7l3 3"/>', trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', up: '<path d="M12 16V4M7 9l5-5 5 5M5 20h14"/>',
+    l: '<path d="M15 6l-6 6 6 6"/>', r: '<path d="M9 6l6 6-6 6"/>',
+  };
+  let pkSP = { id: null, sub: null, sid: null, conf: null, ed: false };
+  const pkSrcHd = (id, ed) => {
+    const L = pkSrcList(id);
+    if (!L.length) return '';   /* والمساحةُ فارغة: لا زرَّ فوق — الإضافةُ من التذييل */
+    if (!ed && L.length < 2) return `<span class="pk-srchd pk-srchd--ro"><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span></span>`;
+    return `<button type="button" class="chtool pk-srchd${pkSP.id === id ? ' is-open' : ''}" data-pksrchd="${esc(id)}" aria-expanded="${pkSP.id === id}"><i class="pk-srchd__ty" style="--c:${pkSrcTy(pkSrcCurOf(id))[2]}">${pkSrcSvg(pkSrcTy(pkSrcCurOf(id))[3])}</i><span>${esc(pkSrcMeta(pkSrcCurOf(id)).name)}</span>${pkSrcSvg(PK_SP_IC.chev)}</button>`;   /* السهمُ يسارَ الاسم (طلبُ صاحب الموقع) */
+  };
+  /* صورٌ صغيرةٌ لصفحات المصدر (للغلاف المصغّر ومعاينته) — مخزنٌ بالمعرّف والصفحة */
+  const pkSrcPgU = {};
+  const pkSrcPgDrop = sid => Object.keys(pkSrcPgU).forEach(k => { if (k.startsWith(sid + '|')) { pkSrcPgU[k].then(u => u && URL.revokeObjectURL(u)).catch(() => {}); delete pkSrcPgU[k]; } });
+  const pkSrcPgURL = (sid, n, w) => {
+    const k = `${sid}|${n}|${w}`;
+    return pkSrcPgU[k] || (pkSrcPgU[k] = (async () => {
+      const doc = await chPdfOpen(pkSrcKey(sid)); if (!doc) return null;
+      const pg = await doc.getPage(Math.max(1, Math.min(doc.numPages, n)));
+      const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w * 2 / v1.width });
+      const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      return URL.createObjectURL(await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.85)));
+    })().catch(() => null));
+  };
+  const pkSrcCovURL = async sid => {
+    if (pkSrcCovMeta(sid)) {
+      const key = pkSrcCovKey(sid);
+      if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (blob) pkSrcCovUrl[key] = URL.createObjectURL(blob); }
+      if (pkSrcCovUrl[key]) return pkSrcCovUrl[key];
+    }
+    return pkSrcPgURL(sid, (pkSrcMeta(sid) || {}).covPg || 1, 40);
+  };
+  const pkSrcPages = sid => (pkSrcBk[sid] && pkSrcBk[sid].n) || (pkSrcMeta(sid) || {}).pages || 0;
+  const pkSrcPopHTML = () => {
+    const { id, sub, sid, conf, ed } = pkSP, L = pkSrcList(id), cur = pkSrcCurOf(id);
+    const row = s => {
+      const ty = pkSrcTy(s), on = sid === s && sub;
+      let panel = '';
+      if (on && sub === 'cov') {
+        const n = pkSP.pg || (pkSrcMeta(s).covPg || 1), N = pkSrcPages(s);
+        panel = `<div class="psp-sub psp-cov"><img class="psp-pv" alt="" data-psppv>
+          <div class="psp-stp"><button type="button" class="psp-ar" data-psp="pg" data-d="-1" aria-label="prev">${pkSrcSvg(PK_SP_IC.r)}</button>
+            <input class="psp-num" type="text" inputmode="numeric" value="${n}" data-pspnum aria-label="page">
+            <button type="button" class="psp-ar" data-psp="pg" data-d="1" aria-label="next">${pkSrcSvg(PK_SP_IC.l)}</button></div>
+          ${N ? `<div class="psp-of">${esc(T().pkSrcOf)} ${N}</div>` : ''}
+          <button type="button" class="psp-up" data-psp="upcov">${pkSrcSvg(PK_SP_IC.up)}<span>${esc(T().pkSrcUpImg)}</span></button></div>`;
+      } else if (on && sub === 'type') {
+        panel = `<div class="psp-sub psp-list">${PK_SRC_TY.map(t => `<button type="button" class="psp-it${t[0] === ty[0] ? ' is-on' : ''}" data-psp="settype" data-ty="${t[0]}" style="--c:${t[2]}">${pkSrcSvg(t[3])}<span>${esc(T()[t[1]])}</span>${t[0] === ty[0] ? '<b class="psp-ck">✓</b>' : ''}</button>`).join('')}</div>`;
+      } else if (on && sub === 'more') {
+        panel = `<div class="psp-sub psp-list">
+          <button type="button" class="psp-it" data-psp="cov">${pkSrcSvg(PK_SP_IC.img)}<span>${esc(T().pkSrcChCov)}</span></button>
+          <button type="button" class="psp-it" data-psp="type">${pkSrcSvg(PK_SP_IC.tag)}<span>${esc(T().pkSrcChType)}</span></button>
+          <button type="button" class="psp-it" data-psp="swap">${pkSrcSvg(PK_SP_IC.swap)}<span>${esc(T().pkSrcSwap)}</span></button>
+          <span class="psp-sep"></span>
+          <button type="button" class="psp-it psp-del${conf === s ? ' is-conf' : ''}" data-psp="del">${pkSrcSvg(PK_SP_IC.trash)}<span>${esc(conf === s ? T().pkSrcDelConf : T().pkSrcDelS)}</span></button></div>`;
+      }
+      return `<div class="psp-r${s === cur ? ' is-cur' : ''}${on ? ' is-sub' : ''}" data-sid="${esc(s)}">
+          <button type="button" class="psp-cv${on && sub === 'cov' ? ' is-on' : ''}" data-psp="cov" ${ed ? '' : 'disabled'}><img alt="" data-pspcv="${esc(s)}"></button>
+          <button type="button" class="psp-ti${on && sub === 'type' ? ' is-on' : ''}" data-psp="type" style="--c:${ty[2]}" title="${esc(T()[ty[1]])}" ${ed ? '' : 'disabled'}>${pkSrcSvg(ty[3])}</button>
+          <button type="button" class="psp-nm" data-psp="go">${esc(pkSrcMeta(s).name)}</button>
+          ${ed ? `<button type="button" class="psp-more${on && sub === 'more' ? ' is-on' : ''}" data-psp="more" aria-label="more">${pkSrcSvg(PK_SP_IC.dots)}</button>` : ''}
+          ${panel}</div>`;
+    };
+    return `<div class="psp-box" role="menu">${L.map(row).join('')}
+      ${ed ? `<button type="button" class="psp-add" data-pksrcpick data-pkid="${esc(pkSrcNext(id))}">${pkSrcSvg(PK_SP_IC.plus)}<span>${esc(T().pkSrcAddS)}</span></button>` : ''}</div>`;
+  };
+  const pkSrcPopPlace = () => {
+    const P = document.getElementById('pk-srcpop'); if (!P) return;
+    const a = document.querySelector(`#cm-body [data-pksrchd="${CSS.escape(pkSP.id || '')}"]`);
+    if (!a) { P.remove(); return; }
+    /* زاويةُ القائمة العليا اليمنى تحت السهم الذي فتحها (طلبُ صاحب الموقع) */
+    const r = a.getBoundingClientRect(), ch = a.querySelector(':scope > svg:last-child'), cr = ch ? ch.getBoundingClientRect() : r;
+    const rtl = getComputedStyle(a).direction !== 'ltr', w = P.offsetWidth || 200;
+    const up = !!a.closest('.cx-acttools');   /* في التذييل: تنفتح القائمةُ فوقه */
+    if (up) { P.style.top = ''; P.style.bottom = Math.round(innerHeight - r.top + 8) + 'px'; }
+    else { P.style.bottom = ''; P.style.top = Math.round(r.bottom + 6) + 'px'; }
+    if (rtl) { P.style.right = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, innerWidth - cr.right - 4))) + 'px'; P.style.left = ''; }
+    else { P.style.left = Math.round(Math.min(innerWidth - 8 - w, Math.max(8, cr.left - 4))) + 'px'; P.style.right = ''; }
+  };
+  const pkSrcPopFill = P => {
+    P.querySelectorAll('[data-pspcv]').forEach(async img => { const u = await pkSrcCovURL(img.dataset.pspcv); if (u && img.isConnected) img.src = u; });
+    const pv = P.querySelector('[data-psppv]');
+    if (pv) { const n = +P.querySelector('[data-pspnum]').value || 1; pkSrcPgURL(pkSP.sid, n, 84).then(u => { if (u && pv.isConnected) pv.src = u; }); }
+  };
+  function pkSrcPopShow() {
+    let P = document.getElementById('pk-srcpop');
+    if (!pkSP.id || !pkSrcAny(pkSP.id) || !document.querySelector(`#cm-body [data-pksrchd="${CSS.escape(pkSP.id)}"]`)) { if (P) P.remove(); if (!pkSP.id || !pkSrcAny(pkSP.id)) pkSP.id = null; return; }
+    if (!P) { P = document.createElement('div'); P.id = 'pk-srcpop'; P.className = 'pk-srcpop'; document.body.appendChild(P); }
+    P.innerHTML = pkSrcPopHTML();
+    pkSrcPopPlace(); pkSrcPopFill(P);
+    document.querySelectorAll('#cm-body [data-pksrchd]').forEach(b => { const on = b.dataset.pksrchd === pkSP.id; b.classList.toggle('is-open', on); b.setAttribute('aria-expanded', on); });
+  }
+  const pkSrcPopClose = () => { pkSP = { id: null, sub: null, sid: null, conf: null, ed: false }; const P = document.getElementById('pk-srcpop'); if (P) P.remove(); document.querySelectorAll('#cm-body [data-pksrchd].is-open').forEach(b => { b.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); }); };
+  window.addEventListener('scroll', pkSrcPopPlace, true);
+  window.addEventListener('resize', pkSrcPopPlace);
+  /* الغلافُ من صفحةٍ في الملف: يُعتمد بعد سكونٍ قصير (لا رسمةَ للكتاب مع كلّ ضغطة سهم) */
+  let pkSrcCovT = 0;
+  const pkSrcCovPg = (sid, n) => {
+    const m = pkSrcMeta(sid); if (!m) return;
+    const N = pkSrcPages(sid); n = Math.max(1, N ? Math.min(N, n | 0) : n | 0);
+    pkSP.pg = n;
+    const P = document.getElementById('pk-srcpop'), inp = P && P.querySelector('[data-pspnum]');
+    if (inp && document.activeElement !== inp) inp.value = n;
+    if (P) pkSrcPopFill(P);
+    clearTimeout(pkSrcCovT);
+    pkSrcCovT = setTimeout(async () => {
+      m.covPg = n;
+      if (pkSrcCovMeta(sid)) { await pkSrcCovDel(sid); return; }   /* صورةُ الغلاف المرفوعة تُزال: الغلافُ صار صفحةً من الملف */
+      save(); renderCmSection();
+    }, 450);
+  };
+  document.addEventListener('click', e => {
+    const hd = e.target.closest && e.target.closest('#cm-body [data-pksrchd]');
+    if (hd) {
+      e.preventDefault(); e.stopPropagation();
+      if (pkSP.id === hd.dataset.pksrchd) { pkSrcPopClose(); return; }
+      pkSP = { id: hd.dataset.pksrchd, sub: null, sid: null, conf: null, ed: !!hd.closest('.pk--edit') || (pkLab() && !hd.closest('.pk--maxpub, .pk--framepub')) };
+      pkSrcPopShow(); return;
+    }
+    const P = document.getElementById('pk-srcpop'); if (!P) return;
+    if (!P.contains(e.target)) { pkSrcPopClose(); return; }
+    e.stopPropagation();
+    const b = e.target.closest('[data-psp], [data-pksrcpick]'); if (!b) return;
+    if (b.hasAttribute('data-pksrcpick')) { pkSrcIn.dataset.pkid = b.dataset.pkid; pkSrcIn.click(); return; }
+    const r = b.closest('[data-sid]'), s = r ? r.dataset.sid : pkSP.sid, k = b.dataset.psp;
+    if (k === 'go') { const id = pkSP.id; pkSrcCur[id] = s; pkSrcScroll = s; pkSrcPopClose(); renderCmSection(); return; }
+    if (k === 'cov' || k === 'type' || k === 'more') { const same = pkSP.sid === s && pkSP.sub === k; pkSP.sub = same ? null : k; pkSP.sid = same ? null : s; pkSP.conf = null; pkSP.pg = 0; pkSrcPopShow(); if (pkSP.sub === 'cov') { const i = document.querySelector('#pk-srcpop [data-pspnum]'); if (i) i.select(); } return; }
+    if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
+    if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
+    if (k === 'upcov') { pkSrcCovIn.dataset.pkid = s; pkSrcCovIn.click(); return; }
+    if (k === 'swap') { pkSrcIn.dataset.pkid = s; pkSrcIn.click(); return; }
+    if (k === 'del') { if (pkSP.conf === s) { pkSP.sub = null; pkSP.sid = null; pkSP.conf = null; pkSrcDel(s); } else { pkSP.conf = s; pkSrcPopShow(); } return; }
+  }, true);
+  document.addEventListener('input', e => { const i = e.target.closest && e.target.closest('#pk-srcpop [data-pspnum]'); if (!i) return; i.value = i.value.replace(/[^0-9٠-٩]/g, '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); if (+i.value) pkSrcCovPg(pkSP.sid, +i.value); });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('pk-srcpop')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (pkSP.sub) { pkSP.sub = null; pkSP.sid = null; pkSrcPopShow(); } else pkSrcPopClose(); }
+    else if (e.key === 'Enter' && e.target.matches && e.target.matches('[data-pspnum]')) { e.preventDefault(); pkSrcCovPg(pkSP.sid, +e.target.value || 1); }
+  }, true);
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
+  /* ===== شريطُ قائمة المصادر يسارًا بثيم الموقع (طلبُ صاحب الموقع) — كشريط الصفحة ‎#xscroll‎: مسارٌ وإبهامٌ بتروليٌّ يُسحب ===== */
+  const pkSrcBarUp = ls => {
+    const pane = ls.parentElement, bar = pane && pane.querySelector(':scope > .pk-srcbar'), th = bar && bar.firstElementChild;
+    if (!th) return;
+    const ch = ls.clientHeight, sh = ls.scrollHeight, bh = Math.max(40, ch - 16);   /* والشريطُ يقف قبل الزاوية المستديرة تحت */
+    bar.style.top = ls.offsetTop + 'px'; bar.style.height = bh + 'px';
+    if (sh <= ch + 2) { bar.hidden = true; return; }
+    bar.hidden = false;
+    const thH = Math.max(30, Math.round(bh * ch / sh));
+    th.style.height = thH + 'px';
+    th.style.transform = `translateY(${Math.round((bh - thH) * ls.scrollTop / (sh - ch))}px)`;
+  };
+  const pkSrcBarRo = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => pkSrcBarUp(e.target))) : null;
+  const pkSrcBarInit = () => document.querySelectorAll('#cm-body [data-pksrclist]:not([data-pkbar])').forEach(ls => {
+    ls.dataset.pkbar = '1';
+    ls.addEventListener('scroll', () => pkSrcBarUp(ls), { passive: true });
+    if (pkSrcBarRo) pkSrcBarRo.observe(ls);
+    const bar = ls.parentElement.querySelector(':scope > .pk-srcbar'), th = bar.firstElementChild;
+    th.addEventListener('pointerdown', e => {
+      e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); bar.classList.add('is-drag');
+      const y0 = e.clientY, s0 = ls.scrollTop;
+      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((bar.offsetHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
+      const up = () => { th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); };
+      th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
+    });
+    bar.addEventListener('pointerdown', e => {
+      if (e.target === th) return;
+      e.preventDefault(); e.stopPropagation();
+      const y = e.clientY - bar.getBoundingClientRect().top - th.offsetHeight / 2;
+      ls.scrollTo({ top: y / ((bar.offsetHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
+    });
+    pkSrcBarUp(ls);
+  });
   async function pkSrcPaint() {
     pkLnkPopShow();
+    pkSrcPopShow();
+    pkSrcBarInit();
+    if (pkSrcScroll) {
+      const v = document.querySelector(`#cm-body [data-pksid="${CSS.escape(pkSrcScroll)}"]`), ls = v && v.closest('.pk-src__list');
+      if (ls) ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' });
+      pkSrcScroll = null;
+    }
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
       const key = pkSrcCovKey(img.dataset.pksrccovimg);
       if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
@@ -10568,6 +11074,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
+      if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
          فلا يُنتزع القارئُ من صفحته مع كلّ رسمة */
       const sel = pkFs[id];
@@ -10584,10 +11091,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          كلُّ رسمةٍ تبني الجوفَ من جديد، فكان الكتابُ يُركَّب من الصفر (ومضةٌ، وورقةٌ تُقلَب تضيع، وصورُ صفحاتٍ تُطلب).
          فإن كان الكتابُ المركَّبُ قبلُ للملفّ نفسِه والغلافِ نفسِه، نُقلت عناصرُه كما هي إلى الوعاء الجديد،
          وأُعيدت مراقبةُ مقاسه، ولحق موضعَه الجديدَ بـ‎FLIP‎ إن كان له موضعٌ قديم */
-      const old = pkSrcBk[id], covKey = cv ? pkSrcCovKey(id) : null;
+      const old = pkSrcBk[id], covKey = cv ? pkSrcCovKey(id) : null, covPg = (meta && meta.covPg) || 1;
       if (old && old.el && old.view === view && old.el.isConnected) return;   /* مركَّبٌ هنا أصلًا */
       /* وكتابُ WebGL الذي أُطفئ بعد طول غيابه لا يُنقل: يُبنى من جديد على موضعه المحفوظ */
-      if (old && old.el && old.doc === doc && old.covKey === covKey && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead)) {
+      if (old && old.el && old.doc === doc && old.covKey === covKey && (old.covPg || 1) === covPg && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead) && (old.gl === undefined || !!old.one === bk2OneGet())) {
         view.innerHTML = '';
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
         old.view.style.transform = '';
@@ -10621,7 +11128,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
         closed: !meta || meta.closed !== false,
-        covKey,
+        covKey, covPg,
         wide: true,
         flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
         /* عمودُ الغلاف والملفّ في **منتصف** الكتاب عموديًّا (طلبُ صاحب الموقع) — لا أعلاه */
@@ -10642,7 +11149,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkEsOpen = (id, deck) => {
     if (!pkLab() || pkEsSeen.has(id)) return;
     pkEsSeen.add(id);
-    if (!(deck || []).length && !pkSrcMeta(id) && pkSplit[id] === undefined && pkBank[id] === undefined) { pkSplit[id] = true; pkBank[id] = true; }
+    if (!(deck || []).length && !pkSrcAny(id) && pkSplit[id] === undefined && pkBank[id] === undefined) { pkSplit[id] = true; pkBank[id] = true; }
   };
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
@@ -10656,7 +11163,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const wrap = pkSplitOn(id) || pkBankOn(id) || (lab && PK_SPLIT_VIEWS.includes(v));   /* والضيّقةُ كذلك: قامةُ الوسط لا تتبدّل */
     /* والكتابُ يُمهَّد في وقت الفراغ (محرّكُه ‎three.js‎) إن كان للفصل ملفّ — فلا يدفع أوّلُ دخولٍ ثمنَ تحميله أثناء الحركة */
     if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
-    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, flatCards(deck).length) : '';
+    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, flatCards(deck).length).replace('</span>', '</span>' + pkVDots(id)) : '';
     /* ومنطقةُ المجلدات وهي فارغة: مكانٌ مرقّطٌ يقول إنّها لمجلدات الملخّص (طلبُ صاحب الموقع) — وفي التحرير ينقر فيضيف أوّلَ فصل */
     const fph = midH ? `<div class="pk-fstrip-ph">`
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>`
@@ -10699,7 +11206,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>`
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
-    const hB = pkBlkH('book', id, pkSrcMeta(id) ? 1 : 0), hQ = pkBlkH('bank', id, flatCards(qb).length);
+    const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
     return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)};--g:${book && bank ? 28 : 14}px">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
@@ -10758,7 +11265,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
         + h.map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
-        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num">${k + 1}</span></td>`
+        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${hlUsed(id).has(n.id) ? ' has-hl' : ''}">${k + 1}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
@@ -21925,6 +22432,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كلُّ فجوةٍ (مربّعُها وجهتُها) لها مقدارٌ من صفرٍ إلى واحدٍ يُحفظ للمساهمة (يعبر إعادةَ الرسم): يُقبل إليه حين تُطلب ويُدبر عنه
      حين تذهب أيقونتُها إلى مساحتها — فترجع الكتلةُ إلى زاويتها تُرسم أمامك */
   const pkNotchSt = {};
+  if (typeof window !== 'undefined') window.__pkNotchSt = pkNotchSt;   /* (للفحص) */
   /* اللوحُ (‎.kcv‎) في مساحة الملخص ذاتِ الفجوات السفلية: يمتدّ إلى قاعها ويُقصّ على شكلها نفسِه
      (زواياه مستديرة، وفجوتا الأيقونتين مقطوعتان منه بالقدر الذي انفتحتا به) — فلا يبقى تحته هامشٌ فارغ */
   function pkKcvNotch(card, ns) {
@@ -21988,7 +22496,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
-    const now = performance.now(), DUR = 340 * (window.__pkfxSlow || 1), ez = pkBez(.3, .7, .2, 1);
+    /* والفجوةُ تُنحت أمام العين: لينةُ البدء والختام (لا تقفز في أوّلها) */
+    const now = performance.now(), DUR = 420 * (window.__pkfxSlow || 1), ez = pkBez(.45, 0, .25, 1);
     const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.k + '|' + t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
@@ -22254,7 +22763,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ROADMAP-SMOOTH ق٥ (القرار ١): في الضيّقة (لا كتلة) تنبسط الداخلةُ في مكانها الحقيقيّ من عرضٍ صفر — والجارُ يتضيّق
      بنفسه لأنّه يأخذ الباقي — بلا نسخٍ ولا قصّ ===== */
   /* وقامةُ القسمة في الضيّقة يحدّدها الكتاب (لا تملأ المربّعَ كما في المكبَّرة): تنتقل من قامتها القديمة إلى الجديدة بنعومة */
-  function pkFxHeight(sp, h0, dur) {
+  function pkFxHeight(sp, h0, dur, ease) {
     if (!sp || h0 == null || bkReduce()) return;
     /* والقامةُ الأخيرةُ تُقرأ قبل أن تبدأ حركةُ العرض (‎pkPaneGrow‎ تحفظها): بعدها تكون المنطقةُ بعرضٍ صفرٍ فتُقرأ خطأ */
     const h1 = sp.pkH1 != null ? sp.pkH1 : sp.getBoundingClientRect().height;
@@ -22262,7 +22771,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ولو تساوت القامتان تُثبَّت طوالَ الحركة: محتوى المنطقة (الكتابُ بنسبة صفحته) يطول ويقصر مع عرضها وهو يتّسع —
        فبلا تثبيتٍ تقفز قامةُ المساهمة وتعود (شكوى صاحب الموقع) */
     sp.style.overflow = 'hidden';
-    const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    const a = sp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: dur, easing: ease || 'cubic-bezier(.2, .8, .2, 1)' });
     a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
   }
   /* ===== دخولُ مساحةٍ طرفيّة بجانب غيرها (طلبُ صاحب الموقع): تنبسط أفقيًّا من حافّة القسمة الخارجيّة =====
@@ -22416,7 +22925,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       commit();
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
-      if (narrow) pkFxHeight(document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split'), spH, 240 * (window.__pkfxSlow || 1));
+      const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
+      if (narrow) pkFxHeight(sp1, spH, 420 * (window.__pkfxSlow || 1), 'cubic-bezier(.45, 0, .25, 1)');   /* مع نحت الفجوة: لينةٌ مثلُها */
+      /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
+         إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
+      const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
     });
   }
   function cxHdSet(up) {
@@ -22595,7 +23108,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        والضيّقُ بلا مساحةٍ ينطوي صفًّا كالمنشورة (‎pk--icrow‎) ويتّسع في موضعه بالأيقونات */
     const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
-    const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcMeta(p.id);
+    const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
     return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
@@ -23369,7 +23882,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ]).catch(e => { bk2LibP = null; throw e; });
     return bk2LibP;
   }
-  const bk2A = b => b.closed ? 0 : Math.floor(b.pos / 2) + 1;
+  /* وضعُ الصفحة الواحدة (طلبُ صاحب الموقع): المقلَّبةُ تُطوى حول الكعب إلى ما وراء الكتاب فلا يبقى أمامك إلّا صفحة.
+     تفضيلٌ واحدٌ للقارئ في متصفّحه، ويُبدَّل من زرٍّ في التذييل. وفيه ‏‎b.pos‎ رقمُ الصفحة الظاهرة (كصفحة المحرّك القديم الواحدة) */
+  function bk2OneGet() { try { return localStorage.getItem('ac.bk.one') === '1'; } catch (e) { return false; } }
+  const bk2OneSet = v => { try { localStorage.setItem('ac.bk.one', v ? '1' : '0'); } catch (e) {} };
+  function bkModeIc(k) {
+    return k === 'one' ? '<rect x="6.5" y="3.5" width="11" height="17" rx="1.6"/><path d="M9.5 8.5h5M9.5 11.5h5M9.5 14.5h3"/>'
+      : '<path d="M3 6.2c3-1.2 6-1 9 .8 3-1.8 6-2 9-.8v12c-3-1.2-6-1-9 .8-3-1.8-6-2-9-.8z"/><path d="M12 7v12"/>';
+  }
+  /* الزرُّ يحمل صورةَ الوضع الذي يُنقل إليه */
+  function bkModeBtn(cls, attr) { const one = bk2OneGet(), to = one ? 'two' : 'one', tip = one ? T().bkTwo : T().bkOne;
+    return `<button type="button" class="${cls}" ${attr} data-bkto="${to}" title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${bkModeIc(to)}</svg></button>`; }
+  const bk2A = b => b.closed ? 0 : b.one ? Math.max(1, b.pos) : Math.floor(b.pos / 2) + 1;
+  const bk2MaxA = b => b.one ? b.n : Math.floor(b.n / 2) + 1;
+  const bk2PosOf = (b, A) => A === 0 ? (b.one ? 1 : 0) : b.one ? A : 2 * (A - 1);
   /* صورةُ صفحةٍ بالدقّة التي يطلبها المحرّك — والغلافُ صورتُه المرفوعة تملأ الصفحةَ ولا تتشوّه، وإلّا الصفحةُ الأولى */
   async function bk2Tex(b, k, w) {
     if (k === 'cover' && b.covKey) {
@@ -23386,14 +23912,265 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
       } catch (e) {}
     }
-    const pg = await b.doc.getPage(k === 'cover' ? 1 : k);
-    const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w / v1.width });
-    const cv = document.createElement('canvas');
-    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
-    const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
-    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    /* رسمُ الصفحة الخامُ يُحفظ قليلًا (آخرُ ثمانٍ): تغيّرُ التحديدات يعيد الطلاءَ فوق نسخةٍ منه بلا رسمٍ للملفّ من جديد */
+    const ck = k + '|' + w;
+    b.pgCv = b.pgCv || new Map();
+    let base = b.pgCv.get(ck);
+    if (!base) {
+      const pg = await b.doc.getPage(k === 'cover' ? Math.min(b.n || 1, Math.max(1, b.covPg || 1)) : k);
+      const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w / v1.width });
+      base = document.createElement('canvas');
+      base.width = Math.round(vp.width); base.height = Math.round(vp.height);
+      const cx = base.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, base.width, base.height);
+      await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
+    } else { b.pgCv.delete(ck); b.pgCv.set(ck, base); }
+    if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return base;
+    const cv = document.createElement('canvas'); cv.width = base.width; cv.height = base.height;
+    cv.getContext('2d').drawImage(base, 0, 0);
+    hlPaint(b, k, cv);
     return cv;
   }
+  /* ===== رحلةُ التحديد: التظليلُ يُربط بصفوف جدول الملخّص (ROADMAP-HL · كونسبت صاحب الموقع) =====
+     · دوائرُ التذييل هي صفوفُ جدول الملخّص في المجلد المختار: ‎14‎ صفًّا ⇐ ‎14‎ دائرة، رقمُ الدائرة رقمُ الصفّ، وبعدها دائرةٌ
+       فارغةٌ لصفٍّ جديد (يُنشأ في الجدول حين يدخلها أوّلُ تظليل).
+     · التحديدُ عابرٌ حتى يدخل دائرة: تُضغط فيثبت تظليلًا مربوطًا بصفّها، ويُنقر بعيدًا (أو Esc) فيختفي.
+       ودائرةٌ «شغّالة» (تُضغط بلا تحديد) يدخلها كلُّ تحديدٍ فورًا حتى تُطفأ.
+     · نقرُ تظليلٍ في الكتاب يختاره: الدوائرُ تُضيفه إلى صفّها أو ترفعه منه، وDelete يحذفه.
+     · والصفُّ في الجدول يُعلَّم رقمُه بلون التظليل، ونقرُه يقلّب الكتابَ إلى تظليله.
+     يُحفظ الربطُ بمعرّف البطاقة (‎m.c‎) لا برقمها، فيبقى مع الصفّ ولو تبدّل ترتيبُه — والرقمُ المرسوم رقمُ الصفّ الآن.
+     ‏‎p.data.hl = { marks: [{ id, s, k, c: [cardId..], bars: [[l,r,t,b]..], d, tx }] }‎ — ‏‎s‎ لاحقةُ المصدر، ‏‎k‎ الصفحة، والمواضعُ كسورٌ منها */
+  const hlArm = {};   /* ‏‎postId → cardId‎ الدائرةُ الشغّالة */
+  let hlCur = null;   /* ‏‎{ id: postId, m: markId }‎ التظليلُ المختار */
+  const hlPost = id => (postsOf(cmCode, 'cards') || []).find(x => x.id === id) || null;
+  function hlData(id, make) {
+    const p = hlPost(id); if (!p || !p.data) return null;
+    if (!p.data.hl && make) p.data.hl = { marks: [] };
+    const H = p.data.hl || null;
+    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; });
+    return H;
+  }
+  const hlSidOf = b => String((b && b.key) || '').replace(/^pksrc:/, '');
+  function hlMarksOn(b, k) {
+    const sid = hlSidOf(b), id = pkSrcBase(sid), H = hlData(id);
+    if (!H) return [];
+    const s = sid.slice(id.length);
+    return H.marks.filter(m => m.s === s && m.k === k);
+  }
+  /* رقمُ كلّ بطاقةٍ في مجلدها (ترتيبُها بين بطائقه) — هو رقمُ صفّها في الجدول */
+  function hlRowMap() {
+    const map = new Map(), pk = cardDataRaw(cmCode);
+    const walk = arr => { (arr || []).filter(n => n.t === 'c').forEach((n, i) => map.set(n.id, i + 1)); (arr || []).filter(n => n.t === 'f').forEach(f => walk(f.ch)); };
+    if (pk) walk(pk.deck);
+    return map;
+  }
+  /* صفوفُ المجلد المختار في الملخّص (بطائقُه بترتيبها) */
+  function hlRows(id) {
+    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
+  }
+  const HL_YEL = 'rgb(246, 214, 120)';
+  /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
+  function hlDots(m, W, Hh, rows) {
+    const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
+    return m.c.map(cid => ({ cid, n: rows.get(cid) })).filter(o => o.n).map((o, i) => ({ ...o, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
+  }
+  /* التحديدُ العابرُ على هذه الصفحة (إن كان) — يُطلى على الورقة كالتظليل فيميل معها، لا طبقةً فوقها */
+  function hlSelOn(b, k) {
+    try { return bkTLSel && bkTLSel.k === k && bkTLSel.painted && bkOfEl(bkTLSel.d) === b ? bkTLSel : null; } catch (e) { return null; }
+  }
+  function hlPaint(b, k, cv) {
+    const sel = hlSelOn(b, k);
+    if (sel) {
+      const c0 = cv.getContext('2d'), W0 = cv.width, H0 = cv.height;
+      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_YEL;
+      for (const o of sel.bars) c0.fillRect(o.l * W0, o.t * H0, (o.r - o.l) * W0, (o.b - o.t) * H0);
+      c0.globalCompositeOperation = 'source-over';
+    }
+    const ms = hlMarksOn(b, k); if (!ms.length) return;
+    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
+    c.globalCompositeOperation = 'multiply'; c.fillStyle = HL_YEL;
+    for (const m of ms) for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh);
+    c.globalCompositeOperation = 'source-over';
+    for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
+      c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
+      c.fillStyle = '#f3d27a'; c.fill();
+      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(120, 92, 25, .55)'; c.stroke();
+      c.fillStyle = '#3a2c0b'; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText(String(n), x, y + R * 0.06);
+    }
+  }
+  /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل صفَّها)، وإطارُ التظليل المختار */
+  function hlSpots(b, d) {
+    d.querySelectorAll('.bk-hlnum, .bk-hlcur').forEach(x => x.remove());
+    const k = +d.dataset.k, ms = hlMarksOn(b, k); if (!ms.length) return;
+    const W = 1000, Hh = 1000 / b.ar, rows = hlRowMap();
+    for (const m of ms) {
+      for (const { cid, n, x, y, R } of hlDots(m, W, Hh, rows)) {
+        const e = document.createElement('button');
+        e.type = 'button'; e.className = 'bk-hlnum'; e.dataset.hlcid = cid;
+        e.title = T().hlArmT.replace('{n}', n); e.setAttribute('aria-label', e.title);
+        Object.assign(e.style, { left: (x - R * 1.4) / W * 100 + '%', top: (y - R * 1.4) / Hh * 100 + '%', width: R * 2.8 / W * 100 + '%', height: R * 2.8 / Hh * 100 + '%' });
+        d.appendChild(e);
+      }
+      if (hlCur && hlCur.m === m.id) for (const [l, r, t, bb] of m.bars) {
+        const e = document.createElement('i'); e.className = 'bk-hlcur';
+        Object.assign(e.style, { left: l * 100 + '%', width: (r - l) * 100 + '%', top: t * 100 + '%', height: (bb - t) * 100 + '%' });
+        d.insertBefore(e, d.firstChild);
+      }
+    }
+  }
+  const bkOfEl = el => Object.values(pkSrcBk).find(b => b && b.stage && b.stage.contains(el)) || null;
+  const bkOfSid = sid => Object.values(pkSrcBk).find(b => b && b.gl && hlSidOf(b) === sid) || null;
+  function hlRefresh(b, k, paint = true) {
+    if (!b) return;
+    if (paint && b.gl && b.gl.refreshPage) b.gl.refreshPage(k);
+    if (b.tlPages) { const d = b.tlPages.get(k); if (d) hlSpots(b, d); }
+  }
+  function hlRefreshMark(id, m, paint = true) { hlRefresh(bkOfSid(id + m.s), m.k, paint); }
+  /* تبدّلت الصفوف (أُضيف صفٌّ أو تبدّل المجلد): الأرقامُ المرسومةُ على كلّ صفحةٍ ظاهرة تُعاد */
+  function hlRepaintAll(id) {
+    const H = hlData(id); if (!H) return;
+    const seen = new Set();
+    H.marks.forEach(m => { const key = m.s + '|' + m.k; if (!seen.has(key)) { seen.add(key); hlRefreshMark(id, m); } });
+  }
+  /* من يملك أن يظلّل: صاحبُ المساهمة في التحرير */
+  function hlCan(el) {
+    const b = bkOfEl(el); if (!b || !b.view || !b.view.closest('.pk--edit')) return null;
+    const sid = hlSidOf(b), id = pkSrcBase(sid), p = hlPost(id);
+    return p && p.me ? { b, sid, id } : null;
+  }
+  const hlMark = (id, mid) => { const H = hlData(id); return H ? H.marks.find(m => m.id === mid) || null : null; };
+  function hlSetCur(id, mid) {
+    const prev = hlCur; hlCur = mid ? { id, m: mid } : null;
+    const pm = prev && hlMark(prev.id, prev.m); if (pm) hlRefreshMark(prev.id, pm, false);
+    const nm = hlCur && hlMark(id, mid); if (nm) hlRefreshMark(id, nm, false);
+    if (prev && prev.id !== id) hlBarSync(prev.id);
+    if (id) hlBarSync(id);
+  }
+  /* الدائرةُ الفارغة: صفٌّ جديدٌ في المجلد المختار (بطاقةٌ فارغةٌ تُكتب في الجدول) */
+  function hlNewRow(id) {
+    const R = hlRows(id); if (!R) return null;
+    const nn = { id: newId(), t: 'c', f: '', b: '' };
+    R.host.arr.push(nn);
+    return nn.id;
+  }
+  /* تحديدٌ يثبت تظليلًا مربوطًا بصفّ (‎cid‎ أو الشغّال) */
+  function hlCreate(sel, cid) {
+    const c = hlCan(sel.d); if (!c) return false;
+    const { b, sid, id } = c, H = hlData(id, true);
+    let row = cid || hlArm[id] || null, grew = false;
+    if (row === 'new') { row = hlNewRow(id); grew = !!row; if (hlArm[id] === 'new') hlArm[id] = row; }
+    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l',
+      bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
+    H.marks.push(m);
+    save();
+    bkTLClear();
+    hlRefresh(b, sel.k); hlSetCur(id, m.id);
+    if (grew) hlRowsChanged();
+    return true;
+  }
+  /* صفٌّ أُضيف: يُرسم الجدولُ من جديد (فيظهر الصفّ) */
+  function hlRowsChanged() { try { renderCmSection(); } catch (e) {} }
+  /* البطائقُ المربوطةُ بتظليلٍ في مساهمة */
+  function hlUsed(id) {
+    const u = new Set();
+    try { const H = hlData(id); (H ? H.marks : []).forEach(x => (x.c || []).forEach(c => u.add(c))); } catch (e) {}
+    return u;
+  }
+  /* بعد كلّ رسم: إن تبدّلت أرقامُ الصفوف (صفٌّ أُضيف أو حُذف أو رُتّب) أُعيد طلاءُ أرقامها على الصفحات الظاهرة */
+  let hlRowSig = '';
+  function hlAfterRender() {
+    const pk = cardDataRaw(cmCode); if (!pk) return;
+    const sig = [...hlRowMap()].map(([k, v]) => k + ':' + v).join(',');
+    if (sig === hlRowSig) return;
+    const first = !hlRowSig; hlRowSig = sig;
+    if (first) return;
+    (postsOf(cmCode, 'cards') || []).forEach(p => { if (p.data && p.data.hl && p.data.hl.marks.length) hlRepaintAll(p.id); });
+  }
+  function hlPick(d, e) {
+    const c = hlCan(d); if (!c) return;
+    const R = d.getBoundingClientRect(), x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
+    const m = hlMarksOn(c.b, +d.dataset.k).find(m => m.bars.some(([l, r, t, bb]) => x >= l && x <= r && y >= t && y <= bb));
+    hlSetCur(c.id, m ? m.id : null);
+  }
+  /* ضغطُ دائرة: مع تحديدٍ عابرٍ يُثبَّت فيها · مع تظليلٍ مختارٍ يُضاف إلى صفّها أو يُرفع منه · وإلّا تُشغَّل أو تُطفأ */
+  function hlCircle(id, cid) {
+    if (bkTLSel && bkTLSel.d.isConnected) { const c = hlCan(bkTLSel.d); if (c && c.id === id) { hlCreate(bkTLSel, cid); hlBarSync(id); return; } }
+    const m = hlCur && hlCur.id === id && hlMark(id, hlCur.m);
+    if (m) {
+      let row = cid, grew = false;
+      if (row === 'new') { row = hlNewRow(id); grew = !!row; }
+      if (!row) return;
+      if (m.c.includes(row)) m.c = m.c.filter(x => x !== row); else m.c.push(row);
+      save(); hlRefreshMark(id, m); hlBarSync(id);
+      if (grew) hlRowsChanged();
+    } else { hlArm[id] = hlArm[id] === cid ? 0 : cid; hlBarSync(id); }
+  }
+  function hlDelete(id, mid) {
+    const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
+    H.marks = H.marks.filter(x => x !== m);
+    if (hlCur && hlCur.m === mid) hlCur = null;
+    save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
+  }
+  /* شريطُ الدوائر: صفوفُ المجلد المختار (الممتلئةُ ما رُبط به تظليل)، ثمّ فارغةٌ لصفٍّ جديد */
+  function hlBarHTML(id) {
+    const R = hlRows(id), H = hlData(id), arm = hlArm[id] || 0;
+    const cards = R ? R.cards : [];
+    const m = hlCur && hlCur.id === id && H ? H.marks.find(x => x.id === hlCur.m) : null;
+    let pend = false; try { pend = !!(bkTLSel && bkTLSel.d.isConnected && (hlCan(bkTLSel.d) || {}).id === id); } catch (e) {}
+    const used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    const dot = (cid, n, next) => {
+      const cls = 'cx-hlc' + (next ? ' is-next' : used.has(cid) ? '' : ' is-row') + (arm === cid ? ' is-arm' : '') + (m && m.c.includes(cid) ? ' is-in' : '');
+      const tip = (pend ? T().hlIn : m ? (m.c.includes(cid) ? T().hlOut : T().hlIn) : arm === cid ? T().hlArmOff : T().hlArmT).replace('{n}', n);
+      return `<button type="button" class="${cls}" data-hlcid="${esc(cid)}" title="${esc(tip)}">${next ? '+' : n}</button>`;
+    };
+    const dots = cards.map((c, i) => dot(c.id, i + 1, false)).join('') + (R ? dot('new', cards.length + 1, true) : '');
+    return `<span class="cx-hlbar${m || pend ? ' has-cur' : ''}" data-hlwrap data-pkid="${esc(id)}">${dots}</span>`;
+  }
+  function hlBarSync(id) {
+    document.querySelectorAll(`[data-hlwrap][data-pkid="${CSS.escape(id)}"]`).forEach(x => { x.outerHTML = hlBarHTML(id); });
+    hlRowMarksSync(id);
+  }
+  /* في الجدول: رقمُ الصفّ المربوطِ بتظليلٍ يتلوّن، ونقرُه يقلّب الكتابَ إلى أوّل تظليلاته */
+  function hlRowMarksSync(id) {
+    const H = hlData(id), used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    document.querySelectorAll(`#cm-body .kt-view[data-pkid="${CSS.escape(id)}"] tr[data-kcard]`).forEach(tr => {
+      const n = tr.querySelector('.kt-num'); if (n) n.classList.toggle('has-hl', used.has(tr.dataset.kcard));
+    });
+  }
+  document.addEventListener('click', e => {
+    const num = e.target.closest && e.target.closest('#cm-body .kt-view tr[data-kcard] .kt-num.has-hl');
+    if (num) {
+      const kv = num.closest('.kt-view'), id = kv.dataset.pkid, cid = num.closest('tr').dataset.kcard, H = hlData(id);
+      const m = H && H.marks.find(x => x.c.includes(cid)); if (!m) return;
+      e.preventDefault(); e.stopPropagation();
+      if (!pkSplitOn(id)) return;
+      pkLnkGo(id + m.s, m.k); hlSetCur(id, m.id);
+      return;
+    }
+    const t = e.target.closest && e.target.closest('[data-hlcid]');
+    if (!t) return;
+    e.preventDefault(); e.stopPropagation();
+    if (t.classList.contains('bk-hlnum')) {
+      const c = hlCan(t); if (!c) return;
+      const cid = t.dataset.hlcid; hlSetCur(c.id, null); hlArm[c.id] = hlArm[c.id] === cid ? 0 : cid; hlBarSync(c.id);
+      return;
+    }
+    const w = t.closest('[data-hlwrap]'); if (w) hlCircle(w.dataset.pkid, t.dataset.hlcid);
+  }, true);
+  /* Esc: يُلغى التحديدُ القائم أوّلًا، ثمّ الاختيار، ثمّ تُطفأ الدائرةُ الشغّالة · Delete يحذف المختار */
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input, textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')) return;
+    if (e.key === 'Escape') {
+      if (hlCur) { const id = hlCur.id; hlSetCur(id, null); e.preventDefault(); e.stopImmediatePropagation(); return; }
+      const ids = Object.keys(hlArm).filter(id => hlArm[id] && document.querySelector(`#cm-body [data-hlwrap][data-pkid="${CSS.escape(id)}"]`));
+      if (!ids.length) return;
+      ids.forEach(id => { hlArm[id] = 0; hlBarSync(id); });
+      e.preventDefault(); e.stopImmediatePropagation();
+    } else if ((e.key === 'Delete' || e.key === 'Backspace') && hlCur) {
+      e.preventDefault(); e.stopImmediatePropagation(); hlDelete(hlCur.id, hlCur.m);
+    }
+  }, true);
   function bk2Mount(view, b) {
     view.innerHTML = `
       <div class="cbk-stage cbk-stage--gl" tabindex="0" data-bkstage><div class="cbk cbk--gl" data-bk></div></div>
@@ -23402,13 +24179,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <span class="cbk-nav__i" data-bkind></span>
         <button type="button" class="cbk-nav__b" data-bknav="1" aria-label="next">${BK_ARR('M15 6l-6 6 6 6')}</button>
         <button type="button" class="cbk-nav__b cbk-nav__close" data-bkclose title="${esc(T().bkClose)}" aria-label="${esc(T().bkClose)}">${BK_ARR('M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3')}</button>
+        ${bkModeBtn('cbk-nav__b cbk-nav__mode', 'data-bkmode')}
       </div>`;
     b.stage = view.querySelector('[data-bkstage]');
     b.el = view.querySelector('[data-bk]');
     b.ind = view.querySelector('[data-bkind]');
     b.nav = view.querySelector('.cbk-nav');
-    b.view = view; b.leaf = null; b.single = false;
-    b.pos = Math.max(0, b.pos - (b.pos % 2));
+    b.view = view; b.leaf = null;
+    b.one = b.single = bk2OneGet();
+    b.pos = b.one ? Math.max(1, b.pos) : Math.max(0, b.pos - (b.pos % 2));
     b.gl = null;   /* المحرّكُ بعد التحميل */
     b.dark = pkDark();
     let raf = 0;
@@ -23419,6 +24198,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (cxMorphBusy && b.gl && b.stW && b.stH) {
         const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
         Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
+        bkTLHide(b);
         return;
       }
       cancelAnimationFrame(raf);
@@ -23428,9 +24208,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const st = b.stage;
     /* قبل أن يُحمَّل المحرّك يُكتب الموضعُ وحدَه، فيُفتح عليه حين يجهز */
     const turnTo = A => {
-      A = Math.max(0, Math.min(Math.floor(b.n / 2) + 1, A));
+      A = Math.max(0, Math.min(bk2MaxA(b), A));
       if (b.gl) return b.gl.goTo(A);
-      b.closed = A === 0; b.pos = A === 0 ? 0 : 2 * (A - 1);
+      b.closed = A === 0; b.pos = bk2PosOf(b, A);
       if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
       bk2Show(b);
     };
@@ -23442,15 +24222,249 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     view.querySelectorAll('[data-bknav]').forEach(btn => btn.addEventListener('click', () => step(+btn.dataset.bknav)));
     view.querySelector('[data-bkclose]').addEventListener('click', () => turnTo(0));
+    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !b.one));
     bk2Layout(b);
+    bk2Engine(b);
+  }
+  /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته.
+     المحرّكُ يُبنى من جديد بالوضع الآخر، ولقطةُ القديم فوقه تتلاشى فلا يومض */
+  function bk2SetOne(b0, one) {
+    one = !!one; bk2OneSet(one);
+    bkModeSync();
+    const all = new Set([b0, ...Object.values(pkSrcBk)]);
+    all.forEach(b => { if (b && b.gl !== undefined && !!b.one !== one && b.view && b.view.isConnected) bk2Switch(b, one); });
+  }
+  function bk2Switch(b, one) {
+    const pg = b.closed ? null : Math.max(1, b.pos);
+    let ghost = null;
+    const g = b.gl;
+    if (g && !g.dead && !bkReduce()) {
+      ghost = document.createElement('canvas');
+      try { g.snapshot(ghost); } catch (e) { ghost = null; }
+      if (ghost) {
+        Object.assign(ghost.style, { position: 'absolute', left: g.el.offsetLeft + 'px', top: g.el.offsetTop + 'px', width: g.el.style.width, height: g.el.style.height, pointerEvents: 'none', zIndex: 2 });
+        b.stage.appendChild(ghost);
+      }
+    }
+    if (g) g.dispose();
+    b.gl = null;
+    if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
+    b.one = b.single = one;
+    b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
+    if (b.meta) { b.meta.pos = b.pos; save(); }
+    bk2Layout(b);
+    bk2Engine(b);
+    if (ghost) setTimeout(() => {
+      const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-out', fill: 'forwards' });
+      an.onfinish = () => ghost.remove();
+    }, 60);
+  }
+  /* أزرارُ الوضع (تحت الكتاب وفي التذييل) تحمل صورةَ الوضع الآخر */
+  function bkModeSync() {
+    const one = bk2OneGet(), to = one ? 'two' : 'one', tip = one ? T().bkTwo : T().bkOne;
+    document.querySelectorAll('[data-bkmode], [data-actbk="mode"]').forEach(x => {
+      x.dataset.bkto = to; x.title = tip; x.setAttribute('aria-label', tip);
+      const sv = x.querySelector('svg'); if (sv) sv.innerHTML = bkModeIc(to);
+    });
+  }
+  /* ===== طبقةُ النصّ فوق الكتاب (أساسُ التحديد) =====
+     الصفحةُ في الكتاب رسمٌ على وجه الورقة، والرسمُ لا يُحدَّد منه نصّ. فإذا سكنت الصفحة وُضعت فوقها طبقةٌ شفّافة
+     بكلمات الملفّ نفسِه في مواضعها (‎pdf.js renderTextLayer‎) — لا نسخةَ صورٍ ولا نصٍّ تُحفظ، كلُّه من الـPDF.
+     تُخفى مع أوّل حركة (تقليبٌ أو سحبٌ أو تحويمٌ عند الحرف) وتعود حين يسكن. والفراغُ بين الكلمات يمرّر النقرَ للكتاب فيُقلَّب */
+  function bkTLHide(b) { if (b && b.tlBox) b.tlBox.hidden = true; }
+  async function bkTLShow(b) {
+    const g = b && b.gl;
+    if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc) return;
+    if (g.flat === false) { bkTLHide(b); return; }
+    if (!b.tlBox || !b.tlBox.isConnected) {
+      b.tlBox = document.createElement('div'); b.tlBox.className = 'bk-tlbox'; b.tlBox.hidden = true;
+      b.stage.appendChild(b.tlBox); b.tlPages = new Map(); b.tlText = b.tlText || new Map();
+    }
+    const A = g.A, rects = g.pageRects(), want = new Set(rects.map(r => r.k));
+    b.tlPages.forEach((d, k) => { if (!want.has(k)) { d.remove(); b.tlPages.delete(k); } });
+    const tok = b.tlTok = (b.tlTok || 0) + 1;
+    for (const r of rects) {
+      let d = b.tlPages.get(r.k);
+      const W = Math.round(r.w);
+      if (!d || d.dataset.w !== String(W)) {
+        if (d) d.remove();
+        d = document.createElement('div'); d.className = 'bk-tl'; d.dataset.k = r.k; d.dataset.w = W; d.dir = 'ltr';
+        b.tlBox.appendChild(d); b.tlPages.set(r.k, d);
+        /* البناءُ وعدٌ على الطبقة نفسِها: نداءٌ ثانٍ في أثنائه ينتظره ولا يجدها نصفَ مبنيّة */
+        d._p = (async (d, k, w) => {
+          const pg = await b.doc.getPage(k);
+          const vp = pg.getViewport({ scale: w / pg.getViewport({ scale: 1 }).width });
+          d.style.setProperty('--scale-factor', vp.scale);
+          let tc = b.tlText.get(k);
+          if (!tc) { tc = await pg.getTextContent(); b.tlText.set(k, tc); if (b.tlText.size > 12) b.tlText.delete(b.tlText.keys().next().value); }
+          await pdfjsLib.renderTextLayer({ textContentSource: tc, container: d, viewport: vp, textDivs: [] }).promise;
+        })(d, r.k, r.w);
+      }
+      try { await d._p; } catch (e) { if (b.tlPages.get(r.k) === d) { d.remove(); b.tlPages.delete(r.k); } continue; }
+      if (tok !== b.tlTok) return;
+      Object.assign(d.style, { left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px' });
+    }
+    /* تحرّك شيءٌ أثناء البناء: لا تُظهَر */
+    /* ولا تُظهَر على صفحةٍ مرفوعةٍ بلمس طرفها: الطبقةُ مسطّحةٌ فتنزاح عنها — تعود حين تسكن الورقةُ في كومتها */
+    if (tok !== b.tlTok || b.gl !== g || g.A !== A || !g.settled || g.flat === false) return;
+    b.tlBox.hidden = false;
+    b.tlPages.forEach(d => { if (!d._lines) bkTLLines(d); hlSpots(b, d); });
+  }
+  /* ===== التحديدُ في الكتاب: هندسيٌّ لا تحديدُ المتصفّح (طلبُ صاحب الموقع) =====
+     تحديدُ المتصفّح يمشي بترتيب النصّ في الملفّ، وكثيرٌ من ملفّات PDF العربيّة تحفظه قِطعًا بترتيب الرسم (يسارًا إلى يمين)،
+     فكان السحبُ من يمين السطر يُحدِّد ما لا يُرى. فيُبنى من الطبقة نموذجٌ للصفحة: أسطرٌ، ولكلّ سطرٍ حروفُه بمواضعها
+     (‎Range.getClientRects‎ لكلّ حرف) واتّجاهُه. والسحبُ يمشي باتّجاه القراءة من نقطةٍ إلى نقطة ويلتصق بحدود الحروف،
+     ويُرسم لكلّ سطرٍ شريطٌ واحدٌ بلونٍ واحد وقامةِ السطر (وسيطِ قطعه، فلا ترفعه الحركات).
+     والمحفوظُ مواضعُ على الصفحة (كسورٌ من عرضها وقامتها) — لا يتعلّق بترتيب النصّ في الملفّ */
+  const BK_AR = /[֐-ࣿיִ-﷿ﹰ-﻿]/;
+  function bkTLLines(d) {
+    const R = d.getBoundingClientRect(); if (!R.width) return;
+    const fx = x => (x - R.left) / R.width, fy = y => (y - R.top) / R.height;
+    const spans = [...d.querySelectorAll('span')].filter(e => !e.classList.contains('markedContent') && e.firstChild && e.firstChild.nodeType === 3);
+    const sp = spans.map(e => e.getBoundingClientRect()).filter(r => r.width > 0 && r.height > 0).sort((a, b) => a.top - b.top);
+    /* السطرُ يُعرف بنطاق أوّل قطعةٍ فيه (لا يتمدّد بالقطع الطويلة فيبتلع السطرَ التالي)، وقامتُه وسيطُ قطعه */
+    const rows = [], med = a => { a = a.slice().sort((x, y) => x - y); return a[a.length >> 1]; };
+    for (const r of sp) {
+      const m = r.top + r.height / 2, row = rows.find(o => m > o.c0 && m < o.c1);
+      if (row) { row.l = Math.min(row.l, r.left); row.r = Math.max(row.r, r.right); row.ts.push(r.top); row.bs.push(r.bottom); }
+      else rows.push({ l: r.left, r: r.right, c0: r.top, c1: r.bottom, ts: [r.top], bs: [r.bottom] });
+    }
+    rows.forEach(o => { o.t = med(o.ts); o.b = med(o.bs); o.ch = []; o.ar = 0; o.lt = 0; });
+    /* الحروف: موضعُ كلٍّ منها، ويُنسب إلى السطر الذي يقع فيه وسطُه */
+    const rg = document.createRange();
+    for (const e of spans) {
+      const t = e.firstChild, s = t.data;
+      for (let i = 0; i < s.length; i++) {
+        if (/\s/.test(s[i])) continue;
+        rg.setStart(t, i); rg.setEnd(t, i + 1);
+        const q = rg.getClientRects()[0]; if (!q || q.width <= 0) continue;
+        const m = q.top + q.height / 2, row = rows.find(o => m > o.c0 - 2 && m < o.c1 + 2); if (!row) continue;
+        row.ch.push({ x0: fx(q.left), x1: fx(q.right), c: s[i] });
+        if (BK_AR.test(s[i])) row.ar++; else if (/[A-Za-z0-9]/.test(s[i])) row.lt++;
+      }
+    }
+    const f = document.createDocumentFragment();
+    d._rows = rows.filter(o => o.ch.length).map((o, i) => {
+      const x = document.createElement('i'); x.className = 'bk-tl__ln';
+      Object.assign(x.style, { left: (fx(o.l) - 3 / R.width) * 100 + '%', width: ((o.r - o.l + 6) / R.width) * 100 + '%', top: (fy(o.t) - 1 / R.height) * 100 + '%', height: ((o.b - o.t + 2) / R.height) * 100 + '%' });
+      f.appendChild(x);
+      const ch = o.ch.sort((a, b) => a.x0 - b.x0), ed = [...new Set(ch.flatMap(c => [c.x0, c.x1]))].sort((a, b) => a - b);
+      return { i, t: fy(o.t), b: fy(o.b), l: ch[0].x0, r: Math.max(...ch.map(c => c.x1)), rtl: o.ar >= o.lt, ch, ed };
+    });
+    d.insertBefore(f, d.firstChild);
+    d._lines = true;
+  }
+  /* الموضعُ تحت المؤشّر: أقربُ سطرٍ عموديًّا، وأقربُ حدِّ حرفٍ فيه */
+  function bkTLAt(d, e) {
+    const R = d.getBoundingClientRect(), rows = d._rows || []; if (!rows.length || !R.width) return null;
+    const x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
+    let ri = 0, best = 1e9;
+    rows.forEach((o, i) => { const dd = y < o.t ? o.t - y : y > o.b ? y - o.b : 0; if (dd < best) { best = dd; ri = i; } });
+    const ed = rows[ri].ed; let ex = ed[0];
+    for (const v of ed) if (Math.abs(v - x) < Math.abs(ex - x)) ex = v;
+    return { ri, x: ex };
+  }
+  /* تقدّمُ القراءة: سطرٌ بعد سطر، وفي السطر العربيّ من اليمين إلى اليسار */
+  const bkTLOrd = (d, p) => p.ri * 4 + (d._rows[p.ri].rtl ? 1 - p.x : p.x) * 2;
+  function bkTLBars(d, a, z) {
+    if (bkTLOrd(d, a) > bkTLOrd(d, z)) [a, z] = [z, a];
+    const out = [];
+    for (let i = a.ri; i <= z.ri; i++) {
+      const o = d._rows[i];
+      let l = o.l, r = o.r;
+      if (i === a.ri) { if (o.rtl) r = a.x; else l = a.x; }
+      if (i === z.ri) { if (o.rtl) l = z.x; else r = z.x; }
+      if (r - l > 0.002) out.push({ ri: i, l, r, t: o.t, b: o.b });
+    }
+    return out;
+  }
+  /* نصُّ المحدَّد بترتيب القراءة (يُعاد إلى أشكال الحروف الأصليّة: ‎NFKC‎) — يُحفظ مع التحديد للعرض فقط */
+  function bkTLText(d, bars) {
+    return bars.map(br => {
+      const o = d._rows[br.ri], cs = o.ch.filter(c => (c.x0 + c.x1) / 2 >= br.l && (c.x0 + c.x1) / 2 <= br.r);
+      if (o.rtl) cs.reverse();
+      return cs.map(c => c.c).join('');
+    }).join(' ').normalize('NFKC').replace(/\s+/g, ' ').trim();
+  }
+  function bkTLDraw(d, bars) {
+    d.querySelectorAll('.bk-tl__sel').forEach(x => x.remove());
+    for (const o of bars || []) {
+      const x = document.createElement('i'); x.className = 'bk-tl__sel';
+      Object.assign(x.style, { left: o.l * 100 + '%', width: (o.r - o.l) * 100 + '%', top: o.t * 100 + '%', height: (o.b - o.t) * 100 + '%' });
+      d.insertBefore(x, d.firstChild);
+    }
+  }
+  /* التحديدُ الحاليّ ‏‎bkTLSel = { b, d, k, bars, text }‎ — والخطوةُ التالية (الأرقام) تبني عليه */
+  let bkTLSel = null, bkTLDrag = null;
+  function bkTLClear() {
+    if (!bkTLSel) return;
+    const sel = bkTLSel, c = hlCan(sel.d), b = sel.painted ? bkOfEl(sel.d) : null;
+    bkTLDraw(sel.d, null); bkTLSel = null;
+    if (b && b.gl && b.gl.refreshPage) b.gl.refreshPage(sel.k);
+    if (c) hlBarSync(c.id);
+  }
+  document.addEventListener('pointerdown', e => {
+    const d = e.target.closest && e.target.closest('.bk-tl');
+    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
+    if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
+    const p = bkTLAt(d, e); if (!p) return;
+    e.preventDefault();
+    bkTLClear();
+    bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
+    try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
+    const z = bkTLAt(bkTLDrag.d, e); if (!z) return;
+    bkTLDrag.z = z; bkTLDrag.moved = true;
+    bkTLDraw(bkTLDrag.d, bkTLBars(bkTLDrag.d, bkTLDrag.a, z));
+  }, true);
+  const bkTLUp = e => {
+    if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
+    const g = bkTLDrag; bkTLDrag = null;
+    /* نقرةٌ بلا سحب: تختار التظليلَ الذي تحتها (أو تُلغي الاختيار) */
+    if (!g.moved || !g.z) { bkTLDraw(g.d, null); hlPick(g.d, e); return; }
+    const bars = bkTLBars(g.d, g.a, g.z);
+    if (!bars.length) { bkTLDraw(g.d, null); return; }
+    bkTLSel = { d: g.d, k: +g.d.dataset.k, rtl: g.d._rows[bars[0].ri].rtl, bars: bars.map(({ l, r, t, b }) => ({ l, r, t, b })), text: bkTLText(g.d, bars) };
+    /* التحديدُ عابرٌ حتى يدخل دائرة (طلبُ صاحب الموقع): مع دائرةٍ شغّالةٍ يثبت فيها فورًا، وإلّا يبقى تحديدًا
+       تُضغط دائرةٌ فيثبت فيها، أو يُنقر بعيدًا عنه (أو Esc) فيختفي */
+    const c = hlCan(g.d);
+    if (c && hlArm[c.id]) { hlCreate(bkTLSel); return; }
+    if (c) { if (hlCur) hlSetCur(hlCur.id, null); hlBarSync(c.id); }
+    /* يُطلى التحديدُ على الورقة نفسِها، فإذا رُفعت الصفحةُ بلمس طرفها مال معها ولم يختفِ — وتُرفع أشرطةُ الطبقة حين يصل الطلاء */
+    const b = bkOfEl(g.d), sel = bkTLSel;
+    if (b && b.gl && b.gl.refreshPage) {
+      sel.painted = true;
+      b.gl.refreshPage(sel.k).then(() => { if (bkTLSel === sel) bkTLDraw(sel.d, null); });
+    }
+  };
+  document.addEventListener('pointerup', bkTLUp, true);
+  document.addEventListener('pointercancel', bkTLUp, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && bkTLSel) { bkTLClear(); e.stopImmediatePropagation(); } }, true);
+  /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
+  function bk2Engine(b) {
+    const st = b.stage;
     bk2Lib().then(([THREE, M]) => {
+      if (b.gl && !b.gl.dead) return;
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light',
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
+        /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
+        onIdle: () => bkTLShow(b),
+        /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
+        interceptDown: () => {
+          if (bkTLSel && bkTLSel.d.isConnected && b.stage.contains(bkTLSel.d)) { bkTLClear(); return true; }
+          if (hlCur && hlPost(hlCur.id) && pkSrcBase(hlSidOf(b)) === hlCur.id) { hlSetCur(hlCur.id, null); return true; }
+          return false;
+        },
+        onBusy: () => bkTLHide(b),
         onTurn: A => {
-          b.closed = A === 0; b.pos = A === 0 ? 0 : 2 * (A - 1);
+          /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
+          if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
+          b.closed = A === 0; b.pos = bk2PosOf(b, A);
           if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
           bk2Show(b);
         },
@@ -23477,11 +24491,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (g) {
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
       g.resize();
+      /* تغيّر المقاس: طبقةُ النصّ تُعاد على المستطيل الجديد بعد أن يقف */
+      bkTLHide(b); clearTimeout(b.tlT); b.tlT = setTimeout(() => { if (b.gl === g && g.settled) bkTLShow(b); }, 160);
     }
-    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=1.06 · MY=1.1‎، والكاميرا ترفع الكتابَ ‎4%‎) — ولو قبل تحميله،
+    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=MY=1.04‎، والكاميرا ترفع الكتابَ ‎1%‎) — ولو قبل تحميله،
        فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
-    const H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.1), b.stW / (2 * 1.06));
-    const w = 2 * ppu, h = H * ppu, x = b.stW / 2 - ppu, y = b.stH / 2 - h * 0.54;
+    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.04), b.stW / (cols * 1.04));
+    const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * 0.51;
     b.pw = Math.floor(ppu); b.ph = Math.floor(h);
     Object.assign(b.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
     b.nav.style.width = Math.round(w) + 'px';
@@ -23493,8 +24509,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const g = b.gl, p = b.pos;
     /* موضعٌ كُتب من خارج (اختيارُ مجلدٍ مربوط · ‎pkLnkGo‎): المحرّكُ يقلّب إليه */
     if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
-    const A = bk2A(b), maxA = Math.floor(b.n / 2) + 1;
-    b.ind.textContent = b.closed ? T().bkCover : p === 0 ? `1 / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    const A = bk2A(b), maxA = bk2MaxA(b);
+    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === 0 ? `1 / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
     if (b.onShow) b.onShow(b);
     pkActInd(b);
     b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;
@@ -23604,7 +24620,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b.coverP) return b.coverP;
     b.coverP = (async () => {
       const blob = b.covKey ? await chIdb('readonly', b.covKey) : null;
-      if (!blob) return bkPageURL(b, 1);
+      if (!blob) return bkPageURL(b, b.covPg || 1);
       const bmp = await createImageBitmap(blob);
       const cv = document.createElement('canvas');
       cv.width = b.rw; cv.height = Math.round(b.rw / b.ar);
@@ -23614,7 +24630,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bmp.close && bmp.close();
       const out = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.92));
       return URL.createObjectURL(out);
-    })().catch(() => bkPageURL(b, 1));
+    })().catch(() => bkPageURL(b, b.covPg || 1));
     return b.coverP;
   }
 
@@ -24861,6 +25877,7 @@ void main() {
     srvPull(code);       /* ومنشوراتُ غيرك: تُجذب في الخلفيّة وتُحقن ثمّ تُعاد الشاشة */
     const actLbl = c.act ? ` — ${c.act}` : '';   /* نشاط المعمل يظهر في العنوان لتمييز خيطه */
     $('#cm-title').textContent = (state.lang === 'ar' ? `${arShort(c)}${actLbl} (${c.h})` : `${c.code}${actLbl} (${c.h})`);
+    if (COURSE_PREV[code]) $('#cm-title').insertAdjacentHTML('beforeend', coursePrevHTML(code));
     /* مربع صورة المادة يمين الاسم بالعنوان */
     $('#cm-timg').innerHTML = imgOf(code)
       ? `<img src="${imgOf(code)}" alt="">`
@@ -30723,7 +31740,15 @@ void main() {
      can silently replace the other's session, so we check before writing.
      Asked at most once every few seconds — this sits in the save path. */
   let sesUid = null, sesAt = 0;
-  async function fixSession() {
+  /* One identity check at a time: a save sweeps every post of the account, and each push asked the
+     server 'who am I' before the first answer came back -- hundreds of /auth/me at once exhausted
+     the database connection pool. Concurrent callers now share the check in flight. */
+  let sesInFlight = null;
+  function fixSession() {
+    if (!sesInFlight) sesInFlight = fixSessionOnce().finally(() => { sesInFlight = null; });
+    return sesInFlight;
+  }
+  async function fixSessionOnce() {
     const want = actingAs();
     if (!want) return false;                       /* nobody signed in */
     if (sesUid === want && Date.now() - sesAt < 5000) return false;
@@ -31058,6 +32083,10 @@ void main() {
       }
       if (!r.ok) { bootMark('push:' + r.status); return; }
       srv429 = 0;
+      if (sec === 'doc') {
+        const ids = new Set(((p.data || {}).docs || []).map(x => x && x.id).filter(Boolean));
+        (((state.cinfo || {})[code] || {}).doctors || []).forEach(dr => { if (dr && ids.has(dr.id)) dr.pub = 1; });
+      }
       p.srvH = h;
       /* وبصمةُ المتن كما بلغ الخادمَ: بها يُعرف ما تبدّل بعده فلا يُسقط من الدرج */
       try { p.srvD = srvHash(JSON.stringify(p.data || {})); } catch (e) { delete p.srvD; }
@@ -31096,13 +32125,19 @@ void main() {
   function srvPushSoon() {
     if (!SRV_ON() || isGuest()) return;
     clearTimeout(srvT);
+    /* At most 3 pushes in flight: a sweep over hundreds of posts used to fire them all at once and exhaust
+       the database connection pool (and the server's 120-pushes-an-hour limit). */
     srvT = setTimeout(() => {
+      const jobs = [];
       Object.keys(state.cinfo || {}).forEach(code => {
         const ps = (state.cinfo[code] || {}).posts || {};
         Object.keys(ps).forEach(sec => (ps[sec] || []).forEach(p => {
-          if (p && p.me) srvPush(p, code, sec);   /* المسوّدةُ كالمنشور: كلاهما عملُك */
+          if (p && p.me) jobs.push([p, code, sec]);
         }));
       });
+      let k = 0;
+      const lane = async () => { while (k < jobs.length) { const j = jobs[k++]; try { await srvPush(j[0], j[1], j[2]); } catch (e) {} } };
+      for (let i = 0; i < 3; i++) lane();
     }, 4000);
   }
 
@@ -31888,13 +32923,24 @@ void main() {
           /* ولا تُمَسّ مساهمةٌ بلغت الخادمَ من قبل (‎srvH‎): هي القائمةُ هناك
              بمعرّفها، فتبديلُ معرّفها يجعلها ضرّةً لنفسها */
           if (postEmpty(mine) && !mine.srvH) {
-            mine.id = r.id; mine.uid = r.uid; mine.data = r.data;
+            pkSrcRekey(mine.id, r.id);   /* ومصادرُها (الكتب) تتبع المعرّفَ الجديد */
+            mine.id = r.id; mine.uid = r.uid; mine.data = Object.assign(r.data || {}, mine.data && mine.data.src ? { src: mine.data.src } : {}, mine.data && mine.data.hl ? { hl: mine.data.hl } : {});
             if (r.ts) mine.ts = srvMs(r.ts);
             mine.st = r.st || 'pub'; delete mine.srvH; delete mine.srvBig;
             cut++; return;
           }
           /* ومتني عامرٌ: يبقى، ويتبنّى المعرّفَ ليُحدِّثَ ما هناك لا ليُضاعفه */
-          if (!mine.srvH) { mine.id = r.id; cut++; }
+          if (!mine.srvH) {
+            pkSrcRekey(mine.id, r.id);
+            mine.id = r.id; cut++;
+            /* A doc post rebuilt locally (after the synced copy was dropped from storage) holds only the rows this
+               browser knows. Pushing it as is would replace the server's list, so the server's rows are kept. */
+            if (r.sec === 'doc' && mine.data && r.data && Array.isArray(r.data.docs)) {
+              const docs = Array.isArray(mine.data.docs) ? mine.data.docs : (mine.data.docs = []);
+              const have = new Set(docs.map(x => x && x.id));
+              r.data.docs.forEach(x => { if (x && x.id && !have.has(x.id)) docs.push(x); });
+            }
+          }
           return;
         }
         /* ===== وما ليس عندي منها شيءٌ يُستردّ =====
@@ -32383,6 +33429,7 @@ void main() {
       return;
     }
     /* بنود التقييم: الاسم يُحفظ مباشرة، والسلايدر يحدّث الشريط حيًّا بلا إعادة رسم (حتى لا ينقطع السحب) */
+    if (e.target.id === 'cm-gnote') { gradingOf(cmCode).note = e.target.value; save(); return; }
     if (e.target.classList.contains('gi-name')) {
       const g = gradingOf(cmCode);
       g.items[+e.target.closest('.gitem').dataset.i].name = e.target.value;
@@ -38241,10 +39288,39 @@ void main() {
      ويُفكّ في **كلّ** فتحة. وهي تُقرأ مرّةً واحدةً في عمر المتصفّح ثمّ يُرفع
      ‎ankiRedo1‎ فلا تُقرأ أبدًا — فالثمنُ يُدفع كلَّ يومٍ لعملٍ وقع مرّة.
      فتُجلب عند الحاجة وحدَها، وما بعدها يُنتظر جلبَها. */
+  /* ===== مساهمةٌ تجريبيّةٌ في ‎ACCT 301‎ فيها الكتابُ التجريبيّ (طلبُ صاحب الموقع) =====
+     تُبذر مرّةً واحدةً في متصفّح صاحب الموقع وحده (‎state.uid === OWNER.uid‎): مساهمتُه هو في المادّة (‎myPost‎)،
+     ومصدرُها كتابٌ يُجلب من الموقع (‎assets/samples‎) إلى مخزن المتصفّح كما لو رُفع بيده.
+     ولا تُبذر لغيره: المساهمةُ تُنسب إلى من تُكتب في متصفّحه */
+  async function seedAcctBook() {
+    if (state.seedAcctBook1 || state.uid !== OWNER.uid) return;
+    const code = 'ACCT 301';
+    if (!CM[code]) return;
+    const p = myPost(code, 'cards');
+    if (pkSrcList(p.id).length) { state.seedAcctBook1 = 1; save(); return; }
+    let blob;
+    try {
+      const r = await fetch(assetURL('assets/samples/acct-managerial-accounting.pdf'), { cache: 'no-store' });
+      if (!r.ok) return;
+      blob = await r.blob();
+    } catch (e) { return; }
+    const name = 'المحاسبة الإدارية — كتاب تجريبي.pdf';
+    if (!await chIdb('readwrite', pkSrcKey(p.id), new File([blob], name, { type: 'application/pdf' }))) return;
+    (state.pkSrc = state.pkSrc || {})[p.id] = { name, size: blob.size, ts: Date.now(), type: 'book' };
+    /* العلامةُ تُكتب هنا لا بـ‎pkSrcMark‎: تلك تبحث في المادّة المفتوحة (‎cmCode‎) وقد لا تكون هذه —
+       وبلا علامةٍ تُعدّ المساهمةُ فارغةً فتُكنس */
+    p.data.src = { pdf: name, cover: null };
+    if (!String(p.data.title || '').trim()) p.data.title = 'المحاسبة الإدارية — كتاب تجريبي';
+    state.seedAcctBook1 = 1;
+    save();
+    if (cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
   function ankiChain() {
     ankiRedo();
     ankiHandBack();   /* وما نُسب إليك من بطائق الموقع يُردّ إليه */
     ankiToOwner();    /* ثمّ يُنسب إلى مؤلّفه: صاحبُ الموقع لا الموقع */
+    seedAcctBook();   /* والكتابُ التجريبيّ في ‎ACCT 301‎ — لصاحب الموقع وحده */
+    pkSrcHeal();      /* وكتابٌ ضاع حين بدّلت مساهمتُه معرّفَها: يُردّ إليها */
     cardsPub();       /* وتُوسَم للنشر: فيصير المعروضُ والمُسجَّلُ شيئًا واحدًا */
   }
   if (state.ankiRedo1 || window.ANKI_IMPORT) {
