@@ -9561,6 +9561,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
     pkActSet(post, ctl.dataset.pkid, pane.classList.contains('pk-src') ? 'book' : pane.classList.contains('pk-bank') ? 'bank' : 'mid');
+    /* ولمسُ مساحةٍ يبسط التذييلَ المطويّ فتعود أزرارُه */
+    if (cxFtDn && e.type === 'pointerdown') cxFtSet(false, true);
   };
   /* على النافذة قبل المستند: محرّراتُ الجوف (اللوحُ والجدولُ والشجرة) قد توقف الحدثَ في طور الالتقاء على المستند */
   window.addEventListener('pointerdown', pkActFrom, true);
@@ -22302,7 +22304,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ${id && pkLab() ? `<div class="cx-acttools" data-pkid="${esc(id)}">${pkActTools(id, true)}</div>`
         : `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`}
     </div>`;
-  function cxFtSet(dn) {
+  function cxFtSet(dn, quiet) {
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) { cxFtDn = false; return; }
     dn = !!dn;
@@ -22320,9 +22322,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ln.setAttribute('aria-expanded', String(!dn));
       const t = dn ? T().ftUp : T().ftDown;
       ln.title = t; ln.setAttribute('aria-label', t);
-      ln.focus({ preventScroll: true });
+      /* الطيُّ والبسطُ التلقائيّان (‎quiet‎) لا يسرقان التركيز ممّا نُقر */
+      if (!quiet) ln.focus({ preventScroll: true });
     }
   }
+  /* ===== التذييلُ يُطوى بنقرٍ خارج المساحات الثلاث، ويُبسط بلمس إحداها (طلبُ صاحب الموقع) =====
+     طيُّ القاع القائم (‎cxFtSet‎): الأزرارُ تختفي بحركة ويبقى الخطُّ وحده. ولا يُطوى بما يخدم المساحاتِ نفسَها:
+     التذييلُ وخطّاه، ورؤوسُ المساحات وأيقوناتُها، وشريطُ المجلدات، والمقابضُ بينها، والقوائمُ الطافية */
+  const CX_FT_KEEP = '.vt-foot, .pk-pubfoot, .pk-ftline, .pk-hdline, .cx-acttools, .pk-blkh, .pk-icrow, .pk-ic, .pk-fstrip, .pk-splh, .pk-varc, #pk-srcpop, .psp-sub, .cx-plus, .pk-lnk__pop, [role="dialog"], [role="menu"], [role="listbox"]';
+  window.addEventListener('pointerdown', e => {
+    if (cxFtDn || e.button > 0) return;
+    const t = e.target; if (!t || !t.closest) return;
+    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame'); if (!card) return;
+    if (t.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)')) return;
+    if (t.closest(CX_FT_KEEP)) return;
+    cxFtSet(true, true);
+  }, true);
   function cxHdMeasure() {
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) return;
