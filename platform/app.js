@@ -24073,7 +24073,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const p = hlPost(id); if (!p || !p.data) return null;
     if (!p.data.hl && make) p.data.hl = { marks: [] };
     const H = p.data.hl || null;
-    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; });
+    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; if (!HL_COL[m.col]) m.col = 'y'; if (!m.kind) m.kind = 't'; });   /* القديمُ أصفرُ نصّ */
     return H;
   }
   const hlSidOf = b => String((b && b.key) || '').replace(/^pksrc:/, '');
@@ -24094,7 +24094,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlRows(id) {
     try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
   }
-  const HL_YEL = 'rgb(246, 214, 120)';
+  /* ألوانُ التظليل الأربعة (ROADMAP-HL ق٢): ‏‎[طلاءُ الصفحة، دائرةُ الرقم، حبرُ الرقم]‎ — ولكلّ تظليلٍ لونُه (‎m.col‎) ونوعُه (‎m.kind‎: نصٌّ ‎t‎ أو مربّعٌ ‎box‎)،
+     والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
+  const HL_COL = { y: ['rgb(246, 214, 120)', '#f3d27a', '#3a2c0b'], g: ['rgb(169, 220, 176)', '#9fd6a8', '#173d21'],
+    b: ['rgb(168, 205, 238)', '#9cc6ec', '#123150'], p: ['rgb(244, 182, 200)', '#f2aec2', '#4d1426'] };
+  let hlColNow = (() => { try { const v = localStorage.getItem('ac.hl.col'); return HL_COL[v] ? v : 'y'; } catch (e) { return 'y'; } })();
+  function hlColSet(c) { if (!HL_COL[c]) return; hlColNow = c; try { localStorage.setItem('ac.hl.col', c); } catch (e) {} }
   /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
   function hlDots(m, W, Hh, rows) {
     const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
@@ -24108,20 +24113,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sel = hlSelOn(b, k);
     if (sel) {
       const c0 = cv.getContext('2d'), W0 = cv.width, H0 = cv.height;
-      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_YEL;
+      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_COL[hlColNow][0];
       for (const o of sel.bars) c0.fillRect(o.l * W0, o.t * H0, (o.r - o.l) * W0, (o.b - o.t) * H0);
       c0.globalCompositeOperation = 'source-over';
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
     const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
-    c.globalCompositeOperation = 'multiply'; c.fillStyle = HL_YEL;
-    for (const m of ms) for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh);
+    c.globalCompositeOperation = 'multiply';
+    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
     c.globalCompositeOperation = 'source-over';
     for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
+      const [, dot, ink] = HL_COL[m.col];
       c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
-      c.fillStyle = '#f3d27a'; c.fill();
-      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(120, 92, 25, .55)'; c.stroke();
-      c.fillStyle = '#3a2c0b'; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillStyle = dot; c.fill();
+      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(20, 35, 63, .3)'; c.stroke();
+      c.fillStyle = ink; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillText(String(n), x, y + R * 0.06);
     }
   }
@@ -24186,7 +24192,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const { b, sid, id } = c, H = hlData(id, true);
     let row = cid || hlArm[id] || null, grew = false;
     if (row === 'new') { row = hlNewRow(id); grew = !!row; if (hlArm[id] === 'new') hlArm[id] = row; }
-    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l',
+    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlColNow, kind: 't',
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
     save();
@@ -24259,9 +24265,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* في الجدول: رقمُ الصفّ المربوطِ بتظليلٍ يتلوّن، ونقرُه يقلّب الكتابَ إلى أوّل تظليلاته */
   function hlRowMarksSync(id) {
-    const H = hlData(id), used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    const H = hlData(id), used = new Map(); (H ? H.marks : []).forEach(x => x.c.forEach(c => { if (!used.has(c)) used.set(c, x.col); }));
     document.querySelectorAll(`#cm-body .kt-view[data-pkid="${CSS.escape(id)}"] tr[data-kcard]`).forEach(tr => {
-      const n = tr.querySelector('.kt-num'); if (n) n.classList.toggle('has-hl', used.has(tr.dataset.kcard));
+      const n = tr.querySelector('.kt-num'); if (!n) return;
+      const col = used.get(tr.dataset.kcard);
+      n.classList.toggle('has-hl', !!col);
+      if (col) { n.style.setProperty('--hlc', HL_COL[col][1]); n.style.setProperty('--hli', HL_COL[col][2]); } else { n.style.removeProperty('--hlc'); n.style.removeProperty('--hli'); }
     });
   }
   document.addEventListener('click', e => {

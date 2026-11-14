@@ -18330,7 +18330,7 @@ html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
 .cx-hlc.is-next { font-size: 14px; }
 html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
 /* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
-.kt-num.has-hl { background: #f3d27a; color: #3a2c0b; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
+.kt-num.has-hl { background: var(--hlc, #f3d27a); color: var(--hli, #3a2c0b); border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
 .kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }
 /* ===== المساحاتُ في المساهمة الضيّقة بقامةٍ ثابتة (طلبُ صاحب الموقع) =====
    كانت القسمةُ تأخذ قامتَها من محتوى جيرانها، فتتبدّل مع تبديل عرض الملخّص (شجريّ · بطاقيّ · جدوليّ)، وتنضغط إن قصُر جارٌ
