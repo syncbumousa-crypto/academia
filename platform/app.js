@@ -9476,7 +9476,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a === 'book') {
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
-      if (!pub) return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActMode() + pkActHl(id) + '<span class="cx-srcsep"></span>' + `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcHd(id, true)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
+      /* ثلاثُ خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح، ويسارًا المصدرُ وطريقةُ القراءة وتحتهما «ربط الصفحات» مصغّرة */
+      if (!pub) return `<div class="cx-ftr">${pkActHl(id)}</div>`
+        + `<div class="cx-ftc">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}<span class="cx-actind" data-actind>${esc(ind)}</span>${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>`
+        + `<div class="cx-ftl chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}"><div class="cx-ftl__r">${pkSrcHd(id, true)}${pkActMode()}</div>${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
         + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');

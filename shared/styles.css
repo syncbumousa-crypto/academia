@@ -18360,3 +18360,35 @@ html[data-theme="dark"] .bk2-ph__pg:not(.is-cover):not(.is-inside) { background:
 .bk-skel > i::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .18) 50%, transparent 70%);
   background-size: 220% 100%; animation: bk2-ph-sh 1.4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .bk-skel > i::after { animation: none; } }
+
+/* ===== تذييل الكتاب بثلاث خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح ورقمُ الصفحة،
+   ويسارًا اسمُ المصدر وطريقةُ القراءة على يساره وتحتهما «ربط الصفحات» — مصغّرةٌ ومكدّسة ===== */
+.cx-acttools:has(> .cx-ftc) { inset-inline: 14px; inset-inline-start: 14px; transform: translateY(-50%); justify-content: center; }
+html[data-lang="en"] .cx-acttools:has(> .cx-ftc) { transform: translateY(-50%); }
+.cx-acttools > .cx-ftc { display: flex; align-items: center; gap: 8px; }
+.cx-acttools > .cx-ftc > .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+html[data-theme="dark"] .cx-acttools > .cx-ftc > .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-acttools > .cx-ftc > .cx-actb:disabled { opacity: .35; }
+.cx-acttools > .cx-ftr { position: absolute; inset-inline-start: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; }
+.cx-acttools > .cx-ftl.cx-srctools { position: absolute; inset-inline-end: 0; top: 50%; transform: translateY(-50%);
+  flex-direction: column; align-items: stretch; gap: 4px; }
+.cx-ftl__r { display: flex; align-items: center; gap: 4px; }
+.cx-ftl .pk-srchd { flex: 1 1 auto; justify-content: center; }
+.cx-acttools .cx-ftl .pk-srchd { height: 24px; max-width: 170px; padding: 0 10px; gap: 5px; font-size: 11px; }
+.cx-acttools .cx-ftl .pk-srchd .pk-srchd__ty svg { width: 12px; height: 12px; }
+.cx-acttools .cx-ftl .pk-srchd > svg:last-child { width: 10px; height: 10px; }
+.cx-ftl .cx-actmode { width: 24px; height: 24px; flex: none; border: 1px solid var(--u-line); background: var(--u-surf, #fff); }
+.cx-ftl .cx-actmode svg { width: 13px; height: 13px; }
+html[data-theme="dark"] .cx-ftl .cx-actmode { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-srctools.cx-ftl .pk-lnk__hd { height: 24px; padding: 0 10px; gap: 5px; justify-content: center; }
+.cx-ftl .pk-lnk__hd { font-size: 11px; }
+.cx-ftl .pk-lnk__hd > svg:first-child { width: 13px; height: 13px; }
+.cx-ftl .pk-lnk__hd > svg:last-child { width: 10px; height: 10px; }
+:is(.pk--max, .pk--frame) .vt-foot:has(.cx-ftl) { min-height: 58px; }
+.pk--ftdn .vt-foot:has(.cx-ftl) { min-height: 0; }
+.cx-acttools .cx-ftl .pk-srchd, .cx-srctools.cx-ftl .pk-lnk__hd { height: 23px; }
+.cx-ftl .cx-actmode { width: 23px; height: 23px; }
+.cx-acttools > .cx-ftl.cx-srctools { gap: 3px; }
+.cx-srctools.cx-ftl .pk-lnk { position: static; }   /* فتنفتح شجرةُ الربط فوق الخانة كلّها لا فوق زرّها فتغطّي اسمَ المصدر */
+/* وقائمتا المصدر و«ربط الصفحات» فوق اللوح حين يملأ الشاشة (‎#cm-body.is-cxfull‎ في 4000) — كانتا تنفتحان خلفه */
+.pk-srcpop, .pk-lnk-layer { z-index: 4100; }
