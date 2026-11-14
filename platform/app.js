@@ -23925,7 +23925,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       await pg.render({ canvasContext: cx, viewport: vp }).promise;
       b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
     } else { b.pgCv.delete(ck); b.pgCv.set(ck, base); }
-    if (k === 'cover' || !hlMarksOn(b, k).length) return base;
+    if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return base;
     const cv = document.createElement('canvas'); cv.width = base.width; cv.height = base.height;
     cv.getContext('2d').drawImage(base, 0, 0);
     hlPaint(b, k, cv);
@@ -23974,7 +23974,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
     return m.c.map(cid => ({ cid, n: rows.get(cid) })).filter(o => o.n).map((o, i) => ({ ...o, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
   }
+  /* التحديدُ العابرُ على هذه الصفحة (إن كان) — يُطلى على الورقة كالتظليل فيميل معها، لا طبقةً فوقها */
+  function hlSelOn(b, k) {
+    try { return bkTLSel && bkTLSel.k === k && bkTLSel.painted && bkOfEl(bkTLSel.d) === b ? bkTLSel : null; } catch (e) { return null; }
+  }
   function hlPaint(b, k, cv) {
+    const sel = hlSelOn(b, k);
+    if (sel) {
+      const c0 = cv.getContext('2d'), W0 = cv.width, H0 = cv.height;
+      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_YEL;
+      for (const o of sel.bars) c0.fillRect(o.l * W0, o.t * H0, (o.r - o.l) * W0, (o.b - o.t) * H0);
+      c0.globalCompositeOperation = 'source-over';
+    }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
     const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
     c.globalCompositeOperation = 'multiply'; c.fillStyle = HL_YEL;
@@ -24264,6 +24275,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   async function bkTLShow(b) {
     const g = b && b.gl;
     if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc) return;
+    if (g.flat === false) { bkTLHide(b); return; }
     if (!b.tlBox || !b.tlBox.isConnected) {
       b.tlBox = document.createElement('div'); b.tlBox.className = 'bk-tlbox'; b.tlBox.hidden = true;
       b.stage.appendChild(b.tlBox); b.tlPages = new Map(); b.tlText = b.tlText || new Map();
@@ -24293,7 +24305,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       Object.assign(d.style, { left: r.x + 'px', top: r.y + 'px', width: r.w + 'px', height: r.h + 'px' });
     }
     /* تحرّك شيءٌ أثناء البناء: لا تُظهَر */
-    if (tok !== b.tlTok || b.gl !== g || g.A !== A || !g.settled) return;
+    /* ولا تُظهَر على صفحةٍ مرفوعةٍ بلمس طرفها: الطبقةُ مسطّحةٌ فتنزاح عنها — تعود حين تسكن الورقةُ في كومتها */
+    if (tok !== b.tlTok || b.gl !== g || g.A !== A || !g.settled || g.flat === false) return;
     b.tlBox.hidden = false;
     b.tlPages.forEach(d => { if (!d._lines) bkTLLines(d); hlSpots(b, d); });
   }
@@ -24383,7 +24396,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* التحديدُ الحاليّ ‏‎bkTLSel = { b, d, k, bars, text }‎ — والخطوةُ التالية (الأرقام) تبني عليه */
   let bkTLSel = null, bkTLDrag = null;
-  function bkTLClear() { if (bkTLSel) { const c = hlCan(bkTLSel.d); bkTLDraw(bkTLSel.d, null); bkTLSel = null; if (c) hlBarSync(c.id); } }
+  function bkTLClear() {
+    if (!bkTLSel) return;
+    const sel = bkTLSel, c = hlCan(sel.d), b = sel.painted ? bkOfEl(sel.d) : null;
+    bkTLDraw(sel.d, null); bkTLSel = null;
+    if (b && b.gl && b.gl.refreshPage) b.gl.refreshPage(sel.k);
+    if (c) hlBarSync(c.id);
+  }
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
     if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
@@ -24411,8 +24430,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* التحديدُ عابرٌ حتى يدخل دائرة (طلبُ صاحب الموقع): مع دائرةٍ شغّالةٍ يثبت فيها فورًا، وإلّا يبقى تحديدًا
        تُضغط دائرةٌ فيثبت فيها، أو يُنقر بعيدًا عنه (أو Esc) فيختفي */
     const c = hlCan(g.d);
-    if (c && hlArm[c.id]) hlCreate(bkTLSel);
-    else if (c) { if (hlCur) hlSetCur(hlCur.id, null); hlBarSync(c.id); }
+    if (c && hlArm[c.id]) { hlCreate(bkTLSel); return; }
+    if (c) { if (hlCur) hlSetCur(hlCur.id, null); hlBarSync(c.id); }
+    /* يُطلى التحديدُ على الورقة نفسِها، فإذا رُفعت الصفحةُ بلمس طرفها مال معها ولم يختفِ — وتُرفع أشرطةُ الطبقة حين يصل الطلاء */
+    const b = bkOfEl(g.d), sel = bkTLSel;
+    if (b && b.gl && b.gl.refreshPage) {
+      sel.painted = true;
+      b.gl.refreshPage(sel.k).then(() => { if (bkTLSel === sel) bkTLDraw(sel.d, null); });
+    }
   };
   document.addEventListener('pointerup', bkTLUp, true);
   document.addEventListener('pointercancel', bkTLUp, true);
@@ -24437,6 +24462,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         },
         onBusy: () => bkTLHide(b),
         onTurn: A => {
+          /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
+          if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
           b.closed = A === 0; b.pos = bk2PosOf(b, A);
           if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
           bk2Show(b);

@@ -488,9 +488,11 @@ export function createBook2(THREE, host, cfg) {
     el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
     /* صفحةٌ تغيّر ما يُرسم عليها (تحديداتٌ وأرقام): تُطلب صورتُها من جديد إن كانت محمَّلة */
     refreshPage(k) {
-      const t = pageTex.get(k); if (!t) return;
-      Promise.resolve(cfg.tex(k, texW)).then(cv => { if (dead || !cv) return; t.image = cv; t.needsUpdate = true; needs = true; }).catch(() => {});
+      const t = pageTex.get(k); if (!t) return Promise.resolve();
+      return Promise.resolve(cfg.tex(k, texW)).then(cv => { if (dead || !cv) return; t.image = cv; t.needsUpdate = true; needs = true; }).catch(() => {});
     },
+    /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
+    get flat() { return !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get settled() { return idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
