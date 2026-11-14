@@ -1023,8 +1023,10 @@ function renderLiquid(d, frame, w, h) {
      الزجاج، وهذا ما يُرى على iPhone حقيقي. وما حولها يأخذ لونَ خلفيّة الصفحة. */
   const screen = ph.querySelector('.phone-screen');
   if (app) {
-    // وضعُ التطبيق: الصفحةُ تملأ الشاشة، وشريطُ الحالة فوقها، والمنطقةُ الآمنة تُحقن فيها
-    screen.style.borderRadius = d.r + 'px';
+    // وضعُ التطبيق: هامشٌ علويٌّ بقدر شريط الحالة فلا يقع شيءٌ تحت الجزيرة،
+    // كما يفعل SwiftUI بالمنطقة الآمنة؛ والصفحةُ تمتدّ إلى أسفل الشاشة
+    screen.style.top = top + 'px';
+    screen.style.borderRadius = `0 0 ${d.r}px ${d.r}px`;
   } else {
     screen.style.top = top + 'px';
     screen.style.bottom = bottom + 'px';   // وتنتهي فوق الشريط السفلي — كما يُرى على الجهاز
@@ -1039,7 +1041,7 @@ function renderLiquid(d, frame, w, h) {
   if (d.hinge) vp.insertAdjacentHTML('beforeend', '<div class="hinge" style="z-index:3"></div>');
 
   if (state.src) frame.addEventListener('load', () => {
-    injectSafeArea(frame, app ? { top, bottom, left: 0, right: 0 } : { top: 0, bottom: 0, left: 0, right: 0 }, d);
+    injectSafeArea(frame, app ? { top: 0, bottom, left: 0, right: 0 } : { top: 0, bottom: 0, left: 0, right: 0 }, d);
     followTheme(frame, ph);
   });
 
@@ -1059,7 +1061,7 @@ function renderLiquid(d, frame, w, h) {
   $('safeBtn').classList.toggle('on', state.safe);
   $('rotate').classList.toggle('on', state.landscape);
   $('info').textContent = app
-    ? `تطبيق ${w} × ${h} pt  |  safe ↑${top} ↓${bottom}`
+    ? `تطبيق ${w} × ${h - top} pt — يبدأ تحت شريط الحالة ↑${top}  |  safe ↓${bottom}`
     : `صفحة Safari ${w} × ${h - top - bottom} pt  |  الكروم ↑${top} ↓${bottom}`;
   applyZoom();
   saveToUrl();
