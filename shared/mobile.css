@@ -15,8 +15,9 @@
 
 :root {
   --m-safe-b: max(var(--safe-bottom, 0px), env(safe-area-inset-bottom, 0px));
-  --m-bar-h: 62px;                                   /* ارتفاعُ الكبسولة */
-  --m-bar-gap: max(calc(var(--m-safe-b) - 12px), 10px); /* بُعدُها عن القاع */
+  --m-safe-t: max(var(--safe-top, 0px), env(safe-area-inset-top, 0px));
+  --m-bar-h: 56px;                                   /* ارتفاعُ الكبسولة */
+  --m-bar-gap: calc(var(--m-safe-t) + 8px);          /* بُعدُها عن أعلى الشاشة */
   --m-tint: var(--c-kfupm, #2c5e65);                 /* لونُ التبويب المختار */
 }
 html[data-theme="dark"] { --m-tint: var(--brand-tx, #8fd0c8); }
@@ -27,8 +28,9 @@ html.m-app .side-handle { display: none !important; }
 html.m-app body {
   padding-left: 0 !important;
   padding-right: 0 !important;
-  /* فراغٌ تحت آخر المحتوى بقدر الشريط، فلا يختفي تحته شيء */
-  padding-bottom: calc(var(--m-bar-h) + var(--m-bar-gap) + 16px) !important;
+  /* الشريطُ في الأعلى: فراغٌ فوق أوّل المحتوى بقدره، فلا يختفي تحته شيء (البحثُ أوّلُه) */
+  padding-top: calc(var(--m-bar-h) + var(--m-bar-gap) + 10px) !important;
+  padding-bottom: calc(var(--m-safe-b) + 16px) !important;
 }
 
 /* في الإنجليزيّة يبقى ‎<html dir="rtl">‎ والمحرّكُ يقلب ما يقلبه بـ‎data-lang‎ —
@@ -36,11 +38,11 @@ html.m-app body {
 html[data-lang="en"] .m-tabbar,
 html[data-lang="en"] .m-settings { direction: ltr; }
 
-/* ===== شريطُ التبويب — كبسولةٌ زجاجيّة عائمة ===== */
+/* ===== شريطُ التبويب — كبسولةٌ زجاجيّة عائمة في الأعلى، فوق البحث ===== */
 .m-tabbar {
   position: fixed; z-index: 60;
   left: 16px; right: 16px;
-  bottom: var(--m-bar-gap);
+  top: var(--m-bar-gap);
   height: var(--m-bar-h);
   display: flex; align-items: stretch;
   padding: 4px;
@@ -70,7 +72,7 @@ html[data-theme="dark"] .m-tabbar {
   transition: background-color .25s ease, color .2s ease, transform .15s ease;
 }
 html[data-theme="dark"] .m-tab { color: #f2f2f7; }
-.m-tab svg { width: 24px; height: 24px; flex: none; }
+.m-tab svg { width: 22px; height: 22px; flex: none; }
 .m-tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .m-tab:active { transform: scale(.94); }
 
@@ -87,7 +89,7 @@ html[data-theme="dark"] .m-tab.is-on { background: rgba(255, 255, 255, .12); box
 .m-settings {
   position: fixed; z-index: 55; inset: 0;
   overflow-y: auto;
-  padding: calc(var(--safe-top, 0px) + 12px) 16px calc(var(--m-bar-h) + var(--m-bar-gap) + 24px);
+  padding: calc(var(--m-bar-h) + var(--m-bar-gap) + 12px) 16px calc(var(--m-safe-b) + 24px);
   background: var(--bg, #f2f2f7);
   color: var(--tx, #000);
   font-family: 'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
