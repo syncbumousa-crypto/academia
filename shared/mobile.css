@@ -187,20 +187,24 @@ html[data-lang="en"] .m-cards-row { direction: ltr; }
   display: flex; flex-direction: column; align-items: flex-start;
   padding: 12px; border: 0; border-radius: 22px;
   color: #fff; text-align: start; cursor: pointer;
-  background: linear-gradient(155deg, var(--m-card), color-mix(in srgb, var(--m-card) 78%, #000));
-  box-shadow: 0 6px 16px color-mix(in srgb, var(--m-card) 30%, transparent);
+  background: linear-gradient(155deg, #2c5e65, #1d4248);
+  box-shadow: 0 6px 14px rgba(44, 94, 101, .25);
   font-family: 'IBM Plex Sans Arabic', -apple-system, sans-serif;
   -webkit-tap-highlight-color: transparent;
   transition: transform .15s ease, box-shadow .2s ease;
 }
 .m-card:active { transform: scale(.96); }
 /* المفتوحُ لوحُه: حلقةٌ بيضاءُ داخليّةٌ وحلقةُ الهويّة الذهبيّة حولها */
-.m-card.is-on { box-shadow: 0 0 0 2px #fff inset, 0 0 0 3px #e1c172, 0 8px 20px color-mix(in srgb, var(--m-card) 40%, transparent); }
+.m-card.is-on { box-shadow: 0 0 0 2px #fff inset, 0 0 0 3px #e1c172, 0 8px 20px rgba(44, 94, 101, .35); }
+/* ثيم «بترولي موحّد»: كلُّها بلون الجامعة، وفي الداكن تهدأ ويبقى المفتوحُ بتروليًّا بحلقةٍ ذهبيّة */
+html[data-theme="dark"] .m-card { background: linear-gradient(155deg, #1f4249, #16272b); box-shadow: 0 0 0 1px #25403f inset; }
+html[data-theme="dark"] .m-card.is-on { background: linear-gradient(155deg, #2c5e65, #1d4248); box-shadow: 0 0 0 2px #e1c172; }
+html[data-theme="dark"] .m-av { border-color: #16272b; }
 
 .m-card-ic {
   width: 32px; height: 32px; border-radius: 10px;
   display: grid; place-items: center;
-  background: rgba(255, 255, 255, .24);
+  background: rgba(225, 193, 114, .2); color: #e1c172;
 }
 .m-card-ic svg { width: 19px; height: 19px; opacity: 1; }
 .m-card-nm { margin-top: 9px; font-weight: 800; font-size: 14.5px; line-height: 1.2; }
@@ -217,5 +221,5 @@ html[data-lang="en"] .m-cards-row { direction: ltr; }
 }
 .m-pile .m-av:first-child { margin-inline-start: 0; }
 .m-av img, .m-av svg { width: 100%; height: 100%; object-fit: cover; display: block; }
-.m-av--more { direction: ltr; background: rgba(255, 255, 255, .9); color: #1c1c1e; font-weight: 700; font-size: 10px; line-height: 1; }
+.m-av--more { direction: ltr; background: #e1c172; color: #14233f; font-weight: 700; font-size: 10px; line-height: 1; }
 .m-av--empty { background: transparent; border: 1.5px dashed rgba(255, 255, 255, .7); }
