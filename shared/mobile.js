@@ -167,13 +167,12 @@
 
 
   /* ---------- أقسامُ المادّة: بطاقاتٌ تُسحب بدل التبويبات الثمانية ----------
-     صفّان: «عن المادة» (الأربعةُ الأولى) و«الموارد» (ما في ‎.cm-res‎). وكلُّ بطاقةٍ
+     صفٌّ واحدٌ: «عن المادة» (الأربعةُ الأولى) ثمّ «الموارد» (ما في ‎.cm-res‎). وكلُّ بطاقةٍ
      تُبنى من زرّها الأصليّ: أيقونتُه واسمُه ووجوهُ مساهميه وعدّادُه — وتُقرأ منه
      كلّما تغيّر (مادّةٌ أخرى، مساهمةٌ جديدة، تبويبٌ آخر). والضغطُ ينقر الأصلَ، فيُفتح
      لوحُه تحت البطاقات كما كان. ولا زرَّ «ساهِم» على البطاقة، ولا «عرض الكل». */
   var CARD_TINT = { info: '#2c5e65', doc: '#5e5ce6', abs: '#e8890c', grade: '#2a9fb5',
                     srcU: '#c9a227', srcP: '#2fae52', videos: '#e8365c', cards: '#9b4fd0' };
-  var GRP = { ar: ['عن المادة', 'الموارد'], en: ['About the course', 'Resources'] };
   var cardsHost = null, tabsSeen = null, cardsMO = null, bodyMO = null, rafQ = 0;
 
   function contributors(btn) {
@@ -230,12 +229,10 @@
     var res = tabs.querySelector('.cm-res');
     var about = [].filter.call(tabs.children, function (n) { return n.tagName === 'BUTTON'; });
     var more = res ? [].slice.call(res.querySelectorAll('button')) : [];
-    var g = GRP[lang()];
-    var html = '';
-    [[g[0], about], [g[1], more]].forEach(function (row) {
-      if (!row[1].length) return;
-      html += '<div class="m-cards-title">' + row[0] + '</div><div class="m-cards-row">' + row[1].map(cardHTML).join('') + '</div>';
-    });
+    // صفٌّ واحدٌ يُسحب: «عن المادة» ثمّ فاصلٌ رفيعٌ ثمّ «الموارد»
+    var html = '<div class="m-cards-row">' + about.map(cardHTML).join('') +
+      (about.length && more.length ? '<span class="m-cards-sep" aria-hidden="true"></span>' : '') +
+      more.map(cardHTML).join('') + '</div>';
     // تُحفظ مواضعُ السحب: البناءُ يتكرّر مع كلّ تغيير، والصفُّ لا يقفز إلى أوّله
     var keep = [].map.call(cardsHost.querySelectorAll('.m-cards-row'), function (r) { return r.scrollLeft; });
     cardsHost.innerHTML = html;

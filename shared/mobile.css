@@ -179,6 +179,7 @@ html[data-lang="en"] .m-cards-row { direction: ltr; }
   scrollbar-width: none;
 }
 .m-cards-row::-webkit-scrollbar { display: none; }
+.m-cards-sep { flex: none; align-self: center; width: 1px; height: 96px; margin: 0 2px; background: currentColor; opacity: .14; }
 
 .m-card {
   flex: none; scroll-snap-align: start;
