@@ -981,10 +981,15 @@ function renderLiquid(d, frame, w, h) {
   const tpl = document.getElementById('lf-tpl');
   const ph = tpl.content.firstElementChild.cloneNode(true);
   ph.classList.add('chrome-' + state.chrome, 'lf-light');
+  // الإطارُ نفسُه إطارُ الأجهزة الأخرى: حافّةٌ ‎14‎ وزوايا دائريّة بنصف قطر الشاشة
   ph.style.boxSizing = 'content-box';
   ph.style.width = w + 'px';
   ph.style.height = h + 'px';
-  ph.style.borderRadius = (d.r + 5.5) + 'px';
+  ph.style.border = '14px solid #111';
+  ph.style.borderRadius = (d.r + 14) + 'px';
+  ph.style.setProperty('--lf-corner', 'round');
+  ph.style.boxShadow = '0 0 0 2px #3a3a3c, 0 30px 60px rgba(0,0,0,.5)';
+  ph.querySelectorAll('.phone-btn').forEach(b => b.remove());
   ph.style.setProperty('--sim-safe-top', top + 'px');
   ph.style.setProperty('--sim-safe-bottom', bottom + 'px');
   const vp = ph.querySelector('.phone-viewport');
@@ -992,15 +997,20 @@ function renderLiquid(d, frame, w, h) {
   const notch = ph.querySelector('.phone-notch');
   notch.style.width = d.island[0] + 'px';
   notch.style.height = d.island[1] + 'px';
-  notch.style.top = (d.island[2] + 5.5) + 'px';
+  notch.style.top = d.island[2] + 'px';
   notch.style.borderRadius = '20px';
   const sb = ph.querySelector('.status-bar-info');
   sb.style.height = (d.island[2] * 2 + d.island[1]) + 'px';
   sb.style.padding = '0 34px';
   sb.style.fontSize = '17px';
   ph.querySelectorAll('.safari-url, .compact-pill-url').forEach(el => el.textContent = SITE_HOST);
+  /* الصفحةُ تبدأ تحت شريط الحالة (وتحت كبسولة العنوان في Top) — Safari لا يرسمها
+     خلف الجزيرة ما لم تطلب ‎viewport-fit=cover‎ — وتمتدّ إلى أسفل الشاشة تحت الزجاج.
+     وما فوقها يُلوَّن بلون خلفيّة الصفحة، كما يفعل Safari. */
+  const pageTop = top;
   const screen = ph.querySelector('.phone-screen');
-  screen.style.borderRadius = d.r + 'px';
+  screen.style.top = pageTop + 'px';
+  screen.style.borderRadius = `0 0 ${d.r}px ${d.r}px`;
   screen.appendChild(frame);
   if (state.safe) {
     vp.insertAdjacentHTML('beforeend',
@@ -1010,7 +1020,7 @@ function renderLiquid(d, frame, w, h) {
   if (d.hinge) vp.insertAdjacentHTML('beforeend', '<div class="hinge" style="z-index:3"></div>');
 
   if (state.src) frame.addEventListener('load', () => {
-    injectSafeArea(frame, { top, bottom, left: 0, right: 0 }, d);
+    injectSafeArea(frame, { top: 0, bottom, left: 0, right: 0 }, d);
     followTheme(frame, ph);
   });
 
@@ -1029,7 +1039,7 @@ function renderLiquid(d, frame, w, h) {
   $('fold').classList.toggle('hidden', !d.duo);
   $('safeBtn').classList.toggle('on', state.safe);
   $('rotate').classList.toggle('on', state.landscape);
-  $('info').textContent = `صفحة ${w} × ${h} pt — تمرّ تحت الزجاج  |  الكروم يغطّي ↑${top} ↓${bottom}`;
+  $('info').textContent = `صفحة ${w} × ${h - top} pt — تبدأ تحت ↑${top} وتمرّ تحت الزجاج ↓${bottom}`;
   applyZoom();
   saveToUrl();
 }
@@ -1042,6 +1052,13 @@ function followTheme(frame, ph) {
     const dark = root.getAttribute('data-theme') === 'dark' ||
       (!root.hasAttribute('data-theme') && frame.contentWindow.matchMedia('(prefers-color-scheme: dark)').matches);
     ph.classList.toggle('lf-light', !dark);
+    // ما فوق الصفحة (شريط الحالة) يأخذ لونَ خلفيّتها
+    try {
+      const doc = frame.contentDocument, win = frame.contentWindow;
+      let bg = win.getComputedStyle(doc.body).backgroundColor;
+      if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') bg = win.getComputedStyle(root).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') ph.querySelector('.phone-viewport').style.backgroundColor = bg;
+    } catch (e) { /* أصلٌ آخر */ }
   };
   apply();
   new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
