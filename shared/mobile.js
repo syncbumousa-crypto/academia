@@ -10,12 +10,29 @@
 
    والترتيبُ من اليمين: المكتبة · الركن · الاختبارات · الإعدادات.
    («إحصائياتي» غائبةٌ عن الشريط عمدًا.)
+
+   ===== ولا يراه إلّا مَن طلبه =====
+   الواجهةُ قيدُ التجربة، فهي **مطفأةٌ للزوّار** ولو فتحوا من جوال. وتُشعَل
+   في متصفّحٍ واحدٍ بـ ‎?mobile=1‎ مرّةً (تُحفظ في ‎localStorage‎)، وتُطفأ بـ
+   ‎?mobile=0‎. ومعاينةُ الأجهزة (‎_device.html‎) تُشعلها لمن يفتحها.
+   فيُجرَّب على الموقع الحيّ — بالدخول والبيانات والمساهمات — ولا يتغيّر
+   على أحدٍ شيء.
    ============================================================ */
 
 (function () {
   'use strict';
 
   var MQ   = window.matchMedia('(max-width: 600px)');
+  var FLAG = 'academia:mobile-ui';
+
+  function flagOn() {
+    try {
+      var q = new URLSearchParams(location.search).get('mobile');
+      if (q === '1') localStorage.setItem(FLAG, '1');
+      if (q === '0') localStorage.removeItem(FLAG);
+      return localStorage.getItem(FLAG) === '1';
+    } catch (e) { return false; }
+  }
   var TABS = ['market', 'library', 'past'];
   var root = document.documentElement;
 
@@ -148,7 +165,7 @@
 
   /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
   function apply() {
-    if (MQ.matches) {
+    if (MQ.matches && flagOn()) {
       if (!bar) { build(); watch(); }
       root.classList.add('m-app');
       sync();
@@ -162,6 +179,8 @@
     }
   }
 
+  // المعاينةُ تُبدّل المفتاحَ وهي على الأصل نفسه: يُلتقط هنا بلا إعادة تحميل
+  window.addEventListener('storage', function (e) { if (e.key === FLAG) apply(); });
   if (MQ.addEventListener) MQ.addEventListener('change', apply);
   else MQ.addListener(apply);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
