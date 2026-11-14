@@ -144,3 +144,10 @@ html[data-theme="dark"] .m-seg { background: rgba(118, 118, 128, .26); }
   box-shadow: 0 3px 8px rgba(0, 0, 0, .12), 0 3px 1px rgba(0, 0, 0, .04);
 }
 html[data-theme="dark"] .m-seg button.is-on { background: #636366; }
+
+/* ===== شريطُ الكتب في المكتبة — أصغر على الجوال =====
+   المحرّكُ يوزّع الكتبَ بمسافاتٍ ثابتة بالبكسل (‎GAP‎ في ‎makeReel‎)، فتصغيرُ
+   الكتب وحدها يُبعثرها. فيُصغَّر المسرحُ كلُّه بمقياسٍ واحد: الكتبُ ومسافاتُها
+   وأسماؤها معًا، ويُقصَّر ارتفاعُه بالنسبة نفسها فلا يبقى فراغ. */
+html.m-app .reel-stage { height: calc(296px * var(--m-reel, .72)); }
+html.m-app .reel-track { transform: scale(var(--m-reel, .72)); transform-origin: 50% 50%; }
