@@ -6838,7 +6838,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { hlAfterRender(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} }
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -10475,24 +10475,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
   const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
   /* ===== ROADMAP-SPLITTER: خطٌّ يُمسك بين الكتاب وجاره =====
-     حصّةُ الكتاب من عرض القسمة (بعد الفُرجة) متغيّرٌ ‎--spl‎، افتراضُه ‎.383‎ (ما كانت عليه: ‎.62 : 1‎).
-     والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR‎).
-     الحدّان: الكتابُ ‎≥ 240px‎ والجارُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
-  const PK_SPL_DEF = 0.383, PK_SPL_DEF3 = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
-  /* الحصّتان: المحفوظةُ لكلّ مساهمة، وإلّا الافتراض — ‎.383‎ لمنطقتين و‎.3‎ لكلٍّ من الطرفين في ثلاث */
-  const pkSplGet = (key, id, three) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : three ? PK_SPL_DEF3 : PK_SPL_DEF; };
-  const pkSplR = id => pkSplGet('pkSplR', id, pkBankOn(id));
-  const pkSqbR = id => pkSplGet('pkSqbR', id, !!pkSplitOn(id));
+     حصّةُ كلِّ طرفٍ (الكتابُ ‎--spl‎ والبنكُ ‎--sqb‎) كسرٌ من عرض القسمة إلّا فُرجةً واحدة — أساسٌ واحدٌ لا يتبدّل بعدد المساحات،
+     فلا يتغيّر عرضُ طرفٍ إذا فُتح الطرفُ الآخرُ أو أُغلق: الملخّصُ وحده يأخذ ما بقي (طلبُ صاحب الموقع). وكان الأساسُ يطرح فُرجتين
+     في الثلاث (‎--g‎) والافتراضُ يتبدّل (‎.383‎ لاثنتين و‎.3‎ لثلاث)، فكان فتحُ البنك يضيّق الكتاب.
+     والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR · pkSqbR‎).
+     الحدّان: الطرفُ ‎≥ 240px‎ والملخّصُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
+  const PK_SPL_DEF = 0.383, PK_SQB_DEF = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
+  const pkSplDef = k => k === 'b' ? PK_SQB_DEF : PK_SPL_DEF;
+  /* الحصّةُ المحفوظةُ لكلّ مساهمة، وإلّا افتراضُ طرفها */
+  const pkSplGet = (key, id, def) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : def; };
+  const pkSplR = id => pkSplGet('pkSplR', id, PK_SPL_DEF);
+  const pkSqbR = id => pkSplGet('pkSqbR', id, PK_SQB_DEF);
   /* ‏‎k‎: ‎'a'‎ خطُّ الكتاب، و‎'b'‎ خطُّ البنك */
   const pkSplH = (id, k = 'a') => `<div class="pk-splh${k === 'b' ? ' pk-splh--b' : ''}" role="separator" aria-orientation="vertical" tabindex="0" data-pksplh="${k}" data-pkid="${esc(id)}"
       aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round((k === 'b' ? pkSqbR(id) : pkSplR(id)) * 100)}" title="${esc(T().pkSplTip)}" aria-label="${esc(T().pkSplTip)}"><i></i><i></i><i></i></div>`;
   const pkSplVar = k => k === 'b' ? '--sqb' : '--spl';
-  const pkSplGapOf = sp => parseFloat(sp.style.getPropertyValue('--g')) || PK_SPL_GAP;
-  /* الحصّةُ ضمن حدودها: طرفُها ‎≥ 240px‎، والوسطُ ‎≥ 260px‎ بعد حصّة الطرف الآخر إن ظهر */
+  /* الحصّةُ ضمن حدودها: طرفُها ‎≥ 240px‎، والملخّصُ ‎≥ 260px‎ بعد حصّة الطرف الآخر (وفُرجته) إن ظهر */
   const pkSplClamp = (sp, f, k = 'a') => {
-    const w = sp.clientWidth - pkSplGapOf(sp);
+    const w = sp.clientWidth - PK_SPL_GAP;
     const otherK = k === 'b' ? 'a' : 'b', other = sp.querySelector(`:scope > [data-pksplh="${otherK}"]`) ? (parseFloat(sp.style.getPropertyValue(pkSplVar(otherK))) || 0) : 0;
-    const minF = PK_SPL_MINB / w, maxF = 1 - other - PK_SPL_MINP / w;
+    const minF = PK_SPL_MINB / w, maxF = 1 - other - (PK_SPL_MINP + (other ? PK_SPL_GAP : 0)) / w;
     if (maxF <= minF) return Math.min(Math.max(f, 0.15), Math.max(0.15, 1 - other - 0.2));
     return Math.min(Math.max(f, minF), maxF);
   };
@@ -10503,6 +10505,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (keep) { const key = k === 'b' ? 'pkSqbR' : 'pkSplR'; (state[key] = state[key] || {})[id] = +f.toFixed(4); save(); }
     return f;
   };
+  /* بعد الرسم: الطرفان معًا لا يُبقيان للملخّص أقلَّ من حدّه — فيُضيَّق البنكُ أوّلًا (الكتابُ يبقى على عرضه)، ولا يُحفظ التضييق */
+  function pkSplFitAll() {
+    document.querySelectorAll('#cm-body .pk-split').forEach(sp => {
+      const ha = sp.querySelector(':scope > [data-pksplh="a"]'), hb = sp.querySelector(':scope > [data-pksplh="b"]');
+      if (!ha || !hb || !sp.clientWidth) return;
+      ['b', 'a'].forEach(k => {
+        const v = parseFloat(sp.style.getPropertyValue(pkSplVar(k))); if (!v) return;
+        const f = pkSplClamp(sp, v, k);
+        if (Math.abs(f - v) > 1e-4) sp.style.setProperty(pkSplVar(k), f.toFixed(4));
+      });
+    });
+  }
   /* الكتابُ يُرسم من جديد بعد أن يقف الخطّ (لا في كلّ إطار) */
   const pkSplBook = id => { const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
   document.addEventListener('pointerdown', e => {
@@ -10513,7 +10527,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const en = getComputedStyle(sp).direction === 'ltr';
     cxMorphBusy = true;   /* الكتابُ يُجمَّد ويُحجَّم صورةً حتى يُفلت الخطّ (‎cxMorphBusy‎ كالتكبير) */
     const move = ev => {
-      const r = sp.getBoundingClientRect(), w = r.width - pkSplGapOf(sp);
+      const r = sp.getBoundingClientRect(), w = r.width - PK_SPL_GAP;
       /* خطُّ الكتاب يُقاس من حافّة الكتاب (البداية)، وخطُّ البنك من حافّة البنك (النهاية) */
       const fromStart = en ? ev.clientX - r.left : r.right - ev.clientX;
       const x = k === 'b' ? (r.width - fromStart) - PK_SPL_GAP / 2 : fromStart - PK_SPL_GAP / 2;
@@ -10522,7 +10536,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const up = ev => {
       h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
       h.classList.remove('is-drag'); sp.classList.remove('is-spldrag');
-      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF, true, k);
+      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || pkSplDef(k), true, k);
       cxMorphBusy = false; pkSplBook(id);
     };
     h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
@@ -10530,13 +10544,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('dblclick', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    const k = h.dataset.pksplh || 'a', sp = h.parentElement, three = !!sp.querySelector(':scope > [data-pksplh="a"]') && !!sp.querySelector(':scope > [data-pksplh="b"]');
-    pkSplSet(sp, h.dataset.pkid, three ? PK_SPL_DEF3 : PK_SPL_DEF, true, k); pkSplBook(h.dataset.pkid);
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement;
+    pkSplSet(sp, h.dataset.pkid, pkSplDef(k), true, k); pkSplBook(h.dataset.pkid);
   });
   document.addEventListener('keydown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    const k = h.dataset.pksplh || 'a', sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF;
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || pkSplDef(k);
     /* السهمُ يحرّك الخطَّ في جهته: في العربيّة الكتابُ يمينًا فالسهمُ الأيسرُ يوسّعه، والبنكُ يسارًا فالأيمنُ يوسّعه */
     const fwd = (k === 'b') !== en;
     const grow = fwd ? 'ArrowRight' : 'ArrowLeft', shrink = fwd ? 'ArrowLeft' : 'ArrowRight';
@@ -11198,7 +11212,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
   }
   /* ===== القسمة: الكتابُ يمينًا (إن ظهر) · العرضُ وسطًا · البنكُ يسارًا (إن ظهر) — وبين كلّ جارين خطٌّ يُسحب =====
-     ‏‎--g‎ مجموعُ الفُرَج (‎14‎ لجارين و‎28‎ لثلاثة)، و‎--spl‎ حصّةُ الكتاب و‎--sqb‎ حصّةُ البنك من العرض بعد الفُرَج */
+     ‏‎--spl‎ حصّةُ الكتاب و‎--sqb‎ حصّةُ البنك من عرض القسمة إلّا فُرجةً واحدة (‎ROADMAP-SPLITTER‎) */
   function pkSplitWrap(id, v, ed, viewH, pack) {
     const anim = pkSplitAnim[id]; delete pkSplitAnim[id];
     const book = !!pkSplitOn(id), bank = pkBankOn(id);
@@ -11209,7 +11223,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
     const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
-    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)};--g:${book && bank ? 28 : 14}px">`
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
   }
@@ -22840,15 +22854,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* الخروج بلا نسخ: ‎L‎ المنطقةُ الخارجةُ في مكانها الحقيقيّ — محتواها يخفت ويهبط، ولسانُها ينزل في الذيل، وعرضُها ينطوي إلى طرف
      القسمة فيتّسع الجار؛ ثمّ ‎commit‎ يغيّر الحالَ ويرسم (والرسمُ الساكنُ هو آخرُ إطار) */
-  /* حصّةُ الطرف الآخر تتغيّر بعدد المناطق (‎.383‎ لاثنتين و‎.3‎ لثلاث): تُقرأ بالحال الجديدة مؤقّتًا ⇠ عرضُه بعد التغيير */
-  function pkFxOtherW(sp, id, isBook, after) {
+  /* الطرفُ الآخرُ وحصّتُه (لا تتبدّل بخروج هذا — الأساسُ واحد): يُحتاج إليه حين لا ملخّصَ بينهما فيأخذ القسمةَ كلَّها */
+  function pkFxOtherW(sp, id, isBook) {
     const other = sp.querySelector(isBook ? ':scope > .pk-bank' : ':scope > .pk-src');
-    if (!other) return null;
-    const keep = isBook ? pkSplit[id] : pkBank[id];
-    if (isBook) pkSplit[id] = after; else pkBank[id] = after;
-    const share = isBook ? pkSqbR(id) : pkSplR(id);
-    if (isBook) pkSplit[id] = keep; else pkBank[id] = keep;
-    return { pane: other, share };
+    return other ? { pane: other, share: isBook ? pkSqbR(id) : pkSplR(id) } : null;
   }
   /* الطرفُ الآخرُ يبلغ عرضَه الجديد بنعومة (لا يقفز في أوّل الحركة أو آخرها) */
   function pkFxFlex(pane, w0, w1, dur, delay, ez) {
@@ -22928,7 +22937,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
       other.pane.style.boxSizing = 'border-box';
-      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - g) * other.share) + 'px' }],
+      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - PK_SPL_GAP) * other.share) + 'px' }],
         { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
     }
     const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
@@ -25111,7 +25120,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           renderCmSection();
           const c2 = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
           if (c2) c2.focus({ preventScroll: true });
-        }, pkFxOtherW(bk.parentElement, id, false, false));
+        }, pkFxOtherW(bk.parentElement, id, false));
         return;
       }
     }
@@ -25298,7 +25307,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             renderCmSection();
             const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`);
             if (nb) nb.focus({ preventScroll: true });
-          }, pkFxOtherW(sp, id, true, false));
+          }, pkFxOtherW(sp, id, true));
           return;
         }
       }
