@@ -653,6 +653,10 @@
 .phone-frame.lf-light .safari-liquid-buttons-row .safari-btn:nth-child(2) { color: rgba(0, 0, 0, 0.25); }
 .phone-frame.lf-light.chrome-bottom .safari-liquid-address-row .safari-capsule-address-box { background: rgba(0, 0, 0, 0.06); }
 .phone-frame .phone-screen { overflow: hidden; }
+.phone-frame .status-bar-info > div { display: flex; justify-content: center; }
+.phone-frame .lf-time { font: 600 17px/1 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; letter-spacing: -.3px; }
+.phone-frame .lf-icons { gap: 6px; }
+.phone-frame .lf-icons svg { display: block; }
 /* الكرومُ كما في iOS: الساعةُ يسارًا والرجوعُ يسارًا، والصفحةُ وحدها RTL */
 .phone-frame .status-bar-info, .phone-frame .sim-safari-top-capsule,
 .phone-frame .sim-safari-bottom-liquid-bar, .phone-frame .sim-safari-compact-bar { direction: ltr; }
@@ -999,10 +1003,14 @@ function renderLiquid(d, frame, w, h) {
   notch.style.height = d.island[1] + 'px';
   notch.style.top = d.island[2] + 'px';
   notch.style.borderRadius = '20px';
+  // شريطُ الحالة كما في iOS: الساعةُ في وسط الجيب الأيسر، والأيقوناتُ في وسط الأيمن
   const sb = ph.querySelector('.status-bar-info');
   sb.style.height = (d.island[2] * 2 + d.island[1]) + 'px';
-  sb.style.padding = '0 34px';
-  sb.style.fontSize = '17px';
+  sb.style.padding = '0 10px';
+  sb.style.display = 'grid';
+  sb.style.gridTemplateColumns = `1fr ${d.island[0] + 12}px 1fr`;
+  sb.innerHTML = `<div class="lf-time">9:41</div><div></div><div class="lf-icons">${ICON.signal}${ICON.wifi}${ICON.battery}</div>`;
+  sb.querySelectorAll('svg').forEach(el => el.setAttribute('fill', 'currentColor'));
   ph.querySelectorAll('.safari-url, .compact-pill-url').forEach(el => el.textContent = SITE_HOST);
   /* الصفحةُ بين الكرومين: تبدأ تحت شريط الحالة (وتحت كبسولة العنوان في Top)، وتنتهي
      فوق الشريط السفلي — فالعناصرُ الثابتة في أسفلها (كأزرار الشريط الجانبي) لا يغطّيها
