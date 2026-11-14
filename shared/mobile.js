@@ -1,5 +1,5 @@
 /* ============================================================
-   الجوال — شريطُ التبويب السفليّ وصفحةُ الإعدادات
+   الجوال — الرأسُ العلويّ وصفحةُ الإعدادات
    ============================================================
    لا يعمل إلّا على الشاشة الضيّقة (‎max-width: 600px‎)، ويُطفأ وحده إن اتّسعت.
    وأنماطُه في ‎shared/mobile.css‎ — وهي لا تُحمَّل على سطح المكتب.
@@ -8,7 +8,7 @@
    الجانبيّ المخفيّ (التبويبات · المظهر · اللغة)، فيجري ما كان يجري هناك
    بعينه، ويقرأ حالَه من هناك. فلا يُمسّ ‎app.js‎ ولا يُعاد دمجُه.
 
-   والترتيبُ من اليمين: المكتبة · الركن · الاختبارات · الإعدادات.
+   والترتيبُ من اليمين: الشعارُ واسمُ الموقع · المكتبة · الركن · الاختبارات · صورتُك (الإعدادات).
    («إحصائياتي» غائبةٌ عن الشريط عمدًا.)
 
    ===== ولا يراه إلّا مَن طلبه =====
@@ -63,15 +63,18 @@
     bar.className = 'm-tabbar';
     bar.setAttribute('aria-label', 'التنقّل');
 
-    // شعارُ الموقع أوّلَ الشريط (يمينَه بالعربيّة): نسخةٌ من رمز الشريط الجانبيّ
+    // الرأس (الاتّجاه «ب»): الشعارُ واسمُ الموقع · مبدّلُ الأقسام · صورتُك (تفتح الإعدادات)
     var mk = document.querySelector('.sidebar .side-mark');
-    if (mk) {
-      var m = document.createElement('span');
-      m.className = 'm-mark';
-      m.appendChild(mk.cloneNode(true));
-      bar.appendChild(m);
-    }
+    var m = document.createElement('span');
+    m.className = 'm-mark';
+    if (mk) m.appendChild(mk.cloneNode(true));
+    var nm = document.createElement('span');
+    nm.className = 'm-mark-nm';
+    m.appendChild(nm);
+    bar.appendChild(m);
 
+    var seg = document.createElement('div');
+    seg.className = 'm-seg2';
     TABS.forEach(function (tab) {
       var s = src(tab);
       if (!s) return;
@@ -79,23 +82,22 @@
       b.type = 'button';
       b.className = 'm-tab';
       b.dataset.tab = tab;
-      var ic = s.querySelector('svg');
-      if (ic) b.appendChild(ic.cloneNode(true));
       b.appendChild(document.createElement('span'));
       b.addEventListener('click', function () {
         showSettings(false);
         s.click();
         window.scrollTo(0, 0);
       });
-      bar.appendChild(b);
+      seg.appendChild(b);
     });
+    bar.appendChild(seg);
 
     var g = document.createElement('button');
     g.type = 'button';
-    g.className = 'm-tab';
+    g.className = 'm-tab m-me';
     g.dataset.tab = 'settings';
-    g.innerHTML = ICON.gear + '<span></span>';
-    g.addEventListener('click', function () { showSettings(true); });
+    g.innerHTML = '<span class="m-me-av"></span><span></span>';
+    g.addEventListener('click', function () { showSettings(!onSettings); });
     bar.appendChild(g);
 
     page = document.createElement('section');
@@ -157,6 +159,16 @@
         b.classList.toggle('is-on', !onSettings && !!s && s.classList.contains('is-active'));
       }
     });
+    // اسمُ الموقع كما يكتبه المحرّكُ في الشريط الجانبيّ (يتبع اللغة)
+    var logo = document.querySelector('.sidebar .side-logo');
+    var nmEl = bar.querySelector('.m-mark-nm');
+    if (nmEl) nmEl.textContent = logo ? logo.textContent.trim() : '';
+    // صورتُك من زرّ الحساب؛ وللزائر (أو قبل أن تُحمَّل) ترسٌ
+    var av = document.querySelector('#side-profile .sp-av');
+    var meAv = bar.querySelector('.m-me-av');
+    var guest = document.body.classList.contains('is-guest');
+    var html = (!guest && av && av.innerHTML.trim()) ? av.innerHTML : ICON.gear;
+    if (meAv && meAv.innerHTML !== html) meAv.innerHTML = html;
     page.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t[el.dataset.t]; });
     var theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
     page.querySelectorAll('[data-seg="theme"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === theme); });
@@ -170,7 +182,14 @@
     var tabs = document.querySelectorAll('.sidebar .tabs button');
     var mo2 = new MutationObserver(sync);
     tabs.forEach(function (b) { mo2.observe(b, { attributes: true, attributeFilter: ['class'], childList: true, subtree: true }); });
-    watchers = [mo, mo2];
+    // الحسابُ يُرسم بعد الإقلاع (ويتبدّل بالدخول والخروج)، والاسمُ يتبع اللغة
+    var mo3 = new MutationObserver(sync);
+    var prof = document.getElementById('side-profile');
+    if (prof) mo3.observe(prof, { childList: true, subtree: true, attributes: true });
+    mo3.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    var logo = document.querySelector('.sidebar .side-logo');
+    if (logo) mo3.observe(logo, { childList: true, characterData: true, subtree: true });
+    watchers = [mo, mo2, mo3];
   }
 
 
