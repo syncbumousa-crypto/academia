@@ -158,39 +158,83 @@ html.m-app .reel-track { transform: scale(var(--m-reel, .72)); transform-origin:
    فيُخفى هنا ليطابق الجهاز، والتمريرُ باللمس باقٍ كما هو. */
 html.m-app #xscroll { display: none !important; }
 
-/* ===== تبويباتُ المادّة — «تبادلٌ كامل» (التفريعة ١) =====
-   ثمانيةُ تبويباتٍ متساويةٍ لا تتّسع لعرض الجوال: كانت الأربعةُ الأولى خيوطًا
-   بعرض ‎14px‎ وأسماؤها مقطوعة. فالقاعدةُ هنا: **المفعَّلُ هو العريض** —
-   يأخذ اسمَه ودوائرَه في سطرٍ واحد، والسبعةُ الباقيةُ أيقوناتٌ هامشيّة،
-   وعند الضغط ينتقل العرضُ إلى المختار بحركةٍ واحدة.
-   وكلُّه CSS: المحرّكُ يضع ‎.on‎ على المختار كما كان، ولا يُمسّ. */
-html.m-app .cm-panel .cm-tabs { padding: 0 6px; gap: 3px; }
-html.m-app .cm-panel .cm-tabs button {
-  flex: .55 1 0;
-  flex-direction: row; gap: 6px;
-  min-height: 42px; padding: 5px 4px;
-  font-size: 11.5px; line-height: 1.15;
-  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1), background-color .15s, color .15s;
+/* ===== تبويباتُ المادّة — عدسةٌ زجاجيّة =====
+   الثمانيةُ أيقوناتٌ في كبسولةٍ زجاجيّةٍ واحدة، والمختارُ تحت **عدسةٍ** تكبّره
+   وتنزلق إليه عند الضغط — حركةُ شريط التبويب في iOS 26. وتحت الكبسولة سطرٌ
+   باسم المختار وعدد مساهماته وزرِّ «ساهِم».
+   العدسةُ والسطرُ يبنيهما ‎mobile.js‎ **خارج** ‎#cm-tabs‎: المحرّكُ يعيد كتابةَ
+   جوفه عند كلّ تبديل، فما يُوضع فيه يُمحى. والأزرارُ نفسُها أزرارُ المحرّك.
+   والمقابلُ في SwiftUI: ‎.glassEffect()‎ على الكبسولة، والعدسةُ تنتقل بـ
+   ‎matchedGeometryEffect‎. */
+html.m-app .cm-panel { position: relative; }
+html.m-app .cm-panel .cm-tabs {
+  position: relative; z-index: 1;
+  height: 52px; margin: 12px 12px 0; padding: 0 4px; gap: 0;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(238, 243, 244, .72);
+  border: 1px solid rgba(255, 255, 255, .8);
+  box-shadow: 0 8px 24px rgba(20, 35, 63, .10), inset 0 1px 0 rgba(255, 255, 255, .95);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
 }
-html.m-app .cm-panel .cm-tabs .cm-tabic { width: 19px; height: 19px; }
-/* الهامشيُّ: أيقونةٌ فقط */
-html.m-app .cm-panel .cm-tabs button:not(.on) .cm-tabnm,
-html.m-app .cm-panel .cm-tabs button:not(.on) .cm-faces { display: none; }
-/* المفعَّلُ: عريضٌ، واسمُه ودوائرُه في سطرٍ واحد */
-html.m-app .cm-panel .cm-tabs button.on { flex-grow: 7; padding: 5px 9px; justify-content: center; }
-html.m-app .cm-panel .cm-tabs button.on .cm-tabnm {
-  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+html[data-theme="dark"].m-app .cm-panel .cm-tabs {
+  background: rgba(40, 46, 48, .6); border-color: rgba(255, 255, 255, .12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .1);
 }
-html.m-app .cm-panel .cm-tabs button.on .cm-tabnm br { display: none; }
-html.m-app .cm-panel .cm-tabs .cm-faces { min-height: 0; flex: none; }
+/* رفُّ «الموارد» يذوب: أبناؤه أيقوناتٌ في الكبسولة كإخوتهم */
+html.m-app .cm-panel .cm-tabs .cm-res { display: contents; }
 
-/* رفُّ «الموارد»: يأخذ عرضَ أبنائه — عريضٌ إن كان المختارُ فيه، وإلّا أربعُ أيقونات */
-html.m-app .cm-panel .cm-tabs .cm-res {
-  flex: 2.2 1 0; gap: 3px; padding: 4px 4px 0; margin-top: -4px;
-  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1);
+html.m-app .cm-panel .cm-tabs button {
+  flex: 1 1 0; min-width: 0; height: 44px; padding: 0;
+  background: transparent !important; border-radius: 999px; margin: 0;
+  color: var(--u-btntx, #3d5960);
+  position: relative; z-index: 2;
+  transition: color .25s, transform .35s cubic-bezier(.3, 1.4, .5, 1);
 }
-html.m-app .cm-panel .cm-tabs .cm-res:has(> button.on) { flex-grow: 7; }
-/* في السطر الواحد يضيق المكانُ على الاسم: تبقى «+» (ساهِم) والعدّاد وحدهما،
-   والعدّادُ يُلخّص الوجوهَ التي أُخفيت */
-html.m-app .cm-panel .cm-tabs button.on .cm-faces > .cm-face:not(.cm-face--me):not(.cm-face--count) { display: none; }
-html.m-app .cm-panel .cm-tabs button.on .cm-face--count { margin-inline-start: -4px; }
+html[data-theme="light"].m-app .cm-panel .cm-tabs button { color: #3d5960; }
+html.m-app .cm-panel .cm-tabs button::before,
+html.m-app .cm-panel .cm-tabs button::after { display: none !important; }
+html.m-app .cm-panel .cm-tabs .cm-tabic { width: 21px; height: 21px; opacity: .85; }
+html.m-app .cm-panel .cm-tabs .cm-tabnm,
+html.m-app .cm-panel .cm-tabs .cm-faces { display: none !important; }
+/* المختار: يكبر تحت العدسة ويأخذ لونَ الهويّة */
+html.m-app .cm-panel .cm-tabs button.on { color: var(--m-tint) !important; transform: scale(1.32); }
+html.m-app .cm-panel .cm-tabs button.on .cm-tabic { opacity: 1; }
+
+/* العدسة: قطرةُ زجاجٍ صافيةٌ أكبرُ من الكبسولة، تنزلق بنابض */
+.m-lens {
+  /* فوق الكبسولة لا تحتها: الكبسولةُ سياقُ تكديسٍ بزجاجها، فلا تُدسّ العدسةُ بين
+     جوفها وأيقوناتها. فتعلوها شفّافةً، والأيقونةُ المكبَّرةُ تُرى من خلالها */
+  position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none;
+  width: 60px; height: 60px; border-radius: 999px;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, .28), rgba(255, 255, 255, .06) 60%);
+  border: 1.5px solid rgba(255, 255, 255, .95);
+  box-shadow:
+    0 10px 24px rgba(20, 35, 63, .18),
+    0 0 0 .5px rgba(20, 35, 63, .12),
+    inset 0 2px 2px rgba(255, 255, 255, .95),
+    inset 0 -4px 10px rgba(44, 94, 101, .12);
+  transition: transform .45s cubic-bezier(.3, 1.35, .5, 1), opacity .2s;
+}
+html[data-theme="dark"] .m-lens {
+  background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .45);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .45), inset 0 2px 1px rgba(255, 255, 255, .5);
+}
+
+/* سطرُ المختار تحت الكبسولة */
+.m-lens-label {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 10px 12px 4px; min-height: 26px;
+  font: 700 13.5px/1 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  color: var(--tx, #14233f);
+}
+html[data-theme="light"] .m-lens-label { color: #14233f; }
+html[data-theme="dark"] .m-lens-label { color: #f2f2f7; }
+.m-lens-label .m-cnt { font-weight: 500; color: #8e8e93; }
+.m-lens-label .m-add {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 26px; padding: 0 11px; border-radius: 999px; border: 0; cursor: pointer;
+  font: 700 12px/1 inherit; color: #fff; background: var(--m-tint);
+}
+html[data-theme="dark"] .m-lens-label .m-add { color: #10272b; }

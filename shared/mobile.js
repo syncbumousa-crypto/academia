@@ -53,6 +53,7 @@
   };
 
   var bar = null, page = null, onSettings = false, watchers = [];
+  var lens = null, lensLbl = null, lensObs = null;
 
   function lang() { return root.getAttribute('data-lang') === 'en' ? 'en' : 'ar'; }
   function src(tab) { return document.querySelector('.sidebar .tabs [data-tab="' + tab + '"]'); }
@@ -163,14 +164,78 @@
     watchers = [mo, mo2];
   }
 
+  /* ---------- عدسةُ تبويبات المادّة ----------
+     العدسةُ والسطرُ أخوان لـ‎#cm-tabs‎ في ‎.cm-panel‎ — لا أبناؤه، فالمحرّكُ
+     يكتب جوفَه من جديد عند كلّ تبديل. ويُعاد وضعُهما كلّما تغيّر الجوف أو نُقلت
+     النافذة (‎#cm-ui‎ تُنقل بين السوق والمكتبة). */
+  var TX_LENS = { ar: { add: 'ساهِم', none: 'لا مساهمات بعد', one: 'مساهمة واحدة', many: ' مساهمات' },
+                  en: { add: 'Add', none: 'No contributions yet', one: '1 contribution', many: ' contributions' } };
+
+  function placeLens() {
+    var tabs = document.getElementById('cm-tabs');
+    if (!tabs) return;
+    var panel = tabs.parentElement;
+    if (!lens) {
+      lens = document.createElement('div'); lens.className = 'm-lens';
+      lensLbl = document.createElement('div'); lensLbl.className = 'm-lens-label';
+      lensLbl.addEventListener('click', function (e) {
+        if (!e.target.closest('.m-add')) return;
+        var me = document.querySelector('#cm-tabs button.on .cm-face--me');
+        if (me) me.click();   // يمرّ إلى مستمع المحرّك على ‎.cm-panel‎ كما لو ضُغطت «+»
+      });
+    }
+    if (lens.parentElement !== panel) panel.insertBefore(lens, tabs);
+    if (lensLbl.previousElementSibling !== tabs) tabs.after(lensLbl);
+
+    var on = tabs.querySelector('button.on');
+    if (!on || !tabs.offsetWidth) { lens.style.opacity = 0; if (lensLbl.innerHTML) lensLbl.innerHTML = ''; return; }
+    var pr = panel.getBoundingClientRect(), br = on.getBoundingClientRect();
+    var x = br.left - pr.left + br.width / 2 - 30, y = br.top - pr.top + br.height / 2 - 30;
+    lens.style.opacity = 1;
+    lens.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+
+    var t = TX_LENS[lang()];
+    var nm = on.querySelector('.cm-tabnm');
+    var cnt = on.querySelector('.cm-face--count');
+    var n = cnt ? parseInt(cnt.textContent.replace(/\D/g, ''), 10) || 0 : 0;
+    var count = n === 0 ? t.none : n === 1 ? t.one : n + t.many;
+    var canAdd = !!on.querySelector('.cm-face--me');
+    var html = '<span>' + (nm ? nm.textContent : '') + '</span><span class="m-cnt">· ' + count + '</span>' +
+      (canAdd ? '<button type="button" class="m-add">+ ' + t.add + '</button>' : '');
+    if (lensLbl.innerHTML !== html) lensLbl.innerHTML = html;
+  }
+
+  function startLens() {
+    if (lensObs) return;
+    var raf = 0;
+    var kick = function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(placeLens); };
+    lensObs = new MutationObserver(function (recs) {
+      // ما تكتبه العدسةُ في نفسها لا يُعيد تشغيلها
+      for (var i = 0; i < recs.length; i++) {
+        var t = recs[i].target;
+        if (lens && (t === lens || (lensLbl && lensLbl.contains(t)))) continue;
+        kick(); return;
+      }
+    });
+    lensObs.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
+    window.addEventListener('resize', kick);
+    kick();
+  }
+  function stopLens() {
+    if (lensObs) { lensObs.disconnect(); lensObs = null; }
+    if (lens) { lens.remove(); lensLbl.remove(); lens = lensLbl = null; }
+  }
+
   /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
   function apply() {
     if (MQ.matches && flagOn()) {
       if (!bar) { build(); watch(); }
       root.classList.add('m-app');
       sync();
+      startLens();
     } else if (bar) {
       root.classList.remove('m-app');
+      stopLens();
       watchers.forEach(function (w) { w.disconnect(); });
       watchers = [];
       bar.remove(); page.remove();
