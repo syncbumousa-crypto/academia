@@ -1,0 +1,146 @@
+/* ============================================================
+   الجوال — شريطٌ سفليٌّ بدل الشريط الجانبيّ
+   ============================================================
+   لا تُحمَّل هذي الورقةُ إلّا على الشاشة الضيّقة: الصفحةُ تربطها بـ
+   ‎media="(max-width: 600px)"‎، فالمتصفّحُ لا يطبّقها على سطح المكتب أصلًا،
+   ولا يُمسّ بها شيءٌ هناك. وكلُّ ما فيها يُضاف ولا يُعدِّل ‎styles.css‎.
+
+   والشريطُ والإعداداتُ يبنيهما ‎shared/mobile.js‎، ويحاكيان تطبيقَ SwiftUI
+   على iOS 26: شريطُ تبويبٍ زجاجيٌّ عائمٌ فوق خطّ الرجوع، وصفحةُ إعداداتٍ
+   بقوائمَ مجمَّعة. فما يُرى هنا هو ما سيُكتب بـ Swift بعدُ.
+
+   المنطقةُ الآمنة: ‎--safe-*‎ تحقنها معاينةُ الأجهزة (‎_device.html‎)،
+   و‎env(safe-area-inset-*)‎ يعطيها الجهازُ الحقيقيّ؛ والأكبرُ يغلب.
+   ============================================================ */
+
+:root {
+  --m-safe-b: max(var(--safe-bottom, 0px), env(safe-area-inset-bottom, 0px));
+  --m-bar-h: 62px;                                   /* ارتفاعُ الكبسولة */
+  --m-bar-gap: max(calc(var(--m-safe-b) - 12px), 10px); /* بُعدُها عن القاع */
+  --m-tint: var(--c-kfupm, #2c5e65);                 /* لونُ التبويب المختار */
+}
+html[data-theme="dark"] { --m-tint: var(--brand-tx, #8fd0c8); }
+
+/* ===== الشريطُ الجانبيُّ ومقبضُه يغيبان، والمحتوى يأخذ العرضَ كلَّه ===== */
+html.m-app .sidebar,
+html.m-app .side-handle { display: none !important; }
+html.m-app body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  /* فراغٌ تحت آخر المحتوى بقدر الشريط، فلا يختفي تحته شيء */
+  padding-bottom: calc(var(--m-bar-h) + var(--m-bar-gap) + 16px) !important;
+}
+
+/* في الإنجليزيّة يبقى ‎<html dir="rtl">‎ والمحرّكُ يقلب ما يقلبه بـ‎data-lang‎ —
+   فيُقلب الشريطُ والإعداداتُ صراحةً: المكتبةُ يسارًا كما في iOS بالإنجليزيّة */
+html[data-lang="en"] .m-tabbar,
+html[data-lang="en"] .m-settings { direction: ltr; }
+
+/* ===== شريطُ التبويب — كبسولةٌ زجاجيّة عائمة ===== */
+.m-tabbar {
+  position: fixed; z-index: 60;
+  left: 16px; right: 16px;
+  bottom: var(--m-bar-gap);
+  height: var(--m-bar-h);
+  display: flex; align-items: stretch;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .58);
+  border: 1px solid rgba(255, 255, 255, .75);
+  box-shadow:
+    0 10px 30px rgba(13, 42, 72, .16),
+    0 1px 0 rgba(255, 255, 255, .9) inset,
+    0 -1px 0 rgba(0, 0, 0, .04) inset;
+  backdrop-filter: blur(22px) saturate(1.9);
+  -webkit-backdrop-filter: blur(22px) saturate(1.9);
+}
+html[data-theme="dark"] .m-tabbar {
+  background: rgba(30, 32, 34, .55);
+  border-color: rgba(255, 255, 255, .12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45), 0 1px 0 rgba(255, 255, 255, .1) inset;
+}
+
+.m-tab {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  border: 0; border-radius: 999px; background: transparent;
+  color: var(--tx-2, #3c3c43); opacity: .82;
+  font: 600 10.5px/1 'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background-color .25s ease, color .2s ease, transform .15s ease;
+}
+html[data-theme="dark"] .m-tab { color: #f2f2f7; }
+.m-tab svg { width: 24px; height: 24px; flex: none; }
+.m-tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.m-tab:active { transform: scale(.94); }
+
+/* المختار: فقاعةُ زجاجٍ أفتح تحت الأيقونة، والأيقونةُ بلون الهويّة — كما في iOS 26 */
+.m-tab.is-on {
+  opacity: 1;
+  color: var(--m-tint);
+  background: rgba(0, 0, 0, .06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset;
+}
+html[data-theme="dark"] .m-tab.is-on { background: rgba(255, 255, 255, .12); box-shadow: none; }
+
+/* ===== صفحةُ الإعدادات — قوائمُ iOS المجمَّعة ===== */
+.m-settings {
+  position: fixed; z-index: 55; inset: 0;
+  overflow-y: auto;
+  padding: calc(var(--safe-top, 0px) + 12px) 16px calc(var(--m-bar-h) + var(--m-bar-gap) + 24px);
+  background: var(--bg, #f2f2f7);
+  color: var(--tx, #000);
+  font-family: 'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
+}
+html[data-theme="light"] .m-settings { background: #f2f2f7; }
+html[data-theme="dark"]  .m-settings { background: #000; color: #f2f2f7; }
+.m-settings[hidden] { display: none; }
+
+.m-settings h1 {
+  margin: 8px 4px 18px;
+  font: 700 32px/1.15 'KFUPM Display', 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+}
+.m-group-title {
+  margin: 0 16px 6px;
+  font-size: 13px; font-weight: 500;
+  color: #6e6e73;
+}
+html[data-theme="dark"] .m-group-title { color: #8e8e93; }
+.m-group {
+  margin-bottom: 26px;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+html[data-theme="dark"] .m-group { background: #1c1c1e; }
+.m-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 52px; padding: 8px 16px;
+  font-size: 16px;
+}
+.m-row + .m-row { border-top: .5px solid rgba(60, 60, 67, .2); }
+html[data-theme="dark"] .m-row + .m-row { border-top-color: rgba(84, 84, 88, .55); }
+.m-row-lbl { display: flex; align-items: center; gap: 12px; }
+.m-row-ic {
+  width: 30px; height: 30px; border-radius: 8px; flex: none;
+  display: grid; place-items: center; color: #fff;
+}
+.m-row-ic svg { width: 18px; height: 18px; }
+
+/* مقطعٌ مجزّأ (Segmented Control) */
+.m-seg {
+  display: inline-flex; padding: 2px; gap: 2px;
+  border-radius: 9px; background: rgba(118, 118, 128, .14);
+}
+html[data-theme="dark"] .m-seg { background: rgba(118, 118, 128, .26); }
+.m-seg button {
+  border: 0; background: transparent; color: inherit;
+  min-width: 64px; padding: 6px 12px; border-radius: 7px;
+  font: 500 13px/1 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  cursor: pointer;
+}
+.m-seg button.is-on {
+  background: #fff; font-weight: 600;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .12), 0 3px 1px rgba(0, 0, 0, .04);
+}
+html[data-theme="dark"] .m-seg button.is-on { background: #636366; }

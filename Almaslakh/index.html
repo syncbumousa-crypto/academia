@@ -178,6 +178,8 @@
     .sc-dash        { letter-spacing: .12em; }
     a.sc-item { display: block; text-decoration: none; }
   </style>
+  <!-- الجوال: لا تُحمَّل إلّا على الشاشة الضيّقة، فلا يُمسّ بها سطحُ المكتب -->
+  <link rel="stylesheet" href="../shared/mobile.css?v=1" media="(max-width: 600px)">
 </head>
 <body>
 
@@ -819,6 +821,8 @@
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
   <script src="../platform/emoji.js"></script>
   <script src="../platform/app.js"></script>
+  <!-- الجوال: شريطُ التبويب السفليّ والإعدادات — يعمل تحت ‎600px‎ وحدَه -->
+  <script src="../shared/mobile.js?v=1"></script>
   <!-- فتحُ مبدِّل المجتمع وإغلاقُه. والخياراتُ بلا أثرٍ بعدُ: وسمٌ ينتظر وصلَه -->
   <script>
     (function () {
