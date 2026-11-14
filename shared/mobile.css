@@ -157,3 +157,40 @@ html.m-app .reel-track { transform: scale(var(--m-reel, .72)); transform-origin:
    وعلى iPhone لا يُرسم شريطٌ ثابتٌ أصلًا — خيطٌ رفيعٌ أثناء التمرير ثمّ يختفي —
    فيُخفى هنا ليطابق الجهاز، والتمريرُ باللمس باقٍ كما هو. */
 html.m-app #xscroll { display: none !important; }
+
+/* ===== تبويباتُ المادّة — «تبادلٌ كامل» (التفريعة ١) =====
+   ثمانيةُ تبويباتٍ متساويةٍ لا تتّسع لعرض الجوال: كانت الأربعةُ الأولى خيوطًا
+   بعرض ‎14px‎ وأسماؤها مقطوعة. فالقاعدةُ هنا: **المفعَّلُ هو العريض** —
+   يأخذ اسمَه ودوائرَه في سطرٍ واحد، والسبعةُ الباقيةُ أيقوناتٌ هامشيّة،
+   وعند الضغط ينتقل العرضُ إلى المختار بحركةٍ واحدة.
+   وكلُّه CSS: المحرّكُ يضع ‎.on‎ على المختار كما كان، ولا يُمسّ. */
+html.m-app .cm-panel .cm-tabs { padding: 0 6px; gap: 3px; }
+html.m-app .cm-panel .cm-tabs button {
+  flex: .55 1 0;
+  flex-direction: row; gap: 6px;
+  min-height: 42px; padding: 5px 4px;
+  font-size: 11.5px; line-height: 1.15;
+  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1), background-color .15s, color .15s;
+}
+html.m-app .cm-panel .cm-tabs .cm-tabic { width: 19px; height: 19px; }
+/* الهامشيُّ: أيقونةٌ فقط */
+html.m-app .cm-panel .cm-tabs button:not(.on) .cm-tabnm,
+html.m-app .cm-panel .cm-tabs button:not(.on) .cm-faces { display: none; }
+/* المفعَّلُ: عريضٌ، واسمُه ودوائرُه في سطرٍ واحد */
+html.m-app .cm-panel .cm-tabs button.on { flex-grow: 7; padding: 5px 9px; justify-content: center; }
+html.m-app .cm-panel .cm-tabs button.on .cm-tabnm {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+html.m-app .cm-panel .cm-tabs button.on .cm-tabnm br { display: none; }
+html.m-app .cm-panel .cm-tabs .cm-faces { min-height: 0; flex: none; }
+
+/* رفُّ «الموارد»: يأخذ عرضَ أبنائه — عريضٌ إن كان المختارُ فيه، وإلّا أربعُ أيقونات */
+html.m-app .cm-panel .cm-tabs .cm-res {
+  flex: 2.2 1 0; gap: 3px; padding: 4px 4px 0; margin-top: -4px;
+  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1);
+}
+html.m-app .cm-panel .cm-tabs .cm-res:has(> button.on) { flex-grow: 7; }
+/* في السطر الواحد يضيق المكانُ على الاسم: تبقى «+» (ساهِم) والعدّاد وحدهما،
+   والعدّادُ يُلخّص الوجوهَ التي أُخفيت */
+html.m-app .cm-panel .cm-tabs button.on .cm-faces > .cm-face:not(.cm-face--me):not(.cm-face--count) { display: none; }
+html.m-app .cm-panel .cm-tabs button.on .cm-face--count { margin-inline-start: -4px; }
