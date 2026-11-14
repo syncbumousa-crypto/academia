@@ -18392,3 +18392,18 @@ html[data-theme="dark"] .cx-ftl .cx-actmode { color: rgba(255, 255, 255, .88); b
 .cx-srctools.cx-ftl .pk-lnk { position: static; }   /* فتنفتح شجرةُ الربط فوق الخانة كلّها لا فوق زرّها فتغطّي اسمَ المصدر */
 /* وقائمتا المصدر و«ربط الصفحات» فوق اللوح حين يملأ الشاشة (‎#cm-body.is-cxfull‎ في 4000) — كانتا تنفتحان خلفه */
 .pk-srcpop, .pk-lnk-layer { z-index: 4100; }
+/* ===== شريطُ اللون تحت التظليل المختار (ROADMAP-HL ق٣): ألوانٌ أربع، ففاصل، فزرُّ الحذف ===== */
+.bk-tl .bk-hlstrip { position: absolute; z-index: 5; transform: translate(-50%, 8px); display: flex; align-items: center; gap: 5px; padding: 4px 6px 4px 7px;
+  border-radius: 999px; background: #14233f; box-shadow: 0 6px 16px -6px rgba(10, 18, 30, .45); pointer-events: auto; direction: rtl; white-space: nowrap;
+  animation: bk-hlstrip-in .16s cubic-bezier(.2, .8, .2, 1); }
+.bk-tl .bk-hlstrip.is-up { transform: translate(-50%, calc(-100% - 8px)); }
+@keyframes bk-hlstrip-in { from { opacity: 0; } }
+.bk-hlstrip__c { width: 16px; height: 16px; padding: 0; border: 0; border-radius: 50%; background: var(--c); cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); transition: transform .12s; }
+.bk-hlstrip__c:hover { transform: scale(1.12); }
+.bk-hlstrip__c.is-on { box-shadow: 0 0 0 2px #14233f, 0 0 0 3.5px #fff; }
+.bk-hlstrip__sep { width: 1px; height: 14px; margin: 0 1px; background: rgba(255, 255, 255, .22); }
+.bk-hlstrip__del { display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #ffb4b4; cursor: pointer; }
+.bk-hlstrip__del svg { width: 14px; height: 14px; }
+.bk-hlstrip__del:hover { background: rgba(255, 120, 120, .2); color: #ffd0d0; }
+@media (prefers-reduced-motion: reduce) { .bk-tl .bk-hlstrip { animation: none; } }
