@@ -18451,3 +18451,8 @@ html[data-theme="dark"] .cx-hltool { background: #2c373c; box-shadow: 0 0 0 .8px
   box-shadow: 0 0 0 1.5px #2c5e65; }
 .kt-num.has-hl.is-hlopen { box-shadow: 0 0 0 1.5px #2c5e65, 0 0 0 3px var(--u-surf, #fff); }
 @media (prefers-reduced-motion: reduce) { .cx-hltool button { transition: none; } }
+/* ===== أداةُ المربّع (ROADMAP-HL ق٦): الصفحةُ الساكنةُ لوحُ رسم — مؤشّرٌ متقاطع، ومعاينةُ المربّع بلون القلم وحدٍّ متقطّع ===== */
+.hl-box .bk-tl { pointer-events: auto; cursor: crosshair; }
+.hl-box .bk-tl span, .hl-box .bk-tl .bk-tl__ln { cursor: crosshair; }
+.bk-tl .bk-boxsel { position: absolute; display: block; pointer-events: none; background: var(--c); mix-blend-mode: multiply; opacity: .75;
+  outline: 1.5px dashed rgba(20, 35, 63, .55); outline-offset: -1px; }
