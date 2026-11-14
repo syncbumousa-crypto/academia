@@ -48,6 +48,10 @@ html[data-lang="en"] .m-settings { direction: ltr; }
   display: grid; align-items: center; row-gap: 2px;
   grid-template-columns: 1fr auto;
   grid-template-areas: "mark me" "seg seg";
+}
+/* الغَبشُ لا يُلبَس إلّا عند التمرير: لو بقي والرأسُ شفّافٌ لغبَّش التوهّجَ خلفه
+   وحده، فانقطع عند حافّته السفلى خطًّا بين الرأس والصفحة */
+.m-tabbar.is-scrolled {
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
 }
