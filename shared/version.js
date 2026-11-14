@@ -1,1 +1,1 @@
-window.AC_VER = 666;
+window.AC_VER = 673;
