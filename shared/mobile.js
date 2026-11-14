@@ -221,6 +221,8 @@
      لوحُه تحت البطاقات كما كان. ولا زرَّ «ساهِم» على البطاقة، ولا «عرض الكل». */
   var CARD_TINT = { info: '#2c5e65', doc: '#5e5ce6', abs: '#e8890c', grade: '#2a9fb5',
                     srcU: '#c9a227', srcP: '#2fae52', videos: '#e8365c', cards: '#9b4fd0' };
+  /* موقوفةٌ بطلب صاحب الموقع: رجعت أيقوناتُ المحرّك الأصليّة (‎#cm-tabs‎). تُشعل بـ‎true‎ */
+  var CARDS = false;
   var cardsHost = null, tabsSeen = null, cardsMO = null, bodyMO = null, rafQ = 0;
 
   function contributors(btn) {
@@ -306,7 +308,7 @@
   /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
   function apply() {
     if (MQ.matches && flagOn()) {
-      if (!bar) { build(); watch(); startCards(); }
+      if (!bar) { build(); watch(); if (CARDS) startCards(); }
       root.classList.add('m-app');
       sync();
     } else if (bar) {
