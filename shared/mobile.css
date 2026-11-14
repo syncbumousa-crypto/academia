@@ -151,3 +151,9 @@ html[data-theme="dark"] .m-seg button.is-on { background: #636366; }
    وأسماؤها معًا، ويُقصَّر ارتفاعُه بالنسبة نفسها فلا يبقى فراغ. */
 html.m-app .reel-stage { height: calc(296px * var(--m-reel, .72)); }
 html.m-app .reel-track { transform: scale(var(--m-reel, .72)); transform-origin: 50% 50%; }
+
+/* ===== شريطُ التمرير على يسار الصفحة يغيب =====
+   هو ‎#xscroll‎: شريطٌ مبنيٌّ في الصفحة (لا شريطُ المتصفّح) جهتُه مع اللغة.
+   وعلى iPhone لا يُرسم شريطٌ ثابتٌ أصلًا — خيطٌ رفيعٌ أثناء التمرير ثمّ يختفي —
+   فيُخفى هنا ليطابق الجهاز، والتمريرُ باللمس باقٍ كما هو. */
+html.m-app #xscroll { display: none !important; }
