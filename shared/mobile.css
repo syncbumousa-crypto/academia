@@ -317,3 +317,39 @@ html.m-app .cm-panel .cm-tabs .cm-res:has(> button.on) { flex-grow: 7; }
    والعدّادُ يُلخّص الوجوهَ التي أُخفيت */
 html.m-app .cm-panel .cm-tabs button.on .cm-faces > .cm-face:not(.cm-face--me):not(.cm-face--count) { display: none; }
 html.m-app .cm-panel .cm-tabs button.on .cm-face--count { margin-inline-start: -4px; }
+
+/* ===== الضوءُ يتنقّل (الاتّجاه «ك») — ‎html[data-m-focus]‎ يضعه ‎mobile.js‎ =====
+   الترتيبُ ثابت؛ المرحلةُ الحاليّةُ ملوّنةٌ والتوهّجُ خلفها، والأخريان رماديّتان باهتتان. */
+html.m-app #panel-market { position: relative; }
+.m-spot {
+  position: absolute; z-index: -1; left: -40px; right: -40px; pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(52, 112, 120, .72), transparent),
+    radial-gradient(170px 120px at 68% 42%, rgba(225, 193, 114, .18), transparent);
+  transition: top .55s cubic-bezier(.4, 0, .2, 1), height .55s cubic-bezier(.4, 0, .2, 1);
+}
+html[data-theme="light"] .m-spot {
+  background:
+    radial-gradient(closest-side, rgba(44, 94, 101, .2), transparent),
+    radial-gradient(170px 120px at 68% 42%, rgba(201, 162, 92, .2), transparent);
+}
+/* توهّجُ أعلى الصفحة يتبع الكتبَ: يخبو إذا انتقل الضوء */
+html.m-app body::before { transition: opacity .5s ease; }
+html.m-app[data-m-focus="tabs"] body::before,
+html.m-app[data-m-focus="body"] body::before { opacity: .25; }
+
+html.m-app #panel-market .market-box,
+html.m-app #market-course #cm-tabs,
+html.m-app #market-course #cm-body { transition: filter .45s ease, opacity .45s ease; }
+html.m-app[data-m-focus="books"] #market-course #cm-tabs,
+html.m-app[data-m-focus="books"] #market-course #cm-body,
+html.m-app[data-m-focus="tabs"]  #panel-market .market-box,
+html.m-app[data-m-focus="tabs"]  #market-course #cm-body,
+html.m-app[data-m-focus="body"]  #panel-market .market-box,
+html.m-app[data-m-focus="body"]  #market-course #cm-tabs {
+  filter: grayscale(1) brightness(.78);
+  opacity: .42;
+}
+html[data-theme="light"].m-app[data-m-focus] #panel-market .market-box,
+html[data-theme="light"].m-app[data-m-focus] #market-course #cm-tabs,
+html[data-theme="light"].m-app[data-m-focus] #market-course #cm-body { --m-gray-b: 1.05; }

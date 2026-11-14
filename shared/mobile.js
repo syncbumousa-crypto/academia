@@ -183,6 +183,7 @@
     page.querySelectorAll('[data-seg="theme"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === theme); });
     page.querySelectorAll('[data-seg="lang"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === lang()); });
     if (cardsHost) queueCards();
+    if (spot) placeSpot();
   }
 
   // الصفحةُ تُمرَّر في ‎body‎ (لا في النافذة): يُلبَس الرأسُ زجاجَه متى غادرت أعلاها
@@ -305,10 +306,88 @@
     cardsHost = tabsSeen = cardsMO = bodyMO = null;
   }
 
+  /* ---------- الضوءُ يتنقّل (الاتّجاه «ك») ----------
+     صفحةُ المكتبة ثلاثُ مراحل لا تتحرّك من أماكنها: الكتب ← البنود ← المساهمات.
+     الحاليّةُ ملوّنةٌ والتوهّجُ خلفها، والأخريان رماديّتان. تُحفظ في ‎html[data-m-focus]‎:
+       books — أوّلَ الدخول، أو بلمس منطقة الكتب وهي رماديّة (اللمسةُ الأولى تُرجع الضوءَ فقط)
+       tabs  — بعد اختيار كتاب
+       body  — بعد اختيار بند
+     ولا يُمسّ شيءٌ من عمل المحرّك: النقراتُ تمرّ إليه كما هي، إلّا تلك اللمسةَ الأولى. */
+  var spot = null, spotRaf = 0, focusMO = null;
+  function setFocus(f) {
+    if (root.getAttribute('data-m-focus') === f) return;
+    root.setAttribute('data-m-focus', f);
+    placeSpot();
+  }
+  function zoneOf(f) {
+    if (f === 'books') return document.querySelector('#panel-market .market-box');
+    if (f === 'tabs') return document.querySelector('#market-course #cm-tabs');
+    return document.querySelector('#market-course #cm-body');
+  }
+  function placeSpot() {
+    if (spotRaf) return;
+    spotRaf = requestAnimationFrame(function () {
+      spotRaf = 0;
+      var panel = document.getElementById('panel-market');
+      var z = zoneOf(root.getAttribute('data-m-focus') || 'books');
+      if (!panel || !z) return;
+      if (!spot || !spot.isConnected) {
+        spot = document.createElement('div');
+        spot.className = 'm-spot';
+        spot.setAttribute('aria-hidden', 'true');
+        panel.insertBefore(spot, panel.firstChild);
+      }
+      var pr = panel.getBoundingClientRect(), zr = z.getBoundingClientRect();
+      // البطنُ قد يطول كثيرًا: يُضاء أوّلُه لا وسطُه
+      var h = Math.min(Math.max(zr.height, 160), 340);
+      spot.style.top = (zr.top - pr.top - 60) + 'px';
+      spot.style.height = (h + 120) + 'px';
+    });
+  }
+  function onFocusClick(e) {
+    if (!root.classList.contains('m-app')) return;
+    var t = e.target;
+    if (!t.closest || !t.closest('#panel-market')) return;
+    var f = root.getAttribute('data-m-focus') || 'books';
+    if (t.closest('.market-box')) {
+      if (f !== 'books') {
+        // الكتبُ رماديّة: اللمسةُ ترجّع لها الضوءَ ولا تختار شيئًا بعد
+        e.preventDefault(); e.stopPropagation();
+        setFocus('books');
+        return;
+      }
+      if (t.closest('.book-reel')) setFocus('tabs');
+      return;
+    }
+    if (t.closest('#market-course #cm-tabs button')) {
+      if (t.closest('.cm-face--me')) return;   // «+» يفتح المساهمة ولا يبدّل المرحلة
+      setFocus('body');
+      return;
+    }
+    if (t.closest('#market-course #cm-tabs') && f === 'books') setFocus('tabs');
+  }
+  function startFocus() {
+    root.setAttribute('data-m-focus', 'books');
+    document.addEventListener('click', onFocusClick, true);
+    window.addEventListener('resize', placeSpot);
+    var mc = document.getElementById('market-course');
+    if (mc) { focusMO = new MutationObserver(placeSpot); focusMO.observe(mc, { childList: true, subtree: true }); }
+    placeSpot();
+    setTimeout(placeSpot, 800);
+  }
+  function stopFocus() {
+    root.removeAttribute('data-m-focus');
+    document.removeEventListener('click', onFocusClick, true);
+    window.removeEventListener('resize', placeSpot);
+    if (focusMO) focusMO.disconnect();
+    if (spot) spot.remove();
+    spot = focusMO = null;
+  }
+
   /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
   function apply() {
     if (MQ.matches && flagOn()) {
-      if (!bar) { build(); watch(); if (CARDS) startCards(); }
+      if (!bar) { build(); watch(); if (CARDS) startCards(); startFocus(); }
       root.classList.add('m-app');
       sync();
     } else if (bar) {
@@ -318,6 +397,7 @@
       bar.remove(); page.remove();
       bar = page = null;
       stopCards();
+      stopFocus();
     }
   }
 
