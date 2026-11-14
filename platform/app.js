@@ -9549,6 +9549,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkActFrom = e => {
     const pane = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
     if (!pane) return;
+    /* أيقونةُ المساحة في رأسها تُغلقها — فلا يُعدّ نقرُها لمسًا لها (كانت تسطع نشِطةً ثمّ تنغلق) */
+    if (e.target.closest('.pk-blkh__ic, .pk-blkh__x')) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
     if (!ctl) return;
     /* لمسُ أحد المصادر يجعله الملموسَ: إطارُه، وأدواتُه في التذييل */
@@ -22196,7 +22198,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.style.setProperty('--jr-h', h + 'px');
     });
   }
+  /* القياسُ يُجمع ويؤجَّل إلى أوّل فراغٍ للمتصفّح: يقرأ عرضَ كلّ اسمٍ في الشجرة فيُلزمه بحساب الصفحة كلِّها — وكان يجري
+     مرّتين في كلّ رسمةٍ وفي أثناء دخول المساحات وخروجها (ثقلُ البنك الممتلئ). ووسمُ الطويل زينةٌ لا تُنتظر */
   function cxNameFit() {
+    if (cxNameFit.q) return;
+    cxNameFit.q = true;
+    const run = () => { cxNameFit.q = false; cxNameFitNow(); };
+    if (window.requestIdleCallback) requestIdleCallback(run, { timeout: 600 }); else setTimeout(run, 120);
+  }
+  function cxNameFitNow() {
     /* والشجرةُ الثالثة (‎#nk-road‎) معهما: الخيطُ يُرسم بالقياس لا بالتصريح، فمن لم
        يُقَس اسمُه لم يُعرف أطويلٌ هو أم قصير — فيبقى بلا خيطٍ وإن فاض */
     const els = [...document.querySelectorAll('#cm-cards .cx-nm, .cx-ro .cx-nm, #nk-road .cx-nm')];
@@ -22824,14 +22834,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
     E.style.overflow = 'hidden';
+    const pin = pkFxPin(E);   /* محتواها على عرضه الأخير والحافّةُ تقصّه — فلا يُعاد ترتيبُه في كلّ إطار */
     const cs = getComputedStyle(E), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
     const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
     /* من عرضٍ صفرٍ حقًّا: الحاشيةُ تنبسط معها (وإلّا بدأت بعرض الحاشية) */
     const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); });
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
     bkHoldAnims(an);   /* الكتابُ يُجمَّد حتى تنبسط */
     return true;
+  }
+  /* ===== محتوى المساحة الداخلة أو الخارجة ثابتُ العرض أثناء حركتها =====
+     عرضُ المساحة يتغيّر في كلّ إطار، فكان محتواها كلُّه (شجرةُ بنكٍ بآلاف العناصر) يُعاد ترتيبُه في كلّ إطار — فيُثبَّت
+     أبناؤها المنسابون على عرضهم الآن (عرضِها الأخير) ويقصّهم حدُّها، ويُردّون بعد الحركة. تُرجع ما يردّهم */
+  function pkFxPin(P) {
+    const kids = [...P.children].filter(c => getComputedStyle(c).position !== 'absolute');
+    const ws = kids.map(c => c.getBoundingClientRect().width);
+    kids.forEach((c, i) => { if (ws[i] > 0) { c.style.width = ws[i] + 'px'; c.style.flexShrink = '0'; c.style.contain = 'layout'; } });
+    return () => kids.forEach(c => { c.style.width = ''; c.style.flexShrink = ''; c.style.contain = ''; });
   }
   /* الكتلُ تُرسم من المواضع الحيّة كلَّ إطارٍ ما دامت حركاتُ القسمة جارية، ثمّ ساكنةً (أو ‎done‎) */
   function pkLiveBand(card, anims, done) {
@@ -22937,6 +22957,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const noMid = !sp.querySelector(':scope > .kt-view');
     if (noMid && other) sp.style.justifyContent = 'space-between';
     L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
+    pkFxPin(L);   /* يخرج: محتواه ثابتُ العرض حتى يُرفع (لا يُعاد ترتيبُ شجرةٍ ممتلئةٍ في كلّ إطار) */
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
     /* وحاشيتُها تنطوي معها (وإلّا وقفت عند عرض الحاشية ثمّ قفز جارُها بقدرها حين تُرسم) */

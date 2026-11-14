@@ -16899,7 +16899,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 }
 .pk--max .pk-split > .kt-view:not(.kt-view--tree) { max-height: none; min-height: 0; }
 .pk-split > .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 420px; }
-.pk--max .post-ytmain > .pk-split { flex: 1 1 auto; margin-bottom: 26px; }
+.pk--max .post-ytmain > .pk-split { flex: 1 1 0; min-height: 0; margin-bottom: 26px; }   /* يأخذ ما بقي ولا يطول بمحتواه: بنكٌ ممتلئٌ كان يمدّه فيضغط ما فوقه ويتبدّل مقاسُ الكتاب (فيُعاد بناؤه) بفتحه وإغلاقه */
 .pk--max .pk-split > .pk-src .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
 /* ونصفُ العرض لا يسع الكتابَ وعمودَ أدواته جنبًا إلى جنب، والكتابُ لا يظهر إلّا في القسمة —
    فالأدواتُ (الغلافُ والصفحاتُ وربطُ الصفحات) صفٌّ مضغوطٌ فوق الكتاب، و«ربطُ الصفحات» مفتوحًا لوحٌ يطفو فوقه */
