@@ -18407,3 +18407,47 @@ html[data-theme="dark"] .cx-ftl .cx-actmode { color: rgba(255, 255, 255, .88); b
 .bk-hlstrip__del svg { width: 14px; height: 14px; }
 .bk-hlstrip__del:hover { background: rgba(255, 120, 120, .2); color: #ffd0d0; }
 @media (prefers-reduced-motion: reduce) { .bk-tl .bk-hlstrip { animation: none; } }
+/* ===== شريطُ الألسنة في زاوية التذييل (ROADMAP-HL ق٤–٥): لسانٌ لكلّ صفّ، والأوسطُ هو المفتوح =====
+   يجلس على حافّةٍ ورقيّةٍ رفيعة في قاعه، ويبهت طرفاه دليلًا على المزيد. المواضعُ والمقاساتُ يضعها المحرّك (‎hlRailLayout‎) */
+.cx-hlrail { position: relative; width: min(300px, calc(50vw - 150px)); height: 60px; overflow: hidden; touch-action: pan-y; cursor: grab; outline: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%); }
+.cx-hlrail.is-drag { cursor: grabbing; }
+.cx-hlrail::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 2; pointer-events: none;
+  background: repeating-linear-gradient(#fbf7ee 0 1.3px, #e8e1cf 1.3px 2px); }
+html[data-theme="dark"] .cx-hlrail::after { background: repeating-linear-gradient(#3a464b 0 1.3px, #2a3438 1.3px 2px); }
+.cx-hlrail:focus-visible { box-shadow: inset 0 -2px 0 #2c5e65; }
+.cx-hlt { position: absolute; inset-inline-start: 0; bottom: 4px; width: 4px; height: 13px; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+.cx-hlt__bg { position: absolute; inset: 0; border-radius: var(--r, 7px) var(--r, 7px) 0 0; background: #fbf9f3;
+  box-shadow: inset 0 0 0 .8px rgba(20, 40, 46, .2), inset 0 1px 0 rgba(255, 255, 255, .55); }
+html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__bg { background: #2c373c; box-shadow: inset 0 0 0 .8px rgba(255, 255, 255, .12); }
+.cx-hlt.is-new .cx-hlt__bg { background: transparent; box-shadow: none; outline: 1.2px dashed rgba(44, 94, 101, .55); outline-offset: -1.2px; }
+html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__bg { outline-color: rgba(160, 205, 210, .5); }
+.cx-hlt.is-op .cx-hlt__bg { box-shadow: inset 0 0 0 .8px rgba(20, 40, 46, .2), inset 0 1px 0 rgba(255, 255, 255, .55), 0 -4px 10px -4px rgba(20, 35, 63, .32); }
+.cx-hlt__n { position: absolute; left: 0; right: 0; top: var(--ny, 4px); text-align: center; font-size: var(--fs, 12px); font-weight: 800; line-height: 1;
+  font-variant-numeric: tabular-nums; color: #14233f; opacity: var(--no, 1); text-shadow: 0 0 2px rgba(255, 255, 255, .7); pointer-events: none; }
+.cx-hlt.is-e .cx-hlt__n { color: #a9b2b5; text-shadow: none; }
+html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__n { color: rgba(255, 255, 255, .45); }
+.cx-hlt.is-new .cx-hlt__n { color: #2c5e65; text-shadow: none; }
+html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
+.cx-hlt__cnt { position: absolute; left: 0; right: 0; bottom: 3px; display: flex; justify-content: center; gap: 5px; color: #3d3214; opacity: var(--co, 0); pointer-events: none; }
+.cx-hlt__cnt::before { content: ''; position: absolute; left: 6px; right: 6px; top: -3px; height: .7px; background: rgba(20, 35, 63, .22); }
+.cx-hlt__cnt:empty::before { display: none; }
+.cx-hlt__cnt .k { display: inline-flex; align-items: center; gap: 1.5px; font-size: 8.5px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.cx-hlt__cnt svg { width: 7.5px; height: 7.5px; }
+.cx-hltool { position: absolute; left: 50%; top: -8px; transform: translateX(-50%); z-index: 3; display: flex; align-items: center; gap: 1px; height: 16px; padding: 1.5px;
+  border-radius: 999px; background: #fff; box-shadow: 0 0 0 .8px rgba(20, 40, 46, .16), 0 1.5px 4px rgba(20, 35, 63, .2); direction: rtl; }
+html[data-theme="dark"] .cx-hltool { background: #2c373c; box-shadow: 0 0 0 .8px rgba(255, 255, 255, .14), 0 1.5px 4px rgba(0, 0, 0, .4); }
+.cx-hltool button { display: grid; place-items: center; width: 10px; height: 10px; padding: 0; border: 0; border-radius: 999px; background: none; color: #a9b4b6; cursor: pointer;
+  transition: width .2s cubic-bezier(.2, .8, .2, 1), height .2s cubic-bezier(.2, .8, .2, 1), background .2s; }
+.cx-hltool button svg { width: 6.5px; height: 6.5px; }
+.cx-hltool button.is-on { width: 17px; height: 13px; background: #2c5e65; color: #fff; }
+.cx-hltool button.is-on svg { width: 8.5px; height: 8.5px; }
+.cx-hltool button:disabled { cursor: default; opacity: .55; }
+.cx-acttools > .cx-ftr { top: auto; bottom: -5px; transform: none; }
+/* وفي الجدول: رقمُ الصفّ المفتوح مطوَّقٌ — هنا يدخل التظليلُ القادم */
+.kt-num.is-hlopen { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; border-radius: 999px;
+  box-shadow: 0 0 0 1.5px #2c5e65; }
+.kt-num.has-hl.is-hlopen { box-shadow: 0 0 0 1.5px #2c5e65, 0 0 0 3px var(--u-surf, #fff); }
+@media (prefers-reduced-motion: reduce) { .cx-hltool button { transition: none; } }
