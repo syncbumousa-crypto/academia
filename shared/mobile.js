@@ -63,6 +63,15 @@
     bar.className = 'm-tabbar';
     bar.setAttribute('aria-label', 'التنقّل');
 
+    // شعارُ الموقع أوّلَ الشريط (يمينَه بالعربيّة): نسخةٌ من رمز الشريط الجانبيّ
+    var mk = document.querySelector('.sidebar .side-mark');
+    if (mk) {
+      var m = document.createElement('span');
+      m.className = 'm-mark';
+      m.appendChild(mk.cloneNode(true));
+      bar.appendChild(m);
+    }
+
     TABS.forEach(function (tab) {
       var s = src(tab);
       if (!s) return;
