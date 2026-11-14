@@ -16,7 +16,8 @@
   (من ‎file://‎ تعمل المعاينة، لكن حقنَ المنطقة الآمنة في الصفحة يحتاج خادمًا محليًّا)
 
   روابط مباشرة:  _device.html?device=iphone15   ·   ?device=duoInner   ·   ?landscape=1
-  وأيّ صفحة أخرى:  _device.html?src=Almaslakh/index.html
+  تفتح المسلخ افتراضيًّا، وأيّ صفحة أخرى:  _device.html?src=platform/index.html
+  والمنشورة:  https://syncbumousa-crypto.github.io/academia/_device.html
 
   المنطقة الآمنة تُحقن في الصفحة المعروضة كمتغيّرات CSS على ‎<html>‎:
       --safe-top  --safe-bottom  --safe-left  --safe-right
@@ -89,7 +90,7 @@
     <select id="device"></select>
   </label>
   <label>الشاشة
-    <input type="text" id="src" placeholder="platform/index.html — فارغ = عيّنة">
+    <input type="text" id="src" placeholder="Almaslakh/index.html — فارغ = عيّنة">
   </label>
   <button id="load">تحميل</button>
   <button id="rotate">↻ تدوير</button>
@@ -148,7 +149,7 @@ const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
 const state = {
   device: DEVICES[params.get('device')] ? params.get('device') : 'iphone15',
-  src: params.has('src') ? params.get('src') : 'platform/index.html',
+  src: params.has('src') ? params.get('src') : 'Almaslakh/index.html',
   landscape: params.get('landscape') === '1',
   safe: true,
   zoom: 'fit',
@@ -275,7 +276,7 @@ function saveToUrl() {
   try {
     const url = new URL(location.href);
     url.searchParams.set('device', state.device);
-    state.src === 'platform/index.html' ? url.searchParams.delete('src') : url.searchParams.set('src', state.src);
+    state.src === 'Almaslakh/index.html' ? url.searchParams.delete('src') : url.searchParams.set('src', state.src);
     state.landscape ? url.searchParams.set('landscape', '1') : url.searchParams.delete('landscape');
     history.replaceState(null, '', url);
   } catch (e) { /* المتصفح منع تعديل الرابط — ما يأثر على العرض */ }
