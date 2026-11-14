@@ -18302,33 +18302,8 @@ html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
 /* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
 .bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
 .bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
-/* ===== شريطُ الأرقام في التذييل: دوائرُ ممتلئةٌ ثمّ فارغةٌ للتالي ===== */
-.cx-hlbar { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 5px; border-radius: 999px; border: 1.5px solid var(--u-line); }
-.cx-hlc { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; cursor: pointer; box-sizing: border-box;
-  font: 700 11.5px/1 system-ui, sans-serif; color: #3a2c0b; background: var(--hc, #f3d27a); border: 1.5px solid rgba(120, 92, 25, .45);
-  transition: transform .15s, box-shadow .15s, background .15s; }
-.cx-hlc:hover { transform: scale(1.08); }
-.cx-hlc.is-next { background: transparent; border: 1.5px dashed var(--u-line); color: var(--u-muted, #5b6b72); }
-.cx-hlc.is-arm { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4.5px #a9852f; animation: cx-hlarm 1.6s ease-in-out infinite; }
-.cx-hlc.is-next.is-arm { border-style: solid; border-color: #a9852f; color: #a9852f; }
-.cx-hlc.is-in { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4px var(--u-ink, #14233f); }
-.cx-hlbar.has-cur .cx-hlc:not(.is-in) { opacity: .75; }
-.cx-hlbar.has-cur .cx-hlc:not(.is-in):hover { opacity: 1; }
-@keyframes cx-hlarm { 50% { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 6px rgba(169, 133, 47, .45); } }
-@media (prefers-reduced-motion: reduce) { .cx-hlc.is-arm { animation: none; } }
-.cx-hlmore { font-size: 11px; color: var(--u-muted, #5b6b72); padding-inline: 2px; }
-html[data-theme="dark"] .cx-hlc.is-arm, html[data-theme="dark"] .cx-hlc.is-in { --u-surf: #1b2529; }
-html[data-theme="dark"] .cx-hlc.is-in { box-shadow: 0 0 0 2.5px #1b2529, 0 0 0 4px #eef1f2; }
-html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
 /* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
 .bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
-/* الدوائرُ صفوفُ الجدول: صفٌّ بلا تظليلٍ دائرةٌ بحدٍّ فقط، والمربوطُ ممتلئٌ بلون التظليل، و«+» صفٌّ جديد. والشريطُ يُمرَّر أفقيًّا إن كثرت */
-.cx-hlbar { max-width: min(44vw, 440px); overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
-.cx-hlbar::-webkit-scrollbar { display: none; }
-.cx-hlc { flex: none; }
-.cx-hlc.is-row { background: transparent; border: 1.5px solid var(--u-line); color: var(--u-ink, #14233f); }
-.cx-hlc.is-next { font-size: 14px; }
-html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
 /* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
 .kt-num.has-hl { background: var(--hlc, #f3d27a); color: var(--hli, #3a2c0b); border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
 .kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }
