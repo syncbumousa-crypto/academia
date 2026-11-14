@@ -6838,7 +6838,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -10791,7 +10791,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const cur = pkSrcCurOf(id), many = L.length > 1;
       /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
-      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('');
+      /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
+      const skel = s => { const c = (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover || '#2c5e65';
+        return `<div class="bk-skel" role="status" aria-label="${esc(T().chLoading)}" style="--bk-cover:${esc(c)}"><i></i></div>`; };
+      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
         + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
     }
@@ -22537,8 +22540,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
-    /* والفجوةُ تُنحت أمام العين: لينةُ البدء والختام (لا تقفز في أوّلها) */
-    const now = performance.now(), DUR = 420 * (window.__pkfxSlow || 1), ez = pkBez(.45, 0, .25, 1);
+    /* والفجوةُ تُنحت أمام العين — سريعةً تبدأ من فورها وتلين في آخرها (طلبُ صاحب الموقع: «لا أحسّ بتأخير»)؛ كانت ‎420ms‎ لينةَ البدء
+       فتبدو متأخّرةً بعد انطواء المساحة */
+    const now = performance.now(), DUR = 180 * (window.__pkfxSlow || 1), ez = pkBez(.2, .8, .2, 1);
     const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.k + '|' + t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
@@ -22677,7 +22681,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الكاملة) وحاشيتُه وزاويتُه المقعّرة في جهة جارها — من مستطيلها الحيّ (فيتبع الجارَ وهو يتّسع أو يتضيّق)، وتكتب المسارَ مرّةً،
      وتقف حين تنتهي. والمحتوى بالشفافيّة والإزاحة وحدهما */
   /* ‏‎__pkfxSlow‎ يُبطئ الحركة كلَّها بقدرٍ واحد (للفحص إطارًا إطارًا) */
-  const PKFX = { get IN() { return 440 * (window.__pkfxSlow || 1); }, get OUT() { return 360 * (window.__pkfxSlow || 1); } };
+  const PKFX = { get IN() { return 440 * (window.__pkfxSlow || 1); }, get OUT() { return 280 * (window.__pkfxSlow || 1); } };
   const pkBez = (x1, y1, x2, y2) => t => {
     if (t <= 0) return 0; if (t >= 1) return 1;
     let u = t;
@@ -22982,7 +22986,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
       const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
-      if (narrow) pkFxHeight(sp1, spH, 420 * (window.__pkfxSlow || 1), 'cubic-bezier(.45, 0, .25, 1)');   /* مع نحت الفجوة: لينةٌ مثلُها */
+      if (narrow) pkFxHeight(sp1, spH, 180 * (window.__pkfxSlow || 1), 'cubic-bezier(.2, .8, .2, 1)');   /* مع نحت الفجوة: بمدّتها ومنحناها */
       /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
          إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
       const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
@@ -23951,11 +23955,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · ‏‎A‎ في المحرّك عددُ الأوراق المقلَّبة (الغلافُ ورقة): ‎0‎ مغلق، و‎A‎ فتحةٌ يمينُها ‎2(A−1)‎.
      · ومتصفّحٌ بلا WebGL (أو تعذّر التحميل) يبقى على المحرّك القديم */
   let bk2LibP = null, bk2No = false;
+  /* الفحصُ يُنشئ سياقَ ‎WebGL‎ — مرّةً واحدةً تكفي (كان يُعاد مع كلّ رسمة) */
+  let bk2Probed = false;
   const bk2Ok = () => {
     if (bk2No || window.AC_BOOK2 === false) return false;
+    if (bk2Probed) return true;
     try { const c = document.createElement('canvas'); if (!(c.getContext('webgl2') || c.getContext('webgl'))) bk2No = true; } catch (e) { bk2No = true; }
+    bk2Probed = true;
     return !bk2No;
   };
+  /* ===== غلافٌ مؤقّتٌ مكانَ الكتاب حتى يجهز (طلبُ صاحب الموقع: الإنترنتُ البطيء) — ‏‎b.phEl‎ (‏‎b.ph‎ قامةُ الصفحة) =====
+     يُحمَّل للكتاب مكتبةُ ‎Three.js‎ ومحرّكُه، ثمّ تُرسم صورُ صفحاته — وقد يطول ذلك على شبكةٍ بطيئة فيبقى مكانُه فارغًا.
+     فيُوضع في مكانه فورًا نظيرٌ مسطّح: الغلافُ مغلقًا، والصفحةُ أو الصفحتان الظاهرتان مفتوحًا (من الـPDF نفسِه بدقّةٍ صغيرة)،
+     ويذوب حين يرسم الكتابُ صفحاتِه */
+  function bkPhShow(b) {
+    if (b.phEl && b.phEl.isConnected) return;
+    const ph = b.phEl = document.createElement('div');
+    ph.className = 'bk2-ph' + (b.closed ? ' is-closed' : ''); ph.setAttribute('aria-hidden', 'true');
+    ph.style.setProperty('--ar', b.ar); ph.style.setProperty('--bk-cover', b.cover || '#2c5e65');
+    const ks = b.closed ? ['cover'] : b.one ? [Math.max(1, b.pos)] : [b.pos, b.pos + 1];
+    ks.forEach(k => {
+      const pg = document.createElement('i'); pg.className = 'bk2-ph__pg' + (k === 'cover' ? ' is-cover' : k < 1 ? ' is-inside' : ''); ph.appendChild(pg);
+      if (k === 'cover' || (k >= 1 && k <= b.n)) bk2Tex(b, k, 360).then(cv => { if (b.phEl !== ph || !cv) return; cv.className = 'bk2-ph__img'; pg.appendChild(cv); }).catch(() => {});
+    });
+    /* بمستطيل المحرّك نفسِه (‎MX=MY=1.04‎ ورفعُ ‎1%‎): المغلقُ غلافٌ وحده تقترب منه الكاميرا، والمفتوحُ فتحتُه — فلا يقفز حين يذوب */
+    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH;
+    if (stW && stH) {
+      const cols = ks.length, H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)), w = cols * ppu, h = H * ppu;
+      Object.assign(ph.style, { inset: 'auto', left: (stW / 2 - w / 2) + 'px', top: (stH / 2 - h * 0.51) + 'px', width: w + 'px', height: h + 'px' });
+    }
+    b.stage.appendChild(ph);
+  }
+  function bkPhHide(b) {
+    const ph = b.phEl; if (!ph) return;
+    b.phEl = null;
+    if (bkReduce()) { ph.remove(); return; }
+    ph.style.opacity = '0';
+    setTimeout(() => ph.remove(), 260);
+  }
+  /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
+  function bk2Prefetch() {
+    if (bk2LibP || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
+    (window.requestIdleCallback || setTimeout)(() => { if (bk2Ok()) bk2Lib().catch(() => {}); });
+  }
   function bk2Lib() {
     if (!bk2LibP) bk2LibP = Promise.all([
       import(assetURL('assets/vendor/three/three.module.min.js')),
@@ -24529,6 +24571,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
   function bk2Engine(b) {
     const st = b.stage;
+    bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
       if (b.gl && !b.gl.dead) return;
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
@@ -24560,8 +24603,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
       mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       bk2Layout(b);
+      /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
+      const g = b.gl;
+      const off = () => { if (b.gl === g) bkPhHide(b); };
+      g.ready().then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
+      setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
       /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
+      bkPhHide(b);
       bk2No = true;
       try { b.ro.disconnect(); } catch (e) {}
       delete b.gl;
