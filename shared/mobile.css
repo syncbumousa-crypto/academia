@@ -265,3 +265,25 @@ html[data-theme="dark"] .m-av { border-color: #16272b; }
 .m-av img, .m-av svg { width: 100%; height: 100%; object-fit: cover; display: block; }
 .m-av--more { direction: ltr; background: #e1c172; color: #14233f; font-weight: 700; font-size: 10px; line-height: 1; }
 .m-av--empty { background: transparent; border: 1.5px dashed rgba(255, 255, 255, .7); }
+
+/* ===== التوهّجُ أعلى الصفحة: بتروليٌّ من اليسار وذهبيٌّ خافتٌ يمينه، خلف الرأس والبحث =====
+   يُرسم مرّةً في أعلى الصفحة ويمضي معها إذا مُرِّر، ولا يُنقر. */
+html.m-app body::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 0; left: 0; right: 0; height: 460px;   /* داخلَ حدود الصفحة: لا يمدّ عرضَها فيزيحها */
+  background:
+    radial-gradient(330px 300px at 0% 0%, rgba(52, 112, 120, .95), transparent 100%),
+    radial-gradient(200px 170px at 70% 14%, rgba(225, 193, 114, .2), transparent 100%);
+}
+html[data-theme="light"].m-app body::before {
+  background:
+    radial-gradient(330px 300px at 0% 0%, rgba(44, 94, 101, .28), transparent 100%),
+    radial-gradient(200px 170px at 70% 14%, rgba(201, 162, 92, .24), transparent 100%);
+}
+html[data-lang="en"].m-app body::before { transform: scaleX(-1); }
+/* والرأسُ أشفُّ ليظهر التوهّجُ خلفه */
+/* بلا لونٍ يَسِمه شريطًا: غَبشٌ وحده، والتوهّجُ يمرّ من خلفه متّصلًا */
+html.m-app .m-tabbar, html[data-theme="dark"].m-app .m-tabbar { background: transparent; transition: background .2s ease; }
+/* فإذا مُرِّر ومضى التوهّجُ يعود للرأس زجاجُه، فلا يتداخل ما تحته بأزراره */
+html.m-app .m-tabbar.is-scrolled { background: rgba(255, 255, 255, .8); }
+html[data-theme="dark"].m-app .m-tabbar.is-scrolled { background: rgba(14, 24, 27, .78); }

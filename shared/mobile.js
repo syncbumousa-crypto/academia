@@ -185,6 +185,15 @@
     if (cardsHost) queueCards();
   }
 
+  // الصفحةُ تُمرَّر في ‎body‎ (لا في النافذة): يُلبَس الرأسُ زجاجَه متى غادرت أعلاها
+  function onScroll() {
+    if (!bar) return;
+    var y = Math.max(document.body.scrollTop, window.scrollY || 0);
+    bar.classList.toggle('is-scrolled', y > 6);
+  }
+  document.body.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   function watch() {
     var mo = new MutationObserver(sync);
     mo.observe(root, { attributes: true, attributeFilter: ['data-theme', 'data-lang'] });
