@@ -24,7 +24,7 @@
   ومعها السمة ‎data-device-preview‎ — فتُكتب قواعدُ الجوال هكذا:
       padding-top: var(--safe-top, env(safe-area-inset-top, 0px));
   فتعمل في المعاينة وعلى الآيفون الحقيقي معًا.
-  الاختصارات:  R تدوير · F طيّ Duo · S المنطقة الآمنة · B تخطيط Safari التالي
+  الاختصارات:  R تدوير · F طيّ Duo · S المنطقة الآمنة · B تبديل تطبيق/Safari
   تخطيطُ Safari:  ?chrome=compact (الأصل في iOS 26) · top · bottom · app (تطبيق ملءَ الشاشة)
   وإطارُ iPhone وزجاجُ Safari من liquidframe (MIT) — github.com/CVERInc/liquidframe
 -->
@@ -53,6 +53,9 @@
   button { cursor: pointer; }
   button:hover { border-color: var(--accent); }
   button.on { background: var(--accent); border-color: var(--accent); }
+  .seg { display: inline-flex; background: #3a3a3c; border: 1px solid #48484a; border-radius: 9px; padding: 2px; gap: 2px; }
+  .seg button { border: 0; background: transparent; border-radius: 7px; padding: 5px 14px; font-weight: 600; }
+  .seg button.on { background: #636366; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4); }
   #info { font-size: 12px; color: var(--muted); margin-inline-start: auto; direction: ltr; }
   main { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 30px; overflow: auto; }
   #stage { transform-origin: center center; transition: transform .2s; }
@@ -678,14 +681,15 @@
     <input type="text" id="src" placeholder="Almaslakh/index.html — فارغ = عيّنة">
   </label>
   <button id="load">تحميل</button>
-  <label>Safari
-    <select id="chrome">
-      <option value="compact">Compact (افتراضي iOS 26)</option>
-      <option value="top">Top</option>
-      <option value="bottom">Bottom</option>
-      <option value="app">بدون — تطبيق</option>
-    </select>
-  </label>
+  <div class="seg" id="mode">
+    <button data-mode="app">تطبيق</button>
+    <button data-mode="safari">Safari</button>
+  </div>
+  <select id="chrome" title="تخطيط Safari">
+    <option value="compact">Compact (افتراضي iOS 26)</option>
+    <option value="top">Top</option>
+    <option value="bottom">Bottom</option>
+  </select>
   <button id="rotate">↻ تدوير</button>
   <button id="fold" class="hidden">فتح / طي Duo</button>
   <button id="safeBtn">المنطقة الآمنة</button>
@@ -834,6 +838,7 @@ const DEMO = `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><style>
 
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
+let lastLayout = 'compact';
 const state = {
   device: DEVICES[params.get('device')] ? params.get('device') : 'iphone15',
   src: params.has('src') ? params.get('src') : 'Almaslakh/index.html',
@@ -941,7 +946,7 @@ function render() {
   $('fold').classList.toggle('hidden', !d.duo);
   $('safeBtn').classList.toggle('on', state.safe);
   $('rotate').classList.toggle('on', state.landscape);
-  $('chrome').value = state.chrome;
+  syncMode();
   const vh = (state.chrome !== 'app') ? h - chromeHeight(d) : h;
   $('info').textContent = ((state.chrome !== 'app') ? `صفحة Safari ${w} × ${vh} pt  |  جهاز ${w} × ${h}` : `${w} × ${h} pt`)
     + `  |  safe ↑${sa.top} ↓${sa.bottom}` + (sa.left ? ` ↔${sa.left}` : '');
@@ -973,18 +978,19 @@ const ICON = {
    يُستعمل لأجهزة iPhone ذات Dynamic Island في الوضع العمودي مع كروم Safari.
    والصفحةُ تملأ الشاشةَ كلّها وتمرّ تحت الزجاج — كما في Safari الحقيقي —
    والمنطقةُ الآمنة المحقونة هي ما يغطّيه الكروم في كلّ تخطيط. */
-function useLiquid(d) { return state.chrome !== 'app' && d.island && !isIpad(d) && !state.landscape; }
+function useLiquid(d) { return d.island && !isIpad(d) && !state.landscape; }
 
 function liquidInsets(d) {
   const T = d.island[2] + d.island[1] + 11; // ٥٩ في iPhone 15: تحت الجزيرة بهامش
-  return { compact: [T, 94], top: [T + 54, 78], bottom: [T, 128] }[state.chrome];
+  return { compact: [T, 94], top: [T + 54, 78], bottom: [T, 128], app: [T, 34] }[state.chrome];
 }
 
 function renderLiquid(d, frame, w, h) {
   const [top, bottom] = liquidInsets(d);
   const tpl = document.getElementById('lf-tpl');
   const ph = tpl.content.firstElementChild.cloneNode(true);
-  ph.classList.add('chrome-' + state.chrome, 'lf-light');
+  const app = state.chrome === 'app';
+  ph.classList.add(app ? 'chrome-pwa' : 'chrome-' + state.chrome, 'lf-light');
   // الإطارُ نفسُه إطارُ الأجهزة الأخرى: حافّةٌ ‎14‎ وزوايا دائريّة بنصف قطر الشاشة
   ph.style.boxSizing = 'content-box';
   ph.style.width = w + 'px';
@@ -1016,9 +1022,14 @@ function renderLiquid(d, frame, w, h) {
      فوق الشريط السفلي — فالعناصرُ الثابتة في أسفلها (كأزرار الشريط الجانبي) لا يغطّيها
      الزجاج، وهذا ما يُرى على iPhone حقيقي. وما حولها يأخذ لونَ خلفيّة الصفحة. */
   const screen = ph.querySelector('.phone-screen');
-  screen.style.top = top + 'px';
-  screen.style.bottom = bottom + 'px';   // وتنتهي فوق الشريط السفلي — كما يُرى على الجهاز
-  screen.style.borderRadius = '0';
+  if (app) {
+    // وضعُ التطبيق: الصفحةُ تملأ الشاشة، وشريطُ الحالة فوقها، والمنطقةُ الآمنة تُحقن فيها
+    screen.style.borderRadius = d.r + 'px';
+  } else {
+    screen.style.top = top + 'px';
+    screen.style.bottom = bottom + 'px';   // وتنتهي فوق الشريط السفلي — كما يُرى على الجهاز
+    screen.style.borderRadius = '0';
+  }
   screen.appendChild(frame);
   if (state.safe) {
     vp.insertAdjacentHTML('beforeend',
@@ -1028,7 +1039,7 @@ function renderLiquid(d, frame, w, h) {
   if (d.hinge) vp.insertAdjacentHTML('beforeend', '<div class="hinge" style="z-index:3"></div>');
 
   if (state.src) frame.addEventListener('load', () => {
-    injectSafeArea(frame, { top: 0, bottom: 0, left: 0, right: 0 }, d);
+    injectSafeArea(frame, app ? { top, bottom, left: 0, right: 0 } : { top: 0, bottom: 0, left: 0, right: 0 }, d);
     followTheme(frame, ph);
   });
 
@@ -1043,11 +1054,13 @@ function renderLiquid(d, frame, w, h) {
   }
   $('device').value = state.device;
   $('src').value = state.src;
-  $('chrome').value = state.chrome;
+  syncMode();
   $('fold').classList.toggle('hidden', !d.duo);
   $('safeBtn').classList.toggle('on', state.safe);
   $('rotate').classList.toggle('on', state.landscape);
-  $('info').textContent = `صفحة Safari ${w} × ${h - top - bottom} pt  |  الكروم ↑${top} ↓${bottom}`;
+  $('info').textContent = app
+    ? `تطبيق ${w} × ${h} pt  |  safe ↑${top} ↓${bottom}`
+    : `صفحة Safari ${w} × ${h - top - bottom} pt  |  الكروم ↑${top} ↓${bottom}`;
   applyZoom();
   saveToUrl();
 }
@@ -1070,6 +1083,15 @@ function followTheme(frame, ph) {
   };
   apply();
   new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+}
+
+function syncMode() {
+  const app = state.chrome === 'app';
+  if (!app) lastLayout = state.chrome;
+  document.querySelectorAll('#mode button').forEach(b =>
+    b.classList.toggle('on', (b.dataset.mode === 'app') === app));
+  $('chrome').value = lastLayout;
+  $('chrome').classList.toggle('hidden', app);
 }
 
 function isIpad(d) { return d.w >= 700 && !d.duo; }
@@ -1192,7 +1214,11 @@ $('device').onchange = e => { state.device = e.target.value; render(); };
 $('load').onclick = () => { state.src = $('src').value.trim(); render(); };
 $('src').onkeydown = e => { if (e.key === 'Enter') $('load').click(); };
 $('rotate').onclick = () => { state.landscape = !state.landscape; render(); };
-$('chrome').onchange = e => { state.chrome = e.target.value; render(); };
+$('chrome').onchange = e => { state.chrome = lastLayout = e.target.value; render(); };
+document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
+  state.chrome = b.dataset.mode === 'app' ? 'app' : lastLayout;
+  render();
+});
 $('fold').onclick = () => { state.device = DEVICES[state.device].duo; render(); };
 $('safeBtn').onclick = () => { state.safe = !state.safe; render(); };
 $('zoom').onchange = e => { state.zoom = e.target.value; applyZoom(); };
@@ -1202,7 +1228,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'r') $('rotate').click();
   if (e.key === 'f' && !$('fold').classList.contains('hidden')) $('fold').click();
   if (e.key === 's') $('safeBtn').click();
-  if (e.key === 'b') { const m = ['compact','top','bottom','app']; state.chrome = m[(m.indexOf(state.chrome) + 1) % m.length]; render(); }
+  if (e.key === 'b') { state.chrome = state.chrome === 'app' ? lastLayout : 'app'; render(); }
 });
 
 render();
