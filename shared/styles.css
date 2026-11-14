@@ -18302,8 +18302,6 @@ html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
 /* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
 .bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
 .bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
-/* والكتابُ وحده في الضيّقة (الملخّصُ والبنكُ مغلقان): لا جارَ يعطي القسمةَ قامتَها فكان وعاؤه صفرًا — قامةٌ له كقامة المصادر المتعدّدة */
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--book > .pk-src__view { flex: none; height: clamp(360px, 62vh, 600px); }
 /* ===== شريطُ الأرقام في التذييل: دوائرُ ممتلئةٌ ثمّ فارغةٌ للتالي ===== */
 .cx-hlbar { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 5px; border-radius: 999px; border: 1.5px solid var(--u-line); }
 .cx-hlc { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; cursor: pointer; box-sizing: border-box;
@@ -18334,5 +18332,12 @@ html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
 /* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
 .kt-num.has-hl { background: #f3d27a; color: #3a2c0b; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
 .kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }
-/* وفي الضيّقة (تحريرًا ونشرًا) للكتاب قامةٌ دنيا: جارُه قد يكون قصيرًا («لا يوجد ملخص») فكان يضغط الكتابَ والمساحاتِ معه — والجيرانُ يمتدّون إليها */
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { min-height: clamp(360px, 52vh, 520px); }
+/* ===== المساحاتُ في المساهمة الضيّقة بقامةٍ ثابتة (طلبُ صاحب الموقع) =====
+   كانت القسمةُ تأخذ قامتَها من محتوى جيرانها، فتتبدّل مع تبديل عرض الملخّص (شجريّ · بطاقيّ · جدوليّ)، وتنضغط إن قصُر جارٌ
+   («لا يوجد ملخص») أو انعدم (الكتابُ وحده). فلها الآن قامةٌ واحدةٌ على قدر الشاشة في التحرير والنشر، والمساحاتُ تمتدّ إليها،
+   وما طال من محتواها يُمرَّر في داخلها */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) { height: clamp(440px, 60vh, 600px); box-sizing: border-box; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view, .pk-bank, .pk-src) { min-height: 0; max-height: 100%; box-sizing: border-box; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view--table, .kt-view--cards, .pk-bank) { overflow-y: auto; overscroll-behavior: contain; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { flex: 1 1 auto; height: auto; min-height: 0; }
