@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أكاديميا — معاينة الأجهزة</title>
+<!--
+  ===== معاينةُ الأجهزة — أداةُ تطوير لا تُنشر =====
+  تعرض المنصّةَ داخل إطارِ iPhone وiPhone Duo والآيبادات بمقاساتها الحقيقيّة بالنقاط،
+  مع المنطقة الآمنة (Dynamic Island وخطّ الرجوع). واسمُها يبدأ بشرطة في الجذر
+  فيستثنيها ‎.vercelignore‎ ‏(‎/_*‎) ولا تُرفع إلى فيرسل.
+
+  التشغيل — من جذر المشروع:
+      python -m http.server 8000
+  ثم افتح:  http://localhost:8000/_device.html
+  (من ‎file://‎ تعمل المعاينة، لكن حقنَ المنطقة الآمنة في الصفحة يحتاج خادمًا محليًّا)
+
+  روابط مباشرة:  _device.html?device=iphone15   ·   ?device=duoInner   ·   ?landscape=1
+  تفتح المسلخ افتراضيًّا، وأيّ صفحة أخرى:  _device.html?src=platform/index.html
+  والمنشورة:  https://syncbumousa-crypto.github.io/academia/_device.html
+
+  المنطقة الآمنة تُحقن في الصفحة المعروضة كمتغيّرات CSS على ‎<html>‎:
+      --safe-top  --safe-bottom  --safe-left  --safe-right
+  ومعها السمة ‎data-device-preview‎ — فتُكتب قواعدُ الجوال هكذا:
+      padding-top: var(--safe-top, env(safe-area-inset-top, 0px));
+  فتعمل في المعاينة وعلى الآيفون الحقيقي معًا.
+  الاختصارات:  R تدوير · F طيّ Duo · S المنطقة الآمنة · B تبديل تطبيق/Safari
+  تخطيطُ Safari:  ?chrome=compact (الأصل في iOS 26) · top · bottom · app (تطبيق ملءَ الشاشة)
+  وإطارُ iPhone وزجاجُ Safari من liquidframe (MIT) — github.com/CVERInc/liquidframe
+-->
+<style>
+  :root {
+    --bg: #1c1c1e; --panel: #2c2c2e; --text: #f2f2f7; --muted: #8e8e93;
+    --accent: #0a84ff; --frame: #111; --bezel: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; height: 100vh; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Tahoma, sans-serif;
+    display: flex; flex-direction: column;
+  }
+  header {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    padding: 10px 14px; background: var(--panel); border-bottom: 1px solid #3a3a3c;
+    position: sticky; top: 0; z-index: 10;
+  }
+  header label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  select, input[type=text], button {
+    font: inherit; font-size: 13px; color: var(--text); background: #3a3a3c;
+    border: 1px solid #48484a; border-radius: 8px; padding: 6px 10px;
+  }
+  input[type=text] { width: 220px; direction: ltr; }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button.on { background: var(--accent); border-color: var(--accent); }
+  .seg { display: inline-flex; background: #3a3a3c; border: 1px solid #48484a; border-radius: 9px; padding: 2px; gap: 2px; }
+  .seg button { border: 0; background: transparent; border-radius: 7px; padding: 5px 14px; font-weight: 600; }
+  .seg button.on { background: #636366; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+  #info { font-size: 12px; color: var(--muted); margin-inline-start: auto; direction: ltr; }
+  main { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 30px; overflow: auto; }
+  #stage { transform-origin: center center; transition: transform .2s; }
+
+  .device {
+    position: relative; background: var(--frame); padding: var(--bezel);
+    border-radius: calc(var(--radius) + var(--bezel));
+    box-shadow: 0 0 0 2px #3a3a3c, 0 30px 60px rgba(0,0,0,.5);
+  }
+  .screen {
+    position: relative; overflow: hidden; background: #fff;
+    border-radius: var(--radius);
+  }
+  .screen iframe { border: 0; width: 100%; height: 100%; display: block; background: #fff; }
+  .overlay { position: absolute; inset: 0; pointer-events: none; }
+  .safe { position: absolute; background: rgba(255, 59, 48, .18); outline: 1px dashed rgba(255,59,48,.6); outline-offset: -1px; }
+  .hidden { display: none !important; }
+  .island {
+    position: absolute; background: #000; border-radius: 20px; z-index: 3;
+    left: 50%; transform: translateX(-50%);
+  }
+  .island.landscape { left: 11px; top: 50% !important; transform: translateY(-50%); }
+  .homebar {
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 134px; height: 5px; border-radius: 3px; background: rgba(0,0,0,.85); z-index: 3;
+  }
+  .hinge {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%);
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,.25), transparent); z-index: 2;
+  }
+  /* ===== وضع Safari: كروم المتصفح كما يراه من يفتح الرابط ===== */
+  .screen.browser { display: flex; flex-direction: column; background: #f2f2f7; }
+  .screen.browser iframe { flex: 1; min-height: 0; height: auto; }
+  .sb { flex: none; display: flex; align-items: center; justify-content: space-between;
+        direction: ltr; padding: 0 30px; color: #000; font: 600 17px/1 -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+        letter-spacing: -.2px; background: #f2f2f7; }
+  .sb .icons { display: flex; align-items: center; gap: 6px; }
+  .sb.ipad { font-size: 13px; padding: 0 20px; }
+  .sb.ipad .date { font-weight: 500; margin-inline-start: 6px; }
+  .addr { flex: none; display: flex; align-items: center; gap: 8px; direction: ltr;
+          padding: 4px 12px 8px; background: #f2f2f7; border-bottom: .5px solid rgba(0,0,0,.15); }
+  .field { flex: 1; height: 38px; border-radius: 12px; background: rgba(118,118,128,.14);
+           display: flex; align-items: center; justify-content: space-between; padding: 0 12px;
+           color: #000; font: 400 17px -apple-system, "SF Pro Text", "Segoe UI", sans-serif; min-width: 0; }
+  .field .aa { font-size: 15px; font-weight: 500; }
+  .field .host { display: flex; align-items: center; gap: 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .tb { flex: none; display: flex; align-items: flex-start; justify-content: space-around; direction: ltr;
+        padding-top: 8px; background: #f2f2f7; border-top: .5px solid rgba(0,0,0,.15); }
+  .tb svg, .addr > svg { flex: none; }
+  .screen.browser .safe { display: none; }
+  .note { font-size: 11px; color: #ff9f0a; text-align: center; margin-top: 10px; }
+</style>
+<style id="liquidframe">
+/* liquidframe — https://github.com/CVERInc/liquidframe — MIT © 2026 liquidframe contributors.
+   مضمَّنٌ كما هو: إطارُ iPhone وكرومُ Safari بزجاج iOS 26 (Compact · Top · Bottom). */
+/* ===========================================================================
+   liquidframe — a pure-CSS iPhone 16 Pro + iOS 26 "Liquid Glass" Safari mockup.
+
+   Structure:
+     .phone-frame.chrome-compact        ← set the chrome mode here (one class)
+       .phone-btn ...                    physical side buttons
+       .phone-notch                      Dynamic Island
+       .phone-viewport
+         .status-bar-info                top status bar (clock + icons)
+         .sim-safari-top-capsule         Safari "Top" URL pill
+         .sim-safari-bottom-liquid-bar   Safari "Bottom" bar
+         .sim-safari-compact-bar         Safari "Compact" 3-capsule bar
+         .home-indicator-area            bottom safe-area band
+         .phone-screen                   ← YOUR scrollable content goes here
+           ...your page...
+
+   Chrome modes (swap the class on .phone-frame):
+     .chrome-compact   iOS 26 Compact (3-capsule bottom bar)        [default]
+     .chrome-bottom    iOS Bottom (URL row + buttons row)
+     .chrome-top       iOS Top (URL pill up top, buttons down low)
+     .chrome-pwa       Standalone / installed PWA (no Safari chrome)
+
+   Theming variables (set on .phone-frame or :root):
+     --screen-bg       backdrop shown in the rubber-band/overscroll area
+     --chrome-top      tint painted behind the status bar (default transparent)
+     --chrome-bot      tint painted in the bottom safe-area (default transparent)
+     --status-fg       status bar text/icon color (default #fff)
+
+   Titanium finishes (add to .phone-frame): .frame-desert .frame-black .frame-white
+   (default, no class = Natural Titanium)
+
+   MIT License.
+   =========================================================================== */
+
+/* Optional centering wrapper for the phone. */
+.simulator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Phone Frame — iPhone 16 Pro corner geometry. Apple uses a continuous-
+   curvature squircle; we reproduce it with CSS `corner-shape: squircle`
+   (the real superellipse(2), not a circular arc), sized by border-radius.
+   Browsers without corner-shape gracefully fall back to the rounded arc.
+   Values are tuned for the standard 6.3" Pro class around 375px width. */
+.phone-frame {
+  /* Continuous-curvature corner shape, shared by the frame + inner screen
+     layers below (custom property inherits; corner-shape itself does not). */
+  --lf-corner: squircle;
+
+  /* Simulated safe areas — calibrated to iPhone 16 Pro Dynamic Island.
+     Chrome-mode classes below override --sim-safe-bottom / --sim-safe-top. */
+  --sim-safe-top: 50px;
+  --sim-safe-bottom: 34px;
+
+  /* Titanium frame color variables (defaults to Natural Titanium) */
+  --titanium-outer: #a69f96;
+  --titanium-inner: #8c857c;
+  --titanium-highlight: rgba(255, 255, 255, 0.25);
+  --titanium-btn-shadow: rgba(0, 0, 0, 0.45);
+
+  width: 375px;
+  height: 812px;
+  background: #000;
+  /* iPhone 16 Pro ultra-thin bezel — real device single-side bezel ≈ 2.0% of width */
+  border: 5.5px solid #000000;
+  border-radius: 52px; /* outer frame radius (sizes the squircle) */
+  corner-shape: var(--lf-corner);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  /* Titanium chassis — slim 1.5px metal band matching real device proportions */
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.75),            /* Ambient drop shadow */
+    0 0 0 1px var(--titanium-outer),                   /* Titanium outer chamfer */
+    0 0 0 1.5px var(--titanium-inner),                 /* Titanium chassis edge */
+    0 0 0 2px rgba(0, 0, 0, 0.3),                      /* Antenna line / gasket seam */
+    inset 0 0 0 1px var(--titanium-highlight),          /* Inner metal chamfer highlight */
+    inset 0 0 6px rgba(0, 0, 0, 0.85);                 /* Bezel-to-screen deep shading */
+
+  transition: box-shadow 0.3s ease;
+}
+
+/* Titanium Finishes */
+.phone-frame.frame-desert {
+  --titanium-outer: #c2b29f;
+  --titanium-inner: #b09e8b;
+  --titanium-highlight: rgba(255, 245, 230, 0.3);
+}
+
+.phone-frame.frame-black {
+  --titanium-outer: #3c3d3a;
+  --titanium-inner: #252624;
+  --titanium-highlight: rgba(255, 255, 255, 0.12);
+}
+
+.phone-frame.frame-white {
+  --titanium-outer: #e3e4e5;
+  --titanium-inner: #c5c6c7;
+  --titanium-highlight: rgba(255, 255, 255, 0.5);
+}
+
+/* Phone Buttons — Protruding side buttons.
+   Position math: for position:absolute children of .phone-frame,
+   left: 0 is the PADDING edge (inside the border). The border is 5.5px
+   and the titanium box-shadow extends another ~2px. To place buttons
+   OUTSIDE the outer titanium edge, we need left: -(border + shadow + width). */
+.phone-btn {
+  position: absolute;
+  background: var(--titanium-outer);
+  z-index: 10;
+  box-shadow:
+    -1px 0 2px rgba(0, 0, 0, 0.4),
+    inset 1px 0 1px var(--titanium-highlight);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Left side buttons — protrude from the left titanium edge */
+.phone-btn-action,
+.phone-btn-volup,
+.phone-btn-voldown {
+  left: -12.5px; /* -(5.5 border + 2 shadow + 2 gap + 3 width) */
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.phone-btn-action { top: 130px; height: 32px; }
+.phone-btn-volup  { top: 180px; height: 62px; }
+.phone-btn-voldown { top: 252px; height: 62px; }
+
+/* Right side button — protrudes from the right titanium edge */
+.phone-btn-power {
+  right: -12.5px; /* -(5.5 border + 2 shadow + 2 gap + 3 width) */
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  box-shadow:
+    1px 0 2px rgba(0, 0, 0, 0.4),
+    inset -1px 0 1px var(--titanium-highlight);
+  top: 176px;
+  height: 80px;
+}
+
+/* Phone Viewport Inner Wrapper — clips everything inside the phone screen
+   and hosts the fixed chrome/overlays. Inner radius = outer 52px − border 5.5px = 46.5px */
+.phone-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 46.5px;
+  corner-shape: var(--lf-corner);
+  /* Backdrop shown in the rubber-band/overscroll exposed area. */
+  background-color: var(--screen-bg, #ffffff);
+  transition: background-color 400ms ease;
+}
+
+/* iPhone Screen Inner — your content scrolls here. */
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  border-radius: 46.5px;
+  corner-shape: var(--lf-corner);
+  /* Expose the screen height as a container-query unit so content can size
+     itself to the full viewport (e.g. a hero with min-height: 100cqh). */
+  container-type: size;
+  container-name: phone;
+  z-index: 2;
+  background: transparent;
+}
+
+.phone-screen::-webkit-scrollbar { display: none; }
+
+/* Phone Notch Simulator (Dynamic Island) — 110pt × 30pt mapped to 375px width ≈ 102px × 28px */
+.phone-notch {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 102px;
+  height: 28px;
+  background: #000;
+  border-radius: 9999px;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.phone-notch::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  width: 9px;
+  height: 9px;
+  background: #0f1015;
+  border-radius: 50%;
+  opacity: 0.75;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.phone-notch::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #0a2540 10%, #000 80%);
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+/* Status Bar Info — height 50px with flex centering places contents at
+   the Dynamic Island vertical center: top 11px + height 28px / 2 = 25px. */
+.status-bar-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--status-fg, #fff);
+  z-index: 1000;
+  pointer-events: none;
+  background-color: var(--chrome-top, transparent);
+  transition: background-color 400ms ease, color 250ms ease;
+  box-sizing: border-box;
+}
+.status-bar-info > div {
+  height: 100%;
+  align-items: center !important;
+  line-height: 1;
+  display: flex;
+}
+
+/* Bottom safe-area tint band — sits "below" the Safari bottom bar so the
+   rubber-band-overscroll equivalent is visually consistent. iOS 26 Safari
+   no longer paints a visible home indicator pill here, so this is just a
+   tinted strip you can color via --chrome-bot. */
+.home-indicator-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--sim-safe-bottom);
+  z-index: 1;
+  pointer-events: none;
+  background-color: var(--chrome-bot, transparent);
+  transition: background-color 400ms ease;
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   Simulated Safari Shell — iOS 26 Liquid Glass capsules.
+   These sit INSIDE the safe-area region near the viewport edge, on top of
+   the page content, with a translucent frosted backdrop — matching how iOS
+   actually positions the URL pill / button row.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Top URL capsule (Safari "Top" layout). */
+.sim-safari-top-capsule {
+  position: absolute;
+  /* Anchored to the bottom of safe-area-top: the capsule sits right below
+     the status bar, hugging the chrome edge. */
+  top: calc(var(--sim-safe-top) - 50px);
+  left: 16px;
+  right: 16px;
+  height: 42px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(28, 28, 30, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
+.safari-capsule-address-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.safari-icon-page-menu,
+.safari-icon-reload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.safari-icon-page-menu { opacity: 0.9; }
+.safari-icon-reload { opacity: 0.8; }
+.safari-icon-page-menu svg,
+.safari-icon-reload svg { display: block; }
+
+.safari-url {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Unified Bottom Liquid Bar (iOS 26 Liquid Glass).
+   Sits INSIDE the safe-area-bottom region (right against the chrome edge). */
+.sim-safari-bottom-liquid-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  display: none;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+  pointer-events: auto;
+  background-color: rgba(28, 28, 30, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Sub rows inside the bottom liquid bar. */
+.safari-liquid-address-row { width: 100%; display: none; }
+
+.safari-liquid-buttons-row {
+  width: 100%;
+  height: 36px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.safari-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
+  cursor: default;
+  transition: opacity 0.1s ease;
+}
+/* Grey out the forward button for realism (like in screenshots). */
+.safari-liquid-buttons-row .safari-btn:nth-child(2) { color: rgba(255, 255, 255, 0.35); }
+.safari-btn svg { display: block; }
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPACT MODE — 3-Capsule Bottom Bar
+   Real iOS Safari Compact layout:
+   [◁ circle]  [▢ tabs · url · ↻ reload]  [··· circle]
+   ═══════════════════════════════════════════════════════════════ */
+.sim-safari-compact-bar {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+/* Shared capsule base — translucent frosted glass */
+.compact-capsule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(28, 28, 30, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Circle capsules (back & more) */
+.compact-capsule-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Center pill capsule (tabs + url + reload) */
+.compact-capsule-pill {
+  flex: 1;
+  height: 44px;
+  border-radius: 99px;
+  padding: 0 14px;
+  gap: 8px;
+}
+
+.compact-pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.compact-pill-url {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.95);
+  flex: 1;
+  text-align: center;
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   CHROME MODES — one class on .phone-frame drives safe-area insets AND
+   which Safari chrome elements are visible. No JavaScript required.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Compact (default): 3-capsule bar near the bottom. */
+.phone-frame.chrome-compact {
+  --sim-safe-top: 50px;
+  --sim-safe-bottom: 94px;
+}
+.phone-frame.chrome-compact .sim-safari-compact-bar { display: flex; }
+
+/* Bottom: single card with an address row + a buttons row. */
+.phone-frame.chrome-bottom {
+  --sim-safe-top: 50px;
+  --sim-safe-bottom: 128px;
+}
+.phone-frame.chrome-bottom .sim-safari-bottom-liquid-bar {
+  display: flex;
+  height: 98px;
+  border-radius: 24px;
+  corner-shape: var(--lf-corner);
+  padding: 10px 14px;
+  justify-content: space-between;
+}
+.phone-frame.chrome-bottom .safari-liquid-address-row { display: block; }
+.phone-frame.chrome-bottom .safari-liquid-address-row .safari-capsule-address-box {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 99px;
+  padding: 0 12px;
+  height: 36px;
+  box-sizing: border-box;
+}
+.phone-frame.chrome-bottom .safari-liquid-buttons-row { display: flex; }
+
+/* Top: URL pill up top, a slim buttons-only bar down low. */
+.phone-frame.chrome-top {
+  --sim-safe-top: 104px;
+  --sim-safe-bottom: 78px;
+}
+.phone-frame.chrome-top .sim-safari-top-capsule { display: flex; }
+.phone-frame.chrome-top .sim-safari-bottom-liquid-bar {
+  display: flex;
+  height: 48px;
+  border-radius: 99px;
+  padding: 0 14px;
+  justify-content: center;
+}
+.phone-frame.chrome-top .safari-liquid-buttons-row { display: flex; }
+
+/* PWA / standalone: no Safari chrome, minimal insets. */
+.phone-frame.chrome-pwa {
+  --sim-safe-top: 50px;
+  --sim-safe-bottom: 34px;
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   Optional: Scroll Prompt Overlay — a hint that the screen scrolls.
+   Toggle its opacity from JS (see liquidframe.js) or remove it entirely.
+   ─────────────────────────────────────────────────────────────────────── */
+.scroll-prompt-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.55);
+  width: 56px;
+  height: 64px;
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scroll-wheel { animation: lf-scrollWheel 1.6s infinite ease-in-out; }
+@keyframes lf-scrollWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  35% { transform: translateY(5px); opacity: 0.3; }
+  36% { opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.prompt-arrow { animation: lf-bounceArrow 1.6s infinite ease-in-out; }
+@keyframes lf-bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* ===== زجاج فاتح — iOS يفتّح الزجاج فوق الصفحات الفاتحة ويغمّق الأيقونات =====
+   (liquidframe يرسم الزجاج داكنًا فقط؛ وهذه الطبقة لأكاديميا: جلدها الأصل فاتح) */
+.phone-frame.lf-light { --status-fg: #000; }
+.phone-frame.lf-light .sim-safari-top-capsule,
+.phone-frame.lf-light .sim-safari-bottom-liquid-bar,
+.phone-frame.lf-light .compact-capsule {
+  background-color: rgba(250, 250, 252, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: #000;
+  backdrop-filter: blur(18px) saturate(1.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8);
+}
+.phone-frame.lf-light .safari-url, .phone-frame.lf-light .compact-pill-url,
+.phone-frame.lf-light .safari-btn, .phone-frame.lf-light .safari-capsule-address-box { color: #000; }
+.phone-frame.lf-light .safari-liquid-buttons-row .safari-btn:nth-child(2) { color: rgba(0, 0, 0, 0.25); }
+.phone-frame.lf-light.chrome-bottom .safari-liquid-address-row .safari-capsule-address-box { background: rgba(0, 0, 0, 0.06); }
+.phone-frame .phone-screen { overflow: hidden; }
+.phone-frame .status-bar-info > div { display: flex; justify-content: center; }
+.phone-frame .lf-time { font: 600 17px/1 -apple-system, "SF Pro Text", "Segoe UI", sans-serif; letter-spacing: -.3px; }
+.phone-frame .lf-icons { gap: 6px; }
+.phone-frame .lf-icons svg { display: block; }
+/* الكرومُ كما في iOS: الساعةُ يسارًا والرجوعُ يسارًا، والصفحةُ وحدها RTL */
+.phone-frame .status-bar-info, .phone-frame .sim-safari-top-capsule,
+.phone-frame .sim-safari-bottom-liquid-bar, .phone-frame .sim-safari-compact-bar { direction: ltr; }
+.phone-frame .safari-url, .phone-frame .compact-pill-url {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.phone-frame .phone-screen iframe { border: 0; width: 100%; height: 100%; display: block; background: #fff; }
+.phone-frame .lf-safe { position: absolute; left: 0; right: 0; z-index: 999; pointer-events: none;
+  background: rgba(255, 59, 48, .16); outline: 1px dashed rgba(255, 59, 48, .6); outline-offset: -1px; }
+.phone-frame .lf-home { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 134px; height: 5px; border-radius: 3px; background: currentColor; color: var(--status-fg, #fff); z-index: 1002; opacity: .9; }
+</style>
+</head>
+<body>
+<header>
+  <label>الجهاز
+    <select id="device"></select>
+  </label>
+  <label>الشاشة
+    <input type="text" id="src" placeholder="Almaslakh/index.html — فارغ = عيّنة">
+  </label>
+  <button id="load">تحميل</button>
+  <div class="seg" id="mode">
+    <button data-mode="app">تطبيق</button>
+    <button data-mode="safari">Safari</button>
+  </div>
+  <select id="chrome" title="تخطيط Safari">
+    <option value="compact">Compact (افتراضي iOS 26)</option>
+    <option value="top">Top</option>
+    <option value="bottom">Bottom</option>
+  </select>
+  <button id="rotate">↻ تدوير</button>
+  <button id="fold" class="hidden">فتح / طي Duo</button>
+  <button id="safeBtn">المنطقة الآمنة</button>
+  <label>التكبير
+    <select id="zoom">
+      <option value="fit">ملاءمة</option>
+      <option value="0.5">50%</option>
+      <option value="0.75">75%</option>
+      <option value="1">100%</option>
+    </select>
+  </label>
+  <span id="info"></span>
+</header>
+
+<main><div id="stage"></div></main>
+<template id="lf-tpl">
+<div class="phone-frame">
+
+      <!-- Physical hardware: protruding side buttons -->
+      <div class="phone-btn phone-btn-action" title="Action Button"></div>
+      <div class="phone-btn phone-btn-volup" title="Volume Up"></div>
+      <div class="phone-btn phone-btn-voldown" title="Volume Down"></div>
+      <div class="phone-btn phone-btn-power" title="Power Button"></div>
+
+      <!-- Dynamic Island -->
+      <div class="phone-notch"></div>
+
+      <div class="phone-viewport">
+
+        <!-- Status bar -->
+        <div class="status-bar-info">
+          <div><span data-lf-clock>9:41</span></div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <svg width="19" height="13" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.9;">
+              <rect x="1" y="16" width="3.5" height="5" rx="0.5"/>
+              <rect x="6.5" y="12" width="3.5" height="9" rx="0.5"/>
+              <rect x="12" y="7.5" width="3.5" height="13.5" rx="0.5"/>
+              <rect x="17.5" y="3" width="3.5" height="18" rx="0.5" opacity="0.3"/>
+            </svg>
+            <svg width="18" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.9;">
+              <path d="M12 20h.01"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 13a10 10 0 0 1 14 0"/><path d="M1.5 9.5a15 15 0 0 1 21 0"/>
+            </svg>
+            <svg width="25" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:2px; opacity:0.9;">
+              <rect x="1" y="5" width="18" height="14" rx="3" ry="3"/>
+              <line x1="22" y1="10" x2="22" y2="14"/>
+              <rect x="3" y="7" width="12" height="10" rx="1.5" ry="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Safari "Top" URL capsule -->
+        <div class="sim-safari-top-capsule">
+          <div class="safari-capsule-address-box">
+            <span class="safari-icon-page-menu">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </span>
+            <span class="safari-url">liquidframe.dev</span>
+            <span class="safari-icon-reload">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Safari "Bottom" / "Top" liquid bar -->
+        <div class="sim-safari-bottom-liquid-bar">
+          <div class="safari-liquid-address-row">
+            <div class="safari-capsule-address-box">
+              <span class="safari-icon-page-menu">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              <span class="safari-url">liquidframe.dev</span>
+              <span class="safari-icon-reload">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="safari-liquid-buttons-row">
+            <div class="safari-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+            <div class="safari-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            <div class="safari-btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+            <div class="safari-btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <div class="safari-btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="13" height="13" rx="2" ry="2"/><path d="M9 21h10a2 2 0 0 0 2-2V9"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Safari "Compact" 3-capsule bar -->
+        <div class="sim-safari-compact-bar">
+          <div class="compact-capsule compact-capsule-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </div>
+          <div class="compact-capsule compact-capsule-pill">
+            <span class="compact-pill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+            <span class="compact-pill-url">liquidframe.dev</span>
+            <span class="compact-pill-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>
+          </div>
+          <div class="compact-capsule compact-capsule-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </div>
+        </div>
+
+        <!-- Bottom safe-area tint band -->
+        <div class="home-indicator-area"></div>
+
+        <!-- Your scrollable page content -->
+        <div class="phone-screen"></div>
+      </div>
+    </div>
+</template>
+
+
+<script>
+/* كل القيم بالنقاط (pt).
+   safe: [أعلى, أسفل] للوضع العمودي — safeL: [أعلى, أسفل, يسار/يمين] للوضع الأفقي
+   island: [عرض, ارتفاع, المسافة من الأعلى] — est: مقاسات غير رسمية */
+const DEVICES = {
+  iphone15:   { name: 'iPhone 15 / 15 Pro',         w: 393,  h: 852,  r: 55, safe: [59, 34], safeL: [0, 21, 59], island: [126, 37, 11], home: true },
+  iphone15pm: { name: 'iPhone 15 Plus / Pro Max',   w: 430,  h: 932,  r: 55, safe: [59, 34], safeL: [0, 21, 59], island: [126, 37, 11], home: true },
+  iphonese:   { name: 'iPhone SE',                  w: 375,  h: 667,  r: 0,  safe: [20, 0],  safeL: [0, 0, 0] },
+  duoOuter:   { name: 'iPhone Duo (مطوي)',          w: 466,  h: 678,  r: 48, safe: [59, 34], safeL: [0, 21, 59], island: [126, 37, 11], home: true, duo: 'duoInner', estSafe: true },
+  duoInner:   { name: 'iPhone Duo (مفتوح)',         w: 669,  h: 951,  r: 40, safe: [59, 34], safeL: [0, 21, 59], island: [126, 37, 11], home: true, duo: 'duoOuter', est: true, hinge: true },
+  ipadmini:   { name: 'iPad mini (A17 Pro)',        w: 744,  h: 1133, r: 22, safe: [24, 20], safeL: [24, 20, 0], home: true },
+  ipadmini26: { name: 'iPad mini (A20 Pro، 2026)',  w: 756,  h: 1158, r: 22, safe: [24, 20], safeL: [24, 20, 0], home: true, est: true },
+  ipad11:     { name: 'iPad / iPad Air 11',         w: 820,  h: 1180, r: 18, safe: [24, 20], safeL: [24, 20, 0], home: true },
+  ipadpro11:  { name: 'iPad Pro 11 (M5)',           w: 834,  h: 1210, r: 18, safe: [24, 20], safeL: [24, 20, 0], home: true },
+  ipadair13:  { name: 'iPad Air 13',                w: 1024, h: 1366, r: 18, safe: [24, 20], safeL: [24, 20, 0], home: true },
+  ipadpro13:  { name: 'iPad Pro 13 (M5)',           w: 1032, h: 1376, r: 18, safe: [24, 20], safeL: [24, 20, 0], home: true },
+};
+
+const DEMO = `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><style>
+  body{margin:0;font-family:-apple-system,"Segoe UI",Tahoma,sans-serif;background:#f2f2f7;height:100vh;display:flex;flex-direction:column}
+  .nav{padding:calc(var(--safe-top,0px) + 8px) 16px 8px;background:#f9f9f9;border-bottom:1px solid #d1d1d6}
+  .nav h1{margin:6px 0 0;font-size:34px;font-weight:700}
+  .list{flex:1;overflow:auto;padding:16px}
+  .row{background:#fff;padding:14px 16px;border-bottom:1px solid #e5e5ea;font-size:17px}
+  .row:first-child{border-radius:10px 10px 0 0}.row:last-child{border-radius:0 0 10px 10px;border:0}
+  .tabs{display:flex;justify-content:space-around;padding:8px 0 calc(var(--safe-bottom,0px));background:#f9f9f9;border-top:1px solid #d1d1d6;font-size:11px;color:#8e8e93}
+  .tabs b{color:#0a84ff}
+</style><script>
+  const p=new URLSearchParams(location.search);
+  ['Top','Bottom','Left','Right'].forEach(s=>document.documentElement.style.setProperty('--safe-'+s.toLowerCase(),(p.get('safe'+s)||0)+'px'));
+<\/script></head><body>
+  <div class="nav"><h1>الرئيسية</h1></div>
+  <div class="list"><div class="row">العنصر الأول</div><div class="row">العنصر الثاني</div><div class="row">العنصر الثالث</div></div>
+  <div class="tabs"><b>الرئيسية</b><span>البحث</span><span>الحساب</span></div>
+</body></html>`;
+
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+let lastLayout = 'compact';
+const state = {
+  device: DEVICES[params.get('device')] ? params.get('device') : 'iphone15',
+  src: params.has('src') ? params.get('src') : 'Almaslakh/index.html',
+  landscape: params.get('landscape') === '1',
+  safe: params.get('safe') === '1',
+  chrome: ['compact','top','bottom','app'].includes(params.get('chrome')) ? params.get('chrome') : (params.get('browser') === '0' ? 'app' : 'compact'),
+  zoom: 'fit',
+};
+
+for (const [key, d] of Object.entries(DEVICES)) {
+  const o = document.createElement('option');
+  o.value = key; o.textContent = d.name + (d.est ? ' *' : '');
+  $('device').appendChild(o);
+}
+
+function safeArea(d, landscape) {
+  if (!landscape) return { top: d.safe[0], bottom: d.safe[1], left: 0, right: 0 };
+  return { top: d.safeL[0], bottom: d.safeL[1], left: d.safeL[2], right: d.safeL[2] };
+}
+
+function render() {
+  const d = DEVICES[state.device];
+  const w = state.landscape ? d.h : d.w;
+  const h = state.landscape ? d.w : d.h;
+  const sa = (state.chrome !== 'app')
+    ? { top: 0, bottom: 0, left: state.landscape ? d.safeL[2] : 0, right: state.landscape ? d.safeL[2] : 0 }
+    : safeArea(d, state.landscape);
+
+  const q = `safeTop=${sa.top}&safeBottom=${sa.bottom}&safeLeft=${sa.left}&safeRight=${sa.right}&width=${w}&height=${h}`;
+  const frame = document.createElement('iframe');
+  if (state.src) {
+    // الرابطُ لا يُمسّ: المحرّك يقرأ ‎location.search‎ ويعيد كتابته، فتُحقن القيمُ بعد التحميل
+    frame.src = state.src;
+    frame.addEventListener('load', () => injectSafeArea(frame, sa, d));
+  } else {
+    frame.srcdoc = DEMO.replace('location.search', JSON.stringify('?' + q));
+  }
+
+  if (useLiquid(d)) { renderLiquid(d, frame, w, h); return; }
+
+  const dev = document.createElement('div');
+  dev.className = 'device';
+  dev.style.setProperty('--radius', d.r + 'px');
+  dev.style.setProperty('--bezel', d.r ? '14px' : '50px 14px');
+
+  const screen = document.createElement('div');
+  screen.className = 'screen' + ((state.chrome !== 'app') ? ' browser' : '');
+  screen.style.width = w + 'px';
+  screen.style.height = h + 'px';
+  if ((state.chrome !== 'app')) buildSafari(screen, frame, d, w, h);
+  else screen.appendChild(frame);
+
+  const ov = document.createElement('div');
+  ov.className = 'overlay';
+  if (d.island) {
+    const isl = document.createElement('div');
+    isl.className = 'island' + (state.landscape ? ' landscape' : '');
+    const [iw, ih, it] = d.island;
+    isl.style.width = (state.landscape ? ih : iw) + 'px';
+    isl.style.height = (state.landscape ? iw : ih) + 'px';
+    isl.style.top = it + 'px';
+    ov.appendChild(isl);
+  }
+  if (d.home) {
+    const hb = document.createElement('div');
+    hb.className = 'homebar';
+    if (d.w >= 700) hb.style.width = '320px';
+    ov.appendChild(hb);
+  }
+  if (d.hinge && !state.landscape) {
+    const hg = document.createElement('div');
+    hg.className = 'hinge';
+    ov.appendChild(hg);
+  }
+  const areas = [
+    { top: 0, left: 0, right: 0, height: sa.top },
+    { bottom: 0, left: 0, right: 0, height: sa.bottom },
+    { top: 0, bottom: 0, left: 0, width: sa.left },
+    { top: 0, bottom: 0, right: 0, width: sa.right },
+  ];
+  for (const a of areas) {
+    if (!(a.height || a.width)) continue;
+    const s = document.createElement('div');
+    s.className = 'safe' + (state.safe ? '' : ' hidden');
+    for (const k in a) s.style[k] = a[k] + 'px';
+    ov.appendChild(s);
+  }
+  screen.appendChild(ov);
+  dev.appendChild(screen);
+
+  const stage = $('stage');
+  stage.innerHTML = '';
+  stage.appendChild(dev);
+  if (d.est || d.estSafe) {
+    const n = document.createElement('div');
+    n.className = 'note';
+    n.textContent = d.est
+      ? '* مقاس تقديري غير رسمي — تأكد منه في المحاكي'
+      : '* المنطقة الآمنة تقديرية — تأكد منها في المحاكي';
+    stage.appendChild(n);
+  }
+
+  $('device').value = state.device;
+  $('src').value = state.src;
+  $('fold').classList.toggle('hidden', !d.duo);
+  $('safeBtn').classList.toggle('on', state.safe);
+  $('rotate').classList.toggle('on', state.landscape);
+  syncMode();
+  const vh = (state.chrome !== 'app') ? h - chromeHeight(d) : h;
+  $('info').textContent = ((state.chrome !== 'app') ? `صفحة Safari ${w} × ${vh} pt  |  جهاز ${w} × ${h}` : `${w} × ${h} pt`)
+    + `  |  safe ↑${sa.top} ↓${sa.bottom}` + (sa.left ? ` ↔${sa.left}` : '');
+
+  applyZoom();
+  saveToUrl();
+}
+
+/* ===== كروم Safari =====
+   iPhone بتخطيط «الشريط في الأعلى»: شريط الحالة ← شريط العنوان ← الصفحة ← شريط الأدوات.
+   iPad: شريط الحالة ← صفّ واحد فيه الأزرار والعنوان. والأفقي في iPhone: شريط العنوان وحده.
+   الارتفاعات بالنقاط، قريبةٌ من Safari على iOS 26 لا مطابقة له بكسلًا بكسل. */
+const SITE_HOST = 'syncbumousa-crypto.github.io';
+const ICON = {
+  signal: '<svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>',
+  wifi: '<svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4C5.1.4 2.5 1.5.5 3.4l1.2 1.3A9 9 0 0 1 8 2.2Zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3A5.4 5.4 0 0 1 8 5.8Zm0 3.5c-.5 0-1 .2-1.3.5L8 11.6l1.3-1.8c-.3-.3-.8-.5-1.3-.5Z"/></svg>',
+  battery: '<svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2.5"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2Z" opacity=".45"/></svg>',
+  lock: '<svg width="10" height="13" viewBox="0 0 10 13" fill="#3c3c43"><path d="M2.5 5.5V3.8a2.5 2.5 0 0 1 5 0v1.7h.8c.7 0 1.2.5 1.2 1.2v4.6c0 .7-.5 1.2-1.2 1.2H1.7C1 12.5.5 12 .5 11.3V6.7c0-.7.5-1.2 1.2-1.2h.8Zm1.3 0h2.4V3.8a1.2 1.2 0 0 0-2.4 0v1.7Z"/></svg>',
+  reload: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#000" stroke-width="1.7" stroke-linecap="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M12.2 1.2v3.2H9"/></svg>',
+  back: '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#007aff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5 6.5 11 14 18.5"/></svg>',
+  fwd: '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#c4c4c7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3.5 7.5 7.5L8 18.5"/></svg>',
+  share: '<svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="#007aff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M11 15V2M6.5 6.2 11 1.7l4.5 4.5"/><path d="M7.5 10H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V12a2 2 0 0 0-2-2h-2.5"/></svg>',
+  book: '<svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#007aff" stroke-width="1.9" stroke-linejoin="round"><path d="M13 4.5C10.5 2.4 6.5 2 2 2.6v16c4.5-.6 8.5-.2 11 1.9 2.5-2.1 6.5-2.5 11-1.9v-16c-4.5-.6-8.5-.2-11 1.9Zm0 0v16"/></svg>',
+  tabs: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="1.9" stroke-linejoin="round"><rect x="2" y="7" width="15" height="15" rx="3"/><path d="M7 4.5V4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-.5"/></svg>',
+  plus: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round"><path d="M10 3v14M3 10h14"/></svg>',
+};
+
+/* ===== iOS 26: إطارُ liquidframe =====
+   يُستعمل لأجهزة iPhone ذات Dynamic Island في الوضع العمودي مع كروم Safari.
+   والصفحةُ تملأ الشاشةَ كلّها وتمرّ تحت الزجاج — كما في Safari الحقيقي —
+   والمنطقةُ الآمنة المحقونة هي ما يغطّيه الكروم في كلّ تخطيط. */
+function useLiquid(d) { return d.island && !isIpad(d) && !state.landscape; }
+
+function liquidInsets(d) {
+  const T = d.island[2] + d.island[1] + 11; // ٥٩ في iPhone 15: تحت الجزيرة بهامش
+  return { compact: [T, 94], top: [T + 54, 78], bottom: [T, 128], app: [T, 34] }[state.chrome];
+}
+
+function renderLiquid(d, frame, w, h) {
+  const [top, bottom] = liquidInsets(d);
+  const tpl = document.getElementById('lf-tpl');
+  const ph = tpl.content.firstElementChild.cloneNode(true);
+  const app = state.chrome === 'app';
+  ph.classList.add(app ? 'chrome-pwa' : 'chrome-' + state.chrome, 'lf-light');
+  // الإطارُ نفسُه إطارُ الأجهزة الأخرى: حافّةٌ ‎14‎ وزوايا دائريّة بنصف قطر الشاشة
+  ph.style.boxSizing = 'content-box';
+  ph.style.width = w + 'px';
+  ph.style.height = h + 'px';
+  ph.style.border = '14px solid #111';
+  ph.style.borderRadius = (d.r + 14) + 'px';
+  ph.style.setProperty('--lf-corner', 'round');
+  ph.style.boxShadow = '0 0 0 2px #3a3a3c, 0 30px 60px rgba(0,0,0,.5)';
+  ph.querySelectorAll('.phone-btn').forEach(b => b.remove());
+  ph.style.setProperty('--sim-safe-top', top + 'px');
+  ph.style.setProperty('--sim-safe-bottom', bottom + 'px');
+  const vp = ph.querySelector('.phone-viewport');
+  vp.style.borderRadius = d.r + 'px';
+  const notch = ph.querySelector('.phone-notch');
+  notch.style.width = d.island[0] + 'px';
+  notch.style.height = d.island[1] + 'px';
+  notch.style.top = d.island[2] + 'px';
+  notch.style.borderRadius = '20px';
+  // شريطُ الحالة كما في iOS: الساعةُ في وسط الجيب الأيسر، والأيقوناتُ في وسط الأيمن
+  const sb = ph.querySelector('.status-bar-info');
+  sb.style.height = (d.island[2] * 2 + d.island[1]) + 'px';
+  sb.style.padding = '0 10px';
+  sb.style.display = 'grid';
+  sb.style.gridTemplateColumns = `1fr ${d.island[0] + 12}px 1fr`;
+  sb.innerHTML = `<div class="lf-time">9:41</div><div></div><div class="lf-icons">${ICON.signal}${ICON.wifi}${ICON.battery}</div>`;
+  sb.querySelectorAll('svg').forEach(el => el.setAttribute('fill', 'currentColor'));
+  ph.querySelectorAll('.safari-url, .compact-pill-url').forEach(el => el.textContent = SITE_HOST);
+  /* الصفحةُ بين الكرومين: تبدأ تحت شريط الحالة (وتحت كبسولة العنوان في Top)، وتنتهي
+     فوق الشريط السفلي — فالعناصرُ الثابتة في أسفلها (كأزرار الشريط الجانبي) لا يغطّيها
+     الزجاج، وهذا ما يُرى على iPhone حقيقي. وما حولها يأخذ لونَ خلفيّة الصفحة. */
+  const screen = ph.querySelector('.phone-screen');
+  if (app) {
+    // وضعُ التطبيق: هامشٌ علويٌّ بقدر شريط الحالة فلا يقع شيءٌ تحت الجزيرة،
+    // كما يفعل SwiftUI بالمنطقة الآمنة؛ والصفحةُ تمتدّ إلى أسفل الشاشة
+    screen.style.top = top + 'px';
+    screen.style.borderRadius = `0 0 ${d.r}px ${d.r}px`;
+  } else {
+    screen.style.top = top + 'px';
+    screen.style.bottom = bottom + 'px';   // وتنتهي فوق الشريط السفلي — كما يُرى على الجهاز
+    screen.style.borderRadius = '0';
+  }
+  screen.appendChild(frame);
+  if (state.safe) {
+    vp.insertAdjacentHTML('beforeend',
+      `<div class="lf-safe" style="top:0;height:${top}px"></div><div class="lf-safe" style="bottom:0;height:${bottom}px"></div>`);
+  }
+  vp.insertAdjacentHTML('beforeend', '<div class="lf-home"></div>');
+  if (d.hinge) vp.insertAdjacentHTML('beforeend', '<div class="hinge" style="z-index:3"></div>');
+
+  if (state.src) frame.addEventListener('load', () => {
+    injectSafeArea(frame, app ? { top: 0, bottom, left: 0, right: 0 } : { top: 0, bottom: 0, left: 0, right: 0 }, d);
+    followTheme(frame, ph);
+  });
+
+  const stage = $('stage');
+  stage.innerHTML = '';
+  stage.appendChild(ph);
+  if (d.est || d.estSafe) {
+    const n = document.createElement('div');
+    n.className = 'note';
+    n.textContent = d.est ? '* مقاس تقديري غير رسمي — تأكد منه في المحاكي' : '* المنطقة الآمنة تقديرية — تأكد منها في المحاكي';
+    stage.appendChild(n);
+  }
+  $('device').value = state.device;
+  $('src').value = state.src;
+  syncMode();
+  $('fold').classList.toggle('hidden', !d.duo);
+  $('safeBtn').classList.toggle('on', state.safe);
+  $('rotate').classList.toggle('on', state.landscape);
+  $('info').textContent = app
+    ? `تطبيق ${w} × ${h - top} pt — يبدأ تحت شريط الحالة ↑${top}  |  safe ↓${bottom}`
+    : `صفحة Safari ${w} × ${h - top - bottom} pt  |  الكروم ↑${top} ↓${bottom}`;
+  applyZoom();
+  saveToUrl();
+}
+
+// الزجاجُ يتبع جلدَ الصفحة: فاتحٌ فوق الفاتح، داكنٌ فوق الداكن
+function followTheme(frame, ph) {
+  let root;
+  try { root = frame.contentDocument.documentElement; } catch (e) { return; }
+  const apply = () => {
+    const dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.hasAttribute('data-theme') && frame.contentWindow.matchMedia('(prefers-color-scheme: dark)').matches);
+    ph.classList.toggle('lf-light', !dark);
+    // ما فوق الصفحة (شريط الحالة) يأخذ لونَ خلفيّتها
+    try {
+      const doc = frame.contentDocument, win = frame.contentWindow;
+      let bg = win.getComputedStyle(doc.body).backgroundColor;
+      if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') bg = win.getComputedStyle(root).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') ph.querySelector('.phone-viewport').style.backgroundColor = bg;
+    } catch (e) { /* أصلٌ آخر */ }
+  };
+  apply();
+  new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+}
+
+function syncMode() {
+  const app = state.chrome === 'app';
+  if (!app) lastLayout = state.chrome;
+  document.querySelectorAll('#mode button').forEach(b =>
+    b.classList.toggle('on', (b.dataset.mode === 'app') === app));
+  $('chrome').value = lastLayout;
+  $('chrome').classList.toggle('hidden', app);
+}
+
+function isIpad(d) { return d.w >= 700 && !d.duo; }
+
+// ارتفاعُ الكروم كلّه — لحساب المساحة التي تبقى للصفحة
+function chromeHeight(d) {
+  if (state.landscape && !isIpad(d)) return 48;
+  if (isIpad(d)) return 24 + 50;
+  const status = d.island ? 54 : 20;
+  const bottom = d.home ? 49 + 34 : 44;
+  return status + 48 + bottom;
+}
+
+function statusBar(d) {
+  const sb = document.createElement('div');
+  sb.className = 'sb' + (isIpad(d) ? ' ipad' : '');
+  sb.style.height = (isIpad(d) ? 24 : d.island ? 54 : 20) + 'px';
+  if (d.island) sb.style.paddingTop = '6px';
+  const icons = `<span class="icons">${ICON.signal}${ICON.wifi}${ICON.battery}</span>`;
+  sb.innerHTML = isIpad(d)
+    ? `<span>9:41<span class="date">Sat Nov 14</span></span>${icons}`
+    : `<span style="width:54px;text-align:center">9:41</span>${icons}`;
+  sb.querySelectorAll('svg').forEach(el => el.setAttribute('fill', 'currentColor'));
+  if (!d.island && !isIpad(d)) { sb.style.fontSize = '12px'; sb.style.padding = '0 8px'; }
+  return sb;
+}
+
+function addressField() {
+  const f = document.createElement('div');
+  f.className = 'field';
+  f.innerHTML = `<span class="aa">ᴀA</span><span class="host">${ICON.lock}${SITE_HOST}</span>${ICON.reload}`;
+  return f;
+}
+
+function buildSafari(screen, frame, d, w, h) {
+  const ipad = isIpad(d);
+  const land = state.landscape && !ipad;
+
+  if (!land) screen.appendChild(statusBar(d));
+
+  const addr = document.createElement('div');
+  addr.className = 'addr';
+  if (ipad) {
+    addr.style.height = '50px';
+    addr.style.gap = '18px';
+    addr.style.padding = '6px 20px';
+    addr.innerHTML = ICON.back + ICON.fwd + ICON.book;
+    const fld = addressField();
+    fld.style.maxWidth = '420px';
+    fld.style.margin = '0 auto';
+    addr.appendChild(fld);
+    addr.insertAdjacentHTML('beforeend', ICON.share + ICON.plus + ICON.tabs);
+  } else if (land) {
+    addr.style.height = '48px';
+    addr.style.padding = `5px ${d.safeL[2] + 6}px`;
+    addr.style.gap = '16px';
+    addr.innerHTML = ICON.back + ICON.fwd;
+    addr.appendChild(addressField());
+    addr.insertAdjacentHTML('beforeend', ICON.share + ICON.book + ICON.tabs);
+  } else {
+    addr.style.height = '48px';
+    addr.appendChild(addressField());
+  }
+  screen.appendChild(addr);
+  screen.appendChild(frame);
+
+  if (!ipad && !land) {
+    const tb = document.createElement('div');
+    tb.className = 'tb';
+    tb.style.height = (d.home ? 49 + 34 : 44) + 'px';
+    tb.innerHTML = ICON.back + ICON.fwd + ICON.share + ICON.book + ICON.tabs;
+    screen.appendChild(tb);
+  }
+}
+
+// يكتب المنطقةَ الآمنة في الصفحة المعروضة — يصحّ على أصلٍ واحد فقط (خادمٌ محلّي)
+function injectSafeArea(frame, sa, d) {
+  let doc;
+  try { doc = frame.contentDocument; } catch (e) { doc = null; }
+  if (!doc || !doc.documentElement) {
+    $('info').textContent += '  |  ⚠ شغّل خادمًا محليًّا لحقن المنطقة الآمنة';
+    return;
+  }
+  const root = doc.documentElement;
+  root.style.setProperty('--safe-top', sa.top + 'px');
+  root.style.setProperty('--safe-bottom', sa.bottom + 'px');
+  root.style.setProperty('--safe-left', sa.left + 'px');
+  root.style.setProperty('--safe-right', sa.right + 'px');
+  root.setAttribute('data-device-preview', state.device);
+}
+
+// يحفظ الجهاز والشاشة في الرابط — ويتجاهل البيئات اللي ما تسمح بتعديل الرابط (مثل المعاينة داخل iframe)
+function saveToUrl() {
+  if (location.protocol === 'about:') return;
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set('device', state.device);
+    state.src === 'Almaslakh/index.html' ? url.searchParams.delete('src') : url.searchParams.set('src', state.src);
+    state.landscape ? url.searchParams.set('landscape', '1') : url.searchParams.delete('landscape');
+    state.safe ? url.searchParams.set('safe', '1') : url.searchParams.delete('safe');
+    url.searchParams.delete('browser');
+    state.chrome === 'compact' ? url.searchParams.delete('chrome') : url.searchParams.set('chrome', state.chrome);
+    history.replaceState(null, '', url);
+  } catch (e) { /* المتصفح منع تعديل الرابط — ما يأثر على العرض */ }
+}
+
+function applyZoom() {
+  const stage = $('stage');
+  stage.style.transform = 'none';
+  let z = state.zoom === 'fit' ? null : parseFloat(state.zoom);
+  if (z === null) {
+    const main = document.querySelector('main');
+    const r = stage.getBoundingClientRect();
+    z = Math.min(1, (main.clientWidth - 60) / r.width, (main.clientHeight - 60) / r.height);
+  }
+  stage.style.transform = `scale(${z})`;
+}
+
+$('device').onchange = e => { state.device = e.target.value; render(); };
+$('load').onclick = () => { state.src = $('src').value.trim(); render(); };
+$('src').onkeydown = e => { if (e.key === 'Enter') $('load').click(); };
+$('rotate').onclick = () => { state.landscape = !state.landscape; render(); };
+$('chrome').onchange = e => { state.chrome = lastLayout = e.target.value; render(); };
+document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
+  state.chrome = b.dataset.mode === 'app' ? 'app' : lastLayout;
+  render();
+});
+$('fold').onclick = () => { state.device = DEVICES[state.device].duo; render(); };
+$('safeBtn').onclick = () => { state.safe = !state.safe; render(); };
+$('zoom').onchange = e => { state.zoom = e.target.value; applyZoom(); };
+window.onresize = applyZoom;
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'r') $('rotate').click();
+  if (e.key === 'f' && !$('fold').classList.contains('hidden')) $('fold').click();
+  if (e.key === 's') $('safeBtn').click();
+  if (e.key === 'b') { state.chrome = state.chrome === 'app' ? lastLayout : 'app'; render(); }
+});
+
+render();
+</script>
+</body>
+</html>
