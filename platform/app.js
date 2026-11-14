@@ -10822,7 +10822,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) { toast(T().chNotPdf); return; }
     const key = pkSrcKey(id);
     if (!await chIdb('readwrite', key, file)) { toast(T().chSaveFail); return; }
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     const was = pkSrcMeta(id);
     (state.pkSrc = state.pkSrc || {})[id] = { name: file.name, size: file.size, ts: Date.now(), type: was ? was.type : pkSrcGuess(file.name) };
@@ -10836,7 +10836,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   async function pkSrcDel(id) {
     const key = pkSrcKey(id);
     await chIdb('readwrite', key, null);
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     if (state.pkSrc) delete state.pkSrc[id];
     const base = pkSrcBase(id);
@@ -11122,7 +11122,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         try { old.ro.disconnect(); } catch (e) {}
         old.ro.observe(old.stage);
         const same = old.stage.clientWidth === old.stW && old.stage.clientHeight === old.stH;
-        if (!same || old.flip || moved) { if (old.leaf && old.leaf.mode !== 'rest') bkLeafDrop(old); bkLayout(old); }
+        /* وإن نُقل في أثناء حركة دخولٍ أو تكبير: يُجمَّد ويُرسم مرّةً حين تقف (‎bkRelayoutAll‎) — لا على عرضها وهي تنبسط */
+        if ((bkHoldN > 0 || cxMorphBusy) && old.gl) { /* مراقبُ المقاس (أُعيد أعلاه) يحجّمه صورةً حتى تقف */ }
+        else if (!same || old.flip || moved) { if (old.leaf && old.leaf.mode !== 'rest') bkLeafDrop(old); bkLayout(old); }
         else old.flip = null;
         return;
       }
@@ -22710,12 +22712,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = card.querySelector('.post-ytmain > .pk-split');
     /* وبلا كتلة (الضيّقة) تجري الحركةُ نفسُها بلا لسان: الساعةُ والعكسُ والإنهاءُ واحدة */
     if (!sp) { done && done(); return null; }
-    if (card.pkBandAnim) cancelAnimationFrame(card.pkBandAnim.raf);
+    const prev = card.pkBandAnim;
+    if (prev) cancelAnimationFrame(prev.raf);
     const st = Object.assign({ raf: 0, from: 0, to: 1, start: performance.now(), span: dur, dur, t: 0, tracks, end: done, anims: [] }, extra || {});
     card.pkBandAnim = st;
     card.classList.add('pk--fxrun');
-    /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف */
-    if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
+    /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف.
+       وحركةٌ تحلّ محلّ أخرى قبل تمامها ترث تجميدَها — وإلّا بقي الكتابُ مجمَّدًا أبدًا (لا أحدَ يفكّه) */
+    if (prev && prev.busy) st.busy = true;
+    else if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
     const draw = t => {
       const ft = card.querySelector('.pk-ftline');
       if (!ft || !card.querySelector(':scope > .pk-band')) return;   /* الضيّقة: لا ذيلَ ولا كتلة — الحركةُ بلا لسان */
@@ -22734,7 +22739,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (st.busy) cxMorphSettle();
     };
     st.frame = now => {
-      if (card.pkBandAnim !== st || !card.isConnected) return;
+      if (card.pkBandAnim !== st) return;
+      /* رُسم المربّعُ من جديد في أثنائها: تنتهي هنا، ويُفكّ تجميدُ الكتاب */
+      if (!card.isConnected) { card.pkBandAnim = null; if (st.busy) cxMorphSettle(); return; }
       const k = st.span > 0 ? Math.min(1, (now - st.start) / st.span) : 1;
       st.t = st.from + (st.to - st.from) * k;
       draw(st.t);
@@ -22823,6 +22830,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); });
+    bkHoldAnims(an);   /* الكتابُ يُجمَّد حتى تنبسط */
     return true;
   }
   /* الكتلُ تُرسم من المواضع الحيّة كلَّ إطارٍ ما دامت حركاتُ القسمة جارية، ثمّ ساكنةً (أو ‎done‎) */
@@ -22907,9 +22915,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       band.querySelectorAll('.pk-band__gap, .pk-band__foot').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .45, delay: t0 + D * .55, fill: 'forwards' })));
     } else card.querySelectorAll(':scope > .pk-band, .post-ytmain > .pk-split').forEach(x =>
       an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300 * slow, delay: C, fill: 'forwards' })));
+    bkHold();
     Promise.all(an.map(a => a.finished.catch(() => {})).concat(fold)).then(() => {
       card.pkBlkHold = false;
-      commit();
+      try { commit(); } finally { bkRelease(); }
       const n = document.querySelector('#cm-body .pk-split--none > .pk-none');
       if (n) n.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 300 * slow, delay: 40 * slow, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' });
     });
@@ -22945,8 +22954,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
     /* والقامةُ مثبّتةٌ وهي تنطوي: محتواها يقصر ويطول مع عرضها فلا تقفز المساهمة (ثمّ تنتقل إلى قامتها الجديدة بعد الرسم) */
     if (narrow) { sp.style.height = spH + 'px'; sp.style.overflow = 'hidden'; }
+    /* الكتابُ (الخارجُ أو الباقي) يُجمَّد أثناء الانطواء، ويُفكّ بعد الرسم الجديد — فالخارجُ لا يُبنى على عرضٍ صفر */
+    bkHold();
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
-      commit();
+      try { commit(); } finally { bkRelease(); }
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
       const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
@@ -23004,14 +23015,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وما يثقل الحركة هو الكتاب (‎WebGL‎): كان يُعاد رسمُه كاملًا في كلّ إطار (‎184‎ رسمةً في أربع حركات) — فيُجمَّد أثناءها:
      لوحتُه على آخر رسمة، تُكبَّر وتُصغَّر صورةً بنسبتها حول وسطها، ويُرسم مرّةً واحدةً بالمقاس الجديد حين تقف */
   let cxMorphBusy = false;
-  const cxMorphSettle = () => {
-    cxMorphBusy = false;
+  const cxMorphSettle = () => { cxMorphBusy = false; if (!bkHoldN) bkRelayoutAll(); };
+  /* الكتبُ الظاهرةُ تُقاس وتُرسم مرّةً بمقاسها الآن — ويُترك كتابٌ انطوت مساحتُه (يخرج، فلا تُبنى لوحتُه على عرضٍ صفر) */
+  function bkRelayoutAll() {
     Object.values(pkSrcBk).forEach(b => {
       if (!b || b.gl === undefined || !b.el || !b.el.isConnected) return;
       if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' });
+      if (b.stage && b.stage.clientWidth < 40) return;
       bkLayout(b);
     });
-  };
+  }
+  /* ===== تجميدُ الكتاب أثناء دخول المساحات وخروجها (طلبُ صاحب الموقع: «ثقيلة») =====
+     كانت مساحةُ الكتاب تتّسع وتضيق في كلّ إطار فيُعاد بناءُ لوحة ‎WebGL‎ بمقاسها (‎renderer.setSize‎) مرّةً بعد مرّة — وهو أثقلُ
+     ما في الحركة (أكثرُ من ‎85%‎ من وقتها). فيُجمَّد كما في التكبير: اللوحةُ صورةٌ تُحجَّم، وتُقاس وتُرسم مرّةً حين تقف الحركة.
+     ‏‎bkHoldN‎ عدّادٌ للحركات القائمة (قد تتداخل)، ويُفكّ التجميدُ حين تنتهي كلُّها */
+  let bkHoldN = 0;
+  const bkHold = () => { bkHoldN++; };
+  const bkRelease = () => { if (bkHoldN > 0 && --bkHoldN === 0 && !cxMorphBusy) bkRelayoutAll(); };
+  function bkHoldAnims(an) {
+    an = (an || []).filter(a => { try { return isFinite(a.effect.getComputedTiming().endTime); } catch (e) { return false; } });
+    if (!an.length) return;
+    bkHold();
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(bkRelease);
+  }
   let cxMorphing = null;   /* الحركةُ الجارية ‎{ a, el, end }‎: نقرةٌ في منتصفها تبدأ التاليةَ من حيث المربّعُ الآن لا من آخر الأولى */
   const cxCardEl = key => key === 'edit' ? document.querySelector('#cm-body .pk--edit[data-sub="cards"]')
     : document.querySelector(`#cm-body .post[data-ck="${CSS.escape(key)}"]`);
@@ -23767,14 +23793,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return chLibP;
   }
   const chPdfDoc = {};   /* المستندُ المفتوح لكلّ مفتاح — فالعودةُ إلى شابترٍ لا تُعيد قراءةَ ملفّه */
-  async function chPdfOpen(key) {
-    if (chPdfDoc[key]) return chPdfDoc[key];
-    const blob = await chIdb('readonly', key);
-    if (!blob) return null;
-    const L = await chPdfLib();
-    const data = new Uint8Array(await blob.arrayBuffer());
-    chPdfDoc[key] = await L.getDocument({ data }).promise;
-    return chPdfDoc[key];
+  /* فتحٌ واحدٌ لكلّ ملفّ: رسماتٌ متزامنة (بعد الرفع خاصّةً) كانت تفتحه كلٌّ وحدها فيصير له مستندان — فيُبنى الكتابُ من أحدهما
+     ويُخبَّأ الآخر، ثمّ لا يُعرف الكتابُ القائمُ أنّه للملفّ نفسِه فيُبنى من الصفر في كلّ فتحٍ لمساحته (ثقلُ الحركة) */
+  const chPdfOpening = {};
+  function chPdfOpen(key) {
+    if (chPdfDoc[key]) return Promise.resolve(chPdfDoc[key]);
+    if (chPdfOpening[key]) return chPdfOpening[key];
+    const pr = (async () => {
+      const blob = await chIdb('readonly', key);
+      if (!blob) return null;
+      const L = await chPdfLib();
+      const data = new Uint8Array(await blob.arrayBuffer());
+      const doc = await L.getDocument({ data }).promise;
+      if (chPdfOpening[key] === pr) chPdfDoc[key] = doc;
+      return doc;
+    })();
+    chPdfOpening[key] = pr;
+    pr.then(() => { if (chPdfOpening[key] === pr) delete chPdfOpening[key]; }, () => { if (chPdfOpening[key] === pr) delete chPdfOpening[key]; });
+    return pr;
   }
   /* ============================================================
      الكتاب — مصدرُ الشابتر كتابٌ عربيٌّ يُقلَّب (ROADMAP-BOOK.md)
@@ -24215,18 +24251,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.gl = null;   /* المحرّكُ بعد التحميل */
     b.dark = pkDark();
     let raf = 0;
+    /* المربّعُ يكبر أو يصغر (‎cxMorph‎) أو مساحتُه تدخل وتخرج (‎bkHoldN‎): اللوحةُ تُحجَّم صورةً حول وسطها بلا رسمٍ ولا ترتيب —
+       ويُرسم الكتابُ مرّةً حين تقف. ويُسأل عن التجميد ساعةَ التنفيذ أيضًا: إطارٌ جُدول قبل أن تبدأ الحركةُ كان يرسم في وسطها */
+    const freeze = () => {
+      if (!(cxMorphBusy || bkHoldN > 0) || !b.gl || !b.stW || !b.stH) return false;
+      const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
+      Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
+      bkTLHide(b);
+      return true;
+    };
     b.ro = new ResizeObserver(() => {
       if (!b.el.isConnected) { b.ro.disconnect(); return; }
       if (b.stage.clientWidth === b.stW && b.stage.clientHeight === b.stH) return;
-      /* المربّعُ يكبر أو يصغر (‎cxMorph‎): اللوحةُ تُحجَّم صورةً حول وسطها بلا رسمٍ ولا ترتيب — ويُرسم الكتابُ مرّةً حين تقف */
-      if (cxMorphBusy && b.gl && b.stW && b.stH) {
-        const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
-        Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
-        bkTLHide(b);
-        return;
-      }
+      if (freeze()) return;
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => bkLayout(b));
+      raf = requestAnimationFrame(() => { if (!freeze()) bkLayout(b); });
     });
     b.ro.observe(b.stage);
     const st = b.stage;
@@ -24509,8 +24548,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   function bk2Layout(b) {
-    b.stW = b.stage.clientWidth; b.stH = b.stage.clientHeight;
-    if (!b.stW || !b.stH) return;
+    /* مقاسٌ صفرٌ (مساحةٌ تنبسط من لا شيء، أو وعاءٌ مخفيّ) لا يُكتب: يبقى آخرُ مقاسٍ حقيقيّ — منه يُحجَّم الكتابُ صورةً وهو مجمَّد */
+    const w0 = b.stage.clientWidth, h0 = b.stage.clientHeight;
+    if (!w0 || !h0) return;
+    b.stW = w0; b.stH = h0;
     const g = b.gl;
     if (g) {
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
@@ -25069,7 +25110,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = chPdfKey(code, ch);
     const ok = await chIdb('readwrite', key, file);
     if (!ok) { toast(T().chSaveFail); return; }
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
@@ -25080,7 +25121,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
     if (!chPdfMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     delete state.chPdf[code][ch];
     save();
