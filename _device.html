@@ -1004,13 +1004,13 @@ function renderLiquid(d, frame, w, h) {
   sb.style.padding = '0 34px';
   sb.style.fontSize = '17px';
   ph.querySelectorAll('.safari-url, .compact-pill-url').forEach(el => el.textContent = SITE_HOST);
-  /* الصفحةُ تبدأ تحت شريط الحالة (وتحت كبسولة العنوان في Top) — Safari لا يرسمها
-     خلف الجزيرة ما لم تطلب ‎viewport-fit=cover‎ — وتمتدّ إلى أسفل الشاشة تحت الزجاج.
-     وما فوقها يُلوَّن بلون خلفيّة الصفحة، كما يفعل Safari. */
-  const pageTop = top;
+  /* الصفحةُ بين الكرومين: تبدأ تحت شريط الحالة (وتحت كبسولة العنوان في Top)، وتنتهي
+     فوق الشريط السفلي — فالعناصرُ الثابتة في أسفلها (كأزرار الشريط الجانبي) لا يغطّيها
+     الزجاج، وهذا ما يُرى على iPhone حقيقي. وما حولها يأخذ لونَ خلفيّة الصفحة. */
   const screen = ph.querySelector('.phone-screen');
-  screen.style.top = pageTop + 'px';
-  screen.style.borderRadius = `0 0 ${d.r}px ${d.r}px`;
+  screen.style.top = top + 'px';
+  screen.style.bottom = bottom + 'px';   // وتنتهي فوق الشريط السفلي — كما يُرى على الجهاز
+  screen.style.borderRadius = '0';
   screen.appendChild(frame);
   if (state.safe) {
     vp.insertAdjacentHTML('beforeend',
@@ -1020,7 +1020,7 @@ function renderLiquid(d, frame, w, h) {
   if (d.hinge) vp.insertAdjacentHTML('beforeend', '<div class="hinge" style="z-index:3"></div>');
 
   if (state.src) frame.addEventListener('load', () => {
-    injectSafeArea(frame, { top: 0, bottom, left: 0, right: 0 }, d);
+    injectSafeArea(frame, { top: 0, bottom: 0, left: 0, right: 0 }, d);
     followTheme(frame, ph);
   });
 
@@ -1039,7 +1039,7 @@ function renderLiquid(d, frame, w, h) {
   $('fold').classList.toggle('hidden', !d.duo);
   $('safeBtn').classList.toggle('on', state.safe);
   $('rotate').classList.toggle('on', state.landscape);
-  $('info').textContent = `صفحة ${w} × ${h - top} pt — تبدأ تحت ↑${top} وتمرّ تحت الزجاج ↓${bottom}`;
+  $('info').textContent = `صفحة Safari ${w} × ${h - top - bottom} pt  |  الكروم ↑${top} ↓${bottom}`;
   applyZoom();
   saveToUrl();
 }
