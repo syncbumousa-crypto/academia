@@ -53,7 +53,6 @@
   };
 
   var bar = null, page = null, onSettings = false, watchers = [];
-  var lens = null, lensLbl = null, lensObs = null;
 
   function lang() { return root.getAttribute('data-lang') === 'en' ? 'en' : 'ar'; }
   function src(tab) { return document.querySelector('.sidebar .tabs [data-tab="' + tab + '"]'); }
@@ -153,6 +152,7 @@
     var theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
     page.querySelectorAll('[data-seg="theme"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === theme); });
     page.querySelectorAll('[data-seg="lang"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === lang()); });
+    if (cardsHost) queueCards();
   }
 
   function watch() {
@@ -164,82 +164,113 @@
     watchers = [mo, mo2];
   }
 
-  /* ---------- عدسةُ تبويبات المادّة ----------
-     العدسةُ والسطرُ أخوان لـ‎#cm-tabs‎ في ‎.cm-panel‎ — لا أبناؤه، فالمحرّكُ
-     يكتب جوفَه من جديد عند كلّ تبديل. ويُعاد وضعُهما كلّما تغيّر الجوف أو نُقلت
-     النافذة (‎#cm-ui‎ تُنقل بين السوق والمكتبة). */
-  var TX_LENS = { ar: { add: 'ساهِم', none: 'لا مساهمات بعد', one: 'مساهمة واحدة', many: ' مساهمات' },
-                  en: { add: 'Add', none: 'No contributions yet', one: '1 contribution', many: ' contributions' } };
 
-  function placeLens() {
-    var tabs = document.getElementById('cm-tabs');
-    if (!tabs) return;
-    var panel = tabs.parentElement;
-    if (!lens) {
-      lens = document.createElement('div'); lens.className = 'm-lens';
-      lensLbl = document.createElement('div'); lensLbl.className = 'm-lens-label';
-      lensLbl.addEventListener('click', function (e) {
-        if (!e.target.closest('.m-add')) return;
-        var me = document.querySelector('#cm-tabs button.on .cm-face--me');
-        if (me) me.click();   // يمرّ إلى مستمع المحرّك على ‎.cm-panel‎ كما لو ضُغطت «+»
+
+  /* ---------- أقسامُ المادّة: بطاقاتٌ تُسحب بدل التبويبات الثمانية ----------
+     صفّان: «عن المادة» (الأربعةُ الأولى) و«الموارد» (ما في ‎.cm-res‎). وكلُّ بطاقةٍ
+     تُبنى من زرّها الأصليّ: أيقونتُه واسمُه ووجوهُ مساهميه وعدّادُه — وتُقرأ منه
+     كلّما تغيّر (مادّةٌ أخرى، مساهمةٌ جديدة، تبويبٌ آخر). والضغطُ ينقر الأصلَ، فيُفتح
+     لوحُه تحت البطاقات كما كان. ولا زرَّ «ساهِم» على البطاقة، ولا «عرض الكل». */
+  var CARD_TINT = { info: '#2c5e65', doc: '#5e5ce6', abs: '#e8890c', grade: '#2a9fb5',
+                    srcU: '#c9a227', srcP: '#2fae52', videos: '#e8365c', cards: '#9b4fd0' };
+  var GRP = { ar: ['عن المادة', 'الموارد'], en: ['About the course', 'Resources'] };
+  var cardsHost = null, tabsSeen = null, cardsMO = null, bodyMO = null, rafQ = 0;
+
+  function contributors(btn) {
+    var faces = btn.querySelector('.cm-faces');
+    var count = 0, avatars = [];
+    if (faces) {
+      var c = faces.querySelector('.cm-face--count');
+      count = c ? parseInt(c.textContent.replace(/[^\d]/g, ''), 10) || 0 : 0;
+      faces.querySelectorAll('.cm-face').forEach(function (f) {
+        if (f.matches('.cm-face--me, .cm-face--count, .cm-face--empty')) return;
+        avatars.push(f.innerHTML);
       });
     }
-    if (lens.parentElement !== panel) panel.insertBefore(lens, tabs);
-    if (lensLbl.previousElementSibling !== tabs) tabs.after(lensLbl);
-
-    var on = tabs.querySelector('button.on');
-    if (!on || !tabs.offsetWidth) { lens.style.opacity = 0; if (lensLbl.innerHTML) lensLbl.innerHTML = ''; return; }
-    var pr = panel.getBoundingClientRect(), br = on.getBoundingClientRect();
-    var x = br.left - pr.left + br.width / 2 - 30, y = br.top - pr.top + br.height / 2 - 30;
-    lens.style.opacity = 1;
-    lens.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-
-    var t = TX_LENS[lang()];
-    var nm = on.querySelector('.cm-tabnm');
-    var cnt = on.querySelector('.cm-face--count');
-    var n = cnt ? parseInt(cnt.textContent.replace(/\D/g, ''), 10) || 0 : 0;
-    var count = n === 0 ? t.none : n === 1 ? t.one : n + t.many;
-    var canAdd = !!on.querySelector('.cm-face--me');
-    var html = '<span>' + (nm ? nm.textContent : '') + '</span><span class="m-cnt">· ' + count + '</span>' +
-      (canAdd ? '<button type="button" class="m-add">+ ' + t.add + '</button>' : '');
-    if (lensLbl.innerHTML !== html) lensLbl.innerHTML = html;
+    return { count: count, avatars: avatars };
   }
 
-  function startLens() {
-    if (lensObs) return;
-    var raf = 0;
-    var kick = function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(placeLens); };
-    lensObs = new MutationObserver(function (recs) {
-      // ما تكتبه العدسةُ في نفسها لا يُعيد تشغيلها
-      for (var i = 0; i < recs.length; i++) {
-        var t = recs[i].target;
-        if (lens && (t === lens || (lensLbl && lensLbl.contains(t)))) continue;
-        kick(); return;
-      }
+  function cardHTML(btn) {
+    var k = btn.dataset.tab, nm = btn.querySelector('.cm-tabnm');
+    var ic = btn.querySelector('svg'), who = contributors(btn), en = lang() === 'en';
+    var shown = who.avatars.slice(0, 3);
+    var pile = shown.map(function (a) { return '<span class="m-av">' + a + '</span>'; }).join('');
+    if (who.count > shown.length && shown.length) pile += '<span class="m-av m-av--more">+' + (who.count - shown.length) + '</span>';
+    if (!who.count) pile = '<span class="m-av m-av--empty"></span>';
+    var sub = who.count ? (en ? who.count + (who.count === 1 ? ' contribution' : ' contributions') : who.count + ' مساهمة')
+                        : (en ? 'No contributions yet' : 'لا مساهمات بعد');
+    return '<button type="button" class="m-card' + (btn.classList.contains('on') ? ' is-on' : '') + '" data-tab="' + k + '"' +
+           ' style="--m-card:' + (CARD_TINT[k] || '#2c5e65') + '">' +
+           '<span class="m-card-ic">' + (ic ? ic.outerHTML : '') + '</span>' +
+           '<span class="m-card-nm">' + (nm ? nm.innerHTML : '') + '</span>' +
+           '<span class="m-card-sub">' + sub + '</span>' +
+           '<span class="m-pile">' + pile + '</span></button>';
+  }
+
+  function paintCards() {
+    rafQ = 0;
+    var tabs = document.getElementById('cm-tabs');
+    if (!tabs) return;
+    if (tabs !== tabsSeen || !cardsHost || !cardsHost.isConnected) {
+      if (cardsHost) cardsHost.remove();
+      if (cardsMO) cardsMO.disconnect();
+      tabsSeen = tabs;
+      cardsHost = document.createElement('div');
+      cardsHost.className = 'm-cards';
+      cardsHost.addEventListener('click', function (e) {
+        var c = e.target.closest('.m-card');
+        if (!c) return;
+        var b = tabsSeen.querySelector('button[data-tab="' + c.dataset.tab + '"]');
+        if (b) b.click();
+      });
+      tabs.parentNode.insertBefore(cardsHost, tabs);
+      cardsMO = new MutationObserver(queueCards);
+      cardsMO.observe(tabs, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'], characterData: true });
+    }
+    var res = tabs.querySelector('.cm-res');
+    var about = [].filter.call(tabs.children, function (n) { return n.tagName === 'BUTTON'; });
+    var more = res ? [].slice.call(res.querySelectorAll('button')) : [];
+    var g = GRP[lang()];
+    var html = '';
+    [[g[0], about], [g[1], more]].forEach(function (row) {
+      if (!row[1].length) return;
+      html += '<div class="m-cards-title">' + row[0] + '</div><div class="m-cards-row">' + row[1].map(cardHTML).join('') + '</div>';
     });
-    lensObs.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
-    window.addEventListener('resize', kick);
-    kick();
+    // تُحفظ مواضعُ السحب: البناءُ يتكرّر مع كلّ تغيير، والصفُّ لا يقفز إلى أوّله
+    var keep = [].map.call(cardsHost.querySelectorAll('.m-cards-row'), function (r) { return r.scrollLeft; });
+    cardsHost.innerHTML = html;
+    cardsHost.querySelectorAll('.m-cards-row').forEach(function (r, i) { if (keep[i] != null) r.scrollLeft = keep[i]; });
   }
-  function stopLens() {
-    if (lensObs) { lensObs.disconnect(); lensObs = null; }
-    if (lens) { lens.remove(); lensLbl.remove(); lens = lensLbl = null; }
+  function queueCards() { if (!rafQ) rafQ = requestAnimationFrame(paintCards); }
+
+  function startCards() {
+    paintCards();
+    // ‎#cm-ui‎ يُنقل بين المكتبة والركن ويُعاد بناؤه — فيُراقَب الجسمُ ليُعاد التعليقُ عليه
+    bodyMO = new MutationObserver(function () {
+      var t = document.getElementById('cm-tabs');
+      if (t !== tabsSeen || (cardsHost && !cardsHost.isConnected)) queueCards();
+    });
+    bodyMO.observe(document.body, { childList: true, subtree: true });
+  }
+  function stopCards() {
+    [cardsMO, bodyMO].forEach(function (m) { if (m) m.disconnect(); });
+    if (cardsHost) cardsHost.remove();
+    cardsHost = tabsSeen = cardsMO = bodyMO = null;
   }
 
   /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
   function apply() {
     if (MQ.matches && flagOn()) {
-      if (!bar) { build(); watch(); }
+      if (!bar) { build(); watch(); startCards(); }
       root.classList.add('m-app');
       sync();
-      startLens();
     } else if (bar) {
       root.classList.remove('m-app');
-      stopLens();
       watchers.forEach(function (w) { w.disconnect(); });
       watchers = [];
       bar.remove(); page.remove();
       bar = page = null;
+      stopCards();
       onSettings = false;
     }
   }
