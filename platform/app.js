@@ -24346,12 +24346,51 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (first) return;
     (postsOf(cmCode, 'cards') || []).forEach(p => { if (p.data && p.data.hl && p.data.hl.marks.length) hlRepaintAll(p.id); });
   }
-  function hlPick(d, e) {
-    const c = hlCan(d); if (!c) return;
+  /* التظليلُ الذي تحت نقطةٍ من الصفحة (إن كان) */
+  function hlMarkAt(d, e) {
+    const c = hlCan(d); if (!c) return null;
     const R = d.getBoundingClientRect(), x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
     const m = hlMarksOn(c.b, +d.dataset.k).find(m => m.bars.some(([l, r, t, bb]) => x >= l && x <= r && y >= t && y <= bb));
-    hlSetCur(c.id, m ? m.id : null);
+    return m ? { c, m } : { c, m: null };
   }
+  function hlPick(d, e) {
+    const h = hlMarkAt(d, e); if (!h) return;
+    hlSetCur(h.c.id, h.m ? h.m.id : null);
+    if (h.m) hlMkOpen(h.c.id, h.m, e.clientX, e.clientY); else hlMkClose();
+  }
+  /* ===== قائمةُ التظليل (طلبُ صاحب الموقع): نقرُ تظليلٍ سابقٍ يفتح ألوانَه الأربعة وزرَّ الحذف تحته ===== */
+  const HL_TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 7V4.5h4V7M6.5 7l1 13h9l1-13M10.2 10.5v6.5M13.8 10.5v6.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function hlMkClose() { const P = document.getElementById('hl-mk'); if (P) P.remove(); }
+  function hlMkOpen(id, m, cx, cy) {
+    hlMkClose(); hlPalClose();
+    const P = document.createElement('div');
+    P.id = 'hl-mk'; P.className = 'hl-pal hl-mk' + (document.documentElement.getAttribute('data-theme') === 'dark' ? ' is-dark' : ''); P.setAttribute('role', 'menu');
+    P.innerHTML = Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${m.col === c}" class="${m.col === c ? 'is-on' : ''}" data-hlmc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('')
+      + `<i class="hl-mk__sep"></i><button type="button" class="hl-mk__del" data-hlmdel title="${esc(T().hlDel || '')}" aria-label="${esc(T().hlDel || '')}">${HL_TRASH}</button>`;
+    document.body.appendChild(P);
+    const w = P.offsetWidth, h = P.offsetHeight;
+    P.style.left = Math.round(Math.min(innerWidth - w - 8, Math.max(8, cx - w / 2))) + 'px';
+    P.style.top = Math.round(cy + 14 + h > innerHeight - 6 ? cy - h - 14 : cy + 14) + 'px';
+    P.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      e.stopPropagation();
+      if (b.hasAttribute('data-hlmdel')) { hlDelete(id, m.id); hlMkClose(); return; }
+      const c = b.dataset.hlmc;
+      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); }
+      hlMkClose(); hlSetCur(id, null);
+    });
+  }
+  window.addEventListener('pointerdown', e => { const P = document.getElementById('hl-mk'); if (P && !P.contains(e.target)) hlMkClose(); }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('hl-mk')) { hlMkClose(); } }, true);
+  window.addEventListener('scroll', () => hlMkClose(), true);
+  /* والفأرةُ فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ لا القلم — يُنقر فتنفتح قائمتُه */
+  let hlHovQ = 0;
+  document.addEventListener('pointermove', e => {
+    if (hlHovQ || bkTLDrag || bkBoxDrag) return;
+    const d = e.target.closest && e.target.closest('#cm-body .bk-tl'); 
+    if (!d) { const o = document.querySelector('#cm-body .bk-tl.hl-over'); if (o) o.classList.remove('hl-over'); return; }
+    hlHovQ = requestAnimationFrame(() => { hlHovQ = 0; const h = hlMarkAt(d, e); d.classList.toggle('hl-over', !!(h && h.m)); });
+  }, { passive: true });
   function hlDelete(id, mid) {
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
