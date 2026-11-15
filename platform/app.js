@@ -9528,6 +9528,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const was = ['book', 'mid', 'bank'].find(k => post.classList.contains('pk-act--' + k));
     pkAct[id] = a;
     const now = pkActOf(id);
+    post.pkActT = performance.now();
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
     /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
@@ -9561,6 +9562,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (on) { const ae = document.activeElement; if (ae && ae.closest && ae.closest('.vt-foot')) ae.blur(); }
     if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(cxFtHide.t); cxFtHide.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
     post.classList.toggle('pk--ftnone', on);
+    post.pkActT = performance.now();
   }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
@@ -9575,7 +9577,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sl && pkSrcCurOf(ctl.dataset.pkid) !== sl.dataset.pksid) {
       const id = ctl.dataset.pkid;
       pkSrcCur[id] = sl.dataset.pksid;
-      if (pane.classList.contains('pk-src--multi')) pane.querySelectorAll('.pk-src__list > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === sl));
       const t = post.querySelector('.cx-acttools');
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
@@ -10467,7 +10468,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   const pkSrcCur = {};
-  let pkSrcScroll = null;   /* المصدرُ المضافُ للتوّ: تُمرَّر مساحتُه إليه بعد الرسم */
   const pkSrcCurOf = id => { const l = pkSrcList(id); return l.includes(pkSrcCur[id]) ? pkSrcCur[id] : (l[0] || id); };
   const PK_SRC_FILE_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>';
   const PK_SRC_COV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/></svg>';
@@ -10716,8 +10716,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* يُكتب الموضعُ في وصف الكتاب أوّلًا: الرسمُ التالي يبني الكتابَ من جديد منه */
   const pkLnkGo = (id, page) => {
     const b = pkSrcBk[id], meta = pkSrcMeta(id);
-    const single = b ? b.single : false;
-    const pos = single ? page : page - (page % 2);
+    const single = b ? b.single : false, cv = pkSrcCovMeta(id);
+    const pos = bkNorm(bkSkOf(cv, meta && meta.covPg, meta && meta.pages), page, single);
     if (meta) { meta.pos = pos; meta.closed = false; save(); }
     if (!b || !b.el || !b.el.isConnected) return;
     b.closed = false; b.pos = pos;
@@ -10796,32 +10796,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pkSrcMeta(s)) return '';
     return `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcMenu(id, s)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;
   };
-  /* اختيارُ مصدرٍ من القائمة: يصير الملموس، وتُمرَّر القائمةُ إليه */
+  /* اختيارُ مصدرٍ من القائمة: يحلّ محلَّ الظاهر في مساحته (مصدرٌ واحدٌ يُرى — طلبُ صاحب الموقع)،
+     وكتابُه إن رُكِّب قبلُ يُنقل كما هو بلا بناءٍ من جديد (‎pkSrcPaint‎) */
   document.addEventListener('click', e => {
     const g = e.target.closest && e.target.closest('#cm-body [data-pksrcgo]');
     if (!g) return;
     e.preventDefault(); e.stopPropagation();
-    const sid = g.dataset.pksrcgo, id = pkSrcBase(sid), post = g.closest('.post');
-    pkSrcCur[id] = sid; pkPlusClose(null);
-    if (!post) return;
-    const v = post.querySelector(`.pk-src__list > [data-pksid="${CSS.escape(sid)}"]`), ls = v && v.parentElement;
-    if (ls) { ls.querySelectorAll(':scope > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === v)); ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' }); }
-    const t = post.querySelector('.cx-acttools');
-    if (t) t.innerHTML = pkActTools(id, false);
+    const sid = g.dataset.pksrcgo;
+    pkPlusClose(null);
+    pkSrcGo(pkSrcBase(sid), sid);
   }, true);
+  function pkSrcGo(id, sid) {
+    pkSrcCur[id] = sid;
+    const old = document.querySelector(`#cm-body .pk-split > .pk-src--book[data-pkid="${CSS.escape(id)}"] > [data-pksrcview]`), post = old && old.closest('.post');
+    if (!old) { renderCmSection(); return; }
+    if (old.dataset.pksid !== sid) {
+      const w = document.createElement('div'); w.innerHTML = pkSrcSlot(sid);
+      old.replaceWith(w.firstElementChild);
+      pkSrcPaint(); requestAnimationFrame(() => pkSrcHFit());
+    }
+    const t = post.querySelector('.cx-acttools');
+    if (t) t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
+  }
+  /* جوفُ مصدرٍ واحد — وحتى يُفتح الملفّ: هيكلُ صفحاتٍ تتقلّب يُسلِّم إلى الكتاب بلا قفزة */
+  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar)}</div>`;
   const pkSrcView = (id, ed) => {
     /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
     /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
     const L = pkSrcList(id);
     if (L.length) {
-      const cur = pkSrcCurOf(id), many = L.length > 1;
-      /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
+      /* وأكثرُ من مصدر: يُرى المختارُ وحدَه، والبقيّةُ في قائمة المصدر بالتذييل (طلبُ صاحب الموقع) */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
-      /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
-      const skel = s => bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar);
-      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
-      return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
-        + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
+      return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}" data-pkid="${esc(id)}">${pkSrcSlot(pkSrcCurOf(id))}</div>`;
     }
     /* والمنشورةُ بلا كتاب: مربّعٌ مرقّطٌ يقول ذلك (طلبُ صاحب الموقع) — لا زرَّ رفعٍ معطّل */
     if (!ed) return `<div class="pk-src pk-src--none" data-pkid="${esc(id)}"><div class="pk-vwph">${esc(T().pkSrcNone)}</div></div>`;
@@ -10859,7 +10865,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkSrcPgDrop(id);
     const base = pkSrcBase(id);
     if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
-    pkSrcCur[base] = id; if (id !== base) pkSrcScroll = id;
+    pkSrcCur[base] = id;
     /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
   }
@@ -11052,7 +11058,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const b = e.target.closest('[data-psp], [data-pksrcpick]'); if (!b) return;
     if (b.hasAttribute('data-pksrcpick')) { pkSrcIn.dataset.pkid = b.dataset.pkid; pkSrcIn.click(); return; }
     const r = b.closest('[data-sid]'), s = r ? r.dataset.sid : pkSP.sid, k = b.dataset.psp;
-    if (k === 'go') { const id = pkSP.id; pkSrcCur[id] = s; pkSrcScroll = s; pkSrcPopClose(); renderCmSection(); return; }
+    if (k === 'go') { const id = pkSP.id; pkSrcPopClose(); pkSrcGo(id, s); return; }
     if (k === 'cov' || k === 'type' || k === 'more') { const same = pkSP.sid === s && pkSP.sub === k; pkSP.sub = same ? null : k; pkSP.sid = same ? null : s; pkSP.conf = null; pkSP.pg = 0; pkSrcPopShow(); if (pkSP.sub === 'cov') { const i = document.querySelector('#pk-srcpop [data-pspnum]'); if (i) i.select(); } return; }
     if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
@@ -11068,48 +11074,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     else if (e.key === 'Enter' && e.target.matches && e.target.matches('[data-pspnum]')) { e.preventDefault(); pkSrcCovPg(pkSP.sid, +e.target.value || 1); }
   }, true);
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
-  /* ===== شريطُ قائمة المصادر يسارًا بثيم الموقع (طلبُ صاحب الموقع) — كشريط الصفحة ‎#xscroll‎: مسارٌ وإبهامٌ بتروليٌّ يُسحب ===== */
-  const pkSrcBarUp = ls => {
-    const pane = ls.parentElement, bar = pane && pane.querySelector(':scope > .pk-srcbar'), th = bar && bar.firstElementChild;
-    if (!th) return;
-    const ch = ls.clientHeight, sh = ls.scrollHeight, bh = Math.max(40, ch - 16);   /* والشريطُ يقف قبل الزاوية المستديرة تحت */
-    bar.style.top = ls.offsetTop + 'px'; bar.style.height = bh + 'px';
-    if (sh <= ch + 2) { bar.hidden = true; return; }
-    bar.hidden = false;
-    const thH = Math.max(30, Math.round(bh * ch / sh));
-    th.style.height = thH + 'px';
-    th.style.transform = `translateY(${Math.round((bh - thH) * ls.scrollTop / (sh - ch))}px)`;
-  };
-  const pkSrcBarRo = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => pkSrcBarUp(e.target))) : null;
-  const pkSrcBarInit = () => document.querySelectorAll('#cm-body [data-pksrclist]:not([data-pkbar])').forEach(ls => {
-    ls.dataset.pkbar = '1';
-    ls.addEventListener('scroll', () => pkSrcBarUp(ls), { passive: true });
-    if (pkSrcBarRo) pkSrcBarRo.observe(ls);
-    const bar = ls.parentElement.querySelector(':scope > .pk-srcbar'), th = bar.firstElementChild;
-    th.addEventListener('pointerdown', e => {
-      e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); bar.classList.add('is-drag');
-      const y0 = e.clientY, s0 = ls.scrollTop;
-      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((bar.offsetHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
-      const up = () => { th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); };
-      th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
-    });
-    bar.addEventListener('pointerdown', e => {
-      if (e.target === th) return;
-      e.preventDefault(); e.stopPropagation();
-      const y = e.clientY - bar.getBoundingClientRect().top - th.offsetHeight / 2;
-      ls.scrollTo({ top: y / ((bar.offsetHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
-    });
-    pkSrcBarUp(ls);
-  });
   async function pkSrcPaint() {
     pkLnkPopShow();
     pkSrcPopShow();
-    pkSrcBarInit();
-    if (pkSrcScroll) {
-      const v = document.querySelector(`#cm-body [data-pksid="${CSS.escape(pkSrcScroll)}"]`), ls = v && v.closest('.pk-src__list');
-      if (ls) ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' });
-      pkSrcScroll = null;
-    }
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
       const key = pkSrcCovKey(img.dataset.pksrccovimg);
       if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
@@ -11132,7 +11099,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const r = sel && findNode(pkLnkDeck(id), sel);
         if (r && r.n.pg) {
           const single = pkSrcBk[id] ? pkSrcBk[id].single : false;
-          meta.pos = single ? r.n.pg.a : r.n.pg.a - (r.n.pg.a % 2); meta.closed = false; save();
+          meta.pos = bkNorm(bkSkOf(pkSrcCovMeta(id), meta.covPg, meta.pages), r.n.pg.a, single); meta.closed = false; save();
         }
       }
       pkSrcSelSeen[id] = sel;
@@ -11440,9 +11407,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       shadesF.push(sf.lastElementChild); shadesB.push(sb.lastElementChild);
     }
     let W = 400, SW = 400 / NS;
-    /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة (المكبَّرة)، وحدٌّ أقصى ‎440‎ */
+    /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
-      const fill = !!host.closest('.pk--max'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
+      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"]'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
       const s = Math.max(160, Math.min(440, w * 0.84, h * 0.84 - 30));
       stage.style.width = stage.style.height = s + 'px';
@@ -24141,9 +24109,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الزرُّ يحمل صورةَ الوضع الذي يُنقل إليه */
   function bkModeBtn(cls, attr) { const one = bk2OneGet(), to = one ? 'two' : 'one', tip = one ? T().bkTwo : T().bkOne;
     return `<button type="button" class="${cls}" ${attr} data-bkto="${to}" title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${bkModeIc(to)}</svg></button>`; }
-  const bk2A = b => b.closed ? 0 : b.one ? Math.max(1, b.pos) : Math.floor(b.pos / 2) + 1;
-  const bk2MaxA = b => b.one ? b.n : Math.floor(b.n / 2) + 1;
-  const bk2PosOf = (b, A) => A === 0 ? (b.one ? 1 : 0) : b.one ? A : 2 * (A - 1);
+  /* الغلافُ صفحةُ الملفّ الأولى (لا صورةٌ مرفوعة ولا صفحةٌ أخرى): لا تتكرّر داخلَه — الكتابُ يبدأ بالثانية.
+     الموضعُ يبقى رقمَ الصفحة في الملفّ، والإزاحةُ في التحويل بينه وبين الفتحة وحدَه */
+  const bkSkOf = (cov, covPg, n) => !cov && (covPg || 1) === 1 && n > 1 ? 1 : 0;
+  const bkSk = b => bkSkOf(b.covKey, b.covPg, b.n);
+  /* موضعٌ صالحٌ للوضع: الصفحةُ الواحدة من أولى صفحات الكتاب، والفتحةُ على يمينها */
+  const bkNorm = (d, pos, one) => { const v = pos - d; return d + (one ? Math.max(1, v) : Math.max(0, v - (v % 2))); };
+  const bk2A = b => { const v = b.pos - bkSk(b); return b.closed ? 0 : b.one ? Math.max(1, v) : Math.floor(Math.max(0, v) / 2) + 1; };
+  const bk2MaxA = b => { const N = b.n - bkSk(b); return b.one ? N : Math.floor(N / 2) + 1; };
+  const bk2PosOf = (b, A) => bkSk(b) + (A === 0 ? (b.one ? 1 : 0) : b.one ? A : 2 * (A - 1));
   /* صورةُ صفحةٍ بالدقّة التي يطلبها المحرّك — والغلافُ صورتُه المرفوعة تملأ الصفحةَ ولا تتشوّه، وإلّا الصفحةُ الأولى */
   async function bk2Tex(b, k, w) {
     if (k === 'cover' && b.covKey) {
@@ -24707,7 +24681,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.nav = view.querySelector('.cbk-nav');
     b.view = view; b.leaf = null;
     b.one = b.single = bk2OneGet();
-    b.pos = b.one ? Math.max(1, b.pos) : Math.max(0, b.pos - (b.pos % 2));
+    b.pos = bkNorm(bkSk(b), b.pos, b.one);
     b.gl = null;   /* المحرّكُ بعد التحميل */
     b.dark = pkDark();
     let raf = 0;
@@ -24785,18 +24759,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (one) {
       /* تبقى اليسرى (إن كانت صفحةً) وتنطوي اليمنى — وفي آخر الكتاب تبقى اليمنى */
       /* والفتحةُ التي انفتحت من صفحةٍ ولم تُقلَّب بعدُ تعود إلى تلك الصفحة نفسِها */
-      const A = g.A, bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n ? 'L' : 'R';
+      const A = g.A, d = bkSk(b), bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n - d ? 'L' : 'R';
       b.mxTo = true;
       g.morph(side, 1, BK_MX, bkMxH(b)).then(() => {
-        b.one = b.single = true; b.pos = side === 'L' ? 2 * A - 1 : 2 * (A - 1);
+        b.one = b.single = true; b.pos = d + (side === 'L' ? 2 * A - 1 : 2 * (A - 1));
         bk2Swap(b, g, null).then(fin);
       });
     } else {
       /* الصفحةُ الفرديّةُ يسرى الفتحة فتنفتح اليمنى من ورائها، والزوجيّةُ يمناها فتنفتح اليسرى */
-      const pg = Math.max(1, b.pos), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
+      const d = bkSk(b), pg = Math.max(1, b.pos - d), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
       b.mxTo = true;   /* القامةُ تبقى حتى يبدأ الانفتاح */
       b.mxBack = { A, side };
-      b.one = b.single = false; b.pos = 2 * (A - 1);
+      b.one = b.single = false; b.pos = d + 2 * (A - 1);
       bk2Swap(b, g, side).then(ng => {
         b.mxTo = false;
         return ng.morph(side, 0, BK_MX, bkMxH(b));
@@ -24846,7 +24820,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.gl = null;
     if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.one = b.single = one;
-    b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
+    b.pos = bkNorm(bkSk(b), pg == null ? 0 : pg, one);
     if (b.meta) { b.meta.pos = b.pos; save(); }
     bk2Layout(b);
     /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
@@ -25079,9 +25053,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph,
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b),
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
+        /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
+        zone: bkZone(b), armed: () => bkArmed(b),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShow(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
@@ -25129,6 +25105,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.view.isConnected) bkMount(b.view, b);
     });
   }
+  /* المساحةُ التي تُقلَّب منها: مساحةُ المصدر كلُّها */
+  function bkZone(b) {
+    const src = b.stage.closest('.pk-src');
+    return src || b.stage;
+  }
+  /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
+  function bkArmed(b) {
+    const post = b.stage.closest('.post.pk');
+    if (!post || !post.matches('.pk--max, .pk--frame')) return true;
+    return post.classList.contains('pk-act--book') && !post.classList.contains('pk--ftnone') && performance.now() - (post.pkActT || 0) > 80;
+  }
   function bk2Layout(b) {
     /* مقاسٌ صفرٌ (مساحةٌ تنبسط من لا شيء، أو وعاءٌ مخفيّ) لا يُكتب: يبقى آخرُ مقاسٍ حقيقيّ — منه يُحجَّم الكتابُ صورةً وهو مجمَّد */
     const w0 = b.stage.clientWidth, h0 = b.stage.clientHeight;
@@ -25157,7 +25144,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* موضعٌ كُتب من خارج (اختيارُ مجلدٍ مربوط · ‎pkLnkGo‎): المحرّكُ يقلّب إليه */
     if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
     const A = bk2A(b), maxA = bk2MaxA(b);
-    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === 0 ? `1 / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    const d = bkSk(b);
+    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === d ? `${d + 1} / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
     if (b.onShow) b.onShow(b);
     pkActInd(b);
     b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;
