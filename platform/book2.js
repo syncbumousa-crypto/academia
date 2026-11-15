@@ -344,7 +344,9 @@ export function createBook2(THREE, host, cfg) {
     const sh = 1 - e;
     if (caseG.visible !== show) {
       caseG.visible = show;
-      for (const c of [sheets[0], sheets[S - 1]]) for (const mh of c.meshes) mh.visible = !show;
+      /* أوراقُ القراءة كلُّها مخفيّةٌ ما دام الجسمُ ظاهرًا (فيه كتلةُ أوراقه): انتفاخُ الورق قرب الكعب أعلى من سُمك الغلاف
+         وهو يصغر إلى سُمكه الحقيقيّ، فكانت الصفحةُ تبرز من فوقه شريطًا ثمّ كلُّها قبيل الفتح — وتظهر كلُّها معًا في التسليم */
+      for (const c of sheets) for (const mh of c.meshes) mh.visible = !show;
       needs = true;
     }
     if (!show) { caseK = -1; return; }
