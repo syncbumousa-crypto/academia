@@ -25110,16 +25110,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const src = b.stage.closest('.pk-src');
     return src || b.stage;
   }
-  /* دليلُ النصف الذي يُقلَّب منه (اختيارُ صاحب الموقع): خلفيّةُ النصف تتلوّن بخفّة من حافّته إلى الكعب،
-     وإطارٌ ذهبيٌّ رفيعٌ يلفّ نصفَ الكتاب من فوقه وطرفه وتحته. يُرسم تحت اللوحة (شفّافةٌ حول الكتاب) بمقاسه منها */
+  /* دليلُ النصف الذي يُقلَّب منه (اختيارُ صاحب الموقع): خلفيّةُ النصف تتلوّن من طرفه وتتلاشى إلى الوسط — تحت لوحة الكتاب */
   function bkZoneFx(b, side) {
     const z = bkZone(b);
     let o = z.querySelector(':scope > .bk-zi');
-    if (!side) { if (o) o.classList.remove('is-l', 'is-r'); return; }
-    const g = b.gl; if (!g || !g.el.isConnected) return;
-    if (!o) { o = document.createElement('div'); o.className = 'bk-zi'; o.setAttribute('aria-hidden', 'true'); o.innerHTML = '<i class="bk-zi__t l"></i><i class="bk-zi__t r"></i><i class="bk-zi__f l"></i><i class="bk-zi__f r"></i>'; z.prepend(o); }
-    const f = g.rect(), zr = z.getBoundingClientRect(), cr = g.el.getBoundingClientRect(), x = cr.left - zr.left + f.x, y = cr.top - zr.top + f.y;
-    for (const [k, v] of [['--bx', x], ['--by', y], ['--bw', f.w], ['--bh', f.h]]) o.style.setProperty(k, v.toFixed(1) + 'px');
+    if (!o) { if (!side) return; o = document.createElement('div'); o.className = 'bk-zi'; o.setAttribute('aria-hidden', 'true'); o.innerHTML = '<i class="bk-zi__t l"></i><i class="bk-zi__t r"></i>'; z.prepend(o); }
     o.classList.toggle('is-l', side === 'l'); o.classList.toggle('is-r', side === 'r');
   }
   /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
