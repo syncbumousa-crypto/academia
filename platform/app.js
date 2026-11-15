@@ -24319,9 +24319,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
         /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
-        r.ow = 4 + HL_R.OD + 8 + 50 + (r.t ? 4 + String(r.t).length * 7 : 0) + (r.b ? 4 + String(r.b).length * 7 : 0) + 4;
+        r.ow = HL_R.OD + 50 + (r.t ? 4 + String(r.t).length * 7 : 0) + (r.b ? 4 + String(r.b).length * 7 : 0) + 6;
         return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `<span class="cx-hlt__cap"></span><span class="cx-hlt__g"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}><b>${r.nw ? '+' : r.n}</b></span></button>`;
+          + `<span class="cx-hlt__ring"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}></span><span class="cx-hlt__g"><b>${r.nw ? '+' : r.n}</b></span></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
@@ -24358,11 +24358,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.style.display) e.style.display = '';
       e.style.transform = `translate(${(sg * x).toFixed(2)}px, -50%)`; e.style.width = t.w.toFixed(2) + 'px'; e.style.height = t.h.toFixed(2) + 'px';
       e.style.setProperty('--d', t.d.toFixed(2) + 'px');
-      e.style.setProperty('--hole', (t.d < 11 ? 0 : t.d / 2 - (t.o > .5 ? 3.2 : 2.6)).toFixed(2) + 'px');
+      e.style.setProperty('--th', (t.d < 11 ? t.d / 2 : 2.6 + .5 * t.o).toFixed(2) + 'px');   /* سُمكُ الحلقة — والنقطةُ الصغيرةُ ممتلئة */
       e.style.setProperty('--no', Math.max(0, Math.min(1, (t.d - 15) / 6)).toFixed(3));
       e.style.setProperty('--fs', (10 + 3 * t.o).toFixed(2) + 'px');
       e.style.setProperty('--o', t.o.toFixed(3));
-      e.style.setProperty('--pad', (4 * t.o).toFixed(2) + 'px');
     }
     const op = Math.max(0, Math.min(N - 1, Math.round(c)));
     if (op !== el._op) {

@@ -18390,27 +18390,25 @@ html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .88
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%); }
 .cx-hlrail.is-drag { cursor: grabbing; }
-.cx-hlrail:focus-visible .cx-hlt.is-op .cx-hlt__cap { box-shadow: 0 0 0 2px #2c5e65; }
-.cx-hlt { position: absolute; top: 50%; inset-inline-start: 0; display: flex; align-items: center; gap: 8px; padding: 0 0 0 0; padding-inline-start: var(--pad, 0);
-  border: 0; border-radius: 999px; background: none; overflow: hidden; cursor: pointer; font: inherit; color: var(--u-ink, #14233f); -webkit-tap-highlight-color: transparent; }
+.cx-hlrail:focus-visible .cx-hlt.is-op { box-shadow: 0 0 0 2px #2c5e65; }
+.cx-hlt { position: absolute; top: 50%; inset-inline-start: 0; display: flex; align-items: center; padding: 0; border: 0; border-radius: 999px; background: none;
+  overflow: hidden; cursor: pointer; font: inherit; color: var(--u-ink, #14233f); -webkit-tap-highlight-color: transparent; }
 html[data-theme="dark"] .cx-hlt { color: #e6ecef; }
 .cx-hlt > * { flex: none; position: relative; }
-.cx-hlt__cap { position: absolute !important; inset: 0; border-radius: inherit; border: 1px solid var(--u-line); background: var(--u-surf, #fff); opacity: var(--o, 0);
-  box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
-html[data-theme="dark"] .cx-hlt__cap { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+/* الحلقةُ نفسُها تتمدّد فتصير الكبسولة (طلبُ صاحب الموقع): إطارٌ بألوان التظليل بالسُّمك نفسِه، دائرةً ثمّ مستطيلًا مستديرًا يحوي الرقمَ والمفتاح */
+.cx-hlt__ring { position: absolute !important; inset: 0; border-radius: inherit; padding: var(--th, 2.6px); background: var(--ring, rgba(20, 40, 46, .2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
+html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__ring { background: rgba(255, 255, 255, .22); }
+.cx-hlt.is-new .cx-hlt__ring { background: none; -webkit-mask: none; mask: none; padding: 0; border: 1.3px dashed rgba(44, 94, 101, .6); }
+html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__ring { border-color: rgba(160, 205, 210, .55); }
 .cx-hlt__g { width: var(--d, 24px); height: var(--d, 24px); display: grid; place-items: center; }
-.cx-hlt__g::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--ring, rgba(20, 40, 46, .18));
-  -webkit-mask: radial-gradient(circle closest-side, transparent var(--hole, 9px), #000 calc(var(--hole, 9px) + .6px));
-  mask: radial-gradient(circle closest-side, transparent var(--hole, 9px), #000 calc(var(--hole, 9px) + .6px)); }
-html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__g::before { background: rgba(255, 255, 255, .2); }
-.cx-hlt.is-new .cx-hlt__g::before { background: none; -webkit-mask: none; mask: none; border: 1.3px dashed rgba(44, 94, 101, .6); }
-html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__g::before { border-color: rgba(160, 205, 210, .55); }
-.cx-hlt__g b { position: relative; font-size: var(--fs, 11px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; opacity: var(--no, 1); }
+.cx-hlt__g b { font-size: var(--fs, 11px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; opacity: var(--no, 1); }
 .cx-hlt.is-e .cx-hlt__g b { color: var(--u-muted, #7a8a8e); }
 html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__g b { color: rgba(255, 255, 255, .5); }
 .cx-hlt.is-new .cx-hlt__g b { color: #2c5e65; }
 html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__g b { color: #a0cdd2; }
-.cx-hltool { display: flex; align-items: center; gap: 1px; padding: 2px; border-radius: 999px; background: rgba(20, 40, 46, .07); opacity: var(--o, 0); margin-inline-end: 4px; direction: rtl; }
+.cx-hltool { display: flex; align-items: center; gap: 1px; padding: 2px; border-radius: 999px; background: rgba(20, 40, 46, .07); opacity: var(--o, 0); margin-inline-end: 6px; direction: rtl; }
 html[data-theme="dark"] .cx-hltool { background: rgba(255, 255, 255, .09); }
 .cx-hltool button { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 16px; height: 16px; padding: 0 4px; border: 0; border-radius: 999px;
   background: none; color: inherit; opacity: .55; cursor: pointer; font: 700 10px/1 inherit; font-variant-numeric: tabular-nums;
