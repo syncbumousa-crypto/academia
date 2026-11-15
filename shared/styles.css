@@ -18291,10 +18291,6 @@ html[data-lang="en"] .cx-acttools:has(> .cx-ftc) { transform: translateY(-50%); 
    لكلّ صفٍّ رقمٌ في حلقةٍ مقسومةٍ بألوان تظليلاته، تصغر الحلقاتُ كلّما بعُدت حتى تصير نقاطًا، والتي في الوسط
    كبسولةٌ بلغة أزرار التذييل فيها حلقتُها وعدُّ تظليلاته ومفتاحُ الأداة. المواضعُ والمقاساتُ يضعها المحرّك (‎hlRailLayout‎) */
 .cx-acttools > .cx-ftc { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.cx-ftc__nav { display: flex; align-items: center; gap: 8px; }
-.cx-ftc__nav > .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
-html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
-.cx-ftc__nav > .cx-actb:disabled { opacity: .35; }
 :is(.pk--max, .pk--frame).pk--edit:has(.post-ytmain > .pk-split.has-book):not(.pk--ftdn) .vt-foot { min-height: 94px; max-height: 100px; }   /* والكتابُ مفتوحٌ: صفٌّ ثانٍ لشريط الصفوف، بقامةٍ واحدةٍ في المساحات الثلاث */
 .cx-hlrail { position: relative; width: min(440px, 46vw); height: 40px; overflow: hidden; touch-action: pan-y; cursor: grab; outline: none;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
@@ -18356,12 +18352,6 @@ html[data-theme="dark"] .cx-hltool button { color: #e6ecef; }
 .cx-ftl2 .cx-actmode svg { width: 15px; height: 15px; }
 html[data-theme="dark"] .cx-ftl2 .cx-actmode { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
 .cx-acttools > .cx-ftc { gap: 3px; }
-.cx-ftc__nav { gap: 6px; height: 16px; }
-.cx-ftc__nav > .cx-actb { width: 18px; height: 18px; border: 0 !important; background: none !important; box-shadow: none !important; color: var(--u-muted, #7a8a8e); }
-.cx-ftc__nav > .cx-actb svg { width: 13px; height: 13px; }
-.cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: var(--u-ink, #14233f); }
-html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .5) !important; }
-html[data-theme="dark"] .cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: #fff !important; }
 :is(.pk--max, .pk--frame).pk--edit:has(.post-ytmain > .pk-split.has-book):not(.pk--ftdn) .vt-foot { min-height: 64px; max-height: 70px; }
 .cx-hlrail { height: 42px; }
 /* البطاقة: مربّعٌ أبيضُ بحدٍّ رفيع، في رأسه شريطُ أحبار تظليلاته */
@@ -18454,8 +18444,9 @@ html[data-theme="dark"] .bk-zi { --zt: #7fb7bd; }
 @media (prefers-reduced-motion: reduce) { .bk-zi__t { transition: none; } }
 
 /* ===== رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — من ‎data-pgn‎، وأعلاه ‎--bk-top‎ (‎bk2Layout‎) =====
+   تحت لوحة الكتاب (قبلها في الترتيب بلا ‎z-index‎): الورقةُ المقلَّبةُ تمرّ فوقه لا تحته
    ويغيب في تبدُّل الوضع (الكتابُ يتحرّك)، ويُخفى رقمُ سطر التصفّح تحت الكتاب فلا يتكرّر */
-.cbk-stage--gl[data-pgn]::before { content: attr(data-pgn); position: absolute; left: 0; right: 0; top: max(2px, calc(var(--bk-top, 24px) - 19px)); z-index: 1;
+.cbk-stage--gl[data-pgn]::before { content: attr(data-pgn); position: absolute; left: 0; right: 0; top: max(2px, calc(var(--bk-top, 24px) - 19px));
   text-align: center; font-size: 11px; font-weight: 700; line-height: 14px; color: var(--u-muted, #7a8a8e); font-variant-numeric: tabular-nums; pointer-events: none;
   transition: opacity .25s; }
 .cbk-stage--gl.is-mx::before { opacity: 0; transition-duration: .12s; }

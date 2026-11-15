@@ -9457,7 +9457,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return a;
   };
   const PK_ACT_IC = {
-    prev: '<path d="M9 6l6 6-6 6"/>', next: '<path d="M15 6l-6 6 6 6"/>',
     close: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
     fold: '<path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2h8A1.5 1.5 0 0 1 20.5 9.5v8A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M12 11v5M9.5 13.5h5"/>',
@@ -9480,10 +9479,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* (طلبُ صاحب الموقع) المصدرُ في الزاوية البعيدة يمينًا و«ربطُ الصفحات» في قائمة نقاطه، ووضعُ الكتاب في الزاوية البعيدة يسارًا،
          وفي الوسط سطرُ التصفّح فوق رزمة الصفوف */
       if (!pub) return `<div class="cx-ftr2 chtools cx-srctools">${pkSrcHd(id, true)}${pkSrcMeta(id) && pkLnk.open[id] ? pkLnkHTML(id) : ''}</div>`
-        + `<div class="cx-ftc"><div class="cx-ftc__nav">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>${pkActHl(id)}</div>`
+        + `<div class="cx-ftc">${pkActHl(id)}</div>`   /* بلا زرّي تقليب (طلبُ صاحب الموقع): التقليبُ من نصفَي مساحة الكتاب */
         + `<div class="cx-ftl2">${pkActMode()}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
-      return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')
-        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
+      return pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
         + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
