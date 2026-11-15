@@ -11215,25 +11215,31 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!src || !ctl) return null;
     const W = src.clientWidth; if (!W) return null;
     const sid = pkSrcCurOf(ctl.dataset.pkid), b = pkSrcBk[sid], meta = pkSrcMeta(sid);
-    const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!b.one : bk2OneGet();
+    const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!(b.mxTo != null ? b.mxTo : b.one) : bk2OneGet();
     const view = src.querySelector('.pk-src__view');
     const over = view ? sp.getBoundingClientRect().height - view.getBoundingClientRect().height : 70;
     /* الكتابُ أصغرُ من عرض مساحته (‎.72‎) والقامةُ بسقفٍ أقصر (طلبُ صاحب الموقع: كانت طويلةً جدًّا) */
     const h = (W - 24) * .72 / (one ? 1 : 2) / ar * 1.08 + Math.max(40, over);
     return Math.round(Math.max(400, Math.min(innerHeight * .64, 560, h)));
   }
-  function pkSrcHFit() {
+  /* ‏‎dur‎: قامةٌ تنتقل مع حركةٍ أخرى بمدّتها (تبدُّلُ وضع الكتاب) */
+  function pkSrcHFit(dur) {
+    if (typeof dur !== 'number') dur = 0;
     document.querySelectorAll('#cm-body .post.pk').forEach(card => {
       if (card.pkBandAnim || card.classList.contains('pk--fxrun')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 150); return; }   /* حركةٌ جارية: يُعاد بعدها */
       const sp = card.querySelector('.post-ytmain > .pk-split'), ctl = card.querySelector('[data-pkview][data-pkid]');
       if (!sp || !ctl) return;
       /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
-      if (sp.classList.contains('pk-splh-anim')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
+      if (sp.classList.contains('pk-splh-anim') && !dur) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
       if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
       pkSrcH[id] = h;
       if (Math.abs(h - cur) < 3) return;
-      if (cur && !bkReduce()) { sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT); sp.pkHT = setTimeout(() => sp.classList.remove('pk-splh-anim'), 420); }
+      if (cur && !bkReduce()) {
+        sp.style.transitionDuration = dur ? dur + 'ms' : '';
+        sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT);
+        sp.pkHT = setTimeout(() => { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = ''; }, (dur || 380) + 40);
+      }
       sp.style.setProperty('--pk-h', h + 'px');
     });
   }
@@ -24742,16 +24748,72 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bk2Layout(b);
     bk2Engine(b);
   }
-  /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته.
-     المحرّكُ يُبنى من جديد بالوضع الآخر، ولقطةُ القديم فوقه تتلاشى فلا يومض */
+  /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته */
+  const BK_MX = 720;
   function bk2SetOne(b0, one) {
     one = !!one; bk2OneSet(one);
     bkModeSync();
     const all = new Set([b0, ...Object.values(pkSrcBk)]);
-    all.forEach(b => { if (b && b.gl !== undefined && !!b.one !== one && b.view && b.view.isConnected) bk2Switch(b, one); });
+    all.forEach(b => {
+      if (!b || b.gl === undefined || !b.view || !b.view.isConnected) return;
+      if (b.mx) { b.mxWant = one; return; }   /* تبدُّلٌ جارٍ: الأخيرُ يُنفَّذ بعده */
+      if (!!b.one !== one) bk2Switch(b, one);
+    });
     requestAnimationFrame(() => pkSrcHFit());   /* صفحةٌ واحدةٌ أطولُ من صفحتين: القامةُ تلحق */
   }
+  /* أمام العين (طلبُ صاحب الموقع: لا تلاشي): من صفحتين إلى صفحة تنطوي اليمنى حول الكعب إلى ما وراء الكتاب والكاميرا تقترب
+     من اليسرى، ومن صفحةٍ إلى صفحتين تنفتح من ورائه وهي تبتعد — والقامةُ تتقلّص أو تتّسع معها بالمدّة نفسِها.
+     المحرّكان مختلفا البناء (ورقةٌ لكلّ صفحة · ورقةٌ لكلّ صفحتين)، فيُبدَّل بينهما وهما على الصورة نفسِها:
+     الجديدُ يُبنى مخفيًّا فوق القديم ويظهر حين تجهز صورُه */
   function bk2Switch(b, one) {
+    const g = b.gl;
+    if (!g || g.dead || !g.morph || b.closed || bkReduce() || !b.stage.clientWidth) return bk2SwitchNow(b, one);
+    b.mx = true; b.mxWant = null;
+    if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
+    bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
+    const fin = ng => {
+      b.mx = false; b.mxTo = null;
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      bk2Show(b);
+      const w = b.mxWant; b.mxWant = null;
+      if (w != null && w !== !!b.one) bk2Switch(b, w);
+      else pkSrcHFit();
+    };
+    if (one) {
+      /* تبقى اليسرى (إن كانت صفحةً) وتنطوي اليمنى — وفي آخر الكتاب تبقى اليمنى */
+      /* والفتحةُ التي انفتحت من صفحةٍ ولم تُقلَّب بعدُ تعود إلى تلك الصفحة نفسِها */
+      const A = g.A, bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n ? 'L' : 'R';
+      b.mxTo = true; pkSrcHFit(BK_MX);
+      g.morph(side, 1, BK_MX).then(() => {
+        b.one = b.single = true; b.pos = side === 'L' ? 2 * A - 1 : 2 * (A - 1);
+        bk2Swap(b, g, null, 140).then(fin);
+      });
+    } else {
+      /* الصفحةُ الفرديّةُ يسرى الفتحة فتنفتح اليمنى من ورائها، والزوجيّةُ يمناها فتنفتح اليسرى */
+      const pg = Math.max(1, b.pos), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
+      b.mxTo = true;   /* القامةُ تبقى حتى يبدأ الانفتاح */
+      b.mxBack = { A, side };
+      b.one = b.single = false; b.pos = 2 * (A - 1);
+      bk2Swap(b, g, side, 90).then(ng => {
+        b.mxTo = false; pkSrcHFit(BK_MX);
+        return ng.morph(side, 0, BK_MX);
+      }).then(fin);
+    }
+  }
+  /* محرّكٌ جديدٌ بالوضع الحاليّ يُبنى مخفيًّا، ثمّ يظهر فوق القديم في ‎fade‎ ميلي ثانية ويُطفأ القديم */
+  function bk2Swap(b, old, morph, fade) {
+    return new Promise(res => {
+      b.gl = null;
+      bk2Engine(b, {
+        quiet: true, morph: morph || undefined,
+        onReady: ng => {
+          const show = () => { ng.el.style.opacity = ''; old.dispose(); res(ng); };
+          ng.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: fade, easing: 'ease-out' }).finished.then(show, show);
+        },
+      });
+    });
+  }
+  function bk2SwitchNow(b, one) {
     const pg = b.closed ? null : Math.max(1, b.pos);
     let ghost = null;
     const g = b.gl;
@@ -24770,11 +24832,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
     if (b.meta) { b.meta.pos = b.pos; save(); }
     bk2Layout(b);
-    bk2Engine(b);
-    if (ghost) setTimeout(() => {
-      const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-out', fill: 'forwards' });
-      an.onfinish = () => ghost.remove();
-    }, 60);
+    /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
+    const fade = () => { if (!ghost) return; const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: b.closed ? 160 : 320, easing: 'ease-out', fill: 'forwards' }); an.onfinish = () => ghost.remove(); };
+    if (b.closed && ghost) bk2Engine(b, { quiet: true, onReady: ng => { ng.el.style.opacity = ''; fade(); } });
+    else { bk2Engine(b); setTimeout(fade, 60); }
   }
   /* أزرارُ الوضع (تحت الكتاب وفي التذييل) تحمل صورةَ الوضع الآخر */
   function bkModeSync() {
@@ -24993,15 +25054,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointercancel', bkTLUp, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && bkTLSel) { bkTLClear(); e.stopImmediatePropagation(); } }, true);
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
-  function bk2Engine(b) {
+  function bk2Engine(b, o = {}) {
     const st = b.stage;
-    bkPhShow(b);
+    if (!o.quiet) bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
       if (b.gl && !b.gl.dead) return;
       bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one,
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
@@ -25033,7 +25094,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.phEl) b.gl.el.style.opacity = '0';   /* الكتابُ مخفيٌّ تحت الهيكل حتى يكتمل، ثمّ يظهر بتلاشٍ */
       /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
       const g = b.gl;
-      const off = () => { if (b.gl === g) bkPhHide(b); };
+      if (o.quiet) g.el.style.opacity = '0';
+      let done = false;
+      const off = () => {
+        if (done) return; done = true;
+        if (b.gl !== g) return;
+        if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
+      };
       g.ready().then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
       setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
