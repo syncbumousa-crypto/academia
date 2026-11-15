@@ -11218,8 +11218,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!b.one : bk2OneGet();
     const view = src.querySelector('.pk-src__view');
     const over = view ? sp.getBoundingClientRect().height - view.getBoundingClientRect().height : 70;
-    const h = (W - 24) / (one ? 1 : 2) / ar * 1.08 + Math.max(40, over);
-    return Math.round(Math.max(440, Math.min(innerHeight * .86, h)));
+    /* الكتابُ أصغرُ من عرض مساحته (‎.72‎) والقامةُ بسقفٍ أقصر (طلبُ صاحب الموقع: كانت طويلةً جدًّا) */
+    const h = (W - 24) * .72 / (one ? 1 : 2) / ar * 1.08 + Math.max(40, over);
+    return Math.round(Math.max(400, Math.min(innerHeight * .64, 560, h)));
   }
   function pkSrcHFit() {
     document.querySelectorAll('#cm-body .post.pk').forEach(card => {
