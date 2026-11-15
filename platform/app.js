@@ -25151,7 +25151,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const d = bkSk(b);
     /* رقمٌ واحد: في الفتحة صفحتُها اليمنى (أوّلَ الكتاب باطنُ الغلاف، فأولى صفحاته) · الجزءُ يمينًا والكلُّ يسارًا (اتّجاهُ الصفحة) */
     b.ind.textContent = b.closed ? T().bkCover : `${b.one || p !== d ? p : d + 1} / ${b.n}`;
-    b.stage.dataset.pgn = b.ind.textContent;   /* رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — لا في التذييل */
+    b.stage.dataset.pgn = b.closed ? '' : b.ind.textContent;   /* رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — لا في التذييل، ولا شيءَ فوق الغلاف المغلق */
     if (b.onShow) b.onShow(b);
     b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;
     b.view.querySelector('[data-bknav="-1"]').disabled = A <= 0;
