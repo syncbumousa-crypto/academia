@@ -434,6 +434,9 @@ export function createBook2(THREE, host, cfg) {
   const zone = cfg.zone || el;
   zone.style.touchAction = 'pan-y';
   const armed = () => !cfg.armed || cfg.armed();
+  /* أزرارُ المساحة وما يسمّيه الموقعُ (‎cfg.zoneSkip‎: رأسُها وأيقونتُها التي تُغلقها) ليست مقبضًا — لا تتلوّن ولا تُقلِّب */
+  const SKIP = 'button, a, input, textarea, select, [contenteditable="true"]' + (cfg.zoneSkip ? ', ' + cfg.zoneSkip : '');
+  const skip = e => e.target !== el && !!(e.target.closest && e.target.closest(SKIP));
   const at = e => {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     const yN = Math.max(-0.5, Math.min(0.5, (y - fit.y) / fit.h - 0.5));
@@ -452,7 +455,7 @@ export function createBook2(THREE, host, cfg) {
     /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
-    if (e.target !== el && e.target.closest && e.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
+    if (skip(e)) return;
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
     if (!g || (g.cover ? locked() : mo) || !armed()) return;
@@ -480,7 +483,7 @@ export function createBook2(THREE, host, cfg) {
       if (e.pointerType !== 'mouse') return;
       if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      const g0 = armed() && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
+      const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
       const gv = !ok ? '' : g.cover ? 'c' : g.fwd ? 'l' : 'r';
       if (h !== hover || gv !== grab) { hover = h; setGrab(gv); needs = true; setCursor(); }
       return;

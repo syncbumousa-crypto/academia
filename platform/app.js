@@ -24391,6 +24391,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
+    hlMkClose();   /* قائمتُه (الألوانُ والرقمُ والحذف) تذهب معه */
     save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
   /* ===== شريطُ الألسنة (ROADMAP-HL ق٤–٥ · كونسبت صاحب الموقع) =====
@@ -25052,7 +25053,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
-        zone: bkZone(b), armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
+        zone: bkZone(b), zoneSkip: '.pk-blkh', armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShow(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
