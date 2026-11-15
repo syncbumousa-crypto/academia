@@ -422,41 +422,42 @@ export function createBook2(THREE, host, cfg) {
   }
 
   // ===== التفاعل =====
-  // نصفُ الكتاب كلُّه مقبض (اليسارُ يتقدّم في الكتاب العربيّ واليمينُ يرجع) · السحبُ نسبيّ: ‎80%‎ من عرض الكتاب تقليبةٌ كاملة ·
-  // ‎20%‎ أو رميةٌ سريعةٌ تُكمل · نقراتٌ متتاليةٌ تتتابع · الضغطُ المطوّلُ يقلّب تلقائيًّا ويتسارع · الورقةُ تحت المؤشّر ترتفع
-  el.style.touchAction = 'pan-y';
+  // المقبضُ مساحةُ الكتاب لا الكتاب (طلبُ صاحب الموقع): ما على يساره يتقدّم (كتابٌ عربيّ) وما على يمينه يرجع،
+  // والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
+  // و‎cfg.armed()‎ أنّها المساحةُ المختارةُ التي يُعمل فيها: قبلها لا ترتفع ورقةٌ ولا تُسحب ·
+  // السحبُ نسبيّ: ‎80%‎ من عرض الكتاب تقليبةٌ كاملة · ‎20%‎ أو رميةٌ سريعةٌ تُكمل · الضغطُ المطوّلُ يقلّب تلقائيًّا ويتسارع
+  const zone = cfg.zone || el;
+  zone.style.touchAction = 'pan-y';
+  const armed = () => !cfg.armed || cfg.armed();
   const at = e => {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    if (y < fit.y || y > fit.y + fit.h) return null;
-    /* المغلقُ ورقةٌ واحدةٌ في الوسط تُفتح كلُّها */
-    if (ONE) return x < fit.x || x > fit.x + fit.w ? null : { fwd: A === 0 || x < fit.x + fit.w / 2, yN: (y - fit.y) / fit.h - 0.5 };
-    if (A === 0) return x >= fit.x + fit.w / 4 && x <= fit.x + fit.w * 3 / 4 ? { fwd: true, yN: (y - fit.y) / fit.h - 0.5 } : null;
-    if (x < fit.x || x > fit.x + fit.w) return null;
-    return { fwd: x < fit.x + fit.w / 2, yN: (y - fit.y) / fit.h - 0.5 };
-  };
-  const nearEdge = (e, fwd) => {
-    if (A === 0) return true;
-    const r = el.getBoundingClientRect(), x = e.clientX - r.left, pw = ONE ? fit.w : fit.w / 2, k = 0.2 * pw;
-    return fwd ? x <= fit.x + k : x >= fit.x + fit.w - k;
+    /* بقامة الكتاب (وشيءٍ فوقه وتحته) — وما فوقها رأسُ المساحة وما تحتها أزرارُه */
+    if (y < fit.y - fit.h * 0.06 || y > fit.y + fit.h * 1.06) return null;
+    const yN = Math.max(-0.5, Math.min(0.5, (y - fit.y) / fit.h - 0.5));
+    if (x < fit.x) return { fwd: true, yN };
+    if (x > fit.x + fit.w) return { fwd: false, yN };
+    return A === 0 && y >= fit.y && y <= fit.y + fit.h ? { fwd: true, yN, cover: true } : null;
   };
   let drag = null, hold = null;
   const stopHold = () => { if (hold) { clearTimeout(hold.timer); hold = null; } };
-  const setCursor = () => { el.style.cursor = drag ? 'grabbing' : hover >= 0 ? 'grab' : ''; };
+  let grab = false;   /* المؤشّرُ على مقبضٍ يُقلِّب (ولو لم ترتفع له ورقة: المطويّةُ وراء الكتاب) */
+  const setCursor = () => { zone.style.cursor = drag ? 'grabbing' : grab ? 'grab' : ''; };
   const onDown = e => {
     if (e.button !== 0) return;
     /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
-    if (cfg.interceptDown && cfg.interceptDown()) return;
-    if (locked()) return;
-    const g = at(e); if (!g) return;
+    if (e.target !== el && e.target.closest && e.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
+    const g = at(e);
+    if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
+    if (!g || locked() || !armed()) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
     const s = sheets[g.fwd ? A : A - 1];
     s.anim = null; s.dir = dir; s.tiltT = s.isCover ? 0 : -g.yN * 0.7 * dir;
     hover = -1;
     drag = { s, fwd: g.fwd, x0: e.clientX, y0: e.clientY, base: s.p, w: fit.w || el.clientWidth, moved: false, hist: [[performance.now(), s.p]] };
-    s.drag = s.p; el.setPointerCapture(e.pointerId); setCursor();
+    s.drag = s.p; try { zone.setPointerCapture(e.pointerId); } catch (er) {} setCursor();
     if (cfg.onGrab) cfg.onGrab();
     stopHold();
     hold = { n: 0, timer: setTimeout(function tick() {
@@ -471,11 +472,10 @@ export function createBook2(THREE, host, cfg) {
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
-      if (locked()) { if (hover !== -1) { hover = -1; needs = true; setCursor(); } return; }
+      if (locked()) { if (hover !== -1 || grab) { hover = -1; grab = false; needs = true; setCursor(); } return; }
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      /* ولا ترتفع إلّا قرب حرفها الخارجيّ (حيث تُمسك لتُقلَب) — وإلّا مالت الصفحةُ تحت من يحدّد نصًّا فيها */
-      const g = at(e), h = g && turnable(g.fwd ? 1 : -1) && (g.fwd || !ONE) && nearEdge(e, g.fwd) ? (g.fwd ? A : A - 1) : -1;
-      if (h !== hover) { hover = h; needs = true; setCursor(); }
+      const g = armed() && at(e), ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
+      if (h !== hover || ok !== grab) { hover = h; grab = ok; needs = true; setCursor(); }
       return;
     }
     if (drag.auto) return;
@@ -498,7 +498,7 @@ export function createBook2(THREE, host, cfg) {
     if (!moved || gone >= 0.2 || flick) { A += fwd ? 1 : -1; launch(s, fwd ? 1 : 0, v); commit(); }
     else launch(s, base < 0.5 ? 0 : 1, v);
   };
-  const onLeave = () => { if (!drag && hover !== -1) { hover = -1; needs = true; setCursor(); } };
+  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; grab = false; needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked()) return;
@@ -507,16 +507,15 @@ export function createBook2(THREE, host, cfg) {
     wheelT = now; wheelAcc += e.deltaX;
     if (Math.abs(wheelAcc) > 60) { flip(wheelAcc < 0 ? 1 : -1); wheelAcc = 0; wheelT = now + 250; }
   };
-  el.addEventListener('pointerdown', onDown);
-  el.addEventListener('pointermove', onMove);
-  el.addEventListener('pointerup', onUp);
-  el.addEventListener('pointercancel', onUp);
-  el.addEventListener('pointerleave', onLeave);
+  const evs = [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['pointerleave', onLeave]];
+  for (const [t, f] of evs) zone.addEventListener(t, f);
   el.addEventListener('wheel', onWheel, { passive: false });
 
   function dispose() {
     if (dead) return; dead = true;
     cancelAnimationFrame(raf); stopHold();
+    for (const [t, f] of evs) zone.removeEventListener(t, f);
+    if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
     pageTex.forEach(t => t.dispose()); pageTex.clear();
     [grain, blank, inside, outsideBack].forEach(t => t.dispose());
     for (const s of sheets) for (const mh of s.meshes) { mh.material.dispose(); mh.customDepthMaterial.dispose(); }

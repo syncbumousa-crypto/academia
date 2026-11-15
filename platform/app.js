@@ -9528,6 +9528,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const was = ['book', 'mid', 'bank'].find(k => post.classList.contains('pk-act--' + k));
     pkAct[id] = a;
     const now = pkActOf(id);
+    post.pkActT = performance.now();
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
     /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
@@ -9561,6 +9562,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (on) { const ae = document.activeElement; if (ae && ae.closest && ae.closest('.vt-foot')) ae.blur(); }
     if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(cxFtHide.t); cxFtHide.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
     post.classList.toggle('pk--ftnone', on);
+    post.pkActT = performance.now();
   }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
@@ -25082,6 +25084,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
+        /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
+        zone: bkZone(b), armed: () => bkArmed(b),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShow(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
@@ -25128,6 +25132,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       delete b.gl;
       if (b.view.isConnected) bkMount(b.view, b);
     });
+  }
+  /* المساحةُ التي تُقلَّب منها: المصدرُ كلُّه، أو خانةُ الكتاب إن كان فيه أكثرُ من مصدر */
+  function bkZone(b) {
+    const src = b.stage.closest('.pk-src');
+    return (src && !src.classList.contains('pk-src--multi') ? src : b.stage.closest('[data-pksid]')) || b.stage;
+  }
+  /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
+  function bkArmed(b) {
+    const post = b.stage.closest('.post.pk');
+    if (!post || !post.matches('.pk--max, .pk--frame')) return true;
+    return post.classList.contains('pk-act--book') && !post.classList.contains('pk--ftnone') && performance.now() - (post.pkActT || 0) > 80;
   }
   function bk2Layout(b) {
     /* مقاسٌ صفرٌ (مساحةٌ تنبسط من لا شيء، أو وعاءٌ مخفيّ) لا يُكتب: يبقى آخرُ مقاسٍ حقيقيّ — منه يُحجَّم الكتابُ صورةً وهو مجمَّد */
