@@ -17824,32 +17824,6 @@ html[data-theme="dark"] #cm-body .cx-midadd.cx-addpill:hover { background: linea
 html[data-theme="dark"] .pk-src__more { border-color: rgba(212, 179, 106, .4); background: rgba(212, 179, 106, .04); }
 html[data-theme="dark"] .pk-src__more svg { color: #d4b36a; }
 html[data-theme="dark"] .pk-src__more:hover { background: rgba(212, 179, 106, .12); border-color: rgba(212, 179, 106, .75); color: #f1ead8; }
-/* وفي المكبَّرة: مصدرٌ واحدٌ يملأ ما فوق المربّع المرقّط، وأكثرُ يتتابع وتُمرَّر المساحة */
-#cm-body .pk-split > .pk-src--multi > .pk-src__list {
-  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px;
-  overflow-y: auto; overscroll-behavior: contain;
-}
-#cm-body .pk-split > .pk-src--multi > .pk-src__view { flex: none; }
-#cm-body .pk-src--multi > .pk-src__list > .pk-src__view { flex: none; height: max(240px, calc(100% - 46px)); min-height: 0; }
-#cm-body .pk--max .pk-src--multi > .pk-src__list > .pk-src__view { min-height: 320px; }
-/* والشريطُ بثيم الموقع (كشريط الصفحة ‎#xscroll‎): الأصليُّ مُخمَد، ومسارٌ ‎8px‎ يسارًا وإبهامٌ بتروليٌّ مدوّر يُسحب */
-#cm-body .pk-split > .pk-src--multi { position: relative; }
-#cm-body .pk-src--multi > .pk-src__list { scrollbar-width: none; padding-left: 10px; }
-.pk-src__list::-webkit-scrollbar { width: 0; height: 0; display: none; }
-.pk-srcbar { position: absolute; left: 2px; width: 2.5px; z-index: 4; cursor: pointer; touch-action: none; border-radius: 99px; background: transparent; }
-.pk-srcbar::before { content: ""; position: absolute; inset: 0 -8px 0 -2px; }   /* حرمٌ أعرض للمؤشّر من الخطّ النحيل */
-.pk-srcbar[hidden] { display: none; }
-.pk-srcbar > i { position: absolute; top: 0; left: 0; right: 0; border-radius: 99px; background: rgba(44, 94, 101, .22); cursor: grab; transition: background .2s; }
-.pk-srcbar:hover > i { background: rgba(44, 94, 101, .38); }
-.pk-srcbar.is-drag > i { background: rgba(44, 94, 101, .5); cursor: grabbing; }
-html[data-theme="dark"] .pk-srcbar { background: transparent; }
-html[data-theme="dark"] .pk-srcbar > i { background: rgba(255, 255, 255, .16); }
-html[data-theme="dark"] .pk-srcbar:hover > i { background: rgba(255, 255, 255, .28); }
-html[data-theme="dark"] .pk-srcbar.is-drag > i { background: rgba(255, 255, 255, .36); }
-#cm-body .pk-split:has(> .kt-view, > .pk-bank) > .pk-src--multi { contain: size; }
-/* والقائمةُ تنزل حتى حافّة المساحة السفلى (لا هامشَ ميّتٌ تحتها تُحجب الرؤيةُ خلفه) — والفسحةُ في جوفها، وتُقصّ على الزاوية المستديرة */
-#cm-body .pk-split > .pk-src--multi { padding-bottom: 0; overflow: clip; }
-#cm-body .pk-src--multi > .pk-src__list { padding-bottom: 14px; }
 
 /* ملاحظة «توزيع الدرجات» (data.note): نصٌّ كما كُتب تحت الشريط */
 .gnote { white-space: pre-wrap; margin-top: 8px; line-height: 1.75; font-size: .92em; overflow-wrap: anywhere; unicode-bidi: plaintext; text-align: start; }
@@ -18131,11 +18105,6 @@ html[data-theme="dark"] .pk-srchd__ty { filter: brightness(1.7) saturate(.8); }
 html[data-lang="en"] .psp-sub::before { left: -6px; right: auto; }
 html[data-theme="dark"] .psp-sub::before { right: -7.5px; }
 html[data-theme="dark"][data-lang="en"] .psp-sub::before { left: -7.5px; right: auto; }
-/* قائمةُ المصادر تنزل حتى الحافّة السفلى ولو حُجزت فسحةُ أيقونات المساحات المغلقة (‎pk--icB · ‎40px‎):
-   تمتدّ تحتها، وفسحتُها في جوفها فيُبلغ آخرُها بالتمرير (طلبُ صاحب الموقع) */
-#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { margin-bottom: -40px; padding-bottom: 54px; }
-/* ومساحةُ المصادر وحدَها في الضيّقة: لا جارَ يحدّ قامتها، فللقائمة قامةٌ معلومة لا تنضغط إلى لا شيء */
-#cm-body .post:not(.pk--max) .pk-split:not(:has(> .kt-view, > .pk-bank)) > .pk-src--multi > .pk-src__list { flex: none; height: clamp(360px, 62vh, 600px); }
 /* واسمُ المصدر وأيقونةُ نوعه في وسط المساحة أفقيًّا (طلبُ صاحب الموقع) — وأيقونةُ المساحة في زاويتها */
 .pk-blkh--book > .pk-srchd { position: absolute; left: 50%; top: 0; margin: 0; transform: translate(-50%, -6px); max-width: 72%; z-index: 2; }
 /* ===== قائمةُ المصادر زجاجٌ سائلٌ كلوحة فلاتر البحث (‎glass.css · .market-tools .fpanel‎ · طلبُ صاحب الموقع) =====
@@ -18312,7 +18281,6 @@ html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view, .pk-bank, .pk-src) { min-height: 0; max-height: 100%; box-sizing: border-box; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view--table, .kt-view--cards, .pk-bank) { overflow-y: auto; overscroll-behavior: contain; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { flex: 1 1 auto; height: auto; min-height: 0; }
 
 /* ===== تذييل الكتاب بثلاث خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح ورقمُ الصفحة،
    ويسارًا اسمُ المصدر وطريقةُ القراءة على يساره وتحتهما «ربط الصفحات» — مصغّرةٌ ومكدّسة ===== */

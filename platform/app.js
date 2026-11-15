@@ -9577,7 +9577,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sl && pkSrcCurOf(ctl.dataset.pkid) !== sl.dataset.pksid) {
       const id = ctl.dataset.pkid;
       pkSrcCur[id] = sl.dataset.pksid;
-      if (pane.classList.contains('pk-src--multi')) pane.querySelectorAll('.pk-src__list > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === sl));
       const t = post.querySelector('.cx-acttools');
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
@@ -10469,7 +10468,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   const pkSrcCur = {};
-  let pkSrcScroll = null;   /* المصدرُ المضافُ للتوّ: تُمرَّر مساحتُه إليه بعد الرسم */
   const pkSrcCurOf = id => { const l = pkSrcList(id); return l.includes(pkSrcCur[id]) ? pkSrcCur[id] : (l[0] || id); };
   const PK_SRC_FILE_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>';
   const PK_SRC_COV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/></svg>';
@@ -10798,32 +10796,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pkSrcMeta(s)) return '';
     return `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcMenu(id, s)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;
   };
-  /* اختيارُ مصدرٍ من القائمة: يصير الملموس، وتُمرَّر القائمةُ إليه */
+  /* اختيارُ مصدرٍ من القائمة: يحلّ محلَّ الظاهر في مساحته (مصدرٌ واحدٌ يُرى — طلبُ صاحب الموقع)،
+     وكتابُه إن رُكِّب قبلُ يُنقل كما هو بلا بناءٍ من جديد (‎pkSrcPaint‎) */
   document.addEventListener('click', e => {
     const g = e.target.closest && e.target.closest('#cm-body [data-pksrcgo]');
     if (!g) return;
     e.preventDefault(); e.stopPropagation();
-    const sid = g.dataset.pksrcgo, id = pkSrcBase(sid), post = g.closest('.post');
-    pkSrcCur[id] = sid; pkPlusClose(null);
-    if (!post) return;
-    const v = post.querySelector(`.pk-src__list > [data-pksid="${CSS.escape(sid)}"]`), ls = v && v.parentElement;
-    if (ls) { ls.querySelectorAll(':scope > [data-pksid]').forEach(x => x.classList.toggle('is-cur', x === v)); ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' }); }
-    const t = post.querySelector('.cx-acttools');
-    if (t) t.innerHTML = pkActTools(id, false);
+    const sid = g.dataset.pksrcgo;
+    pkPlusClose(null);
+    pkSrcGo(pkSrcBase(sid), sid);
   }, true);
+  function pkSrcGo(id, sid) {
+    pkSrcCur[id] = sid;
+    const old = document.querySelector(`#cm-body .pk-split > .pk-src--book[data-pkid="${CSS.escape(id)}"] > [data-pksrcview]`), post = old && old.closest('.post');
+    if (!old) { renderCmSection(); return; }
+    if (old.dataset.pksid !== sid) {
+      const w = document.createElement('div'); w.innerHTML = pkSrcSlot(sid);
+      old.replaceWith(w.firstElementChild);
+      pkSrcPaint(); requestAnimationFrame(() => pkSrcHFit());
+    }
+    const t = post.querySelector('.cx-acttools');
+    if (t) t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
+  }
+  /* جوفُ مصدرٍ واحد — وحتى يُفتح الملفّ: هيكلُ صفحاتٍ تتقلّب يُسلِّم إلى الكتاب بلا قفزة */
+  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar)}</div>`;
   const pkSrcView = (id, ed) => {
     /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
     /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
     const L = pkSrcList(id);
     if (L.length) {
-      const cur = pkSrcCurOf(id), many = L.length > 1;
-      /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
+      /* وأكثرُ من مصدر: يُرى المختارُ وحدَه، والبقيّةُ في قائمة المصدر بالتذييل (طلبُ صاحب الموقع) */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
-      /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
-      const skel = s => bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar);
-      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
-      return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
-        + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
+      return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}" data-pkid="${esc(id)}">${pkSrcSlot(pkSrcCurOf(id))}</div>`;
     }
     /* والمنشورةُ بلا كتاب: مربّعٌ مرقّطٌ يقول ذلك (طلبُ صاحب الموقع) — لا زرَّ رفعٍ معطّل */
     if (!ed) return `<div class="pk-src pk-src--none" data-pkid="${esc(id)}"><div class="pk-vwph">${esc(T().pkSrcNone)}</div></div>`;
@@ -10861,7 +10865,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkSrcPgDrop(id);
     const base = pkSrcBase(id);
     if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
-    pkSrcCur[base] = id; if (id !== base) pkSrcScroll = id;
+    pkSrcCur[base] = id;
     /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
   }
@@ -11054,7 +11058,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const b = e.target.closest('[data-psp], [data-pksrcpick]'); if (!b) return;
     if (b.hasAttribute('data-pksrcpick')) { pkSrcIn.dataset.pkid = b.dataset.pkid; pkSrcIn.click(); return; }
     const r = b.closest('[data-sid]'), s = r ? r.dataset.sid : pkSP.sid, k = b.dataset.psp;
-    if (k === 'go') { const id = pkSP.id; pkSrcCur[id] = s; pkSrcScroll = s; pkSrcPopClose(); renderCmSection(); return; }
+    if (k === 'go') { const id = pkSP.id; pkSrcPopClose(); pkSrcGo(id, s); return; }
     if (k === 'cov' || k === 'type' || k === 'more') { const same = pkSP.sid === s && pkSP.sub === k; pkSP.sub = same ? null : k; pkSP.sid = same ? null : s; pkSP.conf = null; pkSP.pg = 0; pkSrcPopShow(); if (pkSP.sub === 'cov') { const i = document.querySelector('#pk-srcpop [data-pspnum]'); if (i) i.select(); } return; }
     if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
@@ -11070,48 +11074,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     else if (e.key === 'Enter' && e.target.matches && e.target.matches('[data-pspnum]')) { e.preventDefault(); pkSrcCovPg(pkSP.sid, +e.target.value || 1); }
   }, true);
   /* بعد كلّ رسمة: صورةُ الغلاف المصغّرة، والكتابُ في كلّ جوفِ مصدرٍ قائم */
-  /* ===== شريطُ قائمة المصادر يسارًا بثيم الموقع (طلبُ صاحب الموقع) — كشريط الصفحة ‎#xscroll‎: مسارٌ وإبهامٌ بتروليٌّ يُسحب ===== */
-  const pkSrcBarUp = ls => {
-    const pane = ls.parentElement, bar = pane && pane.querySelector(':scope > .pk-srcbar'), th = bar && bar.firstElementChild;
-    if (!th) return;
-    const ch = ls.clientHeight, sh = ls.scrollHeight, bh = Math.max(40, ch - 16);   /* والشريطُ يقف قبل الزاوية المستديرة تحت */
-    bar.style.top = ls.offsetTop + 'px'; bar.style.height = bh + 'px';
-    if (sh <= ch + 2) { bar.hidden = true; return; }
-    bar.hidden = false;
-    const thH = Math.max(30, Math.round(bh * ch / sh));
-    th.style.height = thH + 'px';
-    th.style.transform = `translateY(${Math.round((bh - thH) * ls.scrollTop / (sh - ch))}px)`;
-  };
-  const pkSrcBarRo = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => pkSrcBarUp(e.target))) : null;
-  const pkSrcBarInit = () => document.querySelectorAll('#cm-body [data-pksrclist]:not([data-pkbar])').forEach(ls => {
-    ls.dataset.pkbar = '1';
-    ls.addEventListener('scroll', () => pkSrcBarUp(ls), { passive: true });
-    if (pkSrcBarRo) pkSrcBarRo.observe(ls);
-    const bar = ls.parentElement.querySelector(':scope > .pk-srcbar'), th = bar.firstElementChild;
-    th.addEventListener('pointerdown', e => {
-      e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); bar.classList.add('is-drag');
-      const y0 = e.clientY, s0 = ls.scrollTop;
-      const mv = ev => { const k = (ls.scrollHeight - ls.clientHeight) / ((bar.offsetHeight - th.offsetHeight) || 1); ls.scrollTop = s0 + (ev.clientY - y0) * k; };
-      const up = () => { th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); bar.classList.remove('is-drag'); };
-      th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
-    });
-    bar.addEventListener('pointerdown', e => {
-      if (e.target === th) return;
-      e.preventDefault(); e.stopPropagation();
-      const y = e.clientY - bar.getBoundingClientRect().top - th.offsetHeight / 2;
-      ls.scrollTo({ top: y / ((bar.offsetHeight - th.offsetHeight) || 1) * (ls.scrollHeight - ls.clientHeight), behavior: 'smooth' });
-    });
-    pkSrcBarUp(ls);
-  });
   async function pkSrcPaint() {
     pkLnkPopShow();
     pkSrcPopShow();
-    pkSrcBarInit();
-    if (pkSrcScroll) {
-      const v = document.querySelector(`#cm-body [data-pksid="${CSS.escape(pkSrcScroll)}"]`), ls = v && v.closest('.pk-src__list');
-      if (ls) ls.scrollTo({ top: v.offsetTop - ls.offsetTop, behavior: bkReduce() ? 'auto' : 'smooth' });
-      pkSrcScroll = null;
-    }
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
       const key = pkSrcCovKey(img.dataset.pksrccovimg);
       if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
@@ -25134,10 +25099,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.view.isConnected) bkMount(b.view, b);
     });
   }
-  /* المساحةُ التي تُقلَّب منها: المصدرُ كلُّه، أو خانةُ الكتاب إن كان فيه أكثرُ من مصدر */
+  /* المساحةُ التي تُقلَّب منها: مساحةُ المصدر كلُّها */
   function bkZone(b) {
     const src = b.stage.closest('.pk-src');
-    return (src && !src.classList.contains('pk-src--multi') ? src : b.stage.closest('[data-pksid]')) || b.stage;
+    return src || b.stage;
   }
   /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
   function bkArmed(b) {
