@@ -455,7 +455,7 @@ export function createBook2(THREE, host, cfg) {
     if (e.target !== el && e.target.closest && e.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
-    if (!g || locked() || !armed()) return;
+    if (!g || (g.cover ? locked() : mo) || !armed()) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
     const s = sheets[g.fwd ? A : A - 1];
@@ -472,14 +472,15 @@ export function createBook2(THREE, host, cfg) {
       hold.n++; hold.timer = setTimeout(tick, Math.max(150, 420 - 45 * hold.n));
     }, 450) };
   };
-  /* ‏‎cfg.locked‎: أداةُ تظليلٍ مختارة — لا تُقرأ الفأرةُ على الصفحة نيّةَ تقليبٍ أبدًا (لا رفعَ ولا سحبَ ولا عجلة)؛ التقليبُ من أزراره */
+  /* ‏‎cfg.locked‎: أداةُ تظليلٍ مختارة — لا تُقرأ الفأرةُ على **الصفحة** نيّةَ تقليبٍ (لا عجلةَ ولا نقرَ الغلاف). والمقبضُ حولها
+     خارجَها فيبقى يُقلِّب والأداةُ مختارة (كان القفلُ يُعطّله بعد كلّ تظليل، إذ تُختار الأداةُ معه) — إلّا والكتابُ يتبدّل وضعُه */
   const locked = () => !!mo || !!(cfg.locked && cfg.locked());
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
-      if (locked()) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
+      if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      const g = armed() && at(e), ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
+      const g0 = armed() && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
       const gv = !ok ? '' : g.cover ? 'c' : g.fwd ? 'l' : 'r';
       if (h !== hover || gv !== grab) { hover = h; setGrab(gv); needs = true; setCursor(); }
       return;

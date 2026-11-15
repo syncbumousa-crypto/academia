@@ -24720,7 +24720,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const BK_MX = 720;
   /* إطارُ الكتاب في مساحته (طلبُ صاحب الموقع: أصغرُ قليلًا ونازلٌ تحت، وفوقه رقمُ الصفحات): ‏‎m‎ هامشُه (الكتابُ ‎1/m‎ من المساحة)
      و‎lift‎ رفعُه عن الوسط بنسبة قامته (سالبٌ: ينزل). مصدرٌ واحدٌ للمحرّك وللهيكل ولمستطيل الفتحة فلا يفترق أحدُها عن الآخر */
-  const BK_FR = { m: 1.16, lift: -0.035 };
+  const BK_FR = { m: 1.08, lift: -0.01 };
   /* الوضعُ الذي يمضي إليه الكتاب (ضغطاتٌ متتالية أثناء الحركة تُحسب منه لا ممّا كان) */
   const bk2Goal = b => b.mx ? (b.mxWant != null ? b.mxWant : b.mxGoal) : !!b.one;
   function bk2SetOne(b0, one) {
