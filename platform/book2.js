@@ -486,8 +486,9 @@ export function createBook2(THREE, host, cfg) {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
       if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
-      /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
+      /* وفي الصفحة الواحدة لا ترتفع ورقةٌ بالتحويم (طلبُ صاحب الموقع): الكاميرا تتراجع مع كلّ ورقةٍ مرفوعة، فكانت الفأرةُ الباقيةُ
+         في مكانها بعد التقليب ترفع التاليةَ فيبدو كأنّها تنفتح ثمّ ترجع — يكفيها لونُ النصف */
+      const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && !ONE ? (g.fwd ? A : A - 1) : -1;
       const gv = !ok ? '' : g.cover ? 'c' : g.fwd ? 'l' : 'r';
       if (h !== hover || gv !== grab) { hover = h; setGrab(gv); needs = true; setCursor(); }
       return;
