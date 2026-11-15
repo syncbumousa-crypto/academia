@@ -24404,8 +24404,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el.innerHTML = rows.map((r, i) => {
         /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
         r.ow = Math.max(64, 30 + (r.t ? String(r.t).length * 7 : 0) + (r.b ? String(r.b).length * 7 : 0) + 22);
-        return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.nw ? '+' : r.n}</b></button>`;
+        /* والصفُّ الجديدُ بطاقةٌ فارغةٌ برقمه التالي كغيرها (طلبُ صاحب الموقع) — لا «+» ولا إطارٌ منقّط؛ يُنشأ في الجدول حين يدخلها أوّلُ تظليل */
+        return `<button type="button" class="cx-hlt${r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.n}">`
+          + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.n}</b></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
