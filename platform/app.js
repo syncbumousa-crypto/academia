@@ -24218,11 +24218,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const hlColLoad = (k, d) => { try { const v = localStorage.getItem(k); return HL_COL[v] ? v : d; } catch (e) { return d; } };
   const hlCol = { t: hlColLoad('ac.hl.col', 'y'), box: hlColLoad('ac.hl.colb', 'b') };
   function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
-  /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
-  function hlDots(m, W, Hh, rows) {
-    const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
-    return m.c.map(cid => ({ cid, n: rows.get(cid) })).filter(o => o.n).map((o, i) => ({ ...o, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
-  }
   /* التحديدُ العابرُ على هذه الصفحة (إن كان) — يُطلى على الورقة كالتظليل فيميل معها، لا طبقةً فوقها */
   function hlSelOn(b, k) {
     try { return bkTLSel && bkTLSel.k === k && bkTLSel.painted && bkOfEl(bkTLSel.d) === b ? bkTLSel : null; } catch (e) { return null; }
@@ -24236,7 +24231,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c0.globalCompositeOperation = 'source-over';
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
-    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
+    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height;
     c.globalCompositeOperation = 'multiply';
     for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
     c.globalCompositeOperation = 'source-over';
@@ -24245,28 +24240,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = .55;
       c.strokeRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); c.globalAlpha = 1;
     }
-    for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
-      const [, dot, ink] = HL_COL[m.col];
-      c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
-      c.fillStyle = dot; c.fill();
-      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(20, 35, 63, .3)'; c.stroke();
-      c.fillStyle = ink; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
-      c.fillText(String(n), x, y + R * 0.06);
-    }
   }
-  /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل صفَّها)، وإطارُ التظليل المختار */
+  /* في طبقة النصّ: إطارُ التظليل المختار — بلا دوائر أرقامٍ بجانب التظليل (طلبُ صاحب الموقع) */
   function hlSpots(b, d) {
-    d.querySelectorAll('.bk-hlnum, .bk-hlcur').forEach(x => x.remove());
+    d.querySelectorAll('.bk-hlcur').forEach(x => x.remove());
     const k = +d.dataset.k, ms = hlMarksOn(b, k); if (!ms.length) return;
-    const W = 1000, Hh = 1000 / b.ar, rows = hlRowMap();
     for (const m of ms) {
-      for (const { cid, n, x, y, R } of hlDots(m, W, Hh, rows)) {
-        const e = document.createElement('button');
-        e.type = 'button'; e.className = 'bk-hlnum'; e.dataset.hlcid = cid;
-        e.title = T().hlArmT.replace('{n}', n); e.setAttribute('aria-label', e.title);
-        Object.assign(e.style, { left: (x - R * 1.4) / W * 100 + '%', top: (y - R * 1.4) / Hh * 100 + '%', width: R * 2.8 / W * 100 + '%', height: R * 2.8 / Hh * 100 + '%' });
-        d.appendChild(e);
-      }
       if (hlCur && hlCur.m === m.id) {
         for (const [l, r, t, bb] of m.bars) {
           const e = document.createElement('i'); e.className = 'bk-hlcur';
@@ -24650,11 +24629,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t = e.target.closest && e.target.closest('[data-hlcid]');
     if (!t) return;
     e.preventDefault(); e.stopPropagation();
-    if (t.classList.contains('bk-hlnum')) {
-      const c = hlCan(t); if (!c) return;
-      hlSetCur(c.id, null); hlRailGo(c.id, t.dataset.hlcid);
-      return;
-    }
   }, true);
   /* Esc: يُلغى التحديدُ القائم أوّلًا، ثمّ الاختيار، ثمّ تُطفأ الدائرةُ الشغّالة · Delete يحذف المختار */
   document.addEventListener('keydown', e => {
@@ -24907,7 +24881,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkBoxRect = (a, z) => ({ l: Math.min(a[0], z[0]), r: Math.max(a[0], z[0]), t: Math.min(a[1], z[1]), b: Math.max(a[1], z[1]) });
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d || e.button !== 0 || e.target.closest('.bk-hlnum')) return;
+    if (!d || e.button !== 0) return;
     const c = hlCan(d); if (!c || hlTool[c.id] !== 'box' || !hlRows(c.id)) return;
     e.preventDefault(); e.stopImmediatePropagation();
     bkTLClear();
@@ -24934,7 +24908,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
     if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
-    if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
+    if (e.button !== 0 || !d._rows) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
     bkTLClear();
