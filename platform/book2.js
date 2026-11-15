@@ -411,6 +411,7 @@ export function createBook2(THREE, host, cfg) {
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
     if (cfg.interceptDown && cfg.interceptDown()) return;
+    if (locked()) return;
     const g = at(e); if (!g) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
@@ -428,9 +429,12 @@ export function createBook2(THREE, host, cfg) {
       hold.n++; hold.timer = setTimeout(tick, Math.max(150, 420 - 45 * hold.n));
     }, 450) };
   };
+  /* ‏‎cfg.locked‎: أداةُ تظليلٍ مختارة — لا تُقرأ الفأرةُ على الصفحة نيّةَ تقليبٍ أبدًا (لا رفعَ ولا سحبَ ولا عجلة)؛ التقليبُ من أزراره */
+  const locked = () => !!(cfg.locked && cfg.locked());
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
+      if (locked()) { if (hover !== -1) { hover = -1; needs = true; setCursor(); } return; }
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
       /* ولا ترتفع إلّا قرب حرفها الخارجيّ (حيث تُمسك لتُقلَب) — وإلّا مالت الصفحةُ تحت من يحدّد نصًّا فيها */
       const g = at(e), h = g && turnable(g.fwd ? 1 : -1) && (g.fwd || !ONE) && nearEdge(e, g.fwd) ? (g.fwd ? A : A - 1) : -1;
@@ -460,7 +464,7 @@ export function createBook2(THREE, host, cfg) {
   const onLeave = () => { if (!drag && hover !== -1) { hover = -1; needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
-    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked()) return;
     e.preventDefault(); const now = performance.now();
     if (now - wheelT > 400) wheelAcc = 0;
     wheelT = now; wheelAcc += e.deltaX;

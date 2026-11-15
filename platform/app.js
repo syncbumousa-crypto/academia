@@ -25013,6 +25013,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return false;
         },
         onBusy: () => bkTLHide(b),
+        /* والقلمُ أو المربّعُ مختار: الصفحةُ للتظليل وحده، والتقليبُ من زرّي التذييل (طلبُ صاحب الموقع) */
+        locked: () => { const t = hlTool[pkSrcBase(hlSidOf(b))]; return t === 't' || t === 'box'; },
         onTurn: A => {
           /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
           if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
