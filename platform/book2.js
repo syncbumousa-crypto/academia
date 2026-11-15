@@ -266,7 +266,7 @@ export function createBook2(THREE, host, cfg) {
   setTheme(cfg.theme);
   /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
   const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.4, 1.3, 3.6).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  const BLOB = new THREE.Vector3(-0.06, -0.045, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const BLOB = new THREE.Vector3(-0.06, 0.01, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
   /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
   const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
   /* قلبُه المعتم بمقاس الكتاب نفسِه (‎176/256 × 1.45‎) والتلاشي حوله إلى الخارج — كان أغلبُه تحت الكتاب فلا يُرى منه إلّا حافّةٌ باهتة */
@@ -278,7 +278,7 @@ export function createBook2(THREE, host, cfg) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
     blob.visible = e < 1;
     blob.material.opacity = (curTheme === 'dark' ? 0.4 : 0.24) * (1 - e) * (1 - e);
-    blob.scale.set(W * (1 + OV) * 1.45, H * (1 + OV) * 1.45, 1);
+    blob.scale.set(W * (1 + OV) * 1.55, H * (1 + OV) * 1.78, 1);
     blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
