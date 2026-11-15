@@ -1,0 +1,67 @@
+{
+  "code": "CIE 316",
+  "users": [
+    {
+      "id": "stk-user5535",
+      "name": "الأحاجي السبعة",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5535/144/1116_2.png",
+      "email": "user5535@import.stkfupm.invalid",
+      "user": "user5535"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1430962-cie316",
+      "uid": "stk-user5535",
+      "code": "CIE 316",
+      "sec": "info",
+      "ts": 1445501763000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة هي مكملة لمادة CISE 302 و هي تتكلم عن كيف تصمم الكنترولر وفق معايير محددة\n\nفي البداية راح تاخذون كيف تحولون معادلة من درجتين أو اكثر إلى معادلة Linear و تحطونها على شكل الـ state space ( أسبوعين )\nو بعدين تدخلون في طرق تصميم الكنترولر بـ ظ£ أشياء\nظ،- Root locus\nظ¢- Bode plot\nظ£- Nyquist method\n\nو أخيرا تاخذون الـ Controllability و الـ Observability و كيف تجيب الـ state space model للـ (G(s\n\nالمادة يدرسها في آخر ظ¤ سنوات الدكتور سامي الفريك ، و هو فاهم جداً، و شريح ، لكن بعض الطلاب يشوفون انه سريع مرة و يشرح أشياء بناءً على انكم اخذتوها في كورسات ثانية\n\nيعني مثلاً كان يشرح شغلة متعلقة بالـCISE 301 و طلع تقريباً ظ،ظ* طلاب موش ماخذين المادة ، فاضطر يشرحها من جديد\n\nلا تتوقع انك تفهم كل شي في الكلاس خصوصا الـ Bood plot و الـ Nyquist ، لازم ترجع لشروحات اليوتيوب\n\nاللاب على حسب اللي يدرسك ، هو راح يكون باستخدام الماتلاب ، لكن اقصد من ناحية هل فيه بروجيكت أو لا ؟ هذا يعتمد على دكتور اللاب.\n\nالأفرج C في المادة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/cie-316-control-systems-design/120900/5",
+          "user": "user5535",
+          "ts": 1445501763000,
+          "tid": 120900,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1450145-cie316",
+      "uid": "stk-user8581",
+      "code": "CIE 316",
+      "sec": "info",
+      "ts": 1464033328000,
+      "st": "pub",
+      "data": {
+        "desc": "ما قصر الأحاجي السبعة تقريبا غطى كل شيئ . بس حبيت أضيف إن اللاب سهالات وممكن الكورس يكون فيه بروجكت ولو فيه بيكون سهل و على الماتلاب .\n+\nهذا هو اللاب مانول\nlink",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/cie-316-control-systems-design/120900/6",
+          "user": "user8581",
+          "ts": 1464033328000,
+          "tid": 120900,
+          "pn": 6
+        }
+      }
+    }
+  ]
+}

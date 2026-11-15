@@ -1,0 +1,97 @@
+{
+  "code": "COE 306",
+  "users": [
+    {
+      "id": "stk-sultan11",
+      "name": "Sultan1",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/f4b2a3/144.png",
+      "email": "sultan11@import.stkfupm.invalid",
+      "user": "Sultan11"
+    },
+    {
+      "id": "stk-ad0rs",
+      "name": "ad0rs",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f475e1/144.png",
+      "email": "ad0rs@import.stkfupm.invalid",
+      "user": "ad0rs"
+    },
+    {
+      "id": "stk-hungryspirits",
+      "name": "HungrySpirits",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hungryspirits/144/2095_2.png",
+      "email": "hungryspirits@import.stkfupm.invalid",
+      "user": "HungrySpirits"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1292510-coe306",
+      "uid": "stk-sultan11",
+      "code": "COE 306",
+      "sec": "info",
+      "ts": 1385173714000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم .\n\nأخذت الكورس مع الدكتور عبدالحفيظ بو هراوة .\n\nالكورس ممتع جداً جداً جداً . يتكلم عن كل ما يدور حولك من التقنية المخفية . قد شفت جهاز صغير يشغل برنامج معين مكتوب للجهاز ؟ و استغربت كيف الجهاز هذا يشتغل ؟! ووش لغة البرمجة المخصصة له ؟!\n\nطيب الكورس هذا يعلمك شلون تصمم الجهاز ووش لون تكتب له الكود . ووش لون تجعل الكود هذا Secure بحيث اللي يقدر يوصل لمحتويات الجهاز ما يقدر يسوي له Reverse engineering .\n\nأيضاً حتتعلم بروتوكولات كثيرة للتخاطب بين مختلف الأجهزة ( IC ) داخل جهازك . أيضاً بتتعلم طريقة التخاطب بين الأجهزة المختلفة اللي تعتبر من فئة الـ Embeded systems .\n\nالكود حتشتغل غالباً على منصّة الـ Arduino و هو مايكروكونترولر مفيد و بسيط تقدر تبرمجة بلغة الـ C . طبعاً لو تبي تطّلع أكثر على المنصة روح هنا : www.arduino.cc\n\nالكورس حالياً أظن الدكتور أيمن الملح هو اللي يقدّمه … الدكتور أيضاً ممتاز .\n\nالكورس جداً ممتع و خفيف نسبياً مقارنة في البيقية . لكن يعتمد ع الفهم .\n\nبالتوفيق 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-306-introduction-to-embedded-systems/152519/2",
+          "user": "Sultan11",
+          "ts": 1385173714000,
+          "tid": 152519,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1443243-coe306",
+      "uid": "stk-ad0rs",
+      "code": "COE 306",
+      "sec": "info",
+      "ts": 1456519342000,
+      "st": "pub",
+      "data": {
+        "desc": "انا لسا ما اخذت المادة لكن افيدك من كلام اللي اعرفهم وخذوها\nاول كانوا يستخدموا arduino كانت سهالات\nذحين غيروها وجابوا قطع برمجتها اصعب\nودكتور اللاب ما يمدحوه يقولوا مو فاهم شي\nدكتور اللكتشر كويس بس احتمال كبير انه ماينزل المادة الترم الجاي لإنه مسك منصب بال itc",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-306-introduction-to-embedded-systems/152519/4",
+          "user": "ad0rs",
+          "ts": 1456519342000,
+          "tid": 152519,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1443376-coe306",
+      "uid": "stk-hungryspirits",
+      "code": "COE 306",
+      "sec": "info",
+      "ts": 1456681523000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته …\n\nPrerequisites: COE 203 & COE 301\nال 203 هي لاب ل مادة COE 202 واعتقد ان عندكم كورس CISE 204 Digital Systems Design مشابه والله العالم…\n\nاما ال 301 فما اعتقد له مثيل 🤠",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-306-introduction-to-embedded-systems/152519/5",
+          "user": "HungrySpirits",
+          "ts": 1456681523000,
+          "tid": 152519,
+          "pn": 5
+        }
+      }
+    }
+  ]
+}

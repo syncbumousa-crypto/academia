@@ -1,0 +1,276 @@
+{
+  "code": "ACCT 300",
+  "users": [
+    {
+      "id": "stk-user9840",
+      "name": "توحيد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9840/144/2074_2.png",
+      "email": "user9840@import.stkfupm.invalid",
+      "user": "user9840"
+    },
+    {
+      "id": "stk-brilliant_accountant",
+      "name": "Brilliant Accountant",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/brilliant_accountant/144/1202_2.png",
+      "email": "brilliant_accountant@import.stkfupm.invalid",
+      "user": "Brilliant_Accountant"
+    },
+    {
+      "id": "stk-user9921",
+      "name": "أمير الشعراء",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9921/144/2082_2.png",
+      "email": "user9921@import.stkfupm.invalid",
+      "user": "user9921"
+    },
+    {
+      "id": "stk-maxmx05",
+      "name": "Maxmx05",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
+      "email": "maxmx05@import.stkfupm.invalid",
+      "user": "Maxmx05"
+    },
+    {
+      "id": "stk-acct2014",
+      "name": "acct2014",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/cdc98d/144.png",
+      "email": "acct2014@import.stkfupm.invalid",
+      "user": "acct2014"
+    },
+    {
+      "id": "stk-waleedx11",
+      "name": "waleedx11",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/6bbea6/144.png",
+      "email": "waleedx11@import.stkfupm.invalid",
+      "user": "waleedx11"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1492577-acct300",
+      "uid": "stk-user9840",
+      "code": "ACCT 300",
+      "sec": "info",
+      "ts": 1526552862000,
+      "st": "pub",
+      "data": {
+        "desc": "ACCT 300: Accounting Information Systems\n\nLecture\nالكورس يتكلم عن نظم المعلومات في المحاسبة\nيبدأ من البيانات إلى المعلومات إلى نظم المعلومات وكيف تبنى وكيف تحمى وكيف تستخدم لإيصال افضل المعلومات للمستفيد وكيف تعمل DFDs وكل الرسومات التي تسهل دراسة تدفق البيانات وفهمها (شغل سوفتويرو MIS).\nالكورس اساسا يعتبر كورس MIS واللي يدرسونه غالبا دكاترة MIS\nالكورس جدا مفيد لكن مايعيبه هو عدم قدرة الدكتور على ربطه بال ACCT\n\nAIS: An Overview\n\nChapter 1\n\nOverview of Transaction Processing and Enterprise Resource Planning Systems\n\nChapter 2\n\nSystems Documentation Techniques\n\nChapter 3\n\nSystems Documentation Techniques\n\nChapter 3\n\nRelational Databases\n\nChapter 4\n\nRelational Databases\n\nChapter 4\n\nControls and AIS\n\nChapter 7\n\nControls and AIS\n\nChapter 7\n\nControls for Information Security\n\nMid Term Exam March 19, 2018 During Lab (Covers Chapters 1, 2, 3, 4, & 7)\n\nChapter 8\n\nConfidentiality & Privacy Controls\n\nChapter 9\n\nProcessing Integrity & Availability Controls\n\nChapter 10\n\nAuditing Computer-Based Information Systems\n\nChapter11\n\nThe Revenue Cycle: Sales to Cash Collections\n\nChapter 12\n\nThe Expenditure Cycle: Purchasing to Cash\n\nDisbursements\n\nChapter 13\n\nكل ماتقدمت في الكورس بينتابك شعور (وشدخل كل هذا في الاكاونتينق)\n\nLAB\n\nاللاب يبدا بتطبيق على PEACH-TREE\nوبعدها ACCESS\nVISIO\nEXCEL\n\nفيه فاينل لاب في اخر اسبوع من الترم .\n\nفيه بروجكت للكورس وهو عبارة انك تختار شركة وتقوم بزيارة لهم وتتطلع على Internal control system\nللشركة وتعمل له تقييم من A-Z وتقارنه مع افضل نظام موجود وفي النهاية تعمل ريكومانديشن للشركة\n+ تعمل له برزنتيشن في اخر اسبوع من الترم … البروجكت صعب تحصل شركة لان مافي شركة راح تقبل تعطيك معلومات حساسة الا ما ندر فأغلب الطلاب يختلقون معلومات من راسهم ويعملون تقييم لها .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/acct-300-accounting-information-system/120958/2",
+          "user": "user9840",
+          "ts": 1526552862000,
+          "tid": 120958,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-doc-brilliant_accountant-acct300",
+      "uid": "stk-brilliant_accountant",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1393308418000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98419",
+            "n": "Dr. Muhammad Shahidulislam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Acct 300 ترم 123\nAcct 303 ترم 131\n\nالتحضير : نهاية الكلاس وما عنده مشكلة في التأخير + لايعطي DN\nطريقة الشرح : من السلايد وتكون مملة ، لكن اذا بدأ يحل ع السبورة تكون شيقة\nالكويزات : الاختيارات من التي بي و المقالية من الشرح\nالمياجر: تنقسم قسمين قسم اختيارات وقسم مقالي\nالاختيارات من التي بي والمقالي من الاستدي قايد اللي يعطيكم اياه، لا تتعب نفسك وتقرأ الكتاب التي بي والاستدي قايد كافي جدا\nالفاينلات : نفس المياجر\n\nالصوت: واضح واكسنت رهيييب\nإضافات : دكتور متساعد وفليكسبول جدا ، غير موعد الميدتيرم 3 مرات عشاننا D:\nله خبيرة طويلة في الجامعة فهو هنا من بداية التسعينات",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1333971-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/muhammad-shahidulislam/98419/8",
+              "user": "Brilliant_Accountant",
+              "ts": 1393308418000,
+              "tid": 98419,
+              "pn": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9921-acct300",
+      "uid": "stk-user9921",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1515451562000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98432",
+            "n": "Dr. Israr Khan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Acct 300\n171\n\nالتحضير :\nبداية ونهاية الكلاس وما عنده تأخير ، بونص درجة للي كا يغيب\n\nطريقة الشرح :\nيشرح من السلايدات ووقت المحاضرة قصير أصلاً فما تحس كلاسه طويل ، السلايدات قصييرة جداً وما تغطي الكتاب كله فلذلك لازم ترجع للكتاب\n\nالكويزات :\nTB ويلعب فيها شوي وأحياناً يغيرها تماماً\n\nالمياجر:\nمدترم من ٢٥ كان نصه TB (ملعوب فيه ) ونصه مسائل حلها في الكلاس\n\nالفاينلات :\nنفس المدترم\n\nالقريد النهائي:\n+C\n\nالصوت:\nاكسنت هندي بس مو سيء نفس غيره ، يعني مفهوم\n\nإضافات :\nالمادة صراحة صعبه شوي ومتعبة والمصطلحات صعبه وكثيره ولها اختصارات كثيره برضو\n+ الدكتور طيب ومتعاون ويحاول يسهلها بس يبقى أغلب المادة صعب\n+ البروجكت ما يدقق كثير فيه\n+ القريدات صارت ستاندرد لأن الافرج في النهاية صار عاالي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1485782-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-israr-khan/98432/11",
+              "user": "user9921",
+              "ts": 1515451562000,
+              "tid": 98432,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-maxmx05-acct300",
+      "uid": "stk-maxmx05",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1524589364000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98432",
+            "n": "Dr. Israr Khan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "TERM 172\nACCT 300\nالاسبوع 14\nبنود التقييم :\n\nالتحضير : ما يهتم للتاخير لو تتاخر 20- 30 دقيقة بس لا تكثر منها. التحضير يكون نهاية الكلاس\nطريقة الشرح : سلايدات يقرا منها\nالكويزات : TB زيغير عليها\nالمياجر: TB ويغير فيها بعد\nالفاينلات : ما بعد\nالقريد النهائي:\nالصوت: جيد\nإضافات :\nالدكتور تخصصة MIS فلا تتوقع كثير منه. المادة اشوفها اقرب الى MIS منها الى المحاسبة. الماددة تحتاج الى حفظ كثير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1491407-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-israr-khan/98432/12",
+              "user": "Maxmx05",
+              "ts": 1524589364000,
+              "tid": 98432,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-acct2014-acct300",
+      "uid": "stk-acct2014",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1524933107000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98432",
+            "n": "Dr. Israr Khan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "term171\nacct300\n\nالتحضير :نهايه الكلاس وما يدقق بالتاخير - بونص درجة للي ما عنده ولا غياب\nطريقة الشرح : يقرا من السلايدات ، وفيه شابتر جاب واحد بارامكو يشرح لنا\nالكويزات : تي بي بس يغير فيه\nالمياجر: ميدتيرم - تي بي ويغير فيه + مسائل يحل نفسها بالكلاس\nالفاينلات : نفس الميدتيرم\nالقريد النهائي: B\nالصوت: جيد\nإضافات : الدكتور ما يدقق بالبروجكت يعني سوي الي بيبه وتطلع بدرجة كويسه\nوفيه بونص اسايمنت\nالماده بشكل عام غثيثة كلهااا حفظ الدكتور متعاون ويسوي الي يقدر عليه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1491564-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-israr-khan/98432/13",
+              "user": "acct2014",
+              "ts": 1524933107000,
+              "tid": 98432,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9840-acct300",
+      "uid": "stk-user9840",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1526553337000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98432",
+            "n": "Dr. Israr Khan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ACCT 300-TERM 172\n\nالتحضير : نهاية كل كلاس .\nطريقة الشرح :يشرح بخبرة السنين .\nالكويزات : MCQ من التي بي ويلعب فيه\nالمياجر: متوسطة وتكون عبارة عن خيارات من التي بي + مسائل تكون من الاسئلة في نهاية كل جابتر\nالفاينلات : نفس الميدترم\nالقريد النهائي: B\nالصوت: جيد\nإضافات :\nالمادة ولا بريال بسبب ان الدكتور مايعرف يربطها بالاكاونتينق + اشك انه هو فاهم الكورس كما ينبغي .\nمع ذلك هو محترم وذو خلق رفيع …\nوفيه بروجكت عبارة عن Evaluation of one of the companies Internal Control system (تكلمت عنه باسهاب في تقييم الكورس)\nالكورس ستاندرد .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492579-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-israr-khan/98432/14",
+              "user": "user9840",
+              "ts": 1526553337000,
+              "tid": 98432,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-waleedx11-acct300",
+      "uid": "stk-waleedx11",
+      "code": "ACCT 300",
+      "sec": "doc",
+      "ts": 1526773343000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98432",
+            "n": "Dr. Israr Khan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ACCT300 - 172\n\nالتحضير : يحضر نهاية الكلاس ويعلق دايم عاللي يجون متأخرين.\nطريقة الشرح : يفتح السلايدات ويبدأ يقرأ ويشرح … شرحه عادي جدا بس كويس مقارنة بباقي الدكاترة الهنود.\nالكويزات : تكون في اللاب وتكون عبارة عن عشر فقرات mcq بعضها يجي من التي بي وبعضها لا … عطانا حول السبع كويزات وحذف أسوأ اثنين.\nالمياجر: ميدتيرم - الmcq فيه تكون نفس طريقة المياجر والمقالي يجي من اللي يحله سواء هو ولا دكتور محمد السبيعي في اللاب.\nالفاينلات : نفس الميدتيرم.\nالقريد النهائي: B\nالصوت: جيد\nإضافات :\n- المادة غثيثة جدا وفيها مصطلحات منظمات غريبة وفيها كمية حفظ + ضايعة بالنص بين المحاسبة وال mis\n- الدكتور يجيب guest speakers من شركات كبيرة يجون يشرحون ويغطون بعض الكلاسات.\n- البروجكت حقها غثيث بس الدكاترة يحاولون يتعاونون فيه شوي.\n- يختار أسئلة بعض المرات نحلها بالكلاس ويخليها كبونص.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492752-acct300",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-israr-khan/98432/15",
+              "user": "waleedx11",
+              "ts": 1526773343000,
+              "tid": 98432,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

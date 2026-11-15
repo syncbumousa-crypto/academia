@@ -1,0 +1,37 @@
+{
+  "code": "AE 422",
+  "users": [
+    {
+      "id": "stk-alialrajjal",
+      "name": "AliAlrajjal",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/d78d45/144.png",
+      "email": "alialrajjal@import.stkfupm.invalid",
+      "user": "AliAlrajjal"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1537188-ae422",
+      "uid": "stk-alialrajjal",
+      "code": "AE 422",
+      "sec": "info",
+      "ts": 1704225259000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام\nالمقرر عن محركات الطائرات وهو جدا مهم وممتع في نفس الوقت\nالمواضيع التي يغطيها المقرر\nالمقرر يتكلم في البدايه عن الغاز وكيف يتصرف اذا انضغط بتستخدم المعادلات الي في الثرمو والقاز داينامكس وحتى الايرو\nبعدها بتدخل في الشوك ويفز بعدها يبدا الكلام عن محرك الطائره وكيف يشتغل وال Parametric cycle analysis وتختم المقرر بمحركات الصواريخ\nالكتاب المستخدم للمقرر\nElements of Propulsion: Gas Turbines and Rockets” by Jack D. Mattingly and Hans von Ohain, AIAA Pub. Ltd., Inc. 1801. 2nd Edition, (2016).\n\nاخذت المقرر في ٢٣١",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ae-422-flight-propulsion-i/120808/2",
+          "user": "AliAlrajjal",
+          "ts": 1704225259000,
+          "tid": 120808,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

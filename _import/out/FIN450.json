@@ -1,0 +1,149 @@
+{
+  "code": "FIN 450",
+  "users": [
+    {
+      "id": "stk-almax",
+      "name": "almax",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/almax/144/1559_2.png",
+      "email": "almax@import.stkfupm.invalid",
+      "user": "almax"
+    },
+    {
+      "id": "stk-practice",
+      "name": "Practice",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/practice/144/2043_2.png",
+      "email": "practice@import.stkfupm.invalid",
+      "user": "Practice"
+    },
+    {
+      "id": "stk-_cfa",
+      "name": "~CFA~",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/b77776/144.png",
+      "email": "_cfa@import.stkfupm.invalid",
+      "user": "_CFA"
+    },
+    {
+      "id": "stk-saleh9311",
+      "name": "saleh9311",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/50afbb/144.png",
+      "email": "saleh9311@import.stkfupm.invalid",
+      "user": "saleh9311"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1422769-fin450",
+      "uid": "stk-almax",
+      "code": "FIN 450",
+      "sec": "info",
+      "ts": 1437289308000,
+      "st": "pub",
+      "data": {
+        "desc": "سلام عليكم\n\nانا اخذت المادة في اخر قصل دراسي سمستر 142\n\nالمادة اكثر شغلها قروووب ورك و تكون في العادة كل اسبوعين برزنتيشن عن كيس من الكتاب\n\nالمادة سهله بس عيبها انها تشغلك طووول السمستر بكثرة متطلباتها\n\nكورس ممتع كان مع دكتور خالد البن علي\n\nالراحة هالرجال ظالمينه الطلاب ولا هو حبيب و شررريح و هو راعي بزنس فا الرجال يتلكم من خبره عملية",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-450-financial-policy/121026/2",
+          "user": "almax",
+          "ts": 1437289308000,
+          "tid": 121026,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1473514-fin450",
+      "uid": "stk-practice",
+      "code": "FIN 450",
+      "sec": "info",
+      "ts": 1495335084000,
+      "st": "pub",
+      "data": {
+        "desc": "اخذتها مع البن علي بترم 162\n\n1- المادة عبارة عن Cases وشغل قروبات وخفيفة جدا\n2- المادة مافيها مدتيرم ، كيسات وفاينل اونلاين وبروجكت بس\n3- البروجكت راح يكون اطول بروجكت يمر عليك بالفايننس لانه حط فيه كل شي + Turnitin\n\nموفقين",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-450-financial-policy/121026/3",
+          "user": "Practice",
+          "ts": 1495335084000,
+          "tid": 121026,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-doc-_cfa-fin450",
+      "uid": "stk-_cfa",
+      "code": "FIN 450",
+      "sec": "doc",
+      "ts": 1307427975000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98270",
+            "n": "Dr. Khaled M. Albinali",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "فر منه فرارك من الأسد لأن طلباته كثيرة جدا وماتخلص وماكأن عندك إلا مادته بس علما بأنه رئيس القسم ويدرس هالمادة تكملة عدد فقط\n\nهو يدرس Fin450 وكل اللي عنده 14 طالب وأقل بينما مع أبراهام الاخر يوصلون الاربعين بالراحة لأن الشعبة تقفل ومافي مجال للشباب إلا معاه لأن مايعطي ابروفال عند استاذ اخر وشعبته مفتوحة لنفس المادة وتوزيعه للدرجات جدا ظالم\n\nالتحضير : بالملي قبل بداية كل كلاس يمشي عليهم اسم اسم لأن عدد الطلاب قليل جدا\nطريقة الشرح : أقل من المتوسط بكثيير يشرح وهو جالس على مقاعد الطلاب\nالكويزات : لايوجد تقريبا كل اللي عطاناه كويز واحد\nالمياجر: لايوجد\nالفاينلات : صعب جدا مقالية من تقريبا 15 case problems\nالقريد النهائي: خلوها مستورة\nالصوت: منخفض\nإضافات : لاتفكر تاخذ عنده لو حصلت خيار آخر\n__________________",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p847871-fin450",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-khaled-m-albinali/98270/2",
+              "user": "_CFA",
+              "ts": 1307427975000,
+              "tid": 98270,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-saleh9311-fin450",
+      "uid": "stk-saleh9311",
+      "code": "FIN 450",
+      "sec": "doc",
+      "ts": 1496356948000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98270",
+            "n": "Dr. Khaled M. Albinali",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الدكتور خالد خذت معه ثلاث كورسات,\nالرجال جزاه الله خير تعامله محترم لكن لاعلم بتحصل عنده ولا قريد…\n\nلاتاخذ معه ابدا, يعطي واجبات غريبه ماتدري هي لها علاقه بالدرس ولا لا. يحاول يصير شديد لكن يبدو انه كسول. ب Fin 450 قال لنا من الاخر انه مابيقرا الريبورت بس يتصفحه والدرجات كانت دمار فيه اللي اخذ 30% وفيه كم 100% وماتعرف كيف.\n\nفالختام… وفر على نفسك وجع الراس و حاول ماتاخذ معه…\n\nبالتوفيق للجميع",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1474333-fin450",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-khaled-m-albinali/98270/12",
+              "user": "saleh9311",
+              "ts": 1496356948000,
+              "tid": 98270,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

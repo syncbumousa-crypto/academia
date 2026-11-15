@@ -1,0 +1,89 @@
+{
+  "code": "CGS 392",
+  "users": [
+    {
+      "id": "stk-ahmed1",
+      "name": "Ahmed#",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/6f9a4e/144.png",
+      "email": "ahmed1@import.stkfupm.invalid",
+      "user": "Ahmed1"
+    },
+    {
+      "id": "stk-ria",
+      "name": "RIA",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ria/144/2564_2.png",
+      "email": "ria@import.stkfupm.invalid",
+      "user": "RIA"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-ahmed1-cgs392",
+      "uid": "stk-ahmed1",
+      "code": "CGS 392",
+      "sec": "doc",
+      "ts": 1703169478000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118626",
+            "n": "Dr. Yahya E. Osais",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "CGS 392- Term 231\nالتحضير:\nفي نص الكلاس وماعنده مشكلة بالتأخير.\n\nطريقة الشرح :\nالمادة سوالف ما فيها شرح او شي لكنه كان لطيف.\n\nالتقييم النهائي:\nB+\n\nاضافات:\nالدكتور كويس في هالمادة بشكل عام، وعموما ما يفرق الدكتور",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1537170-cgs392",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-yahya-e-osais/118626/11",
+              "user": "Ahmed1",
+              "ts": 1703169478000,
+              "tid": 118626,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ria-cgs392",
+      "uid": "stk-ria",
+      "code": "CGS 392",
+      "sec": "doc",
+      "ts": 1703692439000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f182637",
+            "n": "Dr. Michael Ryall",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "قبل كنت اذم الدكتور لكن تغير 180 درجة في كورس cgs392 صار يتساعد كثير مره مع الطلاب ويدفهم دف على قد ما يقدر مجموعتي طلعت وجابة العيد في الشرح مع ذلك عطاهم درجة ممتازه وطلعت عنده من هذا الكورس بقريد محترم",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1537179-cgs392",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/michael-ryall/182637/12",
+              "user": "RIA",
+              "ts": 1703692439000,
+              "tid": 182637,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

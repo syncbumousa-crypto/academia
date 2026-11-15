@@ -1,0 +1,48 @@
+{
+  "code": "CHE 405",
+  "users": [
+    {
+      "id": "stk-ahmed1",
+      "name": "Ahmed#",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/6f9a4e/144.png",
+      "email": "ahmed1@import.stkfupm.invalid",
+      "user": "Ahmed1"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-ahmed1-che405",
+      "uid": "stk-ahmed1",
+      "code": "CHE 405",
+      "sec": "doc",
+      "ts": 1703168836000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98542",
+            "n": "Dr. B Abussaud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "CHE 405- Term 231\nالتحضير:\nنفس طريقته الترم اللي راح\n\nطريقة الشرح :\nشرحه في هالكورس كان عادي في البارت الأول وحلو في بارت الايكونمي لانه فاهم فيه اكثر لكن بشكل عام الدكتور متمكن في 306 اكثر\nالكويزات:\nنفس كلامي فوق واسهل في هالكورس بعد\nالميد:\nالمادة مياجر وسهلة\n\nالفاينل:\nكومن وكان سهل الى متوسط\n\nالتقييم النهائي:\nA+\n\nاضافات:\nالدكتور رهيب ولطيف جدا، حتى لو ما يشرح شي نزل عنده وبترتاح طول السمستر معاه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1537168-che405",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/b-abussaud/98542/54",
+              "user": "Ahmed1",
+              "ts": 1703168836000,
+              "tid": 98542,
+              "pn": 54
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

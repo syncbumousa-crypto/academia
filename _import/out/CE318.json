@@ -1,0 +1,183 @@
+{
+  "code": "CE 318",
+  "users": [
+    {
+      "id": "stk-rami_ali_ce_1990",
+      "name": "Rami_Ali_CE_1990",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/rami_ali_ce_1990/144/2291_2.png",
+      "email": "rami_ali_ce_1990@import.stkfupm.invalid",
+      "user": "Rami_Ali_CE_1990"
+    },
+    {
+      "id": "stk-_132",
+      "name": "أبو طارق 13",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/_132/144/2137_2.png",
+      "email": "_132@import.stkfupm.invalid",
+      "user": "_132"
+    },
+    {
+      "id": "stk-user2967",
+      "name": "صقر السعودية",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/cc9497/144.png",
+      "email": "user2967@import.stkfupm.invalid",
+      "user": "user2967"
+    },
+    {
+      "id": "stk-civil_engineer1",
+      "name": "civil engineer",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/e68b1a/144.png",
+      "email": "civil_engineer1@import.stkfupm.invalid",
+      "user": "civil_engineer1"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1494006-ce318",
+      "uid": "stk-rami_ali_ce_1990",
+      "code": "CE 318",
+      "sec": "info",
+      "ts": 1528577743000,
+      "st": "pub",
+      "data": {
+        "desc": "اخذتها معا الدكتور حسين القحطاني … جميلة وممتعة اللاب ممتع اكثر كان معا الدكتور الجوحي وللاسف انو مشى والجامعة خسرت عملاق من العمالقة\n\nتعطيك مهارات جميلة في استخدام الكمبيوتر للحل والحلول",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-318-numerical-statistical-methodes-in-civil-engineering/120676/6",
+          "user": "Rami_Ali_CE_1990",
+          "ts": 1528577743000,
+          "tid": 120676,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1502038-ce318",
+      "uid": "stk-_132",
+      "code": "CE 318",
+      "sec": "info",
+      "ts": 1541538979000,
+      "st": "pub",
+      "data": {
+        "desc": "طبعا المادة اخذتها في ترم 172 مع د.فيصل مختار وفي نهاية الترم اعطانا Suggested Term Projects-172 موجودة بالمرفق تحت , تشكل تيم و كل تيم مكون من 4 اشخاص يختار بروجيكت واحد , طبعنا بالنظر الى البروجكتات المقترحة علينا ( لازم تكون لديك خلفية على بعض مشاكل الهندسة المدنية ) , فلذالك اقترح انك تأخذ المادة في السنة الاخيرة من الجامعة لأنك راح تكون غطية كورسات كثيرة فيها بعض من المشاكل الهندسية (مجرد اقتراح )",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-318-numerical-statistical-methodes-in-civil-engineering/120676/7",
+          "user": "_132",
+          "ts": 1541538979000,
+          "tid": 120676,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-doc-user2967-ce318",
+      "uid": "stk-user2967",
+      "code": "CE 318",
+      "sec": "doc",
+      "ts": 1308611991000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98562",
+            "n": "Dr. Saeid Aboud Alghamdi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ce 318 - 101\n\nالتحضير : بالاسم\nطريقة الشرح : يجيب نوت معاه ويكتب ع البورد خرابيش ويشرح منها … بس باختصار ماراح تفهم معااه حتى نوته مثل ماقلت خرابيش\nالكويزات : كوزين + هوم تست … كلها تاخذها معاك تحلها … الهوم تست 5%\nالمياجر: دور مياجر قديمه وتضمن 80% منها + الاختبار open book\nالفاينلات : الله يعينك … نوتات خارجية وكتاب + الاختبار open book\nالقريد النهائي: d\nالصوت: اذا انطلق بالكلام … الله يعينك\nإضافات : دور غيره … ومشكلة 318 الرجال له ترمين والترم الجاي ياخذها\n\nفالله يعينكم",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p856515-ce318",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-saeid-aboud-alghamdi/98562/3",
+              "user": "user2967",
+              "ts": 1308611991000,
+              "tid": 98562,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-civil_engineer1-ce318",
+      "uid": "stk-civil_engineer1",
+      "code": "CE 318",
+      "sec": "doc",
+      "ts": 1327614794000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98562",
+            "n": "Dr. Saeid Aboud Alghamdi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "فصل 111\nce 318\n\nالتحضير : بداية الكلاس\nطريقة الشرح : يكون معه اوراق يكتبها في السبورة على شكل طلاسم ماتقدر تقرا منها كلمة يقول خذ نوت بس بتنهبل وانت تكتب ولوكتبت ماراح تستفيد منه ابدن\nالكويزات : 2 تيك هوم وهوم تيست وكلها نفس السيمسترات اللي قبل (يعني نقش)\nالمياجر: اوبن بوك\nالفاينلات : اوبن بوك\nالقريد النهائي: C+\nالصوت:زين\nإضافات :يعطيك بروجكت اخر الفصل وتسوي عليه بريزنتيشن … طبعا اول كورس في الجامعه اطلع ما معي منه الا 1% بالمية",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p974322-ce318",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-saeid-aboud-alghamdi/98562/5",
+              "user": "civil_engineer1",
+              "ts": 1327614794000,
+              "tid": 98562,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-rami_ali_ce_1990-ce318",
+      "uid": "stk-rami_ali_ce_1990",
+      "code": "CE 318",
+      "sec": "doc",
+      "ts": 1506106891000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98590",
+            "n": "Dr. Husain Jubran Al-Gahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درسني CE 318\n\nالتحضير : مرن لدرجة لطيفة وممتازة … كان معانا شباب مصخوها …مرة من المرات جا و قفل الباب و اي احد متأخر ما دخله … عملها مرة وحدة وبعدها الشباب انعدلوا\nطريقة الشرح : ممتازة جدا ويسأل الطلاب واللي شي مو فاهمه يشرحه بكل اريحية\nالكويزات : مافي كويزات\nالمياجر: سهللة للي يذاكر … كانت عالكمبيوتر … اللاب كان الدكتور بشير الجوحي الله يذكره بالخير ويوفقه مكان مايكون … الجامعة خسرته للأسف ماعينوه دكتور للاسف …\nالفاينلات : متوسط\nالقريد النهائي: عطاني قريد استاهله من دون زيادة او نقصان\nالصوت: وااااضح جدااا\nإضافات : الدكتور حسين خلوق ورجل يخاف الله … كان رئيس القسم ايامنا … ماقدر اوفيه حقه في التعامل محترم للنهاية واخلاق … بالنسبة لكلاسنا كان يشرح بكل امانة وخلوق ومتجاوب لابعد حد … مايعطي اب قريد … ومتساهل في التاخير … لكن في ناس مصخوها … الكلاس كان فيه طلاب ماستر … البروجكت كان برضو لطيف وسهل …\n\nللامانة انا انزل معاه اذا لقيت اسمه وحاط ببالي اني بشد معاه وبركز غير انه محترم وخلوق وبشوش وحبوب ومحبوب.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1480771-ce318",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-husain-jubran-al-gahtani/98590/16",
+              "user": "Rami_Ali_CE_1990",
+              "ts": 1506106891000,
+              "tid": 98590,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

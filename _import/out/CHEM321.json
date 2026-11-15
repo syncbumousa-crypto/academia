@@ -1,0 +1,48 @@
+{
+  "code": "CHEM 321",
+  "users": [
+    {
+      "id": "stk-aomab",
+      "name": "AOMAB",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/c89c15/144.png",
+      "email": "aomab@import.stkfupm.invalid",
+      "user": "AOMAB"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-aomab-chem321",
+      "uid": "stk-aomab",
+      "code": "CHEM 321",
+      "sec": "doc",
+      "ts": 1621553990000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f69430",
+            "n": "Dr. Tawfik Saleh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Chem 321 - Term 201\n\nالتحضير: عشوائي في بداية او نهاية الحصة وأحيانا في منتصف الحصة\n\nالشرح : جدا مختصر وواضح\n\nالكوزات: سهله الى متوسطة MCQs ( غالبا من السلايدات)\n\nالميد: كومن MCQs جدا سهل افرج 77%\n\nالفاينل : كومن MCQs جدا صعب افرج 59%\n\nالتصحيح: آلي\n\nإضافة : المادة تعتمد عليك بنسبة 90% الا إذا الكوردينيتر يدرسك وجاب من شرحه\nغير كذا توقع اسئلة من حاشية الكتاب زي ما حصل في الفاينل\n\nعليك بمذاكرة كل شيء ودعاء الوالدين\n\nبالتوفيق ❤️",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1530026-chem321",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/tawfik-saleh/69430/51",
+              "user": "AOMAB",
+              "ts": 1621553990000,
+              "tid": 69430,
+              "pn": 51
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

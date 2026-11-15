@@ -1,0 +1,37 @@
+{
+  "code": "PETE 403",
+  "users": [
+    {
+      "id": "stk-hussain_alqahtani",
+      "name": "Hussain Alqahtani",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/d2c977/144.png",
+      "email": "hussain_alqahtani@import.stkfupm.invalid",
+      "user": "Hussain_Alqahtani"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1534861-pete403",
+      "uid": "stk-hussain_alqahtani",
+      "code": "PETE 403",
+      "sec": "info",
+      "ts": 1658164222000,
+      "st": "pub",
+      "data": {
+        "desc": "Pete403 - 212\nدكتور مرتضى الجواد\n\nCourse Description: The course introduces the student to topics of inflow and outflow performance, multi-phase flow in pipes, nodal analysis, production optimization and artificial lift with particular focus on electric submersible pumps and gas lift systems\n\nمواضيع المادة:\n- Introduction to Petroleum Production Systems\n- Hydrocarbon fluid properties\n- Reservoir Deliverability (IPR)\n- IPR for 2 phase flow\n- Gas Wells\n- Production from Horizontal Wells\n- Wellbore Performance, Single phase\n- Wellbore Performance, two phase vertical wells\n- Two-phase flow in horizontal pipes\n- Nodal Analysis\n- Introduction to Artificial Lift\n\nالكتاب المستخدم للمادة: Petroleum Production Engineering\nPetroleum Production Engineering | ScienceDirect\n\nمعلومات عن المادة:\n- المادة بترم 212 كان يدرسها دكتورين: دكتور مرتضى ودكتور قنثر (طلع من الكلية) وكل واحد له اختباراته مو كومن. انا درستها عند د مرتضى. المادة متوسطة السهولة بالنسبة لي. الدكتور بترمنا عطانا فقط 5 واجبات وكان متساهل. الواجبات متوسطة الى صعبة. الدكتور بالمجمل تحتاج تشتغل معه وابشر بالقريد\n\n- المتريال مو صعب, فيه اجزاء قد تكون صعبة زي two phase flow. بشكل عام, المتريال ممتع ومواضيعه مفيدة بالتطبيقات العملية\n\n- الدكتور شريح شريح شريح يشهد الله اخذت معه مادة Pete410 قبلها ومتجاوب مع اسئلة الطلاب ويتعاون معك اذا في ظرف\n\n- السلايدات ممتازة وما تعبت معها. الكتاب ما استخدمته بالمذاكرة ابدا\n\n- يمكن 6 كوزات بالترم. الكويزات اعتبرها درجات مجانية لأن الاسئلة تافهة كانت كونسبت فقط, تختبر فهمك للدروس الماضية. مدة الكوز 10د\n\n- يحاسب على التأخير 90% من الاوقات ويعطي وقت المادة حقها. ف الحذر من الغياب المتكرر (الدكتور يقبل اعذار بس لا تفلها)\n\n- كانت MW, ف الدكتور كان يعطي ربع ساعة بريك بنص الكلاس عشان الصلاة.\n\n- البروجكت كان على ماتلاب. صراحة ما كان سهل للاسف لأن الكود معقد شوي, لكن الدكتور ارفق لنا example والوضع اهون. ف يبغاله شغل من بدري مو بليلته تشتغل عليه\n\nطريقة المذاكرة:\nالمادة سلايداتها ممتازة, فكان افضل طريقة (بالنسبة لي) اني اركز مع شرح الدكتور واكتب علايباد. ما يمنع تكتب نوتات بذات لو عندك ايباد وتكتب علسلايدات بيفيدك الموضوع بالمذاكرة. سر ال A+ اشوفه (فهم المادة بحيث تحضر المحاضرة وتركز + تحل الهومووركاتتتتتتت) فقطط. اسئلته اغلبها حسابية (3 اسئلة) مع سؤال قد يكون كونسبت. الوقت ساعتين او 3. **تحذير: اسئلة الاختبار تحتاج تدريب مو تحفظ معادلة وتدخل, نسخة مصغرة من بيتي206 :)**\n\nالتقييم النهائي: B+ (فقط لأنك تحتاج تشتغل مع الدكتور)",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/pete-403-pet-production-engineering/120470/2",
+          "user": "Hussain_Alqahtani",
+          "ts": 1658164222000,
+          "tid": 120470,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

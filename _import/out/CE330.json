@@ -1,0 +1,359 @@
+{
+  "code": "CE 330",
+  "users": [
+    {
+      "id": "stk-vatrik",
+      "name": "vatrik",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/v/8797f3/144.png",
+      "email": "vatrik@import.stkfupm.invalid",
+      "user": "vatrik"
+    },
+    {
+      "id": "stk-a_dulaziz",
+      "name": "AβĐUŁAZIZ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/59ef9b/144.png",
+      "email": "a_dulaziz@import.stkfupm.invalid",
+      "user": "A_DULAZIZ"
+    },
+    {
+      "id": "stk-medoalkebsi",
+      "name": "Medoalkebsi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b3f665/144.png",
+      "email": "medoalkebsi@import.stkfupm.invalid",
+      "user": "Medoalkebsi"
+    },
+    {
+      "id": "stk-user9534",
+      "name": "حكاية رجل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9534/144/2047_2.png",
+      "email": "user9534@import.stkfupm.invalid",
+      "user": "user9534"
+    },
+    {
+      "id": "stk-shinigame",
+      "name": "shinigame",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/c89c15/144.png",
+      "email": "shinigame@import.stkfupm.invalid",
+      "user": "shinigame"
+    },
+    {
+      "id": "stk-saleh1417_2015",
+      "name": "Saleh1417_2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ec9cab/144.png",
+      "email": "saleh1417_2015@import.stkfupm.invalid",
+      "user": "Saleh1417_2015"
+    },
+    {
+      "id": "stk-rami_ali_ce_1990",
+      "name": "Rami_Ali_CE_1990",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/rami_ali_ce_1990/144/2291_2.png",
+      "email": "rami_ali_ce_1990@import.stkfupm.invalid",
+      "user": "Rami_Ali_CE_1990"
+    },
+    {
+      "id": "stk-civil_engineer1",
+      "name": "civil engineer",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/e68b1a/144.png",
+      "email": "civil_engineer1@import.stkfupm.invalid",
+      "user": "civil_engineer1"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1391742-ce330",
+      "uid": "stk-vatrik",
+      "code": "CE 330",
+      "sec": "info",
+      "ts": 1408624809000,
+      "st": "pub",
+      "data": {
+        "desc": "انا استمعت بهذه المادة. اغلبها حفظ و صعوبتها فقط في الميجر الثاني الباقي متوسط اقرب للسهولة. الدكتور عمر العطاس ممتاز يحسسك بأهمية المفاهيم بأمثلة واقعية.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-330-environmental-engineering-principles/120677/5",
+          "user": "vatrik",
+          "ts": 1408624809000,
+          "tid": 120677,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1392407-ce330",
+      "uid": "stk-a_dulaziz",
+      "code": "CE 330",
+      "sec": "info",
+      "ts": 1408783575000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة بشكل عام تتكلم عن البيئة و هذا وصف المادة من السيلابس\n\nIntroduction to major environmental pollution issues; Analyses of water quality; Municipal solid waste management\nand disposal; Hazardous waste testing, management, and treatment; Air pollution characteristics, effects, measurements, control, meteorology, and dispersion; Noise pollution control; Introduction to wastewater testing, treatment and reuse; Environment Impact Assessment\n\n• المادة لأغلب الطلاب تعتبر مملة نوعا ما لاكن الدكتور عمر العطاس حسنها لنا بشكل كبير\n\n• المادة تحتاج متابعه أول بأول وله بصراحه بتضيع مع الوقت\n\n• صعبة المادة تعتبر من متوسطة إلى فوق المتوسط\n\n• بعض الدروس فيها كيمياء لاكن بشكل بسيط\n\n• المادة تعتمد على الجانب الحفظ و الفهم ( في مسائل حسابية )\n\nللعلم أنه طلاب هندسة الكيمياء يقدرون ياخذونها إليكتف و ممكن يشوفونها أسهل من ما نشوفها حنا طلاب المدني\nوفرصة الدراسة مع الدكتور عمر العطاس تعتبر ذهبية من وجهة نظري",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-330-environmental-engineering-principles/120677/6",
+          "user": "A_DULAZIZ",
+          "ts": 1408783575000,
+          "tid": 120677,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1456765-ce330",
+      "uid": "stk-medoalkebsi",
+      "code": "CE 330",
+      "sec": "info",
+      "ts": 1473056752000,
+      "st": "pub",
+      "data": {
+        "desc": "ترم 152 الدكتور عمر العطاس\n\nجودة المقرر بشكل عام: المقرر بشكل عام طوييييييل , وفيه معلومات كثير , المعلومات هذي مهمه جدآ ومفيده تستفيد منها انت كشخص في حياتك بشكل عام.\nالمواضيع التي يغطيها المقرر :\n1- مقدمه للكورس.\n2-انرجي وماس بلنس\n3-تحليه المياه المالحه\n4-معالجة مياه الصرف الصحي\n5-تلوث الهواء\n6-التلوث الضوضائئ\n7-طرق التخلص من الويست\nهذي اهم المواضيع الي يغطيها المقرر\nالكتاب المستخدم للمقرر: الكتاب نهائيا ما استخدمناه , كله من السلايدات\nمدى فائدته في الناحية التطبيقية: الكورس هذا كان بالنسبه لي غلطه عمر اني نزلته , كااان طويل بشكل مو صاحي , كوزات كثيرررررررررررررررررررررررررررررررررررررررررررررررررررر!! كنت اتحلطم منه كثير , والاختبارات كانت طويله جدآ.\nكرهت نفسي من الكورس. بعد ماخلصت الكورس , جا وقت التدريب الصيفي , وكان في محطه معالجة مياة الصرف الصحي!\nبديت التدريب وانهيتة , الحمدلله كل شي اخذته بالكورس هذا فادني 100%%% كل شي درسناه في المعالجة حصلته في ارض الواقع بالضبط, الكورس هذا سهل عليا التدريب بشكل كبيرررر.\n\nالشخص الي ودة في كورس يستفيد شخصيا منه وممكن يفيده مثلي في التدريب ينزل الكورس.\nالشخص الي مايحب يحفظ الكورس هذا 95% حفظ وطويل طويل طويل.\nاما بالنسبه للقريد , فهو مرررررررره مو كورس قريد , انا تخصصي كيميكال واشوفه كورس طويل كثير ومو سهل زي ما سمعت فقط شابتر واحد من الكورس كامل يكون سهل ع طلاب الكيميكال الي هو شابتر 4 انرجي وماس بلنس.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-330-environmental-engineering-principles/120677/7",
+          "user": "Medoalkebsi",
+          "ts": 1473056752000,
+          "tid": 120677,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1493067-ce330",
+      "uid": "stk-user9534",
+      "code": "CE 330",
+      "sec": "info",
+      "ts": 1527395609000,
+      "st": "pub",
+      "data": {
+        "desc": "في البداية، آنا طالب هندسة كيميائية وآخذت هذا الكورس لأنه إليكتف\n\nالكورس طويل وطويل جداً ودسم، فيه كونسيبت كثير وفيه مسائل لكن الحفظ فيه بشكل آكبر ويكون حفظ صعب لآنه متعمق في آشياء دقيقة في البيئة مثل تحلية المياه وتصريف المياه وتعقيمها والخ.\n\nالكورس مايفيد المهندس الكيميائي إلا بشيء بسيط في آول تشابتر فقط، الكورس كان صعب آيضاً لباقي الطلاب (اللي تخصصهم هندسة مدنية) وكان آفرج الميجرين والفاينل كلهم تحت ال٥٠ (الدكتور هو محمد الملاك)\n\nفي النهاية طلعنا بقريدات طايحة ولا آنصح به لطلاب الهندسة الكيميائية\n\nهذا رابط فيه حلول الواجب للكورس لهذا الترم\nCE HW SOL - Download - 4shared",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce-330-environmental-engineering-principles/120677/8",
+          "user": "user9534",
+          "ts": 1527395609000,
+          "tid": 120677,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-doc-user9534-ce330",
+      "uid": "stk-user9534",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1527395891000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98563",
+            "n": "Dr. Muhammad H. Al-Malack",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درست عنده CE330\nمن آسوء الدكاترة اللي درسوني، شرحه يجيب النوم وبس يقرآ من السلايدات ويحضر في البداية آحياناً وآحياناً بالنهاية\nأسئلته صعبة جداً وكان آفرج المياجر والفاينل كلها تحت ال٥٠\nماكان يراعي الوقت المناسب للمياجر وكان لازم يحطه يوم سبت مهما كان عذر الطلاب\n\nبالنهاية آعطى آغلب الطلاب سي وسي بلس",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1493068-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhammad-h-al-malack/98563/28",
+              "user": "user9534",
+              "ts": 1527395891000,
+              "tid": 98563,
+              "pn": 28
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a_dulaziz-ce330",
+      "uid": "stk-a_dulaziz",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1397865337000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98582",
+            "n": "Dr. Omar Alattas",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "1- من أفضل دكاترة القسم بالشرح ( يوصل المعلومة )\n\n2- التعامل ما قد شفت أفضل منه بالجامعة\n\n*أنا درست عنده ce 330\n\nإلي يبون يدرسون عنده 201 ما أعتقد يفرق التقيم كثير , المادة basic شرحها سهل\n\nطلما أنه الدكتور يعرف يوصل المعلومة خلاص يكفي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1354101-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-omar-alattas/98582/18",
+              "user": "A_DULAZIZ",
+              "ts": 1397865337000,
+              "tid": 98582,
+              "pn": 18
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-shinigame-ce330",
+      "uid": "stk-shinigame",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1449263052000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98582",
+            "n": "Dr. Omar Alattas",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "دكتور بطل ومحترم وشررريح وعلاقته مع الطلاب عبارة عن اخوة , متواضع بعكس بعض الدكاترة النفسيات اللي يجيك رافع خشمه عليك ومدري على ايش !!\n\nطبعا انا اخذ عنده CE330 term 151\n\nومع ان تخصصي هندسة كيميائية الا ان المادة بالنسبة لي مهمه وافادتني ووعتني كثير ولها علاقة بتخصصي من ناحية البيئة وكيفية معالجة المياه والتحكم في التلوث والملوثات …\n\nانصحكم باخذ المادة مع هالدكتور الرائع\n\nوعلى فكرة المادة فيها كمية حفظ غير طبيعية وأيضا هي كومبريهنسف وتقريبا كل محاضرة بيكون فيه كويز وترى الكويزات عليها 15% يعني لا يسحب عليها الواحد, والدكتور بينبهكم على هالشي من اول كلاس, فاللي ما يداني الحفظ الله يعينه …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1435356-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-omar-alattas/98582/19",
+              "user": "shinigame",
+              "ts": 1449263052000,
+              "tid": 98582,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-saleh1417_2015-ce330",
+      "uid": "stk-saleh1417_2015",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1559143809000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118679",
+            "n": "Dr. Mohammed H. Essa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "CE330-182\n\nالتحضير:تحضير بالنظر يعرف الطلاب وغالبا اول الكلاس ومو مرة حريص على حضور مع شعبة ثانية احيانا كذا يقول ليش ما قلت لي او كلمتن واحيانا بالتحضير اذا شافك يقول انت سكشن الصباح كيف كذا 👋\n\nالشرح: يشرح من سلايدات هو مسويها واحيانا يكون فيها اخطاء جلية ف حاول تنتبه معاه وللأمانة اذا انت حاب موضوع الكورس راح تستمتع معاه شرحه واضح لكن يحتاج انك تكون مصحصح\n\nالكويزات: تقريبا راح يعطيك ٨ كويزات اسبوع ورا اسبوع اسبوع كويز اسبوع هومورك وهكذا\n\nالمياجر و الفاينل: ميجر ١ كان سهل ميجر ٢ كان صعيب الفاينل متوسط مائل للسهل. + انه اختبارته كلها حل مسائل الا الفاينل كان فيها كتابة شوي. تصحيح الدكتور غريب واحتمال تزعل منه لكن \" تأكد من انه الفاينل انسر عندك صح واليونت عشان تاخذ فل في السوال\" غير كذا راح تاخذ نص درجة السوال او ٦٥٪ منها.\n\nالصوت:لهجة سودانية لكن راح تتعود عليها\n\nالقريد النهائي : تقييمي للدكتور للامانه B+\nاضافات:\n*الدكتور طييب جدا جدا جدا ويحرجك في اخلاقه وطيبته.\n*يحاول يطلعكم رحلات تخص الكورس ويخليكم تعملون تجارب في اللاب على الرغم انه مافيه لاب رسمي\n*يقدر الطالب الحريص والمهتم.\n*نصيحة اخيرة لوجه الله اذا حصلت اسم الدكتور هذا انه راح يدرس هذي المادة خذها على طول وبدون مناقشة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1510364-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammed-h-essa/118679/19",
+              "user": "Saleh1417_2015",
+              "ts": 1559143809000,
+              "tid": 118679,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-rami_ali_ce_1990-ce330",
+      "uid": "stk-rami_ali_ce_1990",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1506107269000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118680",
+            "n": "Dr. Shakhawat Chowdhury",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درسني CE 330\n\nالتحضير : افتكر كان متعاون … كان معانا طالب بحريني يجي من البحرين فكان متعاون مع الكل …\nطريقة الشرح : انا ماكنت فاهم المادة خير شر فمقدر احكم عليه …\nالكويزات : مافتكر\nالمياجر: ماكنت فاهم المادة فماعرف اذا المياجر صعبة او سهلة 😁 😁 😁 😁 😁 😁 😁 😁\nالفاينلات : نفس المياجر 👏 👏 👏 👏\nالقريد النهائي: اعطاني قريد ماتوقعته الله يجزاه خير 👍 👍 👍\nالصوت: عادي لاني كنت اجلس قدام اسمعه لكن مو فاهم شي 👏 👏 👏\nإضافات : انصحكم بالعطاس معا انو مادرسني لكن ياخي يكفيك ابتسامتو 👍 👍 👍",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1480773-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-shakhawat-chowdhury/118680/14",
+              "user": "Rami_Ali_CE_1990",
+              "ts": 1506107269000,
+              "tid": 118680,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-civil_engineer1-ce330",
+      "uid": "stk-civil_engineer1",
+      "code": "CE 330",
+      "sec": "doc",
+      "ts": 1340293412000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118685",
+            "n": "Dr. Muhammad S. Vohra",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "فصل 112\nce330\nالتحضير : ورقة يمررها كل بداية محاضرة و يوم شاف بعض الطلاب مصخوها يحضرون بعض صار هو يحضر\nطريقة الشرح : من السلايدات … لكنه شرييييييييييييييييح جدا ماشالله عليه\nالكويزات : 8 كويزات حلوة مره وتصحيحه بطل\nالمياجر: كانت كومن لكن تصحيحه حلو ودرجات شعبتنا مرتفعه\nالفاينلات :نفس المياجر\nالقريد النهائي: B\nالصوت:من افضل اساتذة الجامعة علما واخلاقا وشرحا وادبا وتقديرا للطالب\nإضافات :",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1058161-ce330",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhammad-s-vohra/118685/5",
+              "user": "civil_engineer1",
+              "ts": 1340293412000,
+              "tid": 118685,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

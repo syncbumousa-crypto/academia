@@ -1,0 +1,37 @@
+{
+  "code": "CIE 315",
+  "users": [
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1437807-cie315",
+      "uid": "stk-user8581",
+      "code": "CIE 315",
+      "sec": "info",
+      "ts": 1451764188000,
+      "st": "pub",
+      "data": {
+        "desc": "خذت الكورس مع د.مجدي وهذا تقييمي له في الكورس\nDr. MAGDI S. MAHMOUD\n\n- الكتاب على حسب كلام الدكتور ممتاز لكن هو كان يستخدم مصدر ثاني بسبب إن الطلاب كانوا يحلون الهومورك من المانول سلوشن .\n- تقدر تأخذ هذا الكورس عند الالكتريكال والكورس الي يعادله هو ee207 لكن على حسب كلام الشباب الي خذوا 207 ee بدل 315 cise\nالالكتريكال مصعبين الكورس اكثر لكن يمكن تكون عند دكتور شريح اما في الـ cise مافيه الا سكشن واحد فانت مجبر عليه سواء كان ممتاز او سيئ .\n- الصراحة ما استفدت كثير من الكورس يمكن تقصير من عندي او بسبب طريقة الدكتور ,على العموم هذا الكورس جزء مب بسيط منه تقدر تقول عنه ماث ولو كنت ممتاز في الماث بعض الأشياء راح تفهمها اسرع وتسهل عليك .\n\nهذي مواضيع الكورس :\nFourier Series and Fourier Transform:\nLaplace TransformZee-TransformConvolution****System Response in the Time Domain\n\nهذا الرابط فيه : http://www.mediafire.com/download/ikii0o496ddjjf1/CISE+315+-+STKFUPM.rar\n- السلايدات الي يستخدمها مجدي schaum’s outlines of signals & systems ( حلول الهوموركات فيها )\n- الهوموركات .\n- نوتة د. مجدي لبعض الدروس .\n- Problem sets\n- السلاباس",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/cie-315-signals-and-systems/120899/3",
+          "user": "user8581",
+          "ts": 1451764188000,
+          "tid": 120899,
+          "pn": 3
+        }
+      }
+    }
+  ]
+}

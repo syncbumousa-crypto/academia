@@ -1,0 +1,112 @@
+{
+  "code": "ACCT 302",
+  "users": [
+    {
+      "id": "stk-user9840",
+      "name": "توحيد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9840/144/2074_2.png",
+      "email": "user9840@import.stkfupm.invalid",
+      "user": "user9840"
+    },
+    {
+      "id": "stk-waleedx11",
+      "name": "waleedx11",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/6bbea6/144.png",
+      "email": "waleedx11@import.stkfupm.invalid",
+      "user": "waleedx11"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1492574-acct302",
+      "uid": "stk-user9840",
+      "code": "ACCT 302",
+      "sec": "info",
+      "ts": 1526551073000,
+      "st": "pub",
+      "data": {
+        "desc": "Intermediate Accounting 302\nهو امتداد لل Financial Accounting 110,301\nولكن هو نقطة البداية حيث تبدا تدخل لمواضيع جدا مختلفة ومتعمقة ومتشعبة بخلاف ACCT 110 .\nيحتاج شغل ومتابعة لان يطرح لك عدد كبير من المشاكل في عالم الاكاونتينق وبعدها يبدا يشرح الكونسبت لل IFRS المتعلقة بتلك المشكلة مع الحلول وطرق التعامل معها .\n\nالمياجر والفاينل -تحتاج مذاكرة اول بأول\nلان الاختبارات جدا صعبة (ما اخوفكم ) لكن يحتاج متابعة فقط قبل الكلاس وبعد الكلاس وان شاء الله كل شيء مضبوط .\n\nالكورس عبارة عن 12 شباتر تقريبا\n13\n\nShort-term Liabilities\n\n14\n\nLong-term Liabilities\n\n15\n\nEquity\n\n16\n\nDilutive Securities and Earnings per Share\n\n17\nInvestments\n\n18\nRevenues\n\n21\n\nLease Accounting\n\n21\n\nLease Accounting\n\n22\n\nAccounting Changes and Error Analysis\n\n23\n\nStatement of Cash Flows\n\n24\n\nPresentation and Disclosure in Financial Reporting\n\nاصعب توبيك هو المتعلق بال leasing لان تماما شيء جديد ويحتاج متابعة خارج الكلاس لان الدكتور للاسف سيء .\nشيء آخر هذا الكورس متعلق بشكل كبير بال Finance حيث ان تقريبا في جميع المدخلات راح تحتاج تستعل Time value of money .\n\nفيه قناة في اليوتيوب لبروفسور اسمه فرحات راح يفيد جدا في هذا الكورس .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/acct-302-intermediate-accounting-i/120960/2",
+          "user": "user9840",
+          "ts": 1526551073000,
+          "tid": 120960,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-doc-user9840-acct302",
+      "uid": "stk-user9840",
+      "code": "ACCT 302",
+      "sec": "doc",
+      "ts": 1526551701000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f172138",
+            "n": "Dr. Mahmud Hossain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "البروفيسور محمود حسين\nACCT302-TERM 172\n\nهو الوحيد في قسم ACCOUNTING\nFull Professor\nوراعي ابحاث ومؤهلات قوية …\n\nالتحضير : بداية كل كلاس يحضر .\nطريقة الشرح : يفتح السلايدات ويحاول يشرح الكونسبت بقدر الامكان ومع ذلك محدش فاهم حاقة لانه مايعرف يوصل المعلومة رغم كل المؤهلات اللي عنده لذلك لاتعتمد عليه , في نهاية السمستر بدا يحاول يحل لنا مسائل وتحسن شرحه نوعا ما .\n\nالمياجر: صللللللللللللللللللللللللللللللللللللللللللخ open book كل انواع الاسئلة\nMCQ\nPROBLEMS\nESSAY\nCONCEPTUAL\n>>>>>>>>>>>>>>>\nلكن حاول تحل الستدي قايد اللي يرفعه على البلاكبورد قبل الاختبارات وان شاء الله امورك اوك\nالفاينلات : نفس المياجر\nالقريد النهائي: الرجال طيب وحنون لكنه سيء واعطيه C وادفه لل C+ بسبب حنيته 🙂\nالصوت: جيد وواضح\nاضافات :\nيحاول يجتهد ويطلع افضل ماعنده لكن مع ذلك مايوصل لك المعلومة بالشكل المطلوب .\n…",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492575-acct302",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mahmud-hossain/172138/5",
+              "user": "user9840",
+              "ts": 1526551701000,
+              "tid": 172138,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-waleedx11-acct302",
+      "uid": "stk-waleedx11",
+      "code": "ACCT 302",
+      "sec": "doc",
+      "ts": 1526695073000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f172138",
+            "n": "Dr. Mahmud Hossain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ACCT302 - Term172\n\nالتحضير : أول ما يدخل الكلاس عن طريق البلاك بورد.\n\nطريقة الشرح :\n\nشرحه ضايع مرررررة مع ان الرجال يحاول يوصل كل اللي عنده بس والله شرحه جدا جدا سيء وماهو بالشكل اللي يجب فيه انه تدرس كورسات المحاسبة.\n\nالمياجر والفاينل :\n\nأوبن بوك … صعبة ومستواها عالي جدا جدا وما تجي ربع شرحه … متنوعة ما بين أسئلة تحليلية cases و ملتبل تشويس و مسائل ، القايد اللي يرفعه قبل الامتحان مفيد للاختبار بس ما يغطيه فالشغل اغلبه يكون عالكتاب … الفاينل كان كله حل وما جاب ملتبل تشويس.\n\nالقريد النهائي:\nD+ بس عشان الدكتور طيب بشكل ما يتصور بدفه ل C\n\nالصوت:\nجيد ومسموع.\n\nإضافات :\n١- الدكتور حبييييييييييييييييييييييب وعسل عسل عسل … ياليت شرحه بمستوى أخلاقه العالية.\n\n٢- دائماً مايسألنا عن طريقة شرحه وتعامله في الكلاس اذا كانت كويسة أو لا ويتقبل النقد ويسوي تقييمات خلال الترم غير اللي نهاية الترم .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492712-acct302",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mahmud-hossain/172138/6",
+              "user": "waleedx11",
+              "ts": 1526695073000,
+              "tid": 172138,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

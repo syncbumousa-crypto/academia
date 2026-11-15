@@ -1,0 +1,48 @@
+{
+  "code": "OM 311",
+  "users": [
+    {
+      "id": "stk-stallion",
+      "name": "Stallion",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/db5fbb/144.png",
+      "email": "stallion@import.stkfupm.invalid",
+      "user": "Stallion"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-stallion-om311",
+      "uid": "stk-stallion",
+      "code": "OM 311",
+      "sec": "doc",
+      "ts": 1756020836587,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f180464",
+            "n": "Dr. Ahmad Al-Nasser",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يحضر من اول ٥ دقايق ويمشي غالبا المتاخرين\nطريقة الشرح : يشرح بنفس ترتيب السلايدات ولكن عالبورد وبشكل واضح جدا ويعطي مثال على كل شي\nالكويزات : الكويزات احيانا يزيد اثنين ويحذف اسوا اثنين ومستواها متوسط\nالمياجر: كانت متوسطه ولكن يحشرك بالوقت\nالفاينلات : الفاينل كان مستواه صعب شوي الصدق ولكن المذاكر بيحل\nالقريد النهائي: A+\nالصوت: واضح\n\nما افوته صراحة واضح انه فاهم في الي قاعد يشرحه ومتمرس فيه ومنزل عنده الحين OM311",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1540307-om311",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ahmad-al-nasser/180464/4",
+              "user": "Stallion",
+              "ts": 1756020836587,
+              "tid": 180464,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
