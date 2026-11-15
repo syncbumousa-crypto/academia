@@ -9457,7 +9457,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return a;
   };
   const PK_ACT_IC = {
-    prev: '<path d="M9 6l6 6-6 6"/>', next: '<path d="M15 6l-6 6 6 6"/>',
     close: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
     fold: '<path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2h8A1.5 1.5 0 0 1 20.5 9.5v8A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M12 11v5M9.5 13.5h5"/>',
@@ -9475,16 +9474,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والإضافةُ مستطيلٌ بزوايا مستديرة ونصُّه بحسب المساحة الملموسة (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» */
     if (a === 'book' && !pub && !pkSrcAny(id)) return pkAddPill(`data-pksrcpick data-pkid="${esc(id)}"`, T().pkAddFirstSrc);   /* الإضافةُ الأولى في التذييل (طلبُ صاحب الموقع) */
     if (a === 'book') {
-      const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
       /* ثلاثُ خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح، ويسارًا المصدرُ وطريقةُ القراءة وتحتهما «ربط الصفحات» مصغّرة */
       /* (طلبُ صاحب الموقع) المصدرُ في الزاوية البعيدة يمينًا و«ربطُ الصفحات» في قائمة نقاطه، ووضعُ الكتاب في الزاوية البعيدة يسارًا،
          وفي الوسط سطرُ التصفّح فوق رزمة الصفوف */
       if (!pub) return `<div class="cx-ftr2 chtools cx-srctools">${pkSrcHd(id, true)}${pkSrcMeta(id) && pkLnk.open[id] ? pkLnkHTML(id) : ''}</div>`
-        + `<div class="cx-ftc"><div class="cx-ftc__nav">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}<span class="cx-actind" data-actind>${esc(ind)}</span>${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>${pkActHl(id)}</div>`
+        + `<div class="cx-ftc">${pkActHl(id)}</div>`   /* بلا زرّي تقليب (طلبُ صاحب الموقع): التقليبُ من نصفَي مساحة الكتاب */
         + `<div class="cx-ftl2">${pkActMode()}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
-      return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
-        + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
+      return pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
         + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
@@ -9783,12 +9780,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation(); pkAddKnowFolder();
   }, true);
   /* ومؤشّرُ الصفحة في الخانة يتبع الكتاب */
-  const pkActInd = b => {
-    const sid = b && b.key ? String(b.key).replace(/^pksrc:/, '') : null;
-    if (sid && pkSrcCurOf(pkSrcBase(sid)) !== sid) return;   /* مؤشّرُ المصدر الملموس وحده */
-    const post = b && b.view && b.view.closest('.post'), el = post && post.querySelector('[data-actind]');
-    if (el && b.ind) el.textContent = b.ind.textContent;
-  };
   /* ===== ثلاثُ نقاطٍ تحت أيقونة الملخّص: كلُّ نقطةٍ طريقةُ عرض (شجريّ · بطاقيّ · جدوليّ) والذهبيّةُ الحاليّة (طلبُ صاحب الموقع)
      — والأيقونةُ نفسُها تبقى تُغلق المساحة. والنقطةُ زرٌّ بـ‎data-pkview‎ فيمرّ بمبدّل العرض القائم ===== */
   /* نقطتان فوق ونقطةٌ تحتهما، والضغطُ في أيّ موضعٍ منها ينقل إلى العرض التالي (طلبُ صاحب الموقع) — زرٌّ واحدٌ بـ‎data-pkview‎ التالي.
@@ -11116,6 +11107,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
         old.view.style.transform = '';
         old.view = view;
+        if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
         const moved = wantClosed !== !!old.closed || wantPos !== old.pos;
         if (moved) { if (old.leaf) bkLeafDrop(old); old.closed = wantClosed; old.pos = wantPos; }
@@ -24024,9 +24016,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     w.innerHTML = bkSkelHTML(k, b.ar);
     const ph = b.phEl = w.firstElementChild;
     ph.classList.add('bk-skel--over');
-    /* بمقاس الغلاف الذي سيرسمه المحرّك (‎MX=MY=1.04‎) فلا يقفز حين يذوب فوقه */
+    /* بمقاس الغلاف الذي سيرسمه المحرّك (‎BK_FR‎) فلا يقفز حين يذوب فوقه */
     const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH, cols = b.closed || b.one ? 1 : 2;
-    if (stW && stH) { const H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)); ph.firstElementChild.style.height = (H * ppu).toFixed(1) + 'px'; }
+    if (stW && stH) { const H = 1 / b.ar, ppu = Math.min(stH / (H * BK_FR.m), stW / (cols * BK_FR.m)); ph.firstElementChild.style.height = (H * ppu).toFixed(1) + 'px'; }
     b.stage.appendChild(ph);
     bkLoadPaint();
   }
@@ -24400,6 +24392,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
+    hlMkClose();   /* قائمتُه (الألوانُ والرقمُ والحذف) تذهب معه */
     save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
   /* ===== شريطُ الألسنة (ROADMAP-HL ق٤–٥ · كونسبت صاحب الموقع) =====
@@ -24725,6 +24718,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته */
   const BK_MX = 720;
+  /* إطارُ الكتاب في مساحته (طلبُ صاحب الموقع: أصغرُ قليلًا ونازلٌ تحت، وفوقه رقمُ الصفحات): ‏‎m‎ هامشُه (الكتابُ ‎1/m‎ من المساحة)
+     و‎lift‎ رفعُه عن الوسط بنسبة قامته (سالبٌ: ينزل). مصدرٌ واحدٌ للمحرّك وللهيكل ولمستطيل الفتحة فلا يفترق أحدُها عن الآخر */
+  const BK_FR = { m: 1.08, lift: -0.01 };
   /* الوضعُ الذي يمضي إليه الكتاب (ضغطاتٌ متتالية أثناء الحركة تُحسب منه لا ممّا كان) */
   const bk2Goal = b => b.mx ? (b.mxWant != null ? b.mxWant : b.mxGoal) : !!b.one;
   function bk2SetOne(b0, one) {
@@ -24746,10 +24742,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const g = b.gl;
     if (!g || g.dead || !g.morph || b.closed || bkReduce() || !b.stage.clientWidth) return bk2SwitchNow(b, one);
     b.mx = true; b.mxWant = null; b.mxGoal = one;
+    b.stage.classList.add('is-mx');   /* رقمُ الصفحات يغيب والكتابُ يتبدّل، ويعود فوقه في مكانه الجديد */
     if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     const fin = ng => {
-      b.mx = false; b.mxTo = null;
+      b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
       if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
       bk2Show(b);
       const w = b.mxWant; b.mxWant = null;
@@ -25053,11 +25050,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b),
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
-        zone: bkZone(b), armed: () => bkArmed(b),
+        zone: bkZone(b), zoneSkip: '.pk-blkh', armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShow(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
@@ -25110,6 +25107,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const src = b.stage.closest('.pk-src');
     return src || b.stage;
   }
+  /* دليلُ النصف الذي يُقلَّب منه (اختيارُ صاحب الموقع): خلفيّةُ النصف تتلوّن من طرفه وتتلاشى إلى الوسط — تحت لوحة الكتاب */
+  function bkZoneFx(b, side) {
+    const z = bkZone(b);
+    let o = z.querySelector(':scope > .bk-zi');
+    if (!o) { if (!side) return; o = document.createElement('div'); o.className = 'bk-zi'; o.setAttribute('aria-hidden', 'true'); o.innerHTML = '<i class="bk-zi__t l"></i><i class="bk-zi__t r"></i>'; z.prepend(o); }
+    o.classList.toggle('is-l', side === 'l'); o.classList.toggle('is-r', side === 'r');
+  }
   /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
   function bkArmed(b) {
     const post = b.stage.closest('.post.pk');
@@ -25123,15 +25127,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.stW = w0; b.stH = h0;
     const g = b.gl;
     if (g) {
+      if (g.setZone) g.setZone(bkZone(b));
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
       g.resize();
       /* تغيّر المقاس: طبقةُ النصّ تُعاد على المستطيل الجديد بعد أن يقف */
       bkTLHide(b); clearTimeout(b.tlT); b.tlT = setTimeout(() => { if (b.gl === g && g.settled) bkTLShow(b); }, 160);
     }
-    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎MX=MY=1.04‎، والكاميرا ترفع الكتابَ ‎1%‎) — ولو قبل تحميله،
+    /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎BK_FR‎) — ولو قبل تحميله،
        فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
-    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * 1.04), b.stW / (cols * 1.04));
-    const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * 0.51;
+    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * BK_FR.m), b.stW / (cols * BK_FR.m));
+    const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * (0.5 + BK_FR.lift);
+    b.stage.style.setProperty('--bk-top', y.toFixed(1) + 'px');   /* رقمُ الصفحات فوقه */
     b.pw = Math.floor(ppu); b.ph = Math.floor(h);
     Object.assign(b.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
     b.nav.style.width = Math.round(w) + 'px';
@@ -25145,9 +25151,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
     const A = bk2A(b), maxA = bk2MaxA(b);
     const d = bkSk(b);
-    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === d ? `${d + 1} / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    /* رقمٌ واحد: في الفتحة صفحتُها اليمنى (أوّلَ الكتاب باطنُ الغلاف، فأولى صفحاته) · الجزءُ يمينًا والكلُّ يسارًا (اتّجاهُ الصفحة) */
+    b.ind.textContent = b.closed ? T().bkCover : `${b.one || p !== d ? p : d + 1} / ${b.n}`;
+    b.stage.dataset.pgn = b.closed ? '' : b.ind.textContent;   /* رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — لا في التذييل، ولا شيءَ فوق الغلاف المغلق */
     if (b.onShow) b.onShow(b);
-    pkActInd(b);
     b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;
     b.view.querySelector('[data-bknav="-1"]').disabled = A <= 0;
     b.view.querySelector('[data-bkclose]').hidden = !!b.closed;

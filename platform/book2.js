@@ -163,11 +163,15 @@ export function createBook2(THREE, host, cfg) {
   const geo = new THREE.PlaneGeometry(1, 1, 48, Math.round(48 * AR));
   geo.setAttribute('aSheet', geo.attributes.uv.clone());
   const grain = grainTexture(THREE);
-  const solid = hex => { const c = new THREE.Color(hex); const t = new THREE.DataTexture(new Uint8Array([c.r * 255, c.g * 255, c.b * 255, 255].map(Math.round)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
+  /* لونٌ واحدٌ صورةً بكسلٍ واحد — بقيم sRGB نفسِها (كانت تُكتب خطّيّةً ثمّ تُفكّ sRGB فيغمق اللونُ مرّتين: باطنُ الغلاف بدا أسود) */
+  const solid = hex => { const h = new THREE.Color(hex).getHexString(); const t = new THREE.DataTexture(new Uint8Array([0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)).concat(255)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
   const blank = solid('#f6f1e6');
-  /* باطنُ الغلاف بلونه، وظاهرُ الغلاف الخلفيّ أغمقُ قليلًا */
+  /* ظاهرُ الغلاف الخلفيّ بلون الغلاف أغمقَ قليلًا */
   const coverC = new THREE.Color(cfg.cover || '#2c5e65'); coverC.convertSRGBToLinear();
-  const inside = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString());
+  /* باطنُ الغلاف ورقٌ فاتحٌ فيه لمسةٌ من لونه (اختيارُ صاحب الموقع: كان بلون الغلاف فيبدو أسود تحت الإضاءة) */
+  const mixHex = (a, b, k) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const x = p(a), y = p(b);
+    return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join(''); };   /* بالـsRGB كـ‎color-mix‎ في الكونسبت */
+  const inside = solid(mixHex('#f6f1e4', '#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString(), 0.16));
   const outsideBack = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').multiplyScalar(0.85).getHexString());
 
   let texW = 1024;
@@ -261,7 +265,8 @@ export function createBook2(THREE, host, cfg) {
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
   /* هامشُ الإطار: الكتابُ يملأ مساحتَه إلّا قليلًا (طلبُ صاحب الموقع) — ‏‎LIFT‎ رفعُه عن الوسط ليُرى ظلُّه تحته */
-  const MX = 1.04, MY = 1.04, DOLLY = 0.5, LIFT = 0.01;
+  /* ‏‎cfg.frame = { m, lift }‎ يأتي من الموقع (هيكلُ التحميل ومستطيلُ الفتحة يُحسبان به أيضًا) */
+  const MX = cfg.frame ? cfg.frame.m : 1.04, MY = MX, DOLLY = 0.5, LIFT = cfg.frame ? cfg.frame.lift : 0.01;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
   let camOpen = -1, camVh = 0;
@@ -426,35 +431,38 @@ export function createBook2(THREE, host, cfg) {
   }
 
   // ===== التفاعل =====
-  // المقبضُ مساحةُ الكتاب لا الكتاب (طلبُ صاحب الموقع): ما على يساره يتقدّم (كتابٌ عربيّ) وما على يمينه يرجع،
-  // والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
+  // المقبضُ مساحةُ الكتاب لا الكتاب (طلبُ صاحب الموقع): نصفُها الأيسرُ كلُّه — جنبَ الكتاب وفوقه وتحته — يتقدّم (كتابٌ عربيّ)
+  // والأيمنُ يرجع، والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
   // و‎cfg.armed()‎ أنّها المساحةُ المختارةُ التي يُعمل فيها: قبلها لا ترتفع ورقةٌ ولا تُسحب ·
   // السحبُ نسبيّ: ‎80%‎ من عرض الكتاب تقليبةٌ كاملة · ‎20%‎ أو رميةٌ سريعةٌ تُكمل · الضغطُ المطوّلُ يقلّب تلقائيًّا ويتسارع
-  const zone = cfg.zone || el;
+  let zone = cfg.zone || el;
   zone.style.touchAction = 'pan-y';
   const armed = () => !cfg.armed || cfg.armed();
+  /* أزرارُ المساحة وما يسمّيه الموقعُ (‎cfg.zoneSkip‎: رأسُها وأيقونتُها التي تُغلقها) ليست مقبضًا — لا تتلوّن ولا تُقلِّب */
+  const SKIP = 'button, a, input, textarea, select, [contenteditable="true"]' + (cfg.zoneSkip ? ', ' + cfg.zoneSkip : '');
+  const skip = e => e.target !== el && !!(e.target.closest && e.target.closest(SKIP));
   const at = e => {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    /* بقامة الكتاب (وشيءٍ فوقه وتحته) — وما فوقها رأسُ المساحة وما تحتها أزرارُه */
-    if (y < fit.y - fit.h * 0.06 || y > fit.y + fit.h * 1.06) return null;
     const yN = Math.max(-0.5, Math.min(0.5, (y - fit.y) / fit.h - 0.5));
-    if (x < fit.x) return { fwd: true, yN };
-    if (x > fit.x + fit.w) return { fwd: false, yN };
-    return A === 0 && y >= fit.y && y <= fit.y + fit.h ? { fwd: true, yN, cover: true } : null;
+    if (x >= fit.x && x <= fit.x + fit.w && y >= fit.y && y <= fit.y + fit.h) return A === 0 ? { fwd: true, yN, cover: true } : null;
+    return { fwd: x < fit.x + fit.w / 2, yN };
   };
   let drag = null, hold = null;
   const stopHold = () => { if (hold) { clearTimeout(hold.timer); hold = null; } };
-  let grab = false;   /* المؤشّرُ على مقبضٍ يُقلِّب (ولو لم ترتفع له ورقة: المطويّةُ وراء الكتاب) */
+  /* المؤشّرُ على مقبضٍ يُقلِّب (ولو لم ترتفع له ورقة: المطويّةُ وراء الكتاب) — ‏‎'l' | 'r'‎ نصفُه، و‎'c'‎ الغلافُ المغلق ·
+     ‏‎cfg.onZone(side)‎ يُخبر بالنصف الذي يُقلَّب منه الآن (أو ‎null‎) فيُرسَم دليلُه */
+  let grab = '';
+  const setGrab = v => { if (v === grab) return; grab = v; if (cfg.onZone) cfg.onZone(v === 'l' || v === 'r' ? v : null); };
   const setCursor = () => { zone.style.cursor = drag ? 'grabbing' : grab ? 'grab' : ''; };
   const onDown = e => {
     if (e.button !== 0) return;
     /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
-    if (e.target !== el && e.target.closest && e.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
+    if (skip(e)) return;
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
-    if (!g || locked() || !armed()) return;
+    if (!g || (g.cover ? locked() : mo) || !armed()) return;
     const dir = g.fwd ? 1 : -1;
     if (!turnable(dir)) return;
     const s = sheets[g.fwd ? A : A - 1];
@@ -471,15 +479,18 @@ export function createBook2(THREE, host, cfg) {
       hold.n++; hold.timer = setTimeout(tick, Math.max(150, 420 - 45 * hold.n));
     }, 450) };
   };
-  /* ‏‎cfg.locked‎: أداةُ تظليلٍ مختارة — لا تُقرأ الفأرةُ على الصفحة نيّةَ تقليبٍ أبدًا (لا رفعَ ولا سحبَ ولا عجلة)؛ التقليبُ من أزراره */
+  /* ‏‎cfg.locked‎: أداةُ تظليلٍ مختارة — لا تُقرأ الفأرةُ على **الصفحة** نيّةَ تقليبٍ (لا عجلةَ ولا نقرَ الغلاف). والمقبضُ حولها
+     خارجَها فيبقى يُقلِّب والأداةُ مختارة (كان القفلُ يُعطّله بعد كلّ تظليل، إذ تُختار الأداةُ معه) — إلّا والكتابُ يتبدّل وضعُه */
   const locked = () => !!mo || !!(cfg.locked && cfg.locked());
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
-      if (locked()) { if (hover !== -1 || grab) { hover = -1; grab = false; needs = true; setCursor(); } return; }
-      /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
-      const g = armed() && at(e), ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
-      if (h !== hover || ok !== grab) { hover = h; grab = ok; needs = true; setCursor(); }
+      if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
+      /* وفي الصفحة الواحدة لا ترتفع ورقةٌ بالتحويم (طلبُ صاحب الموقع): الكاميرا تتراجع مع كلّ ورقةٍ مرفوعة، فكانت الفأرةُ الباقيةُ
+         في مكانها بعد التقليب ترفع التاليةَ فيبدو كأنّها تنفتح ثمّ ترجع — يكفيها لونُ النصف */
+      const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && !ONE ? (g.fwd ? A : A - 1) : -1;
+      const gv = !ok ? '' : g.cover ? 'c' : g.fwd ? 'l' : 'r';
+      if (h !== hover || gv !== grab) { hover = h; setGrab(gv); needs = true; setCursor(); }
       return;
     }
     if (drag.auto) return;
@@ -502,7 +513,7 @@ export function createBook2(THREE, host, cfg) {
     if (!moved || gone >= 0.2 || flick) { A += fwd ? 1 : -1; launch(s, fwd ? 1 : 0, v); commit(); }
     else launch(s, base < 0.5 ? 0 : 1, v);
   };
-  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; grab = false; needs = true; setCursor(); } };
+  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked()) return;
@@ -511,14 +522,29 @@ export function createBook2(THREE, host, cfg) {
     wheelT = now; wheelAcc += e.deltaX;
     if (Math.abs(wheelAcc) > 60) { flip(wheelAcc < 0 ? 1 : -1); wheelAcc = 0; wheelT = now + 250; }
   };
-  const evs = [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['pointerleave', onLeave]];
+  /* ‏‎lostpointercapture‎: انقطع الإمساكُ (أُعيد رسمُ المساحة أثناء السحب) — يُتمّ السحبَ ولا تبقى ورقةٌ معلّقة */
+  const evs = [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['lostpointercapture', onUp], ['pointerleave', onLeave]];
   for (const [t, f] of evs) zone.addEventListener(t, f);
+  /* المساحةُ تُبنى من جديد مع كلّ رسمةٍ للقسم والكتابُ يُنقل إليها كما هو: المستمعون ينتقلون معه، وإلّا بقوا على القديمة
+     المنفصلة فتوقّف التقليبُ من حول الكتاب بعد أوّل رسمة */
+  function setZone(z) {
+    z = z || el;
+    if (z === zone || dead) return;
+    for (const [t, f] of evs) zone.removeEventListener(t, f);
+    if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
+    if (drag) { drag.s.drag = null; drag = null; stopHold(); }
+    hover = -1; setGrab(''); needs = true;
+    zone = z; zone.style.touchAction = 'pan-y';
+    for (const [t, f] of evs) zone.addEventListener(t, f);
+    setCursor();
+  }
   el.addEventListener('wheel', onWheel, { passive: false });
 
   function dispose() {
     if (dead) return; dead = true;
     cancelAnimationFrame(raf); stopHold();
     for (const [t, f] of evs) zone.removeEventListener(t, f);
+    setGrab('');
     if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
     pageTex.forEach(t => t.dispose()); pageTex.clear();
     [grain, blank, inside, outsideBack].forEach(t => t.dispose());
@@ -529,7 +555,7 @@ export function createBook2(THREE, host, cfg) {
   }
 
   return {
-    el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
+    el, flip, goTo, resize, setTheme, dispose, turnable, setZone, one: ONE,
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
     /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
        وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */
