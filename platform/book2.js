@@ -264,27 +264,39 @@ export function createBook2(THREE, host, cfg) {
     needs = true;
   }
   setTheme(cfg.theme);
-  /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
-  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.4, 1.3, 3.6).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  const BLOB = new THREE.Vector3(-0.06, 0.01, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
-  const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
-  /* قلبُه المعتم بمقاس الكتاب نفسِه (‎176/256 × 1.45‎) والتلاشي حوله إلى الخارج — كان أغلبُه تحت الكتاب فلا يُرى منه إلّا حافّةٌ باهتة */
-  { const c = blobCv.getContext('2d'); c.filter = 'blur(18px)'; c.fillStyle = '#000'; c.fillRect(40, 40, 176, 176); }
-  const blobT = new THREE.CanvasTexture(blobCv);
-  const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobT, color: '#000', transparent: true, opacity: 0, depthWrite: false }));
+  /* على الطاولة الظلُّ شريطٌ بسُمكٍ واحدٍ على حافّتَي الكتاب اليسرى والعليا (طلبُ صاحب الموقع) — الشمسُ من يمين الناظر وأمامه
+     فيقع ظلُّها هناك، والاتّجاهُ معرَّفٌ في إطار الشاشة ثمّ يُدار بدوران الكاميرا (‎AZ‎) */
+  const ZR = new THREE.Vector3(0, 0, 1);
+  /* إعداداتُ ظلّ الطاولة كلُّها في مكانٍ واحد (‏‎cfg.shadow‎ أو ‎setShadow‎ يغيّرها) — بإطار الشاشة: ‏‎x‎ يمينٌ و‎y‎ أعلى:
+     ‏‎sunX/sunY/sunZ‎ اتّجاهُ الشمس (يقع الظلُّ عكسه، و‎sunZ‎ أعلى ⇐ أقرب) · ‏‎offX/offY‎ إزاحةُ الظلّ الناعم ·
+     ‏‎margin‎ عرضُه حول الكتاب · ‏‎blur‎ نعومةُ حافّته · ‏‎softDark/softLight‎ و‎castDark/castLight‎ عتمةُ الناعم والمُلقى · ‏‎edge‎ حدّةُ المُلقى */
+  const SHD = Object.assign({ sunX: 2.4, sunY: -2.4, sunZ: 3.6, offX: -0.09, offY: 0.09, margin: 0.15, blur: 0.42,
+    softDark: 0.6, softLight: 0.36, castDark: 0.36, castLight: 0.16, edge: 4 }, cfg.shadow || {});
+  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(), BLOB = new THREE.Vector3();
+  const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ color: '#000', transparent: true, opacity: 0, depthWrite: false }));
   blob.renderOrder = -1; scene.add(blob);
+  /* الظلُّ الناعم بشكل الكتاب نفسِه: قلبُه بمقاسه وهامشُه متساوٍ من الجهات كلّها (فالشريطُ بسُمكٍ واحد يسارًا وأعلى) */
+  function blobTex() {
+    SUN1.set(SHD.sunX, SHD.sunY, SHD.sunZ).applyAxisAngle(ZR, -0.96);
+    BLOB.set(SHD.offX, SHD.offY, 0).applyAxisAngle(ZR, -0.96);
+    const BM = SHD.margin * W, bw = W * (1 + OV) + 2 * BM, bh = H * (1 + OV) + 2 * BM, ppu = 256 / bw;
+    const cv = document.createElement('canvas'); cv.width = 256; cv.height = Math.round(bh * ppu);
+    const c = cv.getContext('2d'); c.filter = `blur(${Math.max(0, BM * SHD.blur * ppu).toFixed(1)}px)`; c.fillStyle = '#000';
+    const m = BM * 0.55 * ppu; c.fillRect(m, m, cv.width - 2 * m, cv.height - 2 * m);
+    if (blob.material.map) blob.material.map.dispose();
+    blob.material.map = new THREE.CanvasTexture(cv); blob.material.needsUpdate = true; blob.scale.set(bw, bh, 1);
+  }
   function tableLight(e) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
+    if (!blob.material.map) blobTex();
     blob.visible = e < 1;
-    blob.material.opacity = (curTheme === 'dark' ? 0.4 : 0.24) * (1 - e) * (1 - e);
-    blob.scale.set(W * (1 + OV) * 1.8, H * (1 + OV) * 2.05, 1);
-    blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
+    blob.material.opacity = (curTheme === 'dark' ? SHD.softDark : SHD.softLight) * (1 - e) * (1 - e);
+    blob.position.set(BLOB.x, BLOB.y, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
-    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.36 : 0.16) - L.ground) * (1 - e);
-    /* ظلُّ الشمس المائلة على الطاولة حادٌّ قليلًا (التنعيمُ الواسع يرسمه نسخًا متراكبةً: خطوط) — النعومةُ من الظلّ المضبَّب تحته */
-    sun.shadow.radius = 4 + 8 * e;
+    ground.material.opacity = L.ground + ((curTheme === 'dark' ? SHD.castDark : SHD.castLight) - L.ground) * (1 - e);
+    /* ظلُّ الشمس المائلة على الطاولة حادٌّ قليلًا (التنعيمُ الواسع يرسمه نسخًا متراكبةً: خطوط) — النعومةُ من الظلّ الناعم تحته */
+    sun.shadow.radius = SHD.edge + (12 - SHD.edge) * e;
   }
 
   sheets.forEach(s => { s.p = s.target = s.i < A ? 1 : 0; });
@@ -749,6 +761,11 @@ export function createBook2(THREE, host, cfg) {
     if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
     pageTex.forEach(t => t.dispose()); pageTex.clear();
     [grain, blank, inside, outsideBack].forEach(t => t.dispose());
+    /* الطاولة: الظلُّ والغلافُ الصلب */
+    if (blob.material.map) blob.material.map.dispose();
+    blob.material.dispose(); blob.geometry.dispose();
+    caseG.traverse(o => { if (o.isMesh) { o.geometry.dispose(); (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose()); } });
+    edgeH.dispose(); edgeV.dispose();
     for (const s of sheets) for (const mh of s.meshes) { mh.material.dispose(); mh.customDepthMaterial.dispose(); }
     geo.dispose(); ground.geometry.dispose(); ground.material.dispose();
     renderer.dispose(); renderer.forceContextLoss();
@@ -757,6 +774,8 @@ export function createBook2(THREE, host, cfg) {
 
   return {
     el, flip, goTo, resize, setTheme, dispose, turnable, setZone, one: ONE,
+    /* يغيّر إعدادات ظلّ الطاولة ويُعاد رسمُه (أداةُ الضبط) */
+    setShadow(o) { Object.assign(SHD, o || {}); blobTex(); tlK = -1; tableLight(smooth(tv)); needs = true; },
     /* يرفعه من الطاولة ويفتحه (‎open‎) أو يُغلقه وينزله إليها (‎rest‎) */
     open() { if (tv < 1 || ta) table(1); },
     rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
