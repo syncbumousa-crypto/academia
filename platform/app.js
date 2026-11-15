@@ -10818,8 +10818,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
       /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
-      const skel = s => { const c = (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover || '#2c5e65';
-        return `<div class="bk-skel" role="status" aria-label="${esc(T().chLoading)}" style="--bk-cover:${esc(c)}"><i></i></div>`; };
+      const skel = s => bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar);
       const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
         + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
@@ -11119,9 +11118,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     document.querySelectorAll('#cm-body [data-pksrcview]').forEach(async view => {
       const id = view.dataset.pkid, key = pkSrcKey(id), meta = pkSrcMeta(id);
       let doc;
+      if (!(pkSrcBk[id] && pkSrcBk[id].el && pkSrcBk[id].el.isConnected)) bkLoadSet(key, 8, 42);
       try { doc = await chPdfOpen(key); } catch (e) { doc = undefined; }
       if (!view.isConnected) return;
-      if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      bkLoadSet(key, 45, 62);
       if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
@@ -24035,28 +24036,70 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويذوب حين يرسم الكتابُ صفحاتِه */
   function bkPhShow(b) {
     if (b.phEl && b.phEl.isConnected) return;
-    const ph = b.phEl = document.createElement('div');
-    ph.className = 'bk2-ph' + (b.closed ? ' is-closed' : ''); ph.setAttribute('aria-hidden', 'true');
-    ph.style.setProperty('--ar', b.ar); ph.style.setProperty('--bk-cover', b.cover || '#2c5e65');
-    const ks = b.closed ? ['cover'] : b.one ? [Math.max(1, b.pos)] : [b.pos, b.pos + 1];
-    ks.forEach(k => {
-      const pg = document.createElement('i'); pg.className = 'bk2-ph__pg' + (k === 'cover' ? ' is-cover' : k < 1 ? ' is-inside' : ''); ph.appendChild(pg);
-      if (k === 'cover' || (k >= 1 && k <= b.n)) bk2Tex(b, k, 360).then(cv => { if (b.phEl !== ph || !cv) return; cv.className = 'bk2-ph__img'; pg.appendChild(cv); }).catch(() => {});
-    });
-    /* بمستطيل المحرّك نفسِه (‎MX=MY=1.04‎ ورفعُ ‎1%‎): المغلقُ غلافٌ وحده تقترب منه الكاميرا، والمفتوحُ فتحتُه — فلا يقفز حين يذوب */
-    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH;
-    if (stW && stH) {
-      const cols = ks.length, H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)), w = cols * ppu, h = H * ppu;
-      Object.assign(ph.style, { inset: 'auto', left: (stW / 2 - w / 2) + 'px', top: (stH / 2 - h * 0.51) + 'px', width: w + 'px', height: h + 'px' });
-    }
+    /* الهيكلُ نفسُه يبقى فوق الكتاب حتى يرسم المحرّكُ صفحاتِه — والحلقةُ تكمل من حيث وصلت */
+    const k = b.key || '';
+    bkLoadSet(k, 62, 88);
+    const w = document.createElement('div');
+    w.innerHTML = bkSkelHTML(k, b.ar);
+    const ph = b.phEl = w.firstElementChild;
+    ph.classList.add('bk-skel--over');
+    /* بمقاس الغلاف الذي سيرسمه المحرّك (‎MX=MY=1.04‎) فلا يقفز حين يذوب فوقه */
+    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH, cols = b.closed || b.one ? 1 : 2;
+    if (stW && stH) { const H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)); ph.firstElementChild.style.height = (H * ppu).toFixed(1) + 'px'; }
     b.stage.appendChild(ph);
+    bkLoadPaint();
   }
   function bkPhHide(b) {
     const ph = b.phEl; if (!ph) return;
     b.phEl = null;
-    if (bkReduce()) { ph.remove(); return; }
-    ph.style.opacity = '0';
-    setTimeout(() => ph.remove(), 260);
+    const k = b.key || '';
+    bkLoadSet(k, 100, 100);
+    if (bkReduce()) { ph.remove(); bkLoadEnd(k); return; }
+    /* تكتمل الحلقةُ، ثمّ تهدأ الصفحاتُ وتذوب الحلقة، ويظهر الغلافُ بتلاشٍ مع رفعةٍ خفيفة (اختيارُ صاحب الموقع) */
+    setTimeout(() => {
+      ph.classList.add('is-done');
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 560, delay: 160, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
+      if (b.stage && b.stage.isConnected) b.stage.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 160, easing: 'ease-out' });
+    }, 160);
+  }
+  /* ===== هيكلُ التحميل «صفحاتٌ تتقلّب» (اختيارُ صاحب الموقع) =====
+     كتابٌ بلون الورق صفحاتُه الفارغةُ تتقلّب، وعلى أولى صفحاته حلقةٌ تمتلئ وفي وسطها النسبة. النسبةُ تمشي مع مراحل التحميل الفعليّة
+     (قراءةُ الملفّ ← فتحُه ← مكتبةُ الكتاب ← رسمُ صفحاته)، وتزحف بين المرحلة والتي تليها حتى لا تقف — ولا تبلغ حدَّ المرحلة قبل أن تتمّ */
+  const bkLoad = {};
+  let bkLoadRaf = 0;
+  function bkSkelHTML(k, ar) {
+    return `<div class="bk-skel" data-bkl="${esc(k)}" role="status" aria-label="${esc(T().chLoading)}" style="--ar:${(+ar > 0 ? +ar : 1 / Math.SQRT2).toFixed(4)}">`
+      + `<div class="bk-skel__bk"><span class="bk-skel__edge"></span><span class="bk-skel__pgs"><b></b><b></b><b></b><b></b></span>`
+      + `<span class="bk-skel__ring"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="tr" cx="32" cy="32" r="27"/><circle class="pr" cx="32" cy="32" r="27"/></svg><em>${Math.round((bkLoad[k] || {}).shown || 0)}٪</em></span></div></div>`;
+  }
+  function bkLoadSet(k, tgt, cap) {
+    const L = bkLoad[k] || (bkLoad[k] = { shown: 0, tgt: 0, cap: 0 });
+    if (tgt >= L.tgt) { L.tgt = tgt; L.cap = Math.max(cap, tgt); }
+    if (!bkLoadRaf) bkLoadRaf = requestAnimationFrame(bkLoadTick);
+  }
+  const bkLoadEnd = k => { delete bkLoad[k]; };
+  function bkLoadTick() {
+    bkLoadRaf = 0;
+    let live = false;
+    for (const k in bkLoad) {
+      const L = bkLoad[k];
+      if (L.tgt < L.cap - 1) L.tgt += (L.cap - 1 - L.tgt) * .006;   /* زحفٌ بطيءٌ نحو حدّ المرحلة */
+      L.shown += (L.tgt - L.shown) * (L.tgt >= 100 ? .25 : .08);
+      if (L.tgt >= 100 && L.shown > 99.5) L.shown = 100;
+      if (L.shown < 100) live = true;
+    }
+    bkLoadPaint();
+    if (live && document.querySelector('#cm-body .bk-skel')) bkLoadRaf = requestAnimationFrame(bkLoadTick);
+  }
+  function bkLoadPaint() {
+    document.querySelectorAll('#cm-body .bk-skel[data-bkl]').forEach(el => {
+      const L = bkLoad[el.dataset.bkl]; if (!L) return;
+      const v = Math.round(L.shown);
+      if (el._v === v) return; el._v = v;
+      const pr = el.querySelector('.pr'), em = el.querySelector('em');
+      if (pr) pr.style.strokeDashoffset = (169.65 * (1 - L.shown / 100)).toFixed(2);
+      if (em) em.textContent = v + '٪';
+    });
   }
   /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
   function bk2Prefetch() {
@@ -24867,6 +24910,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
       if (b.gl && !b.gl.dead) return;
+      bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
         n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one,
