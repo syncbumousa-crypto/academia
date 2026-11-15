@@ -18431,9 +18431,8 @@ html[data-theme="dark"] .cx-hltool { background: #2c373c; box-shadow: 0 0 0 .8px
 .hl-box .bk-tl span, .hl-box .bk-tl .bk-tl__ln { cursor: crosshair; }
 .bk-tl .bk-boxsel { position: absolute; display: block; pointer-events: none; background: var(--c); mix-blend-mode: multiply; opacity: .75;
   outline: 1.5px dashed rgba(20, 35, 63, .55); outline-offset: -1px; }
-/* ===== التحريرُ قبل لمس أيّ مساحة (طلبُ صاحب الموقع): لا تذييلَ ولا خطَّ طيِّه — يظهران بحركة أوّلَ لمس ===== */
-.pk--edit.pk--ftnone .vt-foot { max-height: 0; min-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; opacity: 0; visibility: hidden; overflow: hidden; }
-.pk--edit.pk--ftnone .pk-ftline { max-height: 0; margin-top: 0; margin-bottom: 0; opacity: 0; visibility: hidden; overflow: hidden; pointer-events: none; }
-:is(.pk--max, .pk--frame).pk--edit.pk--ftnone .post-ytmain > .pk-split { margin-bottom: 0; }
-.pk--ftanim .pk-ftline { transition: max-height .22s ease, opacity .18s ease, margin .22s ease, visibility .22s; }
-.pk--edit .pk-ftline { max-height: 40px; }   /* سقفٌ يكفيه لتنساب منه حركةُ الظهور */
+/* ===== التحريرُ قبل لمس أيّ مساحة (طلبُ صاحب الموقع): لا يُرى تذييلٌ ولا خطُّ طيِّه، ومكانُهما محجوزٌ =====
+   فإذا لُمست مساحةٌ ظهرا في مكانهما بحركة ولم تتقلّص المساحاتُ فوقهما. وقامةُ التذييل واحدةٌ في المساحات الثلاث فلا تقفز حين تتبدّل */
+.pk--edit.pk--ftnone .vt-foot, .pk--edit.pk--ftnone .pk-ftline { opacity: 0; visibility: hidden; transform: translateY(10px); pointer-events: none; }
+.pk--ftanim .vt-foot, .pk--ftanim .pk-ftline { transition: max-height .22s ease, opacity .2s ease, transform .24s cubic-bezier(.2, .8, .2, 1), padding .22s ease, margin .22s ease, visibility .22s; }
+:is(.pk--max, .pk--frame).pk--edit:not(.pk--ftdn) .vt-foot { min-height: 58px; }
