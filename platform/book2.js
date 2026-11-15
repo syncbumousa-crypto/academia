@@ -426,8 +426,8 @@ export function createBook2(THREE, host, cfg) {
   }
 
   // ===== التفاعل =====
-  // المقبضُ مساحةُ الكتاب لا الكتاب (طلبُ صاحب الموقع): ما على يساره يتقدّم (كتابٌ عربيّ) وما على يمينه يرجع،
-  // والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
+  // المقبضُ مساحةُ الكتاب لا الكتاب (طلبُ صاحب الموقع): نصفُها الأيسرُ كلُّه — جنبَ الكتاب وفوقه وتحته — يتقدّم (كتابٌ عربيّ)
+  // والأيمنُ يرجع، والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
   // و‎cfg.armed()‎ أنّها المساحةُ المختارةُ التي يُعمل فيها: قبلها لا ترتفع ورقةٌ ولا تُسحب ·
   // السحبُ نسبيّ: ‎80%‎ من عرض الكتاب تقليبةٌ كاملة · ‎20%‎ أو رميةٌ سريعةٌ تُكمل · الضغطُ المطوّلُ يقلّب تلقائيًّا ويتسارع
   const zone = cfg.zone || el;
@@ -435,16 +435,16 @@ export function createBook2(THREE, host, cfg) {
   const armed = () => !cfg.armed || cfg.armed();
   const at = e => {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    /* بقامة الكتاب (وشيءٍ فوقه وتحته) — وما فوقها رأسُ المساحة وما تحتها أزرارُه */
-    if (y < fit.y - fit.h * 0.06 || y > fit.y + fit.h * 1.06) return null;
     const yN = Math.max(-0.5, Math.min(0.5, (y - fit.y) / fit.h - 0.5));
-    if (x < fit.x) return { fwd: true, yN };
-    if (x > fit.x + fit.w) return { fwd: false, yN };
-    return A === 0 && y >= fit.y && y <= fit.y + fit.h ? { fwd: true, yN, cover: true } : null;
+    if (x >= fit.x && x <= fit.x + fit.w && y >= fit.y && y <= fit.y + fit.h) return A === 0 ? { fwd: true, yN, cover: true } : null;
+    return { fwd: x < fit.x + fit.w / 2, yN };
   };
   let drag = null, hold = null;
   const stopHold = () => { if (hold) { clearTimeout(hold.timer); hold = null; } };
-  let grab = false;   /* المؤشّرُ على مقبضٍ يُقلِّب (ولو لم ترتفع له ورقة: المطويّةُ وراء الكتاب) */
+  /* المؤشّرُ على مقبضٍ يُقلِّب (ولو لم ترتفع له ورقة: المطويّةُ وراء الكتاب) — ‏‎'l' | 'r'‎ نصفُه، و‎'c'‎ الغلافُ المغلق ·
+     ‏‎cfg.onZone(side)‎ يُخبر بالنصف الذي يُقلَّب منه الآن (أو ‎null‎) فيُرسَم دليلُه */
+  let grab = '';
+  const setGrab = v => { if (v === grab) return; grab = v; if (cfg.onZone) cfg.onZone(v === 'l' || v === 'r' ? v : null); };
   const setCursor = () => { zone.style.cursor = drag ? 'grabbing' : grab ? 'grab' : ''; };
   const onDown = e => {
     if (e.button !== 0) return;
@@ -476,10 +476,11 @@ export function createBook2(THREE, host, cfg) {
   const onMove = e => {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
-      if (locked()) { if (hover !== -1 || grab) { hover = -1; grab = false; needs = true; setCursor(); } return; }
+      if (locked()) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
       /* والمطويّةُ وراء الكتاب لا تُرفع بالتحويم: لا يُرى منها شيء */
       const g = armed() && at(e), ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && (g.fwd || !ONE) ? (g.fwd ? A : A - 1) : -1;
-      if (h !== hover || ok !== grab) { hover = h; grab = ok; needs = true; setCursor(); }
+      const gv = !ok ? '' : g.cover ? 'c' : g.fwd ? 'l' : 'r';
+      if (h !== hover || gv !== grab) { hover = h; setGrab(gv); needs = true; setCursor(); }
       return;
     }
     if (drag.auto) return;
@@ -502,7 +503,7 @@ export function createBook2(THREE, host, cfg) {
     if (!moved || gone >= 0.2 || flick) { A += fwd ? 1 : -1; launch(s, fwd ? 1 : 0, v); commit(); }
     else launch(s, base < 0.5 ? 0 : 1, v);
   };
-  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; grab = false; needs = true; setCursor(); } };
+  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked()) return;
@@ -519,6 +520,7 @@ export function createBook2(THREE, host, cfg) {
     if (dead) return; dead = true;
     cancelAnimationFrame(raf); stopHold();
     for (const [t, f] of evs) zone.removeEventListener(t, f);
+    setGrab('');
     if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
     pageTex.forEach(t => t.dispose()); pageTex.clear();
     [grain, blank, inside, outsideBack].forEach(t => t.dispose());
