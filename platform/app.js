@@ -11442,9 +11442,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       shadesF.push(sf.lastElementChild); shadesB.push(sb.lastElementChild);
     }
     let W = 400, SW = 400 / NS;
-    /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة (المكبَّرة)، وحدٌّ أقصى ‎440‎ */
+    /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
-      const fill = !!host.closest('.pk--max'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
+      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"]'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
       const s = Math.max(160, Math.min(440, w * 0.84, h * 0.84 - 30));
       stage.style.width = stage.style.height = s + 'px';
