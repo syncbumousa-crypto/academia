@@ -231,8 +231,11 @@ export function createBook2(THREE, host, cfg) {
   function retex(w) {
     if (Math.abs(w - texW) / texW < 0.3) return;
     texW = w;
-    pageTex.forEach(t => t.dispose()); pageTex.clear();
-    keepNear();
+    /* الصورةُ القديمةُ تبقى حتى تجهز الجديدة — لا تسودّ الصفحاتُ وهي تُرسم من جديد */
+    pageTex.forEach((t, k) => Promise.resolve(cfg.tex(k, w)).then(cv => {
+      if (dead || !cv || pageTex.get(k) !== t) return;
+      t.image = cv; t.needsUpdate = true; needs = true;
+    }).catch(() => {}));
   }
 
   function setTheme(th) {
@@ -255,7 +258,7 @@ export function createBook2(THREE, host, cfg) {
   const MX = 1.04, MY = 1.04, DOLLY = 0.5, LIFT = 0.01;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
-  let camOpen = -1;
+  let camOpen = -1, camVh = 0;
   function frameCam() {
     /* والصفحةُ الواحدة عرضُها ورقةٌ — والكعبُ على حافّة الإطار، فإذا طُويت ورقةٌ تراجعت الكاميرا قليلًا نحو الكعب
        (يبقى حرفُ الصفحة الأيسرُ مكانه) فيُرى التفافُها حوله إلى ما وراء الكتاب، ثمّ تعود */
@@ -263,11 +266,13 @@ export function createBook2(THREE, host, cfg) {
     if (mo) o = 2 + mo.k;   /* ما يُرى عرضُه ‎(2−k)W‎ ووسطُه الكعبُ بعد إزاحة الكتاب */
     else if (ONE) { o = 0; for (const s of sheets) if (s.p > 1e-3 && s.p < 1 - 1e-3) o = Math.max(o, Math.sin(s.p * Math.PI)); }
     else o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
-    if (Math.abs(o - camOpen) < 1e-4) return false;
-    camOpen = o;
+    /* في التبدُّل اللوحةُ ثابتةُ المقاس والكتابُ يُحجَّم على المساحة التي تتغيّر قامتُها حولها (‎vh‎) */
+    const vh = mo && mo.vh ? mo.vh : ch;
+    if (Math.abs(o - camOpen) < 1e-4 && vh === camVh) return false;
+    camOpen = o; camVh = vh;
     const tn = Math.tan(camera.fov * Math.PI / 360);
     const span = mo ? W * (2 - mo.k) : ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = mo || !ONE ? 0 : W * DOLLY * o / 2;
-    const dist = Math.max(H * MY / 2 / tn, span * MX / 2 / tn / camera.aspect);
+    const dist = ch / (2 * tn * Math.min(vh / (H * MY), cw / (span * MX)));
     /* مستوى القرب والبعد يلفّان الكتابَ وحده (ورقةٌ تقف نحو الكاميرا تبلغ عرضَها، والمطويّةُ وراءه كذلك): دقّةُ العمق
        تتوزّع على ما بينهما. كانا ‎0.1 · 20‎ فتقاربت الأوراقُ المتراصّة عند بطاقات العمق الخشنة (‎16bit‎ في هواتفَ كثيرة)
        فغلبت الورقةُ التي تحتُ التي فوقها */
@@ -280,6 +285,7 @@ export function createBook2(THREE, host, cfg) {
     return true;
   }
   function resize() {
+    if (mo && mo.box) return;   /* التبدُّلُ جارٍ: لا تُعاد اللوحةُ كلَّ إطار (ثقيلٌ ويمسحها) — تُقاس بعده */
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
     if (w === cw && h === ch) return;
     cw = w; ch = h;
@@ -308,8 +314,14 @@ export function createBook2(THREE, host, cfg) {
     let moving = false, active = null;
     if (mo && mo.a) {
       const q = Math.min(1, Math.max(0, (now - mo.a.t0) / mo.a.dur));
-      mo.k = mo.a.from + (mo.a.to - mo.a.from) * cosE(q); moving = true;
-      if (q >= 1) { const r = mo.a.res; mo.k = mo.a.to; mo.a = null; if (mo.k === 0) mo = null; r(); }
+      const e = cosE(q);
+      mo.k = mo.a.from + (mo.a.to - mo.a.from) * e; moving = true;
+      if (mo.box) mo.vh = mo.box.h0 + (mo.box.h1 - mo.box.h0) * e;
+      if (q >= 1) {
+        const r = mo.a.res; mo.k = mo.a.to; mo.a = null;
+        if (mo.k === 0) { mo = null; el.style.top = el.style.marginTop = ''; resize(); }
+        r();
+      }
     }
     for (const s of sheets) if (s.drag != null || s.anim) { if (!active || s.drag != null) active = s; }
     for (const s of sheets) {
@@ -514,10 +526,19 @@ export function createBook2(THREE, host, cfg) {
   return {
     el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
-    morph(side, to, dur = 700) {
+    /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
+       وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */
+    morph(side, to, dur = 700, box) {
       if (ONE || dead) return Promise.resolve();
       if (!mo) { if (!to) return Promise.resolve(); mo = { side: side === 'R' ? 'R' : 'L', k: 0, a: null }; }
       hover = -1; needs = true;
+      if (box && box.h0 > 0 && box.h1 > 0) {
+        mo.box = box; mo.vh = box.h0;
+        const hc = Math.max(ch, box.h0, box.h1);
+        if (hc !== ch) { ch = hc; renderer.setSize(cw, ch, false); el.style.height = ch + 'px'; camera.aspect = cw / ch; }
+        el.style.top = '50%'; el.style.marginTop = -ch / 2 + 'px';
+        camOpen = -1;
+      }
       if (mo.a) mo.a.res();
       return new Promise(res => { mo.a = { from: mo.k, to: to ? 1 : 0, t0: performance.now(), dur: Math.max(1, dur), res }; });
     },

@@ -11237,8 +11237,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (Math.abs(h - cur) < 3) return;
       if (cur && !bkReduce()) {
         sp.style.transitionDuration = dur ? dur + 'ms' : '';
+        sp.style.transitionTimingFunction = dur ? 'cubic-bezier(.37, 0, .63, 1)' : '';   /* منحنى حركة الكتاب نفسُه */
         sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT);
-        sp.pkHT = setTimeout(() => { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = ''; }, (dur || 380) + 40);
+        sp.pkHT = setTimeout(() => { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = sp.style.transitionTimingFunction = ''; }, (dur || 380) + 40);
       }
       sp.style.setProperty('--pk-h', h + 'px');
     });
@@ -24744,12 +24745,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     view.querySelectorAll('[data-bknav]').forEach(btn => btn.addEventListener('click', () => step(+btn.dataset.bknav)));
     view.querySelector('[data-bkclose]').addEventListener('click', () => turnTo(0));
-    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !b.one));
+    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !bk2Goal(b)));
     bk2Layout(b);
     bk2Engine(b);
   }
   /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته */
   const BK_MX = 720;
+  /* الوضعُ الذي يمضي إليه الكتاب (ضغطاتٌ متتالية أثناء الحركة تُحسب منه لا ممّا كان) */
+  const bk2Goal = b => b.mx ? (b.mxWant != null ? b.mxWant : b.mxGoal) : !!b.one;
   function bk2SetOne(b0, one) {
     one = !!one; bk2OneSet(one);
     bkModeSync();
@@ -24768,7 +24771,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bk2Switch(b, one) {
     const g = b.gl;
     if (!g || g.dead || !g.morph || b.closed || bkReduce() || !b.stage.clientWidth) return bk2SwitchNow(b, one);
-    b.mx = true; b.mxWant = null;
+    b.mx = true; b.mxWant = null; b.mxGoal = one;
     if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     const fin = ng => {
@@ -24783,10 +24786,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* تبقى اليسرى (إن كانت صفحةً) وتنطوي اليمنى — وفي آخر الكتاب تبقى اليمنى */
       /* والفتحةُ التي انفتحت من صفحةٍ ولم تُقلَّب بعدُ تعود إلى تلك الصفحة نفسِها */
       const A = g.A, bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n ? 'L' : 'R';
-      b.mxTo = true; pkSrcHFit(BK_MX);
-      g.morph(side, 1, BK_MX).then(() => {
+      b.mxTo = true;
+      g.morph(side, 1, BK_MX, bkMxH(b)).then(() => {
         b.one = b.single = true; b.pos = side === 'L' ? 2 * A - 1 : 2 * (A - 1);
-        bk2Swap(b, g, null, 140).then(fin);
+        bk2Swap(b, g, null).then(fin);
       });
     } else {
       /* الصفحةُ الفرديّةُ يسرى الفتحة فتنفتح اليمنى من ورائها، والزوجيّةُ يمناها فتنفتح اليسرى */
@@ -24794,21 +24797,35 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       b.mxTo = true;   /* القامةُ تبقى حتى يبدأ الانفتاح */
       b.mxBack = { A, side };
       b.one = b.single = false; b.pos = 2 * (A - 1);
-      bk2Swap(b, g, side, 90).then(ng => {
-        b.mxTo = false; pkSrcHFit(BK_MX);
-        return ng.morph(side, 0, BK_MX);
+      bk2Swap(b, g, side).then(ng => {
+        b.mxTo = false;
+        return ng.morph(side, 0, BK_MX, bkMxH(b));
       }).then(fin);
     }
   }
-  /* محرّكٌ جديدٌ بالوضع الحاليّ يُبنى مخفيًّا، ثمّ يظهر فوق القديم في ‎fade‎ ميلي ثانية ويُطفأ القديم */
-  function bk2Swap(b, old, morph, fade) {
+  /* القامةُ تنتقل الآن بمدّة الحركة، ويُعطى المحرّكُ قامةَ المساحة قبلها وبعدها */
+  function bkMxH(b) {
+    const sp = b.stage.closest('.pk-split'), h0 = b.stage.clientHeight;
+    const v = () => sp ? parseFloat(sp.style.getPropertyValue('--pk-h')) || 0 : 0, p0 = v();
+    pkSrcHFit(BK_MX);
+    const p1 = v();
+    return { h0, h1: p0 && p1 ? Math.max(1, h0 + p1 - p0) : h0 };
+  }
+  /* تبديلُ المحرّك خفيف: لقطةٌ ثابتةٌ من القديم تغطّيه، ويُطفأ قبل أن يُبنى الجديد (سياقُ رسمٍ واحدٌ لا اثنان)،
+     ثمّ تذوب اللقطةُ حين يرسم الجديدُ الصورةَ نفسَها */
+  function bk2Swap(b, old, morph) {
     return new Promise(res => {
-      b.gl = null;
+      const sh = document.createElement('canvas');
+      try { old.snapshot(sh); } catch (e) {}
+      Object.assign(sh.style, { position: 'absolute', left: old.el.offsetLeft + 'px', top: old.el.offsetTop + 'px', width: old.el.style.width, height: old.el.style.height, pointerEvents: 'none', zIndex: 2 });
+      b.stage.appendChild(sh);
+      old.dispose(); b.gl = null;
       bk2Engine(b, {
         quiet: true, morph: morph || undefined,
         onReady: ng => {
-          const show = () => { ng.el.style.opacity = ''; old.dispose(); res(ng); };
-          ng.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: fade, easing: 'ease-out' }).finished.then(show, show);
+          ng.el.style.opacity = '';
+          const end = () => { sh.remove(); res(ng); };
+          sh.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 110, easing: 'ease-out' }).finished.then(end, end);
         },
       });
     });
