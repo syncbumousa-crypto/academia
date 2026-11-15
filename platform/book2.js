@@ -134,6 +134,14 @@ export function createBook2(THREE, host, cfg) {
      أو ينفتح من ورائه وهي تبتعد. ‏‎side‎ النصفُ الذي يبقى: ‏‎L‎ اليسرى (تُطوى كومةُ اليمين) و‎R‎ اليمنى (تُطوى كومةُ اليسار) ·
      ‏‎k‎ ‎0‎ فتحةٌ تامّة و‎1‎ مطويّةٌ — ‏‎cfg.morph‎ يبدأ المحرّكُ مطويًّا لينفتح أمامها */
   let mo = !ONE && cfg.morph ? { side: cfg.morph === 'R' ? 'R' : 'L', k: 1, a: null } : null;
+  /* ===== على الطاولة (طلبُ صاحب الموقع) =====
+     ‏‎cfg.rest‎: الكتابُ المغلقُ موضوعٌ على طاولةٍ تُرى من جانبٍ مائل، بسُمكه وحوافّ أوراقه وظلّه. نقرُه يرفعه وتدور الكاميرا
+     فوقه وينفتح غلافُه — والعودةُ إلى الغلاف تُنزله إليها. ‏‎tv‎ ‎0‎ الطاولة و‎1‎ القراءة (الكاميرا فوق الكتاب كما كانت)،
+     وكلُّ ما بينهما مزيجٌ من الوضعين فلا يتبدّل شيءٌ بآخر */
+  let tv = cfg.rest && A === 0 ? 0 : 1;
+  let ta = null, tRise = 0, tHov = 0, tHovT = 0, tAfter = false;
+  /* وفي الصفحة الواحدة كلُّ صفحةٍ ورقة: نصفُ السماكة، فلا يتضاعف سُمكُ الكتاب */
+  const STACK = ONE ? 0.0008 : 0.0016;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
@@ -167,11 +175,9 @@ export function createBook2(THREE, host, cfg) {
   const solid = hex => { const h = new THREE.Color(hex).getHexString(); const t = new THREE.DataTexture(new Uint8Array([0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)).concat(255)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
   const blank = solid('#f6f1e6');
   /* ظاهرُ الغلاف الخلفيّ بلون الغلاف أغمقَ قليلًا */
-  const coverC = new THREE.Color(cfg.cover || '#2c5e65'); coverC.convertSRGBToLinear();
-  /* باطنُ الغلاف ورقٌ فاتحٌ فيه لمسةٌ من لونه (اختيارُ صاحب الموقع: كان بلون الغلاف فيبدو أسود تحت الإضاءة) */
-  const mixHex = (a, b, k) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const x = p(a), y = p(b);
-    return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join(''); };   /* بالـsRGB كـ‎color-mix‎ في الكونسبت */
-  const inside = solid(mixHex('#f6f1e4', '#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString(), 0.16));
+  const coverC = new THREE.Color(cfg.cover || '#2c5e65');   /* لونُ اللوحين والكعب (تحويلُ sRGB يجري عند القراءة) */
+  /* باطنُ الغلاف بلونه الخارجيّ نفسِه (طلبُ صاحب الموقع) — صار يُرى بلونه بعد إصلاح ‎solid‎ (كان يغمق مرّتين فبدا أسود) */
+  const inside = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString());
   const outsideBack = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').multiplyScalar(0.85).getHexString());
 
   let texW = 1024;
@@ -248,18 +254,110 @@ export function createBook2(THREE, host, cfg) {
     }).catch(() => {}));
   }
 
+  let curTheme = 'light', tlK = -1;
   function setTheme(th) {
     const L = LIGHTS[th === 'dark' ? 'dark' : 'light'];
     sky.color.set(L.sky[0]); sky.groundColor.set(L.sky[1]); sky.intensity = L.sky[2];
     sun.color.set(L.sun[0]); sun.intensity = L.sun[1];
-    ground.material.opacity = L.ground;
+    ground.material.opacity = L.ground; curTheme = th === 'dark' ? 'dark' : 'light'; tlK = -1;
     for (const s of sheets) for (const mt of [s.fm, s.bm]) mt.userData.x.uPaper.value.set(...(s.isCover ? [1, 1, 1] : L.paper));
     needs = true;
   }
   setTheme(cfg.theme);
+  /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
+  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.6, -0.7, 1.8).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const BLOB = new THREE.Vector3(-0.09, 0.05, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
+  const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
+  { const c = blobCv.getContext('2d'); c.filter = 'blur(22px)'; c.fillStyle = '#000'; c.fillRect(48, 48, 160, 160); }
+  const blobT = new THREE.CanvasTexture(blobCv);
+  const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobT, color: '#000', transparent: true, opacity: 0, depthWrite: false }));
+  blob.renderOrder = -1; scene.add(blob);
+  function tableLight(e) {
+    if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
+    blob.visible = e < 1;
+    blob.material.opacity = (curTheme === 'dark' ? 0.6 : 0.42) * (1 - e) * (1 - e);
+    blob.scale.set(W * (1 + OV) * 1.62, H * (1 + OV) * 1.5, 1);
+    blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
+    sun.position.copy(SUN1).lerp(SUN0, e);
+    const L = LIGHTS[curTheme];
+    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.5 : 0.2) - L.ground) * (1 - e);
+  }
 
   sheets.forEach(s => { s.p = s.target = s.i < A ? 1 : 0; });
   keepNear();
+
+  /* ===== الكتابُ على الطاولة: غلافٌ صلبٌ حقيقيّ =====
+     اللوحان والكعبُ المستدير جسمٌ واحدٌ متّصل (مقطعُه حرفُ C ممدودٌ بطول الكتاب، حوافُّه مشطوفة) فلا فجوةَ ولا خطَّ عند
+     تقاطعاته، وفي جوفه كتلةُ الأوراق بحوافّها، وصورةُ الغلاف على وجه اللوح نفسِه. بسُمكٍ يُرى (‏‎TH‎ بحسب عدد الصفحات).
+     يُرسم على الطاولة وفي الطريق منها وحدَه — وورقتا الغلاف من محرّك القراءة مخفيّتان — ويصغر إلى مقاس الكتاب الحقيقيّ،
+     فإذا صارت الكاميرا فوقه سُلِّم إلى أوراق القراءة وهما على الصورة نفسِها */
+  const TH = Math.min(0.2, Math.max(0.15, 0.12 + cfg.n * 0.0012)) * W, SH = S * STACK, OV = 0.032, BT = 0.02 * W;
+  const WB = W * (1 + OV), HB = H * (1 + OV), SPB = BT * 1.9, XI = -BT * 0.6, BV = BT * 0.22;
+  const edgeTex = vert => {
+    const cv = document.createElement('canvas'); cv.width = vert ? 128 : 8; cv.height = vert ? 8 : 128;
+    const c = cv.getContext('2d'); c.fillStyle = '#f1ebdb'; c.fillRect(0, 0, cv.width, cv.height);
+    for (let i = 0; i < 128; i += 3) { c.fillStyle = i % 9 ? 'rgba(150,135,105,.16)' : 'rgba(150,135,105,.26)'; vert ? c.fillRect(i, 0, 1, 8) : c.fillRect(0, i, 8, 1); }
+    const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t;
+  };
+  const edgeH = edgeTex(false), edgeV = edgeTex(true);
+  const hideM = new THREE.MeshBasicMaterial({ visible: false });
+  const boardM = new THREE.MeshStandardMaterial({ color: coverC, roughness: 0.78, metalness: 0 });
+  /* حوافُّ الورق مضيئةٌ قليلًا من نفسها (كالكونسبت: كريميّةٌ صافية ولو كانت في الجانب البعيد عن الشمس) */
+  const edgeM = t => new THREE.MeshStandardMaterial({ map: t, roughness: 0.95, emissive: '#ffffff', emissiveMap: t, emissiveIntensity: 0.32 });
+  const caseG = new THREE.Group(); scene.add(caseG);
+  let caseMesh = null;
+  /* مقطعُ الغلاف في المستوى ‎(x, z)‎: اللوحُ العلويّ ← الكعبُ نصفُ قطعٍ ناقص ← اللوحُ السفليّ، وجوفُه حيث الأوراق */
+  {
+    const zt = TH + BT, zb = -BT, shp = new THREE.Shape();
+    shp.moveTo(-WB, zt); shp.lineTo(0, zt);
+    shp.absellipse(0, (zt + zb) / 2, SPB, (zt - zb) / 2, Math.PI / 2, -Math.PI / 2, true);
+    shp.lineTo(-WB, zb); shp.lineTo(-WB, 0); shp.lineTo(XI, 0); shp.lineTo(XI, TH); shp.lineTo(-WB, TH); shp.closePath();
+    const g = new THREE.ExtrudeGeometry(shp, { depth: HB - 2 * BV, bevelEnabled: true, bevelThickness: BV, bevelSize: BV * 0.6, bevelSegments: 3, curveSegments: 24 });
+    g.rotateX(Math.PI / 2); g.translate(0, (HB - 2 * BV) / 2, 0);   /* الامتدادُ بطول الكتاب (‎y‎) */
+    /* هدفُ الشكل: كلُّ نقطةٍ خارج مقاس الأوراق (الكعبُ البارز وبروزُ اللوحين) تنضمّ إليه — فيبلغ الغلافُ في التسليم
+       مقاسَ ورقة الغلاف نفسَه تمامًا (التحجيمُ وحده كان يُبقي الكعبَ بارزًا شعرةً فيقفز) */
+    const pos = g.attributes.position, mp = new Float32Array(pos.array.length);
+    for (let i = 0; i < pos.count; i++) {
+      mp[i * 3] = Math.min(0, Math.max(-W, pos.getX(i)));
+      mp[i * 3 + 1] = Math.min(H / 2, Math.max(-H / 2, pos.getY(i)));
+      mp[i * 3 + 2] = pos.getZ(i);
+    }
+    g.morphAttributes.position = [new THREE.BufferAttribute(mp, 3)];
+    caseMesh = new THREE.Mesh(g, boardM); caseMesh.morphTargetInfluences = [0];
+    caseMesh.castShadow = caseMesh.receiveShadow = true; caseG.add(caseMesh);
+  }
+  /* كتلةُ الأوراق: من حافّة الصفحات إلى باطن الكعب، بين اللوحين — وجوهُها ‎+x −x +y −y +z −z‎، وما يغطّيه الغلافُ لا يُرسم */
+  const block = new THREE.Mesh(new THREE.BoxGeometry(W + XI, H, TH), [hideM, edgeM(edgeV), edgeM(edgeH), edgeM(edgeH), hideM, hideM]);
+  block.position.set((-W + XI) / 2, 0, TH / 2); block.castShadow = block.receiveShadow = true; caseG.add(block);
+  /* صورةُ الغلاف على وجه اللوح العلويّ (الصورةُ نفسُها التي على ورقة الغلاف) */
+  const artM = new THREE.MeshStandardMaterial({ roughness: 0.72, metalness: 0, color: '#ffffff' });
+  const art = new THREE.Mesh(new THREE.PlaneGeometry(WB - BV, HB - BV), artM);
+  /* فوق الوجه المسطّح (الشطفُ يرفعه ‎0.6·BV‎) وداخلَ حوافّه المشطوفة */
+  art.position.set(-(WB - BV) / 2 - BV * 0.2, 0, TH + BT + BV * 0.6 + 0.0004); art.receiveShadow = true; caseG.add(art);
+  let caseK = -1;
+  /* ‏‎e‎ مقدارُ القراءة ‎0..1‎ (بعد المنحنى): الغلافُ يصغر إلى مقاس الأوراق وسُمكها الحقيقيّ، ويُسلَّم إليها في ‎e = 1‎ */
+  function updCase(e) {
+    const show = e < 1 || !!ta;
+    const sh = 1 - e;
+    if (caseG.visible !== show) {
+      caseG.visible = show;
+      for (const c of [sheets[0], sheets[S - 1]]) for (const mh of c.meshes) mh.visible = !show;
+      needs = true;
+    }
+    if (!show) { caseK = -1; return; }
+    if (artM.map !== sheets[0].fm.map) { artM.map = sheets[0].fm.map; artM.needsUpdate = true; }
+    caseG.position.copy(book.position);
+    if (Math.abs(sh - caseK) < 1e-6) return;
+    caseK = sh;
+    const sz = (SH + (TH - SH) * sh) / TH;
+    caseG.scale.set(1, 1, sz);
+    caseMesh.morphTargetInfluences[0] = 1 - sh;
+    /* وصورةُ الغلاف من وجه اللوح إلى مقاس الورقة */
+    const aw = W + (WB - BV - W) * sh, ah = H + (HB - BV - H) * sh;
+    art.scale.set(aw / (WB - BV), ah / (HB - BV), 1); art.position.x = -aw / 2 - BV * 0.2 * sh;
+  }
+  updCase(tv);
 
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
   let frameNow = null;
@@ -269,7 +367,30 @@ export function createBook2(THREE, host, cfg) {
   const MX = cfg.frame ? cfg.frame.m : 1.04, MY = MX, DOLLY = 0.5, LIFT = cfg.frame ? cfg.frame.lift : 0.01;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
-  let camOpen = -1, camVh = 0;
+  let camOpen = -1, camVh = 0, camT = -1;
+  /* زاويةُ الطاولة: دورانُ كتاب الكونسبت نفسُه (‎−55°‎، مقيسٌ من زوايا غلافه في الفيديو معكوسًا لكتابٍ عربيّ كعبُه يمين)،
+     والكاميرا أعلى منه (ميلٌ ‎42°‎ عن العموديّ — طلبُ صاحب الموقع) بعدسةٍ طويلةٍ كعدسته */
+  const TILT = 0.74, AZ = -0.96, RM = 1.2, FOV = 28, FOV_T = 13;
+  const qv = new THREE.Quaternion(), ev = new THREE.Euler(), v3 = new THREE.Vector3(), tRest = new THREE.Vector3();
+  const tCorners = [];
+  for (const x of [-WB, SPB]) for (const y of [-HB / 2, HB / 2]) for (const z of [0, TH + 2 * BT]) tCorners.push(new THREE.Vector3(x + W / 2, y, z));
+  let restRect = null;
+  const smooth = t => t * t * (3 - 2 * t);
+  /* الطاولةُ بكاملها في الإطار: تُسقَط زوايا الكتاب على اتّجاه الكاميرا، فيُختار البعدُ الذي يسعها والمركزُ الذي يوسّطها */
+  function restPose(q) {
+    const qi = q.clone().invert(), tn = Math.tan(camera.fov * Math.PI / 360), asp = cw / ch;
+    tRest.set(0, 0, TH / 2);
+    let d = 0;
+    for (let it = 0; it < 2; it++) {
+      d = 0;
+      const cs = tCorners.map(p => v3.copy(p).sub(tRest).applyQuaternion(qi).clone());
+      for (const c of cs) d = Math.max(d, c.z + Math.abs(c.x) * RM / (tn * asp), c.z + Math.abs(c.y) * RM / tn);
+      let u0 = Infinity, u1 = -Infinity, w0 = Infinity, w1 = -Infinity;
+      for (const c of cs) { const u = c.x / (d - c.z), w = c.y / (d - c.z); u0 = Math.min(u0, u); u1 = Math.max(u1, u); w0 = Math.min(w0, w); w1 = Math.max(w1, w); }
+      tRest.add(v3.set(1, 0, 0).applyQuaternion(q).multiplyScalar((u0 + u1) / 2 * d)).add(v3.set(0, 1, 0).applyQuaternion(q).multiplyScalar((w0 + w1) / 2 * d));
+    }
+    return d;
+  }
   function frameCam() {
     /* والصفحةُ الواحدة عرضُها ورقةٌ — والكعبُ على حافّة الإطار، فإذا طُويت ورقةٌ تراجعت الكاميرا قليلًا نحو الكعب
        (يبقى حرفُ الصفحة الأيسرُ مكانه) فيُرى التفافُها حوله إلى ما وراء الكتاب، ثمّ تعود */
@@ -279,16 +400,39 @@ export function createBook2(THREE, host, cfg) {
     else o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
     /* في التبدُّل اللوحةُ ثابتةُ المقاس والكتابُ يُحجَّم على المساحة التي تتغيّر قامتُها حولها (‎vh‎) */
     const vh = mo && mo.vh ? mo.vh : ch;
-    if (Math.abs(o - camOpen) < 1e-4 && vh === camVh) return false;
-    camOpen = o; camVh = vh;
+    const tk = tv + book.position.z * 13;
+    if (Math.abs(o - camOpen) < 1e-4 && vh === camVh && Math.abs(tk - camT) < 1e-6) return false;
+    camOpen = o; camVh = vh; camT = tk;
+    camera.fov = FOV;   /* وضعُ القراءة بعدسته؛ والطاولةُ بعدسةٍ أضيق (أدناه) */
     const tn = Math.tan(camera.fov * Math.PI / 360);
     const span = mo ? W * (2 - mo.k) : ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = mo || !ONE ? 0 : W * DOLLY * o / 2;
-    const dist = ch / (2 * tn * Math.min(vh / (H * MY), cw / (span * MX)));
+    let dist = ch / (2 * tn * Math.min(vh / (H * MY), cw / (span * MX)));
     /* مستوى القرب والبعد يلفّان الكتابَ وحده (ورقةٌ تقف نحو الكاميرا تبلغ عرضَها، والمطويّةُ وراءه كذلك): دقّةُ العمق
        تتوزّع على ما بينهما. كانا ‎0.1 · 20‎ فتقاربت الأوراقُ المتراصّة عند بطاقات العمق الخشنة (‎16bit‎ في هواتفَ كثيرة)
        فغلبت الورقةُ التي تحتُ التي فوقها */
     camera.near = Math.max(0.1, dist - W * 1.35); camera.far = dist + W * 1.6;
-    camera.position.set(cx, -LIFT * H, dist); camera.lookAt(cx, -LIFT * H, 0); camera.updateProjectionMatrix();
+    camera.position.set(cx, -LIFT * H, dist); camera.lookAt(cx, -LIFT * H, 0);
+    restRect = null;
+    if (tv < 1) {
+      /* بين الطاولة والقراءة: الميلُ والدورانُ يتلاشيان، والمركزُ والبعدُ يمضيان من وضع الطاولة إلى وضع القراءة */
+      const e = smooth(tv);
+      /* عدسةٌ طويلةٌ على الطاولة كالكونسبت (المنظورُ هادئ: حافّتا الكتاب شبهُ متوازيتين)، تتّسع إلى عدسة القراءة */
+      camera.fov = FOV_T + (FOV - FOV_T) * e;
+      const kf = tn / Math.tan(camera.fov * Math.PI / 360);   /* بعدُ القراءة بالعدسة الحاليّة: الإطارُ نفسُه */
+      dist *= kf;
+      qv.setFromEuler(ev.set(TILT * (1 - e), 0, AZ * (1 - e), 'ZXY'));
+      /* يُسَع الكتابُ بميله الحاليّ (مائلًا يُرى أطولَ منه مسطّحًا)، ثمّ يمضي البعدُ والمركزُ إلى وضع القراءة نفسِه */
+      const dF = restPose(qv), d = dF + (dist - dF) * e;
+      v3.set(cx, -LIFT * H, 0).sub(tRest).multiplyScalar(e).add(tRest);
+      camera.position.set(0, 0, d).applyQuaternion(qv).add(v3); camera.quaternion.copy(qv);
+      camera.near = Math.max(0.05, d - W * 2.2); camera.far = d + W * 3;
+      /* مستطيلُ الكتاب على اللوحة (للنقر والتحويم عليه) */
+      camera.updateMatrixWorld(); camera.updateProjectionMatrix();
+      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      for (const p of tCorners) { v3.copy(p); v3.z += book.position.z; v3.project(camera); const px = (v3.x + 1) / 2 * cw, py = (1 - v3.y) / 2 * ch; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+      restRect = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+    }
+    camera.updateProjectionMatrix();
     const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
     fit = mo ? { w: span * ppu, h: H * ppu, x: cw / 2 - span / 2 * ppu, y: ch / 2 - H * ppu / 2 }
       : ONE ? { w: W * ppu, h: H * ppu, x: cw / 2 + (-W / 2 - cx) * ppu, y: ch / 2 - H * ppu / 2 }
@@ -304,7 +448,7 @@ export function createBook2(THREE, host, cfg) {
     camera.aspect = w / h;
     camOpen = -1; frameCam();
     /* الدقّةُ على أكبر قدرٍ تبلغه الصفحة (المغلقُ يُقرَّب) */
-    const tn = Math.tan(camera.fov * Math.PI / 360), dMin = Math.max(H * MY / 2 / tn, W * MX / 2 / tn / camera.aspect);
+    const tn = Math.tan(FOV * Math.PI / 360), dMin = Math.max(H * MY / 2 / tn, W * MX / 2 / tn / camera.aspect);
     retex(Math.min(2048, Math.max(512, Math.ceil(W * (h / (2 * dMin * tn)) * Math.min(devicePixelRatio || 1, 2) / 256) * 256)));
     /* تغييرُ المقاس يمسح اللوحة: تُرسم الآن في الإطار نفسِه، وإلّا ظهرت فارغةً إطارًا بعد كلّ إطارٍ والقسمةُ تتحرّك (وميض) */
     if (!dead && typeof frameNow === 'function') frameNow(); else needs = true;
@@ -313,8 +457,6 @@ export function createBook2(THREE, host, cfg) {
 
   // ===== الحركة =====
   let last = performance.now(), idle = false, hover = -1, raf = 0, goneAt = 0;
-  /* وفي الصفحة الواحدة كلُّ صفحةٍ ورقة: نصفُ السماكة، فلا يتضاعف سُمكُ الكتاب */
-  const STACK = ONE ? 0.0008 : 0.0016;
   const T = { follow: 0.07, settle: 0.12, flip: 0.8, hoverLift: 0.035, fan: 0.05 };
   function frame(now) {
     raf = requestAnimationFrame(frame);
@@ -384,6 +526,28 @@ export function createBook2(THREE, host, cfg) {
     const x = mo ? (mo.side === 'L' ? 1 : -1) * W / 2 * mo.k : ONE ? W / 2 : W / 2 * (1 - pc);
     ground.position.z = mo ? GZ + (GZ1 - GZ) * mo.k : GZ;
     if (Math.abs(book.position.x - x) > 1e-5) { book.position.x = x; moving = true; }
+    /* على الطاولة: الارتفاعُ والدورانُ إلى القراءة (أو النزولُ منها)، والتحويمُ يرفعه شعرة */
+    if (ta) {
+      const q = Math.min(1, Math.max(0, (now - ta.t0) / ta.dur));
+      tv = ta.from + (ta.to - ta.from) * q;
+      tRise = Math.sin(Math.PI * q) * (ta.to > ta.from ? 1 : 0.55);
+      /* يُفتح الغلافُ قرب آخر الدوران فتكون الحركةُ واحدة */
+      if (q >= 1) {
+        const opening = ta.to === 1, goal = ta.goal; tv = ta.to; tRise = 0; ta = null;
+        /* الكاميرا فوقه والغلافُ سُلِّم إلى ورقة القراءة: الآن ينفتح (على الفتحة المطلوبة) */
+        if (opening && A === 0) { updCase(1); goTo(goal || 1); }
+        if (cfg.onTable) cfg.onTable(tv < 1);
+      }
+      moving = true;
+    }
+    /* الغلافُ انطبق تمامًا (والكاميرا فوقه): يُسلَّم إلى الغلاف الصلب وينزل */
+    if (tAfter && sheets[0].target === 0 && sheets[0].p === 0 && !sheets[0].anim) { tAfter = false; table(0); }
+    const hv = tv < 1 ? tHovT : 0;
+    if (Math.abs(hv - tHov) > 1e-4) { tHov += (hv - tHov) * (1 - Math.exp(-dt / 0.12)); moving = true; } else tHov = hv;
+    const z = (tRise * 0.07 + tHov * 0.016) * W + BT * (1 - smooth(tv));   /* اللوحُ الخلفيّ على الطاولة لا تحتها */
+    tableLight(smooth(tv));
+    if (Math.abs(book.position.z - z) > 1e-6) { book.position.z = z; moving = true; }
+    updCase(smooth(tv));
     if (frameCam()) moving = true;
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
     const wasIdle = idle; idle = !moving && !drag;
@@ -408,8 +572,23 @@ export function createBook2(THREE, host, cfg) {
   const turnable = dir => dir > 0 ? A < maxA : A > 0;
   /* بعد كلّ تقليبة يُنسى المرفوعُ بالتحويم: كان رقمُه يبقى على الورقة نفسِها بعد هبوطها يمينًا فترتفع هناك.
      ويُحسب من جديد مع أوّل حركةٍ للفأرة */
-  const commit = () => { hover = -1; keepNear(); if (cfg.onTurn) cfg.onTurn(A); };
+  const commit = () => {
+    hover = -1; keepNear();
+    /* رجع إلى الغلاف: ينزل إلى الطاولة بعد أن ينطبق — وإن فُتح ثانيةً قبل ذلك بقي */
+    if (cfg.rest) tAfter = A === 0 && tv === 1 && !ta;
+    if (cfg.onTurn) cfg.onTurn(A);
+  };
+  /* ‏‎to = 1‎ يرفعه من الطاولة ويفتحه (على الفتحة ‎goal‎) · ‏‎0‎ ينزله إليها (والغلافُ منطبق) */
+  function table(to, goal = 1) {
+    if (dead || (ta ? ta.to === to : tv === to)) return;
+    /* لا يبقى لونُ نصف التقليب ولا مؤشّرُه من قبل (الطاولةُ لا تُقلَّب) */
+    tHovT = 0; hover = -1; setGrab(''); setCursor();
+    if (cfg.onBusy && idle) cfg.onBusy();
+    ta = { from: tv, to, t0: performance.now(), dur: to ? 1150 : 900, goal: Math.max(1, goal | 0) };
+    needs = true;
+  }
   function flip(dir) {
+    if (tv < 1 || ta) { if (dir > 0 && !ta) table(1); return dir > 0; }
     if (mo || !turnable(dir)) return false;
     const s = sheets[dir > 0 ? A : A - 1];
     A += dir; s.dir = dir; s.tiltT = 0; launch(s, dir > 0 ? 1 : 0, 0);
@@ -419,6 +598,7 @@ export function createBook2(THREE, host, cfg) {
   /* القفزُ إلى فتحةٍ بعيدة: الأوراقُ بينهما تتقلّب متتابعةً سريعة (حتى ثمانٍ)، وما وراءها يُنقل ساكنًا تحت الكومة */
   function goTo(t) {
     t = Math.max(0, Math.min(maxA, t | 0));
+    if (tv < 1 && !ta) { if (t > 0) table(1, t); return; }
     if (mo || t === A) return;
     const dir = t > A ? 1 : -1, list = [];
     for (let i = A; i !== t; i += dir) list.push(sheets[dir > 0 ? i : i - 1]);
@@ -460,6 +640,8 @@ export function createBook2(THREE, host, cfg) {
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
     if (skip(e)) return;
+    /* على الطاولة: الكتابُ نفسُه يُنقر فيرتفع وينفتح */
+    if (tv < 1 || ta) { if (!ta && inRest(e)) table(1); return; }
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
     if (!g || (g.cover ? locked() : mo) || !armed()) return;
@@ -486,6 +668,12 @@ export function createBook2(THREE, host, cfg) {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
       if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
+      if (tv < 1 || ta) {
+        const on = !ta && inRest(e);
+        if (hover !== -1 || grab) { hover = -1; setGrab(''); }
+        tHovT = on ? 1 : 0; zone.style.cursor = on ? 'pointer' : ''; needs = true;
+        return;
+      }
       /* وفي الصفحة الواحدة لا ترتفع ورقةٌ بالتحويم (طلبُ صاحب الموقع): الكاميرا تتراجع مع كلّ ورقةٍ مرفوعة، فكانت الفأرةُ الباقيةُ
          في مكانها بعد التقليب ترفع التاليةَ فيبدو كأنّها تنفتح ثمّ ترجع — يكفيها لونُ النصف */
       const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && !ONE ? (g.fwd ? A : A - 1) : -1;
@@ -513,10 +701,12 @@ export function createBook2(THREE, host, cfg) {
     if (!moved || gone >= 0.2 || flick) { A += fwd ? 1 : -1; launch(s, fwd ? 1 : 0, v); commit(); }
     else launch(s, base < 0.5 ? 0 : 1, v);
   };
-  const onLeave = () => { if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
+  const inRest = e => { if (!restRect) return false; const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top; return x >= restRect.x && x <= restRect.x + restRect.w && y >= restRect.y && y <= restRect.y + restRect.h; };
+  const onLeave = () => {
+    if (tHovT) { tHovT = 0; needs = true; zone.style.cursor = ''; } if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
-    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked()) return;
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked() || tv < 1 || ta) return;
     e.preventDefault(); const now = performance.now();
     if (now - wheelT > 400) wheelAcc = 0;
     wheelT = now; wheelAcc += e.deltaX;
@@ -556,6 +746,10 @@ export function createBook2(THREE, host, cfg) {
 
   return {
     el, flip, goTo, resize, setTheme, dispose, turnable, setZone, one: ONE,
+    /* يرفعه من الطاولة ويفتحه (‎open‎) أو يُغلقه وينزله إليها (‎rest‎) */
+    open() { if (tv < 1 || ta) table(1); },
+    rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
+    get onTable() { return tv < 1 || !!ta; },
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
     /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
        وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */
@@ -583,9 +777,9 @@ export function createBook2(THREE, host, cfg) {
       }).catch(() => {});
     },
     /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
-    get flat() { return !mo && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
+    get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
-    get settled() { return !mo && idle && !drag && sheets.every(s => !s.anim); },
+    get settled() { return !mo && tv === 1 && !ta && idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
     /* الصفحاتُ الساكنةُ الظاهرة ومستطيلاتُها على اللوحة (بكسل CSS) — تُسقَط زواياها من موضعها الحقيقيّ (فوق كومتها) بالكاميرا نفسِها،
        فتنطبق عليها طبقةُ النصّ. ‏‎k‎ رقمُ الصفحة في الملفّ */
