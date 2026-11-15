@@ -18383,8 +18383,7 @@ html[data-theme="dark"] .cx-hltool button { color: #e6ecef; }
 .cx-hltool button svg { width: 11px; height: 11px; flex: none; }
 .cx-hltool button i { font-style: normal; }
 .cx-hltool button i:empty { display: none; }
-.cx-hltool button.is-on { opacity: 1; color: var(--hlink, #2c5e65); }
-html[data-theme="dark"] .cx-hltool button.is-on { color: var(--hlink, #79b8bf); }
+.cx-hltool button.is-on { opacity: 1; color: var(--tc, #2c5e65); }
 
 /* خطُّ الأداة المختارة بلون حبرها، يُنقر فتنفتح ألوانُها (طلبُ صاحب الموقع) — ساحةُ نقرٍ أوسعُ من الخطّ */
 .cx-hltool__ul { position: absolute; left: 3px; right: 3px; bottom: -4px; height: 9px; cursor: pointer; display: none; }

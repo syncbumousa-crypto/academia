@@ -24310,7 +24310,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
     const tool = hlTool[id] || 't';
     const st = el._st || (el._st = hlRailSt[id] || (hlRailSt[id] = { center: -1, vel: 0, target: null, lastIn: 0 }));
-    const sig = rows.map(r => r.cid + ':' + r.cols.join('') + r.t + '.' + r.b).join('|') + '|' + tool;
+    const sig = rows.map(r => r.cid + ':' + r.cols.join('') + r.t + '.' + r.b).join('|') + '|' + tool + hlCol.t + hlCol.box;
     if (el._sig !== sig) {
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
@@ -24323,9 +24323,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
       /* المفتاحُ نفسُه يحمل العدد (طلبُ صاحب الموقع): زرُّ القلم فيه عددُ تظليلات النصّ، وزرُّ المربّع عددُ المربّعات — فلا تتكرّر الأيقونتان */
       /* وتحت الأداة المختارة خطٌّ بلون حبرها: يُنقر فتنفتح ألوانُها (طلبُ صاحب الموقع) */
-      const ul = k => `<span class="cx-hltool__ul" data-hlpal="${k}" role="button" tabindex="-1" title="${esc(T().hlInk || '')}" style="--tc:var(--ink-${hlCol[k]})"></span>`;
-      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i>${ul('t')}</button>`
-        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i>${ul('box')}</button>`;
+      /* والأداةُ المختارةُ كلُّها — أيقونتُها وعددُها وخطُّها — بحبرها هي (طلبُ صاحب الموقع)، فإذا بُدّلت الأداةُ تبدّل اللونُ معها */
+      const ul = k => `<span class="cx-hltool__ul" data-hlpal="${k}" role="button" tabindex="-1" title="${esc(T().hlInk || '')}"></span>`;
+      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" style="--tc:var(--ink-${hlCol.t})" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i>${ul('t')}</button>`
+        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" style="--tc:var(--ink-${hlCol.box})" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i>${ul('box')}</button>`;
       el._op = -1;
     }
     if (!el._bound) hlRailBind(el);
@@ -24363,7 +24364,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
       el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
-      const c0 = rows[op].cols[rows[op].cols.length - 1]; if (c0) el._tool.style.setProperty('--hlink', `var(--ink-${c0})`); else el._tool.style.removeProperty('--hlink');   /* المختارُ بحبر الصفّ */
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
     /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
