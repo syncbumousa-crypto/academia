@@ -163,11 +163,15 @@ export function createBook2(THREE, host, cfg) {
   const geo = new THREE.PlaneGeometry(1, 1, 48, Math.round(48 * AR));
   geo.setAttribute('aSheet', geo.attributes.uv.clone());
   const grain = grainTexture(THREE);
-  const solid = hex => { const c = new THREE.Color(hex); const t = new THREE.DataTexture(new Uint8Array([c.r * 255, c.g * 255, c.b * 255, 255].map(Math.round)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
+  /* لونٌ واحدٌ صورةً بكسلٍ واحد — بقيم sRGB نفسِها (كانت تُكتب خطّيّةً ثمّ تُفكّ sRGB فيغمق اللونُ مرّتين: باطنُ الغلاف بدا أسود) */
+  const solid = hex => { const h = new THREE.Color(hex).getHexString(); const t = new THREE.DataTexture(new Uint8Array([0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)).concat(255)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
   const blank = solid('#f6f1e6');
-  /* باطنُ الغلاف بلونه، وظاهرُ الغلاف الخلفيّ أغمقُ قليلًا */
+  /* ظاهرُ الغلاف الخلفيّ بلون الغلاف أغمقَ قليلًا */
   const coverC = new THREE.Color(cfg.cover || '#2c5e65'); coverC.convertSRGBToLinear();
-  const inside = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString());
+  /* باطنُ الغلاف ورقٌ فاتحٌ فيه لمسةٌ من لونه (اختيارُ صاحب الموقع: كان بلون الغلاف فيبدو أسود تحت الإضاءة) */
+  const mixHex = (a, b, k) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const x = p(a), y = p(b);
+    return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * k).toString(16).padStart(2, '0')).join(''); };   /* بالـsRGB كـ‎color-mix‎ في الكونسبت */
+  const inside = solid(mixHex('#f6f1e4', '#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString(), 0.16));
   const outsideBack = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').multiplyScalar(0.85).getHexString());
 
   let texW = 1024;
@@ -431,7 +435,7 @@ export function createBook2(THREE, host, cfg) {
   // والأيمنُ يرجع، والصفحةُ نفسُها للقراءة والتحديد لا تُمسك — إلّا الغلافَ المغلق يُنقر فيُفتح. ‏‎cfg.zone‎ المساحةُ (اللوحةُ إن لم تُعطَ)،
   // و‎cfg.armed()‎ أنّها المساحةُ المختارةُ التي يُعمل فيها: قبلها لا ترتفع ورقةٌ ولا تُسحب ·
   // السحبُ نسبيّ: ‎80%‎ من عرض الكتاب تقليبةٌ كاملة · ‎20%‎ أو رميةٌ سريعةٌ تُكمل · الضغطُ المطوّلُ يقلّب تلقائيًّا ويتسارع
-  const zone = cfg.zone || el;
+  let zone = cfg.zone || el;
   zone.style.touchAction = 'pan-y';
   const armed = () => !cfg.armed || cfg.armed();
   /* أزرارُ المساحة وما يسمّيه الموقعُ (‎cfg.zoneSkip‎: رأسُها وأيقونتُها التي تُغلقها) ليست مقبضًا — لا تتلوّن ولا تُقلِّب */
@@ -517,8 +521,22 @@ export function createBook2(THREE, host, cfg) {
     wheelT = now; wheelAcc += e.deltaX;
     if (Math.abs(wheelAcc) > 60) { flip(wheelAcc < 0 ? 1 : -1); wheelAcc = 0; wheelT = now + 250; }
   };
-  const evs = [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['pointerleave', onLeave]];
+  /* ‏‎lostpointercapture‎: انقطع الإمساكُ (أُعيد رسمُ المساحة أثناء السحب) — يُتمّ السحبَ ولا تبقى ورقةٌ معلّقة */
+  const evs = [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['lostpointercapture', onUp], ['pointerleave', onLeave]];
   for (const [t, f] of evs) zone.addEventListener(t, f);
+  /* المساحةُ تُبنى من جديد مع كلّ رسمةٍ للقسم والكتابُ يُنقل إليها كما هو: المستمعون ينتقلون معه، وإلّا بقوا على القديمة
+     المنفصلة فتوقّف التقليبُ من حول الكتاب بعد أوّل رسمة */
+  function setZone(z) {
+    z = z || el;
+    if (z === zone || dead) return;
+    for (const [t, f] of evs) zone.removeEventListener(t, f);
+    if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
+    if (drag) { drag.s.drag = null; drag = null; stopHold(); }
+    hover = -1; setGrab(''); needs = true;
+    zone = z; zone.style.touchAction = 'pan-y';
+    for (const [t, f] of evs) zone.addEventListener(t, f);
+    setCursor();
+  }
   el.addEventListener('wheel', onWheel, { passive: false });
 
   function dispose() {
@@ -536,7 +554,7 @@ export function createBook2(THREE, host, cfg) {
   }
 
   return {
-    el, flip, goTo, resize, setTheme, dispose, turnable, one: ONE,
+    el, flip, goTo, resize, setTheme, dispose, turnable, setZone, one: ONE,
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
     /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
        وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */

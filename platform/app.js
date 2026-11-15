@@ -11107,6 +11107,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
         old.view.style.transform = '';
         old.view = view;
+        if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
         const moved = wantClosed !== !!old.closed || wantPos !== old.pos;
         if (moved) { if (old.leaf) bkLeafDrop(old); old.closed = wantClosed; old.pos = wantPos; }
@@ -25126,6 +25127,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.stW = w0; b.stH = h0;
     const g = b.gl;
     if (g) {
+      if (g.setZone) g.setZone(bkZone(b));
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
       g.resize();
       /* تغيّر المقاس: طبقةُ النصّ تُعاد على المستطيل الجديد بعد أن يقف */
