@@ -18299,9 +18299,6 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 /* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
 .bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
 html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
-/* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
-.bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
-.bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
 /* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
 .bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
 /* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
@@ -18316,25 +18313,6 @@ html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view--table, .kt-view--cards, .pk-bank) { overflow-y: auto; overscroll-behavior: contain; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { flex: 1 1 auto; height: auto; min-height: 0; }
-/* ===== غلافُ الكتاب المؤقّت (‎bkPhShow‎): نظيرٌ مسطّحٌ في مكانه حتى يجهز — فوق لوحة الكتاب، ويذوب ===== */
-.bk2-ph { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: center; pointer-events: none; transition: opacity .24s ease; }
-.bk2-ph__pg { position: relative; flex: none; height: 100%; aspect-ratio: var(--ar, .707); overflow: hidden; background: #f6f1e6;
-  box-shadow: 0 10px 26px -14px rgba(20, 35, 63, .45); }
-.bk2-ph__pg.is-cover, .bk2-ph__pg.is-inside { background: var(--bk-cover); }
-.bk2-ph__img { display: block; width: 100%; height: 100%; }
-/* لمعةٌ هادئةٌ تعبرها حتى تأتي صورتُها */
-.bk2-ph__pg:not(:has(.bk2-ph__img))::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
-  background-size: 220% 100%; animation: bk2-ph-sh 1.4s ease-in-out infinite; }
-@keyframes bk2-ph-sh { from { background-position: 120% 0; } to { background-position: -20% 0; } }
-@media (prefers-reduced-motion: reduce) { .bk2-ph__pg::after { animation: none !important; } }
-html[data-theme="dark"] .bk2-ph__pg:not(.is-cover):not(.is-inside) { background: #e6e1d4; }
-/* هيئةُ الكتاب حتى يُفتح ملفُّه: غلافٌ بلونه في الوسط يلمع */
-.bk-skel { flex: 1 1 auto; align-self: stretch; display: grid; place-items: center; min-height: 0; padding: 2%; }
-.bk-skel > i { position: relative; display: block; height: 96%; max-width: 100%; aspect-ratio: .707; overflow: hidden; background: var(--bk-cover); opacity: .85;
-  box-shadow: 0 10px 26px -14px rgba(20, 35, 63, .45); }
-.bk-skel > i::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .18) 50%, transparent 70%);
-  background-size: 220% 100%; animation: bk2-ph-sh 1.4s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { .bk-skel > i::after { animation: none; } }
 
 /* ===== تذييل الكتاب بثلاث خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح ورقمُ الصفحة،
    ويسارًا اسمُ المصدر وطريقةُ القراءة على يساره وتحتهما «ربط الصفحات» — مصغّرةٌ ومكدّسة ===== */
@@ -18442,3 +18420,52 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .cx-hltool button svg { width: 9px; height: 9px; }
 .cx-hltool__ul { bottom: -4px; height: 8px; }
 .hl-pal { border-radius: 0 0 12px 12px; padding: 7px 9px 6px; }
+/* ===== قامةُ المساحات من صفحة المصدر في الضيّقة (‎--pk-h‎ يضعها ‎pkSrcHFit‎) — والمساهمةُ الفارغةُ بها من أوّلها ===== */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"]:not(.pk-split--none) { height: var(--pk-h); flex: none; }
+#cm-body .pk--frame.pk--blank:has(.post-ytmain > .pk-split[style*="--pk-h"]) { height: auto; }
+.pk-split.pk-splh-anim { transition: height .38s cubic-bezier(.2, .8, .2, 1); }
+
+/* ===== هيكلُ التحميل «صفحاتٌ تتقلّب» (اختيارُ صاحب الموقع): كتابٌ بلون الورق صفحاتُه الفارغةُ تتقلّب، وعلى أولاها حلقةُ النسبة =====
+   في الوعاء قبل أن يُفتح الملفّ، ثمّ فوق الكتاب (‎--over‎) حتى يرسم المحرّكُ صفحاته؛ وعند الاكتمال تهدأ الصفحاتُ وتذوب الحلقة */
+.bk-skel { flex: 1 1 auto; align-self: stretch; display: grid; place-items: center; min-height: 0; padding: 0; container-type: size;
+  --sk: #e8edef; --sk2: #d7dfe2; --skl: rgba(20, 40, 46, .1); --skr: #2c5e65; }
+html[data-theme="dark"] .bk-skel { --sk: #34424a; --sk2: #3f4e56; --skl: rgba(255, 255, 255, .1); --skr: #7fb7bd; }
+.bk-skel--over { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.bk-skel__bk { position: relative; height: min(96cqh, 96cqw / var(--ar)); aspect-ratio: var(--ar); perspective: 900px; }
+.bk-skel__bk::after { content: ''; position: absolute; left: 8%; right: 8%; bottom: -14px; height: 16px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20, 35, 63, .22), transparent); filter: blur(2px); }
+.bk-skel__edge { position: absolute; left: -6px; top: 3px; bottom: 3px; width: 6px; border-radius: 4px 0 0 4px; background: repeating-linear-gradient(90deg, #f3eee2 0 1px, #dcd4c0 1px 2px); }
+html[data-theme="dark"] .bk-skel__edge { background: repeating-linear-gradient(90deg, #4a5860 0 1px, #3a474e 1px 2px); }
+.bk-skel__pgs { position: absolute; inset: 0; transform-style: preserve-3d; }
+.bk-skel__pgs b { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; background: var(--sk); box-shadow: inset 0 0 0 1px var(--skl); transform-origin: right center;
+  animation: bk-skel-flip 1.7s ease-in-out infinite; }
+.bk-skel__pgs b:nth-child(2) { animation-delay: -.42s; } .bk-skel__pgs b:nth-child(3) { animation-delay: -.85s; } .bk-skel__pgs b:nth-child(4) { animation-delay: -1.27s; }
+@keyframes bk-skel-flip { 0%, 100% { transform: rotateY(0); opacity: 1; } 50% { transform: rotateY(-28deg); opacity: .55; } }
+.bk-skel.is-done .bk-skel__pgs b { animation-play-state: paused; }   /* تقف الصفحاتُ حيث هي (لا ترجع وهي تذوب فوق الغلاف فتبدو لمعةً تمشي عليه) */
+.bk-skel__ring { position: absolute; left: 50%; top: 50%; width: clamp(44px, 34%, 72px); aspect-ratio: 1; transform: translate(-50%, -50%); z-index: 2; transition: opacity .22s, transform .22s; }
+.bk-skel.is-done .bk-skel__ring { opacity: 0; transform: translate(-50%, -50%) scale(.85); }
+.bk-skel__ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.bk-skel__ring circle { fill: none; stroke-width: 4; }
+.bk-skel__ring .tr { stroke: var(--sk2); }
+.bk-skel__ring .pr { stroke: var(--skr); stroke-linecap: round; stroke-dasharray: 169.65; stroke-dashoffset: 169.65; }
+.bk-skel__ring em { position: absolute; inset: 0; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: clamp(11px, 4.2cqw, 15px); font-variant-numeric: tabular-nums; color: var(--u-ink, #14233f); }
+html[data-theme="dark"] .bk-skel__ring em { color: #e6ecef; }
+@media (prefers-reduced-motion: reduce) { .bk-skel__pgs b { animation: none; } }
+/* مؤشّرُ قلم التظليل على الصفحة والقلمُ مختارٌ أو وهو يظلّل (‎--hl-cur‎ يضعه ‎hlToolSync‎ بحبر القلم) */
+:is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
+.hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
+/* فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ (لا القلم ولا التقاطع) — ونقرُه يفتح قائمتَه */
+#cm-body .cbk-stage.hl-over, #cm-body .cbk-stage.hl-over * { cursor: pointer !important; }
+.hl-pal.hl-mk { border-radius: 999px; padding: 6px 8px; align-items: center; }
+.hl-mk__sep { width: 1px; height: 16px; margin: 0 2px; background: rgba(20, 40, 46, .16); }
+.hl-pal.is-dark .hl-mk__sep { background: rgba(255, 255, 255, .18); }
+.hl-mk__del { display: grid; place-items: center; width: 24px !important; height: 24px !important; border-radius: 50%; background: none !important; box-shadow: none !important; color: #c0455f; }
+.hl-mk__del svg { width: 15px; height: 15px; }
+.hl-mk__del:hover { background: rgba(192, 69, 95, .12) !important; transform: none !important; }
+.hl-pal.is-dark .hl-mk__del { color: #ff9aa9; }
+/* مربّعُ رقم الصفّ في قائمة التظليل — يُكتب فيه ويُمسح */
+.hl-mk__n { width: 28px; height: 24px; padding: 0; border: 0; border-radius: 6px; text-align: center; font: 800 12px/1 inherit; font-variant-numeric: tabular-nums;
+  color: #14233f; background: rgba(20, 40, 46, .06); box-shadow: inset 0 0 0 1px rgba(20, 40, 46, .18); outline: none; direction: ltr; }
+.hl-mk__n:focus { box-shadow: inset 0 0 0 1.5px #2c5e65; background: #fff; }
+.hl-mk__n:placeholder-shown { background: none; box-shadow: inset 0 0 0 1px rgba(20, 40, 46, .18); }
+.hl-pal.is-dark .hl-mk__n { color: #e6ecef; background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18); }
+.hl-pal.is-dark .hl-mk__n:focus { box-shadow: inset 0 0 0 1.5px #7fb7bd; background: rgba(255, 255, 255, .12); }

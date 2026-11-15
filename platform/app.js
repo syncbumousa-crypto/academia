@@ -1197,7 +1197,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1668,7 +1668,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -6839,7 +6839,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -10538,7 +10538,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   /* الكتابُ يُرسم من جديد بعد أن يقف الخطّ (لا في كلّ إطار) */
-  const pkSplBook = id => { const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
+  const pkSplBook = id => { requestAnimationFrame(() => pkSrcHFit()); const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
   document.addEventListener('pointerdown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h || e.button !== 0) return;
@@ -10818,8 +10818,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
       /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
-      const skel = s => { const c = (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover || '#2c5e65';
-        return `<div class="bk-skel" role="status" aria-label="${esc(T().chLoading)}" style="--bk-cover:${esc(c)}"><i></i></div>`; };
+      const skel = s => bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar);
       const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
         + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
@@ -10861,7 +10860,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const base = pkSrcBase(id);
     if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
     pkSrcCur[base] = id; if (id !== base) pkSrcScroll = id;
-    if (!was && pkLab()) pkSP = { id: base, sub: 'type', sid: id, conf: null, ed: true };   /* الجديدُ تنفتح له الأنواعُ ليُحدَّد نوعُه */
+    /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
   }
   async function pkSrcDel(id) {
@@ -11119,9 +11118,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     document.querySelectorAll('#cm-body [data-pksrcview]').forEach(async view => {
       const id = view.dataset.pkid, key = pkSrcKey(id), meta = pkSrcMeta(id);
       let doc;
+      if (!(pkSrcBk[id] && pkSrcBk[id].el && pkSrcBk[id].el.isConnected)) bkLoadSet(key, 8, 42);
       try { doc = await chPdfOpen(key); } catch (e) { doc = undefined; }
       if (!view.isConnected) return;
-      if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      bkLoadSet(key, 45, 62);
       if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
@@ -11163,6 +11164,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
+      /* شكلُ الهيكل والقامةُ من صفحة الملفّ نفسِه (مربّعةً كانت أو مستطيلةً بالطول أو بالعرض) قبل أن يُبنى الكتاب */
+      { const ar1 = p1.width / p1.height; if (meta && Math.abs((meta.ar || 0) - ar1) > 1e-3) { meta.ar = ar1; save(); }
+        view.querySelectorAll('.bk-skel').forEach(k => k.style.setProperty('--ar', ar1.toFixed(4))); requestAnimationFrame(() => pkSrcHFit()); }
       /* ROADMAP-SMOOTH ق٢: الكتابُ يُبنى بعد أن تقف الحركة (لا أثناءها فتسقط إطاراتُها)، ويظهر بتلاشٍ قصير */
       if (document.querySelector('#cm-body .pk--fxrun')) {
         await new Promise(res => { const chk = () => document.querySelector('#cm-body .pk--fxrun') ? setTimeout(chk, 50) : res(); chk(); });
@@ -11194,8 +11198,53 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           pkLnkPlace();   /* والعمودُ تحرّك: نافذةُ «اربط» تلحق زرَّها */
         },
       });
+      /* نسبةُ الصفحة تُحفظ مع المصدر فتُرسم القامةُ صحيحةً من أوّل رسمةٍ قادمة، وتُضبط الآن على الملفّ الفعليّ */
+      if (meta && pkSrcBk[id] && meta.ar !== pkSrcBk[id].ar) { meta.ar = pkSrcBk[id].ar; save(); }
+      requestAnimationFrame(() => pkSrcHFit());
     });
   }
+  /* ===== قامةُ المساحات في الضيّقة من صفحة المصدر (طلبُ صاحب الموقع) =====
+     تُحسب من عرض مساحة المصدر ونسبةِ صفحة الكتاب (A4 قبل أن يُضاف كتاب): فالمساهمةُ الفارغةُ بطولها المناسب من أوّلها ولا تمتدّ
+     حين يُضاف الكتاب، ثمّ تتقلّص أو تتّسع بنعومة إن كان الملفّ أقصرَ أو أطول — وتُحفظ لكلّ مساهمة فتُرسم بها من أوّل إطار */
+  const pkSrcH = {};
+  function pkSrcHCalc(card) {
+    if (card.classList.contains('pk--max')) return null;
+    const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || sp.classList.contains('pk-split--none')) return null;
+    const src = sp.querySelector(':scope > .pk-src'), ctl = card.querySelector('[data-pkview][data-pkid]');
+    if (!src || !ctl) return null;
+    const W = src.clientWidth; if (!W) return null;
+    const sid = pkSrcCurOf(ctl.dataset.pkid), b = pkSrcBk[sid], meta = pkSrcMeta(sid);
+    const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!(b.mxTo != null ? b.mxTo : b.one) : bk2OneGet();
+    const view = src.querySelector('.pk-src__view');
+    const over = view ? sp.getBoundingClientRect().height - view.getBoundingClientRect().height : 70;
+    /* الكتابُ أصغرُ من عرض مساحته (‎.72‎) والقامةُ بسقفٍ أقصر (طلبُ صاحب الموقع: كانت طويلةً جدًّا) */
+    const h = (W - 24) * .72 / (one ? 1 : 2) / ar * 1.08 + Math.max(40, over);
+    return Math.round(Math.max(400, Math.min(innerHeight * .64, 560, h)));
+  }
+  /* ‏‎dur‎: قامةٌ تنتقل مع حركةٍ أخرى بمدّتها (تبدُّلُ وضع الكتاب) */
+  function pkSrcHFit(dur) {
+    if (typeof dur !== 'number') dur = 0;
+    document.querySelectorAll('#cm-body .post.pk').forEach(card => {
+      if (card.pkBandAnim || card.classList.contains('pk--fxrun')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 150); return; }   /* حركةٌ جارية: يُعاد بعدها */
+      const sp = card.querySelector('.post-ytmain > .pk-split'), ctl = card.querySelector('[data-pkview][data-pkid]');
+      if (!sp || !ctl) return;
+      /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
+      if (sp.classList.contains('pk-splh-anim') && !dur) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
+      const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
+      if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
+      pkSrcH[id] = h;
+      if (Math.abs(h - cur) < 3) return;
+      if (cur && !bkReduce()) {
+        sp.style.transitionDuration = dur ? dur + 'ms' : '';
+        sp.style.transitionTimingFunction = dur ? 'cubic-bezier(.37, 0, .63, 1)' : '';   /* منحنى حركة الكتاب نفسُه */
+        sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT);
+        sp.pkHT = setTimeout(() => { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = sp.style.transitionTimingFunction = ''; }, (dur || 380) + 40);
+      }
+      sp.style.setProperty('--pk-h', h + 'px');
+    });
+  }
+  window.addEventListener('resize', () => { clearTimeout(pkSrcHFit.t); pkSrcHFit.t = setTimeout(pkSrcHFit, 150); });
   const pkEsSeen = new Set();
   const pkEsOpen = (id, deck) => {
     if (!pkLab() || pkEsSeen.has(id)) return;
@@ -11258,7 +11307,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
     const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
-    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}">`
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
   }
@@ -24000,28 +24049,74 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويذوب حين يرسم الكتابُ صفحاتِه */
   function bkPhShow(b) {
     if (b.phEl && b.phEl.isConnected) return;
-    const ph = b.phEl = document.createElement('div');
-    ph.className = 'bk2-ph' + (b.closed ? ' is-closed' : ''); ph.setAttribute('aria-hidden', 'true');
-    ph.style.setProperty('--ar', b.ar); ph.style.setProperty('--bk-cover', b.cover || '#2c5e65');
-    const ks = b.closed ? ['cover'] : b.one ? [Math.max(1, b.pos)] : [b.pos, b.pos + 1];
-    ks.forEach(k => {
-      const pg = document.createElement('i'); pg.className = 'bk2-ph__pg' + (k === 'cover' ? ' is-cover' : k < 1 ? ' is-inside' : ''); ph.appendChild(pg);
-      if (k === 'cover' || (k >= 1 && k <= b.n)) bk2Tex(b, k, 360).then(cv => { if (b.phEl !== ph || !cv) return; cv.className = 'bk2-ph__img'; pg.appendChild(cv); }).catch(() => {});
-    });
-    /* بمستطيل المحرّك نفسِه (‎MX=MY=1.04‎ ورفعُ ‎1%‎): المغلقُ غلافٌ وحده تقترب منه الكاميرا، والمفتوحُ فتحتُه — فلا يقفز حين يذوب */
-    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH;
-    if (stW && stH) {
-      const cols = ks.length, H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)), w = cols * ppu, h = H * ppu;
-      Object.assign(ph.style, { inset: 'auto', left: (stW / 2 - w / 2) + 'px', top: (stH / 2 - h * 0.51) + 'px', width: w + 'px', height: h + 'px' });
-    }
+    /* الهيكلُ نفسُه يبقى فوق الكتاب حتى يرسم المحرّكُ صفحاتِه — والحلقةُ تكمل من حيث وصلت */
+    const k = b.key || '';
+    bkLoadSet(k, 62, 88);
+    const w = document.createElement('div');
+    w.innerHTML = bkSkelHTML(k, b.ar);
+    const ph = b.phEl = w.firstElementChild;
+    ph.classList.add('bk-skel--over');
+    /* بمقاس الغلاف الذي سيرسمه المحرّك (‎MX=MY=1.04‎) فلا يقفز حين يذوب فوقه */
+    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH, cols = b.closed || b.one ? 1 : 2;
+    if (stW && stH) { const H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)); ph.firstElementChild.style.height = (H * ppu).toFixed(1) + 'px'; }
     b.stage.appendChild(ph);
+    bkLoadPaint();
   }
   function bkPhHide(b) {
     const ph = b.phEl; if (!ph) return;
     b.phEl = null;
-    if (bkReduce()) { ph.remove(); return; }
-    ph.style.opacity = '0';
-    setTimeout(() => ph.remove(), 260);
+    const k = b.key || '';
+    bkLoadSet(k, 100, 100);
+    const cv = b.gl && b.gl.el;
+    if (bkReduce()) { ph.remove(); bkLoadEnd(k); if (cv) cv.style.opacity = ''; return; }
+    /* تكتمل الحلقةُ، ثمّ تهدأ الصفحاتُ وتذوب الحلقة، ويظهر الغلافُ بتلاشٍ مع رفعةٍ خفيفة (اختيارُ صاحب الموقع) */
+    setTimeout(() => {
+      ph.classList.add('is-done');
+      /* الهيكلُ يذوب أوّلًا، ثمّ يظهر الغلافُ بعده على مكانٍ صافٍ — لا يتراكبان فيبدو على الغلاف تدرّجٌ يمشي */
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
+      if (cv) cv.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 560, delay: 200, easing: 'ease-out', fill: 'backwards' }).finished.then(() => { cv.style.opacity = ''; }, () => { cv.style.opacity = ''; });
+      if (cv) cv.style.opacity = '';
+      if (b.stage && b.stage.isConnected) b.stage.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 200, easing: 'ease-out' });
+    }, 160);
+  }
+  /* ===== هيكلُ التحميل «صفحاتٌ تتقلّب» (اختيارُ صاحب الموقع) =====
+     كتابٌ بلون الورق صفحاتُه الفارغةُ تتقلّب، وعلى أولى صفحاته حلقةٌ تمتلئ وفي وسطها النسبة. النسبةُ تمشي مع مراحل التحميل الفعليّة
+     (قراءةُ الملفّ ← فتحُه ← مكتبةُ الكتاب ← رسمُ صفحاته)، وتزحف بين المرحلة والتي تليها حتى لا تقف — ولا تبلغ حدَّ المرحلة قبل أن تتمّ */
+  const bkLoad = {};
+  let bkLoadRaf = 0;
+  function bkSkelHTML(k, ar) {
+    return `<div class="bk-skel" data-bkl="${esc(k)}" role="status" aria-label="${esc(T().chLoading)}" style="--ar:${(+ar > 0 ? +ar : 1 / Math.SQRT2).toFixed(4)}">`
+      + `<div class="bk-skel__bk"><span class="bk-skel__edge"></span><span class="bk-skel__pgs"><b></b><b></b><b></b><b></b></span>`
+      + `<span class="bk-skel__ring"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="tr" cx="32" cy="32" r="27"/><circle class="pr" cx="32" cy="32" r="27"/></svg><em>${Math.round((bkLoad[k] || {}).shown || 0)}٪</em></span></div></div>`;
+  }
+  function bkLoadSet(k, tgt, cap) {
+    const L = bkLoad[k] || (bkLoad[k] = { shown: 0, tgt: 0, cap: 0 });
+    if (tgt >= L.tgt) { L.tgt = tgt; L.cap = Math.max(cap, tgt); }
+    if (!bkLoadRaf) bkLoadRaf = requestAnimationFrame(bkLoadTick);
+  }
+  const bkLoadEnd = k => { delete bkLoad[k]; };
+  function bkLoadTick() {
+    bkLoadRaf = 0;
+    let live = false;
+    for (const k in bkLoad) {
+      const L = bkLoad[k];
+      if (L.tgt < L.cap - 1) L.tgt += (L.cap - 1 - L.tgt) * .006;   /* زحفٌ بطيءٌ نحو حدّ المرحلة */
+      L.shown += (L.tgt - L.shown) * (L.tgt >= 100 ? .25 : .08);
+      if (L.tgt >= 100 && L.shown > 99.5) L.shown = 100;
+      if (L.shown < 100) live = true;
+    }
+    bkLoadPaint();
+    if (live && document.querySelector('#cm-body .bk-skel')) bkLoadRaf = requestAnimationFrame(bkLoadTick);
+  }
+  function bkLoadPaint() {
+    document.querySelectorAll('#cm-body .bk-skel[data-bkl]').forEach(el => {
+      const L = bkLoad[el.dataset.bkl]; if (!L) return;
+      const v = Math.round(L.shown);
+      if (el._v === v) return; el._v = v;
+      const pr = el.querySelector('.pr'), em = el.querySelector('em');
+      if (pr) pr.style.strokeDashoffset = (169.65 * (1 - L.shown / 100)).toFixed(2);
+      if (em) em.textContent = v + '٪';
+    });
   }
   /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
   function bk2Prefetch() {
@@ -24130,11 +24225,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const hlColLoad = (k, d) => { try { const v = localStorage.getItem(k); return HL_COL[v] ? v : d; } catch (e) { return d; } };
   const hlCol = { t: hlColLoad('ac.hl.col', 'y'), box: hlColLoad('ac.hl.colb', 'b') };
   function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
-  /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
-  function hlDots(m, W, Hh, rows) {
-    const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
-    return m.c.map(cid => ({ cid, n: rows.get(cid) })).filter(o => o.n).map((o, i) => ({ ...o, R, y, x: m.d === 'r' ? r * W + R * (1.3 + 2.15 * i) : l * W - R * (1.3 + 2.15 * i) }));
-  }
   /* التحديدُ العابرُ على هذه الصفحة (إن كان) — يُطلى على الورقة كالتظليل فيميل معها، لا طبقةً فوقها */
   function hlSelOn(b, k) {
     try { return bkTLSel && bkTLSel.k === k && bkTLSel.painted && bkOfEl(bkTLSel.d) === b ? bkTLSel : null; } catch (e) { return null; }
@@ -24148,7 +24238,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c0.globalCompositeOperation = 'source-over';
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
-    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
+    const c = cv.getContext('2d'), W = cv.width, Hh = cv.height;
     c.globalCompositeOperation = 'multiply';
     for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
     c.globalCompositeOperation = 'source-over';
@@ -24157,28 +24247,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = .55;
       c.strokeRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); c.globalAlpha = 1;
     }
-    for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
-      const [, dot, ink] = HL_COL[m.col];
-      c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
-      c.fillStyle = dot; c.fill();
-      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(20, 35, 63, .3)'; c.stroke();
-      c.fillStyle = ink; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
-      c.fillText(String(n), x, y + R * 0.06);
-    }
   }
-  /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل صفَّها)، وإطارُ التظليل المختار */
+  /* في طبقة النصّ: إطارُ التظليل المختار — بلا دوائر أرقامٍ بجانب التظليل (طلبُ صاحب الموقع) */
   function hlSpots(b, d) {
-    d.querySelectorAll('.bk-hlnum, .bk-hlcur').forEach(x => x.remove());
+    d.querySelectorAll('.bk-hlcur').forEach(x => x.remove());
     const k = +d.dataset.k, ms = hlMarksOn(b, k); if (!ms.length) return;
-    const W = 1000, Hh = 1000 / b.ar, rows = hlRowMap();
     for (const m of ms) {
-      for (const { cid, n, x, y, R } of hlDots(m, W, Hh, rows)) {
-        const e = document.createElement('button');
-        e.type = 'button'; e.className = 'bk-hlnum'; e.dataset.hlcid = cid;
-        e.title = T().hlArmT.replace('{n}', n); e.setAttribute('aria-label', e.title);
-        Object.assign(e.style, { left: (x - R * 1.4) / W * 100 + '%', top: (y - R * 1.4) / Hh * 100 + '%', width: R * 2.8 / W * 100 + '%', height: R * 2.8 / Hh * 100 + '%' });
-        d.appendChild(e);
-      }
       if (hlCur && hlCur.m === m.id) {
         for (const [l, r, t, bb] of m.bars) {
           const e = document.createElement('i'); e.className = 'bk-hlcur';
@@ -24230,6 +24304,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let row = cid || hlOpenCid(id) || null, grew = false;
     if (row === 'new') { row = hlNewRow(id); grew = !!row; }
     if (row) { hlOpen[id] = row; hlOpenUsr[id] = true; }
+    if (kind !== 'box' && hlTool[id] !== 't') { hlTool[id] = 't'; queueMicrotask(() => hlBarSync(id)); }   /* تظليلُ نصٍّ يعني اختيارَ القلم */
     const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlCol[kind === 'box' ? 'box' : 't'], kind,
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
@@ -24257,12 +24332,96 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (first) return;
     (postsOf(cmCode, 'cards') || []).forEach(p => { if (p.data && p.data.hl && p.data.hl.marks.length) hlRepaintAll(p.id); });
   }
-  function hlPick(d, e) {
-    const c = hlCan(d); if (!c) return;
+  /* التظليلُ الذي تحت نقطةٍ من الصفحة (إن كان) */
+  function hlMarkAt(d, e) {
+    const c = hlCan(d); if (!c) return null;
     const R = d.getBoundingClientRect(), x = (e.clientX - R.left) / R.width, y = (e.clientY - R.top) / R.height;
     const m = hlMarksOn(c.b, +d.dataset.k).find(m => m.bars.some(([l, r, t, bb]) => x >= l && x <= r && y >= t && y <= bb));
-    hlSetCur(c.id, m ? m.id : null);
+    return m ? { c, m } : { c, m: null };
   }
+  function hlPick(d, e) {
+    const h = hlMarkAt(d, e); if (!h) return;
+    hlSetCur(h.c.id, h.m ? h.m.id : null);
+    if (h.m) hlMkOpen(h.c.id, h.m, e.clientX, e.clientY); else hlMkClose();
+  }
+  /* ===== قائمةُ التظليل (طلبُ صاحب الموقع): نقرُ تظليلٍ سابقٍ يفتح ألوانَه الأربعة وزرَّ الحذف تحته ===== */
+  const HL_TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 7V4.5h4V7M6.5 7l1 13h9l1-13M10.2 10.5v6.5M13.8 10.5v6.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function hlMkClose() { const P = document.getElementById('hl-mk'); if (P) P.remove(); }
+  function hlMkOpen(id, m, cx, cy) {
+    hlMkClose(); hlPalClose();
+    const P = document.createElement('div');
+    P.id = 'hl-mk'; P.className = 'hl-pal hl-mk' + (document.documentElement.getAttribute('data-theme') === 'dark' ? ' is-dark' : ''); P.setAttribute('role', 'menu');
+    /* ومربّعُ رقم الصفّ الذي ينتمي إليه (طلبُ صاحب الموقع): يُكتب فيه رقمٌ آخر فينتقل التظليلُ إلى صفّه (ورقمُ ما بعد الأخير صفٌّ جديد)، ويُمسح فيُفكّ من صفّه */
+    const rn = m.c.length ? (hlRowMap().get(m.c[0]) || '') : '';
+    P.innerHTML = `<input class="hl-mk__n" data-hlmn inputmode="numeric" maxlength="3" value="${rn}" aria-label="${esc(T().hlRowN || '')}" title="${esc(T().hlRowN || '')}"><i class="hl-mk__sep"></i>`
+      + Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${m.col === c}" class="${m.col === c ? 'is-on' : ''}" data-hlmc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('')
+      + `<i class="hl-mk__sep"></i><button type="button" class="hl-mk__del" data-hlmdel title="${esc(T().hlDel || '')}" aria-label="${esc(T().hlDel || '')}">${HL_TRASH}</button>`;
+    document.body.appendChild(P);
+    const w = P.offsetWidth, h = P.offsetHeight;
+    P.style.left = Math.round(Math.min(innerWidth - w - 8, Math.max(8, cx - w / 2))) + 'px';
+    P.style.top = Math.round(cy + 14 + h > innerHeight - 6 ? cy - h - 14 : cy + 14) + 'px';
+    const nin = P.querySelector('[data-hlmn]');
+    const applyN = () => {
+      const v = nin.value.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\D/g, '');
+      const R = hlRows(id), cards = R ? R.cards : [];
+      let cid = null, grew = false;
+      if (v) {
+        const n = +v;
+        if (n >= 1 && n <= cards.length) cid = cards[n - 1].id;
+        else if (n === cards.length + 1 && R) { cid = hlNewRow(id); grew = !!cid; }
+        else { nin.value = rn; return; }   /* رقمٌ خارج الجدول: يعود كما كان */
+      }
+      const now = m.c[0] || null;
+      if (cid === now) return;
+      m.c = cid ? [cid] : [];
+      save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id);
+      if (cid) hlRailGo(id, cid);
+      if (grew) hlRowsChanged();
+    };
+    nin.addEventListener('input', () => { nin.value = nin.value.replace(/[^0-9٠-٩]/g, ''); });
+    nin.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyN(); hlMkClose(); } e.stopPropagation(); });
+    nin.addEventListener('change', applyN);
+    P.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      e.stopPropagation();
+      if (b.hasAttribute('data-hlmdel')) { hlDelete(id, m.id); hlMkClose(); return; }
+      const c = b.dataset.hlmc;
+      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); }
+      hlMkClose(); hlSetCur(id, null);
+    });
+  }
+  window.addEventListener('pointerdown', e => { const P = document.getElementById('hl-mk'); if (P && !P.contains(e.target)) { const n = P.querySelector('[data-hlmn]'); if (n && document.activeElement === n) n.dispatchEvent(new Event('change')); hlMkClose(); } }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('hl-mk')) { hlMkClose(); } }, true);
+  window.addEventListener('scroll', () => hlMkClose(), true);
+  /* صفحةُ طبقة النصّ الظاهرةُ تحت نقطة (ولو بين الكلمات أو داخل مربّعٍ بلا نصّ — حيث لا تلتقط الطبقةُ الفأرة) */
+  function hlTLAt(e) {
+    const st = e.target.closest && e.target.closest('#cm-body .cbk-stage'); if (!st) return null;
+    for (const d of st.querySelectorAll('.bk-tlbox:not([hidden]) .bk-tl')) {
+      const r = d.getBoundingClientRect();
+      if (r.width && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return d;
+    }
+    return null;
+  }
+  /* نقرُ تظليلٍ يفتح قائمتَه في كلّ حال (طلبُ صاحب الموقع): بالفأرة أو والقلمُ أو المربّعُ مختار — قبل تقليب الكتاب وقبل بدء تظليلٍ جديد */
+  window.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    const d = hlTLAt(e); if (!d) return;
+    const h = hlMarkAt(d, e); if (!h || !h.m) return;
+    e.preventDefault(); e.stopPropagation();
+    if (bkTLSel) bkTLClear();
+    hlSetCur(h.c.id, h.m.id); hlMkOpen(h.c.id, h.m, e.clientX, e.clientY);
+  }, true);
+  /* والفأرةُ فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ لا القلم ولا التقليب */
+  let hlHovQ = 0;
+  document.addEventListener('pointermove', e => {
+    if (hlHovQ || bkTLDrag || bkBoxDrag) return;
+    hlHovQ = requestAnimationFrame(() => {
+      hlHovQ = 0;
+      const d = hlTLAt(e), h = d && hlMarkAt(d, e), on = !!(h && h.m);
+      document.querySelectorAll('#cm-body .cbk-stage.hl-over').forEach(x => { if (!on || !x.contains(d)) x.classList.remove('hl-over'); });
+      if (on) d.closest('.cbk-stage').classList.add('hl-over');
+    });
+  }, { passive: true });
   function hlDelete(id, mid) {
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
@@ -24308,16 +24467,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlRailBuild(el) {
     const id = el.dataset.pkid, rows = hlRailData(id);
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
-    const tool = hlTool[id] || 't';
+    const tool = hlTool[id] || '';   /* لا أداةَ مختارةً حتى يُظلَّل أو تُختار (طلبُ صاحب الموقع): كلتاهما باهتة والفأرةُ للتقليب */
     const st = el._st || (el._st = hlRailSt[id] || (hlRailSt[id] = { center: -1, vel: 0, target: null, lastIn: 0 }));
     const sig = rows.map(r => r.cid + ':' + r.cols.join('') + r.t + '.' + r.b).join('|') + '|' + tool + hlCol.t + hlCol.box;
     if (el._sig !== sig) {
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
         /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
-        r.ow = Math.max(64, 30 + (r.t ? String(r.t).length * 7 : 0) + (r.b ? String(r.b).length * 7 : 0) + 22);
-        return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.nw ? '+' : r.n}</b></button>`;
+        r.ow = Math.max(64, 30 + String(r.t || 0).length * 7 + String(r.b || 0).length * 7 + 22);
+        /* والصفُّ الجديدُ بطاقةٌ فارغةٌ برقمه التالي كغيرها (طلبُ صاحب الموقع) — لا «+» ولا إطارٌ منقّط؛ يُنشأ في الجدول حين يدخلها أوّلُ تظليل */
+        return `<button type="button" class="cx-hlt${r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.n}">`
+          + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.n}</b></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
@@ -24363,7 +24523,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (op !== el._op) {
       if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
-      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
+      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || 0;   /* صفرٌ ظاهرٌ قبل أيّ تظليل (طلبُ صاحب الموقع) */ });
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
     /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
@@ -24438,12 +24598,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tb = e.target.closest('.cx-hltool button'); if (!tb) return;
       e.preventDefault(); e.stopPropagation();
       const id = el.dataset.pkid; if (tb.disabled) return;
-      hlTool[id] = tb.dataset.hltool; el._sig = ''; hlRailBuild(el); hlToolSync(id);
+      hlTool[id] = hlTool[id] === tb.dataset.hltool ? '' : tb.dataset.hltool;   /* ضغطُ المختارة ثانيةً يتركها ويعود للفأرة */
+      el._sig = ''; hlRailBuild(el); hlToolSync(id);
     });
   }
   /* أداةُ المربّع (ق٦): يُعلَّم مصدرُ المساهمة فتصير صفحاتُه لوحَ رسمٍ بمؤشّرٍ متقاطع، وتعود نصًّا بالقلم */
+  /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — رأسُه المائلُ عند نقطة التأشير أسفلَ اليسار */
+  const hlPenCurC = {};
+  function hlPenCursor(c) {
+    if (hlPenCurC[c]) return hlPenCurC[c];
+    const ink = { y: '#c99410', g: '#3f9a52', b: '#3f84c6', p: '#c95b7d' }[c] || '#c99410', fill = (HL_COL[c] || HL_COL.y)[1];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><g stroke="#14233f" stroke-width="1.3" stroke-linejoin="round">`
+      + `<path d="M15.5 2.5l8 8-9.5 9.5-8-8z" fill="#fff"/><path d="M6 12l8 8-2.5 2.5H7.5L3.5 18.5v-4z" fill="${fill}"/><path d="M3.5 18.5l4 4H2z" fill="${ink}"/></g></svg>`;
+    return (hlPenCurC[c] = `url("data:image/svg+xml,${encodeURIComponent(svg)}") 2 24, text`);
+  }
   function hlToolSync(id) {
-    Object.values(pkSrcBk).forEach(b => { if (b && b.view && pkSrcBase(hlSidOf(b)) === id) b.view.classList.toggle('hl-box', hlTool[id] === 'box'); });
+    const cur = hlPenCursor(hlCol.t);
+    Object.values(pkSrcBk).forEach(b => {
+      if (!b || !b.view || pkSrcBase(hlSidOf(b)) !== id) return;
+      b.view.classList.toggle('hl-box', hlTool[id] === 'box');
+      b.view.classList.toggle('hl-pen', hlTool[id] === 't');
+      b.view.style.setProperty('--hl-cur', cur);
+    });
   }
   /* ===== ألوانُ حبر الأداة: قائمةٌ صغيرةٌ تطفو فوق خطّها، تُغلق باختيارٍ أو نقرٍ خارجها أو Esc ===== */
   function hlPalClose() { const P = document.getElementById('hl-pal'); if (P) P.remove(); }
@@ -24505,11 +24681,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t = e.target.closest && e.target.closest('[data-hlcid]');
     if (!t) return;
     e.preventDefault(); e.stopPropagation();
-    if (t.classList.contains('bk-hlnum')) {
-      const c = hlCan(t); if (!c) return;
-      hlSetCur(c.id, null); hlRailGo(c.id, t.dataset.hlcid);
-      return;
-    }
   }, true);
   /* Esc: يُلغى التحديدُ القائم أوّلًا، ثمّ الاختيار، ثمّ تُطفأ الدائرةُ الشغّالة · Delete يحذف المختار */
   document.addEventListener('keydown', e => {
@@ -24574,19 +24745,92 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     view.querySelectorAll('[data-bknav]').forEach(btn => btn.addEventListener('click', () => step(+btn.dataset.bknav)));
     view.querySelector('[data-bkclose]').addEventListener('click', () => turnTo(0));
-    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !b.one));
+    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !bk2Goal(b)));
     bk2Layout(b);
     bk2Engine(b);
   }
-  /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته.
-     المحرّكُ يُبنى من جديد بالوضع الآخر، ولقطةُ القديم فوقه تتلاشى فلا يومض */
+  /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته */
+  const BK_MX = 720;
+  /* الوضعُ الذي يمضي إليه الكتاب (ضغطاتٌ متتالية أثناء الحركة تُحسب منه لا ممّا كان) */
+  const bk2Goal = b => b.mx ? (b.mxWant != null ? b.mxWant : b.mxGoal) : !!b.one;
   function bk2SetOne(b0, one) {
     one = !!one; bk2OneSet(one);
     bkModeSync();
     const all = new Set([b0, ...Object.values(pkSrcBk)]);
-    all.forEach(b => { if (b && b.gl !== undefined && !!b.one !== one && b.view && b.view.isConnected) bk2Switch(b, one); });
+    all.forEach(b => {
+      if (!b || b.gl === undefined || !b.view || !b.view.isConnected) return;
+      if (b.mx) { b.mxWant = one; return; }   /* تبدُّلٌ جارٍ: الأخيرُ يُنفَّذ بعده */
+      if (!!b.one !== one) bk2Switch(b, one);
+    });
+    requestAnimationFrame(() => pkSrcHFit());   /* صفحةٌ واحدةٌ أطولُ من صفحتين: القامةُ تلحق */
   }
+  /* أمام العين (طلبُ صاحب الموقع: لا تلاشي): من صفحتين إلى صفحة تنطوي اليمنى حول الكعب إلى ما وراء الكتاب والكاميرا تقترب
+     من اليسرى، ومن صفحةٍ إلى صفحتين تنفتح من ورائه وهي تبتعد — والقامةُ تتقلّص أو تتّسع معها بالمدّة نفسِها.
+     المحرّكان مختلفا البناء (ورقةٌ لكلّ صفحة · ورقةٌ لكلّ صفحتين)، فيُبدَّل بينهما وهما على الصورة نفسِها:
+     الجديدُ يُبنى مخفيًّا فوق القديم ويظهر حين تجهز صورُه */
   function bk2Switch(b, one) {
+    const g = b.gl;
+    if (!g || g.dead || !g.morph || b.closed || bkReduce() || !b.stage.clientWidth) return bk2SwitchNow(b, one);
+    b.mx = true; b.mxWant = null; b.mxGoal = one;
+    if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
+    bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
+    const fin = ng => {
+      b.mx = false; b.mxTo = null;
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      bk2Show(b);
+      const w = b.mxWant; b.mxWant = null;
+      if (w != null && w !== !!b.one) bk2Switch(b, w);
+      else pkSrcHFit();
+    };
+    if (one) {
+      /* تبقى اليسرى (إن كانت صفحةً) وتنطوي اليمنى — وفي آخر الكتاب تبقى اليمنى */
+      /* والفتحةُ التي انفتحت من صفحةٍ ولم تُقلَّب بعدُ تعود إلى تلك الصفحة نفسِها */
+      const A = g.A, bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n ? 'L' : 'R';
+      b.mxTo = true;
+      g.morph(side, 1, BK_MX, bkMxH(b)).then(() => {
+        b.one = b.single = true; b.pos = side === 'L' ? 2 * A - 1 : 2 * (A - 1);
+        bk2Swap(b, g, null).then(fin);
+      });
+    } else {
+      /* الصفحةُ الفرديّةُ يسرى الفتحة فتنفتح اليمنى من ورائها، والزوجيّةُ يمناها فتنفتح اليسرى */
+      const pg = Math.max(1, b.pos), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
+      b.mxTo = true;   /* القامةُ تبقى حتى يبدأ الانفتاح */
+      b.mxBack = { A, side };
+      b.one = b.single = false; b.pos = 2 * (A - 1);
+      bk2Swap(b, g, side).then(ng => {
+        b.mxTo = false;
+        return ng.morph(side, 0, BK_MX, bkMxH(b));
+      }).then(fin);
+    }
+  }
+  /* القامةُ تنتقل الآن بمدّة الحركة، ويُعطى المحرّكُ قامةَ المساحة قبلها وبعدها */
+  function bkMxH(b) {
+    const sp = b.stage.closest('.pk-split'), h0 = b.stage.clientHeight;
+    const v = () => sp ? parseFloat(sp.style.getPropertyValue('--pk-h')) || 0 : 0, p0 = v();
+    pkSrcHFit(BK_MX);
+    const p1 = v();
+    return { h0, h1: p0 && p1 ? Math.max(1, h0 + p1 - p0) : h0 };
+  }
+  /* تبديلُ المحرّك خفيف: لقطةٌ ثابتةٌ من القديم تغطّيه، ويُطفأ قبل أن يُبنى الجديد (سياقُ رسمٍ واحدٌ لا اثنان)،
+     ثمّ تذوب اللقطةُ حين يرسم الجديدُ الصورةَ نفسَها */
+  function bk2Swap(b, old, morph) {
+    return new Promise(res => {
+      const sh = document.createElement('canvas');
+      try { old.snapshot(sh); } catch (e) {}
+      Object.assign(sh.style, { position: 'absolute', left: old.el.offsetLeft + 'px', top: old.el.offsetTop + 'px', width: old.el.style.width, height: old.el.style.height, pointerEvents: 'none', zIndex: 2 });
+      b.stage.appendChild(sh);
+      old.dispose(); b.gl = null;
+      bk2Engine(b, {
+        quiet: true, morph: morph || undefined,
+        onReady: ng => {
+          ng.el.style.opacity = '';
+          const end = () => { sh.remove(); res(ng); };
+          sh.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 110, easing: 'ease-out' }).finished.then(end, end);
+        },
+      });
+    });
+  }
+  function bk2SwitchNow(b, one) {
     const pg = b.closed ? null : Math.max(1, b.pos);
     let ghost = null;
     const g = b.gl;
@@ -24605,11 +24849,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
     if (b.meta) { b.meta.pos = b.pos; save(); }
     bk2Layout(b);
-    bk2Engine(b);
-    if (ghost) setTimeout(() => {
-      const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-out', fill: 'forwards' });
-      an.onfinish = () => ghost.remove();
-    }, 60);
+    /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
+    const fade = () => { if (!ghost) return; const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: b.closed ? 160 : 320, easing: 'ease-out', fill: 'forwards' }); an.onfinish = () => ghost.remove(); };
+    if (b.closed && ghost) bk2Engine(b, { quiet: true, onReady: ng => { ng.el.style.opacity = ''; fade(); } });
+    else { bk2Engine(b); setTimeout(fade, 60); }
   }
   /* أزرارُ الوضع (تحت الكتاب وفي التذييل) تحمل صورةَ الوضع الآخر */
   function bkModeSync() {
@@ -24761,7 +25004,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkBoxRect = (a, z) => ({ l: Math.min(a[0], z[0]), r: Math.max(a[0], z[0]), t: Math.min(a[1], z[1]), b: Math.max(a[1], z[1]) });
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d || e.button !== 0 || e.target.closest('.bk-hlnum')) return;
+    if (!d || e.button !== 0) return;
     const c = hlCan(d); if (!c || hlTool[c.id] !== 'box' || !hlRows(c.id)) return;
     e.preventDefault(); e.stopImmediatePropagation();
     bkTLClear();
@@ -24788,11 +25031,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
     if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
-    if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
+    if (e.button !== 0 || !d._rows) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
     bkTLClear();
     bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
+    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur', hlPenCursor(hlCol.t)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
     try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
   document.addEventListener('pointermove', e => {
@@ -24804,6 +25048,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkTLUp = e => {
     if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
     const g = bkTLDrag; bkTLDrag = null;
+    { const v = g.d.closest('.pk-src__view, [data-pksrcview]'); if (v) v.classList.remove('hl-drag'); }
     /* نقرةٌ بلا سحب: تختار التظليلَ الذي تحتها (أو تُلغي الاختيار) */
     if (!g.moved || !g.z) { bkTLDraw(g.d, null); hlPick(g.d, e); return; }
     const bars = bkTLBars(g.d, g.a, g.z);
@@ -24826,14 +25071,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointercancel', bkTLUp, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && bkTLSel) { bkTLClear(); e.stopImmediatePropagation(); } }, true);
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
-  function bk2Engine(b) {
+  function bk2Engine(b, o = {}) {
     const st = b.stage;
-    bkPhShow(b);
+    if (!o.quiet) bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
       if (b.gl && !b.gl.dead) return;
+      bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one,
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
@@ -24845,6 +25091,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return false;
         },
         onBusy: () => bkTLHide(b),
+        /* والقلمُ أو المربّعُ مختار: الصفحةُ للتظليل وحده، والتقليبُ من زرّي التذييل (طلبُ صاحب الموقع) */
+        locked: () => { const t = hlTool[pkSrcBase(hlSidOf(b))]; return t === 't' || t === 'box'; },
         onTurn: A => {
           /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
           if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
@@ -24860,9 +25108,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
       mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       bk2Layout(b);
+      if (b.phEl) b.gl.el.style.opacity = '0';   /* الكتابُ مخفيٌّ تحت الهيكل حتى يكتمل، ثمّ يظهر بتلاشٍ */
       /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
       const g = b.gl;
-      const off = () => { if (b.gl === g) bkPhHide(b); };
+      if (o.quiet) g.el.style.opacity = '0';
+      let done = false;
+      const off = () => {
+        if (done) return; done = true;
+        if (b.gl !== g) return;
+        if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
+      };
       g.ready().then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
       setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
