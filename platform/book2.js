@@ -269,9 +269,10 @@ export function createBook2(THREE, host, cfg) {
   const ZR = new THREE.Vector3(0, 0, 1);
   /* إعداداتُ ظلّ الطاولة كلُّها في مكانٍ واحد (‏‎cfg.shadow‎ أو ‎setShadow‎ يغيّرها) — بإطار الشاشة: ‏‎x‎ يمينٌ و‎y‎ أعلى:
      ‏‎sunX/sunY/sunZ‎ اتّجاهُ الشمس (يقع الظلُّ عكسه، و‎sunZ‎ أعلى ⇐ أقرب) · ‏‎offX/offY‎ إزاحةُ الظلّ الناعم ·
+     (ظلٌّ واحدٌ على الطاولة — طلبُ صاحب الموقع: المُلقى عتمتُه ‎0‎ فلا يبقى إلّا الناعم) ·
      ‏‎margin‎ عرضُه حول الكتاب · ‏‎blur‎ نعومةُ حافّته · ‏‎softDark/softLight‎ و‎castDark/castLight‎ عتمةُ الناعم والمُلقى · ‏‎edge‎ حدّةُ المُلقى */
   const SHD = Object.assign({ sunX: 2.4, sunY: -2.4, sunZ: 3.6, offX: -0.09, offY: 0.09, margin: 0.15, blur: 0.42,
-    softDark: 0.6, softLight: 0.36, castDark: 0.36, castLight: 0.16, edge: 4 }, cfg.shadow || {});
+    softDark: 0.6, softLight: 0.36, castDark: 0, castLight: 0, edge: 4 }, cfg.shadow || {});
   const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(), BLOB = new THREE.Vector3();
   const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ color: '#000', transparent: true, opacity: 0, depthWrite: false }));
   blob.renderOrder = -1; scene.add(blob);
