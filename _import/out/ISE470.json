@@ -1,0 +1,220 @@
+{
+  "code": "ISE 470",
+  "users": [
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-naheeb",
+      "name": "naheeb",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/c68b51/144.png",
+      "email": "naheeb@import.stkfupm.invalid",
+      "user": "naheeb"
+    },
+    {
+      "id": "stk-mujahed_alsaqabi",
+      "name": "mujahed alsaqabi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/71c47a/144.png",
+      "email": "mujahed_alsaqabi@import.stkfupm.invalid",
+      "user": "mujahed_alsaqabi"
+    },
+    {
+      "id": "stk-fond_of_you",
+      "name": "Fond Of You",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/fond_of_you/144/553_2.png",
+      "email": "fond_of_you@import.stkfupm.invalid",
+      "user": "Fond_Of_You"
+    },
+    {
+      "id": "stk-the_phenom",
+      "name": "THE PHENOM",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/the_phenom/144/1909_2.png",
+      "email": "the_phenom@import.stkfupm.invalid",
+      "user": "THE_PHENOM"
+    },
+    {
+      "id": "stk-user11658",
+      "name": "خالد العمري",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11658/144/2488_2.png",
+      "email": "user11658@import.stkfupm.invalid",
+      "user": "user11658"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1320448-ise470",
+      "uid": "stk-user2352",
+      "code": "ISE 470",
+      "sec": "info",
+      "ts": 1390003525000,
+      "st": "pub",
+      "data": {
+        "desc": "What is a Supply Chain?\n\nA supply chain consists of all parties involved, directly or indirectly, in fulfilling a\ncustomer request. The supply chain not only includes the manufacturer and suppliers, but\nalso transporters, warehouses, retailers, and customers themselves. Within each\norganization, such as manufacturer, the supply chain includes all functions involved in\nreceiving and filling a customer request. These functions include, but are not limited to,\nnew product development, marketing, operations, distribution, finance, and customer\nservice.\n\nConsider a customer walking into a Wal-Mart store to purchase detergent. The\nsupply chain begins with the customer and their need for detergent. The next stage of\nthis supply chain is the Wal-Mart retail store that the customer visits. Wal-Mart stocks its\nshelves using inventory that may have been supplied from a finished-goods warehouse\nthat Wal-Mart manages or from a distributor using trucks supplied by a third party. The\ndistributor in turn is stocked by the manufacturer (say Procter & Gamble p&g] in this\ncase). The P&G manufacturing plant receives raw material from a variety of suppliers\nwho may themselves have been supplied by lower tier suppliers. For example, packaging\nmaterial may come from Tenneco packaging while Tenneco receives raw materials to\nmanufacture the packaging from other suppliers.\n\nA supply chain is dynamic and involves the constant flow of information, product,\nand funds between different stages. In our example, Wal-Mart provides the product, as\nwell as pricing and availability information, to the customer. The customer transfers\nfunds to Wal-Mart. Wal-Mart conveys point-of-sales data as well as replenishment order\nvia trucks back to the store. Wal-Mart transfers funds to the distributor after the\nreplenishment. The distributor also provides pricing information and sends delivery\nschedules to Wal-Mart. Similar information, material, and fund flows take place across\nthe entire supply chain.\n\nIn another example, when a customer purchases online from Dell Computer, the\nsupply chain includes, among others, the customer, Dell’s Web site that takes the\ncustomer’s order, the Dell assembly plant, and all of Dell’s suppliers and their suppliers.\nThe Web site provides the customer with information regarding pricing, product variety,\nand product availability. Having made a product choice, the customer enters the site to\ncheck the status of the order. Stages further up the supply chain use customer order\ninformation to fill the order. That process involves an additional flow of information,\nproduct, and funds between various stages of the supply chain.\n\nThese examples illustrate that the customer is an integral part of the supply chain.\nThe primary purpose from the existence of any supply chain is to satisfy customer needs,\nin the process generating profits for itself. Supply chain activities begin with a customer\norder and end when a satisfied customer has paid for his or her purchase. The term\nsupply chain conjures up images of product or supply moving from suppliers to\nmanufacturers to distributors to retailers to customers along a chain. It is important to\nvisualize information, funds, and product flows along both directions of this chain. The term supply chain may also imply that only one player is involved at each stage. In\nreality, a manufacturer may receive material from several suppliers and then supply\nseveral distributors. Thus, most supply chains are actually networks. It may be more\naccurate to use the term supply network or supply web to describe the structure of most\nsupply chains.\n\nA typical supply chain may involve a variety of stages. These supply chain stages\ninclude:\n• Customers\n• Retailers\n• Wholesalers/Distributors\n• Manufacturers\n• Component/Raw material suppliers\n\nEach stage need not be presented in a supply chain. The appropriate design of the\nsupply chain will depend on both the customer’s needs and the roles of the stages\ninvolved. In some cases, such as Dell, a manufacturer may fill customer orders directly.\nDell builds-to-order; that is, a customer order initiates manufacturing at Dell. Dell does\nnot have a retailer, wholesaler, or distributor in its supply chain. In other cases, such as\nthe mail order company L.L. Bean, manufacturers do not respond to customer orders\ndirectly. In this case, L.L. Bean maintains an inventory or product from which they fill\ncustomer orders. Compared to the Dell supply chain, the L.L. Bean supply chain\ncontains an extra stage (the retailer, L.L. Bean itself) between the customer and the\nmanufacturer. In the case of other retail stores, the supply chain may also contain a\nwholesaler or distributor between the store and the manufacturer.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-470-supply-chain-systems-modeling/120952/6",
+          "user": "user2352",
+          "ts": 1390003525000,
+          "tid": 120952,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1385488-ise470",
+      "uid": "stk-naheeb",
+      "code": "ISE 470",
+      "sec": "info",
+      "ts": 1404908158000,
+      "st": "pub",
+      "data": {
+        "desc": "الله يعطيك العافية…الأخ صانع القرار…\n\nأنا تخصصي هندسة ميكانيكية…\nوالمصطلحات المذكورة في وصف التخصص أغلبها جديدة علي…\n\nفممكن بشكل مختصر أحد يعطينا وصف مبسط عن الـ supply chain وبشكل عام عن الـ materials supply.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-470-supply-chain-systems-modeling/120952/11",
+          "user": "naheeb",
+          "ts": 1404908158000,
+          "tid": 120952,
+          "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1529117-ise470",
+      "uid": "stk-mujahed_alsaqabi",
+      "code": "ISE 470",
+      "sec": "info",
+      "ts": 1616313850000,
+      "st": "pub",
+      "data": {
+        "desc": "TERM 202 | Dr.AHMAD AL HANBALI\nهذا تقييم مبدئي بعد الميد ولي عودة بعد نهاية الكورس\n\nجودة المقرر بشكل عام: ممتاز الى الان\nالمواضيع التي يغطيها المقرر:\nالمتيريال اللي قبل الميد :\nch1:Introduction to supply chain management\nch2:Achieving a strategic fit and scope\nch3:Identify key drivers in SC and define key metrics\n(concept)ch4:Designing a distribution network\n( use of OR models to balance some SC factors)ch5:Designing a distribution network\nch6:Impact of uncertainty on network design\nالكتاب المستخدم للمقرر : نستخدم سلايدات واللي هي مقتبسة من كتابين واحد اسمه supply chain management والثاني designing and managing the supply chain\nالأسئلة والأمثلة المستخدمة في المقرر: قليلة نوعاً ما\nنقاط مهمة :\n-اعتقد دكتور أحمد يختلف عن الدكتور الضرغام في السلبس لأني شفت ان الدكتور الضرغام ماغطا اول 4 شابترز غطيناها حنا\n-مستوى الكورس تقريباً اعلى من ISE402بشكل بسيط بحكم استخدام ال OR وتحتاج تقرأ بشكل معمق أكثر\n-شابتر 6 كان عبارة عن شابتر 5 في ISE307 ومفهوم حتى لو ما أخذت الكورس … لكن حلو لو تاخذه معاه او قبله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-470-supply-chain-systems-modeling/120952/15",
+          "user": "mujahed_alsaqabi",
+          "ts": 1616313850000,
+          "tid": 120952,
+          "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-doc-fond_of_you-ise470",
+      "uid": "stk-fond_of_you",
+      "code": "ISE 470",
+      "sec": "doc",
+      "ts": 1358518474000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98639",
+            "n": "Dr. Mohammed Ben Daya",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ISE 470 - Term 121\n\nالتحضير : كل محاضرة بعض الأحيان بنهاية الكلاس أو بعض الأحيان ببدايته\n\nطريقة الشرح : كتب على السبورة أحيانا و يحب الطلاب يكتبوا معاه و يشاركوه و بعض الاحيان سلايدات\n\nالكويزات : متوسطة تميل للصعوبة\n\nالمياجر: صعبة\n\nالفاينلات : سهل\n\nالقريد النهائي: A+\n\nالصوت: واضح و يتحرك بالكلاس\n\nإضافات : الدكتور شريح جدا لكن عيبه الوحيد مو منظم شويتين لكن قريده يعتمد بشكل كبير على أداءك و مشاركتك بالكلاس لا تغيب و خلك بالصف الأول و شارك معاه و القريد بيجيك شيء ما تتوقعه 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1165598-ise470",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammed-ben-daya/98639/14",
+              "user": "Fond_Of_You",
+              "ts": 1358518474000,
+              "tid": 98639,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-the_phenom-ise470",
+      "uid": "stk-the_phenom",
+      "code": "ISE 470",
+      "sec": "doc",
+      "ts": 1421635268000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98639",
+            "n": "Dr. Mohammed Ben Daya",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "السلام عليكم\nTERM 141 - ISE 470\nالتحضير :\nنهاية كل كلاس\nالشرح :\nرائع جدا و المادة تعتبر من اهم المواد في التخصص وهو يمشي معاك بالارقام والكونسبت من البداية و المادة تتطلب انك تكون فاهم شابتر 4 و 5 من ISE402 🥊 🥊\nيعتمد في الشرح على كل من النوت المكتوب و سلايدات يعرضها و مقالات يوزعها خلال الترم\nو تدخل معاك في الاختبارات\nالكويزات :\nتحتاج فهم اكثر من المذاكرة 😐 🚬\nالمياجر :\nنفس نظام الكويزات و غالبا من النوت ولو كنت فاهم معاه بالكلاس 100% بترتاح بشكل عجيب وانت تذاكر 👍\nالفاينلات :\nنفس نظام المياجر وبشكل اسهل 🤠\n\nالصوت :\nواضح جدا\nالقريد النهائي :\nA\nإضافات :\nللأمانة الدكتور اخلاق و رائع جدا في التعامل و شرح ولا اروع 🌹 🌹\nطبعا الاختبارات كلها MCQ \"multiple choice \"\nبالنسبة للقريد والدرجات :\nما ادري الا عن درجة المياجر غير كذا ما ادري عن شيء\nبصراحة في الاخير ما احس انه ظلمني وشوف اني اخذت حقي ويمكن اكثر وهالنقطة فيها اختلاف للامانة ❤️ ❤️\n\nاسف للاطالة ولكن حبيت اقيم من كل النواحي بنظري",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1420448-ise470",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammed-ben-daya/98639/21",
+              "user": "THE_PHENOM",
+              "ts": 1421635268000,
+              "tid": 98639,
+              "pn": 21
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user11658-ise470",
+      "uid": "stk-user11658",
+      "code": "ISE 470",
+      "sec": "doc",
+      "ts": 1685879403000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f180888",
+            "n": "Dr. Mohammad Abdel-Aal",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ISE 470- 222\n\nالتحضير :\nالتحضير عن طريق كود ع البلاكبورد و يحضر كل كلاس\nطريقة الشرح :\nتقليدية, يستعرض السلايدات و يعلق عليها و اذا فيه اكزامبل يحله او derivation يستعرضه بنفسه و يكتب ع السبورة. يتقبل الاسألة بصدر رحب و يرد عليها و يجتهد في الاجابة.\nالكويزات :\nاخذنا ثلاث كويزات طول الترم قبل كل ميحر و الفاينال.\nالمياجر:\nكومن. الميجر الاول سهل و الثاني كان سبايسي حبتين.\nالفاينلات :\nالفاينال متوسط مائل للصعوبة.\nالقريد النهائي:\nA\nالصوت:\nواضح\nإضافات :\nالدكتور محترم جدا و خلوق و متساعد.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536736-ise470",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mohammad-abdel-aal/180888/5",
+              "user": "user11658",
+              "ts": 1685879403000,
+              "tid": 180888,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

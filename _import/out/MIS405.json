@@ -1,0 +1,78 @@
+{
+  "code": "MIS 405",
+  "users": [
+    {
+      "id": "stk-user9840",
+      "name": "توحيد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9840/144/2074_2.png",
+      "email": "user9840@import.stkfupm.invalid",
+      "user": "user9840"
+    },
+    {
+      "id": "stk-sooonah",
+      "name": "sooonah",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/sooonah/144/1756_2.png",
+      "email": "sooonah@import.stkfupm.invalid",
+      "user": "sooonah"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1498460-mis405",
+      "uid": "stk-user9840",
+      "code": "MIS 405",
+      "sec": "info",
+      "ts": 1535677415000,
+      "st": "pub",
+      "data": {
+        "desc": "ا الموضوع مخصص لمناقشة المقرر المذكور في العنوان\nبنود تساعد في تقييم المقرر:\n\nجودة المقرر بشكل عام\nالمواضيع التي يغطيها المقرر\nالكتاب المستخدم للمقرر\nالأسئلة والأمثلة المستخدمة في المقرر\nمدى فائدته في الناحية التطبيقية\n\nولكم الحرية في تقييم المقرر باستحداث بنود أخرى ترونها مناسبه لتقييمه.\n\nكما نرجو تحري الصدق والعدل في تقييم المقرر\nوعدم الخلط بين تقييم الأستاذ وتقييم المقرر بذاته",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mis-405-is-project-management/180012/1",
+          "user": "user9840",
+          "ts": 1535677415000,
+          "tid": 180012,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-doc-sooonah-mis405",
+      "uid": "stk-sooonah",
+      "code": "MIS 405",
+      "sec": "doc",
+      "ts": 1333280833000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98417",
+            "n": "Dr. Ahmed S. Alojairi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "صراحه في زيادة الدرجات هو يقول في كورس 215 ما اقدر اسوي لكم شي لانه الكورس كومن\nبس ما قصر في التصحيح . كان يتقاضى عن كثير من الاخطاء بس عشان يساعد الطلاب\n\nانشالله اجربه في mis 405 و أقول لكم وش الجديد 😃\n\nبس الصرااحه انصح فيه و بقووووه\n\nو انشالله ينزل كم ماده إلكتف عشان اخذها معاااه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1016640-mis405",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmed-s-alojairi/98417/12",
+              "user": "sooonah",
+              "ts": 1333280833000,
+              "tid": 98417,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

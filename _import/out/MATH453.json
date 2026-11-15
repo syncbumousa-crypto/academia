@@ -1,0 +1,37 @@
+{
+  "code": "MATH 453",
+  "users": [
+    {
+      "id": "stk-omar4",
+      "name": "OMAR ..",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/omar4/144/2362_2.png",
+      "email": "omar4@import.stkfupm.invalid",
+      "user": "OMAR4"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1531482-math453",
+      "uid": "stk-omar4",
+      "code": "MATH 453",
+      "sec": "info",
+      "ts": 1629947632000,
+      "st": "pub",
+      "data": {
+        "desc": "Math 453 - Introduction to Topology\nسابقًا 421\nTerm 202\n\nجودة المقرر بشكل عام :\nيعتبر المقرر مهم لطالب الرياضيات ومن المواضيع المهمة وسيتكرر في الدراسات العليا.\n\nالمواضيع التي يغطيها المقرر :\nيبدأ المقرر بمراجعة لنظرية المجموعات والدوال (Sets and Functions).\nثم ينتقل لتعريف التوبولوجي ودراسة الفضاءات التوبولوجية (Topological Spaces).\nثم ينتقل لدراسة المجموعات المفتوحة والمغلقة والتعريف العام للدوال المتصلة (Open and Closed Sets and Continuous Functions).\nثم ينتقل بناء فضاءات جديدة مما سبق دراسته مثل Product space, Quotient space وغيرهم (New Spaces from Old).\nثم ينتقل لدراسة Connected and Compact Spaces.\nثم ينتقل لدراسة Separation Axioms (T0, T1, T2, …).\nثم يختتم المقرر بدراسة الفضاءات المترية (Metric Spaces).\nتجد الSyllabus في موقع قسم الرياضيات.\n________________________________________\nفي فصل 202, تم دراسة بعض المواضيع الاضافية على ما سبق وليست من ضمن الخطة وهي\nSeparable Spaces\nMetrization Theorems\n\nالكتاب المستخدم للمقرر :\nP. L. Shick, Topology, Point-Set and Geometric, Wiley (2007).\nالكتاب جيد وسرده جيد ويحتوي على أمثلة جيدة وأسئلة لا بأس بها.\n\nتعتبر الكتب التالية مراجع جيدة لدراسة المقرر :\nTopology by James Munkres\nGeneral Topology by John L. Kelley\nA Course in Point Set Topology by John Conway\nIntroduction to Topology and Modern Analysis by George Simmons\nTopology Without Tears by Sidney Morris\n\nالأسئلة والأمثلة المستخدمة في المقرر :\nالأسئلة بالكتاب جيدة وتركز على أفكار كل درس , ولكنها تعتبر قليلة, ويفضل استخدام كتاب Topology - Munkres لحل مسائل أكثر.\n\nمدى فائدته في الناحية التطبيقية :\nيعتبر المقرر رياضي بحت ويركز على الاثباتات الرياضية كشكل رئيسي ويعد مدخل لتطبيقات كثيرة في شتى مجالات العلوم والحاسب والهندسة.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/math-453-introduction-to-topology/184160/1",
+          "user": "OMAR4",
+          "ts": 1629947632000,
+          "tid": 184160,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

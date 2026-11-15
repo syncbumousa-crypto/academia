@@ -1,0 +1,37 @@
+{
+  "code": "AE 427",
+  "users": [
+    {
+      "id": "stk-alialrajjal",
+      "name": "AliAlrajjal",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/d78d45/144.png",
+      "email": "alialrajjal@import.stkfupm.invalid",
+      "user": "AliAlrajjal"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1537187-ae427",
+      "uid": "stk-alialrajjal",
+      "code": "AE 427",
+      "sec": "info",
+      "ts": 1704224759000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة عباره عن تصميم طياره من الصفر\nالماده فيها اختبارين و كويزين وواجبين\nعادة تدرس من الدكتور وائل\nتبدا الماده بمتطلبات الطياره يعطيك ايها الدكتور فيها تفصيلات كثير مثل\n\nعدد الركاب المطلوب\nالمدى المطلوب\nالسرعه\nالارتفاع\nوبعدها انت مع الفريق تبدا تصمم الطياره الي تقدر تحقق المطلوب منك والدكتور بساعدكم في اغلب الاشياء\nاخذت المقرر في ٢٣١",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ae-427-aerospace-system-design/120810/2",
+          "user": "AliAlrajjal",
+          "ts": 1704224759000,
+          "tid": 120810,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

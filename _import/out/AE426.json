@@ -1,0 +1,37 @@
+{
+  "code": "AE 426",
+  "users": [
+    {
+      "id": "stk-alialrajjal",
+      "name": "AliAlrajjal",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/d78d45/144.png",
+      "email": "alialrajjal@import.stkfupm.invalid",
+      "user": "AliAlrajjal"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1537189-ae426",
+      "uid": "stk-alialrajjal",
+      "code": "AE 426",
+      "sec": "info",
+      "ts": 1704225713000,
+      "st": "pub",
+      "data": {
+        "desc": "المواضيع التي يغطيها المقرر\nالمقرر يتكلم عن كيف تتحرك الطائره وتغير مسارها وتكون مستقره\nبتبدا بمعادلة الحركة وكيف ممكن تستخدمها بعدها بتاخذ (earth frame & body frame)\nوتتعلم عن جميع الحركات الممكنه للطائره (roll , yaw, lift …etc)\nوبتعلم عن كيف ممكن تعمل نظام الكتروني يضمن استقرار الطائره شبيه بالي تعلمناه في AE313/AE314\n\nالكتاب المستخدم للمقرر\nThomas R. Yechout, Introduction to Aircraft Flight Mechanics: Performance, Static Stability, Dynamic Stability, Classical Feedback Control, and State-space Foundations, 2nd Ed., AIAA, 2014.\n\nاخذته في 231",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ae-426-flight-dynamics-i/120809/2",
+          "user": "AliAlrajjal",
+          "ts": 1704225713000,
+          "tid": 120809,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

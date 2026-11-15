@@ -1,0 +1,78 @@
+{
+  "code": "CHE 360",
+  "users": [
+    {
+      "id": "stk-giant_genius1",
+      "name": "Giant_Genius",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/df705f/144.png",
+      "email": "giant_genius1@import.stkfupm.invalid",
+      "user": "Giant_Genius1"
+    },
+    {
+      "id": "stk-ahmed1",
+      "name": "Ahmed#",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/6f9a4e/144.png",
+      "email": "ahmed1@import.stkfupm.invalid",
+      "user": "Ahmed1"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1536360-che360",
+      "uid": "stk-giant_genius1",
+      "code": "CHE 360",
+      "sec": "info",
+      "ts": 1676255524000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم و رحمة الله و بركاته\n\nبعد إذن الأخوة المشرفين\n\nيا ليت تعطونا فكرة عن المادة و طبيعتها و وش تدرسون فيها\n\nو اللي عنده أي ملف سواء سلايدات او اختبارات قديمة اوهومورك او كويز او اي شي غيرها ممكن يساعدنا يا ليت ينزله لنا هنا و لا عليكم أمر\n\nمع التحية مقدما",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-360-numerical-methods-in-chemical-engineering/184929/1",
+          "user": "Giant_Genius1",
+          "ts": 1676255524000,
+          "tid": 184929,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-doc-ahmed1-che360",
+      "uid": "stk-ahmed1",
+      "code": "CHE 360",
+      "sec": "doc",
+      "ts": 1686158004000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118698",
+            "n": "Dr. Nayef Al-Saifi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "CHE 360 - TERM 222\n\nالتحضير : بداية الكلاس، بشكل شبه يومي.\n\nطريقة الشرح : ممتازة وواضحة ويبسط المواضيع بطريقته، يحاول يوريك فايدة اللي تدرسه وكيف تستخدمه في الماتلاب والشي ذا حلو عشان تعرفه لكنه للاسف غير مطلوب منك في الكورس.\n\nالكويزات : سهلة.\n\nالمياجر: كومن.\nالفاينلات :كومن.\nالقريد النهائي: A+\nالصوت: واضح\nإضافات : المادة سهلة وخفيفة ودكتور نايف الله يجزيه الخير بسطها اكثر، ولكن فيه دكاترة متمكنين في هذا الكورس اكثر، نصيحتي انك تنزل عند اللي يناسبك وقته في هالمادة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536742-che360",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nayef-al-saifi/118698/31",
+              "user": "Ahmed1",
+              "ts": 1686158004000,
+              "tid": 118698,
+              "pn": 31
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

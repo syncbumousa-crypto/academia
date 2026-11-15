@@ -1,0 +1,3605 @@
+{
+  "code": "ME 203",
+  "users": [
+    {
+      "id": "stk-metallic",
+      "name": "METALLIC",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/5e9695/144.png",
+      "email": "metallic@import.stkfupm.invalid",
+      "user": "METALLIC"
+    },
+    {
+      "id": "stk-user5216",
+      "name": "الرقمي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5216/144/1003_2.png",
+      "email": "user5216@import.stkfupm.invalid",
+      "user": "user5216"
+    },
+    {
+      "id": "stk-user5430",
+      "name": "| أبوفيصل |",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5430/144/1092_2.png",
+      "email": "user5430@import.stkfupm.invalid",
+      "user": "user5430"
+    },
+    {
+      "id": "stk-user4665",
+      "name": "آآلجرح ارحـم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/53a042/144.png",
+      "email": "user4665@import.stkfupm.invalid",
+      "user": "user4665"
+    },
+    {
+      "id": "stk-abu_abdullah",
+      "name": "Abu Abdullah",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/b5e925/144.png",
+      "email": "abu_abdullah@import.stkfupm.invalid",
+      "user": "Abu_Abdullah"
+    },
+    {
+      "id": "stk-user9360",
+      "name": "قمة جبل",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/9de0a6/144.png",
+      "email": "user9360@import.stkfupm.invalid",
+      "user": "user9360"
+    },
+    {
+      "id": "stk-abo_ali",
+      "name": "Abo Ali",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abo_ali/144/1589_2.png",
+      "email": "abo_ali@import.stkfupm.invalid",
+      "user": "Abo_Ali"
+    },
+    {
+      "id": "stk-ahmad-ali",
+      "name": "ahmad-ali",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e19adc/144.png",
+      "email": "ahmad-ali@import.stkfupm.invalid",
+      "user": "ahmad-ali"
+    },
+    {
+      "id": "stk-user5535",
+      "name": "الأحاجي السبعة",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5535/144/1116_2.png",
+      "email": "user5535@import.stkfupm.invalid",
+      "user": "user5535"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-tomoo",
+      "name": "TOMOO",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/aca169/144.png",
+      "email": "tomoo@import.stkfupm.invalid",
+      "user": "TOMOO"
+    },
+    {
+      "id": "stk-the_lion013",
+      "name": "The lion013",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/90ced4/144.png",
+      "email": "the_lion013@import.stkfupm.invalid",
+      "user": "The_lion013"
+    },
+    {
+      "id": "stk-kfupm76",
+      "name": "kfupm76",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/13edae/144.png",
+      "email": "kfupm76@import.stkfupm.invalid",
+      "user": "kfupm76"
+    },
+    {
+      "id": "stk-nasalmz",
+      "name": "Nasalmz",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/a9adbd/144.png",
+      "email": "nasalmz@import.stkfupm.invalid",
+      "user": "Nasalmz"
+    },
+    {
+      "id": "stk-abofordan2004",
+      "name": "AboFordan2004",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abofordan2004/144/2472_2.png",
+      "email": "abofordan2004@import.stkfupm.invalid",
+      "user": "AboFordan2004"
+    },
+    {
+      "id": "stk-mohammed_alkalaf",
+      "name": "mohammed alkalaf",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/f6c823/144.png",
+      "email": "mohammed_alkalaf@import.stkfupm.invalid",
+      "user": "mohammed_alkalaf"
+    },
+    {
+      "id": "stk-abdallah_ak",
+      "name": "Abdallah AK",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/65b543/144.png",
+      "email": "abdallah_ak@import.stkfupm.invalid",
+      "user": "Abdallah_AK"
+    },
+    {
+      "id": "stk-leo.da_vinci",
+      "name": "Leo.Da VinCi",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/leo.da_vinci/144/2188_2.png",
+      "email": "leo.da_vinci@import.stkfupm.invalid",
+      "user": "Leo.Da_VinCi"
+    },
+    {
+      "id": "stk-owheading",
+      "name": "OWHEADING",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/o/49beb7/144.png",
+      "email": "owheading@import.stkfupm.invalid",
+      "user": "OWHEADING"
+    },
+    {
+      "id": "stk-khdsa2022",
+      "name": "Khdsa2022",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/khdsa2022/144/2326_2.png",
+      "email": "khdsa2022@import.stkfupm.invalid",
+      "user": "Khdsa2022"
+    },
+    {
+      "id": "stk-ttttt",
+      "name": "ttttt",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/41988e/144.png",
+      "email": "ttttt@import.stkfupm.invalid",
+      "user": "ttttt"
+    },
+    {
+      "id": "stk-guest",
+      "name": "Guest",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8dc957/144.png",
+      "email": "guest@import.stkfupm.invalid",
+      "user": "Guest"
+    },
+    {
+      "id": "stk-user2781",
+      "name": "][ متكهرب ][",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2781/144/307_2.png",
+      "email": "user2781@import.stkfupm.invalid",
+      "user": "user2781"
+    },
+    {
+      "id": "stk-user3804",
+      "name": "أبو ثابت",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/958977/144.png",
+      "email": "user3804@import.stkfupm.invalid",
+      "user": "user3804"
+    },
+    {
+      "id": "stk-user4620",
+      "name": "أبو صالح",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/dc4da7/144.png",
+      "email": "user4620@import.stkfupm.invalid",
+      "user": "user4620"
+    },
+    {
+      "id": "stk-m_nd_m",
+      "name": "M nd m",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/m_nd_m/144/2140_2.png",
+      "email": "m_nd_m@import.stkfupm.invalid",
+      "user": "M_nd_m"
+    },
+    {
+      "id": "stk-m.n.a",
+      "name": "M.N.A",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b77776/144.png",
+      "email": "m.n.a@import.stkfupm.invalid",
+      "user": "M.N.A"
+    },
+    {
+      "id": "stk-user11848",
+      "name": "أبو سطّام",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/0ea827/144.png",
+      "email": "user11848@import.stkfupm.invalid",
+      "user": "user11848"
+    },
+    {
+      "id": "stk-user2552",
+      "name": "عبادي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2552/144/266_2.png",
+      "email": "user2552@import.stkfupm.invalid",
+      "user": "user2552"
+    },
+    {
+      "id": "stk-ayman_g",
+      "name": "AYMAN .g",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/41988e/144.png",
+      "email": "ayman_g@import.stkfupm.invalid",
+      "user": "AYMAN_g"
+    },
+    {
+      "id": "stk-zoomm",
+      "name": "zoomm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/z/50afbb/144.png",
+      "email": "zoomm@import.stkfupm.invalid",
+      "user": "zoomm"
+    },
+    {
+      "id": "stk-black_lighting",
+      "name": "black lighting",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/bcef8e/144.png",
+      "email": "black_lighting@import.stkfupm.invalid",
+      "user": "black_lighting"
+    },
+    {
+      "id": "stk-adamksa",
+      "name": "adamksa",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/dbc845/144.png",
+      "email": "adamksa@import.stkfupm.invalid",
+      "user": "adamksa"
+    },
+    {
+      "id": "stk-abdelaziz",
+      "name": "Abdelaziz",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdelaziz/144/2081_2.png",
+      "email": "abdelaziz@import.stkfupm.invalid",
+      "user": "Abdelaziz"
+    },
+    {
+      "id": "stk-c_a_c_t_u_a_r",
+      "name": "C a c t u a r",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/c_a_c_t_u_a_r/144/1543_2.png",
+      "email": "c_a_c_t_u_a_r@import.stkfupm.invalid",
+      "user": "C_a_c_t_u_a_r"
+    },
+    {
+      "id": "stk-me.me.me",
+      "name": "ME.ME.ME",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/edb3f5/144.png",
+      "email": "me.me.me@import.stkfupm.invalid",
+      "user": "ME.ME.ME"
+    },
+    {
+      "id": "stk-mtlinjawi",
+      "name": "mtlinjawi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/9d8465/144.png",
+      "email": "mtlinjawi@import.stkfupm.invalid",
+      "user": "mtlinjawi"
+    },
+    {
+      "id": "stk-montadhar",
+      "name": "montadhar",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/montadhar/144/1214_2.png",
+      "email": "montadhar@import.stkfupm.invalid",
+      "user": "montadhar"
+    },
+    {
+      "id": "stk-iahmed015",
+      "name": "iAhmed015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/b77776/144.png",
+      "email": "iahmed015@import.stkfupm.invalid",
+      "user": "iAhmed015"
+    },
+    {
+      "id": "stk-a.atiq",
+      "name": "A.Atiq",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/4bbf92/144.png",
+      "email": "a.atiq@import.stkfupm.invalid",
+      "user": "A.Atiq"
+    },
+    {
+      "id": "stk-harry_potter",
+      "name": "harry potter",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/harry_potter/144/1502_2.png",
+      "email": "harry_potter@import.stkfupm.invalid",
+      "user": "harry_potter"
+    },
+    {
+      "id": "stk-stu2009",
+      "name": "stu2009",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/13edae/144.png",
+      "email": "stu2009@import.stkfupm.invalid",
+      "user": "stu2009"
+    },
+    {
+      "id": "stk-user5643",
+      "name": "ابو شووووق",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5643/144/1141_2.png",
+      "email": "user5643@import.stkfupm.invalid",
+      "user": "user5643"
+    },
+    {
+      "id": "stk-_hlali",
+      "name": "%HLALI@MADRIDI%",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/_hlali/144/1582_2.png",
+      "email": "_hlali@import.stkfupm.invalid",
+      "user": "_HLALI"
+    },
+    {
+      "id": "stk-user8551",
+      "name": "مستانس",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/13edae/144.png",
+      "email": "user8551@import.stkfupm.invalid",
+      "user": "user8551"
+    },
+    {
+      "id": "stk-almaiman",
+      "name": "almaiman",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9bcb4/144.png",
+      "email": "almaiman@import.stkfupm.invalid",
+      "user": "almaiman"
+    },
+    {
+      "id": "stk-amat_24",
+      "name": "amat_24",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/amat_24/144/403_2.png",
+      "email": "amat_24@import.stkfupm.invalid",
+      "user": "amat_24"
+    },
+    {
+      "id": "stk-user4626",
+      "name": "أبوعريب",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/3ab097/144.png",
+      "email": "user4626@import.stkfupm.invalid",
+      "user": "user4626"
+    },
+    {
+      "id": "stk-user4774",
+      "name": "لنا الله",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/51bf81/144.png",
+      "email": "user4774@import.stkfupm.invalid",
+      "user": "user4774"
+    },
+    {
+      "id": "stk-user8655",
+      "name": "صمت الكلام",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8655/144/1867_2.png",
+      "email": "user8655@import.stkfupm.invalid",
+      "user": "user8655"
+    },
+    {
+      "id": "stk-user12192",
+      "name": "قمر الصباح",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/838e76/144.png",
+      "email": "user12192@import.stkfupm.invalid",
+      "user": "user12192"
+    },
+    {
+      "id": "stk-user11634",
+      "name": "سليل الطوارق",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11634/144/2480_2.png",
+      "email": "user11634@import.stkfupm.invalid",
+      "user": "user11634"
+    },
+    {
+      "id": "stk-retaj_basheer",
+      "name": "RETAJ BASHEER",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/retaj_basheer/144/15075_2.png",
+      "email": "retaj_basheer@import.stkfupm.invalid",
+      "user": "RETAJ_BASHEER"
+    },
+    {
+      "id": "stk-dok116",
+      "name": "dok116",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/dok116/144/1019_2.png",
+      "email": "dok116@import.stkfupm.invalid",
+      "user": "dok116"
+    },
+    {
+      "id": "stk-user6095",
+      "name": "غريب لكن ذيب",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6095/144/1275_2.png",
+      "email": "user6095@import.stkfupm.invalid",
+      "user": "user6095"
+    },
+    {
+      "id": "stk-user8593",
+      "name": "الزئبق",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/7bcc69/144.png",
+      "email": "user8593@import.stkfupm.invalid",
+      "user": "user8593"
+    },
+    {
+      "id": "stk-user9306",
+      "name": "انامش كذا",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user9306/144/2017_2.png",
+      "email": "user9306@import.stkfupm.invalid",
+      "user": "user9306"
+    },
+    {
+      "id": "stk-cpp_2015",
+      "name": "cpp_2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/46a35a/144.png",
+      "email": "cpp_2015@import.stkfupm.invalid",
+      "user": "cpp_2015"
+    },
+    {
+      "id": "stk-mohammedj",
+      "name": "mohammedj",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mohammedj/144/2211_2.png",
+      "email": "mohammedj@import.stkfupm.invalid",
+      "user": "mohammedj"
+    },
+    {
+      "id": "stk-user10811",
+      "name": "بدر سعد",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a698b9/144.png",
+      "email": "user10811@import.stkfupm.invalid",
+      "user": "user10811"
+    },
+    {
+      "id": "stk-user4465",
+      "name": "ابو قاسم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/bc8723/144.png",
+      "email": "user4465@import.stkfupm.invalid",
+      "user": "user4465"
+    },
+    {
+      "id": "stk-_student",
+      "name": "طالب و student",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/b9e5f3/144.png",
+      "email": "_student@import.stkfupm.invalid",
+      "user": "_student"
+    },
+    {
+      "id": "stk-meshoo",
+      "name": "Meshoo",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
+      "email": "meshoo@import.stkfupm.invalid",
+      "user": "Meshoo"
+    },
+    {
+      "id": "stk-momanso",
+      "name": "MoManSo",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/momanso/144/782_2.png",
+      "email": "momanso@import.stkfupm.invalid",
+      "user": "MoManSo"
+    },
+    {
+      "id": "stk-shadow-92",
+      "name": "shadow-92",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/278dde/144.png",
+      "email": "shadow-92@import.stkfupm.invalid",
+      "user": "shadow-92"
+    },
+    {
+      "id": "stk-user5628",
+      "name": "حجازي الهوى",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5628/144/1135_2.png",
+      "email": "user5628@import.stkfupm.invalid",
+      "user": "user5628"
+    },
+    {
+      "id": "stk-user5621",
+      "name": "الفجر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5621/144/1134_2.png",
+      "email": "user5621@import.stkfupm.invalid",
+      "user": "user5621"
+    },
+    {
+      "id": "stk-user6130",
+      "name": "موثاوي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6130/144/1287_2.png",
+      "email": "user6130@import.stkfupm.invalid",
+      "user": "user6130"
+    },
+    {
+      "id": "stk-jumper",
+      "name": "jumper",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/j/e5b9ba/144.png",
+      "email": "jumper@import.stkfupm.invalid",
+      "user": "jumper"
+    },
+    {
+      "id": "stk-a-majeed",
+      "name": "A-MAJEED",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/a-majeed/144/1718_2.png",
+      "email": "a-majeed@import.stkfupm.invalid",
+      "user": "A-MAJEED"
+    },
+    {
+      "id": "stk-i_bo_da7m",
+      "name": "i_Bo_Da7m",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/i_bo_da7m/144/1921_2.png",
+      "email": "i_bo_da7m@import.stkfupm.invalid",
+      "user": "i_Bo_Da7m"
+    },
+    {
+      "id": "stk-trad",
+      "name": "Trad",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/trad/144/2568_2.png",
+      "email": "trad@import.stkfupm.invalid",
+      "user": "Trad"
+    },
+    {
+      "id": "stk-leon-mohammed",
+      "name": "Leon-Mohammed",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/l/ce73a5/144.png",
+      "email": "leon-mohammed@import.stkfupm.invalid",
+      "user": "Leon-Mohammed"
+    },
+    {
+      "id": "stk-sake",
+      "name": "SAKE",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/c5a1d2/144.png",
+      "email": "sake@import.stkfupm.invalid",
+      "user": "SAKE"
+    },
+    {
+      "id": "stk-ffaahhd",
+      "name": "ffaahhd",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/e9c0ed/144.png",
+      "email": "ffaahhd@import.stkfupm.invalid",
+      "user": "ffaahhd"
+    },
+    {
+      "id": "stk-yasser123231",
+      "name": "Yasser123231",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/yasser123231/144/2475_2.png",
+      "email": "yasser123231@import.stkfupm.invalid",
+      "user": "Yasser123231"
+    },
+    {
+      "id": "stk-mr.x99",
+      "name": "Mr.X99",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/34f0e0/144.png",
+      "email": "mr.x99@import.stkfupm.invalid",
+      "user": "Mr.X99"
+    },
+    {
+      "id": "stk-m.9",
+      "name": "M.9",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/edb3f5/144.png",
+      "email": "m.9@import.stkfupm.invalid",
+      "user": "M.9"
+    },
+    {
+      "id": "stk-ahm2d1",
+      "name": "Ahm2d__",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/ac91a4/144.png",
+      "email": "ahm2d1@import.stkfupm.invalid",
+      "user": "Ahm2d1"
+    },
+    {
+      "id": "stk-daho0omy.10",
+      "name": "daho0omy.10",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/3d9bf3/144.png",
+      "email": "daho0omy.10@import.stkfupm.invalid",
+      "user": "daho0omy.10"
+    },
+    {
+      "id": "stk-wolf_99",
+      "name": "wolf_99",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/f17d59/144.png",
+      "email": "wolf_99@import.stkfupm.invalid",
+      "user": "wolf_99"
+    },
+    {
+      "id": "stk-user8219",
+      "name": "فراس عطار",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/73ab20/144.png",
+      "email": "user8219@import.stkfupm.invalid",
+      "user": "user8219"
+    },
+    {
+      "id": "stk-user10610",
+      "name": "ميدوريا ابن المثنى",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10610/144/2202_2.png",
+      "email": "user10610@import.stkfupm.invalid",
+      "user": "user10610"
+    },
+    {
+      "id": "stk-user11264",
+      "name": "أبو سفيان",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11264/144/2408_2.png",
+      "email": "user11264@import.stkfupm.invalid",
+      "user": "user11264"
+    },
+    {
+      "id": "stk-user12308",
+      "name": "منقول",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/848f3c/144.png",
+      "email": "user12308@import.stkfupm.invalid",
+      "user": "user12308"
+    },
+    {
+      "id": "stk-me_student91",
+      "name": "ابن الصحراء",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/4da419/144.png",
+      "email": "me_student91@import.stkfupm.invalid",
+      "user": "ME_STUDENT91"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p987063-me203",
+      "uid": "stk-metallic",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1329311271000,
+      "st": "pub",
+      "data": {
+        "desc": "http://www.mediafire.com/?3m74qk6inm8mg8h\nهالسلايدات أعتبرها تغني عن شرح الدكتور وعن أمثلة الكتاب …\n\nمن ناحية الكورس فأنا أشوفه امتع كورس درسته بالجامعة … طبعا اذا حليت اسئلة الهومووك وزيادة اسئلة عليها فانت بتضمن قريد عالي جدا ان شاء الله…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/2",
+          "user": "METALLIC",
+          "ts": 1329311271000,
+          "tid": 120732,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p987082-me203",
+      "uid": "stk-user5216",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1329313022000,
+      "st": "pub",
+      "data": {
+        "desc": "بسم الله الرحمن الرحيم\n\nجودة المقرر بشكل عام : ممتازة لكن تشابتر 1 و 2 مالهم دخل والمفترض يتم حذفهم من المقرر\n\nالمواضيع التي يغطيها المقرر : قانون حفظ الطاقة + النظام المغلق والمفتوح + الانتروبي\n\nالكتاب المستخدم للمقرر : جيدا جدا\n\nالأسئلة والأمثلة المستخدمة في المقرر : كافيه وتغنى حتى عن الاولد اقزامزز\n\nطريقة دراسة المقرر :\n1 - قراءة الكتاب ( واستيعاب القوانين وتعريفاتها )\n2 - فهم الامثلة وطريقة الحل\n3 - حل اسئلة الهومورك\n4 - حل اسئلة اضافيه تشبه اسئلة الهومورك لاستيعاب طريقة الحل\n5 - الاولد اقزامزز\n\n, وبالتوفيق ,",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/3",
+          "user": "user5216",
+          "ts": 1329313022000,
+          "tid": 120732,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1056733-me203",
+      "uid": "stk-user5430",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1339963470000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام\n\nالمادة تعتبر من امتع واسهل مواد التخصص … تعطي الاساسيات في علم الفلود\nو تطبيقات كثيرة في ارض الواقع\n\nالكتاب المستخدم للمقرر\n\nجيد جدآ … الامثلة ممتآزة و فيه عدد كبيرة من اسئلة نهاية الشابتر\n\nنصائح :\n\n- حاول تختار دكتور ممتاز بالشرح مثل ( الشرقاوي , وائل احمد , السرخي … ) لان مواد الفلود تعتمد عليها .\n- حل الهومورك بنفسك … اذا ضبطت الهومورك اضمن لك على الاقل b+\n- منهج المادة قصير , ولكنها تحتاج حل اسئلة كثيرة\n\nبالتوفيق 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/4",
+          "user": "user5430",
+          "ts": 1339963470000,
+          "tid": 120732,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1143663-me203",
+      "uid": "stk-user4665",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1355707656000,
+      "st": "pub",
+      "data": {
+        "desc": "شباب بالنسبة للقريدات\nكم تقريبا راح يكون الرينج للقريدات\nيعني كم البي والبي + والسي والسي +\nتقريبا يعني من واقع تجربتكم او اللي تعرفونه عن المادة\n\nلا هنتو",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/8",
+          "user": "user4665",
+          "ts": 1355707656000,
+          "tid": 120732,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p1171521-me203",
+      "uid": "stk-abu_abdullah",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1359355163000,
+      "st": "pub",
+      "data": {
+        "desc": "-\n\nالمادة سهلة وتعتبر هي مدخلك لمواد الفلويد في التخصص …\nقوانينها بسيطة و تنحفظ بسرعة …\n\nوالهوموورك مهم جداً … أذكر في ترمنا قبل سنتين جابوا سؤال نسخ لصق من الهوموورك لنا !!\n\nموفقين 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/10",
+          "user": "Abu_Abdullah",
+          "ts": 1359355163000,
+          "tid": 120732,
+          "pn": 10
+        }
+      }
+    },
+    {
+      "id": "stk-p1303167-me203",
+      "uid": "stk-user9360",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1386612806000,
+      "st": "pub",
+      "data": {
+        "desc": "خريطة ذهنية\n\nشباب هذي خريطة ذهنية للثيرمو بشكل عام ممكن تفيدكم\nأتمنى لكم التوفيق و الدرجات العالية في الدنيا و الأخرة\nhttp://skfupm.kfupm.edu.sa/vb/showthread.php?t=116001",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/12",
+          "user": "user9360",
+          "ts": 1386612806000,
+          "tid": 120732,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p1381735-me203",
+      "uid": "stk-abo_ali",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1403435332000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام\nجميل وجدن مهم لأي مهندس , مش لازم يكون ميكانيكي علشان يعرف كيف مبدا عمل المكيفات والثلاجات والسخانات والمحركات والتربينات والكمبرسرات وغيرها من الامور ,\n\nالمواضيع التي يغطيها المقرر\nهههه , ذكرتها فوق هع\nيغطي القانون الاول والثاني للثيرموداينامكس 🙂\n\nالكتاب المستخدم للمقرر\nما اذكر وشسمه , لكن كتاب جميل لكن طويل في نفس الوقت 😦\n\nالأسئلة والأمثلة المستخدمة في المقرر\nمناسبه علشان تفتح مخك , + السليوشن موجود فراح ترتاح وانت تحل 🙂\n\nمدى فائدته في الناحية التطبيقية\nجدن مفيييييييييد , كثير من الامور سوف تتضح لك لمن تخلص من الكورس ذا 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/16",
+          "user": "Abo_Ali",
+          "ts": 1403435332000,
+          "tid": 120732,
+          "pn": 16
+        }
+      }
+    },
+    {
+      "id": "stk-p1390246-me203",
+      "uid": "stk-ahmad-ali",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1408210493000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام\nبالنسبة للصعوبة فالكورس سهل الى متوسط والكتاب المستخدم ممتاز جداً لكن فيه كلام كثير\nالكونسبت فيه واضح وامثلته مفيدة\nلكن سلايدات الدكتور السرخي افضل\n\nالمواضيع التي يغطيها المقرر\nاول شابترين شاطحين شوي عن الحرارة والضغط وحفظ الطاقة واشياء اساسية\nشابتر 3 اهم شابتر لانه اساسيات قرائة الجداول ( طبعا المادة كلها تعتمد على استخراج الارقام من الجداول)\nبقية الشباتر من 4 الى 6 عن الـclosed system and open system و شوية عن الـcycles تشبه فيزكس 101\nشابتر الـ7 عن الانتروبي هذا اصعب شابتر\n\nمدى فائدته في الناحية التطبيقية\nجداً مفيد وخصوصاً انه بعض الدروس تتكلم عن اجهزة مثل الكومبرسر والتوربين وحاجات نلمسها في الواقع\nفحلو انك تكون عارف مبداً عملها\n\nطريقة الـA+\nافهم من الكتاب او سلايدات السرخي واختبر فهمك بحل الامثلة ( ضروري تكون فاهم كل الامثلة لانها تغطي افكار كثيرة)\nحل اسئلة الهومورك وافهمها مو بس نسخ لصق من السوليشن\nحل اسئلة مشابهة او اللي تحس ان فيها افكار\n\nنصيحة : لا تضيع الكلاس تيست او المياجر لان مادة الفاينل صعبة وخصوصاً ان كل المادة داخلة بالفاينل والطالب بيكون مشغول في نهاية السمستر",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/17",
+          "user": "ahmad-ali",
+          "ts": 1408210493000,
+          "tid": 120732,
+          "pn": 17
+        }
+      }
+    },
+    {
+      "id": "stk-p1421689-me203",
+      "uid": "stk-user5535",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1422028934000,
+      "st": "pub",
+      "data": {
+        "desc": "Term 141\n\nأخذت المادة مع د. أحمد شاهين ، أنا عن نفسي ما هضمت الكورس مع إني كنت ماشي معاه في الشرح ، خصوصا لما تجي تحل المسائل ، ياخي ممكن تفترض أكثر من افتراض و كان هذا الشي معقدني ، و المشكلة إني أجيب أم أم العيد في المياجر بسبب هذا الشيء ، ميجر ون أخذت أسوأ درجة ممكن أتخيلها مع إني استعديت له استعداد غير طبيعي ، و السبب إني افترضت افتراض خاطئ\n\nالكورس أسمع كثير يقولون سهل ، لكن بما إني طالب كنترول فالمادة هاذي ما تفتح لنا أي شيء و الفائدة منها هي تفهم كيف يشتغل الكومبروسور و التوربين و الأدوات ذي ، غيرها أشوف إنها بالنسبة لنا مضيعة وقت 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/18",
+          "user": "user5535",
+          "ts": 1422028934000,
+          "tid": 120732,
+          "pn": 18
+        }
+      }
+    },
+    {
+      "id": "stk-p1424284-me203",
+      "uid": "stk-user8581",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1439892428000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام :\n\n- المادة يمكن تكون سهلة بالنسبة \" للميكانيكال \" او متوسطة بالنسبة للطلاب من التخصصات الثانية خصوصا الي مالهم علاقة بهذي المادة على سبيل المثال طلاب الكنترول . لكن بشكل عام مقدور عليها ولو تبي تنزلها بالصيف فنزل مادة ثانية من مستواها او اقل بشوي … لاتنزلها لحالها في الصيف مايستاهل تنزل صيفي بس عشان الثيرمو**.**\n\n- الكتاب ممتاز جدا خصوصا الامثلة + الاسئلة و الـ summary في نهاية كل شابتر حاول تحل الامثلة والهوموركات مهمة جدا . الكتاب فيه شوي هذرة لكن لو تقدر تحدد الاشياء المهمة في كل صفحة هالشي راح يسهل عليك المذاكرة للمياجر والفاينل بالتحديد .\n\n- المادة مب طويلة لكن لو تسوي ملخص لك بالقوانين وبعض الملاحضات قبل كل الميجر هالشي راح يفيدك في الفانيل لأنه غالبا يكون comprehensive والي يبقى عليك بس هو حل امثلة واسئلة**.**\n\nالمواضيع التي يغطيها المقرر\n\n:Chapter 1 : INTRODUCTION AND BASIC CONCEPTS\nChapter 2: ENERGY, ENERGY TRANSFER, AND GENERAL ENERGY ANALYSIS\nChapter 3: PROPERTIES OF PURE SUBSTANCES\nChapter 4: ENERGY ANALYSIS OF CLOSED SYSTEMS\nChapter 5: MASS AND ENERGY ANALYSIS OF CONTROLVOLUMES\nChapter 6: THE SECOND LAW OF THERMODYNAMICS\nChapter 7: ENTROPY\n\nأول شابترين مالهم علاقة وتقريبا كلها اساسيات واشياء ماخذينها في الفزكس أهم شابترين هم 7 وهو عن الانتروبي\nوشابتر 3 عشان تعرف كيف تستخدم الجداول\n\n+ يمكن تحتاج الـ Interpolation هذا شرح لواحد من طلاب الجامعة الله يجزاه خير\n**https://www.youtube.com/watch?v=vmj0Ee_99qA**",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/19",
+          "user": "user8581",
+          "ts": 1439892428000,
+          "tid": 120732,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p1425922-me203",
+      "uid": "stk-tomoo",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1440619105000,
+      "st": "pub",
+      "data": {
+        "desc": "كيف طريقه مذاكرتها\nهل من السلايدات او من الكتاب افضل\nوالاسئله اللي بالنهايه مره كثيره صعب الواحد يحلها\nاذا فيه اولد اكرام او شي ياليت تعطونا\nأي نصائح\nوشكرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/21",
+          "user": "TOMOO",
+          "ts": 1440619105000,
+          "tid": 120732,
+          "pn": 21
+        }
+      }
+    },
+    {
+      "id": "stk-p1425935-me203",
+      "uid": "stk-the_lion013",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1440623441000,
+      "st": "pub",
+      "data": {
+        "desc": "حسب سلبس 151 للثيرمو203, المياجر كومن.\n\nEvaluation:\nIn-class Test (By each instructor, on chapters 1, 2, and 3) 10 % (Sunday, October 11, 2015; In Class)\n\nMajor Exam I (Common, on chapters 3, 4 and 5) 20 % (Wednesday, November 04, 2015 @ 5:30-8:00PM)\n\nMajor Exam II (Common, on chapters 5, 6 and 7) 20 % (Tuesday, December 01, 2015 @ 5:30-8:00PM)\n\nQuizzes (at least 3) 15% (Quiz #1 = 5%, on Sunday, October 4, 2015)\n\nHomework (7 assignments, one on each chapter) 5 %\n\nFinal Exam (comprehensive) 30 % (07:00 PM on Sunday: December 20, 2015)",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/23",
+          "user": "The_lion013",
+          "ts": 1440623441000,
+          "tid": 120732,
+          "pn": 23
+        }
+      }
+    },
+    {
+      "id": "stk-p1453837-me203",
+      "uid": "stk-kfupm76",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1468538985000,
+      "st": "pub",
+      "data": {
+        "desc": "م اخذتها صيف لكن اشوف المادة هذي ي انك تجيب D او انك تجيب A+\n\nالمادة جدا بسيييطة وبعض الاحيان يكون الهوموورك اصعب من الميجر , تقريبا افكار الماده ماهي كثيره , اهم تشابتر فيها هوا 3 اذا فهمته مضبوط انا اضمنلك المادة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/33",
+          "user": "kfupm76",
+          "ts": 1468538985000,
+          "tid": 120732,
+          "pn": 33
+        }
+      }
+    },
+    {
+      "id": "stk-p1522397-me203",
+      "uid": "stk-nasalmz",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1590430386000,
+      "st": "pub",
+      "data": {
+        "desc": "term 191\nمن اسهل و امتع مواد التخصص.\n\nطبعا الكونسبت ف الكورس مره سهل ولازم تطبق عن طريق حلك للهومورك.\nالمياجر كومن وسهالات اذا انك مدرك الهومورك وفاهم الكونسبت لان احيانا يسون ترك وتسوي assumption غلط وتروح عليك.\nاذا حصل وقدرت سجل عند قطب مع انه ما يحتاج سلايدات الشرفي كافيه ووافيه",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/35",
+          "user": "Nasalmz",
+          "ts": 1590430386000,
+          "tid": 120732,
+          "pn": 35
+        }
+      }
+    },
+    {
+      "id": "stk-p1527203-me203",
+      "uid": "stk-abofordan2004",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1608636115000,
+      "st": "pub",
+      "data": {
+        "desc": "TERM 201 ONLINE\n\nمادة عادية كفهم ولكن اختباراتها وكويزاتها جدا جدا جدا صعبة طبعا الحمدلله ان المادة افرج ولا كان اغلبنا راسب فيها لان الاسألة فيها تحدي شديد للطالب بحكم انهم يلعبون بالقوانين والوحدات لعب\nبالنسبة للي فوق ويقول متعه وسهله و A+ بالجيب ما ادري هل هم يمزحون او صدق يتكلمون , الفاينل اللي جانا امس اسألته خرافيه وطويل الحل فيها والوقت ابدا مو كافي\nبغض النظر عن صعوبتها وطول الحل فيها الا ان المدرسين يحشرونك بالوقت واغلب الطلاب يسلم ورقته وهو ما كمل الحل\nاختصار الكلام ان المادة ذي زي الفيزيكس وممكن اصعب وفيها نفس شعور الاختبار لما تدخله وانت مذاكر فجاه تجيك اشياء اول مره تشوفها\n\nتوزيع الدرجات :-\n\nواجبات : 10%\nكويزات : 55%\nميدتيرم : 15%\nفاينل : 20%\n\nالميد تيرم هو الوحيد اللي كان سهل بس الباقي الله وكيلك , الحمدلله ان الكورس ذا خلص والله يستر من الثاني\n\nملاحظة : تقييمي لها بالاون لاين ( زمن كورونا ) ممكن تكون مختلفه جدا وربما افضل في الاترام العادية والله اعلم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/38",
+          "user": "AboFordan2004",
+          "ts": 1608636115000,
+          "tid": 120732,
+          "pn": 38
+        }
+      }
+    },
+    {
+      "id": "stk-p1531256-me203",
+      "uid": "stk-mohammed_alkalaf",
+      "code": "ME 203",
+      "sec": "info",
+      "ts": 1629045261000,
+      "st": "pub",
+      "data": {
+        "desc": "Term 203\nالمادة ككونسبت سهلة جدا ومو طويلة لكن تحتاج تحل مسائل عشان تطلع بقريد كويس\nتقسيم الكورس كالآتي\nالكورس مكون من ٦ شباتر\nشابتر ١:\nمقدمة والمصطلحات الي تحتاجها … الشابتر مافي اي شي تقرا السلايدات كافي\nشابتر ٣ :\nشابتر ٣ قبل ٢ وهو عبارة عن جزئين الجزء الاول\nكيف تستخدم الجداول ( الجداول فكرتها مثلا لو عطاك ماء درجة حرارته كذا وعطاك اي شي ثاني ضغط او فوليوم او انرجي الخخ … يمديك تطلع باقي المعطيات من الجدول )\nالجزء الثاني هو عبارة عن الideal gases\nقانون الغاز المثالي وكيف تحدد هل هو غاز مثالي او لا واذا لا كيف تحسب خصائصه\n\nشابتر ٢:\nFirst law of thermodynamics:(\nconservation Of energy\nالشابتر هو عبارة عن حفظ الطاقة للنظام المغلق بمعنى السستم مايعبر خلاله شي او يطلع منه شي اثناء العملية\n\nشابتر ٤:\nنفس شابتر ٢ لكن السستم يكون مفتوح بتدرس فيه كم جهاز لهذي العمليات مثل الكمبرسور والturbine وغيرهم من التطبيقات\n\nشابتر ٥: second law of thermodynamics\nبتدرس اجهزة الثلاجة والمضخات والمكينة وكيف تحسب كفائتها\n\nشابتر ٦: الانتروبي\n\nالكورس تقريبا كله في ثلاث معادلات اساسية عشان تحل الاسئلة\nConservation of mass\nConservation of energy\nConservation of entropy\n\nكتاب المادة : بالنسبة لي ماقدرت اذاكر منه ولا عجبني\n\nمصادر المذاكرة : سلايدات الشرفي مهمة للكونسبت وتدرب على الاسئلة الي فيه واسئلة الهومورك مهمة وقبل الاختبار حل كم اولد",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-203-thermodynamics-i/120732/39",
+          "user": "mohammed_alkalaf",
+          "ts": 1629045261000,
+          "tid": 120732,
+          "pn": 39
+        }
+      }
+    },
+    {
+      "id": "stk-doc-abdallah_ak-me203",
+      "uid": "stk-abdallah_ak",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1466106080000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درسني : 151 - ME203\n\nبنود التقييم :\n\nالتحضير : اول اسبوع حضرنا بنفسه, بعدها صار يمرر ورقة بين الطلاب وكل واحد يكتب اسمه, بعدها صار نادرا يحضر.\n\nطريقة الشرح :يشرحلنا ويعاملنا كمهندسين, اخر الدرس يعطيك امثلة ويحلها معانا, اذا خلصت المحاضرة وما كمل المثال يقلنا كملوه بالبيت, واذا مافي ولا واحد بالفصل حل المثال يهددكم بPOP QUIZ.\n\nالكويزات : يعطيك 4 او5 اختبارات قصيرة وما يعطي CLASS TEST ابدا. يقول اش الفايدة اني اعطيكم مياجر زيادة على الي عندكم. (اختباراته سهلة جدا جدا بالنسبة لشرحه).\n\nالمياجر: شبه كومون, احيانا الدكتور عمرو يغير سؤال او اثنين لطلابه, عموما مستوى الاختبارات لازم يكون قريب جدا, اذا حليت كل الواجبات حقت الدكتور عمرو بنفسك وانتا فاهمها ما تقدر تجيب اصلا اقل من 85% بالمياجر حتى لو خبصت ( تصحيحه متعاون, اذا شافك بتحل بطريقة صحيحة ممكن يعطيك درجة السؤال كاملة حتى لو ما كملته, بشرط انك تكون مبين بالورقة انك فاهم وقريب من الجواب الكامل).\n\nالفاينلات : نفس المياجر\n\nالقريد النهائي: A+\n\nالصوت: واضح, لغته ولهجته الانجليزية جميلة جدا, واحيانا يتكلم معانا باللهجة الحجازية.\n\nإضافات : الدكتور للامانة ما تلقى احسن منه لاسباب اذكرها :\n\n_ افضل دكتور بهذي المادة واكثر واحد متمكن فيها من ناحية الشرح, يخليك ما تحتاج تتعب بالمادة ومع ذلك تفهم كل شي بالتفصيل منو.\n_المادة عندو ستاندرد وليست افرج زي اغلب الدكاترة بهذي المادة, وهذا يساعد طلابه انهم يجيبو درجات اكثر بالنهاية ( اذكر الي جابو A+ و A بشعبتنا كان عددهم 15 واحد, وعددنا كان يتراوح بين 25 و30) وهذا الشي مستحيل يصير اذا كانت المادة افرج.\n_ الA+ عنده تقريبا من 90 والله اعلم.\n_ مره وحدة بالترم يسوي هذا الشي: يقل للطلاب المحاضرة الجية راح اعطيكم ثلاث اسئلة واول واحد يجاوب راح ياخد 1% بونص, وما يحق للطالب يجاوب على اكثر من سؤال.\n\nملاحظات :\n# الدكتور متعاون جدا ومن اول محاضرة له قال لنا ( ازا كل الي في الكلاس هادا كانو يستحقو A+ راح ياخدوها, وازا كلكم تستحقو F راح تاخدوها ), وكون انكثير من طلاب الدكتور يجيبو قريدات عالية لا يعني انه بس يدفدف, بل يعني ان اغلب طلابه فاهمين المادة.\n# اذا انت انسان حساس جدا وما تحب الدكاترة يتكلمو عليك بطريقة او باخرى قدام زملائك, ومصر تنزل عند هذا الدكتور فلا تقاطعه وقت ما يشرح ولا تسأله عن اي شي منتا فاهمه وقت المحاضرة. اذا تبغا تسأل عن شي روح له الاوفيس الله يجزاك بالخير.\n\n(( اذا ودك تجيب عنده A+ كل المطلوب منك : لا تغيب ولا محاضرة, حل كل الواجبات بنفسك وانتا فاهمها, لا تغيب ولا اختبار قصير, لا تغيب المياجر والفاينل, لا تجيب العيد. ))\n\n(حاولت اكتب كل شي سئ عن الدكتور وممكن يخليك ما تفكر تنزل عنده, واذا تقدر تتحمل الي مكتوب فوق فاعلم ان هذا الدكتور قد يكون احسن دكتور تواجهه في حياتك)\n\nالله يجزاه خير لو عندي اي فرصة اني اسجل معاه مادة او بحث او اي شي ما راح افوتها.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1452065-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/9",
+              "user": "Abdallah_AK",
+              "ts": 1466106080000,
+              "tid": 98178,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-leo.da_vinci-me203",
+      "uid": "stk-leo.da_vinci",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1484818115000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203 - 161\nالتحضير : حضر اول يومين بس\nطريقة الشرح : من دخلت الجامعة مامر علي دكتور يشرح نفسه + الشرح كل ع السبوره + نوت مجنووون ماتحصل مثله + منقع الثرمو وشاربه شرررب ماظن في افضل منه في الجامعه في الثرمو + شديد شوي من ناحية التاخير يعني اذا شفت روحك تاخرت اكثر من عشر دقايق لا تحضر لان احتمال ما راح يدخلك\n\nالكوزات : عطانا 3 كوزات وياخذ افضل 2 مستواها سهل جدا جدا جدا وماعنده كلاس تست (20%) في الجيب +يعطيك هومورك قبل الكوز ويقولك ذاكره وبيجيك الكوز منه + اول كوز عطانا كان الافرج 14/15\n\nالمياجر: كومون + اذا ماعجبه سوال عادي يغيره حق طلابه بس + التصحيح ممتاز وبقوه لو تغلط في شي ينقصك ون بوينت ع الشي الي غلطت فيه ويحسب لك الباقي كامل (مره غلطت في تحويل الوحدرات في بداية السوال و ارقام الحل طلعت كلها خطا نقصني ون بوينت عليها وقالي الارقام عادي الكل يغلط اوقات تنسى صفر او تزيد صفر مو من العدل اني اكنسلك السوال كامل الغرض من الاختبار قياس فهم الطالب مو تحدي )\n\nاضافات : + القريدات ماطلعت الى الان لكن حسب كلامه ان نظام الافرج مايمشي عليه اذا تستحق الA+ راح تاخذها\n\nالقريد النهائي: A+ وبقووووووووووووه وقليله في حقه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466590-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/10",
+              "user": "Leo.Da_VinCi",
+              "ts": 1484818115000,
+              "tid": 98178,
+              "pn": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-owheading-me203",
+      "uid": "stk-owheading",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1556276423000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203 TERM 171\nالتحضير : ما يحضر\nطريقة الشرح : ع السبورة\nالكويزات : كتابية\nالمياجر: كتابية\nالفاينلات : كتابية وMCQs\nالقريد النهائي: C\nالصوت: ممتاز\nإضافات :\nمتكبر جدًا، ويستحقر الأسئلة الي تجيه وما تحسه يحترم الطلاب، طريقة شرحه حلوة لكن ما يتقبل الأسئلة، مع الوقت تشوف شيء يشرحه مو فاهمنه ولا مقتنع فيه، لكن تمشي وياه ولا تسأل، لأن ما لك خلق يهزئ فيك ويستحقرك، وبالنسبة للتصحيح فهو سيء ومجحف، وما يتقبل أي أحد يراجعه في تصحيحه، ما أنسى أنه حبطني وحطمني لما رحت أراجعه في تصحيحه، قال لي بالحرف \" أنت ما تفهم شيء في المادة واحمد ربك عطيتك ذي الدرجة \"، أتمنى أنه يقرأ ذي الأبيات\nوالـعـلمُ إنْ لــمْ تـكـتنفهُ شـمائلٌ … تـُعـلـيهِ كـــانَ مـطـيةَ الإخفاقِِ ِ\nلاتـحـسبنَّ الـعـلمَ يـنـفعُ وحــــدهُ … مـا لـمْ يـُـتـَـوِّجْ ربـَّــهُ بــخَـلاق ِ",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1509018-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/13",
+              "user": "OWHEADING",
+              "ts": 1556276423000,
+              "tid": 98178,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-khdsa2022-me203",
+      "uid": "stk-khdsa2022",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1578295447000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "BY WHATSAPP\nاسم الدكتور : عمر القطب\nالمادة: ME203\nالفصل الدراسي: 191\nبنود التقييم ⬇️⬇️⬇️\n\nالتحضير : غالبا مايحضر ، ورقة تمر على الطلاب\nطريقة الشرح : يشرح الفكره ~ يكتب التعاريف والقوانين والامثله على السبوره .\nالكويزات : سهله\nالمياجر: سهله - متوسطة ، ممكن حلها مجرد وقت.\nالفاينلات : سهله - متوسطة ، نفس الفكره مجرد وقت\nالقريد النهائي: A\nالصوت: يطفي المكيفات فالصوت مافي مشكله كويس\nإضافات :\n١- تابع وراه أول بأول نصيحه وكتب معه وفهم كويس.\n٢- حل الهوموركات قد ماتقدر لحالك وارجع لشيء الي مش فاهمه وفهمه\n٣-الدكتور خدوم حيييل الله يجزاه خير من ناحية اذا كنت تبي تروح له اوفيس وتسأله .\n٤- أرجع وأكد على نقطة ١ و ٢ .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1518843-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/15",
+              "user": "Khdsa2022",
+              "ts": 1578295447000,
+              "tid": 98178,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ttttt-me203",
+      "uid": "stk-ttttt",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1588933540000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - TERM 191\nالتحضير : حضر ٤ أو ٥ مرات خلال السمستر تقريبًا.\nطريقة الشرح : يكتب نوتات و أمثلة على السبورة ممتازة جدًا. احرص كل الحرص إنك تكتب وراه و إذا ما أمداك صورها و أكتبها بعد الكلاس.\nالكويزات : سهلة جدًا مقارنة بشرح الدكتور.\nالمياجر: كومن.\nالفاينلات : كومن.\nالقريد النهائي: +A\nالصوت: ممتاز و لغته الإنقليزية رائعة.\nإضافات :\nالدكتور شديد مرة مع اللي يستخدم الجوال، يحضر متأخر، يلبس شورت، ينام في الكلاس. و هذا الشيء ما أشوفه عيب في الدكتور. من الناحية العلمية، الدكتور متمكن جدًا من المادة و شرحه رائع. باختصار تبغى قريد ممتاز، اكتب في دفترك كل كلمة كتبها الدكتور و ذاكر منها + حل الواجب بنفسك و روح له المكتب إذا واجهتك مشكلة ( هذا اللي كنت أسويه ) و فالك التوفيق بإذن الله. أخيرًا، إذا أنت من النوع المنضبط و حريص على دراستك، هذا بيكون من أفضل الدكاترة اللي بيدرسونك. إذا أنت من النوع اللي يحب يتأخر و يسحب على المادة و ما يذاكر بشكل مستمر، ما أنصحك بالدكتور.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1521862-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/16",
+              "user": "ttttt",
+              "ts": 1588933540000,
+              "tid": 98178,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-guest-me203",
+      "uid": "stk-guest",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1591125479000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98178",
+            "n": "Dr. Amro Al-Qutub",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - Term 182\n\nالتحضير :\nيحظر بشكل يومي في البداية لاكن بعد نص الترم تقريبا يشوف بنظره اذا عدد الغياب زايد يحظر.\n\nطريقة الشرح :\nيمسك نوتاته ويبدأ يكتب على السبورة السؤال او مفاهيم الدرس بعدها يخلي الكل يوقف كتابة يشرح و بعد مايخلص يخليك تكتب على الدفتر وماكان يحبذ انك تصور السبور. ( طبعآ يغطي جميع مفاهيم المادع مع امثلة على كل كيس )\n\nالكويزات :\nسهلة بس عليك تذاكر النوتات وتحل الهوم ورك بنفسك وراح تجيب فل.\n\nالمياجر:\nعادتآ تكون كومن بس اهوا الدكتور الوحيد الي يغير الميجر او يغير سؤال من الميجر على حسب مزاجه لاكن ماراح يضلم الطالب ويجيب اسألة شرحها فالكلاس او الهوم ورك.\n\nالقريد النهائي:\nA++\nالصوت:\nواضح و غير ممل في الشرح.\n\nإضافات :\nالدكتور فاهم و متمكن من المادة الى ابعد حدود و الجميل انه يوصل المعلومة بشكل سريع ف لاتغيب عن المحاظرة ابد بس انتبه الدكتور يحب تكون له كلمته و شخصيته ف لاتلبس شورت ولا تتعلك و لا تحط رجل على رجل, كذا مرة رحت له المكتب وكان تعامل الطف هناك.\nفي النهاية الدكتور معروف ولاتفوته اذا مداك",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1522571-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-amro-al-qutub/98178/18",
+              "user": "Guest",
+              "ts": 1591125479000,
+              "tid": 98178,
+              "pn": 18
+            }
+          },
+          {
+            "id": "stk-dr-f103290",
+            "n": "Dr. Abdulrahman Al-Murbati",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me203 - 202\nعبدالرحمن المرابطي\nالتحضير : التحضير نهاية المحاضرة لكن التحضير مو يوميا\n\nطريقة الشرح : عنده سلايدات نفس حق الشرفي لكن معدل عليها شوية ويشرح الكونسبت في البداية وبعدين يشرح مثال عليه لكن عموما الامثلة احسها قليلة. الدكتور يتقبل اي سوال\n\nالكويزات : كانت متوسطة ماهي سهلة او صعبة غالبا سؤال مقالي ٨ درجات وسؤالين كونسبت عليها درجتين وتكون سهلة\n\nالمياجر: صار ميد واحد بدل ميجرين وكل دكتور يحط اسئلته كان الافرج ١١ من ١٥\n\nالفاينلات : الفاينل كل دكتور يحط اسئلته وكان صعب جدًا ومافيه باكتراكينق وبسببه نزلت القريدات عن الدكتور كثير\n\nتوزيع القريدات صار عنده\n87 A+\n83 A\n77 B+\n\nالقريد النهائي: A+\n\nالصوت: واضح جدًا ولغته ممتازة\n\nملاحظة: الدكتور متعاون كان متعاون معانا اذا طلبنا منه تاجيل الكويزات لكن اغلب الشباب كانوا يواجهوا مشكلة لان تسليم الوجبات يكون قبل الكلاس يوم الخميس ولا يوافق يخليه الليل\n\nافرج الكلاسورك كان ٥٨ من ٧٥",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527613-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulrahman-al-murbati/103290/15",
+              "user": "Guest",
+              "ts": 1609844451000,
+              "tid": 103290,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2781-me203",
+      "uid": "stk-user2781",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1290788075000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بروفيسور احمد شاهين ،،\nدرسني me 203\n\nالتحضير: اول الكلاس يحضر كل يوم ،،\nطريقة الشرح: يشرح ع الصبوره، يبدأ بالكونسيبت وبعدين اكسزاامبلس لين ما تدوخ\nالي يعجبني فيه، انه عنده سلايدات ممتازه جداً للـ 203 ويستخدمها بالشرح ع الصبوره\nوموجودة بالويب سي تي ، يعني لو ما تكتب معه، ما راح يضرك شي ،،\nوشرحه كان مناسب معي\nالكويزاته: كويزاته متوسطه، وكان فيه 4 كويزات، 3 محسوبه والرابع باك اب ،،\nالمياجر: كانت كومون المادة، الاول ما كان سهل الثاني سهل والفاينل يبي له شغل\nالقريد النهائي: كانت كومون وما ادري شلون حسب ، بس انه عطاني حقي\nبالنسبه له هو فهو يحط الافريج بين السي والسي بلس ويبدأ يقص\nالـ A+ اتوقع يطيره بعييد\nالصوت: الانجليزيه حلوه، بس الصوت نااازل ، يبي لك تجلس قدااام\n\nإضافات: تصحيح الدكتور حلو حلو حلو\nواخلاقه جداً ممتازه ومتعاون بالاوفيس\n\nانصح فيه وبشده\n\nلو ابي انزل ثيرمو تو بانزلها معه إن شاء الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p739073-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/2",
+              "user": "user2781",
+              "ts": 1290788075000,
+              "tid": 98182,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3804-me203",
+      "uid": "stk-user3804",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1297679133000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me 203 قبل ماتصير كومون…\n\nالتحضير :\n\nيحضر بالأسماء بس حبيييييب, عادي تتأخر\nوعلى كلام واحد لي يقول بأنه مرة راح وقاله انه حضر الكلاس وهو ماجا وشال عنه الدكتور الغياب…\n\nطريقة الشرح :\n\nكان يستخدم الصبورة بس\nيشرح الكونسبت ثم يبدأ بالأمثلة…\n\nوهذي أفضل طريقة من وجهة نظري لل203\n\nالكويزات :\n\nبسيطة\n\nالمياجر:\n\nبعض الأسئلة كانت نفس أسئلة الهومورك حتى انه ماكان يغير الأرقام الظاهر\nوالأسئلة للي يحطها كانت مرة سهلة…\n\nبس كان الافرج يجي مرة مرتفع, فما فيه ذيك الفايدة تقريبا\n\nالفاينلات :\n\nالفاينل كان كومون, وسلخونا فيه.\nالظاهر انه نزلني قريد أو قريدين!!\n\nالقريد النهائي:\n\na\n\nالصوت:\n\nللأسف صوته مرة مرة منخفض, لكن لهجته واضحة\n\nإضافات :\n\nلاحظت انه مايحاول يدخل مرة في التعقيد…\nوهذي بتصير مشكلة اذا كان الكورس كومون…",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p789630-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/5",
+              "user": "user3804",
+              "ts": 1297679133000,
+              "tid": 98182,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4620-me203",
+      "uid": "stk-user4620",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1326854120000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "اخذت معاه me 203 بصراحة مدرس بطل وقمة الاخلاق ومتعاون جدا مع الطلاب\nالتصحيح مره ممتاز يكفي تكتب القانون الصحيح يعطيك نص الدرجة (لا تفكر تخلي السؤال فاضي معاه )\nالكويزات تتراوح من سهل ووسط\nالقريدات اخذت فوق ماتوقع (لكن مدري اذا هو رفعني قريد ولا حقي لانه الافرج كان نازل مره علما ان المادة كانت افرج سكشن والاختبارات كومن)\nصوته منخفض جدا لازم تجلس باول صف عشان تسمعه\nشرحه لك عليك لكن المادة عموما سهلة\nتقيمي له A",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p970204-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/7",
+              "user": "user4620",
+              "ts": 1326854120000,
+              "tid": 98182,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8581-me203",
+      "uid": "stk-user8581",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1413876619000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me203\nالدكتور متعاون واخلاق وممتاز في الشرح لكن شوي هادي في الشرح والكلام فيعني خلك قدام عشان ماتمل او تنام + شريح لكن فيه اشياء يتجاهلها او مايركز كثير عليها وتالي تكتشف ان بعض اسئلة الهومورك على ذيك النقاط\nطريقة الشرح على السبورة وتالي يحل مسائل بعد مايخلص من الكونسبت …\nالزبدة : الدكتور ممتاز لكن خل الكتاب مصدرك الأساسي لأنه مثل ماقلت احاينا مايركز على بعض النقاط في الشرح + لو كنت محضر للدرس راح تستفيد في الكلاس كثير\nيقبل بالميك اب + متساهل في التحضير الي يكون في بداية الكلاس\nالقريد النهائي : b+ كشرح و a+ كأخلاق وتعاون مع الطلاب",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1406550-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/19",
+              "user": "user8581",
+              "ts": 1413876619000,
+              "tid": 98182,
+              "pn": 19
+            }
+          },
+          {
+            "id": "stk-dr-f98200",
+            "n": "Dr. Mohammad Al-Qahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - TERM 143\n\nالتحضير :\n\nيختار واحد من الطلاب ويعطيه كشف يسجل فيه الحضور والغياب والبونصات الي يعطيها وفي نهاية السمستر يراجع الكشف و وعدنا انه يرسله عشان لو احد عنده اعتراض يكلمه لكن للأسف ما ارسله + في نهاية السمستر يحذف غياب واحد وكل غياب عليه 0.5 وكل تأخير 0.2 ولازم يكون معاك الكتاب واذا ماجبته خصم 0.2\n\nوهو غالبا يتأخر 10 دقايق\n\nطريقة الشرح :\nهو من فترة طويلة مانزل الكورس فجرب معانا طريقة جديدة عليه وهي ان يخلي طالب يقرأ من الكتاب و هو يعلق ويحل الامثلة ونفس الوقت يحدد للطلاب اهم المواضيع ويعطيك الزبدة وحذف كثير من المواضيع خاصة الي فيها كلام كثير في الشابتر الأول والثاني والرابع\nيشرح بالعامية وشوي انجليزي ويبسط لك المواضيع بأمثلة من الواقع . الي يعجبني في طريقته انه يعطيك زبدة الزبدة ويقولك مثلا هالموضوع متى راح تحتاجه مثلا في الكواب او في الكورس الفلاني وفي نفس الوقت يعلمك الأخطاء الشائعة عند الطلاب .\nهو غالبا كان يسوي قروبات ويوزع على كل قروب بروجكت ويقسم العمل بينهم لكن يقول انه ترك هذي الطريقة بسبب ان اغلب الطلاب الي كانوا يسجلون معاه في الـ heat transfer ماكانوا جادين وحريصين على المادة …\n\nالكويزات :\n\nتقريبا 3 او 4 كويزات مستواها بين المتوسط والسهل … يعني يجيب مثل امثلة الكتاب لكن عليها تعديل بسيط او يضيف لها تريك لكن بشكل عام اغلب الطلاب كانوا مبدعين فيها بس المشكلة ان الكويزات عليه درجات مب قليلة + يمكن يوم يعطيكم كويز للقروبات يعني كل اعضاء قروب يحلون الكويز مع بعض ويقدمونه له في ورقة وحدة.\n\nاول كويز : 3 % و الثاني : 7 % الثالث 2.5% الرابع 5 %\n\nالمياجر:\n\n4 اسئلة ريتين والاسئلة مشابهة جدا للأسئلة الي تكون في نهاية الشابتر وهو غالبا يحدد بعض الاسئلة من نهاية الشابتر للتدريب فحاول تحلها وتفهمها لأن المياجر تكون مقاربة لها مع بعض الاضافات والتريكات .\n\nالفاينلات :\n\nكان سهل حيل وتقريبا من شابتر 7 بس ويتكون من 3 اسئلة .\n\nالقريد النهائي:\nكشرح A\nلكن كتعامل D ما يسبك لكن كلامه وطريقته احيانا فيه شوي حدة واحيانا ينكت ويضحك و المحاضرة تكون مافي احلى منها … بإختصار خلك وسيع صدر + لاتفهي او تنام في كلاس ولا راح يركز عليك .\n\nالصوت: واضح وقوي والاكسنت جيد\n\nإضافات :\n\n-\nيعطي بونصات كثير وعلى اشياء بسيطة\nمثلا لو جاوبت على سؤال وسط الشرح يعطيك بونص واحيانا يكون غاب عن كلاس فيقول في ميك اب كلاس في اليوم الفلاني الي بيحضر له بونص فنصيحة حاول تركز معاه وسط الشرح وتشارك معاه واذا طلب شي او حصلت شي له علاقة بالمادة ويمكن يفيد الطلاب ( مثلا برنامج او شرح لموضوع معين ) وره الدكتور غالبا راح يعطيك بونص و بإختصار يحب الطالب الي جاد في المادة ويبي يستفيد فحاول تستفيد من هالنقطة وتحصل بونصات فيه بعض الطلاب اعتقد خذوا بونص اكثر من 5 درجات .\n\n- هو حريص على الطلاب واحيانا يعصب ويقول كلام شوي قوي لكن تأكد ان هالشي من حرصه على الطالب صحيحا احيانا يقول بعض الكلمات الي يمكن تأذي او نبرة كلامه تكون حادة شوي لكن خلك وسيع صدر واذا ضايقك كلامه رح له المكتب وتكلم معاه بطريقة محترمة و هو راح يقدر هالشي… اذا خلص الوقت او بتطلبون منه شي فحاولوا تدققون في كلامكم وتطلبون منه بطريقة حلوة مثلا تقول لو سمحت … او كأن خلص الوقت يا دكتور\nلأنه شوي حساس من هالناحية .\nفالخلاصة الي شوي مايتحمل المزح او بعض التعليقات لاينزل معاه .\n\n- اذا شافك مفهي او نايم راح ياخذ فكرة عنك وكل ساعة يسألك فحاول ماتفهي واذا ركز عليك حاول تشارك معاه عشان تتغير نظرته عنك و نفس الوقت تاخذ بونص.\n\n- في التصحيح اشوفه جيد واحيانا يخلي القريدر هو الي يصحح المياجر فإذا لقيت خطأ وكنت\n(( متأكد 100 % ))\nان التصحيح فيه مشكلة راجعه واذا ناقصك شي اكيد بتاخذه\nلكن نصيحة اذا كان دافك في التصحيح وماكانت فيه اخطاء في التصحيح لاتروح له\nعشان يزيدك او يتأكد من التصحيح لأن يمكن ينتبه انه دفك في التصحيح او زادك بالغلط فهو يروح يشيل الزيادة وبسبب هالشي صارت مشكلة له مع واحد من الطلاب كان معترض على التصحيح وبعد ماراجعه الدكتور انتبه ان حل الطالب كان ناقص وراح نقصه .\n\n- اذا كان الكورس الي يدرسه مب كومون فهو يحذف كثير من الأشياء ويعطيك الاشياء الي تهمك بس ويربطها مع الكورسات الجاية .\n- نظام القريدات عنده ستاندرد وللأسف ماعطانا كيف توزيع الكلاس ورك + كيف القريدات لكن على كلام الطلاب 85<= a+\n\n- للهوموركات لا تنسى تسوي cover page وكل سؤال في صفحة ولا ماراح يستلمه .\nالدكتور عنده بروجكت السمستر الجاي ويبي 8 طلاب … ذكر لنا بعض التفاصيل عن المشروع لكن نسيتها\nلكن بإختصار فكرة المشروع تصميم جهاز متكامل لتثبيت الجمل خلال عملية النحر طبعا الدكتور عنده تفاصيل اكثر فالي عنده الحماس والرغبة يتواصل معاه على الايميل في هذي الفترة …\n\nmqahtani@kfupm.edu.sa",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1424274-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammad-al-qahtani/98200/18",
+              "user": "user8581",
+              "ts": 1439889210000,
+              "tid": 98200,
+              "pn": 18
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5535-me203",
+      "uid": "stk-user5535",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1422039180000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 141\n\nme 203\n\nالدكتور قمة في الأخلاق ، كويزات و كلاس تست سهلة ، شرحه تمام لكنه بطيء ، و أنا أعاني من هاذي النقطة ، أحب المدرس اللي يتكلم بسرعة و يشرح زي حرابي ❤️\n\nأنا كانت كويزاتي و هوموركات و كلاس تست تمام ، لكن ميجر ون جبت الـlowest ، ميجر ٢ جبت تحت الأفرج يمكن بفرق ١٠ ٪ ، و من شدة الاحباط ما ذاكرت للفاينل أبد 😦 ، و توقعت إني آخذ F حتى إني كنت قاعد اشوف السكاشن حقت السمستر الجاي\n\nالحمد لله طلعت من الكورس بـ D+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1421744-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/20",
+              "user": "user5535",
+              "ts": 1422039180000,
+              "tid": 98182,
+              "pn": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m_nd_m-me203",
+      "uid": "stk-m_nd_m",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1485147625000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "T161 - ME203\n\nالتحضير : بداية الكلاس ينادي الأسماء… يحذف غيابين ثلاث لكل طالب… إذا جيت متأخر ما يقولك شي و يحضرك بعد (روح له بعد نهاية الكلاس)… مرة الطريق كان زحمة و تأخرت تقريبًا 25 دقيقة و دخلت و حضرني عادي\nما عنده مشكلة تحضر و تختبر مع سكشن ثاني\n\nطريقة الشرح : على السبورة… يشرح الكونسبت بكلاسين ثلاث بعدين الباقي يقضيه أسئلة… يحل عدد كبير من الأسئلة\n\nالكويزات : اختبرنا ما مجموعه 5 كويزات… الكويز الثالث حذفه للجميع… و بعدين حذف أسوء كويز لكل طالب و أخذ أفضل ثلاثة… مستواها سهل <----- حرام تضيع الـ20%\n\nالمياجر: -\n\nالفاينلات : -\n\nالقريد النهائي: أتركه لكم\n\nالصوت: منخفض و الأكسنت تكاد لا تظهر\n\nإضافات :\nإيجابيات:\nحبيب جدًا و متعاون مع الطلاب و رايق جدًا جدًا\nتصحيحه عسل و هذه سلاح ذو حدين ساذكر نقطة مهمة بهذا الشأن بالسلبيات… أيضا تصحيحه سريع جدًا يعني تختبر اليوم بالليل بكرا الصبح الورقة عندك لكن تأخر بالفاينل\nمرن بموعد تسليم الهوموركات… يعطينا أوف بعد المياجر و دائمًا نطلب منه يخليه يوم الخميس\nبعد الفاينل يعطي الطلاب فرصة يراجعون الاوراق\nدائمًا يرد على الإيميلات\nأخر هوموركين خلاهم أوبشنل… بس إذا حليتهم تاخذ 2% بونس !\n\nسلبيات:\nالمادة عنده ستاندرد من ناحية توزيع الدرجات ! لكن اللي يعوض هذه النقطة (نوعًا ما) أن تصحيحه عسل\nالصوت منخفض\nالأوفس دائمًا يكون عنده أحد و مشغول معه مدري المشكلة منه ولا من اللي عنده نشبة\n\nسلايداته و بعض كويزاته:\nME203 - AhmetSahin | تحميل\n***(أتمنى إعلامي في حالة عدم عمل الملف)\n\nإن شاء الله ما أكون نسيت شي 😅",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466822-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/24",
+              "user": "M_nd_m",
+              "ts": 1485147625000,
+              "tid": 98182,
+              "pn": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m.n.a-me203",
+      "uid": "stk-m.n.a",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1497206564000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - ME 204 T161 &162\n\nالتحضير : بداية الكلاس بالاسامي وما عنده مشكلة بالتاخير تروح له اخر الكلاس و يحضرك , يسمح بالميك اب\n\nطريقة الشرح : يشرح الكونسبت بعدين يحل امثلة الكتاب ما شفت فيها شي مميز. يتجاوب مع اسئلة الطلاب و يعيد لك اذا في شي منت فاهمة.\nفي ثرمو 1 تعبت معه في البداية لانه ما يحل معك اسئلة زي اللي تجي بالمياجر بس يحل اشياء سهلة و بسيطة جدا. في اشياء يتجاهلها تماما و ما يشرحها سواء في ثرمو 1 او2 و كان هو الكوردنيتور وما جت في المياجر للامانة يعني ذاكر اللي شرحه وبس.\n\nالكويزات : اغلبها سهلة يعطي 3 كويزات و ياخد احسن 2. بالنسة للواجبات متساهل فيها لابعد درجة و ف اخر اسبوع قال اللي ما سلم اي واجب يقدر يسلمه في هذا الاسبوع مع ان السلوشن موجود على البلاك بورد. الكلاس وورك عند هدية هذا كلامه.\n\nالمياجرو الفاينلات : هنا الكلام المهم بالنسبة للتصحيح وكان مختلف:\nثرمو 1 : ما يهتم ابدا بالفاينل انسر اذا انت ماشي صح وشافك فاهم بتاخذ الدرجة كاملة اهم شي عنده الكونسبت صح. في سؤال فرضت فيه رقم لشي كنت ناسي كيف احسبه عشان اكمل الحل وعطاني فل مارك بالسؤاال. التصحيح عسل بشاهدة الكل.\n\nثرمو 2 : يكون معك فورملا شيت لذلك يحاسب على الفاينل انسر و يدقق عليها ما يعطيك درجة على القانون ما اقدر اقول تصحيحه سيْ بس يعطيك حقك.\n\nالصوت: غير واضح ابدا و يجيب النوم وهذه اكبر مشاكلي معه لازم تقعد قدام عشان تسمعه و حتى اذا سمعته صعب تركو معاه لان اسلوبه هادي بزياة , كنت اعتمد على نفسي في المذاكرة و الفهم\nإضافات : بالنسبة للقريدات اللي اهم شي فهي عنده استاندرد بالنسبة لثرمو1 و طريقة تصحيحه ما هتكون صعبة لان التصحيح جدا بطل\nبالنسبة لثرمو 2 هتكون اصعب شوية بس للامانة دفني 3% للقريد اللي بعده.\n\nاخيرا الدكتورمن اطيب ما يكون ومتعان جدا جدا, في ثرمو 2 كلمناه يخلي الفاينل مو كومبرهينسف بسبب الضغط و فعلا ما قصر.\nماهو احسن دكتور بس يبقى خيار جيد جدا في ثرمو 2 و ممتاز في ثرمو 1\n\nاعتذر على الاطالة واذا في اي سؤال انا حاضر",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1474941-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/25",
+              "user": "M.N.A",
+              "ts": 1497206564000,
+              "tid": 98182,
+              "pn": 25
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user11848-me203",
+      "uid": "stk-user11848",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1601633515000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم : ME 203 -191\n\nالتحضير : ينادي بالاسماء يوميا ببداية الكلاس وماعنده مشكلة مع التأخير او المكيب ابدا\nطريقة الشرح : يحل امثلة بالسبورة\nالكويزات : متوسط الى سهل\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: A\nالصوت: يسمعه اللي قدام بس\nإضافات : الدكتور حبيب وبشوش ومتساعد وشريح جدا بس ركز معه , اذا ماتبي تركز اجلس ورا على جوالك مابيقول شي , تصحيحه كريك حرفيا , الدكتور خبير وقديم بالجامعة",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1526006-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/26",
+              "user": "user11848",
+              "ts": 1601633515000,
+              "tid": 98182,
+              "pn": 26
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abofordan2004-me203",
+      "uid": "stk-abofordan2004",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1606126157000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98182",
+            "n": "Dr. Ahmet Ziyaettin Şahin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203 ,TERM 201\n\n( ONLINE)\n\nالدكتور ينفع للي ياخذ ذي المادة سلف ستدي , شرحة مش ولا بد بس الصوت واللهجة واضحة\nكويزاته بالنسبة للسكشن اللي قبلنا تكون سهله وبالنسبة لسكشننا كانت تجي شوي سبايسي\nالتصحيح ما يعرف يعطي الا 5/5 او 1/5\nبالنسبة للهومووركات للامانه حنا اللي نحدد متى نسلمها وكل ما نقوله ياجلها ياجل ولا يقول شي\nالدكتور متفهم لاوضاعنا واخلاقة جدا عالية وطيب\nبالنسبة للترم اللي ادرس فيه حاليا ما فيه مياجر فقط ميد وفاينل وكويزات عليها 55% من القريد للكورس\nالكويزات تجي سؤال واحد فقط ولكنه يتفرع الى ثلاث او اربع فقرات وكل كويز عليه 5% وقالنا بالنهايه راح يحذف اسوء كويزين",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1526776-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ahmet-ziyaettin-sahin/98182/27",
+              "user": "AboFordan2004",
+              "ts": 1606126157000,
+              "tid": 98182,
+              "pn": 27
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user2552-me203",
+      "uid": "stk-user2552",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1340391338000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98185",
+            "n": "Dr. Habib Abualhamayel",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الدكتور حبيب … ممتاز في الشرح\n\nاحضر معه كل الكلاسات … و اقعد قدام و حاول تحل كل الهوموركات\n\nصدقني راح تطلع بقريد طيب\n\nانا اخذت معاه me203",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1058631-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-habib-abualhamayel/98185/3",
+              "user": "user2552",
+              "ts": 1340391338000,
+              "tid": 98185,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ayman_g-me203",
+      "uid": "stk-ayman_g",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1536665174000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98185",
+            "n": "Dr. Habib Abualhamayel",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "172 ME203\nالتحضير : ورقة تمر بين الطلاب و في ايام ينسى\nطريقة الشرح : سيئة بكل ما تحمله الكلمة من معنى. مافي سلايدات ولا يكتب بطريقة تساعدك انك تكتب نوت معه ولا قد رفع لنا شي بالبلاكبورد غير الهومووكز\nالكويزات : سهلة الى متوسط\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: C\nإضافات : الاستاذ طيب و حبوب و متعاون معك الين بكرة ، لكن الكورس كوور و تحتاجه اذا ميكانكل فما انصح به ابد. تصحيحه طيب.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1499269-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-habib-abualhamayel/98185/5",
+              "user": "AYMAN_g",
+              "ts": 1536665174000,
+              "tid": 98185,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-zoomm-me203",
+      "uid": "stk-zoomm",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1314068966000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98187",
+            "n": "Dr. Maged A. I. El-Shaarawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير بداية الكلاس ومثل ماقال خوينا يحط ليت ومايحاسبك عليه بعدين حتى الغيابات بنهاية السمستر قال مابخصم عالغيابات\nالافرج عنده طايح العاده ف حاول تشد عنده تطلع بقريد ماتتوقعه\nشرحه مو شين يبيلك شوية تركيز وتحاول تعطي المادة حقها لانها مو سهلله (me203)\nموفقين",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p890547-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-maged-a-i-el-shaarawi/98187/5",
+              "user": "zoomm",
+              "ts": 1314068966000,
+              "tid": 98187,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-black_lighting-me203",
+      "uid": "stk-black_lighting",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1353772218000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98187",
+            "n": "Dr. Maged A. I. El-Shaarawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا منزل عنده\nme203\nشرح سيء جدا من السلايد والسبوره يسويها خرابيط\nيشرح من برا المنهج الواجبات على كيفك تحضير قبل وقت الكلاس الكوزات ناااااااااااااااااااااااااااااااااار\nلا أنصح به طوال المرحلة الجامعية\nترم121",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1122931-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-maged-a-i-el-shaarawi/98187/12",
+              "user": "black_lighting",
+              "ts": 1353772218000,
+              "tid": 98187,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-adamksa-me203",
+      "uid": "stk-adamksa",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1446814873000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98187",
+            "n": "Dr. Maged A. I. El-Shaarawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "term : 142\nme 203\nالتحضير :\nيومي اخر الكلاس واذا كنت متاخر اسمح السبورة ويشيل التاخير\n\nطريقة الشرح :\nبس كونسبت مسائل بالغلط وشرحة دمار انحش منه اذا يوجد البديل\n\nالكويزات :\n4 متوسطين يميلون للصعوبة تحتاج تذاكر اسئلة الكتاب عدل\nوالكلاس تيت حقة صعب جدا جدا جدا كان الافرج 2 من 10 الطلاب زحفو بشكل غير طبيعي\n\nالمياجر:\n3 اسئلة كل سؤال لة 5 فقرات كل فقرة تعتمد على اللي قبلها تغلط بالاولى الكل يصير خطا\nوالاسئلة اللي يجيبها صعبة وبعيد جدا عن شرحة\nالفاينلات :\nنفس المياجر\nالقريد النهائي: D\n\nالصوت: واضح بس مافي فايدة ماراح تفهم شي اعتمد على نفسك بالمذاكرة\n\nإضافات : افرج سكشنه يكون نازل حيل اخر السمستر يزيد كل الطلاب على 4 درجات بس برضو ماتنفع حيل\nال C+ عنده 55 وزيد 5 درجات لكل قريد\nمايرسب احد\nودايما افرج المياجر حقته اقل من النص فا يخلي اعلى واحد بالسكشن فل مارك والباقي يزيدهم نفس زيادة نسبتة هذي الحركة يستفيد منها اللي درجاتهم عالية واللي نازلة درجاتهم مايستفيدون كثير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1432321-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-maged-a-i-el-shaarawi/98187/22",
+              "user": "adamksa",
+              "ts": 1446814873000,
+              "tid": 98187,
+              "pn": 22
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-the_lion013-me203",
+      "uid": "stk-the_lion013",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1451687509000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98187",
+            "n": "Dr. Maged A. I. El-Shaarawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203\nTerm151\n\nالتحضير :\nيوميا قبل وقت بداية الكلاس بثلاث دقايق تقريبا ويضل يعيد في الاسماء الى وقت بداية الكلاس بالضبط وبعدها تعتبر متأخر وياخذ اسمك نهاية الكلاس\nواذا كنت متاخر تمسح السبورة ويشيل التاخير\n\nلكن نهاية السمستر قال مابيحاسب لا عن غياب ولا تأخير\n\nطريقة الشرح :\nبشرك كونسبت يضيعك فيه ويعدين يحط مسائل بالبروجكتر ويشرحها كلام وهو قاعد عالكرسي وشرحة دمار جدددا\nوماتستفيد من الشرح شي واغلب الشعب يفهي في وقت الكلاس\n\nالكويزات :\n3 كويزات يميلون للصعوبة وفقرات وكل فقرة تعتمد عاللي قبلها وعادة تكون الاسئلة من كتاب ثيرمو قديم او من هالنوع\nوالكلاس تست كان نفس مستوى الكويزات\nطبعا افرج الكويزات والكلاس تيست عنده نااااازل\n\nالمياجر:\nكومن 3 اسئلة\nالفاينلات :\nكومن ظ¥ اسئلة\nالقريد النهائي: D\n\nالصوت:\nواضح بس مافي فايدة ماراح تفهم شي اعتمد على نفسك بالمذاكرة\n\nإضافات :\nافرج سكشنه يكون نازل حيل اخر السمستر يزيد كل الطلاب على 4-5 درجات\n\nافرج المياجر حقته اقل من النص واقل بفررق من باقي السكاشن فا يخلي اعلى واحد بالسكشن فل مارك والباقي يزيدهم نفس زيادة النسبة\n\nالتصحيح شديييد عنده وبعض الاحيان يظلمك فيه على شي سخييييييييييف جدا\nيعني انا في سوال حليته ظ،ظ*ظ*ظھ صح والخطوات والجواب النهائي ظ،ظ*ظ*ظھ صح لكن بدل ما احط m= … حطيت mاكبر من او يساوي ، على اشارة (اكبر من ) ماينص ظ§ من عشرين رحت له المكتب وقلت له مب معقول ماينص ظ§ على اشارة (اكبر من) قال لي اي هذا يعتبر كونسبت. عموما بعد الكلام خلاها ماينص ظ¤ وليومك قاهرني عليها.\n\nحاول تبدع عنده وذاكر سيلف ستدي لان الافرج عنده طااااايح فاذا بدعت شوي تضمن قريد\nلو بتاخذ عنده جهز نفسك للمادة سيلف ستدي ظ،ظ*ظ*ظھ\nطلعت عنده ب A ولكن من جهدي ظ،ظ*ظ*ظھ و بعد معاناة في المذاكرة لان مافي فايدة من شرحه ولا 1%",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1437693-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-maged-a-i-el-shaarawi/98187/24",
+              "user": "The_lion013",
+              "ts": 1451687509000,
+              "tid": 98187,
+              "pn": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abdelaziz-me203",
+      "uid": "stk-abdelaziz",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1451785908000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98187",
+            "n": "Dr. Maged A. I. El-Shaarawi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 Thermodynamics I - 151\n\nالتحضير :\nبداية كل كلاس\nوأحياناً يحضر قبل يبدأ الكلاس 🤣\nولا مرة نسى يحضر\nاللي عنده ليت يخليه يمسح السبورة ويشيل عنه الليت\n\nطريقة الشرح :\nيشرح من سلايدات\nمايحل مسائل إلا ناااااااادراً غالبية شرحه كونسبت\nشرحه نص ونص توصيله للمعلومه للطلاب ضعيف\nاللي يركز معاه بيفهم لكن يتعب شوي\n\nالكويزات :\nمتوسطة مائلة للصعوبة\nتقريباً كل كويز 5 فقرات وكل فقرة تعتمد على اللي قبلها\n\nالمياجر:\nكومن\nتصحيحه مو ذاك الزود\nفي ميجر 1 حليت سؤال بالخطوات صح وكل شي تمام والارقام مضبوطة ،إلا في الأخير غلطت في رقم في الحاسبة وطلع عندي الفاينل أنسر غلط وشال علي 5 بوينتس !!\n\nالفاينلات :\nكومن\n\nالقريد النهائي:\nأعطيه B\n\nالصوت:\nواضح\nمصري إنقلش 🤠\n\nإضافات :\nالدكتور مشكلته شايب الحين ، من يقول كلمتين تعب\nأحياناً الضغط عنده يرتفع ويعصب\nأفرجه نازل نوعاً ما في المياجر والمادة أفرج سكشن فـ القريدات عند أغلب الطلاب كانت حلوة.\nأنا انحديت عليه وفي البداية ماكنت متقبلة ، لكنه كويس .\nقبل نهاية السمستر بكم اسبوع صار يطلع الطلاب يحلون Examples اللي في الكتاب / يوم شاف ماحد يطلع صار يحط عليه بونص\nاللي بيتعب على نفسه معاه بيطلع بقريد فوق فوق فوق ما يتوقعه\n\nموفقين 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1437824-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-maged-a-i-el-shaarawi/98187/25",
+              "user": "Abdelaziz",
+              "ts": 1451785908000,
+              "tid": 98187,
+              "pn": 25
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-c_a_c_t_u_a_r-me203",
+      "uid": "stk-c_a_c_t_u_a_r",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1291577088000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me203\n\nههههههه\n\nوالله هالدكتور إسمه فله\nتصدقون إلا الآن ما اعرف السبلنق حق اسمه << توهقت بالميجر ( لازم اكتب إسمه ) 🙂\n\n::\n\nالشرح روعة روعة روعة + عنده هاندآوت بالويب سي تي مفيد جداً\nالكويزات متوسطة مائلة للسهولة\nالتحضير بعد اول 10 دقايق + ما يحب التأخير\nأول 10 دقايق بالكلاس … يعطي ( هنت ) لأسئلة الهوموورك\nالآكسنت شويه لك عليه … يااف = F\n😃\n\n::\n\nأنصح فيه وبعنف 🙂",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p741231-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/2",
+              "user": "C_a_c_t_u_a_r",
+              "ts": 1291577088000,
+              "tid": 98188,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-me.me.me-me203",
+      "uid": "stk-me.me.me",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1297842346000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "من افضل دكاترة الثيرموديناميك\nطريقة شرحة من النوت ويحل المسائل على السبورة\nاحلى شيء انه يعطي هنت على الهومورك بعض الاحيان هذا الهنت هو حل الهومورك ما عليك إلا انك تحط الارقام\nمتساهل نوعا ما في التصحيح وتقدر تراجعه في تصحيح المياجر وسبق وان عدلي درجة الميجر\nاخذت معاه me203 وحاليا ماخذ معه me204\nومثل ما قالوا الشباب الاكسنت لك علية ولكن راح تتعود مع الوقت … يم =m\n\nالقريد النهائي a",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p792142-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/8",
+              "user": "ME.ME.ME",
+              "ts": 1297842346000,
+              "tid": 98188,
+              "pn": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mtlinjawi-me203",
+      "uid": "stk-mtlinjawi",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1336150965000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - semester 112\n\nالتحضير :\n\nكل يوم ينادي بالرقم، يحضر في وسط الحصة، و يسمح بشوية تأخير.\n\nطريقة الشرح :\n\nممتازة، يحل أسئلة الواجب و أحيانا أمثلة من الكتاب. و يشرح نظري شوي و الباقي حل مسائل.\n\nالكويزات :\n\nسهلة و تجي شبه الكويزات القديمة\n\nالمياجر:\n\nكومن و تصحيحه عادل يعطيك على قد حقك\n\nالفاينلات :\n\nكومن\n\nالقريد النهائي:\n\nما استلمته\n\nالصوت:\n\nواضح، بس اللهجة ما تفهمها اول كم يوم بعد كذا تتعود عليها\n\nإضافات :\n\nالدكتور طيب و متعاون لابعد الحدود و متواجد في المكتب و يرحب بالجميع",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1032381-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/15",
+              "user": "mtlinjawi",
+              "ts": 1336150965000,
+              "tid": 98188,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-montadhar-me203",
+      "uid": "stk-montadhar",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1338287937000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الكورس: Me203\n\nالسمستر: 112\n\nفي البداية أقول أني حست الجدول علشانه و بعدين طلع ما يسوى أبد.\n\nالشرح: سيء جدا و ما عنده إلا هنت و هنت. و بعدين؟ و الأخير طيب؟ هنت و أنت أصلا ما تشرح الكونسبت زي الناس؟\n\nاختباراته: كوزاته مرة صلللللخ و مرة سهلة. هلكنا في التصحيح في بداية الكوزات و الكلاس تست و الميجر الأول لدرجة أن السكشنين اللي تبعه كانوا أقل شي في الميجر الأول واحد منهم عشرين من أربعين و الثاني 18 . و جانا ميجر تو و كان سهل و طبعا مو كومن يعني كان هو اللي حاطنه و كان يبغى يضبط و غمض عينه عن حاجات واجد لدرجة أن أفرج الميجر تو صار 25 من 30!!! و قالها و هو يفتخر بمعنى لا تحاسبوني بعدين إذا خسفتكم لأن أفرج ميجر تو اللي ما عليه إلا 15% عالي جدا و نسى أن الكوزات و الميجر الأول و الكلاس تست طايحين.\n\nالقريدات: من ناحية القريد فأنا أقول عطاني حقي بالمل.\n\nالأخلاق: طيب لكن وش الفايدة الطيبة بدون شرح؟\n\nالقريد النهائي: F\n\nإضافات: طبعا أنا مشيت على كلام المنتدى و اكتشفت ليش ناس تمدح و ناس تذم لأن كلاسنا أكثر من ثلاثة أرباعه يذمون و الباقي يقولون مش حالك و بعدين يقيموا بناء على القريد. مع أني جبت قريد زين وياه لكن أقول لكم ابتعدوا عنه ، تراني تعبت تعب مو طبيعي وياه و طبعا على حساب المواد الثانية.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1047427-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/17",
+              "user": "montadhar",
+              "ts": 1338287937000,
+              "tid": 98188,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-iahmed015-me203",
+      "uid": "stk-iahmed015",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1358109867000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "# TERM 121 - ME203: Thermodynamics I\n\nالتحضير :\nقلق، يسمح بالتأخير دقايق معدودات وممكن تتهزأ ويقول دايماً لو تأخرت مرة لا تجي احسن.\n\nطريقة الشرح :\nسلايدات + حل اسئلة الهوموورك\n\nالكويزات :\nكنت اشوفها \" حريقة \" 🤠\n\nالمياجر:\nثلاثة مياجر - كومون\n\nالفاينلات :\nكومون\n\nالقريد النهائي:\nD+\n\nالصوت:\nواضح\n\nإضافات :\nالدكتور نفسيّة + معقّد + يكرهّك فالمادة ، أخلاقه سيئة مايسلم عليك لو شفته برا وانا انغشيت بالكلام اللي هنا.\n\nالدكتور شرحه لا بأس فيه ، لكن انا ماكنت استفيد منه ، تصحيحه زفت الميجر الاول السؤال طلب كيلو جول ، حطيت الاجابة بـ الجول ، وحط عليها -1 على فقرتين يعني ( -2 ) ولما جيته رضي يعطيني +1 بس ، وصار منخصني -1 على شئ زي كذا .\n\nلا تنزّل معاه إلا اذا كنت (\n\nممرررة\n) دافور وتداوم كل الكلاسات و تدفّر كل الكويزات.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1163773-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/19",
+              "user": "iAhmed015",
+              "ts": 1358109867000,
+              "tid": 98188,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a.atiq-me203",
+      "uid": "stk-a.atiq",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1388830293000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98188",
+            "n": "Dr. P. Gandhidasan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله\n\nدرست عنده ME 203 في ترم 131 .\n\nقبل لا أبدا بنود التقييم… فيه شيء … ما لاحظتوا اسم الدكتور ؟؟\n\nفيه حفلة … و بالتحديد … حفلة بعدين اسم قاندي بعدين حفلة ثانية … يعني شوف معي:\n\nبالانتشامي قانديدسان\n\nشفتوا الاسم كيف حفلة 😍 ؟؟\n\nما أخفيكم اني ما عرفت اقرأ اسمه الا نهاية السمستر … و كنت اسميه غاندي لأنه أسهل على لساني.\n\nالتحضير :\nآخر الكلاس برقم الآيدي . ما ينسسسسسسسى ولا كلاس في العالم .\n\nطريقة الشرح :\nابداع … ركز معاه في الكلاس و اسأله و خش فيه … أضمن لك فهم و تزبيد … يعطيك زبد عن المادة … يقولك الدرس هذا كذا يجي السؤال عنه في الميجر … في الميجر ما نعطيكم كذا … في الميجر راح نعطيك هذا و هذا … يعني زي كذا. أو يقول لك السكشن هذا ماهو مرة مهم لذلك راح أشرحه بسرعة … يعني افهم انه ما راح يجي في الميجر . و يعطيك هنت عن أغلب مسائل الهوموورك.\nفي الكلاس يقول ما أبغاك تكتب معاي … بس ركز.\n\nالكويزات :\nمتوسطة … أعطانا خمس كويزات ياخذ أفضل 3 .\n\nالمياجر:\nكومون.\n\nالفاينلات :\nكومون.\n\nالقريد النهائي:\nB+\n\nالصوت:\nواضح جدا … مع آكسنت ابداع ما تلقاه الا عنده … من اختراعه .\n\nإضافات :\n1- يجلسك 51 دقيقة في الكلاس … ما يضيع دقيقة.\n2- الآكسنت حقه رهييييييييب و أحيانا أضحك في الكلاس بسبب كلامه … مرة كنت مسخن و دايخ في الكلاس … الزبدة انه قال كلمة … و ضحكت عليها … تخيلوا ضحكت و أنا مسخن. :ninja:\n3-دكتور نفسيييييييييييية من أنفس ما خلق رب العالمين … بينه و بين الطلاب حجاب فولاذي سمكه 54 سم. الطالب عنده عبارة عن رقم آيدي فقط … أتكلم جد ترى … اقسم بالله لو أنك أدفر واحد أو أدشر واحد … ما يدري عنك .\n4- يهزئك اذا سألته في الكلاس … يعني كم مرة اسأله أو يسألوه الشباب … يجاوبك و يهزئك … يعني يقول لا تضيع وقتي بأسئلة زي كذا … لو فكرت كان عرفت الاجابة … اقرأ الكتاب … هذي المعلومة أنا قلتها قبل .\n5-يسمح بالتأخير لمدة خمس دقائق … بعدها يدخلك لكن تتهزأ أمام الملأ .\n6- التصحيح بالملم … لو غيرت كلمة واحدة من التعريف … على طول -1.\n7-دكتور نظامي جدا ما فيه تسامح أو تساهل.\n8-دكتور شارب الثيرمو شرب.\n9- ضحك 3 مرات في السمستر فقط.\n\nاذا تبغى شرح خذ معاه … بس لازم تركز … و حط في بالك انك تاخذ حقك بالملم و مافيه تساهل أو تسامح.\n\nبالتوفيق للجميع.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1314651-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-p-gandhidasan/98188/21",
+              "user": "A.Atiq",
+              "ts": 1388830293000,
+              "tid": 98188,
+              "pn": 21
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-harry_potter-me203",
+      "uid": "stk-harry_potter",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1295992659000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98190",
+            "n": "Dr. Syed Said",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203\nالشرح : يشرح على السبوره بطريقه غير منظمه وبعض المرات السلايدات\nبس شرحه واضح و يتقبل اي سؤال من الطالب حتى لو كان السؤال جدا غبي\nالاخلاق : عاليه 100/100\nالكويزات : صعبه اول الترم وآخر الترم بدأ يجيب من الsolve EX\nكلاس تست : سوالنا 2 مدري 3\nالمياجر : كومن\nالفاينل : كومن\nاضافه : شرحه دائما ما يكون عادي بس قبل المياجر و الفاينل يسوي هلب سشن و يعطيك فيها SUMMARY بطل يرتبلك كل الافكار\nالصوت : 10/10\nالكلاس وورك : خسف طايح جدا\nالدكتور ممتاز بس شد حيلك معاه\nالتقييم : B+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p774315-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/syed-said/98190/2",
+              "user": "harry_potter",
+              "ts": 1295992659000,
+              "tid": 98190,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-stu2009-me203",
+      "uid": "stk-stu2009",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1338794026000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98190",
+            "n": "Dr. Syed Said",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "د.سيد سعيد\n\nMe203\nالتحضير :\nأحيانا يحضر وأحيانا لا ولا يركز على التأخير بس يزعل لما يشوف واحد جاي متأخر أكثر من عشر دقايق\nطريقة الشرح :\nيشرح باستخدام السبوره ويعطي أمثله ويحل أمثله من الكتاب…الصراحه أشوفه واجد ممتاز في الشرح…ومثل ما قالوا الشباب في البدايه راح تحسه مضيع…بس اصبر شوي وبتشوف كيف يصير بطل لنهاية السمستر 🌹\nالكويزات :\nكويزاته سهالات واحيانا تجي صعبه شوي وتصحيحه زين\nالمياجر:\nميجر ون كان كومن…أما ميجر تو كان سهل جدا…وكانت افكاره كلها من الهيلب سيشن\nالفاينلات :\nكومن\nالقريد النهائي:\nأعطيه B+\nالصوت:\nالصوت واضح ويشرح طبعا عربي وانجليزي\nإضافات :\nالدكتور جدا ممتاز وخصوصا في الهيلب سشن ونصيحه لا تفوتونها…عيوبه مثل ما قالوا الشباب بالنسبه للكلاس تيست 🤠…والقريدات اشوفه فيها متوسط يعني ما يخسف ولا يدف…بالأخير ينصح فيه 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1050511-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/syed-said/98190/5",
+              "user": "stu2009",
+              "ts": 1338794026000,
+              "tid": 98190,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5643-me203",
+      "uid": "stk-user5643",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1291194084000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98193",
+            "n": "Dr. Syed Zubair",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم :\nme 203\nالتحضير :\nيوميا … بس ما ياثر بالقريد كثير\n\nطريقة الشرح :\n\nطريقته مره حلوه بالشرح 🙂 سلايدات + سبوره\n\nالكويزات :\n\nكوزاته صعععععععععععععععععععععععععععععععععععععععععععععععععبه مره بدرجه فضيعه\n\nوافكارها نففففففسها تجي بالميجر مع العلم ان الماده كومن !!\n\nالمياجر:\nكومن …\nالفاينلات :\n\nكومن\nالقريد النهائي:\nA شرح … Bاخلااق … B قريد\n\nالصوت:\n\nواضح …\nإضافات :\n\nبالنسبه لي اشوف الثيرمو سيلف ستدي + 25 درجه بيد المدرس (( عالاقل ) )عشان كذا ما انصح فيه\n\nبالثيرمو بسبب صعوبة كوزاته لكن شرحه والله جبااااااااار",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p740420-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/syed-zubair/98193/2",
+              "user": "user5643",
+              "ts": 1291194084000,
+              "tid": 98193,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_hlali-me203",
+      "uid": "stk-_hlali",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1292378633000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98194",
+            "n": "Dr. Abdelsalam Al-Sarkhi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "سمستر 101 مادة me203\n\nالدكتور ماشاء الله عليه متمكن من المادة ودايم ياخذ الامور ببساطة\n\nويحب يسهل المادة على الطالب وشرحه ممتاز واكثر من ممتاز بعد وبالنسبه\n\nللكويزات يعطيك 4 كويزات وياخذ افضل اثنين ويقسمهم على اثنين وياخذ الدرجه\n\nيعني مثلا خت في الاول 10 وفي الثاني 8 في الكويزات يعطيك 9 والهووم وورك\n\nاذا نسيته يعطيك فرصة تسلمه اليوم الي بعده وفي تصحيح المياجر يحاول يعطيك اكبر درجة\n\nممكنه والتحضير يمرر ورقة على الطلاب ولا يشيك بعدها وبالنسبة للصوت واضح ولغته ممتازه\n\nماشاء الله عليه والدكتور قمة في الاخلاق والتعاون مع الطالب يعني بأختصار اعتقد ماراح تحصل\n\nدكتور مثل الدكتور عبدالسلام وان شاء الله في نهاية الكورس يبيضها معنا الدكتور .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p744427-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdelsalam-al-sarkhi/98194/2",
+              "user": "_HLALI",
+              "ts": 1292378633000,
+              "tid": 98194,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8551-me203",
+      "uid": "stk-user8551",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1365103543000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98194",
+            "n": "Dr. Abdelsalam Al-Sarkhi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - Term 121\n\nالتحضير : ورقة يمررها عالطلاب و يوقعون عليها ، ما قد شيك عليها ، و ما يخصم شئ عالغياب بنهاية الترم.\n\nطريقة الشرح : ممتازة ، يستخدم سلايدات و يكتب عالسبورة أحيانا ؛ لكن مشكلته إنه يجلس يناظر بطالب واحد طول الكلاس و يسحب عالباقي.\n\nالكويزات : متوسطة ، و بسهولة يمديكم تأجلونها (يعني لو يجونه ثلاث طلاب يقولون ما نبغى الكويز اليوم ، يأجله).\n\nالمياجر و الفاينلات : كومن.\n\nالصوت : جهوري ❤️.\n\nإضافات : في هذا الترم ما كان يدرس إلا سكشن واحد ، و خسف فينا بالقريد النهائي لأن أفرجنا مرتفع ، أنا مجموعي 83 و أعطاني B.\nالدكتور حبيب و متفهم و أخلاقه عالية ، لو تجيبله الهومووركات متأخرة بأسبوع يقبلها ❤️.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1205715-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdelsalam-al-sarkhi/98194/17",
+              "user": "user8551",
+              "ts": 1365103543000,
+              "tid": 98194,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ahmad-ali-me203",
+      "uid": "stk-ahmad-ali",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1408208981000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98194",
+            "n": "Dr. Abdelsalam Al-Sarkhi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me 203 - 133\n\nافضل دكتور مر علي لحد الان , فاهم المادة وطريقة شرحه مرتبة ووااضحة جداً\nسلايداته بالنسبة للثيرمو فيها امثلة واسئلة , والكونسبت فيها اوضح من الكتاب ويشرح منها واحياناً يكتب على السبورة\n\nواحياناً يربط لك اللي تدرسه بالواقع بحكم خبرته , متعة\n\nكويزاته من الهومورك , اذا حليت الهومورك الفل مارك بجيبك\n\nواخلاقه ممتاز ويتجاوب مع الاسئلة حتى لو كانت شاطحة وتدل ان صاحبها مو مركز ابداً\n\nتصحيحه ممتااااااااااااااااز\nاذكر اني اوجدت قيمة غلط من الجدول ومشيت عليها بحلي وطلع الناتج عند غلط\nما خصم علي غير بوينت واحد فقط من 100 !\n\nانصح فيه لان الكورس معاه خفيف وممتع",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1390240-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdelsalam-al-sarkhi/98194/26",
+              "user": "ahmad-ali",
+              "ts": 1408208981000,
+              "tid": 98194,
+              "pn": 26
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-almaiman-me203",
+      "uid": "stk-almaiman",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1384709005000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98195",
+            "n": "Dr. Abdulghani Al-Farayedhi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ترم 121 me 203\nو ترم 122 me 204\n\nالدكتور شريييييييييييييييييح درجة أولى … أكتب معاه نوتس حقتو ولا تذاكر الا منها وأبشر بالـ a+ … هاذي عن تجربة … متساهل جدا في تسليم الهوموركات … طيب جدا … نادر ما يبتسم لكن أخلاقه ممتازة …\n\nعيبه الوحيد إن درجات المياجر يسلمها متأخر …\n\n**أنصح به وبقوه **",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1289051-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-abdulghani-al-farayedhi/98195/16",
+              "user": "almaiman",
+              "ts": 1384709005000,
+              "tid": 98195,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-amat_24-me203",
+      "uid": "stk-amat_24",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1292949301000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98196",
+            "n": "Dr. Esmail Mokheimer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "مدري ما اشوفه بالسوء اللي كاتبينه الشباب هنا\nاخذت معاه me203 السمستر 092\nاخلاقه لا باس بها\nشرحه عادي، بس الكورس جدا صعب ويحتاج دكتور شرحه افضل فما انصح به من هذي الناحية\n\nالشرح تقريبا كله على السبورة، يمكن يمر على السلايدات على خفيف يشرح بها القوانين بس، لكن يحل مسائل على السبورة\n\nبالنسبة للتحضير، يحضر يوميا، ويسجلك ناقص نص على كل تاخير\nلكن آخر السمستر قالنا ما راح احاسب على التاخير، سجلتلكم هوا عشان تنتبهو\n\nاحسه يهتم جدا بفهم الطلاب، كان كلاسي من 11 الى 12 وكان يعطينا نص ساعة زيادة - برضانا - وقت البريك ، وكان له هيلب سشنز بس ما حضرتها",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p748981-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/esmail-mokheimer/98196/2",
+              "user": "amat_24",
+              "ts": 1292949301000,
+              "tid": 98196,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4626-me203",
+      "uid": "stk-user4626",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1326879043000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98196",
+            "n": "Dr. Esmail Mokheimer",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me203\nالدكتور من ناحية الأخلاق جدا محترم لكن يعصب فجأة لو شاف واحد يتكلم أو نايم أو مو منتبه\nأعطانا ٦ كويزات و أخذ أحسن ٣ (عموما الكوزات سهلة و من الكتاب بالرقم)\nيعطي أسئلة و عليها بونص كثير و في النهاية ما حسبها !!!!!!\nطبعا تحضير يومي و أعطى ١ أو ٢ DN واحد فيهم في نص السمستر\nيعطي تلميحات قوية عن أسـئلة المياجر و الفاينل\nالتصحيح جدا دقيق و مستحيل يتساهل فيه\nخسف فينا بالقريد النهائى نص السكشن D\nأعتقد إني كنت أستاهل ٣ قريدات أكثر من القريد إلا أخذته\nباختصار هو كان تمام لولا إنه خسفنا بطريقة غير جيدة في النهاية",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p970352-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/esmail-mokheimer/98196/5",
+              "user": "user4626",
+              "ts": 1326879043000,
+              "tid": 98196,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4774-me203",
+      "uid": "stk-user4774",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1314053305000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98197",
+            "n": "Dr. Shahzada Shuja",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me203\nالتحضير :\n\nيحضر بالاسامي في اول الكلاس يبدا في اول ثانية من الكلاس\n\nطريقة الشرح :\n\nعنده سلايدات ياخذ منها التعاريف والقوانين\n\nيحل اسئلة بدون تعويض للمجاهيل\n\nالكويزات :\n\nكوزين + واحد ميك اب\n\nكوزاته صعبه\n\nالمياجر:كومون\n\nالفاينلات :كومون\n\nالقريد النهائي:\n\nB\n\nالصوت:\n\nعالي وواضح\n\nإضافات :\n\n- الدكتور شرحه ممتاز وبتفهم معاه الماده بس اذا سلمت من تحطيمه\n\n- قاعدة الدكتور الذهبيه اذا الطلاب ماكانوا خايفين من الماده ماراح يذكروا\n\n- اذا بتسلم من تحطيمه ووبتذاكر صح نزل معاه غير كذا لا تفكر",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p890385-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/shahzada-shuja/98197/3",
+              "user": "user4774",
+              "ts": 1314053305000,
+              "tid": 98197,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8655-me203",
+      "uid": "stk-user8655",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1337321256000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98197",
+            "n": "Dr. Shahzada Shuja",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "للأمانة هذا الدكتور أفضل دكتور مر علي لا من حيث الشرح أو تشجيع الطلاب\n\nو حتى سلايداته روعة و كما يعطي قريد ع شغلك معاه\n\nطبعا أنا أخذت معاه me 203 و تخصصي مو me\n\nأنصح فيه و بقوة",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1039239-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/shahzada-shuja/98197/6",
+              "user": "user8655",
+              "ts": 1337321256000,
+              "tid": 98197,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user12192-me203",
+      "uid": "stk-user12192",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1641319475000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98197",
+            "n": "Dr. Shahzada Shuja",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203 - 211\nالتحضير : من دقيقتين إلى ثلاث وبعدها ليت (بعض الأيام يحضر المتأخرين) وحذف التأخيرات كلها نهاية الترم (ما هو شرط كل ترم يسويها 😁)\nطريقة الشرح : يشرح بالسبورة ويستخدم السلايدات للمراجعة أو إذا بيعرض جداول او صور، الخ… ثم يشرح طريقة حل مسائل الواجب ويكتب القوانين (ما يعوض بالأرقام) وبعض الشباتر يزيد أسئلة من برا الكتاب، الدكتور شريح ما شاء الله عليه.\nالكويزات : 3 كويزات من الأسئلة اللي شرحها (يغير الأرقام) فإذا حليتها وفهمتها فتقدر تقول انك ضمنت الكويزات + واحد اشتقاق قوانين (Derivation) يأخذ أفضل ثلاثة وكل واحد عليه 5 درجات. أول اثنين كانوا في آخر الكلاس اذا ما خاب ظني واعطانا 15-20 دقيقة. اخر كويزين كانوا مع بعض في اخر كلاس 🤪\nالمياجر: كومن، تصحيحه ممتاز، الدكتور تصحيحه طلقة ما شاء الله عليه الكلاس كان في الظهر ودرجات أول كويزين نزلها قبل العصر والمياجر خلصت 9 أو 8:30 ونزل الدرجات على 12\nالفاينلات : كومن، ما نزل درجته لكن احس كان ممتاز <<(بناءً على توقعي لدرجتي والقريد)>> 👍\nالقريد النهائي: A+\nالصوت: واضح ولغته ممتازة والنطق كذلك.\nإضافات : انصح فيه بشدة، الواجبات 11 أو 12 تسليمها على البلاك بورد والتصحيح كان على قريدر.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533298-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/shahzada-shuja/98197/13",
+              "user": "user12192",
+              "ts": 1641319475000,
+              "tid": 98197,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user11634-me203",
+      "uid": "stk-user11634",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1642401415000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98197",
+            "n": "Dr. Shahzada Shuja",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - Term 211\nالتحضير : يحضر في بداية المحاضرة باستخدام البلاك بورد.\nطريقة الشرح : شرحه ممتاز جدا، ويستخدم السبورة بشكل فعال ويوضح الكونسبت، ويحل عليه مسائل كثيرة.\nالكويزات : من أسئلة الواجب مع تغيير الأرقام فقط.\nالمياجر: موحدة.\nالفاينلات : موحدة.\nالقريد النهائي: +A\nالصوت: واضح\nإضافات :\n1 - الدكتور شجاع شريح ويغطي كل مفاهيم المادة ولديه ملخصات ممتازة جدا للمذاكرة يطلب من طلابه تصويرها بالجوال كي لا تتسرب.\n2- يشرح حل أسئلة الواجب في المحاضرة، وما على الطالب إلا التعويض وإيجاد الحل النهائي.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533501-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/shahzada-shuja/98197/14",
+              "user": "user11634",
+              "ts": 1642401415000,
+              "tid": 98197,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-retaj_basheer-me203",
+      "uid": "stk-retaj_basheer",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1768706733877,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98197",
+            "n": "Dr. Shahzada Shuja",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "شجاع\n\nالمادة : ME203\n\nالتحضير : دقيقتين بداية الكلاس بعدها تصير ليت وجدًا شديد في موضوع التحضير ، ويبدأ على الوقت تمامًا وينتهي على الوقت تمامًا\n\nطريقة الشرح : بالنسبة لي في البداية كنت جدًا خايفة من الدكتور وأسلوبه بناء على تقييمات البعض له لكن حبيت اكتب تجربتي لأن الدكتور صح انه شديد ولكنه ممتاز\n\nبالنسبة للشرح سلايداته كويسة بس احس يبغالها ترتيب وشرحه جدًا جدًا كويس البعض كان يعتبره عشوائي في الشرح بس أسلوبه مرة ناسبني يعطيك الشي المهم ويقعد يحل على الكونسبت اكثر من نوع سؤال وكان يحل ويانا كل اسئلة الواجبات ويعطينا اسئلة من بره وبعضها كانت تسبب الهلع وتخليك تخاف من المادة وهالاشياء كان مستحيل أنها تجي في المياجر\n\nولكن أشوفه كان جدًا ممتاز وثبت لنا المفاهيم الصعبة ولكن لما جا البارت الصعب في المادة عطبها شوي وصار شرحه مو مفهوم ويعقد الأمور وهي مو بهالصعوبة\n\nعيوبه انه سرييع في الشرح بس لو مافهمت يقعد يعيد ويزيد لك عشان تستوعب\n\n، انه مرة شديد وإذ حسكم مو متفاعلين يقعد يخوّفك من المادة ، يعرف الطالب اللي ذاكر واللي مايدري وين الله قاطنه وينحز واجد في الكلام وإذ كنت مو مذاكر وحاولت تسأل مايعطيك وجه في الشرح لأنه ببساطة عارف انك مو مذاكر\n\nالكوزات : قبل الكوزات يعطينا اسئلة تسبب صرع ويخلينا نركز عالصعب وبعدين يجيب سؤال من الواجب بس يغيّر فيه المهم الكوزات مو سهلة ابدًا\n\nاننننصصصح بعدم أخذ ميكب كوز لأن الكوز كان حريقة ببساطة\n\nالمياجر : اسرع إنسان في المجرة يصحح بعد اقل من ساعة الدرجات والافرج نازلين وعلى سرعته تصحيحه عادل وجدًا يعطيك بالضبط اللي تستاهله لا اكثر ولا اقل ( ماتهمه الأرقام يهمه انك فاهم كيف تحل ) بعض الأحيان يجاوب على اسئلتكم في المياجر او انه يرد على السؤال ببساطة (فكري ! ) بينما كانو كل باقي الدكاترة يعطو هنتات ومتعاونين في التصحيح\n\nلا انصح ابدًا بمراجعة التصحيح وياه وبحافظ على الأسباب\n\nانزل عنده مادة ثانية ؟ ايي لان ببساطة الدكتور عنده علللممم واسسسسسععع وجدًا عبقري ويربط الأمور بشكل جدًا ممتاز وحليّل\n\nالصوت : واضح\n\nالقريد النهائي : B+, A",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1540920-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/shahzada-shuja/98197/17",
+              "user": "RETAJ_BASHEER",
+              "ts": 1768706733877,
+              "tid": 98197,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-dok116-me203",
+      "uid": "stk-dok116",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1326572654000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98198",
+            "n": "Dr. Salem A. Al-Dini",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me 203 ترم 111\n\nالتحضير : في بداية الترم كان يحضر على الساعة بالضبط وبعض الأحيان قبل الوقت بدقيقتين لكن بعدين ماعاد صار يحضر إلى نهاية الترم إلا بعض الأحيان تمسك معاه يحضر\nطريقة الشرح : الدكتور شريح درجة أولى , المادة سهلة أصلاً بس كمان الدكتور مبسطها زيادة وميزته انو يهتم بالكونسيبت وما يعقدنا بالقوانين.\nالكويزات : خمسة كويزات وياخذ أفضل أربعة , الكويزات متفاوته, بس معظمها من الهوموورك, وكل كويزاته خارج أوقات الكلاس\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: B+\nالصوت: ممتاز ولهجة واضحة\nإضافات : الدكتور ممتاز ويتجاوب مع الطلاب, لكن في عيب واحد فقط لاغير ويمكن البعض مايعتبره عيب وهو بعض الأحيان لما تسأله سؤال يمكن يديك تهزيئة خفيفة وبطريقة مزح , ومع انها خفيفة إلا اني صرت أتجنب أسأله\nلكن بشكل عام الدكتور شريييييح + أخلااااق عااااالية والكلاس تبعه ممتع 👍",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p967751-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-salem-a-al-dini/98198/4",
+              "user": "dok116",
+              "ts": 1326572654000,
+              "tid": 98198,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6095-me203",
+      "uid": "stk-user6095",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1327298062000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98198",
+            "n": "Dr. Salem A. Al-Dini",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "^\n\nme 203 ترم 111\n\nمآ أزيد على كلاآمك …\n\nالدكتور أعتقد إنّـه مميز في الشرح … و في الإسلوب …\nيعطـي 5 أو 6 كوزآت … و يآخذ أفضل 4 … >> طبعـآ آخر أسبوعين يعطيكم 3 كوزآت …\n\nبإعتقآدي … إنّه من أفضل من يدرّس هـ المآدة … الميجر الأوّل كآن أفرج كلاآسنـآ 67 … و الميجر الثآني كآن أفرجنـآ 77 … و بالرغـم من إنّ الأفرج كآن عآلي … إلّآ إنّي أشوف إنّه أعطآني حقّي و زيآدة …\n\nالله يجزآه خير … و يحفظه … و ينفع به و بـ علمــه …\n\n🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p972410-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-salem-a-al-dini/98198/5",
+              "user": "user6095",
+              "ts": 1327298062000,
+              "tid": 98198,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8593-me203",
+      "uid": "stk-user8593",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1357892370000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98198",
+            "n": "Dr. Salem A. Al-Dini",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me203 ترم 121\nالتحضير: الدكتور حضر يمكن اول اسبوعين وحاسب على التاخير بس بعدين ماعاد يحضر الا في يوم ماداوم الاسته طلاب وحضر\nطريقة الشرح: الدكتور شرحه رائع مره واللي من قوة واسلوبه خيالي ومحمس طبعا الدكتور عنده سلايدات يبدا يشرح منها واذا فيه نقاط مهمه يكتبها على السبوره. ميزة الدكتور هي تبسيط القوانين في الماده . الدكتور خفيف دم ويمكن يذب عليك في الكلاس ذبه يعني اذا كنت من النوع الي يزعل يمكن تاخذ في خاطرك على الدكتور .\nالكويزات: اعطانا خمسه واخذ افضل اربعه صراحه كويزاته صعبه وتصحيح الدكتور شديد بس ميزته انه يعطينا الكويزات قبل المياجر\nالمياجر: اختبرنا ثلاث مياجر كومن وتصحيح الدكتور شديد مره و كان يرجع لنا المياجر بعد ماتختبرها باسبوع\nالفانيلات: كومن\nالقريد النهائي : الدكتور والله بطل ويستاهل +A\nالصوت : ملعلع ماشاء الله والقاء الدكتور رائع طبعا يشرح بالعربي والانقليزي\nاضافات : الدكتور رائع ولا يتفوت صح بعد المياجر حقدنا عليه من تصحيحه بس في النهايه ماقصر معي انا شخصيا\nيعني باختصار اذا شفته منزل لاتفوته.\nفيه نقطه مهمه طبعا الدكتور مدير تطوير برنامج المهارات الشخصيه يعني على طول مشغول ممكن ماتلقاه في الساعات المكتبيه على كلام الشباب وكثير كان يسافر ونحظر الجمعه العصر ومرتين غاب من غير مايقول لنا بس مسامحين الدكتور ههه\nفي الاخير الله يوفقك يالدكتور سالم ويحفظك.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1162072-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-salem-a-al-dini/98198/8",
+              "user": "user8593",
+              "ts": 1357892370000,
+              "tid": 98198,
+              "pn": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user9306-me203",
+      "uid": "stk-user9306",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1450346425000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98200",
+            "n": "Dr. Mohammad Al-Qahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "السمستر 151\n\nالمادة:ME-203\n\nالشرح:- يستطرد كثير خارج الشرح وتضيع معاه افكارك في الكلاس يعني لا تستغرب مثلا قاعد يشرح first law of thermodynamic يروح بعد شوي يناقش قضية المجتمع مثلا وهنا انت راح تتخبط وتقول ياربي انا وش اللي خلاني انزل عند هالدكتور (قلت لكم من الحين علشان ماتستغربون).بالمختصر المفيد اذا بتنزل عند هذا الدكتور يبيلك تعتمد على نفسك في كل شيئ وهو للامانة ماراح يقصر معاك اذا رحتله الاوفيس وسئلته وطلبت انه يساعدك في شيئ لكن اذا انت حاولت انك تركز فقط على الكلام اللي في الشرح وسكرت اذنك عن الكلام الخارجي راح تفهم كثير .\n\nالتصحيح:- للأمانة التصحيح رائع جدا وحقاني وانا مستغرب منه في هذا الموضوع يعني اذا جوابك غلط راح ينقصك عليه غير كيذا راح يعطيك درجتك من غير ظلم .\nالايجابيات:- بعد اول خمس محاضرات حسيت اني راح ارسب في هذا الكورس لامحاله والسبب طبعا هذا الدكتور وبعدها جلست مع نفسي وقلت لازم اعتمد على نفسي فعلا فقمت اذاكر بنفسي والحمد لله جبت درجات كويسه طبعا بسبب اني مو قادر افهم معاه(طبعا هو سبب غير مباشر وان هذي الايجابيات انا اللي تعبت على ماوصلت لها وليس هو والفخر ليس لهذا الدكتور بل لي انا وحدي لاني استطعت من خلال تجربتي الفاشله في الفهم معاه داخل الكلاس اني انمى عندي روح التحدي ولاعتماد على النفس ) .\n\n1- صرت اعتمد على نفسي ولا واسمع كلامه ابدا حتى الاراق اللي يعطينا ايها ويقول انها مهمة اسحب عليها وماعندي شيئ غير الكتاب اعتمد عليه.\n2-\n3- اكتشفت ان كل طالب عنده القدرة والطاقه على انه يبدع ويجيب درجات خيالية حتى لو ماسمع كلام الدكتور بس لازم يصر على النجاح.\n4-\n5- مثل ماذكرت سابقا الدكتور هذا فاهم ومشاء الله عليه وعلى تفكيره لكن يجيب العيد صراح في الشرح.\n6-\n7- الدكتور عنده عقليه رائعة ماشفت ولا دكتور زيه هنا في الجامعة واحس انه قادر يبدع مو بس في الهندسة الميكنيكية حتى في مجلات اخرى.\n\n8- دمه خفيف وعسل (الله يسعدك يادكتور محمد) ما تحس بوقت الكلاس ابدا من كثر التنكيت والسوالف يعني تضحك غصب معاه .\n\nالسلبيات:-\n1- احس انا هذا الدكتور قادر على انه يعطي الطلاب ويفيدهم الكثير لكن اسلوبة وعدم قدرته الاستفادرة من قدراته وعلى الفصل بين مشاكلة الخارجيه والعمل تخليه يعطيني الشرح بهذا الاسلوب.\n\n2- يحب الانتقاد كثير ويطلع حرته في الطلاب.\n\n3- ينكت كثير و مايبي احد يضحك واللي يضحك كثير يحسبه ان قاعد يفرشله ويشب عليه.\n\n4- خلال الكلاس احس اني مازلت في الثانوية حتى مرة نسيت نفسي وقدت اطبل على الطاولة(ايه الله يرحم ذيك الايام)\n\nنصائح للدكتور والطلاب اللي رح ينزلون معاه:-\nاتمنى ان هذا الدكتور يستفيد من قدراته وعلمه ويعطي الطلاب لان مشاء الله عليه واضح فاهم التخصص كويس وتعبان عليه وعنده من العلم الوفير وانه يقدر يفصل بين اي مشكلة خارجية والدوام , واتمنى من الطلاب اللي ياخذون عنده انهم مايأخذون الموضوع على محمل الجد لانه بعض الاحيان يقسي في الكلام لاكن احس انه مو من قلبه لان حريص على مصلحة الطلاب\n\nكانت تجربه رائعه لي في الجامعة اني ادرس معاه والله يسعدك يادكتور محمد ويوفقك احبك في الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1436155-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammad-al-qahtani/98200/27",
+              "user": "user9306",
+              "ts": 1450346425000,
+              "tid": 98200,
+              "pn": 27
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-cpp_2015-me203",
+      "uid": "stk-cpp_2015",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1495545372000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98200",
+            "n": "Dr. Mohammad Al-Qahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me203 - 162\n\nالتحضير : أول اسبوعين كان يحضر بس بعدين وقّف، ولا خصم درجات عالغياب\nطريقة الشرح : عنده مشكلة بالركبة ف يجمّع الطلاب حوله ويشرح عالطاولة\nالكويزات : ٧ كويزات ، يحذف أسوء واحد وكل كويز عليه ٣٪\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: A+\nالصوت: واضح\n\nإضافات : أنا سجّلت بالمنتدى بس عشان أكتب ذا التعليق، أول ما نزلت عند الدكتور “مغصوب، مافيه سكشن الا هو” ، جوني ناس واجد يقولون مسكين ومدري ايش، بس والله لو بيدي إني أنزل عنده مادة ثانية وثالثة بعد.\nدكتور يحاول قدر المستطاع ان الواحد يفهم المادة، يخصص من وقته عشان ينزّل ڤديوات باليوتيوب شرح “اكتب باليوتيوب د.محمد شايع القحطاني وشف قناته”\nحصته تمشي بدون ما تحس فيها، ينكّت و يستطرد أحيانا ، يعني مب من النوع الكريه.\nالبونس عنده برييييااااال، تحضر كلاس بالليل ؟ بونس، تشارك معه وتصحح له خطأ ؟ بونس، ارتفعت قريد بسبّت هالبونس\n\nكان عنده سكشن واحد ME203 و عددنا 15\nالفاينل قريد بنهاية السمستر كالآتي:\n\n2 A+\n4 A\n2 B+\n2 B\n1 C+\n1 C\n1 D+\n2 D\n\nبالأخير ، أنصح بالدكتور وبقووووة ، وحتى لو قال لك بالبداية “اذا ما اعجبك نظامي دردب” لأن فيه ناس دردبوا و تحسّفوا بعدين…\n\nالله يجزاه خير أبومجاهد",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1473705-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammad-al-qahtani/98200/33",
+              "user": "cpp_2015",
+              "ts": 1495545372000,
+              "tid": 98200,
+              "pn": 33
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mohammedj-me203",
+      "uid": "stk-mohammedj",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1529731998000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98200",
+            "n": "Dr. Mohammad Al-Qahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me203 -172\nالتحضير : اعطى ورقة التحضير لطالب, والطالب يحضر يوميا (يحضر حتى لو غاب الدكتور). يخصم نص درجة على كل غياب.\nطريقة الشرح : شرح كويس مره وكلاسه ممتع نوعا ما.\nالكويزات : 4 كويزات بالترم, صعبة, وكلها مفاجأة وعلى كل واحد 3%\nالمياجر: ---------\nالفاينلات : ---------\nالقريد النهائي: F\nالصوت: واضح\n\nإضافات : الدكتور له طريقة معينة ممكن تناسب البعض وممكن ما تناسب الاخرين.\n1-عنده نوت تاكنق, كل نوت تاكنق عباره عن مقاطع رافعها الدكتور على اليوتيوب والطالب لازم يلخصها وفق معايير الدكتور, النوت تاكنق هذي تأخذ وقت طويل وجهد متعب مره خصوصا ان بعضها كان فوق العشر مقاطع وبعض المقاطع تتجاوز مدتها العشرين دقيقة.\n2- نظام الكويزات اللي كلها مفاجأه تطير عليك الدرجات زي السلام عليك.\n3- الدكتور كان يغيب بعض الايام( بدون ما يعطينا خبر) وبعدها يخلينا نداوم بليل.\n4- نظام التصحيح كالتالي: يبغى يشوف حاجات معينه مب بس اجابات, بعض الاحيان تكون معلومات بسيطة فانت ما تكتبها فيخصم عليك, لكنه كان يذكر في المحاضرة كيف طريقة تصحيحه ووش الخطوات او الرسمات اللي يبغى يشوفها.\n5- عنده بونص بعضها سهل والبعض صعب مره, ودف بعض الطلاب نهاية الترم.\n6- الدكتور شرحه كويس مره ورافعه على اليوتيوب.\n7- الكورس ما تدري كيف جاي, السيلبس كان يحتوي التشابترات اللي معنا فقط, لا يحتوي الدروس اللي معنا والدروس اللي ماهي معنا واذا سألت الدكتور يزبدلك.\nالدكتور واضح انه يبي مصلحة الطالب لكنه يعاملنا وكأننا اطفال لا نعرف مصلحتنا, يعني يعتقد ان الكويزات الفاجأه بتخلي الطلاب يذاكرون, ويعتقد ان النوت تاكنق سوف يجبر الطلاب على مشاهدة المقاطع.\nالمادة بسيطة جدا لكن الدكتور الله يهديه معقدها, أرى تجنبه خصوصا اذا انت طالب سلف ستدي.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1494505-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammad-al-qahtani/98200/35",
+              "user": "mohammedj",
+              "ts": 1529731998000,
+              "tid": 98200,
+              "pn": 35
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user10811-me203",
+      "uid": "stk-user10811",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1529935978000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98200",
+            "n": "Dr. Mohammad Al-Qahtani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me203 - 172\n\nالتحضير : يعطي طالب ورقة بداية الترم و يصير التحضير عنده الى النهاية الترم, و التغييب يكون للطلاب اللي يدخلون بعد الدكتور, و هو غالبا يتاخر 10 دقايق عالاقل.\n\nطريقة الشرح : يجمّع الطلاب حوله ويشرح عالطاولة, و بعض المرات يقول شوفوا هالفيديو في القناة ما راح اشرحه. و عطانا كلاسين مسائية عليها بونص 0.5%, الكلاس المسائي ما منه اي فايدة, مجرد يجمعنا و يجلس ساعتين عشان يشرح سؤالين بس,مع أنه يكون مخطط يشرح لنا ثلاث أو اربع أسئلة(الساعتين هذي أغلب وقته يقعد يشطح و يتكلم في حاجات ما منها أي فايدة).\nالكويزات : 4 كويزات ،3 منها جتنا على تشابتر و كلها كانت مفاجآة و صعبة و كلها كانت في أول أسبوع و كل كويز عليه 3%, و أفرجه دايم طايح في الكويزات و المياجر, أقل من أفرج الدكاترة الباقيين بكثير. (EX1=51% EX2=58%), الفاينل ما عطانا الدرجة, جحفلنا بالقريد النهائي في البورتل.\nالمياجر: ماهي كومون مع أنه كان الكوردينيتر, الى أنه كان فيه دكاترة يحذفون أصعب سؤال على طلابهم, إلى هو ما يهتم في التساعد مع طلابه الى بالعكس تحسه يستمتع بجلدهم(في إعتقاده أنه كل ما كرفهم كل ما نفعهم).\nالفاينلات : كومون\nالقريد النهائي: D\nالصوت: ممتاز و فاهم المادة, بس أنه ماهو بقادر يوصل المعلومات للطلاب بشكل كويس لأنه يضيع وقت كثير,و سهل أنه يخرج عن الموضوع و يضيع وقت في موضوع ثاني.\n\nالإيجابيات:\n1-قناته في اليوتيوب, للي يبي الفائدة فقط (أما اللي ينزلها عنده بياكلها معه و بيشوف أغلب فيديواته غصبا عليه).\n\nالسلبيات:\n1-النوت تيكنق اللي تاخذ وقت و جهد ز بدون فائدة تذكر, لأنه يحشر لنا 15 فيديو في نوت تيكنق واحد, و نشوفها غالبا و احنا مجبورين.\n2- ما عنده نظام واضح كل شيء عنده يمشي بالبركة.\n3- التصحيح متوسط يميل الى السيء (مع أن درجاتي أعلى من الأفرج ب 20% عالأقل).\n4- الدكتور يعتقد أن بيغير العالم بهالمادة.\n5- يشطح كثير بطريقة تغث فلا تستغرب إذا قام يتكلم لك عن أيام ما كان يعاني مع الثيرمو أو عن ولده مجاهد … .\n6- الدكتور شديد بطريقة تجيب الهم و تصحيحه للهوموركات و المياجر تصحيح شخص حاقد و بس يبي ينقص.\n\nنصيحة أخيرة, لا أحد ينزل عنده والله أن تكره عيشتك معه مع أن المادة سهلة ماهي صعبة و لكن معه بتصير المادة غثيثة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1494608-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mohammad-al-qahtani/98200/36",
+              "user": "user10811",
+              "ts": 1529935978000,
+              "tid": 98200,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user4465-me203",
+      "uid": "stk-user4465",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1292707888000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98204",
+            "n": "Dr. Wael H. Ahmed",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا آخذ معاه me 203 الآن\nمن أفضل المدرسين اللي مروا علي في الشرح\nمتمكن جدا من المادة لدرجة ان آفرج الميجر الأول 80% وباقي السكاشن في حدود 50% <<<<<< لا تعتبر ميزة للطلاب الداجين لأن القريد بحسب آفرج الكلاس مو آفرج السكاشن كلها\nأنا أنصح به أن المادة مهمة في التخصص\n\nلكن بالنسبة للأخلاق هو حبيب بس أممممم - رأي شخصي -\nهو يضحك ومزح مع الطلاب لكن اذا سألته يضحك الطلاب عليك بتعليقاته ويحسسك انك دلخ\nوهذا الشي الوحيد اللي ما عجبني فيه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p746741-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-wael-h-ahmed/98204/2",
+              "user": "user4465",
+              "ts": 1292707888000,
+              "tid": 98204,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5216-me203",
+      "uid": "stk-user5216",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1308305390000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98204",
+            "n": "Dr. Wael H. Ahmed",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله\n\nالسمستر 102 … مادة me203\n\nالتحضير : يحضر بورقة تمشي على الطلاب وكل واحد يوقع قدام اسمه … ( مايحب التاخير وينصح المتاخرين بعدم التاخر )\n\nطريقة الشرح : يشرح عن طريق السلايدات و كانت سلايداته جدا ممتازة وكافية عن الكتاب لتغطيتها كافة المفاهيم ., شرحه جيد جدا لكن اخوكم في الله يفهي في كلاسه … مدري ليه يمكن عشان ( الاجبشن اكسنت ) تذكرني بمدرسين الرياضيات ايام الثانوي … ايام العز والنوم ههه\n\nالكويزات : سهله الي متوسطه وتركز على المفاهيم … اذا انت فاهم تحل زي السلام عليكم\n\nالمياجر: كومن … لكن الكلاس تست كان متوسط\n\nالفاينلات : كومن\n\nالقريد النهائي: والله اعطيه a+\n\nالصوت: واضح جدا ومسموع\n\nإضافات : الدكتور احمد من افضل دكاترة قسم الميكانيكال … متساهل مع الطلاب يحب يساعدهم ويتعاون معاهم … تصحيحه ممتاز … واذا دف يدف كلللل الطلاب والطلاب الي يحسه فاهم في حل السؤال ( حتى لو الجواب غلط ) يعطيه نصف درجة السؤال … صراحتا يخليك تحب المادة الي يدرسها ويتفهم ظروف الطالب ,",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p854319-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-wael-h-ahmed/98204/4",
+              "user": "user5216",
+              "ts": 1308305390000,
+              "tid": 98204,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_student-me203",
+      "uid": "stk-_student",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1296353804000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98205",
+            "n": "Dr. Mostafa H. Sharqawy",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا أخذت me203 في هذا السمستر 101\nوكان توا جاي من جامعة mit كمل فيها بوست دكتوراه، مع انه كان يدرس في البترول قبل لا يروح.\n\nالتحضير:\nيحضر بالأسماء نهاية الكلاس ولا يحاسب على التأخير\n\nالشرح:\nممتاز، يكتب لك نوتة على السبورة موضح لك فيها اهم القوانين ويشكل في ألوان الطباشير، ويعلمك فيها استراتيجيات سهلة و واضحة في حل المسائل، و كان يحدد أرقام مسائل مهمة في نهاية كل شابتر.\nبس ركز على شرحه وسجل النوتة وراه وحل المسائل اللي يحددها وراح تطلع بأحلى قريد إن شاء الله.\nوتعجبني أمثلة حلوة من الحياة مثل التكييف او سيارة أو بخاخ… يقولها اذا خطر على باله.\n\nالكويزات: وسط يميل إلى السهولة، ويخليها آخر ربع او ثلث ساعة من الكلاس.\n\nالمياجر: كومون، بس اذكر انه في يوم الميجر الثاني حل لنا شوية مسائل وجانا شبيه لهم.\n\nالفاينلات: كومون، ونفس الكلام بالنسبة للمسائل.\n\nإضافات: كان يعطينا شوية تاسكات يعوضنا فيها عن المياجر، بعد الميجر الأول طلب ريبورت، وعطانا تيك هوم كويز يعوضنا فيها عن الميجر الثاني.\nوعجبني حرصه وإخلاصه، وتعامله المحترم.\n\nتقيمي النهائي: A++ وشوي بحقه.\nالله يوفقه ويجزيه كل خير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p778695-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mostafa-h-sharqawy/98205/4",
+              "user": "_student",
+              "ts": 1296353804000,
+              "tid": 98205,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-meshoo-me203",
+      "uid": "stk-meshoo",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1296474614000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98205",
+            "n": "Dr. Mostafa H. Sharqawy",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "**أنا أخذت me203 في هذا السمستر 101**وكان توا جاي من جامعة mit كمل فيها بوست دكتوراه، مع انه كان يدرس في البترول قبل لا يروح.\n\nالتحضير:\nيحضر بالأسماء نهاية الكلاس ولا يحاسب على التأخير\n\nالشرح:\nممتاز، يكتب لك نوتة على السبورة موضح لك فيها اهم القوانين ويشكل في ألوان الطباشير، ويعلمك فيها استراتيجيات سهلة و واضحة في حل المسائل، و كان يحدد أرقام مسائل مهمة في نهاية كل شابتر.\nبس ركز على شرحه وسجل النوتة وراه وحل المسائل اللي يحددها وراح تطلع بأحلى قريد إن شاء الله.\nوتعجبني أمثلة حلوة من الحياة مثل التكييف او سيارة أو بخاخ… يقولها اذا خطر على باله.\n\nالكويزات: وسط يميل إلى السهولة، ويخليها آخر ربع او ثلث ساعة من الكلاس.\n\nالمياجر: كومون، بس اذكر انه في يوم الميجر الثاني حل لنا شوية مسائل وجانا شبيه لهم.\n\nالفاينلات: كومون، ونفس الكلام بالنسبة للمسائل.\n\nإضافات: كان يعطينا شوية تاسكات يعوضنا فيها عن المياجر، بعد الميجر الأول طلب ريبورت، وعطانا تيك هوم كويز يعوضنا فيها عن الميجر الثاني.\nوعجبني حرصه وإخلاصه، وتعامله المحترم.\n\nتقيمي النهائي: A++ وشوي بحقه.\nالله يوفقه ويجزيه كل خير\n\nبس زياده في كلامه زود بعد الفاينل 5% لكل طالب\nوالله دكتور مافي أحسن منه أخلاق وشرح وقريدات وطيبه أنصح بيه بشدددددددددددددده",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p779565-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mostafa-h-sharqawy/98205/5",
+              "user": "Meshoo",
+              "ts": 1296474614000,
+              "tid": 98205,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-momanso-me203",
+      "uid": "stk-momanso",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1296775848000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98205",
+            "n": "Dr. Mostafa H. Sharqawy",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يومياً في نهاية المحاضرة .\nطريقة الشرح : يبسط المادة بشكل لا يصدق ( ما شاء الله تبارك الله عليه ) ويشرح على السبورة ونادراً ما يستخدم البروجكتور .\nالكويزات : بسيطة وخفيفة وكل سبت و أربعاء .\nالمياجر: كومون\nالفاينلات : كومون\nالقريد النهائي: A+ بالراحة !\nالصوت: واضح ولهجة مفهومة\nإضافات :\nالدكتور أول سمستر له 101 يدرس ME 203 .\nوفي نقطة مهمة بالنسبة للنوتات :\n\nالنوتات اللي يشرحها على السبورة مفيدة جداُ وذهبية … بس علشان تستفيد منها يبغالك تكمل المسائل اللي يحلها في الـ class لأنه هو ما يحلها كاملة بس يعيطيك الأفكار الرئيسية .\n\nومهم جداً الحضور عنده لأنه الكتاب ما يساعد على الفهم أبداً\nوحاول تسجل كل كلمة يقولها …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p781210-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mostafa-h-sharqawy/98205/7",
+              "user": "MoManSo",
+              "ts": 1296775848000,
+              "tid": 98205,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-shadow-92-me203",
+      "uid": "stk-shadow-92",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1353291399000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98205",
+            "n": "Dr. Mostafa H. Sharqawy",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 -112\n\nبنود التقييم :\n\nالتحضير : يحضر كل يوم اخر الكلاس عن طريق الاكسل , يحضر المتاخر بس يقول لاتتاخر\nطريقة الشرح : سلايدات حلوه بس الاسئلة غير محلوله لازم تكتب معه عشان تفهم السلايدز , اللغة انقلش وما يتكلم عربي مره بس اكسنت مصري بس شرح كويس وواضح وتفهم اذا ركزت\nالكويزات : متوسطة يجيب من الي يشرحه ومره عطانا كوز مفاجى يبغا يشوف من الي يذاكر\nالمياجر: اعطانا في البداية كلاس تست وكان صعب شويه بس ماعليه كثير يبغانا نذاكر للمياجر صح والميجر الاول كان كومن وماكان صعب مره من الهوم وورك والثاني كان سهل هو الي حطه وفي وقت الكلاس\nالفاينلات : الفاينل كان كومون وحريييقة مرره طويل جدا وصعب , وهنا صارت لنا مشكلة يا طلاب شرقاوي افرج الفاينل كان طايح مره بس شرقاوي يقول من بداية الترم انه مايعترف بالافرج ع اعتبار ان افرج سكاشنه عالي , المدرسين الثانين رفعو قريدات طلابهم وحنا مكانك سر مارد حتى علينا ولانزل درجاتنا حقت الفانيل ولا شي القريد ع طول في البورتال\nالقريد النهائي: c+\nالصوت: واضح ومسموع\nإضافات : المدرس خلوق وشريح ما انكر بس وش الفايده يشرح وتفهم وتجيب درجات كويسه في المياجر وفي الاخير مافي قريد حلو .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1119834-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mostafa-h-sharqawy/98205/13",
+              "user": "shadow-92",
+              "ts": 1353291399000,
+              "tid": 98205,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5628-me203",
+      "uid": "stk-user5628",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1389562254000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98205",
+            "n": "Dr. Mostafa H. Sharqawy",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درست عنده me203\nالشرح من السلايدات ويحل مسائل على السبورة ، عموما شرحه ممتاز\nالتحضير نهاية كل كلاس ويتغاضى عن التأخير\nالمياجر والفاينلز كومون ، وتصحيحه كان جيد\nكويزاته متوسطة أو سهلة\nلكن المشكلة في القريدات ، اتوقع المشكلة عند دكاترة الثيرمو كلهم يعاملون المادة معاملة ستاندرد ، فلذلك غالبا تشوف قريدك أقل من اللي تستحقه (مثال ، أفضل مادة جبت فيها درجات في السمستر الماضي هي الثيرمو، وهي أكثر مادة اشتغلت عليها ، ومع ذلك أخذت فيها أقل قريد من بقية المواد)\nالدكتور حبوب وخلوق وتعامله طيب",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1318612-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-mostafa-h-sharqawy/98205/20",
+              "user": "user5628",
+              "ts": 1389562254000,
+              "tid": 98205,
+              "pn": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user5621-me203",
+      "uid": "stk-user5621",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1295769781000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98206",
+            "n": "Dr. Muzafferuddin Mahmood",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Me 203…\nهو والكتاب واحد…\nتقدر تفهم كل اللي يقوله عن طريق المرور على الكتاب…\nحتى النوت حقه كوبي بيست من الكتاب ولا يزيد حرف…\n\nنصيحة: لمن يحب التحضير ثم السحية، أو الحضور متأخر ينزل عنده فقط…",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p770168-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/muzafferuddin-mahmood/98206/3",
+              "user": "user5621",
+              "ts": 1295769781000,
+              "tid": 98206,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6130-me203",
+      "uid": "stk-user6130",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1296396342000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98206",
+            "n": "Dr. Muzafferuddin Mahmood",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله (me 203 ) سمستر 101 .\nالشرح : ما في شرح ينقل من نوت هو كتابها نسخ لصق من الكتاب.\nالتحضير : يحضر بالأسماء في بداية الكلاس غالباً ويمديك تسحب بعد ما يحضر ما عنده مشكلة .\nالصوت : واضح و مسموع .\nالكوزات : سهلة جداً بس الكلاس تست جانا صعيب الله يهديه.\nالمياجر و الفاينل : كومن .\nالقريد النهائي : C+ .\nإضافات : في اللابات يمكن جيد بس في كورس 203 إذا لقيت غيره أحسن.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p779003-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/muzafferuddin-mahmood/98206/4",
+              "user": "user6130",
+              "ts": 1296396342000,
+              "tid": 98206,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-jumper-me203",
+      "uid": "stk-jumper",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1304795535000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103287",
+            "n": "Dr. Atia Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا حاليا معه في me 203 - 102\n\n-----------------\n\nالتحضير :\n\nأغلب الأحيان ورقه تمر بين الطلاب ، وأحيانا يحضر بالأسمـاء\n\nطريقة الشرح :\n\nشرحه ممتاز ، يستخدم السبوره بشكل أساسي وأحيانا يستخدم السلايدات…\nيحل بعض أمثلة الكتاب، وبعض التمارين في نهاية \" الفصل \"…\n\nالكويزات :\n\nسهله ، و غالبا تجي من أسئلة الواجبات…\n\nالقريد النهائي:\n\nA\n\nالصوت:\n\nواضح جدا …\n\nإضافات :\n\nالدكتور حقاني في التصحيح، يدقق على كل شيء تكتبه…\n\n\\\n/\n\\\n/\n\n🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p841785-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/atia-khalifa/103287/2",
+              "user": "jumper",
+              "ts": 1304795535000,
+              "tid": 103287,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a-majeed-me203",
+      "uid": "stk-a-majeed",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1312577607000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103287",
+            "n": "Dr. Atia Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me 203 سمستر 103\nالدكتور ممتاز في الشرح ويهتم بالطلاب\nوتصحيحه حقاني ومجرد ما يحس انك فاهم راح يعطيك جزء من درجة على السؤال\nالتحضير ورقة تمر على الطلاب\nالكويزات متوسطة\nكلام الاخ جمبر قريب جدا من الواقع",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p880333-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/atia-khalifa/103287/7",
+              "user": "A-MAJEED",
+              "ts": 1312577607000,
+              "tid": 103287,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-i_bo_da7m-me203",
+      "uid": "stk-i_bo_da7m",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1357839542000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103287",
+            "n": "Dr. Atia Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الترم :\n103\n\nالكورس :\nMe-203\n\nالتحضير :\nيومياً على ورق … وقليل جداً جداً ينادي بالأسماء , وعادي التأخير عنده\n\nطريقة الشرح :\nيحل لك اسئلة الهومورك غالباً + اسئلة قليلة من الكتاب والامثلة وطول الوقت ماسك الكتاب\nيشرح الجداول بشكل حلو … وهذا هو المطلوب في اساسيات هذه المادة\n\nالكويزات :\nسؤال صعب من ضمن ( مسائل الكتاب غالباً )\nيعطيك 3 طول الترم وانت وحظك … وماعليك منه تراه مايحذف اسوأ كويز ولا شيء\n\nالمياجر:\nكان هو الوحيد الي يدرس في الصيف لذلك كانت منه المياجر , يعني ركز على الي بيشرحه لو كانت بالصيف … أما الاترام العادية كومون , لازم تفهم للمادة\n\nالفاينلات :\nنفس الكلام عن المياجر , وكانت أصعب ومافي وقت لها\n\nالقريد النهائي:\nاعطيه d\n\nالصوت:\nمسموع نوعاً مـا\n\nإضافات :\nماني قايل بالتصحيح حقّاني … إلاّ بقول إنه بالمللللي متر … ويمكن يجحفك بدرجة انت محتاجها\nبصراحة سيء نوعاً ما من ناحية ( الدرجات ) … بطل نوعاً ما من ناحية ( الكلاس ممتع أخلاقه توب )",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1161634-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/atia-khalifa/103287/17",
+              "user": "i_Bo_Da7m",
+              "ts": 1357839542000,
+              "tid": 103287,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-trad-me203",
+      "uid": "stk-trad",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1609865281000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103287",
+            "n": "Dr. Atia Khalifa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203-Term 191\n\nالتحضير:\nورقة تمر على الطلاب اخر المحاضرة , شديد شوي من ناحية التحضير وبعض المرات ينشب ويدقق في عدد الحاضرين بالكشف وعدد الطلاب في الصف\n\nطريقة الشرح :\nكان يشرح من سلايدات ويكتب عالسبورة كثير, للأمانة شرحه جيد لكن اذا تبي تفهم معه صح حاول انك تكون محضر للدرس قبل وماخذ فكره عنه , غير كذا بيجيك نوم\n\nالكويزات :\nكويزاته كانت متوسطة الصعوبة واذكر مرة جاب لنا سوال نسخ لصق من الكتاب. تصحيحه كان حليو كان يعطيك فوق حقك بعض المرات\n\nالمياجر:كومن\nالفاينلات :كومن\n\nالقريد النهائي: +B\n\nالصوت:واضح بس يجيب النوم شوي\n\nإضافات :الدكتور عنده عقدة نفسية من شي اسمه جوال , ما يبي يشوف جوالك ابدا حتى على الكرسي وكان يتنزفر كثير اذا دخل الكلاس وشاف احد ماسك جواله. للامانة الدكتور احسه من النوع اللي يحقد عالطلاب اذا تكرر كم موقف من طالب او طالبين. طبعا الدكتور ماعلمنا كم درجاتنا بالكلاس وورك يعني دخلت الفاينل وخلصت فجاة قريد في وجهي ولا ادري كم مجموعي وجيت ابغا اناقشه للاسف مالقيته ولا كان يرد على ايميلاتي. الدكتور جيد ماهو سيء لكن فيه افضل منه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527628-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/atia-khalifa/103287/32",
+              "user": "Trad",
+              "ts": 1609865281000,
+              "tid": 103287,
+              "pn": 32
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-leon-mohammed-me203",
+      "uid": "stk-leon-mohammed",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1588292346000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103290",
+            "n": "Dr. Abdulrahman Al-Murbati",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "me203-192\nعبد الرحمن المرباطي.\nالتحضير :متساهل في التأخير شديد في التحضير.\nطريقة الشرح :من السلايدات ويكتب على السبورة شرحه واضح جدا ومتجاوب مع كل الأسئلة.\n\nالكويزات : كانت اسئلة اولد اقزام ومن الواجب.\n\nالمياجر:مااختبرنا بسبب التحول الى عن بعد .\n\nالفاينلات :مااختبرنا بسبب التحول الى عن بعد .\nالمادة اصبحت كوزات وكلاس تيسيت وواجبات.\nالدكتور طيب جدا وخلوق جدا ويحب يستاعد مع الطللاب.\nالدكتور مايجب احد يرسب ولا احد ياخذ درجة اعمال سنة سيئة.\nالقريد النهائي:A++++\n\nالصوت:واضح.\n\nملاحظة: الدكتور خريج جامعتنا فعارف شيبي الطالب بالضبط 😏 👏 :slightly_smiling_face: :slightly_smiling_face: :slightly_smiling_face:\nإضافات :رغم ان انا مو من التخصص بس المادة حبيتها بسببه الله يعطيه العافية.\nاذا شفت منزل لاتترد انك تنزل عنده، شخص والنعم فيه نابغة.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1521684-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulrahman-al-murbati/103290/14",
+              "user": "Leon-Mohammed",
+              "ts": 1588292346000,
+              "tid": 103290,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-sake-me203",
+      "uid": "stk-sake",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1619492918000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f103290",
+            "n": "Dr. Abdulrahman Al-Murbati",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - Term 201 - ONLINE\n\nالتحضير: يحضر نهاية المحاضرة عن طريق مناداة الاسامي ، اذا العدد كامل مايحضر ، واذا في واحد غايب يحضر لين يعرفه بعدين يوقف.\n\nالشرح : عن طريق سلايدات شرفي لكن معدلة شوي ، يشرح كونسبت بعمق ثم يبدأ بحل المسائل بالتفصيل ، يستخدم القلم اثناء الشرح ، شرحه اشوفه ممتاز صراحة. احيانا يخصص محاضرة لحل مسائل فقط ويخليها كمجموعات ، احد المرات خلاها كويز اضافي فقط للمساعدة ، الاسئلة شوي معقدة لكنها مفيدة.\n\nالكويزات: بالبداية كانت ريتن لكن بعدين خلاها ملتبل تشويس ، آخر الكويزات كان سؤال حل طويل عليه 6 نقاط ان ماخاب ظني ، و سؤالين كونسبت سهلين كل واحد 2 بوينت ، مما يشكل مجموع 10 بوينت. كويزاته متوسطة تميل للصعوبة احيانا. الكلاس تيست الاول ريتن ، والثاني ريتن وملتبل، التيست الثاني جاب سؤال نسخ لصق من اللي يرفعهم لكن بتغيير ارقام فقط.\n\nالمياجر: صارت ميد واحد وكان متوسط الصعوبة ، ثلاثة اسئلة ، الافرج 73%\nالفاينل: كان صعب صراحة والمشكلة مافي باكتراكنق وهذا كان مصعبه اكثر ، ثلاثة اسئلة طويلة كلها ريتن عليها 90% ، وعشرة اسئلة كونسبت عليها 10%.\nالتصحيح: تصحيحه حلو ولكن يهمه صحة الجواب زي الطريقة بالضبط ، ف في مرة جمعت غلط ، الطريقة صح وهي تجمع ، لكن جمعت غلط وكتبت اجابة غلط ، عطاني على الفقرة نص الدرجة ، حاول تكتب اي شي حتى لو قانون وتعوض نصه ، بيعطيك عليهم بوينت. في سؤال بالكويز جبت الاجابة صح لكن الاشارة غلط ، كلمته يعدل لي درجتها ويعطيني نص عالاقل ، والله يعطيه العافية عدلها لي.\n\nاضافات: اخلاق الدكتور جدا عالية ومتعاون جدا مع الطلاب ودرجاتهم تهمه ، مايحب يشوف طلاب جايبين قريدات نازلة فحسب كلامه انه يضبطهم ب oral exam وامور كذا ، متساهل بتأجيل الواجبات ، اذا توزيع قريدات المشاركة اللي فوق ^^^ صحيحة ، فالله يعطيه العافية عطاني ابقريد 1% كامل. دكتور ممتاز وخلوق.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1529713-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdulrahman-al-murbati/103290/17",
+              "user": "SAKE",
+              "ts": 1619492918000,
+              "tid": 103290,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ffaahhd-me203",
+      "uid": "stk-ffaahhd",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1409651456000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118632",
+            "n": "Dr. Saad Mansoor",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "’ُme 203\nالدكتوووور والله هذا بطل بقوووة ومحرم وأخلاق\nالتحضير تقريبا متساهل بس كل يوم يحضر بنهاية الكلاس\nالشررح طريقته جدا مرتبه ويستعرض في بداية الكلاس وش راح يشرح\nوطريقته يبدا كل شابتر بشرح السلايدات بعدها يدخل بالمسائل ما يخلص الا انت فااهم مظبووط وما يحتاج تذاكر بعدها\n\nالتصحيح حلوو\nالقريد تماام التماام\n\nصوته والاكسنت كويس",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1396375-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/saad-mansoor/118632/20",
+              "user": "ffaahhd",
+              "ts": 1409651456000,
+              "tid": 118632,
+              "pn": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-yasser123231-me203",
+      "uid": "stk-yasser123231",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1640260226000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118636",
+            "n": "Dr. Fahad Alzahrani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "الدكتور فهد الزهراني ME203 ترم 211\n\nالتحضير : يحضر اخر الكلاس، ويحضرك حتى لو متأخر. التحضير ماهو دايم. وماعنده مشكله تحضر مع شعبة ثانية.\nطريقة الشرح : يكتب الدرس على السبورة ويعطينا مسألة نحله، ثم هو يحلها. شرحه اسطوري.\nالكويزات : مستواها متوسط، ويجيب منها في المياجر.\nالمياجر: مستواها متوسط ايضاً. اتوقع اسهل من باقي الدكاترة.\nالصوت: واضح\nإضافات : الدكتور رائع جداً جداً جداً اذا قدرت تلحق عليه لايفوتك.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533154-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/fahad-alzahrani/118636/6",
+              "user": "Yasser123231",
+              "ts": 1640260226000,
+              "tid": 118636,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mr.x99-me203",
+      "uid": "stk-mr.x99",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1642195663000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118636",
+            "n": "Dr. Fahad Alzahrani",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - 211\n\nابو زهرة الاسطووووووورة ، بشكل مختصر سجل عند الدكتور وانت مغمض\n\nشرحه ممتاز واسطوري وايضا عنده مقاطع باليوتيوب ، الدكتور اخلاق وحبيب جدا ويحب يمزح مع الطلاب بعيدا عن الرسمية ، كويزاته سهلة الى وسط ، يدف في التصحيح ، يقبل الميك اب ويحضر نهاية الكلاس ، يشرح الزبدة والمهم فقط وما يتفلسف او يشرح اشياء زايدة ما لها داعي\n\nالدكتور يستاهل A+ وانا طلعت معه ب A+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533469-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/fahad-alzahrani/118636/7",
+              "user": "Mr.X99",
+              "ts": 1642195663000,
+              "tid": 118636,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m.9-me203",
+      "uid": "stk-m.9",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1610136039000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118637",
+            "n": "Dr. Obaidallah Munteshari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "دكتور عبيد الله المنتشري\nME 203\nTerm : 201\nالتحضير:\nينزل تصويت في التيمز نهايه الكلاس وبعض الاحيان ماينزل\nفي النهايه اعطا المل ٥/٥ في الحضور مانقص احد\nالكوزات:\nاعطانا ٨ كوزات صراحه الكوزات ٤ متوسطه و البقيه صعبه واذا قال الكوز سهل اعرف ان الكوز صعب بما تعنيه الكلمه بس في النهايه حذف اسوء كوزين وزبطنا صراحه\nالكوزات اما رتن وترفعها على البلاك او ترسلها له تلقرام\nاو تكون خيارات من البلاك او الاثنين مع بعض\nالصوت: واضح\nالمدترم: المد ترم كان متوسط وصحح تصحيح جبار صراحه كان الافرج ٣٣/٤٥\nالفاينل: كان جلد صراحه والافرج فيه ١٢/٢٥\nاضافات:\nبشرح هنا صراحه شرح مفصل وش صار معنا في الترم\nاول شي في اول كلاس قال كل واحد يفتح الكام ويعرف بنفسه وتخصصه\nثاني شي الدكتور يسمع من الطالب صراحه يعني ينزل تصويت ويقول على ايش تبغون الكلاس البلاك او زوم او تيمز وكان دايم ياخذ رأي الطلاب صراحه لو تبغا تأجل واجب او تأجل كوز يأجل صراحه يعني كنا متفقين موعد الكوز كل خميس في بعد ما عدينا ٦٠٪؜ من السمستر كلمناه عشان يغير الموعد الى يوم الاحد ووافق بدون اي جدال قال بنزل تصويت واشوف ومتواجد في الاوفيس اور ومحترم صراحه و كثيير مرات نادا اسامي في الكلاس يبغاهم يشاركون كانو مو موجودين واجد صارت ومع ذالك مشها لهم الدكتور حبيب ولا تفوته اذا بتنزل ماده اشوفه خيار ممتاز.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527702-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/obaidallah-munteshari/118637/9",
+              "user": "M.9",
+              "ts": 1610136039000,
+              "tid": 118637,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ahm2d1-me203",
+      "uid": "stk-ahm2d1",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1543103797000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118642",
+            "n": "Dr. Abdullah Al-Sharafi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - TERM 181\n\nالتحضير : بداية الكلاس واحسه شوي متشدد ونادر يسمح لك تسوي ميك اب. ( نص الترم قال لكل واحد كم عنه غياب ، وحسيت انه مزودني غيابين كذا مع اني ولا مره غبت !!! ).\nطريقة الشرح : يشرح من سلايداته وشرحه جيد الى كويس.\nالكويزات : سهله الى متوسطه واغلبها نفس افكار اسئلة نهاية الشابتر.\nالمياجر : كومون.\nتصحيحه للمياجر كان عادي مايدف مره ولا يخسف فيك يعني يعطيك حقك.\nالصوت : واضح.\nالدكتور اخلاقه طيبه ويحب يساعد الطلاب ويحاول يخليهم يجون الاوفيس اور واذا فيه مشكله في سوال في الكويز يشرحه في الكلاس ويعطي بعد التلميحات وقت الميجر تساعدك في الحل اذا سألته عن حاجه.\nانصح فيه وبقوه.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1502796-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdullah-al-sharafi/118642/3",
+              "user": "Ahm2d1",
+              "ts": 1543103797000,
+              "tid": 118642,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-daho0omy.10-me203",
+      "uid": "stk-daho0omy.10",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1545025691000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118642",
+            "n": "Dr. Abdullah Al-Sharafi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 203 - TERM 171\n\nالتحضير : بداية الكلاس وشديد بالتحضير وما كان عنده الا سكشن واحد فما ادري عن الميك اب.\nطريقة الشرح : يشرح من سلايداته ويحل مسائل كثيرة وشرحه ممتاز جدا وقبل الميجر يسوي كلاس مراجعة مهم جدا.\nالكويزات : سهله الى متوسطه بس ما يحط الا 4 وكل واحد عليه 5%.\nالمياجر : كومون.\nتصحيحه للمياجر كان ممتاز اذا شاف انك فاهم يحسب لك اغلب الدرجة حتى لو حلك غلط + يتجاوب مع الاسئلة بوسط الاختبار ويقلبه كلاس.\nالصوت : واضح.\nالدكتور اخلاقه طيبه ويحب الطلاباللي يجون الاوفيس اور ويحاول يدفهم بالتصحيح اذا شاف انهم مهتمين للمادة.\nانصح فيه وبقوه.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1503689-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdullah-al-sharafi/118642/4",
+              "user": "daho0omy.10",
+              "ts": 1545025691000,
+              "tid": 118642,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-wolf_99-me203",
+      "uid": "stk-wolf_99",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1598708223000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118642",
+            "n": "Dr. Abdullah Al-Sharafi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203-192\n\nالتحضير : يحضر يوميا في اول دقيقة بالكلاس ويسمح لك تسوي ميكب اب مره مرتين بالترم بس\n\nطريقة الشرح : يشرح من سلايدات خاصة فيه ، شرحه ممتاز بس المشكلة فيه انه يصعب عليك الموضوع ويعطيك اشياء اضافية بالسلايدات يعني بشكل عام يحسسك من سلايداته ان الموضوع معقد وهو ابسط من كذا بكثييييير\n\nالكويزات : معقولة\n\nالمياجر: كومن\n\nالفاينلات : كومن\n\nالقريد النهائي : C\n\nالصوت : واضح جدا\n\nإضافات :\n\nصراحة الدكتور شرحه كويس ويحاول ان الكل يفهم قد مايقدر بس فيه سلبيه تكرهك فيه وهو طريقة تفكيره او طريقة تعامله يعني يضغطك نفسيا من بداية المادة الى نهايتها بلا سبب ، صراحة اغرب دكتور مر علي من دخلت الجامعة احسه كذا شكاك مايتعامل معك ب اريحية دايم يحسب انك جالس تكذب عليه او جالس تستحقره",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1525209-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdullah-al-sharafi/118642/5",
+              "user": "wolf_99",
+              "ts": 1598708223000,
+              "tid": 118642,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user8219-me203",
+      "uid": "stk-user8219",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1439904119000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118646",
+            "n": "Dr. Medhat Nemitallah",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "مدحت نعمة الله\nme 203-term 132\n\nالتحضير: يومي نهاية الكلاس ويسمح بالتأخير\nالتصحيح: حلوو مرة 👍\n\nالشرح: مرة فاهم ماشالله\nويركز على الأسئلة إلي تجي في المياجر!\nويعلمك إيش تسوي مع الحالات ويقولك إيش مهم وإيش مو مهم 👍 ❤️\n\nالكويزات: حذفها وحط بدالها الحضور والهومووركات\n(احضر وحل الهومووركات تضمن شي عااااالي،، علما إن هومووركات 203 مرة مهمة وسههلة)\nأعطانا كويز واحد كان بونص +2% للمجموع\n\nبس قال شكلها آخر مرة ماسوي كويزات، ماتذاكروا 😆\n\nالقريدات:\n90 A+ وكل 5 درجات قريد\nأعلى واحد في الكلاس يرفعه إلى 100 والباقين يرفعهم معاه\nإلا إذا أول واحد كان مرة شاطح، فيرفع الجميع بقدر معين\nالزيد أغلب الطلاب طلعوا (فاهمين) و(قريدات عاااااالية) 👍\n\nالأخلاق: عسسسسسسسل\n\nالتقويم النهائي: A+++++++++\n\nلو جاتني أي فرصة أنزل معاه حأنزل 👍 من جد ما يتفوت",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1424332-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/medhat-nemitallah/118646/5",
+              "user": "user8219",
+              "ts": 1439904119000,
+              "tid": 118646,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user10610-me203",
+      "uid": "stk-user10610",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1556972210000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118647",
+            "n": "Dr. Bilal Qureshi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME-203-182\n\nالتحضير: ورقة تمر يوميا على آخر وقت الكلاس وحبيب مره ما يدقق يعني من اللي حضر خويه او كذا ( أتوقع يسويها عشان يبري ذمته ولا ما همه الموضوع 😅)\n\nالشرح: يشرح من السلايدات حقته , وملياااانه فيها كل شي ممكن تحتاجه. يهمه جدا أنك تفهم وتتدرب على كل المفاهيم لذلك أي فكرة يشوف أنها مهمة يجيب عليها سؤال في الشرح عشان تفهم , واذا اكتشف إن فيه شي جديد أو ما غطاه يرجع يذكرك ويرفع لك أسئلة عشان تفهم .\n\nالكوزات : أول واحد جاب لنا جدول نعبيه والأفرج كان 12 من 15 . من بعدها قال كل الكوزات الجاية بتكون خيارات عشان يكون عندكم خلفية أحسن في نوع الأسئلة اللي بتجيكم في الفاينل (ميجر 1 & 2 ما فيها خيارات كلها مسائل فقط , بينما الفانيل مكس) تقريبا وصلنا 6 كوزات والأفرج تقريبا من 7 الى 8 من 10 , موب أن سكشني شاطرين 😀 لكن الكوزات فعلا سهله اذا فهمت السلايدات فقط بتحل وإذا مركز من الشرح يمديك تجيب 6 او 8 :msn-wink: بس شد حيلك يعني.\n\nالمياجر : يطووووول في التصحيح يقعد من 10 ايام الى اسبوعين , بس يطول عشان يقعد يرقع للشعب 😕 يعني يحاول يفهم انت وين أخطيت ويساعدك ويدفك منا وما. ( الكوزات والمياجر ما يرجعها لك ! , لازم انت تروح له المكتب ويشرح لك وين أخطائك ثم يرجعها لك . يقول لو رجعتها لكم محد بيشوف حله , لكن لو جيتني بشرح لك وين أخطيت عشان ما تعيد الخطأ في ميجر 2 والفاينل ).\n\nالصوت : واضح ومفهوم , + يعرف عربي منا ومنا. لذلك بعد كم أسبوع تلاقيه يناديك بإسمك 😄 ❤️.\n\nإضافات : كثر شطة وكتشب 👋 . امممزح 😀 الدكتور حبيب جدا وأخلاق وينكت وكلاسه ممتع , يهمه جدا أنك تفهم ويساعدك باللي يقدر عليه + يكون صداقات مع الطلاب يعني يعرف أسمائهم ويمزح معهم .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1509338-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/bilal-qureshi/118647/7",
+              "user": "user10610",
+              "ts": 1556972210000,
+              "tid": 118647,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user11264-me203",
+      "uid": "stk-user11264",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1577799503000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118647",
+            "n": "Dr. Bilal Qureshi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203 - 191\n\nالتحضير: ورقة تمر آخر الكلاس أو منتصفه، ما يهتم بالتأخير. بداية الترم كان يشدّد على الحضور ويتأكد من العدد الموجود ويقارنه بعدد الحاضرين بالورقة، نهاية الترم ما صار يهتم. آخر الترم ما خصم على الغياب أصلًا، لكن بداية الترم إذا سألته يقولك يمكن أخصم ويمكن ما أخصم، فما تضمنه من هالناحية. (الغياب = خصم نصف درجة من المجموع النهائي 100)\n\nالشرح: شرحه جيد، يفتح سلايداته ويجي قدامنا يسولف ويربط المادة بواقع الحياة وما إلى ذلك. يستخدم السبورة في حل المعادلات فقط أو إيضاح بعض الاشتقاقات أحيانًا. بخصوص سلايداته، كل شابتر أو جزئيّة لها سلايدة. توزيعتها دائمًا تكون الكونسبت والشرح في البداية ونهاية السلايدات يحط 3 أو 4 أسئلة يحلها في الأخير. التوزيعة بنظري سيئة جدًا لأنه بتصير فيه محاضرات كثير عبارة عن شرح فقط بدون أي حلول وهذا يضعف ربط الكونسبت بالمسائل عند الطلاب، ضروري جدًا إنك تبحث عن مصدر آخر تاخذ منه أسئلة (مثل سلايدات الشرفي)، لأن الأسئلة عند هذا الدكتور قليلة.\n\nالكويزات: اختبرنا 6 كويزات وأخذ أفضل 5 لكل طالب. الكويزات كلها كونسبت وأفكار من السلايدات، لو تذاكر السلايدات وتركّز مع الدكتور تضمنها إن شاء الله.\n\nالمياجر: تصحيحه مثل ما قالوا يطوّل مرة للمياجر، ياخذ 10 أيام إلى 14 يوم ويعصّب إذا سألته متى تخلص أو كم باقيلك. للأمانة ما شفت منه دف في التصحيح، الدكتور حقّااااااني جدًا وبيعطيك حقك بدون دف، ممكن دف خفيف لو شافك فاهم ونسيت شيء سهوًا، أما إنه يدفك بس كذا لا مستحيل يسويها. أفرجنا أول ميجر 59، ثاني ميجر 68، الفاينل 57\n\nالصوت: واضح ومفهوم\n\nختامًا: الدكتور حقّاني وماشي على النظام زي الألف، تسأله عن توزيع القريدات يقولك ما أقدر، حقك في الاختبارات يجيك بالملّي، يمزح كثير وأحيانًا يحرج الطلاب ويستقعد لهم ويحسب إن هذا مزح (مزحه ثقيل الغالي)\nفي الأخير هو دكتور كويّس لو بتجتهد وتعطي المادة حقها، وربطه للكونسبت بواقع الحياة عجبني مرة. بس مقارنة ببقية الدكاترة اللي يدرسون المادّة الممتازين في الشرح وفي الدف ما أشوفه مناسب كخيار أول أو خيار ثاني",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1518516-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/bilal-qureshi/118647/8",
+              "user": "user11264",
+              "ts": 1577799503000,
+              "tid": 118647,
+              "pn": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user12308-me203",
+      "uid": "stk-user12308",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1693095671000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118647",
+            "n": "Dr. Bilal Qureshi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME203-203\nالتحضير : يأخذه من التيمز ومرتين حضر بنفسه وصاد كم طالب نايمين و اخذ اساميهم.\n\nطريقة الشرح : يتكلم عن تجاربه و خبراته. لما يركز بالشرح، شرحه جيد يكون. طبعا كل شرحه كونسبشوال وما يشرح نومركال الا نادرا جدا.\n\nالكويزات : خيارات وسهله جدا والعادة يجيب الاسئلة من سلايداته بالحرف.\n\nالمياجر: كان ميد وطول وهو يصحح وكان شديد بالتصحيح. كرر لنا ميجر ١٩١\nالفاينلات : كان متوسط مائل للصعوبة. تصحيحه كان افضل من الميد.\nالقريد النهائي: اعطيهB\nالصوت: واضح وكان مزكم طول الترم فبعض الاحيان ما تقدر تركز معاه من كثر ما يضطر يوقف.\nإضافات :\nالدكتور يزعل اذا الطلاب استعجلوه بالتصحيح.\n\nوكان فيه بروجكت وكانت طريقته بالبروجكت سيئة جدا. يخليك تحل مسألة حبة حبة لو تقدمت بزيادة يخصم ويبغاك تراسله بالتيمز ويتابع معاك ويشوف انت فاهم او لا ولكن للاسف الدكتور ما حط بالحسبان عدد الطلاب اللي عنده وكان بالتالي يتأخر كثير بالرد.\n\nالقريدات كانت ماش.\n\nفيه خيارات افضل منه مثل د. عمرو القطب و د. عبيدالله المنتشري و د. المرباطي و د. الطريفي ود. الشهري واللستة تطول.\n\nلذلك انصح انه يكون اخر خيار.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536905-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/bilal-qureshi/118647/10",
+              "user": "user12308",
+              "ts": 1693095671000,
+              "tid": 118647,
+              "pn": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-me_student91-me203",
+      "uid": "stk-me_student91",
+      "code": "ME 203",
+      "sec": "doc",
+      "ts": 1747740442950,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f185060",
+            "n": "Dr. Ali Alshehri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 242- ME 203\nالتحضير : بداية الكلاس عن طريق البلاكبورد ويحطك متأخر إذا جيت بعد ما يخلص التحضير في البداية، يسامح في غياب أو غيابين.\nطريقة الشرح : يستخدم سلايداته ويحط فيها أسئلة أولدات والسبورة للحل، شرح كافي ووافي.\nالكويزات : منوعة بين اختياري ومقالي. سهلة إلى متوسطة ويعدل على صعوبتها بناء على طلب طلاب السكشن.\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: A+ وقليله في حقه الصراحة\nالصوت: واضح\nإضافات\nالدكتور أخلاقه عالية ويستاهل تخرب جدولك عشانه ويجاوب على الأسئلة بكل سعة صدر، تصحيحه ممتاز ويزودك إذا لك حق، في الفاينل الظاهر زودنا كلنا رقم كبير الصدق لأن الآفرج طايح جدا. ما يتشدد في موضوع استخدام الجوال أو غيره.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1539619-me203",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ali-alshehri/185060/2",
+              "user": "ME_STUDENT91",
+              "ts": 1747740442950,
+              "tid": 185060,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "code": "ACCT 410",
+  "users": [
+    {
+      "id": "stk-hard-worker",
+      "name": "HARD-WORKER",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hard-worker/144/2192_2.png",
+      "email": "hard-worker@import.stkfupm.invalid",
+      "user": "HARD-WORKER"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-hard-worker-acct410",
+      "uid": "stk-hard-worker",
+      "code": "ACCT 410",
+      "sec": "doc",
+      "ts": 1478465357000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98415",
+            "n": "Dr. Muhammad Alhazmi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ACCT410 … Term 151\nبسم الله …\nالأخلاق:\nالدكتور صراحة حبييييب ومتفهم لأبعد درجة و قمة في الأخلاق والتعامل الله يسعده\nالتحضير:\nالدكتور شديد جدا في التحضير يحضر على السيستم على طول ( BlackBoard ) وميزته عنده بونص للطلاب اللي مايغيبون هذا اللي لاحظته والله أعلم\nالشرح:\nالشرح عادة يكون من سلايدات و كتابة على السبورة … بالاضافة انه أحيان يكرفنا ويجيب Case studies من أرض الواقع ويبغانا نحلها ك قروب و نسوي عليها عرض جماعي\nالاختبارات:\nاختباراته عادة طوييلة وتتكون من قسمين خيارات و كتابة ولكن المادة ماتعتبر مادة معقدة ومذاكرتها فيها شوي متعة . بالنسبة للكويزات أعطانا 3 أو 4 كويزات طول الفصل\nالقريد:\nالقريد عند الدكتور محمد يكون نظام Average أو هو يسميه Learning Curve يعني ان شاء الله الواحد مايخاف على القريد معاه اذا شد حيله وسلم كل شيء في وقته\nتقييمي للدكتور : A\nقريدي معاه : B+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1461878-acct410",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhammad-alhazmi/98415/7",
+              "user": "HARD-WORKER",
+              "ts": 1478465357000,
+              "tid": 98415,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

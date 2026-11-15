@@ -1,0 +1,48 @@
+{
+  "code": "PETE 407",
+  "users": [
+    {
+      "id": "stk-user10273",
+      "name": "فلان الفلاني",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/278dde/144.png",
+      "email": "user10273@import.stkfupm.invalid",
+      "user": "user10273"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-user10273-pete407",
+      "uid": "stk-user10273",
+      "code": "PETE 407",
+      "sec": "doc",
+      "ts": 1441447388000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f169385",
+            "n": "Dr. Dhafer Abdullah Al-Shehri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "PETE407 - 142\n\nالتحضير :\nيحفظ الطلاب من أول يوم ويحضر بعيونه باقي الأيام… عنده بونص على الحضور\n\nطريقة الشرح :\nيقرا أول سلايدين وبعدين يمشي ويقول you have to read\n\nالكويزات :\nكل أسبوع وتكون غالبا بمستوى الميجر\n\nالمياجر:\nكومن\n\nالفاينلات :\nالفاينل ما كان كومون، لكن كان سهل جدًا وكله من السلايدات\n\nالقريد النهائي:\n5/10\n\nالصوت:\nواضح\n\nإضافات :\nالدكتور طيب وحبيب ومتعاون بس شرحه لك عليه شوي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1427304-pete407",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dhafer-abdullah-al-shehri/169385/2",
+              "user": "user10273",
+              "ts": 1441447388000,
+              "tid": 169385,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

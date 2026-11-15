@@ -1,0 +1,6 @@
+-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · AE 427 · ولَّده _import/stkfupm.py
+-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.
+BEGIN;
+INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) VALUES ('stk-alialrajjal', 'alialrajjal@import.stkfupm.invalid', 'AliAlrajjal', 'https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/d78d45/144.png', '', '', 0, 0, 1794774613, 1794774613) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, img = EXCLUDED.img;
+INSERT INTO posts (id, uid, code, sec, data, ts, updated, st) VALUES ('stk-p1537187-ae427', 'stk-alialrajjal', 'AE 427', 'info', '{"desc": "المادة عباره عن تصميم طياره من الصفر\nالماده فيها اختبارين و كويزين وواجبين\nعادة تدرس من الدكتور وائل\nتبدا الماده بمتطلبات الطياره يعطيك ايها الدكتور فيها تفصيلات كثير مثل\n\nعدد الركاب المطلوب\nالمدى المطلوب\nالسرعه\nالارتفاع\nوبعدها انت مع الفريق تبدا تصمم الطياره الي تقدر تحقق المطلوب منك والدكتور بساعدكم في اغلب الاشياء\nاخذت المقرر في ٢٣١", "type": "", "rel": 0, "lang": "", "book": "", "imp": {"src": "stkfupm", "url": "https://community.stkfupm.com/t/ae-427-aerospace-system-design/120810/2", "user": "AliAlrajjal", "ts": 1704224759000, "tid": 120810, "pn": 2}}', 1704224759000, 1794774613, 'pub') ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, ts = EXCLUDED.ts, updated = EXCLUDED.updated;
+COMMIT;

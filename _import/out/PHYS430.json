@@ -1,0 +1,48 @@
+{
+  "code": "PHYS 430",
+  "users": [
+    {
+      "id": "stk-hamza_alnasser",
+      "name": "Hamza Alnasser",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hamza_alnasser/144/2186_2.png",
+      "email": "hamza_alnasser@import.stkfupm.invalid",
+      "user": "Hamza_Alnasser"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-hamza_alnasser-phys430",
+      "uid": "stk-hamza_alnasser",
+      "code": "PHYS 430",
+      "sec": "doc",
+      "ts": 1522171081000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f68357",
+            "n": "Dr. Ibraheem Nasser",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Phys 430 Thermal and Statistical Physics.\nTerm 172\nبنود التقييم :\n\nالتحضير : وقع على ورقة (يحسب الغيابات وتشوف كل أسبوع كم غياباتك)\nطريقة الشرح : تقليدي (مذكرته يعرضها ويشرح منها)، يركز على الرياضات أكثر! لم يُضف لنا الكثير في الفيزياء!\nالكويزات : لا يوجد\nالمياجر: متوسطة إلى صعبة (معظمها أسئلة اثباتات)\nالفاينلات :\nالقريد النهائي: C+\nالصوت: واضح\nإضافات : عزيزي الفرشمن: لا تأخذ هذا التقييم بعين الاعتبار، انظر للتقييمات السابقة. هذه المادة لطلاب تخصص الفيزياء!\nقد يخلف التقييم إذا اختلفت المادة!",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1489837-phys430",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ibraheem-nasser/68357/21",
+              "user": "Hamza_Alnasser",
+              "ts": 1522171081000,
+              "tid": 68357,
+              "pn": 21
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

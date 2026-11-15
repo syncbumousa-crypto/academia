@@ -1,0 +1,37 @@
+{
+  "code": "CIE 438",
+  "users": [
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1474579-cie438",
+      "uid": "stk-user8581",
+      "code": "CIE 438",
+      "sec": "info",
+      "ts": 1496688929000,
+      "st": "pub",
+      "data": {
+        "desc": "هذا الكورس تكملة لـ 312\nبعض المواضيع من 312 تتكرر في هذا الكورس لكن بتفصيل أكثر , على العموم هذي أهم المواضيع في الكورس\nEngineering flow schemes= PFD +P&ID ( بشكل مبسط لكن في التدريب راح تشتغل عليه فحاول تفهمه صح أو على الأقل الأساسيات)\nFlow Measurements\nTemperature Measurements\nUltrasonic sensors\ninfrared sensors\nsignal conditioning\nintrinsic safety\n\nطبعا الكورس كان ماسكه د.الشافعي لكن ترك الجامعة وممكن يرجع السنة الجاية بس حاليا ً الي ماسك الكورس هو د. أنس وقار وشرحه ممتاز ومن السلايدات لكن المشكلة إنه مايحل المسائل , ولأن أسئلة المياجر والكويزات تكون مشابهة لأسئلة الكتاب بتضطر تحل أسئلة الكتاب مع العلم إن الكتاب ماله سلوشن .\n\nاللاب : للأسف مب مجهز صح لكن بإمكانك تطبق بعض المشاريع و شغلك بيكون على field point و compact Rio و ممكن في البداية تواجه صعوبات وتحسه معقد لكن مع الوقت بيسهل الوضع وأنصح إن تتعلم عليه لأنهم موجودين في ال industry واكيد راح تشتغلهم عليه او ب controlller مشابه لهم .\n\nالكتاب هو نفس كتاب 312 فإحتفظ فيه\n\nهذي بعض المشاريع الي طبقوها الشباب :\n- Semins PLC with GUI.\n- Leak detection system.\n- Festo system (two projects).\n- Forced air cooling system\n- Electro static desalination\n- Plastic injector machine.\n- Alarm and safety system.\n- Process of two tank system.\n- Deionization water treatment system.\nFeed forward and feedback level control process\n\nالكورس مهم وحاول تستفيد منه قد ماتقدر ولو تقدر حاول تأخذه قبل التدريب , وماهو صعب بس مثل بقية كورسات cise في السينير , مستوى الكورس يعتمد على الدكتور الي ماسك الكورس.\n\nرفعت ملفات للكورس على kfupm resources",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/cie-438-instrumentation-for-process-control/120918/2",
+          "user": "user8581",
+          "ts": 1496688929000,
+          "tid": 120918,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

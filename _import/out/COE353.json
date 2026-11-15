@@ -1,0 +1,78 @@
+{
+  "code": "COE 353",
+  "users": [
+    {
+      "id": "stk-computist",
+      "name": "Computist",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
+      "email": "computist@import.stkfupm.invalid",
+      "user": "Computist"
+    },
+    {
+      "id": "stk-ksa-wolf",
+      "name": "KSA-WOLF",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ksa-wolf/144/1815_2.png",
+      "email": "ksa-wolf@import.stkfupm.invalid",
+      "user": "KSA-WOLF"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1347889-coe353",
+      "uid": "stk-computist",
+      "code": "COE 353",
+      "sec": "info",
+      "ts": 1396528951000,
+      "st": "pub",
+      "data": {
+        "desc": "COE 353\nFundamentals of Computer Communications\n(3-0-3)\n\nDigital communications fundamentals. Voice and data transmission equipment. Communications channels. Data coding and modulation. Multiplexing. Modems. Transmission media. Data transmission codes and protocols. Software packages. Data networks. Planning and design of communication networks.\n\nNote: This course is NOT open for COE students. It cannot be taken for credit with COE 241.\n\nPrerequisite: Junior Standing",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-353-fundamentals-of-computer-communications/120820/3",
+          "user": "Computist",
+          "ts": 1396528951000,
+          "tid": 120820,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-doc-ksa-wolf-coe353",
+      "uid": "stk-ksa-wolf",
+      "code": "COE 353",
+      "sec": "doc",
+      "ts": 1485231883000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98334",
+            "n": "Dr. Kamel Chenaoua",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "( COE 353 ( Fund of Computer Communication - ترم 161\n\nالتحضير :\nمن فترة لفترة و ما هو شديد.\nطريقة الشرح :\nمن السلايدات و الكتاب و الشرح عادي.\nالكويزات :\nمتوسطة الصعوبة.\nالمياجر:\nمتوسطة الصعوبة.\nالفاينال :\nسهل.\nالقريد النهائي:\nA\nالصوت:\nواضح جدا ما شاء الله 🙂\nإضافات :\n- الدكتور مرح و ينكت في الكلاس ، كلاسه ممتع.\n- الدكتور يبحث عن مساعدة و راحت الطلاب… بل هو اللي يسأل “هاه شباب كيف المادة؟ كيف طريقة الشرح؟”… ساعدنا كثير و تعاون معنا كثير والله، الله يوفقه. و لكن المادة مخربه علينا… يحتاج لها متابعة و فهم مسبق.\n- المشكلة المادة كلها حفظ و مصطلحات و مفاهيم جديدة. يعني لو تبغى تفهم لازم يكون عندك خلفية عن اللي تقرأه… الكتاب ينقز من موضوع لموضوع آخر بدون أن يعطيك معلومات تحتاجها للمواضيع القادمة… طلعت من المادة و أنا ما أقدر أربط بين كل اللي أخذته مع بعض مع أنهم مرتبطين بشكل كبير.\n- الدكتور لاحظت أنه الله يهديه ينسى و يخرج عن المحدد… يعني لو حدد لك شابتر 3 و جزء من 4… ذاكر الشابترين كاملة.\n- فيه أشياء موجودة في السلايدات مش موجودة في الكتاب… فذاكر السلايدات و لا تهملها لأنه يجي منها كثير في الاختبار.\n- إذا تبغى قريد لازم تذاكر الكتاب و السلايدات… أنا الميجر الأول ذاكرت الكتاب صم كل جزء في الكتاب. و جاء من السلايدات كثير. جبت حول 80 على ما أذكر.\n- فيه قريدر (طالب أو ماستر) صحح لنا الواجبات و خسفنا خسف في التصحيح… حتى إجابات كنت متأكد منها مليون في المئة (سؤال تعريف) و عطاني صفر للسؤال… فانتبهوا منه أو اشتكوا عليه… والله رفع ضغطي القريدر.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466887-coe353",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mr-kamel-chenaoua/98334/12",
+              "user": "KSA-WOLF",
+              "ts": 1485231883000,
+              "tid": 98334,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

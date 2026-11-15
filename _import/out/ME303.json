@@ -1,0 +1,48 @@
+{
+  "code": "ME 303",
+  "users": [
+    {
+      "id": "stk-moh_ammed",
+      "name": "Moh ammed",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ad7895/144.png",
+      "email": "moh_ammed@import.stkfupm.invalid",
+      "user": "Moh_ammed"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-moh_ammed-me303",
+      "uid": "stk-moh_ammed",
+      "code": "ME 303",
+      "sec": "doc",
+      "ts": 1704269155000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98244",
+            "n": "Dr. Sarfaraz Furqan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ME 303 - Term 231\n\nالتحضير: أحيانا يحضر في نص اللاب وأحيانا يسحب ولا أدري إذا كان كل كلاس يحاسب عليه ولا لا بصراحة.\n\nالشرح: الشرح نايم بصراحة وتحسه يسولف لحاله لأن القاعة كبيرة شوي والطلاب يسولفون ولاتدري وش قاعد يقول.\n\nالكويزات: لايوجد.\n\nإضافات:\n- الدكتور تعامله طيب ولو تبيه يساعدك يمديك تكلمه بأي وقت في تيمز إذا كان موجود.\n- بعض الأحيان الدكتور مايوضح المطلوب بشكل واضح 100% فانت لازم تجتهد وتسأله.\n\nالقريد النهائي: C+\nعموما الدكتور عادي جدا ولو لقيت واحد أحسن رح عنده.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1537192-me303",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/sarfaraz-furqan/98244/18",
+              "user": "Moh_ammed",
+              "ts": 1704269155000,
+              "tid": 98244,
+              "pn": 18
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

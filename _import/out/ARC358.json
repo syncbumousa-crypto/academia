@@ -1,0 +1,37 @@
+{
+  "code": "ARC 358",
+  "users": [
+    {
+      "id": "stk-nevermind7",
+      "name": "Nevermind7",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/ea5d25/144.png",
+      "email": "nevermind7@import.stkfupm.invalid",
+      "user": "Nevermind7"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1528066-arc358",
+      "uid": "stk-nevermind7",
+      "code": "ARC 358",
+      "sec": "info",
+      "ts": 1611255060000,
+      "st": "pub",
+      "data": {
+        "desc": "هذا الموضوع مخصص لمناقشة المقرر المذكور في العنوان\nبنود تساعد في تقييم المقرر:\n\nجودة المقرر بشكل عام\nالمواضيع التي يغطيها المقرر\nالكتاب المستخدم للمقرر\nالأسئلة والأمثلة المستخدمة في المقرر\nمدى فائدته في الناحية التطبيقية\nولكم الحرية في تقييم المقرر باستحداث بنود أخرى ترونها مناسبه لتقييمه.\n\nكما نرجو تحري الصدق والعدل في تقييم المقرر\nوعدم الخلط بين تقييم الأستاذ وتقييم المقرر بذاته",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/arc-358-real-estate-and-housing-development/183587/1",
+          "user": "Nevermind7",
+          "ts": 1611255060000,
+          "tid": 183587,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

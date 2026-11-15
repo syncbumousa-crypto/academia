@@ -1,0 +1,78 @@
+{
+  "code": "PETE 302",
+  "users": [
+    {
+      "id": "stk-cpc_2015",
+      "name": "CPC 2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/ecae2f/144.png",
+      "email": "cpc_2015@import.stkfupm.invalid",
+      "user": "CPC_2015"
+    },
+    {
+      "id": "stk-user5621",
+      "name": "الفجر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5621/144/1134_2.png",
+      "email": "user5621@import.stkfupm.invalid",
+      "user": "user5621"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1503878-pete302",
+      "uid": "stk-cpc_2015",
+      "code": "PETE 302",
+      "sec": "info",
+      "ts": 1545385105000,
+      "st": "pub",
+      "data": {
+        "desc": "PETE 302 - Term 181\n\nمع الدكتور راهول\n\nالمادة بشكل مختصر تتكلم عن المرحلة الإنتقالية بعد الحفر و قبل الإنتاج\n\nبشكل عام المادة طويلة شويتين ، لكنها ما هي صعبه و لا هي متعبه ، موصوعات المادرة موجودة بالسيلابوس المرفقة\n\nالبعض يعتبرها مادة حفظ و خصوصا مع الدكتور راهول ، أنا عن نفسي أرى أنها مادة فهم من الدرجة الأولى و تحتاج القليل من الحفظ.\n\nبإعتقادي أنها مهمة للي بيشغتل بالحفر أو الإنتاج فيما بعد\n\nبأرفق لكم السيلابس،\n\nالكتاب لطيف و فيه أمثلة واضحة ، لكن سلايدات الدكتور تفي بالغرض\n\nلمن يدرسها مع الدكتور راهول فهو يخلي المادة ستاندر ، لكن أفرج مياجره فوق ال 80 بشوي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/pete-302-well-completion/120464/3",
+          "user": "CPC_2015",
+          "ts": 1545385105000,
+          "tid": 120464,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-doc-user5621-pete302",
+      "uid": "stk-user5621",
+      "code": "PETE 302",
+      "sec": "doc",
+      "ts": 1328622826000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98484",
+            "n": "Dr. Abdullah Al-Sultan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "PETE 302\nالتحضير: بعض الأحيان في البداية وبعض الأحيان في النهاية\nالشرح: جيد جداً\nالكويزات: اثنين سهلين.\nالمياجر: الأول والثاني سهلين…80% من الأسئلة من السلايدات…\nالفاينل: نار…\nالصوت: واضح جداً، ولا يرضى أحد ينام…\nالواجبات: شبه غير متعلقة بالمنهج…\nبروجكت: SPE Paper",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p981503-pete302",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-abdullah-al-sultan/98484/9",
+              "user": "user5621",
+              "ts": 1328622826000,
+              "tid": 98484,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
