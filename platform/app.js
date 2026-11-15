@@ -24310,6 +24310,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* حلقةُ الصفّ مقسومةٌ بألوان تظليلاته بالتساوي (ج · اختيارُ صاحب الموقع) */
   /* حبرُ الحلقة: درجةٌ أغمقُ من لون التظليل (‎--ink-*‎ في الأنماط، وفي الداكن أفتحُ قليلًا) — اختيارُ صاحب الموقع */
   const hlRingBg = cols => `conic-gradient(${cols.map((c, i) => `var(--ink-${c}) ${(i * 100 / cols.length).toFixed(2)}% ${((i + 1) * 100 / cols.length).toFixed(2)}%`).join(', ')})`;
+  /* ===== الحلقةُ حين تنفتح (اختيارُ صاحب الموقع: «خصرٌ أعمق»): خطُّ الحبر نفسُه يتمدّد كبسولةً وينخصر خصرًا ناعمًا بين الرقم والأدوات =====
+     ‏‎SVG‎ في كلّ حلقة، لا يُرسم إلّا وهي تنفتح؛ والألوانُ تدرّجٌ بقطعٍ متساوية بأحبار الصفّ (‎--ink-*‎) */
+  function hlWaistSvg(pid, i, r) {
+    const gid = `hlw-${pid}-${i}`, n = r.cols.length;
+    const stops = n ? r.cols.map((c, j) => `<stop offset="${(j / n).toFixed(3)}" style="stop-color:var(--ink-${c})"/><stop offset="${((j + 1) / n).toFixed(3)}" style="stop-color:var(--ink-${c})"/>`).join('') : '';
+    return `<svg class="cx-hlt__sv" aria-hidden="true">${n ? `<defs><linearGradient id="${gid}" x1="1" x2="0">${stops}</linearGradient></defs>` : ''}<path${n ? ` stroke="url(#${gid})"` : ''}/></svg>`;
+  }
+  /* المسار: نصفُ الارتفاع ثابتٌ إلّا عند العنق ‎x0‎ فينخفض بمنحنًى جرسيّ (عمقُه ‎dip‎ وعرضُه ‎nw‎)، وطرفاه نصفا دائرة */
+  function hlWaistPath(W, H, x0, dip, nw) {
+    const r = H / 2 - .75, cy = H / 2, xa = .75 + r, xb = W - .75 - r;
+    if (xb <= xa) return `M ${xa} .75 A ${r} ${r} 0 1 1 ${xa} ${H - .75} A ${r} ${r} 0 1 1 ${xa} .75 Z`;
+    const half = x => r - dip * Math.exp(-Math.pow((x - x0) / (nw / 2.4), 2));
+    const top = [], bot = [];
+    for (let x = xa; x <= xb + .01; x += 1) { const h = half(x); top.push(`${x.toFixed(1)} ${(cy - h).toFixed(2)}`); bot.unshift(`${x.toFixed(1)} ${(cy + h).toFixed(2)}`); }
+    return `M ${top[0]} L ${top.join(' L ')} A ${r} ${r} 0 0 1 ${bot[0]} L ${bot.join(' L ')} A ${r} ${r} 0 0 1 ${top[0]} Z`;
+  }
   function hlRailBuild(el) {
     const id = el.dataset.pkid, rows = hlRailData(id);
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
@@ -24320,9 +24336,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
         /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
-        r.ow = HL_R.OD + 50 + (r.t ? 4 + String(r.t).length * 7 : 0) + (r.b ? 4 + String(r.b).length * 7 : 0) + 6;
+        r.ow = HL_R.OD + 18 + 50 + (r.t ? 4 + String(r.t).length * 7 : 0) + (r.b ? 4 + String(r.b).length * 7 : 0) + 6;
         return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `<span class="cx-hlt__ring"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}></span><span class="cx-hlt__g"><b>${r.nw ? '+' : r.n}</b></span></button>`;
+          + `<span class="cx-hlt__ring"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}></span>${hlWaistSvg(el.dataset.pkid, i, r)}<span class="cx-hlt__g"><b>${r.nw ? '+' : r.n}</b></span></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
@@ -24363,6 +24379,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.style.setProperty('--no', Math.max(0, Math.min(1, (t.d - 15) / 6)).toFixed(3));
       e.style.setProperty('--fs', (10 + 3 * t.o).toFixed(2) + 'px');
       e.style.setProperty('--o', t.o.toFixed(3));
+      const wv = t.o > .02 && !rows[i].nw;
+      if (wv !== !!e._wv) { e._wv = wv; e.classList.toggle('is-wv', wv); }
+      if (wv) {
+        /* العنقُ بعد خانة الرقم من جهتها (اليمين في العربيّ) — وعمقُه يكبر مع الانفتاح */
+        const W = t.w, H = t.h, nx = t.d + 9 * t.o, x0 = el._rtl ? W - nx : nx;
+        const sv = e.querySelector('.cx-hlt__sv'), p = sv && sv.firstElementChild && sv.lastElementChild;
+        if (p) { sv.setAttribute('viewBox', `0 0 ${W.toFixed(2)} ${H.toFixed(2)}`); p.setAttribute('d', hlWaistPath(W, H, x0, 6.5 * t.o * t.o, 28)); }
+      }
     }
     const op = Math.max(0, Math.min(N - 1, Math.round(c)));
     if (op !== el._op) {

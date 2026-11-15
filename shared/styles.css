@@ -18443,3 +18443,11 @@ html[data-theme="dark"] .cx-hltool button { color: #e6ecef; }
 html[data-theme="dark"] .cx-hltool button.is-on { color: var(--hlink, #79b8bf); }
 .cx-hltool button.is-on::after { transform: none; }
 @media (prefers-reduced-motion: reduce) { .cx-hltool button, .cx-hltool button::after { transition: none; } }
+/* الحلقةُ المنفتحة: خطُّ ‎SVG‎ بخصرٍ ناعم بين الرقم والأدوات يحلّ محلّ الحلقة */
+.cx-hlt__sv { position: absolute !important; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; display: none; }
+.cx-hlt.is-wv .cx-hlt__sv { display: block; }
+.cx-hlt.is-wv .cx-hlt__ring { opacity: 0; }
+.cx-hlt__sv path { fill: none; stroke-width: 1.5; stroke-linejoin: round; }
+.cx-hlt__sv path:not([stroke]) { stroke: rgba(20, 40, 46, .28); }
+html[data-theme="dark"] .cx-hlt__sv path:not([stroke]) { stroke: rgba(255, 255, 255, .26); }
+.cx-hlt__g { margin-inline-end: calc(var(--o, 0) * 18px); }   /* فُرجةُ العنق بين الرقم والأدوات */
