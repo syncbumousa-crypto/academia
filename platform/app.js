@@ -4350,6 +4350,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxRowPub = null, cxRowFresh = null;   // ‏‎cxRowFresh‎: اتّسعت للتوّ ولم تُفتح فيها مساحةٌ بعد — فلا تُطوى لخلوّها                     // والمفتوحةُ في موضعها بإطارٍ (رأسٌ وذيل) من مفاتيح المساحات — بين أخواتها
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
   let cxFtDn = false;
+  let cxFtGone = false;   /* التحرير: نُقر خارج المساحات الثلاث فاختفى التذييلُ كلُّه (ومكانُه محجوز) حتى تُلمس إحداها */
   let cxFull = false;                      // والمكبَّرةُ تملأ الشاشةَ كلَّها (درجةٌ ثالثة) — حالُ نظرة                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
 
   function showCmTab(t) {
@@ -9528,10 +9529,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
     /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
-    if (post.classList.contains('pk--edit') && post.classList.contains('pk--ftnone') === !!now) {
-      if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(pkActSet.t); pkActSet.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
-      post.classList.toggle('pk--ftnone', !now);
-    }
+    if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
@@ -9553,6 +9551,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const anims = pkFxSlot(post, html0, .5, D);
     pkBandRun(post, tracks, D, null, { anims });
   }
+  /* إخفاءُ تذييل التحرير كلِّه وإظهارُه في مكانه المحجوز — بحركة */
+  function cxFtHide(post, on) {
+    if (!post.classList.contains('pk--edit')) return;
+    cxFtGone = on && !!pkActOf((post.querySelector('[data-pkview][data-pkid]') || {}).dataset?.pkid);
+    if (post.classList.contains('pk--ftnone') === on) return;
+    if (on) { const ae = document.activeElement; if (ae && ae.closest && ae.closest('.vt-foot')) ae.blur(); }
+    if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(cxFtHide.t); cxFtHide.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
+    post.classList.toggle('pk--ftnone', on);
+  }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
     const pane = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
@@ -9571,8 +9578,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
     pkActSet(post, ctl.dataset.pkid, pane.classList.contains('pk-src') ? 'book' : pane.classList.contains('pk-bank') ? 'bank' : 'mid');
-    /* ولمسُ مساحةٍ يبسط التذييلَ المطويّ فتعود أزرارُه */
+    /* ولمسُ مساحةٍ يبسط التذييلَ المطويّ فتعود أزرارُه — وفي التحرير يُظهره كلَّه إن كان مخفيًّا */
     if (cxFtDn && e.type === 'pointerdown') cxFtSet(false, true);
+    if (e.type === 'pointerdown' && post.classList.contains('pk--ftnone')) cxFtHide(post, false);
   };
   /* على النافذة قبل المستند: محرّراتُ الجوف (اللوحُ والجدولُ والشجرة) قد توقف الحدثَ في طور الالتقاء على المستند */
   window.addEventListener('pointerdown', pkActFrom, true);
@@ -22373,6 +22381,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame'); if (!card) return;
     if (t.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)')) return;
     if (t.closest(CX_FT_KEEP)) return;
+    /* في التحرير يختفي التذييلُ كلُّه بخطّه (طلبُ صاحب الموقع)، وفي النشر يُطوى ويبقى خطُّه */
+    if (card.classList.contains('pk--edit')) { cxFtHide(card, true); return; }
     cxFtSet(true, true);
   }, true);
   function cxHdMeasure() {
@@ -23192,7 +23202,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
     const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
-    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && !pkActOf(p.id) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
+    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && (!pkActOf(p.id) || cxFtGone) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}
