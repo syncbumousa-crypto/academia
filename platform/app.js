@@ -10716,8 +10716,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* يُكتب الموضعُ في وصف الكتاب أوّلًا: الرسمُ التالي يبني الكتابَ من جديد منه */
   const pkLnkGo = (id, page) => {
     const b = pkSrcBk[id], meta = pkSrcMeta(id);
-    const single = b ? b.single : false;
-    const pos = single ? page : page - (page % 2);
+    const single = b ? b.single : false, cv = pkSrcCovMeta(id);
+    const pos = bkNorm(bkSkOf(cv, meta && meta.covPg, meta && meta.pages), page, single);
     if (meta) { meta.pos = pos; meta.closed = false; save(); }
     if (!b || !b.el || !b.el.isConnected) return;
     b.closed = false; b.pos = pos;
@@ -11099,7 +11099,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const r = sel && findNode(pkLnkDeck(id), sel);
         if (r && r.n.pg) {
           const single = pkSrcBk[id] ? pkSrcBk[id].single : false;
-          meta.pos = single ? r.n.pg.a : r.n.pg.a - (r.n.pg.a % 2); meta.closed = false; save();
+          meta.pos = bkNorm(bkSkOf(pkSrcCovMeta(id), meta.covPg, meta.pages), r.n.pg.a, single); meta.closed = false; save();
         }
       }
       pkSrcSelSeen[id] = sel;
@@ -24109,9 +24109,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الزرُّ يحمل صورةَ الوضع الذي يُنقل إليه */
   function bkModeBtn(cls, attr) { const one = bk2OneGet(), to = one ? 'two' : 'one', tip = one ? T().bkTwo : T().bkOne;
     return `<button type="button" class="${cls}" ${attr} data-bkto="${to}" title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${bkModeIc(to)}</svg></button>`; }
-  const bk2A = b => b.closed ? 0 : b.one ? Math.max(1, b.pos) : Math.floor(b.pos / 2) + 1;
-  const bk2MaxA = b => b.one ? b.n : Math.floor(b.n / 2) + 1;
-  const bk2PosOf = (b, A) => A === 0 ? (b.one ? 1 : 0) : b.one ? A : 2 * (A - 1);
+  /* الغلافُ صفحةُ الملفّ الأولى (لا صورةٌ مرفوعة ولا صفحةٌ أخرى): لا تتكرّر داخلَه — الكتابُ يبدأ بالثانية.
+     الموضعُ يبقى رقمَ الصفحة في الملفّ، والإزاحةُ في التحويل بينه وبين الفتحة وحدَه */
+  const bkSkOf = (cov, covPg, n) => !cov && (covPg || 1) === 1 && n > 1 ? 1 : 0;
+  const bkSk = b => bkSkOf(b.covKey, b.covPg, b.n);
+  /* موضعٌ صالحٌ للوضع: الصفحةُ الواحدة من أولى صفحات الكتاب، والفتحةُ على يمينها */
+  const bkNorm = (d, pos, one) => { const v = pos - d; return d + (one ? Math.max(1, v) : Math.max(0, v - (v % 2))); };
+  const bk2A = b => { const v = b.pos - bkSk(b); return b.closed ? 0 : b.one ? Math.max(1, v) : Math.floor(Math.max(0, v) / 2) + 1; };
+  const bk2MaxA = b => { const N = b.n - bkSk(b); return b.one ? N : Math.floor(N / 2) + 1; };
+  const bk2PosOf = (b, A) => bkSk(b) + (A === 0 ? (b.one ? 1 : 0) : b.one ? A : 2 * (A - 1));
   /* صورةُ صفحةٍ بالدقّة التي يطلبها المحرّك — والغلافُ صورتُه المرفوعة تملأ الصفحةَ ولا تتشوّه، وإلّا الصفحةُ الأولى */
   async function bk2Tex(b, k, w) {
     if (k === 'cover' && b.covKey) {
@@ -24675,7 +24681,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.nav = view.querySelector('.cbk-nav');
     b.view = view; b.leaf = null;
     b.one = b.single = bk2OneGet();
-    b.pos = b.one ? Math.max(1, b.pos) : Math.max(0, b.pos - (b.pos % 2));
+    b.pos = bkNorm(bkSk(b), b.pos, b.one);
     b.gl = null;   /* المحرّكُ بعد التحميل */
     b.dark = pkDark();
     let raf = 0;
@@ -24753,18 +24759,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (one) {
       /* تبقى اليسرى (إن كانت صفحةً) وتنطوي اليمنى — وفي آخر الكتاب تبقى اليمنى */
       /* والفتحةُ التي انفتحت من صفحةٍ ولم تُقلَّب بعدُ تعود إلى تلك الصفحة نفسِها */
-      const A = g.A, bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n ? 'L' : 'R';
+      const A = g.A, d = bkSk(b), bk = b.mxBack, side = bk && bk.A === A && A > 1 ? bk.side : 2 * A - 1 <= b.n - d ? 'L' : 'R';
       b.mxTo = true;
       g.morph(side, 1, BK_MX, bkMxH(b)).then(() => {
-        b.one = b.single = true; b.pos = side === 'L' ? 2 * A - 1 : 2 * (A - 1);
+        b.one = b.single = true; b.pos = d + (side === 'L' ? 2 * A - 1 : 2 * (A - 1));
         bk2Swap(b, g, null).then(fin);
       });
     } else {
       /* الصفحةُ الفرديّةُ يسرى الفتحة فتنفتح اليمنى من ورائها، والزوجيّةُ يمناها فتنفتح اليسرى */
-      const pg = Math.max(1, b.pos), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
+      const d = bkSk(b), pg = Math.max(1, b.pos - d), side = pg % 2 ? 'L' : 'R', A = side === 'L' ? (pg + 1) / 2 : pg / 2 + 1;
       b.mxTo = true;   /* القامةُ تبقى حتى يبدأ الانفتاح */
       b.mxBack = { A, side };
-      b.one = b.single = false; b.pos = 2 * (A - 1);
+      b.one = b.single = false; b.pos = d + 2 * (A - 1);
       bk2Swap(b, g, side).then(ng => {
         b.mxTo = false;
         return ng.morph(side, 0, BK_MX, bkMxH(b));
@@ -24814,7 +24820,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.gl = null;
     if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.one = b.single = one;
-    b.pos = pg == null ? (one ? 1 : 0) : one ? pg : pg - (pg % 2);
+    b.pos = bkNorm(bkSk(b), pg == null ? 0 : pg, one);
     if (b.meta) { b.meta.pos = b.pos; save(); }
     bk2Layout(b);
     /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
@@ -25047,7 +25053,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph,
+        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b),
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
@@ -25138,7 +25144,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* موضعٌ كُتب من خارج (اختيارُ مجلدٍ مربوط · ‎pkLnkGo‎): المحرّكُ يقلّب إليه */
     if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
     const A = bk2A(b), maxA = bk2MaxA(b);
-    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === 0 ? `1 / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
+    const d = bkSk(b);
+    b.ind.textContent = b.closed ? T().bkCover : b.one ? `${p} / ${b.n}` : p === d ? `${d + 1} / ${b.n}` : p + 1 > b.n ? `${p} / ${b.n}` : `${p}–${p + 1} / ${b.n}`;
     if (b.onShow) b.onShow(b);
     pkActInd(b);
     b.view.querySelector('[data-bknav="1"]').disabled = A >= maxA;

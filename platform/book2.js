@@ -123,8 +123,11 @@ export function createBook2(THREE, host, cfg) {
   /* ‏‎cfg.one‎: صفحةٌ واحدةٌ أمامك — كلُّ صفحةٍ ورقةٌ وحدها (ظهرُها ورقٌ يشفّ عن وجهها كالمطبوع على وجهٍ واحد)،
      والمقلَّبةُ تُطوى حول الكعب إلى ما وراء الكتاب. ‏‎A‎ فيه رقمُ الصفحة الظاهرة (‎0‎ الغلاف) */
   const ONE = !!cfg.one;
-  const m = ONE ? cfg.n : Math.ceil(cfg.n / 2), S = m + 2;
-  const maxA = ONE ? cfg.n : Math.min(S - 1, Math.floor(cfg.n / 2) + 1);
+  /* ‏‎cfg.skip‎: الغلافُ صفحةُ الملفّ الأولى نفسُها — فالكتابُ من داخله يبدأ بالثانية (لا تتكرّر). ‏‎N‎ ما في الكتاب من صفحات،
+     ورقمُ الصفحة في الملفّ ‎k = v + skip‎ (‏‎v‎ ترتيبُها في الكتاب) */
+  const SK = cfg.skip ? 1 : 0, N = cfg.n - SK;
+  const m = ONE ? N : Math.ceil(N / 2), S = m + 2;
+  const maxA = ONE ? N : Math.min(S - 1, Math.floor(N / 2) + 1);
   let A = Math.max(0, Math.min(maxA, cfg.A | 0));
   let needs = true, dead = false;
   /* ‏‎mo‎: تبدُّلُ الوضع أمام العين (صفحتان ⇄ صفحة) — نصفُ الفتحة يُطوى حول الكعب إلى ما وراء الكتاب والكاميرا تقترب من الباقي،
@@ -185,7 +188,8 @@ export function createBook2(THREE, host, cfg) {
     pageTex.set(k, tex);
     return tex;
   }
-  const faces = i => i === 0 ? ['cover', 'inside'] : i === S - 1 ? ['inside', 'back'] : ONE ? [i, 'blank'] : [2 * i - 1, 2 * i];
+  const pk = v => v >= 1 && v <= N ? v + SK : 'blank';
+  const faces = i => i === 0 ? ['cover', 'inside'] : i === S - 1 ? ['inside', 'back'] : ONE ? [pk(i), 'blank'] : [pk(2 * i - 1), pk(2 * i)];
 
   const sheets = [];
   for (let i = 0; i < S; i++) {
@@ -563,8 +567,9 @@ export function createBook2(THREE, host, cfg) {
       if (A === 0 || mo) return [];
       const v = new THREE.Vector3(), out = [];
       const proj = (x, y, z) => { v.set(x + book.position.x, y, z).project(camera); return [(v.x + 1) / 2 * cw, (1 - v.y) / 2 * ch]; };
-      const face = (k, x0, x1, z) => {
-        if (!(k >= 1 && k <= cfg.n)) return;
+      const face = (vk, x0, x1, z) => {
+        if (!(vk >= 1 && vk <= N)) return;
+        const k = vk + SK;
         const [ax, ay] = proj(x0, H / 2, z), [bx, by] = proj(x1, -H / 2, z);
         out.push({ k, x: Math.min(ax, bx), y: Math.min(ay, by), w: Math.abs(bx - ax), h: Math.abs(by - ay) });
       };
