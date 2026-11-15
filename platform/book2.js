@@ -266,7 +266,7 @@ export function createBook2(THREE, host, cfg) {
   setTheme(cfg.theme);
   /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
   const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.6, -0.7, 1.8).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  const BLOB = new THREE.Vector3(-0.09, 0.05, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const BLOB = new THREE.Vector3(-0.05, 0.03, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
   /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
   const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
   { const c = blobCv.getContext('2d'); c.filter = 'blur(22px)'; c.fillStyle = '#000'; c.fillRect(48, 48, 160, 160); }
@@ -276,12 +276,14 @@ export function createBook2(THREE, host, cfg) {
   function tableLight(e) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
     blob.visible = e < 1;
-    blob.material.opacity = (curTheme === 'dark' ? 0.6 : 0.42) * (1 - e) * (1 - e);
-    blob.scale.set(W * (1 + OV) * 1.62, H * (1 + OV) * 1.5, 1);
+    blob.material.opacity = (curTheme === 'dark' ? 0.4 : 0.26) * (1 - e) * (1 - e);
+    blob.scale.set(W * (1 + OV) * 1.38, H * (1 + OV) * 1.28, 1);
     blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
-    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.5 : 0.2) - L.ground) * (1 - e);
+    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.3 : 0.13) - L.ground) * (1 - e);
+    /* ظلُّ الشمس المائلة على الطاولة حادٌّ قليلًا (التنعيمُ الواسع يرسمه نسخًا متراكبةً: خطوط) — النعومةُ من الظلّ المضبَّب تحته */
+    sun.shadow.radius = 2 + 10 * e;
   }
 
   sheets.forEach(s => { s.p = s.target = s.i < A ? 1 : 0; });
@@ -367,7 +369,7 @@ export function createBook2(THREE, host, cfg) {
   const MX = cfg.frame ? cfg.frame.m : 1.04, MY = MX, DOLLY = 0.5, LIFT = cfg.frame ? cfg.frame.lift : 0.01;
   /* المغلقُ ورقةٌ واحدة: الكاميرا تقترب حتى يسع الغلافُ وحده، وتبتعد مع انفتاحه حتى تسع الفتحةَ (طلبُ صاحب الموقع: «كبّر الكتب»).
      ‏‎o‎ انفتاحُ الغلاف ‎0..1‎ (تقدُّمُ ورقته)، فالعرضُ المطلوب ‎W(1+o)‎ */
-  let camOpen = -1, camVh = 0, camT = -1;
+  let camOpen = -1, camVh = 0, camT = -1, calm = false;
   /* زاويةُ الطاولة: دورانُ كتاب الكونسبت نفسُه (‎−55°‎، مقيسٌ من زوايا غلافه في الفيديو معكوسًا لكتابٍ عربيّ كعبُه يمين)،
      والكاميرا أعلى منه (ميلٌ ‎42°‎ عن العموديّ — طلبُ صاحب الموقع) بعدسةٍ طويلةٍ كعدسته */
   const TILT = 0.74, AZ = -0.96, RM = 1.2, FOV = 28, FOV_T = 13;
@@ -396,7 +398,7 @@ export function createBook2(THREE, host, cfg) {
        (يبقى حرفُ الصفحة الأيسرُ مكانه) فيُرى التفافُها حوله إلى ما وراء الكتاب، ثمّ تعود */
     let o;
     if (mo) o = 2 + mo.k;   /* ما يُرى عرضُه ‎(2−k)W‎ ووسطُه الكعبُ بعد إزاحة الكتاب */
-    else if (ONE) { o = 0; for (const s of sheets) if (s.p > 1e-3 && s.p < 1 - 1e-3) o = Math.max(o, Math.sin(s.p * Math.PI)); }
+    else if (ONE) { o = 0; if (!calm) for (const s of sheets) if (s.p > 1e-3 && s.p < 1 - 1e-3) o = Math.max(o, Math.sin(s.p * Math.PI)); }
     else o = sheets.length ? Math.max(0, Math.min(1, sheets[0].p)) : 1;
     /* في التبدُّل اللوحةُ ثابتةُ المقاس والكتابُ يُحجَّم على المساحة التي تتغيّر قامتُها حولها (‎vh‎) */
     const vh = mo && mo.vh ? mo.vh : ch;
@@ -477,6 +479,7 @@ export function createBook2(THREE, host, cfg) {
       }
     }
     for (const s of sheets) if (s.drag != null || s.anim) { if (!active || s.drag != null) active = s; }
+    if (calm && !active) calm = false;
     for (const s of sheets) {
       if (s.anim) {
         const k = Math.min(1, Math.max(0, (now - s.anim.t0) / s.anim.dur));
@@ -535,7 +538,12 @@ export function createBook2(THREE, host, cfg) {
       if (q >= 1) {
         const opening = ta.to === 1, goal = ta.goal; tv = ta.to; tRise = 0; ta = null;
         /* الكاميرا فوقه والغلافُ سُلِّم إلى ورقة القراءة: الآن ينفتح (على الفتحة المطلوبة) */
-        if (opening && A === 0) { updCase(1); goTo(goal || 1); }
+        if (opening && A === 0) {
+          updCase(1);
+          /* الصفحةُ الواحدة: الغلافُ يُطوى إلى ما وراء الكتاب سريعًا والكاميرا ثابتة (كانت تتراجع معه فيُرى باطنُه لوحًا عريضًا
+             بجانب الصفحة قبل أن ينطوي) — والفتحةُ صفحتان: يتقلّب الغلافُ كالعادة */
+          if (ONE) { calm = true; goTo(goal || 1, 0.55); } else goTo(goal || 1);
+        }
         if (cfg.onTable) cfg.onTable(tv < 1);
       }
       moving = true;
@@ -596,7 +604,7 @@ export function createBook2(THREE, host, cfg) {
     return true;
   }
   /* القفزُ إلى فتحةٍ بعيدة: الأوراقُ بينهما تتقلّب متتابعةً سريعة (حتى ثمانٍ)، وما وراءها يُنقل ساكنًا تحت الكومة */
-  function goTo(t) {
+  function goTo(t, durK = 0.8) {
     t = Math.max(0, Math.min(maxA, t | 0));
     if (tv < 1 && !ta) { if (t > 0) table(1, t); return; }
     if (mo || t === A) return;
@@ -606,7 +614,7 @@ export function createBook2(THREE, host, cfg) {
     const near = list.slice(far.length);
     A = t;
     for (const s of far) { s.anim = null; s.p = s.target = dir > 0 ? 1 : 0; }
-    near.forEach((s, k) => { s.dir = dir; s.tiltT = 0; launch(s, dir > 0 ? 1 : 0, 0, k * 70, 0.8); });
+    near.forEach((s, k) => { s.dir = dir; s.tiltT = 0; launch(s, dir > 0 ? 1 : 0, 0, k * 70, durK); });
     commit();
   }
 
