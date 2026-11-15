@@ -24467,7 +24467,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
         /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
-        r.ow = Math.max(64, 30 + (r.t ? String(r.t).length * 7 : 0) + (r.b ? String(r.b).length * 7 : 0) + 22);
+        r.ow = Math.max(64, 30 + String(r.t || 0).length * 7 + String(r.b || 0).length * 7 + 22);
         /* والصفُّ الجديدُ بطاقةٌ فارغةٌ برقمه التالي كغيرها (طلبُ صاحب الموقع) — لا «+» ولا إطارٌ منقّط؛ يُنشأ في الجدول حين يدخلها أوّلُ تظليل */
         return `<button type="button" class="cx-hlt${r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.n}">`
           + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.n}</b></button>`;
@@ -24516,7 +24516,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (op !== el._op) {
       if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
-      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
+      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || 0;   /* صفرٌ ظاهرٌ قبل أيّ تظليل (طلبُ صاحب الموقع) */ });
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
     /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
