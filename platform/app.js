@@ -24318,6 +24318,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let row = cid || hlOpenCid(id) || null, grew = false;
     if (row === 'new') { row = hlNewRow(id); grew = !!row; }
     if (row) { hlOpen[id] = row; hlOpenUsr[id] = true; }
+    if (kind !== 'box' && hlTool[id] !== 't') { hlTool[id] = 't'; queueMicrotask(() => hlBarSync(id)); }   /* تظليلُ نصٍّ يعني اختيارَ القلم */
     const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlCol[kind === 'box' ? 'box' : 't'], kind,
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
@@ -24396,7 +24397,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlRailBuild(el) {
     const id = el.dataset.pkid, rows = hlRailData(id);
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
-    const tool = hlTool[id] || 't';
+    const tool = hlTool[id] || '';   /* لا أداةَ مختارةً حتى يُظلَّل أو تُختار (طلبُ صاحب الموقع): كلتاهما باهتة والفأرةُ للتقليب */
     const st = el._st || (el._st = hlRailSt[id] || (hlRailSt[id] = { center: -1, vel: 0, target: null, lastIn: 0 }));
     const sig = rows.map(r => r.cid + ':' + r.cols.join('') + r.t + '.' + r.b).join('|') + '|' + tool + hlCol.t + hlCol.box;
     if (el._sig !== sig) {
@@ -24527,7 +24528,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tb = e.target.closest('.cx-hltool button'); if (!tb) return;
       e.preventDefault(); e.stopPropagation();
       const id = el.dataset.pkid; if (tb.disabled) return;
-      hlTool[id] = tb.dataset.hltool; el._sig = ''; hlRailBuild(el); hlToolSync(id);
+      hlTool[id] = hlTool[id] === tb.dataset.hltool ? '' : tb.dataset.hltool;   /* ضغطُ المختارة ثانيةً يتركها ويعود للفأرة */
+      el._sig = ''; hlRailBuild(el); hlToolSync(id);
     });
   }
   /* أداةُ المربّع (ق٦): يُعلَّم مصدرُ المساهمة فتصير صفحاتُه لوحَ رسمٍ بمؤشّرٍ متقاطع، وتعود نصًّا بالقلم */
