@@ -24533,8 +24533,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   /* أداةُ المربّع (ق٦): يُعلَّم مصدرُ المساهمة فتصير صفحاتُه لوحَ رسمٍ بمؤشّرٍ متقاطع، وتعود نصًّا بالقلم */
+  /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — رأسُه المائلُ عند نقطة التأشير أسفلَ اليسار */
+  const hlPenCurC = {};
+  function hlPenCursor(c) {
+    if (hlPenCurC[c]) return hlPenCurC[c];
+    const ink = { y: '#c99410', g: '#3f9a52', b: '#3f84c6', p: '#c95b7d' }[c] || '#c99410', fill = (HL_COL[c] || HL_COL.y)[1];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><g stroke="#14233f" stroke-width="1.3" stroke-linejoin="round">`
+      + `<path d="M15.5 2.5l8 8-9.5 9.5-8-8z" fill="#fff"/><path d="M6 12l8 8-2.5 2.5H7.5L3.5 18.5v-4z" fill="${fill}"/><path d="M3.5 18.5l4 4H2z" fill="${ink}"/></g></svg>`;
+    return (hlPenCurC[c] = `url("data:image/svg+xml,${encodeURIComponent(svg)}") 2 24, text`);
+  }
   function hlToolSync(id) {
-    Object.values(pkSrcBk).forEach(b => { if (b && b.view && pkSrcBase(hlSidOf(b)) === id) b.view.classList.toggle('hl-box', hlTool[id] === 'box'); });
+    const cur = hlPenCursor(hlCol.t);
+    Object.values(pkSrcBk).forEach(b => {
+      if (!b || !b.view || pkSrcBase(hlSidOf(b)) !== id) return;
+      b.view.classList.toggle('hl-box', hlTool[id] === 'box');
+      b.view.classList.toggle('hl-pen', hlTool[id] === 't');
+      b.view.style.setProperty('--hl-cur', cur);
+    });
   }
   /* ===== ألوانُ حبر الأداة: قائمةٌ صغيرةٌ تطفو فوق خطّها، تُغلق باختيارٍ أو نقرٍ خارجها أو Esc ===== */
   function hlPalClose() { const P = document.getElementById('hl-pal'); if (P) P.remove(); }
@@ -24885,6 +24900,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault();
     bkTLClear();
     bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
+    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur', hlPenCursor(hlCol.t)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
     try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
   document.addEventListener('pointermove', e => {
@@ -24896,6 +24912,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkTLUp = e => {
     if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
     const g = bkTLDrag; bkTLDrag = null;
+    { const v = g.d.closest('.pk-src__view, [data-pksrcview]'); if (v) v.classList.remove('hl-drag'); }
     /* نقرةٌ بلا سحب: تختار التظليلَ الذي تحتها (أو تُلغي الاختيار) */
     if (!g.moved || !g.z) { bkTLDraw(g.d, null); hlPick(g.d, e); return; }
     const bars = bkTLBars(g.d, g.a, g.z);

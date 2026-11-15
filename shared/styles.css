@@ -18453,3 +18453,6 @@ html[data-theme="dark"] .bk-skel__edge { background: repeating-linear-gradient(9
 .bk-skel__ring em { position: absolute; inset: 0; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: clamp(11px, 4.2cqw, 15px); font-variant-numeric: tabular-nums; color: var(--u-ink, #14233f); }
 html[data-theme="dark"] .bk-skel__ring em { color: #e6ecef; }
 @media (prefers-reduced-motion: reduce) { .bk-skel__pgs b { animation: none; } }
+/* مؤشّرُ قلم التظليل على الصفحة والقلمُ مختارٌ أو وهو يظلّل (‎--hl-cur‎ يضعه ‎hlToolSync‎ بحبر القلم) */
+:is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
+.hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
