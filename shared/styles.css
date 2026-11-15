@@ -18433,8 +18433,7 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .bk-skel { flex: 1 1 auto; align-self: stretch; display: grid; place-items: center; min-height: 0; padding: 0; container-type: size;
   --sk: #e8edef; --sk2: #d7dfe2; --skl: rgba(20, 40, 46, .1); --skr: #2c5e65; }
 html[data-theme="dark"] .bk-skel { --sk: #34424a; --sk2: #3f4e56; --skl: rgba(255, 255, 255, .1); --skr: #7fb7bd; }
-.bk-skel--over { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: var(--u-surf, #fff); }
-html[data-theme="dark"] .bk-skel--over { background: var(--pk-blk, #2a353a); }
+.bk-skel--over { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .bk-skel__bk { position: relative; height: min(96cqh, 96cqw / var(--ar)); aspect-ratio: var(--ar); perspective: 900px; }
 .bk-skel__bk::after { content: ''; position: absolute; left: 8%; right: 8%; bottom: -14px; height: 16px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20, 35, 63, .22), transparent); filter: blur(2px); }
 .bk-skel__edge { position: absolute; left: -6px; top: 3px; bottom: 3px; width: 6px; border-radius: 4px 0 0 4px; background: repeating-linear-gradient(90deg, #f3eee2 0 1px, #dcd4c0 1px 2px); }

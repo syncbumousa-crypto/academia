@@ -11164,6 +11164,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
       if (!view.isConnected) return;
+      /* شكلُ الهيكل والقامةُ من صفحة الملفّ نفسِه (مربّعةً كانت أو مستطيلةً بالطول أو بالعرض) قبل أن يُبنى الكتاب */
+      { const ar1 = p1.width / p1.height; if (meta && Math.abs((meta.ar || 0) - ar1) > 1e-3) { meta.ar = ar1; save(); }
+        view.querySelectorAll('.bk-skel').forEach(k => k.style.setProperty('--ar', ar1.toFixed(4))); requestAnimationFrame(() => pkSrcHFit()); }
       /* ROADMAP-SMOOTH ق٢: الكتابُ يُبنى بعد أن تقف الحركة (لا أثناءها فتسقط إطاراتُها)، ويظهر بتلاشٍ قصير */
       if (document.querySelector('#cm-body .pk--fxrun')) {
         await new Promise(res => { const chk = () => document.querySelector('#cm-body .pk--fxrun') ? setTimeout(chk, 50) : res(); chk(); });
@@ -11220,9 +11223,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkSrcHFit() {
     document.querySelectorAll('#cm-body .post.pk').forEach(card => {
-      if (card.pkBandAnim || card.classList.contains('pk--fxrun')) return;
+      if (card.pkBandAnim || card.classList.contains('pk--fxrun')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 150); return; }   /* حركةٌ جارية: يُعاد بعدها */
       const sp = card.querySelector('.post-ytmain > .pk-split'), ctl = card.querySelector('[data-pkview][data-pkid]');
       if (!sp || !ctl) return;
+      /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
+      if (sp.classList.contains('pk-splh-anim')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
       if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
       pkSrcH[id] = h;
@@ -24054,11 +24059,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.phEl = null;
     const k = b.key || '';
     bkLoadSet(k, 100, 100);
-    if (bkReduce()) { ph.remove(); bkLoadEnd(k); return; }
+    const cv = b.gl && b.gl.el;
+    if (bkReduce()) { ph.remove(); bkLoadEnd(k); if (cv) cv.style.opacity = ''; return; }
     /* تكتمل الحلقةُ، ثمّ تهدأ الصفحاتُ وتذوب الحلقة، ويظهر الغلافُ بتلاشٍ مع رفعةٍ خفيفة (اختيارُ صاحب الموقع) */
     setTimeout(() => {
       ph.classList.add('is-done');
-      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 560, delay: 160, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
+      if (cv) cv.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 160, easing: 'ease-out', fill: 'backwards' }).finished.then(() => { cv.style.opacity = ''; }, () => { cv.style.opacity = ''; });
+      if (cv) cv.style.opacity = '';
       if (b.stage && b.stage.isConnected) b.stage.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 160, easing: 'ease-out' });
     }, 160);
   }
@@ -24940,6 +24948,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
       mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       bk2Layout(b);
+      if (b.phEl) b.gl.el.style.opacity = '0';   /* الكتابُ مخفيٌّ تحت الهيكل حتى يكتمل، ثمّ يظهر بتلاشٍ */
       /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
       const g = b.gl;
       const off = () => { if (b.gl === g) bkPhHide(b); };
