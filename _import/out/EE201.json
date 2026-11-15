@@ -1,0 +1,1471 @@
+{
+  "code": "EE 201",
+  "users": [
+    {
+      "id": "stk-user6171",
+      "name": "حبوبي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/bcef8e/144.png",
+      "email": "user6171@import.stkfupm.invalid",
+      "user": "user6171"
+    },
+    {
+      "id": "stk-math_lover",
+      "name": "math lover",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/math_lover/144/1514_2.png",
+      "email": "math_lover@import.stkfupm.invalid",
+      "user": "math_lover"
+    },
+    {
+      "id": "stk-user7238",
+      "name": "عضو فرش",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/9fc29f/144.png",
+      "email": "user7238@import.stkfupm.invalid",
+      "user": "user7238"
+    },
+    {
+      "id": "stk-_xbx",
+      "name": "(-_-XBX-_-)",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/db5fbb/144.png",
+      "email": "_xbx@import.stkfupm.invalid",
+      "user": "_XBX"
+    },
+    {
+      "id": "stk-faisal91",
+      "name": "FAISAL91",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/ee59a6/144.png",
+      "email": "faisal91@import.stkfupm.invalid",
+      "user": "FAISAL91"
+    },
+    {
+      "id": "stk-jack_sparrow",
+      "name": "jack sparrow",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/jack_sparrow/144/1605_2.png",
+      "email": "jack_sparrow@import.stkfupm.invalid",
+      "user": "jack_sparrow"
+    },
+    {
+      "id": "stk-i.s.w.r.t.w",
+      "name": "I.S.W.R.T.W",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/a8b319/144.png",
+      "email": "i.s.w.r.t.w@import.stkfupm.invalid",
+      "user": "I.S.W.R.T.W"
+    },
+    {
+      "id": "stk-confident",
+      "name": "confident",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/8e8cbc/144.png",
+      "email": "confident@import.stkfupm.invalid",
+      "user": "confident"
+    },
+    {
+      "id": "stk-user8577",
+      "name": "مسمار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8577/144/1828_2.png",
+      "email": "user8577@import.stkfupm.invalid",
+      "user": "user8577"
+    },
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-magbool",
+      "name": "magbool",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/8e7dd6/144.png",
+      "email": "magbool@import.stkfupm.invalid",
+      "user": "magbool"
+    },
+    {
+      "id": "stk-red_black",
+      "name": "Red Black",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/r/e19b73/144.png",
+      "email": "red_black@import.stkfupm.invalid",
+      "user": "Red_Black"
+    },
+    {
+      "id": "stk-abdullah2015",
+      "name": "Abdullah2015",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9bcb4/144.png",
+      "email": "abdullah2015@import.stkfupm.invalid",
+      "user": "Abdullah2015"
+    },
+    {
+      "id": "stk-breaktheunbreakable",
+      "name": "BreakTheUnbreakable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
+      "email": "breaktheunbreakable@import.stkfupm.invalid",
+      "user": "BreakTheUnbreakable"
+    },
+    {
+      "id": "stk-mr.power",
+      "name": "Mr.power",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b9e5f3/144.png",
+      "email": "mr.power@import.stkfupm.invalid",
+      "user": "Mr.power"
+    },
+    {
+      "id": "stk-user11942",
+      "name": "فيصل الفاهد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11942/144/2544_2.png",
+      "email": "user11942@import.stkfupm.invalid",
+      "user": "user11942"
+    },
+    {
+      "id": "stk-user11724",
+      "name": "ركاد الوافي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/8491ac/144.png",
+      "email": "user11724@import.stkfupm.invalid",
+      "user": "user11724"
+    },
+    {
+      "id": "stk-es_engineer",
+      "name": "ES Engineer",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/a9a28c/144.png",
+      "email": "es_engineer@import.stkfupm.invalid",
+      "user": "ES_Engineer"
+    },
+    {
+      "id": "stk-c.k.s",
+      "name": "C.K.S",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/9de0a6/144.png",
+      "email": "c.k.s@import.stkfupm.invalid",
+      "user": "C.K.S"
+    },
+    {
+      "id": "stk-mega_mind",
+      "name": "Mega Mind",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/47e85d/144.png",
+      "email": "mega_mind@import.stkfupm.invalid",
+      "user": "Mega_Mind"
+    },
+    {
+      "id": "stk-majed_sami_alghamdi",
+      "name": "MAJED SAMI ALGHAMDI",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ea666f/144.png",
+      "email": "majed_sami_alghamdi@import.stkfupm.invalid",
+      "user": "MAJED_SAMI_ALGHAMDI"
+    },
+    {
+      "id": "stk-m77a_alkhraimi",
+      "name": "M77a Alkhraimi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/67e7ee/144.png",
+      "email": "m77a_alkhraimi@import.stkfupm.invalid",
+      "user": "M77a_Alkhraimi"
+    },
+    {
+      "id": "stk-_only",
+      "name": ".. ONLY ..",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/_only/144/1329_2.png",
+      "email": "_only@import.stkfupm.invalid",
+      "user": "_ONLY"
+    },
+    {
+      "id": "stk-prince-abod",
+      "name": "prince-abod",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/p/bbe5ce/144.png",
+      "email": "prince-abod@import.stkfupm.invalid",
+      "user": "prince-abod"
+    },
+    {
+      "id": "stk-shmaiz3r",
+      "name": "ShMaiz3R",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/shmaiz3r/144/534_2.png",
+      "email": "shmaiz3r@import.stkfupm.invalid",
+      "user": "ShMaiz3R"
+    },
+    {
+      "id": "stk-eng_mohamed",
+      "name": "Eng. Mohamed",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/6f9a4e/144.png",
+      "email": "eng_mohamed@import.stkfupm.invalid",
+      "user": "Eng_Mohamed"
+    },
+    {
+      "id": "stk-user6737",
+      "name": "م ع ع",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ecb155/144.png",
+      "email": "user6737@import.stkfupm.invalid",
+      "user": "user6737"
+    },
+    {
+      "id": "stk-euler",
+      "name": "Euler",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/euler/144/1252_2.png",
+      "email": "euler@import.stkfupm.invalid",
+      "user": "Euler"
+    },
+    {
+      "id": "stk-a_s_m",
+      "name": "A_S_M",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9bcb4/144.png",
+      "email": "a_s_m@import.stkfupm.invalid",
+      "user": "A_S_M"
+    },
+    {
+      "id": "stk-user7645",
+      "name": "[ايجابي]",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user7645/144/1645_2.png",
+      "email": "user7645@import.stkfupm.invalid",
+      "user": "user7645"
+    },
+    {
+      "id": "stk-_prince",
+      "name": "ღ PrInCe ღ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/b5a626/144.png",
+      "email": "_prince@import.stkfupm.invalid",
+      "user": "_PrInCe"
+    },
+    {
+      "id": "stk-saudi_kfupm",
+      "name": "saudi_kfupm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/c5a1d2/144.png",
+      "email": "saudi_kfupm@import.stkfupm.invalid",
+      "user": "saudi_kfupm"
+    },
+    {
+      "id": "stk-user6130",
+      "name": "موثاوي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6130/144/1287_2.png",
+      "email": "user6130@import.stkfupm.invalid",
+      "user": "user6130"
+    },
+    {
+      "id": "stk-eng.3booodii",
+      "name": "eng.3boOodii",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/eng.3booodii/144/726_2.png",
+      "email": "eng.3booodii@import.stkfupm.invalid",
+      "user": "eng.3boOodii"
+    },
+    {
+      "id": "stk-abdulrahman.h",
+      "name": "Abdulrahman.H",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdulrahman.h/144/856_2.png",
+      "email": "abdulrahman.h@import.stkfupm.invalid",
+      "user": "Abdulrahman.H"
+    },
+    {
+      "id": "stk-ria",
+      "name": "RIA",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ria/144/2564_2.png",
+      "email": "ria@import.stkfupm.invalid",
+      "user": "RIA"
+    },
+    {
+      "id": "stk-ball_9",
+      "name": "ball 9",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/da6949/144.png",
+      "email": "ball_9@import.stkfupm.invalid",
+      "user": "ball_9"
+    },
+    {
+      "id": "stk-user6095",
+      "name": "غريب لكن ذيب",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6095/144/1275_2.png",
+      "email": "user6095@import.stkfupm.invalid",
+      "user": "user6095"
+    },
+    {
+      "id": "stk-dark_side",
+      "name": "Dark_Side",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/dark_side/144/14626_2.png",
+      "email": "dark_side@import.stkfupm.invalid",
+      "user": "Dark_Side"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p989277-ee201",
+      "uid": "stk-user6171",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1329649948000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة اشوفها مادة قريد وكانت سهلة خصوصا لطلاب الكهربا لأنها كلها تعتبر اساسيات للكهرباء ولابها بسييييط ومافيه بريلاب وشغله كان خفافي\n\nاهم شابتر كان 4 لأنه تقريبا راح تستخدمه على طول بعدين في باقي الدروس\nوتقريبا اصعب شيء كان الامبليفاير اللي هو شابتر 5 لأنه لو لعبوا بالاسئلة حقتوا كان اكثر الطلاب جابوا العيد… بس لو فهمت كيف تحلل اي دائرة فيها امبليفاير خلاص بتصير سهلة\n\nكتابي كان electric circuits ninth edition , nilsson riedel PEARSON",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/2",
+          "user": "user6171",
+          "ts": 1329649948000,
+          "tid": 120694,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p993707-ee201",
+      "uid": "stk-math_lover",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1330247261000,
+      "st": "pub",
+      "data": {
+        "desc": "مادة هذي تعتبر من اسهل مواد الكهرباء و حرام واحد ما يأخذ فيها قريد…عموما تتكلم عن الاساسيات و طرق تحليل الدوائر الكهربائية…بصراحة المادة كانت روعة إلا نهاية شابتر 7 كان فيه لحس شوي بالنسبة لي…لاب المادة هذي خفيف مرة و ما يحتاج الى جهد كبير ايضا…بالتوفيق للجميع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/3",
+          "user": "math_lover",
+          "ts": 1330247261000,
+          "tid": 120694,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p993856-ee201",
+      "uid": "stk-user7238",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1330256185000,
+      "st": "pub",
+      "data": {
+        "desc": "المااده من اهم الموااد في الكهرب وايضاً سهله\n\nالكورس عن تحليل الدوائر الكربائيه\nواكثر الطرق في شابتر 4\nثم شابتر 5 عن الامبليفاير سهل\n6و7 عن تحليل الدوائر الي فيها كباستور او اندكتور\n\nوثم شابتر 9 سهل وهو اعاده لشابتر 4 بس بالنسبه لac وفيه كم حاجه زياده\nواخيراً شابتر 10 عن الباور في ac وهذا الشابتر كان بالنسبه لي الاصعب\nبس ممكن لانه كان اخر الدراسه علشان كذه حسيته صعب\n\nاهم حااجه في الماااده البراااكتس\nوالهوموركات الي تجي من القسم في العااده مهمه جداً\nو تجي فيها اسئله اصعب من الاولد اكزام",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/4",
+          "user": "user7238",
+          "ts": 1330256185000,
+          "tid": 120694,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1022769-ee201",
+      "uid": "stk-_xbx",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1334492475000,
+      "st": "pub",
+      "data": {
+        "desc": "أساس الحقيقي لكثير من المواد\nلازم الواحد يحط في باله أقل أقل شي يأخذ b+ أو b لأنو في مواد كثيرة إذا مو كلها تعتمد عليها\n\nأذكر بعد ما خلصت المادة رجعت أذاكرها لأنو في أشياء كنت مش فاهمها",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/6",
+          "user": "_XBX",
+          "ts": 1334492475000,
+          "tid": 120694,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1025096-ee201",
+      "uid": "stk-faisal91",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1334868090000,
+      "st": "pub",
+      "data": {
+        "desc": "ولا ازيد على كلااام الي قبلي\nبس حبيت انبه الطلاب الي اول مرة ياخذونه ترى الكورس ما راح يكون سهل بالنسبة لهم وهم يدرسونه… انا كنت اعتبره صعب نوعا ما (يوم كنت آخذه) ويبيله براكتس قد ما تقدر… بس ميزة الكورس هذا انه مترابط… يعني انا اذكر دخلت الفاينل وما فتحت شي من الماتيريال حق ميجر 1 ومجير 2 لانك خلاص بتتعود عليها وبتمشي معاااك بقية الكورس نفس المواضيع والطرق حقت تحليل الدوائر الكهربائيه\nكل طلاب الكهرب وانا منهم نشوف الكورس هذا سهل وتافه بعد ما تعودنا على الدوائر الكهربائيه … بس الطالب الي يدرس الكورس ما راح يحس بسهولته الا اذا خلصه واخذ كورسات تعتمد عليه",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/7",
+          "user": "FAISAL91",
+          "ts": 1334868090000,
+          "tid": 120694,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1167580-ee201",
+      "uid": "stk-jack_sparrow",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1358857437000,
+      "st": "pub",
+      "data": {
+        "desc": "أنــآ أخذتهآ ترم 121\nالمتيريل كالتآلي :\n\nشـــآبتر 1 و 2 يتكلم عن قوآنين آوم وكريشووف وكذلك البور والاينيرجي…سهل جدا\nشــآبتر 3 يتكلم عن تكنيك غير كيرشوف ل لتحليل الدوآئر الكهربآئية مثـل :\nنود فولتج لو - وميش اناليسيس … الكرنت ديفآيدر والفولتج ديفآيدر رول …وطبعا هالتكنيك بيستمر معك الى نهآية الترم …يجب عليك فهمهآ بكل الحآلات الشــآذه فيهآ …\nشآبتر 4 يتكلم عن ثفنن ونورتن سيركت وكذلك السورس ترانسفورميشن …مهم وكذلك فيه صعوبه قليــله ,لان عندك يمكن 4 تكنيك لايجــآد ثفنن او نورتن سيركت …ولازم تعرف متى تستخدم كل وآحده …لانه في الميجر يمكن يعطونك سيركت مآتقدر تحللهآ الا بطريقة وآحده …\nشآبتر 5 مآ أخذنآه …\nشآبتر 6 يتكلم عن الايندكتورز والكبآسيتورز …وكيفيه ايجآد الايكويفيلنت اندكتنس او كباسيتنس\n\nشآبتر 7 يتكلم عن النآتشرل والستيب ريسبونس في rc , rl بآرآلل أو سيريز سيركتز \"فيرست ديفرنشل ايكويشن \"\nفيه صعـــوبة قليله واذا حفظت القوآنين وفهمت الافكآر الاسآسية بتمشي وبترتآح في هالشــآبتر\n\nشآبتر 8 يتكلم عن النآتشرل والستيب ريسبونس في rlc بآرآلل أو سيريز سيركتز \"سكند ديفرنشل ايكويشن \"\nنفس شآبتر 7 ومستوى الصعوبه اصعب بقليل من 7 بس نفس الكلآم اذا حفظت القوآنين وعرفت كيف تمشي من البدآية بترتآح …\n\nأخر شآيتر 9 يتكلم عن اللي درسنآه في شآيتر 1و2و3و4 بس هنآ بيكون الكرنت او الفولتج سورس على شكل سينوسويدل ويف … طبعا هنــآك خطــوتين تسويهآ في البدآية وخلاص تحل السيركت كأنهآ مسألة من شآبتر 1او2او3او4 …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/11",
+          "user": "jack_sparrow",
+          "ts": 1358857437000,
+          "tid": 120694,
+          "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1319191-ee201",
+      "uid": "stk-i.s.w.r.t.w",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1389723711000,
+      "st": "pub",
+      "data": {
+        "desc": "اخذت الكورس ترم 131\n\nجودة المقرر بشكل عام:\n\nالمقرر مهم لطالب الهندسة الكهربائية ، حيث ان الكورس يعد من اهم الكورسات التى ينبني عليها معظم الكورسات القادمة في التخصص .\n\nالمواضيع التي يغطيها المقرر :\n\nالمقرر يغطي مواضيع اساسية بعضها البسيط (أكثرها) ، وبعضها صعبة (قليلاُ) ، ولكن مع التدرب وحل الامثلة تصبح سهلة جدا .\n\nمن شابتر 1 - 4 ، تعتبر اساسيات مهمة ، وفهمها راح يسهل عليك الكورس كامل ، طبعا هي مو صعبة ولكن لازم تحل امثلة على هذي الـ chapters.\n\nشابتر 5 محذوف وليس في المقرر ( هو جزء من ee 203 وراح يدرس اظن من كتاب اخر)\n\nشابتر 6 سهل ولا فيها صعوبة ، يعطي مقدمة عن الـ Inductors و الـ Capacitor .\nطبعا كل واحد له قانون تجيب الفولت والتيار ، فيه معلومة يجهلها الكثير ممكن تسبب مشاكل ، وهي :\n\nفي الـ Inductor :\nالتيار ما يتغير بشكل سريع المقصود Instantaneously ، بعكس الجهد .\n\nاما في الـ Capacitor :\nالجهد ما يتغير بسرعة ، بعكس التيار .\n\nوهذي المعلومات بعض المدرسين ممكن مايركز عليها ، ولكن مهمة .\n\nشابتر 7 :\nيتكلم عن الـ RC او الـ RL :\n\nRC: دائرة تحتوى على resistor and capacitor\nRL: دائر تحتوى على Inductor and resistor\n\nالشابتر شوي فيه صعوبة ، لذلك لابد من حل الامثلة ، الصعوبة تكمل انا نتعامل مع differential equations وهي شوي معقدة .\n\nفيه ترك يجي في الاسئلة سواً في الكتاب او الميجر ، ان الدائرة معقدة ولا تقدر تشتغل عليها ، عادةً بسبب وجود Independente source الحل سهل جدا ، بسطها بـ Thevinen equavlent circuit (شابتر 4 ) ، خل دكتورك يشرحها لك .\n\nشابتر 8 :\n\nبالنسبة لي اشوفه systematic ، طريقة ثابتة للحل ، انك تعرف نوع الـ response اولا ، وعندك ثلاث انواع ، كل نوع له معادلة ، الى يخلي هذا الشابتر صعب هو انه RLC يعني الثلاثة مع بعض ، Capacitor , Inductor and resistor . والمعدلات ( differential equations ) من الدرجة الثانية .\n\nشابتر 9 :\n\nحلو وسهل ولذيذ ، ولكن لازم تعرف تستخدم الالة ، وتذاكره ، لأن في الفاينل جابوا اسئلة كثيرة عليه وبعض الشباب ما ذاكره ، وإذا كنت الكتركل ، راح تستخدمه في EE213 .\n\nالمذاكرة :\n\nافضل شي الكتاب ، حل اسئلة الـ assesment problems وفي نهايتها راح يقولك حل السؤال الفلاني من نهاية الكتاب ، حله ، وقبل الميجر خذا اول اقزامز ، بالنسبة للفاينال ما فيه اولد اقزامز ، لذلك حل اسئلة اخر الكتاب ، شوف الصعب وحلها ، وشيك المانيوال .\n\nلا تنقل الواجب ابدا ، حلها بنفسك وبعد التصحيح شيك على اخظائك ، واغتنم الساعات المكتبية .\nالكلاس ورك عليه 25٪ لذلك اغتنم كل كويز وحاول انك ما تغيب .\n\nhttps://www.dropbox.com/s/4npelv952lhkvy4/EE-202-131-Syllabus%255b1%255d.docx\n\nبالتوفيق 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/16",
+          "user": "I.S.W.R.T.W",
+          "ts": 1389723711000,
+          "tid": 120694,
+          "pn": 16
+        }
+      }
+    },
+    {
+      "id": "stk-p1363216-ee201",
+      "uid": "stk-confident",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1399678155000,
+      "st": "pub",
+      "data": {
+        "desc": "سمستر ١٣٢\n\nمادة اشوفها سهله على طلاب الالكترك اللي يحبون الدوائر لكن طلاب الاندستريال اشوفهم مستصعبينها جدا\nالكتاب ممتاز جدا في شرح الكونسبت مع الامثلة والسليوشن متوفر في المنتدى\n\nاخذتها مع دكتور بلغنيم وانصح فيه ، شريح ماشالله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/21",
+          "user": "confident",
+          "ts": 1399678155000,
+          "tid": 120694,
+          "pn": 21
+        }
+      }
+    },
+    {
+      "id": "stk-p1382408-ee201",
+      "uid": "stk-user8577",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1403690804000,
+      "st": "pub",
+      "data": {
+        "desc": "ee202\n\nبالنسبة لطلاب الكهرباء فهي مادة جدا اساسية ولازم تفهمها … طلاب التخصصات اللي بياخذوا بعدها ee203 فهم هالكورس بيساعدك في الإلكترونكس … أما الطلاب اللي ما تفتح لهم شي فالله يعينكم المادة يبغى لها شوية جهد.\n\nالمواضيع التي يغطيها المقرر :\n\nببساطة هي مادة تعلمك طرق تحليل الدوائر الكهربائية … مادة ماهي متشعبة بمعنى أن المادة أغلبها تدور حول KVL و KCL في البداية تكون بسيطة بعدين تصعب شوي لما تدخل non-linear elements مثل الكابستر والإندكتر واخر شي جزء الكومبلكس واللي صعوبته في التعامل مع الكومبلكس و التحويل له.\n\nالكتاب المستخدم للمقرر:\nكتاب جيد وواضح\n\nالأسئلة والأمثلة المستخدمة في المقرر:\n\nاسئلة الهومورك حلها اول شي وبعدين ارجع شوف كم سؤال صعب من الكتاب لتأكيد فهمك … بعض اسئلة الكتاب جيدة\n\nمدى فائدته في الناحية التطبيقية:\n\nبالنسبة لطلاب الكهرباء راح تستخدمه في كثير من كورساتك ففهم الأساسيات بيريحك في المستقبل.\n\nكثير من دكاترة القسم بيدرسوها بس في كم دكتور غالبا بينزلوها كل فصل مثل: بالغنيم, الأحمري. دكتور كويس بيريحك في هالكورس بس يبقى كورس مقدور عليه كسلف ستدي.\nغالبا الفاينال أصعب من المياجر.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/22",
+          "user": "user8577",
+          "ts": 1403690804000,
+          "tid": 120694,
+          "pn": 22
+        }
+      }
+    },
+    {
+      "id": "stk-p1403650-ee201",
+      "uid": "stk-user2352",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1412176867000,
+      "st": "pub",
+      "data": {
+        "desc": "هذا الكتاب مبسط ومفيد جدا في شرح محتويات الكورس وفيه مسائل كثيرة محلولة شبيهه بمسائل الهوموركات والمياجر إذا ماكانت نفسها\nhttp://www.stu.edu.vn/uploads/documents/030409-224833.pdf",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/23",
+          "user": "user2352",
+          "ts": 1412176867000,
+          "tid": 120694,
+          "pn": 23
+        }
+      }
+    },
+    {
+      "id": "stk-p1420410-ee201",
+      "uid": "stk-user8581",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1421613493000,
+      "st": "pub",
+      "data": {
+        "desc": "الكورس في السابق كان اسمه EE201 لكن حاليا صار EE202 واللاب EE212 وهم كورسين منفصلين و 212 كوريكويست ل 202\nطبعا اللاب EE212 ياخذون الاندستريال والكنترول و الـ COE فقط\n\nجودة المقرر بشكل عام :\nممتاز وفادني بشكل كبير خصوصا لو كنت كهرب لأنه يغطي الاساسيات في الـ circuit مع شوية اضافات . المادة سهلة خصوصا الشباتر 1-4 اما الشباتر 6 & 7 & 8 مترابطين مع بعض فحاول تفهم وتراجعهم اول بأول اما شابتر 9 فهو سهل راح تبطق الي خذته في الشباتر السابقة اللهم مع complex numbers . المادة ينفع معاها السيلف ستدي لكن اهم شي هي التدرب وحل مسائل كثر ماتقدر خصوصا اسئلة الهوموركات\n\nالمواضيع التي يغطيها المقرر :\nCircuits Variables, Sources, Power and Energy\nOhm’s Law, KCL, KVL, Dependent Sources\nResistive Circuits, Nodal Analysis\nMesh Analysis, Source Transformation\nThevenin and Norton Equivalent Circuits\nMaximum Power Transfer, Superposition\nInductors, Capacitors first & second order\nSinusoidal & Frequency Domain Analysis\n\nالكتاب المستخدم للمقرر & الأسئلة والأمثلة المستخدمة في المقرر :\nممتاز والشرح واضح وبالخطوات وبعد كل جزء من الدرس فيه example و check points\nحاول تخليه مرجعك في المذاكرة من بداية السمستر لأنه احيانا يشرح بعض الأفكار بشكل مطول ولو كنت متوهق قبل الميجر ومضغوط ماراح يفيدك .\n\nإضافات :\n- لو مافهمت شي او طحت عند دكتور شرحه سيئ فاليوتيوب فيه شروحات كثير لأغلب الماتيريال + حوال تـنزل عند دكتور شرحه ممتاز عشان يريحك والأفضل بالتدريج هم : زيدوري , بالغنيم ,الأخضر\n-المياجر نصها رتين و خيارات اما الفاينل مب ثابت في 141 خلوه خيارات بس\nحاول تبدع في الميجر الأول لأن الثاني يكون شوي اصعب من الأول + الكورس افرج\n\nسلايدات واولداقزامات للمياجر + كويزات قديمة\nhttp://faculty.kfupm.edu.sa/EE/adil/teaching.htm\nاولداقزامات للفاينل\nhttps://www.mediafire.com/?3o1juayk2uvcqy5",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/26",
+          "user": "user8581",
+          "ts": 1421613493000,
+          "tid": 120694,
+          "pn": 26
+        }
+      }
+    },
+    {
+      "id": "stk-p1421175-ee201",
+      "uid": "stk-magbool",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1421870894000,
+      "st": "pub",
+      "data": {
+        "desc": "أخذتها في ترم 141 مع د.عبد الله الأحمري\n\nجودة المقرر بشكل عام :\nمقرر سهل وأفكاره مترابطة ومواضيعه قليلة والأساسيات تتكرر على طول .\nيعني ممكن تطلع بقريد جيد من المادة بجهد متوسط .\n\nالمواضيع التي يغطيها المقرر\nشابتر 1-3 : أساسيات الدوائر الكهرائية، تعطيك عناصر الدوائر زي الكرنت والفولتج سورس والرزيستر والتوصيل على التوالي أو التوازي، فهم الكورس يعتمد بشكل كبير على فهم هذي الأساسيات .\nشابتر 4: أطول وأهم شابتر ، يعطيك بعض الطرق لتحليل الدوائر الكهربائية .\nشاتبتر 6 : يعرف عنصرين جديدين هما الكابيستر والاندكتر .\nشابتر 7، 8 : أصعب شابترين في المنهج ، تستخدم فيه دفرنشيال اكويشنز ، فكرة الشابترين هي تحليل الدائر اللي فيها كابيستر واندكتر وعناصر أخرى ( مثل السويتش والرزيستر وغيرها)\nشابتر 9: الدوائر اللي يكون الكرنت أو الفولتج سورس يتمثل بسانسوديال فنكشن وكيفية تحليلها ، شابتر سهل وممتع.\n\nالكتاب المستخدم للمقرر\nممتاز جدا ويحتوي على أمثلة كثيرة .\n\nمدى فائدته في الناحية التطبيقية\nمهم جدا وأساسي لطلاب الالكتريك .\n\nإضافات:\n- طلاب الاندستريال يكرهوا دا الكورس كثيرا .\n- حاول تحل أكبر قدر ممكن من الأسئلة .\n- ميجر 1 سهل جدا وممكن تجيب فيه درجة عالية بشوية جهد.\n- أغلب دكاترة المادة في فصل 141 كانوا سفاحين في التصحيح .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/27",
+          "user": "magbool",
+          "ts": 1421870894000,
+          "tid": 120694,
+          "pn": 27
+        }
+      }
+    },
+    {
+      "id": "stk-p1483212-ee201",
+      "uid": "stk-red_black",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1510351716000,
+      "st": "pub",
+      "data": {
+        "desc": "اعذروني على قسوة الكلام، لكن من يقول عن هذه المادة “سهلة” يكذب على نفسه و على غيره. إلا أن يكون من القلة العباقرة فهذا شيء آخر! مادة بصراحة لا ترحم مثقال ذرة. إما أن تملأ دفتراً تلو دفتر بحلك للأسئلة و تمخر عباب الإنترنت باحثاً عن حلول أسئلة يأتونك بها “من تحت الأرض” لم تر مثلها لا في شرح الدرس و لا في شرح الكتاب، و إما أن “تنزف” منك الدرجات كما ينزف الدم من الذبيحة!",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/32",
+          "user": "Red_Black",
+          "ts": 1510351716000,
+          "tid": 120694,
+          "pn": 32
+        }
+      }
+    },
+    {
+      "id": "stk-p1485325-ee201",
+      "uid": "stk-abdullah2015",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1514740771000,
+      "st": "pub",
+      "data": {
+        "desc": "أخذت الكورس في ترم 171 مع الدكتور سليم ابرير.\n\nجودة المقرر بشكل عام:\nممتازة.\n\nالمواضيع التي يغطيها المقرر:\nغطوها الأخوة اللي قبلي فما فيه شيء أزيده…\n\nزبدة الكلام إن الكورس يتكلم عن طرق تحليل الدوائر الكهربائية بشكل عام، يعني كيف توجد الكرنت والفولتاج في كل فرع في الدائرة الكهربائية.\nما فيه شيء تطبيقي عملي في هذا الكورس، لأنه كله طرق تحليل وحسابات.\n\nالكتاب المستخدم للمقرر:\nhttps://www.gulf-up.com/12-2017/1514741044451.jpg\n\nالأسئلة والأمثلة المستخدمة في المقرر:\nالكتاب فيه عدد كبير جدًا من الأسئلة، لكنه لا يغني عن الأولد إقزام، يعني أكيد الكتاب مفيد جدًا في ترسيخ المفهوم، لكن للمذاكرة للاختبارات ما يكفي، لأن في اختباراتهم يركزون على أشياء أسئلة الكتاب ما تركز عليها.\n\nمدى فائدته في الناحية التطبيقية:\nكورس تحليل الدوائر الكهربائية يعتبر اللبنة الأساسية لكثير من مواد التخصص، فلازم تفهم هذا الكورس بشكل كويس جدًا لو كنت طالب هندسة كهربائية، أما إذا كنت من طلاب الهندسة الصناعية أو أحد التخصصات الثانية فراح يعطيك فكرة عن الدوائر الكهربائية بشكل عام.\n\nإضافات:\n- فيه شباب يقولون إن الكورس سهل، فعلًا أنا الآن خلصت الكورس وأشوف المواضيع اللي فيه سهلة، لكن في بداية السمستر ما كنت أشوفها كذا، ففي البداية طبيعي إذا حسيت إنك ضايع ومش عارف من وين تبدأ في تحليل الدوائر، لكن ما هي إلا مسألة وقت حتى تتعود.\n- الهومووركات مهمة جدًا في هذا الكورس، إذا فهمت الهومووركات إن شاء الله أمورك تمام، فحاول إنك تحلها بنفسك، أو إذا نقلت تنقل بفهم.\n- هذه القناة فادتني كثيرًا، وتمنيت إني عرفت عن وجودها في بداية السمستر، لكن للأسف ما دريت عنها إلا قبل الفاينل بثلاثة أيام:\nFundamentals of electric circuits\nعمومًا النت مليء بالشروحات للمنهج، لكن اللي يميز هذه القناة إنه ماشي على تسلسل الكتاب وشرحه واضح وبالعربي.\n\nبالتوفيق للجميع 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/34",
+          "user": "Abdullah2015",
+          "ts": 1514740771000,
+          "tid": 120694,
+          "pn": 34
+        }
+      }
+    },
+    {
+      "id": "stk-p1492316-ee201",
+      "uid": "stk-breaktheunbreakable",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1526273751000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة تحتاج حل أسئلة ومتابعة وشغل. القسم غريب، يحط لك أسئلة صعبة والوقت قصير والتصحيح سيئ. المهم يبيلك تنتبه لأن الدرجات تطير بالسهولة، فالك الدرجات العالية.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/37",
+          "user": "BreakTheUnbreakable",
+          "ts": 1526273751000,
+          "tid": 120694,
+          "pn": 37
+        }
+      }
+    },
+    {
+      "id": "stk-p1518603-ee201",
+      "uid": "stk-mr.power",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1577893001000,
+      "st": "pub",
+      "data": {
+        "desc": "بسم الله الرحمن الرحيم …\n\nالمادة حقيقة هي بس أول ٤ شباتر ، بعد ذلك تصبح مادة عقل حقيقة …\n\nأعني بذلك ، أول أربع شباتر هي الأساس ، يعني الكوخ عشان ينبني يحتاج أربع أعمدة ، لو عمود واحد أنكسر ، طاح الكوخ بأكمله ، فالمقصد هنا الطرق والكونسبت حقت أول أربع شباتر هي الأعمدة للكورس ، وبقية الشباتر هي التضبيطات اللي داخل الكوخ .\n\nيعني كل اللي تحتاجه عشان تفهم وتحل مسائل شابتر ٦ و٧ و٨ و٩ ، هو كونسبت وطرق أول أربع شباتر .\n\n-\n\nالمادة ليست صعبة وبل بالعكس سهل جداً الحصول فيها على قريد عالي وعالي جداً كذلك ، ولكن هالشيء ماراح يجي بس بالمذاكرة وفهم الكونسبت ، لا لا ، أنا كمثال ، دخلت الميجرين والفاينلات ، وكلهم كنت فاهم الكونسبت ١٠٠٪؜ ، وكذلك بالميجر الأول والثاني حليت أولد اقزام ، ومع ذلك درجاتي جداً عادية وكنت أواجه صعوبة عالية في اسئلة الاختبارات .\n\nبشكل عام ، المادة صعوبتها مو بالكونسبت وطرق الحل ، المادة جداً سهلة من ناحية الكونسبت ومن ناحية الحل ، لانه الماث اللي فيها جداً بسيط وأشياء أساسية ، على قولتهم سمبل ماث ، ولكن الاشكالية في الاختبارات ، مهما حليت أولد اقزام وكنت فاهم الكونسبت ١٠٠٪؜ ، المراهنة أنك تبدع بالاختبار صعبة جداً ، لانه الاسئلة اللي تجي تكون مختلفة عن أفكار الاولد اقزام ، وهالشيء بسبب أن السيركت فيها أفكار كثيرة ولعب كثير يعني اللعب والخدع جداً كبير .\n\nكملخص ، اختبارات المادة ماتحتاج منك أنك تكون فاهم الكونسبت وحال اولد اقزام والواجب ، لا ، تحتاج منك بالاضافة إلى هالاشياء ، أنك تشغل مخك ، يعني بالبداية لمن تشوف السيركت تفكر فيها بمخك أولاً ، وبعدين الخطوة الثانية هو استخدامك للكونسبت حق المادة .\n\nيعني كل سؤال بالاختبار يكون تسلسله هكذا …\n\nالعقل والتفكير السريع - استخدام الكونسبت - حسابات وسمبل ماث - الجواب .\n\nوفقكم الله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/38",
+          "user": "Mr.power",
+          "ts": 1577893001000,
+          "tid": 120694,
+          "pn": 38
+        }
+      }
+    },
+    {
+      "id": "stk-p1524047-ee201",
+      "uid": "stk-user11942",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1595250345000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة ككونسبت سهلة والماث الي تعتمد عليه سمبل، لكن التطبيقات وأسئلة القسم فيها صعوبة وتعقيد، بالإضافة إلى أن الوقت لا يتناسب مع طبيعة الأسئلة؛ فلازم تطور مهارة الحل السريع. الكورس هذا يحتاج شغل وأمثلة الكتاب ممتازة.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/39",
+          "user": "user11942",
+          "ts": 1595250345000,
+          "tid": 120694,
+          "pn": 39
+        }
+      }
+    },
+    {
+      "id": "stk-p1526516-ee201",
+      "uid": "stk-user11724",
+      "code": "EE 201",
+      "sec": "info",
+      "ts": 1604555311000,
+      "st": "pub",
+      "data": {
+        "desc": "EE202-Term201\n\nالمادة يحتاج لها تدريب كثيف خصوصا في البداية عشان تفهم كيف تحلل الدوائر المعقدة بعدين، وفي نفس الوقت تصير واثق في نفسك، ممكن شيء بسيط يتغير في الدائرة الكهربائية وحلها يتغير فيحتاج تفكر بمنطق وايش اسهل طريقة حل ممكن تحل فيه، اخذتها في الاونلاين ووضعها كويس غير انها تفتح مواد كثيرة فلازم تاخذها، ذحين رجعوا تسيميتها القديمة في الخطة الجديدة وصار اسمها EE201، عموما طلاب باخشوين مضغوطين اكثر ولكن افرجهم اعلى في الميجر.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-201-electric-circuits-i/120694/40",
+          "user": "user11724",
+          "ts": 1604555311000,
+          "tid": 120694,
+          "pn": 40
+        }
+      }
+    },
+    {
+      "id": "stk-doc-es_engineer-ee201",
+      "uid": "stk-es_engineer",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1290903558000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98371",
+            "n": "Dr. A Zidouri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "المادة ee 201\n\nالتحضير : كل محاضرة\n\nطريقة الشرح : حل تمارين وامثلة على السبورة …\n\nالكويزات : بسيطة جدا من افكار اسئلة الكتاب\n\nالتصحيح : افضل دكتور في التصحيح لهذي المادة !!! تاخذ قريد ما تحلم فيه\nاهم شي لا تترك ولا شي فاضي\n\nالقريد النهائي: A+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p739882-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-zidouri/98371/2",
+              "user": "ES_Engineer",
+              "ts": 1290903558000,
+              "tid": 98371,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-c.k.s-ee201",
+      "uid": "stk-c.k.s",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1292135299000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98371",
+            "n": "Dr. A Zidouri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "المادة : ee 201\nالتحضير بشكل يومي\n\nالكويزات من النوت حقه مع تغيير شبه لا يذكر\n\nالتصحيح اشوفه يعطيك اكثر من حقك بشيء بسيط\n\nB",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p742312-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-zidouri/98371/4",
+              "user": "C.K.S",
+              "ts": 1292135299000,
+              "tid": 98371,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-mega_mind-ee201",
+      "uid": "stk-mega_mind",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1301812655000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98371",
+            "n": "Dr. A Zidouri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا درست معه ee201 term 101\n\nالتحضير :كل كلاس يحضر بس أتوقع تحضير شكلي فقط (بالنسبة له)\nطريقة الشرح : يشرح غالباً على السبوره ويستخدم السلايد فقط لتوضيح الدوائر الكهربائية. شرحة حلو جدا في الماده وهي سهله الماده أصلاً.\nالكويزات : كل شابتر عليه كويز من الهوموورك أو الكتاب\nالمياجر:كومن\nالفاينلات :كومن\nالقريد النهائي: أعطية B\nالصوت:,واضح\nإضافات\nالدكتور مره طيب وأخلاقة جدا عالية ويحب اللي يشتغلون معه .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p829676-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-zidouri/98371/7",
+              "user": "Mega_Mind",
+              "ts": 1301812655000,
+              "tid": 98371,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-majed_sami_alghamdi-ee201",
+      "uid": "stk-majed_sami_alghamdi",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1684833217000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98371",
+            "n": "Dr. A Zidouri",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201 - T222\nالتحضير :\nفي أول خمس أسابع كان الدكتور يحضر تقريبا كل يوم ومعظم الأحيان يكون نهاية الكلاس عن طريق السيريال نمبر بعدها بدأ الدكتور في التساهل في التحضير لكن في حال رأى غياب كثيريحضر.\nالدكتور لا يحب الـتأخير، ولا يحب الذي يحضر ثم يذهب إلى دورة المياه أو الكافتريا، وقد ينفعل الدكتور إذا تكرر هذا الشيء منك.\nطبعا الحضور والمشاركة عليهم 4% من الكلاس ورك و الدكتور أعطى غيابين مجانية لكل طالب.\n\nطريقة الشرح :\nشرح الدكتور متوسط، وهذا الأمر يختلف من طالب لطالب لأني للأمانة لم اكن أعتمد عليه لتوفر الكثير من المصادر لكن كنت أحاول الاستفادة من شرح الدكتور قدر المستطاع.\nالدكتور لديه مميزات كثيرة أحداها أنه يعطي الطلاب فرصة في الكلاس خاصة قبل المياجر لحل أسئلتهم على السبورة بالتفصيل سواء كانت من الاولد اكزام أو أسئلة الكتاب.\n\nالكويزات : متوسطة إلى سهلة.\nكانت أسئلة الكويزات تقريبا نفس أسئلة الكتاب مع بعض التغير ومرات قليلة كان يجيب من الاولد أكزام.\n\nالمياجر: كومن\nMajor 1 كان المواضيع بسيطة وسهلة وغالبا يكون الافريج مرتفع لذلك لا تفرط فيه\nMajor 2 المتيريال يبدأ يصعب مقارنة بمتيريال الميجر الأول وغالبا الافريج راح يكون أقل من ميجر 1\nالفاينلات : كومن\nباقي ما اختبرت لكن على كلام الدكتور أن الفاينل يعتمد على الافريج يحاولون يخلون الافريج 70-75%\n\nالقريد النهائي: B\nالصوت: منخفض قليلا و لغة الدكتور ممتازة وواضحة\nإضافات:\n- الدكتور أخلاقة عليه.\n- الدكتور لا يدقق في التصحيح سواء في الهومورك وكذلك في المياجر و الكويزات وراح يعطيك أكثر من حقك.\n- الكورس هذا بالذات تحتاج تتدرب كثير فقط لأن الكوسبت سهل جدا.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536708-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/a-zidouri/98371/37",
+              "user": "MAJED_SAMI_ALGHAMDI",
+              "ts": 1684833217000,
+              "tid": 98371,
+              "pn": 37
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-m77a_alkhraimi-ee201",
+      "uid": "stk-m77a_alkhraimi",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1312016388000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98373",
+            "n": "Dr. Abdullah Al-Ahmari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درست عند الاحمري ee201 وكان الكورس سهل ومفهوم وميزت الاحمري يكتب نوت ويغير طرق بعض القوانين عن الكتاب عشان يسهلها بس لازم تحدد من البدايه من وين بتذاكر عشان ماتلخبط بين الطرق حقت الاحمري والطرق الي فالكتاب. الشرح ممتاز والتحضير يوميا في بداية الكلاس و الدكتور جدا متعاون مع الطلاب والتصحيح حلو يعني تاخذ حقك وزياده والمشكلة عند الاحمري انه يعطي ثلاث كوزات بس في الترم والكوز عليه درجات كثير. في النهايه انصح به وبشده",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p877383-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdullah-al-ahmari/98373/13",
+              "user": "M77a_Alkhraimi",
+              "ts": 1312016388000,
+              "tid": 98373,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_only-ee201",
+      "uid": "stk-_only",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1315719881000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98373",
+            "n": "Dr. Abdullah Al-Ahmari",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أخذت عنده ee201 في فصل 091 … بداية السمستر كان شرحه مقبول إلى الميجر الأول، بعدها بدأ يسرع في شرح المتيريال لأنه كان متأخر … تصحيحيه في المياجر سيئ جداً … التحضير كل كلاس و ينادي على الأشخاص واحد واحد … الصراحة لا أنصح به أبداً … تقييمي النهائي له c",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p898800-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdullah-al-ahmari/98373/15",
+              "user": "_ONLY",
+              "ts": 1315719881000,
+              "tid": 98373,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-prince-abod-ee201",
+      "uid": "stk-prince-abod",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1296459437000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98377",
+            "n": "Dr. S. Al-Ahmadi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "لاب ee 201 - ترم 101\n\nمدرس جديد ، تخرج من الجامعة في التسعينات وكمل الدراسة في أمريكا وكندا ورجع يدرس هنا في أول سمستر له …\nاللاب كان معاه إبدااااااااااااااع ، لا بري لاب ولا ريبورتات ولا واجبات و كويزين طول السمستر كل واحد أتفه من الثاني …\nكل اللي تسويه ، تسوي التجربة ويشيك على الارقام ، يعطيك ورقة وتجاوب على الاسئلة نهاية كل لاب وتسلمه الورقة وتمشي …\nأعطانا فاينال متوسط ، كان فيه كذا سؤال يعتمد على فهمك للكتشر …\nالدرجات في النهاية سوا فيها فارييشن جيد بين 12 و 18 من 20 …\n\nطلابه في الليكتشر يشتكون من صوته الواطي وضعف ايصاله للمعلومة ، لكني وجدته انسان فاهم مرة من خلال اكثر من حاجة شرحها لنا في اللاب ما كنا فاهمينها في الليكتشر …\n\nبصراحة انصح به في اللاب …",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p779438-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/s-al-ahmadi/98377/7",
+              "user": "prince-abod",
+              "ts": 1296459437000,
+              "tid": 98377,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-shmaiz3r-ee201",
+      "uid": "stk-shmaiz3r",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1297605310000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98377",
+            "n": "Dr. S. Al-Ahmadi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أخذت معه 101 لكتشر ee201\n\nالتحضير : بالاسم\nطريقة الشرح : يحل أسئلة الشرح اللي بالكتاب\nالكويزات : سهلة إلى متوسطة (6كويزات)\nالمياجر:------كومن\nالفاينلات : -----كومن\nالصوت: واضح ولكن بطيء جدًا****القريد النهائيD\nإضافات : يشرح للسبورة ونادرًا ما يواجهنا وهو يتكلم. الأفرج كان عنده معدوم مقارنة بالسكاشن الثانية. الكلاس ورك يعطيك حقك بالمللي. خلوق جدًا ويرحب بالأسئلة أثناء الشرح لكن يعيبه البطئ وبالتالي يصير الفصل نايم.\n\nلا أنصح به أبداً وإذا كان فيه شيء إيجابي هو أخلاقه العالية فقط.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p788642-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/s-al-ahmadi/98377/9",
+              "user": "ShMaiz3R",
+              "ts": 1297605310000,
+              "tid": 98377,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-eng_mohamed-ee201",
+      "uid": "stk-eng_mohamed",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1328189642000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98387",
+            "n": "Dr. Mesbah Wessam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE 201 - 111\n\nالتحضير :\nآخر كل كلاس ينادي على الأسماء\n\nطريقة الشرح :\nسلايدات مع كتابة ملاحظات على السبورة مثل اشتقاق القوانين وحل الأمثلة\nالشرح واضح\n\nالكويزات :\nمن متوسطة إلى صعبة\n\nالمياجر:\nالفاينلات :\nكومون\n\nالقريد النهائي:\nA\n\nالصوت:\nواضح\n\nإضافات :\nالحمد لله أنا كنت مرتاح معاه في المادة ، يصحح على المانيوال ، لكن ميجر 2 والفاينل كان بطريقة الmultiple choice ، يعني يا تاخد عشرة أو صفر في السؤال …\nفي النهاية أنصح به",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p978552-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mesbah-wessam/98387/14",
+              "user": "Eng_Mohamed",
+              "ts": 1328189642000,
+              "tid": 98387,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6737-ee201",
+      "uid": "stk-user6737",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1338468885000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98387",
+            "n": "Dr. Mesbah Wessam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Ee 201 - 112\n\nالتحضير :\nآخر كل كلاس ينادي على الأسماء\n\nطريقة الشرح :\nيفتح سلايد ويشرح ويفصل فيه على السبورة ويخليك تفهم كيفية اشتقاق القوانين ويفصل تفصيل رائع وكافي ووافي للكونسبت ويحل أمثلة عن أهم الأمثلة و يشرحها حبة حبة و يربط الكورس باستخدماته في الواقع\n\nالكويزات :\nمتوسطة للمذاكر طبعاً\n\nالمياجر:\nكومون\nالفاينلات :\nكومون\n\nالقريد النهائي:\nA+\n\nالصوت:\nواضح جداً\n\nإضافات :\nأنا حاذف سمستر وعايد الكورس ودرست المادة عند دكتورين آخرين بصراحة د. وسام الأفضل بكثييير و لو أحصله في أي كورس ما أتردد وطبعاً يحذف أسوء كوز وبروجكته كان سهل جداً جداً و يرفع لك الكلاس وورك تقريباً 4 درجات\nالتصحيح مثله مثل بقية الدكاترة لا هو التوب ولا هو السيء أنصح به وبقوة وطبعاً يذكرك بالأشياء اللي فاتت قبل البدء في حل التمارين",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1048540-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mesbah-wessam/98387/16",
+              "user": "user6737",
+              "ts": 1338468885000,
+              "tid": 98387,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-euler-ee201",
+      "uid": "stk-euler",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1344388783000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f118660",
+            "n": "Dr. Naveed Iqbal",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم :\n\nEE201 Lab****التحضير : يحضر كل لاب , تتأخر مايقولك شي 🌹\n\nطريقة الشرح : يشرح سريع ع السبورة , وتبدون تشتغلون حسب اللي مكتوب باللاب , 👍\n\nالكويزات : كويزات سهلة , بعضها نظري وبعضها عملي , 🌺\n\nالقريد النهائي: B+\n\nالصوت: موب واضح بس تفهم عليه أحيانا ,\n\nإضافات : المدرس حبوب ومستعد يشرح لك اكثر من مرة وماعنده مشكلة , وتصحيحه للريبورتات بطل = الافرج صار مرة عالي , = عطانا فاينال صعب( نظري ) ع حسب تقييم الطلاب , لأن يعتمد ع فهمك للمادة ,و(عملي) وكان سهل , 🌹\n\nباختصار , لايفوتك , 👍",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1077543-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/naveed-iqbal/118660/10",
+              "user": "Euler",
+              "ts": 1344388783000,
+              "tid": 118660,
+              "pn": 10
+            }
+          },
+          {
+            "id": "stk-dr-f98387",
+            "n": "Dr. Mesbah Wessam",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201 _ Lec\n\n**التحضير :**آخر الكلاس ينادي على الأسماء ومايسمح لك تدخل لو تأخرت 10 دقايق , 🌹\n\nطريقة الشرح : من السلايدات ويشتق القانون ع السبورة ويحل لنا كم مسألة من السلايدات او من الكتاب , 🌺\n\nالكويزات : كانت سهلة نوعا ما , بس الوقت ضيق يعني يبغالك ماتضيع وقت بالتفكير , 👍 ياخذ احسن 5 كويزات طبعن , 🤴\n\n**المياجر:**كومون\n**الفاينلات :**كومون\n\n**القريد النهائي:**A+ بجدارة , 🤴\n\n**الصوت:**واضح جداً\n\n**إضافات :**تصحيحه بالمياجر + قريد ولا أحلى , غير كذا أسلوبه ف توصيل المعلومة , ويحاول يجيب تطبيقات للدرس عمليا , 🙂\nأيضا البروجكت كان سهل , 🌹\n\n= لايفوتك , 👍",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1077604-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/mesbah-wessam/98387/17",
+              "user": "Euler",
+              "ts": 1344395288000,
+              "tid": 98387,
+              "pn": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a_s_m-ee201",
+      "uid": "stk-a_s_m",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1336654924000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98492",
+            "n": "Dr. Adil Balghonaim",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "لابأس فيه للـ ee201\nتصحيحه زي كل المدرسين على السلوشن.\nميزته خفيف دم وكوزاته سهله.\nمع اني طالب سستم بس أحس شرحه كويس وافضل من غيره.\nفي النهاية احب انصحكم بالأونلاين كورس لايفوتك.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1035389-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/adil-balghonaim/98492/19",
+              "user": "A_S_M",
+              "ts": 1336654924000,
+              "tid": 98492,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user7645-ee201",
+      "uid": "stk-user7645",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1321544841000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98522",
+            "n": "Dr. Husain Al-Dawish",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "مادة ee201\n\nاعتقد انه الدكتور الوحيد اللي مايعطي DN لإني اشوف طلاب مايحضرون ابداً للكلاسات ودايما قليل بالكلاس .\n\nشرحه بالنسبة لي ممل واحسه يشرح بدون نفس ، كويزاته سهله وسؤال مباشر واحد .\n\nانصح انك تنزل معاه خصوصاً وان المادة سهله الفهم وتقدر تذاكر لحالك من السلايدات وتفهم او من الكتاب .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p932207-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/husain-al-dawish/98522/10",
+              "user": "user7645",
+              "ts": 1321544841000,
+              "tid": 98522,
+              "pn": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-_prince-ee201",
+      "uid": "stk-_prince",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1325796733000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98522",
+            "n": "Dr. Husain Al-Dawish",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ee 201\nترم 111\n\nالتحضير :\nطريقة الشرح : على السبورة …والنوت حقه محترم لو كنت تتابع معاه اول باول …يعطيك الزبدة بالمختصر المفيد يعني كل درس يحل عليه مثال ولا اثنين …النوت حقه تقريبا كان مغطي مالا يقل عن 80% من افكار الكتاب\nالكويزات : احنا اخدنا اربعة كوزات لكن حذف واحد لان يقول اغلب الطلاب جايبين 0 والباقي سهالات (وكان ما يتأخر في ترجيعها هي والمياجر !!)\nالمياجر: المياجر سهالات…وتصحيح المدرس حلو يعني مايدقق كثير\nالفاينلات :تعرف وش معنى كلمة صلخ …اعظم منها (السمسترات اللي راحت الفاينل كان 6-8 اسئلة واحنا 12 سؤال كل واحد يقول الزود عندي )ونظامهم الغبي اختيارات لكن اذا اخترت صح بدون حل صفر واذا حليت وغلطت في اخر رقم هم صفر << نظام غبي\nالقريد النهائي: B+\nالصوت:,واضح والدكتور طبيعته بااارد جدا\nإضافات :الله يوفقه اعطى مجموعة من الشباب فل في الكلاس وورك وكثير اخذو فوق 17…وحسبته كانت على الكوزات والهوموركات وبعدين زاد كل الطلاب",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p959843-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/husain-al-dawish/98522/11",
+              "user": "_PrInCe",
+              "ts": 1325796733000,
+              "tid": 98522,
+              "pn": 11
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-saudi_kfupm-ee201",
+      "uid": "stk-saudi_kfupm",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1325974236000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98522",
+            "n": "Dr. Husain Al-Dawish",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "ee201\n\nصراحة أستغرب من الطلاب اللي يمدحونه … المدرس سيء لأبعد درجة … الشرح من غير نفس …شايف نفسه على الطلاب … دائما هو صح حتى لو كان غلطان … صراحة واحد من أسوء المدرسين اللي نزلت عندهم … إستنزاف للوقت بشكل غير طبيعي … مرات كلاس كامل نحل فيه مسئلة وحده فقطططط !! أغلب الكلاسات يحط مثال على السبورة ويحله وبعدها يجيب سؤال ثاني معقد أكثر منه شوي ويقول يلا كل واحد يحل … ويشيك على كل طالب يشوف وش سوى … إذا ما راجعت محاضرته نصيحة لا تحضر المحاضرة اللي بعدها\n\nالنقطة الإيجابية الوحيدة فيه إنه ما يحضر … فأضطريت إني أسحب على آخر اسبوعين حالي حال أغلب الطلاب معه\n\nكوزاته قليلة جداا ومرات تكون مفاجئة وبدون ما يقولك قبلها … الظاهر هذا السمستر 4 كويزات أخذنا فقط وحذف أول واحد وصاروا 3 إذا ما خابني الظن فلازم تكون مركز بشكل كبير في الكويزات وتذاكر لها زين\n\nإذا كنت محتار بينه وبين مدرس آخر … أختر المدرس الآخر بدون تفكير لأني ما أتوقع فيه مدرس أسوء من كذا\n\nالتقييم النهائي: F-\n\nولا أحد يظن إني ما أخذت قريد حلو عشان كذا أسبه … بالعكس درجاتي ولله الحمد عالي العال وهذا بفضل الله ثم بفضل الدروس اللي يحطونها على الويب سي تي",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p961414-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/husain-al-dawish/98522/13",
+              "user": "saudi_kfupm",
+              "ts": 1325974236000,
+              "tid": 98522,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6130-ee201",
+      "uid": "stk-user6130",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1307916938000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98523",
+            "n": "Dr. Jameel Bakhshwain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بسم الله \" ee 201 \" سمستر 102 :\n\n1) الشرح : الرجال شريح بس عيبه إنه يحل أمثلة الأون لاين كورس بس و هي أمثلة سهلة جداً يعني عكس أسئلة المياجر و أسئلة الكتاب بس عموماً شرحه بطل.\n\n2) التحضير : يحضر غالباً بالأسماء و إذا في كويز يحضر عن طريقه بس إذا نزلت عنده انتبه ثم انتبه من الغياب لأن نهاية السمستر بيخصم على كل غياب درجة أما إذا كانت غيابتك اثنين أو أقل راح يعطيك زيادة واحدة في المية 🤠.\n\n3) الكوزات : عطانا 8 كوزات أخذ أحسن 6 أو 5 و الله إني ناسي بس كان مستواها متوسط .\n\nإضافات :\n\n* الدكتور باخشوين إذا اشتغلت معه صح يعني تبدع في الكوزات و تحل الهوموركات و ما تغيب ما راح يقصر معك نهائياً.\n\n* بالنسبة لتصحيحه أشوف عادي يعني يعطيك حقك لا أكثر و لا أقل.\n\nالقريد النهائي : +B .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p851703-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameel-bakhshwain/98523/15",
+              "user": "user6130",
+              "ts": 1307916938000,
+              "tid": 98523,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-eng.3booodii-ee201",
+      "uid": "stk-eng.3booodii",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1307962607000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98523",
+            "n": "Dr. Jameel Bakhshwain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE 201\n\nبنود التقييم :\n\nالتحضير : يحضر بداية المحاضرة غالباً وبعض الأحيان فـ النهاية ولما يكون فيه كويز يحضر به ( لو حضر وإنت منت موجود خلاص غايب إلا لو فاز الإتحاد شي ثاني 🤠 )\nطريقة الشرح :يشرح من الأون لاين ليكشرز … شرح ممتاز ورائع ويحل أمثلة السلايدز بس\nالكويزات : متوسطة ماهي صعبة\nالمياجر: كومن\nالفاينلات : كومن\nالقريد النهائي: A\nالصوت: واضح جداً ماشالله << شباب الشعراوي جمبنا يقولو صوته عندنا واصل ماشالله 🤠\nإضافات : دكتور محترم وأخلاق ومخلص جداً في عمله وتدريسه عكس كثير دكاترة … إلي ما عجبني فيه هو التصحيح … لكن إلي أسمعه إن أغلب دكاترة الكهربا زي كذا …\nبالنسبة للغياب … أنا نهاية السمستر عرفت إنه يخصم ع كل غياب درجة ! مدري المادة إسلامي ولا بي اي !",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p852230-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameel-bakhshwain/98523/16",
+              "user": "eng.3boOodii",
+              "ts": 1307962607000,
+              "tid": 98523,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abdulrahman.h-ee201",
+      "uid": "stk-abdulrahman.h",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1353787821000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98523",
+            "n": "Dr. Jameel Bakhshwain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Ee201 - ee205\n\nأخذت مع الدكتور 201 وطلعت معه بأسوأ قريد لي في الجامعة … قلت بآخذ معه 205 عشان أوريه مستواي الحقيقي … طلعت بنفس القريد ><\"\n\nعيبه تصحيحه الشديد ، زي ما قالوا الشباب يا إما فل أو صفر و يحب أسئلة الخيارات و فل ان ذا بوكس لهذا السبب .\nهو فاهم جداً وشرحه زين لكن يغلب عليه حس الماث ، ويعتمد على الأونلاين لكتشر .",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1123230-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameel-bakhshwain/98523/23",
+              "user": "Abdulrahman.H",
+              "ts": 1353787821000,
+              "tid": 98523,
+              "pn": 23
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ria-ee201",
+      "uid": "stk-ria",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1648348224000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98523",
+            "n": "Dr. Jameel Bakhshwain",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201-212\nالتحضير : ينادي بالاسامي واذا تاخرت ولو دقيقة خلاص متاخر (وللامانه شرح جبار)\nطريقة الشرح : يشرح من نوتات الحسون ويحلها بالايباد حقه\nالكويزات : هذا اللي يعيب الدكتور كويزات هذا الترم تجيب المرض نظامه وشو؟ ي فل ي صفر مافي بينهم يعطيك كويز علي البلاك بورد ي يكون اختيارات ي يكون اكتب الاجابة المشكلة انه اذا الجواب كان 8.1 وانت حاط 8.099 تاخذ صفر وكل كويز الافرج يكون ي 5 ي 6 بسبب الاصفار وهذا غير اذا ما صارخ عليك بنص الكويز\nالمياجر: كومن\nالفاينلات :كومن\nالقريد النهائي: C (يمشي الحال)\nالصوت: واضح\nإضافات : الدكتور شرحه حلو لكن لو تروح له تساله عن شيء منت فاهم بيصارخ عليك ومشكلته ينسى واجد فا اذا عندك عذر طبي ولا شيء بتراجعه فيه انشبله لانه يسنى.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1534010-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/jameel-bakhshwain/98523/36",
+              "user": "RIA",
+              "ts": 1648348224000,
+              "tid": 98523,
+              "pn": 36
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ball_9-ee201",
+      "uid": "stk-ball_9",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1322492060000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f115351",
+            "n": "Dr. Ali T. Al-Awami",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201 term111\nالدكتور روووعة وأخلاق\nيحضر تقريبا في الأسبوع مرة\nالكويزات يا إما صعبة مرة أو سهلة مرة\nالمياجر كومن\nالصوت واضح والأكسنت جيدة\nمتساهل في التصحيح",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p938809-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ali-t-al-awami/115351/5",
+              "user": "ball_9",
+              "ts": 1322492060000,
+              "tid": 115351,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user6095-ee201",
+      "uid": "stk-user6095",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1327803881000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f115351",
+            "n": "Dr. Ali T. Al-Awami",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201 term111\n\nالتحضير : في بدآية الترم … كآن يحضر بـ ذكر الأسمآء . أحيآنآ مآ يحضر … إلاآ إذآ كآن فيه غيآب وآضح\n\nطريقة الشرح : يشرح الكونسبت … و يحل إكزآمبلز\n\nالكويزات : متوسّطة … و أحيآنآ مآئلة للصعوبة …\n\nالمياجر: كومن\n\nالفاينلات : كومن\n\nالقريد النهائي: A+\n\nالصوت: وآضح … و الأكسنت ممتازة\n\nإضافات : المدرس يُنصح به … فآهم و شريح",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p975605-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ali-t-al-awami/115351/7",
+              "user": "user6095",
+              "ts": 1327803881000,
+              "tid": 115351,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-dark_side-ee201",
+      "uid": "stk-dark_side",
+      "code": "EE 201",
+      "sec": "doc",
+      "ts": 1672112763000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f176830",
+            "n": "Dr. Ali Arshad Nasir",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "EE201-T221\n\nدكتور ممتاز الصراحه\n\nطريقة الشرح: دكتور علي ناصر طريقته يكتب لك القوانين حقت الدرس بالسبوره ويوريك اشتقاقها بعدين يستمر في حل المسائل، الدكتور يركز جدا ب جانب حل المسائل و انك تطلع من اللكتشر وانت تعرف شلون تحل و يجيب لك افكار رهيبه و صعبه، لكن مشكلته انه مايطري ابد جانب ربط اللي يسويه ب الحياه الواقعيه وهذا شيء الصراحه مهم بالنسبه لي لاني حاليا قاعد اتعامل مع السيركت كأنه ماث مادري وش فايدة الشي الفلاني او الطريقه الفلانيه\n\nالكويزات: اختبرنا ٥ كويزات و اشوف مستواها مابين المتوسط المرتفع إلى الصعب … هو يحاول يوزن الافرج حق الكلاس اذا شافه مرتفع جلدنا ب كويز واذا شافه منخفض سهل علينا الكويز و على هذا الحال .\n\nالمياجر: كومن\n\nالفاينلات: كومن\n\nالتصحيح: الصراحه تصحيحه ممتاز ب اسئلة الرتن كم مره اجيب حل نهائي غلط بالكويز و يعطيني درجه كامله او حولها عشاني حليت ب طريقه صحيحه بس الارقام ماطلعت معي… بخصوص تصحيح اسئلة الرتن ب المياجر و الفاينل الصراحه الدكتور عطاني حقي و زود و اذا حسيت درجتك فيها شيء غلط رح راجعه .يستقبلك ب صدر رحب و يعطيك ورقة الفاينل و بيراجع معك وفي حال وضح فيه سوء فهم بالتصحيخ راح يعدل و يزودك بإذن الله\n\nالصوت: عادي بس اذا بتجلس ورى ممكن ماتسمعه بوضوح\n\nالقريد النهائي : A+ ولو فيه زود يستاهلها\n\nإضافات: الدكتور حبيب جدا جدا تتعب و انت تقول حبيب و لا توفيه حقه، ومتعاون بخصوص تأجيل الكويزات و الواجبات مره\n\nالتحضير: يحضر ب بداية الكلاس ب منادات الاسماء … و يعطيك غيابين مجانيه وبعدها يبدأ يخصم",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1536065-ee201",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ali-arshad-nasir/176830/9",
+              "user": "Dark_Side",
+              "ts": 1672112763000,
+              "tid": 176830,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "code": "PHYS 305",
+  "users": [
+    {
+      "id": "stk-hamza_alnasser",
+      "name": "Hamza Alnasser",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hamza_alnasser/144/2186_2.png",
+      "email": "hamza_alnasser@import.stkfupm.invalid",
+      "user": "Hamza_Alnasser"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-hamza_alnasser-phys305",
+      "uid": "stk-hamza_alnasser",
+      "code": "PHYS 305",
+      "sec": "doc",
+      "ts": 1545486093000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f179108",
+            "n": "Dr. Nikolaos Konstantinidis",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "Term 181 Phys305\n\nبنود التقييم :\n\nالتحضير : ورقة في نص الكلاس واكتب اسمك فيها.\nطريقة الشرح : يتبع الكتاب ما يطلع عنه. يكتب على السبورة ويحل بعض المسائل. شرحه تقليدي يعني ما في حماس. يوقف بين فترة وفترة حتى يشوف إذا أحد مو فاهم حتى يسأل.\nالكويزات : لا يوجد. في واجبات: كانت سهلة، كانت مُقاربة للأسئلة اللي يحلها في الكلاس. ميزته أنه يكتب الأسئلة بنفسه يعني ما يعطيك واجب من الكتاب، يقول لأن الكتاب حلوله موجودة فما راح تتعلموا إذا عطيتكم منه.\nالمياجر: بنفس مستوى الواجبات.\nالفاينلات : كان طويل وأصعب من المياجر.\nالقريد النهائي: B+\nالصوت: Clear and good English.\nإضافات : This is for a higher course. Things might change with 101 or 102.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1503915-phys305",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/nikolaos-konstantinidis/179108/5",
+              "user": "Hamza_Alnasser",
+              "ts": 1545486093000,
+              "tid": 179108,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
