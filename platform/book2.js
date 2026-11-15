@@ -265,8 +265,8 @@ export function createBook2(THREE, host, cfg) {
   }
   setTheme(cfg.theme);
   /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
-  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.6, -0.7, 3.6).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  const BLOB = new THREE.Vector3(-0.05, 0.03, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.4, 1.3, 3.6).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const BLOB = new THREE.Vector3(-0.06, -0.045, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
   /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
   const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
   /* قلبُه المعتم بمقاس الكتاب نفسِه (‎176/256 × 1.45‎) والتلاشي حوله إلى الخارج — كان أغلبُه تحت الكتاب فلا يُرى منه إلّا حافّةٌ باهتة */
