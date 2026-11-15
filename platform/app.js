@@ -24065,10 +24065,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* تكتمل الحلقةُ، ثمّ تهدأ الصفحاتُ وتذوب الحلقة، ويظهر الغلافُ بتلاشٍ مع رفعةٍ خفيفة (اختيارُ صاحب الموقع) */
     setTimeout(() => {
       ph.classList.add('is-done');
-      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
-      if (cv) cv.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 160, easing: 'ease-out', fill: 'backwards' }).finished.then(() => { cv.style.opacity = ''; }, () => { cv.style.opacity = ''; });
+      /* الهيكلُ يذوب أوّلًا، ثمّ يظهر الغلافُ بعده على مكانٍ صافٍ — لا يتراكبان فيبدو على الغلاف تدرّجٌ يمشي */
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-out', fill: 'forwards' }).finished.then(() => { ph.remove(); bkLoadEnd(k); }, () => { ph.remove(); bkLoadEnd(k); });
+      if (cv) cv.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 560, delay: 200, easing: 'ease-out', fill: 'backwards' }).finished.then(() => { cv.style.opacity = ''; }, () => { cv.style.opacity = ''; });
       if (cv) cv.style.opacity = '';
-      if (b.stage && b.stage.isConnected) b.stage.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 160, easing: 'ease-out' });
+      if (b.stage && b.stage.isConnected) b.stage.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 200, easing: 'ease-out' });
     }, 160);
   }
   /* ===== هيكلُ التحميل «صفحاتٌ تتقلّب» (اختيارُ صاحب الموقع) =====
