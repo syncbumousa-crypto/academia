@@ -9527,6 +9527,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const now = pkActOf(id);
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
+    /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
+    if (post.classList.contains('pk--edit') && post.classList.contains('pk--ftnone') === !!now) {
+      if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(pkActSet.t); pkActSet.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
+      post.classList.toggle('pk--ftnone', !now);
+    }
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
@@ -23187,7 +23192,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
     const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
-    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
+    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && !pkActOf(p.id) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}
