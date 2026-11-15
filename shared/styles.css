@@ -18410,16 +18410,15 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__g::before { border-color: rgba(1
 html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__g b { color: rgba(255, 255, 255, .5); }
 .cx-hlt.is-new .cx-hlt__g b { color: #2c5e65; }
 html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__g b { color: #a0cdd2; }
-.cx-hlt__cnt { display: flex; align-items: center; gap: 6px; opacity: var(--o, 0); }
-.cx-hlt__cnt:empty { display: none; }
-.cx-hlt__cnt .k { display: inline-flex; align-items: center; gap: 2px; font-size: 11px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
-.cx-hlt__cnt svg { width: 10px; height: 10px; }
 .cx-hltool { display: flex; align-items: center; gap: 1px; padding: 2px; border-radius: 999px; background: rgba(20, 40, 46, .07); opacity: var(--o, 0); margin-inline-end: 4px; direction: rtl; }
 html[data-theme="dark"] .cx-hltool { background: rgba(255, 255, 255, .09); }
-.cx-hltool button { display: grid; place-items: center; width: 14px; height: 14px; padding: 0; border: 0; border-radius: 999px; background: none; color: inherit; opacity: .5; cursor: pointer;
-  transition: width .2s cubic-bezier(.2, .8, .2, 1), height .2s cubic-bezier(.2, .8, .2, 1), background .2s, opacity .2s; }
-.cx-hltool button svg { width: 8px; height: 8px; }
-.cx-hltool button.is-on { width: 22px; height: 18px; background: #2c5e65; color: #fff; opacity: 1; }
+.cx-hltool button { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 16px; height: 16px; padding: 0 4px; border: 0; border-radius: 999px;
+  background: none; color: inherit; opacity: .55; cursor: pointer; font: 700 10px/1 inherit; font-variant-numeric: tabular-nums;
+  transition: height .2s cubic-bezier(.2, .8, .2, 1), padding .2s cubic-bezier(.2, .8, .2, 1), background .2s, opacity .2s; }
+.cx-hltool button svg { width: 8px; height: 8px; flex: none; }
+.cx-hltool button i { font-style: normal; }
+.cx-hltool button i:empty { display: none; }
+.cx-hltool button.is-on { height: 20px; padding: 0 7px; background: #2c5e65; color: #fff; opacity: 1; font-size: 11px; }
 .cx-hltool button.is-on svg { width: 10px; height: 10px; }
 @media (prefers-reduced-motion: reduce) { .cx-hltool button { transition: none; } }
 /* وفي الجدول: رقمُ الصفّ المفتوح مطوَّقٌ — هنا يدخل التظليلُ القادم */

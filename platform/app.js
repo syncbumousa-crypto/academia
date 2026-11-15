@@ -24318,16 +24318,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (el._sig !== sig) {
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
-        const k = (r.t ? `<span class="k">${HL_MARK}${r.t}</span>` : '') + (r.b ? `<span class="k">${HL_BOX}${r.b}</span>` : '');
-        /* عرضُ الكبسولة حين تنفتح: الحلقةُ والعدُّ ومفتاحُ الأداة — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
-        r.ow = 4 + HL_R.OD + 8 + (r.t ? 14 + String(r.t).length * 7 : 0) + (r.b ? 14 + String(r.b).length * 7 : 0) + (r.t && r.b ? 6 : 0) + (k ? 8 : 0) + 46;
+        /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
+        r.ow = 4 + HL_R.OD + 8 + 50 + (r.t ? 4 + String(r.t).length * 7 : 0) + (r.b ? 4 + String(r.b).length * 7 : 0) + 4;
         return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `<span class="cx-hlt__cap"></span><span class="cx-hlt__g"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}><b>${r.nw ? '+' : r.n}</b></span><span class="cx-hlt__cnt">${k}</span></button>`;
+          + `<span class="cx-hlt__cap"></span><span class="cx-hlt__g"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}><b>${r.nw ? '+' : r.n}</b></span></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
-      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" title="${esc(T().hlToolT || '')}">${HL_MARK}</button>`
-        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" title="${esc(T().hlToolBox || '')}">${HL_BOX}</button>`;
+      /* المفتاحُ نفسُه يحمل العدد (طلبُ صاحب الموقع): زرُّ القلم فيه عددُ تظليلات النصّ، وزرُّ المربّع عددُ المربّعات — فلا تتكرّر الأيقونتان */
+      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i></button>`
+        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i></button>`;
       el._op = -1;
     }
     if (!el._bound) hlRailBind(el);
@@ -24368,6 +24368,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (op !== el._op) {
       if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
+      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
     /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
