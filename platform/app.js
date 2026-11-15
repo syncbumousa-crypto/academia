@@ -6839,7 +6839,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -10538,7 +10538,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   /* الكتابُ يُرسم من جديد بعد أن يقف الخطّ (لا في كلّ إطار) */
-  const pkSplBook = id => { const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
+  const pkSplBook = id => { requestAnimationFrame(() => pkSrcHFit()); const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
   document.addEventListener('pointerdown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h || e.button !== 0) return;
@@ -11194,8 +11194,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           pkLnkPlace();   /* والعمودُ تحرّك: نافذةُ «اربط» تلحق زرَّها */
         },
       });
+      /* نسبةُ الصفحة تُحفظ مع المصدر فتُرسم القامةُ صحيحةً من أوّل رسمةٍ قادمة، وتُضبط الآن على الملفّ الفعليّ */
+      if (meta && pkSrcBk[id] && meta.ar !== pkSrcBk[id].ar) { meta.ar = pkSrcBk[id].ar; save(); }
+      requestAnimationFrame(() => pkSrcHFit());
     });
   }
+  /* ===== قامةُ المساحات في الضيّقة من صفحة المصدر (طلبُ صاحب الموقع) =====
+     تُحسب من عرض مساحة المصدر ونسبةِ صفحة الكتاب (A4 قبل أن يُضاف كتاب): فالمساهمةُ الفارغةُ بطولها المناسب من أوّلها ولا تمتدّ
+     حين يُضاف الكتاب، ثمّ تتقلّص أو تتّسع بنعومة إن كان الملفّ أقصرَ أو أطول — وتُحفظ لكلّ مساهمة فتُرسم بها من أوّل إطار */
+  const pkSrcH = {};
+  function pkSrcHCalc(card) {
+    if (card.classList.contains('pk--max')) return null;
+    const sp = card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || sp.classList.contains('pk-split--none')) return null;
+    const src = sp.querySelector(':scope > .pk-src'), ctl = card.querySelector('[data-pkview][data-pkid]');
+    if (!src || !ctl) return null;
+    const W = src.clientWidth; if (!W) return null;
+    const sid = pkSrcCurOf(ctl.dataset.pkid), b = pkSrcBk[sid], meta = pkSrcMeta(sid);
+    const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!b.one : bk2OneGet();
+    const view = src.querySelector('.pk-src__view');
+    const over = view ? sp.getBoundingClientRect().height - view.getBoundingClientRect().height : 70;
+    const h = (W - 24) / (one ? 1 : 2) / ar * 1.08 + Math.max(40, over);
+    return Math.round(Math.max(440, Math.min(innerHeight * .86, h)));
+  }
+  function pkSrcHFit() {
+    document.querySelectorAll('#cm-body .post.pk').forEach(card => {
+      if (card.pkBandAnim || card.classList.contains('pk--fxrun')) return;
+      const sp = card.querySelector('.post-ytmain > .pk-split'), ctl = card.querySelector('[data-pkview][data-pkid]');
+      if (!sp || !ctl) return;
+      const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
+      if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
+      pkSrcH[id] = h;
+      if (Math.abs(h - cur) < 3) return;
+      if (cur && !bkReduce()) { sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT); sp.pkHT = setTimeout(() => sp.classList.remove('pk-splh-anim'), 420); }
+      sp.style.setProperty('--pk-h', h + 'px');
+    });
+  }
+  window.addEventListener('resize', () => { clearTimeout(pkSrcHFit.t); pkSrcHFit.t = setTimeout(pkSrcHFit, 150); });
   const pkEsSeen = new Set();
   const pkEsOpen = (id, deck) => {
     if (!pkLab() || pkEsSeen.has(id)) return;
@@ -11258,7 +11293,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
     const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
-    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}">`
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
   }
@@ -24585,6 +24620,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkModeSync();
     const all = new Set([b0, ...Object.values(pkSrcBk)]);
     all.forEach(b => { if (b && b.gl !== undefined && !!b.one !== one && b.view && b.view.isConnected) bk2Switch(b, one); });
+    requestAnimationFrame(() => pkSrcHFit());   /* صفحةٌ واحدةٌ أطولُ من صفحتين: القامةُ تلحق */
   }
   function bk2Switch(b, one) {
     const pg = b.closed ? null : Math.max(1, b.pos);

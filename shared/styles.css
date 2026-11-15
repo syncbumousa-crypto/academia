@@ -18442,3 +18442,7 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .cx-hltool button svg { width: 9px; height: 9px; }
 .cx-hltool__ul { bottom: -4px; height: 8px; }
 .hl-pal { border-radius: 0 0 12px 12px; padding: 7px 9px 6px; }
+/* ===== قامةُ المساحات من صفحة المصدر في الضيّقة (‎--pk-h‎ يضعها ‎pkSrcHFit‎) — والمساهمةُ الفارغةُ بها من أوّلها ===== */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"]:not(.pk-split--none) { height: var(--pk-h); flex: none; }
+#cm-body .pk--frame.pk--blank:has(.post-ytmain > .pk-split[style*="--pk-h"]) { height: auto; }
+.pk-split.pk-splh-anim { transition: height .38s cubic-bezier(.2, .8, .2, 1); }
