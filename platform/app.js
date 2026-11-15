@@ -1197,7 +1197,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1668,7 +1668,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -24113,8 +24113,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
   const HL_COL = { y: ['rgb(246, 214, 120)', '#f3d27a', '#3a2c0b'], g: ['rgb(169, 220, 176)', '#9fd6a8', '#173d21'],
     b: ['rgb(168, 205, 238)', '#9cc6ec', '#123150'], p: ['rgb(244, 182, 200)', '#f2aec2', '#4d1426'] };
-  let hlColNow = (() => { try { const v = localStorage.getItem('ac.hl.col'); return HL_COL[v] ? v : 'y'; } catch (e) { return 'y'; } })();
-  function hlColSet(c) { if (!HL_COL[c]) return; hlColNow = c; try { localStorage.setItem('ac.hl.col', c); } catch (e) {} }
+  /* لكلّ أداةٍ حبرُها (طلبُ صاحب الموقع): القلمُ لونٌ والمربّعُ لون — يُختاران من خطّ الأداة في الشريط ويُحفظان في المتصفّح */
+  const hlColLoad = (k, d) => { try { const v = localStorage.getItem(k); return HL_COL[v] ? v : d; } catch (e) { return d; } };
+  const hlCol = { t: hlColLoad('ac.hl.col', 'y'), box: hlColLoad('ac.hl.colb', 'b') };
+  function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
   /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
   function hlDots(m, W, Hh, rows) {
     const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
@@ -24128,7 +24130,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sel = hlSelOn(b, k);
     if (sel) {
       const c0 = cv.getContext('2d'), W0 = cv.width, H0 = cv.height;
-      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_COL[hlColNow][0];
+      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_COL[hlCol.t][0];
       for (const o of sel.bars) c0.fillRect(o.l * W0, o.t * H0, (o.r - o.l) * W0, (o.b - o.t) * H0);
       c0.globalCompositeOperation = 'source-over';
     }
@@ -24153,7 +24155,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* في طبقة النصّ: دوائرُ الصفحة أزرارٌ شفّافة (تُشغّل صفَّها)، وإطارُ التظليل المختار */
   function hlSpots(b, d) {
-    d.querySelectorAll('.bk-hlnum, .bk-hlcur, .bk-hlstrip').forEach(x => x.remove());
+    d.querySelectorAll('.bk-hlnum, .bk-hlcur').forEach(x => x.remove());
     const k = +d.dataset.k, ms = hlMarksOn(b, k); if (!ms.length) return;
     const W = 1000, Hh = 1000 / b.ar, rows = hlRowMap();
     for (const m of ms) {
@@ -24170,29 +24172,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           Object.assign(e.style, { left: l * 100 + '%', width: (r - l) * 100 + '%', top: t * 100 + '%', height: (bb - t) * 100 + '%' });
           d.insertBefore(e, d.firstChild);
         }
-        if (hlCan(d)) d.appendChild(hlStrip(m));
       }
     }
-  }
-  /* ===== شريطُ اللون عند التظليل (ROADMAP-HL ق٣): الألوانُ الأربعة وبعدها فاصلٌ وزرُّ الحذف — تحت نهاية التظليل المختار،
-     فيظهر بعد التظليل مباشرةً ومتى نُقر تظليلٌ قديم؛ ويختفي باختيارٍ آخر أو نقرٍ بعيد أو Esc ===== */
-  const HL_TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 7V4.5h4V7M6.5 7l1 13h9l1-13M10.2 10.5v6.5M13.8 10.5v6.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  function hlStrip(m) {
-    const e = document.createElement('div'); e.className = 'bk-hlstrip'; e.setAttribute('role', 'toolbar');
-    const last = m.bars.reduce((a, o) => (o[3] > a[3] ? o : a), m.bars[0]), first = m.bars.reduce((a, o) => (o[2] < a[2] ? o : a), m.bars[0]);
-    const x = Math.min(.88, Math.max(.12, m.kind === 'box' ? (last[0] + last[1]) / 2 : m.d === 'r' ? last[0] : last[1]));   /* المربّعُ: تحت وسطه */
-    const below = last[3] < .9;
-    Object.assign(e.style, { left: x * 100 + '%', top: (below ? last[3] : first[2]) * 100 + '%' });
-    if (!below) e.classList.add('is-up');
-    e.innerHTML = Object.keys(HL_COL).map(c => `<button type="button" class="bk-hlstrip__c${m.col === c ? ' is-on' : ''}" data-hlcol="${c}" style="--c:${HL_COL[c][1]}" aria-label="${c}"></button>`).join('')
-      + `<i class="bk-hlstrip__sep"></i><button type="button" class="bk-hlstrip__del" data-hldel title="${esc(T().hlDel || 'حذف')}" aria-label="${esc(T().hlDel || 'حذف')}">${HL_TRASH}</button>`;
-    return e;
-  }
-  function hlRecolor(id, mid, c) {
-    const m = hlMark(id, mid); if (!m || !HL_COL[c]) return;
-    hlColSet(c);
-    if (m.col === c) return;
-    m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id);
   }
   const bkOfEl = el => Object.values(pkSrcBk).find(b => b && b.stage && b.stage.contains(el)) || null;
   const bkOfSid = sid => Object.values(pkSrcBk).find(b => b && b.gl && hlSidOf(b) === sid) || null;
@@ -24236,12 +24217,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let row = cid || hlOpenCid(id) || null, grew = false;
     if (row === 'new') { row = hlNewRow(id); grew = !!row; }
     if (row) { hlOpen[id] = row; hlOpenUsr[id] = true; }
-    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlColNow, kind,
+    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlCol[kind === 'box' ? 'box' : 't'], kind,
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
     save();
     bkTLClear();
-    hlRefresh(b, sel.k); hlSetCur(id, m.id);
+    hlRefresh(b, sel.k);   /* بلا اختيارٍ بعد التظليل ولا شريطِ لون (طلبُ صاحب الموقع) */
     if (grew) hlRowsChanged();
     return true;
   }
@@ -24343,8 +24324,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
       /* المفتاحُ نفسُه يحمل العدد (طلبُ صاحب الموقع): زرُّ القلم فيه عددُ تظليلات النصّ، وزرُّ المربّع عددُ المربّعات — فلا تتكرّر الأيقونتان */
-      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i></button>`
-        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i></button>`;
+      /* وتحت الأداة المختارة خطٌّ بلون حبرها: يُنقر فتنفتح ألوانُها (طلبُ صاحب الموقع) */
+      const ul = k => `<span class="cx-hltool__ul" data-hlpal="${k}" role="button" tabindex="-1" title="${esc(T().hlInk || '')}" style="--tc:var(--ink-${hlCol[k]})"></span>`;
+      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i>${ul('t')}</button>`
+        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i>${ul('box')}</button>`;
       el._op = -1;
     }
     if (!el._bound) hlRailBind(el);
@@ -24463,6 +24446,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.preventDefault(); e.stopPropagation(); go(to);
     });
     el.addEventListener('click', e => {
+      const pl = e.target.closest('[data-hlpal]');
+      if (pl && pl.closest('button.is-on')) { e.preventDefault(); e.stopPropagation(); hlPalOpen(el, pl); return; }
       const tb = e.target.closest('.cx-hltool button'); if (!tb) return;
       e.preventDefault(); e.stopPropagation();
       const id = el.dataset.pkid; if (tb.disabled) return;
@@ -24473,6 +24458,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlToolSync(id) {
     Object.values(pkSrcBk).forEach(b => { if (b && b.view && pkSrcBase(hlSidOf(b)) === id) b.view.classList.toggle('hl-box', hlTool[id] === 'box'); });
   }
+  /* ===== ألوانُ حبر الأداة: قائمةٌ صغيرةٌ تطفو فوق خطّها، تُغلق باختيارٍ أو نقرٍ خارجها أو Esc ===== */
+  function hlPalClose() { const P = document.getElementById('hl-pal'); if (P) P.remove(); }
+  function hlPalOpen(el, ul) {
+    hlPalClose();
+    const k = ul.dataset.hlpal, P = document.createElement('div');
+    P.id = 'hl-pal'; P.className = 'hl-pal'; P.setAttribute('role', 'menu');
+    P.innerHTML = Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${hlCol[k] === c}" class="${hlCol[k] === c ? 'is-on' : ''}" data-hlpc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('');
+    if (document.documentElement.getAttribute('data-theme') === 'dark') P.classList.add('is-dark');
+    document.body.appendChild(P);
+    const r = ul.getBoundingClientRect(), w = P.offsetWidth, h = P.offsetHeight;
+    P.style.left = Math.round(Math.min(innerWidth - w - 8, Math.max(8, r.left + r.width / 2 - w / 2))) + 'px';
+    P.style.top = Math.round(r.top - h - 12) + 'px';
+    P.addEventListener('click', e => {
+      const b = e.target.closest('[data-hlpc]'); if (!b) return;
+      e.stopPropagation(); hlColSet(k, b.dataset.hlpc); hlPalClose();
+      el._sig = ''; hlRailBuild(el);
+    });
+  }
+  window.addEventListener('pointerdown', e => { const P = document.getElementById('hl-pal'); if (P && !P.contains(e.target) && !(e.target.closest && e.target.closest('[data-hlpal]'))) hlPalClose(); }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('hl-pal')) { hlPalClose(); e.stopImmediatePropagation(); } }, true);
+  window.addEventListener('scroll', hlPalClose, true);
   /* يُفتح صفٌّ بعينه (دائرةُ رقمه في الصفحة أو رقمُه في الجدول): ينزلق لسانُه إلى الوسط */
   function hlRailGo(id, cid) {
     hlOpen[id] = cid; hlOpenUsr[id] = true;
@@ -24506,13 +24512,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.preventDefault(); e.stopPropagation();
       if (!pkSplitOn(id)) return;
       pkLnkGo(id + m.s, m.k); hlSetCur(id, m.id); hlRailGo(id, cid);
-      return;
-    }
-    const sb = e.target.closest && e.target.closest('#cm-body .bk-hlstrip button');
-    if (sb) {
-      e.preventDefault(); e.stopPropagation();
-      if (!hlCur) return;
-      if (sb.hasAttribute('data-hldel')) hlDelete(hlCur.id, hlCur.m); else hlRecolor(hlCur.id, hlCur.m, sb.dataset.hlcol);
       return;
     }
     const t = e.target.closest && e.target.closest('[data-hlcid]');
@@ -24774,11 +24773,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkBoxRect = (a, z) => ({ l: Math.min(a[0], z[0]), r: Math.max(a[0], z[0]), t: Math.min(a[1], z[1]), b: Math.max(a[1], z[1]) });
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d || e.button !== 0 || e.target.closest('.bk-hlnum, .bk-hlstrip')) return;
+    if (!d || e.button !== 0 || e.target.closest('.bk-hlnum')) return;
     const c = hlCan(d); if (!c || hlTool[c.id] !== 'box' || !hlRows(c.id)) return;
     e.preventDefault(); e.stopImmediatePropagation();
     bkTLClear();
-    const el = document.createElement('i'); el.className = 'bk-boxsel'; el.style.setProperty('--c', HL_COL[hlColNow][1]); d.appendChild(el);
+    const el = document.createElement('i'); el.className = 'bk-boxsel'; el.style.setProperty('--c', HL_COL[hlCol.box][1]); d.appendChild(el);
     bkBoxDrag = { d, a: bkBoxPt(d, e), el, id: e.pointerId };
     try { d.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
@@ -24801,7 +24800,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
     if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
-    if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum, .bk-hlstrip')) return;
+    if (e.button !== 0 || !d._rows || e.target.closest('.bk-hlnum')) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
     bkTLClear();
