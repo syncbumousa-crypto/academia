@@ -1197,7 +1197,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'اضغط ثم ظلّل — ما تظلّله يدخل {n}', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1668,7 +1668,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Press, then highlight — highlights go to {n}', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -4350,6 +4350,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxRowPub = null, cxRowFresh = null;   // ‏‎cxRowFresh‎: اتّسعت للتوّ ولم تُفتح فيها مساحةٌ بعد — فلا تُطوى لخلوّها                     // والمفتوحةُ في موضعها بإطارٍ (رأسٌ وذيل) من مفاتيح المساحات — بين أخواتها
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
   let cxFtDn = false;
+  let cxFtGone = false;   /* التحرير: نُقر خارج المساحات الثلاث فاختفى التذييلُ كلُّه (ومكانُه محجوز) حتى تُلمس إحداها */
   let cxFull = false;                      // والمكبَّرةُ تملأ الشاشةَ كلَّها (درجةٌ ثالثة) — حالُ نظرة                      // وقاعُها مطويٌّ تحت خطّه السفليّ (مرآةُ الرأس) — حالُ نظرة
 
   function showCmTab(t) {
@@ -6838,7 +6839,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { hlAfterRender(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -9476,7 +9477,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (a === 'book') {
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
-      if (!pub) return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>` + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActMode() + pkActHl(id) + '<span class="cx-srcsep"></span>' + `<div class="chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}">${pkSrcHd(id, true)}${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
+      /* ثلاثُ خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح، ويسارًا المصدرُ وطريقةُ القراءة وتحتهما «ربط الصفحات» مصغّرة */
+      /* (طلبُ صاحب الموقع) المصدرُ في الزاوية البعيدة يمينًا و«ربطُ الصفحات» في قائمة نقاطه، ووضعُ الكتاب في الزاوية البعيدة يسارًا،
+         وفي الوسط سطرُ التصفّح فوق رزمة الصفوف */
+      if (!pub) return `<div class="cx-ftr2 chtools cx-srctools">${pkSrcHd(id, true)}${pkSrcMeta(id) && pkLnk.open[id] ? pkLnkHTML(id) : ''}</div>`
+        + `<div class="cx-ftc"><div class="cx-ftc__nav">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}<span class="cx-actind" data-actind>${esc(ind)}</span>${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>${pkActHl(id)}</div>`
+        + `<div class="cx-ftl2">${pkActMode()}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
         + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
@@ -9524,6 +9530,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const now = pkActOf(id);
     post.classList.remove('pk-act--book', 'pk-act--mid', 'pk-act--bank');
     if (now) post.classList.add('pk-act--' + now);
+    /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
+    if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
@@ -9545,10 +9553,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const anims = pkFxSlot(post, html0, .5, D);
     pkBandRun(post, tracks, D, null, { anims });
   }
+  /* إخفاءُ تذييل التحرير كلِّه وإظهارُه في مكانه المحجوز — بحركة */
+  function cxFtHide(post, on) {
+    if (!post.classList.contains('pk--edit')) return;
+    cxFtGone = on && !!pkActOf((post.querySelector('[data-pkview][data-pkid]') || {}).dataset?.pkid);
+    if (post.classList.contains('pk--ftnone') === on) return;
+    if (on) { const ae = document.activeElement; if (ae && ae.closest && ae.closest('.vt-foot')) ae.blur(); }
+    if (!bkReduce()) { post.classList.add('pk--ftanim'); clearTimeout(cxFtHide.t); cxFtHide.t = setTimeout(() => post.classList.remove('pk--ftanim'), 300); }
+    post.classList.toggle('pk--ftnone', on);
+  }
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
     const pane = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
     if (!pane) return;
+    /* أيقونةُ المساحة في رأسها تُغلقها — فلا يُعدّ نقرُها لمسًا لها (كانت تسطع نشِطةً ثمّ تنغلق) */
+    if (e.target.closest('.pk-blkh__ic, .pk-blkh__x')) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
     if (!ctl) return;
     /* لمسُ أحد المصادر يجعله الملموسَ: إطارُه، وأدواتُه في التذييل */
@@ -9561,6 +9580,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t && pkActOf(id) === 'book') t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
     }
     pkActSet(post, ctl.dataset.pkid, pane.classList.contains('pk-src') ? 'book' : pane.classList.contains('pk-bank') ? 'bank' : 'mid');
+    /* ولمسُ مساحةٍ يبسط التذييلَ المطويّ فتعود أزرارُه — وفي التحرير يُظهره كلَّه إن كان مخفيًّا */
+    if (cxFtDn && e.type === 'pointerdown') cxFtSet(false, true);
+    if (e.type === 'pointerdown' && post.classList.contains('pk--ftnone')) cxFtHide(post, false);
   };
   /* على النافذة قبل المستند: محرّراتُ الجوف (اللوحُ والجدولُ والشجرة) قد توقف الحدثَ في طور الالتقاء على المستند */
   window.addEventListener('pointerdown', pkActFrom, true);
@@ -10473,24 +10495,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
   const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
   /* ===== ROADMAP-SPLITTER: خطٌّ يُمسك بين الكتاب وجاره =====
-     حصّةُ الكتاب من عرض القسمة (بعد الفُرجة) متغيّرٌ ‎--spl‎، افتراضُه ‎.383‎ (ما كانت عليه: ‎.62 : 1‎).
-     والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR‎).
-     الحدّان: الكتابُ ‎≥ 240px‎ والجارُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
-  const PK_SPL_DEF = 0.383, PK_SPL_DEF3 = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
-  /* الحصّتان: المحفوظةُ لكلّ مساهمة، وإلّا الافتراض — ‎.383‎ لمنطقتين و‎.3‎ لكلٍّ من الطرفين في ثلاث */
-  const pkSplGet = (key, id, three) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : three ? PK_SPL_DEF3 : PK_SPL_DEF; };
-  const pkSplR = id => pkSplGet('pkSplR', id, pkBankOn(id));
-  const pkSqbR = id => pkSplGet('pkSqbR', id, !!pkSplitOn(id));
+     حصّةُ كلِّ طرفٍ (الكتابُ ‎--spl‎ والبنكُ ‎--sqb‎) كسرٌ من عرض القسمة إلّا فُرجةً واحدة — أساسٌ واحدٌ لا يتبدّل بعدد المساحات،
+     فلا يتغيّر عرضُ طرفٍ إذا فُتح الطرفُ الآخرُ أو أُغلق: الملخّصُ وحده يأخذ ما بقي (طلبُ صاحب الموقع). وكان الأساسُ يطرح فُرجتين
+     في الثلاث (‎--g‎) والافتراضُ يتبدّل (‎.383‎ لاثنتين و‎.3‎ لثلاث)، فكان فتحُ البنك يضيّق الكتاب.
+     والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR · pkSqbR‎).
+     الحدّان: الطرفُ ‎≥ 240px‎ والملخّصُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
+  const PK_SPL_DEF = 0.383, PK_SQB_DEF = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
+  const pkSplDef = k => k === 'b' ? PK_SQB_DEF : PK_SPL_DEF;
+  /* الحصّةُ المحفوظةُ لكلّ مساهمة، وإلّا افتراضُ طرفها */
+  const pkSplGet = (key, id, def) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : def; };
+  const pkSplR = id => pkSplGet('pkSplR', id, PK_SPL_DEF);
+  const pkSqbR = id => pkSplGet('pkSqbR', id, PK_SQB_DEF);
   /* ‏‎k‎: ‎'a'‎ خطُّ الكتاب، و‎'b'‎ خطُّ البنك */
   const pkSplH = (id, k = 'a') => `<div class="pk-splh${k === 'b' ? ' pk-splh--b' : ''}" role="separator" aria-orientation="vertical" tabindex="0" data-pksplh="${k}" data-pkid="${esc(id)}"
       aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round((k === 'b' ? pkSqbR(id) : pkSplR(id)) * 100)}" title="${esc(T().pkSplTip)}" aria-label="${esc(T().pkSplTip)}"><i></i><i></i><i></i></div>`;
   const pkSplVar = k => k === 'b' ? '--sqb' : '--spl';
-  const pkSplGapOf = sp => parseFloat(sp.style.getPropertyValue('--g')) || PK_SPL_GAP;
-  /* الحصّةُ ضمن حدودها: طرفُها ‎≥ 240px‎، والوسطُ ‎≥ 260px‎ بعد حصّة الطرف الآخر إن ظهر */
+  /* الحصّةُ ضمن حدودها: طرفُها ‎≥ 240px‎، والملخّصُ ‎≥ 260px‎ بعد حصّة الطرف الآخر (وفُرجته) إن ظهر */
   const pkSplClamp = (sp, f, k = 'a') => {
-    const w = sp.clientWidth - pkSplGapOf(sp);
+    const w = sp.clientWidth - PK_SPL_GAP;
     const otherK = k === 'b' ? 'a' : 'b', other = sp.querySelector(`:scope > [data-pksplh="${otherK}"]`) ? (parseFloat(sp.style.getPropertyValue(pkSplVar(otherK))) || 0) : 0;
-    const minF = PK_SPL_MINB / w, maxF = 1 - other - PK_SPL_MINP / w;
+    const minF = PK_SPL_MINB / w, maxF = 1 - other - (PK_SPL_MINP + (other ? PK_SPL_GAP : 0)) / w;
     if (maxF <= minF) return Math.min(Math.max(f, 0.15), Math.max(0.15, 1 - other - 0.2));
     return Math.min(Math.max(f, minF), maxF);
   };
@@ -10501,6 +10525,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (keep) { const key = k === 'b' ? 'pkSqbR' : 'pkSplR'; (state[key] = state[key] || {})[id] = +f.toFixed(4); save(); }
     return f;
   };
+  /* بعد الرسم: الطرفان معًا لا يُبقيان للملخّص أقلَّ من حدّه — فيُضيَّق البنكُ أوّلًا (الكتابُ يبقى على عرضه)، ولا يُحفظ التضييق */
+  function pkSplFitAll() {
+    document.querySelectorAll('#cm-body .pk-split').forEach(sp => {
+      const ha = sp.querySelector(':scope > [data-pksplh="a"]'), hb = sp.querySelector(':scope > [data-pksplh="b"]');
+      if (!ha || !hb || !sp.clientWidth) return;
+      ['b', 'a'].forEach(k => {
+        const v = parseFloat(sp.style.getPropertyValue(pkSplVar(k))); if (!v) return;
+        const f = pkSplClamp(sp, v, k);
+        if (Math.abs(f - v) > 1e-4) sp.style.setProperty(pkSplVar(k), f.toFixed(4));
+      });
+    });
+  }
   /* الكتابُ يُرسم من جديد بعد أن يقف الخطّ (لا في كلّ إطار) */
   const pkSplBook = id => { const b = pkSrcBk[id]; if (b && b.el && b.el.isConnected) { if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' }); bkLayout(b); } };
   document.addEventListener('pointerdown', e => {
@@ -10511,7 +10547,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const en = getComputedStyle(sp).direction === 'ltr';
     cxMorphBusy = true;   /* الكتابُ يُجمَّد ويُحجَّم صورةً حتى يُفلت الخطّ (‎cxMorphBusy‎ كالتكبير) */
     const move = ev => {
-      const r = sp.getBoundingClientRect(), w = r.width - pkSplGapOf(sp);
+      const r = sp.getBoundingClientRect(), w = r.width - PK_SPL_GAP;
       /* خطُّ الكتاب يُقاس من حافّة الكتاب (البداية)، وخطُّ البنك من حافّة البنك (النهاية) */
       const fromStart = en ? ev.clientX - r.left : r.right - ev.clientX;
       const x = k === 'b' ? (r.width - fromStart) - PK_SPL_GAP / 2 : fromStart - PK_SPL_GAP / 2;
@@ -10520,7 +10556,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const up = ev => {
       h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
       h.classList.remove('is-drag'); sp.classList.remove('is-spldrag');
-      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF, true, k);
+      pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || pkSplDef(k), true, k);
       cxMorphBusy = false; pkSplBook(id);
     };
     h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
@@ -10528,13 +10564,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('dblclick', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    const k = h.dataset.pksplh || 'a', sp = h.parentElement, three = !!sp.querySelector(':scope > [data-pksplh="a"]') && !!sp.querySelector(':scope > [data-pksplh="b"]');
-    pkSplSet(sp, h.dataset.pkid, three ? PK_SPL_DEF3 : PK_SPL_DEF, true, k); pkSplBook(h.dataset.pkid);
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement;
+    pkSplSet(sp, h.dataset.pkid, pkSplDef(k), true, k); pkSplBook(h.dataset.pkid);
   });
   document.addEventListener('keydown', e => {
     const h = e.target.closest && e.target.closest('#cm-body [data-pksplh]');
     if (!h) return;
-    const k = h.dataset.pksplh || 'a', sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || PK_SPL_DEF;
+    const k = h.dataset.pksplh || 'a', sp = h.parentElement, en = getComputedStyle(sp).direction === 'ltr', cur = parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || pkSplDef(k);
     /* السهمُ يحرّك الخطَّ في جهته: في العربيّة الكتابُ يمينًا فالسهمُ الأيسرُ يوسّعه، والبنكُ يسارًا فالأيمنُ يوسّعه */
     const fwd = (k === 'b') !== en;
     const grow = fwd ? 'ArrowRight' : 'ArrowLeft', shrink = fwd ? 'ArrowLeft' : 'ArrowRight';
@@ -10668,6 +10704,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <div class="pk-lnk__tree">${rows || `<p class="pk-lnk__empty">${T().pkLnkNone}</p>`}</div>
       </div>`;
   };
+  /* شجرةُ «ربط الصفحات» المفتوحةُ من قائمة المصدر تُغلق بنقرٍ خارجها أو Esc */
+  const pkLnkShut = () => { const ids = Object.keys(pkLnk.open).filter(k => pkLnk.open[k]); if (!ids.length) return false; ids.forEach(k => { pkLnk.open[k] = false; pkLnk.pop[k] = null; }); renderCmSection(); return true; };
+  window.addEventListener('pointerdown', e => {
+    if (!Object.values(pkLnk.open).some(Boolean) || !e.target.closest) return;
+    if (e.target.closest('.pk-lnk__tree, #pk-lnk-layer, #pk-srcpop, [data-pksrchd]')) return;
+    pkLnkShut();
+  }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.getElementById('pk-lnk-layer') && pkLnkShut()) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
   /* قلبُ الكتاب إلى صفحةٍ بعينها (اختيارُ مجلدٍ مربوط) */
   /* يُكتب الموضعُ في وصف الكتاب أوّلًا: الرسمُ التالي يبني الكتابَ من جديد منه */
   const pkLnkGo = (id, page) => {
@@ -10773,7 +10817,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const cur = pkSrcCurOf(id), many = L.length > 1;
       /* وأكثرُ من مصدر: الكتبُ وزرُّ الإضافة في قائمةٍ تُمرَّر وحدها، وشريطُها يسارًا — ورأسُ المساحة (أيقونتُها) ثابتٌ فوقها */
       /* وزرُّ «إضافة مصدر آخر» في التذييل مع أدوات المصدر (طلبُ صاحب الموقع · ‎pkActTools‎) */
-      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}"><p class="v-none">${T().chLoading}</p></div>`).join('');
+      /* وحتى يُفتح الملفّ: هيئةُ كتابٍ بلون غلافه تلمع (لا نصّ «يُحمَّل») — تُسلِّم إلى الغلاف المؤقّت ثمّ إلى الكتاب بلا قفزة */
+      const skel = s => { const c = (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover || '#2c5e65';
+        return `<div class="bk-skel" role="status" aria-label="${esc(T().chLoading)}" style="--bk-cover:${esc(c)}"><i></i></div>`; };
+      const slots = L.map(s => `<div class="chsrc__view pk-src__view pk-src__slot${many && s === cur ? ' is-cur' : ''}" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${skel(s)}</div>`).join('');
       return `<div class="pk-src pk-src--book${ed ? '' : ' pk-src--ro'}${many ? ' pk-src--multi' : ''}" data-pkid="${esc(id)}">`
         + (many ? `<div class="pk-src__list" data-pksrclist>${slots}</div><div class="pk-srcbar" aria-hidden="true"><i></i></div>` : slots) + `</div>`;
     }
@@ -10806,7 +10853,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) { toast(T().chNotPdf); return; }
     const key = pkSrcKey(id);
     if (!await chIdb('readwrite', key, file)) { toast(T().chSaveFail); return; }
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     const was = pkSrcMeta(id);
     (state.pkSrc = state.pkSrc || {})[id] = { name: file.name, size: file.size, ts: Date.now(), type: was ? was.type : pkSrcGuess(file.name) };
@@ -10820,7 +10867,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   async function pkSrcDel(id) {
     const key = pkSrcKey(id);
     await chIdb('readwrite', key, null);
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     if (state.pkSrc) delete state.pkSrc[id];
     const base = pkSrcBase(id);
@@ -10932,6 +10979,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         panel = `<div class="psp-sub psp-list">
           <button type="button" class="psp-it" data-psp="cov">${pkSrcSvg(PK_SP_IC.img)}<span>${esc(T().pkSrcChCov)}</span></button>
           <button type="button" class="psp-it" data-psp="type">${pkSrcSvg(PK_SP_IC.tag)}<span>${esc(T().pkSrcChType)}</span></button>
+          <button type="button" class="psp-it" data-psp="lnk">${PK_LNK_IC}<span>${esc(T().pkLnk)}</span></button>
           <button type="button" class="psp-it" data-psp="swap">${pkSrcSvg(PK_SP_IC.swap)}<span>${esc(T().pkSrcSwap)}</span></button>
           <span class="psp-sep"></span>
           <button type="button" class="psp-it psp-del${conf === s ? ' is-conf' : ''}" data-psp="del">${pkSrcSvg(PK_SP_IC.trash)}<span>${esc(conf === s ? T().pkSrcDelConf : T().pkSrcDelS)}</span></button></div>`;
@@ -11011,6 +11059,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
     if (k === 'upcov') { pkSrcCovIn.dataset.pkid = s; pkSrcCovIn.click(); return; }
     if (k === 'swap') { pkSrcIn.dataset.pkid = s; pkSrcIn.click(); return; }
+    if (k === 'lnk') { const id = pkSP.id; pkSrcPopClose(); pkLnk.open[id] = true; renderCmSection(); return; }   /* شجرةُ الربط تطفو فوق زرّ المصدر */
     if (k === 'del') { if (pkSP.conf === s) { pkSP.sub = null; pkSP.sid = null; pkSP.conf = null; pkSrcDel(s); } else { pkSP.conf = s; pkSrcPopShow(); } return; }
   }, true);
   document.addEventListener('input', e => { const i = e.target.closest && e.target.closest('#pk-srcpop [data-pspnum]'); if (!i) return; i.value = i.value.replace(/[^0-9٠-٩]/g, '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); if (+i.value) pkSrcCovPg(pkSP.sid, +i.value); });
@@ -11106,7 +11155,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         try { old.ro.disconnect(); } catch (e) {}
         old.ro.observe(old.stage);
         const same = old.stage.clientWidth === old.stW && old.stage.clientHeight === old.stH;
-        if (!same || old.flip || moved) { if (old.leaf && old.leaf.mode !== 'rest') bkLeafDrop(old); bkLayout(old); }
+        /* وإن نُقل في أثناء حركة دخولٍ أو تكبير: يُجمَّد ويُرسم مرّةً حين تقف (‎bkRelayoutAll‎) — لا على عرضها وهي تنبسط */
+        if ((bkHoldN > 0 || cxMorphBusy) && old.gl) { /* مراقبُ المقاس (أُعيد أعلاه) يحجّمه صورةً حتى تقف */ }
+        else if (!same || old.flip || moved) { if (old.leaf && old.leaf.mode !== 'rest') bkLeafDrop(old); bkLayout(old); }
         else old.flip = null;
         return;
       }
@@ -11196,7 +11247,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
   }
   /* ===== القسمة: الكتابُ يمينًا (إن ظهر) · العرضُ وسطًا · البنكُ يسارًا (إن ظهر) — وبين كلّ جارين خطٌّ يُسحب =====
-     ‏‎--g‎ مجموعُ الفُرَج (‎14‎ لجارين و‎28‎ لثلاثة)، و‎--spl‎ حصّةُ الكتاب و‎--sqb‎ حصّةُ البنك من العرض بعد الفُرَج */
+     ‏‎--spl‎ حصّةُ الكتاب و‎--sqb‎ حصّةُ البنك من عرض القسمة إلّا فُرجةً واحدة (‎ROADMAP-SPLITTER‎) */
   function pkSplitWrap(id, v, ed, viewH, pack) {
     const anim = pkSplitAnim[id]; delete pkSplitAnim[id];
     const book = !!pkSplitOn(id), bank = pkBankOn(id);
@@ -11207,7 +11258,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
     const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
-    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)};--g:${book && bank ? 28 : 14}px">`
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
   }
@@ -22178,7 +22229,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.style.setProperty('--jr-h', h + 'px');
     });
   }
+  /* القياسُ يُجمع ويؤجَّل إلى أوّل فراغٍ للمتصفّح: يقرأ عرضَ كلّ اسمٍ في الشجرة فيُلزمه بحساب الصفحة كلِّها — وكان يجري
+     مرّتين في كلّ رسمةٍ وفي أثناء دخول المساحات وخروجها (ثقلُ البنك الممتلئ). ووسمُ الطويل زينةٌ لا تُنتظر */
   function cxNameFit() {
+    if (cxNameFit.q) return;
+    cxNameFit.q = true;
+    const run = () => { cxNameFit.q = false; cxNameFitNow(); };
+    if (window.requestIdleCallback) requestIdleCallback(run, { timeout: 600 }); else setTimeout(run, 120);
+  }
+  function cxNameFitNow() {
     /* والشجرةُ الثالثة (‎#nk-road‎) معهما: الخيطُ يُرسم بالقياس لا بالتصريح، فمن لم
        يُقَس اسمُه لم يُعرف أطويلٌ هو أم قصير — فيبقى بلا خيطٍ وإن فاض */
     const els = [...document.querySelectorAll('#cm-cards .cx-nm, .cx-ro .cx-nm, #nk-road .cx-nm')];
@@ -22302,7 +22361,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ${id && pkLab() ? `<div class="cx-acttools" data-pkid="${esc(id)}">${pkActTools(id, true)}</div>`
         : `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`}
     </div>`;
-  function cxFtSet(dn) {
+  function cxFtSet(dn, quiet) {
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) { cxFtDn = false; return; }
     dn = !!dn;
@@ -22320,9 +22379,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ln.setAttribute('aria-expanded', String(!dn));
       const t = dn ? T().ftUp : T().ftDown;
       ln.title = t; ln.setAttribute('aria-label', t);
-      ln.focus({ preventScroll: true });
+      /* الطيُّ والبسطُ التلقائيّان (‎quiet‎) لا يسرقان التركيز ممّا نُقر */
+      if (!quiet) ln.focus({ preventScroll: true });
     }
   }
+  /* ===== التذييلُ يُطوى بنقرٍ خارج المساحات الثلاث، ويُبسط بلمس إحداها (طلبُ صاحب الموقع) =====
+     طيُّ القاع القائم (‎cxFtSet‎): الأزرارُ تختفي بحركة ويبقى الخطُّ وحده. ولا يُطوى بما يخدم المساحاتِ نفسَها:
+     التذييلُ وخطّاه، ورؤوسُ المساحات وأيقوناتُها، وشريطُ المجلدات، والمقابضُ بينها، والقوائمُ الطافية */
+  const CX_FT_KEEP = '.vt-foot, .pk-pubfoot, .pk-ftline, .pk-hdline, .cx-acttools, .pk-blkh, .pk-icrow, .pk-ic, .pk-fstrip, .pk-splh, .pk-varc, #pk-srcpop, .psp-sub, .cx-plus, .pk-lnk__pop, [role="dialog"], [role="menu"], [role="listbox"]';
+  window.addEventListener('pointerdown', e => {
+    if (cxFtDn || e.button > 0) return;
+    const t = e.target; if (!t || !t.closest) return;
+    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame'); if (!card) return;
+    if (t.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)')) return;
+    if (t.closest(CX_FT_KEEP)) return;
+    /* في التحرير يختفي التذييلُ كلُّه بخطّه (طلبُ صاحب الموقع)، وفي النشر يُطوى ويبقى خطُّه */
+    if (card.classList.contains('pk--edit')) { cxFtHide(card, true); return; }
+    cxFtSet(true, true);
+  }, true);
   function cxHdMeasure() {
     const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
     if (!card) return;
@@ -22496,8 +22570,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
-    /* والفجوةُ تُنحت أمام العين: لينةُ البدء والختام (لا تقفز في أوّلها) */
-    const now = performance.now(), DUR = 420 * (window.__pkfxSlow || 1), ez = pkBez(.45, 0, .25, 1);
+    /* والفجوةُ تُنحت أمام العين — سريعةً تبدأ من فورها وتلين في آخرها (طلبُ صاحب الموقع: «لا أحسّ بتأخير»)؛ كانت ‎420ms‎ لينةَ البدء
+       فتبدو متأخّرةً بعد انطواء المساحة */
+    const now = performance.now(), DUR = 180 * (window.__pkfxSlow || 1), ez = pkBez(.2, .8, .2, 1);
     const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.k + '|' + t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
@@ -22636,7 +22711,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الكاملة) وحاشيتُه وزاويتُه المقعّرة في جهة جارها — من مستطيلها الحيّ (فيتبع الجارَ وهو يتّسع أو يتضيّق)، وتكتب المسارَ مرّةً،
      وتقف حين تنتهي. والمحتوى بالشفافيّة والإزاحة وحدهما */
   /* ‏‎__pkfxSlow‎ يُبطئ الحركة كلَّها بقدرٍ واحد (للفحص إطارًا إطارًا) */
-  const PKFX = { get IN() { return 440 * (window.__pkfxSlow || 1); }, get OUT() { return 360 * (window.__pkfxSlow || 1); } };
+  const PKFX = { get IN() { return 440 * (window.__pkfxSlow || 1); }, get OUT() { return 280 * (window.__pkfxSlow || 1); } };
   const pkBez = (x1, y1, x2, y2) => t => {
     if (t <= 0) return 0; if (t >= 1) return 1;
     let u = t;
@@ -22681,12 +22756,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = card.querySelector('.post-ytmain > .pk-split');
     /* وبلا كتلة (الضيّقة) تجري الحركةُ نفسُها بلا لسان: الساعةُ والعكسُ والإنهاءُ واحدة */
     if (!sp) { done && done(); return null; }
-    if (card.pkBandAnim) cancelAnimationFrame(card.pkBandAnim.raf);
+    const prev = card.pkBandAnim;
+    if (prev) cancelAnimationFrame(prev.raf);
     const st = Object.assign({ raf: 0, from: 0, to: 1, start: performance.now(), span: dur, dur, t: 0, tracks, end: done, anims: [] }, extra || {});
     card.pkBandAnim = st;
     card.classList.add('pk--fxrun');
-    /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف */
-    if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
+    /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف.
+       وحركةٌ تحلّ محلّ أخرى قبل تمامها ترث تجميدَها — وإلّا بقي الكتابُ مجمَّدًا أبدًا (لا أحدَ يفكّه) */
+    if (prev && prev.busy) st.busy = true;
+    else if (!cxMorphBusy) { cxMorphBusy = true; st.busy = true; }
     const draw = t => {
       const ft = card.querySelector('.pk-ftline');
       if (!ft || !card.querySelector(':scope > .pk-band')) return;   /* الضيّقة: لا ذيلَ ولا كتلة — الحركةُ بلا لسان */
@@ -22705,7 +22783,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (st.busy) cxMorphSettle();
     };
     st.frame = now => {
-      if (card.pkBandAnim !== st || !card.isConnected) return;
+      if (card.pkBandAnim !== st) return;
+      /* رُسم المربّعُ من جديد في أثنائها: تنتهي هنا، ويُفكّ تجميدُ الكتاب */
+      if (!card.isConnected) { card.pkBandAnim = null; if (st.busy) cxMorphSettle(); return; }
       const k = st.span > 0 ? Math.min(1, (now - st.start) / st.span) : 1;
       st.t = st.from + (st.to - st.from) * k;
       draw(st.t);
@@ -22788,13 +22868,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
     E.style.overflow = 'hidden';
+    const pin = pkFxPin(E);   /* محتواها على عرضه الأخير والحافّةُ تقصّه — فلا يُعاد ترتيبُه في كلّ إطار */
     const cs = getComputedStyle(E), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
     const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
     /* من عرضٍ صفرٍ حقًّا: الحاشيةُ تنبسط معها (وإلّا بدأت بعرض الحاشية) */
     const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); });
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
+    bkHoldAnims(an);   /* الكتابُ يُجمَّد حتى تنبسط */
     return true;
+  }
+  /* ===== محتوى المساحة الداخلة أو الخارجة ثابتُ العرض أثناء حركتها =====
+     عرضُ المساحة يتغيّر في كلّ إطار، فكان محتواها كلُّه (شجرةُ بنكٍ بآلاف العناصر) يُعاد ترتيبُه في كلّ إطار — فيُثبَّت
+     أبناؤها المنسابون على عرضهم الآن (عرضِها الأخير) ويقصّهم حدُّها، ويُردّون بعد الحركة. تُرجع ما يردّهم */
+  function pkFxPin(P) {
+    const kids = [...P.children].filter(c => getComputedStyle(c).position !== 'absolute');
+    const ws = kids.map(c => c.getBoundingClientRect().width);
+    kids.forEach((c, i) => { if (ws[i] > 0) { c.style.width = ws[i] + 'px'; c.style.flexShrink = '0'; c.style.contain = 'layout'; } });
+    return () => kids.forEach(c => { c.style.width = ''; c.style.flexShrink = ''; c.style.contain = ''; });
   }
   /* الكتلُ تُرسم من المواضع الحيّة كلَّ إطارٍ ما دامت حركاتُ القسمة جارية، ثمّ ساكنةً (أو ‎done‎) */
   function pkLiveBand(card, anims, done) {
@@ -22825,15 +22916,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* الخروج بلا نسخ: ‎L‎ المنطقةُ الخارجةُ في مكانها الحقيقيّ — محتواها يخفت ويهبط، ولسانُها ينزل في الذيل، وعرضُها ينطوي إلى طرف
      القسمة فيتّسع الجار؛ ثمّ ‎commit‎ يغيّر الحالَ ويرسم (والرسمُ الساكنُ هو آخرُ إطار) */
-  /* حصّةُ الطرف الآخر تتغيّر بعدد المناطق (‎.383‎ لاثنتين و‎.3‎ لثلاث): تُقرأ بالحال الجديدة مؤقّتًا ⇠ عرضُه بعد التغيير */
-  function pkFxOtherW(sp, id, isBook, after) {
+  /* الطرفُ الآخرُ وحصّتُه (لا تتبدّل بخروج هذا — الأساسُ واحد): يُحتاج إليه حين لا ملخّصَ بينهما فيأخذ القسمةَ كلَّها */
+  function pkFxOtherW(sp, id, isBook) {
     const other = sp.querySelector(isBook ? ':scope > .pk-bank' : ':scope > .pk-src');
-    if (!other) return null;
-    const keep = isBook ? pkSplit[id] : pkBank[id];
-    if (isBook) pkSplit[id] = after; else pkBank[id] = after;
-    const share = isBook ? pkSqbR(id) : pkSplR(id);
-    if (isBook) pkSplit[id] = keep; else pkBank[id] = keep;
-    return { pane: other, share };
+    return other ? { pane: other, share: isBook ? pkSqbR(id) : pkSplR(id) } : null;
   }
   /* الطرفُ الآخرُ يبلغ عرضَه الجديد بنعومة (لا يقفز في أوّل الحركة أو آخرها) */
   function pkFxFlex(pane, w0, w1, dur, delay, ez) {
@@ -22883,9 +22969,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       band.querySelectorAll('.pk-band__gap, .pk-band__foot').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .45, delay: t0 + D * .55, fill: 'forwards' })));
     } else card.querySelectorAll(':scope > .pk-band, .post-ytmain > .pk-split').forEach(x =>
       an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300 * slow, delay: C, fill: 'forwards' })));
+    bkHold();
     Promise.all(an.map(a => a.finished.catch(() => {})).concat(fold)).then(() => {
       card.pkBlkHold = false;
-      commit();
+      try { commit(); } finally { bkRelease(); }
       const n = document.querySelector('#cm-body .pk-split--none > .pk-none');
       if (n) n.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 300 * slow, delay: 40 * slow, easing: 'cubic-bezier(.2, .8, .2, 1)', fill: 'backwards' });
     });
@@ -22904,6 +22991,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const noMid = !sp.querySelector(':scope > .kt-view');
     if (noMid && other) sp.style.justifyContent = 'space-between';
     L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
+    pkFxPin(L);   /* يخرج: محتواه ثابتُ العرض حتى يُرفع (لا يُعاد ترتيبُ شجرةٍ ممتلئةٍ في كلّ إطار) */
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
     /* وحاشيتُها تنطوي معها (وإلّا وقفت عند عرض الحاشية ثمّ قفز جارُها بقدرها حين تُرسم) */
@@ -22913,7 +23001,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
       other.pane.style.boxSizing = 'border-box';
-      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - g) * other.share) + 'px' }],
+      other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - PK_SPL_GAP) * other.share) + 'px' }],
         { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
     }
     const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
@@ -22921,12 +23009,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
     /* والقامةُ مثبّتةٌ وهي تنطوي: محتواها يقصر ويطول مع عرضها فلا تقفز المساهمة (ثمّ تنتقل إلى قامتها الجديدة بعد الرسم) */
     if (narrow) { sp.style.height = spH + 'px'; sp.style.overflow = 'hidden'; }
+    /* الكتابُ (الخارجُ أو الباقي) يُجمَّد أثناء الانطواء، ويُفكّ بعد الرسم الجديد — فالخارجُ لا يُبنى على عرضٍ صفر */
+    bkHold();
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
-      commit();
+      try { commit(); } finally { bkRelease(); }
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
       const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
-      if (narrow) pkFxHeight(sp1, spH, 420 * (window.__pkfxSlow || 1), 'cubic-bezier(.45, 0, .25, 1)');   /* مع نحت الفجوة: لينةٌ مثلُها */
+      if (narrow) pkFxHeight(sp1, spH, 180 * (window.__pkfxSlow || 1), 'cubic-bezier(.2, .8, .2, 1)');   /* مع نحت الفجوة: بمدّتها ومنحناها */
       /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
          إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
       const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
@@ -22980,14 +23070,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وما يثقل الحركة هو الكتاب (‎WebGL‎): كان يُعاد رسمُه كاملًا في كلّ إطار (‎184‎ رسمةً في أربع حركات) — فيُجمَّد أثناءها:
      لوحتُه على آخر رسمة، تُكبَّر وتُصغَّر صورةً بنسبتها حول وسطها، ويُرسم مرّةً واحدةً بالمقاس الجديد حين تقف */
   let cxMorphBusy = false;
-  const cxMorphSettle = () => {
-    cxMorphBusy = false;
+  const cxMorphSettle = () => { cxMorphBusy = false; if (!bkHoldN) bkRelayoutAll(); };
+  /* الكتبُ الظاهرةُ تُقاس وتُرسم مرّةً بمقاسها الآن — ويُترك كتابٌ انطوت مساحتُه (يخرج، فلا تُبنى لوحتُه على عرضٍ صفر) */
+  function bkRelayoutAll() {
     Object.values(pkSrcBk).forEach(b => {
       if (!b || b.gl === undefined || !b.el || !b.el.isConnected) return;
       if (b.gl && b.gl.el) Object.assign(b.gl.el.style, { left: '', top: '', right: '', bottom: '', transform: '', transformOrigin: '' });
+      if (b.stage && b.stage.clientWidth < 40) return;
       bkLayout(b);
     });
-  };
+  }
+  /* ===== تجميدُ الكتاب أثناء دخول المساحات وخروجها (طلبُ صاحب الموقع: «ثقيلة») =====
+     كانت مساحةُ الكتاب تتّسع وتضيق في كلّ إطار فيُعاد بناءُ لوحة ‎WebGL‎ بمقاسها (‎renderer.setSize‎) مرّةً بعد مرّة — وهو أثقلُ
+     ما في الحركة (أكثرُ من ‎85%‎ من وقتها). فيُجمَّد كما في التكبير: اللوحةُ صورةٌ تُحجَّم، وتُقاس وتُرسم مرّةً حين تقف الحركة.
+     ‏‎bkHoldN‎ عدّادٌ للحركات القائمة (قد تتداخل)، ويُفكّ التجميدُ حين تنتهي كلُّها */
+  let bkHoldN = 0;
+  const bkHold = () => { bkHoldN++; };
+  const bkRelease = () => { if (bkHoldN > 0 && --bkHoldN === 0 && !cxMorphBusy) bkRelayoutAll(); };
+  function bkHoldAnims(an) {
+    an = (an || []).filter(a => { try { return isFinite(a.effect.getComputedTiming().endTime); } catch (e) { return false; } });
+    if (!an.length) return;
+    bkHold();
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(bkRelease);
+  }
   let cxMorphing = null;   /* الحركةُ الجارية ‎{ a, el, end }‎: نقرةٌ في منتصفها تبدأ التاليةَ من حيث المربّعُ الآن لا من آخر الأولى */
   const cxCardEl = key => key === 'edit' ? document.querySelector('#cm-body .pk--edit[data-sub="cards"]')
     : document.querySelector(`#cm-body .post[data-ck="${CSS.escape(key)}"]`);
@@ -23109,7 +23214,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
     const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
-    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
+    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && (!pkActOf(p.id) || cxFtGone) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}
@@ -23743,14 +23848,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return chLibP;
   }
   const chPdfDoc = {};   /* المستندُ المفتوح لكلّ مفتاح — فالعودةُ إلى شابترٍ لا تُعيد قراءةَ ملفّه */
-  async function chPdfOpen(key) {
-    if (chPdfDoc[key]) return chPdfDoc[key];
-    const blob = await chIdb('readonly', key);
-    if (!blob) return null;
-    const L = await chPdfLib();
-    const data = new Uint8Array(await blob.arrayBuffer());
-    chPdfDoc[key] = await L.getDocument({ data }).promise;
-    return chPdfDoc[key];
+  /* فتحٌ واحدٌ لكلّ ملفّ: رسماتٌ متزامنة (بعد الرفع خاصّةً) كانت تفتحه كلٌّ وحدها فيصير له مستندان — فيُبنى الكتابُ من أحدهما
+     ويُخبَّأ الآخر، ثمّ لا يُعرف الكتابُ القائمُ أنّه للملفّ نفسِه فيُبنى من الصفر في كلّ فتحٍ لمساحته (ثقلُ الحركة) */
+  const chPdfOpening = {};
+  function chPdfOpen(key) {
+    if (chPdfDoc[key]) return Promise.resolve(chPdfDoc[key]);
+    if (chPdfOpening[key]) return chPdfOpening[key];
+    const pr = (async () => {
+      const blob = await chIdb('readonly', key);
+      if (!blob) return null;
+      const L = await chPdfLib();
+      const data = new Uint8Array(await blob.arrayBuffer());
+      const doc = await L.getDocument({ data }).promise;
+      if (chPdfOpening[key] === pr) chPdfDoc[key] = doc;
+      return doc;
+    })();
+    chPdfOpening[key] = pr;
+    pr.then(() => { if (chPdfOpening[key] === pr) delete chPdfOpening[key]; }, () => { if (chPdfOpening[key] === pr) delete chPdfOpening[key]; });
+    return pr;
   }
   /* ============================================================
      الكتاب — مصدرُ الشابتر كتابٌ عربيٌّ يُقلَّب (ROADMAP-BOOK.md)
@@ -23870,11 +23985,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · ‏‎A‎ في المحرّك عددُ الأوراق المقلَّبة (الغلافُ ورقة): ‎0‎ مغلق، و‎A‎ فتحةٌ يمينُها ‎2(A−1)‎.
      · ومتصفّحٌ بلا WebGL (أو تعذّر التحميل) يبقى على المحرّك القديم */
   let bk2LibP = null, bk2No = false;
+  /* الفحصُ يُنشئ سياقَ ‎WebGL‎ — مرّةً واحدةً تكفي (كان يُعاد مع كلّ رسمة) */
+  let bk2Probed = false;
   const bk2Ok = () => {
     if (bk2No || window.AC_BOOK2 === false) return false;
+    if (bk2Probed) return true;
     try { const c = document.createElement('canvas'); if (!(c.getContext('webgl2') || c.getContext('webgl'))) bk2No = true; } catch (e) { bk2No = true; }
+    bk2Probed = true;
     return !bk2No;
   };
+  /* ===== غلافٌ مؤقّتٌ مكانَ الكتاب حتى يجهز (طلبُ صاحب الموقع: الإنترنتُ البطيء) — ‏‎b.phEl‎ (‏‎b.ph‎ قامةُ الصفحة) =====
+     يُحمَّل للكتاب مكتبةُ ‎Three.js‎ ومحرّكُه، ثمّ تُرسم صورُ صفحاته — وقد يطول ذلك على شبكةٍ بطيئة فيبقى مكانُه فارغًا.
+     فيُوضع في مكانه فورًا نظيرٌ مسطّح: الغلافُ مغلقًا، والصفحةُ أو الصفحتان الظاهرتان مفتوحًا (من الـPDF نفسِه بدقّةٍ صغيرة)،
+     ويذوب حين يرسم الكتابُ صفحاتِه */
+  function bkPhShow(b) {
+    if (b.phEl && b.phEl.isConnected) return;
+    const ph = b.phEl = document.createElement('div');
+    ph.className = 'bk2-ph' + (b.closed ? ' is-closed' : ''); ph.setAttribute('aria-hidden', 'true');
+    ph.style.setProperty('--ar', b.ar); ph.style.setProperty('--bk-cover', b.cover || '#2c5e65');
+    const ks = b.closed ? ['cover'] : b.one ? [Math.max(1, b.pos)] : [b.pos, b.pos + 1];
+    ks.forEach(k => {
+      const pg = document.createElement('i'); pg.className = 'bk2-ph__pg' + (k === 'cover' ? ' is-cover' : k < 1 ? ' is-inside' : ''); ph.appendChild(pg);
+      if (k === 'cover' || (k >= 1 && k <= b.n)) bk2Tex(b, k, 360).then(cv => { if (b.phEl !== ph || !cv) return; cv.className = 'bk2-ph__img'; pg.appendChild(cv); }).catch(() => {});
+    });
+    /* بمستطيل المحرّك نفسِه (‎MX=MY=1.04‎ ورفعُ ‎1%‎): المغلقُ غلافٌ وحده تقترب منه الكاميرا، والمفتوحُ فتحتُه — فلا يقفز حين يذوب */
+    const stW = b.stage.clientWidth || b.stW, stH = b.stage.clientHeight || b.stH;
+    if (stW && stH) {
+      const cols = ks.length, H = 1 / b.ar, ppu = Math.min(stH / (H * 1.04), stW / (cols * 1.04)), w = cols * ppu, h = H * ppu;
+      Object.assign(ph.style, { inset: 'auto', left: (stW / 2 - w / 2) + 'px', top: (stH / 2 - h * 0.51) + 'px', width: w + 'px', height: h + 'px' });
+    }
+    b.stage.appendChild(ph);
+  }
+  function bkPhHide(b) {
+    const ph = b.phEl; if (!ph) return;
+    b.phEl = null;
+    if (bkReduce()) { ph.remove(); return; }
+    ph.style.opacity = '0';
+    setTimeout(() => ph.remove(), 260);
+  }
+  /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
+  function bk2Prefetch() {
+    if (bk2LibP || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
+    (window.requestIdleCallback || setTimeout)(() => { if (bk2Ok()) bk2Lib().catch(() => {}); });
+  }
   function bk2Lib() {
     if (!bk2LibP) bk2LibP = Promise.all([
       import(assetURL('assets/vendor/three/three.module.min.js')),
@@ -23940,14 +24093,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · والصفُّ في الجدول يُعلَّم رقمُه بلون التظليل، ونقرُه يقلّب الكتابَ إلى تظليله.
      يُحفظ الربطُ بمعرّف البطاقة (‎m.c‎) لا برقمها، فيبقى مع الصفّ ولو تبدّل ترتيبُه — والرقمُ المرسوم رقمُ الصفّ الآن.
      ‏‎p.data.hl = { marks: [{ id, s, k, c: [cardId..], bars: [[l,r,t,b]..], d, tx }] }‎ — ‏‎s‎ لاحقةُ المصدر، ‏‎k‎ الصفحة، والمواضعُ كسورٌ منها */
-  const hlArm = {};   /* ‏‎postId → cardId‎ الدائرةُ الشغّالة */
+  const hlOpen = {};   /* ‏‎postId → cardId‎ اللسانُ المفتوح (الذي في وسط الشريط): كلُّ تظليلٍ جديدٍ يدخل صفَّه */
+  const hlTool = {};   /* ‏‎postId → 't' | 'box'‎ أداةُ التظليل */
   let hlCur = null;   /* ‏‎{ id: postId, m: markId }‎ التظليلُ المختار */
   const hlPost = id => (postsOf(cmCode, 'cards') || []).find(x => x.id === id) || null;
   function hlData(id, make) {
     const p = hlPost(id); if (!p || !p.data) return null;
     if (!p.data.hl && make) p.data.hl = { marks: [] };
     const H = p.data.hl || null;
-    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; });
+    if (H) H.marks.forEach(m => { if (!m.c) m.c = []; if (!HL_COL[m.col]) m.col = 'y'; if (!m.kind) m.kind = 't'; });   /* القديمُ أصفرُ نصّ */
     return H;
   }
   const hlSidOf = b => String((b && b.key) || '').replace(/^pksrc:/, '');
@@ -23968,7 +24122,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlRows(id) {
     try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
   }
-  const HL_YEL = 'rgb(246, 214, 120)';
+  /* ألوانُ التظليل الأربعة (ROADMAP-HL ق٢): ‏‎[طلاءُ الصفحة، دائرةُ الرقم، حبرُ الرقم]‎ — ولكلّ تظليلٍ لونُه (‎m.col‎) ونوعُه (‎m.kind‎: نصٌّ ‎t‎ أو مربّعٌ ‎box‎)،
+     والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
+  const HL_COL = { y: ['rgb(246, 214, 120)', '#f3d27a', '#3a2c0b'], g: ['rgb(169, 220, 176)', '#9fd6a8', '#173d21'],
+    b: ['rgb(168, 205, 238)', '#9cc6ec', '#123150'], p: ['rgb(244, 182, 200)', '#f2aec2', '#4d1426'] };
+  /* لكلّ أداةٍ حبرُها (طلبُ صاحب الموقع): القلمُ لونٌ والمربّعُ لون — يُختاران من خطّ الأداة في الشريط ويُحفظان في المتصفّح */
+  const hlColLoad = (k, d) => { try { const v = localStorage.getItem(k); return HL_COL[v] ? v : d; } catch (e) { return d; } };
+  const hlCol = { t: hlColLoad('ac.hl.col', 'y'), box: hlColLoad('ac.hl.colb', 'b') };
+  function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
   /* دوائرُ التظليل على الصفحة: أرقامُ صفوفه، قبل أوّل شريطٍ (يمينَه في العربيّ) عند أعلى السطر — كالحاشية */
   function hlDots(m, W, Hh, rows) {
     const [l, r, t, bb] = m.bars[0], R = Math.max(7, W * 0.0105), lh = (bb - t) * Hh, y = t * Hh + Math.min(R * 0.35, lh * 0.3);
@@ -23982,20 +24143,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sel = hlSelOn(b, k);
     if (sel) {
       const c0 = cv.getContext('2d'), W0 = cv.width, H0 = cv.height;
-      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_YEL;
+      c0.globalCompositeOperation = 'multiply'; c0.fillStyle = HL_COL[hlCol.t][0];
       for (const o of sel.bars) c0.fillRect(o.l * W0, o.t * H0, (o.r - o.l) * W0, (o.b - o.t) * H0);
       c0.globalCompositeOperation = 'source-over';
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
     const c = cv.getContext('2d'), W = cv.width, Hh = cv.height, rows = hlRowMap();
-    c.globalCompositeOperation = 'multiply'; c.fillStyle = HL_YEL;
-    for (const m of ms) for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh);
+    c.globalCompositeOperation = 'multiply';
+    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
     c.globalCompositeOperation = 'source-over';
+    /* والمربّعُ (ق٦) بحدٍّ رفيعٍ من حبر لونه فوق طلائه — يُعرف أنّه منطقةٌ لا سطر */
+    for (const m of ms) if (m.kind === 'box') for (const [l, r, t, bb] of m.bars) {
+      c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = .55;
+      c.strokeRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); c.globalAlpha = 1;
+    }
     for (const m of ms) for (const { n, x, y, R } of hlDots(m, W, Hh, rows)) {
+      const [, dot, ink] = HL_COL[m.col];
       c.beginPath(); c.arc(x, y, R, 0, Math.PI * 2);
-      c.fillStyle = '#f3d27a'; c.fill();
-      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(120, 92, 25, .55)'; c.stroke();
-      c.fillStyle = '#3a2c0b'; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillStyle = dot; c.fill();
+      c.lineWidth = Math.max(1, R * 0.12); c.strokeStyle = 'rgba(20, 35, 63, .3)'; c.stroke();
+      c.fillStyle = ink; c.font = `700 ${Math.round(R * (n > 9 ? 1.0 : 1.2))}px system-ui, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillText(String(n), x, y + R * 0.06);
     }
   }
@@ -24012,10 +24179,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         Object.assign(e.style, { left: (x - R * 1.4) / W * 100 + '%', top: (y - R * 1.4) / Hh * 100 + '%', width: R * 2.8 / W * 100 + '%', height: R * 2.8 / Hh * 100 + '%' });
         d.appendChild(e);
       }
-      if (hlCur && hlCur.m === m.id) for (const [l, r, t, bb] of m.bars) {
-        const e = document.createElement('i'); e.className = 'bk-hlcur';
-        Object.assign(e.style, { left: l * 100 + '%', width: (r - l) * 100 + '%', top: t * 100 + '%', height: (bb - t) * 100 + '%' });
-        d.insertBefore(e, d.firstChild);
+      if (hlCur && hlCur.m === m.id) {
+        for (const [l, r, t, bb] of m.bars) {
+          const e = document.createElement('i'); e.className = 'bk-hlcur';
+          Object.assign(e.style, { left: l * 100 + '%', width: (r - l) * 100 + '%', top: t * 100 + '%', height: (bb - t) * 100 + '%' });
+          d.insertBefore(e, d.firstChild);
+        }
       }
     }
   }
@@ -24055,17 +24224,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return nn.id;
   }
   /* تحديدٌ يثبت تظليلًا مربوطًا بصفّ (‎cid‎ أو الشغّال) */
-  function hlCreate(sel, cid) {
+  function hlCreate(sel, cid, kind = 't') {
     const c = hlCan(sel.d); if (!c) return false;
     const { b, sid, id } = c, H = hlData(id, true);
-    let row = cid || hlArm[id] || null, grew = false;
-    if (row === 'new') { row = hlNewRow(id); grew = !!row; if (hlArm[id] === 'new') hlArm[id] = row; }
-    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l',
+    let row = cid || hlOpenCid(id) || null, grew = false;
+    if (row === 'new') { row = hlNewRow(id); grew = !!row; }
+    if (row) { hlOpen[id] = row; hlOpenUsr[id] = true; }
+    const m = { id: newId(), s: sid.slice(id.length), k: sel.k, c: row ? [row] : [], d: sel.rtl ? 'r' : 'l', col: hlCol[kind === 'box' ? 'box' : 't'], kind,
       bars: sel.bars.map(o => [o.l, o.r, o.t, o.b].map(v => +v.toFixed(4))), tx: (sel.text || '').slice(0, 400) };
     H.marks.push(m);
     save();
     bkTLClear();
-    hlRefresh(b, sel.k); hlSetCur(id, m.id);
+    hlRefresh(b, sel.k);   /* بلا اختيارٍ بعد التظليل ولا شريطِ لون (طلبُ صاحب الموقع) */
     if (grew) hlRowsChanged();
     return true;
   }
@@ -24093,49 +24263,233 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const m = hlMarksOn(c.b, +d.dataset.k).find(m => m.bars.some(([l, r, t, bb]) => x >= l && x <= r && y >= t && y <= bb));
     hlSetCur(c.id, m ? m.id : null);
   }
-  /* ضغطُ دائرة: مع تحديدٍ عابرٍ يُثبَّت فيها · مع تظليلٍ مختارٍ يُضاف إلى صفّها أو يُرفع منه · وإلّا تُشغَّل أو تُطفأ */
-  function hlCircle(id, cid) {
-    if (bkTLSel && bkTLSel.d.isConnected) { const c = hlCan(bkTLSel.d); if (c && c.id === id) { hlCreate(bkTLSel, cid); hlBarSync(id); return; } }
-    const m = hlCur && hlCur.id === id && hlMark(id, hlCur.m);
-    if (m) {
-      let row = cid, grew = false;
-      if (row === 'new') { row = hlNewRow(id); grew = !!row; }
-      if (!row) return;
-      if (m.c.includes(row)) m.c = m.c.filter(x => x !== row); else m.c.push(row);
-      save(); hlRefreshMark(id, m); hlBarSync(id);
-      if (grew) hlRowsChanged();
-    } else { hlArm[id] = hlArm[id] === cid ? 0 : cid; hlBarSync(id); }
-  }
   function hlDelete(id, mid) {
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
     save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
-  /* شريطُ الدوائر: صفوفُ المجلد المختار (الممتلئةُ ما رُبط به تظليل)، ثمّ فارغةٌ لصفٍّ جديد */
+  /* ===== شريطُ الألسنة (ROADMAP-HL ق٤–٥ · كونسبت صاحب الموقع) =====
+     لسانٌ لكلّ صفٍّ في جدول المجلد المختار، وفي آخرها لسانُ «+» منقّطٌ لصفٍّ جديد. يتلوّن اللسانُ بألوان تظليلاته شرائحَ مائلةً متساوية،
+     واللسانُ الذي في الوسط هو المفتوحُ دائمًا: أكبرُ وأعلى، وفيه عدُّ تظليلاته بحسب النوع ومفتاحُ الأداة فوقه — وكلُّ تظليلٍ جديدٍ يدخل صفَّه.
+     التمريرُ (عجلةً أو سحبًا أو أسهمًا) يُدير الشريطَ بقصورٍ ويستقرّ على أقرب لسان، والألسنةُ تنضغط كلّما بعُدت عن الوسط (كتمرير الكتب في الموقع).
+     الحركةُ لا تجري إلّا والشريطُ يتحرّك، وبالتحويل والعرض وحدهما */
+  const hlOpenUsr = {};   /* صاحبُ المساهمة اختار لسانًا بنفسه — وإلّا فالمفتوحُ أوّلُ الصفوف كلّما تبدّلت */
+  const hlRailSt = {};   /* ‏‎postId → { center, vel, target, lastIn }‎ يبقى مع إعادة رسم التذييل */
+  function hlRailData(id) {
+    const R = hlRows(id); if (!R) return null;
+    const H = hlData(id), ms = H ? H.marks : [];
+    const rows = R.cards.map((c, i) => {
+      const mine = ms.filter(m => m.c.includes(c.id));
+      return { cid: c.id, n: i + 1, cols: [...new Set(mine.map(m => m.col))], t: mine.filter(m => m.kind !== 'box').length, b: mine.filter(m => m.kind === 'box').length };
+    });
+    rows.push({ cid: 'new', n: R.cards.length + 1, nw: true, cols: [], t: 0, b: 0 });
+    return rows;
+  }
+  function hlOpenCid(id) {
+    const d = hlRailData(id); if (!d) return null;
+    return d.some(r => r.cid === hlOpen[id]) ? hlOpen[id] : d[0].cid;
+  }
   function hlBarHTML(id) {
-    const R = hlRows(id), H = hlData(id), arm = hlArm[id] || 0;
-    const cards = R ? R.cards : [];
-    const m = hlCur && hlCur.id === id && H ? H.marks.find(x => x.id === hlCur.m) : null;
-    let pend = false; try { pend = !!(bkTLSel && bkTLSel.d.isConnected && (hlCan(bkTLSel.d) || {}).id === id); } catch (e) {}
-    const used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
-    const dot = (cid, n, next) => {
-      const cls = 'cx-hlc' + (next ? ' is-next' : used.has(cid) ? '' : ' is-row') + (arm === cid ? ' is-arm' : '') + (m && m.c.includes(cid) ? ' is-in' : '');
-      const tip = (pend ? T().hlIn : m ? (m.c.includes(cid) ? T().hlOut : T().hlIn) : arm === cid ? T().hlArmOff : T().hlArmT).replace('{n}', n);
-      return `<button type="button" class="${cls}" data-hlcid="${esc(cid)}" title="${esc(tip)}">${next ? '+' : n}</button>`;
-    };
-    const dots = cards.map((c, i) => dot(c.id, i + 1, false)).join('') + (R ? dot('new', cards.length + 1, true) : '');
-    return `<span class="cx-hlbar${m || pend ? ' has-cur' : ''}" data-hlwrap data-pkid="${esc(id)}">${dots}</span>`;
+    if (!hlRows(id)) return '';
+    return `<div class="cx-hlrail" data-hlwrap data-pkid="${esc(id)}" tabindex="0" role="listbox" aria-label="${esc(T().hlRail || '')}"></div>`;
   }
   function hlBarSync(id) {
-    document.querySelectorAll(`[data-hlwrap][data-pkid="${CSS.escape(id)}"]`).forEach(x => { x.outerHTML = hlBarHTML(id); });
+    document.querySelectorAll(`.cx-hlrail[data-pkid="${CSS.escape(id)}"]`).forEach(hlRailBuild);
     hlRowMarksSync(id);
   }
+  const HL_R = { S: 22, OH: 38, G: 5 };
+  const HL_MARK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8.1 1.1l2.8 2.8-4.9 4.9-2.8-2.8z" fill="currentColor"/><path d="M3 6.2l2.8 2.8-1 1H2.2l-.4-.4V7.4z" fill="currentColor" opacity=".65"/></svg>';
+  const HL_BOX = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7" rx=".8" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 1.3"/><circle cx="2" cy="2.5" r="1.2" fill="currentColor"/><circle cx="10" cy="9.5" r="1.2" fill="currentColor"/></svg>';
+  /* حلقةُ الصفّ مقسومةٌ بألوان تظليلاته بالتساوي (ج · اختيارُ صاحب الموقع) */
+  /* ===== رزمةُ البطاقات (اختيارُ صاحب الموقع): لكلّ صفٍّ بطاقةٌ مربّعةٌ صغيرة، في رأسها شريطٌ رفيعٌ بأحبار تظليلاته بقطعٍ متساوية،
+     وبينها فُرَج؛ والتي في الوسط — تحت رقم الصفحة بالضبط — تكبر فيها رقمُ الصفّ وتحته مفتاحُ الأداة بعدّيه ===== */
+  const hlTopBar = cols => cols.length ? `<span class="cx-hlt__tp">${cols.map(c => `<i style="background:var(--ink-${c})"></i>`).join('')}</span>` : '';
+  function hlRailBuild(el) {
+    const id = el.dataset.pkid, rows = hlRailData(id);
+    if (!rows) { el.innerHTML = ''; el._rows = null; return; }
+    const tool = hlTool[id] || 't';
+    const st = el._st || (el._st = hlRailSt[id] || (hlRailSt[id] = { center: -1, vel: 0, target: null, lastIn: 0 }));
+    const sig = rows.map(r => r.cid + ':' + r.cols.join('') + r.t + '.' + r.b).join('|') + '|' + tool + hlCol.t + hlCol.box;
+    if (el._sig !== sig) {
+      el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
+      el.innerHTML = rows.map((r, i) => {
+        /* عرضُ الكبسولة حين تنفتح: الحلقةُ ومفتاحُ الأداة وفي زرّيه عددُ تظليلات كلّ نوع — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
+        r.ow = Math.max(64, 30 + (r.t ? String(r.t).length * 7 : 0) + (r.b ? String(r.b).length * 7 : 0) + 22);
+        return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
+          + `${hlTopBar(r.cols)}<b class="cx-hlt__n">${r.nw ? '+' : r.n}</b></button>`;
+      }).join('');
+      el._tabs = [...el.children];
+      el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
+      /* المفتاحُ نفسُه يحمل العدد (طلبُ صاحب الموقع): زرُّ القلم فيه عددُ تظليلات النصّ، وزرُّ المربّع عددُ المربّعات — فلا تتكرّر الأيقونتان */
+      /* وتحت الأداة المختارة خطٌّ بلون حبرها: يُنقر فتنفتح ألوانُها (طلبُ صاحب الموقع) */
+      /* والأداةُ المختارةُ كلُّها — أيقونتُها وعددُها وخطُّها — بحبرها هي (طلبُ صاحب الموقع)، فإذا بُدّلت الأداةُ تبدّل اللونُ معها */
+      const ul = k => `<span class="cx-hltool__ul" data-hlpal="${k}" role="button" tabindex="-1" title="${esc(T().hlInk || '')}"></span>`;
+      el._tool.innerHTML = `<button type="button" data-hltool="t" class="${tool === 't' ? 'is-on' : ''}" style="--tc:var(--ink-${hlCol.t})" title="${esc(T().hlToolT || '')}">${HL_MARK}<i data-hln="t"></i>${ul('t')}</button>`
+        + `<button type="button" data-hltool="box" class="${tool === 'box' ? 'is-on' : ''}" style="--tc:var(--ink-${hlCol.box})" title="${esc(T().hlToolBox || '')}">${HL_BOX}<i data-hln="b"></i>${ul('box')}</button>`;
+      el._op = -1;
+    }
+    if (!el._bound) hlRailBind(el);
+    const oi = hlOpenUsr[id] ? Math.max(0, rows.findIndex(r => r.cid === hlOpenCid(id))) : 0;
+    if (st.center < 0 || (!hlOpenUsr[id] && st.target == null && !st.drag)) st.center = oi;
+    else if (st.target == null && !st.drag && Math.round(st.center) !== oi) { st.target = oi; hlRailKick(el); }
+    st.center = Math.min(st.center, rows.length - 1);
+    hlRailLayout(el); hlToolSync(id);
+  }
+  /* البطاقاتُ متساويةٌ بفُرَجٍ ثابتة وتبهت كلّما بعُدت، والتي في الوسط تكبر وتنبسط فيها الأدوات — والانتقالُ بينهما متّصلٌ مع التمرير */
+  function hlRailLayout(el) {
+    const st = el._st, rows = el._rows, tabs = el._tabs, P = HL_R; if (!rows) return;
+    const N = rows.length, W = el.clientWidth, c = st.center, it = [];
+    let acc = 0;
+    for (let i = 0; i < N; i++) {
+      const dd = Math.abs(i - c);
+      let o = Math.max(0, 1 - dd * 1.4); o = o * o * (3 - 2 * o);
+      const w = P.S + (rows[i].ow - P.S) * o, h = P.S + (P.OH - P.S) * o;
+      acc += i ? P.G : 0;
+      it.push({ w, h, o, dd, m: acc + w / 2 }); acc += w;
+    }
+    const fl = Math.max(0, Math.min(N - 1, Math.floor(c))), cl = Math.min(N - 1, fl + 1), fr = Math.max(0, Math.min(1, c - fl));
+    const off = W / 2 - (it[fl].m + (it[cl].m - it[fl].m) * fr), sg = el._rtl ? -1 : 1;
+    for (let i = 0; i < N; i++) {
+      const t = it[i], e = tabs[i], x = off + t.m - t.w / 2, vis = x < W + 30 && x + t.w > -30;
+      if (!vis) { if (e.style.display !== 'none') e.style.display = 'none'; continue; }
+      if (e.style.display) e.style.display = '';
+      e.style.transform = `translate(${(sg * x).toFixed(2)}px, -50%)`; e.style.width = t.w.toFixed(2) + 'px'; e.style.height = t.h.toFixed(2) + 'px';
+      e.style.opacity = Math.max(.3, 1 - Math.max(0, t.dd - .5) * .2).toFixed(3);
+      e.style.setProperty('--fs', (9.5 + 4 * t.o).toFixed(2) + 'px');
+      e.style.setProperty('--o', t.o.toFixed(3));
+    }
+    const op = Math.max(0, Math.min(N - 1, Math.round(c)));
+    if (op !== el._op) {
+      if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
+      el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
+      el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
+      const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
+    }
+    /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
+    if (it[op].o > .99 && !rows[op].owM) { const e = tabs[op], sw = e.scrollWidth; rows[op].owM = 1; if (Math.abs(sw - rows[op].ow) > 1) { rows[op].ow = sw; hlRailLayout(el); return; } }
+  }
+  const hlRailLive = new Set(); let hlRailRaf = 0;
+  function hlRailKick(el) { hlRailLive.add(el); if (!hlRailRaf) hlRailRaf = requestAnimationFrame(hlRailTick); }
+  function hlRailTick() {
+    hlRailRaf = 0;
+    for (const el of [...hlRailLive]) { if (!el.isConnected || !el._rows || !hlRailStep(el)) hlRailLive.delete(el); }
+    if (hlRailLive.size) hlRailRaf = requestAnimationFrame(hlRailTick);
+  }
+  /* خطوةُ حركة: نابضٌ إلى الهدف، أو قصورٌ يخبو ثمّ يستقرّ على أقرب لسان — ويُرجَع ‎false‎ حين يسكن */
+  function hlRailStep(el) {
+    const st = el._st, N = el._rows.length; let live = true;
+    if (!st.drag) {
+      if (bkReduce() && st.target != null) { st.center = st.target; st.vel = 0; st.target = null; live = false; }
+      else if (st.target != null) {
+        const f = st.target - st.center; st.vel += f * .11; st.vel *= .68; st.center += st.vel;
+        if (Math.abs(f) < .001 && Math.abs(st.vel) < .001) { st.center = st.target; st.vel = 0; st.target = null; live = false; }
+      } else {
+        st.center += st.vel; st.vel *= .92;
+        if (st.center < 0) { st.vel *= .6; st.center -= st.center * .2; }
+        if (st.center > N - 1) { st.vel *= .6; st.center += (N - 1 - st.center) * .2; }
+        if (Math.abs(st.vel) < .004 && performance.now() - st.lastIn > 140) st.target = Math.max(0, Math.min(N - 1, Math.round(st.center)));
+      }
+    }
+    hlRailLayout(el);
+    return live || !!st.drag;
+  }
+  function hlRailBind(el) {
+    el._bound = true;
+    const SP = HL_R.S + HL_R.G, go = i => { hlOpenUsr[el.dataset.pkid] = true; el._st.target = Math.max(0, Math.min(el._rows.length - 1, i)); hlRailKick(el); };
+    el.addEventListener('wheel', e => {
+      if (!el._rows) return;
+      e.preventDefault();
+      const st = el._st, d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? (el._rtl ? -e.deltaX : e.deltaX) : e.deltaY;
+      hlOpenUsr[el.dataset.pkid] = true; st.target = null; st.vel = Math.max(-.9, Math.min(.9, st.vel + d * .004)); st.lastIn = performance.now(); hlRailKick(el);
+    }, { passive: false });
+    el.addEventListener('pointerdown', e => {
+      if (!el._rows || e.button !== 0 || e.target.closest('.cx-hltool')) return;
+      const st = el._st, tab = e.target.closest('.cx-hlt');
+      st.drag = { x0: e.clientX, c0: st.center, moved: false, lx: e.clientX, lt: performance.now(), v: 0, tab: tab ? +tab.dataset.i : -1, pid: e.pointerId };
+      st.target = null; st.vel = 0;
+      try { el.setPointerCapture(e.pointerId); } catch (er) {}
+    });
+    el.addEventListener('pointermove', e => {
+      const st = el._st, g = st && st.drag; if (!g || e.pointerId !== g.pid) return;
+      const dx = e.clientX - g.x0; if (Math.abs(dx) > 4) g.moved = true;
+      if (!g.moved) return;
+      st.center = g.c0 + (el._rtl ? dx : -dx) / SP;
+      const t = performance.now(); g.v = (el._rtl ? 1 : -1) * (e.clientX - g.lx) / SP / Math.max(1, (t - g.lt) / 16.7); g.lx = e.clientX; g.lt = t;
+      el.classList.add('is-drag'); hlRailKick(el);
+    });
+    const up = e => {
+      const st = el._st, g = st && st.drag; if (!g || e.pointerId !== g.pid) return;
+      st.drag = null; el.classList.remove('is-drag');
+      if (!g.moved) { if (g.tab >= 0) go(g.tab); return; }
+      hlOpenUsr[el.dataset.pkid] = true; st.vel = g.v; st.lastIn = performance.now(); hlRailKick(el);
+    };
+    el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+    el.addEventListener('keydown', e => {
+      if (!el._rows) return;
+      const fwd = el._rtl ? 'ArrowLeft' : 'ArrowRight', back = el._rtl ? 'ArrowRight' : 'ArrowLeft', b = el._st.target != null ? el._st.target : Math.round(el._st.center);
+      const to = e.key === fwd ? b + 1 : e.key === back ? b - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? el._rows.length - 1 : null;
+      if (to == null) return;
+      e.preventDefault(); e.stopPropagation(); go(to);
+    });
+    el.addEventListener('click', e => {
+      const pl = e.target.closest('[data-hlpal]');
+      if (pl && pl.closest('button.is-on')) { e.preventDefault(); e.stopPropagation(); hlPalOpen(el, pl); return; }
+      const tb = e.target.closest('.cx-hltool button'); if (!tb) return;
+      e.preventDefault(); e.stopPropagation();
+      const id = el.dataset.pkid; if (tb.disabled) return;
+      hlTool[id] = tb.dataset.hltool; el._sig = ''; hlRailBuild(el); hlToolSync(id);
+    });
+  }
+  /* أداةُ المربّع (ق٦): يُعلَّم مصدرُ المساهمة فتصير صفحاتُه لوحَ رسمٍ بمؤشّرٍ متقاطع، وتعود نصًّا بالقلم */
+  function hlToolSync(id) {
+    Object.values(pkSrcBk).forEach(b => { if (b && b.view && pkSrcBase(hlSidOf(b)) === id) b.view.classList.toggle('hl-box', hlTool[id] === 'box'); });
+  }
+  /* ===== ألوانُ حبر الأداة: قائمةٌ صغيرةٌ تطفو فوق خطّها، تُغلق باختيارٍ أو نقرٍ خارجها أو Esc ===== */
+  function hlPalClose() { const P = document.getElementById('hl-pal'); if (P) P.remove(); }
+  function hlPalOpen(el, ul) {
+    hlPalClose();
+    const k = ul.dataset.hlpal, P = document.createElement('div');
+    P.id = 'hl-pal'; P.className = 'hl-pal'; P.setAttribute('role', 'menu');
+    P.innerHTML = Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${hlCol[k] === c}" class="${hlCol[k] === c ? 'is-on' : ''}" data-hlpc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('');
+    if (document.documentElement.getAttribute('data-theme') === 'dark') P.classList.add('is-dark');
+    document.body.appendChild(P);
+    /* تنزل من تحت البطاقة المفتوحة ملتصقةً بها كلسانٍ منها (طلبُ صاحب الموقع) — وإن ضاق ما تحتها رُفعت حتى تتّسع */
+    const card = ul.closest('.cx-hlt') || ul, r = card.getBoundingClientRect(), w = P.offsetWidth, h = P.offsetHeight;
+    P.style.left = Math.round(Math.min(innerWidth - w - 8, Math.max(8, r.left + r.width / 2 - w / 2))) + 'px';
+    P.style.top = Math.round(Math.min(r.bottom - 1, innerHeight - h - 4)) + 'px';
+    P.addEventListener('click', e => {
+      const b = e.target.closest('[data-hlpc]'); if (!b) return;
+      e.stopPropagation(); hlColSet(k, b.dataset.hlpc); hlPalClose();
+      el._sig = ''; hlRailBuild(el);
+    });
+  }
+  window.addEventListener('pointerdown', e => { const P = document.getElementById('hl-pal'); if (P && !P.contains(e.target) && !(e.target.closest && e.target.closest('[data-hlpal]'))) hlPalClose(); }, true);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('hl-pal')) { hlPalClose(); e.stopImmediatePropagation(); } }, true);
+  window.addEventListener('scroll', hlPalClose, true);
+  /* يُفتح صفٌّ بعينه (دائرةُ رقمه في الصفحة أو رقمُه في الجدول): ينزلق لسانُه إلى الوسط */
+  function hlRailGo(id, cid) {
+    hlOpen[id] = cid; hlOpenUsr[id] = true;
+    document.querySelectorAll(`.cx-hlrail[data-pkid="${CSS.escape(id)}"]`).forEach(el => {
+      if (!el._rows) return; const i = el._rows.findIndex(r => r.cid === cid); if (i < 0) return;
+      el._st.target = i; el._st.drag = null; hlRailKick(el);
+    });
+  }
+  /* الشريطُ يُرسم داخل التذييل بـ‎innerHTML‎ من طرقٍ كثيرة: يُركَّب كلُّ شريطٍ جديدٍ في الإطار التالي */
+  let hlRailMOq = 0;
+  new MutationObserver(() => {
+    if (hlRailMOq) return;
+    hlRailMOq = requestAnimationFrame(() => { hlRailMOq = 0; document.querySelectorAll('#cm-body .cx-hlrail:not(.is-on)').forEach(el => { el.classList.add('is-on'); hlRailBuild(el); }); });
+  }).observe(document.documentElement, { childList: true, subtree: true });
   /* في الجدول: رقمُ الصفّ المربوطِ بتظليلٍ يتلوّن، ونقرُه يقلّب الكتابَ إلى أوّل تظليلاته */
   function hlRowMarksSync(id) {
-    const H = hlData(id), used = new Set(); (H ? H.marks : []).forEach(x => x.c.forEach(c => used.add(c)));
+    const H = hlData(id), used = new Map(); (H ? H.marks : []).forEach(x => x.c.forEach(c => { if (!used.has(c)) used.set(c, x.col); }));
     document.querySelectorAll(`#cm-body .kt-view[data-pkid="${CSS.escape(id)}"] tr[data-kcard]`).forEach(tr => {
-      const n = tr.querySelector('.kt-num'); if (n) n.classList.toggle('has-hl', used.has(tr.dataset.kcard));
+      const n = tr.querySelector('.kt-num'); if (!n) return;
+      const col = used.get(tr.dataset.kcard);
+      n.classList.toggle('has-hl', !!col);
+      if (col) { n.style.setProperty('--hlc', HL_COL[col][1]); n.style.setProperty('--hli', HL_COL[col][2]); } else { n.style.removeProperty('--hlc'); n.style.removeProperty('--hli'); }
+      n.classList.toggle('is-hlopen', hlOpen[id] === tr.dataset.kcard);
     });
   }
   document.addEventListener('click', e => {
@@ -24145,7 +24499,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const m = H && H.marks.find(x => x.c.includes(cid)); if (!m) return;
       e.preventDefault(); e.stopPropagation();
       if (!pkSplitOn(id)) return;
-      pkLnkGo(id + m.s, m.k); hlSetCur(id, m.id);
+      pkLnkGo(id + m.s, m.k); hlSetCur(id, m.id); hlRailGo(id, cid);
       return;
     }
     const t = e.target.closest && e.target.closest('[data-hlcid]');
@@ -24153,20 +24507,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     if (t.classList.contains('bk-hlnum')) {
       const c = hlCan(t); if (!c) return;
-      const cid = t.dataset.hlcid; hlSetCur(c.id, null); hlArm[c.id] = hlArm[c.id] === cid ? 0 : cid; hlBarSync(c.id);
+      hlSetCur(c.id, null); hlRailGo(c.id, t.dataset.hlcid);
       return;
     }
-    const w = t.closest('[data-hlwrap]'); if (w) hlCircle(w.dataset.pkid, t.dataset.hlcid);
   }, true);
   /* Esc: يُلغى التحديدُ القائم أوّلًا، ثمّ الاختيار، ثمّ تُطفأ الدائرةُ الشغّالة · Delete يحذف المختار */
   document.addEventListener('keydown', e => {
     if (e.target.closest && e.target.closest('input, textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')) return;
     if (e.key === 'Escape') {
-      if (hlCur) { const id = hlCur.id; hlSetCur(id, null); e.preventDefault(); e.stopImmediatePropagation(); return; }
-      const ids = Object.keys(hlArm).filter(id => hlArm[id] && document.querySelector(`#cm-body [data-hlwrap][data-pkid="${CSS.escape(id)}"]`));
-      if (!ids.length) return;
-      ids.forEach(id => { hlArm[id] = 0; hlBarSync(id); });
-      e.preventDefault(); e.stopImmediatePropagation();
+      if (hlCur) { const id = hlCur.id; hlSetCur(id, null); e.preventDefault(); e.stopImmediatePropagation(); }
     } else if ((e.key === 'Delete' || e.key === 'Backspace') && hlCur) {
       e.preventDefault(); e.stopImmediatePropagation(); hlDelete(hlCur.id, hlCur.m);
     }
@@ -24191,18 +24540,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.gl = null;   /* المحرّكُ بعد التحميل */
     b.dark = pkDark();
     let raf = 0;
+    /* المربّعُ يكبر أو يصغر (‎cxMorph‎) أو مساحتُه تدخل وتخرج (‎bkHoldN‎): اللوحةُ تُحجَّم صورةً حول وسطها بلا رسمٍ ولا ترتيب —
+       ويُرسم الكتابُ مرّةً حين تقف. ويُسأل عن التجميد ساعةَ التنفيذ أيضًا: إطارٌ جُدول قبل أن تبدأ الحركةُ كان يرسم في وسطها */
+    const freeze = () => {
+      if (!(cxMorphBusy || bkHoldN > 0) || !b.gl || !b.stW || !b.stH) return false;
+      const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
+      Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
+      bkTLHide(b);
+      return true;
+    };
     b.ro = new ResizeObserver(() => {
       if (!b.el.isConnected) { b.ro.disconnect(); return; }
       if (b.stage.clientWidth === b.stW && b.stage.clientHeight === b.stH) return;
-      /* المربّعُ يكبر أو يصغر (‎cxMorph‎): اللوحةُ تُحجَّم صورةً حول وسطها بلا رسمٍ ولا ترتيب — ويُرسم الكتابُ مرّةً حين تقف */
-      if (cxMorphBusy && b.gl && b.stW && b.stH) {
-        const k = Math.min(b.stage.clientWidth / b.stW, b.stage.clientHeight / b.stH);
-        Object.assign(b.gl.el.style, { left: '50%', top: '50%', right: 'auto', bottom: 'auto', transformOrigin: '50% 50%', transform: `translate(-50%, -50%) scale(${k})` });
-        bkTLHide(b);
-        return;
-      }
+      if (freeze()) return;
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => bkLayout(b));
+      raf = requestAnimationFrame(() => { if (!freeze()) bkLayout(b); });
     });
     b.ro.observe(b.stage);
     const st = b.stage;
@@ -24403,6 +24755,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b && b.gl && b.gl.refreshPage) b.gl.refreshPage(sel.k);
     if (c) hlBarSync(c.id);
   }
+  /* رسمُ المربّع: من نقطةٍ إلى نقطةٍ على الصفحة الساكنة — يُرسم معاينةً ويثبت تظليلًا من نوع ‎box‎ في الصفّ المفتوح */
+  let bkBoxDrag = null;
+  const bkBoxPt = (d, e) => { const R = d.getBoundingClientRect(); return [Math.min(1, Math.max(0, (e.clientX - R.left) / R.width)), Math.min(1, Math.max(0, (e.clientY - R.top) / R.height))]; };
+  const bkBoxRect = (a, z) => ({ l: Math.min(a[0], z[0]), r: Math.max(a[0], z[0]), t: Math.min(a[1], z[1]), b: Math.max(a[1], z[1]) });
+  document.addEventListener('pointerdown', e => {
+    const d = e.target.closest && e.target.closest('.bk-tl');
+    if (!d || e.button !== 0 || e.target.closest('.bk-hlnum')) return;
+    const c = hlCan(d); if (!c || hlTool[c.id] !== 'box' || !hlRows(c.id)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    bkTLClear();
+    const el = document.createElement('i'); el.className = 'bk-boxsel'; el.style.setProperty('--c', HL_COL[hlCol.box][1]); d.appendChild(el);
+    bkBoxDrag = { d, a: bkBoxPt(d, e), el, id: e.pointerId };
+    try { d.setPointerCapture(e.pointerId); } catch (er) {}
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (!bkBoxDrag || e.pointerId !== bkBoxDrag.id) return;
+    const g = bkBoxDrag, o = bkBoxRect(g.a, bkBoxPt(g.d, e)); g.z = o;
+    Object.assign(g.el.style, { left: o.l * 100 + '%', top: o.t * 100 + '%', width: (o.r - o.l) * 100 + '%', height: (o.b - o.t) * 100 + '%' });
+  }, true);
+  const bkBoxUp = e => {
+    if (!bkBoxDrag || e.pointerId !== bkBoxDrag.id) return;
+    const g = bkBoxDrag; bkBoxDrag = null; g.el.remove();
+    e.stopImmediatePropagation();
+    const o = g.z;
+    /* نقرةٌ أو مربّعٌ أصغرُ من أن يُقصد: تختار ما تحتها كالقلم */
+    if (!o || o.r - o.l < .012 || o.b - o.t < .008) { hlPick(g.d, e); return; }
+    hlCreate({ d: g.d, k: +g.d.dataset.k, rtl: true, bars: [o], text: '' }, null, 'box');
+  };
+  document.addEventListener('pointerup', bkBoxUp, true);
+  document.addEventListener('pointercancel', bkBoxUp, true);
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
     if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
@@ -24430,7 +24812,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* التحديدُ عابرٌ حتى يدخل دائرة (طلبُ صاحب الموقع): مع دائرةٍ شغّالةٍ يثبت فيها فورًا، وإلّا يبقى تحديدًا
        تُضغط دائرةٌ فيثبت فيها، أو يُنقر بعيدًا عنه (أو Esc) فيختفي */
     const c = hlCan(g.d);
-    if (c && hlArm[c.id]) { hlCreate(bkTLSel); return; }
+    /* اللسانُ المفتوحُ يستقبل كلَّ تظليل (ق٤): يثبت التحديدُ فيه فورًا بآخر لون، ويظهر شريطُ اللون لتغييره أو حذفه */
+    if (c && hlRows(c.id)) { hlCreate(bkTLSel); return; }
     if (c) { if (hlCur) hlSetCur(hlCur.id, null); hlBarSync(c.id); }
     /* يُطلى التحديدُ على الورقة نفسِها، فإذا رُفعت الصفحةُ بلمس طرفها مال معها ولم يختفِ — وتُرفع أشرطةُ الطبقة حين يصل الطلاء */
     const b = bkOfEl(g.d), sel = bkTLSel;
@@ -24445,6 +24828,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
   function bk2Engine(b) {
     const st = b.stage;
+    bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
       if (b.gl && !b.gl.dead) return;
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
@@ -24476,8 +24860,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
       mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       bk2Layout(b);
+      /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
+      const g = b.gl;
+      const off = () => { if (b.gl === g) bkPhHide(b); };
+      g.ready().then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
+      setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
       /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
+      bkPhHide(b);
       bk2No = true;
       try { b.ro.disconnect(); } catch (e) {}
       delete b.gl;
@@ -24485,8 +24875,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   function bk2Layout(b) {
-    b.stW = b.stage.clientWidth; b.stH = b.stage.clientHeight;
-    if (!b.stW || !b.stH) return;
+    /* مقاسٌ صفرٌ (مساحةٌ تنبسط من لا شيء، أو وعاءٌ مخفيّ) لا يُكتب: يبقى آخرُ مقاسٍ حقيقيّ — منه يُحجَّم الكتابُ صورةً وهو مجمَّد */
+    const w0 = b.stage.clientWidth, h0 = b.stage.clientHeight;
+    if (!w0 || !h0) return;
+    b.stW = w0; b.stH = h0;
     const g = b.gl;
     if (g) {
       const dk = pkDark(); if (dk !== b.dark) { b.dark = dk; g.setTheme(dk ? 'dark' : 'light'); }
@@ -25045,7 +25437,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = chPdfKey(code, ch);
     const ok = await chIdb('readwrite', key, file);
     if (!ok) { toast(T().chSaveFail); return; }
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
@@ -25056,7 +25448,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const code = cmCode, ch = cmTabSel, key = chPdfKey(code, ch);
     if (!chPdfMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
-    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; }
+    if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
     delete state.chPdf[code][ch];
     save();
@@ -25096,7 +25488,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           renderCmSection();
           const c2 = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
           if (c2) c2.focus({ preventScroll: true });
-        }, pkFxOtherW(bk.parentElement, id, false, false));
+        }, pkFxOtherW(bk.parentElement, id, false));
         return;
       }
     }
@@ -25283,7 +25675,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             renderCmSection();
             const nb = document.querySelector(`#cm-body [data-pkview="source"][data-pkid="${CSS.escape(id)}"]`);
             if (nb) nb.focus({ preventScroll: true });
-          }, pkFxOtherW(sp, id, true, false));
+          }, pkFxOtherW(sp, id, true));
           return;
         }
       }

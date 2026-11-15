@@ -16888,9 +16888,9 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 .pk--max .kt-view--tree { flex: 1 1 auto; min-height: 0; margin-bottom: 26px; }
 /* ===== «المصدر» و«الشجريّ» معًا: الكتابُ يمينًا واللوحُ يسارَه ===== */
 .pk-split { display: flex; gap: 14px; align-items: stretch; min-height: 0; }
-/* حصّةُ الكتاب ‎--spl‎ من العرض بعد الفُرجة (افتراضُها ‎.383‎ = ‎.62 : 1‎ كما كانت) — يغيّرها خطُّ الفاصل (ROADMAP-SPLITTER) */
+/* حصّةُ الكتاب ‎--spl‎ من العرض إلّا فُرجةً واحدة (افتراضُها ‎.383‎) — يغيّرها خطُّ الفاصل (ROADMAP-SPLITTER) */
 .pk-split { position: relative; }
-.pk-split > .pk-src { flex: 0 0 calc((100% - var(--g, 14px)) * var(--spl, .383)); min-width: 0; }   /* الكتابُ على حصّته، واللوحُ يأخذ الباقي */
+.pk-split > .pk-src { flex: 0 1 calc((100% - 14px) * var(--spl, .383)); min-width: 0; }   /* الكتابُ على حصّته (من العرض إلّا فُرجةً واحدة، في مساحتين أو ثلاث)، والملخّصُ يأخذ الباقي */
 .pk-split > .kt-view--tree { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; margin-bottom: 0; }
 /* والبطاقيُّ والجدوليُّ جارين: يُمرَّران في جانبهما ولا يُطيلان القسمة */
 .pk-split > .kt-view:not(.kt-view--tree) {
@@ -16899,7 +16899,7 @@ html[data-theme="dark"] .kcv-ui { background: #3a4246; }
 }
 .pk--max .pk-split > .kt-view:not(.kt-view--tree) { max-height: none; min-height: 0; }
 .pk-split > .kt-view--tree .kcv { flex: 1 1 auto; height: auto; min-height: 420px; }
-.pk--max .post-ytmain > .pk-split { flex: 1 1 auto; margin-bottom: 26px; }
+.pk--max .post-ytmain > .pk-split { flex: 1 1 0; min-height: 0; margin-bottom: 26px; }   /* يأخذ ما بقي ولا يطول بمحتواه: بنكٌ ممتلئٌ كان يمدّه فيضغط ما فوقه ويتبدّل مقاسُ الكتاب (فيُعاد بناؤه) بفتحه وإغلاقه */
 .pk--max .pk-split > .pk-src .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
 /* ونصفُ العرض لا يسع الكتابَ وعمودَ أدواته جنبًا إلى جنب، والكتابُ لا يظهر إلّا في القسمة —
    فالأدواتُ (الغلافُ والصفحاتُ وربطُ الصفحات) صفٌّ مضغوطٌ فوق الكتاب، و«ربطُ الصفحات» مفتوحًا لوحٌ يطفو فوقه */
@@ -17081,7 +17081,7 @@ html[data-theme="dark"] .cx-midadd { color: #d4b36a; background: color-mix(in sr
    وتظهر في وسطه مسكةٌ بثلاث نقاط كمسكات الموقع */
 .pk-splh {
   position: absolute; z-index: 3; inset-block: 0; width: 14px;
-  inset-inline-start: calc((100% - var(--g, 14px)) * var(--spl, .383));
+  inset-inline-start: calc((100% - 14px) * var(--spl, .383));
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
   cursor: col-resize; touch-action: none; outline: none;
 }
@@ -17102,12 +17102,12 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
    حصّتُها ‎--sqb‎ من العرض بعد الفُرَج، وخطُّها عند حافّتها الداخليّة (من نهاية الصفّ). وفيها في التحرير وعاءُ المحرّر
    (‎#cm-cards‎ — يُظهَر هنا وإن أخفته العروضُ الثلاثة)، وفي النشر شجرةُ البنك قراءةً. تُمرَّر في جوفها ولا تُطيل القسمة */
 .pk-split > .pk-bank {
-  flex: 0 0 calc((100% - var(--g, 14px)) * var(--sqb, .383)); min-width: 0; min-height: 0;
+  flex: 0 1 calc((100% - 14px) * var(--sqb, .3)); min-width: 0; min-height: 0;
   display: flex; flex-direction: column; padding: 0; overflow: hidden;
   /* بلا مربّعٍ خاصّ (طلبُ صاحب الموقع): المجلداتُ على المربّع الأساسيّ مباشرةً، كما كانت في العرض المجلّديّ */
   border: 0; border-radius: 0; background: none;
 }
-.pk-split > .pk-splh--b { inset-inline-start: auto; inset-inline-end: calc((100% - var(--g, 14px)) * var(--sqb, .383)); }
+.pk-split > .pk-splh--b { inset-inline-start: auto; inset-inline-end: calc((100% - 14px) * var(--sqb, .3)); }
 .pk--vwalt .pk-bank #cm-cards { display: block; }
 .pk-bank > #cm-cards, .pk-bank > .x3 { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; margin: 0; padding-inline-end: 4px;
   scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent; }
@@ -18278,7 +18278,7 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 /* زرُّ «صفحة واحدة ⇄ صفحتان» (تحت الكتاب وفي التذييل) */
 .cbk-nav__mode svg { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 /* والكتابُ لا يترك قاعَ مساحته لفجوة الأيقونات: الفجوةُ في المساحة اليسرى، وما دام بعده مساحةٌ فليست فيه (طلبُ صاحب الموقع) */
-#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--book:has(~ .kt-view, ~ .pk-bank) { padding-bottom: 6px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-src--book:has(~ .kt-view, ~ .pk-bank) { padding-bottom: 14px; }   /* كحشوه والمساحاتُ ثلاث — فلا يكبر الكتابُ ويصغر بفتح الثالثة وإغلاقها */
 /* ورأسُ مساحة المصادر (أيقونتُها في الزاوية) يطفو فوق الكتاب ولا يأخذ سطرًا من قامته (طلبُ صاحب الموقع) */
 #cm-body .pk-split > .pk-src--book { position: relative; }
 #cm-body .pk-split > .pk-src--book > .pk-blkh { position: absolute; top: 10px; inset-inline: 14px; margin: 0; z-index: 3; pointer-events: none; }
@@ -18302,35 +18302,10 @@ html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
 /* دوائرُ الأرقام في الكتاب مرسومةٌ على الورقة؛ وفوقها أزرارٌ شفّافةٌ تُمسك الرقم */
 .bk-tl .bk-hlnum { position: absolute; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; z-index: 3; }
 .bk-tl .bk-hlnum:hover { box-shadow: 0 0 0 2px rgba(169, 133, 47, .55); }
-/* ===== شريطُ الأرقام في التذييل: دوائرُ ممتلئةٌ ثمّ فارغةٌ للتالي ===== */
-.cx-hlbar { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 5px; border-radius: 999px; border: 1.5px solid var(--u-line); }
-.cx-hlc { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; cursor: pointer; box-sizing: border-box;
-  font: 700 11.5px/1 system-ui, sans-serif; color: #3a2c0b; background: var(--hc, #f3d27a); border: 1.5px solid rgba(120, 92, 25, .45);
-  transition: transform .15s, box-shadow .15s, background .15s; }
-.cx-hlc:hover { transform: scale(1.08); }
-.cx-hlc.is-next { background: transparent; border: 1.5px dashed var(--u-line); color: var(--u-muted, #5b6b72); }
-.cx-hlc.is-arm { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4.5px #a9852f; animation: cx-hlarm 1.6s ease-in-out infinite; }
-.cx-hlc.is-next.is-arm { border-style: solid; border-color: #a9852f; color: #a9852f; }
-.cx-hlc.is-in { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 4px var(--u-ink, #14233f); }
-.cx-hlbar.has-cur .cx-hlc:not(.is-in) { opacity: .75; }
-.cx-hlbar.has-cur .cx-hlc:not(.is-in):hover { opacity: 1; }
-@keyframes cx-hlarm { 50% { box-shadow: 0 0 0 2.5px var(--u-surf, #fff), 0 0 0 6px rgba(169, 133, 47, .45); } }
-@media (prefers-reduced-motion: reduce) { .cx-hlc.is-arm { animation: none; } }
-.cx-hlmore { font-size: 11px; color: var(--u-muted, #5b6b72); padding-inline: 2px; }
-html[data-theme="dark"] .cx-hlc.is-arm, html[data-theme="dark"] .cx-hlc.is-in { --u-surf: #1b2529; }
-html[data-theme="dark"] .cx-hlc.is-in { box-shadow: 0 0 0 2.5px #1b2529, 0 0 0 4px #eef1f2; }
-html[data-theme="dark"] .cx-hlc.is-next { color: #9aa8ad; }
 /* التظليلُ المختار: إطارٌ رفيعٌ حول أسطره */
 .bk-tl .bk-hlcur { position: absolute; display: block; pointer-events: none; box-shadow: 0 0 0 1.5px rgba(169, 133, 47, .95); }
-/* الدوائرُ صفوفُ الجدول: صفٌّ بلا تظليلٍ دائرةٌ بحدٍّ فقط، والمربوطُ ممتلئٌ بلون التظليل، و«+» صفٌّ جديد. والشريطُ يُمرَّر أفقيًّا إن كثرت */
-.cx-hlbar { max-width: min(44vw, 440px); overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
-.cx-hlbar::-webkit-scrollbar { display: none; }
-.cx-hlc { flex: none; }
-.cx-hlc.is-row { background: transparent; border: 1.5px solid var(--u-line); color: var(--u-ink, #14233f); }
-.cx-hlc.is-next { font-size: 14px; }
-html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
 /* رقمُ الصفّ المربوط في الجدول بلون التظليل — يُنقر فيقلّب الكتاب إلى تظليله */
-.kt-num.has-hl { background: #f3d27a; color: #3a2c0b; border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
+.kt-num.has-hl { background: var(--hlc, #f3d27a); color: var(--hli, #3a2c0b); border-radius: 999px; box-shadow: 0 0 0 1.5px rgba(120, 92, 25, .35); cursor: pointer; }
 .kt-num.has-hl { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; }
 /* ===== المساحاتُ في المساهمة الضيّقة بقامةٍ ثابتة (طلبُ صاحب الموقع) =====
    كانت القسمةُ تأخذ قامتَها من محتوى جيرانها، فتتبدّل مع تبديل عرض الملخّص (شجريّ · بطاقيّ · جدوليّ)، وتنضغط إن قصُر جارٌ
@@ -18341,3 +18316,129 @@ html[data-theme="dark"] .cx-hlc.is-row { color: #e6ecee; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split:not(.pk-split--none) > :is(.kt-view--table, .kt-view--cards, .pk-bank) { overflow-y: auto; overscroll-behavior: contain; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--book > .pk-src__view { flex: 1 1 auto; height: auto; min-height: 0; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split > .pk-src--multi > .pk-src__list { flex: 1 1 auto; height: auto; min-height: 0; }
+/* ===== غلافُ الكتاب المؤقّت (‎bkPhShow‎): نظيرٌ مسطّحٌ في مكانه حتى يجهز — فوق لوحة الكتاب، ويذوب ===== */
+.bk2-ph { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: center; pointer-events: none; transition: opacity .24s ease; }
+.bk2-ph__pg { position: relative; flex: none; height: 100%; aspect-ratio: var(--ar, .707); overflow: hidden; background: #f6f1e6;
+  box-shadow: 0 10px 26px -14px rgba(20, 35, 63, .45); }
+.bk2-ph__pg.is-cover, .bk2-ph__pg.is-inside { background: var(--bk-cover); }
+.bk2-ph__img { display: block; width: 100%; height: 100%; }
+/* لمعةٌ هادئةٌ تعبرها حتى تأتي صورتُها */
+.bk2-ph__pg:not(:has(.bk2-ph__img))::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
+  background-size: 220% 100%; animation: bk2-ph-sh 1.4s ease-in-out infinite; }
+@keyframes bk2-ph-sh { from { background-position: 120% 0; } to { background-position: -20% 0; } }
+@media (prefers-reduced-motion: reduce) { .bk2-ph__pg::after { animation: none !important; } }
+html[data-theme="dark"] .bk2-ph__pg:not(.is-cover):not(.is-inside) { background: #e6e1d4; }
+/* هيئةُ الكتاب حتى يُفتح ملفُّه: غلافٌ بلونه في الوسط يلمع */
+.bk-skel { flex: 1 1 auto; align-self: stretch; display: grid; place-items: center; min-height: 0; padding: 2%; }
+.bk-skel > i { position: relative; display: block; height: 96%; max-width: 100%; aspect-ratio: .707; overflow: hidden; background: var(--bk-cover); opacity: .85;
+  box-shadow: 0 10px 26px -14px rgba(20, 35, 63, .45); }
+.bk-skel > i::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .18) 50%, transparent 70%);
+  background-size: 220% 100%; animation: bk2-ph-sh 1.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .bk-skel > i::after { animation: none; } }
+
+/* ===== تذييل الكتاب بثلاث خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح ورقمُ الصفحة،
+   ويسارًا اسمُ المصدر وطريقةُ القراءة على يساره وتحتهما «ربط الصفحات» — مصغّرةٌ ومكدّسة ===== */
+.cx-acttools:has(> .cx-ftc) { inset-inline: 14px; inset-inline-start: 14px; transform: translateY(-50%); justify-content: center; }
+html[data-lang="en"] .cx-acttools:has(> .cx-ftc) { transform: translateY(-50%); }
+/* وقائمتا المصدر و«ربط الصفحات» فوق اللوح حين يملأ الشاشة (‎#cm-body.is-cxfull‎ في 4000) — كانتا تنفتحان خلفه */
+.pk-srcpop, .pk-lnk-layer { z-index: 4100; }
+/* ===== شريطُ الصفوف تحت زرّي التصفّح (ROADMAP-HL · ج: الحلقات — اختيارُ صاحب الموقع) =====
+   لكلّ صفٍّ رقمٌ في حلقةٍ مقسومةٍ بألوان تظليلاته، تصغر الحلقاتُ كلّما بعُدت حتى تصير نقاطًا، والتي في الوسط
+   كبسولةٌ بلغة أزرار التذييل فيها حلقتُها وعدُّ تظليلاته ومفتاحُ الأداة. المواضعُ والمقاساتُ يضعها المحرّك (‎hlRailLayout‎) */
+.cx-acttools > .cx-ftc { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.cx-ftc__nav { display: flex; align-items: center; gap: 8px; }
+.cx-ftc__nav > .cx-actb { width: 34px; height: 34px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-ftc__nav > .cx-actb:disabled { opacity: .35; }
+:is(.pk--max, .pk--frame).pk--edit:has(.post-ytmain > .pk-split.has-book):not(.pk--ftdn) .vt-foot { min-height: 94px; max-height: 100px; }   /* والكتابُ مفتوحٌ: صفٌّ ثانٍ لشريط الصفوف، بقامةٍ واحدةٍ في المساحات الثلاث */
+.cx-hlrail { position: relative; width: min(440px, 46vw); height: 40px; overflow: hidden; touch-action: pan-y; cursor: grab; outline: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%); }
+.cx-hlrail.is-drag { cursor: grabbing; }
+.cx-hlrail:focus-visible .cx-hlt.is-op { box-shadow: 0 0 0 2px #2c5e65; }
+/* وفي الجدول: رقمُ الصفّ المفتوح مطوَّقٌ — هنا يدخل التظليلُ القادم */
+.kt-num.is-hlopen { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; border-radius: 999px;
+  box-shadow: 0 0 0 1.5px #2c5e65; }
+.kt-num.has-hl.is-hlopen { box-shadow: 0 0 0 1.5px #2c5e65, 0 0 0 3px var(--u-surf, #fff); }
+/* ===== أداةُ المربّع (ROADMAP-HL ق٦): الصفحةُ الساكنةُ لوحُ رسم — مؤشّرٌ متقاطع، ومعاينةُ المربّع بلون القلم وحدٍّ متقطّع ===== */
+.hl-box .bk-tl { pointer-events: auto; cursor: crosshair; }
+.hl-box .bk-tl span, .hl-box .bk-tl .bk-tl__ln { cursor: crosshair; }
+.bk-tl .bk-boxsel { position: absolute; display: block; pointer-events: none; background: var(--c); mix-blend-mode: multiply; opacity: .75;
+  outline: 1.5px dashed rgba(20, 35, 63, .55); outline-offset: -1px; }
+/* ===== التحريرُ قبل لمس أيّ مساحة (طلبُ صاحب الموقع): لا يُرى تذييلٌ ولا خطُّ طيِّه، ومكانُهما محجوزٌ =====
+   فإذا لُمست مساحةٌ ظهرا في مكانهما بحركة ولم تتقلّص المساحاتُ فوقهما. وقامةُ التذييل واحدةٌ في المساحات الثلاث فلا تقفز حين تتبدّل */
+.pk--edit.pk--ftnone .vt-foot, .pk--edit.pk--ftnone .pk-ftline { opacity: 0; visibility: hidden; transform: translateY(10px); pointer-events: none; }
+.pk--ftanim .vt-foot, .pk--ftanim .pk-ftline { transition: max-height .22s ease, opacity .2s ease, transform .24s cubic-bezier(.2, .8, .2, 1), padding .22s ease, margin .22s ease, visibility .22s; }
+:is(.pk--max, .pk--frame).pk--edit:not(.pk--ftdn) .vt-foot { min-height: 58px; }
+
+/* ===== حلقاتٌ بحبرٍ غامقٍ نحيف، ومفتاحُ الأداة خطوطٌ بالحبر نفسِه (اختيارُ صاحب الموقع) =====
+   القلمُ والمربّعُ بعدّيهما، والمختارُ بحبر لون الصفّ وتحته خطٌّ قصير، والآخرُ باهت */
+.cx-hlrail { --ink-y: #c99410; --ink-g: #3f9a52; --ink-b: #3f84c6; --ink-p: #c95b7d; }
+html[data-theme="dark"] .cx-hlrail { --ink-y: #e8bf4f; --ink-g: #79c487; --ink-b: #7fb2e6; --ink-p: #e98ea9; }
+.cx-hltool { display: flex; align-items: center; gap: 2px; opacity: var(--o, 0); margin-inline-end: 8px; direction: rtl; }
+.cx-hltool button { position: relative; display: inline-flex; align-items: center; gap: 3px; height: 24px; padding: 0 6px; border: 0; background: none; cursor: pointer;
+  color: var(--u-ink, #14233f); opacity: .4; font-family: inherit; font-size: 11.5px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; transition: opacity .18s, color .18s; }
+html[data-theme="dark"] .cx-hltool button { color: #e6ecef; }
+.cx-hltool button:hover { opacity: .7; }
+.cx-hltool button svg { width: 11px; height: 11px; flex: none; }
+.cx-hltool button i { font-style: normal; }
+.cx-hltool button i:empty { display: none; }
+.cx-hltool button.is-on { opacity: 1; color: var(--tc, #2c5e65); }
+
+/* خطُّ الأداة المختارة بلون حبرها، يُنقر فتنفتح ألوانُها (طلبُ صاحب الموقع) — ساحةُ نقرٍ أوسعُ من الخطّ */
+.cx-hltool__ul { position: absolute; left: 3px; right: 3px; bottom: -4px; height: 9px; cursor: pointer; display: none; }
+.cx-hltool button.is-on .cx-hltool__ul { display: block; }
+.cx-hltool__ul::before { content: ''; position: absolute; left: 2px; right: 2px; top: 3px; height: 2.5px; border-radius: 99px; background: var(--tc, currentColor); transition: height .15s, top .15s; }
+.cx-hltool__ul:hover::before { height: 3.5px; top: 2.5px; }
+.hl-pal { position: fixed; z-index: 4200; display: flex; gap: 6px; padding: 6px 7px; border-radius: 999px; background: #fff; direction: rtl;
+  box-shadow: 0 0 0 1px rgba(20, 40, 46, .12), 0 10px 26px -10px rgba(20, 35, 63, .45); animation: hl-pal-in .14s cubic-bezier(.2, .8, .2, 1); }
+.hl-pal.is-dark { background: #2c373c; box-shadow: 0 0 0 1px rgba(255, 255, 255, .12), 0 12px 28px -10px rgba(0, 0, 0, .7); }
+@keyframes hl-pal-in { from { opacity: 0; transform: translateY(4px); } }
+.hl-pal button { width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%; background: var(--c); cursor: pointer; box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .15); transition: transform .12s; }
+.hl-pal button:hover { transform: scale(1.12); }
+.hl-pal button.is-on { box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #2c5e65; }
+.hl-pal.is-dark button.is-on { box-shadow: 0 0 0 2px #2c373c, 0 0 0 3.5px #a0cdd2; }
+@media (prefers-reduced-motion: reduce) { .hl-pal { animation: none; } }
+
+/* ===== التذييلُ الجديد (طلبُ صاحب الموقع): المصدرُ في الزاوية البعيدة يمينًا، ووضعُ الكتاب في الزاوية البعيدة يسارًا،
+   وفي الوسط سطرُ تصفّحٍ نحيفٌ فوق رزمة البطاقات — والبطاقةُ المفتوحةُ تحت رقم الصفحة بالضبط ===== */
+.cx-acttools > .cx-ftr2 { position: absolute; inset-inline-start: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; }
+.cx-acttools > .cx-ftl2 { position: absolute; inset-inline-end: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; }
+.cx-ftr2 .pk-lnk { position: static; border: 0; background: none; box-shadow: none; }
+.cx-ftr2 .pk-lnk__hd { display: none; }
+.cx-srctools.cx-ftr2 .pk-lnk__tree { inset-inline-end: auto; inset-inline-start: 0; }
+.cx-ftl2 .cx-actmode { width: 30px; height: 30px; border: 1px solid var(--u-line); background: var(--u-surf, #fff); }
+.cx-ftl2 .cx-actmode svg { width: 15px; height: 15px; }
+html[data-theme="dark"] .cx-ftl2 .cx-actmode { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.cx-acttools > .cx-ftc { gap: 3px; }
+.cx-ftc__nav { gap: 6px; height: 16px; }
+.cx-ftc__nav > .cx-actb { width: 18px; height: 18px; border: 0 !important; background: none !important; box-shadow: none !important; color: var(--u-muted, #7a8a8e); }
+.cx-ftc__nav > .cx-actb svg { width: 13px; height: 13px; }
+.cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: var(--u-ink, #14233f); }
+html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .5) !important; }
+html[data-theme="dark"] .cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: #fff !important; }
+.cx-ftc__nav .cx-actind { font-size: 12px; font-weight: 700; }
+:is(.pk--max, .pk--frame).pk--edit:has(.post-ytmain > .pk-split.has-book):not(.pk--ftdn) .vt-foot { min-height: 64px; max-height: 70px; }
+.cx-hlrail { height: 42px; }
+/* البطاقة: مربّعٌ أبيضُ بحدٍّ رفيع، في رأسه شريطُ أحبار تظليلاته */
+.cx-hlt { position: absolute; top: 50%; inset-inline-start: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  padding: 0; border: 0; border-radius: 6px; overflow: visible; cursor: pointer; font: inherit; color: var(--u-ink, #14233f);
+  background: var(--u-surf, #fff); box-shadow: 0 1px 2px rgba(20, 35, 63, .16), inset 0 0 0 .8px rgba(20, 40, 46, .16); -webkit-tap-highlight-color: transparent; }
+html[data-theme="dark"] .cx-hlt { color: #e6ecef; background: #34424a; box-shadow: 0 1px 3px rgba(0, 0, 0, .4), inset 0 0 0 .8px rgba(255, 255, 255, .14); }
+.cx-hlt.is-op { border-radius: 9px; box-shadow: 0 6px 14px -6px rgba(20, 35, 63, .4), inset 0 0 0 .8px rgba(20, 40, 46, .16); z-index: 2; }
+html[data-theme="dark"] .cx-hlt.is-op { box-shadow: 0 8px 18px -6px rgba(0, 0, 0, .7), inset 0 0 0 .8px rgba(255, 255, 255, .14); }
+.cx-hlt__tp { position: absolute; top: 0; left: 0; right: 0; height: 3px; display: flex; border-radius: inherit; border-bottom-left-radius: 0; border-bottom-right-radius: 0; overflow: hidden; }
+.cx-hlt__tp i { flex: 1; }
+.cx-hlt__n { font-size: var(--fs, 10px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.cx-hlt.is-e .cx-hlt__n { color: var(--u-muted, #8a979a); }
+html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__n { color: rgba(255, 255, 255, .5); }
+.cx-hlt.is-new { background: none; box-shadow: none; outline: 1.2px dashed rgba(44, 94, 101, .55); outline-offset: -1.2px; }
+.cx-hlt.is-new .cx-hlt__n { color: #2c5e65; }
+html[data-theme="dark"] .cx-hlt.is-new { background: none; outline-color: rgba(160, 205, 210, .5); }
+html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
+.cx-hlt .cx-hltool { margin: 0; height: 14px; opacity: var(--o, 0); }
+.cx-hlt:not(.is-op) .cx-hltool { display: none; }
+.cx-hltool button { height: 14px; padding: 0 4px; font-size: 10px; }
+.cx-hltool button svg { width: 9px; height: 9px; }
+.cx-hltool__ul { bottom: -4px; height: 8px; }
+.hl-pal { border-radius: 0 0 12px 12px; padding: 7px 9px 6px; }
