@@ -10860,7 +10860,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const base = pkSrcBase(id);
     if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
     pkSrcCur[base] = id; if (id !== base) pkSrcScroll = id;
-    if (!was && pkLab()) pkSP = { id: base, sub: 'type', sid: id, conf: null, ed: true };   /* الجديدُ تنفتح له الأنواعُ ليُحدَّد نوعُه */
+    /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
   }
   async function pkSrcDel(id) {
