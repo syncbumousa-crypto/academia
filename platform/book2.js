@@ -278,7 +278,7 @@ export function createBook2(THREE, host, cfg) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
     blob.visible = e < 1;
     blob.material.opacity = (curTheme === 'dark' ? 0.4 : 0.24) * (1 - e) * (1 - e);
-    blob.scale.set(W * (1 + OV) * 1.55, H * (1 + OV) * 1.78, 1);
+    blob.scale.set(W * (1 + OV) * 1.8, H * (1 + OV) * 2.05, 1);
     blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
