@@ -265,25 +265,26 @@ export function createBook2(THREE, host, cfg) {
   }
   setTheme(cfg.theme);
   /* شمسُ الطاولة من يمين الناظر وأمامه قليلًا فيقع الظلُّ يسارَ الكتاب (طلبُ صاحب الموقع) — بدوران الكاميرا نفسِه */
-  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(0.55, -0.15, 5).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
-  const BLOB = new THREE.Vector3(-0.008, 0.005, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const SUN0 = new THREE.Vector3(-1.3, 1.5, 4.2), SUN1 = new THREE.Vector3(2.6, -0.7, 3.6).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
+  const BLOB = new THREE.Vector3(-0.05, 0.03, 0).applyAxisAngle(new THREE.Vector3(0, 0, 1), -0.96);
   /* ظلٌّ ناعمٌ عريضٌ تحت الكتاب على الطاولة (صورةٌ مضبَّبة) — كظلّ الكونسبت الذي يلفّه ويمتدّ خلفه */
   const blobCv = document.createElement('canvas'); blobCv.width = blobCv.height = 256;
-  { const c = blobCv.getContext('2d'); c.filter = 'blur(22px)'; c.fillStyle = '#000'; c.fillRect(48, 48, 160, 160); }
+  /* قلبُه المعتم بمقاس الكتاب نفسِه (‎176/256 × 1.45‎) والتلاشي حوله إلى الخارج — كان أغلبُه تحت الكتاب فلا يُرى منه إلّا حافّةٌ باهتة */
+  { const c = blobCv.getContext('2d'); c.filter = 'blur(18px)'; c.fillStyle = '#000'; c.fillRect(40, 40, 176, 176); }
   const blobT = new THREE.CanvasTexture(blobCv);
   const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobT, color: '#000', transparent: true, opacity: 0, depthWrite: false }));
   blob.renderOrder = -1; scene.add(blob);
   function tableLight(e) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
     blob.visible = e < 1;
-    blob.material.opacity = (curTheme === 'dark' ? 0.5 : 0.32) * (1 - e) * (1 - e);
-    blob.scale.set(W * (1 + OV) * 1.14, H * (1 + OV) * 1.1, 1);
+    blob.material.opacity = (curTheme === 'dark' ? 0.6 : 0.36) * (1 - e) * (1 - e);
+    blob.scale.set(W * (1 + OV) * 1.45, H * (1 + OV) * 1.45, 1);
     blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
-    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.3 : 0.13) - L.ground) * (1 - e);
+    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.55 : 0.24) - L.ground) * (1 - e);
     /* ظلُّ الشمس المائلة على الطاولة حادٌّ قليلًا (التنعيمُ الواسع يرسمه نسخًا متراكبةً: خطوط) — النعومةُ من الظلّ المضبَّب تحته */
-    sun.shadow.radius = 2 + 10 * e;
+    sun.shadow.radius = 4 + 8 * e;
   }
 
   sheets.forEach(s => { s.p = s.target = s.i < A ? 1 : 0; });
