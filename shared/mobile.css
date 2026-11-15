@@ -1,0 +1,355 @@
+/* ============================================================
+   الجوال — شريطٌ سفليٌّ بدل الشريط الجانبيّ
+   ============================================================
+   لا تُحمَّل هذي الورقةُ إلّا على الشاشة الضيّقة: الصفحةُ تربطها بـ
+   ‎media="(max-width: 600px)"‎، فالمتصفّحُ لا يطبّقها على سطح المكتب أصلًا،
+   ولا يُمسّ بها شيءٌ هناك. وكلُّ ما فيها يُضاف ولا يُعدِّل ‎styles.css‎.
+
+   والشريطُ والإعداداتُ يبنيهما ‎shared/mobile.js‎، ويحاكيان تطبيقَ SwiftUI
+   على iOS 26: شريطُ تبويبٍ زجاجيٌّ عائمٌ فوق خطّ الرجوع، وصفحةُ إعداداتٍ
+   بقوائمَ مجمَّعة. فما يُرى هنا هو ما سيُكتب بـ Swift بعدُ.
+
+   المنطقةُ الآمنة: ‎--safe-*‎ تحقنها معاينةُ الأجهزة (‎_device.html‎)،
+   و‎env(safe-area-inset-*)‎ يعطيها الجهازُ الحقيقيّ؛ والأكبرُ يغلب.
+   ============================================================ */
+
+:root {
+  --m-safe-b: max(var(--safe-bottom, 0px), env(safe-area-inset-bottom, 0px));
+  --m-safe-t: max(var(--safe-top, 0px), env(safe-area-inset-top, 0px));
+  --m-bar-h: 84px;                                   /* ارتفاعُ الرأس: سطرُ الشعار + العنوانُ الكبير */
+  --m-bar-gap: calc(var(--m-safe-t) + 16px);         /* حشوةُ الرأس فوقه وتحته */
+  --m-tint: var(--c-kfupm, #2c5e65);                 /* لونُ التبويب المختار */
+}
+html[data-theme="dark"] { --m-tint: var(--brand-tx, #8fd0c8); }
+
+/* ===== الشريطُ الجانبيُّ ومقبضُه يغيبان، والمحتوى يأخذ العرضَ كلَّه ===== */
+html.m-app .sidebar,
+html.m-app .side-handle { display: none !important; }
+html.m-app body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  /* الشريطُ في الأعلى: فراغٌ فوق أوّل المحتوى بقدره، فلا يختفي تحته شيء (البحثُ أوّلُه) */
+  padding-top: calc(var(--m-bar-h) + var(--m-bar-gap)) !important;
+  padding-bottom: calc(var(--m-safe-b) + 16px) !important;
+}
+
+/* في الإنجليزيّة يبقى ‎<html dir="rtl">‎ والمحرّكُ يقلب ما يقلبه بـ‎data-lang‎ —
+   فيُقلب الشريطُ والإعداداتُ صراحةً: المكتبةُ يسارًا كما في iOS بالإنجليزيّة */
+html[data-lang="en"] .m-tabbar,
+html[data-lang="en"] .m-settings { direction: ltr; }
+
+/* ===== الرأس — سطرٌ واحدٌ هادئ (الاتّجاه «ب»): الشعارُ واسمُ الموقع · مبدّلُ الأقسام · صورتُك =====
+   ثابتٌ في أعلى الشاشة بزجاجٍ بلون الصفحة، فما يمرّ تحته يُغبَّش ولا يتداخل. */
+.m-tabbar {
+  position: fixed; z-index: 60;
+  left: 0; right: 0; top: 0;
+  padding: calc(var(--m-safe-t) + 8px) 16px 8px;
+  height: calc(var(--m-bar-h) + var(--m-safe-t) + 16px);
+  display: grid; align-items: center; row-gap: 2px;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "mark me" "seg seg";
+}
+/* الغَبشُ لا يُلبَس إلّا عند التمرير: لو بقي والرأسُ شفّافٌ لغبَّش التوهّجَ خلفه
+   وحده، فانقطع عند حافّته السفلى خطًّا بين الرأس والصفحة */
+.m-tabbar.is-scrolled {
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+}
+
+/* السطرُ الأوّل: الشعارُ واسمُ الموقع صغيرَين (لا يُنقران) */
+.m-mark { grid-area: mark; display: flex; align-items: center; gap: 6px; color: var(--c-kfupm, #2c5e65); }
+html[data-theme="dark"] .m-mark { color: #e1c172; }
+.m-mark svg { width: 22px; height: auto; display: block; }
+.m-mark-nm {
+  font: 800 14px/1 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  color: #46626b; white-space: nowrap;
+}
+html[data-theme="dark"] .m-mark-nm { color: #cfe0e3; }
+
+/* السطرُ الثاني (الاتّجاه «١»): عنوانٌ كبيرٌ يتبدّل — القسمُ الحاليُّ كبيرٌ، والآخران باهتان
+   بجنبه؛ يُنقر أحدُهما فيكبر هو ويصغر الأوّل */
+.m-seg2 { grid-area: seg; display: flex; align-items: baseline; gap: 18px; min-width: 0; }
+.m-tab {
+  flex: none; padding: 0; border: 0; background: transparent;
+  color: rgba(20, 35, 63, .32);
+  font: 800 19px/1.15 'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: font-size .28s cubic-bezier(.4, 0, .2, 1), color .2s ease;
+}
+html[data-theme="dark"] .m-tab { color: rgba(238, 245, 246, .35); }
+.m-tab span { white-space: nowrap; }
+.m-tab:active { opacity: .7; }
+.m-seg2 .m-tab.is-on { font-size: 34px; font-weight: 900; color: #14233f; }
+html[data-theme="dark"] .m-seg2 .m-tab.is-on { color: #eef5f6; }
+
+/* صورتُك: ملفُّك الشخصيّ. وللزائر شخصٌ مكانها */
+.m-me {
+  grid-area: me;
+  width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%;
+  display: grid; place-items: center; overflow: hidden; cursor: pointer; position: relative;
+  color: #14233f; background: linear-gradient(135deg, #f0d999, #c9a25c);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px rgba(201, 162, 92, .55);
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme="dark"] .m-me { color: #14233f; box-shadow: 0 0 0 2px #0e181b, 0 0 0 3.5px rgba(225, 193, 114, .5); }
+.m-me.is-on { box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #2c5e65; }
+html[data-theme="dark"] .m-me.is-on { box-shadow: 0 0 0 2px #0e181b, 0 0 0 3.5px #e1c172; }
+.m-me .m-me-av { width: 100%; height: 100%; display: grid; place-items: center; }
+.m-me img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.m-me svg { width: 18px; height: 18px; }
+.m-me > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ===== البحث: سطرٌ بلا كبسولة — عدسةٌ وحقلٌ وخطٌّ رفيعٌ تحته، والتصنيفُ أيقونةٌ ذهبيّة ===== */
+html.m-app #panel-market .market-tools { gap: 6px; }
+html.m-app #panel-market .search {
+  height: 48px; padding: 0 30px 0 6px !important;
+  border: 0 !important; border-bottom: 1px solid rgba(44, 94, 101, .18) !important; border-radius: 0 !important;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f989d' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") no-repeat right 2px center / 20px !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  font-size: 17px !important; font-weight: 500;
+}
+html[data-lang="en"].m-app #panel-market .search { padding: 0 6px 0 30px !important; background-position: left 2px center !important; }
+html[data-theme="dark"].m-app #panel-market .search { border-bottom-color: rgba(143, 208, 200, .16) !important; color: #eef5f6; }
+html.m-app #panel-market .search:focus { border-bottom-color: #c9a25c !important; }
+html.m-app #panel-market .btn-filter {
+  background: transparent !important; border: 0 !important; box-shadow: none !important;
+  padding: 8px !important; color: #a8842e !important;
+}
+html[data-theme="dark"].m-app #panel-market .btn-filter { color: #e1c172 !important; }
+html.m-app #panel-market .btn-filter svg { width: 22px; height: 22px; }
+/* الكبسولةُ خلف التصنيف وشريحتِه تغيب: يبقى السطرُ خفيفًا */
+html.m-app #panel-market .filterwrap::before { display: none !important; }
+
+.m-mark svg.side-mark { color: inherit !important; }
+
+/* ===== الإعدادات — قوائمُ iOS المجمَّعة في ذيل صفحة الحساب ===== */
+.m-settings {
+  margin: 28px 0 8px;
+  font-family: 'IBM Plex Sans Arabic', -apple-system, 'Segoe UI', sans-serif;
+}
+.m-settings[hidden] { display: none; }
+
+.m-settings h1 {
+  margin: 0 4px 14px;
+  font: 700 22px/1.2 'KFUPM Display', 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+}
+.m-group-title {
+  margin: 0 16px 6px;
+  font-size: 13px; font-weight: 500;
+  color: #6e6e73;
+}
+html[data-theme="dark"] .m-group-title { color: #8e8e93; }
+.m-group {
+  margin-bottom: 26px;
+  border-radius: 14px;
+  background: #f4f8f8; box-shadow: 0 0 0 1px #dbe6e6 inset;
+  overflow: hidden;
+}
+html[data-theme="dark"] .m-group { background: #16272b; box-shadow: 0 0 0 1px #25403f inset; }
+.m-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 52px; padding: 8px 16px;
+  font-size: 16px;
+}
+.m-row + .m-row { border-top: .5px solid rgba(60, 60, 67, .2); }
+html[data-theme="dark"] .m-row + .m-row { border-top-color: rgba(84, 84, 88, .55); }
+.m-row-lbl { display: flex; align-items: center; gap: 12px; }
+.m-row-ic {
+  width: 30px; height: 30px; border-radius: 8px; flex: none;
+  display: grid; place-items: center; color: #fff;
+}
+.m-row-ic svg { width: 18px; height: 18px; }
+
+/* مقطعٌ مجزّأ (Segmented Control) */
+.m-seg {
+  display: inline-flex; padding: 2px; gap: 2px;
+  border-radius: 9px; background: rgba(118, 118, 128, .14);
+}
+html[data-theme="dark"] .m-seg { background: rgba(118, 118, 128, .26); }
+.m-seg button {
+  border: 0; background: transparent; color: inherit;
+  min-width: 64px; padding: 6px 12px; border-radius: 7px;
+  font: 500 13px/1 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  cursor: pointer;
+}
+.m-seg button.is-on {
+  background: #fff; font-weight: 600;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .12), 0 3px 1px rgba(0, 0, 0, .04);
+}
+html[data-theme="dark"] .m-seg button.is-on { background: #636366; }
+
+/* ===== شريطُ الكتب في المكتبة — أصغر على الجوال =====
+   المحرّكُ يوزّع الكتبَ بمسافاتٍ ثابتة بالبكسل (‎GAP‎ في ‎makeReel‎)، فتصغيرُ
+   الكتب وحدها يُبعثرها. فيُصغَّر المسرحُ كلُّه بمقياسٍ واحد: الكتبُ ومسافاتُها
+   وأسماؤها معًا، ويُقصَّر ارتفاعُه بالنسبة نفسها فلا يبقى فراغ. */
+html.m-app .reel-stage { height: calc(296px * var(--m-reel, .72)); }
+html.m-app .reel-track { transform: scale(var(--m-reel, .72)); transform-origin: 50% 50%; }
+
+/* ===== شريطُ التمرير على يسار الصفحة يغيب =====
+   هو ‎#xscroll‎: شريطٌ مبنيٌّ في الصفحة (لا شريطُ المتصفّح) جهتُه مع اللغة.
+   وعلى iPhone لا يُرسم شريطٌ ثابتٌ أصلًا — خيطٌ رفيعٌ أثناء التمرير ثمّ يختفي —
+   فيُخفى هنا ليطابق الجهاز، والتمريرُ باللمس باقٍ كما هو. */
+html.m-app #xscroll { display: none !important; }
+
+/* ===== أقسامُ المادّة: بطاقاتٌ تُسحب (بدل التبويبات الثمانية) =====
+   يبنيها ‎mobile.js‎ من الأزرار الأصليّة، فتُخفى هذه ويبقى لوحُها (‎.cm-pane‎) تحت
+   البطاقات. (وحلّت محلَّ «التبادل الكامل» ثمّ «العدسة الزجاجيّة» — جُرّبتا ورُفعتا.) */
+/* (موقوف: البطاقاتُ مطفأةٌ في ‎mobile.js‎، فالأيقوناتُ الأصليّةُ ظاهرة) */
+.m-cards { margin: 4px 0 12px; }
+.m-cards-title {
+  margin: 10px 18px 7px;
+  font: 700 13px/1.2 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  color: #6e6e73;
+}
+html[data-theme="dark"] .m-cards-title { color: #8e8e93; }
+html[data-lang="en"] .m-cards-title,
+html[data-lang="en"] .m-cards-row { direction: ltr; }
+.m-cards-row {
+  display: flex; gap: 10px;
+  padding: 2px 16px 6px;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; scroll-padding-inline: 16px;
+  scrollbar-width: none;
+}
+.m-cards-row::-webkit-scrollbar { display: none; }
+.m-cards-sep { flex: none; align-self: center; width: 1px; height: 96px; margin: 0 2px; background: currentColor; opacity: .14; }
+
+.m-card {
+  flex: none; scroll-snap-align: start;
+  width: 138px; height: 142px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 12px; border: 0; border-radius: 22px;
+  color: #fff; text-align: start; cursor: pointer;
+  background: linear-gradient(155deg, #2c5e65, #1d4248);
+  box-shadow: 0 6px 14px rgba(44, 94, 101, .25);
+  font-family: 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.m-card:active { transform: scale(.96); }
+/* المفتوحُ لوحُه: حلقةٌ بيضاءُ داخليّةٌ وحلقةُ الهويّة الذهبيّة حولها */
+.m-card.is-on { box-shadow: 0 0 0 2px #fff inset, 0 0 0 3px #e1c172, 0 8px 20px rgba(44, 94, 101, .35); }
+/* ثيم «بترولي موحّد»: كلُّها بلون الجامعة، وفي الداكن تهدأ ويبقى المفتوحُ بتروليًّا بحلقةٍ ذهبيّة */
+html[data-theme="dark"] .m-card { background: linear-gradient(155deg, #1f4249, #16272b); box-shadow: 0 0 0 1px #25403f inset; }
+html[data-theme="dark"] .m-card.is-on { background: linear-gradient(155deg, #2c5e65, #1d4248); box-shadow: 0 0 0 2px #e1c172; }
+html[data-theme="dark"] .m-av { border-color: #16272b; }
+
+.m-card-ic {
+  width: 32px; height: 32px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(225, 193, 114, .2); color: #e1c172;
+}
+.m-card-ic svg { width: 19px; height: 19px; opacity: 1; }
+.m-card-nm { margin-top: 9px; font-weight: 800; font-size: 14.5px; line-height: 1.2; }
+.m-card-nm br { display: none; }
+.m-card-sub { margin-top: 2px; font-weight: 600; font-size: 11px; line-height: 1.2; opacity: .85; }
+
+/* الوجوه */
+.m-pile { margin-top: auto; display: flex; align-items: center; }
+.m-av {
+  width: 26px; height: 26px; border-radius: 50%; flex: none; overflow: hidden;
+  margin-inline-start: -8px; border: 2px solid rgba(255, 255, 255, .92);
+  background: rgba(255, 255, 255, .3);
+  display: grid; place-items: center;
+}
+.m-pile .m-av:first-child { margin-inline-start: 0; }
+.m-av img, .m-av svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.m-av--more { direction: ltr; background: #e1c172; color: #14233f; font-weight: 700; font-size: 10px; line-height: 1; }
+.m-av--empty { background: transparent; border: 1.5px dashed rgba(255, 255, 255, .7); }
+
+/* ===== التوهّجُ أعلى الصفحة: بتروليٌّ من اليسار وذهبيٌّ خافتٌ يمينه، خلف الرأس والبحث =====
+   يُرسم مرّةً في أعلى الصفحة ويمضي معها إذا مُرِّر، ولا يُنقر. */
+html.m-app body::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 0; left: 0; right: 0; height: 460px;   /* داخلَ حدود الصفحة: لا يمدّ عرضَها فيزيحها */
+  background:
+    radial-gradient(330px 300px at 0% 0%, rgba(52, 112, 120, .95), transparent 100%),
+    radial-gradient(200px 170px at 70% 14%, rgba(225, 193, 114, .2), transparent 100%);
+}
+html[data-theme="light"].m-app body::before {
+  background:
+    radial-gradient(330px 300px at 0% 0%, rgba(44, 94, 101, .28), transparent 100%),
+    radial-gradient(200px 170px at 70% 14%, rgba(201, 162, 92, .24), transparent 100%);
+}
+html[data-lang="en"].m-app body::before { transform: scaleX(-1); }
+/* والرأسُ أشفُّ ليظهر التوهّجُ خلفه */
+/* بلا لونٍ يَسِمه شريطًا: غَبشٌ وحده، والتوهّجُ يمرّ من خلفه متّصلًا */
+html.m-app .m-tabbar, html[data-theme="dark"].m-app .m-tabbar { background: transparent; transition: background .2s ease; }
+/* فإذا مُرِّر ومضى التوهّجُ يعود للرأس زجاجُه، فلا يتداخل ما تحته بأزراره */
+html.m-app .m-tabbar.is-scrolled { background: rgba(255, 255, 255, .8); }
+html[data-theme="dark"].m-app .m-tabbar.is-scrolled { background: rgba(14, 24, 27, .78); }
+
+/* (أُعيدت بطلب صاحب الموقع بعد تجربة البطاقات) */
+/* ===== تبويباتُ المادّة — «تبادلٌ كامل» (التفريعة ١) =====
+   ثمانيةُ تبويباتٍ متساويةٍ لا تتّسع لعرض الجوال: كانت الأربعةُ الأولى خيوطًا
+   بعرض ‎14px‎ وأسماؤها مقطوعة. فالقاعدةُ هنا: **المفعَّلُ هو العريض** —
+   يأخذ اسمَه ودوائرَه في سطرٍ واحد، والسبعةُ الباقيةُ أيقوناتٌ هامشيّة،
+   وعند الضغط ينتقل العرضُ إلى المختار بحركةٍ واحدة.
+   وكلُّه CSS: المحرّكُ يضع ‎.on‎ على المختار كما كان، ولا يُمسّ. */
+html.m-app .cm-panel .cm-tabs { padding: 0 6px; gap: 3px; }
+html.m-app .cm-panel .cm-tabs button {
+  flex: .55 1 0;
+  flex-direction: row; gap: 6px;
+  min-height: 42px; padding: 5px 4px;
+  font-size: 11.5px; line-height: 1.15;
+  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1), background-color .15s, color .15s;
+}
+html.m-app .cm-panel .cm-tabs .cm-tabic { width: 19px; height: 19px; }
+/* الهامشيُّ: أيقونةٌ فقط */
+html.m-app .cm-panel .cm-tabs button:not(.on) .cm-tabnm,
+html.m-app .cm-panel .cm-tabs button:not(.on) .cm-faces { display: none; }
+/* المفعَّلُ: عريضٌ، واسمُه ودوائرُه في سطرٍ واحد */
+html.m-app .cm-panel .cm-tabs button.on { flex-grow: 7; padding: 5px 9px; justify-content: center; }
+html.m-app .cm-panel .cm-tabs button.on .cm-tabnm {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+html.m-app .cm-panel .cm-tabs button.on .cm-tabnm br { display: none; }
+html.m-app .cm-panel .cm-tabs .cm-faces { min-height: 0; flex: none; }
+
+/* رفُّ «الموارد»: يأخذ عرضَ أبنائه — عريضٌ إن كان المختارُ فيه، وإلّا أربعُ أيقونات */
+html.m-app .cm-panel .cm-tabs .cm-res {
+  flex: 2.2 1 0; gap: 3px; padding: 4px 4px 0; margin-top: -4px;
+  transition: flex-grow .3s cubic-bezier(.4, 0, .2, 1);
+}
+html.m-app .cm-panel .cm-tabs .cm-res:has(> button.on) { flex-grow: 7; }
+/* في السطر الواحد يضيق المكانُ على الاسم: تبقى «+» (ساهِم) والعدّاد وحدهما،
+   والعدّادُ يُلخّص الوجوهَ التي أُخفيت */
+html.m-app .cm-panel .cm-tabs button.on .cm-faces > .cm-face:not(.cm-face--me):not(.cm-face--count) { display: none; }
+html.m-app .cm-panel .cm-tabs button.on .cm-face--count { margin-inline-start: -4px; }
+
+/* ===== الضوءُ يتنقّل (الاتّجاه «ك») — ‎html[data-m-focus]‎ يضعه ‎mobile.js‎ =====
+   الترتيبُ ثابت؛ المرحلةُ الحاليّةُ ملوّنةٌ والتوهّجُ خلفها، والأخريان رماديّتان باهتتان. */
+html.m-app #panel-market { position: relative; }
+.m-spot {
+  position: absolute; z-index: -1; left: -40px; right: -40px; pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(52, 112, 120, .72), transparent),
+    radial-gradient(170px 120px at 68% 42%, rgba(225, 193, 114, .18), transparent);
+  transition: top .55s cubic-bezier(.4, 0, .2, 1), height .55s cubic-bezier(.4, 0, .2, 1);
+}
+html[data-theme="light"] .m-spot {
+  background:
+    radial-gradient(closest-side, rgba(44, 94, 101, .2), transparent),
+    radial-gradient(170px 120px at 68% 42%, rgba(201, 162, 92, .2), transparent);
+}
+/* توهّجُ أعلى الصفحة يتبع الكتبَ: يخبو إذا انتقل الضوء */
+html.m-app body::before { transition: opacity .5s ease; }
+html.m-app[data-m-focus="tabs"] body::before,
+html.m-app[data-m-focus="body"] body::before { opacity: .25; }
+
+html.m-app #panel-market .market-box,
+html.m-app #market-course #cm-tabs,
+html.m-app #market-course #cm-body { transition: filter .45s ease, opacity .45s ease; }
+html.m-app[data-m-focus="books"] #market-course #cm-tabs,
+html.m-app[data-m-focus="books"] #market-course #cm-body,
+html.m-app[data-m-focus="tabs"]  #panel-market .market-box,
+html.m-app[data-m-focus="tabs"]  #market-course #cm-body,
+html.m-app[data-m-focus="body"]  #panel-market .market-box,
+html.m-app[data-m-focus="body"]  #market-course #cm-tabs {
+  filter: grayscale(1) brightness(.78);
+  opacity: .42;
+}
+html[data-theme="light"].m-app[data-m-focus] #panel-market .market-box,
+html[data-theme="light"].m-app[data-m-focus] #market-course #cm-tabs,
+html[data-theme="light"].m-app[data-m-focus] #market-course #cm-body { --m-gray-b: 1.05; }

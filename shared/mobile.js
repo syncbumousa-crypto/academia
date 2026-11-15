@@ -1,0 +1,410 @@
+/* ============================================================
+   الجوال — الرأسُ العلويّ وصفحةُ الإعدادات
+   ============================================================
+   لا يعمل إلّا على الشاشة الضيّقة (‎max-width: 600px‎)، ويُطفأ وحده إن اتّسعت.
+   وأنماطُه في ‎shared/mobile.css‎ — وهي لا تُحمَّل على سطح المكتب.
+
+   **ولا يُعيد بناءَ شيءٍ من المحرّك:** كلُّ زرٍّ هنا ينقر نظيرَه في الشريط
+   الجانبيّ المخفيّ (التبويبات · المظهر · اللغة)، فيجري ما كان يجري هناك
+   بعينه، ويقرأ حالَه من هناك. فلا يُمسّ ‎app.js‎ ولا يُعاد دمجُه.
+
+   والترتيبُ من اليمين: الشعارُ واسمُ الموقع · المكتبة · الركن · الاختبارات · صورتُك (ملفُّك الشخصيّ،
+   وفي ذيله المظهرُ واللغة).
+   («إحصائياتي» غائبةٌ عن الشريط عمدًا.)
+
+   ===== ولا يراه إلّا مَن طلبه =====
+   الواجهةُ قيدُ التجربة، فهي **مطفأةٌ للزوّار** ولو فتحوا من جوال. وتُشعَل
+   في متصفّحٍ واحدٍ بـ ‎?mobile=1‎ مرّةً (تُحفظ في ‎localStorage‎)، وتُطفأ بـ
+   ‎?mobile=0‎. ومعاينةُ الأجهزة (‎_device.html‎) تُشعلها لمن يفتحها.
+   فيُجرَّب على الموقع الحيّ — بالدخول والبيانات والمساهمات — ولا يتغيّر
+   على أحدٍ شيء.
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  var MQ   = window.matchMedia('(max-width: 600px)');
+  var FLAG = 'academia:mobile-ui';
+
+  function flagOn() {
+    try {
+      var q = new URLSearchParams(location.search).get('mobile');
+      if (q === '1') localStorage.setItem(FLAG, '1');
+      if (q === '0') localStorage.removeItem(FLAG);
+      return localStorage.getItem(FLAG) === '1';
+    } catch (e) { return false; }
+  }
+  var TABS = ['market', 'library', 'past'];
+  var root = document.documentElement;
+
+  var TX = {
+    ar: { settings: 'الإعدادات', look: 'المظهر', theme: 'الإضاءة', light: 'فاتح', dark: 'داكن',
+          langGroup: 'اللغة', lang: 'لغة الموقع' },
+    en: { settings: 'Settings', look: 'Appearance', theme: 'Lighting', light: 'Light', dark: 'Dark',
+          langGroup: 'Language', lang: 'Site language' },
+  };
+
+  // احتياطٌ إن لم يُترجم المحرّكُ اسمَ التبويب (‎«الاختبارات»‎ يبقى عربيًّا في الإنجليزيّة)
+  var TAB_EN = { market: 'Library', library: 'Nook', past: 'Exams' };
+
+  var ICON = {
+    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+    sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>',
+    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
+  };
+
+  var bar = null, page = null, watchers = [];
+
+  function lang() { return root.getAttribute('data-lang') === 'en' ? 'en' : 'ar'; }
+  function src(tab) { return document.querySelector('.sidebar .tabs [data-tab="' + tab + '"]'); }
+
+  /* ---------- البناء ---------- */
+  function build() {
+    bar = document.createElement('nav');
+    bar.className = 'm-tabbar';
+    bar.setAttribute('aria-label', 'التنقّل');
+
+    // الرأس (الاتّجاه «ب»): الشعارُ واسمُ الموقع · مبدّلُ الأقسام · صورتُك (تفتح الإعدادات)
+    var mk = document.querySelector('.sidebar .side-mark');
+    var m = document.createElement('span');
+    m.className = 'm-mark';
+    if (mk) m.appendChild(mk.cloneNode(true));
+    var nm = document.createElement('span');
+    nm.className = 'm-mark-nm';
+    m.appendChild(nm);
+    bar.appendChild(m);
+
+    var seg = document.createElement('div');
+    seg.className = 'm-seg2';
+    TABS.forEach(function (tab) {
+      var s = src(tab);
+      if (!s) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'm-tab';
+      b.dataset.tab = tab;
+      b.appendChild(document.createElement('span'));
+      b.addEventListener('click', function () {
+        s.click();
+        window.scrollTo(0, 0);
+      });
+      seg.appendChild(b);
+    });
+    bar.appendChild(seg);
+
+    var g = document.createElement('button');
+    g.type = 'button';
+    g.className = 'm-tab m-me';
+    g.dataset.tab = 'account';
+    g.innerHTML = '<span class="m-me-av"></span><span></span>';
+    // صورتُك: ملفُّك الشخصيّ (صفحةُ الحساب)؛ وللزائر بابُ الدخول — وكلاهما يسكن ‎#panel-account‎
+    g.addEventListener('click', function () {
+      var guest = document.body.classList.contains('is-guest');
+      var t = document.getElementById(guest ? 'side-login' : 'side-profile');
+      if (t) t.click();
+      window.scrollTo(0, 0);
+      sync();
+    });
+    bar.appendChild(g);
+
+    page = document.createElement('section');
+    page.className = 'm-settings';
+    page.innerHTML =
+      '<h1 data-t="settings"></h1>' +
+      '<div class="m-group-title" data-t="look"></div>' +
+      '<div class="m-group"><div class="m-row">' +
+        '<span class="m-row-lbl"><span class="m-row-ic" style="background:#ff9f0a">' + ICON.sun + '</span><span data-t="theme"></span></span>' +
+        '<span class="m-seg" data-seg="theme"><button type="button" data-v="light" data-t="light"></button><button type="button" data-v="dark" data-t="dark"></button></span>' +
+      '</div></div>' +
+      '<div class="m-group-title" data-t="langGroup"></div>' +
+      '<div class="m-group"><div class="m-row">' +
+        '<span class="m-row-lbl"><span class="m-row-ic" style="background:#0a84ff">' + ICON.globe + '</span><span data-t="lang"></span></span>' +
+        '<span class="m-seg" data-seg="lang"><button type="button" data-v="ar">عربي</button><button type="button" data-v="en">English</button></span>' +
+      '</div></div>';
+
+    // الأزرارُ تنقر نظائرَها في الشريط الجانبيّ: ‎#themebar‎ و‎#langbar‎
+    page.querySelectorAll('[data-seg="theme"] button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = document.querySelector('#themebar [data-theme="' + b.dataset.v + '"]');
+        if (t) t.click();
+      });
+    });
+    page.querySelectorAll('[data-seg="lang"] button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = document.querySelector('#langbar [data-lang="' + b.dataset.v + '"]');
+        if (t) t.click();
+      });
+    });
+
+    document.body.appendChild(page);
+    document.body.appendChild(bar);
+  }
+
+  /* المظهرُ واللغةُ في ذيل صفحة الحساب (ملفُّك أو بابُ الدخول): المحرّكُ يعيد رسمَها
+     بـ‎innerHTML‎ فيمحو ما فيها، فتُعاد إليها كلّما رُسمت */
+  function attachSettings() {
+    var acct = document.getElementById('panel-account');
+    if (page && acct && page.parentNode !== acct) acct.appendChild(page);
+  }
+
+  /* ---------- المزامنة: كلُّ حالٍ يُقرأ من مصدره ---------- */
+  function sync() {
+    if (!bar) return;
+    var t = TX[lang()];
+    bar.querySelectorAll('.m-tab').forEach(function (b) {
+      var tab = b.dataset.tab, label = b.querySelector('span');
+      if (tab === 'account') {
+        var acct = document.getElementById('panel-account');
+        label.textContent = document.body.classList.contains('is-guest') ? (lang() === 'en' ? 'Sign in' : 'تسجيل الدخول') : (lang() === 'en' ? 'Profile' : 'الملف الشخصي');
+        b.classList.toggle('is-on', !!acct && !acct.hidden);
+      } else {
+        var s = src(tab);
+        var tx = s && s.querySelector('.tab-tx');
+        var name = tx ? tx.textContent : '';
+        if (lang() === 'en' && /[\u0600-\u06FF]/.test(name)) name = TAB_EN[tab];
+        label.textContent = name;
+        b.classList.toggle('is-on', !!s && s.classList.contains('is-active'));
+      }
+    });
+    // اسمُ الموقع كما يكتبه المحرّكُ في الشريط الجانبيّ (يتبع اللغة)
+    var logo = document.querySelector('.sidebar .side-logo');
+    var nmEl = bar.querySelector('.m-mark-nm');
+    if (nmEl) nmEl.textContent = logo ? logo.textContent.trim() : '';
+    // صورتُك من زرّ الحساب؛ وللزائر (أو قبل أن تُحمَّل) ترسٌ
+    var av = document.querySelector('#side-profile .sp-av');
+    var meAv = bar.querySelector('.m-me-av');
+    var guest = document.body.classList.contains('is-guest');
+    var html = (!guest && av && av.innerHTML.trim()) ? av.innerHTML : ICON.person;
+    attachSettings();
+    if (meAv && meAv.innerHTML !== html) meAv.innerHTML = html;
+    page.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t[el.dataset.t]; });
+    var theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    page.querySelectorAll('[data-seg="theme"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === theme); });
+    page.querySelectorAll('[data-seg="lang"] button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.v === lang()); });
+    if (cardsHost) queueCards();
+    if (spot) placeSpot();
+  }
+
+  // الصفحةُ تُمرَّر في ‎body‎ (لا في النافذة): يُلبَس الرأسُ زجاجَه متى غادرت أعلاها
+  function onScroll() {
+    if (!bar) return;
+    var y = Math.max(document.body.scrollTop, window.scrollY || 0);
+    bar.classList.toggle('is-scrolled', y > 6);
+  }
+  document.body.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function watch() {
+    var mo = new MutationObserver(sync);
+    mo.observe(root, { attributes: true, attributeFilter: ['data-theme', 'data-lang'] });
+    var tabs = document.querySelectorAll('.sidebar .tabs button');
+    var mo2 = new MutationObserver(sync);
+    tabs.forEach(function (b) { mo2.observe(b, { attributes: true, attributeFilter: ['class'], childList: true, subtree: true }); });
+    // الحسابُ يُرسم بعد الإقلاع (ويتبدّل بالدخول والخروج)، والاسمُ يتبع اللغة
+    var mo3 = new MutationObserver(sync);
+    var prof = document.getElementById('side-profile');
+    if (prof) mo3.observe(prof, { childList: true, subtree: true, attributes: true });
+    mo3.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    var logo = document.querySelector('.sidebar .side-logo');
+    if (logo) mo3.observe(logo, { childList: true, characterData: true, subtree: true });
+    var acctP = document.getElementById('panel-account');
+    if (acctP) mo3.observe(acctP, { childList: true, attributes: true, attributeFilter: ['hidden'] });
+    watchers = [mo, mo2, mo3];
+  }
+
+
+
+  /* ---------- أقسامُ المادّة: بطاقاتٌ تُسحب بدل التبويبات الثمانية ----------
+     صفٌّ واحدٌ: «عن المادة» (الأربعةُ الأولى) ثمّ «الموارد» (ما في ‎.cm-res‎). وكلُّ بطاقةٍ
+     تُبنى من زرّها الأصليّ: أيقونتُه واسمُه ووجوهُ مساهميه وعدّادُه — وتُقرأ منه
+     كلّما تغيّر (مادّةٌ أخرى، مساهمةٌ جديدة، تبويبٌ آخر). والضغطُ ينقر الأصلَ، فيُفتح
+     لوحُه تحت البطاقات كما كان. ولا زرَّ «ساهِم» على البطاقة، ولا «عرض الكل». */
+  var CARD_TINT = { info: '#2c5e65', doc: '#5e5ce6', abs: '#e8890c', grade: '#2a9fb5',
+                    srcU: '#c9a227', srcP: '#2fae52', videos: '#e8365c', cards: '#9b4fd0' };
+  /* موقوفةٌ بطلب صاحب الموقع: رجعت أيقوناتُ المحرّك الأصليّة (‎#cm-tabs‎). تُشعل بـ‎true‎ */
+  var CARDS = false;
+  var cardsHost = null, tabsSeen = null, cardsMO = null, bodyMO = null, rafQ = 0;
+
+  function contributors(btn) {
+    var faces = btn.querySelector('.cm-faces');
+    var count = 0, avatars = [];
+    if (faces) {
+      var c = faces.querySelector('.cm-face--count');
+      count = c ? parseInt(c.textContent.replace(/[^\d]/g, ''), 10) || 0 : 0;
+      faces.querySelectorAll('.cm-face').forEach(function (f) {
+        if (f.matches('.cm-face--me, .cm-face--count, .cm-face--empty')) return;
+        avatars.push(f.innerHTML);
+      });
+    }
+    return { count: count, avatars: avatars };
+  }
+
+  function cardHTML(btn) {
+    var k = btn.dataset.tab, nm = btn.querySelector('.cm-tabnm');
+    var ic = btn.querySelector('svg'), who = contributors(btn), en = lang() === 'en';
+    var shown = who.avatars.slice(0, 3);
+    var pile = shown.map(function (a) { return '<span class="m-av">' + a + '</span>'; }).join('');
+    if (who.count > shown.length && shown.length) pile += '<span class="m-av m-av--more">+' + (who.count - shown.length) + '</span>';
+    if (!who.count) pile = '<span class="m-av m-av--empty"></span>';
+    var sub = who.count ? (en ? who.count + (who.count === 1 ? ' contribution' : ' contributions') : who.count + ' مساهمة')
+                        : (en ? 'No contributions yet' : 'لا مساهمات بعد');
+    return '<button type="button" class="m-card' + (btn.classList.contains('on') ? ' is-on' : '') + '" data-tab="' + k + '"' +
+           ' style="--m-card:' + (CARD_TINT[k] || '#2c5e65') + '">' +
+           '<span class="m-card-ic">' + (ic ? ic.outerHTML : '') + '</span>' +
+           '<span class="m-card-nm">' + (nm ? nm.innerHTML : '') + '</span>' +
+           '<span class="m-card-sub">' + sub + '</span>' +
+           '<span class="m-pile">' + pile + '</span></button>';
+  }
+
+  function paintCards() {
+    rafQ = 0;
+    var tabs = document.getElementById('cm-tabs');
+    if (!tabs) return;
+    if (tabs !== tabsSeen || !cardsHost || !cardsHost.isConnected) {
+      if (cardsHost) cardsHost.remove();
+      if (cardsMO) cardsMO.disconnect();
+      tabsSeen = tabs;
+      cardsHost = document.createElement('div');
+      cardsHost.className = 'm-cards';
+      cardsHost.addEventListener('click', function (e) {
+        var c = e.target.closest('.m-card');
+        if (!c) return;
+        var b = tabsSeen.querySelector('button[data-tab="' + c.dataset.tab + '"]');
+        if (b) b.click();
+      });
+      tabs.parentNode.insertBefore(cardsHost, tabs);
+      cardsMO = new MutationObserver(queueCards);
+      cardsMO.observe(tabs, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'], characterData: true });
+    }
+    var res = tabs.querySelector('.cm-res');
+    var about = [].filter.call(tabs.children, function (n) { return n.tagName === 'BUTTON'; });
+    var more = res ? [].slice.call(res.querySelectorAll('button')) : [];
+    // صفٌّ واحدٌ يُسحب: «عن المادة» ثمّ فاصلٌ رفيعٌ ثمّ «الموارد»
+    var html = '<div class="m-cards-row">' + about.map(cardHTML).join('') +
+      (about.length && more.length ? '<span class="m-cards-sep" aria-hidden="true"></span>' : '') +
+      more.map(cardHTML).join('') + '</div>';
+    // تُحفظ مواضعُ السحب: البناءُ يتكرّر مع كلّ تغيير، والصفُّ لا يقفز إلى أوّله
+    var keep = [].map.call(cardsHost.querySelectorAll('.m-cards-row'), function (r) { return r.scrollLeft; });
+    cardsHost.innerHTML = html;
+    cardsHost.querySelectorAll('.m-cards-row').forEach(function (r, i) { if (keep[i] != null) r.scrollLeft = keep[i]; });
+  }
+  function queueCards() { if (!rafQ) rafQ = requestAnimationFrame(paintCards); }
+
+  function startCards() {
+    paintCards();
+    // ‎#cm-ui‎ يُنقل بين المكتبة والركن ويُعاد بناؤه — فيُراقَب الجسمُ ليُعاد التعليقُ عليه
+    bodyMO = new MutationObserver(function () {
+      var t = document.getElementById('cm-tabs');
+      if (t !== tabsSeen || (cardsHost && !cardsHost.isConnected)) queueCards();
+    });
+    bodyMO.observe(document.body, { childList: true, subtree: true });
+  }
+  function stopCards() {
+    [cardsMO, bodyMO].forEach(function (m) { if (m) m.disconnect(); });
+    if (cardsHost) cardsHost.remove();
+    cardsHost = tabsSeen = cardsMO = bodyMO = null;
+  }
+
+  /* ---------- الضوءُ يتنقّل (الاتّجاه «ك») ----------
+     صفحةُ المكتبة ثلاثُ مراحل لا تتحرّك من أماكنها: الكتب ← البنود ← المساهمات.
+     الحاليّةُ ملوّنةٌ والتوهّجُ خلفها، والأخريان رماديّتان. تُحفظ في ‎html[data-m-focus]‎:
+       books — أوّلَ الدخول، أو بلمس منطقة الكتب وهي رماديّة (اللمسةُ الأولى تُرجع الضوءَ فقط)
+       tabs  — بعد اختيار كتاب
+       body  — بعد اختيار بند
+     ولا يُمسّ شيءٌ من عمل المحرّك: النقراتُ تمرّ إليه كما هي، إلّا تلك اللمسةَ الأولى. */
+  var spot = null, spotRaf = 0, focusMO = null;
+  function setFocus(f) {
+    if (root.getAttribute('data-m-focus') === f) return;
+    root.setAttribute('data-m-focus', f);
+    placeSpot();
+  }
+  function zoneOf(f) {
+    if (f === 'books') return document.querySelector('#panel-market .market-box');
+    if (f === 'tabs') return document.querySelector('#market-course #cm-tabs');
+    return document.querySelector('#market-course #cm-body');
+  }
+  function placeSpot() {
+    if (spotRaf) return;
+    spotRaf = requestAnimationFrame(function () {
+      spotRaf = 0;
+      var panel = document.getElementById('panel-market');
+      var z = zoneOf(root.getAttribute('data-m-focus') || 'books');
+      if (!panel || !z) return;
+      if (!spot || !spot.isConnected) {
+        spot = document.createElement('div');
+        spot.className = 'm-spot';
+        spot.setAttribute('aria-hidden', 'true');
+        panel.insertBefore(spot, panel.firstChild);
+      }
+      var pr = panel.getBoundingClientRect(), zr = z.getBoundingClientRect();
+      // البطنُ قد يطول كثيرًا: يُضاء أوّلُه لا وسطُه
+      var h = Math.min(Math.max(zr.height, 160), 340);
+      spot.style.top = (zr.top - pr.top - 60) + 'px';
+      spot.style.height = (h + 120) + 'px';
+    });
+  }
+  function onFocusClick(e) {
+    if (!root.classList.contains('m-app')) return;
+    var t = e.target;
+    if (!t.closest || !t.closest('#panel-market')) return;
+    var f = root.getAttribute('data-m-focus') || 'books';
+    if (t.closest('.market-box')) {
+      if (f !== 'books') {
+        // الكتبُ رماديّة: اللمسةُ ترجّع لها الضوءَ ولا تختار شيئًا بعد
+        e.preventDefault(); e.stopPropagation();
+        setFocus('books');
+        return;
+      }
+      if (t.closest('.book-reel')) setFocus('tabs');
+      return;
+    }
+    if (t.closest('#market-course #cm-tabs button')) {
+      if (t.closest('.cm-face--me')) return;   // «+» يفتح المساهمة ولا يبدّل المرحلة
+      setFocus('body');
+      return;
+    }
+    if (t.closest('#market-course #cm-tabs') && f === 'books') setFocus('tabs');
+  }
+  function startFocus() {
+    root.setAttribute('data-m-focus', 'books');
+    document.addEventListener('click', onFocusClick, true);
+    window.addEventListener('resize', placeSpot);
+    var mc = document.getElementById('market-course');
+    if (mc) { focusMO = new MutationObserver(placeSpot); focusMO.observe(mc, { childList: true, subtree: true }); }
+    placeSpot();
+    setTimeout(placeSpot, 800);
+  }
+  function stopFocus() {
+    root.removeAttribute('data-m-focus');
+    document.removeEventListener('click', onFocusClick, true);
+    window.removeEventListener('resize', placeSpot);
+    if (focusMO) focusMO.disconnect();
+    if (spot) spot.remove();
+    spot = focusMO = null;
+  }
+
+  /* ---------- التشغيل والإطفاء مع عرض الشاشة ---------- */
+  function apply() {
+    if (MQ.matches && flagOn()) {
+      if (!bar) { build(); watch(); if (CARDS) startCards(); startFocus(); }
+      root.classList.add('m-app');
+      sync();
+    } else if (bar) {
+      root.classList.remove('m-app');
+      watchers.forEach(function (w) { w.disconnect(); });
+      watchers = [];
+      bar.remove(); page.remove();
+      bar = page = null;
+      stopCards();
+      stopFocus();
+    }
+  }
+
+  // المعاينةُ تُبدّل المفتاحَ وهي على الأصل نفسه: يُلتقط هنا بلا إعادة تحميل
+  window.addEventListener('storage', function (e) { if (e.key === FLAG) apply(); });
+  if (MQ.addEventListener) MQ.addEventListener('change', apply);
+  else MQ.addListener(apply);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
+  else apply();
+})();

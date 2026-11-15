@@ -692,6 +692,7 @@
   </select>
   <button id="rotate">↻ تدوير</button>
   <button id="fold" class="hidden">فتح / طي Duo</button>
+  <button id="mobileBtn" title="شريط التبويب السفلي والإعدادات وما معها — قيد التجربة، لا يراه الزوّار">واجهة الجوال</button>
   <button id="safeBtn">المنطقة الآمنة</button>
   <label>التكبير
     <select id="zoom">
@@ -1216,6 +1217,19 @@ $('device').onchange = e => { state.device = e.target.value; render(); };
 $('load').onclick = () => { state.src = $('src').value.trim(); render(); };
 $('src').onkeydown = e => { if (e.key === 'Enter') $('load').click(); };
 $('rotate').onclick = () => { state.landscape = !state.landscape; render(); };
+/* واجهةُ الجوال الجديدة (‎shared/mobile.js‎) مطفأةٌ للزوّار، وتُشعل بمفتاحٍ في
+   ‎localStorage‎ على أصل الموقع نفسه. فالمعاينةُ تُشعلها أوّلَ مرّة، والزرُّ يبدّلها،
+   والصفحةُ المعروضةُ تلتقط التبديل بحدث ‎storage‎ بلا إعادة تحميل. */
+const MOBILE_FLAG = 'academia:mobile-ui';
+function mobileOn() { try { return localStorage.getItem(MOBILE_FLAG) === '1'; } catch (e) { return false; } }
+function setMobile(on) {
+  try { on ? localStorage.setItem(MOBILE_FLAG, '1') : localStorage.removeItem(MOBILE_FLAG); } catch (e) {}
+  $('mobileBtn').classList.toggle('on', on);
+}
+try { if (localStorage.getItem(MOBILE_FLAG + ':seen') === null) { localStorage.setItem(MOBILE_FLAG + ':seen', '1'); localStorage.setItem(MOBILE_FLAG, '1'); } } catch (e) {}
+$('mobileBtn').classList.toggle('on', mobileOn());
+$('mobileBtn').onclick = () => { setMobile(!mobileOn()); render(); };
+
 $('chrome').onchange = e => { state.chrome = lastLayout = e.target.value; render(); };
 document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
   state.chrome = b.dataset.mode === 'app' ? 'app' : lastLayout;
