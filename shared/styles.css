@@ -18456,7 +18456,7 @@ html[data-theme="dark"] .bk-zi { --zt: #7fb7bd; }
 /* ===== رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — من ‎data-pgn‎، وأعلاه ‎--bk-top‎ (‎bk2Layout‎) =====
    ويغيب في تبدُّل الوضع (الكتابُ يتحرّك)، ويُخفى رقمُ سطر التصفّح تحت الكتاب فلا يتكرّر */
 .cbk-stage--gl[data-pgn]::before { content: attr(data-pgn); position: absolute; left: 0; right: 0; top: max(2px, calc(var(--bk-top, 24px) - 19px)); z-index: 1;
-  text-align: center; direction: ltr; font-size: 11px; font-weight: 700; line-height: 14px; color: var(--u-muted, #7a8a8e); font-variant-numeric: tabular-nums; pointer-events: none;
+  text-align: center; font-size: 11px; font-weight: 700; line-height: 14px; color: var(--u-muted, #7a8a8e); font-variant-numeric: tabular-nums; pointer-events: none;
   transition: opacity .25s; }
 .cbk-stage--gl.is-mx::before { opacity: 0; transition-duration: .12s; }
 html[data-theme="dark"] .cbk-stage--gl[data-pgn]::before { color: rgba(255, 255, 255, .5); }
