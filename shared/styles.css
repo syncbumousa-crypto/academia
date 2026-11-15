@@ -18454,7 +18454,7 @@ html[data-theme="dark"] .bk-skel__ring em { color: #e6ecef; }
 :is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
 .hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
 /* فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ (لا القلم ولا التقاطع) — ونقرُه يفتح قائمتَه */
-#cm-body .bk-tl.hl-over, #cm-body .bk-tl.hl-over span, #cm-body .bk-tl.hl-over .bk-tl__ln { cursor: pointer !important; }
+#cm-body .cbk-stage.hl-over, #cm-body .cbk-stage.hl-over * { cursor: pointer !important; }
 .hl-pal.hl-mk { border-radius: 999px; padding: 6px 8px; align-items: center; }
 .hl-mk__sep { width: 1px; height: 16px; margin: 0 2px; background: rgba(20, 40, 46, .16); }
 .hl-pal.is-dark .hl-mk__sep { background: rgba(255, 255, 255, .18); }

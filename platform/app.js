@@ -24386,13 +24386,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   window.addEventListener('pointerdown', e => { const P = document.getElementById('hl-mk'); if (P && !P.contains(e.target)) { const n = P.querySelector('[data-hlmn]'); if (n && document.activeElement === n) n.dispatchEvent(new Event('change')); hlMkClose(); } }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('hl-mk')) { hlMkClose(); } }, true);
   window.addEventListener('scroll', () => hlMkClose(), true);
-  /* والفأرةُ فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ لا القلم — يُنقر فتنفتح قائمتُه */
+  /* صفحةُ طبقة النصّ الظاهرةُ تحت نقطة (ولو بين الكلمات أو داخل مربّعٍ بلا نصّ — حيث لا تلتقط الطبقةُ الفأرة) */
+  function hlTLAt(e) {
+    const st = e.target.closest && e.target.closest('#cm-body .cbk-stage'); if (!st) return null;
+    for (const d of st.querySelectorAll('.bk-tlbox:not([hidden]) .bk-tl')) {
+      const r = d.getBoundingClientRect();
+      if (r.width && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return d;
+    }
+    return null;
+  }
+  /* نقرُ تظليلٍ يفتح قائمتَه في كلّ حال (طلبُ صاحب الموقع): بالفأرة أو والقلمُ أو المربّعُ مختار — قبل تقليب الكتاب وقبل بدء تظليلٍ جديد */
+  window.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    const d = hlTLAt(e); if (!d) return;
+    const h = hlMarkAt(d, e); if (!h || !h.m) return;
+    e.preventDefault(); e.stopPropagation();
+    if (bkTLSel) bkTLClear();
+    hlSetCur(h.c.id, h.m.id); hlMkOpen(h.c.id, h.m, e.clientX, e.clientY);
+  }, true);
+  /* والفأرةُ فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ لا القلم ولا التقليب */
   let hlHovQ = 0;
   document.addEventListener('pointermove', e => {
     if (hlHovQ || bkTLDrag || bkBoxDrag) return;
-    const d = e.target.closest && e.target.closest('#cm-body .bk-tl'); 
-    if (!d) { const o = document.querySelector('#cm-body .bk-tl.hl-over'); if (o) o.classList.remove('hl-over'); return; }
-    hlHovQ = requestAnimationFrame(() => { hlHovQ = 0; const h = hlMarkAt(d, e); d.classList.toggle('hl-over', !!(h && h.m)); });
+    hlHovQ = requestAnimationFrame(() => {
+      hlHovQ = 0;
+      const d = hlTLAt(e), h = d && hlMarkAt(d, e), on = !!(h && h.m);
+      document.querySelectorAll('#cm-body .cbk-stage.hl-over').forEach(x => { if (!on || !x.contains(d)) x.classList.remove('hl-over'); });
+      if (on) d.closest('.cbk-stage').classList.add('hl-over');
+    });
   }, { passive: true });
   function hlDelete(id, mid) {
     const H = hlData(id), m = hlMark(id, mid); if (!H || !m) return;
