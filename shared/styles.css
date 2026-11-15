@@ -17150,7 +17150,6 @@ html[data-lang="en"] .cx-acttools { transform: translate(-50%, -50%); }
 .cx-actb:disabled { opacity: .4; cursor: default; }
 .cx-actb--gold { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 55%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, var(--u-surf, #fff)); color: #a9852f; }
 html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(in srgb, #d4b36a 12%, transparent); }
-.cx-actind { min-width: 74px; text-align: center; font-size: 13px; font-weight: 600; color: var(--u-mut, #7c8a96); font-variant-numeric: tabular-nums; white-space: nowrap; }
 /* لونُ الذيل شفّافٌ قليلًا (‎--u-surf‎ بألفا): ما يتراكب منه يغمق — فالامتدادُ يبدأ بعد حاشية المنطقة (‎8px‎) وينتهي حيث يبدأ شريطُ
    الذيل (‎41px‎ تحت القسمة = هامشُها ‎26‎ وحاشيةٌ ‎8‎ ونصفُ المسكة ‎7‎) بلا تراكب، وخطُّ الذيل الشعريُّ يُرفع ما دامت كتلة —
    فتنساب المنطقةُ فيه بلا خطّ */
@@ -18363,7 +18362,6 @@ html[data-theme="dark"] .cx-ftl2 .cx-actmode { color: rgba(255, 255, 255, .88); 
 .cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: var(--u-ink, #14233f); }
 html[data-theme="dark"] .cx-ftc__nav > .cx-actb { color: rgba(255, 255, 255, .5) !important; }
 html[data-theme="dark"] .cx-ftc__nav > .cx-actb:hover:not(:disabled) { color: #fff !important; }
-.cx-ftc__nav .cx-actind { font-size: 12px; font-weight: 700; }
 :is(.pk--max, .pk--frame).pk--edit:has(.post-ytmain > .pk-split.has-book):not(.pk--ftdn) .vt-foot { min-height: 64px; max-height: 70px; }
 .cx-hlrail { height: 42px; }
 /* البطاقة: مربّعٌ أبيضُ بحدٍّ رفيع، في رأسه شريطُ أحبار تظليلاته */
@@ -18403,7 +18401,8 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
   --sk: #e8edef; --sk2: #d7dfe2; --skl: rgba(20, 40, 46, .1); --skr: #2c5e65; }
 html[data-theme="dark"] .bk-skel { --sk: #34424a; --sk2: #3f4e56; --skl: rgba(255, 255, 255, .1); --skr: #7fb7bd; }
 .bk-skel--over { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.bk-skel__bk { position: relative; height: min(96cqh, 96cqw / var(--ar)); aspect-ratio: var(--ar); }
+/* بإطار الكتاب نفسِه (‎BK_FR‎: ‎1/1.16‎ من المساحة، ونازلٌ ‎3.5%‎ من قامته) فيذوب على مكانه */
+.bk-skel__bk { position: relative; height: min(calc(100cqh / 1.16), calc(100cqw / 1.16 / var(--ar))); aspect-ratio: var(--ar); transform: translateY(3.5%); }
 .bk-skel__bk::after { content: ''; position: absolute; left: 8%; right: 8%; bottom: -14px; height: 16px; border-radius: 50%; background: radial-gradient(closest-side, rgba(20, 35, 63, .22), transparent); filter: blur(2px); }
 .bk-skel__edge { position: absolute; left: -6px; top: 3px; bottom: 3px; width: 6px; border-radius: 4px 0 0 4px; background: repeating-linear-gradient(90deg, #f3eee2 0 1px, #dcd4c0 1px 2px); }
 html[data-theme="dark"] .bk-skel__edge { background: repeating-linear-gradient(90deg, #4a5860 0 1px, #3a474e 1px 2px); }
@@ -18453,3 +18452,12 @@ html[data-theme="dark"] .bk-zi { --zt: #7fb7bd; }
 .bk-zi__t.r { right: 0; background: linear-gradient(-90deg, color-mix(in srgb, var(--zt) 14%, transparent) 18%, transparent); }
 .bk-zi.is-l > .l, .bk-zi.is-r > .r { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .bk-zi__t { transition: none; } }
+
+/* ===== رقمُ الصفحات صغيرًا فوق الكتاب (طلبُ صاحب الموقع) — من ‎data-pgn‎، وأعلاه ‎--bk-top‎ (‎bk2Layout‎) =====
+   ويغيب في تبدُّل الوضع (الكتابُ يتحرّك)، ويُخفى رقمُ سطر التصفّح تحت الكتاب فلا يتكرّر */
+.cbk-stage--gl[data-pgn]::before { content: attr(data-pgn); position: absolute; left: 0; right: 0; top: max(2px, calc(var(--bk-top, 24px) - 19px)); z-index: 1;
+  text-align: center; direction: ltr; font-size: 11px; font-weight: 700; line-height: 14px; color: var(--u-muted, #7a8a8e); font-variant-numeric: tabular-nums; pointer-events: none;
+  transition: opacity .25s; }
+.cbk-stage--gl.is-mx::before { opacity: 0; transition-duration: .12s; }
+html[data-theme="dark"] .cbk-stage--gl[data-pgn]::before { color: rgba(255, 255, 255, .5); }
+.cbk-stage--gl ~ .cbk-nav [data-bkind] { display: none; }
