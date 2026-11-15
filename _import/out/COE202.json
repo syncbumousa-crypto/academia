@@ -1,0 +1,1086 @@
+{
+  "code": "COE 202",
+  "users": [
+    {
+      "id": "stk-iiiii",
+      "name": "IIIII",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/iiiii/144/1820_2.png",
+      "email": "iiiii@import.stkfupm.invalid",
+      "user": "IIIII"
+    },
+    {
+      "id": "stk-s2012055",
+      "name": "s2012055",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/f475e1/144.png",
+      "email": "s2012055@import.stkfupm.invalid",
+      "user": "s2012055"
+    },
+    {
+      "id": "stk-hungryspirits",
+      "name": "HungrySpirits",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/hungryspirits/144/2095_2.png",
+      "email": "hungryspirits@import.stkfupm.invalid",
+      "user": "HungrySpirits"
+    },
+    {
+      "id": "stk-practice",
+      "name": "Practice",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/practice/144/2043_2.png",
+      "email": "practice@import.stkfupm.invalid",
+      "user": "Practice"
+    },
+    {
+      "id": "stk-cs_scientist",
+      "name": "CS Scientist",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/cs_scientist/144/2096_2.png",
+      "email": "cs_scientist@import.stkfupm.invalid",
+      "user": "CS_Scientist"
+    },
+    {
+      "id": "stk-walo0od",
+      "name": "Walo0od",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/walo0od/144/2099_2.png",
+      "email": "walo0od@import.stkfupm.invalid",
+      "user": "Walo0od"
+    },
+    {
+      "id": "stk-mzd",
+      "name": "MZD",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/54ee81/144.png",
+      "email": "mzd@import.stkfupm.invalid",
+      "user": "MZD"
+    },
+    {
+      "id": "stk-k.a.q",
+      "name": "K.A.Q",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/4bbf92/144.png",
+      "email": "k.a.q@import.stkfupm.invalid",
+      "user": "K.A.Q"
+    },
+    {
+      "id": "stk-user3616",
+      "name": "دحوم تسعين",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3616/144/508_2.png",
+      "email": "user3616@import.stkfupm.invalid",
+      "user": "user3616"
+    },
+    {
+      "id": "stk-computist",
+      "name": "Computist",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
+      "email": "computist@import.stkfupm.invalid",
+      "user": "Computist"
+    },
+    {
+      "id": "stk-tryagain",
+      "name": "TryAgain",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/90db22/144.png",
+      "email": "tryagain@import.stkfupm.invalid",
+      "user": "TryAgain"
+    },
+    {
+      "id": "stk-krooom",
+      "name": "Krooom",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/9de0a6/144.png",
+      "email": "krooom@import.stkfupm.invalid",
+      "user": "Krooom"
+    },
+    {
+      "id": "stk-wiss_alamri",
+      "name": "Wiss Alamri",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/9fc348/144.png",
+      "email": "wiss_alamri@import.stkfupm.invalid",
+      "user": "Wiss_Alamri"
+    },
+    {
+      "id": "stk-zoroo",
+      "name": "zoroo",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/z/7ea924/144.png",
+      "email": "zoroo@import.stkfupm.invalid",
+      "user": "zoroo"
+    },
+    {
+      "id": "stk-abdu1002",
+      "name": "Abdu1002",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdu1002/144/1155_2.png",
+      "email": "abdu1002@import.stkfupm.invalid",
+      "user": "Abdu1002"
+    },
+    {
+      "id": "stk-memomoro",
+      "name": "MemoMoro",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/8e8cbc/144.png",
+      "email": "memomoro@import.stkfupm.invalid",
+      "user": "MemoMoro"
+    },
+    {
+      "id": "stk-user82",
+      "name": "حمد",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/7cd45c/144.png",
+      "email": "user82@import.stkfupm.invalid",
+      "user": "user82"
+    },
+    {
+      "id": "stk-breaktheunbreakable",
+      "name": "BreakTheUnbreakable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
+      "email": "breaktheunbreakable@import.stkfupm.invalid",
+      "user": "BreakTheUnbreakable"
+    },
+    {
+      "id": "stk-ali19",
+      "name": "Ali19",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/b4bc9f/144.png",
+      "email": "ali19@import.stkfupm.invalid",
+      "user": "Ali19"
+    },
+    {
+      "id": "stk-ahmelq",
+      "name": "ahmelq",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ahmelq/144/2158_2.png",
+      "email": "ahmelq@import.stkfupm.invalid",
+      "user": "ahmelq"
+    },
+    {
+      "id": "stk-guest",
+      "name": "Guest",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8dc957/144.png",
+      "email": "guest@import.stkfupm.invalid",
+      "user": "Guest"
+    },
+    {
+      "id": "stk-a7md_i",
+      "name": "a7md i",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f9ae1b/144.png",
+      "email": "a7md_i@import.stkfupm.invalid",
+      "user": "a7md_i"
+    },
+    {
+      "id": "stk-ad0rs",
+      "name": "ad0rs",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f475e1/144.png",
+      "email": "ad0rs@import.stkfupm.invalid",
+      "user": "ad0rs"
+    },
+    {
+      "id": "stk-user11151",
+      "name": "عزّام العُمري",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user11151/144/2374_2.png",
+      "email": "user11151@import.stkfupm.invalid",
+      "user": "user11151"
+    },
+    {
+      "id": "stk-salh_1",
+      "name": "Salh_1",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ec9cab/144.png",
+      "email": "salh_1@import.stkfupm.invalid",
+      "user": "Salh_1"
+    },
+    {
+      "id": "stk-user12133",
+      "name": "عبد الله القحطاني",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/5daacb/144.png",
+      "email": "user12133@import.stkfupm.invalid",
+      "user": "user12133"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1054124-coe202",
+      "uid": "stk-iiiii",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1339419649000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام: جيده جداً\nالمواضيع التي يغطيها المقرر: تصميم الدوائر الرقميه وعلم الجبر المنطقي … وفهمها يعتبر أهم اساس للتخصص كامل لانها بستمر معاك الى آخر يوم بالتخصص … وهذي الماده اساس تصميم الدوائر الرقميه والمعالجات …\nالكتاب المستخدم للمقرر: اذكر انه كان جيد بس ماكنت استخدمه بكثره علشان احكم عليه بشكل كامل …\nالأسئلة والأمثلة المستخدمة في المقرر: فيه سورسات كثيره للكورس من اولد اقزامز وهوموركات وكوزات ونوتات منها:\nhttp://faculty.kfupm.edu.sa/coe/aimane/coe202\nhttp://www.ccse.kfupm.edu.sa/~ahmadsm/teaching/coe202-092/coe202.html\nhttp://faculty.kfupm.edu.sa/coe/marwan/richfiles\nمدى فائدته في الناحية التطبيقية: مهم جداُ في كامل التخصص مثل ماذكرت من قبل\n\nالكورس ماهو صعب ويعتبر جداً أساسي للتخصص فلازم تكون فاهمه بشكل واضح … والكورس يحتاج متابعه اول باول وتطبيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/2",
+          "user": "IIIII",
+          "ts": 1339419649000,
+          "tid": 120812,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1317341-coe202",
+      "uid": "stk-s2012055",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1389188997000,
+      "st": "pub",
+      "data": {
+        "desc": "اللي يقول لك سهلة ما عليك منه\n\nالمادة صعبة تقول فزكس حق طلاب الكمبيوتر\n\nلكن بصراحة المنهج قصير وخفيف والافكار قليلة\n\nالمادة بشكل عام ممتعة جدا وحلوة وخفيفة ما راح تحس فيها الا وانتم مخلصين المنهج من خفتها\n\nالمادة تتكلم عن مثل ما قالوا الزملاء فوق\n\nاظن اللي مخلي المادة صعبة ان اغلب الاسئلة في المياجر والفاينل يكون فيها كونسبت مع تركات وأنواع المطبات اللي ما تخطر على بالك\n\nبس لو يحطون اسئلة كونسبت بس كان الكل جاب درجات زينة\n\nلكن اذا تبغى تجيب قريد حلو حل الاولد اكزامز كلها ولا تخلي شي!!!\n\nواذا ما فهمت حاجة فيها رح عند الدكتور\n\nبعض الطلاب اذا ما فهم شي حفظ الاجابة او سحب عليها وهذا اللي مخلي الافرج نازل\n\nوالله اعلم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/4",
+          "user": "s2012055",
+          "ts": 1389188997000,
+          "tid": 120812,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1420843-coe202",
+      "uid": "stk-hungryspirits",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1421751101000,
+      "st": "pub",
+      "data": {
+        "desc": "مادة سهله … ممكن بعد ميجر 2 تبدأ الدروس الاصعب … لكن الكورس ممتع اخذته عند الدكتور ايمن الملح ترم 141 المياجر والفاينل قريبة جدا من الاولد اكزامز … بشكل عام المادة سهله ولا تحتاج مذاكرة طويلة … المواضيع مب كثيرة بس تحتاج انك تفهم مع الدكتور …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/7",
+          "user": "HungrySpirits",
+          "ts": 1421751101000,
+          "tid": 120812,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1435376-coe202",
+      "uid": "stk-practice",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1449277958000,
+      "st": "pub",
+      "data": {
+        "desc": "^ الا ان تصير عدد ساعاتك سينير … راح تجيك رسالة انك تنزلها او بيجيك هولد\n\nبشكل عام كل مادة يمديك تاخرها ليفلين كاملين\n\nمثال : ماث 102 اخر فترة انك تنزله بدون ما يجيك هولد هو اول ترم جونيور بحكم ان الجونيور المفروض مواد ليفل 3\n\nانقلش 214 اخر ترم تقدر تنزله فيه هو اول ترم سينير\n\nوقس على ذلك بكل موادك\n\nموفق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/9",
+          "user": "Practice",
+          "ts": 1449277958000,
+          "tid": 120812,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p1437984-coe202",
+      "uid": "stk-cs_scientist",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1451904323000,
+      "st": "pub",
+      "data": {
+        "desc": "جودة المقرر بشكل عام:\n\nمقرر جدًا ممتع و بالنسبة لي ذا أكثر كورس أعجبني في الجامعة للآن، فيه منطق و فهم، كورس جميل و يعتمد على فهمك 100%\nإذا فهمت من البداية بيسهل عليك باقي المنهج، لأن كل درس على اللي قبله بالفهم، نظام إنك تخلي كل الفهم قبل الميجر بثلاث أيام ولا أربعة احتمال تضيع\nبس الميزة إذا فهمت مع دكتورك بتحس المادة سهلة\n\nالمواضيع التي يغطيها المقرر\n\nNumber Systems - Boolean Algebra - K-maps - Universal Gates - Combinational Circuits - Sequential Circuits - Registers - Programmable Logic\n\nماتيريال المادة مهو ثقيل، بس كل درس تلقى فيه أفكار كثيرة\n\nالكتاب المستخدم للمقرر\n\nأظن ما قد فتحته، أصلًا ما احتجته، سلايدات الدكتور أيمن ما تقصر\n\nالأسئلة والأمثلة المستخدمة في المقرر\n\nذي صفحة الدكتور أيمن فيها أشياء جدًا مفيدة للكورس من سلايدات و اختبارات قديمة و كويزات faculty.kfupm.edu.sa - /coe/aimane/coe202/\n\nمدى فائدته في الناحية التطبيقية\n\nالكورس هذا مهم، يعتبر شيء أساسي لأي طالب تخصصه له علاقة بالكمبيوتر، لأن الكورس هذا تتعامل مع الكمبيوتر بأبسط لغة له، و اللي هي 0 و 1\n\nالكورس هذا يفتح كورس ICS233/COE301، الأفضل ما تأخره و لا تستهين فيه عشان ما تخبص فيه و في الكورس اللي بعده\n\nالكورس مهو صعب، بس لازم له متابعة لأن إذا ما فهمت نقطة ما بتفهم اللي بعدها، عطه حقه في المذاكرة و بتجيب قريد كويس إن شاء الله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/12",
+          "user": "CS_Scientist",
+          "ts": 1451904323000,
+          "tid": 120812,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p1492323-coe202",
+      "uid": "stk-walo0od",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1526282287000,
+      "st": "pub",
+      "data": {
+        "desc": "Term 172\n\nالمواضيع التي يغطيها المقرر:\nUnit 1: Data Representation\nUnit 2: Binary Logic and Gates\nUnit 3: Standard and Canonical Forms\nUnit 4: K-map Simplification\nUnit 5: Other Gate Types\nUnit 6: Combinational Logic Design\nUnit 7: Arithmetic Functions and Circuits\nUnit 8: Functions and Functional Blocks\nUnit 9: Sequential Circuits and Design Analysis\nUnit 10: Registers and Counters\n\nالكتاب المستخدم للمقرر:\nAlan B. Marcovitz , Introduction to Logic Design, Third Edition, McGraw-Hill, 2010.\n\nمدى فائدته في الناحية التطبيقية:\nمفيد جداً، الأشياء اللي يتكلم عنها كلها تتعلق بتصميم الهاردوير حق الأجهزة بمختلف أشكالها في الواقع.\n\nإضافات:\n- كورس تأسيسي جداً وسهل إنك تجيب فيه قريد عالي.\n- الكورس ممتع جداً للي يحب تصميم الهاردوير ويلعب بأجزاءه ويرسم دوائر منطقية.\n- نوع الأسئلة تقريباً نفسها اللي في الاولد اقزام، حتى الدكتور يقول هي نفس الأفكار بس تحتاج إنك تحل كثير.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/14",
+          "user": "Walo0od",
+          "ts": 1526282287000,
+          "tid": 120812,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p1533283-coe202",
+      "uid": "stk-mzd",
+      "code": "COE 202",
+      "sec": "info",
+      "ts": 1641283291000,
+      "st": "pub",
+      "data": {
+        "desc": "المواضيع التي يغطيها المقرر:\nBinary Arithmetic- Boolean Algebra and Logic Gates- The Karnaugh Map- Characteristics of Logic Gates- Additional Gates- Verilog- Combinational Circuit Design- Arithmetic Circuits- Functional Blocks- Sequential Circuit Design- Registers and Counter\n\nإضافات:\n- المادة ليست صعبة وسهل انك تجيب قريد عالي فيها.\n-المادة جدا مهمة لطلاب الهندسة الكهربائية و هندسة الحاسب\n- المادة تحتاج تذاكرها اول باول\n- حين تحل اولد اقزام، افهم السؤال لا تحفظ السؤال، دكتوري دائما ينبهنا عن هذه النطقة انه لازم تفهم السؤال\n\nبعض المصادر المفيدة:\n\nموقع الدكتور محمد مدور\n\nCOE 202 - Digital Logic Design\n\nفيديوهات الدكتور علي الصويان\n\nhttps://youtube.com/playlist?list=PLjusC38NfWcPR6LdcCRVLPpFFfmgDF6iQ\n\nفيديوهات الدكتور محمد مدور\n\nhttps://youtube.com/playlist?list=PLeurb_BIjrxifPpf5Z1B5nSNmwI_GHXFZ",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-202-digital-logic-design/120812/15",
+          "user": "MZD",
+          "ts": 1641283291000,
+          "tid": 120812,
+          "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-doc-k.a.q-coe202",
+      "uid": "stk-k.a.q",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1293294061000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98317",
+            "n": "Dr. Radwan E. Abdel-Aal",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا أخذت مع البروفسور coe202\n\nشيء بطل وأخلااااااااق بس يجيب النوووم شووي في الشرح ,\n\nالتحضير في آخر الكلاس ومررررررررررررره متساهل في التأخير ,\n\nالهووموركات جااامدة و طويلة بس تسهلك فهم المادة ,\n\nالكوززات من متوسطة إلى صعبة لكن إذا حليت الهومورك بنفسك بتكون سهلة ,\n\nأعطيه a",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p751682-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-radwan-e-abdel-aal/98317/4",
+              "user": "K.A.Q",
+              "ts": 1293294061000,
+              "tid": 98317,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user3616-coe202",
+      "uid": "stk-user3616",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1307876534000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98317",
+            "n": "Dr. Radwan E. Abdel-Aal",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "coe 202\nترم 101\n\nالمدرس هذا يعطيك 8 هومووركات في الترم\n8 كويزات في الترم\n\nالهوموورك أنا حليت أول 4 هومووركات اعتقد اقصد واحد كان 8 صفحات وكل اسبوع او اسبوعين هوموورك يلحقه كويز\nالكويزات كانت صعبه وعلى اني كنت احل الهومووركات صح واتعب فيها الا ان الكويزات كان فيها اسئله صعبه\n\nيتفنن طبعاً في اوقات الهومووركات والكويزات, يعني مثلاً حاط كويزين وهومووركين بينهم يوم في نص المياجر! وعطانا كويز وهومورك في آخر احد في الترم\n\nطيب قلنا ماشي\n\nبكل بساطة جمع درجات الهوموركات والكويزات كلها مانقص ولاكويز من ال8 كوزات اللي ثلاث ارباعها اوقاتها غلط. وعطانا درجتها\n\nافرج الكلاس وورك 9 من 25 تخيلو !!\nطبعاً مارفعنا ولا درجة وحده في الكلاس وورك يعني المدرسين اللي غيره يرفع الطلاب لين يوصلون افرج معين, يعني اغلب المدرسين افرجهم بين 17-20\n\nبكل بساطة أفرج القريدات عندنا كان حوالي 1.8 ههههههههه يعني نص الطلاب دي ونصهم سي\n\nبالعربي\n\nأنحش",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p851416-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-radwan-e-abdel-aal/98317/7",
+              "user": "user3616",
+              "ts": 1307876534000,
+              "tid": 98317,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-computist-coe202",
+      "uid": "stk-computist",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1389112899000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98317",
+            "n": "Dr. Radwan E. Abdel-Aal",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "بنود التقييم : coe202\n\nالتحضير : نهاية الحصة\n\nطريقة الشرح : عن طريق السلايدات + النقاش مع الطلاب\n\nالكويزات : تقريبا كل اسبوعين عندك كوز(ممتاز) وهومورك\n\nالمياجر: common (متوسطة - سهلة)\n\nالفاينلات : مثل المياجر\n\nالقريد النهائي: A(+) بجدارة\n\nالصوت: واضح\n\nإضافات : المدرس اخلاق وعلم (ويش تريد اكثر من كذا) - بس يمكن ان اسلوبه في الشرح يخليك تشعر بالنوم. خليك نشط في الحصة بالسؤال والنقاش وإن شاء الله A+ تاخذها",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1316835-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-radwan-e-abdel-aal/98317/15",
+              "user": "Computist",
+              "ts": 1389112899000,
+              "tid": 98317,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-tryagain-coe202",
+      "uid": "stk-tryagain",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1485276737000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98318",
+            "n": "Dr. Muhamed F. Mudawar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202\nTerm 161\nDr Mudawwar\n\nبنود التقييم :\n\nالتحضير :\nيحضر كل يوم وما يحاسب على التأخير بس ما يحب المتأخرين بشكل عام … المشكلة إنو يحضر بشكل سريع كلاسنا كان الساعة 11 … 11 ودقيقة تلقاه مخلص وبادي في الشرح\n\nطريقة الشرح :\nيشرح من سلايدات خاصة فيه … وأتعب وانا اقول انها ممتازة … بكل بساطة تختصر عليك كل المعلومات وتعطيك الزبدة … أشوف بعض سلايدات الدكاترة تكون مليانة ودرس بسيط يكون عليه 100 سلايد وهو ما يتعدى ال 40 او اقل حتى … المشكلة للأمانة إن الدكتور ما شاء لله عليه ما يسكت ولا للحظة وحدة … من الساعة 11 للساعة 11 و 50 واحيانا ياخذله كمان 5 دقايق زيادة وهو طول الوقت يتكلم ويتكلم ويتكلم … ممكن تحس إنك ضعت شوي لكن شرحه ممتاز لو ركزت معاه بشكل كامل … المشكلة عندي إنو كلاسو كان آخر كلاس عندي الساعة 11 ودوامي من الـ 7 فكان التركيز شبه صعب معاه … في مشكلة ثانية … إن الدكتور للأسف يشرحلك أشياء مو معك بحجة إنها رح تفيدك بعدين … المشكلة إنو هذي الأشياء تاخذ وقت طويييييل فعلى نهاية الترم صرنا نمشي اسرع شوي علشان نقدر نخلص الماتيريال اللي معنا …\n\nالكويزات :\nسهلة جداً للمذاكر الصراحة والقريدر كان ممتاز ويوزع درجات بشكل كبير لو شافك فاهم … الدكتور عطانا اسئلة نحلها موجودة في الكتاب وكان أحيانا يجيب أسئلة نسخ لصق منها بدون اي تغيير … الاسئلة حلها مو اجباري اختياري فكان أغلب الشباب يسحبون عليها … والدكتور ما عنده واجبات ويعطيك 8 كويزات ويحذف أسوأ اثنين على ما اتوقع …\n\nالمياجر:\nكومون\n\nالفاينلات :\nكومون\n\nالقريد النهائي: A+ بدون اي شك\n\nالصوت: مرتفع ويتكلم طول الحصة بالانجليزية\n\nإضافات : الدكتور طيب بشكل كبير وقمة في الاخلاق وفي التعامل",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1466931-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhamed-f-mudawar/98318/13",
+              "user": "TryAgain",
+              "ts": 1485276737000,
+              "tid": 98318,
+              "pn": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-krooom-coe202",
+      "uid": "stk-krooom",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1486138841000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98318",
+            "n": "Dr. Muhamed F. Mudawar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202\nTerm 161\n\nالتحضير : متساهل نوعا ما ويحضر بأول دقيقة ومرة ثانية باخر دقيقة للمتأخرين\n\nالشرح : كان بالنسبة لي سئ جداً لانه حرفيا يقرأ من السلايدات (فاغلب الطلاب ينامون والباقيين على الجوال ويسمح بذا الشئ و احيانا يكون الفصل كل مب معه وما شاء الله عليه يكمل شرح لنفسه وهذا عيب فيه فالمفترض ما يسمح لاحد بالانشغال)وبعض الاحيان يعطي معلومات عامة متعلقة بالدرس , قلة اللي كانوا مبدعين معه 2 او 3 والدليل افرج المياجر والفاينل كان جدا بعيد عن افرج السكاشن الثانية\n\nالكويزات : يعطي على كل شابتر غالبا اختبار ويكون متوسط الصعوبة واللي يصححها مش الاستاذ (مساعد له ) فاشوف التصحيح جدا عادل وينقص على مقدار الغلطة\n\nالواجبات : كان فيه واجبين عليهم 10% من الكورس الاول سهل وكان عليه 3 والثاني جدا صعب وكان عليه 7 وما عطانا الا اسبوع وكان وقت مياجر(قبل الفاينل بسبوعين ) بعكس السكاشن الثانية وهذا الشي كان فيه ظلم لبعض الطلبة\n\nالقريد النهائي: C+ بسبب تصحيحه السئ جدا جدا وان درجات تضيع بسبب تصحيحه على عكس السكاشن الثانية\n\nالصوت: مرتفع ويتكلم طول الحصة بالانجليزية و أضيف ان صوته يجيب النوم بسبة انه فقط يقرا من السلايدات بدون اي جذب لانتباه الطلاب\nاضافات : الاستاذ عنده كم هائل من المعلومات والمعلومات العامة اللي يعطينا هي مفيدة جدا والاستاذ جدا خلوق وحبوب ولكن يعيبه شيئين الاول انه مش متساعد جدا بالاوفس اور (اذا ما فهمت شي ورحت الاوفس اور تبيه يشرح راح يشرحها مرة وحدة اذا فهمت اوكي وبعد كذا يبدا يصرفك) و الثاني تصحيحه فالمياجر و الفاينل جدا ظالم وما عنده مشكلة انه الكل ينخسف والافرج يصير واطي جدا فمثلا بالميجر الثاني افرجنا كان اقل افرج بس بفرق بسيط ولكن بالفاينل من 90 (35% من الكورس) افرجنا 53 وافرج سكشن اخر 77 والمادة شبه ستاندر و 75 سي بلص فلك ان تتخيل الدمار اللي سواه بالدرجات\n\n* انا من الناس اللي تؤمن بأن اجتهادك بالمادة يجيب لك الدرجة اللي تبغاها لكن الاستاذ ذا غير مفهومي 100%\nفاذا تبي قريد على اجتهادك ابتعد عنه",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1467527-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhamed-f-mudawar/98318/14",
+              "user": "Krooom",
+              "ts": 1486138841000,
+              "tid": 98318,
+              "pn": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-wiss_alamri-coe202",
+      "uid": "stk-wiss_alamri",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1647957672000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98318",
+            "n": "Dr. Muhamed F. Mudawar",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE202 - Term211\n\nالتحضير :\nبشكل يومي، يمرر ورقة وكل واحد يحضر نفسه وياخذها نهاية الحصة. ما كان يهتم للتأخير كثير.\n\nطريقة الشرح :\nأسطورة ما شاء الله عليه وفاهم بمعنى الكلمة والطالب اللي يركز معه بيفهم بشكل ممتاز.\n\nالكويزات :\nيحب الكويزات، تقريباً كل تشابتر بيعطيك عليه كويز، كويزاته كانت متوسطة مائلة للصعوبة لازم تحضر لها زين.\n\nالمياجر:\nميدتيرم واحد وكان كومون، تصحيح الدكتور كان جبار والأفرج حق شعبتنا كان 75 من 90.\n\nالفاينلات :\nكومون وكان إعجازي، الأفرج العام أعتقد كان 43%.\n\nالقريد النهائي:\nA\n\nالصوت:\nواضح ما شاء الله والانجليزي حقه ممتاز جدا.\n\nإضافات :\nالدكتور أنصح فيه هذا الكورس، تصحيح الدكتور للميد كان ممتاز بالنسبة للكويزات كان مزاج مرات يعطيك فوق حقك ومرات يعطيك حقك بالضبط وما يزيد حتى ربع.\nعيب الدكتور في الهومووركات كان بس يعطينا البروقرامنق فقط وعطانا عليه 3 واجبات وقال المفروض 5.\nال+ ما حطيتها مع الA لأن الدكتور كان غير متعاون من ناحية تأجيل الكويزات او الهومووركات.\n\nعمومًا لا يفوتكم الدكتور.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1533974-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhamed-f-mudawar/98318/19",
+              "user": "Wiss_Alamri",
+              "ts": 1647957672000,
+              "tid": 98318,
+              "pn": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-zoroo-coe202",
+      "uid": "stk-zoroo",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1357331683000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98324",
+            "n": "Dr. Aiman H. El-Maleh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "coe 202 term 121\n\nمن احسن الدكاتره اللي مروا علي في الجامعة… ومن اللي مروا علي، هو اكثر دكتور يهتم بالطالب وفهمه…\n\nلو اقدر انزل كل موادي معه نزلتها…\n\nونصيحة للي بينزل معه يكتب وراه اللي في السبوره لأن شرحه وطريقة حله للمسائل افضل واسهل بكثير من السلايدات + اسئلته في المياجر والفاينلات تكون من الهوموورك والاساينمت، فاحرص انك تكون فاهمها…\n\nالدكتور ايمن الله يوفقه دنيا واخره،،",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1154991-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-aiman-h-el-maleh/98324/9",
+              "user": "zoroo",
+              "ts": 1357331683000,
+              "tid": 98324,
+              "pn": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-hungryspirits-coe202",
+      "uid": "stk-hungryspirits",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1421751136000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98324",
+            "n": "Dr. Aiman H. El-Maleh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "وهل يخفى القمر 🤠 ❤️\n\nكوزات نسخ ولصق من الاولد اكزامز … محترم جدا … شرحة لا يعلى عليه … اخذت COE 202 ترم 141 معه الكورس كان جدا ممتاز … انصح فيه بقوة …\n\n👍 🌹",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1420845-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-aiman-h-el-maleh/98324/15",
+              "user": "HungrySpirits",
+              "ts": 1421751136000,
+              "tid": 98324,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-cs_scientist-coe202",
+      "uid": "stk-cs_scientist",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1451835936000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98324",
+            "n": "Dr. Aiman H. El-Maleh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE202 - 151\n\nالتحضير : ما يحط ليت، بس أفضل إنك ما تتأخر لأن شرح الدكتور مهم في ذي المادة\n\nطريقة الشرح : شرح الدكتور أيمن ممتاز جدًا، يبسط لك المادة و تفهمها بسهولة إذا ركزت معه، و سلايداته تغنيك عن الكتاب، أصلًا محد منا فتح الكتاب 😆\n\nالكويزات : بين السهلة و المتوسطة، أسئلة كويزاته عادةً يجيبها من كويزات قديمة/اختبارات قديمة، و أصلًا إذا فاهم شرحه بالكلاس بتحلها بسهولة\nعطانا خمس كويزات و حذف أسوأ واحد منهم\n\nالمياجر: كومون\n\nالفاينلات : كومون\n\nالصوت: واضح و مفهوم، تركز معه بالراحة\n\nإضافات :\nبدون مبالغة الدكتور أيمن هو أفضل دكتور درسني بالجامعة للآن، دكتور خلوق جدًا و متساعد مع الطلاب و إذا ما جبت درجة كويسة يزعل كأنك ولده\nحبّيت المادة منه، مادة ممتعة و بسطها لنا و فهمنا إياها، و تعال له الأوفيس أور لو ما فهمت و يجلس معك لين ما تفهم\nو حتى الأساينمنتس اللي يعطيك، عادي تروح تسأله و يشرح لك، هو في راسه حاط الأساينمنت عشان تتعلم و تفهم، مو عشان تحدي و تنقص\nعن نفسي رحت له و شرح لي الحل و ما قصر و عطاني الأوراق اللي شرح عليها و كتب فيها نوتات\nكويزاته تقيس فهمك، و مو بعيدة عن مستوى المياجر بحكم إن بعضها تكون أسئلة مياجر قديمة أصلًا\nو كان يعطينا activities بالهبل للديزاين بحيث إنه مهم بالكورس، و اللي يحله يعطيه 0.5% ولا 1% بالـDiscussion، و بسبب الآكتيفيتيز ذولي بدعنا في أسئلة الديزاين في المياجر\nلو أرسلت له رسالة بالإيميل فيها سؤال عطه شوي و تلقاه مجاوب، مرة ارسلت له 10:26 رد علي 10:28، انخرشت من سرعته 😆\nدكتور حريص على فهمك للمادة أكثر من حرصك على نفسك، الله يوفقه و يسهل له\nنصيحة إذا لقيت سكشنه مفتوح سجل فيه\n\nالقريد النهائي: A++++",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1437906-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/prof-aiman-h-el-maleh/98324/16",
+              "user": "CS_Scientist",
+              "ts": 1451835936000,
+              "tid": 98324,
+              "pn": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-abdu1002-coe202",
+      "uid": "stk-abdu1002",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1296506259000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98327",
+            "n": "Dr. Marwan H. Abu-Amara",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "التحضير : يومي بآخر الحصة ولا يحاسب على التأخير … حتى لو بعد ثلاث أرباع الساعة!\nطريقة الشرح: من السلايدات مع السبورة وهي رتيبة جدا لدرجة أنني لم أستطع التركيز معها إلا فيما ندر وربما أثر في ذلك طول المحاضرة فهي كانت ساعة وربع ! Coe 202\nالكويزات: متوسطة … إن فهمت المطلوب قبل الكويز ستأخذ العلامة الكاملة بسهولة\nالمياجر: متوسطة\nالفاينل: متوسط إلى سهل\nالصوت : عالي وواضح\nالدرجة النهائية : C+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p779826-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-marwan-h-abu-amara/98327/2",
+              "user": "Abdu1002",
+              "ts": 1296506259000,
+              "tid": 98327,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-memomoro-coe202",
+      "uid": "stk-memomoro",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1396032097000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98327",
+            "n": "Dr. Marwan H. Abu-Amara",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "درسني الدكتور في ترم 131 كورس coe202\n\nالتحضير :\nيحضر دائما أخر الكلاس وما يحسب تأخير غالبا ولكن صارت مشكلة ان ممكن يبدأ الكلاس وما يكون الا في كم واحد بس موجود\nطريقة الشرح :\nمن سلايدات موجودة عنده في الموقع … سلايدات جيدة وكافية جدا وشرحه أصلا ممتاااااز بحيث ان اذا ركزت معاه ما هتحتاج تبذل جهد كبير في المذاكرة\nالكويزات :\nمتوسطة\nالمياجر:\nكومون\nالفاينلات :\nكومون\nالقريد النهائي: A\nالصوت:\nممتاز والاكسنت ممتازة\nإضافات :\nالآستاذ ما شاء الله عليه فاهم جدا ومرة متساعد لكن المشكلة انه احيانا يوصل لمرحلة الملل يعني هو يشرح وكذا وبعدين تحس ان الكلاس بدأ ينام\nولكن مع ذلك انا شايف اني الحمدلله استفدت منه كتيير وكان ممتاز جدا",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1345396-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-marwan-h-abu-amara/98327/4",
+              "user": "MemoMoro",
+              "ts": 1396032097000,
+              "tid": 98327,
+              "pn": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user82-coe202",
+      "uid": "stk-user82",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1350556697000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98337",
+            "n": "Dr. Muhammad E. S. Elrabaa",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أنا ما درست عند د. الربعة … بس بأنقل لكم كلام الشباب اللي درسوا عنده\n\nاخلاق الدكتور جيدة … وشرحه ممتاز ويفهمك المادة … وانا اتكلم عن كورسات coe 202 و coe 360 VLSI\n\nلكن الكويزات والهوموكات … دمار عنده\nالاختبارات اصعب مما تتوقع بكثير … معظم السيكشن زاحف حول درجات D و +D\n\nفي احدى المواد … السكشن كان 14 طالب … تقريبا … بعد عدد من الصحايا اللي دردبوا المادة … 8 من هذولا 14 درجاتهم F … ومعظمهم خريجين !!\n\nالله يذكر الشيرمان بخير … د. عبد العزيز قطب … هذاك الوقت … أمر بإعادة الفاينل لهذولا الطلاب وبالفعل عادوه ونجح منهم 5 ورسب 3 بعدما كانوا كل 8 راسبين !!\n\nاكرر … ما ادري عن وضع هالدكتور الحين … يمكن تغير … لكن اللي ذكرته هو اللي صار … وطبعا الوضع يتختلف تماما عن ما ذكرته لو كانت هذه المواد كومون … يعني ان الاختبارات ما هي من عنده",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1109567-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-muhammad-e-s-elrabaa/98337/10",
+              "user": "user82",
+              "ts": 1350556697000,
+              "tid": 98337,
+              "pn": 10
+            }
+          },
+          {
+            "id": "stk-dr-f98338",
+            "n": "Dr. Ashraf S. Hasan Mahmoud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "أخذت معه coe 202 وشرحه واضح ويهتم بفهم الطلاب … ومتعاون جدا معهم\nالتحضير عنده بشكل يومي … في كل محاضرة\nكويزاته ومياجره … متوسطة المستوى\nعندك حوالي 5 % بونص … إذا كنت تجاوب على الأسئلة اللي يلقيها في المحاضرة أو تجاوب على الأسئلة الإضافية في الواجبات\nخرجت في نهاية الكورس بـ +b … لو شديت على نفسي أكثر … لكان خرجت بدرجة a",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1165611-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ashraf-s-hasan-mahmoud/98338/2",
+              "user": "user82",
+              "ts": 1358521292000,
+              "tid": 98338,
+              "pn": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-breaktheunbreakable-coe202",
+      "uid": "stk-breaktheunbreakable",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1526270721000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98338",
+            "n": "Dr. Ashraf S. Hasan Mahmoud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202 - TERM 171\nCOE 241 - TERM 172\n\nالتحضير :\nنهاية الكلاس. ما يسمح لك بالتأخير إلا بعذر.\nطريقة الشرح :\nالسلايدات حقته والسبورة. سلايداته تمشي الحال.\nالكويزات :\nكل شابتر. متوسطة مائلة للصعوبة.\nالمياجر:\nهو يحطها. تكون خليط من السلايدات والكتاب والواجبات والكوزات والتيست بانك etc\nالفاينلات :\nنفس المياجر\nالقريد النهائي:\nB\nالصوت:\nواضح\n\nإضافات:\n-ما أفهم ليش الطلاب مرفعين الدكتور للسماء. الدكتور زين بس مش الدكتور اللي تقول عنه الأفضل.\n-في أشياء ما تعجبني مثل أنه ما يرضى يعطي الطلاب الاختبارات القديمة أو أشياء ملخصة للمادة. بس يقولك ذاكر السلايدات والكتاب وأشياء المادة الثانية.\n-الدكتور شرحه بعض الأحيان مب حلو ما تفهم شيء وتضيع. يشرح في الكلاسات أشياء كثييير وفي النهاية الأشياء اللي تجي في الاختبارات سخيفة وتكون مكررة لو ركز عليها كل الطلاب حلوها.\n-الدكتور متساعد على المستوى الشخصي وأخلاقه طيبة.\n-يسمح للطلاب بأي سؤال وأي شيء.\n-كان في أشياء يقول بتجي في الاختبار لما ركزنا عليها تجحفلنا وما جت في الاختبار.\n-يهتم بالشرح Theory أكثر من البراكتكل وحل الأسئلة وذا عيب بنظري لأن التطبيق والحل هو اللي بيخلي الأشياء ترسخ في مخك.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1492304-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ashraf-s-hasan-mahmoud/98338/7",
+              "user": "BreakTheUnbreakable",
+              "ts": 1526270721000,
+              "tid": 98338,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ali19-coe202",
+      "uid": "stk-ali19",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1552514567000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98338",
+            "n": "Dr. Ashraf S. Hasan Mahmoud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202 - TERM 171\nالتحضير :\nنهاية الكلاس و ما يسمح بالتأخير ، ممكن تكلمه قبل الكلاس اذا حبيت تسوي ميك اب.\nطريقة الشرح :\nبالسلايدات و السبورة للأمثلة و حل أسئلة الطلاب.\nالكويزات:\nمتوسطة، كان آفرجها شوي نازل.\nالمياجر:\nزي ما قالوا الشباب خليط بين الاولد اقزامز و الكويزات و النقاط اللي يركز عليها في الكلاس.\nالفاينلات:\nنفس المياجر لكن يركز ٩٥٪ على الأجزاء الجديدة (بعد ميجر ٢).\nالصوت :\nواضح جداً.\nالقريد النهائي:\nA++++++\n\nاضافات:\n\n١- شخصياً اشوفه من أفضل الدكاترة في شرح ال٢٠٢. اكثر من شخص كانوا معاي بدون مذاكرة جابوا B+ وفوق.\n٢- يساعد الطلاب في الكلاسات اللي قبل المياجر، يحل جميع أسئلة الطلاب ويشرح أي نقطة فيها صعوبة.\n٣- يساعد الجميع في الأوفيس سواءً من طلابه او لا.\nأكثر من مره مريته بعد دراسة الكورس (أسأل عن مواد ثانية) وكان مرة متعاون وشرحه رهيب.\n٤- أخلاق جداً عالية و طيب بشكل مو طبيعي.\n\nممكن البعض ما يعتبرها سلبية لكن الدكتور ما يحب التواصل بالبلاك بورد.\nاغلب التواصل معانا كان بالإيميل.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1507208-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ashraf-s-hasan-mahmoud/98338/8",
+              "user": "Ali19",
+              "ts": 1552514567000,
+              "tid": 98338,
+              "pn": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ahmelq-coe202",
+      "uid": "stk-ahmelq",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1564305376000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98338",
+            "n": "Dr. Ashraf S. Hasan Mahmoud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE202 - 171\n\nالتحضير :\nعند بداية المحاضرة، ويحاسب على التأخير.\n\nطريقة الشرح :\nتفاعلية؛ يستخدم السلايدات للمفاهيم الأساسية وكل الشرح يكون على السبورة، ويحب يشوف الطلاب يتفاعلوا معاه، اذا تمبى تفهم عدل أقعد فالصفوف الأمامية\n\nالكويزات :\nمتوسطة لا تخلو من التحدي، بس اذا تركز معاه وتاخذ نوتس بتعرف تحل.\n\nالمياجر والفينلات:\nشبيهة بالأود اكزامس، لكن التصحيح دقيق.\n\nالقريد النهائي:\nA - الصوت:\nواضح بلكنة شامية.\n\nإضافات:\nالدكتور أخلاق وطيب وأنصح فيه صراحة، بعض السلبيات: ما يسمح بالجوال أبداً ولا القهوة أو الأكل داخل الكلاس.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1513006-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ashraf-s-hasan-mahmoud/98338/10",
+              "user": "ahmelq",
+              "ts": 1564305376000,
+              "tid": 98338,
+              "pn": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-guest-coe202",
+      "uid": "stk-guest",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1610105084000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98338",
+            "n": "Dr. Ashraf S. Hasan Mahmoud",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202 - Term 201\nالترم اونلاين\n\nالتحضير : كان يحضر عن طريق فورم على تيمز بعد نص ساعه من البدايه بالغالب .\n\nالشرح : شرحه ممتاز وواضح ولو تركز معه بتفهم .\n\nالكويزات : الكويزات صلخ شويتين لكن لمصلحتك اشوفها لانك اذا عرفت اغلاطك وحليتها من جديد بتجيب درجه حلوه بالمياجر .\n\nالمياجر : المياجر ما هي كومن زي الاترام اللي قبل ماهي صعبه مره وشبيهه للاولد .\n\nالفاينل : الفاينل كان خيارات بالبلاكبورد , كان متوسط فيه شوي صعوبه .\n\nالقريد : A+\n\nاضافات :\nدكتور اشرف حبيب ومتعاون جدًا مع الطلاب كان مسوي تشانل بالتيمز عشان بس الاسئله اللي تواجه الطلاب بالكورس وكان يجاوب بسرعه . اخر السمستر اخذ افضل ٥ كويزات من اصلا ٧ مدري ٨ . الدكتور متعاون جدًا لكن ممكن تنكرف شوي وهو من مصلحتك بالاخير",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1527698-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-ashraf-s-hasan-mahmoud/98338/12",
+              "user": "Guest",
+              "ts": 1610105084000,
+              "tid": 98338,
+              "pn": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-a7md_i-coe202",
+      "uid": "stk-a7md_i",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1327539137000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f99334",
+            "n": "Dr. Alaaeldin Amin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "coe 202\nsemester 111\n\nالتحضير :\nحتى وقت ميجر ون كان يومي بعد ميجر ون ما صار ينادي لأنه عرف الطلاب وصار يعرف الحضرين من دون تحضير\n\nطريقة الشرح :\nشوية سلايدز وأغلب الوقت كتابه على السبورة ونقاش\nالكويزات :\nكثييييييييييييييييييرة جدا عطانا بوب كويز وعطانا جروب كويز … بالنسبة لي هذي السلبية الوحيدة لأني شخصيا لا أركز في الكويزات لو كانت كثيرة لأني ما أحس إنها تسوى التعب\nالمياجر:\nكومن\nالفاينلات :\nكومن\nالقريد النهائي:\nA+\nالصوت:\nممتاز\nإضافات :\n\nالدكتور مرح وله أسلوب خاص بالشرح. وبالنسبة لسكشنا كان موزعنا مجموعات وكل الشغل في الكلاس على المجموعة.\nفي النهاية شخصيا كان عندي ضروف في الترم السابق أدت إلى غيابي فترة عن الجامعة ولما رجعة كان أدائي سيء في الكلاس ورك(الكلاس ورك 25% من الفاينل جريد) والسبب إني ما كنت ملحق لكن شديت حيلي في المياجر والدكتور الله يجزاه خير قدر ضروفي بدون ما أكلمه وراعاني في الفاينل قريد وهذي تحسب له لأن دكاتره ثانين ما راعو رغم إني كلمتهم لكن هذا الي يفرق إنسان عن ثاني…\n…",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p973961-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-alaaeldin-amin/99334/3",
+              "user": "a7md_i",
+              "ts": 1327539137000,
+              "tid": 99334,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-ad0rs-coe202",
+      "uid": "stk-ad0rs",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1453411558000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f99334",
+            "n": "Dr. Alaaeldin Amin",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE202 T141\n\nالتحضير :\nبداية كل كلاس وعنده درجات ألوان (يستخدم الاكسل) يعني مثلا حاضر ابيض متأخر شوي أحمر فاتح متأخر مرة أحمر غامق الخ\nطريقة الشرح :\nيشرح من نوت حقه pdf الين ماتيرال ال sequntial circuits يشرحها عالسبورة\nالكويزات :\nعنده كويزات عادية وكويزات double weight كويزات reading وكويزات pop up\nالمياجر:\nكومون\nالفاينلات :\nكومون\nالقريد النهائي:\nC\nالصوت:\nواضح\nإضافات :\nالميزة في الدكتور ذا شرحه بس\nولا انه معقد في نظامه وكويزاته وكل شي وهوموركاته مبالغ في صعوبتها",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1440105-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-alaaeldin-amin/99334/7",
+              "user": "ad0rs",
+              "ts": 1453411558000,
+              "tid": 99334,
+              "pn": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user11151-coe202",
+      "uid": "stk-user11151",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1577810374000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f180679",
+            "n": "Dr. Abdel-Aziz Tabakh",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE 202 - 191\n\nشرح الدكتور أمانةً مو ذاك الزود واختباراته شوي صعبة ووقت قصير ولا يعطي وقت زيادة بمجرد ما ينتهي الوقت تسلم.\nإذا الواحد بيشد على نفسه ممكن يطلع بقريد لأن المادة نفسها معقدة من بعد الميجر الأول وغير ممتعة أبدً.\n\nالدكتور طيب وحبيب جدًّا وهذا الشي يخليك تتغاضى عن كل شي حقيقةً ويحرص على توصيل المادة لكل طالب.\nدكتور مميز الله يجزاه خير ويوفقه وبإذن الله يطور من طريقة توصيله للمادة، ويمكن الخلل مني فلذلك هذا مو مقياس.",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1518520-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/abdel-aziz-tabakh/180679/3",
+              "user": "user11151",
+              "ts": 1577810374000,
+              "tid": 180679,
+              "pn": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-salh_1-coe202",
+      "uid": "stk-salh_1",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1625914716000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f183282",
+            "n": "Dr. Ali Al-Suwaiyan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE-202\nTerm 202 (Online)\n\nالدكتور ممتاز صراحة جدا زي كلام الأخ الي فوق، ولعله في ترمنا حس ان اختباراته الترم الي قبل كانت صعبه فسهل علينا\nشرحه ممتاز جدا وكوزاته مستواها متوسط الى سهل ومتفاهم جدا\nانصح فيه\nولكن بشكل عام المادة تحتاج جهد وتركيز بغض النظر عن الدكتور وبتطلع بقريد ممتاز ان شاء الله",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1530827-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ali-al-suwaiyan/183282/5",
+              "user": "Salh_1",
+              "ts": 1625914716000,
+              "tid": 183282,
+              "pn": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stk-doc-user12133-coe202",
+      "uid": "stk-user12133",
+      "code": "COE 202",
+      "sec": "doc",
+      "ts": 1629751161000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f183282",
+            "n": "Dr. Ali Al-Suwaiyan",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "COE-202\nTerm 202 (online(\n\nالدكتور علي قمة بالأخلاق وتعامله أخوي مع الطلاب، شرحه ممتاز وفاهم المادة صح، بالنسبة لللكوزات كانت من سهلة الى متوسطة والواجبات صح طويلة شوي لكن مقدور عليها\nلو تركز معه وتذاكر الي ينزله بتجيب قريد بتوفيق الله\nالقريد: A+",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1531421-coe202",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/ali-al-suwaiyan/183282/6",
+              "user": "user12133",
+              "ts": 1629751161000,
+              "tid": 183282,
+              "pn": 6
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

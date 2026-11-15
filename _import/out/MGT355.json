@@ -1,0 +1,48 @@
+{
+  "code": "MGT 355",
+  "users": [
+    {
+      "id": "stk-sadguts",
+      "name": "SadGuts",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/sadguts/144/2512_2.png",
+      "email": "sadguts@import.stkfupm.invalid",
+      "user": "SadGuts"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-doc-sadguts-mgt355",
+      "uid": "stk-sadguts",
+      "code": "MGT 355",
+      "sec": "doc",
+      "ts": 1655719373000,
+      "st": "pub",
+      "data": {
+        "docs": [
+          {
+            "id": "stk-dr-f98466",
+            "n": "Dr. Azhar Kazmi",
+            "en": "",
+            "img": "",
+            "e": "",
+            "bld": "",
+            "room": "",
+            "d": "MGT355 - 212\nدكتور كاظمي ازهر درست معاه كورس الريسيرش ممتاز جدا وتعلمت منه اشياء كثير\nالكورس اعتبره ممتع ك متيريل رغم انه ف الاخير يصير حشو كلام كثير\nوالبروجكت مفيد يعلمك كيف تسوي ريسيرش سواء لبزنسك او عن ظاهرة حولك وكيف تستخدم الطريقة العلمية لبحث المشاكل وايش الطريقة المناسبة لتجميع الداتا الي بتستخدمها وايش طريقة البحث المناسبة حسب موضوعك\nالاختبارات كانت بسيطة ترو وفولس وMCQ",
+            "hours": [],
+            "teach": 0,
+            "grade": 0,
+            "pid": "stk-p1534680-mgt355",
+            "imp": {
+              "src": "stkfupm",
+              "url": "https://community.stkfupm.com/t/dr-azhar-kazmi/98466/15",
+              "user": "SadGuts",
+              "ts": 1655719373000,
+              "tid": 98466,
+              "pn": 15
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
