@@ -18408,22 +18408,10 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__ring { border-color: rgba(160, 2
 html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__g b { color: rgba(255, 255, 255, .5); }
 .cx-hlt.is-new .cx-hlt__g b { color: #2c5e65; }
 html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__g b { color: #a0cdd2; }
-.cx-hltool { display: flex; align-items: center; gap: 1px; padding: 2px; border-radius: 999px; background: rgba(20, 40, 46, .07); opacity: var(--o, 0); margin-inline-end: 6px; direction: rtl; }
-html[data-theme="dark"] .cx-hltool { background: rgba(255, 255, 255, .09); }
-.cx-hltool button { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 16px; height: 16px; padding: 0 4px; border: 0; border-radius: 999px;
-  background: none; color: inherit; opacity: .55; cursor: pointer; font: 700 10px/1 inherit; font-variant-numeric: tabular-nums;
-  transition: height .2s cubic-bezier(.2, .8, .2, 1), padding .2s cubic-bezier(.2, .8, .2, 1), background .2s, opacity .2s; }
-.cx-hltool button svg { width: 8px; height: 8px; flex: none; }
-.cx-hltool button i { font-style: normal; }
-.cx-hltool button i:empty { display: none; }
-.cx-hltool button.is-on { height: 20px; padding: 0 7px; background: #2c5e65; color: #fff; opacity: 1; font-size: 11px; }
-.cx-hltool button.is-on svg { width: 10px; height: 10px; }
-@media (prefers-reduced-motion: reduce) { .cx-hltool button { transition: none; } }
 /* وفي الجدول: رقمُ الصفّ المفتوح مطوَّقٌ — هنا يدخل التظليلُ القادم */
 .kt-num.is-hlopen { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; border-radius: 999px;
   box-shadow: 0 0 0 1.5px #2c5e65; }
 .kt-num.has-hl.is-hlopen { box-shadow: 0 0 0 1.5px #2c5e65, 0 0 0 3px var(--u-surf, #fff); }
-@media (prefers-reduced-motion: reduce) { .cx-hltool button { transition: none; } }
 /* ===== أداةُ المربّع (ROADMAP-HL ق٦): الصفحةُ الساكنةُ لوحُ رسم — مؤشّرٌ متقاطع، ومعاينةُ المربّع بلون القلم وحدٍّ متقطّع ===== */
 .hl-box .bk-tl { pointer-events: auto; cursor: crosshair; }
 .hl-box .bk-tl span, .hl-box .bk-tl .bk-tl__ln { cursor: crosshair; }
@@ -18434,3 +18422,24 @@ html[data-theme="dark"] .cx-hltool { background: rgba(255, 255, 255, .09); }
 .pk--edit.pk--ftnone .vt-foot, .pk--edit.pk--ftnone .pk-ftline { opacity: 0; visibility: hidden; transform: translateY(10px); pointer-events: none; }
 .pk--ftanim .vt-foot, .pk--ftanim .pk-ftline { transition: max-height .22s ease, opacity .2s ease, transform .24s cubic-bezier(.2, .8, .2, 1), padding .22s ease, margin .22s ease, visibility .22s; }
 :is(.pk--max, .pk--frame).pk--edit:not(.pk--ftdn) .vt-foot { min-height: 58px; }
+
+/* ===== حلقاتٌ بحبرٍ غامقٍ نحيف، ومفتاحُ الأداة خطوطٌ بالحبر نفسِه (اختيارُ صاحب الموقع) =====
+   القلمُ والمربّعُ بعدّيهما، والمختارُ بحبر لون الصفّ وتحته خطٌّ قصير، والآخرُ باهت */
+.cx-hlrail { --ink-y: #c99410; --ink-g: #3f9a52; --ink-b: #3f84c6; --ink-p: #c95b7d; }
+html[data-theme="dark"] .cx-hlrail { --ink-y: #e8bf4f; --ink-g: #79c487; --ink-b: #7fb2e6; --ink-p: #e98ea9; }
+.cx-hlt.is-e .cx-hlt__ring { background: rgba(20, 40, 46, .28); }
+html[data-theme="dark"] .cx-hlt.is-e .cx-hlt__ring { background: rgba(255, 255, 255, .26); }
+.cx-hltool { display: flex; align-items: center; gap: 2px; opacity: var(--o, 0); margin-inline-end: 8px; direction: rtl; }
+.cx-hltool button { position: relative; display: inline-flex; align-items: center; gap: 3px; height: 24px; padding: 0 6px; border: 0; background: none; cursor: pointer;
+  color: var(--u-ink, #14233f); opacity: .4; font-family: inherit; font-size: 11.5px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; transition: opacity .18s, color .18s; }
+html[data-theme="dark"] .cx-hltool button { color: #e6ecef; }
+.cx-hltool button:hover { opacity: .7; }
+.cx-hltool button svg { width: 11px; height: 11px; flex: none; }
+.cx-hltool button i { font-style: normal; }
+.cx-hltool button i:empty { display: none; }
+.cx-hltool button::after { content: ''; position: absolute; left: 5px; right: 5px; bottom: 0; height: 2.5px; border-radius: 99px; background: currentColor; transform: scaleX(0);
+  transition: transform .2s cubic-bezier(.2, .8, .2, 1); }
+.cx-hltool button.is-on { opacity: 1; color: var(--hlink, #2c5e65); }
+html[data-theme="dark"] .cx-hltool button.is-on { color: var(--hlink, #79b8bf); }
+.cx-hltool button.is-on::after { transform: none; }
+@media (prefers-reduced-motion: reduce) { .cx-hltool button, .cx-hltool button::after { transition: none; } }

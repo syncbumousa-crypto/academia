@@ -24308,7 +24308,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const HL_MARK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8.1 1.1l2.8 2.8-4.9 4.9-2.8-2.8z" fill="currentColor"/><path d="M3 6.2l2.8 2.8-1 1H2.2l-.4-.4V7.4z" fill="currentColor" opacity=".65"/></svg>';
   const HL_BOX = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7" rx=".8" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 1.3"/><circle cx="2" cy="2.5" r="1.2" fill="currentColor"/><circle cx="10" cy="9.5" r="1.2" fill="currentColor"/></svg>';
   /* حلقةُ الصفّ مقسومةٌ بألوان تظليلاته بالتساوي (ج · اختيارُ صاحب الموقع) */
-  const hlRingBg = cols => `conic-gradient(${cols.map((c, i) => `${HL_COL[c][1]} ${(i * 100 / cols.length).toFixed(2)}% ${((i + 1) * 100 / cols.length).toFixed(2)}%`).join(', ')})`;
+  /* حبرُ الحلقة: درجةٌ أغمقُ من لون التظليل (‎--ink-*‎ في الأنماط، وفي الداكن أفتحُ قليلًا) — اختيارُ صاحب الموقع */
+  const hlRingBg = cols => `conic-gradient(${cols.map((c, i) => `var(--ink-${c}) ${(i * 100 / cols.length).toFixed(2)}% ${((i + 1) * 100 / cols.length).toFixed(2)}%`).join(', ')})`;
   function hlRailBuild(el) {
     const id = el.dataset.pkid, rows = hlRailData(id);
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
@@ -24358,7 +24359,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.style.display) e.style.display = '';
       e.style.transform = `translate(${(sg * x).toFixed(2)}px, -50%)`; e.style.width = t.w.toFixed(2) + 'px'; e.style.height = t.h.toFixed(2) + 'px';
       e.style.setProperty('--d', t.d.toFixed(2) + 'px');
-      e.style.setProperty('--th', (t.d < 11 ? t.d / 2 : 2.6 + .5 * t.o).toFixed(2) + 'px');   /* سُمكُ الحلقة — والنقطةُ الصغيرةُ ممتلئة */
+      e.style.setProperty('--th', (t.d < 11 ? t.d / 2 : 1.5).toFixed(2) + 'px');   /* سُمكُ الحلقة — والنقطةُ الصغيرةُ ممتلئة */
       e.style.setProperty('--no', Math.max(0, Math.min(1, (t.d - 15) / 6)).toFixed(3));
       e.style.setProperty('--fs', (10 + 3 * t.o).toFixed(2) + 'px');
       e.style.setProperty('--o', t.o.toFixed(3));
@@ -24368,6 +24369,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
       el._tool.querySelectorAll('[data-hln]').forEach(x => { x.textContent = rows[op][x.dataset.hln] || ''; });
+      const c0 = rows[op].cols[rows[op].cols.length - 1]; if (c0) el._tool.style.setProperty('--hlink', `var(--ink-${c0})`); else el._tool.style.removeProperty('--hlink');   /* المختارُ بحبر الصفّ */
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
     /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
