@@ -234,6 +234,8 @@ export function createBook2(THREE, host, cfg) {
     /* الصورةُ القديمةُ تبقى حتى تجهز الجديدة — لا تسودّ الصفحاتُ وهي تُرسم من جديد */
     pageTex.forEach((t, k) => Promise.resolve(cfg.tex(k, w)).then(cv => {
       if (dead || !cv || pageTex.get(k) !== t) return;
+      /* مقاسٌ آخر: مخزنُ الصورة في البطاقة ثابتُ المقاس، فيُحرَّر ليُبنى بالجديد (وإلّا بقيت القديمةُ ملصقةً في زاويتها) */
+      if (t.image && (t.image.width !== cv.width || t.image.height !== cv.height)) t.dispose();
       t.image = cv; t.needsUpdate = true; needs = true;
     }).catch(() => {}));
   }
@@ -545,7 +547,11 @@ export function createBook2(THREE, host, cfg) {
     /* صفحةٌ تغيّر ما يُرسم عليها (تحديداتٌ وأرقام): تُطلب صورتُها من جديد إن كانت محمَّلة */
     refreshPage(k) {
       const t = pageTex.get(k); if (!t) return Promise.resolve();
-      return Promise.resolve(cfg.tex(k, texW)).then(cv => { if (dead || !cv) return; t.image = cv; t.needsUpdate = true; needs = true; }).catch(() => {});
+      return Promise.resolve(cfg.tex(k, texW)).then(cv => {
+        if (dead || !cv) return;
+        if (t.image && (t.image.width !== cv.width || t.image.height !== cv.height)) t.dispose();
+        t.image = cv; t.needsUpdate = true; needs = true;
+      }).catch(() => {});
     },
     /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
     get flat() { return !mo && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
