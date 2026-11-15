@@ -9478,8 +9478,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const s = pkSrcCurOf(id), b = pkSrcBk[s], ind = b && b.ind ? b.ind.textContent : '';
       /* وفي التحرير: أدواتُ المصدر الثلاث وزرّا التصفّح في التذييل (طلبُ صاحب الموقع) — ويُخفى تقليبُ الكتاب من تحته في مربّعه فلا يتكرّر */
       /* ثلاثُ خانات (طلبُ صاحب الموقع): يمينًا لوحُ التظليل، وفي الوسط زرّا التصفّح، ويسارًا المصدرُ وطريقةُ القراءة وتحتهما «ربط الصفحات» مصغّرة */
-      if (!pub) return `<div class="cx-ftr">${pkActHl(id)}</div>`
-        + `<div class="cx-ftc">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}<span class="cx-actind" data-actind>${esc(ind)}</span>${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>`
+      if (!pub) return `<div class="cx-ftc"><div class="cx-ftc__nav">${pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev')}<span class="cx-actind" data-actind>${esc(ind)}</span>${pkActB('data-actbk="1"', PK_ACT_IC.next, 'next')}</div>${pkActHl(id)}</div>`
         + `<div class="cx-ftl chtools cx-srctools${pkLnk.open[id] ? ' is-wide' : ''}"><div class="cx-ftl__r">${pkSrcHd(id, true)}${pkActMode()}</div>${pkSrcMeta(id) ? pkLnkHTML(id) : ''}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
       return pkActB('data-actbk="-1"', PK_ACT_IC.prev, 'prev') + `<span class="cx-actind" data-actind>${esc(ind)}</span>`
         + pkActB('data-actbk="1"', PK_ACT_IC.next, 'next') + pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
@@ -24305,10 +24304,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     document.querySelectorAll(`.cx-hlrail[data-pkid="${CSS.escape(id)}"]`).forEach(hlRailBuild);
     hlRowMarksSync(id);
   }
-  const HL_R = { MAXW: 28, MINW: 4, OPENW: 38, SIG: 2.6, H0: 13, H1: 19, HO: 44, G0: 1, G1: 3 };
+  const HL_R = { MAXD: 24, MIND: 6, OD: 30, SIG: 2.4, CAPH: 36, G0: 3, G1: 7 };
   const HL_MARK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8.1 1.1l2.8 2.8-4.9 4.9-2.8-2.8z" fill="currentColor"/><path d="M3 6.2l2.8 2.8-1 1H2.2l-.4-.4V7.4z" fill="currentColor" opacity=".65"/></svg>';
   const HL_BOX = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7" rx=".8" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 1.3"/><circle cx="2" cy="2.5" r="1.2" fill="currentColor"/><circle cx="10" cy="9.5" r="1.2" fill="currentColor"/></svg>';
-  const hlTabBg = cols => cols.length ? `linear-gradient(125deg, ${cols.map((c, i) => `${HL_COL[c][1]} ${(i * 100 / cols.length).toFixed(2)}% ${((i + 1) * 100 / cols.length).toFixed(2)}%`).join(', ')})` : '';
+  /* حلقةُ الصفّ مقسومةٌ بألوان تظليلاته بالتساوي (ج · اختيارُ صاحب الموقع) */
+  const hlRingBg = cols => `conic-gradient(${cols.map((c, i) => `${HL_COL[c][1]} ${(i * 100 / cols.length).toFixed(2)}% ${((i + 1) * 100 / cols.length).toFixed(2)}%`).join(', ')})`;
   function hlRailBuild(el) {
     const id = el.dataset.pkid, rows = hlRailData(id);
     if (!rows) { el.innerHTML = ''; el._rows = null; return; }
@@ -24319,8 +24319,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el._sig = sig; el._rows = rows; el._rtl = getComputedStyle(el).direction === 'rtl';
       el.innerHTML = rows.map((r, i) => {
         const k = (r.t ? `<span class="k">${HL_MARK}${r.t}</span>` : '') + (r.b ? `<span class="k">${HL_BOX}${r.b}</span>` : '');
+        /* عرضُ الكبسولة حين تنفتح: الحلقةُ والعدُّ ومفتاحُ الأداة — تقديرٌ يُصحَّح بالقياس أوّلَ ما تنبسط */
+        r.ow = 4 + HL_R.OD + 8 + (r.t ? 14 + String(r.t).length * 7 : 0) + (r.b ? 14 + String(r.b).length * 7 : 0) + (r.t && r.b ? 6 : 0) + (k ? 8 : 0) + 46;
         return `<button type="button" class="cx-hlt${r.nw ? ' is-new' : r.cols.length ? '' : ' is-e'}" data-i="${i}" tabindex="-1" role="option" aria-label="${r.nw ? '+' : r.n}">`
-          + `<span class="cx-hlt__bg"${r.cols.length ? ` style="background:${hlTabBg(r.cols)}"` : ''}></span><span class="cx-hlt__n">${r.nw ? '+' : r.n}</span><span class="cx-hlt__cnt">${k}</span></button>`;
+          + `<span class="cx-hlt__cap"></span><span class="cx-hlt__g"${r.cols.length ? ` style="--ring:${hlRingBg(r.cols)}"` : ''}><b>${r.nw ? '+' : r.n}</b></span><span class="cx-hlt__cnt">${k}</span></button>`;
       }).join('');
       el._tabs = [...el.children];
       el._tool = document.createElement('span'); el._tool.className = 'cx-hltool';
@@ -24335,17 +24337,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.center = Math.min(st.center, rows.length - 1);
     hlRailLayout(el); hlToolSync(id);
   }
+  /* الحلقاتُ تصغر كلّما بعُدت عن الوسط حتى تصير نقاطًا، والتي في الوسط تنبسط كبسولةً فيها حلقتُها وعدُّها ومفتاحُ الأداة */
   function hlRailLayout(el) {
     const st = el._st, rows = el._rows, tabs = el._tabs, P = HL_R; if (!rows) return;
     const N = rows.length, W = el.clientWidth, c = st.center, it = [];
     let acc = 0;
     for (let i = 0; i < N; i++) {
-      const d = i - c, g = Math.exp(-(d * d) / (2 * P.SIG * P.SIG));
-      let o = Math.max(0, 1 - Math.abs(d) * 1.5); o = o * o * (3 - 2 * o);
-      let w = P.MINW + (P.MAXW - P.MINW) * g; w += (P.OPENW - w) * o;
-      let h = P.H0 + (P.H1 - P.H0) * g; h += (P.HO - h) * o;
+      const dd = i - c, g = Math.exp(-(dd * dd) / (2 * P.SIG * P.SIG));
+      let o = Math.max(0, 1 - Math.abs(dd) * 1.5); o = o * o * (3 - 2 * o);
+      let d = P.MIND + (P.MAXD - P.MIND) * g; d += (P.OD - d) * o;
+      const w = d + (rows[i].ow - d) * o, h = d + (P.CAPH - d) * o;
       acc += i ? P.G0 + (P.G1 - P.G0) * Math.max(g, o) : 0;
-      it.push({ w, h, g, o, m: acc + w / 2 }); acc += w;
+      it.push({ w, h, d, g, o, m: acc + w / 2 }); acc += w;
     }
     const fl = Math.max(0, Math.min(N - 1, Math.floor(c))), cl = Math.min(N - 1, fl + 1), fr = Math.max(0, Math.min(1, c - fl));
     const off = W / 2 - (it[fl].m + (it[cl].m - it[fl].m) * fr), sg = el._rtl ? -1 : 1;
@@ -24353,20 +24356,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const t = it[i], e = tabs[i], x = off + t.m - t.w / 2, vis = x < W + 30 && x + t.w > -30;
       if (!vis) { if (e.style.display !== 'none') e.style.display = 'none'; continue; }
       if (e.style.display) e.style.display = '';
-      e.style.transform = `translateX(${(sg * x).toFixed(2)}px)`; e.style.width = t.w.toFixed(2) + 'px'; e.style.height = t.h.toFixed(2) + 'px';
-      e.style.setProperty('--r', Math.min(7, t.w / 2.6).toFixed(2) + 'px');
-      e.style.setProperty('--no', Math.max(0, Math.min(1, (t.w - 14) / 7)).toFixed(3));
-      e.style.setProperty('--fs', (10 + 3 * Math.min(1, t.g + t.o)).toFixed(2) + 'px');
-      e.style.setProperty('--ny', (4 + 9 * t.o).toFixed(2) + 'px');
-      e.style.setProperty('--co', Math.max(0, (t.o - .5) * 2).toFixed(3));
+      e.style.transform = `translate(${(sg * x).toFixed(2)}px, -50%)`; e.style.width = t.w.toFixed(2) + 'px'; e.style.height = t.h.toFixed(2) + 'px';
+      e.style.setProperty('--d', t.d.toFixed(2) + 'px');
+      e.style.setProperty('--hole', (t.d < 11 ? 0 : t.d / 2 - (t.o > .5 ? 3.2 : 2.6)).toFixed(2) + 'px');
+      e.style.setProperty('--no', Math.max(0, Math.min(1, (t.d - 15) / 6)).toFixed(3));
+      e.style.setProperty('--fs', (10 + 3 * t.o).toFixed(2) + 'px');
+      e.style.setProperty('--o', t.o.toFixed(3));
+      e.style.setProperty('--pad', (4 * t.o).toFixed(2) + 'px');
     }
     const op = Math.max(0, Math.min(N - 1, Math.round(c)));
     if (op !== el._op) {
-      if (el._tabs[el._op]) el._tabs[el._op].classList.remove('is-op');
+      if (el._tabs[el._op]) { el._tabs[el._op].classList.remove('is-op'); el._tabs[el._op].removeAttribute('aria-selected'); }
       el._op = op; tabs[op].classList.add('is-op'); tabs[op].setAttribute('aria-selected', 'true'); tabs[op].appendChild(el._tool);
       const id = el.dataset.pkid; hlOpen[id] = rows[op].cid; hlRowMarksSync(id);
     }
-    el._tool.style.opacity = Math.max(0, (it[op].o - .55) / .45).toFixed(3);
+    /* وعرضُ الكبسولة المنبسطة يُقاس مرّةً فيُعتمد بدل التقدير (الخطوطُ تختلف) */
+    if (it[op].o > .99 && !rows[op].owM) { const e = tabs[op], sw = e.scrollWidth; rows[op].owM = 1; if (Math.abs(sw - rows[op].ow) > 1) { rows[op].ow = sw; hlRailLayout(el); return; } }
   }
   const hlRailLive = new Set(); let hlRailRaf = 0;
   function hlRailKick(el) { hlRailLive.add(el); if (!hlRailRaf) hlRailRaf = requestAnimationFrame(hlRailTick); }
@@ -24395,7 +24400,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function hlRailBind(el) {
     el._bound = true;
-    const SP = HL_R.MAXW + HL_R.G1, go = i => { hlOpenUsr[el.dataset.pkid] = true; el._st.target = Math.max(0, Math.min(el._rows.length - 1, i)); hlRailKick(el); };
+    const SP = HL_R.MAXD + HL_R.G1, go = i => { hlOpenUsr[el.dataset.pkid] = true; el._st.target = Math.max(0, Math.min(el._rows.length - 1, i)); hlRailKick(el); };
     el.addEventListener('wheel', e => {
       if (!el._rows) return;
       e.preventDefault();
