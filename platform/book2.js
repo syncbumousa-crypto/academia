@@ -277,12 +277,12 @@ export function createBook2(THREE, host, cfg) {
   function tableLight(e) {
     if (Math.abs(e - tlK) < 1e-5) return; tlK = e;
     blob.visible = e < 1;
-    blob.material.opacity = (curTheme === 'dark' ? 0.6 : 0.36) * (1 - e) * (1 - e);
+    blob.material.opacity = (curTheme === 'dark' ? 0.4 : 0.24) * (1 - e) * (1 - e);
     blob.scale.set(W * (1 + OV) * 1.45, H * (1 + OV) * 1.45, 1);
     blob.position.set(BLOB.x * W, BLOB.y * H, GZ + 0.0004);
     sun.position.copy(SUN1).lerp(SUN0, e);
     const L = LIGHTS[curTheme];
-    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.55 : 0.24) - L.ground) * (1 - e);
+    ground.material.opacity = L.ground + ((curTheme === 'dark' ? 0.36 : 0.16) - L.ground) * (1 - e);
     /* ظلُّ الشمس المائلة على الطاولة حادٌّ قليلًا (التنعيمُ الواسع يرسمه نسخًا متراكبةً: خطوط) — النعومةُ من الظلّ المضبَّب تحته */
     sun.shadow.radius = 4 + 8 * e;
   }
