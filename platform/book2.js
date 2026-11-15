@@ -351,13 +351,15 @@ export function createBook2(THREE, host, cfg) {
   const art = new THREE.Mesh(new THREE.PlaneGeometry(WB - BV, HB - BV), artM);
   /* فوق الوجه المسطّح (الشطفُ يرفعه ‎0.6·BV‎) وداخلَ حوافّه المشطوفة */
   art.position.set(-(WB - BV) / 2 - BV * 0.2, 0, TH + BT + BV * 0.6 + 0.0004); art.receiveShadow = true; caseG.add(art);
-  let caseK = -1;
+  let caseK = -1, caseShown = null;
   /* ‏‎e‎ مقدارُ القراءة ‎0..1‎ (بعد المنحنى): الغلافُ يصغر إلى مقاس الأوراق وسُمكها الحقيقيّ، ويُسلَّم إليها في ‎e = 1‎ */
   function updCase(e) {
     const show = e < 1 || !!ta;
     const sh = 1 - e;
-    if (caseG.visible !== show) {
-      caseG.visible = show;
+    /* بحالةٍ محفوظة لا بظهور الجسم: كان يبدأ ظاهرًا فلا يتبدّل أوّلَ مرّة، فتبقى أوراقُ القراءة (والغلافُ بصورته) مرسومةً داخله —
+       لا تُرى والكتابُ مغلق، وتبرز حين ينفتح الغطاءُ في التقليب أو قبل أوّل فتحٍ للقراءة */
+    if (caseShown !== show) {
+      caseShown = show; caseG.visible = show;
       /* أوراقُ القراءة كلُّها مخفيّةٌ ما دام الجسمُ ظاهرًا (فيه كتلةُ أوراقه): انتفاخُ الورق قرب الكعب أعلى من سُمك الغلاف
          وهو يصغر إلى سُمكه الحقيقيّ، فكانت الصفحةُ تبرز من فوقه شريطًا ثمّ كلُّها قبيل الفتح — وتظهر كلُّها معًا في التسليم */
       for (const c of sheets) for (const mh of c.meshes) mh.visible = !show;
