@@ -17135,6 +17135,9 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 .pk-bank > #cm-cards::-webkit-scrollbar-thumb:hover, .pk-bank > .x3::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
 html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data-theme="dark"] .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
 .pk-bank > #cm-cards::-webkit-scrollbar-corner, .pk-bank > .x3::-webkit-scrollbar-corner { background: transparent; }
+/* والشريطان على حافّة المساحة نفسِها (طلبُ صاحب الموقع): الممرَّرُ يمتدّ فوق حشوة البنك (‎14px‎ جانبًا وأسفلَ)
+   ويحمل الحشوةَ في داخله — فيبقى المحتوى في موضعه، والشريطان على الحدّ */
+.pk-bank > #cm-cards, .pk-bank > .x3 { margin: 0 -14px -14px; padding-inline-start: 20px; padding-inline-end: 18px; padding-bottom: 14px; }
 .pk-split:not(.pk--max *) > .pk-bank { max-height: 72vh; }
 .pk-bank > .pk-qbempty { margin: auto; }
 @media (max-width: 760px) {
