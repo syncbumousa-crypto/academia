@@ -10491,7 +10491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      في الثلاث (‎--g‎) والافتراضُ يتبدّل (‎.383‎ لاثنتين و‎.3‎ لثلاث)، فكان فتحُ البنك يضيّق الكتاب.
      والخطُّ في الفُرجة نفسِها مطلقُ الموضع، يُسحب فتتغيّر الحصّةُ حيّةً، وتُحفظ لكلّ مساهمة (‎state.pkSplR · pkSqbR‎).
      الحدّان: الطرفُ ‎≥ 240px‎ والملخّصُ ‎≥ 260px‎. والكتابُ (‎WebGL‎) يُجمَّد أثناء السحب ويُرسم مرّةً حين يُفلت */
-  const PK_SPL_DEF = 0.383, PK_SQB_DEF = 0.3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
+  const PK_SPL_DEF = 1 / 3, PK_SQB_DEF = 1 / 3, PK_SPL_GAP = 14, PK_SPL_MINB = 240, PK_SPL_MINP = 260;
   const pkSplDef = k => k === 'b' ? PK_SQB_DEF : PK_SPL_DEF;
   /* الحصّةُ المحفوظةُ لكلّ مساهمة، وإلّا افتراضُ طرفها */
   const pkSplGet = (key, id, def) => { const r = ((state[key] || {})[id]); return typeof r === 'number' && r > 0 && r < 1 ? +r.toFixed(4) : def; };
@@ -10521,6 +10521,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     document.querySelectorAll('#cm-body .pk-split').forEach(sp => {
       const ha = sp.querySelector(':scope > [data-pksplh="a"]'), hb = sp.querySelector(':scope > [data-pksplh="b"]');
       if (!ha || !hb || !sp.clientWidth) return;
+      /* مساهمةٌ لم يُسحب خطّاها بعد: المساحاتُ الثلاث متساوية تمامًا (طلبُ صاحب الموقع) — الحصّتان من العرض إلّا فُرجة،
+         والملخّصُ ما بقي بعد فُرجتين، فثلثٌ دقيقٌ بحسب العرض لا ‎1/3‎ */
+      const id = ha.dataset.pkid, W = sp.clientWidth - PK_SPL_GAP, eq = Math.max(0.1, (W - PK_SPL_GAP) / (3 * W));
+      ['a', 'b'].forEach(k => { const key = k === 'b' ? 'pkSqbR' : 'pkSplR'; if (!((state[key] || {})[id] > 0)) sp.style.setProperty(pkSplVar(k), eq.toFixed(4)); });
       ['b', 'a'].forEach(k => {
         const v = parseFloat(sp.style.getPropertyValue(pkSplVar(k))); if (!v) return;
         const f = pkSplClamp(sp, v, k);
