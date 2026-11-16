@@ -99,6 +99,9 @@ def kind(code, tag):
 query('ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind TEXT; '
       'ALTER TABLE course_tags ADD COLUMN IF NOT EXISTS kind_auto TEXT;')
 links = query('SELECT code, tag_id, kind, kind_auto FROM course_tags')
+# «السنة التحضيرية» وسمٌ قبل التخصّصات لا تخصّص: موادُّه كلُّها مشتركة، فلا تُحسب أنواعُها هنا
+NON_MAJOR = {'pyp'}
+links = [r for r in links if r['tag_id'] not in NON_MAJOR]
 unknown = sorted({r['tag_id'] for r in links} - set(MAJORS))
 if unknown:
     sys.exit('majors not in majors.py: ' + ', '.join(unknown))
