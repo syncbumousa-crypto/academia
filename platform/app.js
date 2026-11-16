@@ -20492,15 +20492,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const c = document.createElement('div'); c.className = 'cd-chooser';
     /* النافذةُ نفسُها أربعةُ أرباعٍ بخطّين رفيعين، في كلّ ربعٍ نوعٌ بأيقونته واسمه (طلبُ صاحب الموقع: الخيارُ ٢ · بلا ألوان) */
     c.setAttribute('role', 'group'); c.setAttribute('aria-label', T().cdChooseT || '');
-    c.innerHTML = CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-ch" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('');
+    /* ثمّ رجعت إلى المربّعات ذوات الحدود تحت عنوانها (طلبُ صاحب الموقع: الشكلُ ٠١)، بألوان النافذة نفسِها.
+       والصنفُ ‎cd-qk‎ لا ‎cd-ch‎: ذاك صنفُ خيارات السؤال المتعدّد، فلا تتسرّب قواعدُه إلى هنا */
+    c.innerHTML = `<b class="cd-qk__t">${esc(T().cdChooseT || '')}</b><div class="cd-qk__row">`
+      + CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-qk" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('') + '</div>';
+    /* اللوحةُ تبدأ تحت الترويسة أيًّا كانت قامتُها */
+    const meta = stage.querySelector('#cd-card .cd-meta');
+    stage.style.setProperty('--chT', ((meta ? meta.offsetHeight : 46) + 1) + 'px');
     stage.appendChild(c);
     /* ولسانُ النافذة يقول «سؤال» حتى يُختار نوعُه */
     const tab = document.querySelector('#cd-mins .cd-mtab.is-focus .cd-mtab__tx');
     if (tab) tab.textContent = T().pkPlusQC;
-    const first = c.querySelector('.cd-ch'); if (first) first.focus({ preventScroll: true });
+    const first = c.querySelector('.cd-qk'); if (first) first.focus({ preventScroll: true });
   }
   document.addEventListener('click', e => {
-    const b = e.target.closest && e.target.closest('.cd-chooser .cd-ch');
+    const b = e.target.closest && e.target.closest('.cd-chooser .cd-qk');
     if (!b || !cardDlg) return;
     e.preventDefault(); e.stopPropagation();
     cardDlg.choose = false;
