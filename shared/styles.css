@@ -17234,12 +17234,13 @@ html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp
 /* ===== شبكةُ التسعة في العرض البطاقيّ =====
    مطويّةً: الوسطُ يملأ المساحة والأطرافُ في أضيق حال. وتنفرج (‎is-open‎: في الأطراف ورق · ‎is-carry‎: ورقةٌ محمولة) فيصغر الوسطُ
    برزمته وتتّسع الأطراف — بحركة. وفي كلّ مربّعٍ فيه ورقٌ رزمةٌ حقيقيّة كالوسط */
-.pp-grid { display: grid; grid-template-columns: .05fr 1fr .05fr; grid-template-rows: .05fr 1fr .05fr; gap: 0; width: 100%; aspect-ratio: 1; min-height: 0;
-  transition: grid-template-columns .45s cubic-bezier(.3, .7, .2, 1), grid-template-rows .45s cubic-bezier(.3, .7, .2, 1), gap .45s ease; }
-.pp-grid.is-open, .pp-grid.is-carry { grid-template-columns: 1fr 1.25fr 1fr; grid-template-rows: 1fr 1.25fr 1fr; gap: 8px; }
+.pp-grid { display: grid; grid-template-columns: var(--gc, minmax(0,0fr) minmax(0,1fr) minmax(0,0fr)); grid-template-rows: var(--gr, minmax(0,0fr) minmax(0,1fr) minmax(0,0fr)); width: 100%; aspect-ratio: 1; min-height: 0;
+  transition: grid-template-columns .45s cubic-bezier(.3, .7, .2, 1), grid-template-rows .45s cubic-bezier(.3, .7, .2, 1); }
+/* الورقةُ محمولة: المربّعاتُ التسعةُ كلُّها ظاهرةٌ ليُفلت في أيّها */
+.pp-grid.is-carry { grid-template-columns: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); grid-template-rows: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); }
 .pk--max .kt-view--cards > .pp-grid,
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--cards > .pp-grid { flex: 1 1 auto; aspect-ratio: auto; }
-.pp-cell { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 14px;
+.pp-cell { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 14px; overflow: visible; box-sizing: border-box; padding: 4px;
   border: 1.5px dashed transparent; transition: border-color .15s ease, background-color .15s ease; }
 .pp-cell > .pp-host { width: 100%; height: 100%; min-height: 0; }
 .pp-cell.is-src { z-index: 3; }   /* الورقةُ المحمولةُ فوق المربّعات كلِّها */

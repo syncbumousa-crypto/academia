@@ -11542,19 +11542,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function ppGridHTML(key, cards, D) {
     const G = ppGridOf(key), has = new Set();
     cards.forEach(n => { const c = G[n.id]; if (c >= 0 && c !== 4 && c < 9) has.add(c); });
-    const open = has.size > 0, hold = !open && ppHoldOpen; ppHoldOpen = false;
+    /* المقاسُ يتبع مواضعَ الورق (طلبُ صاحب الموقع): كلُّ صفٍّ أو عمودٍ فيه رزمةٌ نصيبٌ متساوٍ من المساحة فتُقرأ رزمُه،
+       والفارغُ ينطوي إلى صفر — فتتوسّط الرزمُ المساحةَ كلَّها، أيًّا كانت جهاتُها وعددُها */
+    const rows = [0, 0, 0], cols = [0, 0, 0];
+    [4, ...has].forEach(i => { rows[Math.floor(i / 3)] = 1; cols[i % 3] = 1; });
+    const tpl = a => a.map(v => v ? 'minmax(0,1fr)' : 'minmax(0,0fr)').join(' ');
+    const hold = ppHoldOpen; ppHoldOpen = false;
     const cell = i => {
       const on = i === 4 || has.has(i), k = key + '#' + i;
       if (on) PPDATA.set(k, Object.assign({}, D, { cell: i, base: key }));
       return `<div class="pp-cell${i === 4 ? ' pp-cell--c' : ''}" data-ppc="${i}">${on ? `<div class="pp-host" data-pp="${esc(k)}"></div>` : ''}</div>`;
     };
-    /* وما انطوى للتوّ (عادت آخرُ ورقةٍ إلى الوسط) يُرسم منفرجًا ثمّ ينطوي بحركة (‎data-close‎) */
-    return `<div class="pp-grid${open || hold ? ' is-open' : ''}" data-ppg="${esc(key)}"${hold ? ' data-close="1"' : ''}>${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
+    /* وبعد الإفلات يُرسم منفرجًا كما كان والورقةُ محمولة، ثمّ ينطوي على مواضعه الجديدة بحركة (‎data-close‎) */
+    return `<div class="pp-grid${hold ? ' is-carry' : ''}" data-ppg="${esc(key)}"${hold ? ' data-close="1"' : ''} style="--gr:${tpl(rows)};--gc:${tpl(cols)}">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
   }
   /* المربّعُ تحت نقطةٍ من الشاشة (بمستطيلاته — فالورقةُ الممسوكةُ فوقها لا تحجبها) */
   const ppCellAt = (grid, x, y) => [...grid.querySelectorAll(':scope > .pp-cell')].find(c => { const r = c.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; }) || null;
   function ppMountAll() {
-    document.querySelectorAll('#cm-body .pp-grid[data-close]').forEach(g => { g.removeAttribute('data-close'); requestAnimationFrame(() => requestAnimationFrame(() => g.classList.remove('is-open'))); });
+    document.querySelectorAll('#cm-body .pp-grid[data-close]').forEach(g => { g.removeAttribute('data-close'); requestAnimationFrame(() => requestAnimationFrame(() => g.classList.remove('is-carry'))); });
     document.querySelectorAll('#cm-body .pp-host:not([data-ppm])').forEach(host => {
       host.dataset.ppm = '1';
       const d = PPDATA.get(host.dataset.pp); if (!d) return;
@@ -11731,11 +11736,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const to = d.over ? +d.over.dataset.ppc : null, me = D.cell === undefined ? 4 : D.cell;
         if (to !== null && to !== me && CARDS[idx]) {
           const cid = CARDS[idx].id, base = D.base || key;
-          const sides = Object.keys(ppGridOf(base)).filter(x => x !== cid).length;
           ppGridSet(base, cid, to);
           ppEnter = { cid, x: e.clientX - d.ox, y: e.clientY - d.oy };
-          /* عادت الأطرافُ فارغة: تُرسم منفرجةً ثمّ تنطوي */
-          if (to === 4 && !sides) ppHoldOpen = true;
+          ppHoldOpen = true;   /* تُرسم الشبكةُ منفرجةً كما تُرِكت ثمّ تنطوي على مواضعها الجديدة */
           renderCmSection(); return;
         }
         wake(); return;
