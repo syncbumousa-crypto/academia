@@ -18679,3 +18679,22 @@ html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18p
 html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }
 /* والكتابُ مغلقٌ: لا صفحةَ ولا صفحتين، فيغيب زرُّ التبديل (‎bk-shut‎ يكتبه ‎bk2Show‎) */
 .post.bk-shut .cx-actmode, .post.bk-shut .cbk-nav__mode { display: none; }
+/* ===== شريطُ الملخّص كشريط البنك (طلبُ صاحب الموقع) =====
+   رفيعٌ ‎4px‎ بلا سكّة، بلونٍ خافتٍ يغمق قليلًا عند المرور، ويقف ‎18px‎ عن طرفي المساحة فلا يمسّ انحناءها.
+   و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎ لأنّ كروم يُهمل ‎::-webkit-scrollbar‎ متى ضُبطا */
+.pk-split > .kt-view:not(.kt-view--tree),
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree) { scrollbar-width: auto; scrollbar-color: auto; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar { width: 4px; height: 4px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-track,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-track { background: transparent; margin-block: 18px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border: 0; border-radius: 99px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .28); }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button { display: none; }
