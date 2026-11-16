@@ -18568,3 +18568,65 @@ html[data-theme="dark"] .cx-jrk__h { color: #9fb0b8; }
 html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg { background: #1a2226; }
 html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button { color: #9fb0b8; }
 html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #36434a; color: #e6ecef; }
+/* ===== أزرارُ النافذة سككٌ في ركن الترويسة (طلبُ صاحب الموقع) =====
+   بلغة مقبض توسيع المساهمة (‎pk-max--curve‎): سكّةٌ شفّافةٌ سُمكُها ‎4.5‎ ونقاطٌ عليها.
+   الأزرارُ الثلاثةُ مربّعٌ واحدٌ ‎34‎ مسمَّرٌ على ركن ‎.cd-meta‎، ولا يُلتقط منها إلّا سكّتُها
+   (‎.cd-wb__hit‎)، فلا يحجب أحدُها أخاه. و‎translate‎ يُرفع عن الشريط لأنّ أيَّ قيمةٍ فيه
+   تجعله مرجعَ المطلق فيقع المربّعُ على الشريط لا على الركن */
+.cd-wb__rl { display: none; }
+#card-modal .cd-meta > .cd-bar { translate: none; }
+#card-modal .cd-meta > .cd-bar > .cd-wb--x,
+#card-modal .cd-meta > .cd-bar > .cd-wb--mx,
+#card-modal .cd-meta > .cd-bar > .cd-wb--mn {
+  position: absolute; top: 0; inset-inline-start: 0; z-index: 4;
+  width: 34px; height: 34px; padding: 0; border-radius: 0;
+  background: none; pointer-events: none;
+}
+#card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__ic { display: none; }
+#card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl {
+  display: block; width: 34px; height: 34px; overflow: visible; fill: none; stroke-linecap: round; }
+html[data-lang="en"] #card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl { transform: scaleX(-1); }
+.cd-wb__hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: pointer; }
+.cd-wb__grip { stroke-width: 4.5; transition: stroke .15s; }
+.cd-wb__dot, .cd-wb__dash { opacity: .8; transition: fill .15s, stroke .15s, opacity .15s; }
+.cd-wb__dash { stroke-width: 1.9; }
+.cd-wb:hover .cd-wb__dot, .cd-wb:hover .cd-wb__dash,
+.cd-wb:focus-visible .cd-wb__dot, .cd-wb:focus-visible .cd-wb__dash { opacity: 1; }
+#card-modal .cd-meta > .cd-bar > .cd-wb:focus-visible { outline: none; }
+/* الطيُّ رماديّ، والتكبيرُ أخضر، والإغلاقُ أحمر — ظاهرةٌ دائمًا، ويغمق اللونُ عند المرور */
+.cd-wb--mn .cd-wb__grip { stroke: rgba(20, 35, 63, .1); }
+.cd-wb--mn:hover .cd-wb__grip, .cd-wb--mn:focus-visible .cd-wb__grip { stroke: rgba(20, 35, 63, .2); }
+.cd-wb--mn .cd-wb__dash { stroke: rgba(20, 35, 63, .45); }
+.cd-wb--mx .cd-wb__grip { stroke: rgba(63, 154, 92, .24); }
+.cd-wb--mx:hover .cd-wb__grip, .cd-wb--mx:focus-visible .cd-wb__grip { stroke: rgba(63, 154, 92, .42); }
+.cd-wb--mx .cd-wb__dot { fill: #2f7d48; }
+.cd-wb--x .cd-wb__grip { stroke: rgba(192, 86, 75, .22); }
+.cd-wb--x:hover .cd-wb__grip, .cd-wb--x:focus-visible .cd-wb__grip,
+.cd-wb--mx.is-rs:hover .cd-wb__grip, .cd-wb--mx.is-rs:focus-visible .cd-wb__grip { stroke: rgba(192, 86, 75, .4); }
+.cd-wb--x .cd-wb__dot, .cd-wb--mx.is-rs:hover .cd-wb__dot { fill: #b5483c; }
+html[data-theme="dark"] .cd-wb--mn .cd-wb__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .cd-wb--mn:hover .cd-wb__grip { stroke: rgba(255, 255, 255, .24); }
+html[data-theme="dark"] .cd-wb--mn .cd-wb__dash { stroke: rgba(231, 239, 240, .5); }
+html[data-theme="dark"] .cd-wb--mx .cd-wb__grip { stroke: rgba(108, 196, 138, .24); }
+html[data-theme="dark"] .cd-wb--mx:hover .cd-wb__grip { stroke: rgba(108, 196, 138, .42); }
+html[data-theme="dark"] .cd-wb--mx .cd-wb__dot { fill: #6cc48a; }
+html[data-theme="dark"] .cd-wb--x .cd-wb__grip { stroke: rgba(224, 123, 111, .24); }
+html[data-theme="dark"] .cd-wb--x:hover .cd-wb__grip,
+html[data-theme="dark"] .cd-wb--mx.is-rs:hover .cd-wb__grip { stroke: rgba(224, 123, 111, .42); }
+html[data-theme="dark"] .cd-wb--x .cd-wb__dot,
+html[data-theme="dark"] .cd-wb--mx.is-rs:hover .cd-wb__dot { fill: #e07b6f; }
+/* والنافذةُ التي خلف غيرها: سككُها رماديّة حتى يمرّ عليها المؤشّر */
+#card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__grip { stroke: rgba(20, 35, 63, .1); }
+#card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__dot { fill: #14233f; opacity: .4; }
+html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__dot { fill: #e7eff0; opacity: .45; }
+/* ومقابضُ التحجيم كانت تغطّي الركنَ فتبتلع السكك: تُقصَّر عنه، ومقبضُ الركن يخرج إلى ما وراء
+   الانحناءة (وهو فراغٌ لا سكّةَ فيه). والركنُ أيمنُ في العربيّة وأيسرُ في الإنجليزيّة */
+#card-modal .cd-rz--t { right: 34px; }
+#card-modal .cd-rz--r { top: 34px; }
+#card-modal .cd-rz--tr { top: -8px; right: -8px; width: 11px; height: 11px; }
+html[data-lang="en"] #card-modal .cd-rz--t { right: 12px; left: 34px; }
+html[data-lang="en"] #card-modal .cd-rz--r { top: 12px; }
+html[data-lang="en"] #card-modal .cd-rz--l { top: 34px; }
+html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18px; height: 18px; }
+html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }

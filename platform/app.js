@@ -14396,14 +14396,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      واحدٌ فيكبُر). ولا يُلتمس واحدٌ منها بمعرّفه في الملفّ: المعرّفاتُ تُعار للنافذة
      المركَّزة وحدَها وتُنزع عمّن سواها (‎cdIdMove‎)، فقاعدةٌ على ‎#cd-max‎ تصحّ في نافذةٍ
      وتسقط في أختها — فالأصنافُ وحدَها هي المِقبض */
+  /* ===== سككُ الركن: أزرارُ النافذة بلغة مقبض توسيع المساهمة (طلبُ صاحب الموقع) =====
+     ثلاثُ سككٍ قصارٍ متساوية الطول لاصقةٌ بركن الترويسة: الطيُّ على الحافّة العليا (رماديٌّ
+     وعلامتُه شَرطةٌ من نقطتين متشابكتين)، والتكبيرُ قوسٌ على الانحناءة (أخضرُ بنقطتين)،
+     والإغلاقُ على الجنب (أحمرُ بنقطة). مرسومةٌ في مربّعٍ ‎34‎ ركنُه ‎(34,0)‎ ونصفُ قطر الركن
+     الداخليّ ‎9‎ (‎--cd-r‎ ناقصَ الحدّ)، والسكّةُ على ‎3.2‎ من الحافّتين. والرمزُ القديم باقٍ
+     في ‎.cd-wb__ic‎ لترويسة الاختبار التي لا ركنَ لها */
+  const CD_RL = (d, marks) => `<svg class="cd-wb__rl" viewBox="0 0 34 34" aria-hidden="true">`
+    + `<path class="cd-wb__hit" d="${d}"/><path class="cd-wb__grip" d="${d}"/>${marks}</svg>`;
+  const CD_RL_MN = CD_RL('M11.06 3.2H19.06', '<path class="cd-wb__dash" d="M13.26 3.2H16.86"/>');
+  const CD_RL_MX = CD_RL('M25.56 3.23A5.8 5.8 0 0 1 30.77 8.44',
+    '<circle class="cd-wb__dot" cx="27.92" cy="3.99" r=".95"/><circle class="cd-wb__dot" cx="30.01" cy="6.08" r=".95"/>');
+  const CD_RL_X = CD_RL('M30.8 14.95V22.95', '<circle class="cd-wb__dot" cx="30.8" cy="18.95" r=".95"/>');
   const cdWinBtns = () => `
     <button type="button" class="cd-wb cd-wb--x" id="cd-close"
-      title="${esc(T().cdCancel)}" aria-label="${esc(T().cdCancel)}">✕</button>
-    <button type="button" class="cd-wb cd-wb--mx" id="cd-max"
+      title="${esc(T().cdCancel)}" aria-label="${esc(T().cdCancel)}"><span class="cd-wb__ic">✕</span>${CD_RL_X}</button>
+    <button type="button" class="cd-wb cd-wb--mx${maxCard() ? ' is-rs' : ''}" id="cd-max"
       title="${esc(maxCard() ? T().cdRestore : T().cdMax)}"
-      aria-label="${esc(maxCard() ? T().cdRestore : T().cdMax)}">${maxCard() ? CD_IC.restore : CD_IC.max}</button>
+      aria-label="${esc(maxCard() ? T().cdRestore : T().cdMax)}"><span class="cd-wb__ic">${maxCard() ? CD_IC.restore : CD_IC.max}</span>${CD_RL_MX}</button>
     <button type="button" class="cd-wb cd-wb--mn" id="cd-min"
-      title="${esc(T().cdMin)}" aria-label="${esc(T().cdMin)}">${CD_IC.min}</button>`;
+      title="${esc(T().cdMin)}" aria-label="${esc(T().cdMin)}"><span class="cd-wb__ic">${CD_IC.min}</span>${CD_RL_MN}</button>`;
   /* تسمية أيقونيّة: الصورة في الجسم واللفظ في ‎title/aria-label‎ فقط */
   function setIcLab(sel, ic, lbl) {
     const el = $(sel);
