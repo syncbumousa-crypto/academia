@@ -2,6 +2,13 @@
   "code": "SWE 363",
   "users": [
     {
+      "id": "stk-bo_rayan",
+      "name": "Bo Rayan",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/bo_rayan/144/2084_2.png",
+      "email": "bo_rayan@import.stkfupm.invalid",
+      "user": "Bo_Rayan"
+    },
+    {
       "id": "stk-md508",
       "name": "MD508",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/94ad74/144.png",
@@ -52,6 +59,29 @@
     }
   ],
   "posts": [
+    {
+      "id": "stk-p1471550-swe363",
+      "uid": "stk-bo_rayan",
+      "code": "SWE 363",
+      "sec": "info",
+      "ts": 1492520396000,
+      "st": "pub",
+      "data": {
+        "desc": "عليكم السلام\n\nحاليا قاعد أخذ المادة مع الدكتور جمال الدين\n\nالكورس يعطيك أساسيات عن ال html/css/js/php/jquery\n\nفيه جزء كبير عن ال modeling\n\nأشوف مهم قبل لا تاخذ هالكورس تكون اخذت:\nICS 324\nSWE 311/SWE 205\n\nبصراحة ما أتوقع أنها مناسبة لل MIS إلا إذا كان عندك خلفية قوية في البرمجة و modeling",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/swe-363/176488/2",
+          "user": "Bo_Rayan",
+          "ts": 1492520396000,
+          "tid": 176488,
+          "pn": 2
+        }
+      }
+    },
     {
       "id": "stk-doc-md508-swe363",
       "uid": "stk-md508",

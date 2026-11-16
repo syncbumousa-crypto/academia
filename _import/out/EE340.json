@@ -51,6 +51,13 @@
       "user": "user11634"
     },
     {
+      "id": "stk-try2cry",
+      "name": "try2cry",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/f17d59/144.png",
+      "email": "try2cry@import.stkfupm.invalid",
+      "user": "try2cry"
+    },
+    {
       "id": "stk-c.k.s",
       "name": "C.K.S",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/9de0a6/144.png",
@@ -287,6 +294,29 @@
           "ts": 1609264702000,
           "tid": 120701,
           "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p1025809-ee340",
+      "uid": "stk-try2cry",
+      "code": "EE 340",
+      "sec": "info",
+      "ts": 1334957217000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة معي الآن … أهم شي بالبداية تعرف الـ المتجهات 3d لأنها بتكون معك طول السمستر\nالمادة تميل للصعوبة شوي … ( كيف تحسب المجال الكهربائي والمغناطيسي والمقاومة … الخ من وجهة نظر الالكترومغناطيسية )\nطريقة المذاكرة : نوت الدكتور اللي يدرسني … عصام حسن\nالاسئلة : قريبة من النوت …\nالافرج : يقولون بالعادة بالـ 40 وميجر 1 كان نفس الكلام\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee340/123193/2",
+          "user": "try2cry",
+          "ts": 1334957217000,
+          "tid": 123193,
+          "pn": 2
         }
       }
     },

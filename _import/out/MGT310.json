@@ -2,6 +2,13 @@
   "code": "MGT 310",
   "users": [
     {
+      "id": "stk-hamad_al-harthi",
+      "name": "Hamad Al-Harthi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/9e8a1a/144.png",
+      "email": "hamad_al-harthi@import.stkfupm.invalid",
+      "user": "Hamad_Al-Harthi"
+    },
+    {
       "id": "stk-dani21",
       "name": "DANI21",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/e19b73/144.png",
@@ -24,6 +31,29 @@
     }
   ],
   "posts": [
+    {
+      "id": "stk-p1229986-mgt310",
+      "uid": "stk-hamad_al-harthi",
+      "code": "MGT 310",
+      "sec": "info",
+      "ts": 1369909360000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة تتكلم عن سلوك الافراد في المنظمات\n\nالمادة لها علاقة كبيره بعلم النفس وتتطرق لموضوعات كثيره\nكالمحفزات الوظيفيه الي تزيد من انتاجيه الافراد داخل المؤسسه مثل مهارة العمل في فريق والمكافأت الماديه والمعنويه\n\nيعني الزبده في الموضوع انه الاشخاص مختلين في سلوكهم واعتقاداتهم وقناعاتهم وطرق تفكيرهم\nوعشان نوظفهم بطريقه تخدم مصلحه المؤسسه لازم نكون ملمين بسلوكيات الافراد داخل المنظمه\n\nالماده سهله وممتعه",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-310-free-elective/145211/3",
+          "user": "Hamad_Al-Harthi",
+          "ts": 1369909360000,
+          "tid": 145211,
+          "pn": 3
+        }
+      }
+    },
     {
       "id": "stk-doc-dani21-mgt310",
       "uid": "stk-dani21",

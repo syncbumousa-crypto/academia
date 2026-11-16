@@ -72,6 +72,27 @@
       "user": "Abdul_666"
     },
     {
+      "id": "stk-user4988",
+      "name": "أبو مرسمة !!",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4988/144/891_2.png",
+      "email": "user4988@import.stkfupm.invalid",
+      "user": "user4988"
+    },
+    {
+      "id": "stk-aaazzzaaa",
+      "name": "aaazzzaaa",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/53a042/144.png",
+      "email": "aaazzzaaa@import.stkfupm.invalid",
+      "user": "aaazzzaaa"
+    },
+    {
+      "id": "stk-user3354",
+      "name": "ميموو",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3354/144/447_2.png",
+      "email": "user3354@import.stkfupm.invalid",
+      "user": "user3354"
+    },
+    {
       "id": "stk-mjehad",
       "name": "mjehad",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/8e8cbc/144.png",
@@ -412,6 +433,75 @@
           "ts": 1621637452000,
           "tid": 120652,
           "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-p1009607-che303",
+      "uid": "stk-user4988",
+      "code": "CHE 303",
+      "sec": "info",
+      "ts": 1331913848000,
+      "st": "pub",
+      "data": {
+        "desc": "يا رجال أحمد ربك ، مع اللي صار لي في هذا الميجر لكن بالنسبة لي أعتبر الميجر هذا أهون علي بكثير من مياجر الدكتور معتز عطية ( 203 )\nيمين الله علامات الإستفهام و التعجب طلعت لنا في أيامه خاصةً الفاينل\n\nبالمناسبة ،،، أفرج الميجر طلع : 63.5\nو الدرجات بكرة\n\nTomorrow, you are going to see your major exam score. The average is 63.5\n\nالمصدر : حساب che303 في التويتر\n\nالله يستر",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-303/122928/2",
+          "user": "user4988",
+          "ts": 1331913848000,
+          "tid": 122928,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p818819-che303",
+      "uid": "stk-aaazzzaaa",
+      "code": "CHE 303",
+      "sec": "info",
+      "ts": 1300497728000,
+      "st": "pub",
+      "data": {
+        "desc": "كل الطلاب اللي قابلتهم يبون يأجلون الميجر\n\nانا ارسلت رسالة على الويب سيتي للدكتور وارسلت على ايميلة الخاص بالجامعة عن التأجيل من قبل يومين\nولا رد علي\nوطلاب كثير ارسلوا له عن التأجيل ولا رد على احد\nشكل الدكتور ما يمر على الرسايل ولا الويب سيتي\n\nانا صراحه عندي يوم الاحد اوف , فـ لما سمعت خبر الاجازة سافرت لاهلي\nوكلي امل ان بكره ما فيه ميجر\n\nوبعدين برضو الدكتور ما قال لنا وين رح يكون الاختبار ولا قال لنا الوقت بالتحديد\nاعتقد كان ناوي يقول لنا في الكلاس بكره , لكن مع الاجازة , بيضطر يدخل الويب سيتي عشان يرسل اناونسمنت\nفــ ان شاء الله لما يدخل الويب سيتي ويشوف الكم الهائل من الرسايل اللي تطالب بتأجيل الميجر , ان شاء الله انه بيتجاوب معنا ورح يأجله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-303/105159/3",
+          "user": "aaazzzaaa",
+          "ts": 1300497728000,
+          "tid": 105159,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p818824-che303",
+      "uid": "stk-user3354",
+      "code": "CHE 303",
+      "sec": "info",
+      "ts": 1300498280000,
+      "st": "pub",
+      "data": {
+        "desc": "والله الدكتور من الاسبوع الماضي وحنا نحاول فيه يأجل الميجر…\n\nمع الاجازة باذن الله انه يتعاون معنا… وبيني وبينك ترى الدكتور يدور على الاجازات هذي…\n\nاللي المفروض نسويه انو بكره الساعه 7 المغرب واللي هو تقريبا وقت الاختبار … نجتمع في\n\nمبني 4 وننتظر الدكتور… ولمن يجي نكلمه بالموضوع … ونحدد وقت ثاني للاختبار…\n\nكثير من الشباب اللي قابلتهم ودهم ياجلون الاختبار وكثير والله ماذاكروا خصوصا انو لخميس كان فيه 300 …\n\nومع الاحتفالات والاجازة كملت…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-303/105159/4",
+          "user": "user3354",
+          "ts": 1300498280000,
+          "tid": 105159,
+          "pn": 4
         }
       }
     },

@@ -23,6 +23,27 @@
       "user": "Guest"
     },
     {
+      "id": "stk-user3193",
+      "name": "لافت نظر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3193/144/388_2.png",
+      "email": "user3193@import.stkfupm.invalid",
+      "user": "user3193"
+    },
+    {
+      "id": "stk-mamoo",
+      "name": "mamoo",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/bc79bd/144.png",
+      "email": "mamoo@import.stkfupm.invalid",
+      "user": "mamoo"
+    },
+    {
+      "id": "stk-_kfupm3",
+      "name": "اعصار kfupm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/a587f6/144.png",
+      "email": "_kfupm3@import.stkfupm.invalid",
+      "user": "_kfupm3"
+    },
+    {
       "id": "stk-dark_prince",
       "name": "Dark Prince",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/a9adbd/144.png",
@@ -146,6 +167,75 @@
           "ts": 1609097635000,
           "tid": 120938,
           "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p723585-ise320",
+      "uid": "stk-user3193",
+      "code": "ISE 320",
+      "sec": "info",
+      "ts": 1287446715000,
+      "st": "pub",
+      "data": {
+        "desc": "الله يعطيكم العافية اخوي زرياب 🌹\n\nوالظاهر ان النسخة الجديدة من الكتاب قالبة الاقسام فوق تحت\nلان نزلت السلايدات وقريت جابتر 4 وفيه مواضيع تخص جابتر 5 و 4 في النسخة الجديدة\n\nلكن السلايدات تفك ازمة لان الكتاب مايحمس للمذاكرة ومشكووورين والله يعطيكم العافية",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-320/96956/4",
+          "user": "user3193",
+          "ts": 1287446715000,
+          "tid": 96956,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p979970-ise320",
+      "uid": "stk-mamoo",
+      "code": "ISE 320",
+      "sec": "info",
+      "ts": 1328390434000,
+      "st": "pub",
+      "data": {
+        "desc": "عبدالرحيم فيه 2 ، فيه الغامدي وفيه عبد الرحيم إم\n\nاذا الغامدي : اولا : الحفظ ثانيا : الحفظ ثالثا : الحفظ\nرابعا : البرزنتيشن تهتم فيه وتسوي شيء رايق خامسا: الحضور ، والحضور عنده مهم\nوالاسئله النيومريكال تجي غالبا من الامثله اللي بالكتاب والاسئله اللي بالكتاب\nوفوق هذا كله ، حاول انك تستعين بـمفهوم الـ تشبيك\n\nبالنسبه لعبد الرحيم إم : ذاكر الاختبارات القديمه واحفظها وتوكل على الله …\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-320/119740/2",
+          "user": "mamoo",
+          "ts": 1328390434000,
+          "tid": 119740,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p980497-ise320",
+      "uid": "stk-_kfupm3",
+      "code": "ISE 320",
+      "sec": "info",
+      "ts": 1328469968000,
+      "st": "pub",
+      "data": {
+        "desc": "مع عبد الرحيم البنقالي من واقع تجربة\nاحضر و الكتاب معك و هو دايم يحدد سكاشن و يحذف اشياء انت حاول تحدد معه الاشياء و ذاكرها قبل الاختبار و حل الاولد اكزام و اذا فيه شيء ما عرفته احفظه لانه يجيب نفس الاختبارات القديمة بالارقام و حاول انك تروح لمكتبه و تشبكه لان التشبيك ينفع معه بقووووه\nو فالك الـ a+",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-320/119740/6",
+          "user": "_kfupm3",
+          "ts": 1328469968000,
+          "tid": 119740,
+          "pn": 6
         }
       }
     },

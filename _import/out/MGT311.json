@@ -51,6 +51,48 @@
       "user": "user9840"
     },
     {
+      "id": "stk-user4836",
+      "name": "عبوود عالحدوود",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4836/144/839_2.png",
+      "email": "user4836@import.stkfupm.invalid",
+      "user": "user4836"
+    },
+    {
+      "id": "stk-fahad-07",
+      "name": "Fahad-07",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/ecccb3/144.png",
+      "email": "fahad-07@import.stkfupm.invalid",
+      "user": "Fahad-07"
+    },
+    {
+      "id": "stk-brameg",
+      "name": "brameg",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/85e7bf/144.png",
+      "email": "brameg@import.stkfupm.invalid",
+      "user": "brameg"
+    },
+    {
+      "id": "stk-high_voltage",
+      "name": "High Voltage",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/high_voltage/144/48_2.png",
+      "email": "high_voltage@import.stkfupm.invalid",
+      "user": "High_Voltage"
+    },
+    {
+      "id": "stk-azoooozy",
+      "name": "azoooozy",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/azoooozy/144/1599_2.png",
+      "email": "azoooozy@import.stkfupm.invalid",
+      "user": "azoooozy"
+    },
+    {
+      "id": "stk-abdul_991",
+      "name": "abdul_991",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/ecae2f/144.png",
+      "email": "abdul_991@import.stkfupm.invalid",
+      "user": "abdul_991"
+    },
+    {
       "id": "stk-creative-guy",
       "name": "creative-guy",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/258eb7/144.png",
@@ -245,6 +287,144 @@
           "ts": 1499306919000,
           "tid": 120988,
           "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p744465-mgt311",
+      "uid": "stk-user4836",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1292389740000,
+      "st": "pub",
+      "data": {
+        "desc": "أولا المادة بالعربي 😭\nثانيا: شغل حفظ احفظ المنهج و روح للاختبار.\nثالثا: الطيب الجيلي ما اقول سيء بس لو لقيت غيرو يكون افضلك.\nانا منزلها مع الجيلي هذا السمستر 10.1 😐\nالتحضير اول الكلاس و يحضر المتأخرين نهاية الكلاس بعد ما يعطيهم محاضرة ربع ساعة ليش متأخرين. 🥊 (كل حصة). و بعض الطلاب يحضرو أول الكلاس و يمشوا بعد 15 - 30 دقيقة. ❤️*\nالشرح من السلايدات. و المعلومات فيها رؤوس اقلام يعني ما يكفي تدرسها بس. 😞\nواجبات منزلية كل فترة يعني ممكن كل ثلاث مواضيع واحد\nالكويزات: حسب السلايدات. فجأة تلاقي سلايد فيها اسئلة و غالبا في نفس شرح الحصة\nانا اعطيه جريد C مو أكثر.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-311/99274/2",
+          "user": "user4836",
+          "ts": 1292389740000,
+          "tid": 99274,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p744638-mgt311",
+      "uid": "stk-fahad-07",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1292416594000,
+      "st": "pub",
+      "data": {
+        "desc": "ياخوي نزلها وانت مغمض عند مكااااااوي\n\nانسان فاهم الماده ومياجره سهله جدا جدا واخلاقه جدا رائعه لايوجد لديه كويزات\n\nيعطيك موضوع تقوم تشرحه او سوال تروح تحله وتجيب له الحل يعطيك عليه بونص\n\nمع الدكتور مكاوي الماده سهله جدا وماده قريد جدا\n\nبالتوووووفيق لك ان شاء اللهـ\n\nاعطي الدكتور a+",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-311/99274/4",
+          "user": "Fahad-07",
+          "ts": 1292416594000,
+          "tid": 99274,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p316508-mgt311",
+      "uid": "stk-brameg",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1223581450000,
+      "st": "pub",
+      "data": {
+        "desc": "الجيلي حق c و c+\n\nفي حصة الدكتور الجيلي يمديك تسوي أشياء كثيرة\n\nمنها\n\n1- المذاكرة وقت الحصة\n\n2- النوم وقت المحـاضرة\n\n3- الخروج وقضاء الوقت عند الانترنت أو الأكل\n\n!\n\nالشرح لو فهمته بتجيب درجات حلوة لكن صعب جدا التركيز\nوالاختبار يعتمد على مذاكرتك الشخصية \" إذا لم تكن مركز في الحصة \"\n\nالأسئلة كـومن ودقيقة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt311/66657/3",
+          "user": "brameg",
+          "ts": 1223581450000,
+          "tid": 66657,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p112147-mgt311",
+      "uid": "stk-high_voltage",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1156083290000,
+      "st": "pub",
+      "data": {
+        "desc": "اخي العزيز لم تذكر ماهو ضغط المواد عندك… يعني كم ساعه منزل الترم الجاي… و ماهو مستواك الدراسي و كيف انت في مواد الاداره بشكل عام… لكي نستطيع ان نعطيك نصيحه بمقاسك 🙂\n\nو على العموم المادة هي مادة القانون التجاري السعودي… هي مادة ثقيلة دم و هي المادة الوحيدة في كلية الادارة التي تدرس بالعربي… مادة محاميين و مادري ما نفعها للنا كطلاب تسويق او محاسبة او ايا كان…\nاسئلتها كلها صح و غلط لكن لا تستهين بها… لانه يجي الدكتور (الله يستر عليه) يغيرلك حرف في الجمله و اذا حطيت صح يقولك لأ في حرف غلط في الجمله… بس ابشرك الدكتور دا اخيرا مشي من الجامعه و الترم الي فات كان اخر ترم له في الجامعه بعد ما قضى مايقارب الـ 21 سنه في الكليه يدرس نفس المنهج كل ترم لـ 3 سكاشن… فلك ان تتخيل انه حافظ كل كلمه و جمله في الكتاب و يجي يسمعها لك في الحصه… و كل طلاب الاداره يشهدوا على كلامي… سواء الي درسها قبل سنه و لا قبل 15 سنه…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-311/51728/2",
+          "user": "High_Voltage",
+          "ts": 1156083290000,
+          "tid": 51728,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1255910-mgt311",
+      "uid": "stk-azoooozy",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1377604000000,
+      "st": "pub",
+      "data": {
+        "desc": "الجيلي ماشفت انه زي مايقولون في المنتدى !\n\nخذت معه الصيف اللي راح وطلعت بقريد ماكنت اتوقعه الحمد لله\n\nمع اني معيّد في المياجر والفاينل اكيد\n\nالجيلي نظامه خله يعرفك انشب له في الكلاس تعال بدري وحاول تبين له انك مهتم وفالك القريد الطيّب\n\n+الدكتور فاهم واغلب اسئلته من اللي يقوله حاول تخطط وتسأله وتناقشه لان بعض الكلام اللي يقوله راح تلقاه سؤال في الميجر\n\n+انا تخصصي هندسة+",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-311/143479/12",
+          "user": "azoooozy",
+          "ts": 1377604000000,
+          "tid": 143479,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p176531-mgt311",
+      "uid": "stk-abdul_991",
+      "code": "MGT 311",
+      "sec": "info",
+      "ts": 1182161382000,
+      "st": "pub",
+      "data": {
+        "desc": "ما تقدر تنزلها لإنك لازم تكون سفمور واللي افهمه من كلامك انك فرشمان على العموم الدكتور الطيب الجيلي من اطيب الدكاتره اللي مروا علي بس المادة (غثيثة) شوي (لا شويتين)وانصحك انك تنزل مواد فيها لابات علشان تترتاح بالسيميستر العادي(يعني بحكم انك بتحول يمكنacct تكون جيدة بالصيف او ماث على حسب قدرتك ) …الله يوفقك",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-311/56932/2",
+          "user": "abdul_991",
+          "ts": 1182161382000,
+          "tid": 56932,
+          "pn": 2
         }
       }
     },

@@ -23,6 +23,13 @@
       "user": "user10533"
     },
     {
+      "id": "stk-mr.cool",
+      "name": "Mr.Cool",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mr.cool/144/1315_2.png",
+      "email": "mr.cool@import.stkfupm.invalid",
+      "user": "Mr.Cool"
+    },
+    {
       "id": "stk-user5938",
       "name": "اوريا بترولي",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5938/144/1219_2.png",
@@ -111,6 +118,29 @@
           "ts": 1545348510000,
           "tid": 120670,
           "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p976910-ce230",
+      "uid": "stk-mr.cool",
+      "code": "CE 230",
+      "sec": "info",
+      "ts": 1327949835000,
+      "st": "pub",
+      "data": {
+        "desc": "هذي المادة هي ميكانيكا الموائع\nتدرس خواص الموائع و القوى التي يأثرها المائع على السطوح .\nو تدرس جريان الموائع و قوانين الجريان و تطبيقات عليها و هكذا …\n\nالمادة الآن يدرسها الصويان الساعة 11 و الصويان غني عن التعريف توووب …\nالمادة فيها أربعة مياجر و فاينل ،، أربعة كويزات …\n\nالمادة عندي ألحين بس على كلام الشباب يقولون إنها من أسهل مواد السفمور و الله أعلم …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce230/119264/3",
+          "user": "Mr.Cool",
+          "ts": 1327949835000,
+          "tid": 119264,
+          "pn": 3
         }
       }
     },

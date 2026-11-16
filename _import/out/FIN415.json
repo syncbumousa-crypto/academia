@@ -2,6 +2,13 @@
   "code": "FIN 415",
   "users": [
     {
+      "id": "stk-user1168",
+      "name": "الرمز",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ecccb3/144.png",
+      "email": "user1168@import.stkfupm.invalid",
+      "user": "user1168"
+    },
+    {
       "id": "stk-imported54",
       "name": "imported_دمامي",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/51bf81/144.png",
@@ -10,6 +17,29 @@
     }
   ],
   "posts": [
+    {
+      "id": "stk-p71973-fin415",
+      "uid": "stk-user1168",
+      "code": "FIN 415",
+      "sec": "info",
+      "ts": 1111513309000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\nيا اخوان انا عندى الاسبوع الجاي ميجر Fin 415 مع الدكتوربسام حمدان و بصراحة ما ادري وش سالفة المادة\n\nالكتاب معقد جدا جدا جدا\n\nاللي اخذ الكورس من قبل اتمنى انه يساعدنى و يقولي ايش اهم الاشياء اللي لازم اركز عليها و كيف طريقة الاسئلة\n\nو جزاكم الله خير",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-415/46622/1",
+          "user": "user1168",
+          "ts": 1111513309000,
+          "tid": 46622,
+          "pn": 1
+        }
+      }
+    },
     {
       "id": "stk-doc-imported54-fin415",
       "uid": "stk-imported54",

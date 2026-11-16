@@ -23,6 +23,27 @@
       "user": "user9534"
     },
     {
+      "id": "stk-winter_dreams",
+      "name": "winter dreams",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/9de053/144.png",
+      "email": "winter_dreams@import.stkfupm.invalid",
+      "user": "winter_dreams"
+    },
+    {
+      "id": "stk-exuse_me",
+      "name": "Exuse Me",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/3be4f8/144.png",
+      "email": "exuse_me@import.stkfupm.invalid",
+      "user": "Exuse_Me"
+    },
+    {
+      "id": "stk-najiali",
+      "name": "NajiAli",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/najiali/144/2225_2.png",
+      "email": "najiali@import.stkfupm.invalid",
+      "user": "NajiAli"
+    },
+    {
       "id": "stk-mha14",
       "name": "MHA14",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/a88e4f/144.png",
@@ -153,6 +174,75 @@
           "ts": 1517083232000,
           "tid": 120657,
           "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1451506-che402",
+      "uid": "stk-winter_dreams",
+      "code": "CHE 402",
+      "sec": "info",
+      "ts": 1465671556000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\nالمادة هذه بتكون الترم الجاي عند الدكتور نبيل ابو غندر والدكتور رياض الشوابكة وأنا مسجلها عند الدكتور أبو غندر بس فيه واحد نصحني أغير وأسجل عند شوابكة. أبغى نصيحتكم اللي عنده معلومات عنهم ومن الأفضل خصوصا من ناحية أسئلة المياجر والفاينلات.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che402/173627/1",
+          "user": "winter_dreams",
+          "ts": 1465671556000,
+          "tid": 173627,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1458408-che402",
+      "uid": "stk-exuse_me",
+      "code": "CHE 402",
+      "sec": "info",
+      "ts": 1474505014000,
+      "st": "pub",
+      "data": {
+        "desc": "اخذت الماده هذه مع ابو غندر … بصراحه كلمه حق شرحه رائع جداً وتطلع فاهم المادة ، ولكن اسئلته في المياجر صعبه مقارنه مع مليباري\nوالبروجكت والهوموركات والكويزز ، اذكر مره بكلاس واحد اعطانا 3 كويزات\nلكن بتطلع فاهم المادة ، اذا شديت حيلك بتطلع بقريد كويس بعد ،\n\nشوابكه درسني في السينير بروجكت بصراحه الرجل اخلاقه عاليه ولكنه من الاردن من منطقه ريفيه وكان يقولنا احنا بدو ودمنا حار ، عشان كذا تشوفه احيانا ينفعل لأتفه الاسباب\n\nبالتوفيق يالذيب",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che402/173627/5",
+          "user": "Exuse_Me",
+          "ts": 1474505014000,
+          "tid": 173627,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1461293-che402",
+      "uid": "stk-najiali",
+      "code": "CHE 402",
+      "sec": "info",
+      "ts": 1477748728000,
+      "st": "pub",
+      "data": {
+        "desc": "ما اعرف شيء عن ابو غندر لكن بالنسبة لشوابكة درست معه CHE-432 . طبعا خوووووراااااافي في توصيل المعلومة. فاهم في كل شيء يقوله. اي سؤال يجاوب عليك بدون مايفكر (القصد انه عبقري). الأسئلة جدا سهل ومباشرة. يكتب ع السبورة بشكل كبير جدا لهذا راح تفهم المادة عدل.( طبعا كل هذا في CHE-432 ). بالنسبة لأخلاقه, متقلب المزاج وانت وحظك. عادي يعطيك بروجكت تحتاج شهر وانت تسويه وعادي يجيك ميجر فيه سؤالين فقط. لهذا ماتدري كيف الكورس راح يكون عنده. ع العموم اذا تبي شرح محترم نزل عند شوابكة. والباقي اعتبرها مفاجآت الطريق…:msn-wink:",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che402/173627/6",
+          "user": "NajiAli",
+          "ts": 1477748728000,
+          "tid": 173627,
+          "pn": 6
         }
       }
     },

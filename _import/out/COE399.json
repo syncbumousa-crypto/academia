@@ -7,6 +7,34 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/f4b2a3/144.png",
       "email": "sultan11@import.stkfupm.invalid",
       "user": "Sultan11"
+    },
+    {
+      "id": "stk-ghosty",
+      "name": "Ghosty",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/4af34b/144.png",
+      "email": "ghosty@import.stkfupm.invalid",
+      "user": "Ghosty"
+    },
+    {
+      "id": "stk-nigma",
+      "name": "Nigma",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/bc79bd/144.png",
+      "email": "nigma@import.stkfupm.invalid",
+      "user": "Nigma"
+    },
+    {
+      "id": "stk-user222",
+      "name": "العاشق",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/50afbb/144.png",
+      "email": "user222@import.stkfupm.invalid",
+      "user": "user222"
+    },
+    {
+      "id": "stk-user447",
+      "name": "بو حميد",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/898d66/144.png",
+      "email": "user447@import.stkfupm.invalid",
+      "user": "user447"
     }
   ],
   "posts": [
@@ -29,6 +57,98 @@
           "user": "Sultan11",
           "ts": 1385172970000,
           "tid": 120823,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p383390-coe399",
+      "uid": "stk-ghosty",
+      "code": "COE 399",
+      "sec": "info",
+      "ts": 1237452421000,
+      "st": "pub",
+      "data": {
+        "desc": "في الحقيقة والواقع أخوي هذا يعتبر تدريب صيفي 🙂\nأنا أخذت التدريب الصيفي مع أرامكو السنة اللي فاتت 072 وكان نفس هذا البرنامج…\n\nبالنسبة لاستفسارك أخوي alfares333, روح للمسؤول عن التدريب الصيفي في قسمك واسأله ان كان القسم يسمحلك تاخذ التدريب مع أرامكو…\n\nالتدريب الصيفي تبع أرامكو للسعوديين فقط واذا تبي توصل للنك حقت التسجيل بعد دخولك لصفحة الموقع الرئيسي:\nJobs & Careers --> Saudis --> Summer Student Programs --> College Students\nطبعا التسجيل ماراح يبدأ الا 21 مارس…\n\nفي النهاية بالنسة لي كCOE ما استفدت من البرنامج لانو ماكان في شغل أغلب وقتي طال عمرك ألعب كانسة الألغام << على فكرة صرت حريف وختمت مستوى Expert ف180 ثانية 👍\n\nبعد ما رجيت السوبرفايسور تبعي كل ساعتين وانا مشقر عليه في المكتب ابي شغل 🥊 تخلص مني ورسلني لPump Station 😦\n\nكل اللي اقدر اقولك عليه في النهاية انو الشغل يعتمد على تخصصك وعلى السوبرفايسور تبعك واهم شي على درجة حماسك للشغل…\n\nبالتوفيق أخوي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/71729/7",
+          "user": "Ghosty",
+          "ts": 1237452421000,
+          "tid": 71729,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1377291-coe399",
+      "uid": "stk-nigma",
+      "code": "COE 399",
+      "sec": "info",
+      "ts": 1401923484000,
+      "st": "pub",
+      "data": {
+        "desc": "إعلان عن توفر فرص تدريب\n\nتعلن شركة ) Fablab Dharan) عن توفر فرص تدريبية التالية في برنامج التدريب الصيفي وبالتنسيق مع إدارة التدريب في عمادة شؤون الطلاب :\n\n· هندسة ميكانيكة\n· هندسة الحاسب الآلي\n· العمارة\n\nعلى الراغبين في التقدم على هذه الفرص، ارسال السيرة الذاتية على البريد الالكتروني :\n\nb.alsaif@fabladhahran.org\n\nالأستاذ / بدر أكرم السيف\n\nجوال / 0503815230\n\nإدارة التدريب\n\nالتدريييييييب في الجامعة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/161274/21",
+          "user": "Nigma",
+          "ts": 1401923484000,
+          "tid": 161274,
+          "pn": 21
+        }
+      }
+    },
+    {
+      "id": "stk-p30435-coe399",
+      "uid": "stk-user222",
+      "code": "COE 399",
+      "sec": "info",
+      "ts": 1061498137000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\nياشباب احد يعرف كم مدة ال presentation لطلاب التدريب الصيفي (هندسة حاسب الي)\nومتى تكون ان شاء الله (في اي اسبوع … الثالث او الخامس … او …)\n\nوسلامتكم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/presentation/25281/1",
+          "user": "user222",
+          "ts": 1061498137000,
+          "tid": 25281,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p30482-coe399",
+      "uid": "stk-user447",
+      "code": "COE 399",
+      "sec": "info",
+      "ts": 1061557339000,
+      "st": "pub",
+      "data": {
+        "desc": "ارسل الى summer training coordinator الى عندكم في COE واسأله عن اي شي وشيك موقع http://webcourses.kfupm.edu.sa\n\nبالنسبة لي كانت 15 دقيقة او اقل شوي وبحكم اني ماسويت شي يذكر شرحت لهم عن الشركة ووش فيها وبس 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/presentation/25281/2",
+          "user": "user447",
+          "ts": 1061557339000,
+          "tid": 25281,
           "pn": 2
         }
       }

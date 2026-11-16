@@ -23,6 +23,13 @@
       "user": "AzizLake"
     },
     {
+      "id": "stk-banyan",
+      "name": "Banyan",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/c0e974/144.png",
+      "email": "banyan@import.stkfupm.invalid",
+      "user": "Banyan"
+    },
+    {
       "id": "stk-moh_ammed",
       "name": "Moh ammed",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ad7895/144.png",
@@ -153,6 +160,29 @@
           "ts": 1618836295000,
           "tid": 120667,
           "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p695804-ce202",
+      "uid": "stk-banyan",
+      "code": "CE 202",
+      "sec": "info",
+      "ts": 1283378941000,
+      "st": "pub",
+      "data": {
+        "desc": "أعتقــد ان الكــورس بيكــون سهــل لعـــدة أسبـــاب:\n\nأولآ: لانـــه عبارة عــن كورسيـــن مدموجيــن ســـوا ومــن الصعــب ان التعمـــق فيهـــــم عشــان الوقتز\n\nثانيا: الكــورسين اثنيـــنهم مو صعبيـــن في الاصل\n\nثالثا: الدكتــــور اللي بيدرسهـــا … الدليجـــان … متساعد جدا مع الطلاب وأهم شـــي الطلاب يفهـــمون عندهـ\n\nرابعــا: الكورس مو كومن … يعني الدكتور بيمشي على كيفــــهـ وبهــدوء",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ce202/94190/5",
+          "user": "Banyan",
+          "ts": 1283378941000,
+          "tid": 94190,
+          "pn": 5
         }
       }
     },

@@ -58,6 +58,13 @@
       "user": "Mohammed_Al-Hajji"
     },
     {
+      "id": "stk-user2728",
+      "name": "واصل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2728/144/302_2.png",
+      "email": "user2728@import.stkfupm.invalid",
+      "user": "user2728"
+    },
+    {
       "id": "stk-ali-che",
       "name": "Ali-CHE",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/d6d6ee/144.png",
@@ -303,6 +310,29 @@
           "ts": 1766933555348,
           "tid": 120654,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p915433-che306",
+      "uid": "stk-user2728",
+      "code": "CHE 306",
+      "sec": "info",
+      "ts": 1318093673000,
+      "st": "pub",
+      "data": {
+        "desc": "هذي مالها شيء أخبره إلا نوت مدرسكم أو تعتمد على الكتاب\nالكتاب أحسن مافيه الأمثلة واضحة ومشروحة بالتفصيل تلخص لك فكرة الدرس\nوإذا حاب تتعود على الأسئلة وتحل تمارين فيه حلول لأسئلة الهوموركات بالمكتبة اللي بالجبل للدكتور سليم الرحمن\n\nوفيه مياجر قديمة لحبيب العلي بالجمعية اللي بسكن الطلاب\nوفيه برضو مياجر قديمة لبكر أمين (بالجمعية أو بالجبل)\n\nوالان الدكتور بينوس جديد وسوا سلايدات واضحة وملونة عن المادة تقدر تاحذها من موقعه الشخصي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-306/113273/4",
+          "user": "user2728",
+          "ts": 1318093673000,
+          "tid": 113273,
+          "pn": 4
         }
       }
     },

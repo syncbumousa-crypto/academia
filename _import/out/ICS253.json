@@ -44,6 +44,41 @@
       "user": "ahmelq"
     },
     {
+      "id": "stk-bo_rayan",
+      "name": "Bo Rayan",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/bo_rayan/144/2084_2.png",
+      "email": "bo_rayan@import.stkfupm.invalid",
+      "user": "Bo_Rayan"
+    },
+    {
+      "id": "stk-can_you_say",
+      "name": "Can you say",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/e68b1a/144.png",
+      "email": "can_you_say@import.stkfupm.invalid",
+      "user": "Can_you_say"
+    },
+    {
+      "id": "stk-newb",
+      "name": "newb",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/newb/144/1358_2.png",
+      "email": "newb@import.stkfupm.invalid",
+      "user": "newb"
+    },
+    {
+      "id": "stk-everest",
+      "name": "EvErEst",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/96bed5/144.png",
+      "email": "everest@import.stkfupm.invalid",
+      "user": "EvErEst"
+    },
+    {
+      "id": "stk-a.s.g",
+      "name": "A.S.G",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/9fc29f/144.png",
+      "email": "a.s.g@import.stkfupm.invalid",
+      "user": "A.S.G"
+    },
+    {
       "id": "stk-user10429",
       "name": "حسن العوض",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10429/144/2161_2.png",
@@ -112,13 +147,6 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdu1002/144/1155_2.png",
       "email": "abdu1002@import.stkfupm.invalid",
       "user": "Abdu1002"
-    },
-    {
-      "id": "stk-everest",
-      "name": "EvErEst",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/96bed5/144.png",
-      "email": "everest@import.stkfupm.invalid",
-      "user": "EvErEst"
     },
     {
       "id": "stk-abdulrahman97",
@@ -278,6 +306,135 @@
           "ts": 1571884913000,
           "tid": 120840,
           "pn": 20
+        }
+      }
+    },
+    {
+      "id": "stk-p1457407-ics253",
+      "uid": "stk-bo_rayan",
+      "code": "ICS 253",
+      "sec": "info",
+      "ts": 1473517256000,
+      "st": "pub",
+      "data": {
+        "desc": "نعم المادة ماث ويبيلها متابعة وتمرين كثيييير\nاذكر الميجر الثاني كان اعلى واحد ٣٠/٦٠ او حولها\nوالفاينال برضو الافرج كذا\n\nانا في اغلب كورسات الماث جبت A لكن في هالكورس جبت B\n\nف المادة مو سهلة ابدا ولا هي خفيفة\nع الاقل لما اخذتها مع الدكتور عادل (العميد)",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics-253/174621/2",
+          "user": "Bo_Rayan",
+          "ts": 1473517256000,
+          "tid": 174621,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p784955-ics253",
+      "uid": "stk-can_you_say",
+      "code": "ICS 253",
+      "sec": "info",
+      "ts": 1297269369000,
+      "st": "pub",
+      "data": {
+        "desc": "انا نزلت لي 17 ساعة السمستر الجاي\nبس يوم جيت اشوف مواعيد الاختبار في 4 مواد قريبة من بعض\n\nاختبار ال ics253 في يوم ومن بكرة اختبار ال swe 205\nفهل المادتين يبغالهم شغل وفهم\nولا المادتين سهلات\nلاني ناوي احذف ال ics253\nعلشان اقدر الحق اذاكر الفاينلز ما اتوهق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics253-swe-205/102373/1",
+          "user": "Can_you_say",
+          "ts": 1297269369000,
+          "tid": 102373,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p786429-ics253",
+      "uid": "stk-newb",
+      "code": "ICS 253",
+      "sec": "info",
+      "ts": 1297457586000,
+      "st": "pub",
+      "data": {
+        "desc": "> 205 سهله جدا ومادة قريد ، ومثل ما قال دحوم … مادة سواليف\n> حاول تسجل اسئلة الدكتور خالد عن المحاضره السابقه (يقولها اول خمس دقائق من كل محاضره)\n> ايضا يستحسن انك تلخص اللي غطيتوه نهاية كل اسبوع عشان اذا جاء الفاينل تكون مرتاح\n> 253 تتكون من سبعه فصول … +500 صفحه تقريبا\n> تحتاج منك متابعه وحل اسئله بكثرررره … واذا ما كنت من اللي يذاكرون اول باول (تحضير ومراجعه) فصدقني\n> راح تتعب فيها لان منهج الفاينل طوييييل.\n> اذا كنت عند صبري محمود …احرص على حل اسئلة الواجب لانه يجيب الكوزات منها تماما او\n> يجيب نفس الفكره\n\n> الله يوفقك 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics253-swe-205/102373/8",
+          "user": "newb",
+          "ts": 1297457586000,
+          "tid": 102373,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p741512-ics253",
+      "uid": "stk-everest",
+      "code": "ICS 253",
+      "sec": "info",
+      "ts": 1291715977000,
+      "st": "pub",
+      "data": {
+        "desc": "Ics253\n\nانا اخد المادة الحين\nخلصنا من المادة شبترين\n\nالاول يتكلم عن طرق الاثبات: يبدا من الشروط البسيطة وبعدين الشروط المركبة وطرق الاثبات\nالشابتر الثاني اسهل يتكلم عن المجموعات وخصائصها والعمليات الي ممكن تسويها عليها واخر شي المتسلسلات (معظمه اخدنا في المدرسة)\n\nباقي المنهج يدخل في نظرية الاحتمالات ونظرية العد (التوافيق والتباديل) وفي رسم وفي شبتر عن Trees\nهاده الي اقدر اقوله الحين…\n\nبالتوفيق…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics-253/98967/2",
+          "user": "EvErEst",
+          "ts": 1291715977000,
+          "tid": 98967,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p332715-ics253",
+      "uid": "stk-a.s.g",
+      "code": "ICS 253",
+      "sec": "srcU",
+      "ts": 1226692123000,
+      "st": "pub",
+      "data": {
+        "html": "اسف بخصوص الرابط …<br>كان شغال يوم حطيته 😦<br><br>عموما الملفات حطيتها في المرفقات …🙂<br><br>بالتوفيق لك في دراستك …<br><br>​<span data-fid=\"stk-f332715-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br><br>​<span data-fid=\"stk-f332715-1\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br><br>​<span data-fid=\"stk-f332715-2\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br><br>​<span data-fid=\"stk-f332715-3\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f332715-0": {
+            "name": "ICS253-1.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/cc0c849fd924b34fc88a92e5823df19675b730c0e7a9a65528a4d0da4a581095"
+          },
+          "stk-f332715-1": {
+            "name": "ICS253-2.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/e7f58c2b5d6b799276d9aed1d7494a77777afdd1ea2a75fd28f71f00b82f71d7"
+          },
+          "stk-f332715-2": {
+            "name": "ICS253-3.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/d5a9922c635491a1c127c9a4575e90975ddda7fff1dee49674a6830d4b59896d"
+          },
+          "stk-f332715-3": {
+            "name": "ICS253-4.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/99103b254ecc4020637133e22092f4a8451b8a7a8b9d00dd165b84d5b2a24746"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics253/67773/5",
+          "user": "A.S.G",
+          "ts": 1226692123000,
+          "tid": 67773,
+          "pn": 5
         }
       }
     },
