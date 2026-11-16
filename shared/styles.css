@@ -17572,8 +17572,8 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 :is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
 .pk--ftdn .vt-foot { min-height: 0; }
 /* «قائمة · رحلة» لا يظهر والبنكُ فارغ — يظهر حالَ إضافة أوّل شيء (طلبُ صاحب الموقع) */
-#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > .cx-jrseg,
-#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > .cx-jrseg { display: none !important; }
+#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk),
+#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk) { display: none !important; }
 /* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
 /* التذييلُ المطويّ بطول الترويسة المطويّة (طلبُ صاحب الموقع): ‎20px‎ بين الكتل وحافّة المربّع، والمسكةُ على الحافّة كمسكة الرأس */
@@ -18549,3 +18549,22 @@ html[data-theme="dark"] .cd-ch:hover, html[data-theme="dark"] .cd-ch:focus-visib
 .cd-stage.is-choosing #cd-card .cd-body, .cd-stage.is-choosing #cd-card .cd-foot, .cd-stage.is-choosing #cd-card .cd-meta > :not(.cd-bar) { visibility: hidden; }
 /* وأزرارُ النافذة (إغلاقٌ وتصغير) ظاهرةٌ فوق اللوحة — لمن غيّر رأيه */
 .cd-stage.is-choosing .cd-chooser { inset: 47px 0 0; border-radius: 0 0 14px 14px; }
+
+/* ===== زرُّ ⋮ «طريقة العرض» في تذييل البنك: دائرةٌ صغيرة، وفوقها عنوانٌ ومقسومُ «رحلة · قائمة» ===== */
+.cx-jrk { margin-inline-start: 6px; }
+.cx-plus.cx-jrk .cx-jrk__tg { width: 36px; height: 36px; padding: 0; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--u-line, #d9dfe3);
+  background: var(--u-surf, #fff); color: var(--u-ink, #14233f); cursor: pointer; }
+.cx-plus.cx-jrk .cx-jrk__tg svg { width: 17px; height: 17px; }
+.cx-plus.cx-jrk.is-open .cx-jrk__tg > svg { transform: none; }
+.cx-plus.cx-jrk.is-open .cx-jrk__tg, .cx-plus.cx-jrk .cx-jrk__tg:hover { background: #f3f5f6; }
+.cx-jrk__menu { gap: 8px; padding: 10px 12px 12px; }
+.cx-jrk__h { font-size: 11.5px; font-weight: 700; color: #7a8592; text-align: start; }
+.pk--edit .cx-jrk__menu .cx-jrseg { display: flex; padding: 3px; border-radius: 99px; background: #f3f5f6; }
+.pk--edit .cx-jrk__menu .cx-jrseg button { height: 32px; padding: 0 14px; border-radius: 99px; gap: 6px; font-size: 13px; font-weight: 700; color: #5d6b7a; background: transparent; }
+.pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #fff; color: #14233f; box-shadow: 0 2px 6px -2px rgba(20, 35, 63, .3); }
+html[data-theme="dark"] .cx-plus.cx-jrk .cx-jrk__tg { background: #2f3b45; border-color: rgba(255, 255, 255, .12); color: #e6ecef; }
+html[data-theme="dark"] .cx-plus.cx-jrk.is-open .cx-jrk__tg, html[data-theme="dark"] .cx-plus.cx-jrk .cx-jrk__tg:hover { background: #36434a; }
+html[data-theme="dark"] .cx-jrk__h { color: #9fb0b8; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg { background: #1a2226; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button { color: #9fb0b8; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #36434a; color: #e6ecef; }
