@@ -18457,3 +18457,21 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 /* صورةُ الغلاف تظهر حين تكتمل لا وهي تصل (‎bookHTML‎) — والوجهُ المرسومُ تحتها حتى ذلك */
 .bk .bkface--img > img { opacity: 0; transition: opacity .22s ease; aspect-ratio: auto .7; }   /* وقبل أن يُعرف مقاسُها: بنسبة المرسوم، فلا ينطوي الكتابُ إلى عرضٍ صفرٍ يُخفي المرسومَ تحته */
 .bk .bkface--img > img.is-in { opacity: 1; }
+
+/* ===== دعوةُ اختيار القسم في رفّ السوق (الاقتراح ٤): مساهماتٌ مغبّشةٌ وبطاقةٌ فوقها ===== */
+.cm-pick { position: relative; padding: 14px 4px 6px; min-height: 170px; }
+.cm-pick__ghost { display: flex; flex-direction: column; gap: 14px; opacity: .38; filter: blur(1.2px); pointer-events: none; }
+.cm-pick__row { display: flex; gap: 10px; align-items: flex-start; }
+.cm-pick__av { width: 34px; height: 34px; border-radius: 50%; flex: none; background: color-mix(in srgb, var(--u-brand, #2c5e65) 22%, var(--u-surface-2, #eef2f3)); }
+.cm-pick__ln { flex: 1; display: flex; flex-direction: column; gap: 9px; padding-top: 6px; }
+.cm-pick__ln i { display: block; height: 9px; border-radius: 5px; background: color-mix(in srgb, var(--u-mut, #6b7686) 25%, transparent); }
+.cm-pick__msg { position: absolute; inset: 0; margin: auto; width: fit-content; height: fit-content; display: flex; align-items: center; gap: 10px;
+  background: var(--u-surface, #fff); border: 1px solid var(--u-line, rgba(20, 35, 63, .1)); border-radius: 14px; padding: 12px 18px;
+  box-shadow: 0 10px 30px -14px rgba(20, 35, 63, .35); font-size: 14px; font-weight: 600; color: var(--u-ink, #14233f); }
+.cm-pick__msg svg { width: 20px; height: 20px; fill: none; stroke: var(--u-brand, #2c5e65); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: cm-pick-up 1.6s ease-in-out infinite; }
+@keyframes cm-pick-up { 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .cm-pick__msg svg { animation: none; } }
+html[data-theme="dark"] .cm-pick__msg { background: var(--u-surface, #182026); border-color: rgba(255, 255, 255, .09); color: #e6ecef; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] .cm-pick__av { background: color-mix(in srgb, #7fb7bd 22%, #1d272e); }
+html[data-theme="dark"] .cm-pick__ln i { background: rgba(255, 255, 255, .1); }
+html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
