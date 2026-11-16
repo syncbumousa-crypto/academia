@@ -25051,6 +25051,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       b.gl = M.createBook2(THREE, b.stage, {
         n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
+        rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
