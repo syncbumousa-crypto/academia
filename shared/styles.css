@@ -18686,3 +18686,8 @@ html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-w
    المساحات (‎--pk-blk‎) فتذوب فيه. فصارت خلفيّتُها خلفيّةَ الصفحة (‎--bg‎) بلا صبغة — كما تبدو المساهمةُ في مكانها */
 #cm-body.is-cxfull, html[data-theme="dark"] #cm-body.is-cxfull { background: var(--bg, #fff); }
 #cm-body.is-cxfull .post.pk--max, #cm-body.is-cxfull .post.pk--maxpub { background: transparent; }
+/* وأطرافُ الشاشة الكاملة منحنيةٌ كأطراف المساهمة في مكانها (طلبُ صاحب الموقع). والحركةُ تقرأ الانحناءَ من هنا
+   (‎cxMorph‎ يأخذ ‎borderRadius‎ المحسوب)، فتنتقل إليه بلا سطرٍ آخر */
+#cm-body.is-cxfull { border-radius: 18px; }
+/* ومسكةُ التضييق تدخل ‎6px‎ مع الانحناءة فتسكن جوفَ القوس ولا يقصّها الطرف */
+#cm-body.is-cxfull .pk--max .pk-max.pk-max--curve.pk-shrink { top: -6px; inset-inline-end: -10px; }
