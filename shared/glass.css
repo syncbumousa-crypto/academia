@@ -647,3 +647,162 @@ img.emo {
   object-fit: contain;
   user-select: text;
 }
+
+/* ============================================================
+   قائمةُ الدكاترة زجاجٌ كلوحة فلاتر البحث (‎.market-tools .fpanel‎) — طلبُ صاحب الموقع
+   ============================================================
+   الصبغةُ نفسُها (‎--glass‎ بكثافة ٨٤٪)، والحرفُ (‎--glass-edge‎)، والظلُّ (‎--glass-cast‎)،
+   والتمويهُ ٢٠ مع تشبيع ١٧٠، وزاويةُ اللوح الواسعة (٢٦)، ورقاقاتٌ كبسولات، والمختارُ
+   بتروليٌّ ممتلئ كالمختار في الفلاتر. والفواصلُ حبرٌ بثمانية في المئة كفواصل المجموعات. */
+html:root .post-menu__list.cm-docmenu {
+  border: 0; border-radius: 26px; padding: 16px 18px; min-width: 404px; max-width: calc(100vw - 32px);
+  /* ===== وشفّافٌ يُرى ما خلفه =====
+     بكثافة لوح البحث (٨٤٪) وتمويه ٢٠ لم يُرَ خلفَه شيء: لوحُ البحث فوق أغلفةٍ ملوّنةٍ
+     يَبين لونُها، وهذه فوق نصٍّ أبيضَ رفيعٍ على داكن يذوب كلُّه. فصارت بكثافة الشريط
+     الجانبيّ (‎--glass-mix‎) وتمويهٍ أخفّ — فيَبين ما خلفها ظلالًا، ويبقى ما عليها يُقرأ. */
+  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list.cm-docmenu { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .cm-docmenu { animation: lg-pop .26s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .cm-docmenu { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list.cm-docmenu { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+/* الترتيب: مجموعةٌ أولى، وتحتها فاصلٌ كفاصل المجموعات */
+html:root .cm-docmenu .cm-sortgrp {
+  gap: 6px; padding-bottom: 13px; margin-bottom: 13px;
+  border-bottom: 1px solid color-mix(in srgb, var(--glass-ink) 8%, transparent);
+}
+/* العنوانُ كعنوان المجموعة (‎.fgroup__t‎) */
+html:root .cm-docmenu .cm-docmenu__t { margin-bottom: 10px; }
+html:root .cm-docmenu .cm-docmenu__t > span { font-size: 12px; font-weight: 700; color: color-mix(in srgb, var(--glass-ink) 72%, transparent); }
+/* الرقاقات: الترتيبُ والترمات — كبسولاتٌ كرقاقات الفلاتر */
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt,
+html:root .cm-docmenu .drl-term {
+  border-radius: 999px; border: 1px solid color-mix(in srgb, var(--glass-ink) 12%, transparent);
+  background: color-mix(in srgb, #fff 55%, transparent); color: var(--glass-ink);
+  font-size: 12.5px; font-weight: 600; transition: background .15s, color .15s, border-color .15s;
+}
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt { padding: 7px 13px; }
+html:root .cm-docmenu .drl-term { height: 30px; padding: 0 12px; }
+html[data-theme="dark"]:root .cm-docmenu .cm-sortgrp .cm-sortopt,
+html[data-theme="dark"]:root .cm-docmenu .drl-term { background: rgba(255,255,255,.06); }
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt:hover,
+html:root .cm-docmenu .drl-term:hover { border-color: color-mix(in srgb, var(--glass-ink) 24%, transparent); }
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt.on,
+html:root .cm-docmenu .drl-term.on { background: var(--c-kfupm, #2c5e65); border-color: transparent; color: #fff; font-weight: 700; }
+html:root .cm-docmenu .drl-term span { opacity: .5; font-weight: 400; }
+html:root .cm-docmenu .drl-term.on span { opacity: .75; }
+/* البحث: كبسولةٌ كبحث التخصّصات (‎.fcol-search‎) */
+html:root .cm-docmenu .drl-q {
+  height: 36px; border-radius: 999px; border: 0; padding: 0 14px;
+  background: color-mix(in srgb, var(--glass-ink) 5%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 10%, transparent);
+}
+html:root .cm-docmenu .drl-q svg { color: color-mix(in srgb, var(--glass-ink) 55%, transparent); }
+html:root .cm-docmenu .drl-qin { color: var(--glass-ink); }
+html:root .cm-docmenu .drl-qin::placeholder { color: color-mix(in srgb, var(--glass-ink) 45%, transparent); }
+/* الصفوف: فاصلٌ فوقها، وزاويةٌ = زاويةُ اللوح − حشوتُه */
+html:root .cm-docmenu .drl-list {
+  margin-top: 4px; padding-top: 10px; border-top: 0;
+  /* ===== والشريطُ رفيعٌ هادئٌ ملتصقٌ بحدّ اللوح =====
+     كان يرث لونَ إطاره (ذهبيٌّ عريضٌ بسهمين) ويقف حيث تنتهي الصفوف، فتبقى بينه وبين
+     حرف اللوح حشوةٌ خاوية. فتمتدّ القائمةُ في حشوة اللوح إلى ستّة بكسلات من حرفه،
+     والشريطُ أربعةُ بكسلات بحبرٍ شفّاف بلا أسهم. والفاصلُ فوقها خلفيّةٌ بعرض المحتوى
+     لا حدٌّ: الحدُّ كان سيمتدّ معها إلى الحرف. */
+  margin-inline-end: -12px; padding-inline-end: 10px;
+  background: linear-gradient(color-mix(in srgb, var(--glass-ink) 8%, transparent), color-mix(in srgb, var(--glass-ink) 8%, transparent)) no-repeat top right / calc(100% - 12px) 1px;
+  scrollbar-width: auto; scrollbar-color: auto;
+}
+html[data-lang="en"]:root .cm-docmenu .drl-list { background-position: top left; }
+html:root .cm-docmenu .drl-list::-webkit-scrollbar { width: 4px; }
+html:root .cm-docmenu .drl-list::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+html:root .cm-docmenu .drl-list::-webkit-scrollbar-track { background: transparent; margin: 12px 0 6px; }
+html:root .cm-docmenu .drl-list::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--glass-ink) 20%, transparent); border-radius: 99px; }
+html:root .cm-docmenu .drl-list::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--glass-ink) 36%, transparent); }
+@supports not selector(::-webkit-scrollbar) {
+  html:root .cm-docmenu .drl-list { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--glass-ink) 20%, transparent) transparent; }
+}
+html:root .cm-docmenu .drl-row { border-radius: 14px; border: 0; color: var(--glass-ink); }
+html:root .cm-docmenu .drl-row:hover { background: color-mix(in srgb, var(--glass-ink) 6%, transparent); }
+html:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-kfupm, #2c5e65) 70%, transparent);
+}
+html[data-theme="dark"]:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, #4f9aa4 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #4f9aa4 70%, transparent);
+}
+html:root .cm-docmenu .drl-av { background: color-mix(in srgb, var(--glass-ink) 10%, transparent); }
+html:root .cm-docmenu .drl-av--all { color: color-mix(in srgb, var(--glass-ink) 65%, transparent); }
+html:root .cm-docmenu .drl-n,
+html:root .cm-docmenu .drl-rt i,
+html:root .cm-docmenu .drl-none { color: color-mix(in srgb, var(--glass-ink) 55%, transparent); }
+
+/* ============================================================
+   قائمةُ الترتيب في بقيّة التبويبات (‎cmSortBar‎) — زجاجُ قائمة الدكاترة نفسُه (طلبُ صاحب الموقع)
+   ============================================================
+   الصبغةُ بكثافة الشريط والتمويهُ الأخفّ والحرفُ والظلُّ كقائمة الدكاترة. وهي صغيرة (خياران)،
+   فزاويتُها ١٨ لا ٢٦ — كقائمة المصادر (‎.psp-box‎) — وزاويةُ الخيار = زاويتُها − حشوتُها.
+   والمختارُ بتروليٌّ ممتلئٌ كرقاقات الترتيب في قائمة الدكاترة. */
+html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) {
+  border: 0; border-radius: 18px; padding: 5px; min-width: 132px;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .cm-sort__list:not(.cm-docmenu) { animation: lg-pop .22s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .cm-sort__list:not(.cm-docmenu) { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt {
+  border-radius: 13px; padding: 9px 13px; color: var(--glass-ink); font-weight: 600;
+  transition: background .15s, color .15s;
+}
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt + .cm-sortopt { margin-top: 2px; }
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt:hover { background: color-mix(in srgb, var(--glass-ink) 8%, transparent); }
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt.on { background: var(--c-kfupm, #2c5e65); color: #fff; font-weight: 700; }
+
+/* ============================================================
+   قائمةُ النقاط الثلاث (تعديل · حذف · إبلاغ · تثبيت) — الزجاجُ نفسُه (طلبُ صاحب الموقع)
+   ============================================================
+   كقائمة الترتيب: زاويةٌ ١٨ وحشوةٌ ٥ وخيارٌ بزاوية ١٣. والحذفُ يبقى أحمرَ يُعرف من بعيد،
+   وحين يُمَرّ عليه يمتلئ بحمرةٍ خفيفة. */
+html:root .post-menu__list:not(.cm-sort__list) {
+  border: 0; border-radius: 18px; padding: 5px; min-width: 132px;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list:not(.cm-sort__list) { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .post-menu__list:not(.cm-sort__list) { animation: lg-pop .22s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .post-menu__list:not(.cm-sort__list) { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list:not(.cm-sort__list) { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+html:root .post-menu__list:not(.cm-sort__list) button {
+  border-radius: 13px; padding: 9px 13px; color: var(--glass-ink); font-weight: 600;
+  transition: background .15s, color .15s;
+}
+html:root .post-menu__list:not(.cm-sort__list) button + button { margin-top: 2px; }
+html:root .post-menu__list:not(.cm-sort__list) button:hover { background: color-mix(in srgb, var(--glass-ink) 8%, transparent); }
+html:root .post-menu__list:not(.cm-sort__list) button:disabled { opacity: .5; cursor: default; background: transparent; }
+html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger) { color: #c0564b; }
+html[data-theme="dark"]:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger) { color: #e08377; }
+html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger):hover { background: color-mix(in srgb, #c75b5b 16%, transparent); }

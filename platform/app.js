@@ -4360,6 +4360,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let ehIdx = 0;                           // الفترة المكتبية قيد التحرير حاليًا (مستطيل واحد بعدّاد وسهمين)
   let topicIdx = 0;                        // الموضوع المعروض في مستطيل «مواضيع المادة» بمحرّر «المادة»
   let cmDocSel = null;                     // الدكتور المختار في تبويب الدكاترة (null = شبكة الدكاترة)
+  let docTerm = null, docQ = '';            // ترمُ قائمة الدكاترة (‎null‎ = أحدثُ ترمٍ للمادّة) وبحثُها
   let docCarIdx = 0;                       // شريحة منتقي الدكاترة الأفقي المعروضة (٠ = كل الدكاترة)
   let cmSrcSel = null;                      // القناة المختارة في «المصادر» (null = تقسيم فهم/ممارسة · srcU · srcP)
   /* ===== التكبير (ROADMAP-EXPAND) =====
@@ -4385,6 +4386,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     dtAbs = new Set();    /* ومفاتيح التاريخ تعود إلى الزمن النسبيّ */
     cmDocSel = null;      /* الدكاترة تفتح على الشبكة */
     docCarIdx = 0;        /* والمنتقي يعود إلى «كل الدكاترة» */
+    docTerm = null; docQ = '';   /* وقائمةُ الدكاترة تعود إلى أحدث ترمٍ بلا بحث */
     cmSrcSel = null;      /* المصادر تفتح على تقسيم فهم/ممارسة */
     vidView = { open: null, fold: {} };    /* كومنتات «الشروح» تفتح مسفوطة */
     cardView = { open: null, fold: {} };   /* وكومنتات «البطائق» كذلك */
@@ -4639,6 +4641,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كان الترحيلُ مشروطًا بـ‎if (!info.doctors)‎، فمساهمةٌ تصل بعد أوّل بناءٍ للقائمة
      لا يراها أحد — والجذبُ يقع بعد الرسم دائمًا. */
   const DOC_WIRE = ['e', 'bld', 'room', 'hours', 'teach', 'grade', 'd'];
+  /* ===== وصفٌّ لا فيه إلّا الاسمُ وسمٌ لا مساهمة =====
+     قائمةُ دكاترة المادّة تُنشر صفوفًا في مساهمةِ الموقع (‎docRow‎)، فكان كلُّ صفٍّ
+     يصير مساهمةً تحت دكتوره — لا فيها إلّا وسمُه، باسم «أكاديميا» عند الناس
+     و«أنا» عند صاحب الموقع. وهي ثمانُ مئةٍ وتسعٌ وسبعون مادّة. فالصفُّ الخاوي
+     يُعرِّف الدكتورَ ولا يَلِد مساهمة. */
+  const docRowEmpty = d => !d || DOC_WIRE.every(k => {
+    const v = d[k];
+    if (k === 'hours') return !(Array.isArray(v) && v.some(h => h && (h.from || h.to)));
+    return v === undefined || v === null || v === '' || v === 0;
+  });
   /* ووصلُ مساهمتي بصفّها. وما كُتب قبل السلك — في دُرجٍ مضى — يُنقل إلى الصفّ
      ولا يُكتب فوق ما فيه: الصفُّ أحدثُ، لأنّه هو الذي يُكتب اليوم */
   function docLink(p, row) {
@@ -4707,6 +4719,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
            عنده تحت الدكتور، فلولا الوصلُ ههنا لَبقي المربّعُ خاويًا وفي يده متنُه */
         if (mine) {
           let p = (dr.posts || []).find(isMine);
+          if (!p && docRowEmpty(d)) return;      /* اسمٌ وحدَه: وسمٌ لا مساهمة */
           if (!p) {
             p = { id: newId(), me: true, uid: post.uid || actingAs(),
                   u: post.u || { name: T().meName }, likes: 0, liked: false,
@@ -4717,6 +4730,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         const who = key(post);
         let p = (dr.posts || []).find(x => x && !x.me && key(x) === who);
+        if (docRowEmpty(d)) {                     /* اسمٌ وحدَه: وسمٌ لا مساهمة — وما وُلد منه قبلُ يُنزع */
+          if (p) { dr.posts = dr.posts.filter(x => x !== p); hit++; }
+          return;
+        }
         const data = {};
         DOC_WIRE.forEach(k => { if (d[k] !== undefined) data[k] = d[k]; });
         /* ===== والمنقولُ يحمل أصلَه وتاريخَه =====
@@ -4747,6 +4764,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!info.doctors) info.doctors = [];
     const seen = {};
     let hit = docAbsorb(code, info, seen);
+    /* ===== وما وُلد من صفٍّ خاوٍ في مساهمتي يُكنس مرّةً =====
+       عند صاحب الموقع صفوفُ القائمة صفوفُه (‎mine‎)، فكانت لكلّ دكتورٍ مساهمةٌ
+       خاويةٌ باسم «أنا». تُكنس مرّةً لكلّ مادّة لا مع كلّ رسم: مساهمتي تولد خاويةً
+       لحظةَ فتح محرّرها (‎myDrPost‎)، ولو كُنست كلَّ مرّةٍ لَذهبت وهي تُكتب. */
+    if (!info.drSweep1) {
+      info.doctors.forEach(dr => {
+        const n = (dr.posts || []).length;
+        dr.posts = (dr.posts || []).filter(p => !p || !p.me || !docRowEmpty(p.data));
+        if (dr.posts.length !== n) hit++;
+      });
+      info.drSweep1 = 1; hit++;
+    }
     /* ============================================================
        والقائمةُ تُنشر من اللوحة وحدَها
        ============================================================
@@ -6463,20 +6492,66 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* عدّاد «الجزء من الكل» بنفس نمط عدّاد الفترات: عناصر منفصلة يرتّبها اتجاه الصندوق */
   const drCarNumHTML = (i, n) => `<b class="hn-i">${i}</b><i class="hn-s">/</i><b class="hn-t">${n}</b>`;
-  /* شريط ترتيب تبويب الدكاترة: نفس زر الهمبرغر — قائمته = فرز (الأفضل/الأحدث) + منتقي الدكاترة الأفقي */
+  /* ============================================================
+     قائمةُ الدكاترة: ترماتٌ ثمّ بحثٌ ثمّ صفوف
+     ============================================================
+     كان المنتقي شريحةً بين سهمين: دكتورٌ واحدٌ يُرى، والباقون خلف نقراتٍ لا يُعرف عددُها.
+     فصار قائمةً كاملةً تُصفّى بترمٍ من جدول الطرح (‎DOCTOR_TERMS‎ في
+     ‎shared/doctor-terms.js‎) — أحدثُ ترمٍ للمادّة مختارٌ ابتداءً، ومعه آخرُ ثلاثةٍ قبله و«الكل».
+     ودكتورٌ لا يُعرف له ترم (اسمٌ بالعربيّة، أو لم يرد في الجدول) يظهر في «الكل» وحدَها. */
+  document.addEventListener('input', e => {
+    const i = e.target && e.target.closest && e.target.closest('.drl-qin');
+    if (!i) return;
+    docQ = i.value;
+    const q = docQ.trim().toLowerCase();
+    const box = i.closest('.drl');
+    if (box) box.querySelectorAll('.drl-row[data-n]').forEach(r => { r.hidden = !!q && r.dataset.n.indexOf(q) < 0; });
+  });
+  const drTermKey = n => String(n || '').toLowerCase()
+    .replace(/^\s*(dr|mr|mrs|ms|prof)\.?\s+/, '').replace(/^\s*[دأ]\s*\.\s*/, '')
+    .replace(/[ً-ْ]/g, '').replace(/[^a-z؀-ۿ]+/g, '');
+  const drL = (ar, en) => (state.lang === 'en' ? en : ar);
+  function drlInner(doctors) {
+    const R = (window.DOCTOR_TERMS || {})[cmCode] || null;
+    const terms = R ? R.t.slice(0, 4) : [];
+    const termsOf = dr => (R && R.d[drTermKey(dr && dr.name)]) || [];
+    if (docTerm == null || (docTerm !== 'all' && terms.indexOf(docTerm) < 0)) docTerm = terms[0] || 'all';
+    const inTerm = dr => docTerm === 'all' || termsOf(dr).indexOf(docTerm) > -1;
+    const STAR = '<svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.7l1.4-6.8L1.3 9l6.9-.7z"/></svg>';
+    const ALL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19a6 6 0 0 1 12 0"/><path d="M16.5 5.5a3 3 0 0 1 0 5.4"/><path d="M18 19a5.5 5.5 0 0 0-2-4.3"/></svg>';
+    const rank = a => (a.avg == null ? -1 : a.avg);
+    const list = doctors.map((dr, di) => ({ dr, di, avg: avgDocRating(dr) }))
+      .filter(x => x.dr && inTerm(x.dr)).sort((a, b) => rank(b) - rank(a));
+    const chips = terms.length ? `<div class="drl-terms" role="group" aria-label="${drL('الترم', 'Term')}">${terms.concat('all').map(t => {
+        const on = docTerm === t;
+        const n = t === 'all' ? doctors.length : doctors.filter(d => termsOf(d).indexOf(t) > -1).length;
+        return `<button type="button" class="drl-term${on ? ' on' : ''}" data-drterm="${t}" aria-pressed="${on}">${t === 'all' ? drL('الكل', 'All') : t}<span>${n}</span></button>`;
+      }).join('')}</div>` : '';
+    const q = docQ.trim().toLowerCase();
+    const search = `<label class="drl-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>`
+      + `<input type="search" class="drl-qin" value="${esc(docQ)}" placeholder="${drL('ابحث عن دكتور', 'Search instructors')}" aria-label="${drL('ابحث عن دكتور', 'Search instructors')}"></label>`;
+    const allRow = `<button type="button" class="drl-row drfilter${cmDocSel == null ? ' on' : ''}" data-drfilter="all">
+        <span class="drl-av drl-av--all">${ALL}</span>
+        <b class="drl-nm">${docTerm === 'all' ? T().allDoctors : drL('كل دكاترة ترم ' + docTerm, 'All instructors · ' + docTerm)}</b>
+        <span class="drl-n">${list.length}</span></button>`;
+    const rows = list.map(x => {
+      const nm = String(x.dr.name || '');
+      const cnt = (x.dr.posts || []).length;
+      return `<button type="button" class="drl-row drfilter${cmDocSel === x.di ? ' on' : ''}" data-drfilter="${x.di}" data-n="${esc(nm.toLowerCase())}"${q && nm.toLowerCase().indexOf(q) < 0 ? ' hidden' : ''}>
+        <span class="drl-av">${drAvatar(x.dr)}</span>
+        <b class="drl-nm">${esc(nm) || '—'}</b>
+        <span class="drl-rt"><b>${x.avg != null ? STAR + x.avg.toFixed(1) : '—'}</b><i>${cnt ? drL(cnt + ' تقييم', cnt + ' reviews') : drL('بلا تقييم', 'no reviews')}</i></span></button>`;
+    }).join('');
+    const none = list.length ? '' : `<p class="drl-none">${drL('لا دكاترة في هذا الترم', 'No instructors in this term')}</p>`;
+    return chips + search + `<div class="drl-list">${allRow}${rows}${none}</div>`;
+  }
+  /* شريط ترتيب تبويب الدكاترة: نفس زر الهمبرغر — قائمته = فرز (الأفضل/الأحدث) + قائمة الدكاترة */
   function cmDocBar(doctors, n) {
     const ARW = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${d > 0 ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'}"/></svg>`;
     /* المنتقي الأفقي: سهم يمين (السابق) · البطاقة · سهم يسار (التالي) — ثم العدّاد تحتهم */
     const slides = drCarSlides(doctors);
     if (docCarIdx >= slides.length) docCarIdx = 0;
-    const rows = `<div class="drcar" data-total="${slides.length}">
-        <div class="drcar__row">
-          <button type="button" class="drcar-nav" data-d="-1" aria-label="${T().prevDoctor}">${ARW(-1)}</button>
-          <div class="drcar__body">${drCarCardHTML(slides[docCarIdx], docCarIdx)}</div>
-          <button type="button" class="drcar-nav" data-d="1" aria-label="${T().nextDoctor}">${ARW(1)}</button>
-        </div>
-        <div class="drcar__num">${drCarNumHTML(docCarIdx + 1, slides.length)}</div>
-      </div>`;
+    const rows = `<div class="drl">${drlInner(doctors)}</div>`;
     /* دكتور محدَّد في الفلتر: مستطيل يسار زر الفلتر بصورته واسمه — إشارة أن هناك تصفية فعّالة */
     const selDr = cmDocSel != null ? doctors[cmDocSel] : null;
     const activeChip = selDr
@@ -34986,6 +35061,17 @@ void main() {
     }
     /* تصفية مساهمات الدكاترة حسب دكتور (أو الكل) من جدول قائمة الهمبرغر */
     /* أسهم المنتقي الأفقي: تبديل الشريحة في مكانها (بلا إعادة رسم) فتبقى القائمة مفتوحة */
+    /* قائمةُ الدكاترة: الترمُ يُعيد رسمَ القائمة في مكانها فتبقى مفتوحة، والبحثُ لا يُغلقها */
+    const dtm = e.target.closest('.drl-term');
+    if (dtm) {
+      docTerm = dtm.dataset.drterm;
+      const box = dtm.closest('.drl');
+      /* ويُرسم بعد أن تفرغ الضغطةُ من مستمعاتها: لو بُدّل الزرُّ تحتها الآن لَخرج من الصفحة،
+         فيقرؤه مستمعُ الإغلاق العامّ نقرةً خارج القائمة ويُغلقها */
+      if (box) setTimeout(() => { box.innerHTML = drlInner(doctorsOf(cmCode)); }, 0);
+      return;
+    }
+    if (e.target.closest('.drl-q')) return;
     const dcn = e.target.closest('.drcar-nav');
     if (dcn) {
       const car = dcn.closest('.drcar'), n = +car.dataset.total || 1;

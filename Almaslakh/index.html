@@ -23,14 +23,14 @@
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
   <script>
-    window.AC_MINV = 911;
+    window.AC_MINV = 920;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
 
   <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
        — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
-  <link rel="stylesheet" href="../shared/glass.css?v=24">
+  <link rel="stylesheet" href="../shared/glass.css?v=29">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -826,6 +826,7 @@
   <script src="../platform/api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
+  <script src="../shared/doctor-terms.js?v=1"></script>
   <!-- فهرس وجوه المجلدات: أسماء ملفات emoji/ — يُقرأ في منتقي وجه المجلد -->
   <script src="../platform/emoji.js"></script>
   <!-- المحرّكُ مضغوطًا في المنشور. والمضغوطُ يتحقّق أوّلَ سطرٍ فيه أنّه بُني لهذه النسخة (‎AC_VER‎) فيرفع ‎AC_MINOK‎ -->
