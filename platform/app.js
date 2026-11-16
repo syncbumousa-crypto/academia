@@ -11811,7 +11811,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يحيط بما فيه ويكبر معه، وموضعُه في أبيه آليٌّ (صفٌّ تحت بطائق الأب) أو ما سُحب إليه (‎g.zone‎ نسبةً إلى أصل الأب).
      ولا تتراكب المناطق: ما يصطدم بسابقه يُدفع تحته. ومن فتح المجلدَ الداخليَّ وحدَه رأى منطقتَه وحدها،
      ومن فتح أباه رأى الكلَّ فيسحب بينها ويصل */
-  const KZ = { P: 20, H: 36, G: 44 };
+  const KZ = { P: 20, H: 20, G: 44 };   /* بلا رأسٍ ظاهر (طلبُ صاحب الموقع): الحشوةُ من الأعلى كسائر الجهات */
   const KCVHOST = new Map();   // مفتاحُ اللوح ← مجلدُه المفتوح (يُقرأ عند الترتيب والسحب)
   function kcvHTML(id, sel, host, cards0, ro, pack) {
     const key = kcvKey(id, sel), V = PKCV.get(key);
@@ -11832,7 +11832,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
-      + zs.map(g => `<div class="kcv-zone" data-kzone="${esc(g.id)}" style="--zc:${folderColor(g)}"><div class="kcv-zh"${ro ? '' : ' data-kzh="1"'}>${pkFi(folderColor(g))}<b>${esc(g.name || T().pkTitlePh)}</b></div></div>`).join('')
+      /* المنطقةُ خفيّةٌ (طلبُ صاحب الموقع: اللوحُ يبدو واحدًا بلا إطارٍ ولا اسمٍ ولا أيقونة) — تبقى للترتيب بلا تراكب،
+         ولمعرفة المجلد الذي تُفلت فيه بطاقةٌ أو تُضاف */
+      + zs.map(g => `<div class="kcv-zone" data-kzone="${esc(g.id)}" aria-hidden="true"></div>`).join('')
       + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"><defs>`
       + `<marker id="kcv-ar" class="kcv-ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `<marker id="kcv-ar-sel" class="kcv-ar kcv-ar--sel" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
