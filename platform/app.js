@@ -10890,7 +10890,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = pkSrcCovKey(id);
     if (!await chIdb('readwrite', key, img)) { toast(T().chSaveFail); return; }
     if (pkSrcCovUrl[key]) { URL.revokeObjectURL(pkSrcCovUrl[key]); delete pkSrcCovUrl[key]; }
-    (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, ts: Date.now() };
+    (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, cv: PK_COV_V, ts: Date.now() };
     pkSrcMark(id); save(); renderCmSection();
   }
   /* ===== «غلاف المادة»: الغلافُ المرسومُ الذي يلبسه الموقعُ مادّةً بلا غلاف (‎bookFace‎ و‎.bk--ph .bkface‎) =====
@@ -10912,6 +10912,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (num) g.fillText(num, W / 2, H / 2 + ls * .55);
     const blob = await new Promise(r => c.toBlob(r, 'image/png'));
     if (blob) await pkSrcCovSet(id, new File([blob], (code || 'cover') + '.png', { type: 'image/png' }));
+  }
+  /* ===== لونُ الكتاب من غلافه الفعليّ — مصدرٌ واحد =====
+     الغلافُ الذي على الكتاب إمّا صورةٌ مرفوعة (أو «غلاف المادة») وإمّا صفحةٌ من الملفّ (‎covPg‎) — ويُقرأ اللونُ منه هو بـ‎covPick‎.
+     يُحفظ مع اللون ما حُسب منه (‎coverOf‎)، فإذا تبدّل الغلافُ (صفحةٌ أخرى، رفعٌ، حذف) أو كان بطريقةٍ قديمة (‎coverV‎) حُسب من جديد
+     قبل أن يُبنى الكتاب. ‏‎PK_COV_V‎ نسخةُ الطريقة */
+  const PK_COV_V = 3;
+  async function pkSrcColorSync(id, doc) {
+    const meta = pkSrcMeta(id), cv = pkSrcCovMeta(id); if (!meta) return;
+    if (cv) {
+      if (cv.cv === PK_COV_V) return;
+      try {
+        const blob = await chIdb('readonly', pkSrcCovKey(id)), bmp = blob && await createImageBitmap(blob);
+        if (bmp) { const c = document.createElement('canvas'); c.width = 96; c.height = Math.max(1, Math.round(96 * bmp.height / bmp.width)); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height); bmp.close && bmp.close(); cv.color = covPick(c); }
+      } catch (e) {}
+      cv.cv = PK_COV_V; save(); return;
+    }
+    const of = 'pg' + (meta.covPg || 1);
+    if (meta.coverV === PK_COV_V && meta.coverOf === of) return;
+    meta.cover = await bkCoverColor(doc, meta.covPg || 1).catch(() => null);
+    meta.coverV = PK_COV_V; meta.coverOf = of; save();
   }
   async function pkSrcCovDel(id) {
     const key = pkSrcCovKey(id);
@@ -11108,7 +11128,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       bkLoadSet(key, 45, 62);
-      if (meta && meta.coverV !== 2) { meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = 2; save(); }   /* ‏‎coverV‎: بطريقة اللون الحاليّة (القديمةُ كانت تترك الأغلفةَ الفاتحة) */
+      await pkSrcColorSync(id, doc);
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
          فلا يُنتزع القارئُ من صفحته مع كلّ رسمة */
@@ -23963,15 +23983,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (Math.max(r, g, b) - Math.min(r, g, b) > 45) add(sat, r, g, b);
     }
     const top = m => { let best = null; m.forEach(e => { if (!best || e[3] > best[3]) best = e; }); return best && best.map((v, j) => j < 3 ? v / best[3] : v); };
-    const shade = (c, f) => `rgb(${c.slice(0, 3).map(v => Math.round(v * f)).join(',')})`;
+        /* والغامقُ جدًّا يُرفع قليلًا فيُرى الكعبُ لا ظلًّا، والأبيضُ بلا لونٍ مشبعٍ كتابٌ ورقيٌّ فاتح (لا اللونُ الافتراضيّ) */
+    const out = (c, f) => { const v = c.slice(0, 3).map(x => x * f), m = Math.max(...v), k = m < 34 ? 34 / Math.max(1, m) : 1; return `rgb(${v.map(x => Math.round(Math.min(255, x * k))).join(',')})`; };
     const e = top(edge);
-    if (e && !(Math.min(e[0], e[1], e[2]) > 244 && e[3] > nEdge * .5)) return shade(e, .9);
+    if (e && !(Math.min(e[0], e[1], e[2]) > 244 && e[3] > nEdge * .5)) return out(e, .9);
     const s2 = top(sat);
-    return s2 && s2[3] > nAll * .01 ? shade(s2, .8) : null;
+    return s2 && s2[3] > nAll * .01 ? out(s2, .8) : 'rgb(226,221,209)';
   }
-  /* لونُ الكتاب من أولى صفحات الملفّ (إذا لم يُرفع له غلاف) */
-  async function bkCoverColor(doc) {
-    const pg = await doc.getPage(1), v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: 64 / v1.width });
+  /* لونُ الكتاب من الصفحة التي هي غلافُه في الملفّ (‎covPg‎، إذا لم يُرفع له غلاف) */
+  async function bkCoverColor(doc, n = 1) {
+    const pg = await doc.getPage(Math.max(1, Math.min(doc.numPages || 1, n | 0 || 1))), v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: 64 / v1.width });
     const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
     const cx = cv.getContext('2d', { willReadFrequently: true }); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
     await pg.render({ canvasContext: cx, viewport: vp }).promise;
@@ -23989,8 +24010,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
     if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
     const meta = chPdfMeta(code, ch);
-    if (meta && meta.coverV !== 2) {
-      meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = 2;
+    if (meta && meta.coverV !== PK_COV_V) {
+      meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = PK_COV_V;
       save();
     }
     const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
