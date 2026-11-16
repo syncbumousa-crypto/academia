@@ -11544,9 +11544,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cards.forEach(n => { const c = G[n.id]; if (c >= 0 && c !== 4 && c < 9) has.add(c); });
     /* المقاسُ يتبع مواضعَ الورق (طلبُ صاحب الموقع): كلُّ صفٍّ أو عمودٍ فيه رزمةٌ نصيبٌ متساوٍ من المساحة فتُقرأ رزمُه،
        والفارغُ ينطوي إلى صفر — فتتوسّط الرزمُ المساحةَ كلَّها، أيًّا كانت جهاتُها وعددُها */
-    const rows = [0, 0, 0], cols = [0, 0, 0];
-    [4, ...has].forEach(i => { rows[Math.floor(i / 3)] = 1; cols[i % 3] = 1; });
-    const tpl = a => a.map(v => v ? 'minmax(0,1fr)' : 'minmax(0,0fr)').join(' ');
+    const T0 = ppGridTpl([...has]);
     const hold = ppHoldOpen; ppHoldOpen = false;
     const cell = i => {
       const on = i === 4 || has.has(i), k = key + '#' + i;
@@ -11554,7 +11552,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return `<div class="pp-cell${i === 4 ? ' pp-cell--c' : ''}" data-ppc="${i}">${on ? `<div class="pp-host" data-pp="${esc(k)}"></div>` : ''}</div>`;
     };
     /* وبعد الإفلات يُرسم منفرجًا كما كان والورقةُ محمولة، ثمّ ينطوي على مواضعه الجديدة بحركة (‎data-close‎) */
-    return `<div class="pp-grid${hold ? ' is-carry' : ''}" data-ppg="${esc(key)}"${hold ? ' data-close="1"' : ''} style="--gr:${tpl(rows)};--gc:${tpl(cols)}">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
+    return `<div class="pp-grid${hold ? ' is-carry' : ''}" data-ppg="${esc(key)}"${hold ? ' data-close="1"' : ''} style="--gr:${T0.gr};--gc:${T0.gc}">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
+  }
+  /* مقاسُ الشبكة من مواضع الورق: صفٌّ/عمودٌ فيه رزمةٌ نصيبٌ متساوٍ، والفارغُ صفر */
+  function ppGridTpl(cells) {
+    const rows = [0, 0, 0], cols = [0, 0, 0];
+    [4, ...cells].forEach(i => { rows[Math.floor(i / 3)] = 1; cols[i % 3] = 1; });
+    const t = a => a.map(v => v ? 'minmax(0,1fr)' : 'minmax(0,0fr)').join(' ');
+    return { gr: t(rows), gc: t(cols) };
+  }
+  /* تُعاد رزمةُ مربّعٍ واحدٍ في مكانها (لا القسمُ كلُّه): فلا تختفي الورقةُ لحظةَ الإفلات ولا يُعاد بناءُ ما لم يتغيّر */
+  function ppMountCell(grid, i) {
+    const base = grid.dataset.ppg, D0 = PPDATA.get(base), cell = grid.querySelector(':scope > .pp-cell[data-ppc="' + i + '"]');
+    if (!D0 || !cell) return;
+    const old = cell.querySelector(':scope > .pp-host'); if (old) old.remove();
+    const D1 = PPDATA.get(base + '#4') || D0, h0 = ktHost(D1.sel, D1.pack), G = ppGridOf(base);
+    const any = i === 4 || (h0 && ktCardsDeep(h0).some(c => G[c.id] === i));
+    if (!any) return;
+    const k = base + '#' + i;
+    PPDATA.set(k, Object.assign({}, D1, { cell: i, base }));
+    const h = document.createElement('div'); h.className = 'pp-host'; h.dataset.pp = k; h.dataset.ppm = '1';
+    cell.appendChild(h);
+    ppMount(h, PPDATA.get(k));
   }
   /* المربّعُ تحت نقطةٍ من الشاشة (بمستطيلاته — فالورقةُ الممسوكةُ فوقها لا تحجبها) */
   const ppCellAt = (grid, x, y) => [...grid.querySelectorAll(':scope > .pp-cell')].find(c => { const r = c.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; }) || null;
@@ -11704,18 +11723,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* السحبُ لأعلى أو مائلًا يحمل الورقةَ نفسَها في الشبكة (طلبُ صاحب الموقع): تتبع اليدَ وترفرف بسرعتها،
            والشبكةُ تنفرج تحتها — والأفقيُّ قلبٌ كما كان */
         const grid = drag.axis === 'y' && host.closest('.pp-grid');
-        if (grid) { drag.axis = 'g'; drag.grid = grid; grid.classList.add('is-carry'); host.closest('.pp-cell').classList.add('is-src'); }
+        if (grid) { drag.axis = 'g'; drag.grid = grid; drag.px = e.clientX; drag.py = e.clientY; drag.ct = 0; grid.classList.add('is-carry'); host.closest('.pp-cell').classList.add('is-src'); }
       }
       if (drag.axis === 'x') {
         const na = drag.a0 + dx * (180 / (card.clientWidth * .85));
         const v = (na - st.a) / dt; st.va = st.va * .55 + v * .45; st.a = na; st.target = na;
       } else if (drag.axis === 'g') {
-        const sr = stage.getBoundingClientRect();
-        const nx = e.clientX - (sr.left + sr.width / 2) - drag.ox, ny = e.clientY - (sr.top + sr.height / 2) - drag.oy;
-        st.vx = st.vx * .5 + ((nx - st.x) / dt) * .5; st.vy = st.vy * .5 + ((ny - st.y) / dt) * .5;
-        st.x = nx; st.y = ny; st.rz = clamp(st.vx * .01, -16, 16);
-        const over = ppCellAt(drag.grid, e.clientX, e.clientY);
-        if (drag.over !== over) { if (drag.over) drag.over.classList.remove('is-over'); drag.over = over; if (over) over.classList.add('is-over'); }
+        drag.px = e.clientX; drag.py = e.clientY;   /* يُقرأ موضعُ اليد ويُحسب ما بعده مرّةً في الإطار (‎frame‎) — لا مع كلّ حركةٍ للفأرة */
       } else if (drag.axis === 'y') {
         const ny = dy < 0 ? dy : dy * .25;
         st.vy = st.vy * .5 + ((ny - st.y) / dt) * .5; st.vx = st.vx * .5 + ((dx * .35 - st.x) / dt) * .5;
@@ -11731,17 +11745,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         flip(e.clientX > r.left + r.width / 2 ? 1 : -1); return;
       }
       if (d.axis === 'g') {
-        d.grid.classList.remove('is-carry'); if (d.over) d.over.classList.remove('is-over');
+        const grid = d.grid; if (d.over) d.over.classList.remove('is-over');
         const src = host.closest('.pp-cell'); if (src) src.classList.remove('is-src');
         const to = d.over ? +d.over.dataset.ppc : null, me = D.cell === undefined ? 4 : D.cell;
+        const settle = () => {   /* الشبكةُ تنطوي على مواضعها الجديدة بحركة */
+          const G = ppGridOf(grid.dataset.ppg), T1 = ppGridTpl([...new Set(Object.values(G))]);
+          grid.style.setProperty('--gr', T1.gr); grid.style.setProperty('--gc', T1.gc);
+          requestAnimationFrame(() => grid.classList.remove('is-carry'));
+        };
         if (to !== null && to !== me && CARDS[idx]) {
           const cid = CARDS[idx].id, base = D.base || key;
           ppGridSet(base, cid, to);
-          ppEnter = { cid, x: e.clientX - d.ox, y: e.clientY - d.oy };
-          ppHoldOpen = true;   /* تُرسم الشبكةُ منفرجةً كما تُرِكت ثمّ تنطوي على مواضعها الجديدة */
-          renderCmSection(); return;
+          /* موضعُ الورقة كما تُرى الآن (لا موضعُ اليد): تبدأ رزمتُها الجديدةُ منه بالضبط */
+          const cr = card.getBoundingClientRect();
+          ppEnter = { cid, x: cr.left + cr.width / 2, y: cr.top + cr.height / 2 };
+          ppMountCell(grid, to); ppMountCell(grid, me); ppEnter = null;
+          settle(); return;
         }
-        wake(); return;
+        settle(); wake(); return;
       }
       if (d.axis === 'x') {
         const base = Math.round(d.a0 / 180) * 180, proj = st.a + st.va * .12;
@@ -11838,7 +11859,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       } else if (!drag || (drag.axis !== 'y' && drag.axis !== 'g')) {
         [st.x, st.vx] = spring(st.x, st.vx, 0, K.pos, dt);
         [st.y, st.vy] = spring(st.y, st.vy, 0, K.pos, dt);
-      } else if (drag.axis === 'g') { st.vx *= Math.pow(.05, dt); st.vy *= Math.pow(.05, dt); }   /* اليدُ واقفة: تهدأ الرفرفة */
+      } else if (drag.axis === 'g') {
+        /* القراءاتُ أوّلًا ثمّ الكتابة، مرّةً في الإطار: موضعُ الرزمة ومستطيلاتُ المربّعات */
+        const sr = stage.getBoundingClientRect();
+        const nx = drag.px - (sr.left + sr.width / 2) - drag.ox, ny = drag.py - (sr.top + sr.height / 2) - drag.oy;
+        st.vx = st.vx * .6 + ((nx - st.x) / dt) * .4; st.vy = st.vy * .6 + ((ny - st.y) / dt) * .4;
+        st.x = nx; st.y = ny; st.rz += (clamp(st.vx * .01, -16, 16) - st.rz) * Math.min(1, dt * 12);
+        const over = ppCellAt(drag.grid, drag.px, drag.py);
+        if (drag.over !== over) { if (drag.over) drag.over.classList.remove('is-over'); drag.over = over; if (over) over.classList.add('is-over'); }
+      }
       st.hx += (st.hxT - st.hx) * Math.min(1, dt * 7); st.hy += (st.hyT - st.hy) * Math.min(1, dt * 7);
       const L = clamp(st.lift, 0, 1.2), en = clamp(st.enter, 0, 1.1);
       card.style.transform = `translate3d(${st.x}px, ${st.y - L * 10 + (1 - en) * 13}px, ${L * 70}px)`
