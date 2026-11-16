@@ -4618,6 +4618,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كان الترحيلُ مشروطًا بـ‎if (!info.doctors)‎، فمساهمةٌ تصل بعد أوّل بناءٍ للقائمة
      لا يراها أحد — والجذبُ يقع بعد الرسم دائمًا. */
   const DOC_WIRE = ['e', 'bld', 'room', 'hours', 'teach', 'grade', 'd'];
+  /* ===== وصفٌّ لا فيه إلّا الاسمُ وسمٌ لا مساهمة =====
+     قائمةُ دكاترة المادّة تُنشر صفوفًا في مساهمةِ الموقع (‎docRow‎)، فكان كلُّ صفٍّ
+     يصير مساهمةً تحت دكتوره — لا فيها إلّا وسمُه، باسم «أكاديميا» عند الناس
+     و«أنا» عند صاحب الموقع. وهي ثمانُ مئةٍ وتسعٌ وسبعون مادّة. فالصفُّ الخاوي
+     يُعرِّف الدكتورَ ولا يَلِد مساهمة. */
+  const docRowEmpty = d => !d || DOC_WIRE.every(k => {
+    const v = d[k];
+    if (k === 'hours') return !(Array.isArray(v) && v.some(h => h && (h.from || h.to)));
+    return v === undefined || v === null || v === '' || v === 0;
+  });
   /* ووصلُ مساهمتي بصفّها. وما كُتب قبل السلك — في دُرجٍ مضى — يُنقل إلى الصفّ
      ولا يُكتب فوق ما فيه: الصفُّ أحدثُ، لأنّه هو الذي يُكتب اليوم */
   function docLink(p, row) {
@@ -4686,6 +4696,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
            عنده تحت الدكتور، فلولا الوصلُ ههنا لَبقي المربّعُ خاويًا وفي يده متنُه */
         if (mine) {
           let p = (dr.posts || []).find(isMine);
+          if (!p && docRowEmpty(d)) return;      /* اسمٌ وحدَه: وسمٌ لا مساهمة */
           if (!p) {
             p = { id: newId(), me: true, uid: post.uid || actingAs(),
                   u: post.u || { name: T().meName }, likes: 0, liked: false,
@@ -4696,6 +4707,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         const who = key(post);
         let p = (dr.posts || []).find(x => x && !x.me && key(x) === who);
+        if (docRowEmpty(d)) {                     /* اسمٌ وحدَه: وسمٌ لا مساهمة — وما وُلد منه قبلُ يُنزع */
+          if (p) { dr.posts = dr.posts.filter(x => x !== p); hit++; }
+          return;
+        }
         const data = {};
         DOC_WIRE.forEach(k => { if (d[k] !== undefined) data[k] = d[k]; });
         /* ===== والمنقولُ يحمل أصلَه وتاريخَه =====
@@ -4726,6 +4741,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!info.doctors) info.doctors = [];
     const seen = {};
     let hit = docAbsorb(code, info, seen);
+    /* ===== وما وُلد من صفٍّ خاوٍ في مساهمتي يُكنس مرّةً =====
+       عند صاحب الموقع صفوفُ القائمة صفوفُه (‎mine‎)، فكانت لكلّ دكتورٍ مساهمةٌ
+       خاويةٌ باسم «أنا». تُكنس مرّةً لكلّ مادّة لا مع كلّ رسم: مساهمتي تولد خاويةً
+       لحظةَ فتح محرّرها (‎myDrPost‎)، ولو كُنست كلَّ مرّةٍ لَذهبت وهي تُكتب. */
+    if (!info.drSweep1) {
+      info.doctors.forEach(dr => {
+        const n = (dr.posts || []).length;
+        dr.posts = (dr.posts || []).filter(p => !p || !p.me || !docRowEmpty(p.data));
+        if (dr.posts.length !== n) hit++;
+      });
+      info.drSweep1 = 1; hit++;
+    }
     /* ============================================================
        والقائمةُ تُنشر من اللوحة وحدَها
        ============================================================
