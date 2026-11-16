@@ -11447,12 +11447,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (v === 'table') {
       const h = host.holder.kth || T().ktHead;
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
-        + h.map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
+        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
+        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
         + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${hlUsed(id).has(n.id) ? ' has-hl' : ''}">${k + 1}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
-          + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
+          + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`).join('')
         + `</tbody></table>`;
     } else if (v === 'cards' && pkLab()) {
       /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
