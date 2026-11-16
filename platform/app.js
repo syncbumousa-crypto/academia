@@ -24887,6 +24887,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post = b.stage.closest('.post') || document.getElementById('cm-body');
     const vis = e => !b.view.contains(e) && e.getClientRects().length;
     /* الجدولُ والشجرةُ بطاقةٌ لكلّ صفّ، والأوراقُ رزمةٌ تُرى عليا أوراقها فقط — فيُنزل عليها */
+    /* وفي شبكة البطائق: رزمةُ المربّع الذي فيه هذه البطاقة (طلبُ صاحب الموقع) — لا أوّلُ رزمةٍ تُرى */
+    const grid = post.querySelector('.pp-grid[data-ppg]');
+    if (grid) { const c = ppGridOf(grid.dataset.ppg)[cid], cell = c >= 0 && c < 9 ? c : 4, el = grid.querySelector(`.pp-cell[data-ppc="${cell}"] .pp-card`); if (el && vis(el)) return el; }
     return [...post.querySelectorAll(`[data-kcard="${CSS.escape(cid)}"]`)].find(vis) || [...post.querySelectorAll('.pp-host .pp-card')].find(vis) || null;
   }
   function hlCallRect(el) {
