@@ -37,6 +37,13 @@
       "user": "user607"
     },
     {
+      "id": "stk-almax",
+      "name": "almax",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/almax/144/1559_2.png",
+      "email": "almax@import.stkfupm.invalid",
+      "user": "almax"
+    },
+    {
       "id": "stk-user5877",
       "name": "بوحيدر",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5877/144/1198_2.png",
@@ -255,6 +262,29 @@
           "ts": 1118836878000,
           "tid": 48096,
           "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1423177-stat211",
+      "uid": "stk-almax",
+      "code": "STAT 211",
+      "sec": "info",
+      "ts": 1438341300000,
+      "st": "pub",
+      "data": {
+        "desc": "بالنسبة لي stat 211-212 سهل مو صعب بسسسسس الطلاب عاطين المادة اكبر من حجمهما و انا شخصيا شفتها في طلاب الادارة بشكل عام اي مادة فيها شوي ماث يصعبوها ويعطوها اكبر من حجمها\n\nالمادة فيها بعض الشباتر الصعبه بس الباقي سهل و ينفهم.\n\nمثل ما قلت من قبل درجة الصعوبة و التقيم يختلف من شخص الى شخص\n\nبالتوفييق ان شاء الله",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/169125/12",
+          "user": "almax",
+          "ts": 1438341300000,
+          "tid": 169125,
+          "pn": 12
         }
       }
     },

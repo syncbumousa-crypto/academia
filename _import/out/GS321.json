@@ -30,6 +30,20 @@
       "user": "Abdullah266"
     },
     {
+      "id": "stk-asool",
+      "name": "asool",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f19dbf/144.png",
+      "email": "asool@import.stkfupm.invalid",
+      "user": "asool"
+    },
+    {
+      "id": "stk-user3554",
+      "name": "رساوي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ecccb3/144.png",
+      "email": "user3554@import.stkfupm.invalid",
+      "user": "user3554"
+    },
+    {
       "id": "stk-user2352",
       "name": "صانع القرار",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
@@ -134,6 +148,52 @@
           "ts": 1223417527000,
           "tid": 66575,
           "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p546909-gs321",
+      "uid": "stk-asool",
+      "code": "GS 321",
+      "sec": "info",
+      "ts": 1266653168000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\nشباب اي كورس في ال gs أسهل بشكل عام سواء على مستوى الماده ومدرسها\n\ngs 220\n\nsaleh a. Al-baridi\n\ngs 221\n\nguoping jiang\nkhedair s. Al-khedair\n\ngs 321\n\nahmed bendania\nhisham o. Khogali\nd al-matrodi\n\ngs 423\n\nabdulrahman a. Al-osail\nshafi al-damer\n\nتحياتي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/gs/83993/1",
+          "user": "asool",
+          "ts": 1266653168000,
+          "tid": 83993,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p505189-gs321",
+      "uid": "stk-user3554",
+      "code": "GS 321",
+      "sec": "info",
+      "ts": 1261276528000,
+      "st": "pub",
+      "data": {
+        "desc": "انا درست gs321 في الترم 082 وكانت تدرس بالعربي والاختبارات بالعربي ما عدا ميجر واحد كان بالانجليزي , والاسئلة اختيار متعدد وصح وخطأ …\n\nعموما انا نزلتها عند بن دانيه والحقيقه المدرس حبيب وطيب ويدف قريدات آخر الترم , ولكن في البداية راح تحس ان المدرس شديد ومافيه امل يزودك ربع درجة ولكن في نهاية الترم يزود الطلاب على قريدين تقريبا , وفيه ميزه للدكتور بن دانية انه التحضير عنده يكون عن طريق التوقيع في ورقة تمر على الطلاب يعني التاخير مافيه اي مشكله , واذا كنت تعرف احد معك في الكلاس يمديك تقول له يحضرك … و المدرس ممل في الشرح,\n\nومن ناحية المتيريال حق المادة , فهو عموما يتكلم عن علم النفس وبصراحه المتيريال غثيث شوي ويبغاله حفظ شوي لكن ماهي صعبة \" طبعا اتكلم عن المادة يوم كانت بالعربي ما عندي علم عن صعوبتها بالانجليزي\"\n\nوبالنسبة للمواد الثانية في ال gs حقيقه انا سمعت من بعض الزملاء اللي درسوا مادة gs423 يقولوا ان الماده ممتعه في الكلاس خاصه مع الدكتور العصيل , ولكن اذا جت الاختبارات يقول لهم الدكتور ذاكروا من الكتاب وعلى كلام الشباب ان الشرح في الكلاس ماله دخل في الكتاب وما تستفيد من شرح الدكتور … ولكن سواليف الدكتور ممتعه ,\n\nوالله يوفقنا واياكم ,\n\n.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/general-studies-help/80991/5",
+          "user": "user3554",
+          "ts": 1261276528000,
+          "tid": 80991,
+          "pn": 5
         }
       }
     },

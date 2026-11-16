@@ -51,6 +51,27 @@
       "user": "idk"
     },
     {
+      "id": "stk-yazeed58",
+      "name": "Yazeed58",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/y/a6a055/144.png",
+      "email": "yazeed58@import.stkfupm.invalid",
+      "user": "Yazeed58"
+    },
+    {
+      "id": "stk-user12007",
+      "name": "ميسي بن عبدالله",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a698b9/144.png",
+      "email": "user12007@import.stkfupm.invalid",
+      "user": "user12007"
+    },
+    {
+      "id": "stk-user12191",
+      "name": "محمد،.",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/22d042/144.png",
+      "email": "user12191@import.stkfupm.invalid",
+      "user": "user12191"
+    },
+    {
       "id": "stk-wiss_alamri",
       "name": "Wiss Alamri",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/9fc348/144.png",
@@ -350,6 +371,75 @@
           "ts": 1735761708395,
           "tid": 183557,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1533335-ics104",
+      "uid": "stk-yazeed58",
+      "code": "ICS 104",
+      "sec": "info",
+      "ts": 1641477857000,
+      "st": "pub",
+      "data": {
+        "desc": "ICS104 - LEC - TERM 211\n\nالتحضير: ينادي بالأرقام بداية الكلاس\n\nطريقة الشرح : واضحه ويطبق على كل فكره يشرحها وفي حال ما فهمت نقطة معينة ما ينتقل للنقطة اللي بعدها الا لما يتأكد انك فهمت\n\nالكويزات : سهلة\n\nالمياجر: كومن\n\nالفاينلات : كومن\n\nالقريد النهائي: A+\n\nالصوت: واضح\n\nإضافات : الدكتور جدا متساهل مع الطلاب وما يدقق على التأخير … لو حصلت لك فرصة تنزل عنده لا تتردد",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/3",
+          "user": "Yazeed58",
+          "ts": 1641477857000,
+          "tid": 184179,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1534375-ics104",
+      "uid": "stk-user12007",
+      "code": "ICS 104",
+      "sec": "info",
+      "ts": 1653219064000,
+      "st": "pub",
+      "data": {
+        "desc": "ICS104-TERM212\nالتحضير :\nينادي بالاسامي ويسمح بالتأخير\nالشرح :\nمافي حرف يطلع من فمه الا وهو واثق ما شاء الله متمكن جدا\nالكويزات :\n4 كويزات متوسطين لكن صعب واحد عشان الافرج ( اغلب كويزاته الافرج 7 من 10)\n\nA+ انصح وبشدة\nإضافات :\nالدكتور كان بيحذف اسوء كويز لكن قال بننقص كلنا لو سوا كذا فمعناته انه ما يتخذ قرار عبث\n\nيسمح بالأسالة دايم ويجاوب دايم ماهو من النوع اللي يحشر ولا يستزلع بالعكس يعامل كل طالب باحترام ومتفهم ان اغلب الطلاب ما عندهم خلفية عن البرمجة\n\nالدكتور لسا شباب ما تفرق بينه وبين خويك احمد",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/6",
+          "user": "user12007",
+          "ts": 1653219064000,
+          "tid": 184179,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1534470-ics104",
+      "uid": "stk-user12191",
+      "code": "ICS 104",
+      "sec": "info",
+      "ts": 1653597891000,
+      "st": "pub",
+      "data": {
+        "desc": "ICS104-LEC-TERM 212\nالتحضير :\nينادي بالأرقام في نص المحاضرة ولا يحاسب على التأخير.\nطريقة الشرح :\nشرحه ممتاز وواضح ، يبدأ أول شي يشرح الكود على السبورة ، بعدين يطبقه على الجهاز ، ويحاول يخلي الطلاب يتفاعلون معه قدر المستطاع في المحاضرة. وما يعدي أي جزئية إلا إذا كل الطلاب فهموها.\nالكويزات :\nمن سهلة إلى متوسطة ، في البداية قال باخذ أفضل ثلاثة بس في الأخير أخذها كلها عشان يرفعنا النورملايزيشن.\nالقريد النهائي:\n+A\nالصوت:\nواضح\nإضافات :\nالدكتور قمة في الأخلاق و ما عنده مشكلة يشرح لك النقطة أكثر من مرة . خله خيارك الأول وأنت مغمض.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/7",
+          "user": "user12191",
+          "ts": 1653597891000,
+          "tid": 184179,
+          "pn": 7
         }
       }
     },

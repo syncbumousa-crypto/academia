@@ -128,6 +128,13 @@
       "user": "CHE1"
     },
     {
+      "id": "stk-user6441",
+      "name": "بـيبــسي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6441/144/1352_2.png",
+      "email": "user6441@import.stkfupm.invalid",
+      "user": "user6441"
+    },
+    {
       "id": "stk-ahmed1",
       "name": "Ahmed#",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/6f9a4e/144.png",
@@ -617,6 +624,29 @@
           "ts": 1318026932000,
           "tid": 112772,
           "pn": 16
+        }
+      }
+    },
+    {
+      "id": "stk-p1016153-che300",
+      "uid": "stk-user6441",
+      "code": "CHE 300",
+      "sec": "info",
+      "ts": 1333211606000,
+      "st": "pub",
+      "data": {
+        "desc": "ما ادري عن الستات لسا ما اخذتها\n\nاشوف ان che 300 and cise 301 مناسبه اذا تبي تجتهد\n\nالse301 سهله لو تذاكر قبل الميجر بيومين او ثلاثه تجيب فل مارك\nو افرجها دائما عالي جداً بعض الاحيان يوصل فوق ال90\nبعض الدكاتره يعطوا بروجكت عليه 5% وياخذ منك وقت وجهد كبير\n\nاذا تبي تنزلهم مع بعض حاول تشد حيلك اكثر وذاكر اول باول",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/113-121/123600/30",
+          "user": "user6441",
+          "ts": 1333211606000,
+          "tid": 123600,
+          "pn": 30
         }
       }
     },

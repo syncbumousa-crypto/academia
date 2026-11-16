@@ -114,6 +114,13 @@
       "user": "user8509"
     },
     {
+      "id": "stk-abu_hamad",
+      "name": "Abu Hamad",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/97f17d/144.png",
+      "email": "abu_hamad@import.stkfupm.invalid",
+      "user": "Abu_Hamad"
+    },
+    {
       "id": "stk-s_h_a_d_o_w",
       "name": "S H A D O W",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/e19adc/144.png",
@@ -704,6 +711,29 @@
           "ts": 1348818325000,
           "tid": 132687,
           "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1341962-me322",
+      "uid": "stk-abu_hamad",
+      "code": "ME 322",
+      "sec": "info",
+      "ts": 1394982690000,
+      "st": "pub",
+      "data": {
+        "desc": "انا اخذت عند الدكتور السمستر الماضي ,الدكتور يكرر الاسئله ,فيه اولد هوموركس وكويزز موجوده في الجمعيه ME 306 خذها وذاكر منها في اسئله يكررها ,وبالنسبة لشابتر 8 machining لاسئلة الكونسبت ذاكر الاولد اقزام لل me 322 الخاصه بال machining ترى يكرر بعض الاسئلة\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/major-1-me406/158331/3",
+          "user": "Abu_Hamad",
+          "ts": 1394982690000,
+          "tid": 158331,
+          "pn": 3
         }
       }
     },

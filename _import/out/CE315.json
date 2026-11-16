@@ -23,6 +23,13 @@
       "user": "mr.wail"
     },
     {
+      "id": "stk-user888",
+      "name": "تمزون تعسور",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e99b99/144.png",
+      "email": "user888@import.stkfupm.invalid",
+      "user": "user888"
+    },
+    {
       "id": "stk-civil_engineer1",
       "name": "civil engineer",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/e68b1a/144.png",
@@ -118,6 +125,29 @@
           "ts": 1391366748000,
           "tid": 156367,
           "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p49726-ce315",
+      "uid": "stk-user888",
+      "code": "CE 315",
+      "sec": "info",
+      "ts": 1084814881000,
+      "st": "pub",
+      "data": {
+        "desc": "بصراحه\nأنت ظلمت بعض الدكاتره مثل\n\n1- سعيد الغامدي : شرح واضح اسئله من الهومورك و يشيلك على راسه في المكتب و حريص مره على فهم الطالب.\n2- علي القضيب : مره شرحه حلو و القريد احلى و مره تستمتع في الكلاس و خصوصا لاب CE 315\n3- أحمد شمشاد : شرحه مره واضح و الاختبارات من الهانداوت بالنص.\n4- طلعت بدر : مره شديد و سئ بشكل غير طبيعي و الاختبار مكون من 20 ورقه.\n\nو شكرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/35676/2",
+          "user": "user888",
+          "ts": 1084814881000,
+          "tid": 35676,
+          "pn": 2
         }
       }
     },

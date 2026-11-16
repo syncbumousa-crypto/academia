@@ -51,6 +51,20 @@
       "user": "G_U_C_C_I"
     },
     {
+      "id": "stk-the-financial",
+      "name": "The-FiNaNcial",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/the-financial/144/129_2.png",
+      "email": "the-financial@import.stkfupm.invalid",
+      "user": "The-FiNaNcial"
+    },
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
       "id": "stk-gmc",
       "name": "GMC",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/f475e1/144.png",
@@ -91,13 +105,6 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/kbsc/144/2474_2.png",
       "email": "kbsc@import.stkfupm.invalid",
       "user": "KBSC"
-    },
-    {
-      "id": "stk-user2352",
-      "name": "صانع القرار",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
-      "email": "user2352@import.stkfupm.invalid",
-      "user": "user2352"
     },
     {
       "id": "stk-user2838",
@@ -294,6 +301,52 @@
           "ts": 1277473860000,
           "tid": 90840,
           "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p202974-mgt210",
+      "uid": "stk-the-financial",
+      "code": "MGT 210",
+      "sec": "info",
+      "ts": 1189716341000,
+      "st": "pub",
+      "data": {
+        "desc": "بصراحة نصيحة لك حاول تخلص كورسات الانجلش ورى بعض افضل لك وبالذات اذا كان عند نفس المدرس ترتاح اكثر لانه بعد الانجلش 214 تقدر تاخذ مادة mgt210 ماادة مفيدة تساعدك في باقي المواد وبالذات انها تساعدك حق البرزنشن والبروجكتات ومادة سهلة مع الدكتور دانيال ومره روعة انا اخذت الكورس متاخر بس مع الاسف اكتشفت انو التاخير مااجا في صالحي وحاول ان تنزل المواد بالفصل زي ماهي بالكروكلم\n\nحاضرين اي وقت لطلاب الفاينسس\nتحياتي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/58622/3",
+          "user": "The-FiNaNcial",
+          "ts": 1189716341000,
+          "tid": 58622,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1412453-mgt210",
+      "uid": "stk-user2352",
+      "code": "MGT 210",
+      "sec": "info",
+      "ts": 1416052342000,
+      "st": "pub",
+      "data": {
+        "desc": "فيه ملاحظات بسيطة على خطتك وهي إن فيه كورس Free elective\n3 ساعات مطلوب بدل IAS4XX وانصحك تختار MGT-210\nوأشوف من رأيي لو تترك مشروع التخرج CISE490 بعد COOP يكون أفضل وتنزل مكانه فري أليكتيف المشار اليه MGT210\n\nوكمان أنصحك تستشير الدكتور سامي الفريك والدكتور سمير العامر والشيرمان د. فؤاد السني عندهم خبرة بإفادة طلاب التخصص بأفضل الخطط والمواد 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise/150776/358",
+          "user": "user2352",
+          "ts": 1416052342000,
+          "tid": 150776,
+          "pn": 358
         }
       }
     },

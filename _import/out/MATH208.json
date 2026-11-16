@@ -114,6 +114,27 @@
       "user": "Nostalgia"
     },
     {
+      "id": "stk-superson1c",
+      "name": "SUPERSON1C",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/superson1c/144/2193_2.png",
+      "email": "superson1c@import.stkfupm.invalid",
+      "user": "SUPERSON1C"
+    },
+    {
+      "id": "stk-amat_24",
+      "name": "amat_24",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/amat_24/144/403_2.png",
+      "email": "amat_24@import.stkfupm.invalid",
+      "user": "amat_24"
+    },
+    {
+      "id": "stk-ise-26",
+      "name": "ISE-26",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ise-26/144/1157_2.png",
+      "email": "ise-26@import.stkfupm.invalid",
+      "user": "ISE-26"
+    },
+    {
       "id": "stk-nice_one",
       "name": "NicE'OnE",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/7ab992/144.png",
@@ -140,6 +161,13 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/bc79bd/144.png",
       "email": "ce_student@import.stkfupm.invalid",
       "user": "CE_student"
+    },
+    {
+      "id": "stk-ifeel_cold",
+      "name": "ifeel cold",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/a6a055/144.png",
+      "email": "ifeel_cold@import.stkfupm.invalid",
+      "user": "ifeel_cold"
     },
     {
       "id": "stk-user4992",
@@ -722,6 +750,75 @@
       }
     },
     {
+      "id": "stk-p1458072-math208",
+      "uid": "stk-superson1c",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1474285549000,
+      "st": "pub",
+      "data": {
+        "desc": "حتى الان اشوف تنزل\nGeol201\nEe204\nMath260\n+ماده عربي او اسلامي او الي قالها خالد Are\nهذي ١٢ ساعه وقريداتها سهله (مع شده الحيل طبعا)\n--------------\n\n١٢ ساعه تكفي وزوود انت في حاله خطر ولازم تنزل قليل عشان تركز عالمواد وتطلع بمعدل\n\n+ما انصح تنزل ماثين خصصوصا201 اصعب من 260",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-5/174706/22",
+          "user": "SUPERSON1C",
+          "ts": 1474285549000,
+          "tid": 174706,
+          "pn": 22
+        }
+      }
+    },
+    {
+      "id": "stk-p872376-math208",
+      "uid": "stk-amat_24",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1311121248000,
+      "st": "pub",
+      "data": {
+        "desc": "😆 😆 😆 😆 😆\n\nارحمني يا هوكو… جبت ابو العيد!!!!\n\nاولا ربطت الكمبيوتر والماث… الsoftware engineering ما ياخذو الا 3 كورسات ماث بس،، وينسو ابوها بعدين (مع انه عندهم arithmetics… بس هذي كلام فاضي ماهي ماث) ، اما بالنسبة للcomputer engineering ياخذو ال3 الاولى بالاضافة الا math260 يعني ما ياخذو حتى 202،، زيكم يا سستماوية\nاما المكنكل والالكتركل،، ياخذو 5 كورسات ، بالنسبة للمكنكل الثلاثة الاولى تطبق فيها الين ما تتخرج… الباقية تمر على خفيف… مدري الالكتركل كيف نظامهم بس اسمع انهم يتعمقو في الlaplace transform واشباهها\n\nثاني حاجة،،\n“ما تحب تتعامل مع البشر” بالنسبة لهندسة البرمجيات على الاقل،، تقريبا كل بروجكتاتهم جماعية واعتقد بعضها تكون على مدار السمستر كامل\nاما المكنكل،، تذاكر لوحدك،، تشتغل لوحدك،، تسوي البروجكت لوحدك،، تبكي عليه لوحدك 😭… فيه جماعية لكن الاغلب فردي 🥊\n^^^\nالكلام هذا بالنسبة لظروف الدراسة… بالنسبة للعمل، اشوف المكنكل يحتك بالجميع يعني ممكن حتى تشرف على عمال او تكنشنز وتناقش المشاريع مع مهندسين من تخصصات ثانية الخ\n\nبس صدقت في حاجة،، كثيرين يروحو الصناعة لمجرد انها هندسة… بلا ميول معين\nوالبعض يحول لها من المكنكل بعد الصعوبة اللي واجهها… وفي هذي الحالة يسمى التخصص “مخرج كلية الهندسة” لانه ما حيلاقي الامور سهلت كثير ويحول ادارة 😁\n^^\nلاحد سستماوي يزعل 🌹 🤠",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/109878/18",
+          "user": "amat_24",
+          "ts": 1311121248000,
+          "tid": 109878,
+          "pn": 18
+        }
+      }
+    },
+    {
+      "id": "stk-p520960-math208",
+      "uid": "stk-ise-26",
+      "code": "MATH 208",
+      "sec": "info",
+      "ts": 1263125119000,
+      "st": "pub",
+      "data": {
+        "desc": "^\n\nالماده هذي 4 ساعات + لاب\n\nوانا صراحه ما انصحك تنزلها … لانها اصلا ماده ثقيلة\nوفوق هذا كله … ما تفتح لك اي شي\n\nيعني خليها بدري عليها … فيه مواد اهم منها خذها عشان تفيدك بالمواد الثانيه\n\nوانا من رايي نزل math260 اذا ما كنت منزل الكورس هذا للحين\nلانه بيفيدك باكثر من شي … وغير هذا كورس موب ثقيل و 3 ساعات\nواحسن لك بكثير من cise302\n\nاو شف لك cise301 ماده 3 ساغات وحلوه واخف بكثير من cise302\nولا فيها لاب\n\nبالتوفيق يارب",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/092-ise/80839/245",
+          "user": "ISE-26",
+          "ts": 1263125119000,
+          "tid": 80839,
+          "pn": 245
+        }
+      }
+    },
+    {
       "id": "stk-p472663-math208",
       "uid": "stk-nice_one",
       "code": "MATH 208",
@@ -930,6 +1027,31 @@
           "user": "A_DULAZIZ",
           "ts": 1347116171000,
           "tid": 131398,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p912440-math208",
+      "uid": "stk-ifeel_cold",
+      "code": "MATH 208",
+      "sec": "srcU",
+      "ts": 1317618213000,
+      "st": "pub",
+      "data": {
+        "html": "هلا اخوي … تفضل السلابوس في المرفقات<br><br>ادعيلنا لا هنت …<br><br>​<span data-fid=\"stk-f912440-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f912440-0": {
+            "name": "MATH260_111_syllabus0.pdf",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/fea3cd8ea5a50fc07852a9a749992a4fe95608659ed8acf667260c31425b6f70"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/113182/3",
+          "user": "ifeel_cold",
+          "ts": 1317618213000,
+          "tid": 113182,
           "pn": 3
         }
       }

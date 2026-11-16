@@ -1,0 +1,37 @@
+{
+  "code": "ECON 401",
+  "users": [
+    {
+      "id": "stk-doi",
+      "name": "DOI",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/6a8cbe/144.png",
+      "email": "doi@import.stkfupm.invalid",
+      "user": "DOI"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1535692-econ401",
+      "uid": "stk-doi",
+      "code": "ECON 401",
+      "sec": "info",
+      "ts": 1666896569000,
+      "st": "pub",
+      "data": {
+        "desc": "Mehmet Soytas\nEcon-401 - Term 221:\n\nالتحضير: بداية الكلاس ورقه ويوقعون عليها الطلاب ويخذها اخر الكلاس، ما يقول شي عن التأخير.\n\nطريقة الشرح: اعظم دكتور بالجامعه شرح، سلايدات ويبسطها لك برسمات ونفسه حلوه ودايماً مبتسم .\n\nالـQuizes: ما فيه كوزات\n\nالـMidterm: ميجرين كل واحد عليه ٣٠٪؜ ويعطيك ١٠٠ سوال قبل الميجر تقريباً نفس الي بتجيك بالميجر\n\nالـFinal: الفاينل من ٣٥٪؜ نفس طريقة المياجر على كلامه ولسى ادرس عنده ما خلصنا الفاينل\n\nالقريد النهائي: فوق التقيم\n\nإضافات: الدكتور جبار بس لازم تركز معه بالكلاس، الصوت واضح جدا.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mehmet-soytas-or-mustafa-ba-biker/183487/4",
+          "user": "DOI",
+          "ts": 1666896569000,
+          "tid": 183487,
+          "pn": 4
+        }
+      }
+    }
+  ]
+}

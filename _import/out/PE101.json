@@ -37,6 +37,13 @@
       "user": "Al-Houri"
     },
     {
+      "id": "stk-faisal_2011",
+      "name": "Faisal 2011",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/48db29/144.png",
+      "email": "faisal_2011@import.stkfupm.invalid",
+      "user": "Faisal_2011"
+    },
+    {
       "id": "stk-anoosh",
       "name": "Anoosh",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/anoosh/144/1389_2.png",
@@ -563,6 +570,29 @@
           "ts": 1465227224000,
           "tid": 173569,
           "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1075457-pe101",
+      "uid": "stk-faisal_2011",
+      "code": "PE 101",
+      "sec": "info",
+      "ts": 1344038583000,
+      "st": "pub",
+      "data": {
+        "desc": "السنة التحضيرية\n\nPE 001\nPE 002\nهناك كتاب طبعا تقريبا ٣٠ صفحة\nتدرسه اول ٥ اسابيع وتختبر \" كويز \" فيه بعدين تبدا بالكورسات\nالكورسات حسب المدرس\nبس اتوقع في PE002 فيه كورس سباحة لاغلب المدرسين 😆\n\n-----\nالجبل\n\nPE 101 . 102 . 201 . 202\n\nفي الجبل غالبا حسب تخصصك ! الهندسة اتوقع بس بيدرسون 101 , 102\nيعني كورسين بس\nو وقت التسجيل تعرف المدرس وش بيدرسك \" طائرة،قدم،ريشة،لياقة،سلة…\"\n\nوطبعا فيه كتاب و اختبار \" كويز \"",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/129637/3",
+          "user": "Faisal_2011",
+          "ts": 1344038583000,
+          "tid": 129637,
+          "pn": 3
         }
       }
     },

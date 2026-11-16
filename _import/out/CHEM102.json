@@ -107,6 +107,34 @@
       "user": "Medoalkebsi"
     },
     {
+      "id": "stk-user4626",
+      "name": "أبوعريب",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/3ab097/144.png",
+      "email": "user4626@import.stkfupm.invalid",
+      "user": "user4626"
+    },
+    {
+      "id": "stk-alisul1",
+      "name": "AliSul1",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/a8b319/144.png",
+      "email": "alisul1@import.stkfupm.invalid",
+      "user": "AliSul1"
+    },
+    {
+      "id": "stk-giant_genius",
+      "name": "giant genius",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8797f3/144.png",
+      "email": "giant_genius@import.stkfupm.invalid",
+      "user": "giant_genius"
+    },
+    {
+      "id": "stk-user5836",
+      "name": "طير المحبة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a8b319/144.png",
+      "email": "user5836@import.stkfupm.invalid",
+      "user": "user5836"
+    },
+    {
       "id": "stk-kfupm_accord",
       "name": "kfupm accord",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/57b2e6/144.png",
@@ -681,6 +709,98 @@
           "ts": 1400600375000,
           "tid": 161380,
           "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1317895-chem102",
+      "uid": "stk-user4626",
+      "code": "CHEM 102",
+      "sec": "info",
+      "ts": 1389304819000,
+      "st": "pub",
+      "data": {
+        "desc": "أول شي أنا ماعندي علم كيف صعوبة ال chem102 يفيدونك شباب الكيميكال\n\nطبعا لازم تنزل الماث (يفترض تشد حيلك في المادة و لازم قريدك ما ينزل عن ال B )\nالكمستري (شوف كيف كان مستواك في 101 و اسأل شباب التخصص)\nics103 لازم تركز مع الدكتور\nنزل بعد ias101 و 111 و معهم pe الثلاث مواد هذه لازم تطلع فيهم ب A+ يعني بحسبة بسيطة\nلو جبت في العربي و الاسلامي A+ و B في الماث و A في ال Pe و C+ في الكمستري و ال ics\nمعدلك بيكون تقريبا 3 و كذا ترفع معدلك العام فوق ال 2 او بتكون جد قريب\n\nطبعا في وضعك الافضل تنزل مواد سهلة عشان ترفع المعدل حتى لو بتتأخر لان المعدل لو ما عدلته بسرعة راح تتعب بعدين و راح تكون عرضة لدسمس\n\nملاحظة : بشكل عام ما افضل الواحد ينزل عربي و اسلامي في سمستر واحد لكنها طريقة مضمونة لرفع المعدل",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics-103-or-eng-102/155200/10",
+          "user": "user4626",
+          "ts": 1389304819000,
+          "tid": 155200,
+          "pn": 10
+        }
+      }
+    },
+    {
+      "id": "stk-p1161323-chem102",
+      "uid": "stk-alisul1",
+      "code": "CHEM 102",
+      "sec": "info",
+      "ts": 1357796725000,
+      "st": "pub",
+      "data": {
+        "desc": "أنا بآخذه الفصل الجاي إن شاء الله مثلك …\n\nاللي أعرفه ، بنكمّل نفس الكتاب اللي بديناه في ١٠١ وبنرجع لتشابتر ١٠ الملغي من ١٠١ …\n\nوهنا سلايدات السعدي للمذاكرة :\n\nhttp://faculty.kfupm.edu.sa/CHEM/asaadi/chem102_ppt_slides.htm\n\nوبانتظار تفاعل الشباب عشان يفيدونا أكثر …\n\n🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/138130/2",
+          "user": "AliSul1",
+          "ts": 1357796725000,
+          "tid": 138130,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1407140-chem102",
+      "uid": "stk-giant_genius",
+      "code": "CHEM 102",
+      "sec": "info",
+      "ts": 1414076063000,
+      "st": "pub",
+      "data": {
+        "desc": "اولا مستغرب\nكيف chem 102 ولا تفتح لك شي\n\nبس ما علينا المهم\nالميجر الاول 13 من 20 (39 من 60)\nالميجر الثاني 13 من 20 (39 من 60)\nالفاينل 65 من 100\nالكلاس وورك + الحضور (50 من 80 ) لازم تشد شويتين فالكويزات والحضور تهتم فيه\nاللاب (75 من 100 )\n\nهذي 268 يعني تقريبا بي\n\nنصيحه لا تدردب",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/166513/2",
+          "user": "giant_genius",
+          "ts": 1414076063000,
+          "tid": 166513,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p972192-chem102",
+      "uid": "stk-user5836",
+      "code": "CHEM 102",
+      "sec": "info",
+      "ts": 1327265649000,
+      "st": "pub",
+      "data": {
+        "desc": "من رأيي:\nخطتك ممتازة وما عليها كلام ،، وهي مشابهة لي السنة الماضية.\n\nشد حيلك والله يوفقك.\n\nبالنسبة للـ Chem 102:\nفهي أسهل من 101 لأنها غير متشعبة وأغلبها حسابات وأفكار ثالث ثانوي (لكن آخر شابترين يبي لها شد شوي) ، أنصحك تابعها أول بأول ، لأنه بالرغم من سهولتها نسبياً ؛ إلا أنها تتطلب متابعة مستمرة كما هو الحال مع كورسات الكمستري.\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/che-112/115051/187",
+          "user": "user5836",
+          "ts": 1327265649000,
+          "tid": 115051,
+          "pn": 187
         }
       }
     },

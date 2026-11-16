@@ -58,6 +58,13 @@
       "user": "user9534"
     },
     {
+      "id": "stk-najiali",
+      "name": "NajiAli",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/najiali/144/2225_2.png",
+      "email": "najiali@import.stkfupm.invalid",
+      "user": "NajiAli"
+    },
+    {
       "id": "stk-_917",
       "name": "سراج9",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/dbc845/144.png",
@@ -317,6 +324,29 @@
           "ts": 1486248117000,
           "tid": 120653,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1469635-che304",
+      "uid": "stk-najiali",
+      "code": "CHE 304",
+      "sec": "info",
+      "ts": 1489040406000,
+      "st": "pub",
+      "data": {
+        "desc": "وعليكم السلام ورحمة الله وبركاته.\n\nالدكاتره بالعادة يتغيروا من وقت الى آخر. CHE-304 أحد المواد السهلة في قسم الهندسة الكيميائية. يحبذ إنك تبحث عن دكتور ممتاز، لكن لو مالقيت أنصحك تنزلها صيف حتى لو عند دكتور مش بذاك المستوى المطلوب. مادة ممتعة وأهم شيء فيها شابتر 26. rate of change راح تستخدمه كثير وهذا يعتمد على التكامل.\n\nموفق لكل خير,",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/304-che/176236/3",
+          "user": "NajiAli",
+          "ts": 1489040406000,
+          "tid": 176236,
+          "pn": 3
         }
       }
     },

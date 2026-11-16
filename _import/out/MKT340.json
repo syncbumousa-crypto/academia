@@ -1,0 +1,37 @@
+{
+  "code": "MKT 340",
+  "users": [
+    {
+      "id": "stk-brave_heart1",
+      "name": "Brave_Heart",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/brave_heart1/144/131_2.png",
+      "email": "brave_heart1@import.stkfupm.invalid",
+      "user": "Brave_Heart1"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p134740-mkt340",
+      "uid": "stk-brave_heart1",
+      "code": "MKT 340",
+      "sec": "info",
+      "ts": 1164552464000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم و رحمة الله وبركاته لجميع الزوار\n\nالسمستر الجاي بإذن الله منزل ماده MKT 340 مع Dr.Cooper لأنه هو الوحيد اللي منزلها\n\nفإيش رايكم يا شباب في الدكتور و حتى لو ربنا كتبلي إني أنزل الماده كيف راح تكون أسئلته\n\nو طريقة مذاكرتي للماده لأني سمعت إنو يعطي أسئله كتابيه\n\nوالسلام ختام\n\nو جزاكم الله خير\n\nأخوكم Brave_Heart @46@",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/53530/1",
+          "user": "Brave_Heart1",
+          "ts": 1164552464000,
+          "tid": 53530,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

@@ -72,6 +72,13 @@
       "user": "user4254"
     },
     {
+      "id": "stk-user67",
+      "name": "مهندس كيميائي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e274bd/144.png",
+      "email": "user67@import.stkfupm.invalid",
+      "user": "user67"
+    },
+    {
       "id": "stk-user4656",
       "name": "الأدميرال",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ee59a6/144.png",
@@ -376,6 +383,29 @@
           "user": "user4254",
           "ts": 1380809585000,
           "tid": 150412,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p77792-che401",
+      "uid": "stk-user67",
+      "code": "CHE 401",
+      "sec": "info",
+      "ts": 1120491061000,
+      "st": "pub",
+      "data": {
+        "desc": "هلا بيك\nعموما انا اخذت مع باسل\nبس che 401\nبصراحة الدكتور شريح وفااااهم\nمتمكن بس مدري كيف بالنسبة\nلمواد 203و204 .الاختبارات معقولة\nوفيها صعوبة .شخص مزاااجي يعني\nكل حصة له مزااج يوم رايق ويوم يصيح\nويصارخ بس عموما اخلاق وذوق وعلم\nالدرجات فوق المتوقع (ممكن لانا متخرجين\nيومها او ليه -مزاجي)\nبس لاتخاف وشد حيلك فهو من الي يقدرون\nالجهد لاهله حتى لو مستواك مش ولابد يحاول\nيساعدك بس اثبت له انك مهتم من خلال الاوفيس اور\nوبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/48183/2",
+          "user": "user67",
+          "ts": 1120491061000,
+          "tid": 48183,
           "pn": 2
         }
       }

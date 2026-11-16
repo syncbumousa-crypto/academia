@@ -72,6 +72,27 @@
       "user": "user5474"
     },
     {
+      "id": "stk-dok116",
+      "name": "dok116",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/dok116/144/1019_2.png",
+      "email": "dok116@import.stkfupm.invalid",
+      "user": "dok116"
+    },
+    {
+      "id": "stk-_l_p_c_no",
+      "name": "ḁl pḁcḯnô",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/d78d45/144.png",
+      "email": "_l_p_c_no@import.stkfupm.invalid",
+      "user": "_l_p_c_no"
+    },
+    {
+      "id": "stk-ahmed_sh",
+      "name": "AHMED_SH",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ahmed_sh/144/1837_2.png",
+      "email": "ahmed_sh@import.stkfupm.invalid",
+      "user": "AHMED_SH"
+    },
+    {
       "id": "stk-sstem",
       "name": "sstem",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ba9def/144.png",
@@ -84,6 +105,13 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6202/144/1301_2.png",
       "email": "user6202@import.stkfupm.invalid",
       "user": "user6202"
+    },
+    {
+      "id": "stk-mathematician",
+      "name": "MATHEMATICIAN",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/49beb7/144.png",
+      "email": "mathematician@import.stkfupm.invalid",
+      "user": "MATHEMATICIAN"
     },
     {
       "id": "stk-magbool",
@@ -409,6 +437,75 @@
       }
     },
     {
+      "id": "stk-p1320887-ee360",
+      "uid": "stk-dok116",
+      "code": "EE 360",
+      "sec": "info",
+      "ts": 1390176426000,
+      "st": "pub",
+      "data": {
+        "desc": "stat 319\nأنا نزلتها مع محمد صالح و ماكنت أذاكر إلا من الأسئلة اللي في النوت تبعه (مافكيت الكتاب إلا للجداول) وطلعت بقريد كويس\n\nEE 306\nأخذتها مع شكري بلحاج, كنت أكتب معاه وغالباً أسئلة المياجر تكون مشابهة للأمثلة تبعه, تقدر تحمل من التراكر ملف لـEE360 وشوف الأولد إكزامز والأولد كويزز لشكري, ميزة المادة ان الأسئلة تكون مكررة ومتشابهه\n\nمواد السيستم على حسب دكتورك, لكن بشكل عام للمادتين ما احتجت الكتاب , السلايدات كانت كافية",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/stat-ise/155432/15",
+          "user": "dok116",
+          "ts": 1390176426000,
+          "tid": 155432,
+          "pn": 15
+        }
+      }
+    },
+    {
+      "id": "stk-p404172-ee360",
+      "uid": "stk-_l_p_c_no",
+      "code": "EE 360",
+      "sec": "info",
+      "ts": 1242676711000,
+      "st": "pub",
+      "data": {
+        "desc": "قصدك ee360 نزلها مع ابيدو وانت مغمض … الدكتور شريح … يحضر بداية المحاضره …تقريبا كويز كل اسبوعين … هوم وورك كل اسبوعين … مياجره سهله … ودورله مياجر قديمه يجيب منها … قريد يعطيك اللي متتوقعه … فمصلا تتوقع b فانت بتأخذ b+أو a…طبعا في هذه الماده ما يبغاله تشغيل المخ بكثر ما يبغالها الحس الهندسي …\n\nاللاب ما تفرق خذه مع اي احد … وما اعرف احد منهم…\n\nوالحموز … لا تفكر تنزل عنده",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/083-091/72948/92",
+          "user": "_l_p_c_no",
+          "ts": 1242676711000,
+          "tid": 72948,
+          "pn": 92
+        }
+      }
+    },
+    {
+      "id": "stk-p1430644-ee360",
+      "uid": "stk-ahmed_sh",
+      "code": "EE 360",
+      "sec": "info",
+      "ts": 1445104409000,
+      "st": "pub",
+      "data": {
+        "desc": "كورس EE 360 هو كورس اساسيات الآلات الكهربائية ويعتبر مقدمة واساس في تخصص الطاقة الكهربائية وتوليدها ونقلها وهو مشابه لكورس EE 306 في قسم الهندسة الميكانيكية ومن متطلباته EE 213 لطلاب الكهرباء و EE 204 لطلاب الميكانيكية.\n\nهذا الكورس راح يغطي كل من هذه المواضيع:\n١- Three Phase Circuits\n٢- Introduction to Machinery Principles, magnetic Circuits\n٣- Transformers\n٤- DC Machines, motors and generators\n٥- Synchronous Machines\n٦- Three-Phase Induction Motor\n٧- Transmission Line\nتقييمي للكورس:\nالكورس بشكل عام متوسط ما هو صعب ولا سهل ويمتاز بطول المنهج وكثرة المعادلات فيه ويحتاج للحفظ بعض مرات وعدا عن ذلك يوجد فيه تكرار من سيركت ١ وسيركت ٢ بحيث تحتاج بعض مرات قوانين منهم لتحليل الدوائر مثل KVL و KCL. وبعد اعتبر هذا الكورس مهم للطلاب اللي يبون يتخصصون بمجال الطاقة بمواد المستوى الرابع. انصحك بهذا الكورس بالكتاب وحل الامثلة اللي فيه واقصد بالكتاب حق Chapman واذا امداك تفتح كتاب Sen وتطلع على اللي فيه يكون افضل.\n\nبالرابط بالاسفل تلقى ملفات تساعدك باذن الله على هذا الكورس:\n- هنا -",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/119808/97",
+          "user": "AHMED_SH",
+          "ts": 1445104409000,
+          "tid": 119808,
+          "pn": 97
+        }
+      }
+    },
+    {
       "id": "stk-p1160026-ee360",
       "uid": "stk-sstem",
       "code": "EE 360",
@@ -459,6 +556,31 @@
           "ts": 1357678808000,
           "tid": 138003,
           "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1160411-ee360",
+      "uid": "stk-mathematician",
+      "code": "EE 360",
+      "sec": "srcP",
+      "ts": 1357720420000,
+      "st": "pub",
+      "data": {
+        "html": "دعواتك<br><br>​<span data-fid=\"stk-f1160411-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1160411-0": {
+            "name": "FINAL-EE360-071-sol.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/db276336ffd2cbfe7dfcd7d34bfcfd8b433bcf5f211863406515f93900e1c71d"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/138041/2",
+          "user": "MATHEMATICIAN",
+          "ts": 1357720420000,
+          "tid": 138041,
+          "pn": 2
         }
       }
     },

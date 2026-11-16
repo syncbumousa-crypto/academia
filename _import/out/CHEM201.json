@@ -86,6 +86,20 @@
       "user": "user9948"
     },
     {
+      "id": "stk-user3356",
+      "name": "القحــطاني",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3356/144/448_2.png",
+      "email": "user3356@import.stkfupm.invalid",
+      "user": "user3356"
+    },
+    {
+      "id": "stk-user439",
+      "name": "الولهان",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user439/144/28_2.png",
+      "email": "user439@import.stkfupm.invalid",
+      "user": "user439"
+    },
+    {
       "id": "stk-m.tawhari",
       "name": "m.tawhari",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/45deac/144.png",
@@ -112,6 +126,13 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/_0014/144/704_2.png",
       "email": "_0014@import.stkfupm.invalid",
       "user": "_0014"
+    },
+    {
+      "id": "stk-abu_mnahe",
+      "name": "ABU MNAHE",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abu_mnahe/144/1648_2.png",
+      "email": "abu_mnahe@import.stkfupm.invalid",
+      "user": "ABU_MNAHE"
     },
     {
       "id": "stk-the_sad_story",
@@ -553,6 +574,52 @@
       }
     },
     {
+      "id": "stk-p889759-chem201",
+      "uid": "stk-user3356",
+      "code": "CHEM 201",
+      "sec": "info",
+      "ts": 1313978783000,
+      "st": "pub",
+      "data": {
+        "desc": "CHE\n\nافضل المدرسين : ابو السعود … و باشماخ\nالمادة سهله … تتكلم عن الماس بلنس و الانيرجي بلنس\nافضل طريقة للمذاكرة نوت المدرس و الكتاب\n\nME 205\nافضل مدرس : العقيلي\nالمادة حلوة نوعاا ماا … تتكلم عن خواص المواد و طبيعتها\nافضل طريقة طريقة للمذاكرة سلايدات المدرس و ركز ع الاولد اقزام\n\nChem 201\nالمعلم ممتاز\nالمادة غثيثه نوعا ما و المنهج طويل و متشابه … يتكلم عن الكيمياء العضوية\nالكتاب كويس بس شارح كل شي بالتفصيل … السلايدات كويسه بعد\n\nالماث\nانا درست مع اسان لو مدرس ممتاز جدا بس عيبه اللهجه\nالمادة سهلة شوية تركيز بالكلاس و تمشي الامور تتكلم عن الهندسة الفراغيه و الثري دايمنشن\nعليك بنوت المدرس\n\nو بالتوفيق لكـ",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/111043/2",
+          "user": "user3356",
+          "ts": 1313978783000,
+          "tid": 111043,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p59079-chem201",
+      "uid": "stk-user439",
+      "code": "CHEM 201",
+      "sec": "info",
+      "ts": 1095497027000,
+      "st": "pub",
+      "data": {
+        "desc": "اهلين بالمتفاءل\n\nبالنسبه لمادة CHEM201\n\nالماده ماده حفظ 100% و نسبة الفهم تكاد ان تكون معدومه\n\nالمياجر القديمه لها كثيره ومتنوعه وانا راح احاول تضبيطها في ملف واحطها في المنتدى\n\nوبالنسبه للماده CHE201\n\nالماده مهضومه وسهله واسئلتها حلوه في المياجر بس طويله شوي\n\nالوقت يا دوووب يسعفك ولكن ترى الوقت عليك وعلى غيرك\n\nالماده ماده فهم 95% واما 5% في عباره عن حفظ ا standard معين وبعض المعادلات الخفيفه\n\nولازم تفهم شغلة مهمه وهي كيفية التوصل الى العلاقات مثلا\n\nكثافة السائل هل تزيد ام تنقص مع\n1-ارتفاع الحراره\n2-ارتفاع الضغط\n3- تغير الMw\n4- تفير ال flow\n\nفهم هذه العلاقات ترسخ المعلومات في ذاكرتك وتنمي حاجه عندك يسمونها\nengineering sense\n\nولاي استفسار انا موجود",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/39998/2",
+          "user": "user439",
+          "ts": 1095497027000,
+          "tid": 39998,
+          "pn": 2
+        }
+      }
+    },
+    {
       "id": "stk-p1518571-chem201",
       "uid": "stk-m.tawhari",
       "code": "CHEM 201",
@@ -657,6 +724,31 @@
           "ts": 1298965535000,
           "tid": 103837,
           "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p949732-chem201",
+      "uid": "stk-abu_mnahe",
+      "code": "CHEM 201",
+      "sec": "srcP",
+      "ts": 1324250874000,
+      "st": "pub",
+      "data": {
+        "html": "تفضل عزيزي<br><br>​<span data-fid=\"stk-f949732-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f949732-0": {
+            "name": "Solution_CHEM-201_Second_Maj-111.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/6c0d380e4e6c40646493b0649bfadea7bda253d2604c89431b90f1b11973c716"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/chemistry-201-second-major/116720/3",
+          "user": "ABU_MNAHE",
+          "ts": 1324250874000,
+          "tid": 116720,
+          "pn": 3
         }
       }
     },

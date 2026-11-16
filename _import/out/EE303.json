@@ -44,6 +44,20 @@
       "user": "user8246"
     },
     {
+      "id": "stk-user9346",
+      "name": "الافضل",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/db5fbb/144.png",
+      "email": "user9346@import.stkfupm.invalid",
+      "user": "user9346"
+    },
+    {
+      "id": "stk-fssh85",
+      "name": "fssh85",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/3ab097/144.png",
+      "email": "fssh85@import.stkfupm.invalid",
+      "user": "fssh85"
+    },
+    {
       "id": "stk-user6202",
       "name": "أبــو هديــب",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6202/144/1301_2.png",
@@ -299,6 +313,52 @@
           "ts": 1326999743000,
           "tid": 118483,
           "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1162731-ee303",
+      "uid": "stk-user9346",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1357985143000,
+      "st": "pub",
+      "data": {
+        "desc": "بالنسبه لماده ee 303 اهم شي الدكتور لا تنزل الا عند دكتور كويس مره لان مافيه مرجع زين للمذاكره والكتاب من اسوأ كتب مواد الاي اي. وحاول تكتب نوت مع الدكتور .\n\nانا اشوف هالكورس مواضيعه متنوعه ومتفرقه يعني تبدا بتشابتر ٧ وبعدين تروح تشابتر ١ و زي كذا . بالنسبه لي اشوف هالكورس من اصعب المواد اللي درستها بالاي اي لسببين مافي نوت زين للمذاكره والكتاب سيئ ، والدكاتره اللي ينزلونه غالبا سيئين …\nاتمنى اني افدتك وبالتوفيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/a-a-303-315-370/138223/4",
+          "user": "user9346",
+          "ts": 1357985143000,
+          "tid": 138223,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p369510-ee303",
+      "uid": "stk-fssh85",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1235046465000,
+      "st": "pub",
+      "data": {
+        "desc": "بسم الله الرحمن الرحيم\n\nيا شباب أنا ناوي أنزل مادة industrial instrumentation عند د. العبسي … ودي أول شي أعرف أول شي وش طبيعة المادة و هل فيها خربطة EE303 كثيير و ثانيا ابي أعرف وش وضع الدكتور نفسه يعني الأخلاق ، الدرجات ، الشرح ومراعاته للخريجين … أتمنى منكم إفادتي في أسرع وقت ممكن",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/industrial-instrumentation-dr-al-absi/70735/1",
+          "user": "fssh85",
+          "ts": 1235046465000,
+          "tid": 70735,
+          "pn": 1
         }
       }
     },

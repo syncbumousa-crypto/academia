@@ -513,6 +513,20 @@
       "user": "Silent-180"
     },
     {
+      "id": "stk-mmkhoj",
+      "name": "mmkhoj",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mmkhoj/144/721_2.png",
+      "email": "mmkhoj@import.stkfupm.invalid",
+      "user": "mmkhoj"
+    },
+    {
+      "id": "stk-user9893",
+      "name": "بدر الغامدي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/48db29/144.png",
+      "email": "user9893@import.stkfupm.invalid",
+      "user": "user9893"
+    },
+    {
       "id": "stk-the_silver",
       "name": "THE SILVER",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/the_silver/144/1942_2.png",
@@ -3240,6 +3254,52 @@
           "ts": 1328112732000,
           "tid": 119403,
           "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p760335-chem101",
+      "uid": "stk-mmkhoj",
+      "code": "CHEM 101",
+      "sec": "info",
+      "ts": 1294573998000,
+      "st": "pub",
+      "data": {
+        "desc": "أنا أشوف سلايدات الكتاب أو اللي جات من نفس الشركة ممتازة والدكتور حقنا يشرح منها\n\nلكن لازم تحل الـ check point من الكتاب مع ان بعضها موجودة في السلايدات\n\nتفضل الرابط :\nhttp://faculty.kfupm.edu.sa/CHEM/fettouhi/CHEM-101%20Lecture%20slides%20Burdge%201ed.htm",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/100384/4",
+          "user": "mmkhoj",
+          "ts": 1294573998000,
+          "tid": 100384,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1434597-chem101",
+      "uid": "stk-user9893",
+      "code": "CHEM 101",
+      "sec": "info",
+      "ts": 1448538214000,
+      "st": "pub",
+      "data": {
+        "desc": "انصحك بالكيمياء بس ترا يبغالها متابعة أول بأول, chem101 هي عبارة عن أساسيات الكيمياء ,تقريبا نفس اللي كنا ناخذه في الثانوي,\n\nو صراحة ما ودي احطمك لكن الضغط بيجيك كذا ولا كذا , فانت بيدك أنك تقلل منه وتنزل كيمياء وتفتك . وبالنسبة للمذاكر لازم اسبوعيا , وانا ادري أن math 002 صعب\n\nلكن صدقني math002 +chem101 أسهل من math10X+chem101+ics103 أوmath10X+chem101+phys10X .\n\nو إذا كنت كيمكال بتنزل ch102 في الفرشمان وهذا يزيد من الصعوبة .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/170988/7",
+          "user": "user9893",
+          "ts": 1448538214000,
+          "tid": 170988,
+          "pn": 7
         }
       }
     },

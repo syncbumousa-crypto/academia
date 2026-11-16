@@ -93,6 +93,34 @@
       "user": "user3083"
     },
     {
+      "id": "stk-mohammed_mag",
+      "name": "Mohammed Mag",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
+      "email": "mohammed_mag@import.stkfupm.invalid",
+      "user": "Mohammed_Mag"
+    },
+    {
+      "id": "stk-wiss_alamri",
+      "name": "Wiss Alamri",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/9fc348/144.png",
+      "email": "wiss_alamri@import.stkfupm.invalid",
+      "user": "Wiss_Alamri"
+    },
+    {
+      "id": "stk-swe_student",
+      "name": "SWE Student",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/4bbf92/144.png",
+      "email": "swe_student@import.stkfupm.invalid",
+      "user": "SWE_Student"
+    },
+    {
+      "id": "stk-_911",
+      "name": "القاضي911",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/e95f7d/144.png",
+      "email": "_911@import.stkfupm.invalid",
+      "user": "_911"
+    },
+    {
       "id": "stk-annoos",
       "name": "annoos",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f1d935/144.png",
@@ -154,13 +182,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
       "email": "breaktheunbreakable@import.stkfupm.invalid",
       "user": "BreakTheUnbreakable"
-    },
-    {
-      "id": "stk-mohammed_mag",
-      "name": "Mohammed Mag",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
-      "email": "mohammed_mag@import.stkfupm.invalid",
-      "user": "Mohammed_Mag"
     },
     {
       "id": "stk-o11",
@@ -474,6 +495,98 @@
           "ts": 1262444731000,
           "tid": 81604,
           "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1533313-ics202",
+      "uid": "stk-mohammed_mag",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1641337627000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة: ICS 202 - LAB - TERM 211\n\nالتحضير : ينادي بدايه الكلاس على الاسامي , ويتسامح مع التأخير\n\nطريقة الشرح : جدا واضحه ومتواجد اذا تبي أي سؤال عن التاسك .\n\nالكويزات : سهله\n\nالمياجر: ميد تيرم كومن\n\nالفاينلات : الفاينل كومن ايضا\n\nالقريد النهائي: A+\n\nالصوت: واضحه\n\nإضافات : الدكتور جدا مريح من ناحيه الحضور , المهم انك تسوي الي عليك وتطلع بدري .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/2",
+          "user": "Mohammed_Mag",
+          "ts": 1641337627000,
+          "tid": 184179,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1534055-ics202",
+      "uid": "stk-wiss_alamri",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1648971088000,
+      "st": "pub",
+      "data": {
+        "desc": "ICS202 “LAB” - term211 In Person\n\nالتحضير :\nيحضر كل لاب بعد 5 دقايق من بداية اللاب ومرات بعد 10 دقايق، ما يقول شيء عالتأخير بس قوله انك جيت ويحضرك.\n\nطريقة الشرح :\nيشرح التاسكات بشكل مبسط ومختصر بحيث انك تفهم وش المطلوب منك بالضبط.\n\nالكويزات :\nكان فيه 2 لاب كويز، الأول كان شوي صعب والثاني سهل.\n\nالمياجر: ----\n\nالفاينلات : -----\n\nالقريد النهائي:\nA++++++++++ وبجدارة وأحس اني ظلمته كمان.\n\nالصوت:\nواضح.\n\nإضافات :\n- الدكتور متساهل جدا الله يسعده بحيث انه اذا تبي تطلع بدري حتى لو ما خلصت التاسكات عادي عنده ويعطيك أسبوع كامل الين تسلم التاسكات.\n- تصحيح الدكتور أسطوري ويحرجك، لدرجة إنه حتى لو سلمت اللاب بعد نهاية الديدلاين وكان كودك صحيح بيعطيك الدرجة كاملة وما يشيل السبميشن من البلاكبورد، بالمناسبة حتى لو ما سلمت شيء بيعطيك نص الدرجة تخيل عزيزي القارئ، الدرجة من 10 واذا ما سلمت شيء يعطيك 5 ويكتب No Submission. 👏 🥰\n- في البروجيكت الوضع كان عنده سهالات وما كان يحشر كثير، بالنسبة لي خلاني اشرح كيف سويت الفنكشن وسويت الديمو وخلاص، كثير عطاهم درجة كاملة بالبروجيكت.\n- الدكتور لا زال صغير في العمر وفي سن الشباب ويساعدك لو احتجت شيء.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/5",
+          "user": "Wiss_Alamri",
+          "ts": 1648971088000,
+          "tid": 184179,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p156592-ics202",
+      "uid": "stk-swe_student",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1173876095000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\n* عليك بالمواد الثلاثة : ( ICS 102 + ICS 201 + ICS 202 ) كمحور لاختيار التخصص\nلأنهم لكل تخصصات الحاسب\nإذا رأيت انك انسان تأقلمت مع هذه المواد وهي مواد في البرمجة وأساسياتها واحترافها\nحبيت تلك المواد … وحسيت انك راح تبدع وراح تنتج وراح تطور نفسك بنفسك\n\nفأنا أنصحك بالـSWE\n\n-------\n\nبالنسبة للـAverage على حسب الماده\nبعض المواد اخذتها وكانوا عدد الطلاب يتجاوز الـ20 والافرج كان فيها معقول\n\nبعض المواد وكان عدد الطلاب فيها لايتجاوز الـ8 وكان الأفرج فيها عالٍ جداً ( ولكن في هذه الماده بالذات أتيحت لي فرصه الـA+ وأخذتها ولله الحمد لأني قدرت اثبت نفسي عند الدكتور مافي طلاب كثير)\n\n----------\n\nبالنسبة للطلاب الأجانب :\nماأزيد على ماذكره بعض الأخوة ان لافرق بينكم الا بالعقل والتفكير\n\n----------\n\nبالنسبة للشركات :\n\nفما أتوقع انك ماتعرف شركة ( الإلكترونيات المتقدمه )\nأكتفيت بهذا المثال فقط لأن الشركة كبيره وانتشارها على مستوى واسع\nومتخصصه في البرمجة وأمور الحاسب بشكل عام. (على حد علمي)\n\n----------\n\nنصيحتي لكل من أراد الدخول في هذا التخصص :\n\n* ان يكون محب للبرمجة\n* ان يتكيف مع أي لغة برمجة يتعلمها\n* ان يطور نفسه بنفسه ولا ينتظر احد لكي يعلمه\n* محاولة الإستفاده من المشاريع والواجبات ( وعدم أخذ المساعده الكلية من شخص آخر )\n* الإتكال على المولى عز وجل.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/swe/55319/12",
+          "user": "SWE_Student",
+          "ts": 1173876095000,
+          "tid": 55319,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p81911-ics202",
+      "uid": "stk-_911",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1128331891000,
+      "st": "pub",
+      "data": {
+        "desc": "دخلت للتو في كورس الــ ICS202 ولازالت تواجهني حتى اليوم نفس المشكلة وهي:\n\nأني لا أجد أنه مشابه أبدا للكورسات السابقة (102 & 201)\n\nقرأت السلايدات ولكنها من غير فائدة\n\nإلى من يعرف كتابا ممتازا أو طريقة تجعلني أفهم الكورس بشكل أفضل وأكون له من الشاكرين.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/48729/1",
+          "user": "_911",
+          "ts": 1128331891000,
+          "tid": 48729,
+          "pn": 1
         }
       }
     },

@@ -107,6 +107,13 @@
       "user": "Alumni"
     },
     {
+      "id": "stk-pe24te",
+      "name": "pe24te",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/p/5e9695/144.png",
+      "email": "pe24te@import.stkfupm.invalid",
+      "user": "pe24te"
+    },
+    {
       "id": "stk-anoosh",
       "name": "Anoosh",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/anoosh/144/1389_2.png",
@@ -694,6 +701,31 @@
           "ts": 1117282763000,
           "tid": 47989,
           "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p198908-acct110",
+      "uid": "stk-pe24te",
+      "code": "ACCT 110",
+      "sec": "srcU",
+      "ts": 1188876398000,
+      "st": "pub",
+      "data": {
+        "html": "Acct201<br><br>​<span data-fid=\"stk-f198908-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f198908-0": {
+            "name": "ACCT 201 Course Syllabus (061).doc",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/79ce9cc4d31e1701d8a874e26b3214e87e69b42586a7df20328d84362d8d053b"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/syllabus/58311/7",
+          "user": "pe24te",
+          "ts": 1188876398000,
+          "tid": 58311,
+          "pn": 7
         }
       }
     },

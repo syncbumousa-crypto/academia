@@ -135,6 +135,13 @@
       "user": "user4988"
     },
     {
+      "id": "stk-user5836",
+      "name": "طير المحبة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a8b319/144.png",
+      "email": "user5836@import.stkfupm.invalid",
+      "user": "user5836"
+    },
+    {
       "id": "stk-abu_mnahe",
       "name": "ABU MNAHE",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abu_mnahe/144/1648_2.png",
@@ -742,6 +749,29 @@
       }
     },
     {
+      "id": "stk-p1119014-che204",
+      "uid": "stk-user5836",
+      "code": "CHE 204",
+      "sec": "info",
+      "ts": 1353176012000,
+      "st": "pub",
+      "data": {
+        "desc": "بمناسبة كثرة الحديث حول CHE 204\n\nبحكم تجربتي، انتبه مع الدكتور وحاول تفهم ثم توجه مباشرة إلى نوتات المبيض والشامي حتى تستوعب جيداً، بعد ذلك لا مانع من مطالعة الكتاب لمحاولة ربط الأفكار والإطلاع على الأمثلة المحلولة, هذا بالنسبة للشابتر الأول والثاني. أما الثالث وما بعده؛ يبدأ الكتاب يكون مفهوم أكثر والمعلومات تترابط بسلاسة (مع المحافظة على نوتات المبيض والشامي طول الفصل).\n\nرابط نوتات المبيض:\n\nhttp://faculty.kfupm.edu.sa/che/usamah/CHE204_handouts.htm\n\nرابط نوتات الشامي:\n\nhttp://faculty.kfupm.edu.sa/che/alshami/teaching/Che%20204/notes_list.html\n\nوأشكر الدكاترة على جهدهم في شرح المادة على شكل مذكرات تناسب مستوى الطلاب.\n\nبالتوفيق للجميع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/134476/67",
+          "user": "user5836",
+          "ts": 1353176012000,
+          "tid": 134476,
+          "pn": 67
+        }
+      }
+    },
+    {
       "id": "stk-p1039289-che204",
       "uid": "stk-abu_mnahe",
       "code": "CHE 204",
@@ -792,6 +822,31 @@
           "ts": 1299174456000,
           "tid": 103491,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p799992-che204",
+      "uid": "stk-user6441",
+      "code": "CHE 204",
+      "sec": "srcU",
+      "ts": 1298642486000,
+      "st": "pub",
+      "data": {
+        "html": "يعطيك العافيه CHE@KFUPM http://www.skfupm.com/vb/images/icons/icon15.gif<br>وتستحق التقييم<br><br>اسئله اظافيه للــ204 --chapter1 في المرفقات<br><br>​<span data-fid=\"stk-f799992-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f799992-0": {
+            "name": "che204-2.pdf",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/f139bb4fc36627f9df636b963a79ae16cdbd0f9a55e4ea0b4b0045cad2fca911"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/203-204/103710/5",
+          "user": "user6441",
+          "ts": 1298642486000,
+          "tid": 103710,
+          "pn": 5
         }
       }
     },

@@ -128,6 +128,41 @@
       "user": "242424"
     },
     {
+      "id": "stk-metallic",
+      "name": "METALLIC",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/5e9695/144.png",
+      "email": "metallic@import.stkfupm.invalid",
+      "user": "METALLIC"
+    },
+    {
+      "id": "stk-user2884",
+      "name": "نقطة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/bc79bd/144.png",
+      "email": "user2884@import.stkfupm.invalid",
+      "user": "user2884"
+    },
+    {
+      "id": "stk-ahmed_sh",
+      "name": "AHMED_SH",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ahmed_sh/144/1837_2.png",
+      "email": "ahmed_sh@import.stkfupm.invalid",
+      "user": "AHMED_SH"
+    },
+    {
+      "id": "stk-brain_man",
+      "name": "Brain Man",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/brain_man/144/1672_2.png",
+      "email": "brain_man@import.stkfupm.invalid",
+      "user": "Brain_Man"
+    },
+    {
+      "id": "stk-user4760",
+      "name": "عذب المعاني",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ba8739/144.png",
+      "email": "user4760@import.stkfupm.invalid",
+      "user": "user4760"
+    },
+    {
       "id": "stk-mechanical_boy",
       "name": "Mechanical Boy",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mechanical_boy/144/1796_2.png",
@@ -659,6 +694,121 @@
           "ts": 1231271864000,
           "tid": 68930,
           "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p1221561-ise307",
+      "uid": "stk-metallic",
+      "code": "ISE 307",
+      "sec": "info",
+      "ts": 1368375071000,
+      "st": "pub",
+      "data": {
+        "desc": "هنا عاد يرجع الأمر لكثرة قراءتك وسؤالك لزملائك من باقي التخصصات عن المواد السهلة عندهم واللي تكون أنهيت البريريكويسيت لها …\n\nمن ناحيتي نزلت هالسمستر cise 301 و نويت أنزل السمستر الجاي ise 307 ثم عدَلت عن هالشيء بسبب سوء سمعت دكاترة الكورس للسمستر الجاي … الخيارات كثير وان بغيت تأخذ كورس ام اي فهالشيء راجع لك في حال حبيت تتوغل بمسار تحبه في التخصص …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/144337/6",
+          "user": "METALLIC",
+          "ts": 1368375071000,
+          "tid": 144337,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p844147-ise307",
+      "uid": "stk-user2884",
+      "code": "ISE 307",
+      "sec": "info",
+      "ts": 1305353383000,
+      "st": "pub",
+      "data": {
+        "desc": "والله نصيحتي خذ الـ ise307 هي أسهل من الـستات وتقدر تطلع فيها بقريد حلو بالصصصيف\n\nاما الستات فهي ماده غثيثة انا أخذتها بالصيف وتحسسفت ماطلعت فيها بالقريد اللي ببآلي ! مع العلم الماده سهلة ولكنها طططططططططططويلة منهجها طططويل جدآ !!\n\nيعني نصيحتي ise307 بالصيف ، والـstat بترم عادي والله يوفقـك",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/107540/4",
+          "user": "user2884",
+          "ts": 1305353383000,
+          "tid": 107540,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1457192-ise307",
+      "uid": "stk-ahmed_sh",
+      "code": "ISE 307",
+      "sec": "info",
+      "ts": 1473276684000,
+      "st": "pub",
+      "data": {
+        "desc": "الاستاذ حسن باعوم جاي من ارامكو ويدرس كورس ISE307 وهو خريج بكلوريوس كهرباء وماستر بالاندستريال من البترول.\nماعنده هومووركات وكوزاته من سلايداته وعنده هيلب سيشن قبل المياجر يحل بها امثلة قريبة لطريقة الميجر وكذلك عنده بونص جيد.\n\nجزاه الله كل خير I recommend him",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/hassan-ba-aoum/171615/3",
+          "user": "AHMED_SH",
+          "ts": 1473276684000,
+          "tid": 171615,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1343870-ise307",
+      "uid": "stk-brain_man",
+      "code": "ISE 307",
+      "sec": "info",
+      "ts": 1395403772000,
+      "st": "pub",
+      "data": {
+        "desc": "أنا درست مع الدكتور ise 307\nوما حسيت بكل هالظلم اللي تقول عنه\n\nالرجال صح يهدد … لكن ما عمره يظلمك ف شي …\n\nوالغلط اللي تغلطه يحاسبك عليه … ولو اعطاك صفر في السؤال فأكيد معناه انك مسوي مصيبة في السؤال بس ما انتبهت …\n\nالمادة بطبيعتها فاينال أنسر … ولو الفاينال أنسر غلط فغالباً عندك خطوات غلط …\nولو هو ظلمك بشي روح كلمه … هو إنسان مرة طيب ومتفهم …\n\nأنا عارف انه صدمة انك تجيب درجات نازلة في المادة … لكن ما أظن انه مهما كان ظالم انه بيعطيك 1من20 وانت تساهل 15 مثلا !!\n\nآسف على صراحتي … لكن هذي طبيعتنا دائماً للهروب من الواقع …\n\nوالله يوفقك وييسرلك أمورك … وإن شاء الله تعوض في الاختبارات القادمة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/dr-tahir-ayar/158394/6",
+          "user": "Brain_Man",
+          "ts": 1395403772000,
+          "tid": 158394,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1378536-ise307",
+      "uid": "stk-user4760",
+      "code": "ISE 307",
+      "sec": "info",
+      "ts": 1402261012000,
+      "st": "pub",
+      "data": {
+        "desc": "من تجربتي :\n\nأحذت مادتين اليكتف خارج التخصص cise 301 و ise 307 و تندمت على هذا الاختيار …\n\nو احذت مادتين اليكتف من داخل التخصص و كان الفرق بالقريدات كبير …\n\nمن وجهة نظري خذ لك مادتين من التخصص سهلات لانك بتكون عارف وضع المواد و طريقة المذاكره للمواد الميكانكيل بشكل عام …\n\nو فيه ناس تقول العكس بس ارجع و اقول من وجهة نظري …\n\nاي استفسار انا حاضر …\n\nو الله يكتب لك التوفيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/xe-4xx/162372/4",
+          "user": "user4760",
+          "ts": 1402261012000,
+          "tid": 162372,
+          "pn": 4
         }
       }
     },

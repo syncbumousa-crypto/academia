@@ -93,6 +93,13 @@
       "user": "user3354"
     },
     {
+      "id": "stk-gamofrn",
+      "name": "GAMOFRN",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/258eb7/144.png",
+      "email": "gamofrn@import.stkfupm.invalid",
+      "user": "GAMOFRN"
+    },
+    {
       "id": "stk-mjehad",
       "name": "mjehad",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/8e8cbc/144.png",
@@ -502,6 +509,29 @@
           "ts": 1300498280000,
           "tid": 105159,
           "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1440049-che303",
+      "uid": "stk-gamofrn",
+      "code": "CHE 303",
+      "sec": "info",
+      "ts": 1453369514000,
+      "st": "pub",
+      "data": {
+        "desc": "سلام عليكم\n\nتفضل اخوي …\n\nتحصل بموضوعي بعض الملفات الهامة\n\nملفات حديثة لكورسات: (Term 151-(CHE 303, 300 ,304\n\nبعد اخ> الكورس … اقدر اقولك … حل الأكزامبلز … والهوم ورك (اهمم شى بالكورس كله … يجي مثله مع تغير الأرقام ) و الأولد اكزامز … وه>ا بيكون كافي للأختبارات … لكن افهمهم صح\n\nلكن ا>ا تبي تتأكد من فهمك اكثر … حل من الكتاب …\n\nوالحلول ابحث عنها بجوجل …\n\nيعني اكتب اسم السؤال بجوجل … وبيططلع لك\n\nالهوم ورك … بتكون ورقة تسلم لك من دكتورك … وتسلمها بعد سبوع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-205/171852/2",
+          "user": "GAMOFRN",
+          "ts": 1453369514000,
+          "tid": 171852,
+          "pn": 2
         }
       }
     },

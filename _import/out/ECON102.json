@@ -79,6 +79,13 @@
       "user": "KiTKaT"
     },
     {
+      "id": "stk-abo.saud",
+      "name": "abo.saud",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/22d042/144.png",
+      "email": "abo.saud@import.stkfupm.invalid",
+      "user": "abo.saud"
+    },
+    {
       "id": "stk-waleedx11",
       "name": "waleedx11",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/6bbea6/144.png",
@@ -477,6 +484,29 @@
           "ts": 1277623424000,
           "tid": 78458,
           "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1021675-econ102",
+      "uid": "stk-abo.saud",
+      "code": "ECON 102",
+      "sec": "info",
+      "ts": 1334319388000,
+      "st": "pub",
+      "data": {
+        "desc": "بصراحة العربي والاسلامي بالنسبة لي اشوف انها مثل الـ PE حضور وذاكر بيوم الاختبار او قبله\nاذا بتحذفهن حط مكانهن مادة ٣ ساعات ولا بصير جدولك شبه فاضي\nالايكون المادة اسهل من الـ 101 & econ 102 عموما ماهي صعبة\nجدولك حاليا ما اشوف فيه شي صعب الا الستات والاكاوتنق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/124162/4",
+          "user": "abo.saud",
+          "ts": 1334319388000,
+          "tid": 124162,
+          "pn": 4
         }
       }
     },

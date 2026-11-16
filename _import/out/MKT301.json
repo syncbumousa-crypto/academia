@@ -30,6 +30,13 @@
       "user": "Decision_Maker"
     },
     {
+      "id": "stk-cim_finance",
+      "name": "CIM finance",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/3ab097/144.png",
+      "email": "cim_finance@import.stkfupm.invalid",
+      "user": "CIM_finance"
+    },
+    {
       "id": "stk-user5961",
       "name": "فهو يهدين",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/839c29/144.png",
@@ -127,6 +134,29 @@
           "ts": 1118324531000,
           "tid": 42813,
           "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p647028-mkt301",
+      "uid": "stk-cim_finance",
+      "code": "MKT 301",
+      "sec": "info",
+      "ts": 1277749146000,
+      "st": "pub",
+      "data": {
+        "desc": "شباب شلون اسلوب الدكتور مروان في الشرح و الكويزات و المياجر في الكورس mkt 301 , طبعا في الترم 093 , اسف يمكن السؤال مكرر بس لان اليوم الصباح كان اللي منزل الكورس الدكتور جميل غازي واتوقع العصر او الظهر تغير وصار الدكتور مروان , انا ابي اقل شئ A في الكورس هل هي ممكنة مع الدكتور مروان ولا احذف الكورس …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mkt-mgt/81186/38",
+          "user": "CIM_finance",
+          "ts": 1277749146000,
+          "tid": 81186,
+          "pn": 38
         }
       }
     },

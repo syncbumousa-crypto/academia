@@ -1,0 +1,37 @@
+{
+  "code": "OM 201",
+  "users": [
+    {
+      "id": "stk-cl_500",
+      "name": "CL 500",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/51bf81/144.png",
+      "email": "cl_500@import.stkfupm.invalid",
+      "user": "CL_500"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p38488-om201",
+      "uid": "stk-cl_500",
+      "code": "OM 201",
+      "sec": "info",
+      "ts": 1068622514000,
+      "st": "pub",
+      "data": {
+        "desc": "هلا وغلا\n\nشوف بالغالي\n\nتخصصك ماهو زي تخصصي بس بقول المواد الي جربتها\n\nMath 132 …\nباخذها السمستر الجاي ان شاء الله … هي اسهل من 131\nانصحك تنزل عند BEG G لانه الافضل او ابو صبيح\n\nSE 100 … برضو السمستر الجاي باخذها\nالماده سهله نوعا ما حفظ\nالاسئله كومن\nخذها عند صديقي او خان\n\nOm 201 … ماخذتها للحين\nبس يقولون انها سهله وخفيفه\nخذها عند الزاير\n\nIAS 101 …نزل عند التويجري او الزهراني\n\nوالله يوفقنا وياك",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/29489/2",
+          "user": "CL_500",
+          "ts": 1068622514000,
+          "tid": 29489,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}
