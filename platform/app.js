@@ -13199,13 +13199,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const JR_PEEK_MS = 3500;
   let jrPeekOn = false, jrPeekT = 0, jrPeekArm = false;
   const jrPeekEls = () => document.querySelectorAll('#cm-cards > .x3, #cm-videos > .x3');
-  function jrPeek() {
+  /* ‏‎sw‎: لمحةُ التبديل بين «قائمة» و«رحلة» (‎jr-peek--sw‎) — تُرى في البنك أيضًا، وإن لم تُرَ فيه لمحةُ الفتح */
+  function jrPeek(sw) {
     jrPeekOn = true;
     clearTimeout(jrPeekT);
-    jrPeekEls().forEach(el => el.classList.add('jr-peek'));
+    jrPeekEls().forEach(el => { el.classList.add('jr-peek'); el.classList.toggle('jr-peek--sw', !!sw); });
     jrPeekT = setTimeout(() => {
       jrPeekOn = false;
-      jrPeekEls().forEach(el => el.classList.remove('jr-peek'));
+      jrPeekEls().forEach(el => el.classList.remove('jr-peek', 'jr-peek--sw'));
     }, JR_PEEK_MS);
   }
   /* يُنادى **قبل** إعادة الرسم: الرأسُ يُولد لابسًا الصنفَ في قالبه، فلا انتقالَ في
@@ -34993,7 +34994,7 @@ void main() {
         /* الشجرةُ تُعاد لأنّ قضيبَها يظهر ويغيب معه (‎edRender‎ يبني ‎#cm-cards‎)... */
         edRender();
         /* ...وتُلمَح الرحلةُ ثلاثًا ونصفًا ليُرى أثرُ التبديل حيث وقع */
-        jrPeek();
+        jrPeek(true);
         /* ...والتذييلُ خارجَه فلا يبلغه، فيُوسَم المقسومُ في مكانه */
         jrb.closest('.cx-jrseg').querySelectorAll('[data-jr]').forEach(b => {
           const on = (b.dataset.jr === '1') === want;
