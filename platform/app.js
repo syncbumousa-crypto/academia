@@ -1368,7 +1368,7 @@
         year: ['قبل سنة', 'قبل سنتين', 'سنوات', 'سنة'],
       },
       /* شريط الأنواع الأربعة: الاسم وحده في التلميح — الأيقونة هي الواجهة */
-      cdKinds: { c: 'الوجهين', cloze: 'الفراغ', io: 'الإخفاء', q: 'المتعدّد' },
+      cdKinds: { c: 'الوجهين', cloze: 'الفراغ', io: 'الإخفاء', q: 'المتعدّد' }, cdChooseT: 'اختر نوع السؤال',
       cdStDraft: 'كُتب ولم يُحفظ بعد', cdStSaving: 'يجري الحفظ…', cdStSaved: 'محفوظ',
       cdFront: 'الوجه', cdBack2: 'الظهر', cdSave: 'إضافة', cdSaveEdit: 'حفظ', cdCancel: 'إغلاق',
       vtDragSel: 'اسحب لترتيبها · أو اضغط لتحديدها',
@@ -1802,7 +1802,7 @@
       },
       /* بالجمع كما طُلبت: ‎Choices · Sides · Blanks · Occlusions‎ — و«الإخفاء» تُكتب
          بحرفَي ‎c‎ في الإنجليزيّة (‎Occlusions‎)، وهو رسمُها الصحيح */
-      cdKinds: { c: 'Sides', cloze: 'Blanks', io: 'Occlusions', q: 'Choices' },
+      cdKinds: { c: 'Sides', cloze: 'Blanks', io: 'Occlusions', q: 'Choices' }, cdChooseT: 'Choose the question type',
       cdStDraft: 'Typed, not saved yet', cdStSaving: 'Saving…', cdStSaved: 'Saved',
       cdFront: 'Front', cdBack2: 'Back', cdSave: 'Add', cdSaveEdit: 'Save', cdCancel: 'Close',
       vtDragSel: 'Drag to reorder · or click to select',
@@ -9638,7 +9638,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* «سؤال» يفتح دُرجَ أنواع السؤال العلويّ دائمًا (طلبُ صاحب الموقع) — كان يمرّ بـ‎.cx-addc‎ فيصير
        «ورقةَ الملخّص» متى كان في المساهمة متن (‎cxPageOpen‎)، وما ذاك بابُ إضافة سؤال */
-    if (qb.dataset.actqb !== 'f') { openCardDlg(null, null); return; }
+    if (qb.dataset.actqb !== 'f') { cdQuickQ(); return; }
     const t = post && post.querySelector('.vt-foot .cx-addf');
     if (t) t.click();
   }, true);
@@ -20381,6 +20381,39 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (cardDlg.picked) setTimeout(() => $('#cd-front').focus(), 30);
   }
+  /* ===== سؤالٌ جديدٌ من البنك: النافذةُ مباشرةً ولسانُها معها، وأنواعُ السؤال الأربعةُ داخلَها (طلبُ صاحب الموقع) =====
+     بدل الدُّرج العلويّ: تُفتح النافذةُ كأنّ النوعَ اختير (فيولد لسانُها «سؤال» ولا ينزل الدُّرج)، وفوق متنها لوحةٌ بالأنواع.
+     يُختار النوعُ منها فيصير نوعَ النافذة وتنصرف اللوحةُ ويُكتب فيها مباشرة */
+  function cdQuickQ() {
+    openCardDlg(null, null);
+    if (!cardDlg || cardDlg.picked) return;
+    cdSetWhich('c'); cardDlg.picked = true; cardDlg.choose = true; cdTray = false;
+    cdMinsSync(); renderCardDlg(); cdChooserPaint();
+  }
+  function cdChooserPaint() {
+    document.querySelectorAll('.cd-chooser').forEach(x => x.remove());
+    document.querySelectorAll('.cd-stage.is-choosing').forEach(x => x.classList.remove('is-choosing'));
+    if (!cardDlg || !cardDlg.choose) return;
+    const stage = document.querySelector('.cd-stage.is-focus'); if (!stage) return;
+    stage.classList.add('is-choosing');   /* متنُ النافذة يُخفى تحت اللوحة (حقولُه في طبقةٍ ثلاثيّة الأبعاد تعلو أيَّ ‎z-index‎) */
+    const c = document.createElement('div'); c.className = 'cd-chooser';
+    c.innerHTML = `<b class="cd-chooser__t">${esc(T().cdChooseT || 'اختر نوع السؤال')}</b><div class="cd-chooser__row">`
+      + CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-ch" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('') + `</div>`;
+    stage.appendChild(c);
+    /* ولسانُ النافذة يقول «سؤال» حتى يُختار نوعُه */
+    const tab = document.querySelector('#cd-mins .cd-mtab.is-focus .cd-mtab__tx');
+    if (tab) tab.textContent = T().pkPlusQC;
+    const first = c.querySelector('.cd-ch'); if (first) first.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('.cd-chooser .cd-ch');
+    if (!b || !cardDlg) return;
+    e.preventDefault(); e.stopPropagation();
+    cardDlg.choose = false;
+    cdSetWhich(b.dataset.chk);
+    cdMinsSync(); renderCardDlg(); cdChooserPaint();
+    setTimeout(() => { const f = $('#cd-front'); if (f) f.focus(); }, 30);
+  }, true);
   /* ===== «✕» تُنهي البطاقة لا الجلسة =====
      الدُّرج بابُ الإضافة، والبطاقةُ ما ينزل منه. فإغلاقُ البطاقة يردّك إلى الباب لا يُخرجك
      من الغرفة — تُغلق ما بين يديك وتأخذ نوعًا آخر بلا أن تعيد فتح كلّ شيء.
