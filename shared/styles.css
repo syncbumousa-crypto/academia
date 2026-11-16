@@ -16716,7 +16716,7 @@ html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { backgrou
   transition: background .12s ease, transform .22s cubic-bezier(.3, 1.5, .5, 1);
 }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 4px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 1px; }   /* وسطُ الأيقونة (‎22‎) على وسط السطر الأوّل (‎1.7em + 2px‎) — كانت ‎4px‎ لأيقونة ‎16‎ فنزلت ‎3.5‎ */
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: var(--lgx-hov); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; border-radius: 19px; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: var(--lgx-hov); }
