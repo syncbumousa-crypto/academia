@@ -10814,7 +10814,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (t) t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
   }
   /* جوفُ مصدرٍ واحد — وحتى يُفتح الملفّ: هيكلُ صفحاتٍ تتقلّب يُسلِّم إلى الكتاب بلا قفزة */
-  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n)}</div>`;
+  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n, (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover)}</div>`;
   const pkSrcView = (id, ed) => {
     /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
     /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
@@ -24099,6 +24099,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.save(); g.transform((b[0] - a[0]) / img.width, (b[1] - a[1]) / img.width, (d[0] - a[0]) / img.height, (d[1] - a[1]) / img.height, a[0], a[1]);
     g.drawImage(img, 0, 0); if (dim) { g.fillStyle = `rgba(0,0,0,${dim})`; g.fillRect(0, 0, img.width, img.height); } g.restore();
   }
+  /* لونُ الغلاف كما يأتي (‎#rrggbb‎ أو ‎rgb(…)‎: لونُ الغلاف المرفوع أو المقروءُ من أولى الصفحات) ← ‎#rrggbb‎، وإلّا لونُ الكتاب الافتراضيّ */
+  function bkLdHex(c) {
+    c = String(c || '').trim(); if (/^#[0-9a-f]{6}$/i.test(c)) return c;
+    const m = c.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i);
+    return m ? '#' + m.slice(1, 4).map(v => Math.min(255, +v).toString(16).padStart(2, '0')).join('') : '#2c5e65';
+  }
   function bkLdShade(hex, f) { const n = parseInt(hex.slice(1), 16), c = v => Math.max(0, Math.min(255, Math.round(v * f))); return `rgb(${c(n >> 16)},${c(n >> 8 & 255)},${c(n & 255)})`; }
   /* ===== التقليبُ نفسُه الذي في المحرّك (‎book2.js‎: ‏‎pageCurve · rfTick‎ — «المجلدُ يستدعي تحديداته») =====
      كلُّ صفحةٍ مربوطةٌ بجدار الكعب على عمقها ‎δ‎ وتُقلَّب بزاوية ‎θ‎ حول مفصل الغلاف، تنثني في ثنية الكعب (‎GUT‎) ثمّ تستوي؛ والورقُ
@@ -24212,7 +24218,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkLdRaf = 0;
     for (const el of [...document.querySelectorAll('.bk-skel')]) if (!el._ld) {
       const cv = el.querySelector('.bk-skel__cv'); if (!cv) continue;
-      el._ld = { el, cv, g: cv.getContext('2d'), n: +el.dataset.n || 120, cover: /^#[0-9a-f]{6}$/i.test(el.dataset.cv || '') ? el.dataset.cv : '#1d4a50' };
+      el._ld = { el, cv, g: cv.getContext('2d'), n: +el.dataset.n || 120, cover: bkLdHex(el.dataset.cv) };
       bkLdLive.add(el._ld); bkLdCv[el.dataset.bkl] = cv;
     }
     for (const L of bkLdLive) {
