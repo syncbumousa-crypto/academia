@@ -11461,15 +11461,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
-      const h = host.holder.kth || T().ktHead, used = hlUsed(id), nc = ro ? 4 : 3;
+      const h = host.holder.kth || T().ktHead, used = hlUsed(id);
       let k = 0;
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
         /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
         + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
         + deep.map(x => {
-          /* رأسُ مجلدٍ داخليّ: اسمُه وأيقونتُه بلونه، مُزاحًا بعمقه — وتحته بطائقُه بترقيمٍ متّصل */
-          if (x.h) return `<tr class="kt-sub" data-ktsub="${esc(x.h.id)}" style="--d:${x.d - 1}"><td colspan="${nc}"><span class="kt-subn">${pkFace({ id: x.h.id, c: folderColor(x.h), em: x.h.em }, false)}<b>${esc(x.h.name || T().pkTitlePh)}</b></span></td></tr>`;
+          /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
+          if (x.h) return '';
           const n = x.n;
           return `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
