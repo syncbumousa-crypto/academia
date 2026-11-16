@@ -37504,10 +37504,17 @@ void main() {
     if (old && old.data && ((old.data.deck || []).length || (old.data.qb || []).length) && !confirm('لك مساهمةٌ في ' + S.code + ' — تُستبدل بالبذرة؟')) return;
     const p = myPost(S.code, 'cards');
     const now = Date.now();
-    const withIds = a => (a || []).map(n => Object.assign({ id: newId() }, n, n.t === 'c' && n.ctype ? { ct: now } : {}, n.ch ? { ch: withIds(n.ch) } : {}));
+    const keyed = {};   /* مفتاحُ الصفّ في البذرة ← معرّفُه الجديد (تُربط به التظليلات) */
+    const withIds = a => (a || []).map(n => {
+      const o = Object.assign({ id: newId() }, n, n.t === 'c' && n.ctype ? { ct: now } : {}, n.ch ? { ch: withIds(n.ch) } : {});
+      if (o.key) { keyed[o.key] = o.id; delete o.key; }
+      return o;
+    });
     p.data.title = S.title || p.data.title;
     p.data.deck = withIds(S.deck);
     p.data.qb = withIds(S.qb);
+    /* وتظليلاتُ الكتاب مربوطةً بصفوفها — على المصدر الأوّل (‎s: ''‎)؛ وصورُها تُصنع من الكتاب حين تُطلب */
+    p.data.hl = { marks: (S.marks || []).filter(m => keyed[m.ck]).map(m => ({ id: newId(), s: '', k: m.k, c: [keyed[m.ck]], d: m.d || 'r', col: m.col || 'y', kind: m.kind || 't', bars: m.bars, tx: m.tx || '' })) };
     save();
     if (S.pdf) {
       try {
@@ -37515,6 +37522,7 @@ void main() {
         if (r.ok) await pkSrcSet(p.id, new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }));
       } catch (e) {}
     }
+    pkSplit[p.id] = true;   /* والكتابُ ظاهرٌ بجانب الملخّص: نقرُ مجلدٍ يقلّبه ويُطلع تظليلاتِه */
     save();
     toast('أُضيفت المساهمة في ' + S.code);
     marketReel.focusCode(S.code);
