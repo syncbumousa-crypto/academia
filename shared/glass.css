@@ -744,3 +744,65 @@ html:root .cm-docmenu .drl-av--all { color: color-mix(in srgb, var(--glass-ink) 
 html:root .cm-docmenu .drl-n,
 html:root .cm-docmenu .drl-rt i,
 html:root .cm-docmenu .drl-none { color: color-mix(in srgb, var(--glass-ink) 55%, transparent); }
+
+/* ============================================================
+   قائمةُ الترتيب في بقيّة التبويبات (‎cmSortBar‎) — زجاجُ قائمة الدكاترة نفسُه (طلبُ صاحب الموقع)
+   ============================================================
+   الصبغةُ بكثافة الشريط والتمويهُ الأخفّ والحرفُ والظلُّ كقائمة الدكاترة. وهي صغيرة (خياران)،
+   فزاويتُها ١٨ لا ٢٦ — كقائمة المصادر (‎.psp-box‎) — وزاويةُ الخيار = زاويتُها − حشوتُها.
+   والمختارُ بتروليٌّ ممتلئٌ كرقاقات الترتيب في قائمة الدكاترة. */
+html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) {
+  border: 0; border-radius: 18px; padding: 5px; min-width: 132px;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .cm-sort__list:not(.cm-docmenu) { animation: lg-pop .22s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .cm-sort__list:not(.cm-docmenu) { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list.cm-sort__list:not(.cm-docmenu) { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt {
+  border-radius: 13px; padding: 9px 13px; color: var(--glass-ink); font-weight: 600;
+  transition: background .15s, color .15s;
+}
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt + .cm-sortopt { margin-top: 2px; }
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt:hover { background: color-mix(in srgb, var(--glass-ink) 8%, transparent); }
+html:root .cm-sort__list:not(.cm-docmenu) .cm-sortopt.on { background: var(--c-kfupm, #2c5e65); color: #fff; font-weight: 700; }
+
+/* ============================================================
+   قائمةُ النقاط الثلاث (تعديل · حذف · إبلاغ · تثبيت) — الزجاجُ نفسُه (طلبُ صاحب الموقع)
+   ============================================================
+   كقائمة الترتيب: زاويةٌ ١٨ وحشوةٌ ٥ وخيارٌ بزاوية ١٣. والحذفُ يبقى أحمرَ يُعرف من بعيد،
+   وحين يُمَرّ عليه يمتلئ بحمرةٍ خفيفة. */
+html:root .post-menu__list:not(.cm-sort__list) {
+  border: 0; border-radius: 18px; padding: 5px; min-width: 132px;
+  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list:not(.cm-sort__list) { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .post-menu__list:not(.cm-sort__list) { animation: lg-pop .22s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .post-menu__list:not(.cm-sort__list) { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list:not(.cm-sort__list) { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+html:root .post-menu__list:not(.cm-sort__list) button {
+  border-radius: 13px; padding: 9px 13px; color: var(--glass-ink); font-weight: 600;
+  transition: background .15s, color .15s;
+}
+html:root .post-menu__list:not(.cm-sort__list) button + button { margin-top: 2px; }
+html:root .post-menu__list:not(.cm-sort__list) button:hover { background: color-mix(in srgb, var(--glass-ink) 8%, transparent); }
+html:root .post-menu__list:not(.cm-sort__list) button:disabled { opacity: .5; cursor: default; background: transparent; }
+html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger) { color: #c0564b; }
+html[data-theme="dark"]:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger) { color: #e08377; }
+html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger):hover { background: color-mix(in srgb, #c75b5b 16%, transparent); }
