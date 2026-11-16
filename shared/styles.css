@@ -16723,7 +16723,7 @@ html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { backgrou
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide > .pg-in { padding: 0 6px 6px; }
 .pk-fstrip.pk-lg .pg-nm { flex: 0 1 auto; line-height: 1.7; padding-block: 1px; }
-.pk-fstrip.pk-lg .pk-fi { width: 16px; height: 16px; flex: none; color: var(--u-mut, #8a97a3); }
+.pk-fstrip.pk-lg .pk-fi { width: 22px; height: 22px; flex: none; color: var(--u-mut, #8a97a3); }   /* أكبر (طلبُ صاحب الموقع): كان ‎16‎ */
 html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-weight: 700; }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
 .pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; }
@@ -16742,7 +16742,7 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-we
 .lgx-ghost.is-dark { color: #eef2f3; --lgx-hi: rgba(255, 255, 255, .15); --lgx-hi2: rgba(255, 255, 255, .045); --lgx-bev: rgba(255, 255, 255, .06); --lgx-bev2: rgba(0, 0, 0, .16); }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
-.lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
+.lgx-ghost > .pk-fi { width: 22px; height: 22px; flex: none; }
 .lgx-ghost > .pg-nm { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .lgx-gb { position: absolute; inset: 0; border-radius: 999px; pointer-events: none; }
 .lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .45); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .35); }
@@ -17311,7 +17311,7 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .pk-es__b svg { width: 16px; height: 16px; flex: none; }
 /* وعاءُ المصدر الفارغ والوسطُ الفارغ: الرسمةُ في الوسط بلا إطارٍ مرقّط */
 .pk-src.pk-src--es { display: flex; padding: 0; }
-.pk-split__ph--es { display: flex; }
+.pk-split__ph--es, .pk-split__esr { display: flex; }
 /* البنك: تُرى ما دام محرّرُه فارغًا */
 .pk-bank > .pk-es { display: none; }
 .pk-bank:not(:has(#cm-cards .x3 > *)) > .pk-es { display: flex; }

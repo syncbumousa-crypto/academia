@@ -9670,7 +9670,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pv || !pkFromNoneCheck(pv)) return;
     const id = pv.dataset.pkid; if (!id) return;
     e.preventDefault(); e.stopPropagation();
-    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree'; }
+    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF; }
     else pkBank[id] = true;
     pkFromNoneRender(id);
   }, true);
@@ -9844,8 +9844,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `</svg></button>`;
   };
   const pkVwOf = id => {
-    const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
-    if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || 'tree'; pkBank[id] = true; return pkVw[id]; }
+    const v = pkVw[id] || (pkLab() ? PK_KN_DEF : 'folder');
+    if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || PK_KN_DEF; pkBank[id] = true; return pkVw[id]; }
     return v;
   };
   const pkBankOn = id => !!(pkLab() && pkBank[id]);
@@ -9916,7 +9916,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkIcSet = (id, k) => {
     pkSplit[id] = k === 'book'; pkBank[id] = k === 'bank';
     if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
-    if (k === 'book' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    if (k === 'book' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
     cxRowFresh = id;   /* خلوُّها في هذا الكونسبت عودةٌ إلى الأيقونات، لا طيّ */
   };
   /* مستطيلٌ بإحداثيّات المربّع */
@@ -10527,6 +10527,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وتعمّ العروضَ الثلاثة (طلبُ صاحب الموقع): ‎pkSplit[id]‎ هو العرضُ الذي بجانب الكتاب — شجريٌّ أو بطاقيٌّ
      أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
   const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
+  const PK_KN_DEF = 'table';   /* العرضُ الأوّلُ لمساحة الملخّص: الجدوليّ (طلبُ صاحب الموقع) — ثمّ ما اختاره صاحبُها آخرَ مرّة */
   /* ===== ROADMAP-SPLITTER: خطٌّ يُمسك بين الكتاب وجاره =====
      حصّةُ كلِّ طرفٍ (الكتابُ ‎--spl‎ والبنكُ ‎--sqb‎) كسرٌ من عرض القسمة إلّا فُرجةً واحدة — أساسٌ واحدٌ لا يتبدّل بعدد المساحات،
      فلا يتغيّر عرضُ طرفٍ إذا فُتح الطرفُ الآخرُ أو أُغلق: الملخّصُ وحده يأخذ ما بقي (طلبُ صاحب الموقع). وكان الأساسُ يطرح فُرجتين
@@ -11367,7 +11368,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
-        lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
+        /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
+           وهي ‎kt-view‎ بمجلدها المختار: فـ«+ صفّ» من التذييل يضيف إليه، ثمّ يُرسم العرضُ مكانها */
+        lab && v !== 'folder' && ed && wrap && !flatCards(deck).length ? `<div class="kt-view pk-split__ph pk-split__esr" data-ktf="${esc(sel)}">${pkEs('mid')}</div>`
+        : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
   }
@@ -26082,7 +26086,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cxMorph(btn, () => {
           const body = document.getElementById('cm-body');
           cxSel.clear(); pkBank[id] = true; pkPaneLast[id] = 'bank';
-          if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+          if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
           if (body) cxMaxY = body.scrollTop;
           cxMax = true; renderCmSection();
         });
@@ -26116,7 +26120,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
     pkBank[id] = !on;
     if (!on) pkPaneLast[id] = 'bank';   /* يُضاف ولا يُنشَّط (طلبُ صاحب الموقع) */
-    if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
     renderCmSection();
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
     const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
@@ -26299,7 +26303,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const beforeR = before ? before.getBoundingClientRect() : null;
       if (to === 'source') {
         if (part) pkSplit[id] = false;
-        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
+        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || PK_KN_DEF; }
       } else if (to !== cur) {
         /* ===== تبديلُ طريقة العرض: الكتلةُ ثابتة، ومحتواها وحدَه يخرج ثمّ يدخل الجديد (طلبُ صاحب الموقع) ===== */
         const kv0 = part && sp && sp.querySelector(':scope > .kt-view');
@@ -26507,10 +26511,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
      و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
+  /* شجرةُ الشريط: مجلداتُ الملخّص نفسُها — لا ‎edPack()‎، فذاك يصير شجرةَ البنك متى فُتح البنك
+     (‎cardData‎ ⇐ ‎pkQbView‎)، فكان الاسمُ يُكتب ولا يجد مجلدَه فلا يُحفظ */
+  const pkStripDeck = () => edSec() === 'cards' ? cardDataRaw(cmCode).deck : edPack().deck;
   document.addEventListener('input', e => {
     const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
     if (!fi) return;
-    const hit = findNode(edPack().deck, fi.dataset.pkfn);
+    const hit = findNode(pkStripDeck(), fi.dataset.pkfn);
     if (!hit) return;
     hit.n.name = fi.value;
     save();
@@ -26525,7 +26532,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فيُرى حيث نزل */
   const pkDropOk = (dragId, targetId) => {
     if (!dragId || dragId === targetId) return false;
-    const deck = edPack().deck, hit = findNode(deck, dragId);
+    const deck = pkStripDeck(), hit = findNode(deck, dragId);
     if (!hit) return false;
     if (targetId === '') return hit.arr !== deck;                 /* إلى الجذر: إلّا إن كان فيه */
     return !findNode(hit.n.ch, targetId);                          /* لا في أحد أحفاده */
@@ -26535,7 +26542,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* (كان هنا سحبُ المتصفّح الأصليّ ‎dragstart/dragover/drop‎ — نُزع في المرحلة ٥ من ROADMAP-GLASS-STRIP:
      لم يبقَ وجهٌ ‎draggable‎، والسحبُ كلُّه بالمؤشّر في «السحب الزجاجيّ» تحت) */
   function pkMove(id, dragId, to) {
-    const deck = edPack().deck, hit = findNode(deck, dragId);
+    const deck = pkStripDeck(), hit = findNode(deck, dragId);
     hit.arr.splice(hit.i, 1);
     if (to === '') deck.push(hit.n);
     else { const t = findNode(deck, to); (t.n.ch = t.n.ch || []).push(hit.n); t.n.open = true; }
