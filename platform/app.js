@@ -23781,9 +23781,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const mine   = posts.find(p => p.me);
     const others = posts.filter(p => !p.me);
     const circles = [];
-    if (posts.length === 0) {
-      for (let k = 0; k < FACE_K; k++) circles.push('<span class="cm-face cm-face--empty"></span>');
-    } else {
+    /* بلا مساهمات: لا دوائرَ منقّطة ولا «+0» (طلبُ صاحب الموقع) — تبقى دعوةُ «+» وحدها، وتظهر مع اختيار التبويب */
+    if (posts.length === 0) return noInvite ? '' : `<span class="cm-face cm-face--me" title="${T().sharePost}">+</span>`;
+    {
       /* إن ساهمتُ: صورتي دائرة عادية أول الصف (يمين بالعربي / يسار بالإنجليزي) */
       if (mine) circles.push(`<span class="cm-face cm-face--mine">${avatarHTML(mine)}</span>`);
       others.slice(0, FACE_K - (mine ? 1 : 0)).forEach(p => circles.push(`<span class="cm-face">${avatarHTML(p)}</span>`));
@@ -23825,7 +23825,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!code) return;
     document.querySelectorAll('.cm-tabs button[data-tab]').forEach(btn => {   /* يشمل الشريطين */
       const span = btn.querySelector('.cm-faces');
-      if (span) span.innerHTML = facesRowHTML(code, btn.dataset.tab);
+      if (span) { span.innerHTML = facesRowHTML(code, btn.dataset.tab); span.classList.toggle('is-none', !span.querySelector('.cm-face:not(.cm-face--me)')); }
     });
   }
 

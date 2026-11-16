@@ -18475,3 +18475,6 @@ html[data-theme="dark"] .cm-pick__msg { background: var(--u-surface, #182026); b
 html[data-theme="dark"] .cm-pick__av { background: color-mix(in srgb, #7fb7bd 22%, #1d272e); }
 html[data-theme="dark"] .cm-pick__ln i { background: rgba(255, 255, 255, .1); }
 html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
+/* تبويبٌ بلا مساهمات: صفُّ الدوائر لا يأخذ مكانًا، فتتوسّط الأيقونةُ والاسمُ عموديًّا — وإذا اختير ظهرت «+» وحدها */
+.cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
+.cm-tabs button:not(.on) .cm-faces.is-none { display: none; }
