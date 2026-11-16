@@ -18681,3 +18681,8 @@ html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-w
 .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button { display: none; }
 /* في النشر لا زرّا تقليبٍ تحت الكتاب (طلبُ صاحب الموقع): التقليبُ من نصفَي مساحته كما في التحرير */
 #cm-body .post:not(.pk--edit) .pk-src--book .cbk-nav { display: none; }
+/* ===== المساهمةُ الموسَّعة بخلفية الموقع نفسِها وألوانِ مساحاتها نفسِها (طلبُ صاحب الموقع) =====
+   كانت الشاشةُ الكاملة تلبس سطحًا مُعتِمًا (‎#1f2a31‎ في الليلي) وفوقه صبغةٌ (‎--u-surf‎) فيقترب لونُها من لون
+   المساحات (‎--pk-blk‎) فتذوب فيه. فصارت خلفيّتُها خلفيّةَ الصفحة (‎--bg‎) بلا صبغة — كما تبدو المساهمةُ في مكانها */
+#cm-body.is-cxfull, html[data-theme="dark"] #cm-body.is-cxfull { background: var(--bg, #fff); }
+#cm-body.is-cxfull .post.pk--max, #cm-body.is-cxfull .post.pk--maxpub { background: transparent; }
