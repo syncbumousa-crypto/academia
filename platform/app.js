@@ -11491,7 +11491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `</article>`).join('') + `</div>`;
     } else {
       /* العرضُ الشجريّ لوحٌ حرّ (ROADMAP-CANVAS) — ‎kcvHTML‎ */
-      body = kcvHTML(id, sel, host, cards, ro);
+      body = kcvHTML(id, sel, host, cards, ro, pack);
     }
     /* الفارغُ بلا كلام (طلبُ صاحب الموقع) — في التحرير والنشر سواء: الشجريُّ لوحُه وحدَه، والبطاقيُّ والجدوليُّ مربّعٌ مرقّطٌ خالٍ.
        وزرُّ «+ معرفة» شِيل حتى يُقرَّر مكانُه الجديد (‎ktAddBtn‎ باقيةٌ له) */
@@ -11806,19 +11806,41 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PKCV = new Map();
   const KCV = { W: 240, GX: 36, GY: 28, PAD: 24, ZMIN: .25, ZMAX: 2 };
   const kcvKey = (id, sel) => id + '|' + sel;
-  function kcvHTML(id, sel, host, cards, ro) {
+  /* ===== مناطقُ المجلدات (طلبُ صاحب الموقع): اللوحُ واحد، ولكلّ مجلدٍ داخليٍّ منطقتُه فيه =====
+     موضعُ البطاقة (‎n.pos‎) نسبةً إلى أصل مجلدها كما كان — فالقديمُ يبقى كما هو. والمجلدُ الداخليُّ إطارٌ باسمه ولونه
+     يحيط بما فيه ويكبر معه، وموضعُه في أبيه آليٌّ (صفٌّ تحت بطائق الأب) أو ما سُحب إليه (‎g.zone‎ نسبةً إلى أصل الأب).
+     ولا تتراكب المناطق: ما يصطدم بسابقه يُدفع تحته. ومن فتح المجلدَ الداخليَّ وحدَه رأى منطقتَه وحدها،
+     ومن فتح أباه رأى الكلَّ فيسحب بينها ويصل */
+  const KZ = { P: 20, H: 36, G: 44 };
+  const KCVHOST = new Map();   // مفتاحُ اللوح ← مجلدُه المفتوح (يُقرأ عند الترتيب والسحب)
+  function kcvHTML(id, sel, host, cards0, ro, pack) {
     const key = kcvKey(id, sel), V = PKCV.get(key);
+    KCVHOST.set(key, host);
     queueMicrotask(kcvMountAll);
+    const zs = [], cards = [], zOf = new Map();
+    const walk = (arr, z) => { arr.forEach(n => { if (n.t === 'c') { cards.push(n); zOf.set(n.id, z); } }); arr.forEach(g => { if (g.t === 'f') { zs.push(g); walk(g.ch || [], g.id); } }); };
+    walk(host.arr, '');
     const links = kcvLinkData(host, cards, ro);
+    /* وصلاتٌ في آباء المفتوح لها طرفٌ هنا وطرفٌ خارجه: سهمٌ قصيرٌ يخرج من البطاقة، ونقرُه يفتح الأب (‎data-kup‎) */
+    const ids = new Set(cards.map(n => n.id)), stubs = [];
+    let up = '';
+    if (sel !== '') {
+      const deck = (pack || cardDataRaw(cmCode) || {}).deck || [], trail = cxTrail(deck, sel) || [];
+      up = trail.length ? trail[trail.length - 1] : '';
+      const holders = [pack || cardDataRaw(cmCode)].concat(trail.map(t => (findNode(deck, t) || {}).n).filter(Boolean));
+      holders.forEach(H => (H && H.links || []).forEach(l => { const ia = ids.has(l.a), ib = ids.has(l.b); if (ia !== ib) stubs.push({ id: l.id, c: ia ? l.a : l.b, out: ia }); }));
+    }
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
+      + zs.map(g => `<div class="kcv-zone" data-kzone="${esc(g.id)}" style="--zc:${folderColor(g)}"><div class="kcv-zh"${ro ? '' : ' data-kzh="1"'}>${pkFi(folderColor(g))}<b>${esc(g.name || T().pkTitlePh)}</b></div></div>`).join('')
       + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"><defs>`
       + `<marker id="kcv-ar" class="kcv-ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `<marker id="kcv-ar-sel" class="kcv-ar kcv-ar--sel" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `</defs>` + links.map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
+      + stubs.map(t => `<g class="kcv-stub" data-kstub="${esc(t.id)}" data-c="${esc(t.c)}" data-out="${t.out ? 1 : 0}" data-kup="${esc(up)}"><path class="kcv-hit"/><path class="kcv-line"${t.out ? ' marker-end="url(#kcv-ar)"' : ' marker-start="url(#kcv-ar)"'}/></g>`).join('')
       + `</svg>`
-      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
-          + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
+      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}" data-kz="${esc(zOf.get(n.id))}"`
+          + (n.pos ? ` data-rx="${+n.pos.x || 0}" data-ry="${+n.pos.y || 0}" style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
           + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
           + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + `</div>`).join('')
@@ -11843,7 +11865,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* حدودُ ما في العالم (لملاءمة الكلّ) — من مواضع البطائق وقاماتها، بلا ‎getBoundingClientRect‎ المتأثّر بالتكبير */
   const kcvBox = cv => {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-    cv.querySelectorAll('.kcv-card').forEach(c => { const x = c.offsetLeft, y = c.offsetTop; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x + c.offsetWidth); y1 = Math.max(y1, y + c.offsetHeight); });
+    cv.querySelectorAll('.kcv-card, .kcv-zone').forEach(c => { const x = c.offsetLeft, y = c.offsetTop; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x + c.offsetWidth); y1 = Math.max(y1, y + c.offsetHeight); });
+    cv.querySelectorAll('.kcv-stub').forEach(g => { const c = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.c) + '"]'); if (c) y0 = Math.min(y0, c.offsetTop - 62); });   /* والسهمُ القصيرُ فوق بطاقته */
     return x0 === Infinity ? null : { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
   };
   function kcvFit(cv, keep100) {
@@ -11857,18 +11880,78 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     PKCV.set(cv.dataset.kcv, { x, y: P - b.y * z, z });
     kcvApply(cv);
   }
+  /* الترتيب: أوّلًا مواضعُ كلِّ مجموعةٍ نسبةً إلى أصل مجلدها (المرتّبُ آليًّا أعمدةٌ تمتدّ يسارًا من الأصل كما كان)،
+     ثمّ حدودُ كلّ منطقةٍ من أسفل إلى أعلى، ثمّ تُوضع المناطقُ في آبائها، ثمّ يُحسب كلُّ شيءٍ مطلقًا من أصل المفتوح.
+     ويحمل كلُّ عنصرٍ أصلَ مجلده (‎data-ox/oy‎) فيُردّ موضعُه نسبيًّا عند الحفظ */
   function kcvLayout(cv) {
-    const auto = [...cv.querySelectorAll('.kcv-card[data-auto]')];
-    if (!auto.length) return;
-    const placed = [...cv.querySelectorAll('.kcv-card:not([data-auto])')];
-    const top = placed.length ? Math.max(...placed.map(c => c.offsetTop + c.offsetHeight)) + KCV.GY * 2 : 0;
-    const cols = Math.max(1, Math.floor((cv.clientWidth - 2 * KCV.PAD + KCV.GX) / (KCV.W + KCV.GX)));
-    const ys = new Array(cols).fill(top);
-    auto.forEach(c => {
-      let k = 0; for (let i = 1; i < cols; i++) if (ys[i] < ys[k] - 1) k = i;
-      c.style.left = (-(k + 1) * KCV.W - k * KCV.GX) + 'px'; c.style.top = ys[k] + 'px';
-      ys[k] += c.offsetHeight + KCV.GY;
+    const host = KCVHOST.get(cv.dataset.kcv); if (!host) return;
+    const byZ = new Map(), frames = new Map(), rel = new Map(), off = new Map(), frel = new Map();
+    cv.querySelectorAll('.kcv-card').forEach(c => { const z = c.dataset.kz || ''; if (!byZ.has(z)) byZ.set(z, []); byZ.get(z).push(c); });
+    cv.querySelectorAll('.kcv-zone').forEach(f => frames.set(f.dataset.kzone, f));
+    const U = (a, b) => !a ? b : !b ? a : { x: Math.min(a.x, b.x), y: Math.min(a.y, b.y), w: Math.max(a.x + a.w, b.x + b.w) - Math.min(a.x, b.x), h: Math.max(a.y + a.h, b.y + b.h) - Math.min(a.y, b.y) };
+    const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    function own(z) {
+      const els = byZ.get(z) || [];
+      const placed = els.filter(c => !c.hasAttribute('data-auto')), auto = els.filter(c => c.hasAttribute('data-auto'));
+      placed.forEach(c => rel.set(c, { x: +c.dataset.rx || 0, y: +c.dataset.ry || 0, w: c.offsetWidth, h: c.offsetHeight }));
+      if (auto.length) {
+        const top = placed.length ? Math.max(...placed.map(c => rel.get(c).y + rel.get(c).h)) + KCV.GY * 2 : 0;
+        /* عددُ الأعمدة من عدد البطائق وحدَه — لا من عرض اللوح: فتُرى المجموعةُ بالهيئة نفسِها مفتوحةً وحدها أو منطقةً في أبيها */
+        const cols = Math.max(1, Math.min(3, Math.ceil(Math.sqrt(auto.length))));
+        const ys = new Array(cols).fill(top);
+        auto.forEach(c => {
+          let k = 0; for (let i = 1; i < cols; i++) if (ys[i] < ys[k] - 1) k = i;
+          rel.set(c, { x: -(k + 1) * KCV.W - k * KCV.GX, y: ys[k], w: c.offsetWidth, h: c.offsetHeight });
+          ys[k] += c.offsetHeight + KCV.GY;
+        });
+      }
+      let b = null; els.forEach(c => { b = U(b, rel.get(c)); });
+      return b;
+    }
+    function measure(arr, z) {
+      const mine = own(z);
+      let b = mine;
+      const kids = arr.filter(n => n.t === 'f'), done = mine ? [{ x: mine.x - KZ.P, y: mine.y - KZ.P, w: mine.w + 2 * KZ.P, h: mine.h + 2 * KZ.P }] : [];
+      const x0 = mine ? mine.x + mine.w : 0;
+      let cx = x0, ty = (mine ? mine.y + mine.h : 0) + KZ.G, rowH = 0, inRow = 0;
+      kids.forEach(g => {
+        const cb = measure(g.ch || [], g.id) || { x: -KCV.W, y: 0, w: KCV.W, h: 64 };
+        const fr = { x: cb.x - KZ.P, y: cb.y - KZ.H, w: cb.w + 2 * KZ.P, h: cb.h + KZ.H + KZ.P };
+        let o;
+        if (g.zone && isFinite(g.zone.x) && isFinite(g.zone.y)) o = { x: +g.zone.x, y: +g.zone.y };
+        else {
+          if (inRow === 3) { cx = x0; ty += rowH + KZ.G; rowH = 0; inRow = 0; }
+          o = { x: cx - (fr.x + fr.w), y: ty - fr.y };
+          cx = o.x + fr.x - KZ.G; rowH = Math.max(rowH, fr.h); inRow++;
+        }
+        const R = { x: o.x + fr.x, y: o.y + fr.y, w: fr.w, h: fr.h };
+        for (let q, n = 0; n < 60 && (q = done.find(d => hit(R, d))); n++) { const dy = q.y + q.h + KZ.G / 2 - R.y; o.y += dy; R.y += dy; }   /* لا تراكب: يُدفع تحت ما اصطدم به */
+        done.push(R); off.set(g.id, o); frel.set(g.id, fr);
+        b = U(b, R);
+      });
+      return b;
+    }
+    measure(host.arr, '');
+    function place(arr, z, ox, oy) {
+      (byZ.get(z) || []).forEach(c => { const r = rel.get(c); c.style.left = (ox + r.x) + 'px'; c.style.top = (oy + r.y) + 'px'; c.dataset.ox = ox; c.dataset.oy = oy; });
+      arr.forEach(g => {
+        if (g.t !== 'f') return;
+        const o = off.get(g.id), fr = frel.get(g.id), f = frames.get(g.id), gx = ox + o.x, gy = oy + o.y;
+        if (f) { Object.assign(f.style, { left: (gx + fr.x) + 'px', top: (gy + fr.y) + 'px', width: fr.w + 'px', height: fr.h + 'px' }); f.dataset.ox = gx; f.dataset.oy = gy; f.dataset.px = ox; f.dataset.py = oy; }
+        place(g.ch || [], g.id, gx, gy);
+      });
+    }
+    place(host.arr, '', 0, 0);
+  }
+  /* المنطقةُ تحت نقطةٍ من العالم: أعمقُ إطارٍ يحويها (أصغرُها)، وإلّا المفتوحُ نفسُه ('') */
+  function kcvZoneAt(cv, x, y, skip) {
+    let best = null, ba = Infinity;
+    cv.querySelectorAll('.kcv-zone').forEach(f => {
+      if (skip && skip.has(f.dataset.kzone)) return;
+      const l = f.offsetLeft, t = f.offsetTop, w = f.offsetWidth, h = f.offsetHeight;
+      if (x >= l && x <= l + w && y >= t && y <= t + h && w * h < ba) { ba = w * h; best = f; }
     });
+    return best;
   }
   function kcvMountAll() {
     document.querySelectorAll('#cm-body .kcv:not([data-kcvm])').forEach(cv => {
@@ -11899,7 +11982,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link, .kcv-lab, .kcv-map')) return;
+    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link, .kcv-lab, .kcv-map, .kcv-zh[data-kzh]')) return;
     const V = kcvView(cv); if (!V) return;
     /* إصبعٌ ثانٍ على اللوح: قرصٌ يكبّر (ويُلغي الإزاحة) */
     KCVP.pts.set(e.pointerId, { x: e.clientX, y: e.clientY, cv });
@@ -12019,9 +12102,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     fix.forEach(c => {
       if (!c.hasAttribute('data-auto') && !ids.has(c.dataset.kcard)) return;
       const n = ktCardOf(c, c.dataset.kcard); if (!n) return;
-      n.pos = { x: c.offsetLeft, y: c.offsetTop }; c.removeAttribute('data-auto');
+      n.pos = { x: c.offsetLeft - (+c.dataset.ox || 0), y: c.offsetTop - (+c.dataset.oy || 0) }; c.removeAttribute('data-auto');
+      c.dataset.rx = n.pos.x; c.dataset.ry = n.pos.y;
     });
     save();
+    if (cv.querySelector('.kcv-zone')) { kcvLayout(cv); kcvLinksFor(cv); }   /* والإطاراتُ تكبر مع ما فيها وتدفع جاراتِها */
   }
   function kcvMoveBy(cv, ids, dx, dy) {
     cv.querySelectorAll('.kcv-card').forEach(c => { if (!ids.has(c.dataset.kcard)) return; c.style.left = (c.offsetLeft + dx) + 'px'; c.style.top = (c.offsetTop + dy) + 'px'; });
@@ -12052,8 +12137,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const n = ktCardOf(card, id);
       KCVS.fresh = null;
       if (!n || (n.f || '').trim() || (n.b || '').trim()) return;
-      const host = ktHost(card.closest('.kt-view').dataset.ktf), i = host ? host.arr.indexOf(n) : -1;
-      if (i >= 0) { host.arr.splice(i, 1); card.remove(); save(); }
+      const r = ktLoc(ktHost(card.closest('.kt-view').dataset.ktf), id);
+      if (r) { r.arr.splice(r.i, 1); card.remove(); save(); }
     }, 0);
   });
   const KCVD = { s: null, raf: 0 };
@@ -12112,7 +12197,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = KCVD.s; if (!s) return;
     KCVD.s = null; s.cv.classList.remove('is-dragging');
     s.cv.querySelectorAll('.kcv-guide').forEach(g => { g.style.display = ''; });
-    if (s.moved) kcvCommit(s.cv, s.ids);
+    if (s.moved) { kcvRehome(s.cv, s.ids); kcvCommit(s.cv, s.ids); }
     else kcvSelect(s.cv, new Set([s.id]));   /* نقرةٌ بلا سحب: هذه وحدها */
   };
   document.addEventListener('pointerup', kcvDragEnd);
@@ -12135,8 +12220,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!host) return;
     kcvUndoPush(cv);
     kcvCommit(cv, new Set());   /* يثبت ما رُتّب آليًّا قبل أن يُضاف جديدٌ فيُعاد الترتيب */
-    const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x), y: kcvSnap(y) } };
-    host.arr.push(nn);
+    /* وفي منطقةِ مجلدٍ داخليّ: يُضاف إليه، وموضعُه نسبةً إلى أصله */
+    const zf = kcvZoneAt(cv, x + KCV.W / 2, y + 20), zn = zf && findNode(host.arr, zf.dataset.kzone);
+    const arr = zn ? (zn.n.ch || (zn.n.ch = [])) : host.arr, ox = zf ? +zf.dataset.ox || 0 : 0, oy = zf ? +zf.dataset.oy || 0 : 0;
+    const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x - ox), y: kcvSnap(y - oy) } };
+    arr.push(nn);
     KCVS.set(cv.dataset.kcv, new Set([nn.id]));
     KCVS.edit = { id: nn.id, fld: 'f' }; KCVS.fresh = nn.id;
     save(); renderCmSection();
@@ -12151,8 +12239,67 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const H = host.holder, ids = new Set(cards.map(n => n.id));
     const ok = (H.links || []).filter(l => ids.has(l.a) && ids.has(l.b) && l.a !== l.b);
     if (!ro && H.links && ok.length !== H.links.length) { H.links = ok; queueMicrotask(save); }
-    return ok;
+    /* ووصلاتُ المجلدات الداخليّة تُرى في أبيها (تُقرأ ولا تُنقّى ههنا: تُنقّى حين يُفتح مجلدُها) */
+    const sub = []; const walk = arr => arr.forEach(g => { if (g.t !== 'f') return; (g.links || []).forEach(l => { if (ids.has(l.a) && ids.has(l.b) && l.a !== l.b) sub.push(l); }); walk(g.ch || []); });
+    walk(host.arr);
+    return ok.concat(sub);
   }
+  /* بطاقةٌ سُحبت إلى منطقةٍ أخرى تنتقل إلى مجلدها (طلبُ صاحب الموقع)، ووصلاتُها تصعد إلى المفتوح
+     (أبٌ مشتركٌ لطرفيها) فلا تضيع حين يُفتح مجلدٌ لا يحوي الطرفين */
+  function kcvRehome(cv, ids) {
+    const host = KCVHOST.get(cv.dataset.kcv); if (!host || !cv.querySelector('.kcv-zone')) return;
+    let moved = false;
+    cv.querySelectorAll('.kcv-card').forEach(c => {
+      if (!ids.has(c.dataset.kcard)) return;
+      const f = kcvZoneAt(cv, c.offsetLeft + c.offsetWidth / 2, c.offsetTop + c.offsetHeight / 2), z = f ? f.dataset.kzone : '';
+      if (z === (c.dataset.kz || '')) return;
+      const r = ktLoc(host, c.dataset.kcard), to = z ? findNode(host.arr, z) : null;
+      if (!r || (z && !to)) return;
+      r.arr.splice(r.i, 1);
+      (z ? (to.n.ch || (to.n.ch = [])) : host.arr).push(r.n);
+      c.dataset.kz = z; c.dataset.ox = f ? f.dataset.ox : 0; c.dataset.oy = f ? f.dataset.oy : 0; c.removeAttribute('data-auto');
+      moved = true;
+    });
+    if (!moved) return;
+    const up = []; const walk = arr => arr.forEach(g => { if (g.t !== 'f') return; if (g.links) g.links = g.links.filter(l => (ids.has(l.a) || ids.has(l.b)) ? (up.push(l), false) : true); walk(g.ch || []); });
+    walk(host.arr);
+    if (up.length) host.holder.links = (host.holder.links || []).concat(up);
+  }
+  /* سحبُ المنطقة من رأسها: تتحرّك بما فيها، ويُحفظ موضعُها في أبيها (‎g.zone‎) — وما اصطدمت به يُدفع */
+  const KCVZ = { s: null, raf: 0 };
+  document.addEventListener('pointerdown', e => {
+    const h = e.target.closest && e.target.closest('#cm-body .kcv .kcv-zh[data-kzh]');
+    if (!h || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const f = h.closest('.kcv-zone'), cv = f.closest('.kcv'), host = KCVHOST.get(cv.dataset.kcv), V = kcvView(cv);
+    const g = host && findNode(host.arr, f.dataset.kzone); if (!g || !V) return;
+    const sub = new Set([g.n.id]); const walk = arr => arr.forEach(n => { if (n.t === 'f') { sub.add(n.id); walk(n.ch || []); } }); walk(g.n.ch || []);
+    const els = [...cv.querySelectorAll('.kcv-card, .kcv-zone')].filter(el => sub.has(el.dataset.kz) || sub.has(el.dataset.kzone));
+    cv.focus({ preventScroll: true });
+    KCVZ.s = { cv, g: g.n, f, els: els.map(el => [el, el.offsetLeft, el.offsetTop]), sx: e.clientX, sy: e.clientY, z: V.z, pid: e.pointerId, moved: false };
+  }, true);
+  document.addEventListener('pointermove', e => {
+    const s = KCVZ.s; if (!s || e.pointerId !== s.pid) return;
+    s.ex = e.clientX; s.ey = e.clientY;
+    if (!s.moved && Math.hypot(s.ex - s.sx, s.ey - s.sy) < 3) return;
+    if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); kcvUndoPush(s.cv); }
+    if (!KCVZ.raf) KCVZ.raf = requestAnimationFrame(() => {
+      KCVZ.raf = 0; const t = KCVZ.s; if (!t) return;
+      const dx = kcvSnap((t.ex - t.sx) / t.z), dy = kcvSnap((t.ey - t.sy) / t.z);
+      t.els.forEach(([el, x, y]) => { el.style.left = (x + dx) + 'px'; el.style.top = (y + dy) + 'px'; });
+      t.dx = dx; t.dy = dy; kcvLinksFor(t.cv);
+    });
+  });
+  const kcvZoneEnd = () => {
+    const s = KCVZ.s; if (!s) return;
+    KCVZ.s = null; s.cv.classList.remove('is-dragging');
+    if (!s.moved) return;
+    const ox = +s.f.dataset.ox - +s.f.dataset.px, oy = +s.f.dataset.oy - +s.f.dataset.py;
+    s.g.zone = { x: ox + (s.dx || 0), y: oy + (s.dy || 0) };
+    save(); kcvLayout(s.cv); kcvLinksFor(s.cv); kcvMapSoon(s.cv);
+  };
+  document.addEventListener('pointerup', kcvZoneEnd);
+  document.addEventListener('pointercancel', kcvZoneEnd);
   const kcvRect = c => ({ x: c.offsetLeft, y: c.offsetTop, w: c.offsetWidth, h: c.offsetHeight });
   const KCV_SIDE = { t: [0, -1], r: [1, 0], b: [0, 1], l: [-1, 0] };
   const kcvAnchor = (r, sd) => sd === 't' ? [r.x + r.w / 2, r.y] : sd === 'b' ? [r.x + r.w / 2, r.y + r.h] : sd === 'l' ? [r.x, r.y + r.h / 2] : [r.x + r.w, r.y + r.h / 2];
@@ -12179,7 +12326,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function kcvLinksFor(cv, ids) {
     cv.querySelectorAll('.kcv-link').forEach(g => { if (!ids || ids.has(g.dataset.a) || ids.has(g.dataset.b)) kcvRoute(cv, g); });
+    /* السهمُ القصير: من أعلى البطاقة صاعدًا (خارجٌ) أو نازلًا إليها (داخل) — متقطّعٌ يدلّ على أنّ طرفَه الآخرَ في الأب */
+    cv.querySelectorAll('.kcv-stub').forEach(g => {
+      const c = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.c) + '"]'); if (!c) return;
+      const r = kcvRect(c), x = r.x + r.w / 2, y = r.y, L = 54;
+      g.querySelectorAll('path').forEach(p => p.setAttribute('d', `M${x},${y} L${x},${y - L}`));
+    });
   }
+  /* نقرُ السهم القصير يفتح المجلدَ الأب — حيث يُرى طرفاه */
+  document.addEventListener('pointerdown', e => {
+    const g = e.target.closest && e.target.closest('#cm-body .kcv .kcv-stub');
+    if (!g || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const v = g.closest('.kt-view'), pid = v && v.dataset.pkid; if (!pid) return;
+    pkFs[pid] = g.dataset.kup || ''; renderCmSection();
+  }, true);
   function kcvLinkSel(cv, id) {
     document.querySelectorAll('#cm-body .kcv-link.is-sel').forEach(g => { g.classList.remove('is-sel'); g.querySelector('.kcv-line').setAttribute('marker-end', 'url(#kcv-ar)'); });
     KCVL.sel = cv && id ? { cv, id } : null;
@@ -12190,6 +12351,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function kcvLinkDel(cv, id) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     host.holder.links = (host.holder.links || []).filter(l => l.id !== id);
+    const walk = arr => arr.forEach(n => { if (n.t === 'f') { if (n.links) n.links = n.links.filter(l => l.id !== id); walk(n.ch || []); } }); walk(host.arr);
     const g = cv.querySelector('.kcv-link[data-klink="' + CSS.escape(id) + '"]'); if (g) g.remove();
     KCVL.sel = null; save();
   }
@@ -12253,7 +12415,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const kcvStack = cv => { const k = cv.dataset.kcv; if (!KCVU.stacks.has(k)) KCVU.stacks.set(k, { u: [], r: [] }); return KCVU.stacks.get(k); };
   function kcvShot(cv) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return null;
-    return JSON.stringify({ cards: ktCards(host), links: host.holder.links || [] });
+    return JSON.stringify({ arr: host.arr, links: host.holder.links || [] });   /* الشجرةُ كلُّها: البطاقةُ قد تنتقل بين المناطق والمنطقةُ قد تتحرّك */
   }
   function kcvUndoPush(cv, kind, snap) {
     /* أسهمٌ متتالية خطوةٌ واحدة في التراجع (لا عشرون) */
@@ -12266,10 +12428,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function kcvRestore(cv, sn) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     const d = JSON.parse(sn), arr = host.arr;
-    const at = arr.findIndex(n => n.t === 'c');
-    const rest = arr.filter(n => n.t !== 'c');
-    const i0 = at < 0 ? rest.length : arr.slice(0, at).filter(n => n.t !== 'c').length;
-    arr.splice(0, arr.length, ...rest.slice(0, i0), ...d.cards, ...rest.slice(i0));
+    if (d.arr) arr.splice(0, arr.length, ...d.arr);
+    else {   /* لقطةٌ قديمةُ الهيئة (بطائقُ المجلد وحدها) */
+      const at = arr.findIndex(n => n.t === 'c'), rest = arr.filter(n => n.t !== 'c');
+      const i0 = at < 0 ? rest.length : arr.slice(0, at).filter(n => n.t !== 'c').length;
+      arr.splice(0, arr.length, ...rest.slice(0, i0), ...d.cards, ...rest.slice(i0));
+    }
     host.holder.links = d.links;
     KCVS.set(cv.dataset.kcv, new Set()); KCVL.sel = null;
     save(); renderCmSection();
@@ -12286,8 +12450,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (ids.size > 1 && !window.confirm(T().kcvDelMany.replace('{n}', ids.size))) return;
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     kcvUndoPush(cv);
-    for (let i = host.arr.length - 1; i >= 0; i--) if (host.arr[i].t === 'c' && ids.has(host.arr[i].id)) host.arr.splice(i, 1);
+    ids.forEach(id => { const r = ktLoc(host, id); if (r) r.arr.splice(r.i, 1); });
     host.holder.links = (host.holder.links || []).filter(l => !ids.has(l.a) && !ids.has(l.b));
+    const walk = arr => arr.forEach(n => { if (n.t === 'f') { if (n.links) n.links = n.links.filter(l => !ids.has(l.a) && !ids.has(l.b)); walk(n.ch || []); } }); walk(host.arr);
     KCVS.set(cv.dataset.kcv, new Set());
     save(); renderCmSection();
   }

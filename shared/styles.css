@@ -16868,6 +16868,18 @@ td.kt-t:hover:not(:focus) { background: var(--u-hov, rgba(44, 94, 101, .05)); }
 .kcv.is-panning * { user-select: none; }
 .kcv-world { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; }
 .kcv-links { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+/* منطقةُ مجلدٍ داخليّ في اللوح: إطارٌ مرقّطٌ بلون المجلد يحيط بما فيه، ورأسُه (الأيقونةُ والاسم) مقبضُ سحبه.
+   والإطارُ لا يلتقط المؤشّر (يُزاح اللوحُ ويُنقر فيه كأنّه فراغ) — الرأسُ وحده */
+.kcv-zone { position: absolute; box-sizing: border-box; border-radius: 18px; pointer-events: none;
+  border: 1.5px dashed color-mix(in srgb, var(--zc, #8a97a3) 55%, transparent);
+  background: color-mix(in srgb, var(--zc, #8a97a3) 6%, transparent); }
+.kcv-zh { position: absolute; top: 8px; inset-inline-start: 14px; display: inline-flex; align-items: center; gap: 7px;
+  padding: 3px 8px; border-radius: 8px; font-size: 13px; font-weight: 800; color: var(--u-ink, #24323a); pointer-events: auto; user-select: none; }
+.kcv-zh[data-kzh] { cursor: grab; }
+.kcv-zh[data-kzh]:hover { background: color-mix(in srgb, var(--zc, #8a97a3) 14%, transparent); }
+.kcv.is-dragging .kcv-zh { cursor: grabbing; }
+.kcv-zh .pk-fi { width: 18px; height: 18px; flex: none; }
+html[data-theme="dark"] .kcv-zh { color: #e7ecef; }
 .kcv-card {
   position: absolute; width: 240px; box-sizing: border-box; border-radius: 12px; cursor: default; overflow: hidden;
   border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); background: var(--u-in-bg, #fff);
@@ -16986,6 +16998,10 @@ html[data-lang="en"] .pk-split.is-in > .kt-view { animation-name: pkSplitInEn; }
 .kcv-link .kcv-hit { fill: none; stroke: transparent; stroke-width: 14; }
 .kcv-link .kcv-line, .kcv-tmp { fill: none; stroke: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); stroke-width: 1.75; stroke-linecap: round; }
 .kcv-link:hover .kcv-line { stroke: color-mix(in srgb, var(--u-tx, #35455c) 70%, transparent); }
+/* السهمُ القصير (وصلةٌ طرفُها الآخرُ في المجلد الأب): متقطّعٌ، ونقرُه يفتح الأب */
+.kcv-stub .kcv-line { fill: none; stroke: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); stroke-width: 1.75; stroke-dasharray: 4 4; stroke-linecap: round; }
+.kcv-stub .kcv-hit { fill: none; stroke: transparent; stroke-width: 14; pointer-events: stroke; cursor: pointer; }
+.kcv-stub:hover .kcv-line { stroke: var(--u-gold, #c9a25c); }
 .kcv-link.is-sel .kcv-line, .kcv-tmp { stroke: var(--u-gold, #c9a25c); stroke-width: 2.25; }
 .kcv-tmp { stroke-dasharray: 6 5; pointer-events: none; }
 .kcv-ar path { fill: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); }
