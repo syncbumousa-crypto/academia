@@ -9591,8 +9591,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!pub) return `<div class="cx-ftr2 chtools cx-srctools">${pkSrcHd(id, true)}${pkSrcMeta(id) && pkLnk.open[id] ? pkLnkHTML(id) : ''}</div>`
         + `<div class="cx-ftc">${pkActHl(id)}</div>`   /* بلا زرّي تقليب (طلبُ صاحب الموقع): التقليبُ من نصفَي مساحة الكتاب */
         + `<div class="cx-ftl2">${pkActMode()}</div>`;   /* زرُّ المصدر في التذييل جنب «ربط الصفحات» (رجوعٌ لفكرة التذييل · طلبُ صاحب الموقع) */
-      return pkActB('data-actbk="close"', PK_ACT_IC.close, T().bkClose) + pkActMode()
-        + (pkSrcList(id).length > 1 ? '<span class="cx-srcsep"></span>' + pkSrcHd(id, false) : '');
+      /* وفي النشر على خانات التحرير نفسِها وثوبِها (طلبُ صاحب الموقع): المصدرُ حبّةً يمينًا ووضعُ القراءة يسارًا.
+         والحبّةُ للقراءة وحدَها ما دام المصدرُ واحدًا (لا قائمةَ تحرير)، فإن تعدّدت صارت زرَّ التبديل بينها */
+      const cur = pkSrcCurOf(id), ty = pkSrcTy(cur);
+      const hd = pkSrcList(id).length > 1 ? pkSrcHd(id, false)
+        : `<span class="chtool pk-srchd pk-srchd--ro"><i class="pk-srchd__ty" style="--c:${ty[2]}">${pkSrcSvg(ty[3])}</i><span>${esc((pkSrcMeta(cur) || {}).name || '')}</span></span>`;
+      return `<div class="cx-ftr2 chtools cx-srctools">${hd}</div><div class="cx-ftc"></div><div class="cx-ftl2">${pkActMode()}</div>`;
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
     if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;

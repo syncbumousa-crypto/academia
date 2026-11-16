@@ -18679,3 +18679,5 @@ html[data-theme="dark"] .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scroll
 html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .28); }
 .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button,
 .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button { display: none; }
+/* في النشر لا زرّا تقليبٍ تحت الكتاب (طلبُ صاحب الموقع): التقليبُ من نصفَي مساحته كما في التحرير */
+#cm-body .post:not(.pk--edit) .pk-src--book .cbk-nav { display: none; }
