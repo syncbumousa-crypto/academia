@@ -23685,7 +23685,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const cxUnpin = el => ['position', 'top', 'left', 'width', 'height', 'margin', 'boxSizing', 'zIndex', 'right', 'bottom', 'borderRadius', 'boxShadow']
     .forEach(k => { el.style[k] = ''; });
   /* فراغٌ بقامة العنصر في مكانه، فلا يقفز ما حوله وهو مثبَّتٌ فوقه */
-  function cxHold(el, r) {
+  /* ‎cxMorphHold‎ لا ‎cxHold‎: ذاك اسمُ إمساك المجلد المفتوح (أعلى الملف)، وكان هذا يحجبه فلا ينطوي مجلدٌ في البنك */
+  function cxMorphHold(el, r) {
     const cs = getComputedStyle(el), ph = document.createElement('div');
     ph.className = 'cx-morph-ph';
     Object.assign(ph.style, { height: r.height + 'px', width: el.id === 'cm-body' ? r.width + 'px' : '', flex: 'none',
@@ -23711,7 +23712,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== الشاشةُ الكاملة: الصندوقُ نفسُه يتحرّك ===== */
     if (full0 !== full1) {
       const b1 = cxRect(body);
-      const ph = full1 ? null : cxHold(body, b1);   /* الخارجُ منها يعود إلى مكانه في اللوح: يُحجز له */
+      const ph = full1 ? null : cxMorphHold(body, b1);   /* الخارجُ منها يعود إلى مكانه في اللوح: يُحجز له */
       const off = cxPin(body, b1);
       const dark = '0 0 0 100vmax rgba(10, 18, 30, .45), 0 24px 60px rgba(0, 0, 0, .35)', clear = '0 0 0 100vmax rgba(10, 18, 30, 0), 0 24px 60px rgba(0, 0, 0, 0)';
       const fr = (r, shd) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', boxShadow: shd });
@@ -23730,7 +23731,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     body.scrollTop = wide ? 0 : cxMaxY;   /* التمريرُ يُردّ قبل القياس لا بعده، فلا يقفز ‎R1‎ */
     const r1 = cxRect(card), rad1 = getComputedStyle(card).borderRadius;
     if (Math.abs(r1.width - r0.width) < 1 && Math.abs(r1.height - r0.height) < 1 && Math.abs(r1.top - r0.top) < 1) { cxMorphSettle(); return; }
-    const ph = wide ? null : cxHold(card, r1);
+    const ph = wide ? null : cxMorphHold(card, r1);
     const off = cxPin(card, r1);
     const fr = (r, rad) => ({ top: (r.top - off.dy) + 'px', left: (r.left - off.dx) + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: rad });
     const a = card.animate([fr(r0, rad0), fr(r1, rad1)], { duration: CX_MS, easing: CX_EASE });
