@@ -11500,7 +11500,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const key = id + '|' + sel;
       PPDATA.set(key, { sel, pack, ro: !!ro });
       if (cards.length) queueMicrotask(ppMountAll);
-      body = !cards.length ? '' : `<div class="pp-host" data-pp="${esc(key)}"></div>`;
+      body = !cards.length ? '' : ppGridHTML(key, cards);
     } else if (v === 'cards') {
       body = !cards.length ? '' : `<div class="kc-grid">` + cards.map(n => `<article class="kc${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
         + `<div class="kc-top">${ktOk(n)}</div>`
@@ -11524,6 +11524,80 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وحلقتُها لا تدور إلّا والورقةُ تتحرّك (تسكن فتقف، وتوقظها اليدُ أو الفأرة) */
   const PPDATA = new Map(), PPORD = new Map();
   let ppEditNew = null;   /* بطاقةٌ أُضيفت للتوّ: تصعد على الرزمة ووجهُها مفتوحٌ للكتابة */
+  /* ===== شبكةُ التسعة (طلبُ صاحب الموقع) =====
+     مساحةُ البطائق ٣×٣: الرزمةُ في المربّع الأوسط (أكبرُها)، وما حوله ثمانيةُ مربّعاتٍ بلا أسماء. تُمسك الورقةُ (سحبًا لأعلى
+     أو مائلًا) فتظهر المربّعات وتُفلت في أيّها فتصير فيه كومة؛ وورقةُ الكومة العليا تُقلب بالنقر وتُسحب إلى مربّعٍ آخر أو إلى الوسط.
+     والترتيبُ لكلّ قارئٍ في متصفّحه، ولكلّ مجلدٍ مفتوحٍ ترتيبُه (‎state.ppGrid['post|folder']‎) — فما رُتّب في مجلدٍ داخليّ
+     لا يمسّ أباه: الورقُ هو هو، وطريقةُ عرضه تتبع المجلدَ المفتوح */
+  const ppGridOf = key => ((state.ppGrid || {})[key]) || {};
+  function ppGridSet(key, cid, cell) {
+    const all = state.ppGrid || (state.ppGrid = {}), G = all[key] || (all[key] = {});
+    if (cell === 4) delete G[cid]; else G[cid] = cell;
+    if (!Object.keys(G).length) delete all[key];
+    save();
+  }
+  function ppGridHTML(key, cards) {
+    const G = ppGridOf(key), piles = Array.from({ length: 9 }, () => []);
+    cards.forEach(n => { const c = G[n.id]; if (c >= 0 && c !== 4 && c < 9) piles[c].push(n); });
+    const cell = i => {
+      if (i === 4) return `<div class="pp-cell pp-cell--c" data-ppc="4"><div class="pp-host" data-pp="${esc(key)}"></div></div>`;
+      const P = piles[i], top = P[P.length - 1];
+      return `<div class="pp-cell" data-ppc="${i}">` + P.slice(-3).map((n, k, a) => {
+        const d = a.length - 1 - k, isTop = n === top;
+        return `<div class="pp-mini${isTop ? ' is-top' : ''}" data-ppmini="${esc(n.id)}" style="--d:${d}"${isTop ? ' tabindex="0" role="button"' : ''}>`
+          + (isTop ? `<span class="pp-mini__f">${esc(n.f || '')}</span><span class="pp-mini__b">${esc(n.b || '')}</span>` : '') + `</div>`;
+      }).join('') + (P.length > 1 ? `<i class="pp-cnt">${P.length}</i>` : '') + `</div>`;
+    };
+    return `<div class="pp-grid" data-ppg="${esc(key)}">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
+  }
+  const PPG = { s: null, pend: null };
+  function ppGrabStart(key, n, e, from) {
+    const grid = n && document.querySelector('.pp-grid[data-ppg="' + CSS.escape(key) + '"]'); if (!grid) return false;
+    const g = document.createElement('div'); g.className = 'pp-ghost'; g.setAttribute('aria-hidden', 'true');
+    g.innerHTML = `<span>${esc(n.f || '')}</span>`;
+    document.body.appendChild(g); grid.classList.add('is-drag');
+    PPG.s = { key, id: n.id, g, grid, from };
+    ppGrabMove(e);
+    return true;
+  }
+  function ppGrabMove(e) {
+    const s = PPG.s; if (!s) return;
+    s.g.style.left = e.clientX + 'px'; s.g.style.top = e.clientY + 'px';
+    const el = document.elementFromPoint(e.clientX, e.clientY), c = el && el.closest('.pp-cell');
+    const ok = c && s.grid.contains(c) ? c : null;
+    if (s.over !== ok) { if (s.over) s.over.classList.remove('is-over'); s.over = ok; if (ok) ok.classList.add('is-over'); }
+  }
+  function ppGrabEnd(cancel) {
+    const s = PPG.s; if (!s) return;
+    PPG.s = null; s.g.remove(); s.grid.classList.remove('is-drag'); if (s.over) s.over.classList.remove('is-over');
+    if (cancel || !s.over) return;
+    const cell = +s.over.dataset.ppc, was = ppGridOf(s.key)[s.id];
+    if ((was === undefined ? 4 : was) === cell) return;
+    ppGridSet(s.key, s.id, cell);
+    PPORD.delete(s.key);
+    renderCmSection();
+  }
+  document.addEventListener('pointermove', e => {
+    if (PPG.pend && !PPG.s) {
+      const p = PPG.pend;
+      if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 6) { PPG.pend = null; const D = PPDATA.get(p.key), h = D && ktHost(D.sel, D.pack), r = h && ktLoc(h, p.id); if (r) ppGrabStart(p.key, r.n, e, 'm'); }
+      return;
+    }
+    if (PPG.s) ppGrabMove(e);
+  });
+  document.addEventListener('pointerup', e => {
+    if (PPG.s) { ppGrabEnd(false); return; }
+    const p = PPG.pend; PPG.pend = null;
+    if (p) { const m = p.el; if (m.isConnected) m.classList.toggle('is-back'); }   /* نقرةٌ بلا سحب: تُقلب ورقةُ الكومة */
+  });
+  document.addEventListener('pointercancel', () => { PPG.pend = null; ppGrabEnd(true); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && PPG.s) { e.preventDefault(); ppGrabEnd(true); } }, true);
+  document.addEventListener('pointerdown', e => {
+    const m = e.target.closest && e.target.closest('.pp-grid .pp-mini.is-top');
+    if (!m || e.button > 0) return;
+    e.preventDefault();
+    PPG.pend = { key: m.closest('.pp-grid').dataset.ppg, id: m.dataset.ppmini, x: e.clientX, y: e.clientY, el: m };
+  });
   function ppMountAll() {
     document.querySelectorAll('#cm-body .pp-host:not([data-ppm])').forEach(host => {
       host.dataset.ppm = '1';
@@ -11534,7 +11608,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function ppMount(host, D) {
     const key = host.dataset.pp;
     const hostOf = () => ktHost(D.sel, D.pack);
-    const cardsOf = () => { const h = hostOf(); return h ? ktCardsDeep(h) : []; };   /* والمجلداتُ الداخليّةُ في الرزمة كذلك */
+    const cardsOf = () => { const h = hostOf(), G = ppGridOf(key); return h ? ktCardsDeep(h).filter(c => !(G[c.id] >= 0 && G[c.id] !== 4)) : []; };   /* والمجلداتُ الداخليّةُ في الرزمة كذلك — إلّا ما أُرسل إلى مربّعٍ جانبيّ */
     let CARDS = cardsOf();
     const N = CARDS.length; if (!N) return;
     /* الترتيبُ يبقى عبر إعادة الرسم (معرّفات البطائق) */
@@ -11568,7 +11642,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
       /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
-      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"]'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"], .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
       const s = Math.max(160, Math.min(440, w * 0.84, h * 0.84 - 30));
       stage.style.width = stage.style.height = s + 'px';
@@ -11659,7 +11733,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!drag || e.pointerId !== drag.id) return;
       const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
       const dx = e.clientX - drag.x0, dy = e.clientY - drag.y0;
-      if (!drag.axis && Math.hypot(dx, dy) > 7) { drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; drag.moved = true; }
+      if (!drag.axis && Math.hypot(dx, dy) > 7) {
+        drag.axis = Math.abs(dx) > Math.abs(dy) * 1.4 ? 'x' : 'y'; drag.moved = true;
+        /* السحبُ لأعلى أو مائلًا يمسك الورقةَ إلى الشبكة (طلبُ صاحب الموقع) — والأفقيُّ قلبٌ كما كان */
+        if (drag.axis === 'y' && ppGrabStart(key, CARDS[idx], e, 'c')) {
+          try { card.releasePointerCapture(drag.id); } catch (er) {}
+          drag = null; st.y = st.x = st.vx = st.vy = st.rz = 0; wake(); return;
+        }
+      }
       if (drag.axis === 'x') {
         const na = drag.a0 + dx * (180 / (card.clientWidth * .85));
         const v = (na - st.a) / dt; st.va = st.va * .55 + v * .45; st.a = na; st.target = na;
