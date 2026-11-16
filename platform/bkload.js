@@ -58,8 +58,10 @@ function poly(g, q, fill) { g.beginPath(); g.moveTo(q[0][0], q[0][1]); for (let 
 /* بطانةٌ تحت وجوه كتلةٍ واحدة، بلونها ومحدودةٌ بخطٍّ منه — فلا يظهر من شقوق الحوافّ الملساء بين الوجوه ما وراءها */
 function under(g, qs, col) { g.save(); g.fillStyle = g.strokeStyle = col; g.lineWidth = 1.4; g.lineJoin = 'round'; for (const q of qs) { g.beginPath(); g.moveTo(q[0][0], q[0][1]); for (let i = 1; i < q.length; i++) g.lineTo(q[i][0], q[i][1]); g.closePath(); g.fill(); g.stroke(); } g.restore(); }
 /* وجهٌ مستوٍ بصورته: أصلُه وزاويتاه على الشاشة (العدسةُ طويلة: الوجهُ متوازي أضلاعٍ تقريبًا) */
-function img(g, im, a, b, d, dim = 0) {
-  g.save(); g.transform((b[0] - a[0]) / im.width, (b[1] - a[1]) / im.width, (d[0] - a[0]) / im.height, (d[1] - a[1]) / im.height, a[0], a[1]);
+function img(g, im, a, b, d, dim = 0, e = null) {
+  /* ‏‎e‎ الركنُ الرابعُ الحقيقيّ: التحويلُ متوازي أضلاعٍ يمدّ الركنَ الرابعَ ‎b + d − a‎، والمنظورُ يجعل الحقيقيَّ دونه — فيُقصّ عليه لئلّا يبرز ركنُ الوجه */
+  g.save(); if (e) { g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.lineTo(e[0], e[1]); g.lineTo(d[0], d[1]); g.closePath(); g.clip(); }
+  g.transform((b[0] - a[0]) / im.width, (b[1] - a[1]) / im.width, (d[0] - a[0]) / im.height, (d[1] - a[1]) / im.height, a[0], a[1]);
   g.drawImage(im, 0, 0); if (dim) { g.fillStyle = `rgba(0,0,0,${dim})`; g.fillRect(0, 0, im.width, im.height); } g.restore();
 }
 
@@ -99,11 +101,28 @@ function base(L) {
   poly(g, [S(0, y0, zt), S(WB, y0, zt), S(WB, y1, zt), S(WB, y1, 0), S(0, y1, 0), S(0, y0, 0)], L.dark ? 'rgba(0,0,0,.42)' : 'rgba(20,35,63,.2)'); g.restore();
   poly(g, [P(WB, y0, BT), P(WB, y1, BT), P(WB, y1, 0), P(WB, y0, 0)], dark);
   poly(g, [P(WB, y1, BT), P(0, y1, BT), P(0, y1, 0), P(WB, y1, 0)], dark);
-  const R = zt / 2, N = 8, sp = t => [-C.SPB * Math.sin(t), R + R * Math.cos(t)];
-  for (let i = 0; i < N; i++) { const [xa, za] = sp(Math.PI * i / N), [xb, zb] = sp(Math.PI * (i + 1) / N); poly(g, [P(xa, y0, za), P(xb, y0, zb), P(xb, y1, zb), P(xa, y1, za)], shade(cv, .62 + .3 * Math.cos(Math.PI * (i + .5) / N - .5))); }
-  const cap = []; for (let i = 0; i <= N; i++) { const [x, z] = sp(Math.PI * i / N); cap.push(P(x, y1, z)); } poly(g, cap, dark);
   poly(g, [P(0, y0, BT), P(WB, y0, BT), P(WB, y1, BT), P(0, y1, BT)], shade(cv, .8));   /* باطنُ اللوح (بلون الغلاف كالمحرّك) */
   return c;
+}
+/* الكعبُ المستدير (مرّةً لكلّ مقاس): وجوهُه وطرفُه عند الذيل — يُرسم بعد الكتلة والكومة والأوراق، فهو أقربُ إلى الناظر منها
+   (تحته كان يُرسم أوّلًا فيبرز ركنُ الكتلة فوقه خارج الغلاف) */
+function spineFaces(L) {
+  const { C } = L, { P, D, H, HB, TH, BT } = C, y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2, zt = TH + 2 * BT, cv = L.cover, out = [];
+  const R = zt / 2, N = 8, sp = t => [-C.SPB * Math.sin(t), R + R * Math.cos(t)];
+  /* كلُّ وجهٍ بعمقه */
+  for (let i = 0; i < N; i++) {
+    const tm = Math.PI * (i + .5) / N;
+    const [xa, za] = sp(Math.PI * i / N), [xb, zb] = sp(Math.PI * (i + 1) / N);
+    out.push({ d: D((xa + xb) / 2, H / 2, (za + zb) / 2), q: [P(xa, y0, za), P(xb, y0, zb), P(xb, y1, zb), P(xa, y1, za)], c: shade(cv, .62 + .3 * Math.cos(tm - .5)) });
+  }
+  const cap = []; for (let i = 0; i <= N; i++) { const [x, z] = sp(Math.PI * i / N); cap.push(P(x, y1, z)); }
+  out.push({ d: D(-C.SPB / 2, y1, R), q: cap, c: shade(cv, .55) });
+  /* وجدارُه الداخليّ (كقالب المحرّك: صلبٌ من الكعب إلى ‎x0 = 0.6·BT‎ بارتفاع الكتلة كاملًا) — يحجب جانبَ الكتلة عند الكعب وهي تنقص */
+  const x0 = .6 * BT, zw = BT + TH;
+  out.push({ d: D(x0 / 2, H / 2, zw), q: [P(0, y0, zw), P(x0, y0, zw), P(x0, y1, zw), P(0, y1, zw)], c: shade(cv, .7) });
+  out.push({ d: D(x0, H / 2, zw / 2), q: [P(x0, y0, zw), P(x0, y1, zw), P(x0, y1, BT), P(x0, y0, BT)], c: '#d8d0bd' });   /* باطنُه ورقيّ: ربطُ الصفحات يكسوه */
+  out.push({ d: D(x0 / 2, y1, zw / 2), q: [P(0, y1, zw), P(x0, y1, zw), P(x0, y1, 0), P(0, y1, 0)], c: shade(cv, .55) });
+  return out;
 }
 
 /* ===== إطارٌ: ‏‎a‎ زاويةُ الغلاف، و‏‎R‎ حالُ التقليب — ما فوق اللوح عناصرُ بعمقها، تُرسم من الأبعد إلى الأقرب (كمخزن العمق في المحرّك:
@@ -113,15 +132,20 @@ function draw(L, a, R) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, L.cv.width, L.cv.height); g.drawImage(L.base, 0, 0); g.setTransform(L.s, 0, 0, L.s, 0, 0);
   const it = [];
   const hb = TH * (1 - R.launched / R.n), zb = BT + hb;
-  if (hb > 1e-4) it.push({ d: Infinity, f: () => {
-    under(g, [[P(1, 0, zb), P(1, H, zb), P(1, H, BT), P(1, 0, BT)], [P(1, H, zb), P(0, H, zb), P(0, H, BT), P(1, H, BT)], [P(1, 0, zb), P(0, 0, zb), P(0, H, zb), P(1, H, zb)]], '#ece5d4');
-    img(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT));
-    img(g, tx.edge, P(1, H, zb), P(0, H, zb), P(1, H, BT), .06);
-    img(g, tx.page, P(1, 0, zb), P(0, 0, zb), P(1, H, zb));
+  /* ترتيبٌ عدديٌّ صريح (‎Infinity‎ لا يُقارَن بمثله فيضطرب الفرز): الكعبُ وجدارُه وراء الكتلة (الكاميرا من جهة الحافّة)، ثمّ الكتلة،
+     ثمّ باطنُ الغلاف المرفوع (فوق الكتلة فحافّتُه عند المفصل تحجب ركنَها)، ثمّ الكومةُ والأوراق بعمقها، ثمّ ظاهرُ الغلاف إذا ظهر */
+  const SP = 3e12, BK = 2e12, LI = 1e12;
+  if (hb > 1e-4) it.push({ d: BK, f: () => {
+    /* من جدار الكعب الداخليّ (‎x0 = 0.6·BT‎، كالمحرّك) إلى الحافّة — من الكعب نفسِه كانت تعلوه فيبرز ركنُها خارج الغلاف */
+    const x0 = .6 * BT;
+    under(g, [[P(1, 0, zb), P(1, H, zb), P(1, H, BT), P(1, 0, BT)], [P(1, H, zb), P(x0, H, zb), P(x0, H, BT), P(1, H, BT)], [P(1, 0, zb), P(x0, 0, zb), P(x0, H, zb), P(1, H, zb)]], '#ece5d4');
+    img(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT), 0, P(1, H, BT));
+    img(g, tx.edge, P(1, H, zb), P(x0, H, zb), P(1, H, BT), .06, P(x0, H, BT));
+    img(g, tx.page, P(1, 0, zb), P(x0, 0, zb), P(1, H, zb), 0, P(x0, H, zb));
   } });
   const hz = BT + TH, c = Math.cos(a), s = Math.sin(a), at = (x, y, z) => P(x * c - (z - hz) * s, y, x * s + (z - hz) * c + hz);
   const seen = -s * C.vw[0] + c * C.vw[2] > 0;   /* وجهُه الخارجيّ ‎(−sin a, 0, cos a)‎ نحو الناظر */
-  it.push({ d: seen ? -Infinity : Infinity, f: () => {
+  it.push({ d: seen ? -LI : LI, f: () => {
     poly(g, [at(WB, y1, hz + BT), at(0, y1, hz + BT), at(0, y1, hz), at(WB, y1, hz)], dark);
     poly(g, [at(WB, y0, hz + BT), at(WB, y1, hz + BT), at(WB, y1, hz), at(WB, y0, hz)], mid);
     if (seen) poly(g, [at(WB, y0, hz + BT), at(0, y0, hz + BT), at(0, y1, hz + BT), at(WB, y1, hz + BT)], cvr);
@@ -135,10 +159,12 @@ function draw(L, a, R) {
     it.push({ d: dp + 1e-6, f: () => under(g, [B2.map(([x, z]) => P(x, 0, z)).concat(B2.slice().reverse().map(([x, z]) => P(x, H, z))),
       [P(ea[0], 0, ea[1]), P(ea[0], H, ea[1]), P(eb[0], H, eb[1]), P(eb[0], 0, eb[1])], sec], '#ece5d4') });
     strip(g, C, B2, tx.page, it);
-    it.push({ d: D((ea[0] + eb[0]) / 2, H / 2, (ea[1] + eb[1]) / 2), f: () => img(g, tx.edge, P(ea[0], 0, ea[1]), P(ea[0], H, ea[1]), P(eb[0], 0, eb[1])) });
+    it.push({ d: D((ea[0] + eb[0]) / 2, H / 2, (ea[1] + eb[1]) / 2), f: () => img(g, tx.edge, P(ea[0], 0, ea[1]), P(ea[0], H, ea[1]), P(eb[0], 0, eb[1]), 0, P(eb[0], H, eb[1])) });
     it.push({ d: dp, f: () => poly(g, sec, '#e9e1cf') });
   }
   for (const f of R.fly) strip(g, C, curve(C, f.delta, f.th, f.curl), tx.page, it);
+  /* الكعبُ وجدارُه: أوّلًا، ووجوهُه بينها بعمقها */
+  for (const x of L.spine) it.push({ d: SP + x.d, f: () => poly(g, x.q, x.c) });
   it.sort((p, q) => q.d - p.d);
   for (const x of it) x.f();
 }
@@ -171,7 +197,7 @@ export function createLoader(cv, o, onClosed, onDrawn) {
     Object.assign(L, { w, h, s, ar });
     const cw = Math.round(w * s), chh = Math.round(h * s);
     if (cv.width !== cw || cv.height !== chh) { cv.width = cw; cv.height = chh; }   /* تغييرُ المقاس يمحو اللوحة — فلا يُغيَّر إلّا حين يلزم */
-    L.C = camera(w, h, ar, L.n); L.base = base(L);
+    L.C = camera(w, h, ar, L.n); L.base = base(L); L.spine = spineFaces(L);
   };
   const frame = now => {
     if (L.dead) return;
@@ -194,8 +220,8 @@ export function createLoader(cv, o, onClosed, onDrawn) {
   return {
     set(q) {
       if (q.p != null) L.p = Math.min(1, q.p);
-      if (q.dark != null && !!q.dark !== L.dark) { L.dark = !!q.dark; if (L.C) L.base = base(L); }
-      if (q.cover && hex(q.cover) !== L.cover) { L.cover = hex(q.cover); if (L.C) L.base = base(L); }
+      if (q.dark != null && !!q.dark !== L.dark) { L.dark = !!q.dark; if (L.C) { L.base = base(L); L.spine = spineFaces(L); } }
+      if (q.cover && hex(q.cover) !== L.cover) { L.cover = hex(q.cover); if (L.C) { L.base = base(L); L.spine = spineFaces(L); } }
       if (q.w) fit(q);
     },
     fin() { L.fin = true; },
