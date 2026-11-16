@@ -18452,3 +18452,14 @@ html[data-theme="dark"] .bk-zi { --zt: #7fb7bd; }
 .cbk-stage--gl.is-mx::before { opacity: 0; transition-duration: .12s; }
 html[data-theme="dark"] .cbk-stage--gl[data-pgn]::before { color: rgba(255, 255, 255, .5); }
 .cbk-stage--gl ~ .cbk-nav [data-bkind] { display: none; }
+
+/* ===== المجلدُ يستدعي تحديداته: طبقةُ الطيران، والبطائقُ المنتظرة، ونبضُ النزول ===== */
+.hl-fly-layer { position: fixed; inset: 0; pointer-events: none; z-index: 9000; overflow: hidden; }
+.hl-fly { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform, opacity; backface-visibility: hidden; }
+img.hl-fly { border-radius: 2px; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .4); }
+.hl-fly--to { box-shadow: inset 0 0 0 2px var(--hlc), 0 8px 18px -8px rgba(0, 0, 0, .3); }
+.hl-call-pend:not(tr), tr.hl-call-pend > td { opacity: .35; transition: opacity .2s; }
+.hl-call-land:not(tr) { animation: hl-call-land .7s ease-out; }
+tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
+@keyframes hl-call-land { 0% { box-shadow: 0 0 0 0 var(--hlc); } 30% { box-shadow: 0 0 0 4px var(--hlc); } 100% { box-shadow: 0 0 0 0 transparent; } }
+@keyframes hl-call-row { 0%, 25% { background-color: color-mix(in srgb, var(--hlc) 45%, transparent); } 100% { background-color: transparent; } }
