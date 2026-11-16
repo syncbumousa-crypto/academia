@@ -2,21 +2,22 @@
    styles.css — هوية الجامعة (الخطوط + الألوان) + التابان فقط
    ============================================================ */
 
-/* خط KFUPM الرسمي: IBM Plex Sans Arabic (محلي، يعمل أوفلاين) */
+/* خط KFUPM الرسمي: IBM Plex Sans Arabic (محلي، يعمل أوفلاين).
+   ‎woff2‎ أوّلًا (ثلثُ حجم ‎ttf‎، والحروفُ نفسُها) و‎ttf‎ احتياطٌ لا يُجلب إلّا لمتصفّحٍ لا يعرفه */
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Regular.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Regular.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Regular.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 500; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Medium.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Medium.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Medium.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 600; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-SemiBold.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Bold.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Bold.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Bold.ttf') format('truetype'); }
 
 /* خط عناوين KFUPM الرسمي: KFUPM Display (محلي، يعمل أوفلاين) */
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/KFUPM-Regular.ttf') format('truetype'); }
+             src: url('../assets/fonts/KFUPM-Regular.woff2') format('woff2'), url('../assets/fonts/KFUPM-Regular.ttf') format('truetype'); }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/KFUPM-Bold.ttf') format('truetype'); }
+             src: url('../assets/fonts/KFUPM-Bold.woff2') format('woff2'), url('../assets/fonts/KFUPM-Bold.ttf') format('truetype'); }
 
 :root {
   --c-ink:       #14233f;
@@ -417,6 +418,9 @@ html[data-lang="en"] .crow { direction: ltr; }
   border-radius: 1px var(--r) var(--r) 1px;
   transform: translateZ(calc(var(--thk) * -1));
   box-shadow: 0 8px 16px rgba(13, 42, 72, .3);
+  /* وراءَ الوجه في ترتيب الرسم أيضًا: المتصفّحُ قد لا يفرز الوجهَ المصوَّر (‎.bkface--img‎ موضوعٌ بطبقته) مع هذا السطح بعمقه،
+     فيُرسم الغلافُ الخلفيّ فوق شريطٍ منه — شريطٌ داكنٌ على يسار الغلاف يبدو كتابًا لم يكتمل تحميلُه (طلبُ صاحب الموقع) */
+  z-index: -1;
 }
 /* مرور الماوس على البطاقة يعتدل الكتاب نحو الناظر */
 .crow:hover .bk { transform: rotateY(7deg); }
@@ -1269,10 +1273,11 @@ html[data-lang="en"] .reel-slot.is-center .crow .bk { transform: rotateY(-9deg);
 .reel-slot.is-center .crow .cimg--book {
   -webkit-box-reflect: below 1px linear-gradient(rgba(255, 255, 255, .28), transparent 30%);
 }
-/* أسلوب ١٣: تعويم حيّ — البطاقة المتمركزة تطفو بلطف مستمر (2D على .crow حتى لا يتشوّه الكتاب 3D) */
-.reel-slot.is-center .crow { animation: reel-bob 3.1s ease-in-out infinite; }
+/* أسلوب ١٣: تعويم حيّ — البطاقة المتمركزة تطفو بلطف (2D على .crow حتى لا يتشوّه الكتاب 3D).
+   تبدأ بمرور المؤشّر (‎.is-bob‎ من ‎app.js‎) وتقف بعد ثلاث دورات = ‎10s‎ — لا تدور بلا نهاية */
+.reel-slot.is-center .crow.is-bob { animation: reel-bob 3.333s ease-in-out 3; }
 @keyframes reel-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow.is-bob { animation: none; } }
 
 /* ====== حزمة مادة اللاب في البار: «التفتّح» — مروحة مغلقة ← انقسام مفتوح (مُدار بـ --o من الـJS) ======
    المحاضرة (يمين) والمعمل (يسار)؛ كل مكوّن transform = قيمة‑الإغلاق + فرق×var(--o)،
@@ -10825,7 +10830,7 @@ html[data-theme="dark"] #jri-body .x3 .is-sel > .vt-grab--ro:hover { color: #0e1
    فبينهما **تناوبٌ موقوت**: عند الدخول يخفت الخطُّ أوّلًا ثمّ يظهر الطوق بعده بـ‎.14s‎،
    وعند الخروج ينسحب الطوقُ أوّلًا ثمّ يعود الخطُّ بعده بـ‎.12s‎ — فلا يجتمعان لحظةً واحدة.
    والوالدُ يُختار من ابنه بـ‎:has()‎: الخطُّ على الغلاف والمرورُ على الزرّ، ولا سبيل غيرَه */
-button.x3-fic { padding: 0; background: none; border: 0; cursor: pointer; }
+button.x3-fic, button.x3-fic.cx-face:hover { padding: 0; background: none; border: 0; cursor: pointer; }   /* ولا مربّعَ خلفها: ‎.cx-face:hover‎ كان يلوّنها تحت الطوق (طلبُ صاحب الموقع) */
 button.x3-fic::after {
   content: ''; position: absolute; inset: -4px; border-radius: 6px;
   border: 1px dashed var(--u-in-line); opacity: 0; transition: opacity .14s ease;
@@ -16619,7 +16624,7 @@ html[data-theme="dark"] .pk-src__btn { color: #e1c172; background: rgba(225, 193
   cursor: text;
   background: transparent; color: inherit; font: inherit; font-weight: 700; outline: none;
 }
-.pk-fnm:focus { border-bottom-color: #c9a25c; }
+.pk-fnm:focus { border-bottom-color: transparent; }   /* بلا خطٍّ تحت الاسم وهو يُكتب (طلبُ صاحب الموقع) */
 .pk-fnm::placeholder { color: inherit; opacity: .45; font-weight: 400; }
 
 /* السحب: المربّعُ الممسوكُ يخفت، والهدفُ الصالحُ يُطوَّق بذهبٍ متقطّع */
@@ -16711,14 +16716,14 @@ html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { backgrou
   transition: background .12s ease, transform .22s cubic-bezier(.3, 1.5, .5, 1);
 }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 4px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 1px; }   /* وسطُ الأيقونة (‎22‎) على وسط السطر الأوّل (‎1.7em + 2px‎) — كانت ‎4px‎ لأيقونة ‎16‎ فنزلت ‎3.5‎ */
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: var(--lgx-hov); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; border-radius: 19px; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: var(--lgx-hov); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide > .pg-in { padding: 0 6px 6px; }
 .pk-fstrip.pk-lg .pg-nm { flex: 0 1 auto; line-height: 1.7; padding-block: 1px; }
-.pk-fstrip.pk-lg .pk-fi { width: 16px; height: 16px; flex: none; color: var(--u-mut, #8a97a3); }
+.pk-fstrip.pk-lg .pk-fi { width: 22px; height: 22px; flex: none; color: var(--u-mut, #8a97a3); }   /* أكبر (طلبُ صاحب الموقع): كان ‎16‎ */
 html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-weight: 700; }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline: 2px solid rgba(74, 111, 165, .55); outline-offset: 1px; }
 .pk-fstrip.pk-lg .pg-box.is-drop { outline: 2px dashed #c9a25c; outline-offset: 1px; }
@@ -16737,7 +16742,7 @@ html .pk-fstrip.pk-lg .pg-box.is-sel > .pg-face { color: var(--lgx-ink); font-we
 .lgx-ghost.is-dark { color: #eef2f3; --lgx-hi: rgba(255, 255, 255, .15); --lgx-hi2: rgba(255, 255, 255, .045); --lgx-bev: rgba(255, 255, 255, .06); --lgx-bev2: rgba(0, 0, 0, .16); }
 .lgx-ghost > .pk-fi, .lgx-ghost > .pg-nm { position: relative; z-index: 1; transition: opacity .15s ease; }
 .lgx-ghost.is-under > .pk-fi, .lgx-ghost.is-under > .pg-nm { opacity: .18; }
-.lgx-ghost > .pk-fi { width: 16px; height: 16px; flex: none; }
+.lgx-ghost > .pk-fi { width: 22px; height: 22px; flex: none; }
 .lgx-ghost > .pg-nm { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .lgx-gb { position: absolute; inset: 0; border-radius: 999px; pointer-events: none; }
 .lgx-ghost.no-gl > .lgx-gb { background: rgba(255, 255, 255, .45); box-shadow: var(--lgx-rim), 0 12px 26px -10px rgba(20, 35, 63, .35); }
@@ -16863,6 +16868,8 @@ td.kt-t:hover:not(:focus) { background: var(--u-hov, rgba(44, 94, 101, .05)); }
 .kcv.is-panning * { user-select: none; }
 .kcv-world { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; }
 .kcv-links { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+/* منطقةُ مجلدٍ داخليّ في اللوح: خفيّةٌ تمامًا (طلبُ صاحب الموقع) — للترتيب ومعرفةِ مجلد ما يُفلت فيها، ولا تلتقط المؤشّر */
+.kcv-zone { position: absolute; pointer-events: none; visibility: hidden; }
 .kcv-card {
   position: absolute; width: 240px; box-sizing: border-box; border-radius: 12px; cursor: default; overflow: hidden;
   border: 1px solid var(--u-line, rgba(44, 94, 101, .18)); background: var(--u-in-bg, #fff);
@@ -16981,6 +16988,10 @@ html[data-lang="en"] .pk-split.is-in > .kt-view { animation-name: pkSplitInEn; }
 .kcv-link .kcv-hit { fill: none; stroke: transparent; stroke-width: 14; }
 .kcv-link .kcv-line, .kcv-tmp { fill: none; stroke: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); stroke-width: 1.75; stroke-linecap: round; }
 .kcv-link:hover .kcv-line { stroke: color-mix(in srgb, var(--u-tx, #35455c) 70%, transparent); }
+/* السهمُ القصير (وصلةٌ طرفُها الآخرُ في المجلد الأب): متقطّعٌ، ونقرُه يفتح الأب */
+.kcv-stub .kcv-line { fill: none; stroke: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); stroke-width: 1.75; stroke-dasharray: 4 4; stroke-linecap: round; }
+.kcv-stub .kcv-hit { fill: none; stroke: transparent; stroke-width: 14; pointer-events: stroke; cursor: pointer; }
+.kcv-stub:hover .kcv-line { stroke: var(--u-gold, #c9a25c); }
 .kcv-link.is-sel .kcv-line, .kcv-tmp { stroke: var(--u-gold, #c9a25c); stroke-width: 2.25; }
 .kcv-tmp { stroke-dasharray: 6 5; pointer-events: none; }
 .kcv-ar path { fill: color-mix(in srgb, var(--u-tx, #35455c) 45%, transparent); }
@@ -17109,8 +17120,24 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 }
 .pk-split > .pk-splh--b { inset-inline-start: auto; inset-inline-end: calc((100% - 14px) * var(--sqb, .3)); }
 .pk--vwalt .pk-bank #cm-cards { display: block; }
-.pk-bank > #cm-cards, .pk-bank > .x3 { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; margin: 0; padding-inline-end: 4px;
+.pk-bank > #cm-cards, .pk-bank > .x3 { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: auto; margin: 0; padding-inline-end: 4px;
   scrollbar-width: thin; scrollbar-color: rgba(225, 193, 114, .65) transparent; }
+/* ===== البنكُ يُمرَّر أفقيًّا (طلبُ صاحب الموقع) =====
+   كانت الصفوفُ تنضغط إلى عرض المساحة فيختفي نصُّ السؤال ويُقصّ اسمُ المجلد وتتزاحم أيقوناتُ العدّادات.
+   فللشجرة عرضٌ أدنى يسع الصفَّ كاملًا، وما زاد عن المساحة شريطٌ سفليٌّ يُمرَّر يمينًا ويسارًا */
+.pk-bank > #cm-cards > .x3, .pk-bank > .x3 > * { min-width: 640px; }
+/* والشريطُ ظاهرٌ دائمًا (لا يختفي حتى يُمرَّر كما في الماك): رفيعٌ بلونٍ خافت. و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎
+   لأنّ كروم يُهمل ‎::-webkit-scrollbar‎ متى ضُبطا */
+.pk-bank > #cm-cards, .pk-bank > .x3 { scrollbar-width: auto; scrollbar-color: auto; }
+.pk-bank > #cm-cards::-webkit-scrollbar, .pk-bank > .x3::-webkit-scrollbar { width: 4px; height: 4px; }   /* رفيعٌ هادئ (طلبُ صاحب الموقع) */
+.pk-bank > #cm-cards::-webkit-scrollbar-track, .pk-bank > .x3::-webkit-scrollbar-track { background: transparent; }
+.pk-bank > #cm-cards::-webkit-scrollbar-thumb, .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border-radius: 99px; }
+.pk-bank > #cm-cards::-webkit-scrollbar-thumb:hover, .pk-bank > .x3::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data-theme="dark"] .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
+.pk-bank > #cm-cards::-webkit-scrollbar-corner, .pk-bank > .x3::-webkit-scrollbar-corner { background: transparent; }
+/* والشريطان على حافّة المساحة نفسِها (طلبُ صاحب الموقع): الممرَّرُ يمتدّ فوق حشوة البنك (‎14px‎ جانبًا وأسفلَ)
+   ويحمل الحشوةَ في داخله — فيبقى المحتوى في موضعه، والشريطان على الحدّ */
+.pk-bank > #cm-cards, .pk-bank > .x3 { margin: 0 -14px -14px; padding-inline-start: 20px; padding-inline-end: 18px; padding-bottom: 14px; }
 .pk-split:not(.pk--max *) > .pk-bank { max-height: 72vh; }
 .pk-bank > .pk-qbempty { margin: auto; }
 @media (max-width: 760px) {
@@ -17204,6 +17231,21 @@ html[data-theme="dark"] .cx-plus__it:hover, html[data-theme="dark"] .cx-plus__it
 html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp-ink: #1c2947; --pp-soft: #6b7180; --pp-shadow: rgba(0, 0, 0, .7); }
 .pk--max .kt-view--cards { display: flex; flex-direction: column; }
 .pk--max .kt-view--cards > .pp-host { flex: 1 1 auto; min-height: 0; }
+/* ===== شبكةُ التسعة في العرض البطاقيّ =====
+   مطويّةً: الوسطُ يملأ المساحة والأطرافُ في أضيق حال. وتنفرج (‎is-open‎: في الأطراف ورق · ‎is-carry‎: ورقةٌ محمولة) فيصغر الوسطُ
+   برزمته وتتّسع الأطراف — بحركة. وفي كلّ مربّعٍ فيه ورقٌ رزمةٌ حقيقيّة كالوسط */
+.pp-grid { display: grid; grid-template-columns: var(--gc, minmax(0,0fr) minmax(0,1fr) minmax(0,0fr)); grid-template-rows: var(--gr, minmax(0,0fr) minmax(0,1fr) minmax(0,0fr)); width: 100%; aspect-ratio: 1; min-height: 0;
+  transition: grid-template-columns .45s cubic-bezier(.3, .7, .2, 1), grid-template-rows .45s cubic-bezier(.3, .7, .2, 1); }
+/* الورقةُ محمولة: المربّعاتُ التسعةُ كلُّها ظاهرةٌ ليُفلت في أيّها */
+.pp-grid.is-carry { grid-template-columns: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); grid-template-rows: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); }
+.pk--max .kt-view--cards > .pp-grid,
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--cards > .pp-grid { flex: 1 1 auto; aspect-ratio: auto; }
+.pp-cell { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 14px; overflow: visible; box-sizing: border-box; padding: 4px;
+  border: 1.5px dashed transparent; transition: border-color .15s ease, background-color .15s ease; }
+.pp-cell > .pp-host { width: 100%; height: 100%; min-height: 0; }
+.pp-cell.is-src { z-index: 3; }   /* الورقةُ المحمولةُ فوق المربّعات كلِّها */
+.pp-grid.is-carry .pp-cell { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 45%, transparent); }
+.pp-grid.is-carry .pp-cell.is-over { border-color: var(--u-gold, #c9a25c); background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, transparent); }
 .pp-stage { position: relative; perspective: 1300px; }
 .pp-pile { position: absolute; inset: 0; }
 .pp-layer, .pp-face {
@@ -17306,7 +17348,7 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 .pk-es__b svg { width: 16px; height: 16px; flex: none; }
 /* وعاءُ المصدر الفارغ والوسطُ الفارغ: الرسمةُ في الوسط بلا إطارٍ مرقّط */
 .pk-src.pk-src--es { display: flex; padding: 0; }
-.pk-split__ph--es { display: flex; }
+.pk-split__ph--es, .pk-split__esr { display: flex; }
 /* البنك: تُرى ما دام محرّرُه فارغًا */
 .pk-bank > .pk-es { display: none; }
 .pk-bank:not(:has(#cm-cards .x3 > *)) > .pk-es { display: flex; }
@@ -18392,7 +18434,7 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .bk-skel__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .bk-skel__pc { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-style: normal; font-weight: 700; font-size: 12px; font-variant-numeric: tabular-nums;
   color: var(--u-mut, #6b7686); transition: opacity .2s; }
-.bk-skel.is-done .bk-skel__pc { opacity: 0; }
+.bk-skel.is-done .bk-skel__pc, .bk-skel:not(.is-drawn) .bk-skel__pc { opacity: 0; }   /* النسبةُ مع أوّل إطارٍ للكتاب لا قبله */
 /* مؤشّرُ قلم التظليل على الصفحة والقلمُ مختارٌ أو وهو يظلّل (‎--hl-cur‎ يضعه ‎hlToolSync‎ بحبر القلم) */
 :is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
 .hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
@@ -18444,3 +18486,36 @@ img.hl-fly { border-radius: 2px; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .4); 
 tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 @keyframes hl-call-land { 0% { box-shadow: 0 0 0 0 var(--hlc); } 30% { box-shadow: 0 0 0 4px var(--hlc); } 100% { box-shadow: 0 0 0 0 transparent; } }
 @keyframes hl-call-row { 0%, 25% { background-color: color-mix(in srgb, var(--hlc) 45%, transparent); } 100% { background-color: transparent; } }
+/* «غلاف المادة» تحت «رفع صورة» مباشرة: بلا فاصلٍ ثانٍ */
+.psp-up.psp-gen { border-top: 0 !important; margin-top: 0 !important; padding-top: 4px !important; }
+/* وجهُ المجلد في شريط المساهمة (التحرير): زرٌّ يفتح «لون المجلد ووجهه» كمجلدات بنوك الأسئلة */
+.pk-fic { cursor: pointer; border-radius: 6px; outline: 1px dashed transparent; outline-offset: 4px; transition: outline-color .14s ease; }
+/* بالمرور: طوقٌ مرقّطٌ يظهر بعد ‎.14s‎ كطوق أيقونات البنك (‎button.x3-fic::after‎) — لا تكبيرَ ولا مربّعَ خلفها (طلبُ صاحب الموقع).
+   والأيقونةُ ‎svg‎ أو ‎img‎ لا تحمل ‎::after‎، فالطوقُ ‎outline‎ يتبع انحناءها */
+.pk-fic:hover, .pk-fic:focus-visible, .pk-fic.cx-face:hover { background: none; outline-color: var(--u-in-line); transition-delay: .14s; }
+.pk-fem { object-fit: contain; }
+.pk-fic:focus:not(:focus-visible):not(:hover) { outline-color: transparent; }
+/* صورةُ الغلاف تظهر حين تكتمل لا وهي تصل (‎bookHTML‎) — والوجهُ المرسومُ تحتها حتى ذلك */
+.bk .bkface--img > img { opacity: 0; transition: opacity .22s ease; aspect-ratio: auto .7; }   /* وقبل أن يُعرف مقاسُها: بنسبة المرسوم، فلا ينطوي الكتابُ إلى عرضٍ صفرٍ يُخفي المرسومَ تحته */
+.bk .bkface--img > img.is-in { opacity: 1; }
+
+/* ===== دعوةُ اختيار القسم في رفّ السوق (الاقتراح ٤): مساهماتٌ مغبّشةٌ وبطاقةٌ فوقها ===== */
+.cm-pick { position: relative; padding: 14px 4px 6px; min-height: 170px; }
+.cm-pick__ghost { display: flex; flex-direction: column; gap: 14px; opacity: .38; filter: blur(1.2px); pointer-events: none; }
+.cm-pick__row { display: flex; gap: 10px; align-items: flex-start; }
+.cm-pick__av { width: 34px; height: 34px; border-radius: 50%; flex: none; background: color-mix(in srgb, var(--u-brand, #2c5e65) 22%, var(--u-surface-2, #eef2f3)); }
+.cm-pick__ln { flex: 1; display: flex; flex-direction: column; gap: 9px; padding-top: 6px; }
+.cm-pick__ln i { display: block; height: 9px; border-radius: 5px; background: color-mix(in srgb, var(--u-mut, #6b7686) 25%, transparent); }
+.cm-pick__msg { position: absolute; inset: 0; margin: auto; width: fit-content; height: fit-content; display: flex; align-items: center; gap: 10px;
+  background: var(--u-surface, #fff); border: 1px solid var(--u-line, rgba(20, 35, 63, .1)); border-radius: 14px; padding: 12px 18px;
+  box-shadow: 0 10px 30px -14px rgba(20, 35, 63, .35); font-size: 14px; font-weight: 600; color: var(--u-ink, #14233f); }
+.cm-pick__msg svg { width: 20px; height: 20px; fill: none; stroke: var(--u-brand, #2c5e65); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: cm-pick-up 1.6s ease-in-out infinite; }
+@keyframes cm-pick-up { 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .cm-pick__msg svg { animation: none; } }
+html[data-theme="dark"] .cm-pick__msg { background: var(--u-surface, #182026); border-color: rgba(255, 255, 255, .09); color: #e6ecef; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] .cm-pick__av { background: color-mix(in srgb, #7fb7bd 22%, #1d272e); }
+html[data-theme="dark"] .cm-pick__ln i { background: rgba(255, 255, 255, .1); }
+html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
+/* تبويبٌ بلا مساهمات: صفُّ الدوائر لا يأخذ مكانًا، فتتوسّط الأيقونةُ والاسمُ عموديًّا — وإذا اختير ظهرت «+» وحدها */
+.cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
+.cm-tabs button:not(.on) .cm-faces.is-none { display: none; }

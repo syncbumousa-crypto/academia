@@ -585,7 +585,7 @@
      أيضًا حين يُزرع ترميز الموقع في صفحة أخرى (لوحة الأدمن) */
   const ASSET_BASE = (() => {
     const s = document.currentScript && document.currentScript.src;
-    return s ? s.replace(/platform\/app\.js.*$/, '') : '';
+    return s ? s.replace(/platform\/app(\.min)?\.js.*$/, '') : '';   /* والمضغوطُ ‎app.min.js‎ في المنشور */
   })();
   const assetURL = p => (!p || /^(data:|blob:|https?:)/.test(p)) ? p : /^\/api\//.test(p) ? (window.AC_API_ORIGIN || location.origin) + p : /^\//.test(p) ? p : ASSET_BASE + p;
   /* ---------- غلاف المادة = مساهمة مثبَّتة في بند «المادة» تحمل صورة كتاب ----------
@@ -663,6 +663,8 @@
       + (kind === 'g' ? '<span class="bg-shine"></span>' : '')
       + bookFace(baseOf(code)) + (op.inner || '') + '</span><span class="bg-clip"></span>' + (op.after || '') + '</span>';
   }
+  /* صورُ الأغلفة التي اكتملت مرّةً في هذه الجلسة: تُرسم ظاهرةً فورًا (الرفُّ يُعاد رسمُه، فلا تذوب من جديد في كلّ رسمة) */
+  const BK_SEEN = window.__bkSeen = window.__bkSeen || new Set();
   function bookHTML(code, img, o) {    const op = o || {};
     const sz = op.size ? ' bk--' + op.size : '';
     const inner = op.inner || '';
@@ -681,7 +683,11 @@
     const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
                + ' this.parentNode.remove()';
     const shot = img
-      ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy"'
+      ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy" decoding="async"'
+        + (BK_SEEN.has(img) ? ' class="is-in"' : '') + ' data-u="' + esc(img) + '"'
+        /* لا تُرى الصورةُ وهي تصل: المتصفّحُ يرسم ما وصل منها شريطًا شريطًا من أعلى، مشوّشًا — فتبقى خفيّةً والمرسومُ تحتها،
+           حتى تكتمل وتُفكّ، فتظهر دفعةً بتلاشٍ قصير */
+        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\')})"'
         + ' onerror="' + fail + '">' + inner + '</span>'
       : '';
     return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : '') + '">'
@@ -1105,6 +1111,14 @@
     } catch (e) { saveBad = true; bootMark('quota'); saveAlarm(e); }
   };
 
+  /* ‏‎saveSoon‎: حفظٌ واحدٌ في أوّل فراغ بدل حفظاتٍ متتالية — كلُّ حفظٍ يكتب الحالَ كلَّها (ثلثُ ما يُجمّد الصفحةَ وهي تحمّل الكتاب).
+     للكتاب ومصادره وحدها، ويُحفَظ فورًا إن أُغلقت الصفحة */
+  let saveSoonT = 0;
+  const saveFlush = () => { if (saveSoonT) { (window.cancelIdleCallback || clearTimeout)(saveSoonT); saveSoonT = 0; save(); } };
+  const saveSoon = () => { if (!saveSoonT) saveSoonT = (window.requestIdleCallback || (f => setTimeout(f, 300)))(() => { saveSoonT = 0; save(); }, { timeout: 2000 }); };
+  window.addEventListener('pagehide', saveFlush);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveFlush(); });
+
   /* ---------- بابُ اللوحة إلى الدرج ----------
      لوحةُ الأدمن تعمل في هذي الصفحة نفسِها وتكتب الدرجَ كلَّه من لقطةٍ قديمة،
      فتمحو ما كتبه المحرّكُ بعد اللقطة. فتُعطى بابًا: تُنقل مفاتيحُ لقطتِها إلى
@@ -1197,7 +1211,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', cmPick: 'اختر قسمًا من فوق لتظهر مساهماته', pkSrcGenCov: 'غلاف المادة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد معرفة', pkPlusKC: 'بطاقة معرفة', pkPlusQF: 'مجلد أسئلة', pkPlusQC: 'بطاقة مسألة', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'المصطلح', 'معناه', ''], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1668,7 +1682,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', cmPick: 'Choose a section above to see its contributions', pkSrcGenCov: 'Course cover', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Knowledge folder', pkPlusKC: 'Knowledge card', pkPlusQF: 'Question folder', pkPlusQC: 'Problem card', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'TERM', 'WHAT IT MEANS', ''], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -2648,6 +2662,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       track = host.querySelector('.reel-track');
       countEl = host.querySelector('.reel-count');
       bindEvents();
+      /* تعويمُ المتمركز يبدأ بمرور المؤشّر عليه ويقف بعد ثلاث دورات (‎10s‎): الحركةُ الدائمة
+         كانت تُبقي الرفَّ تحت زجاج البحث يُعاد رسمُه كلَّ إطار — ‎~75MB‎ من ذاكرة الرسم */
+      track.addEventListener('pointerover', e => {
+        const cr = e.target.closest && e.target.closest('.reel-slot.is-center .crow');
+        if (cr) cr.classList.add('is-bob');
+      });
+      track.addEventListener('animationend', e => { if (e.animationName === 'reel-bob') e.target.classList.remove('is-bob'); });
     }
     /* الجزء يمينًا ثم «/» ثم الكل يسارًا مع العربية — يقلبها اتجاه الصندوق في CSS مع الإنجليزية */
     function paintCount() {
@@ -6868,10 +6889,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function renderCmSection() {
     try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
+  /* الدعوة (الاقتراحُ ٤ من صاحب الموقع): مساهماتٌ مغبّشةٌ تُوحي بما ينتظر، وفوقها بطاقةٌ تقول اختر قسمًا من فوق */
+  function cmPickHTML() {
+    const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
+    return `<div class="cm-pick"><div class="cm-pick__ghost" aria-hidden="true">${row(34, 76) + row(42, 69) + row(50, 62)}</div>`
+      + `<div class="cm-pick__msg" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
+  }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
+    /* لا قسمَ مختار (رفُّ السوق): دعوةٌ للاختيار مكانَ المساهمات، ولا تبويبَ مضيء */
+    if (cmTabSel == null) {
+      const body = $('#cm-body');
+      body.innerHTML = cmPickHTML(); body.classList.remove('is-cxmax', 'is-cxfull');
+      document.querySelectorAll('.cm-panel .cm-tabs button[data-tab]').forEach(b => b.classList.remove('on'));
+      paintTabFaces(cmCode);
+      return;
+    }
     /* دخولُ المحرّر يُسلّح اللمحة، ويستهلكها أوّلُ بناءٍ للشجرة بعده */
     jrPeekArm = cmView.mode === 'edit';
     const sec = cmTabSel;
@@ -9558,6 +9593,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
     if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
+    if (slot) slot.dataset.fill = pkFillKey();
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
@@ -9627,7 +9663,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t) t.click();
       return;
     }
-    const t = post && post.querySelector(qb.dataset.actqb === 'f' ? '.vt-foot .cx-addf' : '.vt-foot .cx-addc');
+    /* «سؤال» يفتح دُرجَ أنواع السؤال العلويّ دائمًا (طلبُ صاحب الموقع) — كان يمرّ بـ‎.cx-addc‎ فيصير
+       «ورقةَ الملخّص» متى كان في المساهمة متن (‎cxPageOpen‎)، وما ذاك بابُ إضافة سؤال */
+    if (qb.dataset.actqb !== 'f') { openCardDlg(null, null); return; }
+    const t = post && post.querySelector('.vt-foot .cx-addf');
     if (t) t.click();
   }, true);
   /* «+ مجلد معرفة»: إلى شجرة المعرفة مباشرةً (لا إلى البنك وإن كان مفتوحًا) — يظهر في الشريط مختارًا واسمُه يُحرَّر */
@@ -9662,7 +9701,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!pv || !pkFromNoneCheck(pv)) return;
     const id = pv.dataset.pkid; if (!id) return;
     e.preventDefault(); e.stopPropagation();
-    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree'; }
+    if (pv.dataset.pkview === 'source') { pkSplit[id] = true; if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF; }
     else pkBank[id] = true;
     pkFromNoneRender(id);
   }, true);
@@ -9836,8 +9875,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `</svg></button>`;
   };
   const pkVwOf = id => {
-    const v = pkVw[id] || (pkLab() ? 'tree' : 'folder');
-    if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || 'tree'; pkBank[id] = true; return pkVw[id]; }
+    const v = pkVw[id] || (pkLab() ? PK_KN_DEF : 'folder');
+    if (v === 'folder' && pkLab()) { pkVw[id] = pkLastKn[id] || PK_KN_DEF; pkBank[id] = true; return pkVw[id]; }
     return v;
   };
   const pkBankOn = id => !!(pkLab() && pkBank[id]);
@@ -9908,7 +9947,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkIcSet = (id, k) => {
     pkSplit[id] = k === 'book'; pkBank[id] = k === 'bank';
     if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
-    if (k === 'book' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    if (k === 'book' && !PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
     cxRowFresh = id;   /* خلوُّها في هذا الكونسبت عودةٌ إلى الأيقونات، لا طيّ */
   };
   /* مستطيلٌ بإحداثيّات المربّع */
@@ -10280,6 +10319,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      أبناءه، واللونُ في أيقونة المجلد وفي حلقة المختار وحدهما. والزجاجُ نفسُه — حافّتُه
      المضيئةُ مع الضوء، وانحناءُ سطحه، وظلُّه الناعم — ‎CSS‎ على العنصر نفسِه (ROADMAP-GLASS-STRIP ق٣):
      مصدرٌ واحدٌ للحقيقة، فما يُرى هو ما يُحوَّم عليه ويُنقر */
+  /* وجهُ المجلد في الشريط: إيموجيه إن اختير له، وإلّا رمزُ المجلد بلونه. وفي التحرير يصير زرًّا يفتح «لون المجلد ووجهه» — القائمةَ نفسَها
+     التي لمجلدات بنوك الأسئلة (‎fmn‎)، وتُحفظ في مجلدات المساهمة (‎data-pkface‎) */
+  const pkFace = (k, ed) => {
+    const at = ed && k.id ? ` cx-face pk-fic" data-id="${esc(k.id)}" data-pkface="1" role="button" tabindex="0" aria-haspopup="true" title="${esc(T().ffTitle)}" aria-label="${esc(T().ffTitle)}` : '';
+    const u = k.em && emURL(k.em);
+    return u ? `<img class="pk-fi pk-fem${at}" src="${u}" alt="">` : pkFi(k.c).replace('class="pk-fi"', `class="pk-fi${at}"`).replace(' aria-hidden="true"', at ? '' : ' aria-hidden="true"');
+  };
   const pkFi = c => '<svg class="pk-fi" viewBox="0 0 24 24" aria-hidden="true"' + (c ? ' style="color:' + c + '"' : '') + '><path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h4.3c.66 0 1.3.26 1.77.73L11.9 6h7.6A2.5 2.5 0 0 1 22 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5z"/></svg>';
   /* انحناءاتٌ متّحدةُ المركز: اللوحُ نصفُ قطره نصفُ قطرِ ما في داخله زائدًا حشوتَه (٦)،
      فتجري الحوافُّ متوازية. ويُحسب من الأسفل: لوحٌ لا يتّسع فيه شيء ٢٤ (١٨ للكبسولة + ٦)،
@@ -10379,7 +10425,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -10403,13 +10449,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      دائمًا لَما أُمسك أبدًا */
   let pkNaming = null;
   const pkKidsAll = f => (f.ch || []).filter(x => x.t === 'f')
-    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', c: folderColor(x), kids: pkKidsAll(x) }));
+    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', c: folderColor(x), em: x.em, kids: pkKidsAll(x) }));
   function pgFoldsAll(deck, ed) {
     const out = [];
     /* «الجذر» لا يظهر إلّا لبطائقَ خارج المجلدات (كما في ورقة الملخّص) — لا مَهبطًا للسحب:
        الإخراجُ إلى الطبقة العليا يكون بالإفلات على **فراغ الشريط** نفسِه (بطلب صاحب الموقع) */
     if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
-    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', c: folderColor(f), kids: pkKidsAll(f) }));
+    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', c: folderColor(f), em: f.em, kids: pkKidsAll(f) }));
     return out;
   }
   /* مربّعاتُ المختبر في التحرير: المختارُ وجهُه حقلُ اسمٍ (والجذرُ لا يُسمّى — ليس مجلدًا)،
@@ -10421,7 +10467,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>';
+        : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>';
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
@@ -10512,6 +10558,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* وتعمّ العروضَ الثلاثة (طلبُ صاحب الموقع): ‎pkSplit[id]‎ هو العرضُ الذي بجانب الكتاب — شجريٌّ أو بطاقيٌّ
      أو جدوليّ. والتنقّلُ بينها يُبقي الكتابَ في مكانه ويبدّل جارَه */
   const PK_SPLIT_VIEWS = ['tree', 'cards', 'table'];
+  const PK_KN_DEF = 'table';   /* العرضُ الأوّلُ لمساحة الملخّص: الجدوليّ (طلبُ صاحب الموقع) — ثمّ ما اختاره صاحبُها آخرَ مرّة */
   /* ===== ROADMAP-SPLITTER: خطٌّ يُمسك بين الكتاب وجاره =====
      حصّةُ كلِّ طرفٍ (الكتابُ ‎--spl‎ والبنكُ ‎--sqb‎) كسرٌ من عرض القسمة إلّا فُرجةً واحدة — أساسٌ واحدٌ لا يتبدّل بعدد المساحات،
      فلا يتغيّر عرضُ طرفٍ إذا فُتح الطرفُ الآخرُ أو أُغلق: الملخّصُ وحده يأخذ ما بقي (طلبُ صاحب الموقع). وكان الأساسُ يطرح فُرجتين
@@ -10841,7 +10888,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (t) t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
   }
   /* جوفُ مصدرٍ واحد — وحتى يُفتح الملفّ: هيكلُ صفحاتٍ تتقلّب يُسلِّم إلى الكتاب بلا قفزة */
-  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n)}</div>`;
+  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n, (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover)}</div>`;
   const pkSrcView = (id, ed) => {
     /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
     /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
@@ -10917,8 +10964,76 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const key = pkSrcCovKey(id);
     if (!await chIdb('readwrite', key, img)) { toast(T().chSaveFail); return; }
     if (pkSrcCovUrl[key]) { URL.revokeObjectURL(pkSrcCovUrl[key]); delete pkSrcCovUrl[key]; }
-    (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, ts: Date.now() };
+    (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, cv: PK_COV_V, ts: Date.now() };
     pkSrcMark(id); save(); renderCmSection();
+  }
+  /* ===== «غلاف المادة»: نسخةٌ مصوَّرةٌ من الغلاف المرسوم الذي يلبسه الموقعُ مادّةً بلا غلاف (‎bookHTML‎ في الرفّ) =====
+     لا يُعاد تصميمُه: يُبنى وجهُه نفسُه في الصفحة مخفيًّا بمقاس الرفّ، وتُقرأ منه ألوانُه وخطوطُه ومواضعُ نصوصه كما رسمها المتصفّح،
+     ثمّ تُرسم بأعيانها مكبَّرةً على صورةٍ بنسبة صفحات الكتاب — فتأتي نسخةً منه، وتتبعه إن تبدّل تصميمُه */
+  async function courseCoverCanvas(code, ar, W = 1000) {
+    const host = document.createElement('div');
+    host.style.cssText = 'position:fixed;left:-10000px;top:0;height:114px;pointer-events:none;visibility:hidden';
+    host.innerHTML = bookHTML(code, '', {});
+    host.querySelectorAll('.ribbon').forEach(x => x.remove());   /* شريطُ النوع للرفّ وحده */
+    document.body.appendChild(host);
+    try {
+      const face = host.querySelector('.bkface'); if (!face) return null;
+      const fr = face.getBoundingClientRect(); if (!fr.width) return null;
+      const fcs = getComputedStyle(face), texts = [...face.children].filter(e => (e.tagName === 'B' || e.tagName === 'I') && e.textContent.trim());
+      await Promise.all(texts.map(e => { const c = getComputedStyle(e); return document.fonts.load(`${c.fontWeight} ${c.fontSize} ${c.fontFamily}`, e.textContent).catch(() => {}); }));
+      const H = Math.round(W / ar), c = document.createElement('canvas'); c.width = W; c.height = H;
+      const g = c.getContext('2d'), k = W / fr.width, oy = (H - fr.height * k) / 2;
+      /* الخلفيّة: تدرّجُ الوجه نفسُه (زاويتُه ولوناه من الأنماط المحسوبة)، ممدودًا على الصورة كلّها */
+      const bg = fcs.backgroundImage, deg = +((bg.match(/(-?[\d.]+)deg/) || [])[1] || 180), cols = bg.match(/rgba?\([^)]+\)/g) || [fcs.backgroundColor];
+      const a = deg * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a), L = Math.abs(W * dx) + Math.abs(H * dy);
+      const gr = g.createLinearGradient(W / 2 - dx * L / 2, H / 2 - dy * L / 2, W / 2 + dx * L / 2, H / 2 + dy * L / 2);
+      cols.forEach((col, n) => gr.addColorStop(cols.length > 1 ? n / (cols.length - 1) : 0, col)); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+      /* النصوص: كلُّ سطرٍ بموضعه وخطّه ولونه وشفافيّته كما في الوجه */
+      /* النصُّ أصغرُ ممّا في الرفّ (‎TS‎): الغلافُ كبيرٌ فلا يُملأ — يُصغَّر هو وبُعدُه عن الوسط معًا فيبقى ترتيبُه (طلبُ صاحب الموقع) */
+      const TS = .62, cyF = (fr.height * k) / 2 + oy;
+      g.textAlign = 'center'; g.textBaseline = 'middle';
+      for (const e of texts) {
+        const cs = getComputedStyle(e), fs = parseFloat(cs.fontSize) * k * TS, lh = (parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2) * k * TS;
+        g.font = `${cs.fontStyle === 'italic' ? '' : ''}${cs.fontWeight} ${fs}px ${cs.fontFamily}`;
+        g.fillStyle = cs.color; g.globalAlpha = +cs.opacity; g.direction = cs.direction;
+        if ('letterSpacing' in g) g.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : (parseFloat(cs.letterSpacing) * k * TS) + 'px';
+        /* الأسطرُ كما لفّها المتصفّح: مستطيلاتُ النصّ سطرًا سطرًا */
+        const rg = document.createRange(); rg.selectNodeContents(e);
+        const lines = [...rg.getClientRects()].filter(r => r.width > 0), words = e.textContent.trim().split(/\s+/), out = [];
+        if (lines.length > 1) { let cur = ''; const maxW = Math.max(...lines.map(r => r.width)) * k * TS * 1.02; for (const w of words) { const t = cur ? cur + ' ' + w : w; if (cur && g.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t; } out.push(cur); }
+        else out.push(e.textContent.trim());
+        const er = e.getBoundingClientRect(), cx = (er.left + er.width / 2 - fr.left) * k, top = cyF + ((er.top - fr.top) * k + oy - cyF) * TS;
+        out.forEach((t, n) => g.fillText(t, cx, top + lh * (n + .5)));
+      }
+      g.globalAlpha = 1;
+      return c;
+    } finally { host.remove(); }
+  }
+  async function pkSrcCovGen(id) {
+    const code = cmCode || '', c = await courseCoverCanvas(code, +(pkSrcMeta(id) || {}).ar || .7);
+    if (!c) return;
+    const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+    if (blob) await pkSrcCovSet(id, new File([blob], (baseOf(code) || 'cover') + '.png', { type: 'image/png' }));
+  }
+  /* ===== لونُ الكتاب من غلافه الفعليّ — مصدرٌ واحد =====
+     الغلافُ الذي على الكتاب إمّا صورةٌ مرفوعة (أو «غلاف المادة») وإمّا صفحةٌ من الملفّ (‎covPg‎) — ويُقرأ اللونُ منه هو بـ‎covPick‎.
+     يُحفظ مع اللون ما حُسب منه (‎coverOf‎)، فإذا تبدّل الغلافُ (صفحةٌ أخرى، رفعٌ، حذف) أو كان بطريقةٍ قديمة (‎coverV‎) حُسب من جديد
+     قبل أن يُبنى الكتاب. ‏‎PK_COV_V‎ نسخةُ الطريقة */
+  const PK_COV_V = 3;
+  async function pkSrcColorSync(id, doc) {
+    const meta = pkSrcMeta(id), cv = pkSrcCovMeta(id); if (!meta) return;
+    if (cv) {
+      if (cv.cv === PK_COV_V) return;
+      try {
+        const blob = await chIdb('readonly', pkSrcCovKey(id)), bmp = blob && await createImageBitmap(blob);
+        if (bmp) { const c = document.createElement('canvas'); c.width = 96; c.height = Math.max(1, Math.round(96 * bmp.height / bmp.width)); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height); bmp.close && bmp.close(); cv.color = covPick(c); }
+      } catch (e) {}
+      cv.cv = PK_COV_V; saveSoon(); return;
+    }
+    const of = 'pg' + (meta.covPg || 1);
+    if (meta.coverV === PK_COV_V && meta.coverOf === of) return;
+    meta.cover = await bkCoverColor(doc, meta.covPg || 1).catch(() => null);
+    meta.coverV = PK_COV_V; meta.coverOf = of; saveSoon();
   }
   async function pkSrcCovDel(id) {
     const key = pkSrcCovKey(id);
@@ -10955,6 +11070,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     img: '<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="M20 15l-4.5-4.5L6 20"/>', tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>',
     swap: '<path d="M4 9h13l-3-3M20 15H7l3 3"/>', trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', up: '<path d="M12 16V4M7 9l5-5 5 5M5 20h14"/>',
     l: '<path d="M15 6l-6 6 6 6"/>', r: '<path d="M9 6l6 6-6 6"/>',
+    book: '<path d="M6 4h11a1 1 0 0 1 1 1v15H7a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1z"/><path d="M9 9h6M9 12h4"/>',
   };
   let pkSP = { id: null, sub: null, sid: null, conf: null, ed: false };
   const pkSrcHd = (id, ed) => {
@@ -10999,7 +11115,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <input class="psp-num" type="text" inputmode="numeric" value="${n}" data-pspnum aria-label="page">
             <button type="button" class="psp-ar" data-psp="pg" data-d="1" aria-label="next">${pkSrcSvg(PK_SP_IC.l)}</button></div>
           ${N ? `<div class="psp-of">${esc(T().pkSrcOf)} ${N}</div>` : ''}
-          <button type="button" class="psp-up" data-psp="upcov">${pkSrcSvg(PK_SP_IC.up)}<span>${esc(T().pkSrcUpImg)}</span></button></div>`;
+          <button type="button" class="psp-up" data-psp="upcov">${pkSrcSvg(PK_SP_IC.up)}<span>${esc(T().pkSrcUpImg)}</span></button>
+          <button type="button" class="psp-up psp-gen" data-psp="gencov">${pkSrcSvg(PK_SP_IC.book)}<span>${esc(T().pkSrcGenCov)}</span></button></div>`;
       } else if (on && sub === 'type') {
         panel = `<div class="psp-sub psp-list">${PK_SRC_TY.map(t => `<button type="button" class="psp-it${t[0] === ty[0] ? ' is-on' : ''}" data-psp="settype" data-ty="${t[0]}" style="--c:${t[2]}">${pkSrcSvg(t[3])}<span>${esc(T()[t[1]])}</span>${t[0] === ty[0] ? '<b class="psp-ck">✓</b>' : ''}</button>`).join('')}</div>`;
       } else if (on && sub === 'more') {
@@ -11085,6 +11202,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
     if (k === 'upcov') { pkSrcCovIn.dataset.pkid = s; pkSrcCovIn.click(); return; }
+    if (k === 'gencov') { pkSrcCovGen(s); return; }
     if (k === 'swap') { pkSrcIn.dataset.pkid = s; pkSrcIn.click(); return; }
     if (k === 'lnk') { const id = pkSP.id; pkSrcPopClose(); pkLnk.open[id] = true; renderCmSection(); return; }   /* شجرةُ الربط تطفو فوق زرّ المصدر */
     if (k === 'del') { if (pkSP.conf === s) { pkSP.sub = null; pkSP.sid = null; pkSP.conf = null; pkSrcDel(s); } else { pkSP.conf = s; pkSrcPopShow(); } return; }
@@ -11112,7 +11230,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       bkLoadSet(key, 45, 62);
-      if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
+      await pkSrcColorSync(id, doc);
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
          فلا يُنتزع القارئُ من صفحته مع كلّ رسمة */
@@ -11172,7 +11290,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
-        closed: !meta || meta.closed !== false,
+        closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة: فيه ينتهي هيكلُ التحميل، فلا يتسلّمه المحرّكُ مفتوحًا على صفحةٍ قديمة */
         covKey, covPg,
         wide: true,
         flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
@@ -11222,7 +11340,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
       if (sp.classList.contains('pk-splh-anim') && !dur) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
-      if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
+      /* أُغلق الكتاب: تبقى المساحةُ بقامتها التي كانت معه (طلبُ صاحب الموقع) — لا تطول إلى قامتها الحرّة */
+      if (h == null) { if (pkSrcH[id] && Math.abs(pkSrcH[id] - cur) >= 1) sp.style.setProperty('--pk-h', pkSrcH[id] + 'px'); return; }
       pkSrcH[id] = h;
       if (Math.abs(h - cur) < 3) return;
       if (cur && !bkReduce()) {
@@ -11243,6 +11362,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
+    /* ما وقع خارج المجلدات (فظهر «الجذر» في الشريط — طلبُ صاحب الموقع أن يُشال) يُنقل إلى أوّل مجلد، فلا يضيع ولا يُرى جذر */
+    if (ed && Array.isArray(deck) && deck.some(n => n.t !== 'f')) {
+      const f0 = deck.find(n => n.t === 'f');
+      if (f0) {
+        const loose = deck.filter(n => n.t !== 'f');
+        for (let i = deck.length - 1; i >= 0; i--) if (deck[i].t !== 'f') deck.splice(i, 1);
+        (f0.ch || (f0.ch = [])).push(...loose);
+        /* ووصلاتُ اللوح المحفوظةُ على الرزمة (حين فُتح الجذر) تتبع بطائقَها إلى المجلد إن كان طرفاها فيه */
+        const P = cardDataRaw(cmCode);
+        if (P && P.deck === deck && P.links && P.links.length) {
+          const inF = new Set(); const walk = a => a.forEach(n => { if (n.t === 'c') inF.add(n.id); else if (n.t === 'f') walk(n.ch || []); }); walk(f0.ch);
+          const mv = P.links.filter(l => inF.has(l.a) && inF.has(l.b));
+          if (mv.length) { P.links = P.links.filter(l => !mv.includes(l)); f0.links = (f0.links || []).concat(mv); }
+        }
+        if (pkFs[id] === '') pkFs[id] = f0.id;
+        queueMicrotask(save);
+      }
+    }
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
     /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
@@ -11281,7 +11418,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
-        lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
+        /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
+           وهي ‎kt-view‎ بمجلدها المختار: فـ«+ صفّ» من التذييل يضيف إليه، ثمّ يُرسم العرضُ مكانها */
+        lab && v !== 'folder' && ed && wrap && !flatCards(deck).length ? `<div class="kt-view pk-split__ph pk-split__esr" data-ktf="${esc(sel)}">${pkEs('mid')}</div>`
+        : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
   }
@@ -11335,6 +11475,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     delete H.kt; save();
   }
   const ktCards = host => host.arr.filter(n => n.t === 'c');
+  /* ===== المجلدُ بما فيه (طلبُ صاحب الموقع): بطائقُه أوّلًا، ثمّ كلُّ مجلدٍ داخليٍّ برأسه وبطائقه — وهكذا نزولًا =====
+     ‏‎{n}‎ بطاقة · ‎{h, d}‎ رأسُ مجلدٍ داخليّ بعمقه. والترقيمُ ‎1..N‎ بهذا الترتيب نسبةً إلى المجلد المفتوح: رقمٌ للتحديد
+     والربط لا هويّة — يتبدّل بتبدّل المفتوح، والتظليلُ مربوطٌ بالبطاقة نفسِها لا برقمها */
+  function ktDeep(host) {
+    const out = [];
+    const walk = (arr, d) => {
+      arr.forEach(n => { if (n.t === 'c') out.push({ n }); });
+      arr.forEach(g => { if (g.t === 'f') { out.push({ h: g, d: d + 1 }); walk(g.ch || [], d + 1); } });
+    };
+    walk(host.arr, 0);
+    return out;
+  }
+  const ktCardsDeep = host => ktDeep(host).filter(x => x.n).map(x => x.n);
+  /* موضعُ بطاقةٍ في شجرة المجلد المفتوح (قد تكون في مجلدٍ داخليّ) */
+  const ktLoc = (host, id) => { const r = host && findNode(host.arr, id); return r && r.n.t === 'c' ? r : null; };
   /* المنشورةُ تُقرأ ولا تُحرَّر (‎KTRO‎ أثناء رسمها): لا حقولَ ولا مفاتيحَ ولا إضافة */
   let KTRO = false;
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
@@ -11348,24 +11503,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const host = ktHost(sel, pack);
     if (!host) return '';
     if (!ro) ktMigrate(host);
-    const cards = ktCards(host);
+    const deep = v === 'tree' ? null : ktDeep(host);
+    const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
-      const h = host.holder.kth || T().ktHead;
+      const h = host.holder.kth || T().ktHead, used = hlUsed(id);
+      let k = 0;
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
-        + h.map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
+        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
+        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
-        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${hlUsed(id).has(n.id) ? ' has-hl' : ''}">${k + 1}</span></td>`
+        + deep.map(x => {
+          /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
+          if (x.h) return '';
+          const n = x.n;
+          return `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
-          + `<td class="kt-c3">${ktOk(n)}</td></tr>`).join('')
+          + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
+        }).join('')
         + `</tbody></table>`;
     } else if (v === 'cards' && pkLab()) {
       /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
       const key = id + '|' + sel;
       PPDATA.set(key, { sel, pack, ro: !!ro });
       if (cards.length) queueMicrotask(ppMountAll);
-      body = !cards.length ? '' : `<div class="pp-host" data-pp="${esc(key)}"></div>`;
+      body = !cards.length ? '' : ppGridHTML(key, cards, { sel, pack, ro: !!ro });
     } else if (v === 'cards') {
       body = !cards.length ? '' : `<div class="kc-grid">` + cards.map(n => `<article class="kc${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}">`
         + `<div class="kc-top">${ktOk(n)}</div>`
@@ -11374,7 +11537,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `</article>`).join('') + `</div>`;
     } else {
       /* العرضُ الشجريّ لوحٌ حرّ (ROADMAP-CANVAS) — ‎kcvHTML‎ */
-      body = kcvHTML(id, sel, host, cards, ro);
+      body = kcvHTML(id, sel, host, cards, ro, pack);
     }
     /* الفارغُ بلا كلام (طلبُ صاحب الموقع) — في التحرير والنشر سواء: الشجريُّ لوحُه وحدَه، والبطاقيُّ والجدوليُّ مربّعٌ مرقّطٌ خالٍ.
        وزرُّ «+ معرفة» شِيل حتى يُقرَّر مكانُه الجديد (‎ktAddBtn‎ باقيةٌ له) */
@@ -11389,7 +11552,61 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وحلقتُها لا تدور إلّا والورقةُ تتحرّك (تسكن فتقف، وتوقظها اليدُ أو الفأرة) */
   const PPDATA = new Map(), PPORD = new Map();
   let ppEditNew = null;   /* بطاقةٌ أُضيفت للتوّ: تصعد على الرزمة ووجهُها مفتوحٌ للكتابة */
+  /* ===== شبكةُ التسعة (طلبُ صاحب الموقع) =====
+     مساحةُ البطائق ٣×٣: الرزمةُ في المربّع الأوسط (أكبرُها)، وما حوله ثمانيةُ مربّعاتٍ بلا أسماء. تُمسك الورقةُ (سحبًا لأعلى
+     أو مائلًا) فتظهر المربّعات وتُفلت في أيّها فتصير فيه كومة؛ وورقةُ الكومة العليا تُقلب بالنقر وتُسحب إلى مربّعٍ آخر أو إلى الوسط.
+     والترتيبُ لكلّ قارئٍ في متصفّحه، ولكلّ مجلدٍ مفتوحٍ ترتيبُه (‎state.ppGrid['post|folder']‎) — فما رُتّب في مجلدٍ داخليّ
+     لا يمسّ أباه: الورقُ هو هو، وطريقةُ عرضه تتبع المجلدَ المفتوح */
+  const ppGridOf = key => ((state.ppGrid || {})[key]) || {};
+  function ppGridSet(key, cid, cell) {
+    const all = state.ppGrid || (state.ppGrid = {}), G = all[key] || (all[key] = {});
+    if (cell === 4) delete G[cid]; else G[cid] = cell;
+    if (!Object.keys(G).length) delete all[key];
+    save();
+  }
+  /* كلُّ مربّعٍ فيه ورقٌ رزمةٌ حقيقيّة (‎ppMount‎ نفسُه بفيزيائه) — مفتاحُها ‎key#مربّع‎. والشبكةُ مطويّة (الوسطُ يملأ المساحة
+     والأطرافُ في أضيق حالٍ) ما لم يكن في الأطراف ورق، وتنفرج حين تُمسك ورقة: يصغر الوسطُ برزمته وتتّسع الأطراف */
+  let ppEnter = null, ppHoldOpen = false;
+  function ppGridHTML(key, cards, D) {
+    const G = ppGridOf(key), has = new Set();
+    cards.forEach(n => { const c = G[n.id]; if (c >= 0 && c !== 4 && c < 9) has.add(c); });
+    /* المقاسُ يتبع مواضعَ الورق (طلبُ صاحب الموقع): كلُّ صفٍّ أو عمودٍ فيه رزمةٌ نصيبٌ متساوٍ من المساحة فتُقرأ رزمُه،
+       والفارغُ ينطوي إلى صفر — فتتوسّط الرزمُ المساحةَ كلَّها، أيًّا كانت جهاتُها وعددُها */
+    const T0 = ppGridTpl([...has]);
+    const hold = ppHoldOpen; ppHoldOpen = false;
+    const cell = i => {
+      const on = i === 4 || has.has(i), k = key + '#' + i;
+      if (on) PPDATA.set(k, Object.assign({}, D, { cell: i, base: key }));
+      return `<div class="pp-cell${i === 4 ? ' pp-cell--c' : ''}" data-ppc="${i}">${on ? `<div class="pp-host" data-pp="${esc(k)}"></div>` : ''}</div>`;
+    };
+    /* وبعد الإفلات يُرسم منفرجًا كما كان والورقةُ محمولة، ثمّ ينطوي على مواضعه الجديدة بحركة (‎data-close‎) */
+    return `<div class="pp-grid${hold ? ' is-carry' : ''}" data-ppg="${esc(key)}"${hold ? ' data-close="1"' : ''} style="--gr:${T0.gr};--gc:${T0.gc}">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cell).join('')}</div>`;
+  }
+  /* مقاسُ الشبكة من مواضع الورق: صفٌّ/عمودٌ فيه رزمةٌ نصيبٌ متساوٍ، والفارغُ صفر */
+  function ppGridTpl(cells) {
+    const rows = [0, 0, 0], cols = [0, 0, 0];
+    [4, ...cells].forEach(i => { rows[Math.floor(i / 3)] = 1; cols[i % 3] = 1; });
+    const t = a => a.map(v => v ? 'minmax(0,1fr)' : 'minmax(0,0fr)').join(' ');
+    return { gr: t(rows), gc: t(cols) };
+  }
+  /* تُعاد رزمةُ مربّعٍ واحدٍ في مكانها (لا القسمُ كلُّه): فلا تختفي الورقةُ لحظةَ الإفلات ولا يُعاد بناءُ ما لم يتغيّر */
+  function ppMountCell(grid, i) {
+    const base = grid.dataset.ppg, D0 = PPDATA.get(base), cell = grid.querySelector(':scope > .pp-cell[data-ppc="' + i + '"]');
+    if (!D0 || !cell) return;
+    const old = cell.querySelector(':scope > .pp-host'); if (old) old.remove();
+    const D1 = PPDATA.get(base + '#4') || D0, h0 = ktHost(D1.sel, D1.pack), G = ppGridOf(base);
+    const any = i === 4 || (h0 && ktCardsDeep(h0).some(c => G[c.id] === i));
+    if (!any) return;
+    const k = base + '#' + i;
+    PPDATA.set(k, Object.assign({}, D1, { cell: i, base }));
+    const h = document.createElement('div'); h.className = 'pp-host'; h.dataset.pp = k; h.dataset.ppm = '1';
+    cell.appendChild(h);
+    ppMount(h, PPDATA.get(k));
+  }
+  /* المربّعُ تحت نقطةٍ من الشاشة (بمستطيلاته — فالورقةُ الممسوكةُ فوقها لا تحجبها) */
+  const ppCellAt = (grid, x, y) => [...grid.querySelectorAll(':scope > .pp-cell')].find(c => { const r = c.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; }) || null;
   function ppMountAll() {
+    document.querySelectorAll('#cm-body .pp-grid[data-close]').forEach(g => { g.removeAttribute('data-close'); requestAnimationFrame(() => requestAnimationFrame(() => g.classList.remove('is-carry'))); });
     document.querySelectorAll('#cm-body .pp-host:not([data-ppm])').forEach(host => {
       host.dataset.ppm = '1';
       const d = PPDATA.get(host.dataset.pp); if (!d) return;
@@ -11399,7 +11616,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function ppMount(host, D) {
     const key = host.dataset.pp;
     const hostOf = () => ktHost(D.sel, D.pack);
-    const cardsOf = () => { const h = hostOf(); return h ? ktCards(h) : []; };
+    /* ورقُ هذا المربّع وحدَه (والمجلداتُ الداخليّةُ في الرزمة كذلك): الوسطُ ما لم يُرسَل إلى طرف */
+    const cardsOf = () => { const h = hostOf(), G = ppGridOf(D.base || key), me = D.cell === undefined ? 4 : D.cell; return h ? ktCardsDeep(h).filter(c => { const g = G[c.id]; return (g >= 0 && g < 9 ? g : 4) === me; }) : []; };
     let CARDS = cardsOf();
     const N = CARDS.length; if (!N) return;
     /* الترتيبُ يبقى عبر إعادة الرسم (معرّفات البطائق) */
@@ -11407,6 +11625,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ids = ids.filter(x => CARDS.some(c => c.id === x));
     CARDS.forEach(c => { if (!ids.includes(c.id)) ids.push(c.id); });
     if (ppEditNew && ids.includes(ppEditNew)) ids = [ppEditNew].concat(ids.filter(x => x !== ppEditNew));
+    const landing = ppEnter && ids.includes(ppEnter.cid) ? ppEnter : null;   /* ورقةٌ أُفلتت هنا للتوّ: على رأس الرزمة، وتبدأ من حيث أُفلتت */
+    if (landing) { ppEnter = null; ids = [landing.cid].concat(ids.filter(x => x !== landing.cid)); }
     PPORD.set(key, ids);
     const byId = id => CARDS.find(c => c.id === id);
     let order = ids.map(id => CARDS.indexOf(byId(id)));
@@ -11433,9 +11653,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
       /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
-      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"]'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"], .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
-      const s = Math.max(160, Math.min(440, w * 0.84, h * 0.84 - 30));
+      const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.84, h * 0.84 - 30));
       stage.style.width = stage.style.height = s + 'px';
       if (!isFinite(h)) host.style.height = (s + 64) + 'px';
     }
@@ -11517,17 +11737,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.target.closest('[data-ppok], [data-pppen]')) return;
       card.setPointerCapture(e.pointerId);
       const now = performance.now();
-      drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, a0: st.a, axis: null, moved: false, lt: now, t0: now };
+      const sr = stage.getBoundingClientRect();
+      drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, a0: st.a, axis: null, moved: false, lt: now, t0: now,
+        ox: e.clientX - (sr.left + sr.width / 2) - st.x, oy: e.clientY - (sr.top + sr.height / 2) - st.y };
       st.va = 0; wake();
     });
     card.addEventListener('pointermove', e => {
       if (!drag || e.pointerId !== drag.id) return;
       const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
       const dx = e.clientX - drag.x0, dy = e.clientY - drag.y0;
-      if (!drag.axis && Math.hypot(dx, dy) > 7) { drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; drag.moved = true; }
+      if (!drag.axis && Math.hypot(dx, dy) > 7) {
+        drag.axis = Math.abs(dx) > Math.abs(dy) * 1.4 ? 'x' : 'y'; drag.moved = true;
+        /* السحبُ لأعلى أو مائلًا يحمل الورقةَ نفسَها في الشبكة (طلبُ صاحب الموقع): تتبع اليدَ وترفرف بسرعتها،
+           والشبكةُ تنفرج تحتها — والأفقيُّ قلبٌ كما كان */
+        const grid = drag.axis === 'y' && host.closest('.pp-grid');
+        if (grid) { drag.axis = 'g'; drag.grid = grid; drag.px = e.clientX; drag.py = e.clientY; drag.ct = 0; grid.classList.add('is-carry'); host.closest('.pp-cell').classList.add('is-src'); }
+      }
       if (drag.axis === 'x') {
         const na = drag.a0 + dx * (180 / (card.clientWidth * .85));
         const v = (na - st.a) / dt; st.va = st.va * .55 + v * .45; st.a = na; st.target = na;
+      } else if (drag.axis === 'g') {
+        drag.px = e.clientX; drag.py = e.clientY;   /* يُقرأ موضعُ اليد ويُحسب ما بعده مرّةً في الإطار (‎frame‎) — لا مع كلّ حركةٍ للفأرة */
       } else if (drag.axis === 'y') {
         const ny = dy < 0 ? dy : dy * .25;
         st.vy = st.vy * .5 + ((ny - st.y) / dt) * .5; st.vx = st.vx * .5 + ((dx * .35 - st.x) / dt) * .5;
@@ -11541,6 +11771,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!d.moved && performance.now() - d.t0 < 600) {
         const r = card.getBoundingClientRect();
         flip(e.clientX > r.left + r.width / 2 ? 1 : -1); return;
+      }
+      if (d.axis === 'g') {
+        const grid = d.grid; if (d.over) d.over.classList.remove('is-over');
+        const src = host.closest('.pp-cell'); if (src) src.classList.remove('is-src');
+        const to = d.over ? +d.over.dataset.ppc : null, me = D.cell === undefined ? 4 : D.cell;
+        const settle = () => {   /* الشبكةُ تنطوي على مواضعها الجديدة بحركة */
+          const G = ppGridOf(grid.dataset.ppg), T1 = ppGridTpl([...new Set(Object.values(G))]);
+          grid.style.setProperty('--gr', T1.gr); grid.style.setProperty('--gc', T1.gc);
+          requestAnimationFrame(() => grid.classList.remove('is-carry'));
+        };
+        if (to !== null && to !== me && CARDS[idx]) {
+          const cid = CARDS[idx].id, base = D.base || key;
+          ppGridSet(base, cid, to);
+          /* موضعُ الورقة كما تُرى الآن (لا موضعُ اليد): تبدأ رزمتُها الجديدةُ منه بالضبط */
+          const cr = card.getBoundingClientRect();
+          ppEnter = { cid, x: cr.left + cr.width / 2, y: cr.top + cr.height / 2 };
+          ppMountCell(grid, to); ppMountCell(grid, me); ppEnter = null;
+          settle(); return;
+        }
+        settle(); wake(); return;
       }
       if (d.axis === 'x') {
         const base = Math.round(d.a0 / 180) * 180, proj = st.a + st.va * .12;
@@ -11601,7 +11851,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     function delCard() {
       const c = CARDS[idx], h = hostOf(); if (!h) return;
       if (!confirm(T_().ppDel)) return;
-      const i = h.arr.indexOf(c); if (i >= 0) h.arr.splice(i, 1);
+      const r = ktLoc(h, c.id); if (r) r.arr.splice(r.i, 1);
       save(); renderCmSection();
     }
     /* الإطار — كما في المرجع، ويقف إذا سكنت الورقة */
@@ -11634,17 +11884,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           st.hxT = st.hyT = 0;
           if (st.t > .62) nextCard();
         }
-      } else if (!drag || drag.axis !== 'y') {
+      } else if (!drag || (drag.axis !== 'y' && drag.axis !== 'g')) {
         [st.x, st.vx] = spring(st.x, st.vx, 0, K.pos, dt);
         [st.y, st.vy] = spring(st.y, st.vy, 0, K.pos, dt);
+      } else if (drag.axis === 'g') {
+        /* القراءاتُ أوّلًا ثمّ الكتابة، مرّةً في الإطار: موضعُ الرزمة ومستطيلاتُ المربّعات */
+        const sr = stage.getBoundingClientRect();
+        const nx = drag.px - (sr.left + sr.width / 2) - drag.ox, ny = drag.py - (sr.top + sr.height / 2) - drag.oy;
+        st.vx = st.vx * .6 + ((nx - st.x) / dt) * .4; st.vy = st.vy * .6 + ((ny - st.y) / dt) * .4;
+        st.x = nx; st.y = ny; st.rz += (clamp(st.vx * .01, -16, 16) - st.rz) * Math.min(1, dt * 12);
+        const over = ppCellAt(drag.grid, drag.px, drag.py);
+        if (drag.over !== over) { if (drag.over) drag.over.classList.remove('is-over'); drag.over = over; if (over) over.classList.add('is-over'); }
       }
       st.hx += (st.hxT - st.hx) * Math.min(1, dt * 7); st.hy += (st.hyT - st.hy) * Math.min(1, dt * 7);
       const L = clamp(st.lift, 0, 1.2), en = clamp(st.enter, 0, 1.1);
       card.style.transform = `translate3d(${st.x}px, ${st.y - L * 10 + (1 - en) * 13}px, ${L * 70}px)`
         + ` rotateX(${st.hy + L * 3}deg) rotateY(${st.hx}deg) rotateZ(${st.rz}deg) scale(${(.955 + .045 * en) * (1 + L * .03)})`;
       const tossing = st.mode === 'toss';
-      const Dt = reduce ? 0 : clamp(st.va * .00062 * T.bend, -1.4, 1.4) + (tossing ? .12 * T.bend : 0);
-      const Bt = reduce ? 0 : T.sag * (L * .16 + (tossing ? .22 : 0) + (drag && drag.axis === 'y' ? clamp(-st.y / 600, 0, .25) : 0));
+      const carry = drag && drag.axis === 'g';
+      const Dt = reduce ? 0 : clamp(st.va * .00062 * T.bend, -1.4, 1.4) + (tossing ? .12 * T.bend : 0) + (carry ? clamp(st.vx * .0011 * T.bend, -.9, .9) : 0);
+      const Bt = reduce ? 0 : T.sag * (L * .16 + (tossing ? .22 : 0) + (drag && drag.axis === 'y' ? clamp(-st.y / 600, 0, .25) : 0) + (carry ? clamp(Math.abs(st.vy) * .00045, 0, .35) : 0));
       [st.D, st.vD] = spring(st.D, st.vD, Dt, [95, 16 - 13.5 * T.flutter], dt);
       [st.B, st.vB] = spring(st.B, st.vB, Bt, [140, 18 - 12 * T.flutter], dt);
       const A = rad, half = NS / 2, phi = new Array(NS), px = new Array(NS + 1), pz = new Array(NS + 1);
@@ -11677,6 +11936,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (host.isConnected) measure(); }).observe(host);
     placeLayers(0); render(); measure();
+    if (landing) {   /* تبدأ من موضع الإفلات مرفوعةً، فتهبط إلى رزمتها الجديدة بفيزيائها */
+      const sr = stage.getBoundingClientRect();
+      st.x = landing.x - (sr.left + sr.width / 2); st.y = landing.y - (sr.top + sr.height / 2); st.lift = .6; st.rz = clamp(st.x * .02, -10, 10);
+      wake();
+    }
     if (ppEditNew && CARDS[idx] && CARDS[idx].id === ppEditNew) { ppEditNew = null; st.enter = 0; requestAnimationFrame(() => editFace()); }
   }
   let ppEditing = false;
@@ -11689,19 +11953,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PKCV = new Map();
   const KCV = { W: 240, GX: 36, GY: 28, PAD: 24, ZMIN: .25, ZMAX: 2 };
   const kcvKey = (id, sel) => id + '|' + sel;
-  function kcvHTML(id, sel, host, cards, ro) {
+  /* ===== مناطقُ المجلدات (طلبُ صاحب الموقع): اللوحُ واحد، ولكلّ مجلدٍ داخليٍّ منطقتُه فيه =====
+     موضعُ البطاقة (‎n.pos‎) نسبةً إلى أصل مجلدها كما كان — فالقديمُ يبقى كما هو. والمجلدُ الداخليُّ إطارٌ باسمه ولونه
+     يحيط بما فيه ويكبر معه، وموضعُه في أبيه آليٌّ (صفٌّ تحت بطائق الأب) أو ما سُحب إليه (‎g.zone‎ نسبةً إلى أصل الأب).
+     ولا تتراكب المناطق: ما يصطدم بسابقه يُدفع تحته. ومن فتح المجلدَ الداخليَّ وحدَه رأى منطقتَه وحدها،
+     ومن فتح أباه رأى الكلَّ فيسحب بينها ويصل */
+  const KZ = { P: 20, H: 20, G: 44 };   /* بلا رأسٍ ظاهر (طلبُ صاحب الموقع): الحشوةُ من الأعلى كسائر الجهات */
+  const KCVHOST = new Map();   // مفتاحُ اللوح ← مجلدُه المفتوح (يُقرأ عند الترتيب والسحب)
+  function kcvHTML(id, sel, host, cards0, ro, pack) {
     const key = kcvKey(id, sel), V = PKCV.get(key);
+    KCVHOST.set(key, host);
     queueMicrotask(kcvMountAll);
+    const zs = [], cards = [], zOf = new Map();
+    const walk = (arr, z) => { arr.forEach(n => { if (n.t === 'c') { cards.push(n); zOf.set(n.id, z); } }); arr.forEach(g => { if (g.t === 'f') { zs.push(g); walk(g.ch || [], g.id); } }); };
+    walk(host.arr, '');
     const links = kcvLinkData(host, cards, ro);
+    /* وصلاتٌ في آباء المفتوح لها طرفٌ هنا وطرفٌ خارجه: سهمٌ قصيرٌ يخرج من البطاقة، ونقرُه يفتح الأب (‎data-kup‎) */
+    const ids = new Set(cards.map(n => n.id)), stubs = [];
+    let up = '';
+    if (sel !== '') {
+      const deck = (pack || cardDataRaw(cmCode) || {}).deck || [], trail = cxTrail(deck, sel) || [];
+      up = trail.length ? trail[trail.length - 1] : '';
+      const holders = trail.map(t => (findNode(deck, t) || {}).n).filter(Boolean);   /* آباءٌ هي مجلدات — لا «جذرَ» يُفتح */
+      holders.forEach(H => (H && H.links || []).forEach(l => { const ia = ids.has(l.a), ib = ids.has(l.b); if (ia !== ib) stubs.push({ id: l.id, c: ia ? l.a : l.b, out: ia }); }));
+    }
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
+      /* المنطقةُ خفيّةٌ (طلبُ صاحب الموقع: اللوحُ يبدو واحدًا بلا إطارٍ ولا اسمٍ ولا أيقونة) — تبقى للترتيب بلا تراكب،
+         ولمعرفة المجلد الذي تُفلت فيه بطاقةٌ أو تُضاف */
+      + zs.map(g => `<div class="kcv-zone" data-kzone="${esc(g.id)}" aria-hidden="true"></div>`).join('')
       + `<svg class="kcv-links" width="1" height="1" aria-hidden="true"><defs>`
       + `<marker id="kcv-ar" class="kcv-ar" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `<marker id="kcv-ar-sel" class="kcv-ar kcv-ar--sel" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`
       + `</defs>` + links.map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
+      + stubs.map(t => `<g class="kcv-stub" data-kstub="${esc(t.id)}" data-c="${esc(t.c)}" data-out="${t.out ? 1 : 0}" data-kup="${esc(up)}"><path class="kcv-hit"/><path class="kcv-line"${t.out ? ' marker-end="url(#kcv-ar)"' : ' marker-start="url(#kcv-ar)"'}/></g>`).join('')
       + `</svg>`
-      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}"`
-          + (n.pos ? ` style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
+      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}" data-kz="${esc(zOf.get(n.id))}"`
+          + (n.pos ? ` data-rx="${+n.pos.x || 0}" data-ry="${+n.pos.y || 0}" style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
           + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
           + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + `</div>`).join('')
@@ -11726,7 +12014,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* حدودُ ما في العالم (لملاءمة الكلّ) — من مواضع البطائق وقاماتها، بلا ‎getBoundingClientRect‎ المتأثّر بالتكبير */
   const kcvBox = cv => {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-    cv.querySelectorAll('.kcv-card').forEach(c => { const x = c.offsetLeft, y = c.offsetTop; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x + c.offsetWidth); y1 = Math.max(y1, y + c.offsetHeight); });
+    cv.querySelectorAll('.kcv-card, .kcv-zone').forEach(c => { const x = c.offsetLeft, y = c.offsetTop; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x + c.offsetWidth); y1 = Math.max(y1, y + c.offsetHeight); });
+    cv.querySelectorAll('.kcv-stub').forEach(g => { const c = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.c) + '"]'); if (c) y0 = Math.min(y0, c.offsetTop - 62); });   /* والسهمُ القصيرُ فوق بطاقته */
     return x0 === Infinity ? null : { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
   };
   function kcvFit(cv, keep100) {
@@ -11740,18 +12029,78 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     PKCV.set(cv.dataset.kcv, { x, y: P - b.y * z, z });
     kcvApply(cv);
   }
+  /* الترتيب: أوّلًا مواضعُ كلِّ مجموعةٍ نسبةً إلى أصل مجلدها (المرتّبُ آليًّا أعمدةٌ تمتدّ يسارًا من الأصل كما كان)،
+     ثمّ حدودُ كلّ منطقةٍ من أسفل إلى أعلى، ثمّ تُوضع المناطقُ في آبائها، ثمّ يُحسب كلُّ شيءٍ مطلقًا من أصل المفتوح.
+     ويحمل كلُّ عنصرٍ أصلَ مجلده (‎data-ox/oy‎) فيُردّ موضعُه نسبيًّا عند الحفظ */
   function kcvLayout(cv) {
-    const auto = [...cv.querySelectorAll('.kcv-card[data-auto]')];
-    if (!auto.length) return;
-    const placed = [...cv.querySelectorAll('.kcv-card:not([data-auto])')];
-    const top = placed.length ? Math.max(...placed.map(c => c.offsetTop + c.offsetHeight)) + KCV.GY * 2 : 0;
-    const cols = Math.max(1, Math.floor((cv.clientWidth - 2 * KCV.PAD + KCV.GX) / (KCV.W + KCV.GX)));
-    const ys = new Array(cols).fill(top);
-    auto.forEach(c => {
-      let k = 0; for (let i = 1; i < cols; i++) if (ys[i] < ys[k] - 1) k = i;
-      c.style.left = (-(k + 1) * KCV.W - k * KCV.GX) + 'px'; c.style.top = ys[k] + 'px';
-      ys[k] += c.offsetHeight + KCV.GY;
+    const host = KCVHOST.get(cv.dataset.kcv); if (!host) return;
+    const byZ = new Map(), frames = new Map(), rel = new Map(), off = new Map(), frel = new Map();
+    cv.querySelectorAll('.kcv-card').forEach(c => { const z = c.dataset.kz || ''; if (!byZ.has(z)) byZ.set(z, []); byZ.get(z).push(c); });
+    cv.querySelectorAll('.kcv-zone').forEach(f => frames.set(f.dataset.kzone, f));
+    const U = (a, b) => !a ? b : !b ? a : { x: Math.min(a.x, b.x), y: Math.min(a.y, b.y), w: Math.max(a.x + a.w, b.x + b.w) - Math.min(a.x, b.x), h: Math.max(a.y + a.h, b.y + b.h) - Math.min(a.y, b.y) };
+    const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+    function own(z) {
+      const els = byZ.get(z) || [];
+      const placed = els.filter(c => !c.hasAttribute('data-auto')), auto = els.filter(c => c.hasAttribute('data-auto'));
+      placed.forEach(c => rel.set(c, { x: +c.dataset.rx || 0, y: +c.dataset.ry || 0, w: c.offsetWidth, h: c.offsetHeight }));
+      if (auto.length) {
+        const top = placed.length ? Math.max(...placed.map(c => rel.get(c).y + rel.get(c).h)) + KCV.GY * 2 : 0;
+        /* عددُ الأعمدة من عدد البطائق وحدَه — لا من عرض اللوح: فتُرى المجموعةُ بالهيئة نفسِها مفتوحةً وحدها أو منطقةً في أبيها */
+        const cols = Math.max(1, Math.min(3, Math.ceil(Math.sqrt(auto.length))));
+        const ys = new Array(cols).fill(top);
+        auto.forEach(c => {
+          let k = 0; for (let i = 1; i < cols; i++) if (ys[i] < ys[k] - 1) k = i;
+          rel.set(c, { x: -(k + 1) * KCV.W - k * KCV.GX, y: ys[k], w: c.offsetWidth, h: c.offsetHeight });
+          ys[k] += c.offsetHeight + KCV.GY;
+        });
+      }
+      let b = null; els.forEach(c => { b = U(b, rel.get(c)); });
+      return b;
+    }
+    function measure(arr, z) {
+      const mine = own(z);
+      let b = mine;
+      const kids = arr.filter(n => n.t === 'f'), done = mine ? [{ x: mine.x - KZ.P, y: mine.y - KZ.P, w: mine.w + 2 * KZ.P, h: mine.h + 2 * KZ.P }] : [];
+      const x0 = mine ? mine.x + mine.w : 0;
+      let cx = x0, ty = (mine ? mine.y + mine.h : 0) + KZ.G, rowH = 0, inRow = 0;
+      kids.forEach(g => {
+        const cb = measure(g.ch || [], g.id) || { x: -KCV.W, y: 0, w: KCV.W, h: 64 };
+        const fr = { x: cb.x - KZ.P, y: cb.y - KZ.H, w: cb.w + 2 * KZ.P, h: cb.h + KZ.H + KZ.P };
+        let o;
+        if (g.zone && isFinite(g.zone.x) && isFinite(g.zone.y)) o = { x: +g.zone.x, y: +g.zone.y };
+        else {
+          if (inRow === 3) { cx = x0; ty += rowH + KZ.G; rowH = 0; inRow = 0; }
+          o = { x: cx - (fr.x + fr.w), y: ty - fr.y };
+          cx = o.x + fr.x - KZ.G; rowH = Math.max(rowH, fr.h); inRow++;
+        }
+        const R = { x: o.x + fr.x, y: o.y + fr.y, w: fr.w, h: fr.h };
+        for (let q, n = 0; n < 60 && (q = done.find(d => hit(R, d))); n++) { const dy = q.y + q.h + KZ.G / 2 - R.y; o.y += dy; R.y += dy; }   /* لا تراكب: يُدفع تحت ما اصطدم به */
+        done.push(R); off.set(g.id, o); frel.set(g.id, fr);
+        b = U(b, R);
+      });
+      return b;
+    }
+    measure(host.arr, '');
+    function place(arr, z, ox, oy) {
+      (byZ.get(z) || []).forEach(c => { const r = rel.get(c); c.style.left = (ox + r.x) + 'px'; c.style.top = (oy + r.y) + 'px'; c.dataset.ox = ox; c.dataset.oy = oy; });
+      arr.forEach(g => {
+        if (g.t !== 'f') return;
+        const o = off.get(g.id), fr = frel.get(g.id), f = frames.get(g.id), gx = ox + o.x, gy = oy + o.y;
+        if (f) { Object.assign(f.style, { left: (gx + fr.x) + 'px', top: (gy + fr.y) + 'px', width: fr.w + 'px', height: fr.h + 'px' }); f.dataset.ox = gx; f.dataset.oy = gy; f.dataset.px = ox; f.dataset.py = oy; }
+        place(g.ch || [], g.id, gx, gy);
+      });
+    }
+    place(host.arr, '', 0, 0);
+  }
+  /* المنطقةُ تحت نقطةٍ من العالم: أعمقُ إطارٍ يحويها (أصغرُها)، وإلّا المفتوحُ نفسُه ('') */
+  function kcvZoneAt(cv, x, y, skip) {
+    let best = null, ba = Infinity;
+    cv.querySelectorAll('.kcv-zone').forEach(f => {
+      if (skip && skip.has(f.dataset.kzone)) return;
+      const l = f.offsetLeft, t = f.offsetTop, w = f.offsetWidth, h = f.offsetHeight;
+      if (x >= l && x <= l + w && y >= t && y <= t + h && w * h < ba) { ba = w * h; best = f; }
     });
+    return best;
   }
   function kcvMountAll() {
     document.querySelectorAll('#cm-body .kcv:not([data-kcvm])').forEach(cv => {
@@ -11782,7 +12131,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const cv = e.target.closest && e.target.closest('#cm-body .kcv');
-    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link, .kcv-lab, .kcv-map')) return;
+    if (!cv || e.target.closest('.kcv-card, .kcv-ui, .kcv-link, .kcv-lab, .kcv-map, .kcv-zh[data-kzh]')) return;
     const V = kcvView(cv); if (!V) return;
     /* إصبعٌ ثانٍ على اللوح: قرصٌ يكبّر (ويُلغي الإزاحة) */
     KCVP.pts.set(e.pointerId, { x: e.clientX, y: e.clientY, cv });
@@ -11902,9 +12251,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     fix.forEach(c => {
       if (!c.hasAttribute('data-auto') && !ids.has(c.dataset.kcard)) return;
       const n = ktCardOf(c, c.dataset.kcard); if (!n) return;
-      n.pos = { x: c.offsetLeft, y: c.offsetTop }; c.removeAttribute('data-auto');
+      n.pos = { x: c.offsetLeft - (+c.dataset.ox || 0), y: c.offsetTop - (+c.dataset.oy || 0) }; c.removeAttribute('data-auto');
+      c.dataset.rx = n.pos.x; c.dataset.ry = n.pos.y;
     });
     save();
+    if (cv.querySelector('.kcv-zone')) { kcvLayout(cv); kcvLinksFor(cv); }   /* والإطاراتُ تكبر مع ما فيها وتدفع جاراتِها */
   }
   function kcvMoveBy(cv, ids, dx, dy) {
     cv.querySelectorAll('.kcv-card').forEach(c => { if (!ids.has(c.dataset.kcard)) return; c.style.left = (c.offsetLeft + dx) + 'px'; c.style.top = (c.offsetTop + dy) + 'px'; });
@@ -11935,8 +12286,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const n = ktCardOf(card, id);
       KCVS.fresh = null;
       if (!n || (n.f || '').trim() || (n.b || '').trim()) return;
-      const host = ktHost(card.closest('.kt-view').dataset.ktf), i = host ? host.arr.indexOf(n) : -1;
-      if (i >= 0) { host.arr.splice(i, 1); card.remove(); save(); }
+      const r = ktLoc(ktHost(card.closest('.kt-view').dataset.ktf), id);
+      if (r) { r.arr.splice(r.i, 1); card.remove(); save(); }
     }, 0);
   });
   const KCVD = { s: null, raf: 0 };
@@ -11995,7 +12346,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = KCVD.s; if (!s) return;
     KCVD.s = null; s.cv.classList.remove('is-dragging');
     s.cv.querySelectorAll('.kcv-guide').forEach(g => { g.style.display = ''; });
-    if (s.moved) kcvCommit(s.cv, s.ids);
+    if (s.moved) { kcvRehome(s.cv, s.ids); kcvCommit(s.cv, s.ids); }
     else kcvSelect(s.cv, new Set([s.id]));   /* نقرةٌ بلا سحب: هذه وحدها */
   };
   document.addEventListener('pointerup', kcvDragEnd);
@@ -12018,8 +12369,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!host) return;
     kcvUndoPush(cv);
     kcvCommit(cv, new Set());   /* يثبت ما رُتّب آليًّا قبل أن يُضاف جديدٌ فيُعاد الترتيب */
-    const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x), y: kcvSnap(y) } };
-    host.arr.push(nn);
+    /* وفي منطقةِ مجلدٍ داخليّ: يُضاف إليه، وموضعُه نسبةً إلى أصله */
+    const zf = kcvZoneAt(cv, x + KCV.W / 2, y + 20), zn = zf && findNode(host.arr, zf.dataset.kzone);
+    const arr = zn ? (zn.n.ch || (zn.n.ch = [])) : host.arr, ox = zf ? +zf.dataset.ox || 0 : 0, oy = zf ? +zf.dataset.oy || 0 : 0;
+    const nn = { id: newId(), t: 'c', f: '', b: '', pos: { x: kcvSnap(x - ox), y: kcvSnap(y - oy) } };
+    arr.push(nn);
     KCVS.set(cv.dataset.kcv, new Set([nn.id]));
     KCVS.edit = { id: nn.id, fld: 'f' }; KCVS.fresh = nn.id;
     save(); renderCmSection();
@@ -12034,8 +12388,67 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const H = host.holder, ids = new Set(cards.map(n => n.id));
     const ok = (H.links || []).filter(l => ids.has(l.a) && ids.has(l.b) && l.a !== l.b);
     if (!ro && H.links && ok.length !== H.links.length) { H.links = ok; queueMicrotask(save); }
-    return ok;
+    /* ووصلاتُ المجلدات الداخليّة تُرى في أبيها (تُقرأ ولا تُنقّى ههنا: تُنقّى حين يُفتح مجلدُها) */
+    const sub = []; const walk = arr => arr.forEach(g => { if (g.t !== 'f') return; (g.links || []).forEach(l => { if (ids.has(l.a) && ids.has(l.b) && l.a !== l.b) sub.push(l); }); walk(g.ch || []); });
+    walk(host.arr);
+    return ok.concat(sub);
   }
+  /* بطاقةٌ سُحبت إلى منطقةٍ أخرى تنتقل إلى مجلدها (طلبُ صاحب الموقع)، ووصلاتُها تصعد إلى المفتوح
+     (أبٌ مشتركٌ لطرفيها) فلا تضيع حين يُفتح مجلدٌ لا يحوي الطرفين */
+  function kcvRehome(cv, ids) {
+    const host = KCVHOST.get(cv.dataset.kcv); if (!host || !cv.querySelector('.kcv-zone')) return;
+    let moved = false;
+    cv.querySelectorAll('.kcv-card').forEach(c => {
+      if (!ids.has(c.dataset.kcard)) return;
+      const f = kcvZoneAt(cv, c.offsetLeft + c.offsetWidth / 2, c.offsetTop + c.offsetHeight / 2), z = f ? f.dataset.kzone : '';
+      if (z === (c.dataset.kz || '')) return;
+      const r = ktLoc(host, c.dataset.kcard), to = z ? findNode(host.arr, z) : null;
+      if (!r || (z && !to)) return;
+      r.arr.splice(r.i, 1);
+      (z ? (to.n.ch || (to.n.ch = [])) : host.arr).push(r.n);
+      c.dataset.kz = z; c.dataset.ox = f ? f.dataset.ox : 0; c.dataset.oy = f ? f.dataset.oy : 0; c.removeAttribute('data-auto');
+      moved = true;
+    });
+    if (!moved) return;
+    const up = []; const walk = arr => arr.forEach(g => { if (g.t !== 'f') return; if (g.links) g.links = g.links.filter(l => (ids.has(l.a) || ids.has(l.b)) ? (up.push(l), false) : true); walk(g.ch || []); });
+    walk(host.arr);
+    if (up.length) host.holder.links = (host.holder.links || []).concat(up);
+  }
+  /* سحبُ المنطقة من رأسها: تتحرّك بما فيها، ويُحفظ موضعُها في أبيها (‎g.zone‎) — وما اصطدمت به يُدفع */
+  const KCVZ = { s: null, raf: 0 };
+  document.addEventListener('pointerdown', e => {
+    const h = e.target.closest && e.target.closest('#cm-body .kcv .kcv-zh[data-kzh]');
+    if (!h || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const f = h.closest('.kcv-zone'), cv = f.closest('.kcv'), host = KCVHOST.get(cv.dataset.kcv), V = kcvView(cv);
+    const g = host && findNode(host.arr, f.dataset.kzone); if (!g || !V) return;
+    const sub = new Set([g.n.id]); const walk = arr => arr.forEach(n => { if (n.t === 'f') { sub.add(n.id); walk(n.ch || []); } }); walk(g.n.ch || []);
+    const els = [...cv.querySelectorAll('.kcv-card, .kcv-zone')].filter(el => sub.has(el.dataset.kz) || sub.has(el.dataset.kzone));
+    cv.focus({ preventScroll: true });
+    KCVZ.s = { cv, g: g.n, f, els: els.map(el => [el, el.offsetLeft, el.offsetTop]), sx: e.clientX, sy: e.clientY, z: V.z, pid: e.pointerId, moved: false };
+  }, true);
+  document.addEventListener('pointermove', e => {
+    const s = KCVZ.s; if (!s || e.pointerId !== s.pid) return;
+    s.ex = e.clientX; s.ey = e.clientY;
+    if (!s.moved && Math.hypot(s.ex - s.sx, s.ey - s.sy) < 3) return;
+    if (!s.moved) { s.moved = true; s.cv.classList.add('is-dragging'); kcvUndoPush(s.cv); }
+    if (!KCVZ.raf) KCVZ.raf = requestAnimationFrame(() => {
+      KCVZ.raf = 0; const t = KCVZ.s; if (!t) return;
+      const dx = kcvSnap((t.ex - t.sx) / t.z), dy = kcvSnap((t.ey - t.sy) / t.z);
+      t.els.forEach(([el, x, y]) => { el.style.left = (x + dx) + 'px'; el.style.top = (y + dy) + 'px'; });
+      t.dx = dx; t.dy = dy; kcvLinksFor(t.cv);
+    });
+  });
+  const kcvZoneEnd = () => {
+    const s = KCVZ.s; if (!s) return;
+    KCVZ.s = null; s.cv.classList.remove('is-dragging');
+    if (!s.moved) return;
+    const ox = +s.f.dataset.ox - +s.f.dataset.px, oy = +s.f.dataset.oy - +s.f.dataset.py;
+    s.g.zone = { x: ox + (s.dx || 0), y: oy + (s.dy || 0) };
+    save(); kcvLayout(s.cv); kcvLinksFor(s.cv); kcvMapSoon(s.cv);
+  };
+  document.addEventListener('pointerup', kcvZoneEnd);
+  document.addEventListener('pointercancel', kcvZoneEnd);
   const kcvRect = c => ({ x: c.offsetLeft, y: c.offsetTop, w: c.offsetWidth, h: c.offsetHeight });
   const KCV_SIDE = { t: [0, -1], r: [1, 0], b: [0, 1], l: [-1, 0] };
   const kcvAnchor = (r, sd) => sd === 't' ? [r.x + r.w / 2, r.y] : sd === 'b' ? [r.x + r.w / 2, r.y + r.h] : sd === 'l' ? [r.x, r.y + r.h / 2] : [r.x + r.w, r.y + r.h / 2];
@@ -12062,7 +12475,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function kcvLinksFor(cv, ids) {
     cv.querySelectorAll('.kcv-link').forEach(g => { if (!ids || ids.has(g.dataset.a) || ids.has(g.dataset.b)) kcvRoute(cv, g); });
+    /* السهمُ القصير: من أعلى البطاقة صاعدًا (خارجٌ) أو نازلًا إليها (داخل) — متقطّعٌ يدلّ على أنّ طرفَه الآخرَ في الأب */
+    cv.querySelectorAll('.kcv-stub').forEach(g => {
+      const c = cv.querySelector('.kcv-card[data-kcard="' + CSS.escape(g.dataset.c) + '"]'); if (!c) return;
+      const r = kcvRect(c), x = r.x + r.w / 2, y = r.y, L = 54;
+      g.querySelectorAll('path').forEach(p => p.setAttribute('d', `M${x},${y} L${x},${y - L}`));
+    });
   }
+  /* نقرُ السهم القصير يفتح المجلدَ الأب — حيث يُرى طرفاه */
+  document.addEventListener('pointerdown', e => {
+    const g = e.target.closest && e.target.closest('#cm-body .kcv .kcv-stub');
+    if (!g || e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    const v = g.closest('.kt-view'), pid = v && v.dataset.pkid; if (!pid) return;
+    if (!g.dataset.kup) return;
+    pkFs[pid] = g.dataset.kup; renderCmSection();
+  }, true);
   function kcvLinkSel(cv, id) {
     document.querySelectorAll('#cm-body .kcv-link.is-sel').forEach(g => { g.classList.remove('is-sel'); g.querySelector('.kcv-line').setAttribute('marker-end', 'url(#kcv-ar)'); });
     KCVL.sel = cv && id ? { cv, id } : null;
@@ -12073,6 +12501,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function kcvLinkDel(cv, id) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     host.holder.links = (host.holder.links || []).filter(l => l.id !== id);
+    const walk = arr => arr.forEach(n => { if (n.t === 'f') { if (n.links) n.links = n.links.filter(l => l.id !== id); walk(n.ch || []); } }); walk(host.arr);
     const g = cv.querySelector('.kcv-link[data-klink="' + CSS.escape(id) + '"]'); if (g) g.remove();
     KCVL.sel = null; save();
   }
@@ -12136,7 +12565,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const kcvStack = cv => { const k = cv.dataset.kcv; if (!KCVU.stacks.has(k)) KCVU.stacks.set(k, { u: [], r: [] }); return KCVU.stacks.get(k); };
   function kcvShot(cv) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return null;
-    return JSON.stringify({ cards: ktCards(host), links: host.holder.links || [] });
+    return JSON.stringify({ arr: host.arr, links: host.holder.links || [] });   /* الشجرةُ كلُّها: البطاقةُ قد تنتقل بين المناطق والمنطقةُ قد تتحرّك */
   }
   function kcvUndoPush(cv, kind, snap) {
     /* أسهمٌ متتالية خطوةٌ واحدة في التراجع (لا عشرون) */
@@ -12149,10 +12578,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function kcvRestore(cv, sn) {
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     const d = JSON.parse(sn), arr = host.arr;
-    const at = arr.findIndex(n => n.t === 'c');
-    const rest = arr.filter(n => n.t !== 'c');
-    const i0 = at < 0 ? rest.length : arr.slice(0, at).filter(n => n.t !== 'c').length;
-    arr.splice(0, arr.length, ...rest.slice(0, i0), ...d.cards, ...rest.slice(i0));
+    if (d.arr) arr.splice(0, arr.length, ...d.arr);
+    else {   /* لقطةٌ قديمةُ الهيئة (بطائقُ المجلد وحدها) */
+      const at = arr.findIndex(n => n.t === 'c'), rest = arr.filter(n => n.t !== 'c');
+      const i0 = at < 0 ? rest.length : arr.slice(0, at).filter(n => n.t !== 'c').length;
+      arr.splice(0, arr.length, ...rest.slice(0, i0), ...d.cards, ...rest.slice(i0));
+    }
     host.holder.links = d.links;
     KCVS.set(cv.dataset.kcv, new Set()); KCVL.sel = null;
     save(); renderCmSection();
@@ -12169,8 +12600,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (ids.size > 1 && !window.confirm(T().kcvDelMany.replace('{n}', ids.size))) return;
     const host = ktHost(cv.closest('.kt-view').dataset.ktf); if (!host) return;
     kcvUndoPush(cv);
-    for (let i = host.arr.length - 1; i >= 0; i--) if (host.arr[i].t === 'c' && ids.has(host.arr[i].id)) host.arr.splice(i, 1);
+    ids.forEach(id => { const r = ktLoc(host, id); if (r) r.arr.splice(r.i, 1); });
     host.holder.links = (host.holder.links || []).filter(l => !ids.has(l.a) && !ids.has(l.b));
+    const walk = arr => arr.forEach(n => { if (n.t === 'f') { if (n.links) n.links = n.links.filter(l => !ids.has(l.a) && !ids.has(l.b)); walk(n.ch || []); } }); walk(host.arr);
     KCVS.set(cv.dataset.kcv, new Set());
     save(); renderCmSection();
   }
@@ -12245,7 +12677,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!lab) return;
     if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); lab.closest('.kcv').focus({ preventScroll: true }); }
   }, true);
-  const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
+  const ktCardOf = (el, id) => { const r = ktLoc(ktHost(el.closest('.kt-view').dataset.ktf), id); return r && r.n; };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
     const mid = e.target.closest && e.target.closest('#cm-body [data-cxmidadd]');
@@ -12850,6 +13282,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     d.deck = d.deck || [];
     return pkQbOn(code, p) ? pkQbView(d) : d;
   };
+  /* قراءةٌ بلا إنشاء: مساهمتي في المادّة إن وُجدت (‎cardDataRaw‎ يُنشئها ويحفظ الدرجَ كلَّه — فكان مجرّدُ المرور بكتابٍ في الرفّ يُنشئ مسوّدةً فارغة) */
+  const cardDataPeek = code => { const p = postsOf(code, 'cards').find(isMine); if (!p) return null; const d = migPackC(code, p); d.deck = d.deck || []; return d; };
   const cardDataRaw = code => { const p = myPost(code, 'cards'), d = migPackC(code, p); d.deck = d.deck || []; return d; };
   /* إيجاد عقدة بهويتها داخل الشجرة — يعيد {arr,i,n} للحذف والتحرير */
   function findNode(nodes, id) {
@@ -14747,10 +15181,35 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      مصدرها ‎Unicode CLDR‎ (‎annotations/ar.xml‎ + المشتقّة) — الاسمُ أوّلًا ثمّ كلماتُه بـ‎|‎،
      وتغطيتُها ١٨٠٢ من ١٨٠٢. وهي في مصفوفةٍ **موازيةٍ** لا مدموجةٍ بالأسماء: الفصلُ يُبقي
      كلَّ قارئٍ للفهرس عاملًا بلا تعديل، ولا يُكرَّر اسمُ الملفّ مفتاحًا فيُضاعَف حجمُ الملفّ */
-  const EM_AR = (() => {
-    const a = (typeof ACADEMIA_EMOJI_AR !== 'undefined' && Array.isArray(ACADEMIA_EMOJI_AR)) ? ACADEMIA_EMOJI_AR : [];
-    const m = {}; EM_LIST.forEach((n, i) => { m[n] = a[i] || ''; }); return m;
-  })();
+  /* وتُجلب من ‎emoji-ar.js‎ عند أوّل فتحٍ للمنتقي لا مع الصفحة (‎~187KB‎ لا يحتاجها إلّا هو).
+     وقبل وصولها: التلميحُ بالشريحة الإنجليزيّة، والبحثُ بها — ولا يُحفظ الناقصُ فيُبنى من جديد */
+  let EM_AR = null, EM_Q = null, emArP = null;
+  const emArHas = () => typeof ACADEMIA_EMOJI_AR !== 'undefined' && Array.isArray(ACADEMIA_EMOJI_AR);
+  function emAr() {
+    if (EM_AR) return EM_AR;
+    const a = emArHas() ? ACADEMIA_EMOJI_AR : [];
+    const m = {}; EM_LIST.forEach((n, i) => { m[n] = a[i] || ''; });
+    if (a.length) EM_AR = m;
+    return m;
+  }
+  function emArLoad() {
+    if (emArP || emArHas()) return emArP || Promise.resolve();
+    emArP = new Promise(res => {
+      const sc = document.createElement('script');
+      sc.src = assetURL('platform/emoji-ar.js?v=' + (window.AC_VER || 0));
+      sc.onload = res; sc.onerror = () => { emArP = null; res(); };
+      document.head.appendChild(sc);
+    }).then(() => {
+      if (!emArHas()) return;
+      EM_AR = null; EM_Q = null;
+      /* المنتقي المفتوح يأخذ أسماءه العربيّة فورَ وصولها */
+      document.querySelectorAll('.fmn [data-em]').forEach(b => {
+        const n = EM_BY[b.dataset.em]; if (!n) return;
+        const t = emName(n); b.title = t; b.setAttribute('aria-label', t);
+      });
+    });
+    return emArP;
+  }
   /* تطبيعُ البحث: العربيّةُ تُكتب بألفٍ وهمزةٍ وتاءٍ مربوطةٍ على وجوه، ومن يبحث «كتاب»
      لا ينبغي أن يُحرَم لأنّ المكتوب «كتابٌ» أو «إناء» وهو كتب «اناء». فتُسوّى الحروفُ
      المتقاربةُ ويُنزع التشكيلُ والتطويل — في المخزون مرّةً وفي السؤال كلَّ مرّة */
@@ -14760,14 +15219,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     .replace(/ة/g, 'ه').replace(/[ىئ]/g, 'ي').replace(/ؤ/g, 'و');
   /* فهرسُ البحث: الشريحةُ الإنجليزيّة والأسماءُ العربيّة في نصٍّ واحدٍ مطبَّع — فالبحثُ
      باللغتين يقع على الحقل نفسِه، ولا يُسأل عن لغة الكاتب */
-  const EM_Q = (() => {
-    const m = {};
-    EM_LIST.forEach(n => { m[n] = arNorm(emSlug(n).replace(/-/g, ' ') + ' ' + (EM_AR[n] || '').replace(/\|/g, ' ')); });
+  function emQ() {
+    if (EM_Q) return EM_Q;
+    const ar = emAr(), m = {};
+    EM_LIST.forEach(n => { m[n] = arNorm(emSlug(n).replace(/-/g, ' ') + ' ' + (ar[n] || '').replace(/\|/g, ' ')); });
+    if (EM_AR) EM_Q = m;
     return m;
-  })();
+  }
   /* اسمُ الإيموجي في التلميح: بلغة الواجهة — العربيُّ أوّلُ ما في ‎EM_AR‎، والإنجليزيُّ شريحتُه */
   const emName = n => state.lang === 'ar'
-    ? ((EM_AR[n] || '').split('|')[0] || emSlug(n).replace(/-/g, ' '))
+    ? ((emAr()[n] || '').split('|')[0] || emSlug(n).replace(/-/g, ' '))
     : emSlug(n).replace(/-/g, ' ');
   /* حدود التصنيفات برقم الملفّ: ترتيبُ الرزمة ترتيبُ يونيكود، فالتصنيفُ يُشتقّ من الرقم
      ولا يحتاج جدولًا لكلّ بند. ورأسُ كلّ باب إيموجيُّه الأوّل — يُعرَّف بأشهر ما فيه */
@@ -14976,7 +15437,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const closeFolderMenu = () => {
     if (!fmn) return;
     if (fmn.el && fmn.el.parentNode) fmn.el.parentNode.removeChild(fmn.el);
+    const pk = !!fmn.deck;
     fmn = null;
+    if (pk) renderCmSection();   /* وما في المساهمة من ألوان المجلد (حلقةُ المختار والشجرة) يُرسم بلونه الجديد */
     fmnRoom(0);   /* والذيلُ يُطوى: توسعةٌ بلا قائمةٍ فراغٌ في قاع الصفحة */
   };
   /* ============================================================
@@ -14989,16 +15452,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فيُكتب الديكُ **في القائمة عند ولادتها** (من موضع زرّها) لا يُستنتج عند كلّ قراءة:
      الشاشةُ قد تتبدّل تحتها، والوسمُ لا يتبدّل.
      ============================================================ */
-  const fmnDeck = () => (fmn && fmn.road) ? roadOf(nookEntry, true) : edPack().deck;
+  const fmnDeck = () => (fmn && fmn.deck) ? fmn.deck() : (fmn && fmn.road) ? roadOf(nookEntry, true) : edPack().deck;
   function openFolderMenu(id, anchor) {
     closeFolderMenu();
     /* والوسمُ يُقرأ من الزرّ قبل أن تُبنى القائمة — فتُقرأ به هي نفسُها */
     const road = !!(anchor && anchor.closest && anchor.closest('#nk-road'));
-    const r = findNode(road ? roadOf(nookEntry, true) : edPack().deck, id);
+    /* ومن شريط مجلدات المساهمة: مجلداتُها هي (‎data-pkid‎ على الشريط) */
+    const strip = anchor && anchor.dataset && anchor.dataset.pkface && anchor.closest('.pk-fstrip'), pid = strip && strip.dataset.pkid;
+    const deck = pid ? () => (((hlPost(pid) || {}).data || {}).deck || []) : null;
+    const r = findNode(deck ? deck() : road ? roadOf(nookEntry, true) : edPack().deck, id);
     if (!r) return;
     document.body.insertAdjacentHTML('beforeend', fmnHTML(r.n));
+    emArLoad();
     const el = document.body.lastElementChild;
-    fmn = { id, el, road, tab: 'col', box: fmnBoxOf(anchor) };
+    fmn = { id, el, road, deck, tab: 'col', box: fmnBoxOf(anchor) };
     fmnPlace(el, anchor);
     fmnFit(el, anchor);
     fmnClip();
@@ -15012,6 +15479,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const btn = ffbOf(id);
     if (!btn) return;
     const col = folderColor(r.n);
+    /* وجهُ الشريط: يُستبدل بوجهه الجديد (إيموجي أو رمزٌ بلونه) */
+    if (btn.dataset.pkface) { btn.outerHTML = pkFace({ id, c: col, em: r.n.em }, true); return; }
     btn.style.color = col;
     btn.innerHTML = folderFace(r.n);
     const wrap = btn.closest('.x3-fwrap');
@@ -15096,7 +15565,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* السؤالُ يُطبَّع كما طُبِّع المخزون، فيلتقي العربيُّ بالعربيّ والإنجليزيُّ بالإنجليزيّ
        في حقلٍ واحد — «كتاب» و‎book‎ كلاهما يصيب 📖 */
     const q = arNorm(s.value.trim());
-    const list = q ? EM_LIST.filter(n => EM_Q[n].indexOf(q) > -1) : EM_LIST;
+    const Q = q ? emQ() : null;
+    const list = q ? EM_LIST.filter(n => Q[n].indexOf(q) > -1) : EM_LIST;
     fmn.el.querySelectorAll('.fmn-cb').forEach(x => x.classList.toggle('on', x.dataset.cat === '-1'));
     fmn.el.querySelector('.fmn-grid').outerHTML = fmnGridHTML(r.n, list, !q);
   });
@@ -20735,7 +21205,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     $('#card-modal').classList.remove('is-tray');
     $('#cd-drawer').classList.remove('is-open');
     cdPeekOff();   /* ولا إطلالةٌ تُخلَّف لفتحةٍ قادمة */
-    $('#cd-folderlist').hidden = true;
+    { const fl = $('#cd-folderlist'); if (fl) fl.hidden = true; }   /* قد لا تكون في الصفحة: كان سقوطُها يقطع الإغلاقَ قبل تمامه */
     /* الموضعُ المنقول والإلصاقُ لا يُخلَّفان لفتحةٍ قادمة: تُفتح في وسطها كما عهدتَها.
        إلّا أن تسكن المسرحَ الأصليَّ مطويّةٌ: موضعُها **متاعُها** تعود إليه متى نُشرت،
        فلا يُمحى عنها بإغلاق صدَفةٍ لا شأنَ لها به */
@@ -23323,8 +23793,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* زرُّ «+» ثابتٌ في وسط التذييل (طلبُ صاحب الموقع): يضيف بطاقةَ معرفةٍ إلى المجلد المختار في العرض الظاهر
      (مكانُ «+ معرفة» الجديد)، وفي العرض المجلّديّ يفتح قائمةَ الإضافة */
   const cxMidAdd = () => `<button type="button" class="cx-midadd" data-cxmidadd title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>`;
+  /* امتلاءُ المساحتين حين رُسمت الأدوات (‎pkActSync‎ يقارن به) */
+  const pkFillKey = () => { const d = cmCode && cardDataPeek(cmCode); return d ? ((d.qb || []).length ? 'q' : '') + (d.deck.length ? 'd' : '') : ''; };
   const cxFoot = (d, id) => `<div class="edit-acts edit-acts--foot vt-foot">
-      <div class="cx-acttools" data-pkid="${esc(id || '')}">${pkActTools(id)}</div>
+      <div class="cx-acttools" data-pkid="${esc(id || '')}" data-fill="${pkFillKey()}">${pkActTools(id)}</div>
       ${completeGlyph(completenessOf('cards', d))}
       ${pkLab() ? `<span class="cx-addhide" hidden>${cxAddBtns()}</span>` : cxAddBtns() + '<span class="src-tools__sep src-tools__sep--solo"></span>'}
       <!-- في المختبر: مجموعةُ الإضافة يمينًا تُخفى (طلبُ صاحب الموقع) — «+» الوسط يقوم بواجبها، وتبقى في الصفحة ينوب عنها -->
@@ -23693,9 +24165,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const mine   = posts.find(p => p.me);
     const others = posts.filter(p => !p.me);
     const circles = [];
-    if (posts.length === 0) {
-      for (let k = 0; k < FACE_K; k++) circles.push('<span class="cm-face cm-face--empty"></span>');
-    } else {
+    /* بلا مساهمات: لا دوائرَ منقّطة ولا «+0» (طلبُ صاحب الموقع) — تبقى دعوةُ «+» وحدها، وتظهر مع اختيار التبويب */
+    if (posts.length === 0) return noInvite ? '' : `<span class="cm-face cm-face--me" title="${T().sharePost}">+</span>`;
+    {
       /* إن ساهمتُ: صورتي دائرة عادية أول الصف (يمين بالعربي / يسار بالإنجليزي) */
       if (mine) circles.push(`<span class="cm-face cm-face--mine">${avatarHTML(mine)}</span>`);
       others.slice(0, FACE_K - (mine ? 1 : 0)).forEach(p => circles.push(`<span class="cm-face">${avatarHTML(p)}</span>`));
@@ -23737,7 +24209,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!code) return;
     document.querySelectorAll('.cm-tabs button[data-tab]').forEach(btn => {   /* يشمل الشريطين */
       const span = btn.querySelector('.cm-faces');
-      if (span) span.innerHTML = facesRowHTML(code, btn.dataset.tab);
+      if (span) { span.innerHTML = facesRowHTML(code, btn.dataset.tab); span.classList.toggle('is-none', !span.querySelector('.cm-face:not(.cm-face--me)')); }
     });
   }
 
@@ -23951,35 +24423,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      تُرسم صغيرةً (‎48px‎) ويُعدّ لونُها الغالب بعد طرح الورق الأبيض. فإن كان أكثرُها
      ورقًا (صفحةُ نصٍّ لا غلاف) رُدّ ‎null‎ وأخذ الكتابُ بتروليَّ الموقع.
      واللونُ يُعتَم قليلًا: الغلافُ المقوّى أغمقُ من طباعته */
-  async function bkCoverColor(doc) {
-    const pg = await doc.getPage(1);
-    const v1 = pg.getViewport({ scale: 1 });
-    const vp = pg.getViewport({ scale: 48 / v1.width });
-    const cv = document.createElement('canvas');
-    cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
-    const cx = cv.getContext('2d', { willReadFrequently: true });
-    cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
-    await pg.render({ canvasContext: cx, viewport: vp }).promise;
-    const d = cx.getImageData(0, 0, cv.width, cv.height).data;
-    const bins = new Map();
-    let tot = 0, ink = 0;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i], g = d[i + 1], bl = d[i + 2];
-      tot++;
-      const mx = Math.max(r, g, bl), mn = Math.min(r, g, bl);
-      if (mx > 228 && mx - mn < 26) continue;
-      ink++;
-      const k = ((r >> 5) << 6) | ((g >> 5) << 3) | (bl >> 5);
-      const e = bins.get(k) || [0, 0, 0, 0];
-      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
-      bins.set(k, e);
+  /* ===== لونُ الكتاب من غلافه: لونُ أطراف الغلاف (حيث يلتفّ القماشُ على اللوح والكعب) =====
+     يُقرأ شريطُ الأطراف (‎8%‎ من كلّ جهة)، ويُختار لونُه الغالب ولو كان فاتحًا — غلافٌ عاجيٌّ كتابٌ عاجيّ (كان الفاتحُ يُحسب ورقًا أبيض
+     فيُترك، فيبقى الافتراضيُّ الأزرق). وإن كانت الأطرافُ بيضاءَ خالصةً فالصفحةُ لم تُصمَّم غلافًا: يُؤخذ أبرزُ لونٍ مشبعٍ فيها (عنوانُها)،
+     وإلّا فلا لون (الافتراضيّ). ويُغمَّق قليلًا ليبدو قماشًا لا ورقًا. واحدٌ للغلاف المرفوع ولأولى صفحات الملفّ */
+  function covPick(cv) {
+    const w = cv.width, h = cv.height, d = cv.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
+    const bx = Math.max(2, Math.round(w * .08)), by = Math.max(2, Math.round(h * .08));
+    const edge = new Map(), sat = new Map(); let nEdge = 0, nAll = 0;
+    const add = (m, r, g, b) => { const k = ((r >> 4) << 8) | ((g >> 4) << 4) | (b >> 4), e = m.get(k) || [0, 0, 0, 0]; e[0] += r; e[1] += g; e[2] += b; e[3]++; m.set(k, e); };
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4; if (d[i + 3] < 128) continue;
+      const r = d[i], g = d[i + 1], b = d[i + 2]; nAll++;
+      if (x < bx || x >= w - bx || y < by || y >= h - by) { add(edge, r, g, b); nEdge++; }
+      if (Math.max(r, g, b) - Math.min(r, g, b) > 45) add(sat, r, g, b);
     }
-    if (!tot || ink / tot < 0.3) return null;
-    let best = null;
-    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
-    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.8));
-    return `rgb(${c.join(',')})`;
+    const top = m => { let best = null; m.forEach(e => { if (!best || e[3] > best[3]) best = e; }); return best && best.map((v, j) => j < 3 ? v / best[3] : v); };
+        /* والغامقُ جدًّا يُرفع قليلًا فيُرى الكعبُ لا ظلًّا، والأبيضُ بلا لونٍ مشبعٍ كتابٌ ورقيٌّ فاتح (لا اللونُ الافتراضيّ) */
+    const out = (c, f) => { const v = c.slice(0, 3).map(x => x * f), m = Math.max(...v), k = m < 34 ? 34 / Math.max(1, m) : 1; return `rgb(${v.map(x => Math.round(Math.min(255, x * k))).join(',')})`; };
+    const e = top(edge);
+    if (e && !(Math.min(e[0], e[1], e[2]) > 244 && e[3] > nEdge * .5)) return out(e, .9);
+    const s2 = top(sat);
+    return s2 && s2[3] > nAll * .01 ? out(s2, .8) : 'rgb(226,221,209)';
   }
+  /* لونُ الكتاب من الصفحة التي هي غلافُه في الملفّ (‎covPg‎، إذا لم يُرفع له غلاف) */
+  async function bkCoverColor(doc, n = 1) {
+    const pg = await doc.getPage(Math.max(1, Math.min(doc.numPages || 1, n | 0 || 1))), v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: 64 / v1.width });
+    const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+    const cx = cv.getContext('2d', { willReadFrequently: true }); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    return covPick(cv);
+  }
+
 
   async function chPdfPaint() {
     const view = document.querySelector('#cm-body [data-chview]');
@@ -23991,8 +24466,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
     if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
     const meta = chPdfMeta(code, ch);
-    if (meta && meta.cover === undefined) {
-      meta.cover = await bkCoverColor(doc).catch(() => null);
+    if (meta && meta.coverV !== PK_COV_V) {
+      meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = PK_COV_V;
       save();
     }
     const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
@@ -24003,7 +24478,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cover: ((chCovMeta(code, ch) || {}).color) || (meta && meta.cover) || '#2c5e65',
       pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
       /* يُفتح الكتابُ مغلقًا أوّلَ مرّة، ثمّ كما تركتَه */
-      closed: !meta || meta.closed !== false,
+      closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة (حيث ينتهي هيكلُ التحميل) */
       covKey: chCovMeta(code, ch) ? chCovKey(code, ch) : null,
     });
   }
@@ -24080,189 +24555,76 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="bk-skel" data-bkl="${esc(k)}" data-n="${+n || 0}" data-cv="${esc(cv || '')}" role="status" aria-label="${esc(T().chLoading)}" style="--ar:${(+ar > 0 ? +ar : 1 / Math.SQRT2).toFixed(4)}">`
       + `<canvas class="bk-skel__cv" aria-hidden="true"></canvas><em class="bk-skel__pc">${Math.round((bkLoad[k] || {}).shown || 0)}٪</em></div>`;
   }
-  /* ‏‎bkLd‎ رسّامُ الهيكل — كاميرا الطاولة في المحرّك (‎book2.js‎: الميلُ والدورانُ والعدسةُ وسَعةُ الإطار ‎restPose‎) محسوبةً هنا بلا
-     مكتبة، فيقع الكتابُ حيث سيرسمه المحرّكُ بالضبط. حلقةٌ واحدةٌ لكلّ الهياكل الظاهرة، تقف حين لا يبقى منها شيء */
-  const BKL = { tilt: .74, az: -.96, fov: 13, rm: 1.2, ov: .032, bt: .02, ang: 1.05 };
-  const bkLdLive = new Set(); let bkLdRaf = 0;
-  function bkLdCam(cw, ch, ar, n) {
-    const H = 1 / ar, TH = Math.min(.2, Math.max(.15, .12 + n * .0012)), BT = BKL.bt, WB = 1 + BKL.ov, HB = H * (1 + BKL.ov), SPB = BT * 1.9;
-    const ca = Math.cos(BKL.az), sa = Math.sin(BKL.az), ct = Math.cos(BKL.tilt), st = Math.sin(BKL.tilt);
-    const R = [ca, -sa * ct, sa * st, sa, ca * ct, -ca * st, 0, st, ct];   /* ‏‎Rz·Rx‎ (ترتيبُ ‎ZXY‎ في المحرّك) */
-    const inv = v => [R[0] * v[0] + R[3] * v[1] + R[6] * v[2], R[1] * v[0] + R[4] * v[1] + R[7] * v[2], R[2] * v[0] + R[5] * v[1] + R[8] * v[2]];
-    const fw = v => [R[0] * v[0] + R[1] * v[1] + R[2] * v[2], R[3] * v[0] + R[4] * v[1] + R[5] * v[2], R[6] * v[0] + R[7] * v[1] + R[8] * v[2]];
-    const tn = Math.tan(BKL.fov * Math.PI / 360), asp = cw / ch, cs0 = [];
-    for (const x of [-WB, SPB]) for (const y of [-HB / 2, HB / 2]) for (const z of [0, TH + 2 * BT]) cs0.push([x + .5, y, z]);
-    let t = [0, 0, TH / 2], d = 0;
-    for (let it = 0; it < 2; it++) {
-      const cs = cs0.map(p => inv([p[0] - t[0], p[1] - t[1], p[2] - t[2]]));
-      d = 0; for (const c of cs) d = Math.max(d, c[2] + Math.abs(c[0]) * BKL.rm / (tn * asp), c[2] + Math.abs(c[1]) * BKL.rm / tn);
-      let u0 = Infinity, u1 = -Infinity, w0 = Infinity, w1 = -Infinity;
-      for (const c of cs) { const u = c[0] / (d - c[2]), w = c[1] / (d - c[2]); u0 = Math.min(u0, u); u1 = Math.max(u1, u); w0 = Math.min(w0, w); w1 = Math.max(w1, w); }
-      const ax = fw([1, 0, 0]), ay = fw([0, 1, 0]), mu = (u0 + u1) / 2 * d, mw = (w0 + w1) / 2 * d;
-      t = [t[0] + ax[0] * mu + ay[0] * mw, t[1] + ax[1] * mu + ay[1] * mw, t[2] + ax[2] * mu + ay[2] * mw];
-    }
-    const zc = fw([0, 0, d]), cam = [t[0] + zc[0], t[1] + zc[1], t[2] + zc[2]];
-    /* نقطةٌ محلّيّة: ‏‎x‎ من الكعب نحو الحافّة، و‏‎y‎ من الرأس، و‏‎z‎ إلى الأعلى ← بكسلٌ على اللوحة */
-    const P = (x, y, z) => { const c = inv([.5 - x - cam[0], H / 2 - y - cam[1], z - cam[2]]), k = -1 / c[2]; return [(c[0] * k / (tn * asp) + 1) / 2 * cw, (1 - c[1] * k / tn) / 2 * ch]; };
-    /* اتّجاهُ الناظر محلّيًّا (من الكتاب إلى الكاميرا): به يُعرف أيُّ وجهَي الغلاف يُرى */
-    const vw = [-R[2], -R[5], R[8]];
-    return { P, H, TH, BT, WB, HB, SPB, vw };
+  /* ===== ‏‎bkLd‎: يصل هياكلَ الصفحة برسّامها (‎platform/bkload.js‎) =====
+     الرسّامُ في عاملٍ إن نُقلت إليه اللوحة (فلا يتجمّد والصفحةُ مشغولةٌ بالتحميل نفسِه)، وإلّا في الصفحة بالواجهة نفسِها. والصفحةُ لا ترسل إليه
+     إلّا التقدّمَ والمقاسَ والوضعَ و«جهز» — بحلقةٍ تعمل ما دام كتابٌ يُحمَّل. ولوحةُ كلّ كتابٍ واحدةٌ تنتقل من الوعاء إلى فوق الكتاب (‏‎bkLdCv‎) */
+  const bkLdCv = {}, bkLdWait = {}, bkLdAll = new Set(), bkLdDrawn = new Set();   /* ‏‎bkLdDrawn‎ كتبٌ رُسم هيكلُها: النسبةُ تظهر معه لا قبله */
+  let bkLdRaf = 0, bkLdW = null, bkLdModP = null;
+  const bkLdUrl = () => assetURL('platform/bkload.js?v=' + (window.AC_VER || 0));
+  const bkLdDark = () => document.documentElement.dataset.theme === 'dark';
+  const bkLdP = k => Math.min(1, ((bkLoad[k] || {}).shown || 0) / 100);
+  const bkLdDone = k => { const r = bkLdWait[k]; if (r) { delete bkLdWait[k]; r(); } };
+  function bkLdWorker() {
+    if (bkLdW !== null) return bkLdW;
+    bkLdW = false;
+    try {
+      if (typeof OffscreenCanvas !== 'undefined' && HTMLCanvasElement.prototype.transferControlToOffscreen) {
+        bkLdW = new Worker(bkLdUrl(), { type: 'module' });
+        bkLdW.onmessage = ({ data: m }) => { if (m.t === 'closed') bkLdDone(m.id); else if (m.t === 'drawn') { bkLdDrawn.add(m.id); bkLdKick(); } };
+        bkLdW.onerror = () => Object.keys(bkLdWait).forEach(bkLdDone);   /* عاملٌ لم يعمل: لا يُنتظر انطباقٌ لن يأتي */
+      }
+    } catch (e) { bkLdW = false; }
+    return bkLdW;
   }
-  /* صورُ الهيكل (مرّةً): صفحةٌ بأسطرٍ باهتة، وحافّةُ ورقٍ مخطّطة */
-  let bkLdTex = null;
-  function bkLdTexs() {
-    if (bkLdTex) return bkLdTex;
-    const mk = (w, h, f) => { const c = document.createElement('canvas'); c.width = w; c.height = h; f(c.getContext('2d'), w, h); return c; };
-    return bkLdTex = {
-      page: mk(120, 170, (g, w, h) => { g.fillStyle = '#fbf8f1'; g.fillRect(0, 0, w, h); g.fillStyle = 'rgba(70,64,52,.2)'; for (let y = h * .1, i = 0; y < h * .9; y += h * .036, i++) g.fillRect(w * .1, y, w * (i % 6 === 5 ? .4 : .78), 2); }),
-      edge: mk(32, 32, (g, w, h) => { g.fillStyle = '#f2ecdf'; g.fillRect(0, 0, w, h); for (let y = 0; y < h; y += 2) { g.fillStyle = `rgba(150,130,95,${.16 + .12 * Math.sin(y * 1.7) ** 2})`; g.fillRect(0, y, w, 1); } }),
-    };
+  function bkLdSize(el) {
+    const w = el.clientWidth, h = el.clientHeight;
+    return w && h ? { w, h, dpr: window.devicePixelRatio || 1, ar: parseFloat(el.style.getPropertyValue('--ar')) || 1 / Math.SQRT2 } : null;
   }
-  /* بطانةٌ تحت وجوه كتلةٍ واحدة: بلونها ومحدودةٌ بخطٍّ منه — فلا يظهر ما وراءها من شقوق الحوافّ الملساء بين الوجوه (خطوطٌ داكنة) */
-  function bkLdUnder(g, qs, col) { g.save(); g.fillStyle = g.strokeStyle = col; g.lineWidth = 1.4; g.lineJoin = 'round'; for (const q of qs) { g.beginPath(); g.moveTo(q[0][0], q[0][1]); for (let i = 1; i < q.length; i++) g.lineTo(q[i][0], q[i][1]); g.closePath(); g.fill(); g.stroke(); } g.restore(); }
-  function bkLdPoly(g, q, fill) { g.beginPath(); g.moveTo(q[0][0], q[0][1]); for (let i = 1; i < q.length; i++) g.lineTo(q[i][0], q[i][1]); g.closePath(); g.fillStyle = fill; g.fill(); }
-  /* وجهٌ مستوٍ بصورته: أصلُه وزاويتاه على الشاشة (الكاميرا طويلةُ العدسة: الوجهُ متوازي أضلاعٍ تقريبًا) */
-  function bkLdImg(g, img, a, b, d, dim = 0) {
-    g.save(); g.transform((b[0] - a[0]) / img.width, (b[1] - a[1]) / img.width, (d[0] - a[0]) / img.height, (d[1] - a[1]) / img.height, a[0], a[1]);
-    g.drawImage(img, 0, 0); if (dim) { g.fillStyle = `rgba(0,0,0,${dim})`; g.fillRect(0, 0, img.width, img.height); } g.restore();
-  }
-  function bkLdShade(hex, f) { const n = parseInt(hex.slice(1), 16), c = v => Math.max(0, Math.min(255, Math.round(v * f))); return `rgb(${c(n >> 16)},${c(n >> 8 & 255)},${c(n & 255)})`; }
-  /* ===== التقليبُ نفسُه الذي في المحرّك (‎book2.js‎: ‏‎pageCurve · rfTick‎ — «المجلدُ يستدعي تحديداته») =====
-     كلُّ صفحةٍ مربوطةٌ بجدار الكعب على عمقها ‎δ‎ وتُقلَّب بزاوية ‎θ‎ حول مفصل الغلاف، تنثني في ثنية الكعب (‎GUT‎) ثمّ تستوي؛ والورقُ
-     الذي انقلب كومةٌ تحت الغلاف بين منحنيَي أولى صفحاتها وآخرها، والطائرةُ بترتيبها ينحني طرفُها بقدر الفُرجة التي تحتها فلا تمسّها.
-     المقطعُ ‎(x, z)‎ ممدودٌ بطول الصفحة، فيُرسم هنا بلا مكتبة. ‏‎x‎ من الكعب نحو الحافّة و‏‎z‎ فوق اللوح السفليّ */
-  const bkLdRf = {}, bkLdCv = {}, bkLdVt = {};   /* حالُ التقليب لكلّ كتاب: يبقى إذا انتقل الهيكلُ من الوعاء إلى فوق الكتاب فلا يبدأ من جديد */
-  const BKRF = { open: 130, ivMin: 18, ivMax: 75, leaf: 260, close: 260, angle: 1.05, seg: 12, nMax: 40 };
-  function bkLdCurve(C, delta, th, curl) {
-    const XI = -C.BT * .6, GUT = .2, WP = 1 + XI, TH = C.TH, BT = C.BT, out = [];
-    const ux = -Math.cos(th), uz = Math.sin(th), nx = -Math.sin(th), nz = -Math.cos(th), U0 = -delta * Math.sin(th), N0 = delta * Math.cos(th);
-    for (let j = 0; j <= BKRF.seg; j++) {
-      const f = j / BKRF.seg, U = U0 + WP * f, k = Math.min(1, (U - U0) / GUT), N = N0 + (delta - N0) * k * k * (3 - 2 * k) + curl * f * f;
-      out.push([-(XI + U * ux + N * nx), TH + U * uz + N * nz + BT]);
-    }
-    return out;
-  }
-  /* شريطٌ ممدودٌ بطول الصفحة من منحنًى: شرائحُ بصورة الصفحة، مظلّلةً بميلها للضوء */
-  function bkLdStrip(g, C, pts, img) {
-    const { P, H } = C;
-    for (let j = 0; j < pts.length - 1; j++) {
-      const [xa, za] = pts[j], [xb, zb] = pts[j + 1], dx = xb - xa, dz = zb - za, l = Math.hypot(dx, dz) || 1, lit = Math.max(0, (-dz * .42 + dx * .86) / l);
-      const sw = img.width / (pts.length - 1);
-      g.save(); const a = P(xa, 0, za), b = P(xb, 0, zb), d = P(xa, H, za);
-      g.transform((b[0] - a[0]) / sw, (b[1] - a[1]) / sw, (d[0] - a[0]) / img.height, (d[1] - a[1]) / img.height, a[0], a[1]);
-      g.drawImage(img, j * sw, 0, sw + .6, img.height, 0, 0, sw + .6, img.height);
-      g.fillStyle = `rgba(40,30,15,${(.16 * (1 - lit)).toFixed(3)})`; g.fillRect(0, 0, sw + .6, img.height);
-      g.restore();
+  function bkLdAttach(el, cv) {
+    const q = bkLdSize(el); if (!q) return;
+    const key = el.dataset.bkl, o = { id: key, ...q, n: +el.dataset.n || 120, cover: el.dataset.cv, dark: bkLdDark(), reduce: bkReduce(), p: bkLdP(key) };
+    const S = cv._ld = { key, cv, q, p: o.p, cover: o.cover, n: o.n, dark: o.dark, gone: 0, q0: [] };
+    S.post = m => S.q0.push(m);
+    bkLdCv[key] = cv; bkLdAll.add(S);
+    const w = bkLdWorker();
+    if (w) {
+      const off = cv.transferControlToOffscreen();
+      w.postMessage({ t: 'add', ...o, canvas: off }, [off]);
+      S.post = m => w.postMessage({ id: key, ...m });
+    } else {
+      (bkLdModP || (bkLdModP = import(bkLdUrl()))).then(M => {
+        const L = M.createLoader(cv, o, () => bkLdDone(key), () => { bkLdDrawn.add(key); bkLdKick(); });
+        S.post = m => m.t === 'fin' ? L.fin() : m.t === 'del' ? L.dispose() : L.set(m);
+        S.q0.splice(0).forEach(S.post);
+      }).catch(() => {});
     }
   }
-  /* إطارٌ: ‏‎a‎ زاويةُ الغلاف، و‏‎R‎ حالُ التقليب (المنطلقة، والنازلة، وتقدُّمُ كلّ طائرة) */
-  function bkLdDraw(L, a, R) {
-    const { g, cam: C, cv } = L, { P, H, TH, BT, WB, HB } = C, tx = bkLdTexs();
-    const cvr = L.cover, dark = bkLdShade(cvr, .55), mid = bkLdShade(cvr, .8), y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2;
-    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(L.s, 0, 0, L.s, 0, 0);
-    if (L.sh) g.drawImage(L.sh, 0, 0, L.w, L.h);
-    /* اللوحُ السفليّ، والكعبُ المستدير */
-    bkLdPoly(g, [P(WB, y0, BT), P(WB, y1, BT), P(WB, y1, 0), P(WB, y0, 0)], dark);
-    bkLdPoly(g, [P(WB, y1, BT), P(0, y1, BT), P(0, y1, 0), P(WB, y1, 0)], dark);
-    const zt = TH + 2 * BT, Rr = zt / 2, N = 8, sp = t => [-C.SPB * Math.sin(t), Rr + Rr * Math.cos(t)];
-    for (let i = 0; i < N; i++) { const [xa, za] = sp(Math.PI * i / N), [xb, zb] = sp(Math.PI * (i + 1) / N); bkLdPoly(g, [P(xa, y0, za), P(xb, y0, zb), P(xb, y1, zb), P(xa, y1, za)], bkLdShade(cvr, .62 + .3 * Math.cos(Math.PI * (i + .5) / N - .5))); }
-    const cap = []; for (let i = 0; i <= N; i++) { const [x, z] = sp(Math.PI * i / N); cap.push(P(x, y1, z)); } bkLdPoly(g, cap, dark);
-    /* باطنُ اللوح السفليّ (بلون الغلاف كالمحرّك) — يظهر كلّما نقصت الكتلة */
-    bkLdPoly(g, [P(0, y0, BT), P(WB, y0, BT), P(WB, y1, BT), P(0, y1, BT)], mid);
-    /* الكتلة: ما لم ينطلق بعد */
-    const hb = TH * (1 - R.launched / R.n), zb = BT + hb;
-    if (hb > 1e-4) {
-      bkLdUnder(g, [[P(1, 0, zb), P(1, H, zb), P(1, H, BT), P(1, 0, BT)], [P(1, H, zb), P(0, H, zb), P(0, H, BT), P(1, H, BT)], [P(1, 0, zb), P(0, 0, zb), P(0, H, zb), P(1, H, zb)]], '#ece5d4');
-      bkLdImg(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT));
-      bkLdImg(g, tx.edge, P(1, H, zb), P(0, H, zb), P(1, H, BT), .06);
-      bkLdImg(g, tx.page, P(1, 0, zb), P(0, 0, zb), P(1, H, zb));
-    }
-    /* الغلافُ حول مفصله ‎(0, BT+TH)‎ */
-    const hz = BT + TH, c = Math.cos(a), s = Math.sin(a), at = (x, y, z) => P(x * c - (z - hz) * s, y, x * s + (z - hz) * c + hz);
-    const out = [at(WB, y0, hz + BT), at(0, y0, hz + BT), at(0, y1, hz + BT), at(WB, y1, hz + BT)];
-    const seen = -s * C.vw[0] + c * C.vw[2] > 0;   /* وجهُه الخارجيّ ‎(−sin a, 0, cos a)‎ نحو الناظر */
-    const rim = () => { bkLdPoly(g, [at(WB, y1, hz + BT), at(0, y1, hz + BT), at(0, y1, hz), at(WB, y1, hz)], dark); bkLdPoly(g, [at(WB, y0, hz + BT), at(WB, y1, hz + BT), at(WB, y1, hz), at(WB, y0, hz)], mid); };
-    /* الكومةُ تحت الغلاف: بين منحنى أولاها وآخرِ ما نزل — وجهُها الذيليّ مقطعُها، ووجهُها الظاهرُ صفحتُها */
-    const pile = () => {
-      const pt = TH * R.landed / R.n; if (pt < 1e-4) return;
-      const A2 = bkLdCurve(C, .0006, a, 0), B2 = bkLdCurve(C, pt, a, 0), ea0 = A2[A2.length - 1], eb0 = B2[B2.length - 1];
-      bkLdUnder(g, [B2.map(([x, z]) => P(x, 0, z)).concat(B2.slice().reverse().map(([x, z]) => P(x, H, z))),
-        [P(ea0[0], 0, ea0[1]), P(ea0[0], H, ea0[1]), P(eb0[0], H, eb0[1]), P(eb0[0], 0, eb0[1])],
-        [...A2, ...B2.slice().reverse()].map(([x, z]) => P(x, H, z))], '#ece5d4');
-      bkLdStrip(g, C, B2, tx.page);
-      /* حافّتُها الأماميّة: سُمكُ الورق المقلوب ممدودًا بطول الصفحة (هي ما يُرى منها والغلافُ مرفوع) — ثمّ مقطعُها عند الذيل */
-      const ea = A2[A2.length - 1], eb = B2[B2.length - 1];
-      bkLdImg(g, tx.edge, P(ea[0], 0, ea[1]), P(ea[0], H, ea[1]), P(eb[0], 0, eb[1]));
-      bkLdPoly(g, [...A2, ...B2.slice().reverse()].map(([x, z]) => P(x, H, z)), '#e9e1cf');   /* عند ذيل الورق (لا ذيل الغلاف البارز عنه) */
-    };
-    /* الطائرة: من الأبعد (أكبرِ زاوية) إلى الأقرب */
-    const leaves = () => { for (const f of R.fly) bkLdStrip(g, C, bkLdCurve(C, f.delta, f.th, f.curl), tx.page); };
-    if (seen) { pile(); leaves(); rim(); bkLdPoly(g, out, cvr); }
-    else { rim(); bkLdPoly(g, [at(WB, y0, hz), at(0, y0, hz), at(0, y1, hz), at(WB, y1, hz)], mid); pile(); leaves(); }
-  }
-  /* حالُ التقليب في لحظة: كلُّ ورقةٍ تنطلق إذا بلغها التحميل (لا أسرعَ من ‎ivMax‎ بينها، ومتى جهز الكتابُ فبأقصى سرعته ‎ivMin‎)،
-     وتطير ‎leaf‎ مللي‌ثانية؛ ثمّ ينطبق الغلافُ بعد نزول آخرها — كتوقيت التقليب في المحرّك */
-  function bkLdState(L, now, p) {
-    const key = L.el.dataset.bkl, T = L.rf || (L.rf = bkLdRf[key] || (bkLdRf[key] = { t0: now, n: Math.max(12, Math.min(BKRF.nMax, Math.round(L.n / 6) || 20)), at: [], next: now + BKRF.open, end: 0 }));
-    const want = L.fin ? T.n : Math.min(T.n - 1, Math.floor(p * T.n));
-    while (T.at.length < want && now >= T.next) { T.at.push(now); T.next = now + (L.fin ? BKRF.ivMin : BKRF.ivMax); }
-    let landed = 0; const fly = [];
-    T.at.forEach((t, i) => { const k = (now - t) / BKRF.leaf; if (k >= 1) landed++; else fly.push({ i, k }); });
-    let a = BKRF.angle * (1 - Math.pow(1 - Math.min(1, (now - T.t0) / BKRF.open), 3));
-    if (L.fin && landed === T.n) { if (!T.end) T.end = now + 40; const k = Math.min(1, Math.max(0, (now - T.end) / BKRF.close)); a = BKRF.angle * (1 - k * k * k); if (k >= 1) T.closed = true; }
-    /* الأسبقُ أعلى، وانحناءُ كلٍّ محدودٌ بنصف الفُرجة بينه وبين التي تحته */
-    const fl = fly.map(f => ({ ...f, th: a * (1 - Math.pow(1 - f.k, 3)) }));
-    /* وإذا تمهّل التحميلُ: تنهض عليا الكتلة قليلًا وتهدأ (كإبهامٍ يتحسّس الورق) فلا يبدو الكتابُ متجمّدًا */
-    if (!fl.length && !L.fin && T.at.length < T.n && now - T.t0 > BKRF.open) { const w = Math.sin(((now - T.t0) / 1100) * Math.PI) ** 2; if (w > .02) fl.push({ i: T.at.length, k: 0, th: a * .14 * w }); }
-    for (let q = 0; q < fl.length; q++) { const below = q + 1 < fl.length ? fl[q + 1].th : 0; fl[q].curl = Math.min(.09 * Math.sin(Math.PI * fl[q].k), .5 * Math.max(0, fl[q].th - below)); fl[q].delta = L.cam.TH * (fl[q].i + .5) / T.n; }
-    return { a, R: { n: T.n, launched: T.at.length, landed, fly: fl }, closed: !!T.closed };
-  }
-  /* مقاسُ اللوحة وكاميرتُها وظلُّها — تُعاد حين يتغيّر مقاسُ الهيكل فقط */
-  function bkLdFit(L) {
-    const r = L.el.getBoundingClientRect(), w = Math.round(r.width), h = Math.round(r.height);
-    if (!w || !h) return false;
-    const ar = parseFloat(L.el.style.getPropertyValue('--ar')) || 1 / Math.SQRT2;
-    if (w === L.w && h === L.h && ar === L.ar) return true;
-    L.w = w; L.h = h; L.ar = ar; L.s = Math.min(2, window.devicePixelRatio || 1);
-    const cw = Math.round(w * L.s), chh = Math.round(h * L.s);
-    if (L.cv.width !== cw || L.cv.height !== chh) { L.cv.width = cw; L.cv.height = chh; }   /* تغييرُ المقاس يمحو اللوحة — فلا يُغيَّر إلّا حين يلزم */
-    L.cam = bkLdCam(w, h, ar, L.n);
-    const { P, H, HB, WB, TH, BT } = L.cam, y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2, zt = TH + 2 * BT, k = .9;
-    const sh = document.createElement('canvas'); sh.width = L.cv.width; sh.height = L.cv.height;
-    const sg = sh.getContext('2d'); sg.scale(L.s, L.s); sg.filter = `blur(${Math.max(4, w * .018)}px)`;
-    const S = (x, y, z) => P(x + z * k * 1.6, y - z * k * .35, 0);
-    bkLdPoly(sg, [S(0, y0, zt), S(WB, y0, zt), S(WB, y1, zt), S(WB, y1, 0), S(0, y1, 0), S(0, y0, 0)], `rgba(${document.documentElement.dataset.theme === 'dark' ? '0,0,0,.42' : '20,35,63,.2'})`);
-    L.sh = sh;
-    return true;
-  }
-  function bkLdTick(now) {
+  function bkLdTick() {
     bkLdRaf = 0;
-    for (const el of [...document.querySelectorAll('.bk-skel')]) if (!el._ld) {
+    for (const el of document.getElementsByClassName('bk-skel')) {
       const cv = el.querySelector('.bk-skel__cv'); if (!cv) continue;
-      el._ld = { el, cv, g: cv.getContext('2d'), n: +el.dataset.n || 120, cover: /^#[0-9a-f]{6}$/i.test(el.dataset.cv || '') ? el.dataset.cv : '#1d4a50' };
-      bkLdLive.add(el._ld); bkLdCv[el.dataset.bkl] = cv;
+      if (!cv._ld) bkLdAttach(el, cv);
+      const S = cv._ld; if (!S) continue;
+      el.classList.toggle('is-drawn', bkLdDrawn.has(S.key));
+      const q = bkLdSize(el);
+      if (q && (q.w !== S.q.w || q.h !== S.q.h || q.ar !== S.q.ar || q.dpr !== S.q.dpr)) { S.q = q; S.post({ t: 'set', ...q }); }
+      const p = bkLdP(S.key), cvr = el.dataset.cv, n = +el.dataset.n || 0, dk = bkLdDark();
+      if (p !== S.p) { S.p = p; S.post({ t: 'set', p }); }
+      if (cvr && cvr !== S.cover) { S.cover = cvr; S.post({ t: 'set', cover: cvr }); }   /* الوعاءُ لم يعرف لونَ الكتاب، وفوقَ الكتاب يُعرف */
+      if (n && n !== S.n) { S.n = n; S.post({ t: 'set', n }); }
+      if (dk !== S.dark) { S.dark = dk; S.post({ t: 'set', dark: dk }); }
     }
-    for (const L of bkLdLive) {
-      if (!L.el.isConnected) { bkLdLive.delete(L); continue; }
-      if (!bkLdFit(L)) continue;
-      const p = Math.min(1, ((bkLoad[L.el.dataset.bkl] || {}).shown || 0) / 100);
-      if (bkReduce()) { const n = 20, k = Math.floor(p * n); bkLdDraw(L, L.fin ? 0 : BKRF.angle, { n, launched: k, landed: k, fly: [] }); if (L.fin && L.res) { const r = L.res; L.res = null; r(); } continue; }
-      /* ساعةُ الهيكل: لا تتقدّم في الإطار أكثرَ من إطار — إذا انشغلت الصفحةُ (بناءُ الكتاب) أكملت الحركةُ من حيث وقفت ولم تقفز */
-      const ck = bkLdVt[L.el.dataset.bkl] || (bkLdVt[L.el.dataset.bkl] = { t: 0, last: now });
-      ck.t += Math.min(34, Math.max(0, now - ck.last)); ck.last = now;
-      const st = bkLdState(L, ck.t, p);
-      bkLdDraw(L, st.a, st.R);
-      if (st.closed && L.res) { const r = L.res; L.res = null; r(); }
-    }
-    /* وما دام كتابٌ يُحمَّل تبقى الحلقةُ تبحث: الهيكلُ قد يوضع في وعاءٍ لم يدخل الصفحةَ بعد، فيُرسم في أوّل إطارٍ يظهر فيه */
-    if (bkLdLive.size || Object.keys(bkLoad).length) bkLdRaf = requestAnimationFrame(bkLdTick);
+    /* لوحةٌ خرجت من الصفحة (أُغلقت المساحةُ أثناء التحميل) يُطفأ رسّامُها — بعد مهلةٍ، فانتقالُها من الوعاء إلى فوق الكتاب ليس خروجًا */
+    const now = performance.now();
+    for (const S of bkLdAll) { if (S.cv.isConnected) S.gone = 0; else if (!S.gone) S.gone = now; else if (now - S.gone > 3000) { S.post({ t: 'del' }); bkLdAll.delete(S); } }
+    if (Object.keys(bkLoad).length || bkLdAll.size) bkLdRaf = requestAnimationFrame(bkLdTick);
   }
   const bkLdKick = () => { if (!bkLdRaf) bkLdRaf = requestAnimationFrame(bkLdTick); };
-  /* جهز الكتاب: آخرُ الصفحات وانطباقُ الغلاف، ثمّ يُسلَّم */
+  /* جهز الكتاب: تنقلب آخرُ الصفحات وينطبق الغلاف، ثمّ يُسلَّم (ومهلةٌ إن لم يُجب الرسّام) */
   function bkLdClose(el) {
-    const L = el._ld; if (!L || bkReduce() || !el.isConnected) return Promise.resolve();
-    L.fin = true; bkLdKick();
-    return new Promise(res => { L.res = res; setTimeout(res, 2400); });
+    const cv = el.querySelector('.bk-skel__cv'), S = cv && cv._ld;
+    if (!S || bkReduce() || !el.isConnected) return Promise.resolve();
+    return new Promise(res => { bkLdWait[S.key] = res; S.post({ t: 'set', p: 1 }); S.post({ t: 'fin' }); setTimeout(() => bkLdDone(S.key), 4000); });
   }
 
   function bkLoadSet(k, tgt, cap) {
@@ -24270,7 +24632,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (tgt >= L.tgt) { L.tgt = tgt; L.cap = Math.max(cap, tgt); }
     if (!bkLoadRaf) bkLoadRaf = requestAnimationFrame(bkLoadTick);
   }
-  const bkLoadEnd = k => { delete bkLoad[k]; delete bkLdRf[k]; delete bkLdCv[k]; delete bkLdVt[k]; };
+  const bkLoadEnd = k => { delete bkLoad[k]; delete bkLdCv[k]; bkLdDrawn.delete(k); for (const S of bkLdAll) if (S.key === k) bkLdAll.delete(S); };
   function bkLoadTick() {
     bkLoadRaf = 0;
     let live = false;
@@ -24297,8 +24659,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
   function bk2Prefetch() {
-    if (bk2LibP || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
-    (window.requestIdleCallback || setTimeout)(() => { if (bk2Ok()) bk2Lib().catch(() => {}); });
+    if ((bk2LibP && bkLdW !== null) || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
+    (window.requestIdleCallback || setTimeout)(() => { bkLdWorker(); if (!bk2LibP && bk2Ok()) bk2Lib().catch(() => {}); });   /* والعاملُ يُنشأ مبكّرًا فيجلب رسّامَ الهيكل قبل أن يُحتاج */
   }
   function bk2Lib() {
     if (!bk2LibP) bk2LibP = Promise.all([
@@ -24353,7 +24715,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       base = document.createElement('canvas');
       base.width = Math.round(vp.width); base.height = Math.round(vp.height);
       const cx = base.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, base.width, base.height);
+      /* الغلافُ يُرسم أكبرَ بقليلٍ من وسطه: لونُه في الملفّ كثيرًا ما لا يبلغ حافّةَ الصفحة، فيبقى عمودٌ فاتحٌ يبدو خطًّا على حافّة الغلاف
+         (مغلقًا وهو يُرفع ويُفتح). الصفحاتُ الأخرى كما هي، فلا تتزحزح مواضعُ التحديد عليها */
+      if (k === 'cover') { const o = 1.016; cx.setTransform(o, 0, 0, o, -base.width * (o - 1) / 2, -base.height * (o - 1) / 2); }
       await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      cx.setTransform(1, 0, 0, 1, 0, 0);
       b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
     } else { b.pgCv.delete(ck); b.pgCv.set(ck, base); }
     if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return base;
@@ -24389,16 +24755,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = sid.slice(id.length);
     return H.marks.filter(m => m.s === s && m.k === k);
   }
-  /* رقمُ كلّ بطاقةٍ في مجلدها (ترتيبُها بين بطائقه) — هو رقمُ صفّها في الجدول */
-  function hlRowMap() {
-    const map = new Map(), pk = cardDataRaw(cmCode);
-    const walk = arr => { (arr || []).filter(n => n.t === 'c').forEach((n, i) => map.set(n.id, i + 1)); (arr || []).filter(n => n.t === 'f').forEach(f => walk(f.ch)); };
-    if (pk) walk(pk.deck);
+  /* رقمُ كلّ بطاقةٍ **نسبةً إلى المجلد المفتوح** (طلبُ صاحب الموقع) — هو رقمُ صفّها في الجدول الظاهر: ‎1..N‎ بترتيب العرض
+     مارًّا بالمجلدات الداخليّة. رقمٌ للتحديد لا هويّة: يتبدّل بتبدّل المفتوح، والتظليلُ مربوطٌ بالبطاقة نفسِها.
+     وما ليس في المفتوح لا رقمَ له */
+  function hlRowMap(id) {
+    const map = new Map();
+    if (!id) { const me = (postsOf(cmCode, 'cards') || []).find(isMine); id = me && me.id; }
+    const R = id && hlRows(id);
+    if (R) R.cards.forEach((n, i) => map.set(n.id, i + 1));
     return map;
   }
-  /* صفوفُ المجلد المختار في الملخّص (بطائقُه بترتيبها) */
+  /* صفوفُ المجلد المختار في الملخّص: بطائقُه وما في مجلداته الداخليّة، بترتيب الجدول (‎ktDeep‎) */
   function hlRows(id) {
-    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
+    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCardsDeep(h) } : null; } catch (e) { return null; }
   }
   /* ألوانُ التظليل الأربعة (ROADMAP-HL ق٢): ‏‎[طلاءُ الصفحة، دائرةُ الرقم، حبرُ الرقم]‎ — ولكلّ تظليلٍ لونُه (‎m.col‎) ونوعُه (‎m.kind‎: نصٌّ ‎t‎ أو مربّعٌ ‎box‎)،
      والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
@@ -24422,12 +24791,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
     const c = cv.getContext('2d'), W = cv.width, Hh = cv.height;
+    /* تظليلُ صفٍّ خارجَ المجلد المفتوح يبهت ولا رقمَ له (طلبُ صاحب الموقع) — في تحرير صاحبه وحدَه */
+    const R = b.view && b.view.closest('.pk--edit') ? hlRows(pkSrcBase(hlSidOf(b))) : null;
+    const inn = R && new Set(R.cards.map(n => n.id));
+    const out = m => !!inn && m.c.length > 0 && !m.c.some(x => inn.has(x));
     c.globalCompositeOperation = 'multiply';
-    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
+    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; c.globalAlpha = out(m) ? .3 : 1; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
+    c.globalAlpha = 1;
     c.globalCompositeOperation = 'source-over';
     /* والمربّعُ (ق٦) بحدٍّ رفيعٍ من حبر لونه فوق طلائه — يُعرف أنّه منطقةٌ لا سطر */
     for (const m of ms) if (m.kind === 'box') for (const [l, r, t, bb] of m.bars) {
-      c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = .55;
+      c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = out(m) ? .18 : .55;
       c.strokeRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); c.globalAlpha = 1;
     }
   }
@@ -24477,7 +24851,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlNewRow(id) {
     const R = hlRows(id); if (!R) return null;
     const nn = { id: newId(), t: 'c', f: '', b: '' };
-    R.host.arr.push(nn);
+    /* لا صفَّ خارج المجلدات (فيظهر «الجذر» في الشريط): بلا مجلدٍ مفتوح يُضاف إلى أوّلها */
+    const f0 = R.sel === '' && R.host.arr.find(n => n.t === 'f');
+    (f0 ? (f0.ch || (f0.ch = [])) : R.host.arr).push(nn);
     return nn.id;
   }
   /* تحديدٌ يثبت تظليلًا مربوطًا بصفّ (‎cid‎ أو الشغّال) */
@@ -24538,6 +24914,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post = b.stage.closest('.post') || document.getElementById('cm-body');
     const vis = e => !b.view.contains(e) && e.getClientRects().length;
     /* الجدولُ والشجرةُ بطاقةٌ لكلّ صفّ، والأوراقُ رزمةٌ تُرى عليا أوراقها فقط — فيُنزل عليها */
+    /* وفي شبكة البطائق: رزمةُ المربّع الذي فيه هذه البطاقة (طلبُ صاحب الموقع) — لا أوّلُ رزمةٍ تُرى */
+    const grid = post.querySelector('.pp-grid[data-ppg]');
+    if (grid) { const c = ppGridOf(grid.dataset.ppg)[cid], cell = c >= 0 && c < 9 ? c : 4, el = grid.querySelector(`.pp-cell[data-ppc="${cell}"] .pp-card`); if (el && vis(el)) return el; }
     return [...post.querySelectorAll(`[data-kcard="${CSS.escape(cid)}"]`)].find(vis) || [...post.querySelectorAll('.pp-host .pp-card')].find(vis) || null;
   }
   function hlCallRect(el) {
@@ -24650,7 +25029,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* بعد كلّ رسم: إن تبدّلت أرقامُ الصفوف (صفٌّ أُضيف أو حُذف أو رُتّب) أُعيد طلاءُ أرقامها على الصفحات الظاهرة */
   let hlRowSig = '';
   function hlAfterRender() {
-    const pk = cardDataRaw(cmCode); if (!pk) return;
+    const pk = cardDataPeek(cmCode); if (!pk) return;
     const sig = [...hlRowMap()].map(([k, v]) => k + ':' + v).join(',');
     if (sig === hlRowSig) return;
     const first = !hlRowSig; hlRowSig = sig;
@@ -24677,7 +25056,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const P = document.createElement('div');
     P.id = 'hl-mk'; P.className = 'hl-pal hl-mk' + (document.documentElement.getAttribute('data-theme') === 'dark' ? ' is-dark' : ''); P.setAttribute('role', 'menu');
     /* ومربّعُ رقم الصفّ الذي ينتمي إليه (طلبُ صاحب الموقع): يُكتب فيه رقمٌ آخر فينتقل التظليلُ إلى صفّه (ورقمُ ما بعد الأخير صفٌّ جديد)، ويُمسح فيُفكّ من صفّه */
-    const rn = m.c.length ? (hlRowMap().get(m.c[0]) || '') : '';
+    const rn = m.c.length ? (hlRowMap(id).get(m.c[0]) || '') : '';
     P.innerHTML = `<input class="hl-mk__n" data-hlmn inputmode="numeric" maxlength="3" value="${rn}" aria-label="${esc(T().hlRowN || '')}" title="${esc(T().hlRowN || '')}"><i class="hl-mk__sep"></i>`
       + Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${m.col === c}" class="${m.col === c ? 'is-on' : ''}" data-hlmc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('')
       + `<i class="hl-mk__sep"></i><button type="button" class="hl-mk__del" data-hlmdel title="${esc(T().hlDel || '')}" aria-label="${esc(T().hlDel || '')}">${HL_TRASH}</button>`;
@@ -25061,7 +25440,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       A = Math.max(0, Math.min(bk2MaxA(b), A));
       if (b.gl) return b.gl.goTo(A);
       b.closed = A === 0; b.pos = bk2PosOf(b, A);
-      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
     };
     const step = d => b.gl ? b.gl.flip(d) : turnTo(bk2A(b) + d);
@@ -25107,7 +25486,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     const fin = ng => {
       b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
-      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
       const w = b.mxWant; b.mxWant = null;
       if (w != null && w !== !!b.one) bk2Switch(b, w);
@@ -25178,7 +25557,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.one = b.single = one;
     b.pos = bkNorm(bkSk(b), pg == null ? 0 : pg, one);
-    if (b.meta) { b.meta.pos = b.pos; save(); }
+    if (b.meta) { b.meta.pos = b.pos; saveSoon(); }
     bk2Layout(b);
     /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
     const fade = () => { if (!ghost) return; const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: b.closed ? 160 : 320, easing: 'ease-out', fill: 'forwards' }); an.onfinish = () => ghost.remove(); };
@@ -25431,7 +25810,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
           if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
           b.closed = A === 0; b.pos = bk2PosOf(b, A);
-          if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+          if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
           bk2Show(b);
         },
       });
@@ -25808,7 +26187,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.closed) { b.closed = false; b.pos = b.single ? 1 : 0; }
       else b.closed = true;
     } else b.pos += lf.dir * (b.single ? 1 : 2);
-    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = !!b.closed; save(); }
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = !!b.closed; saveSoon(); }
     if (b.closed) { b.leaf = null; lf.el.remove(); bkShow(b); return; }
     bkShow(b).then(() => { if (b.leaf === lf) bkLeafDrop(b); });
   }
@@ -25975,27 +26354,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يُقرأ **إطارُ** الصورة وحده (‎9%‎ من كلّ حافّة) لا وسطُها: الوسطُ عنوانٌ وزخرفة،
      والأطرافُ هي ما يلتفّ على الكرتون في الكتاب الحقيقيّ. ويُؤخذ اللونُ الغالب فيها
      ويُعتَم قليلًا — الكرتونُ المقوّى أغمقُ من طباعته */
-  function chEdgeColor(cv) {
-    const w = cv.width, h = cv.height;
-    const d = cv.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
-    const bx = Math.max(2, Math.round(w * 0.09)), by = Math.max(2, Math.round(h * 0.09));
-    const bins = new Map();
-    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-      if (x >= bx && x < w - bx && y >= by && y < h - by) continue;
-      const i = (y * w + x) * 4;
-      if (d[i + 3] < 128) continue;
-      const r = d[i], g = d[i + 1], bl = d[i + 2];
-      const k = ((r >> 4) << 8) | ((g >> 4) << 4) | (bl >> 4);
-      const e = bins.get(k) || [0, 0, 0, 0];
-      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
-      bins.set(k, e);
-    }
-    let best = null;
-    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
-    if (!best) return null;
-    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.86));
-    return `rgb(${c.join(',')})`;
-  }
+  const chEdgeColor = cv => covPick(cv);
+
   async function chCovSet(file) {
     const code = cmCode, ch = cmTabSel;
     if (!code || !isChTab(ch) || !file) return;
@@ -26083,7 +26443,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cxMorph(btn, () => {
           const body = document.getElementById('cm-body');
           cxSel.clear(); pkBank[id] = true; pkPaneLast[id] = 'bank';
-          if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+          if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
           if (body) cxMaxY = body.scrollTop;
           cxMax = true; renderCmSection();
         });
@@ -26117,7 +26477,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
     pkBank[id] = !on;
     if (!on) pkPaneLast[id] = 'bank';   /* يُضاف ولا يُنشَّط (طلبُ صاحب الموقع) */
-    if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || 'tree';
+    if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
     renderCmSection();
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
     const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
@@ -26230,7 +26590,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           }
           grow = partEl && partEl.getBoundingClientRect();
         }
-        else if (PK_SPLIT_VIEWS.includes(to) && to !== part) mkGhost(partEl, 0, 260);   /* الجارُ يتبدّل والكتابُ باقٍ */
+        /* (تبديلُ طريقة العرض والكتابُ باقٍ: مباشرٌ بلا شبحٍ يتلاشى فوقه — طلبُ صاحب الموقع) */
       }
       const playGhosts = () => {
         if (fly) {
@@ -26300,24 +26660,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const beforeR = before ? before.getBoundingClientRect() : null;
       if (to === 'source') {
         if (part) pkSplit[id] = false;
-        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || 'tree'; }
+        else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || PK_KN_DEF; }
       } else if (to !== cur) {
-        /* ===== تبديلُ طريقة العرض: الكتلةُ ثابتة، ومحتواها وحدَه يخرج ثمّ يدخل الجديد (طلبُ صاحب الموقع) ===== */
-        const kv0 = part && sp && sp.querySelector(':scope > .kt-view');
-        if (kv0 && PK_SPLIT_VIEWS.includes(to) && !bkReduce()) {
-          if (kv0.pkOut) return;
-          kv0.pkOut = true;
-          const dx = state.lang === 'en' ? -12 : 12;
-          const an = [...kv0.children].map(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${dx}px)` }],
-            { duration: 140, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
-          Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
-            pkVw[id] = to; pkSplitAnim[id] = true; pkLastKn[id] = to;
-            renderCmSection(); playGhosts();
-          });
-          return;
-        }
+        /* تبديلُ طريقة العرض مباشرٌ دائمًا (طلبُ صاحب الموقع): كان مع مساحتين يُخرج المحتوى ثمّ يُدخل الجديد بحركة — شِيلت */
         pkVw[id] = to;
-        if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
       } else return;
       if (PK_SPLIT_VIEWS.includes(pkVwOf(id))) pkLastKn[id] = pkVwOf(id);
       renderCmSection();
@@ -26367,7 +26713,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       return;
     }
-    if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
+    if (e.target.closest('#cm-body .pk-fnm, #cm-body .pk-fic')) return;   /* ووجهُ المجلد يفتح قائمتَه لا يختاره */   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
     /* نقرُ اسمِ المختار في المختبر: يُفتح حقلُ تسميته (والجذرُ لا يُسمّى) */
     /* والمجلدُ الذي فيه مجلداتٌ نقرُه يفتح ويُغلق (بطلب صاحب الموقع)، فتسميتُه بالنقر المزدوج */
     const nm = e.target.closest('#cm-body .pk-fstrip--ed .pg-box.is-sel > .pg-face:not([aria-expanded]) > .pg-nm');
@@ -26508,10 +26854,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);   /* في طور الالتقاط: يُسأل قبل أن يُغلق محرّرٌ نفسَه بالضغطة ذاتها فيبدو كأن لا نافذة */
   /* تسميةُ المجلد من مربّعه في الشريط (مختبر «رياضيات 105»): يُكتب في العقدة مع كلّ حرف،
      و‎Enter‎ و‎Esc‎ يُنهيان الكتابة — ويُعاد الرسمُ عند الخروج ليتّفق الاسمُ في كلّ موضع */
+  /* شجرةُ الشريط: مجلداتُ الملخّص نفسُها — لا ‎edPack()‎، فذاك يصير شجرةَ البنك متى فُتح البنك
+     (‎cardData‎ ⇐ ‎pkQbView‎)، فكان الاسمُ يُكتب ولا يجد مجلدَه فلا يُحفظ */
+  const pkStripDeck = () => edSec() === 'cards' ? cardDataRaw(cmCode).deck : edPack().deck;
   document.addEventListener('input', e => {
     const fi = e.target.closest && e.target.closest('#cm-body .pk-fnm');
     if (!fi) return;
-    const hit = findNode(edPack().deck, fi.dataset.pkfn);
+    const hit = findNode(pkStripDeck(), fi.dataset.pkfn);
     if (!hit) return;
     hit.n.name = fi.value;
     save();
@@ -26526,7 +26875,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فيُرى حيث نزل */
   const pkDropOk = (dragId, targetId) => {
     if (!dragId || dragId === targetId) return false;
-    const deck = edPack().deck, hit = findNode(deck, dragId);
+    const deck = pkStripDeck(), hit = findNode(deck, dragId);
     if (!hit) return false;
     if (targetId === '') return hit.arr !== deck;                 /* إلى الجذر: إلّا إن كان فيه */
     return !findNode(hit.n.ch, targetId);                          /* لا في أحد أحفاده */
@@ -26536,7 +26885,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* (كان هنا سحبُ المتصفّح الأصليّ ‎dragstart/dragover/drop‎ — نُزع في المرحلة ٥ من ROADMAP-GLASS-STRIP:
      لم يبقَ وجهٌ ‎draggable‎، والسحبُ كلُّه بالمؤشّر في «السحب الزجاجيّ» تحت) */
   function pkMove(id, dragId, to) {
-    const deck = edPack().deck, hit = findNode(deck, dragId);
+    const deck = pkStripDeck(), hit = findNode(deck, dragId);
     hit.arr.splice(hit.i, 1);
     if (to === '') deck.push(hit.n);
     else { const t = findNode(deck, to); (t.n.ch = t.n.ch || []).push(hit.n); t.n.open = true; }
@@ -26871,6 +27220,12 @@ void main() {
   });
 
   function fillCourseUI(code) {
+    /* ===== في رفّ السوق: لا قسمَ مختارٌ حتى يختاره المستخدم (طلبُ صاحب الموقع) =====
+       كلُّ وصولٍ إلى كتابٍ آخر (ولو عاد إلى كتابٍ زاره) يبدأ بلا قسم: المنطقةُ تحت التبويبات دعوةٌ للاختيار، ولا تُرسم
+       مساهماتُ قسمٍ لم يُطلب — فالتنقّلُ بين الكتب خفيف. وفي غير الرفّ (النافذة، الرَّكن) يبقى القسمُ كما كان */
+    const inMarket = $('#cm-ui').parentElement === $('#market-course');
+    if (inMarket && cmCode !== code) cmTabSel = null;
+    else if (cmTabSel == null && !inMarket) cmTabSel = 'info';
     if (cmCode && cmCode !== code) cleanupEmptyMine();   /* تبديل مادة ومحرر المادة السابقة مفتوح */
     if (cmCode !== code) { cxMax = false; cxMaxPub = null; }   /* والتكبيرُ حالُ مساهمةٍ في مادّةٍ بعينها */
     cxSel.clear();   /* التحديدُ حالُ جلسةٍ في مادّةٍ بعينها — ولا يُورَّث لمادّةٍ أخرى */
@@ -33819,6 +34174,8 @@ void main() {
        فالخانةُ تُفتح ههنا: الجذبُ مصدرٌ للبيانات لا قارئٌ لها. */
     const info = (state.cinfo[code] = state.cinfo[code] || {});
     info.posts = info.posts || {};
+    /* بصمةُ ما في المادّة قبل الدمج: إن لم يتبدّل شيءٌ فلا حفظَ للدرج كلِّه ولا إعادةَ رسم (كان يقع مع كلّ تنقّلٍ بين كتب الرفّ) */
+    const srvSig0 = JSON.stringify(info.posts);
     let n = 0;
     /* The server knows who owns what. Copy that onto our local copies, then
        let the one ownership rule decide what is mine. (Before, this place
@@ -33995,14 +34352,15 @@ void main() {
       srvCmtPull(r.id, r.data, true);
       n++;
     });
-    save();
+    const srvSame = JSON.stringify(info.posts) === srvSig0;
+    if (!srvSame) saveSoon();
     /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها.
        والطرحُ حدثٌ كالحقن: لو نُظر إلى ‎n‎ وحدَها لَبقيت النسخةُ المطروحةُ على
        الشاشة حتى تُفتح المادّةُ ثانيةً. */
     /* ===== ووصولُ الجواب حدثٌ ولو كان خاويًا =====
        الشاشةُ تنتظره لتكفّ عن قول «جارٍ التحميل». فيُختم قبل كلّ إعادةِ رسم. */
     srvGot[code] = 1;
-    if ((n || cut) && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+    if ((n || cut) && !srvSame && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
     /* ===== والمربّعاتُ الأربعةُ تُعاد كذلك =====
        كانت تُبنى مرّةً عند فتح الرَّكن ثمّ لا يبلغها شيء: يصل الجوابُ فتُعاد لوحةُ
        المادّة وحدَها، وتبقى الأربعةُ على حالها الصفريّة حتّى يُفتح الرَّكنُ من جديد.
@@ -34014,7 +34372,7 @@ void main() {
     /* ===== والغلافُ يُعاد رسمُه حيث يُرى =====
        كان يُعاد لوحُ المادّة وحدَه، والغلافُ في السوقين وفي إطار الترم أيضًا.
        فمن ثبّت في اللوحة رأى الكتابَ في المكتبة على حاله حتّى يُعاد بناءُ الصفحة. */
-    if (n || cut) {
+    if ((n || cut) && !srvSame) {
       if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
       if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
       if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
@@ -34549,7 +34907,19 @@ void main() {
     (edSec() === 'videos' ? renderVideos : renderCards)();
     cdOrphanSweep();
     sheetLive();
+    pkActSync();
   };
+  /* أدواتُ التذييل تتبع امتلاءَ المساحتين: «إضافة أول سؤال» تصير «إضافة ▾» (سؤال · مجلد) حالَ نزول أوّل سؤال،
+     و«إضافة أول مجلد» كذلك — وكانت لا تُرسم إلّا بتبديل المساحة النشِطة فتبقى على حالها الأولى.
+     ولا تُعاد إلّا إن تبدّل الامتلاء: فلا تُطوى قائمةٌ مفتوحة ولا يضيع تركيز */
+  function pkActSync() {
+    if (edSec() !== 'cards') return;
+    const k = pkFillKey();
+    document.querySelectorAll('#cm-body .post.pk--edit .cx-acttools[data-pkid]').forEach(sl => {
+      if (sl.dataset.fill === k || !sl.dataset.pkid) return;
+      sl.dataset.fill = k; sl.innerHTML = pkActTools(sl.dataset.pkid);
+    });
+  }
 
   $('.cm-panel').addEventListener('click', e => {
     if (!cmCode) return;
@@ -37237,6 +37607,45 @@ void main() {
      «١٤ بطاقة» ولا يُرى منها صفٌّ واحد — خبرٌ صادقٌ عن شجرةٍ مطويّة */
   /* ===== الوصولُ شوطان: سَوقُ البِكرة ثمّ إنزالُ التحديد =====
      ولا يُنزَل شيءٌ قبل أن تسكن البِكرةُ على مادّة الرابط، وإلّا محته حين تسكن */
+  /* ===== رابطُ البذرة (طلبُ صاحب الموقع): ‎#seed=<اسم>‎ يبني في حسابك مساهمةً جاهزة =====
+     من ‎assets/demo/<اسم>.json‎ (المادّة · العنوان · شجرةُ الملخّص · شجرةُ البنك) وملفِّ كتابها — بدوالّ الموقع نفسِها،
+     فتُحفظ وتُرفع كأنّك كتبتَها. ولا يعمل إلّا لمن دخل، ويسأل قبل أن يكتب فوق مساهمةٍ فيها شيء */
+  async function bootSeed() {
+    const m = /^#seed=([a-z0-9-]+)$/.exec(location.hash || '');
+    if (!m) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    if (isGuest()) { toast('سجّل دخولك أوّلًا ثمّ افتح الرابط'); return; }
+    let S = null;
+    try { const r = await fetch(assetURL('assets/demo/' + m[1] + '.json'), { cache: 'no-cache' }); if (r.ok) S = await r.json(); } catch (e) {}
+    if (!S || !S.code || !CM[S.code]) { toast('تعذّر تحميل البذرة'); return; }
+    const old = postsOf(S.code, 'cards').find(isMine);
+    if (old && old.data && ((old.data.deck || []).length || (old.data.qb || []).length) && !confirm('لك مساهمةٌ في ' + S.code + ' — تُستبدل بالبذرة؟')) return;
+    const p = myPost(S.code, 'cards');
+    const now = Date.now();
+    const keyed = {};   /* مفتاحُ الصفّ في البذرة ← معرّفُه الجديد (تُربط به التظليلات) */
+    const withIds = a => (a || []).map(n => {
+      const o = Object.assign({ id: newId() }, n, n.t === 'c' && n.ctype ? { ct: now } : {}, n.ch ? { ch: withIds(n.ch) } : {});
+      if (o.key) { keyed[o.key] = o.id; delete o.key; }
+      return o;
+    });
+    p.data.title = S.title || p.data.title;
+    p.data.deck = withIds(S.deck);
+    p.data.qb = withIds(S.qb);
+    /* وتظليلاتُ الكتاب مربوطةً بصفوفها — على المصدر الأوّل (‎s: ''‎)؛ وصورُها تُصنع من الكتاب حين تُطلب */
+    p.data.hl = { marks: (S.marks || []).filter(m => keyed[m.ck]).map(m => ({ id: newId(), s: '', k: m.k, c: [keyed[m.ck]], d: m.d || 'r', col: m.col || 'y', kind: m.kind || 't', bars: m.bars, tx: m.tx || '' })) };
+    save();
+    if (S.pdf) {
+      try {
+        const r = await fetch(assetURL('assets/demo/' + S.pdf));
+        if (r.ok) await pkSrcSet(p.id, new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }));
+      } catch (e) {}
+    }
+    pkSplit[p.id] = true;   /* والكتابُ ظاهرٌ بجانب الملخّص: نقرُ مجلدٍ يقلّبه ويُطلع تظليلاتِه */
+    save();
+    toast('أُضيفت المساهمة في ' + S.code);
+    marketReel.focusCode(S.code);
+    setTimeout(() => { showMarketContribs(S.code); showCmTab('cards'); }, 700);
+  }
   function bootExamLink() {
     const m = /^#exam=(.+)$/.exec(location.hash || '');
     if (!m) return;
@@ -40363,11 +40772,13 @@ void main() {
   renderTerms();
   bootAddCard();
   bootExamLink();
+  bootSeed();
   /* ===== ورابطُ الاختبار يُلتقط في الحالين =====
      إن فُتح في لسانٍ جديدٍ أُقلع الموقعُ فقرأه الإقلاعُ أعلاه. وإن لُصق في لسانٍ
      **مفتوحٍ أصلًا** فلا إقلاعَ ولا تحميل — المتصفّحُ يبدّل الشقَّ وحدَه ويُطلق
      ‎hashchange‎ لا غير. وهذه كانت علّةَ «لا يعمل»: الرابطُ صحيحٌ ولا أحدَ يقرؤه */
   window.addEventListener('hashchange', bootExamLink);
+  window.addEventListener('hashchange', bootSeed);
 
   /* ---------- شريط تمرير مخصّص (#xscroll): عنصر DOM نبنيه ونتحكّم في جهته حسب اللغة —
      مفصول عن المتصفح، فيتغيّر مكانه فعلًا (يسار عربي/يمين إنجليزي) عبر html[data-lang] ---------- */

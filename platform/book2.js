@@ -84,10 +84,14 @@ function patch(material, withNormal, nsign, paper) {
 }
 
 /* حُبيباتُ الورق: ضجيجٌ بثلاث طبقاتٍ وأليافٌ قصيرة — نسيجٌ نولّده لا صورة */
+/* بياناتُه تُحسب مرّةً وتُعاد لكلّ كتاب (كانت ربعَ زمن بناء الكتاب) — والنسيجُ نفسُه لكلّ محرّكٍ لأنّه يُفرَّغ معه */
+let GRAIN = null;
 function grainTexture(THREE) {
-  const N = 256, d = new Uint8Array(N * N * 4);
+  const N = 128;   /* بلاطةٌ أصغرُ تتكرّر ضعفين (‎uGrainRep‎): الحُبيبةُ نفسُها بربع الحساب */
+  if (GRAIN) return grainTex(THREE, GRAIN, N);
+  const d = new Uint8Array(N * N * 4);
   let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  const oct = [[8, .35], [32, .3], [128, .35]].map(([n, w]) => { const g = new Float32Array(n * n); for (let i = 0; i < g.length; i++) g[i] = rnd(); return { n, w, g }; });
+  const oct = [[4, .35], [16, .3], [64, .35]].map(([n, w]) => { const g = new Float32Array(n * n); for (let i = 0; i < g.length; i++) g[i] = rnd(); return { n, w, g }; });
   const v = new Float32Array(N * N);
   for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
     let s = 0;
@@ -99,11 +103,15 @@ function grainTexture(THREE) {
     }
     v[y * N + x] = s;
   }
-  for (let k = 0; k < 420; k++) {
-    let x = rnd() * N, y = rnd() * N; const a = rnd() * Math.PI, L = 4 + rnd() * 10, dv = (rnd() - 0.3) * 0.25;
+  for (let k = 0; k < 105; k++) {
+    let x = rnd() * N, y = rnd() * N; const a = rnd() * Math.PI, L = 2 + rnd() * 5, dv = (rnd() - 0.3) * 0.25;
     for (let t = 0; t < L; t++) { const i = ((Math.floor(y) + N) % N) * N + ((Math.floor(x) + N) % N); v[i] += dv; x += Math.cos(a); y += Math.sin(a); }
   }
   for (let i = 0; i < N * N; i++) { const c = Math.max(0, Math.min(255, v[i] * 255)); d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = c; d[i * 4 + 3] = 255; }
+  GRAIN = d;
+  return grainTex(THREE, d, N);
+}
+function grainTex(THREE, d, N) {
   const t = new THREE.DataTexture(d, N, N); t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.magFilter = THREE.LinearFilter; t.minFilter = THREE.LinearMipmapLinearFilter; t.generateMipmaps = true; t.needsUpdate = true;
   return t;
@@ -144,6 +152,8 @@ export function createBook2(THREE, host, cfg) {
   const STACK = ONE ? 0.0008 : 0.0016;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  /* لا يُسأل المشغّلُ عن أخطاء المظلّلات بعد بنائها: السؤالُ يُوقف الصفحةَ حتى ينتهي البناء (نصفُ زمن أوّل رسمة) — والمظلّلاتُ ثابتةٌ مجرَّبة */
+  renderer.debug.checkShaderErrors = false;
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -210,7 +220,7 @@ export function createBook2(THREE, host, cfg) {
       const mt = patch(new THREE.MeshStandardMaterial({ side, roughness: isCover ? 0.7 : 0.86, metalness: 0, color: '#ffffff' }), true, -1, true);
       mt.userData.u = u; mt.userData.mirror = mirror;
       mt.userData.x = { uThru: { value: blank }, uThruFlip: { value: flipThru }, uThruAmt: { value: isCover ? 0 : ONE ? 0.11 : 0.07 },
-        uGrain: { value: grain }, uGrainRep: { value: new THREE.Vector2(3, 3 * AR) }, uGrainAmt: { value: isCover ? 0.04 : 0.07 },
+        uGrain: { value: grain }, uGrainRep: { value: new THREE.Vector2(6, 6 * AR) }, uGrainAmt: { value: isCover ? 0.04 : 0.07 },
         uPaper: { value: new THREE.Vector3(1, 1, 1) } };
       return mt;
     };
@@ -649,6 +659,7 @@ export function createBook2(THREE, host, cfg) {
   const T = { follow: 0.07, settle: 0.12, flip: 0.8, hoverLift: 0.035, fan: 0.05 };
   function frame(now) {
     raf = requestAnimationFrame(frame);
+    if (!compiled) { last = now; return; }
     /* نُقل الكتابُ بين الرسمات فانفصل لحظةً — ويُطفأ إن طال انفصالُه (رُفع الكتاب) */
     if (!el.isConnected) { if (!goneAt) goneAt = now; else if (now - goneAt > 6000) dispose(); return; }
     goneAt = 0;
@@ -750,8 +761,18 @@ export function createBook2(THREE, host, cfg) {
     if (idle && !wasIdle && cfg.onIdle) cfg.onIdle();
     if (!idle && wasIdle && cfg.onBusy) cfg.onBusy();
   }
+  /* ===== المظلّلاتُ تُبنى في الخلفية قبل أوّل رسمة (‎compileAsync‎) =====
+     أوّلُ رسمةٍ كانت تبني كلَّ مظلّلٍ وتنتظره فتُجمّد الصفحة (~نصف ثانيةٍ في جهازٍ متوسّط). فتُبنى الآن والهيكلُ ما زال فوق الكتاب،
+     وكلُّ ما في المشهد ظاهرٌ لحظةَ الطلب (أوراقُ القراءة المخفيّة والغلاف) فيُبنى مظلّلُه معه، ثمّ يعود كما كان */
+  let compiled = !renderer.compileAsync;
+  const compileP = compiled ? Promise.resolve() : (() => {
+    const hid = []; scene.traverse(o => { if (!o.visible) { hid.push(o); o.visible = true; } });
+    let p; try { p = renderer.compileAsync(scene, camera); } catch (e) { p = Promise.resolve(); }
+    for (const o of hid) o.visible = false;
+    return Promise.resolve(p).catch(() => {}).then(() => { compiled = true; needs = true; });
+  })();
   raf = requestAnimationFrame(frame);
-  frameNow = () => { if (el.isConnected) { renderer.render(scene, camera); needs = false; } else needs = true; };
+  frameNow = () => { if (el.isConnected && compiled) { renderer.render(scene, camera); needs = false; } else needs = true; };
 
   const cosE = k => 0.5 - 0.5 * Math.cos(Math.PI * k);
   /* الإفلاتُ يحمل سرعةَ اليد: منحنى ‎Hermite‎ يبدأ بميلٍ = السرعة × المدّة، وينتهي ساكنًا */
@@ -1008,7 +1029,7 @@ export function createBook2(THREE, host, cfg) {
       }
       return out;
     },
-    ready: () => Promise.all([...pageTex.values()].map(t => t.userData.ready)),
+    ready: () => Promise.all([compileP, ...[...pageTex.values()].map(t => t.userData.ready)]),
     /* لقطةٌ للّوحة (للشبح الذي يخرج به الكتابُ في القسمة) — تُرسم الآن فتُقرأ قبل أن يُمسح المخزن */
     snapshot(cv) { renderer.render(scene, camera); const c = cv.getContext('2d'); cv.width = el.width; cv.height = el.height; c.drawImage(el, 0, 0); },
     sheets,
