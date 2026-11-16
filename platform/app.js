@@ -10930,18 +10930,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const gr = g.createLinearGradient(W / 2 - dx * L / 2, H / 2 - dy * L / 2, W / 2 + dx * L / 2, H / 2 + dy * L / 2);
       cols.forEach((col, n) => gr.addColorStop(cols.length > 1 ? n / (cols.length - 1) : 0, col)); g.fillStyle = gr; g.fillRect(0, 0, W, H);
       /* النصوص: كلُّ سطرٍ بموضعه وخطّه ولونه وشفافيّته كما في الوجه */
+      /* النصُّ أصغرُ ممّا في الرفّ (‎TS‎): الغلافُ كبيرٌ فلا يُملأ — يُصغَّر هو وبُعدُه عن الوسط معًا فيبقى ترتيبُه (طلبُ صاحب الموقع) */
+      const TS = .62, cyF = (fr.height * k) / 2 + oy;
       g.textAlign = 'center'; g.textBaseline = 'middle';
       for (const e of texts) {
-        const cs = getComputedStyle(e), fs = parseFloat(cs.fontSize) * k, lh = (parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2) * k;
+        const cs = getComputedStyle(e), fs = parseFloat(cs.fontSize) * k * TS, lh = (parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2) * k * TS;
         g.font = `${cs.fontStyle === 'italic' ? '' : ''}${cs.fontWeight} ${fs}px ${cs.fontFamily}`;
         g.fillStyle = cs.color; g.globalAlpha = +cs.opacity; g.direction = cs.direction;
-        if ('letterSpacing' in g) g.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : (parseFloat(cs.letterSpacing) * k) + 'px';
+        if ('letterSpacing' in g) g.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : (parseFloat(cs.letterSpacing) * k * TS) + 'px';
         /* الأسطرُ كما لفّها المتصفّح: مستطيلاتُ النصّ سطرًا سطرًا */
         const rg = document.createRange(); rg.selectNodeContents(e);
         const lines = [...rg.getClientRects()].filter(r => r.width > 0), words = e.textContent.trim().split(/\s+/), out = [];
-        if (lines.length > 1) { let cur = ''; const maxW = Math.max(...lines.map(r => r.width)) * k * 1.02; for (const w of words) { const t = cur ? cur + ' ' + w : w; if (cur && g.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t; } out.push(cur); }
+        if (lines.length > 1) { let cur = ''; const maxW = Math.max(...lines.map(r => r.width)) * k * TS * 1.02; for (const w of words) { const t = cur ? cur + ' ' + w : w; if (cur && g.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t; } out.push(cur); }
         else out.push(e.textContent.trim());
-        const er = e.getBoundingClientRect(), cx = (er.left + er.width / 2 - fr.left) * k, top = (er.top - fr.top) * k + oy;
+        const er = e.getBoundingClientRect(), cx = (er.left + er.width / 2 - fr.left) * k, top = cyF + ((er.top - fr.top) * k + oy - cyF) * TS;
         out.forEach((t, n) => g.fillText(t, cx, top + lh * (n + .5)));
       }
       g.globalAlpha = 1;
