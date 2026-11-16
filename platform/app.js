@@ -10261,6 +10261,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      أبناءه، واللونُ في أيقونة المجلد وفي حلقة المختار وحدهما. والزجاجُ نفسُه — حافّتُه
      المضيئةُ مع الضوء، وانحناءُ سطحه، وظلُّه الناعم — ‎CSS‎ على العنصر نفسِه (ROADMAP-GLASS-STRIP ق٣):
      مصدرٌ واحدٌ للحقيقة، فما يُرى هو ما يُحوَّم عليه ويُنقر */
+  /* وجهُ المجلد في الشريط: إيموجيه إن اختير له، وإلّا رمزُ المجلد بلونه. وفي التحرير يصير زرًّا يفتح «لون المجلد ووجهه» — القائمةَ نفسَها
+     التي لمجلدات بنوك الأسئلة (‎fmn‎)، وتُحفظ في مجلدات المساهمة (‎data-pkface‎) */
+  const pkFace = (k, ed) => {
+    const at = ed && k.id ? ` cx-face pk-fic" data-id="${esc(k.id)}" data-pkface="1" role="button" tabindex="0" aria-haspopup="true" title="${esc(T().ffTitle)}" aria-label="${esc(T().ffTitle)}` : '';
+    const u = k.em && emURL(k.em);
+    return u ? `<img class="pk-fi pk-fem${at}" src="${u}" alt="">` : pkFi(k.c).replace('class="pk-fi"', `class="pk-fi${at}"`).replace(' aria-hidden="true"', at ? '' : ' aria-hidden="true"');
+  };
   const pkFi = c => '<svg class="pk-fi" viewBox="0 0 24 24" aria-hidden="true"' + (c ? ' style="color:' + c + '"' : '') + '><path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h4.3c.66 0 1.3.26 1.77.73L11.9 6h7.6A2.5 2.5 0 0 1 22 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5z"/></svg>';
   /* انحناءاتٌ متّحدةُ المركز: اللوحُ نصفُ قطره نصفُ قطرِ ما في داخله زائدًا حشوتَه (٦)،
      فتجري الحوافُّ متوازية. ويُحسب من الأسفل: لوحٌ لا يتّسع فيه شيء ٢٤ (١٨ للكبسولة + ٦)،
@@ -10360,7 +10367,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() ? pkFi(k.c) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -10384,13 +10391,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      دائمًا لَما أُمسك أبدًا */
   let pkNaming = null;
   const pkKidsAll = f => (f.ch || []).filter(x => x.t === 'f')
-    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', c: folderColor(x), kids: pkKidsAll(x) }));
+    .map(x => ({ id: x.id, name: x.name || T().pkTitlePh, raw: x.name || '', c: folderColor(x), em: x.em, kids: pkKidsAll(x) }));
   function pgFoldsAll(deck, ed) {
     const out = [];
     /* «الجذر» لا يظهر إلّا لبطائقَ خارج المجلدات (كما في ورقة الملخّص) — لا مَهبطًا للسحب:
        الإخراجُ إلى الطبقة العليا يكون بالإفلات على **فراغ الشريط** نفسِه (بطلب صاحب الموقع) */
     if ((deck || []).some(n => n.t !== 'f')) out.push({ id: '', name: T().shRoot, kids: [] });
-    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', c: folderColor(f), kids: pkKidsAll(f) }));
+    (deck || []).filter(n => n.t === 'f').forEach(f => out.push({ id: f.id, name: f.name || T().pkTitlePh, raw: f.name || '', c: folderColor(f), em: f.em, kids: pkKidsAll(f) }));
     return out;
   }
   /* مربّعاتُ المختبر في التحرير: المختارُ وجهُه حقلُ اسمٍ (والجذرُ لا يُسمّى — ليس مجلدًا)،
@@ -10402,7 +10409,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : pkFi(k.c) + '<span class="pg-nm">' + esc(k.name) + '</span>';
+        : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>';
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
@@ -10901,25 +10908,51 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, cv: PK_COV_V, ts: Date.now() };
     pkSrcMark(id); save(); renderCmSection();
   }
-  /* ===== «غلاف المادة»: الغلافُ المرسومُ الذي يلبسه الموقعُ مادّةً بلا غلاف (‎bookFace‎ و‎.bk--ph .bkface‎) =====
-     اسمُ القسم ورقمُ المادة على تدرّج البترولي — يُرسم بنسبة صفحات الكتاب ويُحفظ صورةَ غلافه كالمرفوعة، فيأخذ الكتابُ لونَه منه */
+  /* ===== «غلاف المادة»: نسخةٌ مصوَّرةٌ من الغلاف المرسوم الذي يلبسه الموقعُ مادّةً بلا غلاف (‎bookHTML‎ في الرفّ) =====
+     لا يُعاد تصميمُه: يُبنى وجهُه نفسُه في الصفحة مخفيًّا بمقاس الرفّ، وتُقرأ منه ألوانُه وخطوطُه ومواضعُ نصوصه كما رسمها المتصفّح،
+     ثمّ تُرسم بأعيانها مكبَّرةً على صورةٍ بنسبة صفحات الكتاب — فتأتي نسخةً منه، وتتبعه إن تبدّل تصميمُه */
+  async function courseCoverCanvas(code, ar, W = 1000) {
+    const host = document.createElement('div');
+    host.style.cssText = 'position:fixed;left:-10000px;top:0;height:114px;pointer-events:none;visibility:hidden';
+    host.innerHTML = bookHTML(code, '', {});
+    host.querySelectorAll('.ribbon').forEach(x => x.remove());   /* شريطُ النوع للرفّ وحده */
+    document.body.appendChild(host);
+    try {
+      const face = host.querySelector('.bkface'); if (!face) return null;
+      const fr = face.getBoundingClientRect(); if (!fr.width) return null;
+      const fcs = getComputedStyle(face), texts = [...face.children].filter(e => (e.tagName === 'B' || e.tagName === 'I') && e.textContent.trim());
+      await Promise.all(texts.map(e => { const c = getComputedStyle(e); return document.fonts.load(`${c.fontWeight} ${c.fontSize} ${c.fontFamily}`, e.textContent).catch(() => {}); }));
+      const H = Math.round(W / ar), c = document.createElement('canvas'); c.width = W; c.height = H;
+      const g = c.getContext('2d'), k = W / fr.width, oy = (H - fr.height * k) / 2;
+      /* الخلفيّة: تدرّجُ الوجه نفسُه (زاويتُه ولوناه من الأنماط المحسوبة)، ممدودًا على الصورة كلّها */
+      const bg = fcs.backgroundImage, deg = +((bg.match(/(-?[\d.]+)deg/) || [])[1] || 180), cols = bg.match(/rgba?\([^)]+\)/g) || [fcs.backgroundColor];
+      const a = deg * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a), L = Math.abs(W * dx) + Math.abs(H * dy);
+      const gr = g.createLinearGradient(W / 2 - dx * L / 2, H / 2 - dy * L / 2, W / 2 + dx * L / 2, H / 2 + dy * L / 2);
+      cols.forEach((col, n) => gr.addColorStop(cols.length > 1 ? n / (cols.length - 1) : 0, col)); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+      /* النصوص: كلُّ سطرٍ بموضعه وخطّه ولونه وشفافيّته كما في الوجه */
+      g.textAlign = 'center'; g.textBaseline = 'middle';
+      for (const e of texts) {
+        const cs = getComputedStyle(e), fs = parseFloat(cs.fontSize) * k, lh = (parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2) * k;
+        g.font = `${cs.fontStyle === 'italic' ? '' : ''}${cs.fontWeight} ${fs}px ${cs.fontFamily}`;
+        g.fillStyle = cs.color; g.globalAlpha = +cs.opacity; g.direction = cs.direction;
+        if ('letterSpacing' in g) g.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : (parseFloat(cs.letterSpacing) * k) + 'px';
+        /* الأسطرُ كما لفّها المتصفّح: مستطيلاتُ النصّ سطرًا سطرًا */
+        const rg = document.createRange(); rg.selectNodeContents(e);
+        const lines = [...rg.getClientRects()].filter(r => r.width > 0), words = e.textContent.trim().split(/\s+/), out = [];
+        if (lines.length > 1) { let cur = ''; const maxW = Math.max(...lines.map(r => r.width)) * k * 1.02; for (const w of words) { const t = cur ? cur + ' ' + w : w; if (cur && g.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t; } out.push(cur); }
+        else out.push(e.textContent.trim());
+        const er = e.getBoundingClientRect(), cx = (er.left + er.width / 2 - fr.left) * k, top = (er.top - fr.top) * k + oy;
+        out.forEach((t, n) => g.fillText(t, cx, top + lh * (n + .5)));
+      }
+      g.globalAlpha = 1;
+      return c;
+    } finally { host.remove(); }
+  }
   async function pkSrcCovGen(id) {
-    const code = baseOf(cmCode || ''), sp = code.indexOf(' '), dept = sp < 0 ? code : code.slice(0, sp), num = sp < 0 ? '' : code.slice(sp + 1);
-    const lab = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept, ar = +(pkSrcMeta(id) || {}).ar || .7;
-    try { await document.fonts.load('700 40px "KFUPM Display"'); } catch (e) {}
-    const W = 1000, H = Math.round(W / ar), c = document.createElement('canvas'); c.width = W; c.height = H;
-    const g = c.getContext('2d'), a = 150 * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a), L = Math.abs(W * dx) + Math.abs(H * dy);
-    const gr = g.createLinearGradient(W / 2 - dx * L / 2, H / 2 - dy * L / 2, W / 2 + dx * L / 2, H / 2 + dy * L / 2);
-    gr.addColorStop(0, '#3a6f76'); gr.addColorStop(1, '#22454b'); g.fillStyle = gr; g.fillRect(0, 0, W, H);
-    const F = "'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif", ls = W * .15, ns = W * .29;   /* نسبُ الرفّ: ‎14px‎ و‎27px‎ على وجهٍ عرضُه ‎~95px‎ */
-    g.fillStyle = '#eef3f3'; g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.globalAlpha = .9; g.direction = state.lang === 'ar' ? 'rtl' : 'ltr'; g.font = `700 ${ls}px ${F}`;
-    let fs = ls; while (fs > 20 && g.measureText(lab).width > W * .84) { fs -= 4; g.font = `700 ${fs}px ${F}`; }
-    g.fillText(lab, W / 2, H / 2 - (num ? ns * .42 : 0));
-    g.globalAlpha = 1; g.direction = 'ltr'; g.font = `700 ${ns}px ${F}`;
-    if (num) g.fillText(num, W / 2, H / 2 + ls * .55);
+    const code = cmCode || '', c = await courseCoverCanvas(code, +(pkSrcMeta(id) || {}).ar || .7);
+    if (!c) return;
     const blob = await new Promise(r => c.toBlob(r, 'image/png'));
-    if (blob) await pkSrcCovSet(id, new File([blob], (code || 'cover') + '.png', { type: 'image/png' }));
+    if (blob) await pkSrcCovSet(id, new File([blob], (baseOf(code) || 'cover') + '.png', { type: 'image/png' }));
   }
   /* ===== لونُ الكتاب من غلافه الفعليّ — مصدرٌ واحد =====
      الغلافُ الذي على الكتاب إمّا صورةٌ مرفوعة (أو «غلاف المادة») وإمّا صفحةٌ من الملفّ (‎covPg‎) — ويُقرأ اللونُ منه هو بـ‎covPick‎.
@@ -15000,7 +15033,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const closeFolderMenu = () => {
     if (!fmn) return;
     if (fmn.el && fmn.el.parentNode) fmn.el.parentNode.removeChild(fmn.el);
+    const pk = !!fmn.deck;
     fmn = null;
+    if (pk) renderCmSection();   /* وما في المساهمة من ألوان المجلد (حلقةُ المختار والشجرة) يُرسم بلونه الجديد */
     fmnRoom(0);   /* والذيلُ يُطوى: توسعةٌ بلا قائمةٍ فراغٌ في قاع الصفحة */
   };
   /* ============================================================
@@ -15013,16 +15048,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فيُكتب الديكُ **في القائمة عند ولادتها** (من موضع زرّها) لا يُستنتج عند كلّ قراءة:
      الشاشةُ قد تتبدّل تحتها، والوسمُ لا يتبدّل.
      ============================================================ */
-  const fmnDeck = () => (fmn && fmn.road) ? roadOf(nookEntry, true) : edPack().deck;
+  const fmnDeck = () => (fmn && fmn.deck) ? fmn.deck() : (fmn && fmn.road) ? roadOf(nookEntry, true) : edPack().deck;
   function openFolderMenu(id, anchor) {
     closeFolderMenu();
     /* والوسمُ يُقرأ من الزرّ قبل أن تُبنى القائمة — فتُقرأ به هي نفسُها */
     const road = !!(anchor && anchor.closest && anchor.closest('#nk-road'));
-    const r = findNode(road ? roadOf(nookEntry, true) : edPack().deck, id);
+    /* ومن شريط مجلدات المساهمة: مجلداتُها هي (‎data-pkid‎ على الشريط) */
+    const strip = anchor && anchor.dataset && anchor.dataset.pkface && anchor.closest('.pk-fstrip'), pid = strip && strip.dataset.pkid;
+    const deck = pid ? () => (((hlPost(pid) || {}).data || {}).deck || []) : null;
+    const r = findNode(deck ? deck() : road ? roadOf(nookEntry, true) : edPack().deck, id);
     if (!r) return;
     document.body.insertAdjacentHTML('beforeend', fmnHTML(r.n));
     const el = document.body.lastElementChild;
-    fmn = { id, el, road, tab: 'col', box: fmnBoxOf(anchor) };
+    fmn = { id, el, road, deck, tab: 'col', box: fmnBoxOf(anchor) };
     fmnPlace(el, anchor);
     fmnFit(el, anchor);
     fmnClip();
@@ -15036,6 +15074,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const btn = ffbOf(id);
     if (!btn) return;
     const col = folderColor(r.n);
+    /* وجهُ الشريط: يُستبدل بوجهه الجديد (إيموجي أو رمزٌ بلونه) */
+    if (btn.dataset.pkface) { btn.outerHTML = pkFace({ id, c: col, em: r.n.em }, true); return; }
     btn.style.color = col;
     btn.innerHTML = folderFace(r.n);
     const wrap = btn.closest('.x3-fwrap');
@@ -26266,7 +26306,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       return;
     }
-    if (e.target.closest('#cm-body .pk-fnm')) return;   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
+    if (e.target.closest('#cm-body .pk-fnm, #cm-body .pk-fic')) return;   /* ووجهُ المجلد يفتح قائمتَه لا يختاره */   /* حقلُ الاسم يُكتب فيه — لا يُطوى ولا يُختار */
     /* نقرُ اسمِ المختار في المختبر: يُفتح حقلُ تسميته (والجذرُ لا يُسمّى) */
     /* والمجلدُ الذي فيه مجلداتٌ نقرُه يفتح ويُغلق (بطلب صاحب الموقع)، فتسميتُه بالنقر المزدوج */
     const nm = e.target.closest('#cm-body .pk-fstrip--ed .pg-box.is-sel > .pg-face:not([aria-expanded]) > .pg-nm');

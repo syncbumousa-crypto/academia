@@ -16619,7 +16619,7 @@ html[data-theme="dark"] .pk-src__btn { color: #e1c172; background: rgba(225, 193
   cursor: text;
   background: transparent; color: inherit; font: inherit; font-weight: 700; outline: none;
 }
-.pk-fnm:focus { border-bottom-color: #c9a25c; }
+.pk-fnm:focus { border-bottom-color: transparent; }   /* بلا خطٍّ تحت الاسم وهو يُكتب (طلبُ صاحب الموقع) */
 .pk-fnm::placeholder { color: inherit; opacity: .45; font-weight: 400; }
 
 /* السحب: المربّعُ الممسوكُ يخفت، والهدفُ الصالحُ يُطوَّق بذهبٍ متقطّع */
@@ -18446,3 +18446,8 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 @keyframes hl-call-row { 0%, 25% { background-color: color-mix(in srgb, var(--hlc) 45%, transparent); } 100% { background-color: transparent; } }
 /* «غلاف المادة» تحت «رفع صورة» مباشرة: بلا فاصلٍ ثانٍ */
 .psp-up.psp-gen { border-top: 0 !important; margin-top: 0 !important; padding-top: 4px !important; }
+/* وجهُ المجلد في شريط المساهمة (التحرير): زرٌّ يفتح «لون المجلد ووجهه» كمجلدات بنوك الأسئلة */
+.pk-fic { cursor: pointer; border-radius: 4px; transition: transform .15s ease, filter .15s ease; }
+.pk-fic:hover { transform: scale(1.12); filter: brightness(1.1); }
+.pk-fem { object-fit: contain; }
+.pk-fic:focus:not(:focus-visible) { outline: none; }
