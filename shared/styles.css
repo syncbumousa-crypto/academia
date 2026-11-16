@@ -417,6 +417,9 @@ html[data-lang="en"] .crow { direction: ltr; }
   border-radius: 1px var(--r) var(--r) 1px;
   transform: translateZ(calc(var(--thk) * -1));
   box-shadow: 0 8px 16px rgba(13, 42, 72, .3);
+  /* وراءَ الوجه في ترتيب الرسم أيضًا: المتصفّحُ قد لا يفرز الوجهَ المصوَّر (‎.bkface--img‎ موضوعٌ بطبقته) مع هذا السطح بعمقه،
+     فيُرسم الغلافُ الخلفيّ فوق شريطٍ منه — شريطٌ داكنٌ على يسار الغلاف يبدو كتابًا لم يكتمل تحميلُه (طلبُ صاحب الموقع) */
+  z-index: -1;
 }
 /* مرور الماوس على البطاقة يعتدل الكتاب نحو الناظر */
 .crow:hover .bk { transform: rotateY(7deg); }
