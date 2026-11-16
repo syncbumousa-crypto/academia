@@ -10830,7 +10830,7 @@ html[data-theme="dark"] #jri-body .x3 .is-sel > .vt-grab--ro:hover { color: #0e1
    فبينهما **تناوبٌ موقوت**: عند الدخول يخفت الخطُّ أوّلًا ثمّ يظهر الطوق بعده بـ‎.14s‎،
    وعند الخروج ينسحب الطوقُ أوّلًا ثمّ يعود الخطُّ بعده بـ‎.12s‎ — فلا يجتمعان لحظةً واحدة.
    والوالدُ يُختار من ابنه بـ‎:has()‎: الخطُّ على الغلاف والمرورُ على الزرّ، ولا سبيل غيرَه */
-button.x3-fic { padding: 0; background: none; border: 0; cursor: pointer; }
+button.x3-fic, button.x3-fic.cx-face:hover { padding: 0; background: none; border: 0; cursor: pointer; }   /* ولا مربّعَ خلفها: ‎.cx-face:hover‎ كان يلوّنها تحت الطوق (طلبُ صاحب الموقع) */
 button.x3-fic::after {
   content: ''; position: absolute; inset: -4px; border-radius: 6px;
   border: 1px dashed var(--u-in-line); opacity: 0; transition: opacity .14s ease;
@@ -18452,10 +18452,12 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 /* «غلاف المادة» تحت «رفع صورة» مباشرة: بلا فاصلٍ ثانٍ */
 .psp-up.psp-gen { border-top: 0 !important; margin-top: 0 !important; padding-top: 4px !important; }
 /* وجهُ المجلد في شريط المساهمة (التحرير): زرٌّ يفتح «لون المجلد ووجهه» كمجلدات بنوك الأسئلة */
-.pk-fic { cursor: pointer; border-radius: 4px; transition: transform .15s ease, filter .15s ease; }
-.pk-fic:hover { transform: scale(1.12); filter: brightness(1.1); }
+.pk-fic { cursor: pointer; border-radius: 6px; outline: 1px dashed transparent; outline-offset: 4px; transition: outline-color .14s ease; }
+/* بالمرور: طوقٌ مرقّطٌ يظهر بعد ‎.14s‎ كطوق أيقونات البنك (‎button.x3-fic::after‎) — لا تكبيرَ ولا مربّعَ خلفها (طلبُ صاحب الموقع).
+   والأيقونةُ ‎svg‎ أو ‎img‎ لا تحمل ‎::after‎، فالطوقُ ‎outline‎ يتبع انحناءها */
+.pk-fic:hover, .pk-fic:focus-visible, .pk-fic.cx-face:hover { background: none; outline-color: var(--u-in-line); transition-delay: .14s; }
 .pk-fem { object-fit: contain; }
-.pk-fic:focus:not(:focus-visible) { outline: none; }
+.pk-fic:focus:not(:focus-visible):not(:hover) { outline-color: transparent; }
 /* صورةُ الغلاف تظهر حين تكتمل لا وهي تصل (‎bookHTML‎) — والوجهُ المرسومُ تحتها حتى ذلك */
 .bk .bkface--img > img { opacity: 0; transition: opacity .22s ease; aspect-ratio: auto .7; }   /* وقبل أن يُعرف مقاسُها: بنسبة المرسوم، فلا ينطوي الكتابُ إلى عرضٍ صفرٍ يُخفي المرسومَ تحته */
 .bk .bkface--img > img.is-in { opacity: 1; }
