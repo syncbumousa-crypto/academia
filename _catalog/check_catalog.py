@@ -31,7 +31,8 @@ else:
         cat = json.load(r)
 
 bad = collections.defaultdict(list)
-tags = [t['id'] for t in cat['tags']]
+NON_MAJOR = {'pyp'}                  # «السنة التحضيرية»: وسمٌ قبل التخصّصات، لا تخصّص
+tags = [t['id'] for t in cat['tags'] if t['id'] not in NON_MAJOR]
 per = collections.defaultdict(collections.Counter)
 common_in = collections.defaultdict(set)
 
@@ -56,6 +57,7 @@ for c in cat['courses']:
             bad['2 common course typed college'].append(f"{c['code']} / {t}")
 
 for t in tags:
+    if t in NON_MAJOR: continue
     n = sum(per[t].values())
     if not n:
         bad['3 empty major'].append(t)

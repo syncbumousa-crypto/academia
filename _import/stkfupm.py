@@ -2173,10 +2173,161 @@ DOCTORS = {
   'stk-dr-f185295': 'Dr. Sagheer Ahmed Sagheer Onaizi',
   'stk-dr-f186281': 'Dr. Moayad Alnammi',
   'stk-dr-f187902': 'Dr. Ammar Alzaydi',
+  # ومدرّسو موادَّ أخرى بأسماء صفحاتهم (والمعرّفُ رقمُ صفحته)
+  'stk-dr-f68331': 'أ.عادل النموري',
+  'stk-dr-f68336': 'Dr. H. Abu-Hilal',
+  'stk-dr-f68498': 'Dr. Mohammed Al-Solami',
+  'stk-dr-f68843': 'أ. تشارلز يندورك',
+  'stk-dr-f70508': 'أ. هيونج شين',
+  'stk-dr-f74184': 'Dr. John Allen',
+  'stk-dr-f99457': 'Dr. Ahmed Baqais',
+  'stk-dr-f115380': 'Dr. Fazal Ur-Rehman',
+  'stk-dr-f115389': 'Dr. Muhammad Akhlaq',
+  'stk-dr-f118593': 'Dr. Akhtar Hussain',
+  'stk-dr-f172587': 'Dr. Giacinto Genco',
+  # ومدرّسو موادَّ أخرى بأسماء صفحاتهم (والمعرّفُ رقمُ صفحته)
+  'stk-dr-f68392': 'Dr. Ahmad Al-Zoubi',
+  'stk-dr-f68394': 'د. محمد رضا عليميه',
+  'stk-dr-f68407': 'Dr. Balarabe Yushau',
+  'stk-dr-f68415': 'Dr. Elyas Al-Shawish',
+  'stk-dr-f68468': 'Dr. Sayed Omar',
+  'stk-dr-f68525': 'Dr. Denis Christopher Kearney',
+  'stk-dr-f68527': 'Dr. John Ross Macleod',
+  'stk-dr-f68529': 'Dr. David Harold Moore',
+  'stk-dr-f68550': 'Dr. John Armstrong',
+  'stk-dr-f68555': 'Dr. B Demir',
+  'stk-dr-f68556': 'Dr. John Martin Carey',
+  'stk-dr-f68595': 'Dr. Sarel Van Rooy Snyman',
+  'stk-dr-f68614': 'Dr. Ian Davison',
+  'stk-dr-f68620': 'Dr. Keith Arnolds',
+  'stk-dr-f68648': 'Dr. Husam Sharqawi',
+  'stk-dr-f68675': 'Dr. Khaled Saifullah',
+  'stk-dr-f80396': 'Dr. I Naji',
+  'stk-dr-f82373': 'Dr. A Elghanmi',
+  'stk-dr-f94893': 'Dr. Q Imam',
+  'stk-dr-f98615': 'Dr. Hamoud A Dehwah',
+  'stk-dr-f118969': 'Dr. Nicholas Mann',
+  'stk-dr-f118976': 'Dr. Frederick Wallace',
+  'stk-dr-f118984': 'Dr. Craig Amison',
+  'stk-dr-f152153': 'Dr. Syed Khawar Kirmani',
+  'stk-dr-f172420': 'Dr. John Lauder',
+  'stk-dr-f172424': 'Dr. John Baker',
+  'stk-dr-f175314': 'Dr. Pedro Bichirey',
+  'stk-dr-f175784': 'Dr. Stephen Gill',
+  'stk-dr-f176962': 'Dr. Ahmed Abdelrazec',
+  'stk-dr-f176966': 'Dr. Mohammad Awad',
+  'stk-dr-f185998': 'Dr. Shiyam Azwar',
+  'stk-dr-f186013': 'Dr. Siraj Ehsun Rafique',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
 PICK_DOC = {
+  # ‏‎ENGL 001 / ENGL 002 / ENGL 003 / ENGL 004 / MATH 001 / MATH 002‎ — بالقاعدة نفسها (ردٌّ فيه بنودُ تقييم ويصرّح بالمادّة أوّلًا، بلا سبٍّ ولا دعاء)
+  'ENGL 001': [
+    (68527, 2, 'stk-dr-f68527'),
+    (68529, 24, 'stk-dr-f68529'),
+    (68614, 61, 'stk-dr-f68614'),
+    (172424, 3, 'stk-dr-f172424'),
+  ],
+  'ENGL 002': [
+    (68550, 7, 'stk-dr-f68550'),
+    (68556, 12, 'stk-dr-f68556'),
+    (118976, 4, 'stk-dr-f118976'),
+    (172420, 2, 'stk-dr-f172420'),
+    (172424, 4, 'stk-dr-f172424'),
+    (175784, 9, 'stk-dr-f175784'),
+    (185998, 2, 'stk-dr-f185998'),
+  ],
+  'ENGL 003': [
+    (68525, 11, 'stk-dr-f68525'),
+    (68595, 24, 'stk-dr-f68595'),
+    (118969, 10, 'stk-dr-f118969'),
+    (172424, 5, 'stk-dr-f172424'),
+  ],
+  'ENGL 004': [
+    (68595, 19, 'stk-dr-f68595'),
+    (68620, 11, 'stk-dr-f68620'),
+    (118984, 7, 'stk-dr-f118984'),
+    (175314, 2, 'stk-dr-f175314'),
+    (186013, 2, 'stk-dr-f186013'),
+  ],
+  'MATH 001': [
+    (68392, 69, 'stk-dr-f68392'),
+    (68394, 46, 'stk-dr-f68394'),
+    (68415, 66, 'stk-dr-f68415'), (68415, 70, 'stk-dr-f68415'), (68415, 75, 'stk-dr-f68415'), (68415, 77, 'stk-dr-f68415'),
+    (68468, 37, 'stk-dr-f68468'), (68468, 39, 'stk-dr-f68468'),
+    (68555, 70, 'stk-dr-f68555'), (68555, 71, 'stk-dr-f68555'), (68555, 75, 'stk-dr-f68555'), (68555, 77, 'stk-dr-f68555'),
+    (68675, 48, 'stk-dr-f68675'),
+    (80396, 47, 'stk-dr-f80396'), (80396, 57, 'stk-dr-f80396'),
+    (82373, 20, 'stk-dr-f82373'), (82373, 33, 'stk-dr-f82373'), (82373, 41, 'stk-dr-f82373'),
+    (94893, 18, 'stk-dr-f94893'),
+    (118561, 14, 'stk-dr-m118561'), (118561, 15, 'stk-dr-m118561'),
+    (118569, 13, 'stk-dr-m118569'),
+    (118572, 9, 'stk-dr-m118572'), (118572, 11, 'stk-dr-m118572'), (118572, 14, 'stk-dr-m118572'),
+    (172443, 3, 'stk-dr-m172443'), (172443, 5, 'stk-dr-m172443'), (172443, 9, 'stk-dr-m172443'), (172443, 19, 'stk-dr-m172443'),
+    (172444, 10, 'stk-dr-m172444'),
+    (172448, 9, 'stk-dr-m172448'), (172448, 10, 'stk-dr-m172448'), (172448, 13, 'stk-dr-m172448'), (172448, 14, 'stk-dr-m172448'), (172448, 15, 'stk-dr-m172448'), (172448, 16, 'stk-dr-m172448'),
+    (176962, 2, 'stk-dr-f176962'),
+    (176966, 6, 'stk-dr-f176966'), (176966, 8, 'stk-dr-f176966'), (176966, 11, 'stk-dr-f176966'), (176966, 12, 'stk-dr-f176966'),
+    (182904, 9, 'stk-dr-m182904'),
+  ],
+  'MATH 002': [
+    (68392, 53, 'stk-dr-f68392'),
+    (68407, 31, 'stk-dr-f68407'),
+    (68415, 65, 'stk-dr-f68415'), (68415, 69, 'stk-dr-f68415'), (68415, 71, 'stk-dr-f68415'), (68415, 76, 'stk-dr-f68415'),
+    (68468, 34, 'stk-dr-f68468'), (68468, 36, 'stk-dr-f68468'), (68468, 40, 'stk-dr-f68468'),
+    (68555, 76, 'stk-dr-f68555'),
+    (68648, 66, 'stk-dr-f68648'), (68648, 69, 'stk-dr-f68648'),
+    (68675, 44, 'stk-dr-f68675'), (68675, 47, 'stk-dr-f68675'),
+    (80396, 42, 'stk-dr-f80396'), (80396, 52, 'stk-dr-f80396'),
+    (82373, 42, 'stk-dr-f82373'), (82373, 43, 'stk-dr-f82373'), (82373, 44, 'stk-dr-f82373'), (82373, 45, 'stk-dr-f82373'), (82373, 46, 'stk-dr-f82373'),
+    (98615, 8, 'stk-dr-f98615'), (98615, 11, 'stk-dr-f98615'), (98615, 12, 'stk-dr-f98615'), (98615, 14, 'stk-dr-f98615'),
+    (118561, 13, 'stk-dr-m118561'), (118561, 16, 'stk-dr-m118561'), (118561, 18, 'stk-dr-m118561'), (118561, 19, 'stk-dr-m118561'), (118561, 21, 'stk-dr-m118561'), (118561, 22, 'stk-dr-m118561'),
+    (152153, 3, 'stk-dr-f152153'),
+    (172443, 7, 'stk-dr-m172443'), (172443, 8, 'stk-dr-m172443'), (172443, 13, 'stk-dr-m172443'), (172443, 15, 'stk-dr-m172443'),
+    (172444, 9, 'stk-dr-m172444'),
+    (172448, 6, 'stk-dr-m172448'), (172448, 7, 'stk-dr-m172448'), (172448, 8, 'stk-dr-m172448'), (172448, 12, 'stk-dr-m172448'),
+    (176962, 5, 'stk-dr-f176962'),
+    (176966, 2, 'stk-dr-f176966'), (176966, 3, 'stk-dr-f176966'), (176966, 4, 'stk-dr-f176966'), (176966, 7, 'stk-dr-f176966'), (176966, 13, 'stk-dr-f176966'), (176966, 14, 'stk-dr-f176966'),
+  ],
+  # ‏‎PE 001 / PE 002 / PYP 001 / PYP 002‎ — بالقاعدة نفسها (ردٌّ فيه بنودُ تقييم ويصرّح بالمادّة أوّلًا، بلا سبٍّ ولا دعاء)
+  'PE 001': [
+    (68326, 88, 'stk-dr-f68326'),
+    (68331, 54, 'stk-dr-f68331'),
+    (68843, 30, 'stk-dr-f68843'),
+    (70508, 18, 'stk-dr-f70508'),
+    (70879, 54, 'stk-dr-f70879'),
+    (74753, 45, 'stk-dr-f74753'),
+    (90478, 29, 'stk-dr-f90478'), (90478, 40, 'stk-dr-f90478'),
+    (148177, 16, 'stk-dr-f148177'),
+    (175801, 3, 'stk-dr-f175801'), (175801, 6, 'stk-dr-f175801'), (175801, 9, 'stk-dr-f175801'),
+    (176973, 2, 'stk-dr-f176973'), (176973, 3, 'stk-dr-f176973'), (176973, 7, 'stk-dr-f176973'),
+    (179144, 6, 'stk-dr-f179144'),
+  ],
+  'PE 002': [
+    (68326, 89, 'stk-dr-f68326'), (68326, 93, 'stk-dr-f68326'),
+    (68330, 47, 'stk-dr-f68330'), (68330, 50, 'stk-dr-f68330'),
+    (68336, 61, 'stk-dr-f68336'), (68336, 73, 'stk-dr-f68336'),
+    (70306, 25, 'stk-dr-f70306'),
+    (74184, 17, 'stk-dr-f74184'), (74184, 21, 'stk-dr-f74184'),
+    (80987, 21, 'stk-dr-f80987'),
+    (90478, 44, 'stk-dr-f90478'), (90478, 46, 'stk-dr-f90478'),
+    (175801, 5, 'stk-dr-f175801'), (175801, 10, 'stk-dr-f175801'), (175801, 14, 'stk-dr-f175801'),
+    (179144, 2, 'stk-dr-f179144'),
+  ],
+  'PYP 001': [
+    (68477, 29, 'stk-dr-f68477'),
+    (68489, 59, 'stk-dr-f68489'),
+    (68498, 3, 'stk-dr-f68498'),
+    (115380, 4, 'stk-dr-f115380'), (115380, 9, 'stk-dr-f115380'), (115380, 10, 'stk-dr-f115380'), (115380, 11, 'stk-dr-f115380'),
+    (172587, 3, 'stk-dr-f172587'), (172587, 5, 'stk-dr-f172587'), (172587, 9, 'stk-dr-f172587'), (172587, 11, 'stk-dr-f172587'),
+    (176974, 3, 'stk-dr-f176974'),
+  ],
+  'PYP 002': [
+    (99457, 14, 'stk-dr-f99457'), (99457, 16, 'stk-dr-f99457'),
+    (115389, 2, 'stk-dr-f115389'),
+    (118593, 10, 'stk-dr-f118593'),
+  ],
   # ‏‎ACCT 300 / ACCT 301 / ACCT 302 / ACCT 311 / ACCT 410 / AE 325 / AE 328 / AE 333 / ARE 322 / AS 201 / AS 289 / BUS 200 / CE 101 / CE 201 / CE 203 / CE 230 / CE 261 / CE 305 / CE 315 / CE 318 / CE 330 / CE 341 / CGS 392 / CHE 200 / CHE 204 / CHE 212 / CHE 300 / CHE 303 / CHE 304 / CHE 306 / CHE 309 / CHE 360 / CHE 401 / CHE 402 / CHE 405 / CHE 409 / CHE 470 / CHEM 212 / CHEM 311 / CHEM 312 / CHEM 321 / CHEM 324 / CIE 318 / COE 203 / COE 233 / COE 241 / COE 292 / COE 301 / COE 344 / COE 353 / EE 207 / EE 272 / EE 303 / EE 315 / EE 340 / EE 360 / EE 370 / EE 380 / EE 390 / FIN 315 / FIN 415 / FIN 425 / FIN 450 / HRM 301 / HRM 401 / ICS 321 / ICS 343 / ICS 353 / ICS 381 / ICS 410 / ISE 205 / ISE 303 / ISE 307 / ISE 315 / ISE 320 / ISE 321 / ISE 324 / ISE 391 / ISE 402 / ISE 405 / ISE 422 / ISE 470 / MATH 202 / MATH 225 / MATH 333 / MATH 371 / ME 201 / ME 203 / ME 204 / ME 210 / ME 218 / ME 301 / ME 302 / ME 303 / ME 311 / ME 315 / ME 316 / ME 322 / ME 323 / ME 401 / ME 411 / ME 412 / MGT 301 / MGT 310 / MGT 311 / MGT 440 / MGT 450 / MIS 101 / MIS 215 / MIS 250 / MIS 301 / MIS 311 / MIS 405 / OM 311 / PETE 101 / PETE 202 / PETE 206 / PETE 302 / PETE 313 / PETE 407 / PHYS 430 / STAT 201 / STAT 211 / STAT 212 / SWE 216 / SWE 316 / SWE 326 / SWE 387‎ — بالقاعدة نفسها (ردٌّ فيه بنودُ تقييم ويصرّح بالمادّة أوّلًا، بلا سبٍّ ولا دعاء)
   'ACCT 300': [
     (98419, 8, 'stk-dr-f98419'),
@@ -3928,6 +4079,10 @@ if os.path.exists(BULK):
     for _c, _v in _b.get('src', {}).items():
         PICK_SRC.setdefault(_c, []).extend((s, t, n, [tuple(f) for f in fs]) for s, t, n, fs in _v)
 
+# ===== ملفّاتٌ محظورة: كشوفُ أرقامٍ جامعيّة ودرجات =====
+# ‏لا تُنقل درجاتُ الطلاب ولا أرقامُهم. ملفٌّ في هذه القائمة يُسقط من مساهمته، ومساهمةٌ لم يبقَ فيها ملفٌّ تُترك.
+BLOCKED = set(json.load(io.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'blocked_files.json'), encoding='utf-8')))
+
 def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}
@@ -3949,6 +4104,8 @@ def main(src):
         # ---- «المصادر»: نصُّ الكاتب أسطرًا، وملفُّه في موضع مرفقه
         for ent in PICK_SRC.get(code, []):
             sec, tid, num, files = ent[:4]
+            if files and all(f[1] in BLOCKED for f in files): continue
+            files = [f for f in files if f[1] not in BLOCKED]
             keep = ent[4] if len(ent) > 4 else None
             t, p = load_post(src, cache, tid, num)
             uid = author(users, p)
