@@ -24278,7 +24278,149 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkTLClear();
     hlRefresh(b, sel.k);   /* بلا اختيارٍ بعد التظليل ولا شريطِ لون (طلبُ صاحب الموقع) */
     if (grew) hlRowsChanged();
+    hlSnap(id, m);
     return true;
+  }
+  /* ===== نسخةُ التحديد (خطّةُ المجلد ق١) =====
+     لكلّ تظليلٍ صورةٌ صغيرةٌ من موضعه في الصفحة (‏‎WebP‎، أطولُ ضلعٍ ‎480‎) في ‏‎IndexedDB‎ بمعرّفه — منها يطير التحديدُ حين يستدعيه
+     مجلدُه والكتابُ مغلق. تُؤخذ عند إنشائه وتُعاد إن تغيّر لونُه وتُحذف معه، والمفقودةُ (تحديدٌ قديمٌ أو متصفّحٌ آخر) تُصنع عند أوّل طلبٍ
+     إن كان ملفُّ المصدر حاضرًا. ‏‎box‎ مستطيلُها من الصفحة (كسور) — يُعرف به مكانُها حين تُقلع */
+  const HL_SNAP = { w: 1024, max: 480, pad: 0.012, q: 0.8 };
+  const hlSnapKey = mid => 'hlsnap:' + mid;
+  function hlSnapBox(m) {
+    let l = 1, t = 1, r = 0, bb = 0;
+    for (const [a, c, d, e] of m.bars) { l = Math.min(l, a); r = Math.max(r, c); t = Math.min(t, d); bb = Math.max(bb, e); }
+    const P = HL_SNAP.pad;
+    return [Math.max(0, l - P), Math.max(0, t - P), Math.min(1, r + P), Math.min(1, bb + P)];
+  }
+  async function hlSnap(id, m) {
+    const b = bkOfSid(id + m.s); if (!b || !b.doc || !m.bars.length) return null;
+    try {
+      const cv = await bk2Tex(b, m.k, HL_SNAP.w), [l, t, r, bb] = hlSnapBox(m);
+      const sx = l * cv.width, sy = t * cv.height, sw = (r - l) * cv.width, sh = (bb - t) * cv.height, k = Math.min(1, HL_SNAP.max / Math.max(sw, sh));
+      const o = document.createElement('canvas'); o.width = Math.max(1, Math.round(sw * k)); o.height = Math.max(1, Math.round(sh * k));
+      o.getContext('2d').drawImage(cv, sx, sy, sw, sh, 0, 0, o.width, o.height);
+      const blob = await new Promise(res => o.toBlob(res, 'image/webp', HL_SNAP.q));
+      if (!blob || !hlMark(id, m.id)) return null;   /* حُذف التحديدُ أثناء التصوير */
+      await chIdb('readwrite', hlSnapKey(m.id), blob);
+      return blob;
+    } catch (e) { return null; }
+  }
+  async function hlSnapGet(id, mid) {
+    const blob = await chIdb('readonly', hlSnapKey(mid)); if (blob) return blob;
+    const m = hlMark(id, mid); return m ? hlSnap(id, m) : null;
+  }
+  /* ===== المجلدُ يستدعي تحديداته (خطّةُ المجلد ق٢–٤ · كونسبت صاحب الموقع) =====
+     يُختار مجلدٌ والكتابُ مغلقٌ على الطاولة: ينفتح غلافُه وتتقلّب صفحاتُه، وتقف كلُّ صفحةٍ فيها تحديدٌ مربوطٌ ببطاقةٍ من بطائق المجلد
+     لحظةً مرفوعة، فيطير التحديدُ من موضعه عليها (نسختُه الخفيفة) ويتحوّل إلى شكل بطاقته في العرض الحاليّ — صفُّ الجدول أو ورقتُه أو
+     عقدةُ الشجرة — وينزل مكانها، ثمّ ينطبق الكتاب. والكتابُ مفتوحٌ للقراءة: لا شيء. ‏‎hlCall‎ التشغيلُ الجاري، ومجلدٌ آخرُ يُنهيه */
+  let hlCall = null;
+  const hlCallBook = id => Object.values(pkSrcBk).find(b => b && b.gl && !b.gl.dead && b.stage && b.stage.isConnected && b.stage.getClientRects().length && pkSrcBase(hlSidOf(b)) === id) || null;
+  /* بطاقةُ الصفّ في العرض الحاليّ (خارج الكتاب) أو الورقةُ العليا من رزمة الأوراق، ومستطيلُها مقصوصًا بما يحويها من تمرير — فالخارجةُ عن النظر يُطار إلى حافّته */
+  function hlCallEl(b, cid) {
+    const post = b.stage.closest('.post') || document.getElementById('cm-body');
+    const vis = e => !b.view.contains(e) && e.getClientRects().length;
+    /* الجدولُ والشجرةُ بطاقةٌ لكلّ صفّ، والأوراقُ رزمةٌ تُرى عليا أوراقها فقط — فيُنزل عليها */
+    return [...post.querySelectorAll(`[data-kcard="${CSS.escape(cid)}"]`)].find(vis) || [...post.querySelectorAll('.pp-host .pp-card')].find(vis) || null;
+  }
+  function hlCallRect(el) {
+    const r = el.getBoundingClientRect();
+    let l = r.left, t = r.top, R = r.right, B = r.bottom;
+    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+      if (getComputedStyle(a).overflow === 'visible') continue;
+      const q = a.getBoundingClientRect(), h = B - t, w = R - l;
+      if (t < q.top) { t = q.top; B = Math.max(B, t + h * 0.5); } if (B > q.bottom) { B = q.bottom; t = Math.min(t, B - h * 0.5); }
+      if (l < q.left) { l = q.left; R = Math.max(R, l + w * 0.5); } if (R > q.right) { R = q.right; l = Math.min(l, R - w * 0.5); }
+    }
+    return { left: l, top: t, right: R, bottom: B, width: R - l, height: B - t };
+  }
+  /* لونُ خلفيّة البطاقة: أوّلُ ما ليس شفّافًا منها صعودًا */
+  function hlCallBg(el) {
+    for (let a = el.querySelector('.pp-front') || el; a && a !== document.documentElement; a = a.parentElement) { const c = getComputedStyle(a).backgroundColor; if (c && !/rgba\(.*,\s*0\)$|transparent/.test(c)) return c; }
+    return 'var(--surface)';
+  }
+  /* ‏‎matrix3d‎ يُحوِّل المستطيلَ ‎(0,0)–(w,h)‎ إلى الرباعيّ ‎q‎ (زوايا: أعلى يسار، أعلى يمين، أسفل يمين، أسفل يسار) */
+  function hlHomo(w, h, q) {
+    const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = q;
+    const dx1 = x1 - x2, dx2 = x3 - x2, dy1 = y1 - y2, dy2 = y3 - y2, sx = x0 - x1 + x2 - x3, sy = y0 - y1 + y2 - y3;
+    const den = dx1 * dy2 - dx2 * dy1 || 1e-9, g = (sx * dy2 - dx2 * sy) / den, hh = (dx1 * sy - sx * dy1) / den;
+    const a = x1 - x0 + g * x1, bb = x3 - x0 + hh * x3, d = y1 - y0 + g * y1, e = y3 - y0 + hh * y3;
+    return `matrix3d(${a / w},${d / w},0,${g / w},${bb / h},${e / h},0,${hh / h},0,0,1,0,${x0},${y0},0,1)`;
+  }
+  /* طيرانُ تحديدٍ واحد: طبقتان بتحويلين — صورتُه تحفظ نسبتها (تنتهي شريطًا في وسط الهدف)، وجسمُ الهدف بمقاسه يبدأ من رباعيّه —
+     تذوب الأولى في الثانية على قوسٍ يعلو قليلًا، ثمّ تنبض البطاقة بلون التظليل */
+  function hlFly(run, b, m, quad, url) {
+    const el = hlCallEl(b, m.c.find(c => run.cids.has(c)));
+    if (!el || !run.on) return Promise.resolve();
+    const r = hlCallRect(el), w = Math.max(8, r.width), h = Math.max(8, r.height), D = [[r.left, r.top], [r.right, r.top], [r.right, r.bottom], [r.left, r.bottom]];
+    const iw = Math.hypot(quad[1][0] - quad[0][0], quad[1][1] - quad[0][1]), ih = Math.max(1, Math.hypot(quad[3][0] - quad[0][0], quad[3][1] - quad[0][1])), ar = Math.max(0.05, iw / ih);
+    const bw = Math.min(w, h * ar), bh = bw / ar, cx = (r.left + r.right) / 2, cy = (r.top + r.bottom) / 2;
+    const DI = [[cx - bw / 2, cy - bh / 2], [cx + bw / 2, cy - bh / 2], [cx + bw / 2, cy + bh / 2], [cx - bw / 2, cy + bh / 2]];
+    const cs = getComputedStyle(el), col = HL_COL[m.col] || HL_COL.y;
+    const to = document.createElement('div'); to.className = 'hl-fly hl-fly--to';
+    Object.assign(to.style, { width: w + 'px', height: h + 'px', background: `color-mix(in srgb, ${col[1]} 28%, ${hlCallBg(el)})`, borderRadius: cs.borderRadius, opacity: 0, '--hlc': col[1] });
+    const im = document.createElement('img'); im.className = 'hl-fly'; im.alt = ''; im.src = url; Object.assign(im.style, { width: '100px', height: 100 / ar + 'px' });
+    run.layer.append(to, im);
+    const lerp = (a, c, t) => a + (c - a) * t;
+    const path = (A, B) => {
+      const c0 = [(A[0][0] + A[2][0]) / 2, (A[0][1] + A[2][1]) / 2], c1 = [(B[0][0] + B[2][0]) / 2, (B[0][1] + B[2][1]) / 2], lift = Math.min(160, Math.hypot(c1[0] - c0[0], c1[1] - c0[1]) * 0.35);
+      const ctrl = A.map((p, i) => [(p[0] + B[i][0]) / 2, Math.min(p[1], B[i][1]) - lift]);
+      return e => A.map((p, i) => [lerp(lerp(p[0], ctrl[i][0], e), lerp(ctrl[i][0], B[i][0], e), e), lerp(lerp(p[1], ctrl[i][1], e), lerp(ctrl[i][1], B[i][1], e), e)]);
+    };
+    const qc = [(quad[0][0] + quad[2][0]) / 2, (quad[0][1] + quad[2][1]) / 2], sc = Math.max(1, (h / w) * ar);
+    const pI = path(quad, DI), pT = path(quad.map(p => [p[0], qc[1] + (p[1] - qc[1]) * sc]), D);
+    const dur = 300 * (window.__pkfxSlow || 1), t0 = performance.now();
+    return new Promise(res => {
+      const fin = () => { im.remove(); to.remove(); res(); };
+      const step = now => {
+        if (!run.on) return fin();
+        const t = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - t, 3), k = Math.min(1, Math.max(0, (t - 0.3) / 0.45));
+        im.style.transform = hlHomo(100, 100 / ar, pI(e)); to.style.transform = hlHomo(w, h, pT(e));
+        im.style.opacity = 1 - k; to.style.opacity = Math.min(1, k * 1.3);
+        if (t < 1) return requestAnimationFrame(step);
+        const tgt = hlCallEl(b, m.c.find(c => run.cids.has(c))) || el;
+        tgt.classList.remove('hl-call-pend', 'hl-call-land'); tgt.style.setProperty('--hlc', col[1]); void tgt.offsetWidth; tgt.classList.add('hl-call-land');
+        setTimeout(() => tgt.classList.remove('hl-call-land'), 700);
+        fin();
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  function hlCallStop() {
+    const run = hlCall; if (!run) return;
+    hlCall = null; run.on = false;
+    try { if (run.b.gl && !run.b.gl.dead) run.b.gl.riffleEnd(); } catch (e) {}
+    document.querySelectorAll('#cm-body .hl-call-pend').forEach(x => x.classList.remove('hl-call-pend'));
+    run.urls.forEach(u => URL.revokeObjectURL(u)); run.layer.remove();
+  }
+  async function hlCallRun(id) {
+    hlCallStop();
+    if (bkReduce()) return;
+    const b = hlCallBook(id), R = hlRows(id), H = hlData(id);
+    if (!b || !R || !H || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) return;
+    const s = hlSidOf(b).slice(id.length), cids = new Set(R.cards.map(c => c.id));
+    const marks = H.marks.filter(m => m.s === s && m.k >= 1 && m.k <= b.n && m.c.some(c => cids.has(c))).sort((x, y) => x.k - y.k || x.bars[0][2] - y.bars[0][2]);
+    if (!marks.length) return;
+    const layer = document.createElement('div'); layer.className = 'hl-fly-layer'; layer.setAttribute('aria-hidden', 'true'); document.body.appendChild(layer);
+    const run = hlCall = { id, b, cids, on: true, layer, urls: [] };
+    const blobs = await Promise.all(marks.map(m => hlSnapGet(id, m.id).catch(() => null)));
+    if (!run.on) return;
+    const imgs = new Map(); marks.forEach((m, i) => { if (blobs[i]) { const u = URL.createObjectURL(blobs[i]); run.urls.push(u); imgs.set(m.id, u); } });
+    const flying = marks.filter(m => imgs.has(m.id));
+    if (!flying.length) return hlCallStop();
+    /* البطائقُ المنتظرةُ تخفت حتى تنزل عليها تحديداتُها (إلّا عليا الرزمة: هي هدفُ الجميع) */
+    flying.forEach(m => { const el = hlCallEl(b, m.c.find(c => cids.has(c))); if (el && !el.classList.contains('pp-card')) el.classList.add('hl-call-pend'); });
+    const flights = [];
+    await b.gl.riffle({ stops: [...new Set(flying.map(m => m.k))], onStop: (k, quad) => {
+      if (!run.on) return;
+      const cv = b.gl.el.getBoundingClientRect();
+      flying.filter(m => m.k === k).forEach((m, i) => {
+        const [l, t, r, bb] = hlSnapBox(m), q = quad(l, r, t, bb).map(([x, y]) => [x + cv.left, y + cv.top]);
+        flights.push(new Promise(res => setTimeout(() => hlFly(run, b, m, q, imgs.get(m.id)).then(res), i * 60)));
+      });
+    } });
+    await Promise.all(flights);
+    if (hlCall === run) hlCallStop();
   }
   /* صفٌّ أُضيف: يُرسم الجدولُ من جديد (فيظهر الصفّ) */
   function hlRowsChanged() { try { renderCmSection(); } catch (e) {} }
@@ -24352,7 +24494,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.stopPropagation();
       if (b.hasAttribute('data-hlmdel')) { hlDelete(id, m.id); hlMkClose(); return; }
       const c = b.dataset.hlmc;
-      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); }
+      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); hlSnap(id, m); }
       hlMkClose(); hlSetCur(id, null);
     });
   }
@@ -24393,6 +24535,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
     hlMkClose();   /* قائمتُه (الألوانُ والرقمُ والحذف) تذهب معه */
+    chIdb('readwrite', hlSnapKey(mid), null);
     save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
   /* ===== شريطُ الألسنة (ROADMAP-HL ق٤–٥ · كونسبت صاحب الموقع) =====
@@ -26030,6 +26173,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
       } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
+      requestAnimationFrame(() => hlCallRun(id));   /* والكتابُ مغلقٌ على الطاولة: يستدعي المجلدُ تحديداتِ بطائقه (بعد أن يعود الكتابُ إلى وعائه المرسوم) */
       /* ===== وقامةُ الشريط تنتقل بنعومة (طلبُ صاحب الموقع) =====
          فتحُ مجلدٍ فيه مجلداتٌ يُطيل الشريطَ (ومعه المساهمة) وإغلاقُه يُقصّره — كانا يقفزان. فتُقاس القامةُ قبلُ وبعدُ،
          ويُحرَّك الشريطُ بينهما (يُقصّ ما لم يبلغه)، والكتلُ تُرسم حيّةً معه */

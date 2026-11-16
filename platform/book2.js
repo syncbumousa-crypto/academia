@@ -351,13 +351,15 @@ export function createBook2(THREE, host, cfg) {
   const art = new THREE.Mesh(new THREE.PlaneGeometry(WB - BV, HB - BV), artM);
   /* فوق الوجه المسطّح (الشطفُ يرفعه ‎0.6·BV‎) وداخلَ حوافّه المشطوفة */
   art.position.set(-(WB - BV) / 2 - BV * 0.2, 0, TH + BT + BV * 0.6 + 0.0004); art.receiveShadow = true; caseG.add(art);
-  let caseK = -1;
+  let caseK = -1, caseShown = null;
   /* ‏‎e‎ مقدارُ القراءة ‎0..1‎ (بعد المنحنى): الغلافُ يصغر إلى مقاس الأوراق وسُمكها الحقيقيّ، ويُسلَّم إليها في ‎e = 1‎ */
   function updCase(e) {
     const show = e < 1 || !!ta;
     const sh = 1 - e;
-    if (caseG.visible !== show) {
-      caseG.visible = show;
+    /* بحالةٍ محفوظة لا بظهور الجسم: كان يبدأ ظاهرًا فلا يتبدّل أوّلَ مرّة، فتبقى أوراقُ القراءة (والغلافُ بصورته) مرسومةً داخله —
+       لا تُرى والكتابُ مغلق، وتبرز حين ينفتح الغطاءُ في التقليب أو قبل أوّل فتحٍ للقراءة */
+    if (caseShown !== show) {
+      caseShown = show; caseG.visible = show;
       /* أوراقُ القراءة كلُّها مخفيّةٌ ما دام الجسمُ ظاهرًا (فيه كتلةُ أوراقه): انتفاخُ الورق قرب الكعب أعلى من سُمك الغلاف
          وهو يصغر إلى سُمكه الحقيقيّ، فكانت الصفحةُ تبرز من فوقه شريطًا ثمّ كلُّها قبيل الفتح — وتظهر كلُّها معًا في التسليم */
       for (const c of sheets) for (const mh of c.meshes) mh.visible = !show;
@@ -377,6 +379,175 @@ export function createBook2(THREE, host, cfg) {
   }
   updCase(tv);
 
+  /* ===== التقليبُ على الطاولة: المجلدُ يستدعي تحديداته (كالكونسبت) =====
+     الغلافُ ينفتح ‎~30°‎ والكتابُ مكانه، وتتقلّب الصفحاتُ من الكتلة إلى تحت الغلاف مروحةً، وتقف لحظةً عند كلّ صفحةٍ فيها
+     تحديد (‏‎onStop‎ يُعطى مواضعَ زواياه على الشاشة فيطير منها)، ثمّ ينطبق الغلافُ والأوراقُ معًا على اللوح السفليّ.
+     هيكلٌ منفصلٌ يُبنى عند أوّل استعمال: غطاءٌ بمفصلٍ عند الكعب، وقاعدةٌ (الكعبُ واللوحُ السفليّ)، وكومةٌ تحت الغطاء،
+     وثماني أوراقٍ طائرة — وما سواها لا يُرسم (خفيفٌ ولو كان الكتابُ مئاتِ الصفحات) */
+  const RF = { open: 130, hold: 120, sweep: 1180, ivMin: 18, ivMax: 75, dwell: 170, leaf: 260, close: 260, angle: 1.05, leaves: 8 };
+  let rf = null, rig = null;
+  const paperM = new THREE.MeshStandardMaterial({ color: '#efe8d6', roughness: 0.95 });
+  function genericPage() {
+    const cv = document.createElement('canvas'); cv.width = 256; cv.height = Math.round(256 * H / W);
+    const c = cv.getContext('2d'); c.fillStyle = '#fbf8f0'; c.fillRect(0, 0, cv.width, cv.height);
+    c.fillStyle = 'rgba(70,64,52,.28)';
+    for (let y = cv.height * 0.12, i = 0; y < cv.height * 0.9; y += cv.height * 0.034, i++) c.fillRect(cv.width * (0.12 + (i % 5 === 4 ? 0.3 : 0)), y, cv.width * (0.76 - (i % 5 === 4 ? 0.3 : 0)), cv.height * 0.009);
+    const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t;
+  }
+  function buildRig() {
+    const zt = TH + BT, zb = -BT, ex = { depth: HB - 2 * BV, bevelEnabled: true, bevelThickness: BV, bevelSize: BV * 0.6, bevelSegments: 3, curveSegments: 24 };
+    const extr = shp => { const g = new THREE.ExtrudeGeometry(shp, ex); g.rotateX(Math.PI / 2); g.translate(0, (HB - 2 * BV) / 2, 0); return g; };
+    /* القاعدة: الكعبُ واللوحُ السفليّ (مفتوحةٌ من فوق) */
+    const sb = new THREE.Shape();
+    sb.moveTo(0, zt); sb.absellipse(0, (zt + zb) / 2, SPB, (zt - zb) / 2, Math.PI / 2, -Math.PI / 2, true);
+    sb.lineTo(-WB, zb); sb.lineTo(-WB, 0); sb.lineTo(XI, 0); sb.lineTo(XI, TH); sb.lineTo(0, TH); sb.closePath();
+    const base = new THREE.Mesh(extr(sb), boardM); base.castShadow = base.receiveShadow = true;
+    /* الغطاء: اللوحُ العلويّ، مفصلُه عند الكعب ‎(0, TH)‎ — في مجموعةٍ أصلُها المفصل فيُدار حولها */
+    const sl = new THREE.Shape(); sl.moveTo(-WB, TH); sl.lineTo(0, TH); sl.lineTo(0, zt); sl.lineTo(-WB, zt); sl.closePath();
+    const lidG = new THREE.Group(); lidG.position.set(0, 0, TH);
+    const lid = new THREE.Mesh(extr(sl), boardM); lid.position.z = -TH; lid.castShadow = lid.receiveShadow = true; lidG.add(lid);
+    const artL = new THREE.Mesh(art.geometry, artM); artL.position.set(art.position.x, 0, art.position.z - TH); lidG.add(artL);
+    /* الكومةُ تحت الغطاء: شكلُها من منحنيات صفحاتها نفسِها (‏‎pileGeom‎) — رأسُها وذيلُها حوافُّ ورق، وما سواهما ورق */
+    const pile = new THREE.Mesh(new THREE.BufferGeometry(), [block.material[2], paperM]);
+    pile.castShadow = pile.receiveShadow = true;
+    /* الصفحةُ العليا على الكتلة (تتبدّل مع التقليب) */
+    const topM = new THREE.MeshStandardMaterial({ roughness: 0.9 });
+    const topP = new THREE.Mesh(new THREE.PlaneGeometry(W, H), topM); topP.position.x = -W / 2; topP.receiveShadow = true;
+    /* الأوراقُ الطائرة: شريطٌ ينحني بطول عرضه (يُحسب كلَّ إطار) */
+    const SEG = 20, leaves = [];
+    for (let i = 0; i < RF.leaves; i++) {
+      const g = new THREE.BufferGeometry(), pos = new Float32Array((SEG + 1) * 2 * 3), uv = new Float32Array((SEG + 1) * 2 * 2), idx = [];
+      for (let j = 0; j <= SEG; j++) { uv.set([1 - j / SEG, 1, 1 - j / SEG, 0], j * 4); if (j < SEG) { const a = j * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); } }
+      g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.BufferAttribute(uv, 2)); g.setIndex(idx);
+      /* لا تُلقي ظلًّا: ظلُّها الحادُّ على الصفحات تحتها كان يبدو أنصافَ صفحات */
+      const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ roughness: 0.9, side: THREE.DoubleSide })); m.visible = false; m.castShadow = false;
+      leaves.push({ m, busy: false });
+    }
+    const grp = new THREE.Group(); grp.add(base, lidG, topP, pile); for (const l of leaves) grp.add(l.m);
+    grp.visible = false; caseG.add(grp);
+    rig = { grp, base, lidG, lid, artL, pile, pileKey: '', topP, topM, leaves, SEG, generic: genericPage(), tex: new Map() };
+  }
+  /* ===== منحنى الصفحة (نموذجٌ واحدٌ لكلّ صفحات الكتاب) =====
+     الصفحةُ مربوطةٌ بجدار الكعب الداخليّ ‎(XI, TH − δ)‎ — ‏‎δ‎ عمقُ ربطها من أعلى الكعب (الأولى أعلاه والأخيرةُ أسفله) — وتُقلَّب
+     بزاوية ‎θ‎ حول مفصل الغلاف ‎(XI, TH)‎. في إطارٍ يدور بـ‎θ‎ حول المفصل: ‏‎U‎ على طول الصفحة و‎N‎ عمقُها تحت خطّ الغلاف؛ تبدأ من
+     ربطها (عمقُه ‎δ cosθ‎) وتنحني في ثنية الكعب (‏‎GUT‎) إلى عمقها في الكومة ‎δ‎ فتستوي. ‏‎θ = 0‎ صفحةٌ مستويةٌ على الكتلة على ارتفاع
+     ربطها، و‎θ = a‎ صفحةٌ تحت الغلاف. الكتلةُ والكومةُ والأوراقُ الطائرةُ كلُّها من هذا المنحنى، فهي على ترتيبها عند الكعب */
+  const GUT = 0.2 * W, WP = W + XI;
+  const easeOut = k => 1 - Math.pow(1 - k, 3), easeIn = k => k * k * k;
+  /* ‏‎curl‎ انحناءُ الورقة وهي تُقلَّب: حرفُها يتأخّر نحو الكتلة — عمقٌ إضافيٌّ يكبر مع البعد عن الكعب (مقدارُه ‎curl·W‎ عند الحرف) */
+  function pageCurve(delta, th, out, curl = 0) {
+    const ux = -Math.cos(th), uz = Math.sin(th), nx = -Math.sin(th), nz = -Math.cos(th);
+    const U0 = -delta * Math.sin(th), N0 = delta * Math.cos(th), SEG = rig.SEG;
+    for (let j = 0; j <= SEG; j++) {
+      const U = U0 + WP * j / SEG, k = Math.min(1, (U - U0) / GUT), f = j / SEG;
+      const N = N0 + (delta - N0) * k * k * (3 - 2 * k) + curl * W * f * f;
+      out[j * 2] = XI + U * ux + N * nx; out[j * 2 + 1] = TH + U * uz + N * nz;
+    }
+    return out;
+  }
+  function setLeaf(l, delta, th, curl) {
+    l.pts = pageCurve(delta, th, l.pts || new Float64Array((rig.SEG + 1) * 2), curl);
+    const pos = l.m.geometry.attributes.position;
+    for (let j = 0; j <= rig.SEG; j++) { const x = l.pts[j * 2], z = l.pts[j * 2 + 1]; pos.setXYZ(j * 2, x, H / 2, z); pos.setXYZ(j * 2 + 1, x, -H / 2, z); }
+    pos.needsUpdate = true; l.m.geometry.computeVertexNormals(); l.m.geometry.computeBoundingSphere();
+  }
+  /* موضعُ نقطةٍ من الورقة الطائرة على الشاشة (‏‎fx, fy‎ كسرٌ من صورة الصفحة: من يسارها ومن أعلاها) — بانحنائها نفسِه */
+  function leafPoint(l, fx, fy) {
+    const u = Math.min(rig.SEG - 1e-6, (1 - fx) * rig.SEG), j = Math.floor(u), f = u - j, P = l.pts;
+    const v = new THREE.Vector3(P[j * 2] + (P[j * 2 + 2] - P[j * 2]) * f, H / 2 - fy * H, P[j * 2 + 1] + (P[j * 2 + 3] - P[j * 2 + 1]) * f + 0.0004);
+    caseG.updateMatrixWorld(); v.applyMatrix4(caseG.matrixWorld).project(camera);
+    return [(v.x + 1) / 2 * cw, (1 - v.y) / 2 * ch];
+  }
+  /* الكومة: بين منحنى أولى المقلَّبة (تحت الغلاف) وآخرِها، ‏‎a‎ زاويتُها — تُبنى من جديد حين تتغيّر وحدَها */
+  const ptsA = new Float64Array(2 * 21), ptsB = new Float64Array(2 * 21);
+  function pileGeom(pileT, a) {
+    const key = pileT.toFixed(5) + '|' + a.toFixed(4); if (key === rig.pileKey) return; rig.pileKey = key;
+    pageCurve(0.0006, a, ptsA); pageCurve(pileT, a, ptsB);
+    const shp = new THREE.Shape(), S2 = rig.SEG;
+    shp.moveTo(ptsA[0], ptsA[1]);
+    for (let j = 1; j <= S2; j++) shp.lineTo(ptsA[j * 2], ptsA[j * 2 + 1]);
+    for (let j = S2; j >= 0; j--) shp.lineTo(ptsB[j * 2], ptsB[j * 2 + 1]);
+    shp.closePath();
+    const g = new THREE.ExtrudeGeometry(shp, { depth: H, bevelEnabled: false, curveSegments: 1 });
+    g.rotateX(Math.PI / 2); g.translate(0, H / 2, 0);
+    rig.pile.geometry.dispose(); rig.pile.geometry = g;
+  }
+  /* تقدُّمُ ورقة ‎i‎ في طيرانها: ورقةُ التحديد تقف عند ‎PEEK‎ (مرفوعةً مائلةً نحو الناظر فيُقرأ وجهُها) مدّةَ ‎dwell‎ */
+  const PEEK = 0.36;
+  function leafS(i, e) {
+    const loc = e - rf.at[i], L = RF.leaf;
+    if (!rf.stops.has(rf.n0 + i)) return loc / L;
+    if (loc < PEEK * L) return loc / L;
+    if (loc < PEEK * L + RF.dwell) return PEEK;
+    return (loc - RF.dwell) / L;
+  }
+  function riffle(o) {
+    if (dead || rf || tv !== 0 || ta || !cfg.rest) return Promise.resolve(false);
+    if (!rig) buildRig();
+    const n0 = 1 + SK, n1 = cfg.n, n = Math.max(1, n1 - n0 + 1), stops = new Set((o.stops || []).filter(k => k >= n0 && k <= n1));
+    /* صورُ صفحات التحديد بالدقّة الحقيقيّة قبل البدء، والبقيّةُ صفحةٌ عامّة */
+    const need = [...stops].filter(k => !rig.tex.has(k));
+    return Promise.all(need.map(k => Promise.resolve(cfg.tex(k, 768)).then(cv => {
+      if (!cv) return; const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; rig.tex.set(k, t);
+    }).catch(() => {}))).then(() => new Promise(res => {
+      if (dead) return res(false);
+      const iv = Math.max(RF.ivMin, Math.min(RF.ivMax, RF.sweep / n)), at = [];
+      let t = RF.open + RF.hold;
+      for (let k = n0; k <= n1; k++) { at.push(t); t += iv + (stops.has(k) ? RF.dwell : 0); }
+      rf = { t0: performance.now(), n0, n1, n, at, stops, onStop: o.onStop, res, stopped: new Set(), end: t + RF.leaf, closeAt: t + RF.leaf + 40 };
+      hover = -1; setGrab(''); tHovT = 0; setCursor();
+      caseMesh.visible = false; art.visible = false; rig.grp.visible = true;
+      for (const l of rig.leaves) { l.busy = false; l.m.visible = false; }
+      rig.pile.visible = false; rig.pileKey = '';
+      needs = true;
+    }));
+  }
+  const texOf = k => rig.tex.get(k) || rig.generic;
+  function rfTick(now) {
+    const e = now - rf.t0, R = rig;
+    /* الغطاء: ينفتح سريعًا ويهدأ، ويبقى، ثمّ ينطبق والصفحاتُ معه — حول مفصله الحقيقيّ أعلى الكعب */
+    let a = RF.angle * easeOut(Math.min(1, e / RF.open));
+    if (e > rf.closeAt) a = RF.angle * (1 - easeIn(Math.min(1, (e - rf.closeAt) / RF.close)));
+    R.lidG.rotation.y = a;
+    let launched = 0, landed = 0;
+    for (let i = 0; i < rf.n; i++) { if (e >= rf.at[i]) launched++; if (leafS(i, e) >= 1) landed++; }
+    const hb = TH * (1 - launched / rf.n), pileT = TH * landed / rf.n;
+    block.scale.z = Math.max(1e-4, hb / TH); block.position.z = hb / 2; block.visible = hb > 1e-4;
+    R.pile.visible = landed > 0; if (landed > 0) pileGeom(pileT, a);
+    /* الصفحةُ العليا: التي تُقلَّب بعدُ (أو لا شيء إن انتهت) */
+    const topK = rf.n0 + launched;
+    R.topP.visible = topK <= rf.n1; R.topP.position.z = hb + 0.0006;
+    if (R.topP.visible && R.topM.map !== texOf(topK)) { R.topM.map = texOf(topK); R.topM.needsUpdate = true; }
+    /* الأوراقُ الطائرة: كلٌّ على عمق ربطها، تُقلَّب من الكتلة (‏‎θ = 0‎) إلى تحت الغلاف (‏‎θ = a‎) */
+    for (const l of R.leaves) l.busy = false;
+    /* الطائرةُ بترتيبها (الأسبقُ أعلى) — وانحناءُ كلٍّ محدودٌ بنصف الفُرجة بينها وبين التي تحتها (أو الكتلة) فلا يمسّها */
+    const fly = [];
+    for (let i = 0; i < rf.n && fly.length < R.leaves.length; i++) { const s = leafS(i, e); if (s >= 0 && s < 1) fly.push({ i, s, th: a * easeOut(s) }); }
+    let li = 0;
+    for (let q = 0; q < fly.length; q++) {
+      const { i, s, th } = fly[q], below = q + 1 < fly.length ? fly[q + 1].th : 0;
+      const l = R.leaves[li++], k = rf.n0 + i;
+      l.busy = true; l.m.visible = true;
+      if (l.m.material.map !== texOf(k)) { l.m.material.map = texOf(k); l.m.material.needsUpdate = true; }
+      const curl = Math.min(0.09 * Math.sin(Math.PI * s), 0.5 * Math.max(0, th - below));
+      setLeaf(l, TH * (i + 0.5) / rf.n, th, curl);
+      /* ورقةُ التحديد وقفت مرفوعة: تُعطى زواياه منها فيطير */
+      if (rf.stops.has(k) && s === PEEK && !rf.stopped.has(k)) {
+        rf.stopped.add(k);
+        if (rf.onStop) try { rf.onStop(k, (fl, fr, ft, fb) => [leafPoint(l, fl, ft), leafPoint(l, fr, ft), leafPoint(l, fr, fb), leafPoint(l, fl, fb)]); } catch (er) {}
+      }
+    }
+    for (const l of R.leaves) if (!l.busy) l.m.visible = false;
+    if (e >= rf.closeAt + RF.close + 60) rfEnd();
+  }
+  function rfEnd() {
+    if (!rf) return;
+    const res = rf.res; rf = null;
+    rig.grp.visible = false; caseMesh.visible = true; art.visible = true;
+    block.scale.z = 1; block.position.z = TH / 2; block.visible = true;
+    rig.lidG.rotation.y = 0;
+    needs = true; res(true);
+  }
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
@@ -572,6 +743,7 @@ export function createBook2(THREE, host, cfg) {
     tableLight(smooth(tv));
     if (Math.abs(book.position.z - z) > 1e-6) { book.position.z = z; moving = true; }
     updCase(smooth(tv));
+    if (rf) { rfTick(now); moving = true; }
     if (frameCam()) moving = true;
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
     const wasIdle = idle; idle = !moving && !drag;
@@ -604,7 +776,7 @@ export function createBook2(THREE, host, cfg) {
   };
   /* ‏‎to = 1‎ يرفعه من الطاولة ويفتحه (على الفتحة ‎goal‎) · ‏‎0‎ ينزله إليها (والغلافُ منطبق) */
   function table(to, goal = 1) {
-    if (dead || (ta ? ta.to === to : tv === to)) return;
+    if (dead || rf || (ta ? ta.to === to : tv === to)) return;
     /* لا يبقى لونُ نصف التقليب ولا مؤشّرُه من قبل (الطاولةُ لا تُقلَّب) */
     tHovT = 0; hover = -1; setGrab(''); setCursor();
     if (cfg.onBusy && idle) cfg.onBusy();
@@ -665,7 +837,7 @@ export function createBook2(THREE, host, cfg) {
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
     if (skip(e)) return;
     /* على الطاولة: الكتابُ نفسُه يُنقر فيرتفع وينفتح */
-    if (tv < 1 || ta) { if (!ta && inRest(e)) table(1); return; }
+    if (tv < 1 || ta || rf) { if (!ta && !rf && inRest(e)) table(1); return; }
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
     if (!g || (g.cover ? locked() : mo) || !armed()) return;
@@ -692,8 +864,8 @@ export function createBook2(THREE, host, cfg) {
     if (!drag) {
       if (e.pointerType !== 'mouse') return;
       if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
-      if (tv < 1 || ta) {
-        const on = !ta && inRest(e);
+      if (tv < 1 || ta || rf) {
+        const on = !ta && !rf && inRest(e);
         if (hover !== -1 || grab) { hover = -1; setGrab(''); }
         tHovT = on ? 1 : 0; zone.style.cursor = on ? 'pointer' : ''; needs = true;
         return;
@@ -755,7 +927,9 @@ export function createBook2(THREE, host, cfg) {
   el.addEventListener('wheel', onWheel, { passive: false });
 
   function dispose() {
-    if (dead) return; dead = true;
+    if (dead) return;
+    if (rf) { const res = rf.res; rf = null; res(false); }   /* تقليبٌ جارٍ: يُعلَم صاحبُه أنّه انتهى */
+    dead = true;
     cancelAnimationFrame(raf); stopHold();
     for (const [t, f] of evs) zone.removeEventListener(t, f);
     setGrab('');
@@ -766,7 +940,8 @@ export function createBook2(THREE, host, cfg) {
     if (blob.material.map) blob.material.map.dispose();
     blob.material.dispose(); blob.geometry.dispose();
     caseG.traverse(o => { if (o.isMesh) { o.geometry.dispose(); (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose()); } });
-    edgeH.dispose(); edgeV.dispose();
+    edgeH.dispose(); edgeV.dispose(); paperM.dispose();
+    if (rig) { rig.grp.traverse(o => { if (o.isMesh && o.geometry !== art.geometry) { o.geometry.dispose(); if (o.material !== boardM && o.material !== artM && !Array.isArray(o.material)) o.material.dispose(); } }); rig.generic.dispose(); rig.tex.forEach(t => t.dispose()); }
     for (const s of sheets) for (const mh of s.meshes) { mh.material.dispose(); mh.customDepthMaterial.dispose(); }
     geo.dispose(); ground.geometry.dispose(); ground.material.dispose();
     renderer.dispose(); renderer.forceContextLoss();
@@ -781,6 +956,8 @@ export function createBook2(THREE, host, cfg) {
     open() { if (tv < 1 || ta) table(1); },
     rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
     get onTable() { return tv < 1 || !!ta; },
+    /* التقليبُ على الطاولة (المجلدُ يستدعي تحديداته) — وإنهاؤه فورًا */
+    riffle, riffleEnd() { if (rf) rfEnd(); }, get riffling() { return !!rf; },
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
     /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
        وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */
