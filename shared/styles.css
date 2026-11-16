@@ -17177,6 +17177,9 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 .pk-bank > #cm-cards, .pk-bank > .x3 { scrollbar-width: auto; scrollbar-color: auto; }
 .pk-bank > #cm-cards::-webkit-scrollbar, .pk-bank > .x3::-webkit-scrollbar { width: 4px; height: 4px; }   /* رفيعٌ هادئ (طلبُ صاحب الموقع) */
 .pk-bank > #cm-cards::-webkit-scrollbar-track, .pk-bank > .x3::-webkit-scrollbar-track { background: transparent; }
+/* ولا يخرجان عن انحناء المساحة عند طرفيهما (طلبُ صاحب الموقع): مسارُ كلٍّ منهما يبدأ بعد الانحناء وينتهي قبله */
+.pk-bank > #cm-cards::-webkit-scrollbar-track:vertical, .pk-bank > .x3::-webkit-scrollbar-track:vertical { margin-block: 18px; }
+.pk-bank > #cm-cards::-webkit-scrollbar-track:horizontal, .pk-bank > .x3::-webkit-scrollbar-track:horizontal { margin-inline: 18px; }
 .pk-bank > #cm-cards::-webkit-scrollbar-thumb, .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border-radius: 99px; }
 .pk-bank > #cm-cards::-webkit-scrollbar-thumb:hover, .pk-bank > .x3::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
 html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data-theme="dark"] .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
@@ -17192,6 +17195,8 @@ html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data
 /* ولا حاشيةَ يمينَ مجلدات البنك (طلبُ صاحب الموقع): لمحةُ قضيب الرحلة (‎.jr-peek‎ ثلاثُ ثوانٍ بعد كلّ فتح) لا تُفتح في منطقته —
    كانت تترك فراغًا ‎30px‎ يمينَ المجلدات في كلّ مرّةٍ تدخل فيها المنطقة */
 .pk--edit .pk-bank .x3.jr-peek { --jr-op: 0; padding-inline-start: 0; }
+/* أمّا التبديلُ بين «قائمة» و«رحلة» فجوابُه يُرى في البنك أيضًا (طلبُ صاحب الموقع): يظهر القضيبُ لحظةً ثمّ ينسلّ */
+.pk--edit .pk-bank .x3.jr-peek.jr-peek--sw { --jr-op: 1; padding-inline-start: 30px; }
 /* وصدرُ صفّ المجلد في البنك: مقبضُ السحب (لا يظهر إلّا بالمرور) يُنقل إلى آخر الصفّ، ويبقى مكانُ مثلّث الفتح محجوزًا
    في كلّ صفٍّ وإن خلا — فتصطفّ الأسماءُ على خطٍّ واحدٍ ما كان للمجلد أبناءٌ أو لم يكن، والحاشيةُ قدرُ المثلّث وحدَه */
 .pk-bank .x3-hd > .vt-grab { order: 99; margin-inline-start: 4px; }
@@ -17237,34 +17242,38 @@ html[data-theme="dark"] .cx-actb--gold { color: #d4b36a; background: color-mix(i
   top: calc(var(--hdh, 68px) / 2); transform: translateY(-50%); }
 /* ===== «+» الوسط ينفتح عن خيارين يطفوان فوقه ===== */
 .cx-plus { position: relative; display: inline-grid; place-items: center; }
-.cx-plus .cx-plus__tg { position: static; transform: none; transition: background .15s, border-color .15s, transform .2s cubic-bezier(.2, .8, .2, 1); }
-.cx-plus.is-open .cx-plus__tg { transform: rotate(45deg); background: color-mix(in srgb, var(--u-gold, #c9a25c) 22%, var(--u-surf, #fff)); }
+.cx-plus .cx-plus__tg { position: static; transform: none; transition: background .15s, border-color .15s; }
+/* ===== «إضافة» (طلبُ صاحب الموقع · الخيارُ ٢): الزرُّ ثابتٌ لا يميل — علامةُ + وحدَها تدور إلى ×،
+   وتطلع فوقه قائمةٌ صغيرةٌ عموديّة: لكلّ خيارٍ أيقونتُه واسمُه وكلمتان تشرحانه ===== */
+.cx-plus .cx-plus__tg > svg { transition: transform .3s cubic-bezier(.3, 1.4, .5, 1); }
+.cx-plus.is-open .cx-plus__tg > svg { transform: rotate(45deg); }
+.cx-plus.is-open .cx-plus__tg { background: color-mix(in srgb, var(--u-gold, #c9a25c) 14%, var(--u-surf, #fff)); }
 .cx-plus__menu {
-  position: absolute; bottom: calc(100% + 10px); inset-inline-start: 50%; transform: translate(50%, 6px);
-  display: flex; gap: 8px; padding: 6px; border-radius: 999px; white-space: nowrap;
-  background: var(--u-surf2, #fff); border: 1px solid var(--u-line); box-shadow: 0 8px 24px rgba(20, 35, 63, .14);
-  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease, transform .2s cubic-bezier(.2, .8, .2, 1), visibility .2s;
+  position: absolute; bottom: calc(100% + 10px); inset-inline-start: 50%; transform: translate(50%, 8px) scale(.96); transform-origin: 50% 100%;
+  display: flex; flex-direction: column; gap: 4px; padding: 6px; border-radius: 16px; white-space: nowrap;
+  border: 1px solid var(--u-line); box-shadow: 0 16px 36px -14px rgba(20, 35, 63, .35);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, transform .26s cubic-bezier(.2, .8, .2, 1), visibility .26s;
   z-index: 20;
 }
-html[data-lang="en"] .cx-plus__menu { transform: translate(-50%, 6px); }
-html[data-theme="dark"] .cx-plus__menu { background: #26313a; box-shadow: 0 8px 24px rgba(0, 0, 0, .4); }
+html[data-lang="en"] .cx-plus__menu { transform: translate(-50%, 8px) scale(.96); }
 .cx-plus.is-open .cx-plus__menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(50%, 0); }
 html[data-lang="en"] .cx-plus.is-open .cx-plus__menu { transform: translate(-50%, 0); }
 .cx-plus__it {
-  display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px 0 12px; border-radius: 999px; cursor: pointer;
-  border: 1.5px solid var(--u-line); background: var(--u-surf, #fff); color: var(--u-ink, #14233f); font: inherit; font-size: 13px; font-weight: 600;
-  transition: border-color .15s, background .15s;
+  display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px 0 14px; border-radius: 11px; cursor: pointer;
+  border: 0; font: inherit; font-size: 13.5px; font-weight: 700; text-align: start; transition: background .15s;
 }
-.cx-plus__it:hover, .cx-plus__it:focus-visible { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 65%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 10%, var(--u-surf, #fff)); outline: none; }
-.cx-plus__it svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; }
+.cx-plus__it em { font-style: normal; font-size: 11.5px; font-weight: 500; opacity: .62; margin-inline-start: 4px; }
+.cx-plus__it:focus-visible { outline: 2px solid color-mix(in srgb, var(--u-gold, #c9a25c) 60%, transparent); outline-offset: -2px; }
+.cx-plus__it svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; }
 html[data-theme="dark"] .cx-plus__it svg { color: #d4b36a; }
-@media (prefers-reduced-motion: reduce) { .cx-plus__menu, .cx-plus .cx-plus__tg { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .cx-plus__menu, .cx-plus .cx-plus__tg, .cx-plus .cx-plus__tg > svg { transition: none; } }
 /* سطوحٌ مصمتةٌ لا شفّافة (كانت خطوطُ ما خلفها تُرى)، وحبرٌ فاتحٌ في الداكن */
 .cx-plus__menu { background: #fff; }
-.cx-plus__it { background: #fff; color: #14233f; }
-html[data-theme="dark"] .cx-plus__menu { background: #26313a; border-color: rgba(255, 255, 255, .1); }
-html[data-theme="dark"] .cx-plus__it { background: #2f3b45; color: #e6ecef; border-color: rgba(255, 255, 255, .12); }
-html[data-theme="dark"] .cx-plus__it:hover, html[data-theme="dark"] .cx-plus__it:focus-visible { background: color-mix(in srgb, #d4b36a 16%, #2f3b45); }
+.cx-plus__it { background: transparent; color: #14233f; }
+.cx-plus__it:hover { background: color-mix(in srgb, var(--u-gold, #c9a25c) 12%, #fff); }
+html[data-theme="dark"] .cx-plus__menu { background: #232c31; border-color: rgba(255, 255, 255, .1); box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .8); }
+html[data-theme="dark"] .cx-plus__it { color: #e6ecef; }
+html[data-theme="dark"] .cx-plus__it:hover { background: #36434a; }
 /* والقائمةُ المفتوحةُ فوق خطوط الفاصل (‎z-index: 3‎ داخل القسمة) — الخانةُ نفسُها ترتفع ما دامت مفتوحة */
 .cx-acttools:has(.cx-plus.is-open) { z-index: 30; }
 
@@ -17609,8 +17618,8 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 :is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
 .pk--ftdn .vt-foot { min-height: 0; }
 /* «قائمة · رحلة» لا يظهر والبنكُ فارغ — يظهر حالَ إضافة أوّل شيء (طلبُ صاحب الموقع) */
-#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > .cx-jrseg,
-#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > .cx-jrseg { display: none !important; }
+#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk),
+#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk) { display: none !important; }
 /* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
 /* التذييلُ المطويّ بطول الترويسة المطويّة (طلبُ صاحب الموقع): ‎20px‎ بين الكتل وحافّة المربّع، والمسكةُ على الحافّة كمسكة الرأس */
@@ -17921,6 +17930,7 @@ html[data-theme="dark"] .imp-q { border-inline-start-color: rgba(131, 197, 190, 
 /* ===== قائمةُ المصادر في التذييل (التوجّهُ الأوّل): زرٌّ باسم المصدر ▾ وبطاقةٌ عموديّة فوقه ===== */
 .cx-srcm .cx-srcm__tg { gap: 8px; }
 .cx-plus.cx-srcm.is-open .cx-plus__tg { transform: none; }
+.cx-plus.cx-srcm.is-open .cx-plus__tg > svg { transform: none; }   /* قائمةُ المصادر: أيقونتُها لا تدور كعلامة + */
 .cx-srcm__tg .chtool__txt b { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
 .cx-srcm__chev { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #a9852f; transition: transform .2s ease; }
 .cx-srcm.is-open .cx-srcm__chev { transform: rotate(180deg); }
@@ -18565,3 +18575,106 @@ html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
 /* تبويبٌ بلا مساهمات: صفُّ الدوائر لا يأخذ مكانًا، فتتوسّط الأيقونةُ والاسمُ عموديًّا — وإذا اختير ظهرت «+» وحدها */
 .cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
 .cm-tabs button:not(.on) .cm-faces.is-none { display: none; }
+
+
+/* ===== زرُّ ⋮ «طريقة العرض» في تذييل البنك: دائرةٌ صغيرة، وفوقها عنوانٌ ومقسومُ «رحلة · قائمة» ===== */
+.cx-jrk { margin-inline-start: 6px; }
+.cx-plus.cx-jrk .cx-jrk__tg { width: 36px; height: 36px; padding: 0; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--u-line, #d9dfe3);
+  background: var(--u-surf, #fff); color: var(--u-ink, #14233f); cursor: pointer; }
+.cx-plus.cx-jrk .cx-jrk__tg svg { width: 17px; height: 17px; }
+.cx-plus.cx-jrk.is-open .cx-jrk__tg > svg { transform: none; }
+.cx-plus.cx-jrk.is-open .cx-jrk__tg, .cx-plus.cx-jrk .cx-jrk__tg:hover { background: #f3f5f6; }
+.cx-jrk__menu { gap: 8px; padding: 10px 12px 12px; }
+.cx-jrk__h { font-size: 11.5px; font-weight: 700; color: #7a8592; text-align: start; }
+.pk--edit .cx-jrk__menu .cx-jrseg { display: flex; padding: 3px; border-radius: 99px; background: #f3f5f6; }
+.pk--edit .cx-jrk__menu .cx-jrseg button { height: 32px; padding: 0 14px; border-radius: 99px; gap: 6px; font-size: 13px; font-weight: 700; color: #5d6b7a; background: transparent; }
+.pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #fff; color: #14233f; box-shadow: 0 2px 6px -2px rgba(20, 35, 63, .3); }
+html[data-theme="dark"] .cx-plus.cx-jrk .cx-jrk__tg { background: #2f3b45; border-color: rgba(255, 255, 255, .12); color: #e6ecef; }
+html[data-theme="dark"] .cx-plus.cx-jrk.is-open .cx-jrk__tg, html[data-theme="dark"] .cx-plus.cx-jrk .cx-jrk__tg:hover { background: #36434a; }
+html[data-theme="dark"] .cx-jrk__h { color: #9fb0b8; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg { background: #1a2226; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button { color: #9fb0b8; }
+html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #36434a; color: #e6ecef; }
+/* ===== أزرارُ النافذة سككٌ في ركن الترويسة (طلبُ صاحب الموقع) =====
+   بلغة مقبض توسيع المساهمة (‎pk-max--curve‎): سكّةٌ شفّافةٌ سُمكُها ‎6.5‎ ونقاطٌ عليها.
+   الأزرارُ الثلاثةُ مربّعٌ واحدٌ ‎40‎ مسمَّرٌ على ركن ‎.cd-meta‎، ولا يُلتقط منها إلّا سكّتُها
+   (‎.cd-wb__hit‎)، فلا يحجب أحدُها أخاه. و‎translate‎ يُرفع عن الشريط لأنّ أيَّ قيمةٍ فيه
+   تجعله مرجعَ المطلق فيقع المربّعُ على الشريط لا على الركن */
+.cd-wb__rl { display: none; }
+#card-modal .cd-meta > .cd-bar { translate: none; }
+#card-modal .cd-meta > .cd-bar > .cd-wb--x,
+#card-modal .cd-meta > .cd-bar > .cd-wb--mx,
+#card-modal .cd-meta > .cd-bar > .cd-wb--mn {
+  position: absolute; top: 0; inset-inline-start: 0; z-index: 4;
+  width: 40px; height: 40px; padding: 0; border-radius: 0;
+  background: none; pointer-events: none;
+}
+#card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__ic { display: none; }
+#card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl {
+  display: block; width: 40px; height: 40px; overflow: visible; fill: none; stroke-linecap: round; }
+html[data-lang="en"] #card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl { transform: scaleX(-1); }
+.cd-wb__hit { stroke: transparent; stroke-width: 12; pointer-events: stroke; cursor: pointer; }
+.cd-wb__grip { stroke-width: 6.5; transition: stroke .15s; }
+.cd-wb__dot, .cd-wb__dash { opacity: .8; transition: fill .15s, stroke .15s, opacity .15s; }
+.cd-wb__dash { stroke-width: 2.5; }
+.cd-wb:hover .cd-wb__dot, .cd-wb:hover .cd-wb__dash,
+.cd-wb:focus-visible .cd-wb__dot, .cd-wb:focus-visible .cd-wb__dash { opacity: 1; }
+#card-modal .cd-meta > .cd-bar > .cd-wb:focus-visible { outline: none; }
+/* الطيُّ رماديّ، والتكبيرُ أخضر، والإغلاقُ أحمر — ظاهرةٌ دائمًا، ويغمق اللونُ عند المرور */
+.cd-wb--mn .cd-wb__grip { stroke: rgba(20, 35, 63, .1); }
+.cd-wb--mn:hover .cd-wb__grip, .cd-wb--mn:focus-visible .cd-wb__grip { stroke: rgba(20, 35, 63, .2); }
+.cd-wb--mn .cd-wb__dash { stroke: rgba(20, 35, 63, .45); }
+.cd-wb--mx .cd-wb__grip { stroke: rgba(63, 154, 92, .24); }
+.cd-wb--mx:hover .cd-wb__grip, .cd-wb--mx:focus-visible .cd-wb__grip { stroke: rgba(63, 154, 92, .42); }
+.cd-wb--mx .cd-wb__dot { fill: #2f7d48; }
+.cd-wb--x .cd-wb__grip { stroke: rgba(192, 86, 75, .22); }
+.cd-wb--x:hover .cd-wb__grip, .cd-wb--x:focus-visible .cd-wb__grip,
+.cd-wb--mx.is-rs:hover .cd-wb__grip, .cd-wb--mx.is-rs:focus-visible .cd-wb__grip { stroke: rgba(192, 86, 75, .4); }
+.cd-wb--x .cd-wb__dot, .cd-wb--mx.is-rs:hover .cd-wb__dot { fill: #b5483c; }
+html[data-theme="dark"] .cd-wb--mn .cd-wb__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .cd-wb--mn:hover .cd-wb__grip { stroke: rgba(255, 255, 255, .24); }
+html[data-theme="dark"] .cd-wb--mn .cd-wb__dash { stroke: rgba(231, 239, 240, .5); }
+html[data-theme="dark"] .cd-wb--mx .cd-wb__grip { stroke: rgba(108, 196, 138, .24); }
+html[data-theme="dark"] .cd-wb--mx:hover .cd-wb__grip { stroke: rgba(108, 196, 138, .42); }
+html[data-theme="dark"] .cd-wb--mx .cd-wb__dot { fill: #6cc48a; }
+html[data-theme="dark"] .cd-wb--x .cd-wb__grip { stroke: rgba(224, 123, 111, .24); }
+html[data-theme="dark"] .cd-wb--x:hover .cd-wb__grip,
+html[data-theme="dark"] .cd-wb--mx.is-rs:hover .cd-wb__grip { stroke: rgba(224, 123, 111, .42); }
+html[data-theme="dark"] .cd-wb--x .cd-wb__dot,
+html[data-theme="dark"] .cd-wb--mx.is-rs:hover .cd-wb__dot { fill: #e07b6f; }
+/* والنافذةُ التي خلف غيرها: سككُها رماديّة حتى يمرّ عليها المؤشّر */
+#card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__grip { stroke: rgba(20, 35, 63, .1); }
+#card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__dot { fill: #14233f; opacity: .4; }
+html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__grip { stroke: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__dot { fill: #e7eff0; opacity: .45; }
+/* ومقابضُ التحجيم كانت تغطّي الركنَ فتبتلع السكك: تُقصَّر عنه، ومقبضُ الركن يخرج إلى ما وراء
+   الانحناءة (وهو فراغٌ لا سكّةَ فيه). والركنُ أيمنُ في العربيّة وأيسرُ في الإنجليزيّة */
+#card-modal .cd-rz--t { right: 40px; }
+#card-modal .cd-rz--r { top: 40px; }
+#card-modal .cd-rz--tr { top: -8px; right: -8px; width: 11px; height: 11px; }
+html[data-lang="en"] #card-modal .cd-rz--t { right: 12px; left: 40px; }
+html[data-lang="en"] #card-modal .cd-rz--r { top: 12px; }
+html[data-lang="en"] #card-modal .cd-rz--l { top: 40px; }
+html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18px; height: 18px; }
+html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }
+/* والكتابُ مغلقٌ: لا صفحةَ ولا صفحتين، فيغيب زرُّ التبديل (‎bk-shut‎ يكتبه ‎bk2Show‎) */
+.post.bk-shut .cx-actmode, .post.bk-shut .cbk-nav__mode { display: none; }
+/* ===== شريطُ الملخّص كشريط البنك (طلبُ صاحب الموقع) =====
+   رفيعٌ ‎4px‎ بلا سكّة، بلونٍ خافتٍ يغمق قليلًا عند المرور، ويقف ‎18px‎ عن طرفي المساحة فلا يمسّ انحناءها.
+   و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎ لأنّ كروم يُهمل ‎::-webkit-scrollbar‎ متى ضُبطا */
+.pk-split > .kt-view:not(.kt-view--tree),
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree) { scrollbar-width: auto; scrollbar-color: auto; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar { width: 4px; height: 4px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-track,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-track { background: transparent; margin-block: 18px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border: 0; border-radius: 99px; }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] .pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .28); }
+.pk-split > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button,
+.pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-webkit-scrollbar-button { display: none; }
