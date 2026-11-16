@@ -6301,6 +6301,106 @@
 169687,
 2
 ]
+],
+"PE 001": [
+[
+147140,
+29
+],
+[
+175348,
+2
+],
+[
+61154,
+7
+],
+[
+112282,
+1068
+]
+],
+"PYP 001": [
+[
+95674,
+14
+],
+[
+61322,
+3
+],
+[
+61322,
+4
+],
+[
+61322,
+16
+],
+[
+134548,
+8
+],
+[
+70165,
+20
+],
+[
+72411,
+20
+],
+[
+54933,
+3
+],
+[
+171628,
+1
+],
+[
+55644,
+7
+],
+[
+169272,
+3
+],
+[
+149553,
+7
+],
+[
+59240,
+15
+],
+[
+59240,
+19
+],
+[
+62351,
+2
+],
+[
+176103,
+2
+]
+],
+"PE 002": [
+[
+119329,
+12
+],
+[
+159616,
+2
+]
+],
+"PYP 002": [
+[
+79218,
+6
+]
 ]
 },
 "src": {
@@ -11433,6 +11533,204 @@ null
 "Degree Plan.zip",
 "stkfupm-110752-2-Degree Plan.zip",
 "^Degree\\ Plan\\."
+]
+]
+]
+],
+"PYP 001": [
+[
+"srcU",
+59850,
+2,
+[
+[
+"pyp001.doc",
+"stkfupm-59850-2-pyp001.doc",
+"^pyp001\\.doc"
+]
+]
+],
+[
+"srcP",
+88246,
+2,
+[
+[
+"PYP001-091-HW-10 Sol.doc",
+"stkfupm-88246-2-PYP001-091-HW-10 Sol.doc",
+"^PYP001\\-091\\-H"
+]
+]
+],
+[
+"srcP",
+70165,
+8,
+[
+[
+"webct ch.2.doc",
+"stkfupm-70165-8-webct ch.2.doc",
+"^webct\\ ch\\.2\\.d"
+],
+[
+"webct ch.12.zip",
+"stkfupm-70165-8-webct ch.12.zip",
+"^webct\\ ch\\.12\\."
+],
+[
+"H.W solutions.doc",
+"stkfupm-70165-15-H.W solutions.doc",
+null
+]
+]
+],
+[
+"srcP",
+70165,
+9,
+[
+[
+"ch 3.zip",
+"stkfupm-70165-9-ch 3.zip",
+"^ch\\ 3\\.zip"
+],
+[
+"ch1.zip",
+"stkfupm-70165-9-ch1.zip",
+"^ch1\\.zip"
+]
+]
+],
+[
+"srcU",
+70165,
+21,
+[
+[
+"ch 23.doc",
+"stkfupm-70165-21-ch 23.doc",
+"^ch\\ 23\\.doc"
+]
+]
+],
+[
+"srcU",
+70165,
+24,
+[
+[
+"WEB CT.zip",
+"stkfupm-70165-24-WEB CT.zip",
+"^WEB\\ CT\\.zip"
+]
+]
+],
+[
+"srcU",
+55644,
+1,
+[
+[
+"pyp001.doc",
+"stkfupm-55644-1-pyp001.doc",
+"^pyp001\\.doc"
+]
+]
+],
+[
+"srcP",
+137763,
+5,
+[
+[
+"PYP001-121-MI-20Q-Website.pdf",
+"stkfupm-137763-5-PYP001-121-MI-20Q-Website.pdf",
+"^PYP001\\-121\\-M"
+],
+[
+"PYP001-121-MII-Solution-Website.pdf",
+"stkfupm-137763-6-PYP001-121-MII-Solution-Website.pdf",
+null
+]
+]
+],
+[
+"srcP",
+106903,
+12,
+[
+[
+"PYP001-MI-102-Solution.doc",
+"stkfupm-106903-12-PYP001-MI-102-Solution.doc",
+"^PYP001\\-MI\\-10"
+],
+[
+"Solution-Major-II-102-PYP001.pdf",
+"stkfupm-106903-14-Solution-Major-II-102-PYP001.pdf",
+null
+]
+]
+],
+[
+"srcP",
+98824,
+6,
+[
+[
+"pyp 001 081 second major.pdf",
+"stkfupm-98824-6-pyp 001 081 second major.pdf",
+"^pyp\\ 001\\ 081\\ "
+],
+[
+"pyp 001 071 second major.pdf",
+"stkfupm-98824-6-pyp 001 071 second major.pdf",
+"^pyp\\ 001\\ 071\\ "
+],
+[
+"pyp 001 051 second major.pdf",
+"stkfupm-98824-6-pyp 001 051 second major.pdf",
+"^pyp\\ 001\\ 051\\ "
+]
+]
+],
+[
+"srcP",
+48900,
+1,
+[
+[
+"h.w pyp001.doc",
+"stkfupm-48900-1-h.w pyp001.doc",
+"^h\\.w\\ pyp001\\.d"
+],
+[
+"quiz.zip",
+"stkfupm-48900-2-quiz.zip",
+null
+]
+]
+],
+[
+"srcP",
+88696,
+1,
+[
+[
+"h.w 11.doc",
+"stkfupm-88696-1-h.w 11.doc",
+"^h\\.w\\ 11\\.doc"
+]
+]
+],
+[
+"srcP",
+137916,
+2,
+[
+[
+"PYP001-121-MI-20Q-Website.pdf",
+"stkfupm-137916-2-PYP001-121-MI-20Q-Website.pdf",
+"^PYP001\\-121\\-M"
 ]
 ]
 ]

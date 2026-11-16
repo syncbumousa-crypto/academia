@@ -2173,10 +2173,60 @@ DOCTORS = {
   'stk-dr-f185295': 'Dr. Sagheer Ahmed Sagheer Onaizi',
   'stk-dr-f186281': 'Dr. Moayad Alnammi',
   'stk-dr-f187902': 'Dr. Ammar Alzaydi',
+  # ومدرّسو موادَّ أخرى بأسماء صفحاتهم (والمعرّفُ رقمُ صفحته)
+  'stk-dr-f68331': 'أ.عادل النموري',
+  'stk-dr-f68336': 'Dr. H. Abu-Hilal',
+  'stk-dr-f68498': 'Dr. Mohammed Al-Solami',
+  'stk-dr-f68843': 'أ. تشارلز يندورك',
+  'stk-dr-f70508': 'أ. هيونج شين',
+  'stk-dr-f74184': 'Dr. John Allen',
+  'stk-dr-f99457': 'Dr. Ahmed Baqais',
+  'stk-dr-f115380': 'Dr. Fazal Ur-Rehman',
+  'stk-dr-f115389': 'Dr. Muhammad Akhlaq',
+  'stk-dr-f118593': 'Dr. Akhtar Hussain',
+  'stk-dr-f172587': 'Dr. Giacinto Genco',
 }
 # code ⇐ [(topic id, post_number, doctor id)] — تقييماتُ هذه المادّة وحدَها.
 # والردُّ الذي لا يقيّم («القريد هذا قريدك؟») لا يُنقل، ولا تقييمُ مادّةٍ أخرى.
 PICK_DOC = {
+  # ‏‎PE 001 / PE 002 / PYP 001 / PYP 002‎ — بالقاعدة نفسها (ردٌّ فيه بنودُ تقييم ويصرّح بالمادّة أوّلًا، بلا سبٍّ ولا دعاء)
+  'PE 001': [
+    (68326, 88, 'stk-dr-f68326'),
+    (68331, 54, 'stk-dr-f68331'),
+    (68843, 30, 'stk-dr-f68843'),
+    (70508, 18, 'stk-dr-f70508'),
+    (70879, 54, 'stk-dr-f70879'),
+    (74753, 45, 'stk-dr-f74753'),
+    (90478, 29, 'stk-dr-f90478'), (90478, 40, 'stk-dr-f90478'),
+    (148177, 16, 'stk-dr-f148177'),
+    (175801, 3, 'stk-dr-f175801'), (175801, 6, 'stk-dr-f175801'), (175801, 9, 'stk-dr-f175801'),
+    (176973, 2, 'stk-dr-f176973'), (176973, 3, 'stk-dr-f176973'), (176973, 7, 'stk-dr-f176973'),
+    (179144, 6, 'stk-dr-f179144'),
+  ],
+  'PE 002': [
+    (68326, 89, 'stk-dr-f68326'), (68326, 93, 'stk-dr-f68326'),
+    (68330, 47, 'stk-dr-f68330'), (68330, 50, 'stk-dr-f68330'),
+    (68336, 61, 'stk-dr-f68336'), (68336, 73, 'stk-dr-f68336'),
+    (70306, 25, 'stk-dr-f70306'),
+    (74184, 17, 'stk-dr-f74184'), (74184, 21, 'stk-dr-f74184'),
+    (80987, 21, 'stk-dr-f80987'),
+    (90478, 44, 'stk-dr-f90478'), (90478, 46, 'stk-dr-f90478'),
+    (175801, 5, 'stk-dr-f175801'), (175801, 10, 'stk-dr-f175801'), (175801, 14, 'stk-dr-f175801'),
+    (179144, 2, 'stk-dr-f179144'),
+  ],
+  'PYP 001': [
+    (68477, 29, 'stk-dr-f68477'),
+    (68489, 59, 'stk-dr-f68489'),
+    (68498, 3, 'stk-dr-f68498'),
+    (115380, 4, 'stk-dr-f115380'), (115380, 9, 'stk-dr-f115380'), (115380, 10, 'stk-dr-f115380'), (115380, 11, 'stk-dr-f115380'),
+    (172587, 3, 'stk-dr-f172587'), (172587, 5, 'stk-dr-f172587'), (172587, 9, 'stk-dr-f172587'), (172587, 11, 'stk-dr-f172587'),
+    (176974, 3, 'stk-dr-f176974'),
+  ],
+  'PYP 002': [
+    (99457, 14, 'stk-dr-f99457'), (99457, 16, 'stk-dr-f99457'),
+    (115389, 2, 'stk-dr-f115389'),
+    (118593, 10, 'stk-dr-f118593'),
+  ],
   # ‏‎ACCT 300 / ACCT 301 / ACCT 302 / ACCT 311 / ACCT 410 / AE 325 / AE 328 / AE 333 / ARE 322 / AS 201 / AS 289 / BUS 200 / CE 101 / CE 201 / CE 203 / CE 230 / CE 261 / CE 305 / CE 315 / CE 318 / CE 330 / CE 341 / CGS 392 / CHE 200 / CHE 204 / CHE 212 / CHE 300 / CHE 303 / CHE 304 / CHE 306 / CHE 309 / CHE 360 / CHE 401 / CHE 402 / CHE 405 / CHE 409 / CHE 470 / CHEM 212 / CHEM 311 / CHEM 312 / CHEM 321 / CHEM 324 / CIE 318 / COE 203 / COE 233 / COE 241 / COE 292 / COE 301 / COE 344 / COE 353 / EE 207 / EE 272 / EE 303 / EE 315 / EE 340 / EE 360 / EE 370 / EE 380 / EE 390 / FIN 315 / FIN 415 / FIN 425 / FIN 450 / HRM 301 / HRM 401 / ICS 321 / ICS 343 / ICS 353 / ICS 381 / ICS 410 / ISE 205 / ISE 303 / ISE 307 / ISE 315 / ISE 320 / ISE 321 / ISE 324 / ISE 391 / ISE 402 / ISE 405 / ISE 422 / ISE 470 / MATH 202 / MATH 225 / MATH 333 / MATH 371 / ME 201 / ME 203 / ME 204 / ME 210 / ME 218 / ME 301 / ME 302 / ME 303 / ME 311 / ME 315 / ME 316 / ME 322 / ME 323 / ME 401 / ME 411 / ME 412 / MGT 301 / MGT 310 / MGT 311 / MGT 440 / MGT 450 / MIS 101 / MIS 215 / MIS 250 / MIS 301 / MIS 311 / MIS 405 / OM 311 / PETE 101 / PETE 202 / PETE 206 / PETE 302 / PETE 313 / PETE 407 / PHYS 430 / STAT 201 / STAT 211 / STAT 212 / SWE 216 / SWE 316 / SWE 326 / SWE 387‎ — بالقاعدة نفسها (ردٌّ فيه بنودُ تقييم ويصرّح بالمادّة أوّلًا، بلا سبٍّ ولا دعاء)
   'ACCT 300': [
     (98419, 8, 'stk-dr-f98419'),
