@@ -555,13 +555,6 @@
       "user": "Sherlock_Holmes"
     },
     {
-      "id": "stk-user3125",
-      "name": "مجموعة العنيد",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/858c86/144.png",
-      "email": "user3125@import.stkfupm.invalid",
-      "user": "user3125"
-    },
-    {
       "id": "stk-user2552",
       "name": "عبادي",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2552/144/266_2.png",
@@ -576,13 +569,6 @@
       "user": "ABU_MNAHE"
     },
     {
-      "id": "stk-a_dulaziz",
-      "name": "AβĐUŁAZIZ",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/59ef9b/144.png",
-      "email": "a_dulaziz@import.stkfupm.invalid",
-      "user": "A_DULAZIZ"
-    },
-    {
       "id": "stk-user8598",
       "name": "الـدحـمي",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8598/144/1838_2.png",
@@ -595,13 +581,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/3ab097/144.png",
       "email": "user4626@import.stkfupm.invalid",
       "user": "user4626"
-    },
-    {
-      "id": "stk-eng.mshari",
-      "name": "Eng.Mshari",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/3e96dc/144.png",
-      "email": "eng.mshari@import.stkfupm.invalid",
-      "user": "Eng.Mshari"
     },
     {
       "id": "stk-musaad101",
@@ -630,13 +609,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8797f3/144.png",
       "email": "giant_genius@import.stkfupm.invalid",
       "user": "giant_genius"
-    },
-    {
-      "id": "stk-da7mi91",
-      "name": "da7mi91",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/ecc23a/144.png",
-      "email": "da7mi91@import.stkfupm.invalid",
-      "user": "da7mi91"
     },
     {
       "id": "stk-danteer",
@@ -980,6 +952,13 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/super_prince/144/648_2.png",
       "email": "super_prince@import.stkfupm.invalid",
       "user": "Super_Prince"
+    },
+    {
+      "id": "stk-user3125",
+      "name": "مجموعة العنيد",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/858c86/144.png",
+      "email": "user3125@import.stkfupm.invalid",
+      "user": "user3125"
     },
     {
       "id": "stk-user8654",
@@ -3449,35 +3428,6 @@
       }
     },
     {
-      "id": "stk-p438496-chem101",
-      "uid": "stk-user3125",
-      "code": "CHEM 101",
-      "sec": "srcP",
-      "ts": 1248869750000,
-      "st": "pub",
-      "data": {
-        "html": "بسم الله الرحمن الرحيم<br><br>كما هو موضح في العنوان الدرجات نزلت للميجر الأول وبإمكانكم مشاهدتها عبر الموضوع اللي حاطه الدكتور في الويب سي تي او في المرفقات<br><br>جدير بالذكر ان الاختبار بدأ الساعة 12:40 وانتهى الساعة 2 ظهرا<br><br>القريدات نزلت 2:45 وهو حسب ما اعتقد نوعا ما وقت قياسي ,<br><br>الافرج 65 من 100<br><br>آرآئكم وانطباعاتكم عن الاختبار 😊<br><br>بالتوفيق للكل يارب<br><br>في المرفقات ملف اكسل مضغوط بصيغة ZIP يحتوي على القريدات للسكاشن 1 و 2 و 3 وهي اللي يدرسها د.ايساب<br><br>​<span data-fid=\"stk-f438496-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br>​<span data-fid=\"stk-f438496-1\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
-        "files": {
-          "stk-f438496-0": {
-            "name": "First_Major_CHEM_101-083_Section1_2_3.zip",
-            "v": "data:application/zip;base64,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"
-          },
-          "stk-f438496-1": {
-            "name": "Final_Exam_CHEM_101-083_Section1_2_3.zip",
-            "v": "data:application/zip;base64,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"
-          }
-        },
-        "imp": {
-          "src": "stkfupm",
-          "url": "https://community.stkfupm.com/t/major-exam-1-chem-101-term-083-65/76035/1",
-          "user": "user3125",
-          "ts": 1248869750000,
-          "tid": 76035,
-          "pn": 1
-        }
-      }
-    },
-    {
       "id": "stk-p217959-chem101",
       "uid": "stk-user2552",
       "code": "CHEM 101",
@@ -3601,31 +3551,6 @@
       }
     },
     {
-      "id": "stk-p1105661-chem101",
-      "uid": "stk-a_dulaziz",
-      "code": "CHEM 101",
-      "sec": "srcU",
-      "ts": 1349790804000,
-      "st": "pub",
-      "data": {
-        "html": "بالتوفيق<br><br>​<span data-fid=\"stk-f1105661-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
-        "files": {
-          "stk-f1105661-0": {
-            "name": "results_id0.pdf",
-            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/a4d6942d662d6908ddec9f8d6725958e34662d6f3d28e0a61aa4ce25afc749ec"
-          }
-        },
-        "imp": {
-          "src": "stkfupm",
-          "url": "https://community.stkfupm.com/t/chem-101/133377/1",
-          "user": "A_DULAZIZ",
-          "ts": 1349790804000,
-          "tid": 133377,
-          "pn": 1
-        }
-      }
-    },
-    {
       "id": "stk-p934509-chem101",
       "uid": "stk-user8598",
       "code": "CHEM 101",
@@ -3675,31 +3600,6 @@
           "user": "user4626",
           "ts": 1273351594000,
           "tid": 87801,
-          "pn": 1
-        }
-      }
-    },
-    {
-      "id": "stk-p1124985-chem101",
-      "uid": "stk-eng.mshari",
-      "code": "CHEM 101",
-      "sec": "srcP",
-      "ts": 1354004113000,
-      "st": "pub",
-      "data": {
-        "html": "السلام عليكم …<br><br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br><br>اتمنى لكم التوفيق … 🌹<br><br>​<span data-fid=\"stk-f1124985-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
-        "files": {
-          "stk-f1124985-0": {
-            "name": "results_id2.pdf",
-            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/532df3e75990ce447e05591dab79e8bcc7df42e6122b0210fa364bcbef967a85"
-          }
-        },
-        "imp": {
-          "src": "stkfupm",
-          "url": "https://community.stkfupm.com/t/major-ii-chem-101-scores/135518/1",
-          "user": "Eng.Mshari",
-          "ts": 1354004113000,
-          "tid": 135518,
           "pn": 1
         }
       }
@@ -3826,31 +3726,6 @@
           "ts": 1357390065000,
           "tid": 137605,
           "pn": 8
-        }
-      }
-    },
-    {
-      "id": "stk-p735178-chem101",
-      "uid": "stk-da7mi91",
-      "code": "CHEM 101",
-      "sec": "srcU",
-      "ts": 1289404041000,
-      "st": "pub",
-      "data": {
-        "html": "معليش على التاخر<br><br>​<span data-fid=\"stk-f735178-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
-        "files": {
-          "stk-f735178-0": {
-            "name": "chem101result.pdf",
-            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/f0cc9f28a90886eae1335b27f796465e0ab9630ed47b9ae1fa0c2c21154bf552"
-          }
-        },
-        "imp": {
-          "src": "stkfupm",
-          "url": "https://community.stkfupm.com/t/chem-101-grades/98030/3",
-          "user": "da7mi91",
-          "ts": 1289404041000,
-          "tid": 98030,
-          "pn": 3
         }
       }
     },

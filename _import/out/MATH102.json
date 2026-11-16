@@ -604,13 +604,6 @@
       "user": "pazzo_3Qeel"
     },
     {
-      "id": "stk-user6441",
-      "name": "بـيبــسي",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6441/144/1352_2.png",
-      "email": "user6441@import.stkfupm.invalid",
-      "user": "user6441"
-    },
-    {
       "id": "stk-computist",
       "name": "Computist",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
@@ -4298,31 +4291,6 @@
           "ts": 1328036019000,
           "tid": 119515,
           "pn": 2
-        }
-      }
-    },
-    {
-      "id": "stk-p733120-math102",
-      "uid": "stk-user6441",
-      "code": "MATH 102",
-      "sec": "srcU",
-      "ts": 1289066778000,
-      "st": "pub",
-      "data": {
-        "html": "شوف المرفقات:)<br><br>​<span data-fid=\"stk-f733120-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
-        "files": {
-          "stk-f733120-0": {
-            "name": "MATH102_101_E1_Scores.pdf",
-            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/320e90a35a884c7281539c4f5561275005190c0ce2f21058b840cdfc3f894b51"
-          }
-        },
-        "imp": {
-          "src": "stkfupm",
-          "url": "https://community.stkfupm.com/t/math-102/97820/8",
-          "user": "user6441",
-          "ts": 1289066778000,
-          "tid": 97820,
-          "pn": 8
         }
       }
     },

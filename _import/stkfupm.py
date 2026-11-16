@@ -3928,6 +3928,10 @@ if os.path.exists(BULK):
     for _c, _v in _b.get('src', {}).items():
         PICK_SRC.setdefault(_c, []).extend((s, t, n, [tuple(f) for f in fs]) for s, t, n, fs in _v)
 
+# ===== ملفّاتٌ محظورة: كشوفُ أرقامٍ جامعيّة ودرجات =====
+# ‏لا تُنقل درجاتُ الطلاب ولا أرقامُهم. ملفٌّ في هذه القائمة يُسقط من مساهمته، ومساهمةٌ لم يبقَ فيها ملفٌّ تُترك.
+BLOCKED = set(json.load(io.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'blocked_files.json'), encoding='utf-8')))
+
 def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}
@@ -3949,6 +3953,8 @@ def main(src):
         # ---- «المصادر»: نصُّ الكاتب أسطرًا، وملفُّه في موضع مرفقه
         for ent in PICK_SRC.get(code, []):
             sec, tid, num, files = ent[:4]
+            if files and all(f[1] in BLOCKED for f in files): continue
+            files = [f for f in files if f[1] not in BLOCKED]
             keep = ent[4] if len(ent) > 4 else None
             t, p = load_post(src, cache, tid, num)
             uid = author(users, p)
