@@ -24156,8 +24156,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pile = () => {
       const pt = TH * R.landed / R.n; if (pt < 1e-4) return;
       const A2 = bkLdCurve(C, .0006, a, 0), B2 = bkLdCurve(C, pt, a, 0);
-      bkLdPoly(g, [...A2, ...B2.slice().reverse()].map(([x, z]) => P(x, y1, z)), '#e9e1cf');
       bkLdStrip(g, C, B2, tx.page);
+      /* حافّتُها الأماميّة: سُمكُ الورق المقلوب ممدودًا بطول الصفحة (هي ما يُرى منها والغلافُ مرفوع) — ثمّ مقطعُها عند الذيل */
+      const ea = A2[A2.length - 1], eb = B2[B2.length - 1];
+      bkLdImg(g, tx.edge, P(ea[0], 0, ea[1]), P(ea[0], H, ea[1]), P(eb[0], 0, eb[1]));
+      bkLdPoly(g, [...A2, ...B2.slice().reverse()].map(([x, z]) => P(x, y1, z)), '#e9e1cf');
     };
     /* الطائرة: من الأبعد (أكبرِ زاوية) إلى الأقرب */
     const leaves = () => { for (const f of R.fly) bkLdStrip(g, C, bkLdCurve(C, f.delta, f.th, f.curl), tx.page); };
