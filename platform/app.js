@@ -585,7 +585,7 @@
      أيضًا حين يُزرع ترميز الموقع في صفحة أخرى (لوحة الأدمن) */
   const ASSET_BASE = (() => {
     const s = document.currentScript && document.currentScript.src;
-    return s ? s.replace(/platform\/app\.js.*$/, '') : '';
+    return s ? s.replace(/platform\/app(\.min)?\.js.*$/, '') : '';   /* والمضغوطُ ‎app.min.js‎ في المنشور */
   })();
   const assetURL = p => (!p || /^(data:|blob:|https?:)/.test(p)) ? p : /^\/api\//.test(p) ? (window.AC_API_ORIGIN || location.origin) + p : /^\//.test(p) ? p : ASSET_BASE + p;
   /* ---------- غلاف المادة = مساهمة مثبَّتة في بند «المادة» تحمل صورة كتاب ----------
@@ -2662,6 +2662,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       track = host.querySelector('.reel-track');
       countEl = host.querySelector('.reel-count');
       bindEvents();
+      /* تعويمُ المتمركز يبدأ بمرور المؤشّر عليه ويقف بعد ثلاث دورات (‎10s‎): الحركةُ الدائمة
+         كانت تُبقي الرفَّ تحت زجاج البحث يُعاد رسمُه كلَّ إطار — ‎~75MB‎ من ذاكرة الرسم */
+      track.addEventListener('pointerover', e => {
+        const cr = e.target.closest && e.target.closest('.reel-slot.is-center .crow');
+        if (cr) cr.classList.add('is-bob');
+      });
+      track.addEventListener('animationend', e => { if (e.animationName === 'reel-bob') e.target.classList.remove('is-bob'); });
     }
     /* الجزء يمينًا ثم «/» ثم الكل يسارًا مع العربية — يقلبها اتجاه الصندوق في CSS مع الإنجليزية */
     function paintCount() {
@@ -14828,10 +14835,35 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      مصدرها ‎Unicode CLDR‎ (‎annotations/ar.xml‎ + المشتقّة) — الاسمُ أوّلًا ثمّ كلماتُه بـ‎|‎،
      وتغطيتُها ١٨٠٢ من ١٨٠٢. وهي في مصفوفةٍ **موازيةٍ** لا مدموجةٍ بالأسماء: الفصلُ يُبقي
      كلَّ قارئٍ للفهرس عاملًا بلا تعديل، ولا يُكرَّر اسمُ الملفّ مفتاحًا فيُضاعَف حجمُ الملفّ */
-  const EM_AR = (() => {
-    const a = (typeof ACADEMIA_EMOJI_AR !== 'undefined' && Array.isArray(ACADEMIA_EMOJI_AR)) ? ACADEMIA_EMOJI_AR : [];
-    const m = {}; EM_LIST.forEach((n, i) => { m[n] = a[i] || ''; }); return m;
-  })();
+  /* وتُجلب من ‎emoji-ar.js‎ عند أوّل فتحٍ للمنتقي لا مع الصفحة (‎~187KB‎ لا يحتاجها إلّا هو).
+     وقبل وصولها: التلميحُ بالشريحة الإنجليزيّة، والبحثُ بها — ولا يُحفظ الناقصُ فيُبنى من جديد */
+  let EM_AR = null, EM_Q = null, emArP = null;
+  const emArHas = () => typeof ACADEMIA_EMOJI_AR !== 'undefined' && Array.isArray(ACADEMIA_EMOJI_AR);
+  function emAr() {
+    if (EM_AR) return EM_AR;
+    const a = emArHas() ? ACADEMIA_EMOJI_AR : [];
+    const m = {}; EM_LIST.forEach((n, i) => { m[n] = a[i] || ''; });
+    if (a.length) EM_AR = m;
+    return m;
+  }
+  function emArLoad() {
+    if (emArP || emArHas()) return emArP || Promise.resolve();
+    emArP = new Promise(res => {
+      const sc = document.createElement('script');
+      sc.src = assetURL('platform/emoji-ar.js?v=' + (window.AC_VER || 0));
+      sc.onload = res; sc.onerror = () => { emArP = null; res(); };
+      document.head.appendChild(sc);
+    }).then(() => {
+      if (!emArHas()) return;
+      EM_AR = null; EM_Q = null;
+      /* المنتقي المفتوح يأخذ أسماءه العربيّة فورَ وصولها */
+      document.querySelectorAll('.fmn [data-em]').forEach(b => {
+        const n = EM_BY[b.dataset.em]; if (!n) return;
+        const t = emName(n); b.title = t; b.setAttribute('aria-label', t);
+      });
+    });
+    return emArP;
+  }
   /* تطبيعُ البحث: العربيّةُ تُكتب بألفٍ وهمزةٍ وتاءٍ مربوطةٍ على وجوه، ومن يبحث «كتاب»
      لا ينبغي أن يُحرَم لأنّ المكتوب «كتابٌ» أو «إناء» وهو كتب «اناء». فتُسوّى الحروفُ
      المتقاربةُ ويُنزع التشكيلُ والتطويل — في المخزون مرّةً وفي السؤال كلَّ مرّة */
@@ -14841,14 +14873,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     .replace(/ة/g, 'ه').replace(/[ىئ]/g, 'ي').replace(/ؤ/g, 'و');
   /* فهرسُ البحث: الشريحةُ الإنجليزيّة والأسماءُ العربيّة في نصٍّ واحدٍ مطبَّع — فالبحثُ
      باللغتين يقع على الحقل نفسِه، ولا يُسأل عن لغة الكاتب */
-  const EM_Q = (() => {
-    const m = {};
-    EM_LIST.forEach(n => { m[n] = arNorm(emSlug(n).replace(/-/g, ' ') + ' ' + (EM_AR[n] || '').replace(/\|/g, ' ')); });
+  function emQ() {
+    if (EM_Q) return EM_Q;
+    const ar = emAr(), m = {};
+    EM_LIST.forEach(n => { m[n] = arNorm(emSlug(n).replace(/-/g, ' ') + ' ' + (ar[n] || '').replace(/\|/g, ' ')); });
+    if (EM_AR) EM_Q = m;
     return m;
-  })();
+  }
   /* اسمُ الإيموجي في التلميح: بلغة الواجهة — العربيُّ أوّلُ ما في ‎EM_AR‎، والإنجليزيُّ شريحتُه */
   const emName = n => state.lang === 'ar'
-    ? ((EM_AR[n] || '').split('|')[0] || emSlug(n).replace(/-/g, ' '))
+    ? ((emAr()[n] || '').split('|')[0] || emSlug(n).replace(/-/g, ' '))
     : emSlug(n).replace(/-/g, ' ');
   /* حدود التصنيفات برقم الملفّ: ترتيبُ الرزمة ترتيبُ يونيكود، فالتصنيفُ يُشتقّ من الرقم
      ولا يحتاج جدولًا لكلّ بند. ورأسُ كلّ باب إيموجيُّه الأوّل — يُعرَّف بأشهر ما فيه */
@@ -15083,6 +15117,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r = findNode(deck ? deck() : road ? roadOf(nookEntry, true) : edPack().deck, id);
     if (!r) return;
     document.body.insertAdjacentHTML('beforeend', fmnHTML(r.n));
+    emArLoad();
     const el = document.body.lastElementChild;
     fmn = { id, el, road, deck, tab: 'col', box: fmnBoxOf(anchor) };
     fmnPlace(el, anchor);
@@ -15184,7 +15219,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* السؤالُ يُطبَّع كما طُبِّع المخزون، فيلتقي العربيُّ بالعربيّ والإنجليزيُّ بالإنجليزيّ
        في حقلٍ واحد — «كتاب» و‎book‎ كلاهما يصيب 📖 */
     const q = arNorm(s.value.trim());
-    const list = q ? EM_LIST.filter(n => EM_Q[n].indexOf(q) > -1) : EM_LIST;
+    const Q = q ? emQ() : null;
+    const list = q ? EM_LIST.filter(n => Q[n].indexOf(q) > -1) : EM_LIST;
     fmn.el.querySelectorAll('.fmn-cb').forEach(x => x.classList.toggle('on', x.dataset.cat === '-1'));
     fmn.el.querySelector('.fmn-grid').outerHTML = fmnGridHTML(r.n, list, !q);
   });

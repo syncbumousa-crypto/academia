@@ -2,21 +2,22 @@
    styles.css — هوية الجامعة (الخطوط + الألوان) + التابان فقط
    ============================================================ */
 
-/* خط KFUPM الرسمي: IBM Plex Sans Arabic (محلي، يعمل أوفلاين) */
+/* خط KFUPM الرسمي: IBM Plex Sans Arabic (محلي، يعمل أوفلاين).
+   ‎woff2‎ أوّلًا (ثلثُ حجم ‎ttf‎، والحروفُ نفسُها) و‎ttf‎ احتياطٌ لا يُجلب إلّا لمتصفّحٍ لا يعرفه */
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Regular.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Regular.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Regular.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 500; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Medium.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Medium.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Medium.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 600; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-SemiBold.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype'); }
 @font-face { font-family: 'IBM Plex Sans Arabic'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/IBMPlexSansArabic-Bold.ttf') format('truetype'); }
+             src: url('../assets/fonts/IBMPlexSansArabic-Bold.woff2') format('woff2'), url('../assets/fonts/IBMPlexSansArabic-Bold.ttf') format('truetype'); }
 
 /* خط عناوين KFUPM الرسمي: KFUPM Display (محلي، يعمل أوفلاين) */
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 400; font-display: swap;
-             src: url('../assets/fonts/KFUPM-Regular.ttf') format('truetype'); }
+             src: url('../assets/fonts/KFUPM-Regular.woff2') format('woff2'), url('../assets/fonts/KFUPM-Regular.ttf') format('truetype'); }
 @font-face { font-family: 'KFUPM Display'; font-style: normal; font-weight: 700; font-display: swap;
-             src: url('../assets/fonts/KFUPM-Bold.ttf') format('truetype'); }
+             src: url('../assets/fonts/KFUPM-Bold.woff2') format('woff2'), url('../assets/fonts/KFUPM-Bold.ttf') format('truetype'); }
 
 :root {
   --c-ink:       #14233f;
@@ -1272,10 +1273,11 @@ html[data-lang="en"] .reel-slot.is-center .crow .bk { transform: rotateY(-9deg);
 .reel-slot.is-center .crow .cimg--book {
   -webkit-box-reflect: below 1px linear-gradient(rgba(255, 255, 255, .28), transparent 30%);
 }
-/* أسلوب ١٣: تعويم حيّ — البطاقة المتمركزة تطفو بلطف مستمر (2D على .crow حتى لا يتشوّه الكتاب 3D) */
-.reel-slot.is-center .crow { animation: reel-bob 3.1s ease-in-out infinite; }
+/* أسلوب ١٣: تعويم حيّ — البطاقة المتمركزة تطفو بلطف (2D على .crow حتى لا يتشوّه الكتاب 3D).
+   تبدأ بمرور المؤشّر (‎.is-bob‎ من ‎app.js‎) وتقف بعد ثلاث دورات = ‎10s‎ — لا تدور بلا نهاية */
+.reel-slot.is-center .crow.is-bob { animation: reel-bob 3.333s ease-in-out 3; }
 @keyframes reel-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow.is-bob { animation: none; } }
 
 /* ====== حزمة مادة اللاب في البار: «التفتّح» — مروحة مغلقة ← انقسام مفتوح (مُدار بـ --o من الـJS) ======
    المحاضرة (يمين) والمعمل (يسار)؛ كل مكوّن transform = قيمة‑الإغلاق + فرق×var(--o)،
