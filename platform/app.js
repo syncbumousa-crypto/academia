@@ -24440,16 +24440,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = sid.slice(id.length);
     return H.marks.filter(m => m.s === s && m.k === k);
   }
-  /* رقمُ كلّ بطاقةٍ في مجلدها (ترتيبُها بين بطائقه) — هو رقمُ صفّها في الجدول */
-  function hlRowMap() {
-    const map = new Map(), pk = cardDataPeek(cmCode);
-    const walk = arr => { (arr || []).filter(n => n.t === 'c').forEach((n, i) => map.set(n.id, i + 1)); (arr || []).filter(n => n.t === 'f').forEach(f => walk(f.ch)); };
-    if (pk) walk(pk.deck);
+  /* رقمُ كلّ بطاقةٍ **نسبةً إلى المجلد المفتوح** (طلبُ صاحب الموقع) — هو رقمُ صفّها في الجدول الظاهر: ‎1..N‎ بترتيب العرض
+     مارًّا بالمجلدات الداخليّة. رقمٌ للتحديد لا هويّة: يتبدّل بتبدّل المفتوح، والتظليلُ مربوطٌ بالبطاقة نفسِها.
+     وما ليس في المفتوح لا رقمَ له */
+  function hlRowMap(id) {
+    const map = new Map();
+    if (!id) { const me = (postsOf(cmCode, 'cards') || []).find(isMine); id = me && me.id; }
+    const R = id && hlRows(id);
+    if (R) R.cards.forEach((n, i) => map.set(n.id, i + 1));
     return map;
   }
-  /* صفوفُ المجلد المختار في الملخّص (بطائقُه بترتيبها) */
+  /* صفوفُ المجلد المختار في الملخّص: بطائقُه وما في مجلداته الداخليّة، بترتيب الجدول (‎ktDeep‎) */
   function hlRows(id) {
-    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCards(h) } : null; } catch (e) { return null; }
+    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCardsDeep(h) } : null; } catch (e) { return null; }
   }
   /* ألوانُ التظليل الأربعة (ROADMAP-HL ق٢): ‏‎[طلاءُ الصفحة، دائرةُ الرقم، حبرُ الرقم]‎ — ولكلّ تظليلٍ لونُه (‎m.col‎) ونوعُه (‎m.kind‎: نصٌّ ‎t‎ أو مربّعٌ ‎box‎)،
      والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
@@ -24473,12 +24476,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     const ms = hlMarksOn(b, k); if (!ms.length) return;
     const c = cv.getContext('2d'), W = cv.width, Hh = cv.height;
+    /* تظليلُ صفٍّ خارجَ المجلد المفتوح يبهت ولا رقمَ له (طلبُ صاحب الموقع) — في تحرير صاحبه وحدَه */
+    const R = b.view && b.view.closest('.pk--edit') ? hlRows(pkSrcBase(hlSidOf(b))) : null;
+    const inn = R && new Set(R.cards.map(n => n.id));
+    const out = m => !!inn && m.c.length > 0 && !m.c.some(x => inn.has(x));
     c.globalCompositeOperation = 'multiply';
-    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
+    for (const m of ms) { c.fillStyle = HL_COL[m.col][0]; c.globalAlpha = out(m) ? .3 : 1; for (const [l, r, t, bb] of m.bars) c.fillRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); }
+    c.globalAlpha = 1;
     c.globalCompositeOperation = 'source-over';
     /* والمربّعُ (ق٦) بحدٍّ رفيعٍ من حبر لونه فوق طلائه — يُعرف أنّه منطقةٌ لا سطر */
     for (const m of ms) if (m.kind === 'box') for (const [l, r, t, bb] of m.bars) {
-      c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = .55;
+      c.lineWidth = Math.max(1.5, W * .0022); c.strokeStyle = HL_COL[m.col][2]; c.globalAlpha = out(m) ? .18 : .55;
       c.strokeRect(l * W, t * Hh, (r - l) * W, (bb - t) * Hh); c.globalAlpha = 1;
     }
   }
@@ -24728,7 +24736,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const P = document.createElement('div');
     P.id = 'hl-mk'; P.className = 'hl-pal hl-mk' + (document.documentElement.getAttribute('data-theme') === 'dark' ? ' is-dark' : ''); P.setAttribute('role', 'menu');
     /* ومربّعُ رقم الصفّ الذي ينتمي إليه (طلبُ صاحب الموقع): يُكتب فيه رقمٌ آخر فينتقل التظليلُ إلى صفّه (ورقمُ ما بعد الأخير صفٌّ جديد)، ويُمسح فيُفكّ من صفّه */
-    const rn = m.c.length ? (hlRowMap().get(m.c[0]) || '') : '';
+    const rn = m.c.length ? (hlRowMap(id).get(m.c[0]) || '') : '';
     P.innerHTML = `<input class="hl-mk__n" data-hlmn inputmode="numeric" maxlength="3" value="${rn}" aria-label="${esc(T().hlRowN || '')}" title="${esc(T().hlRowN || '')}"><i class="hl-mk__sep"></i>`
       + Object.keys(HL_COL).map(c => `<button type="button" role="menuitemradio" aria-checked="${m.col === c}" class="${m.col === c ? 'is-on' : ''}" data-hlmc="${c}" style="--c:${HL_COL[c][1]}"></button>`).join('')
       + `<i class="hl-mk__sep"></i><button type="button" class="hl-mk__del" data-hlmdel title="${esc(T().hlDel || '')}" aria-label="${esc(T().hlDel || '')}">${HL_TRASH}</button>`;
