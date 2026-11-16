@@ -9566,6 +9566,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* التحريرُ يبدأ بلا تذييلٍ ولا خطِّه (طلبُ صاحب الموقع): يظهران بحركة أوّلَ ما تُلمس إحدى المساحات الثلاث */
     if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
+    if (slot) slot.dataset.fill = pkFillKey();
     if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
@@ -9635,7 +9636,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t) t.click();
       return;
     }
-    const t = post && post.querySelector(qb.dataset.actqb === 'f' ? '.vt-foot .cx-addf' : '.vt-foot .cx-addc');
+    /* «سؤال» يفتح دُرجَ أنواع السؤال العلويّ دائمًا (طلبُ صاحب الموقع) — كان يمرّ بـ‎.cx-addc‎ فيصير
+       «ورقةَ الملخّص» متى كان في المساهمة متن (‎cxPageOpen‎)، وما ذاك بابُ إضافة سؤال */
+    if (qb.dataset.actqb !== 'f') { openCardDlg(null, null); return; }
+    const t = post && post.querySelector('.vt-foot .cx-addf');
     if (t) t.click();
   }, true);
   /* «+ مجلد معرفة»: إلى شجرة المعرفة مباشرةً (لا إلى البنك وإن كان مفتوحًا) — يظهر في الشريط مختارًا واسمُه يُحرَّر */
@@ -20863,7 +20867,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     $('#card-modal').classList.remove('is-tray');
     $('#cd-drawer').classList.remove('is-open');
     cdPeekOff();   /* ولا إطلالةٌ تُخلَّف لفتحةٍ قادمة */
-    $('#cd-folderlist').hidden = true;
+    { const fl = $('#cd-folderlist'); if (fl) fl.hidden = true; }   /* قد لا تكون في الصفحة: كان سقوطُها يقطع الإغلاقَ قبل تمامه */
     /* الموضعُ المنقول والإلصاقُ لا يُخلَّفان لفتحةٍ قادمة: تُفتح في وسطها كما عهدتَها.
        إلّا أن تسكن المسرحَ الأصليَّ مطويّةٌ: موضعُها **متاعُها** تعود إليه متى نُشرت،
        فلا يُمحى عنها بإغلاق صدَفةٍ لا شأنَ لها به */
@@ -23451,8 +23455,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* زرُّ «+» ثابتٌ في وسط التذييل (طلبُ صاحب الموقع): يضيف بطاقةَ معرفةٍ إلى المجلد المختار في العرض الظاهر
      (مكانُ «+ معرفة» الجديد)، وفي العرض المجلّديّ يفتح قائمةَ الإضافة */
   const cxMidAdd = () => `<button type="button" class="cx-midadd" data-cxmidadd title="${esc(T().ktAddAria)}" aria-label="${esc(T().ktAddAria)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>`;
+  /* امتلاءُ المساحتين حين رُسمت الأدوات (‎pkActSync‎ يقارن به) */
+  const pkFillKey = () => { const d = cmCode && cardDataPeek(cmCode); return d ? ((d.qb || []).length ? 'q' : '') + (d.deck.length ? 'd' : '') : ''; };
   const cxFoot = (d, id) => `<div class="edit-acts edit-acts--foot vt-foot">
-      <div class="cx-acttools" data-pkid="${esc(id || '')}">${pkActTools(id)}</div>
+      <div class="cx-acttools" data-pkid="${esc(id || '')}" data-fill="${pkFillKey()}">${pkActTools(id)}</div>
       ${completeGlyph(completenessOf('cards', d))}
       ${pkLab() ? `<span class="cx-addhide" hidden>${cxAddBtns()}</span>` : cxAddBtns() + '<span class="src-tools__sep src-tools__sep--solo"></span>'}
       <!-- في المختبر: مجموعةُ الإضافة يمينًا تُخفى (طلبُ صاحب الموقع) — «+» الوسط يقوم بواجبها، وتبقى في الصفحة ينوب عنها -->
@@ -34564,7 +34570,19 @@ void main() {
     (edSec() === 'videos' ? renderVideos : renderCards)();
     cdOrphanSweep();
     sheetLive();
+    pkActSync();
   };
+  /* أدواتُ التذييل تتبع امتلاءَ المساحتين: «إضافة أول سؤال» تصير «إضافة ▾» (سؤال · مجلد) حالَ نزول أوّل سؤال،
+     و«إضافة أول مجلد» كذلك — وكانت لا تُرسم إلّا بتبديل المساحة النشِطة فتبقى على حالها الأولى.
+     ولا تُعاد إلّا إن تبدّل الامتلاء: فلا تُطوى قائمةٌ مفتوحة ولا يضيع تركيز */
+  function pkActSync() {
+    if (edSec() !== 'cards') return;
+    const k = pkFillKey();
+    document.querySelectorAll('#cm-body .post.pk--edit .cx-acttools[data-pkid]').forEach(sl => {
+      if (sl.dataset.fill === k || !sl.dataset.pkid) return;
+      sl.dataset.fill = k; sl.innerHTML = pkActTools(sl.dataset.pkid);
+    });
+  }
 
   $('.cm-panel').addEventListener('click', e => {
     if (!cmCode) return;
