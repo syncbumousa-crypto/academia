@@ -37489,6 +37489,37 @@ void main() {
      «١٤ بطاقة» ولا يُرى منها صفٌّ واحد — خبرٌ صادقٌ عن شجرةٍ مطويّة */
   /* ===== الوصولُ شوطان: سَوقُ البِكرة ثمّ إنزالُ التحديد =====
      ولا يُنزَل شيءٌ قبل أن تسكن البِكرةُ على مادّة الرابط، وإلّا محته حين تسكن */
+  /* ===== رابطُ البذرة (طلبُ صاحب الموقع): ‎#seed=<اسم>‎ يبني في حسابك مساهمةً جاهزة =====
+     من ‎assets/demo/<اسم>.json‎ (المادّة · العنوان · شجرةُ الملخّص · شجرةُ البنك) وملفِّ كتابها — بدوالّ الموقع نفسِها،
+     فتُحفظ وتُرفع كأنّك كتبتَها. ولا يعمل إلّا لمن دخل، ويسأل قبل أن يكتب فوق مساهمةٍ فيها شيء */
+  async function bootSeed() {
+    const m = /^#seed=([a-z0-9-]+)$/.exec(location.hash || '');
+    if (!m) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    if (isGuest()) { toast('سجّل دخولك أوّلًا ثمّ افتح الرابط'); return; }
+    let S = null;
+    try { const r = await fetch(assetURL('assets/demo/' + m[1] + '.json'), { cache: 'no-cache' }); if (r.ok) S = await r.json(); } catch (e) {}
+    if (!S || !S.code || !CM[S.code]) { toast('تعذّر تحميل البذرة'); return; }
+    const old = postsOf(S.code, 'cards').find(isMine);
+    if (old && old.data && ((old.data.deck || []).length || (old.data.qb || []).length) && !confirm('لك مساهمةٌ في ' + S.code + ' — تُستبدل بالبذرة؟')) return;
+    const p = myPost(S.code, 'cards');
+    const now = Date.now();
+    const withIds = a => (a || []).map(n => Object.assign({ id: newId() }, n, n.t === 'c' && n.ctype ? { ct: now } : {}, n.ch ? { ch: withIds(n.ch) } : {}));
+    p.data.title = S.title || p.data.title;
+    p.data.deck = withIds(S.deck);
+    p.data.qb = withIds(S.qb);
+    save();
+    if (S.pdf) {
+      try {
+        const r = await fetch(assetURL('assets/demo/' + S.pdf));
+        if (r.ok) await pkSrcSet(p.id, new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }));
+      } catch (e) {}
+    }
+    save();
+    toast('أُضيفت المساهمة في ' + S.code);
+    marketReel.focusCode(S.code);
+    setTimeout(() => { showMarketContribs(S.code); showCmTab('cards'); }, 700);
+  }
   function bootExamLink() {
     const m = /^#exam=(.+)$/.exec(location.hash || '');
     if (!m) return;
@@ -40615,11 +40646,13 @@ void main() {
   renderTerms();
   bootAddCard();
   bootExamLink();
+  bootSeed();
   /* ===== ورابطُ الاختبار يُلتقط في الحالين =====
      إن فُتح في لسانٍ جديدٍ أُقلع الموقعُ فقرأه الإقلاعُ أعلاه. وإن لُصق في لسانٍ
      **مفتوحٍ أصلًا** فلا إقلاعَ ولا تحميل — المتصفّحُ يبدّل الشقَّ وحدَه ويُطلق
      ‎hashchange‎ لا غير. وهذه كانت علّةَ «لا يعمل»: الرابطُ صحيحٌ ولا أحدَ يقرؤه */
   window.addEventListener('hashchange', bootExamLink);
+  window.addEventListener('hashchange', bootSeed);
 
   /* ---------- شريط تمرير مخصّص (#xscroll): عنصر DOM نبنيه ونتحكّم في جهته حسب اللغة —
      مفصول عن المتصفح، فيتغيّر مكانه فعلًا (يسار عربي/يمين إنجليزي) عبر html[data-lang] ---------- */
