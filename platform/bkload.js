@@ -112,7 +112,7 @@ function draw(L, a, R) {
   const { g, C } = L, { P, D, H, TH, BT, WB, HB } = C, tx = texs(), cvr = L.cover, dark = shade(cvr, .55), mid = shade(cvr, .8), y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2;
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, L.cv.width, L.cv.height); g.drawImage(L.base, 0, 0); g.setTransform(L.s, 0, 0, L.s, 0, 0);
   const it = [];
-  const hb = TH * (1 - (R.launched + R.lift) / R.n), zb = BT + hb;
+  const hb = TH * (1 - R.launched / R.n), zb = BT + hb;
   if (hb > 1e-4) it.push({ d: Infinity, f: () => {
     under(g, [[P(1, 0, zb), P(1, H, zb), P(1, H, BT), P(1, 0, BT)], [P(1, H, zb), P(0, H, zb), P(0, H, BT), P(1, H, BT)], [P(1, 0, zb), P(0, 0, zb), P(0, H, zb), P(1, H, zb)]], '#ece5d4');
     img(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT));
@@ -144,7 +144,7 @@ function draw(L, a, R) {
 }
 
 /* ===== حالُ التقليب في لحظة (توقيتُ المحرّك): ورقةٌ تنطلق إذا بلغها التحميل — لا أسرعَ من ‎ivMax‎ بينها، ومتى جهز الكتابُ فبأقصى سرعته،
-   ولا أكثرَ من ثمانٍ طائرة — وتطير ‎leaf‎؛ ثمّ ينطبق الغلافُ بعد نزول آخرها. وإذا تمهّل التحميلُ نهضت عليا الكتلة قليلًا وهدأت ===== */
+   ولا أكثرَ من ثمانٍ طائرة — وتطير ‎leaf‎؛ ثمّ ينطبق الغلافُ بعد نزول آخرها. وإذا تمهّل التحميلُ سكنت الكتلة (لا ورقةَ تنهض منها فتبرز) ===== */
 function state(L, now) {
   const T = L.T, want = L.fin ? T.n : Math.min(T.n - 1, Math.floor(L.p * T.n));
   let flying = 0; for (const t of T.at) if (now - t < RF.leaf) flying++;
@@ -153,11 +153,10 @@ function state(L, now) {
   T.at.forEach((t, i) => { const k = (now - t) / RF.leaf; if (k >= 1) landed++; else fly.push({ i, k }); });
   let a = RF.angle * (1 - Math.pow(1 - Math.min(1, (now - T.t0) / RF.open), 3));
   if (L.fin && landed === T.n) { if (!T.end) T.end = now + 40; const k = Math.min(1, Math.max(0, (now - T.end) / RF.close)); a = RF.angle * (1 - k * k * k); if (k >= 1) T.closed = true; }
-  let lift = 0; const fl = fly.map(f => ({ i: f.i, k: f.k, th: a * (1 - Math.pow(1 - f.k, 3)) }));
-  if (!fl.length && !L.fin && T.at.length < T.n && now - T.t0 > RF.open) { const w = Math.sin(((now - T.t0) / 1100) * Math.PI) ** 2; if (w > .02) { fl.push({ i: T.at.length, k: 0, th: a * .14 * w }); lift = 1; } }
+  const fl = fly.map(f => ({ i: f.i, k: f.k, th: a * (1 - Math.pow(1 - f.k, 3)) }));
   /* الأسبقُ أعلى، وانحناءُ كلٍّ محدودٌ بنصف الفُرجة بينه وبين التي تحته */
   for (let q = 0; q < fl.length; q++) { const below = q + 1 < fl.length ? fl[q + 1].th : 0; fl[q].curl = Math.min(.09 * Math.sin(Math.PI * fl[q].k), .5 * Math.max(0, fl[q].th - below)); fl[q].delta = L.C.TH * (fl[q].i + .5) / T.n; }
-  return { a, R: { n: T.n, launched: T.at.length, lift, landed, fly: fl } };
+  return { a, R: { n: T.n, launched: T.at.length, landed, fly: fl } };
 }
 
 /* ===== هيكلٌ واحد على لوحة: ‏‎o = { w, h, dpr, ar, n, cover, dark, reduce, p }‎. حلقتُه تقف حين ينتهي. ساعتُه لا تتقدّم في الإطار أكثرَ
@@ -182,7 +181,7 @@ export function createLoader(cv, o, onClosed, onDrawn) {
       L.t += Math.min(34, Math.max(0, now - L.last)); L.last = now;
       if (!L.T) L.T = { t0: L.t, n: Math.max(12, Math.min(RF.nMax, Math.round(L.n / 6) || 20)), at: [], next: L.t + RF.open, end: 0, closed: false };
       if (L.reduce) {
-        const n = 20, k = Math.floor(L.p * n); draw(L, L.fin ? 0 : RF.angle, { n, launched: k, lift: 0, landed: k, fly: [] });
+        const n = 20, k = Math.floor(L.p * n); draw(L, L.fin ? 0 : RF.angle, { n, launched: k, landed: k, fly: [] });
         if (L.fin) { L.dead = true; onClosed && onClosed(); return; }
       } else {
         const st = state(L, L.t); draw(L, st.a, st.R); if (o.trace) o.trace(st, L);   /* ‏‎trace‎ لأداة الفحص وحدها */
