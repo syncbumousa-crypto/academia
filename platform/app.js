@@ -24278,7 +24278,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkTLClear();
     hlRefresh(b, sel.k);   /* بلا اختيارٍ بعد التظليل ولا شريطِ لون (طلبُ صاحب الموقع) */
     if (grew) hlRowsChanged();
+    hlSnap(id, m);
     return true;
+  }
+  /* ===== نسخةُ التحديد (خطّةُ المجلد ق١) =====
+     لكلّ تظليلٍ صورةٌ صغيرةٌ من موضعه في الصفحة (‏‎WebP‎، أطولُ ضلعٍ ‎480‎) في ‏‎IndexedDB‎ بمعرّفه — منها يطير التحديدُ حين يستدعيه
+     مجلدُه والكتابُ مغلق. تُؤخذ عند إنشائه وتُعاد إن تغيّر لونُه وتُحذف معه، والمفقودةُ (تحديدٌ قديمٌ أو متصفّحٌ آخر) تُصنع عند أوّل طلبٍ
+     إن كان ملفُّ المصدر حاضرًا. ‏‎box‎ مستطيلُها من الصفحة (كسور) — يُعرف به مكانُها حين تُقلع */
+  const HL_SNAP = { w: 1024, max: 480, pad: 0.012, q: 0.8 };
+  const hlSnapKey = mid => 'hlsnap:' + mid;
+  function hlSnapBox(m) {
+    let l = 1, t = 1, r = 0, bb = 0;
+    for (const [a, c, d, e] of m.bars) { l = Math.min(l, a); r = Math.max(r, c); t = Math.min(t, d); bb = Math.max(bb, e); }
+    const P = HL_SNAP.pad;
+    return [Math.max(0, l - P), Math.max(0, t - P), Math.min(1, r + P), Math.min(1, bb + P)];
+  }
+  async function hlSnap(id, m) {
+    const b = bkOfSid(id + m.s); if (!b || !b.doc || !m.bars.length) return null;
+    try {
+      const cv = await bk2Tex(b, m.k, HL_SNAP.w), [l, t, r, bb] = hlSnapBox(m);
+      const sx = l * cv.width, sy = t * cv.height, sw = (r - l) * cv.width, sh = (bb - t) * cv.height, k = Math.min(1, HL_SNAP.max / Math.max(sw, sh));
+      const o = document.createElement('canvas'); o.width = Math.max(1, Math.round(sw * k)); o.height = Math.max(1, Math.round(sh * k));
+      o.getContext('2d').drawImage(cv, sx, sy, sw, sh, 0, 0, o.width, o.height);
+      const blob = await new Promise(res => o.toBlob(res, 'image/webp', HL_SNAP.q));
+      if (!blob || !hlMark(id, m.id)) return null;   /* حُذف التحديدُ أثناء التصوير */
+      await chIdb('readwrite', hlSnapKey(m.id), blob);
+      return blob;
+    } catch (e) { return null; }
+  }
+  async function hlSnapGet(id, mid) {
+    const blob = await chIdb('readonly', hlSnapKey(mid)); if (blob) return blob;
+    const m = hlMark(id, mid); return m ? hlSnap(id, m) : null;
   }
   /* صفٌّ أُضيف: يُرسم الجدولُ من جديد (فيظهر الصفّ) */
   function hlRowsChanged() { try { renderCmSection(); } catch (e) {} }
@@ -24352,7 +24382,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       e.stopPropagation();
       if (b.hasAttribute('data-hlmdel')) { hlDelete(id, m.id); hlMkClose(); return; }
       const c = b.dataset.hlmc;
-      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); }
+      if (HL_COL[c] && m.col !== c) { m.col = c; save(); hlRefreshMark(id, m); hlRowMarksSync(id); hlBarSync(id); hlSnap(id, m); }
       hlMkClose(); hlSetCur(id, null);
     });
   }
@@ -24393,6 +24423,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     H.marks = H.marks.filter(x => x !== m);
     if (hlCur && hlCur.m === mid) hlCur = null;
     hlMkClose();   /* قائمتُه (الألوانُ والرقمُ والحذف) تذهب معه */
+    chIdb('readwrite', hlSnapKey(mid), null);
     save(); hlRefreshMark(id, m); hlBarSync(id); hlRowMarksSync(id);
   }
   /* ===== شريطُ الألسنة (ROADMAP-HL ق٤–٥ · كونسبت صاحب الموقع) =====
