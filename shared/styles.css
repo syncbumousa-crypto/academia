@@ -16792,6 +16792,10 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
 .kt th { background: var(--u-surf, rgba(44, 94, 101, .06)); padding: 8px 12px; font-size: 12px; font-weight: 700; color: var(--u-lab, #5d6b82); }
 .kt td { padding: 8px 12px; vertical-align: middle; }   /* الصفُّ على قدر نصّه — لا قامةَ دنيا ولا هامش */
 .kt .kt-c0 { width: 52px; text-align: center; }
+/* رأسُ مجلدٍ داخليّ في الجدول: سطرٌ بلا إطار — أيقونتُه واسمُه، مُزاحٌ بعمقه (‎--d‎) */
+.kt tr.kt-sub > td { border: 0; padding: 14px 12px 4px; padding-inline-start: calc(12px + var(--d, 0) * 18px); background: none; }
+.kt tr.kt-sub .kt-subn { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 800; color: var(--u-ink, #24323a); }
+.kt tr.kt-sub .pk-fi { width: 18px; height: 18px; flex: none; color: var(--u-mut, #8a97a3); }
 .kt .kt-c1 { width: 28%; }
 .kt .kt-c3 { width: 52px; text-align: center; vertical-align: middle; }
 .kt-t { line-height: 1.6; outline: none; word-break: break-word; white-space: pre-wrap; cursor: text; unicode-bidi: plaintext; }

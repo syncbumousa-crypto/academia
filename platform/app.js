@@ -11429,6 +11429,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     delete H.kt; save();
   }
   const ktCards = host => host.arr.filter(n => n.t === 'c');
+  /* ===== المجلدُ بما فيه (طلبُ صاحب الموقع): بطائقُه أوّلًا، ثمّ كلُّ مجلدٍ داخليٍّ برأسه وبطائقه — وهكذا نزولًا =====
+     ‏‎{n}‎ بطاقة · ‎{h, d}‎ رأسُ مجلدٍ داخليّ بعمقه. والترقيمُ ‎1..N‎ بهذا الترتيب نسبةً إلى المجلد المفتوح: رقمٌ للتحديد
+     والربط لا هويّة — يتبدّل بتبدّل المفتوح، والتظليلُ مربوطٌ بالبطاقة نفسِها لا برقمها */
+  function ktDeep(host) {
+    const out = [];
+    const walk = (arr, d) => {
+      arr.forEach(n => { if (n.t === 'c') out.push({ n }); });
+      arr.forEach(g => { if (g.t === 'f') { out.push({ h: g, d: d + 1 }); walk(g.ch || [], d + 1); } });
+    };
+    walk(host.arr, 0);
+    return out;
+  }
+  const ktCardsDeep = host => ktDeep(host).filter(x => x.n).map(x => x.n);
+  /* موضعُ بطاقةٍ في شجرة المجلد المفتوح (قد تكون في مجلدٍ داخليّ) */
+  const ktLoc = (host, id) => { const r = host && findNode(host.arr, id); return r && r.n.t === 'c' ? r : null; };
   /* المنشورةُ تُقرأ ولا تُحرَّر (‎KTRO‎ أثناء رسمها): لا حقولَ ولا مفاتيحَ ولا إضافة */
   let KTRO = false;
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
@@ -11442,18 +11457,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const host = ktHost(sel, pack);
     if (!host) return '';
     if (!ro) ktMigrate(host);
-    const cards = ktCards(host);
+    const deep = v === 'tree' ? null : ktDeep(host);
+    const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
-      const h = host.holder.kth || T().ktHead;
+      const h = host.holder.kth || T().ktHead, used = hlUsed(id), nc = ro ? 4 : 3;
+      let k = 0;
       body = !cards.length ? '' : `<table class="kt"><thead><tr>`
         /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
         + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
-        + cards.map((n, k) => `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${hlUsed(id).has(n.id) ? ' has-hl' : ''}">${k + 1}</span></td>`
+        + deep.map(x => {
+          /* رأسُ مجلدٍ داخليّ: اسمُه وأيقونتُه بلونه، مُزاحًا بعمقه — وتحته بطائقُه بترقيمٍ متّصل */
+          if (x.h) return `<tr class="kt-sub" data-ktsub="${esc(x.h.id)}" style="--d:${x.d - 1}"><td colspan="${nc}"><span class="kt-subn">${pkFace({ id: x.h.id, c: folderColor(x.h), em: x.h.em }, false)}<b>${esc(x.h.name || T().pkTitlePh)}</b></span></td></tr>`;
+          const n = x.n;
+          return `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
-          + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`).join('')
+          + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
+        }).join('')
         + `</tbody></table>`;
     } else if (v === 'cards' && pkLab()) {
       /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
@@ -11494,7 +11516,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function ppMount(host, D) {
     const key = host.dataset.pp;
     const hostOf = () => ktHost(D.sel, D.pack);
-    const cardsOf = () => { const h = hostOf(); return h ? ktCards(h) : []; };
+    const cardsOf = () => { const h = hostOf(); return h ? ktCardsDeep(h) : []; };   /* والمجلداتُ الداخليّةُ في الرزمة كذلك */
     let CARDS = cardsOf();
     const N = CARDS.length; if (!N) return;
     /* الترتيبُ يبقى عبر إعادة الرسم (معرّفات البطائق) */
@@ -11696,7 +11718,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     function delCard() {
       const c = CARDS[idx], h = hostOf(); if (!h) return;
       if (!confirm(T_().ppDel)) return;
-      const i = h.arr.indexOf(c); if (i >= 0) h.arr.splice(i, 1);
+      const r = ktLoc(h, c.id); if (r) r.arr.splice(r.i, 1);
       save(); renderCmSection();
     }
     /* الإطار — كما في المرجع، ويقف إذا سكنت الورقة */
@@ -12340,7 +12362,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!lab) return;
     if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); lab.closest('.kcv').focus({ preventScroll: true }); }
   }, true);
-  const ktCardOf = (el, id) => { const host = ktHost(el.closest('.kt-view').dataset.ktf); return host && ktCards(host).find(n => n.id === id); };
+  const ktCardOf = (el, id) => { const r = ktLoc(ktHost(el.closest('.kt-view').dataset.ktf), id); return r && r.n; };
   /* «+ معرفة»: بطاقةٌ جديدةٌ في المجلد، ويُركَّز وجهُها للكتابة */
   document.addEventListener('click', e => {
     const mid = e.target.closest && e.target.closest('#cm-body [data-cxmidadd]');
