@@ -7,6 +7,20 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/c0e974/144.png",
       "email": "hassanibra11@import.stkfupm.invalid",
       "user": "Hassanibra11"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-user10275",
+      "name": "مبعثر",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f05b48/144.png",
+      "email": "user10275@import.stkfupm.invalid",
+      "user": "user10275"
     }
   ],
   "posts": [
@@ -30,6 +44,52 @@
           "ts": 1554902214000,
           "tid": 181273,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1460581-chem399",
+      "uid": "stk-user8581",
+      "code": "CHEM 399",
+      "sec": "info",
+      "ts": 1476947749000,
+      "st": "pub",
+      "data": {
+        "desc": "فرص تدريب تعاوني (كواب) في شركة GSK في جدة لعدة تخصصات هندسية و إدارية :\n\nEngineering, Chemistry, Pharmacy, Microbiology, Finance or HR.\n\nرابط التقديم\nGSK Internship Program - GMS Jeddah - Makkah Makkah n\\a",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/162-163-171/174980/10",
+          "user": "user8581",
+          "ts": 1476947749000,
+          "tid": 174980,
+          "pn": 10
+        }
+      }
+    },
+    {
+      "id": "stk-p1468847-chem399",
+      "uid": "stk-user10275",
+      "code": "CHEM 399",
+      "sec": "info",
+      "ts": 1487749647000,
+      "st": "pub",
+      "data": {
+        "desc": "GSK Internship Program - GMS 2017\n\nRequisition ID: 150203\nPosition: Co-Op\nOpen date: 07/02/2017 05:04 ص\nFunctional area: Production\nLocation:\nJeddah, Makkah\nRequired degrees: Bachelors\nRelocation: Not Indicated\nBasic qualifications:\n• Must have active student status and / or within 12 months of graduating from a degree program.\n• Studying in one of the following fields: Engineering, Chemistry, Pharmacy.\n• Good English language fluency.\n• Demonstrate academic achievements.\n• Good command of MS Office.\n• Excellent communication skills, both oral and written.\n\nThis internship opportunity will be based in Jeddah Factory (Al Khomrah District).\n\nPreferred qualifications:\n• Fluency in English.\n• Good problem solving and analytical skills.\n\nDetails:\nWe are a global, science-led healthcare company operating in three main areas; Pharmaceuticals, Vaccines and Consumer Healthcare. Our mission is to improve the quality of human life by enabling people to do more, feel better and live longer.\n\nIt’s never easy to decide what you want to do in the future. That’s why we do what we can to give young people a taste of working life to help them make the right choices. We offer a limited number of placements each year that are packed with interesting experiences.\n\nThose successfully completing the program will be considered for full time opportunities based on available opportunities and business needs.\n\nGSK Internship Program - GMS 2017 - Makkah Makkah n\\a",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/162-163-171/174980/83",
+          "user": "user10275",
+          "ts": 1487749647000,
+          "tid": 174980,
+          "pn": 83
         }
       }
     }
