@@ -120,7 +120,7 @@ function spineFaces(L) {
   /* وجدارُه الداخليّ (كقالب المحرّك: صلبٌ من الكعب إلى ‎x0 = 0.6·BT‎ بارتفاع الكتلة كاملًا) — يحجب جانبَ الكتلة عند الكعب وهي تنقص */
   const x0 = .6 * BT, zw = BT + TH;
   out.push({ d: D(x0 / 2, H / 2, zw), q: [P(0, y0, zw), P(x0, y0, zw), P(x0, y1, zw), P(0, y1, zw)], c: shade(cv, .7) });
-  out.push({ d: D(x0, H / 2, zw / 2), q: [P(x0, y0, zw), P(x0, y1, zw), P(x0, y1, BT), P(x0, y0, BT)], c: '#d8d0bd' });   /* باطنُه ورقيّ: ربطُ الصفحات يكسوه */
+  out.push({ d: D(x0, H / 2, zw / 2), q: [P(x0, y0, zw), P(x0, y1, zw), P(x0, y1, BT), P(x0, y0, BT)], c: shade(cv, .8) });   /* باطنُه بلون الغلاف كالمحرّك */
   out.push({ d: D(x0 / 2, y1, zw / 2), q: [P(0, y1, zw), P(x0, y1, zw), P(x0, y1, 0), P(0, y1, 0)], c: shade(cv, .55) });
   return out;
 }
