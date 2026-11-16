@@ -24020,6 +24020,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     w.innerHTML = bkSkelHTML(k, b.ar, b.n, b.cover);
     const ph = b.phEl = w.firstElementChild;
     ph.classList.add('bk-skel--over');
+    /* لوحةُ الهيكل الذي كان في الوعاء نفسُها بآخر ما رُسم عليها — فلا يفرغ مكانُه لحظةَ الانتقال والصفحةُ مشغولةٌ بفتح الملفّ */
+    const old = bkLdCv[k]; if (old && !old.isConnected) ph.querySelector('.bk-skel__cv').replaceWith(old);
     b.stage.appendChild(ph);
     bkLoadPaint();
   }
@@ -24035,8 +24037,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkLdClose(ph).then(() => {
       ph.classList.add('is-done');
       const fin = () => { ph.remove(); bkLoadEnd(k); };
-      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: 'ease-out', fill: 'forwards' }).finished.then(fin, fin);
-      if (cv) { cv.style.opacity = ''; cv.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' }); }
+      /* الكتابُ تحته كاملًا، والهيكلُ وحده يذوب — لا يكونان شفّافين معًا فيبهتا */
+      if (cv) cv.style.opacity = '';
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: 'ease-out', fill: 'forwards' }).finished.then(fin, fin);
     });
   }
   /* ===== تحميلُ الكتاب المركون «يُجمَع ورقةً ورقة» (اختيارُ صاحب الموقع) =====
@@ -24074,7 +24077,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const zc = fw([0, 0, d]), cam = [t[0] + zc[0], t[1] + zc[1], t[2] + zc[2]];
     /* نقطةٌ محلّيّة: ‏‎x‎ من الكعب نحو الحافّة، و‏‎y‎ من الرأس، و‏‎z‎ إلى الأعلى ← بكسلٌ على اللوحة */
     const P = (x, y, z) => { const c = inv([.5 - x - cam[0], H / 2 - y - cam[1], z - cam[2]]), k = -1 / c[2]; return [(c[0] * k / (tn * asp) + 1) / 2 * cw, (1 - c[1] * k / tn) / 2 * ch]; };
-    return { P, H, TH, BT, WB, HB, SPB };
+    /* اتّجاهُ الناظر محلّيًّا (من الكتاب إلى الكاميرا): به يُعرف أيُّ وجهَي الغلاف يُرى */
+    const vw = [-R[2], -R[5], R[8]];
+    return { P, H, TH, BT, WB, HB, SPB, vw };
   }
   /* صورُ الهيكل (مرّةً): صفحةٌ بأسطرٍ باهتة، وحافّةُ ورقٍ مخطّطة */
   let bkLdTex = null;
@@ -24092,42 +24097,89 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.save(); g.transform((b[0] - a[0]) / img.width, (b[1] - a[1]) / img.width, (d[0] - a[0]) / img.height, (d[1] - a[1]) / img.height, a[0], a[1]);
     g.drawImage(img, 0, 0); if (dim) { g.fillStyle = `rgba(0,0,0,${dim})`; g.fillRect(0, 0, img.width, img.height); } g.restore();
   }
-  const bkLdArea = q => { let s = 0; for (let i = 0; i < q.length; i++) { const a = q[i], b = q[(i + 1) % q.length]; s += a[0] * b[1] - b[0] * a[1]; } return s; };
   function bkLdShade(hex, f) { const n = parseInt(hex.slice(1), 16), c = v => Math.max(0, Math.min(255, Math.round(v * f))); return `rgb(${c(n >> 16)},${c(n >> 8 & 255)},${c(n & 255)})`; }
-  /* إطارٌ واحدٌ لهيكل: ‏‎p‎ ما جهز ‎0..1‎، و‏‎a‎ زاويةُ الغلاف، و‏‎fl‎ تقدُّمُ الورقة الطائرة (أو سالبٌ إن لم تكن) */
-  function bkLdDraw(L, p, a, fl) {
+  /* ===== التقليبُ نفسُه الذي في المحرّك (‎book2.js‎: ‏‎pageCurve · rfTick‎ — «المجلدُ يستدعي تحديداته») =====
+     كلُّ صفحةٍ مربوطةٌ بجدار الكعب على عمقها ‎δ‎ وتُقلَّب بزاوية ‎θ‎ حول مفصل الغلاف، تنثني في ثنية الكعب (‎GUT‎) ثمّ تستوي؛ والورقُ
+     الذي انقلب كومةٌ تحت الغلاف بين منحنيَي أولى صفحاتها وآخرها، والطائرةُ بترتيبها ينحني طرفُها بقدر الفُرجة التي تحتها فلا تمسّها.
+     المقطعُ ‎(x, z)‎ ممدودٌ بطول الصفحة، فيُرسم هنا بلا مكتبة. ‏‎x‎ من الكعب نحو الحافّة و‏‎z‎ فوق اللوح السفليّ */
+  const bkLdRf = {}, bkLdCv = {};   /* حالُ التقليب لكلّ كتاب: يبقى إذا انتقل الهيكلُ من الوعاء إلى فوق الكتاب فلا يبدأ من جديد */
+  const BKRF = { open: 130, ivMin: 18, ivMax: 75, leaf: 260, close: 260, angle: 1.05, seg: 12, nMax: 40 };
+  function bkLdCurve(C, delta, th, curl) {
+    const XI = -C.BT * .6, GUT = .2, WP = 1 + XI, TH = C.TH, BT = C.BT, out = [];
+    const ux = -Math.cos(th), uz = Math.sin(th), nx = -Math.sin(th), nz = -Math.cos(th), U0 = -delta * Math.sin(th), N0 = delta * Math.cos(th);
+    for (let j = 0; j <= BKRF.seg; j++) {
+      const f = j / BKRF.seg, U = U0 + WP * f, k = Math.min(1, (U - U0) / GUT), N = N0 + (delta - N0) * k * k * (3 - 2 * k) + curl * f * f;
+      out.push([-(XI + U * ux + N * nx), TH + U * uz + N * nz + BT]);
+    }
+    return out;
+  }
+  /* شريطٌ ممدودٌ بطول الصفحة من منحنًى: شرائحُ بصورة الصفحة، مظلّلةً بميلها للضوء */
+  function bkLdStrip(g, C, pts, img) {
+    const { P, H } = C;
+    for (let j = 0; j < pts.length - 1; j++) {
+      const [xa, za] = pts[j], [xb, zb] = pts[j + 1], dx = xb - xa, dz = zb - za, l = Math.hypot(dx, dz) || 1, lit = Math.max(0, (-dz * .42 + dx * .86) / l);
+      const sw = img.width / (pts.length - 1);
+      g.save(); const a = P(xa, 0, za), b = P(xb, 0, zb), d = P(xa, H, za);
+      g.transform((b[0] - a[0]) / sw, (b[1] - a[1]) / sw, (d[0] - a[0]) / img.height, (d[1] - a[1]) / img.height, a[0], a[1]);
+      g.drawImage(img, j * sw, 0, sw + .6, img.height, 0, 0, sw + .6, img.height);
+      g.fillStyle = `rgba(40,30,15,${(.16 * (1 - lit)).toFixed(3)})`; g.fillRect(0, 0, sw + .6, img.height);
+      g.restore();
+    }
+  }
+  /* إطارٌ: ‏‎a‎ زاويةُ الغلاف، و‏‎R‎ حالُ التقليب (المنطلقة، والنازلة، وتقدُّمُ كلّ طائرة) */
+  function bkLdDraw(L, a, R) {
     const { g, cam: C, cv } = L, { P, H, TH, BT, WB, HB } = C, tx = bkLdTexs();
     const cvr = L.cover, dark = bkLdShade(cvr, .55), mid = bkLdShade(cvr, .8), y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2;
     g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(L.s, 0, 0, L.s, 0, 0);
-    /* الظلّ (مرسومٌ مرّةً لكلّ مقاس) */
     if (L.sh) g.drawImage(L.sh, 0, 0, L.w, L.h);
-    /* اللوحُ السفليّ وحافّتاه، والكعبُ المستدير */
+    /* اللوحُ السفليّ، والكعبُ المستدير */
     bkLdPoly(g, [P(WB, y0, BT), P(WB, y1, BT), P(WB, y1, 0), P(WB, y0, 0)], dark);
     bkLdPoly(g, [P(WB, y1, BT), P(0, y1, BT), P(0, y1, 0), P(WB, y1, 0)], dark);
-    const zt = TH + 2 * BT, R = zt / 2, N = 8, sp = t => [-C.SPB * Math.sin(t), R + R * Math.cos(t)];
+    const zt = TH + 2 * BT, Rr = zt / 2, N = 8, sp = t => [-C.SPB * Math.sin(t), Rr + Rr * Math.cos(t)];
     for (let i = 0; i < N; i++) { const [xa, za] = sp(Math.PI * i / N), [xb, zb] = sp(Math.PI * (i + 1) / N); bkLdPoly(g, [P(xa, y0, za), P(xb, y0, zb), P(xb, y1, zb), P(xa, y1, za)], bkLdShade(cvr, .62 + .3 * Math.cos(Math.PI * (i + .5) / N - .5))); }
     const cap = []; for (let i = 0; i <= N; i++) { const [x, z] = sp(Math.PI * i / N); cap.push(P(x, y1, z)); } bkLdPoly(g, cap, dark);
-    /* الكتلةُ (ما جهز): حافّتُها وذيلُها ووجهُها */
-    const hb = Math.max(.002, TH * p), zb = BT + hb;
-    bkLdImg(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT));
-    bkLdImg(g, tx.edge, P(1, H, zb), P(0, H, zb), P(1, H, BT), .06);
-    bkLdImg(g, tx.page, P(1, 0, zb), P(0, 0, zb), P(1, H, zb));
-    /* الغلافُ حول مفصله ‎(0, BT+TH)‎ ومعه ما تحته من ورقٍ لم يجهز */
-    const hz = BT + TH, c = Math.cos(a), s = Math.sin(a), at = (x, y, z) => P(x * c - (z - hz) * s, y, x * s + (z - hz) * c + hz);
-    const pile = TH - hb, out = [at(WB, y0, hz + BT), at(0, y0, hz + BT), at(0, y1, hz + BT), at(WB, y1, hz + BT)];
-    const seen = bkLdArea(out) * bkLdArea([P(WB, y0, 0), P(0, y0, 0), P(0, y1, 0), P(WB, y1, 0)]) > 0;
-    const rim = () => { bkLdPoly(g, [at(WB, y1, hz + BT), at(0, y1, hz + BT), at(0, y1, hz), at(WB, y1, hz)], dark); bkLdPoly(g, [at(WB, y0, hz + BT), at(WB, y1, hz + BT), at(WB, y1, hz), at(WB, y0, hz)], mid); };
-    const under = () => { if (pile < 1e-4) return;
-      bkLdImg(g, tx.edge, at(1, 0, hz - pile), at(1, H, hz - pile), at(1, 0, hz), .04);
-      bkLdImg(g, tx.page, at(1, 0, hz - pile), at(0, 0, hz - pile), at(1, H, hz - pile), .03 + .05 * (a / BKL.ang)); };
-    if (seen) { under(); rim(); bkLdPoly(g, out, cvr); }
-    else { rim(); bkLdPoly(g, [at(WB, y0, hz), at(0, y0, hz), at(0, y1, hz), at(WB, y1, hz)], mid); under(); }
-    /* الورقةُ الطائرة: من تحت الغلاف إلى الكتلة، ينحني طرفُها قليلًا */
-    if (fl >= 0) {
-      const th = a * (1 - (fl < .5 ? 4 * fl ** 3 : 1 - (-2 * fl + 2) ** 3 / 2)), cu = .3 * Math.sin(Math.PI * fl), M = 8, pts = [];
-      for (let i = 0; i <= M; i++) { const f = i / M, an = th - cu * f * f; pts.push([f * Math.cos(an), f * Math.sin(an) + zb + .002]); }
-      for (let i = 0; i < M; i++) { const [xa, za] = pts[i], [xb, zz] = pts[i + 1], v = Math.round(236 + 14 * Math.max(0, Math.min(1, (xb - xa) * 1.2))); bkLdPoly(g, [P(xa, 0, za), P(xb, 0, zz), P(xb, H, zz), P(xa, H, za)], `rgb(${v},${v - 4},${v - 14})`); }
+    /* باطنُ اللوح السفليّ (بلون الغلاف كالمحرّك) — يظهر كلّما نقصت الكتلة */
+    bkLdPoly(g, [P(0, y0, BT), P(WB, y0, BT), P(WB, y1, BT), P(0, y1, BT)], mid);
+    /* الكتلة: ما لم ينطلق بعد */
+    const hb = TH * (1 - R.launched / R.n), zb = BT + hb;
+    if (hb > 1e-4) {
+      bkLdImg(g, tx.edge, P(1, 0, zb), P(1, H, zb), P(1, 0, BT));
+      bkLdImg(g, tx.edge, P(1, H, zb), P(0, H, zb), P(1, H, BT), .06);
+      bkLdImg(g, tx.page, P(1, 0, zb), P(0, 0, zb), P(1, H, zb));
     }
+    /* الغلافُ حول مفصله ‎(0, BT+TH)‎ */
+    const hz = BT + TH, c = Math.cos(a), s = Math.sin(a), at = (x, y, z) => P(x * c - (z - hz) * s, y, x * s + (z - hz) * c + hz);
+    const out = [at(WB, y0, hz + BT), at(0, y0, hz + BT), at(0, y1, hz + BT), at(WB, y1, hz + BT)];
+    const seen = -s * C.vw[0] + c * C.vw[2] > 0;   /* وجهُه الخارجيّ ‎(−sin a, 0, cos a)‎ نحو الناظر */
+    const rim = () => { bkLdPoly(g, [at(WB, y1, hz + BT), at(0, y1, hz + BT), at(0, y1, hz), at(WB, y1, hz)], dark); bkLdPoly(g, [at(WB, y0, hz + BT), at(WB, y1, hz + BT), at(WB, y1, hz), at(WB, y0, hz)], mid); };
+    /* الكومةُ تحت الغلاف: بين منحنى أولاها وآخرِ ما نزل — وجهُها الذيليّ مقطعُها، ووجهُها الظاهرُ صفحتُها */
+    const pile = () => {
+      const pt = TH * R.landed / R.n; if (pt < 1e-4) return;
+      const A2 = bkLdCurve(C, .0006, a, 0), B2 = bkLdCurve(C, pt, a, 0);
+      bkLdPoly(g, [...A2, ...B2.slice().reverse()].map(([x, z]) => P(x, y1, z)), '#e9e1cf');
+      bkLdStrip(g, C, B2, tx.page);
+    };
+    /* الطائرة: من الأبعد (أكبرِ زاوية) إلى الأقرب */
+    const leaves = () => { for (const f of R.fly) bkLdStrip(g, C, bkLdCurve(C, f.delta, f.th, f.curl), tx.page); };
+    if (seen) { pile(); leaves(); rim(); bkLdPoly(g, out, cvr); }
+    else { rim(); bkLdPoly(g, [at(WB, y0, hz), at(0, y0, hz), at(0, y1, hz), at(WB, y1, hz)], mid); pile(); leaves(); }
+  }
+  /* حالُ التقليب في لحظة: كلُّ ورقةٍ تنطلق إذا بلغها التحميل (لا أسرعَ من ‎ivMax‎ بينها، ومتى جهز الكتابُ فبأقصى سرعته ‎ivMin‎)،
+     وتطير ‎leaf‎ مللي‌ثانية؛ ثمّ ينطبق الغلافُ بعد نزول آخرها — كتوقيت التقليب في المحرّك */
+  function bkLdState(L, now, p) {
+    const key = L.el.dataset.bkl, T = L.rf || (L.rf = bkLdRf[key] || (bkLdRf[key] = { t0: now, n: Math.max(12, Math.min(BKRF.nMax, Math.round(L.n / 6) || 20)), at: [], next: now + BKRF.open, end: 0 }));
+    const want = L.fin ? T.n : Math.min(T.n - 1, Math.floor(p * T.n));
+    while (T.at.length < want && now >= T.next) { T.at.push(now); T.next = now + (L.fin ? BKRF.ivMin : BKRF.ivMax); }
+    let landed = 0; const fly = [];
+    T.at.forEach((t, i) => { const k = (now - t) / BKRF.leaf; if (k >= 1) landed++; else fly.push({ i, k }); });
+    let a = BKRF.angle * (1 - Math.pow(1 - Math.min(1, (now - T.t0) / BKRF.open), 3));
+    if (L.fin && landed === T.n) { if (!T.end) T.end = now + 40; const k = Math.min(1, Math.max(0, (now - T.end) / BKRF.close)); a = BKRF.angle * (1 - k * k * k); if (k >= 1) T.closed = true; }
+    /* الأسبقُ أعلى، وانحناءُ كلٍّ محدودٌ بنصف الفُرجة بينه وبين التي تحته */
+    const fl = fly.map(f => ({ ...f, th: a * (1 - Math.pow(1 - f.k, 3)) }));
+    /* وإذا تمهّل التحميلُ: تنهض عليا الكتلة قليلًا وتهدأ (كإبهامٍ يتحسّس الورق) فلا يبدو الكتابُ متجمّدًا */
+    if (!fl.length && !L.fin && T.at.length < T.n && now - T.t0 > BKRF.open) { const w = Math.sin(((now - T.t0) / 1100) * Math.PI) ** 2; if (w > .02) fl.push({ i: T.at.length, k: 0, th: a * .14 * w }); }
+    for (let q = 0; q < fl.length; q++) { const below = q + 1 < fl.length ? fl[q + 1].th : 0; fl[q].curl = Math.min(.09 * Math.sin(Math.PI * fl[q].k), .5 * Math.max(0, fl[q].th - below)); fl[q].delta = L.cam.TH * (fl[q].i + .5) / T.n; }
+    return { a, R: { n: T.n, launched: T.at.length, landed, fly: fl }, closed: !!T.closed };
   }
   /* مقاسُ اللوحة وكاميرتُها وظلُّها — تُعاد حين يتغيّر مقاسُ الهيكل فقط */
   function bkLdFit(L) {
@@ -24136,7 +24188,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ar = parseFloat(L.el.style.getPropertyValue('--ar')) || 1 / Math.SQRT2;
     if (w === L.w && h === L.h && ar === L.ar) return true;
     L.w = w; L.h = h; L.ar = ar; L.s = Math.min(2, window.devicePixelRatio || 1);
-    L.cv.width = Math.round(w * L.s); L.cv.height = Math.round(h * L.s);
+    const cw = Math.round(w * L.s), chh = Math.round(h * L.s);
+    if (L.cv.width !== cw || L.cv.height !== chh) { L.cv.width = cw; L.cv.height = chh; }   /* تغييرُ المقاس يمحو اللوحة — فلا يُغيَّر إلّا حين يلزم */
     L.cam = bkLdCam(w, h, ar, L.n);
     const { P, H, HB, WB, TH, BT } = L.cam, y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2, zt = TH + 2 * BT, k = .9;
     const sh = document.createElement('canvas'); sh.width = L.cv.width; sh.height = L.cv.height;
@@ -24148,38 +24201,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bkLdTick(now) {
     bkLdRaf = 0;
-    for (const el of [...document.querySelectorAll('#cm-body .bk-skel')]) if (!el._ld) {
+    for (const el of [...document.querySelectorAll('.bk-skel')]) if (!el._ld) {
       const cv = el.querySelector('.bk-skel__cv'); if (!cv) continue;
-      el._ld = { el, cv, g: cv.getContext('2d'), n: +el.dataset.n || 120, cover: /^#[0-9a-f]{6}$/i.test(el.dataset.cv || '') ? el.dataset.cv : '#1d4a50', t0: now, close: null };
-      bkLdLive.add(el._ld);
+      el._ld = { el, cv, g: cv.getContext('2d'), n: +el.dataset.n || 120, cover: /^#[0-9a-f]{6}$/i.test(el.dataset.cv || '') ? el.dataset.cv : '#1d4a50' };
+      bkLdLive.add(el._ld); bkLdCv[el.dataset.bkl] = cv;
     }
     for (const L of bkLdLive) {
       if (!L.el.isConnected) { bkLdLive.delete(L); continue; }
       if (!bkLdFit(L)) continue;
-      const p = Math.min(1, ((bkLoad[L.el.dataset.bkl] || {}).shown || 0) / 100), still = bkReduce();
-      let a = BKL.ang, fl = still ? -1 : ((now - L.t0) / 300) % 1;
-      if (L.close) {
-        const t = Math.min(1, (now - L.close.t0) / 420), e = t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
-        a = BKL.ang * (1 - e); fl = -1;
-        if (t >= 1) { const res = L.close.res; L.close = null; L.done = true; res(); }
-      }
-      if (L.done) a = 0, fl = -1;
-      bkLdDraw(L, L.done || L.close ? 1 : p, a, fl);
+      const p = Math.min(1, ((bkLoad[L.el.dataset.bkl] || {}).shown || 0) / 100);
+      if (bkReduce()) { const n = 20, k = Math.floor(p * n); bkLdDraw(L, L.fin ? 0 : BKRF.angle, { n, launched: k, landed: k, fly: [] }); if (L.fin && L.res) { const r = L.res; L.res = null; r(); } continue; }
+      const st = bkLdState(L, now, p);
+      bkLdDraw(L, st.a, st.R);
+      if (st.closed && L.res) { const r = L.res; L.res = null; r(); }
     }
-    if (bkLdLive.size) bkLdRaf = requestAnimationFrame(bkLdTick);
+    /* وما دام كتابٌ يُحمَّل تبقى الحلقةُ تبحث: الهيكلُ قد يوضع في وعاءٍ لم يدخل الصفحةَ بعد، فيُرسم في أوّل إطارٍ يظهر فيه */
+    if (bkLdLive.size || Object.keys(bkLoad).length) bkLdRaf = requestAnimationFrame(bkLdTick);
   }
   const bkLdKick = () => { if (!bkLdRaf) bkLdRaf = requestAnimationFrame(bkLdTick); };
   /* جهز الكتاب: آخرُ الصفحات وانطباقُ الغلاف، ثمّ يُسلَّم */
   function bkLdClose(el) {
     const L = el._ld; if (!L || bkReduce() || !el.isConnected) return Promise.resolve();
-    return new Promise(res => { L.close = { t0: performance.now(), res }; bkLdKick(); setTimeout(res, 900); });
+    L.fin = true; bkLdKick();
+    return new Promise(res => { L.res = res; setTimeout(res, 2400); });
   }
+
   function bkLoadSet(k, tgt, cap) {
     const L = bkLoad[k] || (bkLoad[k] = { shown: 0, tgt: 0, cap: 0 });
     if (tgt >= L.tgt) { L.tgt = tgt; L.cap = Math.max(cap, tgt); }
     if (!bkLoadRaf) bkLoadRaf = requestAnimationFrame(bkLoadTick);
   }
-  const bkLoadEnd = k => { delete bkLoad[k]; };
+  const bkLoadEnd = k => { delete bkLoad[k]; delete bkLdRf[k]; delete bkLdCv[k]; };
   function bkLoadTick() {
     bkLoadRaf = 0;
     let live = false;
@@ -24191,12 +24243,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (L.shown < 100) live = true;
     }
     bkLoadPaint();
-    if (live && document.querySelector('#cm-body .bk-skel')) bkLoadRaf = requestAnimationFrame(bkLoadTick);
+    if (live && document.querySelector('.bk-skel')) bkLoadRaf = requestAnimationFrame(bkLoadTick);
     bkLdKick();
   }
   function bkLoadPaint() {
     bkLdKick();
-    document.querySelectorAll('#cm-body .bk-skel[data-bkl]').forEach(el => {
+    document.querySelectorAll('.bk-skel[data-bkl]').forEach(el => {
       const L = bkLoad[el.dataset.bkl]; if (!L) return;
       const v = Math.round(L.shown);
       if (el._v === v) return; el._v = v;
