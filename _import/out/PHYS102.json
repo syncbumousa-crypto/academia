@@ -366,6 +366,251 @@
       "user": "Chemist"
     },
     {
+      "id": "stk-break",
+      "name": "Break",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
+      "email": "break@import.stkfupm.invalid",
+      "user": "Break"
+    },
+    {
+      "id": "stk-meshoo",
+      "name": "Meshoo",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
+      "email": "meshoo@import.stkfupm.invalid",
+      "user": "Meshoo"
+    },
+    {
+      "id": "stk-keep_smiling",
+      "name": "kEEp sMiliNg",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/82dd89/144.png",
+      "email": "keep_smiling@import.stkfupm.invalid",
+      "user": "kEEp_sMiliNg"
+    },
+    {
+      "id": "stk-user2728",
+      "name": "واصل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2728/144/302_2.png",
+      "email": "user2728@import.stkfupm.invalid",
+      "user": "user2728"
+    },
+    {
+      "id": "stk-user5430",
+      "name": "| أبوفيصل |",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5430/144/1092_2.png",
+      "email": "user5430@import.stkfupm.invalid",
+      "user": "user5430"
+    },
+    {
+      "id": "stk-stu2009",
+      "name": "stu2009",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/13edae/144.png",
+      "email": "stu2009@import.stkfupm.invalid",
+      "user": "stu2009"
+    },
+    {
+      "id": "stk-user2870",
+      "name": "الشـظـايـا",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2870/144/319_2.png",
+      "email": "user2870@import.stkfupm.invalid",
+      "user": "user2870"
+    },
+    {
+      "id": "stk-mr.cold",
+      "name": "mR.cOLd",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/b3f665/144.png",
+      "email": "mr.cold@import.stkfupm.invalid",
+      "user": "mR.cOLd"
+    },
+    {
+      "id": "stk-e_khaloodi",
+      "name": "E khaloodi",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/90db22/144.png",
+      "email": "e_khaloodi@import.stkfupm.invalid",
+      "user": "E_khaloodi"
+    },
+    {
+      "id": "stk-user2303",
+      "name": "سينشي كودو",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2303/144/219_2.png",
+      "email": "user2303@import.stkfupm.invalid",
+      "user": "user2303"
+    },
+    {
+      "id": "stk-xman2012",
+      "name": "xman2012",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/x/bc8723/144.png",
+      "email": "xman2012@import.stkfupm.invalid",
+      "user": "xman2012"
+    },
+    {
+      "id": "stk-el_prince",
+      "name": "El Prince",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/e/da6949/144.png",
+      "email": "el_prince@import.stkfupm.invalid",
+      "user": "El_Prince"
+    },
+    {
+      "id": "stk-abo_al-higaa",
+      "name": "abo al-higaa",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/50afbb/144.png",
+      "email": "abo_al-higaa@import.stkfupm.invalid",
+      "user": "abo_al-higaa"
+    },
+    {
+      "id": "stk-amat_24",
+      "name": "amat_24",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/amat_24/144/403_2.png",
+      "email": "amat_24@import.stkfupm.invalid",
+      "user": "amat_24"
+    },
+    {
+      "id": "stk-user6200",
+      "name": "بعيد المنال",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6200/144/1300_2.png",
+      "email": "user6200@import.stkfupm.invalid",
+      "user": "user6200"
+    },
+    {
+      "id": "stk-user4620",
+      "name": "أبو صالح",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/dc4da7/144.png",
+      "email": "user4620@import.stkfupm.invalid",
+      "user": "user4620"
+    },
+    {
+      "id": "stk-wanted",
+      "name": "wanted",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/779978/144.png",
+      "email": "wanted@import.stkfupm.invalid",
+      "user": "wanted"
+    },
+    {
+      "id": "stk-_aiman",
+      "name": "°¨¨™¤¦aiman¦¤™¨¨°",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/f0a364/144.png",
+      "email": "_aiman@import.stkfupm.invalid",
+      "user": "_aiman"
+    },
+    {
+      "id": "stk-muslum_4ever",
+      "name": "muslum_4ever",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/a6a055/144.png",
+      "email": "muslum_4ever@import.stkfupm.invalid",
+      "user": "muslum_4ever"
+    },
+    {
+      "id": "stk-user6623",
+      "name": "مخي @@",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/6de8d8/144.png",
+      "email": "user6623@import.stkfupm.invalid",
+      "user": "user6623"
+    },
+    {
+      "id": "stk-brain_man",
+      "name": "Brain Man",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/brain_man/144/1672_2.png",
+      "email": "brain_man@import.stkfupm.invalid",
+      "user": "Brain_Man"
+    },
+    {
+      "id": "stk-sorry",
+      "name": "Sorry",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/sorry/144/322_2.png",
+      "email": "sorry@import.stkfupm.invalid",
+      "user": "Sorry"
+    },
+    {
+      "id": "stk-user5800",
+      "name": "رجـعـي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5800/144/1172_2.png",
+      "email": "user5800@import.stkfupm.invalid",
+      "user": "user5800"
+    },
+    {
+      "id": "stk-lord",
+      "name": "Lord .. ~",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/l/df705f/144.png",
+      "email": "lord@import.stkfupm.invalid",
+      "user": "Lord"
+    },
+    {
+      "id": "stk-saskgh",
+      "name": "saskgh",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/f0a364/144.png",
+      "email": "saskgh@import.stkfupm.invalid",
+      "user": "saskgh"
+    },
+    {
+      "id": "stk-user8697",
+      "name": "الحاائر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8697/144/1880_2.png",
+      "email": "user8697@import.stkfupm.invalid",
+      "user": "user8697"
+    },
+    {
+      "id": "stk-user7645",
+      "name": "[ايجابي]",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user7645/144/1645_2.png",
+      "email": "user7645@import.stkfupm.invalid",
+      "user": "user7645"
+    },
+    {
+      "id": "stk-mysterious",
+      "name": "Mysterious",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ecb155/144.png",
+      "email": "mysterious@import.stkfupm.invalid",
+      "user": "Mysterious"
+    },
+    {
+      "id": "stk-user3767",
+      "name": "بلانر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3767/144/546_2.png",
+      "email": "user3767@import.stkfupm.invalid",
+      "user": "user3767"
+    },
+    {
+      "id": "stk-user6896",
+      "name": "الى متى؟",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e9c0ed/144.png",
+      "email": "user6896@import.stkfupm.invalid",
+      "user": "user6896"
+    },
+    {
+      "id": "stk-user7699",
+      "name": "الداهيه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user7699/144/1656_2.png",
+      "email": "user7699@import.stkfupm.invalid",
+      "user": "user7699"
+    },
+    {
+      "id": "stk-user3817",
+      "name": "حـلـم",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3817/144/561_2.png",
+      "email": "user3817@import.stkfupm.invalid",
+      "user": "user3817"
+    },
+    {
+      "id": "stk-the_marvel",
+      "name": "The Marvel",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/the_marvel/144/862_2.png",
+      "email": "the_marvel@import.stkfupm.invalid",
+      "user": "The_Marvel"
+    },
+    {
+      "id": "stk-twitter",
+      "name": "Twitter",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/b4bc9f/144.png",
+      "email": "twitter@import.stkfupm.invalid",
+      "user": "Twitter"
+    },
+    {
+      "id": "stk-azoooozy",
+      "name": "azoooozy",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/azoooozy/144/1599_2.png",
+      "email": "azoooozy@import.stkfupm.invalid",
+      "user": "azoooozy"
+    },
+    {
       "id": "stk-_99920",
       "name": "الخبير_999",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/e56c9b/144.png",
@@ -392,13 +637,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/cdc98d/144.png",
       "email": "_140@import.stkfupm.invalid",
       "user": "_140"
-    },
-    {
-      "id": "stk-meshoo",
-      "name": "Meshoo",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/958977/144.png",
-      "email": "meshoo@import.stkfupm.invalid",
-      "user": "Meshoo"
     },
     {
       "id": "stk-scatter",
@@ -555,6 +793,20 @@
       "user": "user5771"
     },
     {
+      "id": "stk-user3743",
+      "name": "أبو عادل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3743/144/541_2.png",
+      "email": "user3743@import.stkfupm.invalid",
+      "user": "user3743"
+    },
+    {
+      "id": "stk-hush1994",
+      "name": "HUSH1994",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/8e8cbc/144.png",
+      "email": "hush1994@import.stkfupm.invalid",
+      "user": "HUSH1994"
+    },
+    {
       "id": "stk-ad0rs",
       "name": "ad0rs",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f475e1/144.png",
@@ -632,13 +884,6 @@
       "user": "_169"
     },
     {
-      "id": "stk-user5430",
-      "name": "| أبوفيصل |",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5430/144/1092_2.png",
-      "email": "user5430@import.stkfupm.invalid",
-      "user": "user5430"
-    },
-    {
       "id": "stk-user6130",
       "name": "موثاوي",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6130/144/1287_2.png",
@@ -658,13 +903,6 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abdelaziz/144/2081_2.png",
       "email": "abdelaziz@import.stkfupm.invalid",
       "user": "Abdelaziz"
-    },
-    {
-      "id": "stk-user2728",
-      "name": "واصل",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2728/144/302_2.png",
-      "email": "user2728@import.stkfupm.invalid",
-      "user": "user2728"
     },
     {
       "id": "stk-user12136",
@@ -1052,13 +1290,6 @@
       "user": "userdahm"
     },
     {
-      "id": "stk-stu2009",
-      "name": "stu2009",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/13edae/144.png",
-      "email": "stu2009@import.stkfupm.invalid",
-      "user": "stu2009"
-    },
-    {
       "id": "stk-ahmad18",
       "name": "Ahmad18",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/aca169/144.png",
@@ -1085,13 +1316,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/c5a1d2/144.png",
       "email": "badran11@import.stkfupm.invalid",
       "user": "badran11"
-    },
-    {
-      "id": "stk-user3767",
-      "name": "بلانر",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3767/144/546_2.png",
-      "email": "user3767@import.stkfupm.invalid",
-      "user": "user3767"
     },
     {
       "id": "stk-user8720",
@@ -2467,6 +2691,811 @@
       }
     },
     {
+      "id": "stk-p650386-phys102",
+      "uid": "stk-break",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1278167907000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمه الله وركاته\nبدون مقدمات انا امس كنت متحمس للصيفي وخصوصا لماده الفزكس خصوصا اني نجحت ب101 بdبعد طلعه الروح ولكن لاكون صريح كنت مهمل الماده فقررت اني ابي اشد هذا الترم واخذ درجه حلوه المهم يوم جيت افتح الكتاب قبل شوي الله لا يوريكم حسيت اني رجعت لعادتي القديمه الا وهي السحب عالمذاكره بسبب ان الكتاب طويل ومعقد السوال هل سلايدات الجلال كافيه ووافيه للي يبي الاي بلس (والله ان تبطي) وشكرا\nملاحظه/ اتمنى الاجابه من اهل الخبره (المخضرمين) وخصوصا اللي اخذوه الترم الماضي.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/91393/1",
+          "user": "Break",
+          "ts": 1278167907000,
+          "tid": 91393,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p650395-phys102",
+      "uid": "stk-meshoo",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1278169148000,
+      "st": "pub",
+      "data": {
+        "desc": "شوف تبى تحاول تفهم مع الدكتور لازم تحضر للدرس لأنه المتيرريال طويل ومافي وقت\nفأنصحك تحضر بسلايدات الجلال بس وإذا شفت إنو الدكتور كتب نقطه مفيده أكتبها في نوت أو في صفحات الكتاب وخذ الكتاب معاك في المحاضره وراح تكتش إنك فاهم الكتاب زي كأنك قريتو كامل ^^",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/91393/2",
+          "user": "Meshoo",
+          "ts": 1278169148000,
+          "tid": 91393,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p650425-phys102",
+      "uid": "stk-keep_smiling",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1278171871000,
+      "st": "pub",
+      "data": {
+        "desc": "عزيزي\n\nاولا توكل على الله وحد\n\nثم ذاكر من سلايدات الجلال بس اول بأول\n\nوحل على كل شابتر كم سؤال من اولد اقزام بس بشرط تكون متفرقه يعني مو كلها تتكلم عن نفس النقطه (( خلك ملم بالمنهج وعندك افكاره))\n\nلا تهمل الهوم ورك حتى لو تنقله لان عليه خمس درجات\n\nلا تغيب منها انك تستفيد ومنها ان الأب قريد ما يفوتك\n\nلا تهمل الماده وافضل شي انك تكون على اتصال بها يعني (( ما تقول بكر بأدرس بجد …حاول حتى لو ما تخلص إلا شوي وبكره كمل الباقي بس من دون إهمال ))\n\nواتمنى لك التوفيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/91393/4",
+          "user": "kEEp_sMiliNg",
+          "ts": 1278171871000,
+          "tid": 91393,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p295383-phys102",
+      "uid": "stk-user2728",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1217864355000,
+      "st": "pub",
+      "data": {
+        "desc": "يا أخوك سو طريقتي وبتدعي لي\n\nذاكر أول باول السلايدات وافهمها وما يحتاج تبذل جهد كثير اهم شيء تقراها بتركيز\nمع كل سلايد أو اكثر حاول تكتب القانون في ورقة خاصة بالقوانين ( خاصة فيك ) واكتب الخطوات اللي جاية منه القانون\nمع كل سكشن في السلايد في مثال أو تشيك بوينت حاول تحله بدون ما تنظر للحل اللي في السلايدات\nبعدها قارن حلك مع الحل اللي موجود اذا صح راجع الخطوات عشان ما تنساها\nاذا خطأ دور الخطوة اللي خطأت فيها وادرسها وراجع المواضيع السابقة عشان تعرف مصدر الخطأ ( وهذي أفضل وسيلة للتعلم , الله يذكرك بالخير ياعويمرين كان يقول try to learn from your errors !! )\nلا خلصت راجع ورقة القوانين اللي خاصة فيك واحفظها وابدأ بحل اسئلة الجلال اللي على كل تشابتر\nوحل الاسئلة المتعلقة في السكاشن اللي خذتها في نفس اليوم\n\nوحل وحل وحل واذا عرفت الجواب سجله في ورقة خاصة بالحلول عشان ما تنساه بعدين وترجع له كل مرة وقت الضرورة\nواذا ما عرفت عاد الله يعينك فكر فيها وحلل واسأل زملائك وروح الساعات المكتبية\n\nوبكذا تستمر معك الطريقة الى الميجر وقبل الميجر بيوم ذاكر السلايدات من جديد واحفظ القوانين اللي مسجلها في الورقة الخاصة فيك ثمن حل لك ميجرين على الاقل وان شاء الله ما تقل فيهن عن 15 من 20\n\nنصيحة من مجرب حبيت أفيدك فيها وحنا علينا الشور وانت عليك العزيمة والفعل\nوبلاش مدرس خصوصي وخرابيط\nانت وصلت مرحلة المفروض تعتمد فيها على نفسك من دون الرجوع الى احد\n\nصدقني 3 مدرسين من جيت الجبل ما افهم عليهم وادخل واطلع ولا استفيد حاجة من الشرح\nلكن صرت اعتمد على روحي وجبت قريد يرضي نفسي وعلى قد تعبي واحس بطعمها\n\nالله يعينك وان شاء الله اشوفك مسويها وفالك وفالي ال A+",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/65131/14",
+          "user": "user2728",
+          "ts": 1217864355000,
+          "tid": 65131,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p691403-phys102",
+      "uid": "stk-user5430",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1282854095000,
+      "st": "pub",
+      "data": {
+        "desc": "أول شي ياشبآب ألف مبروك إنتهاء كورسآت الفيزكس …\n\nبعدي أيام من العذاب والمرمطه و وقع ] الدمآغ …\n\nثآنيآ وش رايك في إختبآر فيزكس 102 …\n\nأنا من ناحيتي أشوف إنه عسل … أسئلة كثيرة تعويض مبآشر … وكونسب مرررررررررررررة سهل …\n\nأنا لو شديت حيلي صح … كآآن طلعت بدرجة فوووووق … لكن الحمد لله ع كل حآل …\n\nعندي شويآت ورود …\n\n🌹 إستاذ ختك ع الفاينل الحلو …\n\n🌹 أسنآذ نقفي ع إنه وضح اسئله كثير جات بالميجر …\n\n🌹 فيزكسسست 😊\n\n🌹 برنس 😊\n\n🌹 لنفسي 😁",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-1-102/93999/1",
+          "user": "user5430",
+          "ts": 1282854095000,
+          "tid": 93999,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p958685-phys102",
+      "uid": "stk-stu2009",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1325641173000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته 🌹\nطبعا يا شباب هذي ملخصات للمتيريال كامل للدكتور خليل حرابي\nطبعا موجوده لكل الشباتر ما عدا شبتر 24 ماحصلته(طبعا هذي لسلايدات ما تغني عن مذاكرة الكتاب ولسلايدات الكامله)\nطلب يا شباب انكم تدعوا لي ولكل الشباب اللي عندهم فيزكس 102 😭\nهذا الرابط(طبعا اثنينهم فيهم نفس الملف):\nz share\nhttp://www.zshare.net/download/982329831e2ef1ed/\nمركز رفع الصور والملفات\nhttp://www.up-00.com/dldo5D40484.zip.html\nأخيرا نصيحة لوجه الله انك تذاكر سلايدات الشباتر الأخيره كامله واذا ما بقى عندك وقت ذاكر السمريز\nموفقين بالفاينل 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/117463/1",
+          "user": "stu2009",
+          "ts": 1325641173000,
+          "tid": 117463,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p441983-phys102",
+      "uid": "stk-user2870",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1249397257000,
+      "st": "pub",
+      "data": {
+        "desc": "الفيزكس ما يكفي فيها الحفظ و أحيانا ً حتى لو كنت فاهم ما يمشي الحال !!\n\nالمشكلة في طريقة المذاكرة !\n\nو مادام في طلاب جابوا الفل مارك أجل الميجر ماكان مستحيل … !\n\nإذا الواحد ذاكر الماتيريال كامل و كان فاهم الكونسبت المفروض ما ينزل عن 10 و إذا نزل عنها لازم\n\nيغير طريقة المذاكرة …\n\nو موفقين إن شاء الله 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/76143/29",
+          "user": "user2870",
+          "ts": 1249397257000,
+          "tid": 76143,
+          "pn": 29
+        }
+      }
+    },
+    {
+      "id": "stk-p442517-phys102",
+      "uid": "stk-mr.cold",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1249484107000,
+      "st": "pub",
+      "data": {
+        "desc": "الله يعينكم يا شباب\nحنا السمستر الماضي كان العكس، كان الميجر الأول سهل جدا والآفرج كان تقريبا 12\nالميجر الثاني جابوه صعب جدا والآفرج كان حول ال 10\n\nلكن اتوقع بحالتكم بيحاولون يسهلون الميجر الثاني،، لأن لو خلوه صعب ماراح يجيب a+ الا القليل جداا …\nوبالنسبه للمدرسين اللي قالولكم حاولوا تجيبون درجه زينه بالاختبار الأول لأن الثاني بيكون صعب، اتوقع ماخذين هالفكره من السمستر الماضي وكانوا متوقعين بيجي نفس صعوبته … عشان كذا تفاءلوا وإن شاء الله بيكون الميجر الثاني سهل",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/76143/35",
+          "user": "mR.cOLd",
+          "ts": 1249484107000,
+          "tid": 76143,
+          "pn": 35
+        }
+      }
+    },
+    {
+      "id": "stk-p442661-phys102",
+      "uid": "stk-e_khaloodi",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1249515589000,
+      "st": "pub",
+      "data": {
+        "desc": "اللي لاحظته في هالقسم الترم الماضي واللي قبله …\nميجر ون عادي … ميجر تو اصعب … الفاينل حرررق\nفي ٠٨٢ كان افرج الفاينل ٤٠٪ …\nانا ما اقول هالكلام احطم احد …لكن المقصد انه ما لا تعتقدو ان ديبارتمنت الفزكس ممكن يرحمكم … ماااا همهم ابدا عادي لو صعبو الاختبارات الجايه مو بعيده عليهم ابدا … شدو حيلكم والله يوفقكم وترو الفزكس ما تنفع قبل الاختبار لازم من بدري تتذاكر",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/76143/37",
+          "user": "E_khaloodi",
+          "ts": 1249515589000,
+          "tid": 76143,
+          "pn": 37
+        }
+      }
+    },
+    {
+      "id": "stk-p294470-phys102",
+      "uid": "stk-user2303",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1217704713000,
+      "st": "pub",
+      "data": {
+        "desc": "^^^^^^^\n\nكلام سليم 🙂\n\nلكن اعتقد ان بعض اسئلة الكتاب رائع ومفيد لفهم الموضوع ,\n\nوهنا رابط جديد لحلول اسئلة الكتاب خطوة بخطوة :\n\nhttp://www.zshare.net/download/158354738094ee13\n\nولا تنسى المياجر القديمة , لانها مهمة جدا 🙂\n\nوهنا رابط ( اسئلة المياجر القديمة على كل شابتر مع الاجابة ) :\n\nhttp://www.zshare.net/download/16425809af3b4280\n\nالله يوفقك اخوي ,\n\nولا تنسانا من دعواتك 🙂\n\nتحياتي ,",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/65131/5",
+          "user": "user2303",
+          "ts": 1217704713000,
+          "tid": 65131,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1355057-phys102",
+      "uid": "stk-xman2012",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1398078138000,
+      "st": "pub",
+      "data": {
+        "desc": "مع اني ما حليت صــح لـكن لو الواحد مذاكر صـح راح يقدر يـحل وبسهوله لو على الاقل مذاكر من سلايدات كنوار وحال الاولد اقزامز حق كنوار صـدقوني الاختبار هذا بيشوفه شربه ماي وطلاب كنوار تعرف هذا الشي … افرج سكشن كنوار في الميجر الاول كان 15 من 20 وأسئلته في الكوزات شي اليييييم وصعب …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/160102/23",
+          "user": "xman2012",
+          "ts": 1398078138000,
+          "tid": 160102,
+          "pn": 23
+        }
+      }
+    },
+    {
+      "id": "stk-p1355266-phys102",
+      "uid": "stk-el_prince",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1398100669000,
+      "st": "pub",
+      "data": {
+        "desc": "مدري متى البعض يستوعب هالشي لكن \" كل شخص حر برأيه \"\n\nاللي يشوفه سهل واللي يشوفه صعب\nكونك ما حليت صح أو ما توفقت في الاختبار ما يعطيك الحق إنك تحط حرتك بغيرك بهالشكل\n\nلازم أغلبكم يفهم هالشي لكن \" الدراما \" اللي تسير بالمنتدى بعد كل إختبار خصوصا من دفعتنا ما راح تنفعكم بشي 🙂\n\nكل واحد يشد حيله ويتوكل على الله ولا يخلي الديبارتمنت أو أفرج الدفعة شماعة لكل إخفاق يواجهه\nفي النهاية إنت طالب بترول ومعادن منت طالب جامعة ثانية 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/160102/26",
+          "user": "El_Prince",
+          "ts": 1398100669000,
+          "tid": 160102,
+          "pn": 26
+        }
+      }
+    },
+    {
+      "id": "stk-p534581-phys102",
+      "uid": "stk-abo_al-higaa",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1265102480000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته…\nياشباب أنا والله خبرتي مو كبيرة في الجامعة وأنظمتها لكن اللي أعرفه واللي قاله الدكتور لنا ان الآفرج حق الفاينل في الفزكس لازم يكون على الأقل 18 او 19 عشان المصيبة اللي في ميجر 2 عشان يكون الافرج النهائي للمادة حوالي 57 من 100 واللي هو المفروض يكون بدل 52.6 .\nلان في النظام لازم يكون الافرج في الوسط بين السي والسي بلس.\nيعني ياشباب اللي يعرف طريقة ممكن نشتكي فيها او شي وماتكون طريقتنا عالفاضي يعني ممكن يعدلون شي لايقصر يسويها ويرسل ويعلمنا عشان نرسل معه لان في ناس كثيرين بيستفيدون ويطلعون للقريد اللي اعلى …\nمو شرط إن نظام المادة ستاندرد انا ننظلم اذا ما استطاعوا يتحكمون في الافرج هذا السمستر يرجعونها مادة افرج وخلاص منعا للظلم.\nاما انا بطلع من الF لل D 😆\nوشكرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/52-6-d-102/82985/1",
+          "user": "abo_al-higaa",
+          "ts": 1265102480000,
+          "tid": 82985,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p534744-phys102",
+      "uid": "stk-amat_24",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1265115221000,
+      "st": "pub",
+      "data": {
+        "desc": "اخي الكريم الآفرج في major 1 و2 له علاقة بتعيين مدى صعوبة اسئلة الفاينل\n\nيما يكون عندك الآفرج 9 و 7 لازم ترفع آفرج الفاينل بالتحكم بصعوبة الأسئلة\nيعني لانه الافرج كان تحت نص الدرجة في الميجرز لازم تسهل الفاينل بحيث يكون الآفرج فوق النص يعني تقريبا 17 او 18\n\nهذي السياسة اللي يدعونها في قسم الفيزكس وأغلب الدكاترة ماكدين هذا الشي\nحتى بعضهم قال انه بسبب صعوبة ميجر 2 حتكون اغلب اسئلة الفاينل تعويض مباشر، واكييييييد حنسهل الاختبار عليكم\n\nللاسف ما شفنا هذا الشي والدليل الآفرج الواطي في الفاينل\nانا ما اقول انه اصعب من ميجر 2\nلكنه من حيث الصعوبة اصعب من ميجر 1\nيعني ماهو سهل ابدا\n\nبس ما اعتقد شكوانا حتساعد لانه القسم نفسه والكوردنيتر حق المادة نفسه…\nابراهيم ناصر\nما اسمع احد درس عنده الا يسب فيه وانا اولهم\nالله يعيننا بس\nالحمد لله انا ربي اعانني وافتكيت من القسم بعد 3 اترام معاه",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/52-6-d-102/82985/3",
+          "user": "amat_24",
+          "ts": 1265115221000,
+          "tid": 82985,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p535444-phys102",
+      "uid": "stk-user6200",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1265176875000,
+      "st": "pub",
+      "data": {
+        "desc": "اولا مرحبا بك 😆\n\nانا قلت شكل يعني يمكن دفعتكم مو ذاك الزود بعدين شفت ماشاء الله طلاب تسال عن الاي والاي بلس وطلاب تسال عن الاف ماعرفنا لكم 🤣\n\nوانا صادق ماله عذر هم كاتبين لك بالسليبوس توزيع القريدات يعني كلكم عارفين طريقة توزيع الدرجات وان الافررج ماله علاقة لو الافرج صفر مو شغلهم لانه استاندر 😆\n\nودي اواسيكم ومتعاطف معكم بس شنسوي هذا نظامهم وانتم نزلتوا المادة برغبتكم تحملوا ماجاكم وغيركم اكلها قبلكم خخخخخخخخخخخ 😏",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/52-6-d-102/82985/10",
+          "user": "user6200",
+          "ts": 1265176875000,
+          "tid": 82985,
+          "pn": 10
+        }
+      }
+    },
+    {
+      "id": "stk-p535550-phys102",
+      "uid": "stk-user4620",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1265186267000,
+      "st": "pub",
+      "data": {
+        "desc": "صحيح ان المادة استاندر\nبس الاستاندر له حدود\nاكبر دليل ان الافرج مهم انهم مايصعبون كل الاختبارات يحاولون يوازون الافرج مع الاستاندر\nلو ان كلام بعضهم صحيح ان الافرج مو مهم لكان من دواعي وسرور قسم الفيزياء الحبيب يجيب اصعب الاسئلة (فهذه امنية قسم الفيزياء ) بس الافرج يعيق تحقيق رغباتهم وامانيهم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/52-6-d-102/82985/13",
+          "user": "user4620",
+          "ts": 1265186267000,
+          "tid": 82985,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p38170-phys102",
+      "uid": "stk-wanted",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1067964039000,
+      "st": "pub",
+      "data": {
+        "desc": "أول شي اعصابك علي اخوي |2|\n\nهو قالك ان الدفاع هو ملك الانتقريشن مو العصار…\nماختلفنا الرجال فاهم بالانتقريشن بس اسئلته صعبه حبتين… يعني موضوع القريد عنده صعب شوي… مدري انا خبري فيه قبل سنه يمكن غير اسلوبه الله اعلم…\n\nبس نصيحتي احرص على الدفاع تراه اخلاق… وعلى قولة الشباب يكفيك شرف انك درست عنده…\n\nالشلالي برضو ممتاز اذا بتراجع معه…\n\nوأنور شودري اذا بتتحمل تعامله معك بس انصحك خله الخيار اللي بعد الدفاع والشلالي…\n\nتحياتي…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/29280/8",
+          "user": "wanted",
+          "ts": 1067964039000,
+          "tid": 29280,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p600747-phys102",
+      "uid": "stk-_aiman",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1273147198000,
+      "st": "pub",
+      "data": {
+        "desc": "غريبه ايمن ما علق على الميجر سبحان مغير الاحوال\n\nراح اقول ليش ما علقت …\nقبل الميجر كنت في كلاس لعبدالكريم مكي … وكنت محبط من الماده جدا بعد ما جبت صفر في كلاس تست السنيدي لاني سلمت الورقه فاضيه …\n\nعبد الكريم مكي قبل الميجر حل ثلاث اسئله عامه قال يتوقع انها تجي …وفعلا … جات في الميجر … ماني فاهم كيف حلها ولاني فاهم المنهج بس كل اذكره القوانين الي كتبها وطريقة الحل قبل ما انساهم كتبتهم بالحرف وسويت مثل ما سوى وطلع الناتج …\n\nايش ابغ اكثر ثلاث اسئله جاتني ببلاش غير سؤالين من الشباتر القديمه حليتها … وحظي انه شرح شابتر 24 شرح مفصل قبل الميجر خلاني احل جميع اسئلة هذا الشباتر … مع انه ما ادري صح او خطأ تعرفو لعبهم في الاختيارات …\n\nلا فضل للسنيدي في شيئ :s\n\nعشان كدا ما حبيت اعلق طال ما انه لعب معي الحظ خلني ساكت احسن",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/87675/13",
+          "user": "_aiman",
+          "ts": 1273147198000,
+          "tid": 87675,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p666876-phys102",
+      "uid": "stk-muslum_4ever",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1280049813000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\nأول شي الحمدلله كان الاختبار سهل وطبعا كل شي بتوفيق الله عزوجل\nبس ابغى نصايح عشان درجتي ((طبعا الحمدلله على كل شي)) نازلة شوي\nانا قريت الكتاب حلييت اسئلة حلييت اولد اكزامز كنت فاهم الكونسبت تماااام\n\nسمعت انه لو فهمت سلايدات الجلال بس تمام تطلع بقريييد عاااالي\n\nفلا تبخلو علينا يا اهل الخبـــــرة 🥊\n\nجزيتم خيرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/92570/1",
+          "user": "muslum_4ever",
+          "ts": 1280049813000,
+          "tid": 92570,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p666983-phys102",
+      "uid": "stk-user6623",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1280058052000,
+      "st": "pub",
+      "data": {
+        "desc": "والله انا مو من اهـــــــــــــــل الخبره\n\nلكن حااالي مثل حالك ودرجـتي نازله ويمكن ارداا منك بعد\n\nبس الحمدلله على كل حـــال\n\nالحين باقي عندنـااا ميجر 2 وباقي الفاينـل وباقي اللاب ودرجة الهوم ورك والكلاس ورك\n\nيــــــــــااا أنااا يـــــــــــاااا هم… ابي اتحدا نفســي\n\nراح احااااول قد ما اقدر وبكل ما اقدر اني اعوووض عن الميجر الاول واني ما انزل ولااا درجــه فيهم\nوقبل كلشي التوووفيق بيد الله\n\nالله يعيننا ويسهل علينا يارب 😦",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/92570/2",
+          "user": "user6623",
+          "ts": 1280058052000,
+          "tid": 92570,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p958021-phys102",
+      "uid": "stk-brain_man",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1325548414000,
+      "st": "pub",
+      "data": {
+        "desc": "بالنسبة للماتيرال حق آخر 5 شباتر\n\nبيجي عليها من 15-20 سؤال ،،، الكلام هذا قاله لي دكتور الجلال ،، وسمعت دكتور الشكري يقول في حدود من 17 - 20 سؤال ،،،\n\n20% من الاختبار أسئلة كونسبت <<< اللي لما نشوفها نخليها 😦\n\nمدة الاختبار 3 ساعات ،،\n\nعلى حد علمي الأسئلة على الشباتر ال10 الأولى تكون أسهل من المياجر ،، والصعوبة تكون في الماتيريال الجديد ،،\n\nدمتم بود ،،، وبالتوفيق جميعاً ،، وربي يسهل علينا هالمادة ،،،",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/117390/9",
+          "user": "Brain_Man",
+          "ts": 1325548414000,
+          "tid": 117390,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p631481-phys102",
+      "uid": "stk-sorry",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1276509558000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار كان اسهل اختبار في حياتي\n\nطلعت في نص الاختبار وانا باذن الله متاكد من كل اجاباتي\n\n😛 😛 😛 😛\n\nشباب بلاش نضحك على بعض\nاللي يذاكر يحل واللي شغل تراكر الين قبل الاختبار بليلتين ويبي يجب فوق ال20 من 30 خله يمص حمر اصرف له\n\n🙂 تراني امزح الكورس ذا خلصته في 082 وانا مذاكر للفاينل اسبوووع كامل وطلعت ب 12 من 30 😦",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/102-sound-waves/89999/19",
+          "user": "Sorry",
+          "ts": 1276509558000,
+          "tid": 89999,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p926066-phys102",
+      "uid": "stk-user5800",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319702177000,
+      "st": "pub",
+      "data": {
+        "desc": "أنا اصلا غاسل يدي من يوم ما شفت الدكتور الشكري هو الكوردنيتر … !\nلأنه الحقيقة أولا … طبق طريقته في التحضير في سكاشنه … بالنسبة للاختبار / وهي ان لكل طالب كرسي .\nثانياً ، اذا كويزاته فيها لا يقل عن 16 أو 18 نموذج مختلف ( هذا يعني 16 او 18 سؤال مختلف , ولا يعني مجرد فقط تغيير ارقام ) …\nفما بالك اذا هو تولى امر \" الميجر \" ؟!!\nالله يصلحه بس …\n\nبالنسبة للاختبار ،\nالحقيقة اني اقرا السؤال ، وتآجي القوانين حقت كل مسألة على طول في بالي …\nوانا متاكد تماما انها صح 100% واتحدى احد يشككني فيها …\nثم استخرج المعطيات و احولهم الى si يونيت واحل …\nللأسف حول ثلث الاختبار … اعوض وما الاقي الاجابة الصح موجودة … !\n\nما ادري هو اختبار ماث والا تريل وارور والا فيزكس ؟!!!!!!!!!\n\nعموماً\nميجر 2 …\nيا انا … يا هم …\nما عليه … هين .!!",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/114453/23",
+          "user": "user5800",
+          "ts": 1319702177000,
+          "tid": 114453,
+          "pn": 23
+        }
+      }
+    },
+    {
+      "id": "stk-p927827-phys102",
+      "uid": "stk-lord",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319969410000,
+      "st": "pub",
+      "data": {
+        "desc": "تعتقدون ان حركة القسم بعرض جميع درجات الطلاب\nمقصود فيها شئ ؟\nبمعنى شوفوا درجاتكم يا الفالحين و انوا شدوا حيلكم\nاو مجرد امر تقني ماله علاقه ؟\nمن ناحيتي اشوفها غريبه صفة درجات الطلاب بالطريقه هذي\nخاصه ان خانة الدرجات بالهوومورك يقدرون بكل سهوله يضيفون لها درجة الميجر ( زي ماتعودنا قبل )\n---------\nومن ناحية نشكي للسلطان احس ما راح يصير شئ\nاو بمعنى اصح ما احنا اول دفعه الافرج حقها 9\nفيه سنوات لو ما خانتني الذاكره كان اقل من تسعه\nو اعتقد انه يعتبر افرج مناسب بنظر الـ(ديبارتمنت ) نفسها",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/114608/9",
+          "user": "Lord",
+          "ts": 1319969410000,
+          "tid": 114608,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p927871-phys102",
+      "uid": "stk-saskgh",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319974425000,
+      "st": "pub",
+      "data": {
+        "desc": "يا شباب لحد يتعب نفسه مع خالد السلطان انا في 101 كان الافرج 7 والسلطان ما سوا شي والسلطان مايتدخل بأي شي له دخل بالدرجات لاني اعرف ناس اخذوا f في مواد ثانيه ظلما وكل شي كان مرفق بالمستندات وماحصلوا من السلطان الا رسالة اعتذار و انا مره دكتور عطاني رساله اتحفظ باسمه لاسباب امنيه ههههههههه ان الفيزيا في ذي الجامعه ماهي الا فلتر كورس يعني يا تطفشه يحول اداره او انها تقلعه برا الجامعه انا مذاكر اكثر من اسبوع وحال فوق ال 500 مسأله وماجبت الا 7 والحمدلله على كل حال واذا كان فعلا المقصود التصعيب على الطلاب وتحديهم او تطفيشهم فيا رب يالله ياقادر على كل شي يا جبار يا عزيز ان تجعل كيدهم في نحرهم وتصعب عليهم كل امور حياتهم من كبيرهم الى صغيرههم اذا كان هدفهم مجرد تحدي او تطفيش. ورساله ارسلها للدكتور واخي السلطان والى شخص احبه والله من قلبي الدكتور الجلال جيبوا لنا دكاتره يوصلون معلومه بغض النظر عن شهايدهم وانجازاتهم اللتي ماراح تفيد الا بتقيم الجامعه وماراح تفيدنا تعليمياً بعدين تعال اختبرني باخبارات بذا المستوى. وشكرا . وارجو من المشرف عدم حذف اي شي من كلامي فنحن في نقاش وحوار.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/114608/13",
+          "user": "saskgh",
+          "ts": 1319974425000,
+          "tid": 114608,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p1196346-phys102",
+      "uid": "stk-user8697",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1362632540000,
+      "st": "pub",
+      "data": {
+        "desc": "يا حبيبي … يا قلبي … ياعيوني\n\nلما تقلي ان الماتيريال الجاية أصعب وأنا مذاكر كويس للمتيريل الأسهل وآكل زفت\n\nانتا مو بتحطمني انتا بتحولني من بني ادم لبخار … هيا احسب كمية الحرارة اللي تطبقها عليا مع العلم ان درجة حرارتي الآن 36.2 درجة مئوية (C human= 8000 J/kg.K)\n\nأدري انو قصدك تساعدني بس مو كذا ترا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/141631/20",
+          "user": "user8697",
+          "ts": 1362632540000,
+          "tid": 141631,
+          "pn": 20
+        }
+      }
+    },
+    {
+      "id": "stk-p1196639-phys102",
+      "uid": "stk-user7645",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1362679756000,
+      "st": "pub",
+      "data": {
+        "desc": "اعتبرها نصيحة من أخ ، لاتسمع ابداً ابداً ابداً لكلام من حولك بصعوبة أي مادة سواءً فيزياء أو غيرها جميعها تجارب شخصية ولا تبني على تجربة غيرك ! ، نسبة كبيرة من الشباب بعتقد الفيزياء أصعب كورس قبل حتى ماينزله ويشوف متعته ! فيصير عندهم تبلد نفسي … حتى لو جابلهم الدكتور 1+1 بيقولك صعب … لإن المسألة صارت شحن نفسي .\n\nلو خبصت بميجر 1 ، لسى قدامك ميجر 2 والفاينل واللاب ، اشتغل على نفسك و 101 كورس ممتع وبتطلع منه بقريد عالي ان شاء الله ، أهم شيء لاتخلي مجال للإحباط أو كلام المُحبطين .\n\nإذا هذا الشيء بيرفع من معنوياتك فأخوك نزل كورس فيزياء 102 وماث 202 بالصيف مع بعض والحمدلله طلعت منها بقريدات ممتازة ولله الحمد وكنت أشتغل بارت تايم بعد ! .\n\nبالتوفيق لك ولجميع الشباب .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/141631/33",
+          "user": "user7645",
+          "ts": 1362679756000,
+          "tid": 141631,
+          "pn": 33
+        }
+      }
+    },
+    {
+      "id": "stk-p1196741-phys102",
+      "uid": "stk-mysterious",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1362695862000,
+      "st": "pub",
+      "data": {
+        "desc": "أنا أعتبر الفيزكس والمواد الصعبة “نسبياً” مثل ] الدّوّامــة ] ,\n\nإذا دخلت فيها بتلفّك وبتخلّيك تدور إلى أن تثبّت نفسك وبعدها ما راح تعوق معك ,\n\nلذلك تسمع الصعوبة بفيزكس 101 أكثر من 102 ومواد التخصص حتى لأنها هي الصدمة الأولى ,\n\nما راح تجيب الـ 20 من البداية ومن أوّل مرة إلا لمن حالته نادرة ,\n\nالمحكّ كيف تقدر تتغلّب على مثل هالظروف الصعبة وإلي ما يتجاوزها إلا الطالب الذكي والموفّق ,\n\nما أنسى الكحيلي يوم قال لنا \" الكثير يصيبه الإحباط واليأس بعد الميجر الأول وبالتالي عدم الاستمرار بالمذاكرة للميجر الثاني والفاينل وهذا هو سبب الفشل الرئيس في المادة \"\n\nالـ +A أو الـ A ما تجي بالتمنّي , بل بتجاوز مثل هـ الصعوبات والعقبات وإلي المفروض ما تصعب على طلاب مثل طلّاب البترول ❤️ ,\n\nبالتوفيـق للجميع 🙄",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/141631/35",
+          "user": "Mysterious",
+          "ts": 1362695862000,
+          "tid": 141631,
+          "pn": 35
+        }
+      }
+    },
+    {
+      "id": "stk-p733121-phys102",
+      "uid": "stk-user3767",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1289066783000,
+      "st": "pub",
+      "data": {
+        "desc": "قمة الاحباط …\nالواحد يشد حيله ويذاكر ويتعب ويفهم كل نقطة في المنهج…\nبالنهاية ما يحصل نص جهده…\n\nقسم الفيزياء (الأكثر تخلفاً بالجامعة برأيي) عندهم قناعات غريبه عجيبة في وضع الاختبارات…\nاتمنى اعرف ليش ما يمشون على النظام العالمي للاختبارات؟\nالاختبار المفروض يكون 3 اقسام… قسم صعب وقسم متوسط وقسم سهل… ويخلون عدد اسئلة كل قسم متساويه…\nلكن اللي شفناه اليوم غير… اللي نشوفه من قسم الفيزياء في كل اختبار غير…\nاحنا بالاختبار نشوف 13 سؤال صعب … 6 اسئلة متوسطة … سؤال واحد سهل…\nطيب اللي ذاكر مذاكرة متوسطة كم يجيب؟ 7؟ 8؟\n(مذاكرة متوسطة=فهم كل المادة وحل اكزامين الى ثلاثه)\nوالله لو أجيب العمال اللي يغسلون السيارات في المواقف وقلت لهم لونو… يمكن يجيبون 7 او 8…\nيعني اذا قسم ما يعرف اساسيات وضع الاختبارات… وش تنتظر منه؟\n\nانا طالب… واللي استنتجته من هالاختبار ان على كثر ما تجتهد ما راح تحصل حقك…\nلذلك جاني احباط وخلاني انوي اني ما اذاكر الاختبار الثاني…\nهذا اللي يبغونه قسم الفيزياء المتخلف؟",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/97837/2",
+          "user": "user3767",
+          "ts": 1289066783000,
+          "tid": 97837,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p960231-phys102",
+      "uid": "stk-user6896",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1325861156000,
+      "st": "pub",
+      "data": {
+        "desc": "ههههههههههههههههه\n\nالمشكله أن أغلب الاعضاء بالمنتدى دوافير وسايقينها علينا\n\nمثلا يجيك واحد يقول الاختبار صعب وانا خبصت ومدري وشو وتراني جااايب اوم العيد … وهذا كله لأنه ما قدر يحل 5 اسئله من أصل 30 سؤال\n\nو طالب ثاني يقول صعب لأنه ما قدر يحل 10 اسئله من 30 سؤال\n\nما أدري وشو االمعيار اللي تحكمون من خلاله ان الاختبار صعب أو سهل ؟؟\n\nهل هو على عدد الاسئله اللي ما قدرت تحلها ؟؟ ولا على الاسئله اللي تعبت وأخذت منك جهد وانت تحلها في الاختبار خخخخخخ\n\nتحياتي …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/117529/42",
+          "user": "user6896",
+          "ts": 1325861156000,
+          "tid": 117529,
+          "pn": 42
+        }
+      }
+    },
+    {
+      "id": "stk-p961680-phys102",
+      "uid": "stk-user7699",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1326011102000,
+      "st": "pub",
+      "data": {
+        "desc": "سألت الدكتور الشكري قبل نص ساعة عن درجات الفاينل…قالي إنها موجودة في الموقع لها يومين!!!\n\nأكدت له ووضحت له إنها ماهي موجودة…في النهاية قلي يمكن جهازك فيه مشكلة شيك من اللابات\n\nعالعموم القريدات النهائية يوم الإثنين العصر حتكون نازلة إن شاء الله حسب كلامه",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/117529/58",
+          "user": "user7699",
+          "ts": 1326011102000,
+          "tid": 117529,
+          "pn": 58
+        }
+      }
+    },
+    {
+      "id": "stk-p926045-phys102",
+      "uid": "stk-user3817",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319688511000,
+      "st": "pub",
+      "data": {
+        "desc": "…\n\nالاختبار في ظاهره أنه ربما حوالي 12 - 15 سؤال قابلة وبسهولة للحل للمذاكر ، و حوالي 5 تحتاج تركيز شديد وفهم عميق و ربما ذكي إستنتاجي وعبقرية بعض الشيء ! ولو ركزنا حقيقةً على تلك 12 أو 15 سؤال الاخرى راح نلاقي فيها تركات غير ملحوظة ، و بما أن ماتيرال هذا الجزء من الكورس يعد ألطف من الكورس كما يشير الكثيرون ، فيتبادر لهم أيضاً أن الحصول على درجة عالية أو على الأقل متوسطة أمر ليس بصعب المنال. يعني الكثير يقولون على الأقل ما راح نفوت درجات تلك الاسئلة المتوسطة و السهلة لكن في الحقيقة الكثير من تلك الاسئلة إحتمالية وقوعك في الخطأ جداً عالية، لذا يرى الجميع أنا النتائج مُخيبة للآمال وُمحطمة ، و أنا بصراحة مع رؤية السلوشن ، تفأجات بأخطاء لإسئلة كنت أجزم بصحة حلي لها ، بإختصار الإختبار مُعد بحرافية عالية ، ومن شخص مُتمكن وذو معرفة شديدة بمكامن الخطأ لدى الطلاب ، و الإجابات كالعادة جداً متقاربة وتصنع الفرق الشديد في الدرجة ، لذا لا أرى الإختبار\n- من وجهة نظري الخاصة - إلا أنه يميل وبشدة للصعوبة ، و أعتقد أن المستوى العام للطلاب سيكون بحدود 9 !\n\nأتمنى لنا التعويض في القادم ، وما فات قد مات … والحمد لله على كل حال …\n\n…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/114453/19",
+          "user": "user3817",
+          "ts": 1319688511000,
+          "tid": 114453,
+          "pn": 19
+        }
+      }
+    },
+    {
+      "id": "stk-p926115-phys102",
+      "uid": "stk-the_marvel",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319714724000,
+      "st": "pub",
+      "data": {
+        "desc": "معروف ميجر ون يا شباب…\n\nماتيريال أسهل ماتيريال…\n\nلكن يقدرون يلعبون بالأسئلة\n\nاذكر مثلا…شي سهل مضمون\n\nاللي هو المسافة بين تو نودز\n\nفي الاختبار جابوا بين انتي نودز…يعني تضرب في اثنين مدري تقسم على 2\n\nالمهم يلعبون بالاسئلة…\n\nأما الفورملا شيت…\n\nالمفروض وانت تذاكر تطبعها عشان تتعود عليها قبل…\n\nموب تجي الاختبار وانت اول مرة تشوفها…\n\nوالفزكس ما يبون يشوفون انت فاهم والا لا…يبون يشوفون انت تطيح في الترك والا لا\n\nالله يقلعها من مادة…\n\nموفقين ❤️",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/114453/29",
+          "user": "The_Marvel",
+          "ts": 1319714724000,
+          "tid": 114453,
+          "pn": 29
+        }
+      }
+    },
+    {
+      "id": "stk-p926439-phys102",
+      "uid": "stk-twitter",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1319755755000,
+      "st": "pub",
+      "data": {
+        "desc": "أخي Marval\n\nكلامي ليس بالمثالي لإنه واقع مررت به ، طلعت من هاذي الكورسين بقريدات ممتازة والحمدلله ، واتكلم عن واقع تجربة .\n\nكونك لم تحقق فيها ماتصبو اليه لايعني بأنها مستحيلة او صعب تحقيق فيها القريدات ، تجربتك ليس بالمقياس لمدى صعوبة او سهولة هذه المادتين .\n\nكل مايتم دراسته بالفيزياء هي اساسيات يتم التفصيل بها في تخصصات ، الاسئلة التي تأتي بالاختبار تكون مقياس حقيقي لفهم الطالب للكونسبت .\n\nبالنسبة لكم يااخوان اخطائكم هي دروس لكم ولايزال هناك ميجر 2 والفاينل ، عدل من طريقة مذاكرتك حاول تفهم المادة ، \"لاتسمع \" لكلام الاخرين عن صعوبة المياجر او تطفيس قسم الفيزياء …الخ\n\nكلها عوامل نفسية تؤثر عليك ، لذا اعمل وتوكل على الله وصدقني لن يضيع عملك .\n\nاعذرونا اذا اطلنا والله من حبنا نتمنى لكم الخير 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/2-102/114453/43",
+          "user": "Twitter",
+          "ts": 1319755755000,
+          "tid": 114453,
+          "pn": 43
+        }
+      }
+    },
+    {
+      "id": "stk-p1005785-phys102",
+      "uid": "stk-azoooozy",
+      "code": "PHYS 102",
+      "sec": "info",
+      "ts": 1331541867000,
+      "st": "pub",
+      "data": {
+        "desc": "سلايدات الجلال + اولد اقزام تجربة شخصية طبعا السلايدات. كانك ساحب من البداية يبغالك على الاقل تبدا في قبل الميجر باسبوعين اسبوع واحد ماراح تطلع بنتيجة وبتجيب العيد ، الاولد اقزامز قبل الاختبار باسبوع ، كل يوم حل ٢-٣ اولد اقزام واي سؤال ماتعرفه حاول فيه اذا يأست ارجع لسلايدات الجلال وحط نوتس للاشياء اللي عندك مشكلة فيها ، + في سلايدات الجلال قوانين مب موجودة في ورقة القوانين ، اطبع ورقة القوانين واكتب عليها القوانين الاضافية ومع الممارسة راح تحفظ اماكن القوانين وتعرف اي قانون تستخدم ولا تواجه صعوبات في تطبيق القوانين ، وفالك التوفيق 3>",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/122777/5",
+          "user": "azoooozy",
+          "ts": 1331541867000,
+          "tid": 122777,
+          "pn": 5
+        }
+      }
+    },
+    {
       "id": "stk-p860409-phys102",
       "uid": "stk-_99920",
       "code": "PHYS 102",
@@ -3267,6 +4296,56 @@
           "ts": 1319657942000,
           "tid": 114453,
           "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p405618-phys102",
+      "uid": "stk-user3743",
+      "code": "PHYS 102",
+      "sec": "srcP",
+      "ts": 1243008760000,
+      "st": "pub",
+      "data": {
+        "html": "نوتة مكي فيها كل الحالات بالتفصيل:<br><br>انظر المرفقات.<br><br>تحياتي:أبو عادل<br><br>​<span data-fid=\"stk-f405618-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f405618-0": {
+            "name": "شابتر 23.doc",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/e5a923aed3a40eb5e678291cc908761b257f0e475d4adcaa92d68854986177ce"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/73445/12",
+          "user": "user3743",
+          "ts": 1243008760000,
+          "tid": 73445,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p1174144-phys102",
+      "uid": "stk-hush1994",
+      "code": "PHYS 102",
+      "sec": "srcU",
+      "ts": 1359647699000,
+      "st": "pub",
+      "data": {
+        "html": "🌹تفضل<br><br>​<span data-fid=\"stk-f1174144-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1174144-0": {
+            "name": "Phys102-122-Lecture-Schedule.pdf",
+            "v": "data:application/pdf;base64,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ZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTMtMDEtMjdUMTE6MDU6MTIrMDM6MDA8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8eG1wOkNyZWF0ZURhdGU+MjAxMy0wMS0yN1QxMTowNTowOSswMzowMDwveG1wOkNyZWF0ZURhdGU+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMTMtMDEtMjdUMTE6MDU6MTIrMDM6MDA8L3htcDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDx4bXA6Q3JlYXRvclRvb2w+QWNyb2JhdCBQREZNYWtlciA5LjAgZm9yIFdvcmQ8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIj4KICAgICAgICAgPHhtcE1NOkRvY3VtZW50SUQ+dXVpZDo2NGRmOTBmOS1kMTRhLTRmYjQtYTBiZS05ODNkNDhiNTc0OTQ8L3htcE1NOkRvY3VtZW50SUQ+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnV1aWQ6ODU4MGM1Y2UtMDhkNS00NTcxLThkOTQtNTU4OGRjNWUzODZlPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06c3ViamVjdD4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGk+MTwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpTZXE+CiAgICAgICAgIDwveG1wTU06c3ViamVjdD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyI+CiAgICAgICAgIDxkYzpmb3JtYXQ+YXBwbGljYXRpb24vcGRmPC9kYzpmb3JtYXQ+CiAgICAgICAgIDxkYzpjcmVhdG9yPgogICAgICAgICAgICA8cmRmOlNlcT4KICAgICAgICAgICAgICAgPHJkZjpsaT5Db3JlSTU8L3JkZjpsaT4KICAgICAgICAgICAgPC9yZGY6U2VxPgogICAgICAgICA8L2RjOmNyZWF0b3I+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczpwZGY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGRmLzEuMy8iPgogICAgICAgICA8cGRmOlByb2R1Y2VyPkFkb2JlIFBERiBMaWJyYXJ5IDkuMDwvcGRmOlByb2R1Y2VyPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6cGRmeD0iaHR0cDovL25zLmFkb2JlLmNvbS9wZGZ4LzEuMy8iPgogICAgICAgICA8cGRmeDpTb3VyY2VNb2RpZmllZD5EOjIwMTMwMTI3MDgwNDU3PC9wZGZ4OlNvdXJjZU1vZGlmaWVkPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSJ3Ij8+DQplbmRzdHJlYW0NZW5kb2JqDTcgMCBvYmoNPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0ZpcnN0IDYvTGVuZ3RoIDUyL04gMS9UeXBlL09ialN0bT4+c3RyZWFtDQpo3jK2tFAwULCx0XfOL80rUTDU985MKY42MTACigbF6odUFqTqBySmpxbb2QEEGAD71gxMDQplbmRzdHJlYW0NZW5kb2JqDTggMCBvYmoNPDwvRmlsdGVyL0ZsYXRlRGVjb2RlL0ZpcnN0IDYvTGVuZ3RoIDE1NS9OIDEvVHlwZS9PYmpTdG0+PnN0cmVhbQ0KaN5szMEKgkAQgOFXmZsuQTurSW2IIEoQJAgdOq/uSEvQwLAeevsUIjp0//8vtxYQylLXc7yzpA0LnQulGyEXAz9bFyltjxmaHE22NwYLtBvME8TkUy1XPQoPLkLfnjr3IAG7RZhY4Mbile7Y/3FM9nV6YT+PtECeB1oZuIRBnLxWSekrzzLSwoQpkP9x8IC7Yq+q6i3AAGOjOLANCmVuZHN0cmVhbQ1lbmRvYmoNOSAwIG9iag08PC9EZWNvZGVQYXJtczw8L0NvbHVtbnMgNC9QcmVkaWN0b3IgMTI+Pi9GaWx0ZXIvRmxhdGVEZWNvZGUvSURbPDYwMEQ1RjUyMjczQzkxNDlCRTI0NTAyNDYyRTg0RTQ0Pjw5NjZDNzJFRDczMTE2RDQ1ODA5RkE0MTExNzlDN0M5MT5dL0luZm8gMzk5IDAgUi9MZW5ndGggODYvUm9vdCA0MDEgMCBSL1NpemUgNDAwL1R5cGUvWFJlZi9XWzEgMiAxXT4+c3RyZWFtDQpo3mJiAAImxj5jBiYGRl8gwXEKSLBcAxKsr0AsHyDBrwuSnQAifgAVe38DshgYGPERjL8IKhklhhnBOHc0DEbjfJQYjfNRgu4E0wZQzDAABBgAzJEPKw0KZW5kc3RyZWFtDWVuZG9iag1zdGFydHhyZWYNCjExNg0KJSVFT0YNCg=="
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/139586/2",
+          "user": "HUSH1994",
+          "ts": 1359647699000,
+          "tid": 139586,
+          "pn": 2
         }
       }
     },

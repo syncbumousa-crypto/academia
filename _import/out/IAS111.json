@@ -233,6 +233,41 @@
       "user": "Mr.A1"
     },
     {
+      "id": "stk-user4208",
+      "name": "الملك راؤول",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/41988e/144.png",
+      "email": "user4208@import.stkfupm.invalid",
+      "user": "user4208"
+    },
+    {
+      "id": "stk-user5216",
+      "name": "الرقمي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5216/144/1003_2.png",
+      "email": "user5216@import.stkfupm.invalid",
+      "user": "user5216"
+    },
+    {
+      "id": "stk-user5081",
+      "name": "طموح الحياة",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5081/144/930_2.png",
+      "email": "user5081@import.stkfupm.invalid",
+      "user": "user5081"
+    },
+    {
+      "id": "stk-mr.kaloood",
+      "name": "mr.kaloood",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mr.kaloood/144/1614_2.png",
+      "email": "mr.kaloood@import.stkfupm.invalid",
+      "user": "mr.kaloood"
+    },
+    {
+      "id": "stk-user9202",
+      "name": "حبيب الكل",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a9a28c/144.png",
+      "email": "user9202@import.stkfupm.invalid",
+      "user": "user9202"
+    },
+    {
       "id": "stk-user4631",
       "name": "الحل الصعب",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/7bcc69/144.png",
@@ -259,13 +294,6 @@
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3794/144/551_2.png",
       "email": "user3794@import.stkfupm.invalid",
       "user": "user3794"
-    },
-    {
-      "id": "stk-user9202",
-      "name": "حبيب الكل",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/a9a28c/144.png",
-      "email": "user9202@import.stkfupm.invalid",
-      "user": "user9202"
     },
     {
       "id": "stk-user10175",
@@ -329,6 +357,13 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/3ab097/144.png",
       "email": "master_key@import.stkfupm.invalid",
       "user": "Master_Key"
+    },
+    {
+      "id": "stk-user8250",
+      "name": "مساعد الكل",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/ed8c4c/144.png",
+      "email": "user8250@import.stkfupm.invalid",
+      "user": "user8250"
     },
     {
       "id": "stk-fay16",
@@ -1610,6 +1645,121 @@
       }
     },
     {
+      "id": "stk-p510562",
+      "uid": "stk-user4208",
+      "code": "IAS 111",
+      "sec": "info",
+      "ts": 1262000417000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم و رحمة الله و بركاته …\n\nشباب … حبيت أسأل عن توزيع الدرجات في هالماده …\n\nالمادة حاليا عبارة عن ميدتيرم و فاينل و كلاس وورك …\n\nالميد تيرم عليه 35 % وانا متأكد …\n\nبس اللي سمعته ان الكلاس وورك عليه 10 % فقط !!\n\nلأني كنت أحسبه 20% …\n\nيعني على كذا الفاينل لوحده عليه 55 % <<< أكثر من نص الدرجات !!!\n\nفبغيت إذا أحد عنده معلومة أكيدة يقولي كم على الكلاس وورك و كم على الفاينل …\n\nيعطيكم العافية و في الإنتظار …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/81385/1",
+          "user": "user4208",
+          "ts": 1262000417000,
+          "tid": 81385,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p933252",
+      "uid": "stk-user5216",
+      "code": "IAS 111",
+      "sec": "info",
+      "ts": 1321707959000,
+      "st": "pub",
+      "data": {
+        "desc": "لا باذن الله ماراح تاخذ dn والدكتور راح يتفهم الوضع بس عشان تكون رسالتك اصدق … ارسل له صورة من شهادة الوفاة اذا فيه امكانية\n\nكذا صعبه صعبه جدا يقول لا … واكيد بيقبل تاجيله لك\n\nلاتشيل هم وانا اخوك امورك بتتسهل باذن الله\n\nوالله يرحم والدك ويوفقك يالغالي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/115154/7",
+          "user": "user5216",
+          "ts": 1321707959000,
+          "tid": 115154,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p933265",
+      "uid": "stk-user5081",
+      "code": "IAS 111",
+      "sec": "info",
+      "ts": 1321708875000,
+      "st": "pub",
+      "data": {
+        "desc": "أخوي لا تصعب الموضوع ، وبإذن الله ماضاقت إلا لـ تفرج .\nإنت سوي اللي عليك ، وبعدها لو جاك dn لا سمح الله فأنت على الأقل سويت كل اللي تقدر عليه .\nيعني لو مثلا تيقنت انك خلاص بتاخذ dn ، إيش يمديك تسوي ؟ ماحتقدر تجي خلال 4 ساعات …!\nإنت إعمل بالأسباب ، وسلم أمرك لله …\n\nالله ييسرها لك يالغالي ، ولا تشيل هم فوق همك … ان شاء الله الدكتور يقدر ظرفك ،\nوبرضوه أنصحك ترسل رسالة لرئيس القسم ( الآن ) وتعلمه بالموضوع كامل … وتروح لمكتبه بكرة .\nومثل ما قال أخوي الرقمي ، تراهم حبيبين وبإذن الله يقدرون ظرفك .\nأسأل الله لك التوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/115154/12",
+          "user": "user5081",
+          "ts": 1321708875000,
+          "tid": 115154,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p933318",
+      "uid": "stk-mr.kaloood",
+      "code": "IAS 111",
+      "sec": "info",
+      "ts": 1321714182000,
+      "st": "pub",
+      "data": {
+        "desc": "وعليكم السلام ورحمة الله وبركاته …\n\nالله يرحمك فقيدكم ويسكنه فسيح جناته , واحسن الله عزاكم فيه …\n\nوالله اذا احب عبداً ابتلاه , فحالمدلله على كل حال …\n\n:\n\nوانا اضمن لك راح يتأجل اختبارك , لاني سبق وسمعت عن شخص\nوتم تأجيل اختباره لظروف صعبة حصلت له ومنها نفس ظرفك من تأجيل رحلة والخ …\nفلاتخاف وتفائل بالخير دايما …\n\nالدكتور . السلمي درست عنده … رجل متفهم وحبيب جداً\nوكانت عندي بعض المشاكل مع المادة وكان يساعدني دايماً …\nفتأكد إذا رحت له ماراح تشوف إلا اللي يسرك …\n\nوكذلك رئيس القسم أطيب وأطيب …\n\nاخوي لو اني اقدر اروح وأسألك , والله العظيم رحت … لكني خارج الجامعة\nوعامل الوقت مؤثر علي لبعض الامور الاخرى …\n\nفـ في واحد من الاخوياء اعرفه عنده مشكلة وبيروح لهم لكن بكره …\nتبي أسأله عنك وابلغك الجواب ؟",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/115154/22",
+          "user": "mr.kaloood",
+          "ts": 1321714182000,
+          "tid": 115154,
+          "pn": 22
+        }
+      }
+    },
+    {
+      "id": "stk-p1314646",
+      "uid": "stk-user9202",
+      "code": "IAS 111",
+      "sec": "info",
+      "ts": 1388829255000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار عليه في الاصل 35 درجة وإذا تم حذف السؤال فبالتأكيد أنه ستتم إضافة الدرجة لكل طالب\n\n…\n\nلنفترض أنهم ما أعطونا الدرجة يعني الـtotal حق الكورس من 99 بدل 100 وهذا غير معقول\n\n…\n\nتوقعي ان الدرجة ستضاف لكل طالب لأن الخطأ من القسم نفسه وهو اللي يتحمل\n\n…\n\nبالتوفيق للجيمع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/154859/3",
+          "user": "user9202",
+          "ts": 1388829255000,
+          "tid": 154859,
+          "pn": 3
+        }
+      }
+    },
+    {
       "id": "stk-p911118",
       "uid": "stk-user4631",
       "code": "IAS 111",
@@ -1925,6 +2075,31 @@
           "ts": 1307653886000,
           "tid": 108047,
           "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p805861",
+      "uid": "stk-user8250",
+      "code": "IAS 111",
+      "sec": "srcU",
+      "ts": 1299255956000,
+      "st": "pub",
+      "data": {
+        "html": "السلام عليكم<br>ها هي في المرفقات<br>و إن رمت مكافأتي فدعوة في ظهر الغيب<br><br>​<span data-fid=\"stk-f805861-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f805861-0": {
+            "name": "32.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/6aad4afa377b1977c1eacc36281b166826fe502f79f38d694929e7322cf069c1"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/104147/2",
+          "user": "user8250",
+          "ts": 1299255956000,
+          "tid": 104147,
+          "pn": 2
         }
       }
     },
