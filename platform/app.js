@@ -11145,7 +11145,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
-        closed: !meta || meta.closed !== false,
+        closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة: فيه ينتهي هيكلُ التحميل، فلا يتسلّمه المحرّكُ مفتوحًا على صفحةٍ قديمة */
         covKey, covPg,
         wide: true,
         flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
@@ -23976,7 +23976,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cover: ((chCovMeta(code, ch) || {}).color) || (meta && meta.cover) || '#2c5e65',
       pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
       /* يُفتح الكتابُ مغلقًا أوّلَ مرّة، ثمّ كما تركتَه */
-      closed: !meta || meta.closed !== false,
+      closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة (حيث ينتهي هيكلُ التحميل) */
       covKey: chCovMeta(code, ch) ? chCovKey(code, ch) : null,
     });
   }
