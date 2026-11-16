@@ -663,6 +663,8 @@
       + (kind === 'g' ? '<span class="bg-shine"></span>' : '')
       + bookFace(baseOf(code)) + (op.inner || '') + '</span><span class="bg-clip"></span>' + (op.after || '') + '</span>';
   }
+  /* صورُ الأغلفة التي اكتملت مرّةً في هذه الجلسة: تُرسم ظاهرةً فورًا (الرفُّ يُعاد رسمُه، فلا تذوب من جديد في كلّ رسمة) */
+  const BK_SEEN = window.__bkSeen = window.__bkSeen || new Set();
   function bookHTML(code, img, o) {    const op = o || {};
     const sz = op.size ? ' bk--' + op.size : '';
     const inner = op.inner || '';
@@ -681,7 +683,11 @@
     const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
                + ' this.parentNode.remove()';
     const shot = img
-      ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy"'
+      ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy" decoding="async"'
+        + (BK_SEEN.has(img) ? ' class="is-in"' : '') + ' data-u="' + esc(img) + '"'
+        /* لا تُرى الصورةُ وهي تصل: المتصفّحُ يرسم ما وصل منها شريطًا شريطًا من أعلى، مشوّشًا — فتبقى خفيّةً والمرسومُ تحتها،
+           حتى تكتمل وتُفكّ، فتظهر دفعةً بتلاشٍ قصير */
+        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\')})"'
         + ' onerror="' + fail + '">' + inner + '</span>'
       : '';
     return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : '') + '">'

@@ -18451,3 +18451,6 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 .pk-fic:hover { transform: scale(1.12); filter: brightness(1.1); }
 .pk-fem { object-fit: contain; }
 .pk-fic:focus:not(:focus-visible) { outline: none; }
+/* صورةُ الغلاف تظهر حين تكتمل لا وهي تصل (‎bookHTML‎) — والوجهُ المرسومُ تحتها حتى ذلك */
+.bk .bkface--img > img { opacity: 0; transition: opacity .22s ease; aspect-ratio: auto .7; }   /* وقبل أن يُعرف مقاسُها: بنسبة المرسوم، فلا ينطوي الكتابُ إلى عرضٍ صفرٍ يُخفي المرسومَ تحته */
+.bk .bkface--img > img.is-in { opacity: 1; }
