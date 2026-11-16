@@ -647,3 +647,80 @@ img.emo {
   object-fit: contain;
   user-select: text;
 }
+
+/* ============================================================
+   قائمةُ الدكاترة زجاجٌ كلوحة فلاتر البحث (‎.market-tools .fpanel‎) — طلبُ صاحب الموقع
+   ============================================================
+   الصبغةُ نفسُها (‎--glass‎ بكثافة ٨٤٪)، والحرفُ (‎--glass-edge‎)، والظلُّ (‎--glass-cast‎)،
+   والتمويهُ ٢٠ مع تشبيع ١٧٠، وزاويةُ اللوح الواسعة (٢٦)، ورقاقاتٌ كبسولات، والمختارُ
+   بتروليٌّ ممتلئ كالمختار في الفلاتر. والفواصلُ حبرٌ بثمانية في المئة كفواصل المجموعات. */
+html:root .post-menu__list.cm-docmenu {
+  border: 0; border-radius: 26px; padding: 16px 18px; min-width: 404px; max-width: calc(100vw - 32px);
+  background: color-mix(in srgb, var(--glass) 84%, transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
+  color: var(--glass-ink);
+}
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .post-menu__list.cm-docmenu { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:root .post-menu.open .cm-docmenu { animation: lg-pop .26s cubic-bezier(.2,.9,.25,1.08); transform-origin: top left; }
+  html[data-lang="en"]:root .post-menu.open .cm-docmenu { transform-origin: top right; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:root .post-menu__list.cm-docmenu { background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+/* الترتيب: مجموعةٌ أولى، وتحتها فاصلٌ كفاصل المجموعات */
+html:root .cm-docmenu .cm-sortgrp {
+  gap: 6px; padding-bottom: 13px; margin-bottom: 13px;
+  border-bottom: 1px solid color-mix(in srgb, var(--glass-ink) 8%, transparent);
+}
+/* العنوانُ كعنوان المجموعة (‎.fgroup__t‎) */
+html:root .cm-docmenu .cm-docmenu__t { margin-bottom: 10px; }
+html:root .cm-docmenu .cm-docmenu__t > span { font-size: 12px; font-weight: 700; color: color-mix(in srgb, var(--glass-ink) 72%, transparent); }
+/* الرقاقات: الترتيبُ والترمات — كبسولاتٌ كرقاقات الفلاتر */
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt,
+html:root .cm-docmenu .drl-term {
+  border-radius: 999px; border: 1px solid color-mix(in srgb, var(--glass-ink) 12%, transparent);
+  background: color-mix(in srgb, #fff 55%, transparent); color: var(--glass-ink);
+  font-size: 12.5px; font-weight: 600; transition: background .15s, color .15s, border-color .15s;
+}
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt { padding: 7px 13px; }
+html:root .cm-docmenu .drl-term { height: 30px; padding: 0 12px; }
+html[data-theme="dark"]:root .cm-docmenu .cm-sortgrp .cm-sortopt,
+html[data-theme="dark"]:root .cm-docmenu .drl-term { background: rgba(255,255,255,.06); }
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt:hover,
+html:root .cm-docmenu .drl-term:hover { border-color: color-mix(in srgb, var(--glass-ink) 24%, transparent); }
+html:root .cm-docmenu .cm-sortgrp .cm-sortopt.on,
+html:root .cm-docmenu .drl-term.on { background: var(--c-kfupm, #2c5e65); border-color: transparent; color: #fff; font-weight: 700; }
+html:root .cm-docmenu .drl-term span { opacity: .5; font-weight: 400; }
+html:root .cm-docmenu .drl-term.on span { opacity: .75; }
+/* البحث: كبسولةٌ كبحث التخصّصات (‎.fcol-search‎) */
+html:root .cm-docmenu .drl-q {
+  height: 36px; border-radius: 999px; border: 0; padding: 0 14px;
+  background: color-mix(in srgb, var(--glass-ink) 5%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 10%, transparent);
+}
+html:root .cm-docmenu .drl-q svg { color: color-mix(in srgb, var(--glass-ink) 55%, transparent); }
+html:root .cm-docmenu .drl-qin { color: var(--glass-ink); }
+html:root .cm-docmenu .drl-qin::placeholder { color: color-mix(in srgb, var(--glass-ink) 45%, transparent); }
+/* الصفوف: فاصلٌ فوقها، وزاويةٌ = زاويةُ اللوح − حشوتُه */
+html:root .cm-docmenu .drl-list {
+  margin-top: 4px; padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--glass-ink) 8%, transparent);
+}
+html:root .cm-docmenu .drl-row { border-radius: 14px; border: 0; color: var(--glass-ink); }
+html:root .cm-docmenu .drl-row:hover { background: color-mix(in srgb, var(--glass-ink) 6%, transparent); }
+html:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, var(--c-kfupm, #2c5e65) 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-kfupm, #2c5e65) 70%, transparent);
+}
+html[data-theme="dark"]:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, #4f9aa4 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #4f9aa4 70%, transparent);
+}
+html:root .cm-docmenu .drl-av { background: color-mix(in srgb, var(--glass-ink) 10%, transparent); }
+html:root .cm-docmenu .drl-av--all { color: color-mix(in srgb, var(--glass-ink) 65%, transparent); }
+html:root .cm-docmenu .drl-n,
+html:root .cm-docmenu .drl-rt i,
+html:root .cm-docmenu .drl-none { color: color-mix(in srgb, var(--glass-ink) 55%, transparent); }
