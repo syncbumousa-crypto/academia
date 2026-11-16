@@ -30,6 +30,48 @@
       "user": "user7706"
     },
     {
+      "id": "stk-user6906",
+      "name": "مـحـمـد",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6906/144/1448_2.png",
+      "email": "user6906@import.stkfupm.invalid",
+      "user": "user6906"
+    },
+    {
+      "id": "stk-user6200",
+      "name": "بعيد المنال",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6200/144/1300_2.png",
+      "email": "user6200@import.stkfupm.invalid",
+      "user": "user6200"
+    },
+    {
+      "id": "stk-user1813",
+      "name": "الرياض",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user1813/144/134_2.png",
+      "email": "user1813@import.stkfupm.invalid",
+      "user": "user1813"
+    },
+    {
+      "id": "stk-user4459",
+      "name": "ماجدالعَمري",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4459/144/722_2.png",
+      "email": "user4459@import.stkfupm.invalid",
+      "user": "user4459"
+    },
+    {
+      "id": "stk-one",
+      "name": "ONE",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/o/90db22/144.png",
+      "email": "one@import.stkfupm.invalid",
+      "user": "ONE"
+    },
+    {
+      "id": "stk-insatiable",
+      "name": "insatiable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/7bcc69/144.png",
+      "email": "insatiable@import.stkfupm.invalid",
+      "user": "insatiable"
+    },
+    {
       "id": "stk-mr.all",
       "name": "Mr.All",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/mr.all/144/695_2.png",
@@ -70,6 +112,13 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/67e7ee/144.png",
       "email": "system-eng@import.stkfupm.invalid",
       "user": "System-eng"
+    },
+    {
+      "id": "stk-user7399",
+      "name": "جامع العلم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/aeb1de/144.png",
+      "email": "user7399@import.stkfupm.invalid",
+      "user": "user7399"
     }
   ],
   "posts": [
@@ -162,6 +211,144 @@
           "ts": 1388623091000,
           "tid": 154710,
           "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p811301-ias322",
+      "uid": "stk-user6906",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1299838110000,
+      "st": "pub",
+      "data": {
+        "desc": "الاختبار السبت القادم إن شاء الله من الساعة 5-6 عصراً في مبنى 54\nالمطلوب الموضوعات حسب المفردات المرسلة سابقاً، وصفحات الكتاب حسب النسخة الثالثة التي معي هي:\n28-44\n56-67\n89-98\n109-118\n155-174\nالاختبار 10 أسئلة اختيار متعدد و10 أسئلة صح وخطأ\n\nنقلا عن الدكتور سلمان 🙂\n\nوبالتوفيق للجميع…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/322-ias/104599/2",
+          "user": "user6906",
+          "ts": 1299838110000,
+          "tid": 104599,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p482521-ias322",
+      "uid": "stk-user6200",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1256667500000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته:\n\nتحية طيبه لاخواني الاعزاء\n\nاما بعد<<<تبي تخطب ولا وش قصتك اخلص!! ههههههههه 🤣\n\nباختصار لو ماعليكم امر اللي كان منزل مع الدكتور عبد الملك قاضي بالسمسترات الماضيه وعنده شي يفيدنا بهالماده من مياجر او اي شي نقدر نذاكر منه اكون له شاكر 😉",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/79422/1",
+          "user": "user6200",
+          "ts": 1256667500000,
+          "tid": 79422,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p521727-ias322",
+      "uid": "stk-user1813",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1263216125000,
+      "st": "pub",
+      "data": {
+        "desc": "…\n…السلام عليكم ورحمة الله وبركاته …\n\nمالكم بالطويلة يا جماعة الخير …\n\nاليوم بعد محاضرة الإسلامي 322 قال لنا الدكتور فيه خبر سيء …\n\nاللي هو ان مقرر الفاينال راح يكون من البداية للنهاية … !!\n\nوالله يا عالم وش نخلي و وش نسوي و وش نبدي …\n\nفاينالات لابات …\n\nبروجكتات …\n\nوحنا معتمدين على الله ثم على هالمادة انها تساعد برفع المعدل شويّات …\n\nلكن الحين تقريبا المقرر 200 صفحة … !!\n\nوباقي اسبوعين على الاختبار …\n\nوالله ما يمدي أبد …\n\nوالقرار تعسفي وجاء بوقت ضيق جدا … << وموب غريبة على قرارات هالقسم … 😠\n\nواحد الدكاترة قال \" لا تروحون للدكتور النمري … تراه ما راح يفيدكم بشيء … \" !!\n\nياليت نشوف اقتراحاتكم وأرائكم بطرق حل هالموضوع …\n\nوأنا أولكم بكل شيء تتفقون عليه …\n\nوالله يعطيكم العافية …\n…\n…\n…",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/82097/1",
+          "user": "user1813",
+          "ts": 1263216125000,
+          "tid": 82097,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p521733-ias322",
+      "uid": "stk-user4459",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1263216946000,
+      "st": "pub",
+      "data": {
+        "desc": "شوف ما اخذت الكورس علشان أقول طويل أو لا أو صعب أو سهل\n\nلكن\n\nالافضل انك تجعل لك كل يوم حوالي ساعة أو كل يومين وقسم المنهج في هذي الايام على الطريقة الي تعجبك\n\nأما بالنسبة للوقت فأكيد انت عندك بريك بين الكلاسات فاستغنم الوقت هذا في مراجعة القسم الي حددته أو مثلا من مغرب الى عشاء أو مثلا الصباح قبل الدوام أو … , واجعل اليوم الي قبل الاختبار للمراجعة\n\nيعني عندك اوقات فراغ استغنمها بمذاكرة المنهج , وخذها حبة حبة لانو صعب انك تدرس المنهج في يوم او يومين وعندك اشياء اهم من ذلك\n\nوبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/82097/2",
+          "user": "user4459",
+          "ts": 1263216946000,
+          "tid": 82097,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p521761-ias322",
+      "uid": "stk-one",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1263220339000,
+      "st": "pub",
+      "data": {
+        "desc": "واااااااااااااااااو\n\n😍\n\nاول شي\n\nوعليكم السلام ورحمة الله وبركاته\n\n:d\n\n… ثم ،\n\nيا اخواني … الله يحفظنا واياكم ويوفقنا جميعاً\n\nورى تفكيركم سلبي كذا ؟؟ ليه حصرتوا نفسكم في زاويه من الحين ؟؟ 😦\n\nبدريييييييييييييييييي ع الفاينل بدرييييييييي !!\n\nالاسلامي والعربي بحسب ما اعرف … فاينلاتها يوم 28 / 1 / 2010 م …\n\nواليوم … 11 / 1 / 2010 م . . يعني عندكم اكثر من اسبوعين\n\nبالتالي … احسبوا من بكره 14 يوم واقسموا عدد الصفحات على عدد الايام\n\n200 / 14 … = تقريباً 14 صفحة في اليوم … ، هذي ساعة مذاكرة بالكثير ! 🌹\n\nخلوكم صادقين مع نفسكم في هالجدول\nوذاكروا 14 صفحة في اليوم واخر يوم اقروها كلها قرايه وانتهى الموضوع .\n\nانا معكم في ان المتيريال كثير … وانه هذا فيه خطأ ، لأنها بتسبب للطالب حمل وضغط وهمي يسبب في ارتباك اداءه في المواد الاهم ، لكن طاح الفاس ع الراس … وش ننتظر ؟؟\n\nخلاص … ما يمدينا نعدل في قرار زي هذا … خلونا نشتغل ونكون واقعيين\n\nترى لا تحسبوا اني حاط يديني ورجليني في مويه بارده ! … بس شايف الموضوع انأخذ بسلبيه ويمكن يسبب في احباط الطلاب … وكلنا في الهوا سوا … أنا منزل عربي واسلامي 😦\n\nدعواتي للجميع بالتوفيق ،،",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/82097/8",
+          "user": "ONE",
+          "ts": 1263220339000,
+          "tid": 82097,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p521771-ias322",
+      "uid": "stk-insatiable",
+      "code": "IAS 322",
+      "sec": "info",
+      "ts": 1263221500000,
+      "st": "pub",
+      "data": {
+        "desc": "حسبنا الله فيهم ونعم الوكيل\n\nالعالم يادوبك يلحقوا على البروجكتات حقت المواد\nوالا يبداء يحضر للفاينلات\n\nويلاقي الحاجة الواحيده الي كان يتامل فيها خير\nوالكورس الوحيد الي كان الطالب يامل فيه خير لانة يعتبر سهل <<< مقارنة ببقية الكورسات والا مو سهل في حد ذاته …وانتو تتذكرو الاختبار الي راح كيف كان صعب درجة انو حسيت اني طالب في كلية الشريعة مو في كلية الادارة\n\nخلينا نشوف من جد صوتك مسموع والا بس بوسترات متعلقة في الجبل\n\n😠",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/82097/9",
+          "user": "insatiable",
+          "ts": 1263221500000,
+          "tid": 82097,
+          "pn": 9
         }
       }
     },
@@ -319,6 +506,31 @@
           "user": "System-eng",
           "ts": 1352765175000,
           "tid": 134576,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1090722-ias322",
+      "uid": "stk-user7399",
+      "code": "IAS 322",
+      "sec": "srcP",
+      "ts": 1347368631000,
+      "st": "pub",
+      "data": {
+        "html": "في المرفقات مواعيد جميع اختبارات العربي والاسلامي<br><br>بالتوفيق<br><br>​<span data-fid=\"stk-f1090722-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1090722-0": {
+            "name": "مسارات الاختبار الاول.doc",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/b0b24e7d5fbc4c19425d56c4e51bd0bdca985edc3b03a2150cd1b7c7d1b098a2"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/131606/3",
+          "user": "user7399",
+          "ts": 1347368631000,
+          "tid": 131606,
           "pn": 3
         }
       }

@@ -1,0 +1,7 @@
+first we have the interval (-5,1)
+you take (x + 2)^n = 1 /2n
+=> x + 2 = 1 /2
+=> x = -3 /2
+that converges
+
+and so on you try with all choices 
