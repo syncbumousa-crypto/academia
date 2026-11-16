@@ -18630,3 +18630,5 @@ html[data-lang="en"] #card-modal .cd-rz--r { top: 12px; }
 html[data-lang="en"] #card-modal .cd-rz--l { top: 34px; }
 html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18px; height: 18px; }
 html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }
+/* والكتابُ مغلقٌ: لا صفحةَ ولا صفحتين، فيغيب زرُّ التبديل (‎bk-shut‎ يكتبه ‎bk2Show‎) */
+.post.bk-shut .cx-actmode, .post.bk-shut .cbk-nav__mode { display: none; }

@@ -25913,6 +25913,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bk2Show(b) {
     const g = b.gl, p = b.pos;
+    /* زرُّ الصفحة/الصفحتين لا معنى له والكتابُ مغلق (طلبُ صاحب الموقع): يغيب حتى يُفتح */
+    { const post = b.view && b.view.closest('.post'); if (post) post.classList.toggle('bk-shut', !!b.closed); }
     /* موضعٌ كُتب من خارج (اختيارُ مجلدٍ مربوط · ‎pkLnkGo‎): المحرّكُ يقلّب إليه */
     if (g && g.A !== bk2A(b)) g.goTo(bk2A(b));
     const A = bk2A(b), maxA = bk2MaxA(b);
