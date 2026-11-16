@@ -11313,7 +11313,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
       if (sp.classList.contains('pk-splh-anim') && !dur) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
-      if (h == null) { if (cur) sp.style.removeProperty('--pk-h'); return; }
+      /* أُغلق الكتاب: تبقى المساحةُ بقامتها التي كانت معه (طلبُ صاحب الموقع) — لا تطول إلى قامتها الحرّة */
+      if (h == null) { if (pkSrcH[id] && Math.abs(pkSrcH[id] - cur) >= 1) sp.style.setProperty('--pk-h', pkSrcH[id] + 'px'); return; }
       pkSrcH[id] = h;
       if (Math.abs(h - cur) < 3) return;
       if (cur && !bkReduce()) {
@@ -26559,7 +26560,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           }
           grow = partEl && partEl.getBoundingClientRect();
         }
-        else if (PK_SPLIT_VIEWS.includes(to) && to !== part) mkGhost(partEl, 0, 260);   /* الجارُ يتبدّل والكتابُ باقٍ */
+        /* (تبديلُ طريقة العرض والكتابُ باقٍ: مباشرٌ بلا شبحٍ يتلاشى فوقه — طلبُ صاحب الموقع) */
       }
       const playGhosts = () => {
         if (fly) {
@@ -26631,22 +26632,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (part) pkSplit[id] = false;
         else { pkSplit[id] = true; pkPaneLast[id] = 'book'; enter = true; if (!PK_SPLIT_VIEWS.includes(cur)) pkVw[id] = pkLastKn[id] || PK_KN_DEF; }
       } else if (to !== cur) {
-        /* ===== تبديلُ طريقة العرض: الكتلةُ ثابتة، ومحتواها وحدَه يخرج ثمّ يدخل الجديد (طلبُ صاحب الموقع) ===== */
-        const kv0 = part && sp && sp.querySelector(':scope > .kt-view');
-        if (kv0 && PK_SPLIT_VIEWS.includes(to) && !bkReduce()) {
-          if (kv0.pkOut) return;
-          kv0.pkOut = true;
-          const dx = state.lang === 'en' ? -12 : 12;
-          const an = [...kv0.children].map(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${dx}px)` }],
-            { duration: 140, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
-          Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
-            pkVw[id] = to; pkSplitAnim[id] = true; pkLastKn[id] = to;
-            renderCmSection(); playGhosts();
-          });
-          return;
-        }
+        /* تبديلُ طريقة العرض مباشرٌ دائمًا (طلبُ صاحب الموقع): كان مع مساحتين يُخرج المحتوى ثمّ يُدخل الجديد بحركة — شِيلت */
         pkVw[id] = to;
-        if (part && PK_SPLIT_VIEWS.includes(to)) pkSplitAnim[id] = true;
       } else return;
       if (PK_SPLIT_VIEWS.includes(pkVwOf(id))) pkLastKn[id] = pkVwOf(id);
       renderCmSection();
