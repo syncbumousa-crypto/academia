@@ -11085,7 +11085,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       bkLoadSet(key, 45, 62);
-      if (meta && meta.cover === undefined) { meta.cover = await bkCoverColor(doc).catch(() => null); save(); }
+      if (meta && meta.coverV !== 2) { meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = 2; save(); }   /* ‏‎coverV‎: بطريقة اللون الحاليّة (القديمةُ كانت تترك الأغلفةَ الفاتحة) */
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
       /* اختيارُ مجلدٍ مربوطٍ من الشريط فوق يفتح الكتابَ على أوّل صفحاته — عند **تبدّل** الاختيار وحده،
          فلا يُنتزع القارئُ من صفحته مع كلّ رسمة */
@@ -23924,35 +23924,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      تُرسم صغيرةً (‎48px‎) ويُعدّ لونُها الغالب بعد طرح الورق الأبيض. فإن كان أكثرُها
      ورقًا (صفحةُ نصٍّ لا غلاف) رُدّ ‎null‎ وأخذ الكتابُ بتروليَّ الموقع.
      واللونُ يُعتَم قليلًا: الغلافُ المقوّى أغمقُ من طباعته */
-  async function bkCoverColor(doc) {
-    const pg = await doc.getPage(1);
-    const v1 = pg.getViewport({ scale: 1 });
-    const vp = pg.getViewport({ scale: 48 / v1.width });
-    const cv = document.createElement('canvas');
-    cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
-    const cx = cv.getContext('2d', { willReadFrequently: true });
-    cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
-    await pg.render({ canvasContext: cx, viewport: vp }).promise;
-    const d = cx.getImageData(0, 0, cv.width, cv.height).data;
-    const bins = new Map();
-    let tot = 0, ink = 0;
-    for (let i = 0; i < d.length; i += 4) {
-      const r = d[i], g = d[i + 1], bl = d[i + 2];
-      tot++;
-      const mx = Math.max(r, g, bl), mn = Math.min(r, g, bl);
-      if (mx > 228 && mx - mn < 26) continue;
-      ink++;
-      const k = ((r >> 5) << 6) | ((g >> 5) << 3) | (bl >> 5);
-      const e = bins.get(k) || [0, 0, 0, 0];
-      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
-      bins.set(k, e);
+  /* ===== لونُ الكتاب من غلافه: لونُ أطراف الغلاف (حيث يلتفّ القماشُ على اللوح والكعب) =====
+     يُقرأ شريطُ الأطراف (‎8%‎ من كلّ جهة)، ويُختار لونُه الغالب ولو كان فاتحًا — غلافٌ عاجيٌّ كتابٌ عاجيّ (كان الفاتحُ يُحسب ورقًا أبيض
+     فيُترك، فيبقى الافتراضيُّ الأزرق). وإن كانت الأطرافُ بيضاءَ خالصةً فالصفحةُ لم تُصمَّم غلافًا: يُؤخذ أبرزُ لونٍ مشبعٍ فيها (عنوانُها)،
+     وإلّا فلا لون (الافتراضيّ). ويُغمَّق قليلًا ليبدو قماشًا لا ورقًا. واحدٌ للغلاف المرفوع ولأولى صفحات الملفّ */
+  function covPick(cv) {
+    const w = cv.width, h = cv.height, d = cv.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
+    const bx = Math.max(2, Math.round(w * .08)), by = Math.max(2, Math.round(h * .08));
+    const edge = new Map(), sat = new Map(); let nEdge = 0, nAll = 0;
+    const add = (m, r, g, b) => { const k = ((r >> 4) << 8) | ((g >> 4) << 4) | (b >> 4), e = m.get(k) || [0, 0, 0, 0]; e[0] += r; e[1] += g; e[2] += b; e[3]++; m.set(k, e); };
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4; if (d[i + 3] < 128) continue;
+      const r = d[i], g = d[i + 1], b = d[i + 2]; nAll++;
+      if (x < bx || x >= w - bx || y < by || y >= h - by) { add(edge, r, g, b); nEdge++; }
+      if (Math.max(r, g, b) - Math.min(r, g, b) > 45) add(sat, r, g, b);
     }
-    if (!tot || ink / tot < 0.3) return null;
-    let best = null;
-    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
-    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.8));
-    return `rgb(${c.join(',')})`;
+    const top = m => { let best = null; m.forEach(e => { if (!best || e[3] > best[3]) best = e; }); return best && best.map((v, j) => j < 3 ? v / best[3] : v); };
+    const shade = (c, f) => `rgb(${c.slice(0, 3).map(v => Math.round(v * f)).join(',')})`;
+    const e = top(edge);
+    if (e && !(Math.min(e[0], e[1], e[2]) > 244 && e[3] > nEdge * .5)) return shade(e, .9);
+    const s2 = top(sat);
+    return s2 && s2[3] > nAll * .01 ? shade(s2, .8) : null;
   }
+  /* لونُ الكتاب من أولى صفحات الملفّ (إذا لم يُرفع له غلاف) */
+  async function bkCoverColor(doc) {
+    const pg = await doc.getPage(1), v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: 64 / v1.width });
+    const cv = document.createElement('canvas'); cv.width = Math.ceil(vp.width); cv.height = Math.ceil(vp.height);
+    const cx = cv.getContext('2d', { willReadFrequently: true }); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    return covPick(cv);
+  }
+
 
   async function chPdfPaint() {
     const view = document.querySelector('#cm-body [data-chview]');
@@ -23964,8 +23966,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!view.isConnected || cmCode !== code || cmTabSel !== ch) return;
     if (!doc) { view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
     const meta = chPdfMeta(code, ch);
-    if (meta && meta.cover === undefined) {
-      meta.cover = await bkCoverColor(doc).catch(() => null);
+    if (meta && meta.coverV !== 2) {
+      meta.cover = await bkCoverColor(doc).catch(() => null); meta.coverV = 2;
       save();
     }
     const p1 = (await doc.getPage(1)).getViewport({ scale: 1 });
@@ -25839,27 +25841,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يُقرأ **إطارُ** الصورة وحده (‎9%‎ من كلّ حافّة) لا وسطُها: الوسطُ عنوانٌ وزخرفة،
      والأطرافُ هي ما يلتفّ على الكرتون في الكتاب الحقيقيّ. ويُؤخذ اللونُ الغالب فيها
      ويُعتَم قليلًا — الكرتونُ المقوّى أغمقُ من طباعته */
-  function chEdgeColor(cv) {
-    const w = cv.width, h = cv.height;
-    const d = cv.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
-    const bx = Math.max(2, Math.round(w * 0.09)), by = Math.max(2, Math.round(h * 0.09));
-    const bins = new Map();
-    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-      if (x >= bx && x < w - bx && y >= by && y < h - by) continue;
-      const i = (y * w + x) * 4;
-      if (d[i + 3] < 128) continue;
-      const r = d[i], g = d[i + 1], bl = d[i + 2];
-      const k = ((r >> 4) << 8) | ((g >> 4) << 4) | (bl >> 4);
-      const e = bins.get(k) || [0, 0, 0, 0];
-      e[0] += r; e[1] += g; e[2] += bl; e[3]++;
-      bins.set(k, e);
-    }
-    let best = null;
-    bins.forEach(e => { if (!best || e[3] > best[3]) best = e; });
-    if (!best) return null;
-    const c = [0, 1, 2].map(j => Math.round((best[j] / best[3]) * 0.86));
-    return `rgb(${c.join(',')})`;
-  }
+  const chEdgeColor = cv => covPick(cv);
+
   async function chCovSet(file) {
     const code = cmCode, ch = cmTabSel;
     if (!code || !isChTab(ch) || !file) return;
