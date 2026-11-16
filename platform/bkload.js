@@ -163,7 +163,7 @@ function state(L, now) {
 /* ===== هيكلٌ واحد على لوحة: ‏‎o = { w, h, dpr, ar, n, cover, dark, reduce, p }‎. حلقتُه تقف حين ينتهي. ساعتُه لا تتقدّم في الإطار أكثرَ
    من إطار — فإذا تأخّر إطارٌ أكملت الحركةُ من حيث وقفت ولم تقفز ===== */
 const raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : f => setTimeout(() => f(performance.now()), 16);
-export function createLoader(cv, o, onClosed) {
+export function createLoader(cv, o, onClosed, onDrawn) {
   const L = { cv, g: cv.getContext('2d'), p: 0, fin: false, dead: false, t: 0, last: 0, T: null, n: o.n || 120, cover: hex(o.cover), dark: !!o.dark, reduce: !!o.reduce };
   const fit = q => {
     const w = Math.round(q.w), h = Math.round(q.h); if (!w || !h) return;
@@ -177,6 +177,7 @@ export function createLoader(cv, o, onClosed) {
   const frame = now => {
     if (L.dead) return;
     if (L.C) {
+      if (!L.drawn) { L.drawn = true; if (onDrawn) Promise.resolve().then(onDrawn); }   /* أوّلُ إطار: تظهر النسبةُ معه */
       if (!L.last) L.last = now;
       L.t += Math.min(34, Math.max(0, now - L.last)); L.last = now;
       if (!L.T) L.T = { t0: L.t, n: Math.max(12, Math.min(RF.nMax, Math.round(L.n / 6) || 20)), at: [], next: L.t + RF.open, end: 0, closed: false };
@@ -208,7 +209,7 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScop
   const all = new Map();
   self.onmessage = ({ data: m }) => {
     const x = all.get(m.id);
-    if (m.t === 'add') { if (x) x.dispose(); all.set(m.id, createLoader(m.canvas, m, () => { all.delete(m.id); self.postMessage({ t: 'closed', id: m.id }); })); }
+    if (m.t === 'add') { if (x) x.dispose(); all.set(m.id, createLoader(m.canvas, m, () => { all.delete(m.id); self.postMessage({ t: 'closed', id: m.id }); }, () => self.postMessage({ t: 'drawn', id: m.id }))); }
     else if (!x) { if (m.t === 'fin') self.postMessage({ t: 'closed', id: m.id }); }
     else if (m.t === 'set') x.set(m);
     else if (m.t === 'fin') x.fin();

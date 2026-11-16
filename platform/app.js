@@ -24056,7 +24056,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ‏‎bkLd‎: يصل هياكلَ الصفحة برسّامها (‎platform/bkload.js‎) =====
      الرسّامُ في عاملٍ إن نُقلت إليه اللوحة (فلا يتجمّد والصفحةُ مشغولةٌ بالتحميل نفسِه)، وإلّا في الصفحة بالواجهة نفسِها. والصفحةُ لا ترسل إليه
      إلّا التقدّمَ والمقاسَ والوضعَ و«جهز» — بحلقةٍ تعمل ما دام كتابٌ يُحمَّل. ولوحةُ كلّ كتابٍ واحدةٌ تنتقل من الوعاء إلى فوق الكتاب (‏‎bkLdCv‎) */
-  const bkLdCv = {}, bkLdWait = {}, bkLdAll = new Set();
+  const bkLdCv = {}, bkLdWait = {}, bkLdAll = new Set(), bkLdDrawn = new Set();   /* ‏‎bkLdDrawn‎ كتبٌ رُسم هيكلُها: النسبةُ تظهر معه لا قبله */
   let bkLdRaf = 0, bkLdW = null, bkLdModP = null;
   const bkLdUrl = () => assetURL('platform/bkload.js?v=' + (window.AC_VER || 0));
   const bkLdDark = () => document.documentElement.dataset.theme === 'dark';
@@ -24068,7 +24068,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     try {
       if (typeof OffscreenCanvas !== 'undefined' && HTMLCanvasElement.prototype.transferControlToOffscreen) {
         bkLdW = new Worker(bkLdUrl(), { type: 'module' });
-        bkLdW.onmessage = ({ data: m }) => { if (m.t === 'closed') bkLdDone(m.id); };
+        bkLdW.onmessage = ({ data: m }) => { if (m.t === 'closed') bkLdDone(m.id); else if (m.t === 'drawn') { bkLdDrawn.add(m.id); bkLdKick(); } };
         bkLdW.onerror = () => Object.keys(bkLdWait).forEach(bkLdDone);   /* عاملٌ لم يعمل: لا يُنتظر انطباقٌ لن يأتي */
       }
     } catch (e) { bkLdW = false; }
@@ -24091,7 +24091,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       S.post = m => w.postMessage({ id: key, ...m });
     } else {
       (bkLdModP || (bkLdModP = import(bkLdUrl()))).then(M => {
-        const L = M.createLoader(cv, o, () => bkLdDone(key));
+        const L = M.createLoader(cv, o, () => bkLdDone(key), () => { bkLdDrawn.add(key); bkLdKick(); });
         S.post = m => m.t === 'fin' ? L.fin() : m.t === 'del' ? L.dispose() : L.set(m);
         S.q0.splice(0).forEach(S.post);
       }).catch(() => {});
@@ -24103,6 +24103,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const cv = el.querySelector('.bk-skel__cv'); if (!cv) continue;
       if (!cv._ld) bkLdAttach(el, cv);
       const S = cv._ld; if (!S) continue;
+      el.classList.toggle('is-drawn', bkLdDrawn.has(S.key));
       const q = bkLdSize(el);
       if (q && (q.w !== S.q.w || q.h !== S.q.h || q.ar !== S.q.ar || q.dpr !== S.q.dpr)) { S.q = q; S.post({ t: 'set', ...q }); }
       const p = bkLdP(S.key), cvr = el.dataset.cv, n = +el.dataset.n || 0, dk = bkLdDark();
@@ -24129,7 +24130,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (tgt >= L.tgt) { L.tgt = tgt; L.cap = Math.max(cap, tgt); }
     if (!bkLoadRaf) bkLoadRaf = requestAnimationFrame(bkLoadTick);
   }
-  const bkLoadEnd = k => { delete bkLoad[k]; delete bkLdCv[k]; for (const S of bkLdAll) if (S.key === k) bkLdAll.delete(S); };
+  const bkLoadEnd = k => { delete bkLoad[k]; delete bkLdCv[k]; bkLdDrawn.delete(k); for (const S of bkLdAll) if (S.key === k) bkLdAll.delete(S); };
   function bkLoadTick() {
     bkLoadRaf = 0;
     let live = false;
@@ -24156,8 +24157,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* والمكتبةُ تُجلب في وقت الفراغ ما دامت على الشاشة مساهمةٌ لها كتاب — فتكون جاهزةً حين تُفتح مساحتُه */
   function bk2Prefetch() {
-    if (bk2LibP || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
-    (window.requestIdleCallback || setTimeout)(() => { if (bk2Ok()) bk2Lib().catch(() => {}); });
+    if ((bk2LibP && bkLdW !== null) || bk2No || !document.querySelector('#cm-body [data-pkic="book"], #cm-body .pk-src')) return;
+    (window.requestIdleCallback || setTimeout)(() => { bkLdWorker(); if (!bk2LibP && bk2Ok()) bk2Lib().catch(() => {}); });   /* والعاملُ يُنشأ مبكّرًا فيجلب رسّامَ الهيكل قبل أن يُحتاج */
   }
   function bk2Lib() {
     if (!bk2LibP) bk2LibP = Promise.all([
