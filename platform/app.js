@@ -20397,8 +20397,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const stage = document.querySelector('.cd-stage.is-focus'); if (!stage) return;
     stage.classList.add('is-choosing');   /* متنُ النافذة يُخفى تحت اللوحة (حقولُه في طبقةٍ ثلاثيّة الأبعاد تعلو أيَّ ‎z-index‎) */
     const c = document.createElement('div'); c.className = 'cd-chooser';
-    c.innerHTML = `<b class="cd-chooser__t">${esc(T().cdChooseT || 'اختر نوع السؤال')}</b><div class="cd-chooser__row">`
-      + CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-ch" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('') + `</div>`;
+    /* النافذةُ نفسُها أربعةُ أرباعٍ بخطّين رفيعين، في كلّ ربعٍ نوعٌ بأيقونته واسمه (طلبُ صاحب الموقع: الخيارُ ٢ · بلا ألوان) */
+    c.setAttribute('role', 'group'); c.setAttribute('aria-label', T().cdChooseT || '');
+    c.innerHTML = CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-ch" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('');
     stage.appendChild(c);
     /* ولسانُ النافذة يقول «سؤال» حتى يُختار نوعُه */
     const tab = document.querySelector('#cd-mins .cd-mtab.is-focus .cd-mtab__tx');

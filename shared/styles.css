@@ -18530,21 +18530,22 @@ html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
 .cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
 .cm-tabs button:not(.on) .cm-faces.is-none { display: none; }
 
-/* ===== لوحةُ أنواع السؤال داخل نافذته (سؤالٌ جديدٌ من البنك) — تغطّي متنَ النافذة حتى يُختار النوع ===== */
-.cd-chooser { position: absolute; inset: 0; z-index: 60; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-  border-radius: 14px; background: var(--u-surf, #fff); animation: cdChIn .22s ease both; }
+/* ===== لوحةُ أنواع السؤال داخل نافذته (سؤالٌ جديدٌ من البنك): متنُ النافذة أربعةُ أرباعٍ بخطّين متقاطعين — في كلّ ربعٍ نوع ===== */
+.cd-chooser { position: absolute; inset: 0; z-index: 60; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  border-radius: 14px; overflow: hidden; background: var(--u-surf, #fff); animation: cdChIn .2s ease both; }
 @keyframes cdChIn { from { opacity: 0; } }
-.cd-chooser__t { font-size: 15px; font-weight: 800; color: var(--u-ink, #14233f); }
-.cd-chooser__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 16px; }
-.cd-ch { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; width: 118px; height: 108px; border-radius: 14px;
-  border: 1px solid rgba(20, 35, 63, .14); background: var(--u-surf, #fff); color: var(--u-ink, #14233f); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer;
-  transition: border-color .15s, background .15s, transform .15s; }
-.cd-ch svg { width: 34px; height: 34px; }
-.cd-ch:hover, .cd-ch:focus-visible { border-color: color-mix(in srgb, var(--u-gold, #c9a25c) 70%, transparent); background: color-mix(in srgb, var(--u-gold, #c9a25c) 9%, var(--u-surf, #fff)); outline: none; transform: translateY(-2px); }
+.cd-ch { display: flex; align-items: center; justify-content: center; gap: 14px; border: 0; background: transparent; color: #14233f;
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .18s ease; }
+.cd-ch:nth-child(odd) { border-inline-end: 1px solid #e3e8eb; }
+.cd-ch:nth-child(-n+2) { border-bottom: 1px solid #e3e8eb; }
+.cd-ch svg { width: 40px; height: 40px; flex: none; transition: transform .25s cubic-bezier(.3, 1.4, .5, 1); }
+.cd-ch:hover, .cd-ch:focus-visible { background: #f3f5f6; outline: none; }
+.cd-ch:hover svg, .cd-ch:focus-visible svg { transform: scale(1.12); }
 html[data-theme="dark"] .cd-chooser { background: #1f292e; }
-html[data-theme="dark"] .cd-chooser__t { color: #e6ecef; }
-html[data-theme="dark"] .cd-ch { background: #26313a; border-color: rgba(255, 255, 255, .12); color: #e6ecef; }
-html[data-theme="dark"] .cd-ch:hover, html[data-theme="dark"] .cd-ch:focus-visible { background: #2f3b45; border-color: rgba(212, 179, 106, .6); }
+html[data-theme="dark"] .cd-ch { color: #e6ecef; }
+html[data-theme="dark"] .cd-ch:nth-child(odd) { border-inline-end-color: rgba(255, 255, 255, .1); }
+html[data-theme="dark"] .cd-ch:nth-child(-n+2) { border-bottom-color: rgba(255, 255, 255, .1); }
+html[data-theme="dark"] .cd-ch:hover, html[data-theme="dark"] .cd-ch:focus-visible { background: #26313a; }
 .cd-stage.is-choosing #cd-card .cd-body, .cd-stage.is-choosing #cd-card .cd-foot, .cd-stage.is-choosing #cd-card .cd-meta > :not(.cd-bar) { visibility: hidden; }
 /* وأزرارُ النافذة (إغلاقٌ وتصغير) ظاهرةٌ فوق اللوحة — لمن غيّر رأيه */
 .cd-stage.is-choosing .cd-chooser { inset: 47px 0 0; border-radius: 0 0 14px 14px; }
