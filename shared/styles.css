@@ -18577,22 +18577,6 @@ html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
 .cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
 .cm-tabs button:not(.on) .cm-faces.is-none { display: none; }
 
-/* ===== لوحةُ أنواع السؤال داخل نافذته (سؤالٌ جديدٌ من البنك): متنُ النافذة أربعةُ أرباعٍ بخطّين متقاطعين — في كلّ ربعٍ نوع ===== */
-.cd-chooser { position: absolute; inset: 0; z-index: 60; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-  padding: 20px 16px; border-radius: 14px; overflow: auto; background: var(--cd-win, #fff); animation: cdChIn .2s ease both; }
-@keyframes cdChIn { from { opacity: 0; } }
-.cd-qk__t { font-size: 15px; font-weight: 700; color: var(--cd-tx); }
-.cd-qk__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-.cd-qk { width: 96px; height: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  border: 1px solid var(--cd-winline); border-radius: 12px; background: var(--cd-fld, #fff); color: var(--cd-tx);
-  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
-  transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease; }
-.cd-qk svg { width: 30px; height: 30px; flex: none; }
-.cd-qk:hover, .cd-qk:focus-visible { border-color: #c9a25c; transform: translateY(-2px); box-shadow: 0 8px 18px -12px rgba(20, 35, 63, .45); outline: none; }
-html[data-theme="dark"] .cd-qk:hover, html[data-theme="dark"] .cd-qk:focus-visible { border-color: #d4b36a; box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .7); }
-.cd-stage.is-choosing #cd-card .cd-body, .cd-stage.is-choosing #cd-card .cd-foot, .cd-stage.is-choosing #cd-card .cd-meta > :not(.cd-bar) { visibility: hidden; }
-/* وأزرارُ النافذة (إغلاقٌ وتصغير) ظاهرةٌ فوق اللوحة — لمن غيّر رأيه */
-.cd-stage.is-choosing .cd-chooser { inset: var(--chT, 47px) 1px 1px; border-radius: 0 0 9px 9px; }
 
 /* ===== زرُّ ⋮ «طريقة العرض» في تذييل البنك: دائرةٌ صغيرة، وفوقها عنوانٌ ومقسومُ «رحلة · قائمة» ===== */
 .cx-jrk { margin-inline-start: 6px; }

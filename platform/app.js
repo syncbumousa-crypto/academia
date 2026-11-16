@@ -9719,7 +9719,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* «سؤال» يفتح دُرجَ أنواع السؤال العلويّ دائمًا (طلبُ صاحب الموقع) — كان يمرّ بـ‎.cx-addc‎ فيصير
        «ورقةَ الملخّص» متى كان في المساهمة متن (‎cxPageOpen‎)، وما ذاك بابُ إضافة سؤال */
-    if (qb.dataset.actqb !== 'f') { cdQuickQ(); return; }
+    /* ورجع إلى الدُّرج العلويّ يُختار منه النوع (طلبُ صاحب الموقع: لوحةُ الأنواع داخل النافذة أُلغيت) */
+    if (qb.dataset.actqb !== 'f') { openCardDlg(null, null); return; }
     const t = post && post.querySelector('.vt-foot .cx-addf');
     if (t) t.click();
   }, true);
@@ -20474,46 +20475,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (cardDlg.picked) setTimeout(() => $('#cd-front').focus(), 30);
   }
-  /* ===== سؤالٌ جديدٌ من البنك: النافذةُ مباشرةً ولسانُها معها، وأنواعُ السؤال الأربعةُ داخلَها (طلبُ صاحب الموقع) =====
-     بدل الدُّرج العلويّ: تُفتح النافذةُ كأنّ النوعَ اختير (فيولد لسانُها «سؤال» ولا ينزل الدُّرج)، وفوق متنها لوحةٌ بالأنواع.
-     يُختار النوعُ منها فيصير نوعَ النافذة وتنصرف اللوحةُ ويُكتب فيها مباشرة */
-  function cdQuickQ() {
-    openCardDlg(null, null);
-    if (!cardDlg || cardDlg.picked) return;
-    cdSetWhich('c'); cardDlg.picked = true; cardDlg.choose = true; cdTray = false;
-    cdMinsSync(); renderCardDlg(); cdChooserPaint();
-  }
-  function cdChooserPaint() {
-    document.querySelectorAll('.cd-chooser').forEach(x => x.remove());
-    document.querySelectorAll('.cd-stage.is-choosing').forEach(x => x.classList.remove('is-choosing'));
-    if (!cardDlg || !cardDlg.choose) return;
-    const stage = document.querySelector('.cd-stage.is-focus'); if (!stage) return;
-    stage.classList.add('is-choosing');   /* متنُ النافذة يُخفى تحت اللوحة (حقولُه في طبقةٍ ثلاثيّة الأبعاد تعلو أيَّ ‎z-index‎) */
-    const c = document.createElement('div'); c.className = 'cd-chooser';
-    /* النافذةُ نفسُها أربعةُ أرباعٍ بخطّين رفيعين، في كلّ ربعٍ نوعٌ بأيقونته واسمه (طلبُ صاحب الموقع: الخيارُ ٢ · بلا ألوان) */
-    c.setAttribute('role', 'group'); c.setAttribute('aria-label', T().cdChooseT || '');
-    /* ثمّ رجعت إلى المربّعات ذوات الحدود تحت عنوانها (طلبُ صاحب الموقع: الشكلُ ٠١)، بألوان النافذة نفسِها.
-       والصنفُ ‎cd-qk‎ لا ‎cd-ch‎: ذاك صنفُ خيارات السؤال المتعدّد، فلا تتسرّب قواعدُه إلى هنا */
-    c.innerHTML = `<b class="cd-qk__t">${esc(T().cdChooseT || '')}</b><div class="cd-qk__row">`
-      + CD_KINDS.map(([k, ic]) => `<button type="button" class="cd-qk" data-chk="${k}">${ic()}<span>${esc(T().cdKinds[k])}</span></button>`).join('') + '</div>';
-    /* اللوحةُ تبدأ تحت الترويسة أيًّا كانت قامتُها */
-    const meta = stage.querySelector('#cd-card .cd-meta');
-    stage.style.setProperty('--chT', ((meta ? meta.offsetHeight : 46) + 1) + 'px');
-    stage.appendChild(c);
-    /* ولسانُ النافذة يقول «سؤال» حتى يُختار نوعُه */
-    const tab = document.querySelector('#cd-mins .cd-mtab.is-focus .cd-mtab__tx');
-    if (tab) tab.textContent = T().pkPlusQC;
-    const first = c.querySelector('.cd-qk'); if (first) first.focus({ preventScroll: true });
-  }
-  document.addEventListener('click', e => {
-    const b = e.target.closest && e.target.closest('.cd-chooser .cd-qk');
-    if (!b || !cardDlg) return;
-    e.preventDefault(); e.stopPropagation();
-    cardDlg.choose = false;
-    cdSetWhich(b.dataset.chk);
-    cdMinsSync(); renderCardDlg(); cdChooserPaint();
-    setTimeout(() => { const f = $('#cd-front'); if (f) f.focus(); }, 30);
-  }, true);
   /* ===== «✕» تُنهي البطاقة لا الجلسة =====
      الدُّرج بابُ الإضافة، والبطاقةُ ما ينزل منه. فإغلاقُ البطاقة يردّك إلى الباب لا يُخرجك
      من الغرفة — تُغلق ما بين يديك وتأخذ نوعًا آخر بلا أن تعيد فتح كلّ شيء.
