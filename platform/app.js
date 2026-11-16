@@ -11334,6 +11334,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   function pkAltView(id, deck, editable, pack) {
     const lab = pkLab(), ed = lab && editable;
+    /* ما وقع خارج المجلدات (فظهر «الجذر» في الشريط — طلبُ صاحب الموقع أن يُشال) يُنقل إلى أوّل مجلد، فلا يضيع ولا يُرى جذر */
+    if (ed && Array.isArray(deck) && deck.some(n => n.t !== 'f')) {
+      const f0 = deck.find(n => n.t === 'f');
+      if (f0) {
+        const loose = deck.filter(n => n.t !== 'f');
+        for (let i = deck.length - 1; i >= 0; i--) if (deck[i].t !== 'f') deck.splice(i, 1);
+        (f0.ch || (f0.ch = [])).push(...loose);
+        /* ووصلاتُ اللوح المحفوظةُ على الرزمة (حين فُتح الجذر) تتبع بطائقَها إلى المجلد إن كان طرفاها فيه */
+        const P = cardDataRaw(cmCode);
+        if (P && P.deck === deck && P.links && P.links.length) {
+          const inF = new Set(); const walk = a => a.forEach(n => { if (n.t === 'c') inF.add(n.id); else if (n.t === 'f') walk(n.ch || []); }); walk(f0.ch);
+          const mv = P.links.filter(l => inF.has(l.a) && inF.has(l.b));
+          if (mv.length) { P.links = P.links.filter(l => !mv.includes(l)); f0.links = (f0.links || []).concat(mv); }
+        }
+        if (pkFs[id] === '') pkFs[id] = f0.id;
+        queueMicrotask(save);
+      }
+    }
     const folds = lab ? pgFoldsAll(deck, ed) : pgFolds(deck), v = pkVwOf(id);
     /* و«المصدر» كالبقيّة: شريطُ المجلدات فوقه (طلبُ صاحب الموقع) — ولا شريطَ إن لم تكن مجلدات */
     /* وبلا مجلدات: تلميحُ «أضف مجلدًا» مكانَ العرض، والكتابُ بجانبه إن كان ظاهرًا */
@@ -11827,7 +11845,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sel !== '') {
       const deck = (pack || cardDataRaw(cmCode) || {}).deck || [], trail = cxTrail(deck, sel) || [];
       up = trail.length ? trail[trail.length - 1] : '';
-      const holders = [pack || cardDataRaw(cmCode)].concat(trail.map(t => (findNode(deck, t) || {}).n).filter(Boolean));
+      const holders = trail.map(t => (findNode(deck, t) || {}).n).filter(Boolean);   /* آباءٌ هي مجلدات — لا «جذرَ» يُفتح */
       holders.forEach(H => (H && H.links || []).forEach(l => { const ia = ids.has(l.a), ib = ids.has(l.b); if (ia !== ib) stubs.push({ id: l.id, c: ia ? l.a : l.b, out: ia }); }));
     }
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
@@ -12341,7 +12359,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!g || e.button !== 0) return;
     e.preventDefault(); e.stopPropagation();
     const v = g.closest('.kt-view'), pid = v && v.dataset.pkid; if (!pid) return;
-    pkFs[pid] = g.dataset.kup || ''; renderCmSection();
+    if (!g.dataset.kup) return;
+    pkFs[pid] = g.dataset.kup; renderCmSection();
   }, true);
   function kcvLinkSel(cv, id) {
     document.querySelectorAll('#cm-body .kcv-link.is-sel').forEach(g => { g.classList.remove('is-sel'); g.querySelector('.kcv-line').setAttribute('marker-end', 'url(#kcv-ar)'); });
@@ -24703,7 +24722,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlNewRow(id) {
     const R = hlRows(id); if (!R) return null;
     const nn = { id: newId(), t: 'c', f: '', b: '' };
-    R.host.arr.push(nn);
+    /* لا صفَّ خارج المجلدات (فيظهر «الجذر» في الشريط): بلا مجلدٍ مفتوح يُضاف إلى أوّلها */
+    const f0 = R.sel === '' && R.host.arr.find(n => n.t === 'f');
+    (f0 ? (f0.ch || (f0.ch = [])) : R.host.arr).push(nn);
     return nn.id;
   }
   /* تحديدٌ يثبت تظليلًا مربوطًا بصفّ (‎cid‎ أو الشغّال) */
