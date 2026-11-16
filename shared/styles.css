@@ -18444,3 +18444,5 @@ img.hl-fly { border-radius: 2px; box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .4); 
 tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 @keyframes hl-call-land { 0% { box-shadow: 0 0 0 0 var(--hlc); } 30% { box-shadow: 0 0 0 4px var(--hlc); } 100% { box-shadow: 0 0 0 0 transparent; } }
 @keyframes hl-call-row { 0%, 25% { background-color: color-mix(in srgb, var(--hlc) 45%, transparent); } 100% { background-color: transparent; } }
+/* «غلاف المادة» تحت «رفع صورة» مباشرة: بلا فاصلٍ ثانٍ */
+.psp-up.psp-gen { border-top: 0 !important; margin-top: 0 !important; padding-top: 4px !important; }
