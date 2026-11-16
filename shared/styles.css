@@ -17131,6 +17131,9 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
 .pk-bank > #cm-cards, .pk-bank > .x3 { scrollbar-width: auto; scrollbar-color: auto; }
 .pk-bank > #cm-cards::-webkit-scrollbar, .pk-bank > .x3::-webkit-scrollbar { width: 4px; height: 4px; }   /* رفيعٌ هادئ (طلبُ صاحب الموقع) */
 .pk-bank > #cm-cards::-webkit-scrollbar-track, .pk-bank > .x3::-webkit-scrollbar-track { background: transparent; }
+/* ولا يخرجان عن انحناء المساحة عند طرفيهما (طلبُ صاحب الموقع): مسارُ كلٍّ منهما يبدأ بعد الانحناء وينتهي قبله */
+.pk-bank > #cm-cards::-webkit-scrollbar-track:vertical, .pk-bank > .x3::-webkit-scrollbar-track:vertical { margin-block: 18px; }
+.pk-bank > #cm-cards::-webkit-scrollbar-track:horizontal, .pk-bank > .x3::-webkit-scrollbar-track:horizontal { margin-inline: 18px; }
 .pk-bank > #cm-cards::-webkit-scrollbar-thumb, .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border-radius: 99px; }
 .pk-bank > #cm-cards::-webkit-scrollbar-thumb:hover, .pk-bank > .x3::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
 html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data-theme="dark"] .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
