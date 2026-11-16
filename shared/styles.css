@@ -17126,12 +17126,14 @@ html[data-theme="dark"] .pk-splh i { background: #d4b36a; }
    كانت الصفوفُ تنضغط إلى عرض المساحة فيختفي نصُّ السؤال ويُقصّ اسمُ المجلد وتتزاحم أيقوناتُ العدّادات.
    فللشجرة عرضٌ أدنى يسع الصفَّ كاملًا، وما زاد عن المساحة شريطٌ سفليٌّ يُمرَّر يمينًا ويسارًا */
 .pk-bank > #cm-cards > .x3, .pk-bank > .x3 > * { min-width: 640px; }
-/* والشريطُ ظاهرٌ دائمًا (لا يختفي حتى يُمرَّر كما في الماك): ذهبيٌّ رفيع. و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎
+/* والشريطُ ظاهرٌ دائمًا (لا يختفي حتى يُمرَّر كما في الماك): رفيعٌ بلونٍ خافت. و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎
    لأنّ كروم يُهمل ‎::-webkit-scrollbar‎ متى ضُبطا */
 .pk-bank > #cm-cards, .pk-bank > .x3 { scrollbar-width: auto; scrollbar-color: auto; }
-.pk-bank > #cm-cards::-webkit-scrollbar, .pk-bank > .x3::-webkit-scrollbar { width: 8px; height: 8px; }
-.pk-bank > #cm-cards::-webkit-scrollbar-track, .pk-bank > .x3::-webkit-scrollbar-track { background: rgba(44, 94, 101, .06); border-radius: 99px; }
-.pk-bank > #cm-cards::-webkit-scrollbar-thumb, .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(225, 193, 114, .75); border-radius: 99px; }
+.pk-bank > #cm-cards::-webkit-scrollbar, .pk-bank > .x3::-webkit-scrollbar { width: 4px; height: 4px; }   /* رفيعٌ هادئ (طلبُ صاحب الموقع) */
+.pk-bank > #cm-cards::-webkit-scrollbar-track, .pk-bank > .x3::-webkit-scrollbar-track { background: transparent; }
+.pk-bank > #cm-cards::-webkit-scrollbar-thumb, .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border-radius: 99px; }
+.pk-bank > #cm-cards::-webkit-scrollbar-thumb:hover, .pk-bank > .x3::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .pk-bank > #cm-cards::-webkit-scrollbar-thumb, html[data-theme="dark"] .pk-bank > .x3::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
 .pk-bank > #cm-cards::-webkit-scrollbar-corner, .pk-bank > .x3::-webkit-scrollbar-corner { background: transparent; }
 .pk-split:not(.pk--max *) > .pk-bank { max-height: 72vh; }
 .pk-bank > .pk-qbempty { margin: auto; }
