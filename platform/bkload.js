@@ -7,6 +7,8 @@
    لا يمسّ ‎document‎ في أعلاه: هو وحدةٌ للعامل وللصفحة معًا */
 
 const BKL = { tilt: .74, az: -.96, fov: 13, rm: 1.2, ov: .032, bt: .02 };
+/* إعداداتُ ظلّ الطاولة في المحرّك (‎SHD‎) — تُنسخ هنا كما هي */
+const SHD = { offX: -.125, offY: .045, margin: .155, blur: .05, softDark: .21, softLight: .24 };
 const RF = { open: 130, ivMin: 18, ivMax: 75, leaf: 260, close: 260, angle: 1.05, seg: 12, nMax: 40, leaves: 8 };
 const mk = (w, h) => { if (typeof OffscreenCanvas !== 'undefined') return new OffscreenCanvas(w, h); const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 
@@ -95,10 +97,20 @@ function strip(g, C, pts, im, out) {
 function base(L) {
   const { C, s } = L, { P, H, HB, WB, TH, BT } = C, y0 = -(HB - H) / 2, y1 = H + (HB - H) / 2, zt = TH + 2 * BT, cv = L.cover, dark = shade(cv, .55);
   const c = mk(L.cv.width, L.cv.height), g = c.getContext('2d'); g.scale(s, s);
-  /* ظلٌّ ناعمٌ تحت الكتاب (الضوءُ من فوق يمين) */
-  const S = (x, y, z) => P(x + z * 1.44, y - z * .315, 0);
-  g.save(); if ('filter' in g) g.filter = `blur(${Math.max(4, L.w * .018)}px)`;
-  poly(g, [S(0, y0, zt), S(WB, y0, zt), S(WB, y1, zt), S(WB, y1, 0), S(0, y1, 0), S(0, y0, 0)], L.dark ? 'rgba(0,0,0,.42)' : 'rgba(20,35,63,.2)'); g.restore();
+  /* الظلُّ الناعمُ نفسُه الذي يرسمه المحرّكُ والكتابُ مركون (‎book2.js‎: ‏‎SHD · blobTex · tableLight‎): مستطيلٌ بمقاس الغلاف وهامشٍ متساوٍ،
+     مطموسُ الحافّة، مزاحٌ قليلًا، بعتمة ‎.24‎ (‎.21‎ في الداكن) — فلا يتحرّك الظلُّ حين يتسلّم المحرّكُ الكتاب */
+  {
+    const az = -.96, ca = Math.cos(az), sa = Math.sin(az), bx = SHD.offX * ca - SHD.offY * sa, by = SHD.offX * sa + SHD.offY * ca;
+    const BM = SHD.margin, bw = 1 + BKL.ov + 2 * BM, bh = H * (1 + BKL.ov) + 2 * BM, ppu = 256 / bw;
+    const t = mk(256, Math.round(bh * ppu)), tg = t.getContext('2d');
+    if ('filter' in tg) tg.filter = `blur(${(BM * SHD.blur * ppu).toFixed(1)}px)`;
+    tg.fillStyle = '#000'; const m = BM * .55 * ppu; tg.fillRect(m, m, t.width - 2 * m, t.height - 2 * m);
+    /* زوايا المستوى في العالم ← محلّيّ الهيكل (‎x = 0.5 − X‎، ‏‎y = H/2 − Y‎) — على الطاولة */
+    const Q = (X, Y) => P(.5 - X, H / 2 - Y, 0);
+    g.save(); g.globalAlpha = L.dark ? SHD.softDark : SHD.softLight;
+    img(g, t, Q(bx + bw / 2, by + bh / 2), Q(bx - bw / 2, by + bh / 2), Q(bx + bw / 2, by - bh / 2), 0, Q(bx - bw / 2, by - bh / 2));
+    g.restore();
+  }
   poly(g, [P(WB, y0, BT), P(WB, y1, BT), P(WB, y1, 0), P(WB, y0, 0)], dark);
   poly(g, [P(WB, y1, BT), P(0, y1, BT), P(0, y1, 0), P(WB, y1, 0)], dark);
   poly(g, [P(0, y0, BT), P(WB, y0, BT), P(WB, y1, BT), P(0, y1, BT)], shade(cv, .8));   /* باطنُ اللوح (بلون الغلاف كالمحرّك) */

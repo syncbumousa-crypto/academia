@@ -1105,6 +1105,14 @@
     } catch (e) { saveBad = true; bootMark('quota'); saveAlarm(e); }
   };
 
+  /* ‏‎saveSoon‎: حفظٌ واحدٌ في أوّل فراغ بدل حفظاتٍ متتالية — كلُّ حفظٍ يكتب الحالَ كلَّها (ثلثُ ما يُجمّد الصفحةَ وهي تحمّل الكتاب).
+     للكتاب ومصادره وحدها، ويُحفَظ فورًا إن أُغلقت الصفحة */
+  let saveSoonT = 0;
+  const saveFlush = () => { if (saveSoonT) { (window.cancelIdleCallback || clearTimeout)(saveSoonT); saveSoonT = 0; save(); } };
+  const saveSoon = () => { if (!saveSoonT) saveSoonT = (window.requestIdleCallback || (f => setTimeout(f, 300)))(() => { saveSoonT = 0; save(); }, { timeout: 2000 }); };
+  window.addEventListener('pagehide', saveFlush);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveFlush(); });
+
   /* ---------- بابُ اللوحة إلى الدرج ----------
      لوحةُ الأدمن تعمل في هذي الصفحة نفسِها وتكتب الدرجَ كلَّه من لقطةٍ قديمة،
      فتمحو ما كتبه المحرّكُ بعد اللقطة. فتُعطى بابًا: تُنقل مفاتيحُ لقطتِها إلى
@@ -10926,12 +10934,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const blob = await chIdb('readonly', pkSrcCovKey(id)), bmp = blob && await createImageBitmap(blob);
         if (bmp) { const c = document.createElement('canvas'); c.width = 96; c.height = Math.max(1, Math.round(96 * bmp.height / bmp.width)); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height); bmp.close && bmp.close(); cv.color = covPick(c); }
       } catch (e) {}
-      cv.cv = PK_COV_V; save(); return;
+      cv.cv = PK_COV_V; saveSoon(); return;
     }
     const of = 'pg' + (meta.covPg || 1);
     if (meta.coverV === PK_COV_V && meta.coverOf === of) return;
     meta.cover = await bkCoverColor(doc, meta.covPg || 1).catch(() => null);
-    meta.coverV = PK_COV_V; meta.coverOf = of; save();
+    meta.coverV = PK_COV_V; meta.coverOf = of; saveSoon();
   }
   async function pkSrcCovDel(id) {
     const key = pkSrcCovKey(id);
@@ -24971,7 +24979,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       A = Math.max(0, Math.min(bk2MaxA(b), A));
       if (b.gl) return b.gl.goTo(A);
       b.closed = A === 0; b.pos = bk2PosOf(b, A);
-      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
     };
     const step = d => b.gl ? b.gl.flip(d) : turnTo(bk2A(b) + d);
@@ -25017,7 +25025,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     const fin = ng => {
       b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
-      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+      if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
       const w = b.mxWant; b.mxWant = null;
       if (w != null && w !== !!b.one) bk2Switch(b, w);
@@ -25088,7 +25096,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.one = b.single = one;
     b.pos = bkNorm(bkSk(b), pg == null ? 0 : pg, one);
-    if (b.meta) { b.meta.pos = b.pos; save(); }
+    if (b.meta) { b.meta.pos = b.pos; saveSoon(); }
     bk2Layout(b);
     /* المغلقُ واحدٌ في الوضعين (الغلافُ وحده في الوسط): يُبدَّل بلا هيكل تحميل */
     const fade = () => { if (!ghost) return; const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: b.closed ? 160 : 320, easing: 'ease-out', fill: 'forwards' }); an.onfinish = () => ghost.remove(); };
@@ -25341,7 +25349,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* تقليبٌ والتحديدُ العابرُ قائمٌ في هذا الكتاب: يزول (لا يبقى مطليًّا على صفحةٍ غادرها) */
           if (bkTLSel && b.stage.contains(bkTLSel.d)) bkTLClear();
           b.closed = A === 0; b.pos = bk2PosOf(b, A);
-          if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; save(); }
+          if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
           bk2Show(b);
         },
       });
@@ -25718,7 +25726,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.closed) { b.closed = false; b.pos = b.single ? 1 : 0; }
       else b.closed = true;
     } else b.pos += lf.dir * (b.single ? 1 : 2);
-    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = !!b.closed; save(); }
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = !!b.closed; saveSoon(); }
     if (b.closed) { b.leaf = null; lf.el.remove(); bkShow(b); return; }
     bkShow(b).then(() => { if (b.leaf === lf) bkLeafDrop(b); });
   }
