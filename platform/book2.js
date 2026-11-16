@@ -349,9 +349,6 @@ export function createBook2(THREE, host, cfg) {
   /* صورةُ الغلاف على وجه اللوح العلويّ (الصورةُ نفسُها التي على ورقة الغلاف) */
   const artM = new THREE.MeshStandardMaterial({ roughness: 0.72, metalness: 0, color: '#ffffff' });
   const art = new THREE.Mesh(new THREE.PlaneGeometry(WB - BV, HB - BV), artM);
-  /* صورةُ الصفحة الأولى من الملفّ كثيرًا ما تحمل في أطرافها سطرَ بكسلٍ فاتحًا (هامشُ الورقة أو نعومةُ الحافّة) فيبدو على حافّة الغلاف خطًّا —
-     فتُقصّ منها شعرةٌ من كلّ جهة */
-  { const uv = art.geometry.attributes.uv, E = 0.006; for (let i = 0; i < uv.count; i++) uv.setXY(i, E + uv.getX(i) * (1 - 2 * E), E + uv.getY(i) * (1 - 2 * E)); uv.needsUpdate = true; }
   /* فوق الوجه المسطّح (الشطفُ يرفعه ‎0.6·BV‎) وداخلَ حوافّه المشطوفة */
   art.position.set(-(WB - BV) / 2 - BV * 0.2, 0, TH + BT + BV * 0.6 + 0.0004); art.receiveShadow = true; caseG.add(art);
   let caseK = -1, caseShown = null;

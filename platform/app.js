@@ -24213,7 +24213,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       base = document.createElement('canvas');
       base.width = Math.round(vp.width); base.height = Math.round(vp.height);
       const cx = base.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, base.width, base.height);
+      /* الغلافُ يُرسم أكبرَ بقليلٍ من وسطه: لونُه في الملفّ كثيرًا ما لا يبلغ حافّةَ الصفحة، فيبقى عمودٌ فاتحٌ يبدو خطًّا على حافّة الغلاف
+         (مغلقًا وهو يُرفع ويُفتح). الصفحاتُ الأخرى كما هي، فلا تتزحزح مواضعُ التحديد عليها */
+      if (k === 'cover') { const o = 1.016; cx.setTransform(o, 0, 0, o, -base.width * (o - 1) / 2, -base.height * (o - 1) / 2); }
       await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      cx.setTransform(1, 0, 0, 1, 0, 0);
       b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
     } else { b.pgCv.delete(ck); b.pgCv.set(ck, base); }
     if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return base;
