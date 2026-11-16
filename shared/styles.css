@@ -1624,7 +1624,7 @@ html[data-theme="light"] .jri-go:disabled { border-color: #dbe6e6; background: t
 }
 .lib-course {
   margin-top: 24px;                /* الهامش بين أسفل مواد الترم والخط */
-  border-top: 2px solid #d5e2e6;   /* الخط الفاصل تحت مواد الترم */
+  border-top: 0;                   /* بلا خطٍّ فاصلٍ بين الكتب والتبويبات (طلبُ صاحب الموقع) */
   padding-top: 26px;
 }
 html[data-theme="light"] .lib-course #cm-ui, html[data-theme="light"] #market-course #cm-ui, html[data-theme="light"] #nook,
@@ -1860,8 +1860,8 @@ html[data-lang="en"] .lib-course textarea { direction: ltr; }
 
 /* ---------- عرض مساهمات المادة تحت مستطيل السوق (خط فاصل ثم واجهة #cm-ui) ---------- */
 .market-course {
-  margin-top: 0;   /* 0 + 5px (padding-bottom لبار الكتب) = 5px بين الكتب والخط */
-  border-top: 2px solid #d5e2e6;
+  margin-top: 0;   /* 0 + 5px (padding-bottom لبار الكتب) = 5px بين الكتب والتبويبات */
+  border-top: 0;   /* بلا خطٍّ فاصلٍ بين الكتب والتبويبات (طلبُ صاحب الموقع) */
   padding-top: 24px;
 }
 .market-course .mmodal__scroll { overflow: visible; }   /* التمرير بالصفحة لا بصندوق داخلي */
@@ -9361,7 +9361,6 @@ html[data-theme="dark"] .search::placeholder { color: var(--placeholder); }
 /* دائرة الإتقان في الداكن: مسارها سطح داكن وحدّها ذهبي خافت (السائل ذهبي كما هو) */
 html[data-theme="dark"] .cstat { background: rgba(255, 255, 255, .08); border-color: rgba(225, 193, 114, .4); }
 html[data-theme="dark"] :is(.cimg, .term-frame) { border-color: var(--border-dash); }
-html[data-theme="dark"] :is(.market-course, .lib-course) { border-top-color: var(--border); }
 
 /* نصوص بترولية على أسطح داكنة → بترولي فاتح (استثناء الحالات النشطة بيضاء النص) */
 html[data-theme="dark"] :is(.langbar, .tabs, .themebar) button:not(.is-active) { color: var(--brand-tx); }
