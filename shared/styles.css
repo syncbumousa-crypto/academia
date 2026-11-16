@@ -18613,8 +18613,8 @@ html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg { background: #1a2226;
 html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button { color: #9fb0b8; }
 html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button.on { background: #36434a; color: #e6ecef; }
 /* ===== أزرارُ النافذة سككٌ في ركن الترويسة (طلبُ صاحب الموقع) =====
-   بلغة مقبض توسيع المساهمة (‎pk-max--curve‎): سكّةٌ شفّافةٌ سُمكُها ‎4.5‎ ونقاطٌ عليها.
-   الأزرارُ الثلاثةُ مربّعٌ واحدٌ ‎34‎ مسمَّرٌ على ركن ‎.cd-meta‎، ولا يُلتقط منها إلّا سكّتُها
+   بلغة مقبض توسيع المساهمة (‎pk-max--curve‎): سكّةٌ شفّافةٌ سُمكُها ‎6.5‎ ونقاطٌ عليها.
+   الأزرارُ الثلاثةُ مربّعٌ واحدٌ ‎40‎ مسمَّرٌ على ركن ‎.cd-meta‎، ولا يُلتقط منها إلّا سكّتُها
    (‎.cd-wb__hit‎)، فلا يحجب أحدُها أخاه. و‎translate‎ يُرفع عن الشريط لأنّ أيَّ قيمةٍ فيه
    تجعله مرجعَ المطلق فيقع المربّعُ على الشريط لا على الركن */
 .cd-wb__rl { display: none; }
@@ -18623,17 +18623,17 @@ html[data-theme="dark"] .pk--edit .cx-jrk__menu .cx-jrseg button.on { background
 #card-modal .cd-meta > .cd-bar > .cd-wb--mx,
 #card-modal .cd-meta > .cd-bar > .cd-wb--mn {
   position: absolute; top: 0; inset-inline-start: 0; z-index: 4;
-  width: 34px; height: 34px; padding: 0; border-radius: 0;
+  width: 40px; height: 40px; padding: 0; border-radius: 0;
   background: none; pointer-events: none;
 }
 #card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__ic { display: none; }
 #card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl {
-  display: block; width: 34px; height: 34px; overflow: visible; fill: none; stroke-linecap: round; }
+  display: block; width: 40px; height: 40px; overflow: visible; fill: none; stroke-linecap: round; }
 html[data-lang="en"] #card-modal .cd-meta > .cd-bar > .cd-wb .cd-wb__rl { transform: scaleX(-1); }
-.cd-wb__hit { stroke: transparent; stroke-width: 10; pointer-events: stroke; cursor: pointer; }
-.cd-wb__grip { stroke-width: 4.5; transition: stroke .15s; }
+.cd-wb__hit { stroke: transparent; stroke-width: 12; pointer-events: stroke; cursor: pointer; }
+.cd-wb__grip { stroke-width: 6.5; transition: stroke .15s; }
 .cd-wb__dot, .cd-wb__dash { opacity: .8; transition: fill .15s, stroke .15s, opacity .15s; }
-.cd-wb__dash { stroke-width: 1.9; }
+.cd-wb__dash { stroke-width: 2.5; }
 .cd-wb:hover .cd-wb__dot, .cd-wb:hover .cd-wb__dash,
 .cd-wb:focus-visible .cd-wb__dot, .cd-wb:focus-visible .cd-wb__dash { opacity: 1; }
 #card-modal .cd-meta > .cd-bar > .cd-wb:focus-visible { outline: none; }
@@ -18666,12 +18666,12 @@ html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) 
 html[data-theme="dark"] #card-modal .cd-stage:not(.is-focus) .cd-wb:not(:hover) .cd-wb__dot { fill: #e7eff0; opacity: .45; }
 /* ومقابضُ التحجيم كانت تغطّي الركنَ فتبتلع السكك: تُقصَّر عنه، ومقبضُ الركن يخرج إلى ما وراء
    الانحناءة (وهو فراغٌ لا سكّةَ فيه). والركنُ أيمنُ في العربيّة وأيسرُ في الإنجليزيّة */
-#card-modal .cd-rz--t { right: 34px; }
-#card-modal .cd-rz--r { top: 34px; }
+#card-modal .cd-rz--t { right: 40px; }
+#card-modal .cd-rz--r { top: 40px; }
 #card-modal .cd-rz--tr { top: -8px; right: -8px; width: 11px; height: 11px; }
-html[data-lang="en"] #card-modal .cd-rz--t { right: 12px; left: 34px; }
+html[data-lang="en"] #card-modal .cd-rz--t { right: 12px; left: 40px; }
 html[data-lang="en"] #card-modal .cd-rz--r { top: 12px; }
-html[data-lang="en"] #card-modal .cd-rz--l { top: 34px; }
+html[data-lang="en"] #card-modal .cd-rz--l { top: 40px; }
 html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18px; height: 18px; }
 html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }
 /* والكتابُ مغلقٌ: لا صفحةَ ولا صفحتين، فيغيب زرُّ التبديل (‎bk-shut‎ يكتبه ‎bk2Show‎) */
