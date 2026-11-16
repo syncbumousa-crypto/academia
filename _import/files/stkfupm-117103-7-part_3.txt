@@ -1,0 +1,18 @@
+
+
+for Ts=0.002:0.1:1
+
+    SR=1./Ts;
+
+    t=0:Ts:1;
+
+    x=cos(2*pi*10*t);
+
+    plot(t,x,'.-')
+
+    title('Rs')
+
+    pause
+
+end
+

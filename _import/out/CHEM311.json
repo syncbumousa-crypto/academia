@@ -37,6 +37,34 @@
       "user": "user9534"
     },
     {
+      "id": "stk-che1",
+      "name": "CHE@KFUPM",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/ebca7d/144.png",
+      "email": "che1@import.stkfupm.invalid",
+      "user": "CHE1"
+    },
+    {
+      "id": "stk-user2728",
+      "name": "واصل",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2728/144/302_2.png",
+      "email": "user2728@import.stkfupm.invalid",
+      "user": "user2728"
+    },
+    {
+      "id": "stk-user439",
+      "name": "الولهان",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user439/144/28_2.png",
+      "email": "user439@import.stkfupm.invalid",
+      "user": "user439"
+    },
+    {
+      "id": "stk-abu_3zzoz",
+      "name": "Abu 3zzoz",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/abu_3zzoz/144/646_2.png",
+      "email": "abu_3zzoz@import.stkfupm.invalid",
+      "user": "Abu_3zzoz"
+    },
+    {
       "id": "stk-user4988",
       "name": "أبو مرسمة !!",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user4988/144/891_2.png",
@@ -84,13 +112,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/d9b06d/144.png",
       "email": "user6661@import.stkfupm.invalid",
       "user": "user6661"
-    },
-    {
-      "id": "stk-user2728",
-      "name": "واصل",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2728/144/302_2.png",
-      "email": "user2728@import.stkfupm.invalid",
-      "user": "user2728"
     },
     {
       "id": "stk-abo_fauzi",
@@ -262,6 +283,100 @@
           "ts": 1486247192000,
           "tid": 120596,
           "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p913584-chem311",
+      "uid": "stk-che1",
+      "code": "CHEM 311",
+      "sec": "info",
+      "ts": 1317794195000,
+      "st": "pub",
+      "data": {
+        "desc": "نوت الداعوس ممتاز جداً … وهو موجود بالجمعية\n\nالنوت يفيدك في فهم الـ concept\n\nوعندك في السيلبوس suggested Hw problems هذه مهمة جداً ، تقريبا ١٥ سؤال على كل chapter\n\nإذا فهمت الـconcept من نوت الداعوس , وحليت الـ example الكتاب اللي غالبا الداعوس ينقله في النوت\n\nوحليت الـ suggested problems في آخر كل chapter ستشعر أن الأمور تحت السيطرة وترتاح في المادة\n\nبقيت إضافة أخيرة :::\n\nإذا لقيت مياجر قديمة لنفس الدكاترة اللي يدرسون الآن لا تفوتها لأن الداعوس يعيد الأسئلة غالباً\n\nبالنسبة لكويزات الداعوس ، هو أخبرنا أنه يأخذ من الـ suggested Hw problems ويغير فيها أرقام فقط\n\nبالتوفيق يا شباب",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/chem311/95973/5",
+          "user": "CHE1",
+          "ts": 1317794195000,
+          "tid": 95973,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p974039-chem311",
+      "uid": "stk-user2728",
+      "code": "CHEM 311",
+      "sec": "info",
+      "ts": 1327552197000,
+      "st": "pub",
+      "data": {
+        "desc": "وعليكم السلام ورحمة الله وبركاته\nنوت الدكتور الداعوس يكفي كفهم للمادة وبعض المسائل\n\nوالكتاب يجي معه سلوشن مانوال حاول أسبوعيا تحل أسئلة الكتاب بغض النظر عن إنه مشار له كهمورك أو لا أهم شيء الممارسة والتعود على الحل لترسيخ المعلومة\n\nالمادة ما فيها هوموركات بس يعطونك بعض الأسئلة للمارسة والتعود على أسئة الإختبار\n\nالمذاكرة من الكتاب والأولد إكسامز ما أقدر أفيدك فيها لأن الكتاب ما أفتحه إلا لحل أسئة الكتاب والأولد إكسامز ما كان متوفر لنا وقتها",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/chem311/118959/2",
+          "user": "user2728",
+          "ts": 1327552197000,
+          "tid": 118959,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p56817-chem311",
+      "uid": "stk-user439",
+      "code": "CHEM 311",
+      "sec": "info",
+      "ts": 1093954823000,
+      "st": "pub",
+      "data": {
+        "desc": "بصراحة انا اخذت عند وزير مادة CHEM-311\n\nالشرح --- ما عندك احد وشرحة على قده\n\nالكويزات -- اتعب على كويزاته القديمه لانه يجيب نفسها وبالارقام\n\nالمياجر--- دائما هو يلمح عن بعض الاسئلة وخاصةً اذا كانت المادة common\n\nالقريد--- حقك بتاخذة ولا تخاف من اي احد\n\nلمزيد من المعلومات عنه اسئل ولا تخاف",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/38897/4",
+          "user": "user439",
+          "ts": 1093954823000,
+          "tid": 38897,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1100933-chem311",
+      "uid": "stk-abu_3zzoz",
+      "code": "CHEM 311",
+      "sec": "srcP",
+      "ts": 1349005034000,
+      "st": "pub",
+      "data": {
+        "html": "^^^^^<br>سم و عذرا ( تصوير جوال ) 😦<br><br>​<span data-fid=\"stk-f1100933-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1100933-0": {
+            "name": "Chemist.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/7c9fe7e04a7d863f9a44fa0b45fc487928ae4789107cd68ebcdc1dc6f1001906"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/chem-311/132633/7",
+          "user": "Abu_3zzoz",
+          "ts": 1349005034000,
+          "tid": 132633,
+          "pn": 7
         }
       }
     },

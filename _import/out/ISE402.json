@@ -30,6 +30,27 @@
       "user": "user12137"
     },
     {
+      "id": "stk-user9409",
+      "name": "المتقدم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e480ec/144.png",
+      "email": "user9409@import.stkfupm.invalid",
+      "user": "user9409"
+    },
+    {
+      "id": "stk-hussain_ali93",
+      "name": "Hussain Ali93",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/eb8c5e/144.png",
+      "email": "hussain_ali93@import.stkfupm.invalid",
+      "user": "Hussain_Ali93"
+    },
+    {
+      "id": "stk-loseit1997",
+      "name": "loseit1997",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/l/e9a140/144.png",
+      "email": "loseit1997@import.stkfupm.invalid",
+      "user": "loseit1997"
+    },
+    {
       "id": "stk-royalty",
       "name": "Royalty",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/r/5daacb/144.png",
@@ -190,6 +211,75 @@
           "ts": 1717452282000,
           "tid": 120945,
           "pn": 16
+        }
+      }
+    },
+    {
+      "id": "stk-p1269876-ise402",
+      "uid": "stk-user9409",
+      "code": "ISE 402",
+      "sec": "info",
+      "ts": 1380512715000,
+      "st": "pub",
+      "data": {
+        "desc": "و عليكم السلام و الرحمة\n\nتقريباً اسألته كانت في البداية مشاهبة أو مطابقة لأسئلة الكتاب بس كان يغير فكرة في السؤال احياناً سهالات و أحياناً ما تدري وش يبغى 😐\n\nبس اسلوبه في الفاينل تغير … جاب اسألة شوي متعمقة بسبب ان الفاينل كان كومبرهنسف\n\nبشكل عام إذا انت فاهم المادة أسألته بتكون متوسطة إلى سهلة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-402/149824/7",
+          "user": "user9409",
+          "ts": 1380512715000,
+          "tid": 149824,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p1446835-ise402",
+      "uid": "stk-hussain_ali93",
+      "code": "ISE 402",
+      "sec": "info",
+      "ts": 1460839524000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله وبركاته\n\nأنا احد طلاب الـcise آخذ هذا الكورس في هذا السمستر،\nكانت عندي فكرة إن المادة سهلة بشكل عام، وتوزيع الدرجات ستاندارد،\nلكن تفاجأت بالوضع الحالي، أفرج المياجر قريب من ال50% ( أنا حوالي الأفرج)\nكيف تتوقعون بيكون القريدات ، عطونا من خبرتكم ياخوان =_=",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-402/172996/1",
+          "user": "Hussain_Ali93",
+          "ts": 1460839524000,
+          "tid": 172996,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1435116-ise402",
+      "uid": "stk-loseit1997",
+      "code": "ISE 402",
+      "sec": "info",
+      "ts": 1449004077000,
+      "st": "pub",
+      "data": {
+        "desc": "الدكتور بن دايه يهتم بالفهم العميق والتمرس في مايقول ولكن الحق يقال متعمق في الكورس والسبلاي شين\nاذا بتأخذ معاه ركز على الدرايف ومش راح يجيب أسئلة دايركت الامامندر يعني راح يفهمك الأساسيات وانت عليك تبدع اذكر في الماستر اخذت معاه 508 وكان يشرح المودل الموجود بشكل معمق ولكن في الاختبار يطلب منك تطبيق الي قاله على مودل ثاني.\nبالنسبة لي مزاجتية والمعتمدة على مستوى الطلاب في الكورس هي مايعيبة.\nالدرجات في العادة سي وسي بلس والمتميز بي وبي بلس والأيه للفلته.\nيكرف في البرزنتيشن ويخلي الطلاب تشرح الأجزاء الخفيفة من المادة.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ise-402/170875/5",
+          "user": "loseit1997",
+          "ts": 1449004077000,
+          "tid": 170875,
+          "pn": 5
         }
       }
     },

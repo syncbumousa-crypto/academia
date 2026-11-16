@@ -2,6 +2,13 @@
   "code": "ARE 322",
   "users": [
     {
+      "id": "stk-user6260",
+      "name": "عبدالله بن فهد",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/90ced4/144.png",
+      "email": "user6260@import.stkfupm.invalid",
+      "user": "user6260"
+    },
+    {
       "id": "stk-nevermind7",
       "name": "Nevermind7",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/n/ea5d25/144.png",
@@ -10,6 +17,29 @@
     }
   ],
   "posts": [
+    {
+      "id": "stk-p1322602-are322",
+      "uid": "stk-user6260",
+      "code": "ARE 322",
+      "sec": "info",
+      "ts": 1390755656000,
+      "st": "pub",
+      "data": {
+        "desc": "are 322 - building mechanical systems\nare 325 - building illumination\nare 413 - construction management\nare 431 - building economy\nare 440 - solar energy in buildings\nare 457 - introduction to building maintenance management\nare 458 - quantitative methods in construction management\nare 459 - contracts and specifications\nare 490 - special topics in architectural engineering\n\nهالكورسات غير مقبولة كا الكتف … لانها من كلية علوم البيئة\n\nوقد تواصلت مع الدكتور حسن بدر … على كورس are 322 وقالي نفس الكلام",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/xe-4xx/152412/11",
+          "user": "user6260",
+          "ts": 1390755656000,
+          "tid": 152412,
+          "pn": 11
+        }
+      }
+    },
     {
       "id": "stk-doc-nevermind7-are322",
       "uid": "stk-nevermind7",

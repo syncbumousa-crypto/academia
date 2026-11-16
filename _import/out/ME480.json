@@ -1,0 +1,37 @@
+{
+  "code": "ME 480",
+  "users": [
+    {
+      "id": "stk-user9670",
+      "name": "م ع ا ذ",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f19dbf/144.png",
+      "email": "user9670@import.stkfupm.invalid",
+      "user": "user9670"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1460620-me480",
+      "uid": "stk-user9670",
+      "code": "ME 480",
+      "sec": "info",
+      "ts": 1476976848000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ياشباب\n\nاليوم تواصلت مع الدكتور خالد مزغاني وقالي ان مادة “ME 480 Plastics Materials and Processing” ماراح تعرض في ترم 162.\n\nيقول اذا جبت له 10 تواقيع من طلاب لهم رغبة ينزلونها الترم الجاي راح يكلم التشيرمان وينزلها ان شاء الله.\n\nطبعاً انا شخصيا أشوف المادة هذي مهمة خصوصا لو لك رغبة تشتغل في شركة لها علاقة بصناعة البوليمارات أو الأنابيب أو أي شي له علاقة بالبلاستيك ( زي سابك وغيرها ).\n\nفاللي عنده رغبه أو يعرف احد مهتم, ياليت يتواصل معي علشان اقدر اجمع التوقيعات المطلوبة وينزل الكورس باذن الله.\n\nEmail: s201226100@kfupm.edu.sa\nor: m3ath1415@gmail.com\n\nشكرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/plastics-materials-and-processing-162/175098/1",
+          "user": "user9670",
+          "ts": 1476976848000,
+          "tid": 175098,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

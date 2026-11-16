@@ -3916,6 +3916,18 @@ LEGACY = {'ACCT 210', 'IAS 111', 'ENGL 101', 'FIN 250'}
 def pid_of(code, p, pre='stk-p'):
     return pre + str(p['id']) + ('' if code in LEGACY else '-' + code.replace(' ', '').lower())
 
+# ===== النقلُ الشامل: ما فُرز آليًّا من المنتدى كلِّه =====
+# ‏آلافُ المدخلات لا تُكتب هنا يدًا: تُقرأ من ‎stk_bulk.json‎ وتُضاف إلى القواميس أعلاه.
+#   info: {code: [[tid, num], ...]}   ⇐ PICK (تجربةٌ أو معلومة، وفيها منشوراتُ التدريب الصيفي والتعاوني)
+#   src:  {code: [[sec, tid, num, [[name, file, pattern|null], ...]], ...]}   ⇐ PICK_SRC
+BULK = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'stk_bulk.json')
+if os.path.exists(BULK):
+    _b = json.load(io.open(BULK, encoding='utf-8'))
+    for _c, _v in _b.get('info', {}).items():
+        PICK.setdefault(_c, []).extend((t, n, '', None) for t, n in _v)
+    for _c, _v in _b.get('src', {}).items():
+        PICK_SRC.setdefault(_c, []).extend((s, t, n, [tuple(f) for f in fs]) for s, t, n, fs in _v)
+
 def main(src):
     os.makedirs(OUT, exist_ok=True)
     cache = {}

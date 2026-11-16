@@ -9,6 +9,13 @@
       "user": "user9840"
     },
     {
+      "id": "stk-g_u_c_c_i",
+      "name": "G U C C I",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/g_u_c_c_i/144/1492_2.png",
+      "email": "g_u_c_c_i@import.stkfupm.invalid",
+      "user": "G_U_C_C_I"
+    },
+    {
       "id": "stk-sadguts",
       "name": "SadGuts",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/sadguts/144/2512_2.png",
@@ -71,6 +78,29 @@
           "user": "user9840",
           "ts": 1534597166000,
           "tid": 120634,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p755545-stat212",
+      "uid": "stk-g_u_c_c_i",
+      "code": "STAT 212",
+      "sec": "info",
+      "ts": 1293814631000,
+      "st": "pub",
+      "data": {
+        "desc": ".\n\n…\n\nأنا نزلت الكورس في الصيف مع الصاوي , طبعاً مثل ما قالولك الشباب مياجر الصاوي كانت تعتمد بشكل\nكبير على الهوموورك …\n\nلكن بالنسبة لي , ما أستسيغ المادة بأي شكل من الأشكال , فيمكن هذا السبب اللي صعبها علي شوي ,\nولا عديتها بعد الله إلا بمساعدة ( عبيد ) … مدرس كثير من طلاب الجامعة و معروف في كل شي يتعلق بالرياضيات\nأو بـ الكمبيوتر …\n\nإذا أنت مثلي , صعبة عليك المادة فأنصحك بعبيد , وإن كنت تشوف نفسك متمكن من المادة فما عليك إلا\nإنك تحل الهوموركات مع الصاوي و أمورك إن شاء الله في السليم …\n\n…\n\n.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/stat-212/99807/5",
+          "user": "G_U_C_C_I",
+          "ts": 1293814631000,
+          "tid": 99807,
           "pn": 5
         }
       }

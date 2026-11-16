@@ -1,0 +1,127 @@
+{
+  "code": "ISE 399",
+  "users": [
+    {
+      "id": "stk-user6511",
+      "name": "كـــلمــة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/4af34b/144.png",
+      "email": "user6511@import.stkfupm.invalid",
+      "user": "user6511"
+    },
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-fahad_2012",
+      "name": "Fahad 2012",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/f07891/144.png",
+      "email": "fahad_2012@import.stkfupm.invalid",
+      "user": "Fahad_2012"
+    },
+    {
+      "id": "stk-ihajar",
+      "name": "Ihajar",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/c2a13f/144.png",
+      "email": "ihajar@import.stkfupm.invalid",
+      "user": "Ihajar"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p749214-ise399",
+      "uid": "stk-user6511",
+      "code": "ISE 399",
+      "sec": "info",
+      "ts": 1292961244000,
+      "st": "pub",
+      "data": {
+        "desc": "يعطيكم العافية يـا كركليوم و عاشق طيبة و 26-ISE\nلكن ابغى اعرف هل كتابة ال C.V تعتبر حاجه أساسية فالتقديم على ال summer training ؟؟ وسؤال ثاني بالنسبة للعروض اللي تكون مقدمة في موقع الجامعه لو لا قدر الله قدمت و ماجاني رد و قدمت بنفسي على شركات و برضه ماجاني … فذي الحالة وش الحل ؟؟ … الحقيقة انه لا املك اي معلومة عن الsummer training ولا متطلباته ولا اي شي عنه بصراحه . فاتحملوني لانه مالي الا الله و هالمنتدى …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/99645/5",
+          "user": "user6511",
+          "ts": 1292961244000,
+          "tid": 99645,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p1332087-ise399",
+      "uid": "stk-user2352",
+      "code": "ISE 399",
+      "sec": "info",
+      "ts": 1392886128000,
+      "st": "pub",
+      "data": {
+        "desc": "هام جدا :\nجميع الطلاب المرشحين للتدريب الصيفي 133 عليهم البدء بالإجراءات من اليوم\nبمراجعة المنسق للتدريب الصيفي في كل قسم أكاديمي والاستعداد للبحث عن فرصة تدريب\nNote: If you intend to early register for Summer Training, then you should add course # 399 in term 133 during the early registration period which will be held from 13th April, 2014 onwards (early registration schedule will be announced later).\n\nExample: If your major is EE, then add EE 399 in term 133\nME399\nISE399\nCHE399",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/summer-training/156194/25",
+          "user": "user2352",
+          "ts": 1392886128000,
+          "tid": 156194,
+          "pn": 25
+        }
+      }
+    },
+    {
+      "id": "stk-p1450910-ise399",
+      "uid": "stk-fahad_2012",
+      "code": "ISE 399",
+      "sec": "info",
+      "ts": 1464782170000,
+      "st": "pub",
+      "data": {
+        "desc": "إعلان عن توفر فرص تدريب صيفي\n\nتعلن شركة (ABB ) ومقرها الرياض عن توفر فرص تدريبية في برنامج التدريب الصيفي وبالتنسيق مع إدارة التدريب في عمادة شؤون الطلاب :\n\n· الهندسة الميكانيكية\n· الهندسة الصناعية والنظم\n\no مميزات التدريب: راتب شهري ( 3500 ريال)\n\nعلى الراغبين في التقدم على هذه الفرص التدريبية إرسال سيرهم الذاتية للدكتور / محمود قصاص من خلال البريد الالكتروني التالي:\n\nmkassas@kfupm.edu.sa\n\nإدارة التدريب\nعمادة شؤون الطلاب\nجامعة الملك فهد للبترول والمعادن",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/161-152-153/170272/210",
+          "user": "Fahad_2012",
+          "ts": 1464782170000,
+          "tid": 170272,
+          "pn": 210
+        }
+      }
+    },
+    {
+      "id": "stk-p1509777-ise399",
+      "uid": "stk-ihajar",
+      "code": "ISE 399",
+      "sec": "info",
+      "ts": 1557949159000,
+      "st": "pub",
+      "data": {
+        "desc": "انا سويت مقابلة اليوم مع رئيس قسم الـ Accounting، وكانت الأسئلة تكنكال بحت. الزبدة تالي ودوني تبع قسم الـtreasury لاني اساسا تخصصي مالية. قالوا بيردون علي بكرة والشغل يبدأ يوم الأحد ١٩ مايو! أنا ما سألت بشكل مباشر اذا بعد هالتدريب في توظيف، بس اللي حسيته إن ممكن بعد فترة التدريب يكون في عروض لبعض المتميزين. انتوا شرايكم؟\nزوجي بعد قبلوه تدريب الـIndustrial Engineering بدون مقابلة، فما ندري كيف الوضع، نوافق أولا.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/rawabi/181478/7",
+          "user": "Ihajar",
+          "ts": 1557949159000,
+          "tid": 181478,
+          "pn": 7
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "code": "ICS 399",
+  "users": [
+    {
+      "id": "stk-explicit",
+      "name": "eXplicit",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/explicit/144/58_2.png",
+      "email": "explicit@import.stkfupm.invalid",
+      "user": "eXplicit"
+    },
+    {
+      "id": "stk-mahboop",
+      "name": "mahboop",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/e274bd/144.png",
+      "email": "mahboop@import.stkfupm.invalid",
+      "user": "mahboop"
+    },
+    {
+      "id": "stk-sophomore",
+      "name": "sophomore",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/d26b3c/144.png",
+      "email": "sophomore@import.stkfupm.invalid",
+      "user": "sophomore"
+    },
+    {
+      "id": "stk-alotmsh",
+      "name": "ALOTMSH",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/da6949/144.png",
+      "email": "alotmsh@import.stkfupm.invalid",
+      "user": "ALOTMSH"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p88509-ics399",
+      "uid": "stk-explicit",
+      "code": "ICS 399",
+      "sec": "info",
+      "ts": 1138101873000,
+      "st": "pub",
+      "data": {
+        "desc": "صحيح … طلاب الـ ICS و الـ SWE إلى الآن قريدهم IC …\nطبعاً المشرف على التدريب الصيف الماضي للتخصصين هذي هو الدكتور الدرو … وهو معروف بأنه من النوع الـ lazy والمسوف في المواعيد بالرغم من عقليته الصاروخية - دبل ميجر وفيرست أونر - 🙂\nلكن إلى الآن ما نزل القريدات !!\nبس تطمن يعني معقول بيعطيك fail ؟ اذا انت مسلّم الريبورت ومسوي بريسنتيشن ومسلم البروقريس ريبورتس كلها والإيفالويشن فما اعتقد انه فيها fail …\nانا قاللي الدكتور اللي سويت له البريسنتيشن: ( you passed … 10/10 )\nلكن الله يستر ماني مصدق الين ما اشوف الـ IC تصير P أو Pass …\n\nمع السلامة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/49580/4",
+          "user": "eXplicit",
+          "ts": 1138101873000,
+          "tid": 49580,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p846785-ics399",
+      "uid": "stk-mahboop",
+      "code": "ICS 399",
+      "sec": "info",
+      "ts": 1307252403000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n---\nانا كان التدريب الصيفي حقي في ارامكو في صيف 2009\nفيها سلبيات وايجابيات\n\nايجابياتها انك تروح تدخل وتطلع وتلعب ولا احد يطق لك خبر\nوتسولف مع الناس ، ولا فيه تحضير ولا شي ، اهم شي يشوفوك شوي في الصباح حتى يدروا انك جيت.\n\nسلبياتها\nاذا ودك تروح تشتغل صح ، مشكلة ، لأنك ما تدري وين يحطوك\nانا تخصصي علوم حاسب ، حطوني في قسم الـHome Ownership !!!! شدخلني في البيوت والمباني !!!\n\nرواتبهم 2000 ريال للشهر الكامل ، خصم كل يوم غياب\n\nحياة اجتماعية ممتازة وسوالف وضحك\n\nوبس هذا اللي عندي حاليا\nوشكرا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/flour-arabia-or-aramco-which-one-is-better/107844/2",
+          "user": "mahboop",
+          "ts": 1307252403000,
+          "tid": 107844,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p85130-ics399",
+      "uid": "stk-sophomore",
+      "code": "ICS 399",
+      "sec": "info",
+      "ts": 1133556479000,
+      "st": "pub",
+      "data": {
+        "desc": "مشكور اخوي الساحر على الرد\n\nانا بصراحة تحطمت من التفاعل الغير متوقع منكم\n\nعلى العموم انا لقيت معلومات وابغى افيد فيها الطلاب\n\nSE 399 Summer Training\n\nCollege: CS\n\nDepartment: SE\n\nDescription:\nA continuous period of 8 weeks of training spent in industry to gain exposure and appreciation of the systems engineering profession. Students are required to submit a report and make a presentation about their summer training experience and knowledge gained before receiving a grade of Pass or Fail for the course.\n\nCredits: 0\n\nPrerequisites: ENGL214, Junior Standing, Approval of the Department\n\nCo requisites: None\n\nواسف اذا ازعجتكم",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/49110/4",
+          "user": "sophomore",
+          "ts": 1133556479000,
+          "tid": 49110,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1016243-ics399",
+      "uid": "stk-alotmsh",
+      "code": "ICS 399",
+      "sec": "info",
+      "ts": 1333220478000,
+      "st": "pub",
+      "data": {
+        "desc": "مساء الخير …\n\nالصدق ما ادري وش آبغى بالضبط من موضوعي … بس حسيتكم اكثر ناس ممكن تتفهم وضعي\n\nانا قدمت على تدريب صيفي لمدة شهرين في شركة ارامكو / الظهران … ،سكنت في السكن حقهم\n\nوعشت شهرين من أروع مايكون … كانت جميله جميله جميله بكل ماتحمله هذه الكلمه من معنى\n\nتعلقت في الشركة وفي شغلهم وفي طريقة التعامل تعلق فضيع …\n\nوفي وسط اعجابي الشديد بالشركة فرحني المسؤول اللي كنت تحت اداراته انه راح يوظفني بالفرع الثاني للشركة اللي موجود في جدة بحكم اني اصلاً من أهل مكة … وماكان مني إلا اني تعلقت أكثر وتعشمت وفرحت غيري مثل مافرحت انا 😕\n\nوبعد انتهاء التدريب ويوم رجعت لمكة … سحب المسؤول وماعاد صرت احسه جاد زي ماكنت عنده في التدريب . يعني بالعربي صار يصرف كل مادقيت عليه اسأل وش اللي صار\n\nيوم كنت عنده دخل حتى في تفاصيل الراتب من كثر الجديّه اللي فيه:/\n\nالحين بتمر سنه وانا انتظر هالوظيفه منه\n\nوبعد مافقدت الأمل من هذاك المسؤول رحت دخلت على موقع ارامكو ،، وقدمت طلب وظيفة وجاني اختبار الأون لاين … اختبرته\n\nبس هذي هي الخطوة اللي وقفت عندها . : (\n\nتخيلوا من زود ما أنا متعلقه فيها كل صبح افتح موقعهم وافتح ملفي ،ابحث عن صور السكن بقوقل واقلب الصور اللي مصورتهم بجهازي لها … تعبت نفسياً من كثر ما آنا اتمنى هالوظيفه ولا صارت لي\n\nحتى اني ماصرت اقدم ولا على اي وظيفه ثانيه . احس اني ما اصلح إلا بهالشركة\n\nولا أبغى إلا هي !\n\nهذي فضفضة مو أكثر\n\nانا قسمي علوم حاسب - ومعدلي 3.14 من 4\n\nهل فيه طرق تزيد احتمالية حصولي على الوظيفه في اقرب فرصه ممكنه : (\n\nشكراً لكم …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/123664/1",
+          "user": "ALOTMSH",
+          "ts": 1333220478000,
+          "tid": 123664,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

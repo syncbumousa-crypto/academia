@@ -9,6 +9,20 @@
       "user": "user9840"
     },
     {
+      "id": "stk-user2418",
+      "name": "مشاري الغامدي",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2418/144/239_2.png",
+      "email": "user2418@import.stkfupm.invalid",
+      "user": "user2418"
+    },
+    {
+      "id": "stk-user2426",
+      "name": "درع الجزيرة",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2426/144/242_2.png",
+      "email": "user2426@import.stkfupm.invalid",
+      "user": "user2426"
+    },
+    {
       "id": "stk-user10407",
       "name": "عمار ناصر",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/9dc877/144.png",
@@ -51,6 +65,52 @@
           "ts": 1526554707000,
           "tid": 121031,
           "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p232535-econ306",
+      "uid": "stk-user2418",
+      "code": "ECON 306",
+      "sec": "info",
+      "ts": 1199220514000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة عن اقتصاد السعودية … يعني شيء متخصص ما للعالم علاقة به 🙂\n\nبالنسبة لي ::\n\nأنا أدرس الفصل هذا مادتين مع الدكتور رمادي 305 & 306\n\nأخذتهم كمواد اختيارية لأن تخصصي Mgt\n\nو فعلاً …\n\nاللي بيأخذها اختيارية فما أحد مثل رمادي …\n\nعشان كذا أحس إن الكورس بتنزل قيمته عند الطلاب …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/econ-306/60159/9",
+          "user": "user2418",
+          "ts": 1199220514000,
+          "tid": 60159,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p233756-econ306",
+      "uid": "stk-user2426",
+      "code": "ECON 306",
+      "sec": "info",
+      "ts": 1199574954000,
+      "st": "pub",
+      "data": {
+        "desc": "^\n^\n^\n^\n\nبالفعل … الكتاب معتمد في كلية اليمامة وكلية الامير سلطان والعديد من من المعاهد التي تهتم بتدريس الاقتصاد السعودي\n\nاتمنى من الدكتور خالد السلطان كما اسلفت ان يتدخل شخصيا لحل هذه الاشكالية التي ليست لدي فقط وانما لدى الطلاب اجمع\n\nبالمناسبة جميع الطلاب الذين سجلوا في هذه المادة للسمستر القادم مع الدكتور رمادي عليهم مراجعة جداولهم لانهم غيرو الدكتور رمادي ووضعوا الدكتور الحجي\n\nالدكتور الحجي ممتاز جدا ومن افضل الدكاترة ولكن … لمـــــــــــــــــاذا",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/econ-306/60159/11",
+          "user": "user2426",
+          "ts": 1199574954000,
+          "tid": 60159,
+          "pn": 11
         }
       }
     },

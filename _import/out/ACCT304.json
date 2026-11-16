@@ -1,0 +1,37 @@
+{
+  "code": "ACCT 304",
+  "users": [
+    {
+      "id": "stk-maximus-27",
+      "name": "MAXIMUS-27",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/f6c823/144.png",
+      "email": "maximus-27@import.stkfupm.invalid",
+      "user": "MAXIMUS-27"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p302913-acct304",
+      "uid": "stk-maximus-27",
+      "code": "ACCT 304",
+      "sec": "info",
+      "ts": 1219514739000,
+      "st": "pub",
+      "data": {
+        "desc": "أخوي بصراحة شغل متعوب عليه\n\nولكن\n\nElectives = المواد الإختيارية - وهذه يختارها الطالب بناءً على رغبتة وميوله. (وهي ليست إجبارية).\n\nالمواد الاليكتيف مو مخير بأنو ياخذها او لا\nهذي يختار الكورس الي يبغاه\n\nمثلا في الاكاونتنق\nعندك كورسين اليكتيف\nاذا جاء وقت هذي المادة تختار الكورس مثلا acct304 أو ةلف440\nتختار احد هالكورسين\n\nارجوا ان لا اكون مخطأ\n\nومرة ثانية مشكور وما قصرت على هالمجهود",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/65620/8",
+          "user": "MAXIMUS-27",
+          "ts": 1219514739000,
+          "tid": 65620,
+          "pn": 8
+        }
+      }
+    }
+  ]
+}

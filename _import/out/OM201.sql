@@ -1,0 +1,6 @@
+-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · OM 201 · ولَّده _import/stkfupm.py
+-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.
+BEGIN;
+INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) VALUES ('stk-cl_500', 'cl_500@import.stkfupm.invalid', 'CL 500', 'https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/51bf81/144.png', '', '', 0, 0, 1794828446, 1794828446) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, img = EXCLUDED.img;
+INSERT INTO posts (id, uid, code, sec, data, ts, updated, st) VALUES ('stk-p38488-om201', 'stk-cl_500', 'OM 201', 'info', '{"desc": "هلا وغلا\n\nشوف بالغالي\n\nتخصصك ماهو زي تخصصي بس بقول المواد الي جربتها\n\nMath 132 …\nباخذها السمستر الجاي ان شاء الله … هي اسهل من 131\nانصحك تنزل عند BEG G لانه الافضل او ابو صبيح\n\nSE 100 … برضو السمستر الجاي باخذها\nالماده سهله نوعا ما حفظ\nالاسئله كومن\nخذها عند صديقي او خان\n\nOm 201 … ماخذتها للحين\nبس يقولون انها سهله وخفيفه\nخذها عند الزاير\n\nIAS 101 …نزل عند التويجري او الزهراني\n\nوالله يوفقنا وياك", "type": "", "rel": 0, "lang": "", "book": "", "imp": {"src": "stkfupm", "url": "https://community.stkfupm.com/t/topic/29489/2", "user": "CL_500", "ts": 1068622514000, "tid": 29489, "pn": 2}}', 1068622514000, 1794828446, 'pub') ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, ts = EXCLUDED.ts, updated = EXCLUDED.updated;
+COMMIT;

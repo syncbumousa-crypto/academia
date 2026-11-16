@@ -1,0 +1,67 @@
+{
+  "code": "EE 400",
+  "users": [
+    {
+      "id": "stk-abdulaziz22",
+      "name": "abdulaziz22",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9a140/144.png",
+      "email": "abdulaziz22@import.stkfupm.invalid",
+      "user": "abdulaziz22"
+    },
+    {
+      "id": "stk-user1508",
+      "name": "ابو دحيم",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user1508/144/95_2.png",
+      "email": "user1508@import.stkfupm.invalid",
+      "user": "user1508"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p261239-ee400",
+      "uid": "stk-abdulaziz22",
+      "code": "EE 400",
+      "sec": "info",
+      "ts": 1209066110000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\nبدون مقدمات ياجماعة الوضع بالماده جدا جدا ما يطمن\nالظاهر اني بجلس سمستر كامل بس عشان هالمادة\nانا خريج وباقيلي هالسمستر والصيف بس ولكن الماده !!!\nالحل ياجماعة\nالدكتور الغضبان والحارثي يدرسونها\n\nوش السوووووووووووووووووووووووووووووووووووووووات (ة)\n\nطاير من عيوني النوم والله خايف اخذ F كبر راسي ولا اقدر اخذها بالصيف لان عندي 6 ساعات\n\nاعينونا 😦\n\nهل الدكتور الغضبان يعطي Fffffffffffffffffffffffffffffffffffffff",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee400/62758/1",
+          "user": "abdulaziz22",
+          "ts": 1209066110000,
+          "tid": 62758,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1051375-ee400",
+      "uid": "stk-user1508",
+      "code": "EE 400",
+      "sec": "info",
+      "ts": 1338884050000,
+      "st": "pub",
+      "data": {
+        "desc": "تبي الصراحه … انا الفايبر اوبتيكس ما أخذتها\nلكن سمعت انك بتنبسط و ترتاح اذا أخذتها مع الجامد … هذا اللي أعرفه\n-------------------------------------\nو اذا كنت مهتم بالكومينيكيشن و النتووركينق … أنصحك بهذا الكورس:\nEE 400 Telecommunication Networks\nمهمه جدا + ماده خفيفه و ممممممممتعه\nخصوصا اذا كانت مع الدكتور الرائع وجيه ابو السعود\n---------------------------\nو أخيرا بخصوص : EE497 Special Topics + EE499 Special Topics\nيوم رحت للكورس ديسكريبشن , حصلت مكتوب الآتي:\nThe contents of this course will be in one of the areas of interest in electrical engineering. The specific contents of the course will be given in detail at least one semester in advance of that in which it is offered.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-4xx/126959/2",
+          "user": "user1508",
+          "ts": 1338884050000,
+          "tid": 126959,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

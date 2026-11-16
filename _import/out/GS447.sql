@@ -1,0 +1,6 @@
+-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · GS 447 · ولَّده _import/stkfupm.py
+-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.
+BEGIN;
+INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) VALUES ('stk-3mooor', '3mooor@import.stkfupm.invalid', '3mooor', 'https://community.stkfupm.com/letter_avatar_proxy/v4/letter/3/a587f6/144.png', '', '', 0, 0, 1794826860, 1794826860) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, img = EXCLUDED.img;
+INSERT INTO posts (id, uid, code, sec, data, ts, updated, st) VALUES ('stk-p1320083-gs447', 'stk-3mooor', 'GS 447', 'info', '{"desc": "المادة حلوة نوعا ما كماتيريال\nالكرف بيعطيك بروجكت لكن درجات البروجكت زفت\nالقريد ستاندارد\nالدكتور في الكلاس كويس لكنه “بريطاني” و معروفين كيف البريطانيين\nالقريد تخيل في المياجر مانقصت الا 5 درجات و خرجت بسي +\nاذا تبغى تنبسط روح عنده\nاذا تبغى قريد ابتعد عنه", "type": "", "rel": 0, "lang": "", "book": "", "imp": {"src": "stkfupm", "url": "https://community.stkfupm.com/t/gs-447/152618/2", "user": "3mooor", "ts": 1389888285000, "tid": 152618, "pn": 2}}', 1389888285000, 1794826860, 'pub') ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, ts = EXCLUDED.ts, updated = EXCLUDED.updated;
+COMMIT;

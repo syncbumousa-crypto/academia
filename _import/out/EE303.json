@@ -23,6 +23,55 @@
       "user": "user11634"
     },
     {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-saudi_kfupm",
+      "name": "saudi_kfupm",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/c5a1d2/144.png",
+      "email": "saudi_kfupm@import.stkfupm.invalid",
+      "user": "saudi_kfupm"
+    },
+    {
+      "id": "stk-user8246",
+      "name": "نحو التقدم",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8246/144/1621_2.png",
+      "email": "user8246@import.stkfupm.invalid",
+      "user": "user8246"
+    },
+    {
+      "id": "stk-user9346",
+      "name": "الافضل",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/db5fbb/144.png",
+      "email": "user9346@import.stkfupm.invalid",
+      "user": "user9346"
+    },
+    {
+      "id": "stk-fssh85",
+      "name": "fssh85",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/3ab097/144.png",
+      "email": "fssh85@import.stkfupm.invalid",
+      "user": "fssh85"
+    },
+    {
+      "id": "stk-user6202",
+      "name": "أبــو هديــب",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user6202/144/1301_2.png",
+      "email": "user6202@import.stkfupm.invalid",
+      "user": "user6202"
+    },
+    {
+      "id": "stk-user5697",
+      "name": "ادحيم",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5697/144/1151_2.png",
+      "email": "user5697@import.stkfupm.invalid",
+      "user": "user5697"
+    },
+    {
       "id": "stk-user11265",
       "name": "قائد المهندسين",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/41988e/144.png",
@@ -105,13 +154,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/ba9def/144.png",
       "email": "muath.12@import.stkfupm.invalid",
       "user": "Muath.12"
-    },
-    {
-      "id": "stk-user5697",
-      "name": "ادحيم",
-      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user5697/144/1151_2.png",
-      "email": "user5697@import.stkfupm.invalid",
-      "user": "user5697"
     },
     {
       "id": "stk-magbool",
@@ -202,6 +244,179 @@
           "ts": 1609437624000,
           "tid": 120698,
           "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p1264259-ee303",
+      "uid": "stk-user2352",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1379260027000,
+      "st": "pub",
+      "data": {
+        "desc": "اللي اعرفه ولو إني لست إلكتركال إنه يوجد لأغلب مواد القسم ما يسمى بـONLINE LECTURE أفضل مرجع مع هذا الكتاب\nhttps://www.google.com.sa/search?safe=active&q=electronics%20schaum%20series&um=1&hl=ar&biw=1366&bih=667&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=f9Y1UuH3G_OS7Aay-ICoCw#facrc=_&imgrc=Nl8y1IgV5gVrmM%3A%3ByhCAMmZ32sL3lM%3Bhttp%253A%252F%252Fwww.ebooks4gate.com%252Fwp-content%252Fuploads%252F2013%252F06%252FElectronic-Communication-Schaum-Series-300x300.jpg%3Bhttp%253A%252F%252Fwww.ebooks4gate.com%252F2013%252F06%252F03%252Felectronic-communication-schaum-series%252F%3B300%3B300\n\n+ نوت الدكتور سعد الشهراني وأسئلة المياجر القديمة\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee303/149614/2",
+          "user": "user2352",
+          "ts": 1379260027000,
+          "tid": 149614,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1192649-ee303",
+      "uid": "stk-saudi_kfupm",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1362074574000,
+      "st": "pub",
+      "data": {
+        "desc": "الأون لاين ليكتشرز مبنية على السيلابوس القديم ما أنصحك تعتمد عليها !\n\nالمتايريال المطلوب:\n7.1 , 7.2 , 7.3 , 7.5 (بدون الميس ماتش) + 8.1 , 8.2 , 8.3\n\nتقدر تذاكرها من الكتاب أحسن أو تذاكر ماتيريال تشابتر 7 من الكتاب و8 تذاكره من الأون لاين ليكتشرز\n\nوبالنسبة للأون لاين ليكتشرز يجمع لك كم معلومة من 1.6 برضوا (عشان يذكرك بالفريكونسي دومين فقط )\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee303/141276/3",
+          "user": "saudi_kfupm",
+          "ts": 1362074574000,
+          "tid": 141276,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p970967-ee303",
+      "uid": "stk-user8246",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1326999743000,
+      "st": "pub",
+      "data": {
+        "desc": "بالنسبه لي كان اسهل من الـ 203\nانا اخذته مع الدكتور سعد الشهراني\nوالدكتور ممتاز بالشرح والنوت حقه بطل\n\nما فيه شي اسمه صعب\nبس اوقات لازم تعطي وقت اكثر عشان تفهم مفاتيح المادة\n\nأشكرك أخوي متكهرب لكن كيف أقدر أفهمها وأحصل مفتاحها وأنا اتعذبت في 203 بالرغم من سهولتها ولازلت أقول إنها مشوشة عندي\n\n- على فكرة السمستر الجاي منزلها مع الزاهر فما أدري تنصح به أولا في هذا الكورس خصوصاً انه يناسب جدولي.\n\n- هل أقدر أخليه كورس شبه self study ؟ أحس نفسي صعب أفهم على الدكتور.\n\n- بالنسبة للنوت: هل هو مفيد مثل 201 ولا يضيع الوقت مثل 207؟\n\n.\n.\n.\n.\n.\n.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee303/118483/4",
+          "user": "user8246",
+          "ts": 1326999743000,
+          "tid": 118483,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1162731-ee303",
+      "uid": "stk-user9346",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1357985143000,
+      "st": "pub",
+      "data": {
+        "desc": "بالنسبه لماده ee 303 اهم شي الدكتور لا تنزل الا عند دكتور كويس مره لان مافيه مرجع زين للمذاكره والكتاب من اسوأ كتب مواد الاي اي. وحاول تكتب نوت مع الدكتور .\n\nانا اشوف هالكورس مواضيعه متنوعه ومتفرقه يعني تبدا بتشابتر ٧ وبعدين تروح تشابتر ١ و زي كذا . بالنسبه لي اشوف هالكورس من اصعب المواد اللي درستها بالاي اي لسببين مافي نوت زين للمذاكره والكتاب سيئ ، والدكاتره اللي ينزلونه غالبا سيئين …\nاتمنى اني افدتك وبالتوفيق …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/a-a-303-315-370/138223/4",
+          "user": "user9346",
+          "ts": 1357985143000,
+          "tid": 138223,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p369510-ee303",
+      "uid": "stk-fssh85",
+      "code": "EE 303",
+      "sec": "info",
+      "ts": 1235046465000,
+      "st": "pub",
+      "data": {
+        "desc": "بسم الله الرحمن الرحيم\n\nيا شباب أنا ناوي أنزل مادة industrial instrumentation عند د. العبسي … ودي أول شي أعرف أول شي وش طبيعة المادة و هل فيها خربطة EE303 كثيير و ثانيا ابي أعرف وش وضع الدكتور نفسه يعني الأخلاق ، الدرجات ، الشرح ومراعاته للخريجين … أتمنى منكم إفادتي في أسرع وقت ممكن",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/industrial-instrumentation-dr-al-absi/70735/1",
+          "user": "fssh85",
+          "ts": 1235046465000,
+          "tid": 70735,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1154390-ee303",
+      "uid": "stk-user6202",
+      "code": "EE 303",
+      "sec": "srcP",
+      "ts": 1357281554000,
+      "st": "pub",
+      "data": {
+        "html": "هذا الموجود …<br><br>غير محلول + قديم جدا<br><br>وش نسوي !<br><br>انا اذكر ان موقع الديبارتمنت فيه اختبارات قديمة لكل مواد الاي اي تقريبا غير محلولة للترمين 91-92<br>بس المشكلة مالقوا يحوسون في الموقع الا هالوقت … 😐<br><br>​<span data-fid=\"stk-f1154390-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br>​<span data-fid=\"stk-f1154390-1\" class=\"src-fchip\" contenteditable=\"false\"></span>​<br>​<span data-fid=\"stk-f1154390-2\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1154390-0": {
+            "name": "EE 303 Very old unsolved finals.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/77062355862d6f85a4d6e63243c621a1a7c7bee6533e07b42b190b30c19db833"
+          },
+          "stk-f1154390-1": {
+            "name": "81-101.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/bff6833ed5eada60a98e6d9023bd2e52d9d897a55e77067006383a0f1b3a6925"
+          },
+          "stk-f1154390-2": {
+            "name": "111.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/fcb10040ec2a7257af1d9b882290ef8465ce8dd1cffb0c33dc4c5c309a4cdeb2"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee303/137354/6",
+          "user": "user6202",
+          "ts": 1357281554000,
+          "tid": 137354,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p1192896-ee303",
+      "uid": "stk-user5697",
+      "code": "EE 303",
+      "sec": "srcP",
+      "ts": 1362096899000,
+      "st": "pub",
+      "data": {
+        "html": "دعواتك لنا بالتوفيق …<br>ميجر 1 السمستر الماضي ( محلول )<br><br>​<span data-fid=\"stk-f1192896-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1192896-0": {
+            "name": "New WinRAR ZIP أرشيف.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/0731c144a6ee7907e31f0a09ec7a8e6c4eefe8c347a9abd96664c870aa4d1fbd"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/old-exams-ee303/141262/2",
+          "user": "user5697",
+          "ts": 1362096899000,
+          "tid": 141262,
+          "pn": 2
         }
       }
     },

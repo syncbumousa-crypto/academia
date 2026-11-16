@@ -58,6 +58,27 @@
       "user": "user9534"
     },
     {
+      "id": "stk-najiali",
+      "name": "NajiAli",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/najiali/144/2225_2.png",
+      "email": "najiali@import.stkfupm.invalid",
+      "user": "NajiAli"
+    },
+    {
+      "id": "stk-_917",
+      "name": "سراج9",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/dbc845/144.png",
+      "email": "_917@import.stkfupm.invalid",
+      "user": "_917"
+    },
+    {
+      "id": "stk-chemistry.eng",
+      "name": "Chemistry.Eng",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/5e9695/144.png",
+      "email": "chemistry.eng@import.stkfupm.invalid",
+      "user": "Chemistry.Eng"
+    },
+    {
       "id": "stk-a-alajmi",
       "name": "A-Alajmi",
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/54ee81/144.png",
@@ -303,6 +324,79 @@
           "ts": 1486248117000,
           "tid": 120653,
           "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1469635-che304",
+      "uid": "stk-najiali",
+      "code": "CHE 304",
+      "sec": "info",
+      "ts": 1489040406000,
+      "st": "pub",
+      "data": {
+        "desc": "وعليكم السلام ورحمة الله وبركاته.\n\nالدكاتره بالعادة يتغيروا من وقت الى آخر. CHE-304 أحد المواد السهلة في قسم الهندسة الكيميائية. يحبذ إنك تبحث عن دكتور ممتاز، لكن لو مالقيت أنصحك تنزلها صيف حتى لو عند دكتور مش بذاك المستوى المطلوب. مادة ممتعة وأهم شيء فيها شابتر 26. rate of change راح تستخدمه كثير وهذا يعتمد على التكامل.\n\nموفق لكل خير,",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/304-che/176236/3",
+          "user": "NajiAli",
+          "ts": 1489040406000,
+          "tid": 176236,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p1104486-che304",
+      "uid": "stk-_917",
+      "code": "CHE 304",
+      "sec": "srcU",
+      "ts": 1349627510000,
+      "st": "pub",
+      "data": {
+        "html": "هذي handout ل chapter 25<br><br>ما اعتقد انه فيه handout لشبتر 26<br><br>​<span data-fid=\"stk-f1104486-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1104486-0": {
+            "name": "Re-Handout_for_chapter_25.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/3d55fb7acf4797fe996c95b092de7b36e23c94eb359dfc346ebf9b23bc7331f2"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/help-che304/133215/2",
+          "user": "_917",
+          "ts": 1349627510000,
+          "tid": 133215,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1104554-che304",
+      "uid": "stk-chemistry.eng",
+      "code": "CHE 304",
+      "sec": "srcP",
+      "ts": 1349632118000,
+      "st": "pub",
+      "data": {
+        "html": "فيه ملف يشرح لك بالخطوات كيف تحل مسأله من تشابتر 25 أو 26 أو 27<br><br>في المرفقات<br><br>بالتـــوفيق<br><br>🌹<br><br>​<span data-fid=\"stk-f1104554-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f1104554-0": {
+            "name": "Steps for solving the problem.pdf",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/6a282f59745c1e3f9066bcd7dcbb2c5c3e65cc88d14b71592897b1db47242dc3"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/help-che304/133215/4",
+          "user": "Chemistry.Eng",
+          "ts": 1349632118000,
+          "tid": 133215,
+          "pn": 4
         }
       }
     },

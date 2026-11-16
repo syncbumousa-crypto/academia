@@ -1,0 +1,67 @@
+{
+  "code": "SWE 399",
+  "users": [
+    {
+      "id": "stk-explicit",
+      "name": "eXplicit",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/explicit/144/58_2.png",
+      "email": "explicit@import.stkfupm.invalid",
+      "user": "eXplicit"
+    },
+    {
+      "id": "stk-korabeka",
+      "name": "koRaBeKa",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/k/8edcca/144.png",
+      "email": "korabeka@import.stkfupm.invalid",
+      "user": "koRaBeKa"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p88509-swe399",
+      "uid": "stk-explicit",
+      "code": "SWE 399",
+      "sec": "info",
+      "ts": 1138101873000,
+      "st": "pub",
+      "data": {
+        "desc": "صحيح … طلاب الـ ICS و الـ SWE إلى الآن قريدهم IC …\nطبعاً المشرف على التدريب الصيف الماضي للتخصصين هذي هو الدكتور الدرو … وهو معروف بأنه من النوع الـ lazy والمسوف في المواعيد بالرغم من عقليته الصاروخية - دبل ميجر وفيرست أونر - 🙂\nلكن إلى الآن ما نزل القريدات !!\nبس تطمن يعني معقول بيعطيك fail ؟ اذا انت مسلّم الريبورت ومسوي بريسنتيشن ومسلم البروقريس ريبورتس كلها والإيفالويشن فما اعتقد انه فيها fail …\nانا قاللي الدكتور اللي سويت له البريسنتيشن: ( you passed … 10/10 )\nلكن الله يستر ماني مصدق الين ما اشوف الـ IC تصير P أو Pass …\n\nمع السلامة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/49580/4",
+          "user": "eXplicit",
+          "ts": 1138101873000,
+          "tid": 49580,
+          "pn": 4
+        }
+      }
+    },
+    {
+      "id": "stk-p1282363-swe399",
+      "uid": "stk-korabeka",
+      "code": "SWE 399",
+      "sec": "info",
+      "ts": 1383556984000,
+      "st": "pub",
+      "data": {
+        "desc": "وعليكم السلام ورحمة الله وبركاته\n\nالله يوفقك ويسهل أمرك\n\nأنا اشتغلت معهم التدريب الصيفي 2010 … وكان شغلهم ديزاين وشغالين على سوفتويرز وماسكين وقتها شركة كيآن … ومشاريع ثانية\nوعندهم مكاتب في كل ديرة والمقر الرئيسي أمريكا …\n\nمن ناحية الراتب … مثل ما قال الأخ iEymn\n\nحاول تقنعهم يزيدون راتبك بطريقة دبلوماسية\nوإن ما قدرت فالشركة سمعتها طيبة وتكسب خبرة وإذا حصلت عرض أفضل تقدر تستقيل\n\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/flour-arabia/151569/8",
+          "user": "koRaBeKa",
+          "ts": 1383556984000,
+          "tid": 151569,
+          "pn": 8
+        }
+      }
+    }
+  ]
+}

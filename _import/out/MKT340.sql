@@ -1,0 +1,6 @@
+-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · MKT 340 · ولَّده _import/stkfupm.py
+-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.
+BEGIN;
+INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) VALUES ('stk-brave_heart1', 'brave_heart1@import.stkfupm.invalid', 'Brave_Heart', 'https://community.stkfupm.com/user_avatar/community.stkfupm.com/brave_heart1/144/131_2.png', '', '', 0, 0, 1794828446, 1794828446) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, img = EXCLUDED.img;
+INSERT INTO posts (id, uid, code, sec, data, ts, updated, st) VALUES ('stk-p134740-mkt340', 'stk-brave_heart1', 'MKT 340', 'info', '{"desc": "السلام عليكم و رحمة الله وبركاته لجميع الزوار\n\nالسمستر الجاي بإذن الله منزل ماده MKT 340 مع Dr.Cooper لأنه هو الوحيد اللي منزلها\n\nفإيش رايكم يا شباب في الدكتور و حتى لو ربنا كتبلي إني أنزل الماده كيف راح تكون أسئلته\n\nو طريقة مذاكرتي للماده لأني سمعت إنو يعطي أسئله كتابيه\n\nوالسلام ختام\n\nو جزاكم الله خير\n\nأخوكم Brave_Heart @46@", "type": "", "rel": 0, "lang": "", "book": "", "imp": {"src": "stkfupm", "url": "https://community.stkfupm.com/t/topic/53530/1", "user": "Brave_Heart1", "ts": 1164552464000, "tid": 53530, "pn": 1}}', 1164552464000, 1794828446, 'pub') ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, ts = EXCLUDED.ts, updated = EXCLUDED.updated;
+COMMIT;

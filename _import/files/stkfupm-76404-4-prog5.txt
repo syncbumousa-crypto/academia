@@ -1,0 +1,103 @@
+TITLE"5"
+.MODEL SMALL
+.STACK 100
+.DATA
+
+        MSG1 DB 'Enter FIVE NUMBERS: $'
+        MSG2 DB 0dh,0ah,'THE ENCRYPT VALUE IS: $'
+        MSG3 DB 0dh,0ah,'ORIGNAL NUMBERS AFTER UNCRYPTION ARE : $'
+	MSG4 DB 0dh,0ah,'$'
+	var1 db 20 dup(0)
+        var2 db 20 dup(0)
+
+.CODE
+        MAIN PROC
+
+	mov ax,@data
+	mov ds,ax
+	
+	MOV AH,9 
+	LEA SI,MSG1 
+        MOV DX,SI 
+	INT 21H
+
+	lea di,var1
+        call AA
+	MOV AH,9
+	LEA DI,MSG2
+	MOV DX,DI
+	INT 21H
+
+	LEA DI,VAR1
+	LEA SI,VAR2
+        CALL BB
+	
+	MOV AH,9
+	LEA DI,MSG3
+	MOV DX,DI
+	INT 21H
+
+	LEA SI,VAR2
+        CALL CC
+	MOV AH,9 
+	LEA SI,MSG4 
+        MOV DX,SI 
+	INT 21H
+	
+	MOV AH,1
+	INT 21H
+
+        MOV aX,4C00H
+        INT 21H
+
+        MAIN ENDP
+
+        AA PROC NEAR
+	MOV CX,5
+	N:MOV AH,7
+	INT 21H
+	MOV [DI],AL
+	MOV DX,2AH
+        MOV AH,2
+        INT 21H
+	INC DI
+	LOOP N
+	RET
+        AA ENDP
+
+        BB PROC NEAR
+	MOV CX,5
+	E:MOV BX,[DI]
+	ADD BX,2
+	MOV DX,BX
+        MOV AH,2
+        INT 21H
+	MOV [SI],BX
+	INC DI
+	INC SI
+	LOOP E
+	RET
+        BB ENDP
+
+        CC PROC NEAR
+	MOV DI,4444
+	MOV CX,5
+	U:MOV BX,[SI]
+	SUB BX,2
+	MOV DX,BX
+        MOV AH,2
+        INT 21H
+	MOV [DI],BX
+	INC DI
+	INC SI
+	LOOP U
+	RET
+        CC ENDP
+
+
+
+
+        END
+
+
+

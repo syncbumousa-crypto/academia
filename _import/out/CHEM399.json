@@ -1,0 +1,37 @@
+{
+  "code": "CHEM 399",
+  "users": [
+    {
+      "id": "stk-hassanibra11",
+      "name": "Hassanibra11",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/c0e974/144.png",
+      "email": "hassanibra11@import.stkfupm.invalid",
+      "user": "Hassanibra11"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1508471-chem399",
+      "uid": "stk-hassanibra11",
+      "code": "CHEM 399",
+      "sec": "info",
+      "ts": 1554902214000,
+      "st": "pub",
+      "data": {
+        "desc": "اها هو كذا لكن ماعند الله خير و أبقى …\n\nقدمت بموقع ارامكو انا ع وظيفه تخصص كيمياء لكن تتوقع يكون في رد و اتوظف عندهم ؟\n\nلأن احس كل تركيزهم ع جامعة الملك فهد للبترول و كليات التقنيه\n\nعندك علم اذا احد توظف فيها سواءاً كان تخصص كيمياء او احياء او احد التخصصات العلمية ؟",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/181273/11",
+          "user": "Hassanibra11",
+          "ts": 1554902214000,
+          "tid": 181273,
+          "pn": 11
+        }
+      }
+    }
+  ]
+}

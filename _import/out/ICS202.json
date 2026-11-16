@@ -72,6 +72,69 @@
       "user": "Posty"
     },
     {
+      "id": "stk-user524",
+      "name": "سفمور بوي",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f19dbf/144.png",
+      "email": "user524@import.stkfupm.invalid",
+      "user": "user524"
+    },
+    {
+      "id": "stk-dreams_maker",
+      "name": "Dreams_Maker",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/b5ac83/144.png",
+      "email": "dreams_maker@import.stkfupm.invalid",
+      "user": "Dreams_Maker"
+    },
+    {
+      "id": "stk-user3083",
+      "name": "بوشخاط",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/90ced4/144.png",
+      "email": "user3083@import.stkfupm.invalid",
+      "user": "user3083"
+    },
+    {
+      "id": "stk-mohammed_mag",
+      "name": "Mohammed Mag",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
+      "email": "mohammed_mag@import.stkfupm.invalid",
+      "user": "Mohammed_Mag"
+    },
+    {
+      "id": "stk-wiss_alamri",
+      "name": "Wiss Alamri",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/w/9fc348/144.png",
+      "email": "wiss_alamri@import.stkfupm.invalid",
+      "user": "Wiss_Alamri"
+    },
+    {
+      "id": "stk-swe_student",
+      "name": "SWE Student",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/4bbf92/144.png",
+      "email": "swe_student@import.stkfupm.invalid",
+      "user": "SWE_Student"
+    },
+    {
+      "id": "stk-_911",
+      "name": "القاضي911",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/_/e95f7d/144.png",
+      "email": "_911@import.stkfupm.invalid",
+      "user": "_911"
+    },
+    {
+      "id": "stk-annoos",
+      "name": "annoos",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f1d935/144.png",
+      "email": "annoos@import.stkfupm.invalid",
+      "user": "annoos"
+    },
+    {
+      "id": "stk-sshacker",
+      "name": "sshacker",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/9de0a6/144.png",
+      "email": "sshacker@import.stkfupm.invalid",
+      "user": "sshacker"
+    },
+    {
       "id": "stk-shaheed_hussain",
       "name": "shaheed hussain",
       "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/shaheed_hussain/144/1588_2.png",
@@ -119,13 +182,6 @@
       "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/b/838e76/144.png",
       "email": "breaktheunbreakable@import.stkfupm.invalid",
       "user": "BreakTheUnbreakable"
-    },
-    {
-      "id": "stk-mohammed_mag",
-      "name": "Mohammed Mag",
-      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/c77e96/144.png",
-      "email": "mohammed_mag@import.stkfupm.invalid",
-      "user": "Mohammed_Mag"
     },
     {
       "id": "stk-o11",
@@ -370,6 +426,217 @@
           "ts": 1640988221000,
           "tid": 120838,
           "pn": 22
+        }
+      }
+    },
+    {
+      "id": "stk-p64136-ics202",
+      "uid": "stk-user524",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1100909144000,
+      "st": "pub",
+      "data": {
+        "desc": "اخوي Dreams_Maker الله يعطيك العافية … طبعا غير السلايدات نبي اللي تقدر تجيبه من اسئلة مياجر وكوزات وهوموركات … يعني كل المياجر القديمة اللي عندك + كل مايعطونكم كوز أو هوموورك أو ميجر توضع بملف مضغوط وترسلي نسخة وأنا راح اكلم المشرف العام TheCollector يحطها في قسم ماتيريال الـICS وإن شاء الله راح يساعد …فيه مواقع فيه شروح وأمثل حلوة لكن المقصد من هذا كله نبغى نذاكر بالطريقة اللي عندنا وطرقة مدرسينا …\nولك الأجر والثواب بإذن الله في كل شخص يستفيد منها 🙂\nلك خالص شكري 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics232-swe-214-ics202/39778/13",
+          "user": "user524",
+          "ts": 1100909144000,
+          "tid": 39778,
+          "pn": 13
+        }
+      }
+    },
+    {
+      "id": "stk-p64139-ics202",
+      "uid": "stk-dreams_maker",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1100910866000,
+      "st": "pub",
+      "data": {
+        "desc": "كاتب الرسالة الأصلية سفمور بوي\nاخوي Dreams_Maker الله يعطيك العافية … طبعا غير السلايدات نبي اللي تقدر تجيبه من اسئلة مياجر وكوزات وهوموركات … يعني كل المياجر القديمة اللي عندك + كل مايعطونكم كوز أو هوموورك أو ميجر توضع بملف مضغوط وترسلي نسخة وأنا راح اكلم المشرف العام TheCollector يحطها في قسم ماتيريال الـICS وإن شاء الله راح يساعد …فيه مواقع فيه شروح وأمثل حلوة لكن المقصد من هذا كله نبغى نذاكر بالطريقة اللي عندنا وطرقة مدرسينا …\nولك الأجر والثواب بإذن الله في كل شخص يستفيد منها 🙂\nلك خالص شكري 🙂\n\nفاهم عليك\n\nبس المشكلة الكويزات والمياجر والهوموورك على قولتك…راح تكون مجرد اسألة…لانه الأجوبة ماراح يعطونا اياها…لازم انت تروح للمدرس وياعالم إذا وقت الأوفيس حقه يناسب البريك حقك…وفي الأخير…زين إذا فهمت منه وش يقول…\n\nيعني الحالة صعبة جداً\n\nإذا بغيت الهوم ورك…وأسئلة اللاب…راح اعطيك اياها…\nأما المياجر والكويزات…فـ صعبة…لانها على ورق…\n\nمع إحترامي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics232-swe-214-ics202/39778/14",
+          "user": "Dreams_Maker",
+          "ts": 1100910866000,
+          "tid": 39778,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p514243-ics202",
+      "uid": "stk-user3083",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1262444731000,
+      "st": "pub",
+      "data": {
+        "desc": "شوف انا بعطيك تجربتي خلال هذا الترم لان حاليا انا اخذ المادة عند محمد سعيد\n\nالدكتور هذا متفاني جدا جدا في مهنته وما يقصر ابد في التدريس\nيعدل السلايدات اول بأول ويحاول قد ما يقدر ينفع الطالب\nكويزاته سهلة سهلة جداااااا\n\nمشكلته انه جدي 24 ساعة وممل في الغالب\n\nبالنسبة لالفي هو معروف في القسم بشكل عام انه ممتاز جدا\nلكن بالنسبة لي اشوف مشكلته كويزاته صعبة والبروجكت (هذا اذا كانت المادة فيها بروجكت بس هذي المادة ما فيها) يكون صعععععععععععععب\n\nادري ان الشرح من جنبها لكن هذا اللي قدرت عليه واذا عندك اي سؤال لا تتردد عطني خبر 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics-202-for-092/81604/2",
+          "user": "user3083",
+          "ts": 1262444731000,
+          "tid": 81604,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1533313-ics202",
+      "uid": "stk-mohammed_mag",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1641337627000,
+      "st": "pub",
+      "data": {
+        "desc": "المادة: ICS 202 - LAB - TERM 211\n\nالتحضير : ينادي بدايه الكلاس على الاسامي , ويتسامح مع التأخير\n\nطريقة الشرح : جدا واضحه ومتواجد اذا تبي أي سؤال عن التاسك .\n\nالكويزات : سهله\n\nالمياجر: ميد تيرم كومن\n\nالفاينلات : الفاينل كومن ايضا\n\nالقريد النهائي: A+\n\nالصوت: واضحه\n\nإضافات : الدكتور جدا مريح من ناحيه الحضور , المهم انك تسوي الي عليك وتطلع بدري .",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/2",
+          "user": "Mohammed_Mag",
+          "ts": 1641337627000,
+          "tid": 184179,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p1534055-ics202",
+      "uid": "stk-wiss_alamri",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1648971088000,
+      "st": "pub",
+      "data": {
+        "desc": "ICS202 “LAB” - term211 In Person\n\nالتحضير :\nيحضر كل لاب بعد 5 دقايق من بداية اللاب ومرات بعد 10 دقايق، ما يقول شيء عالتأخير بس قوله انك جيت ويحضرك.\n\nطريقة الشرح :\nيشرح التاسكات بشكل مبسط ومختصر بحيث انك تفهم وش المطلوب منك بالضبط.\n\nالكويزات :\nكان فيه 2 لاب كويز، الأول كان شوي صعب والثاني سهل.\n\nالمياجر: ----\n\nالفاينلات : -----\n\nالقريد النهائي:\nA++++++++++ وبجدارة وأحس اني ظلمته كمان.\n\nالصوت:\nواضح.\n\nإضافات :\n- الدكتور متساهل جدا الله يسعده بحيث انه اذا تبي تطلع بدري حتى لو ما خلصت التاسكات عادي عنده ويعطيك أسبوع كامل الين تسلم التاسكات.\n- تصحيح الدكتور أسطوري ويحرجك، لدرجة إنه حتى لو سلمت اللاب بعد نهاية الديدلاين وكان كودك صحيح بيعطيك الدرجة كاملة وما يشيل السبميشن من البلاكبورد، بالمناسبة حتى لو ما سلمت شيء بيعطيك نص الدرجة تخيل عزيزي القارئ، الدرجة من 10 واذا ما سلمت شيء يعطيك 5 ويكتب No Submission. 👏 🥰\n- في البروجيكت الوضع كان عنده سهالات وما كان يحشر كثير، بالنسبة لي خلاني اشرح كيف سويت الفنكشن وسويت الديمو وخلاص، كثير عطاهم درجة كاملة بالبروجيكت.\n- الدكتور لا زال صغير في العمر وفي سن الشباب ويساعدك لو احتجت شيء.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mustafa-alturki/184179/5",
+          "user": "Wiss_Alamri",
+          "ts": 1648971088000,
+          "tid": 184179,
+          "pn": 5
+        }
+      }
+    },
+    {
+      "id": "stk-p156592-ics202",
+      "uid": "stk-swe_student",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1173876095000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\n* عليك بالمواد الثلاثة : ( ICS 102 + ICS 201 + ICS 202 ) كمحور لاختيار التخصص\nلأنهم لكل تخصصات الحاسب\nإذا رأيت انك انسان تأقلمت مع هذه المواد وهي مواد في البرمجة وأساسياتها واحترافها\nحبيت تلك المواد … وحسيت انك راح تبدع وراح تنتج وراح تطور نفسك بنفسك\n\nفأنا أنصحك بالـSWE\n\n-------\n\nبالنسبة للـAverage على حسب الماده\nبعض المواد اخذتها وكانوا عدد الطلاب يتجاوز الـ20 والافرج كان فيها معقول\n\nبعض المواد وكان عدد الطلاب فيها لايتجاوز الـ8 وكان الأفرج فيها عالٍ جداً ( ولكن في هذه الماده بالذات أتيحت لي فرصه الـA+ وأخذتها ولله الحمد لأني قدرت اثبت نفسي عند الدكتور مافي طلاب كثير)\n\n----------\n\nبالنسبة للطلاب الأجانب :\nماأزيد على ماذكره بعض الأخوة ان لافرق بينكم الا بالعقل والتفكير\n\n----------\n\nبالنسبة للشركات :\n\nفما أتوقع انك ماتعرف شركة ( الإلكترونيات المتقدمه )\nأكتفيت بهذا المثال فقط لأن الشركة كبيره وانتشارها على مستوى واسع\nومتخصصه في البرمجة وأمور الحاسب بشكل عام. (على حد علمي)\n\n----------\n\nنصيحتي لكل من أراد الدخول في هذا التخصص :\n\n* ان يكون محب للبرمجة\n* ان يتكيف مع أي لغة برمجة يتعلمها\n* ان يطور نفسه بنفسه ولا ينتظر احد لكي يعلمه\n* محاولة الإستفاده من المشاريع والواجبات ( وعدم أخذ المساعده الكلية من شخص آخر )\n* الإتكال على المولى عز وجل.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/swe/55319/12",
+          "user": "SWE_Student",
+          "ts": 1173876095000,
+          "tid": 55319,
+          "pn": 12
+        }
+      }
+    },
+    {
+      "id": "stk-p81911-ics202",
+      "uid": "stk-_911",
+      "code": "ICS 202",
+      "sec": "info",
+      "ts": 1128331891000,
+      "st": "pub",
+      "data": {
+        "desc": "دخلت للتو في كورس الــ ICS202 ولازالت تواجهني حتى اليوم نفس المشكلة وهي:\n\nأني لا أجد أنه مشابه أبدا للكورسات السابقة (102 & 201)\n\nقرأت السلايدات ولكنها من غير فائدة\n\nإلى من يعرف كتابا ممتازا أو طريقة تجعلني أفهم الكورس بشكل أفضل وأكون له من الشاكرين.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/48729/1",
+          "user": "_911",
+          "ts": 1128331891000,
+          "tid": 48729,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p64258-ics202",
+      "uid": "stk-annoos",
+      "code": "ICS 202",
+      "sec": "srcU",
+      "ts": 1101033499000,
+      "st": "pub",
+      "data": {
+        "html": "اتفضل 🙂<br><br>​<span data-fid=\"stk-f64258-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f64258-0": {
+            "name": "lab06.zip",
+            "v": "data:application/zip;base64,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"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/lab06-ics202/42491/2",
+          "user": "annoos",
+          "ts": 1101033499000,
+          "tid": 42491,
+          "pn": 2
+        }
+      }
+    },
+    {
+      "id": "stk-p58699-ics202",
+      "uid": "stk-sshacker",
+      "code": "ICS 202",
+      "sec": "srcU",
+      "ts": 1095214881000,
+      "st": "pub",
+      "data": {
+        "html": "هذه اللابات لICS 202<br>الى نهاية الترم<br><br>مع كم HW<br><br>ارجو ان تستعملها للفهم و ليس للحفظ هذي مادة لازم تكون فاهم فيها<br><br>وان كنت ساكن في الجامعة و عندك شبكة في الغرفة دور عمارة 2<br>جهاز anubis<br><br>بتلقاها ان شاء الله في مجلد مشارك و الكل مدعو في مجلد KFUPM<br><br>​<span data-fid=\"stk-f58699-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f58699-0": {
+            "name": "ics202.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/5099f7ecb204887f854e7a176dd6ee45701a7d9ba932d3aaaba45f6c72a4894b"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ics232-swe-214-ics202/39778/9",
+          "user": "sshacker",
+          "ts": 1095214881000,
+          "tid": 39778,
+          "pn": 9
         }
       }
     },
