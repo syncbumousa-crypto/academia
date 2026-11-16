@@ -12915,6 +12915,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     d.deck = d.deck || [];
     return pkQbOn(code, p) ? pkQbView(d) : d;
   };
+  /* قراءةٌ بلا إنشاء: مساهمتي في المادّة إن وُجدت (‎cardDataRaw‎ يُنشئها ويحفظ الدرجَ كلَّه — فكان مجرّدُ المرور بكتابٍ في الرفّ يُنشئ مسوّدةً فارغة) */
+  const cardDataPeek = code => { const p = postsOf(code, 'cards').find(isMine); if (!p) return null; const d = migPackC(code, p); d.deck = d.deck || []; return d; };
   const cardDataRaw = code => { const p = myPost(code, 'cards'), d = migPackC(code, p); d.deck = d.deck || []; return d; };
   /* إيجاد عقدة بهويتها داخل الشجرة — يعيد {arr,i,n} للحذف والتحرير */
   function findNode(nodes, id) {
@@ -24357,7 +24359,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* رقمُ كلّ بطاقةٍ في مجلدها (ترتيبُها بين بطائقه) — هو رقمُ صفّها في الجدول */
   function hlRowMap() {
-    const map = new Map(), pk = cardDataRaw(cmCode);
+    const map = new Map(), pk = cardDataPeek(cmCode);
     const walk = arr => { (arr || []).filter(n => n.t === 'c').forEach((n, i) => map.set(n.id, i + 1)); (arr || []).filter(n => n.t === 'f').forEach(f => walk(f.ch)); };
     if (pk) walk(pk.deck);
     return map;
@@ -24616,7 +24618,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* بعد كلّ رسم: إن تبدّلت أرقامُ الصفوف (صفٌّ أُضيف أو حُذف أو رُتّب) أُعيد طلاءُ أرقامها على الصفحات الظاهرة */
   let hlRowSig = '';
   function hlAfterRender() {
-    const pk = cardDataRaw(cmCode); if (!pk) return;
+    const pk = cardDataPeek(cmCode); if (!pk) return;
     const sig = [...hlRowMap()].map(([k, v]) => k + ':' + v).join(',');
     if (sig === hlRowSig) return;
     const first = !hlRowSig; hlRowSig = sig;
@@ -33766,6 +33768,8 @@ void main() {
        فالخانةُ تُفتح ههنا: الجذبُ مصدرٌ للبيانات لا قارئٌ لها. */
     const info = (state.cinfo[code] = state.cinfo[code] || {});
     info.posts = info.posts || {};
+    /* بصمةُ ما في المادّة قبل الدمج: إن لم يتبدّل شيءٌ فلا حفظَ للدرج كلِّه ولا إعادةَ رسم (كان يقع مع كلّ تنقّلٍ بين كتب الرفّ) */
+    const srvSig0 = JSON.stringify(info.posts);
     let n = 0;
     /* The server knows who owns what. Copy that onto our local copies, then
        let the one ownership rule decide what is mine. (Before, this place
@@ -33942,14 +33946,15 @@ void main() {
       srvCmtPull(r.id, r.data, true);
       n++;
     });
-    save();
+    const srvSame = JSON.stringify(info.posts) === srvSig0;
+    if (!srvSame) saveSoon();
     /* وتُعاد الشاشةُ إن كانت هذه المادّةُ مفتوحةً الآن — وإلّا فقد جُذبت لغيرها.
        والطرحُ حدثٌ كالحقن: لو نُظر إلى ‎n‎ وحدَها لَبقيت النسخةُ المطروحةُ على
        الشاشة حتى تُفتح المادّةُ ثانيةً. */
     /* ===== ووصولُ الجواب حدثٌ ولو كان خاويًا =====
        الشاشةُ تنتظره لتكفّ عن قول «جارٍ التحميل». فيُختم قبل كلّ إعادةِ رسم. */
     srvGot[code] = 1;
-    if ((n || cut) && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+    if ((n || cut) && !srvSame && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
     /* ===== والمربّعاتُ الأربعةُ تُعاد كذلك =====
        كانت تُبنى مرّةً عند فتح الرَّكن ثمّ لا يبلغها شيء: يصل الجوابُ فتُعاد لوحةُ
        المادّة وحدَها، وتبقى الأربعةُ على حالها الصفريّة حتّى يُفتح الرَّكنُ من جديد.
@@ -33961,7 +33966,7 @@ void main() {
     /* ===== والغلافُ يُعاد رسمُه حيث يُرى =====
        كان يُعاد لوحُ المادّة وحدَه، والغلافُ في السوقين وفي إطار الترم أيضًا.
        فمن ثبّت في اللوحة رأى الكتابَ في المكتبة على حاله حتّى يُعاد بناءُ الصفحة. */
-    if (n || cut) {
+    if ((n || cut) && !srvSame) {
       if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
       if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
       if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
