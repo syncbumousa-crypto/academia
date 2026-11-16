@@ -1,0 +1,67 @@
+{
+  "code": "MGT 410",
+  "users": [
+    {
+      "id": "stk-a7med.88",
+      "name": "a7med.88",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/f04885/144.png",
+      "email": "a7med.88@import.stkfupm.invalid",
+      "user": "a7med.88"
+    },
+    {
+      "id": "stk-user2263",
+      "name": "عبرات مخفية",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/e36b37/144.png",
+      "email": "user2263@import.stkfupm.invalid",
+      "user": "user2263"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p614062-mgt410",
+      "uid": "stk-a7med.88",
+      "code": "MGT 410",
+      "sec": "info",
+      "ts": 1274667772000,
+      "st": "pub",
+      "data": {
+        "desc": "دكتور المير يا عزيزي …\nفي الأخلاق … مافيه زيه في الجامعه كلها … على كبر سنه … الا أنه يحطك على راسه من فوق …\nفي التدريس … صراحه اختباراته وكوزاته جامدة … يعني يبغالك تاكل الكتاب … القريد مادري عنه … بروجيكت مافيه بس فيه تيرم بيبر … حاجه أسهل من البروجيكت …\nاتمنى اني افدتك … 🙂",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt410/88707/3",
+          "user": "a7med.88",
+          "ts": 1274667772000,
+          "tid": 88707,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p276241-mgt410",
+      "uid": "stk-user2263",
+      "code": "MGT 410",
+      "sec": "info",
+      "ts": 1214099097000,
+      "st": "pub",
+      "data": {
+        "desc": "نصيييييحتكم … سمعت كلام كثير عن د/القحطاني … لكن ماني عارف ما ابغى اظلم الرجال …\n\nاي احد دارس عنده من قبل بنفس المادة او مادة ثانية لا يبخل علينا بانبطاعه عن الدكتور من ناحية القريدات والتعامل والغياب و و و و و كل شي يعرفه … المادة منزلها بالصيف 073 … وللأسف شبه مضطر اني اخذها …\n\nفي انتظار الردود … 🌹 🌹 🌹 🌹 🌹",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/mgt-410/63873/1",
+          "user": "user2263",
+          "ts": 1214099097000,
+          "tid": 63873,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

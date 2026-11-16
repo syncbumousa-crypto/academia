@@ -1,0 +1,37 @@
+{
+  "code": "GS 342",
+  "users": [
+    {
+      "id": "stk-user10207",
+      "name": "بروتوكول",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user10207/144/2111_2.png",
+      "email": "user10207@import.stkfupm.invalid",
+      "user": "user10207"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1441547-gs342",
+      "uid": "stk-user10207",
+      "code": "GS 342",
+      "sec": "info",
+      "ts": 1454848906000,
+      "st": "pub",
+      "data": {
+        "desc": "عليكم السلام.\n\nMass Media مذاكرتها من السلايدات. الدكتور الصيني غالباً يدرسها وهو كويس.\nInternational relations الصيف الماضي درسها مارك. الدكتور ممتاز. بس اعتقد المذاكرة من الكتاب وهو يحدد الاشياء المهمة.\n\nكلهم حلوين بس شوف وش الي يناسبك. بما انك تخصصك CS الـ Mass Media مواضيعها بتكون حلوة وسهلة لك.\n\nفي مادة ثانية خفيفة GS 336 - Work & Society اذا كانت محمد سعيد، سهالات والمذاكرة من السلايدات.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/gs-342-or-434-in-153/172157/2",
+          "user": "user10207",
+          "ts": 1454848906000,
+          "tid": 172157,
+          "pn": 2
+        }
+      }
+    }
+  ]
+}

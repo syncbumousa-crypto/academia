@@ -1,0 +1,97 @@
+{
+  "code": "EE 466",
+  "users": [
+    {
+      "id": "stk-user1655",
+      "name": "عاشق طيبة",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/43a26b/144.png",
+      "email": "user1655@import.stkfupm.invalid",
+      "user": "user1655"
+    },
+    {
+      "id": "stk-x_zero",
+      "name": "X_zErO",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/x_zero/144/1088_2.png",
+      "email": "x_zero@import.stkfupm.invalid",
+      "user": "X_zErO"
+    },
+    {
+      "id": "stk-dior",
+      "name": "Dior",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/d/ecd19e/144.png",
+      "email": "dior@import.stkfupm.invalid",
+      "user": "Dior"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p430549-ee466",
+      "uid": "stk-user1655",
+      "code": "EE 466",
+      "sec": "info",
+      "ts": 1247536742000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله،،\n\nشباب اللي عنده كتاب كورس( EE 466 (Power System Protection\nوما يحتاجه ويود إنه يبيعه فأنا سأشتريه ولن يكون إن شاء الله بيننا خلاف في السعر…\n\nعندي كو أب الآن وأحتاج الكتاب علما بأني لم آخذ الكورس بعد\nأرسل على الخاص وإن شاء الله نتفق\nسلام",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee466/75427/1",
+          "user": "user1655",
+          "ts": 1247536742000,
+          "tid": 75427,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p491863-ee466",
+      "uid": "stk-x_zero",
+      "code": "EE 466",
+      "sec": "info",
+      "ts": 1258034234000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\nشباب مثل ما انتم ملاحظين الدكتور ما يعرف يشرح ولا يقدر يوصل المعلومة\nوانا رايح فيها\nكم مرة افتح الكتاب والقاه يعقدني اكثر\nالكتاب مرررة ما يساعد هو معقد\nوالاختبار الاحد\nانا واربعة من اخوياي منعدمين ما ندري من وين نبدا نحاول نفهم مع الدكتور نحاول نفهم المادة عجزنا\nودي اعرف كيف تذاكرون واذا فيه نوتات تساعدني الله لا يهينكم علموني وش هي\nجزاكم الله خير",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee466/80057/1",
+          "user": "X_zErO",
+          "ts": 1258034234000,
+          "tid": 80057,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p492126-ee466",
+      "uid": "stk-dior",
+      "code": "EE 466",
+      "sec": "info",
+      "ts": 1258099148000,
+      "st": "pub",
+      "data": {
+        "desc": "على فكره الدكتور راعي تشبيك\n\nوعطه جوه في الكلاس وابشر بالي يعزك\n\nوالفاينل 3-4 اسئله من ميجر 1 و ميجر 2 …يعني ذاكر اسئلة المياجر حقتك, وهو طبعا ما راح يعطيكم اوراق الاختبار بس انت حاول تصورها في الكلاس…\n\nوالجزء حق ال 463 حاول تذاكره من كتاب 463 (الكتاب مره واضح وسهل)",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee466/80057/5",
+          "user": "Dior",
+          "ts": 1258099148000,
+          "tid": 80057,
+          "pn": 5
+        }
+      }
+    }
+  ]
+}

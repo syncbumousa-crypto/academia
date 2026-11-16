@@ -1,0 +1,37 @@
+{
+  "code": "EE 400",
+  "users": [
+    {
+      "id": "stk-abdulaziz22",
+      "name": "abdulaziz22",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/e9a140/144.png",
+      "email": "abdulaziz22@import.stkfupm.invalid",
+      "user": "abdulaziz22"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p261239-ee400",
+      "uid": "stk-abdulaziz22",
+      "code": "EE 400",
+      "sec": "info",
+      "ts": 1209066110000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم\n\nبدون مقدمات ياجماعة الوضع بالماده جدا جدا ما يطمن\nالظاهر اني بجلس سمستر كامل بس عشان هالمادة\nانا خريج وباقيلي هالسمستر والصيف بس ولكن الماده !!!\nالحل ياجماعة\nالدكتور الغضبان والحارثي يدرسونها\n\nوش السوووووووووووووووووووووووووووووووووووووووات (ة)\n\nطاير من عيوني النوم والله خايف اخذ F كبر راسي ولا اقدر اخذها بالصيف لان عندي 6 ساعات\n\nاعينونا 😦\n\nهل الدكتور الغضبان يعطي Fffffffffffffffffffffffffffffffffffffff",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee400/62758/1",
+          "user": "abdulaziz22",
+          "ts": 1209066110000,
+          "tid": 62758,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

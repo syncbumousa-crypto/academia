@@ -1,0 +1,39 @@
+{
+  "code": "FIN 410",
+  "users": [
+    {
+      "id": "stk-f.a.b",
+      "name": "F.A.B",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/9d8465/144.png",
+      "email": "f.a.b@import.stkfupm.invalid",
+      "user": "F.A.B"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p979374-fin410",
+      "uid": "stk-f.a.b",
+      "code": "FIN 410",
+      "sec": "srcU",
+      "ts": 1328309475000,
+      "st": "pub",
+      "data": {
+        "html": "السلام عليكم<br>الملف مدرج بالمرفقات لنفس نسخة الكتاب بالتوفيق ودعواتكم<br><br>​<span data-fid=\"stk-f979374-0\" class=\"src-fchip\" contenteditable=\"false\"></span>​",
+        "files": {
+          "stk-f979374-0": {
+            "name": "FIN_410_Test_Bank.zip",
+            "v": "https://cyuufavrbqyqywhftbjw.supabase.co/functions/v1/api/media/ed7bc7293487ba7e483ceccacaff5e8008d0b924f114638cb2b79ff7a6d3df15"
+          }
+        },
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/fin-410-tb/112702/5",
+          "user": "F.A.B",
+          "ts": 1328309475000,
+          "tid": 112702,
+          "pn": 5
+        }
+      }
+    }
+  ]
+}

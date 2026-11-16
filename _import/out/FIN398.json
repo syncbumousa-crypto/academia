@@ -1,0 +1,607 @@
+{
+  "code": "FIN 398",
+  "users": [
+    {
+      "id": "stk-ahmad.ah",
+      "name": "Ahmad.AH",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/ahmad.ah/144/2287_2.png",
+      "email": "ahmad.ah@import.stkfupm.invalid",
+      "user": "Ahmad.AH"
+    },
+    {
+      "id": "stk-thamer_al-fakeeh",
+      "name": "Thamer Al-Fakeeh",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/t/7993a0/144.png",
+      "email": "thamer_al-fakeeh@import.stkfupm.invalid",
+      "user": "Thamer_Al-Fakeeh"
+    },
+    {
+      "id": "stk-saleh9311",
+      "name": "saleh9311",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/50afbb/144.png",
+      "email": "saleh9311@import.stkfupm.invalid",
+      "user": "saleh9311"
+    },
+    {
+      "id": "stk-guest",
+      "name": "Guest",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/8dc957/144.png",
+      "email": "guest@import.stkfupm.invalid",
+      "user": "Guest"
+    },
+    {
+      "id": "stk-user3",
+      "name": "ابو سمر",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user3/144/12_2.png",
+      "email": "user3@import.stkfupm.invalid",
+      "user": "user3"
+    },
+    {
+      "id": "stk-practice",
+      "name": "Practice",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/practice/144/2043_2.png",
+      "email": "practice@import.stkfupm.invalid",
+      "user": "Practice"
+    },
+    {
+      "id": "stk-sub_zero",
+      "name": "sub_zero",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/59ef9b/144.png",
+      "email": "sub_zero@import.stkfupm.invalid",
+      "user": "sub_zero"
+    },
+    {
+      "id": "stk-fin_entreprenur",
+      "name": "FIN_Entreprenur",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/82dd89/144.png",
+      "email": "fin_entreprenur@import.stkfupm.invalid",
+      "user": "FIN_Entreprenur"
+    },
+    {
+      "id": "stk-user8581",
+      "name": "شدعوه",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user8581/144/1829_2.png",
+      "email": "user8581@import.stkfupm.invalid",
+      "user": "user8581"
+    },
+    {
+      "id": "stk-user10275",
+      "name": "مبعثر",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/f05b48/144.png",
+      "email": "user10275@import.stkfupm.invalid",
+      "user": "user10275"
+    },
+    {
+      "id": "stk-gotham",
+      "name": "Gotham",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/g/43a26b/144.png",
+      "email": "gotham@import.stkfupm.invalid",
+      "user": "Gotham"
+    },
+    {
+      "id": "stk-user3306",
+      "name": "جامعي كوم",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/u/97f17d/144.png",
+      "email": "user3306@import.stkfupm.invalid",
+      "user": "user3306"
+    },
+    {
+      "id": "stk-a111",
+      "name": "A1@KFUPM",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/a/ec9cab/144.png",
+      "email": "a111@import.stkfupm.invalid",
+      "user": "A111"
+    },
+    {
+      "id": "stk-insatiable",
+      "name": "insatiable",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/i/7bcc69/144.png",
+      "email": "insatiable@import.stkfupm.invalid",
+      "user": "insatiable"
+    },
+    {
+      "id": "stk-user2352",
+      "name": "صانع القرار",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/user2352/144/232_2.png",
+      "email": "user2352@import.stkfupm.invalid",
+      "user": "user2352"
+    },
+    {
+      "id": "stk-s.a.l.m.a.n",
+      "name": "S.a.l.m.a.n",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/858c86/144.png",
+      "email": "s.a.l.m.a.n@import.stkfupm.invalid",
+      "user": "S.a.l.m.a.n"
+    },
+    {
+      "id": "stk-f.a.b",
+      "name": "F.A.B",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/f/9d8465/144.png",
+      "email": "f.a.b@import.stkfupm.invalid",
+      "user": "F.A.B"
+    },
+    {
+      "id": "stk-safwaneez",
+      "name": "safwaneez",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/5f8ce5/144.png",
+      "email": "safwaneez@import.stkfupm.invalid",
+      "user": "safwaneez"
+    },
+    {
+      "id": "stk-hummer_4_ever",
+      "name": "hummer 4 ever",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/7ab992/144.png",
+      "email": "hummer_4_ever@import.stkfupm.invalid",
+      "user": "hummer_4_ever"
+    },
+    {
+      "id": "stk-the_aviator",
+      "name": "THE AVIATOR",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/the_aviator/144/2088_2.png",
+      "email": "the_aviator@import.stkfupm.invalid",
+      "user": "THE_AVIATOR"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1520417-fin398",
+      "uid": "stk-ahmad.ah",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1583081148000,
+      "st": "pub",
+      "data": {
+        "desc": "فرص تدريب لدى Unilever\n\nUnilever Internship Program - Customer Development\n\nUnilever Internship Program - Marketing\n\nUnilever Internship Program - Human Resources\n\nUnilever Internship Program - Finance\n\nUnilever Internship Program - Supply Chain",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/182745/9",
+          "user": "Ahmad.AH",
+          "ts": 1583081148000,
+          "tid": 182745,
+          "pn": 9
+        }
+      }
+    },
+    {
+      "id": "stk-p523176-fin398",
+      "uid": "stk-thamer_al-fakeeh",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1263459213000,
+      "st": "pub",
+      "data": {
+        "desc": "Internship &Coop:\nAn internship or co-op at GE gives a student hands-on experience,\nworking on challenging projects with some of the best minds in business. This is a superb opportunity to give his career a head start while making valuable Contacts. The Coop work experience is a vitally important tool for helping a student determines the course of his career, giving him valuable insight into the workplace, useful experience, and helpful contacts for the future.\n\nIf your Major is: Electric Engineering, Mechanical Engineering, Industrial Engineering, or Finance, you may apply through this link:\n\nhttp://www.ge.com/careers/students/internships/middle_east.html\n\nGE invests over $1 billion in training & development. You’ll never stop learning and growing, because GE is a culture committed to education. We’re NOT training Employees; we’re DEVELOPING talent !\n\nRegards,\nThamer Al-Fakeeh\nHR Manager\nGE Energy & Water\nMiddle East & Africa",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/internship-opportunities-with-ge/82198/1",
+          "user": "Thamer_Al-Fakeeh",
+          "ts": 1263459213000,
+          "tid": 82198,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1469630-fin398",
+      "uid": "stk-saleh9311",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1489027625000,
+      "st": "pub",
+      "data": {
+        "desc": "نوع التدريب: ( COOP )\nاسم الشركة أو جهة التدريب: SABIC\nالسنة: 153 - 161\nالتخصص + الجامعة: Finance / KFUPM\nمكان التدريب + القسم: Corporate Planning & Budgeting / Riyadh\nالمكافأة: 4,000\nطريقة التقديم: تم ارسال رابط التقديم عن طريق ايميل الجامعه\n\nإضافات ( مثلا : رأيك في الشركة , الإستفادة,… ): للأسف الشركة لاتملك برنامج واضح للتدريب وكثير من المتدربين يقضون اكثر وقتهم Rotations. وقد لايحصل الفائدة المرجوة بحكم انه بيستقبل كم هائل من المعلومات وكثير منها لاعلاقة لها بتخصصه وان كانت بتفيده بمعرفة ال Industry.\nشخصياً, تم وضع خطة Rotations لكن لم التزم بها وفضلت ان اقضي التدريب في الـ Planning & Budgeting حيث انه كان عندهم نقص موظفين ويوجد ضغط شغل بحكم اننا كنا باخر السنه الميلادية.\nأيضاً شعرت بالقبول من اعضاء القسم وهذا شي ضروري للمتدرب لانه هم اللي بيعطونك الشغل وهم اللي بيشرحون لك الاشياء اللي يصعب عليك فهمها.\nبشكل عام كانت تجربة جداً ثريه بالنسبة لي واستفدت منها كثير عالمستوى العلمي والشخصي.\nأخيراً, نصيحتي لطلاب الـ Finance: أولاً لاتأجل كورس Fin 425 لبعد الكواب. ثانياً, التدريب في بنك, شركة استثمار أو شركة استشارات Big 4 هو افضل لك لانه تخصصك في هذي الشركات يعتبر هو جوهر الشركة وصانع المال وليس دعم لاقسام اخرى, سابك كمثال.\nأيضاً ياشباب ابدأوا البحث عن فرص من بدري, تجربة الـ COOP قد تكون جداً مفيده أو قد تكون مضيعه للوقت. الأمر يعتمد عليك انت!\n\nعذراً عالإطالة وبالتوفيق لكم جميعاً",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/170460/60",
+          "user": "saleh9311",
+          "ts": 1489027625000,
+          "tid": 170460,
+          "pn": 60
+        }
+      }
+    },
+    {
+      "id": "stk-p529904-fin398",
+      "uid": "stk-guest",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1264591889000,
+      "st": "pub",
+      "data": {
+        "desc": "هادا الإيميل اللي وصلني على إيميل الجامعة من شركة GE\n\nInternship &Coop:\nAn internship or co-op at GE gives a student hands-on experience,\nworking on challenging projects with some of the best minds in business. This is a superb opportunity to give his career a head start while making valuable Contacts. The Coop work experience is a vitally important tool for helping a student determines the course of his career, giving him valuable insight into the workplace, useful experience, and helpful contacts for the future.\n\nIf your Major is: Electric Engineering, Mechanical Engineering, Industrial Engineering, or Finance, Send your email to:\n\nthamer.al\\-fakeeh@ge.com\n\nGE invests over $1 billion in training & development. You’ll never stop learning and growing, because GE is a culture committed to education. We’re NOT training Employees; we’re DEVELOPING talent",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/ee-me-ise-ge/82698/1",
+          "user": "Guest",
+          "ts": 1264591889000,
+          "tid": 82698,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p172520-fin398",
+      "uid": "stk-user3",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1180638342000,
+      "st": "pub",
+      "data": {
+        "desc": "ذهبت مُسرعاً لكي ألتقي به, فوجدته ينتظرني بكل تواضع و هدوء. لقد توقعت أن رجلاً في منصبه سيسألني عن طريقة لباسي او لماذا لم أحلق ذقني… او شيء من هذا القبيل… لكن شيئاً من هذا لم يحدث, فلقد استقبلني و أجلسني بجانبه و كأنني أعرفه منذ مدة ليست بالقصيرة… كنت أتتوقع أن أجواء من السكون و السكوت ستخيّم علينا, إلا أنه بادرني بأمطار من الأسئلة عن المنتدى و عن نشأته… أخذ يسألني عن كل صغيرة و كبيرة مما أثار حماسي المُطلق. أخذت أسرد له قصة هذه السفينة, و لقد تعجبتُ حينما أخبرني بأنه قد زار المنتدى في السابق (منذ سنتين تقريباً) بهدف التعاون مع المنتدى لحجز (بانر) دعائي للشركة التي كان يعمل فيها وقتئذٍ …Unilever.\n\nثم بادرني بالأسئلة الشخصية… و مع تبادلنا لبعض المعلومات إكتشفتُ أن هذا الرجل حريص على التوظيف و محاربة البطالة… فتجده يتنقل من منتدى لآخر يعرض فيه وظائف في الجهة التي يعمل بها, وهذا على حد علمي, عملٌ لا يقوم به إلا رئيس متواضع للناس ولا يتغير بتغيّر منصبه…\n\nhttp://j.loading.googlepages.com/KFUPMcareerday.JPG\n\nنرحب جميعاً بالأستاذ /طارق الكاهلي - رئيس قسم التوظيف في بنك ساب. و يطيب لنا أن نعرض لكم الأسئلة التي عُرضت عليه و تفضّل بإجابتها…\n\n1) عرفنا بنفسك… إسمك… سنة التحاقك بالجامعة… التخصص… سنة التخرج…الخبرة الوظيفية\n\nطارق حسين الكاهلي، دفعة 97. تخرجت من الجامعة في عام 2002 من قسم هندسة نظم. عملت في الوظائف التالية:\n\n2001 تدريب تعاوني - شركة يونيليفر\n2002 مدير تحت التدريب – يونيليفر\n2004 مدير التوظيف – يونيليفر\n2005 مدير توظيف الخريجين - الشرق الأوسط - يونيليفر\n2006 و حتى تاريخه، رئيس إدارة التوظيف – بنك ســـاب\n\n2) نبذة عن موقعك الوظيفي في البنك, و عن الأعمال التي تقوم بها في هذا القسم؟\n\nأقوم بقيادة فريق عمل يعنى بالآتي:\n\n- تسويق البنك عبر مختلف الجامعات و المعاهد و القنوات المناسبة لإستقطاب الكفاءات الشابة للبنك\n- إدارة مركز قياس و تقويم لتقييم قدرات المتقدمين و أيضا لتقييم موظفي البنك لأسباب تطويرية\n- استقطاب متقدمين ذوو خبرات\n- استكمال الإجراءات الإدارية للمنضمين الجدد للبنك لجعل انضمامهم للبنك يتم بكل يسر و سهولة\n- تطوير قدرات البنك في التوظيف من حيث تطوير الكفاءات الشابة في الإدارة، وتطوير الإجراءات و أنظمة المعلومات التي تساند الفريق في أداء عمله.\n\nhttp://j.loading.googlepages.com/1-t.JPG\n\n3) حدثنا عن مرحلتك التعليمية من الابتدائية و حتى المرحلة الثانوية؟\n\nابتسمت عند هذا السؤال… الحقيقة رحلة الدراسة كانت غريبة نوع ما. فقد درست أغلب الإبتدائية في مدارس الأندلس لكن انقطعت لسنة و نصف لمرافقة والدتي {أطال الله في عمرها} في بريطانيا حيث كانت تدرس. ثم عدت للمملكة و أكملت دراستي حتى الأول ثانوي، عندها درست منهج الثانوية البريطانية في نفس عام الأول ثانوي. و كنت أدرس بالنهار في مدارس الثغر و بالليل أدرس منهج الثانوية البريطانية، والتي أهلتني لدخول الجامعه فور انتهائي من تلك السنة.\n\n4) لماذا إخترت جامعة الملك فهد؟ و هل لالتحاقك بالجامعة قصة؟\n\nأخي كان التحق بها قبلي و كان يشيد بالجامعه كثيرا. لم يكن هناك قصة أذكرها، لكني لا أنسى من ذلك دموع والدي عندما اتصلت الجامعة لإخباري بالقبول.\n\n5) السنة التحضيرية “الأوريا” لها ذكرياتها في ذهن كل طالب جامعي… فما هي ذكريات الأستاذ طارق الكاهلي مع عالم الأوريا (بقليل من التفاصيل)؟\n\nأخبروني أن علي ان أراجع مبنى 17 لأخذ البطاقة و انهاء بعض الإجراءات. كانت نقطة الإنطلاق لاين 647 حيث سكنت في أول اسبوع مع أخي. بالطبع دخلت أول مبنى صادفني، باحثا عن رقم المبنى من الداخل حيث لم أجد أرقام على واجهة المبنى، هذا كان في سبيل أن أستدل من رقم المبنى على مبنى 17. بعد ان دخلت المبنى وجدته مظلما من الداخل و به سراديب مظلمة و خرج لي شخص بسروال سنة من غرفته ليخبرني بمتعة، انني كنت في العماير البنية و ليس الجبل.\n\nhttp://j.loading.googlepages.com/2-t.JPG\n\n6) موقف لازلت تذكره في السنة التحضيرية؟\n\nأخبرني في أول أسبوع لي بالجامعة، عميد الأوريا آنذاك د.فهد السعيـد، انني سأفصل من الجامعة إن رسبت في الـ Math لأنها كانت مع الرياضة و الـ shop المواد الوحيدة في جدولي. اجتهدت خوفا من الفصل و حصلت على مرتبة شرف أولى.\n\n7) ما سبب إختيارك لتخصصك؟ و هل كنت تواجه صعوبات في إتخاذ القرار؟\n\nأعجبني قدرة مهندسي النظم في زيادة الإنتاجية عن طريق حسابات هندسية وإدارية و هذا الذي جذبني.لم تكن كل القرارات سهلة طبعا، هناك قرارات صعبة اتخذتها.\n\n8)هل لك تجارب في عالم النشاط الطلابي؟ و ما مدى تأثيرها الإيجابي عليك كطالب في الجامعة؟\n\nنعم كنت عضو في نادي العلاقات العامة. كان لها فضل كبير بعد الله في تطوير قدراتي الشخصية، بالإضافة لتكوين مجموعة متميزة من الأصدقاء، أعتز بهم إلى هذا اليوم.\n\n9) أسماء دكاترة و أساتذة تدين لهم الكثير, لا زالت عالقة في ذهنك؟\n\nد. فؤاد السني، د.عبدالباسط أنديجاني، و د.عمر التركي. كما أدين كثيرا لأساتذتي في الحياة الذان علماني خير دروس ما زالت ترشدني إلى اليوم، والدي حسين الكاهلي ووالدتي د. أسماء باهرمز، أسأل الله أن يحفظهما و يطيل في أعمارهم.\n\n10) ما هي أبرز هوايات طارق الكاهلي؟\n\nالسفر، القراءة، العلاقات الإجتماعية و ركوب الخيل متى ما أمكن.\n\n11) هل تفكر في إكمال دراستك العليا قريباً؟\n\nلا.\n\n12) هل تنصح الخريج أن يتوظف أولاً… أم يكمل برنامج الماجستير؟\n\nالجامعات المرموقة التي تقدم برامج MBA أغلبها تطلب خبرة سابقة قبل الإلتحاق ببرنامج ماجستير، وأنا أتفق معها في الرأي.\n\n13) لماذا يركز القطاع البنكي في توظيف الخريجين تحت برنامج (Corporate Finance), مالمميز في هذا المجال الذي يجعل أغلب البنوك توظف فيه؟\n\nيكون لدى خريجين ال Finance خلفية جيدة في عمليات البنك المختلفة والأسس التي تعمل بها. لكن يجب التنويه أن الإدارة البنكية ليست علم نووي و يمكن لخريج أي تخصص أن يتقنه.\n\n14) ما هو موقفكم من سياسة “الحشو التوظيفي”… مثلاً أن يأتي خريج في الهندسة الصناعية و يتم توظيفه في قسم الإدارة المالية؟\n\nالرئيس التنفيذي لأحد البنوك العالمية في المملكة خريج كلية جوية، وهناك أمثلة كثيرة. كما قلت سابقا، ليس هناك علم نووي في الموضوع، و من لديه رغبة في مجال، سيتعلمه.\n\nhttp://j.loading.googlepages.com/3-t.JPG\n\n15) يقال أن الخريج حينما يختار إكمال دراسته العليا, فإنه يواجه صعوبة في الحصول على وظيفة نظراً لانعدام الخبرة التي تتطلبها الجهات التوظيفية… هل هذه المقولة صحيحة؟ و ماهي الطريقة السليمة للتوفيق بين إكمال الدراسة و الحصول على وظيفة؟\n\nللعمر دور، حيث أن الخريج يسهل عليه الإلتحاق بوظائف كثيرة عندما يكون في حدود ال25 عاما فأقل، أما بعد ذلك، فيجب أن يكون لديه خبرة تشفع له، إذا ما أراد الحصول على وظيفة مرموقة. الإنطلاق في الدراسات العليا يجب ان يكون مدروسا ومخططا، ويؤسفني بعض الأمثلة من الشباب الذين –يمطون- في دراساتهم العليا فيأخذ double major ثم ماجستير أو ربما اثنين. كثيرا يكون هذا في سبيل البقاء في الخارج أطول فترة ممكنه، ثم يستيقظون في عمر ال 26 إلى 30 و هم لا يملكون أي خبرة و يبحثون عن فرص.\n\n16) بحكم خبرتك في مجال التوظيف, ما الذي يميز خريج جامعة البترول في نظرك عن أقرانه من خريجي الجامعات الأخرى؟\n\nشهادتي في خريجي جامعة البترول مجروحة، و لكني أظن انه لو لم تكن هناك جامعه أخرى في المملكة غيرها لكفت.\n\n17) ما هي النقاط التي تتمنى لو كانت موجودة بقوة و بكثافة في خريج جامعة البترول, او بمعنى آخر… تتمنى أن تتوفر في خريج البترول؟\n\nربما ينقص الجامعة ما يسمى بـ diversity و هو التنوع الثقافي من حيث جنسيات الطلاب. فلو كان موجودا لطور في الطلاب مهارات التعامل مع الثقافات الأخرى و هذا مطلوب في العالم اليوم و يمكن الحصول عليه عن طريق العمل مع أجانب في شركات معينة.\n\n18) لقد عملت في شركة كبرى قبل التحاقك بـ ساب. أنا أجزم بأنك صادفت مجموعة ليست قليلة في كلا الجهتين, من خريجي الجامعة… هل نستطيع أن نقول بأن خريجي جامعة البترول هم العامل البشري المؤثر و الأساسي في كلا القطاعين؟\n\nنعم، لهم نصيب الأسد من الوظائف القيادية.\n\n19) أين ترى نفسك كخريج من جامعة الفهد, بعد عشرة سنوات؟\n\nأن أكون قادرا على خدمة الجامعه بشكل خاص، وخدمة المجتمع بشكل عام و ذلك حسب اختصاصي عن طريق المساهمة في تطوير أبناء المملكة مما يكون له مردود إيجابي على الإقتصاد، فشبابنا هم النفط الذي لا ينضب بإذن الله.\n\n20) ماذا تنصح إخوانك الطلاب و المقبلين على التخرج قريباً؟\n\nالطريق شيق و ممتع أمامكم، و هناك الكثير مما يمكن أن تضيفوه حيث أنكم النخبه و الجميع ينتظر منكم الكثير أيضا، فالهمة الهمة.\n\n21) هل صحيح أن المعدل هو المقياس الحقيقي للتوظيف بشكل عام؟\n\nلا\n\n22) قمتَ بإلقاء محاضرات تعريفية أكثر من مرة في قاعات الجامعة, مالإنطباع الذي ترسخ لديك من طلاب الجامعة مقارنة بالوقت الذي كنت فيه طالباً مثلهم؟\n\nلا أتذكر جيدا لأنني في وقت دراستي لم أكن أقيم الآخرين. لكنني أفرح كثيرا عندما أقابل نخبة من الطلاب أرى فيهم عوامل النجاح و أنا متأكد أنهم سيكونون في مواقع مرموقة بإذن الله بعد عدد من السنين.\n\n23) ما فائدة اللقاءات مع الطلاب في نظرك؟ و مالنتيجة المرجوة من طرفكم كإدارة توظيف؟\n\nالتسويق لإسم البنك و من ثم اختيارها الطلاب للتوظيف عند تخرجهم.\n\n24) ما هو رأيك في منتدى طلاب جامعة الملك فهد للبترول و المعادن sKFUPM ؟\n\nمنتدى رائع و أتوقع للموقع مستقبل باهر، بالذات إذا تم تفعيله مع الأندية الطلابية و نادي الخريجيين. إلى الآن لا نملك وسيلة فعالة للتواصل بين الخريجين و قد يكون مثل هذا المنتدى وسيلة فعالة.\n\n25) يتميز منتدانا بمتابعة حثيثة من قبل مسؤلي الجامعة و على رأسهم معالي الدكتور خالد السلطان… هل سبق و فكرتم في التواصل مع خريجي الجامعة عن طريق المنتدى؟\n\nنعم لدينا خطط لهذا و لكن لا أستطيع الإفصاح عنها الآن.\n\n26) رسالة تود أن يقرأها أعضاء منتدى sKFUPM ؟\n\nأتمنى أن يكون هذا اللقاء ذو فائدة و أتمنى أن يثمر المنتدى في الحفاظ على التواصل بين أبناء الجامعة خلال دراستهم و بعد تخرجهم.\n\nhttp://j.loading.googlepages.com/4-t.JPG\n\nشكراً جزيلاً للأستاذ طارق الكاهلي على وقته الثمين, وعلى تجاوبه مع المنتدى… وإلى أن نلتقي معكم في لقاء آخر مع شخصية قيادية أخرى تخرجت من هذه الجامعة, لكم مني أجمل و أزكى تحية 🙂\n\nابو سمر … sKFUPM … الرياض\n\n@46@",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/56618/1",
+          "user": "user3",
+          "ts": 1180638342000,
+          "tid": 56618,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1471380-fin398",
+      "uid": "stk-practice",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1492321172000,
+      "st": "pub",
+      "data": {
+        "desc": "نوع التدريب: ( COOP )\nاسم الشركة أو جهة التدريب: SAMREF\nالسنة: 153 - 161\nالتخصص + الجامعة: Finance - KFUPM\nمكان التدريب + القسم: Finance & Accounting - Yanbu\nالمكافأة: 3500\nطريقة التقديم: موقع الشركة\n\n1- مافي خطة واضحة للتدريب - ممنوع تستخدم sap او يكون لك يوزر (قالوها بالاسبوع التعريفي انتو هنا ما تشتغلو تتعلمو وبس)\n2- راح تضيع وقت هائل لو قررت تداوم\n3- المشرف يقولك اقعد مع الموظف وتعلم منه بس كذا - ممنوع تسوي اي شي له علاقة بشغلهم\n4- عن نفسي، شغلهم ما ناسبني لانه كله accounting وما داومت غير اربعة شهور متقطعة\n5- كان ليا اصحاب هندسة يطبقو جوا بالمصفاة - كلهم اتفقو انه عبارة عن تضييع وقت\n6- اذا تخصصك اداري - شركات البترول وخاصة للكواب راح تكون تضييع كبير لوقتك\n7- الشركة ما تعطي سكن ولا بدل سكن للكواب - انا اعطوني لانهم يدرون اني من جدة وقالولي بايميل الموافقة بنعطيك سكن اما باقي الطلاب ما اعطوهم\n8- بيئة الشركة بمبنى الادارة نايمة اذا يفرق معاك الشي هذا\n9- الشركة تحب طلاب البترول\n10- محد بيحاسبك لو ما داومت الا لو طبيت بمشرف شديد\n\nموفقين",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/170460/61",
+          "user": "Practice",
+          "ts": 1492321172000,
+          "tid": 170460,
+          "pn": 61
+        }
+      }
+    },
+    {
+      "id": "stk-p517754-fin398",
+      "uid": "stk-sub_zero",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1262783753000,
+      "st": "pub",
+      "data": {
+        "desc": "هلا شباب. كيفكم. جاني هذا الايميل من فترة الظاهر في ديسمبر بس ما فتحت الايميل هذا لاني ما انتبهت له. الرجاء من الاخوة اللي يعرف وش الموضوع يخبرني (يرحم والديكم)\n\nSubject: 073-081 Coop Students with\n\nExtended IC due 091\n\nThe following Coop students for 073-081 with extended IC due 091\n\nmust complete, defend and submit their Coop Reports before or on\n\nJANUARY 27, 2010. Otherwise, the IC will automatically turn to “F”.\n\nLate Submission will not be accepted after this date.\n\nDr. Yakubu A. Umar\n\nCoop Coordinator\n\nDepartment of Finance & Economics, CIM",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/81851/1",
+          "user": "sub_zero",
+          "ts": 1262783753000,
+          "tid": 81851,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1441595-fin398",
+      "uid": "stk-fin_entreprenur",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1454923016000,
+      "st": "pub",
+      "data": {
+        "desc": "A vacancy is currently open for an ambitious and willing-to-learn fresh graduate (MIS, Finance) to work in Risk Management Dept. in a leading Finance Company in Riyadh.\nSuitable candidate should have strong statistical skills and excellent in using MO applications. Risk Management courses or coop training is a plus. Minimum GPA is 3 out of 4.\nA competitive package will be granted to suitable candidate.\nForward your updated CV to qahtani84@gmail.com\n\nأتمنى من الاخوة المشرفين عدم حذف الموضوع بسبب الايميل الشخصي وذلك أن الايميل الرسمي لا يسمح باستقبال البريد الالكتروني من خارج الشبكة، والله من وراء القصد.",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/vacancy-for-an-mis-finance-graduate-in-risk-management-field/172172/1",
+          "user": "FIN_Entreprenur",
+          "ts": 1454923016000,
+          "tid": 172172,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1441863-fin398",
+      "uid": "stk-user8581",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1455239945000,
+      "st": "pub",
+      "data": {
+        "desc": "برنامج إعداد للتدريب المهني ( بقية المعلومات في الرد القادم )\n\n[table=“class: x_msonormaltable”]\n\n[td=“colspan: 2”]التعريف بالبرنامج\n\n[td=“colspan: 2”]Program Overview\n\n[td=“colspan: 2”]برنامج إعداد أحد أحدث برامج المجلس التنفيذي لشباب الأعمال في غرفة الشرقية. تم تصميمه ليخدم الشباب حديثي التخرج أو من هم في صدد التخرج (الفترة التطبيقية) ممن لديهم أفكار مشاريع ومندفعون للعمل الحر مباشرة لتطبيق أفكارهم على أرض الواقع. حسب الإحصائيات، أن غالبية من هم في مثل هذه الظروف يضطرون مع الأسف لإغلاق مشاريعهم في السنة الأولى من الممارسة وذلك لضعف الخبرة و المهارات الإدارية لديهم رغم أفكار مشاريعهم العبقرية. برنامج إعداد يقدم لهؤلاء الشباب الواعد فرصة لتفادي تلك الخسائر عن طريق استغلال الأشهر الأولى بعد التخرج أو الفترة التطبيقية في الجامعة بطريقة يمكن من خلالها إعدادهم لتحقيق طموحاتهم.\n\n[td=“colspan: 2”]E’dad is an exclusive COOP program with limited seating. In association with the KFUPM Entrepreneurship Institute, it is one of the newly introduced programs of the Executive Council of Young Businessmen in the Eastern Province as part of the strategy and support of the Asharqiya Chamber of Commerce. It is designed specifically for senior undergraduates OR fresh graduates who have great ideas and are thinking of starting their own businesses as soon as possible. Statistically, such businessmen, though sometimes having brilliant ideas, are likely to close down their start-ups in the very first year of opening due to the lack of basic business knowledge and management skills. E’dad offers those potential entrepreneurs a chance to train in the best possible way that suits their ambitions.\n\n[td=“colspan: 2”]تفاصيل البرنامج**:**\n\n[td=“width: 295, colspan: 2”]Program Details\n\n[td=“width: 295, colspan: 2”]سينضم المشاركون في برنامج تدريبي على مدى مدة زمنية أقصاها 28 اسبوعا وسيقدم لهم الميزات التالية:\n\n[td=“width: 295, colspan: 2”]Participants will be enrolled in a 28 weeks training program in which they will be offered the following advantages:\n\n[td=“width: 295, colspan: 2”]دورة تطبيقية في الأقسام المختلفة لأحد الشركات المحلية الرائدة\n\n[td=“width: 295, colspan: 2”]Internship in one of the leading local corporations in which the participant will go through a rotation in the different management departments (HR, Finance, Procurement, Contracts, Legal, Government Relations etc.)\n\n[td=“width: 295, colspan: 2”]فرصة للمشاركة في ورش عمل تدريبية مختلفة خلال فترة التدريب والتي تساعد على إعداد خطة العمل أو دراسة السوق أو غيرها.\n\n[td=“width: 295, colspan: 2”]A chance to enroll in workshops that will help the participant develop and structure his business prospect and skills\n\n[td=“width: 295, colspan: 2”]مساحة مكتبية خاصة أو ما نسميه “مختبر إعداد” داخل الشركة الحاضنة وذلك لبناء مراحل المشروع.\n\n[td=“width: 295, colspan: 2”]An “entrepreneurial lab” or office space to employ for the benefit of his business idea\n\n[td=“width: 295, colspan: 2”]الوقت المناسب لبناء دراسات الجدوى وخطط العمل\n\n[td=“width: 295, colspan: 2”]Comfortable time to utilize in building his feasibility studies and business plans.\n\n[td=“width: 295, colspan: 2”]الاستفادة من جميع خدمات وخبرات غرفة الشرقية ومركز دعم المنشآت الصغيرة والمتوسطة والمجلس التنفيذي لشباب الأعمال.\n\n[td=“width: 295, colspan: 2”]Access to the facilities and expertise of the Chamber of Commerce in general and the YBC in specific along with the Entrepreneurship Institute of KFUPM.\n\n[td=“width: 295, colspan: 2”]مكافئة شهرية 3000 ريال حتى يتسنى للمشارك أن يتفرغ لإعداد مشروعه بالشكل السليم.\n\n[td=“width: 295, colspan: 2”]A monthly support of SR 3,000 per month for the duration of the program.\n\n[td=“width: 295, colspan: 2”]وعلى نهاية البرنامج واعتمادا على مستوى إنجاز المشارك، سيكون له الفرصة لعرض فكرته على الإدارة العليا للشركة الحاضنة. بالنسبة للقائمين على برنامج إعداد، فإن نجاح المستفيد من البرنامج يكمن في تحقيق واحدة من السيناريوهات التالية:\n\n[td=“width: 295, colspan: 2”]At the end of the program and depending on personal achievement, the participant may have the chance to present his well-founded idea to the upper management of the incubating corporation. The key success factor of the program facilitators is achieving one of the following for each participant:\n\n[td=“width: 295, colspan: 2”]أن تحضى فكرة المشارك على اهتمام الإدارة العليا للشركة الحاضنة لتنتهي بها المطاف أن تكون إما فرصة استثمارية لهذه الشركة أو بذرة قسم متخصص جديد.\n\n[td=“width: 295, colspan: 2”]Capturing the interest of the incubating corporation and the possibility of investing in the participant idea via the creation of a subsidiary.\n\n[td=“width: 295, colspan: 2”]أن يحضى المشارك على اهتمام الإدارة العليا للشركة الحاضنة فيتم تقديم عرض وظيفي لتثبيته في رأس العمل كعضو مشارك وفعال في شركة رائدة قائمة.\n\n[td=“width: 295, colspan: 2”]Verification of the intern’s job position in the incubating corporation\n\n[td=“width: 295, colspan: 2”]أن يكون المشارك على استعداد تام وثقة كبيرة للتوجه إلى الجهات الداعمة أو المستثمرة .\n\n[td=“width: 295, colspan: 2”]Exposing the well-prepared participant to different available funding bodies\n\n[td=“width: 295, colspan: 2”]التدريب والاستشارات\n\n[td=“width: 295, colspan: 2”]Training & Advisory Programs\n\n[td=“width: 295, colspan: 2”]من خلال البرنامج، سيتوفر للمشارك الاستفادة من فرص التدريب والاستشارات التالية:\n\n[td=“width: 295, colspan: 2”]During the COOP period, participants will have access to the following training and advisory programs and opportunities:\n\n[td=“width: 295, colspan: 2”]ورش عمل مقدمة من مركز الريادة في الأعمال التابع لجامعة الملك فهد للبترول والمعادن\n\n[td=“width: 295, colspan: 2”]Entrepreneurial Workshops by the KFUPM Institute of Entrepreneurship\n\n[td=“width: 295, colspan: 2”]ورش عمل مقدمة من معهد الزامل للتدريب\n\n[td=“width: 295, colspan: 2”]Workshops by the incubating corporation\n\n[td=“width: 295, colspan: 2”]جميع برامج مجلس شباب الأعمال الخاصة بالتدريب والاستشارات وغيرها.\n\n[td=“width: 295, colspan: 2”]Mentoring Program by YBC in Asharqiya Chamber\n\n[td=“width: 295, colspan: 2”]\n[td=“width: 295, colspan: 2”]",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/161-152-153/170272/56",
+          "user": "user8581",
+          "ts": 1455239945000,
+          "tid": 170272,
+          "pn": 56
+        }
+      }
+    },
+    {
+      "id": "stk-p1475037-fin398",
+      "uid": "stk-user10275",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1497307752000,
+      "st": "pub",
+      "data": {
+        "desc": "Coop Training Program (Saudi National Only)\nCoop Training Program (Saudi National Only):\n\nRiyadh Airports will start our new Coop Training Program. We are looking for student with major:\n\nAviation Management.\nMarketing.\nManagement.\nAccounting.\nEngineering.\nFinance.\nConditions:\n\nTotal internship period: 28 week.\nGPA must be very good and above.\nEnglish must be Excellent.\nhttps://www.linkedin.com/jobs/view/367195824/?alertAction=markasviewed&savedSearchAuthToken=1&AQHzTa2SvGVuWwAAAVyd4amLNMsnPOP7QtjdqSYcS874zMVdbveUQtPBRk3Fmis5LvnC8wjYsLp8Anc0zCr0DA0G3MrbvGbhyJbQ6GgTI_sq4cxFffbyUV3ncBRS15D92pYNeVmE8kzILP5UvLRHOHB46xoRenUza3IKMpGAhhbjgcZQkylWQZsFDT6fe203jSoJyh_UL7AgDOZMR9y4PtE8EHiLC9hLuF9PPlwrRdv0F0CsnE6XfWIIw3ouCQopV3DSjcyJh5JOxO7vOKA0qoVtBnq6ra3Gbnss-xQRBKlAy9Yi_Wn5y08&AaGGDO3OuywpwTuNCdJAhpTL5kT7&savedSearchId=113365575&trk=eml-job-alert-member-details&midToken=AQFAOX5DtDiegA&trkEmail=eml-email_job_alert_single_02-null-4-null-null-7nym8q~j3uk8brm~fi-null-jobs~view&lipi=urn:li:page:email_email_job_alert_single_02;IOo+xprbRICZmE3Oap+ijA==",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/162-163-171/174980/147",
+          "user": "user10275",
+          "ts": 1497307752000,
+          "tid": 174980,
+          "pn": 147
+        }
+      }
+    },
+    {
+      "id": "stk-p1471463-fin398",
+      "uid": "stk-gotham",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1492429106000,
+      "st": "pub",
+      "data": {
+        "desc": "فرص تدريب ( 3 - 7 اشهر ) للطلاب في جدة والدمام في P&G لعدة تخصصات هندسية وإدارية\n\nWe have opportunities in:\n\nProduct Supply, Supply Chain, Sales, Marketing, HR, IT, and Finance & Accounting\n\nQualifications\n\nCurrently studying toward Bachelor or Master program in any of the following majors: Engineering, Marketing/Sales, Finance & Accounting, Supply Chain, and Human Resources.\nEnglish fluency.\nFluent in English.\nMust be Saudi national or holds one of the GCC nationality.\nJob ID\nIME00000293\nLocations\nJeddah, Makkah, Saudi Arabia\nDammam, Ash Sharaqiyah, Saudi Arabia\n\nStudent Program - Saudi Arabia Internship Program - Internship http://jobs.pgcareers.com/job/-/-/936/3147135?utm_source=twitter.com&utm_medium=social_post&utm_campaign=Procter_and_Gamble_social&ss=paid",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/162-163-171/174980/127",
+          "user": "Gotham",
+          "ts": 1492429106000,
+          "tid": 174980,
+          "pn": 127
+        }
+      }
+    },
+    {
+      "id": "stk-p688124-fin398",
+      "uid": "stk-user3306",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1282481238000,
+      "st": "pub",
+      "data": {
+        "desc": "-->\nTo all Coop 093-101 students and faculty members\n\n-->\n\n--> Subject: New Coop Guidelines\n\n-->\n\nDear Students:\n\n--> Kindly take a few moments to read and understand the following changes in the coop --> requirements:\n\nFinal Coop Report Submission dates: -->\n--> The Coop cut-off date for presentations is now 5 weeks --> before end of classes for Semester and --> No excuses will be entertained.\n\n-->\n\nProgress Reports:\nAs of 28 --> th of August (Week #9) you are required to submit a weekly report at the end of each week to your -->\n\nCoop Coordinator. Submission after the deadline will incur an automatic reduction of half a grade. -->\n\n-->\n\nPlease ensure you are aware of all the above changes and have a enjoyable coop assignment.\n\nFor any questions please contact your --> --> coop advisor or --> coop coordinator.\n\n--> Coop projects Report monitor.\n\n-->\n\nDepartment of Finance & Economics, CIM\n\nwhat a hill is that??",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/new-coop-guidelines/93787/1",
+          "user": "user3306",
+          "ts": 1282481238000,
+          "tid": 93787,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p696888-fin398",
+      "uid": "stk-a111",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1283589254000,
+      "st": "pub",
+      "data": {
+        "desc": "ياخي وييكلي ريبورت ميين والناس نايميين 😆\n\nحنا زين نداوم 😃\n\nاصلا مافي شغل 😆\n\nعلى كل حال ( حسب فهمي ) تمت كنسلت هذه الرسالة المشؤومه\n\nوعليه القرارات المتخذه باسم المسمى جون سميث >> الله ^$#^&$&$%&\n\nغير فاعلة <<< قايل بدخل محاماه وش اللي دخلني فايننس 🤓\n\nDate : 31/08/2010\n\nTO : ALL COOP STUDENTS – SEMESTERS 093-101\n\nDEPARTMENT OF FINANCE & ECONOMICS, CIMSubject:CLARIFICATION FOR COOP STUDENTS - SEMESTERS 093-101\n\nKindly note the following:\n\n(1) Ignore the following email address which is no longer in use by the Department of Finance & Economics:\n\nCoop.p.r.093@gmail.Com\n\n(2) Send all your Progress Reports to the following E-Mail address:\n\nCoop.p.r.101@gmail.com\n\nThis is the official email for the progress reports, for the above noted semesters,\n\nof the Finance & Economics Department.\n\n(3) Kindly note the following Deadlines for submission of the Progress Reports.\n\n§ 1st Progress Report (08-weeks) = 27-August-2010\n\n§ 2nd Progress Report (16-weeks) = 22-October-2010\n\n§ 3rd Or Final\n\nProgress Report \\(24\\-weeks\\) \\= 17\\-December\\-2010Kindly ensure that the deadlines for the progress reports are adhered to.\n\nFor any assistance kindly call Mr. Abdulsalam Al-Abdulsalam, the Summer Coop Coordinator for the Department of Finance & Economics, CIM, on Mobile # 0505 929 992 or send E-mail to (salam.alqutub@gmail.com)\n\nThank you,\n\nAbdulsalam Al-Abdulsalam\n\nSummer Coop Coordinator,\n\nDepartment of Finance & Economics, CIM\n\nكملوا وناستكم يا عيال",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/new-coop-guidelines/93787/14",
+          "user": "A111",
+          "ts": 1283589254000,
+          "tid": 93787,
+          "pn": 14
+        }
+      }
+    },
+    {
+      "id": "stk-p1007883-fin398",
+      "uid": "stk-insatiable",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1331729813000,
+      "st": "pub",
+      "data": {
+        "desc": "شكراً يا غالي ،، بس اتمنى لو الأخوان يفيدونا بمعلومات اكثر خصوصاً طلاب الفاينانس اتوقع احد قد اخذ كواب في البنك أو عالأقل يعرف أحد اخذ كواب فيه أو توظف فيه …",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/topic/122850/3",
+          "user": "insatiable",
+          "ts": 1331729813000,
+          "tid": 122850,
+          "pn": 3
+        }
+      }
+    },
+    {
+      "id": "stk-p945028-fin398",
+      "uid": "stk-user2352",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1323501494000,
+      "st": "pub",
+      "data": {
+        "desc": "من واقع خبرتي ،، فرص التدريب التعاوني ،، لتخصص الادارة المالية كثيرة في الرياض علىة سبيل المثال لا للحصر ،،\n\n1- مجموعة سامبا المالية\n2- بنك الرياض\n3- وزارة المالية أو هيئة سوق المال\n4- بنك البلاد ،،\nوفيه بعض الشركات مثل شركة الفيصلية والعقارية ووإلخ ،،",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coop/116168/6",
+          "user": "user2352",
+          "ts": 1323501494000,
+          "tid": 116168,
+          "pn": 6
+        }
+      }
+    },
+    {
+      "id": "stk-p945163-fin398",
+      "uid": "stk-s.a.l.m.a.n",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1323518152000,
+      "st": "pub",
+      "data": {
+        "desc": "اللي اعرفه ان بعض الجامعات الثانية نظام الـ coop يختلف عندهم\n\nفيكون عدد ساعات وغالبا 320 او حولها مع امكانية تنزيل كورس او كورسين في الجامعه\n\nيعني يسوي الكواب + ياخذ كورسين في الجامعه\n\nبينما حنا هنا يكون عندنا لمدة 28 اسبوع",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coop/116168/7",
+          "user": "S.a.l.m.a.n",
+          "ts": 1323518152000,
+          "tid": 116168,
+          "pn": 7
+        }
+      }
+    },
+    {
+      "id": "stk-p945594-fin398",
+      "uid": "stk-f.a.b",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1323556985000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم تقدر تزور يوم المهنة في الجامعة الاسبوع الجاي وتقدم على الشركات\nوهي الي تختارك مو انت الي تختارها فقدم على كل الشركات ولا جاك القبول تخير منهم ابحث في موقع الجامعه عن يوم المهنة موجود لها موقع كامل وفيه يوم مفتوح للطلاب خارج الجامعه\nتحياتي",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coop/116168/8",
+          "user": "F.A.B",
+          "ts": 1323556985000,
+          "tid": 116168,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p177548-fin398",
+      "uid": "stk-safwaneez",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1183064452000,
+      "st": "pub",
+      "data": {
+        "desc": "احد الاخوان تخصصه finance\nخلص 4 سنوات و الـ Coop اخر شي\nقالوا له ما تنزل لك مكافأه\nالمكافأه تنزل للي ماخذ الكوأب و عنده بعد الكوأب فصول دراسيه و مجموعها 4 سنوات و نص = 9 مستويات",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coop/52244/11",
+          "user": "safwaneez",
+          "ts": 1183064452000,
+          "tid": 52244,
+          "pn": 11
+        }
+      }
+    },
+    {
+      "id": "stk-p1272551-fin398",
+      "uid": "stk-hummer_4_ever",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1381068539000,
+      "st": "pub",
+      "data": {
+        "desc": "تجربتي مع GE\nJune - December 2012\nطالب Finance\nمع اجازات الشركة\n+\n12 يوم انا بنفسي شفتها موجودة عندي من الشركة في موقع ال HR\nبس مديري عطاني بس اسبوع\nالبعض كلم مديره مره كويس ممكن يعطيك حتى ل 3 اسابيع في الكوب متفرقة",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coop/150502/8",
+          "user": "hummer_4_ever",
+          "ts": 1381068539000,
+          "tid": 150502,
+          "pn": 8
+        }
+      }
+    },
+    {
+      "id": "stk-p1489764-fin398",
+      "uid": "stk-the_aviator",
+      "code": "FIN 398",
+      "sec": "info",
+      "ts": 1522082904000,
+      "st": "pub",
+      "data": {
+        "desc": "Human Resources Internship - P&G Saudi Arabia\nSaudi Arabia, Makkah, Jeddah\nFinance & Accounting Internship - P&G Saudi Arabia\nSaudi Arabia, Makkah, Jeddah\nMarketing Internship - P&G Saudi Arabia\nSaudi Arabia, Makkah, Jeddah\nInformation Technology (IT) Internship - P&G Saudi Arabia\nSaudi Arabia, Makkah, Jeddah\nSupply Chain Internship - P&G Saudi Arabia\nSaudi Arabia, Jeddah\nManufacturing/Engineering Internship - P&G Saudi Arabia\nMultiple Locations\nSales Internship - P&G Saudi Arabia\nSaudi Arabia, Makkah, Jeddah\n\nPlant Technician Internship Program - Product Supply\nSaudi Arabia, Makkah, Jeddah\n\nSearch our Job Opportunities at Procter and Gamble{%22key%22:%22custom_fields.othercountry%22,%22value%22:%22saudi%20arabia%22},{%22key%22:%22custom_fields.language%22,%22value%22:%22english%22}]",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/172-173-181/177905/66",
+          "user": "THE_AVIATOR",
+          "ts": 1522082904000,
+          "tid": 177905,
+          "pn": 66
+        }
+      }
+    }
+  ]
+}

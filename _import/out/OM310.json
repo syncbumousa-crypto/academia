@@ -1,0 +1,37 @@
+{
+  "code": "OM 310",
+  "users": [
+    {
+      "id": "stk-kfupm_man",
+      "name": "kfupm man",
+      "img": "https://community.stkfupm.com/user_avatar/community.stkfupm.com/kfupm_man/144/874_2.png",
+      "email": "kfupm_man@import.stkfupm.invalid",
+      "user": "kfupm_man"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p509711-om310",
+      "uid": "stk-kfupm_man",
+      "code": "OM 310",
+      "sec": "info",
+      "ts": 1261898861000,
+      "st": "pub",
+      "data": {
+        "desc": "الماده ماهي بالصعوه القويه لكنها دسمه واذا كان مالك فالرياضيات او الاحصاء فلاتأخذها (الا اذا كنت مجبر)\nالدكتور طيب ومتفهم لكن مواعيده فيها مشكله كبيرة\nيعني الكورس اخذته كان الساعه 6 لأن الرجل يعطي للماجستير بعد مايعطي لطلاب البكالريوس\nالمدرس يعطيط افضل درجه بين الاختبار الفاينل والميدتسرم ويعتبر الاثنين بنفس درجه الاعلى\nلكن يبغالك شغل وتركيز\nالكاده فيها برسينتيشن صغير\nبالتوفيق",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/om310/81291/3",
+          "user": "kfupm_man",
+          "ts": 1261898861000,
+          "tid": 81291,
+          "pn": 3
+        }
+      }
+    }
+  ]
+}

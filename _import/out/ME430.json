@@ -1,0 +1,67 @@
+{
+  "code": "ME 430",
+  "users": [
+    {
+      "id": "stk-sajkab",
+      "name": "sajkab",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/s/ed8c4c/144.png",
+      "email": "sajkab@import.stkfupm.invalid",
+      "user": "sajkab"
+    },
+    {
+      "id": "stk-myduty10",
+      "name": "myduty10",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/m/9fc29f/144.png",
+      "email": "myduty10@import.stkfupm.invalid",
+      "user": "myduty10"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1193812-me430",
+      "uid": "stk-sajkab",
+      "code": "ME 430",
+      "sec": "info",
+      "ts": 1362238690000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم أخواني\n\nأنا صار لي شهر أدور على أي ملف لـ ME 430 Air Conditioning لكن للأسف ما حصلت شي 😭 😭 😭\n\nمحتاج للسلوشن مانوال\nطبعا الكتاب heating ventilating and air conditioning analysis and design 6th edition\nالدكتور يركز على أسئلة الهومورك في الكويزات و المياجر فلذلك أحتاج أذاكر منها\n\nأطلب منكم المساعدة أخواني أحس الكورس مقطوع من شجرة 😐",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-430-files/141385/1",
+          "user": "sajkab",
+          "ts": 1362238690000,
+          "tid": 141385,
+          "pn": 1
+        }
+      }
+    },
+    {
+      "id": "stk-p1537335-me430",
+      "uid": "stk-myduty10",
+      "code": "ME 430",
+      "sec": "info",
+      "ts": 1717315830000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم ورحمة الله\nحبيت افيدكم بتجربتي مع المادة\n\nالمادة جدا ممله والدكتور حافظ علي طيب بس صوته نازل ويجيب النوم\nطبعا المادة مالها مصادر خارجية منظمة ومختلفه عن الموجود في النت يعني الي الجامعة تسحب عليه يركزوا عليه الي في اليوتيوب والي جامعه تركز عليه يسحبوا عليه (عادة)\nالميد و الفاينل في سؤال يجي من لسلايدات نسخ لصق والباقي من برا\nالمهم ان مادة هذي بتحس انك ضايع فيها اكثر من المشين\nومع ذلك هي سهله بس مشكلتها مافي مصادر لا اولد لا ركوردنق واليوتيوب ذكرناه فوق\n\nانا عن نفسي دخلتها وطلعت منها ما استفدت شي\n\nلقريدات لسه ما طلعت بس يقولوا الدكتور يدف",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/me-430/152450/4",
+          "user": "myduty10",
+          "ts": 1717315830000,
+          "tid": 152450,
+          "pn": 4
+        }
+      }
+    }
+  ]
+}

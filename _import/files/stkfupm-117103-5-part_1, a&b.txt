@@ -1,0 +1,36 @@
+
+
+
+
+
+
+t = -5:0.001:5;
+ 
+% ( a )
+ 
+x=2*cos(2*pi*(0.25)*t);
+plot(t,x)
+grid
+xlabel('t')
+ylabel('x')
+title('A pure sinusoid')
+ 
+ 
+% ( b )
+ 
+ 
+ 
+y=3*cos(2*pi*(0.25)*t).*cos(2*pi*8*t);
+figure
+plot(t,y)
+grid
+xlabel('t')
+ylabel('y')
+title('A modulated sinusoid')
+ 
+ 
+
+
+
+
+

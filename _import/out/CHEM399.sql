@@ -1,0 +1,6 @@
+-- نقلٌ من مجتمع STKFUPM ⇐ أكاديميا · CHEM 399 · ولَّده _import/stkfupm.py
+-- يُعاد تشغيلُه بلا ضرر: ON CONFLICT يحدّث ولا يكرّر.
+BEGIN;
+INSERT INTO users (id, email, name, img, pw_hash, pw_salt, pw_iter, verified, created, seen) VALUES ('stk-hassanibra11', 'hassanibra11@import.stkfupm.invalid', 'Hassanibra11', 'https://community.stkfupm.com/letter_avatar_proxy/v4/letter/h/c0e974/144.png', '', '', 0, 0, 1794792305, 1794792305) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, img = EXCLUDED.img;
+INSERT INTO posts (id, uid, code, sec, data, ts, updated, st) VALUES ('stk-p1508471-chem399', 'stk-hassanibra11', 'CHEM 399', 'info', '{"desc": "اها هو كذا لكن ماعند الله خير و أبقى …\n\nقدمت بموقع ارامكو انا ع وظيفه تخصص كيمياء لكن تتوقع يكون في رد و اتوظف عندهم ؟\n\nلأن احس كل تركيزهم ع جامعة الملك فهد للبترول و كليات التقنيه\n\nعندك علم اذا احد توظف فيها سواءاً كان تخصص كيمياء او احياء او احد التخصصات العلمية ؟", "type": "", "rel": 0, "lang": "", "book": "", "imp": {"src": "stkfupm", "url": "https://community.stkfupm.com/t/topic/181273/11", "user": "Hassanibra11", "ts": 1554902214000, "tid": 181273, "pn": 11}}', 1554902214000, 1794792305, 'pub') ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, ts = EXCLUDED.ts, updated = EXCLUDED.updated;
+COMMIT;

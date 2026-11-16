@@ -1,0 +1,97 @@
+TITLE "4"
+.MODEL SMALL
+.STACK 032H 
+.DATA
+cr      EQU     0Dh          
+lf      EQU     0Ah           
+BMSK    EQU     0Fh 
+	
+
+exCode  DB      0
+prompt  DB      'Enter A two digit Deciml Number: ', '$'
+hexout  DB      cr, lf,'The Equal Hexadecimal Number is: ', '$'
+  
+.CODE      
+Start:
+        mov     ax, @data     
+        mov     ds, ax        
+        mov     es, ax       
+        lea     dx, prompt  
+        mov     ah, 09h       
+        int     21h          
+
+       
+    
+
+        push    ax           
+        push    cx
+        push    dx
+        xor     bx,bx      
+
+Main_loop:
+	mov     ah, 01h
+        int     21h          
+        cmp     al, cr        
+        je      endMain_loop  
+Top1:
+	push	ax	     
+	mov	ax, bx	      
+        mov     dx, 10	      
+        mul     dx            
+        mov 	bx, ax	      
+        pop	ax	      
+Convert1:
+        and     al,BMSK       
+        mov	ah,0          
+        add     bx, ax        
+        jmp     Main_loop     
+endMain_loop:
+        pop     dx 	      
+        pop     cx
+        pop     ax
+
+ lea     dx, hexout 
+        int     21h           
+
+
+
+
+        push    ax              
+        push    cx
+        push    dx
+
+        mov	cx, 4		
+        ror	bx, 12		
+Hex:
+	mov	dx, bx		
+	and	dl, 0Fh         
+	cmp	dl, 9		
+	jg 	Letter		
+
+	add	dx, 48
+	jmp	Display2
+Letter:
+	add	dx, 55		
+Display2:
+	mov	ah, 02h		
+	int     21h	        
+
+	rol	bx, 4
+	loop	Hex	        
+
+	pop     dx              
+        pop     cx
+        pop     ax
+        
+
+Exit:
+	MOV AH,07
+	INT 21H
+        mov     ah, 04Ch      
+        mov     al, [exCode]  
+        int     21h           
+
+end
+
+
+

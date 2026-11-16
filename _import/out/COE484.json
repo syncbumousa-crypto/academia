@@ -1,0 +1,37 @@
+{
+  "code": "COE 484",
+  "users": [
+    {
+      "id": "stk-computist",
+      "name": "Computist",
+      "img": "https://community.stkfupm.com/letter_avatar_proxy/v4/letter/c/b9e5f3/144.png",
+      "email": "computist@import.stkfupm.invalid",
+      "user": "Computist"
+    }
+  ],
+  "posts": [
+    {
+      "id": "stk-p1435841-coe484",
+      "uid": "stk-computist",
+      "code": "COE 484",
+      "sec": "info",
+      "ts": 1449864514000,
+      "st": "pub",
+      "data": {
+        "desc": "السلام عليكم يا شباب COE\n\nأنا وغيري حابين ناخذ كورس في Robotics لكن نحتاج عدد يقنع القسم بعرض الكورس\n\nهذا سليبس يشرح فكرة المادة\nhttp://faculty.kfupm.edu.sa/COE/mayez/ps-coe484/coe484-082.html\n\nهذا المتريال\nhttp://faculty.kfupm.edu.sa/COE/mayez/ps-coe484/coe484-material.htm\n\nThe course in shot is about three things:\n\nHow to control motion\nHow to recognize\nHow robots cooperate\nاللي عنده رغبة في التسجيل ممكن يتراسل معي عالخاص",
+        "type": "",
+        "rel": 0,
+        "lang": "",
+        "book": "",
+        "imp": {
+          "src": "stkfupm",
+          "url": "https://community.stkfupm.com/t/coe-484-robotics/171187/1",
+          "user": "Computist",
+          "ts": 1449864514000,
+          "tid": 171187,
+          "pn": 1
+        }
+      }
+    }
+  ]
+}

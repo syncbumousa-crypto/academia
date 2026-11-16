@@ -1,0 +1,69 @@
+TITLE"6"
+.MODEL SMALL
+.STACK 100
+.DATA
+        MSG1 DB 'Enter a HEXADECIMAL NUMBER PLEASE: $'
+	MSG2 DB 0DH,0AH,'THE NUMBER IS  NEGATIVE  $'
+	MSG3 DB 0DH,0AH,'THE NUMBER IS POSITIVE    $'
+
+.CODE
+        MAIN PROC
+	mov ax,@data
+	mov ds,ax
+	
+	MOV AH,9 
+	LEA SI,MSG1 
+	MOV DX,si  
+	INT 21H
+	call sign
+		
+	CMP BL,07H
+	ja bn
+	
+	MOV AH,9 
+	LEA SI,MSG3 
+	MOV DX,si 
+	INT 21H
+	jmp X
+	
+	bn:MOV AH,9 
+	LEA SI,MSG2 
+	MOV DX,si 
+	INT 21H
+	 
+	X:mov ah,07
+	int 21h
+	
+
+	MOV AX,4C00H
+	INT 21H
+
+        MAIN ENDP
+
+	sign proc near
+	
+
+	MOV AH,01
+	INT 21H
+	cmp al,39h
+	ja ee
+        sub al,30h
+	jmp e1
+	
+	ee:sub al,37h
+		
+	E1:mov bl,al
+
+	MOV AH,01
+	INT 21H
+	cmp al,39h
+	ja ee2
+        sub al,30h
+	jmp e2
+	
+	ee2:sub al,37h
+
+	e2:ret
+	sign endp
+	
+               end  
