@@ -7410,7 +7410,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (cxRoadSel) return roadOf(nookEntry);
     if (!cardView.open) return null;
     const p = postsOf(cmCode, 'cards').find(x => x.id === cardView.open);
-    return p && Array.isArray(p.data.deck) ? p.data.deck : null;
+    if (!p) return null;
+    /* والبنكُ مفتوحٌ في النشر: التحديدُ في شجرته (‎qb‎) لا في شجرة الملخّص — كما في التحرير (‎pkQbOn‎).
+       وكانت تُقرأ الأخرى فلا يُوجد فيها المجلدُ المحدَّد، فيبقى صفُّه وحدَه ولا يظهر شريطُ التحديد */
+    if (pkBank[p.id] && Array.isArray(p.data.qb)) return p.data.qb;
+    return Array.isArray(p.data.deck) ? p.data.deck : null;
   };
   const cxDeck = () => (cxSelRo ? cxRoDeck() : edPack().deck) || [];
   /* والتبديلُ يقع على الصفّ وحدَه لا بإعادة رسم الشجرة: الشجرةُ فيها حقولٌ مفتوحةٌ

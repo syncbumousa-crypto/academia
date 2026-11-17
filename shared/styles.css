@@ -18690,3 +18690,7 @@ html[data-theme="dark"] .pk--max .post-ytmain > .kt-view:not(.kt-view--tree)::-w
 #cm-body.is-cxfull { border-radius: 18px; }
 /* ومسكةُ التضييق تدخل ‎6px‎ مع الانحناءة فتسكن جوفَ القوس ولا يقصّها الطرف */
 #cm-body.is-cxfull .pk--max .pk-max.pk-max--curve.pk-shrink { top: -6px; inset-inline-end: -10px; }
+/* ===== شريطُ التحديد فوق المساهمة الموسَّعة =====
+   الشاشةُ الكاملة (‎#cm-body.is-cxfull‎) طبقتُها ‎4000‎ والشريطُ ‎44‎ فكان يُرسم خلفها فلا يُرى. فيعلوها،
+   ويتوسّط عرضَ الشاشة كلِّه (لا شريطَ جانبيًّا يُحسب له)، ويرتفع فوق تذييلها فلا يغطّي أدواته */
+body:has(#cm-body.is-cxfull) .cx-selbar { z-index: 4001; left: 0; right: 0; bottom: 92px; }
