@@ -37845,7 +37845,7 @@ void main() {
      ‎(17.08, 8.42)‎، وجوفُ الشاشة بعد سُمك حدّها مركزُه ‎(12, 10.4)‎، فالقياسُ ‎.66‎
      والإزاحةُ ما يُطابق المركزين، ويبقى هامشُ ‎1.54‎ من كلّ جهةٍ بعد سُمك الحبر */
   /* أسماءُ الطرائق بجانب رموزها — مصدرٌ واحدٌ يقرؤه الزرُّ وقائمتُه */
-  const XT_MD = { paper: 'ورقي', digital: 'رقمي', sim: 'رقمي يحاكي الورقي' };
+  const XT_MD = { paper: 'ورقي', digital: 'رقمي', sim: 'ورقي بالمسلخ' };
   const XT_MODE_IC = {
     paper: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="8.6" width="17.2" height="7.6" rx="2"/><path d="M7 8.6V3.6h10v5"/><path d="M7 14.4h10v6.6H7z"/></svg>',
     digital: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="3.6" width="19.2" height="13.6" rx="2.4"/><path d="M8.6 20.6h6.8M12 17.2v3.4"/></svg>',
