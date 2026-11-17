@@ -38406,7 +38406,35 @@ void main() {
      فيتوقّف المشهدُ وصوتُه ولا يبقى يستهلك الجهاز */
   const HALL_FS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
   const HALL_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-  function hallOpen() {
+  /* ===== كرّاسةُ الأسئلة تُرسَل إلى القاعة بياناتٍ لا صفحات (طلبُ صاحب الموقع: الخيار ب) =====
+     القاعةُ ترسم الأوراقَ بنفسها على قماش (‎canvas‎)، فيُرسَل لها لكلّ سؤالٍ نوعُه ونصُّه الخالص (بلا وسوم)
+     وخياراتُه إن كان متعدّدًا، وصورتُه وأقنعتُه إن كان إخفاءً. والجوابُ الصحيح لا يُرسَل: التصحيحُ هنا لا هناك */
+  const hallTx = h => {
+    const d = document.createElement('div'); d.innerHTML = String(h == null ? '' : h);
+    d.querySelectorAll('.xt-cz').forEach(b => { b.textContent = ' ________ '; });
+    d.querySelectorAll('br, p, div, li').forEach(b => b.insertAdjacentText('afterend', '\n'));
+    d.querySelectorAll('img, .xt-io').forEach(b => b.remove());
+    return d.textContent.replace(/[ \t]+/g, ' ').replace(/\s*\n\s*/g, '\n').trim();
+  };
+  function hallExam(seq) {
+    const qs = seq.map((u, i) => {
+      const qa = xtQA(u), o = { n: i + 1, k: u.k, t: hallTx(qa.q) };
+      if (u.k === 'q') o.opts = (qa.opts || []).map(hallTx);
+      if (u.k === 'io') {
+        const n = xtRoTx(xtNodeAt(u.cid)), m = String(xtImgOf(n && n.f)).match(/src="([^"]+)"/i);
+        const num = u.face === 0 ? -1 : xtFaceNum(n, u.face);
+        o.img = m ? assetURL(m[1].replace(/&amp;/g, '&')) : '';
+        o.masks = ((ioParse((n && n.f) || '').shapes) || []).filter(sh => sh.q === false || num === -1 || (+sh.n || 1) === num)
+          .map(sh => ({ l: sh.l, t: sh.t, w: sh.w, h: sh.h, ell: sh.k === 'ell', ask: sh.q !== false, no: +sh.n || 1 }));
+        o.t = 'اكتب ما تحت كلّ مربّعٍ مرقَّم';
+      }
+      return o;
+    });
+    return { code: cmCode || '', when: Date.now(), qs, min: xtClkOn() && xtS.timer === 'total' ? Math.max(1, +xtS.tmin || 25) : 0 };
+  }
+  let hallData = null;
+  function hallOpen(data) {
+    hallData = data || null;
     if (document.getElementById('hall')) return;
     const h = document.createElement('div');
     h.id = 'hall'; h.setAttribute('role', 'dialog'); h.setAttribute('aria-label', 'قاعة الاختبار');
@@ -38420,7 +38448,12 @@ void main() {
       else (h.requestFullscreen || h.webkitRequestFullscreen || (() => {})).call(h);
     });
     document.body.appendChild(h);
-    const f = h.querySelector('iframe'); f.addEventListener('load', () => { try { f.contentWindow.focus(); } catch (e) {} });
+    const f = h.querySelector('iframe');
+    f.addEventListener('load', () => {
+      try { f.contentWindow.focus(); } catch (e) {}
+      /* والقاعةُ على أصل الموقع نفسِه، فالرسالةُ لها وحدها (لا ‎'*'‎) */
+      if (hallData) f.contentWindow.postMessage({ type: 'acad-exam', exam: hallData }, location.origin);
+    });
   }
   function hallClose() {
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
@@ -38434,7 +38467,7 @@ void main() {
     const q = xtBuild();
     if (!q.length) return;
     /* «ورقي بالمسلخ»: التبويبُ كلُّه يصير قاعةَ الاختبار (طلبُ صاحب الموقع). وما يجري في القاعة مرحلةٌ تالية */
-    if (xtS.mode === 'sim') { hallOpen(); return; }
+    if (xtS.mode === 'sim') { hallOpen(hallExam(q)); return; }
     xtRun = { q, i: 0, phase: 'ask', pick: null, judged: null, ok: 0, no: 0, wrong: [],
       t0: Date.now(), ms: 0, ans: [], spent: 0, tick: 0, qms: 0 };
     xtMode = 'run'; xtPreOpen = false; xtSub = '';

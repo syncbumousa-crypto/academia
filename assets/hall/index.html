@@ -2,7 +2,13 @@
 <title>قاعة الاختبار</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=IBM+Plex+Mono:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap">
+<style>
+/* the Arabic face comes from the site's own font files, so the exam papers never depend on a third-party host */
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(../fonts/IBMPlexSansArabic-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(../fonts/IBMPlexSansArabic-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(../fonts/IBMPlexSansArabic-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+</style>
 <style>
 /* Layout: full-bleed 3D canvas; a glass card on entry, then a thin HUD at the screen edges. Single dark look by choice. */
 :root{
@@ -37,6 +43,7 @@ kbd{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.08);bord
 .bar{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100% - 32px);pointer-events:auto}
 .bar button{font:500 14px var(--ui);color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:9px;padding:9px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
 .bar button[aria-pressed="true"]{background:rgba(47,107,208,.85)}
+.bar .pg{font:500 14px var(--ui);color:var(--muted);background:var(--glass);border:1px solid var(--line);border-radius:9px;padding:9px 12px;display:flex;gap:6px;align-items:center}.bar .pg b{color:var(--ink);font-family:var(--mono)}.bar button:disabled{opacity:.4;cursor:default}
 #err{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;direction:rtl;font-size:16px}
 @media (max-width:520px){.bar kbd{display:none}h1{font-size:28px}}
 </style>
@@ -61,6 +68,9 @@ kbd{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.08);bord
   <div class="chip">القسم <b>3</b> · الصف <b>S</b> · المقعد <b>3</b></div>
   <div id="toast" class="toast" hidden></div>
   <div class="bar">
+    <button id="bNext" type="button" hidden aria-label="الصفحة التالية">التالية <kbd>←</kbd></button>
+    <span id="bPage" class="pg" hidden>صفحة <b>1 / 1</b></span>
+    <button id="bPrev" type="button" hidden aria-label="الصفحة السابقة"><kbd>→</kbd> السابقة</button>
     <button id="bPaper" type="button" aria-pressed="false">انظر للورقة <kbd>مسافة</kbd></button>
     <button id="bSpeed" type="button" aria-pressed="false">تسريع ×60 <kbd>T</kbd></button>
     <button id="bMute" type="button" aria-pressed="false">كتم الصوت <kbd>M</kbd></button>
@@ -805,18 +815,25 @@ Promise.all([loadClips('anim/clips.json'), ...Object.entries(CHARS).map(([k, u])
 }
 
 /* ============ desk props ============ */
+let MCQ = [], EXAM_ON = false;   // the exam's multiple-choice questions: {n: number in the booklet, c: how many options}
 const sheetTex = canvasTex(512, 724, (g, w, h) => {
   g.fillStyle = '#fbfbf7'; g.fillRect(0, 0, w, h); g.fillStyle = '#e7eaee'; g.fillRect(0, 0, w, 100);
   g.direction = 'rtl'; g.textAlign = 'right'; g.fillStyle = '#1b2430';
   g.font = '700 34px "IBM Plex Sans Arabic", Tahoma, sans-serif'; g.fillText('ورقة الإجابة', w - 28, 52);
   g.font = '400 20px "IBM Plex Sans Arabic", Tahoma, sans-serif'; g.fillText('رقم المقعد: S-3   ·   القسم 3', w - 28, 84);
   g.strokeStyle = '#9aa6b2'; g.lineWidth = 1.3; g.fillText('الاسم:', w - 28, 140); g.beginPath(); g.moveTo(w - 95, 146); g.lineTo(34, 146); g.stroke();
-  const opts = ['أ', 'ب', 'ج', 'د'];
-  for (let col = 0; col < 2; col++) for (let i = 0; i < 25; i++) {
-    const y = 190 + i * 21, xr = w - 34 - col * 240;
-    g.direction = 'ltr'; g.textAlign = 'right'; g.fillStyle = '#556270'; g.font = '600 13px "IBM Plex Mono", monospace'; g.fillText(String(col * 25 + i + 1).padStart(2, '0'), xr, y + 4);
-    for (let k = 0; k < 4; k++) { const cx = xr - 44 - k * 36; g.beginPath(); g.arc(cx, y, 8, 0, 7); g.stroke(); g.fillStyle = '#9aa6b2'; g.font = '400 10px "IBM Plex Sans Arabic", sans-serif'; g.textAlign = 'center'; g.fillText(opts[k], cx, y + 3); }
+  const opts = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+  if (EXAM_ON && !MCQ.length) {   // an exam without multiple-choice questions: every answer is written in the booklet
+    g.direction = 'rtl'; g.textAlign = 'center'; g.fillStyle = '#7a8694'; g.font = '400 20px "IBM Plex Sans Arabic", sans-serif';
+    g.fillText('لا أسئلةَ اختيارٍ في هذا الاختبار', w / 2, 300); g.fillText('اكتب إجاباتك في ورقة الأسئلة', w / 2, 334);
+    return;
   }
+  const rows = MCQ.length ? MCQ.slice(0, 50) : Array.from({ length: 50 }, (_, i) => ({ n: i + 1, c: 4 }));
+  rows.forEach((row, i) => {
+    const col = (i / 25) | 0, y = 190 + (i % 25) * 21, xr = w - 34 - col * 240;
+    g.direction = 'ltr'; g.textAlign = 'right'; g.fillStyle = '#556270'; g.font = '600 13px "IBM Plex Mono", monospace'; g.fillText(String(row.n).padStart(2, '0'), xr, y + 4);
+    for (let k = 0; k < Math.min(row.c, 5); k++) { const cx = xr - 44 - k * 36; g.beginPath(); g.arc(cx, y, 8, 0, 7); g.stroke(); g.fillStyle = '#9aa6b2'; g.font = '400 10px "IBM Plex Sans Arabic", sans-serif'; g.textAlign = 'center'; g.fillText(opts[k], cx, y + 3); }
+  });
 });
 const stickerTex = canvasTex(256, 64, (g) => { g.fillStyle = '#fff'; g.fillRect(0, 0, 256, 64); g.fillStyle = '#222'; g.font = '700 34px "IBM Plex Mono", monospace'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('S-3', 64, 33); g.fillText('R-3', 192, 33); });
 const eraserTex = [];
@@ -839,7 +856,7 @@ function bodyShade(mat) {
 }
 bodyShade(M.tablet);
 // off-white matte paper: stays below the bloom threshold, so it reads as paper rather than a light
-put(bodyShade(L({ map: sheetTex, color: new THREE.Color(.68, .675, .66) })), new THREE.PlaneGeometry(.21, .297), mtx(PX + .12, TOP + .001, PZ - .34, -Math.PI / 2, 0, .06));
+put(bodyShade(L({ map: sheetTex, color: new THREE.Color(.68, .675, .66) })), new THREE.PlaneGeometry(.21, .297), mtx(PX + .235, TOP + .001, PZ - .36, -Math.PI / 2, 0, .06));
 // the player's pencil: hexagonal lacquered body with print, sharpened wood cone and graphite, crimped ferrule, eraser
 {
   const R = .0037, BODY = .15, pencil = new THREE.Group();
@@ -899,8 +916,8 @@ put(bodyShade(L({ map: sheetTex, color: new THREE.Color(.68, .675, .66) })), new
   // BoxGeometry faces: +x, -x, +y (top), -y, +z (front), -z — the open ends show the white eraser
   const sleeve = new THREE.Mesh(new THREE.BoxGeometry(SL, H_ + .0007, W_ + .0007), [white, white, paperMat(topTex), paperMat(plainTex), paperMat(sideTex), paperMat(sideTex)]);
   sleeve.position.x = -(L_ - SL) / 2 + .0006; sleeve.castShadow = true; eraser.add(sleeve);
-  eraser.position.set(PX + .31, TOP + H_ / 2 + .00035, PZ - .42); eraser.rotation.y = .5; scene.add(eraser);
-  const cs = new THREE.Mesh(new THREE.PlaneGeometry(.06, .035).rotateX(-Math.PI / 2), M.blob); cs.position.set(PX + .31, TOP + .0004, PZ - .42); cs.rotation.y = .5; cs.renderOrder = 2; scene.add(cs);
+  eraser.position.set(PX + .31, TOP + H_ / 2 + .00035, PZ - .14); eraser.rotation.y = .5; scene.add(eraser);   // on the arm of the desk, off the answer sheet's bubbles
+  const cs = new THREE.Mesh(new THREE.PlaneGeometry(.06, .035).rotateX(-Math.PI / 2), M.blob); cs.position.set(PX + .31, TOP + .0004, PZ - .14); cs.rotation.y = .5; cs.renderOrder = 2; scene.add(cs);
   eraserTex.push(topTex, sideTex);
 }
 {
@@ -982,6 +999,144 @@ const smaa = new SMAAPass(innerWidth * dpr, innerHeight * dpr); composer.addPass
 Promise.all([document.fonts.load('600 30px "IBM Plex Sans Arabic"'), document.fonts.load('600 100px "IBM Plex Mono"')])
   .then(() => [screenTex, sheetTex, stickerTex, ...eraserTex].forEach(redraw)).catch(() => {});
 
+/* ============ the question booklet: the user's selected questions, laid out as exam pages ============
+   The site sends {code, qs:[{n, k, t, opts?, img?, masks?}]} by postMessage. Pages are drawn on one canvas
+   (A4 at 1024 px wide); only the open page is ever drawn, so a long exam costs no more memory than a short one.
+   Multiple-choice answers go on the answer sheet (its bubbles are generated from the booklet numbers);
+   every other question gets ruled lines under it on the booklet itself. */
+const PW = 1024, PH = Math.round(1024 * 297 / 210), PM = 78, FONT = '"IBM Plex Sans Arabic", Tahoma, sans-serif';
+const AR_NUM = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+const book = { exam: null, pages: [], i: 0, imgs: {} };
+const measure = document.createElement('canvas').getContext('2d');
+function wrap(text, font, width) {   // right-to-left word wrap; explicit newlines are kept
+  measure.font = font; const out = [];
+  for (const para of String(text || '').split('\n')) {
+    let line = '';
+    for (const w of para.split(/\s+/).filter(Boolean)) {
+      const t = line ? line + ' ' + w : w;
+      if (measure.measureText(t).width > width && line) { out.push(line); line = w; } else line = t;
+    }
+    out.push(line);
+  }
+  return out;
+}
+const QF = '500 27px ' + FONT, OF = '400 25px ' + FONT, LH = 44, BODY_W = PW - 2 * PM - 58;
+function blockOf(q) {   // a question as a list of draw steps, plus its height
+  const steps = [], lines = wrap(q.t, QF, BODY_W);
+  let h = lines.length * LH;
+  steps.push({ kind: 'text', lines, font: QF, dy: 0 });
+  if (q.k === 'q') {
+    (q.opts || []).forEach((o, i) => { const ol = wrap(o, OF, BODY_W - 56); steps.push({ kind: 'opt', label: AR_NUM[i] || String(i + 1), lines: ol, dy: h + 6 }); h += ol.length * 40 + 6; });
+    steps.push({ kind: 'note', text: 'ظلِّل إجابتك في ورقة الإجابة', dy: h + 8 }); h += 40;
+  } else if (q.k === 'io') {
+    steps.push({ kind: 'img', q, dy: h + 10, hgt: 330 }); h += 350;
+    const asks = (q.masks || []).filter(m => m.ask).length || 1;
+    for (let i = 0; i < asks; i++) { steps.push({ kind: 'rule', label: (i + 1) + ')', dy: h + 12 }); h += 52; }
+  } else {
+    const n = q.k === 'cloze' ? 2 : 3;
+    for (let i = 0; i < n; i++) { steps.push({ kind: 'rule', dy: h + 12 }); h += 52; }
+  }
+  return { q, steps, h: h + 34 };
+}
+function paginate(exam) {
+  const top0 = PM + 120, bottom = PH - PM - 40, pages = [[]];
+  let y = top0;
+  for (const q of exam.qs) {
+    const b = blockOf(q);
+    if (y + b.h > bottom && pages[pages.length - 1].length) { pages.push([]); y = top0; }
+    pages[pages.length - 1].push({ b, y }); y += b.h;
+  }
+  return pages;
+}
+function imgOf(url) {
+  if (!url) return null;
+  if (!book.imgs[url]) { const im = new Image(); im.onload = () => { if (book.exam) redraw(pageTex); }; im.src = url; book.imgs[url] = im; }
+  const im = book.imgs[url]; return im.complete && im.naturalWidth ? im : null;
+}
+function drawPage(g, w, h) {
+  g.fillStyle = '#fbfaf6'; g.fillRect(0, 0, w, h);
+  const ex = book.exam, page = book.pages[book.i] || [], N = book.pages.length || 1;
+  g.direction = 'rtl'; g.textAlign = 'right'; g.textBaseline = 'alphabetic';
+  // header: title on the right, course code on the left, then a rule
+  g.fillStyle = '#1b2430'; g.font = '700 36px ' + FONT; g.fillText('ورقة الأسئلة', w - PM, PM + 40);
+  g.font = '400 22px ' + FONT; g.fillStyle = '#556270'; g.fillText(ex ? 'أجب عن جميع الأسئلة · عددها ' + ex.qs.length : 'بانتظار الأسئلة…', w - PM, PM + 76);
+  if (ex && ex.code) { g.textAlign = 'left'; g.direction = 'ltr'; g.font = '600 26px "IBM Plex Mono", monospace'; g.fillStyle = '#1b2430'; g.fillText(ex.code, PM, PM + 40); g.textAlign = 'right'; g.direction = 'rtl'; }
+  g.strokeStyle = '#1b2430'; g.lineWidth = 2; g.beginPath(); g.moveTo(PM, PM + 96); g.lineTo(w - PM, PM + 96); g.stroke();
+  const R = w - PM, TX = R - 58;
+  for (const { b, y } of page) {
+    // question number in a small box
+    g.strokeStyle = '#1b2430'; g.lineWidth = 2; g.strokeRect(R - 44, y + 8, 44, 40);
+    g.fillStyle = '#1b2430'; g.font = '700 24px "IBM Plex Mono", monospace'; g.textAlign = 'center'; g.direction = 'ltr'; g.fillText(String(b.q.n), R - 22, y + 37);
+    g.textAlign = 'right'; g.direction = 'rtl';
+    for (const st of b.steps) {
+      const y0 = y + st.dy;
+      if (st.kind === 'text') { g.font = st.font; g.fillStyle = '#121a24'; st.lines.forEach((l, i) => g.fillText(l, TX, y0 + 34 + i * LH)); }
+      else if (st.kind === 'opt') { g.font = OF; g.fillStyle = '#26303c'; g.fillText(st.label + ')', TX - 4, y0 + 30); st.lines.forEach((l, i) => g.fillText(l, TX - 56, y0 + 30 + i * 40)); }
+      else if (st.kind === 'note') { g.font = '400 19px ' + FONT; g.fillStyle = '#7a8694'; g.fillText(st.text, TX, y0 + 24); }
+      else if (st.kind === 'rule') {
+        if (st.label) { g.font = OF; g.fillStyle = '#26303c'; g.fillText(st.label, TX, y0 + 30); }
+        g.strokeStyle = '#9aa6b2'; g.lineWidth = 1.4; g.setLineDash([3, 6]); g.beginPath(); g.moveTo(PM + 10, y0 + 36); g.lineTo(TX - (st.label ? 40 : 0), y0 + 36); g.stroke(); g.setLineDash([]);
+      } else if (st.kind === 'img') {
+        const im = imgOf(st.q.img), bw = TX - PM, bh = st.hgt;
+        g.strokeStyle = '#c9d0d6'; g.lineWidth = 1.5; g.strokeRect(PM, y0, bw, bh);
+        if (im) {
+          const k = Math.min(bw / im.naturalWidth, bh / im.naturalHeight), iw = im.naturalWidth * k, ih = im.naturalHeight * k, ix = PM + (bw - iw) / 2, iy = y0 + (bh - ih) / 2;
+          g.drawImage(im, ix, iy, iw, ih);
+          let a = 0;
+          for (const m of st.q.masks || []) {
+            const mx = ix + m.l * iw, my = iy + m.t * ih, mw = m.w * iw, mh = m.h * ih;
+            g.fillStyle = m.ask ? '#e9c46a' : '#8d99a6';
+            if (m.ell) { g.beginPath(); g.ellipse(mx + mw / 2, my + mh / 2, mw / 2, mh / 2, 0, 0, 7); g.fill(); } else g.fillRect(mx, my, mw, mh);
+            if (m.ask) { a++; g.fillStyle = '#1b2430'; g.font = '700 22px "IBM Plex Mono", monospace'; g.textAlign = 'center'; g.direction = 'ltr'; g.fillText(String(a), mx + mw / 2, my + mh / 2 + 8); g.textAlign = 'right'; g.direction = 'rtl'; }
+          }
+        } else { g.font = '400 20px ' + FONT; g.fillStyle = '#9aa6b2'; g.fillText('الصورة غير متاحة', TX - 20, y0 + bh / 2); }
+      }
+    }
+  }
+  // footer: page n of N
+  g.textAlign = 'center'; g.font = '400 20px ' + FONT; g.fillStyle = '#7a8694'; g.fillText('صفحة ' + (book.i + 1) + ' من ' + N, w / 2, h - PM + 10);
+}
+const pageTex = canvasTex(PW, PH, drawPage);
+pageTex.anisotropy = 8;
+// the booklet: the open page on top of a thin block of the remaining pages, in the middle of the desk
+const bookletG = new THREE.Group();
+bookletG.position.set(PX + .045, TOP, PZ - .35); bookletG.rotation.y = -.04; scene.add(bookletG);
+const bookTop = new THREE.Mesh(new THREE.PlaneGeometry(.21, .297).rotateX(-Math.PI / 2), bodyShade(L({ map: pageTex, color: new THREE.Color(.7, .695, .68) })));
+const bookBlock = new THREE.Mesh(new THREE.BoxGeometry(.21, 1, .297), bodyShade(L({ color: new THREE.Color(.62, .615, .6) })));
+bookTop.receiveShadow = bookBlock.receiveShadow = true; bookBlock.castShadow = true;
+bookletG.add(bookBlock, bookTop);
+function bookFit() {
+  const N = Math.max(1, book.pages.length), th = .0009 + (N - book.i) * .00012;   // pages already turned lie on the left pile
+  bookBlock.scale.y = th; bookBlock.position.y = th / 2; bookTop.position.y = th + .0004;
+  renderer.shadowMap.needsUpdate = true;
+}
+bookFit();
+function bookGo(d) {
+  if (!book.exam) return;
+  const j = Math.max(0, Math.min(book.pages.length - 1, book.i + d));
+  if (j === book.i) return;
+  book.i = j; redraw(pageTex); bookFit(); bookHud();
+  if (actx) sfx.paper(V(PX + .02, .8, PZ - .3));
+}
+function bookHud() {
+  const el = document.getElementById('bPage'); if (!el) return;
+  el.hidden = $('bNext').hidden = $('bPrev').hidden = !book.exam;
+  $('bNext').disabled = book.i >= book.pages.length - 1; $('bPrev').disabled = book.i <= 0;
+  el.querySelector('b').textContent = (book.i + 1) + ' / ' + (book.pages.length || 1);
+}
+function examLoad(exam) {
+  book.exam = exam; book.pages = paginate(exam); book.i = 0;
+  EXAM_ON = true;
+  MCQ = exam.qs.filter(q => q.k === 'q').map(q => ({ n: q.n, c: Math.max(2, (q.opts || []).length) }));
+  if (exam.min) state.exam = exam.min * 60;
+  redraw(pageTex); redraw(sheetTex); redraw(screenTex); bookFit(); bookHud();
+}
+addEventListener('message', e => {
+  if (e.origin !== location.origin || !e.data || e.data.type !== 'acad-exam') return;
+  document.fonts.load('500 27px "IBM Plex Sans Arabic"').catch(() => {}).then(() => examLoad(e.data.exam));
+});
+document.fonts.load('500 27px "IBM Plex Sans Arabic"').then(() => redraw(pageTex)).catch(() => {});
+
 /* ============ audio (synthesized, buffers made once) ============ */
 let actx = null, master, revIn, muted = false; const NB = {};
 function initAudio() {
@@ -1033,11 +1188,14 @@ function setSpeed(fast) { state.speed = fast ? 60 : 1; $('bSpeed').setAttribute(
 function setMute(m) { muted = m; $('bMute').setAttribute('aria-pressed', m); if (master) master.gain.value = m ? 0 : 1; }
 $('go').addEventListener('click', () => { $('intro').hidden = true; $('hud').hidden = false; initAudio(); state.phase = 'pre'; state.t = 0; toast('اجلس. يبدأ الاختبار خلال دقيقة'); });
 $('bPaper').addEventListener('click', () => setPaper(!view.paper));
+$('bNext').addEventListener('click', () => bookGo(1));
+$('bPrev').addEventListener('click', () => bookGo(-1));
 $('bSpeed').addEventListener('click', () => setSpeed(state.speed === 1));
 $('bMute').addEventListener('click', () => setMute(!muted));
 const keys = {};
 addEventListener('keydown', e => {
   keys[e.code] = true; if (!$('intro').hidden) return;
+  if (view.paper && (e.code === 'ArrowLeft' || e.code === 'ArrowRight')) { e.preventDefault(); bookGo(e.code === 'ArrowLeft' ? 1 : -1); return; }
   if (e.code === 'Space') { e.preventDefault(); setPaper(!view.paper); } else if (e.code === 'KeyT') setSpeed(state.speed === 1); else if (e.code === 'KeyM') setMute(!muted);
 });
 addEventListener('keyup', e => keys[e.code] = false);
@@ -1069,10 +1227,14 @@ function tick() {
   if (sec !== lastSec) { lastSec = sec; redraw(screenTex); }
   if (toastT > 0 && (toastT -= dt) <= 0) toastEl.hidden = true;
 
-  if (keys.ArrowLeft) view.yaw += dt * 1.4; if (keys.ArrowRight) view.yaw -= dt * 1.4;
+  if (!view.paper) { if (keys.ArrowLeft) view.yaw += dt * 1.4; if (keys.ArrowRight) view.yaw -= dt * 1.4; }
   if (keys.ArrowUp) view.pitch = Math.min(1.3, view.pitch + dt * 1.2); if (keys.ArrowDown) view.pitch = Math.max(-1.25, view.pitch - dt * 1.2);
   const k = 1 - Math.exp(-(drag ? 40 : 6) * dt);
-  cy += ((view.paper ? 0 : view.yaw) - cy) * k; cp += ((view.paper ? -1.02 : view.pitch) - cp) * k;
+  // looking at the paper aims at the booklet and narrows the lens, so a printed page is readable from the seat
+  const bz = bookletG.position.z;
+  const PAPER_YAW = -Math.atan2(bookletG.position.x - EYE.x, EYE.z - bz), PAPER_PITCH = -Math.atan2(EYE.y - TOP, Math.hypot(bookletG.position.x - EYE.x, EYE.z - bz));
+  cy += ((view.paper ? PAPER_YAW : view.yaw) - cy) * k; cp += ((view.paper ? PAPER_PITCH : view.pitch) - cp) * k;
+  const fov = view.paper ? 31 : 68; if (Math.abs(camera.fov - fov) > .01) { camera.fov += (fov - camera.fov) * k; camera.updateProjectionMatrix(); }
   camera.rotation.set(cp, cy, 0);
   camera.position.copy(EYE);   // fixed head position: looking up or down never moves the desk
 
