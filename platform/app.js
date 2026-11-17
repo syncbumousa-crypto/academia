@@ -38400,12 +38400,41 @@ void main() {
     return '<div class="xt-io">' + (img || '') + masks + '</div>';
   }
 
+  /* ===== قاعةُ الاختبار (ثلاثيّةُ الأبعاد) تملأ التبويب =====
+     صفحةٌ مستقلّةٌ في ‎assets/hall/‎ (مشهدُ three.js بنماذجه وحركاته) تُحمَّل في إطارٍ يغطّي الصفحةَ كلَّها،
+     وفوقه زرّان: ملءُ الشاشة (فيكبر التبويبُ إلى الشاشة كلِّها) والخروجُ من القاعة. والإطارُ يُزال بالخروج
+     فيتوقّف المشهدُ وصوتُه ولا يبقى يستهلك الجهاز */
+  const HALL_FS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  const HALL_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function hallOpen() {
+    if (document.getElementById('hall')) return;
+    const h = document.createElement('div');
+    h.id = 'hall'; h.setAttribute('role', 'dialog'); h.setAttribute('aria-label', 'قاعة الاختبار');
+    h.innerHTML = `<iframe class="hall__f" src="${esc(assetURL('assets/hall/index.html'))}" title="قاعة الاختبار" allow="fullscreen; autoplay"></iframe>`
+      + `<div class="hall__bar"><button type="button" class="hall__b" data-hall="fs" title="ملء الشاشة" aria-label="ملء الشاشة">${HALL_FS}</button>`
+      + `<button type="button" class="hall__b" data-hall="x" title="الخروج من القاعة" aria-label="الخروج من القاعة">${HALL_X}</button></div>`;
+    h.addEventListener('click', e => {
+      const b = e.target.closest('[data-hall]'); if (!b) return;
+      if (b.dataset.hall === 'x') hallClose();
+      else if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      else (h.requestFullscreen || h.webkitRequestFullscreen || (() => {})).call(h);
+    });
+    document.body.appendChild(h);
+    const f = h.querySelector('iframe'); f.addEventListener('load', () => { try { f.contentWindow.focus(); } catch (e) {} });
+  }
+  function hallClose() {
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    const h = document.getElementById('hall'); if (h) h.remove();
+  }
+
   /* ===== الحلقة ===== */
   function xtGo() {
     /* حارسٌ ثانٍ: الزرُّ مطفأٌ بلا طريقة، ولا يُنفَّذ ولو نودِي — و‎Enter‎ ينادِيه */
     if (!XT_MD[xtS.mode]) return;
     const q = xtBuild();
     if (!q.length) return;
+    /* «ورقي بالمسلخ»: التبويبُ كلُّه يصير قاعةَ الاختبار (طلبُ صاحب الموقع). وما يجري في القاعة مرحلةٌ تالية */
+    if (xtS.mode === 'sim') { hallOpen(); return; }
     xtRun = { q, i: 0, phase: 'ask', pick: null, judged: null, ok: 0, no: 0, wrong: [],
       t0: Date.now(), ms: 0, ans: [], spent: 0, tick: 0, qms: 0 };
     xtMode = 'run'; xtPreOpen = false; xtSub = '';

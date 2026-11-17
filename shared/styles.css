@@ -18697,3 +18697,12 @@ body:has(#cm-body.is-cxfull) .cx-selbar { z-index: 4001; left: 0; right: 0; bott
 /* ونوافذُ البطاقة والاختبار والرابط تعلو المساهمةَ الموسَّعة: طبقتُها ‎85‎ وتلك ‎4000‎، فكانت تنفتح خلفها
    (يُضغط «اختبر نفسك» أو «سؤال» فلا يظهر شيء). ودُرجُ الأنواع ابنُ نافذة البطاقة فيعلو معها */
 body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
+/* ===== قاعةُ الاختبار تغطّي التبويبَ كلَّه («ورقي بالمسلخ») ===== */
+#hall { position: fixed; inset: 0; z-index: 2147483000; background: #151b1e; }
+#hall .hall__f { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+#hall .hall__bar { position: absolute; top: 14px; left: 16px; display: flex; gap: 8px; z-index: 1; }
+#hall .hall__b { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; cursor: pointer;
+  color: #eef2f1; background: rgba(18, 25, 28, .82); border: 1px solid rgba(255, 255, 255, .1); transition: background .15s; }
+#hall .hall__b:hover { background: rgba(47, 107, 208, .85); }
+#hall .hall__b[data-hall="x"]:hover { background: rgba(192, 69, 95, .9); }
+#hall .hall__b svg { width: 17px; height: 17px; }
