@@ -18975,3 +18975,5 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine .pc-sale__st { border-co
 #cm-body .pk--pc .pc-name { font-size: 15px; max-width: none; }
 /* ودائرةُ الاكتمال ونصُّها في وسط عمود البيع تحت مستطيله (طلبُ صاحب الموقع) */
 #cm-body .pk--pc .pc-ttl > .pc-prog { width: 190px; justify-content: center; }
+/* والعنوانُ كذلك في وسط عمود البيع فوق مستطيله */
+#cm-body .pk--pc .pc-name { text-align: center; }
