@@ -19051,7 +19051,6 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:focus-visible { transform: translateX(-50%) translateY(-2px); color: #a8842e; background: var(--pc-pg, #fff); }
 #cm-body .pk--pc .pc-fr .pc-fs__go .pc-k__ic { color: inherit; }
 #cm-body .pk--pc .pc-fr .pc-fs__go svg { width: 24px !important; height: 24px !important; }
-#cm-body .pk--pc .pc-fr .pc-fs:has(.pc-fs__go:hover) { box-shadow: inset 0 0 0 1.5px rgba(168, 132, 46, .55); }
 #cm-body .pk--pc .pc-fr:hover .pk-ic { opacity: 1; }
 /* والأيقونةُ يمينًا على خطّ بداية الاسم فوقها، وانقطاعُ الخطّ بقدرها تمامًا (حشوةُ ‎8px‎ كحشوة الاسم) */
 #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go,
@@ -19238,3 +19237,14 @@ html[data-theme="dark"] #cm-body .pk--pcnone .pc-ban .pk-icrow.pc-fr .pc-fs__go:
 html[data-theme="dark"] #cm-body .pk--pcnone .pc-ban .pk-icrow.pc-fr .pc-fs__go { --pc-pg: var(--bg, #0e181c); color: #9fcbd2;
   background: linear-gradient(rgba(127, 179, 187, .16), rgba(127, 179, 187, .16)), var(--pc-pg);
   box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .15), 0 0 0 1px rgba(127, 179, 187, .25), 0 8px 16px -10px rgba(0, 0, 0, .6), 0 0 0 6px var(--pc-pg); }
+
+/* ===== لمسُ زرّ المساحة (اختيارُ صاحب الموقع — ٣): الأيقونةُ وحدها تكبر والزجاجُ يصفو درجة؛
+   الكبسولةُ بحجمها وموضعها، والإطارُ لا يتلوّن، والخطُّ حولها ثابت ===== */
+#cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:hover, :focus-visible) { transform: none !important; color: #2c5e65 !important;
+  background: linear-gradient(rgba(127, 179, 187, .36), rgba(127, 179, 187, .36)), var(--pc-pg, #fff) !important; box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .95), inset -.36px -.72px 0 -.2px rgba(255, 255, 255, .45), inset 3.2px 6.3px 12px -8px rgba(255, 255, 255, .55), inset -3.2px -6.3px 12px -8px rgba(20, 35, 63, .06), 0 0 0 1px rgba(44, 94, 101, .14), 0 8px 16px -10px rgba(44, 94, 101, .4), 0 0 0 6px var(--pc-pg, #fff) !important; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:hover, :focus-visible) { color: #9fcbd2 !important;
+  background: linear-gradient(rgba(127, 179, 187, .28), rgba(127, 179, 187, .28)), var(--pc-pg) !important; box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .15), inset 3.2px 6.3px 12px -8px rgba(255, 255, 255, .06), 0 0 0 1px rgba(127, 179, 187, .25), 0 8px 16px -10px rgba(0, 0, 0, .6), 0 0 0 6px var(--pc-pg) !important; }
+#cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:active { transform: none !important; }
+#cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go svg { transition: transform .26s cubic-bezier(.32, .72, 0, 1); }
+#cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:hover, :focus-visible) svg { transform: scale(1.18); }
+#cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:active svg { transform: scale(1.06); }
