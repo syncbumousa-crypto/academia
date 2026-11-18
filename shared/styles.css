@@ -19582,3 +19582,7 @@ html[data-theme="dark"] .srch-hist__clr { color: #f08080; }
 html[data-theme="dark"] .srch-hist__it:hover, html[data-theme="dark"] .srch-hist__it.on { background: rgba(255, 255, 255, .07); color: #7fb3bb; }
 .srch-hist__ic { display: grid; place-items: center; width: 16px; height: 16px; opacity: .5; flex: none; }
 .srch-hist__ic svg { width: 15px; height: 15px; }
+/* ورحلةُ البنك في التحرير حين تظهر: كانت دائرتُها الأولى تحت فجوة أيقونة المساحة (الزاويةُ المقصوصةُ خلف الأيقونة)
+   فتُقطع — فتنزاح الشجرةُ إلى الداخل بقدر الفجوة كما في النشر، وتعود حين تنسلّ الرحلة (طلبُ صاحب الموقع) */
+.pk--edit .pk-bank .x3 { transition: padding-inline-start .42s cubic-bezier(.4, 0, .2, 1), margin-inline-start .42s cubic-bezier(.4, 0, .2, 1); }
+.pk--edit .pk-bank .x3.jr-peek.jr-peek--sw { margin-inline-start: 26px; }
