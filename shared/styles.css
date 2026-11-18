@@ -19106,3 +19106,39 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 #cm-body .pk--pc .pc-fr .pc-fs--book .pc-k__s, #cm-body .pk--pc .pc-fr .pc-fs--mid .pc-k__s { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
 /* وما في الإطارات أعلى قليلًا (طلبُ صاحب الموقع) */
 #cm-body .pk--pc .pc-fr .pc-fs { padding-top: 11px; padding-bottom: 22px; }
+/* ============================================================
+   مستطيلُ البيع: نصفان — الحالةُ ضبابٌ بترولي، والشراءُ زجاجٌ في طرفه (طلبُ صاحب الموقع — «نصفين»)
+   في الفاتح الشراءُ بتروليٌّ عميق، وفي الغامق ذهبٌ زجاجيّ
+   ============================================================ */
+#cm-body .pk--pc .pc-sale {
+  height: 32px; padding: 0; gap: 0; overflow: hidden; color: #2c5e65;
+  background: rgba(127, 179, 187, .16);
+  box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .95), inset -.36px -.72px 0 -.2px rgba(255, 255, 255, .45),
+    0 0 0 1px rgba(44, 94, 101, .14), 0 8px 16px -12px rgba(44, 94, 101, .35);
+}
+#cm-body .pk--pc .pc-sale--free, #cm-body .pk--pc .pc-sale--own, #cm-body .pk--pc .pc-sale--mine { background: rgba(127, 179, 187, .16); color: #2c5e65; }
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st, #cm-body .pk--pc .pc-sale--mine .pc-sale__st {
+  flex: 1; justify-content: center; padding: 0 8px; border: 0; opacity: 1; color: #2c5e65; font-weight: 600;
+}
+#cm-body .pk--pc .pc-sale--buy.pc-sale--part .pc-sale__st { color: #2c5e65; }
+#cm-body .pk--pc .pc-sale--buy b, #cm-body .pk--pc .pc-sale--mine b {
+  align-self: stretch; display: flex; align-items: center; padding: 0 14px; white-space: nowrap;
+  color: #fff; background: linear-gradient(180deg, rgba(61, 120, 128, .95), rgba(44, 94, 101, .95));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4); transition: filter .15s;
+}
+#cm-body .pk--pc .pc-sale--mine b { color: #2c5e65; background: none; box-shadow: inset 1px 0 0 rgba(44, 94, 101, .15); }
+#cm-body .pk--pc .pc-sale--buy { background: rgba(127, 179, 187, .16); color: #2c5e65; box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .95), 0 0 0 1px rgba(44, 94, 101, .14), 0 8px 16px -12px rgba(44, 94, 101, .35); }
+#cm-body .pk--pc .pc-sale--buy:hover { transform: translateY(-1px); box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .95), 0 0 0 1px rgba(44, 94, 101, .22), 0 12px 20px -12px rgba(44, 94, 101, .45); }
+#cm-body .pk--pc .pc-sale--buy:hover b { filter: brightness(1.08); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale,
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--free, html[data-theme="dark"] #cm-body .pk--pc .pc-sale--own,
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy, html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine {
+  color: #9fcbd2; background: rgba(127, 179, 187, .12); box-shadow: inset .5px 1px 0 -.2px rgba(255, 255, 255, .15), 0 0 0 1px rgba(127, 179, 187, .22);
+}
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy .pc-sale__st, html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine .pc-sale__st { color: #9fcbd2; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy b {
+  color: #f1dca8; background: linear-gradient(180deg, rgba(212, 179, 106, .32), rgba(168, 132, 46, .22));
+  box-shadow: inset .5px 1px 0 -.2px rgba(255, 236, 190, .35), inset 1px 0 0 rgba(212, 179, 106, .35);
+}
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine b { color: #f1dca8; background: none; box-shadow: inset 1px 0 0 rgba(127, 179, 187, .2); }
+#cm-body .pk--pc .pc-sale--own, #cm-body .pk--pc .pc-sale--free { gap: 6px; }
