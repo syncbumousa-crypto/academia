@@ -3,7 +3,7 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-glass="liquid" data-title="المسلخ" data-title-en="Almaslakh">
+<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-title="المسلخ" data-title-en="Almaslakh">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,14 +23,14 @@
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
   <script>
-    window.AC_MINV = 962;
+    window.AC_MINV = 963;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
 
   <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
        — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
-  <link rel="stylesheet" href="../shared/glass.css?v=40">
+  <link rel="stylesheet" href="../shared/glass.css?v=41">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -189,19 +189,6 @@
 </head>
 <body>
 
-<!-- ===== م٣ · انكسارُ الحافّة =====
-     خريطةُ إزاحةٍ تُقرأ قناتاها: الحمراءُ تُزيح أفقيًّا، والخضراءُ رأسيًّا.
-     فجعلتُ الخضراءَ ثابتةً (لا إزاحةَ رأسيّة)، والحمراءَ ١٢٨ في الوسط (أي
-     صفرًا) وتندفع إلى طرفيها — فينحني ما خلفَ الزجاج عند حافّتيه ويستوي
-     في وسطه، كشريحةِ زجاجٍ مشطوفةِ الحرفين. وهي مضمَّنةٌ هنا لا ملفًّا:
-     مرشّحٌ ينتظر طلبَ شبكةٍ يُرى بعد أن تُرسم الصفحة. -->
-<svg width="0" height="0" aria-hidden="true" style="position:absolute">
-  <filter id="lg-edge" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(255,128,0)'/%3E%3Cstop offset='0.16' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='0.84' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,128,0)'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='8' fill='url(%23g)'/%3E%3C/svg%3E" preserveAspectRatio="none" result="map"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="26"
-                       xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
 
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
@@ -799,16 +786,9 @@
         e.stopImmediatePropagation(); e.preventDefault();
         /* الحركةُ للضغطة وحدَها (‎side-anim‎): تُرفع بعد انتهائها فلا تتحرّك الصفحةُ عند فتحها */
         var B = document.body;
-        clearTimeout(B._sd1); clearTimeout(B._sd2); clearTimeout(B._sd3);
-        /* ثلاثُ مراحل (‎glass.css‎): تكثُف الصبغة ⇐ يتحرّك اللوحُ بلا تمويهٍ تحتها ⇐ يعود التمويهُ ثمّ تخفّ */
-        B.classList.add('side-dense');
-        B._sd1 = setTimeout(function () {
-          B.classList.add('side-anim'); setRail(!B.classList.contains('side-rail'));
-          B._sd2 = setTimeout(function () {
-            B.classList.remove('side-anim');
-            B._sd3 = setTimeout(function () { B.classList.remove('side-dense'); }, 60);
-          }, 340);
-        }, 60);
+        clearTimeout(B._sa);
+        B.classList.add('side-anim'); setRail(!B.classList.contains('side-rail'));
+        B._sa = setTimeout(function () { B.classList.remove('side-anim'); }, 360);
       }, true);
       /* السكّةُ هي الافتراض (الواسعُ لوحٌ يطفو فوق المحتوى): من لم يختر شيئًا (‎null‎) فسكّة، ومن اختار الواسعَ (‎''‎) بقي عليه */ try { var rv = localStorage.getItem(RAIL_K); if (rv === null || rv) document.body.classList.add('side-rail'); } catch (e) { document.body.classList.add('side-rail'); }
 

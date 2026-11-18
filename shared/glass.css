@@ -30,12 +30,8 @@
         أن تقف عنده. فأوّلُ بطاقةٍ تبقى بارزةً (الحَشْوُ يردّها)، وما
         بعدها ينزلق تحت الزجاج عند التمرير. وبلا هذا فالزجاجُ فوق
         لونٍ واحدٍ = لونٌ واحد.
-   م٢ · السطح: ثلاثُ درجاتٍ لا قفزة —
-          لا دعمَ        ⟵ مصمتٌ كما كان
-          blur           ⟵ زجاجٌ مثلَّج (هذي المرحلة)
-          blur + url()   ⟵ انكسارُ الحافّة (م٣: كروميوم وحده)
-        ومن طلب تقليلَ الشفافيّة رجع إلى المصمت: قراءةُ الواجهة
-        حقٌّ لا زينة. */
+   م٢ · السطح: كان زجاجًا مثلَّجًا ثمّ انكسارًا عند الحافّة، ونُزعا من الشريط
+        (§٨ في ‎ROADMAP-SIDEBAR.md‎): لوحٌ يتبدّل عرضُه لا يحمل سطحًا يتبدّل. */
 
 
 /* م١ · الصفوفُ تمرّ تحت الشريط */
@@ -77,43 +73,7 @@
     background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
-/* ============================================================
-   م٦ · الحياة — الزجاجُ يتبدّل بما يمرّ تحته
-   ============================================================
-   ١· الكثافةُ تتبع التمرير: في رأس الصفحة لا شيءَ تحت اللوح فيكون
-      أصفى ما يكون، وكلّما مرّت الأغلفةُ تحته ثَقُل ليبقى النصُّ مقروءًا.
-      والحركةُ **صعودًا فقط** من قيمة الجلد المقيسة — فالبوّابةُ (4.5:1)
-      محفوظةٌ في أدنى الحالتين، وما فوقها أأمن.
-   ٢· ولمعةٌ تتبع المؤشّر على الصفّ المُحوَّم عليه، كانعكاسٍ على زجاج.
-   وكلتاهما تُطفأ لمن طلب تقليلَ الحركة. */
-@property --glass-mix { syntax: '<percentage>'; inherits: true; initial-value: 54%; }
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    @keyframes ac-glass-dense { to { --glass-mix: 76%; } }
-    /* المُمرِّرُ ههنا ‎body‎ لا الجذر — قِيس: ‎scroll(root)‎ لم يرتبط
-       و‎scrollTop‎ يقع على الجسد. فيُسمَّى الجدولُ على المُمرِّر نفسِه،
-       ويُطلب بالاسم من اللوح وهو ابنُه. */
-    body { scroll-timeline-name: --ac-page; scroll-timeline-axis: block; }
-    .sidebar {
-      animation: ac-glass-dense linear both;
-      animation-timeline: --ac-page;
-      animation-range: 0 340px;
-    }
-  }
-}
-
-/* اللمعة: طبقةٌ لا تُمسك الضغط، وتتبع ‎--mx/--my‎ من حركة المؤشّر */
 .sidebar .tabs button, .nook-com { position: relative; overflow: hidden; }
-.sidebar .tabs button::after, .nook-com::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  transition: opacity .18s;
-  background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 50%),
-              color-mix(in srgb, var(--glass-ink) 13%, transparent), transparent 68%);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .sidebar .tabs button:hover::after, .nook-com:hover::after { opacity: 1; }
-}
 
 /* ============================================================
    م٥ · ثلاثُ حالاتٍ للوح: واسعٌ · سكّةٌ · مطويّ
@@ -160,16 +120,8 @@ body.side-rail :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
   body.side-anim .sidebar { transition: --side-w .32s cubic-bezier(.32,.72,0,1), padding .32s cubic-bezier(.32,.72,0,1); }
   body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
 }
-/* ===== والتمويهُ لا يُحمَل على لوحٍ يتبدّل عرضُه — ولا يُرى إطفاؤه =====
-   قِيس مكرّرًا مع مادّةٍ مفتوحة: التمويهُ في أثناء الحركة ٢–٧ إطاراتٍ بطيئةٍ من ٢٩، وبإطفائه ٠–١.
-   وإطفاؤه فجأةً يُري ما تحته حادًّا لحظةً ثمّ يعود — وميض. فثلاثُ مراحل (‎setRail‎ في الصفحة):
-     ١· ‎side-dense‎: تكثُف الصبغةُ إلى ٩٢٪ في ستّين مللي، والتمويهُ قائم.
-     ٢· ‎side-anim‎: يُطفأ التمويهُ تحت الصبغة الكثيفة (لا يُرى) ويتحرّك اللوح.
-     ٣· يُرفع ‎side-anim‎ فيعود التمويهُ تحتها، ثمّ ‎side-dense‎ فتخفّ الصبغةُ بنعومة.
-   والبحثُ والقرصُ لا يتحرّكان الآن (المحتوى ثابت)، فتمويهُهما باقٍ. */
-.sidebar, .side-handle { transition: background-color .22s ease; }
-body.side-dense :is(.sidebar, .side-handle) { background-color: color-mix(in srgb, var(--glass) 92%, transparent); }
-body.side-anim :is(.sidebar, .side-handle) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+/* واللوحُ سطحٌ مصمتٌ لا يتبدّل (§٨ في ‎ROADMAP-SIDEBAR.md‎): لا تمويه ولا انكسار ولا لمعة —
+   فلا شيءَ فيه يومض حين يتّسع أو يضيق، ولا يُعاد رسمُ ما خلفه في كلّ إطار. */
 
 body.side-rail .sidebar { padding: 14px 8px; }
 body.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
@@ -347,7 +299,7 @@ html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-rail
   top: var(--glass-gap); transform: none;
   right: calc(var(--side-w) + var(--glass-gap)
               + (var(--glass-gap) + var(--pnl-pad) + var(--hdl-room)) / 2 - var(--hdl) / 2);
-  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  background: var(--glass);
   color: var(--glass-ink);
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
   /* بلا ‎right/left‎: موضعُه محسوبٌ من ‎--side-w‎ وهو يتحرّك معه في الإطار نفسِه — انتقالٌ ثانٍ عليه كان يجعله يلحق متأخّرًا */
@@ -361,15 +313,12 @@ html[data-lang="en"] .side-handle {
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
 .side-handle:hover {
-  background: color-mix(in srgb, color-mix(in srgb, var(--glass-ink) 7%, var(--glass)) var(--glass-mix), transparent);
+  background: color-mix(in srgb, var(--glass-ink) 7%, var(--glass));
   transform: none;
 }
 .side-handle:active { transform: scale(.94); }
 /* الأيقونةُ ثابتةٌ لا تدور: هي تقول «شريط» لا «اتّجاه» */
 .side-handle svg { width: 19px; height: 19px; transform: none !important; }
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .side-handle { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
-}
 
 /* ===== مقايضةٌ مقيسة =====
    الزجاجُ الأصفى يُسقط التباين، والتباينُ شرطٌ لا يُساوَم. فبدل أن
@@ -383,42 +332,14 @@ html[data-lang="en"] .side-handle {
 .sidebar .tabs button.is-active { color: var(--glass-ink); }
 .sidebar .nook-com span { color: inherit; opacity: .82; }
 
-/* م٢ · السطح الزجاجيّ */
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .sidebar {
-    background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(170%);
-            backdrop-filter: blur(16px) saturate(170%);
-  }
-  /* والظلُّ بتخصيصٍ أعلى: ‎html[data-skin="flat"] .sidebar‎ في جلد الجذر
-     يُصفّر الظلَّ، وقِيس فغلب ‎.sidebar‎ وحدَها. فالحدُّ الفاتحُ على الوجه
-     المواجه للمحتوى، وينقلب مع اللغة.
-     والمِشبَكُ ‎data-theme‎ لا ‎data-skin‎: المسلخُ بلا جلدٍ مُسمّى، فكان
-     الظلُّ والحدُّ لا يَبلغانه أصلًا. والتخصيصُ واحدٌ (٠,٢,١) فيَغلب
-     ‎.sidebar‎ في الأمّ، ويَغلب جلدَ الجذر بترتيب التحميل. */
-  html[data-theme] .sidebar {
-    box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
-  }
-  html[data-theme][data-lang="en"] .sidebar {
-    box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
-  }
-
-  /* الدرجةُ الثالثة: الانكسار. تُضاف للسلسلة نفسِها ولا تَستبدلها، فمن
-     لا يدعم ‎url()‎ في الخلفيّة (سفاري وفايرفوكس) يبقى على المثلَّج. */
-  @supports (backdrop-filter: url(#lg-edge)) {
-    html[data-glass="liquid"] .sidebar {
-      -webkit-backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
-              backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
-    }
-  }
+/* السطح: مصمتٌ بلون الصبغة، وحدٌّ لامعٌ على الوجه المواجه للمحتوى وظلّ.
+   والمِشبَكُ ‎html[data-theme]‎ ليغلب جلدَ الجذر (‎html[data-skin="flat"] .sidebar‎ يُصفّر الظلّ). */
+.sidebar, .side-handle { background: var(--glass); }
+html[data-theme] .sidebar {
+  box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
 }
-/* ولا شفافيّةَ لمن لا يريدها */
-@media (prefers-reduced-transparency: reduce) {
-  .sidebar {
-    background: var(--glass);
-    -webkit-backdrop-filter: none; backdrop-filter: none;
-    box-shadow: none;
-  }
+html[data-theme][data-lang="en"] .sidebar {
+  box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
 }
 
 
