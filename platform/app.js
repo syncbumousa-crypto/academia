@@ -23097,7 +23097,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (زواياه مستديرة، وفجوتا الأيقونتين مقطوعتان منه بالقدر الذي انفتحتا به) — فلا يبقى تحته هامشٌ فارغ */
   function pkKcvNotch(card, ns) {
     /* (والملخّصُ الخاوي في النشر مربّعُ «لا يوجد ملخص» — ‎.pk-split__ph > .pk-vwph‎ — يُقصّ كاللوح) */
-    const TG = { mid: '.kt-view--tree > .kcv, .kt-view.pk-split__ph > .pk-vwph', book: '.pk-src > .pk-vwph', bank: '.pk-bank > .pk-vwph' };
+    /* والجدولُ والبطائقُ (المساحةُ نفسُها هي المُمرِّر) وشجرةُ البنك تُقصّ كذلك (طلبُ صاحب الموقع): كانت صفوفُها تنزل
+       في الفجوة السفليّة فتخرج عن شكل المساحة. والقصُّ على صندوق العنصر لا على جوفه، فيبقى ثابتًا وهي تُمرَّر */
+    const TG = { mid: '.kt-view--tree > .kcv, .kt-view.pk-split__ph > .pk-vwph, .kt-view--table, .kt-view--cards',
+      book: '.pk-src > .pk-vwph', bank: '.pk-bank > .pk-vwph, .pk-bank > .x3, .pk-bank > #cm-cards' };
     const f = n => Math.round(n * 100) / 100, R = 14, on = card.classList.contains('pk--icB');
     Object.keys(TG).forEach(k => {
       const el = card.querySelector(TG[k].split(', ').map(x => '.post-ytmain > .pk-split > ' + x).join(', '));
