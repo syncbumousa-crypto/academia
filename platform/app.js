@@ -10328,7 +10328,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
-      + `<div class="pc-ttl">${nm}${pcSaleHTML(p)}${pcProgHTML(p)}</div>`
+      + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
@@ -10393,6 +10393,88 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const c = e.target.closest('[data-pcvcol]'); if (c) { pcvSt.c = c.dataset.pcvcol; pcvPaint(); return; }
     const s = e.target.closest('[data-pcvsc]'); if (s) { pcvSet({ k: 'sc', n: +s.dataset.pcvsc, c: pcvSt.c }); return; }
     if (e.target.closest('[data-pcvbk]')) pcvSet({ k: 'book' });
+  }, true);
+  /* ===== تسعيرُ المساهمة (طلبُ صاحب الموقع) =====
+     في التحرير زرٌّ «سعّر عناصر مساهمتك» مكانَ «مجانية»، يفتح نافذةً كبيرة: فوقُ السعرُ الكلّيّ،
+     وتحتُ نصفان — يمينًا مجلداتُ الملخّص الأساسيّة ويسارًا مجلداتُ البنك — ولكلّ مجلدٍ سعرُه
+     إن اختار صاحبُها «سعّر كل مجلد وحده»، فيصير الكلّيُّ مجموعَها.
+     ‎data.sale‎: ‎{m, price, fp?:{folderId: price}}‎ — وبلا ‎sale‎ فهي مجانية */
+  const PC_TAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.6V5a1.5 1.5 0 0 1 1.5-1.5h7.6a1.5 1.5 0 0 1 1.06.44l7.4 7.4a1.5 1.5 0 0 1 0 2.12l-7.6 7.6a1.5 1.5 0 0 1-2.12 0l-7.4-7.4a1.5 1.5 0 0 1-.44-1.06z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>';
+  const pcTopF = ns => (ns || []).filter(n => n && n.t === 'f');
+  function pcSetHTML(p) {
+    const s = (p.data && p.data.sale) || null, en = pcEn(), m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
+    if (m === 'free') return `<button type="button" class="pc-sale pc-sale--set" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${en ? 'Price your contribution' : 'سعّر عناصر مساهمتك'}</span></button>`;
+    const st = m === 'part' ? (en ? 'Free trial' : 'فيها تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
+    return `<button type="button" class="pc-sale pc-sale--set is-on" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${st}</span><b class="pc-pr">${Math.max(0, +s.price || 0)}${PC_SAR}</b></button>`;
+  }
+  let pcpSt = null;   /* { id, per, total, f:{id:price} } */
+  const pcpSum = () => Object.values(pcpSt.f).reduce((t, v) => t + (+v > 0 ? +v : 0), 0);
+  function pcpPaint() {
+    const box = document.getElementById('pcp'), p = pcpSt && pcvPost(pcpSt.id); if (!box || !p) return;
+    const en = pcEn(), d = p.data || {};
+    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each main folder on its own', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder' }
+      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'سعّر كل مجلد أساسي وحده', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم' };
+    const half = (k, ns) => `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${ns.length}</i></div>`
+      + (ns.length ? `<div class="pcp-list">` + ns.map(n => `<label class="pcp-row"><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
+        + `<span class="pcp-in"><input type="number" min="0" step="5" inputmode="numeric" data-pcpf="${esc(n.id)}" placeholder="0" value="${+pcpSt.f[n.id] || ''}"${pcpSt.per ? '' : ' disabled'}>${PC_SAR}</span></label>`).join('') + `</div>`
+        : `<p class="pcp-none">${esc(L.none)}</p>`) + `</div>`;
+    const tot = pcpSt.per ? pcpSum() : pcpSt.total;
+    box.innerHTML = `<div class="pcp-panel${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
+      + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
+      + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><input type="number" min="0" step="5" inputmode="numeric" data-pcpt="1" placeholder="0" value="${tot || ''}"${pcpSt.per ? ' readonly tabindex="-1"' : ''}>${PC_SAR}</span>`
+      + `<span class="pcp-hint">${esc(pcpSt.per ? L.fhint : L.hint)}</span>`
+      + `<label class="pcp-sw"><input type="checkbox" data-pcpper="1"${pcpSt.per ? ' checked' : ''}><span class="pcp-tg"></span>${esc(L.per)}</label></div>`
+      + `<div class="pcp-split">${half('mid', pcTopF(d.deck))}${half('bank', pcTopF(d.qb))}</div>`
+      + `<div class="pcp-ft"><button type="button" class="pcp-free" data-pcpfree="1">${esc(L.free)}</button><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
+  }
+  function pcpOpen(id) {
+    const p = pcvPost(id); if (!p) return;
+    const s = (p.data && p.data.sale) || {}, fp = s.fp && typeof s.fp === 'object' ? s.fp : null;
+    pcpSt = { id, per: !!fp, total: Math.max(0, +s.price || 0), f: Object.assign({}, fp || {}) };
+    let box = document.getElementById('pcp');
+    if (!box) { box = document.createElement('div'); box.id = 'pcp'; document.body.appendChild(box); }
+    box.hidden = false; pcpPaint();
+    const t = box.querySelector(pcpSt.per ? '[data-pcpf]' : '[data-pcpt]'); if (t) t.focus();
+  }
+  function pcpClose() { const box = document.getElementById('pcp'); if (box) { box.hidden = true; box.innerHTML = ''; } pcpSt = null; }
+  function pcpSave(free) {
+    const p = pcpSt && pcvPost(pcpSt.id); if (!p) return;
+    const d = p.data = p.data || {};
+    const ids = new Set([...pcTopF(d.deck), ...pcTopF(d.qb)].map(n => n.id));
+    if (free) delete d.sale;
+    else if (pcpSt.per) {
+      const fp = {}; Object.keys(pcpSt.f).forEach(k => { const v = Math.round(+pcpSt.f[k] || 0); if (v > 0 && ids.has(k)) fp[k] = v; });
+      const sum = Object.values(fp).reduce((t, v) => t + v, 0);
+      if (!sum) delete d.sale; else d.sale = { m: Object.keys(fp).length < ids.size ? 'part' : 'lock', price: sum, fp };
+    } else {
+      const v = Math.max(0, Math.round(+pcpSt.total || 0));
+      if (!v) delete d.sale; else d.sale = { m: 'lock', price: v };
+    }
+    pcpClose(); save(); renderCmSection();
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-pcprice]');
+    if (b) { e.preventDefault(); e.stopPropagation(); pcpOpen(b.dataset.pcprice); return; }
+    const box = e.target.closest && e.target.closest('#pcp');
+    if (!box || !pcpSt) return;
+    if (e.target === box || e.target.closest('[data-pcpx]')) { pcpClose(); return; }
+    if (e.target.closest('[data-pcpfree]')) { pcpSave(true); return; }
+    if (e.target.closest('[data-pcpsave]')) pcpSave(false);
+  }, true);
+  document.addEventListener('input', e => {
+    if (!pcpSt || !e.target.closest || !e.target.closest('#pcp')) return;
+    const t = e.target;
+    if (t.dataset.pcpt) pcpSt.total = Math.max(0, +t.value || 0);
+    if (t.dataset.pcpf) {   /* المجموعُ يتبع الكتابة بلا إعادة رسمٍ تخطف المؤشّر */
+      pcpSt.f[t.dataset.pcpf] = Math.max(0, +t.value || 0);
+      const tt = document.querySelector('#pcp [data-pcpt]'); if (tt) tt.value = pcpSum() || '';
+    }
+    if (t.dataset.pcpper) { pcpSt.per = t.checked; pcpPaint(); const f = document.querySelector(`#pcp ${pcpSt.per ? '[data-pcpf]' : '[data-pcpt]'}`); if (f) f.focus(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (!pcpSt) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); pcpClose(); }
+    else if (e.key === 'Enter' && e.target.closest && e.target.closest('#pcp input[type=number]')) { e.preventDefault(); pcpSave(false); }
   }, true);
   /* ‎Escape‎ يغلق النافذةَ وحدَها — يُلتقط أوّلًا ولا يسري، وإلّا أغلق صفحةَ المادّة تحتها */
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && pcvSt) { e.preventDefault(); e.stopPropagation(); pcvClose(); } }, true);
