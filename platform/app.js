@@ -11279,8 +11279,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وما ليس غلافَ مصدرٍ (غلافُ الشابتر) يُقرأ كما كان */
   async function covBlob(key) {
     let b = await chIdb('readonly', key);
-    if (b || String(key).indexOf('pksrccov:') !== 0) return b;
-    const c = pkSrcCovMeta(String(key).slice(9));
+    if (b) return b;
+    const K = String(key);
+    if (K.indexOf('chcov:') === 0) {                 /* وغلافُ الشابتر (ROADMAP-CLOUD-NEXT ٢) */
+      const rest = K.slice(6), i = rest.lastIndexOf(':'), cm = chCovMeta(rest.slice(0, i), rest.slice(i + 1));
+      if (cm && cm.h) { b = await bookDown(cm.h); if (b) chIdb('readwrite', key, b); }
+      return b;
+    }
+    if (K.indexOf('pksrccov:') !== 0) return b;
+    const c = pkSrcCovMeta(K.slice(9));
     if (c && c.h) { b = await bookDown(c.h); if (b) chIdb('readwrite', key, b); }
     return b;
   }
@@ -25381,6 +25388,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const m = pkSrcMeta(key.slice(6));
         if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
       }
+      if (!blob && key.indexOf('chpdf:') === 0) {      /* وملفُّ الشابتر كذلك (ROADMAP-CLOUD-NEXT ٢) */
+        const rest = key.slice(6), i = rest.lastIndexOf(':');
+        const m = chPdfMeta(rest.slice(0, i), rest.slice(i + 1));
+        if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
+      }
       if (!blob) return null;
       const L = await chPdfLib();
       const data = new Uint8Array(await blob.arrayBuffer());
@@ -27413,6 +27425,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     state.chCov = state.chCov || {};
     (state.chCov[code] = state.chCov[code] || {})[ch] = { name: file.name, color, ts: Date.now() };
     save();
+    chapCloud('cov', code, ch, thumb || file);
     if (cmCode === code && cmTabSel === ch) renderCmSection();
   }
   async function chCovDel() {
@@ -27420,6 +27433,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!chCovMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
     if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+    (state.chapGone = state.chapGone || {})[chapGoneK('cov', code, ch)] = Date.now();
     delete state.chCov[code][ch];
     save();
     renderCmSection();
@@ -27429,7 +27443,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!img) return;
     const key = chCovKey(cmCode, cmTabSel);
     if (!chCovUrl[key]) {
-      const blob = await chIdb('readonly', key);
+      const blob = await covBlob(key);
       if (!blob) return;
       chCovUrl[key] = URL.createObjectURL(blob);
     }
@@ -27448,6 +27462,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
     save();
+    chapCloud('pdf', code, ch, file);
     if (cmCode === code && cmTabSel === ch) renderCmSection();
   }
   async function chPdfDel() {
@@ -27456,9 +27471,122 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     await chIdb('readwrite', key, null);
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
+    (state.chapGone = state.chapGone || {})[chapGoneK('pdf', code, ch)] = Date.now();
     delete state.chPdf[code][ch];
     save();
     renderCmSection();
+  }
+  /* ===== ملفُّ الشابتر وغلافُه ⇐ حسابُك (ROADMAP-CLOUD-NEXT ٢ · قرارُ صاحب الموقع: «يتبع حسابي») =====
+     كانا في متصفّح من أضافهما وحده، والخادمُ لا يعرف حتّى اسمَهما.
+     · الملفُّ يُرفع إلى مستودع ‎books‎ باسم بصمته (كملفّات المساهمات)، ووصفُه وبصمتُه في وثيقةٍ في حسابك
+       (‎chap‎) — فتجده من أيّ جهاز، ولا يعرف غيرُك أنّه موجود. والمستودعُ اليومَ عامُّ القراءة لمن يملك
+       البصمة (قرارُ الكتب)؛ يوم تأتي ميزةُ الحجب يصير خاصًّا مع الكتب كلِّها.
+     · الدمجُ مدخلًا مدخلًا بوقته (‎ts‎): الأحدثُ يغلب. والحذفُ يُقيَّد (‎state.chapGone‎) فيبلغ أجهزتَك
+       ولا يعود من جهازٍ لم يعلم به.
+     · ولا يُرفع الوصفُ قبل أوّل جذب: جهازٌ جديدٌ خاوٍ لا يكتب فوق ما في حسابك. */
+  var chapGot = false, chapSig = '', chapT = 0, chapBusy = false;
+  const CHAP_BAGS = { pdf: 'chPdf', cov: 'chCov' };
+  const chapGoneK = (t, code, ch) => t + '|' + code + '|' + ch;
+  function chapDoc() {
+    const out = { pdf: {}, cov: {}, gone: Object.assign({}, state.chapGone || {}) };
+    Object.keys(CHAP_BAGS).forEach(t => {
+      const bag = state[CHAP_BAGS[t]] || {};
+      Object.keys(bag).forEach(code => Object.keys(bag[code] || {}).forEach(ch => {
+        const m = bag[code][ch];
+        if (m && m.h) (out[t][code] = out[t][code] || {})[ch] = m;
+      }));
+    });
+    return out;
+  }
+  async function chapCloud(t, code, ch, blob) {
+    const h = await bookUp(blob, blob.type || (t === 'pdf' ? 'application/pdf' : 'image/jpeg'));
+    const m = (((state[CHAP_BAGS[t]] || {})[code]) || {})[ch];
+    if (!h || !m) return;
+    m.h = h;
+    save();
+  }
+  async function chapPull() {
+    if (!SRV_ON() || isGuest() || !state.uid || chapGot) return;
+    let j;
+    try {
+      const r = await apiFetch(udocURL('?kind=chap'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('chap:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('chap:neterr'); return; }
+    chapGot = true;
+    const d = (j && j.data) || {};
+    const gone = state.chapGone = state.chapGone || {};
+    Object.keys(d.gone || {}).forEach(k => { if ((d.gone[k] || 0) > (gone[k] || 0)) gone[k] = d.gone[k]; });
+    let n = 0;
+    Object.keys(CHAP_BAGS).forEach(t => {
+      const bag = state[CHAP_BAGS[t]] = state[CHAP_BAGS[t]] || {};
+      /* ما حُذف بعد أن أُضيف هنا يُحذف هنا */
+      Object.keys(bag).forEach(code => Object.keys(bag[code] || {}).forEach(ch => {
+        const m = bag[code][ch], g = gone[chapGoneK(t, code, ch)] || 0;
+        if (m && g > (m.ts || 0)) {
+          delete bag[code][ch]; n++;
+          chIdb('readwrite', t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch), null);
+        }
+      }));
+      /* وما في الحساب وهو أحدثُ ممّا هنا (ولم يُحذف بعده) يُؤخذ */
+      const S = d[t] || {};
+      Object.keys(S).forEach(code => Object.keys(S[code] || {}).forEach(ch => {
+        const r = S[code][ch], m = (bag[code] || {})[ch], g = gone[chapGoneK(t, code, ch)] || 0;
+        if (!r || !r.h || g > (r.ts || 0)) return;
+        if (m && (m.ts || 0) >= (r.ts || 0)) return;
+        const same = m && m.h === r.h;
+        (bag[code] = bag[code] || {})[ch] = Object.assign({}, r);
+        n++;
+        if (same) return;                         /* الملفُّ نفسُه: يبقى ما في المتصفّح */
+        const key = t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch);
+        chIdb('readwrite', key, null);            /* ما في المتصفّح قديمٌ إن وُجد: يُجلب الجديدُ عند الفتح */
+        if (t === 'pdf') { if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key]; bkForget(key); }
+        else if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+      }));
+    });
+    chapSig = (d.pdf || d.cov || d.gone) ? JSON.stringify({ pdf: d.pdf || {}, cov: d.cov || {}, gone: d.gone || {} }) : '';
+    if (n) { save(); if (typeof renderCmSection === 'function' && cmCode && isChTab(cmTabSel)) renderCmSection(); bootMark('chap:got' + n); }
+    chapUpAll();
+  }
+  /* ما في المتصفّح بلا بصمة (أُضيف قبل هذا): يُرفع مرّةً ثمّ يُكتب في الحساب */
+  async function chapUpAll() {
+    let up = 0;
+    for (const t of Object.keys(CHAP_BAGS)) {
+      const bag = state[CHAP_BAGS[t]] || {};
+      for (const code of Object.keys(bag)) for (const ch of Object.keys(bag[code] || {})) {
+        const m = bag[code][ch];
+        if (!m || m.h) continue;
+        const blob = await chIdb('readonly', t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch));
+        if (!blob) continue;
+        const h = await bookUp(blob, blob.type || (t === 'pdf' ? 'application/pdf' : 'image/jpeg'));
+        if (h && bag[code] && bag[code][ch] === m) { m.h = h; up++; }
+      }
+    }
+    if (up) { bootMark('chap:up' + up); save(); }
+    else chapPushSoon();
+  }
+  async function chapPush() {
+    chapT = 0;
+    if (!SRV_ON() || isGuest() || !state.uid || chapBusy) return;
+    if (!chapGot) { chapPull(); return; }
+    const doc = chapDoc(), sig = JSON.stringify(doc);
+    if (sig === chapSig) return;
+    chapBusy = true;
+    try {
+      const r = await apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'chap', data: doc }),
+      });
+      if (!r.ok) bootMark('chap:put' + r.status);
+      else chapSig = sig;
+    } catch (e) { bootMark('chap:puterr'); }
+    finally { chapBusy = false; }
+  }
+  function chapPushSoon() {
+    if (!chapGot || !SRV_ON() || isGuest() || !state.uid) return;
+    clearTimeout(chapT);
+    chapT = setTimeout(chapPush, 3000);
   }
   /* لاقطُ الملفّ واحدٌ مخفيّ، وأزرارُ الوعاء تُلتقط بالتفويض — فالوعاءُ يُعاد بناؤه كلَّ رسمة */
   const chPick = document.createElement('input');
@@ -41293,8 +41421,8 @@ void main() {
     prefsT = setTimeout(prefsPush, 3000);
   }
 
-  function acctPull() { actPull(); prefsPull(); }
-  function acctPushSoon() { if (!acctReady) return; actPushSoon(); prefsPushSoon(); }
+  function acctPull() { actPull(); prefsPull(); if (typeof chapPull === 'function') chapPull(); }
+  function acctPushSoon() { if (!acctReady) return; actPushSoon(); prefsPushSoon(); if (typeof chapPushSoon === 'function') chapPushSoon(); }
   try {
     actDev = localStorage.getItem('academia2:dev') || '';
     if (!/^[a-z0-9]{4,40}$/.test(actDev)) {

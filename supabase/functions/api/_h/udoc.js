@@ -31,7 +31,7 @@ const J = (o, status = 200) => new Response(JSON.stringify(o), {
 /* والحدُّ قيسَ ولم يُقدَّر: سجلُّ اختبارات صاحب الموقع ٢٩٦ك اليوم وينمو مع كلّ
    اختبار. فميجا سعةٌ لسنواتٍ، وسقفٌ يمنع أن يُدسّ في الوثيقة متنٌ ثقيل. */
 const MAX_DATA = 1024 * 1024;
-const KINDS = new Set(['nook', 'exams', 'srs', 'prefs']);
+const KINDS = new Set(['nook', 'exams', 'srs', 'prefs', 'chap']);   /* ‎chap‎: ملفّاتُ الشابترات وأغلفتُها (ROADMAP-CLOUD-NEXT ٢) */
 
 /* ===== وكلُّ اختبارٍ وثيقةٌ وحده (ROADMAP-CLOUD-NEXT ٧) =====
    كان السجلُّ كلُّه وثيقةً واحدة (‎exams‎) فبلغ ٨٢٪ من الحدّ بثلاثين اختبارًا،
