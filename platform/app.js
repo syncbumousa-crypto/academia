@@ -2443,7 +2443,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let query = '';
     const fHours = new Set();          // فارغة = الكل
     const fCols  = new Set();
-    const fStat  = new Set(['todo']);  // «متبقية» مطبق افتراضيًا دائمًا — ويُحذف بالنقر على رقاقته
+    /* «متبقية» لا تُطبَّق افتراضيًّا في المكتبة (طلبُ صاحب الموقع): من دخل رأى الرفَّ كاملًا.
+       وتبقى افتراضيّةً في نافذة الإضافة إلى الترم (‎pick‎): هناك يُختار ما لم يُدرس بعد */
+    const fStat  = new Set(mode === 'pick' ? ['todo'] : []);
     const fAct   = new Set();           // النشاط: lec (محاضرة فقط) · lab (لها معمل) — فارغة = الكل
     const fKind  = new Set();           // نوعيّة المواد في التخصّصات المختارة — فارغة = الكل
     const inCols = c => (c.tags || []).some(t => fCols.has(t) && (!fKind.size || fKind.has((c.kinds || {})[t])));
