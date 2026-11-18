@@ -10677,19 +10677,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = h.parentElement, id = h.dataset.pkid, k = h.dataset.pksplh || 'a';
     e.preventDefault(); h.setPointerCapture(e.pointerId); h.classList.add('is-drag'); sp.classList.add('is-spldrag');
     const en = getComputedStyle(sp).direction === 'ltr';
-    cxMorphBusy = true;   /* الكتابُ يُجمَّد ويُحجَّم صورةً حتى يُفلت الخطّ (‎cxMorphBusy‎ كالتكبير) */
+    /* والكتابُ يُرتَّب في كلّ إطارٍ مع السحب لا صورةً مُجمَّدةً تُرتَّب عند الإفلات (طلبُ صاحب الموقع: «التغيير خلال ما يحرّك،
+       ولما يفلت ما يصير شي») — مراقبُ مقاسه يرتّبه ما دام ‎cxMorphBusy‎ مطفأً، والقامةُ تلحق في الإطار نفسِه */
+    let fitRaf = 0;
+    const fitSoon = () => { if (!fitRaf) fitRaf = requestAnimationFrame(() => { fitRaf = 0; pkSrcHFit(-1); }); };
     const move = ev => {
       const r = sp.getBoundingClientRect(), w = r.width - PK_SPL_GAP;
       /* خطُّ الكتاب يُقاس من حافّة الكتاب (البداية)، وخطُّ البنك من حافّة البنك (النهاية) */
       const fromStart = en ? ev.clientX - r.left : r.right - ev.clientX;
       const x = k === 'b' ? (r.width - fromStart) - PK_SPL_GAP / 2 : fromStart - PK_SPL_GAP / 2;
       pkSplSet(sp, id, x / w, false, k);
+      fitSoon();
     };
     const up = ev => {
       h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); h.removeEventListener('pointercancel', up);
       h.classList.remove('is-drag'); sp.classList.remove('is-spldrag');
+      cancelAnimationFrame(fitRaf); fitRaf = 0;
       pkSplSet(sp, id, parseFloat(sp.style.getPropertyValue(pkSplVar(k))) || pkSplDef(k), true, k);
-      cxMorphBusy = false; pkSplBook(id);
+      pkSrcHFit(-1);
     };
     h.addEventListener('pointermove', move); h.addEventListener('pointerup', up); h.addEventListener('pointercancel', up);
   });
@@ -11395,19 +11400,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* ‏‎dur‎: قامةٌ تنتقل مع حركةٍ أخرى بمدّتها (تبدُّلُ وضع الكتاب) */
   function pkSrcHFit(dur) {
-    if (typeof dur !== 'number') dur = 0;
+    /* ‎-1‎: في الحال بلا انتقال — والخطُّ يُسحب، فالقامةُ تتبع اليدَ إطارًا بإطار ولا تنزلق وراءها */
+    const now = dur === -1;
+    if (typeof dur !== 'number' || now) dur = 0;
     document.querySelectorAll('#cm-body .post.pk').forEach(card => {
       if (card.pkBandAnim || card.classList.contains('pk--fxrun')) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 150); return; }   /* حركةٌ جارية: يُعاد بعدها */
       const sp = card.querySelector('.post-ytmain > .pk-split'), ctl = card.querySelector('[data-pkview][data-pkid]');
       if (!sp || !ctl) return;
       /* والقامةُ تنتقل الآن: لا يُقاس في منتصفها (القياسُ يتبدّل معها فيُعيد الانتقالَ بلا نهاية) — يُعاد بعده */
-      if (sp.classList.contains('pk-splh-anim') && !dur) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
+      if (sp.classList.contains('pk-splh-anim') && !dur && !now) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
       /* أُغلق الكتاب: تبقى المساحةُ بقامتها التي كانت معه (طلبُ صاحب الموقع) — لا تطول إلى قامتها الحرّة */
       if (h == null) { if (pkSrcH[id] && Math.abs(pkSrcH[id] - cur) >= 1) sp.style.setProperty('--pk-h', pkSrcH[id] + 'px'); return; }
       pkSrcH[id] = h;
       if (Math.abs(h - cur) < 3) return;
-      if (cur && !bkReduce()) {
+      if (now) { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = sp.style.transitionTimingFunction = ''; }
+      else if (cur && !bkReduce()) {
         sp.style.transitionDuration = dur ? dur + 'ms' : '';
         sp.style.transitionTimingFunction = dur ? 'cubic-bezier(.37, 0, .63, 1)' : '';   /* منحنى حركة الكتاب نفسُه */
         sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT);
