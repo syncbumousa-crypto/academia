@@ -19356,3 +19356,10 @@ html[data-theme="dark"] #pcp .pcp-seg__th { background: #a8842e; box-shadow: non
 html[data-theme="dark"] #pcp .pcp-seg button[aria-checked="true"] { color: #fff; }
 #pcp .pcp-seg button:focus-visible { outline: 2px solid #a8842e; outline-offset: 1px; }
 @media (max-width: 480px) { #pcp .pcp-seg button { font-size: 12px; padding: 8px 4px; white-space: normal; } }
+/* إطارُ موضع غلاف الكتاب في نافذة الغلاف: الكتابُ كاملًا وإطارٌ بنسبة الغلاف يُسحب عليه، وما خارجه معتم */
+#pcv .pcv-crop { position: relative; flex: none; display: inline-block; height: 240px; border-radius: 6px; overflow: hidden; cursor: grab; touch-action: none; user-select: none; box-shadow: 0 10px 18px -8px rgba(0, 0, 0, .5); }
+#pcv .pcv-crop.is-drag { cursor: grabbing; }
+#pcv .pcv-crop img { display: block; height: 100%; width: auto; border-radius: 0; box-shadow: none; pointer-events: none; }
+#pcv .pcv-win { position: absolute; left: 0; right: 0; top: 0; border-radius: 12px; box-shadow: 0 0 0 2px #fff, 0 0 0 999px rgba(8, 12, 20, .5); transition: box-shadow .2s; }
+#pcv .pcv-crop:not(.on) .pcv-win { box-shadow: 0 0 0 2px rgba(255, 255, 255, .7), 0 0 0 999px rgba(8, 12, 20, .3); }
+#pcv .pcv-crop.on .pcv-win { box-shadow: 0 0 0 2px #d4b36a, 0 0 0 999px rgba(8, 12, 20, .5); }

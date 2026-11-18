@@ -10229,7 +10229,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (w.k === 'img' && !d.img) w = book ? { k: 'book' } : pcAutoSc(p.id);
     if (w.k === 'book' && !book) w = d.img ? { k: 'img' } : pcAutoSc(p.id);
     if (w.k === 'sc') { const c = PC_PAL[w.c] ? w.c : 'teal', n = PC_SC.includes(+w.n) ? +w.n : 1; return { k: 'sc', n, c, url: pcSceneURL(n, c), bg: PC_PAL[c][4] }; }
-    return { k: w.k, url: w.k === 'img' ? d.img : book, bg: '#121a24' };
+    /* وغلافُ الكتاب يُختار موضعُه منه (‎y‎ نسبةٌ من أعلاه إلى أسفله) — طلبُ صاحب الموقع */
+    const y = w.k === 'book' && cv && cv.k === 'book' && isFinite(+cv.y) ? Math.min(100, Math.max(0, +cv.y)) : null;
+    return { k: w.k, url: w.k === 'img' ? d.img : book, bg: '#121a24', y };
   }
   /* أيقوناتُ الأرقام الصغيرة: ما للموقع منها يُستعار (المجلد · الربط · الحفظ · النظر · الكلام · البلاغ)، والصفحةُ والتظليلُ يُرسمان هنا */
   const PC_SV = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -10372,7 +10374,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
-      + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
+      + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
@@ -10388,8 +10390,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const box = document.getElementById('pcv'); if (!box || !pcvSt) return;
     const p = pcvPost(pcvSt.id); if (!p) { pcvClose(); return; }
     const en = pcEn(), cur = pcCover(p), book = imgOf(cmCode), tab = pcvSt.tab;
-    const L = en ? { t: 'Contribution cover', up: 'From your device', sc: 'Ready-made', bk: 'Book cover', col: 'Colour', pick: 'Choose a photo', bkUse: 'Use the book cover', bkNo: 'This course has no book cover yet.', bkTip: 'The course book cover — the same for every contribution on this book.', upTip: 'A wide photo looks best. It is resized before it is saved.', cls: 'Close' }
-      : { t: 'غلاف المساهمة', up: 'صورة من جهازك', sc: 'أشكال جاهزة', bk: 'غلاف الكتاب', col: 'اللون', pick: 'اختر صورة', bkUse: 'استخدم غلاف الكتاب', bkNo: 'ما لهذه المادة غلاف كتاب بعد.', bkTip: 'غلاف كتاب المادة نفسه — يتكرّر في كل مساهمة على هذا الكتاب.', upTip: 'الصورة العريضة تطلع أحسن، وتُصغَّر قبل الحفظ.', cls: 'إغلاق' };
+    const L = en ? { t: 'Contribution cover', up: 'From your device', sc: 'Ready-made', bk: 'Book cover', col: 'Colour', pick: 'Choose a photo', bkUse: 'Use the book cover', bkDrag: 'Drag the frame to pick the part of the book that shows on the cover.', bkNo: 'This course has no book cover yet.', bkTip: 'The course book cover — the same for every contribution on this book.', upTip: 'A wide photo looks best. It is resized before it is saved.', cls: 'Close' }
+      : { t: 'غلاف المساهمة', up: 'صورة من جهازك', sc: 'أشكال جاهزة', bk: 'غلاف الكتاب', col: 'اللون', pick: 'اختر صورة', bkDrag: 'اسحب الإطار على الكتاب لتختار الجزء اللي يطلع في الغلاف.', bkUse: 'استخدم غلاف الكتاب', bkNo: 'ما لهذه المادة غلاف كتاب بعد.', bkTip: 'غلاف كتاب المادة نفسه — يتكرّر في كل مساهمة على هذا الكتاب.', upTip: 'الصورة العريضة تطلع أحسن، وتُصغَّر قبل الحفظ.', cls: 'إغلاق' };
     const tabs = [['up', L.up], ['sc', L.sc], ['bk', L.bk]].map(([k, n]) =>
       `<button type="button" class="pcv-tab${tab === k ? ' on' : ''}" data-pcvtab="${k}">${esc(n)}</button>`).join('');
     let body = '';
@@ -10402,7 +10404,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return `<button type="button" class="pcv-tile${on ? ' on' : ''}" data-pcvsc="${n}"><img src="${pcSceneURL(n, c)}" alt=""><span>${esc(pcSceneNm(n))}</span></button>`;
         }).join('') + `</div>`;
     } else if (tab === 'bk') {
-      body = book ? `<div class="pcv-bk"><img src="${book}" alt=""><div><p>${esc(L.bkTip)}</p><button type="button" class="pcv-btn${cur.k === 'book' ? ' on' : ''}" data-pcvbk="1">${esc(L.bkUse)}</button></div></div>`
+      const by = cur.k === 'book' && cur.y != null ? cur.y : 50;
+      body = book ? `<div class="pcv-bk"><span class="pcv-crop${cur.k === 'book' ? ' on' : ''}" data-pcvcrop="1" data-y="${by}"><img src="${book}" alt="" draggable="false"><span class="pcv-win"></span></span><div><p>${esc(L.bkTip)}</p><p>${esc(L.bkDrag)}</p><button type="button" class="pcv-btn${cur.k === 'book' ? ' on' : ''}" data-pcvbk="1">${esc(L.bkUse)}</button></div></div>`
         : `<p class="pcv-none">${esc(L.bkNo)}</p>`;
     } else {
       const img = (p.data && p.data.img) || '';
@@ -10411,7 +10414,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     box.innerHTML = `<div class="pcv-panel" role="dialog" aria-modal="true" aria-label="${esc(L.t)}"><div class="pcv-hd"><b>${esc(L.t)}</b>`
       + `<button type="button" class="pcv-x" data-pcvx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div><div class="pcv-tabs">${tabs}</div>${body}</div>`;
+    const cr = box.querySelector('.pcv-crop'); if (cr) { const im = cr.querySelector('img'); if (im.complete) pcvCropPlace(cr); else im.onload = () => pcvCropPlace(cr); }
   }
+  /* ===== موضعُ غلاف الكتاب: إطارٌ بنسبة الغلاف (‎3:2‎) يُسحب على الكتاب صعودًا ونزولًا ===== */
+  function pcvCropPlace(cr, y) {
+    const W = cr.clientWidth, H = cr.clientHeight, wh = Math.min(H, W * 2 / 3), win = cr.querySelector('.pcv-win');
+    if (y == null) y = +cr.dataset.y; cr.dataset.y = y;
+    Object.assign(win.style, { height: wh + 'px', top: ((H - wh) * y / 100) + 'px' });
+  }
+  let pcvDrag = null;
+  document.addEventListener('pointerdown', e => {
+    const cr = e.target.closest && e.target.closest('#pcv [data-pcvcrop]'); if (!cr || !pcvSt) return;
+    e.preventDefault(); cr.setPointerCapture(e.pointerId); pcvDrag = cr; cr.classList.add('on', 'is-drag'); pcvDragMove(e);
+  });
+  function pcvDragMove(e) {
+    const cr = pcvDrag; if (!cr) return;
+    const r = cr.getBoundingClientRect(), wh = Math.min(r.height, r.width * 2 / 3), sp = r.height - wh;
+    const y = sp > 0 ? Math.round(Math.min(1, Math.max(0, (e.clientY - r.top - wh / 2) / sp)) * 100) : 50;
+    pcvCropPlace(cr, y);
+    /* والغلافُ في المساهمة يتبع السحبَ حيًّا */
+    const p = pcvPost(pcvSt.id); if (p) document.querySelectorAll(`#cm-body .post[data-pkicid="${p.id}"] .pc-art--book img, #cm-body .post[data-ck="${p.id}"] .pc-art--book img`).forEach(im => { im.style.objectPosition = `50% ${y}%`; });
+  }
+  document.addEventListener('pointermove', e => { if (pcvDrag) pcvDragMove(e); });
+  document.addEventListener('pointerup', () => { const cr = pcvDrag; if (!cr) return; pcvDrag = null; cr.classList.remove('is-drag'); pcvSet({ k: 'book', y: +cr.dataset.y }); });
   function pcvOpen(id) {
     const p = pcvPost(id); if (!p) return;
     const cur = pcCover(p);
@@ -10437,7 +10462,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t = e.target.closest('[data-pcvtab]'); if (t) { pcvSt.tab = t.dataset.pcvtab; pcvPaint(); return; }
     const c = e.target.closest('[data-pcvcol]'); if (c) { pcvSt.c = c.dataset.pcvcol; pcvPaint(); return; }
     const s = e.target.closest('[data-pcvsc]'); if (s) { pcvSet({ k: 'sc', n: +s.dataset.pcvsc, c: pcvSt.c }); return; }
-    if (e.target.closest('[data-pcvbk]')) pcvSet({ k: 'book' });
+    if (e.target.closest('[data-pcvbk]')) { const cr = box.querySelector('[data-pcvcrop]'); pcvSet({ k: 'book', y: cr ? +cr.dataset.y : 50 }); }
   }, true);
   /* ===== تسعيرُ المساهمة (طلبُ صاحب الموقع) =====
      في التحرير زرٌّ «سعّر عناصر مساهمتك» مكانَ «مجانية»، يفتح نافذةً كبيرة: فوقُ السعرُ الكلّيّ،
