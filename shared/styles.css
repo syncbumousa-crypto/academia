@@ -19594,3 +19594,14 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set { box-shadow: non
 html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-color: rgba(212, 179, 106, .95); }
 /* وزرُّ السعر الشامل الواحد («شراء كامل · السعر»): حشوتُه من الجهتين */
 #cm-body .pk--pc .pc-buyw.pc-buyone { padding-inline: 10px 8px; }
+/* رقاقةُ الاختيار داخل زرّ الشراء: «الكل ⌄» على صبغةٍ أفتح من الأخضر (الاقتراحُ ٥) */
+#cm-body .pk--pc .pc-buyx button.pc-ddchip { width: auto; height: 24px; align-self: center; gap: 1px; padding-inline: 6px 4px; margin-inline: 2px 0; border-radius: 999px; background: rgba(255, 255, 255, .2); transition: background .15s; }
+#cm-body .pk--pc .pc-buyx button.pc-ddchip:hover, #cm-body .pk--pc .pc-buyx button.pc-ddchip[aria-expanded="true"] { background: rgba(255, 255, 255, .3); }
+#cm-body .pk--pc .pc-ddchip svg { width: 13px; height: 13px; }
+#cm-body .pk--pc .pc-buyb { padding-inline-end: 0; }
+#cm-body .pk--pc .pc-buyx:has(.pc-ddchip) .pc-buyw { padding-inline-end: 4px; }
+/* وإن طال المختارُ («الملخص» · «بنك الأسئلة») لا يخرج الزرُّ من الكبسولة: الحالةُ هي التي تضيق وتُختصر */
+#cm-body .pk--pc .pc-sale--buy { overflow: hidden; }
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st { flex: 1 1 auto; min-width: 0; display: flex; justify-content: center; }
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx { flex: none; }
