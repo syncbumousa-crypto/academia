@@ -33908,6 +33908,7 @@ void main() {
   /* ---------- الدفع ---------- */
   /* عدّادُ ‎429‎ ومؤقّتُ إعادتها — تراخٍ يزيد بكلّ ردّ ولا يتجاوز ربعَ ساعة */
   let srv429 = 0, srv429T = 0, srvSaveT = 0;
+  const srvFail = new Map();   /* معرّفٌ ⇐ بصمةُ المتن الذي ردّه الخادم في هذه الجلسة */
   async function srvPush(p, code, sec, retried) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
     /* ===== وتُرفع المسوّدةُ كما يُرفع المنشور =====
@@ -33925,6 +33926,10 @@ void main() {
     const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, st: p.st || '', data: p.data }));
     if (p.srvBig === rawH) return;
     if (p.srvBig) { delete p.srvBig; }          /* تبدّل المتن: تُعطى فرصةً جديدة */
+    /* ===== وما ردّه الخادمُ في هذه الجلسة لا يُعاد بعينه =====
+       تعارضٌ لم تُصلحه المصالحة أو عطبٌ في الخادم: المتنُ نفسُه لن يُقبل في الحفظ
+       التالي. والذاكرةُ للجلسة لا للدرج: عطبٌ عابرٌ لا يحبس المساهمةَ بعد التحديث. */
+    if (srvFail.get(p.id) === rawH) return;
 
     /* ===== وما لم يتبدّل منذ بلغ لا يُجهَّز ثانيةً =====
        كان كلُّ دفعٍ يمرّ بسؤال الهويّة (‎/auth/me‎) وبـ‎medPrep‎ — نسخةٌ عميقةٌ
@@ -33987,20 +33992,27 @@ void main() {
         headers: { 'content-type': 'application/json' }, body: body,
       });
       if (r.status === 413) { p.srvBig = rawH; save(); bootMark('push:413'); toast(T().srvTooBig + tooBigWhere(code)); return; }
-      if (r.status === 409) {
+      if (r.status === 409 || r.status === 500) {
         /* ===== و‎409‎ مصالحةٌ لا عطب =====
            «لك مساهمةٌ في هذا البند بمعرّفٍ آخر» — قيدُ ‎(uid, code, sec)‎ الفريد.
            فلو سُجّلت وتُركت لَبقيت تُحاول في كلّ حفظةٍ أبدًا ولا تصل، ولبقي
            الدرجُ يحفظها لأنّها «لم تبلغ الخادم».
-           والجذبُ يعرف كيف يصالح: يتبنّى المعرّفَ أو يملأ الخاوية. فيُطلب. */
-        bootMark('push:409');
+           والجذبُ يعرف كيف يصالح: يتبنّى المعرّفَ أو يملأ الخاوية. فيُطلب.
+           ===== و‎500‎ تُعامَل معاملتَها =====
+           الخادمُ كان يردّ هذا التعارضَ ‎500‎ (رسالةُ Postgres غيرُ رسالة SQLite التي
+           يبحث عنها)، فلم تقع المصالحةُ قطّ: ألفٌ ومئةُ دفعةٍ من اللوحة في كلّ حفظ. */
+        bootMark('push:' + r.status);
+        srvFail.set(p.id, rawH);
+        const id0 = p.id;
         srvPulled[code] = 0;
-        /* ===== وتُنتظر المصالحةُ ثمّ تُعاد المحاولة =====
+        /* ===== وتُنتظر المصالحةُ ثمّ تُعاد المحاولة — إن صالحت =====
            كان الجذبُ يُطلب ويُرجع، فيتبنّى المعرّفَ ولا أحدَ يُعيد الدفع — فتبقى
            المساهمةُ بلا بصمةٍ إلى أن يقع حفظٌ آخر. ورآه صاحبُ الموقع مرّتين في
-           سجلّه. فيُنتظر الجذبُ ثمّ يُطلب الدفعُ من جديد. */
+           سجلّه. فيُنتظر الجذبُ ثمّ يُطلب الدفعُ من جديد.
+           وإن لم يتبدّل المعرّفُ (عطبٌ حقيقيّ، أو مساهمةٌ بلغت الخادمَ فلا يُبدَّل
+           معرّفُها) فلا إعادة: كانت تدور كلَّ أربع ثوانٍ أبدًا. */
         await srvPull(code, true);
-        srvPushSoon();
+        if (p.id !== id0) srvPushSoon();
         return;
       }
       /* ===== و‎403‎: هذي ليست لِمن هو داخلٌ الآن =====
@@ -34031,8 +34043,9 @@ void main() {
         srv429T = setTimeout(srvPushSoon, Math.min(15 * 60000, 60000 * srv429));
         return;
       }
-      if (!r.ok) { bootMark('push:' + r.status); return; }
+      if (!r.ok) { bootMark('push:' + r.status); srvFail.set(p.id, rawH); return; }
       srv429 = 0;
+      srvFail.delete(p.id);
       if (sec === 'doc') {
         const ids = new Set(((p.data || {}).docs || []).map(x => x && x.id).filter(Boolean));
         (((state.cinfo || {})[code] || {}).doctors || []).forEach(dr => { if (dr && ids.has(dr.id)) dr.pub = 1; });
