@@ -10367,7 +10367,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tx = pct <= 0 ? `<span class="pc-ptx is-0">${en ? 'Not started' : 'لم تبدأ بعد'}</span>`
       : pct >= 100 ? `<span class="pc-ptx">${en ? 'Completed ✓' : 'مكتملة ✓'}</span>`
         : `<span class="pc-ptx">${en ? pct + '% done' : 'أكملت ' + pct + '%'}</span>`;
-    return `<div class="pc-prog" title="${esc((en ? `${a.k} of ${a.n}` : `${a.k} من ${a.n}`))}"><span class="pc-ring" style="--pc-p:${pct}%"></span>${tx}</div>`;
+    return `<div class="pc-prog" title="${esc((en ? `${a.k} of ${a.n}` : `${a.k} من ${a.n}`))}"><span class="pc-ring">${x3DotAns(a)}</span>${tx}</div>`;   /* دائرةُ الاكتمال دائرةُ محطّة الرحلة نفسُها: ماءٌ بموجته (الصوابُ أخضرُ والخطأُ أحمر) — طلبُ صاحب الموقع */
   }
   /* ===== سطرُ البيع (طلبُ صاحب الموقع) =====
      ‎data.sale‎: ‎{m:'part'|'lock', price}‎ — وبلا ‎sale‎ فهي مجانية. والمشترى سجلُّه ‎state.bought[id]‎.

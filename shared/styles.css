@@ -19634,3 +19634,8 @@ html[data-theme="dark"] #pcp .pcp-in.is-own { color: #7fb3bb; }
 #pcp .pcb-free { color: #2c5e65; font-weight: 700; }
 html[data-theme="dark"] #pcp .pcb-free { color: #7fb3bb; }
 #pcp .pcv-btn[disabled] { opacity: .45; cursor: default; filter: none; }
+/* دائرةُ اكتمال المساهمة بثيم محطّة الرحلة (‎x3DotAns‎): لا تدرّجَ من أسفل ولا حدَّ ذهبيّ — الدائرةُ هي المحطّةُ نفسُها */
+#cm-body .pk--pc .pc-prog .pc-ring,
+html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { width: 20px; height: 20px; border: 0; background: none; overflow: visible; }
+#cm-body .pk--pc .pc-ring > .x3-dot { inset: 0; width: 100%; height: 100%; }
+#cm-body .pk--pc .pc-ring > .x3-dot { border: 1.4px solid var(--u-in-line, rgba(127, 127, 127, .35)); }
