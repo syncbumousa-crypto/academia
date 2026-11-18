@@ -33,7 +33,7 @@
    م٢ · السطح: ثلاثُ درجاتٍ لا قفزة —
           لا دعمَ        ⟵ مصمتٌ كما كان
           blur           ⟵ زجاجٌ مثلَّج (هذي المرحلة)
-          blur + url()   ⟵ انكسارُ الحافّة (م٣، لم تأتِ بعد)
+          blur + url()   ⟵ انكسارُ الحافّة (م٣: كروميوم وحده)
         ومن طلب تقليلَ الشفافيّة رجع إلى المصمت: قراءةُ الواجهة
         حقٌّ لا زينة. */
 
@@ -47,11 +47,6 @@
   scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
 }
 
-
-
-
-
-
 /* ============================================================
    الزجاجُ يخرج من اللوح — بالنظام نفسِه لا بنسخةٍ ثانية
    ============================================================
@@ -61,19 +56,8 @@
 
    والمُرشَّحُ للزجاج ما **يطفو فوق محتوًى يتحرّك** — شريطُ الأدوات
    وأسهمُ الصفوف. أمّا ما هو سطحُ قراءةٍ ثابتٌ (بطاقةُ مادّة، نافذةُ
-   حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال. */
-.ac-glass {
-  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent) !important;
-  border-color: transparent !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent);
-}
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .ac-glass { -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
-}
-@media (prefers-reduced-transparency: reduce) {
-  .ac-glass { background: var(--glass) !important;
-              -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
+   حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال.
+   (وكان هنا صنفٌ عامٌّ ‎.ac-glass‎ لم يستعمله شيءٌ قطّ — نُزع.) */
 
 /* شريطُ أدوات المكتبة: صار في قسمه آخرَ الورقة («البحثُ والتصنيفات: زجاجٌ سائل») */
 
@@ -141,9 +125,6 @@
 :root { --side-w: 200px; }
 body.side-rail { --side-w: 64px; }
 
-body.side-rail .side-logout .side-logout-tx,
-body.side-rail .side-auth-tx,
-body.side-rail .side-profile .sp-name { display: none; }
 
 /* ============================================================
    الحركةُ بين الواسع والسكّة: كلُّ شيءٍ على إيقاعٍ واحد (طلبُ صاحب الموقع · «ج»)
@@ -154,14 +135,20 @@ body.side-rail .side-profile .sp-name { display: none; }
    والأسماءُ تتلاشى وتنطوي بدل أن تختفي، والأيقونةُ تنزاح إلى الوسط بالحَشو لا بقفزةٍ.
    والحركةُ عند الضغط وحدَه (‎body.side-anim‎ من ‎setRail‎)، لا عند فتح الصفحة. */
 @property --side-w { syntax: '<length>'; inherits: true; initial-value: 200px; }
-.side-logo, .sidebar .tabs .tab-tx, .nook-com span { max-width: 170px; overflow: hidden; white-space: nowrap; }
-body.side-rail .side-logo,
-body.side-rail .sidebar .tabs .tab-tx,
-body.side-rail .nook-com span { max-width: 0; opacity: 0; }
+.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+.side-logout-tx, .side-auth-tx, .side-profile .sp-name { max-width: 170px; overflow: hidden; white-space: nowrap; }
+body.side-rail :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+                   .side-logout-tx, .side-auth-tx, .side-profile .sp-name) { max-width: 0; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   body.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
-  body.side-anim :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span) {
+  body.side-anim :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+                     .side-logout-tx, .side-auth-tx, .side-profile .sp-name) {
     transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease; }
+  body.side-anim :is(.nook-com, .side-logout, .side-join, .side-login) {
+    transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
+  body.side-anim .side-acct .side-profile {
+    transition: width .32s cubic-bezier(.32,.72,0,1), height .32s cubic-bezier(.32,.72,0,1), min-height .32s cubic-bezier(.32,.72,0,1),
+                padding .32s cubic-bezier(.32,.72,0,1), border-radius .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
   body.side-anim .sidebar .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
   body.side-anim .sidebar { transition: padding .32s cubic-bezier(.32,.72,0,1); }
   body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
@@ -171,7 +158,8 @@ body.side-rail .nook-com span { max-width: 0; opacity: 0; }
    تمويهُ ما تحته كاملًا، ومعه الانكسارُ (‎#lg-edge‎) والبحثُ والقرص. كان خُمسُ الإطارات
    يتجاوز ٢٠ مللي، وبإطفائه في ثلث الثانية هذا صار إطارًا واحدًا من ٨٤. فيُطفأ والصبغةُ
    أكثفُ قليلًا فلا يتبدّل المظهر، ويعود حين يُرفع ‎side-anim‎. والتمريرُ لا يمسّه شيء (قِيس كذلك). */
-body.side-anim :is(.sidebar, .side-handle, .market-tools .search, .market-tools .filterwrap::before) {
+body.side-anim :is(.sidebar, .side-handle, .market-tools .search),
+body.side-anim .market-tools .filterwrap::before {   /* العنصرُ الزائف لا يدخل ‎:is()‎ — فله سطرُه */
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
 }
 body.side-anim .sidebar,
@@ -182,12 +170,9 @@ body.side-anim .market-tools .filterwrap::before {
 }
 
 body.side-rail .sidebar { padding: 14px 8px; }
-body.side-rail .nook-com,
-body.side-rail .side-logout,
-body.side-rail .side-join,
-body.side-rail .side-login,
-body.side-rail .side-profile { justify-content: center; padding-inline: 0; }
-body.side-rail .nook-com { padding-inline-start: 0; }
+body.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
+body.side-rail .sidebar .tabs .nook-com { gap: 0; padding-inline: calc(50% - 5.5px) 0; }
+body.side-rail .side-profile { gap: 0; }
 body.side-rail .sidebar .tabs button { gap: 0; padding-inline: calc(50% - 9px) 0; }
 body.side-rail .side-ctl { align-items: center; }
 body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
@@ -340,7 +325,6 @@ html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
 /* والمحتوى يُفسح للوح وفجوته */
 body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
 html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
-/* والمطويُّ يخرج كلَّه ومعه فجوتُه */
 
 /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
 .sidebar .tabs { margin-inline: -4px; }
@@ -401,8 +385,8 @@ html[data-lang="en"] .side-handle {
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
   .sidebar {
     background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
-    -webkit-backdrop-filter: blur(20px) saturate(170%);
-            backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+            backdrop-filter: blur(16px) saturate(170%);
   }
   /* والظلُّ بتخصيصٍ أعلى: ‎html[data-skin="flat"] .sidebar‎ في جلد الجذر
      يُصفّر الظلَّ، وقِيس فغلب ‎.sidebar‎ وحدَها. فالحدُّ الفاتحُ على الوجه
@@ -632,7 +616,10 @@ html[dir="ltr"]:root .market-tools .fpanel, html[data-lang="en"]:root .market-to
   left: auto; right: 0; transform-origin: top right; }
 @media (prefers-reduced-motion: no-preference) {
   html:root .market-tools .fpanel:not([hidden]) { animation: lg-pop .26s cubic-bezier(.2,.9,.25,1.08); }
-  @keyframes lg-pop { from { opacity: 0; transform: scale(.94) translateY(-4px); } }
+  /* ===== تلاشٍ لا تكبير =====
+     قِيس: التكبيرُ (‎scale‎) على لوحٍ عليه تمويهٌ يُعيد تمويهَ ما تحته في كلّ إطار — كان نصفُ
+     إطارات فتح الفلاتر يتجاوز ٢٠ مللي. والتلاشي وحده يُموَّه ما تحته مرّةً ثمّ يُخبَّأ. */
+  @keyframes lg-pop { from { opacity: 0; } }
 }
 html:root .market-tools .fgroup + .fgroup { border-top-color: color-mix(in srgb, var(--lg-ink) 8%, transparent); }
 

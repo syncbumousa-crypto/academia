@@ -328,7 +328,7 @@
     state.signedIn = !!(state.profile.name || state.profile.email);
   const isGuest = () => !state.signedIn;
   const hasAcct = () => !!(state.profile.email && state.profile.password);
-  state.sideCollapsed = !!state.sideCollapsed;   // طي الشريط الجانبي (محفوظ)
+  delete state.sideCollapsed;   // كان طيُّ الشريط الكامل — نُزع: للشريط حالتان (واسعٌ وسكّة) تملكهما الصفحة
   /* مقاسُ مربّع «المادة» في القُمرة: نافذةٌ مرنة يسحبها صاحبُها، والمحتوى يتبع المقاس.
      ‏‎w = 0‎ يعني «اترك العرضَ للشبكة» (‎.75fr‎)، وما فوقه عرضٌ صريحٌ يقود عمودَه.
      ولمَ في الحال المحفوظة لا في الجلسة؟ لأنّه تفضيلٌ لا حالُ نظرة: من ضيّقه مرّةً
@@ -32718,7 +32718,6 @@ void main() {
       b.title = tx;
       const s = b.querySelector('.side-auth-tx'); if (s) s.textContent = tx;
     });
-    const sh = $('#side-handle'); if (sh) sh.title = state.sideCollapsed ? T().sideOpen : T().sideClose;
   }
   /* ============================================================
      صفحةُ الباب — تسكن لوحَ الحساب نفسَه
@@ -34717,12 +34716,6 @@ void main() {
     if (e.target.closest('#nook-join'))  openAuthPage('join');
     if (e.target.closest('#nook-login')) openAuthPage('login');
   });
-  /* طي/فتح الشريط الجانبي عبر مقبض واحد ملتصق بحافته (كلاس على body) */
-  function applySidebar() {
-    document.body.classList.toggle('side-closed', !!state.sideCollapsed);
-    const sh = $('#side-handle'); if (sh) sh.title = state.sideCollapsed ? T().sideOpen : T().sideClose;
-  }
-  $('#side-handle').addEventListener('click', () => { state.sideCollapsed = !state.sideCollapsed; save(); applySidebar(); });
   $('#panel-account').addEventListener('input', e => {
     const inp = e.target.closest('.acct-in'); if (!inp) return;
     state.profile[inp.dataset.f] = inp.value; save(); renderProfile();
@@ -40989,7 +40982,6 @@ void main() {
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
   if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
   applyTheme();
-  applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ
      وجهٍ يُرى في قاعه يجب أن يكون على الجسم قبلها */
   applyAuth();

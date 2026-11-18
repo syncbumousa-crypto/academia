@@ -11070,36 +11070,13 @@ body.is-guest .side-logout { display: none; }
 }
 .side-login:hover { border-color: var(--c-kfupm); color: var(--c-kfupm); background: var(--c-kfupm-soft); }
 
-/* طيّ الشريط: ينزلق خارج الشاشة + يختفي هامش الجسم */
-.sidebar { transition: transform .25s ease; }
-body { transition: padding .25s ease; }
-body.side-closed .sidebar { transform: translateX(100%); }
-body.side-closed { padding-right: 0; }
-html[data-lang="en"] body.side-closed .sidebar { transform: translateX(-100%); }
-html[data-lang="en"] body.side-closed { padding-left: 0; }
-
-/* مقبض عمودي ملتصق بحافة الشريط (المنتصف): يطوي/يفتح — يتبع الحافة عند الطي */
+/* مقبضُ الشريط: أساسُه هنا، وشكلُه وموضعُه في ‎glass.css‎ (قرصٌ زجاجيّ محسوبٌ من ‎--side-w‎).
+   وكان هنا طيُّ الشريط الكامل (‎body.side-closed‎) وانتقالٌ على حشو الجسد — نُزعا: الانتقالُ
+   كان يُضاف فوق حركة ‎--side-w‎ فيتأخّر عنها ويُقطّعها، والطيُّ الكامل لم يعد في الواجهة. */
 .side-handle {
-  position: fixed; z-index: 42; top: 50%; right: var(--side-w);
-  transform: translateY(-50%);
-  width: 21px; height: 62px; cursor: pointer; padding: 0;
-  border: 1px solid var(--border); border-right: 0; border-radius: 11px 0 0 11px;
-  background: var(--surface); color: var(--c-kfupm);
+  position: fixed; z-index: 42; cursor: pointer; padding: 0;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: -5px 0 14px rgba(20, 35, 63, .1);
-  transition: right .25s ease;
 }
-.side-handle:hover { color: #fff; background: var(--c-kfupm); border-color: var(--c-kfupm); }
-body.side-closed .side-handle { right: 0; }
-.side-handle svg { width: 15px; height: 15px; transition: transform .25s ease; }
-body.side-closed .side-handle svg { transform: rotate(180deg); }
-html[data-lang="en"] .side-handle {
-  right: auto; left: var(--side-w); border: 1px solid var(--border); border-left: 0;
-  border-radius: 0 11px 11px 0; box-shadow: 5px 0 14px rgba(20, 35, 63, .1);
-}
-html[data-lang="en"] body.side-closed .side-handle { left: 0; }
-html[data-lang="en"] .side-handle svg { transform: rotate(180deg); }
-html[data-lang="en"] body.side-closed .side-handle svg { transform: rotate(0deg); }
 .sp-av {
   flex: none; width: 32px; height: 32px; border-radius: 50%; overflow: hidden;
   background: var(--c-kfupm-soft); color: var(--brand-tx);
