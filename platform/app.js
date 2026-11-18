@@ -10195,7 +10195,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if ((state.bought || {})[p.id]) return `<span class="pc-sale pc-sale--own">${PC_CHK}${en ? 'Purchased' : 'اشتريتها'}</span>`;
     const pr = Math.max(0, +s.price || 0);
     const ic = m === 'part' ? PC_HALF : PC_LOCK, st = m === 'part' ? (en ? 'Free trial available' : 'توجد تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
-    const body = `<span class="pc-sale__st">${ic}${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'اشترِ · ')}<span class="pc-pr">${pr}${PC_SAR}</span></b>`;
+    const body = `<span class="pc-sale__st">${ic}${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'شراء · ')}<span class="pc-pr">${pr}${PC_SAR}</span></b>`;
     return isMine(p) ? `<span class="pc-sale pc-sale--mine pc-sale--${m}">${body}</span>`
       : `<button type="button" class="pc-sale pc-sale--buy pc-sale--${m}" data-pcbuy="${esc(p.id)}">${body}</button>`;
   }
