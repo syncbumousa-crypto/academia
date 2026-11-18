@@ -14090,6 +14090,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (kind === 'c') { const g = pkGoneOf(p); pkGone[p.id] = g;
       g.forEach(k => { if (k === 'book') pkSplit[p.id] = false; else if (k === 'bank') pkBank[p.id] = false; else pkMidOff[p.id] = true; }); }
     /* والمفتوحةُ في موضعها بإطار (طلبُ صاحب الموقع): رأسٌ وذيلٌ ومساحاتٌ كالمكبَّرة، وهي بين أخواتها */
+    /* ولا «مفتوحةً بلا إطار» في المختبر: إن فُتحت من طريقٍ آخر (‎cardView.open‎ — زرٌّ أو مساهمةٌ أخرى طوت فأحالت
+       «الحاليّة» إليها) وليست في المتّسعات، لبست الإطارَ ومساحاتِها لا الهيئةَ القديمة (طلبُ صاحب الموقع: أيقوناتٌ
+       تطير خارج الصفحة ومساحةٌ بلا مربّع) */
+    if (kind === 'c' && pkLab() && !maxd && V.open === p.id && !pubOpen.has(p.id)) {
+      pubOpen.add(p.id); cxRowFresh = p.id;
+      if (!pkSplitOn(p.id) && !pkBankOn(p.id) && pkMidOff[p.id]) delete pkMidOff[p.id];
+    }
     let framed = !maxd && kind === 'c' && pkLab() && pubOpen.has(p.id);
     /* ولا مساحةَ مفتوحةً فيها: يُلغى التوسيعُ فتعود صفًّا بين أخواتها (طلبُ صاحب الموقع) */
     if (framed) {
