@@ -19457,3 +19457,79 @@ html[data-theme="dark"] #pcv .pcv-exit .pk-curve__grip { stroke: rgba(240, 100, 
 html[data-theme="dark"] #pcv .pcv-exit .pk-curve__dots { fill: #f08080; }
 html[data-theme="dark"] #pcv .pcv-exit:hover .pk-curve__grip { stroke: rgba(240, 100, 100, .62); }
 html[data-theme="dark"] #pcv .pcv-exit:hover .pk-curve__dots { fill: #f6a0a0; }
+/* ===== نافذةُ التسعير بثيم الموقع — كنافذة الغلاف ولوح الفلاتر (طلبُ صاحب الموقع) =====
+   زجاجٌ مضبَّب، ومجموعاتٌ تفصلها خطوطٌ رقيقة، والحقولُ رقاقات، والمختارُ تركوازُ الموقع لا الذهب */
+#pcp { background: rgba(13, 42, 72, .16); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+html[data-theme="dark"] #pcp { background: rgba(0, 0, 0, .3); }
+#pcp .pcp-panel {
+  position: relative; padding: 16px 18px 18px; border-radius: 26px; corner-shape: round; color: #14233f;
+  background: rgba(231, 239, 240, .84); backdrop-filter: blur(20px) saturate(1.7); -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 24px 56px -20px rgba(13, 42, 72, .35);
+}
+#pcp .pcp-panel.is-in { animation: pcvIn .28s cubic-bezier(.32, .72, 0, 1); }
+html[data-theme="dark"] #pcp .pcp-panel { color: #e6edf1; background: rgba(23, 49, 58, .84); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 24px 56px -20px rgba(0, 0, 0, .6); }
+#pcp .pcv-hd { margin-bottom: 12px; font-size: 15px; }
+/* شريطُ الخروج الأحمر في الزاوية المقابلة */
+#pcp .pk-max.pk-max--curve.pcv-exit { top: 4px; inset-inline-start: auto; inset-inline-end: 4px; z-index: 2; }
+#pcp .pcv-exit svg { transform: scaleX(-1); }
+html[data-lang="en"] #pcp .pcv-exit svg { transform: none; }
+#pcp .pcv-exit .pk-curve__grip { stroke: rgba(205, 60, 60, .3); }
+#pcp .pcv-exit .pk-curve__dots { fill: #b3302f; opacity: .75; }
+#pcp .pcv-exit:hover .pk-curve__grip, #pcp .pcv-exit:focus-visible .pk-curve__grip { stroke: rgba(205, 60, 60, .6); }
+#pcp .pcv-exit:hover .pk-curve__dots, #pcp .pcv-exit:focus-visible .pk-curve__dots { fill: #9e2523; opacity: 1; }
+html[data-theme="dark"] #pcp .pcv-exit .pk-curve__grip { stroke: rgba(240, 100, 100, .32); }
+html[data-theme="dark"] #pcp .pcv-exit .pk-curve__dots { fill: #f08080; }
+html[data-theme="dark"] #pcp .pcv-exit:hover .pk-curve__grip { stroke: rgba(240, 100, 100, .62); }
+html[data-theme="dark"] #pcp .pcv-exit:hover .pk-curve__dots { fill: #f6a0a0; }
+/* السعرُ الكلّيّ: مجموعةٌ أولى بلا صندوقٍ ذهبيّ، يفصلها خطٌّ كخطوط الفلاتر */
+#pcp .pcp-top { margin-bottom: 14px; padding: 6px 0 16px; border-radius: 0; background: none; border-bottom: 1px solid rgba(20, 35, 63, .08); }
+html[data-theme="dark"] #pcp .pcp-top { background: none; border-bottom-color: rgba(255, 255, 255, .08); }
+#pcp .pcp-tl { font-size: 12px; font-weight: 700; color: #5d6b82; opacity: 1; }
+html[data-theme="dark"] #pcp .pcp-tl { color: #93a7b6; }
+#pcp .pcp-big { color: #2c5e65; }
+html[data-theme="dark"] #pcp .pcp-big { color: #7fb3bb; }
+#pcp .pcp-big input { border-bottom-color: rgba(44, 94, 101, .35); }
+#pcp .pcp-big input:focus { border-bottom-color: #2c5e65; }
+html[data-theme="dark"] #pcp .pcp-big input { border-bottom-color: rgba(127, 179, 187, .35); }
+html[data-theme="dark"] #pcp .pcp-big input:focus { border-bottom-color: #7fb3bb; }
+#pcp .is-per .pcp-big input { border-bottom-color: transparent; }
+/* الشريطُ رقاقتان متلاصقتان كرقاقات الفلاتر، والمختارةُ تركوازيّة */
+#pcp .pcp-seg { padding: 3px; background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); }
+html[data-theme="dark"] #pcp .pcp-seg { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+#pcp .pcp-seg__th { top: 3px; bottom: 3px; inset-inline-start: 3px; width: calc(50% - 3px); background: #2c5e65; box-shadow: none; }
+html[data-theme="dark"] #pcp .pcp-seg__th { background: #2c5e65; }
+#pcp .pcp-seg button { padding: 7px 10px; font-size: 12.5px; font-weight: 600; color: #5d6b82; opacity: 1; }
+html[data-theme="dark"] #pcp .pcp-seg button { color: #7fb3bb; }
+#pcp .pcp-seg button[aria-checked="true"], html[data-theme="dark"] #pcp .pcp-seg button[aria-checked="true"] { color: #fff; }
+#pcp .pcp-seg button:focus-visible { outline-color: #2c5e65; }
+/* النصفان: بلا إطارٍ ثقيل، والفاصلُ بينهما خطٌّ رقيق */
+#pcp .pcp-split { border-radius: 0; box-shadow: none; }
+#pcp .pcp-half { padding: 2px 4px 4px; }
+#pcp .pcp-half + .pcp-half { border-inline-start: 1px solid rgba(20, 35, 63, .08); padding-inline-start: 14px; }
+html[data-theme="dark"] #pcp .pcp-half + .pcp-half { border-inline-start-color: rgba(255, 255, 255, .08); }
+#pcp .pcp-hh { font-size: 12px; color: #5d6b82; }
+#pcp .pcp-hh b { font-weight: 700; }
+html[data-theme="dark"] #pcp .pcp-hh { color: #93a7b6; }
+#pcp .pcp-hh svg { width: 16px; height: 16px; color: #2c5e65; }
+html[data-theme="dark"] #pcp .pcp-hh svg { color: #7fb3bb; }
+#pcp .pcp-hh i { background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); }
+html[data-theme="dark"] #pcp .pcp-hh i { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+/* صفوفُ المجلدات وحقولُ أسعارها رقاقاتُ الفلاتر */
+#pcp .pcp-row { background: rgba(255, 255, 255, .45); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .06); font-size: 13px; }
+html[data-theme="dark"] #pcp .pcp-row { background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06); }
+#pcp .pcp-in { background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); color: #14233f; }
+html[data-theme="dark"] #pcp .pcp-in { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); color: #e6edf1; }
+#pcp .pcp-in:focus-within { box-shadow: inset 0 0 0 1.5px #2c5e65; }
+html[data-theme="dark"] #pcp .pcp-in:focus-within { box-shadow: inset 0 0 0 1.5px #7fb3bb; }
+#pcp .pcp-in.is-on { color: #fff; background: #2c5e65; box-shadow: none; }
+html[data-theme="dark"] #pcp .pcp-in.is-on { color: #fff; background: #2c5e65; }
+#pcp .pcp-in.is-on > svg:not(.pc-sar) { color: #fff; }
+#pcp .pcp-nb { background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .1); }
+html[data-theme="dark"] #pcp .pcp-nb { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+#pcp .pcp-none { color: #5d6b82; font-size: 12.5px; }
+html[data-theme="dark"] #pcp .pcp-none { color: #93a7b6; }
+/* «حفظ» رقاقةٌ مختارة */
+#pcp .pcp-ft { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(20, 35, 63, .08); }
+html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08); }
+#pcp .pcv-btn, html[data-theme="dark"] #pcp .pcv-btn { padding: 8px 20px; font-size: 12.5px; font-weight: 600; color: #fff; background: #2c5e65; transition: filter .15s; }
+#pcp .pcv-btn:hover { filter: brightness(1.12); }

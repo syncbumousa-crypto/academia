@@ -10521,7 +10521,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fresh = pcpSt.fresh; pcpSt.fresh = false;
     const sc = [...box.querySelectorAll('.pcp-list')].map(x => x.scrollTop), psc = (box.querySelector('.pcp-panel') || {}).scrollTop || 0;
     box.innerHTML = `<div class="pcp-panel${fresh ? ' is-in' : ''}${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
-      + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
+      + `<div class="pcv-hd"><b>${esc(L.t)}</b></div>`
+      /* الخروجُ شريطُ الزاوية الأحمر كنافذة الغلاف (طلبُ صاحب الموقع) */
+      + `<button type="button" class="pk-max pk-max--curve pcv-exit" data-pcpx="1" aria-pressed="true" title="${esc(L.cls)}" aria-label="${esc(L.cls)}">${CX_GROW1}</button>`
       + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><input type="number" min="0" step="5" inputmode="numeric" data-pcpt="1" placeholder="0" value="${tot || ''}"${pcpSt.per ? ' readonly tabindex="-1"' : ''}>${PC_SAR}</span>`
       
       /* شريطٌ بخيارين لا مفتاح (طلبُ صاحب الموقع): سعرٌ شامل · تسعيرُ كلّ مجلد */
