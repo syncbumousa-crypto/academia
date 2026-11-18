@@ -4490,10 +4490,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         srcU: (info.study && info.study.study.length) ? { items: info.study.study } : null,
         srcP: (info.study && info.study.practice.length) ? { items: info.study.practice } : null,
       };
+      let moved = false;
       SECTIONS.forEach(s => {
+        if (legacy[s]) moved = true;
         info.posts[s] = legacy[s] ? [{ me: true, u: { name: T().meName }, likes: 0, liked: false, ts: Date.now(), data: legacy[s] }] : [];
       });
-      save();
+      /* ===== وخاناتٌ خاويةٌ لا تُحفظ، والمنقولُ يُحفظ في أوّل فراغ =====
+         كان ‎save()‎ يقع هنا في كلّ مرّة — والخاناتُ الخاويةُ يُسقطها الدرجُ (‎cinfoThin‎)،
+         فتعود ‎posts‎ غائبةً في الإقلاع التالي ويقع الحفظُ ثانيةً: حفظٌ كاملٌ متزامنٌ
+         (~٦٠ms) عند أوّل فتحٍ لكلّ كتابٍ في كلّ جلسة، لا يحفظ شيئًا. */
+      if (moved) saveSoon();
     }
     /* دمج «نوعية المادة» في «المادة»: مشاركات nature القديمة تنطوي داخل info */
     if (info.posts.nature) {
