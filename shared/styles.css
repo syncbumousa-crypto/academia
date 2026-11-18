@@ -18735,4 +18735,4 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 #cm-body .pk-bank .x3.cx-ro .x3-hd > .vt-grab--ro,
 #cm-body .pk--edit .pk-bank .x3-hd > .vt-grab--sel { opacity: 1; }
 /* (ثمّ) يتنحّى الصفُّ كلُّه عن زاوية الأيقونة: زرُّ التحديد يساراها (‎34px‎ من الحافّة)، فيصعد أوّلُ مجلدٍ إلى سطر الرأس بجانبها */
-#cm-body .post-ytmain > .pk-split > .pk-bank > :is(.x3, #cm-cards) { padding-inline-start: 34px; margin-top: -26px; }
+#cm-body .post-ytmain > .pk-split > .pk-bank > :is(.x3, #cm-cards) { padding-inline-start: 34px; margin-top: -34px; }
