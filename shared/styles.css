@@ -18706,3 +18706,9 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 #hall .hall__b:hover { background: rgba(47, 107, 208, .85); }
 #hall .hall__b[data-hall="x"]:hover { background: rgba(192, 69, 95, .9); }
 #hall .hall__b svg { width: 17px; height: 17px; }
+/* ===== شريطُ البنك الأفقيّ على قاع المساحة لا فوق فجوتها (طلبُ صاحب الموقع) =====
+   في كونسبت الأيقونات السفليّة (‎pk--icB‎) للمساحة حشوةُ ‎40px‎ في قاعها تحجز فجوةَ الأيقونة، فكان المُمرِّرُ
+   ينتهي فوقها فيطفو شريطُه بعيدًا عن الحافّة ويمتدّ فوق الفجوة. فيمتدّ المُمرِّرُ إلى القاع نفسِه (والحشوةُ
+   تنتقل إلى جوفه فلا يقع آخرُ صفٍّ تحت الأيقونة)، وتبتعد سكّتُه عن الطرفين بقدر الفجوة أيًّا كان جانبُها */
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-bank > :is(#cm-cards, .x3) { margin-bottom: -40px; padding-bottom: 40px; }
+#cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-bank > :is(#cm-cards, .x3)::-webkit-scrollbar-track:horizontal { margin-inline: 52px; }
