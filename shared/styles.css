@@ -19385,14 +19385,10 @@ html[data-theme="dark"] #pcp .pcp-seg button[aria-checked="true"] { color: #fff;
 @keyframes pcAeSh { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
 #cm-body .pk--pc .pc-art--empty:hover { transform: translateY(-2px); background: linear-gradient(160deg, rgba(168, 132, 46, .18), rgba(168, 132, 46, .08)); }
 #cm-body .pk--pc .pc-art--empty:focus-visible { outline: 2px solid #a8842e; outline-offset: 3px; }
-#cm-body .pk--pc .pc-ae__ic { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(168, 132, 46, .16); }
-#cm-body .pk--pc .pc-ae__ic svg { width: 21px; height: 21px; }
-#cm-body .pk--pc .pc-ae__ic i { position: absolute; top: -3px; inset-inline-end: -4px; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #a8842e; color: #fff; font: 700 14px/1 sans-serif; font-style: normal; box-shadow: 0 0 0 2px var(--u-bg, #fff); }
-#cm-body .pk--pc .pc-art--empty b { font-size: 13.5px; font-weight: 700; margin-top: 2px; }
-#cm-body .pk--pc .pc-art--empty small { font-size: 11px; opacity: .7; }
+#cm-body .pk--pc .pc-ae__ic { display: grid; place-items: center; }
+#cm-body .pk--pc .pc-ae__ic svg { width: 28px; height: 28px; }
+#cm-body .pk--pc .pc-art--empty b { font-size: 14px; font-weight: 700; margin-top: 4px; }
 html[data-theme="dark"] #cm-body .pk--pc .pc-art.pc-art--empty { color: #e1c172; background: linear-gradient(160deg, rgba(212, 179, 106, .12), rgba(212, 179, 106, .04)); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::before { border-color: rgba(212, 179, 106, .5); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::after { background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .12) 50%, transparent 65%); }
-html[data-theme="dark"] #cm-body .pk--pc .pc-ae__ic { background: rgba(212, 179, 106, .16); }
-html[data-theme="dark"] #cm-body .pk--pc .pc-ae__ic i { background: #d4b36a; color: #1a2230; box-shadow: 0 0 0 2px #0f1720; }
 @media (prefers-reduced-motion: reduce) { #cm-body .pk--pc .pc-art--empty::before, #cm-body .pk--pc .pc-art--empty::after { animation: none; } }
