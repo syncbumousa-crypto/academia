@@ -10111,6 +10111,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المربّع في زاويته العليا اليسرى. ونقرُ إحداهما يبدّل المساحة، وإغلاقُ المساحة يُعيد الأيقونات إلى سطرها */
   const PK_ICX = true;
   const PK_IC_KEYS = ['book', 'mid', 'bank'];
+  /* ===== المساحةُ الفارغةُ لا تُرى في المنشورة (طلبُ صاحب الموقع) =====
+     بلا مصدرٍ ⇐ لا «مصادر»، وبلا مجلدٍ ولا بطاقةٍ في الملخّص ⇐ لا «ملخّص»، وبلا شيءٍ في البنك ⇐ لا «بنك» —
+     لا إطارَ ولا زرَّ ولا فتحَ لها. يُحسب عند رسم المنشورة (‎packCard‎) ويُمحى في التحرير: صاحبُها يرى الثلاثَ ليملأها */
+  const pkGone = {};
+  const pkGoneOf = p => { const d = (p && p.data) || {}; return PK_IC_KEYS.filter(k => k === 'book' ? !pkSrcList(p.id).length : k === 'mid' ? !(d.deck || []).length : !(d.qb || []).length); };
+  const pkKeysOf = id => { const g = pkGone[id]; return g && g.length ? PK_IC_KEYS.filter(k => !g.includes(k)) : PK_IC_KEYS; };
   const pkIcOpenK = id => pkSplitOn(id) ? 'book' : pkBankOn(id) ? 'bank' : !pkMidOff[id] ? 'mid' : null;
   const pkIcOne = id => !!pkIcOpenK(id);
   /* ومعرّفُ المساهمة: المنشورةُ بـ‎data-ck‎، ومساهمةُ التحرير الواسعة بـ‎data-pkicid‎ (لا ‎data-ck‎: له مستمعو النشر) — ROADMAP-MAXICX · ٥ */
@@ -10122,7 +10128,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkIcRow = (id, row) => {
     const on = row ? [] : pkIcOpenSet(id);   /* في الصفّ الضيّق لا مفتوحَ — الثلاثُ ظاهرة */
     /* وفي الصفّ: «ابدأ بـ» قبلها — هي خطوةُ القارئ التالية (طلبُ صاحب الموقع) */
-    return `<div class="pk-icrow" data-pkid="${esc(id)}">${row ? `<span class="pk-icgo">${esc(T().pkIcGo)}</span>` : ''}` + PK_IC_KEYS.map(k =>
+    return `<div class="pk-icrow" data-pkid="${esc(id)}">${row ? `<span class="pk-icgo">${esc(T().pkIcGo)}</span>` : ''}` + pkKeysOf(id).map(k =>
       `<button type="button" class="pk-ic${on.includes(k) ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
   };
   /* ============================================================
@@ -10279,9 +10285,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        في أعلى كلّ إطارٍ اسمُ مساحته وحدَه على خطّه، وفي أسفله ينقطع الخطُّ لأيقونتها —
        والأيقونةُ هي الزرّ (‎[data-pkic]‎ في ‎.pk-icrow‎): تُوسِّع المساهمةَ على مساحتها كما كانت */
     /* وفي المساهمة المفتوحة لا أزرار: الأزرارُ نزلت مساحاتٍ تحت، فيتّصل خطُّ الإطار من تحت (طلبُ صاحب الموقع) */
-    if (noKeys) return `<div class="pc-fr pc-fr--nokeys">` + PK_IC_KEYS.map(k =>
+    if (noKeys) return `<div class="pc-fr pc-fr--nokeys">` + pkKeysOf(id).map(k =>
       `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg">${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span></div>`).join('') + `</div>`;
-    return `<div class="pk-icrow pc-ks pc-fr" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
+    return `<div class="pk-icrow pc-ks pc-fr" data-pkid="${esc(id)}">` + pkKeysOf(id).map(k =>
       `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg">${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span>`
       + `<button type="button" class="pk-ic pc-k pc-fs__go pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(nm(k))}" aria-label="${esc(nm(k))}"><span class="pc-k__ic">${pkIcSvg(k, id)}</span></button></div>`).join('') + `</div>`;
   }
@@ -11018,6 +11024,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     const post = (b || x).closest('.post'), id = post && pkIcId(post);
     if (!id || post.pkIcBusy) return;
+    if (b && (pkGone[id] || []).includes(b.dataset.pkic)) return;   /* مساحةٌ فارغةٌ في المنشورة لا تُفتح */
     post.pkIcBusy = true;
     if (b && post.classList.contains('pk--icrow')) return pkIcExpand(id, b.dataset.pkic, post);   /* من الصفّ الضيّق: تتّسع على مساحتها */
     if (b) { post.pkIcBusy = false; return pkIcToggle(post, b.dataset.pkic); }
@@ -13915,6 +13922,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sub = kind === 'c' ? 'cards' : 'videos';
     const V = kind === 'c' ? cardView : vidView;
     const maxd = kind === 'c' && cxMaxPub === p.id;   /* المكبَّرةُ مفتوحةٌ أبدًا: التكبيرُ لقراءة جوفها */
+    /* والمساحاتُ الفارغة تغيب، ومفتوحُها يُغلق قبل الحساب (فلا تُفتح على فراغ) */
+    if (kind === 'c') { const g = pkGoneOf(p); pkGone[p.id] = g;
+      g.forEach(k => { if (k === 'book') pkSplit[p.id] = false; else if (k === 'bank') pkBank[p.id] = false; else pkMidOff[p.id] = true; }); }
     /* والمفتوحةُ في موضعها بإطار (طلبُ صاحب الموقع): رأسٌ وذيلٌ ومساحاتٌ كالمكبَّرة، وهي بين أخواتها */
     let framed = !maxd && kind === 'c' && pkLab() && cxRowPub === p.id && V.open === p.id;
     /* ولا مساحةَ مفتوحةً فيها: يُلغى التوسيعُ فتعود صفًّا بين أخواتها (طلبُ صاحب الموقع) */
@@ -24688,6 +24698,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
 
   function cardEditCard(p, i) {
+    delete pkGone[p.id];   /* صاحبُها يرى المساحاتِ الثلاث ليملأها */
     pkEsOpen(p.id, p.data.deck);   /* المساهمةُ الفارغة تُفتح أوّلَ مرّةٍ بمساحاتها الثلاث — ثمّ يُترك لصاحبها ما يفتح ويغلق */
     const vwAlt = pkVwOf(p.id) !== 'folder';
     /* ورأسُ المساهمة (الغلافُ والشاراتُ والأخبار) يعدّ الشجرةَ المعروضة: البنكَ في المجلّديّ */
