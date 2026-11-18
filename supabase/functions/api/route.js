@@ -27,6 +27,7 @@ import * as lock     from './_h/lock.js';
 import * as posts    from './_h/posts.js';
 import * as udoc     from './_h/udoc.js';
 import * as media    from './_h/media.js';
+import * as books    from './_h/books.js';
 import * as likes    from './_h/likes.js';
 import * as comments from './_h/comments.js';
 import * as admin    from './_h/admin.js';
@@ -39,6 +40,7 @@ const ROUTES = [
   ['/api/posts',    posts],
   ['/api/udoc',     udoc],
   ['/api/media',    media],
+  ['/api/books',    books],   /* كتبُ المساهمات إلى السحابة (ROADMAP-BOOKS-SERVER) */
   ['/api/likes',    likes],
   ['/api/comments', comments],
   ['/api/admin',    admin],

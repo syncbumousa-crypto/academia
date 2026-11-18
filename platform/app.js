@@ -7074,6 +7074,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       inner = chPaneHTML(cmCode, sec);
     } else if (sec === 'cards') {
       /* «البطائق»: عرض مجمّع كالشروح — متصفح شجرة المجلدات والبطائق (ROADMAP-CARDS م2) */
+      /* ومصادرُ المساهمات من السحابة: وصفُها يُبنى من المساهمة، وبصماتُ ملفّاتي تُكتب فيها (ROADMAP-BOOKS-SERVER) */
+      { let hy = 0; (postsOf(cmCode, 'cards') || []).forEach(p => { hy += pkSrcHydrate(p) + pkSrcSync(p); }); if (hy) saveSoon(); }
       inner = cardsTabHTML();
     } else if (sec === 'doc') {
       /* الدكتور: كل المساهمات عن كل الدكاترة في نافذة واحدة؛ زر الترتيب = فرز + جدول تصفية الدكاترة.
@@ -11043,6 +11045,131 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSrcKey = id => `pksrc:${id}`, pkSrcCovKey = id => `pksrccov:${id}`;
   const pkSrcMeta = id => (state.pkSrc || {})[id] || null;
   const pkSrcCovMeta = id => (state.pkSrcCov || {})[id] || null;
+  /* ============================================================
+     الكتبُ إلى السحابة (ROADMAP-BOOKS-SERVER)
+     ============================================================
+     كان ملفُّ المصدر في متصفّح من أضافه وحده، ولا يبلغ الخادمَ إلّا اسمُه — فغيرُه لا يفتحه،
+     وهو لا يجده من جهازٍ آخر، ويضيع بمسح المتصفّح. والمبدأ (صاحبُ الموقع): الموقعُ سحابيّ.
+     · يُرفع الملفُّ إلى مستودع ‎books‎ باسم بصمته (SHA-256): المكرّرُ ملفٌّ واحد.
+     · والبصمةُ تُكتب في ‎data.src.files‎ فتسافر مع المساهمة إلى كلّ جهاز.
+     · والمتصفّحُ ذاكرةٌ مؤقّتةٌ لا أصل: يُفتح منه إن وُجد، وإلّا من السحابة ثمّ يُحفظ فيه. */
+  const BOOKS_PUB = () => { try { return new URL(window.AC_API_BASE || '').origin + '/storage/v1/object/public/books/'; } catch (e) { return ''; } };
+  const booksURL = () => (ASSET_BASE ? new URL('api/books', window.AC_API_BASE || ASSET_BASE).href
+                                     : (window.AC_API_ORIGIN || location.origin) + '/api/books');
+  async function bookHash(blob) {
+    const d = await crypto.subtle.digest('SHA-256', await blob.arrayBuffer());
+    return [...new Uint8Array(d)].map(x => x.toString(16).padStart(2, '0')).join('');
+  }
+  /* يرفع الملفَّ (أو يجده قائمًا) ويردّ بصمتَه — أو ‎null‎ إن تعثّر، فيبقى محلّيًّا ويُعاد لاحقًا */
+  async function bookUp(blob, type) {
+    if (!blob || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return null;
+    try {
+      const h = await bookHash(blob);
+      const r = await apiFetch(booksURL(), {
+        method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ h, size: blob.size, type: type || 'application/pdf' }),
+      });
+      if (!r.ok) { bootMark('book:' + r.status); return null; }
+      const j = await r.json();
+      if (!j.exists) {
+        const u = await fetch(j.upload, { method: 'PUT', headers: { 'content-type': type || 'application/pdf' }, body: blob });
+        if (!u.ok && u.status !== 409) { bootMark('book:put:' + u.status); return null; }
+      }
+      return h;
+    } catch (e) { return null; }
+  }
+  async function bookDown(h) {
+    const b = BOOKS_PUB();
+    if (!b || !/^[0-9a-f]{64}$/.test(String(h || ''))) return null;
+    try { const r = await fetch(b + h); return r.ok ? await r.blob() : null; } catch (e) { return null; }
+  }
+  /* المساهمةُ بمعرّفها في أيّ مادّة (الرفعُ قد ينتهي وقد انتقل صاحبُه إلى مادّةٍ أخرى) */
+  const pkSrcPost = id => {
+    const here = cmCode ? (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id) : null;
+    if (here) return here;
+    for (const c of Object.keys(state.cinfo || {})) {
+      const a = (((state.cinfo[c] || {}).posts || {}).cards) || [];
+      const q = a.find(x => x && x.id === id);
+      if (q) return q;
+    }
+    return null;
+  };
+  /* وصفُ المصادر من المساهمة نفسِها — في الجهاز الذي لم يُضف فيه الملفّ */
+  function pkSrcHydrate(p) {
+    const F = p && p.data && p.data.src && p.data.src.files;
+    if (!Array.isArray(F)) return 0;
+    let n = 0;
+    state.pkSrc = state.pkSrc || {};
+    F.forEach(f => {
+      if (!f || !f.h) return;
+      const sid = p.id + (f.s || ''), m = state.pkSrc[sid];
+      if (m) { if (!m.h) { m.h = f.h; n++; } return; }
+      state.pkSrc[sid] = { name: f.n || '', size: f.z || 0, ts: Date.now(), type: f.t || 'book', pages: f.p || 0, h: f.h, remote: 1 };
+      n++;
+      if (f.s) { const xs = ((state.pkSrcX = state.pkSrcX || {})[p.id] = state.pkSrcX[p.id] || []); if (!xs.includes(sid)) xs.push(sid); }
+    });
+    return n;
+  }
+  /* مساهمتي التي لملفّاتها بصماتٌ لم تُكتب فيها بعد */
+  function pkSrcSync(p) {
+    if (!p || !isMine(p)) return 0;
+    const L = pkSrcList(p.id);
+    if (!L.some(s => (pkSrcMeta(s) || {}).h)) return 0;
+    const F = p.data && p.data.src && p.data.src.files;
+    if (Array.isArray(F) && F.length === L.length && L.every((s, i) => F[i] && F[i].h === (pkSrcMeta(s) || {}).h)) return 0;
+    pkSrcMark(p.id);
+    return 1;
+  }
+  /* ملفٌّ أُضيف للتوّ: يُرفع في الخلفية، ثمّ تُكتب بصمتُه في المساهمة فتُدفع */
+  async function pkSrcCloud(sid, blob) {
+    if (!(pkSrcMeta(sid) || {}).name || pkSrcMeta(sid).h) return;
+    const h = await bookUp(blob, 'application/pdf');
+    const m = pkSrcMeta(sid);
+    if (!h || !m) return;
+    m.h = h;
+    pkSrcMark(pkSrcBase(sid));
+    saveSoon();
+  }
+  /* وما في المتصفّح من قبل: يُرفع مرّةً (قرارُ صاحب الموقع) — مساهماتي وحدها، والبذورُ تُزرع
+     في كلّ متصفّحٍ من ملفّات المستودع فلا تُرفع. وما تعثّر يُعاد في الإقلاع التالي */
+  let bookUpAllOn = false;
+  async function bookUpAll() {
+    if (bookUpAllOn || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return;
+    bookUpAllOn = true;
+    let up = 0;
+    /* ومساهمتي التي ليست في الذاكرة (الدرجُ يُسقط ما بلغ الخادم): يُسأل الخادمُ عن مادّتها
+       فتُجذب، ثمّ تُكتب البصمةُ فيها — وإلّا رُفع الملفُّ ولم يعلم به جهازٌ آخر */
+    let mineIdx = null;
+    const postOf = async id => {
+      let p = pkSrcPost(id);
+      if (p) return p;
+      if (!mineIdx) {
+        try { const r = await apiFetch(postsURL('?mine=1'), { credentials: 'same-origin' }); const j = r.ok ? await r.json() : {}; mineIdx = new Map((j.posts || []).map(x => [x.id, x.code])); }
+        catch (e) { mineIdx = new Map(); }
+      }
+      const code = mineIdx.get(id);
+      if (!code) return null;
+      await srvPull(code, true);
+      return pkSrcPost(id);
+    };
+    try {
+      for (const sid of Object.keys(state.pkSrc || {})) {
+        const m = pkSrcMeta(sid);
+        if (!m || m.h || m.remote) continue;
+        if (/^a\d{3}d-/.test(sid)) continue;                 /* بذرةٌ تجريبيّة: تُزرع في كلّ متصفّح */
+        const p = await postOf(pkSrcBase(sid));
+        /* ومصدرٌ لا مساهمةَ له (حُذفت، أو لم تبلغ الخادمَ ولا هي في الذاكرة): لا يراه أحد، فلا يُرفع */
+        if (!p || !isMine(p)) continue;
+        const blob = await chIdb('readonly', pkSrcKey(sid));
+        if (!blob) continue;
+        const h = await bookUp(blob, 'application/pdf');
+        if (!h) continue;
+        m.h = h; up++;
+        pkSrcMark(p.id);
+      }
+    } finally { bookUpAllOn = false; }
+    if (up) { bootMark('book:up:' + up); saveSoon(); }
+  }
   /* ===== أكثرُ من مصدر (طلبُ صاحب الموقع) =====
      لكلّ مصدرٍ معرّفُه (‎sid‎): الأوّلُ معرّفُ المساهمة نفسُه (فلا يتغيّر ما حُفظ قبل)، والإضافيّةُ ‎id~2 · id~3‎…
      وقائمتُها في ‎state.pkSrcX[id]‎. وكلُّ ما للمصدر (الملفّ · الغلاف · الكتاب المركَّب) مفتاحُه الـ‎sid‎،
@@ -11481,10 +11608,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      — والميزانُ (‎editHasInput‎) يقرأ البيانات لا المعرّف */
   const pkSrcMark = sid => {
     const id = pkSrcBase(sid);
-    const p = postsOf(cmCode, 'cards').find(x => x.id === id);
+    const p = pkSrcPost(id);
     if (!p) return;
     const L = pkSrcList(id), on = !!(L.length || pkSrcCovMeta(id));
-    if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null, ...(L.length > 1 ? { all: L.map(s => pkSrcMeta(s).name) } : {}) };
+    /* و‎files‎: وصفُ كلّ ملفٍّ ببصمته — به يُبنى المصدرُ ويُفتح في جهازٍ لم يُضف فيه (ROADMAP-BOOKS-SERVER) */
+    const files = L.some(s => (pkSrcMeta(s) || {}).h)
+      ? { files: L.map(s => { const m = pkSrcMeta(s) || {}; return { s: s.slice(id.length), n: m.name || '', z: m.size || 0, t: m.type || 'book', p: m.pages || 0, h: m.h || '' }; }) }
+      : {};
+    if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null, ...(L.length > 1 ? { all: L.map(s => pkSrcMeta(s).name) } : {}), ...files };
     else delete p.data.src;
   };
   async function pkSrcSet(id, file) {
@@ -11501,6 +11632,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkSrcCur[base] = id;
     /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
+    pkSrcCloud(id, file);   /* وإلى السحابة في الخلفية — لا ينتظره العرض */
   }
   async function pkSrcDel(id) {
     const key = pkSrcKey(id);
@@ -24989,7 +25121,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (chPdfDoc[key]) return Promise.resolve(chPdfDoc[key]);
     if (chPdfOpening[key]) return chPdfOpening[key];
     const pr = (async () => {
-      const blob = await chIdb('readonly', key);
+      let blob = await chIdb('readonly', key);
+      /* ===== وما ليس في المتصفّح يُجلب من السحابة ثمّ يُحفظ فيه (ROADMAP-BOOKS-SERVER) =====
+         المتصفّحُ ذاكرةٌ مؤقّتةٌ لا أصل: جهازٌ آخر، أو غيرُ صاحب المساهمة، أو متصفّحٌ مُسح */
+      if (!blob && key.indexOf('pksrc:') === 0) {
+        const m = pkSrcMeta(key.slice(6));
+        if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
+      }
       if (!blob) return null;
       const L = await chPdfLib();
       const data = new Uint8Array(await blob.arrayBuffer());
@@ -41603,6 +41741,8 @@ void main() {
   coverHandBack();  /* وغلافُ الكتاب خبرٌ عن المادّة لا عملُ أحد — يُردّ إلى الموقع */
   siteUnclaim();    /* وما نُسب إليك من مساهمات الموقع سهوًا يُردّ إليه */
   seedMark();       /* آخِرَ البذور كلِّها: يُوسَم المصنوعُ ليُمحى بسطرٍ يوم يجيء الحقيقيّ */
+  /* والكتبُ التي في المتصفّح وحده تُرفع في أوّل فراغٍ بعد الإقلاع (ROADMAP-BOOKS-SERVER) */
+  (window.requestIdleCallback || (f => setTimeout(f, 3000)))(() => { bookUpAll(); }, { timeout: 10000 });
   catSync();        /* وبعد أن يستقرّ كلُّ شيء: يُسأل الخادمُ عن الكتالوج — بلا انتظارٍ في الإقلاع */
   authSync();       /* ومَن يقول الخادمُ إنّي؟ — الدرجُ ذاكرةٌ لا حجّة */
   if (typeof nookPull === 'function') nookPull();   /* ونواةُ الركن من الحساب */
