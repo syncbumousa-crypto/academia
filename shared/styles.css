@@ -18719,3 +18719,10 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 .hl-fill-in:not(tr), tr.hl-fill-in > td { transition: opacity .3s ease !important; }
 /* وقبل أوّل مجلد: مساحةُ الملخّص فارغةٌ بلا كلام */
 .kt-view.pk-await { min-height: 120px; }
+/* ===== البنكُ وحده يأخذ قدرَ ما فيه (طلبُ صاحب الموقع) =====
+   القسمةُ في الضيّقة بقامةٍ ثابتة (‎clamp(440px, 60vh, 600px)‎ أو قامةِ الكتاب ‎--pk-h‎) لأنّ الكتابَ يحتاجها؛ والبنكُ
+   وحده لا كتابَ معه ولا ملخّص، فكان يُمدّ إلى تلك القامة ولو كانت فيه خمسةُ مجلدات. فتصير قامتُه قدرَ صفوفه، لها حدٌّ
+   أدنى (‎220px‎) لا تنزل عنه، وسقفُ القامة الثابتة نفسُه فما زاد يُمرَّر. ومتى انفتح معه الكتابُ أو الملخّصُ عادت قامتُهما */
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none),
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none)[style*="--pk-h"] { height: auto; min-height: 220px; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none) > .pk-bank { max-height: clamp(440px, 60vh, 600px); }
