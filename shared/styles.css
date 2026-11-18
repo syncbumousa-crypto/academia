@@ -19545,3 +19545,5 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
    والقوسُ على حافّته ينزلق للخارج عند المرور فيدخل في المقصوص ويختفي. فيُنزل إلى داخل الزاوية بقدر انزلاقه —
    يبقى موازيًا لاستدارتها، ويُرى ساكنًا ومارًّا (طلبُ صاحب الموقع) */
 #cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: 2px; inset-inline-start: 2px; }
+/* والبنكُ المنشورُ رحلةً: محطّتُه الأولى كانت تحت أيقونة المساحة في زاويتها — فتنزل الشجرةُ عنها */
+#cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr) { padding-top: 30px; }

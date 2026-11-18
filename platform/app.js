@@ -12387,10 +12387,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkBankHTML(id, ed, pack) {
     if (ed) return `<div class="pk-bank" data-pkid="${esc(id)}"><div id="cm-cards"></div>${pkEs('qb', 'data-actqb="c"')}</div>`;
     const qb = (pack && pack.qb) || [];
+    /* والبنكُ على وضع الرحلة يُرى رحلةً للقارئ من أوّل نظرة (طلبُ صاحب الموقع): خيطُها ومحطّاتُها ظاهرةٌ
+       ولو لم يبدأ — فلا يُسقطها ‎packEntered‎ كما في الملخّص. (‎x3Tree‎ يقرأ ‎cxRoDot‎ وقتَ البناء فيُرفع حوله) */
+    const dot0 = cxRoDot; if (cxRoJr) cxRoDot = true;
     /* فارغًا: مربّعٌ منقّطٌ كمربّع «لا يوجد مصادر» (يمتدّ إلى القاع ويُقصّ على الفجوات كذلك) */
-    return `<div class="pk-bank is-ro${qb.length ? '' : ' pk-bank--none'}" data-pkid="${esc(id)}">${qb.length
+    const html = `<div class="pk-bank is-ro${qb.length ? '' : ' pk-bank--none'}" data-pkid="${esc(id)}">${qb.length
       ? `<div class="x3 cx-ro${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(qb, cardView.fold, 0, 'c')}</div>`
       : `<div class="pk-vwph">${esc(T().pkQbNone)}</div>`}</div>`;
+    cxRoDot = dot0;
+    return html;
   }
   /* ===== «المعرفة» — بطاقاتُ المجلد في ثلاثة عروض (تحرير المختبر) =====
      كلُّ صفٍّ في الجدول **بطاقةٌ حقيقيّة** في المجلد المختار (‎{t:'c', f, b}‎): المصطلحُ وجهُها والمعنى
