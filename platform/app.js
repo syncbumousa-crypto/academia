@@ -10186,19 +10186,71 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* رمزُ الريال السعوديّ الرسميّ (‎U+20C1‎) — مسارُه من خطّ ‎saudi-riyal-font‎ المفتوح (‎OFL-1.1‎)،
      يُرسم بلون النصّ، ويوضع يسارَ الرقم كما في دليل البنك المركزيّ */
   const PC_SAR = '<svg class="pc-sar" viewBox="40 0 1150 1270" aria-hidden="true"><path fill="currentColor" d="M750,1119 C730,1163,716,1211,711,1262 C711,1262,1136,1172,1136,1172 C1156,1127,1169,1079,1174,1028 C1174,1028,750,1119,750,1119Z M1136,901 C1136,901,1136,901,1136,901 C1156,857,1169,809,1174,758 C1174,758,843,828,843,828 C843,828,843,693,843,693 C843,693,1136,631,1136,631 C1156,587,1169,538,1174,488 C1174,488,843,558,843,558 C843,558,843,72,843,72 C793,100,748,138,711,183 C711,183,711,586,711,586 C711,586,579,614,579,614 C579,614,579,6,579,6 C528,34,483,72,447,117 C447,117,447,642,447,642 C447,642,151,705,151,705 C131,750,117,798,112,849 C112,849,447,777,447,777 C447,777,447,948,447,948 C447,948,88,1024,88,1024 C68,1068,55,1117,50,1167 C50,1167,425,1088,425,1088 C456,1081,482,1063,499,1038 C499,1038,568,936,568,936 C568,936,568,936,568,936 C575,926,579,913,579,899 C579,899,579,749,579,749 C579,749,711,721,711,721 C711,721,711,992,711,992 C711,992,1136,901,1136,901Z"/></svg>';
+  /* ===== مستطيلُ البيع (طلبُ صاحب الموقع) =====
+     ‎data.sale‎: ‎{m:'part'|'lock', price, parts?:{book,mid,bank}}‎ — وبلا ‎sale‎ فهي مجانية.
+     يمينُه الحالةُ نصًّا، ويسارُه زرُّ الشراء: «شراء ⌄ الكل · السعر». والسهمُ يفتح قائمةً
+     تحته: الكلُّ أو مساحةٌ وحدَها بسعرها (من ‎parts‎)، والمشترى منها عليه ✓.
+     والمشترى سجلُّه ‎state.bought[id]‎: ‎1‎ للكلّ، أو ‎{book,mid,bank}‎ لما اشتُري منها */
+  const pcPick = {};   /* ما اختاره القارئُ من القائمة لكلّ مساهمة (‎all‎ أو مساحة) */
+  const PC_DD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+  const pcBought = id => (state.bought || {})[id];
+  const pcSpNm = (k, en) => (en ? { book: 'Sources', mid: 'Summary', bank: 'Question bank' } : { book: 'المصادر', mid: 'الملخص', bank: 'بنك الأسئلة' })[k];
+  function pcSaleOpts(p) {
+    const s = (p.data && p.data.sale) || {}, parts = s.parts || {}, b = pcBought(p.id), got = b && typeof b === 'object' ? b : {};
+    const keys = PK_IC_KEYS.filter(k => parts[k] > 0);
+    const left = keys.filter(k => !got[k]).reduce((t, k) => t + (+parts[k] || 0), 0);
+    const all = keys.length && Object.keys(got).length ? left : Math.max(0, +s.price || 0);
+    return { all, keys, parts, got };
+  }
   function pcSaleHTML(p) {
-    /* مستطيلٌ واحدٌ بعرضٍ ثابتٍ في كلّ الأحوال (طلبُ صاحب الموقع): الحالةُ والشراءُ فيه معًا.
-       فما كان للشراء صار المستطيلُ نفسُه زرَّه، وما سواه وسمٌ ساكنٌ بالقدّ نفسه */
     const s = (p.data && p.data.sale) || null, en = pcEn();
     const m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
     if (m === 'free') return `<span class="pc-sale pc-sale--free">${en ? 'Free' : 'مجانية'}</span>`;
-    if ((state.bought || {})[p.id]) return `<span class="pc-sale pc-sale--own">${en ? 'Purchased' : 'اشتريتها'}</span>`;
-    const pr = Math.max(0, +s.price || 0);
-    const st = m === 'part' ? (en ? 'Free trial available' : 'توجد تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
-    const body = `<span class="pc-sale__st">${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'شراء · ')}<span class="pc-pr">${pr}${PC_SAR}</span></b>`;
-    return isMine(p) ? `<span class="pc-sale pc-sale--mine pc-sale--${m}">${body}</span>`
-      : `<button type="button" class="pc-sale pc-sale--buy pc-sale--${m}" data-pcbuy="${esc(p.id)}">${body}</button>`;
+    const b = pcBought(p.id), o = pcSaleOpts(p);
+    if (b === 1 || b === true || (o.keys.length && o.keys.every(k => o.got[k]))) return `<span class="pc-sale pc-sale--own">${en ? 'Purchased' : 'اشتريتها'}</span>`;
+    const some = o.keys.some(k => o.got[k]);
+    const st = some ? (en ? 'Partly purchased' : 'اشتريت جزء') : m === 'part' ? (en ? 'Free trial available' : 'توجد تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
+    if (isMine(p)) return `<span class="pc-sale pc-sale--mine pc-sale--${m}"><span class="pc-sale__st">${st}</span><b><span class="pc-pr">${o.all}${PC_SAR}</span></b></span>`;
+    const pk = pcPick[p.id] && pcPick[p.id] !== 'all' && o.keys.includes(pcPick[p.id]) && !o.got[pcPick[p.id]] ? pcPick[p.id] : 'all';
+    const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : pcSpNm(pk, en);
+    const pr = pk === 'all' ? o.all : +o.parts[pk];
+    const dd = o.keys.length ? `<button type="button" class="pc-dd" data-pcdd="${esc(p.id)}" aria-haspopup="true" aria-label="${esc(en ? 'Purchase options' : 'خيارات الشراء')}">${PC_DD}</button>` : '';
+    return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st">${st}</span>`
+      + `<span class="pc-buyx"><button type="button" class="pc-buyb" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">${en ? 'Buy' : 'شراء'}</button>${dd}`
+      + `<button type="button" class="pc-buyw" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">${esc(what)} · <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
   }
+  function pcMenuHTML(p) {
+    const o = pcSaleOpts(p), en = pcEn(), some = o.keys.some(k => o.got[k]);
+    const row = (k, nm, pr, own) => `<button type="button" class="pc-mi${own ? ' is-own' : ''}${(pcPick[p.id] || 'all') === k ? ' is-on' : ''}" data-pcpick="${k}" data-pcid="${esc(p.id)}"${own ? ' disabled' : ''}>`
+      + (k === 'all' ? '' : `<span class="pc-k__ic">${pkIcSvg(k, p.id)}</span>`) + `<span>${esc(nm)}</span>`
+      + `<span class="pc-mi__pr">${own ? '✓ ' + (en ? 'Owned' : 'اشتريتها') : `<span class="pc-pr">${pr}${PC_SAR}</span>`}</span></button>`;
+    return `<div class="pc-menu" role="menu">` + row('all', some ? (en ? 'The rest' : 'الباقي كله') : (en ? 'All of it' : 'الكل'), o.all, false)
+      + `<span class="pc-menu__sep"></span>` + o.keys.map(k => row(k, pcSpNm(k, en), o.parts[k], !!o.got[k])).join('') + `</div>`;
+  }
+  document.addEventListener('click', e => {
+    const dd = e.target.closest && e.target.closest('[data-pcdd]');
+    const open = document.querySelector('#cm-body .pc-menu');
+    if (dd) {
+      e.preventDefault(); e.stopPropagation();
+      const host = dd.closest('.pc-ttl'), was = host && host.querySelector('.pc-menu');
+      if (open) open.remove();
+      if (was) return;
+      const p = (postsOf(cmCode, 'cards') || []).find(x => x && x.id === dd.dataset.pcdd);
+      if (p && host) host.insertAdjacentHTML('beforeend', pcMenuHTML(p));
+      return;
+    }
+    const mi = e.target.closest && e.target.closest('[data-pcpick]');
+    if (mi) {
+      e.preventDefault(); e.stopPropagation();
+      pcPick[mi.dataset.pcid] = mi.dataset.pcpick;
+      const p = (postsOf(cmCode, 'cards') || []).find(x => x && x.id === mi.dataset.pcid);
+      const host = mi.closest('.pc-ttl'), sale = host && host.querySelector('.pc-sale');
+      if (p && sale) sale.outerHTML = pcSaleHTML(p);
+      const m2 = host && host.querySelector('.pc-menu'); if (m2) m2.remove();
+      return;
+    }
+    if (open && !(e.target.closest && e.target.closest('.pc-menu'))) open.remove();
+  }, true);
   function pcBan(p, deck) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
     return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
