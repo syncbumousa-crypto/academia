@@ -19099,3 +19099,6 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
   box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .15), inset 3.2px 6.3px 12px -8px rgba(255, 255, 255, .06),
     0 0 0 1px rgba(127, 179, 187, .25), 0 8px 16px -10px rgba(0, 0, 0, .6), 0 0 0 6px var(--pc-pg); }
 html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:hover { background: linear-gradient(rgba(127, 179, 187, .28), rgba(127, 179, 187, .28)), var(--pc-pg); color: #c3e2e6; }
+/* والإطاراتُ بقدر ما فيها (طلبُ صاحب الموقع): لا عرضَ موحّدًا يترك في يسار الإطار فراغًا */
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr { display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 14px; }
+#cm-body .pk--pc .pc-fr .pc-fs { flex: 0 0 auto; min-width: 110px; padding-inline-end: 16px; }
