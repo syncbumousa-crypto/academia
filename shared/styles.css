@@ -19063,3 +19063,12 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 #cm-body .pk--pc .pc-fr .pc-fs__go svg { width: 24px !important; height: 24px !important; }
 #cm-body .pk--pc .pc-fr .pc-fs:has(.pc-fs__go:hover) { box-shadow: inset 0 0 0 1.5px rgba(168, 132, 46, .55); }
 #cm-body .pk--pc .pc-fr:hover .pk-ic { opacity: 1; }
+/* والأيقونةُ يمينًا على خطّ بداية الاسم فوقها، وانقطاعُ الخطّ بقدرها تمامًا (حشوةُ ‎8px‎ كحشوة الاسم) */
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go,
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go {
+  left: auto; right: auto; inset-inline-start: 14px; transform: none; width: auto; height: 26px; bottom: -13px; padding: 0 8px; border-radius: 0;
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:focus-visible { transform: translateY(-2px); }
+#cm-body .pk--pc .pc-fr .pc-fs__go svg { width: 22px !important; height: 22px !important; display: block; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go { display: flex; grid-template-columns: none; gap: 0; }
