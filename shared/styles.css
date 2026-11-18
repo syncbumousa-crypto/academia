@@ -19102,3 +19102,5 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 /* والإطاراتُ بقدر ما فيها (طلبُ صاحب الموقع): لا عرضَ موحّدًا يترك في يسار الإطار فراغًا */
 #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr { display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 14px; }
 #cm-body .pk--pc .pc-fr .pc-fs { flex: 0 0 auto; min-width: 110px; padding-inline-end: 16px; }
+/* والمصادرُ والملخّصُ ثلاثةُ أسطرٍ في عمودٍ واحد (البنكُ يبقى عمودين لكثرة أرقامه) */
+#cm-body .pk--pc .pc-fr .pc-fs--book .pc-k__s, #cm-body .pk--pc .pc-fr .pc-fs--mid .pc-k__s { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
