@@ -10425,10 +10425,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       body = `<div class="pcv-up">${img ? `<img src="${img}" alt="">` : `<span class="pcv-ph">${PC_CV_IC}</span>`}<div><p>${esc(L.upTip)}</p>`
         + `<label class="pcv-btn">${esc(L.pick)}<input type="file" accept="image/*" hidden data-pcvfile="1"></label></div></div>`;
     }
-    box.innerHTML = `<div class="pcv-panel" role="dialog" aria-modal="true" aria-label="${esc(L.t)}"><div class="pcv-hd"><b>${esc(L.t)}</b>`
+    /* الدخلةُ مرّةً عند الفتح وحدَه — النقرُ داخلها (لونٌ، رسمةٌ، تبويب) يُعيد رسمَ جوفها ولا يُعيد دخلتَها */
+    const fresh = pcvSt.fresh; pcvSt.fresh = false;
+    const gsc = (box.querySelector('.pcv-panel') || {}).scrollTop || 0;
+    box.innerHTML = `<div class="pcv-panel${fresh ? ' is-in' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}"><div class="pcv-hd"><b>${esc(L.t)}</b>`
       + `</div><div class="pcv-tabs">${tabs}</div>${body}`
       /* الخروجُ شريطُ الزاوية نفسُه الذي يُخرج من الوضع الواسع (طلبُ صاحب الموقع) — لا ‎×‎ */
       + `<button type="button" class="pk-max pk-max--curve pcv-exit" data-pcvx="1" aria-pressed="true" title="${esc(L.cls)}" aria-label="${esc(L.cls)}">${CX_GROW1}</button></div>`;
+    { const pn = box.querySelector('.pcv-panel'); if (pn) pn.scrollTop = gsc; }
     const cr = box.querySelector('.pcv-crop'); if (cr) { const im = cr.querySelector('img'); if (im.complete) pcvCropPlace(cr); else im.onload = () => pcvCropPlace(cr); }
   }
   /* ===== موضعُ غلاف الكتاب: إطارٌ بنسبة الغلاف (‎3:2‎) يُسحب على الكتاب صعودًا ونزولًا ===== */
@@ -10455,7 +10459,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pcvOpen(id) {
     const p = pcvPost(id); if (!p) return;
     const cur = pcCover(p);
-    pcvSt = { id, tab: cur.k === 'img' ? 'up' : cur.k === 'book' ? 'bk' : 'sc', c: cur.k === 'sc' ? cur.c : 'teal' };
+    pcvSt = { id, tab: cur.k === 'img' ? 'up' : cur.k === 'book' ? 'bk' : 'sc', c: cur.k === 'sc' ? cur.c : 'teal', fresh: true };
     let box = document.getElementById('pcv');
     if (!box) { box = document.createElement('div'); box.id = 'pcv'; document.body.appendChild(box); }
     box.hidden = false; pcvPaint();
