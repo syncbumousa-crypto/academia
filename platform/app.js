@@ -1046,7 +1046,23 @@
         if (list.length) { keep[sec] = list; any = true; }
       });
       const rest = {};
-      Object.keys(src).forEach(k2 => { if (k2 !== 'posts') { rest[k2] = src[k2]; any = true; } });
+      Object.keys(src).forEach(k2 => {
+        if (k2 === 'posts') return;
+        let v = src[k2];
+        /* ===== ومساهماتُ غيري تحت الدكاترة تُسقط كذلك =====
+           هي نسخٌ تُبنى من ‎posts.doc‎ في كلّ عرض (‎docAbsorb‎)، و‎posts.doc‎ يُجذب
+           مع المادّة. وكانت ٢٠٠٠ك.ب من ٢٧٠٠ يُكتب كلُّها في كلّ حفظ: ٦٠ms من
+           التسلسل والصفحةُ تحمّل الكتاب، والدرجُ على حافّة سعته.
+           فيبقى ما لا يعرفه الخادم: ما هو لي، وما لا ‎uid‎ له (بذرةٌ أو قديم). */
+        if (k2 === 'doctors' && Array.isArray(v)) {
+          v = v.map(dr => {
+            if (!dr || !Array.isArray(dr.posts)) return dr;
+            const ps = dr.posts.filter(p => !p || p.me || !p.uid || isMine(p));
+            return ps.length === dr.posts.length ? dr : Object.assign({}, dr, { posts: ps });
+          });
+        }
+        rest[k2] = v; any = true;
+      });
       if (any) out[code] = Object.assign(rest, Object.keys(keep).length ? { posts: keep } : {});
     });
     return out;
