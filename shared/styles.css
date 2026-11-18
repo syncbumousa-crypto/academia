@@ -19104,3 +19104,5 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 #cm-body .pk--pc .pc-fr .pc-fs { flex: 0 0 auto; min-width: 110px; padding-inline-end: 16px; }
 /* والمصادرُ والملخّصُ ثلاثةُ أسطرٍ في عمودٍ واحد (البنكُ يبقى عمودين لكثرة أرقامه) */
 #cm-body .pk--pc .pc-fr .pc-fs--book .pc-k__s, #cm-body .pk--pc .pc-fr .pc-fs--mid .pc-k__s { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+/* وما في الإطارات أعلى قليلًا (طلبُ صاحب الموقع) */
+#cm-body .pk--pc .pc-fr .pc-fs { padding-top: 11px; padding-bottom: 22px; }
