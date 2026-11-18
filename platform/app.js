@@ -36674,6 +36674,61 @@ void main() {
     save();
   }
 
+  /* ---------- بذرة محاسبة 301: عشرُ مساهماتٍ وهميّة بنسخةٍ من مساهمة صاحب الموقع (طلبُه) ----------
+     المحتوى نفسُه حرفًا (العنوانُ والملخّصُ وبنكُ الأسئلة وتظليلاتُ الكتاب) من ‎assets/demo/acct301.json‎،
+     والكتابُ نفسُه لكلٍّ منها، والفرقُ في صاحبها: «بروفايل وهمي» بصورةٍ وتاريخٍ وإعجاباتٍ مختلفة.
+     وتُزرع في كلّ إقلاعٍ في الذاكرة كبذرة ‎ACCT 210‎ (الدرجُ يُسقط ما ليس لي)، بمعرّفاتٍ ثابتة ‎a301d-‎ */
+  async function seedACCT301Cards() {
+    const code = 'ACCT 301';
+    if (!CM[code]) return;
+    const has = () => (postsOf(code, 'cards') || []).some(x => x && typeof x.id === 'string' && x.id.indexOf('a301d-') === 0);
+    if (has()) return;
+    let S = null;
+    try { const r = await fetch(assetURL('assets/demo/acct301.json'), { cache: 'no-cache' }); if (r.ok) S = await r.json(); } catch (e) {}
+    if (!S || has()) return;
+    const D = 86400000, now = Date.now();
+    const av = (ini, c1, c2) => 'data:image/svg+xml,' + encodeURIComponent(
+      `<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'>` +
+      `<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>` +
+      `<stop offset='0' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/></linearGradient></defs>` +
+      `<rect width='80' height='80' fill='url(#g)'/>` +
+      `<text x='40' y='53' font-family='Segoe UI, Tahoma, sans-serif' font-size='30' font-weight='700' fill='#fff' text-anchor='middle'>${ini}</text></svg>`);
+    const COL = [['#1565c0', '#42a5f5'], ['#6a1b9a', '#ab47bc'], ['#00695c', '#26a69a'], ['#c62828', '#ef5350'], ['#ef6c00', '#ffa726'],
+      ['#2e7d32', '#66bb6a'], ['#4527a0', '#7e57c2'], ['#00838f', '#26c6da'], ['#ad1457', '#ec407a'], ['#5d4037', '#8d6e63']];
+    const DAYS = [1, 2, 3, 4, 6, 8, 10, 13, 17, 21], LIKES = [34, 27, 22, 18, 15, 11, 9, 6, 4, 2], DIS = [1, 0, 2, 0, 1, 0, 0, 1, 0, 0];
+    const list = postsOf(code, 'cards');
+    for (let i = 0; i < 10; i++) {
+      let seq = 0;
+      const id = () => 'a301d-' + i + '-' + (seq++);
+      const keyed = {};
+      const withIds = a => (a || []).map(n => {
+        const o = Object.assign({}, n, { id: id() }, n.ch ? { ch: withIds(n.ch) } : {});
+        if (o.key) { keyed[o.key] = o.id; delete o.key; }
+        return o;
+      });
+      const pid = 'a301d-p' + i;
+      const data = { title: S.title, deck: withIds(S.deck), qb: withIds(S.qb) };
+      data.hl = { marks: (S.marks || []).filter(m => keyed[m.ck]).map(m => ({ id: id(), s: '', k: m.k, c: [keyed[m.ck]], d: m.d || 'r', col: m.col || 'y', kind: m.kind || 't', bars: m.bars, tx: m.tx || '' })) };
+      list.push({ id: pid, me: false, seeded: 1, u: { name: 'بروفايل وهمي', img: av(String(i + 1), COL[i][0], COL[i][1]) },
+        likes: LIKES[i], liked: false, dislikes: DIS[i], disliked: false, ts: now - DAYS[i] * D, data });
+    }
+    /* والكتابُ: نسخةٌ من ملفّ البذرة في مخزن المصادر لكلٍّ منها (يُجلب مرّةً، ويُكتب لمن ليس عنده) */
+    if (S.pdf) {
+      let file = null;
+      for (let i = 0; i < 10; i++) {
+        const pid = 'a301d-p' + i;
+        if (pkSrcMeta(pid) && await chIdb('readonly', pkSrcKey(pid))) continue;
+        if (!file) {
+          try { const r = await fetch(assetURL('assets/demo/' + S.pdf)); if (r.ok) file = new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }); } catch (e) {}
+          if (!file) break;
+        }
+        if (await chIdb('readwrite', pkSrcKey(pid), file))
+          (state.pkSrc = state.pkSrc || {})[pid] = { name: file.name, size: file.size, ts: Date.now(), type: pkSrcGuess(file.name) };
+      }
+    }
+    if (typeof cmCode !== 'undefined' && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+  }
+
   /* ---------- بذرة «الملخصات وبنوك الأسئلة» في محاسبة 210 (المحاسبة الإدارية) — بطلب صاحب الموقع ----------
      مساهماتٌ وهميّة بالشكل الجديد: عنوان، وملخّصٌ بمجلداتٍ متداخلةٍ وبطائقِ معرفة (‎deck‎)، وبنكُ أسئلةٍ بمجلداتٍ
      ومسائل (‎qb‎). تُزرع مرّةً بعلَمها، وتوسمها ‎seedMark‎ كبقيّة البذور فتُمحى بسطرٍ يوم يجيء الحقيقيّ */
@@ -40447,6 +40502,7 @@ void main() {
      فلا تُترك ورقةٌ استُجدّت بلا تعليق. ولا تمسّ ما عليه تعليقٌ من قبل */
   seedCmtMineBoth111();
   seedACCT210Cards();   /* ملخّصاتُ وبنوكُ أسئلةِ محاسبة 210 الوهميّة — قبل ‎seedMark‎ فتُوسَم معها */
+  seedACCT301Cards();   /* وعشرُ مساهماتٍ وهميّة في محاسبة 301 بنسخة مساهمة صاحب الموقع — تُجلب بياناتُها فتُزرع حين تصل */
   /* بذور العرض القديمة أُوقفت: المكتبة تبدأ بلا مساهمات عدا أغلفة «أكاديميا» */
   seedCoverPosts();
   pinCoverPosts();
