@@ -2343,6 +2343,65 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return edges;
   }
 
+  /* ============================================================
+     سجلُّ البحث وأيقونتُه (طلبُ صاحب الموقع)
+     ============================================================
+     كان المتصفّحُ يقترح من ذاكرته ما كُتب قبلُ (وحين يُختار منها يُلوَّن الحقلُ أبيضَ بلون
+     الملء التلقائيّ ويخرج عن الثيم). فيُطفأ اقتراحُه (‎autocomplete="off"‎ وأخواته) ويحلّ محلَّه
+     سجلٌّ للموقع: آخرُ ما بُحث عنه (‎state.searchHist‎ — ثمانيةٌ لا أكثر، الأحدثُ أوّلًا) في قائمةٍ
+     تحت الحقل بثيمه، تُصفّى بما يُكتب، وفي رأسها سلّةٌ تمسح السجلَّ كلَّه.
+     ويُحفظ البحثُ حين يتمّ: بـ‎Enter‎ أو بمغادرة الحقل وفيه نصّ.
+     وفي صدر الحقل عدسةُ البحث نفسُها التي في بحث الدكاترة */
+  const SRCH_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
+  const SRCH_MAX = 8;
+  const searchHist = () => (Array.isArray(state.searchHist) ? state.searchHist : []);
+  function searchHistAdd(q) {
+    q = String(q || '').trim(); if (q.length < 2) return;
+    const k = q.toLowerCase();
+    state.searchHist = [q, ...searchHist().filter(x => String(x).toLowerCase() !== k)].slice(0, SRCH_MAX);
+    save();
+  }
+  function searchHistWire(inp) {
+    if (!inp || inp.dataset.histWired) return;
+    inp.dataset.histWired = '1';
+    /* المتصفّحُ لا يقترح ولا يملأ */
+    inp.setAttribute('autocomplete', 'off'); inp.setAttribute('autocorrect', 'off'); inp.setAttribute('autocapitalize', 'off');
+    inp.setAttribute('spellcheck', 'false'); inp.setAttribute('name', 'q-' + Math.random().toString(36).slice(2, 8));
+    let box = inp.closest('.searchbox');
+    if (!box) { box = document.createElement('div'); box.className = 'searchbox srch-wrap'; inp.before(box); box.appendChild(inp); }   /* حقلٌ بلا وعاءٍ يُلبَس وعاءً تُنسب إليه العدسةُ والقائمة */
+    box.classList.add('searchbox--ic');
+    box.insertAdjacentHTML('afterbegin', `<span class="srch-ic">${SRCH_IC}</span>`);
+    const dd = document.createElement('div'); dd.className = 'srch-hist'; dd.hidden = true; dd.setAttribute('role', 'listbox');
+    box.appendChild(dd);
+    let pick = -1;
+    const items = () => { const q = inp.value.trim().toLowerCase(); return searchHist().filter(x => !q || (String(x).toLowerCase().includes(q) && String(x).toLowerCase() !== q)); };
+    const paint = () => {
+      const list = items(), en = state.lang === 'en';
+      if (!list.length || document.activeElement !== inp) { dd.hidden = true; return; }
+      pick = Math.min(pick, list.length - 1);
+      dd.innerHTML = `<div class="srch-hist__hd"><span>${esc(en ? 'Recent searches' : 'عمليات البحث الأخيرة')}</span>`
+        + `<button type="button" class="srch-hist__clr" data-srchclr title="${esc(en ? 'Clear history' : 'مسح السجل')}" aria-label="${esc(en ? 'Clear history' : 'مسح السجل')}">${TRASH_IC}</button></div>`
+        + list.map((x, i) => `<button type="button" class="srch-hist__it${i === pick ? ' on' : ''}" role="option" data-srchq="${esc(x)}"><span class="srch-hist__ic">${SRCH_IC}</span><span>${esc(x)}</span></button>`).join('');
+      dd.hidden = false;
+    };
+    const use = q => { inp.value = q; inp.dispatchEvent(new Event('input', { bubbles: true })); searchHistAdd(q); dd.hidden = true; pick = -1; };
+    inp.addEventListener('focus', () => { pick = -1; paint(); });
+    inp.addEventListener('input', () => { pick = -1; paint(); });
+    inp.addEventListener('blur', () => { dd.hidden = true; if (inp.value.trim()) searchHistAdd(inp.value); });
+    inp.addEventListener('keydown', e => {
+      const list = dd.hidden ? [] : items();
+      if (e.key === 'ArrowDown' && list.length) { e.preventDefault(); pick = (pick + 1) % list.length; paint(); }
+      else if (e.key === 'ArrowUp' && list.length) { e.preventDefault(); pick = (pick - 1 + list.length) % list.length; paint(); }
+      else if (e.key === 'Enter') { if (pick >= 0 && list[pick]) { e.preventDefault(); use(list[pick]); } else if (inp.value.trim()) { searchHistAdd(inp.value); dd.hidden = true; } }
+      else if (e.key === 'Escape' && !dd.hidden) { e.preventDefault(); e.stopPropagation(); dd.hidden = true; }
+    });
+    /* النقرُ في القائمة لا يُفقد الحقلَ تركيزَه (فلا تُغلق قبل أن يصلها النقر) */
+    dd.addEventListener('mousedown', e => e.preventDefault());
+    dd.addEventListener('click', e => {
+      if (e.target.closest('[data-srchclr]')) { state.searchHist = []; save(); dd.hidden = true; return; }
+      const it = e.target.closest('[data-srchq]'); if (it) use(it.dataset.srchq);
+    });
+  }
   function marketView(p, mode, onList) {
     const el = id => document.getElementById(`${p}-${id}`);
     const panel = el('fpanel');
@@ -2611,6 +2670,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
 
     el('search').addEventListener('input', e => { query = e.target.value; render(); renderPanel(); });
+    searchHistWire(el('search'));
     el('btn-filter').addEventListener('click', () => {
       panel.hidden = !panel.hidden;
       if (!panel.hidden) requestAnimationFrame(colEdges);
