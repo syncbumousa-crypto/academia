@@ -1042,8 +1042,13 @@
      تبدّل بعد الدفع يبقى في الدرج حتّى يبلغ. والحسابُ رخيص (بصمةٌ نصّيّةٌ لا
      تعمّيةٌ)، ولا يقع إلّا على مساهماتي أنا. */
   /* أفيها صورةٌ لم تُرفع بعد؟ — ‎data:‎ في المتن دليلٌ قاطع */
+  /* ===== إلّا الرسمَ المولَّد (جرد التخزين ‎2026-11-19‎) =====
+     ‏‎data:image/svg+xml,…‎ نصًّا (لا ‎base64‎) رمزٌ يرسمه الموقعُ نفسُه (صورُ الدكاترة الرمزيّة)، لا صورةٌ
+     ألصقها أحد — فكان يُبقي مساهماتٍ بلغت الخادمَ حرفًا بحرف في الدرج ويُكتب مع كلّ حفظ (‎~360ك‎).
+     وما سواه صورةٌ: الملصقُ ‎base64‎ دائمًا، و‎SVG‎ الملصقُ ‎base64‎ كذلك فيبقى محميًّا */
+  const RAW_IMG = /data:image\/(?!svg\+xml,)/;
   const hasRaw = p => {
-    try { return JSON.stringify((p && p.data) || {}).indexOf('data:image') > -1; }
+    try { return RAW_IMG.test(JSON.stringify((p && p.data) || {})); }
     catch (e) { return true; }                 /* شكٌّ ⇒ تُبقى */
   };
 
@@ -1060,7 +1065,7 @@
        الخادمَ منها شيء. فظهرت الصورةُ ثمّ ذهبت بأوّل تحديث.
        و‎data:‎ في المتن دليلٌ قاطعٌ أنّ فيها ما لم يُرفع — لا يحتمل بصمةً ولا
        تاريخًا: ما دامت الصورةُ في المتصفّح فالمتصفّحُ آخرُ ما يحفظها. */
-    if (s.indexOf('data:image') > -1) return false;
+    if (RAW_IMG.test(s)) return false;
     if (!p.srvD) return true;                  /* بلغت قبل البصمة ولا صورةَ معلَّقة */
     return srvHash(s) === p.srvD;
   };
@@ -11248,6 +11253,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!b || !/^[0-9a-f]{64}$/.test(String(h || ''))) return null;
     try { const r = await fetch(b + h); return r.ok ? await r.blob() : null; } catch (e) { return null; }
   }
+  /* غلافُ المصدر: من المتصفّح إن وُجد، وإلّا من السحابة ثمّ يُحفظ فيه (ROADMAP-CLOUD-NEXT ١).
+     وما ليس غلافَ مصدرٍ (غلافُ الشابتر) يُقرأ كما كان */
+  async function covBlob(key) {
+    let b = await chIdb('readonly', key);
+    if (b || String(key).indexOf('pksrccov:') !== 0) return b;
+    const c = pkSrcCovMeta(String(key).slice(9));
+    if (c && c.h) { b = await bookDown(c.h); if (b) chIdb('readwrite', key, b); }
+    return b;
+  }
+  /* غلافٌ أُضيف للتوّ: يُرفع في الخلفية ثمّ تُكتب بصمتُه في المساهمة */
+  async function pkSrcCovCloud(sid, blob) {
+    const c0 = pkSrcCovMeta(sid);
+    if (!c0 || c0.h || !blob) return;
+    const h = await bookUp(blob, blob.type || 'image/jpeg');
+    const c = pkSrcCovMeta(sid);
+    if (!h || !c) return;
+    c.h = h;
+    pkSrcMark(pkSrcBase(sid));
+    saveSoon();
+  }
   /* المساهمةُ بمعرّفها في أيّ مادّة (الرفعُ قد ينتهي وقد انتقل صاحبُه إلى مادّةٍ أخرى) */
   const pkSrcPost = id => {
     const here = cmCode ? (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id) : null;
@@ -11266,8 +11291,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let n = 0;
     state.pkSrc = state.pkSrc || {};
     F.forEach(f => {
-      if (!f || !f.h) return;
-      const sid = p.id + (f.s || ''), m = state.pkSrc[sid];
+      if (!f) return;
+      const sid = p.id + (f.s || '');
+      if (f.ch) {
+        const c = (state.pkSrcCov = state.pkSrcCov || {})[sid];
+        if (!c) { state.pkSrcCov[sid] = { name: f.cn || '', color: f.cc || null, cv: PK_COV_V, ts: Date.now(), h: f.ch, remote: 1 }; n++; }
+        else if (!c.h) { c.h = f.ch; n++; }
+      }
+      if (!f.h) return;
+      const m = state.pkSrc[sid];
       if (m) { if (!m.h) { m.h = f.h; n++; } return; }
       state.pkSrc[sid] = { name: f.n || '', size: f.z || 0, ts: Date.now(), type: f.t || 'book', pages: f.p || 0, h: f.h, remote: 1 };
       n++;
@@ -11279,9 +11311,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkSrcSync(p) {
     if (!p || !isMine(p)) return 0;
     const L = pkSrcList(p.id);
-    if (!L.some(s => (pkSrcMeta(s) || {}).h)) return 0;
+    if (!L.some(s => (pkSrcMeta(s) || {}).h || (pkSrcCovMeta(s) || {}).h)) return 0;
     const F = p.data && p.data.src && p.data.src.files;
-    if (Array.isArray(F) && F.length === L.length && L.every((s, i) => F[i] && F[i].h === (pkSrcMeta(s) || {}).h)) return 0;
+    if (Array.isArray(F) && F.length === L.length
+        && L.every((s, i) => F[i] && F[i].h === ((pkSrcMeta(s) || {}).h || '') && (F[i].ch || '') === ((pkSrcCovMeta(s) || {}).h || ''))) return 0;
     pkSrcMark(p.id);
     return 1;
   }
@@ -11330,6 +11363,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const h = await bookUp(blob, 'application/pdf');
         if (!h) continue;
         m.h = h; up++;
+        pkSrcMark(p.id);
+      }
+      /* والأغلفةُ كذلك (ROADMAP-CLOUD-NEXT ١) */
+      for (const sid of Object.keys(state.pkSrcCov || {})) {
+        const c = pkSrcCovMeta(sid);
+        if (!c || c.h || c.remote) continue;
+        const p = await postOf(pkSrcBase(sid));
+        if (!p || !isMine(p)) continue;
+        const blob = await chIdb('readonly', pkSrcCovKey(sid));
+        if (!blob) continue;
+        const h = await bookUp(blob, blob.type || 'image/jpeg');
+        if (!h) continue;
+        c.h = h; up++;
         pkSrcMark(p.id);
       }
     } finally { bookUpAllOn = false; }
@@ -11777,8 +11823,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!p) return;
     const L = pkSrcList(id), on = !!(L.length || pkSrcCovMeta(id));
     /* و‎files‎: وصفُ كلّ ملفٍّ ببصمته — به يُبنى المصدرُ ويُفتح في جهازٍ لم يُضف فيه (ROADMAP-BOOKS-SERVER) */
-    const files = L.some(s => (pkSrcMeta(s) || {}).h)
-      ? { files: L.map(s => { const m = pkSrcMeta(s) || {}; return { s: s.slice(id.length), n: m.name || '', z: m.size || 0, t: m.type || 'book', p: m.pages || 0, h: m.h || '' }; }) }
+    /* والغلافُ المرفوع كذلك (‎ch‎ بصمتُه · ‎cc‎ لونُ أطرافه · ‎cn‎ اسمُه) — كان في متصفّح صاحبه وحده (ROADMAP-CLOUD-NEXT ١) */
+    const files = L.some(s => (pkSrcMeta(s) || {}).h || (pkSrcCovMeta(s) || {}).h)
+      ? { files: L.map(s => {
+          const m = pkSrcMeta(s) || {}, c = pkSrcCovMeta(s) || {};
+          return { s: s.slice(id.length), n: m.name || '', z: m.size || 0, t: m.type || 'book', p: m.pages || 0, h: m.h || '',
+                   ...(c.h ? { ch: c.h, cc: c.color || null, cn: c.name || '' } : {}) };
+        }) }
       : {};
     if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null, ...(L.length > 1 ? { all: L.map(s => pkSrcMeta(s).name) } : {}), ...files };
     else delete p.data.src;
@@ -11827,6 +11878,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkSrcCovUrl[key]) { URL.revokeObjectURL(pkSrcCovUrl[key]); delete pkSrcCovUrl[key]; }
     (state.pkSrcCov = state.pkSrcCov || {})[id] = { name: file.name, color, cv: PK_COV_V, ts: Date.now() };
     pkSrcMark(id); save(); renderCmSection();
+    pkSrcCovCloud(id, img);
   }
   /* ===== «غلاف المادة»: نسخةٌ مصوَّرةٌ من الغلاف المرسوم الذي يلبسه الموقعُ مادّةً بلا غلاف (‎bookHTML‎ في الرفّ) =====
      لا يُعاد تصميمُه: يُبنى وجهُه نفسُه في الصفحة مخفيًّا بمقاس الرفّ، وتُقرأ منه ألوانُه وخطوطُه ومواضعُ نصوصه كما رسمها المتصفّح،
@@ -11886,7 +11938,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (cv) {
       if (cv.cv === PK_COV_V) return;
       try {
-        const blob = await chIdb('readonly', pkSrcCovKey(id)), bmp = blob && await createImageBitmap(blob);
+        const blob = await covBlob(pkSrcCovKey(id)), bmp = blob && await createImageBitmap(blob);
         if (bmp) { const c = document.createElement('canvas'); c.width = 96; c.height = Math.max(1, Math.round(96 * bmp.height / bmp.width)); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height); bmp.close && bmp.close(); cv.color = covPick(c); }
       } catch (e) {}
       cv.cv = PK_COV_V; saveSoon(); return;
@@ -11958,7 +12010,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkSrcCovURL = async sid => {
     if (pkSrcCovMeta(sid)) {
       const key = pkSrcCovKey(sid);
-      if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (blob) pkSrcCovUrl[key] = URL.createObjectURL(blob); }
+      if (!pkSrcCovUrl[key]) { const blob = await covBlob(key); if (blob) pkSrcCovUrl[key] = URL.createObjectURL(blob); }
       if (pkSrcCovUrl[key]) return pkSrcCovUrl[key];
     }
     return pkSrcPgURL(sid, (pkSrcMeta(sid) || {}).covPg || 1, 40);
@@ -12080,7 +12132,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkSrcPopShow();
     document.querySelectorAll('#cm-body [data-pksrccovimg]').forEach(async img => {
       const key = pkSrcCovKey(img.dataset.pksrccovimg);
-      if (!pkSrcCovUrl[key]) { const blob = await chIdb('readonly', key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
+      if (!pkSrcCovUrl[key]) { const blob = await covBlob(key); if (!blob) return; pkSrcCovUrl[key] = URL.createObjectURL(blob); }
       if (img.isConnected) img.src = pkSrcCovUrl[key];
     });
     document.querySelectorAll('#cm-body [data-pksrcview]').forEach(async view => {
@@ -25621,7 +25673,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   async function bk2Tex(b, k, w) {
     if (k === 'cover' && b.covKey) {
       try {
-        const blob = await chIdb('readonly', b.covKey);
+        const blob = await covBlob(b.covKey);
         if (blob) {
           const bmp = await createImageBitmap(blob);
           const cv = document.createElement('canvas');
@@ -26951,7 +27003,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkCoverURL(b) {
     if (b.coverP) return b.coverP;
     b.coverP = (async () => {
-      const blob = b.covKey ? await chIdb('readonly', b.covKey) : null;
+      const blob = b.covKey ? await covBlob(b.covKey) : null;
       if (!blob) return bkPageURL(b, b.covPg || 1);
       const bmp = await createImageBitmap(blob);
       const cv = document.createElement('canvas');
@@ -35045,7 +35097,7 @@ void main() {
       const p = arr.find(x => x && x.me) || null;
       const docs = p ? ((p.data || {}).docs || []) : [];
       let raw = 0;
-      try { raw = (JSON.stringify(docs).match(/data:image/g) || []).length; } catch (e) { raw = -1; }
+      try { raw = (JSON.stringify(docs).match(/data:image\/(?!svg\+xml,)/g) || []).length; } catch (e) { raw = -1; }
       rows.push({
         المادّة: code, دكاترة: drs.length, صفوف: docs.length,
         مساهمة: p ? 'نعم' : '— لم تُفتح',
