@@ -19363,3 +19363,36 @@ html[data-theme="dark"] #pcp .pcp-seg button[aria-checked="true"] { color: #fff;
 #pcv .pcv-win { position: absolute; left: 0; right: 0; top: 0; border-radius: 12px; box-shadow: 0 0 0 2px #fff, 0 0 0 999px rgba(8, 12, 20, .5); transition: box-shadow .2s; }
 #pcv .pcv-crop:not(.on) .pcv-win { box-shadow: 0 0 0 2px rgba(255, 255, 255, .7), 0 0 0 999px rgba(8, 12, 20, .3); }
 #pcv .pcv-crop.on .pcv-win { box-shadow: 0 0 0 2px #d4b36a, 0 0 0 999px rgba(8, 12, 20, .5); }
+/* ===== غلافٌ لم يُختر بعد (في تحرير صاحب المساهمة): مكانُه فارغٌ يدعو إلى الضغط ===== */
+#cm-body .pk--pc .pc-art.pc-art--empty {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  padding: 0; border: 0; cursor: pointer; font: inherit; color: #8a6420; text-align: center;
+  background: linear-gradient(160deg, rgba(168, 132, 46, .1), rgba(168, 132, 46, .04));
+  box-shadow: none; overflow: hidden; isolation: isolate;
+  transition: transform .25s cubic-bezier(.32, .72, 0, 1), background .2s;
+}
+/* حدٌّ متقطّعٌ يتنفّس، ولمعةٌ تمرّ عليه بين حينٍ وآخر */
+#cm-body .pk--pc .pc-art--empty::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+  border: 2px dashed rgba(168, 132, 46, .55); animation: pcAeBr 2.6s ease-in-out infinite;
+}
+#cm-body .pk--pc .pc-art--empty::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%);
+  transform: translateX(-120%); animation: pcAeSh 4.2s ease-in-out 1s infinite;
+}
+@keyframes pcAeBr { 50% { border-color: rgba(168, 132, 46, .95); } }
+@keyframes pcAeSh { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+#cm-body .pk--pc .pc-art--empty:hover { transform: translateY(-2px); background: linear-gradient(160deg, rgba(168, 132, 46, .18), rgba(168, 132, 46, .08)); }
+#cm-body .pk--pc .pc-art--empty:focus-visible { outline: 2px solid #a8842e; outline-offset: 3px; }
+#cm-body .pk--pc .pc-ae__ic { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(168, 132, 46, .16); }
+#cm-body .pk--pc .pc-ae__ic svg { width: 21px; height: 21px; }
+#cm-body .pk--pc .pc-ae__ic i { position: absolute; top: -3px; inset-inline-end: -4px; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #a8842e; color: #fff; font: 700 14px/1 sans-serif; font-style: normal; box-shadow: 0 0 0 2px var(--u-bg, #fff); }
+#cm-body .pk--pc .pc-art--empty b { font-size: 13.5px; font-weight: 700; margin-top: 2px; }
+#cm-body .pk--pc .pc-art--empty small { font-size: 11px; opacity: .7; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-art.pc-art--empty { color: #e1c172; background: linear-gradient(160deg, rgba(212, 179, 106, .12), rgba(212, 179, 106, .04)); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::before { border-color: rgba(212, 179, 106, .5); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::after { background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .12) 50%, transparent 65%); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ae__ic { background: rgba(212, 179, 106, .16); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ae__ic i { background: #d4b36a; color: #1a2230; box-shadow: 0 0 0 2px #0f1720; }
+@media (prefers-reduced-motion: reduce) { #cm-body .pk--pc .pc-art--empty::before, #cm-body .pk--pc .pc-art--empty::after { animation: none; } }

@@ -10368,16 +10368,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, true);
   function pcBan(p, deck, noKeys, ed) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
+    /* ومساهمةٌ تبدأ بلا غلاف: في تحرير صاحبها مكانُ الغلاف فارغٌ يدعوه ليختار (طلبُ صاحب الموقع) — والقارئُ يرى الرسمةَ الثابتة */
+    const en = pcEn(), dd = p.data || {}, cvE = !!ed && pcOwn(p) && !(dd.cv && dd.cv.k) && !dd.img;
     /* وفي التحرير (طلبُ صاحب الموقع): اللافتةُ نفسُها والعنوانُ حقلٌ يُكتب فيه (‎#cm-vtitle‎ — يحفظه مستمعُه العامّ) */
     const nm = ed ? `<span class="vt-grow x3-ttlwrap pc-name pc-name--ed${t ? '' : ' is-ph'}" data-v="${esc(t) || T().pkTitlePh}"><input class="x3-ttlin" id="cm-vtitle" size="1" placeholder="${T().pkTitlePh}" value="${esc(t)}"></span>`
       : `<b class="pc-name">${esc(t) || '—'}</b>`;
-    return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
-      + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
+    return `<div class="pc-ban pc-ban--${cvE ? 'empty' : cv.k}" style="--pc-bg:${cv.bg}">`
+      + (cv.k === 'sc' || cvE ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
-      + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`
+      + (cvE ? `<button type="button" class="pc-art pc-art--empty" data-pccv="${esc(p.id)}" aria-label="${esc(en ? 'Choose a cover' : 'اختر غلاف مساهمتك')}"><span class="pc-ae__ic">${PC_CV_IC}<i>+</i></span><b>${esc(en ? 'Choose a cover' : 'اختر غلاف مساهمتك')}</b><small>${esc(en ? 'Photo · artwork · book cover' : 'صورة · رسمة · غلاف الكتاب')}</small></button>`
+        : `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`)
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
-      + (ed && pcOwn(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
+      + (ed && pcOwn(p) && !cvE ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
   }
   /* ===== نافذةُ «غلاف المساهمة» — لصاحبها وحده (زرُّ الصورة في زاوية اللافتة) =====
