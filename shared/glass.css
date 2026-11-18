@@ -392,8 +392,11 @@ html:root .market-tools .fpanel {
   background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
+/* والتمويهُ للوحة التصنيف وحدَها، فهي تنفتح فوق المحتوى. أمّا البحثُ وقرصُ التصنيف فليسا
+   ثابتين: يمرّان مع الصفحة فلا يقع تحتهما إلّا لونُ الخلفيّة، فتمويهُهما لا يُرى (قِيس: الفرقُ ٣/٢٥٥
+   في أقصاه) — ويُعاد حسابُه في كلّ إطارٍ يتحرّك فيه شيءٌ في الشاشة: مع طفو الكتاب ٥٣٠ مللي من كلّ ثانية */
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .market-tools .search, .market-tools .filterwrap::before, .market-tools .fpanel {
+  .market-tools .fpanel {
     -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
 /* ونافذةُ المكتبة في الفاتح كانت تُصمِت البحثَ والزرَّ أبيضَ بقاعدةٍ فيها معرّفٌ
