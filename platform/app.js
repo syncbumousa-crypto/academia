@@ -10410,12 +10410,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pr = pk === 'all' ? o.all : +o.parts[pk];
     /* والسعرُ الشاملُ (لا مساحةَ تُشترى وحدَها) زرٌّ واحدٌ بنصٍّ واحد: «شراء كامل · السعر» (طلبُ صاحب الموقع) */
     if (!o.keys.length) return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
-      + `<span class="pc-buyx"><button type="button" class="pc-buyw pc-buyone" data-pcbuy="${esc(p.id)}" data-pcpk="all">${en ? 'Buy in full' : 'شراء كامل'} · <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
+      + `<span class="pc-buyx"><button type="button" class="pc-buyw pc-buyone" data-pcbuy="${esc(p.id)}" data-pcpk="all">${en ? 'Buy in full' : 'شراء كامل'} <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
     return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
       /* والمختارُ وسهمُه في رقاقةٍ أفتحَ داخل الزرّ — هي التي تفتح القائمة (طلبُ صاحب الموقع: الاقتراحُ ٥) */
       + `<span class="pc-buyx"><button type="button" class="pc-buyb" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">${en ? 'Buy' : 'شراء'}</button>`
-      + `<button type="button" class="pc-dd pc-ddchip" data-pcdd="${esc(p.id)}" aria-haspopup="true" aria-label="${esc(en ? 'Purchase options' : 'خيارات الشراء')}">${esc(what)}${PC_DD}</button>`
-      + `<button type="button" class="pc-buyw" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">· <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
+      + `<button type="button" class="pc-dd pc-ddchip" data-pcdd="${esc(p.id)}" aria-haspopup="true" aria-label="${esc(en ? 'Purchase options' : 'خيارات الشراء')}">${PC_DD}${esc(what)}</button>`
+      + `<button type="button" class="pc-buyw" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}"><span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
   }
   function pcMenuHTML(p) {
     const o = pcSaleOpts(p), en = pcEn(), some = o.keys.some(k => o.got[k]);

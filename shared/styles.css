@@ -19595,7 +19595,7 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-co
 /* وزرُّ السعر الشامل الواحد («شراء كامل · السعر»): حشوتُه من الجهتين */
 #cm-body .pk--pc .pc-buyw.pc-buyone { padding-inline: 10px 8px; }
 /* رقاقةُ الاختيار داخل زرّ الشراء: «الكل ⌄» على صبغةٍ أفتح من الأخضر (الاقتراحُ ٥) */
-#cm-body .pk--pc .pc-buyx button.pc-ddchip { width: auto; height: 24px; align-self: center; gap: 1px; padding-inline: 6px 4px; margin-inline: 2px 0; border-radius: 999px; background: rgba(255, 255, 255, .2); transition: background .15s; }
+#cm-body .pk--pc .pc-buyx button.pc-ddchip { width: auto; height: 24px; align-self: center; gap: 1px; padding-inline: 4px 7px; margin-inline: 3px 4px; border-radius: 999px; background: rgba(255, 255, 255, .2); transition: background .15s; }
 #cm-body .pk--pc .pc-buyx button.pc-ddchip:hover, #cm-body .pk--pc .pc-buyx button.pc-ddchip[aria-expanded="true"] { background: rgba(255, 255, 255, .3); }
 #cm-body .pk--pc .pc-ddchip svg { width: 13px; height: 13px; }
 #cm-body .pk--pc .pc-buyb { padding-inline-end: 0; }
