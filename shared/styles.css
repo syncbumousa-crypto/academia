@@ -19605,3 +19605,13 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-co
 #cm-body .pk--pc .pc-sale--buy .pc-sale__st { flex: 1 1 auto; min-width: 0; display: flex; justify-content: center; }
 #cm-body .pk--pc .pc-sale--buy .pc-sale__st > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #cm-body .pk--pc .pc-sale--buy .pc-buyx { flex: none; }
+/* وكبسولةُ الشراء بخطٍّ أصغر قليلًا لتسع الحالةَ والزرَّ معًا بلا اختصار (طلبُ صاحب الموقع) */
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st { font-size: 11px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx button { font-size: 11px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx button.pc-ddchip { height: 22px; }
+#cm-body .pk--pc .pc-sale--buy .pc-sar { width: 10px; height: 10px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx button.pc-ddchip { padding-inline: 3px 6px; margin-inline: 2px 3px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyb { padding-inline-start: 6px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx button.pc-ddchip { padding-inline: 3px 5px; margin-inline: 1px 2px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyb { padding-inline-start: 5px; }
+#cm-body .pk--pc .pc-sale--buy .pc-buyx:has(.pc-ddchip) .pc-buyw { padding-inline-end: 3px; }

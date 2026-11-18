@@ -10406,7 +10406,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const st = some ? (en ? 'Partly purchased' : 'اشتريت جزء') : m === 'part' ? (en ? 'Free preview available' : 'توجد معاينة مجانية') : (en ? 'Paid' : 'مدفوعة');
     if (isMine(p)) return `<span class="pc-sale pc-sale--mine pc-sale--${m}"><span class="pc-sale__st">${st}</span></span>`;   /* وصاحبُها لا يُرى له سعرُ ما كتب (طلبُ صاحب الموقع) */
     const pk = pcPick[p.id] && pcPick[p.id] !== 'all' && o.keys.includes(pcPick[p.id]) && !o.got[pcPick[p.id]] ? pcPick[p.id] : 'all';
-    const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : pcSpNm(pk, en);
+    const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : (en ? 'Selected' : 'المحدد');   /* والمختارُ من القائمة «المحدد» لا اسمُه (طلبُ صاحب الموقع) */
     const pr = pk === 'all' ? o.all : +o.parts[pk];
     /* والسعرُ الشاملُ (لا مساحةَ تُشترى وحدَها) زرٌّ واحدٌ بنصٍّ واحد: «شراء كامل · السعر» (طلبُ صاحب الموقع) */
     if (!o.keys.length) return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
