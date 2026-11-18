@@ -24090,7 +24090,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const mine = on ? ns.filter(n => n.k === k) : [];
       /* وفي أعلاه: مربّعُ «لا يوجد» يصعد إلى رأس مساحته، فتُقطع من زاويته العليا فجوةٌ لأيقونة المساحة */
       let T = null;
-      if (k !== 'mid' && card.classList.contains('pk--icx')) {
+      /* ولا فجوةَ في زاوية البنك في التحرير (طلبُ صاحب الموقع): كانت تقصّ الدائرةَ الأولى من رحلته — والأيقونةُ تقف على المربّع */
+      if (k !== 'mid' && card.classList.contains('pk--icx') && !(k === 'bank' && card.classList.contains('pk--edit'))) {
         const ic = el.parentElement.querySelector(':scope > .pk-blkh .pk-blkh__ic');
         const ir = ic && ic.getBoundingClientRect(), er = el.getBoundingClientRect();
         if (ir && ir.width && ir.bottom > er.top) {
