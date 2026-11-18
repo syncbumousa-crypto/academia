@@ -4627,7 +4627,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
   const avatarHTML = p => {
     const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
-    return src ? `<img src="${src}" alt="">` : FLAT_AVATAR;
+    /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
+       تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
+    return src ? `<img src="${src}" alt="" loading="lazy" decoding="async">` : FLAT_AVATAR;
   };
   const nameOf = p => (p.me ? esc(state.profile.name || '') : esc((p.u && p.u.name) || '')) || T().meName;
 
@@ -6189,7 +6191,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tip = o.t + (im.user ? '، كتبها @' + im.user : '') +
       (im.ts ? ' سنة ' + new Date(im.ts).getFullYear() : '');
     /* «من» بالعربيّة و«from» بالإنجليزيّة (طلبُ صاحب الموقع) */
-    const inner = `<i class="imp-badge__f">${document.documentElement.dataset.lang === 'en' ? 'from' : 'من'}</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
+    const inner = `<i class="imp-badge__f">${document.documentElement.dataset.lang === 'en' ? 'from' : 'من'}</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}" loading="lazy" decoding="async">`;
     return url
       ? `<a class="imp-badge" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</a>`
       : `<span class="imp-badge" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</span>`;
@@ -6859,7 +6861,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* الواجهة المشتركة: قائمة المشاركات ← مشاركة كاملة ← أو محرر رأيي */
   /* ---------- قسم الدكتور: كتل الدكاترة ومشاركات المجتمع تحتهم ---------- */
-  const drAvatar = dr => dr.img ? `<img src="${dr.img}" alt="">` : FLAT_AVATAR;
+  const drAvatar = dr => dr.img ? `<img src="${dr.img}" alt="" loading="lazy" decoding="async">` : FLAT_AVATAR;
 
   /* بطاقة تحرير مساهمة الدكتور إنلاين (نفس شكل الكومنت المنشور): الحقول قابلة للتحرير داخل
      نفس بطاقة .post.pk، وزر إرسال صغير + حذف يسارًا، وهويتي أسفل الخط — لا صفحة/محرّر منفصل */
