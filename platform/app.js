@@ -10426,7 +10426,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sub = pcTopF(n.ch), op = sub.length && pcpSt.open.has(n.id), own = +pcpSt.f[n.id] > 0;
       const row = `<div class="pcp-row${inP ? ' is-in' : ''}" style="--dp:${dp}">`
         + (sub.length ? `<button type="button" class="pcp-cv${op ? ' on' : ''}" data-pcpcv="${esc(n.id)}" aria-expanded="${!!op}" aria-label="${esc(n.name || L.nn)}">${PC_DD}</button>` : `<span class="pcp-cv pcp-cv--no"></span>`)
-        + `<span class="pcp-fi">${PC_IC.fold}</span><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
+        + `<span class="pcp-fi" style="color:${folderColor(n)}">${folderFace(n)}</span><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
         + (sub.length ? `<i class="pcp-nb">${sub.length}</i>` : '')
         + (inP ? `<span class="pcp-inp">${esc(L.inp)}</span>`
           : `<span class="pcp-in${own ? ' is-on' : ''}">${own ? PC_LOCK : ''}<input type="number" min="0" step="5" inputmode="numeric" data-pcpf="${esc(n.id)}" placeholder="0" value="${+pcpSt.f[n.id] || ''}"${pcpSt.per ? '' : ' disabled'}>${PC_SAR}</span>`)

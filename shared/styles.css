@@ -19338,8 +19338,8 @@ html[dir="ltr"] #pcp .pcp-cv, #pcp:dir(ltr) .pcp-cv { transform: rotate(-90deg);
 #pcp .pcp-cv:hover { background: rgba(127, 127, 127, .14); opacity: 1; }
 #pcp .pcp-cv svg { width: 14px; height: 14px; }
 #pcp .pcp-cv--no { cursor: default; }
-#pcp .pcp-fi { flex: none; display: grid; place-items: center; opacity: .55; }
-#pcp .pcp-fi svg { width: 15px; height: 15px; }
+#pcp .pcp-fi { flex: none; display: grid; place-items: center; width: 17px; height: 17px; }   /* وجهُ المجلد ولونُه كما في المساهمة */
+#pcp .pcp-fi svg, #pcp .pcp-fi img { width: 100%; height: 100%; object-fit: contain; }
 #pcp .pcp-fn { flex: 1 1 auto; }
 #pcp .pcp-nb { flex: none; font-style: normal; font-size: 11px; padding: 0 6px; border-radius: 999px; background: rgba(127, 127, 127, .14); opacity: .8; }
 #pcp .pcp-in > svg:not(.pc-sar) { width: 12px; height: 12px; color: #a8842e; }
