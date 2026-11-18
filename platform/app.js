@@ -14040,7 +14040,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
-          ${pcRow ? pcBan(p, deck) : pcHead ? pcBan(p, deck, pkSplitOn(p.id) || pkBankOn(p.id) || !pkMidOff[p.id]) : x3PkHead(p, deck, open, kind)}
+          ${pcRow ? pcBan(p, deck) : pcHead ? pcBan(p, deck, pkSplitOn(p.id) || pkBankOn(p.id) || !pkMidOff[p.id]) + (open ? `<div class="x3-pkhd on pc-edhd">${pkViewBar('pub', p.id)}</div>` : '') : x3PkHead(p, deck, open, kind)}
           ${framed && !PK_ICX ? reactRowHTML(p, likeAttr, '') : ''}
           ${!pcRow && PK_ICX && kind === 'c' && pkLab() && (framed || maxd || !open) ? pkIcRow(p.id, maxd ? !pkIcOne(p.id) : !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}

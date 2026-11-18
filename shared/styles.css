@@ -19582,3 +19582,6 @@ html[data-theme="dark"] .srch-hist__clr { color: #f08080; }
 html[data-theme="dark"] .srch-hist__it:hover, html[data-theme="dark"] .srch-hist__it.on { background: rgba(255, 255, 255, .07); color: #7fb3bb; }
 .srch-hist__ic { display: grid; place-items: center; width: 16px; height: 16px; opacity: .5; flex: none; }
 .srch-hist__ic svg { width: 15px; height: 15px; }
+/* وفي المنشورة المفتوحة شريطُ طرق العرض خفيٌّ تحت اللافتة: به تُفتح مساحةٌ ثانيةٌ بجانب الأولى (‎pkIcToggle‎ ينقر أزرارَه) —
+   سقط مع الترويسة القديمة فصار النقرُ لا يفعل شيئًا (طلبُ صاحب الموقع) */
+#cm-body .pk--pc .x3-pkhd.pc-edhd { display: none; }
