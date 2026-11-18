@@ -10436,6 +10436,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkIcRowTtl = {};   /* وموضعُ عنوانه */
   const pkIcRowM = {};   /* وهوامشُه */
   const pkIcRowAt = {};   /* ومواضعُ أيقوناته */
+  const pkIcRowSv = {};   /* ومواضعُ رسوم أيقوناته داخل أزرارها ولونُها (لافتةُ الغلاف: الزرُّ أعرضُ من رسمه) */
   const pkIcRowRe = {};   /* وموضعُ الإعجاب فيه */
   const pkIcRowH = {};   /* قامةُ الصفّ الضيّق لكلّ مساهمة (تُحفظ عند الاتّساع ليُطوى إليها تمامًا) */
   const PK_IC_EZ = 'cubic-bezier(.32, .72, 0, 1)';
@@ -10467,7 +10468,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const w = parseFloat(cs.width) || 12, rtl = getComputedStyle(x).direction === 'rtl', l = rtl ? q.right : q.left - w;
         return { x: l - m0.left, xr: l + w - m0.right, y: q.top - r0.top, w, h: q.height, html: `<span style="display:grid;place-items:center">/</span>`, font: cs.font, color: cs.color }; }).filter(Boolean);
       { const a0 = post0.querySelector('.x3-pkhd > .x3-art'); pkIcRowArtSh[id] = a0 ? getComputedStyle(a0).boxShadow : null; }
-      pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; }); }
+      pkIcRowAt[id] = {}; PK_IC_KEYS.forEach(q => { const b = before[q]; if (b) pkIcRowAt[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height }; });
+      pkIcRowSv[id] = {}; if (post0.classList.contains('pk--pc')) post0.querySelectorAll('.pk-icrow [data-pkic] svg').forEach(v => { const b = v.getBoundingClientRect(), q = v.closest('[data-pkic]').dataset.pkic;
+        pkIcRowSv[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height, c: getComputedStyle(v).color }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     const isEd = post0.classList.contains('pk--edit');   /* مساهمةُ التحرير تتّسع في موضعها كذلك، بلا حال القائمة */
     if (!isEd) { cardView = { open: id, fold: {} }; cxRowPub = id; }
@@ -10501,9 +10504,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* وإزاحتُها الأصليّة (أيقونةُ رأس المساحة ‎translateY(-2px)‎) تبقى في آخر الحركة — فلا تنزل ثمّ تقفز إليها —
          وحجمُها يبدأ من حجم السطر ويصغر إلى حجم رأس المساحة */
       const r1 = el.getBoundingClientRect(), cs = getComputedStyle(el), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;
-      const sc = r1.width ? r0.width / r1.width : 1;
-      const dx = (r0.left + r0.width / 2) - (r1.left + r1.width / 2 - (bm ? bm.e : 0)), dy = (r0.top + r0.height / 2) - (r1.top + r1.height / 2 - (bm ? bm.f : 0));
+      const sv0 = (pkIcRowSv[id] || {})[q], sv1 = sv0 && el.querySelector('svg'), b1 = sv1 && sv1.getBoundingClientRect();
+      /* لافتةُ الغلاف: يُقاس بالرسم لا بالزرّ العريض، فلا تبدأ الأيقونةُ كبيرة */
+      const s0 = b1 ? { left: before[q].left + (sv0.x - pkIcRowAt[id][q].x), top: before[q].top + (sv0.y - pkIcRowAt[id][q].y), width: sv0.w, height: sv0.h } : r0, s1 = b1 || r1;
+      const sc = s1.width ? s0.width / s1.width : 1;
+      const dx = (s0.left + s0.width / 2) - (s1.left + s1.width / 2 - (bm ? bm.e : 0)), dy = (s0.top + s0.height / 2) - (s1.top + s1.height / 2 - (bm ? bm.f : 0));
       an.push(el.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${sc})` }, { transform: bm ? cs.transform : 'none' }], { duration: D, easing: ez }));
+      if (b1) an.push(el.animate([{ color: sv0.c }, { color: cs.color }], { duration: D * .5, delay: D * .4, easing: 'ease-out', fill: 'backwards' }));
     });
     /* والعنوانُ كان مُزاحًا في الصفّ لتسع الأيقوناتُ سطرَه: يعود إلى موضعه على المنحنى نفسِه */
     { const t0 = pkIcRowTtl[id], tt = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd > .x3-pkttl');
@@ -10606,12 +10613,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         { const mr = mv.getBoundingClientRect(), wl = r.left - (bm ? bm.e : 0), wt = r.top - (bm ? bm.f : 0);
           if (Math.abs(mr.left - wl) > .5 || Math.abs(mr.top - wt) > .5) { mv.style.left = (parseFloat(mv.style.left) + wl - mr.left) + 'px'; mv.style.top = (parseFloat(mv.style.top) + wt - mr.top) + 'px'; } }
       }
+      const sv0 = (pkIcRowSv[id] || {})[q], sv1 = sv0 && mv.querySelector('svg');
+      if (sv1) {
+        /* لافتةُ الغلاف: الرسمُ إلى رسم الزرّ، بلون أيقونات الصفّ من أوّلها (لا ذهبيّة)، ويصغر إلى حجمه قبل أن يبلغ موضعه */
+        const b1 = sv1.getBoundingClientRect(), t2 = { left: en ? main.left + sv0.x : main.right + sv0.xr - sv0.w, top: fr.top + dT + sv0.y };
+        const s2 = b1.width ? sv0.w / b1.width : 1, ex = (t2.left + sv0.w / 2) - (b1.left + b1.width / 2), ey = (t2.top + sv0.h / 2) - (b1.top + b1.height / 2);
+        an.push(mv.animate([{ transform: 'none', color: cs.color }, { color: sv0.c, offset: .12 }, { transform: `translate(${ex * .4}px, ${ey * .4}px) scale(${s2})`, offset: .4 }, { transform: `translate(${ex}px, ${ey}px) scale(${s2})`, color: sv0.c }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+        return;
+      }
       an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
     });
     /* والنسخةُ الطائرة ثابتةٌ في النافذة: إن تحرّكت المساهمةُ (يتقلّص ما تحت التمرير فيُقصَر مداه) تتبعها */
     let live = true;
     if (flies.length) { const y0 = fr.top; const follow = () => { if (!live) return; const d = fp.getBoundingClientRect().top - y0; flies.forEach(x => { x.style.translate = `0px ${d}px`; }); requestAnimationFrame(follow); }; requestAnimationFrame(follow); }
-    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { live = false; done(); flies.forEach(x => x.remove()); });
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { live = false; done(); flies.forEach(x => x.remove());
+      /* لافتةُ الغلاف: زجاجُ الأزرار ينبت حول أيقوناتها بعد أن تستقرّ */
+      const np = pkIcPost(id); if (np && np.classList.contains('pk--pc')) np.querySelectorAll('.pc-fs__go').forEach(x => x.animate([{ background: 'transparent', boxShadow: 'none' }], { duration: 220 * (window.__pkfxSlow || 1), easing: 'ease-out' })); });
   }
   function pkIcToggle(post, k) {
     const id = pkIcId(post), open = pkIcOpenSet(id);
@@ -13504,7 +13521,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
     const pcRow = PK_ICX && kind === 'c' && pkLab() && !maxd && !framed && !open;
-    const pcHead = !pcRow && PK_ICX && kind === 'c' && pkLab() && (maxd || framed);   /* والمفتوحةُ تلبس الشكلَ الجديد نفسَه بلا أزرار، ويسقط القديمُ كلُّه */   /* الصفُّ المطويُّ يلبس لافتةَ الغلاف (ROADMAP-POSTCARD) */
+    const pcHead = !pcRow && PK_ICX && kind === 'c' && pkLab();   /* والمفتوحةُ تلبس الشكلَ الجديد نفسَه بلا أزرار، ويسقط القديمُ كلُّه */   /* الصفُّ المطويُّ يلبس لافتةَ الغلاف (ROADMAP-POSTCARD) */
     const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' + (PK_ICX && kind === 'c' && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '') : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow pk--pc' : '')}${PK_ICX && kind === 'c' && pkLab() && (maxd || framed) ? ' pk--pc pk--pcopen' + (pkSplitOn(p.id) || pkBankOn(p.id) || !pkMidOff[p.id] ? '' : ' pk--pcnone') : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
