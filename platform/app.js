@@ -9550,6 +9550,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
   const pkVw = {}, pkFo = {}, pkFs = {};
+  const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
      في المختبر لا عرضَ مجلّديًّا قائمًا بذاته: العرضُ الأصلُ أحدُ الثلاثة دائمًا، وأيقونةُ المجلد مفتاحُ منطقة البنك
      يسارًا (‎pkBank[id]‎) كما «المصدر» مفتاحُ الكتاب يمينًا. ومن كان على المجلّديّ صار على آخر عروضه والبنكُ مفتوح */
@@ -11469,6 +11470,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!folds.length && wrap) return midH + fph + pkSplitWrap(id, v, ed, ed ? `<div class="kt-view pk-split__ph pk-split__ph--es">${pkEs('mid', 'data-actkf')}</div>`
       : `<div class="kt-view pk-split__ph"><div class="pk-vwph">${esc(T().pkMidNone)}</div></div>`, pack);
     if (!folds.length) return `<div class="pk-vwph" aria-hidden="true"></div>`;
+    /* ===== الملخّصُ المنشورُ يُفتح فارغًا (طلبُ صاحب الموقع) =====
+       لا مجلدَ مختارًا ولا صفوف حتى ينقر القارئُ مجلدًا، فتنسحب إليه تظليلاتُه من الكتاب وتمتلئ الصفوفُ أمامه (‎hlFill‎) */
+    if (!ed && lab && pkFs[id] === undefined) pkAwait.add(id);
+    const wait = !ed && lab && pkAwait.has(id);
     if (pkFs[id] === undefined || !pkFoldName(folds, pkFs[id]) && pkFs[id] !== '') pkFs[id] = folds[0].id;
     const open = pkFo[id] || (pkFo[id] = new Map());
     const sel = pkFs[id];
@@ -11487,11 +11492,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, sel)}</div>`)
+    return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
            وهي ‎kt-view‎ بمجلدها المختار: فـ«+ صفّ» من التذييل يضيف إليه، ثمّ يُرسم العرضُ مكانها */
         lab && v !== 'folder' && ed && wrap && !flatCards(deck).length ? `<div class="kt-view pk-split__ph pk-split__esr" data-ktf="${esc(sel)}">${pkEs('mid')}</div>`
+        : wait && v !== 'folder' ? `<div class="kt-view pk-split__ph pk-await" aria-hidden="true"></div>`
         : lab && v !== 'folder' ? ktViewHTML(id, sel, v, folds, ed ? null : (pack && pack.deck === deck ? pack : { deck }), !ed)
         /* مكانُ العرض بلا كلام (طلبُ صاحب الموقع) — كان: اسمُ العرض واسمُ المجلد و«قريبًا» */
         : `<div class="pk-vwph" aria-hidden="true"></div>`));
@@ -25063,35 +25069,55 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         im.style.opacity = 1 - k; to.style.opacity = Math.min(1, k * 1.3);
         if (t < 1) return requestAnimationFrame(step);
         const tgt = hlCallEl(b, m.c.find(c => run.cids.has(c))) || el;
-        tgt.classList.remove('hl-call-pend', 'hl-call-land'); tgt.style.setProperty('--hlc', col[1]); void tgt.offsetWidth; tgt.classList.add('hl-call-land');
+        tgt.classList.remove('hl-call-pend', 'hl-call-land', 'hl-fill-wait'); setTimeout(() => tgt.classList.remove('hl-fill-in'), 360); tgt.style.setProperty('--hlc', col[1]); void tgt.offsetWidth; tgt.classList.add('hl-call-land');
         setTimeout(() => tgt.classList.remove('hl-call-land'), 700);
         fin();
       };
       requestAnimationFrame(step);
     });
   }
+  /* ===== الامتلاءُ أمام القارئ (طلبُ صاحب الموقع) =====
+     نقرُ مجلدٍ في مساهمةٍ منشورة: صفوفُ الملخّص (أيًّا كانت طريقةُ العرض) تُخفى قبل أوّل إطار، ثمّ يظهر كلٌّ منها حين
+     ينزل عليه تظليلُه من الكتاب، وما لا تظليلَ له يظهر بالترتيب معها. وبلا كتابٍ مفتوح تظهر بالترتيب وحدها */
+  const hlFill = new Set();
+  function hlFillEls(id) {
+    const ctl = document.querySelector(`#cm-body [data-pkview][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
+    const v = post && post.querySelector('.post-ytmain > .pk-split > .kt-view, .post-ytmain > .kt-view');
+    return v ? [...v.querySelectorAll('[data-kcard], .pp-cell .pp-card, .pp-host .pp-card')] : [];
+  }
+  function hlFillHide(id) { hlFillEls(id).forEach(x => x.classList.add('hl-fill-wait', 'hl-fill-in')); }
+  function hlFillShow(els, step = 70) {
+    els.filter(x => x.classList.contains('hl-fill-wait')).forEach((x, i) => setTimeout(() => {
+      x.classList.remove('hl-fill-wait'); setTimeout(() => x.classList.remove('hl-fill-in'), 360);
+    }, i * step));
+  }
   function hlCallStop() {
     const run = hlCall; if (!run) return;
     hlCall = null; run.on = false;
     try { if (run.b.gl && !run.b.gl.dead) run.b.gl.riffleEnd(); } catch (e) {}
     document.querySelectorAll('#cm-body .hl-call-pend').forEach(x => x.classList.remove('hl-call-pend'));
+    hlFillShow([...document.querySelectorAll('#cm-body .hl-fill-wait')], 40);
     run.urls.forEach(u => URL.revokeObjectURL(u)); run.layer.remove();
   }
   async function hlCallRun(id) {
     hlCallStop();
-    if (bkReduce()) return;
+    const fill = hlFill.delete(id);
+    const rest = () => { if (fill) hlFillShow(hlFillEls(id)); };   /* ما لم يطر إليه شيء يظهر بالترتيب */
+    if (bkReduce()) return rest();
     const b = hlCallBook(id), R = hlRows(id), H = hlData(id);
-    if (!b || !R || !H || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) return;
+    if (!b || !R || !H || !b.gl || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) return rest();
     const s = hlSidOf(b).slice(id.length), cids = new Set(R.cards.map(c => c.id));
     const marks = H.marks.filter(m => m.s === s && m.k >= 1 && m.k <= b.n && m.c.some(c => cids.has(c))).sort((x, y) => x.k - y.k || x.bars[0][2] - y.bars[0][2]);
-    if (!marks.length) return;
+    if (!marks.length) return rest();
     const layer = document.createElement('div'); layer.className = 'hl-fly-layer'; layer.setAttribute('aria-hidden', 'true'); document.body.appendChild(layer);
     const run = hlCall = { id, b, cids, on: true, layer, urls: [] };
     const blobs = await Promise.all(marks.map(m => hlSnapGet(id, m.id).catch(() => null)));
     if (!run.on) return;
     const imgs = new Map(); marks.forEach((m, i) => { if (blobs[i]) { const u = URL.createObjectURL(blobs[i]); run.urls.push(u); imgs.set(m.id, u); } });
     const flying = marks.filter(m => imgs.has(m.id));
-    if (!flying.length) return hlCallStop();
+    if (!flying.length) { rest(); return hlCallStop(); }
+    /* والصفوفُ التي لا يطير إليها تظليلٌ تظهر بالترتيب من الآن، والتي يطير إليها تنتظر هبوطَه */
+    if (fill) { const tg = new Set(flying.map(m => hlCallEl(b, m.c.find(c => cids.has(c)))).filter(Boolean)); hlFillShow(hlFillEls(id).filter(x => !tg.has(x)), 90); }
     /* البطائقُ المنتظرةُ تخفت حتى تنزل عليها تحديداتُها (إلّا عليا الرزمة: هي هدفُ الجميع) */
     flying.forEach(m => { const el = hlCallEl(b, m.c.find(c => cids.has(c))); if (el && !el.classList.contains('pp-card')) el.classList.add('hl-call-pend'); });
     const flights = [];
@@ -26826,12 +26852,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
       } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
+      const pubPick = !pf.closest('.pk--edit');
+      if (pubPick) { pkAwait.delete(id); hlFill.add(id); }
       requestAnimationFrame(() => hlCallRun(id));   /* والكتابُ مغلقٌ على الطاولة: يستدعي المجلدُ تحديداتِ بطائقه (بعد أن يعود الكتابُ إلى وعائه المرسوم) */
       /* ===== وقامةُ الشريط تنتقل بنعومة (طلبُ صاحب الموقع) =====
          فتحُ مجلدٍ فيه مجلداتٌ يُطيل الشريطَ (ومعه المساهمة) وإغلاقُه يُقصّره — كانا يقفزان. فتُقاس القامةُ قبلُ وبعدُ،
          ويُحرَّك الشريطُ بينهما (يُقصّ ما لم يبلغه)، والكتلُ تُرسم حيّةً معه */
       const st0 = pf.closest('.pk-fstrip'), h0 = st0 ? st0.getBoundingClientRect().height : null;
       renderCmSection();
+      if (pubPick) hlFillHide(id);   /* قبل أن يُرسم إطار: الصفوفُ خفيّةٌ حتى تملأها تظليلاتُها */
       const st1 = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"]`);
       /* ===== ولا شريطَ تمريرٍ عابر (طلبُ صاحب الموقع) =====
          المقاساتُ النهائيّة (قدرُ اسم كلّ مغلق وتسطيحُ اللوح الضيّق) كانت تُحسب في الإطار التالي (‎pkFitSoon‎)، فيُرسم

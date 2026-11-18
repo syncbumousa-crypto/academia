@@ -18714,3 +18714,8 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-bank > :is(#cm-cards, .x3)::-webkit-scrollbar-track:horizontal { margin-inline: 52px; }
 /* وقامةُ شريط المجلدات تنتقل: صفوفُه بلا شريط تمرير (يفيض الصفُّ لحظةً وسط الحركة فيظهر شريطٌ لا حاجةَ له) */
 .pk-fstrip.is-hanim .pg-row { overflow-x: hidden; }
+/* الملخّصُ المنشورُ يمتلئ أمام القارئ: الصفُّ المنتظرُ خفيٌّ، ثمّ يظهر حين ينزل عليه تظليلُه أو حين يجيء دورُه */
+.hl-fill-wait:not(tr), tr.hl-fill-wait > td { opacity: 0 !important; }
+.hl-fill-in:not(tr), tr.hl-fill-in > td { transition: opacity .3s ease !important; }
+/* وقبل أوّل مجلد: مساحةُ الملخّص فارغةٌ بلا كلام */
+.kt-view.pk-await { min-height: 120px; }
