@@ -10191,7 +10191,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
-      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b>${pcProgHTML(p)}${pcSaleHTML(p)}</div>`
+      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b>${pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
