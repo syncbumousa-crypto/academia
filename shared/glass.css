@@ -141,21 +141,40 @@
 :root { --side-w: 200px; }
 body.side-rail { --side-w: 64px; }
 
-body.side-rail .side-logo,
-body.side-rail .sidebar .tab-tx,
-body.side-rail .nook-com span,
 body.side-rail .side-logout .side-logout-tx,
 body.side-rail .side-auth-tx,
 body.side-rail .side-profile .sp-name { display: none; }
 
+/* ============================================================
+   الحركةُ بين الواسع والسكّة: كلُّ شيءٍ على إيقاعٍ واحد (طلبُ صاحب الموقع · «ج»)
+   ============================================================
+   كان العرضُ والحَشوُ يقفزان في لحظة، والأسماءُ تختفي، والدائرةُ وحدها تنزلق
+   بعدهم بربع ثانية — فبدا ثقيلًا متقطّعًا. فصار ‎--side-w‎ متغيّرًا مسجَّلًا يُحرَّك،
+   وكلُّ ما يُحسب منه (اللوح والحَشو والدائرة) يتبعه في الإطار نفسِه بالمنحنى نفسِه.
+   والأسماءُ تتلاشى وتنطوي بدل أن تختفي، والأيقونةُ تنزاح إلى الوسط بالحَشو لا بقفزةٍ.
+   والحركةُ عند الضغط وحدَه (‎body.side-anim‎ من ‎setRail‎)، لا عند فتح الصفحة. */
+@property --side-w { syntax: '<length>'; inherits: true; initial-value: 200px; }
+.side-logo, .sidebar .tabs .tab-tx, .nook-com span { max-width: 170px; overflow: hidden; white-space: nowrap; }
+body.side-rail .side-logo,
+body.side-rail .sidebar .tabs .tab-tx,
+body.side-rail .nook-com span { max-width: 0; opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  body.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
+  body.side-anim :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span) {
+    transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease; }
+  body.side-anim .sidebar .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
+  body.side-anim .sidebar { transition: padding .32s cubic-bezier(.32,.72,0,1); }
+  body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
+}
+
 body.side-rail .sidebar { padding: 14px 8px; }
-body.side-rail .sidebar .tabs button,
 body.side-rail .nook-com,
 body.side-rail .side-logout,
 body.side-rail .side-join,
 body.side-rail .side-login,
 body.side-rail .side-profile { justify-content: center; padding-inline: 0; }
 body.side-rail .nook-com { padding-inline-start: 0; }
+body.side-rail .sidebar .tabs button { gap: 0; padding-inline: calc(50% - 9px) 0; }
 body.side-rail .side-ctl { align-items: center; }
 body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
 /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء، ولا الكتلةُ: الجوفُ صفٌّ
@@ -331,7 +350,8 @@ html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) +
   background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
   color: var(--glass-ink);
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
-  transition: right .25s ease, left .25s ease, background .15s, color .15s, transform .15s;
+  /* بلا ‎right/left‎: موضعُه محسوبٌ من ‎--side-w‎ وهو يتحرّك معه في الإطار نفسِه — انتقالٌ ثانٍ عليه كان يجعله يلحق متأخّرًا */
+  transition: background .15s, color .15s, transform .15s;
 }
 html[data-lang="en"] .side-handle {
   right: auto;
