@@ -33449,6 +33449,16 @@ void main() {
     if (p.srvBig === rawH) return;
     if (p.srvBig) { delete p.srvBig; }          /* تبدّل المتن: تُعطى فرصةً جديدة */
 
+    /* ===== وما لم يتبدّل منذ بلغ لا يُجهَّز ثانيةً =====
+       كان كلُّ دفعٍ يمرّ بسؤال الهويّة (‎/auth/me‎) وبـ‎medPrep‎ — نسخةٌ عميقةٌ
+       للمتن، وتحليلُ كلِّ نصٍّ فيه ‎<img‎ بـ‎innerHTML‎ — ثمّ يجد ‎p.srvH === h‎
+       فيرجع. والمسحُ يقع بعد كلِّ حفظ، فرزمتا بطاقاتٍ فيهما ألفٌ ومئةُ صورة
+       كانتا ~٣٢٠ms على الخيط الرئيس بعد تغيير الكتاب.
+       فالبصمةُ الخامُ وما يدخل المتنَ المرسَل سواها (‎ts uid st pin‎) تُحفظ يومَ
+       يُعرف أنّ الخادمَ على ما عندي — فإن طابقت رجع الدفعُ قبل أن يبدأ. */
+    const sigNow = () => rawH + '|' + (p.ts || '') + '|' + (p.uid || '') + '|' + stOf(p) + '|' + (p.pin ? 1 : 0);
+    if (p.srvH && p.srvR === sigNow()) return;
+
     /* ===== ولا تُنشر باسمي مساهمةُ غيري =====
        الدرجُ للأصل كلِّه: ما كتبتَه في اللوحة بحساب «أكاديميا» تجده في الموقع
        الأساسيّ، وهو ‎me:true‎ ههنا كذلك. فلولا هذا لَرفعه الموقعُ باسم من دخل
@@ -33493,7 +33503,7 @@ void main() {
     const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, uid: p.uid || '',
                                  st: stOf(p), pin: p.pin ? 1 : 0, data: prepped });
     const h = srvHash(body);
-    if (p.srvH === h) return;                  /* لم يتبدّل شيء */
+    if (p.srvH === h) { p.srvR = sigNow(); return; }   /* لم يتبدّل شيء — وتُحفظ بصمتُه فلا يُجهَّز ثانيةً */
     try {
       const r = await apiFetch(postsURL(), {
         method: 'PUT', credentials: 'same-origin',
@@ -33565,6 +33575,7 @@ void main() {
       try { const jr = await r.json(); ru = (jr && jr.uid) || ''; } catch (e) { /* ردٌّ بلا متن */ }
       if (ru) p.uid = ru;
       else if (state.uid) p.uid = state.uid;
+      p.srvR = sigNow();                      /* بعد المالك: هو جزءٌ من المتن المرسَل */
       if (!isMine(p)) refreshOwnership();   /* owner learned: judge again */
       save();
       srvBump(code);                           /* وسائرُ التبويبات تُنادى في الحال */
