@@ -19251,3 +19251,17 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:
 /* ===== لافتةُ الغلاف بلا هوامشَ زائدة فوق الغلاف وتحته (طلبُ صاحب الموقع) ===== */
 #cm-body .pk--pc .pc-ban { margin-block: -5px 0; padding-block: 0; }
 #cm-body .pk--icrow.pk--pc .post-ytmain > .post-react { margin-top: 8px; }
+/* ===== طيُّ المساحة إلى زرّها (اختيارُ صاحب الموقع — «المساحةُ نفسُها تصير الزر») =====
+   نسختان ثابتتان في الصفحة مدّةَ الطيّ: الكبسولةُ الزجاجيّة (تبدأ بحجم المساحة ولونها) وفسحةُ الخطّ تحتها (تنفتح قبل وصولها) */
+.pc-morph, .pc-mgap { position: fixed; pointer-events: none; margin: 0; border-radius: 999px; }
+.pc-mgap { z-index: 58; background: var(--pc-pg); box-shadow: 0 0 0 6px var(--pc-pg); }
+.pc-morph { z-index: 59; overflow: hidden; display: flex; align-items: center; justify-content: center; color: #2c5e65;
+  background: linear-gradient(rgba(127, 179, 187, .22), rgba(127, 179, 187, .22)), var(--pc-pg);
+  box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .95), inset -.36px -.72px 0 -.2px rgba(255, 255, 255, .45),
+    inset 3.2px 6.3px 12px -8px rgba(255, 255, 255, .55), inset -3.2px -6.3px 12px -8px rgba(20, 35, 63, .06),
+    0 0 0 1px rgba(44, 94, 101, .14), 0 8px 16px -10px rgba(44, 94, 101, .4); }
+html[data-theme="dark"] .pc-morph { color: #9fcbd2; background: linear-gradient(rgba(127, 179, 187, .16), rgba(127, 179, 187, .16)), var(--pc-pg);
+  box-shadow: inset .54px 1.08px 0 -.2px rgba(255, 255, 255, .15), inset 3.2px 6.3px 12px -8px rgba(255, 255, 255, .06), 0 0 0 1px rgba(127, 179, 187, .25), 0 8px 16px -10px rgba(0, 0, 0, .6); }
+.pc-morph__pane { position: absolute; inset: 0; }
+.pc-morph > :not(i) { position: relative; display: flex; }
+.pc-morph svg { width: 18px; height: 18px; }
