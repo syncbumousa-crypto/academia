@@ -19179,8 +19179,8 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-mi { color: #eef3f4; }
 html[data-theme="dark"] #cm-body .pk--pc .pc-mi .pc-k__ic { color: #7fb3bb; }
 html[data-theme="dark"] #cm-body .pk--pc .pc-mi.is-own { color: rgba(255, 255, 255, .4); }
 /* ===== المساهمةُ المفتوحة تلبس رأسَ الشكل الجديد بلا أزرار (‎.pk--pcopen‎) ===== */
-#cm-body .pk--pc .pc-fr--nokeys { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: nowrap; gap: 14px; padding: 10px 0 4px; }
-#cm-body .pk--pc .pc-fr--nokeys .pc-fs { flex: 0 0 auto; min-width: 110px; padding: 11px 14px 12px; padding-inline-end: 16px; }
+#cm-body .pk--pc .pc-fr--nokeys { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: nowrap; gap: 14px; padding: 10px 0 18px; }
+#cm-body .pk--pc .pc-fr--nokeys .pc-fs { flex: 0 0 auto; min-width: 110px; padding: 11px 14px 22px; padding-inline-end: 16px; }
 #cm-body .pk--pcopen .pc-ban { margin-bottom: 4px; }
 
 /* ===== المفتوحةُ بلا مساحة: تعود أزرارُ الإطارات (ونُسخت قواعدُها من الصفّ المطويّ) ===== */
