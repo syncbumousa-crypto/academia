@@ -34746,57 +34746,100 @@ void main() {
      ===== والدمجُ اتّحادٌ لا ترجيح =====
      الاختبارُ واقعةٌ مضت لا رأيٌ يُبدَّل: فما عند الخادم وما عندي يجتمعان
      بمعرّفاتهما، ولا يُطرح شيء. ومن اختبر في متصفّحين وجد الاثنين. */
-  let xtGot = false, xtT = 0, xtSig = '';
+  /* ===== وكلُّ اختبارٍ وثيقةٌ وحده (ROADMAP-CLOUD-NEXT ٧ · قرارُ صاحب الموقع) =====
+     كان السجلُّ كلُّه وثيقةً واحدة: بلغت ٨٥٧ ألفَ حرفٍ من حدّ المليون بثلاثين اختبارًا،
+     وكلُّ حكمٍ في اختبارٍ جارٍ يرفع السجلَّ كلَّه، والموقعُ يقصّه عند الثلاثين فيمحو الأقدمَ صامتًا.
+     فصار لكلّ اختبارٍ صفُّه في الحساب (‎xt:<معرّفه>‎):
+     · لا حدَّ للسجلّ لمن له حساب (والثلاثون باقيةٌ للزائر: لا خادمَ له).
+     · يُرفع ما تبدّل وحده — والبصمةُ لكلّ اختبار (‎xtSigs‎).
+     · ويُجلب السجلُّ **خفيفًا**: طابورُ ما لم يكتمل (‎run‎، ~٧٥ك) يبقى في الخادم، والسجلُّ عليه ‎rx‎،
+       ويُجلب كاملًا حين يُكمَل أو تُفتح إحصاءاتُه (‎xtFull‎). والخفيفُ لا يُرفع أبدًا — وإلّا محا طابورَه.
+     · والحذفُ يبلغ الخادم (‎state.xtDel‎ حتّى يبلغ)، وما كان في الخادم (‎sv‎) فغاب عنه حُذف هنا:
+       فلا يعود اختبارٌ حذفتَه في جهازٍ لأنّ جهازًا آخرَ ما زال يحمله.
+     · والنقلُ مرّةً: حسابٌ لا صفوفَ فيه تُضمّ إليه وثيقةُ ‎exams‎ القديمة، فيُرفع كلُّ اختبارٍ وحده.
+       والقديمةُ لا تُمحى — نسخةٌ احتياطيّةٌ لما قبل النقل.
+     ===== والدمجُ اتّحادٌ لا ترجيح =====
+     الاختبارُ واقعةٌ مضت: ما عند الخادم وما عندي يجتمعان بمعرّفاتهما. وإن كان عند الاثنين
+     فالأبعدُ شوطًا يغلب (اكتمل · أو أجاب أكثر) — فمن أكمل اختبارَه في الجوّال لا يرجع ناقصًا */
+  let xtGot = false, xtT = 0, xtBusy = false;
+  const xtSigs = new Map();
+  const XT_ID = /^[a-z0-9]{4,40}$/;
+  const xtSigOf = r => JSON.stringify(r, (k, v) => (k === 'sv' || k === 'rx') ? undefined : v);
+  const xtAhead = (a, b) => (!!a.done !== !!b.done) ? !!a.done : ((a.ans || []).length > (b.ans || []).length);
 
   async function xtPull() {
     if (!SRV_ON() || isGuest() || !state.uid || xtGot) return;
-    let j;
+    let rem;
     try {
-      const r = await apiFetch(udocURL('?kind=exams'), { credentials: 'same-origin', cache: 'no-store' });
-      if (!r.ok) { bootMark('xt:get' + r.status); return; }
-      j = await r.json();
+      const r = await apiFetch(udocURL('?list=xt'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('xt:list' + r.status); return; }
+      rem = ((await r.json()) || {}).list || [];
     } catch (e) { bootMark('xt:neterr'); return; }
-    xtGot = true;
-    const mine = Array.isArray(state.xtPast) ? state.xtPast : [];
-    const rem = (j && j.data && Array.isArray(j.data.list)) ? j.data.list : [];
-    if (rem.length) {
-      const seen = new Set(mine.map(x => x && x.id).filter(Boolean));
-      let add = 0;
-      rem.forEach(x => { if (x && x.id && !seen.has(x.id)) { mine.push(x); seen.add(x.id); add++; } });
-      if (add) {
-        mine.sort((a, b) => (b.ts || 0) - (a.ts || 0));
-        state.xtPast = mine;
-        save();
-        bootMark('xt:got' + add);
-      }
+    let legacy = [];
+    if (!rem.length) {
+      try {
+        const r = await apiFetch(udocURL('?kind=exams'), { credentials: 'same-origin', cache: 'no-store' });
+        if (!r.ok) { bootMark('xt:get' + r.status); return; }
+        const j = await r.json();
+        legacy = (j && j.data && Array.isArray(j.data.list)) ? j.data.list : [];
+        if (legacy.length) bootMark('xt:legacy' + legacy.length);
+      } catch (e) { bootMark('xt:neterr'); return; }
     }
-    /* ===== وبصمةُ «ما عند الخادم» لا «ما عندي» =====
-       كانت تُكتب بصمةُ سجلّي بعد الجذب — فإن كان الخادمُ خاويًا ظنّ الدفعُ أنّ
-       ما عندي هو ما عنده، فلم يرفع شيئًا أبدًا. وهي علّةُ ‎exams: 0‎ في القاعدة
-       مع تسعةٍ وتسعين ومئتي كيلو في الدرج.
-       فالبصمةُ بصمةُ ما **قرأتُه منه**: فإن خالفها سجلّي رُفع. */
-    xtSig = JSON.stringify(rem);
+    xtGot = true;
+    const mine = xtPastAll();
+    const byId = new Map(mine.filter(x => x && x.id).map(x => [x.id, x]));
+    legacy.forEach(x => { if (x && x.id && !byId.has(x.id)) { mine.push(x); byId.set(x.id, x); } });
+    const onSrv = new Set();
+    let add = 0;
+    rem.forEach(it => {
+      const d = it && it.data;
+      if (!d || !d.id) return;
+      onSrv.add(d.id);
+      const loc = byId.get(d.id);
+      if (loc && !xtAhead(d, loc)) { loc.sv = 1; return; }      /* ما عندي أبعدُ أو مثلُه: يُرفع إن خالف */
+      const rec = Object.assign({}, d, { sv: 1 }, it.big ? { rx: 1 } : {});
+      if (loc) { Object.keys(loc).forEach(k => delete loc[k]); Object.assign(loc, rec); }
+      else { mine.push(rec); byId.set(d.id, rec); add++; }
+      xtSigs.set(d.id, it.big ? '' : xtSigOf(rec));
+    });
+    /* وما كان في الخادم فغاب عنه: حُذف من جهازٍ آخر */
+    const keep = mine.filter(x => !(x && x.sv && !onSrv.has(x.id)));
+    const gone = mine.length - keep.length;
+    if (add || gone || legacy.length) {
+      keep.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+      state.xtPast = keep;
+      save();
+      bootMark('xt:got' + add + (gone ? ':gone' + gone : ''));
+    }
     xtPushSoon();
   }
 
   async function xtPush() {
-    if (!SRV_ON() || isGuest() || !state.uid) return;
-    /* ولا يُدفع قبل جذب: من دفع قبل أن يقرأ محا سجلَّ متصفّحٍ آخر.
-       والجذبُ ينتهي بدفعٍ مؤجَّل، فلا تضيع الدفعةُ التي أوقفناها */
+    if (!SRV_ON() || isGuest() || !state.uid || xtBusy) return;
+    /* ولا يُدفع قبل جذب: من دفع قبل أن يقرأ لم يعرف ما حُذف في جهازٍ آخر */
     if (!xtGot) { xtPull(); return; }
-    const list = Array.isArray(state.xtPast) ? state.xtPast : [];
-    const sig = JSON.stringify(list);
-    if (sig === xtSig) return;
+    xtBusy = true;
+    let n = 0;
     try {
-      const r = await apiFetch(udocURL(), {
-        method: 'PUT', credentials: 'same-origin',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ kind: 'exams', data: { list: list } }),
-      });
-      if (!r.ok) { bootMark('xt:put' + r.status); return; }
-      xtSig = sig;
-      bootMark('xt:ok' + list.length);
+      for (const id of (state.xtDel || []).slice()) {
+        const r = await apiFetch(udocURL('?kind=' + encodeURIComponent('xt:' + id)), { method: 'DELETE', credentials: 'same-origin' });
+        if (!r.ok) { bootMark('xt:del' + r.status); break; }
+        state.xtDel = (state.xtDel || []).filter(x => x !== id); n++;
+      }
+      const dirty = xtPastAll().filter(r => r && r.id && XT_ID.test(r.id) && !r.rx && xtSigs.get(r.id) !== xtSigOf(r));
+      for (const rec of dirty) {
+        const sig = xtSigOf(rec);
+        const r = await apiFetch(udocURL(), {
+          method: 'PUT', credentials: 'same-origin',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ kind: 'xt:' + rec.id, data: JSON.parse(sig) }),
+        });
+        if (!r.ok) { bootMark('xt:put' + r.status); break; }
+        xtSigs.set(rec.id, sig); rec.sv = 1; n++;
+      }
     } catch (e) { bootMark('xt:puterr'); }
+    finally { xtBusy = false; }
+    if (n) { bootMark('xt:ok' + n); save(); }
   }
 
   function xtPushSoon() {
@@ -34807,7 +34850,22 @@ void main() {
   /* وقد بلغ الحسابَ؟ — بها يُعرف أنّه لا يحتاج مأوًى في الدرج */
   function xtSynced() {
     if (!SRV_ON() || isGuest() || !state.uid || !xtGot) return false;
-    return xtSig === JSON.stringify(state.xtPast || []);
+    if ((state.xtDel || []).length) return false;
+    return xtPastAll().every(r => !r || r.rx || xtSigs.get(r.id) === xtSigOf(r));
+  }
+  /* الاختبارُ كاملًا من الحساب — لِما جاء خفيفًا (‎rx‎) */
+  async function xtFull(rec) {
+    if (!rec || !rec.rx) return rec;
+    try {
+      const r = await apiFetch(udocURL('?kind=' + encodeURIComponent('xt:' + rec.id)), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('xt:full' + r.status); return null; }
+      const j = await r.json();
+      if (!j || !j.data || j.data.id !== rec.id) return null;
+      Object.keys(rec).forEach(k => delete rec[k]);
+      Object.assign(rec, j.data, { sv: 1 });
+      xtSigs.set(rec.id, xtSigOf(rec));
+      return rec;
+    } catch (e) { bootMark('xt:fullerr'); return null; }
   }
   window.acExamSync = xtPull;
 
@@ -40735,7 +40793,8 @@ void main() {
       run: null
     };
     L.unshift(rec);
-    if (L.length > XT_PAST_MAX) L.length = XT_PAST_MAX;
+    /* والثلاثون للزائر وحده: لمن له حساب كلُّ اختبارٍ وثيقةٌ فيه، فلا يُمحى شيء (ROADMAP-CLOUD-NEXT ٧) */
+    if (!(SRV_ON() && !isGuest() && state.uid) && L.length > XT_PAST_MAX) L.length = XT_PAST_MAX;
     xtPastId = rec.id;
     save();
   }
@@ -40955,7 +41014,7 @@ void main() {
   }
 
   /* ===== أفعالُ اللوح ===== */
-  document.addEventListener('click', e => {
+  document.addEventListener('click', async e => {
     const b = e.target.closest && e.target.closest('#panel-past [data-past]');
     if (!b) return;
     const rec = xtPastOf(b.dataset.id); if (!rec) return;
@@ -40963,7 +41022,13 @@ void main() {
     if (a === 'del') {
       const L = xtPastAll();
       const i = L.indexOf(rec); if (i >= 0) L.splice(i, 1);
+      /* ويبلغ الحذفُ الحسابَ — وإلّا عاد مع أوّل جذب */
+      if (rec.sv) { (state.xtDel = state.xtDel || []).push(rec.id); xtPushSoon(); }
       save(); xtPastPaint(); return;
+    }
+    /* وما جاء خفيفًا يُجلب كاملًا قبل أن يُكمَل أو تُفتح إحصاءاتُه */
+    if (rec.rx && (a === 'stat' || a === 'go')) {
+      if (!await xtFull(rec)) { alert('تعذّر جلب هذا الاختبار من حسابك — تحقّق من الاتصال وأعد المحاولة.'); return; }
     }
     /* ===== والرزمةُ تُطلب من مادّتها: قد تكون حُذفت =====
        فإن لم تُوجد لم يُفتح شيءٌ ولم يُقل شيء — بل يُقال. وصمتُ الفعل أسوأُ من عطبه */
