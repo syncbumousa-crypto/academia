@@ -10421,7 +10421,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + `<label class="pcv-btn">${esc(L.pick)}<input type="file" accept="image/*" hidden data-pcvfile="1"></label></div></div>`;
     }
     box.innerHTML = `<div class="pcv-panel" role="dialog" aria-modal="true" aria-label="${esc(L.t)}"><div class="pcv-hd"><b>${esc(L.t)}</b>`
-      + `<button type="button" class="pcv-x" data-pcvx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div><div class="pcv-tabs">${tabs}</div>${body}</div>`;
+      + `</div><div class="pcv-tabs">${tabs}</div>${body}`
+      /* الخروجُ شريطُ الزاوية نفسُه الذي يُخرج من الوضع الواسع (طلبُ صاحب الموقع) — لا ‎×‎ */
+      + `<button type="button" class="pk-max pk-max--curve pcv-exit" data-pcvx="1" aria-pressed="true" title="${esc(L.cls)}" aria-label="${esc(L.cls)}">${CX_GROW1}</button></div>`;
     const cr = box.querySelector('.pcv-crop'); if (cr) { const im = cr.querySelector('img'); if (im.complete) pcvCropPlace(cr); else im.onload = () => pcvCropPlace(cr); }
   }
   /* ===== موضعُ غلاف الكتاب: إطارٌ بنسبة الغلاف (‎3:2‎) يُسحب على الكتاب صعودًا ونزولًا ===== */

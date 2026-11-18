@@ -19443,3 +19443,8 @@ html[data-theme="dark"] #pcv .pcv-btn.on { color: #7fb3bb; background: rgba(255,
 html[data-theme="dark"] #pcv .pcv-ph { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
 #pcv .pcv-crop.on .pcv-win { box-shadow: 0 0 0 2px #fff, 0 0 0 999px rgba(13, 42, 72, .45); }
 #pcv .pcv-crop:not(.on) .pcv-win { box-shadow: 0 0 0 2px rgba(255, 255, 255, .75), 0 0 0 999px rgba(13, 42, 72, .3); }
+/* شريطُ الخروج على زاوية نافذة الغلاف — قوسُ الوضع الواسع نفسُه، في الزاوية العليا المقابلة للعنوان */
+#pcv .pcv-panel { position: relative; }
+#pcv .pk-max.pk-max--curve.pcv-exit { top: 4px; inset-inline-start: auto; inset-inline-end: 4px; z-index: 2; }
+#pcv .pcv-exit svg { transform: scaleX(-1); }
+html[data-lang="en"] #pcv .pcv-exit svg { transform: none; }
