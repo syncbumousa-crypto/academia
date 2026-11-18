@@ -19248,3 +19248,6 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:
 #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go svg { transition: transform .26s cubic-bezier(.32, .72, 0, 1); }
 #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:is(:hover, :focus-visible) svg { transform: scale(1.18); }
 #cm-body .pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:active svg { transform: scale(1.06); }
+/* ===== لافتةُ الغلاف بلا هوامشَ زائدة فوق الغلاف وتحته (طلبُ صاحب الموقع) ===== */
+#cm-body .pk--pc .pc-ban { margin-block: 2px 0; padding-block: 0; }
+#cm-body .pk--icrow.pk--pc .post-ytmain > .post-react { margin-top: 8px; }
