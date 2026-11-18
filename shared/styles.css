@@ -19615,3 +19615,22 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-co
 #cm-body .pk--pc .pc-sale--buy .pc-buyx button.pc-ddchip { padding-inline: 3px 5px; margin-inline: 1px 2px; }
 #cm-body .pk--pc .pc-sale--buy .pc-buyb { padding-inline-start: 5px; }
 #cm-body .pk--pc .pc-sale--buy .pc-buyx:has(.pc-ddchip) .pc-buyw { padding-inline-end: 3px; }
+/* ===== نافذةُ الشراء (‎.pcb-panel‎) — على هيئة نافذة التسعير ===== */
+#pcp .pcb-tot { font: inherit; }
+#pcp .pcb-all { margin-top: 6px; padding: 6px 14px; border: 0; border-radius: 999px; cursor: pointer; font: inherit; font-size: 12.5px; font-weight: 600; color: #2c5e65; background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); }
+#pcp .pcb-all:hover { box-shadow: inset 0 0 0 1px #2c5e65; }
+html[data-theme="dark"] #pcp .pcb-all { color: #7fb3bb; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+#pcp button.pcb-ck { border: 0; cursor: pointer; font: inherit; gap: 6px; padding: 4px 10px 4px 8px; }
+#pcp button.pcb-ck b { font-weight: 700; }
+#pcp .pcb-box { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 5px; box-shadow: inset 0 0 0 1.5px rgba(44, 94, 101, .45); background: #fff; color: #fff; flex: none; }
+#pcp .pcb-box svg { width: 12px; height: 12px; }
+#pcp button.pcb-ck.is-on .pcb-box { background: #fff; color: #2c5e65; box-shadow: none; }
+html[data-theme="dark"] #pcp .pcb-box { background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1.5px rgba(127, 179, 187, .5); }
+html[data-theme="dark"] #pcp button.pcb-ck.is-on .pcb-box { background: #fff; color: #2c5e65; }
+#pcp .pcp-row.is-sel { box-shadow: inset 0 0 0 1.5px rgba(44, 94, 101, .45); }
+html[data-theme="dark"] #pcp .pcp-row.is-sel { box-shadow: inset 0 0 0 1.5px rgba(127, 179, 187, .45); }
+#pcp .pcp-in.is-own { color: #2c5e65; font-size: 12px; }
+html[data-theme="dark"] #pcp .pcp-in.is-own { color: #7fb3bb; }
+#pcp .pcb-free { color: #2c5e65; font-weight: 700; }
+html[data-theme="dark"] #pcp .pcb-free { color: #7fb3bb; }
+#pcp .pcv-btn[disabled] { opacity: .45; cursor: default; filter: none; }

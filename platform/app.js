@@ -10384,7 +10384,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يمينُه الحالةُ نصًّا، ويسارُه زرُّ الشراء: «شراء ⌄ الكل · السعر». والسهمُ يفتح قائمةً
      تحته: الكلُّ أو مساحةٌ وحدَها بسعرها (من ‎parts‎)، والمشترى منها عليه ✓.
      والمشترى سجلُّه ‎state.bought[id]‎: ‎1‎ للكلّ، أو ‎{book,mid,bank}‎ لما اشتُري منها */
-  const pcPick = {};   /* ما اختاره القارئُ من القائمة لكلّ مساهمة (‎all‎ أو مساحة) */
+  const pcPick = {};
+  const pcPickF = {};   /* ومجلداتُ ما حدّده القارئُ في نافذة الشراء (‎Set‎ لكلّ مساهمةٍ مسعَّرةٍ بمجلداتها) */   /* ما اختاره القارئُ من القائمة لكلّ مساهمة (‎all‎ أو مساحة) */
   /* سهمُ قائمة الشراء: أسمكُ ومنحنٍ (طلبُ صاحب الموقع) — قوسٌ لا زاويةٌ حادّة */
   const PC_DD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5C9 13.2 10.6 14.6 12 14.6S15 13.2 17.5 9.5"/></svg>';
   const pcBought = id => (state.bought || {})[id];
@@ -10393,23 +10394,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const s = (p.data && p.data.sale) || {}, parts = s.parts || {}, b = pcBought(p.id), got = b && typeof b === 'object' ? b : {};
     const keys = PK_IC_KEYS.filter(k => parts[k] > 0);
     const left = keys.filter(k => !got[k]).reduce((t, k) => t + (+parts[k] || 0), 0);
-    const all = keys.length && Object.keys(got).length ? left : Math.max(0, +s.price || 0);
-    return { all, keys, parts, got };
+    /* والمسعَّرةُ بمجلداتها (‎fp‎ من نافذة التسعير): ما اشتُري منها في ‎bought[id].f‎ */
+    const fp = s.fp && typeof s.fp === 'object' ? s.fp : {}, fkeys = Object.keys(fp).filter(k => +fp[k] > 0), gotF = (got && got.f) || {};
+    const leftF = fkeys.filter(k => !gotF[k]).reduce((t, k) => t + (+fp[k] || 0), 0);
+    const all = fkeys.length ? (Object.keys(gotF).length ? leftF : Math.max(0, +s.price || 0))
+      : keys.length && Object.keys(got).length ? left : Math.max(0, +s.price || 0);
+    return { all, keys, parts, got, fp, fkeys, gotF };
   }
   function pcSaleHTML(p) {
     const s = (p.data && p.data.sale) || null, en = pcEn();
     const m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
     if (m === 'free') return `<span class="pc-sale pc-sale--free">${en ? 'Free' : 'مجانية'}</span>`;
     const b = pcBought(p.id), o = pcSaleOpts(p);
-    if (b === 1 || b === true || (o.keys.length && o.keys.every(k => o.got[k]))) return `<span class="pc-sale pc-sale--own">${en ? 'Purchased' : 'اشتريتها'}</span>`;
-    const some = o.keys.some(k => o.got[k]);
+    if (b === 1 || b === true || (o.keys.length && o.keys.every(k => o.got[k])) || (o.fkeys.length && o.fkeys.every(k => o.gotF[k]))) return `<span class="pc-sale pc-sale--own">${en ? 'Purchased' : 'اشتريتها'}</span>`;
+    const some = o.keys.some(k => o.got[k]) || o.fkeys.some(k => o.gotF[k]);
     const st = some ? (en ? 'Partly purchased' : 'اشتريت جزء') : m === 'part' ? (en ? 'Free preview available' : 'توجد معاينة مجانية') : (en ? 'Paid' : 'مدفوعة');
     if (isMine(p)) return `<span class="pc-sale pc-sale--mine pc-sale--${m}"><span class="pc-sale__st">${st}</span></span>`;   /* وصاحبُها لا يُرى له سعرُ ما كتب (طلبُ صاحب الموقع) */
-    const pk = pcPick[p.id] && pcPick[p.id] !== 'all' && o.keys.includes(pcPick[p.id]) && !o.got[pcPick[p.id]] ? pcPick[p.id] : 'all';
+    const fsel = o.fkeys.length ? [...(pcPickF[p.id] || [])].filter(k => o.fkeys.includes(k) && !o.gotF[k]) : [];
+    const fAll = fsel.length && o.fkeys.filter(k => !o.gotF[k]).every(k => fsel.includes(k));   /* وتحديدُ الكلّ «الكل» لا «المحدد» */
+    const pk = fsel.length && !fAll ? 'sel' : pcPick[p.id] && pcPick[p.id] !== 'all' && o.keys.includes(pcPick[p.id]) && !o.got[pcPick[p.id]] ? pcPick[p.id] : 'all';
     const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : (en ? 'Selected' : 'المحدد');   /* والمختارُ من القائمة «المحدد» لا اسمُه (طلبُ صاحب الموقع) */
-    const pr = pk === 'all' ? o.all : +o.parts[pk];
+    const pr = pk === 'all' ? o.all : pk === 'sel' ? fsel.reduce((t, k) => t + (+o.fp[k] || 0), 0) : +o.parts[pk];
     /* والسعرُ الشاملُ (لا مساحةَ تُشترى وحدَها) زرٌّ واحدٌ بنصٍّ واحد: «شراء كامل · السعر» (طلبُ صاحب الموقع) */
-    if (!o.keys.length) return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
+    if (!o.keys.length && !o.fkeys.length) return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
       + `<span class="pc-buyx"><button type="button" class="pc-buyw pc-buyone" data-pcbuy="${esc(p.id)}" data-pcpk="all">${en ? 'Buy in full' : 'شراء كامل'} <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
     return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st"><span>${st}</span></span>`
       /* والمختارُ وسهمُه في رقاقةٍ أفتحَ داخل الزرّ — هي التي تفتح القائمة (طلبُ صاحب الموقع: الاقتراحُ ٥) */
@@ -10434,6 +10441,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (open) open.remove();
       if (was) return;
       const p = (postsOf(cmCode, 'cards') || []).find(x => x && x.id === dd.dataset.pcdd);
+      if (p && pcSaleOpts(p).fkeys.length) { pcbOpen(p.id); return; }   /* المسعَّرةُ بمجلداتها: نافذةٌ كبيرةٌ يُحدَّد منها */
       if (p && host) host.insertAdjacentHTML('beforeend', pcMenuHTML(p));
       return;
     }
@@ -10622,6 +10630,75 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<div class="pcp-ft"><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
     box.querySelectorAll('.pcp-list').forEach((x, n) => { x.scrollTop = sc[n] || 0; }); const pn = box.querySelector('.pcp-panel'); if (pn) pn.scrollTop = psc;
   }
+  /* ===== نافذةُ الشراء (طلبُ صاحب الموقع) =====
+     سهمُ زرّ الشراء في مساهمةٍ مسعَّرةٍ بمجلداتها يفتح نافذةً كنافذة التسعير عند صاحبها: نصفان — مجلداتُ
+     الملخّص يمينًا ومجلداتُ البنك يسارًا — شجرةً تُفتح، وعلى كلّ مجلدٍ مسعَّرٍ سعرُه يُحدَّد بنقرة.
+     والمجانيُّ يُرى «مجاني»، وما تحت مسعَّرٍ «ضمن مجلد مسعّر»، وما اشتُري «اشتريته». وفوقُ مجموعُ المحدَّد.
+     وتُكتب في ‎#pcp‎ نفسِه (بحال ‎pcbSt‎ لا ‎pcpSt‎ — فلا يلتبس مستمعاهما) */
+  let pcbSt = null;   /* { id, open:Set, fresh } */
+  const pcbPost = id => (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id) || null;
+  const pcbSel = id => pcPickF[id] || (pcPickF[id] = new Set());
+  function pcbPaint() {
+    const box = document.getElementById('pcp'), p = pcbSt && pcbPost(pcbSt.id); if (!box || !p) return;
+    const en = pcEn(), d = p.data || {}, o = pcSaleOpts(p), sel = pcbSel(p.id);
+    [...sel].forEach(k => { if (!o.fkeys.includes(k) || o.gotF[k]) sel.delete(k); });
+    const L = en ? { t: 'Choose what to buy', tot: 'Selected total', all: 'Select all', none: 'Clear selection', buy: 'Buy selected', free: 'Free', inP: 'In a priced folder', own: 'Owned', nn: 'Untitled folder', cls: 'Close', mid: 'Summary folders', bank: 'Question bank folders', empty: { mid: 'No folders in the summary space', bank: 'No folders in the question bank space' } }
+      : { t: 'اختر ما تشتريه', tot: 'مجموع المحدد', all: 'تحديد الكل', none: 'إلغاء التحديد', buy: 'شراء المحدد', free: 'مجاني', inP: 'ضمن مجلد مسعّر', own: 'اشتريته', nn: 'مجلد بلا اسم', cls: 'إغلاق', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', empty: { mid: 'لا يوجد مجلدات بمساحة الملخص', bank: 'لا يوجد مجلدات بمساحة بنك الأسئلة' } };
+    const fp = o.fp;
+    const tree = (ns, dp, inP, inOwn) => pcTopF(ns).map(n => {
+      const sub = pcTopF(n.ch), op = sub.length && pcbSt.open.has(n.id), pr = +fp[n.id] || 0, own = inOwn || !!o.gotF[n.id];
+      const ctl = inP ? `<span class="pcp-inp">${esc(own ? L.own : L.inP)}</span>`
+        : pr > 0 ? (own ? `<span class="pcp-in is-own">✓ ${esc(L.own)}</span>`
+          : `<button type="button" class="pcp-in pcb-ck${sel.has(n.id) ? ' is-on' : ''}" data-pcbf="${esc(n.id)}" aria-pressed="${sel.has(n.id)}"><span class="pcb-box">${sel.has(n.id) ? PC_CHK : ''}</span><b>${pr}</b>${PC_SAR}</button>`)
+          : pcHasP(n, fp) ? '' : `<span class="pcp-inp pcb-free">${esc(L.free)}</span>`;
+      const row = `<div class="pcp-row${inP ? ' is-in' : ''}${sel.has(n.id) ? ' is-sel' : ''}" style="--dp:${dp}">`
+        + (sub.length ? `<button type="button" class="pcp-cv${op ? ' on' : ''}" data-pcbcv="${esc(n.id)}" aria-expanded="${!!op}">${PC_DD}</button>` : `<span class="pcp-cv pcp-cv--no"></span>`)
+        + `<span class="pcp-fi" style="color:${folderColor(n)}">${folderFace(n)}</span><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
+        + (sub.length ? `<i class="pcp-nb">${sub.length}</i>` : '') + ctl + `</div>`;
+      return row + (op ? tree(n.ch, dp + 1, inP || pr > 0, own) : '');
+    }).join('');
+    const half = (k, ns) => { const all = pcAllF(ns); return `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${all.length}</i></div>`
+      + (all.length ? `<div class="pcp-list">${tree(ns, 0, false, false)}</div>` : `<p class="pcp-none">${esc(L.empty[k])}</p>`) + `</div>`; };
+    const avail = o.fkeys.filter(k => !o.gotF[k]), tot = [...sel].reduce((t, k) => t + (+fp[k] || 0), 0), allOn = avail.length && avail.every(k => sel.has(k));
+    const fresh = pcbSt.fresh; pcbSt.fresh = false;
+    const sc = [...box.querySelectorAll('.pcp-list')].map(x => x.scrollTop);
+    box.innerHTML = `<div class="pcp-panel pcb-panel is-per${fresh ? ' is-in' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
+      + `<div class="pcv-hd"><b>${esc(L.t)}</b></div>`
+      + `<button type="button" class="pk-max pk-max--curve pcv-exit" data-pcbx="1" aria-pressed="true" title="${esc(L.cls)}" aria-label="${esc(L.cls)}">${CX_GROW1}</button>`
+      + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><b class="pcb-tot">${tot}</b>${PC_SAR}</span>`
+      + `<button type="button" class="pcb-all" data-pcball="1">${esc(allOn ? L.none : L.all)}</button></div>`
+      + `<div class="pcp-split">${half('mid', d.deck)}${half('bank', d.qb)}</div>`
+      + `<div class="pcp-ft"><button type="button" class="pcv-btn" data-pcbbuy="1"${tot ? '' : ' disabled'}>${esc(L.buy)}${tot ? ` · ${tot}` : ''}</button></div></div>`;
+    box.querySelectorAll('.pcp-list').forEach((x, i) => { x.scrollTop = sc[i] || 0; });
+  }
+  /* زرُّ الشراء في المساهمة يتبع التحديدَ في موضعه (المحددُ وسعرُه) */
+  const pcbSync = id => { const p = pcbPost(id); if (!p) return;
+    document.querySelectorAll(`#cm-body .post[data-ck="${CSS.escape(id)}"] .pc-sale`).forEach(el => { el.outerHTML = pcSaleHTML(p); }); };
+  function pcbOpen(id) {
+    const p = pcbPost(id); if (!p) return;
+    const o = pcSaleOpts(p), d = p.data || {};
+    pcbSt = { id, open: new Set(), fresh: true };
+    [d.deck, d.qb].forEach(ns => { const top = pcTopF(ns); if (top.length === 1) pcbSt.open.add(top[0].id);
+      pcAllF(ns).forEach(n => { if (pcHasP(n, o.fp)) pcbSt.open.add(n.id); }); });
+    let box = document.getElementById('pcp');
+    if (!box) { box = document.createElement('div'); box.id = 'pcp'; document.body.appendChild(box); }
+    box.hidden = false; pcbPaint();
+  }
+  function pcbClose() { const box = document.getElementById('pcp'); if (box) { box.hidden = true; box.innerHTML = ''; } const id = pcbSt && pcbSt.id; pcbSt = null; if (id) pcbSync(id); }
+  document.addEventListener('click', e => {
+    if (!pcbSt) return;
+    const box = e.target.closest && e.target.closest('#pcp'); if (!box) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.target === box || e.target.closest('[data-pcbx]')) { pcbClose(); return; }
+    const sel = pcbSel(pcbSt.id);
+    const ck = e.target.closest('[data-pcbf]'); if (ck) { const k = ck.dataset.pcbf; sel.has(k) ? sel.delete(k) : sel.add(k); pcbPaint(); return; }
+    const cv = e.target.closest('[data-pcbcv]'); if (cv) { const k = cv.dataset.pcbcv; pcbSt.open.has(k) ? pcbSt.open.delete(k) : pcbSt.open.add(k); pcbPaint(); return; }
+    if (e.target.closest('[data-pcball]')) { const p = pcbPost(pcbSt.id), o = pcSaleOpts(p), av = o.fkeys.filter(k => !o.gotF[k]);
+      if (av.every(k => sel.has(k))) sel.clear(); else av.forEach(k => sel.add(k)); pcbPaint(); return; }
+    /* «شراء المحدد»: الدفعُ لم يُربط بعد — فيُحفظ التحديدُ في زرّ المساهمة وتُغلق */
+    if (e.target.closest('[data-pcbbuy]')) pcbClose();
+  }, true);
+  document.addEventListener('keydown', e => { if (pcbSt && e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); pcbClose(); } }, true);
   function pcpOpen(id) {
     const p = pcvPost(id); if (!p) return;
     const s = (p.data && p.data.sale) || {}, fp = s.fp && typeof s.fp === 'object' ? s.fp : null;
