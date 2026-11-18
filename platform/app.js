@@ -2672,6 +2672,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* الجزء يمينًا ثم «/» ثم الكل يسارًا مع العربية — يقلبها اتجاه الصندوق في CSS مع الإنجليزية */
     function paintCount() {
+      /* ===== والعدُّ في مستطيل البحث (‎opts.countOut‎) — طلبُ صاحب الموقع =====
+         «1034 مادة» بلا بحث، و«12 نتيجة» إن كُتب فيه شيء (والرقمُ ذهبيّ) */
+      if (opts.countOut) {
+        const o = document.querySelector(opts.countOut);
+        if (o) {
+          const qEl = opts.countQuery && document.querySelector(opts.countQuery);
+          const q = !!(qEl && String(qEl.value || '').trim());
+          const en = state.lang === 'en';
+          o.hidden = !items.length;
+          o.innerHTML = items.length
+            ? `<b${q ? ' class="is-q"' : ''}>${items.length}</b> ${q ? (en ? 'results' : 'نتيجة') : (en ? 'courses' : 'مادة')}`
+            : '';
+        }
+      }
       if (!countEl) return;
       countEl.innerHTML = items.length
         ? `<b class="hn-i">${centerIdx + 1}</b><i class="hn-s">/</i><b class="hn-t">${items.length}</b>`
@@ -2874,7 +2888,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لمادة اللاب: نقر كتاب «معمل» يفتح مساهمات نشاط المعمل (خيط منفصل)، وغيره يفتح المحاضرة. */
   const marketReel = makeReel('#m-grid', {
     cardMode: 'market',
-    counter: true,   /* عدّاد «الجزء من الكل» تحت الشريط — يتبع نتائج البحث والفلاتر */
+    /* العددُ داخل مستطيل البحث بعد فاصل (‎#m-count‎) — لا عدّادَ «الجزء من الكل» على الرفّ */
+    countOut: '#m-count', countQuery: '#m-search',
     confirm: (code, act) => openMarketCourse(act === 'معمل' ? labKey(code) : code),
     /* المتمركز: مساهمات النشاط المحدَّد (افتراضيًا المحاضرة، أو المعمل إن سبق اختياره) */
     /* ===== ورابطُ الاختبار يقود البِكرةَ إلى مادّته =====

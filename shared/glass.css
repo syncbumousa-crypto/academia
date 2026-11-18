@@ -808,25 +808,24 @@ html[data-theme="dark"]:root .post-menu__list:not(.cm-sort__list) :is(.post-del,
 html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger):hover { background: color-mix(in srgb, #c75b5b 16%, transparent); }
 
 /* ============================================================
-   عدّادُ رفّ الكتب «1 / 1034» — كبسولةُ زجاجٍ في زاوية الرفّ العليا (طلبُ صاحب الموقع)
+   عددُ المواد داخل مستطيل البحث — بعد فاصلٍ رفيع (طلبُ صاحب الموقع)
    ============================================================
-   كان تحت منتصف الكتب وحيدًا في الفراغ بينها وبين التبويبات، فيُقرأ عنوانًا وهو معلومةٌ
-   ثانويّة. فصار في الزاوية العليا البعيدة عن القرص — يسارًا بالعربيّة ويمينًا بالإنجليزيّة —
-   لا يزاحم الكتبَ ولا أسماءَها، بزجاج القوائم نفسِه. */
-html:root .book-reel:has(> .reel-count) { position: relative; }
-html:root .book-reel > .reel-count {
-  position: absolute; top: 4px; left: 0; right: auto; z-index: 3;
-  margin: 0; min-height: 0; height: 26px; padding: 0 11px; border-radius: 999px;
-  font-size: 11.5px; font-weight: 700; color: color-mix(in srgb, var(--glass-ink) 75%, transparent);
-  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
-  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 6px 18px -10px var(--glass-cast);
-  pointer-events: none;
+   كان «1 / 1034» تحت الكتب وحيدًا، ثمّ كبسولةً في زاوية الرفّ. فصار في طرف البحث:
+   «1034 مادة» بلونٍ خافت، و«12 نتيجة» برقمٍ ذهبيّ إن كُتب شيء (‎paintCount‎ · ‎countOut‎).
+   والخانةُ تُحشى من طرفها بقدره فلا يجري النصُّ تحته. */
+html:root .market-tools .searchbox { position: relative; flex: 1 1 auto; min-width: 180px; display: flex; }
+html:root .market-tools .searchbox .search { flex: 1 1 auto; width: 100%; min-width: 0; padding-inline-end: 124px; }
+html:root .market-tools .m-count {
+  position: absolute; inset-inline-end: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 4px; padding-inline-start: 14px;
+  font-size: 12.5px; color: color-mix(in srgb, var(--glass-ink) 55%, transparent);
+  white-space: nowrap; pointer-events: none;
 }
-html[data-lang="en"]:root .book-reel > .reel-count { left: auto; right: 0; }
-html:root .book-reel > .reel-count:empty { display: none; }
-html:root .book-reel > .reel-count .hn-i { color: var(--glass-ink); font-weight: 800; }
-html:root .book-reel > .reel-count .hn-s { opacity: .45; margin: 0 3px; }
-html:root .book-reel > .reel-count .hn-t { opacity: 1; font-weight: 700; }
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  html:root .book-reel > .reel-count { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+html:root .market-tools .m-count[hidden] { display: none; }
+html:root .market-tools .m-count::before {
+  content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 1px; height: 20px;
+  transform: translateY(-50%); background: color-mix(in srgb, var(--glass-ink) 14%, transparent);
 }
+html:root .market-tools .m-count b { color: color-mix(in srgb, var(--glass-ink) 85%, transparent); font-weight: 700; font-variant-numeric: tabular-nums; }
+html:root .market-tools .m-count b.is-q { color: #a8842e; }
+html[data-theme="dark"]:root .market-tools .m-count b.is-q { color: #e1c172; }
