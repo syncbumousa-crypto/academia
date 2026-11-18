@@ -10377,7 +10377,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
-      + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
+      + (ed && pcOwn(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
   }
   /* ===== نافذةُ «غلاف المساهمة» — لصاحبها وحده (زرُّ الصورة في زاوية اللافتة) =====
@@ -10385,7 +10385,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      من الاثنتي عشرة بلونٍ من الخمسة · غلافُ كتاب المادّة. والاختيارُ يُكتب في ‎data.cv‎
      ويُرى في اللافتة فورًا */
   let pcvSt = null;   /* { id, tab, c } */
-  const pcvPost = id => (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id && isMine(x)) || null;
+  /* ===== تعديلُ الغلاف والسعر لصاحب المساهمة وحده (طلبُ صاحب الموقع) =====
+     زرُّ الغلاف لا يظهر إلّا في لافتة التحرير — والتحريرُ لا يُفتح إلّا لمساهمتي —
+     والملكيّةُ تُسأل صارمةً: ذاتُ المالك لمالكها المسجَّل الآن وحده، وما لا مالكَ له مسوّدتي المحلّيّة
+     ما لم تأتِ من الخادم. فلا تُفتح نافذةٌ على مساهمة غيري ولو وصلها نقرٌ */
+  const pcOwn = p => { if (!p) return false; const o = ownerOf(p), me = actingAs(); return o ? !!me && o === me : !!p.me && !p.srvH; };
+  const pcvPost = id => (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id && pcOwn(x)) || null;
   function pcvPaint() {
     const box = document.getElementById('pcv'); if (!box || !pcvSt) return;
     const p = pcvPost(pcvSt.id); if (!p) { pcvClose(); return; }
