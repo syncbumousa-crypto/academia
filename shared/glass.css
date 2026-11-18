@@ -166,6 +166,20 @@ body.side-rail .nook-com span { max-width: 0; opacity: 0; }
   body.side-anim .sidebar { transition: padding .32s cubic-bezier(.32,.72,0,1); }
   body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
 }
+/* ===== ولا تمويهَ في أثناء الحركة =====
+   قِيس: التمويهُ (‎backdrop-filter‎) هو الثقل كلُّه — اللوحُ يتبدّل عرضُه في كلّ إطار فيُعاد
+   تمويهُ ما تحته كاملًا، ومعه الانكسارُ (‎#lg-edge‎) والبحثُ والقرص. كان خُمسُ الإطارات
+   يتجاوز ٢٠ مللي، وبإطفائه في ثلث الثانية هذا صار إطارًا واحدًا من ٨٤. فيُطفأ والصبغةُ
+   أكثفُ قليلًا فلا يتبدّل المظهر، ويعود حين يُرفع ‎side-anim‎. والتمريرُ لا يمسّه شيء (قِيس كذلك). */
+body.side-anim :is(.sidebar, .side-handle, .market-tools .search, .market-tools .filterwrap::before) {
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+body.side-anim .sidebar,
+body.side-anim .side-handle,
+body.side-anim .market-tools .search,
+body.side-anim .market-tools .filterwrap::before {
+  background: color-mix(in srgb, var(--glass) 90%, transparent) !important;
+}
 
 body.side-rail .sidebar { padding: 14px 8px; }
 body.side-rail .nook-com,
