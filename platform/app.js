@@ -33436,7 +33436,7 @@ void main() {
 
   /* ---------- الدفع ---------- */
   /* عدّادُ ‎429‎ ومؤقّتُ إعادتها — تراخٍ يزيد بكلّ ردّ ولا يتجاوز ربعَ ساعة */
-  let srv429 = 0, srv429T = 0;
+  let srv429 = 0, srv429T = 0, srvSaveT = 0;
   async function srvPush(p, code, sec, retried) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
     /* ===== وتُرفع المسوّدةُ كما يُرفع المنشور =====
@@ -33583,7 +33583,12 @@ void main() {
       else if (state.uid) p.uid = state.uid;
       p.srvR = sigNow();                      /* بعد المالك: هو جزءٌ من المتن المرسَل */
       if (!isMine(p)) refreshOwnership();   /* owner learned: judge again */
-      save();
+      /* ===== والختمُ يُحفظ مرّةً بعد أن تهدأ الدفعات =====
+         كان ‎save()‎ متزامنًا بعد كلِّ دفعة، والمسحُ يدفع عشراتٍ متتابعة (ثمانٍ وعشرون
+         بعد جذب الترم): حفظٌ كاملٌ لكلّ واحدة. و‎saveSoon‎ وحدَه لا يجمعها — الدفعاتُ
+         تصل متباعدةً فيقع فراغٌ بين كلّ اثنتين. فيُنتظر هدوؤها ثمّ حفظٌ واحد.
+         ومن غادر قبله ضاع الختمُ وحدَه (المتنُ على الخادم): دفعةٌ مكرّرةٌ في الجلسة التالية. */
+      clearTimeout(srvSaveT); srvSaveT = setTimeout(saveSoon, 1500);
       srvBump(code);                           /* وسائرُ التبويبات تُنادى في الحال */
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
@@ -40058,11 +40063,16 @@ void main() {
     xaDirty = true;
   }
   function xaFlush() { if (xaDirty) { xaDirty = false; save(); } }
+  /* ===== والصبُّ الدوريُّ في أوّل فراغ =====
+     كان المؤقّتُ يصبّ بـ‎save()‎ متزامنًا: حفظٌ كاملٌ (~٦٠ms) كلَّ دقيقةٍ والقارئُ يتحرّك،
+     لأجل ثوانٍ في العدّاد. فيُصبّ بـ‎saveSoon‎. والصبُّ عند المغادرة وتغيّر الرؤية يبقى
+     فوريًّا (‎xaFlush‎): ‎saveFlush‎ يسبقه في الترتيب فلا يُدرك ما يُجدوَل بعده. */
+  function xaFlushSoon() { if (xaDirty) { xaDirty = false; saveSoon(); } }
   /* وما أجبتَ من أسئلةٍ يُقيَّد في يومه — وهو مقياسُ «المربّعات» لا الزمن:
      الزمنُ يجري وأنت تقرأ، والجوابُ فعلٌ يقع منك. فالمربّعُ يُلوَّن بما فعلتَ */
   function xaAns() { xaDay(xaKey()).q++; xaDirty = true; }
   setInterval(xaBeat, XA_TICK);
-  setInterval(xaFlush, XA_FLUSH);
+  setInterval(xaFlushSoon, XA_FLUSH);
   document.addEventListener('visibilitychange', xaFlush);
   window.addEventListener('pagehide', xaFlush);
   window.addEventListener('beforeunload', xaFlush);
