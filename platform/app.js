@@ -1164,6 +1164,7 @@
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
       if (typeof srsPushSoon === 'function') srsPushSoon();   /* وجدولةُ المذاكرة */
+      if (typeof acctPushSoon === 'function') acctPushSoon(); /* والنشاطُ والتفضيلات (ROADMAP-CLOUD-NEXT ٣ و٤) */
       /* وما نُشر يتبدّل بعد نشره: يُدفَع مؤجَّلًا فلا يُتبع كلَّ حرفٍ طلبُ شبكة.
          و‎srvPushSoon‎ تُعرَّف في جزءٍ لاحق — فتُسأل بالاسم لا تُنادى عمًى */
       if (typeof srvPushSoon === 'function') srvPushSoon();
@@ -11421,8 +11422,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وما ليس غلافَ مصدرٍ (غلافُ الشابتر) يُقرأ كما كان */
   async function covBlob(key) {
     let b = await chIdb('readonly', key);
-    if (b || String(key).indexOf('pksrccov:') !== 0) return b;
-    const c = pkSrcCovMeta(String(key).slice(9));
+    if (b) return b;
+    const K = String(key);
+    if (K.indexOf('chcov:') === 0) {                 /* وغلافُ الشابتر (ROADMAP-CLOUD-NEXT ٢) */
+      const rest = K.slice(6), i = rest.lastIndexOf(':'), cm = chCovMeta(rest.slice(0, i), rest.slice(i + 1));
+      if (cm && cm.h) { b = await bookDown(cm.h); if (b) chIdb('readwrite', key, b); }
+      return b;
+    }
+    if (K.indexOf('pksrccov:') !== 0) return b;
+    const c = pkSrcCovMeta(K.slice(9));
     if (c && c.h) { b = await bookDown(c.h); if (b) chIdb('readwrite', key, b); }
     return b;
   }
@@ -25524,6 +25532,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const m = pkSrcMeta(key.slice(6));
         if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
       }
+      if (!blob && key.indexOf('chpdf:') === 0) {      /* وملفُّ الشابتر كذلك (ROADMAP-CLOUD-NEXT ٢) */
+        const rest = key.slice(6), i = rest.lastIndexOf(':');
+        const m = chPdfMeta(rest.slice(0, i), rest.slice(i + 1));
+        if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
+      }
       if (!blob) return null;
       const L = await chPdfLib();
       const data = new Uint8Array(await blob.arrayBuffer());
@@ -27556,6 +27569,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     state.chCov = state.chCov || {};
     (state.chCov[code] = state.chCov[code] || {})[ch] = { name: file.name, color, ts: Date.now() };
     save();
+    chapCloud('cov', code, ch, thumb || file);
     if (cmCode === code && cmTabSel === ch) renderCmSection();
   }
   async function chCovDel() {
@@ -27563,6 +27577,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!chCovMeta(code, ch)) return;
     await chIdb('readwrite', key, null);
     if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+    (state.chapGone = state.chapGone || {})[chapGoneK('cov', code, ch)] = Date.now();
     delete state.chCov[code][ch];
     save();
     renderCmSection();
@@ -27572,7 +27587,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!img) return;
     const key = chCovKey(cmCode, cmTabSel);
     if (!chCovUrl[key]) {
-      const blob = await chIdb('readonly', key);
+      const blob = await covBlob(key);
       if (!blob) return;
       chCovUrl[key] = URL.createObjectURL(blob);
     }
@@ -27591,6 +27606,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     state.chPdf = state.chPdf || {};
     (state.chPdf[code] = state.chPdf[code] || {})[ch] = { name: file.name, size: file.size, ts: Date.now() };
     save();
+    chapCloud('pdf', code, ch, file);
     if (cmCode === code && cmTabSel === ch) renderCmSection();
   }
   async function chPdfDel() {
@@ -27599,9 +27615,122 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     await chIdb('readwrite', key, null);
     if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key];
     bkForget(key);
+    (state.chapGone = state.chapGone || {})[chapGoneK('pdf', code, ch)] = Date.now();
     delete state.chPdf[code][ch];
     save();
     renderCmSection();
+  }
+  /* ===== ملفُّ الشابتر وغلافُه ⇐ حسابُك (ROADMAP-CLOUD-NEXT ٢ · قرارُ صاحب الموقع: «يتبع حسابي») =====
+     كانا في متصفّح من أضافهما وحده، والخادمُ لا يعرف حتّى اسمَهما.
+     · الملفُّ يُرفع إلى مستودع ‎books‎ باسم بصمته (كملفّات المساهمات)، ووصفُه وبصمتُه في وثيقةٍ في حسابك
+       (‎chap‎) — فتجده من أيّ جهاز، ولا يعرف غيرُك أنّه موجود. والمستودعُ اليومَ عامُّ القراءة لمن يملك
+       البصمة (قرارُ الكتب)؛ يوم تأتي ميزةُ الحجب يصير خاصًّا مع الكتب كلِّها.
+     · الدمجُ مدخلًا مدخلًا بوقته (‎ts‎): الأحدثُ يغلب. والحذفُ يُقيَّد (‎state.chapGone‎) فيبلغ أجهزتَك
+       ولا يعود من جهازٍ لم يعلم به.
+     · ولا يُرفع الوصفُ قبل أوّل جذب: جهازٌ جديدٌ خاوٍ لا يكتب فوق ما في حسابك. */
+  var chapGot = false, chapSig = '', chapT = 0, chapBusy = false;
+  const CHAP_BAGS = { pdf: 'chPdf', cov: 'chCov' };
+  const chapGoneK = (t, code, ch) => t + '|' + code + '|' + ch;
+  function chapDoc() {
+    const out = { pdf: {}, cov: {}, gone: Object.assign({}, state.chapGone || {}) };
+    Object.keys(CHAP_BAGS).forEach(t => {
+      const bag = state[CHAP_BAGS[t]] || {};
+      Object.keys(bag).forEach(code => Object.keys(bag[code] || {}).forEach(ch => {
+        const m = bag[code][ch];
+        if (m && m.h) (out[t][code] = out[t][code] || {})[ch] = m;
+      }));
+    });
+    return out;
+  }
+  async function chapCloud(t, code, ch, blob) {
+    const h = await bookUp(blob, blob.type || (t === 'pdf' ? 'application/pdf' : 'image/jpeg'));
+    const m = (((state[CHAP_BAGS[t]] || {})[code]) || {})[ch];
+    if (!h || !m) return;
+    m.h = h;
+    save();
+  }
+  async function chapPull() {
+    if (!SRV_ON() || isGuest() || !state.uid || chapGot) return;
+    let j;
+    try {
+      const r = await apiFetch(udocURL('?kind=chap'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('chap:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('chap:neterr'); return; }
+    chapGot = true;
+    const d = (j && j.data) || {};
+    const gone = state.chapGone = state.chapGone || {};
+    Object.keys(d.gone || {}).forEach(k => { if ((d.gone[k] || 0) > (gone[k] || 0)) gone[k] = d.gone[k]; });
+    let n = 0;
+    Object.keys(CHAP_BAGS).forEach(t => {
+      const bag = state[CHAP_BAGS[t]] = state[CHAP_BAGS[t]] || {};
+      /* ما حُذف بعد أن أُضيف هنا يُحذف هنا */
+      Object.keys(bag).forEach(code => Object.keys(bag[code] || {}).forEach(ch => {
+        const m = bag[code][ch], g = gone[chapGoneK(t, code, ch)] || 0;
+        if (m && g > (m.ts || 0)) {
+          delete bag[code][ch]; n++;
+          chIdb('readwrite', t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch), null);
+        }
+      }));
+      /* وما في الحساب وهو أحدثُ ممّا هنا (ولم يُحذف بعده) يُؤخذ */
+      const S = d[t] || {};
+      Object.keys(S).forEach(code => Object.keys(S[code] || {}).forEach(ch => {
+        const r = S[code][ch], m = (bag[code] || {})[ch], g = gone[chapGoneK(t, code, ch)] || 0;
+        if (!r || !r.h || g > (r.ts || 0)) return;
+        if (m && (m.ts || 0) >= (r.ts || 0)) return;
+        const same = m && m.h === r.h;
+        (bag[code] = bag[code] || {})[ch] = Object.assign({}, r);
+        n++;
+        if (same) return;                         /* الملفُّ نفسُه: يبقى ما في المتصفّح */
+        const key = t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch);
+        chIdb('readwrite', key, null);            /* ما في المتصفّح قديمٌ إن وُجد: يُجلب الجديدُ عند الفتح */
+        if (t === 'pdf') { if (chPdfDoc[key]) { chPdfDoc[key].destroy(); delete chPdfDoc[key]; } delete chPdfOpening[key]; bkForget(key); }
+        else if (chCovUrl[key]) { URL.revokeObjectURL(chCovUrl[key]); delete chCovUrl[key]; }
+      }));
+    });
+    chapSig = (d.pdf || d.cov || d.gone) ? JSON.stringify({ pdf: d.pdf || {}, cov: d.cov || {}, gone: d.gone || {} }) : '';
+    if (n) { save(); if (typeof renderCmSection === 'function' && cmCode && isChTab(cmTabSel)) renderCmSection(); bootMark('chap:got' + n); }
+    chapUpAll();
+  }
+  /* ما في المتصفّح بلا بصمة (أُضيف قبل هذا): يُرفع مرّةً ثمّ يُكتب في الحساب */
+  async function chapUpAll() {
+    let up = 0;
+    for (const t of Object.keys(CHAP_BAGS)) {
+      const bag = state[CHAP_BAGS[t]] || {};
+      for (const code of Object.keys(bag)) for (const ch of Object.keys(bag[code] || {})) {
+        const m = bag[code][ch];
+        if (!m || m.h) continue;
+        const blob = await chIdb('readonly', t === 'pdf' ? chPdfKey(code, ch) : chCovKey(code, ch));
+        if (!blob) continue;
+        const h = await bookUp(blob, blob.type || (t === 'pdf' ? 'application/pdf' : 'image/jpeg'));
+        if (h && bag[code] && bag[code][ch] === m) { m.h = h; up++; }
+      }
+    }
+    if (up) { bootMark('chap:up' + up); save(); }
+    else chapPushSoon();
+  }
+  async function chapPush() {
+    chapT = 0;
+    if (!SRV_ON() || isGuest() || !state.uid || chapBusy) return;
+    if (!chapGot) { chapPull(); return; }
+    const doc = chapDoc(), sig = JSON.stringify(doc);
+    if (sig === chapSig) return;
+    chapBusy = true;
+    try {
+      const r = await apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'chap', data: doc }),
+      });
+      if (!r.ok) bootMark('chap:put' + r.status);
+      else chapSig = sig;
+    } catch (e) { bootMark('chap:puterr'); }
+    finally { chapBusy = false; }
+  }
+  function chapPushSoon() {
+    if (!chapGot || !SRV_ON() || isGuest() || !state.uid) return;
+    clearTimeout(chapT);
+    chapT = setTimeout(chapPush, 3000);
   }
   /* لاقطُ الملفّ واحدٌ مخفيّ، وأزرارُ الوعاء تُلتقط بالتفويض — فالوعاءُ يُعاد بناؤه كلَّ رسمة */
   const chPick = document.createElement('input');
@@ -34060,6 +34189,7 @@ void main() {
        ولا يُمحى ما جمعه قبل أن يسجّل. */
     if (typeof xtPull === 'function') xtPull();
     if (typeof srsPull === 'function') srsPull();
+    if (typeof acctPull === 'function') acctPull();   /* والنشاطُ والتفضيلات */
     /* ===== ومن دخل ملك ما عليه ختمُه =====
        رزمُ البطائق تنزل مع الموقع بـ‎uid‎ مؤلّفها وبلا ‎me‎ — فتُملَّك عند الدخول
        لا عند الزرع. وكانت هذي تُنادى من اللوحة وحدَها، فيبقى صاحبُ الموقع في
@@ -41273,6 +41403,183 @@ void main() {
   window.addEventListener('beforeunload', xaFlush);
 
   /* ============================================================
+     سجلُّ النشاط والتفضيلات ⇐ الحساب (ROADMAP-CLOUD-NEXT ٣ و٤ · قرارُ صاحب الموقع)
+     ============================================================
+     كانا في المتصفّح وحده: يضيعان بمسحه، ولكلّ جهازٍ سجلُّه وإعداداتُه.
+
+     ===== النشاط: وثيقةٌ لكلّ جهاز، والعرضُ مجموعُها =====
+     كلُّ جهازٍ يكتب أيّامَه وحده في ‎act:<الجهاز>‎، فلا يكتب جهازٌ فوق جهاز ولا
+     يُعدّ يومٌ مرّتين. والعرضُ (المربّعات والأرقام) يجمع الأجهزةَ كلَّها (‎xaView‎).
+     والجهازُ معرّفُه في المتصفّح (‎academia2:dev‎). فإن مُسح المتصفّح وُلد جهازٌ
+     جديد، وبقيت أيّامُ القديم في الحساب تُجمع كجهازٍ آخر — فلا يضيع يوم.
+
+     ===== التفضيلات: الأحدثُ يغلب =====
+     اللغةُ والثيمُ وإعداداتُ الاختبار والإضافة، وعروضُ الأجزاء وترتيبُ الشبكة،
+     ولونُ التظليل ووضعُ الكتاب، وآخرُ ركن. وثيقةٌ واحدة (‎prefs‎) بختم وقت (‎at‎).
+     ولا يُختم ولا يُرفع شيءٌ قبل أوّل جذب: جهازٌ جديدٌ بإعداداته الافتراضيّة لا
+     يكتب فوق إعداداتك.
+
+     والمتغيّراتُ ‎var‎ لا ‎let‎: ‎save()‎ تُنادي ‎acctPushSoon‎ وقد تُنادى في الإقلاع
+     قبل أن يبلغه التنفيذ، و‎let‎ حينها خطأٌ يُسقط الحفظ. */
+  var acctReady = false;
+  var actDev = '', actGot = false, actSig = '', actT = 0, actBusy = false, xaOthers = null;
+  var prefsGot = false, prefsSig = '', prefsT = 0, prefsBusy = false;
+  var PREF_ST = ['lang', 'theme', 'xtS', 'cdSet', 'cdSetV', 'pkSplR', 'pkSqbR', 'ppGrid', 'lastNook', 'nkInfo', 'nkDoc', 'nkFit'];
+  var PREF_LS = ['ac.hl.col', 'ac.hl.colb', 'ac.bk.one'];
+  const acctOn = () => acctReady && SRV_ON() && !isGuest() && !!state.uid;
+
+  /* ما يُعرض: أيّامي وأيّامُ أجهزتي الأخرى مجموعة */
+  function xaView() {
+    const A = xaAll();
+    if (!xaOthers) return A;
+    const out = {};
+    const add = S => Object.keys(S || {}).forEach(k => {
+      const r = S[k] || {}, o = out[k] || (out[k] = { ms: 0, q: 0, by: {} });
+      o.ms += r.ms || 0; o.q += r.q || 0;
+      Object.keys(r.by || {}).forEach(c => { o.by[c] = (o.by[c] || 0) + (r.by[c] || 0); });
+    });
+    add(A); add(xaOthers);
+    return out;
+  }
+
+  async function actPull() {
+    if (!acctOn() || actGot || !actDev) return;
+    let list;
+    try {
+      const r = await apiFetch(udocURL('?list=act'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('act:list' + r.status); return; }
+      list = ((await r.json()) || {}).list || [];
+    } catch (e) { bootMark('act:neterr'); return; }
+    actGot = true;
+    const others = {};
+    let mine = null;
+    list.forEach(it => {
+      const days = it && it.data && it.data.days;
+      if (!days || typeof days !== 'object') return;
+      if (it.id === actDev) { mine = days; return; }
+      Object.keys(days).forEach(k => {
+        const r = days[k] || {}, o = others[k] || (others[k] = { ms: 0, q: 0, by: {} });
+        o.ms += r.ms || 0; o.q += r.q || 0;
+        Object.keys(r.by || {}).forEach(c => { o.by[c] = (o.by[c] || 0) + (r.by[c] || 0); });
+      });
+    });
+    /* وما لجهازي في الحساب ولا أجده هنا يُضمّ بالأكبر (لا بالجمع: هو نفسُه) */
+    if (mine) {
+      const A = xaAll();
+      Object.keys(mine).forEach(k => {
+        const r = mine[k] || {}, o = A[k] || (A[k] = { ms: 0, q: 0, by: {} });
+        o.ms = Math.max(o.ms || 0, r.ms || 0); o.q = Math.max(o.q || 0, r.q || 0);
+        o.by = o.by || {};
+        Object.keys(r.by || {}).forEach(c => { o.by[c] = Math.max(o.by[c] || 0, r.by[c] || 0); });
+      });
+      actSig = JSON.stringify(mine);
+    }
+    xaOthers = Object.keys(others).length ? others : null;
+    bootMark('act:got' + list.length);
+    actPushSoon();
+  }
+  async function actPush() {
+    actT = 0;
+    if (!acctOn() || !actDev || actBusy) return;
+    if (!actGot) { actPull(); return; }
+    const days = xaAll(), sig = JSON.stringify(days);
+    if (sig === actSig || sig === '{}') return;
+    actBusy = true;
+    try {
+      const r = await apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin', keepalive: sig.length < 60000,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'act:' + actDev, data: { dev: actDev, at: Date.now(), days } }),
+      });
+      if (!r.ok) bootMark('act:put' + r.status);
+      else actSig = sig;
+    } catch (e) { bootMark('act:puterr'); }
+    finally { actBusy = false; }
+  }
+  /* والنشاطُ يتبدّل كلَّ دقيقةٍ والقارئُ جالس: يُرفع مرّةً في الدقيقة على الأكثر */
+  function actPushSoon() {
+    if (!acctOn() || actT) return;
+    actT = setTimeout(actPush, 60000);
+  }
+
+  function prefsOf() {
+    const st = {}, ls = {};
+    PREF_ST.forEach(k => { if (state[k] !== undefined && state[k] !== null) st[k] = state[k]; });
+    PREF_LS.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) ls[k] = v; } catch (e) {} });
+    return { st, ls };
+  }
+  function prefsApply(d) {
+    const st = d.st || {}, ls = d.ls || {};
+    const lang0 = state.lang, theme0 = state.theme;
+    PREF_ST.forEach(k => { if (k in st) state[k] = st[k]; });
+    PREF_LS.forEach(k => { if (k in ls) { try { localStorage.setItem(k, ls[k]); } catch (e) {} } });
+    try { if (ls['ac.hl.col']) hlCol.t = ls['ac.hl.col']; if (ls['ac.hl.colb']) hlCol.box = ls['ac.hl.colb']; } catch (e) {}
+    if (typeof xtLoadS === 'function') { try { xtLoadS(); } catch (e) {} }
+    if (state.lang !== lang0) { try { applyLang(); } catch (e) {} }
+    if (state.theme !== theme0) { try { applyTheme(); } catch (e) {} }
+  }
+  async function prefsPull() {
+    if (!acctOn() || prefsGot) return;
+    let j;
+    try {
+      const r = await apiFetch(udocURL('?kind=prefs'), { credentials: 'same-origin', cache: 'no-store' });
+      if (!r.ok) { bootMark('prefs:get' + r.status); return; }
+      j = await r.json();
+    } catch (e) { bootMark('prefs:neterr'); return; }
+    prefsGot = true;
+    const d = j && j.data;
+    if (d && d.st && (d.at || 0) > (state.prefsAt || 0)) {
+      prefsApply(d);
+      state.prefsAt = d.at;
+      prefsSig = JSON.stringify(prefsOf());
+      save();
+      bootMark('prefs:got');
+    } else {
+      prefsSig = '';                       /* لا وثيقة، أو ما عندي أحدث: يُرفع */
+      prefsPushSoon();
+    }
+  }
+  async function prefsPush() {
+    prefsT = 0;
+    if (!acctOn() || prefsBusy) return;
+    if (!prefsGot) { prefsPull(); return; }
+    const P = prefsOf(), sig = JSON.stringify(P);
+    if (sig === prefsSig) return;
+    /* تبدّلت هنا بعد الجذب: هذي أحدث — والختمُ يتقدّم ولو تأخّرت ساعةُ هذا الجهاز عن ساعة الذي كتب قبله */
+    if (prefsSig || !state.prefsAt) state.prefsAt = Math.max(Date.now(), (state.prefsAt || 0) + 1);
+    prefsBusy = true;
+    try {
+      const r = await apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'prefs', data: { at: state.prefsAt, st: P.st, ls: P.ls } }),
+      });
+      if (!r.ok) bootMark('prefs:put' + r.status);
+      else prefsSig = sig;
+    } catch (e) { bootMark('prefs:puterr'); }
+    finally { prefsBusy = false; }
+  }
+  function prefsPushSoon() {
+    if (!acctOn() || !prefsGot) return;
+    clearTimeout(prefsT);
+    prefsT = setTimeout(prefsPush, 3000);
+  }
+
+  function acctPull() { actPull(); prefsPull(); if (typeof chapPull === 'function') chapPull(); }
+  function acctPushSoon() { if (!acctReady) return; actPushSoon(); prefsPushSoon(); if (typeof chapPushSoon === 'function') chapPushSoon(); }
+  try {
+    actDev = localStorage.getItem('academia2:dev') || '';
+    if (!/^[a-z0-9]{4,40}$/.test(actDev)) {
+      actDev = 'd' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      localStorage.setItem('academia2:dev', actDev);
+    }
+  } catch (e) { actDev = ''; }
+  /* وما بقي من الدقيقة عند المغادرة يُرفع (‎keepalive‎) */
+  document.addEventListener('visibilitychange', () => { if (document.hidden && actT) { clearTimeout(actT); actPush(); } });
+  acctReady = true;
+  window.acAcctSync = acctPull;
+
+  /* ============================================================
      لوحُ الإحصاءات — ما صنعتَه وما جلستَه ومتى
      ============================================================
      ولا يُخزَّن من هذا شيءٌ يمكن عدُّه: البطائقُ والمساهماتُ تُمشى في بياناتك عند
@@ -41301,7 +41608,7 @@ void main() {
      اليمين إلى اليسار كسائر الصفحة، فالأقدمُ يمينًا واليومُ في الطرف الآخر.
      والخمسُ درجاتٍ تُقاس بما أجبتَ لا بما جلستَ: الجلوسُ يقع بالقراءة، والجوابُ فعل. */
   function xaGrid() {
-    const A = xaAll(), out = [];
+    const A = xaView(), out = [];
     const today = new Date(); today.setHours(0, 0, 0, 0);
     /* يُرجع إلى أوّل السبت: ‎getDay()‎ الأحدُ صفرٌ والسبتُ ستّة، فالإزاحةُ ‎(day + 1) % 7‎ */
     const end = new Date(today);
@@ -41319,7 +41626,7 @@ void main() {
      وتُحسب من **اليوم أو أمس** لا من اليوم وحدَه: من عمل أمسِ ولم يبدأ يومَه بعدُ
      سلسلتُه قائمةٌ لم تنقطع — وقطعُها عند منتصف الليل عقوبةٌ على ساعةٍ لم تمضِ. */
   function xaStreak() {
-    const A = xaAll();
+    const A = xaView();
     const has = d => { const r = A[xaKey(d)]; return !!(r && (r.q > 0 || r.ms > 0)); };
     const d = new Date(); d.setHours(0, 0, 0, 0);
     if (!has(d)) { d.setDate(d.getDate() - 1); if (!has(d)) return 0; }
@@ -41328,7 +41635,7 @@ void main() {
     return n;
   }
   function xaBest() {
-    const A = xaAll();
+    const A = xaView();
     const has = k => { const r = A[k]; return !!(r && (r.q > 0 || r.ms > 0)); };
     const keys = Object.keys(A).filter(has).sort();
     let best = 0, run = 0, prev = null;
@@ -41347,7 +41654,7 @@ void main() {
   const XA_MON = ['ينا', 'فبر', 'مار', 'أبر', 'ماي', 'يون', 'يول', 'أغس', 'سبت', 'أكت', 'نوف', 'ديس'];
   function xaPaint() {
     const el = document.getElementById('panel-stats'); if (!el) return;
-    const A = xaAll(), mine = xaMine(), grid = xaGrid();
+    const A = xaView(), mine = xaMine(), grid = xaGrid();
     let ms = 0, q = 0, days = 0;
     const by = {};
     Object.keys(A).forEach(k => {
@@ -42214,6 +42521,7 @@ void main() {
   if (typeof coversPull === 'function') coversPull();
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
   if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
+  if (typeof acctPull === 'function') acctPull();         /* ونشاطُك وتفضيلاتُك من الحساب */
   applyTheme();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ
      وجهٍ يُرى في قاعه يجب أن يكون على الجسم قبلها */
