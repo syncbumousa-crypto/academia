@@ -18885,3 +18885,35 @@ html[data-theme="dark"] #pcv .pcv-btn { background: #eef3f4; color: #14233f; }
 #pcv .pcv-btn.on { background: #a8842e; color: #fff; }
 #pcv .pcv-none { opacity: .7; }
 @media (max-width: 600px) { #pcv .pcv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } #pcv .pcv-bk, #pcv .pcv-up { flex-direction: column; align-items: flex-start; } }
+/* ===== بلا لافتة (طلبُ صاحب الموقع): العناصرُ على خلفية الموقع مباشرة =====
+   الكتلةُ الداكنةُ لا تركب على ثيمٍ فاتحٍ هادئ — فتُرفع الأرضيّةُ والضبابُ والتدرّج،
+   وتلبس البطاقاتُ سطوحَ الموقع نفسَها (بتروليٌّ خفيفٌ بحدٍّ ناعم في الفاتح، وزجاجٌ باهتٌ في الغامق).
+   والعنوانُ بقدّ نصّه فتأخذ البطاقاتُ الثلاثُ ما بقي من العرض */
+#cm-body .pk--pc .pc-ban { background: none; padding-inline: 0; color: var(--u-tx-strong, #14233f); }
+#cm-body .pk--pc .pc-blur, #cm-body .pk--pc .pc-fade { display: none; }
+#cm-body .pk--pc .pc-name { color: var(--u-tx-strong, #14233f); }
+#cm-body .pk--pc .pc-ttl { flex: 0 0 auto; max-width: 150px; margin-inline-end: -6px; }
+#cm-body .pk--pc .pc-art { box-shadow: 0 10px 18px -12px rgba(20, 35, 63, .35); }
+#cm-body .pk--pc .pc-ring { border-color: rgba(168, 132, 46, .55); background: rgba(44, 94, 101, .06); }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic {
+  color: #14233f; background: rgba(44, 94, 101, .06); backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: inset 0 0 0 1px rgba(44, 94, 101, .16);
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:focus-visible {
+  background: rgba(44, 94, 101, .1); box-shadow: inset 0 0 0 1px rgba(44, 94, 101, .24), 0 14px 24px -14px rgba(20, 35, 63, .35);
+}
+#cm-body .pk--pc .pc-k__m > span:last-child, #cm-body .pk--pc .pc-k__s { color: #5d6b82; }
+#cm-body .pk--pc .pc-k__s { border-color: rgba(44, 94, 101, .18); }
+#cm-body .pk--pc .pc-st b { color: #14233f; }
+#cm-body .pk--pc .pc-st--warn, #cm-body .pk--pc .pc-st--warn b { color: #a8842e; }
+#cm-body .pk--pc .pc-cvbtn { background: rgba(20, 35, 63, .55); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ban, html[data-theme="dark"] #cm-body .pk--pc .pc-name { color: #fff; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-art { box-shadow: 0 12px 22px -12px rgba(0, 0, 0, .7); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ring { border-color: rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic { color: #fff; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:hover { background: rgba(255, 255, 255, .09); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), 0 16px 26px -14px rgba(0, 0, 0, .7); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-k__m > span:last-child, html[data-theme="dark"] #cm-body .pk--pc .pc-k__s { color: rgba(255, 255, 255, .72); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-k__s { border-color: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-st b { color: #fff; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-st--warn, html[data-theme="dark"] #cm-body .pk--pc .pc-st--warn b { color: #e5c47c; }
