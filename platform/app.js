@@ -34286,6 +34286,23 @@ void main() {
      رحلةٌ لمادّةٍ (‎srvPull‎) ورحلةٌ لترمٍ كامل (‎srvWarm‎) — وكلتاهما تنتهيان ههنا.
      ولو كُتب الدمجُ مرّتين لَافترقا يومَ يُبدَّل أحدُهما، وهو دمجٌ فيه أحكامُ
      ملكيّةٍ وبذورٍ وأغلفةٍ لا تُكرَّر بيدٍ سليمة. */
+  /* ===== ومساهمتي العائدةُ من الخادم تحمل ختمَه =====
+     الدرجُ يُسقط ما بلغ الخادم (‎cinfoThin‎)، فيعود عند الجذب ‎me:true‎ **بلا ‎srvH‎**،
+     فيراه المسحُ «لم يُدفع» فيدفعه — كلَّ مساهماتي في كلّ جلسة (ثمانٍ وعشرون بعد جذب
+     الترم)، لا يتبدّل منها حرف. وهي جاءت من الخادم، فما على الخادم هو هي بعينها:
+     تُختم بالبصمات الثلاث على **الشكل نفسِه** الذي يبنيه ‎srvPush‎ — ‎srvH‎ (المتنُ
+     المرسَل) و‎srvD‎ (المتنُ وحده، يُسقطها من الدرج كسائر ما بلغ) و‎srvR‎ (يُرجع
+     المسحَ قبل سؤال الهويّة و‎medPrep‎). فإن عُدّلت بعدُ اختلفت البصماتُ فدُفعت. */
+  function srvStampIn(p, code, sec) {
+    try {
+      p.srvH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, uid: p.uid || '',
+                                        st: stOf(p), pin: p.pin ? 1 : 0, data: p.data }));
+      p.srvD = srvHash(JSON.stringify(p.data || {}));
+      const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, st: p.st || '', data: p.data }));
+      p.srvR = rawH + '|' + (p.ts || '') + '|' + (p.uid || '') + '|' + stOf(p) + '|' + (p.pin ? 1 : 0);
+    } catch (e) { delete p.srvH; delete p.srvD; delete p.srvR; }   /* شكٌّ ⇒ تُدفع كما كانت */
+  }
+
   function srvMerge(code, incoming) {
     const j = { posts: incoming };
 
@@ -34435,14 +34452,16 @@ void main() {
            أو نسخةٌ ضاعت — فالخادمُ آخرُ ما بقي منها. فتُحقن وتُختم لي:
            ‎me:true‎ بلا ‎srv‎، فتُحرَّر كما كانت وتُدفع إن بُدّلت. */
         if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
-        info.posts[r.sec].push({
+        const back = {
           id: r.id, uid: r.uid, me: true, st: r.st || 'pub',
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
           ts: srvMs(r.ts) || Date.now(),
           pin: r.pin ? 1 : 0,
           data: r.data,
-        });
+        };
+        srvStampIn(back, code, r.sec);
+        info.posts[r.sec].push(back);
         n++;
         return;
       }
