@@ -19535,3 +19535,9 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
 #pcp .pcv-btn:hover { filter: brightness(1.12); }
 /* وقامتُها ثابتةٌ بين التبويبات — فلا تقصر وتطول وتتحرّك أمام صاحبها (طلبُ صاحب الموقع) */
 #pcv .pcv-panel { min-height: min(608px, calc(100vh - 32px)); align-self: center; }
+/* ===== زرُّ النقاط الثلاث في المنشورة ثابتٌ حجمًا وموضعًا، ضيّقةً كانت أو مفتوحةً أو مكبَّرة (طلبُ صاحب الموقع) =====
+   لا يصغر (‎scale(.72)‎ يُلغى) ويقف حيث يقف في الصفّ: في وسط لافتة الغلاف عموديًّا، يسارَها */
+#cm-body .pk--pc.pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn,
+#cm-body .pk--pc.pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: none; }
+#cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: -11px; }
+#cm-body .pk--pc.pk--maxpub > .post-yt > .post-menu { top: 64px; inset-inline-end: -14px; }
