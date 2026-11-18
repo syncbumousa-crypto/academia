@@ -10403,7 +10403,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b === 1 || b === true || (o.keys.length && o.keys.every(k => o.got[k]))) return `<span class="pc-sale pc-sale--own">${en ? 'Purchased' : 'اشتريتها'}</span>`;
     const some = o.keys.some(k => o.got[k]);
     const st = some ? (en ? 'Partly purchased' : 'اشتريت جزء') : m === 'part' ? (en ? 'Free trial available' : 'توجد تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
-    if (isMine(p)) return `<span class="pc-sale pc-sale--mine pc-sale--${m}"><span class="pc-sale__st">${st}</span><b><span class="pc-pr">${o.all}${PC_SAR}</span></b></span>`;
+    if (isMine(p)) return `<span class="pc-sale pc-sale--mine pc-sale--${m}"><span class="pc-sale__st">${st}</span></span>`;   /* وصاحبُها لا يُرى له سعرُ ما كتب (طلبُ صاحب الموقع) */
     const pk = pcPick[p.id] && pcPick[p.id] !== 'all' && o.keys.includes(pcPick[p.id]) && !o.got[pcPick[p.id]] ? pcPick[p.id] : 'all';
     const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : pcSpNm(pk, en);
     const pr = pk === 'all' ? o.all : +o.parts[pk];
@@ -10567,10 +10567,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pcAllF = ns => (ns || []).reduce((a, n) => n && n.t === 'f' ? a.concat(n, pcAllF(n.ch)) : a, []);
   const pcHasP = (n, f) => pcTopF(n.ch).some(c => +f[c.id] > 0 || pcHasP(c, f));
   function pcSetHTML(p) {
+    /* نصُّ الحالة وحدَه بلا سعر (طلبُ صاحب الموقع) — والسعرُ في النافذة */
     const s = (p.data && p.data.sale) || null, en = pcEn(), m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
-    if (m === 'free') return `<button type="button" class="pc-sale pc-sale--set" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${en ? 'Price your contribution' : 'سعّر عناصر مساهمتك'}</span></button>`;
-    const st = m === 'part' ? (en ? 'Free trial' : 'فيها تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
-    return `<button type="button" class="pc-sale pc-sale--set is-on" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${st}</span><b class="pc-pr">${Math.max(0, +s.price || 0)}${PC_SAR}</b></button>`;
+    const st = m === 'free' ? (en ? 'Free access to the contribution' : 'وصول مجاني للمساهمة')
+      : m === 'part' ? (en ? 'Partly paid access' : 'وصول مدفوع جزئي') : (en ? 'Fully paid access' : 'وصول مدفوع كلي');
+    return `<button type="button" class="pc-sale pc-sale--set${m === 'free' ? '' : ' is-on'}" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${st}</span></button>`;
   }
   let pcpSt = null;   /* { id, per, total, f:{id:price} } */
   /* المجموعُ من الشجرة: ما تحت مجلدٍ مسعَّرٍ داخلٌ في سعره فلا يُعدّ مرّتين */
