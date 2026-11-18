@@ -118,14 +118,11 @@
       });
     });
 
-    /* ووسمُ المرشّح في **كلتا** الصفحتين: ‎url(#lg-edge)‎ يُحَلّ في مستند
-       الصفحة لا في ورقة النمط، فورقةٌ واحدةٌ لا تكفي لموقعين. */
+    /* والانكسارُ نُزع (§٨): لا مرشّحَ ولا مِشبَكَ في الصفحتين، فلا يعود خِلسة */
     SITES.forEach(function (site) {
       var page = parts[site.i];
-      check('وسمُ الانكسار في صفحة ' + site.nm,
-            /id="lg-edge"/.test(page) && /data-glass="liquid"/.test(page),
-            /id="lg-edge"/.test(page) ? (/data-glass="liquid"/.test(page) ? 'موجود' : 'بلا مِشبَك') : 'مفقود',
-            'filter + data-glass');
+      var back = /id="lg-edge"/.test(page) || /data-glass="liquid"/.test(page);
+      check('لا انكسارَ في صفحة ' + site.nm, !back, back ? 'عاد' : 'غائب', 'غائب');
     });
 
     /* ---------- ٢· القواعدُ الواجبةُ موجودة ---------- */
@@ -133,13 +130,8 @@
           /@supports\s*\(\((?:-webkit-)?backdrop-filter/.test(src), 'موجود', '@supports');
     check('البديلُ المصمت — prefers-reduced-transparency',
           /prefers-reduced-transparency:\s*reduce/.test(src), 'موجود', 'media query');
-    check('الانكسارُ داخل سلّمه — @supports url()',
-          /@supports\s*\(backdrop-filter:\s*url\(/.test(src), 'موجود', '@supports url()');
-    check('الحركةُ تحترم prefers-reduced-motion',
-          /prefers-reduced-motion:\s*no-preference/.test(src), 'موجود', 'media query');
-    check('خريطةُ الإزاحة مضمَّنةٌ لا مجلوبة',
-          /feDisplacementMap/.test(src) && !/feImage[^>]*href="https?:/.test(src),
-          'مضمَّنة', 'بلا طلب شبكة');
+    check('اللوحُ بلا تمويهٍ ولا انكسارٍ ولا لمعة (§٨)',
+          !/url\(#lg-edge\)|--mx|side-dense|ac-glass-dense/.test(src), 'نظيف', 'لا شيءَ يتبدّل في سطحه');
 
     /* ---------- ٣· لا سطحَ مصمتًا داخل اللوح ---------- */
     var sideCss = src.slice(src.indexOf('داخلُ اللوح'), src.indexOf('م٤ · الشريطُ لوحٌ عائم'));

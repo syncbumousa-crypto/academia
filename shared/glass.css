@@ -30,27 +30,18 @@
         أن تقف عنده. فأوّلُ بطاقةٍ تبقى بارزةً (الحَشْوُ يردّها)، وما
         بعدها ينزلق تحت الزجاج عند التمرير. وبلا هذا فالزجاجُ فوق
         لونٍ واحدٍ = لونٌ واحد.
-   م٢ · السطح: ثلاثُ درجاتٍ لا قفزة —
-          لا دعمَ        ⟵ مصمتٌ كما كان
-          blur           ⟵ زجاجٌ مثلَّج (هذي المرحلة)
-          blur + url()   ⟵ انكسارُ الحافّة (م٣، لم تأتِ بعد)
-        ومن طلب تقليلَ الشفافيّة رجع إلى المصمت: قراءةُ الواجهة
-        حقٌّ لا زينة. */
+   م٢ · السطح: كان زجاجًا مثلَّجًا ثمّ انكسارًا عند الحافّة، ونُزعا من الشريط
+        (§٨ في ‎ROADMAP-SIDEBAR.md‎): لوحٌ يتبدّل عرضُه لا يحمل سطحًا يتبدّل. */
 
 
 /* م١ · الصفوفُ تمرّ تحت الشريط */
 #panel-explore .ex-strip {
-  margin-inline-start:  calc((var(--side-w) + var(--pnl-pad) + var(--hdl-room)) * -1);
-  padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
+  margin-inline-start:  calc((var(--side-rail) + var(--pnl-pad) + var(--hdl-room)) * -1);
+  padding-inline-start: calc(var(--side-rail) + var(--pnl-pad) + var(--hdl-room));
   /* والالتقاطُ يحترم الحَشْو: بدونه يَجذب البطاقةَ الأولى إلى حافّة
      الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
-  scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
+  scroll-padding-inline-start: calc(var(--side-rail) + var(--pnl-pad) + var(--hdl-room));
 }
-
-
-
-
-
 
 /* ============================================================
    الزجاجُ يخرج من اللوح — بالنظام نفسِه لا بنسخةٍ ثانية
@@ -61,19 +52,8 @@
 
    والمُرشَّحُ للزجاج ما **يطفو فوق محتوًى يتحرّك** — شريطُ الأدوات
    وأسهمُ الصفوف. أمّا ما هو سطحُ قراءةٍ ثابتٌ (بطاقةُ مادّة، نافذةُ
-   حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال. */
-.ac-glass {
-  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent) !important;
-  border-color: transparent !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-ink) 11%, transparent);
-}
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .ac-glass { -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); }
-}
-@media (prefers-reduced-transparency: reduce) {
-  .ac-glass { background: var(--glass) !important;
-              -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
+   حوار) فيبقى مصمتًا: الزجاجُ تحت نصٍّ طويلٍ إتعابٌ لا جمال.
+   (وكان هنا صنفٌ عامٌّ ‎.ac-glass‎ لم يستعمله شيءٌ قطّ — نُزع.) */
 
 /* شريطُ أدوات المكتبة: صار في قسمه آخرَ الورقة («البحثُ والتصنيفات: زجاجٌ سائل») */
 
@@ -93,43 +73,7 @@
     background: var(--glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
-/* ============================================================
-   م٦ · الحياة — الزجاجُ يتبدّل بما يمرّ تحته
-   ============================================================
-   ١· الكثافةُ تتبع التمرير: في رأس الصفحة لا شيءَ تحت اللوح فيكون
-      أصفى ما يكون، وكلّما مرّت الأغلفةُ تحته ثَقُل ليبقى النصُّ مقروءًا.
-      والحركةُ **صعودًا فقط** من قيمة الجلد المقيسة — فالبوّابةُ (4.5:1)
-      محفوظةٌ في أدنى الحالتين، وما فوقها أأمن.
-   ٢· ولمعةٌ تتبع المؤشّر على الصفّ المُحوَّم عليه، كانعكاسٍ على زجاج.
-   وكلتاهما تُطفأ لمن طلب تقليلَ الحركة. */
-@property --glass-mix { syntax: '<percentage>'; inherits: true; initial-value: 54%; }
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    @keyframes ac-glass-dense { to { --glass-mix: 76%; } }
-    /* المُمرِّرُ ههنا ‎body‎ لا الجذر — قِيس: ‎scroll(root)‎ لم يرتبط
-       و‎scrollTop‎ يقع على الجسد. فيُسمَّى الجدولُ على المُمرِّر نفسِه،
-       ويُطلب بالاسم من اللوح وهو ابنُه. */
-    body { scroll-timeline-name: --ac-page; scroll-timeline-axis: block; }
-    .sidebar {
-      animation: ac-glass-dense linear both;
-      animation-timeline: --ac-page;
-      animation-range: 0 340px;
-    }
-  }
-}
-
-/* اللمعة: طبقةٌ لا تُمسك الضغط، وتتبع ‎--mx/--my‎ من حركة المؤشّر */
 .sidebar .tabs button, .nook-com { position: relative; overflow: hidden; }
-.sidebar .tabs button::after, .nook-com::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  transition: opacity .18s;
-  background: radial-gradient(90px circle at var(--mx, 50%) var(--my, 50%),
-              color-mix(in srgb, var(--glass-ink) 13%, transparent), transparent 68%);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .sidebar .tabs button:hover::after, .nook-com:hover::after { opacity: 1; }
-}
 
 /* ============================================================
    م٥ · ثلاثُ حالاتٍ للوح: واسعٌ · سكّةٌ · مطويّ
@@ -138,46 +82,74 @@
    وتردّ المساحةَ للمحتوى. والحيلةُ أنّ كلّ شيءٍ ههنا محسوبٌ من ‎--side-w‎:
    حَشْوُ الجسد، وموضعُ الدائرة، وامتدادُ الصفوف تحت اللوح. فتبديلُ
    **متغيّرٍ واحد** يُزيح المنظومة كلَّها، ولا يُطارَد رقمٌ في عشرة مواضع. */
-:root { --side-w: 200px; }
-body.side-rail { --side-w: 64px; }
+/* ===== والمحتوى يحجز السكّةَ وحدَها، والواسعُ يطفو فوقه (طلبُ صاحب الموقع · «ب») =====
+   قِيس: حين كان حشوُ الجسد يتبع ‎--side-w‎ أُعيد ترتيبُ الصفحة كلِّها في كلّ إطارٍ من الحركة —
+   ومع مادّةٍ مفتوحة (٢٧٦٧ عنصرًا) كان نصفُ الإطارات ٣٣–٥٠ مللي. فصار المحتوى على ‎--side-rail‎
+   الثابت لا يتحرّك أبدًا، والعرضُ (‎--side-w‎) متغيّرٌ لا يُورَّث: يعرفه اللوحُ والمقبضُ وشريطُ
+   التحديد وحدَهم، فلا يُعاد حسابُ أنماط الصفحة كلِّها في كلّ إطار. */
+:root { --side-rail: 64px; }
+.sidebar, .side-handle, .cx-selbar { --side-w: 200px; }
+:is(.sidebar, .side-handle, .cx-selbar).side-rail { --side-w: var(--side-rail); }
 
-body.side-rail .side-logo,
-body.side-rail .sidebar .tab-tx,
-body.side-rail .nook-com span,
-body.side-rail .side-logout .side-logout-tx,
-body.side-rail .side-auth-tx,
-body.side-rail .side-profile .sp-name { display: none; }
 
-body.side-rail .sidebar { padding: 14px 8px; }
-body.side-rail .sidebar .tabs button,
-body.side-rail .nook-com,
-body.side-rail .side-logout,
-body.side-rail .side-join,
-body.side-rail .side-login,
-body.side-rail .side-profile { justify-content: center; padding-inline: 0; }
-body.side-rail .nook-com { padding-inline-start: 0; }
-body.side-rail .side-ctl { align-items: center; }
-body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
+/* ============================================================
+   الحركةُ بين الواسع والسكّة: كلُّ شيءٍ على إيقاعٍ واحد (طلبُ صاحب الموقع · «ج»)
+   ============================================================
+   كان العرضُ والحَشوُ يقفزان في لحظة، والأسماءُ تختفي، والدائرةُ وحدها تنزلق
+   بعدهم بربع ثانية — فبدا ثقيلًا متقطّعًا. فصار ‎--side-w‎ متغيّرًا مسجَّلًا يُحرَّك،
+   وكلُّ ما يُحسب منه (اللوح والحَشو والدائرة) يتبعه في الإطار نفسِه بالمنحنى نفسِه.
+   والأسماءُ تتلاشى وتنطوي بدل أن تختفي، والأيقونةُ تنزاح إلى الوسط بالحَشو لا بقفزةٍ.
+   والحركةُ عند الضغط وحدَه (‎.side-anim‎ على اللوح من ‎setRail‎)، لا عند فتح الصفحة. */
+@property --side-w { syntax: '<length>'; inherits: false; initial-value: 200px; }
+.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+.side-logout-tx, .side-auth-tx, .side-profile .sp-name { max-width: 170px; overflow: hidden; white-space: nowrap; }
+.sidebar.side-rail :is(.side-logo, .tabs .tab-tx, .nook-com span,
+                   .side-logout-tx, .side-auth-tx, .side-profile .sp-name) { max-width: 0; opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .cx-selbar.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
+  .side-handle.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1), background .15s, color .15s, transform .15s; }
+  .sidebar.side-anim :is(.side-logo, .tabs .tab-tx, .nook-com span,
+                     .side-logout-tx, .side-auth-tx, .side-profile .sp-name) {
+    transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease; }
+  .sidebar.side-anim :is(.nook-com, .side-logout, .side-join, .side-login) {
+    transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
+  .sidebar.side-anim .side-acct .side-profile {
+    transition: width .32s cubic-bezier(.32,.72,0,1), height .32s cubic-bezier(.32,.72,0,1), min-height .32s cubic-bezier(.32,.72,0,1),
+                padding .32s cubic-bezier(.32,.72,0,1), border-radius .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
+  .sidebar.side-anim .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
+  .sidebar.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1), padding .32s cubic-bezier(.32,.72,0,1); }
+  .sidebar.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
+}
+/* واللوحُ سطحٌ مصمتٌ لا يتبدّل (§٨ في ‎ROADMAP-SIDEBAR.md‎): لا تمويه ولا انكسار ولا لمعة —
+   فلا شيءَ فيه يومض حين يتّسع أو يضيق، ولا يُعاد رسمُ ما خلفه في كلّ إطار. */
+
+.sidebar.side-rail { padding: 14px 8px; }
+.sidebar.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
+.sidebar.side-rail .tabs .nook-com { gap: 0; padding-inline: calc(50% - 5.5px) 0; }
+.sidebar.side-rail .side-profile { gap: 0; }
+.sidebar.side-rail .tabs button { gap: 0; padding-inline: calc(50% - 9px) 0; }
+.sidebar.side-rail .side-ctl { align-items: center; }
+.sidebar.side-rail .themebar, .sidebar.side-rail .langbar { justify-content: center; }
 /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء، ولا الكتلةُ: الجوفُ صفٌّ
    من نقاطٍ تحت أيقونةٍ، ولوحةٌ حولَه تُضيّق السكّةَ بلا فائدة. */
-body.side-rail .nook-caret { display: none !important; }
-body.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
-body.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
-body.side-rail .nook-block.is-open > #nook-head.is-active {
+.sidebar.side-rail .nook-caret { display: none !important; }
+.sidebar.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
+.sidebar.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
+.sidebar.side-rail .nook-block.is-open > #nook-head.is-active {
   box-shadow: inset 0 0 0 1px var(--plate-edge); }
-body.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
+.sidebar.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
 
 /* ===== الحسابُ في السكّة: دائرةُ صورةٍ لا صندوق =====
    كان الاسمُ يُخفى بصنفٍ لا وجودَ له (‎.side-pname‎ والصحيح ‎.sp-name‎)،
    فيبقى شاغلًا سطرَه ويدفع الصورةَ إلى الحافّة. فصُحِّح الاسمُ، وصار
    الزرُّ نفسُه دائرةً بقدر الصورة: لا لوحةَ تحتها ولا حشوَ حولها. */
-body.side-rail .side-acct .side-profile {
+.sidebar.side-rail .side-acct .side-profile {
   width: 38px; height: 38px; min-height: 0; padding: 0; margin-inline: auto;
   border-radius: 50%; overflow: hidden; background: transparent;
   box-shadow: inset 0 0 0 1px var(--plate-edge); }
-body.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
-body.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
-body.side-rail .side-brand { gap: 0; }
+.sidebar.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
+.sidebar.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
+.sidebar.side-rail .side-brand { gap: 0; }
 
 /* ============================================================
    داخلُ اللوح — نظامٌ واحدٌ لكلّ ما يُضغط
@@ -305,9 +277,8 @@ html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
    (يرتفع ستًّا في ‎reel-bob‎). والهامشُ تحت شريط الأدوات هو ما يحمله */
 #panel-market .market-tools { margin-bottom: calc(clamp(16px, 2vw, 24px) - 10.8px); }
 /* والمحتوى يُفسح للوح وفجوته */
-body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
-html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
-/* والمطويُّ يخرج كلَّه ومعه فجوتُه */
+body { padding-right: calc(var(--side-rail) + var(--glass-gap) * 2 + var(--hdl-room)); }
+html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-rail) + var(--glass-gap) * 2 + var(--hdl-room)); }
 
 /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
 .sidebar .tabs { margin-inline: -4px; }
@@ -328,10 +299,11 @@ html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) +
   top: var(--glass-gap); transform: none;
   right: calc(var(--side-w) + var(--glass-gap)
               + (var(--glass-gap) + var(--pnl-pad) + var(--hdl-room)) / 2 - var(--hdl) / 2);
-  background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
+  background: var(--glass);
   color: var(--glass-ink);
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
-  transition: right .25s ease, left .25s ease, background .15s, color .15s, transform .15s;
+  /* بلا ‎right/left‎: موضعُه محسوبٌ من ‎--side-w‎ وهو يتحرّك معه في الإطار نفسِه — انتقالٌ ثانٍ عليه كان يجعله يلحق متأخّرًا */
+  transition: background .15s, color .15s, transform .15s;
 }
 html[data-lang="en"] .side-handle {
   right: auto;
@@ -341,15 +313,12 @@ html[data-lang="en"] .side-handle {
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
 .side-handle:hover {
-  background: color-mix(in srgb, color-mix(in srgb, var(--glass-ink) 7%, var(--glass)) var(--glass-mix), transparent);
+  background: color-mix(in srgb, var(--glass-ink) 7%, var(--glass));
   transform: none;
 }
 .side-handle:active { transform: scale(.94); }
 /* الأيقونةُ ثابتةٌ لا تدور: هي تقول «شريط» لا «اتّجاه» */
 .side-handle svg { width: 19px; height: 19px; transform: none !important; }
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .side-handle { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
-}
 
 /* ===== مقايضةٌ مقيسة =====
    الزجاجُ الأصفى يُسقط التباين، والتباينُ شرطٌ لا يُساوَم. فبدل أن
@@ -363,42 +332,14 @@ html[data-lang="en"] .side-handle {
 .sidebar .tabs button.is-active { color: var(--glass-ink); }
 .sidebar .nook-com span { color: inherit; opacity: .82; }
 
-/* م٢ · السطح الزجاجيّ */
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .sidebar {
-    background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
-    -webkit-backdrop-filter: blur(20px) saturate(170%);
-            backdrop-filter: blur(20px) saturate(170%);
-  }
-  /* والظلُّ بتخصيصٍ أعلى: ‎html[data-skin="flat"] .sidebar‎ في جلد الجذر
-     يُصفّر الظلَّ، وقِيس فغلب ‎.sidebar‎ وحدَها. فالحدُّ الفاتحُ على الوجه
-     المواجه للمحتوى، وينقلب مع اللغة.
-     والمِشبَكُ ‎data-theme‎ لا ‎data-skin‎: المسلخُ بلا جلدٍ مُسمّى، فكان
-     الظلُّ والحدُّ لا يَبلغانه أصلًا. والتخصيصُ واحدٌ (٠,٢,١) فيَغلب
-     ‎.sidebar‎ في الأمّ، ويَغلب جلدَ الجذر بترتيب التحميل. */
-  html[data-theme] .sidebar {
-    box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
-  }
-  html[data-theme][data-lang="en"] .sidebar {
-    box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
-  }
-
-  /* الدرجةُ الثالثة: الانكسار. تُضاف للسلسلة نفسِها ولا تَستبدلها، فمن
-     لا يدعم ‎url()‎ في الخلفيّة (سفاري وفايرفوكس) يبقى على المثلَّج. */
-  @supports (backdrop-filter: url(#lg-edge)) {
-    html[data-glass="liquid"] .sidebar {
-      -webkit-backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
-              backdrop-filter: blur(16px) saturate(170%) url(#lg-edge);
-    }
-  }
+/* السطح: مصمتٌ بلون الصبغة، وحدٌّ لامعٌ على الوجه المواجه للمحتوى وظلّ.
+   والمِشبَكُ ‎html[data-theme]‎ ليغلب جلدَ الجذر (‎html[data-skin="flat"] .sidebar‎ يُصفّر الظلّ). */
+.sidebar, .side-handle { background: var(--glass); }
+html[data-theme] .sidebar {
+  box-shadow: inset 1px 0 0 var(--glass-edge), -14px 0 34px var(--glass-cast);
 }
-/* ولا شفافيّةَ لمن لا يريدها */
-@media (prefers-reduced-transparency: reduce) {
-  .sidebar {
-    background: var(--glass);
-    -webkit-backdrop-filter: none; backdrop-filter: none;
-    box-shadow: none;
-  }
+html[data-theme][data-lang="en"] .sidebar {
+  box-shadow: inset -1px 0 0 var(--glass-edge), 14px 0 34px var(--glass-cast);
 }
 
 
@@ -451,8 +392,11 @@ html:root .market-tools .fpanel {
   background: color-mix(in srgb, var(--glass) var(--glass-mix), transparent);
   box-shadow: inset 0 0 0 1px var(--glass-edge), 0 10px 28px -12px var(--glass-cast);
 }
+/* والتمويهُ للوحة التصنيف وحدَها، فهي تنفتح فوق المحتوى. أمّا البحثُ وقرصُ التصنيف فليسا
+   ثابتين: يمرّان مع الصفحة فلا يقع تحتهما إلّا لونُ الخلفيّة، فتمويهُهما لا يُرى (قِيس: الفرقُ ٣/٢٥٥
+   في أقصاه) — ويُعاد حسابُه في كلّ إطارٍ يتحرّك فيه شيءٌ في الشاشة: مع طفو الكتاب ٥٣٠ مللي من كلّ ثانية */
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .market-tools .search, .market-tools .filterwrap::before, .market-tools .fpanel {
+  .market-tools .fpanel {
     -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
 /* ونافذةُ المكتبة في الفاتح كانت تُصمِت البحثَ والزرَّ أبيضَ بقاعدةٍ فيها معرّفٌ
@@ -598,7 +542,10 @@ html[dir="ltr"]:root .market-tools .fpanel, html[data-lang="en"]:root .market-to
   left: auto; right: 0; transform-origin: top right; }
 @media (prefers-reduced-motion: no-preference) {
   html:root .market-tools .fpanel:not([hidden]) { animation: lg-pop .26s cubic-bezier(.2,.9,.25,1.08); }
-  @keyframes lg-pop { from { opacity: 0; transform: scale(.94) translateY(-4px); } }
+  /* ===== تلاشٍ لا تكبير =====
+     قِيس: التكبيرُ (‎scale‎) على لوحٍ عليه تمويهٌ يُعيد تمويهَ ما تحته في كلّ إطار — كان نصفُ
+     إطارات فتح الفلاتر يتجاوز ٢٠ مللي. والتلاشي وحده يُموَّه ما تحته مرّةً ثمّ يُخبَّأ. */
+  @keyframes lg-pop { from { opacity: 0; } }
 }
 html:root .market-tools .fgroup + .fgroup { border-top-color: color-mix(in srgb, var(--lg-ink) 8%, transparent); }
 
@@ -808,25 +755,24 @@ html[data-theme="dark"]:root .post-menu__list:not(.cm-sort__list) :is(.post-del,
 html:root .post-menu__list:not(.cm-sort__list) :is(.post-del, .a-danger):hover { background: color-mix(in srgb, #c75b5b 16%, transparent); }
 
 /* ============================================================
-   عدّادُ رفّ الكتب «1 / 1034» — كبسولةُ زجاجٍ في زاوية الرفّ العليا (طلبُ صاحب الموقع)
+   عددُ المواد داخل مستطيل البحث — بعد فاصلٍ رفيع (طلبُ صاحب الموقع)
    ============================================================
-   كان تحت منتصف الكتب وحيدًا في الفراغ بينها وبين التبويبات، فيُقرأ عنوانًا وهو معلومةٌ
-   ثانويّة. فصار في الزاوية العليا البعيدة عن القرص — يسارًا بالعربيّة ويمينًا بالإنجليزيّة —
-   لا يزاحم الكتبَ ولا أسماءَها، بزجاج القوائم نفسِه. */
-html:root .book-reel:has(> .reel-count) { position: relative; }
-html:root .book-reel > .reel-count {
-  position: absolute; top: 4px; left: 0; right: auto; z-index: 3;
-  margin: 0; min-height: 0; height: 26px; padding: 0 11px; border-radius: 999px;
-  font-size: 11.5px; font-weight: 700; color: color-mix(in srgb, var(--glass-ink) 75%, transparent);
-  background: color-mix(in srgb, var(--glass) var(--glass-mix, 62%), transparent);
-  box-shadow: inset 0 0 0 1px var(--glass-edge), 0 6px 18px -10px var(--glass-cast);
-  pointer-events: none;
+   كان «1 / 1034» تحت الكتب وحيدًا، ثمّ كبسولةً في زاوية الرفّ. فصار في طرف البحث:
+   «1034 مادة» بلونٍ خافت، و«12 نتيجة» برقمٍ ذهبيّ إن كُتب شيء (‎paintCount‎ · ‎countOut‎).
+   والخانةُ تُحشى من طرفها بقدره فلا يجري النصُّ تحته. */
+html:root .market-tools .searchbox { position: relative; flex: 1 1 auto; min-width: 180px; display: flex; }
+html:root .market-tools .searchbox .search { flex: 1 1 auto; width: 100%; min-width: 0; padding-inline-end: 124px; }
+html:root .market-tools .m-count {
+  position: absolute; inset-inline-end: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 4px; padding-inline-start: 14px;
+  font-size: 12.5px; color: color-mix(in srgb, var(--glass-ink) 55%, transparent);
+  white-space: nowrap; pointer-events: none;
 }
-html[data-lang="en"]:root .book-reel > .reel-count { left: auto; right: 0; }
-html:root .book-reel > .reel-count:empty { display: none; }
-html:root .book-reel > .reel-count .hn-i { color: var(--glass-ink); font-weight: 800; }
-html:root .book-reel > .reel-count .hn-s { opacity: .45; margin: 0 3px; }
-html:root .book-reel > .reel-count .hn-t { opacity: 1; font-weight: 700; }
-@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  html:root .book-reel > .reel-count { -webkit-backdrop-filter: blur(9px) saturate(170%); backdrop-filter: blur(9px) saturate(170%); }
+html:root .market-tools .m-count[hidden] { display: none; }
+html:root .market-tools .m-count::before {
+  content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 1px; height: 20px;
+  transform: translateY(-50%); background: color-mix(in srgb, var(--glass-ink) 14%, transparent);
 }
+html:root .market-tools .m-count b { color: color-mix(in srgb, var(--glass-ink) 85%, transparent); font-weight: 700; font-variant-numeric: tabular-nums; }
+html:root .market-tools .m-count b.is-q { color: #a8842e; }
+html[data-theme="dark"]:root .market-tools .m-count b.is-q { color: #e1c172; }

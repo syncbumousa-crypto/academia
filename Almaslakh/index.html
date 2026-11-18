@@ -3,7 +3,7 @@
      وأزرقَ مزدوجًا للنحو، ويُظلّل المنطقةَ بالأزرق عند المرور. وهو في نصٍّ عربيٍّ عِلمِيٍّ
      ضوضاءُ لا فائدةَ فيها. والسِّمةُ تُورَّث، فوضعُها هنا يُطفئه في كل حقلٍ في الموقع —
      القائمِ منها والذي يولد بعدُ -->
-<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-glass="liquid" data-title="المسلخ" data-title-en="Almaslakh">
+<html lang="ar" dir="rtl" data-theme="light" spellcheck="false" data-title="المسلخ" data-title-en="Almaslakh">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,14 +23,14 @@
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
   <script>
-    window.AC_MINV = 955;
+    window.AC_MINV = 977;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
 
   <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
        — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
-  <link rel="stylesheet" href="../shared/glass.css?v=30">
+  <link rel="stylesheet" href="../shared/glass.css?v=43">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -156,9 +156,9 @@
     .sc-item.is-on { background: var(--plate-hi); color: var(--glass-ink); opacity: 1;
                      box-shadow: inset 0 0 0 1px var(--plate-edge); font-weight: 700; }
     /* وفي السكّة لا أسماءَ ولا كتلة */
-    body.side-rail .side-com:has(.sc-menu:not([hidden])) {
+    .sidebar.side-rail .side-com:has(.sc-menu:not([hidden])) {
       background: transparent; box-shadow: none; padding-bottom: 0; }
-    body.side-rail .sc-now .sc-nm { display: none; }
+    .sidebar.side-rail .sc-now .sc-nm { display: none; }
 
     /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
        فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
@@ -189,19 +189,6 @@
 </head>
 <body>
 
-<!-- ===== م٣ · انكسارُ الحافّة =====
-     خريطةُ إزاحةٍ تُقرأ قناتاها: الحمراءُ تُزيح أفقيًّا، والخضراءُ رأسيًّا.
-     فجعلتُ الخضراءَ ثابتةً (لا إزاحةَ رأسيّة)، والحمراءَ ١٢٨ في الوسط (أي
-     صفرًا) وتندفع إلى طرفيها — فينحني ما خلفَ الزجاج عند حافّتيه ويستوي
-     في وسطه، كشريحةِ زجاجٍ مشطوفةِ الحرفين. وهي مضمَّنةٌ هنا لا ملفًّا:
-     مرشّحٌ ينتظر طلبَ شبكةٍ يُرى بعد أن تُرسم الصفحة. -->
-<svg width="0" height="0" aria-hidden="true" style="position:absolute">
-  <filter id="lg-edge" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='rgb(255,128,0)'/%3E%3Cstop offset='0.16' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='0.84' stop-color='rgb(128,128,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,128,0)'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='8' fill='url(%23g)'/%3E%3C/svg%3E" preserveAspectRatio="none" result="map"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="26"
-                       xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
 
 
   <!-- الشريط الجانبي: التابان (زرّان تحت بعض) فوق، والتحكم بالمظهر واللغة أسفله.
@@ -348,7 +335,7 @@
     <!-- مستطيل السوق: أعلاه البحث والتصنيفات، وتحته سطر كتب واحد يُمرَّر أفقيًا -->
     <div class="market-box">
       <div class="market-tools">
-        <input class="search" id="m-search" type="text" placeholder="ابحث عن مادة…">
+        <div class="searchbox"><input class="search" id="m-search" type="text" placeholder="ابحث عن مادة…"><span class="m-count" id="m-count" aria-live="polite" hidden></span></div>
         <div class="filterwrap">
           <button class="btn-filter" id="m-btn-filter" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -782,37 +769,37 @@
 
   <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
   <script>
-    /* ===== حالتان لا ثلاث: سكّةٌ ⇄ واسع =====
-       النظامُ في ‎shared/glass.css‎ يَعرف السكّةَ بصنف ‎body.side-rail‎،
-       ومن يضعه هو هذا. وهو نسخةُ الجذر نفسُها وبالخطوات الثلاث:
-         ١· يُنظَّف ما حفظه المحرّكُ من «مطويّ» **قبل أن يقرأه** —
-            هذا الوسمُ يسبق ‎app.js‎ — فلا تومض الصفحةُ بشريطٍ غائب.
-         ٢· وتُعترض الضغطةُ في طور الالتقاط أبدًا، فلا تبلغه قطّ.
-         ٣· ويُنزع الصنفُ عند الإقلاع احتياطًا. */
+    /* ===== حالتان: سكّةٌ ⇄ واسع =====
+       النظامُ في ‎shared/glass.css‎ يَعرف السكّةَ بصنف ‎body.side-rail‎، ومن يضعه هو هذا
+       (نسخةُ الجذر نفسُها). والضغطةُ على المقبض تُعترض في طور الالتقاط، فالصفحةُ وحدَها
+       تملك الحالة. وكان المطويُّ بالكامل ثالثًا، ونُزع من المحرّك نفسِه. */
     (function () {
-      try {
-        var SK = 'academia2:v1', st = JSON.parse(localStorage.getItem(SK) || 'null');
-        if (st && st.sideCollapsed) { st.sideCollapsed = false; localStorage.setItem(SK, JSON.stringify(st)); }
-      } catch (e) {}
 
       var RAIL_K = 'academia2:rail:maslakh:v1';
+      /* الحالُ على اللوح والمقبض وشريط التحديد لا على الجسد: صنفٌ على الجسد يُعيد حسابَ أنماط
+         الصفحة كلِّها (قِيس: ٦٧٧ عنصرًا مع مادّةٍ مفتوحة)، وعلى اللوح ما تحته وحدَه */
+      function sideEls() { return [document.getElementById('sidebar'), document.getElementById('side-handle'), document.getElementById('cx-selbar')].filter(Boolean); }
+      function sideCls(c, on) { sideEls().forEach(function (el) { el.classList.toggle(c, !!on); }); }
+      function isRail() { var sb = document.getElementById('sidebar'); return !!sb && sb.classList.contains('side-rail'); }
       function setRail(on) {
-        document.body.classList.toggle('side-rail', !!on);
+        sideCls('side-rail', on);
         try { localStorage.setItem(RAIL_K, on ? '1' : ''); } catch (e) {}
         var h = document.getElementById('side-handle');
         if (h) h.title = h.ariaLabel = on ? 'توسيع الشريط' : 'تضييق الشريط';
       }
       document.getElementById('side-handle').addEventListener('click', function (e) {
         e.stopImmediatePropagation(); e.preventDefault();
-        setRail(!document.body.classList.contains('side-rail'));
+        /* الحركةُ للضغطة وحدَها (‎side-anim‎): تُرفع بعد انتهائها فلا تتحرّك الصفحةُ عند فتحها */
+        clearTimeout(setRail.t);
+        sideCls('side-anim', true); setRail(!isRail());
+        setRail.t = setTimeout(function () { sideCls('side-anim', false); }, 360);
       }, true);
-      try { if (localStorage.getItem(RAIL_K)) document.body.classList.add('side-rail'); } catch (e) {}
+      /* السكّةُ هي الافتراض (الواسعُ لوحٌ يطفو فوق المحتوى): من لم يختر شيئًا (‎null‎) فسكّة، ومن اختار الواسعَ (‎''‎) بقي عليه */ var rail0 = true; try { var rv = localStorage.getItem(RAIL_K); rail0 = rv === null || !!rv; } catch (e) {} sideCls('side-rail', rail0);
 
       /* وأيقونةُ «شريط جانبيّ» مكانَ السهم: المحرّكُ يبنيها وهو مشترك،
          فتُبدَّل من ههنا كما صُنع في الجذر. */
       document.addEventListener('DOMContentLoaded', function () {
-        document.body.classList.remove('side-closed');
-        setRail(document.body.classList.contains('side-rail'));
+        setRail(isRail());
         var h = document.getElementById('side-handle');
         if (h) h.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
           + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'

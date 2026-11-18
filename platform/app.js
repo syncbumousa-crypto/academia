@@ -168,7 +168,10 @@
        إن كان الدرجُ صغيرًا: القياسُ نفسُه ثمنٌ لا يُدفع بلا حاجة. */
     /* والحدُّ ثلاثُ مئةٍ لا تسعُ مئة: الدرجُ انكمش من ثلاثة ملايين إلى دون
        الميجا، فصار القياسُ يصمت في المدى الذي صرنا نعمل فيه */
-    if (bootRaw > 300000) {
+    /* ===== والوزنُ يُقاس في أوّل فراغ =====
+       ‏‎JSON.stringify‎ لكلّ فرعٍ وأربعُ طبقاتٍ نزولًا: ~٢٤ms في كلّ إقلاع، والدرجُ فوق
+       الحدّ دائمًا. فيُقاس بعد الإقلاع ويُكتب في سطر الإقلاع نفسِه (كما يفعل ‎bootMark‎) */
+    if (bootRaw > 300000) (window.requestIdleCallback || (f => setTimeout(f, 500)))(() => {
       try {
         const wt = v => { try { return JSON.stringify(v).length; } catch (e) { return 0; } };
         const kids = v => (v && typeof v === 'object')
@@ -189,7 +192,12 @@
         }
         if (path.length) bootRow.deep = path.join(' > ');
       } catch (e) { /* لا يُعطَّل الإقلاعُ لأجل قياس */ }
-    }
+      /* ويُكتب في سطر هذا الإقلاع إن كان آخرَ الدفتر */
+      try {
+        const rs = bootRead_();
+        if (rs.length && rs[rs.length - 1].t === bootRow.t) { rs[rs.length - 1] = bootRow; bootPut(rs); }
+      } catch (e) {}
+    }, { timeout: 3000 });
     const rows = bootRead_();
     rows.push(bootRow);
     bootPut(rows);
@@ -328,7 +336,7 @@
     state.signedIn = !!(state.profile.name || state.profile.email);
   const isGuest = () => !state.signedIn;
   const hasAcct = () => !!(state.profile.email && state.profile.password);
-  state.sideCollapsed = !!state.sideCollapsed;   // طي الشريط الجانبي (محفوظ)
+  delete state.sideCollapsed;   // كان طيُّ الشريط الكامل — نُزع: للشريط حالتان (واسعٌ وسكّة) تملكهما الصفحة
   /* مقاسُ مربّع «المادة» في القُمرة: نافذةٌ مرنة يسحبها صاحبُها، والمحتوى يتبع المقاس.
      ‏‎w = 0‎ يعني «اترك العرضَ للشبكة» (‎.75fr‎)، وما فوقه عرضٌ صريحٌ يقود عمودَه.
      ولمَ في الحال المحفوظة لا في الجلسة؟ لأنّه تفضيلٌ لا حالُ نظرة: من ضيّقه مرّةً
@@ -1046,7 +1054,23 @@
         if (list.length) { keep[sec] = list; any = true; }
       });
       const rest = {};
-      Object.keys(src).forEach(k2 => { if (k2 !== 'posts') { rest[k2] = src[k2]; any = true; } });
+      Object.keys(src).forEach(k2 => {
+        if (k2 === 'posts') return;
+        let v = src[k2];
+        /* ===== ومساهماتُ غيري تحت الدكاترة تُسقط كذلك =====
+           هي نسخٌ تُبنى من ‎posts.doc‎ في كلّ عرض (‎docAbsorb‎)، و‎posts.doc‎ يُجذب
+           مع المادّة. وكانت ٢٠٠٠ك.ب من ٢٧٠٠ يُكتب كلُّها في كلّ حفظ: ٦٠ms من
+           التسلسل والصفحةُ تحمّل الكتاب، والدرجُ على حافّة سعته.
+           فيبقى ما لا يعرفه الخادم: ما هو لي، وما لا ‎uid‎ له (بذرةٌ أو قديم). */
+        if (k2 === 'doctors' && Array.isArray(v)) {
+          v = v.map(dr => {
+            if (!dr || !Array.isArray(dr.posts)) return dr;
+            const ps = dr.posts.filter(p => !p || p.me || !p.uid || isMine(p));
+            return ps.length === dr.posts.length ? dr : Object.assign({}, dr, { posts: ps });
+          });
+        }
+        rest[k2] = v; any = true;
+      });
       if (any) out[code] = Object.assign(rest, Object.keys(keep).length ? { posts: keep } : {});
     });
     return out;
@@ -2443,7 +2467,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let query = '';
     const fHours = new Set();          // فارغة = الكل
     const fCols  = new Set();
-    const fStat  = new Set(['todo']);  // «متبقية» مطبق افتراضيًا دائمًا — ويُحذف بالنقر على رقاقته
+    /* «متبقية» لا تُطبَّق افتراضيًّا في المكتبة (طلبُ صاحب الموقع): من دخل رأى الرفَّ كاملًا.
+       وتبقى افتراضيّةً في نافذة الإضافة إلى الترم (‎pick‎): هناك يُختار ما لم يُدرس بعد */
+    const fStat  = new Set(mode === 'pick' ? ['todo'] : []);
     const fAct   = new Set();           // النشاط: lec (محاضرة فقط) · lab (لها معمل) — فارغة = الكل
     const fKind  = new Set();           // نوعيّة المواد في التخصّصات المختارة — فارغة = الكل
     const inCols = c => (c.tags || []).some(t => fCols.has(t) && (!fKind.size || fKind.has((c.kinds || {})[t])));
@@ -2662,16 +2688,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       track = host.querySelector('.reel-track');
       countEl = host.querySelector('.reel-count');
       bindEvents();
-      /* تعويمُ المتمركز يبدأ بمرور المؤشّر عليه ويقف بعد ثلاث دورات (‎10s‎): الحركةُ الدائمة
-         كانت تُبقي الرفَّ تحت زجاج البحث يُعاد رسمُه كلَّ إطار — ‎~75MB‎ من ذاكرة الرسم */
-      track.addEventListener('pointerover', e => {
-        const cr = e.target.closest && e.target.closest('.reel-slot.is-center .crow');
-        if (cr) cr.classList.add('is-bob');
-      });
-      track.addEventListener('animationend', e => { if (e.animationName === 'reel-bob') e.target.classList.remove('is-bob'); });
     }
     /* الجزء يمينًا ثم «/» ثم الكل يسارًا مع العربية — يقلبها اتجاه الصندوق في CSS مع الإنجليزية */
     function paintCount() {
+      /* ===== والعدُّ في مستطيل البحث (‎opts.countOut‎) — طلبُ صاحب الموقع =====
+         «1034 مادة» بلا بحث، و«12 نتيجة» إن كُتب فيه شيء (والرقمُ ذهبيّ) */
+      if (opts.countOut) {
+        const o = document.querySelector(opts.countOut);
+        if (o) {
+          const qEl = opts.countQuery && document.querySelector(opts.countQuery);
+          const q = !!(qEl && String(qEl.value || '').trim());
+          const en = state.lang === 'en';
+          o.hidden = !items.length;
+          o.innerHTML = items.length
+            ? `<b${q ? ' class="is-q"' : ''}>${items.length}</b> ${q ? (en ? 'results' : 'نتيجة') : (en ? 'courses' : 'مادة')}`
+            : '';
+        }
+      }
       if (!countEl) return;
       countEl.innerHTML = items.length
         ? `<b class="hn-i">${centerIdx + 1}</b><i class="hn-s">/</i><b class="hn-t">${items.length}</b>`
@@ -2874,7 +2907,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لمادة اللاب: نقر كتاب «معمل» يفتح مساهمات نشاط المعمل (خيط منفصل)، وغيره يفتح المحاضرة. */
   const marketReel = makeReel('#m-grid', {
     cardMode: 'market',
-    counter: true,   /* عدّاد «الجزء من الكل» تحت الشريط — يتبع نتائج البحث والفلاتر */
+    /* العددُ داخل مستطيل البحث بعد فاصل (‎#m-count‎) — لا عدّادَ «الجزء من الكل» على الرفّ */
+    countOut: '#m-count', countQuery: '#m-search',
     confirm: (code, act) => openMarketCourse(act === 'معمل' ? labKey(code) : code),
     /* المتمركز: مساهمات النشاط المحدَّد (افتراضيًا المحاضرة، أو المعمل إن سبق اختياره) */
     /* ===== ورابطُ الاختبار يقود البِكرةَ إلى مادّته =====
@@ -2908,6 +2942,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   const mkTab   = marketView('m', 'market', list => marketReel.setList(list));   // السوق الرئيسي: شريط → مساهمات حيّة
   const mkModal = marketView('mm', 'pick', list => bookReel.setList(list));       // نافذة المكتبة: شريط → معالج التجهيز
+  /* ===== ونافذةٌ مغلقةٌ لا تُرسم =====
+     كانت شبكتُها تُعاد مع كلّ فتحِ ترمٍ ومع كلّ مادّةٍ تُدمج — ستّ مرّاتٍ في فتح المكتبة،
+     ~٨٠ms لِما لا يُرى. فتُعلَّم «قديمةً» وتُرسم حين تُفتح: فاتحاها (‎.tp-add‎ و‎#drop-add‎)
+     يرسمانها أصلًا، و‎openWizard‎ يرسمها إن كانت قديمة. والعنصرُ يُسأل باسمه لا بـ‎modal‎:
+     ذاك يُعرَّف بعدُ، و‎openTerm‎ قد تُنادى قبله. */
+  let mkModalStale = false;
+  const mkModalSoon = () => {
+    const m = document.getElementById('market-modal');
+    if (m && m.hidden) { mkModalStale = true; return; }
+    mkModalStale = false; mkModal.render();
+  };
 
   /* العودة لتاب السوق: استرجع مساهمات المادة المتمركزة أسفله (قد تكون الواجهة انتقلت للمكتبة) */
   document.querySelector('.tabs').addEventListener('click', e => {
@@ -3853,7 +3898,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     $('#term-frame').hidden = false;
     renderTerms();
     renderFrame();
-    mkModal.render();   /* تحديث علامات «مضافة» لو فُتحت النافذة على ترم آخر */
+    mkModalSoon();   /* تحديث علامات «مضافة» لو فُتحت النافذة على ترم آخر — ومغلقةً تُرسم حين تُفتح */
     if (!firstTermOpen) flipTermWidths(prev);
     firstTermOpen = false;
   }
@@ -4212,6 +4257,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       solo: !!opts.solo,
     };
     modal.hidden = false;
+    if (mkModalStale) { mkModalStale = false; mkModal.render(); }   /* وشبكتُها تحتها: تُرسم إن فاتها رسمٌ وهي مغلقة */
     document.querySelector('#market-modal .mmodal__card').classList.add('wizmode');
     $('#wiz').hidden = false;
     renderWiz();
@@ -4464,10 +4510,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         srcU: (info.study && info.study.study.length) ? { items: info.study.study } : null,
         srcP: (info.study && info.study.practice.length) ? { items: info.study.practice } : null,
       };
+      let moved = false;
       SECTIONS.forEach(s => {
+        if (legacy[s]) moved = true;
         info.posts[s] = legacy[s] ? [{ me: true, u: { name: T().meName }, likes: 0, liked: false, ts: Date.now(), data: legacy[s] }] : [];
       });
-      save();
+      /* ===== وخاناتٌ خاويةٌ لا تُحفظ، والمنقولُ يُحفظ في أوّل فراغ =====
+         كان ‎save()‎ يقع هنا في كلّ مرّة — والخاناتُ الخاويةُ يُسقطها الدرجُ (‎cinfoThin‎)،
+         فتعود ‎posts‎ غائبةً في الإقلاع التالي ويقع الحفظُ ثانيةً: حفظٌ كاملٌ متزامنٌ
+         (~٦٠ms) عند أوّل فتحٍ لكلّ كتابٍ في كلّ جلسة، لا يحفظ شيئًا. */
+      if (moved) saveSoon();
     }
     /* دمج «نوعية المادة» في «المادة»: مشاركات nature القديمة تنطوي داخل info */
     if (info.posts.nature) {
@@ -4583,7 +4635,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
   const avatarHTML = p => {
     const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
-    return src ? `<img src="${src}" alt="">` : FLAT_AVATAR;
+    /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
+       تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
+    return src ? `<img src="${src}" alt="" loading="lazy" decoding="async">` : FLAT_AVATAR;
   };
   const nameOf = p => (p.me ? esc(state.profile.name || '') : esc((p.u && p.u.name) || '')) || T().meName;
 
@@ -5999,7 +6053,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const richPeek = sec === 'doc' || sec === 'abs' || isSrc;   /* المصادر والغياب ملخّص شارات مثل الدكتور */
     /* هوية الدكتور (صورته واسمه) أول الملخّص: تُخفى إذا كان الفلتر مقصورًا على دكتور —
        اسمه ظاهر أصلًا في مستطيل الفلتر فوق القائمة، فلا داعي لتكراره في كل كومنت */
-    const peekDr = (isDr && cmDocSel == null) ? doctorsOf(cmCode)[ref.dr] : null;
+    /* ===== والدكتورُ يُمرَّر ولا يُستخرَج لكلّ مساهمة =====
+       ‏‎doctorsOf‎ تُعيد بناءَ القائمة من صفوف المادّة (‎docAbsorb‎ ومقارناتُ ‎JSON.stringify‎)،
+       وكانت تُنادى مرّةً لكلّ مساهمة: إحدى وتسعون في «الدكاترة». والراسمُ عنده القائمةُ
+       فيمرّرها في ‎ref.drObj‎ — ويبقى الاستخراجُ لمن لم يمرّر */
+    const peekDr = (isDr && cmDocSel == null) ? (ref.drObj || doctorsOf(cmCode)[ref.dr]) : null;
+    /* ===== والرأسُ والذيلُ يُبنيان حيث يُستعملان =====
+       الأقسامُ ذاتُ الشكل الطوليّ (المادّة · الدكتور · الغياب · التقييم · المصادر) تخرج
+       من الفرع أدناه ولا تقرأهما — وكانا يُبنيان لها ثمّ يُرميان، و‎postPeek‎ فيهما مرّتين */
+    const headFoot = () => {
     const head = `<div class="pk-head">
         <div class="fold-peek${richPeek ? ' fold-peek--rich' : ''}">${(open && !peekOnly) ? '' : postPeek(sec, p.data, p.id || key, peekDr, open)}</div>
         <button type="button" class="pk-toggle" title="${open ? T().pkCollapse : T().pkExpand}">
@@ -6017,6 +6079,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         </div>
         ${menu}
       </div>`;
+    return { head, body, foot };
+    };
     /* «المادة» و«الدكتور» و«التقييم» بأسلوب يوتيوب: الصورة عمود جانبي يمين الكومنت كامل (أعلاه)،
        وعلى يسارها عمود = [اسم · تاريخ · قائمة النقاط] ثم المحتوى ثم إبهاما مفيد/غير مفيد */
     if (sec === 'info' || sec === 'doc' || sec === 'abs' || sec === 'grade' || isSrc) {
@@ -6077,6 +6141,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         </div>
       </div>`;
     }
+    const { head, body, foot } = headFoot();
     return `<div class="post pk pk--fold${open ? ' pk--open' : ''}${peekOnly ? ' pk--peek' : ''}" ${dataAttr}>${head}${body}${foot}</div>`;
   }
 
@@ -6134,7 +6199,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tip = o.t + (im.user ? '، كتبها @' + im.user : '') +
       (im.ts ? ' سنة ' + new Date(im.ts).getFullYear() : '');
     /* «من» بالعربيّة و«from» بالإنجليزيّة (طلبُ صاحب الموقع) */
-    const inner = `<i class="imp-badge__f">${document.documentElement.dataset.lang === 'en' ? 'from' : 'من'}</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}">`;
+    const inner = `<i class="imp-badge__f">${document.documentElement.dataset.lang === 'en' ? 'from' : 'من'}</i><img class="imp-badge__logo" src="${esc(assetURL(o.logo))}" alt="${esc(o.n)}" loading="lazy" decoding="async">`;
     return url
       ? `<a class="imp-badge" href="${esc(url)}" target="_blank" rel="noopener" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</a>`
       : `<span class="imp-badge" title="${esc(tip)}" aria-label="${esc(tip)}">${inner}</span>`;
@@ -6804,7 +6869,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* الواجهة المشتركة: قائمة المشاركات ← مشاركة كاملة ← أو محرر رأيي */
   /* ---------- قسم الدكتور: كتل الدكاترة ومشاركات المجتمع تحتهم ---------- */
-  const drAvatar = dr => dr.img ? `<img src="${dr.img}" alt="">` : FLAT_AVATAR;
+  const drAvatar = dr => dr.img ? `<img src="${dr.img}" alt="" loading="lazy" decoding="async">` : FLAT_AVATAR;
 
   /* بطاقة تحرير مساهمة الدكتور إنلاين (نفس شكل الكومنت المنشور): الحقول قابلة للتحرير داخل
      نفس بطاقة .post.pk، وزر إرسال صغير + حذف يسارًا، وهويتي أسفل الخط — لا صفحة/محرّر منفصل */
@@ -6941,7 +7006,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function cmPickHTML() {
     const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
     return `<div class="cm-pick"><div class="cm-pick__ghost" aria-hidden="true">${row(34, 76) + row(42, 69) + row(50, 62)}</div>`
-      + `<div class="cm-pick__msg" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
+      + `<div class="cm-pick__msg" role="note"><svg class="cm-pick__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
@@ -6996,7 +7061,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           : (b.p.ts || 0) - (a.p.ts || 0));
         inner = cmDocBar(doctors, items.length) + (items.length
           ? items.map(({ p, di, pi, dr }) =>
-              (editing && p.me && di === cmView.di) ? drEditCard(dr, di, p, pi) : foldPost('doc', p, pi, { dr: di })
+              (editing && p.me && di === cmView.di) ? drEditCard(dr, di, p, pi) : foldPost('doc', p, pi, { dr: di, drObj: dr })
             ).join('')
           : `<p class="v-none">${doctors.length ? T().noPosts : T().noDoctors}</p>`);
       }
@@ -10814,7 +10879,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
+  /* ===== ويُسأل عن الخطوط بعد الإقلاع لا في أثنائه =====
+     ‏‎document.fonts.ready‎ يُلزم المتصفّحَ أن يحسب أنماطَ الصفحة كلِّها في لحظته ليعرف
+     أيَّ خطٍّ يلزم — ~٥٦ms والسكربتُ لم يرسم شيئًا بعد. والوعدُ يُوفى ولو سُئل بعد
+     اكتمال التحميل، فالسؤالُ في أوّل فراغٍ لا يُسقط شيئًا. */
+  (window.requestIdleCallback || (f => setTimeout(f, 200)))(() => {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
+  }, { timeout: 1500 });
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
@@ -11906,6 +11977,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
   const ktOk = n => KTRO ? `<span class="kt-ok${n.ok ? ' on' : ''}" aria-label="${n.ok ? '✓' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
+  /* بقيّةُ صفوف الجدول المنشور: تُلحَق بجدولها دفعةً في كلّ فراغ. ومفتاحٌ لم يُرسم جدولُه
+     (بُني نصُّه ولم يُوضع، أو هُدم قبل أن يكتمل) يُمحى فلا يبقى في الذاكرة */
+  const KT_FIRST = 40, KT_STEP = 60, KT_REST = new Map();
+  let ktRestN = 0;
+  function ktFillRest() {
+    KT_REST.forEach((rows, key) => {
+      const tb = document.querySelector(`table.kt[data-ktrest="${key}"] > tbody`);
+      KT_REST.delete(key);
+      if (!tb) return;
+      tb.parentElement.removeAttribute('data-ktrest');
+      const idle = window.requestIdleCallback || (f => setTimeout(f, 16));
+      const step = () => {
+        if (!tb.isConnected || !rows.length) return;
+        tb.insertAdjacentHTML('beforeend', rows.splice(0, KT_STEP).join(''));
+        if (rows.length) idle(step, { timeout: 400 });
+      };
+      idle(step, { timeout: 400 });
+    });
+  }
   function ktViewHTML(id, sel, v, folds, pack, ro) {
     KTRO = !!ro;
     try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; }
@@ -11920,11 +12010,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (v === 'table') {
       const h = host.holder.kth || T().ktHead, used = hlUsed(id);
       let k = 0;
-      body = !cards.length ? '' : `<table class="kt"><thead><tr>`
-        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
-        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
-        + `</tr></thead><tbody>`
-        + deep.map(x => {
+      const rows = deep.map(x => {
           /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
           if (x.h) return '';
           const n = x.n;
@@ -11932,7 +12018,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
-        }).join('')
+        }).filter(Boolean);
+      /* ===== والجدولُ المنشورُ يُرسم دفعاتٍ =====
+         رزمةٌ بأربعِ مئةٍ وأربعٍ وأربعين بطاقةً جدولٌ قامتُه خمسون ألفَ بكسلٍ في صندوقِ
+         خمسِ مئة: أوّلُ قراءةٍ بعد الرسم تخطّط ألفًا وسبعَمئةِ خليّةٍ دفعةً (~٣٢٠ms، والنقرةُ
+         واقفة). فيُرسم صدرُه، ويُلحَق الباقي في أوقات الفراغ (‎ktFillRest‎).
+         والمنشورُ وحدَه: جدولُ التحرير تُركَّز خلاياه وتُضاف صفوفُه فيُطلب الصفُّ لحظةَ رسمه */
+      let rest = null;
+      if (ro && rows.length > KT_FIRST) {
+        rest = 'k' + (++ktRestN);
+        KT_REST.set(rest, rows.splice(KT_FIRST));
+        queueMicrotask(ktFillRest);
+      }
+      body = !cards.length ? '' : `<table class="kt"${rest ? ` data-ktrest="${rest}"` : ''}><thead><tr>`
+        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
+        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
+        + `</tr></thead><tbody>`
+        + rows.join('')
         + `</tbody></table>`;
     } else if (v === 'cards' && pkLab()) {
       /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
@@ -31069,7 +31171,7 @@ void main() {
        بين رسمتين — والذاكرةُ لطول الرسمة لا أكثر */
     impMemo.clear();
     const u = impSync(r.list);
-    if (r.changed || u) save();
+    if (r.changed || u) saveSoon();   /* في أوّل فراغ: يقع وسطَ بناء القُمرة، وكان حفظًا كاملًا متزامنًا (~٥٥ms) */
     return r.list;
   }
   /* ===== وعاد القضيبُ إذ صارت للشجرة محطّات =====
@@ -31707,7 +31809,7 @@ void main() {
     document.querySelector('#course-modal .mmodal__card').appendChild($('#cm-ui'));
     nookEntry = entry;
     state.lastNook = { term: selTerm, code: entry.code };   /* تُستأنف عند العودة للركن ولو بعد تحديث الصفحة */
-    save();
+    saveSoon();   /* في أوّل فراغ: كان حفظًا كاملًا متزامنًا (~٥٥ms) في كلّ فتحٍ للقُمرة لأجل موضعٍ يُستأنف */
     coursePosts(nookCode(entry));   /* ترحيل بيانات النشاط المعروض قبل قراءة مساهماته */
     /* ===== ورحلتُك تُبذر عند أوّل فتحٍ لهذه المادّة وحدَه =====
        الشرطُ ‎road‎ **معدومةٌ** لا خاوية: فمن أفرغ رحلتَه بيده لا تُملأ عليه في كلّ
@@ -33081,7 +33183,6 @@ void main() {
       b.title = tx;
       const s = b.querySelector('.side-auth-tx'); if (s) s.textContent = tx;
     });
-    const sh = $('#side-handle'); if (sh) sh.title = state.sideCollapsed ? T().sideOpen : T().sideClose;
   }
   /* ============================================================
      صفحةُ الباب — تسكن لوحَ الحساب نفسَه
@@ -33785,7 +33886,7 @@ void main() {
 
   /* ---------- الدفع ---------- */
   /* عدّادُ ‎429‎ ومؤقّتُ إعادتها — تراخٍ يزيد بكلّ ردّ ولا يتجاوز ربعَ ساعة */
-  let srv429 = 0, srv429T = 0;
+  let srv429 = 0, srv429T = 0, srvSaveT = 0;
   async function srvPush(p, code, sec, retried) {
     if (!SRV_ON() || !p || !p.me || isGuest()) return;
     /* ===== وتُرفع المسوّدةُ كما يُرفع المنشور =====
@@ -33803,6 +33904,16 @@ void main() {
     const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, st: p.st || '', data: p.data }));
     if (p.srvBig === rawH) return;
     if (p.srvBig) { delete p.srvBig; }          /* تبدّل المتن: تُعطى فرصةً جديدة */
+
+    /* ===== وما لم يتبدّل منذ بلغ لا يُجهَّز ثانيةً =====
+       كان كلُّ دفعٍ يمرّ بسؤال الهويّة (‎/auth/me‎) وبـ‎medPrep‎ — نسخةٌ عميقةٌ
+       للمتن، وتحليلُ كلِّ نصٍّ فيه ‎<img‎ بـ‎innerHTML‎ — ثمّ يجد ‎p.srvH === h‎
+       فيرجع. والمسحُ يقع بعد كلِّ حفظ، فرزمتا بطاقاتٍ فيهما ألفٌ ومئةُ صورة
+       كانتا ~٣٢٠ms على الخيط الرئيس بعد تغيير الكتاب.
+       فالبصمةُ الخامُ وما يدخل المتنَ المرسَل سواها (‎ts uid st pin‎) تُحفظ يومَ
+       يُعرف أنّ الخادمَ على ما عندي — فإن طابقت رجع الدفعُ قبل أن يبدأ. */
+    const sigNow = () => rawH + '|' + (p.ts || '') + '|' + (p.uid || '') + '|' + stOf(p) + '|' + (p.pin ? 1 : 0);
+    if (p.srvH && p.srvR === sigNow()) return;
 
     /* ===== ولا تُنشر باسمي مساهمةُ غيري =====
        الدرجُ للأصل كلِّه: ما كتبتَه في اللوحة بحساب «أكاديميا» تجده في الموقع
@@ -33848,7 +33959,7 @@ void main() {
     const body = JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, uid: p.uid || '',
                                  st: stOf(p), pin: p.pin ? 1 : 0, data: prepped });
     const h = srvHash(body);
-    if (p.srvH === h) return;                  /* لم يتبدّل شيء */
+    if (p.srvH === h) { p.srvR = sigNow(); return; }   /* لم يتبدّل شيء — وتُحفظ بصمتُه فلا يُجهَّز ثانيةً */
     try {
       const r = await apiFetch(postsURL(), {
         method: 'PUT', credentials: 'same-origin',
@@ -33920,8 +34031,14 @@ void main() {
       try { const jr = await r.json(); ru = (jr && jr.uid) || ''; } catch (e) { /* ردٌّ بلا متن */ }
       if (ru) p.uid = ru;
       else if (state.uid) p.uid = state.uid;
+      p.srvR = sigNow();                      /* بعد المالك: هو جزءٌ من المتن المرسَل */
       if (!isMine(p)) refreshOwnership();   /* owner learned: judge again */
-      save();
+      /* ===== والختمُ يُحفظ مرّةً بعد أن تهدأ الدفعات =====
+         كان ‎save()‎ متزامنًا بعد كلِّ دفعة، والمسحُ يدفع عشراتٍ متتابعة (ثمانٍ وعشرون
+         بعد جذب الترم): حفظٌ كاملٌ لكلّ واحدة. و‎saveSoon‎ وحدَه لا يجمعها — الدفعاتُ
+         تصل متباعدةً فيقع فراغٌ بين كلّ اثنتين. فيُنتظر هدوؤها ثمّ حفظٌ واحد.
+         ومن غادر قبله ضاع الختمُ وحدَه (المتنُ على الخادم): دفعةٌ مكرّرةٌ في الجلسة التالية. */
+      clearTimeout(srvSaveT); srvSaveT = setTimeout(saveSoon, 1500);
       srvBump(code);                           /* وسائرُ التبويبات تُنادى في الحال */
     } catch (e) { /* لا شبكة: تُعاد لاحقًا */ }
   }
@@ -33965,14 +34082,18 @@ void main() {
      عبر نموذج النوافذ — أعقدِ موضعٍ في المشروع — لأنّ النافذةَ تجد عقدتَها
      بالبحث في الرزمة ولا تعرف من أين جاءت. والحلُّ أبسط: **العقدةُ تحمل أصلَها
      في نفسِها**، فمن أمسك عقدةً عرف مساهمتَها بلا أن يسأل أحدًا. */
+  /* ويردّ عددَ ما وسم: لا تعليقَ إلّا على عقدةٍ موسومة (‎srvCmtSend‎ يشترط ‎srvP‎) */
   function srvMark(v, pid) {
-    if (Array.isArray(v)) { v.forEach(x => srvMark(x, pid)); return; }
-    if (!v || typeof v !== 'object') return;
+    if (Array.isArray(v)) { let n = 0; v.forEach(x => { n += srvMark(x, pid); }); return n; }
+    if (!v || typeof v !== 'object') return 0;
+    let n = 0;
     if (v.id && (v.t === 'c' || v.t === 'f' || v.f !== undefined || v.b !== undefined)) {
       v.srvN = 1;
       if (pid) v.srvP = pid;
+      n = 1;
     }
-    Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') srvMark(v[k], pid); });
+    Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') n += srvMark(v[k], pid); });
+    return n;
   }
 
   /* ============================================================
@@ -34579,10 +34700,15 @@ void main() {
     }
     const by = (j && j.byCode) || null;
     if (!by) { want.forEach(c => { delete srvPulled[c]; }); return; }
+    /* ===== والترمُ يُدمج كلُّه ثمّ يُرسم مرّة =====
+       كانت كلُّ مادّةٍ تُعيد الشبكاتِ الثلاث بعد دمجها — ستُّ موادَّ ستُّ إعاداتٍ في
+       مهمّةٍ واحدة، وإطارُ الترم يُعيد بِكرتَه فيُعاد بناءُ القُمرة. */
+    const batch = {};
     want.forEach(c => {
       if (!Array.isArray(by[c])) return;
-      srvMerge(c, by[c]);
+      srvMerge(c, by[c], batch);
     });
+    if (batch.grids) srvGridsRender();
   }
   window.acWarm = srvWarm;
 
@@ -34619,7 +34745,25 @@ void main() {
      رحلةٌ لمادّةٍ (‎srvPull‎) ورحلةٌ لترمٍ كامل (‎srvWarm‎) — وكلتاهما تنتهيان ههنا.
      ولو كُتب الدمجُ مرّتين لَافترقا يومَ يُبدَّل أحدُهما، وهو دمجٌ فيه أحكامُ
      ملكيّةٍ وبذورٍ وأغلفةٍ لا تُكرَّر بيدٍ سليمة. */
-  function srvMerge(code, incoming) {
+  /* ===== ومساهمتي العائدةُ من الخادم تحمل ختمَه =====
+     الدرجُ يُسقط ما بلغ الخادم (‎cinfoThin‎)، فيعود عند الجذب ‎me:true‎ **بلا ‎srvH‎**،
+     فيراه المسحُ «لم يُدفع» فيدفعه — كلَّ مساهماتي في كلّ جلسة (ثمانٍ وعشرون بعد جذب
+     الترم)، لا يتبدّل منها حرف. وهي جاءت من الخادم، فما على الخادم هو هي بعينها:
+     تُختم بالبصمات الثلاث على **الشكل نفسِه** الذي يبنيه ‎srvPush‎ — ‎srvH‎ (المتنُ
+     المرسَل) و‎srvD‎ (المتنُ وحده، يُسقطها من الدرج كسائر ما بلغ) و‎srvR‎ (يُرجع
+     المسحَ قبل سؤال الهويّة و‎medPrep‎). فإن عُدّلت بعدُ اختلفت البصماتُ فدُفعت. */
+  function srvStampIn(p, code, sec) {
+    try {
+      p.srvH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, ts: p.ts, uid: p.uid || '',
+                                        st: stOf(p), pin: p.pin ? 1 : 0, data: p.data }));
+      p.srvD = srvHash(JSON.stringify(p.data || {}));
+      const rawH = srvHash(JSON.stringify({ id: p.id, code: code, sec: sec, st: p.st || '', data: p.data }));
+      p.srvR = rawH + '|' + (p.ts || '') + '|' + (p.uid || '') + '|' + stOf(p) + '|' + (p.pin ? 1 : 0);
+    } catch (e) { delete p.srvH; delete p.srvD; delete p.srvR; }   /* شكٌّ ⇒ تُدفع كما كانت */
+  }
+
+  /* ‏‎batch‎ (من ‎srvWarm‎): تُسجَّل الحاجةُ إلى رسم الشبكات ولا تُرسم — فتُرسم مرّةً بعد آخر مادّة */
+  function srvMerge(code, incoming, batch) {
     const j = { posts: incoming };
 
     /* ===== ومادّةٌ لا أثرَ لها في الدرج تُفتح لها خانة =====
@@ -34768,14 +34912,16 @@ void main() {
            أو نسخةٌ ضاعت — فالخادمُ آخرُ ما بقي منها. فتُحقن وتُختم لي:
            ‎me:true‎ بلا ‎srv‎، فتُحرَّر كما كانت وتُدفع إن بُدّلت. */
         if (!Array.isArray(info.posts[r.sec])) info.posts[r.sec] = [];
-        info.posts[r.sec].push({
+        const back = {
           id: r.id, uid: r.uid, me: true, st: r.st || 'pub',
           u: { name: (r.u && r.u.name) || '', img: (r.u && r.u.img) || '' },
           likes: r.likes | 0, liked: !!r.liked,
           ts: srvMs(r.ts) || Date.now(),
           pin: r.pin ? 1 : 0,
           data: r.data,
-        });
+        };
+        srvStampIn(back, code, r.sec);
+        info.posts[r.sec].push(back);
         n++;
         return;
       }
@@ -34806,9 +34952,13 @@ void main() {
          الرزمة ولا تحمل معرّفَ مساهمتها. فلو لم تُوسَم العقدةُ نفسُها لَما عرف
          مرسِلُ التعليق أنّه يكتب في مساهمةِ غيره — فيكتب في نسخته، ويُمحى كلامُه
          في أوّل جذبٍ بلا أن يعلم. والوسمُ يجعلها تُعرف بنفسها. */
-      srvMark(r.data, r.id);
-      /* وتعليقاتُها تُجلب في أثرها: رحلةٌ لكلّ مساهمةٍ لا لكلّ بطاقة */
-      srvCmtPull(r.id, r.data, true);
+      const marked = srvMark(r.data, r.id);
+      /* وتعليقاتُها تُجلب في أثرها: رحلةٌ لكلّ مساهمةٍ لا لكلّ بطاقة.
+         ===== ومساهمةٌ لا عقدةَ فيها لا تعليقَ لها =====
+         التعليقُ لا يُكتب إلّا على عقدةٍ موسومة — بطاقةٍ أو مجلد. فالدكاترةُ والمادّةُ
+         والمصادرُ لا يُسأل عنها: كانت رحلةً لكلٍّ منها لا تردّ شيئًا أبدًا — ستٌّ
+         وخمسون عند الإقلاع، ومئةٌ وتسعٌ وأربعون عند فتح المكتبة، وليس فيها عقدةٌ واحدة. */
+      if (marked) srvCmtPull(r.id, r.data, true);
       n++;
     });
     const srvSame = JSON.stringify(info.posts) === srvSig0;
@@ -34832,10 +34982,15 @@ void main() {
        كان يُعاد لوحُ المادّة وحدَه، والغلافُ في السوقين وفي إطار الترم أيضًا.
        فمن ثبّت في اللوحة رأى الكتابَ في المكتبة على حاله حتّى يُعاد بناءُ الصفحة. */
     if ((n || cut) && !srvSame) {
-      if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
-      if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
-      if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
+      if (batch) { batch.grids = true; return; }
+      srvGridsRender();
     }
+  }
+  /* الشبكاتُ الثلاث: السوق، ونافذتُه (مغلقةً تُؤجَّل)، وإطارُ الترم */
+  function srvGridsRender() {
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModalSoon === 'function') mkModalSoon();
+    if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
   }
 
   /* ============================================================
@@ -34913,7 +35068,7 @@ void main() {
       (node.cm = node.cm || []).push(it.c);
       n++;
     });
-    if (n) save();
+    if (n) saveSoon();   /* في أوّل فراغ: الردودُ تصل متتابعةً، وكان كلٌّ منها حفظًا كاملًا متزامنًا */
     if (n && cardDlg && typeof cdCmtPaint === 'function') { try { cdCmtPaint(true); } catch (e) {} }
   }
 
@@ -35080,12 +35235,6 @@ void main() {
     if (e.target.closest('#nook-join'))  openAuthPage('join');
     if (e.target.closest('#nook-login')) openAuthPage('login');
   });
-  /* طي/فتح الشريط الجانبي عبر مقبض واحد ملتصق بحافته (كلاس على body) */
-  function applySidebar() {
-    document.body.classList.toggle('side-closed', !!state.sideCollapsed);
-    const sh = $('#side-handle'); if (sh) sh.title = state.sideCollapsed ? T().sideOpen : T().sideClose;
-  }
-  $('#side-handle').addEventListener('click', () => { state.sideCollapsed = !state.sideCollapsed; save(); applySidebar(); });
   $('#panel-account').addEventListener('input', e => {
     const inp = e.target.closest('.acct-in'); if (!inp) return;
     state.profile[inp.dataset.f] = inp.value; save(); renderProfile();
@@ -37134,8 +37283,10 @@ void main() {
     const c = (f, b) => nd({ t: 'c', f, b });          /* بطاقةُ معرفة */
     const q = (f, b) => nd({ t: 'q', f, b });          /* مسألة */
     const F = (name, ch, open = false) => nd({ t: 'f', name, open, ch });
+    /* ‏‎seeded‎ عند الزرع لا بعده: كانت تُزرع بلا وسم فيسمها ‎seedMark‎ ثمّ يحفظ الحالَ كلَّها
+       (~٤٠ms) في كلّ إقلاع — والدرجُ يُسقطها أصلًا (ليست لي)، فالحفظُ لا يحفظ شيئًا */
     const mk = (name, img, days, likes, dislikes, data) =>
-      ({ id: newId(), me: false, u: { name, img }, likes, liked: false, dislikes, disliked: false, ts: now - days * D, data });
+      ({ id: newId(), me: false, seeded: 1, u: { name, img }, likes, liked: false, dislikes, disliked: false, ts: now - days * D, data });
 
     postsOf(code, 'cards').push(
       mk('عمر القحطاني', av('ع', '#1565c0', '#42a5f5'), 1, 31, 1, {
@@ -40402,11 +40553,16 @@ void main() {
     xaDirty = true;
   }
   function xaFlush() { if (xaDirty) { xaDirty = false; save(); } }
+  /* ===== والصبُّ الدوريُّ في أوّل فراغ =====
+     كان المؤقّتُ يصبّ بـ‎save()‎ متزامنًا: حفظٌ كاملٌ (~٦٠ms) كلَّ دقيقةٍ والقارئُ يتحرّك،
+     لأجل ثوانٍ في العدّاد. فيُصبّ بـ‎saveSoon‎. والصبُّ عند المغادرة وتغيّر الرؤية يبقى
+     فوريًّا (‎xaFlush‎): ‎saveFlush‎ يسبقه في الترتيب فلا يُدرك ما يُجدوَل بعده. */
+  function xaFlushSoon() { if (xaDirty) { xaDirty = false; saveSoon(); } }
   /* وما أجبتَ من أسئلةٍ يُقيَّد في يومه — وهو مقياسُ «المربّعات» لا الزمن:
      الزمنُ يجري وأنت تقرأ، والجوابُ فعلٌ يقع منك. فالمربّعُ يُلوَّن بما فعلتَ */
   function xaAns() { xaDay(xaKey()).q++; xaDirty = true; }
   setInterval(xaBeat, XA_TICK);
-  setInterval(xaFlush, XA_FLUSH);
+  setInterval(xaFlushSoon, XA_FLUSH);
   document.addEventListener('visibilitychange', xaFlush);
   window.addEventListener('pagehide', xaFlush);
   window.addEventListener('beforeunload', xaFlush);
@@ -41265,7 +41421,7 @@ void main() {
        مؤلِّفٍ حقيقيّ ليست منه — ولولا هذا القيدُ لأعاد هذا السطرُ وسمَ البذرة
        على ما نزعه ‎ankiToOwner‎، فمُحيت بطائقُ صاحب الموقع مع المصنوع. */
     seedEachPost(p => { if (p && !p.me && !p.seeded && !p.uid) { p.seeded = 1; n++; } });
-    if (n) save();
+    if (n) saveSoon();   /* في أوّل فراغ: وسمُ بذرةٍ لا يستعجل الإقلاع */
   }
 
   /* المِمحاة: تُنادى مرّةً يوم يجيء الحقيقيّ. وتُترك على ‎window‎ لا في زرٍّ —
@@ -41352,7 +41508,6 @@ void main() {
   if (typeof imgsToStore === 'function') imgsToStore();   /* وأغلفتُك إلى المستودع */
   if (typeof srsPull === 'function') srsPull();           /* وجدولةُ مذاكرتك من الحساب */
   applyTheme();
-  applySidebar();
   /* الجلسةُ قبل اللغة: ‎applyLang‎ تُعيد رسمَ ما في الشريط، والصنفُ الذي يقرّر أيَّ
      وجهٍ يُرى في قاعه يجب أن يكون على الجسم قبلها */
   applyAuth();
