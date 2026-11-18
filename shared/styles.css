@@ -18743,3 +18743,144 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 #cm-body .pk-bank .x3-hd:hover > .vt-grab,
 #cm-body .pk-bank .x3-hd > .vt-grab:focus-visible,
 #cm-body .pk-bank .is-sel > .vt-grab { opacity: 1; }
+
+/* ============================================================
+   غلافُ المساهمة المطويّة (ROADMAP-POSTCARD — ‎pcBan‎)
+   ============================================================
+   لافتةٌ بزوايا آبل (‎corner-shape: squircle‎ حيث يُدعم، وإلّا زاويةٌ مستديرةٌ بالقدّ نفسه):
+   ضبابُ الغلاف أرضيّةً، وتدرّجٌ أسودُ من تحت، والصورةُ يمينًا، والعنوانُ ودائرةُ الاكتمال
+   جنبها، وثلاثُ بطاقاتٍ زجاجيّةٍ على خطٍّ واحد. والبطاقاتُ أزرارُ ‎[data-pkic]‎ القائمة —
+   فتُصفَّر عنها قواعدُ صفّ الأيقونات القديم بقيدٍ أثقل */
+#cm-body .pk--pc .pc-ban {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; gap: 22px;
+  min-height: 176px; margin: 8px 0 6px; padding: 16px 18px;
+  border-radius: 34px; corner-shape: squircle;
+  background: var(--pc-bg, #121a24); color: #fff;
+}
+#cm-body .pk--pc .pc-blur {
+  position: absolute; inset: -40px; z-index: -2;
+  background-position: center; background-size: cover;
+  filter: blur(40px) brightness(.5) saturate(1.3);
+}
+#cm-body .pk--pc .pc-fade {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, .88) 0, rgba(0, 0, 0, .55) 35%, rgba(0, 0, 0, 0) 75%);
+}
+#cm-body .pk--pc .pc-art {
+  flex: none; width: 204px; aspect-ratio: 3 / 2; overflow: hidden;
+  border-radius: 24px; corner-shape: squircle;
+  box-shadow: 0 16px 28px -12px rgba(0, 0, 0, .75);
+}
+#cm-body .pk--pc .pc-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* وغلافُ الكتاب طوليٌّ: يقف كتابًا بظلّه ولا يُقصّ */
+#cm-body .pk--pc .pc-art--book { overflow: visible; box-shadow: none; border-radius: 0; }
+#cm-body .pk--pc .pc-art--book img { object-fit: contain; filter: drop-shadow(0 12px 16px rgba(0, 0, 0, .6)); }
+#cm-body .pk--pc .pc-ttl { flex: 0 1 200px; min-width: 120px; }
+#cm-body .pk--pc .pc-name {
+  display: block; font-size: 22px; font-weight: 700; line-height: 1.4; color: #fff;
+  overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* دائرةُ الاكتمال بهيئة دائرة الرفّ (‎.cstat‎ الليليّة): حدٌّ ذهبيٌّ باهت وزجاجٌ خفيف، ويسكنها ماءُ التقدّم إن بدأ */
+#cm-body .pk--pc .pc-ring {
+  position: relative; display: block; width: 22px; height: 22px; margin-top: 12px; overflow: hidden;
+  border-radius: 50%; border: 1.8px solid rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08);
+}
+#cm-body .pk--pc .pc-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
+/* البطاقاتُ الثلاث: خطٌّ واحدٌ بمسافاتٍ متساوية */
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks {
+  position: static; inset: auto; flex: 1 1 auto; min-width: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch;
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  width: auto; height: 126px; margin: 0; padding: 0;
+  border-radius: 24px; corner-shape: squircle; color: #fff; font: inherit; text-align: center;
+  background: rgba(255, 255, 255, .11);
+  backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), 0 18px 30px -16px rgba(0, 0, 0, .7);
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1), opacity .25s, box-shadow .28s, background .2s;
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic + .pk-ic { margin: 0; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic + .pk-ic::before { content: none; display: none; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic svg { width: auto; height: auto; }
+/* تجذب للضغط (طلبُ صاحب الموقع — الخيار ١): التي تحت المؤشّر ترتفع ويقوى ظلُّها، وأختاها تخفتان */
+#cm-body .pk--pc .pc-ks:hover .pk-ic { opacity: .55; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:focus-visible {
+  opacity: 1; transform: translateY(-6px); background: rgba(255, 255, 255, .17);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3), 0 26px 36px -16px rgba(0, 0, 0, .85);
+}
+/* يمينُ البطاقة: الأيقونةُ والرقمُ والكلمة في وسط منطقتها تمامًا */
+#cm-body .pk--pc .pc-k__m { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 100%; }
+#cm-body .pk--pc .pc-k__ic { display: flex; margin-bottom: 4px; }
+#cm-body .pk--pc .pc-k__ic svg { width: 20px !important; height: 20px !important; }
+#cm-body .pk--pc .pc-k__m b { font-size: 30px; font-weight: 700; line-height: 1; }
+#cm-body .pk--pc .pc-k__m > span:last-child { margin-top: 4px; font-size: 12.5px; color: rgba(255, 255, 255, .72); }
+/* ويسارُها: الأرقامُ الصغيرةُ بأيقوناتها، تحت بعضها بعد خطٍّ فاصل */
+#cm-body .pk--pc .pc-k__s {
+  justify-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 5px;
+  padding-inline-start: 10px; border-inline-start: 1px solid rgba(255, 255, 255, .16);
+  color: rgba(255, 255, 255, .75);
+}
+#cm-body .pk--pc .pc-k--bank .pc-k__s { gap: 2px; }
+#cm-body .pk--pc .pc-st { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; }
+#cm-body .pk--pc .pc-st svg { width: 13px !important; height: 13px !important; flex: none; }
+#cm-body .pk--pc .pc-st b { font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+#cm-body .pk--pc .pc-st.is-0 { opacity: .42; }
+#cm-body .pk--pc .pc-st--warn, #cm-body .pk--pc .pc-st--warn b { color: #e5c47c; }
+/* زرُّ الغلاف لصاحب المساهمة: زاويةُ اللافتة العليا */
+#cm-body .pk--pc .pc-cvbtn {
+  position: absolute; top: 12px; inset-inline-start: 12px; z-index: 2;
+  display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; cursor: pointer;
+  border-radius: 10px; corner-shape: squircle; color: #fff;
+  background: rgba(0, 0, 0, .35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; transition: opacity .2s;
+}
+#cm-body .pk--pc .pc-ban:hover .pc-cvbtn, #cm-body .pk--pc .pc-cvbtn:focus-visible { opacity: 1; }
+#cm-body .pk--pc .pc-cvbtn svg { width: 17px; height: 17px; }
+/* الضيّق: البطاقاتُ تنزل تحت الصورة والعنوان */
+@media (max-width: 900px) {
+  #cm-body .pk--pc .pc-ban { flex-wrap: wrap; }
+  #cm-body .pk--pc .pc-art { width: 150px; }
+  #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks { flex-basis: 100%; }
+}
+/* ===== نافذةُ «غلاف المساهمة» (‎pcvOpen‎) ===== */
+#pcv { position: fixed; inset: 0; z-index: 5000; display: grid; place-items: center; padding: 16px; background: rgba(8, 12, 20, .55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+#pcv[hidden] { display: none; }
+#pcv .pcv-panel {
+  width: min(760px, 100%); max-height: calc(100vh - 32px); overflow: auto;
+  padding: 20px 22px 22px; border-radius: 30px; corner-shape: squircle;
+  background: #fff; color: #14233f; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5);
+}
+html[data-theme="dark"] #pcv .pcv-panel { background: #1a2230; color: #eef3f4; box-shadow: 0 0 0 1px rgba(255, 255, 255, .07), 0 30px 60px -20px rgba(0, 0, 0, .7); }
+#pcv .pcv-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; font-size: 16px; }
+#pcv .pcv-x { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; opacity: .7; }
+#pcv .pcv-x:hover { opacity: 1; background: rgba(127, 127, 127, .14); }
+#pcv .pcv-x svg { width: 16px; height: 16px; }
+#pcv .pcv-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+#pcv .pcv-tab { padding: 7px 14px; border: 0; border-radius: 999px; cursor: pointer; font: inherit; font-size: 13px; color: #5d6b82; background: rgba(20, 35, 63, .06); }
+#pcv .pcv-tab.on { background: #14233f; color: #fff; font-weight: 700; }
+html[data-theme="dark"] #pcv .pcv-tab { color: #93a7b0; background: rgba(255, 255, 255, .06); }
+html[data-theme="dark"] #pcv .pcv-tab.on { background: #eef3f4; color: #14233f; }
+#pcv .pcv-sw { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 12.5px; opacity: .85; }
+#pcv .pcv-col { width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(127, 127, 127, .3); }
+#pcv .pcv-col.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #a8842e; }
+html[data-theme="dark"] #pcv .pcv-col.on { box-shadow: 0 0 0 2px #1a2230, 0 0 0 4px #d4b36a; }
+#pcv .pcv-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+#pcv .pcv-tile { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; font: inherit; font-size: 12px; opacity: .92; }
+#pcv .pcv-tile img { display: block; width: 100%; aspect-ratio: 3 / 2; border-radius: 16px; corner-shape: squircle; transition: transform .2s; }
+#pcv .pcv-tile:hover img { transform: translateY(-3px); }
+#pcv .pcv-tile.on img { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #a8842e; }
+html[data-theme="dark"] #pcv .pcv-tile.on img { box-shadow: 0 0 0 2px #1a2230, 0 0 0 4px #d4b36a; }
+#pcv .pcv-bk, #pcv .pcv-up { display: flex; align-items: center; gap: 18px; }
+#pcv .pcv-bk img { height: 150px; border-radius: 4px; box-shadow: 0 10px 18px -8px rgba(0, 0, 0, .5); }
+#pcv .pcv-up img, #pcv .pcv-ph { width: 216px; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 22px; corner-shape: squircle; flex: none; }
+#pcv .pcv-ph { display: grid; place-items: center; background: rgba(127, 127, 127, .12); color: rgba(127, 127, 127, .8); }
+#pcv .pcv-ph svg { width: 34px; height: 34px; }
+#pcv p { margin: 0 0 12px; font-size: 13px; line-height: 1.7; opacity: .75; }
+#pcv .pcv-btn { display: inline-block; padding: 9px 16px; border: 0; border-radius: 999px; cursor: pointer; font: inherit; font-size: 13px; font-weight: 700; background: #14233f; color: #fff; }
+html[data-theme="dark"] #pcv .pcv-btn { background: #eef3f4; color: #14233f; }
+#pcv .pcv-btn.on { background: #a8842e; color: #fff; }
+#pcv .pcv-none { opacity: .7; }
+@media (max-width: 600px) { #pcv .pcv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } #pcv .pcv-bk, #pcv .pcv-up { flex-direction: column; align-items: flex-start; } }

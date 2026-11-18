@@ -10008,6 +10008,243 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pk-icrow" data-pkid="${esc(id)}">${row ? `<span class="pk-icgo">${esc(T().pkIcGo)}</span>` : ''}` + PK_IC_KEYS.map(k =>
       `<button type="button" class="pk-ic${on.includes(k) ? ' is-on' : ''}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">${pkIcSvg(k, id)}</button>`).join('') + `</div>`;
   };
+  /* ============================================================
+     غلافُ المساهمة المطويّة (ROADMAP-POSTCARD — اختيارُ صاحب الموقع)
+     ============================================================
+     الصفُّ المطويُّ في القائمة صار لافتةً: صورةُ الغلاف يمينًا بزوايا آبل، وعنوانُ
+     المساهمة جنبها وتحته دائرةُ الاكتمال (فارغةٌ حتى يبدأ القارئ)، ثمّ ثلاثُ بطاقاتٍ
+     زجاجيّةٍ على خطٍّ واحد — المصادرُ والملخّصُ والبنك — رقمُ كلٍّ منها الكبيرُ يمينًا
+     وأرقامُه الصغيرةُ بأيقوناتها يسارًا. والخلفيّةُ ضبابُ الغلاف نفسِه، وفوقه تدرّجٌ
+     أسودُ من تحت (إحساسُ «نتفلكس»).
+     والبطاقاتُ هي أزرارُ ‎[data-pkic]‎ نفسُها داخل ‎.pk-icrow‎ — فالضغطُ يُوسِّع المساهمةَ
+     على مساحتها بالآلة القائمة (‎pkIcExpand‎) لا بآلةٍ ثانية.
+     ===== والغلافُ ثلاثةُ مصادر =====
+     ‎data.cv‎: ‎{k:'img'}‎ صورةٌ رفعها صاحبُها (‎data.img‎) · ‎{k:'book'}‎ غلافُ كتاب المادة ·
+     ‎{k:'sc', n, c}‎ رسمةٌ جاهزةٌ بلونٍ من ألوان الموقع. وبلا اختيار: صورتُه إن رفعها،
+     وإلّا رسمةٌ تُشتقّ من معرّف المساهمة — لا غلافُ الكتاب، فهو واحدٌ لكلّ مساهمات المادّة
+     فتتشابه القائمةُ كلُّها (يبقى خيارًا يختاره صاحبُها) */
+  const PC_PAL = {   /* أرضيّة · جسم · لمسة · حبر · ظلمةُ اللافتة */
+    teal: ['#2c5e65', '#3d7880', '#d4b36a', '#e9f1f1', '#14303a'],
+    navy: ['#14233f', '#26395c', '#d4b36a', '#e9eef6', '#0b1528'],
+    gold: ['#a8842e', '#c29c48', '#fbfaf6', '#14233f', '#3f3112'],
+    paper: ['#efe9dc', '#ddd4c1', '#2c5e65', '#14233f', '#2e2c27'],
+    slate: ['#46626b', '#5c7a83', '#e8d3a0', '#eef3f4', '#1d2d33'],
+  };
+  const PC_SC = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const pcSceneNm = n => (state.lang === 'en'
+    ? ['Shelf', 'Book stack', 'Open book', 'Desk lamp', 'Answer sheet', 'Card box', 'Calculator', 'Bookmarks', 'Two shelves', 'Library window', 'Highlighter', 'Graduation']
+    : ['رف', 'كتب مكدّسة', 'كتاب مفتوح', 'مصباح المكتب', 'ورقة الاختبار', 'درج البطاقات', 'آلة حاسبة', 'فواصل', 'رفّان ونبتة', 'نافذة المكتبة', 'قلم التظليل', 'قبعة التخرّج'])[n - 1];
+  function pcScene(n, c) {
+    const [bg, md, ac, ink] = PC_PAL[c] || PC_PAL.teal;
+    const R = (x, y, w, h, f, rx = 3, ex = '') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}" ${ex}/>`;
+    let g = '';
+    if (n === 1) {
+      [30, 52, 70, 96, 112, 140, 160, 186, 204, 232, 252].forEach((x, i) => {
+        const y = 40 + (i * 13) % 30;
+        g += R(x, y, 16 + (i * 5) % 10, 160 - y, (i === 3 || i === 8) ? ac : md);
+      });
+      g += R(20, 160, 260, 6, ac);
+    } else if (n === 2) {
+      [150, 128, 160, 138, 118].forEach((w, i) => {
+        const y = 160 - (i + 1) * 20, x = 70 + (i * 7) % 18;
+        g += R(x, y, w, 17, i === 2 ? ac : md) + R(x + 8, y + 7, 30, 3, bg, 1.5);
+      });
+      g += R(232, 118, 34, 42, md, 6) + `<path d="M266 128h6a8 8 0 0 1 0 16h-6" fill="none" stroke="${md}" stroke-width="5"/>` + R(30, 160, 250, 6, ac);
+    } else if (n === 3) {
+      g += `<path d="M150 52 C120 40 80 40 50 48 V158 C80 150 120 150 150 162 Z" fill="${md}"/><path d="M150 52 C180 40 220 40 250 48 V158 C220 150 180 150 150 162 Z" fill="${md}"/>`;
+      for (let i = 0; i < 6; i++) g += R(64, 64 + i * 14, 72 - (i * 9) % 26, 4, bg, 2) + R(164, 64 + i * 14, 72 - (i * 13) % 26, 4, bg, 2);
+      g += R(162, 90, 60, 8, ac, 2, 'opacity=".9"') + `<path d="M196 40v60l7-7 7 7V40z" fill="${ac}"/>`;
+    } else if (n === 4) {
+      g += R(30, 162, 240, 6, ac) + `<path d="M90 162v-10h40v10" fill="${md}"/><path d="M110 152 L138 92 L182 70" fill="none" stroke="${md}" stroke-width="7" stroke-linecap="round"/>`
+        + `<path d="M168 56 L212 74 L196 96 Z" fill="${md}"/><path d="M200 92 L250 160 L150 160 Z" fill="${ac}" opacity=".18"/>`
+        + R(196, 130, 70, 14, md) + R(204, 116, 56, 14, ac) + R(198, 102, 62, 14, md);
+    } else if (n === 5) {
+      g += R(70, 26, 150, 160, md, 8);
+      for (let r = 0; r < 6; r++) {
+        g += R(84, 44 + r * 22, 16, 5, bg, 2);
+        for (let k = 0; k < 4; k++) g += `<circle cx="${120 + k * 22}" cy="${46 + r * 22}" r="6.5" fill="${(r * 3 + k) % 5 === 1 ? ac : 'none'}" stroke="${bg}" stroke-width="2"/>`;
+      }
+      g += `<g transform="rotate(-38 240 120)"><rect x="228" y="40" width="14" height="110" rx="2" fill="${ac}"/><path d="M228 150h14l-7 16z" fill="${ink}"/></g>`;
+    } else if (n === 6) {
+      for (let i = 0; i < 6; i++) g += R(76 + i * 22, 70 - (i % 3) * 8, 120, 80, i === 3 ? ac : md, 6, 'transform="skewX(-8)"');
+      g += R(56, 112, 190, 62, bg, 8) + R(56, 112, 190, 62, md, 8, 'opacity=".55"') + R(132, 132, 38, 8, bg, 4);
+    } else if (n === 7) {
+      g += R(170, 34, 96, 134, md, 12) + R(182, 46, 72, 26, bg, 5);
+      for (let r = 0; r < 3; r++) for (let k = 0; k < 3; k++) g += R(182 + k * 25, 82 + r * 26, 20, 20, (r === 2 && k === 2) ? ac : bg, 5);
+      for (let i = 0; i < 7; i++) g += R(34, 44 + i * 18, 110, 4, md, 2) + R(124, 42 + i * 18, 20, 8, i === 5 ? ac : md, 2);
+    } else if (n === 8) {
+      [[40, 90], [78, 130], [116, 70], [154, 150], [192, 100], [230, 120]].forEach(([x, h], i) => {
+        g += `<path d="M${x} 0h26v${h}l-13-12-13 12z" fill="${i === 3 ? ac : md}"/>`;
+      });
+    } else if (n === 9) {
+      [88, 168].forEach(sy => {
+        g += R(24, sy, 252, 5, ac);
+        let x = 36;
+        for (let j = 0; j < 8; j++) {
+          const w = 13 + (j * 7 + sy) % 9, h = 44 + (j * 11 + sy) % 22;
+          g += R(x, sy - h, w, h, (j + sy) % 7 === 3 ? ac : md, 2); x += w + 4;
+        }
+      });
+      g += `<path d="M232 84c-8-22 6-34 14-34 8 0 22 12 14 34z" fill="${md}"/>` + R(236, 68, 22, 16, ac, 3);
+    } else if (n === 10) {
+      g += `<path d="M95 170V90a55 55 0 0 1 110 0v80z" fill="${md}"/><path d="M150 36v134M95 110h110" stroke="${bg}" stroke-width="5"/><circle cx="222" cy="58" r="14" fill="${ac}"/>`;
+      [28, 216].forEach(sd => { for (let j = 0; j < 4; j++) { const h = 46 + (j * 9) % 20; g += R(sd + j * 15, 170 - h, 11, h, (sd === 216 && j === 2) ? ac : md, 2); } });
+      g += R(20, 170, 260, 6, ac);
+    } else if (n === 11) {
+      for (let i = 0; i < 7; i++) g += R(40, 40 + i * 18, 220 - (i * 31) % 70, 5, md, 2.5);
+      g += R(36, 74, 150, 14, ac, 3, 'opacity=".75"') + R(36, 128, 96, 14, ac, 3, 'opacity=".75"')
+        + `<g transform="rotate(32 210 120)"><rect x="196" y="70" width="26" height="80" rx="5" fill="${ac}"/><rect x="196" y="70" width="26" height="22" rx="5" fill="${ink}" opacity=".25"/><path d="M199 150h20l-4 14h-12z" fill="${ink}" opacity=".6"/></g>`;
+    } else {
+      g += R(80, 132, 140, 22, md, 4) + R(88, 140, 100, 4, bg, 2) + R(30, 154, 240, 6, ac)
+        + `<path d="M150 50 L236 82 L150 114 L64 82 Z" fill="${md}"/><path d="M110 98v22c20 12 60 12 80 0V98l-40 16z" fill="${md}" opacity=".8"/>`
+        + `<path d="M150 82 L214 106 V136" fill="none" stroke="${ac}" stroke-width="4" stroke-linecap="round"/><circle cx="214" cy="140" r="6" fill="${ac}"/>`;
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200"><rect width="300" height="200" fill="${bg}"/>${g}</svg>`;
+  }
+  const pcScMemo = new Map();
+  const pcSceneURL = (n, c) => {
+    const k = n + ':' + c;
+    if (!pcScMemo.has(k)) pcScMemo.set(k, 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(pcScene(n, c)));
+    return pcScMemo.get(k);
+  };
+  /* رسمةٌ ثابتةٌ لكلّ مساهمةٍ بلا غلاف: تُشتقّ من معرّفها فلا تتبدّل بين رسمةٍ وأخرى */
+  const pcHash = s => { let h = 0; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
+  const pcAutoSc = id => {
+    const h = pcHash(id), C = Object.keys(PC_PAL);
+    return { k: 'sc', n: PC_SC[h % PC_SC.length], c: C[(h >>> 4) % C.length] };
+  };
+  function pcCover(p) {
+    const d = (p && p.data) || {}, cv = d.cv || null, book = typeof imgOf === 'function' ? imgOf(cmCode) : '';
+    let w = cv && cv.k ? cv : (d.img ? { k: 'img' } : pcAutoSc(p.id));
+    if (w.k === 'img' && !d.img) w = book ? { k: 'book' } : pcAutoSc(p.id);
+    if (w.k === 'book' && !book) w = d.img ? { k: 'img' } : pcAutoSc(p.id);
+    if (w.k === 'sc') { const c = PC_PAL[w.c] ? w.c : 'teal', n = PC_SC.includes(+w.n) ? +w.n : 1; return { k: 'sc', n, c, url: pcSceneURL(n, c), bg: PC_PAL[c][4] }; }
+    return { k: w.k, url: w.k === 'img' ? d.img : book, bg: '#121a24' };
+  }
+  /* أيقوناتُ الأرقام الصغيرة: ما للموقع منها يُستعار (المجلد · الربط · الحفظ · النظر · الكلام · البلاغ)، والصفحةُ والتظليلُ يُرسمان هنا */
+  const PC_SV = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const PC_IC = {
+    page: PC_SV('<path d="M8 3.5h7l4 4v11a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 18.5v-13A1.5 1.5 0 0 1 8 3.5z"/><path d="M15 3.5v4h4"/>'),
+    hl: PC_SV('<path d="m8.5 14.5 7.8-7.8a2 2 0 0 0-2.8-2.8l-7.8 7.8-1 3.8z"/><path d="M4 20.5h10"/>'),
+    fold: PC_SV('<path d="M3.5 8.5V7a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2v1"/><path d="M6 11h15.5l-2.8 8H3.5l2.5-8z"/>'),
+    link: PC_SV('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+  };
+  const pcFolds = ns => (ns || []).reduce((s, n) => s + (n.t === 'f' ? 1 + pcFolds(n.ch) : 0), 0);
+  const pcEn = () => state.lang === 'en';
+  const pcSt = (ic, v, ttl, cls = '') => `<span class="pc-st${v ? '' : ' is-0'}${cls}" title="${esc(ttl)}">${ic}<b>${v}</b></span>`;
+  function pcCardsHTML(p) {
+    const id = p.id, d = p.data || {}, deck = d.deck || [], qb = d.qb || [];
+    const marks = (d.hl && d.hl.marks) || [];
+    const srcs = pkSrcList(id), pages = srcs.reduce((s, x) => s + (pkSrcPages(x) || 0), 0);
+    const linked = new Set(); marks.forEach(m => (m.c || []).forEach(x => linked.add(x)));
+    const nC = x3Leaves2(deck).length, nQ = x3Leaves2(qb).length, nw = cxNwSum(qb), en = pcEn();
+    const word = (k, n) => en ? ({ book: n === 1 ? 'source' : 'sources', mid: n === 1 ? 'concept' : 'concepts', bank: n === 1 ? 'question' : 'questions' })[k]
+      : ({ book: n === 1 ? 'مصدر' : 'مصادر', mid: 'مفهوم', bank: 'سؤال' })[k];
+    const L = en ? { pg: 'pages', hl: 'highlights', fo: 'folders', ln: 'linked to the book' } : { pg: 'صفحة', hl: 'تظليل', fo: 'مجلد', ln: 'مربوطة بالكتاب' };
+    const body = {
+      book: [srcs.length, (pages ? pcSt(PC_IC.page, pages, pages + ' ' + L.pg) : '') + pcSt(PC_IC.hl, marks.length, marks.length + ' ' + L.hl)],
+      mid: [nC, pcSt(PC_IC.fold, pcFolds(deck), pcFolds(deck) + ' ' + L.fo) + pcSt(PC_IC.link, linked.size, linked.size + ' ' + L.ln)],
+      bank: [nQ, pcSt(PC_IC.fold, pcFolds(qb), pcFolds(qb) + ' ' + L.fo)
+        + ['dl', 'seen', 'cm', 'warn'].map(x => pcSt(CD_IC[CX_NW_IC[x]], nw[x] || 0, CX_NW_TTL[x](nw[x] || 0), x === 'warn' ? ' pc-st--warn' : '')).join('')],
+    };
+    return `<div class="pk-icrow pc-ks" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
+      `<button type="button" class="pk-ic pc-k pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">`
+      + `<span class="pc-k__m"><span class="pc-k__ic">${pkIcSvg(k, id)}</span><b>${body[k][0]}</b><span>${esc(word(k, body[k][0]))}</span></span>`
+      + `<span class="pc-k__s">${body[k][1]}</span></button>`).join('') + `</div>`;
+  }
+  const PC_CV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 15.5-4.8-4.8L7 19"/></svg>';
+  function pcBan(p, deck) {
+    const cv = pcCover(p), t = (p.data && p.data.title) || '';
+    const a = x3Ans(deck);
+    return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
+      + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
+      + `<span class="pc-fade" aria-hidden="true"></span>`
+      + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
+      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b><span class="pc-ring" title="${esc(T().masteryDot || '')}">${a && a.k ? x3DotAns(a) : ''}</span></div>`
+      + pcCardsHTML(p)
+      + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
+      + `</div>`;
+  }
+  /* ===== نافذةُ «غلاف المساهمة» — لصاحبها وحده (زرُّ الصورة في زاوية اللافتة) =====
+     ثلاثةُ أبواب: صورةٌ من جهازه (تُصغَّر إلى ‎640px‎ ثمّ ‎JPEG‎ كصور المواد) · رسمةٌ جاهزةٌ
+     من الاثنتي عشرة بلونٍ من الخمسة · غلافُ كتاب المادّة. والاختيارُ يُكتب في ‎data.cv‎
+     ويُرى في اللافتة فورًا */
+  let pcvSt = null;   /* { id, tab, c } */
+  const pcvPost = id => (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id && isMine(x)) || null;
+  function pcvPaint() {
+    const box = document.getElementById('pcv'); if (!box || !pcvSt) return;
+    const p = pcvPost(pcvSt.id); if (!p) { pcvClose(); return; }
+    const en = pcEn(), cur = pcCover(p), book = imgOf(cmCode), tab = pcvSt.tab;
+    const L = en ? { t: 'Contribution cover', up: 'From your device', sc: 'Ready-made', bk: 'Book cover', col: 'Colour', pick: 'Choose a photo', bkUse: 'Use the book cover', bkNo: 'This course has no book cover yet.', bkTip: 'The course book cover — the same for every contribution on this book.', upTip: 'A wide photo looks best. It is resized before it is saved.', cls: 'Close' }
+      : { t: 'غلاف المساهمة', up: 'صورة من جهازك', sc: 'أشكال جاهزة', bk: 'غلاف الكتاب', col: 'اللون', pick: 'اختر صورة', bkUse: 'استخدم غلاف الكتاب', bkNo: 'ما لهذه المادة غلاف كتاب بعد.', bkTip: 'غلاف كتاب المادة نفسه — يتكرّر في كل مساهمة على هذا الكتاب.', upTip: 'الصورة العريضة تطلع أحسن، وتُصغَّر قبل الحفظ.', cls: 'إغلاق' };
+    const tabs = [['up', L.up], ['sc', L.sc], ['bk', L.bk]].map(([k, n]) =>
+      `<button type="button" class="pcv-tab${tab === k ? ' on' : ''}" data-pcvtab="${k}">${esc(n)}</button>`).join('');
+    let body = '';
+    if (tab === 'sc') {
+      const c = pcvSt.c;
+      body = `<div class="pcv-sw"><span>${esc(L.col)}</span>` + Object.keys(PC_PAL).map(k =>
+        `<button type="button" class="pcv-col${k === c ? ' on' : ''}" data-pcvcol="${k}" style="background:${PC_PAL[k][0]}" aria-label="${k}"></button>`).join('') + `</div>`
+        + `<div class="pcv-grid">` + PC_SC.map(n => {
+          const on = cur.k === 'sc' && cur.n === n && cur.c === c;
+          return `<button type="button" class="pcv-tile${on ? ' on' : ''}" data-pcvsc="${n}"><img src="${pcSceneURL(n, c)}" alt=""><span>${esc(pcSceneNm(n))}</span></button>`;
+        }).join('') + `</div>`;
+    } else if (tab === 'bk') {
+      body = book ? `<div class="pcv-bk"><img src="${book}" alt=""><div><p>${esc(L.bkTip)}</p><button type="button" class="pcv-btn${cur.k === 'book' ? ' on' : ''}" data-pcvbk="1">${esc(L.bkUse)}</button></div></div>`
+        : `<p class="pcv-none">${esc(L.bkNo)}</p>`;
+    } else {
+      const img = (p.data && p.data.img) || '';
+      body = `<div class="pcv-up">${img ? `<img src="${img}" alt="">` : `<span class="pcv-ph">${PC_CV_IC}</span>`}<div><p>${esc(L.upTip)}</p>`
+        + `<label class="pcv-btn">${esc(L.pick)}<input type="file" accept="image/*" hidden data-pcvfile="1"></label></div></div>`;
+    }
+    box.innerHTML = `<div class="pcv-panel" role="dialog" aria-modal="true" aria-label="${esc(L.t)}"><div class="pcv-hd"><b>${esc(L.t)}</b>`
+      + `<button type="button" class="pcv-x" data-pcvx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div><div class="pcv-tabs">${tabs}</div>${body}</div>`;
+  }
+  function pcvOpen(id) {
+    const p = pcvPost(id); if (!p) return;
+    const cur = pcCover(p);
+    pcvSt = { id, tab: cur.k === 'img' ? 'up' : cur.k === 'book' ? 'bk' : 'sc', c: cur.k === 'sc' ? cur.c : 'teal' };
+    let box = document.getElementById('pcv');
+    if (!box) { box = document.createElement('div'); box.id = 'pcv'; document.body.appendChild(box); }
+    box.hidden = false; pcvPaint();
+  }
+  function pcvClose() { const box = document.getElementById('pcv'); if (box) { box.hidden = true; box.innerHTML = ''; } pcvSt = null; }
+  function pcvSet(cv, img) {
+    const p = pcvSt && pcvPost(pcvSt.id); if (!p) return;
+    p.data = p.data || {};
+    if (img) p.data.img = img;
+    p.data.cv = cv;
+    save(); renderCmSection(); pcvPaint();
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-pccv]');
+    if (b) { e.preventDefault(); e.stopPropagation(); pcvOpen(b.dataset.pccv); return; }
+    const box = e.target.closest && e.target.closest('#pcv');
+    if (!box || !pcvSt) return;
+    if (e.target === box || e.target.closest('[data-pcvx]')) { pcvClose(); return; }
+    const t = e.target.closest('[data-pcvtab]'); if (t) { pcvSt.tab = t.dataset.pcvtab; pcvPaint(); return; }
+    const c = e.target.closest('[data-pcvcol]'); if (c) { pcvSt.c = c.dataset.pcvcol; pcvPaint(); return; }
+    const s = e.target.closest('[data-pcvsc]'); if (s) { pcvSet({ k: 'sc', n: +s.dataset.pcvsc, c: pcvSt.c }); return; }
+    if (e.target.closest('[data-pcvbk]')) pcvSet({ k: 'book' });
+  }, true);
+  /* ‎Escape‎ يغلق النافذةَ وحدَها — يُلتقط أوّلًا ولا يسري، وإلّا أغلق صفحةَ المادّة تحتها */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && pcvSt) { e.preventDefault(); e.stopPropagation(); pcvClose(); } }, true);
+  document.addEventListener('change', e => {
+    const f = e.target.closest && e.target.closest('[data-pcvfile]');
+    if (!f || !f.files || !f.files[0]) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const MAX = 640, k = Math.min(1, MAX / Math.max(im.width, im.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
+        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+        pcvSet({ k: 'img' }, cv.toDataURL('image/jpeg', .85));
+      };
+      im.src = rd.result;
+    };
+    rd.readAsDataURL(f.files[0]);
+  });
   const pkIcSet = (id, k) => {
     pkSplit[id] = k === 'book'; pkBank[id] = k === 'bank';
     if (k === 'mid') delete pkMidOff[id]; else pkMidOff[id] = true;
@@ -13064,7 +13301,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' + (PK_ICX && kind === 'c' && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '') : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const pcRow = PK_ICX && kind === 'c' && pkLab() && !maxd && !framed && !open;   /* الصفُّ المطويُّ يلبس لافتةَ الغلاف (ROADMAP-POSTCARD) */
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' + (PK_ICX && kind === 'c' && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '') : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow pk--pc' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -13073,9 +13311,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
-          ${x3PkHead(p, deck, open, kind)}
+          ${pcRow ? pcBan(p, deck) : x3PkHead(p, deck, open, kind)}
           ${framed && !PK_ICX ? reactRowHTML(p, likeAttr, '') : ''}
-          ${PK_ICX && kind === 'c' && pkLab() && (framed || maxd || !open) ? pkIcRow(p.id, maxd ? !pkIcOne(p.id) : !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
+          ${!pcRow && PK_ICX && kind === 'c' && pkLab() && (framed || maxd || !open) ? pkIcRow(p.id, maxd ? !pkIcOne(p.id) : !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}
           <!-- ===== ووسمُ الهندسة ثالثٌ: ‎cx-vo‎ =====
                قواعدُ الرحلة (القضيبُ والدوائرُ ومواضعُها ومقاساتُها) معلّقةٌ بـ
