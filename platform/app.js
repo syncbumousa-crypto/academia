@@ -2934,6 +2934,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   const mkTab   = marketView('m', 'market', list => marketReel.setList(list));   // السوق الرئيسي: شريط → مساهمات حيّة
   const mkModal = marketView('mm', 'pick', list => bookReel.setList(list));       // نافذة المكتبة: شريط → معالج التجهيز
+  /* ===== ونافذةٌ مغلقةٌ لا تُرسم =====
+     كانت شبكتُها تُعاد مع كلّ فتحِ ترمٍ ومع كلّ مادّةٍ تُدمج — ستّ مرّاتٍ في فتح المكتبة،
+     ~٨٠ms لِما لا يُرى. فتُعلَّم «قديمةً» وتُرسم حين تُفتح: فاتحاها (‎.tp-add‎ و‎#drop-add‎)
+     يرسمانها أصلًا، و‎openWizard‎ يرسمها إن كانت قديمة. والعنصرُ يُسأل باسمه لا بـ‎modal‎:
+     ذاك يُعرَّف بعدُ، و‎openTerm‎ قد تُنادى قبله. */
+  let mkModalStale = false;
+  const mkModalSoon = () => {
+    const m = document.getElementById('market-modal');
+    if (m && m.hidden) { mkModalStale = true; return; }
+    mkModalStale = false; mkModal.render();
+  };
 
   /* العودة لتاب السوق: استرجع مساهمات المادة المتمركزة أسفله (قد تكون الواجهة انتقلت للمكتبة) */
   document.querySelector('.tabs').addEventListener('click', e => {
@@ -3879,7 +3890,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     $('#term-frame').hidden = false;
     renderTerms();
     renderFrame();
-    mkModal.render();   /* تحديث علامات «مضافة» لو فُتحت النافذة على ترم آخر */
+    mkModalSoon();   /* تحديث علامات «مضافة» لو فُتحت النافذة على ترم آخر — ومغلقةً تُرسم حين تُفتح */
     if (!firstTermOpen) flipTermWidths(prev);
     firstTermOpen = false;
   }
@@ -4238,6 +4249,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       solo: !!opts.solo,
     };
     modal.hidden = false;
+    if (mkModalStale) { mkModalStale = false; mkModal.render(); }   /* وشبكتُها تحتها: تُرسم إن فاتها رسمٌ وهي مغلقة */
     document.querySelector('#market-modal .mmodal__card').classList.add('wizmode');
     $('#wiz').hidden = false;
     renderWiz();
@@ -30721,7 +30733,7 @@ void main() {
        بين رسمتين — والذاكرةُ لطول الرسمة لا أكثر */
     impMemo.clear();
     const u = impSync(r.list);
-    if (r.changed || u) save();
+    if (r.changed || u) saveSoon();   /* في أوّل فراغ: يقع وسطَ بناء القُمرة، وكان حفظًا كاملًا متزامنًا (~٥٥ms) */
     return r.list;
   }
   /* ===== وعاد القضيبُ إذ صارت للشجرة محطّات =====
@@ -31359,7 +31371,7 @@ void main() {
     document.querySelector('#course-modal .mmodal__card').appendChild($('#cm-ui'));
     nookEntry = entry;
     state.lastNook = { term: selTerm, code: entry.code };   /* تُستأنف عند العودة للركن ولو بعد تحديث الصفحة */
-    save();
+    saveSoon();   /* في أوّل فراغ: كان حفظًا كاملًا متزامنًا (~٥٥ms) في كلّ فتحٍ للقُمرة لأجل موضعٍ يُستأنف */
     coursePosts(nookCode(entry));   /* ترحيل بيانات النشاط المعروض قبل قراءة مساهماته */
     /* ===== ورحلتُك تُبذر عند أوّل فتحٍ لهذه المادّة وحدَه =====
        الشرطُ ‎road‎ **معدومةٌ** لا خاوية: فمن أفرغ رحلتَه بيده لا تُملأ عليه في كلّ
@@ -34246,10 +34258,15 @@ void main() {
     }
     const by = (j && j.byCode) || null;
     if (!by) { want.forEach(c => { delete srvPulled[c]; }); return; }
+    /* ===== والترمُ يُدمج كلُّه ثمّ يُرسم مرّة =====
+       كانت كلُّ مادّةٍ تُعيد الشبكاتِ الثلاث بعد دمجها — ستُّ موادَّ ستُّ إعاداتٍ في
+       مهمّةٍ واحدة، وإطارُ الترم يُعيد بِكرتَه فيُعاد بناءُ القُمرة. */
+    const batch = {};
     want.forEach(c => {
       if (!Array.isArray(by[c])) return;
-      srvMerge(c, by[c]);
+      srvMerge(c, by[c], batch);
     });
+    if (batch.grids) srvGridsRender();
   }
   window.acWarm = srvWarm;
 
@@ -34303,7 +34320,8 @@ void main() {
     } catch (e) { delete p.srvH; delete p.srvD; delete p.srvR; }   /* شكٌّ ⇒ تُدفع كما كانت */
   }
 
-  function srvMerge(code, incoming) {
+  /* ‏‎batch‎ (من ‎srvWarm‎): تُسجَّل الحاجةُ إلى رسم الشبكات ولا تُرسم — فتُرسم مرّةً بعد آخر مادّة */
+  function srvMerge(code, incoming, batch) {
     const j = { posts: incoming };
 
     /* ===== ومادّةٌ لا أثرَ لها في الدرج تُفتح لها خانة =====
@@ -34518,10 +34536,15 @@ void main() {
        كان يُعاد لوحُ المادّة وحدَه، والغلافُ في السوقين وفي إطار الترم أيضًا.
        فمن ثبّت في اللوحة رأى الكتابَ في المكتبة على حاله حتّى يُعاد بناءُ الصفحة. */
     if ((n || cut) && !srvSame) {
-      if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
-      if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
-      if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
+      if (batch) { batch.grids = true; return; }
+      srvGridsRender();
     }
+  }
+  /* الشبكاتُ الثلاث: السوق، ونافذتُه (مغلقةً تُؤجَّل)، وإطارُ الترم */
+  function srvGridsRender() {
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModalSoon === 'function') mkModalSoon();
+    if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
   }
 
   /* ============================================================
