@@ -40,11 +40,11 @@
 
 /* م١ · الصفوفُ تمرّ تحت الشريط */
 #panel-explore .ex-strip {
-  margin-inline-start:  calc((var(--side-w) + var(--pnl-pad) + var(--hdl-room)) * -1);
-  padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
+  margin-inline-start:  calc((var(--side-rail) + var(--pnl-pad) + var(--hdl-room)) * -1);
+  padding-inline-start: calc(var(--side-rail) + var(--pnl-pad) + var(--hdl-room));
   /* والالتقاطُ يحترم الحَشْو: بدونه يَجذب البطاقةَ الأولى إلى حافّة
      الصندوق فتسكن تحت الزجاج — قِيس: ‎scrollLeft‎ ‎-147‎ عند الإقلاع. */
-  scroll-padding-inline-start: calc(var(--side-w) + var(--pnl-pad) + var(--hdl-room));
+  scroll-padding-inline-start: calc(var(--side-rail) + var(--pnl-pad) + var(--hdl-room));
 }
 
 /* ============================================================
@@ -122,8 +122,14 @@
    وتردّ المساحةَ للمحتوى. والحيلةُ أنّ كلّ شيءٍ ههنا محسوبٌ من ‎--side-w‎:
    حَشْوُ الجسد، وموضعُ الدائرة، وامتدادُ الصفوف تحت اللوح. فتبديلُ
    **متغيّرٍ واحد** يُزيح المنظومة كلَّها، ولا يُطارَد رقمٌ في عشرة مواضع. */
-:root { --side-w: 200px; }
-body.side-rail { --side-w: 64px; }
+/* ===== والمحتوى يحجز السكّةَ وحدَها، والواسعُ يطفو فوقه (طلبُ صاحب الموقع · «ب») =====
+   قِيس: حين كان حشوُ الجسد يتبع ‎--side-w‎ أُعيد ترتيبُ الصفحة كلِّها في كلّ إطارٍ من الحركة —
+   ومع مادّةٍ مفتوحة (٢٧٦٧ عنصرًا) كان نصفُ الإطارات ٣٣–٥٠ مللي. فصار المحتوى على ‎--side-rail‎
+   الثابت لا يتحرّك أبدًا، والعرضُ (‎--side-w‎) متغيّرٌ لا يُورَّث: يعرفه اللوحُ والمقبضُ وشريطُ
+   التحديد وحدَهم، فلا يُعاد حسابُ أنماط الصفحة كلِّها في كلّ إطار. */
+:root { --side-rail: 64px; }
+.sidebar, .side-handle, .cx-selbar { --side-w: 200px; }
+body.side-rail :is(.sidebar, .side-handle, .cx-selbar) { --side-w: var(--side-rail); }
 
 
 /* ============================================================
@@ -134,13 +140,14 @@ body.side-rail { --side-w: 64px; }
    وكلُّ ما يُحسب منه (اللوح والحَشو والدائرة) يتبعه في الإطار نفسِه بالمنحنى نفسِه.
    والأسماءُ تتلاشى وتنطوي بدل أن تختفي، والأيقونةُ تنزاح إلى الوسط بالحَشو لا بقفزةٍ.
    والحركةُ عند الضغط وحدَه (‎body.side-anim‎ من ‎setRail‎)، لا عند فتح الصفحة. */
-@property --side-w { syntax: '<length>'; inherits: true; initial-value: 200px; }
+@property --side-w { syntax: '<length>'; inherits: false; initial-value: 200px; }
 .side-logo, .sidebar .tabs .tab-tx, .nook-com span,
 .side-logout-tx, .side-auth-tx, .side-profile .sp-name { max-width: 170px; overflow: hidden; white-space: nowrap; }
 body.side-rail :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
                    .side-logout-tx, .side-auth-tx, .side-profile .sp-name) { max-width: 0; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  body.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
+  body.side-anim .cx-selbar { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
+  body.side-anim .side-handle { transition: --side-w .32s cubic-bezier(.32,.72,0,1), background .15s, color .15s, transform .15s; }
   body.side-anim :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
                      .side-logout-tx, .side-auth-tx, .side-profile .sp-name) {
     transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease; }
@@ -150,20 +157,19 @@ body.side-rail :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
     transition: width .32s cubic-bezier(.32,.72,0,1), height .32s cubic-bezier(.32,.72,0,1), min-height .32s cubic-bezier(.32,.72,0,1),
                 padding .32s cubic-bezier(.32,.72,0,1), border-radius .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
   body.side-anim .sidebar .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
-  body.side-anim .sidebar { transition: padding .32s cubic-bezier(.32,.72,0,1); }
+  body.side-anim .sidebar { transition: --side-w .32s cubic-bezier(.32,.72,0,1), padding .32s cubic-bezier(.32,.72,0,1); }
   body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
 }
-/* ===== ولا تمويهَ في أثناء الحركة =====
-   قِيس: التمويهُ (‎backdrop-filter‎) هو الثقل كلُّه — اللوحُ يتبدّل عرضُه في كلّ إطار فيُعاد
-   تمويهُ ما تحته كاملًا، ومعه الانكسارُ (‎#lg-edge‎) والبحثُ والقرص. كان خُمسُ الإطارات
-   يتجاوز ٢٠ مللي، وبإطفائه في ثلث الثانية هذا صار إطارًا واحدًا من ٨٤. فيُطفأ والصبغةُ
-   أكثفُ قليلًا فلا يتبدّل المظهر، ويعود حين يُرفع ‎side-anim‎. والتمريرُ لا يمسّه شيء (قِيس كذلك). */
-body.side-anim :is(.sidebar, .side-handle, .market-tools .search),
-body.side-anim .market-tools .filterwrap::before {   /* العنصرُ الزائف لا يدخل ‎:is()‎ — فله سطرُه */
-  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
-}
-/* والصبغةُ لا تُبدَّل معه: كانت تُكثَّف إلى ٩٠٪ ثمّ تعود دفعةً عند رفع ‎side-anim‎ — قِيس
-   سطوعُ اللوح فقفز من ٢٣٣٫٦ إلى ٢٣٩٫٤ في لحظة، وهو «التوهّج» الذي رآه صاحبُ الموقع. */
+/* ===== والتمويهُ لا يُحمَل على لوحٍ يتبدّل عرضُه — ولا يُرى إطفاؤه =====
+   قِيس مكرّرًا مع مادّةٍ مفتوحة: التمويهُ في أثناء الحركة ٢–٧ إطاراتٍ بطيئةٍ من ٢٩، وبإطفائه ٠–١.
+   وإطفاؤه فجأةً يُري ما تحته حادًّا لحظةً ثمّ يعود — وميض. فثلاثُ مراحل (‎setRail‎ في الصفحة):
+     ١· ‎side-dense‎: تكثُف الصبغةُ إلى ٩٢٪ في ستّين مللي، والتمويهُ قائم.
+     ٢· ‎side-anim‎: يُطفأ التمويهُ تحت الصبغة الكثيفة (لا يُرى) ويتحرّك اللوح.
+     ٣· يُرفع ‎side-anim‎ فيعود التمويهُ تحتها، ثمّ ‎side-dense‎ فتخفّ الصبغةُ بنعومة.
+   والبحثُ والقرصُ لا يتحرّكان الآن (المحتوى ثابت)، فتمويهُهما باقٍ. */
+.sidebar, .side-handle { transition: background-color .22s ease; }
+body.side-dense :is(.sidebar, .side-handle) { background-color: color-mix(in srgb, var(--glass) 92%, transparent); }
+body.side-anim :is(.sidebar, .side-handle) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 
 body.side-rail .sidebar { padding: 14px 8px; }
 body.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
@@ -319,8 +325,8 @@ html[data-lang="en"] .sidebar { right: auto; left: var(--glass-gap); }
    (يرتفع ستًّا في ‎reel-bob‎). والهامشُ تحت شريط الأدوات هو ما يحمله */
 #panel-market .market-tools { margin-bottom: calc(clamp(16px, 2vw, 24px) - 10.8px); }
 /* والمحتوى يُفسح للوح وفجوته */
-body { padding-right: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
-html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-w) + var(--glass-gap) * 2 + var(--hdl-room)); }
+body { padding-right: calc(var(--side-rail) + var(--glass-gap) * 2 + var(--hdl-room)); }
+html[data-lang="en"] body { padding-right: 0; padding-left: calc(var(--side-rail) + var(--glass-gap) * 2 + var(--hdl-room)); }
 
 /* الصفوفُ الداخليّة لا تَبلغ الحرفَ المدوَّر: تُسحب من حافّتَي اللوح */
 .sidebar .tabs { margin-inline: -4px; }
