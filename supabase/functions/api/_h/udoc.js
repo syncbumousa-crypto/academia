@@ -33,6 +33,18 @@ const J = (o, status = 200) => new Response(JSON.stringify(o), {
 const MAX_DATA = 1024 * 1024;
 const KINDS = new Set(['nook', 'exams', 'srs', 'prefs']);
 
+/* ===== وكلُّ اختبارٍ وثيقةٌ وحده (ROADMAP-CLOUD-NEXT ٧) =====
+   كان السجلُّ كلُّه وثيقةً واحدة (‎exams‎) فبلغ ٨٢٪ من الحدّ بثلاثين اختبارًا،
+   والموقعُ يقصّه عند الثلاثين فيمحو الأقدمَ صامتًا. فصار لكلّ اختبارٍ صفُّه
+   (‎xt:<معرّفه>‎) — لا حدَّ للسجلّ، والحدُّ للاختبار الواحد (~٧٥ك أثقلُها).
+     GET    /api/udoc?list=xt        ⇐ اختباراتي كلُّها خفيفةً: بلا ‎run‎ (طابورُ ما لم يكتمل)، ومعها ‎big‎
+     GET    /api/udoc?kind=xt:<id>   ⇐ الاختبارُ كاملًا (حين يُكمَل أو تُفتح إحصاءاتُه)
+     PUT    /api/udoc {kind:'xt:<id>', data}
+     DELETE /api/udoc?kind=xt:<id>   ⇐ حذفُه من اللوح
+   وتبقى ‎exams‎ القديمةُ كما هي: نسخةٌ احتياطيّةٌ لما قبل النقل، لا تُمحى. */
+const XT = /^xt:[a-z0-9]{4,40}$/;
+const okKind = k => KINDS.has(k) || XT.test(k);
+
 const enc = new TextEncoder();
 const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
 const now = () => Math.floor(Date.now() / 1000);
@@ -86,9 +98,31 @@ export async function onRequest({ request, env }) {
     const s = await session(db, request);
     if (!s) return J({ error: 'auth' }, 401);
 
+    if (m === 'GET' && url.searchParams.get('list') === 'xt') {
+      const rs = await db.prepare(
+        "SELECT kind, data, rev, updated FROM udoc WHERE uid = ? AND kind LIKE 'xt:%'").bind(s.uid).all();
+      const list = [];
+      for (const r of (rs && rs.results) || []) {
+        let d = null;
+        try { d = JSON.parse(r.data); } catch (e) { continue; }   /* صفٌّ تالف: يُتخطّى */
+        if (!d || typeof d !== 'object') continue;
+        const big = !!d.run;
+        if (big) d = Object.assign({}, d, { run: null });
+        list.push({ id: String(r.kind).slice(3), rev: r.rev | 0, updated: r.updated | 0, big, data: d });
+      }
+      return J({ list });
+    }
+
+    if (m === 'DELETE') {
+      const kind = (url.searchParams.get('kind') || '').trim();
+      if (!XT.test(kind)) return J({ error: 'kind' }, 400);
+      await db.prepare('DELETE FROM udoc WHERE uid = ? AND kind = ?').bind(s.uid, kind).run();
+      return J({ ok: true, kind });
+    }
+
     if (m === 'GET') {
       const kind = (url.searchParams.get('kind') || '').trim();
-      if (!KINDS.has(kind)) return J({ error: 'kind' }, 400);
+      if (!okKind(kind)) return J({ error: 'kind' }, 400);
       const r = await db.prepare('SELECT data, rev, updated FROM udoc WHERE uid = ? AND kind = ?')
         .bind(s.uid, kind).first();
       if (!r) return J({ kind, data: null, rev: 0, updated: 0 });
@@ -101,7 +135,7 @@ export async function onRequest({ request, env }) {
       let b = {};
       try { b = await request.json(); } catch (e) { return J({ error: 'body' }, 400); }
       const kind = String(b.kind || '').trim();
-      if (!KINDS.has(kind)) return J({ error: 'kind' }, 400);
+      if (!okKind(kind)) return J({ error: 'kind' }, 400);
       const d = b.data;
       if (d === undefined || d === null || typeof d !== 'object') return J({ error: 'data' }, 400);
       const txt = JSON.stringify(d);
