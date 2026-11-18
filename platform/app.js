@@ -10205,7 +10205,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cn: PC_SV('<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/>'),
     q: PC_SV('<circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.6a2.3 2.3 0 0 1 4.4.9c0 1.5-2.2 2-2.2 3.3"/><path d="M12 16.6h.01"/>'),
   };
-  function pcCardsHTML(p) {
+  function pcCardsHTML(p, noKeys) {
     const id = p.id, d = p.data || {}, deck = d.deck || [], qb = d.qb || [];
     const marks = (d.hl && d.hl.marks) || [];
     const srcs = pkSrcList(id), pages = srcs.reduce((s, x) => s + (pkSrcPages(x) || 0), 0);
@@ -10224,6 +10224,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== ثلاثةُ إطارات (طلبُ صاحب الموقع) =====
        في أعلى كلّ إطارٍ اسمُ مساحته وحدَه على خطّه، وفي أسفله ينقطع الخطُّ لأيقونتها —
        والأيقونةُ هي الزرّ (‎[data-pkic]‎ في ‎.pk-icrow‎): تُوسِّع المساهمةَ على مساحتها كما كانت */
+    /* وفي المساهمة المفتوحة لا أزرار: الأزرارُ نزلت مساحاتٍ تحت، فيتّصل خطُّ الإطار من تحت (طلبُ صاحب الموقع) */
+    if (noKeys) return `<div class="pc-fr pc-fr--nokeys">` + PK_IC_KEYS.map(k =>
+      `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg">${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span></div>`).join('') + `</div>`;
     return `<div class="pk-icrow pc-ks pc-fr" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
       `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg">${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span>`
       + `<button type="button" class="pk-ic pc-k pc-fs__go pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(nm(k))}" aria-label="${esc(nm(k))}"><span class="pc-k__ic">${pkIcSvg(k, id)}</span></button></div>`).join('') + `</div>`;
@@ -10316,14 +10319,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (open && !(e.target.closest && e.target.closest('.pc-menu'))) open.remove();
   }, true);
-  function pcBan(p, deck) {
+  function pcBan(p, deck, noKeys) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
     return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
       + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b>${pcSaleHTML(p)}${pcProgHTML(p)}</div>`
-      + pcCardsHTML(p)
+      + pcCardsHTML(p, noKeys)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
   }
@@ -13500,8 +13503,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* وههنا يُرفع عَلَمُ القراءة: ما بعده نصُّ القارئ لا نصُّ صاحب الرزمة */
     cxRoPub = true;
     const roAct = big && kind === 'c' && pkLab() && (pkSplitOn(p.id) || pkBankOn(p.id)) && pkActOf(p.id) ? ' pk-act--' + pkActOf(p.id) : '';
-    const pcRow = PK_ICX && kind === 'c' && pkLab() && !maxd && !framed && !open;   /* الصفُّ المطويُّ يلبس لافتةَ الغلاف (ROADMAP-POSTCARD) */
-    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' + (PK_ICX && kind === 'c' && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '') : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow pk--pc' : '')}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
+    const pcRow = PK_ICX && kind === 'c' && pkLab() && !maxd && !framed && !open;
+    const pcHead = !pcRow && PK_ICX && kind === 'c' && pkLab() && (maxd || framed);   /* والمفتوحةُ تلبس الشكلَ الجديد نفسَه بلا أزرار، ويسقط القديمُ كلُّه */   /* الصفُّ المطويُّ يلبس لافتةَ الغلاف (ROADMAP-POSTCARD) */
+    const roHTML = `<div class="post pk pk--info pk--peek pk--pack${roAct}${maxd ? ' pk--max pk--maxpub' + (PK_ICX && kind === 'c' && pkLab() ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : ' pk--icnone') : '') : ''}${framed ? ' pk--frame pk--framepub' + (PK_ICX ? ' pk--icx' + (pkIcOne(p.id) ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : '') : '') : (PK_ICX && kind === 'c' && pkLab() && !maxd && !open ? ' pk--icx pk--icrow pk--pc' : '')}${PK_ICX && kind === 'c' && pkLab() && (maxd || framed) ? ' pk--pc pk--pcopen' + (pkSplitOn(p.id) || pkBankOn(p.id) || !pkMidOff[p.id] ? '' : ' pk--pcnone') : ''}${big && cxHdUp ? ' pk--hdup' : ''}${big && cxFtDn ? ' pk--ftdn' : ''}" data-pi="${pi}" data-sub="${sub}" ${idAttr} data-dkey="${dtKey(p, `${sub}:${pi}`)}">
       ${maxd ? cxMaxPubBtn(p.id) : kind === 'c' && (framed || !pkLab()) ? cxMaxPubCorner(p.id) : ''}   <!-- والتكبيرُ للمتّسعة وحدَها لا للصفّ الضيّق (طلبُ صاحب الموقع) -->
       <div class="post-yt">
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
@@ -13510,7 +13514,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             ${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}
             ${dateBtnHTML(p, `${sub}:${pi}`)}${pinBadge(p)}
           </div>
-          ${pcRow ? pcBan(p, deck) : x3PkHead(p, deck, open, kind)}
+          ${pcRow ? pcBan(p, deck) : pcHead ? pcBan(p, deck, pkSplitOn(p.id) || pkBankOn(p.id) || !pkMidOff[p.id]) : x3PkHead(p, deck, open, kind)}
           ${framed && !PK_ICX ? reactRowHTML(p, likeAttr, '') : ''}
           ${!pcRow && PK_ICX && kind === 'c' && pkLab() && (framed || maxd || !open) ? pkIcRow(p.id, maxd ? !pkIcOne(p.id) : !framed) : ''}   <!-- والإعجابُ في الترويسة تحت الغلاف كما في الصفّ المطويّ، لا في الذيل (طلبُ صاحب الموقع) -->
           ${big ? cxHdLine() : ''}
