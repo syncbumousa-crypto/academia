@@ -1274,10 +1274,11 @@ html[data-lang="en"] .reel-slot.is-center .crow .bk { transform: rotateY(-9deg);
   -webkit-box-reflect: below 1px linear-gradient(rgba(255, 255, 255, .28), transparent 30%);
 }
 /* أسلوب ١٣: تعويم حيّ — البطاقة المتمركزة تطفو بلطف (2D على .crow حتى لا يتشوّه الكتاب 3D).
-   تبدأ بمرور المؤشّر (‎.is-bob‎ من ‎app.js‎) وتقف بعد ثلاث دورات = ‎10s‎ — لا تدور بلا نهاية */
-.reel-slot.is-center .crow.is-bob { animation: reel-bob 3.333s ease-in-out 3; }
+   دائمًا ومن أوّل ما يتمركز. وكان يُقصَر على ثلاث دوراتٍ بعد مرور المؤشّر، لأنّ كلَّ إطارٍ منه كان يُعيد
+   تمويهَ مربّع البحث فوقه — فلمّا نُزع ذاك التمويه (‎glass.css‎) لم يبقَ للقصر سبب */
+.reel-slot.is-center .crow { animation: reel-bob 3.333s ease-in-out infinite; }
 @keyframes reel-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow.is-bob { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow { animation: none; } }
 
 /* ====== حزمة مادة اللاب في البار: «التفتّح» — مروحة مغلقة ← انقسام مفتوح (مُدار بـ --o من الـJS) ======
    المحاضرة (يمين) والمعمل (يسار)؛ كل مكوّن transform = قيمة‑الإغلاق + فرق×var(--o)،

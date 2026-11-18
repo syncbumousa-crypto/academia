@@ -2664,13 +2664,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       track = host.querySelector('.reel-track');
       countEl = host.querySelector('.reel-count');
       bindEvents();
-      /* تعويمُ المتمركز يبدأ بمرور المؤشّر عليه ويقف بعد ثلاث دورات (‎10s‎): الحركةُ الدائمة
-         كانت تُبقي الرفَّ تحت زجاج البحث يُعاد رسمُه كلَّ إطار — ‎~75MB‎ من ذاكرة الرسم */
-      track.addEventListener('pointerover', e => {
-        const cr = e.target.closest && e.target.closest('.reel-slot.is-center .crow');
-        if (cr) cr.classList.add('is-bob');
-      });
-      track.addEventListener('animationend', e => { if (e.animationName === 'reel-bob') e.target.classList.remove('is-bob'); });
     }
     /* الجزء يمينًا ثم «/» ثم الكل يسارًا مع العربية — يقلبها اتجاه الصندوق في CSS مع الإنجليزية */
     function paintCount() {
