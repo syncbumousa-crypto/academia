@@ -19329,3 +19329,20 @@ html[data-theme="dark"] #pcp .pcp-in { background: rgba(255, 255, 255, .06); }
 #pcp .pcv-btn { padding: 9px 22px; border: 0; border-radius: 999px; cursor: pointer; font: inherit; font-size: 13.5px; font-weight: 700; background: #14233f; color: #fff; }
 html[data-theme="dark"] #pcp .pcv-btn { background: #eef3f4; color: #14233f; }
 @media (max-width: 600px) { #pcp .pcp-split { grid-template-columns: 1fr; } #pcp .pcp-half + .pcp-half { border-inline-start: 0; border-top: 1px solid rgba(127, 127, 127, .22); } }
+/* شجرةُ المجلدات في نافذة التسعير */
+#pcp .pcp-list { max-height: 320px; gap: 5px; }
+#pcp .pcp-row { gap: 6px; padding-inline-start: calc(6px + var(--dp, 0) * 20px); }
+#pcp .pcp-cv { flex: none; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 7px; background: none; color: inherit; cursor: pointer; opacity: .6; transform: rotate(90deg); transition: transform .2s, opacity .2s; }
+html[dir="ltr"] #pcp .pcp-cv, #pcp:dir(ltr) .pcp-cv { transform: rotate(-90deg); }
+#pcp .pcp-cv.on { transform: none; opacity: .9; }
+#pcp .pcp-cv:hover { background: rgba(127, 127, 127, .14); opacity: 1; }
+#pcp .pcp-cv svg { width: 14px; height: 14px; }
+#pcp .pcp-cv--no { cursor: default; }
+#pcp .pcp-fi { flex: none; display: grid; place-items: center; opacity: .55; }
+#pcp .pcp-fi svg { width: 15px; height: 15px; }
+#pcp .pcp-fn { flex: 1 1 auto; }
+#pcp .pcp-nb { flex: none; font-style: normal; font-size: 11px; padding: 0 6px; border-radius: 999px; background: rgba(127, 127, 127, .14); opacity: .8; }
+#pcp .pcp-in > svg:not(.pc-sar) { width: 12px; height: 12px; color: #a8842e; }
+#pcp .pcp-in.is-on { box-shadow: inset 0 0 0 1.5px rgba(168, 132, 46, .6); background: rgba(168, 132, 46, .08); }
+#pcp .pcp-row.is-in { opacity: .6; }
+#pcp .pcp-inp { flex: none; font-size: 11.5px; opacity: .8; padding: 0 4px; }

@@ -10401,6 +10401,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ‎data.sale‎: ‎{m, price, fp?:{folderId: price}}‎ — وبلا ‎sale‎ فهي مجانية */
   const PC_TAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.6V5a1.5 1.5 0 0 1 1.5-1.5h7.6a1.5 1.5 0 0 1 1.06.44l7.4 7.4a1.5 1.5 0 0 1 0 2.12l-7.6 7.6a1.5 1.5 0 0 1-2.12 0l-7.4-7.4a1.5 1.5 0 0 1-.44-1.06z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>';
   const pcTopF = ns => (ns || []).filter(n => n && n.t === 'f');
+  /* كلُّ المجلدات بأيّ عمق (المستخدمُ قد يضع مجلداته كلَّها في مجلدٍ واحد — طلبُ صاحب الموقع) */
+  const pcAllF = ns => (ns || []).reduce((a, n) => n && n.t === 'f' ? a.concat(n, pcAllF(n.ch)) : a, []);
+  const pcHasP = (n, f) => pcTopF(n.ch).some(c => +f[c.id] > 0 || pcHasP(c, f));
   function pcSetHTML(p) {
     const s = (p.data && p.data.sale) || null, en = pcEn(), m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
     if (m === 'free') return `<button type="button" class="pc-sale pc-sale--set" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${en ? 'Price your contribution' : 'سعّر عناصر مساهمتك'}</span></button>`;
@@ -10408,16 +10411,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<button type="button" class="pc-sale pc-sale--set is-on" data-pcprice="${esc(p.id)}">${PC_TAG}<span>${st}</span><b class="pc-pr">${Math.max(0, +s.price || 0)}${PC_SAR}</b></button>`;
   }
   let pcpSt = null;   /* { id, per, total, f:{id:price} } */
-  const pcpSum = () => Object.values(pcpSt.f).reduce((t, v) => t + (+v > 0 ? +v : 0), 0);
+  /* المجموعُ من الشجرة: ما تحت مجلدٍ مسعَّرٍ داخلٌ في سعره فلا يُعدّ مرّتين */
+  const pcpSum = () => { const p = pcvPost(pcpSt.id), d = (p && p.data) || {}, f = pcpSt.f;
+    const add = ns => pcTopF(ns).reduce((t, n) => t + (+f[n.id] > 0 ? +f[n.id] : add(n.ch)), 0);
+    return add(d.deck) + add(d.qb); };
   function pcpPaint() {
     const box = document.getElementById('pcp'), p = pcpSt && pcvPost(pcpSt.id); if (!box || !p) return;
     const en = pcEn(), d = p.data || {};
-    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each main folder on its own', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder' }
-      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'سعّر كل مجلد أساسي وحده', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم' };
-    const half = (k, ns) => `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${ns.length}</i></div>`
-      + (ns.length ? `<div class="pcp-list">` + ns.map(n => `<label class="pcp-row"><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
-        + `<span class="pcp-in"><input type="number" min="0" step="5" inputmode="numeric" data-pcpf="${esc(n.id)}" placeholder="0" value="${+pcpSt.f[n.id] || ''}"${pcpSt.per ? '' : ' disabled'}>${PC_SAR}</span></label>`).join('') + `</div>`
-        : `<p class="pcp-none">${esc(L.none)}</p>`) + `</div>`;
+    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each folder on its own', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'Open any folder to price the ones inside. A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder', inp: 'In a priced folder' }
+      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'سعّر كل مجلد وحده', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'افتح أي مجلد وسعّر اللي داخله. المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم', inp: 'داخل مجلد مسعّر' };
+    /* شجرةٌ لا قائمة: كلُّ مجلدٍ يُفتح ليظهر ما فيه، ولكلٍّ سعرُه — والمجلدُ المجانيّ يحوي مسعَّرًا عاديًّا.
+       وما تحت مجلدٍ مسعَّرٍ داخلٌ في سعره فلا يُسعَّر ثانيةً */
+    const tree = (ns, dp, inP) => pcTopF(ns).map(n => {
+      const sub = pcTopF(n.ch), op = sub.length && pcpSt.open.has(n.id), own = +pcpSt.f[n.id] > 0;
+      const row = `<div class="pcp-row${inP ? ' is-in' : ''}" style="--dp:${dp}">`
+        + (sub.length ? `<button type="button" class="pcp-cv${op ? ' on' : ''}" data-pcpcv="${esc(n.id)}" aria-expanded="${!!op}" aria-label="${esc(n.name || L.nn)}">${PC_DD}</button>` : `<span class="pcp-cv pcp-cv--no"></span>`)
+        + `<span class="pcp-fi">${PC_IC.fold}</span><span class="pcp-fn">${esc(n.name || '') || L.nn}</span>`
+        + (sub.length ? `<i class="pcp-nb">${sub.length}</i>` : '')
+        + (inP ? `<span class="pcp-inp">${esc(L.inp)}</span>`
+          : `<span class="pcp-in${own ? ' is-on' : ''}">${own ? PC_LOCK : ''}<input type="number" min="0" step="5" inputmode="numeric" data-pcpf="${esc(n.id)}" placeholder="0" value="${+pcpSt.f[n.id] || ''}"${pcpSt.per ? '' : ' disabled'}>${PC_SAR}</span>`)
+        + `</div>`;
+      return row + (op ? tree(n.ch, dp + 1, inP || own) : '');
+    }).join('');
+    const half = (k, ns) => { const all = pcAllF(ns); return `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${all.length}</i></div>`
+      + (all.length ? `<div class="pcp-list">${tree(ns, 0, false)}</div>` : `<p class="pcp-none">${esc(L.none)}</p>`) + `</div>`; };
     const tot = pcpSt.per ? pcpSum() : pcpSt.total;
     box.innerHTML = `<div class="pcp-panel${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
       + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
@@ -10430,7 +10447,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pcpOpen(id) {
     const p = pcvPost(id); if (!p) return;
     const s = (p.data && p.data.sale) || {}, fp = s.fp && typeof s.fp === 'object' ? s.fp : null;
-    pcpSt = { id, per: !!fp, total: Math.max(0, +s.price || 0), f: Object.assign({}, fp || {}) };
+    pcpSt = { id, per: !!fp, total: Math.max(0, +s.price || 0), f: Object.assign({}, fp || {}), open: new Set() };
+    /* يُفتح من الشجرة ما فيه مسعَّرٌ، ومجلدٌ وحيدٌ يضمّ الباقي (فلا يبدو النصفُ فارغًا) */
+    [p.data.deck, p.data.qb].forEach(ns => { const top = pcTopF(ns); if (top.length === 1) pcpSt.open.add(top[0].id);
+      pcAllF(ns).forEach(n => { if (pcHasP(n, pcpSt.f)) pcpSt.open.add(n.id); }); });
     let box = document.getElementById('pcp');
     if (!box) { box = document.createElement('div'); box.id = 'pcp'; document.body.appendChild(box); }
     box.hidden = false; pcpPaint();
@@ -10440,12 +10460,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pcpSave(free) {
     const p = pcpSt && pcvPost(pcpSt.id); if (!p) return;
     const d = p.data = p.data || {};
-    const ids = new Set([...pcTopF(d.deck), ...pcTopF(d.qb)].map(n => n.id));
+    /* المحفوظُ: كلُّ مجلدٍ مسعَّرٍ ليس تحت مسعَّر (ذاك داخلٌ في سعر أبيه) */
+    const ids = new Set(), tops = [...pcTopF(d.deck), ...pcTopF(d.qb)];
+    const walk = (ns, inP) => pcTopF(ns).forEach(n => { if (!inP) ids.add(n.id); walk(n.ch, inP || +pcpSt.f[n.id] > 0); });
+    walk(d.deck, false); walk(d.qb, false);
     if (free) delete d.sale;
     else if (pcpSt.per) {
       const fp = {}; Object.keys(pcpSt.f).forEach(k => { const v = Math.round(+pcpSt.f[k] || 0); if (v > 0 && ids.has(k)) fp[k] = v; });
       const sum = Object.values(fp).reduce((t, v) => t + v, 0);
-      if (!sum) delete d.sale; else d.sale = { m: Object.keys(fp).length < ids.size ? 'part' : 'lock', price: sum, fp };
+      /* «مدفوعة» إن كانت المجلداتُ الأساسيّةُ كلُّها مسعَّرة، وإلّا ففيها تجربة */
+      if (!sum) delete d.sale; else d.sale = { m: tops.every(n => fp[n.id]) ? 'lock' : 'part', price: sum, fp };
     } else {
       const v = Math.max(0, Math.round(+pcpSt.total || 0));
       if (!v) delete d.sale; else d.sale = { m: 'lock', price: v };
@@ -10458,6 +10482,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const box = e.target.closest && e.target.closest('#pcp');
     if (!box || !pcpSt) return;
     if (e.target === box || e.target.closest('[data-pcpx]')) { pcpClose(); return; }
+    const cv = e.target.closest('[data-pcpcv]');
+    if (cv) { const k = cv.dataset.pcpcv; pcpSt.open.has(k) ? pcpSt.open.delete(k) : pcpSt.open.add(k); pcpPaint(); return; }
     if (e.target.closest('[data-pcpfree]')) { pcpSave(true); return; }
     if (e.target.closest('[data-pcpsave]')) pcpSave(false);
   }, true);
@@ -10470,6 +10496,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tt = document.querySelector('#pcp [data-pcpt]'); if (tt) tt.value = pcpSum() || '';
     }
     if (t.dataset.pcpper) { pcpSt.per = t.checked; pcpPaint(); const f = document.querySelector(`#pcp ${pcpSt.per ? '[data-pcpf]' : '[data-pcpt]'}`); if (f) f.focus(); }
+  });
+  document.addEventListener('change', e => {   /* بعد الكتابة: ما تحت المجلد يُقفل أو يُفتح بحسب سعره — والتركيزُ يبقى حيث انتقل */
+    const t = e.target.closest && e.target.closest('#pcp [data-pcpf]'); if (!t || !pcpSt) return;
+    setTimeout(() => { if (!pcpSt) return; const a = document.activeElement, fid = a && a.dataset && a.dataset.pcpf;
+      pcpPaint(); const n = fid && document.querySelector(`#pcp [data-pcpf="${fid}"]`); if (n) n.focus(); }, 0);
   });
   document.addEventListener('keydown', e => {
     if (!pcpSt) return;
