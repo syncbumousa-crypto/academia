@@ -10418,8 +10418,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pcpPaint() {
     const box = document.getElementById('pcp'), p = pcpSt && pcvPost(pcpSt.id); if (!box || !p) return;
     const en = pcEn(), d = p.data || {};
-    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each folder on its own', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'Open any folder to price the ones inside. A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder', inp: 'In a priced folder' }
-      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'سعّر كل مجلد وحده', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'افتح أي مجلد وسعّر اللي داخله. المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم', inp: 'داخل مجلد مسعّر' };
+    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each folder', whole: 'One price for the whole contribution', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'Open any folder to price the ones inside. A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder', inp: 'In a priced folder' }
+      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'تسعير كل مجلد بسعر', whole: 'سعر شامل للمساهمة', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'افتح أي مجلد وسعّر اللي داخله. المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم', inp: 'داخل مجلد مسعّر' };
     /* شجرةٌ لا قائمة: كلُّ مجلدٍ يُفتح ليظهر ما فيه، ولكلٍّ سعرُه — والمجلدُ المجانيّ يحوي مسعَّرًا عاديًّا.
        وما تحت مجلدٍ مسعَّرٍ داخلٌ في سعره فلا يُسعَّر ثانيةً */
     const tree = (ns, dp, inP) => pcTopF(ns).map(n => {
@@ -10440,7 +10440,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
       + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><input type="number" min="0" step="5" inputmode="numeric" data-pcpt="1" placeholder="0" value="${tot || ''}"${pcpSt.per ? ' readonly tabindex="-1"' : ''}>${PC_SAR}</span>`
       + `<span class="pcp-hint">${esc(pcpSt.per ? L.fhint : L.hint)}</span>`
-      + `<label class="pcp-sw"><input type="checkbox" data-pcpper="1"${pcpSt.per ? ' checked' : ''}><span class="pcp-tg"></span>${esc(L.per)}</label></div>`
+      /* شريطٌ بخيارين لا مفتاح (طلبُ صاحب الموقع): سعرٌ شامل · تسعيرُ كلّ مجلد */
+      + `<div class="pcp-seg${pcpSt.per ? ' is-per' : ''}" role="radiogroup"><span class="pcp-seg__th" aria-hidden="true"></span>`
+      + `<button type="button" role="radio" data-pcpper="0" aria-checked="${!pcpSt.per}">${esc(L.whole)}</button>`
+      + `<button type="button" role="radio" data-pcpper="1" aria-checked="${pcpSt.per}">${esc(L.per)}</button></div></div>`
       + `<div class="pcp-split">${half('mid', pcTopF(d.deck))}${half('bank', pcTopF(d.qb))}</div>`
       + `<div class="pcp-ft"><button type="button" class="pcp-free" data-pcpfree="1">${esc(L.free)}</button><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
   }
@@ -10482,6 +10485,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const box = e.target.closest && e.target.closest('#pcp');
     if (!box || !pcpSt) return;
     if (e.target === box || e.target.closest('[data-pcpx]')) { pcpClose(); return; }
+    const sg = e.target.closest('[data-pcpper]');
+    if (sg) { const on = sg.dataset.pcpper === '1'; if (on !== pcpSt.per) { pcpSt.per = on; pcpPaint();
+      /* الشريطُ يُعاد رسمُه: المؤشّرُ ينزلق من موضعه القديم */
+      const th = document.querySelector('#pcp .pcp-seg__th'); if (th && !bkReduce()) th.animate([{ transform: `translateX(${(on ? 1 : -1) * (document.dir === 'rtl' || getComputedStyle(th).direction === 'rtl' ? 1 : -1) * 100}%)` }, { transform: 'none' }], { duration: 300, easing: 'cubic-bezier(.32, .72, 0, 1)' });
+      const f = document.querySelector(`#pcp ${on ? '[data-pcpf]' : '[data-pcpt]'}`); if (f) f.focus(); } return; }
     const cv = e.target.closest('[data-pcpcv]');
     if (cv) { const k = cv.dataset.pcpcv; pcpSt.open.has(k) ? pcpSt.open.delete(k) : pcpSt.open.add(k); pcpPaint(); return; }
     if (e.target.closest('[data-pcpfree]')) { pcpSave(true); return; }
@@ -10495,7 +10503,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       pcpSt.f[t.dataset.pcpf] = Math.max(0, +t.value || 0);
       const tt = document.querySelector('#pcp [data-pcpt]'); if (tt) tt.value = pcpSum() || '';
     }
-    if (t.dataset.pcpper) { pcpSt.per = t.checked; pcpPaint(); const f = document.querySelector(`#pcp ${pcpSt.per ? '[data-pcpf]' : '[data-pcpt]'}`); if (f) f.focus(); }
   });
   document.addEventListener('change', e => {   /* بعد الكتابة: ما تحت المجلد يُقفل أو يُفتح بحسب سعره — والتركيزُ يبقى حيث انتقل */
     const t = e.target.closest && e.target.closest('#pcp [data-pcpf]'); if (!t || !pcpSt) return;
