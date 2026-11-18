@@ -19448,3 +19448,12 @@ html[data-theme="dark"] #pcv .pcv-ph { background: rgba(255, 255, 255, .06); box
 #pcv .pk-max.pk-max--curve.pcv-exit { top: 4px; inset-inline-start: auto; inset-inline-end: 4px; z-index: 2; }
 #pcv .pcv-exit svg { transform: scaleX(-1); }
 html[data-lang="en"] #pcv .pcv-exit svg { transform: none; }
+/* وشريطُ الخروج أحمر (طلبُ صاحب الموقع) — هادئًا ساكنًا، ويقوى تحت المؤشّر */
+#pcv .pcv-exit .pk-curve__grip { stroke: rgba(205, 60, 60, .3); }
+#pcv .pcv-exit .pk-curve__dots { fill: #b3302f; opacity: .75; }
+#pcv .pcv-exit:hover .pk-curve__grip, #pcv .pcv-exit:focus-visible .pk-curve__grip { stroke: rgba(205, 60, 60, .6); }
+#pcv .pcv-exit:hover .pk-curve__dots, #pcv .pcv-exit:focus-visible .pk-curve__dots { fill: #fff; opacity: 1; }
+html[data-theme="dark"] #pcv .pcv-exit .pk-curve__grip { stroke: rgba(240, 100, 100, .32); }
+html[data-theme="dark"] #pcv .pcv-exit .pk-curve__dots { fill: #f08080; }
+html[data-theme="dark"] #pcv .pcv-exit:hover .pk-curve__grip { stroke: rgba(240, 100, 100, .62); }
+html[data-theme="dark"] #pcv .pcv-exit:hover .pk-curve__dots { fill: #fff; }
