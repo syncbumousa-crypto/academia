@@ -6043,7 +6043,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const richPeek = sec === 'doc' || sec === 'abs' || isSrc;   /* المصادر والغياب ملخّص شارات مثل الدكتور */
     /* هوية الدكتور (صورته واسمه) أول الملخّص: تُخفى إذا كان الفلتر مقصورًا على دكتور —
        اسمه ظاهر أصلًا في مستطيل الفلتر فوق القائمة، فلا داعي لتكراره في كل كومنت */
-    const peekDr = (isDr && cmDocSel == null) ? doctorsOf(cmCode)[ref.dr] : null;
+    /* ===== والدكتورُ يُمرَّر ولا يُستخرَج لكلّ مساهمة =====
+       ‏‎doctorsOf‎ تُعيد بناءَ القائمة من صفوف المادّة (‎docAbsorb‎ ومقارناتُ ‎JSON.stringify‎)،
+       وكانت تُنادى مرّةً لكلّ مساهمة: إحدى وتسعون في «الدكاترة». والراسمُ عنده القائمةُ
+       فيمرّرها في ‎ref.drObj‎ — ويبقى الاستخراجُ لمن لم يمرّر */
+    const peekDr = (isDr && cmDocSel == null) ? (ref.drObj || doctorsOf(cmCode)[ref.dr]) : null;
+    /* ===== والرأسُ والذيلُ يُبنيان حيث يُستعملان =====
+       الأقسامُ ذاتُ الشكل الطوليّ (المادّة · الدكتور · الغياب · التقييم · المصادر) تخرج
+       من الفرع أدناه ولا تقرأهما — وكانا يُبنيان لها ثمّ يُرميان، و‎postPeek‎ فيهما مرّتين */
+    const headFoot = () => {
     const head = `<div class="pk-head">
         <div class="fold-peek${richPeek ? ' fold-peek--rich' : ''}">${(open && !peekOnly) ? '' : postPeek(sec, p.data, p.id || key, peekDr, open)}</div>
         <button type="button" class="pk-toggle" title="${open ? T().pkCollapse : T().pkExpand}">
@@ -6061,6 +6069,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         </div>
         ${menu}
       </div>`;
+    return { head, body, foot };
+    };
     /* «المادة» و«الدكتور» و«التقييم» بأسلوب يوتيوب: الصورة عمود جانبي يمين الكومنت كامل (أعلاه)،
        وعلى يسارها عمود = [اسم · تاريخ · قائمة النقاط] ثم المحتوى ثم إبهاما مفيد/غير مفيد */
     if (sec === 'info' || sec === 'doc' || sec === 'abs' || sec === 'grade' || isSrc) {
@@ -6121,6 +6131,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         </div>
       </div>`;
     }
+    const { head, body, foot } = headFoot();
     return `<div class="post pk pk--fold${open ? ' pk--open' : ''}${peekOnly ? ' pk--peek' : ''}" ${dataAttr}>${head}${body}${foot}</div>`;
   }
 
@@ -7040,7 +7051,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           : (b.p.ts || 0) - (a.p.ts || 0));
         inner = cmDocBar(doctors, items.length) + (items.length
           ? items.map(({ p, di, pi, dr }) =>
-              (editing && p.me && di === cmView.di) ? drEditCard(dr, di, p, pi) : foldPost('doc', p, pi, { dr: di })
+              (editing && p.me && di === cmView.di) ? drEditCard(dr, di, p, pi) : foldPost('doc', p, pi, { dr: di, drObj: dr })
             ).join('')
           : `<p class="v-none">${doctors.length ? T().noPosts : T().noDoctors}</p>`);
       }
