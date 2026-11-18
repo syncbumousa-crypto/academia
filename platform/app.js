@@ -10132,25 +10132,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pcFolds = ns => (ns || []).reduce((s, n) => s + (n.t === 'f' ? 1 + pcFolds(n.ch) : 0), 0);
   const pcEn = () => state.lang === 'en';
   const pcSt = (ic, v, ttl, cls = '') => `<span class="pc-st${v ? '' : ' is-0'}${cls}" title="${esc(ttl)}">${ic}<b>${v}</b></span>`;
+  /* ===== أزرارُ المساحات (طلبُ صاحب الموقع — «حلقة وأرقامها» بلا حلقة ولا زرّ «افتح») =====
+     كلُّ مساحةٍ زرٌّ واحد: أيقونتُها وتحتها اسمُها، وجنبها إحصاءاتُها كلُّها تحت بعض بكلماتها —
+     وأوّلُها عددُها الأساسيّ. وهي أزرارُ ‎[data-pkic]‎ نفسُها، فالضغطُ يفتح المساحة كما كان */
+  const PC_IC2 = {
+    src: PC_SV('<path d="M5 4.5h11a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2z"/><path d="M5 17.5a2 2 0 0 1 2-2h11"/>'),
+    cn: PC_SV('<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/>'),
+    q: PC_SV('<circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.6a2.3 2.3 0 0 1 4.4.9c0 1.5-2.2 2-2.2 3.3"/><path d="M12 16.6h.01"/>'),
+  };
   function pcCardsHTML(p) {
     const id = p.id, d = p.data || {}, deck = d.deck || [], qb = d.qb || [];
     const marks = (d.hl && d.hl.marks) || [];
     const srcs = pkSrcList(id), pages = srcs.reduce((s, x) => s + (pkSrcPages(x) || 0), 0);
     const linked = new Set(); marks.forEach(m => (m.c || []).forEach(x => linked.add(x)));
     const nC = x3Leaves2(deck).length, nQ = x3Leaves2(qb).length, nw = cxNwSum(qb), en = pcEn();
-    const word = (k, n) => en ? ({ book: n === 1 ? 'source' : 'sources', mid: n === 1 ? 'concept' : 'concepts', bank: n === 1 ? 'question' : 'questions' })[k]
-      : ({ book: n === 1 ? 'مصدر' : 'مصادر', mid: 'مفهوم', bank: 'سؤال' })[k];
-    const L = en ? { pg: 'pages', hl: 'highlights', fo: 'folders', ln: 'linked to the book' } : { pg: 'صفحة', hl: 'تظليل', fo: 'مجلد', ln: 'مربوطة بالكتاب' };
+    const L = en ? { src: 'sources', cn: 'concepts', q: 'questions', pg: 'pages', hl: 'highlights', fo: 'folders', ln: 'linked', dl: 'saves', seen: 'visits', cm: 'comments', warn: 'reports' }
+      : { src: 'مصدر', cn: 'مفهوم', q: 'سؤال', pg: 'صفحة', hl: 'تظليل', fo: 'مجلد', ln: 'مربوطة', dl: 'حفظ', seen: 'زيارة', cm: 'تعليق', warn: 'بلاغ' };
+    const row = (ic, v, k, cls = '') => `<span class="pc-st${v ? '' : ' is-0'}${cls}" title="${esc(v + ' ' + L[k])}">${ic}<b>${v}</b><i>${esc(L[k])}</i></span>`;
     const body = {
-      book: [srcs.length, (pages ? pcSt(PC_IC.page, pages, pages + ' ' + L.pg) : '') + pcSt(PC_IC.hl, marks.length, marks.length + ' ' + L.hl)],
-      mid: [nC, pcSt(PC_IC.fold, pcFolds(deck), pcFolds(deck) + ' ' + L.fo) + pcSt(PC_IC.link, linked.size, linked.size + ' ' + L.ln)],
-      bank: [nQ, pcSt(PC_IC.fold, pcFolds(qb), pcFolds(qb) + ' ' + L.fo)
-        + ['dl', 'seen', 'cm', 'warn'].map(x => pcSt(CD_IC[CX_NW_IC[x]], nw[x] || 0, CX_NW_TTL[x](nw[x] || 0), x === 'warn' ? ' pc-st--warn' : '')).join('')],
+      book: row(PC_IC2.src, srcs.length, 'src') + row(PC_IC.page, pages, 'pg') + row(PC_IC.hl, marks.length, 'hl'),
+      mid: row(PC_IC2.cn, nC, 'cn') + row(PC_IC.fold, pcFolds(deck), 'fo') + row(PC_IC.link, linked.size, 'ln'),
+      bank: row(PC_IC2.q, nQ, 'q') + row(PC_IC.fold, pcFolds(qb), 'fo')
+        + ['dl', 'seen', 'cm', 'warn'].map(x => row(CD_IC[CX_NW_IC[x]], nw[x] || 0, x, x === 'warn' ? ' pc-st--warn' : '')).join(''),
     };
+    const nm = k => (en ? { book: 'Sources', mid: 'Summary', bank: 'Question bank' } : { book: 'المصادر', mid: 'الملخص', bank: 'بنك الأسئلة' })[k];
     return `<div class="pk-icrow pc-ks" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
-      `<button type="button" class="pk-ic pc-k pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'])}">`
-      + `<span class="pc-k__m"><span class="pc-k__ic">${pkIcSvg(k, id)}</span><b>${body[k][0]}</b><span>${esc(word(k, body[k][0]))}</span></span>`
-      + `<span class="pc-k__s">${body[k][1]}</span></button>`).join('') + `</div>`;
+      `<button type="button" class="pk-ic pc-k pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(nm(k))}">`
+      + `<span class="pc-k__m"><span class="pc-k__ic">${pkIcSvg(k, id)}</span><span class="pc-k__nm">${esc(nm(k))}</span></span>`
+      + `<span class="pc-k__s">${body[k]}</span></button>`).join('') + `</div>`;
   }
   const PC_CV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 15.5-4.8-4.8L7 19"/></svg>';
   /* ===== سطرُ الاكتمال: دائرتُه وحدَها ويسارَها نسبتُه (طلبُ صاحب الموقع: «النسبة المئوية») =====

@@ -18977,3 +18977,35 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine .pc-sale__st { border-co
 #cm-body .pk--pc .pc-ttl > .pc-prog { width: 190px; justify-content: center; }
 /* والعنوانُ كذلك في وسط عمود البيع فوق مستطيله */
 #cm-body .pk--pc .pc-name { text-align: center; }
+/* ============================================================
+   الصفُّ المطويُّ بشكله الجديد (طلبُ صاحب الموقع — «حلقة وأرقامها» بلا حلقة ولا «افتح»)
+   ============================================================
+   الغلافُ مستطيلٌ بزوايا ناعمة، والعنوانُ سطرٌ واحد، والمساحاتُ أزرارٌ شفّافة:
+   أيقونةٌ وتحتها اسمُ المساحة، وجنبها إحصاءاتُها كلُّها تحت بعض بكلماتها */
+#cm-body .pk--pc .pc-art { width: 150px; aspect-ratio: 3 / 2; border-radius: 18px; }
+#cm-body .pk--pc .pc-ttl { flex: 0 0 210px; width: 210px; }
+#cm-body .pk--pc .pc-name { text-align: start; font-size: 15px; }
+#cm-body .pk--pc .pc-sale { width: 100%; }
+#cm-body .pk--pc .pc-ttl > .pc-prog { width: auto; justify-content: flex-start; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks { grid-template-columns: 1fr 1fr 1.25fr; gap: 10px; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic {
+  display: flex; align-items: center; justify-content: flex-start; gap: 12px; height: auto; min-height: 0; padding: 8px 10px;
+  border-radius: 18px; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; text-align: start;
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:focus-visible { transform: translateY(-2px); background: rgba(44, 94, 101, .07); box-shadow: none; opacity: 1; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks .pk-ic:hover { background: rgba(255, 255, 255, .06); box-shadow: none; }
+#cm-body .pk--pc .pc-k__m { flex: none; width: 76px; height: auto; gap: 6px; }
+#cm-body .pk--pc .pc-k__ic { margin: 0; color: #2c5e65; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-k__ic { color: #7fb3bb; }
+#cm-body .pk--pc .pc-k__ic svg { width: 26px !important; height: 26px !important; }
+#cm-body .pk--pc .pc-k__nm { font-size: 12.5px; font-weight: 700; color: #14233f; white-space: nowrap; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-k__nm { color: #fff; }
+#cm-body .pk--pc .pc-k__s, html[data-theme="dark"] #cm-body .pk--pc .pc-k__s { padding: 0; border: 0; gap: 3px; justify-self: auto; }
+#cm-body .pk--pc .pc-k--bank .pc-k__s { gap: 1px; }
+#cm-body .pk--pc .pc-st i { font-style: normal; font-weight: 500; margin-inline-start: 1px; }
+#cm-body .pk--pc .pc-st svg { width: 14px !important; height: 14px !important; }
+/* ولا لافتةَ تقصّ ما فيها: كانت حوافُّها المدوّرةُ تقطع زاويتَي الغلاف */
+#cm-body .pk--pc .pc-ban { border-radius: 0; overflow: visible; }
+#cm-body .pk--pc .pc-ban { min-height: 0; padding-block: 6px; margin-block: 8px 0; }
