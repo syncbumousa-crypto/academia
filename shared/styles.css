@@ -19142,3 +19142,11 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy b {
 }
 html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine b { color: #f1dca8; background: none; box-shadow: inset 1px 0 0 rgba(127, 179, 187, .2); }
 #cm-body .pk--pc .pc-sale--own, #cm-body .pk--pc .pc-sale--free { gap: 6px; }
+/* رمزُ الريال بجانب الرقم وبقدّ حروفه */
+#cm-body .pk--pc .pc-pr { display: inline-flex; align-items: center; gap: 3px; margin-inline-start: 4px; }
+#cm-body .pk--pc .pc-sar { width: .95em !important; height: .95em !important; flex: none; }
+#cm-body .pk--pc .pc-sale { width: auto; min-width: 100%; }
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st { padding: 0 10px; }
+/* والمستطيلُ بعرضٍ واحدٍ في كلّ الأحوال: عرضُ أطولها («توجد تجربة مجانية» وزرُّها) */
+#cm-body .pk--pc .pc-ttl { flex: 0 0 228px; width: 228px; }
+#cm-body .pk--pc .pc-sale { width: 100%; min-width: 0; }

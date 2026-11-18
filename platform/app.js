@@ -10183,6 +10183,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PC_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
   const PC_HALF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 10.5v10"/></svg>';
   const PC_CHK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  /* رمزُ الريال السعوديّ الرسميّ (‎U+20C1‎) — مسارُه من خطّ ‎saudi-riyal-font‎ المفتوح (‎OFL-1.1‎)،
+     يُرسم بلون النصّ، ويوضع يسارَ الرقم كما في دليل البنك المركزيّ */
+  const PC_SAR = '<svg class="pc-sar" viewBox="40 0 1150 1270" aria-hidden="true"><path fill="currentColor" d="M750,1119 C730,1163,716,1211,711,1262 C711,1262,1136,1172,1136,1172 C1156,1127,1169,1079,1174,1028 C1174,1028,750,1119,750,1119Z M1136,901 C1136,901,1136,901,1136,901 C1156,857,1169,809,1174,758 C1174,758,843,828,843,828 C843,828,843,693,843,693 C843,693,1136,631,1136,631 C1156,587,1169,538,1174,488 C1174,488,843,558,843,558 C843,558,843,72,843,72 C793,100,748,138,711,183 C711,183,711,586,711,586 C711,586,579,614,579,614 C579,614,579,6,579,6 C528,34,483,72,447,117 C447,117,447,642,447,642 C447,642,151,705,151,705 C131,750,117,798,112,849 C112,849,447,777,447,777 C447,777,447,948,447,948 C447,948,88,1024,88,1024 C68,1068,55,1117,50,1167 C50,1167,425,1088,425,1088 C456,1081,482,1063,499,1038 C499,1038,568,936,568,936 C568,936,568,936,568,936 C575,926,579,913,579,899 C579,899,579,749,579,749 C579,749,711,721,711,721 C711,721,711,992,711,992 C711,992,1136,901,1136,901Z"/></svg>';
   function pcSaleHTML(p) {
     /* مستطيلٌ واحدٌ بعرضٍ ثابتٍ في كلّ الأحوال (طلبُ صاحب الموقع): الحالةُ والشراءُ فيه معًا.
        فما كان للشراء صار المستطيلُ نفسُه زرَّه، وما سواه وسمٌ ساكنٌ بالقدّ نفسه */
@@ -10190,9 +10193,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
     if (m === 'free') return `<span class="pc-sale pc-sale--free">${en ? 'Free' : 'مجانية'}</span>`;
     if ((state.bought || {})[p.id]) return `<span class="pc-sale pc-sale--own">${PC_CHK}${en ? 'Purchased' : 'اشتريتها'}</span>`;
-    const pr = Math.max(0, +s.price || 0), cur = en ? 'SAR' : 'ريال';
-    const ic = m === 'part' ? PC_HALF : PC_LOCK, st = m === 'part' ? (en ? 'Partly free' : 'جزء مجاني') : (en ? 'Locked' : 'مقفلة');
-    const body = `<span class="pc-sale__st">${ic}${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'اشترِ · ')}${pr} ${cur}</b>`;
+    const pr = Math.max(0, +s.price || 0);
+    const ic = m === 'part' ? PC_HALF : PC_LOCK, st = m === 'part' ? (en ? 'Free trial available' : 'توجد تجربة مجانية') : (en ? 'Paid' : 'مدفوعة');
+    const body = `<span class="pc-sale__st">${ic}${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'اشترِ · ')}<span class="pc-pr">${pr}${PC_SAR}</span></b>`;
     return isMine(p) ? `<span class="pc-sale pc-sale--mine pc-sale--${m}">${body}</span>`
       : `<button type="button" class="pc-sale pc-sale--buy pc-sale--${m}" data-pcbuy="${esc(p.id)}">${body}</button>`;
   }
