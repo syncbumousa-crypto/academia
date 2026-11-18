@@ -19009,3 +19009,36 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-k__nm { color: #fff; }
 /* ولا لافتةَ تقصّ ما فيها: كانت حوافُّها المدوّرةُ تقطع زاويتَي الغلاف */
 #cm-body .pk--pc .pc-ban { border-radius: 0; overflow: visible; }
 #cm-body .pk--pc .pc-ban { min-height: 0; padding-block: 6px; margin-block: 8px 0; }
+/* ============================================================
+   إطاراتُ الاستزادة وأزرارُ المساحات (‎.pc-side‎)
+   ============================================================ */
+#cm-body .pk--pc .pc-side { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+#cm-body .pk--pc .pc-info { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 14px; padding-top: 10px; opacity: .62; }
+#cm-body .pk--pc .pc-fs { position: relative; padding: 16px 14px 10px; border-radius: 18px; box-shadow: inset 0 0 0 1.5px rgba(44, 94, 101, .2); }
+#cm-body .pk--pc .pc-fs__lg {
+  position: absolute; top: -10px; inset-inline-start: 14px; padding: 0 8px; background: var(--pc-pg, #fff);
+  display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #2c5e65; white-space: nowrap;
+}
+html[data-theme="dark"] #cm-body .pk--pc .pc-fs__lg { --pc-pg: var(--bg, #0e181c); color: #7fb3bb; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-fs { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .16); }
+#cm-body .pk--pc .pc-fs__lg .pc-k__ic svg { width: 16px !important; height: 16px !important; }
+#cm-body .pk--pc .pc-fs .pc-k__s { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 3px 14px; }
+#cm-body .pk--pc .pc-fs--book .pc-k__s, #cm-body .pk--pc .pc-fs--mid .pc-k__s { grid-auto-flow: column; grid-template-rows: auto auto; grid-template-columns: none; }
+/* والأزرارُ: كبسولاتٌ واضحةٌ تحت إطاراتها، بالعرض نفسه */
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 14px; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic,
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic {
+  display: flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 14px;
+  border-radius: 999px; background: #fff; color: #2c5e65; opacity: 1;
+  box-shadow: inset 0 0 0 1.5px #2c5e65, 0 8px 16px -12px rgba(20, 35, 63, .45);
+}
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic:focus-visible {
+  transform: translateY(-2px); background: #2c5e65; color: #fff; box-shadow: 0 12px 20px -10px rgba(44, 94, 101, .6);
+}
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic { background: rgba(255, 255, 255, .04); color: #9fcbd2; box-shadow: inset 0 0 0 1.5px #7fb3bb; }
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-btns .pk-ic:hover { background: #7fb3bb; color: #0e181c; }
+#cm-body .pk--pc .pc-ks:hover .pk-ic { opacity: 1; }
+#cm-body .pk--pc .pc-btns .pc-k__ic { color: inherit; }
+#cm-body .pk--pc .pc-btns .pc-k__ic svg { width: 18px !important; height: 18px !important; }
+#cm-body .pk--pc .pc-btns .pc-k__nm { color: inherit; font-size: 13px; }
