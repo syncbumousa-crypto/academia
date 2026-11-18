@@ -10385,7 +10385,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      تحته: الكلُّ أو مساحةٌ وحدَها بسعرها (من ‎parts‎)، والمشترى منها عليه ✓.
      والمشترى سجلُّه ‎state.bought[id]‎: ‎1‎ للكلّ، أو ‎{book,mid,bank}‎ لما اشتُري منها */
   const pcPick = {};   /* ما اختاره القارئُ من القائمة لكلّ مساهمة (‎all‎ أو مساحة) */
-  const PC_DD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+  /* سهمُ قائمة الشراء: أسمكُ ومنحنٍ (طلبُ صاحب الموقع) — قوسٌ لا زاويةٌ حادّة */
+  const PC_DD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5C9 13.2 10.6 14.6 12 14.6S15 13.2 17.5 9.5"/></svg>';
   const pcBought = id => (state.bought || {})[id];
   const pcSpNm = (k, en) => (en ? { book: 'Sources', mid: 'Summary', bank: 'Question bank' } : { book: 'المصادر', mid: 'الملخص', bank: 'بنك الأسئلة' })[k];
   function pcSaleOpts(p) {
