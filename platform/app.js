@@ -10481,7 +10481,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const half = (k, ns) => { const all = pcAllF(ns); return `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${all.length}</i></div>`
       + (all.length ? `<div class="pcp-list">${tree(ns, 0, false)}</div>` : `<p class="pcp-none">${esc(L.none[k])}</p>`) + `</div>`; };
     const tot = pcpSt.per ? pcpSum() : pcpSt.total;
-    box.innerHTML = `<div class="pcp-panel${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
+    /* الدخلةُ مرّةً عند الفتح وحدَه — إعادةُ الرسم (الشريط، فتحُ مجلد) لا تُعيدها فلا تنهار النافذةُ وتعود،
+       وتمريرُ القائمتين يبقى حيث كان */
+    const fresh = pcpSt.fresh; pcpSt.fresh = false;
+    const sc = [...box.querySelectorAll('.pcp-list')].map(x => x.scrollTop), psc = (box.querySelector('.pcp-panel') || {}).scrollTop || 0;
+    box.innerHTML = `<div class="pcp-panel${fresh ? ' is-in' : ''}${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
       + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
       + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><input type="number" min="0" step="5" inputmode="numeric" data-pcpt="1" placeholder="0" value="${tot || ''}"${pcpSt.per ? ' readonly tabindex="-1"' : ''}>${PC_SAR}</span>`
       
@@ -10491,11 +10495,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<button type="button" role="radio" data-pcpper="1" aria-checked="${pcpSt.per}">${esc(L.per)}</button></div></div>`
       + `<div class="pcp-split">${half('mid', pcTopF(d.deck))}${half('bank', pcTopF(d.qb))}</div>`
       + `<div class="pcp-ft"><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
+    box.querySelectorAll('.pcp-list').forEach((x, n) => { x.scrollTop = sc[n] || 0; }); const pn = box.querySelector('.pcp-panel'); if (pn) pn.scrollTop = psc;
   }
   function pcpOpen(id) {
     const p = pcvPost(id); if (!p) return;
     const s = (p.data && p.data.sale) || {}, fp = s.fp && typeof s.fp === 'object' ? s.fp : null;
-    pcpSt = { id, per: !!fp, total: Math.max(0, +s.price || 0), f: Object.assign({}, fp || {}), open: new Set() };
+    pcpSt = { id, per: !!fp, total: Math.max(0, +s.price || 0), f: Object.assign({}, fp || {}), open: new Set(), fresh: true };
     /* يُفتح من الشجرة ما فيه مسعَّرٌ، ومجلدٌ وحيدٌ يضمّ الباقي (فلا يبدو النصفُ فارغًا) */
     [p.data.deck, p.data.qb].forEach(ns => { const top = pcTopF(ns); if (top.length === 1) pcpSt.open.add(top[0].id);
       pcAllF(ns).forEach(n => { if (pcHasP(n, pcpSt.f)) pcpSt.open.add(n.id); }); });
