@@ -10156,14 +10156,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         + ['dl', 'seen', 'cm', 'warn'].map(x => row(CD_IC[CX_NW_IC[x]], nw[x] || 0, x, x === 'warn' ? ' pc-st--warn' : '')).join(''),
     };
     const nm = k => (en ? { book: 'Sources', mid: 'Summary', bank: 'Question bank' } : { book: 'المصادر', mid: 'الملخص', bank: 'بنك الأسئلة' })[k];
-    /* ===== إطاراتُ الإحصاءات للاستزادة، وأزرارُ المساحات تحتها (طلبُ صاحب الموقع) =====
-       الإطاراتُ الثلاثةُ باهتةٌ ساكنة: اسمُ المساحة على خطّ إطارها وأرقامُها عمودين في جوفه — تُقرأ ولا تُضغط.
-       وتحتها الأزرارُ الثلاثةُ نفسُها (‎[data-pkic]‎ في ‎.pk-icrow‎): هي التي تُوسِّع المساهمةَ على مساحتها */
-    return `<div class="pc-side"><div class="pc-info" aria-hidden="true">` + PK_IC_KEYS.map(k =>
-      `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg"><span class="pc-k__ic">${pkIcSvg(k, id)}</span>${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span></div>`).join('')
-      + `</div><div class="pk-icrow pc-ks pc-btns" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
-      `<button type="button" class="pk-ic pc-k pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(nm(k))}">`
-      + `<span class="pc-k__ic">${pkIcSvg(k, id)}</span><span class="pc-k__nm">${esc(nm(k))}</span></button>`).join('') + `</div></div>`;
+    /* ===== ثلاثةُ إطارات (طلبُ صاحب الموقع) =====
+       في أعلى كلّ إطارٍ اسمُ مساحته وحدَه على خطّه، وفي أسفله ينقطع الخطُّ لأيقونتها —
+       والأيقونةُ هي الزرّ (‎[data-pkic]‎ في ‎.pk-icrow‎): تُوسِّع المساهمةَ على مساحتها كما كانت */
+    return `<div class="pk-icrow pc-ks pc-fr" data-pkid="${esc(id)}">` + PK_IC_KEYS.map(k =>
+      `<div class="pc-fs pc-fs--${k}"><span class="pc-fs__lg">${esc(nm(k))}</span><span class="pc-k__s">${body[k]}</span>`
+      + `<button type="button" class="pk-ic pc-k pc-fs__go pc-k--${k}" data-pkic="${k}" data-pkid="${esc(id)}" title="${esc(nm(k))}" aria-label="${esc(nm(k))}"><span class="pc-k__ic">${pkIcSvg(k, id)}</span></button></div>`).join('') + `</div>`;
   }
   const PC_CV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 15.5-4.8-4.8L7 19"/></svg>';
   /* ===== سطرُ الاكتمال: دائرتُه وحدَها ويسارَها نسبتُه (طلبُ صاحب الموقع: «النسبة المئوية») =====

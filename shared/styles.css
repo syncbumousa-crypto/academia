@@ -19042,3 +19042,24 @@ html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-
 #cm-body .pk--pc .pc-btns .pc-k__ic { color: inherit; }
 #cm-body .pk--pc .pc-btns .pc-k__ic svg { width: 18px !important; height: 18px !important; }
 #cm-body .pk--pc .pc-btns .pc-k__nm { color: inherit; font-size: 13px; }
+/* ===== الإطاراتُ الثلاثة: الاسمُ على خطّها فوق، والأيقونةُ زرٌّ في انقطاعه تحت (‎.pc-fr‎) ===== */
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr {
+  position: static; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 14px; padding: 10px 0 18px;
+}
+#cm-body .pk--pc .pc-fr .pc-fs { position: relative; padding: 16px 14px 18px; border-radius: 18px; box-shadow: inset 0 0 0 1.5px rgba(44, 94, 101, .22); }
+#cm-body .pk--pc .pc-fr .pc-fs__lg { gap: 0; font-size: 13px; }
+#cm-body .pk--pc .pc-fr .pc-k__s { opacity: .8; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go,
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go {
+  position: absolute; bottom: -17px; left: 50%; transform: translateX(-50%); display: grid; place-items: center;
+  width: 46px; height: 34px; padding: 0; border-radius: 999px; opacity: 1;
+  background: var(--pc-pg, #fff); color: #2c5e65; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+  transition: color .15s, background .15s, transform .15s;
+}
+html[data-theme="dark"] #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go { --pc-pg: var(--bg, #0e181c); color: #7fb3bb; }
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:hover,
+#cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-fr .pc-fs__go:focus-visible { transform: translateX(-50%) translateY(-2px); color: #a8842e; background: var(--pc-pg, #fff); }
+#cm-body .pk--pc .pc-fr .pc-fs__go .pc-k__ic { color: inherit; }
+#cm-body .pk--pc .pc-fr .pc-fs__go svg { width: 24px !important; height: 24px !important; }
+#cm-body .pk--pc .pc-fr .pc-fs:has(.pc-fs__go:hover) { box-shadow: inset 0 0 0 1.5px rgba(168, 132, 46, .55); }
+#cm-body .pk--pc .pc-fr:hover .pk-ic { opacity: 1; }
