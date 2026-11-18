@@ -18726,3 +18726,11 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none),
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none)[style*="--pk-h"] { height: auto; min-height: 220px; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none) > .pk-bank { max-height: clamp(440px, 60vh, 600px); }
+/* ===== مجلداتُ البنك (طلبُ صاحب الموقع) =====
+   تصعد الصفوفُ نحو رأس المساحة (كانت تبدأ تحت سطر الرأس كلِّه وأيقونتُه في زاويته وحدها)، وزرُّ التحديد يدنو من
+   المثلّث والأيقونة، ويبقى ظاهرًا أبدًا لا عند المرور وحده */
+#cm-body .post-ytmain > .pk-split > .pk-bank > :is(.x3, #cm-cards) { margin-top: -10px; }
+#cm-body .pk-bank .x3-hd > .vt-grab { margin-inline-end: -6px; }
+#cm-body .pk-bank .x3-hd > .vt-grab,
+#cm-body .pk-bank .x3.cx-ro .x3-hd > .vt-grab--ro,
+#cm-body .pk--edit .pk-bank .x3-hd > .vt-grab--sel { opacity: 1; }
