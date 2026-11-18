@@ -43,7 +43,13 @@ const KINDS = new Set(['nook', 'exams', 'srs', 'prefs']);
      DELETE /api/udoc?kind=xt:<id>   ⇐ حذفُه من اللوح
    وتبقى ‎exams‎ القديمةُ كما هي: نسخةٌ احتياطيّةٌ لما قبل النقل، لا تُمحى. */
 const XT = /^xt:[a-z0-9]{4,40}$/;
-const okKind = k => KINDS.has(k) || XT.test(k);
+/* ===== وسجلُّ النشاط: وثيقةٌ لكلّ جهاز (ROADMAP-CLOUD-NEXT ٣) =====
+   ‏‎act:<الجهاز>‎ — كلُّ جهازٍ يكتب أيّامَه هو وحده، والموقعُ يجمعها عند العرض.
+   فلا يكتب جهازٌ فوق جهاز، ولا يُعدّ يومٌ مرّتين.
+     GET /api/udoc?list=act  ⇐ أجهزتي كلُّها */
+const ACT = /^act:[a-z0-9]{4,40}$/;
+const okKind = k => KINDS.has(k) || XT.test(k) || ACT.test(k);
+const LISTS = new Map([['xt', 'xt:%'], ['act', 'act:%']]);
 
 const enc = new TextEncoder();
 const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
@@ -98,9 +104,10 @@ export async function onRequest({ request, env }) {
     const s = await session(db, request);
     if (!s) return J({ error: 'auth' }, 401);
 
-    if (m === 'GET' && url.searchParams.get('list') === 'xt') {
+    const listOf = url.searchParams.get('list') || '';
+    if (m === 'GET' && LISTS.has(listOf)) {
       const rs = await db.prepare(
-        "SELECT kind, data, rev, updated FROM udoc WHERE uid = ? AND kind LIKE 'xt:%'").bind(s.uid).all();
+        'SELECT kind, data, rev, updated FROM udoc WHERE uid = ? AND kind LIKE ?').bind(s.uid, LISTS.get(listOf)).all();
       const list = [];
       for (const r of (rs && rs.results) || []) {
         let d = null;
@@ -108,7 +115,7 @@ export async function onRequest({ request, env }) {
         if (!d || typeof d !== 'object') continue;
         const big = !!d.run;
         if (big) d = Object.assign({}, d, { run: null });
-        list.push({ id: String(r.kind).slice(3), rev: r.rev | 0, updated: r.updated | 0, big, data: d });
+        list.push({ id: String(r.kind).slice(listOf.length + 1), rev: r.rev | 0, updated: r.updated | 0, big, data: d });
       }
       return J({ list });
     }
