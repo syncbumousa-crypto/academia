@@ -274,7 +274,13 @@ export async function onRequest({ request, env }) {
   } catch (e) {
     console.error('posts:', m, e && e.message);
     /* وقيدُ «واحدةٌ لكلّ بند» يقع خطأً في القاعدة — يُترجَم إلى ما يفهمه المستخدم */
-    if (String(e && e.message).includes('UNIQUE')) return J({ error: 'duplicate' }, 409);
+    /* ===== وبصيغة Postgres لا SQLite =====
+       نُقل الملفُّ من قاعدةٍ تقول ‎UNIQUE constraint failed‎ إلى Postgres، وهو يقول
+       ‎duplicate key value violates unique constraint‎ ورمزُه ‎23505‎. فلم يطابق الشرطُ
+       قطّ، وصار كلُّ تعارضٍ ‎500‎ — فلا يصالح العميلُ (يجذب ويتبنّى المعرّف عند ‎409‎)،
+       ويُعيد الدفعَ في كلّ حفظٍ أبدًا: ألفٌ ومئةٌ من لوحة الأدمن عند كلّ فتح. */
+    if ((e && e.code === '23505') || /unique|duplicate key/i.test(String(e && e.message)))
+      return J({ error: 'duplicate' }, 409);
     return J({ error: 'server' }, 500);
   }
 }
