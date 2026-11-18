@@ -11602,6 +11602,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
   const ktOk = n => KTRO ? `<span class="kt-ok${n.ok ? ' on' : ''}" aria-label="${n.ok ? '✓' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
+  /* بقيّةُ صفوف الجدول المنشور: تُلحَق بجدولها دفعةً في كلّ فراغ. ومفتاحٌ لم يُرسم جدولُه
+     (بُني نصُّه ولم يُوضع، أو هُدم قبل أن يكتمل) يُمحى فلا يبقى في الذاكرة */
+  const KT_FIRST = 40, KT_STEP = 60, KT_REST = new Map();
+  let ktRestN = 0;
+  function ktFillRest() {
+    KT_REST.forEach((rows, key) => {
+      const tb = document.querySelector(`table.kt[data-ktrest="${key}"] > tbody`);
+      KT_REST.delete(key);
+      if (!tb) return;
+      tb.parentElement.removeAttribute('data-ktrest');
+      const idle = window.requestIdleCallback || (f => setTimeout(f, 16));
+      const step = () => {
+        if (!tb.isConnected || !rows.length) return;
+        tb.insertAdjacentHTML('beforeend', rows.splice(0, KT_STEP).join(''));
+        if (rows.length) idle(step, { timeout: 400 });
+      };
+      idle(step, { timeout: 400 });
+    });
+  }
   function ktViewHTML(id, sel, v, folds, pack, ro) {
     KTRO = !!ro;
     try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; }
@@ -11616,11 +11635,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (v === 'table') {
       const h = host.holder.kth || T().ktHead, used = hlUsed(id);
       let k = 0;
-      body = !cards.length ? '' : `<table class="kt"><thead><tr>`
-        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
-        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
-        + `</tr></thead><tbody>`
-        + deep.map(x => {
+      const rows = deep.map(x => {
           /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
           if (x.h) return '';
           const n = x.n;
@@ -11628,7 +11643,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
-        }).join('')
+        }).filter(Boolean);
+      /* ===== والجدولُ المنشورُ يُرسم دفعاتٍ =====
+         رزمةٌ بأربعِ مئةٍ وأربعٍ وأربعين بطاقةً جدولٌ قامتُه خمسون ألفَ بكسلٍ في صندوقِ
+         خمسِ مئة: أوّلُ قراءةٍ بعد الرسم تخطّط ألفًا وسبعَمئةِ خليّةٍ دفعةً (~٣٢٠ms، والنقرةُ
+         واقفة). فيُرسم صدرُه، ويُلحَق الباقي في أوقات الفراغ (‎ktFillRest‎).
+         والمنشورُ وحدَه: جدولُ التحرير تُركَّز خلاياه وتُضاف صفوفُه فيُطلب الصفُّ لحظةَ رسمه */
+      let rest = null;
+      if (ro && rows.length > KT_FIRST) {
+        rest = 'k' + (++ktRestN);
+        KT_REST.set(rest, rows.splice(KT_FIRST));
+        queueMicrotask(ktFillRest);
+      }
+      body = !cards.length ? '' : `<table class="kt"${rest ? ` data-ktrest="${rest}"` : ''}><thead><tr>`
+        /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
+        + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
+        + `</tr></thead><tbody>`
+        + rows.join('')
         + `</tbody></table>`;
     } else if (v === 'cards' && pkLab()) {
       /* ROADMAP-PAPERS: رزمةُ أوراقٍ خلف بعضها (‎ppMountAll‎ يبنيها بعد الرسم) */
