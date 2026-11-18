@@ -6347,8 +6347,10 @@ html[data-theme="light"] { --cdi-gry: #4a5c6e; }
   --cdo-ind: #31267c;  --cdo-viol: #4f176b; --cdo-pnk: #63064c;
   --cdo-gry: #23323c;
 }
-[class*="cdh-"] [class*="cdi-"],
-[class*="cdh-"][class*="cdi-"] { color: var(--cdo, inherit); }
+/* بأسماء الأصناف لا بمُنتقي السلسلة الجزئيّة: ذاك يجعل كلَّ تبديل صنفٍ في الصفحة
+   يُعيد حسابَ أنماط ما تحته كلِّه (قِيس: ٣٥٦–٢٠٢٠ عنصرًا لكلّ تبديلٍ على الجسد) */
+:is(.cdh-red, .cdh-orn, .cdh-amb, .cdh-gold, .cdh-grn, .cdh-emr, .cdh-teal, .cdh-pet, .cdh-blu, .cdh-ind, .cdh-viol, .cdh-pnk, .cdh-y, .cdh-s, .cdh-o, .cdh-p, .cdh-r) :is(.cdi-red, .cdi-orn, .cdi-amb, .cdi-gold, .cdi-grn, .cdi-emr, .cdi-teal, .cdi-pet, .cdi-blu, .cdi-ind, .cdi-viol, .cdi-pnk, .cdi-gry),
+:is(.cdh-red, .cdh-orn, .cdh-amb, .cdh-gold, .cdh-grn, .cdh-emr, .cdh-teal, .cdh-pet, .cdh-blu, .cdh-ind, .cdh-viol, .cdh-pnk, .cdh-y, .cdh-s, .cdh-o, .cdh-p, .cdh-r):is(.cdi-red, .cdi-orn, .cdi-amb, .cdi-gold, .cdi-grn, .cdi-emr, .cdi-teal, .cdi-pet, .cdi-blu, .cdi-ind, .cdi-viol, .cdi-pnk, .cdi-gry) { color: var(--cdo, inherit); }
 /* ============================================================
    (السجلُّ الأوّل — تُرك للحجّة لا للعمل)
    ============================================================
@@ -6541,8 +6543,8 @@ html[data-theme="light"] { --cdi-gry: #4a5c6e; }
 .cd-wb--mn { width: var(--mn-w); height: var(--mn-h); }
 .cd-wb--mn svg { width: var(--mn-ic); height: var(--mn-ic); }
 /* وما سواها من أزرار الصدَفة (جلدُ الورق مثلًا) يبقى على القدّ الأوّل */
-.cd-wb:not([class*="cd-wb--"]) { width: 26px; height: 24px; font-size: 12.5px; }
-.cd-wb:not([class*="cd-wb--"]) svg { width: 13.5px; height: 13.5px; }
+.cd-wb:not(.cd-wb--mn, .cd-wb--mx, .cd-wb--x) { width: 26px; height: 24px; font-size: 12.5px; }
+.cd-wb:not(.cd-wb--mn, .cd-wb--mx, .cd-wb--x) svg { width: 13.5px; height: 13.5px; }
 
 /* ============================================================
    متاعُ الجيب: انسخ · الصق · كرّر
@@ -11534,8 +11536,6 @@ html[data-theme="dark"] .cd-iot.cd-ioimgdel:hover { color: #e0798c; }
   pointer-events: none;   /* الصفيحةُ لا تلتقط المؤشّر — الجسمُ وحده يلتقطه */
 }
 html[data-lang="en"] .cx-selbar { left: var(--side-w); right: 0; }
-body.side-closed .cx-selbar { right: 0; }
-html[data-lang="en"] body.side-closed .cx-selbar { left: 0; }
 .cx-selbar[hidden] { display: none; }
 
 /* الجسم: أرضيّةٌ شفّافةٌ يفصلها الضبابُ عمّا تحتها لا اللون */
@@ -17388,11 +17388,13 @@ html[data-theme="dark"] .pk-es { --es-tx: #e9eef0; --es-mut: #93a0a4; --es-ln: #
 /* ومساهمةٌ لم يُكتب فيها شيء: لا عدّاداتِ أصفار في رأسها */
 .pk--edit:has(.pk-split__ph--es) .x3-pkhd :is(.x3-trio, .cs) { display: none; }
 /* وأدواتُ القاع («+» وغيرُه) لا تظهر ما دامت المساحةُ النشِطة فارغةً (طلبُ صاحب الموقع): زرُّ البداية في وسطها يكفي.
-   ‏‎visibility‎ لا ‎display‎: فلا يتبدّل قاعُ البطاقة ولا لسانُها */
-.pk--edit:is(.pk-act--mid, :not([class*="pk-act--"])):has(.pk-split__ph--es) .cx-acttools > *,
-.pk--edit.pk-act--bank:has(.pk-bank #cm-cards:empty) .cx-acttools > *,
-.pk--edit.pk-act--bank:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > *,
-.pk--edit.pk-act--book:has(.pk-src--es) .cx-acttools > * { visibility: hidden; pointer-events: none; }
+   ‏‎visibility‎ لا ‎display‎: فلا يتبدّل قاعُ البطاقة ولا لسانُها.
+   وعلى الخانة نفسِها لا على أبنائها (‎> *‎): ‎:has()‎ يتبعه ‎> *‎ يجعل كلَّ تغييرٍ في الصفحة — ولو نصَّ
+   الساعة كلَّ ثانية — يُعيد حسابَ أنماطها كلِّها (قِيس: ٣٣٧ عنصرًا، وعلى الخانة ٢). والأبناءُ يرثون الإخفاء */
+.pk--edit:is(.pk-act--mid, :not(.pk-act--book, .pk-act--mid, .pk-act--bank)):has(.pk-split__ph--es) .cx-acttools,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards:empty) .cx-acttools,
+.pk--edit.pk-act--bank:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools,
+.pk--edit.pk-act--book:has(.pk-src--es) .cx-acttools { visibility: hidden; pointer-events: none; }
 
 /* ===== لا مربّعَ كبيرًا تحت الأقسام (طلبُ صاحب الموقع) =====
    المساهماتُ على لوح الموقع نفسِه: يُنزع سطحُ ‎.cm-pane‎ (الخلفيّةُ والحدُّ والانحناءُ) وقامتُه الثابتة وتمريرُه
@@ -17567,7 +17569,7 @@ html[data-theme="dark"] .pk-blkh__x:not(:hover):not(:focus-visible) .pk-curve__d
 .pk-none { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   color: var(--u-mut); font: 600 14px/1.6 'KFUPM Display', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; text-align: center; }
 .pk-none svg { width: 22px; height: 22px; opacity: .7; }
-.pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden; pointer-events: none; }
+.pk--edit:has(.pk-split--none) .cx-acttools { visibility: hidden; pointer-events: none; }
 /* لا مساحةَ مفتوحة: المساهمةُ بلا تذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame):has(.pk-split--none) :is(.pk-ftline, .vt-foot, .pk-pubfoot) { display: none; }
 /* الكتلُ تمتدّ تحت عمود الصورة أيضًا (طلبُ صاحب الموقع): لا تلتزم بمحاذاة رأس المساهمة، فتتوازن حافّتاها في المربّع */
@@ -17589,8 +17591,8 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 .pk--bandfx .post-ytmain > .pk-fstrip-ph + .pk-split { margin-top: 22px; }
 .pk-fstrip-ph { width: -webkit-fill-available; width: -moz-available; width: stretch; }
 /* زرُّ «أوّل …» رُفع من المساحات الفارغة، فأدواتُ الذيل تظهر فيها (طلبُ صاحب الموقع) — إلّا ولا مساحةَ مفتوحة */
-#cm-body .pk--edit .cx-acttools > * { visibility: visible !important; pointer-events: auto !important; }
-#cm-body .pk--edit:has(.pk-split--none) .cx-acttools > * { visibility: hidden !important; pointer-events: none !important; }
+#cm-body .pk--edit .cx-acttools { visibility: visible !important; pointer-events: auto !important; }
+#cm-body .pk--edit:has(.pk-split--none) .cx-acttools { visibility: hidden !important; pointer-events: none !important; }
 /* مسكةُ الذيل ظاهرةٌ دائمًا: للذيل ارتفاعُ خانة الأدوات فتنزل تحت المسكة ولا تتراكب عليها */
 :is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
 .pk--ftdn .vt-foot { min-height: 0; }

@@ -89,7 +89,7 @@
    التحديد وحدَهم، فلا يُعاد حسابُ أنماط الصفحة كلِّها في كلّ إطار. */
 :root { --side-rail: 64px; }
 .sidebar, .side-handle, .cx-selbar { --side-w: 200px; }
-body.side-rail :is(.sidebar, .side-handle, .cx-selbar) { --side-w: var(--side-rail); }
+:is(.sidebar, .side-handle, .cx-selbar).side-rail { --side-w: var(--side-rail); }
 
 
 /* ============================================================
@@ -99,57 +99,57 @@ body.side-rail :is(.sidebar, .side-handle, .cx-selbar) { --side-w: var(--side-ra
    بعدهم بربع ثانية — فبدا ثقيلًا متقطّعًا. فصار ‎--side-w‎ متغيّرًا مسجَّلًا يُحرَّك،
    وكلُّ ما يُحسب منه (اللوح والحَشو والدائرة) يتبعه في الإطار نفسِه بالمنحنى نفسِه.
    والأسماءُ تتلاشى وتنطوي بدل أن تختفي، والأيقونةُ تنزاح إلى الوسط بالحَشو لا بقفزةٍ.
-   والحركةُ عند الضغط وحدَه (‎body.side-anim‎ من ‎setRail‎)، لا عند فتح الصفحة. */
+   والحركةُ عند الضغط وحدَه (‎.side-anim‎ على اللوح من ‎setRail‎)، لا عند فتح الصفحة. */
 @property --side-w { syntax: '<length>'; inherits: false; initial-value: 200px; }
 .side-logo, .sidebar .tabs .tab-tx, .nook-com span,
 .side-logout-tx, .side-auth-tx, .side-profile .sp-name { max-width: 170px; overflow: hidden; white-space: nowrap; }
-body.side-rail :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+.sidebar.side-rail :is(.side-logo, .tabs .tab-tx, .nook-com span,
                    .side-logout-tx, .side-auth-tx, .side-profile .sp-name) { max-width: 0; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  body.side-anim .cx-selbar { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
-  body.side-anim .side-handle { transition: --side-w .32s cubic-bezier(.32,.72,0,1), background .15s, color .15s, transform .15s; }
-  body.side-anim :is(.side-logo, .sidebar .tabs .tab-tx, .nook-com span,
+  .cx-selbar.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1); }
+  .side-handle.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1), background .15s, color .15s, transform .15s; }
+  .sidebar.side-anim :is(.side-logo, .tabs .tab-tx, .nook-com span,
                      .side-logout-tx, .side-auth-tx, .side-profile .sp-name) {
     transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease; }
-  body.side-anim :is(.nook-com, .side-logout, .side-join, .side-login) {
+  .sidebar.side-anim :is(.nook-com, .side-logout, .side-join, .side-login) {
     transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
-  body.side-anim .side-acct .side-profile {
+  .sidebar.side-anim .side-acct .side-profile {
     transition: width .32s cubic-bezier(.32,.72,0,1), height .32s cubic-bezier(.32,.72,0,1), min-height .32s cubic-bezier(.32,.72,0,1),
                 padding .32s cubic-bezier(.32,.72,0,1), border-radius .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s; }
-  body.side-anim .sidebar .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
-  body.side-anim .sidebar { transition: --side-w .32s cubic-bezier(.32,.72,0,1), padding .32s cubic-bezier(.32,.72,0,1); }
-  body.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
+  .sidebar.side-anim .tabs button { transition: padding .32s cubic-bezier(.32,.72,0,1), gap .32s cubic-bezier(.32,.72,0,1), background .15s, box-shadow .15s; }
+  .sidebar.side-anim { transition: --side-w .32s cubic-bezier(.32,.72,0,1), padding .32s cubic-bezier(.32,.72,0,1); }
+  .sidebar.side-anim .side-brand { transition: gap .32s cubic-bezier(.32,.72,0,1); }
 }
 /* واللوحُ سطحٌ مصمتٌ لا يتبدّل (§٨ في ‎ROADMAP-SIDEBAR.md‎): لا تمويه ولا انكسار ولا لمعة —
    فلا شيءَ فيه يومض حين يتّسع أو يضيق، ولا يُعاد رسمُ ما خلفه في كلّ إطار. */
 
-body.side-rail .sidebar { padding: 14px 8px; }
-body.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
-body.side-rail .sidebar .tabs .nook-com { gap: 0; padding-inline: calc(50% - 5.5px) 0; }
-body.side-rail .side-profile { gap: 0; }
-body.side-rail .sidebar .tabs button { gap: 0; padding-inline: calc(50% - 9px) 0; }
-body.side-rail .side-ctl { align-items: center; }
-body.side-rail .sidebar .themebar, body.side-rail .sidebar .langbar { justify-content: center; }
+.sidebar.side-rail { padding: 14px 8px; }
+.sidebar.side-rail :is(.side-logout, .side-join, .side-login) { gap: 0; padding-inline: 0; }
+.sidebar.side-rail .tabs .nook-com { gap: 0; padding-inline: calc(50% - 5.5px) 0; }
+.sidebar.side-rail .side-profile { gap: 0; }
+.sidebar.side-rail .tabs button { gap: 0; padding-inline: calc(50% - 9px) 0; }
+.sidebar.side-rail .side-ctl { align-items: center; }
+.sidebar.side-rail .themebar, .sidebar.side-rail .langbar { justify-content: center; }
 /* والسهمُ لا موضعَ له في سكّةٍ بلا أسماء، ولا الكتلةُ: الجوفُ صفٌّ
    من نقاطٍ تحت أيقونةٍ، ولوحةٌ حولَه تُضيّق السكّةَ بلا فائدة. */
-body.side-rail .nook-caret { display: none !important; }
-body.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
-body.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
-body.side-rail .nook-block.is-open > #nook-head.is-active {
+.sidebar.side-rail .nook-caret { display: none !important; }
+.sidebar.side-rail .nook-block.is-open { background: transparent; box-shadow: none; padding-bottom: 0; }
+.sidebar.side-rail .nook-block.is-open > #nook-head { box-shadow: none; }
+.sidebar.side-rail .nook-block.is-open > #nook-head.is-active {
   box-shadow: inset 0 0 0 1px var(--plate-edge); }
-body.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
+.sidebar.side-rail .nook-block.is-open .nook-coms { padding-inline: 0; }
 
 /* ===== الحسابُ في السكّة: دائرةُ صورةٍ لا صندوق =====
    كان الاسمُ يُخفى بصنفٍ لا وجودَ له (‎.side-pname‎ والصحيح ‎.sp-name‎)،
    فيبقى شاغلًا سطرَه ويدفع الصورةَ إلى الحافّة. فصُحِّح الاسمُ، وصار
    الزرُّ نفسُه دائرةً بقدر الصورة: لا لوحةَ تحتها ولا حشوَ حولها. */
-body.side-rail .side-acct .side-profile {
+.sidebar.side-rail .side-acct .side-profile {
   width: 38px; height: 38px; min-height: 0; padding: 0; margin-inline: auto;
   border-radius: 50%; overflow: hidden; background: transparent;
   box-shadow: inset 0 0 0 1px var(--plate-edge); }
-body.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
-body.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
-body.side-rail .side-brand { gap: 0; }
+.sidebar.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
+.sidebar.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
+.sidebar.side-rail .side-brand { gap: 0; }
 
 /* ============================================================
    داخلُ اللوح — نظامٌ واحدٌ لكلّ ما يُضغط

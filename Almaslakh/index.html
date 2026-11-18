@@ -23,14 +23,14 @@
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
   <script>
-    window.AC_MINV = 963;
+    window.AC_MINV = 964;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
 
   <!-- نظامُ الزجاج: الورقةُ نفسُها الّتي يلبسها الجذر. ولا قيمةَ لونٍ فيها
        — القيمُ تحتُ في ‎<style>‎ الصفحة، فهي الّتي تُفرّق الموقعين. -->
-  <link rel="stylesheet" href="../shared/glass.css?v=41">
+  <link rel="stylesheet" href="../shared/glass.css?v=42">
 
   <!-- ===== مبدِّلُ المجتمع =====
        موضعُ هذي القواعد ههنا لا في ‎shared/styles.css‎ ريثما يُسوّى الفرقُ بين
@@ -156,9 +156,9 @@
     .sc-item.is-on { background: var(--plate-hi); color: var(--glass-ink); opacity: 1;
                      box-shadow: inset 0 0 0 1px var(--plate-edge); font-weight: 700; }
     /* وفي السكّة لا أسماءَ ولا كتلة */
-    body.side-rail .side-com:has(.sc-menu:not([hidden])) {
+    .sidebar.side-rail .side-com:has(.sc-menu:not([hidden])) {
       background: transparent; box-shadow: none; padding-bottom: 0; }
-    body.side-rail .sc-now .sc-nm { display: none; }
+    .sidebar.side-rail .sc-now .sc-nm { display: none; }
 
     /* القائمةُ تتمدّد في مجرى الشريط ولا تطفو فوقه: الشريطُ ‎overflow-y:auto‎
        فالطافي يُقصّ عند حافّته، والمتمدّدُ يدفع ما تحته ولا يُقصّ أبدًا */
@@ -776,8 +776,13 @@
     (function () {
 
       var RAIL_K = 'academia2:rail:maslakh:v1';
+      /* الحالُ على اللوح والمقبض وشريط التحديد لا على الجسد: صنفٌ على الجسد يُعيد حسابَ أنماط
+         الصفحة كلِّها (قِيس: ٦٧٧ عنصرًا مع مادّةٍ مفتوحة)، وعلى اللوح ما تحته وحدَه */
+      function sideEls() { return [document.getElementById('sidebar'), document.getElementById('side-handle'), document.getElementById('cx-selbar')].filter(Boolean); }
+      function sideCls(c, on) { sideEls().forEach(function (el) { el.classList.toggle(c, !!on); }); }
+      function isRail() { var sb = document.getElementById('sidebar'); return !!sb && sb.classList.contains('side-rail'); }
       function setRail(on) {
-        document.body.classList.toggle('side-rail', !!on);
+        sideCls('side-rail', on);
         try { localStorage.setItem(RAIL_K, on ? '1' : ''); } catch (e) {}
         var h = document.getElementById('side-handle');
         if (h) h.title = h.ariaLabel = on ? 'توسيع الشريط' : 'تضييق الشريط';
@@ -785,17 +790,16 @@
       document.getElementById('side-handle').addEventListener('click', function (e) {
         e.stopImmediatePropagation(); e.preventDefault();
         /* الحركةُ للضغطة وحدَها (‎side-anim‎): تُرفع بعد انتهائها فلا تتحرّك الصفحةُ عند فتحها */
-        var B = document.body;
-        clearTimeout(B._sa);
-        B.classList.add('side-anim'); setRail(!B.classList.contains('side-rail'));
-        B._sa = setTimeout(function () { B.classList.remove('side-anim'); }, 360);
+        clearTimeout(setRail.t);
+        sideCls('side-anim', true); setRail(!isRail());
+        setRail.t = setTimeout(function () { sideCls('side-anim', false); }, 360);
       }, true);
-      /* السكّةُ هي الافتراض (الواسعُ لوحٌ يطفو فوق المحتوى): من لم يختر شيئًا (‎null‎) فسكّة، ومن اختار الواسعَ (‎''‎) بقي عليه */ try { var rv = localStorage.getItem(RAIL_K); if (rv === null || rv) document.body.classList.add('side-rail'); } catch (e) { document.body.classList.add('side-rail'); }
+      /* السكّةُ هي الافتراض (الواسعُ لوحٌ يطفو فوق المحتوى): من لم يختر شيئًا (‎null‎) فسكّة، ومن اختار الواسعَ (‎''‎) بقي عليه */ var rail0 = true; try { var rv = localStorage.getItem(RAIL_K); rail0 = rv === null || !!rv; } catch (e) {} sideCls('side-rail', rail0);
 
       /* وأيقونةُ «شريط جانبيّ» مكانَ السهم: المحرّكُ يبنيها وهو مشترك،
          فتُبدَّل من ههنا كما صُنع في الجذر. */
       document.addEventListener('DOMContentLoaded', function () {
-        setRail(document.body.classList.contains('side-rail'));
+        setRail(isRail());
         var h = document.getElementById('side-handle');
         if (h) h.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
           + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
