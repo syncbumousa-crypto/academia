@@ -19265,3 +19265,9 @@ html[data-theme="dark"] .pc-morph { color: #9fcbd2; background: linear-gradient(
 .pc-morph__pane { position: absolute; inset: 0; }
 .pc-morph > :not(i) { position: relative; display: flex; }
 .pc-morph svg { width: 18px; height: 18px; }
+/* ===== لافتةُ الغلاف في التحرير الضيّق (طلبُ صاحب الموقع) =====
+   الترويسةُ القديمة تبقى خفيّةً بشريطها (تُنقر أزرارُه برمجةً)، والعنوانُ حقلٌ في موضع الاسم */
+#cm-body .pk--edit.pk--pc .x3-pkhd.pc-edhd { display: none; }
+#cm-body .pk--edit.pk--pc .pc-name.pc-name--ed { display: inline-block; position: relative; min-width: 90px; max-width: 190px; overflow: hidden; -webkit-line-clamp: unset; vertical-align: top; }
+#cm-body .pk--edit.pk--pc .pc-name--ed > input { font: inherit; color: inherit; cursor: text; }
+#cm-body .pk--edit.pk--pc .pc-name--ed > input::placeholder { color: currentColor; opacity: .45; font-weight: 700; }

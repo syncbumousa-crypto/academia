@@ -10319,13 +10319,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (open && !(e.target.closest && e.target.closest('.pc-menu'))) open.remove();
   }, true);
-  function pcBan(p, deck, noKeys) {
+  function pcBan(p, deck, noKeys, ed) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
+    /* وفي التحرير (طلبُ صاحب الموقع): اللافتةُ نفسُها والعنوانُ حقلٌ يُكتب فيه (‎#cm-vtitle‎ — يحفظه مستمعُه العامّ) */
+    const nm = ed ? `<span class="vt-grow x3-ttlwrap pc-name pc-name--ed${t ? '' : ' is-ph'}" data-v="${esc(t) || T().pkTitlePh}"><input class="x3-ttlin" id="cm-vtitle" size="1" placeholder="${T().pkTitlePh}" value="${esc(t)}"></span>`
+      : `<b class="pc-name">${esc(t) || '—'}</b>`;
     return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
-      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b>${pcSaleHTML(p)}${pcProgHTML(p)}</div>`
+      + `<div class="pc-ttl">${nm}${pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
@@ -24303,22 +24306,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const icOn = PK_ICX && pkLab(), one = icOn && pkIcOne(p.id), edRow = icOn && !cxMax && !one;
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
     const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
-    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${blank ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && (!pkActOf(p.id) || cxFtGone) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
+    /* والضيّقُ يلبس لافتةَ الغلاف كالمنشورة (طلبُ صاحب الموقع): صفًّا بأزرارها، ومفتوحًا بإطاراتها بلا أزرار */
+    const pcEd = icOn && !cxMax, pcCls = pcEd ? (edRow ? ' pk--pc' : ' pk--pc pk--pcopen') : '';
+    return `<div class="post pk pk--peek pk--edit pk--pack${icx}${pcCls}${blank && !pcEd ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && (!pkActOf(p.id) || cxFtGone) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
         ${fr ? cxGlobs() : ''}
         <span class="post-av post-av--yt">${avatarHTML(p)}</span>
         <div class="post-ytmain">
           <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
-          <div class="x3-pkhd on">
-            ${x3ArtEdit(p, 'c', d.deck)}
+          <div class="x3-pkhd on${pcEd ? ' pc-edhd' : ''}">
+            ${pcEd ? '' : `${x3ArtEdit(p, 'c', d.deck)}
             <span class="vt-grow x3-ttlwrap${d.title ? '' : ' is-ph'}" data-v="${esc(d.title || '') || T().pkTitlePh}">
               <input class="x3-ttlin" id="cm-vtitle" size="1" placeholder="${T().pkTitlePh}" value="${esc(d.title || '')}">
-            </span>
+            </span>`}
             <!-- وشريطُ طرق العرض في التحرير، وعدّاداتُ المساهمة (شاراتُ الأنواع وخبرُها) في كبسولة البنك يسارَ اسمه (طلبُ صاحب الموقع) -->
             ${pkViewBar('edit', p.id, `<span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span><span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>`)}
           </div>
-          ${icx ? pkIcRow(p.id, !one) : ''}
+          ${pcEd ? pcBan(p, p.data.deck || [], !edRow, true) : ''}
+          ${icx && !(pcEd && edRow) ? pkIcRow(p.id, !one) : ''}
           ${fr && !edRow ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}
           ${pkBankOn(p.id) ? '' : '<div id="cm-cards"></div>'}
