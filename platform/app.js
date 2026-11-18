@@ -168,7 +168,10 @@
        إن كان الدرجُ صغيرًا: القياسُ نفسُه ثمنٌ لا يُدفع بلا حاجة. */
     /* والحدُّ ثلاثُ مئةٍ لا تسعُ مئة: الدرجُ انكمش من ثلاثة ملايين إلى دون
        الميجا، فصار القياسُ يصمت في المدى الذي صرنا نعمل فيه */
-    if (bootRaw > 300000) {
+    /* ===== والوزنُ يُقاس في أوّل فراغ =====
+       ‏‎JSON.stringify‎ لكلّ فرعٍ وأربعُ طبقاتٍ نزولًا: ~٢٤ms في كلّ إقلاع، والدرجُ فوق
+       الحدّ دائمًا. فيُقاس بعد الإقلاع ويُكتب في سطر الإقلاع نفسِه (كما يفعل ‎bootMark‎) */
+    if (bootRaw > 300000) (window.requestIdleCallback || (f => setTimeout(f, 500)))(() => {
       try {
         const wt = v => { try { return JSON.stringify(v).length; } catch (e) { return 0; } };
         const kids = v => (v && typeof v === 'object')
@@ -189,7 +192,12 @@
         }
         if (path.length) bootRow.deep = path.join(' > ');
       } catch (e) { /* لا يُعطَّل الإقلاعُ لأجل قياس */ }
-    }
+      /* ويُكتب في سطر هذا الإقلاع إن كان آخرَ الدفتر */
+      try {
+        const rs = bootRead_();
+        if (rs.length && rs[rs.length - 1].t === bootRow.t) { rs[rs.length - 1] = bootRow; bootPut(rs); }
+      } catch (e) {}
+    }, { timeout: 3000 });
     const rows = bootRead_();
     rows.push(bootRow);
     bootPut(rows);
@@ -10536,7 +10544,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
+  /* ===== ويُسأل عن الخطوط بعد الإقلاع لا في أثنائه =====
+     ‏‎document.fonts.ready‎ يُلزم المتصفّحَ أن يحسب أنماطَ الصفحة كلِّها في لحظته ليعرف
+     أيَّ خطٍّ يلزم — ~٥٦ms والسكربتُ لم يرسم شيئًا بعد. والوعدُ يُوفى ولو سُئل بعد
+     اكتمال التحميل، فالسؤالُ في أوّل فراغٍ لا يُسقط شيئًا. */
+  (window.requestIdleCallback || (f => setTimeout(f, 200)))(() => {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
+  }, { timeout: 1500 });
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
     const openId = open.get(parentKey);
@@ -33688,14 +33702,18 @@ void main() {
      عبر نموذج النوافذ — أعقدِ موضعٍ في المشروع — لأنّ النافذةَ تجد عقدتَها
      بالبحث في الرزمة ولا تعرف من أين جاءت. والحلُّ أبسط: **العقدةُ تحمل أصلَها
      في نفسِها**، فمن أمسك عقدةً عرف مساهمتَها بلا أن يسأل أحدًا. */
+  /* ويردّ عددَ ما وسم: لا تعليقَ إلّا على عقدةٍ موسومة (‎srvCmtSend‎ يشترط ‎srvP‎) */
   function srvMark(v, pid) {
-    if (Array.isArray(v)) { v.forEach(x => srvMark(x, pid)); return; }
-    if (!v || typeof v !== 'object') return;
+    if (Array.isArray(v)) { let n = 0; v.forEach(x => { n += srvMark(x, pid); }); return n; }
+    if (!v || typeof v !== 'object') return 0;
+    let n = 0;
     if (v.id && (v.t === 'c' || v.t === 'f' || v.f !== undefined || v.b !== undefined)) {
       v.srvN = 1;
       if (pid) v.srvP = pid;
+      n = 1;
     }
-    Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') srvMark(v[k], pid); });
+    Object.keys(v).forEach(k => { if (k !== 'srvN' && k !== 'srvP') n += srvMark(v[k], pid); });
+    return n;
   }
 
   /* ============================================================
@@ -34554,9 +34572,13 @@ void main() {
          الرزمة ولا تحمل معرّفَ مساهمتها. فلو لم تُوسَم العقدةُ نفسُها لَما عرف
          مرسِلُ التعليق أنّه يكتب في مساهمةِ غيره — فيكتب في نسخته، ويُمحى كلامُه
          في أوّل جذبٍ بلا أن يعلم. والوسمُ يجعلها تُعرف بنفسها. */
-      srvMark(r.data, r.id);
-      /* وتعليقاتُها تُجلب في أثرها: رحلةٌ لكلّ مساهمةٍ لا لكلّ بطاقة */
-      srvCmtPull(r.id, r.data, true);
+      const marked = srvMark(r.data, r.id);
+      /* وتعليقاتُها تُجلب في أثرها: رحلةٌ لكلّ مساهمةٍ لا لكلّ بطاقة.
+         ===== ومساهمةٌ لا عقدةَ فيها لا تعليقَ لها =====
+         التعليقُ لا يُكتب إلّا على عقدةٍ موسومة — بطاقةٍ أو مجلد. فالدكاترةُ والمادّةُ
+         والمصادرُ لا يُسأل عنها: كانت رحلةً لكلٍّ منها لا تردّ شيئًا أبدًا — ستٌّ
+         وخمسون عند الإقلاع، ومئةٌ وتسعٌ وأربعون عند فتح المكتبة، وليس فيها عقدةٌ واحدة. */
+      if (marked) srvCmtPull(r.id, r.data, true);
       n++;
     });
     const srvSame = JSON.stringify(info.posts) === srvSig0;
@@ -34666,7 +34688,7 @@ void main() {
       (node.cm = node.cm || []).push(it.c);
       n++;
     });
-    if (n) save();
+    if (n) saveSoon();   /* في أوّل فراغ: الردودُ تصل متتابعةً، وكان كلٌّ منها حفظًا كاملًا متزامنًا */
     if (n && cardDlg && typeof cdCmtPaint === 'function') { try { cdCmtPaint(true); } catch (e) {} }
   }
 
@@ -36881,8 +36903,10 @@ void main() {
     const c = (f, b) => nd({ t: 'c', f, b });          /* بطاقةُ معرفة */
     const q = (f, b) => nd({ t: 'q', f, b });          /* مسألة */
     const F = (name, ch, open = false) => nd({ t: 'f', name, open, ch });
+    /* ‏‎seeded‎ عند الزرع لا بعده: كانت تُزرع بلا وسم فيسمها ‎seedMark‎ ثمّ يحفظ الحالَ كلَّها
+       (~٤٠ms) في كلّ إقلاع — والدرجُ يُسقطها أصلًا (ليست لي)، فالحفظُ لا يحفظ شيئًا */
     const mk = (name, img, days, likes, dislikes, data) =>
-      ({ id: newId(), me: false, u: { name, img }, likes, liked: false, dislikes, disliked: false, ts: now - days * D, data });
+      ({ id: newId(), me: false, seeded: 1, u: { name, img }, likes, liked: false, dislikes, disliked: false, ts: now - days * D, data });
 
     postsOf(code, 'cards').push(
       mk('عمر القحطاني', av('ع', '#1565c0', '#42a5f5'), 1, 31, 1, {
@@ -41017,7 +41041,7 @@ void main() {
        مؤلِّفٍ حقيقيّ ليست منه — ولولا هذا القيدُ لأعاد هذا السطرُ وسمَ البذرة
        على ما نزعه ‎ankiToOwner‎، فمُحيت بطائقُ صاحب الموقع مع المصنوع. */
     seedEachPost(p => { if (p && !p.me && !p.seeded && !p.uid) { p.seeded = 1; n++; } });
-    if (n) save();
+    if (n) saveSoon();   /* في أوّل فراغ: وسمُ بذرةٍ لا يستعجل الإقلاع */
   }
 
   /* المِمحاة: تُنادى مرّةً يوم يجيء الحقيقيّ. وتُترك على ‎window‎ لا في زرٍّ —
