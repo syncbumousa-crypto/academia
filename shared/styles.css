@@ -18917,3 +18917,30 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-k__m > span:last-child, html[data-t
 html[data-theme="dark"] #cm-body .pk--pc .pc-k__s { border-color: rgba(255, 255, 255, .16); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-st b { color: #fff; }
 html[data-theme="dark"] #cm-body .pk--pc .pc-st--warn, html[data-theme="dark"] #cm-body .pk--pc .pc-st--warn b { color: #e5c47c; }
+/* ===== سطرُ الاكتمال وسطرُ البيع تحت العنوان (‎pcProgHTML‎ · ‎pcSaleHTML‎) ===== */
+#cm-body .pk--pc .pc-prog { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+#cm-body .pk--pc .pc-prog .pc-ring { margin: 0; flex: none; background: linear-gradient(to top, #d4b36a var(--pc-p, 0%), rgba(44, 94, 101, .06) var(--pc-p, 0%)); }
+#cm-body .pk--pc .pc-ptx { font-size: 12.5px; font-weight: 700; white-space: nowrap; color: #14233f; }
+#cm-body .pk--pc .pc-ptx.is-0 { font-weight: 600; color: #5d6b82; }
+#cm-body .pk--pc .pc-sale { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+#cm-body .pk--pc .pc-sst { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; white-space: nowrap; color: #5d6b82; }
+#cm-body .pk--pc .pc-sst svg { width: 14px; height: 14px; flex: none; }
+#cm-body .pk--pc .pc-sst--free, #cm-body .pk--pc .pc-sst--own { color: #2c5e65; }
+#cm-body .pk--pc .pc-sst--part { color: #8a6a1f; }
+#cm-body .pk--pc .pc-sst--pr { color: #14233f; }
+#cm-body .pk--pc .pc-buy {
+  display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border: 0; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 12.5px; font-weight: 700; white-space: nowrap; background: #14233f; color: #fff;
+  box-shadow: 0 8px 16px -10px rgba(20, 35, 63, .6); transition: transform .15s, box-shadow .15s;
+}
+#cm-body .pk--pc .pc-buy:hover { transform: translateY(-1px); box-shadow: 0 12px 20px -10px rgba(20, 35, 63, .7); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ptx, html[data-theme="dark"] #cm-body .pk--pc .pc-sst--pr { color: #fff; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-ptx.is-0, html[data-theme="dark"] #cm-body .pk--pc .pc-sst { color: rgba(255, 255, 255, .62); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sst--free, html[data-theme="dark"] #cm-body .pk--pc .pc-sst--own { color: #7fb3bb; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sst--part { color: #e1c172; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-buy { background: #eef3f4; color: #14233f; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { background: linear-gradient(to top, #d4b36a var(--pc-p, 0%), rgba(255, 255, 255, .08) var(--pc-p, 0%)); }
+/* والحالةُ وزرُّها سطرٌ واحد: العنوانُ وحدَه يُحدّ بعرضه، وتأخذ المجموعةُ عرضَ أطول أسطرها */
+#cm-body .pk--pc .pc-ttl { max-width: none; }
+#cm-body .pk--pc .pc-name { max-width: 150px; }
+#cm-body .pk--pc .pc-sale { flex-wrap: nowrap; }

@@ -10153,14 +10153,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span class="pc-k__s">${body[k][1]}</span></button>`).join('') + `</div>`;
   }
   const PC_CV_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 15.5-4.8-4.8L7 19"/></svg>';
+  /* ===== سطرُ الاكتمال: دائرتُه وحدَها ويسارَها نسبتُه (طلبُ صاحب الموقع: «النسبة المئوية») =====
+     المدى بنودُ المساهمة كلُّها — بطائقُ الملخّص وأسئلةُ البنك — بحساب ‎x3Ans‎ نفسِه (ما أُجيب منها)،
+     والدائرةُ تمتلئ ذهبًا من أسفل بقدرها */
+  function pcProgHTML(p) {
+    const d = p.data || {}, a = x3Ans([...(d.deck || []), ...(d.qb || [])]);
+    const pct = a.n ? Math.round(a.k / a.n * 100) : 0, en = pcEn();
+    const tx = pct <= 0 ? `<span class="pc-ptx is-0">${en ? 'Not started' : 'لم تبدأ بعد'}</span>`
+      : pct >= 100 ? `<span class="pc-ptx">${en ? 'Completed ✓' : 'مكتملة ✓'}</span>`
+        : `<span class="pc-ptx">${en ? pct + '% done' : 'أكملت ' + pct + '%'}</span>`;
+    return `<div class="pc-prog" title="${esc((en ? `${a.k} of ${a.n}` : `${a.k} من ${a.n}`))}"><span class="pc-ring" style="--pc-p:${pct}%"></span>${tx}</div>`;
+  }
+  /* ===== سطرُ البيع (طلبُ صاحب الموقع) =====
+     ‎data.sale‎: ‎{m:'part'|'lock', price}‎ — وبلا ‎sale‎ فهي مجانية. والمشترى سجلُّه ‎state.bought[id]‎.
+       · مجانية ⇐ كلمةُ «مجانية» وحدَها.   · اشتريتَها ⇐ «اشتريتها» وحدَها.
+       · جزءٌ مجانيّ أو مقفلة ⇐ الحالةُ ثمّ زرُّ «اشترِ · السعر».
+     وصاحبُها لا يشتري ما كتب: يرى الحالةَ والسعرَ بلا زرّ */
+  const PC_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
+  const PC_HALF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 10.5v10"/></svg>';
+  const PC_CHK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  function pcSaleHTML(p) {
+    const s = (p.data && p.data.sale) || null, en = pcEn();
+    const m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
+    if (m === 'free') return `<div class="pc-sale"><span class="pc-sst pc-sst--free">${en ? 'Free' : 'مجانية'}</span></div>`;
+    if ((state.bought || {})[p.id]) return `<div class="pc-sale"><span class="pc-sst pc-sst--own">${PC_CHK}${en ? 'Purchased' : 'اشتريتها'}</span></div>`;
+    const pr = Math.max(0, +s.price || 0), cur = en ? 'SAR' : 'ريال';
+    const st = m === 'part' ? `<span class="pc-sst pc-sst--part">${PC_HALF}${en ? 'Partly free' : 'جزء مجاني'}</span>`
+      : `<span class="pc-sst">${PC_LOCK}${en ? 'Locked' : 'مقفلة'}</span>`;
+    return `<div class="pc-sale">${st}` + (isMine(p) ? `<span class="pc-sst pc-sst--pr">${pr} ${cur}</span>`
+      : `<button type="button" class="pc-buy" data-pcbuy="${esc(p.id)}">${en ? 'Buy' : 'اشترِ'} · ${pr} ${cur}</button>`) + `</div>`;
+  }
   function pcBan(p, deck) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
-    const a = x3Ans(deck);
     return `<div class="pc-ban pc-ban--${cv.k}" style="--pc-bg:${cv.bg}">`
       + (cv.k === 'sc' ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"></span>`
-      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b><span class="pc-ring" title="${esc(T().masteryDot || '')}">${a && a.k ? x3DotAns(a) : ''}</span></div>`
+      + `<div class="pc-ttl"><b class="pc-name">${esc(t) || '—'}</b>${pcProgHTML(p)}${pcSaleHTML(p)}</div>`
       + pcCardsHTML(p)
       + (isMine(p) ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
