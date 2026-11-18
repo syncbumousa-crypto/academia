@@ -19392,3 +19392,54 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-art.pc-art--empty { color: #e1c172;
 html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::before { border-color: rgba(212, 179, 106, .5); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-art--empty::after { background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .12) 50%, transparent 65%); }
 @media (prefers-reduced-motion: reduce) { #cm-body .pk--pc .pc-art--empty::before, #cm-body .pk--pc .pc-art--empty::after { animation: none; } }
+/* ===== نافذةُ «غلاف المساهمة» بثيم الموقع — على هيئة لوح الفلاتر (‎.fpanel‎) (طلبُ صاحب الموقع) =====
+   زجاجٌ مضبَّبٌ بحدٍّ داخليٍّ أبيض، وتبويباتُها رقاقاتُ الفلاتر، والمختارُ تركوازُ الموقع لا الذهب */
+#pcv { background: rgba(13, 42, 72, .16); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+#pcv .pcv-panel {
+  padding: 16px 18px 18px; border-radius: 26px; corner-shape: round; color: #14233f;
+  background: rgba(231, 239, 240, .84); backdrop-filter: blur(20px) saturate(1.7); -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85), 0 24px 56px -20px rgba(13, 42, 72, .35);
+  animation: pcvIn .28s cubic-bezier(.32, .72, 0, 1);
+}
+@keyframes pcvIn { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+html[data-theme="dark"] #pcv { background: rgba(0, 0, 0, .3); }
+html[data-theme="dark"] #pcv .pcv-panel { color: #e6edf1; background: rgba(23, 49, 58, .84); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 24px 56px -20px rgba(0, 0, 0, .6); }
+#pcv .pcv-hd { margin-bottom: 12px; font-size: 15px; }
+#pcv .pcv-x { width: 30px; height: 30px; border-radius: 50%; opacity: 1; color: #5d6b82; background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); }
+#pcv .pcv-x:hover { color: #2c5e65; background: #fff; }
+html[data-theme="dark"] #pcv .pcv-x { color: #93a7b6; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+html[data-theme="dark"] #pcv .pcv-x:hover { color: #e6edf1; background: rgba(255, 255, 255, .12); }
+#pcv .pcv-x svg { width: 14px; height: 14px; }
+/* التبويباتُ رقاقاتُ الفلاتر، وتحتها خطُّ الفصل بين مجموعاتها */
+#pcv .pcv-tabs { gap: 7px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid rgba(20, 35, 63, .08); }
+#pcv .pcv-tab { padding: 6px 13px; font-size: 12.5px; font-weight: 600; color: #5d6b82; background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); transition: color .15s, box-shadow .15s, background .15s; }
+#pcv .pcv-tab:hover { color: #2c5e65; box-shadow: inset 0 0 0 1px #2c5e65; }
+#pcv .pcv-tab.on { color: #fff; background: #2c5e65; box-shadow: none; font-weight: 600; }
+html[data-theme="dark"] #pcv .pcv-tabs { border-bottom-color: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] #pcv .pcv-tab { color: #7fb3bb; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+html[data-theme="dark"] #pcv .pcv-tab:hover { color: #e6edf1; box-shadow: inset 0 0 0 1px #7fb3bb; }
+html[data-theme="dark"] #pcv .pcv-tab.on { color: #fff; background: #2c5e65; box-shadow: none; }
+/* «اللون» عنوانُ مجموعةٍ كعناوين الفلاتر، والمختارُ حلقةٌ تركوازيّة */
+#pcv .pcv-sw { font-size: 12px; font-weight: 700; color: #5d6b82; opacity: 1; }
+html[data-theme="dark"] #pcv .pcv-sw { color: #93a7b6; }
+#pcv .pcv-col.on { box-shadow: 0 0 0 2px #e7eff0, 0 0 0 4px #2c5e65; }
+html[data-theme="dark"] #pcv .pcv-col.on { box-shadow: 0 0 0 2px #17313a, 0 0 0 4px #7fb3bb; }
+#pcv .pcv-tile { color: #5d6b82; font-weight: 600; }
+html[data-theme="dark"] #pcv .pcv-tile { color: #93a7b6; }
+#pcv .pcv-tile.on { color: #2c5e65; }
+html[data-theme="dark"] #pcv .pcv-tile.on { color: #7fb3bb; }
+#pcv .pcv-tile.on img { box-shadow: 0 0 0 2px #e7eff0, 0 0 0 4px #2c5e65; }
+html[data-theme="dark"] #pcv .pcv-tile.on img { box-shadow: 0 0 0 2px #17313a, 0 0 0 4px #7fb3bb; }
+#pcv p { color: #5d6b82; opacity: 1; font-size: 12.5px; }
+html[data-theme="dark"] #pcv p { color: #93a7b6; }
+/* الأزرارُ رقاقاتٌ كذلك: «اختر صورة» رقاقةٌ مختارة، و«استخدم غلاف الكتاب» مثلُها، ومستعمَلُه مختارٌ بعلامة */
+#pcv .pcv-btn { padding: 8px 16px; font-size: 12.5px; font-weight: 600; color: #fff; background: #2c5e65; transition: filter .15s; }
+#pcv .pcv-btn:hover { filter: brightness(1.12); }
+html[data-theme="dark"] #pcv .pcv-btn { color: #fff; background: #2c5e65; }
+#pcv .pcv-btn.on { color: #2c5e65; background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px #2c5e65; }
+html[data-theme="dark"] #pcv .pcv-btn.on { color: #7fb3bb; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px #7fb3bb; }
+#pcv .pcv-btn.on::before { content: '✓ '; }
+#pcv .pcv-ph { background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(20, 35, 63, .12); color: #93a7b6; }
+html[data-theme="dark"] #pcv .pcv-ph { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+#pcv .pcv-crop.on .pcv-win { box-shadow: 0 0 0 2px #fff, 0 0 0 999px rgba(13, 42, 72, .45); }
+#pcv .pcv-crop:not(.on) .pcv-win { box-shadow: 0 0 0 2px rgba(255, 255, 255, .75), 0 0 0 999px rgba(13, 42, 72, .3); }
