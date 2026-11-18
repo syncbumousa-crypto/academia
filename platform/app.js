@@ -10463,8 +10463,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pcpPaint() {
     const box = document.getElementById('pcp'), p = pcpSt && pcvPost(pcpSt.id); if (!box || !p) return;
     const en = pcEn(), d = p.data || {};
-    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each folder', whole: 'One price for the whole contribution', mid: 'Summary folders', bank: 'Question bank folders', none: 'No folders yet', free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'Open any folder to price the ones inside. A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder', inp: 'In a priced folder' }
-      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'تسعير كل مجلد بسعر', whole: 'سعر شامل للمساهمة', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: 'ما فيه مجلدات بعد', free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'افتح أي مجلد وسعّر اللي داخله. المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم', inp: 'داخل مجلد مسعّر' };
+    const L = en ? { t: 'Price your contribution', tot: 'Total price', per: 'Price each folder', whole: 'One price for the whole contribution', mid: 'Summary folders', bank: 'Question bank folders', none: { mid: 'No folders in the summary space yet', bank: 'No folders in the question bank space yet' }, free: 'Make it free', save: 'Save', cls: 'Close', hint: 'Leave it 0 to keep it free.', fhint: 'Open any folder to price the ones inside. A folder left at 0 stays free — readers can try it.', nn: 'Untitled folder', inp: 'In a priced folder' }
+      : { t: 'سعّر عناصر مساهمتك', tot: 'السعر الكلي', per: 'تسعير كل مجلد بسعر', whole: 'سعر شامل للمساهمة', mid: 'مجلدات الملخص', bank: 'مجلدات بنك الأسئلة', none: { mid: 'لا يوجد مجلدات بمساحة الملخص حتى الآن', bank: 'لا يوجد مجلدات بمساحة بنك الأسئلة حتى الآن' }, free: 'خلّها مجانية', save: 'حفظ', cls: 'إغلاق', hint: 'خلّه صفر وتبقى مجانية.', fhint: 'افتح أي مجلد وسعّر اللي داخله. المجلد اللي سعره صفر يبقى مجاني، والقارئ يجرّبه.', nn: 'مجلد بلا اسم', inp: 'داخل مجلد مسعّر' };
     /* شجرةٌ لا قائمة: كلُّ مجلدٍ يُفتح ليظهر ما فيه، ولكلٍّ سعرُه — والمجلدُ المجانيّ يحوي مسعَّرًا عاديًّا.
        وما تحت مجلدٍ مسعَّرٍ داخلٌ في سعره فلا يُسعَّر ثانيةً */
     const tree = (ns, dp, inP) => pcTopF(ns).map(n => {
@@ -10479,7 +10479,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return row + (op ? tree(n.ch, dp + 1, inP || own) : '');
     }).join('');
     const half = (k, ns) => { const all = pcAllF(ns); return `<div class="pcp-half pcp-half--${k}"><div class="pcp-hh"><span class="pc-k__ic">${pkIcSvg(k, p.id)}</span><b>${esc(L[k])}</b><i>${all.length}</i></div>`
-      + (all.length ? `<div class="pcp-list">${tree(ns, 0, false)}</div>` : `<p class="pcp-none">${esc(L.none)}</p>`) + `</div>`; };
+      + (all.length ? `<div class="pcp-list">${tree(ns, 0, false)}</div>` : `<p class="pcp-none">${esc(L.none[k])}</p>`) + `</div>`; };
     const tot = pcpSt.per ? pcpSum() : pcpSt.total;
     box.innerHTML = `<div class="pcp-panel${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
       + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
