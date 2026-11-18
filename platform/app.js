@@ -10376,7 +10376,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="pc-ban pc-ban--${cvE ? 'empty' : cv.k}" style="--pc-bg:${cv.bg}">`
       + (cv.k === 'sc' || cvE ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
-      + (cvE ? `<button type="button" class="pc-art pc-art--empty" data-pccv="${esc(p.id)}" aria-label="${esc(en ? 'Choose a cover' : 'اختر غلاف مساهمتك')}"><span class="pc-ae__ic">${PC_CV_IC}</span><b>${esc(en ? 'Choose a cover' : 'اختر غلاف مساهمتك')}</b></button>`
+      + (cvE ? `<button type="button" class="pc-art pc-art--empty" data-pccv="${esc(p.id)}" aria-label="${esc(en ? 'Contribution cover' : 'غلاف المساهمة')}"><span class="pc-ae__ic">${PC_CV_IC}</span><b>${esc(en ? 'Contribution cover' : 'غلاف المساهمة')}</b></button>`
         : `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`)
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
