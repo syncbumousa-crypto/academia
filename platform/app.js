@@ -10439,13 +10439,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     box.innerHTML = `<div class="pcp-panel${pcpSt.per ? ' is-per' : ''}" role="dialog" aria-modal="true" aria-label="${esc(L.t)}">`
       + `<div class="pcv-hd"><b>${esc(L.t)}</b><button type="button" class="pcv-x" data-pcpx="1" aria-label="${esc(L.cls)}">${PK_BLK_X}</button></div>`
       + `<div class="pcp-top"><span class="pcp-tl">${esc(L.tot)}</span><span class="pcp-big"><input type="number" min="0" step="5" inputmode="numeric" data-pcpt="1" placeholder="0" value="${tot || ''}"${pcpSt.per ? ' readonly tabindex="-1"' : ''}>${PC_SAR}</span>`
-      + `<span class="pcp-hint">${esc(pcpSt.per ? L.fhint : L.hint)}</span>`
+      + (pcpSt.per ? '' : `<span class="pcp-hint">${esc(L.hint)}</span>`)
       /* شريطٌ بخيارين لا مفتاح (طلبُ صاحب الموقع): سعرٌ شامل · تسعيرُ كلّ مجلد */
       + `<div class="pcp-seg${pcpSt.per ? ' is-per' : ''}" role="radiogroup"><span class="pcp-seg__th" aria-hidden="true"></span>`
       + `<button type="button" role="radio" data-pcpper="0" aria-checked="${!pcpSt.per}">${esc(L.whole)}</button>`
       + `<button type="button" role="radio" data-pcpper="1" aria-checked="${pcpSt.per}">${esc(L.per)}</button></div></div>`
       + `<div class="pcp-split">${half('mid', pcTopF(d.deck))}${half('bank', pcTopF(d.qb))}</div>`
-      + `<div class="pcp-ft"><button type="button" class="pcp-free" data-pcpfree="1">${esc(L.free)}</button><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
+      + `<div class="pcp-ft"><button type="button" class="pcv-btn" data-pcpsave="1">${esc(L.save)}</button></div></div>`;
   }
   function pcpOpen(id) {
     const p = pcvPost(id); if (!p) return;
