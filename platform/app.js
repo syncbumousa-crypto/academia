@@ -10395,9 +10395,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pcvSt = null;   /* { id, tab, c } */
   /* ===== تعديلُ الغلاف والسعر لصاحب المساهمة وحده (طلبُ صاحب الموقع) =====
      زرُّ الغلاف لا يظهر إلّا في لافتة التحرير — والتحريرُ لا يُفتح إلّا لمساهمتي —
-     والملكيّةُ تُسأل صارمةً: ذاتُ المالك لمالكها المسجَّل الآن وحده، وما لا مالكَ له مسوّدتي المحلّيّة
-     ما لم تأتِ من الخادم. فلا تُفتح نافذةٌ على مساهمة غيري ولو وصلها نقرٌ */
-  const pcOwn = p => { if (!p) return false; const o = ownerOf(p), me = actingAs(); return o ? !!me && o === me : !!p.me && !p.srvH; };
+     والملكيّةُ تُسأل صارمةً: ذاتُ المالك لمالكها المسجَّل الآن وحده، وما لا مالكَ له ما وُسم أنّه لي.
+     فلا تُفتح نافذةٌ على مساهمة غيري ولو وصلها نقرٌ */
+  const pcOwn = p => { if (!p) return false; const o = ownerOf(p), me = actingAs(); return o ? !!me && o === me : !!p.me; };   /* (وكان يشترط ألّا تكون بلغت الخادم — فتنقلب مساهمتي بعد أوّل رفعٍ غيرَ مساهمتي ويمتلئ غلافُها برسمة) */
   const pcvPost = id => (postsOf(cmCode, 'cards') || []).find(x => x && x.id === id && pcOwn(x)) || null;
   function pcvPaint() {
     const box = document.getElementById('pcv'); if (!box || !pcvSt) return;
