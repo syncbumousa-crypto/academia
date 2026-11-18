@@ -26833,16 +26833,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const st0 = pf.closest('.pk-fstrip'), h0 = st0 ? st0.getBoundingClientRect().height : null;
       renderCmSection();
       const st1 = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"]`);
+      /* ===== ولا شريطَ تمريرٍ عابر (طلبُ صاحب الموقع) =====
+         المقاساتُ النهائيّة (قدرُ اسم كلّ مغلق وتسطيحُ اللوح الضيّق) كانت تُحسب في الإطار التالي (‎pkFitSoon‎)، فيُرسم
+         إطارٌ أوّلٌ بلا هي — والمفتوحُ الأخيرُ أعرضُ ما يكون فيه — فيفيض الصفُّ فيظهر شريطُه لحظةً ثمّ يختفي.
+         فتُحسب ههنا قبل أن يُرسم شيء، وصفوفُ الشريط بلا تمريرٍ ما دامت قامتُه تنتقل */
+      if (st1 && st1.classList.contains('pk-lg')) pkFit(st1);
       if (st1 && h0 != null && !bkReduce()) {
         const h1 = st1.getBoundingClientRect().height;
         if (Math.abs(h1 - h0) > 1) {
           const card = st1.closest('.post'), D = 300 * (window.__pkfxSlow || 1);
-          st1.style.overflow = 'hidden';
+          st1.style.overflow = 'hidden'; st1.classList.add('is-hanim');
           const a = st1.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: 'cubic-bezier(.3, .7, .2, 1)' });
           const an = [a];
           if (h1 > h0) st1.querySelectorAll('.pg-box.is-wide .pg-kids, .pg-box.is-wide > :not(.pg-face)').forEach(x =>
             an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .7, delay: D * .2, easing: 'ease-out', fill: 'backwards' })));
-          const done = () => { st1.style.overflow = ''; };
+          const done = () => { st1.style.overflow = ''; st1.classList.remove('is-hanim'); };
           if (card && card.querySelector(':scope > .pk-band')) pkLiveBand(card, an, () => { done(); if (card.isConnected) pkBandFit(card); });
           else Promise.all(an.map(x => x.finished.catch(() => {}))).then(done);
         }

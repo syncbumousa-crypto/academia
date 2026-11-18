@@ -18712,3 +18712,5 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
    تنتقل إلى جوفه فلا يقع آخرُ صفٍّ تحت الأيقونة)، وتبتعد سكّتُه عن الطرفين بقدر الفجوة أيًّا كان جانبُها */
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-bank > :is(#cm-cards, .x3) { margin-bottom: -40px; padding-bottom: 40px; }
 #cm-body .pk--icx.pk--icB .post-ytmain > .pk-split > .pk-bank > :is(#cm-cards, .x3)::-webkit-scrollbar-track:horizontal { margin-inline: 52px; }
+/* وقامةُ شريط المجلدات تنتقل: صفوفُه بلا شريط تمرير (يفيض الصفُّ لحظةً وسط الحركة فيظهر شريطٌ لا حاجةَ له) */
+.pk-fstrip.is-hanim .pg-row { overflow-x: hidden; }
