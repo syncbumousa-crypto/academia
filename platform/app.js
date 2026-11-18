@@ -4463,6 +4463,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let cxMax = false;
   let cxMaxY = 0;                          // تمريرُ النافذة قبل التكبير — يُردّ إليه عند التصغير
   let cxMaxPub = null;                     // مساهمةُ «البطائق» المنشورةُ المكبَّرة (معرّفُها) — أو لا شيء
+  /* ===== وتُفتح المساحاتُ في أكثر من مساهمةٍ منشورةٍ معًا (طلبُ صاحب الموقع) =====
+     كان فتحُ مساهمةٍ يطوي التي قبلها (حالٌ واحدةٌ: ‎cxRowPub‎ و‎cardView.open‎). فصارت المتّسعاتُ مجموعةً
+     (‎pubOpen‎) — كلٌّ بمساحاتها — وتبقى ‎cardView.open‎ آخرَها فتحًا لما يخصّ «الحاليّة» (التحديدُ والرحلة) */
+  const pubOpen = new Set();
   let cxRowPub = null, cxRowFresh = null;   // ‏‎cxRowFresh‎: اتّسعت للتوّ ولم تُفتح فيها مساحةٌ بعد — فلا تُطوى لخلوّها                     // والمفتوحةُ في موضعها بإطارٍ (رأسٌ وذيل) من مفاتيح المساحات — بين أخواتها
   let cxHdUp = false;                      // رأسُ المكبَّرة مرفوعٌ خلف حدّها (ROADMAP-HEADFOLD) — حالُ نظرة
   let cxFtDn = false;
@@ -4484,6 +4488,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cmSrcSel = null;      /* المصادر تفتح على تقسيم فهم/ممارسة */
     vidView = { open: null, fold: {} };    /* كومنتات «الشروح» تفتح مسفوطة */
     cardView = { open: null, fold: {} };   /* وكومنتات «البطائق» كذلك */
+    pubOpen.clear(); cxRowPub = null;
     cxStudy = null;   /* أي جلسة مذاكرة تنتهي بتبديل التبويب */
     cxSel.clear();    /* والتحديدُ حالُ شجرةٍ بعينها — لا يُورَّث لتبويبٍ آخر */
     /* طريقة الإظهار «الأفضل»: دخول مباشر إلى أفضل مشاركة في القسم (إن وُجدت) */
@@ -10700,7 +10705,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         pkIcRowSv[id][q] = { x: b.left - m0.left, xr: b.right - m0.right, y: b.top - r0.top, w: b.width, h: b.height, c: getComputedStyle(v).color, html: v.closest('[data-pkic]').innerHTML }; }); }
     if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
     const isEd = post0.classList.contains('pk--edit');   /* مساهمةُ التحرير تتّسع في موضعها كذلك، بلا حال القائمة */
-    if (!isEd) { cardView = { open: id, fold: {} }; cxRowPub = id; }
+    if (!isEd) { cardView = { open: id, fold: cardView.fold || {} }; cxRowPub = id; pubOpen.add(id); }
     cxHdUp = false; cxFtDn = false; delete pkAct[id];
     pkIcSet(id, k);
     const mainR0 = post0.querySelector('.post-yt > .post-ytmain').getBoundingClientRect(), top0 = post0.getBoundingClientRect().top;
@@ -10762,7 +10767,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
   function pkIcCollapse(id, fp) {
     const k = pkIcOpenK(id);
-    const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; cxRowPub = null; cardView = { open: null, fold: {} }; delete pkNotchSt[id]; renderCmSection(); };
+    const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; pubOpen.delete(id);
+      /* تُطوى هذه وحدَها: الأخرياتُ على حالهنّ، و«الحاليّةُ» آخرُ من بقي مفتوحًا */
+      if (cxRowPub === id || cardView.open === id) { const last = [...pubOpen].pop() || null; cxRowPub = last; cardView = { open: last, fold: cardView.fold || {} }; }
+      delete pkNotchSt[id]; renderCmSection(); };
     if (!k || bkReduce()) return done();
     fp.pkBlkHold = true;
     /* الطيُّ ليّنُ البدء والختام (لا يقفز في أوّله كما يقفز الاتّساعُ المنطلق) */
@@ -13741,7 +13749,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       <button type="button" class="pk-toggle x3-pktg" title="${open ? T().pkCollapse : T().pkExpand}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      ${kind === 'c' && open && (cxMaxPub === p.id || (cxRowPub === p.id && cardView.open === p.id && pkLab())) ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
+      ${kind === 'c' && open && (cxMaxPub === p.id || (pubOpen.has(p.id) && pkLab())) ? pkViewBar('pub', p.id) : ''}   <!-- طرقُ العرض للمكبَّرة وحدَها (بحكم صاحب الموقع): المفتوحةُ في موضعها مجلّديّةٌ أبدًا -->
     </div>`;
   /* صفّ البند: أيقونة ← اسم ← مدة (للشروح وحدها) ← مربّع الاكتمال · وعلامة الخيط للدرجة الأولى وحدها.
      اسم البطاقة هو وجهها — أي السؤال المكتوب فيها */
@@ -13926,15 +13934,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (kind === 'c') { const g = pkGoneOf(p); pkGone[p.id] = g;
       g.forEach(k => { if (k === 'book') pkSplit[p.id] = false; else if (k === 'bank') pkBank[p.id] = false; else pkMidOff[p.id] = true; }); }
     /* والمفتوحةُ في موضعها بإطار (طلبُ صاحب الموقع): رأسٌ وذيلٌ ومساحاتٌ كالمكبَّرة، وهي بين أخواتها */
-    let framed = !maxd && kind === 'c' && pkLab() && cxRowPub === p.id && V.open === p.id;
+    let framed = !maxd && kind === 'c' && pkLab() && pubOpen.has(p.id);
     /* ولا مساحةَ مفتوحةً فيها: يُلغى التوسيعُ فتعود صفًّا بين أخواتها (طلبُ صاحب الموقع) */
     if (framed) {
       const none = !pkSplitOn(p.id) && !pkBankOn(p.id) && pkMidOff[p.id];
       if (!none && cxRowFresh === p.id) cxRowFresh = null;   /* فُتحت فيها مساحة: من الآن يُطويها خلوُّها */
-      else if (none && cxRowFresh !== p.id) { framed = false; cxRowPub = null; V.open = null; }
+      else if (none && cxRowFresh !== p.id) { framed = false; pubOpen.delete(p.id);
+        if (cxRowPub === p.id) cxRowPub = null; if (V.open === p.id) V.open = [...pubOpen].pop() || null; }
     }
     const big = maxd || framed;
-    const open = V.open === p.id || maxd;
+    const open = V.open === p.id || maxd || (kind === 'c' && pubOpen.has(p.id));
     const likeAttr = `data-like="${pi}" data-sub="${sub}"`;
     /* مفتاح فتح الرزمة يفرّق بينهما في المستمع العام: data-ck للبطائق و data-pk للشروح */
     const idAttr = kind === 'c' ? `data-ck="${p.id}"` : `data-pk="${p.id}"`;
@@ -36375,8 +36384,10 @@ void main() {
         const id = pk.dataset.ck;
         /* وتحديدُ رزمةٍ يذهب بذهابها: عقدُه من ديكها، فلو بقي لَعُدَّ على ديكٍ آخر */
         if (cxSelRo) { cxSel.clear(); cxSelRo = false; }
-        cardView = { open: cardView.open === id ? null : id, fold: {} };
-        nowOpen = cardView.open === id;
+        /* وفي «الملخصات وبنوك الأسئلة» المتّسعاتُ مجموعة: هذه تُفتح أو تُطوى ولا تمسّ غيرَها */
+        if (pkLab()) { nowOpen = !pubOpen.has(id); if (nowOpen) pubOpen.add(id); else pubOpen.delete(id);
+          cardView = { open: nowOpen ? id : (cardView.open === id ? ([...pubOpen].pop() || null) : cardView.open), fold: cardView.fold || {} }; }
+        else { cardView = { open: cardView.open === id ? null : id, fold: {} }; nowOpen = cardView.open === id; }
         /* ===== وفي «الملخصات وبنوك الأسئلة»: السهمُ يتّسع بها في موضعها بإطار (طلبُ صاحب الموقع) =====
            رأسٌ فيه مفاتيحُ المساحات، وذيلٌ — والملخّصُ مفتوحٌ إن لم تكن فيها مساحةٌ مفتوحة. ونقرةٌ ثانيةٌ تُعيدها صفًّا */
         if (pkLab()) {
@@ -36384,7 +36395,7 @@ void main() {
             /* تتّسع ولا مساحةَ مفتوحة: يُدعى القارئُ إلى الأزرار العلويّة (طلبُ صاحب الموقع) */
             cxRowPub = id; cxRowFresh = id; cxHdUp = false; cxFtDn = false;
             pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; delete pkAct[id];
-          } else if (cxRowPub === id) cxRowPub = cxRowFresh = null;
+          } else if (cxRowPub === id) { cxRowPub = [...pubOpen].pop() || null; cxRowFresh = null; }
         }
       }
       /* الربط باتجاه واحد: توسيع المساهمة يضغط مفتاح التاريخ معه (فيمتلئ ويصير رقميًّا)
