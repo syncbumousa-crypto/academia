@@ -1279,6 +1279,16 @@ html[data-lang="en"] .reel-slot.is-center .crow .bk { transform: rotateY(-9deg);
 .reel-slot.is-center .crow { animation: reel-bob 3.333s ease-in-out infinite; }
 @keyframes reel-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @media (prefers-reduced-motion: reduce) { .reel-slot.is-center .crow { animation: none; } }
+/* ===== الحركةُ الزخرفيّة تقف حين يتحرّك أو يُفتح غيرُها =====
+   الطفوُ وسهمُ «اختر قسمًا» رخيصان وحدَهما، لكنّ كلَّ إطارٍ منهما يُعيد تركيبَ الشاشة — ومعه حركةُ
+   الشريط إن تزامنتا، وتمويهُ ما انفتح من قوائم. فيقفان (‎paused‎: يثبتان حيث هما ويُكملان من هناك، لا
+   قفزة) ما دام: الشريطُ يتحرّك · قائمةٌ مفتوحة · لوحةُ التصنيف · شريطُ التحديد · قائمةُ المصادر · نافذةٌ.
+   (والسهمُ بصنفه ‎.cm-pick__ic‎ لا بـ‎svg‎: منتقٍ آخرُه نوعٌ مجرّد بعد ‎:has()‎ جعل كلَّ تغييرٍ في الصفحة
+   يفحص أيقوناتها كلَّها — قِيس: ٤١ ⇐ ٢٥٨ عنصرًا مع كلّ نصٍّ يتبدّل.)
+   ورفُّ نافذة السوق لا يقف لأنّ نافذتَه هي المفتوحة — رفُّ الصفحة خلفها هو الذي يقف */
+body:has(.sidebar.side-anim, .post-menu.open, .filterwrap.is-open, .cx-selbar:not([hidden]), .psp-box,
+         .mmodal:not([hidden]):not(#market-modal)) :is(.reel-slot.is-center .crow, .cm-pick__ic),
+body:has(#market-modal:not([hidden])) #m-grid .reel-slot.is-center .crow { animation-play-state: paused; }
 
 /* ====== حزمة مادة اللاب في البار: «التفتّح» — مروحة مغلقة ← انقسام مفتوح (مُدار بـ --o من الـJS) ======
    المحاضرة (يمين) والمعمل (يسار)؛ كل مكوّن transform = قيمة‑الإغلاق + فرق×var(--o)،
@@ -18545,13 +18555,13 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 .cm-pick__msg { position: absolute; inset: 0; margin: auto; width: fit-content; height: fit-content; display: flex; align-items: center; gap: 10px;
   background: var(--u-surface, #fff); border: 1px solid var(--u-line, rgba(20, 35, 63, .1)); border-radius: 14px; padding: 12px 18px;
   box-shadow: 0 10px 30px -14px rgba(20, 35, 63, .35); font-size: 14px; font-weight: 600; color: var(--u-ink, #14233f); }
-.cm-pick__msg svg { width: 20px; height: 20px; fill: none; stroke: var(--u-brand, #2c5e65); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: cm-pick-up 1.6s ease-in-out infinite; }
+.cm-pick__ic { width: 20px; height: 20px; fill: none; stroke: var(--u-brand, #2c5e65); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: cm-pick-up 1.6s ease-in-out infinite; }
 @keyframes cm-pick-up { 50% { transform: translateY(-3px); } }
-@media (prefers-reduced-motion: reduce) { .cm-pick__msg svg { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .cm-pick__ic { animation: none; } }
 html[data-theme="dark"] .cm-pick__msg { background: var(--u-surface, #182026); border-color: rgba(255, 255, 255, .09); color: #e6ecef; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .6); }
 html[data-theme="dark"] .cm-pick__av { background: color-mix(in srgb, #7fb7bd 22%, #1d272e); }
 html[data-theme="dark"] .cm-pick__ln i { background: rgba(255, 255, 255, .1); }
-html[data-theme="dark"] .cm-pick__msg svg { stroke: #7fb7bd; }
+html[data-theme="dark"] .cm-pick__ic { stroke: #7fb7bd; }
 /* تبويبٌ بلا مساهمات: صفُّ الدوائر لا يأخذ مكانًا، فتتوسّط الأيقونةُ والاسمُ عموديًّا — وإذا اختير ظهرت «+» وحدها */
 .cm-panel .cm-tabs .cm-faces.is-none { min-height: 0; }
 .cm-tabs button:not(.on) .cm-faces.is-none { display: none; }

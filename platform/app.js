@@ -6951,7 +6951,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function cmPickHTML() {
     const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
     return `<div class="cm-pick"><div class="cm-pick__ghost" aria-hidden="true">${row(34, 76) + row(42, 69) + row(50, 62)}</div>`
-      + `<div class="cm-pick__msg" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
+      + `<div class="cm-pick__msg" role="note"><svg class="cm-pick__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
   }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
