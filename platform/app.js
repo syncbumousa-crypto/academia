@@ -6554,11 +6554,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* شارة صغيرة تُعلم القارئ أن الأدمن ثبّت هذه المساهمة */
   const pinBadge = p => p && p.pin ? `<span class="post-pinned" title="${T().pinnedTag}">${PIN_IC}${T().pinnedTag}</span>` : '';
   const PIN_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 5 3.5 3.5H6.5L10 8z"/><path d="M12 11.5V21"/></svg>';
+  /* ومساهمةُ صاحب الحساب أولى أبدًا في كلّ تبويب، فوق المثبَّتة وأيًّا كان الترتيب (طلبُ صاحب الموقع) */
+  const mineRank = p => (p && (p.me || isMine(p)) ? 1 : 0);
   const byNewest = arr => arr.map((p, i) => ({ p, i })).sort((a, b) =>
-    (pinRank(b.p) - pinRank(a.p)) || ((b.p.ts || 0) - (a.p.ts || 0)));
+    (mineRank(b.p) - mineRank(a.p)) || (pinRank(b.p) - pinRank(a.p)) || ((b.p.ts || 0) - (a.p.ts || 0)));
   /* «الأفضل»: صافي التقييم (مفيد − غير مفيد) تنازليًّا، وعند التعادل الأحدث — مع حفظ الفهرس الأصلي */
   const byBestIdx = arr => arr.map((p, i) => ({ p, i })).sort((a, b) =>
-    (pinRank(b.p) - pinRank(a.p)) ||
+    (mineRank(b.p) - mineRank(a.p)) || (pinRank(b.p) - pinRank(a.p)) ||
     (((b.p.likes || 0) - (b.p.dislikes || 0)) - ((a.p.likes || 0) - (a.p.dislikes || 0))) || ((b.p.ts || 0) - (a.p.ts || 0)));
   /* شريط الترتيب: زر همبرغر صغير بلا نص يفتح قائمة (الأفضل/الأحدث) — يعيد استخدام بنية .post-menu */
   /* أيقونة الفرز «sort by»: سهم تنازلي يسارًا + أعمدة متناقصة يمينًا (أوضح من الهمبرغر) */
@@ -7106,9 +7108,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             items.push({ p, di, pi, dr });
           });
         });
-        items.sort((a, b) => cmSort === 'best'
+        items.sort((a, b) => (mineRank(b.p) - mineRank(a.p)) || (cmSort === 'best'
           ? (docNet(b.p) - docNet(a.p)) || ((b.p.ts || 0) - (a.p.ts || 0))
-          : (b.p.ts || 0) - (a.p.ts || 0));
+          : (b.p.ts || 0) - (a.p.ts || 0)));
         inner = cmDocBar(doctors, items.length) + (items.length
           ? items.map(({ p, di, pi, dr }) =>
               (editing && p.me && di === cmView.di) ? drEditCard(dr, di, p, pi) : foldPost('doc', p, pi, { dr: di, drObj: dr })
