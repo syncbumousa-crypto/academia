@@ -19592,5 +19592,5 @@ html[data-theme="dark"] .srch-hist__it:hover, html[data-theme="dark"] .srch-hist
 #cm-body .pk--pc .pc-sale.pc-sale--set:hover { box-shadow: none; border-color: rgba(168, 132, 46, .95); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set { box-shadow: none; border-color: rgba(212, 179, 106, .55); }
 html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-color: rgba(212, 179, 106, .95); }
-/* «شراء» و«الكل» بلا سهمٍ بينهما (السعرُ الشامل) كانتا تلتصقان — فتُفصلان بقدر ما يفصلهما السهمُ تقريبًا */
-#cm-body .pk--pc .pc-buyx:not(:has(.pc-dd)) .pc-buyb { padding-inline-end: 7px; }
+/* وزرُّ السعر الشامل الواحد («شراء كامل · السعر»): حشوتُه من الجهتين */
+#cm-body .pk--pc .pc-buyw.pc-buyone { padding-inline: 10px 8px; }

@@ -10408,6 +10408,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const what = pk === 'all' ? (some ? (en ? 'The rest' : 'الباقي') : (en ? 'All' : 'الكل')) : pcSpNm(pk, en);
     const pr = pk === 'all' ? o.all : +o.parts[pk];
     const dd = o.keys.length ? `<button type="button" class="pc-dd" data-pcdd="${esc(p.id)}" aria-haspopup="true" aria-label="${esc(en ? 'Purchase options' : 'خيارات الشراء')}">${PC_DD}</button>` : '';
+    /* والسعرُ الشاملُ (لا مساحةَ تُشترى وحدَها) زرٌّ واحدٌ بنصٍّ واحد: «شراء كامل · السعر» (طلبُ صاحب الموقع) */
+    if (!o.keys.length) return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st">${st}</span>`
+      + `<span class="pc-buyx"><button type="button" class="pc-buyw pc-buyone" data-pcbuy="${esc(p.id)}" data-pcpk="all">${en ? 'Buy in full' : 'شراء كامل'} · <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
     return `<span class="pc-sale pc-sale--buy pc-sale--${m}"><span class="pc-sale__st">${st}</span>`
       + `<span class="pc-buyx"><button type="button" class="pc-buyb" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">${en ? 'Buy' : 'شراء'}</button>${dd}`
       + `<button type="button" class="pc-buyw" data-pcbuy="${esc(p.id)}" data-pcpk="${pk}">${esc(what)} · <span class="pc-pr">${pr}${PC_SAR}</span></button></span></span>`;
