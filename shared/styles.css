@@ -19639,3 +19639,5 @@ html[data-theme="dark"] #pcp .pcb-free { color: #7fb3bb; }
 html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { width: 20px; height: 20px; border: 0; background: none; overflow: visible; }
 #cm-body .pk--pc .pc-ring > .x3-dot { inset: 0; width: 100%; height: 100%; }
 #cm-body .pk--pc .pc-ring > .x3-dot { border: 1.4px solid var(--u-in-line, rgba(127, 127, 127, .35)); }
+/* والبنكُ في التحرير بلا فجوةٍ في زاويته: فمربّعُه صار فوق أيقونته فلا تُنقر لتُغلقه — فتعلو الأيقونةُ عليه (طلبُ صاحب الموقع) */
+#cm-body .pk--edit .pk-blkh--bank .pk-blkh__ic { position: relative; z-index: 4; }
