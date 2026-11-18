@@ -19541,3 +19541,7 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
 #cm-body .pk--pc.pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: none; }
 #cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: -11px; }
 #cm-body .pk--pc.pk--maxpub > .post-yt > .post-menu { top: 64px; inset-inline-end: -14px; }
+/* قوسُ التكبير في المنشورة المفتوحة: إطارُها مستديرُ الزاوية (‎16px‎) ويقصّ ما خرج منه (‎overflow: hidden‎)،
+   والقوسُ على حافّته ينزلق للخارج عند المرور فيدخل في المقصوص ويختفي. فيُنزل إلى داخل الزاوية بقدر انزلاقه —
+   يبقى موازيًا لاستدارتها، ويُرى ساكنًا ومارًّا (طلبُ صاحب الموقع) */
+#cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: 2px; inset-inline-start: 2px; }
