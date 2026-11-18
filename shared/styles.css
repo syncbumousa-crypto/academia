@@ -19585,3 +19585,10 @@ html[data-theme="dark"] .srch-hist__it:hover, html[data-theme="dark"] .srch-hist
 /* وفي المنشورة المفتوحة شريطُ طرق العرض خفيٌّ تحت اللافتة: به تُفتح مساحةٌ ثانيةٌ بجانب الأولى (‎pkIcToggle‎ ينقر أزرارَه) —
    سقط مع الترويسة القديمة فصار النقرُ لا يفعل شيئًا (طلبُ صاحب الموقع) */
 #cm-body .pk--pc .x3-pkhd.pc-edhd { display: none; }
+/* قائمةُ الشراء كانت تنفتح تحت المساهمة التالية (تُرسم بعدها فتغطّيها) — فترتفع مساهمتُها ما دامت قائمتُها مفتوحة */
+#cm-body .post:has(.pc-menu) { position: relative; z-index: 40; }
+/* وزرُّ «سعّر عناصر مساهمتك» في التحرير إطارُه منقّطٌ كمكان الغلاف الفارغ (طلبُ صاحب الموقع) */
+#cm-body .pk--pc .pc-sale.pc-sale--set { box-shadow: none; border: 1.5px dashed rgba(168, 132, 46, .6); }
+#cm-body .pk--pc .pc-sale.pc-sale--set:hover { box-shadow: none; border-color: rgba(168, 132, 46, .95); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set { box-shadow: none; border-color: rgba(212, 179, 106, .55); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale.pc-sale--set:hover { border-color: rgba(212, 179, 106, .95); }
