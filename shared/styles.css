@@ -19150,3 +19150,5 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine b { color: #f1dca8; back
 /* والمستطيلُ بعرضٍ واحدٍ في كلّ الأحوال: عرضُ أطولها («توجد تجربة مجانية» وزرُّها) */
 #cm-body .pk--pc .pc-ttl { flex: 0 0 228px; width: 228px; }
 #cm-body .pk--pc .pc-sale { width: 100%; min-width: 0; }
+/* و«توجد تجربة مجانية» في الغامق بلون «مدفوعة» نفسِه */
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy.pc-sale--part .pc-sale__st { color: #9fcbd2; }
