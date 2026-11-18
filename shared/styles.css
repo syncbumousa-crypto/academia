@@ -19548,3 +19548,5 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
 /* والبنكُ المنشورُ رحلةً: محطّتُه الأولى كانت تحت أيقونة المساحة في زاويتها — فتنزاح الشجرةُ عنها إلى الداخل
    (يسارًا في العربيّة) بقدر الأيقونة، وتبقى في ارتفاعها (طلبُ صاحب الموقع) */
 #cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr) { margin-inline-start: 26px; }
+/* وخيطُ رحلة البنك المنشور على محور دوائره: كان مائلًا يمينًا عنها بأربعة (حاشيتُه هنا ‎34‎ لا ‎30‎) — طلبُ صاحب الموقع */
+#cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr)::before { inset-inline-start: 12px; }
