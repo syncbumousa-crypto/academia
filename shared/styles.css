@@ -18969,3 +18969,7 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine .pc-sale__st { border-co
 /* والشراءُ أوّلًا تحت العنوان، والاكتمالُ تحته (طلبُ صاحب الموقع) */
 #cm-body .pk--pc .pc-ttl > .pc-sale { margin-top: 10px; }
 #cm-body .pk--pc .pc-ttl > .pc-prog { margin-top: 10px; }
+/* والعنوانُ سطرٌ واحدٌ أصغر (طلبُ صاحب الموقع): بعرض مستطيل البيع، وما زاد يُختصر بنقاط */
+#cm-body .pk--pc .pc-name { display: block; -webkit-line-clamp: unset; max-width: 190px; font-size: 17px; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#cm-body .pk--pc .pc-ttl { flex: 0 0 190px; width: 190px; }
+#cm-body .pk--pc .pc-name { font-size: 15px; max-width: none; }
