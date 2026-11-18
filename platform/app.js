@@ -24702,7 +24702,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const icx = icOn ? ' pk--icx' + (one ? ' pk--ic1' + (pkIcOpenSet(p.id).length < 3 ? ' pk--icB' : '') : cxMax ? ' pk--icnone' : ' pk--icrow') : '';
     const blank = fr && !cxMax && !edRow && !(p.data.deck || []).length && !(p.data.qb || []).length && !pkSrcAny(p.id);
     /* والضيّقُ يلبس لافتةَ الغلاف كالمنشورة (طلبُ صاحب الموقع): صفًّا بأزرارها، ومفتوحًا بإطاراتها بلا أزرار */
-    const pcEd = icOn && !cxMax, pcCls = pcEd ? (edRow ? ' pk--pc' : ' pk--pc pk--pcopen') : '';
+    /* والمكبَّرةُ كذلك (طلبُ صاحب الموقع): اللافتةُ نفسُها، وبلا مساحةٍ مفتوحةٍ أزرارُها فيها كالمنشورة المكبَّرة */
+    const pcEd = icOn, pcCls = pcEd ? (edRow ? ' pk--pc' : ' pk--pc pk--pcopen' + (cxMax && !one ? ' pk--pcnone' : '')) : '';
     return `<div class="post pk pk--peek pk--edit pk--pack${icx}${pcCls}${blank && !pcEd ? ' pk--blank' : ''}${act}${cxMax ? ' pk--max' : ''}${fr && !cxMax && !edRow ? ' pk--frame' : ''}${fr && cxHdUp ? ' pk--hdup' : ''}${fr && cxFtDn ? ' pk--ftdn' : ''}${fr && (!pkActOf(p.id) || cxFtGone) ? ' pk--ftnone' : ''}${vwAlt ? ' pk--vwalt' : ''}" data-pi="${i}" data-sub="cards"${icx ? ` data-pkicid="${esc(p.id)}"` : ''}>
       ${cxMaxBtn()}
       <div class="post-yt">
@@ -24718,7 +24719,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             <!-- وشريطُ طرق العرض في التحرير، وعدّاداتُ المساهمة (شاراتُ الأنواع وخبرُها) في كبسولة البنك يسارَ اسمه (طلبُ صاحب الموقع) -->
             ${pkViewBar('edit', p.id, `<span id="cm-vbadges">${x3Trio(d.deck, 'c')}</span><span id="cm-vnews">${cxNewsHTML('solo', cxNwSum(d.deck), { nodes: d.deck, key: 'vnews' })}</span>`)}
           </div>
-          ${pcEd ? pcBan(p, p.data.deck || [], !edRow, true) : ''}
+          ${pcEd ? pcBan(p, p.data.deck || [], !edRow && !!one, true) : ''}
           ${icx && !(pcEd && edRow) ? pkIcRow(p.id, !one) : ''}
           ${fr && !edRow ? cxHdLine() : ''}
           ${vwAlt ? pkAltView(p.id, p.data.deck || [], true) : ''}
