@@ -18944,3 +18944,25 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { background: linear-
 #cm-body .pk--pc .pc-ttl { max-width: none; }
 #cm-body .pk--pc .pc-name { max-width: 150px; }
 #cm-body .pk--pc .pc-sale { flex-wrap: nowrap; }
+/* ===== مستطيلُ البيع: قطعةٌ واحدةٌ بعرضٍ ثابت (‎pcSaleHTML‎) ===== */
+#cm-body .pk--pc .pc-sale {
+  display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: nowrap;
+  width: 190px; height: 32px; margin-top: 10px; padding: 0 12px; border: 0; border-radius: 999px;
+  font: inherit; font-size: 12.5px; font-weight: 700; white-space: nowrap; box-sizing: border-box;
+}
+#cm-body .pk--pc .pc-sale svg { width: 14px; height: 14px; flex: none; }
+#cm-body .pk--pc .pc-sale__st { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; opacity: .8; }
+#cm-body .pk--pc .pc-sale b { font-weight: 700; }
+#cm-body .pk--pc .pc-sale--buy .pc-sale__st { padding-inline-end: 8px; border-inline-end: 1px solid rgba(255, 255, 255, .25); }
+#cm-body .pk--pc .pc-sale--free, #cm-body .pk--pc .pc-sale--own { background: rgba(44, 94, 101, .1); color: #2c5e65; }
+#cm-body .pk--pc .pc-sale--buy { cursor: pointer; background: #14233f; color: #fff; box-shadow: 0 8px 16px -10px rgba(20, 35, 63, .6); transition: transform .15s, box-shadow .15s; }
+#cm-body .pk--pc .pc-sale--buy:hover { transform: translateY(-1px); box-shadow: 0 12px 20px -10px rgba(20, 35, 63, .7); }
+#cm-body .pk--pc .pc-sale--buy.pc-sale--part .pc-sale__st { color: #e8d3a0; opacity: 1; }
+#cm-body .pk--pc .pc-sale--mine { background: none; color: #14233f; box-shadow: inset 0 0 0 1.5px rgba(20, 35, 63, .2); }
+#cm-body .pk--pc .pc-sale--mine .pc-sale__st { padding-inline-end: 8px; border-inline-end: 1px solid rgba(20, 35, 63, .15); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--free, html[data-theme="dark"] #cm-body .pk--pc .pc-sale--own { background: rgba(127, 179, 187, .14); color: #9fcbd2; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy { background: #eef3f4; color: #14233f; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy .pc-sale__st { border-color: rgba(20, 35, 63, .18); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--buy.pc-sale--part .pc-sale__st { color: #8a6a1f; }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .25); }
+html[data-theme="dark"] #cm-body .pk--pc .pc-sale--mine .pc-sale__st { border-color: rgba(255, 255, 255, .18); }

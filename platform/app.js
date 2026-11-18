@@ -10173,15 +10173,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PC_HALF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 10.5v10"/></svg>';
   const PC_CHK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
   function pcSaleHTML(p) {
+    /* مستطيلٌ واحدٌ بعرضٍ ثابتٍ في كلّ الأحوال (طلبُ صاحب الموقع): الحالةُ والشراءُ فيه معًا.
+       فما كان للشراء صار المستطيلُ نفسُه زرَّه، وما سواه وسمٌ ساكنٌ بالقدّ نفسه */
     const s = (p.data && p.data.sale) || null, en = pcEn();
     const m = s && (s.m === 'part' || s.m === 'lock') ? s.m : 'free';
-    if (m === 'free') return `<div class="pc-sale"><span class="pc-sst pc-sst--free">${en ? 'Free' : 'مجانية'}</span></div>`;
-    if ((state.bought || {})[p.id]) return `<div class="pc-sale"><span class="pc-sst pc-sst--own">${PC_CHK}${en ? 'Purchased' : 'اشتريتها'}</span></div>`;
+    if (m === 'free') return `<span class="pc-sale pc-sale--free">${en ? 'Free' : 'مجانية'}</span>`;
+    if ((state.bought || {})[p.id]) return `<span class="pc-sale pc-sale--own">${PC_CHK}${en ? 'Purchased' : 'اشتريتها'}</span>`;
     const pr = Math.max(0, +s.price || 0), cur = en ? 'SAR' : 'ريال';
-    const st = m === 'part' ? `<span class="pc-sst pc-sst--part">${PC_HALF}${en ? 'Partly free' : 'جزء مجاني'}</span>`
-      : `<span class="pc-sst">${PC_LOCK}${en ? 'Locked' : 'مقفلة'}</span>`;
-    return `<div class="pc-sale">${st}` + (isMine(p) ? `<span class="pc-sst pc-sst--pr">${pr} ${cur}</span>`
-      : `<button type="button" class="pc-buy" data-pcbuy="${esc(p.id)}">${en ? 'Buy' : 'اشترِ'} · ${pr} ${cur}</button>`) + `</div>`;
+    const ic = m === 'part' ? PC_HALF : PC_LOCK, st = m === 'part' ? (en ? 'Partly free' : 'جزء مجاني') : (en ? 'Locked' : 'مقفلة');
+    const body = `<span class="pc-sale__st">${ic}${st}</span><b>${isMine(p) ? '' : (en ? 'Buy · ' : 'اشترِ · ')}${pr} ${cur}</b>`;
+    return isMine(p) ? `<span class="pc-sale pc-sale--mine pc-sale--${m}">${body}</span>`
+      : `<button type="button" class="pc-sale pc-sale--buy pc-sale--${m}" data-pcbuy="${esc(p.id)}">${body}</button>`;
   }
   function pcBan(p, deck) {
     const cv = pcCover(p), t = (p.data && p.data.title) || '';
