@@ -11333,6 +11333,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
       if (nm && nm.scrollWidth) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 4) + 'px');
     });
+    /* ومراجعةٌ بعد القياس: اسمٌ ما زال مقصوصًا ومربّعُه دون السقف (‎220‎) — خطٌّ وصل بعد القياس، أو في الوجه ما لم يُحسب —
+       يُزاد حدُّه بقدر ما نقص بالضبط. فلا يُرى «مجلـ…» إلّا في اسمٍ أطولَ من السقف */
+    strip.querySelectorAll('.pg-box:not(.is-wide)').forEach(b => {
+      const nm = b.querySelector(':scope > .pg-face > .pg-nm');
+      if (!nm || !nm.clientWidth) return;
+      const miss = nm.scrollWidth - nm.clientWidth, w = b.getBoundingClientRect().width;
+      if (miss > 0 && w < 220) b.style.setProperty('--pk-need', Math.ceil(Math.min(220, w + miss + 1)) + 'px');
+    });
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
     if (window.ResizeObserver && !strip.pkRo) {
       pkFitRo = pkFitRo || new ResizeObserver(es => es.forEach(e => { const t = e.target; if (t.isConnected && e.contentRect.width && (t.pkFitW || 0) !== Math.round(e.contentRect.width)) { t.pkFitW = Math.round(e.contentRect.width); pkFit(t); } }));
@@ -11418,6 +11426,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      اكتمال التحميل، فالسؤالُ في أوّل فراغٍ لا يُسقط شيئًا. */
   (window.requestIdleCallback || (f => setTimeout(f, 200)))(() => {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (pkLab()) pkFitSoon(); });
+    /* وكلُّ خطٍّ يكتمل تحميلُه بعدها يُعيد القياس: الاسمُ يُقاس بالخطّ الاحتياطيّ (أضيق) ثمّ يصل خطُّ الموقع فيتّسع */
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { if (pkLab()) pkFitSoon(); });
   }, { timeout: 1500 });
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
