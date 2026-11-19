@@ -19760,3 +19760,20 @@ html[data-theme="dark"] .kt tr.kt-clr--b > td { background-color: rgba(147, 197,
   background: repeating-linear-gradient(90deg, var(--u-line, rgba(44, 94, 101, .3)) 0 6px, transparent 6px 12px) center / 100% 1.5px no-repeat; }
 .kt-numpop input { -moz-appearance: textfield; appearance: textfield; }
 .kt-numpop input::-webkit-inner-spin-button, .kt-numpop input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+/* ===== زرُّ اللغة ومربّعُ «للكل» جنبه (الاقتراحُ ١٢) ===== */
+.cx-lnw { display: inline-flex; align-items: center; gap: 6px; margin-inline-start: 6px; }
+.cx-lnw > .cx-lnk { margin-inline-start: 0; }
+.cx-lnk:disabled { opacity: .38; cursor: default; transform: none; }
+.cx-lnall { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 4px; border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: 12px; font-weight: 700; color: #5d6b7a; white-space: nowrap; }
+.cx-lnall > i { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid rgba(44, 94, 101, .45); display: grid; place-items: center; color: transparent; transition: background .15s, border-color .15s; }
+.cx-lnall > i svg { width: 11px; height: 11px; }
+.cx-lnall.on { color: #14233f; }
+.cx-lnall.on > i { background: #c9a25c; border-color: #c9a25c; color: #1d2426; }
+html[data-theme="dark"] .cx-lnall { color: #93a0a4; }
+html[data-theme="dark"] .cx-lnall.on { color: #e9eef0; }
+html[data-theme="dark"] .cx-lnall > i { border-color: rgba(255, 255, 255, .4); }
+html[data-theme="dark"] .cx-lnall.on > i { background: #e1c172; border-color: #e1c172; }
+/* مستطيلٌ بلغته الخاصّة: اتّجاهُ نصّه بلغته لا بلغة المساحة */
+.kt tr.kt-lnr--en .kt-t { unicode-bidi: plaintext; text-align: left; }
+.kt tr.kt-lnr--ar .kt-t { unicode-bidi: plaintext; text-align: right; }
