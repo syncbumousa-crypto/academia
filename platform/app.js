@@ -9850,14 +9850,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     walk(d, d.deck); d.ln = to;
     return true;
   }
+  /* زرٌّ واحدٌ يبدّل بضغطة (طلبُ صاحب الموقع): فيه حروفُ اللغة الحاليّة وتحتها نقطتان — الممتلئةُ موضعُها */
   const pkLnKebab = d => {
-    const cur = pkLnOf(d), c = PK_LNS.find(x => x[0] === cur) || PK_LNS[0];
-    return `<span class="cx-plus cx-jrk cx-lnk">
-      <span class="cx-plus__menu cx-jrk__menu" role="menu"><span class="cx-jrk__h">${esc(T().pkLn)}</span>`
-      + `<span class="cx-jrseg cx-lnseg" role="group" aria-label="${esc(T().pkLn)}">${PK_LNS.map(([k, nm]) =>
-        `<button type="button" data-pkln="${k}" class="${k === cur ? 'on' : ''}" aria-pressed="${k === cur}"${k === 'en' ? ' dir="ltr"' : ''}>${nm}</button>`).join('')}</span></span>
-      <button type="button" class="cx-plus__tg cx-jrk__tg cx-lnk__tg" data-plus aria-expanded="false" title="${esc(T().pkLn)}" aria-label="${esc(T().pkLn)}"><b>${c[2]}</b></button>
-    </span>`;
+    const cur = pkLnOf(d), i = Math.max(0, PK_LNS.findIndex(x => x[0] === cur)), c = PK_LNS[i], nx = PK_LNS[(i + 1) % PK_LNS.length];
+    return `<button type="button" class="cx-lnk" data-pkln="${nx[0]}" title="${esc(T().pkLn)}: ${esc(c[1])} → ${esc(nx[1])}" aria-label="${esc(T().pkLn)}: ${esc(c[1])}">`
+      + `<b${cur === 'en' ? ' dir="ltr"' : ''}>${c[2]}</b><span class="cx-lnk__d" aria-hidden="true">${PK_LNS.map((x, k) => `<i${k === i ? ' class="on"' : ''}></i>`).join('')}</span></button>`;
   };
   /* ===== «+» واحدٌ في الوسط ينفتح عن خيارين (طلبُ صاحب الموقع) =====
      في المعرفة: مجلدُ معرفة · بطاقةُ معرفة — وفي البنك: مجلدُ أسئلة · بطاقةُ مسألة. يطفوان فوقه، ويُطويان
@@ -36546,7 +36543,7 @@ void main() {
        نفسُها: ما يتبدّل وحدَه يُحدَّث في موضعه.
        وشجرةُ النشر لا تُمَسّ ههنا: مساهمتي وأنا أحرّرها تُرسم ‎cardEditCard‎ لا ‎packCard‎،
        فالرحلةُ تظهر حين أخرج من التحرير — وهي تُقرأ من ‎d.jr‎ المحفوظة */
-    const lnb = e.target.closest('#cm-body .cx-lnseg [data-pkln]');
+    const lnb = e.target.closest('#cm-body .cx-lnk[data-pkln]');
     if (lnb) {
       const d = cardDataRaw(cmCode);
       if (d && pkLnSwap(d, lnb.dataset.pkln)) { save(); renderCmSection(); }

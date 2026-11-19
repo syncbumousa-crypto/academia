@@ -17613,8 +17613,8 @@ html[data-theme="dark"] button.pk-fstrip-ph:hover { color: #e1c172; }
 :is(.pk--max, .pk--frame) .vt-foot { min-height: 36px; }
 .pk--ftdn .vt-foot { min-height: 0; }
 /* «قائمة · رحلة» لا يظهر والبنكُ فارغ — يظهر حالَ إضافة أوّل شيء (طلبُ صاحب الموقع) */
-#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk:not(.cx-lnk)),
-#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk:not(.cx-lnk)) { display: none !important; }
+#cm-body .pk--edit:has(.pk-bank #cm-cards:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk),
+#cm-body .pk--edit:has(.pk-bank #cm-cards > .x3:empty) .cx-acttools > :is(.cx-jrseg, .cx-jrk) { display: none !important; }
 /* ترويسةُ المساهمة بلا خطٍّ فاصل خلف مسكتها — مثل التذييل (طلبُ صاحب الموقع) */
 :is(.pk--max, .pk--frame) .pk-hdline:not(.pk-ftline)::before { border-bottom-color: transparent; }
 /* التذييلُ المطويّ بطول الترويسة المطويّة (طلبُ صاحب الموقع): ‎20px‎ بين الكتل وحافّة المربّع، والمسكةُ على الحافّة كمسكة الرأس */
@@ -19689,7 +19689,17 @@ body:has(.sidebar:not(.side-rail)) .panel .market-box > .market-tools { margin-i
 .pk-fstrip.pk-lg .pg-row.pg-row--fx { overflow-x: hidden; }
 
 /* ===== زرُّ لغة محتوى الملخّص في تذييل التحرير — على ثوب زرّ «طريقة العرض» في البنك، وفيه رمزُ اللغة الحاليّة ===== */
-.cx-lnk__tg b { font-size: 13px; font-weight: 800; line-height: 1; letter-spacing: .2px; }
-.cx-lnk .cx-lnseg button { min-width: 84px; justify-content: center; }
+.cx-lnk { flex: none; margin-inline-start: 6px; width: 34px; height: 34px; padding: 0; border-radius: 50%; cursor: pointer; font: inherit;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  color: #14233f; background: rgba(44, 94, 101, .06); border: 1px solid rgba(44, 94, 101, .18); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35);
+  transition: background .15s, transform .15s; }
+.cx-lnk:hover { background: rgba(44, 94, 101, .12); }
+.cx-lnk:active { transform: scale(.94); }
+.cx-lnk > b { font-size: 12.5px; font-weight: 800; line-height: 1; margin-top: 2px; }
+.cx-lnk__d { display: flex; gap: 3px; }
+.cx-lnk__d > i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: .28; transition: opacity .2s; }
+.cx-lnk__d > i.on { opacity: 1; }
+html[data-theme="dark"] .cx-lnk { color: rgba(255, 255, 255, .92); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); border-color: rgba(255, 255, 255, .14); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] .cx-lnk:hover { background: linear-gradient(rgba(255, 255, 255, .16), rgba(255, 255, 255, .08)); }
 /* والمحتوى الإنجليزيّ يُكتب ويُقرأ من اليسار */
 .kt-view.kt-ln--en td.kt-t, .kt-view.kt-ln--en :not(td).kt-t { unicode-bidi: plaintext; text-align: left; }
