@@ -19545,7 +19545,8 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
 #cm-body .pk--framepub .pk-max.pk-max--curve.pk-max--pubc { top: 2px; inset-inline-start: 2px; }
 /* والبنكُ المنشورُ رحلةً: محطّتُه الأولى كانت تحت أيقونة المساحة في زاويتها — فتنزاح الشجرةُ عنها إلى الداخل
    (يسارًا في العربيّة) بقدر الأيقونة، وتبقى في ارتفاعها (طلبُ صاحب الموقع) */
-#cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr) { margin-inline-start: 26px; }
+/* (ثمّ بطلبه: لا انزياحَ يسارًا — الشجرةُ تنزل تحت الأيقونة وترجع إلى مكانها يمينًا، فلا يُغطّى منها شيء) */
+#cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr) { margin-inline-start: 0; padding-top: 40px; }
 /* وخيطُ رحلة البنك المنشور على محور دوائره: كان مائلًا يمينًا عنها بأربعة (حاشيتُه هنا ‎34‎ لا ‎30‎) — طلبُ صاحب الموقع */
 #cm-body .pk-bank.is-ro > .x3.cx-ro:not(.cx-nodot):not(.cx-nojr)::before { inset-inline-start: 12px; }
 /* ===== عدسةُ البحث وسجلُّه (طلبُ صاحب الموقع) ===== */
@@ -19802,3 +19803,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 .kt tr.kt-hrow { position: relative; }
 /* «+ صف ترويسة» لا معنى له إلّا والعرضُ جدوليّ */
 #cm-body .post:not(:has(.kt-view--table)) .cx-plus__it[data-ktaddh] { display: none; }
+
+/* ===== البنكُ المنشور: لا شريطَ سفليَّ بلا داعٍ (طلبُ صاحب الموقع) =====
+   الصفوفُ في النشر عرضُها الأدنى ‎600‎ (من أجل التحرير: نصُّ السؤال لا ينضغط)، فمساحةٌ ضيّقةٌ تفيض ويظهر شريطٌ ينزلق إلى فراغ —
+   والاسمُ الطويلُ يُختصر على كلّ حال. ففي النشر حدُّه الأدنى ‎360‎ وحدَه: لا يفيض إلّا في مساحةٍ أضيقَ من ذلك */
+#cm-body .pk-bank.is-ro > .x3 > * { min-width: 360px; }
