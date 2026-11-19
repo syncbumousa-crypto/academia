@@ -19871,5 +19871,11 @@ html[data-theme="dark"] .kt-rt__tm .kt-rt__b.on { color: #e1c172; }
 .pg-cnt > .pg-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
 html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08); }
 /* وبجانب مفتوح: إخوتُه يتّسعون بقدر العدّاد (كانوا ‎160‎)، والعدّادُ على سطر الاسم الأوّل لا في وسط أسطره */
-.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { max-width: 200px; }
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { max-width: 220px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { align-self: flex-start; margin-top: 2px; }
+/* الكسرُ: المُنجَزُ يمينًا ساطعًا، والشرطةُ والكلُّ يسارًا باهتين */
+.pg-cnt > .pg-frac { display: inline-flex; align-items: baseline; direction: rtl; gap: 1px; }
+.pg-cnt > .pg-frac > b { color: var(--u-tx-strong, #14233f); font-weight: 800; }
+html[data-theme="dark"] .pg-cnt > .pg-frac > b { color: #eef2f3; }
+.pg-cnt > .pg-frac > i { font-style: normal; opacity: .55; margin: 0 1px; }
+.pg-cnt > .pg-frac > span { opacity: .75; font-weight: 700; }

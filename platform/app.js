@@ -9763,7 +9763,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];
     const tot = flatCards(ns).length; if (!tot) return '';
     const a = x3Ans(ns);
-    return `<span class="pg-cnt" title="${esc(a.k + ' / ' + tot)}"><b>${tot}</b><span class="pg-ring">${x3DotAns(a)}</span></span>`;
+    /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
+       يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها */
+    const k2 = Math.min(a.k, tot), en = state.lang === 'en';
+    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-frac"><b>${k2}</b><i>/</i><span>${tot}</span></span><span class="pg-ring">${x3DotAns(a)}</span></span>`;
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
