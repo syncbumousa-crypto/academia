@@ -9784,8 +9784,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + (en ? N(d, ud, at, 1) : N(t, ut, at, 1)) + `<tspan dx="2" ${pkCapSl(at)}>/</tspan>` + (en ? N(t, ut, at) : N(d, ud, at)) + `</text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
     const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
-      /* والماءُ في مجموعةٍ تتحرّك وحدها عند الانفتاح (تترجّح وتمشي موجتُها ثم تسكن) — والأرقامُ تكسر صورتَها فتتحرّك فيها أيضًا */
-      + (L ? `<g class="pg-capw"><path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') + '</g>' : '')
+      /* والماءُ في مجموعةٍ يُحرَّك سطحُها عند الانفتاح (‎pkCapWaves‎) — والأرقامُ تكسر صورتَها فتتموّج فيها أيضًا */
+      + (L ? `<g class="pg-capw" data-y0="${(IH * (1 - L)).toFixed(2)}" data-y1="${(IH * (1 - L * R)).toFixed(2)}" data-a="${A}"><path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') + '</g>' : '')
       + `<rect width="100%" height="100%" fill="url(#${id}dp)"/></g>`;
     return `<span class="pg-cap"><span class="pg-capsz">${ut ? `<span class="pg-capu">${ut}</span>` : ''}${t} / ${ud ? `<span class="pg-capu">${ud}</span>` : ''}${d}</span><svg aria-hidden="true"><defs>`
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
@@ -9805,6 +9805,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".4"`)
       + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
+  /* ===== موجةٌ واحدةٌ تنعكس (طلبُ صاحب الموقع): كلّما انفتحت الكبسولة =====
+     انتفاخةٌ تخرج من وسط الماء (حيث كانت الدائرة) وتمشي إلى الطرفين، تضرب الحافّةَ وترتدّ مرّةً، وتخمد في ‎1.9‎ ثانية
+     إلى الموجة الساكنة نفسِها. تُبنى إطاراتُ مسار السطح بعرض الكبسولة الفعليّ وتُشغَّل بـ‎<animate>‎ (فتتبعها نسخةُ
+     الماء التي تكسرها الأرقام)، وآخرُ إطارٍ هو السكونُ فلا قفزة. ولا حركةَ لمن طلب تقليلها */
+  const pkCapWaves = cnt => {
+    const g = cnt.querySelector('.pg-capw'), cap = cnt.querySelector('.pg-cap');
+    if (!g || !cap || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    const w = Math.ceil(cap.getBoundingClientRect().width) + 6, c = w / 2, v = w * .75, A = +g.dataset.a || 0, D = 1.9, FR = 48, TAU = 2 * Math.PI;
+    const ref = p => { p = ((p % (2 * w)) + 2 * w) % (2 * w); return p > w ? 2 * w - p : p; };
+    const bump = (x, t) => { if (t >= D) return 0; const e = 3.4 * Math.exp(-1.3 * t), G = u => Math.exp(-u * u / 162); return -e * (G(x - ref(c + v * t)) + G(x - ref(c - v * t))); };
+    const path = (Y, t) => { let d = 'M-4 30'; for (let x = -4; x <= w + 4; x += 3) d += ` L${x} ${(Y + A * Math.sin(x / 18 * TAU) + bump(x, t)).toFixed(2)}`; return d + ` L${w + 4} 30 Z`; };
+    [...g.querySelectorAll(':scope > path')].forEach((p, k) => {
+      p.querySelectorAll('animate').forEach(x => x.remove());
+      const Y = +(k ? g.dataset.y1 : g.dataset.y0), vals = [];
+      for (let i = 0; i <= FR; i++) vals.push(path(Y, i === FR ? D : D * i / FR));
+      const an = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      [['attributeName', 'd'], ['dur', D + 's'], ['fill', 'freeze'], ['begin', 'indefinite'], ['values', vals.join(';')]].forEach(([n, x]) => an.setAttribute(n, x));
+      p.appendChild(an); try { an.beginElement(); } catch (_) { }
+    });
+  };
+  let pkCapHot = null;
+  document.addEventListener('pointerover', e => {
+    const cnt = e.target.closest && e.target.closest('.pg-cnt');
+    if (cnt === pkCapHot) return; pkCapHot = cnt;
+    if (cnt && e.pointerType !== 'touch') pkCapWaves(cnt);
+  }, { passive: true });
   /* في الكبسولة كلُّ قيمةٍ بوحدتها: ما دون الدقيقة ثوانٍ «45ث»، وما دون الساعة دقائقُ وثوانٍ «8:15د»،
      وما فوقها ساعاتٌ ودقائق «1:20س» */
   const pkTmV = t => t < 60 ? String(t) : t < 3600 ? pkTmTx(t)
