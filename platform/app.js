@@ -9796,9 +9796,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".55"`)
       + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
-  /* في الكبسولة: ما دون الدقيقة ثوانٍ «45ث»، وما فوقها دقائقُ «8:15د» */
-  const pkTmV = t => t < 60 ? String(t) : pkTmTx(t);
-  const pkTmU = (t, en) => t < 60 ? (en ? 's' : 'ث') : (en ? 'm' : 'د');
+  /* في الكبسولة كلُّ قيمةٍ بوحدتها: ما دون الدقيقة ثوانٍ «45ث»، وما دون الساعة دقائقُ وثوانٍ «8:15د»،
+     وما فوقها ساعاتٌ ودقائق «1:20س» */
+  const pkTmV = t => t < 60 ? String(t) : t < 3600 ? pkTmTx(t)
+    : (() => { const m = Math.round(t / 60), h = Math.floor(m / 60), x = m % 60; return x ? h + ':' + String(x).padStart(2, '0') : String(h); })();
+  const pkTmU = (t, en) => t < 60 ? (en ? 's' : 'ث') : t < 3600 ? (en ? 'm' : 'د') : (en ? 'h' : 'س');
   const pkTmTx = t => { const m = Math.floor(t / 60), x = t % 60; return x ? m + ':' + String(x).padStart(2, '0') : String(m); };
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
