@@ -19692,3 +19692,5 @@ body:has(.sidebar:not(.side-rail)) .panel .market-box > .market-tools { margin-i
 @media (prefers-reduced-motion: no-preference) {
   body:has(.sidebar.side-anim) .panel .market-box > .market-tools { transition: margin-inline-start .32s cubic-bezier(.32,.72,0,1); }
 }
+/* صفُّ المجلدات الذي يسع ما فيه لا يُظهر شريطَ تمريرٍ عابرًا أثناءَ حركة ‎FLIP‎ (مقياسُ الألواح يُحسب في فيضه) */
+.pk-fstrip.pk-lg .pg-row.pg-row--fx { overflow-x: hidden; }

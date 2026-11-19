@@ -11309,6 +11309,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const strip = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"]');
     if (!m || !strip || !strip.animate) return;
     pkFit(strip);
+    /* ===== ولا شريطَ تمريرٍ عابر وهي تتحرّك (طلبُ صاحب الموقع) =====
+       الحركةُ ‎transform‎ بمقياس: اللوحُ الذي يضيق يبدأ بقدره القديم الأعرض، والمكبَّرُ يُحسب في فيض الصفّ —
+       فيفيض الصفُّ لحظةً فيظهر شريطُه ثمّ يختفي. فالصفُّ الذي يسع ما فيه بقدره النهائيّ (يُقاس الآن، قبل أيّ حركة)
+       لا يُمرَّر ما دامت الحركة؛ وما يفيض حقًّا يبقى بشريطه */
+    const fitRows = [...strip.querySelectorAll('.pg-row')].filter(r => r.offsetParent && r.scrollWidth <= r.clientWidth + 1);
+    fitRows.forEach(r => r.classList.add('pg-row--fx'));
+    clearTimeout(strip.pkFxT);
+    strip.pkFxT = setTimeout(() => strip.querySelectorAll('.pg-row--fx').forEach(r => r.classList.remove('pg-row--fx')), 420);
     const E = 'cubic-bezier(.2, .8, .2, 1)', T = 260, moved = new Set();
     strip.querySelectorAll('.pg-face[data-pkf]').forEach(f => {
       const b = f.parentElement; if (!b.offsetParent) return;
