@@ -19712,3 +19712,7 @@ html[data-theme="dark"] .cx-lnk:hover { background: linear-gradient(rgba(255, 25
 @keyframes pkStripNudge { 50% { box-shadow: 0 0 0 2px var(--es-g, #c9a25c), 0 0 18px -4px rgba(201, 162, 92, .6); } }
 @media (prefers-reduced-motion: reduce) { .pk-es__b--up svg, .pk-fstrip.is-nudge .pg-face { animation: none; } }
 .pk--bandfx .pk-split .pk-es--await .pk-es__t { display: block; }   /* عنوانُ الاستقبال يبقى (يُخفى في رسمات التحرير وحدها) */
+/* الدعوةُ هادئة (طلبُ صاحب الموقع): سطرٌ بسهمٍ لا زرٌّ ذهبيٌّ صارخ */
+.pk-es__b.pk-es__b--up { margin-top: 0; padding: 4px 8px; background: transparent; color: var(--es-mut); font-size: 13px; font-weight: 600; border-radius: 8px; }
+.pk-es__b.pk-es__b--up svg { width: 14px; height: 14px; color: var(--es-g); }
+.pk-es__b.pk-es__b--up:hover { filter: none; transform: none; color: var(--es-tx); }
