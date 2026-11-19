@@ -16817,7 +16817,7 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
 /* الرأسُ وصفُّ «١» شريطان منفصلان (بطلب صاحب الموقع): بينهما فسحة، ولكلٍّ منهما حدُّه وانحناءُ طرفيه */
 .kt {
   --kt-l: 1px solid var(--u-line, rgba(44, 94, 101, .18));
-  width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0 14px; margin: -14px 0;   /* الفسحةُ بين الصفوف المفصولة ‎14px‎ (طلبُ صاحب الموقع · كانت ‎8‎) */
+  width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0 14px; margin: -20px 0 -14px;   /* الفسحةُ بين الصفوف المفصولة ‎14px‎ (طلبُ صاحب الموقع · كانت ‎8‎) */
   border: 0; background: transparent; color: var(--u-tx, #14233f); font-size: 13.5px;
 }
 .kt th, .kt td { vertical-align: top; text-align: start; border: 0; border-top: var(--kt-l); border-bottom: var(--kt-l); border-inline-start: var(--kt-l); }
@@ -19793,3 +19793,6 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 .kt tr.kt-ja > td { border-start-start-radius: 0 !important; border-start-end-radius: 0 !important; }
 .kt tr.kt-jb > td { border-end-start-radius: 0 !important; border-end-end-radius: 0 !important; }
 .kt tr.is-rowsel { position: relative; z-index: 1; }   /* إطارُ المحدَّد فوق حدِّ جاره الملصوق */
+
+/* والرأسُ وأوّلُ صفٍّ بينهما فسحتُهما الأولى ‎8px‎ دائمًا (طلبُ صاحب الموقع): الرأسُ يُنزل ‎6px‎ نحو الصفوف، والجدولُ يُرفع بقدرها فلا يتحرّك الرأسُ عن مكانه */
+.kt > thead > tr { transform: translateY(6px); }
