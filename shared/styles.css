@@ -19641,3 +19641,6 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { width: 20px; height
 #cm-body .pk--pc .pc-ring > .x3-dot { border: 1.4px solid var(--u-in-line, rgba(127, 127, 127, .35)); }
 /* والبنكُ في التحرير بلا فجوةٍ في زاويته: فمربّعُه صار فوق أيقونته فلا تُنقر لتُغلقه — فتعلو الأيقونةُ عليه (طلبُ صاحب الموقع) */
 #cm-body .pk--edit .pk-blkh--bank .pk-blkh__ic { position: relative; z-index: 4; }
+/* زرُّ النقاط الثلاث (عرضُ البنك: قائمة · رحلة) في تذييل التحرير بثوب زرّ «إضافة» جنبه — قامتُه وحدُّه وظلُّه وزجاجُه (طلبُ صاحب الموقع) */
+#cm-body .pk--edit .cx-jrk__tg { width: 34px; height: 34px; background: rgba(44, 94, 101, .06); border: 1px solid rgba(44, 94, 101, .18); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); color: #14233f; }
+html[data-theme="dark"] #cm-body .pk--edit .cx-jrk__tg { background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); border-color: rgba(255, 255, 255, .14); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); color: rgba(255, 255, 255, .92); }
