@@ -12788,10 +12788,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     tm: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/>',
   };
   /* ===== «زمنٌ لهذا الصف» (طلبُ صاحب الموقع): زرٌّ دائريٌّ بين أدوات الصف يتّسع في مكانه إلى عدّادين — دقائقُ وثوانٍ =====
-     ‏‎n.tm‎ بالثواني (حتى ‎99:59‎). والزمنُ يُرى على الصفّ تحت رقمه بشارةٍ ذهبيّة، في التحرير والنشر */
+     ‏‎n.tm‎ بالثواني (حتى ‎99:59‎) */
   let ktTmOpen = false;
   const ktTmFmt = t => Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
-  const ktTmBadge = n => n.tm ? `<span class="kt-tm" dir="ltr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg>${ktTmFmt(n.tm)}</span>` : '';
+  /* (ثمّ بطلبه: لا يظهر الزمنُ على الصفّ — يبقى في التذييل وحدَه: الزرُّ ذهبيٌّ والزمنُ في تلميحه، ويُرى كاملًا في العدّادين) */
   /* الترويساتُ بمواضعها المحسومة: ‎pos‎ معرّفُ البطاقة التي تأتي قبلها، أو ‎$end‎ */
   function ktHeads(H, CL, main) {
     const ids = new Set(CL.map(n => n.id)), first = CL[0] ? CL[0].id : '$end';
@@ -12850,7 +12850,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span class="kt-rt__seg kt-rt__seg--del">${b('del')}</span>`;
   }
   function ktTmSeg(n, b) {
-    const t = n.tm || 0, R = T().ktR, clk = b('tm', null, ktTmOpen || !!t);
+    const t = n.tm || 0, R = T().ktR, clk = b('tm', null, ktTmOpen || !!t).replace(/title="[^"]*"/, `title="${esc(R.tm)}${t ? ' · ' + ktTmFmt(t) : ''}"`);
     if (!ktTmOpen) return `<span class="kt-rt__seg kt-rt__tm">${clk}</span>`;
     const st = (u, v, lab) => `<span class="kt-tmst"><button type="button" data-kttm="${u}-" aria-label="−">−</button><b>${v}</b><button type="button" data-kttm="${u}+" aria-label="+">+</button></span><i class="kt-tmu">${esc(lab)}</i>`;
     return `<span class="kt-rt__seg kt-rt__tm is-open">${clk}${st('m', Math.floor(t / 60), R.tmM)}${st('s', String(t % 60).padStart(2, '0'), R.tmS)}</span>`;
@@ -12955,8 +12955,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const n = c.L[c.a], d = { 'm+': 60, 'm-': -60, 's+': 15, 's-': -15 }[b.dataset.kttm] || 0;
     const t = Math.max(0, Math.min(5999, (n.tm || 0) + d));
     if (t) n.tm = t; else delete n.tm;
-    const cell = c.v.querySelector(`tr[data-kcard="${CSS.escape(n.id)}"] > .kt-c0`);
-    if (cell) { const old = cell.querySelector('.kt-tm'); if (old) old.remove(); if (t) cell.insertAdjacentHTML('beforeend', ktTmBadge(n)); }
     clearTimeout(ktSaveT); ktSaveT = setTimeout(save, 300);
     ktRtPaint();
   }, true);
@@ -13053,7 +13051,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const ja = !!(n.ja && k && !hb.has(n.id)), jb = !!(nx && nx.ja && !hb.has(nx.id));
           if (ja) jn++;
           const cls = (n.ln ? ' kt-lnr--' + n.ln : '') + (n.clr ? ' kt-clr--' + n.clr : '') + (n.nr ? ' kt-nr' : '') + (ja ? ' kt-ja' : '') + (jb ? ' kt-jb' : '') + (!ro && ktRow && ktRow.id === n.id ? ' is-rowsel' : '');
-          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span>${ktTmBadge(n)}</td>`
+          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;

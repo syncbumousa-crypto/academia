@@ -19850,7 +19850,7 @@ html, body { overscroll-behavior-x: none; }
 .pk-fstrip.pk-lg .pg-box.is-wide.is-solo > .pg-in { opacity: .5; transition: opacity .2s; }
 .pk-fstrip.pk-lg .pg-box.is-wide.is-solo > .pg-in:hover { opacity: .85; }
 
-/* ===== زمنُ الصف: الزرُّ الدائريّ وعدّاداه، والشارةُ تحت رقم الصف ===== */
+/* ===== زمنُ الصف: الزرُّ الدائريّ وعدّاداه (في التذييل وحدَه) ===== */
 .kt-rt__tm.is-open { gap: 6px; padding-inline-end: 8px; }
 .kt-tmst { display: inline-flex; align-items: center; height: 26px; border-radius: 99px; background: rgba(44, 94, 101, .1); direction: ltr; }
 .kt-tmst > button { width: 24px; height: 26px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; border-radius: 99px; }
@@ -19861,10 +19861,4 @@ html, body { overscroll-behavior-x: none; }
 html[data-theme="dark"] .kt-tmst { background: rgba(255, 255, 255, .08); }
 html[data-theme="dark"] .kt-tmst > button:hover { background: rgba(255, 255, 255, .14); }
 html[data-theme="dark"] .kt-rt__tm .kt-rt__b.on { color: #e1c172; }
-.kt .kt-c0 .kt-tm { display: flex; width: fit-content; margin: 3px auto 0; align-items: center; gap: 3px; padding: 0 5px; border-radius: 6px; line-height: 16px;
   font-size: 10.5px; font-weight: 800; font-variant-numeric: tabular-nums; color: #8a6420; background: rgba(201, 162, 92, .16); }
-.kt .kt-c0 .kt-tm svg { width: 10px; height: 10px; }
-html[data-theme="dark"] .kt .kt-c0 .kt-tm { color: #e1c172; background: rgba(225, 193, 114, .13); }
-.kt td.kt-c0:has(.kt-tm) { padding-inline: 3px; }
-.kt .kt-c0 .kt-tm { gap: 2px; padding: 0 4px; font-size: 10px; letter-spacing: -.2px; }
-.kt .kt-c0 .kt-tm svg { width: 9px; height: 9px; }
