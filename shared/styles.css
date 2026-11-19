@@ -19703,3 +19703,12 @@ html[data-theme="dark"] .cx-lnk { color: rgba(255, 255, 255, .92); background: l
 html[data-theme="dark"] .cx-lnk:hover { background: linear-gradient(rgba(255, 255, 255, .16), rgba(255, 255, 255, .08)); }
 /* والمحتوى الإنجليزيّ يُكتب ويُقرأ من اليسار */
 .kt-view.kt-ln--en td.kt-t, .kt-view.kt-ln--en :not(td).kt-t { unicode-bidi: plaintext; text-align: left; }
+/* ===== الملخّصُ المنشورُ قبل اختيار مجلد: رسمةٌ ودعوة (‎.pk-es--await‎) ===== */
+.pk-es--await { min-height: 0; }
+.pk-es__b--up svg { animation: pkUpNudge 1.8s ease-in-out infinite; }
+@keyframes pkUpNudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(-3px); } }
+/* والزرُّ ينبّه إلى المجلدات: تومض حدودُها مرّتين */
+.pk-fstrip.is-nudge .pg-row > .pg-box > .pg-face { animation: pkStripNudge .6s ease-in-out 2; }
+@keyframes pkStripNudge { 50% { box-shadow: 0 0 0 2px var(--es-g, #c9a25c), 0 0 18px -4px rgba(201, 162, 92, .6); } }
+@media (prefers-reduced-motion: reduce) { .pk-es__b--up svg, .pk-fstrip.is-nudge .pg-face { animation: none; } }
+.pk--bandfx .pk-split .pk-es--await .pk-es__t { display: block; }   /* عنوانُ الاستقبال يبقى (يُخفى في رسمات التحرير وحدها) */
