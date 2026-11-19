@@ -9768,15 +9768,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والشرطةُ أسمكُ من حرف الخطّ (طلبُ صاحب الموقع): تُخطّ بلون حشوها نفسِه فتغلظ، وحافّةُ اللمعة تُترك عنها
      (حدٌّ رفيعٌ حول شرطةٍ غليظةٍ يُرى خطًّا في وسطها) */
   const pkCapSl = (at, w = 2.1) => { const f = /fill="([^"]+)"/.exec(at); return f && f[1] !== 'none' ? `stroke="${f[1]}" stroke-width="${w}" stroke-linejoin="round"` : 'opacity="0"'; };
-  function pkCapHTML(lvl, rat, d, t, ud, ut) {
+  function pkCapHTML(lvl, rat, d, t, ud, ut, en) {
     const id = 'pkc' + (pkCapN++), IH = 18.8, by = 13.6;
     let L = lvl || 0, R = rat == null ? 1 : rat;
     if (L > 0) L = Math.max(L, 3.4 / IH);
     if (R > 0 && R < 1) { const m = Math.min(.9 / IH / L, .3); R = Math.min(Math.max(R, m), 1 - m); }
     const A = L > 0 && L < 1 ? .9 : 0;
-    /* ولكلّ رقمٍ وحدتُه عن يساره (طلبُ صاحب الموقع): «4د / 8:15د» — لا حرفٌ واحدٌ للاثنين يُقرأ ساعاتٍ ودقائق */
-    const U = (x, at, first) => x ? `<tspan class="pg-capu" ${first ? '' : 'dx="2" '}${pkCapSl(at, .7)}>${x}</tspan><tspan dx="1.5">` : `<tspan${first ? '' : ' dx="2"'}>`;
-    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${U(ut, at, 1)}${t}</tspan><tspan dx="2" ${pkCapSl(at)}>/</tspan>${U(ud, at)}${d}</tspan></text>`;
+    /* ولكلّ رقمٍ وحدتُه عن يساره (طلبُ صاحب الموقع): «4د / 8:15د» — لا حرفٌ واحدٌ للاثنين يُقرأ ساعاتٍ ودقائق.
+       وفي الإنجليزيّة يُقلب: المُنجَزُ يسارًا والوحدةُ بعد الرقم «4m / 8:15m» — كما يُقرأ الكسرُ هناك */
+    const N = (v, x, at, first) => {
+      const g = first ? '' : ' dx="2"', un = x ? `<tspan class="pg-capu" dx="${en ? 1.5 : 2}" ${pkCapSl(at, .7)}>${x}</tspan>` : '';
+      return en ? `<tspan${g}>${v}</tspan>${un}` : (x ? un.replace(/dx="[\d.]+" /, first ? '' : 'dx="2" ') + `<tspan dx="1.5">${v}</tspan>` : `<tspan${g}>${v}</tspan>`);
+    };
+    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>`
+      + (en ? N(d, ud, at, 1) : N(t, ut, at, 1)) + `<tspan dx="2" ${pkCapSl(at)}>/</tspan>` + (en ? N(t, ut, at) : N(d, ud, at)) + `</text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
     const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
       + (L ? `<path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') : '')
@@ -9817,14 +9822,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmV(dt), pkTmV(tt), pkTmU(dt || tt, en), pkTmU(tt, en))}</span>`;
+        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmV(dt), pkTmV(tt), pkTmU(dt || tt, en), pkTmU(tt, en), en)}</span>`;
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
        يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها.
        ويُرى الدائرةُ وحدها، فإذا مرّ عليها المؤشّرُ انبسطت كبسولةً بثيمها نفسِه (الحدّ واللمعة والماء الصاعد من الأسفل) وفيها الكسر (طلبُ صاحب الموقع) */
     const k2 = Math.min(a.k, tot);
-    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span>${pkCapHTML(a.lvl, a.rat, k2, tot, '')}</span>`;
+    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span>${pkCapHTML(a.lvl, a.rat, k2, tot, '', '', en)}</span>`;
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
