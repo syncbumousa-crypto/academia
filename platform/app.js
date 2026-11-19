@@ -12861,12 +12861,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (x.h) return '';
           const n = x.n, nx = CL[k + 1];
           /* أدواتُ الصفّ (‎ktRow‎): لونُه و«غير مطلوب» والدمج — والمحدَّدُ بإطاره.
-             ‏‎n.ja‎ يلصق الصفَّ بالذي فوقه بلا فسحة (جدولٌ واحد): يُرفع بقدر الفسحة وحدٍّ واحد (‎9px‎) هو وكلُّ ما بعده،
+             ‏‎n.ja‎ يلصق الصفَّ بالذي فوقه بلا فسحة (جدولٌ واحد): يُرفع بقدر الفسحة وحدٍّ واحد (‎15px‎) هو وكلُّ ما بعده،
              وتُسطَّح الزاويتان عند موضع اللصق */
           const ja = !!(n.ja && k), jb = !!(nx && nx.ja);
           if (ja) jn++;
           const cls = (n.ln ? ' kt-lnr--' + n.ln : '') + (n.clr ? ' kt-clr--' + n.clr : '') + (n.nr ? ' kt-nr' : '') + (ja ? ' kt-ja' : '') + (jb ? ' kt-jb' : '') + (!ro && ktRow && ktRow.id === n.id ? ' is-rowsel' : '');
-          return `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 9}px)"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
+          return `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
@@ -12882,7 +12882,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         KT_REST.set(rest, rows.splice(KT_FIRST));
         queueMicrotask(ktFillRest);
       }
-      body = !cards.length ? '' : `<table class="kt"${rest ? ` data-ktrest="${rest}"` : ''}${jn ? ` style="margin-bottom:${-8 - jn * 9}px"` : ''}><thead><tr>`
+      body = !cards.length ? '' : `<table class="kt"${rest ? ` data-ktrest="${rest}"` : ''}${jn ? ` style="margin-bottom:${-14 - jn * 15}px"` : ''}><thead><tr>`
         /* عمودُ ✓ (اكتمالُ الصفّ) لا يُرى في التحرير (طلبُ صاحب الموقع) — والعلامةُ المحفوظةُ باقيةٌ تُرى في النشر */
         + h.slice(0, ro ? 4 : 3).map((x, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"`}>${esc(x || '')}</th>`).join('')
         + `</tr></thead><tbody>`
