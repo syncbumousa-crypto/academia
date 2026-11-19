@@ -19896,15 +19896,23 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 /* ولا تغطّي الاسم (طلبُ صاحب الموقع): العدّادُ نفسُه يتّسع من قدّ الدائرة إلى قدّ الكبسولة (‎--pk-w‎) بنفس المنحنى،
    فيتراجع الاسمُ أمامها وينقطع بنقاطه بدل أن تعلوه. والكبسولةُ والدائرةُ في وسطه، فينفرج القصُّ من الوسط
    إلى الجهتين وحافّتاه مع حافّتَي العدّاد — داخل المربّع ودون الاسم */
-.pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center;
-  transition: width .56s cubic-bezier(.22, 1, .36, 1); }
-.pk-fstrip.pk-lg .pg-face > .pg-cnt:hover { width: var(--pk-w, 18px); }
-.pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - 10px) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
+/* والفُرجةُ إلى الاسم تضيق معها (‎10 → 4px‎) — خاصّيّةٌ مسجّلةٌ فتنتقل بنعومة، والكبسولةُ تتوسّط ما بعدها */
+@property --pk-pad { syntax: '<length>'; inherits: true; initial-value: 10px; }
+.pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center; --pk-pad: 10px; padding-inline-start: var(--pk-pad);
+  transition: width .56s cubic-bezier(.22, 1, .36, 1), --pk-pad .56s cubic-bezier(.22, 1, .36, 1); }
+.pk-fstrip.pk-lg .pg-face > .pg-cnt:hover { width: var(--pk-w, 18px); --pk-pad: 4px; }
+/* ولا يبقى بين الاسم والكبسولة فراغ (طلبُ صاحب الموقع): ما دامت مفتوحةً يمتدّ الاسمُ إلى آخر مكانه بلا نقاط —
+   النقاطُ تقطع الكلمةَ العربيّة عند حرفٍ كامل فتترك فراغًا — ويذوب طرفُه في تدرّجٍ قصير بدل أن يُبتر */
+.pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm { text-overflow: clip;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px); mask-image: linear-gradient(to right, transparent 0, #000 14px); }
+[dir="ltr"] .pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm {
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 14px); mask-image: linear-gradient(to left, transparent 0, #000 14px); }
+.pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - var(--pk-pad, 10px)) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(168, 132, 46, .7); background: #2a3235; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45);
   clip-path: inset(2px calc(50% - 9px) 2px calc(50% - 9px) round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
   transition: clip-path .56s cubic-bezier(.22, 1, .36, 1), opacity .2s ease, visibility 0s linear .56s; }
-[dir="ltr"] .pg-cnt > .pg-cap { left: calc((100% + 10px) / 2); }
+[dir="ltr"] .pg-cnt > .pg-cap { left: calc((100% + var(--pk-pad, 10px)) / 2); }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5); }
 /* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
 .pg-cnt > .pg-cap > .pg-capsz { visibility: hidden; font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; letter-spacing: .6px; }
