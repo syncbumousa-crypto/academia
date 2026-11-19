@@ -1271,7 +1271,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkLn: 'لغة المحتوى', pkAwaitT: 'هنا يظهر الملخص', pkAwaitB: 'يمكنك من الأعلى اختيار المجلد المطلوب', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', cmPick: 'اختر قسمًا من فوق لتظهر مساهماته', pkSrcGenCov: 'غلاف المادة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد', pkPlusKC: 'بطاقة', cxJrView: 'طريقة العرض', pkPlusKFh: 'فصل أو موضوع', pkPlusKCh: 'مصطلح ومعناه', pkPlusQFh: 'مجموعة أسئلة', pkPlusQCh: 'متعدّد · وجهين · فراغ', pkPlusQF: 'مجلد', pkPlusQC: 'سؤال', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'اسم العمود 1', 'اسم العمود 2', ''], ktFacePh: ['المصطلح', 'معناه'], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkLn: 'لغة المحتوى', ktR: { up: 'تحريك لأعلى', dn: 'تحريك لأسفل', swap: 'تبديل مع صف آخر', num: 'نقل لرقم آخر', jup: 'دمج مع الجدول السابق', jdn: 'دمج مع الجدول التالي', split: 'فصل الجدول هنا', nr: 'غير مطلوب', y: 'تلوين أصفر', g: 'تلوين أخضر', b: 'تلوين أزرق', del: 'حذف الصف', ask: 'رقم الصف' }, pkAwaitT: 'هنا يظهر الملخص', pkAwaitB: 'يمكنك من الأعلى اختيار المجلد المطلوب', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', cmPick: 'اختر قسمًا من فوق لتظهر مساهماته', pkSrcGenCov: 'غلاف المادة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد', pkPlusKC: 'بطاقة', cxJrView: 'طريقة العرض', pkPlusKFh: 'فصل أو موضوع', pkPlusKCh: 'مصطلح ومعناه', pkPlusQFh: 'مجموعة أسئلة', pkPlusQCh: 'متعدّد · وجهين · فراغ', pkPlusQF: 'مجلد', pkPlusQC: 'سؤال', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'اسم العمود 1', 'اسم العمود 2', ''], ktFacePh: ['المصطلح', 'معناه'], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1742,7 +1742,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkLn: 'Content language', pkAwaitT: 'The summary shows here', pkAwaitB: 'Pick a folder above', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', cmPick: 'Choose a section above to see its contributions', pkSrcGenCov: 'Course cover', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Folder', pkPlusKC: 'Card', cxJrView: 'View', pkPlusKFh: 'A chapter or topic', pkPlusKCh: 'A term and its meaning', pkPlusQFh: 'A group of questions', pkPlusQCh: 'Choice · two-sided · blank', pkPlusQF: 'Folder', pkPlusQC: 'Question', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'COLUMN 1', 'COLUMN 2', ''], ktFacePh: ['TERM', 'WHAT IT MEANS'], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkLn: 'Content language', ktR: { up: 'Move up', dn: 'Move down', swap: 'Swap with another row', num: 'Move to another number', jup: 'Join the table above', jdn: 'Join the table below', split: 'Split the table here', nr: 'Mark as not required', y: 'Colorize yellow', g: 'Colorize green', b: 'Colorize blue', del: 'Remove this row', ask: 'Row number' }, pkAwaitT: 'The summary shows here', pkAwaitB: 'Pick a folder above', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', cmPick: 'Choose a section above to see its contributions', pkSrcGenCov: 'Course cover', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Folder', pkPlusKC: 'Card', cxJrView: 'View', pkPlusKFh: 'A chapter or topic', pkPlusKCh: 'A term and its meaning', pkPlusQFh: 'A group of questions', pkPlusQCh: 'Choice · two-sided · blank', pkPlusQF: 'Folder', pkPlusQC: 'Question', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'COLUMN 1', 'COLUMN 2', ''], ktFacePh: ['TERM', 'WHAT IT MEANS'], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9815,7 +9815,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والملخّصُ بلا مجلدات (الاستقبال): «+» يضيف مجلدًا مباشرةً بلا خيارين (طلبُ صاحب الموقع) */
     if (!pub && !((cardDataRaw(cmCode) || {}).deck || []).length) return pkAddPill('data-actkf', T().pkAddFirstFold);
     return pkPlus([['data-actkf', PK_ACT_IC.fold, T().pkPlusKF, T().pkPlusKFh], ['data-cxmidadd', PK_ACT_IC.card, T().pkPlusKC, T().pkPlusKCh]], T().pkAddMore)
-      + pkLnKebab(cardDataRaw(cmCode));
+      + pkLnKebab(cardDataRaw(cmCode)) + `<span class="kt-rt" data-ktrt>${ktRtHTML()}</span>`;
   }
   /* ===== لغةُ محتوى الملخّص (طلبُ صاحب الموقع) =====
      زرٌّ في تذييل التحرير يعيّن لغةَ ما في المستطيلات والبطائق والمربّعات. ولكلّ لغةٍ محتواها: الحاليّةُ في حقلَي البطاقة
@@ -12655,6 +12655,125 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   const ktCards = host => host.arr.filter(n => n.t === 'c');
   /* أسماءُ الأعمدة الافتراضيّة بلغة المحتوى المختارة لا بلغة الموقع (طلبُ صاحب الموقع) — وما كُتب منها محفوظٌ لكلّ لغةٍ في ‎kthL‎ */
+  /* ===== أدواتُ الصفّ في تذييل الجدول (طلبُ صاحب الموقع · الاقتراحُ ١: شريطُ أيقوناتٍ مجمّع) =====
+     ما دام المؤشّرُ في صفٍّ من جدول التحرير تظهر تحت: الترتيبُ (أعلى · أسفل · تبديلٌ مع صفّ · نقلٌ إلى رقم) · الجدولُ
+     (دمجٌ بالسابق · دمجٌ بالتالي · فصلٌ هنا) · التمييزُ (غيرُ مطلوب · ثلاثةُ ألوان) · الحذف.
+     الصفوفُ بترتيبها الظاهر (‎ktDeep‎ — بطائقُ المجلد ثمّ مجلداته الداخليّة) والترقيمُ ترقيمُها. و«الجدول» صفوفٌ متّصلة:
+     ‏‎n.brk‎ يجعل الصفَّ أوّلَ جدولٍ جديد (فاصلٌ قبله)، والفواصلُ تبقى في مواضعها إذا تحرّكت الصفوف. واللونُ ‎n.clr‎ و«غيرُ مطلوب» ‎n.nr‎ */
+  var ktRow = null;   /* ‏‎{ pk, id }‎: المساهمةُ والبطاقةُ المحدَّدة */
+  const KTR_IC = {
+    up: '<path d="M12 19V5M6 11l6-6 6 6"/>', dn: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+    swap: '<path d="M4 8h14l-3-3M20 16H6l3 3"/>', num: '<path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/>',
+    jup: '<path d="M4 5h16M8 13l4-4 4 4M12 9v11"/>', jdn: '<path d="M4 19h16M8 11l4 4 4-4M12 15V4"/>',
+    split: '<path d="M3 12h3M9 12h2M14 12h2M19 12h2M7 5h10M7 19h10"/>',
+    nr: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 14 14 4M10 20 20 10M4.6 19.4 19.4 4.6"/>',
+    del: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+  };
+  function ktRowCtx() {
+    if (!ktRow) return null;
+    const v = document.querySelector(`#cm-body .post.pk--edit .kt-view--table[data-pkid="${CSS.escape(ktRow.pk)}"]`); if (!v) return null;
+    const host = ktHost(v.dataset.ktf); if (!host) return null;
+    const L = ktDeep(host).filter(x => x.n).map(x => x.n), a = L.findIndex(n => n.id === ktRow.id);
+    return a < 0 ? null : { v, host, L, a };
+  }
+  function ktRtHTML() {
+    const c = ktRowCtx(); if (!c) return '';
+    const { L, a } = c, n = L[a], R = T().ktR;
+    const brk = L.map((x, i) => x.brk && i ? i : -1).filter(i => i > 0);
+    const can = { up: a > 0, dn: a < L.length - 1, swap: L.length > 1, num: L.length > 1,
+      jup: brk.some(i => i <= a), jdn: brk.some(i => i > a), split: a > 0 && !n.brk };
+    const b = (k, inner, on) => `<button type="button" class="kt-rt__b${on ? ' on' : ''}" data-ktr="${k}" title="${esc(R[k])}" aria-label="${esc(R[k])}"${k in can && !can[k] ? ' disabled' : ''}${on != null ? ` aria-pressed="${!!on}"` : ''}>${inner || `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${KTR_IC[k]}</svg>`}</button>`;
+    const sw = k => b(k, `<i class="kt-rt__sw kt-rt__sw--${k}"></i>`, n.clr === k);
+    return `<span class="kt-rt__sep"></span>`
+      + `<span class="kt-rt__seg">${b('up')}${b('dn')}${b('swap')}${b('num')}</span>`
+      + `<span class="kt-rt__seg">${b('jup')}${b('jdn')}${b('split')}</span>`
+      + `<span class="kt-rt__seg">${b('nr', null, !!n.nr)}${sw('y')}${sw('g')}${sw('b')}</span>`
+      + `<span class="kt-rt__seg kt-rt__seg--del">${b('del')}</span>`;
+  }
+  function ktRtPaint() {
+    document.querySelectorAll('#cm-body [data-ktrt]').forEach(el => { el.innerHTML = ktRtHTML(); });
+    document.querySelectorAll('#cm-body .kt-view--table tr.is-rowsel').forEach(tr => tr.classList.remove('is-rowsel'));
+    if (ktRow) { const c = ktRowCtx(); const tr = c && c.v.querySelector(`tr[data-kcard="${CSS.escape(ktRow.id)}"]`); if (tr) tr.classList.add('is-rowsel'); }
+  }
+  /* الفواصلُ في مواضعها: تُحفظ مواقعُها قبل التحريك وتُعاد على الترتيب الجديد */
+  function ktRtKeepBrk(c, fn) {
+    const pos = c.L.map((x, i) => x.brk ? i : -1).filter(i => i > 0);
+    fn();
+    const L2 = ktDeep(c.host).filter(x => x.n).map(x => x.n);
+    L2.forEach(x => { delete x.brk; });
+    pos.forEach(i => { if (L2[i]) L2[i].brk = true; });
+  }
+  function ktRtSwap(c, i, j) {
+    const A = c.L[i], B = c.L[j], la = ktLoc(c.host, A.id), lb = ktLoc(c.host, B.id);
+    if (!la || !lb) return;
+    la.arr[la.i] = B; lb.arr[lb.i] = A;
+  }
+  function ktRtMoveTo(c, m) {
+    const s = c.L[c.a], t = c.L[m], ls = ktLoc(c.host, s.id); if (!ls || !t) return;
+    ls.arr.splice(ls.i, 1);
+    const lt = ktLoc(c.host, t.id); if (!lt) { ls.arr.splice(ls.i, 0, s); return; }
+    lt.arr.splice(lt.i + (c.a < m ? 1 : 0), 0, s);
+  }
+  function ktRtDo(k, num) {
+    const c = ktRowCtx(); if (!c) return;
+    const { L, a } = c, n = L[a];
+    if (k === 'up' && a > 0) ktRtKeepBrk(c, () => ktRtSwap(c, a, a - 1));
+    else if (k === 'dn' && a < L.length - 1) ktRtKeepBrk(c, () => ktRtSwap(c, a, a + 1));
+    else if (k === 'swap' && num != null && num !== a) ktRtKeepBrk(c, () => ktRtSwap(c, a, num));
+    else if (k === 'num' && num != null && num !== a) ktRtKeepBrk(c, () => ktRtMoveTo(c, num));
+    else if (k === 'jup') { const p = L.map((x, i) => x.brk && i && i <= a ? i : -1).filter(i => i > 0).pop(); if (p) delete L[p].brk; }
+    else if (k === 'jdn') { const p = L.findIndex((x, i) => x.brk && i > a); if (p > 0) delete L[p].brk; }
+    else if (k === 'split' && a > 0) n.brk = true;
+    else if (k === 'nr') { if (n.nr) delete n.nr; else n.nr = true; }
+    else if (k === 'y' || k === 'g' || k === 'b') { if (n.clr === k) delete n.clr; else n.clr = k; }
+    else if (k === 'del') {
+      const l = ktLoc(c.host, n.id); if (!l) return;
+      /* الصفُّ الذي يبدأ جدولًا: يرث التالي بدايتَه */
+      if (n.brk && L[a + 1]) L[a + 1].brk = true;
+      l.arr.splice(l.i, 1); ktRow = null;
+    } else return;
+    save(); renderCmSection(); ktRtPaint();
+  }
+  /* «تبديل» و«نقل إلى رقم»: حقلُ رقمٍ صغيرٌ يطفو فوق الزرّ (Enter يُمضي · Esc أو الخروجُ يُلغي) */
+  function ktRtAsk(btn, k) {
+    document.querySelectorAll('.kt-numpop').forEach(x => x.remove());
+    const c = ktRowCtx(); if (!c) return;
+    const pop = document.createElement('div'); pop.className = 'kt-numpop';
+    pop.innerHTML = `<label><span>${esc(T().ktR[k])}</span><input type="number" min="1" max="${c.L.length}" inputmode="numeric" placeholder="${esc(T().ktR.ask)}"></label>`;
+    document.body.appendChild(pop);
+    const r = btn.getBoundingClientRect(), w = pop.offsetWidth;
+    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px';
+    pop.style.top = (r.top - pop.offsetHeight - 10) + 'px';
+    const inp = pop.querySelector('input'); inp.focus();
+    const close = () => pop.remove();
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      const m = Math.round(+inp.value) - 1; close();
+      if (m >= 0 && m < c.L.length) ktRtDo(k, m);
+    });
+    inp.addEventListener('blur', () => setTimeout(close, 0));
+  }
+  /* الصفُّ يُحدَّد بالتركيز في خانته أو بلمس رقمه، ويُترك بلمس ما سواه (إلّا الأدواتِ نفسَها) */
+  const ktRtFrom = e => {
+    const t = e.target; if (!t || !t.closest) return;
+    const tr = t.closest('#cm-body .post.pk--edit .kt-view--table tr[data-kcard]');
+    if (tr) {
+      const pk = tr.closest('.kt-view').dataset.pkid, id = tr.dataset.kcard;
+      if (!ktRow || ktRow.pk !== pk || ktRow.id !== id) { ktRow = { pk, id }; ktRtPaint(); }
+      return;
+    }
+    if (e.type === 'pointerdown' && ktRow && !t.closest('[data-ktrt], .kt-numpop')) { ktRow = null; ktRtPaint(); }
+  };
+  window.addEventListener('pointerdown', ktRtFrom, true);
+  window.addEventListener('focusin', ktRtFrom, true);
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body [data-ktrt] [data-ktr]'); if (!b || b.disabled) return;
+    e.preventDefault(); e.stopPropagation();
+    const k = b.dataset.ktr;
+    if (k === 'swap' || k === 'num') ktRtAsk(b, k); else ktRtDo(k);
+  }, true);
   const ktHeadOf = pack => { const ln = ((pack || cardDataRaw(cmCode)) || {}).ln; return (I18N[ln] || T()).ktHead; };
   /* ===== المجلدُ بما فيه (طلبُ صاحب الموقع): بطائقُه أوّلًا، ثمّ كلُّ مجلدٍ داخليٍّ برأسه وبطائقه — وهكذا نزولًا =====
      ‏‎{n}‎ بطاقة · ‎{h, d}‎ رأسُ مجلدٍ داخليّ بعمقه. والترقيمُ ‎1..N‎ بهذا الترتيب نسبةً إلى المجلد المفتوح: رقمٌ للتحديد
@@ -12713,7 +12832,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
           if (x.h) return '';
           const n = x.n;
-          return `<tr data-kcard="${esc(n.id)}"><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
+          /* أدواتُ الصفّ (‎ktRow‎): لونُه و«غير مطلوب» وبدايةُ جدولٍ جديدٍ عنده (فاصلٌ يُرسم قبله) — والمحدَّدُ بإطاره */
+          const cls = (n.clr ? ' kt-clr--' + n.clr : '') + (n.nr ? ' kt-nr' : '') + (!ro && ktRow && ktRow.id === n.id ? ' is-rowsel' : '');
+          return (n.brk && k ? `<tr class="kt-gap" aria-hidden="true"><td colspan="${ro ? 4 : 3}"></td></tr>` : '')
+          + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
