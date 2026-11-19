@@ -19833,3 +19833,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* والمجلداتُ تمتدّ تحت أيقونة الزاوية: فالأيقونةُ فوقها تبقى تُنقر */
 #cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-blkh--mid { position: relative; z-index: 4; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh--mid .pk-blkh__ic { position: relative; z-index: 4; }
+/* ===== إطارُ التركيز على اسم المجلد المفتوح (طلبُ صاحب الموقع) =====
+   الاسمُ في زاوية مربّعه تمامًا: فزاويتُه هناك بانحناء المربّع نفسِه (يتّسق الإطارُ مع زاويته)، والإطارُ داخل الاسم لا خارجه
+   فلا يبلغ الصفَّ الذي تحته */
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { border-start-start-radius: var(--r, 24px); }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:focus-visible { outline-offset: -3px; }
