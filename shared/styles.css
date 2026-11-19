@@ -19914,6 +19914,21 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
    ويُعاد بعد انطواء الكبسولة لا قبله (‎allow-discrete‎ بتأخير مدّة الحركة) فلا تُبتر وهي تنطوي */
 .pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt) { transition: flex-grow .18s ease, background .14s ease, border-color .14s ease, overflow 0s linear .56s; transition-behavior: allow-discrete; }
 .pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt:hover) { overflow: visible; position: relative; z-index: 2; transition-delay: 0s, 0s, 0s, 0s; }
+/* ===== والسائلُ يتحرّك مع الانفتاح ثم يثبت (طلبُ صاحب الموقع) =====
+   كأنّ الكبسولة انفتحت بالماء فيها: سطحُه يترجّح يمينًا ويسارًا ترجّحًا يخمد، وموجتُه تمشي موجةً واحدة، ويهبط قليلًا ثم يعود —
+   في ‎1.5‎ ثانية ثم يسكن. والأرقامُ زجاجٌ يكسر صورةَ الماء فتتماوج داخلها معه. ويُعاد كلّما فُتحت */
+.pg-cnt > .pg-cap .pg-capw { transform-box: view-box; transform-origin: 50% 60%; }
+.pg-cnt:hover > .pg-cap .pg-capw { animation: pkSlosh 1.5s cubic-bezier(.33, 0, .2, 1) both; }
+@keyframes pkSlosh {
+  0%   { transform: translate(-18px, 3px) skewY(0deg); }
+  14%  { transform: translate(-13px, 1.5px) skewY(-7deg); }
+  30%  { transform: translate(-8px, -.6px) skewY(5deg); }
+  46%  { transform: translate(-4.5px, .4px) skewY(-3deg); }
+  62%  { transform: translate(-2.2px, -.2px) skewY(1.6deg); }
+  78%  { transform: translate(-.8px, 0) skewY(-.6deg); }
+  100% { transform: translate(0, 0) skewY(0deg); }
+}
+@media (prefers-reduced-motion: reduce) { .pg-cnt:hover > .pg-cap .pg-capw { animation: none; } }
 /* وما دام القصُّ مفتوحًا فخلفيّةُ الوجه (عند المرور) تأخذ استدارةَ المربّع بنفسها، لا تظهر زواياها مربّعة */
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { border-radius: inherit; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { border-start-start-radius: inherit; border-start-end-radius: inherit; }

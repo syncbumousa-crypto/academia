@@ -9764,7 +9764,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والأرقامُ قطعُ زجاجٍ صافٍ بتشتّتٍ لونيّ (منشور): تحتها نسخةٌ من المشهد مشبعةٌ مضيئةٌ مرفوعة (انكسار) تُرى ألوانُ الماء من خلالها، وحافّتُها العلويّة تلمع وتحتها ظلٌّ يفصلها.
      العرضُ من نسخةٍ خفيّةٍ للكسر نفسِه في السطر، فالرسمةُ بالنسبة (٪) والموجةُ بالبكسل تمتدّ وتُقصّ */
   let pkCapN = 0;
-  const pkCapWave = (Y, A) => { let d = 'M-2 30'; for (let x = -2; x <= 302; x += 2) d += ` L${x} ${(Y + A * Math.sin(x / 18 * 2 * Math.PI)).toFixed(2)}`; return d + ' L302 30 Z'; };
+  const pkCapWave = (Y, A) => { let d = 'M-40 30'; for (let x = -40; x <= 302; x += 2) d += ` L${x} ${(Y + A * Math.sin(x / 18 * 2 * Math.PI)).toFixed(2)}`; return d + ' L302 30 Z'; };
   /* والشرطةُ أسمكُ من حرف الخطّ (طلبُ صاحب الموقع): تُخطّ بلون حشوها نفسِه فتغلظ، وحافّةُ اللمعة تُترك عنها
      (حدٌّ رفيعٌ حول شرطةٍ غليظةٍ يُرى خطًّا في وسطها) */
   const pkCapSl = (at, w = 2.1) => { const f = /fill="([^"]+)"/.exec(at); return f && f[1] !== 'none' ? `stroke="${f[1]}" stroke-width="${w}" stroke-linejoin="round"` : 'opacity="0"'; };
@@ -9784,7 +9784,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + (en ? N(d, ud, at, 1) : N(t, ut, at, 1)) + `<tspan dx="2" ${pkCapSl(at)}>/</tspan>` + (en ? N(t, ut, at) : N(d, ud, at)) + `</text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
     const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
-      + (L ? `<path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') : '')
+      /* والماءُ في مجموعةٍ تتحرّك وحدها عند الانفتاح (تترجّح وتمشي موجتُها ثم تسكن) — والأرقامُ تكسر صورتَها فتتحرّك فيها أيضًا */
+      + (L ? `<g class="pg-capw"><path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') + '</g>' : '')
       + `<rect width="100%" height="100%" fill="url(#${id}dp)"/></g>`;
     return `<span class="pg-cap"><span class="pg-capsz">${ut ? `<span class="pg-capu">${ut}</span>` : ''}${t} / ${ud ? `<span class="pg-capu">${ud}</span>` : ''}${d}</span><svg aria-hidden="true"><defs>`
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
