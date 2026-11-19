@@ -19644,3 +19644,15 @@ html[data-theme="dark"] #cm-body .pk--pc .pc-prog .pc-ring { width: 20px; height
 /* زرُّ النقاط الثلاث (عرضُ البنك: قائمة · رحلة) في تذييل التحرير بثوب زرّ «إضافة» جنبه — قامتُه وحدُّه وظلُّه وزجاجُه (طلبُ صاحب الموقع) */
 #cm-body .pk--edit .cx-jrk__tg { width: 34px; height: 34px; background: rgba(44, 94, 101, .06); border: 1px solid rgba(44, 94, 101, .18); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); color: #14233f; }
 html[data-theme="dark"] #cm-body .pk--edit .cx-jrk__tg { background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); border-color: rgba(255, 255, 255, .14); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); color: rgba(255, 255, 255, .92); }
+/* ===== أزرارُ التحديد في تذييل التحرير (بدل الشريط العائم) — طلبُ صاحب الموقع =====
+   خيطٌ عموديٌّ يسارَ زرّ النقاط الثلاث، ثمّ ما كان في الشريط بلا صندوقٍ عائم: على سطح التذييل نفسِه */
+#cm-body .cx-ftsel { display: inline-flex; align-items: center; gap: 6px; }
+#cm-body .cx-ftsel__sep { width: 1px; height: 26px; margin-inline: 6px 2px; background: var(--border, rgba(127, 127, 127, .3)); flex: none; }
+#cm-body .cx-ftsel .cx-selbar__body.cx-ftsel__body {
+  min-height: 0; padding: 0; gap: 6px; border: 0; border-radius: 0; background: none; box-shadow: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none; animation: cxft-in .2s ease-out;
+}
+@keyframes cxft-in { from { opacity: 0; transform: translateX(-6px); } }
+#cm-body .cx-ftsel .cx-selbar__sep { margin: 6px 1px; height: 22px; align-self: center; }
+#cm-body .cx-ftsel .cx-selbar__c b { font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { #cm-body .cx-ftsel .cx-ftsel__body { animation: none; } }

@@ -7800,12 +7800,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       : (cmTabSel === 'cards' && (cxSelRo
         ? document.querySelector('.x3.cx-ro')
         : cmView.mode === 'edit' && document.querySelector('#cm-cards .cx-tree')));
-    const off = () => { if (!bar.hidden) { bar.hidden = true; bar.innerHTML = ''; cxBarSig = ''; } };
+    /* ===== وفي التحرير لا شريطَ عائم: الأزرارُ في التذييل (طلبُ صاحب الموقع) =====
+       يسارَ زرّ النقاط الثلاث خيطٌ ثمّ ما كان في الشريط — في خانة أدوات المساحة نفسِها */
+    const inFoot = !cxRoadSel && !cxSelRo && cmView.mode === 'edit';
+    const slot = inFoot ? document.querySelector('#cm-body .pk--edit .cx-acttools') : null;
+    const ftOff = () => document.querySelectorAll('#cm-body .cx-ftsel').forEach(x => x.remove());
+    const off = () => { ftOff(); if (!bar.hidden) { bar.hidden = true; bar.innerHTML = ''; cxBarSig = ''; } };
     if (!live || !cxSel.size) { off(); return; }
     const d = deck || cxDeck();
     const nc = cxSelLeaves(d).length, nf = cxSelFolders(d);
     if (!nc && !nf) { off(); return; }
-    bar.hidden = false;
+    if (!inFoot) { ftOff(); bar.hidden = false; }
     /* عدّادان بأيقونتيهما ثمّ الفعلان، يفصل بينهما خيط. والأيقونتان أيقونتا الموقع نفسِه
        (‎PK_IC‎) لا رسمًا خاصًّا بالشريط — فالمجلدُ مجلدٌ والرزمةُ رزمةٌ أينما وقعت.
        ولا نصَّ مع الرقم: الأيقونةُ تقول ما هو، والعددُ يقول كم — واللفظُ تكرارٌ لهما.
@@ -7869,6 +7874,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ${act('del', TRASH_IC, T().cxBarDel, ' cx-selbar__b--del',
         (cxRoadSel && !roadDelPlan(d).length) ? T().cxBarDelCh : '')}`}
     </div>`;
+    if (inFoot) {
+      if (!bar.hidden) { bar.hidden = true; bar.innerHTML = ''; cxBarSig = ''; }
+      if (!slot) return;
+      let ft = slot.querySelector(':scope > .cx-ftsel');
+      if (!ft) { ft = document.createElement('span'); ft.className = 'cx-ftsel'; slot.appendChild(ft); }
+      const fh = `<span class="cx-ftsel__sep" aria-hidden="true"></span>` + html.replace('<div class="cx-selbar__body">', '<span class="cx-selbar__body cx-ftsel__body">').replace(/<\/div>\s*$/, '</span>');
+      if (ft.dataset.sig !== fh) { ft.dataset.sig = fh; ft.innerHTML = fh; }
+      return;
+    }
     if (cxBarSig !== html) { cxBarSig = html; bar.innerHTML = html; }
   }
 
@@ -8014,7 +8028,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* أفعالُ الشريط — مستمعٌ خاصٌّ به لأنّه خارج ‎.cm-panel‎ فلا يبلغه مستمعُها */
   document.addEventListener('click', e => {
-    const b = e.target.closest('#cx-selbar [data-cxbar]');
+    const b = e.target.closest('#cx-selbar [data-cxbar], #cm-body .cx-ftsel [data-cxbar]');
     if (!b) return;
     const act = b.dataset.cxbar;
     if (act === 'clear') { cxSel.clear(); cxPaintSel(); return; }
@@ -9840,7 +9854,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.dataset.fill = pkFillKey();
-    if (slot) slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
+    if (slot) { slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub')); if (post.classList.contains('pk--edit')) cxBarPaint(); }   /* وأزرارُ التحديد في التذييل تعود بعد إعادة بنائه */   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
     /* ===== ROADMAP-PANEFX ق٣: الكتلةُ تنتقل بالنقر — القديمةُ تنزل في الذيل والجديدةُ تصعد منه معًا (القرار ٤) ===== */
