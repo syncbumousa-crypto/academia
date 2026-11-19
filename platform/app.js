@@ -7848,11 +7848,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ${cnt(PK_IC.card, nc, T().cxBarNC(nc))}
       <span class="cx-selbar__sep"></span>
       <button type="button" class="cx-selbar__clear" data-cxbar="clear">${esc(T().cxBarClear)}</button>
-      <span class="cx-selbar__sep"></span>
+      ${inFoot ? '' : `<span class="cx-selbar__sep"></span>
       <span class="cx-selbar__acts">
         ${act('sum', CX_BAR_IC.sum, T().cxBarSum, ' cx-selbar__b--act cx-selbar__b--pri')}
         ${cxSelRo ? act('test', CX_BAR_IC.test, T().cxBarTest, ' cx-selbar__b--act cx-selbar__b--pri') : ''}
-      </span>
+      </span>`}   <!-- وفي تذييل التحرير لا «ذاكر الملخّص» (طلبُ صاحب الموقع) -->
       <!-- و«شارك الرابط» يسقط في «رحلتي»: الرابطُ يطوي **معرّفَ مساهمةٍ** ورؤوسَ
            تحديدٍ فيها (‎xlCompose‎)، ودفترُك ليس مساهمةً — فيصير رابطًا لا يفتح شيئًا -->
       ${(cxSelRo && !cxRoadSel) ? `<span class="cx-selbar__sep"></span>
