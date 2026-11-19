@@ -7802,8 +7802,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : cmView.mode === 'edit' && document.querySelector('#cm-cards .cx-tree')));
     /* ===== وفي التحرير لا شريطَ عائم: الأزرارُ في التذييل (طلبُ صاحب الموقع) =====
        يسارَ زرّ النقاط الثلاث خيطٌ ثمّ ما كان في الشريط — في خانة أدوات المساحة نفسِها */
-    const inFoot = !cxRoadSel && !cxSelRo && cmView.mode === 'edit';
-    const slot = inFoot ? document.querySelector('#cm-body .pk--edit .cx-acttools') : null;
+    /* وفي النشر كذلك (طلبُ صاحب الموقع): في تذييل المساهمة المفتوحة التي فيها التحديد — فإن لم يكن لها تذييلٌ بقي الشريطُ العائم */
+    const pubSlot = () => { const ro = [...document.querySelectorAll('#cm-body .post .x3.cx-ro')].find(x => [...cxSel].some(id => x.querySelector(`[data-id="${CSS.escape(id)}"]`)));
+      const po = (ro && ro.closest('.post')) || (cardView.open && document.querySelector(`#cm-body .post[data-ck="${CSS.escape(cardView.open)}"]`));
+      return po ? po.querySelector('.cx-acttools') : null; };
+    const slot = cxRoadSel ? null : cxSelRo ? pubSlot() : cmView.mode === 'edit' ? document.querySelector('#cm-body .pk--edit .cx-acttools') : null;
+    const inFoot = !!slot;
     const ftOff = () => document.querySelectorAll('#cm-body .cx-ftsel').forEach(x => x.remove());
     const off = () => { ftOff(); if (!bar.hidden) { bar.hidden = true; bar.innerHTML = ''; cxBarSig = ''; } };
     if (!live || !cxSel.size) { off(); return; }
@@ -7848,11 +7852,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ${cnt(PK_IC.card, nc, T().cxBarNC(nc))}
       <span class="cx-selbar__sep"></span>
       <button type="button" class="cx-selbar__clear" data-cxbar="clear">${esc(T().cxBarClear)}</button>
-      ${inFoot ? '' : `<span class="cx-selbar__sep"></span>
+      ${(inFoot && !cxSelRo) ? '' : `<span class="cx-selbar__sep"></span>
       <span class="cx-selbar__acts">
-        ${act('sum', CX_BAR_IC.sum, T().cxBarSum, ' cx-selbar__b--act cx-selbar__b--pri')}
+        ${inFoot ? '' : act('sum', CX_BAR_IC.sum, T().cxBarSum, ' cx-selbar__b--act cx-selbar__b--pri')}
         ${cxSelRo ? act('test', CX_BAR_IC.test, T().cxBarTest, ' cx-selbar__b--act cx-selbar__b--pri') : ''}
-      </span>`}   <!-- وفي تذييل التحرير لا «ذاكر الملخّص» (طلبُ صاحب الموقع) -->
+      </span>`}   <!-- وفي التذييل (تحريرًا ونشرًا) لا «ذاكر الملخّص» (طلبُ صاحب الموقع) -->
       <!-- و«شارك الرابط» يسقط في «رحلتي»: الرابطُ يطوي **معرّفَ مساهمةٍ** ورؤوسَ
            تحديدٍ فيها (‎xlCompose‎)، ودفترُك ليس مساهمةً — فيصير رابطًا لا يفتح شيئًا -->
       ${(cxSelRo && !cxRoadSel) ? `<span class="cx-selbar__sep"></span>
@@ -9854,7 +9858,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post.classList.contains('pk--edit')) cxFtHide(post, !now);
     const slot = post.querySelector('.cx-acttools'), html0 = slot ? slot.innerHTML : null;
     if (slot) slot.dataset.fill = pkFillKey();
-    if (slot) { slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub')); if (post.classList.contains('pk--edit')) cxBarPaint(); }   /* وأزرارُ التحديد في التذييل تعود بعد إعادة بنائه */   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
+    if (slot) { slot.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub')); if (cxSel.size) cxBarPaint(); }   /* وأزرارُ التحديد في التذييل تعود بعد إعادة بنائه */   /* والمتّسعةُ في موضعها منشورةٌ كذلك: أدواتُ القارئ لا المحرّر */
     if (!post.classList.contains('pk--max') && !post.classList.contains('pk--frame')) return;   /* والتحريرُ الضيّقُ في إطاره كالمكبَّر */
     pkBandFit(post);
     /* ===== ROADMAP-PANEFX ق٣: الكتلةُ تنتقل بالنقر — القديمةُ تنزل في الذيل والجديدةُ تصعد منه معًا (القرار ٤) ===== */
