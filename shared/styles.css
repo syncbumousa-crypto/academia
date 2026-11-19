@@ -19683,3 +19683,12 @@ html[data-theme="dark"] .srch-hist__hd { background: rgb(23, 49, 58); }
 /* لوحُ الفلاتر (وقائمةُ البحث الأخيرة) فوق كلّ شيءٍ تحته: صندوقُ الأدوات طبقتُه ‎2‎ كتبويبِ المادة المختار بعده،
    فكان التبويبُ يعلو اللوح — فيرتفع الصندوقُ ما دام فيه شيءٌ منفتح (طلبُ صاحب الموقع) */
 html:root .market-tools:has(.filterwrap.is-open, .srch-hist:not([hidden])) { z-index: 80; }
+
+/* ===== الشريطُ الجانبيّ الواسعُ يطفو فوق الصفحة: فصفُّ البحث يُفسح له =====
+   السكّةُ ‎--side-rail‎ (٦٤) والواسعُ ٢٠٠ — فحين يتّسع يتقلّص صفُّ البحث من جهة الشريط بالفرق نفسِه،
+   وبحركة الشريط نفسِها (مدّتِه ومنحناه) فيتحرّكان معًا؛ والحركةُ لا تقوم إلّا وقتَ التبديل (‎.side-anim‎) */
+.panel .market-box > .market-tools { margin-inline-start: 0; }
+body:has(.sidebar:not(.side-rail)) .panel .market-box > .market-tools { margin-inline-start: calc(200px - var(--side-rail)); }
+@media (prefers-reduced-motion: no-preference) {
+  body:has(.sidebar.side-anim) .panel .market-box > .market-tools { transition: margin-inline-start .32s cubic-bezier(.32,.72,0,1); }
+}
