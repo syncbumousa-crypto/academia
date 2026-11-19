@@ -27067,6 +27067,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const z = bkZone(b);
     let o = z.querySelector(':scope > .bk-zi');
     if (!o) { if (!side) return; o = document.createElement('div'); o.className = 'bk-zi'; o.setAttribute('aria-hidden', 'true'); o.innerHTML = '<i class="bk-zi__t l"></i><i class="bk-zi__t r"></i>'; z.prepend(o); }
+    /* والتدرّجُ يلبس شكلَ المساحة المرسومَ نفسَه (‎.pk-band path.pk-blk[data-k=book]‎) — بفجوات أزرار التذييل
+       المقصوصة منها — فلا يفيض على تلك الزوايا؛ وبلا رسمٍ يبقى المستطيلَ المدوَّر */
+    if (side) {
+      const card = z.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]');
+      const d = bp && bp.getAttribute('d');
+      if (d) {
+        const cb = card.getBoundingClientRect(), zb = z.getBoundingClientRect();
+        const dx = cb.left + card.clientLeft - zb.left - z.clientLeft, dy = cb.top + card.clientTop - zb.top - z.clientTop;
+        Object.assign(o.style, { inset: 'auto', left: dx + 'px', top: dy + 'px', width: card.clientWidth + 'px', height: card.clientHeight + 'px', borderRadius: '0', clipPath: `path('${d}')` });
+        o.querySelector('.l').style.cssText = `left:${-dx}px;width:${zb.width / 2}px`;
+        o.querySelector('.r').style.cssText = `left:${-dx + zb.width / 2}px;right:auto;width:${zb.width / 2}px`;
+      } else { o.removeAttribute('style'); o.querySelectorAll('i').forEach(i => i.removeAttribute('style')); }
+    }
     o.classList.toggle('is-l', side === 'l'); o.classList.toggle('is-r', side === 'r');
   }
   /* مساحةُ المصدر مختارةٌ قبل هذه اللمسة (اللمسةُ التي تختارها لا تُقلِّب) — وخارجَ القسمة لا اختيار */
