@@ -9759,6 +9759,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يُحسبان مع كلّ رسمٍ للشريط فيتبعان كلَّ إضافةٍ وحذفٍ ومذاكرة */
   let pkBoxDeck = null, pkBoxTime = false;
   /* ‏‎2:30‎ أو ‎18‎ (دقائقُ تامّة) */
+  /* ===== كبسولةُ العدّاد: أرقامٌ من زجاجٍ سائل (طلبُ صاحب الموقع) =====
+     رسمةٌ واحدة: جوفٌ داكنٌ في الثيمين، وماءٌ يصعد من الأسفل بموجته (الأحمرُ ثم الأخضرُ بنسبة الصواب كالدائرة)،
+     والأرقامُ قطعُ زجاجٍ مصنفر: تحتها نسخةٌ من المشهد مموّهةٌ مرفوعةٌ مضيئة (انكسار)، وحافّتُها العلويّة تلمع وتحتها ظلٌّ يفصلها.
+     العرضُ من نسخةٍ خفيّةٍ للكسر نفسِه في السطر، فالرسمةُ بالنسبة (٪) والموجةُ بالبكسل تمتدّ وتُقصّ */
+  let pkCapN = 0;
+  const pkCapWave = (Y, A) => { let d = 'M-2 30'; for (let x = -2; x <= 302; x += 2) d += ` L${x} ${(Y + A * Math.sin(x / 18 * 2 * Math.PI)).toFixed(2)}`; return d + ' L302 30 Z'; };
+  function pkCapHTML(lvl, rat, d, t, u) {
+    const id = 'pkc' + (pkCapN++), IH = 18.8, by = 13.6;
+    let L = lvl || 0, R = rat == null ? 1 : rat;
+    if (L > 0) L = Math.max(L, 3.4 / IH);
+    if (R > 0 && R < 1) { const m = Math.min(.9 / IH / L, .3); R = Math.min(Math.max(R, m), 1 - m); }
+    const A = L > 0 && L < 1 ? .9 : 0;
+    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${u ? `<tspan font-size="9.5">${u}</tspan><tspan dx="2.5">` : '<tspan>'}${t}</tspan><tspan dx="1.5">/</tspan><tspan dx="1.5">${d}</tspan></text>`;
+    const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
+    const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
+      + (L ? `<path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') : '')
+      + `<rect width="100%" height="100%" fill="url(#${id}dp)"/></g>`;
+    return `<span class="pg-cap"><span class="pg-capsz">${u ? u + ' ' : ''}${t}/${d}</span><svg aria-hidden="true"><defs>`
+      + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
+      + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
+      + `<linearGradient id="${id}rm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>`
+      + `<filter id="${id}L" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="1.3"/><feComponentTransfer><feFuncR type="linear" slope="1.15" intercept=".25"/><feFuncG type="linear" slope="1.15" intercept=".25"/><feFuncB type="linear" slope="1.15" intercept=".25"/></feComponentTransfer><feOffset dy="-1.1"/></filter>`
+      + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".7"/></filter>`
+      + mk('M', TX(by, 'fill="#fff"')) + mk('I', TX(by, 'fill="#fff"') + TX(by + 1, 'fill="#000"')) + mk('B', TX(by, 'fill="#fff"') + TX(by - .9, 'fill="#000"'))
+      + `</defs>${scene}`
+      + `<g filter="url(#${id}sh)" opacity=".4">${TX(by + .9, 'fill="#000"')}</g>`
+      + `<g mask="url(#${id}M)"><use href="#${id}s" filter="url(#${id}L)"/><rect width="100%" height="100%" fill="rgba(255,255,255,.55)"/></g>`
+      + `<rect width="100%" height="100%" fill="#fff" opacity=".9" mask="url(#${id}I)"/>`
+      + `<rect width="100%" height="100%" fill="#000" opacity=".28" mask="url(#${id}B)"/>`
+      + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".55"`)
+      + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
+  }
   const pkTmTx = t => { const m = Math.floor(t / 60), x = t % 60; return x ? m + ':' + String(x).padStart(2, '0') : String(m); };
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
@@ -9775,14 +9807,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span><span class="pg-cap">${x3DotAns(at)}<span class="pg-frac"><b>${pkTmTx(dt)}</b><i>/</i><span>${pkTmTx(tt)}</span><small>${en ? 'm' : 'د'}</small></span></span></span>`;
+        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmTx(dt), pkTmTx(tt), en ? 'm' : 'د')}</span>`;
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
        يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها.
        ويُرى الدائرةُ وحدها، فإذا مرّ عليها المؤشّرُ انبسطت كبسولةً بثيمها نفسِه (الحدّ واللمعة والماء الصاعد من الأسفل) وفيها الكسر (طلبُ صاحب الموقع) */
     const k2 = Math.min(a.k, tot);
-    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span><span class="pg-cap">${x3DotAns(a)}<span class="pg-frac"><b>${k2}</b><i>/</i><span>${tot}</span></span></span></span>`;
+    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span>${pkCapHTML(a.lvl, a.rat, k2, tot, '')}</span>`;
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====

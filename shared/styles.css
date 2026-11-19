@@ -19883,23 +19883,22 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 /* وكسرُ الزمن أعرضُ من كسر العدد: إخوةُ المفتوح يتّسعون بقدره فلا تتكسّر أسماؤهم */
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide):has(> .pg-face > .pg-cnt--tm) { max-width: 260px; }
 
-/* ===== الدائرةُ وحدها، وتحت المؤشّر تنبسطُ هي نفسُها كبسولةً فيها الكسر (طلبُ صاحب الموقع) =====
-   الكبسولةُ بثيم الدائرة نفسِه: حدُّها الذهبيّ ولمعتُها وماؤها الصاعدُ من الأسفل بقدر الإنجاز (‎.x3-dot‎ ممدودةً).
-   وهي فوق الوجه لا في سطره (فلا يتغيّر عرضُ المجلد)، تبدأ مقصوصةً على قدّ الدائرة بالضبط ثم تنكشف نحو الاسم */
+/* ===== الدائرةُ وحدها، وتحت المؤشّر تنبسطُ كبسولةً أرقامُها زجاجٌ سائل (طلبُ صاحب الموقع) =====
+   الكبسولةُ رسمةُ ‎pkCapHTML‎: جوفٌ داكنٌ في الثيمين (فالزجاجُ يُرى في الفاتح أيضًا) والماءُ الصاعد والأرقامُ زجاج.
+   وهي فوق الوجه لا في سطره (فلا يتغيّر عرضُ المجلد)، تبدأ مقصوصةً على قدّ الدائرة بالضبط ثم تنكشف نحو الاسم.
+   ومخفيّةٌ (‎visibility‎) ما لم يُمرّ عليها: فلا تُرسم مرشّحاتُها في كلّ مجلد */
 .pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; inset-inline-end: -2px; z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px;
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
-  border: 1.6px solid rgba(168, 132, 46, .55); background: #f9fafa;
-  clip-path: inset(2px calc(100% - 20px) 2px 2px round 9px); opacity: 0;
-  transition: clip-path .34s cubic-bezier(.3, .7, .2, 1), opacity .12s ease; }
+  border: 1.6px solid rgba(168, 132, 46, .7); background: #2a3235; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45);
+  clip-path: inset(2px calc(100% - 20px) 2px 2px round 9px); opacity: 0; visibility: hidden;
+  transition: clip-path .34s cubic-bezier(.3, .7, .2, 1), opacity .12s ease, visibility 0s linear .34s; }
 [dir="ltr"] .pg-cnt > .pg-cap { clip-path: inset(2px 2px 2px calc(100% - 20px) round 9px); }
-html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .45); background: #333c3f; }
-/* أرضيّةٌ مصمتةٌ بلون المربّع (المربّعُ نفسُه شفّاف): فلا يظهر الاسمُ من تحت الكبسولة */
-.pg-cnt > .pg-cap > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 99px; transform: none; }
-.pg-cnt > .pg-cap > .x3-dot > .x3-gls { border-radius: 99px; }
-.pg-cnt > .pg-cap > .pg-frac { position: relative; z-index: 2; text-shadow: 0 0 3px rgba(255, 255, 255, .9), 0 0 1px #fff; }
-html[data-theme="dark"] .pg-cnt > .pg-cap > .pg-frac { text-shadow: 0 1px 2px rgba(0, 0, 0, .7); }
+html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5); }
+/* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
+.pg-cnt > .pg-cap > .pg-capsz { visibility: hidden; font-size: 12.5px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .4px; }
+.pg-cnt > .pg-cap > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+.pg-cnt > .pg-cap > svg text { font-family: inherit; font-size: 12.5px; font-weight: 800; font-variant-numeric: tabular-nums; }
 .pg-cnt > .pg-ring { transition: opacity .12s ease .05s; }
-.pg-cnt:hover > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; }
+.pg-cnt:hover > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
 .pg-cnt:hover > .pg-ring { opacity: 0; }
-html[data-theme="dark"] .pg-cnt > .pg-cap > .pg-frac > :is(span, i, small) { color: #c9d3d6; }
