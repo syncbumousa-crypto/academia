@@ -19890,16 +19890,17 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 /* ===== الدائرةُ وحدها، وتحت المؤشّر تنبسطُ كبسولةً أرقامُها زجاجٌ سائل (طلبُ صاحب الموقع) =====
    الكبسولةُ رسمةُ ‎pkCapHTML‎: جوفٌ داكنٌ في الثيمين والماءُ الصاعد والأرقامُ زجاج. وهي فوق الوجه لا في سطره.
    ===== وتنبسطُ من مركز الدائرة إلى الجهتين معًا، بنعومة =====
-   مركزُها مركزُ الدائرة (‎9px‎ من حافّة العدّاد)، وتبدأ مقصوصةً دائرةً بقدّها في وسطها ثم ينفرج القصُّ يمينًا ويسارًا معًا؛
+   مركزُها مركزُ الدائرة (‎9px‎ من حافّة العدّاد) ما لم تُزح لتبقى في مربّعها، وتبدأ مقصوصةً دائرةً بقدّها على الدائرة ثم ينفرج القصُّ يمينًا ويسارًا معًا؛
    والدائرةُ تتّسع وتذوب فيها، والأرقامُ تخرج من ضبابٍ خفيف. ومنحنى «خروجٍ» طويلٌ ناعمٌ بلا ارتداد.
    ومخفيّةٌ (‎visibility‎) ما لم يُمرّ عليها: فلا تُرسم مرشّحاتُها في كلّ مجلد */
 .pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; }
-.pg-cnt > .pg-cap { position: absolute; top: 50%; left: 9px; z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
+.pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc(9px + var(--pk-sh, 0px)); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(168, 132, 46, .7); background: #2a3235; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45);
-  clip-path: inset(2px calc(50% - 9px) 2px calc(50% - 9px) round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
+  clip-path: inset(2px calc(50% - 9px + var(--pk-sh, 0px)) 2px calc(50% - 9px - var(--pk-sh, 0px)) round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
   transition: clip-path .56s cubic-bezier(.22, 1, .36, 1), opacity .2s ease, visibility 0s linear .56s; }
-[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: 9px; transform: translateX(50%); }
+[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: calc(9px + var(--pk-sh, 0px)); transform: translateX(50%);
+  clip-path: inset(2px calc(50% - 9px - var(--pk-sh, 0px)) 2px calc(50% - 9px + var(--pk-sh, 0px)) round 9px); }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5); }
 /* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
 .pg-cnt > .pg-cap > .pg-capsz { visibility: hidden; font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; letter-spacing: .6px; }
@@ -19910,12 +19911,7 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
 .pg-cnt:hover > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
 .pg-cnt:hover > .pg-cap > svg { filter: none; transform: none; }
 .pg-cnt:hover > .pg-ring { opacity: 0; transform: scale(1.22); }
-/* ولأنّها تنفرج يسارًا أيضًا فتتجاوز حافّة المربّع: يُفتح قصُّ المربّع ما دام المؤشّرُ على العدّاد،
-   ويُعاد بعد انطواء الكبسولة لا قبله (‎allow-discrete‎ بتأخير مدّة الحركة) فلا تُبتر وهي تنطوي */
-.pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt) { transition: flex-grow .18s ease, background .14s ease, border-color .14s ease, overflow 0s linear .56s; transition-behavior: allow-discrete; }
-.pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt:hover) { overflow: visible; position: relative; z-index: 2; transition-delay: 0s, 0s, 0s, 0s; }
-/* وما دام القصُّ مفتوحًا فخلفيّةُ الوجه (عند المرور) تأخذ استدارةَ المربّع بنفسها، لا تظهر زواياها مربّعة */
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { border-radius: inherit; }
-.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { border-start-start-radius: inherit; border-start-end-radius: inherit; }
+/* ولا تخرج من مربّع مجلدها (طلبُ صاحب الموقع): إن ضاق ما بين الدائرة وحافّة المربّع عن نصفها أُزيحت نحو الاسم بالقدر
+   اللازم (‎--pk-sh‎ من ‎pkCapPlace‎)، والقصُّ يبدأ من موضع الدائرة نفسِه فتبقى تنفرج منها إلى الجهتين */
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }

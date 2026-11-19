@@ -9825,11 +9825,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       p.appendChild(an); try { an.beginElement(); } catch (_) { }
     });
   };
+  /* ولا تخرج الكبسولةُ من مربّع مجلدها (طلبُ صاحب الموقع): تُقاس قبل أن تنفتح، فإن جاوز نصفُها حافّةَ المربّع (‎5px‎ حاشية)
+     أُزيحت نحو الاسم بالفرق (‎--pk-sh‎) — والقصُّ يبدأ من الدائرة على كلّ حال */
+  const pkCapPlace = cnt => {
+    const cap = cnt.querySelector('.pg-cap'), box = cnt.closest('.pg-box'), ring = cnt.querySelector('.pg-ring');
+    if (!cap || !box || !ring) return;
+    const w = cap.offsetWidth, b = box.getBoundingClientRect(), r = ring.getBoundingClientRect(), mid = r.left + r.width / 2;
+    const ltr = getComputedStyle(cnt).direction === 'ltr';
+    const sh = ltr ? Math.max(0, mid + w / 2 - (b.right - 5)) : Math.max(0, b.left + 5 - (mid - w / 2));
+    cnt.style.setProperty('--pk-sh', Math.ceil(sh) + 'px');
+  };
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
     const cnt = e.target.closest && e.target.closest('.pg-cnt');
     if (cnt === pkCapHot) return; pkCapHot = cnt;
-    if (cnt && e.pointerType !== 'touch') pkCapWaves(cnt);
+    if (!cnt) return;
+    pkCapPlace(cnt);
+    if (e.pointerType !== 'touch') pkCapWaves(cnt);
   }, { passive: true });
   /* في الكبسولة كلُّ قيمةٍ بوحدتها: ما دون الدقيقة ثوانٍ «45ث»، وما دون الساعة دقائقُ وثوانٍ «8:15د»،
      وما فوقها ساعاتٌ ودقائق «1:20س» */
