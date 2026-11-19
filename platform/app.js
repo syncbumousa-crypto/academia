@@ -12640,6 +12640,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     delete H.kt; save();
   }
   const ktCards = host => host.arr.filter(n => n.t === 'c');
+  /* أسماءُ الأعمدة الافتراضيّة بلغة المحتوى المختارة لا بلغة الموقع (طلبُ صاحب الموقع) — وما كُتب منها محفوظٌ لكلّ لغةٍ في ‎kthL‎ */
+  const ktHeadOf = pack => { const ln = ((pack || cardDataRaw(cmCode)) || {}).ln; return (I18N[ln] || T()).ktHead; };
   /* ===== المجلدُ بما فيه (طلبُ صاحب الموقع): بطائقُه أوّلًا، ثمّ كلُّ مجلدٍ داخليٍّ برأسه وبطائقه — وهكذا نزولًا =====
      ‏‎{n}‎ بطاقة · ‎{h, d}‎ رأسُ مجلدٍ داخليّ بعمقه. والترقيمُ ‎1..N‎ بهذا الترتيب نسبةً إلى المجلد المفتوح: رقمٌ للتحديد
      والربط لا هويّة — يتبدّل بتبدّل المفتوح، والتظليلُ مربوطٌ بالبطاقة نفسِها لا برقمها */
@@ -12691,7 +12693,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
-      const h = host.holder.kth || T().ktHead, used = hlUsed(id);
+      const h = host.holder.kth || ktHeadOf(pack), used = hlUsed(id);
       let k = 0;
       const rows = deep.map(x => {
           /* لا رأسَ للمجلد الداخليّ (طلبُ صاحب الموقع): صفوفُه تتّصل بما قبلها كأنّها جدولٌ واحد */
@@ -13915,7 +13917,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!c) return;
     if (c.dataset.kth != null) {
       const host = ktHost(c.closest('.kt-view').dataset.ktf); if (!host) return;
-      const h = host.holder.kth || (host.holder.kth = T().ktHead.slice());
+      const h = host.holder.kth || (host.holder.kth = ktHeadOf().slice());
       h[+c.dataset.kth] = c.textContent;
     } else {
       const n = ktCardOf(c, c.dataset.kc); if (!n) return;
