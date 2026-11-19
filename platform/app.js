@@ -9767,14 +9767,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkCapWave = (Y, A) => { let d = 'M-2 30'; for (let x = -2; x <= 302; x += 2) d += ` L${x} ${(Y + A * Math.sin(x / 18 * 2 * Math.PI)).toFixed(2)}`; return d + ' L302 30 Z'; };
   /* والشرطةُ أسمكُ من حرف الخطّ (طلبُ صاحب الموقع): تُخطّ بلون حشوها نفسِه فتغلظ، وحافّةُ اللمعة تُترك عنها
      (حدٌّ رفيعٌ حول شرطةٍ غليظةٍ يُرى خطًّا في وسطها) */
-  const pkCapSl = at => { const f = /fill="([^"]+)"/.exec(at); return f && f[1] !== 'none' ? `stroke="${f[1]}" stroke-width="1.3" stroke-linejoin="round"` : 'opacity="0"'; };
+  const pkCapSl = at => { const f = /fill="([^"]+)"/.exec(at); return f && f[1] !== 'none' ? `stroke="${f[1]}" stroke-width="2.1" stroke-linejoin="round"` : 'opacity="0"'; };
   function pkCapHTML(lvl, rat, d, t, u) {
     const id = 'pkc' + (pkCapN++), IH = 18.8, by = 13.6;
     let L = lvl || 0, R = rat == null ? 1 : rat;
     if (L > 0) L = Math.max(L, 3.4 / IH);
     if (R > 0 && R < 1) { const m = Math.min(.9 / IH / L, .3); R = Math.min(Math.max(R, m), 1 - m); }
     const A = L > 0 && L < 1 ? .9 : 0;
-    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${u ? `<tspan font-size="9.5">${u}</tspan><tspan dx="2.5">` : '<tspan>'}${t}</tspan><tspan dx="1.6" ${pkCapSl(at)}>/</tspan><tspan dx="1.6">${d}</tspan></text>`;
+    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${u ? `<tspan font-size="9.5">${u}</tspan><tspan dx="2.5">` : '<tspan>'}${t}</tspan><tspan dx="2" ${pkCapSl(at)}>/</tspan><tspan dx="2">${d}</tspan></text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
     const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
       + (L ? `<path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') : '')
