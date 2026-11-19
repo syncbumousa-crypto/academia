@@ -9775,13 +9775,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-frac"><b>${pkTmTx(dt)}</b><i>/</i><span>${pkTmTx(tt)}</span><small>${en ? 'm' : 'د'}</small></span><span class="pg-ring">${x3DotAns(at)}</span></span>`;
+        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span><span class="pg-cap" style="--p:${Math.round(dt / tt * 100)}%"><span class="pg-frac"><b>${pkTmTx(dt)}</b><i>/</i><span>${pkTmTx(tt)}</span><small>${en ? 'm' : 'د'}</small></span></span></span>`;
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
-       يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها */
+       يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها.
+       ويُرى الدائرةُ وحدها، فإذا مرّ عليها المؤشّرُ انبسطت كبسولةً تمتلئ بالنسبة وفيها الكسر (طلبُ صاحب الموقع) */
     const k2 = Math.min(a.k, tot);
-    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-frac"><b>${k2}</b><i>/</i><span>${tot}</span></span><span class="pg-ring">${x3DotAns(a)}</span></span>`;
+    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span><span class="pg-cap" style="--p:${Math.round(k2 / tot * 100)}%"><span class="pg-frac"><b>${k2}</b><i>/</i><span>${tot}</span></span></span></span>`;
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
