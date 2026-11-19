@@ -19821,3 +19821,7 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* المساحاتُ وهي تنفتح أو تنطوي أو تتحرّك: أشرطةُ تمريرها مخفيّة (تفيض لحظاتٍ والقامةُ تتحرّك، ثمّ لا داعي) */
 :is(#cm-body.pk-sbhide, .pk--fxrun) .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-width: none; }
 :is(#cm-body.pk-sbhide, .pk--fxrun) .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar { display: none; }
+/* ===== مجلداتُ الملخّص تنزل تحت أيقونة المساحة (طلبُ صاحب الموقع) =====
+   الأيقونةُ في زاوية المساحة على مستوى المجلدات، فإذا مُرِّر الصفُّ دخل أوّلُها تحتها فبدا مغطًّى. فالمجلداتُ تنزل تحتها
+   وتمتدّ إلى حافّة المساحة اليمنى كما تمتدّ إلى اليسرى (لا تشارك الأيقونةَ سطرها) */
+#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip { margin-top: 16px; margin-inline-start: -42px; }
