@@ -9768,18 +9768,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* والشرطةُ أسمكُ من حرف الخطّ (طلبُ صاحب الموقع): تُخطّ بلون حشوها نفسِه فتغلظ، وحافّةُ اللمعة تُترك عنها
      (حدٌّ رفيعٌ حول شرطةٍ غليظةٍ يُرى خطًّا في وسطها) */
   const pkCapSl = (at, w = 2.1) => { const f = /fill="([^"]+)"/.exec(at); return f && f[1] !== 'none' ? `stroke="${f[1]}" stroke-width="${w}" stroke-linejoin="round"` : 'opacity="0"'; };
-  function pkCapHTML(lvl, rat, d, t, u) {
+  function pkCapHTML(lvl, rat, d, t, ud, ut) {
     const id = 'pkc' + (pkCapN++), IH = 18.8, by = 13.6;
     let L = lvl || 0, R = rat == null ? 1 : rat;
     if (L > 0) L = Math.max(L, 3.4 / IH);
     if (R > 0 && R < 1) { const m = Math.min(.9 / IH / L, .3); R = Math.min(Math.max(R, m), 1 - m); }
     const A = L > 0 && L < 1 ? .9 : 0;
-    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${u ? `<tspan class="pg-capu" ${pkCapSl(at, .7)}>${u}</tspan><tspan dx="2.5">` : '<tspan>'}${t}</tspan><tspan dx="2" ${pkCapSl(at)}>/</tspan><tspan dx="2">${d}</tspan></text>`;
+    /* ولكلّ رقمٍ وحدتُه عن يساره (طلبُ صاحب الموقع): «4د / 8:15د» — لا حرفٌ واحدٌ للاثنين يُقرأ ساعاتٍ ودقائق */
+    const U = (x, at, first) => x ? `<tspan class="pg-capu" ${first ? '' : 'dx="2" '}${pkCapSl(at, .7)}>${x}</tspan><tspan dx="1.5">` : `<tspan${first ? '' : ' dx="2"'}>`;
+    const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>${U(ut, at, 1)}${t}</tspan><tspan dx="2" ${pkCapSl(at)}>/</tspan>${U(ud, at)}${d}</tspan></text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
     const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
       + (L ? `<path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') : '')
       + `<rect width="100%" height="100%" fill="url(#${id}dp)"/></g>`;
-    return `<span class="pg-cap"><span class="pg-capsz">${u ? `<span class="pg-capu">${u}</span> ` : ''}${t}/${d}</span><svg aria-hidden="true"><defs>`
+    return `<span class="pg-cap"><span class="pg-capsz">${ut ? `<span class="pg-capu">${ut}</span>` : ''}${t} / ${ud ? `<span class="pg-capu">${ud}</span>` : ''}${d}</span><svg aria-hidden="true"><defs>`
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
       + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
       + `<linearGradient id="${id}rm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>`
@@ -9794,6 +9796,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".55"`)
       + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
+  /* في الكبسولة: ما دون الدقيقة ثوانٍ «45ث»، وما فوقها دقائقُ «8:15د» */
+  const pkTmV = t => t < 60 ? String(t) : pkTmTx(t);
+  const pkTmU = (t, en) => t < 60 ? (en ? 's' : 'ث') : (en ? 'm' : 'د');
   const pkTmTx = t => { const m = Math.floor(t / 60), x = t % 60; return x ? m + ':' + String(x).padStart(2, '0') : String(m); };
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
@@ -9810,7 +9815,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmTx(dt), pkTmTx(tt), en ? 'm' : 'د')}</span>`;
+        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmV(dt), pkTmV(tt), pkTmU(dt || tt, en), pkTmU(tt, en))}</span>`;
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
