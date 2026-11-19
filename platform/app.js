@@ -38092,6 +38092,16 @@ void main() {
       const pid = 'a301d-p' + i;
       const data = { title: S.title, deck: withIds(S.deck), qb: withIds(S.qb) };
       data.hl = { marks: (S.marks || []).filter(m => keyed[m.ck]).map(m => ({ id: id(), s: '', k: m.k, c: [keyed[m.ck]], d: m.d || 'r', col: m.col || 'y', kind: m.kind || 't', bars: m.bars, tx: m.tx || '' })) };
+      /* وأسعارٌ متنوّعة لتُرى حالاتُ البيع كلُّها (طلبُ صاحب الموقع): مجانيّة · سعرٌ شامل · مجلداتٌ مسعَّرةٌ كلُّها · بعضُها (معاينةٌ مجانيّة) */
+      const SALE = ['free', 'part', 'lock', 'fall', 'part', 'lock', 'free', 'fall', 'lock', 'part'][i], WHOLE = [0, 0, 45, 0, 0, 30, 0, 0, 60, 0][i];
+      if (SALE === 'lock') data.sale = { m: 'lock', price: WHOLE };
+      else if (SALE !== 'free') {
+        const fp = {}, tf = (data.deck || []).filter(n => n.t === 'f'), tq = (data.qb || []).filter(n => n.t === 'f');
+        tf.forEach((n, j) => { if (SALE === 'fall' || j % 2 === 0) fp[n.id] = 10 + j * 5; });
+        tq.forEach((n, j) => { if (SALE === 'fall' || j % 2 === 1) fp[n.id] = 8 + j * 4; });
+        const sum = Object.values(fp).reduce((t, v) => t + v, 0);
+        if (sum) data.sale = { m: SALE === 'fall' ? 'lock' : 'part', price: sum, fp };
+      }
       list.push({ id: pid, me: false, seeded: 1, u: { name: 'بروفايل وهمي', img: av(String(i + 1), COL[i][0], COL[i][1]) },
         likes: LIKES[i], liked: false, dislikes: DIS[i], disliked: false, ts: now - DAYS[i] * D, data });
     }
