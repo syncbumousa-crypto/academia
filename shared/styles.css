@@ -19777,3 +19777,14 @@ html[data-theme="dark"] .cx-lnall.on > i { background: #e1c172; border-color: #e
 /* مستطيلٌ بلغته الخاصّة: اتّجاهُ نصّه بلغته لا بلغة المساحة */
 .kt tr.kt-lnr--en .kt-t { unicode-bidi: plaintext; text-align: left; }
 .kt tr.kt-lnr--ar .kt-t { unicode-bidi: plaintext; text-align: right; }
+/* ===== زرُّ اللغة مستطيلٌ واحدٌ وفي داخله «للكل» (طلبُ صاحب الموقع) =====
+   الكبسولةُ بثوب الزرّ نفسِه، وفيها جزءان بفاصلٍ رفيع: الحروفُ بنقطتيها (تبدّل) ومربّعُ «للكل» (النطاق) */
+.cx-lnw { gap: 0; height: 34px; padding: 0 2px 0 4px; border-radius: 999px;
+  background: rgba(44, 94, 101, .06); border: 1px solid rgba(44, 94, 101, .18); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+.cx-lnw > .cx-lnk { width: 34px; height: 30px; border: 0; border-radius: 999px; background: transparent; box-shadow: none; }
+.cx-lnw > .cx-lnk:hover:not(:disabled) { background: rgba(44, 94, 101, .12); }
+.cx-lnw > .cx-lnall { height: 22px; padding: 0 10px 0 8px; margin-inline-start: 2px; border-inline-start: 1px solid rgba(20, 35, 63, .14); border-radius: 0; }
+html[data-theme="dark"] .cx-lnw { background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); border-color: rgba(255, 255, 255, .14); box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] .cx-lnw > .cx-lnk { background: transparent; }
+html[data-theme="dark"] .cx-lnw > .cx-lnk:hover:not(:disabled) { background: rgba(255, 255, 255, .12); }
+html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(255, 255, 255, .14); }
