@@ -11326,6 +11326,43 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pkFitRaf = 0;
   const pkFitSoon = () => { if (!pkFitRaf) pkFitRaf = requestAnimationFrame(() => { pkFitRaf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pkFit); }); };
   let pkFitRo = null;
+  /* ===== شريطُ تمرير المجلدات فوقها لا تحتها (طلبُ صاحب الموقع) =====
+     شريطُ المتصفّح لا يُنقل إلى الأعلى إلّا بقلب الصفّ (‎transform‎)، وحركةُ ‎FLIP‎ تعمل بالخاصّية نفسِها فتنقلب معه.
+     فشريطُ المتصفّح يُخفى لصفّ الشريط الأعلى وحده، ويُرسم مكانَه فوقه شريطٌ رفيعٌ بلا أسهم: مقبضُه بقدر المرئيّ ويتبع
+     التمرير، ويُسحب، ونقرُ مجراه يقفز إليه. ولا يظهر إلّا والصفُّ يفيض */
+  function pkFsb(strip) {
+    const row = strip.querySelector(':scope > .pg-row'); if (!row) return;
+    let sb = strip.querySelector(':scope > .pk-fsb');
+    if (!sb) { sb = document.createElement('div'); sb.className = 'pk-fsb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i>'; strip.prepend(sb); }
+    const th = sb.firstChild;
+    const sync = () => {
+      const sw = row.scrollWidth, cw = row.clientWidth, over = sw > cw + 1;
+      strip.classList.toggle('has-fsb', over);
+      if (!over) return;
+      const tw = sb.clientWidth, w = Math.max(28, tw * cw / sw), f = Math.min(1, Math.abs(row.scrollLeft) / (sw - cw));
+      th.style.width = w + 'px'; th.style.insetInlineStart = (f * (tw - w)) + 'px';
+    };
+    if (!row.pkFsb) {
+      row.pkFsb = 1;
+      row.addEventListener('scroll', sync, { passive: true });
+      /* السحبُ: إزاحةُ المقبض بنسبة ما يُمرَّر (والعلامةُ نفسُها في الاتّجاهين: التمريرُ يتبع حركةَ اليد) */
+      th.addEventListener('pointerdown', e => {
+        e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); th.classList.add('is-drag');
+        const x0 = e.clientX, s0 = row.scrollLeft, k = (row.scrollWidth - row.clientWidth) / Math.max(1, sb.clientWidth - th.offsetWidth);
+        const mv = ev => { row.scrollLeft = s0 + (ev.clientX - x0) * k; };
+        const up = () => { th.classList.remove('is-drag'); th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); };
+        th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
+      });
+      /* نقرُ المجرى: صفحةٌ نحو موضع النقر */
+      sb.addEventListener('pointerdown', e => {
+        if (e.target !== sb) return;
+        e.preventDefault();
+        const r = th.getBoundingClientRect();
+        row.scrollBy({ left: (e.clientX < r.left ? -1 : 1) * row.clientWidth * .8, behavior: 'smooth' });
+      });
+    }
+    sync();
+  }
   function pkFit(strip) {
     /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى
        أصغرَ من الاسم وينضغط المربّعُ إلى «مجلـ…» بدل أن يفيض الصفُّ ويظهر شريطُ تمريره (طلبُ صاحب الموقع) */
@@ -11341,6 +11378,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const miss = nm.scrollWidth - nm.clientWidth, w = b.getBoundingClientRect().width;
       if (miss > 0 && w < 220) b.style.setProperty('--pk-need', Math.ceil(Math.min(220, w + miss + 1)) + 'px');
     });
+    pkFsb(strip);
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
     if (window.ResizeObserver && !strip.pkRo) {
       pkFitRo = pkFitRo || new ResizeObserver(es => es.forEach(e => { const t = e.target; if (t.isConnected && e.contentRect.width && (t.pkFitW || 0) !== Math.round(e.contentRect.width)) { t.pkFitW = Math.round(e.contentRect.width); pkFit(t); } }));

@@ -19808,3 +19808,13 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
    الصفوفُ في النشر عرضُها الأدنى ‎600‎ (من أجل التحرير: نصُّ السؤال لا ينضغط)، فمساحةٌ ضيّقةٌ تفيض ويظهر شريطٌ ينزلق إلى فراغ —
    والاسمُ الطويلُ يُختصر على كلّ حال. ففي النشر حدُّه الأدنى ‎360‎ وحدَه: لا يفيض إلّا في مساحةٍ أضيقَ من ذلك */
 #cm-body .pk-bank.is-ro > .x3 > * { min-width: 360px; }
+
+/* ===== شريطُ تمرير المجلدات فوقها، رفيعٌ بلا أسهم (‎.pk-fsb‎ — طلبُ صاحب الموقع) ===== */
+.pk-fstrip.pk-lg > .pg-row { scrollbar-width: none; }
+.pk-fstrip.pk-lg > .pg-row::-webkit-scrollbar { display: none; }
+.pk-fstrip > .pk-fsb { display: none; position: relative; height: 4px; margin: 0 6px 8px; border-radius: 99px; background: rgba(127, 127, 127, .14); cursor: pointer; }
+.pk-fstrip.has-fsb > .pk-fsb { display: block; }
+.pk-fstrip > .pk-fsb > i { position: absolute; top: 0; bottom: 0; inset-inline-start: 0; border-radius: 99px; background: rgba(127, 127, 127, .45); cursor: grab; transition: background .15s; }
+.pk-fstrip > .pk-fsb > i:hover, .pk-fstrip > .pk-fsb > i.is-drag { background: rgba(127, 127, 127, .7); }
+.pk-fstrip > .pk-fsb > i.is-drag { cursor: grabbing; }
+.pk-fstrip > .pk-fsb > i::before { content: ''; position: absolute; inset: -6px 0; }   /* مَسكةٌ أعرض من خطّه الرفيع */
