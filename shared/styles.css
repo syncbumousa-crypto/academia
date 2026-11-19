@@ -19900,13 +19900,13 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 @property --pk-pad { syntax: '<length>'; inherits: true; initial-value: 10px; }
 .pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center; --pk-pad: 10px; padding-inline-start: var(--pk-pad);
   transition: width .56s cubic-bezier(.22, 1, .36, 1), --pk-pad .56s cubic-bezier(.22, 1, .36, 1); }
-.pk-fstrip.pk-lg .pg-face > .pg-cnt:hover { width: var(--pk-w, 18px); --pk-pad: 4px; }
+.pk-fstrip.pk-lg .pg-face > .pg-cnt:hover { width: var(--pk-w, 18px); --pk-pad: 2px; margin-inline-start: -5px; }
 /* ولا يبقى بين الاسم والكبسولة فراغ (طلبُ صاحب الموقع): ما دامت مفتوحةً يمتدّ الاسمُ إلى آخر مكانه بلا نقاط —
    النقاطُ تقطع الكلمةَ العربيّة عند حرفٍ كامل فتترك فراغًا — ويذوب طرفُه في تدرّجٍ قصير بدل أن يُبتر */
 .pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm { text-overflow: clip;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px); mask-image: linear-gradient(to right, transparent 0, #000 14px); }
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5px); mask-image: linear-gradient(to right, transparent 0, #000 5px); }
 [dir="ltr"] .pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm {
-  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 14px); mask-image: linear-gradient(to left, transparent 0, #000 14px); }
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 5px); mask-image: linear-gradient(to left, transparent 0, #000 5px); }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - var(--pk-pad, 10px)) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(168, 132, 46, .7); background: #2a3235; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45);
