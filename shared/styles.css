@@ -19825,3 +19825,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
    الأيقونةُ في زاوية المساحة على مستوى المجلدات، فإذا مُرِّر الصفُّ دخل أوّلُها تحتها فبدا مغطًّى. فالمجلداتُ تنزل تحتها
    وتمتدّ إلى حافّة المساحة اليمنى كما تمتدّ إلى اليسرى (لا تشارك الأيقونةَ سطرها) */
 #cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip { margin-top: 16px; margin-inline-start: -42px; margin-bottom: 28px; }
+/* ===== مجلدٌ مفتوحٌ في الصفّ ⇐ إخوتُه يطولون بطوله، فأسماؤهم تكمل في السطر التالي بدل «…» (طلبُ صاحب الموقع) =====
+   حتى ثلاثة أسطر — أقلُّ من قامة المفتوح (رأسُه وصفُّ أبنائه) فلا تُطيل الصفّ، وما زاد يُختصر في آخر الثالث */
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) > .pg-face > .pg-nm {
+  white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; text-overflow: clip; overflow-wrap: anywhere;
+}
