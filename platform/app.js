@@ -9761,7 +9761,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ‏‎2:30‎ أو ‎18‎ (دقائقُ تامّة) */
   /* ===== كبسولةُ العدّاد: أرقامٌ من زجاجٍ سائل (طلبُ صاحب الموقع) =====
      رسمةٌ واحدة: جوفٌ داكنٌ في الثيمين، وماءٌ يصعد من الأسفل بموجته (الأحمرُ ثم الأخضرُ بنسبة الصواب كالدائرة)،
-     والأرقامُ قطعُ زجاجٍ مصنفر: تحتها نسخةٌ من المشهد مموّهةٌ مرفوعةٌ مضيئة (انكسار)، وحافّتُها العلويّة تلمع وتحتها ظلٌّ يفصلها.
+     والأرقامُ قطعُ زجاجٍ صافٍ بتشتّتٍ لونيّ (منشور): تحتها نسخةٌ من المشهد مشبعةٌ مضيئةٌ مرفوعة (انكسار) تُرى ألوانُ الماء من خلالها، وحافّتُها العلويّة تلمع وتحتها ظلٌّ يفصلها.
      العرضُ من نسخةٍ خفيّةٍ للكسر نفسِه في السطر، فالرسمةُ بالنسبة (٪) والموجةُ بالبكسل تمتدّ وتُقصّ */
   let pkCapN = 0;
   const pkCapWave = (Y, A) => { let d = 'M-2 30'; for (let x = -2; x <= 302; x += 2) d += ` L${x} ${(Y + A * Math.sin(x / 18 * 2 * Math.PI)).toFixed(2)}`; return d + ' L302 30 Z'; };
@@ -9790,15 +9790,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
       + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
       + `<linearGradient id="${id}rm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>`
-      + `<filter id="${id}L" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="1.3"/><feComponentTransfer><feFuncR type="linear" slope="1.15" intercept=".25"/><feFuncG type="linear" slope="1.15" intercept=".25"/><feFuncB type="linear" slope="1.15" intercept=".25"/></feComponentTransfer><feOffset dy="-1.1"/></filter>`
+      + `<filter id="${id}L" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation=".45"/><feColorMatrix type="saturate" values="1.5"/><feComponentTransfer><feFuncR type="linear" slope="1.35" intercept=".12"/><feFuncG type="linear" slope="1.35" intercept=".12"/><feFuncB type="linear" slope="1.35" intercept=".12"/></feComponentTransfer><feOffset dy="-1.1" result="b0"/>`
+      /* منشور: قناةُ الأحمر تنزاح يسارًا والأزرقُ يمينًا ثم تُجمع — تشتّتُ الضوء على حوافّ الرقم */
+      + `<feColorMatrix in="b0" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r"/><feOffset in="r" dx="-.7" result="r2"/><feColorMatrix in="b0" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="g"/><feColorMatrix in="b0" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="b"/><feOffset in="b" dx=".7" result="b2"/><feBlend in="r2" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b2" mode="screen"/></filter>`
+      + ``
       + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".7"/></filter>`
-      + mk('M', TX(by, 'fill="#fff"')) + mk('I', TX(by, 'fill="#fff"') + TX(by + 1, 'fill="#000"')) + mk('B', TX(by, 'fill="#fff"') + TX(by - .9, 'fill="#000"'))
+      + mk('M', TX(by, 'fill="#fff"')) + mk('I', TX(by, 'fill="#fff"') + TX(by + .8, 'fill="#000"')) + mk('B', TX(by, 'fill="#fff"') + TX(by - .9, 'fill="#000"'))
       + `</defs>${scene}`
-      + `<g filter="url(#${id}sh)" opacity=".4">${TX(by + .9, 'fill="#000"')}</g>`
-      + `<g mask="url(#${id}M)"><use href="#${id}s" filter="url(#${id}L)"/><rect width="100%" height="100%" fill="rgba(255,255,255,.55)"/></g>`
-      + `<rect width="100%" height="100%" fill="#fff" opacity=".9" mask="url(#${id}I)"/>`
-      + `<rect width="100%" height="100%" fill="#000" opacity=".28" mask="url(#${id}B)"/>`
-      + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".55"`)
+      + `<g filter="url(#${id}sh)" opacity=".5">${TX(by + .9, 'fill="#000"')}</g>`
+      + `<g mask="url(#${id}M)"><use href="#${id}s" filter="url(#${id}L)"/><rect width="100%" height="100%" fill="rgba(255,255,255,.06)"/></g>`
+      + `<rect width="100%" height="100%" fill="#fff" opacity=".5" mask="url(#${id}I)"/>`
+      + `<rect width="100%" height="100%" fill="#000" opacity=".25" mask="url(#${id}B)"/>`
+      + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".4"`)
       + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
   /* في الكبسولة كلُّ قيمةٍ بوحدتها: ما دون الدقيقة ثوانٍ «45ث»، وما دون الساعة دقائقُ وثوانٍ «8:15د»،
