@@ -19818,3 +19818,6 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 .post > .pk-fsb > i:hover, .post > .pk-fsb > i.is-drag { background: rgba(127, 127, 127, .8); }
 .post > .pk-fsb > i.is-drag { cursor: grabbing; }
 .post > .pk-fsb > i::before { content: ''; position: absolute; inset: -2px 0 -8px; }   /* مَسكةٌ أعرض من خطّه الرفيع */
+/* المساحاتُ وهي تنفتح أو تنطوي أو تتحرّك: أشرطةُ تمريرها مخفيّة (تفيض لحظاتٍ والقامةُ تتحرّك، ثمّ لا داعي) */
+:is(#cm-body.pk-sbhide, .pk--fxrun) .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-width: none; }
+:is(#cm-body.pk-sbhide, .pk--fxrun) .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar { display: none; }

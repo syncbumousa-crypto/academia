@@ -11188,6 +11188,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (post && tall) { h0n = post.getBoundingClientRect().height; post.style.height = h1 + 'px'; scrs.forEach(([x, t]) => { x.scrollTop = t; }); }
       goTxt.forEach(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140 * S, easing: 'ease-out', fill: 'forwards' }).finished.then(() => x.remove(), () => x.remove()));
       if (!post || bkReduce()) { if (post) post.style.height = ''; return; }
+      /* ولا شريطَ تمريرٍ عابرٍ في المساحات وهي تتبدّل: قامةُ المساحة تتحرّك ومحتواها بقدره الأخير، فيفيض لحظاتٍ (طلبُ صاحب الموقع) */
       cxHdMeasure(); pkBandFit(post);   /* الفجواتُ تُرسم وأيقوناتُها تُوضع فيها قبل القياس */
       post.pkBlkHold = true;
       const an = [];
@@ -11268,10 +11269,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!id || post.pkIcBusy) return;
     if (b && (pkGone[id] || []).includes(b.dataset.pkic)) return;   /* مساحةٌ فارغةٌ في المنشورة لا تُفتح */
     post.pkIcBusy = true;
+    pkSbHide();
     if (b && post.classList.contains('pk--icrow')) return pkIcExpand(id, b.dataset.pkic, post);   /* من الصفّ الضيّق: تتّسع على مساحتها */
     if (b) { post.pkIcBusy = false; return pkIcToggle(post, b.dataset.pkic); }
     else pkIcGo(id, null, x);
   }, true);
+  /* ===== ولا شريطَ تمريرٍ عابرٍ في المساحات وهي تتبدّل (طلبُ صاحب الموقع) =====
+     قامةُ المساحة تتحرّك ومحتواها بقدره الأخير، فيفيض لحظاتٍ فيظهر شريطُه ثمّ يختفي. والمساهمةُ تُعاد رسمًا أثناء الحركة
+     فالصنفُ على وعاء المساهمات لا عليها، ويُرفع بعد أن تقف */
+  function pkSbHide(ms = 1000) {
+    const c = document.getElementById('cm-body'); if (!c) return;
+    c.classList.add('pk-sbhide'); clearTimeout(pkSbHide.t); pkSbHide.t = setTimeout(() => c.classList.remove('pk-sbhide'), ms);
+  }
   const pkViewBar = (where, id, extra = '') => `<span class="pk-vbar${where === 'edit' ? ' pk-vbar--edit' : ''}" role="group" aria-label="${esc(T().pkViewBar)}">
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm">${pkVbBtn(id, 'source', PK_SRC_IC).replace('</svg></button>', `</svg><span class="pk-vbar__nm">${esc(T().pkEsSrcT)}</span></button>`)}</span>
     <span class="pk-vbar__cap pk-vbar__cap--solo pk-vbar__cap--nm pk-vbar__cap--dd">${pkMidBtn(id)}${pkViewDD(id)}</span>
