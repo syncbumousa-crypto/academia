@@ -19824,4 +19824,4 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* ===== مجلداتُ الملخّص تنزل تحت أيقونة المساحة (طلبُ صاحب الموقع) =====
    الأيقونةُ في زاوية المساحة على مستوى المجلدات، فإذا مُرِّر الصفُّ دخل أوّلُها تحتها فبدا مغطًّى. فالمجلداتُ تنزل تحتها
    وتمتدّ إلى حافّة المساحة اليمنى كما تمتدّ إلى اليسرى (لا تشارك الأيقونةَ سطرها) */
-#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip { margin-top: 16px; margin-inline-start: -42px; }
+#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-fstrip { margin-top: 16px; margin-inline-start: -42px; margin-bottom: 28px; }
