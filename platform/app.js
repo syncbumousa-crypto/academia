@@ -9757,15 +9757,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== عددُ المفاهيم ودائرةُ اكتمالها في طرف كلّ مجلد (طلبُ صاحب الموقع) =====
      العددُ بطائقُ المجلد بما في مجلداته، والدائرةُ دائرةُ محطّة الرحلة نفسُها (‎x3DotAns‎ على ‎x3Ans‎ — ماءٌ بقدر ما أُنجز).
      يُحسبان مع كلّ رسمٍ للشريط فيتبعان كلَّ إضافةٍ وحذفٍ ومذاكرة */
-  let pkBoxDeck = null;
+  let pkBoxDeck = null, pkBoxTime = false;
+  /* ‏‎2:30‎ أو ‎18‎ (دقائقُ تامّة) */
+  const pkTmTx = t => { const m = Math.floor(t / 60), x = t % 60; return x ? m + ':' + String(x).padStart(2, '0') : String(m); };
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
     const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];
-    const tot = flatCards(ns).length; if (!tot) return '';
-    const a = x3Ans(ns);
+    const cs = flatCards(ns), tot = cs.length; if (!tot) return '';
+    const a = x3Ans(ns), en = state.lang === 'en';
+    /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
+       الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
+       ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
+    if (pkBoxTime) {
+      const tt = cs.reduce((x, n) => x + (n.tm || 0), 0);
+      if (tt) {
+        let dt = 0;
+        cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
+        dt = Math.min(tt, Math.round(dt));
+        const at = Object.assign({}, a, { lvl: dt / tt });
+        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-frac"><b>${pkTmTx(dt)}</b><i>/</i><span>${pkTmTx(tt)}</span><small>${en ? 'm' : 'د'}</small></span><span class="pg-ring">${x3DotAns(at)}</span></span>`;
+      }
+    }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
        يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها */
-    const k2 = Math.min(a.k, tot), en = state.lang === 'en';
+    const k2 = Math.min(a.k, tot);
     return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-frac"><b>${k2}</b><i>/</i><span>${tot}</span></span><span class="pg-ring">${x3DotAns(a)}</span></span>`;
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
@@ -12717,7 +12732,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null;
+    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).

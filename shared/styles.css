@@ -19879,3 +19879,6 @@ html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(225, 193, 114, .
 html[data-theme="dark"] .pg-cnt > .pg-frac > b { color: #eef2f3; }
 .pg-cnt > .pg-frac > i { font-style: normal; opacity: .55; margin: 0 1px; }
 .pg-cnt > .pg-frac > span { opacity: .75; font-weight: 700; }
+.pg-cnt > .pg-frac > small { font-size: 10px; font-weight: 700; opacity: .65; margin-inline-start: 2px; }
+/* وكسرُ الزمن أعرضُ من كسر العدد: إخوةُ المفتوح يتّسعون بقدره فلا تتكسّر أسماؤهم */
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide):has(> .pg-face > .pg-cnt--tm) { max-width: 260px; }
