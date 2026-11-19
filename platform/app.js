@@ -9754,6 +9754,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ‏‎pkSolo[id]‎: المجلدُ المفتوحُ المضغوطُ ثانيةً — يُعرض ما فيه هو وحدَه بلا مجلداته الداخليّة، والإطارُ على اسمه وحدَه (طلبُ صاحب الموقع) */
   const pkSolo = {};
   let pkSoloCur = null;
+  /* ===== عددُ المفاهيم ودائرةُ اكتمالها في طرف كلّ مجلد (طلبُ صاحب الموقع) =====
+     العددُ بطائقُ المجلد بما في مجلداته، والدائرةُ دائرةُ محطّة الرحلة نفسُها (‎x3DotAns‎ على ‎x3Ans‎ — ماءٌ بقدر ما أُنجز).
+     يُحسبان مع كلّ رسمٍ للشريط فيتبعان كلَّ إضافةٍ وحذفٍ ومذاكرة */
+  let pkBoxDeck = null;
+  function pkCntHTML(k) {
+    if (!pkBoxDeck || !k || k.id === '') return '';
+    const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];
+    const tot = flatCards(ns).length; if (!tot) return '';
+    const a = x3Ans(ns);
+    return `<span class="pg-cnt" title="${esc(a.k + ' / ' + tot)}"><b>${tot}</b><span class="pg-ring">${x3DotAns(a)}</span></span>`;
+  }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
      في المختبر لا عرضَ مجلّديًّا قائمًا بذاته: العرضُ الأصلُ أحدُ الثلاثة دائمًا، وأيقونةُ المجلد مفتاحُ منطقة البنك
@@ -11394,7 +11405,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        أصغرَ من الاسم وينضغط المربّعُ إلى «مجلـ…» بدل أن يفيض الصفُّ ويظهر شريطُ تمريره (طلبُ صاحب الموقع) */
     strip.querySelectorAll('.pg-box:not(.is-wide)').forEach(b => {
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
-      if (nm && nm.scrollWidth) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 4) + 'px');
+      const cn = b.querySelector(':scope > .pg-face > .pg-cnt');
+      if (nm && nm.scrollWidth) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 4 + (cn ? cn.offsetWidth + 8 : 0)) + 'px');
     });
     /* ومراجعةٌ بعد القياس: اسمٌ ما زال مقصوصًا ومربّعُه دون السقف (‎220‎) — خطٌّ وصل بعد القياس، أو في الوجه ما لم يُحسب —
        يُزاد حدُّه بقدر ما نقص بالضبط. فلا يُرى «مجلـ…» إلّا في اسمٍ أطولَ من السقف */
@@ -11402,7 +11414,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
       if (!nm || !nm.clientWidth) return;
       const miss = nm.scrollWidth - nm.clientWidth, w = b.getBoundingClientRect().width;
-      if (miss > 0 && w < 220) b.style.setProperty('--pk-need', Math.ceil(Math.min(220, w + miss + 1)) + 'px');
+      if (miss > 0 && w < 260) b.style.setProperty('--pk-need', Math.ceil(Math.min(260, w + miss + 1)) + 'px');
     });
     pkFsb(strip);
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
@@ -11501,7 +11513,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + (k.id === sel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
+        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span>' + pkCntHTML(k) + '</button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -11543,7 +11555,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>';
+        : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>' + pkCntHTML(k);
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + (isSel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
@@ -12702,7 +12714,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    pkSoloCur = pkSolo[id] || null;
+    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null;
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).

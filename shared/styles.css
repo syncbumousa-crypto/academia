@@ -16722,7 +16722,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
    اسمه — إلّا الاسمَ الطويلَ جدًّا فيُختصر عند ‎220px‎ (ويُقرأ كاملًا عند التحويم) */
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
-  --pk-need: 220px; flex: 1 1 0; min-width: min(var(--pk-need), 220px);   /* ‎220‎ قبل أن يُقاس الاسم (كان ‎140‎ فينضغط المجلدُ الجديدُ تحت اسمه) */ max-width: 100%; overflow: visible; align-self: stretch;
+  --pk-need: 260px; flex: 1 1 0; min-width: min(var(--pk-need), 260px);   /* ‎220‎ قبل أن يُقاس الاسم (كان ‎140‎ فينضغط المجلدُ الجديدُ تحت اسمه) */ max-width: 100%; overflow: visible; align-self: stretch;
   border: 0; border-radius: 19px; background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-out);
 }
 /* ق٢: مفتوحٌ في الصفّ ⇐ إخوتُه على قدر أسمائهم حتى ‎160px‎ (لا تُضغط: إن لم يسعهم الصفُّ مُرِّر)، وهو يأخذ الباقي */
@@ -19861,4 +19861,15 @@ html, body { overscroll-behavior-x: none; }
 html[data-theme="dark"] .kt-tmst { background: rgba(255, 255, 255, .08); }
 html[data-theme="dark"] .kt-tmst > button:hover { background: rgba(255, 255, 255, .14); }
 html[data-theme="dark"] .kt-rt__tm .kt-rt__b.on { color: #e1c172; }
-  font-size: 10.5px; font-weight: 800; font-variant-numeric: tabular-nums; color: #8a6420; background: rgba(201, 162, 92, .16); }
+
+/* ===== عددُ المفاهيم ودائرةُ الاكتمال في طرف المجلد (‎.pg-cnt‎) — دائرةُ محطّة الرحلة نفسُها ===== */
+.pk-fstrip.pk-lg .pg-face > .pg-cnt { flex: none; margin-inline-start: auto; padding-inline-start: 10px; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--u-dim, #8a97a3); align-self: center; }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > .pg-cnt { margin-inline-start: 4px; }
+.pg-cnt > .pg-ring { position: relative; flex: none; width: 18px; height: 18px; overflow: hidden; border-radius: 50%;
+  border: 1.6px solid rgba(168, 132, 46, .55); background: rgba(44, 94, 101, .06); }
+.pg-cnt > .pg-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
+html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08); }
+/* وبجانب مفتوح: إخوتُه يتّسعون بقدر العدّاد (كانوا ‎160‎)، والعدّادُ على سطر الاسم الأوّل لا في وسط أسطره */
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { max-width: 200px; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { align-self: flex-start; margin-top: 2px; }
