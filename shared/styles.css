@@ -17735,7 +17735,7 @@ html[data-theme="dark"] #cm-body .pk--icx .pk-ic:hover { color: #d4b36a; }
 /* والفجوةُ: الأيقونتان فيها (تضعهما ‎pkBandDraw‎)، وإغلاقُ المساحة بأيقونتها لا بالقوس (مكانُه صار الفجوة)، وشريطُ المجلدات يُفسح لها */
 #cm-body .pk--icx.pk--ic1 .pk-icrow { inset-inline: auto; }
 #cm-body .pk--icx.pk--ic1 .pk-blkh__x { display: none; }
-#cm-body .pk--icx.pk--ic1 .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-end: 12px; }   /* كانت ‎54px‎ لأيقونةٍ لا تقع في هذا الطرف أبدًا (أيقونةُ الملخّص في الطرف الآخر): فيمتدّ الشريطُ وشريطُ تمريره إلى حافّة المساحة (طلبُ صاحب الموقع) */
+#cm-body .pk--icx.pk--ic1 .post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph) { margin-inline-end: 0; }   /* كانت ‎54px‎ لأيقونةٍ لا تقع في هذا الطرف أبدًا (أيقونةُ الملخّص في الطرف الآخر): فيمتدّ الشريطُ وشريطُ تمريره إلى حافّة المساحة (طلبُ صاحب الموقع) */
 /* والإعجابُ نزل إلى الأسفل: سطرُ الترويسة الثاني يبقى للأيقونات (فلا تسقط تحت مسكة الترويسة) */
 #cm-body .pk--icx.pk--framepub .x3-pkhd { margin-bottom: 26px; }
 /* وفي الكونسبت لا سهمَ توسيع: الأيقوناتُ تفتح، وإغلاقُ آخرِ مساحةٍ يطوي (طلبُ صاحب الموقع) */
