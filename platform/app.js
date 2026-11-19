@@ -4747,11 +4747,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* صورة الحساب الافتراضية (Profile فلات مؤقتًا) */
   const FLAT_AVATAR = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.2 4.8-6 8-6s6.5 1.8 8 6z"/></svg>';
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
+  /* صورُ الحروف من منتدى STKFUPM ألوانُها عشوائيّةٌ من المنتدى لا من الموقع: يُرسم الحرفُ
+     هنا محايدًا (‎.av-letter‎) بدل جلب صورته — ولا طلبَ شبكةٍ لكلّ وجه */
+  const LETTER_AV = /letter_avatar_proxy\/v\d+\/letter\/([^/])\//;
   const avatarHTML = p => {
     const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
     /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
        تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
-    return src ? `<img src="${src}" alt="" loading="lazy" decoding="async">` : FLAT_AVATAR;
+    if (!src) return FLAT_AVATAR;
+    const lm = LETTER_AV.exec(src);
+    return lm ? `<span class="av-letter" aria-hidden="true">${esc(lm[1].toUpperCase())}</span>` : `<img src="${src}" alt="" loading="lazy" decoding="async">`;
   };
   const nameOf = p => (p.me ? esc(state.profile.name || '') : esc((p.u && p.u.name) || '')) || T().meName;
 
