@@ -19843,3 +19843,9 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
    سحبُ لوحة اللمس يمينًا/يسارًا إذا بلغ حدَّ ما يُمرَّر يمضي إلى الصفحة فيفهمه المتصفّحُ «رجوعًا». فالصفحةُ لا تقبل
    الانسحابَ الأفقيّ (وتمريرُ الشرائط والبنك أفقيًّا باقٍ كما هو) */
 html, body { overscroll-behavior-x: none; }
+/* ===== المجلدُ «وحدَه» (نقرُ المفتوح المختار ثانيةً): الإطارُ على اسمه لا على المربّع كلِّه، وأبناؤه أخفت —
+   فالمعروضُ ما فيه هو وحدَه (طلبُ صاحب الموقع) */
+#cm-body .pk-fstrip.pk-lg .pg-box.is-wide.is-sel.is-solo { box-shadow: var(--lgx-rim), var(--lgx-out); }   /* (بالمعرّف: يغلب إطارَ الصينيّة الملوّن ‎:has‎) */
+.pk-fstrip.pk-lg .pg-box.is-wide.is-solo > .pg-face { background: var(--lgx-bg-sel); box-shadow: inset 0 0 0 1.5px var(--c); }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-solo > .pg-in { opacity: .5; transition: opacity .2s; }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-solo > .pg-in:hover { opacity: .85; }

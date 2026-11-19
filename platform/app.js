@@ -9751,6 +9751,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
   const pkVw = {}, pkFo = {}, pkFs = {};
+  /* ‏‎pkSolo[id]‎: المجلدُ المفتوحُ المضغوطُ ثانيةً — يُعرض ما فيه هو وحدَه بلا مجلداته الداخليّة، والإطارُ على اسمه وحدَه (طلبُ صاحب الموقع) */
+  const pkSolo = {};
+  let pkSoloCur = null;
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
      في المختبر لا عرضَ مجلّديًّا قائمًا بذاته: العرضُ الأصلُ أحدُ الثلاثة دائمًا، وأيقونةُ المجلد مفتاحُ منطقة البنك
@@ -11495,7 +11498,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const openId = open.get(parentKey);
     return '<div class="pg-row">' + nodes.map(k => {
       const has = k.kids && k.kids.length, wide = has && k.id === openId;
-      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + (k.id === sel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
         + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span></button>'
@@ -11541,7 +11544,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
         : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>';
-      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + '"' + pkBoxAt(k, wide, open) + '>'
+      return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + (isSel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
         + (has ? '<div class="pg-in">' + pkBoxEdHTML(k.kids, open, k.id, sel) + '</div>' : '')
@@ -12699,6 +12702,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
+    pkSoloCur = pkSolo[id] || null;
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
@@ -12992,7 +12996,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const host = ktHost(sel, pack);
     if (!host) return '';
     if (!ro) ktMigrate(host);
-    const deep = v === 'tree' ? null : ktDeep(host);
+    /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
+    const deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
     const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
@@ -28454,9 +28459,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const open = pkFo[id] || (pkFo[id] = new Map());
       /* المفتوحُ المختارُ يُغلق بنقره مرّةً أخرى؛ أمّا إن كان المختارُ أحدَ أبنائه فنقرُه يختاره ويبقى
          مفتوحًا (بطلب صاحب الموقع) */
+      /* (ثمّ بطلبه) نقرُ المفتوحِ المختارِ ثانيةً لا يطويه أوّلًا: يُريه وحدَه (ما فيه هو بلا مجلداته، والإطارُ على اسمه)،
+         والنقرةُ الثالثةُ تطويه. وكلُّ اختيارٍ آخر يُنهي «وحدَه» */
       if (pf.hasAttribute('aria-expanded')) {
-        if (open.get(par) === f && pkFs[id] === f) open.delete(par); else open.set(par, f);
-      } else open.delete(par);   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
+        if (open.get(par) === f && pkFs[id] === f) {
+          if (pkSolo[id] !== f) pkSolo[id] = f;
+          else { delete pkSolo[id]; open.delete(par); }
+        } else { open.set(par, f); delete pkSolo[id]; }
+      } else { open.delete(par); delete pkSolo[id]; }   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       const pubPick = !pf.closest('.pk--edit');
       if (pubPick) { pkAwait.delete(id); hlFill.add(id); }
