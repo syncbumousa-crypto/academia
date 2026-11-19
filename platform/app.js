@@ -11331,20 +11331,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فشريطُ المتصفّح يُخفى لصفّ الشريط الأعلى وحده، ويُرسم مكانَه فوقه شريطٌ رفيعٌ بلا أسهم: مقبضُه بقدر المرئيّ ويتبع
      التمرير، ويُسحب، ونقرُ مجراه يقفز إليه. ولا يظهر إلّا والصفُّ يفيض */
   function pkFsb(strip) {
-    const row = strip.querySelector(':scope > .pg-row'); if (!row) return;
-    let sb = strip.querySelector(':scope > .pk-fsb');
-    if (!sb) { sb = document.createElement('div'); sb.className = 'pk-fsb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i>'; strip.prepend(sb); }
-    const th = sb.firstChild;
-    const sync = () => {
-      const sw = row.scrollWidth, cw = row.clientWidth, over = sw > cw + 1;
-      strip.classList.toggle('has-fsb', over);
-      if (!over) return;
-      const tw = sb.clientWidth, w = Math.max(28, tw * cw / sw), f = Math.min(1, Math.abs(row.scrollLeft) / (sw - cw));
-      th.style.width = w + 'px'; th.style.insetInlineStart = (f * (tw - w)) + 'px';
-    };
-    if (!row.pkFsb) {
-      row.pkFsb = 1;
-      row.addEventListener('scroll', sync, { passive: true });
+    const row = strip.querySelector(':scope > .pg-row'), card = strip.closest('.post'); if (!row || !card) return;
+    /* (ثمّ بطلبه: بلا مجرى، ولاصقًا بالحافّة العليا للمساحة) — فالشريطُ في المساهمة نفسِها لا في الشريط (الشريطُ يقصّ ما خرج منه)،
+       موضوعًا على الحافّة العليا لكتلة الملخّص المرسومة، وطرفاه بعيدان عن استدارة زاويتيها */
+    let sb = strip.pkFsbEl;
+    if (!sb || !sb.isConnected) {
+      card.querySelectorAll(':scope > .pk-fsb').forEach(x => { if (!x.pkStrip || !x.pkStrip.isConnected) x.remove(); });
+      sb = strip.pkFsbEl = document.createElement('div'); sb.className = 'pk-fsb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i>'; sb.pkStrip = strip;
+      card.appendChild(sb);
+      const th = sb.firstChild;
       /* السحبُ: إزاحةُ المقبض بنسبة ما يُمرَّر (والعلامةُ نفسُها في الاتّجاهين: التمريرُ يتبع حركةَ اليد) */
       th.addEventListener('pointerdown', e => {
         e.preventDefault(); e.stopPropagation(); th.setPointerCapture(e.pointerId); th.classList.add('is-drag');
@@ -11353,13 +11348,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const up = () => { th.classList.remove('is-drag'); th.removeEventListener('pointermove', mv); th.removeEventListener('pointerup', up); th.removeEventListener('pointercancel', up); };
         th.addEventListener('pointermove', mv); th.addEventListener('pointerup', up); th.addEventListener('pointercancel', up);
       });
-      /* نقرُ المجرى: صفحةٌ نحو موضع النقر */
-      sb.addEventListener('pointerdown', e => {
-        if (e.target !== sb) return;
-        e.preventDefault();
-        const r = th.getBoundingClientRect();
-        row.scrollBy({ left: (e.clientX < r.left ? -1 : 1) * row.clientWidth * .8, behavior: 'smooth' });
-      });
+    }
+    const th = sb.firstChild;
+    const sync = () => {
+      if (!strip.isConnected) { sb.remove(); return; }
+      const sw = row.scrollWidth, cw = row.clientWidth, over = sw > cw + 1 && !!strip.offsetParent;
+      sb.classList.toggle('on', over);
+      if (!over) return;
+      const cb = card.getBoundingClientRect(), ox = cb.left + card.clientLeft, oy = cb.top + card.clientTop, rr = row.getBoundingClientRect();
+      const blk = card.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), bb = blk && blk.getBBox();
+      const top = bb ? bb.y : rr.top - oy - 8;
+      const l = Math.max(rr.left - ox, bb ? bb.x + 18 : -1e9), r = Math.min(rr.right - ox, bb ? bb.x + bb.width - 18 : 1e9);
+      Object.assign(sb.style, { top: top + 'px', left: l + 'px', width: Math.max(0, r - l) + 'px' });
+      const tw = r - l, w = Math.max(28, tw * cw / sw), f = Math.min(1, Math.abs(row.scrollLeft) / (sw - cw));
+      th.style.width = w + 'px'; th.style.insetInlineStart = (f * (tw - w)) + 'px';
+    };
+    strip.pkFsbSync = sync;
+    if (!row.pkFsb) {
+      row.pkFsb = 1;
+      row.addEventListener('scroll', () => strip.pkFsbSync && strip.pkFsbSync(), { passive: true });
     }
     sync();
   }

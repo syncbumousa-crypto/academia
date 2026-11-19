@@ -19812,9 +19812,9 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* ===== شريطُ تمرير المجلدات فوقها، رفيعٌ بلا أسهم (‎.pk-fsb‎ — طلبُ صاحب الموقع) ===== */
 .pk-fstrip.pk-lg > .pg-row { scrollbar-width: none; }
 .pk-fstrip.pk-lg > .pg-row::-webkit-scrollbar { display: none; }
-.pk-fstrip > .pk-fsb { display: none; position: relative; height: 4px; margin: 0 6px 8px; border-radius: 99px; background: rgba(127, 127, 127, .14); cursor: pointer; }
-.pk-fstrip.has-fsb > .pk-fsb { display: block; }
-.pk-fstrip > .pk-fsb > i { position: absolute; top: 0; bottom: 0; inset-inline-start: 0; border-radius: 99px; background: rgba(127, 127, 127, .45); cursor: grab; transition: background .15s; }
-.pk-fstrip > .pk-fsb > i:hover, .pk-fstrip > .pk-fsb > i.is-drag { background: rgba(127, 127, 127, .7); }
-.pk-fstrip > .pk-fsb > i.is-drag { cursor: grabbing; }
-.pk-fstrip > .pk-fsb > i::before { content: ''; position: absolute; inset: -6px 0; }   /* مَسكةٌ أعرض من خطّه الرفيع */
+.post > .pk-fsb { display: none; position: absolute; z-index: 3; height: 4px; pointer-events: none; }
+.post > .pk-fsb.on { display: block; }
+.post > .pk-fsb > i { position: absolute; top: 0; bottom: 0; inset-inline-start: 0; border-radius: 0 0 99px 99px; background: rgba(127, 127, 127, .5); cursor: grab; pointer-events: auto; transition: background .15s; }
+.post > .pk-fsb > i:hover, .post > .pk-fsb > i.is-drag { background: rgba(127, 127, 127, .8); }
+.post > .pk-fsb > i.is-drag { cursor: grabbing; }
+.post > .pk-fsb > i::before { content: ''; position: absolute; inset: -2px 0 -8px; }   /* مَسكةٌ أعرض من خطّه الرفيع */
