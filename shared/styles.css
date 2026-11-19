@@ -19680,3 +19680,6 @@ html[data-lang="en"] #card-modal .xt-hd > .cd-bar > .cd-wb .cd-wb__rl { transfor
 .srch-hist__hd { position: sticky; top: -8px; z-index: 1; margin-top: -8px; padding-top: 12px; background: rgb(231, 239, 240); border-radius: 20px 20px 0 0; }
 html[data-theme="dark"] .srch-hist { scrollbar-color: rgba(127, 179, 187, .35) transparent; }
 html[data-theme="dark"] .srch-hist__hd { background: rgb(23, 49, 58); }
+/* لوحُ الفلاتر (وقائمةُ البحث الأخيرة) فوق كلّ شيءٍ تحته: صندوقُ الأدوات طبقتُه ‎2‎ كتبويبِ المادة المختار بعده،
+   فكان التبويبُ يعلو اللوح — فيرتفع الصندوقُ ما دام فيه شيءٌ منفتح (طلبُ صاحب الموقع) */
+html:root .market-tools:has(.filterwrap.is-open, .srch-hist:not([hidden])) { z-index: 80; }
