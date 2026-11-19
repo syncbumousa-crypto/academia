@@ -19914,5 +19914,8 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
    ويُعاد بعد انطواء الكبسولة لا قبله (‎allow-discrete‎ بتأخير مدّة الحركة) فلا تُبتر وهي تنطوي */
 .pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt) { transition: flex-grow .18s ease, background .14s ease, border-color .14s ease, overflow 0s linear .56s; transition-behavior: allow-discrete; }
 .pk-fstrip.pk-lg .pg-box:has(> .pg-face > .pg-cnt:hover) { overflow: visible; position: relative; z-index: 2; transition-delay: 0s, 0s, 0s, 0s; }
+/* وما دام القصُّ مفتوحًا فخلفيّةُ الوجه (عند المرور) تأخذ استدارةَ المربّع بنفسها، لا تظهر زواياها مربّعة */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { border-radius: inherit; }
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { border-start-start-radius: inherit; border-start-end-radius: inherit; }
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
