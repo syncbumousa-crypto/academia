@@ -19795,4 +19795,10 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 .kt tr.is-rowsel { position: relative; z-index: 1; }   /* إطارُ المحدَّد فوق حدِّ جاره الملصوق */
 
 /* والرأسُ وأوّلُ صفٍّ بينهما فسحتُهما الأولى ‎8px‎ دائمًا (طلبُ صاحب الموقع): الرأسُ يُنزل ‎6px‎ نحو الصفوف، والجدولُ يُرفع بقدرها فلا يتحرّك الرأسُ عن مكانه */
-.kt > thead > tr { transform: translateY(6px); }
+/* (الرأسُ صار صفًّا في جسم الجدول ‎.kt-hrow‎ ونزولُه ‎6px‎ يُكتب عليه عند الرسم) */
+
+/* ===== صفوفُ الترويسة المتنقّلة (‎tr.kt-hrow‎) ===== */
+.kt tr.is-rowsel > th { --kt-l: 1.5px solid color-mix(in srgb, var(--u-gold, #c9a25c) 80%, transparent); }
+.kt tr.kt-hrow { position: relative; }
+/* «+ صف ترويسة» لا معنى له إلّا والعرضُ جدوليّ */
+#cm-body .post:not(:has(.kt-view--table)) .cx-plus__it[data-ktaddh] { display: none; }
