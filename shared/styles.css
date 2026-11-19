@@ -19675,3 +19675,8 @@ html[data-theme="dark"] #cm-body .pk--edit .cx-jrk__tg { background: linear-grad
 #card-modal .xt-hd > .cd-bar > .cd-wb .cd-wb__rl { display: block; width: 40px; height: 40px; overflow: visible; fill: none; stroke-linecap: round; }
 html[data-lang="en"] #card-modal .xt-hd > .cd-bar > .cd-wb .cd-wb__rl { transform: scaleX(-1); }
 #card-modal .xt-hd > .cd-bar > .cd-wb:focus-visible { outline: none; }
+/* وقائمةُ البحث الأخيرة ذاتُ مدًى: خمسةُ صفوفٍ تقريبًا ثمّ شريطُ تمريرٍ رفيع، ورأسُها ثابتٌ فوقها (طلبُ صاحب الموقع) */
+.srch-hist { max-height: 300px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(44, 94, 101, .35) transparent; }
+.srch-hist__hd { position: sticky; top: -8px; z-index: 1; margin-top: -8px; padding-top: 12px; background: rgb(231, 239, 240); border-radius: 20px 20px 0 0; }
+html[data-theme="dark"] .srch-hist { scrollbar-color: rgba(127, 179, 187, .35) transparent; }
+html[data-theme="dark"] .srch-hist__hd { background: rgb(23, 49, 58); }

@@ -2354,7 +2354,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويُحفظ البحثُ حين يتمّ: بـ‎Enter‎ أو بمغادرة الحقل وفيه نصّ.
      وفي صدر الحقل عدسةُ البحث نفسُها التي في بحث الدكاترة */
   const SRCH_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>';
-  const SRCH_MAX = 8;
+  const SRCH_MAX = 20;   /* والقائمةُ ذاتُ مدًى ثمّ تُمرَّر — فيُحفظ أكثرُ مما يُرى */
   const searchHist = () => (Array.isArray(state.searchHist) ? state.searchHist : []);
   function searchHistAdd(q) {
     q = String(q || '').trim(); if (q.length < 2) return;
