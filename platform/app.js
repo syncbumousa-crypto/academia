@@ -9784,7 +9784,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkActMode() { try { if (bk2No || window.AC_BOOK2 === false) return ''; } catch (e) { return ''; } return bkModeBtn('cx-actb cx-actmode', 'data-actbk="mode"'); }
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
-    if (!a) return pub ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* لا نشِطة: لا أدوات */
+    if (!a) return pub && !(pkBankOn(id) && !pkSplitOn(id) && pkMidOff[id]) ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* والبنكُ وحدَه في المنشورة بلا «إخفاء الكل» */   /* لا نشِطة: لا أدوات */
     /* وفي النشر بلا مصادر: لا كتابَ يُقلَّب، فلا أدواتَ له (كانت أزرارُ التقليب تظهر دوائرَ خاوية) */
     if (a === 'book' && pub && !pkSrcAny(id)) return '';
     /* والإضافةُ مستطيلٌ بزوايا مستديرة ونصُّه بحسب المساحة الملموسة (طلبُ صاحب الموقع): «إضافة أول مصدر / مجلد / سؤال» */
@@ -9805,6 +9805,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return `<div class="cx-ftr2 chtools cx-srctools">${hd}</div><div class="cx-ftc"></div><div class="cx-ftl2">${pkActMode()}</div>`;
     }
     /* وفي النشر (قراءة): الكتابُ أدواتُه، وما سواه «إخفاء الكل» — لا إضافةَ ولا مقسوم */
+    if (pub && a === 'bank') return '';   /* ولا «إخفاء الكل» في بنك المنشورة (طلبُ صاحب الموقع) */
     if (pub) return `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>`;
     /* ومقسومُ «قائمة · رحلة» يخصّ شجرةَ البنك وحدها: في الخانة مع أدواته، ولا يظهر إلّا والبنكُ نشِط (طلبُ صاحب الموقع) */
     /* والمقسومُ يسارَ «+» (بعده في الترتيب)، ولا يظهر إلّا وفي البنك شيء (طلبُ صاحب الموقع) */
