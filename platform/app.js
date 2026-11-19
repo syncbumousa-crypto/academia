@@ -11367,7 +11367,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const cb = card.getBoundingClientRect(), ox = cb.left + card.clientLeft, oy = cb.top + card.clientTop, rr = row.getBoundingClientRect();
       const blk = card.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), bb = blk && blk.getBBox();
       const top = bb ? bb.y : rr.top - oy - 8;
-      const l = Math.max(rr.left - ox, bb ? bb.x + 18 : -1e9), r = Math.min(rr.right - ox, bb ? bb.x + bb.width - 18 : 1e9);
+      let l = Math.max(rr.left - ox, bb ? bb.x + 18 : -1e9), r = Math.min(rr.right - ox, bb ? bb.x + bb.width - 18 : 1e9);
+      /* ويقف قبل أيقونةٍ على سطره (أيقونةُ الملخّص في زاوية المساحة وزرُّ تبديل عرضه) بفسحةٍ: لا يتداخل معها (طلبُ صاحب الموقع) */
+      card.querySelectorAll('.pk-blkh__ic, .pk-icrow .pk-ic').forEach(ic => {
+        const q = ic.getBoundingClientRect(); if (!q.width) return;
+        const qt = q.top - oy, qb = q.bottom - oy, qx = (q.left + q.right) / 2 - ox;
+        if (qb < top - 6 || qt > top + 30) return;
+        if (qx > (l + r) / 2) r = Math.min(r, q.left - ox - 12); else l = Math.max(l, q.right - ox + 12);
+      });
       Object.assign(sb.style, { top: top + 'px', left: l + 'px', width: Math.max(0, r - l) + 'px' });
       const tw = r - l, w = Math.max(28, tw * cw / sw), f = Math.min(1, Math.abs(row.scrollLeft) / (sw - cw));
       th.style.width = w + 'px'; th.style.insetInlineStart = (f * (tw - w)) + 'px';
@@ -24760,7 +24767,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
     }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
-      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;
+      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
+    if (!card.pkFsbRaf) card.pkFsbRaf = requestAnimationFrame(() => { card.pkFsbRaf = 0; card.querySelectorAll('.pk-fstrip').forEach(x => x.pkFsbSync && x.pkFsbSync()); });
   }
   /* ===== الانطلاقُ من الذيل والعودةُ إليه (ROADMAP-PANEFX · المرحلتان ١–٢) =====
      محرّكٌ واحد: حلقةُ ‎requestAnimationFrame‎ قصيرةٌ تحسب لكلّ منطقةٍ لسانَها في كلّ إطار — قامتُه (‎lv‎: صفرٌ في الذيل، وواحدٌ قامتُه
