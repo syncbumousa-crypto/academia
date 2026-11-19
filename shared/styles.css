@@ -16722,7 +16722,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
    اسمه — إلّا الاسمَ الطويلَ جدًّا فيُختصر عند ‎220px‎ (ويُقرأ كاملًا عند التحويم) */
 .pk-fstrip.pk-lg .pg-box,
 .pk-fstrip.pk-lg .pg-in .pg-box {
-  --pk-need: 140px; flex: 1 1 0; min-width: min(var(--pk-need), 220px); max-width: 100%; overflow: visible; align-self: stretch;
+  --pk-need: 220px; flex: 1 1 0; min-width: min(var(--pk-need), 220px);   /* ‎220‎ قبل أن يُقاس الاسم (كان ‎140‎ فينضغط المجلدُ الجديدُ تحت اسمه) */ max-width: 100%; overflow: visible; align-self: stretch;
   border: 0; border-radius: 19px; background: var(--lgx-bg); box-shadow: var(--lgx-rim), var(--lgx-out);
 }
 /* ق٢: مفتوحٌ في الصفّ ⇐ إخوتُه على قدر أسمائهم حتى ‎160px‎ (لا تُضغط: إن لم يسعهم الصفُّ مُرِّر)، وهو يأخذ الباقي */

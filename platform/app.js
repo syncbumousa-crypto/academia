@@ -11325,11 +11325,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يُحسب بعد كلّ رسمٍ للشريط وعند تغيّر النافذة وبعد تحميل الخطّ */
   let pkFitRaf = 0;
   const pkFitSoon = () => { if (!pkFitRaf) pkFitRaf = requestAnimationFrame(() => { pkFitRaf = 0; document.querySelectorAll('#cm-body .pk-lg').forEach(pkFit); }); };
+  let pkFitRo = null;
   function pkFit(strip) {
+    /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى
+       أصغرَ من الاسم وينضغط المربّعُ إلى «مجلـ…» بدل أن يفيض الصفُّ ويظهر شريطُ تمريره (طلبُ صاحب الموقع) */
     strip.querySelectorAll('.pg-box:not(.is-wide)').forEach(b => {
       const nm = b.querySelector(':scope > .pg-face > .pg-nm');
-      if (nm) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 1) + 'px');
+      if (nm && nm.scrollWidth) b.style.setProperty('--pk-need', Math.ceil(nm.scrollWidth + 16 + 8 + 32 + 4) + 'px');
     });
+    /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
+    if (window.ResizeObserver && !strip.pkRo) {
+      pkFitRo = pkFitRo || new ResizeObserver(es => es.forEach(e => { const t = e.target; if (t.isConnected && e.contentRect.width && (t.pkFitW || 0) !== Math.round(e.contentRect.width)) { t.pkFitW = Math.round(e.contentRect.width); pkFit(t); } }));
+      strip.pkRo = 1; pkFitRo.observe(strip);
+    }
     /* ق٥: كلُّ لوحٍ يأكل ‎12px‎ من عرض ما فيه، فيختنق العمقُ في الجوّال. فاللوحُ الذي ضاق عن ‎360px‎
        يُسطَّح (‎is-flat‎): لا سطحَ ولا حشوة، وخيطٌ بلونه على جانبه يصل أبناءه به — فيأخذون عرضَه كلَّه.
        من الأعلى إلى الأسفل: تسطيحُ الأب يوسّع الابن، فقد لا يحتاج هو إليه */
