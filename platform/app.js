@@ -29370,6 +29370,11 @@ void main() {
     if (!st || !T || !T.offsetParent) return;
     const D = 620, E = 'cubic-bezier(.22, 1, .36, 1)';
     const h1 = T.getBoundingClientRect().height;
+    /* الشريطُ يبدأ تنفّسَه أوّلًا، ثمّ تُقاس المواضعُ الجديدة وهو على قامته القديمة: فالتبويبُ الذي يتوسّط محتواه يُقاس كما
+       يُرى في أوّل إطار (كانت تُقاس على القامة الجديدة فيبدأ المحتوى مزاحًا، وقد يلامس أعلى الشريط) */
+    /* بلا قصٍّ أصلًا (كان ‎overflow: hidden‎ — طلبُ صاحب الموقع): وما يذوب من الوجوه أو يطلع منها يُرى كاملًا وإن جاوز
+       حافّتَه لحظةً — كان يُبتر وهو يتحرّك */
+    if (Math.abs(h1 - st.h0) > .5) T.animate([{ height: st.h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: E });
     T.querySelectorAll('button[data-tab]').forEach(b => {
       const o = st.old[b.dataset.tab]; if (!o) return;
       if (o.fc) {
@@ -29389,7 +29394,6 @@ void main() {
       b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
         { duration: D * .8, delay: D * .25 + i * 45, easing: 'cubic-bezier(.22, 1.35, .36, 1)', fill: 'backwards' }));
     });
-    if (Math.abs(h1 - st.h0) > .5) T.animate([{ height: st.h0 + 'px', overflow: 'hidden' }, { height: h1 + 'px', overflow: 'hidden' }], { duration: D, easing: E });
   }
 
   /* من السوق: الواجهة داخل النافذة المنبثقة (لم يعد يُستخدم من السوق — مبقى للاستدعاءات الأخرى) */
