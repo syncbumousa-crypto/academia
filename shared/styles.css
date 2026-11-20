@@ -20006,3 +20006,7 @@ html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26,
 .pk-vdots.pk-varc.pk-varc--bk { top: -8px; inset-inline-start: -10px; }
 /* وأيقونةُ المساحة وقوسُها فوق الصفحات المكبَّرة دائمًا */
 .pk-src:has(.is-scr) > .pk-blkh { z-index: 5; }
+/* قوسُ تبديل طريقة العرض في أعلى طبقة دائمًا (طلبُ صاحب الموقع): رأسُ المساحة فوق كلّ ما فيها — الكتابِ ثلاثيِّ الأبعاد
+   والصفحاتِ المتتالية المكبَّرة وحبّةِ التقريب وشريطَي التمرير — والقوسُ فوق رأسها */
+#cm-body .pk-split > .pk-src > .pk-blkh { z-index: 30; }
+#cm-body .pk-vdots.pk-varc.pk-varc--bk { z-index: 40; }
