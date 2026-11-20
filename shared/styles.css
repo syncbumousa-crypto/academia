@@ -19961,7 +19961,11 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
 /* ===== الكتابُ صفحاتٍ متتالية (‎bkScrOn‎ · طلبُ صاحب الموقع) =====
    الورقُ مسطَّحٌ بعضُه تحت بعض في عمودٍ بعرضٍ مقروء، يُمرَّر داخل مساحة الكتاب نفسِها. والمسرحُ ثلاثيُّ الأبعاد يبقى في
    مكانه خفيًّا (‎visibility‎ لا ‎display‎) فلا تتغيّر مقاساتُ المساحة التي يُحسب منها كلُّ شيء */
-.is-scr { position: relative; }
+/* والقائمةُ تملأ المساحةَ كلَّها إلى حوافّها (طلبُ صاحب الموقع): وعاءُ العرض لا يكون مرجعَها بل المساحةُ نفسُها، فلا يبقى إطارٌ
+   من حاشيتها حول الصفحات المكبَّرة، والشريطان على حافّتَي المساحة (يسارًا وتحت) فوق الورق. وتُستدار بقدّ الكتلة (‎PK_BAND_R‎) */
+#cm-body .pk-src__view.is-scr { position: static; }
+#cm-body .pk-src:has(> .pk-src__view.is-scr) > .pk-src__view { position: static; }
+.pk-src .is-scr > .cbk-scr { border-radius: 14px; padding-inline: 0; }
 .is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
 .cbk-scr { position: absolute; inset: 0; z-index: 1; overflow: auto; overscroll-behavior: contain;
   display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 14px 22px; outline: none;
