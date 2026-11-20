@@ -19828,8 +19828,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 #cm-body.pk-sbhide .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar { display: none; }
 /* و‎scrollbar-color‎ لفايرفوكس وحده: كروم إن رآها ترك الشريطَ الرفيعَ المرسوم (‎::-webkit-scrollbar‎) إلى شريطه العريض — فيتغيّر العرض */
 @supports not selector(::-webkit-scrollbar) { .pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-color: transparent transparent; } }
-.pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar-thumb,
-.pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar-track { background: transparent !important; border-color: transparent !important; }
+.pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src, .cbk-scr)::-webkit-scrollbar-thumb,
+.pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src, .cbk-scr)::-webkit-scrollbar-track { background: transparent !important; border-color: transparent !important; }
 /* ===== مجلداتُ الملخّص تنزل تحت أيقونة المساحة (طلبُ صاحب الموقع) =====
    الأيقونةُ في زاوية المساحة على مستوى المجلدات، فإذا مُرِّر الصفُّ دخل أوّلُها تحتها فبدا مغطًّى. فالمجلداتُ تنزل تحتها
    وتمتدّ إلى حافّة المساحة اليمنى كما تمتدّ إلى اليسرى (لا تشارك الأيقونةَ سطرها) */
@@ -19960,3 +19960,30 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
 #cm-body .pk--pc .pc-art:hover .pc-cvbar, #cm-body .pk--pc .pc-cvbar:focus-visible { transform: none; }
 #cm-body .pk--pc .pc-cvbar:focus-visible { outline: none; }
 @media (hover: none) { #cm-body .pk--pc .pc-cvbar { transform: none; } }
+
+/* ===== الكتابُ صفحاتٍ متتالية (‎bkScrOn‎ · طلبُ صاحب الموقع) =====
+   الورقُ مسطَّحٌ بعضُه تحت بعض في عمودٍ بعرضٍ مقروء، يُمرَّر داخل مساحة الكتاب نفسِها. والمسرحُ ثلاثيُّ الأبعاد يبقى في
+   مكانه خفيًّا (‎visibility‎ لا ‎display‎) فلا تتغيّر مقاساتُ المساحة التي يُحسب منها كلُّ شيء */
+.is-scr { position: relative; }
+.is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
+.cbk-scr { position: absolute; inset: 0; z-index: 3; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
+  display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 14px 22px; outline: none;
+  scrollbar-width: thin; scrollbar-color: rgba(20, 35, 63, .25) transparent; }
+html[data-theme="dark"] .cbk-scr { scrollbar-color: rgba(255, 255, 255, .2) transparent; }
+.cbk-scr::-webkit-scrollbar { width: 4px; }
+.cbk-scr::-webkit-scrollbar-track { background: transparent; margin-block: 18px; }
+.cbk-scr::-webkit-scrollbar-thumb { background: rgba(20, 35, 63, .22); border-radius: 99px; }
+html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .18); }
+/* رقمُ الصفحة يلتصق بأعلى المساحة فوق الورق */
+.cbk-scr__ind { position: sticky; top: 8px; z-index: 2; flex: none; align-self: center; margin: 8px 0 -4px; padding: 3px 11px;
+  font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #3d4b57; border-radius: 99px;
+  background: rgba(255, 255, 255, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 2px 8px -3px rgba(0, 0, 0, .25); }
+/* الرقمُ كرقم الكتاب: الجزءُ يمينًا والكلُّ يسارًا في العربيّة */
+html[data-theme="dark"] .cbk-scr__ind { color: #c9d3d6; background: rgba(20, 26, 28, .62); }
+.cbk-scr__pg { flex: none; width: min(100%, 780px); position: relative; overflow: hidden; border-radius: 3px;
+  background: #fbf8f1; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
+.cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
+  background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
+.cbk-scr__pg > canvas { display: block; width: 100%; height: 100%; }
+/* ولا لوحَ صفوفٍ للتظليل في التمرير: التظليلُ يُرسم على الكتاب */
+.post.bk-scroll .cx-hlrail { visibility: hidden; pointer-events: none; }

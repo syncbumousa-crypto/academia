@@ -1271,7 +1271,7 @@
       termSettings: 'إعدادات الترم', termNameLabel: 'اسم الترم', delTermBtn: 'حذف الترم',
       termCourses: 'مواد الترم', noCourses: 'لا مواد في هذا الترم بعد',
       termHint: 'أضف مواد إلى ترمك من + بالأعلى.',
-      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkLn: 'لغة المحتوى', pkLnAll: 'للكل', pkLnPick: 'اختر مستطيلًا لتحويل لغته، أو أشّر «للكل»', ktR: { up: 'تحريك لأعلى', dn: 'تحريك لأسفل', swap: 'تبديل مع صف آخر', num: 'نقل لرقم آخر', jup: 'دمج مع الصف الأعلى', jdn: 'دمج مع الصف الأسفل', sup: 'فصل عن الصف الأعلى', sdn: 'فصل عن الصف الأسفل', nr: 'غير مطلوب', y: 'تلوين أصفر', g: 'تلوين أخضر', b: 'تلوين أزرق', del: 'حذف الصف', ask: 'رقم الصف', tm: 'زمن لهذا الصف', tmM: 'د', tmS: 'ث' }, pkAwaitT: 'هنا يظهر الملخص', pkAwaitB: 'يمكنك من الأعلى اختيار المجلد المطلوب', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', cmPick: 'اختر قسمًا من فوق لتظهر مساهماته', pkSrcGenCov: 'غلاف المادة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد', pkPlusKC: 'بطاقة', pkPlusKH: 'صف ترويسة', pkPlusKHh: 'أسماء أعمدة جديدة في أي مكان من الجدول', cxJrView: 'طريقة العرض', pkPlusKFh: 'فصل أو موضوع', pkPlusKCh: 'مصطلح ومعناه', pkPlusQFh: 'مجموعة أسئلة', pkPlusQCh: 'متعدّد · وجهين · فراغ', pkPlusQF: 'مجلد', pkPlusQC: 'سؤال', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'اسم العمود 1', 'اسم العمود 2', ''], ktFacePh: ['المصطلح', 'معناه'], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
+      chapter: 'شابتر', pkStripAddHint: 'أضف مجلدًا من زرّ «+» تحت — يظهر هنا', pkLn: 'لغة المحتوى', pkLnAll: 'للكل', pkLnPick: 'اختر مستطيلًا لتحويل لغته، أو أشّر «للكل»', ktR: { up: 'تحريك لأعلى', dn: 'تحريك لأسفل', swap: 'تبديل مع صف آخر', num: 'نقل لرقم آخر', jup: 'دمج مع الصف الأعلى', jdn: 'دمج مع الصف الأسفل', sup: 'فصل عن الصف الأعلى', sdn: 'فصل عن الصف الأسفل', nr: 'غير مطلوب', y: 'تلوين أصفر', g: 'تلوين أخضر', b: 'تلوين أزرق', del: 'حذف الصف', ask: 'رقم الصف', tm: 'زمن لهذا الصف', tmM: 'د', tmS: 'ث' }, pkAwaitT: 'هنا يظهر الملخص', pkAwaitB: 'يمكنك من الأعلى اختيار المجلد المطلوب', pkFoldName: 'اسم المجلد', pkStripEmpty: 'لا مجلدات فيها بطائق بعد', pkViewBar: 'طريقة العرض', pkView_folder: 'العرض المجلّدي', pkViewQb: 'بنك الأسئلة', pkQbEmpty: 'بنك الأسئلة فارغ', pkView_source: 'المصدر', pkSrcBtn: 'حمّل ملف المصدر PDF', pkSrcPagesT: 'صفحات المصدر', pkSrcCovT: 'غلاف المصدر', pkSrcCovAdd: 'أضف غلاف المصدر', pkSrcCovBtn: 'حمّل غلاف المصدر', pkSrcNone: 'لا يوجد مصادر', pkQbNone: 'لا يوجد أسئلة', pkEsSrcT: 'مصادر التلخيص', pkEsSrcP: 'انقر هنا لتضع المصادر التي تنوي استعمالها في تلخيصك', pkEsSrcB: 'أول مصدر', pkEsMidT: 'الملخص', pkEsMidP: 'انقر هنا لتلخّص المادة، وتستطيع استعراض ملخصك بشكلٍ شجريّ أو جدوليّ أو كبطائق', pkEsMidB: 'أول فصل', pkEsQbT: 'بنك الأسئلة', pkEsQbP: 'انقر هنا لتضع الأسئلة التي تختبر الفهم، ويمكنك ربطها ببطائق الملخص', pkEsQbB: 'أول سؤال', pkBlkClose: 'إغلاق', pkNone: 'اختر ما تريد العمل عليه من الأزرار العلوية', pkNonePub: 'قم بالنقر على المساحة المرغوب بها من الأزرار العلوية', pkFoldPh: 'هنا تظهر مجلدات الملخص', pkFoldNone: 'لا يوجد مجلدات للملخص', pkMidNone: 'لا يوجد ملخص', pkIcGo: 'ابدأ بـ', pkAddFirstSrc: 'إضافة أول مصدر', pkAddOtherSrc: 'إضافة مصدر آخر', pkSrcAdd: 'إضافة مصدر', pkSrcAddS: 'مصدر', pkSrcChCov: 'تغيير الغلاف', pkSrcChType: 'تغيير النوع', pkSrcDelConf: 'اضغط مرة ثانية للتأكيد', pkSrcDelS: 'حذف', pkSrcOf: 'من', pkSrcUpImg: 'رفع صورة', cmPick: 'اختر قسمًا من فوق لتظهر مساهماته', pkSrcGenCov: 'غلاف المادة', pkTyBook: 'كتاب', pkTyQ: 'بنك أسئلة', pkTyNote: 'ملزمة', pkTySlide: 'شرائح المحاضرة', pkTyExam: 'اختبارات سابقة', pkTyOther: 'آخر', pkSrcAll: 'المصادر', pkSrcThis: 'هذا المصدر', pkSrcSwap: 'استبدال الملف', pkSrcDelT: 'حذف المصدر', pkSrcCovDel: 'إزالة الغلاف', pkAddFirstFold: 'إضافة أول مجلد', pkAddFirstQ: 'إضافة أول سؤال', pkAddMore: 'إضافة', pkSplTip: 'اسحب لتغيير المساحة بين الكتاب وجاره — نقرتان للرجوع', pkActQ: 'أضف سؤالًا إلى البنك', pkActF: 'أضف مجلدَ أسئلة', pkActKF: 'أضف مجلدَ معرفة', pkPlusKF: 'مجلد', pkPlusKC: 'بطاقة', pkPlusKH: 'صف ترويسة', pkPlusKHh: 'أسماء أعمدة جديدة في أي مكان من الجدول', cxJrView: 'طريقة العرض', pkPlusKFh: 'فصل أو موضوع', pkPlusKCh: 'مصطلح ومعناه', pkPlusQFh: 'مجموعة أسئلة', pkPlusQCh: 'متعدّد · وجهين · فراغ', pkPlusQF: 'مجلد', pkPlusQC: 'سؤال', ppDel: 'حذف هذه البطاقة؟', pkLnk: 'ربط الصفحات', pkLnkCount: '{a} من {b} مربوطة', pkLnkNone: 'لا مجلدات في المساهمة بعد', pkLnkAdd: '+ اربط', pkLnkPick: 'اختر مجلدًا لتحدّد صفحاته', pkLnkFrom: 'من صفحة', pkLnkTo: 'إلى صفحة', pkLnkFromL: 'من', pkLnkToL: 'إلى', pkLnkSave: 'تم', pkLnkOpenBook: 'افتح الكتاب على الصفحة', pkView_tree: 'العرض الشجري', pkView_cards: 'العرض البطاقي', pkView_table: 'العرض الجدولي', pkViewSoon: 'قريبًا', ktAdd: 'معرفة', kcvFit: 'ملاءمة الكلّ', kcvDelMany: 'حذف {n} بطائق من المجلد؟ يمكن التراجع بـ Ctrl+Z', ktHead: ['#', 'اسم العمود 1', 'اسم العمود 2', ''], ktFacePh: ['المصطلح', 'معناه'], ktRow: ['1', 'مصطلح', '', ''], ktAddAria: 'أضف جدول معرفة', ktEmpty: 'لا جداول معرفة في هذا المجلد بعد', hdUp: 'أخفِ الرأس', hdDown: 'أظهِر الرأس', pkHideAll: 'إخفاء الكل', ftDown: 'أخفِ أزرار القاع', ftUp: 'أظهِر أزرار القاع', cxMaxOn: 'تكبير المساهمة', cxFullOn: 'ملء الشاشة', cxShrink: 'تضييق', cxMaxOff: 'تصغير المساهمة', chUp: 'أضف صفحات الكتاب', chUpHint: 'ملف PDF', chPages: 'صفحات الكتاب', chCov: 'الغلاف', chCovAdd: 'أضف الغلاف', chCovHint: 'صورة أو PDF', chCovReplace: 'استبدال الغلاف', chCovBad: 'الغلاف صورة أو PDF فقط', chEmpty: 'أضف صفحات الكتاب ليظهر هنا', bkCover: 'الغلاف — اضغط لتفتح', bkClose: 'أغلق الكتاب', bkOne: 'صفحة واحدة', bkTwo: 'صفحتان', bkScroll: 'صفحات متتالية', bkVwBar: 'طريقة عرض الكتاب', hlArmT: 'افتح الصف {n} — ما تظلّله بعدها يدخله', hlRail: 'صفوف الجدول — مرّر لتختار الصف الذي يدخله التظليل', hlToolT: 'قلم التظليل', hlToolBox: 'مربع التحديد — ارسم مربعًا على الصفحة', hlArmOff: 'إيقاف {n}', hlIn: 'أضف التظليل إلى {n}', hlOut: 'أخرج التظليل من {n}', hlDel: 'حذف التظليل', hlRowN: 'رقم الصف — غيّره لتنقل التظليل أو امسحه لتفكّه', hlInk: 'لون الحبر', chReplace: 'استبدال', chRemove: 'إزالة', chBadPdf: 'تعذّر فتح الملف — قد يكون تالفًا', chNotPdf: 'الملف ليس PDF', chSaveFail: 'تعذّر حفظ الملف في المتصفّح', chLoading: 'يُحمَّل المصدر…', chMissing: 'الملف غير موجود في هذا المتصفّح — ارفعه من جديد', infoSec: 'المادة', shortName: 'الاسم المختصر:', fullName: 'الاسم التفصيلي:',
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
@@ -1742,7 +1742,7 @@
       termSettings: 'Term settings', termNameLabel: 'Term name', delTermBtn: 'Delete term',
       termCourses: 'Term courses', noCourses: 'No courses in this term yet',
       termHint: 'Add courses to your term from + above.',
-      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkLn: 'Content language', pkLnAll: 'All', pkLnPick: 'Pick a rectangle to switch it, or tick «All»', ktR: { up: 'Move up', dn: 'Move down', swap: 'Swap with another row', num: 'Move to another number', jup: 'Join with the row above', jdn: 'Join with the row below', sup: 'Split from the row above', sdn: 'Split from the row below', nr: 'Mark as not required', y: 'Colorize yellow', g: 'Colorize green', b: 'Colorize blue', del: 'Remove this row', ask: 'Row number', tm: 'Time for this row', tmM: 'm', tmS: 's' }, pkAwaitT: 'The summary shows here', pkAwaitB: 'Pick a folder above', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', cmPick: 'Choose a section above to see its contributions', pkSrcGenCov: 'Course cover', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Folder', pkPlusKC: 'Card', pkPlusKH: 'Header row', pkPlusKHh: 'New column names anywhere in the table', cxJrView: 'View', pkPlusKFh: 'A chapter or topic', pkPlusKCh: 'A term and its meaning', pkPlusQFh: 'A group of questions', pkPlusQCh: 'Choice · two-sided · blank', pkPlusQF: 'Folder', pkPlusQC: 'Question', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'COLUMN 1', 'COLUMN 2', ''], ktFacePh: ['TERM', 'WHAT IT MEANS'], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
+      chapter: 'Chapter', pkStripAddHint: 'Add a folder with the + button below — it appears here', pkLn: 'Content language', pkLnAll: 'All', pkLnPick: 'Pick a rectangle to switch it, or tick «All»', ktR: { up: 'Move up', dn: 'Move down', swap: 'Swap with another row', num: 'Move to another number', jup: 'Join with the row above', jdn: 'Join with the row below', sup: 'Split from the row above', sdn: 'Split from the row below', nr: 'Mark as not required', y: 'Colorize yellow', g: 'Colorize green', b: 'Colorize blue', del: 'Remove this row', ask: 'Row number', tm: 'Time for this row', tmM: 'm', tmS: 's' }, pkAwaitT: 'The summary shows here', pkAwaitB: 'Pick a folder above', pkFoldName: 'Folder name', pkStripEmpty: 'No folders with cards yet', pkViewBar: 'View', pkView_folder: 'Folder view', pkViewQb: 'Question bank', pkQbEmpty: 'The question bank is empty', pkView_source: 'Source', pkSrcBtn: 'Upload the source PDF', pkSrcPagesT: 'Source pages', pkSrcCovT: 'Source cover', pkSrcCovAdd: 'Add source cover', pkSrcCovBtn: 'Upload the source cover', pkSrcNone: 'No sources', pkQbNone: 'No questions', pkEsSrcT: 'Summary sources', pkEsSrcP: 'Click here to add the sources you plan to use in your summary', pkEsSrcB: 'First source', pkEsMidT: 'The summary', pkEsMidP: 'Click here to summarize the course, and view your summary as a tree, a table or cards', pkEsMidB: 'First chapter', pkEsQbT: 'Question bank', pkEsQbP: 'Click here to add questions that test understanding, and link them to your summary cards', pkEsQbB: 'First question', pkBlkClose: 'Close', pkNone: 'Choose what to work on from the buttons above', pkNonePub: 'Click the space you want from the buttons above', pkFoldPh: 'Your summary folders appear here', pkFoldNone: 'No summary folders', pkMidNone: 'No summary', pkIcGo: 'Start with', pkAddFirstSrc: 'Add the first source', pkAddOtherSrc: 'Add another source', pkSrcAdd: 'Add source', pkSrcAddS: 'Source', pkSrcChCov: 'Change cover', pkSrcChType: 'Change type', pkSrcDelConf: 'Press again to confirm', pkSrcDelS: 'Delete', pkSrcOf: 'of', pkSrcUpImg: 'Upload image', cmPick: 'Choose a section above to see its contributions', pkSrcGenCov: 'Course cover', pkTyBook: 'Book', pkTyQ: 'Question bank', pkTyNote: 'Notes', pkTySlide: 'Lecture slides', pkTyExam: 'Past exams', pkTyOther: 'Other', pkSrcAll: 'Sources', pkSrcThis: 'This source', pkSrcSwap: 'Replace file', pkSrcDelT: 'Delete source', pkSrcCovDel: 'Remove cover', pkAddFirstFold: 'Add the first folder', pkAddFirstQ: 'Add the first question', pkAddMore: 'Add', pkSplTip: 'Drag to resize the book and its neighbour — double-click to reset', pkActQ: 'Add a question to the bank', pkActF: 'Add a question folder', pkActKF: 'Add a knowledge folder', pkPlusKF: 'Folder', pkPlusKC: 'Card', pkPlusKH: 'Header row', pkPlusKHh: 'New column names anywhere in the table', cxJrView: 'View', pkPlusKFh: 'A chapter or topic', pkPlusKCh: 'A term and its meaning', pkPlusQFh: 'A group of questions', pkPlusQCh: 'Choice · two-sided · blank', pkPlusQF: 'Folder', pkPlusQC: 'Question', ppDel: 'Delete this card?', pkLnk: 'Link pages', pkLnkCount: '{a} of {b} linked', pkLnkNone: 'No folders in this contribution yet', pkLnkAdd: '+ Link', pkLnkPick: 'Pick a folder to set its pages', pkLnkFrom: 'From page', pkLnkTo: 'To page', pkLnkFromL: 'From', pkLnkToL: 'To', pkLnkSave: 'Done', pkLnkOpenBook: 'Open the book at the page', pkView_tree: 'Tree view', pkView_cards: 'Cards view', pkView_table: 'Table view', pkViewSoon: 'coming soon', ktAdd: 'Knowledge', kcvFit: 'Fit all', kcvDelMany: 'Delete {n} cards from this folder? You can undo with Ctrl+Z', ktHead: ['#', 'COLUMN 1', 'COLUMN 2', ''], ktFacePh: ['TERM', 'WHAT IT MEANS'], ktRow: ['1', 'Finance', '', ''], ktAddAria: 'Add a knowledge table', ktEmpty: 'No knowledge tables in this folder yet', hdUp: 'Hide header', hdDown: 'Show header', pkHideAll: 'Hide all', ftDown: 'Hide bottom tools', ftUp: 'Show bottom tools', cxMaxOn: 'Expand contribution', cxFullOn: 'Full screen', cxShrink: 'Shrink', cxMaxOff: 'Collapse contribution', chUp: 'Add book pages', chUpHint: 'PDF file', chPages: 'Book pages', chCov: 'Cover', chCovAdd: 'Add cover', chCovHint: 'Image or PDF', chCovReplace: 'Replace cover', chCovBad: 'Cover must be an image or PDF', chEmpty: 'Add the book pages to see it here', bkCover: 'Cover — tap to open', bkClose: 'Close the book', bkOne: 'Single page', bkTwo: 'Two pages', bkScroll: 'Scrolling pages', bkVwBar: 'Book view', hlArmT: 'Open row {n} — your next highlights go into it', hlRail: 'Table rows — scroll to pick the row highlights go into', hlToolT: 'Highlighter', hlToolBox: 'Box select — draw a box on the page', hlArmOff: 'Stop {n}', hlIn: 'Add the highlight to {n}', hlOut: 'Take the highlight out of {n}', hlDel: 'Delete highlight', hlRowN: 'Row number — change it to move the highlight, clear it to unlink', hlInk: 'Ink colour', chReplace: 'Replace', chRemove: 'Remove', chBadPdf: 'Could not open this file — it may be damaged', chNotPdf: 'That file is not a PDF', chSaveFail: 'Could not save the file in this browser', chLoading: 'Loading source…', chMissing: 'File not found in this browser — upload it again', infoSec: 'Course', shortName: 'Short name:', fullName: 'Detailed name:',
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
@@ -9922,8 +9922,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   const pkActB = (attr, ic, tip, cls = '') => `<button type="button" class="cx-actb${cls}" ${attr} title="${esc(tip)}" aria-label="${esc(tip)}"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></button>`;
   /* زرُّ «صفحة واحدة ⇄ صفحتان» في التذييل — لكتاب WebGL وحده (القديمُ يختار بعرضه) */
-  function pkActHl(id) { try { return pkActMode() ? hlBarHTML(id) : ''; } catch (e) { return ''; } }
-  function pkActMode() { try { if (bk2No || window.AC_BOOK2 === false) return ''; } catch (e) { return ''; } return bkModeBtn('cx-actb cx-actmode', 'data-actbk="mode"'); }
+  const bk2On = () => { try { return !(bk2No || window.AC_BOOK2 === false); } catch (e) { return false; } };
+  function pkActHl(id) { try { return bk2On() ? hlBarHTML(id) : ''; } catch (e) { return ''; } }
+  /* زرُّ الوضع في التذييل رُفع: صار قوسًا على زاوية أيقونة المساحة (‎pkBkArc‎) */
+  function pkActMode() { return ''; }
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
     if (!a) return pub && !(pkBankOn(id) && !pkSplitOn(id) && pkMidOff[id]) ? `<button type="button" class="pk-hideall" data-pkhideall>${esc(T().pkHideAll)}</button>` : '';   /* والبنكُ وحدَه في المنشورة بلا «إخفاء الكل» */   /* لا نشِطة: لا أدوات */
@@ -10350,6 +10352,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + P('pk-varc__hit') + P('pk-varc__bg')
       + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
       + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(from * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, from !== cur ? ' data-move="1"' : '')
+      + `</svg></button>`;
+  };
+  /* قوسُ الكتاب: قوسُ الملخّص نفسُه على زاوية أيقونة المساحة، ثلاثُ قطعٍ للطرق الثلاث، والضغطُ ينقل إلى التالية.
+     ‏‎from‎ موضعُ الذهبيّة قبل التبديل فتنزلق منه */
+  let bkArcPrev = null;
+  const pkBkArc = (id, from) => {
+    const cur = Math.max(0, BK_MODES.indexOf(bkModeGet())), nx = BK_MODES[(cur + 1) % 3];
+    const fr = from != null && from !== cur && !bkReduce() ? from : cur;
+    const nm = k => k === 'two' ? T().bkTwo : k === 'one' ? T().bkOne : T().bkScroll;
+    const P = (cls, st, extra = '') => `<path class="${cls}" pathLength="300" d="${PK_VA_D}"${st ? ` style="${st}"` : ''}${extra}/>`;
+    return `<button type="button" class="pk-vdots pk-varc pk-varc--bk" data-bkvw="${nx}" data-pkid="${esc(id)}" title="${esc(nm(nx))}" aria-label="${esc(T().bkVwBar + ' · ' + nm(nx))}">`
+      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + P('pk-varc__hit') + P('pk-varc__bg')
+      + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
+      + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(fr * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, fr !== cur ? ' data-move="1"' : '')
       + `</svg></button>`;
   };
   const pkVwOf = id => {
@@ -11425,7 +11442,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لمسُ مساحةٍ أخرى يُجري حركةَ التبديل (‎pk--fxrun‎)، وكان الشريطُ يُنزع أثناءها فيستردّ المحتوى عرضَه ثم يردّه:
      يُعاد كسرُ أسطر الجدول لجزءٍ من الثانية. فصار الشريطُ يُثبَّت على حاله قبلها — من كان له شريطٌ بقي له (شفّافًا)
      ومن لم يكن له لم يظهر له — ويُرفع التثبيتُ بعد أن تقف */
-  const PK_SB_SEL = '.pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)';
+  const PK_SB_SEL = '.pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src, .cbk-scr)';
   function pkSbFreeze(card, on) {
     if (!card) return;
     if (on) {
@@ -12688,11 +12705,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const old = pkSrcBk[id], covKey = cv ? pkSrcCovKey(id) : null, covPg = (meta && meta.covPg) || 1;
       if (old && old.el && old.view === view && old.el.isConnected) return;   /* مركَّبٌ هنا أصلًا */
       /* وكتابُ WebGL الذي أُطفئ بعد طول غيابه لا يُنقل: يُبنى من جديد على موضعه المحفوظ */
-      if (old && old.el && old.doc === doc && old.covKey === covKey && (old.covPg || 1) === covPg && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead) && (old.gl === undefined || !!old.one === bk2OneGet())) {
+      if (old && old.el && old.doc === doc && old.covKey === covKey && (old.covPg || 1) === covPg && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead) && (old.gl === undefined || (!!old.one === bk2OneGet() && !!old.scroll === (bkModeGet() === 'scroll')))) {
         view.innerHTML = '';
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
         old.view.style.transform = '';
         old.view = view;
+        /* ونقلُ قائمة الصفحات المتتالية يُصفّر تمريرَها: تُردّ إلى صفحتها */
+        if (old.scroll) requestAnimationFrame(() => { if (old.scroll) bkScrGo(old, old.pos, false); });
         if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
         const moved = wantClosed !== !!old.closed || wantPos !== old.pos;
@@ -12882,7 +12901,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>`
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
-    const hB = pkBlkH('book', id, pkSrcList(id).length), hQ = pkBlkH('bank', id, flatCards(qb).length);
+    let hB = pkBlkH('book', id, pkSrcList(id).length);
+    const hQ = pkBlkH('bank', id, flatCards(qb).length);
+    if (pkSrcAny(id) && bk2On()) hB = hB.replace('</span>', '</span>' + pkBkArc(id));   /* قوسُ طريقة العرض على زاوية أيقونة الكتاب */
     return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
@@ -26431,8 +26452,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* وضعُ الصفحة الواحدة (طلبُ صاحب الموقع): المقلَّبةُ تُطوى حول الكعب إلى ما وراء الكتاب فلا يبقى أمامك إلّا صفحة.
      تفضيلٌ واحدٌ للقارئ في متصفّحه، ويُبدَّل من زرٍّ في التذييل. وفيه ‏‎b.pos‎ رقمُ الصفحة الظاهرة (كصفحة المحرّك القديم الواحدة) */
-  function bk2OneGet() { try { return localStorage.getItem('ac.bk.one') === '1'; } catch (e) { return false; } }
-  const bk2OneSet = v => { try { localStorage.setItem('ac.bk.one', v ? '1' : '0'); } catch (e) {} };
+  /* ===== ثلاثُ طرقٍ لعرض الكتاب (طلبُ صاحب الموقع): صفحتان · صفحةٌ واحدة · صفحاتٌ متتالية بالتمرير =====
+     تفضيلٌ واحدٌ للقارئ في متصفّحه (‎ac.bk.mode‎)، ومن كان له التفضيلُ القديم (صفحة/صفحتان) حُمل عليه.
+     ويُبدَّل من قوسٍ على زاوية أيقونة المساحة كقوس الملخّص (‎pkBkArc‎) — لا من زرٍّ في التذييل */
+  const BK_MODES = ['two', 'one', 'scroll'];
+  function bkModeGet() {
+    try { const m = localStorage.getItem('ac.bk.mode'); if (BK_MODES.includes(m)) return m; return localStorage.getItem('ac.bk.one') === '1' ? 'one' : 'two'; }
+    catch (e) { return 'two'; }
+  }
+  const bkModeSet = m => { try { localStorage.setItem('ac.bk.mode', m); localStorage.setItem('ac.bk.one', m === 'two' ? '0' : '1'); } catch (e) {} };
+  /* «صفحةٌ واحدة» عند المحرّك والقامة: والتمريرُ مثلُها (عمودٌ واحدٌ أطول) */
+  function bk2OneGet() { return bkModeGet() !== 'two'; }
+  const bk2OneSet = v => bkModeSet(v ? 'one' : 'two');
   function bkModeIc(k) {
     return k === 'one' ? '<rect x="6.5" y="3.5" width="11" height="17" rx="1.6"/><path d="M9.5 8.5h5M9.5 11.5h5M9.5 14.5h3"/>'
       : '<path d="M3 6.2c3-1.2 6-1 9 .8 3-1.8 6-2 9-.8v12c-3-1.2-6-1-9 .8-3-1.8-6-2-9-.8z"/><path d="M12 7v12"/>';
@@ -26584,6 +26615,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function hlRefresh(b, k, paint = true) {
     if (!b) return;
     if (paint && b.gl && b.gl.refreshPage) b.gl.refreshPage(k);
+    if (paint && b.scroll && b.scr) { const el = b.scr.querySelector(`.cbk-scr__pg[data-k="${k}"]`); if (el && el.dataset.w) { el.dataset.w = ''; bkScrPaint(b, el); } }
     if (b.tlPages) { const d = b.tlPages.get(k); if (d) hlSpots(b, d); }
   }
   function hlRefreshMark(id, m, paint = true) { hlRefresh(bkOfSid(id + m.s), m.k, paint); }
@@ -27185,7 +27217,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         <span class="cbk-nav__i" data-bkind></span>
         <button type="button" class="cbk-nav__b" data-bknav="1" aria-label="next">${BK_ARR('M15 6l-6 6 6 6')}</button>
         <button type="button" class="cbk-nav__b cbk-nav__close" data-bkclose title="${esc(T().bkClose)}" aria-label="${esc(T().bkClose)}">${BK_ARR('M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3')}</button>
-        ${bkModeBtn('cbk-nav__b cbk-nav__mode', 'data-bkmode')}
       </div>`;
     b.stage = view.querySelector('[data-bkstage]');
     b.el = view.querySelector('[data-bk]');
@@ -27231,9 +27262,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     view.querySelectorAll('[data-bknav]').forEach(btn => btn.addEventListener('click', () => step(+btn.dataset.bknav)));
     view.querySelector('[data-bkclose]').addEventListener('click', () => turnTo(0));
-    view.querySelector('[data-bkmode]').addEventListener('click', () => bk2SetOne(b, !bk2Goal(b)));
     bk2Layout(b);
-    bk2Engine(b);
+    if (bkModeGet() === 'scroll') bkScrOn(b); else bk2Engine(b);
   }
   /* تبديلُ الوضع: تفضيلٌ واحدٌ فتتبدّل الكتبُ المركَّبةُ كلُّها، وكلٌّ يبقى على صفحته */
   const BK_MX = 720;
@@ -27269,6 +27299,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
       const w = b.mxWant; b.mxWant = null;
+      if (b.scrPend) { b.scrPend = false; if (bkModeGet() === 'scroll') { bkScrOn(b); pkSrcHFit(); return; } }
       if (w != null && w !== !!b.one) bk2Switch(b, w);
       else pkSrcHFit();
     };
@@ -27343,6 +27374,136 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fade = () => { if (!ghost) return; const an = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: b.closed ? 160 : 320, easing: 'ease-out', fill: 'forwards' }); an.onfinish = () => ghost.remove(); };
     if (b.closed && ghost) bk2Engine(b, { quiet: true, onReady: ng => { ng.el.style.opacity = ''; fade(); } });
     else { bk2Engine(b); setTimeout(fade, 60); }
+  }
+  /* ===== تبديلُ طريقة العرض من القوس: كلُّ كتابٍ مركَّبٍ يتبدّل وهو على صفحته ===== */
+  function bkSetMode(m) {
+    if (!BK_MODES.includes(m)) return;
+    const prev = bkModeGet(); if (prev === m) return;
+    bkModeSet(m);
+    Object.values(pkSrcBk).forEach(b => {
+      if (!b || b.gl === undefined || !b.view || !b.view.isConnected) return;
+      if (m === 'scroll') {
+        if (b.scroll) return;
+        if (b.mx) { b.mxWant = true; b.scrPend = true; return; }   /* تبدُّلٌ جارٍ: يُمرَّر حين يتمّ */
+        bkScrOn(b); return;
+      }
+      b.scrPend = false;
+      const one = m === 'one';
+      if (b.scroll) { bkScrOff(b, one); return; }
+      if (b.mx) { b.mxWant = one; return; }
+      if (!!b.one !== one) bk2Switch(b, one);
+    });
+    bkArcSync(BK_MODES.indexOf(prev));
+    requestAnimationFrame(() => pkSrcHFit());
+  }
+  function bkArcSync(from) {
+    document.querySelectorAll('#cm-body [data-bkvw]').forEach(el => { el.outerHTML = pkBkArc(el.dataset.pkid, from); });
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('#cm-body [data-bkvw]');
+    if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    bkSetMode(a.dataset.bkvw);
+  }, true);
+  /* ===== الصفحاتُ المتتالية: الكتابُ ورقٌ مسطَّحٌ بعضُه تحت بعض، يُنزل إليه بالتمرير =====
+     يُطفأ المحرّكُ ثلاثيُّ الأبعاد (لا سياقَ رسمٍ يبقى مشغولًا)، وتُبنى قائمةُ صفحاتٍ بقدّها من نسبة الكتاب.
+     الصفحةُ تُرسم حين تقترب من النظر (برسم المحرّك نفسِه: ‎bk2Tex‎ بتحديداتها) وتُطرح صورتُها إذا بعدت كثيرًا،
+     والصفحةُ التي في أعلى النظر هي موضعُ الكتاب (يُحفظ كما يُحفظ في الكتاب)، والرجوعُ إلى الكتاب يفتحه عليها */
+  function bkScrOn(b) {
+    if (!b || b.scroll || !b.view) return;
+    const g = b.gl;
+    if (g) { try { g.dispose(); } catch (e) {} }
+    b.gl = null;
+    if (b.leaf) { try { bkLeafDrop(b); } catch (e) {} }
+    bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
+    b.tlPages = null;
+    const k0 = b.closed ? 1 : Math.max(1, Math.min(b.n || 1, b.pos || 1));
+    b.scroll = true; b.one = b.single = true; b.closed = false; b.pos = k0;
+    const post = b.view.closest('.post'); if (post) { post.classList.remove('bk-shut'); post.classList.add('bk-scroll'); }
+    b.view.classList.add('is-scr');
+    const sc = document.createElement('div');
+    sc.className = 'cbk-scr'; sc.tabIndex = 0;
+    let h = `<div class="cbk-scr__ind" aria-live="polite"></div>`;
+    for (let k = 1; k <= (b.n || 0); k++) h += `<div class="cbk-scr__pg" data-k="${k}" style="aspect-ratio:${b.ar || 1 / Math.SQRT2}"></div>`;
+    sc.innerHTML = h;
+    b.view.appendChild(sc);
+    b.scr = sc; b.scrInd = sc.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) bkScrPaint(b, en.target); }), { root: sc, rootMargin: '900px 0px' });
+    b.scrFar = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting || !en.target.dataset.w) return;
+      en.target.dataset.w = ''; en.target.replaceChildren();   /* بعيدةٌ جدًّا: تُطرح صورتُها (الذاكرة) وتُرسم إن عاد إليها */
+    }), { root: sc, rootMargin: '3200px 0px' });
+    sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
+    let raf = 0;
+    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => bkScrTrack(b)); };
+    sc.addEventListener('scroll', b.scrOn, { passive: true });
+    /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
+    b.scrRO = new ResizeObserver(() => {
+      const w = sc.clientWidth; if (!w) return;
+      if (b.scrW && w < b.scrW * 1.25) return;
+      b.scrW = w;
+      sc.querySelectorAll('.cbk-scr__pg').forEach(el => { if (el.dataset.w) { el.dataset.w = ''; bkScrPaint(b, el); } });
+    });
+    b.scrRO.observe(sc);
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = false; saveSoon(); }
+    bkScrShow(b);
+    requestAnimationFrame(() => { b.scrW = sc.clientWidth; bkScrGo(b, k0, false); });
+  }
+  function bkScrOff(b, one) {
+    if (!b || !b.scroll) return;
+    const k = Math.max(1, b.pos || 1);
+    try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
+    if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
+    b.scr = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
+    b.scroll = false;
+    b.view.classList.remove('is-scr');
+    const post = b.view.closest('.post'); if (post) post.classList.remove('bk-scroll');
+    b.one = b.single = !!one; b.closed = false;
+    b.pos = bkNorm(bkSk(b), k, b.one);
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = false; saveSoon(); }
+    bk2Layout(b);
+    bk2Engine(b);
+  }
+  /* الصفحةُ بدقّة عرضها على الشاشة (بسقف): نسخةٌ في لوحتها هي — صورةُ المحرّك المخزونةُ لا تُنقل إلى الصفحة */
+  function bkScrPaint(b, el) {
+    if (!b.scroll || !b.doc || !el.isConnected) return;
+    const k = +el.dataset.k, w = Math.max(200, Math.min(1700, Math.round(el.clientWidth * (window.devicePixelRatio || 1))));
+    if (!el.clientWidth || el.dataset.w == w) return;
+    el.dataset.w = w;
+    bk2Tex(b, k, w).then(src => {
+      if (!b.scroll || !el.isConnected || el.dataset.w != w || !src) return;
+      const c = document.createElement('canvas'); c.width = src.width; c.height = src.height;
+      c.getContext('2d').drawImage(src, 0, 0);
+      el.replaceChildren(c);
+    }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
+  }
+  /* الصفحةُ التي في أعلى النظر (ثلثُه الأوّل) موضعُ الكتاب */
+  function bkScrTrack(b) {
+    const sc = b.scr; if (!sc) return;
+    const pgs = sc.children, y = sc.scrollTop + sc.clientHeight * .32;
+    let lo = 1, hi = pgs.length - 1, k = 1;   /* ‎children[0]‎ مؤشّرُ الصفحة */
+    while (lo <= hi) { const mid = (lo + hi) >> 1; if (pgs[mid].offsetTop <= y) { k = +pgs[mid].dataset.k; lo = mid + 1; } else hi = mid - 1; }
+    if (k === b.pos) return;
+    b.pos = b.scrAt = k;
+    if (b.meta) { b.meta.pos = k; clearTimeout(b.scrSave); b.scrSave = setTimeout(saveSoon, 400); }
+    bkScrShow(b);
+  }
+  function bkScrGo(b, k, smooth) {
+    const sc = b.scr; if (!sc) return;
+    const el = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`); if (!el) return;
+    b.scrAt = k;
+    sc.scrollTo({ top: Math.max(0, el.offsetTop - 34), behavior: smooth && !bkReduce() ? 'smooth' : 'auto' });
+  }
+  /* رقمُ الصفحة، وموضعٌ كُتب من خارج (صفحةٌ مربوطة) يُنزل إليه */
+  function bkScrShow(b) {
+    const t = `${b.pos} / ${b.n}`;
+    if (b.scrInd) b.scrInd.textContent = t;
+    if (b.ind) b.ind.textContent = t;
+    if (b.stage) b.stage.dataset.pgn = '';
+    const post = b.view && b.view.closest('.post'); if (post) post.classList.remove('bk-shut');
+    if (b.scr && b.scrAt != null && b.pos !== b.scrAt) bkScrGo(b, b.pos, true);
+    if (b.onShow) b.onShow(b);
+    return Promise.resolve();
   }
   /* أزرارُ الوضع (تحت الكتاب وفي التذييل) تحمل صورةَ الوضع الآخر */
   function bkModeSync() {
@@ -27679,6 +27840,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b.flip) { const f = b.flip; b.flip = null; bkFlipFrom(b, f); }
   }
   function bk2Show(b) {
+    if (b.scroll) return bkScrShow(b);
     const g = b.gl, p = b.pos;
     /* زرُّ الصفحة/الصفحتين لا معنى له والكتابُ مغلق (طلبُ صاحب الموقع): يغيب حتى يُفتح */
     { const post = b.view && b.view.closest('.post'); if (post) post.classList.toggle('bk-shut', !!b.closed); }
