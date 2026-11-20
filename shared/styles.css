@@ -19930,10 +19930,9 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
 
 /* ===== بنكُ الأسئلة: الحشوُ مسطرة (طلبُ صاحب الموقع) =====
-   كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال (ثم جُرّب غصنًا فرُدّ). فصار **مسطرةً**: خطٌّ رفيعٌ في أسفله
-   وعلاماتٌ قصيرةٌ متتالية فوقه، من آخر العنوان إلى طرف الصفّ — يتساوى بها طولُ الصفوف ويُرى ما بقي فراغًا مقيسًا */
+   كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال (ثم جُرّب غصنًا فرُدّ). فصار **مسطرةً**: علاماتٌ قصيرةٌ متتالية
+   بلا خطٍّ تحتها (بطلبه)، من آخر العنوان إلى طرف الصفّ — يتساوى بها طولُ الصفوف ويُرى ما بقي فراغًا مقيسًا */
 .pk-bank .cx-nm__f::before { --rl: rgba(20, 35, 63, .24); height: 8px; border-radius: 0; opacity: 1; margin-inline-start: 8px; margin-inline-end: 2px;
-  background: linear-gradient(var(--rl), var(--rl)) bottom / 100% 1px no-repeat,
-    repeating-linear-gradient(to left, var(--rl) 0 1.5px, transparent 1.5px 7px) bottom / 100% 5px no-repeat; }
+  background: repeating-linear-gradient(to left, var(--rl) 0 1.5px, transparent 1.5px 7px) center / 100% 6px no-repeat; }
 html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .28); }
 .pk-bank .cx-nm.is-ph .cx-nm__f::before { opacity: .55; }
