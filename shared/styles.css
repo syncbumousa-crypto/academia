@@ -20019,12 +20019,12 @@ html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26,
 .pk-src .cbk-scr::-webkit-scrollbar { display: none; }
 .cbk-sb { position: absolute; z-index: 3; pointer-events: none; }
 .cbk-sb[hidden] { display: none; }
-.cbk-sb--v { top: 18px; bottom: 18px; left: 3px; width: 8px; }
-.cbk-sb--h { left: 18px; right: 18px; bottom: 3px; height: 8px; }
+.cbk-sb--v { top: 18px; bottom: 18px; left: 0; width: 8px; }   /* ملتصقان بحافّة المساحة (طلبُ صاحب الموقع) */
+.cbk-sb--h { left: 18px; right: 18px; bottom: 0; height: 8px; }
 .cbk-sb > i { position: absolute; display: block; border-radius: 99px; pointer-events: auto; cursor: default;
   background: rgba(44, 94, 101, .34); box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); transition: background .15s; }
-.cbk-sb--v > i { left: 2px; width: 4px; top: 0; }
-.cbk-sb--h > i { top: 2px; height: 4px; left: 0; }
+.cbk-sb--v > i { left: 0; width: 4px; top: 0; }
+.cbk-sb--h > i { bottom: 0; height: 4px; left: 0; }
 .cbk-sb > i:hover, .cbk-sb.is-drag > i { background: rgba(44, 94, 101, .55); }
 html[data-theme="dark"] .cbk-sb > i { background: rgba(40, 48, 52, .55); box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
 html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-drag > i { background: rgba(40, 48, 52, .8); }
