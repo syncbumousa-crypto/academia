@@ -19826,7 +19826,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* وأثناء حركة التبديل (‎pk--fxrun‎) يبقى الشريطُ في مكانه شفّافًا — حضورُه مثبَّتٌ (‎pkSbFreeze‎) فلا يتغيّر العرض */
 #cm-body.pk-sbhide .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-width: none; }
 #cm-body.pk-sbhide .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar { display: none; }
-.pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-color: transparent transparent; }
+/* و‎scrollbar-color‎ لفايرفوكس وحده: كروم إن رآها ترك الشريطَ الرفيعَ المرسوم (‎::-webkit-scrollbar‎) إلى شريطه العريض — فيتغيّر العرض */
+@supports not selector(::-webkit-scrollbar) { .pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src) { scrollbar-color: transparent transparent; } }
 .pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar-thumb,
 .pk--fxrun .pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)::-webkit-scrollbar-track { background: transparent !important; border-color: transparent !important; }
 /* ===== مجلداتُ الملخّص تنزل تحت أيقونة المساحة (طلبُ صاحب الموقع) =====
