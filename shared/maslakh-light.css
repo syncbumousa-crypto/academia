@@ -1,0 +1,150 @@
+/* ============================================================
+   المسلخ · الوضع الفاتح — «شمس الصباح» على أرضيّة بيضاء
+   ============================================================
+   اعتمده صاحبُ الموقع بعد مقارناتٍ على صفحته الحقيقيّة (لوحة «المسلخ — ثيم فاتح»).
+   ورقةٌ للمسلخ وحدَه، تُحمَّل آخرَ الرأس، وكلُّ قاعدةٍ فيها مقصورةٌ على
+   ‎html[data-theme="light"]‎ — فالوضعُ الداكن لا يمسّه شيء.
+
+   الأدوار:
+     العمود (الشريط · البحث · قرصاه · التبويبُ المختار) مادّةٌ واحدة: تيلٌ عميق زجاجيّ.
+       · الشريطُ وحدَه زجاجٌ حقيقيّ (‎backdrop-filter‎): هو ما ينفتح فوق المحتوى.
+         ويُطفأ تمويهُه أثناء حركته (‎.side-anim‎) — التمويهُ على لوحٍ يتبدّل عرضُه
+         هو ما أبطأ الحركةَ من قبل (‎ROADMAP-SIDEBAR.md‎ §٧–٨).
+       · والبحثُ وقرصاه والتبويبُ لونُ ذاك الزجاج كما يُرى فوق الأبيض (‎#335a5f‎):
+         لا شيءَ تحتها إلّا البياض، فالتمويهُ لا يُرى ويكلّف (§١٠).
+     الإجراء: «+» داخل الصفحة أصفرُ الشمس بحدٍّ من لونه · «إنشاء حساب» زجاجٌ شفّاف.
+     المختار في القوائم: تيلٌ عميقٌ مصمت للأقراص الصغيرة، وصبغةٌ منه للصفوف.
+     الوسوم محايدة · اسمُ الدكتور صبغةٌ ذهبيّة · الذهبُ للتقييم.
+   ============================================================ */
+
+/* ---------- العمود: الشريط ---------- */
+html[data-theme="light"] #sidebar,
+html[data-theme="light"] .sidebar {
+  background-color: rgba(18, 63, 69, .86) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+          backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(11, 39, 43, .6) !important;
+  border: 0 !important; color: #b9d2d5;
+}
+/* وأثناء الحركة: لونُ الزجاج نفسُه مصمتًا، بلا تمويه */
+html[data-theme="light"] .sidebar.side-anim {
+  background-color: #335a5f !important;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+html[data-theme="light"] .sidebar .side-mark { color: #e6f2f3; }
+html[data-theme="light"] .sidebar .side-logo { color: #ffffff; }
+html[data-theme="light"] .sidebar .tabs button:not(.is-active),
+html[data-theme="light"] .sidebar .tabs button:not(.is-active) * { color: #b9d2d5 !important; stroke: #b9d2d5; }
+html[data-theme="light"] .sidebar .tabs button:not(.is-active):hover { background: rgba(255, 255, 255, .08) !important; }
+html[data-theme="light"] .sidebar .tabs button.is-active {
+  background: rgba(255, 255, 255, .13) !important; color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .10) !important;
+}
+html[data-theme="light"] .sidebar .tabs button.is-active * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] .sidebar .themebar button,
+html[data-theme="light"] .sidebar .langbar button { background: rgba(255, 255, 255, .08) !important; color: #b9d2d5 !important; box-shadow: none !important; }
+html[data-theme="light"] .sidebar .tabs--me,
+html[data-theme="light"] .sidebar .side-ctl { border-color: rgba(255, 255, 255, .12) !important; }
+
+/* «إنشاء حساب»: زجاجٌ شفّاف داخل الزجاج — بلا إطارٍ صارخ */
+html[data-theme="light"] .sidebar .side-acct .side-join {
+  background-color: rgba(255, 255, 255, .12) !important;
+  background-image: radial-gradient(130% 90% at 50% -20%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%);
+  color: #ffffff !important; border: 0 !important; opacity: 1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -2px 6px rgba(0, 0, 0, .10), 0 6px 16px -10px rgba(0, 0, 0, .35) !important;
+}
+html[data-theme="light"] .sidebar .side-acct .side-join:hover { background-color: rgba(255, 255, 255, .18) !important; opacity: 1; }
+html[data-theme="light"] .sidebar .side-acct .side-join * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] .sidebar.side-anim .side-acct .side-join { -webkit-backdrop-filter: none; backdrop-filter: none; }
+html[data-theme="light"] .sidebar .side-login,
+html[data-theme="light"] .sidebar .side-logout {
+  background: transparent !important; color: #b9d2d5 !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28) !important;
+}
+html[data-theme="light"] .sidebar .side-login *,
+html[data-theme="light"] .sidebar .side-logout * { color: #b9d2d5 !important; stroke: #b9d2d5; }
+html[data-theme="light"] .sidebar .side-acct .side-profile { background: rgba(255, 255, 255, .08) !important; color: #ffffff !important; box-shadow: none !important; }
+
+/* ---------- العمود: البحث وقرصاه (لونُ الزجاج فوق الأبيض، بلا تمويه) ---------- */
+html[data-theme="light"] #side-handle,
+html[data-theme="light"] .market-tools .search,
+html[data-theme="light"] #m-search,
+html[data-theme="light"] .market-tools .filterwrap::before {
+  background: #335a5f !important; border: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(11, 39, 43, .6) !important;
+}
+html[data-theme="light"] #side-handle,
+html[data-theme="light"] #side-handle * { color: #b9d2d5 !important; stroke: #b9d2d5; }
+html[data-theme="light"] #m-search { color: #ffffff !important; }
+html[data-theme="light"] #m-search::placeholder { color: #b9d2d5 !important; opacity: 1; }
+html[data-theme="light"] .m-count { color: #b9d2d5 !important; border-color: rgba(255, 255, 255, .18) !important; }
+html[data-theme="light"] .m-count b { color: #ffffff !important; }
+html[data-theme="light"] #m-btn-filter,
+html[data-theme="light"] #m-btn-filter * { color: #b9d2d5 !important; stroke: #b9d2d5; }
+
+/* ---------- أقسام المادّة ---------- */
+html[data-theme="light"] #cm-ui button[data-tab].on {
+  background: #335a5f !important; color: #ffffff !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 12px 26px -16px rgba(11, 39, 43, .55) !important;
+}
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabnm,
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic,
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-face { border-color: #335a5f !important; }
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-face.cm-face--count { background: rgba(255, 255, 255, .18) !important; color: #ffffff !important; }
+html[data-theme="light"] #cm-ui .cm-res { background: #f2f5f5 !important; box-shadow: none !important; }
+
+/* الوجوه والعدّادات محايدة، و«+» (شارك علمك) أصفرُ الشمس */
+html[data-theme="light"] .cm-face { background: #f2f5f5 !important; color: #3a5256 !important; border-color: #ffffff !important; }
+html[data-theme="light"] .cm-face.cm-face--count { background: #d3dbdb !important; color: #0b272b !important; }
+html[data-theme="light"] .cm-face.cm-face--me {
+  background: #f2c94c !important; color: #0b272b !important; border-color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #f2c94c 70%, #3a2a05), 0 4px 10px -6px color-mix(in srgb, #f2c94c 80%, #000) !important;
+}
+
+/* ---------- المساهمات ---------- */
+html[data-theme="light"] .cm-sortbtn { background: #f2f5f5 !important; color: #3a5256 !important; }
+html[data-theme="light"] .post-date,
+html[data-theme="light"] .pd-dot { color: #596b6e !important; border-color: #596b6e !important; }
+html[data-theme="light"] a.imp-badge {
+  background: transparent !important; color: #596b6e !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #d3dbdb !important;
+}
+html[data-theme="light"] a.imp-badge * { color: #596b6e !important; }
+html[data-theme="light"] span.v-badge {
+  background: color-mix(in srgb, #7a5e08 10%, #ffffff) !important; color: #7a5e08 !important;
+  border-color: transparent !important; box-shadow: none !important;
+}
+html[data-theme="light"] span.v-badge * { color: #7a5e08 !important; }
+html[data-theme="light"] .dr-badge__av { background: #ffffff !important; color: #7a5e08 !important; }
+html[data-theme="light"] .cc-liquid { background: #f2f5f5 !important; border-color: #d3dbdb !important; }
+html[data-theme="light"] .cc-fill { background: #d4a72c !important; }
+
+/* ---------- القوائم: سطحٌ مرفوع، والمختار تيلٌ عميق ---------- */
+html[data-theme="light"]:root .post-menu__list,
+html[data-theme="light"]:root .market-tools .fpanel {
+  background: #ffffff !important; border: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  box-shadow: inset 0 0 0 1px #e5eaea, 0 2px 8px rgba(11, 39, 43, .06), 0 28px 56px -24px rgba(11, 39, 43, .34) !important;
+}
+html[data-theme="light"] .cm-sortopt,
+html[data-theme="light"] .drl-term,
+html[data-theme="light"] .fchip {
+  background: transparent !important; color: #3a5256 !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #d3dbdb !important;
+}
+html[data-theme="light"] .fchip__n { color: #596b6e !important; }
+html[data-theme="light"] .cm-sortopt.on,
+html[data-theme="light"] .drl-term.on { background: #123f45 !important; color: #ffffff !important; box-shadow: none !important; }
+html[data-theme="light"] .drl-term.on * { color: #ffffff !important; }
+html[data-theme="light"] .fchip.on,
+html[data-theme="light"] .fchip.is-on,
+html[data-theme="light"]:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, #123f45 9%, #ffffff) !important; color: #123f45 !important;
+  box-shadow: none !important; border-color: transparent !important;
+}
+html[data-theme="light"]:root .cm-docmenu .drl-row.on * { color: #123f45 !important; }
+html[data-theme="light"] .drl-q,
+html[data-theme="light"] .fcol-search { background: #f2f5f5 !important; box-shadow: none !important; border-color: transparent !important; }
+html[data-theme="light"]:root .post-menu__list.cm-docmenu b { color: #123f45 !important; }

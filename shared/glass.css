@@ -776,3 +776,7 @@ html:root .market-tools .m-count::before {
 html:root .market-tools .m-count b { color: color-mix(in srgb, var(--glass-ink) 85%, transparent); font-weight: 700; font-variant-numeric: tabular-nums; }
 html:root .market-tools .m-count b.is-q { color: #a8842e; }
 html[data-theme="dark"]:root .market-tools .m-count b.is-q { color: #e1c172; }
+
+/* ===== حرفُ الوجه: محايدٌ بلون الحبر، بدل صور المنتدى الملوّنة عشوائيًّا ===== */
+.av-letter { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; border-radius: 50%;
+  background: color-mix(in srgb, currentColor 11%, transparent); font-weight: 700; font-size: .92em; line-height: 1; user-select: none; }
