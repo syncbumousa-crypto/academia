@@ -12713,9 +12713,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* ونقلُ قائمة الصفحات المتتالية يُصفّر تمريرَها: تُردّ إلى صفحتها */
         if (old.scroll) {
           /* وعاءُ العرض الجديد يلبس صنفَ القائمة (كان يبقى على القديم المنفصل فتفقد القائمةُ استدارتَها ومرجعَها) */
-          view.classList.add('is-scr');
+          view.classList.add('is-scr'); view.pkBk = old;
           const po = view.closest('.post'); if (po) { po.classList.add('bk-scroll'); po.classList.remove('bk-shut'); }
-          requestAnimationFrame(() => { if (old.scroll) { bkScrGo(old, old.pos, false); old.scrSync && old.scrSync(); } });
+          requestAnimationFrame(() => { if (old.scroll) { bkScrFit(old); bkScrGo(old, old.pos, false); old.scrSync && old.scrSync(); } });
         }
         if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
@@ -24982,7 +24982,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
-    if (!card.pkFsbRaf) card.pkFsbRaf = requestAnimationFrame(() => { card.pkFsbRaf = 0; card.querySelectorAll('.pk-fstrip').forEach(x => x.pkFsbSync && x.pkFsbSync()); });
+    if (!card.pkFsbRaf) card.pkFsbRaf = requestAnimationFrame(() => { card.pkFsbRaf = 0; card.querySelectorAll('.pk-fstrip').forEach(x => x.pkFsbSync && x.pkFsbSync());
+      card.querySelectorAll('.pk-src__view.is-scr').forEach(v => v.pkBk && bkScrFit(v.pkBk)); });
   }
   /* ===== الانطلاقُ من الذيل والعودةُ إليه (ROADMAP-PANEFX · المرحلتان ١–٢) =====
      محرّكٌ واحد: حلقةُ ‎requestAnimationFrame‎ قصيرةٌ تحسب لكلّ منطقةٍ لسانَها في كلّ إطار — قامتُه (‎lv‎: صفرٌ في الذيل، وواحدٌ قامتُه
@@ -27437,9 +27438,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     top.innerHTML = `<span class="cbk-scr__ind" aria-live="polite"></span><span class="cbk-scr__zm">`
       + `<button type="button" class="cbk-scr__zb" data-bkz="-1" aria-label="−">−</button><b class="cbk-scr__zv">100%</b>`
       + `<button type="button" class="cbk-scr__zb" data-bkz="1" aria-label="+">+</button></span>`;
-    b.view.appendChild(sc); b.view.appendChild(top);
-    b.scr = sc; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    /* طبقةٌ فوق القائمة بشكلها نفسِه: فيها حبّةُ الرقم والتقريب والشريطان — فتُقصّ معها على رسمة المساحة */
+    const ov = document.createElement('div'); ov.className = 'cbk-scr__ov'; ov.appendChild(top);
+    b.view.appendChild(sc); b.view.appendChild(ov);
+    b.view.pkBk = b;
+    b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
     bkScrBars(b);
+    requestAnimationFrame(() => bkScrFit(b));
     b.scrZ = b.scrZ || 1; sc.style.setProperty('--bk-z', b.scrZ); bkScrZv(b);
     top.addEventListener('click', e => {
       const zb = e.target.closest('[data-bkz]'); if (!zb) return;
@@ -27470,6 +27475,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
       b.scrSync && b.scrSync();
+      bkScrFit(b);
       if (b.scrW && w < b.scrW * 1.25) return;
       b.scrW = w;
       sc.querySelectorAll('.cbk-scr__pg').forEach(el => { if (el.dataset.w) { el.dataset.w = ''; bkScrPaint(b, el); } });
@@ -27484,8 +27490,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const k = Math.max(1, b.pos || 1);
     try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
     if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
-    if (b.scrTop) b.scrTop.remove();
-    if (b.scrBars) { b.scrBars.forEach(x => x.remove()); b.scrBars = null; b.scrSync = null; }
+    if (b.scrOv) b.scrOv.remove();
+    b.scrOv = b.scrTop = null; b.scrBars = null; b.scrSync = null;
     b.scr = b.scrTop = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
     b.scroll = false;
     b.view.classList.remove('is-scr');
@@ -27562,7 +27568,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      شريطُ المتصفّح يحجز مجراه فيبقى في يسار المساحة وأسفلها شريطٌ بلون المساحة لا يبلغه الورق. فيُخفى، ويُرسم مكانَه
      مقبضان رفيعان في طبقةٍ فوق الصفحات — العموديُّ يسارًا والأفقيُّ تحت — يتبعان التمريرَ ويُسحبان */
   function bkScrBars(b) {
-    const sc = b.scr, host = b.view;
+    const sc = b.scr, host = b.scrOv;
     const mk = k => { const t = document.createElement('div'); t.className = 'cbk-sb cbk-sb--' + k; t.innerHTML = '<i></i>'; host.appendChild(t); return t; };
     const V = mk('v'), Hh = mk('h'), tv = V.firstChild, th = Hh.firstChild;
     b.scrBars = [V, Hh];
@@ -27591,6 +27597,54 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     drag(V, tv, true); drag(Hh, th, false);
     requestAnimationFrame(b.scrSync);
+  }
+  /* ===== القائمةُ مرسومةٌ على رسمة المساحة نفسِها (طلبُ صاحب الموقع) =====
+     المساحةُ ليست مستطيلًا: رسمتُها (‎.pk-band path.pk-blk[data-k=book]‎) بزواياها وفجوات أزرار التذييل المقصوصة منها.
+     فتُوضع القائمةُ (وطبقتُها) على مربّع تلك الرسمة وتُقصّ بها هي (‎clip-path: path‎ مُزاحًا إلى مبدئها) — فلا يفيض الورقُ
+     المكبَّرُ عن حافّة المساحة ولا يملأ فجوةً ولا يُرى بزاويةٍ مربّعة. وبلا رسمٍ تبقى المستطيلَ المدوَّر */
+  const bkPathShift = (d, dx, dy) => {
+    const t = d.match(/[A-Za-z]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi) || [];
+    let out = '', cmd = '', i = 0;
+    const per = { M: 2, L: 2, T: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, A: 7 };
+    for (let k = 0; k < t.length; k++) {
+      const x = t[k];
+      if (/[A-Za-z]/.test(x)) { cmd = x; i = 0; out += x; continue; }
+      let v = +x;
+      if (cmd === cmd.toUpperCase()) {
+        const n = per[cmd] || 2, j = i % n;
+        if (cmd === 'H') v += dx; else if (cmd === 'V') v += dy;
+        else if (cmd === 'A') { if (j === 5) v += dx; else if (j === 6) v += dy; }
+        else v += j % 2 ? dy : dx;
+      }
+      i++; out += (out.endsWith(cmd) ? '' : ' ') + (Math.round(v * 100) / 100);
+    }
+    return out;
+  };
+  function bkScrFit(b) {
+    if (!b || !b.scroll || !b.scr || !b.scrOv) return;
+    const card = b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]');
+    const d = bp && bp.getAttribute('d'), par = b.scr.offsetParent;
+    const els = [b.scr, b.scrOv];
+    if (!d || !par) { els.forEach(e => ['left', 'top', 'width', 'height', 'inset', 'clipPath', 'borderRadius'].forEach(k => e.style[k] = '')); (b.scrBars || []).forEach(x => ['left', 'right', 'top', 'bottom'].forEach(k => x.style[k] = '')); b.scrFitK = ''; b.scrSync && b.scrSync(); return; }
+    let bb; try { bb = bp.getBBox(); } catch (e) { return; }
+    if (!bb || !bb.width) return;
+    const cr = card.getBoundingClientRect(), pr = par.getBoundingClientRect();
+    const left = cr.left + card.clientLeft + bb.x - pr.left - par.clientLeft, top = cr.top + card.clientTop + bb.y - pr.top - par.clientTop;
+    const clip = `path('${bkPathShift(d, -bb.x, -bb.y)}')`;
+    const key = [left, top, bb.width, bb.height, d].join('|');
+    if (b.scrFitK === key) return;
+    b.scrFitK = key;
+    els.forEach(e => Object.assign(e.style, { inset: 'auto', left: left + 'px', top: top + 'px', width: bb.width + 'px', height: bb.height + 'px', borderRadius: '0', clipPath: clip }));
+    /* والشريطان يقفان قبل الفجوات والزوايا: يُقاس على الرسمة أين تبدأ حافّتُها السفلى واليسرى فعلًا، ويُترك بعدها ‎18px‎ */
+    const inF = (x, y) => { try { return bp.isPointInFill(new DOMPoint(x, y)); } catch (e) { return true; } };
+    const scan = (from, to, st, f) => { for (let v = from; st > 0 ? v <= to : v >= to; v += st) if (f(v)) return v; return from; };
+    const yb = bb.y + bb.height - 2, xl = bb.x + 2;
+    const hL = scan(bb.x, bb.x + bb.width / 2, 2, x => inF(x, yb)) - bb.x, hR = bb.x + bb.width - scan(bb.x + bb.width, bb.x + bb.width / 2, -2, x => inF(x, yb));
+    const vT = scan(bb.y, bb.y + bb.height / 2, 2, y => inF(xl, y)) - bb.y, vB = bb.y + bb.height - scan(bb.y + bb.height, bb.y + bb.height / 2, -2, y => inF(xl, y));
+    const [V, Hh] = b.scrBars || [];
+    if (Hh) Object.assign(Hh.style, { left: Math.max(18, hL + 14) + 'px', right: Math.max(18, hR + 14) + 'px' });
+    if (V) Object.assign(V.style, { top: Math.max(18, vT + 14) + 'px', bottom: Math.max(18, vB + 14) + 'px' });
+    b.scrSync && b.scrSync();
   }
   /* الصفحةُ التي في أعلى النظر (ثلثُه الأوّل) موضعُ الكتاب */
   function bkScrTrack(b) {

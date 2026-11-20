@@ -20028,3 +20028,9 @@ html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26,
 .cbk-sb > i:hover, .cbk-sb.is-drag > i { background: rgba(44, 94, 101, .55); }
 html[data-theme="dark"] .cbk-sb > i { background: rgba(40, 48, 52, .55); box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
 html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-drag > i { background: rgba(40, 48, 52, .8); }
+
+/* طبقةُ القائمة (حبّةُ الرقم والتقريب والشريطان) بشكل القائمة نفسِه فوقها، لا تلتقط إلّا من أزرارها ومقبضَيها.
+   والمساحةُ لا تقصّ ما يجاوز صندوقَها: رسمتُها أوسعُ منه قليلًا، والقصُّ عندئذٍ بالرسمة (‎bkScrFit‎) */
+.cbk-scr__ov { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: 14px; clip-path: inset(0 round 14px); }
+.cbk-scr__ov > .cbk-scr__top { pointer-events: auto; }
+#cm-body .pk-src:has(> .pk-src__view.is-scr) { overflow: visible; }
