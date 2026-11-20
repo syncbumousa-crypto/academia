@@ -9827,6 +9827,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   /* وعرضُ الكبسولة يُقاس قبل أن تنفتح (‎--pk-w‎): إليه يتّسع العدّادُ فيتراجع الاسمُ أمامها ولا تغطّيه */
   const pkCapPlace = cnt => { const cap = cnt.querySelector('.pg-cap'); if (cap) cnt.style.setProperty('--pk-w', cap.offsetWidth + 'px'); };
+  /* ===== عند فتح مجلد: تنفتح كبسولتُه وكبسولاتُ مجلداته الفرعيّة معًا، تُرى خمسَ ثوانٍ ثم تنطوي (طلبُ صاحب الموقع) =====
+     النقرُ يعيد رسمَ الشريط، فيُبحث عن الوجه الجديد بعد الرسم بمعرّفه. والفرعيّةُ تتتابع بفارقٍ يسير (‎70ms‎) فتُرى موجةً
+     تسري فيها. ويُفتح فقط ما انفتح أو اختير — لا عند طيّ مجلد */
+  let pkCapPeekT = null, pkCapPeekOn = [];
+  const pkCapPeekOff = () => { clearTimeout(pkCapPeekT); pkCapPeekOn.forEach(c => c.classList.remove('is-peek')); pkCapPeekOn = []; };
+  function pkCapPeek(sid, fid) {
+    const strip = document.querySelector('#cm-body .pk-fstrip.pk-lg[data-pkid="' + CSS.escape(sid) + '"]');
+    const face = strip && strip.querySelector('.pg-face[data-pkf="' + CSS.escape(fid) + '"]');
+    const box = face && face.closest('.pg-box');
+    if (!box || !(box.classList.contains('is-wide') || box.classList.contains('is-sel'))) return;
+    pkCapPeekOff();
+    const cs = [face.querySelector(':scope > .pg-cnt'), ...box.querySelectorAll(':scope > .pg-in > .pg-row > .pg-box > .pg-face > .pg-cnt')].filter(Boolean);
+    cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); }, i * 70));
+    pkCapPeekOn = cs;
+    pkCapPeekT = setTimeout(pkCapPeekOff, 5000);
+  }
+  document.addEventListener('click', e => {
+    const f = e.target.closest && e.target.closest('.pk-fstrip.pk-lg .pg-face[data-pkf]');
+    if (!f) return;
+    const sid = f.closest('.pk-fstrip').dataset.pkid, fid = f.dataset.pkf;
+    setTimeout(() => pkCapPeek(sid, fid), 40);
+  }, true);   /* بالالتقاط: معالجُ الشريط يوقف انتشارَ النقرة */
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
     const cnt = e.target.closest && e.target.closest('.pg-cnt');

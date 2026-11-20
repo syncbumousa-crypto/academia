@@ -19900,14 +19900,14 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 @property --pk-pad { syntax: '<length>'; inherits: true; initial-value: 10px; }
 .pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center; --pk-pad: 10px; padding-inline-start: var(--pk-pad);
   transition: width .56s cubic-bezier(.22, 1, .36, 1), --pk-pad .56s cubic-bezier(.22, 1, .36, 1); }
-.pk-fstrip.pk-lg .pg-face > .pg-cnt:hover { width: var(--pk-w, 18px); --pk-pad: 2px; }
+.pk-fstrip.pk-lg .pg-face > :is(.pg-cnt:hover, .pg-cnt.is-peek) { width: var(--pk-w, 18px); --pk-pad: 2px; }
 /* ولا يبقى بين الاسم والكبسولة فراغ (طلبُ صاحب الموقع): ما دامت مفتوحةً يمتدّ الاسمُ إلى آخر مكانه بلا نقاط —
    النقاطُ تقطع الكلمةَ العربيّة عند حرفٍ كامل فتترك فراغًا — ويذوب طرفُه في تدرّجٍ قصير بدل أن يُبتر */
 /* والاسمُ يدنو منها ‎5px‎ بهامشه هو، لا بهامش العدّاد: العدّادُ في المجلدات الفرعيّة مدفوعٌ إلى الطرف بهامشٍ تلقائيّ (‎auto‎)،
    فلو بُدّل هامشُه عند المرور لقفز إلى جنب الاسم وخرج من تحت المؤشّر فانطوى فعاد — يرتجف بلا نهاية */
-.pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm { text-overflow: clip; margin-inline-end: -5px;
+.pk-fstrip.pk-lg .pg-face:has(> :is(.pg-cnt:hover, .pg-cnt.is-peek)) > .pg-nm { text-overflow: clip; margin-inline-end: -5px;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5px); mask-image: linear-gradient(to right, transparent 0, #000 5px); }
-[dir="ltr"] .pk-fstrip.pk-lg .pg-face:has(> .pg-cnt:hover) > .pg-nm {
+[dir="ltr"] .pk-fstrip.pk-lg .pg-face:has(> :is(.pg-cnt:hover, .pg-cnt.is-peek)) > .pg-nm {
   -webkit-mask-image: linear-gradient(to left, transparent 0, #000 5px); mask-image: linear-gradient(to left, transparent 0, #000 5px); }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - var(--pk-pad, 10px)) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
@@ -19922,8 +19922,9 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
   filter: blur(1.6px); transform: scale(.94); transition: filter .46s cubic-bezier(.22, 1, .36, 1), transform .56s cubic-bezier(.22, 1, .36, 1); }
 .pg-cnt > .pg-cap > svg text { font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; }
 .pg-cnt > .pg-ring { transition: opacity .26s ease, transform .56s cubic-bezier(.22, 1, .36, 1); }
-.pg-cnt:hover > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
-.pg-cnt:hover > .pg-cap > svg { filter: none; transform: none; }
-.pg-cnt:hover > .pg-ring { opacity: 0; transform: scale(1.22); }
+/* ‏‎.is-peek‎: تُفتح الكبسولةُ بلا مؤشّر — عند فتح المجلد تنفتح كبسولتُه وكبسولاتُ ما فيه خمسَ ثوانٍ (‎pkCapPeek‎) */
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap > svg { filter: none; transform: none; }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-ring { opacity: 0; transform: scale(1.22); }
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
