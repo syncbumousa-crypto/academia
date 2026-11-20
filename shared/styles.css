@@ -19928,3 +19928,11 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-ring { opacity: 0; transform: scale(1.22); }
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
+
+/* ===== بنكُ الأسئلة: الحشوُ غصنُ الشجرة نفسُه (طلبُ صاحب الموقع) =====
+   كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال. وفي البنك صار **امتدادَ الغصن**: خطٌّ بقدّ الغصن ولونِه
+   (الذي يخرج من الدائرة إلى الصفّ) يمضي من آخر العنوان إلى طرف الصفّ — فيتساوى طولُ الصفوف والصفُّ قطعةٌ من الشجرة.
+   وللنائب (سؤالٌ بلا اسم) أخفّ */
+.pk-bank .cx-nm__f::before { height: 2px; border-radius: 2px; background: var(--u-gold-hov, #8a7a4c); opacity: 1;
+  margin-inline-start: 8px; margin-inline-end: 2px; }
+.pk-bank .cx-nm.is-ph .cx-nm__f::before { opacity: .55; }
