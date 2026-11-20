@@ -29176,8 +29176,55 @@ void main() {
       + XT_RES().map(cmTab).join('')
       + `</div>`;
     if (isChTab(cmTabSel)) cmTabSel = 'info';
+    const flip = cmTabsFlipStart();
     $('#cm-tabs').innerHTML = secTabs();
     renderCmSection();   /* يفتح النافذة على القسم النشط */
+    cmTabsFlipEnd(flip);
+  }
+  /* ===== التبويباتُ بين الكتب: لا قفز (طلبُ صاحب الموقع) =====
+     كتابٌ فيه مساهماتٌ تحت أسماء تبويباته وكتابٌ ليس فيه: تنزل الأيقونةُ والاسمُ إلى وسط التبويب أو تصعد، ويطول الشريطُ
+     أو يقصر — فكان ذلك قفزًا مع كلّ كتاب. فصار انزلاقًا (‎FLIP‎): يُحفظ موضعُ كلّ أيقونةٍ واسمٍ وقامةُ الشريط قبل إعادة
+     الرسم، ثمّ ينزلق كلٌّ من موضعه القديم إلى الجديد، والشريطُ يتنفّس إلى قامته الجديدة، والوجوهُ القديمةُ تذوب في
+     مكانها (نسخٌ ثابتةٌ فوق الصفحة) والجديدةُ تطلع تباعًا بنابضٍ خفيف. ولا حركةَ لمن طلب تقليلها، ولا لشريطٍ مخفيّ */
+  function cmTabsFlipStart() {
+    const T = document.getElementById('cm-tabs');
+    if (!T || !T.offsetParent || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return null;
+    const old = {};
+    T.querySelectorAll('button[data-tab]').forEach(b => {
+      const ic = b.querySelector('.cm-tabic'), nm = b.querySelector('.cm-tabnm');
+      old[b.dataset.tab] = { ic: ic && ic.getBoundingClientRect(), nm: nm && nm.getBoundingClientRect() };
+    });
+    const ghosts = [...T.querySelectorAll('.cm-faces')].filter(f => f.querySelector('.cm-face') && f.offsetParent).map(f => {
+      const r = f.getBoundingClientRect(), g = f.cloneNode(true);
+      g.classList.add('cm-faces--ghost'); g.setAttribute('aria-hidden', 'true');
+      Object.assign(g.style, { position: 'fixed', left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', margin: '0', pointerEvents: 'none', zIndex: '5' });
+      /* لونُ النصّ والحدودُ من التبويب: النسخةُ خارجَه فتُعطى لونَه */
+      g.style.color = getComputedStyle(f).color;
+      return g;
+    });
+    return { old, h0: T.getBoundingClientRect().height, ghosts };
+  }
+  function cmTabsFlipEnd(st) {
+    const T = document.getElementById('cm-tabs');
+    if (!st || !T || !T.offsetParent) return;
+    const D = 620, E = 'cubic-bezier(.22, 1, .36, 1)';
+    const h1 = T.getBoundingClientRect().height;
+    st.ghosts.forEach(g => {
+      document.body.appendChild(g);
+      const a = g.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.85)' }], { duration: D * .45, easing: 'ease-out', fill: 'forwards' });
+      a.onfinish = a.oncancel = () => g.remove();
+    });
+    T.querySelectorAll('button[data-tab]').forEach(b => {
+      const o = st.old[b.dataset.tab]; if (!o) return;
+      [['.cm-tabic', 'ic'], ['.cm-tabnm', 'nm']].forEach(([sel, k]) => {
+        const el = b.querySelector(sel); if (!el || !o[k]) return;
+        const n = el.getBoundingClientRect(), dx = o[k].left - n.left, dy = o[k].top - n.top;
+        if (Math.abs(dx) > .5 || Math.abs(dy) > .5) el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: D, easing: E });
+      });
+      b.querySelectorAll('.cm-faces > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
+        { duration: D * .8, delay: D * .25 + i * 45, easing: 'cubic-bezier(.22, 1.35, .36, 1)', fill: 'backwards' }));
+    });
+    if (Math.abs(h1 - st.h0) > .5) T.animate([{ height: st.h0 + 'px', overflow: 'hidden' }, { height: h1 + 'px', overflow: 'hidden' }], { duration: D, easing: E });
   }
 
   /* من السوق: الواجهة داخل النافذة المنبثقة (لم يعد يُستخدم من السوق — مبقى للاستدعاءات الأخرى) */
