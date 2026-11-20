@@ -10700,10 +10700,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + (cv.k === 'sc' || cvE ? '' : `<span class="pc-blur" style="background-image:url('${cv.url}')" aria-hidden="true"></span>`)
       + `<span class="pc-fade" aria-hidden="true"></span>`
       + (cvE ? `<button type="button" class="pc-art pc-art--empty" data-pccv="${esc(p.id)}" aria-label="${esc(en ? 'Contribution cover' : 'غلاف المساهمة')}"><span class="pc-ae__ic">${PC_CV_IC}</span><b>${esc(en ? 'Contribution cover' : 'غلاف المساهمة')}</b></button>`
-        : `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}></span>`)
+        : `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}>`
+          /* تغييرُ الغلاف لصاحب المساهمة (طلبُ صاحب الموقع): شريطٌ يصعد من أسفل الغلاف نفسِه مكتوبٌ فيه «تغيير الغلاف» —
+             كانت أيقونةَ صورةٍ في زاوية اللافتة لا يُعرف ما تفعل */
+          + (ed && pcOwn(p) ? `<button type="button" class="pc-cvbar" data-pccv="${esc(p.id)}">${PC_CV_IC}<span>${esc(pcEn() ? 'Change cover' : 'تغيير الغلاف')}</span></button>` : '')
+          + `</span>`)
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
-      + (ed && pcOwn(p) && !cvE ? `<button type="button" class="pc-cvbtn" data-pccv="${esc(p.id)}" title="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}" aria-label="${esc(pcEn() ? 'Contribution cover' : 'غلاف المساهمة')}">${PC_CV_IC}</button>` : '')
       + `</div>`;
   }
   /* ===== نافذةُ «غلاف المساهمة» — لصاحبها وحده (زرُّ الصورة في زاوية اللافتة) =====
