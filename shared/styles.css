@@ -19929,10 +19929,11 @@ html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
 
-/* ===== بنكُ الأسئلة: الحشوُ غصنُ الشجرة نفسُه (طلبُ صاحب الموقع) =====
-   كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال. وفي البنك صار **امتدادَ الغصن**: خطٌّ بقدّ الغصن ولونِه
-   (الذي يخرج من الدائرة إلى الصفّ) يمضي من آخر العنوان إلى طرف الصفّ — فيتساوى طولُ الصفوف والصفُّ قطعةٌ من الشجرة.
-   وللنائب (سؤالٌ بلا اسم) أخفّ */
-.pk-bank .cx-nm__f::before { height: 2px; border-radius: 2px; background: var(--u-gold-hov, #8a7a4c); opacity: 1;
-  margin-inline-start: 8px; margin-inline-end: 2px; }
+/* ===== بنكُ الأسئلة: الحشوُ مسطرة (طلبُ صاحب الموقع) =====
+   كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال (ثم جُرّب غصنًا فرُدّ). فصار **مسطرةً**: خطٌّ رفيعٌ في أسفله
+   وعلاماتٌ قصيرةٌ متتالية فوقه، من آخر العنوان إلى طرف الصفّ — يتساوى بها طولُ الصفوف ويُرى ما بقي فراغًا مقيسًا */
+.pk-bank .cx-nm__f::before { --rl: rgba(20, 35, 63, .24); height: 8px; border-radius: 0; opacity: 1; margin-inline-start: 8px; margin-inline-end: 2px;
+  background: linear-gradient(var(--rl), var(--rl)) bottom / 100% 1px no-repeat,
+    repeating-linear-gradient(to left, var(--rl) 0 1.5px, transparent 1.5px 7px) bottom / 100% 5px no-repeat; }
+html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .28); }
 .pk-bank .cx-nm.is-ph .cx-nm__f::before { opacity: .55; }
