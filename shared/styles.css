@@ -19963,7 +19963,7 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
    مكانه خفيًّا (‎visibility‎ لا ‎display‎) فلا تتغيّر مقاساتُ المساحة التي يُحسب منها كلُّ شيء */
 .is-scr { position: relative; }
 .is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
-.cbk-scr { position: absolute; inset: 0; z-index: 3; overflow: auto; overscroll-behavior: contain;
+.cbk-scr { position: absolute; inset: 0; z-index: 1; overflow: auto; overscroll-behavior: contain;
   display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 14px 22px; outline: none;
   scrollbar-width: auto; scrollbar-color: auto; }   /* ‎scrollbar-color‎ موروثٌ من أعلى، وكرومُ إن رآه ترك الرسمَ أدناه إلى شريطه العريض (كما في البنك) */
 /* شريطا التمرير كشريطَي البنك بالضبط (طلبُ صاحب الموقع): رفيعان ‎4px‎ بلا سكّة، يقفان ‎18px‎ عن طرفي المساحة، ويغمقان قليلًا عند المرور.
@@ -19978,13 +19978,19 @@ html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255
 .cbk-scr::-webkit-scrollbar-corner { background: transparent; }
 @supports not selector(::-webkit-scrollbar) { .cbk-scr { scrollbar-width: thin; scrollbar-color: rgba(44, 94, 101, .25) transparent; } }
 /* رقمُ الصفحة يلتصق بأعلى المساحة فوق الورق */
-.cbk-scr__ind { position: sticky; top: 8px; z-index: 2; flex: none; align-self: center; margin: 8px 0 -4px; padding: 3px 11px;
-  font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #3d4b57; border-radius: 99px;
-  background: rgba(255, 255, 255, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 2px 8px -3px rgba(0, 0, 0, .25); }
-/* الرقمُ كرقم الكتاب: الجزءُ يمينًا والكلُّ يسارًا في العربيّة */
-html[data-theme="dark"] .cbk-scr__ind { color: #c9d3d6; background: rgba(20, 26, 28, .62); }
+/* رقمُ الصفحة وأزرارُ التقريب: حبّةٌ عائمةٌ فوق القائمة في أعلى وسطها (‎cbk-scr__top‎ أختُ القائمة لا ابنتُها) */
+.cbk-scr__top { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; gap: 8px;
+  padding: 3px 4px 3px 11px; border-radius: 99px; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #3d4b57;
+  background: rgba(255, 255, 255, .78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 2px 8px -3px rgba(0, 0, 0, .25); white-space: nowrap; }
+html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26, 28, .66); }
+.cbk-scr__zm { display: inline-flex; align-items: center; gap: 2px; padding-inline-start: 8px; border-inline-start: 1px solid rgba(127, 127, 127, .28); }
+.cbk-scr__zv { min-width: 38px; text-align: center; font-weight: 700; direction: ltr; }
+.cbk-scr__zb { width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; display: grid; place-items: center;
+  font: inherit; font-size: 15px; font-weight: 700; line-height: 1; color: inherit; background: transparent; }
+.cbk-scr__zb:hover { background: rgba(127, 127, 127, .18); }
+.is-scr > .cbk-scr { padding-top: 42px; }
 /* والصفحةُ لا تصغُر دون عرضٍ يُقرأ (‎520px‎): في المساحة الضيّقة تفيض فيظهر الشريطُ الأفقيّ تحتها (كعرض البنك الأدنى) */
-.cbk-scr__pg { flex: none; width: min(780px, max(100%, 520px)); margin-inline: auto; position: relative; overflow: hidden; border-radius: 3px;
+.cbk-scr__pg { flex: none; width: calc(min(780px, max(100%, 520px)) * var(--bk-z, 1)); margin-inline: auto; position: relative; overflow: hidden; border-radius: 3px;
   background: #fbf8f1; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
 .cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
   background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
@@ -19994,3 +20000,5 @@ html[data-theme="dark"] .cbk-scr__ind { color: #c9d3d6; background: rgba(20, 26,
 /* قوسُ الكتاب ملاصقٌ لزاوية مساحته كقوس الملخّص (طلبُ صاحب الموقع): أيقونةُ الكتاب أبعدُ عن زاويتها بـ‎4px‎ أفقًا و‎2px‎ عموديًّا
    من أيقونة الملخّص عن زاوية كتلته، فيُزاح القوسُ بقدرها لتقع زاويةُ رسمه على زاوية المساحة */
 .pk-vdots.pk-varc.pk-varc--bk { top: -8px; inset-inline-start: -10px; }
+/* وأيقونةُ المساحة وقوسُها فوق الصفحات المكبَّرة دائمًا */
+.pk-src:has(.is-scr) > .pk-blkh { z-index: 5; }

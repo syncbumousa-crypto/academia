@@ -27423,11 +27423,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.view.classList.add('is-scr');
     const sc = document.createElement('div');
     sc.className = 'cbk-scr'; sc.tabIndex = 0;
-    let h = `<div class="cbk-scr__ind" aria-live="polite"></div>`;
+    let h = '';
     for (let k = 1; k <= (b.n || 0); k++) h += `<div class="cbk-scr__pg" data-k="${k}" style="aspect-ratio:${b.ar || 1 / Math.SQRT2}"></div>`;
     sc.innerHTML = h;
-    b.view.appendChild(sc);
-    b.scr = sc; b.scrInd = sc.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    /* رقمُ الصفحة وأزرارُ التقريب فوق القائمة لا فيها: التمريرُ الأفقيُّ لا يحملها معه */
+    const top = document.createElement('div');
+    top.className = 'cbk-scr__top';
+    top.innerHTML = `<span class="cbk-scr__ind" aria-live="polite"></span><span class="cbk-scr__zm">`
+      + `<button type="button" class="cbk-scr__zb" data-bkz="-1" aria-label="−">−</button><b class="cbk-scr__zv">100%</b>`
+      + `<button type="button" class="cbk-scr__zb" data-bkz="1" aria-label="+">+</button></span>`;
+    b.view.appendChild(sc); b.view.appendChild(top);
+    b.scr = sc; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    b.scrZ = b.scrZ || 1; sc.style.setProperty('--bk-z', b.scrZ); bkScrZv(b);
+    top.addEventListener('click', e => {
+      const zb = e.target.closest('[data-bkz]'); if (!zb) return;
+      e.preventDefault();
+      bkScrZoom(b, Math.round((b.scrZ + (+zb.dataset.bkz) * .1) * 10) / 10);
+    });
+    /* القرصةُ بإصبعين (عجلةٌ مع ‎ctrlKey‎) تقرّب حول موضع الإصبعين — تُجمع وتُنفَّذ مرّةً في الإطار كما في نافذة الملخّص */
+    let zAcc = 0, zReq = 0, zAt = null;
+    sc.addEventListener('wheel', e => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      e.preventDefault();
+      const r = sc.getBoundingClientRect(); zAt = { x: e.clientX - r.left, y: e.clientY - r.top };
+      zAcc += e.deltaY;
+      if (zReq) return;
+      zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrZoom(b, b.scrZ * Math.exp(-d / 200), zAt); });
+    }, { passive: false });
+    sc.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === '0') { e.preventDefault(); bkScrZoom(b, 1); } });
     b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) bkScrPaint(b, en.target); }), { root: sc, rootMargin: '900px 0px' });
     b.scrFar = new IntersectionObserver(es => es.forEach(en => {
       if (en.isIntersecting || !en.target.dataset.w) return;
@@ -27454,7 +27477,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const k = Math.max(1, b.pos || 1);
     try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
     if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
-    b.scr = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
+    if (b.scrTop) b.scrTop.remove();
+    b.scr = b.scrTop = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
     b.scroll = false;
     b.view.classList.remove('is-scr');
     const post = b.view.closest('.post'); if (post) post.classList.remove('bk-scroll');
@@ -27467,7 +27491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الصفحةُ بدقّة عرضها على الشاشة (بسقف): نسخةٌ في لوحتها هي — صورةُ المحرّك المخزونةُ لا تُنقل إلى الصفحة */
   function bkScrPaint(b, el) {
     if (!b.scroll || !b.doc || !el.isConnected) return;
-    const k = +el.dataset.k, w = Math.max(200, Math.min(1700, Math.round(el.clientWidth * (window.devicePixelRatio || 1))));
+    const k = +el.dataset.k, w = Math.max(200, Math.min(3000, Math.round(el.clientWidth * (window.devicePixelRatio || 1))));
     if (!el.clientWidth || el.dataset.w == w) return;
     el.dataset.w = w;
     bk2Tex(b, k, w).then(src => {
@@ -27477,11 +27501,41 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       el.replaceChildren(c);
     }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
   }
+  /* ===== التقريبُ في الصفحات المتتالية (طلبُ صاحب الموقع): كتقريب نافذة الملخّص، بخفّة =====
+     ‏‎--bk-z‎ يضرب عرضَ الصفحة (وقامتُها من نسبتها)، والنقطةُ التي تحت الإصبعين (أو وسطُ النظر) تبقى مكانها.
+     والصفحاتُ الظاهرةُ تُعاد بدقّتها الجديدة بعد أن تسكن القرصة */
+  const BK_ZMIN = .5, BK_ZMAX = 4;
+  function bkScrZv(b) { const v = b.scrTop && b.scrTop.querySelector('.cbk-scr__zv'); if (v) v.textContent = Math.round(b.scrZ * 100) + '%'; }
+  function bkScrZoom(b, z, at) {
+    const sc = b.scr; if (!sc) return;
+    z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
+    const z0 = b.scrZ || 1; if (Math.abs(z - z0) < .001) return;
+    const pt = at || { x: sc.clientWidth / 2, y: sc.clientHeight / 2 };
+    const rtl = getComputedStyle(sc).direction === 'rtl';
+    const xFromStart = rtl ? (sc.scrollWidth - sc.clientWidth + sc.scrollLeft) + pt.x : sc.scrollLeft + pt.x;
+    const cy = sc.scrollTop + pt.y, cx = xFromStart;
+    b.scrZ = z; sc.style.setProperty('--bk-z', z); bkScrZv(b);
+    const f = z / z0;
+    sc.scrollTop = cy * f - pt.y;
+    const nx = cx * f - pt.x;
+    sc.scrollLeft = rtl ? nx - (sc.scrollWidth - sc.clientWidth) : nx;
+    clearTimeout(b.scrZT);
+    b.scrZT = setTimeout(() => {
+      if (!b.scroll || !b.scr) return;
+      const r = b.scr.getBoundingClientRect();
+      b.scr.querySelectorAll('.cbk-scr__pg').forEach(el => {
+        if (!el.dataset.w) return;
+        const q = el.getBoundingClientRect();
+        if (q.bottom < r.top - 900 || q.top > r.bottom + 900) { el.dataset.w = ''; el.replaceChildren(); return; }   /* بعيدةٌ: تُرسم حين يُوصل إليها */
+        bkScrPaint(b, el);
+      });
+    }, 180);
+  }
   /* الصفحةُ التي في أعلى النظر (ثلثُه الأوّل) موضعُ الكتاب */
   function bkScrTrack(b) {
     const sc = b.scr; if (!sc) return;
     const pgs = sc.children, y = sc.scrollTop + sc.clientHeight * .32;
-    let lo = 1, hi = pgs.length - 1, k = 1;   /* ‎children[0]‎ مؤشّرُ الصفحة */
+    let lo = 0, hi = pgs.length - 1, k = 1;
     while (lo <= hi) { const mid = (lo + hi) >> 1; if (pgs[mid].offsetTop <= y) { k = +pgs[mid].dataset.k; lo = mid + 1; } else hi = mid - 1; }
     if (k === b.pos) return;
     b.pos = b.scrAt = k;
