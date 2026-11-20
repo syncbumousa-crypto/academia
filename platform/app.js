@@ -27510,15 +27510,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sc = b.scr; if (!sc) return;
     z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
     const z0 = b.scrZ || 1; if (Math.abs(z - z0) < .001) return;
+    /* ===== التقريبُ حول ما تحت المؤشّر، لا حول الوسط (طلبُ صاحب الموقع) =====
+       تُؤخذ الصفحةُ التي تحت المؤشّر (أو أقربُها إليه) وموضعُه منها نسبةً، ثمّ بعد التكبير تُردّ تلك النقطةُ تحت المؤشّر:
+       عموديًّا بالتمرير، وأفقيًّا بالتمرير إن فاضت الصفحةُ عن المساحة، وإلّا بإزاحة الصفحات (‎--bk-x‎) داخلها — فلا تبقى
+       الصفحةُ الأضيقُ من المساحة متمركزةً تكبر من وسطها والمؤشّرُ على طرفها */
+    const r = sc.getBoundingClientRect();
     const pt = at || { x: sc.clientWidth / 2, y: sc.clientHeight / 2 };
-    const rtl = getComputedStyle(sc).direction === 'rtl';
-    const xFromStart = rtl ? (sc.scrollWidth - sc.clientWidth + sc.scrollLeft) + pt.x : sc.scrollLeft + pt.x;
-    const cy = sc.scrollTop + pt.y, cx = xFromStart;
+    const ax = r.left + pt.x, ay = r.top + pt.y;
+    let ref = null, best = Infinity;
+    for (const el of sc.children) {
+      const q = el.getBoundingClientRect(), d = ay < q.top ? q.top - ay : ay > q.bottom ? ay - q.bottom : 0;
+      if (d < best) { best = d; ref = el; if (!d) break; }
+    }
+    if (!ref) return;
+    const q0 = ref.getBoundingClientRect(), ux = (ax - q0.left) / q0.width, uy = (ay - q0.top) / q0.height;
     b.scrZ = z; sc.style.setProperty('--bk-z', z); bkScrZv(b);
-    const f = z / z0;
-    sc.scrollTop = cy * f - pt.y;
-    const nx = cx * f - pt.x;
-    sc.scrollLeft = rtl ? nx - (sc.scrollWidth - sc.clientWidth) : nx;
+    const q1 = ref.getBoundingClientRect();
+    sc.scrollTop += q1.top + uy * q1.height - ay;
+    const cw = sc.clientWidth;
+    let q2 = ref.getBoundingClientRect(), dx = q2.left + ux * q2.width - ax;
+    if (q2.width + 28 <= cw) {
+      const lim = (cw - q2.width) / 2 - 14;
+      b.scrX = Math.max(-lim, Math.min(lim, (b.scrX || 0) - dx));
+      sc.style.setProperty('--bk-x', b.scrX + 'px');
+    } else {
+      if (b.scrX) { b.scrX = 0; sc.style.setProperty('--bk-x', '0px'); q2 = ref.getBoundingClientRect(); dx = q2.left + ux * q2.width - ax; }
+      sc.scrollLeft += dx;
+    }
     clearTimeout(b.scrZT);
     b.scrZT = setTimeout(() => {
       if (!b.scroll || !b.scr) return;

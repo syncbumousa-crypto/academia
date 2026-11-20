@@ -19990,7 +19990,7 @@ html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26,
 .cbk-scr__zb:hover { background: rgba(127, 127, 127, .18); }
 .is-scr > .cbk-scr { padding-top: 42px; }
 /* والصفحةُ لا تصغُر دون عرضٍ يُقرأ (‎520px‎): في المساحة الضيّقة تفيض فيظهر الشريطُ الأفقيّ تحتها (كعرض البنك الأدنى) */
-.cbk-scr__pg { flex: none; width: calc(min(780px, max(100%, 520px)) * var(--bk-z, 1)); margin-inline: auto; position: relative; overflow: hidden; border-radius: 3px;
+.cbk-scr__pg { flex: none; width: calc(min(780px, max(100%, 520px)) * var(--bk-z, 1)); margin-inline: auto; position: relative; transform: translateX(var(--bk-x, 0px)); overflow: hidden; border-radius: 3px;
   background: #fbf8f1; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
 .cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
   background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
