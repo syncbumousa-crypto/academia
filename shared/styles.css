@@ -18656,8 +18656,8 @@ html[data-lang="en"] #card-modal .cd-rz--r { top: 12px; }
 html[data-lang="en"] #card-modal .cd-rz--l { top: 40px; }
 html[data-lang="en"] #card-modal .cd-rz--tr { top: -5px; right: -5px; width: 18px; height: 18px; }
 html[data-lang="en"] #card-modal .cd-rz--tl { top: -8px; left: -8px; width: 11px; height: 11px; }
-/* والكتابُ مغلقٌ: لا صفحةَ ولا صفحتين، فيغيب زرُّ التبديل (‎bk-shut‎ يكتبه ‎bk2Show‎) */
-.post.bk-shut .cx-actmode, .post.bk-shut .cbk-nav__mode { display: none; }
+/* والكتابُ مغلقٌ: كان يغيب زرُّ التبديل (‎bk-shut‎) — فلا يُرى في النشر أصلًا، والكتابُ فيه يبدأ مغلقًا. فصار باقيًا (طلبُ صاحب الموقع):
+   يُختار به الوضعُ قبل الفتح، ويُفتح الكتابُ عليه */
 /* ===== شريطُ الملخّص كشريط البنك (طلبُ صاحب الموقع) =====
    رفيعٌ ‎4px‎ بلا سكّة، بلونٍ خافتٍ يغمق قليلًا عند المرور، ويقف ‎18px‎ عن طرفي المساحة فلا يمسّ انحناءها.
    و‎scrollbar-width/color‎ يُرجعان إلى ‎auto‎ لأنّ كروم يُهمل ‎::-webkit-scrollbar‎ متى ضُبطا */
