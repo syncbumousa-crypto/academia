@@ -12711,7 +12711,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         old.view.style.transform = '';
         old.view = view;
         /* ونقلُ قائمة الصفحات المتتالية يُصفّر تمريرَها: تُردّ إلى صفحتها */
-        if (old.scroll) requestAnimationFrame(() => { if (old.scroll) bkScrGo(old, old.pos, false); });
+        if (old.scroll) {
+          /* وعاءُ العرض الجديد يلبس صنفَ القائمة (كان يبقى على القديم المنفصل فتفقد القائمةُ استدارتَها ومرجعَها) */
+          view.classList.add('is-scr');
+          const po = view.closest('.post'); if (po) { po.classList.add('bk-scroll'); po.classList.remove('bk-shut'); }
+          requestAnimationFrame(() => { if (old.scroll) { bkScrGo(old, old.pos, false); old.scrSync && old.scrSync(); } });
+        }
         if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
         const moved = wantClosed !== !!old.closed || wantPos !== old.pos;

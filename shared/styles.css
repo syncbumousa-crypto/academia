@@ -19965,7 +19965,9 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
    من حاشيتها حول الصفحات المكبَّرة، والشريطان على حافّتَي المساحة (يسارًا وتحت) فوق الورق. وتُستدار بقدّ الكتلة (‎PK_BAND_R‎) */
 #cm-body .pk-src__view.is-scr { position: static; }
 #cm-body .pk-src:has(> .pk-src__view.is-scr) > .pk-src__view { position: static; }
-.pk-src .is-scr > .cbk-scr { border-radius: 14px; padding-inline: 0; }
+/* والاستدارةُ قصٌّ (‎clip-path‎) لا ‎border-radius‎ وحدَه: الصفحاتُ لوحاتٌ مركَّبةٌ مزاحة (‎transform‎) فكانت تفلت من الاستدارة
+   فتبدو الزوايا مربّعة — والقصُّ يحكمها كلَّها */
+.pk-src .is-scr > .cbk-scr { border-radius: var(--pk-scr-r, 14px); clip-path: inset(0 round var(--pk-scr-r, 14px)); padding-inline: 0; }
 .is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
 .cbk-scr { position: absolute; inset: 0; z-index: 1; overflow: auto; overscroll-behavior: contain;
   display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 14px 22px; outline: none;
