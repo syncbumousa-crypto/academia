@@ -19984,3 +19984,6 @@ html[data-theme="dark"] .cbk-scr__ind { color: #c9d3d6; background: rgba(20, 26,
 .cbk-scr__pg > canvas { display: block; width: 100%; height: 100%; }
 /* ولا لوحَ صفوفٍ للتظليل في التمرير: التظليلُ يُرسم على الكتاب */
 .post.bk-scroll .cx-hlrail { visibility: hidden; pointer-events: none; }
+/* قوسُ الكتاب ملاصقٌ لزاوية مساحته كقوس الملخّص (طلبُ صاحب الموقع): أيقونةُ الكتاب أبعدُ عن زاويتها بـ‎4px‎ أفقًا و‎2px‎ عموديًّا
+   من أيقونة الملخّص عن زاوية كتلته، فيُزاح القوسُ بقدرها لتقع زاويةُ رسمه على زاوية المساحة */
+.pk-vdots.pk-varc.pk-varc--bk { top: -8px; inset-inline-start: -10px; }
