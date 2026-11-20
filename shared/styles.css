@@ -20010,3 +20010,19 @@ html[data-theme="dark"] .cbk-scr__top { color: #c9d3d6; background: rgba(20, 26,
    والصفحاتِ المتتالية المكبَّرة وحبّةِ التقريب وشريطَي التمرير — والقوسُ فوق رأسها */
 #cm-body .pk-split > .pk-src > .pk-blkh { z-index: 30; }
 #cm-body .pk-vdots.pk-varc.pk-varc--bk { z-index: 40; }
+
+/* ===== شريطا الصفحات المتتالية عائمان فوق الورق (‎bkScrBars‎) — لا مجرى ولا حاشيةَ بلون المساحة يسارًا وتحت =====
+   شريطُ المتصفّح يُخفى، والمقبضان كمقبضَي البنك: رفيعان ‎4px‎، يقفان ‎18px‎ عن طرفي المساحة، ويغمقان قليلًا عند المرور */
+.pk-src .cbk-scr { scrollbar-width: none; padding-bottom: 0; }
+.pk-src .cbk-scr::-webkit-scrollbar { display: none; }
+.cbk-sb { position: absolute; z-index: 3; pointer-events: none; }
+.cbk-sb[hidden] { display: none; }
+.cbk-sb--v { top: 18px; bottom: 18px; left: 3px; width: 8px; }
+.cbk-sb--h { left: 18px; right: 18px; bottom: 3px; height: 8px; }
+.cbk-sb > i { position: absolute; display: block; border-radius: 99px; pointer-events: auto; cursor: default;
+  background: rgba(44, 94, 101, .34); box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); transition: background .15s; }
+.cbk-sb--v > i { left: 2px; width: 4px; top: 0; }
+.cbk-sb--h > i { top: 2px; height: 4px; left: 0; }
+.cbk-sb > i:hover, .cbk-sb.is-drag > i { background: rgba(44, 94, 101, .55); }
+html[data-theme="dark"] .cbk-sb > i { background: rgba(40, 48, 52, .55); box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
+html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-drag > i { background: rgba(40, 48, 52, .8); }
