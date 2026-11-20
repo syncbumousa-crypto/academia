@@ -19963,21 +19963,28 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
    مكانه خفيًّا (‎visibility‎ لا ‎display‎) فلا تتغيّر مقاساتُ المساحة التي يُحسب منها كلُّ شيء */
 .is-scr { position: relative; }
 .is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
-.cbk-scr { position: absolute; inset: 0; z-index: 3; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
-  display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 14px 22px; outline: none;
-  scrollbar-width: thin; scrollbar-color: rgba(20, 35, 63, .25) transparent; }
-html[data-theme="dark"] .cbk-scr { scrollbar-color: rgba(255, 255, 255, .2) transparent; }
-.cbk-scr::-webkit-scrollbar { width: 4px; }
-.cbk-scr::-webkit-scrollbar-track { background: transparent; margin-block: 18px; }
-.cbk-scr::-webkit-scrollbar-thumb { background: rgba(20, 35, 63, .22); border-radius: 99px; }
-html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .18); }
+.cbk-scr { position: absolute; inset: 0; z-index: 3; overflow: auto; overscroll-behavior: contain;
+  display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 14px 22px; outline: none;
+  scrollbar-width: auto; scrollbar-color: auto; }   /* ‎scrollbar-color‎ موروثٌ من أعلى، وكرومُ إن رآه ترك الرسمَ أدناه إلى شريطه العريض (كما في البنك) */
+/* شريطا التمرير كشريطَي البنك بالضبط (طلبُ صاحب الموقع): رفيعان ‎4px‎ بلا سكّة، يقفان ‎18px‎ عن طرفي المساحة، ويغمقان قليلًا عند المرور.
+   والعموديُّ في يسار المساحة (جهةُ نهاية السطر في العربيّة) والأفقيُّ تحتها */
+.cbk-scr::-webkit-scrollbar { width: 4px; height: 4px; }
+.cbk-scr::-webkit-scrollbar-track { background: transparent; }
+.cbk-scr::-webkit-scrollbar-track:vertical { margin-block: 18px; }
+.cbk-scr::-webkit-scrollbar-track:horizontal { margin-inline: 18px; }
+.cbk-scr::-webkit-scrollbar-thumb { background: rgba(44, 94, 101, .18); border-radius: 99px; }
+.cbk-scr::-webkit-scrollbar-thumb:hover { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .16); }
+.cbk-scr::-webkit-scrollbar-corner { background: transparent; }
+@supports not selector(::-webkit-scrollbar) { .cbk-scr { scrollbar-width: thin; scrollbar-color: rgba(44, 94, 101, .25) transparent; } }
 /* رقمُ الصفحة يلتصق بأعلى المساحة فوق الورق */
 .cbk-scr__ind { position: sticky; top: 8px; z-index: 2; flex: none; align-self: center; margin: 8px 0 -4px; padding: 3px 11px;
   font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #3d4b57; border-radius: 99px;
   background: rgba(255, 255, 255, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 2px 8px -3px rgba(0, 0, 0, .25); }
 /* الرقمُ كرقم الكتاب: الجزءُ يمينًا والكلُّ يسارًا في العربيّة */
 html[data-theme="dark"] .cbk-scr__ind { color: #c9d3d6; background: rgba(20, 26, 28, .62); }
-.cbk-scr__pg { flex: none; width: min(100%, 780px); position: relative; overflow: hidden; border-radius: 3px;
+/* والصفحةُ لا تصغُر دون عرضٍ يُقرأ (‎520px‎): في المساحة الضيّقة تفيض فيظهر الشريطُ الأفقيّ تحتها (كعرض البنك الأدنى) */
+.cbk-scr__pg { flex: none; width: min(780px, max(100%, 520px)); margin-inline: auto; position: relative; overflow: hidden; border-radius: 3px;
   background: #fbf8f1; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
 .cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
   background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
