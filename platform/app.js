@@ -10703,7 +10703,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         : `<span class="pc-art pc-art--${cv.k}"><img src="${cv.url}" alt="" decoding="async"${cv.y != null ? ` style="object-position:50% ${cv.y}%"` : ''}>`
           /* تغييرُ الغلاف لصاحب المساهمة (طلبُ صاحب الموقع): شريطٌ يصعد من أسفل الغلاف نفسِه مكتوبٌ فيه «تغيير الغلاف» —
              كانت أيقونةَ صورةٍ في زاوية اللافتة لا يُعرف ما تفعل */
-          + (ed && pcOwn(p) ? `<button type="button" class="pc-cvbar" data-pccv="${esc(p.id)}">${PC_CV_IC}<span>${esc(pcEn() ? 'Change cover' : 'تغيير الغلاف')}</span></button>` : '')
+          + (ed && pcOwn(p) ? `<button type="button" class="pc-cvbar" data-pccv="${esc(p.id)}"><span class="pc-cvbar__in">${PC_CV_IC}<span>${esc(pcEn() ? 'Change cover' : 'تغيير الغلاف')}</span></span></button>` : '')
           + `</span>`)
       + `<div class="pc-ttl">${nm}${ed ? pcSetHTML(p) : pcSaleHTML(p)}${pcProgHTML(p)}</div>`
       + pcCardsHTML(p, noKeys)
