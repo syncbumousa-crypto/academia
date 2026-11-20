@@ -11413,6 +11413,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ولا شريطَ تمريرٍ عابرٍ في المساحات وهي تتبدّل (طلبُ صاحب الموقع) =====
      قامةُ المساحة تتحرّك ومحتواها بقدره الأخير، فيفيض لحظاتٍ فيظهر شريطُه ثمّ يختفي. والمساهمةُ تُعاد رسمًا أثناء الحركة
      فالصنفُ على وعاء المساهمات لا عليها، ويُرفع بعد أن تقف */
+  /* ===== ولا يتغيّر عرضُ المساحة لحظةَ الحركة (إصلاح: «لحظةَ الضغط تتغيّر الأحجامُ ثم ترجع») =====
+     لمسُ مساحةٍ أخرى يُجري حركةَ التبديل (‎pk--fxrun‎)، وكان الشريطُ يُنزع أثناءها فيستردّ المحتوى عرضَه ثم يردّه:
+     يُعاد كسرُ أسطر الجدول لجزءٍ من الثانية. فصار الشريطُ يُثبَّت على حاله قبلها — من كان له شريطٌ بقي له (شفّافًا)
+     ومن لم يكن له لم يظهر له — ويُرفع التثبيتُ بعد أن تقف */
+  const PK_SB_SEL = '.pk-split :is(.pk-bank, .pk-bank > .x3, .pk-bank > #cm-cards, .kt-view, .pk-src)';
+  function pkSbFreeze(card, on) {
+    if (!card) return;
+    if (on) {
+      if (card.pkSbFz) return;
+      card.pkSbFz = [...card.querySelectorAll(PK_SB_SEL)].map(e => {
+        const cs = getComputedStyle(e); if (!/auto|scroll/.test(cs.overflowY)) return null;
+        const bar = e.offsetWidth - e.clientWidth - (parseFloat(cs.borderLeftWidth) || 0) - (parseFloat(cs.borderRightWidth) || 0) > 0.5;
+        e.style.overflowY = bar ? 'scroll' : 'hidden'; return e;
+      }).filter(Boolean);
+    } else if (card.pkSbFz) { card.pkSbFz.forEach(e => e.style.removeProperty('overflow-y')); card.pkSbFz = null; }
+  }
   function pkSbHide(ms = 1000) {
     const c = document.getElementById('cm-body'); if (!c) return;
     c.classList.add('pk-sbhide'); clearTimeout(pkSbHide.t); pkSbHide.t = setTimeout(() => c.classList.remove('pk-sbhide'), ms);
@@ -24988,6 +25004,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (prev) cancelAnimationFrame(prev.raf);
     const st = Object.assign({ raf: 0, from: 0, to: 1, start: performance.now(), span: dur, dur, t: 0, tracks, end: done, anims: [] }, extra || {});
     card.pkBandAnim = st;
+    pkSbFreeze(card, true);
     card.classList.add('pk--fxrun');
     /* الكتابُ (‎WebGL‎) يُجمَّد أثناءها كما في التكبير: لوحتُه صورةٌ تُحجَّم، ويُرسم مرّةً حين تقف.
        وحركةٌ تحلّ محلّ أخرى قبل تمامها ترث تجميدَها — وإلّا بقي الكتابُ مجمَّدًا أبدًا (لا أحدَ يفكّه) */
@@ -25005,7 +25022,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }));
     };
     const stop = () => {
-      card.pkBandAnim = null; card.classList.remove('pk--fxrun');
+      card.pkBandAnim = null; card.classList.remove('pk--fxrun'); pkSbFreeze(card, false);
       const end = st.end;
       if (end) end(); else pkBandFit(card);
       if (st.busy) cxMorphSettle();
