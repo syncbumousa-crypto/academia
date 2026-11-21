@@ -19895,10 +19895,10 @@ html[data-theme="dark"] .kt-rt__tm .kt-rt__b.on { color: #e1c172; }
 .pg-cnt > .pg-ring { position: relative; flex: none; width: 18px; height: 18px; overflow: hidden; border-radius: 50%;
   border: 1.4px solid rgba(44, 94, 101, .3);
   /* جوفُ الدائرة جوفُ كبسولتها نفسُه (طلبُ صاحب الموقع): لونُها وظلُّها الداخليّ من تحت إلى فوق — فلا يتبدّل اللونُ حين تنفتح */
-  background: linear-gradient(to top, rgba(0, 0, 0, .17), rgba(0, 0, 0, .04) 50%, transparent),
-    radial-gradient(ellipse 75% 75% at 50% 45%, transparent 55%, rgba(0, 0, 0, .13)), #f3f6f7; }
+  background: linear-gradient(to top, rgba(0, 0, 0, .17), rgba(0, 0, 0, .04) 50%, transparent) no-repeat, #f3f6f7;
+  background-clip: padding-box;   /* داخلَ الحافّة لا تحتها: كان التدرّجُ يتكرّر تحت الحافّة الشفّافة فيُرى خطٌّ غامقٌ فوق وتحت (طلبُ صاحب الموقع) */ }
 .pg-cnt > .pg-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
-html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(255, 255, 255, .22); background: linear-gradient(to top, rgba(0, 0, 0, .22), transparent 65%), #3b4448; }
+html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(255, 255, 255, .22); background: linear-gradient(to top, rgba(0, 0, 0, .22), transparent 65%) no-repeat, #3b4448; background-clip: padding-box; }
 /* وبجانب مفتوح: إخوتُه يتّسعون بقدر العدّاد (كانوا ‎160‎)، والعدّادُ على سطر الاسم الأوّل لا في وسط أسطره */
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { max-width: 220px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { align-self: flex-start; margin-top: 2px; }
