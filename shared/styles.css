@@ -20083,12 +20083,18 @@ html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255
 .cbk-sb--v { top: 18px; bottom: 18px; left: 0; width: 8px; }   /* ملتصقان بحافّة المساحة (طلبُ صاحب الموقع) */
 .cbk-sb--h { left: 18px; right: 18px; bottom: 0; height: 8px; }
 .cbk-sb > i { position: absolute; display: block; border-radius: 99px; pointer-events: auto; cursor: default;
-  background: rgba(44, 94, 101, .34); box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); transition: background .15s; }
+  background: rgba(44, 94, 101, .18); transition: background .15s; }   /* بألوان شريط بنك الأسئلة نفسِها وبلا إطارٍ أبيض (طلبُ صاحب الموقع) */
 .cbk-sb--v > i { left: 0; width: 4px; top: 0; }
 .cbk-sb--h > i { bottom: 0; height: 4px; left: 0; }
-.cbk-sb > i:hover, .cbk-sb.is-drag > i { background: rgba(44, 94, 101, .55); }
-html[data-theme="dark"] .cbk-sb > i { background: rgba(40, 48, 52, .55); box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
-html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-drag > i { background: rgba(40, 48, 52, .8); }
+.cbk-sb > i:hover, .cbk-sb.is-drag > i { background: rgba(44, 94, 101, .32); }
+html[data-theme="dark"] .cbk-sb > i { background: rgba(255, 255, 255, .16); }
+html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-drag > i { background: rgba(255, 255, 255, .28); }
+/* والشريطُ يطفو على الورق لا على أرضيّة المساحة: فلونُه من الورق تحته (‎bkScrTone‎) — لونا شريط البنك نفسُهما،
+   الفاتحُ فوق الورق الفاتح والداكنُ فوق الغامق، أيًّا كان الوضع (وإلّا اختفى الأبيضُ الشفّافُ على صفحةٍ بيضاء) */
+#cm-body .pk-src.bk-on-light .cbk-sb > i { background: rgba(44, 94, 101, .18); }
+#cm-body .pk-src.bk-on-light :is(.cbk-sb > i:hover, .cbk-sb.is-drag > i) { background: rgba(44, 94, 101, .32); }
+#cm-body .pk-src.bk-on-dark .cbk-sb > i { background: rgba(255, 255, 255, .16); }
+#cm-body .pk-src.bk-on-dark :is(.cbk-sb > i:hover, .cbk-sb.is-drag > i) { background: rgba(255, 255, 255, .28); }
 
 /* طبقةُ القائمة (حبّةُ الرقم والتقريب والشريطان) بشكل القائمة نفسِه فوقها، لا تلتقط إلّا من أزرارها ومقبضَيها.
    والمساحةُ لا تقصّ ما يجاوز صندوقَها: رسمتُها أوسعُ منه قليلًا، والقصُّ عندئذٍ بالرسمة (‎bkScrFit‎) */
