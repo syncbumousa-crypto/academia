@@ -9831,7 +9831,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkCapWaves = cnt => {
     const g = cnt.querySelector('.pg-capw'), cap = cnt.querySelector('.pg-cap');
     if (!g || !cap || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
-    const w = Math.ceil(cap.getBoundingClientRect().width) + 6, c = w / 2, v = w * .75, A = +g.dataset.a || 0, D = 1.9, FR = 48, TAU = 2 * Math.PI;
+    const w = Math.ceil(parseFloat(cnt.style.getPropertyValue('--pk-w')) || cap.getBoundingClientRect().width) + 6, c = w / 2, v = w * .75, A = +g.dataset.a || 0, D = 1.9, FR = 48, TAU = 2 * Math.PI;
     const ref = p => { p = ((p % (2 * w)) + 2 * w) % (2 * w); return p > w ? 2 * w - p : p; };
     const bump = (x, t) => { if (t >= D) return 0; const e = 3.4 * Math.exp(-1.3 * t), G = u => Math.exp(-u * u / 162); return -e * (G(x - ref(c + v * t)) + G(x - ref(c - v * t))); };
     const path = (Y, t) => { let d = 'M-4 30'; for (let x = -4; x <= w + 4; x += 3) d += ` L${x} ${(Y + A * Math.sin(x / 18 * TAU) + bump(x, t)).toFixed(2)}`; return d + ` L${w + 4} 30 Z`; };
@@ -9845,7 +9845,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   };
   /* وعرضُ الكبسولة يُقاس قبل أن تنفتح (‎--pk-w‎): إليه يتّسع العدّادُ فيتراجع الاسمُ أمامها ولا تغطّيه */
-  const pkCapPlace = cnt => { const cap = cnt.querySelector('.pg-cap'); if (cap) cnt.style.setProperty('--pk-w', cap.offsetWidth + 'px'); };
+  /* العرضُ الطبيعيّ: نسخةُ الأرقام الخفيّة وحشوتا الكبسولة وحافّتاها — لا عرضُها الآن (هي ‎22px‎ وهي مطويّة) */
+  const pkCapPlace = cnt => {
+    const cap = cnt.querySelector('.pg-cap'), sz = cap && cap.querySelector('.pg-capsz'); if (!sz) return;
+    const cs = getComputedStyle(cap), pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+    cnt.style.setProperty('--pk-w', Math.ceil(sz.getBoundingClientRect().width + pad) + 'px');
+  };
   /* ===== عند فتح مجلد: تنفتح كبسولتُه وكبسولاتُ مجلداته الفرعيّة معًا، تُرى خمسَ ثوانٍ ثم تنطوي (طلبُ صاحب الموقع) =====
      النقرُ يعيد رسمَ الشريط، فيُبحث عن الوجه الجديد بعد الرسم بمعرّفه. والفرعيّةُ تتتابع بفارقٍ يسير (‎70ms‎) فتُرى موجةً
      تسري فيها. ويُفتح فقط ما انفتح أو اختير — لا عند طيّ مجلد */

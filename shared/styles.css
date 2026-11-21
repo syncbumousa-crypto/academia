@@ -864,7 +864,7 @@ html[data-lang="ar"] .info-sharebtn svg { transform: scaleX(-1); }
   inset-inline-start: auto; inset-inline-end: auto; left: auto;
   right: 100%; margin-right: calc(var(--thk, 10px) / 2 - 1px);
   width: 19px; height: 19px; border-radius: 50%; overflow: hidden;
-  border: 1.4px solid rgba(44, 94, 101, .3); background: rgba(44, 94, 101, .1);
+  border: 1.4px solid rgba(44, 94, 101, .3); background: #fff;   /* جوفُ دائرة المساهمة نفسُه (طلبُ صاحب الموقع) */
 }
 .cstat__fill {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -9385,7 +9385,7 @@ html[data-theme="dark"] .fcol-bar.is-drag i { background: #4a8d96; }
 html[data-theme="dark"] .search { background: var(--surface); border-color: var(--border); color: var(--c-ink); }
 html[data-theme="dark"] .search::placeholder { color: var(--placeholder); }
 /* دائرة الإتقان في الداكن: مسارها سطح داكن وحدّها ذهبي خافت (السائل ذهبي كما هو) */
-html[data-theme="dark"] .cstat { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .22); }
+html[data-theme="dark"] .cstat { background: #0e181c; border-color: rgba(255, 255, 255, .22); }
 html[data-theme="dark"] :is(.cimg, .term-frame) { border-color: var(--border-dash); }
 
 /* نصوص بترولية على أسطح داكنة → بترولي فاتح (استثناء الحالات النشطة بيضاء النص) */
@@ -19932,9 +19932,11 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: -2px; z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px;
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(44, 94, 101, .3); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
-  clip-path: inset(2px calc(100% - 20px) 2px 2px round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
-  transition: clip-path .5s cubic-bezier(.22, 1, .36, 1) .16s, opacity .2s ease .5s, visibility 0s linear .66s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
-[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: -2px; clip-path: inset(2px 2px 2px calc(100% - 20px) round 9px); }
+  box-sizing: border-box; width: 22px; opacity: 0; visibility: hidden; will-change: width;
+  /* تنفتح بعرضها الحقيقيّ لا بقصّ (طلبُ صاحب الموقع): القصُّ كان يأكل حافّتَها أثناء الحركة — والحافّةُ لها، فتبقى طولَ الوقت.
+     من ‎22px‎ (قدُّ الدائرة وهي تكبر عند المرور) إلى عرضها الطبيعيّ (‎--pk-w‎ يُقاس قبل الانفتاح) */
+  transition: width .5s cubic-bezier(.22, 1, .36, 1) .16s, opacity .2s ease .5s, visibility 0s linear .66s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
+[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: -2px; }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
    والداكنُ جوفٌ رماديٌّ ناعم وماءٌ أعمق ورقمُه الزجاجيّ — نسختا الرقم في الرسمة تُظهَر منهما واحدة */
@@ -19950,8 +19952,7 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 .pg-cnt > .pg-cap > svg text { font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; }
 .pg-cnt > .pg-ring { transition: opacity .26s ease, transform .56s cubic-bezier(.22, 1, .36, 1); }
 /* ‏‎.is-peek‎: تُفتح الكبسولةُ بلا مؤشّر — عند فتح المجلد تنفتح كبسولتُه وكبسولاتُ ما فيه خمسَ ثوانٍ (‎pkCapPeek‎) */
-:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
-[dir="ltr"] :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { clip-path: inset(0 0 0 0 round 99px); }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { width: var(--pk-w, 64px); opacity: 1; visibility: visible; transition-delay: 0s; }
 /* ===== الرقمُ ينطلق من الدائرة ويعود إليها (طلبُ صاحب الموقع · الاقتراح ٣) — حركةٌ بلا تلاشٍ =====
    أصلُ التحويل مركزُ الدائرة نفسُها في طرف الكبسولة: عند الانفتاح تخرج الأرقامُ منها صغيرةً وتنزلق إلى مكانها وتكبر بنطّة،
    وعند الانطواء ترجع إليها وتصغر — ثمّ تنطوي الكبسولة (تأخيرُ قصّها أعلاه) */
