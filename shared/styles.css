@@ -19922,12 +19922,14 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
    إلى الجهتين وحافّتاه مع حافّتَي العدّاد — داخل المربّع ودون الاسم */
 /* والفُرجةُ إلى الاسم تضيق معها (‎10 → 4px‎) — خاصّيّةٌ مسجّلةٌ فتنتقل بنعومة، والكبسولةُ تتوسّط ما بعدها */
 @property --pk-pad { syntax: '<length>'; inherits: true; initial-value: 10px; }
-.pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center; --pk-pad: 10px; padding-inline-start: var(--pk-pad);
+.pk-fstrip.pk-lg .pg-face > .pg-cnt { position: relative; box-sizing: content-box; width: 18px; justify-content: center; --pk-pad: 0px; padding-inline-start: var(--pk-pad);
   transition: width .56s cubic-bezier(.22, 1, .36, 1), --pk-pad .56s cubic-bezier(.22, 1, .36, 1); }
 /* ولا يبقى بين الاسم والكبسولة فراغ (طلبُ صاحب الموقع): ما دامت مفتوحةً يمتدّ الاسمُ إلى آخر مكانه بلا نقاط —
    النقاطُ تقطع الكلمةَ العربيّة عند حرفٍ كامل فتترك فراغًا — ويذوب طرفُه في تدرّجٍ قصير بدل أن يُبتر */
 /* والاسمُ يدنو منها ‎5px‎ بهامشه هو، لا بهامش العدّاد: العدّادُ في المجلدات الفرعيّة مدفوعٌ إلى الطرف بهامشٍ تلقائيّ (‎auto‎)،
    فلو بُدّل هامشُه عند المرور لقفز إلى جنب الاسم وخرج من تحت المؤشّر فانطوى فعاد — يرتجف بلا نهاية */
+/* والاسمُ يمتدّ إلى قُبيل الدائرة (طلبُ صاحب الموقع): بلا حشوٍ في العدّاد، وفُرجةُ الشريحة (‎8px‎) تنقص ‎3px‎ — فتقع نقاطُه على ‎5px‎ منها */
+.pk-fstrip.pk-lg .pg-face > .pg-nm { margin-inline-end: -3px; }
 /* (كان الاسمُ يُقصّ ويُمدّ عند المرور فتبان منه حروفٌ فجأةً ثمّ تُخفيها الكبسولة — صار الاسمُ ثابتًا والكبسولةُ تغطّيه وهي تكبر) */
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: 0; z-index: 3; height: 18px; margin-top: -9px; padding: 0;
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
