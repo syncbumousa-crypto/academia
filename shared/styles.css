@@ -16748,7 +16748,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { min-width: 0; }
 /* المختارُ: أصفى، ومطوَّقٌ بلون مجلده */
-.pk-fstrip.pk-lg .pg-box.is-sel:not(.is-wide) { background: var(--lgx-bg-sel); box-shadow: var(--lgx-rim), inset 0 0 0 1.5px var(--c), var(--lgx-out); }
+.pk-fstrip.pk-lg .pg-box.is-sel:not(.is-wide) { background: var(--lgx-bg-sel); box-shadow: inset 0 0 0 1.5px var(--c), var(--lgx-rim), var(--lgx-out); }   /* حدُّ الاختيار أوّلًا = فوق لمعة الزجاج: كانت لمعةُ الفاتح البيضاءُ المزاحةُ تغطّيه من جهتين فيبدو متفاوتَ السُّمك */
 /* اللوحُ المفتوح: يُطوَّق كلُّه بلونه — أشدَّ إن كان هو المختار */
 .pk-fstrip.pk-lg .pg-box.is-wide,
 .pk-fstrip.pk-lg .pg-in .pg-box.is-wide,
@@ -16756,7 +16756,7 @@ html[data-theme="dark"] .pk-fstrip.pk-lg {
   flex: 1 1 420px; min-width: min(420px, 100%); max-width: 100%; align-self: stretch; border-radius: var(--r, 24px);
   background: var(--lgx-bg-tray); box-shadow: var(--lgx-rim), inset 0 0 0 1.5px color-mix(in srgb, var(--c) 50%, transparent), var(--lgx-out);
 }
-.pk-fstrip.pk-lg .pg-box.is-wide.is-sel { box-shadow: var(--lgx-rim), inset 0 0 0 1.5px var(--c), var(--lgx-out); }
+.pk-fstrip.pk-lg .pg-box.is-wide.is-sel { box-shadow: inset 0 0 0 1.5px var(--c), var(--lgx-rim), var(--lgx-out); }   /* حدُّ الاختيار أوّلًا = فوق لمعة الزجاج: كانت لمعةُ الفاتح البيضاءُ المزاحةُ تغطّيه من جهتين فيبدو متفاوتَ السُّمك */
 html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box:not(.is-wide) { background: var(--lgx-bg); }
 html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-sel:not(.is-wide) { background: var(--lgx-bg-sel); }
 html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { background: var(--lgx-bg-tray); }
