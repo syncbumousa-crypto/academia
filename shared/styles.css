@@ -20037,15 +20037,21 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 #cm-body .pk-src:has(> .pk-src__view.is-scr) { overflow: visible; }
 
 /* ===== أيقونةُ مساحة المصادر وقوسُها بلونٍ يتكيّف مع الورق خلفهما (‎bkScrTone‎) — في الصفحات المتتالية وحدها ===== */
-#cm-body .pk-src.bk-on-light > .pk-blkh .pk-blkh__ic { color: #7a5810; }
-#cm-body .pk-src.bk-on-dark > .pk-blkh .pk-blkh__ic { color: #f0cf82; }
-#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__bg { stroke: rgba(20, 40, 46, .16); }
-#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__d { stroke: rgba(20, 40, 46, .6); }
-#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__d[data-nx] { stroke: rgba(138, 99, 18, .6); }
-#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__m { stroke: #8a6312; }
-#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__bg { stroke: rgba(255, 255, 255, .2); }
-#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__d { stroke: rgba(255, 255, 255, .72); }
-#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__d[data-nx] { stroke: rgba(240, 207, 130, .7); }
-#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__m { stroke: #f0cf82; }
+/* ألوانُ القوس هي ألوانُ قوس الملخّص نفسُها (طلبُ صاحب الموقع) — لوحةُ الفاتح فوق الورق الفاتح ولوحةُ الداكن فوق الغامق،
+   لا ألوانٌ أشدّ. والقطعةُ التالية لا تُذهَّب إلّا تحت المؤشّر كما هناك */
+#cm-body .pk-src.bk-on-light > .pk-blkh .pk-blkh__ic { color: #a9852f; }
+#cm-body .pk-src.bk-on-dark > .pk-blkh .pk-blkh__ic { color: #e1c172; }
+#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__bg { stroke: rgba(20, 40, 46, .07); }
+#cm-body .pk-src.bk-on-light .pk-varc--bk:hover .pk-varc__bg { stroke: rgba(44, 94, 101, .24); }
+#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__d { stroke: rgba(20, 40, 46, .26); }
+#cm-body .pk-src.bk-on-light .pk-varc--bk:hover .pk-varc__d { stroke: rgba(20, 40, 46, .42); }
+#cm-body .pk-src.bk-on-light .pk-varc--bk:hover .pk-varc__d[data-nx] { stroke: rgba(169, 133, 47, .5); }
+#cm-body .pk-src.bk-on-light .pk-varc--bk .pk-varc__m { stroke: #a9852f; }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__bg { stroke: rgba(230, 236, 239, .08); }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk:hover .pk-varc__bg { stroke: rgba(230, 236, 239, .17); }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__d { stroke: rgba(230, 236, 239, .28); }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk:hover .pk-varc__d { stroke: rgba(230, 236, 239, .48); }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk:hover .pk-varc__d[data-nx] { stroke: rgba(212, 179, 106, .5); }
+#cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__m { stroke: #d4b36a; }
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) > .pk-blkh .pk-blkh__ic,
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) .pk-varc--bk path { transition: color .3s ease, stroke .3s ease; }
