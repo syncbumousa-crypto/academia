@@ -20120,3 +20120,18 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 #cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__m { stroke: #d4b36a; }
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) > .pk-blkh .pk-blkh__ic,
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) .pk-varc--bk path { transition: color .3s ease, stroke .3s ease; }
+
+/* ===== زرُّ تكبير الصفحات المتتالية في تذييل المصادر (‎pkBkZoomHTML‎ · طلبُ صاحب الموقع) =====
+   بشكل زرّ المصدر (‎34px‎، حدٌّ رفيع، دائريّ، ظلٌّ خفيف): عدسةُ تصغير · النسبة · عدسةُ تكبير. ولا يظهر إلّا بالعرض العادي */
+.pk-bkzoom { display: none; align-items: center; height: 34px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
+  border: 1px solid var(--u-line); background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); }
+.post.bk-scroll .pk-bkzoom { display: inline-flex; }
+html[data-theme="dark"] .pk-bkzoom { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+.pk-bkzoom > button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; place-items: center; height: 26px; border-radius: 99px; transition: background .15s, color .15s; }
+.pk-bkzoom > button:not(.pk-bkzoom__v) { width: 26px; color: #2c5e65; }
+html[data-theme="dark"] .pk-bkzoom > button:not(.pk-bkzoom__v) { color: #7fb3bb; }
+.pk-bkzoom > button:hover { background: var(--u-hov, rgba(44, 94, 101, .1)); }
+.pk-bkzoom > button:active { transform: scale(.92); }
+.pk-bkzoom > button:focus-visible { outline: 2px solid rgba(44, 94, 101, .45); outline-offset: 1px; }
+.pk-bkzoom svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.pk-bkzoom__v { min-width: 44px; padding: 0 4px; font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; font-variant-numeric: tabular-nums; direction: ltr; text-align: center; color: inherit; }
