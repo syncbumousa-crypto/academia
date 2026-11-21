@@ -27469,7 +27469,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); }); };
+    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrTone(b); }); };
     sc.addEventListener('scroll', b.scrOn, { passive: true });
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
@@ -27491,6 +27491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
     if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
     if (b.scrOv) b.scrOv.remove();
+    { const src = b.view.closest('.pk-src'); if (src) src.classList.remove('bk-on-light', 'bk-on-dark'); }
     b.scrOv = b.scrTop = null; b.scrBars = null; b.scrSync = null;
     b.scr = b.scrTop = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
     b.scroll = false;
@@ -27513,6 +27514,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const c = document.createElement('canvas'); c.width = src.width; c.height = src.height;
       c.getContext('2d').drawImage(src, 0, 0);
       el.replaceChildren(c);
+      bkScrTone(b);   /* صفحةٌ رُسمت للتوّ قد تكون هي التي خلف الزاوية */
     }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
   }
   /* ===== التقريبُ في الصفحات المتتالية (طلبُ صاحب الموقع): كتقريب نافذة الملخّص، بخفّة =====
@@ -27539,7 +27541,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!ref) return;
     const q0 = ref.getBoundingClientRect(), ux = (ax - q0.left) / q0.width, uy = (ay - q0.top) / q0.height;
     b.scrZ = z; sc.style.setProperty('--bk-z', z); bkScrZv(b);
-    requestAnimationFrame(() => b.scrSync && b.scrSync());
+    requestAnimationFrame(() => { b.scrSync && b.scrSync(); bkScrTone(b); });
     const q1 = ref.getBoundingClientRect();
     sc.scrollTop += q1.top + uy * q1.height - ay;
     const cw = sc.clientWidth;
@@ -27645,6 +27647,39 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (Hh) Object.assign(Hh.style, { left: Math.max(18, hL + 14) + 'px', right: Math.max(18, hR + 14) + 'px' });
     if (V) Object.assign(V.style, { top: Math.max(18, vT + 14) + 'px', bottom: Math.max(18, vB + 14) + 'px' });
     b.scrSync && b.scrSync();
+    bkScrTone(b);
+  }
+  /* ===== أيقونةُ المساحة وقوسُها يتكيّفان مع ما خلفهما (طلبُ صاحب الموقع · «تكيّفُ لونٍ فقط») =====
+     تُقرأ إضاءةُ الورق الذي تحت الزاوية فعلًا — من لوحات الصفحات المرسومة نفسِها (‎getImageData‎، عيّنةٌ متباعدة) —
+     وما لا ورقَ تحته يُحسب بلون المساحة. ففوق الفاتح حبرٌ غامق، وفوق الغامق حبرٌ فاتح، مهما كان ثيمُ الموقع.
+     وبين العتبتين لا يتقلّب (يبقى على آخر حال) فلا يرتجف على الصفحات المتوسّطة */
+  function bkScrTone(b) {
+    if (!b || !b.scroll || !b.scr) return;
+    const src = b.view.closest('.pk-src'), hd = src && src.querySelector(':scope > .pk-blkh');
+    if (!src || !hd) return;
+    const parts = [hd.querySelector('.pk-blkh__ic'), hd.querySelector('.pk-varc--bk')].filter(Boolean).map(e => e.getBoundingClientRect()).filter(r => r.width);
+    if (!parts.length) return;
+    const box = { l: Math.min(...parts.map(r => r.left)), t: Math.min(...parts.map(r => r.top)), r: Math.max(...parts.map(r => r.right)), b: Math.max(...parts.map(r => r.bottom)) };
+    const area = Math.max(1, (box.r - box.l) * (box.b - box.t));
+    let sum = 0, cov = 0;
+    for (const cv of b.scr.querySelectorAll('.cbk-scr__pg > canvas')) {
+      const q = cv.getBoundingClientRect();
+      if (q.bottom <= box.t || q.top >= box.b || q.right <= box.l || q.left >= box.r) continue;
+      const l = Math.max(box.l, q.left), t = Math.max(box.t, q.top), r = Math.min(box.r, q.right), bt = Math.min(box.b, q.bottom);
+      const kx = cv.width / q.width, ky = cv.height / q.height;
+      const x0 = Math.floor((l - q.left) * kx), y0 = Math.floor((t - q.top) * ky), w = Math.max(1, Math.floor((r - l) * kx)), h = Math.max(1, Math.floor((bt - t) * ky));
+      let d; try { d = cv.getContext('2d').getImageData(x0, y0, w, h).data; } catch (e) { continue; }
+      let a = 0, n = 0;
+      for (let i = 0; i < d.length; i += 16) { a += (.2126 * d[i] + .7152 * d[i + 1] + .0722 * d[i + 2]) / 255; n++; }
+      if (!n) continue;
+      const part = (r - l) * (bt - t) / area;
+      sum += a / n * part; cov += part;
+    }
+    const paneL = pkDark() ? .17 : .95;
+    const L = sum + paneL * Math.max(0, 1 - cov);
+    const was = src.classList.contains('bk-on-light') ? 'l' : src.classList.contains('bk-on-dark') ? 'd' : '';
+    const now = L > .62 ? 'l' : L < .42 ? 'd' : (was || (L > .52 ? 'l' : 'd'));
+    src.classList.toggle('bk-on-light', now === 'l'); src.classList.toggle('bk-on-dark', now === 'd');
   }
   /* الصفحةُ التي في أعلى النظر (ثلثُه الأوّل) موضعُ الكتاب */
   function bkScrTrack(b) {
