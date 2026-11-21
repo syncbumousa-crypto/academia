@@ -27557,7 +27557,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let q2 = ref.getBoundingClientRect(), dx = q2.left + ux * q2.width - ax;
     if (q2.width + 28 <= cw) {
       const lim = (cw - q2.width) / 2 - 14;
-      b.scrX = Math.max(-lim, Math.min(lim, (b.scrX || 0) - dx));
+      /* التصغيرُ يعيد الصفحةَ إلى وسط المساحة (طلبُ صاحب الموقع): لا تبقى مائلةً يمينًا أو يسارًا بهامشٍ في جانبٍ واحد.
+         فإزاحتُها تتلاشى بقدر ما يقترب التقريبُ من ‎100%‎، وتنعدم عندها وما دونها؛ والتقريبُ وحده يتبع المؤشّر */
+      b.scrX = z < z0 ? (z <= 1 ? 0 : (b.scrX || 0) * (z - 1) / (z0 - 1)) : (b.scrX || 0) - dx;
+      b.scrX = Math.max(-lim, Math.min(lim, b.scrX));
       sc.style.setProperty('--bk-x', b.scrX + 'px');
     } else {
       if (b.scrX) { b.scrX = 0; sc.style.setProperty('--bk-x', '0px'); q2 = ref.getBoundingClientRect(); dx = q2.left + ux * q2.width - ax; }
