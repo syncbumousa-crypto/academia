@@ -9819,9 +9819,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".75"/></filter>`
       + mk('M', TX(by, 'fill="#fff"')) + mk('I', TX(by, 'fill="#fff"') + TX(by + .8, 'fill="#000"')) + mk('B', TX(by, 'fill="#fff"') + TX(by - .9, 'fill="#000"'))
       + `</defs>${scene}`
-      + digits('pg-capt--l', 'Ll', 'rgba(255,255,255,.18)', 1, .22, 1.3, '#4b5f6e', .5)
+      + '<g class="pg-capn">' + digits('pg-capt--l', 'Ll', 'rgba(255,255,255,.18)', 1, .22, 1.3, '#4b5f6e', .5)
       + digits('pg-capt--d', 'Ld', 'rgba(255,255,255,.06)', .5, .25, .9, '#000', .5)
-      + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".4"`)
+      + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".4"`) + '</g>'
       + `<rect class="pg-capgl" width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
   /* ===== موجةٌ واحدةٌ تنعكس (طلبُ صاحب الموقع): كلّما انفتحت الكبسولة =====
