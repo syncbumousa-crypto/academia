@@ -20130,8 +20130,11 @@ html[data-theme="dark"] .pk-bkzoom { border-color: rgba(255, 255, 255, .14); bac
 .pk-bkzoom > button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; place-items: center; height: 26px; border-radius: 99px; transition: background .15s, color .15s; }
 .pk-bkzoom > button:not(.pk-bkzoom__v) { width: 26px; color: #2c5e65; }
 html[data-theme="dark"] .pk-bkzoom > button:not(.pk-bkzoom__v) { color: #7fb3bb; }
-.pk-bkzoom > button:hover { background: var(--u-hov, rgba(44, 94, 101, .1)); }
-.pk-bkzoom > button:active { transform: scale(.92); }
+.pk-bkzoom > button:not(.pk-bkzoom__v):hover { background: rgba(44, 94, 101, .1); }
+html[data-theme="dark"] .pk-bkzoom > button:not(.pk-bkzoom__v):hover { background: rgba(255, 255, 255, .07); }
+.pk-bkzoom__v:hover { color: #2c5e65; }
+html[data-theme="dark"] .pk-bkzoom__v:hover { color: #7fb3bb; }
+.pk-bkzoom > button:not(.pk-bkzoom__v):active { transform: scale(.92); }
 .pk-bkzoom > button:focus-visible { outline: 2px solid rgba(44, 94, 101, .45); outline-offset: 1px; }
 .pk-bkzoom svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.pk-bkzoom__v { min-width: 44px; padding: 0 4px; font: 700 12px/1 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; font-variant-numeric: tabular-nums; direction: ltr; text-align: center; color: inherit; }
+.pk-bkzoom > .pk-bkzoom__v { min-width: 40px; padding: 0; font-family: inherit; font-size: 12px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; direction: ltr; text-align: center; color: inherit; }
