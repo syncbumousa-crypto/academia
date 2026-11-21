@@ -27391,11 +27391,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (m === 'scroll') {
         if (b.scroll) return;
         if (b.mx) { b.mxWant = true; b.scrPend = true; return; }   /* تبدُّلٌ جارٍ: يُمرَّر حين يتمّ */
-        bkScrOn(b); return;
+        bkScrIn(b); return;
       }
       b.scrPend = false;
       const one = m === 'one';
-      if (b.scroll) { bkScrOff(b, one); return; }
+      if (b.scroll) { bkScrOut(b, one); return; }
       if (b.mx) { b.mxWant = one; return; }
       if (!!b.one !== one) bk2Switch(b, one);
     });
@@ -27482,7 +27482,108 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkScrShow(b);
     requestAnimationFrame(() => { b.scrW = sc.clientWidth; bkScrGo(b, k0, false); });
   }
-  function bkScrOff(b, one) {
+  /* ===== الانتقالُ بين الكتاب والصفحات المتتالية بلا قفزة (طلبُ صاحب الموقع) =====
+     كتبديل الصفحة والصفحتين: الصفحةُ التي يُقرأ فيها تطير من موضعها في العرض القديم إلى موضعها في الجديد وتأخذ مقاسَه،
+     والعرضان يتعاقبان عليها بتلاشٍ. القديمُ لقطةٌ ثابتة (الكتابُ من لوحته، والصفحاتُ المتتالية تُركَّب من لوحاتها الظاهرة)،
+     والجديدُ يبدأ من مقاس القديم ومكانِه ويستقرّ (‎FLIP‎) */
+  const BK_SX = 460, BK_SXE = 'cubic-bezier(.3, .7, .2, 1)';
+  /* مستطيلُ صفحةٍ في الكتاب على الشاشة (أو أوّلُ الظاهرة) */
+  function bkPgScreen(g, k) {
+    try {
+      const rs = g && !g.dead && g.pageRects ? g.pageRects() : []; if (!rs.length) return null;
+      const r = rs.find(x => x.k === k) || rs[0], c = g.el.getBoundingClientRect();
+      return { l: c.left + r.x, t: c.top + r.y, w: r.w, h: r.h };
+    } catch (e) { return null; }
+  }
+  const bkRect = q => ({ l: q.left, t: q.top, w: q.width, h: q.height });
+  /* يبدأ العنصرُ ‎E‎ (مستطيلُه الآن) وصفحتُه ‎P‎ فيه من المستطيل ‎F‎ */
+  const bkSxFrom = (E, P, F) => ({ transformOrigin: `${P.l - E.l}px ${P.t - E.t}px`, transform: `translate(${F.l - P.l}px, ${F.t - P.t}px) scale(${F.w / P.w}, ${F.h / P.h})` });
+  /* لقطةٌ توضع فوق المساحة في مكانها على الشاشة (تحت رأسها وقوسها) */
+  function bkGhostPut(b, cv, R) {
+    const host = b.view.closest('.pk-src') || b.view;
+    Object.assign(cv.style, { position: 'absolute', left: '0px', top: '0px', width: R.width + 'px', height: R.height + 'px', pointerEvents: 'none', zIndex: 4 });
+    host.appendChild(cv);
+    const o = cv.getBoundingClientRect();
+    cv.style.left = (R.left - o.left) + 'px'; cv.style.top = (R.top - o.top) + 'px';
+    return cv;
+  }
+  /* الصفحاتُ المتتاليةُ الظاهرةُ لقطةً واحدة: كلُّ صفحةٍ ورقةٌ بيضاءُ بظلّها وصورتها في موضعها */
+  function bkScrGhost(b) {
+    const sc = b.scr; if (!sc) return null;
+    const R = sc.getBoundingClientRect(); if (!R.width || !R.height) return null;
+    const d = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement('canvas');
+    cv.width = Math.round(R.width * d); cv.height = Math.round(R.height * d);
+    const x = cv.getContext('2d'); x.scale(d, d);
+    for (const el of sc.querySelectorAll('.cbk-scr__pg')) {
+      const q = el.getBoundingClientRect(); if (q.bottom < R.top || q.top > R.bottom || q.right < R.left || q.left > R.right) continue;
+      const X = q.left - R.left, Y = q.top - R.top, c = el.querySelector(':scope > canvas');
+      x.save(); x.shadowColor = 'rgba(0, 0, 0, .28)'; x.shadowBlur = 14; x.shadowOffsetY = 4; x.fillStyle = '#fff'; x.fillRect(X, Y, q.width, q.height); x.restore();
+      if (c && c.width) x.drawImage(c, X, Y, q.width, q.height);
+    }
+    cv.style.borderRadius = getComputedStyle(sc).borderTopLeftRadius;
+    return { cv, R };
+  }
+  /* الدخولُ: من الكتاب إلى الصفحات المتتالية */
+  function bkScrIn(b) {
+    const g = b.gl, ok = g && !g.dead && !bkReduce() && b.stage && b.stage.clientWidth;
+    let gh = null, F = null;
+    if (ok) {
+      F = b.closed ? null : bkPgScreen(g, b.pos);
+      const cv = document.createElement('canvas');
+      try { g.snapshot(cv); gh = { cv, R: g.el.getBoundingClientRect() }; } catch (e) { gh = null; }
+    }
+    bkScrOn(b);
+    if (!gh || !b.scr) return;
+    const sc = b.scr, ov = b.scrOv, k = b.pos;
+    bkGhostPut(b, gh.cv, gh.R);
+    sc.style.opacity = '0'; if (ov) ov.style.opacity = '0';
+    /* بعد أن تنزل القائمةُ إلى صفحتها (إطارُ ‎bkScrOn‎ نفسُه) */
+    requestAnimationFrame(() => {
+      sc.style.opacity = ''; if (ov) ov.style.opacity = '';
+      const el = b.scr === sc && sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`);
+      const P = el && bkRect(el.getBoundingClientRect()), E = bkRect(sc.getBoundingClientRect()), G = bkRect(gh.R);
+      const o = { duration: BK_SX * (window.__pkfxSlow || 1), easing: BK_SXE };
+      if (P && F && P.w && F.w) {
+        const f = bkSxFrom(E, P, F);
+        sc.animate([{ ...f, opacity: 0 }, { offset: .45, opacity: 1 }, { transformOrigin: f.transformOrigin, transform: 'none', opacity: 1 }], o);
+        /* واللقطةُ تمضي بصفحتها إلى مكان الصفحة الجديدة وتذوب */
+        const t = bkSxFrom(G, F, P);
+        gh.cv.animate([{ transformOrigin: t.transformOrigin, transform: 'none', opacity: 1 }, { offset: .35, opacity: 1 }, { ...t, opacity: 0 }], o).finished.then(() => gh.cv.remove(), () => gh.cv.remove());
+      } else {
+        sc.animate([{ opacity: 0 }, { opacity: 1 }], o);
+        gh.cv.animate([{ opacity: 1 }, { opacity: 0 }], o).finished.then(() => gh.cv.remove(), () => gh.cv.remove());
+      }
+      if (ov) ov.animate([{ opacity: 0 }, { offset: .6, opacity: 0 }, { opacity: 1 }], o);
+    });
+  }
+  /* الخروجُ: من الصفحات المتتالية إلى الكتاب — يُبنى الكتابُ خفيًّا تحت لقطة الصفحات، فإذا جهز طار إليه */
+  function bkScrOut(b, one) {
+    const gh = bkReduce() ? null : bkScrGhost(b);
+    const el = gh && b.scr.querySelector(`.cbk-scr__pg[data-k="${b.pos}"]`), P = el && bkRect(el.getBoundingClientRect()), k = b.pos;
+    if (!gh) return bkScrOff(b, one);
+    bkGhostPut(b, gh.cv, gh.R);
+    let done = false;
+    const end = () => { if (!done) { done = true; gh.cv.remove(); } };
+    bkScrOff(b, one, {
+      quiet: true,
+      onReady: ng => {
+        const o = { duration: BK_SX * (window.__pkfxSlow || 1), easing: BK_SXE };
+        ng.el.style.opacity = '';
+        const F = bkPgScreen(ng, k), E = bkRect(ng.el.getBoundingClientRect()), G = bkRect(gh.R);
+        if (P && F && P.w && F.w) {
+          const f = bkSxFrom(E, F, P);
+          ng.el.animate([{ ...f, opacity: 0 }, { offset: .45, opacity: 1 }, { transformOrigin: f.transformOrigin, transform: 'none', opacity: 1 }], o);
+          const t = bkSxFrom(G, P, F);
+          gh.cv.animate([{ transformOrigin: t.transformOrigin, transform: 'none', opacity: 1 }, { offset: .35, opacity: 1 }, { ...t, opacity: 0 }], o).finished.then(end, end);
+        } else {
+          ng.el.animate([{ opacity: 0 }, { opacity: 1 }], o);
+          gh.cv.animate([{ opacity: 1 }, { opacity: 0 }], o).finished.then(end, end);
+        }
+      },
+    });
+    setTimeout(end, 4000);   /* ولا تبقى اللقطةُ إن تعثّر بناءُ الكتاب */
+  }
+  function bkScrOff(b, one, eo) {
     if (!b || !b.scroll) return;
     const k = Math.max(1, b.pos || 1);
     try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
@@ -27501,7 +27602,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.pos = bkNorm(bkSk(b), k, b.one);
     if (b.meta) { b.meta.pos = b.pos; b.meta.closed = false; saveSoon(); }
     bk2Layout(b);
-    bk2Engine(b);
+    bk2Engine(b, eo);
   }
   /* الصفحةُ بدقّة عرضها على الشاشة (بسقف): نسخةٌ في لوحتها هي — صورةُ المحرّك المخزونةُ لا تُنقل إلى الصفحة */
   function bkScrPaint(b, el) {
