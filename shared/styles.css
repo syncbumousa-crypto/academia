@@ -18362,7 +18362,7 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 /* ورأسُ مساحة المصادر (أيقونتُها في الزاوية) يطفو فوق الكتاب ولا يأخذ سطرًا من قامته (طلبُ صاحب الموقع) */
 #cm-body .pk-split > .pk-src--book { position: relative; }
 #cm-body .pk-split > .pk-src--book > .pk-blkh { position: absolute; top: 10px; inset-inline: 14px; margin: 0; z-index: 3; pointer-events: none; }
-#cm-body .pk-split > .pk-src--book > .pk-blkh > * { pointer-events: auto; }
+#cm-body .pk-split > .pk-src--book > .pk-blkh > :not(.pk-varc) { pointer-events: auto; }   /* والقوسُ لا: صندوقُه يغطّي الأيقونة، ويُلتقط من خطّه وحده (‎.pk-varc__hit‎) كقوس الملخّص — فتبقى الأيقونةُ تُغلق المساحة */
 /* ===== طبقةُ النصّ فوق كتاب WebGL: كلماتُ الـPDF شفّافةً في مواضعها، تُحدَّد ولا تُرى (‎bkTLShow‎) ===== */
 .cbk-stage--gl { position: relative; }
 /* بلا ‎z-index‎: لا سياقَ تكديسٍ يعزل شرائطَ التحديد عن الكتاب تحتها، فتمتزج به (‎multiply‎) — والطبقةُ بعد اللوحة في الترتيب فتعلوها */
