@@ -27432,12 +27432,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let h = '';
     for (let k = 1; k <= (b.n || 0); k++) h += `<div class="cbk-scr__pg" data-k="${k}" style="aspect-ratio:${b.ar || 1 / Math.SQRT2}"></div>`;
     sc.innerHTML = h;
-    /* رقمُ الصفحة وأزرارُ التقريب فوق القائمة لا فيها: التمريرُ الأفقيُّ لا يحملها معه */
+    /* ===== حبّةُ عدد الصفحات (طلبُ صاحب الموقع): زجاجٌ صافٍ بحافّةٍ لامعة، عددُ الصفحات وحده — الجزءُ يمينًا والكلُّ يسارًا.
+       تختفي والقارئُ واقف، وتظهر حين يتحرّك أو يقرّب؛ وعند التقريب تتّسع فتُظهر النسبة ‎5‎ ثوانٍ ثمّ تنطوي (‎bkScrPing‎).
+       ولونُها يتكيّف مع الورق الذي تحتها كقوس الزاوية (‎bkScrTone‎) */
     const top = document.createElement('div');
     top.className = 'cbk-scr__top';
-    top.innerHTML = `<span class="cbk-scr__ind" aria-live="polite"></span><span class="cbk-scr__zm">`
-      + `<button type="button" class="cbk-scr__zb" data-bkz="-1" aria-label="−">−</button><b class="cbk-scr__zv">100%</b>`
-      + `<button type="button" class="cbk-scr__zb" data-bkz="1" aria-label="+">+</button></span>`;
+    top.innerHTML = `<span class="cbk-scr__ind" aria-live="polite"><b></b><i>/</i><s></s></span>`
+      + `<span class="cbk-scr__zm"><span class="cbk-scr__sp"></span><b class="cbk-scr__zv">100%</b></span>`;
     /* طبقةٌ فوق القائمة بشكلها نفسِه: فيها حبّةُ الرقم والتقريب والشريطان — فتُقصّ معها على رسمة المساحة */
     const ov = document.createElement('div'); ov.className = 'cbk-scr__ov'; ov.appendChild(top);
     b.view.appendChild(sc); b.view.appendChild(ov);
@@ -27446,11 +27447,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkScrBars(b);
     requestAnimationFrame(() => bkScrFit(b));
     b.scrZ = b.scrZ || 1; sc.style.setProperty('--bk-z', b.scrZ); bkScrZv(b);
-    top.addEventListener('click', e => {
-      const zb = e.target.closest('[data-bkz]'); if (!zb) return;
-      e.preventDefault();
-      bkScrZoom(b, Math.round((b.scrZ + (+zb.dataset.bkz) * .1) * 10) / 10);
-    });
     /* القرصةُ بإصبعين (عجلةٌ مع ‎ctrlKey‎) تقرّب حول موضع الإصبعين — تُجمع وتُنفَّذ مرّةً في الإطار كما في نافذة الملخّص */
     let zAcc = 0, zReq = 0, zAt = null;
     sc.addEventListener('wheel', e => {
@@ -27469,7 +27465,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrTone(b); }); };
+    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };
     sc.addEventListener('scroll', b.scrOn, { passive: true });
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
@@ -27492,6 +27488,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
     if (b.scrOv) b.scrOv.remove();
     { const src = b.view.closest('.pk-src'); if (src) src.classList.remove('bk-on-light', 'bk-on-dark'); }
+    clearTimeout(b.scrPzT); clearTimeout(b.scrPhT);
     b.scrOv = b.scrTop = null; b.scrBars = null; b.scrSync = null;
     b.scr = b.scrTop = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
     b.scroll = false;
@@ -27522,6 +27519,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والصفحاتُ الظاهرةُ تُعاد بدقّتها الجديدة بعد أن تسكن القرصة */
   const BK_ZMIN = .5, BK_ZMAX = 4;
   function bkScrZv(b) { const v = b.scrTop && b.scrTop.querySelector('.cbk-scr__zv'); if (v) v.textContent = Math.round(b.scrZ * 100) + '%'; }
+  /* الحبّةُ تظهر مع الحركة وتختفي بعد سكونها؛ والتقريبُ يفتح نسبتَه ‎5‎ ثوانٍ ثمّ تنطوي وتختفي */
+  function bkScrPing(b, zoom) {
+    const t = b.scrTop; if (!t) return;
+    t.classList.add('is-on');
+    if (zoom) {
+      t.classList.add('is-z');
+      clearTimeout(b.scrPzT);
+      b.scrPzT = setTimeout(() => { if (b.scrTop !== t) return; t.classList.remove('is-z'); bkScrPing(b); }, 5000);
+    }
+    clearTimeout(b.scrPhT);
+    b.scrPhT = setTimeout(() => { if (b.scrTop === t && !t.classList.contains('is-z')) t.classList.remove('is-on'); }, 1300);
+  }
   function bkScrZoom(b, z, at) {
     const sc = b.scr; if (!sc) return;
     z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
@@ -27540,7 +27549,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     if (!ref) return;
     const q0 = ref.getBoundingClientRect(), ux = (ax - q0.left) / q0.width, uy = (ay - q0.top) / q0.height;
-    b.scrZ = z; sc.style.setProperty('--bk-z', z); bkScrZv(b);
+    b.scrZ = z; sc.style.setProperty('--bk-z', z); bkScrZv(b); bkScrPing(b, true);
     requestAnimationFrame(() => { b.scrSync && b.scrSync(); bkScrTone(b); });
     const q1 = ref.getBoundingClientRect();
     sc.scrollTop += q1.top + uy * q1.height - ay;
@@ -27655,11 +27664,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وبين العتبتين لا يتقلّب (يبقى على آخر حال) فلا يرتجف على الصفحات المتوسّطة */
   function bkScrTone(b) {
     if (!b || !b.scroll || !b.scr) return;
+    bkScrPillTone(b);
     const src = b.view.closest('.pk-src'), hd = src && src.querySelector(':scope > .pk-blkh');
     if (!src || !hd) return;
     const parts = [hd.querySelector('.pk-blkh__ic'), hd.querySelector('.pk-varc--bk')].filter(Boolean).map(e => e.getBoundingClientRect()).filter(r => r.width);
     if (!parts.length) return;
     const box = { l: Math.min(...parts.map(r => r.left)), t: Math.min(...parts.map(r => r.top)), r: Math.max(...parts.map(r => r.right)), b: Math.max(...parts.map(r => r.bottom)) };
+    const L = bkScrLum(b, box);
+    const was = src.classList.contains('bk-on-light') ? 'l' : src.classList.contains('bk-on-dark') ? 'd' : '';
+    const now = L > .62 ? 'l' : L < .42 ? 'd' : (was || (L > .52 ? 'l' : 'd'));
+    src.classList.toggle('bk-on-light', now === 'l'); src.classList.toggle('bk-on-dark', now === 'd');
+  }
+  /* وحبّةُ عدد الصفحات بلون ما تحتها هي */
+  function bkScrPillTone(b) {
+    const t = b.scrTop, tr = t && t.getBoundingClientRect();
+    if (tr && tr.width) {
+      const P = bkScrLum(b, { l: tr.left, t: tr.top, r: tr.right, b: tr.bottom });
+      const pw = t.classList.contains('is-l') ? 'l' : t.classList.contains('is-d') ? 'd' : '';
+      const pn = P > .62 ? 'l' : P < .42 ? 'd' : (pw || (P > .52 ? 'l' : 'd'));
+      t.classList.toggle('is-l', pn === 'l'); t.classList.toggle('is-d', pn === 'd');
+    }
+  }
+  /* إضاءةُ الورق تحت صندوقٍ من الشاشة (‎0..1‎): من لوحات الصفحات المرسومة، وما لا ورقَ تحته بلون المساحة */
+  function bkScrLum(b, box) {
     const area = Math.max(1, (box.r - box.l) * (box.b - box.t));
     let sum = 0, cov = 0;
     for (const cv of b.scr.querySelectorAll('.cbk-scr__pg > canvas')) {
@@ -27676,10 +27703,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       sum += a / n * part; cov += part;
     }
     const paneL = pkDark() ? .17 : .95;
-    const L = sum + paneL * Math.max(0, 1 - cov);
-    const was = src.classList.contains('bk-on-light') ? 'l' : src.classList.contains('bk-on-dark') ? 'd' : '';
-    const now = L > .62 ? 'l' : L < .42 ? 'd' : (was || (L > .52 ? 'l' : 'd'));
-    src.classList.toggle('bk-on-light', now === 'l'); src.classList.toggle('bk-on-dark', now === 'd');
+    return sum + paneL * Math.max(0, 1 - cov);
   }
   /* الصفحةُ التي في أعلى النظر (ثلثُه الأوّل) موضعُ الكتاب */
   function bkScrTrack(b) {
@@ -27701,7 +27725,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* رقمُ الصفحة، وموضعٌ كُتب من خارج (صفحةٌ مربوطة) يُنزل إليه */
   function bkScrShow(b) {
     const t = `${b.pos} / ${b.n}`;
-    if (b.scrInd) b.scrInd.textContent = t;
+    if (b.scrInd) { b.scrInd.firstChild.textContent = b.pos; b.scrInd.lastChild.textContent = b.n; }
     if (b.ind) b.ind.textContent = t;
     if (b.stage) b.stage.dataset.pgn = '';
     const post = b.view && b.view.closest('.post'); if (post) post.classList.remove('bk-shut');
