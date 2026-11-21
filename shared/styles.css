@@ -19935,7 +19935,7 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
   box-sizing: border-box; width: 22px; opacity: 0; visibility: hidden; will-change: width;
   /* تنفتح بعرضها الحقيقيّ لا بقصّ (طلبُ صاحب الموقع): القصُّ كان يأكل حافّتَها أثناء الحركة — والحافّةُ لها، فتبقى طولَ الوقت.
      من ‎22px‎ (قدُّ الدائرة وهي تكبر عند المرور) إلى عرضها الطبيعيّ (‎--pk-w‎ يُقاس قبل الانفتاح) */
-  transition: width .5s cubic-bezier(.22, 1, .36, 1) .16s, opacity .2s ease .5s, visibility 0s linear .66s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
+  transition: width .46s cubic-bezier(.22, 1, .36, 1) .34s, opacity .2s ease .7s, visibility 0s linear .9s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
 [dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: -2px; }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
@@ -19948,7 +19948,9 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 /* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
 .pg-cnt > .pg-cap > .pg-capsz { visibility: hidden; font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; letter-spacing: .6px; }
 .pg-cnt > .pg-cap > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;
-  filter: blur(1.6px); transform: scale(.94); transition: filter .46s cubic-bezier(.22, 1, .36, 1), transform .56s cubic-bezier(.22, 1, .36, 1); }
+  filter: blur(1.6px); transform: scale(.94);
+  /* وعند الانطواء لا يُموَّه شيءٌ قبل أن تعود الأرقامُ إلى الدائرة (طلبُ صاحب الموقع): التمويهُ كان يغطّي رجوعَها */
+  transition: filter .3s ease .38s, transform .4s cubic-bezier(.22, 1, .36, 1) .38s; }
 .pg-cnt > .pg-cap > svg text { font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; }
 .pg-cnt > .pg-ring { transition: opacity .26s ease, transform .56s cubic-bezier(.22, 1, .36, 1); }
 /* ‏‎.is-peek‎: تُفتح الكبسولةُ بلا مؤشّر — عند فتح المجلد تنفتح كبسولتُه وكبسولاتُ ما فيه خمسَ ثوانٍ (‎pkCapPeek‎) */
@@ -19957,11 +19959,11 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
    أصلُ التحويل مركزُ الدائرة نفسُها في طرف الكبسولة: عند الانفتاح تخرج الأرقامُ منها صغيرةً وتنزلق إلى مكانها وتكبر بنطّة،
    وعند الانطواء ترجع إليها وتصغر — ثمّ تنطوي الكبسولة (تأخيرُ قصّها أعلاه) */
 .pg-cap .pg-capn { transform: scale(.16); transform-box: view-box; transform-origin: 9px 50%;
-  transition: transform .26s cubic-bezier(.55, 0, .75, .2); }
+  transition: transform .38s cubic-bezier(.5, -.5, .75, .25); }   /* رجوعٌ مرئيّ: تنشدّ قليلًا ثمّ تدخل الدائرة — عكسُ نطّة الخروج */
 [dir="ltr"] .pg-cap .pg-capn { transform-origin: calc(100% - 9px) 50%; }
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap .pg-capn { transform: none; transition: transform .6s cubic-bezier(.34, 1.45, .64, 1) .06s; }
 @media (prefers-reduced-motion: reduce) { .pg-cap .pg-capn { transition: none !important; } }
-:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap > svg { filter: none; transform: none; }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap > svg { filter: none; transform: none; transition: filter .46s cubic-bezier(.22, 1, .36, 1), transform .56s cubic-bezier(.22, 1, .36, 1); }
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-ring { opacity: 0; transform: scale(1.22); }
 /* وحرفُ الوحدة «د» بخطّ KFUPM الغليظ (طلبُ صاحب الموقع)، ويُغلَّظ فوقه بخطٍّ بلون حشوه */
 .pg-cnt > .pg-cap .pg-capu { font-family: 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; font-size: 12px; }
