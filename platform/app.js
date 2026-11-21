@@ -9761,7 +9761,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pkSoloCur = null;
   /* ===== صبغةُ ما سيُختار (طلبُ صاحب الموقع · الاقتراح ٣) =====
      قبل الضغط يتلوّن بلون مجلده ما سيُختار لو ضُغط: المربّعُ الصغير، أو اللوحُ كلُّه (مساحتُه = المجلدُ بمجلداته)،
-     أو اسمُ المفتوح وحده (نقرُه الثاني = «وحدَه»، والثالثُ يطويه). وما لا يغيّر شيئًا (المختارُ نفسُه) لا يُصبغ */
+     أو اسمُ المفتوح وحده (نقرُه الثاني = «وحدَه»، والثالثُ يطويه) */
   let pkPvEl = null, pkPvX = -1, pkPvY = -1;
   function pkPvAt(el) {
     let t = null;
@@ -9774,8 +9774,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const wide = box.classList.contains('is-wide');
         const fc = face || box.querySelector(':scope > .pg-face'), f = fc && fc.dataset.pkf;
         if (f != null) {
-          if (!wide) t = f === sel ? null : box;                       /* مربّعٌ مغلق: يُختار هو */
-          else if (!face) t = (f === sel && pkSolo[id] !== f) ? null : box;   /* مساحةُ اللوح: المجلدُ كلُّه */
+          /* (ثمّ بطلبه) والمختارُ نفسُه يُصبغ كذلك: الصبغةُ تقول «هذا ما تحت المؤشّر» ولو لم يتغيّر شيء */
+          if (!wide) t = box;                                         /* مربّعٌ مغلق: يُختار هو */
+          else if (!face) t = box;                                    /* مساحةُ اللوح: المجلدُ كلُّه */
           else t = f === sel ? fc : box;                               /* اسمُ المفتوح: «وحدَه» أو يطويه، وإلّا كلُّه */
         }
       }
