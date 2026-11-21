@@ -9777,7 +9777,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* (ثمّ بطلبه) والمختارُ نفسُه يُصبغ كذلك: الصبغةُ تقول «هذا ما تحت المؤشّر» ولو لم يتغيّر شيء */
           if (!wide) t = box;                                         /* مربّعٌ مغلق: يُختار هو */
           else if (!face) t = box;                                    /* مساحةُ اللوح: المجلدُ كلُّه */
-          else t = f === sel ? fc : box;                               /* اسمُ المفتوح: «وحدَه» أو يطويه، وإلّا كلُّه */
+          else t = fc;                                                 /* اسمُ المفتوح: هو «وحدَه» (أو يطويه إن كان وحدَه) */
         }
       }
     }
@@ -29255,7 +29255,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (open.get(par) === f && pkFs[id] === f) {
           if (pkSolo[id] !== f) pkSolo[id] = f;
           else { delete pkSolo[id]; open.delete(par); }
-        } else { open.set(par, f); delete pkSolo[id]; }
+        } else if (open.get(par) === f) pkSolo[id] = f;   /* (طلبُ صاحب الموقع) مفتوحٌ وأحدُ أبنائه مختار: اسمُه يختاره «وحدَه» — والمجلدُ كلُّه بمساحة لوحه */
+        else { open.set(par, f); delete pkSolo[id]; }
       } else { open.delete(par); delete pkSolo[id]; }   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       const pubPick = !pf.closest('.pk--edit');
