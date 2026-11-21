@@ -118,8 +118,9 @@ function grainTex(THREE, d, N) {
 }
 
 const LIGHTS = {
-  light: { sky: ['#ffffff', '#d5d9db', 2.3], sun: ['#fffaf0', 1.1], ground: 0.12, paper: [1.0, 0.985, 0.955] },
-  dark: { sky: ['#f2efe8', '#8a8f96', 2.05], sun: ['#fff4e2', 0.7], ground: 0.42, paper: [0.9, 0.885, 0.85] },
+  /* الورقُ بلون الملفّ نفسِه في الأوضاع الثلاثة (طلبُ صاحب الموقع): لا صبغةَ كريميّةً ولا شمسَ دافئة — الفرقُ عن الصفحات المتتالية الظلُّ ثلاثيُّ الأبعاد وحده */
+  light: { sky: ['#ffffff', '#d5d9db', 2.3], sun: ['#ffffff', 1.1], ground: 0.12, paper: [1, 1, 1] },
+  dark: { sky: ['#ffffff', '#8a8f96', 2.3], sun: ['#ffffff', 1.1], ground: 0.42, paper: [1, 1, 1] },
 };
 
 /**
@@ -183,7 +184,7 @@ export function createBook2(THREE, host, cfg) {
   const grain = grainTexture(THREE);
   /* لونٌ واحدٌ صورةً بكسلٍ واحد — بقيم sRGB نفسِها (كانت تُكتب خطّيّةً ثمّ تُفكّ sRGB فيغمق اللونُ مرّتين: باطنُ الغلاف بدا أسود) */
   const solid = hex => { const h = new THREE.Color(hex).getHexString(); const t = new THREE.DataTexture(new Uint8Array([0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)).concat(255)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
-  const blank = solid('#f6f1e6');
+  const blank = solid('#ffffff');   /* الصفحةُ الخاليةُ بيضاءُ كورق الملفّ (كانت بيجًا، وتسري بيجيّتُها في وجه الصفحة من «ما خلفها») */
   /* ظاهرُ الغلاف الخلفيّ بلون الغلاف أغمقَ قليلًا */
   const coverC = new THREE.Color(cfg.cover || '#2c5e65');   /* لونُ اللوحين والكعب (تحويلُ sRGB يجري عند القراءة) */
   /* باطنُ الغلاف بلونه الخارجيّ نفسِه (طلبُ صاحب الموقع) — صار يُرى بلونه بعد إصلاح ‎solid‎ (كان يغمق مرّتين فبدا أسود) */
@@ -399,7 +400,7 @@ export function createBook2(THREE, host, cfg) {
   const paperM = new THREE.MeshStandardMaterial({ color: '#efe8d6', roughness: 0.95 });
   function genericPage() {
     const cv = document.createElement('canvas'); cv.width = 256; cv.height = Math.round(256 * H / W);
-    const c = cv.getContext('2d'); c.fillStyle = '#fbf8f0'; c.fillRect(0, 0, cv.width, cv.height);
+    const c = cv.getContext('2d'); c.fillStyle = '#ffffff'; c.fillRect(0, 0, cv.width, cv.height);
     c.fillStyle = 'rgba(70,64,52,.28)';
     for (let y = cv.height * 0.12, i = 0; y < cv.height * 0.9; y += cv.height * 0.034, i++) c.fillRect(cv.width * (0.12 + (i % 5 === 4 ? 0.3 : 0)), y, cv.width * (0.76 - (i % 5 === 4 ? 0.3 : 0)), cv.height * 0.009);
     const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t;
