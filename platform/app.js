@@ -9848,7 +9848,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* العرضُ الطبيعيّ: نسخةُ الأرقام الخفيّة وحشوتا الكبسولة وحافّتاها — لا عرضُها الآن (هي ‎22px‎ وهي مطويّة) */
   const pkCapPlace = cnt => {
     const cap = cnt.querySelector('.pg-cap'), sz = cap && cap.querySelector('.pg-capsz'); if (!sz) return;
-    const cs = getComputedStyle(cap), pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+    const cs = getComputedStyle(cap), pad = 20 + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);   /* حشوتا المفتوحة (‎10px‎) — المطويّةُ بلا حشو */
     cnt.style.setProperty('--pk-w', Math.ceil(sz.getBoundingClientRect().width + pad) + 'px');
   };
   /* ===== عند فتح مجلد: تنفتح كبسولتُه وكبسولاتُ مجلداته الفرعيّة معًا، تُرى خمسَ ثوانٍ ثم تنطوي (طلبُ صاحب الموقع) =====

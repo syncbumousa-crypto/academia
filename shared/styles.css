@@ -19929,14 +19929,17 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 /* والاسمُ يدنو منها ‎5px‎ بهامشه هو، لا بهامش العدّاد: العدّادُ في المجلدات الفرعيّة مدفوعٌ إلى الطرف بهامشٍ تلقائيّ (‎auto‎)،
    فلو بُدّل هامشُه عند المرور لقفز إلى جنب الاسم وخرج من تحت المؤشّر فانطوى فعاد — يرتجف بلا نهاية */
 /* (كان الاسمُ يُقصّ ويُمدّ عند المرور فتبان منه حروفٌ فجأةً ثمّ تُخفيها الكبسولة — صار الاسمُ ثابتًا والكبسولةُ تغطّيه وهي تكبر) */
-.pg-cnt > .pg-cap { position: absolute; top: 50%; left: -2px; z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px;
+.pg-cnt > .pg-cap { position: absolute; top: 50%; left: 0; z-index: 3; height: 18px; margin-top: -9px; padding: 0;
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(44, 94, 101, .3); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
-  box-sizing: border-box; width: 22px; opacity: 0; visibility: hidden; will-change: width;
+  box-sizing: border-box; width: 18px; opacity: 0; visibility: hidden; will-change: width;
   /* تنفتح بعرضها الحقيقيّ لا بقصّ (طلبُ صاحب الموقع): القصُّ كان يأكل حافّتَها أثناء الحركة — والحافّةُ لها، فتبقى طولَ الوقت.
      من ‎22px‎ (قدُّ الدائرة وهي تكبر عند المرور) إلى عرضها الطبيعيّ (‎--pk-w‎ يُقاس قبل الانفتاح) */
-  transition: width .46s cubic-bezier(.22, 1, .36, 1) .34s, opacity .2s ease .7s, visibility 0s linear .9s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
-[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: -2px; }
+  /* ومطويّةً هي الدائرةُ نفسُها بقدّها (‎18px‎) وموضعها — فإذا انطوت تسلّمت منها الدائرةُ بلا قفزة (طلبُ صاحب الموقع) */
+  transition: width .46s cubic-bezier(.22, 1, .36, 1) .34s, height .46s cubic-bezier(.22, 1, .36, 1) .34s, margin-top .46s cubic-bezier(.22, 1, .36, 1) .34s,
+    left .46s cubic-bezier(.22, 1, .36, 1) .34s, right .46s cubic-bezier(.22, 1, .36, 1) .34s, padding .46s cubic-bezier(.22, 1, .36, 1) .34s,
+    opacity .2s ease .8s, visibility 0s linear 1s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
+[dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: 0; }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
    والداكنُ جوفٌ رماديٌّ ناعم وماءٌ أعمق ورقمُه الزجاجيّ — نسختا الرقم في الرسمة تُظهَر منهما واحدة */
@@ -19954,7 +19957,8 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 .pg-cnt > .pg-cap > svg text { font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; }
 .pg-cnt > .pg-ring { transition: opacity .26s ease, transform .56s cubic-bezier(.22, 1, .36, 1); }
 /* ‏‎.is-peek‎: تُفتح الكبسولةُ بلا مؤشّر — عند فتح المجلد تنفتح كبسولتُه وكبسولاتُ ما فيه خمسَ ثوانٍ (‎pkCapPeek‎) */
-:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { width: var(--pk-w, 64px); opacity: 1; visibility: visible; transition-delay: 0s; }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { width: var(--pk-w, 64px); height: 22px; margin-top: -11px; left: -2px; padding: 0 10px; opacity: 1; visibility: visible; transition-delay: 0s; }
+[dir="ltr"] :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { left: auto; right: -2px; }
 /* ===== الرقمُ ينطلق من الدائرة ويعود إليها (طلبُ صاحب الموقع · الاقتراح ٣) — حركةٌ بلا تلاشٍ =====
    أصلُ التحويل مركزُ الدائرة نفسُها في طرف الكبسولة: عند الانفتاح تخرج الأرقامُ منها صغيرةً وتنزلق إلى مكانها وتكبر بنطّة،
    وعند الانطواء ترجع إليها وتصغر — ثمّ تنطوي الكبسولة (تأخيرُ قصّها أعلاه) */
