@@ -19940,7 +19940,7 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
    والداكنُ جوفٌ رماديٌّ ناعم وماءٌ أعمق ورقمُه الزجاجيّ — نسختا الرقم في الرسمة تُظهَر منهما واحدة */
-.pg-cap { --pgc-bg: #f3f6f7; --pgc-wl: #e7899c; --pgc-wd: #7cc48a; --pgc-dp: .27; --pgc-ish: 1; --pgc-glc: #2c5e65; --pgc-glo: .22; }
+.pg-cap { --pgc-bg: #f3f6f7; --pgc-wl: #c0455f; --pgc-wd: #4e9d57; --pgc-dp: .27; --pgc-ish: 1; --pgc-glc: #2c5e65; --pgc-glo: .22; }
 html[data-theme="dark"] .pg-cap { --pgc-bg: #3b4448; --pgc-wl: #c0455f; --pgc-wd: #4e9d57; --pgc-dp: .73; --pgc-ish: 0; --pgc-glc: #fff; --pgc-glo: .22; }
 .pg-cap .pg-capt--d { display: none; }
 html[data-theme="dark"] .pg-cap .pg-capt--l { display: none; }
