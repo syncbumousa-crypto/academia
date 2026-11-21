@@ -9813,7 +9813,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
       + `<linearGradient id="${id}it" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".17"/><stop offset=".5" stop-color="#000" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>`
       + `<radialGradient id="${id}iv" cx=".5" cy=".45" r=".75" gradientTransform="translate(.5 .45) scale(1 2.6) translate(-.5 -.45)"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".13"/></radialGradient>`
-      + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
+      + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" style="stop-color:var(--pgc-glc);stop-opacity:var(--pgc-glo)"/><stop offset="1" style="stop-color:var(--pgc-glc)" stop-opacity="0"/></radialGradient>`
       + `<linearGradient id="${id}rm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>`
       + glassF('Ll', 1.35, .2) + glassF('Ld', 1.35, .12)
       + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".75"/></filter>`

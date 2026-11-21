@@ -864,7 +864,7 @@ html[data-lang="ar"] .info-sharebtn svg { transform: scaleX(-1); }
   inset-inline-start: auto; inset-inline-end: auto; left: auto;
   right: 100%; margin-right: calc(var(--thk, 10px) / 2 - 1px);
   width: 19px; height: 19px; border-radius: 50%; overflow: hidden;
-  border: 1.6px solid rgba(168, 132, 46, .45); background: rgba(44, 94, 101, .1);
+  border: 1.4px solid rgba(44, 94, 101, .3); background: rgba(44, 94, 101, .1);
 }
 .cstat__fill {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -9376,7 +9376,7 @@ html[data-theme="dark"] .fcol-bar.is-drag i { background: #4a8d96; }
 html[data-theme="dark"] .search { background: var(--surface); border-color: var(--border); color: var(--c-ink); }
 html[data-theme="dark"] .search::placeholder { color: var(--placeholder); }
 /* دائرة الإتقان في الداكن: مسارها سطح داكن وحدّها ذهبي خافت (السائل ذهبي كما هو) */
-html[data-theme="dark"] .cstat { background: rgba(255, 255, 255, .08); border-color: rgba(225, 193, 114, .4); }
+html[data-theme="dark"] .cstat { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .22); }
 html[data-theme="dark"] :is(.cimg, .term-frame) { border-color: var(--border-dash); }
 
 /* نصوص بترولية على أسطح داكنة → بترولي فاتح (استثناء الحالات النشطة بيضاء النص) */
@@ -10639,6 +10639,11 @@ html[data-theme="light"] .x3 { --x3-paper: #fff; }
 .x3-gls { inset: 0; border-radius: 50%; pointer-events: none;
   background: radial-gradient(ellipse 62% 46% at 30% 16%, rgba(255, 255, 255, .13) 0%, transparent 70%);
   box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .065); }
+/* وفي الوضع الفاتح لمعةُ الزجاج بلونٍ بتروليٍّ خفيف لا أبيض (طلبُ صاحب الموقع): الأبيضُ على الجوف الفاتح لا يُرى.
+   وحافّاتُ الدوائر كلِّها — الكتابُ والمساهمةُ والمجلدُ وكبسولتُه — بلون حافّة دائرة المساهمة */
+html:not([data-theme="dark"]) .x3-gls {
+  background: radial-gradient(ellipse 62% 46% at 30% 16%, rgba(44, 94, 101, .24) 0%, transparent 70%);
+  box-shadow: inset 0 0 0 .5px rgba(44, 94, 101, .12); }
 /* وصلة أفقية من العلامة إلى صفّها — للدرجة الأولى وحدها.
    تبدأ عند حافّة الدائرة وتقف قبل الأيقونة بـ٥px فلا تلتصق بها */
 /* ‎.cx-mst‎ زِيدت يومَ صارت الأمُّ الوالدةُ محطّةً في النشر: هي ‎.x3-st‎ ولا ‎.x3-hd‎
@@ -18782,8 +18787,9 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
 /* دائرةُ الاكتمال بهيئة دائرة الرفّ (‎.cstat‎ الليليّة): حدٌّ ذهبيٌّ باهت وزجاجٌ خفيف، ويسكنها ماءُ التقدّم إن بدأ */
 #cm-body .pk--pc .pc-ring {
   position: relative; display: block; width: 22px; height: 22px; margin-top: 12px; overflow: hidden;
-  border-radius: 50%; border: 1.8px solid rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08);
+  border-radius: 50%; border: 1.4px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .08);
 }
+html:not([data-theme="dark"]) #cm-body .pk--pc .pc-ring { border-color: rgba(44, 94, 101, .3); background: transparent; }
 #cm-body .pk--pc .pc-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
 /* البطاقاتُ الثلاث: خطٌّ واحدٌ بمسافاتٍ متساوية */
 #cm-body .pk--icx.pk--icrow.pk--pc .pc-ban .pk-icrow.pc-ks {
@@ -19877,9 +19883,9 @@ html[data-theme="dark"] .kt-rt__tm .kt-rt__b.on { color: #e1c172; }
   font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--u-dim, #8a97a3); align-self: center; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > .pg-cnt { margin-inline-start: 4px; }
 .pg-cnt > .pg-ring { position: relative; flex: none; width: 18px; height: 18px; overflow: hidden; border-radius: 50%;
-  border: 1.6px solid rgba(168, 132, 46, .55); background: rgba(44, 94, 101, .06); }
+  border: 1.4px solid rgba(44, 94, 101, .3); background: rgba(44, 94, 101, .06); }
 .pg-cnt > .pg-ring > .x3-dot { position: absolute; inset: 0; width: auto; height: auto; border: 0; border-radius: 50%; transform: none; }
-html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(225, 193, 114, .45); background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] .pg-cnt > .pg-ring { border-color: rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .08); }
 /* وبجانب مفتوح: إخوتُه يتّسعون بقدر العدّاد (كانوا ‎160‎)، والعدّادُ على سطر الاسم الأوّل لا في وسط أسطره */
 .pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) { max-width: 220px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { align-self: flex-start; margin-top: 2px; }
@@ -19917,17 +19923,16 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
   -webkit-mask-image: linear-gradient(to left, transparent 0, #000 5px); mask-image: linear-gradient(to left, transparent 0, #000 5px); }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - var(--pk-pad, 10px)) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
-  border: 1.6px solid rgba(168, 132, 46, .55); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
+  border: 1.6px solid rgba(44, 94, 101, .3); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
   clip-path: inset(2px calc(50% - 9px) 2px calc(50% - 9px) round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
   transition: clip-path .56s cubic-bezier(.22, 1, .36, 1), opacity .2s ease, visibility 0s linear .56s; }
 [dir="ltr"] .pg-cnt > .pg-cap { left: calc((100% + var(--pk-pad, 10px)) / 2); }
-html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .45); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
+html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
    والداكنُ جوفٌ رماديٌّ ناعم وماءٌ أعمق ورقمُه الزجاجيّ — نسختا الرقم في الرسمة تُظهَر منهما واحدة */
-.pg-cap { --pgc-bg: #f3f6f7; --pgc-wl: #e7899c; --pgc-wd: #7cc48a; --pgc-dp: .27; --pgc-ish: 1; }
-html[data-theme="dark"] .pg-cap { --pgc-bg: #3b4448; --pgc-wl: #c0455f; --pgc-wd: #4e9d57; --pgc-dp: .73; --pgc-ish: 0; }
+.pg-cap { --pgc-bg: #f3f6f7; --pgc-wl: #e7899c; --pgc-wd: #7cc48a; --pgc-dp: .27; --pgc-ish: 1; --pgc-glc: #2c5e65; --pgc-glo: .22; }
+html[data-theme="dark"] .pg-cap { --pgc-bg: #3b4448; --pgc-wl: #c0455f; --pgc-wd: #4e9d57; --pgc-dp: .73; --pgc-ish: 0; --pgc-glc: #fff; --pgc-glo: .22; }
 .pg-cap .pg-capt--d { display: none; }
-html[data-theme="dark"] .pg-cap .pg-capgl { opacity: .44; }
 html[data-theme="dark"] .pg-cap .pg-capt--l { display: none; }
 html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 /* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
