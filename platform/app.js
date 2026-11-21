@@ -29211,7 +29211,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          مفتوحًا (بطلب صاحب الموقع) */
       /* (ثمّ بطلبه) نقرُ المفتوحِ المختارِ ثانيةً لا يطويه أوّلًا: يُريه وحدَه (ما فيه هو بلا مجلداته، والإطارُ على اسمه)،
          والنقرةُ الثالثةُ تطويه. وكلُّ اختيارٍ آخر يُنهي «وحدَه» */
-      if (pf.hasAttribute('aria-expanded')) {
+      /* (طلبُ صاحب الموقع) ونقرُ اللوح خارج المربّعات يختار المجلدَ **كلَّه بمجلداته** — لا «وحدَه» ولا يطويه:
+         فإن كان «وحدَه» رجع كلَّه، وإن كان مختارًا كلَّه فلا شيء */
+      if (tray) {
+        if (pkFs[id] === f && open.get(par) === f && pkSolo[id] !== f) return;
+        open.set(par, f); delete pkSolo[id];
+      } else if (pf.hasAttribute('aria-expanded')) {
         if (open.get(par) === f && pkFs[id] === f) {
           if (pkSolo[id] !== f) pkSolo[id] = f;
           else { delete pkSolo[id]; open.delete(par); }
