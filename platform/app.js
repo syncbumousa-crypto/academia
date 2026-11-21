@@ -26636,7 +26636,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
   }
   const bkOfEl = el => Object.values(pkSrcBk).find(b => b && ((b.stage && b.stage.contains(el)) || (b.scr && b.scr.contains(el)))) || null;
-  const bkOfSid = sid => Object.values(pkSrcBk).find(b => b && b.gl && hlSidOf(b) === sid) || null;
+  /* الكتابُ بمحرّكه، أو بصفحاته المتتالية (لا محرّكَ فيها) — وإلّا لم يُعَد رسمُ صفحةٍ حُذف منها تظليلٌ أو تبدّل لونُه في التمرير (طلبُ صاحب الموقع) */
+  const bkOfSid = sid => Object.values(pkSrcBk).find(b => b && (b.gl || b.scroll) && hlSidOf(b) === sid) || null;
   function hlRefresh(b, k, paint = true) {
     if (!b) return;
     if (paint && b.gl && b.gl.refreshPage) b.gl.refreshPage(k);
