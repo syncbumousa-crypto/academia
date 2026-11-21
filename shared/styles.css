@@ -19921,7 +19921,7 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
   border: 1.6px solid rgba(44, 94, 101, .3); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
   clip-path: inset(2px calc(100% - 20px) 2px 2px round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
-  transition: clip-path .56s cubic-bezier(.22, 1, .36, 1), opacity .2s ease, visibility 0s linear .56s; }
+  transition: clip-path .5s cubic-bezier(.22, 1, .36, 1) .16s, opacity .2s ease .5s, visibility 0s linear .66s; }   /* الانطواءُ بعد أن تعود الأرقامُ إلى الدائرة */
 [dir="ltr"] .pg-cnt > .pg-cap { left: auto; right: -2px; clip-path: inset(2px 2px 2px calc(100% - 20px) round 9px); }
 html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(255, 255, 255, .22); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
 /* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
@@ -19940,11 +19940,13 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 /* ‏‎.is-peek‎: تُفتح الكبسولةُ بلا مؤشّر — عند فتح المجلد تنفتح كبسولتُه وكبسولاتُ ما فيه خمسَ ثوانٍ (‎pkCapPeek‎) */
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { clip-path: inset(0 0 0 0 round 99px); opacity: 1; visibility: visible; transition-delay: 0s; }
 [dir="ltr"] :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap { clip-path: inset(0 0 0 0 round 99px); }
-/* والرقمُ يظهر بحركته (طلبُ صاحب الموقع): يصعد قليلًا ويتّضح بعد أن تبدأ الكبسولةُ بالانفتاح، ويغيب أوّلًا عند الانطواء */
-.pg-cap .pg-capn { opacity: 0; transform: translateY(3px) scale(.9); transform-box: fill-box; transform-origin: center;
-  transition: opacity .22s ease, transform .3s cubic-bezier(.22, 1, .36, 1); }
-:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap .pg-capn { opacity: 1; transform: none;
-  transition: opacity .34s ease .16s, transform .5s cubic-bezier(.22, 1, .36, 1) .16s; }
+/* ===== الرقمُ ينطلق من الدائرة ويعود إليها (طلبُ صاحب الموقع · الاقتراح ٣) — حركةٌ بلا تلاشٍ =====
+   أصلُ التحويل مركزُ الدائرة نفسُها في طرف الكبسولة: عند الانفتاح تخرج الأرقامُ منها صغيرةً وتنزلق إلى مكانها وتكبر بنطّة،
+   وعند الانطواء ترجع إليها وتصغر — ثمّ تنطوي الكبسولة (تأخيرُ قصّها أعلاه) */
+.pg-cap .pg-capn { transform: scale(.16); transform-box: view-box; transform-origin: 9px 50%;
+  transition: transform .26s cubic-bezier(.55, 0, .75, .2); }
+[dir="ltr"] .pg-cap .pg-capn { transform-origin: calc(100% - 9px) 50%; }
+:is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap .pg-capn { transform: none; transition: transform .6s cubic-bezier(.34, 1.45, .64, 1) .06s; }
 @media (prefers-reduced-motion: reduce) { .pg-cap .pg-capn { transition: none !important; } }
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-cap > svg { filter: none; transform: none; }
 :is(.pg-cnt:hover, .pg-cnt.is-peek) > .pg-ring { opacity: 0; transform: scale(1.22); }
