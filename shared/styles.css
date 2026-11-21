@@ -16769,7 +16769,7 @@ html:not([data-theme="dark"]) .pk-fstrip.pk-lg .pg-in .pg-box.is-wide { backgrou
 }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face { flex: 1 1 auto; height: auto; min-height: 38px; align-items: flex-start; padding-top: 7px; padding-bottom: 7px; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pk-fi { margin-top: 1px; }   /* وسطُ الأيقونة (‎22‎) على وسط السطر الأوّل (‎1.7em + 2px‎) — كانت ‎4px‎ لأيقونة ‎16‎ فنزلت ‎3.5‎ */
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face:hover { background: var(--lgx-hov); }
+
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { width: fit-content; max-width: 100%; padding: 0 12px; border-radius: 19px; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: var(--lgx-hov); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-in,
@@ -16825,7 +16825,7 @@ html .pk-fstrip.pk-lg .pg-box.is-wide.is-flat.is-sel { border-inline-start-color
    ولا يكون إذا كان المؤشّرُ على أحد أبنائه */
 .pk-fstrip.pk-lg .pg-box.is-wide { cursor: pointer; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:hover { background: transparent; }
-.pk-fstrip.pk-lg .pg-box.is-wide:hover:not(:has(.pg-in .pg-box:hover)) { background-image: linear-gradient(var(--lgx-hov), var(--lgx-hov)); }
+/* (والوميضُ صار صبغةَ ما سيُختار ‎.pk-pv‎ — أدناه) */
 
 /* ===== جداولُ «المعرفة» — العرضُ الجدوليّ في تحرير مختبر «رياضيات 105» =====
    بثيم الموقع نفسِه (‎--u-*‎ من جلد المساهمة) وأحجام خطوطه: لوحٌ مدوَّرٌ بحدٍّ رفيع كبطائق الموقع، ورأسٌ
@@ -20138,3 +20138,13 @@ html[data-theme="dark"] .pk-bkzoom__v:hover { color: #7fb3bb; }
 .pk-bkzoom > button:focus-visible { outline: 2px solid rgba(44, 94, 101, .45); outline-offset: 1px; }
 .pk-bkzoom svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .pk-bkzoom > .pk-bkzoom__v { min-width: 40px; padding: 0; font-family: inherit; font-size: 12px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; direction: ltr; text-align: center; color: inherit; }
+
+/* ===== صبغةُ ما سيُختار قبل الضغط (‎pkPvAt‎ · طلبُ صاحب الموقع) — بلون المجلد نفسِه =====
+   المربّعُ الصغير يُصبغ كلُّه، واللوحُ المفتوحُ يُصبغ كلُّه (= المجلدُ بمجلداته)، واسمُ المفتوح وحده (= «وحدَه» أو الطيّ) */
+.pk-fstrip.pk-lg .pg-box { transition: background-color .16s ease; }
+html #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv:not(.is-wide) { background-color: color-mix(in srgb, var(--c) 14%, var(--lgx-bg)); }
+html #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { background-color: color-mix(in srgb, var(--c) 11%, var(--lgx-bg-tray)); }
+html #cm-body .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face.pk-pv { background-color: color-mix(in srgb, var(--c) 18%, transparent); }
+html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv:not(.is-wide) { background-color: color-mix(in srgb, var(--c) 18%, var(--lgx-bg)); }
+html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { background-color: color-mix(in srgb, var(--c) 13%, var(--lgx-bg-tray)); }
+@media (prefers-reduced-motion: reduce) { .pk-fstrip.pk-lg .pg-box { transition: none; } }

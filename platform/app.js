@@ -9759,6 +9759,40 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ‏‎pkSolo[id]‎: المجلدُ المفتوحُ المضغوطُ ثانيةً — يُعرض ما فيه هو وحدَه بلا مجلداته الداخليّة، والإطارُ على اسمه وحدَه (طلبُ صاحب الموقع) */
   const pkSolo = {};
   let pkSoloCur = null;
+  /* ===== صبغةُ ما سيُختار (طلبُ صاحب الموقع · الاقتراح ٣) =====
+     قبل الضغط يتلوّن بلون مجلده ما سيُختار لو ضُغط: المربّعُ الصغير، أو اللوحُ كلُّه (مساحتُه = المجلدُ بمجلداته)،
+     أو اسمُ المفتوح وحده (نقرُه الثاني = «وحدَه»، والثالثُ يطويه). وما لا يغيّر شيئًا (المختارُ نفسُه) لا يُصبغ */
+  let pkPvEl = null, pkPvX = -1, pkPvY = -1;
+  function pkPvAt(el) {
+    let t = null;
+    const st = el && el.closest && el.closest('#cm-body .pk-fstrip.pk-lg');
+    if (st && !el.closest('.pk-fnm, .pk-fic')) {
+      const id = st.dataset.pkid, open = pkFo[id], sel = pkFs[id];
+      const face = el.closest('.pg-face[data-pkf]');
+      const box = face ? face.parentElement : el.closest('.pg-box.is-wide');
+      if (box && st.contains(box)) {
+        const wide = box.classList.contains('is-wide');
+        const fc = face || box.querySelector(':scope > .pg-face'), f = fc && fc.dataset.pkf;
+        if (f != null) {
+          if (!wide) t = f === sel ? null : box;                       /* مربّعٌ مغلق: يُختار هو */
+          else if (!face) t = (f === sel && pkSolo[id] !== f) ? null : box;   /* مساحةُ اللوح: المجلدُ كلُّه */
+          else t = f === sel ? fc : box;                               /* اسمُ المفتوح: «وحدَه» أو يطويه، وإلّا كلُّه */
+        }
+      }
+    }
+    if (t === pkPvEl) return;
+    if (pkPvEl) pkPvEl.classList.remove('pk-pv');
+    pkPvEl = t; if (t) t.classList.add('pk-pv');
+  }
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    pkPvX = e.clientX; pkPvY = e.clientY; pkPvAt(e.target);
+  }, { passive: true });
+  /* وبعد الضغط يُرسم الشريطُ من جديد والمؤشّرُ في مكانه: تُعاد الصبغةُ لما سيكون التالي */
+  window.addEventListener('click', e => {   /* (‎window‎ في الالتقاط: نقرُ الشريط يوقف انتشارَ الحدث) */
+    if (!e.target.closest || !e.target.closest('#cm-body .pk-fstrip.pk-lg')) return;
+    [60, 360].forEach(ms => setTimeout(() => { if (pkPvX >= 0) { if (pkPvEl && !pkPvEl.isConnected) pkPvEl = null; pkPvAt(document.elementFromPoint(pkPvX, pkPvY)); } }, ms));
+  }, true);
   /* ===== عددُ المفاهيم ودائرةُ اكتمالها في طرف كلّ مجلد (طلبُ صاحب الموقع) =====
      العددُ بطائقُ المجلد بما في مجلداته، والدائرةُ دائرةُ محطّة الرحلة نفسُها (‎x3DotAns‎ على ‎x3Ans‎ — ماءٌ بقدر ما أُنجز).
      يُحسبان مع كلّ رسمٍ للشريط فيتبعان كلَّ إضافةٍ وحذفٍ ومذاكرة */
