@@ -9788,27 +9788,41 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const TX = (y, at) => `<text x="50%" y="${y}" text-anchor="middle" direction="ltr" unicode-bidi="bidi-override" ${at}>`
       + (en ? N(d, ud, at, 1) : N(t, ut, at, 1)) + `<tspan dx="2" ${pkCapSl(at)}>/</tspan>` + (en ? N(t, ut, at) : N(d, ud, at)) + `</text>`;
     const mk = (n, inner) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#000"/>${inner}</mask>`;
-    const scene = `<g id="${id}s"><rect width="100%" height="100%" fill="#2a3235"/>`
+    /* ===== جوفُ الكبسولة بالوضعين (طلبُ صاحب الموقع): لا أسودَ بعد اليوم =====
+       الفاتح: جوفٌ أبيضُ مزرقّ وفيه ظلٌّ داخليٌّ متدرّج من تحت إلى فوق (تحت الماء وتحت الرقم)، والماءُ بألوانٍ هادئة،
+       والرقمُ زجاجٌ أبيضُ لامعٌ ينكسر فيه ما وراءه أفتحَ منه ويطفو بظلٍّ ناعم. الداكن: جوفٌ رماديٌّ ناعم (‎#3b4448‎)
+       والرقمُ زجاجُه نفسُه. الماءُ واحدٌ للوضعين (ألوانُه وعتمتُه من ‎CSS‎ فتتبدّل مع الوضع بلا إعادة رسم)،
+       وطبقاتُ الرقم نسختان تُظهر ‎CSS‎ منهما ما يوافق الوضع (‎.pg-capt--l / --d‎).
+       وألوانُ الجوف والماء متغيّراتٌ لا أصناف: نسخةُ ‎<use>‎ التي يكسرها الرقم ترث المتغيّرات ولا تُطابقها الأصناف */
+    const scene = `<g id="${id}s"><rect class="pg-capbg" width="100%" height="100%" style="fill:var(--pgc-bg)"/>`
+      + `<g class="pg-capish" style="opacity:var(--pgc-ish)"><rect width="100%" height="100%" fill="url(#${id}it)"/><rect width="100%" height="100%" fill="url(#${id}iv)"/></g>`
       /* والماءُ في مجموعةٍ يُحرَّك سطحُها عند الانفتاح (‎pkCapWaves‎) — والأرقامُ تكسر صورتَها فتتموّج فيها أيضًا */
-      + (L ? `<g class="pg-capw" data-y0="${(IH * (1 - L)).toFixed(2)}" data-y1="${(IH * (1 - L * R)).toFixed(2)}" data-a="${A}"><path d="${pkCapWave(IH * (1 - L), A)}" fill="#c0455f"/>` + (L * R ? `<path d="${pkCapWave(IH * (1 - L * R), A)}" fill="#4e9d57"/>` : '') + '</g>' : '')
-      + `<rect width="100%" height="100%" fill="url(#${id}dp)"/></g>`;
+      + (L ? `<g class="pg-capw" data-y0="${(IH * (1 - L)).toFixed(2)}" data-y1="${(IH * (1 - L * R)).toFixed(2)}" data-a="${A}"><path class="pg-capwl" style="fill:var(--pgc-wl)" d="${pkCapWave(IH * (1 - L), A)}"/>` + (L * R ? `<path class="pg-capwd" style="fill:var(--pgc-wd)" d="${pkCapWave(IH * (1 - L * R), A)}"/>` : '') + '</g>' : '')
+      + `<rect class="pg-capdp" width="100%" height="100%" fill="url(#${id}dp)" style="opacity:var(--pgc-dp)"/></g>`;
+    const lin = (k, c) => ['R', 'G', 'B'].map(ch => `<feFunc${ch} type="linear" slope="${k}" intercept="${c}"/>`).join('');
+    const glassF = (n, k, c) => `<filter id="${id}${n}" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation=".45"/><feColorMatrix type="saturate" values="1.5"/><feComponentTransfer>${lin(k, c)}</feComponentTransfer><feOffset dy="-1.1" result="b0"/>`
+      /* منشور: قناةُ الأحمر تنزاح يسارًا والأزرقُ يمينًا ثم تُجمع — تشتّتُ الضوء على حوافّ الرقم */
+      + `<feColorMatrix in="b0" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r"/><feOffset in="r" dx="-.7" result="r2"/><feColorMatrix in="b0" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="g"/><feColorMatrix in="b0" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="b"/><feOffset in="b" dx=".7" result="b2"/><feBlend in="r2" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b2" mode="screen"/></filter>`;
+    /* طبقاتُ الرقم لوضعٍ واحد: ظلٌّ تحته، وجسمٌ زجاجيٌّ يكسر الجوف، ونورٌ داخليٌّ فوق وعتمةٌ تحت */
+    const digits = (cls, f, tint, inner, shade, shY, shC, shO) => `<g class="pg-capt ${cls}">`
+      + `<g filter="url(#${id}sh)" opacity="${shO}">${TX(by + shY, `fill="${shC}"`)}</g>`
+      + `<g mask="url(#${id}M)"><use href="#${id}s" filter="url(#${id}${f})"/><rect width="100%" height="100%" fill="${tint}"/></g>`
+      + `<rect width="100%" height="100%" fill="#fff" opacity="${inner}" mask="url(#${id}I)"/>`
+      + `<rect width="100%" height="100%" fill="#000" opacity="${shade}" mask="url(#${id}B)"/></g>`;
     return `<span class="pg-cap"><span class="pg-capsz">${ut ? `<span class="pg-capu">${ut}</span>` : ''}${t} / ${ud ? `<span class="pg-capu">${ud}</span>` : ''}${d}</span><svg aria-hidden="true"><defs>`
       + `<linearGradient id="${id}dp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".65" stop-color="#000" stop-opacity="0"/></linearGradient>`
-      + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
+      + `<linearGradient id="${id}it" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".17"/><stop offset=".5" stop-color="#000" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>`
+      + `<radialGradient id="${id}iv" cx=".5" cy=".45" r=".75" gradientTransform="translate(.5 .45) scale(1 2.6) translate(-.5 -.45)"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".13"/></radialGradient>`
+      + `<radialGradient id="${id}gl" cx=".3" cy=".05" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`
       + `<linearGradient id="${id}rm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>`
-      + `<filter id="${id}L" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation=".45"/><feColorMatrix type="saturate" values="1.5"/><feComponentTransfer><feFuncR type="linear" slope="1.35" intercept=".12"/><feFuncG type="linear" slope="1.35" intercept=".12"/><feFuncB type="linear" slope="1.35" intercept=".12"/></feComponentTransfer><feOffset dy="-1.1" result="b0"/>`
-      /* منشور: قناةُ الأحمر تنزاح يسارًا والأزرقُ يمينًا ثم تُجمع — تشتّتُ الضوء على حوافّ الرقم */
-      + `<feColorMatrix in="b0" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r"/><feOffset in="r" dx="-.7" result="r2"/><feColorMatrix in="b0" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="g"/><feColorMatrix in="b0" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="b"/><feOffset in="b" dx=".7" result="b2"/><feBlend in="r2" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b2" mode="screen"/></filter>`
-      + ``
-      + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".7"/></filter>`
+      + glassF('Ll', 1.35, .2) + glassF('Ld', 1.35, .12)
+      + `<filter id="${id}sh" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation=".75"/></filter>`
       + mk('M', TX(by, 'fill="#fff"')) + mk('I', TX(by, 'fill="#fff"') + TX(by + .8, 'fill="#000"')) + mk('B', TX(by, 'fill="#fff"') + TX(by - .9, 'fill="#000"'))
       + `</defs>${scene}`
-      + `<g filter="url(#${id}sh)" opacity=".5">${TX(by + .9, 'fill="#000"')}</g>`
-      + `<g mask="url(#${id}M)"><use href="#${id}s" filter="url(#${id}L)"/><rect width="100%" height="100%" fill="rgba(255,255,255,.06)"/></g>`
-      + `<rect width="100%" height="100%" fill="#fff" opacity=".5" mask="url(#${id}I)"/>`
-      + `<rect width="100%" height="100%" fill="#000" opacity=".25" mask="url(#${id}B)"/>`
+      + digits('pg-capt--l', 'Ll', 'rgba(255,255,255,.18)', 1, .22, 1.3, '#4b5f6e', .5)
+      + digits('pg-capt--d', 'Ld', 'rgba(255,255,255,.06)', .5, .25, .9, '#000', .5)
       + TX(by, `fill="none" stroke="url(#${id}rm)" stroke-width=".4"`)
-      + `<rect width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
+      + `<rect class="pg-capgl" width="100%" height="100%" fill="url(#${id}gl)"/></svg></span>`;
   }
   /* ===== موجةٌ واحدةٌ تنعكس (طلبُ صاحب الموقع): كلّما انفتحت الكبسولة =====
      انتفاخةٌ تخرج من وسط الماء (حيث كانت الدائرة) وتمشي إلى الطرفين، تضرب الحافّةَ وترتدّ مرّةً، وتخمد في ‎1.9‎ ثانية

@@ -19917,11 +19917,19 @@ html[data-theme="dark"] .pg-cnt .pg-frac > b { color: #eef2f3; }
   -webkit-mask-image: linear-gradient(to left, transparent 0, #000 5px); mask-image: linear-gradient(to left, transparent 0, #000 5px); }
 .pg-cnt > .pg-cap { position: absolute; top: 50%; left: calc((100% - var(--pk-pad, 10px)) / 2); z-index: 3; height: 22px; margin-top: -11px; padding: 0 10px; transform: translateX(-50%);
   display: inline-flex; align-items: center; border-radius: 99px; overflow: hidden; white-space: nowrap; pointer-events: none;
-  border: 1.6px solid rgba(168, 132, 46, .7); background: #2a3235; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45);
+  border: 1.6px solid rgba(168, 132, 46, .55); background: #f3f6f7; box-shadow: 0 3px 8px -4px rgba(20, 40, 46, .35);
   clip-path: inset(2px calc(50% - 9px) 2px calc(50% - 9px) round 9px); opacity: 0; visibility: hidden; will-change: clip-path;
   transition: clip-path .56s cubic-bezier(.22, 1, .36, 1), opacity .2s ease, visibility 0s linear .56s; }
 [dir="ltr"] .pg-cnt > .pg-cap { left: calc((100% + var(--pk-pad, 10px)) / 2); }
-html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .5); }
+html[data-theme="dark"] .pg-cnt > .pg-cap { border-color: rgba(225, 193, 114, .45); background: #3b4448; box-shadow: 0 4px 10px -4px rgba(0, 0, 0, .45); }
+/* جوفُ الكبسولة وماؤها ورقمُها بحسب الوضع (‎pkCapHTML‎): الفاتحُ جوفٌ فاتحٌ بظلٍّ داخليّ وماءٍ هادئ ورقمٍ زجاجيٍّ أبيض،
+   والداكنُ جوفٌ رماديٌّ ناعم وماءٌ أعمق ورقمُه الزجاجيّ — نسختا الرقم في الرسمة تُظهَر منهما واحدة */
+.pg-cap { --pgc-bg: #f3f6f7; --pgc-wl: #e7899c; --pgc-wd: #7cc48a; --pgc-dp: .27; --pgc-ish: 1; }
+html[data-theme="dark"] .pg-cap { --pgc-bg: #3b4448; --pgc-wl: #c0455f; --pgc-wd: #4e9d57; --pgc-dp: .73; --pgc-ish: 0; }
+.pg-cap .pg-capt--d { display: none; }
+html[data-theme="dark"] .pg-cap .pg-capgl { opacity: .44; }
+html[data-theme="dark"] .pg-cap .pg-capt--l { display: none; }
+html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 /* نسخةٌ خفيّةٌ تعطي العرض، والرسمةُ تملأ الجوف كلَّه */
 .pg-cnt > .pg-cap > .pg-capsz { visibility: hidden; font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: 13.5px; font-weight: 400; letter-spacing: .6px; }
 .pg-cnt > .pg-cap > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;
