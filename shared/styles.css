@@ -19863,6 +19863,8 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
    الاسمُ في زاوية مربّعه تمامًا: فزاويتُه هناك بانحناء المربّع نفسِه (يتّسق الإطارُ مع زاويته)، والإطارُ داخل الاسم لا خارجه
    فلا يبلغ الصفَّ الذي تحته */
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { border-start-start-radius: var(--r, 24px); }
+/* (ثمّ بطلبه) والاسمُ لا يلتصق بحافّة اللوح ولا بصفّ أبنائه: يبعد عنهما ‎6px‎ كما يبعد الأبناء، وانحناؤه انحناءُ اللوح ناقصًا البُعد */
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face { margin: 6px 6px 6px; border-radius: calc(var(--r, 24px) - 6px); }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face:focus-visible { outline-offset: -3px; }
 
 /* ===== لا رجوعَ بسحب إصبعين أفقيًّا (طلبُ صاحب الموقع) =====
