@@ -19832,9 +19832,9 @@ html[data-theme="dark"] .cx-lnw > .cx-lnall { border-inline-start-color: rgba(25
 /* ===== شريطُ تمرير المجلدات فوقها، رفيعٌ بلا أسهم (‎.pk-fsb‎ — طلبُ صاحب الموقع) ===== */
 .pk-fstrip.pk-lg > .pg-row { scrollbar-width: none; }
 .pk-fstrip.pk-lg > .pg-row::-webkit-scrollbar { display: none; }
-.post > .pk-fsb { display: none; position: absolute; z-index: 3; height: 4px; pointer-events: none; }
+.post > .pk-fsb { display: none; position: absolute; z-index: 3; height: 3px; pointer-events: none; }   /* كبسولةٌ كاملةٌ رفيعة تحت الحافّة بـ‎1px‎ — لا نصفُ كبسولة (طلبُ صاحب الموقع) */
 .post > .pk-fsb.on { display: block; }
-.post > .pk-fsb > i { position: absolute; top: 0; bottom: 0; inset-inline-start: 0; border-radius: 0 0 99px 99px; background: rgba(127, 127, 127, .5); cursor: grab; pointer-events: auto; transition: background .15s; }
+.post > .pk-fsb > i { position: absolute; top: 0; bottom: 0; inset-inline-start: 0; border-radius: 99px; background: rgba(127, 127, 127, .5); cursor: grab; pointer-events: auto; transition: background .15s; }
 .post > .pk-fsb > i:hover, .post > .pk-fsb > i.is-drag { background: rgba(127, 127, 127, .8); }
 .post > .pk-fsb > i.is-drag { cursor: grabbing; }
 .post > .pk-fsb > i::before { content: ''; position: absolute; inset: -2px 0 -8px; }   /* مَسكةٌ أعرض من خطّه الرفيع */

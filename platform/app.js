@@ -11562,7 +11562,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!over) return;
       const cb = card.getBoundingClientRect(), ox = cb.left + card.clientLeft, oy = cb.top + card.clientTop, rr = row.getBoundingClientRect();
       const blk = card.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), bb = blk && blk.getBBox();
-      const top = bb ? bb.y : rr.top - oy - 8;
+      const top = bb ? bb.y + 1 : rr.top - oy - 7;
       let l = Math.max(rr.left - ox, bb ? bb.x + 18 : -1e9), r = Math.min(rr.right - ox, bb ? bb.x + bb.width - 18 : 1e9);
       /* ويقف قبل أيقونةٍ على سطره (أيقونةُ الملخّص في زاوية المساحة وزرُّ تبديل عرضه) بفسحةٍ: لا يتداخل معها (طلبُ صاحب الموقع) */
       card.querySelectorAll('.pk-blkh__ic, .pk-icrow .pk-ic').forEach(ic => {
