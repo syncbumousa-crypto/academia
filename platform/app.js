@@ -26616,7 +26616,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
     }
   }
-  const bkOfEl = el => Object.values(pkSrcBk).find(b => b && b.stage && b.stage.contains(el)) || null;
+  const bkOfEl = el => Object.values(pkSrcBk).find(b => b && ((b.stage && b.stage.contains(el)) || (b.scr && b.scr.contains(el)))) || null;
   const bkOfSid = sid => Object.values(pkSrcBk).find(b => b && b.gl && hlSidOf(b) === sid) || null;
   function hlRefresh(b, k, paint = true) {
     if (!b) return;
@@ -26917,8 +26917,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   window.addEventListener('scroll', () => hlMkClose(), true);
   /* صفحةُ طبقة النصّ الظاهرةُ تحت نقطة (ولو بين الكلمات أو داخل مربّعٍ بلا نصّ — حيث لا تلتقط الطبقةُ الفأرة) */
   function hlTLAt(e) {
-    const st = e.target.closest && e.target.closest('#cm-body .cbk-stage'); if (!st) return null;
-    for (const d of st.querySelectorAll('.bk-tlbox:not([hidden]) .bk-tl')) {
+    const st = e.target.closest && e.target.closest('#cm-body .cbk-stage, #cm-body .cbk-scr'); if (!st) return null;
+    for (const d of st.querySelectorAll(st.classList.contains('cbk-scr') ? '.bk-tl' : '.bk-tlbox:not([hidden]) .bk-tl')) {
       const r = d.getBoundingClientRect();
       if (r.width && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return d;
     }
@@ -26940,8 +26940,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     hlHovQ = requestAnimationFrame(() => {
       hlHovQ = 0;
       const d = hlTLAt(e), h = d && hlMarkAt(d, e), on = !!(h && h.m);
-      document.querySelectorAll('#cm-body .cbk-stage.hl-over').forEach(x => { if (!on || !x.contains(d)) x.classList.remove('hl-over'); });
-      if (on) d.closest('.cbk-stage').classList.add('hl-over');
+      document.querySelectorAll('#cm-body :is(.cbk-stage, .cbk-scr).hl-over').forEach(x => { if (!on || !x.contains(d)) x.classList.remove('hl-over'); });
+      if (on) { const h = d.closest('.cbk-stage, .cbk-scr'); if (h) h.classList.add('hl-over'); }
     });
   }, { passive: true });
   function hlDelete(id, mid) {
@@ -27444,6 +27444,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.view.appendChild(sc); b.view.appendChild(ov);
     b.view.pkBk = b;
     b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    b.tlPages = new Map(); b.tlText = b.tlText || new Map();
     bkScrBars(b);
     requestAnimationFrame(() => bkScrFit(b));
     b.scrZ = b.scrZ || 1; sc.style.setProperty('--bk-z', b.scrZ); bkScrZv(b);
@@ -27491,6 +27492,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     clearTimeout(b.scrPzT); clearTimeout(b.scrPhT);
     b.scrOv = b.scrTop = null; b.scrBars = null; b.scrSync = null;
     b.scr = b.scrTop = b.scrInd = b.scrIO = b.scrFar = b.scrRO = b.scrOn = null; b.scrW = 0;
+    if (bkTLSel && !bkTLSel.d.isConnected) bkTLSel = null;
+    b.tlPages = null;
     b.scroll = false;
     b.view.classList.remove('is-scr');
     const post = b.view.closest('.post'); if (post) post.classList.remove('bk-scroll');
@@ -27510,9 +27513,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!b.scroll || !el.isConnected || el.dataset.w != w || !src) return;
       const c = document.createElement('canvas'); c.width = src.width; c.height = src.height;
       c.getContext('2d').drawImage(src, 0, 0);
-      el.replaceChildren(c);
+      /* تُبدَّل الصورةُ وحدها: طبقةُ النصّ فوقها تبقى (والتحديدُ الجاري عليها) إلّا إن تبدّل عرضُ الصفحة */
+      const oc = el.querySelector(':scope > canvas'); if (oc) oc.replaceWith(c); else el.prepend(c);
+      bkScrTL(b, el);
       bkScrTone(b);   /* صفحةٌ رُسمت للتوّ قد تكون هي التي خلف الزاوية */
     }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
+  }
+  /* ===== طبقةُ النصّ في الصفحات المتتالية (طلبُ صاحب الموقع): التظليلُ وقائمتُه وأدواتُ التذييل كما في الصفحة والصفحتين =====
+     لكلّ صفحةٍ مرسومةٍ طبقتُها الشفّافة بكلمات الملفّ (‎pdf.js renderTextLayer‎) داخلها، بعرضها على الشاشة — فتمشي معها في التمرير
+     والتقريب، وتُبنى من جديد إذا تبدّل عرضُها. وعليها يجري التحديدُ الهندسيّ والمربّعُ ونقرُ التظليل كما في الكتاب */
+  function bkScrTL(b, el) {
+    if (!b.scroll || !b.doc || !window.pdfjsLib || !el.isConnected) return;
+    const k = +el.dataset.k, W = Math.round(el.clientWidth); if (!W) return;
+    b.tlPages = b.tlPages || new Map(); b.tlText = b.tlText || new Map();
+    const old = b.tlPages.get(k);
+    if (old && old.parentNode === el && old.dataset.w === String(W)) return;
+    if (old) { if (bkTLSel && bkTLSel.d === old) bkTLSel = null; old.remove(); }
+    const d = document.createElement('div'); d.className = 'bk-tl bk-tl--scr'; d.dataset.k = k; d.dataset.w = W; d.dir = 'ltr';
+    el.appendChild(d); b.tlPages.set(k, d);
+    d._p = (async () => {
+      const pg = await b.doc.getPage(k);
+      const vp = pg.getViewport({ scale: W / pg.getViewport({ scale: 1 }).width });
+      d.style.setProperty('--scale-factor', vp.scale);
+      let tc = b.tlText.get(k);
+      if (!tc) { tc = await pg.getTextContent(); b.tlText.set(k, tc); if (b.tlText.size > 12) b.tlText.delete(b.tlText.keys().next().value); }
+      await pdfjsLib.renderTextLayer({ textContentSource: tc, container: d, viewport: vp, textDivs: [] }).promise;
+      if (!d.isConnected) return;
+      bkTLLines(d); hlSpots(b, d);
+    })().catch(() => { if (b.tlPages && b.tlPages.get(k) === d) b.tlPages.delete(k); d.remove(); });
   }
   /* ===== التقريبُ في الصفحات المتتالية (طلبُ صاحب الموقع): كتقريب نافذة الملخّص، بخفّة =====
      ‏‎--bk-z‎ يضرب عرضَ الصفحة (وقامتُها من نسبتها)، والنقطةُ التي تحت الإصبعين (أو وسطُ النظر) تبقى مكانها.
@@ -27912,7 +27940,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointercancel', bkBoxUp, true);
   document.addEventListener('pointerdown', e => {
     const d = e.target.closest && e.target.closest('.bk-tl');
-    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, [data-hlcid]'))) bkTLClear(); return; }
+    if (!d) { if (bkTLSel && !(e.target.closest && e.target.closest('.cbk-stage, .cbk-scr, [data-hlcid]'))) bkTLClear(); return; }
     if (e.button !== 0 || !d._rows) return;
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();

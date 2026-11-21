@@ -18360,7 +18360,7 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 .bk-tl .endOfContent { display: block; position: absolute; inset: 100% 0 0; z-index: -1; cursor: default; user-select: none; }
 .bk-tl.selecting .endOfContent { top: 0; }
 .bk-tl ::selection { background: transparent; color: transparent; }
-.cbk-stage .bk-tl, .cbk-stage .bk-tl span { user-select: none; -webkit-user-select: none; }
+.cbk-stage .bk-tl, .cbk-stage .bk-tl span, .cbk-scr .bk-tl, .cbk-scr .bk-tl span { user-select: none; -webkit-user-select: none; }
 .bk-tl .bk-tl__ln { position: absolute; display: block; pointer-events: auto; cursor: text; }
 /* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
 .bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
@@ -18495,7 +18495,7 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 :is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
 .hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
 /* فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ (لا القلم ولا التقاطع) — ونقرُه يفتح قائمتَه */
-#cm-body .cbk-stage.hl-over, #cm-body .cbk-stage.hl-over * { cursor: pointer !important; }
+#cm-body :is(.cbk-stage, .cbk-scr).hl-over, #cm-body :is(.cbk-stage, .cbk-scr).hl-over * { cursor: pointer !important; }
 .hl-pal.hl-mk { border-radius: 999px; padding: 6px 8px; align-items: center; }
 .hl-mk__sep { width: 1px; height: 16px; margin: 0 2px; background: rgba(20, 40, 46, .16); }
 .hl-pal.is-dark .hl-mk__sep { background: rgba(255, 255, 255, .18); }
@@ -20015,8 +20015,8 @@ html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255
 .cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
   background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
 .cbk-scr__pg > canvas { display: block; width: 100%; height: 100%; }
-/* ولا لوحَ صفوفٍ للتظليل في التمرير: التظليلُ يُرسم على الكتاب */
-.post.bk-scroll .cx-hlrail { visibility: hidden; pointer-events: none; }
+/* وأدواتُ التظليل في التذييل حاضرةٌ في التمرير أيضًا (طلبُ صاحب الموقع): التظليلُ يجري على طبقة نصّ كلّ صفحة (‎bkScrTL‎) */
+.bk-tl.bk-tl--scr { left: 0; top: 0; width: 100%; height: 100%; }
 /* قوسُ الكتاب ملاصقٌ لزاوية مساحته كقوس الملخّص (طلبُ صاحب الموقع): أيقونةُ الكتاب أبعدُ عن زاويتها بـ‎4px‎ أفقًا و‎2px‎ عموديًّا
    من أيقونة الملخّص عن زاوية كتلته، فيُزاح القوسُ بقدرها لتقع زاويةُ رسمه على زاوية المساحة */
 .pk-vdots.pk-varc.pk-varc--bk { top: -8px; inset-inline-start: -10px; }
