@@ -11671,7 +11671,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetWidth ? fr.width / f.offsetWidth : 1;
     const rtl = getComputedStyle(f).direction === 'rtl', pad = parseFloat(getComputedStyle(f)[rtl ? 'paddingLeft' : 'paddingRight']) || 0;
     const room = (rtl ? cr.right - fr.left : fr.right - cr.left) / (k || 1) - pad * .5;
-    c.classList.toggle('is-gl', room >= (parseFloat(c.style.getPropertyValue('--pk-w')) || 64) + 2);
+    const gl = room >= (parseFloat(c.style.getPropertyValue('--pk-w')) || 64) + 2;
+    c.classList.toggle('is-gl', gl);
+    /* (ثمّ بطلبه) ولا متّسعَ بعدها في سطرها: تنزل الكبسولةُ إلى السطر الفارغ تحت الدائرة إن كان في المربّع متّسعٌ له (‎is-gd‎) */
+    const ky = f.offsetHeight ? fr.height / f.offsetHeight : 1, below = (fr.bottom - cr.bottom) / (ky || 1);
+    c.classList.toggle('is-gd', !gl && below >= 26);
   }
   function pkFit(strip) {
     /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى

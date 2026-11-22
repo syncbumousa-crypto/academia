@@ -20170,3 +20170,5 @@ html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { backgr
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl:is(:hover, .is-peek) > .pg-cap { left: auto; right: -2px; }
 [dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl > .pg-cap { right: auto; left: 0; }
 [dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl:is(:hover, .is-peek) > .pg-cap { right: auto; left: -2px; }
+/* وتنزل إلى السطر الفارغ تحتها إن لم يتّسع لها سطرُها (‎is-gd‎): تنزلق إليه وهي تنفتح، فلا تغطّي من الاسم شيئًا */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gd:is(:hover, .is-peek) > .pg-cap { margin-top: 13px; }
