@@ -20154,3 +20154,12 @@ html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { backgr
    الاسمُ هنا على قدّه (‎fit-content‎) وعن يساره فراغُ اللوح: فالعدّادُ نفسُه يتّسع إلى قدّ الكبسولة، فيمتدّ الاسمُ يسارًا
    في الفراغ والكبسولةُ تكبر فيه — والاسمُ مكانه لا يُمسّ */
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > :is(.pg-cnt:hover, .pg-cnt.is-peek) { width: calc(var(--pk-w, 64px) - 4px); }
+
+/* ===== دائرةُ المجلد المغلق تتبع اسمَه (‎pkCntEnd‎ · طلبُ صاحب الموقع) =====
+   بلا هامشٍ تلقائيّ يدفعها إلى طرف المربّع: تلي الاسمَ مباشرة، والاسمُ المنكسرُ تنزل إلى آخر سطره بـ‎translate‎ */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { margin-inline-start: 0; }
+/* والكبسولةُ تنفتح إلى الفراغ بعد الدائرة إن اتّسع لها (‎is-gl‎ · ‎pkCapSide‎): مرسوّةٌ على حافّة الدائرة الأخرى، مطويّةً ومفتوحة */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl > .pg-cap { left: auto; right: 0; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl:is(:hover, .is-peek) > .pg-cap { left: auto; right: -2px; }
+[dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl > .pg-cap { right: auto; left: 0; }
+[dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl:is(:hover, .is-peek) > .pg-cap { right: auto; left: -2px; }

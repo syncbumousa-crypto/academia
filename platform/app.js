@@ -9885,6 +9885,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cap = cnt.querySelector('.pg-cap'), sz = cap && cap.querySelector('.pg-capsz'); if (!sz) return;
     const cs = getComputedStyle(cap), pad = 20 + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);   /* حشوتا المفتوحة (‎10px‎) — المطويّةُ بلا حشو */
     cnt.style.setProperty('--pk-w', Math.ceil(sz.getBoundingClientRect().width + pad) + 'px');
+    if (!cnt.matches(':hover, .is-peek')) pkCapSide(cnt);   /* أيُّ الجهتين تتّسع لها (لا وهي مفتوحة: تقفز) */
   };
   /* ===== عند فتح مجلد: تنفتح كبسولتُه وكبسولاتُ مجلداته الفرعيّة معًا، تُرى خمسَ ثوانٍ ثم تنطوي (طلبُ صاحب الموقع) =====
      النقرُ يعيد رسمَ الشريط، فيُبحث عن الوجه الجديد بعد الرسم بمعرّفه. والفرعيّةُ تتتابع بفارقٍ يسير (‎70ms‎) فتُرى موجةً
@@ -11638,6 +11639,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     sync();
   }
+  /* ===== دائرةُ المجلد في آخر اسمه لا في طرف المربّع (طلبُ صاحب الموقع) =====
+     في المربّع المغلق تتبع الدائرةُ الاسمَ بلا فاصل (‎CSS‎)، والاسمُ إذا انكسر على أسطر نزلت إلى آخر سطرٍ منه بعد آخر كلمة
+     (‎translate‎) — إن كان فيه متّسعٌ لها، وإلّا بقيت بجانب الأسطر على مستوى آخرها. والقياسُ بالمقياس المرئيّ مقسومًا على
+     تصغير الحركة (إن قيس واللوحُ يتحرّك) */
+  function pkCntEnd(strip) {
+    const items = [...strip.querySelectorAll('.pg-box:not(.is-wide) > .pg-face')].map(f => [f.querySelector(':scope > .pg-nm'), f.querySelector(':scope > .pg-cnt')]).filter(([n, c]) => n && c);
+    items.forEach(([, c]) => { c.style.translate = ''; });
+    const moves = items.map(([n, c]) => {
+      if (!n.offsetParent || !n.firstChild) return null;
+      const rg = document.createRange(); rg.selectNodeContents(n);
+      const nb = n.getBoundingClientRect(), ls = [...rg.getClientRects()].filter(r => r.width && r.bottom <= nb.bottom + 1);
+      if (!ls.length) return null;
+      const bot = Math.max(...ls.map(r => r.bottom)), ln = ls.filter(r => r.bottom > bot - 4);   /* آخرُ سطر (قد يكون قطعًا: أرقامٌ وحروف) */
+      if (ln.length === ls.length) return null;   /* سطرٌ واحد: هي بجانبه أصلًا */
+      const rtl = getComputedStyle(n).direction === 'rtl', gap = 5;
+      const last = { left: Math.min(...ln.map(r => r.left)), right: Math.max(...ln.map(r => r.right)), top: Math.min(...ln.map(r => r.top)), bottom: bot };
+      const cr = c.getBoundingClientRect(), k = c.offsetWidth ? cr.width / c.offsetWidth : 1; if (!k) return null;
+      const want = rtl ? last.left - gap - cr.right : last.right + gap - cr.left;   /* حافّةُ الدائرة على ‎5px‎ من آخر كلمة */
+      const dx = rtl ? Math.max(0, want) : Math.min(0, want), dy = (last.top + last.bottom) / 2 - (cr.top + cr.bottom) / 2;
+      return [c, dx / k, dy / k];
+    });
+    moves.forEach(m => { if (m && (Math.abs(m[1]) > .5 || Math.abs(m[2]) > .5)) m[0].style.translate = m[1].toFixed(1) + 'px ' + m[2].toFixed(1) + 'px'; });
+    /* والكبسولةُ تنفتح إلى الفراغ الذي بعد الدائرة إن اتّسع لها (‎is-gl‎)، فلا تغطّي الاسم؛ وإلّا غطّته كما كانت */
+    items.forEach(([, c]) => pkCapSide(c));
+  }
+  function pkCapSide(c) {
+    const f = c.parentElement; if (!f || !f.parentElement || f.parentElement.classList.contains('is-wide') || !c.offsetParent) return;
+    const fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetWidth ? fr.width / f.offsetWidth : 1;
+    const rtl = getComputedStyle(f).direction === 'rtl', pad = parseFloat(getComputedStyle(f)[rtl ? 'paddingLeft' : 'paddingRight']) || 0;
+    const room = (rtl ? cr.right - fr.left : fr.right - cr.left) / (k || 1) - pad * .5;
+    c.classList.toggle('is-gl', room >= (parseFloat(c.style.getPropertyValue('--pk-w')) || 64) + 2);
+  }
   function pkFit(strip) {
     /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى
        أصغرَ من الاسم وينضغط المربّعُ إلى «مجلـ…» بدل أن يفيض الصفُّ ويظهر شريطُ تمريره (طلبُ صاحب الموقع) */
@@ -11654,6 +11687,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const miss = nm.scrollWidth - nm.clientWidth, w = b.getBoundingClientRect().width;
       if (miss > 0 && w < 260) b.style.setProperty('--pk-need', Math.ceil(Math.min(260, w + miss + 1)) + 'px');
     });
+    pkCntEnd(strip);
     pkFsb(strip);
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
     if (window.ResizeObserver && !strip.pkRo) {
