@@ -976,6 +976,9 @@ export function createBook2(THREE, host, cfg) {
     setShadow(o) { Object.assign(SHD, o || {}); blobTex(); tlK = -1; tableLight(smooth(tv)); needs = true; },
     /* يرفعه من الطاولة ويفتحه (‎open‎) أو يُغلقه وينزله إليها (‎rest‎) */
     open() { if (tv < 1 || ta) table(1); },
+    /* (لاستدعاء التحديدات) يُفتح على فتحةٍ بعينها — يعود القارئُ إلى حيث كان — ويُعرف متى سكن على الطاولة فيُقلَّب */
+    openAt(g) { if (tv < 1 || ta) table(1, g); },
+    get resting() { return tv === 0 && !ta && !rf; },
     rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
     get onTable() { return tv < 1 || !!ta; },
     /* التقليبُ على الطاولة (المجلدُ يستدعي تحديداته) — وإنهاؤه فورًا */
