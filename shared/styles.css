@@ -20150,3 +20150,7 @@ html #cm-body .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face.pk-pv { background-col
 html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv:not(.is-wide) { background-color: color-mix(in srgb, var(--c) 18%, var(--lgx-bg)); }
 html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { background-color: color-mix(in srgb, var(--c) 13%, var(--lgx-bg-tray)); }
 @media (prefers-reduced-motion: reduce) { .pk-fstrip.pk-lg .pg-box { transition: none; } }
+/* ===== كبسولةُ اسم المجلد المفتوح لا تغطّي اسمَه (طلبُ صاحب الموقع) =====
+   الاسمُ هنا على قدّه (‎fit-content‎) وعن يساره فراغُ اللوح: فالعدّادُ نفسُه يتّسع إلى قدّ الكبسولة، فيمتدّ الاسمُ يسارًا
+   في الفراغ والكبسولةُ تكبر فيه — والاسمُ مكانه لا يُمسّ */
+.pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > :is(.pg-cnt:hover, .pg-cnt.is-peek) { width: calc(var(--pk-w, 64px) - 4px); }
