@@ -25115,8 +25115,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
       + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
-    if (!card.pkFsbRaf) card.pkFsbRaf = requestAnimationFrame(() => { card.pkFsbRaf = 0; card.querySelectorAll('.pk-fstrip').forEach(x => x.pkFsbSync && x.pkFsbSync());
-      card.querySelectorAll('.pk-src__view.is-scr').forEach(v => v.pkBk && bkScrFit(v.pkBk)); });
+    /* ===== والصفحاتُ المتتاليةُ تُفصَّل على الرسمة **في اللحظة نفسها** (شكوى صاحب الموقع: «الصفحة تطلع برا مساحتها لجزء من الثانية») =====
+       كانت تُؤجَّل إلى الإطار التالي مع شريط التمرير — وفي ذلك الإطار تكون المساحةُ قد تحرّكت (شريطُ المجلدات يقصر أو يطول)،
+       فتُفصَّل على رسمةٍ قديمة وتنزاح بقدر حركة إطار (١٠–٢٥px): تحت الحافّة حين يقصر الشريط، وفوقها حين يطول */
+    card.querySelectorAll('.pk-src__view.is-scr').forEach(v => v.pkBk && bkScrFit(v.pkBk));
+    if (!card.pkFsbRaf) card.pkFsbRaf = requestAnimationFrame(() => { card.pkFsbRaf = 0; card.querySelectorAll('.pk-fstrip').forEach(x => x.pkFsbSync && x.pkFsbSync()); });
   }
   /* ===== الانطلاقُ من الذيل والعودةُ إليه (ROADMAP-PANEFX · المرحلتان ١–٢) =====
      محرّكٌ واحد: حلقةُ ‎requestAnimationFrame‎ قصيرةٌ تحسب لكلّ منطقةٍ لسانَها في كلّ إطار — قامتُه (‎lv‎: صفرٌ في الذيل، وواحدٌ قامتُه
@@ -29336,6 +29339,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          إطارٌ أوّلٌ بلا هي — والمفتوحُ الأخيرُ أعرضُ ما يكون فيه — فيفيض الصفُّ فيظهر شريطُه لحظةً ثمّ يختفي.
          فتُحسب ههنا قبل أن يُرسم شيء، وصفوفُ الشريط بلا تمريرٍ ما دامت قامتُه تنتقل */
       if (st1 && st1.classList.contains('pk-lg')) pkFit(st1);
+      /* ===== والكتلُ تُعاد بعد ضبط الشريط (شكوى صاحب الموقع: «الصفحة تطلع برا مساحتها لجزء من الثانية») =====
+         خطّافُ ما بعد الرسم رسمها والشريطُ قبل ‎pkFit‎ — أطولُ بنحو ‎10px‎ — ثمّ رفع ‎pkFit‎ المساحةَ. والقسمةُ لم يتغيّر حجمُها
+         فلا ينبّه مراقبُ الحجم، والقامةُ قبلُ وبعدُ سواءٌ فلا تجري حلقةُ الحركة: فتبقى الكتلةُ والصفحاتُ تحت مكانهما إطارات */
+      { const c1 = st1 && st1.closest('.post'); if (c1 && c1.querySelector(':scope > .pk-band')) pkBandFit(c1); }
       if (st1 && h0 != null && !bkReduce()) {
         const h1 = st1.getBoundingClientRect().height;
         if (Math.abs(h1 - h0) > 1) {
