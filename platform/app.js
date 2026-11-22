@@ -11644,23 +11644,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (‎translate‎) — إن كان فيه متّسعٌ لها، وإلّا بقيت بجانب الأسطر على مستوى آخرها. والقياسُ بالمقياس المرئيّ مقسومًا على
      تصغير الحركة (إن قيس واللوحُ يتحرّك) */
   function pkCntEnd(strip) {
+    /* (ثمّ بطلبه) والدائرةُ خارجَ سطر الوجه (‎absolute‎): مكانُها محجوزٌ في آخر الاسم نفسِه (‎::after‎ بقدرها)، فلا تأكل من عرض
+       الأسطر شيئًا ويمتلئ كلُّ سطرٍ بما يسعه، ثمّ توضع على ذلك المحجوز */
     const items = [...strip.querySelectorAll('.pg-box:not(.is-wide) > .pg-face')].map(f => [f.querySelector(':scope > .pg-nm'), f.querySelector(':scope > .pg-cnt')]).filter(([n, c]) => n && c);
-    items.forEach(([, c]) => { c.style.translate = ''; });
-    const moves = items.map(([n, c]) => {
-      if (!n.offsetParent || !n.firstChild) return null;
+    const pos = items.map(([n, c]) => {
+      const f = c.parentElement;
+      if (!n.offsetParent || !n.firstChild || !f.offsetWidth) return null;
       const rg = document.createRange(); rg.selectNodeContents(n);
       const nb = n.getBoundingClientRect(), ls = [...rg.getClientRects()].filter(r => r.width && r.bottom <= nb.bottom + 1);
       if (!ls.length) return null;
       const bot = Math.max(...ls.map(r => r.bottom)), ln = ls.filter(r => r.bottom > bot - 4);   /* آخرُ سطر (قد يكون قطعًا: أرقامٌ وحروف) */
-      if (ln.length === ls.length) return null;   /* سطرٌ واحد: هي بجانبه أصلًا */
-      const rtl = getComputedStyle(n).direction === 'rtl', gap = 5;
-      const last = { left: Math.min(...ln.map(r => r.left)), right: Math.max(...ln.map(r => r.right)), top: Math.min(...ln.map(r => r.top)), bottom: bot };
-      const cr = c.getBoundingClientRect(), k = c.offsetWidth ? cr.width / c.offsetWidth : 1; if (!k) return null;
-      const want = rtl ? last.left - gap - cr.right : last.right + gap - cr.left;   /* حافّةُ الدائرة على ‎5px‎ من آخر كلمة */
-      const dx = rtl ? Math.max(0, want) : Math.min(0, want), dy = (last.top + last.bottom) / 2 - (cr.top + cr.bottom) / 2;
-      return [c, dx / k, dy / k];
+      const top = Math.min(...ln.map(r => r.top));
+      const fr = f.getBoundingClientRect(), k = fr.width / f.offsetWidth || 1, rtl = getComputedStyle(n).direction === 'rtl', gap = 5, d = 18;
+      /* والاسمُ المختصَر (‎…‎) يمتدّ نصُّه خلف حدّه: فالدائرةُ عند حدّه */
+      const end = rtl ? Math.max(Math.min(...ln.map(r => r.left)), nb.left + 23 * k) : Math.min(Math.max(...ln.map(r => r.right)), nb.right - 23 * k);
+      let x = ((rtl ? end - gap * k - d * k : end + gap * k) - fr.left) / k;
+      x = Math.max(2, Math.min(f.offsetWidth - d - 2, x));
+      return [c, x, ((top + bot) / 2 - fr.top) / k - d / 2];
     });
-    moves.forEach(m => { if (m && (Math.abs(m[1]) > .5 || Math.abs(m[2]) > .5)) m[0].style.translate = m[1].toFixed(1) + 'px ' + m[2].toFixed(1) + 'px'; });
+    pos.forEach(m => { if (m) { m[0].style.left = m[1].toFixed(1) + 'px'; m[0].style.top = m[2].toFixed(1) + 'px'; } });
     /* والكبسولةُ تنفتح إلى الفراغ الذي بعد الدائرة إن اتّسع لها (‎is-gl‎)، فلا تغطّي الاسم؛ وإلّا غطّته كما كانت */
     items.forEach(([, c]) => pkCapSide(c));
   }

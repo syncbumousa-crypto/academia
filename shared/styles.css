@@ -20157,7 +20157,14 @@ html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { backgr
 
 /* ===== دائرةُ المجلد المغلق تتبع اسمَه (‎pkCntEnd‎ · طلبُ صاحب الموقع) =====
    بلا هامشٍ تلقائيّ يدفعها إلى طرف المربّع: تلي الاسمَ مباشرة، والاسمُ المنكسرُ تنزل إلى آخر سطره بـ‎translate‎ */
-.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { margin-inline-start: 0; }
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { position: absolute; margin: 0; padding: 0; top: 7px; left: 16px; }
+[dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt { left: auto; right: 16px; }
+/* مكانُها محجوزٌ في آخر سطرٍ من الاسم: فراغٌ بقدرها (‎18‎) وفُرجتها (‎5‎) */
+/* (‎inline‎ بوصلةٍ لا عرضَ لها ‎U+2060‎، لا ‎inline-block‎: هذا يُكسر وحده إلى سطرٍ جديد، وذاك يلتصق بآخر كلمة فينزل معها) */
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) > .pg-face > .pg-nm::after { content: '\2060'; padding-inline-start: 23px; }
+/* والاسمُ على سطرٍ واحد (‎…‎ إن طال): المحجوزُ حشوةٌ في طرفه، فالنقاطُ تقف قبله والدائرةُ فيه */
+.pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-nm { padding-inline-end: 23px; }
+.pk-fstrip.pk-lg .pg-row:has(> .pg-box.is-wide) > .pg-box:not(.is-wide) > .pg-face > .pg-nm { padding-inline-end: 0; }
 /* والكبسولةُ تنفتح إلى الفراغ بعد الدائرة إن اتّسع لها (‎is-gl‎ · ‎pkCapSide‎): مرسوّةٌ على حافّة الدائرة الأخرى، مطويّةً ومفتوحة */
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl > .pg-cap { left: auto; right: 0; }
 .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gl:is(:hover, .is-peek) > .pg-cap { left: auto; right: -2px; }
