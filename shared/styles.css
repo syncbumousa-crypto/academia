@@ -20189,3 +20189,5 @@ html.pk-ptr .pk-fstrip .pg-face:focus-visible { outline: none; }
 /* وكبسولةُ المفتوح تنطوي ومكانُها معًا: الفراغُ لا يضيق قبلها (كانت تغطّي الاسمَ لحظةَ الانطواء) — نفسُ تأخير الكبسولة ومدّتها */
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > .pg-cnt { transition: width .46s cubic-bezier(.22, 1, .36, 1) .34s, --pk-pad .46s cubic-bezier(.22, 1, .36, 1) .34s; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > :is(.pg-cnt:hover, .pg-cnt.is-peek) { transition-delay: 0s; }
+/* وإطارُ تركيز لوحة المفاتيح بلون المجلد نفسِه لا بالأزرق (طلبُ صاحب الموقع) */
+.pk-fstrip.pk-lg .pg-face:focus-visible { outline-color: color-mix(in srgb, var(--c, #8a97a3) 75%, transparent); }

@@ -9765,7 +9765,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pkPvEl = null, pkPvX = -1, pkPvY = -1;
   /* آخرُ تفاعلٍ بالمؤشّر أم بلوحة المفاتيح (‎html.pk-ptr‎): إطارُ تركيز المجلد للوحة المفاتيح وحدها */
   document.addEventListener('pointerdown', () => document.documentElement.classList.add('pk-ptr'), true);
-  document.addEventListener('keydown', e => { if (!e.metaKey && !e.ctrlKey && !e.altKey) document.documentElement.classList.remove('pk-ptr'); }, true);
+  /* (ثمّ بطلبه) ومفاتيحُ التنقّل وحدها — لا ‎Shift‎ ولا ‎Win‎ ولا اختصارُ لقطة الشاشة: كانت أيُّ ضغطةٍ تُظهر الإطار */
+  document.addEventListener('keydown', e => { if (!e.metaKey && !e.ctrlKey && !e.altKey && /^(Tab|Arrow\w+|Enter| |Home|End|PageUp|PageDown)$/.test(e.key)) document.documentElement.classList.remove('pk-ptr'); }, true);
   function pkPvAt(el) {
     let t = null;
     const st = el && el.closest && el.closest('#cm-body .pk-fstrip.pk-lg');
