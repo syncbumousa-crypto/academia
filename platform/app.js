@@ -11779,12 +11779,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const par = b.parentElement.closest('.pg-box');
       if (par && moved.has(par)) { if (!o) b.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, delay: 90, easing: 'ease-out', fill: 'backwards' }); return; }
       if (!o) { b.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 200, delay: 90, easing: E, fill: 'backwards' }); return; }
-      const dx = o.right - n.right, dy = o.top - n.top, sx = o.width / n.width, sy = o.height / n.height;
+      const rtl = getComputedStyle(b).direction === 'rtl', dx = rtl ? o.right - n.right : o.left - n.left, dy = o.top - n.top;
+      let sx = o.width / n.width, sy = o.height / n.height;
       if (Math.abs(dx) < .5 && Math.abs(dy) < .5 && Math.abs(sx - 1) < .01 && Math.abs(sy - 1) < .01) return;
       moved.add(b);
-      b.animate([{ transformOrigin: 'right top', transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` }, { transformOrigin: 'right top', transform: 'none' }], { duration: T, easing: E });
+      /* ===== ما يكبر لا يُصغَّر بمقياس بل يُقصّ (طلبُ صاحب الموقع: «محتوى المربّع يمتدّ خارجه») =====
+         المقياسُ يُصغّر المربّعَ إلى قدره القديم ويُعاكَس وجهُه فيبقى الكلامُ بقدره النهائيّ — فإن كبر المربّعُ فاض كلامُه
+         عن حافّته وهو بعدُ صغير. فالجهةُ التي تكبر لا مقياسَ فيها: يُرسم المربّعُ بقدره الجديد مقصوصًا إلى قدره القديم
+         باستدارته، ويُفتح القصُّ إليه؛ والجهةُ التي تصغر تبقى بمقياسها كما كانت (لا فيضَ فيها) */
+      const gx = sx < 1, gy = sy < 1;
+      const ix = gx ? (n.width - o.width) : 0, iy = gy ? (n.height - o.height) : 0;
+      if (gx) sx = 1; if (gy) sy = 1;
+      const rad = getComputedStyle(b).borderTopLeftRadius || '0px';
+      const clip0 = `inset(0px ${rtl ? 0 : ix}px ${iy}px ${rtl ? ix : 0}px round ${rad})`, clip1 = `inset(0px 0px 0px 0px round ${rad})`;
+      const tr0 = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`, org = rtl ? 'right top' : 'left top';
+      b.animate([{ transformOrigin: org, transform: tr0, clipPath: (gx || gy) ? clip0 : 'none' }, { transformOrigin: org, transform: 'none', clipPath: (gx || gy) ? clip1 : 'none' }], { duration: T, easing: E });
       if (Math.abs(sx - 1) > .01 || Math.abs(sy - 1) > .01)
-        f.animate([{ transformOrigin: 'right top', transform: `scale(${1 / sx}, ${1 / sy})` }, { transformOrigin: 'right top', transform: 'none' }], { duration: T, easing: E });
+        f.animate([{ transformOrigin: org, transform: `scale(${1 / sx}, ${1 / sy})` }, { transformOrigin: org, transform: 'none' }], { duration: T, easing: E });
     });
   }
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
