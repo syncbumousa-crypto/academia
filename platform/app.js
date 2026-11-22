@@ -9892,7 +9892,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      تسري فيها. ويُفتح فقط ما انفتح أو اختير — لا عند طيّ مجلد */
   let pkCapPeekT = null, pkCapPeekOn = [];
   const pkCapPeekOff = () => { clearTimeout(pkCapPeekT); pkCapPeekOn.forEach(c => c.classList.remove('is-peek')); pkCapPeekOn = []; };
-  function pkCapPeek(sid, fid) {
+  function pkCapPeek(sid, fid, was) {
     const strip = document.querySelector('#cm-body .pk-fstrip.pk-lg[data-pkid="' + CSS.escape(sid) + '"]');
     const face = strip && strip.querySelector('.pg-face[data-pkf="' + CSS.escape(fid) + '"]');
     const box = face && face.closest('.pg-box');
@@ -9900,7 +9900,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkCapPeekOff();
     /* (طلبُ صاحب الموقع) والمجلدُ «وحدَه» تنفتح كبسولتُه هو وحدها — لا كبسولاتُ مجلداته */
     const cs = [face.querySelector(':scope > .pg-cnt'), ...(box.classList.contains('is-solo') ? [] : box.querySelectorAll(':scope > .pg-in > .pg-row > .pg-box > .pg-face > .pg-cnt'))].filter(Boolean);
-    cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); }, i * 70));
+    /* (طلبُ صاحب الموقع) وما كانت كبسولتُه مفتوحةً قبل النقر تبقى مفتوحةً بلا حركةٍ جديدة — الرسمُ الجديدُ لا يعيد انفتاحها */
+    const kept = c => was && was.has(c.closest('.pg-face').dataset.pkf);
+    cs.filter(kept).forEach(c => { pkCapPlace(c); c.classList.add('pg-cnt--now', 'is-peek'); void c.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('pg-cnt--now'))); });
+    cs.filter(c => !kept(c)).forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); }, i * 70));
     pkCapPeekOn = cs;
     pkCapPeekT = setTimeout(pkCapPeekOff, 5000);
   }
@@ -9908,7 +9911,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const f = e.target.closest && e.target.closest('.pk-fstrip.pk-lg .pg-face[data-pkf]');
     if (!f) return;
     const sid = f.closest('.pk-fstrip').dataset.pkid, fid = f.dataset.pkf;
-    setTimeout(() => pkCapPeek(sid, fid), 40);
+    const was = new Set([...f.closest('.pk-fstrip').querySelectorAll('.pg-cnt.is-peek')].map(c => c.closest('.pg-face').dataset.pkf));
+    pkCapPeekOn = []; clearTimeout(pkCapPeekT);   /* (المفتوحةُ تُنقل إلى الرسم الجديد، فلا يطويها مؤقّتُها القديم) */
+    setTimeout(() => pkCapPeek(sid, fid, was), 40);
   }, true);   /* بالالتقاط: معالجُ الشريط يوقف انتشارَ النقرة */
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
