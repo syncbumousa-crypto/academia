@@ -12828,7 +12828,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* وكتابُ WebGL الذي أُطفئ بعد طول غيابه لا يُنقل: يُبنى من جديد على موضعه المحفوظ */
       if (old && old.el && old.doc === doc && old.covKey === covKey && (old.covPg || 1) === covPg && old.view && old.view !== view && !old.view.isConnected && !(old.gl && old.gl.dead) && (old.gl === undefined || (!!old.one === bk2OneGet() && !!old.scroll === (bkModeGet() === 'scroll')))) {
         view.innerHTML = '';
+        /* (طلبُ صاحب الموقع) وتمريرُ الصفحات المتتالية يُحفظ بعينه قبل النقل ويُردّ فورًا بعده — كان يُصفَّر إطارًا (تومض الأولى) ثمّ يُردّ
+           إلى أوّل صفحته لا إلى موضعه، وردُّه يُري حبّةَ عدد الصفحات كأنّ المستخدمَ مرّر */
+        const scr0 = old.scroll && old.scr ? (old.scrY != null ? old.scrY : old.scr.scrollTop) : null;
         while (old.view.firstChild) view.appendChild(old.view.firstChild);
+        if (scr0 != null && old.scr) { old.scrMute = performance.now() + 400; old.scr.scrollTop = scr0; }
         old.view.style.transform = '';
         old.view = view;
         /* ونقلُ قائمة الصفحات المتتالية يُصفّر تمريرَها: تُردّ إلى صفحتها */
@@ -12836,7 +12840,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           /* وعاءُ العرض الجديد يلبس صنفَ القائمة (كان يبقى على القديم المنفصل فتفقد القائمةُ استدارتَها ومرجعَها) */
           view.classList.add('is-scr'); view.pkBk = old;
           const po = view.closest('.post'); if (po) { po.classList.add('bk-scroll'); po.classList.remove('bk-shut'); }
-          requestAnimationFrame(() => { if (old.scroll) { bkScrFit(old); bkScrGo(old, old.pos, false); old.scrSync && old.scrSync(); } });
+          requestAnimationFrame(() => { if (old.scroll) { bkScrFit(old); if (scr0 != null && old.scr) { old.scrMute = performance.now() + 400; old.scr.scrollTop = scr0; } else bkScrGo(old, old.pos, false); old.scrSync && old.scrSync(); } });
         }
         if (old.gl && old.gl.setZone) old.gl.setZone(bkZone(old));   /* المساحةُ الجديدة مقبضُ التقليب (لا القديمةُ المنفصلة) */
         const wantClosed = !meta || meta.closed !== false, wantPos = Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages));
@@ -25292,7 +25296,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkLiveBand(card, anims, done) {
     card.pkBlkHold = false; pkBandFit(card); card.pkBlkHold = true;
     let live = true;
-    const loop = () => { if (!live || !card.isConnected) return; pkBandDraw(card, []); requestAnimationFrame(loop); };
+    /* والصفحاتُ المتتاليةُ تُفصَّل على رسمة مساحتها في الإطار نفسِه — كانت تلحقها بعد إطارات فتفيض صفحتُها خارج المساحة وهي تضيق
+       (طلبُ صاحب الموقع) */
+    const loop = () => { if (!live || !card.isConnected) return; pkBandDraw(card, []); card.querySelectorAll('.pk-src__view.is-scr').forEach(v => v.pkBk && bkScrFit(v.pkBk)); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
     Promise.all(anims.map(a => a.finished.catch(() => {}))).then(() => {
       live = false; card.pkBlkHold = false;
@@ -27588,7 +27594,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };
+    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
     sc.addEventListener('scroll', b.scrOn, { passive: true });
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
@@ -27775,6 +27781,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* الحبّةُ تظهر مع الحركة وتختفي بعد سكونها؛ والتقريبُ يفتح نسبتَه ‎5‎ ثوانٍ ثمّ تنطوي وتختفي */
   function bkScrPing(b, zoom) {
+    if (!zoom && b.scrMute && performance.now() < b.scrMute) return;   /* ردُّ التمرير بعد نقل الصفحات ليس تمريرًا */
     const t = b.scrTop; if (!t) return;
     t.classList.add('is-on');
     if (zoom) {
