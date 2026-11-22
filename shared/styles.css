@@ -20175,3 +20175,6 @@ html[data-theme="dark"] #cm-body .pk-fstrip.pk-lg .pg-box.pk-pv.is-wide { backgr
 [dir="ltr"] .pk-fstrip.pk-lg .pg-box:not(.is-wide) > .pg-face > .pg-cnt.is-gd:is(:hover, .is-peek) > .pg-cap { left: var(--gdl, 0px); right: auto; }
 /* كبسولةٌ كانت مفتوحةً قبل إعادة الرسم: تُرسم مفتوحةً فورًا بلا حركة (‎pkCapPeek‎) */
 .pg-cnt.pg-cnt--now, .pg-cnt.pg-cnt--now * { transition: none !important; animation: none !important; }
+/* ===== اللوحُ المفتوحُ غيرُ المختار بلا إطارٍ ملوّن (طلبُ صاحب الموقع) =====
+   الإطارُ على المختار وحده: اللوحُ كلُّه إذا اختير كلُّه، واسمُه إذا اختير «وحدَه»، والمجلدُ الصغيرُ إذا اختير هو — لا عليهم كلِّهم */
+#cm-body .pk-fstrip.pk-lg .pg-box.is-wide:not(.is-sel) { box-shadow: var(--lgx-rim), var(--lgx-out); }
