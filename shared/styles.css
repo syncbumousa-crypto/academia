@@ -20191,3 +20191,7 @@ html.pk-ptr .pk-fstrip .pg-face:focus-visible { outline: none; }
 .pk-fstrip.pk-lg .pg-box.is-wide > .pg-face > :is(.pg-cnt:hover, .pg-cnt.is-peek) { transition-delay: 0s; }
 /* وإطارُ تركيز لوحة المفاتيح بلون المجلد نفسِه لا بالأزرق (طلبُ صاحب الموقع) */
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline-color: color-mix(in srgb, var(--c, #8a97a3) 75%, transparent); }
+
+/* كلماتُ اسم المجلد وهي تنساب (‎pkWordsFly‎): ‎inline-block‎ ما دامت الحركة وحدها — خارجها تبقى نصًّا عاديًّا (والاختصارُ بـ‎…‎ كما هو) */
+.pg-face.pg-wfx > .pg-nm > .pg-w { display: inline-block; }
+.pg-face.pg-wfx > .pg-nm { overflow: visible; }

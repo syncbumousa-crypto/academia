@@ -11708,7 +11708,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     pkCntEnd(strip);
     /* وقياسٌ ثانٍ بعد أن تسكن حركةُ الفتح والطيّ: ما قيس في منتصفها قد يقع مزاحًا (طلبُ صاحب الموقع: دوائرُ الفرعيّة مرتفعة) */
-    clearTimeout(strip.pkCntT); strip.pkCntT = setTimeout(() => { if (strip.isConnected) pkCntEnd(strip); }, 700);
+    const again = () => { if (!strip.isConnected) return; if (strip.querySelector('.pg-wfx')) { strip.pkCntT = setTimeout(again, 250); return; } pkCntEnd(strip); };   /* (لا يُقاس والكلماتُ تسير) */
+    clearTimeout(strip.pkCntT); strip.pkCntT = setTimeout(again, 700);
     pkFsb(strip);
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
     if (window.ResizeObserver && !strip.pkRo) {
@@ -11750,18 +11751,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        · ما تغيّر موضعُه أو قدرُه ينزلق إليه، ويُعاكَس قياسُ وجهه فلا يتمطّط الحرف،
        · وما في جوف مجلدٍ يتمدّد لا يُحرَّك وحده (يتحرّك مع أبيه) بل يظهر ظهورًا،
        · وما وُلد الآن (أبناءُ المفتوح) يظهر بعد أبيه بقليل. */
-  const PKF = { prev: new Map() };
+  const PKF = { prev: new Map(), words: new Map() };
+  /* ===== كلماتُ الاسم تنساب إلى أسطرها الجديدة (طلبُ صاحب الموقع · الاقتراح ١) =====
+     كلُّ كلمةٍ في غلافٍ (‎.pg-w‎)، فيُقاس مكانُها قبل الرسم وبعده من زاوية مربّعها، وتمضي إليه في مسارٍ على شكل L: تمشي على
+     سطرها القديم حتى تحاذي مكانها ثمّ تطلع إليه (أو تنزل أوّلًا ثمّ تمشي) — فلا تعبر فوق كلامٍ آخر. والأقربُ إلى جهة سيرها
+     تنطلق أوّلًا بفارقٍ يسير فتُرى موجة، والدائرةُ معها بآخرها */
+  const pkNmW = nm => String(nm || '').split(/(\s+)/).map(w => /^\s*$/.test(w) ? w : '<span class="pg-w">' + esc(w) + '</span>').join('');
+  const pkWRel = (el, br, rtl, nb) => { const r = el.getBoundingClientRect(); return { x: rtl ? r.right - br.right : r.left - br.left, y: r.top - br.top,
+    v: !nb || (r.left >= nb.left - 1 && r.right <= nb.right + 1 && r.bottom <= nb.bottom + 1) }; };   /* (‎v‎: ظاهرةٌ في الاسم — لا خلف «…» ولا تحت آخر سطرٍ مقصوص) */
   const pkReduce = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function pkFlipRecord(id) {
     const old = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"]');
     if (!old || pkReduce() || (PKG.s && PKG.s.on)) return;
     const m = new Map();
-    old.querySelectorAll('.pg-face[data-pkf]').forEach(f => { const b = f.parentElement; if (b.offsetParent) m.set(f.dataset.pkf, b.getBoundingClientRect()); });
-    PKF.prev.set(id, m);
+    const wm = new Map();
+    old.querySelectorAll('.pg-face[data-pkf]').forEach(f => {
+      const b = f.parentElement; if (!b.offsetParent) return;
+      const br = b.getBoundingClientRect(); m.set(f.dataset.pkf, br);
+      const rtl = getComputedStyle(b).direction === 'rtl', cnt = f.querySelector(':scope > .pg-cnt');
+      const nm = f.querySelector(':scope > .pg-nm'), nb = nm && nm.getBoundingClientRect();
+      wm.set(f.dataset.pkf, { w: [...f.querySelectorAll(':scope > .pg-nm > .pg-w')].map(w => pkWRel(w, br, rtl, nb)), r: cnt && cnt.offsetParent ? pkWRel(cnt, br, rtl) : null });
+    });
+    PKF.prev.set(id, m); PKF.words.set(id, wm);
     queueMicrotask(() => pkFlipPlay(id));
   }
   function pkFlipPlay(id) {
     const m = PKF.prev.get(id); PKF.prev.delete(id);
+    const wm = PKF.words.get(id) || new Map(); PKF.words.delete(id);
     const strip = document.querySelector('#cm-body .pk-fstrip[data-pkid="' + CSS.escape(id) + '"]');
     if (!m || !strip || !strip.animate) return;
     pkFit(strip);
@@ -11797,7 +11813,44 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       b.animate([{ transformOrigin: org, transform: tr0, clipPath: (gx || gy) ? clip0 : 'none' }, { transformOrigin: org, transform: 'none', clipPath: (gx || gy) ? clip1 : 'none' }], { duration: T, easing: E });
       if (Math.abs(sx - 1) > .01 || Math.abs(sy - 1) > .01)
         f.animate([{ transformOrigin: org, transform: `scale(${1 / sx}, ${1 / sy})` }, { transformOrigin: org, transform: 'none' }], { duration: T, easing: E });
+      pkWordsFly(f, b, wm.get(f.dataset.pkf), rtl, E, T);
     });
+  }
+  function pkWordsFly(f, b, old, rtl, E, T) {
+    if (!old || !old.w.length) return;
+    const ws = [...f.querySelectorAll(':scope > .pg-nm > .pg-w')]; if (ws.length !== old.w.length) return;
+    f.classList.add('pg-wfx');   /* (‎inline-block‎ ما دامت الحركة: ‎transform‎ لا يعمل على ‎inline‎) */
+    const nb = f.querySelector(':scope > .pg-nm').getBoundingClientRect();
+    const br = b.getBoundingClientRect(), nw = ws.map(w => pkWRel(w, br, rtl, nb));
+    const cnt = f.querySelector(':scope > .pg-cnt'), nr = cnt && old.r && cnt.offsetParent ? pkWRel(cnt, br, rtl) : null;
+    /* والاسمُ لا يقصّ ما دامت الحركة (فلا تُبتر كلمةٌ وهي تمرّ خارجه): ما كان خفيًّا قبلُ وبعدُ يبقى خفيًّا، وما يخفى أو يظهر يذوب */
+    const fades = [];
+    ws.forEach((w, i) => { const a = old.w[i].v, z = nw[i].v; if (a && z) return;
+      /* (والظاهرةُ الآن تنتظر حتى تصل السائرةُ إلى أماكنها — كانت تمرّ فوقها وهي تظهر) */
+      fades.push([w, a, z]); });
+    const items = ws.map((w, i) => [w, old.w[i].x - nw[i].x, old.w[i].y - nw[i].y]).filter((_, i) => old.w[i].v && nw[i].v);   /* (ما خفي في إحدى الحالتين لا يسافر: يذوب في مكانه) */
+    if (nr) items.push([cnt, old.r.x - nr.x, old.r.y - nr.y]);
+    const live = items.filter(([, dx, dy]) => Math.abs(dx) > .5 || Math.abs(dy) > .5);
+    const end = () => { f.classList.remove('pg-wfx'); fades.forEach(a => a.cancel && a.cancel()); };
+    if (!live.length) { end(); return; }
+    /* أيُّها ينطلق أوّلًا: الأقربُ إلى جهة السير (آخرُ الكلمات إن سارت نحو آخر السطر، وأوّلُها إن سارت نحو أوّله) */
+    const toEnd = (items[items.length - 1][1] > 0) === rtl;   /* ‎dx‎ موجبٌ في ‎rtl‎ = جاءت من اليمين، أي تسير نحو آخر السطر (يسارًا) */
+    const N = items.length, D = T + 120, step = Math.min(28, 160 / N);
+    const runs = items.map(([el, dx, dy], i) => {
+      if (Math.abs(dx) <= .5 && Math.abs(dy) <= .5) return null;
+      const up = dy > 0;   /* كانت تحت مكانها الجديد: تمشي ثمّ تطلع؛ وإلّا تنزل ثمّ تمشي */
+      const kf = Math.abs(dy) < 1 ? [{ transform: `translate(${dx}px, 0)` }, { transform: 'none' }]
+        : up ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(0px, ${dy}px)`, offset: .62 }, { transform: 'none' }]
+          : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx}px, 0px)`, offset: .38 }, { transform: 'none' }];
+      const order = toEnd ? (N - 1 - i) : i;
+      return el.animate(kf, { duration: D, delay: order * step, easing: 'cubic-bezier(.3, .7, .2, 1)', fill: 'backwards' });
+    }).filter(Boolean);
+    /* الخافيةُ تذوب حالًا، والظاهرةُ بعد أن تصل آخرُ كلمةٍ سائرة (بتأخّرها) */
+    const arrive = runs.reduce((t, a) => Math.max(t, (a.effect.getTiming().delay || 0) + D), 0);
+    const fa = fades.map(([w, a, z]) => w.animate(a ? [{ opacity: 1 }, { opacity: 0 }] : z ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0 }, { opacity: 0 }],
+      { duration: a ? D * .5 : z ? 180 : arrive, delay: a || !z ? 0 : Math.max(0, arrive - 120), easing: 'ease-out', fill: 'both' }));
+    fades.length = 0; fades.push(...fa);
+    Promise.all([...runs, ...fades].map(a => a.finished.catch(() => {}))).then(end);
   }
   window.addEventListener('resize', () => { if (pkLab()) pkFitSoon(); });
   /* ===== ويُسأل عن الخطوط بعد الإقلاع لا في أثنائه =====
@@ -11817,7 +11870,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + (k.id === sel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + esc(k.name) + '</span>' + pkCntHTML(k) + '</button>'
+        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k) + '</button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -11859,7 +11912,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : pkFace(k, true) + '<span class="pg-nm">' + esc(k.name) + '</span>' + pkCntHTML(k);
+        : pkFace(k, true) + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k);
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + (isSel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
