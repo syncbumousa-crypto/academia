@@ -24800,9 +24800,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (card.classList.contains('pk--edit')) { cxFtHide(card, true); return; }
     cxFtSet(true, true);
   }, true);
-  function cxHdMeasure() {
-    const card = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame');
-    if (!card) return;
+  function cxHdMeasure(card) {
+    /* (طلبُ صاحب الموقع) كلُّ مساهمةٍ مفتوحة لا الأولى وحدها: كانت التي تحتها تفقد طبقةَ كتلها (‎.pk-band‎) بعد كلّ رسم
+       فتفيض صفحاتُ مصدرها خارج مساحتها */
+    if (!card) { document.querySelectorAll('#cm-body .pk--max, #cm-body .pk--frame').forEach(c => cxHdMeasure(c)); return; }
     const ln = card.querySelector('.pk-hdline:not(.pk-ftline)'), yt = card.querySelector('.post-yt');
     if (!ln || !yt) return;
     const cs = getComputedStyle(card), pad = parseFloat(cs.paddingTop) || 0;
@@ -24822,8 +24823,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (منتصفُ مسكته)، ويُعاد القياسُ كلّما تغيّر حجمُ القسمة أو المربّع */
   const PK_PANE = { book: '.pk-src', mid: '.kt-view', bank: '.pk-bank' };
   /* يُرسم في نداء المراقب نفسِه (قبل الطلاء، في الإطار ذاته) — لا في الإطار التالي فتتأخّر الكتلةُ عن مكانها إطارًا */
+  /* (طلبُ صاحب الموقع) ولكلّ مساهمةٍ مفتوحة: يُعاد رسمُ مساهمة العنصر الذي تغيّر حجمُه، لا الأولى في الصفحة */
+  const pkBandObs = new Set();
   const pkBandRO = typeof ResizeObserver === 'function'
-    ? new ResizeObserver(() => { const c = document.querySelector('#cm-body .pk--max, #cm-body .pk--frame'); if (c) pkBandFit(c); }) : null;
+    ? new ResizeObserver(es => { const cs = new Set(); es.forEach(e => { const c = e.target.closest && e.target.closest('#cm-body .pk--max, #cm-body .pk--frame'); if (c) cs.add(c); }); cs.forEach(c => pkBandFit(c)); }) : null;
   /* ===== الكتلةُ شكلٌ واحد (ROADMAP-PANEFX · المرحلة ٠) =====
      شريطُ الذيل ولسانُ المنطقة النشِطة **مسارٌ واحد** في طبقةٍ واحدة (‎.pk-band‎) خلف المحتوى — لا قطعٌ تتبع صناديقَ مختلفة
      (ظلٌّ ممتدّ وعناصرُ وهميّة)، فلا حدودَ بينها يظهر منها خطٌّ في أيّ تقريب، ويُحرَّك اللسانُ وحدَه في الدخول والخروج.
@@ -24880,10 +24883,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkBandFit(card) {
     const a = ['book', 'mid', 'bank'].find(k => card.classList.contains('pk-act--' + k));
     const sp = card.querySelector('.post-ytmain > .pk-split'), ft = card.querySelector('.pk-ftline');
-    if (pkBandRO && sp && pkBandFit.sp !== sp) {
-      pkBandRO.disconnect(); pkBandRO.observe(sp); pkBandRO.observe(card);
-      [...sp.children].forEach(x => pkBandRO.observe(x));
-      pkBandFit.sp = sp;
+    if (pkBandRO && sp && card.pkBandSp !== sp) {
+      pkBandObs.forEach(x => { if (!x.isConnected) { pkBandRO.unobserve(x); pkBandObs.delete(x); } });   /* ما زال من الصفحة (رسمٌ قديم) يُترك */
+      [sp, card, ...sp.children].forEach(x => { if (!pkBandObs.has(x)) { pkBandRO.observe(x); pkBandObs.add(x); } });
+      card.pkBandSp = sp;
     }
     let svg = card.querySelector(':scope > .pk-band');
     /* ===== كتلُ المساحات (طلبُ صاحب الموقع: «الـT»): تُرسم ما وُجدت القسمةُ وخطُّ الذيل — ولو كان الوسطُ وحدَه ===== */
@@ -29344,7 +29347,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .7, delay: D * .2, easing: 'ease-out', fill: 'backwards' })));
           const done = () => { st1.style.overflow = ''; st1.classList.remove('is-hanim'); };
           if (card && card.querySelector(':scope > .pk-band')) pkLiveBand(card, an, () => { done(); if (card.isConnected) pkBandFit(card); });
-          else Promise.all(an.map(x => x.finished.catch(() => {}))).then(done);
+          else Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { done(); if (card && card.isConnected) pkBandFit(card); });   /* وبلا طبقةٍ بعدُ: تُرسم بعد الحركة لا تُترك */
         }
       }
       return;
