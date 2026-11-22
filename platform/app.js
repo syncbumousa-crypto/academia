@@ -11829,7 +11829,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkWordsFly(f, b, old, rtl, E, T) {
     if (!old || !old.w.length) return;
     const ws = [...f.querySelectorAll(':scope > .pg-nm > .pg-w')]; if (ws.length !== old.w.length) return;
-    f.classList.add('pg-wfx');   /* (‎inline-block‎ ما دامت الحركة: ‎transform‎ لا يعمل على ‎inline‎) */
+    f.classList.add('pg-wfx');   /* (الاسمُ لا يقصّ ما دامت الحركة، والكلماتُ تبقى ‎inline‎ — ‎inline-block‎ كان يبدّل ترتيبَ «الفصل 4:» ثنائيَّ الاتّجاه فيتحرّك ما لم يتغيّر) */
     const nb = f.querySelector(':scope > .pg-nm').getBoundingClientRect();
     const br = b.getBoundingClientRect(), nw = ws.map(w => pkWRel(w, br, rtl, nb));
     const cnt = f.querySelector(':scope > .pg-cnt'), nr = cnt && old.r && cnt.offsetParent ? pkWRel(cnt, br, rtl) : null;
@@ -11852,9 +11852,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const runs = items.map(([el, dx, dy], i) => {
       if (Math.abs(dx) <= .5 && Math.abs(dy) <= .5) return null;
       const up = dy > 0;   /* كانت تحت مكانها الجديد: تمشي ثمّ تطلع؛ وإلّا تنزل ثمّ تمشي */
-      const kf = Math.abs(dy) < 1 ? [{ transform: `translate(${dx}px, 0)` }, { transform: 'none' }]
-        : up ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(0px, ${dy}px)`, offset: .62 }, { transform: 'none' }]
-          : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx}px, 0px)`, offset: .38 }, { transform: 'none' }];
+      /* الكلمةُ ‎inline‎: تُزاح بـ‎left/top‎ (الإزاحةُ النسبيّة تعمل عليها ولا تمسّ التخطيط)، والدائرةُ بـ‎transform‎ */
+      const T2 = el.classList.contains('pg-w') ? (x, y) => ({ left: x + 'px', top: y + 'px' }) : (x, y) => ({ transform: `translate(${x}px, ${y}px)` });
+      const kf = Math.abs(dy) < 1 ? [T2(dx, 0), T2(0, 0)]
+        : up ? [T2(dx, dy), Object.assign(T2(0, dy), { offset: .62 }), T2(0, 0)]
+          : [T2(dx, dy), Object.assign(T2(dx, 0), { offset: .38 }), T2(0, 0)];
       const order = toEnd ? (N - 1 - i) : i;
       return el.animate(kf, { duration: D, delay: order * step, easing: 'cubic-bezier(.3, .7, .2, 1)', fill: 'backwards' });
     }).filter(Boolean);

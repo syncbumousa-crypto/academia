@@ -20193,5 +20193,5 @@ html.pk-ptr .pk-fstrip .pg-face:focus-visible { outline: none; }
 .pk-fstrip.pk-lg .pg-face:focus-visible { outline-color: color-mix(in srgb, var(--c, #8a97a3) 75%, transparent); }
 
 /* كلماتُ اسم المجلد وهي تنساب (‎pkWordsFly‎): ‎inline-block‎ ما دامت الحركة وحدها — خارجها تبقى نصًّا عاديًّا (والاختصارُ بـ‎…‎ كما هو) */
-.pg-face.pg-wfx > .pg-nm > .pg-w { display: inline-block; }
+.pk-fstrip .pg-nm > .pg-w { position: relative; }   /* (‎left/top‎ تُحرّكها وهي ‎inline‎) */
 .pg-face.pg-wfx > .pg-nm { overflow: visible; }
