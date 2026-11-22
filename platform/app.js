@@ -11656,7 +11656,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkCntEnd(strip) {
     /* (ثمّ بطلبه) والدائرةُ خارجَ سطر الوجه (‎absolute‎): مكانُها محجوزٌ في آخر الاسم نفسِه (‎::after‎ بقدرها)، فلا تأكل من عرض
        الأسطر شيئًا ويمتلئ كلُّ سطرٍ بما يسعه، ثمّ توضع على ذلك المحجوز */
-    const items = [...strip.querySelectorAll('.pg-box:not(.is-wide) > .pg-face')].map(f => [f.querySelector(':scope > .pg-nm'), f.querySelector(':scope > .pg-cnt')]).filter(([n, c]) => n && c);
+    /* (طلبُ صاحب الموقع) والاسمُ الذي تسير كلماتُه لا يُقاس: القياسُ يأخذ الكلماتِ وهي في منتصف طريقها فتقع الدائرةُ على الكلام —
+       يُقاس حين تصل (‎pkWordsFly‎) */
+    /* وكذا المربّعُ الذي يتحرّك (‎FLIP‎): يُنتظر حتى يسكن ثمّ يُقاس مرّةً واحدة */
+    const busy = f => f.classList.contains('pg-wfx') || f.getAnimations().length || f.parentElement.getAnimations().length;
+    const all = [...strip.querySelectorAll('.pg-box:not(.is-wide) > .pg-face')], wait = all.filter(busy);
+    if (wait.length && !strip.pkCntW) {
+      strip.pkCntW = 1;
+      Promise.all(wait.flatMap(f => [...f.getAnimations(), ...f.parentElement.getAnimations()]).map(a => a.finished.catch(() => {})))
+        .then(() => requestAnimationFrame(() => { strip.pkCntW = 0; if (strip.isConnected) pkCntEnd(strip); }));
+    }
+    const items = all.filter(f => !busy(f)).map(f => [f.querySelector(':scope > .pg-nm'), f.querySelector(':scope > .pg-cnt')]).filter(([n, c]) => n && c);
     const pos = items.map(([n, c]) => {
       const f = c.parentElement;
       if (!n.offsetParent || !n.firstChild || !f.offsetWidth) return null;
@@ -11831,7 +11841,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const items = ws.map((w, i) => [w, old.w[i].x - nw[i].x, old.w[i].y - nw[i].y]).filter((_, i) => old.w[i].v && nw[i].v);   /* (ما خفي في إحدى الحالتين لا يسافر: يذوب في مكانه) */
     if (nr) items.push([cnt, old.r.x - nr.x, old.r.y - nr.y]);
     const live = items.filter(([, dx, dy]) => Math.abs(dx) > .5 || Math.abs(dy) > .5);
-    const end = () => { f.classList.remove('pg-wfx'); fades.forEach(a => a.cancel && a.cancel()); };
+    const end = () => {
+      f.classList.remove('pg-wfx'); fades.forEach(a => a.cancel && a.cancel());
+      const st = f.closest('.pk-fstrip'); if (st && st.isConnected && !st.querySelector('.pg-wfx')) pkCntEnd(st);   /* وصلت: تُوضع الدائرةُ على آخرها الحقيقيّ */
+    };
     if (!live.length) { end(); return; }
     /* أيُّها ينطلق أوّلًا: الأقربُ إلى جهة السير (آخرُ الكلمات إن سارت نحو آخر السطر، وأوّلُها إن سارت نحو أوّله) */
     const toEnd = (items[items.length - 1][1] > 0) === rtl;   /* ‎dx‎ موجبٌ في ‎rtl‎ = جاءت من اليمين، أي تسير نحو آخر السطر (يسارًا) */
