@@ -9898,7 +9898,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const box = face && face.closest('.pg-box');
     if (!box || !(box.classList.contains('is-wide') || box.classList.contains('is-sel'))) return;
     pkCapPeekOff();
-    const cs = [face.querySelector(':scope > .pg-cnt'), ...box.querySelectorAll(':scope > .pg-in > .pg-row > .pg-box > .pg-face > .pg-cnt')].filter(Boolean);
+    /* (طلبُ صاحب الموقع) والمجلدُ «وحدَه» تنفتح كبسولتُه هو وحدها — لا كبسولاتُ مجلداته */
+    const cs = [face.querySelector(':scope > .pg-cnt'), ...(box.classList.contains('is-solo') ? [] : box.querySelectorAll(':scope > .pg-in > .pg-row > .pg-box > .pg-face > .pg-cnt'))].filter(Boolean);
     cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); }, i * 70));
     pkCapPeekOn = cs;
     pkCapPeekT = setTimeout(pkCapPeekOff, 5000);
