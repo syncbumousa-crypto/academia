@@ -11655,12 +11655,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!ls.length) return null;
       const bot = Math.max(...ls.map(r => r.bottom)), ln = ls.filter(r => r.bottom > bot - 4);   /* آخرُ سطر (قد يكون قطعًا: أرقامٌ وحروف) */
       const top = Math.min(...ln.map(r => r.top));
-      const fr = f.getBoundingClientRect(), k = fr.width / f.offsetWidth || 1, rtl = getComputedStyle(n).direction === 'rtl', gap = 5, d = 18;
+      const fr = f.getBoundingClientRect(), k = fr.width / f.offsetWidth || 1, ky = fr.height / f.offsetHeight || 1, rtl = getComputedStyle(n).direction === 'rtl', gap = 5, d = 18;   /* (والحركةُ تصغّر الطولَ غيرَ العرض أحيانًا: فلكلٍّ مقياسُه) */
       /* والاسمُ المختصَر (‎…‎) يمتدّ نصُّه خلف حدّه: فالدائرةُ عند حدّه */
       const end = rtl ? Math.max(Math.min(...ln.map(r => r.left)), nb.left + 23 * k) : Math.min(Math.max(...ln.map(r => r.right)), nb.right - 23 * k);
       let x = ((rtl ? end - gap * k - d * k : end + gap * k) - fr.left) / k;
       x = Math.max(2, Math.min(f.offsetWidth - d - 2, x));
-      return [c, x, ((top + bot) / 2 - fr.top) / k - d / 2];
+      return [c, x, ((top + bot) / 2 - fr.top) / ky - d / 2];
     });
     pos.forEach(m => { if (m) { m[0].style.left = m[1].toFixed(1) + 'px'; m[0].style.top = m[2].toFixed(1) + 'px'; } });
     /* والكبسولةُ تنفتح إلى الفراغ الذي بعد الدائرة إن اتّسع لها (‎is-gl‎)، فلا تغطّي الاسم؛ وإلّا غطّته كما كانت */
@@ -11690,6 +11690,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (miss > 0 && w < 260) b.style.setProperty('--pk-need', Math.ceil(Math.min(260, w + miss + 1)) + 'px');
     });
     pkCntEnd(strip);
+    /* وقياسٌ ثانٍ بعد أن تسكن حركةُ الفتح والطيّ: ما قيس في منتصفها قد يقع مزاحًا (طلبُ صاحب الموقع: دوائرُ الفرعيّة مرتفعة) */
+    clearTimeout(strip.pkCntT); strip.pkCntT = setTimeout(() => { if (strip.isConnected) pkCntEnd(strip); }, 700);
     pkFsb(strip);
     /* ويُعاد القياسُ متى تغيّر قدرُ الشريط (انبساطُ المساحة، تبدّلُ القسمة، الخطوط): مراقبٌ واحدٌ لكلّ الشرائط */
     if (window.ResizeObserver && !strip.pkRo) {
