@@ -11677,6 +11677,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (ثمّ بطلبه) ولا متّسعَ بعدها في سطرها: تنزل الكبسولةُ إلى السطر الفارغ تحت الدائرة إن كان في المربّع متّسعٌ له (‎is-gd‎) */
     const ky = f.offsetHeight ? fr.height / f.offsetHeight : 1, below = (fr.bottom - cr.bottom) / (ky || 1);
     c.classList.toggle('is-gd', !gl && below >= 26);
+    /* ونازلةً تبدأ من أوّل السطر كما يبدأ الاسم (يمينًا) لا من موضع الدائرة: ‎--gdl‎ حافّةُ الاسم الأولى من حافّة الدائرة */
+    const nm = f.querySelector(':scope > .pg-nm');
+    if (nm) { const nb = nm.getBoundingClientRect(); c.style.setProperty('--gdl', (((rtl ? nb.right : nb.left) - cr.left) / (k || 1)).toFixed(1) + 'px'); }
   }
   function pkFit(strip) {
     /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى
