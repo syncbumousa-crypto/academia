@@ -26785,7 +26785,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* صفوفُ المجلد المختار في الملخّص: بطائقُه وما في مجلداته الداخليّة، بترتيب الجدول (‎ktDeep‎) */
   function hlRows(id) {
-    try { const sel = pkFs[id] !== undefined ? pkFs[id] : ''; const h = ktHost(sel); return h ? { sel, host: h, cards: ktCardsDeep(h) } : null; } catch (e) { return null; }
+    /* (طلبُ صاحب الموقع) وبطائقُ المساهمة نفسِها — كانت تُقرأ من ملخّص صاحب الحساب أبدًا، فمساهمةُ غيره لا يُوجد مجلدُها
+       فلا يطير إليها شيء. فما ليست له تُقرأ من بياناتها هي */
+    try {
+      const sel = pkFs[id] !== undefined ? pkFs[id] : '', p = hlPost(id);
+      const pack = p && !p.me && p.data && Array.isArray(p.data.deck) ? p.data : undefined;
+      const h = ktHost(sel, pack); return h ? { sel, host: h, cards: ktCardsDeep(h) } : null;
+    } catch (e) { return null; }
   }
   /* ألوانُ التظليل الأربعة (ROADMAP-HL ق٢): ‏‎[طلاءُ الصفحة، دائرةُ الرقم، حبرُ الرقم]‎ — ولكلّ تظليلٍ لونُه (‎m.col‎) ونوعُه (‎m.kind‎: نصٌّ ‎t‎ أو مربّعٌ ‎box‎)،
      والتحديدُ الجديدُ يأخذ آخرَ لونٍ اختاره صاحبُه (يُحفظ في المتصفّح) */
@@ -26931,7 +26937,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const hlCallBook = id => Object.values(pkSrcBk).find(b => b && b.gl && !b.gl.dead && b.stage && b.stage.isConnected && b.stage.getClientRects().length && pkSrcBase(hlSidOf(b)) === id) || null;
   /* بطاقةُ الصفّ في العرض الحاليّ (خارج الكتاب) أو الورقةُ العليا من رزمة الأوراق، ومستطيلُها مقصوصًا بما يحويها من تمرير — فالخارجةُ عن النظر يُطار إلى حافّته */
   function hlCallEl(b, cid) {
-    const post = b.stage.closest('.post') || document.getElementById('cm-body');
+    const post = (b.stage || b.view).closest('.post') || document.getElementById('cm-body');   /* (‎stage‎ للكتاب وحده؛ والعرضُ العادي ‎view‎) */
     const vis = e => !b.view.contains(e) && e.getClientRects().length;
     /* الجدولُ والشجرةُ بطاقةٌ لكلّ صفّ، والأوراقُ رزمةٌ تُرى عليا أوراقها فقط — فيُنزل عليها */
     /* وفي شبكة البطائق: رزمةُ المربّع الذي فيه هذه البطاقة (طلبُ صاحب الموقع) — لا أوّلُ رزمةٍ تُرى */
@@ -27031,6 +27037,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const rest = () => { if (fill) hlFillShow(hlFillEls(id)); };   /* ما لم يطر إليه شيء يظهر بالترتيب */
     if (bkReduce()) return rest();
     const b = hlCallBook(id), R = hlRows(id), H = hlData(id);
+    /* (طلبُ صاحب الموقع) والمصدرُ بالعرض العادي (صفحاتٌ متتالية، لا كتابٌ على الطاولة): تطير التحديداتُ من صفحاتها نفسِها */
+    if (!b && R && H) { const sb = hlCallScrBook(id); if (sb) return hlCallScroll(id, sb, R, H, fill, rest); }
     if (!b || !R || !H || !b.gl || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) return rest();
     const s = hlSidOf(b).slice(id.length), cids = new Set(R.cards.map(c => c.id));
     const marks = H.marks.filter(m => m.s === s && m.k >= 1 && m.k <= b.n && m.c.some(c => cids.has(c))).sort((x, y) => x.k - y.k || x.bars[0][2] - y.bars[0][2]);
@@ -27055,6 +27063,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         flights.push(new Promise(res => setTimeout(() => hlFly(run, b, m, q, imgs.get(m.id)).then(res), i * 60)));
       });
     } });
+    await Promise.all(flights);
+    if (hlCall === run) hlCallStop();
+  }
+  /* ===== استدعاءُ التحديدات والمصدرُ بالعرض العادي (طلبُ صاحب الموقع: «ما صار يشتغل») =====
+     كان الاستدعاءُ للكتاب المغلق على الطاولة وحده (يُقلَّب فتطير من صفحاته)، والعرضُ العادي بلا كتاب فلا يطير شيء.
+     فههنا يطير كلُّ تحديدٍ من موضعه في صفحته كما تُرى: ما كانت صفحتُه ظاهرةً فمن مكانه، وما كانت خارج المرئيّ فمن الحافّة
+     الأقرب إليها (أعلى المساحة أو أسفلها) كأنّه خرج منها — ولا يُمرَّر المصدرُ عن موضع القارئ */
+  const hlCallScrBook = id => Object.values(pkSrcBk).find(b => b && b.scroll && b.scr && b.scr.isConnected && b.scr.getClientRects().length && pkSrcBase(hlSidOf(b)) === id) || null;
+  async function hlCallScroll(id, b, R, H, fill, rest) {
+    const s = hlSidOf(b).slice(id.length), cids = new Set(R.cards.map(c => c.id));
+    const marks = H.marks.filter(m => m.s === s && m.k >= 1 && m.k <= b.n && m.c.some(c => cids.has(c))).sort((x, y) => x.k - y.k || x.bars[0][2] - y.bars[0][2]);
+    if (!marks.length) return rest();
+    const layer = document.createElement('div'); layer.className = 'hl-fly-layer'; layer.setAttribute('aria-hidden', 'true'); document.body.appendChild(layer);
+    const run = hlCall = { id, b, cids, on: true, layer, urls: [] };
+    const blobs = await Promise.all(marks.map(m => hlSnapGet(id, m.id).catch(() => null)));
+    if (!run.on) return;
+    const imgs = new Map(); marks.forEach((m, i) => { if (blobs[i]) { const u = URL.createObjectURL(blobs[i]); run.urls.push(u); imgs.set(m.id, u); } });
+    const flying = marks.filter(m => imgs.has(m.id) && b.scr.querySelector(`.cbk-scr__pg[data-k="${m.k}"]`));
+    if (!flying.length) { rest(); return hlCallStop(); }
+    if (fill) { const tg = new Set(flying.map(m => hlCallEl(b, m.c.find(c => cids.has(c)))).filter(Boolean)); hlFillShow(hlFillEls(id).filter(x => !tg.has(x)), 90); }
+    flying.forEach(m => { const el = hlCallEl(b, m.c.find(c => cids.has(c))); if (el && !el.classList.contains('pp-card')) el.classList.add('hl-call-pend'); });
+    const sr = b.scr.getBoundingClientRect();
+    const flights = flying.map((m, i) => {
+      const pr = b.scr.querySelector(`.cbk-scr__pg[data-k="${m.k}"]`).getBoundingClientRect(), [l, t, r, bb] = hlSnapBox(m);
+      let x0 = pr.left + l * pr.width, x1 = pr.left + r * pr.width, y0 = pr.top + t * pr.height, y1 = pr.top + bb * pr.height;
+      const h = y1 - y0, w = x1 - x0;
+      if (y1 < sr.top + 4) { y0 = sr.top; y1 = y0 + h; } else if (y0 > sr.bottom - 4) { y1 = sr.bottom; y0 = y1 - h; }   /* خارج المرئيّ: من الحافّة */
+      if (x0 < sr.left) { x0 = sr.left; x1 = x0 + w; } else if (x1 > sr.right) { x1 = sr.right; x0 = x1 - w; }
+      const q = [[x0, y0], [x1, y0], [x1, y1], [x0, y1]];
+      return new Promise(res => setTimeout(() => hlFly(run, b, m, q, imgs.get(m.id)).then(res), i * 70));
+    });
     await Promise.all(flights);
     if (hlCall === run) hlCallStop();
   }
