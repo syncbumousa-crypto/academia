@@ -948,7 +948,9 @@ export function createBook2(THREE, host, cfg) {
   }
   el.addEventListener('wheel', onWheel, { passive: false });
 
-  function dispose() {
+  /* ‏‎keep‎: (للتحوّل إلى الصفحات المتتالية) يُطفأ كلُّ شيءٍ إلّا اللوحةَ نفسَها — تبقى على آخر إطارٍ رُسم فتذوب في مكانها بدل لقطةٍ
+     تُنسخ منها (النسخُ من ‎WebGL‎ يقرأ من كرت الشاشة فيتأخّر التحوّلُ كلُّه) — ويُعاد ما يُتمّ الإطفاءَ حين تنتهي */
+  function dispose(keep) {
     if (dead) return;
     if (rf) { const res = rf.res; rf = null; res(false); }   /* تقليبٌ جارٍ: يُعلَم صاحبُه أنّه انتهى */
     dead = true;
@@ -966,7 +968,9 @@ export function createBook2(THREE, host, cfg) {
     if (rig) { rig.grp.traverse(o => { if (o.isMesh && o.geometry !== art.geometry) { o.geometry.dispose(); if (o.material !== boardM && o.material !== artM && !Array.isArray(o.material)) o.material.dispose(); } }); rig.generic.dispose(); rig.tex.forEach(t => t.dispose()); }
     for (const s of sheets) for (const mh of s.meshes) { mh.material.dispose(); mh.customDepthMaterial.dispose(); }
     geo.dispose(); ground.geometry.dispose(); ground.material.dispose();
-    renderer.dispose(); renderer.forceContextLoss();
+    renderer.dispose();
+    if (keep) return () => { try { renderer.forceContextLoss(); } catch (e) {} el.remove(); };
+    renderer.forceContextLoss();
     el.remove();
   }
 

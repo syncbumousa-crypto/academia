@@ -27734,7 +27734,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkScrOn(b) {
     if (!b || b.scroll || !b.view) return;
     const g = b.gl;
-    if (g) { try { g.dispose(); } catch (e) {} }
+    if (g) { try { const fin = g.dispose(b.keepGl); b.glFin = typeof fin === 'function' ? fin : null; } catch (e) {} }
+    b.keepGl = false;
     b.gl = null;
     if (b.leaf) { try { bkLeafDrop(b); } catch (e) {} }
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
@@ -27853,11 +27854,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (ok) {
       F = b.closed ? null : bkPgScreen(g, b.pos);
       FS = b.closed ? [] : bkPgScreens(g);
-      const cv = document.createElement('canvas');
-      try { g.snapshot(cv); gh = { cv, R: g.el.getBoundingClientRect() }; } catch (e) { gh = null; }
+      /* (المرحلة ٢) لوحةُ الكتاب الحيّةُ نفسُها هي اللقطة: تبقى على آخر إطار وتذوب، ويُتمّ إطفاؤها بعد — بلا نسخٍ منها */
+      if (g.el && g.el.getContext) { gh = { cv: g.el, R: g.el.getBoundingClientRect() }; b.keepGl = true; }
+      else { const cv = document.createElement('canvas'); try { g.snapshot(cv); gh = { cv, R: g.el.getBoundingClientRect() }; } catch (e) { gh = null; } }
     }
     bkScrOn(b);
-    if (!gh || !b.scr) return;
+    if (gh && b.glFin) { const fin = b.glFin, cv = gh.cv; b.glFin = null; const rm = cv.remove; cv.remove = () => { cv.remove = rm; cv.remove(); fin(); }; }   /* (يُعاد الإزالةُ الأصليّة أوّلًا: الإطفاءُ يُزيلها هو أيضًا) */
+    if (!gh || !b.scr) { if (gh) gh.cv.remove(); return; }
     const sc = b.scr, ov = b.scrOv, k = b.pos;
     bkGhostPut(b, gh.cv, gh.R);
     sc.style.opacity = '0'; if (ov) ov.style.opacity = '0';
