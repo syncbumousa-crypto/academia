@@ -26749,6 +26749,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== خطّةُ التحوّل · المرحلة ١: الصفحةُ تبدأ مرسومةً لا فارغة (طلبُ صاحب الموقع) =====
      آخرُ رسمٍ لكلّ صفحة (بتحديداتها، بأيّ عرض) يُحفظ — قليلٌ منها (‎16‎) — فإذا بُنيت الصفحاتُ المتتالية نُسخ على صفحة الوصول
      وجاراتها فورًا (‎bkScrSeed‎) بدل الهيكل الرماديّ، ثمّ يحلّ محلَّه رسمُها بدقّتها حين يجهز (‎bkScrPaint‎ يستبدل اللوحة) */
+  const bkScrW = cw => Math.max(200, Math.min(3000, Math.round(cw * (window.devicePixelRatio || 1))));
+  /* ===== المرحلة ٢: الرسمُ يبدأ قبل النقر =====
+     إذا اقترب المؤشّرُ من القوس (أو لمسه أو بلغه التركيز) والعرضُ التالي هو الصفحاتُ المتتالية: تُرسم صفحةُ القارئ وجاراتُها
+     بعرض الصفحات المتتالية في الخلفية (واحدةً بعد واحدة، الأقربُ أوّلًا). فتُحفظ في ‎pgOut‎ (المرحلة ١)، فإذا نُقر وجدتها
+     القائمةُ بدقّتها الحقيقيّة لا بنسخة الكتاب، ورسمُها هي يجد الملفَّ مرسومًا */
+  function bkScrWarm(b) {
+    if (!b || b.scroll || !b.doc || !b.view || !b.view.isConnected) return;
+    const src = b.view.closest('.pk-src') || b.view, pw = src.getBoundingClientRect().width; if (!pw) return;
+    const w = bkScrW(Math.min(780, Math.max(pw, 520)) * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
+    const key = k0 + '|' + w; if (b.warmKey === key) return; b.warmKey = key;
+    const ks = [k0, k0 + 1, k0 - 1, k0 + 2].filter(k => k >= 1 && k <= (b.n || 1));
+    ks.reduce((p, k) => p.then(() => b.warmKey === key && !b.scroll ? bk2Tex(b, k, w).catch(() => {}) : null), Promise.resolve());
+  }
+  ['pointerover', 'pointerdown', 'focusin'].forEach(ev => document.addEventListener(ev, e => {
+    /* (القوسُ يُلتقط من خطّه وحده؛ والمؤشّرُ يمرّ بزاوية المساحة — أيقونتِها وقوسِها — في طريقه إليه) */
+    const hd = e.target.closest && e.target.closest('#cm-body .pk-src--book > .pk-blkh, #cm-body [data-bkvw]');
+    const a = hd && (hd.matches('[data-bkvw]') ? hd : hd.querySelector('[data-bkvw]')); if (!a || a.dataset.bkvw !== 'scroll') return;
+    Object.values(pkSrcBk).forEach(b => { if (b && b.gl && pkSrcBase(hlSidOf(b)) === a.dataset.pkid) bkScrWarm(b); });
+  }, { passive: true, capture: true }));
   function bkSeedKeep(b, k, cv) {
     if (k !== 'cover' && cv && cv.width) { b.pgOut = b.pgOut || new Map(); b.pgOut.delete(k); b.pgOut.set(k, cv); if (b.pgOut.size > 16) b.pgOut.delete(b.pgOut.keys().next().value); }
     return cv;
@@ -27943,12 +27962,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bk2Engine(b, eo);
   }
   /* الصفحةُ بدقّة عرضها على الشاشة (بسقف): نسخةٌ في لوحتها هي — صورةُ المحرّك المخزونةُ لا تُنقل إلى الصفحة */
+  /* ===== خطّةُ التحوّل · المرحلة ٢: طابورُ رسمٍ بالأولويّة (طلبُ صاحب الموقع) =====
+     كانت كلُّ صفحةٍ تقترب من النظر تبدأ رسمَها في اللحظة نفسها فتتسابق، فتتأخّر صفحةُ القارئ خلف جاراتها. فالطلباتُ
+     تُجمع، ويُرسم اثنان على الأكثر معًا، والأقربُ إلى صفحة القارئ (‎b.pos‎) أوّلًا */
   function bkScrPaint(b, el) {
     if (!b.scroll || !b.doc || !el.isConnected) return;
-    const k = +el.dataset.k, w = Math.max(200, Math.min(3000, Math.round(el.clientWidth * (window.devicePixelRatio || 1))));
+    (b.pq = b.pq || new Set()).add(el); bkScrPump(b);
+  }
+  function bkScrPump(b) {
+    b.pqRun = b.pqRun || 0;
+    while (b.pqRun < 2 && b.pq && b.pq.size) {
+      let best = null, bd = 1e9;
+      for (const el of b.pq) { if (!el.isConnected) { b.pq.delete(el); continue; } const d = Math.abs(+el.dataset.k - (b.pos || 1)); if (d < bd) { bd = d; best = el; } }
+      if (!best) return;
+      b.pq.delete(best); b.pqRun++;
+      Promise.resolve(bkScrPaintNow(b, best)).catch(() => {}).then(() => { b.pqRun--; bkScrPump(b); });
+    }
+  }
+  function bkScrPaintNow(b, el) {
+    if (!b.scroll || !b.doc || !el.isConnected) return;
+    const k = +el.dataset.k, w = bkScrW(el.clientWidth);
     if (!el.clientWidth || el.dataset.w == w) return;
     el.dataset.w = w;
-    bk2Tex(b, k, w).then(src => {
+    return bk2Tex(b, k, w).then(src => {
       if (!b.scroll || !el.isConnected || el.dataset.w != w || !src) return;
       const c = document.createElement('canvas'); c.width = src.width; c.height = src.height;
       c.getContext('2d').drawImage(src, 0, 0);
