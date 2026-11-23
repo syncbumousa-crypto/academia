@@ -26740,11 +26740,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cx.setTransform(1, 0, 0, 1, 0, 0);
       b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
     } else { b.pgCv.delete(ck); b.pgCv.set(ck, base); }
-    if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return base;
+    if (k === 'cover' || (!hlMarksOn(b, k).length && !hlSelOn(b, k))) return bkSeedKeep(b, k, base);
     const cv = document.createElement('canvas'); cv.width = base.width; cv.height = base.height;
     cv.getContext('2d').drawImage(base, 0, 0);
     hlPaint(b, k, cv);
+    return bkSeedKeep(b, k, cv);
+  }
+  /* ===== خطّةُ التحوّل · المرحلة ١: الصفحةُ تبدأ مرسومةً لا فارغة (طلبُ صاحب الموقع) =====
+     آخرُ رسمٍ لكلّ صفحة (بتحديداتها، بأيّ عرض) يُحفظ — قليلٌ منها (‎16‎) — فإذا بُنيت الصفحاتُ المتتالية نُسخ على صفحة الوصول
+     وجاراتها فورًا (‎bkScrSeed‎) بدل الهيكل الرماديّ، ثمّ يحلّ محلَّه رسمُها بدقّتها حين يجهز (‎bkScrPaint‎ يستبدل اللوحة) */
+  function bkSeedKeep(b, k, cv) {
+    if (k !== 'cover' && cv && cv.width) { b.pgOut = b.pgOut || new Map(); b.pgOut.delete(k); b.pgOut.set(k, cv); if (b.pgOut.size > 16) b.pgOut.delete(b.pgOut.keys().next().value); }
     return cv;
+  }
+  function bkScrSeed(b, k0) {
+    if (!b.scr) return;
+    for (let k = Math.max(1, k0 - 2); k <= Math.min(b.n || 1, k0 + 3); k++) {
+      const el = b.scr.querySelector(`.cbk-scr__pg[data-k="${k}"]`); if (!el || el.querySelector(':scope > canvas')) continue;
+      let src = b.pgOut && b.pgOut.get(k);
+      if (!src && b.pgCv) for (const [ck, cv] of b.pgCv) if (ck.split('|')[0] === String(k)) src = cv;   /* (أو رسمُها الخامُ بلا تحديدات) */
+      if (!src) continue;
+      const c = document.createElement('canvas'); c.width = src.width; c.height = src.height; c.dataset.seed = '1';
+      c.getContext('2d').drawImage(src, 0, 0); el.prepend(c);
+    }
   }
   /* ===== رحلةُ التحديد: التظليلُ يُربط بصفوف جدول الملخّص (ROADMAP-HL · كونسبت صاحب الموقع) =====
      · دوائرُ التذييل هي صفوفُ جدول الملخّص في المجلد المختار: ‎14‎ صفًّا ⇐ ‎14‎ دائرة، رقمُ الدائرة رقمُ الصفّ، وبعدها دائرةٌ
@@ -27723,6 +27741,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.view.appendChild(sc); b.view.appendChild(ov);
     b.view.pkBk = b;
     b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    bkScrSeed(b, k0);
     b.tlPages = new Map(); b.tlText = b.tlText || new Map();
     bkScrBars(b);
     requestAnimationFrame(() => bkScrFit(b));
@@ -27822,8 +27841,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t0 = performance.now();
     const ready = () => {
       if (b.scr !== sc) { gh.cv.remove(); return; }
-      const el = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`);
-      if ((!el || !el.querySelector(':scope > canvas')) && performance.now() - t0 < 1200) return requestAnimationFrame(ready);
+      const el = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R = sc.getBoundingClientRect();
+      const bare = [...sc.querySelectorAll('.cbk-scr__pg')].some(p => { const r = p.getBoundingClientRect(); return r.bottom > R.top && r.top < R.bottom && !p.querySelector(':scope > canvas'); });
+      if ((!el || !el.querySelector(':scope > canvas') || bare) && performance.now() - t0 < 1200) return requestAnimationFrame(ready);   /* (كلُّ صفحةٍ في الإطار مرسومةٌ — بنسختها أو بدقّتها) */
       go();
     };
     requestAnimationFrame(ready);
