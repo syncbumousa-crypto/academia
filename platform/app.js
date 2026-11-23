@@ -27816,8 +27816,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sc = b.scr, ov = b.scrOv, k = b.pos;
     bkGhostPut(b, gh.cv, gh.R);
     sc.style.opacity = '0'; if (ov) ov.style.opacity = '0';
-    /* بعد أن تنزل القائمةُ إلى صفحتها (إطارُ ‎bkScrOn‎ نفسُه) */
-    requestAnimationFrame(() => {
+    /* (طلبُ صاحب الموقع: «الصفحة تختفي ثم تجي») رسمُ الصفحة غيرُ فوريّ (يُرسم ملفُّها أوّلًا)، فكانت الحركةُ تبدأ والصفحةُ بعدُ بيضاء:
+       تطير لقطةُ الكتاب إلى فراغٍ وتذوب، ثمّ تظهر الصفحةُ فجأة. فتبقى اللقطةُ مكانها والقائمةُ خفيّة حتى تُرسم صفحةُ الوصول
+       (وما يليها في النظر) — بحدٍّ أقصى ‎1.2‎ ثانية — ثمّ تبدأ الحركة */
+    const t0 = performance.now();
+    const ready = () => {
+      if (b.scr !== sc) { gh.cv.remove(); return; }
+      const el = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`);
+      if ((!el || !el.querySelector(':scope > canvas')) && performance.now() - t0 < 1200) return requestAnimationFrame(ready);
+      go();
+    };
+    requestAnimationFrame(ready);
+    const go = () => {
       sc.style.opacity = ''; if (ov) ov.style.opacity = '';
       const el = b.scr === sc && sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`);
       const P = el && bkRect(el.getBoundingClientRect()), E = bkRect(sc.getBoundingClientRect()), G = bkRect(gh.R);
@@ -27833,7 +27843,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         gh.cv.animate([{ opacity: 1 }, { opacity: 0 }], o).finished.then(() => gh.cv.remove(), () => gh.cv.remove());
       }
       if (ov) ov.animate([{ opacity: 0 }, { offset: .6, opacity: 0 }, { opacity: 1 }], o);
-    });
+    };
   }
   /* الخروجُ: من الصفحات المتتالية إلى الكتاب — يُبنى الكتابُ خفيًّا تحت لقطة الصفحات، فإذا جهز طار إليه */
   function bkScrOut(b, one) {
