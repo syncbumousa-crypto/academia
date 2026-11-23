@@ -27794,6 +27794,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     } catch (e) { return null; }
   }
   const bkRect = q => ({ l: q.left, t: q.top, w: q.width, h: q.height });
+  function bkPgScreens(g) {
+    try {
+      const rs = g && !g.dead && g.pageRects ? g.pageRects() : [], c = g.el.getBoundingClientRect();
+      return rs.filter(r => r.k >= 1).map(r => ({ k: r.k, l: c.left + r.x, t: c.top + r.y, w: r.w, h: r.h }));
+    } catch (e) { return []; }
+  }
   /* يبدأ العنصرُ ‎E‎ (مستطيلُه الآن) وصفحتُه ‎P‎ فيه من المستطيل ‎F‎ */
   const bkSxFrom = (E, P, F) => ({ transformOrigin: `${P.l - E.l}px ${P.t - E.t}px`, transform: `translate(${F.l - P.l}px, ${F.t - P.t}px) scale(${F.w / P.w}, ${F.h / P.h})` });
   /* لقطةٌ توضع فوق المساحة في مكانها على الشاشة (تحت رأسها وقوسها) */
@@ -27824,9 +27830,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* الدخولُ: من الكتاب إلى الصفحات المتتالية */
   function bkScrIn(b) {
     const g = b.gl, ok = g && !g.dead && !bkReduce() && b.stage && b.stage.clientWidth;
-    let gh = null, F = null;
+    let gh = null, F = null, FS = [];
     if (ok) {
       F = b.closed ? null : bkPgScreen(g, b.pos);
+      FS = b.closed ? [] : bkPgScreens(g);
       const cv = document.createElement('canvas');
       try { g.snapshot(cv); gh = { cv, R: g.el.getBoundingClientRect() }; } catch (e) { gh = null; }
     }
@@ -27852,7 +27859,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const el = b.scr === sc && sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`);
       const P = el && bkRect(el.getBoundingClientRect()), E = bkRect(sc.getBoundingClientRect()), G = bkRect(gh.R);
       const o = { duration: BK_SX * (window.__pkfxSlow || 1), easing: BK_SXE };
-      if (P && F && P.w && F.w) {
+      /* ===== خطّةُ التحوّل · المرحلة ٣: الصفحةُ نفسُها تتحوّل (طلبُ صاحب الموقع) =====
+         كلُّ صفحةٍ كانت ظاهرةً في الكتاب (صفحتان في عرض الصفحتين) تمضي وحدها من مكانها وقدرها فيه إلى مكانها في القائمة —
+         ‏‎translate/scale‎ لا ‎transform‎ (الصفحةُ تحمل إزاحةَ التمرير الأفقيّ ‎--bk-x‎ فيه) — وهي مرسومةٌ أصلًا بنسخة الكتاب
+         (المرحلة ١) فتأخذ مكانَ اللقطة. وما لم يكن ظاهرًا في الكتاب ينزلق إلى مكانه من فوق ومن تحت بفارقٍ يسير،
+         ولقطةُ الكتاب (طاولتُه وظلُّه) تذوب سريعًا */
+      const pgs = el && P && P.w ? FS.map(f => [sc.querySelector(`.cbk-scr__pg[data-k="${f.k}"]`), f]).filter(([e, f]) => e && f.w) : [];
+      if (pgs.length) {
+        const D = o.duration, mv = new Set(pgs.map(([e]) => e));
+        pgs.forEach(([e, f]) => {
+          const q = bkRect(e.getBoundingClientRect()); if (!q.w) return;
+          e.style.zIndex = '2';
+          e.animate([{ transformOrigin: '0 0', translate: `${f.l - q.l}px ${f.t - q.t}px`, scale: `${f.w / q.w} ${f.h / q.h}` }, { transformOrigin: '0 0', translate: '0px 0px', scale: '1 1' }], o)
+            .finished.then(() => { e.style.zIndex = ''; }, () => { e.style.zIndex = ''; });
+        });
+        /* الجيرانُ في الإطار: من فوقِ الأولى تنزل، ومن تحتِ الأخيرة تطلع */
+        const R = sc.getBoundingClientRect(), ks = pgs.map(([, f]) => f.k), lo = Math.min(...ks), hi = Math.max(...ks);
+        [...sc.querySelectorAll('.cbk-scr__pg')].filter(p => !mv.has(p)).forEach(p => {
+          const r = p.getBoundingClientRect(); if (r.bottom < R.top - 40 || r.top > R.bottom + 40) return;
+          const pk = +p.dataset.k, dir = pk < lo ? -1 : 1, n = pk < lo ? lo - pk : pk - hi;
+          p.animate([{ translate: `0px ${dir * 46}px`, opacity: 0 }, { translate: '0px 0px', opacity: 1 }], { duration: D * .8, delay: D * .28 + (n - 1) * 55, easing: BK_SXE, fill: 'backwards' });
+        });
+        gh.cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .2, easing: 'ease-out', fill: 'forwards' })   /* (الصفحةُ تغطّي مكانَها في اللقطة من أوّل إطار: فتذوب اللقطةُ قبل أن تتباعدا فلا تُرى مزدوجة) */.finished.then(() => gh.cv.remove(), () => gh.cv.remove());
+      } else if (P && F && P.w && F.w) {
         const f = bkSxFrom(E, P, F);
         sc.animate([{ ...f, opacity: 0 }, { offset: .45, opacity: 1 }, { transformOrigin: f.transformOrigin, transform: 'none', opacity: 1 }], o);
         /* واللقطةُ تمضي بصفحتها إلى مكان الصفحة الجديدة وتذوب */
