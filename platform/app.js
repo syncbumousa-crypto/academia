@@ -26782,7 +26782,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!b || b.scroll || !b.doc || !b.view || !b.view.isConnected) return;
     const src = b.view.closest('.pk-src') || b.view, R = src.getBoundingClientRect(), pw = R.width; if (!pw) return;
     /* (خطّةُ التكبير · المرحلة ٥) بعرض ‎100%‎ نفسِه (الصفحةُ كاملةً في المساحة — ‎bkScrFitW‎)، لا بسقف ‎780px‎ القديم */
-    const fw = b.scrFW || Math.max(120, Math.min(pw - 48, (R.height - 66) * (b.ar || 1 / Math.SQRT2)));
+    const fw = bkScrFitCalc(b) || b.scrFW; if (!fw) return;
     const w = bkScrW(fw * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
     const key = k0 + '|' + w; if (b.warmKey === key) return; b.warmKey = key;
     const ks = [k0, k0 + 1, k0 - 1, k0 + 2].filter(k => k >= 1 && k <= (b.n || 1));
@@ -27773,8 +27773,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     else { bk2Engine(b); setTimeout(fade, 60); }
   }
   /* ===== تبديلُ طريقة العرض من القوس: كلُّ كتابٍ مركَّبٍ يتبدّل وهو على صفحته ===== */
+  /* ===== ج: التقريبُ يُثبَّت قبل أيّ تحويل ===== */
+  function bkScrZoomStop(b) { if (!b) return; if (b.zAnim) { cancelAnimationFrame(b.zAnim); b.zAnim = 0; } if (b.zg) bkScrPinchEnd(b); }
   function bkSetMode(m) {
     if (!BK_MODES.includes(m)) return;
+    Object.values(pkSrcBk).forEach(bkScrZoomStop);
     const prev = bkModeGet(); if (prev === m) return;
     bkModeSet(m);
     Object.values(pkSrcBk).forEach(b => {
@@ -27834,9 +27837,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* طبقةٌ فوق القائمة بشكلها نفسِه: فيها حبّةُ الرقم والتقريب والشريطان — فتُقصّ معها على رسمة المساحة */
     const ov = document.createElement('div'); ov.className = 'cbk-scr__ov'; ov.appendChild(top);
     b.view.appendChild(sc); b.view.appendChild(ov);
-    bkScrFitW(b);
     b.view.pkBk = b;
     b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
+    /* (عرضُ ‎100%‎ قبل أيّ قياسٍ أو تحوّل — كان يُنادى قبل أن تُعرف القائمةُ ‎b.scr‎ فلا يُكتب، فتبدأ الصفحاتُ بعرض المساحة كلِّه
+       وتطير إليه الصفحةُ ثمّ تصغر حين يكتبه مراقبُ المقاس) */
+    bkScrFitW(b, true);
     bkScrSeed(b, k0);
     bkScrThumbs(b);
     b.tlPages = new Map(); b.tlText = b.tlText || new Map();
@@ -27893,7 +27898,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
-      bkScrFitW(b);
+      clearTimeout(b.fitT); b.fitT = setTimeout(() => bkScrFitW(b), 160);   /* (بعد أن يستقرّ المقاس — لا في كلّ إطارٍ من انتقاله) */
       b.scrPW = 0;
       b.scrSync && b.scrSync();
       bkScrFit(b);
@@ -28560,7 +28565,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كانت ستبقى أضيق (فهي في الوسط بعدها) — وإذا وقفت اليدُ (‎160ms‎) أو بلغ التحجيمُ حدّه يُثبَّت المقاسُ الحقيقيّ مرّةً واحدة
      (‎bkScrZoom‎) وتُعاد رسمةُ الظاهرة بدقّتها */
   function bkScrPinch(b, f, at) {
-    const sc = b.scr; if (!sc || !f) return;
+    const sc = b.scr; if (!sc || !f || b.mx || (!b.zg && bkFx(b))) return;   /* (لا يبدأ في تحويلٍ جارٍ) */
     let g = b.zg;
     if (!g) {
       const r = sc.getBoundingClientRect(), H = sc.clientHeight, ay = r.top + at.y;
@@ -28726,14 +28731,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ‎100%‎ = الصفحةُ كاملةً في المساحة (طلبُ صاحب الموقع: «اقدر اشوفها كاملة» في كلّ المساحات) =====
      عرضُها أصغرُ العرضين: عرضُ المساحة إلّا ‎24px‎ على كلّ جانب، أو ما تسعه قامتُها (إلّا رأسَها ‎42px‎ وهامشًا تحتها) بنسبة الصفحة —
      فتُرى الصفحةُ كلُّها في مساحةٍ واحدةٍ واسعة أو مساحتين متجاورتين، والتقريبُ يكبّرها من هنا */
-  function bkScrFitW(b) {
+  /* ===== خطّةُ إصلاح التحويلات · ب: مصدرٌ واحدٌ لعرض ‎100%‎ =====
+     مقاسُ مساحة الصفحات النهائيّ — شكلُها على رسمة البطاقة (‎bkScrFit‎ يضع القائمةَ عليه) أو المساحةُ نفسُها — لا مقاسُ القائمة
+     اللحظيّ (كانت تُقاس قبل أن تتشكّل). منه يُحسب عرضُ ‎100%‎ للرسم المسبق ولبناء القائمة وللتقريب، فتطابق الصورُ المرسومةُ سلفًا */
+  function bkScrDims(b) {
+    const card = b.view && b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]');
+    if (bp) { try { const bb = bp.getBBox(); if (bb && bb.width && bb.height) return { w: bb.width, h: bb.height }; } catch (e) {} }
+    const el = (b.scr && b.scr.isConnected && b.scr) || (b.view && b.view.closest('.pk-src')) || b.view; if (!el) return null;
+    const r = el.getBoundingClientRect(); return r.width && r.height ? { w: r.width, h: r.height } : null;
+  }
+  function bkScrFitCalc(b) {
+    const d = bkScrDims(b); if (!d) return 0;
+    return Math.max(120, Math.floor(Math.min(d.w - 48, (d.h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
+  }
+  /* ===== أ: يُحسب مرّةً قبل بناء القائمة ويثبت طولَ أيّ تحويل =====
+     كان يُعاد مع كلّ تغيّرٍ في مقاس القائمة — وهي تتشكّل وقامتُها تنتقل في أثناء التحويل نفسِه — فتكبر الصفحاتُ وتصغر والصفحةُ
+     الطائرةُ في طريقها. فالآن لا يُغيَّر في نافذة الحركة (‎bkFx‎) ولا في تبدُّلٍ جارٍ، ويُعاد بعد استقرار المقاس فقط (‎force‎ عند
+     البناء)، ومكانُ القراءة ثابتٌ حين يتغيّر (أعلى صفحةٍ ظاهرةٍ وموضعُها منها) */
+  function bkScrFitW(b, force) {
     const sc = b.scr; if (!sc) return;
-    const w = sc.clientWidth, h = sc.clientHeight; if (!w || !h) return;
-    const fw = Math.max(120, Math.floor(Math.min(w - 48, (h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
-    /* (المقارنةُ بما على هذه القائمة نفسِها: الكتابُ يبقى والقائمةُ تُبنى من جديد مع كلّ رجوعٍ إلى العرض العاديّ — كانت تُقارن
-       بقيمة الكتاب المحفوظة فلا تُكتب على القائمة الجديدة، فتأخذ عرضَ المساحة كلَّه ويختلّ ‎100%‎ وحدُّ التصغير) */
+    if (!force && (bkFx(b) || b.mx || b.zg)) { clearTimeout(b.fitT); b.fitT = setTimeout(() => bkScrFitW(b), 220); return; }
+    const fw = bkScrFitCalc(b); if (!fw) return;
+    /* (المقارنةُ بما على هذه القائمة نفسِها: الكتابُ يبقى والقائمةُ تُبنى من جديد مع كلّ رجوعٍ إلى العرض العاديّ) */
     if (sc.bkFW === fw) return;
+    let top = null, off = 0;
+    if (!force && sc.isConnected) {
+      const r = sc.getBoundingClientRect();
+      for (const el of sc.querySelectorAll('.cbk-scr__pg')) { const q = el.getBoundingClientRect(); if (q.bottom > r.top + 1) { top = el; off = (r.top - q.top) / (q.height || 1); break; } }
+    }
     sc.bkFW = b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
+    if (top) { const r = sc.getBoundingClientRect(), q = top.getBoundingClientRect(); sc.scrollTop += q.top + off * q.height - r.top; }
   }
   function bkScrFit(b) {
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
