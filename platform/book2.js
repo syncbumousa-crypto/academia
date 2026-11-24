@@ -1018,14 +1018,18 @@ export function createBook2(THREE, host, cfg) {
     /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
     get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
+    get folding() { return !!mo; },
     get settled() { return !mo && tv === 1 && !ta && idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
     /* الصفحاتُ الساكنةُ الظاهرة ومستطيلاتُها على اللوحة (بكسل CSS) — تُسقَط زواياها من موضعها الحقيقيّ (فوق كومتها) بالكاميرا نفسِها،
        فتنطبق عليها طبقةُ النصّ. ‏‎k‎ رقمُ الصفحة في الملفّ */
     pageRects() {
-      if (A === 0 || mo) return [];
+      /* (مطويًّا ساكنًا يُعطي الصفحةَ الباقيةَ وحدها: التحوّلُ من الصفحات المتتالية يطير إليها قبل أن ينفتح) */
+      if (A === 0 || (mo && (mo.a || mo.k < 1))) return [];
       const v = new THREE.Vector3(), out = [];
-      const proj = (x, y, z) => { v.set(x + book.position.x, y, z).project(camera); return [(v.x + 1) / 2 * cw, (1 - v.y) / 2 * ch]; };
+      /* (المطويُّ مُزاحٌ نصفَ ورقة: تُحسب إزاحتُه هنا لا ممّا رُسم — قد يُسأل قبل أوّل إطار) */
+      const bx = mo ? (mo.side === 'L' ? 1 : -1) * W / 2 * mo.k : book.position.x;
+      const proj = (x, y, z) => { v.set(x + bx, y, z).project(camera); return [(v.x + 1) / 2 * cw, (1 - v.y) / 2 * ch]; };
       const face = (vk, x0, x1, z) => {
         if (!(vk >= 1 && vk <= N)) return;
         const k = vk + SK;
@@ -1034,8 +1038,8 @@ export function createBook2(THREE, host, cfg) {
       };
       if (ONE) { if (A < S - 1) face(A, -W, 0, (S - A) * STACK); }
       else {
-        if (A < S - 1) face(2 * A - 1, -W, 0, (S - A) * STACK);
-        face(2 * (A - 1), 0, W, A * STACK);
+        if (A < S - 1 && (!mo || mo.side === 'L')) face(2 * A - 1, -W, 0, (S - A) * STACK);
+        if (!mo || mo.side === 'R') face(2 * (A - 1), 0, W, A * STACK);
       }
       return out;
     },
