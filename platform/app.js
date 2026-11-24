@@ -26804,6 +26804,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const idle = window.requestIdleCallback || (f => setTimeout(() => f({ timeRemaining: () => 8 }), 120));
     const next = () => {
       if (!b.scroll || !b.doc) { b.thumbRun = false; return; }
+      if (bkFx(b)) return bkFxLater(b, 'thT', () => idle(next, { timeout: 1500 }));
       const n = Math.min(b.n || 0, 600), at = b.pos || 1;
       let k = 0, bd = 1e9;
       for (let i = 1; i <= n; i++) if (!b.thumbs.has(i)) { const d = Math.abs(i - at); if (d < bd) { bd = d; k = i; } }
@@ -27852,11 +27853,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
+    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; if (bkFx(b)) return bkFxLater(b, 'onT', () => b.scrOn && b.scrOn()); cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
     sc.addEventListener('scroll', b.scrOn, { passive: true });
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
+      b.scrPW = 0;
       b.scrSync && b.scrSync();
       bkScrFit(b);
       if (b.scrW && w < b.scrW * 1.25) return;
@@ -27935,6 +27937,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · استدعاءُ التحديدات جارٍ (الكتابُ يُقلَّب مغلقًا): يُوقف بلا إعادة فتح.
      · صفحةٌ تتقلّب (المحرّكُ لا يُعطي أماكنَ صفحاته وهو يتحرّك): يُنتظر استقرارُه — ثلثَ ثانيةٍ على الأكثر.
      ثمّ التحويلُ الحيّ (‎bkScrIn‎) — وإن بقي بلا أماكن (مغلقٌ أو لم يستقرّ) قُدِّر مكانُ الصفحة فوق الكتاب فكبرت منه */
+  /* ===== خطّةُ ثبات التحويل · المرحلة ٢: نافذةُ الحركة (من تقرير الاختبار على جهاز صاحب الموقع) =====
+     كانت كلُّ أعمال الصفحات المتتالية تبدأ في لحظة الحركة نفسِها: مراقبُ الصفحات يُبلغ عن القريبة كلِّها دفعةً فيُرسم لكلٍّ
+     (ويقيس عرضَها فيُفرض تخطيطٌ كامل)، وطبقاتُ النصّ، وقراءةُ لون ما تحت الزاوية، ومعالجُ التمرير — فيتجمّد الخيطُ
+     ‎100–190ms‎ والحركةُ مربوطةٌ بالساعة، فتقفز الصفحةُ نصفَ مسافتها في إطار. فما دامت النافذةُ (‎b.fxUntil‎) يُؤجَّل كلُّ
+     ما لا يحتاجه الإطار، ويُستأنف بعدها */
+  const bkFx = b => !!b && performance.now() < (b.fxUntil || 0);
+  function bkFxLater(b, key, fn) {
+    if (b[key]) return; const ms = Math.max(0, (b.fxUntil || 0) - performance.now()) + 30;
+    b[key] = setTimeout(() => { b[key] = 0; fn(); }, ms);
+  }
   function bkScrInSafe(b) {
     bkDiag(b, 'start', { closed: !!b.closed, pos: b.pos });
     const g = b.gl;
@@ -27943,7 +27955,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const t0 = performance.now();
     const wait = () => {
       if (b.scroll || bkModeGet() !== 'scroll') return;   /* (تبدّل شيءٌ في أثناء الانتظار) */
-      if (!b.gl || b.gl.dead || b.gl.settled || performance.now() - t0 > 340) { bkDiag(b, 'waited-settle', { ms: Math.round(performance.now() - t0), settled: !!(b.gl && b.gl.settled) }); return bkScrIn(b); }
+      if (!b.gl || b.gl.dead || b.gl.settled || bkPgScreens(b.gl).length || performance.now() - t0 > 340) { bkDiag(b, 'waited-settle', { ms: Math.round(performance.now() - t0), settled: !!(b.gl && b.gl.settled) }); return bkScrIn(b); }   /* (يكفي أن يُعطي أماكنَ صفحاته — لا أن يسكن كلُّ شيء) */
       requestAnimationFrame(wait);
     };
     requestAnimationFrame(wait);
@@ -27994,6 +28006,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          ولقطةُ الكتاب (طاولتُه وظلُّه) تذوب سريعًا */
       const pgs = el && P && P.w ? FS.map(f => [sc.querySelector(`.cbk-scr__pg[data-k="${f.k}"]`), f]).filter(([e, f]) => e && f.w) : [];
       bkDiag(b, pgs.length ? 'live' : 'fade', { gateMs: Math.round(performance.now() - t0), pages: pgs.length });
+      b.fxUntil = performance.now() + o.duration + 90;
       if (pgs.length) {
         const D = o.duration, mv = new Set(pgs.map(([e]) => e));
         pgs.forEach(([e, f]) => {
@@ -28255,18 +28268,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bkScrPump(b) {
     b.pqRun = b.pqRun || 0;
-    while (b.pqRun < 2 && b.pq && b.pq.size) {
+    if (bkFx(b)) return bkFxLater(b, 'pqT', () => bkScrPump(b));   /* (يُجمع وقتَ الحركة ولا يُرسم) */
+    while (b.pqRun < 1 && b.pq && b.pq.size) {
       let best = null, bd = 1e9;
       for (const el of b.pq) { if (!el.isConnected) { b.pq.delete(el); continue; } const d = Math.abs(+el.dataset.k - (b.pos || 1)); if (d < bd) { bd = d; best = el; } }
       if (!best) return;
       b.pq.delete(best); b.pqRun++;
-      Promise.resolve(bkScrPaintNow(b, best)).catch(() => {}).then(() => { b.pqRun--; bkScrPump(b); });
+      Promise.resolve(bkScrPaintNow(b, best)).catch(() => {}).then(() => { b.pqRun--; requestAnimationFrame(() => bkScrPump(b)); });   /* (صفحةٌ في الإطار لا دفعة) */
     }
   }
   function bkScrPaintNow(b, el) {
     if (!b.scroll || !b.doc || !el.isConnected) return;
-    const k = +el.dataset.k, w = bkScrW(el.clientWidth);
-    if (!el.clientWidth || el.dataset.w == w) return;
+    const cw = b.scrPW || (b.scrPW = el.clientWidth);   /* (عرضُ الصفحات واحد: يُقاس مرّةً لا لكلّ صفحة — كلُّ قياسٍ يفرض تخطيطًا) */
+    const k = +el.dataset.k, w = bkScrW(cw);
+    if (!cw || el.dataset.w == w) return;
     el.dataset.w = w;
     return bk2Tex(b, k, w).then(src => {
       if (!b.scroll || !el.isConnected || el.dataset.w != w || !src) return;
@@ -28282,6 +28297,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لكلّ صفحةٍ مرسومةٍ طبقتُها الشفّافة بكلمات الملفّ (‎pdf.js renderTextLayer‎) داخلها، بعرضها على الشاشة — فتمشي معها في التمرير
      والتقريب، وتُبنى من جديد إذا تبدّل عرضُها. وعليها يجري التحديدُ الهندسيّ والمربّعُ ونقرُ التظليل كما في الكتاب */
   function bkScrTL(b, el) {
+    if (bkFx(b)) { (b.tlWait = b.tlWait || new Set()).add(el); return bkFxLater(b, 'tlT', () => { const s = b.tlWait; b.tlWait = null; if (s) s.forEach(x => bkScrTL(b, x)); }); }
     if (!b.scroll || !b.doc || !window.pdfjsLib || !el.isConnected) return;
     const k = +el.dataset.k, W = Math.round(el.clientWidth); if (!W) return;
     b.tlPages = b.tlPages || new Map(); b.tlText = b.tlText || new Map();
@@ -28324,6 +28340,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bkScrZoom(b, z, at) {
     const sc = b.scr; if (!sc) return;
+    b.scrPW = 0;
     z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
     const z0 = b.scrZ || 1; if (Math.abs(z - z0) < .001) return;
     /* ===== التقريبُ حول ما تحت المؤشّر، لا حول الوسط (طلبُ صاحب الموقع) =====
@@ -28457,6 +28474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وما لا ورقَ تحته يُحسب بلون المساحة. ففوق الفاتح حبرٌ غامق، وفوق الغامق حبرٌ فاتح، مهما كان ثيمُ الموقع.
      وبين العتبتين لا يتقلّب (يبقى على آخر حال) فلا يرتجف على الصفحات المتوسّطة */
   function bkScrTone(b) {
+    if (bkFx(b)) return bkFxLater(b, 'toneT', () => bkScrTone(b));
     if (!b || !b.scroll || !b.scr) return;
     bkScrPillTone(b);
     const src = b.view.closest('.pk-src'), hd = src && src.querySelector(':scope > .pk-blkh');
