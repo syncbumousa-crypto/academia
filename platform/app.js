@@ -27967,6 +27967,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      لكلّ تحويلٍ إلى الصفحات المتتالية: الطريقُ الذي أخذه (حيّ / تلاشٍ)، وأسبابُه، وانتظاراتُه، واللحظاتُ الثقيلةُ على الجهاز
      في الثانيتين بعده. يُقرأ من الكونسول: ‎copy(JSON.stringify(__bkDiag))‎ */
   const bkDiagOn = () => { try { return localStorage.getItem('ac.bk.diag') === '1'; } catch (e) { return false; } };
+  /* (للقياس، مع السجلّ وحده) كتبُ المساحات — يُقرأ منها المحرّكُ ودقّةُ صوره */
+  try { if (bkDiagOn()) window.__bkBooks = () => Object.values(pkSrcBk).filter(Boolean); } catch (e) {}
   function bkDiag(b, note, extra) {
     if (!bkDiagOn()) return;
     const L = window.__bkDiag = window.__bkDiag || [];
