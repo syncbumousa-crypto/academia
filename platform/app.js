@@ -28228,16 +28228,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        فتبلغه في آخر الحركة. وفي آخر إطارٍ من الانفتاح يعود النصفُ إلى الكتاب تحتها بالصورة نفسِها فتُرفع */
     let mDone = false, mOn = false;
     if (side) {
-      const slow = window.__pkfxSlow || 1, Df = Math.round((BK_SX + 260) * slow), t0 = performance.now();
-      const ez = q => 1 - Math.pow(1 - q, 3);
+      const slow = window.__pkfxSlow || 1, t0 = performance.now();
       const goal = () => { const g = b.gl; const f = g && !g.dead ? bkPgScreens(g).find(x => x.k === k) : null; return f || T[0]; };
       /* قبل الانفتاح بإطارات الصفحة، وفي أثنائه بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) — فلا تتأخّر عنه إطارًا ولو تقطّع الجهاز */
       const put = () => {
         if (mDone || !live || !L.isConnected) return;
-        const e = mEnd ? 1 : ez(Math.min(1, (performance.now() - t0) / Df)), f = goal(), r0 = live.r0;
+        /* (طلبُ صاحب الموقع: «لسه على خطوتين») التصغُّرُ مربوطٌ بالانفتاح نفسِه: قبله تمضي الصفحةُ شيئًا يسيرًا (نحو ‎40%‎ وتتمهّل)،
+           ومعه يجري باقي طريقها بمنحناه ومدّته (‎cosE‎ كالمحرّك) — فيبدآن معًا وينتهيان معًا ولو تأخّر بناءُ الكتاب */
+        const now = performance.now();
+        let e;
+        if (mEnd) e = 1;
+        else if (!mOn) e = .42 * (1 - Math.exp(-(now - t0) / (180 * slow)));
+        else { if (eA == null) { eA = cur; tM = now; } const q = Math.min(1, (now - tM) / (BK_MX * slow)); e = eA + (1 - eA) * (1 - Math.cos(Math.PI * q)) / 2; }
+        cur = e;
+        const f = goal(), r0 = live.r0;
         Object.assign(live.d.style, { left: r0.left + (f.l - r0.left) * e + 'px', top: r0.top + (f.t - r0.top) * e + 'px', width: r0.width + (f.w - r0.width) * e + 'px', height: r0.height + (f.h - r0.height) * e + 'px' });
       };
-      let mEnd = false;
+      let mEnd = false, eA = null, tM = 0, cur = 0;
       const tick = () => { if (mOn || mDone) return; put(); requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
       const open = g => {
