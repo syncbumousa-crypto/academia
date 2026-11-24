@@ -26233,7 +26233,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كانت الدوائرُ تظهر فجأةً بعد بداية الموقع فيطول الشريطُ قفزًا. فما دام الجوابُ لم يصل (‎srvSeen‎): في كلّ تبويبٍ ثلاثُ
      دوائرَ باهتةٍ تنبض — مكانُها محجوزٌ من أوّل لحظة. والجوابُ واحدٌ للتبويبات كلِّها (‎srvPull‎ مادّةً كاملة) فتمتلئ معًا،
      وما تغيّر منها ينتقل بانزلاق الشريط نفسِه (‎cmTabsFlipStart/End‎): الباهتةُ تذوب والوجوهُ تطلع، والقامةُ تتنفّس */
-  const FACES_LD = '<span class="cm-face cm-face--ld"></span>'.repeat(3);
+  const FACES_LD = '<span class="cm-face cm-face--ld"></span>';   /* حلقةٌ صغيرةٌ تدور (الاقتراحُ ٣ · طلبُ صاحب الموقع) */
   function paintTabFaces(code) {
     if (!code) return;
     let ld = false; try { ld = !srvSeen(code) && !srvPullFail[code]; } catch (e) {}   /* (قبل أن يُعرَّف في التمهيد: لا انتظار) */
@@ -26247,11 +26247,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!todo.length) return;
     /* أوّلُ طلاءٍ بعد بناء الشريط بلا حركة (البناءُ له انزلاقُه) — وما بعده إن تغيّر */
     const flip = todo.some(([, sp]) => sp.dataset.sig != null) ? cmTabsFlipStart() : null;
+    const fan = new Set(todo.filter(([, sp]) => sp.dataset.sig === FACES_LD).map(([b]) => b.dataset.tab));   /* (من الحلقة: تنفرد الوجوهُ منها) */
     todo.forEach(([btn, span, html]) => {
       span.dataset.sig = html; span.innerHTML = html;
       span.classList.toggle('is-none', !ld && !span.querySelector('.cm-face:not(.cm-face--me)'));
     });
-    if (flip) cmTabsFlipEnd(flip, new Set(todo.map(([b]) => b.dataset.tab)));
+    if (flip) cmTabsFlipEnd(flip, new Set(todo.map(([b]) => b.dataset.tab)), fan);
   }
 
   /* أيقونات أزرار التبويبات (مختارة من مختبر الأيقونات) — تُرسم فوق التسمية، وترث لون الزرّ
@@ -30921,7 +30922,7 @@ void main() {
     });
     return { old, h0: T.getBoundingClientRect().height };
   }
-  function cmTabsFlipEnd(st, only) {
+  function cmTabsFlipEnd(st, only, fan) {
     const T = document.getElementById('cm-tabs');
     if (!st || !T || !T.offsetParent) return;
     const D = 620, E = 'cubic-bezier(.22, 1, .36, 1)';
@@ -30948,7 +30949,11 @@ void main() {
         const n = el.getBoundingClientRect(), dx = o[k].left - n.left, dy = o[k].top - n.top;
         if (Math.abs(dx) > .5 || Math.abs(dy) > .5) el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: D, easing: E });
       });
-      if (mine) b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
+      /* والآتيةُ من حلقة التحميل: تنفرد الوجوهُ من موضعها (وسطِ الصفّ) إلى الجنبين */
+      const fs = mine && fan && fan.has(b.dataset.tab) ? [...b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face')] : null;
+      if (fs) fs.forEach((f, i) => f.animate([{ opacity: 0, transform: `translateX(${((fs.length - 1) / 2 - i) * 11 * (state.lang === 'en' ? -1 : 1)}px) scale(.3)` }, { opacity: 1, transform: 'none' }],
+        { duration: D * .75, delay: D * .2, easing: 'cubic-bezier(.22, 1.3, .36, 1)', fill: 'backwards' }));
+      else if (mine) b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
         { duration: D * .8, delay: D * .25 + i * 45, easing: 'cubic-bezier(.22, 1.35, .36, 1)', fill: 'backwards' }));
     });
   }
