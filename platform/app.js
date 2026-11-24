@@ -4749,6 +4749,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
   /* صورُ الحروف من منتدى STKFUPM ألوانُها عشوائيّةٌ من المنتدى لا من الموقع: يُرسم الحرفُ
      هنا محايدًا (‎.av-letter‎) بدل جلب صورته — ولا طلبَ شبكةٍ لكلّ وجه */
+  const AV_COLS = ['#2c5e65', '#3f7fb8', '#8a5bb0', '#b9803a', '#3f8f55', '#b85a78', '#5a68b8', '#4b949a'];
   const LETTER_AV = /letter_avatar_proxy\/v\d+\/letter\/([^/])\//;
   const avatarHTML = p => {
     const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
@@ -4756,7 +4757,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
     if (!src) return FLAT_AVATAR;
     const lm = LETTER_AV.exec(src);
-    return lm ? `<span class="av-letter" aria-hidden="true">${esc(lm[1].toUpperCase())}</span>` : `<img src="${src}" alt="" loading="lazy" decoding="async">`;
+    /* حرفُ من لا صورةَ له: دائرةٌ بلونٍ صلبٍ (ثابتٍ للحرف نفسِه) وحرفٌ أبيضُ واقف — كالصورة (طلبُ صاحب الموقع: كانت شفّافةً والحرفُ مائلًا) */
+    if (lm) { const ch = lm[1].toUpperCase(); return `<span class="av-letter" aria-hidden="true" style="--av-c:${AV_COLS[ch.charCodeAt(0) % AV_COLS.length]}">${esc(ch)}</span>`; }
+    return `<img src="${src}" alt="" loading="lazy" decoding="async">`;
   };
   const nameOf = p => (p.me ? esc(state.profile.name || '') : esc((p.u && p.u.name) || '')) || T().meName;
 
