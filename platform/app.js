@@ -27506,14 +27506,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
   }
   /* أداةُ المربّع (ق٦): يُعلَّم مصدرُ المساهمة فتصير صفحاتُه لوحَ رسمٍ بمؤشّرٍ متقاطع، وتعود نصًّا بالقلم */
-  /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — رأسُه المائلُ عند نقطة التأشير أسفلَ اليسار */
+  /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — بكسليٌّ بأسلوب يد التقليب ومؤشرات المتصفّح (طلبُه أيضًا):
+     حدٌّ أسودُ بعرض بكسل، جسمٌ أبيض بين حلقتين، طرفاه بلون الحبر، ورأسُه المشطوفُ أسفلَ اليسار هو نقطةُ التأشير */
+  /* واقفٌ نحيل (طلبُ صاحب الموقع): بعرض خمسة بكسلات وطولُه قريبٌ من سطر النصّ، فيقع على السطر بقدره — غطاءٌ بلون الحبر، جسمٌ أبيض
+     بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ نقطةُ التأشير طرفُ الرأس */
+  const HL_PEN_PX = ['.kkk.', 'kccck', 'kccck', 'kkkkk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kkkkk', 'kccck', 'kccck', 'kttk.', 'ktk..', 'kk...'];
+  function hlPixPen(fill, ink) {
+    const col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
+    let r = '';
+    HL_PEN_PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="20" viewBox="0 0 8 20" shape-rendering="crispEdges">${r}</svg>`;
+    return { svg, hx: ox + 1, hy: oy + HL_PEN_PX.length - 2 };
+  }
   const hlPenCurC = {};
   function hlPenCursor(c) {
     if (hlPenCurC[c]) return hlPenCurC[c];
     const ink = { y: '#c99410', g: '#3f9a52', b: '#3f84c6', p: '#c95b7d' }[c] || '#c99410', fill = (HL_COL[c] || HL_COL.y)[1];
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><g stroke="#14233f" stroke-width="1.3" stroke-linejoin="round">`
-      + `<path d="M15.5 2.5l8 8-9.5 9.5-8-8z" fill="#fff"/><path d="M6 12l8 8-2.5 2.5H7.5L3.5 18.5v-4z" fill="${fill}"/><path d="M3.5 18.5l4 4H2z" fill="${ink}"/></g></svg>`;
-    return (hlPenCurC[c] = `url("data:image/svg+xml,${encodeURIComponent(svg)}") 2 24, text`);
+    const r = hlPixPen(fill, ink);
+    return (hlPenCurC[c] = `url("data:image/svg+xml,${encodeURIComponent(r.svg)}") ${r.hx} ${r.hy}, text`);
   }
   function hlToolSync(id) {
     const cur = hlPenCursor(hlCol.t);
