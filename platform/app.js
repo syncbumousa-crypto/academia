@@ -28133,8 +28133,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (t && side) {
         /* (إلى الصفحتين) تُقاد إطارًا إطارًا إلى مكان صفحتها الحيّ في الكتاب — يتغيّر وهو ينفتح */
         const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
-        d.style.zIndex = 3; d.style.boxShadow = 'none';
-        live = { d, r0: r };
+        d.style.zIndex = 3; d.style.boxShadow = 'none'; d.style.transformOrigin = '0 0';
+        live = { d, r0: r }; moving.set(kk, d);   /* (في ‎moving‎: وإلّا حُسبت غائبةً عن القائمة فطلعت لها ورقةٌ بيضاء) */
       } else if (t) {
         const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
         d.style.zIndex = kk === k ? 3 : 2;
@@ -28242,7 +28242,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         else { if (eA == null) { eA = cur; tM = now; } const q = Math.min(1, (now - tM) / (BK_MX * slow)); e = eA + (1 - eA) * (1 - Math.cos(Math.PI * q)) / 2; }
         cur = e;
         const f = goal(), r0 = live.r0;
-        Object.assign(live.d.style, { left: r0.left + (f.l - r0.left) * e + 'px', top: r0.top + (f.t - r0.top) * e + 'px', width: r0.width + (f.w - r0.width) * e + 'px', height: r0.height + (f.h - r0.height) * e + 'px' });
+        /* (بالتحويل وحده على كرت الشاشة — كان تغييرُ مقاسها في كلّ إطارٍ يُعيد تخطيطَها ورسمَ لوحتها الكبيرة: ثقل) */
+        const x = (f.l - r0.left) * e, y = (f.t - r0.top) * e, sx = (r0.width + (f.w - r0.width) * e) / r0.width, sy = (r0.height + (f.h - r0.height) * e) / r0.height;
+        live.d.style.transform = `translate(${x}px, ${y}px) scale(${sx}, ${sy})`;
       };
       let mEnd = false, eA = null, tM = 0, cur = 0;
       const tick = () => { if (mOn || mDone) return; put(); requestAnimationFrame(tick); };
