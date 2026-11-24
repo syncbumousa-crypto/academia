@@ -592,7 +592,6 @@ export function createBook2(THREE, host, cfg) {
   const qv = new THREE.Quaternion(), ev = new THREE.Euler(), v3 = new THREE.Vector3(), tRest = new THREE.Vector3();
   const tCorners = [];
   for (const x of [-WB, SPB]) for (const y of [-HB / 2, HB / 2]) for (const z of [0, TH + 2 * BT]) tCorners.push(new THREE.Vector3(x + W / 2, y, z));
-  let restRect = null;
   const smooth = t => t * t * (3 - 2 * t);
   /* الطاولةُ بكاملها في الإطار: تُسقَط زوايا الكتاب على اتّجاه الكاميرا، فيُختار البعدُ الذي يسعها والمركزُ الذي يوسّطها */
   function restPose(q) {
@@ -630,7 +629,6 @@ export function createBook2(THREE, host, cfg) {
        فغلبت الورقةُ التي تحتُ التي فوقها */
     camera.near = Math.max(0.1, dist - W * 1.35); camera.far = dist + W * 1.6;
     camera.position.set(cx, -LIFT * H, dist); camera.lookAt(cx, -LIFT * H, 0);
-    restRect = null;
     if (tv < 1) {
       /* بين الطاولة والقراءة: الميلُ والدورانُ يتلاشيان، والمركزُ والبعدُ يمضيان من وضع الطاولة إلى وضع القراءة */
       const e = smooth(tv);
@@ -644,11 +642,6 @@ export function createBook2(THREE, host, cfg) {
       v3.set(cx, -LIFT * H, 0).sub(tRest).multiplyScalar(e).add(tRest);
       camera.position.set(0, 0, d).applyQuaternion(qv).add(v3); camera.quaternion.copy(qv);
       camera.near = Math.max(0.05, d - W * 2.2); camera.far = d + W * 3;
-      /* مستطيلُ الكتاب على اللوحة (للنقر والتحويم عليه) */
-      camera.updateMatrixWorld(); camera.updateProjectionMatrix();
-      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
-      for (const p of tCorners) { v3.copy(p); v3.z += book.position.z; v3.project(camera); const px = (v3.x + 1) / 2 * cw, py = (1 - v3.y) / 2 * ch; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
-      restRect = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
     }
     camera.updateProjectionMatrix();
     const ppu = ch / (2 * dist * tn);   // بكسلٌ لكلّ وحدة في مستوى الكتاب
@@ -888,10 +881,12 @@ export function createBook2(THREE, host, cfg) {
   /* ‏‎cfg.cursor(kind, side, n)‎ (طلبُ صاحب الموقع): مؤشرُ اليد البكسليّ وسهمُه لجهة السحب — ‏‎side‎ ‏‎l‎ طرفُ اليسار (يُسحب لليمين)
      و‎r‎ اليمين؛ ‏‎kind‎ ‏‎open‎ والمؤشرُ على المقبض، ‏‎grab‎ في السحب. والسهمُ ينبض ما دام المؤشرُ على المقبض: تُبدَّل صورُه (‎n‎) كلَّ ‎110ms‎ */
   let curT = 0, curI = 0;
+  /* ‏‎tblOn‎: المؤشرُ في المساحة والكتابُ على الطاولة — يدُ التقليب نفسُها وسهمُها ينبض، والنقرُ في أيّ موضعٍ يفتحه (طلبُ صاحب الموقع) */
+  let tblOn = false;
   const setCursor = () => {
-    const side = drag ? (drag.fwd ? 'l' : 'r') : (grab === 'l' || grab === 'r' ? grab : null);
+    const side = drag ? (drag.fwd ? 'l' : 'r') : tblOn ? 'l' : (grab === 'l' || grab === 'r' ? grab : null);
     const c = cfg.cursor && side ? cfg.cursor(drag ? 'grab' : 'open', side, drag ? 0 : curI) : '';
-    zone.style.cursor = c || (drag ? 'grabbing' : grab ? 'grab' : '');
+    zone.style.cursor = c || (drag ? 'grabbing' : grab ? 'grab' : tblOn ? 'pointer' : '');
     const anim = !!(c && !drag && !dead);
     if (anim && !curT) curT = setInterval(() => { curI++; setCursor(); }, 110);
     else if (!anim && curT) { clearInterval(curT); curT = 0; curI = 0; }
@@ -903,7 +898,7 @@ export function createBook2(THREE, host, cfg) {
     if (sel && !sel.isCollapsed && host.contains(sel.anchorNode)) { sel.removeAllRanges(); return; }
     if (skip(e)) return;
     /* على الطاولة: الكتابُ نفسُه يُنقر فيرتفع وينفتح */
-    if (tv < 1 || ta || rf) { if (!ta && !rf && inRest(e)) table(1); return; }
+    if (tv < 1 || ta || rf) { if (!ta && !rf) { tblOn = false; setCursor(); table(1); } return; }
     const g = at(e);
     if ((g || e.target === el) && cfg.interceptDown && cfg.interceptDown()) return;
     if (!g || (g.cover ? locked() : mo) || !armed()) return;
@@ -931,11 +926,13 @@ export function createBook2(THREE, host, cfg) {
       if (e.pointerType !== 'mouse') return;
       if (mo) { if (hover !== -1 || grab) { hover = -1; setGrab(''); needs = true; setCursor(); } return; }
       if (tv < 1 || ta || rf) {
-        const on = !ta && !rf && inRest(e);
+        const on = !ta && !rf && !skip(e);
         if (hover !== -1 || grab) { hover = -1; setGrab(''); }
-        tHovT = on ? 1 : 0; zone.style.cursor = on ? 'pointer' : ''; needs = true;
+        tHovT = on ? 1 : 0; needs = true;
+        if (on !== tblOn) { tblOn = on; setCursor(); }
         return;
       }
+      if (tblOn) { tblOn = false; setCursor(); }
       /* وفي الصفحة الواحدة لا ترتفع ورقةٌ بالتحويم (طلبُ صاحب الموقع): الكاميرا تتراجع مع كلّ ورقةٍ مرفوعة، فكانت الفأرةُ الباقيةُ
          في مكانها بعد التقليب ترفع التاليةَ فيبدو كأنّها تنفتح ثمّ ترجع — يكفيها لونُ النصف */
       const g0 = armed() && !skip(e) && at(e), g = g0 && !(g0.cover && locked()) && g0, ok = !!g && turnable(g.fwd ? 1 : -1), h = ok && !ONE ? (g.fwd ? A : A - 1) : -1;
@@ -963,9 +960,8 @@ export function createBook2(THREE, host, cfg) {
     if (!moved || gone >= 0.2 || flick) { A += fwd ? 1 : -1; launch(s, fwd ? 1 : 0, v); commit(); }
     else launch(s, base < 0.5 ? 0 : 1, v);
   };
-  const inRest = e => { if (!restRect) return false; const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top; return x >= restRect.x && x <= restRect.x + restRect.w && y >= restRect.y && y <= restRect.y + restRect.h; };
   const onLeave = () => {
-    if (tHovT) { tHovT = 0; needs = true; zone.style.cursor = ''; } if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
+    if (tHovT) { tHovT = 0; needs = true; } if (tblOn) { tblOn = false; setCursor(); } if (!drag && (hover !== -1 || grab)) { hover = -1; setGrab(''); needs = true; setCursor(); } };
   let wheelAcc = 0, wheelT = 0;
   const onWheel = e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || locked() || tv < 1 || ta) return;
