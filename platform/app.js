@@ -26900,7 +26900,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* لكلّ أداةٍ حبرُها (طلبُ صاحب الموقع): القلمُ لونٌ والمربّعُ لون — يُختاران من خطّ الأداة في الشريط ويُحفظان في المتصفّح */
   const hlColLoad = (k, d) => { try { const v = localStorage.getItem(k); return HL_COL[v] ? v : d; } catch (e) { return d; } };
   const hlCol = { t: hlColLoad('ac.hl.col', 'y'), box: hlColLoad('ac.hl.colb', 'b') };
-  function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
+  function hlColSet(tool, c) { if (!HL_COL[c]) return; hlCol[tool] = c; if (tool !== 'box') hlCurRoot(); try { localStorage.setItem(tool === 'box' ? 'ac.hl.colb' : 'ac.hl.col', c); } catch (e) {} }
   /* التحديدُ العابرُ على هذه الصفحة (إن كان) — يُطلى على الورقة كالتظليل فيميل معها، لا طبقةً فوقها */
   function hlSelOn(b, k) {
     try { return bkTLSel && bkTLSel.k === k && bkTLSel.painted && bkOfEl(bkTLSel.d) === b ? bkTLSel : null; } catch (e) { return null; }
@@ -27530,6 +27530,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r = hlPixPen(fill, ink, down);
     return (hlPenCurC[ck] = `url("data:image/svg+xml,${encodeURIComponent(r.svg)}") ${r.hx} ${r.hy}, text`);
   }
+  /* نصُّ الكتاب يُظلَّل بالسحب دائمًا، فمؤشّرُه القلمُ البكسليّ في كل طرق العرض لا مؤشّرُ المتصفّح (طلبُ صاحب الموقع) */
+  function hlCurRoot() { document.documentElement.style.setProperty('--hl-cur', hlPenCursor(hlCol.t)); }
+  hlCurRoot();
   function hlToolSync(id) {
     const cur = hlPenCursor(hlCol.t);
     Object.values(pkSrcBk).forEach(b => {

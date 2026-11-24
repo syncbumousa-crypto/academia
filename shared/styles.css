@@ -18369,13 +18369,13 @@ html[data-theme="dark"] .pk-varc:hover .pk-varc__d[data-nx] { stroke: rgba(212, 
 .bk-tlbox { position: absolute; inset: 0; pointer-events: none; }
 .bk-tlbox[hidden] { display: none; }
 .bk-tl { position: absolute; overflow: hidden; line-height: 1; text-size-adjust: none; -webkit-text-size-adjust: none; forced-color-adjust: none; pointer-events: none; }
-.bk-tl span, .bk-tl br { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0% 0%; pointer-events: auto; }
+.bk-tl span, .bk-tl br { color: transparent; position: absolute; white-space: pre; cursor: var(--hl-cur, text); transform-origin: 0% 0%; pointer-events: auto; }
 .bk-tl span.markedContent { top: 0; height: 0; }
 .bk-tl .endOfContent { display: block; position: absolute; inset: 100% 0 0; z-index: -1; cursor: default; user-select: none; }
 .bk-tl.selecting .endOfContent { top: 0; }
 .bk-tl ::selection { background: transparent; color: transparent; }
 .cbk-stage .bk-tl, .cbk-stage .bk-tl span, .cbk-scr .bk-tl, .cbk-scr .bk-tl span { user-select: none; -webkit-user-select: none; }
-.bk-tl .bk-tl__ln { position: absolute; display: block; pointer-events: auto; cursor: text; }
+.bk-tl .bk-tl__ln { position: absolute; display: block; pointer-events: auto; cursor: var(--hl-cur, text); }
 /* التحديدُ خلف الكلام لا فوقه (طلبُ صاحب الموقع): يمتزج بالورق ضربًا فيتلوّن الورقُ ويبقى الحبرُ حبرًا — كقلم التظليل. وحوافُّه حادّة */
 .bk-tl .bk-tl__sel { position: absolute; display: block; pointer-events: none; background: rgb(246, 214, 120); mix-blend-mode: multiply; border-radius: 0; }
 html[data-theme="dark"] .bk-tl .bk-tl__sel { background: rgb(252, 226, 150); }
