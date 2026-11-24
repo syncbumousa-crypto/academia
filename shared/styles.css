@@ -20065,6 +20065,7 @@ html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255
 .cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
   background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
 .cbk-scr__pg > canvas { display: block; width: 100%; height: 100%; }
+.cbk-scr.bk-xr > .cbk-scr__pg { transition: transform .26s cubic-bezier(.2, .7, .3, 1); }   /* (التصغيرُ يعيد الصفحات إلى الوسط بانزلاق) */
 /* وأدواتُ التظليل في التذييل حاضرةٌ في التمرير أيضًا (طلبُ صاحب الموقع): التظليلُ يجري على طبقة نصّ كلّ صفحة (‎bkScrTL‎) */
 .bk-tl.bk-tl--scr { left: 0; top: 0; width: 100%; height: 100%; }
 /* قوسُ الكتاب ملاصقٌ لزاوية مساحته كقوس الملخّص (طلبُ صاحب الموقع): أيقونةُ الكتاب أبعدُ عن زاويتها بـ‎4px‎ أفقًا و‎2px‎ عموديًّا
