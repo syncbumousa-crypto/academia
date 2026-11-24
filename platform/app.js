@@ -28087,7 +28087,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bkReduce() || !b.scr || !b.view) return false;
     const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
     const P = src.getBoundingClientRect(), R = sc.getBoundingClientRect(); if (!P.width || !R.height) return false;
-    const k = Math.max(1, b.pos || 1);
+    /* (صفحةُ الغلاف في الملفّ ليست من صفحات الكتاب الداخليّة: الكتابُ يُفتح على أولاها، فهي التي تطير) */
+    const k = Math.min(Math.max(1, b.n || 1), Math.max(bkSk(b) + 1, b.pos || 1));
     /* ===== إلى الصفحتين: حركةُ المحرّك نفسُها بالعكس (طلبُ صاحب الموقع) =====
        من الصفحتين إلى الصفحة ينطوي نصفُ الفتحة حول الكعب إلى ما وراء الكتاب (‎book2: morph(side, 1)‎). فهنا يُبنى الكتابُ
        بصفحتين مطويًّا (‎morph: side‎ — يبدو صفحةً واحدة)، وتطير صفحةُ القارئ وحدها إلى تلك الصفحة، والقائمةُ كلُّها
@@ -28124,11 +28125,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        نفسِه (بُعدُها منها محفوظٌ بالمقياس نفسِه)، وتذوب في نصف الحركة الأوّل — كأنّ القائمةَ كلَّها تنطوي في الكتاب */
     const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R0 = kEl && kEl.getBoundingClientRect(), T0 = T.find(x => x.k === k);
     const sK = R0 && T0 && R0.width ? T0.w / R0.width : 1;
+    let live = null;
     pages.forEach(el => {
       const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
       if (!vis && !tk.has(kk)) return;
       const t = T.find(x => x.k === kk);
-      if (t) {
+      if (t && side) {
+        /* (إلى الصفحتين) تُقاد إطارًا إطارًا إلى مكان صفحتها الحيّ في الكتاب — يتغيّر وهو ينفتح */
+        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
+        d.style.zIndex = 3; d.style.boxShadow = 'none';
+        live = { d, r0: r };
+      } else if (t) {
         const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
         d.style.zIndex = kk === k ? 3 : 2;
         runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
@@ -28153,7 +28160,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const U = T.reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
     const sh = document.createElement('div'); sh.className = 'bk-fly-shadow';
     const place = (el, u) => Object.assign(el.style, { left: u.l + 'px', top: u.t + 'px', width: (u.r - u.l) + 'px', height: (u.b - u.t) + 'px' });
-    place(sh, U); L.prepend(sh); sh.style.opacity = '0';
+    place(sh, U); if (!side) L.prepend(sh); sh.style.opacity = '0';
     /* (الظلُّ يتكوّن حين يُعرف مكانُ الكتاب الحقيقيّ — كان يظهر في المكان المقدَّر أوّلًا فيُرى مستطيلًا باهتًا فوق الفتحة) */
     const shIn = ms => { sh.style.opacity = ''; sh.animate([{ opacity: 0, transform: 'scale(.94)' }, { opacity: 1, transform: 'none' }], { duration: Math.max(140, ms), easing: E, fill: 'both' }); };
     /* ===== المرحلة ٤: التصويبُ في الطيران — المحرّكُ يُبنى بعد عُشر ثانيةٍ تقريبًا، قبل أن تنتهي الحركة: فإذا عرف مكانَ صفحاته
@@ -28189,8 +28196,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       if (performance.now() - t00 < D) requestAnimationFrame(aim);
     };
-    requestAnimationFrame(aim);
-    let ng = null, animDone = false, fin = false;
+    if (!side) requestAnimationFrame(aim);
+    let ng = null, animDone = false, fin = false, onEngine = null;
     const finish = () => {
       if (fin) return; fin = true;
       if (!aimed) shIn(140);   /* (لم يُعرف مكانُه في الطيران: يظهر الآن) */
@@ -28209,23 +28216,50 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
       L.dataset.jump = Math.round(jump * 10) / 10;   /* (قدرُ التصحيح عند الاستلام — للاختبار) */
       Promise.all(outs).catch(() => {}).then(() => {
-        /* النسخةُ على صورة الكتاب نفسِها: تذوب سريعًا (لا يُرى ذوبانُها)، ثمّ ينفتح الكتابُ من ورائها */
-        const a = L.animate([{ opacity: 1 }, { opacity: 0 }], { duration: (side ? 90 : 160) * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' });
-        const gone = () => { L.remove(); if (side) unfold(); };
-        a.finished.then(gone, gone);
+        const a = L.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' });
+        a.finished.then(() => L.remove(), () => L.remove());
       });
     };
     const maybe = () => { if (animDone && ng && !d0busy()) finish(); };
-    /* الانفتاحُ بالمحرّك (كالتبدُّل من الصفحة إلى الصفحتين) — وما طُلب في أثنائه يُنفَّذ بعده */
-    const unfold = () => {
-      const g = b.gl;
-      if (!g || g.dead || !g.morph || !g.folding) { b.mx = false; b.stage.classList.remove('is-mx'); return; }
-      b.mxTo = false;
-      g.morph(side, 0, BK_MX * (window.__pkfxSlow || 1), bkMxH(b)).then(() => bk2MxEnd(b));
-    };
     const d0busy = () => [...moving.values()].some(d => d.getAnimations().some(a => a.playState === 'running'));
-    Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
-    setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
+    /* ===== الانفتاحُ في أثناء التصغُّر (طلبُ صاحب الموقع: «ابيها تنفتح خلال ماهي تتصغر») =====
+       أوّلَ ما يجهز الكتابُ (المطويُّ) يظهر ويبدأ انفتاحُه بالمحرّك (‎morph(side, 0)‎) وصفحةُ القارئ ما زالت تطير: نصفُه الباقي
+       مخفيٌّ (‎hideKept‎) فلا تتكرّر الصفحة، والنسخةُ تقوم مقامه — تمضي في كلّ إطارٍ نحو مكانه الحيّ (يتغيّر والكاميرا تبتعد)،
+       فتبلغه في آخر الحركة. وفي آخر إطارٍ من الانفتاح يعود النصفُ إلى الكتاب تحتها بالصورة نفسِها فتُرفع */
+    let mDone = false, mOn = false;
+    if (side) {
+      const slow = window.__pkfxSlow || 1, Df = Math.round((BK_SX + 260) * slow), t0 = performance.now();
+      const ez = q => 1 - Math.pow(1 - q, 3);
+      const goal = () => { const g = b.gl; const f = g && !g.dead ? bkPgScreens(g).find(x => x.k === k) : null; return f || T[0]; };
+      /* قبل الانفتاح بإطارات الصفحة، وفي أثنائه بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) — فلا تتأخّر عنه إطارًا ولو تقطّع الجهاز */
+      const put = () => {
+        if (mDone || !live || !L.isConnected) return;
+        const e = mEnd ? 1 : ez(Math.min(1, (performance.now() - t0) / Df)), f = goal(), r0 = live.r0;
+        Object.assign(live.d.style, { left: r0.left + (f.l - r0.left) * e + 'px', top: r0.top + (f.t - r0.top) * e + 'px', width: r0.width + (f.w - r0.width) * e + 'px', height: r0.height + (f.h - r0.height) * e + 'px' });
+      };
+      let mEnd = false;
+      const tick = () => { if (mOn || mDone) return; put(); requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      const open = g => {
+        if (mOn || mDone) return;
+        if (!g || g.dead || !g.morph || !g.folding) { mDone = true; L.remove(); b.mx = false; b.stage.classList.remove('is-mx'); if (g && !g.dead) g.el.style.opacity = ''; return; }
+        mOn = true; b.mxTo = false; put();
+        if (g.hideKept) g.hideKept(true);
+        g.afterFrame = () => { if (!g.folding) mEnd = true; put(); };   /* (آخرُ إطارٍ من الانفتاح: في مكانها تمامًا) */
+        g.el.style.opacity = '';
+        g.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140 * slow, easing: 'ease-out' });
+        g.morph(side, 0, BK_MX * slow, bkMxH(b)).then(() => {
+          const f = bkPgScreens(g).find(x => x.k === k), r = live && live.d.getBoundingClientRect();
+          if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;; bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null });   /* (للاختبار) */
+          mDone = true; g.afterFrame = null; L.remove(); bk2MxEnd(b);
+        });
+      };
+      onEngine = open;
+      setTimeout(() => { if (!mOn) open(b.gl); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
+    } else {
+      Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
+      setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
+    }
     b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
     const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
     setTimeout(sharp, 4000);
@@ -28237,7 +28271,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side };
     }
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, onReady: g => { ng = g; maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
+      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, onReady: g => { ng = g; if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
       if (side) b.stage.classList.add('is-mx');
     }));
     return true;

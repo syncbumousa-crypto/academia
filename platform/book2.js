@@ -655,6 +655,13 @@ export function createBook2(THREE, host, cfg) {
   }
   resize();
 
+  /* ‏‎kHid‎: النصفُ الباقي مخفيٌّ في أثناء الانفتاح — نسخةُ الصفحة الطائرةُ تقوم مقامَه حتى تستقرّ عليه */
+  let kHid = false, after = null;
+  function keptVis(v) {
+    kHid = !v;
+    for (const s of sheets) { const f = mo && (mo.side === 'L' ? s.i < A : s.i >= A); for (const mh of s.meshes) mh.visible = v || !!f; }
+    needs = true;
+  }
   // ===== الحركة =====
   let last = performance.now(), idle = false, hover = -1, raf = 0, goneAt = 0;
   const T = { follow: 0.07, settle: 0.12, flip: 0.8, hoverLift: 0.035, fan: 0.05 };
@@ -673,7 +680,7 @@ export function createBook2(THREE, host, cfg) {
       if (mo.box) mo.vh = mo.box.h0 + (mo.box.h1 - mo.box.h0) * e;
       if (q >= 1) {
         const r = mo.a.res; mo.k = mo.a.to; mo.a = null;
-        if (mo.k === 0) { mo = null; el.style.top = el.style.marginTop = ''; resize(); }
+        if (mo.k === 0) { mo = null; el.style.top = el.style.marginTop = ''; resize(); if (kHid) keptVis(true); }   /* (الباقي يعود في الإطار نفسِه الذي ينتهي فيه) */
         r();
       }
     }
@@ -758,6 +765,7 @@ export function createBook2(THREE, host, cfg) {
     if (rf) { rfTick(now); moving = true; }
     if (frameCam()) moving = true;
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
+    if (after) after();   /* (ما يتبع الكتابَ على الشاشة يُوضع بعد رسمه، في الإطار نفسِه) */
     const wasIdle = idle; idle = !moving && !drag;
     if (idle && !wasIdle && cfg.onIdle) cfg.onIdle();
     if (!idle && wasIdle && cfg.onBusy) cfg.onBusy();
@@ -1019,13 +1027,17 @@ export function createBook2(THREE, host, cfg) {
     get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get folding() { return !!mo; },
+    /* يُخفي النصفَ الباقيَ (صفحةَ القارئ وكومتَها) ما دام التبدُّل — ويعود وحده في آخر إطارٍ منه */
+    hideKept(h) { if (!dead) keptVis(!(h && mo)); },
+    /* يُنادى بعد كلّ إطارٍ يرسمه (أو ‎null‎) */
+    set afterFrame(f) { after = typeof f === 'function' ? f : null; },
     get settled() { return !mo && tv === 1 && !ta && idle && !drag && sheets.every(s => !s.anim); },
     rect: () => fit,
     /* الصفحاتُ الساكنةُ الظاهرة ومستطيلاتُها على اللوحة (بكسل CSS) — تُسقَط زواياها من موضعها الحقيقيّ (فوق كومتها) بالكاميرا نفسِها،
        فتنطبق عليها طبقةُ النصّ. ‏‎k‎ رقمُ الصفحة في الملفّ */
     pageRects() {
-      /* (مطويًّا ساكنًا يُعطي الصفحةَ الباقيةَ وحدها: التحوّلُ من الصفحات المتتالية يطير إليها قبل أن ينفتح) */
-      if (A === 0 || (mo && (mo.a || mo.k < 1))) return [];
+      /* (في التبدُّل يُعطي الصفحةَ الباقيةَ وحدها — مطويًّا وفي أثناء انفتاحه: التحوّلُ من الصفحات المتتالية يلاحقها) */
+      if (A === 0) return [];
       const v = new THREE.Vector3(), out = [];
       /* (المطويُّ مُزاحٌ نصفَ ورقة: تُحسب إزاحتُه هنا لا ممّا رُسم — قد يُسأل قبل أوّل إطار) */
       const bx = mo ? (mo.side === 'L' ? 1 : -1) * W / 2 * mo.k : book.position.x;
