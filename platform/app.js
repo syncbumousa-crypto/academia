@@ -28240,6 +28240,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkScrNbOut(b, sc, R, R0.t, k, clone, Dm, null, pk);
     /* تبدُّلٌ جارٍ: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، والرجوعُ إلى الصفحة الواحدة إلى صفحة القارئ، والقامةُ ثابتةٌ حتى الاستلام */
     b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true; b.hHold = true;
+    /* (طلبُ صاحب الموقع: «الرقم يطلع أوّل ما أضغط ثم يختفي ثم يطلع») رقمُ الصفحات يُخفى من الضغطة — كان يُخفى بعد إطارين، والمسرحُ
+       يظهر قبله فيومض الرقمُ ثمّ يذوب؛ فيظهر مرّةً واحدةً في آخر التحويل (‎bk2MxEnd‎) */
+    b.stage.classList.add('is-mx');
     { const d = bkSk(b), pg = Math.max(1, k - d); b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side }; }
     b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
     const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
@@ -28300,7 +28303,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الكتابُ يُبنى بعد أوّل إطارٍ للحركة (مطويًّا، معروضًا بشفافيةٍ لا تُرى) */
     requestAnimationFrame(() => requestAnimationFrame(() => {
       bkScrOff(b, false, { quiet: true, near: true, nearKs: [k, pk].filter(Boolean), morph: side, warm: true, adopt: pre ? pre.g : null, adoptP: pre ? pre.p : null, onReady: eng => { bkDiag(b, 'engine-ready'); take(eng); setTimeout(sharp, BK_MX + 500); } });
-      b.stage.classList.add('is-mx');
     }));
     return true;
   }

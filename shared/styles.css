@@ -18543,6 +18543,8 @@ html[data-theme="dark"] .bk-zi { --zt: #7fb7bd; }
   text-align: center; font-size: 11px; font-weight: 700; line-height: 14px; color: var(--u-muted, #7a8a8e); font-variant-numeric: tabular-nums; pointer-events: none;
   transition: opacity .25s; }
 .cbk-stage--gl.is-mx::before { opacity: 0; transition-duration: .12s; }
+/* (في العرض العاديّ المسرحُ مخفيّ: الرقمُ مطفأٌ بلا انتقال — فلا يومض لحظةَ يظهر المسرحُ عند الخروج إلى الكتاب، ويظهر في آخر التحويل وحده) */
+.is-scr > .cbk-stage--gl::before { opacity: 0; transition: none; }
 html[data-theme="dark"] .cbk-stage--gl[data-pgn]::before { color: rgba(255, 255, 255, .5); }
 .cbk-stage--gl ~ .cbk-nav [data-bkind] { display: none; }
 
