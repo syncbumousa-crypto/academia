@@ -26255,23 +26255,42 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      دوائرَ باهتةٍ تنبض — مكانُها محجوزٌ من أوّل لحظة. والجوابُ واحدٌ للتبويبات كلِّها (‎srvPull‎ مادّةً كاملة) فتمتلئ معًا،
      وما تغيّر منها ينتقل بانزلاق الشريط نفسِه (‎cmTabsFlipStart/End‎): الباهتةُ تذوب والوجوهُ تطلع، والقامةُ تتنفّس */
   const FACES_LD = '<span class="cm-face cm-face--ld"></span>';   /* حلقةٌ صغيرةٌ تدور (الاقتراحُ ٣ · طلبُ صاحب الموقع) */
+  /* ===== والحلقةُ لا تظهر إلّا حيث يُنتظر شيء (طلبُ صاحب الموقع: كانت تدور في تبويباتٍ لا مساهمات فيها أصلًا) =====
+     ‏‎ac.faces1‎: عددُ المساهمات في كلّ تبويبٍ كما رآه الخادمُ آخرَ مرّة (لكلّ مادّة). فقبل وصول الجواب:
+       · ما عندنا مساهماتُه في الجهاز ⇐ وجوهُه حالًا (بلا حلقة)
+       · ما كان فارغًا في آخر زيارة ⇐ فارغٌ من أوّل لحظة
+       · ما كان فيه شيءٌ آخرَ مرّة، أو مادّةٌ لم تُزر قبل ⇐ الحلقة */
+  const FACES_MEMO_K = 'ac.faces1';
+  let facesMemo = null;
+  const facesMemoGet = () => { if (!facesMemo) { try { facesMemo = JSON.parse(localStorage.getItem(FACES_MEMO_K) || '{}') || {}; } catch (e) { facesMemo = {}; } } return facesMemo; };
+  function facesMemoPut(code, counts) {
+    const m = facesMemoGet(), was = m[code];
+    if (was && Object.keys(counts).every(k => was[k] === counts[k])) return;
+    delete m[code]; m[code] = counts;   /* (الأحدثُ آخرًا — ويُطرح الأقدمُ فوق ٤٠٠ مادّة) */
+    const ks = Object.keys(m); if (ks.length > 400) ks.slice(0, ks.length - 400).forEach(k => delete m[k]);
+    try { localStorage.setItem(FACES_MEMO_K, JSON.stringify(m)); } catch (e) {}
+  }
   function paintTabFaces(code) {
     if (!code) return;
-    let ld = false; try { ld = !srvSeen(code) && !srvPullFail[code]; } catch (e) {}   /* (قبل أن يُعرَّف في التمهيد: لا انتظار) */
+    let ld = false, seen = false; try { seen = srvSeen(code); ld = !seen && !srvPullFail[code]; } catch (e) {}   /* (قبل أن يُعرَّف في التمهيد: لا انتظار) */
+    const memo = ld ? facesMemoGet()[code] : null, counts = {};
     const todo = [];
     document.querySelectorAll('.cm-tabs button[data-tab]').forEach(btn => {   /* يشمل الشريطين */
       const span = btn.querySelector('.cm-faces:not(.cm-faces--ghost)'); if (!span) return;
-      const html = ld ? FACES_LD : facesRowHTML(code, btn.dataset.tab);
+      const tab = btn.dataset.tab, n = collectTabPosts(code, tab).length;
+      if (seen) counts[tab] = n;
+      const html = ld && !n && !(memo && memo[tab] === 0) ? FACES_LD : facesRowHTML(code, tab);
       if (span.dataset.sig === html) return;
       todo.push([btn, span, html]);
     });
+    if (seen && Object.keys(counts).length) facesMemoPut(code, counts);
     if (!todo.length) return;
     /* أوّلُ طلاءٍ بعد بناء الشريط بلا حركة (البناءُ له انزلاقُه) — وما بعده إن تغيّر */
     const flip = todo.some(([, sp]) => sp.dataset.sig != null) ? cmTabsFlipStart() : null;
     const fan = new Set(todo.filter(([, sp]) => sp.dataset.sig === FACES_LD).map(([b]) => b.dataset.tab));   /* (من الحلقة: تنفرد الوجوهُ منها) */
     todo.forEach(([btn, span, html]) => {
       span.dataset.sig = html; span.innerHTML = html;
-      span.classList.toggle('is-none', !ld && !span.querySelector('.cm-face:not(.cm-face--me)'));
+      span.classList.toggle('is-none', html !== FACES_LD && !span.querySelector('.cm-face:not(.cm-face--me)'));
     });
     if (flip) cmTabsFlipEnd(flip, new Set(todo.map(([b]) => b.dataset.tab)), fan);
   }
