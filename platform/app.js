@@ -28575,6 +28575,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (q.bottom < r.top - 3 * H || q.top > r.bottom + 3 * H) return;
         g.pages.push([el, q]); if (!g.w0) g.w0 = q.width;
       });
+      /* (طلبُ صاحب الموقع: «المسافة بين الصفحات تزيد ثم ترجع تنقص») — كانت الصفحاتُ تكبر كصورةٍ واحدة فتكبر الفجوةُ بينها معها، ثمّ
+         تعود ‎14px‎ عند التثبيت. فكلُّ صفحةٍ تكبر وحدها والفجوةُ ثابتة: تُزاح ‎n·gap·(1 − s)‎ بعدد الصفحات بينها وبين صفحة المؤشّر */
+      let ref = g.pages[0], bd = Infinity;
+      for (const pq of g.pages) { const q = pq[1], d = ay < q.top ? q.top - ay : ay > q.bottom ? ay - q.bottom : 0; if (d < bd) { bd = d; ref = pq; } }
+      const P0 = g.pages[0] && g.pages[0][1], P1 = g.pages[1] && g.pages[1][1];
+      g.gap = P0 && P1 ? Math.max(0, P1.top - P0.bottom) : 14;
+      g.pages.forEach(pq => { const q = pq[1], rq = ref[1]; pq[2] = Math.round((q.top - rq.top) / ((rq.height + g.gap) || 1)); });
       sc.classList.add('is-zg');
     }
     g.z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, g.z * f));
@@ -28585,7 +28592,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const L = w <= g.cw ? g.cx - w / 2 : Math.min(g.l0, Math.max(g.l0 + g.cw - w, g.ax - (g.ax - q0.left) / q0.width * w));
       X = (L - s * q0.left) / (1 - s);
     }
-    for (const [el, q] of g.pages) { el.style.transformOrigin = `${X - q.left}px ${g.ay - q.top}px`; el.style.transform = `scale(${s})`; }
+    for (const [el, q, n] of g.pages) { el.style.transformOrigin = `${X - q.left}px ${g.ay - q.top}px`; el.style.transform = `translateY(${(n || 0) * g.gap * (1 - s)}px) scale(${s})`; }
     { const v = b.scrTop && b.scrTop.querySelector('.cbk-scr__zv'); if (v) v.textContent = Math.round(g.z * 100) + '%'; }
     bkScrPing(b, true);
     clearTimeout(g.t); g.t = setTimeout(() => bkScrPinchEnd(b), 160);
