@@ -10194,7 +10194,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* نقرٌ أو تركيزٌ في إحدى المناطق يجعلها النشِطة */
   const pkActFrom = e => {
     const pane = e.target.closest && e.target.closest('#cm-body :is(.pk--max, .pk--frame) .post-ytmain > .pk-split > :is(.pk-src, .kt-view, .pk-bank)');
-    if (!pane) return;
+    if (!pane) { if (e.type === 'pointerdown') pkActOut(e); return; }
     /* أيقونةُ المساحة في رأسها تُغلقها — فلا يُعدّ نقرُها لمسًا لها (كانت تسطع نشِطةً ثمّ تنغلق) */
     if (e.target.closest('.pk-blkh__ic, .pk-blkh__x')) return;
     const post = pane.closest('.post'), ctl = post && post.querySelector('[data-pkview][data-pkid]');
@@ -10212,6 +10212,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (cxFtDn && e.type === 'pointerdown') cxFtSet(false, true);
     if (e.type === 'pointerdown' && post.classList.contains('pk--ftnone')) cxFtHide(post, false);
   };
+  /* ===== اللمسُ خارج المساحات الثلاث يُطفئ المنيرةَ منها (طلبُ صاحب الموقع) =====
+     إلّا ما يعمل على المساحة المنيرة نفسِها: تذييلُها وأدواتُه، ورأسُها وشريطُ مجلداتها، وما يطفو خارج الصفحة (قوائمُ ونوافذ) */
+  function pkActOut(e) {
+    const t = e.target; if (!t || !t.closest || e.button > 0) return;
+    if (t !== document.body && t !== document.documentElement && !t.closest('section.panel, #sidebar')) return;   /* الصفحةُ وهامشُها والشريطُ الجانبيّ — لا النوافذُ الطافية (‎.mmodal‎) ولا القوائم */
+    document.querySelectorAll('#cm-body .post:is(.pk-act--book, .pk-act--mid, .pk-act--bank)').forEach(post => {
+      if (post.contains(t) && t.closest('.vt-foot, .cx-acttools, .pk-ftline, .pk-pubfoot, .pk-blkh, .pk-fstrip, .pk-fstrip-ph, .cx-plus, .pk-icrow, .pk-band')) return;
+      const ctl = post.querySelector('[data-pkview][data-pkid]'); if (!ctl) return;
+      pkActSet(post, ctl.dataset.pkid, null);
+    });
+  }
   /* على النافذة قبل المستند: محرّراتُ الجوف (اللوحُ والجدولُ والشجرة) قد توقف الحدثَ في طور الالتقاء على المستند */
   window.addEventListener('pointerdown', pkActFrom, true);
   window.addEventListener('focusin', pkActFrom, true);
