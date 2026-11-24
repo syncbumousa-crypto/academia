@@ -4987,7 +4987,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (!rows.some(x => x && x.id === dr.id)) { docRow(code, dr); hit++; }
       });
     }
-    if (hit) save();
+    if (hit) saveSoon();   /* (مؤجَّلًا: كان حفظُ الحالة كلِّها متزامنًا أوّلَ فتحٍ لكلّ مادّة فيُجمّد الصفحة)
     /* معرفات ثابتة للدكاترة ومساهماتهم (م0) */
     {
       let tagged = false;
@@ -5002,7 +5002,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         (dr.posts || []).forEach(p => { if (!p.id) { p.id = newId(); tagged = true; } });
       });
-      if (tagged) save();
+      if (tagged) saveSoon();
     }
     /* فكّ دمج «الغياب والتأخير» عن مساهمة الدكتور: صار بندًا مستقلًّا على مستوى المادة (قناة abs).
        كل مساهمة دكتور فيها بيانات غياب تُنقل مساهمةً في القناة باسم صاحبها وتاريخها نفسه،
@@ -30999,7 +30999,9 @@ void main() {
       const fs = mine && fan && fan.has(b.dataset.tab) ? [...b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face')] : null;
       if (fs) fs.forEach((f, i) => f.animate([{ opacity: 0, transform: `translateX(${((fs.length - 1) / 2 - i) * 11 * (state.lang === 'en' ? -1 : 1)}px) scale(.3)` }, { opacity: 1, transform: 'none' }],
         { duration: D * .75, delay: D * .2, easing: 'cubic-bezier(.22, 1.3, .36, 1)', fill: 'backwards' }));
-      else if (mine) b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
+      /* والحلقةُ تطلع بالتلاشي وحده: حركةُ ‎transform‎ (التكبير) كانت تغلب دورانَها فتبدو متجمّدةً أوّلَ ظهورها (طلبُ صاحب الموقع) */
+      else if (mine) b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.classList.contains('cm-face--ld')
+        ? f.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, easing: 'ease-out', fill: 'backwards' }) : f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
         { duration: D * .8, delay: D * .25 + i * 45, easing: 'cubic-bezier(.22, 1.35, .36, 1)', fill: 'backwards' }));
     });
   }
