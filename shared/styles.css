@@ -18507,7 +18507,7 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .bk-skel.is-done .bk-skel__pc, .bk-skel:not(.is-drawn) .bk-skel__pc { opacity: 0; }   /* النسبةُ مع أوّل إطارٍ للكتاب لا قبله */
 /* مؤشّرُ قلم التظليل على الصفحة والقلمُ مختارٌ أو وهو يظلّل (‎--hl-cur‎ يضعه ‎hlToolSync‎ بحبر القلم) */
 :is(.hl-pen, .hl-drag) .bk-tl, :is(.hl-pen, .hl-drag) .bk-tl span, :is(.hl-pen, .hl-drag) .bk-tl .bk-tl__ln { cursor: var(--hl-cur, text) !important; }
-.hl-drag, .hl-drag * { cursor: var(--hl-cur, text) !important; }
+.hl-drag, .hl-drag *, .hl-drag .bk-tl, .hl-drag .bk-tl span, .hl-drag .bk-tl .bk-tl__ln { cursor: var(--hl-cur-d, var(--hl-cur, text)) !important; }   /* (وهو يظلّل: القلمُ مضغوط — ‎--hl-cur-d‎) */
 /* فوق تظليلٍ سابق: مؤشّرُ نقرٍ عاديّ (لا القلم ولا التقاطع) — ونقرُه يفتح قائمتَه */
 #cm-body :is(.cbk-stage, .cbk-scr).hl-over, #cm-body :is(.cbk-stage, .cbk-scr).hl-over * { cursor: pointer !important; }
 .hl-pal.hl-mk { border-radius: 999px; padding: 6px 8px; align-items: center; }

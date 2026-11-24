@@ -27512,20 +27512,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ وفوقه وتحته عارضةٌ عريضة (‎T‎) كمؤشّر تحديد النصّ بأسلوب القلم نفسِه — حدٌّ أسودُ بطرفين مدوّرين وحبرٌ ملوّن ببكسل لمعةٍ أبيضَ يسارًا وبكسل ظلٍّ داكنٍ يمينًا، العليا غطاؤه والسفلى قاعدةٌ يقف عليها رأسُه (طلبُه أيضًا).
      (على ورق الصفحة دائمًا، فلا حدَّ أبيضَ حوله) — نقطةُ التأشير طرفُ الرأس */
   const HL_PEN_PX = ['..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..', '...kccck...', '...kkkkk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kkkkk...', '...kccck...', '...kccck...', '...kttk....', '...ktk.....', '..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..'];
-  function hlPixPen(fill, ink) {
-    const col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
+  /* وهو يظلّل (طلبُه): القلمُ مضغوطٌ على الورق (أقصرُ ببكسل، رأسُه على القاعدة) والقاعدةُ حبرٌ يسيل — بكسلاتٌ داكنةٌ تحت الرأس */
+  const HL_PEN_PX_D = HL_PEN_PX.slice(0, 6).concat(HL_PEN_PX.slice(7, HL_PEN_PX.length - 4), ['..kkkkkkk..', '.kttcccctk.', '.kctcctcck.', '..kkkkkkk..']);
+  function hlPixPen(fill, ink, down) {
+    const PX = down ? HL_PEN_PX_D : HL_PEN_PX, col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
     let r = '';
-    HL_PEN_PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
-    const W = HL_PEN_PX[0].length + 2, Hh = HL_PEN_PX.length + 2;
+    PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
+    const W = PX[0].length + 2, Hh = PX.length + 2;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
-    return { svg, hx: ox + 4, hy: oy + 17 };
+    return { svg, hx: ox + 4, hy: oy + PX.length - 5 };
   }
   const hlPenCurC = {};
-  function hlPenCursor(c) {
-    if (hlPenCurC[c]) return hlPenCurC[c];
+  function hlPenCursor(c, down) {
+    const ck = c + (down ? 'd' : '');
+    if (hlPenCurC[ck]) return hlPenCurC[ck];
     const ink = { y: '#c99410', g: '#3f9a52', b: '#3f84c6', p: '#c95b7d' }[c] || '#c99410', fill = (HL_COL[c] || HL_COL.y)[1];
-    const r = hlPixPen(fill, ink);
-    return (hlPenCurC[c] = `url("data:image/svg+xml,${encodeURIComponent(r.svg)}") ${r.hx} ${r.hy}, text`);
+    const r = hlPixPen(fill, ink, down);
+    return (hlPenCurC[ck] = `url("data:image/svg+xml,${encodeURIComponent(r.svg)}") ${r.hx} ${r.hy}, text`);
   }
   function hlToolSync(id) {
     const cur = hlPenCursor(hlCol.t);
@@ -29093,7 +29096,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault();
     bkTLClear();
     bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
-    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur', hlPenCursor(hlCol.t)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
+    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur-d', hlPenCursor(hlCol.t, true)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
     try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
   document.addEventListener('pointermove', e => {
