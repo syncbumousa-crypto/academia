@@ -26188,6 +26188,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* صفّ دوائر من قائمة مشاركات: [عيّنة صور/مرقّطة] + [أنا بالمنتصف مخفية] + [عدّاد].
      noInvite: بلا دائرة الإضافة «+» (خلايا الشبكة — الإضافة تكون في زر التبويب فقط) */
+  /* ===== العدّادُ مختصرًا (الاقتراحُ ٢ · طلبُ صاحب الموقع): ‎K‎ و‎M‎ في اللغتين =====
+     تحت الألف كاملًا؛ ثمّ رقمٌ واحدٌ بعد الفاصلة ما دون العشرة (‎1.2K‎) وبلا فاصلةٍ بعدها (‎12K · 156K‎)، ولا «‎.0‎» أبدًا.
+     يُقطع ولا يُقرَّب (‎1,999‎ ‎1.9K‎ لا ‎2K‎) — والعددُ الكاملُ في ‎title‎ */
+  const fmtCount = n => {
+    if (n < 1000) return String(n);
+    const [d, u] = n < 1e6 ? [1e3, 'K'] : [1e6, 'M'], v = n / d;
+    return (v < 10 ? (Math.floor(v * 10) / 10).toFixed(1) : String(Math.floor(v))).replace(/\.0$/, '') + u;
+  };
   function facesHTML(posts, noInvite) {
     const mine   = posts.find(p => p.me);
     const others = posts.filter(p => !p.me);
@@ -26202,7 +26210,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* دائرة «+» للدعوة إن لم أساهم فقط — كبيرة بالمنتصف، تظهر مع .on عبر CSS */
     if (!mine && !noInvite) circles.splice(Math.ceil(circles.length / 2), 0, `<span class="cm-face cm-face--me" title="${T().sharePost}">+</span>`);
     /* العدّاد آخر الصف — «+N» (موضعه يمين/يسار حسب اتجاه الصف = اللغة) */
-    circles.push(`<span class="cm-face cm-face--count${posts.length === 0 ? ' is-zero' : ''}">+${posts.length}</span>`);
+    circles.push(`<span class="cm-face cm-face--count${posts.length === 0 ? ' is-zero' : ''}" title="${posts.length.toLocaleString('en')}">+${fmtCount(posts.length)}</span>`);
     return circles.join('');
   }
   /* دوائر تبويب واحد — كل تبويب (بما فيه مصادر الفهم/الممارسة) يسمح بالإضافة مباشرةً عبر دائرة «+» */
