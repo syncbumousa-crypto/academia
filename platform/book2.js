@@ -774,7 +774,7 @@ export function createBook2(THREE, host, cfg) {
       moving = true;
     }
     /* الغلافُ انطبق تمامًا (والكاميرا فوقه): يُسلَّم إلى الغلاف الصلب وينزل */
-    if (tAfter && sheets[0].target === 0 && sheets[0].p === 0 && !sheets[0].anim) { tAfter = false; table(0); }
+    if (tAfter && sheets[0].target === 0 && sheets[0].p === 0 && !sheets[0].anim) { const q = tAfter === 2; tAfter = false; table(0, 1, q ? 560 : 0); }
     const hv = tv < 1 ? tHovT : 0;
     if (Math.abs(hv - tHov) > 1e-4) { tHov += (hv - tHov) * (1 - Math.exp(-dt / 0.12)); moving = true; } else tHov = hv;
     const z = (tRise * 0.07 + tHov * 0.016) * W + BT * (1 - smooth(tv));   /* اللوحُ الخلفيّ على الطاولة لا تحتها */
@@ -824,12 +824,12 @@ export function createBook2(THREE, host, cfg) {
     if (cfg.onTurn) cfg.onTurn(A);
   };
   /* ‏‎to = 1‎ يرفعه من الطاولة ويفتحه (على الفتحة ‎goal‎) · ‏‎0‎ ينزله إليها (والغلافُ منطبق) */
-  function table(to, goal = 1) {
+  function table(to, goal = 1, dur = 0) {
     if (dead || rf || (ta ? ta.to === to : tv === to)) return;
     /* لا يبقى لونُ نصف التقليب ولا مؤشّرُه من قبل (الطاولةُ لا تُقلَّب) */
     tHovT = 0; hover = -1; setGrab(''); setCursor();
     if (cfg.onBusy && idle) cfg.onBusy();
-    ta = { from: tv, to, t0: performance.now(), dur: to ? 1150 : 900, goal: Math.max(1, goal | 0) };
+    ta = { from: tv, to, t0: performance.now(), dur: dur || (to ? 1150 : 900), goal: Math.max(1, goal | 0) };
     needs = true;
   }
   function flip(dir) {
@@ -841,7 +841,7 @@ export function createBook2(THREE, host, cfg) {
     return true;
   }
   /* القفزُ إلى فتحةٍ بعيدة: الأوراقُ بينهما تتقلّب متتابعةً سريعة (حتى ثمانٍ)، وما وراءها يُنقل ساكنًا تحت الكومة */
-  function goTo(t, durK = 0.8) {
+  function goTo(t, durK = 0.8, step = 70) {
     t = Math.max(0, Math.min(maxA, t | 0));
     if (tv < 1 && !ta) { if (t > 0) table(1, t); return; }
     if (mo || t === A) return;
@@ -851,7 +851,7 @@ export function createBook2(THREE, host, cfg) {
     const near = list.slice(far.length);
     A = t;
     for (const s of far) { s.anim = null; s.p = s.target = dir > 0 ? 1 : 0; }
-    near.forEach((s, k) => { s.dir = dir; s.tiltT = 0; launch(s, dir > 0 ? 1 : 0, 0, k * 70, durK); });
+    near.forEach((s, k) => { s.dir = dir; s.tiltT = 0; launch(s, dir > 0 ? 1 : 0, 0, k * step, durK); });
     commit();
   }
 
@@ -1026,7 +1026,8 @@ export function createBook2(THREE, host, cfg) {
     /* (للتحوّل من الصفحات المتتالية) تُطلب صورُ الصفحات من جديد بدقّتها — بعد أن بُني الكتابُ بنسخٍ جاهزةٍ قريبة الدقّة */
     refreshTex() { retex(texW, true); },
     get resting() { return tv === 0 && !ta && !rf; },
-    rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
+    /* ‏‎quick‎ (طلبُ صاحب الموقع: استدعاءُ المجلد): ينطبق في حركةٍ واحدةٍ أسرع وينزل إلى الطاولة أسرع */
+    rest(quick) { if (!cfg.rest) return; if (A > 0) { tAfter = quick ? 2 : true; if (quick) goTo(0, 0.42, 22); else goTo(0); } else table(0, 1, quick ? 560 : 0); },
     get onTable() { return tv < 1 || !!ta; },
     /* التقليبُ على الطاولة (المجلدُ يستدعي تحديداته) — وإنهاؤه فورًا */
     riffle, riffleEnd() { if (rf) rfEnd(); }, get riffling() { return !!rf; },

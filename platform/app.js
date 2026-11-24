@@ -27145,23 +27145,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       x.classList.remove('hl-fill-wait'); setTimeout(() => x.classList.remove('hl-fill-in'), 360);
     }, i * step));
   }
-  /* يُعاد الكتابُ مفتوحًا على فتحة القارئ إن كان الاستدعاءُ قد أغلقه */
-  function hlReopen(b) {
-    if (!b || b.hlReopen == null) return; const g = b.gl, at = b.hlReopen; b.hlReopen = null;
-    try { if (g && !g.dead && g.openAt) g.openAt(Math.max(1, at)); } catch (e) {}
-  }
-  function hlCallStop(reopen = true) {
+  function hlCallStop() {
     const run = hlCall; if (!run) return;
     hlCall = null; run.on = false;
     try { if (run.b.gl && !run.b.gl.dead) run.b.gl.riffleEnd(); } catch (e) {}
-    if (reopen) hlReopen(run.b);
     document.querySelectorAll('#cm-body .hl-call-pend').forEach(x => x.classList.remove('hl-call-pend'));
     hlFillShow([...document.querySelectorAll('#cm-body .hl-fill-wait')], 40);
     run.urls.forEach(u => URL.revokeObjectURL(u)); run.layer.remove();
   }
   let hlCallTok = null;
   async function hlCallRun(id) {
-    hlCallStop(false);   /* (لا يُعاد فتحُ الكتاب بين استدعاءين: الجديدُ يُقلّبه ثمّ يفتحه) */
+    hlCallStop();
     const tok = hlCallTok = {};
     const fill = hlFill.delete(id);
     const rest = () => { if (fill) hlFillShow(hlFillEls(id)); };   /* ما لم يطر إليه شيء يظهر بالترتيب */
@@ -27171,18 +27165,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!b && R && H) { const sb = hlCallScrBook(id); if (sb) return hlCallScroll(id, sb, R, H, fill, rest); }
     /* ===== والكتابُ مفتوحٌ للقراءة (طلبُ صاحب الموقع: «زي ما كان يعمل مع تقلّب الصفحات») =====
        التقليبُ لا يكون إلّا والكتابُ مغلقٌ على الطاولة — والآتي من العرض العادي يجده مفتوحًا فلا يطير شيء. فيُغلق وينزل إلى
-       الطاولة، ويُقلَّب فتطير تحديداتُه، ثمّ يُفتح ثانيةً على الفتحة التي كان عليها القارئ (‎b.hlReopen‎ · ‎hlCallStop‎) */
+       الطاولة سريعًا، ويُقلَّب فتطير تحديداتُه، ويبقى على الطاولة (طلبُ صاحب الموقع: لا يعود إلى فتحة القارئ) */
     const hasMk = () => { const s0 = hlSidOf(b).slice(id.length), c0 = new Set(R.cards.map(c => c.id)); return H.marks.some(m => m.s === s0 && m.k >= 1 && m.k <= b.n && m.c.some(c => c0.has(c))); };   /* (لا يُغلق لمجلدٍ لا تحديدَ له) */
     if (b && R && H && b.gl && !b.gl.dead && !b.gl.onTable && b.gl.rest && b.gl.openAt && !b.gl.riffling && hasMk()) {
-      const g = b.gl; if (b.hlReopen == null) b.hlReopen = g.A;
-      g.rest();
+      /* ينطبق وينزل إلى الطاولة بسرعةٍ وسلاسة، وتطير تحديداتُه ويبقى على الطاولة — لا يُعاد فتحُه على فتحة القارئ (طلبُ صاحب الموقع) */
+      const g = b.gl;
+      g.rest(true);
       const ok = await new Promise(res => { const t0 = performance.now(); const w = () => { if (hlCallTok !== tok || g.dead) return res(false); if (g.resting) return res(true); if (performance.now() - t0 > 5000) return res(false); requestAnimationFrame(w); }; w(); });
-      if (!ok) { if (hlCallTok === tok) { hlReopen(b); rest(); } return; }
+      if (!ok) { if (hlCallTok === tok) rest(); return; }
     }
-    if (!b || !R || !H || !b.gl || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) { if (b) hlReopen(b); return rest(); }
+    if (!b || !R || !H || !b.gl || !b.gl.onTable || b.gl.riffling || !b.gl.riffle) return rest();
     const s = hlSidOf(b).slice(id.length), cids = new Set(R.cards.map(c => c.id));
     const marks = H.marks.filter(m => m.s === s && m.k >= 1 && m.k <= b.n && m.c.some(c => cids.has(c))).sort((x, y) => x.k - y.k || x.bars[0][2] - y.bars[0][2]);
-    if (!marks.length) { hlReopen(b); return rest(); }
+    if (!marks.length) return rest();
     const layer = document.createElement('div'); layer.className = 'hl-fly-layer'; layer.setAttribute('aria-hidden', 'true'); document.body.appendChild(layer);
     const run = hlCall = { id, b, cids, on: true, layer, urls: [] };
     const blobs = await Promise.all(marks.map(m => hlSnapGet(id, m.id).catch(() => null)));
@@ -28052,7 +28047,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkScrInSafe(b) {
     bkDiag(b, 'start', { closed: !!b.closed, pos: b.pos });
     const g = b.gl;
-    if (g && !g.dead && g.riffling) { try { if (hlCall && hlCall.b === b) { b.hlReopen = null; hlCallStop(false); } else g.riffleEnd(); } catch (e) {} bkDiag(b, 'stopped-riffle'); }
+    if (g && !g.dead && g.riffling) { try { if (hlCall && hlCall.b === b) hlCallStop(); else g.riffleEnd(); } catch (e) {} bkDiag(b, 'stopped-riffle'); }
     if (!g || g.dead || b.closed || g.settled !== false) return bkScrIn(b);
     const t0 = performance.now();
     const wait = () => {
