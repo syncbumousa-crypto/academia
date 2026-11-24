@@ -18242,6 +18242,27 @@ html:root .psp-box { border-radius: 18px; }
 html:root .psp-sub { border-radius: 15px; background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; }
 html:root .psp-sub::before { background: color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; box-shadow: inset -1px 1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); right: -6px !important; }
 html[data-lang="en"]:root .psp-sub::before { box-shadow: inset 1px -1px 0 var(--glass-edge, rgba(20, 40, 46, .08)); left: -6px !important; right: auto !important; }
+/* ===== السهمُ قطعةٌ من القائمة لا مربّعٌ فوقها (طلبُ صاحب الموقع) =====
+   كان مربّعًا مُدارًا نصفُه داخل القائمة: زجاجٌ فوق زجاج فيُرى مربّعٌ أغمق. فصار مثلّثًا خارجها وحدَه (‎clip-path‎)،
+   وحرفاه المائلان مرسومان فيه، وحرفُ القائمة (‎::after‎) مفتوحٌ حيث يتّصل — فيُقرأ الاثنان قطعةً واحدة */
+html:root .psp-sub { box-shadow: 0 10px 28px -12px var(--glass-cast, rgba(20, 40, 46, .3)) !important; }
+html:root .psp-sub::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08));
+  -webkit-mask: linear-gradient(#000 calc(50% - 7px), transparent 0 calc(50% + 7px), #000 0), linear-gradient(to left, transparent 2px, #000 0);
+  mask: linear-gradient(#000 calc(50% - 7px), transparent 0 calc(50% + 7px), #000 0), linear-gradient(to left, transparent 2px, #000 0); }
+html[data-lang="en"]:root .psp-sub::after {
+  -webkit-mask: linear-gradient(#000 calc(50% - 7px), transparent 0 calc(50% + 7px), #000 0), linear-gradient(to right, transparent 2px, #000 0);
+  mask: linear-gradient(#000 calc(50% - 7px), transparent 0 calc(50% + 7px), #000 0), linear-gradient(to right, transparent 2px, #000 0); }
+html:root .psp-sub::before { display: block; width: 7px !important; height: 14px !important; margin-top: -7px !important; top: 50% !important; right: -7px !important; left: auto !important;
+  transform: none !important; border-radius: 0 !important; box-shadow: none !important; border: 0 !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: linear-gradient(to top right, transparent calc(50% - .75px), var(--glass-edge, rgba(20, 40, 46, .08)) 0) top / 100% 50% no-repeat,
+    linear-gradient(to bottom right, transparent calc(50% - .75px), var(--glass-edge, rgba(20, 40, 46, .08)) 0) bottom / 100% 50% no-repeat,
+    color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; }
+html[data-lang="en"]:root .psp-sub::before { right: auto !important; left: -7px !important; clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  background: linear-gradient(to top left, transparent calc(50% - .75px), var(--glass-edge, rgba(20, 40, 46, .08)) 0) top / 100% 50% no-repeat,
+    linear-gradient(to bottom left, transparent calc(50% - .75px), var(--glass-edge, rgba(20, 40, 46, .08)) 0) bottom / 100% 50% no-repeat,
+    color-mix(in srgb, var(--glass, #fff) 92%, transparent) !important; }
 @supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
   html:root .psp-box { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
 }
