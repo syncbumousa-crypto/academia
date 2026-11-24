@@ -200,9 +200,14 @@ export function createBook2(THREE, host, cfg) {
 
   /* (الدقّةُ الأولى من مقاس المساحة الآن — قبل أن تُطلب الصورُ — بحساب ‎resize‎ نفسِه: لا تُرسم بغيرها ثمّ تُعاد) */
   const TEX_HEAD = 1.5;
+  /* بكسلٌ لكلّ وحدة حين يُسَع الكتابُ (عرضُه ‎span‎) في ‎w×h‎ — وللموقع أن يحسبه (‎cfg.frame.fit‎، مثلًا ليتجنّب أيقونتي الزاويتين) */
+  function fitS(w, h, span) {
+    const fr = cfg.frame, m = fr ? fr.m : 1.04;
+    return fr && fr.fit ? fr.fit(w, h, span, H, host) : Math.min(h / (H * m), w / (span * m));
+  }
   let texW = (() => {
-    const w = host.clientWidth, h = host.clientHeight, m = cfg.frame ? cfg.frame.m : 1.04; if (!w || !h) return 1024;
-    const ppu = Math.min(h / (H * m), w / ((ONE ? W : 2 * W) * m));
+    const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return 1024;
+    const ppu = fitS(w, h, ONE ? W : 2 * W);
     return Math.min(2048, Math.max(256, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) * TEX_HEAD / 32) * 32));
   })();
   const pageTex = new Map();
@@ -619,7 +624,7 @@ export function createBook2(THREE, host, cfg) {
     camera.fov = FOV;   /* وضعُ القراءة بعدسته؛ والطاولةُ بعدسةٍ أضيق (أدناه) */
     const tn = Math.tan(camera.fov * Math.PI / 360);
     const span = mo ? W * (2 - mo.k) : ONE ? W * (1 + DOLLY * o) : W * (1 + o), cx = mo || !ONE ? 0 : W * DOLLY * o / 2;
-    let dist = ch / (2 * tn * Math.min(vh / (H * MY), cw / (span * MX)));
+    let dist = ch / (2 * tn * fitS(cw, vh, span));
     /* مستوى القرب والبعد يلفّان الكتابَ وحده (ورقةٌ تقف نحو الكاميرا تبلغ عرضَها، والمطويّةُ وراءه كذلك): دقّةُ العمق
        تتوزّع على ما بينهما. كانا ‎0.1 · 20‎ فتقاربت الأوراقُ المتراصّة عند بطاقات العمق الخشنة (‎16bit‎ في هواتفَ كثيرة)
        فغلبت الورقةُ التي تحتُ التي فوقها */
@@ -665,7 +670,7 @@ export function createBook2(THREE, host, cfg) {
        كانت على أكبر قدرٍ تبلغه الصفحةُ مقرَّبةً لأعلى بخطوات ‎256‎ (فتختلف نسبتُها بين مساحةٍ وأخرى). فالآن عرضُ الصفحة الساكنة في
        وضعها (صفحةٌ أو صفحتان) × دقّةُ اللوحة × ‎1.5‎ (هامشٌ يجعل التصغيرَ حادًّا مع المرحلة ٢ — بالقياس أحدُّ من الصورة بقدر الصفحة
        بالضبط)، بخطوات ‎32‎. وهذا قرابةُ مقاسها السابق فلا تزيد الذاكرة */
-    const pr = renderer.getPixelRatio(), span = ONE ? W : 2 * W, ppu = Math.min(h / (H * MY), w / (span * MX));
+    const pr = renderer.getPixelRatio(), span = ONE ? W : 2 * W, ppu = fitS(w, h, span);
     rtWant = Math.min(2048, Math.max(256, Math.ceil(W * ppu * pr * TEX_HEAD / 32) * 32));
     /* ===== المرحلة ٣: تُعاد الصورُ حين تكبر الصفحةُ (أكثر من ‎5%‎) أو تصغر كثيرًا (دون ‎60%‎) — بعد أن يستقرّ المقاس =====
        (كانت لا تُعاد إلّا بتغيّرٍ يجاوز ‎30%‎، فتبقى ممدودةً إن كبرت المساحة أقلَّ منه) */

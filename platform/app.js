@@ -27673,6 +27673,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* إطارُ الكتاب في مساحته (طلبُ صاحب الموقع: أصغرُ قليلًا ونازلٌ تحت، وفوقه رقمُ الصفحات): ‏‎m‎ هامشُه (الكتابُ ‎1/m‎ من المساحة)
      و‎lift‎ رفعُه عن الوسط بنسبة قامته (سالبٌ: ينزل). مصدرٌ واحدٌ للمحرّك وللهيكل ولمستطيل الفتحة فلا يفترق أحدُها عن الآخر */
   const BK_FR = { m: 1.08, lift: -0.01 };
+  /* المسرحُ يمتدّ إلى شريط الأدوات تحته (‎--bk-foot‎ قامتُه) فيكبر الكتابُ فيه (طلبُ صاحب الموقع) — إلّا أن يبلغ أيقونتي الزاويتين:
+     فإن عرُض حتى يحاذيهما قصُر حتى يعلوهما */
+  const BK_FOOT_SIDE = 54;   /* فجوةُ الأيقونة ‎40px‎ من حافّة المربّع (‎pkNotchDraw‎) وانحناؤها، والمسرحُ داخلَه بحشوته */
+  BK_FR.fit = (w, h, span, H, el) => {
+    const m = BK_FR.m, f = (el && el.__bkFoot) || 0;
+    let s = Math.min(h / (H * m), w / (span * m));
+    if (f) s = Math.min(s, Math.max((w - 2 * BK_FOOT_SIDE) / span, (h - 2 * f) / H));
+    return s;
+  };
+  function bkFootSet(st) { st.__bkFoot = parseFloat(getComputedStyle(st).getPropertyValue('--bk-foot')) || 0; }
   /* الوضعُ الذي يمضي إليه الكتاب (ضغطاتٌ متتالية أثناء الحركة تُحسب منه لا ممّا كان) */
   const bk2Goal = b => b.mx ? (b.mxWant != null ? b.mxWant : b.mxGoal) : !!b.one;
   function bk2SetOne(b0, one) {
@@ -28220,7 +28230,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الكاميرا كما يحسبها المحرّك (‎frameCam‎ مع ‎mo‎): مساحتُه قامةُ المسرح وعرضُه، والعدسة ‎28°‎ */
     const sw = b.stage.clientWidth || P.width, sh = b.stage.clientHeight || P.height;
     const Hh = 1 / (b.ar || 1 / Math.SQRT2), Mf = BK_FR.m, fpx = sh / (2 * Math.tan(28 * Math.PI / 360));
-    const ppu = kk => Math.min(sh / (Hh * Mf), sw / ((2 - kk) * Mf));
+    bkFootSet(b.stage);
+    const ppu = kk => BK_FR.fit(sw, sh, 2 - kk, Hh, b.stage);
     const cE = q => .5 - .5 * Math.cos(Math.PI * Math.max(0, Math.min(1, q)));
     const lerp = (a, z, c) => ({ l: a.l + (z.l - a.l) * c, t: a.t + (z.t - a.t) * c, w: a.w + (z.w - a.w) * c, h: a.h + (z.h - a.h) * c });
     const R0 = { l: r0.left, t: r0.top, w: r0.width, h: r0.height };
@@ -29269,7 +29280,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* مقاسٌ صفرٌ (مساحةٌ تنبسط من لا شيء، أو وعاءٌ مخفيّ) لا يُكتب: يبقى آخرُ مقاسٍ حقيقيّ — منه يُحجَّم الكتابُ صورةً وهو مجمَّد */
     const w0 = b.stage.clientWidth, h0 = b.stage.clientHeight;
     if (!w0 || !h0) return;
-    b.stW = w0; b.stH = h0;
+    b.stW = w0; b.stH = h0; bkFootSet(b.stage);
     const g = b.gl;
     if (g) {
       if (g.setZone) g.setZone(bkZone(b));
@@ -29280,7 +29291,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* مستطيلُ الفتحة بحساب المحرّك نفسِه (‎BK_FR‎) — ولو قبل تحميله،
        فيُحاذي عمودُ الأدوات الكتابَ ويُقاس منه ‎FLIP‎ */
-    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = Math.min(b.stH / (H * BK_FR.m), b.stW / (cols * BK_FR.m));
+    const cols = b.one ? 1 : 2, H = 1 / b.ar, ppu = BK_FR.fit(b.stW, b.stH, cols, H, b.stage);
     const w = cols * ppu, h = H * ppu, x = b.stW / 2 - w / 2, y = b.stH / 2 - h * (0.5 + BK_FR.lift);
     b.stage.style.setProperty('--bk-top', y.toFixed(1) + 'px');   /* رقمُ الصفحات فوقه */
     b.pw = Math.floor(ppu); b.ph = Math.floor(h);
