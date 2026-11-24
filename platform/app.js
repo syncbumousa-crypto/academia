@@ -26585,10 +26585,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (el) el.remove();
     const L = PROT_T();
     el = document.createElement('div'); el.className = 'pk-prot'; el.dataset.sid = sid;
-    el.innerHTML = `<span class="pk-prot__chip">${PROT_LOCK}${esc(L.chip)}</span>`
-      + `<div class="pk-prot__card"><b>${esc(L.t)}</b><p>${esc(L.d)}</p><p class="pk-prot__msg" hidden></p>`
-      + `<button type="button" class="pk-prot__go" data-protgo hidden>${esc(L.go)}</button>`
-      + `<button type="button" class="pk-prot__up" data-protup>${esc(L.b)}</button></div>`;
+    /* (لوحٌ أفقيٌّ صغيرٌ في الوسط تحت: قفلٌ ثمّ الرسالةُ ثمّ الزرّ — طلبُ صاحب الموقع، بلا شارةٍ ولا أقفالٍ على الصفحات) */
+    el.innerHTML = `<div class="pk-prot__card"><span class="pk-prot__ic">${PROT_LOCK}</span>`
+      + `<div class="pk-prot__tx"><b>${esc(L.t)}</b><p>${esc(L.d)}</p><p class="pk-prot__msg" hidden></p></div>`
+      + `<div class="pk-prot__btns"><button type="button" class="pk-prot__go" data-protgo hidden>${esc(L.go)}</button>`
+      + `<button type="button" class="pk-prot__up" data-protup>${esc(L.b)}</button></div></div>`;
     host.appendChild(el);
   }
   let protPick = null, protPend = null;
@@ -26679,12 +26680,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
               if (mk.kind === 'box') { c.globalAlpha = .55; c.fillRect(x + w * .19, y + h * .24, w * .62, h * .52); c.globalAlpha = 1; }
               else { const lh = Math.max(1.5, h * .13); c.fillRect(x + w * .03, y + h / 2 - lh / 2, w * .94, lh); }
             }
-            /* القفل */
-            const R = Math.max(7, W * .035), cx = W - R * 1.9, cy = R * 1.9;
-            c.fillStyle = 'rgba(44, 94, 101, .88)'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
-            c.strokeStyle = '#fff'; c.fillStyle = '#fff'; c.lineWidth = Math.max(1.2, R * .16);
-            c.fillRect(cx - R * .42, cy - R * .05, R * .84, R * .6);
-            c.beginPath(); c.arc(cx, cy - R * .08, R * .28, Math.PI, 0); c.stroke();
             c.restore();
           })();
           return { promise, cancel() {} };
