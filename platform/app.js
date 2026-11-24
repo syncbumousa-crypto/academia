@@ -28105,6 +28105,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tk = new Set(T.filter(t => t.k).map(t => t.k));
     /* الصفحاتُ الظاهرةُ وما يُنقل منها (صفحتا الفتحة ولو كانت إحداهما خارج النظر: تأتي منه) */
     const pages = [...sc.querySelectorAll('.cbk-scr__pg')];
+    /* (طلبُ صاحب الموقع: «الصفحاتُ فوق وتحت تخرج بقفزات») كانت الجاراتُ تبتعد ‎46px‎ وحدها وتذوب والصفحتان تقطعان مئاتِ
+       البكسلات وتصغران — فتبدو قفزةً منفصلة، ويبقى طيفُها خلفهما. فالآن هي من القائمة نفسِها: تصغر وتمضي مع صفحة القارئ بتحويلها
+       نفسِه (بُعدُها منها محفوظٌ بالمقياس نفسِه)، وتذوب في نصف الحركة الأوّل — كأنّ القائمةَ كلَّها تنطوي في الكتاب */
+    const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R0 = kEl && kEl.getBoundingClientRect(), T0 = T.find(x => x.k === k);
+    const sK = R0 && T0 && R0.width ? T0.w / R0.width : 1;
     pages.forEach(el => {
       const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
       if (!vis && !tk.has(kk)) return;
@@ -28115,8 +28120,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
         moving.set(kk, d);
       } else {
-        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = kk < k, ks = [...tk], gap = up ? Math.min(...ks) - kk : kk - Math.max(...ks);
-        runs.push(d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${up ? -46 : 46}px)`, opacity: 0 }], { duration: D * .8, delay: Math.max(0, gap - 1) * 55, easing: E, fill: 'both' }));
+        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
+        const to = R0 && T0 ? `translate(${T0.l + (r.left - R0.left) * sK - r.left}px, ${T0.t + (r.top - R0.top) * sK - r.top}px) scale(${sK})` : `translateY(${kk < k ? -46 : 46}px)`;
+        runs.push(d.animate([{ transformOrigin: '0 0', transform: 'none', opacity: 1 }, { transformOrigin: '0 0', opacity: 0, offset: .34 }, { transformOrigin: '0 0', transform: to, opacity: 0 }], { duration: D, easing: E, fill: 'both' }));
       }
     });
     /* باطنُ الغلاف في جانبه: لونُه نفسُه يتكوّن من الكعب إلى الطرف (لا صفحةَ تطير إليه) */
@@ -28133,8 +28139,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const U = T.reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
     const sh = document.createElement('div'); sh.className = 'bk-fly-shadow';
     const place = (el, u) => Object.assign(el.style, { left: u.l + 'px', top: u.t + 'px', width: (u.r - u.l) + 'px', height: (u.b - u.t) + 'px' });
-    place(sh, U); L.prepend(sh);
-    sh.animate([{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: D, delay: D * .25, easing: E, fill: 'both' });
+    place(sh, U); L.prepend(sh); sh.style.opacity = '0';
+    /* (الظلُّ يتكوّن حين يُعرف مكانُ الكتاب الحقيقيّ — كان يظهر في المكان المقدَّر أوّلًا فيُرى مستطيلًا باهتًا فوق الفتحة) */
+    const shIn = ms => { sh.style.opacity = ''; sh.animate([{ opacity: 0, transform: 'scale(.94)' }, { opacity: 1, transform: 'none' }], { duration: Math.max(140, ms), easing: E, fill: 'both' }); };
     /* (لا خطَّ كعبٍ طائرًا: كان يُوضع في وسط الفتحة النهائيّة من أوّل الحركة فيقع على وسط الصفحة وهي بعدُ كبيرةٌ تتحرّك —
        طلبُ صاحب الموقع. والكتابُ الحقيقيّ يحمل ظلَّ كعبه حين يستلم) */
     const spine = null;
@@ -28163,7 +28170,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             Object.assign(d.style, { left: x + 'px', top: pg.t + 'px', width: pg.w + 'px', height: pg.h + 'px' });
           });
           const V = F.filter(f => moving.has(f.k)).reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
-          place(sh, V); if (spine) { const sx = (V.l + V.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: V.t, b: V.b }); }
+          place(sh, V); shIn(left); if (spine) { const sx = (V.l + V.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: V.t, b: V.b }); }
           /* (لا يُنتظر ما أُلغي: وعدُ انتهائه بعد الإلغاء وعدٌ جديدٌ لا يُوفى أبدًا) */
           Promise.all(runs.filter(a => a.playState !== 'idle').map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
           return;
@@ -28175,6 +28182,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let ng = null, animDone = false, fin = false;
     const finish = () => {
       if (fin) return; fin = true;
+      if (!aimed) shIn(140);   /* (لم يُعرف مكانُه في الطيران: يظهر الآن) */
       if (b.gl && !b.gl.dead) b.gl.el.style.opacity = '';
       const F = ng ? bkPgScreens(ng) : [];
       const outs = [];
