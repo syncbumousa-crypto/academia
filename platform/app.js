@@ -28130,6 +28130,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!a || a.dataset.bkvw !== 'two' || bkModeGet() !== 'scroll' || e.button !== 0) return;
     Object.values(pkSrcBk).forEach(b => { if (b && b.scroll && b.view && b.view.isConnected) bkPreTwo(b); });
   }, true);
+  /* ===== الجاراتُ حين يُغادَر العرضُ العاديّ (طلبُ صاحب الموقع: «تتحرّك لفوق أو تحت بشكلٍ عموديٍّ خالص ما فيه أيّ أفقيّة،
+     من مكانها نفسه») — كانت تصغر وتمضي مع صفحة القارئ إلى جانبها من الفتحة فتبدو مائلة. فالآن كلُّ صفحةٍ ظاهرةٍ غيرها تنزلق
+     من مكانها عموديًّا فقط (التي فوقها إلى فوق، والتي تحتها إلى تحت) بلا تحجيمٍ ولا إزاحةٍ أفقيّة، وتذوب في أوّل الحركة ===== */
+  function bkScrNbOut(b, sc, R, y0, k, clone, dur, skip) {
+    const H = R.height || 600;
+    sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
+      const kk = +el.dataset.k; if (kk === k || (skip && skip(kk))) return;
+      const r = el.getBoundingClientRect(); if (!(r.bottom > R.top && r.top < R.bottom)) return;
+      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), dy = (r.top < y0 ? -1 : 1) * H * .28;
+      d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${dy * .6}px)`, opacity: 0, offset: .5 }, { transform: `translateY(${dy}px)`, opacity: 0 }], { duration: dur, easing: 'cubic-bezier(.33, 0, .2, 1)', fill: 'forwards' });
+    });
+  }
   function bkScrOutTwo(b) {
     if (bkReduce() || !b.scr || !b.view || !b.stage) return false;
     const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
@@ -28180,20 +28192,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     for (let i = 0; i <= N; i++) { const c = cE(i / N), p = lerp(R0, F, c); kfL.push({ offset: i / N, transform: liveTf(p) }); kfT.push({ offset: i / N, transform: twinTf(p, 1 - c) }); }
     const aL = live.animate(kfL, { duration: Dm, easing: 'linear', fill: 'forwards' });
     const aT = tw.animate(kfT, { duration: Dm, easing: 'linear', fill: 'forwards' });
-    /* القائمةُ حولها (طلبُ صاحب الموقع: «يبدو كأنهم يميلون لليمين أو اليسار») — كانت على ساعةٍ ومنحنًى غير ساعة صفحة القارئ
-       (أقصر وأسرع)، فتسبقها في اتّجاهها إلى جانبها من الفتحة فتبدو مائلة. فالآن عمودٌ واحدٌ معها على الساعة نفسِها: تصغر بمقياسها
-       وتمضي معها أفقيًّا كما هي، وتتباعد عنها قليلًا (التي فوقها إلى فوق والتي تحتها إلى تحت) وتذوب في أوّل الحركة */
-    sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
-      const kk = +el.dataset.k; if (kk === k) return;
-      const r = el.getBoundingClientRect(); if (!(r.bottom > R.top && r.top < R.bottom)) return;
-      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = r.top < R0.t ? -1 : 1, kf = [];
-      for (let i = 0; i <= N; i++) {
-        const c = cE(i / N), p = lerp(R0, F, c), sc2 = p.w / R0.w;
-        const x = p.l + (r.left - R0.l) * sc2, y = p.t + (r.top - R0.t) * sc2 + up * 56 * c;
-        kf.push({ offset: i / N, transformOrigin: '0 0', transform: `translate(${x - r.left}px, ${y - r.top}px) scale(${sc2})`, opacity: Math.max(0, 1 - c / .42) });
-      }
-      d.animate(kf, { duration: Dm, easing: 'linear', fill: 'forwards' });
-    });
+    bkScrNbOut(b, sc, R, R0.t, k, clone, Dm);
     /* تبدُّلٌ جارٍ: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، والرجوعُ إلى الصفحة الواحدة إلى صفحة القارئ، والقامةُ ثابتةٌ حتى الاستلام */
     b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true; b.hHold = true;
     { const d = bkSk(b), pg = Math.max(1, k - d); b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side }; }
@@ -28290,25 +28289,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tk = new Set(T.filter(t => t.k).map(t => t.k));
     /* الصفحاتُ الظاهرةُ وما يُنقل منها (صفحتا الفتحة ولو كانت إحداهما خارج النظر: تأتي منه) */
     const pages = [...sc.querySelectorAll('.cbk-scr__pg')];
-    /* (طلبُ صاحب الموقع: «الصفحاتُ فوق وتحت تخرج بقفزات») كانت الجاراتُ تبتعد ‎46px‎ وحدها وتذوب والصفحتان تقطعان مئاتِ
-       البكسلات وتصغران — فتبدو قفزةً منفصلة، ويبقى طيفُها خلفهما. فالآن هي من القائمة نفسِها: تصغر وتمضي مع صفحة القارئ بتحويلها
-       نفسِه (بُعدُها منها محفوظٌ بالمقياس نفسِه)، وتذوب في نصف الحركة الأوّل — كأنّ القائمةَ كلَّها تنطوي في الكتاب */
-    const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R0 = kEl && kEl.getBoundingClientRect(), T0 = T.find(x => x.k === k);
-    const sK = R0 && T0 && R0.width ? T0.w / R0.width : 1;
+    const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R0 = kEl && kEl.getBoundingClientRect();
+    bkScrNbOut(b, sc, R, R0 ? R0.top : R.top + R.height / 2, k, clone, D, kk => tk.has(kk));
     pages.forEach(el => {
-      const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
-      if (!vis && !tk.has(kk)) return;
-      const t = T.find(x => x.k === kk);
-if (t) {
-        const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
-        d.style.zIndex = kk === k ? 3 : 2;
-        runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
-        moving.set(kk, d);
-      } else {
-        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
-        const to = R0 && T0 ? `translate(${T0.l + (r.left - R0.left) * sK - r.left}px, ${T0.t + (r.top - R0.top) * sK - r.top}px) scale(${sK})` : `translateY(${kk < k ? -46 : 46}px)`;
-        runs.push(d.animate([{ transformOrigin: '0 0', transform: 'none', opacity: 1 }, { transformOrigin: '0 0', opacity: 0, offset: .34 }, { transformOrigin: '0 0', transform: to, opacity: 0 }], { duration: D, easing: E, fill: 'both' }));
-      }
+      const kk = +el.dataset.k, t = T.find(x => x.k === kk); if (!t) return;
+      const r = el.getBoundingClientRect();
+      const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
+      d.style.zIndex = kk === k ? 3 : 2;
+      runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
+      moving.set(kk, d);
     });
     /* باطنُ الغلاف في جانبه: لونُه نفسُه يتكوّن من الكعب إلى الطرف (لا صفحةَ تطير إليه) */
     const insides = [];
