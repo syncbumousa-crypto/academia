@@ -27992,28 +27992,41 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ومكانُ الصفحتين في الكتاب معروفٌ قبل بنائه: آخرُ ما رُسم عليه الكتابُ في هذه المساحة (‎b.geo‎) إن لم يتغيّر قدرُها،
      وإلّا يُقدَّر من قدرها ونسبة الصفحة. والكتابُ يُبنى خفيًّا في أثناء ذلك، فإذا انتهت الحركةُ وجهز ظهر تحتهما
      وصُحّح مكانُهما إلى مكانه الحقيقيّ إن اختلف، ثمّ تذوبان (المرحلة ٤ مبدئيًّا) */
+  /* ===== خطّةُ الفتحة الصحيحة · المرحلة ١ (طلبُ صاحب الموقع: «تنزل الصفحة اللي قبل على اليمين ثم تختفي») =====
+     الفتحةُ بقاعدة المحرّك نفسِها (‎book2: faces‎): الغلافُ (صفحةُ الملفّ الأولى إن لم يكن له غلافٌ مستقلّ) خارجُ الصفحات
+     الداخليّة (‎bkSk‎)، فرقمُ الصفحة الداخليّ ‎v = k − d‎؛ والفتحةُ ‎A‎ تُري ‎v = 2A−2‎ يمينًا و‎v = 2A−1‎ يسارًا — فالفرديّةُ يسرى
+     وشريكتُها التي قبلها، والزوجيّةُ يمنى وشريكتُها التي بعدها. وما خرج عن الكتاب باطنُ غلاف (يمينًا الأماميّ، يسارًا الخلفيّ).
+     كان يُخمَّن من زوجيّة رقم الصفحة وحدها، فتطير صفحةُ الغلاف (١) إلى اليمين ثمّ تختفي حين يستلم الكتاب */
+  function bkSpread(b, k) {
+    const d = bkSk(b), N = Math.max(1, (b.n || 1) - d), v = Math.max(1, Math.min(N, k - d));
+    if (v % 2) return { L: d + v, R: v - 1 >= 1 ? d + v - 1 : null };
+    return { R: d + v, L: v + 1 <= N ? d + v + 1 : null };
+  }
+  const bkSideOf = (b, k) => ((k - bkSk(b)) % 2 ? 'L' : 'R');
   function bkGeoSave(b, g) {
     try {
       const src = b.view && b.view.closest('.pk-src'); if (!src || !g || g.dead) return;
       const P = src.getBoundingClientRect(), rs = bkPgScreens(g); if (!rs.length || !P.width) return;
-      b.geo = { one: !!g.one, pw: P.width, ph: P.height, list: rs.map(r => ({ k: r.k, x: r.l - P.left, y: r.t - P.top, w: r.w, h: r.h })) };
+      const rel = r => ({ x: r.l - P.left, y: r.t - P.top, w: r.w, h: r.h }), sides = {};
+      if (g.one) sides.C = rel(rs[0]);
+      else {
+        rs.forEach(r => { sides[bkSideOf(b, r.k)] = rel(r); });
+        /* جانبٌ بلا صفحة (باطن الغلاف): مجاورٌ لأخيه */
+        if (sides.L && !sides.R) sides.R = { ...sides.L, x: sides.L.x + sides.L.w };
+        if (sides.R && !sides.L) sides.L = { ...sides.R, x: sides.R.x - sides.R.w };
+      }
+      b.geo = { one: !!g.one, pw: P.width, ph: P.height, sides };
     } catch (e) {}
   }
+  /* أهدافُ الطيران: لكلّ جانبٍ صفحتُه ‎{k}‎ أو باطنُ الغلاف ‎{k: null, inside: true}‎ */
   function bkGeoPredict(b, k, one, P) {
-    const G = b.geo, out = [];
-    if (G && G.one === one && Math.abs(G.pw - P.width) < 4 && Math.abs(G.ph - P.height) < 4 && G.list.length) {
-      const same = G.list.find(r => (r.k - k) % 2 === 0) || G.list[0];
-      out.push({ k, l: P.left + same.x, t: P.top + same.y, w: same.w, h: same.h });
-      if (!one) { const o = G.list.find(r => r !== same); if (o) { const pk = k + (o.k - same.k); if (pk >= 1 && pk <= (b.n || 1)) out.push({ k: pk, l: P.left + o.x, t: P.top + o.y, w: o.w, h: o.h }); } }
-      return out;
-    }
-    /* تقديرٌ من قدر المساحة: الفتحةُ في وسطها، والأصغرُ رقمًا يمينًا (عربيّ) */
+    const G = b.geo, ok = G && G.one === one && G.sides && Math.abs(G.pw - P.width) < 4 && Math.abs(G.ph - P.height) < 4;
     const ar = b.ar || 1 / Math.SQRT2, n = one ? 1 : 2;
     const h = Math.min(P.height * .8, P.width * .9 / (n * ar)), w = h * ar, x0 = P.left + (P.width - n * w) / 2, y0 = P.top + (P.height - h) / 2;
-    if (one) return [{ k, l: x0, t: y0, w, h }];
-    const pk = k % 2 ? k + 1 : k - 1, lo = Math.min(k, pk);
-    [k, pk].filter(q => q >= 1 && q <= (b.n || 1)).forEach(q => out.push({ k: q, l: q === lo ? x0 + w : x0, t: y0, w, h }));
-    return out;
+    const abs = r => ({ l: P.left + r.x, t: P.top + r.y, w: r.w, h: r.h });
+    if (one) return [{ k, ...(ok && G.sides.C ? abs(G.sides.C) : { l: x0, t: y0, w, h }) }];
+    const sp = bkSpread(b, k), S = ok && G.sides.L && G.sides.R ? { L: abs(G.sides.L), R: abs(G.sides.R) } : { L: { l: x0, t: y0, w, h }, R: { l: x0 + w, t: y0, w, h } };
+    return ['R', 'L'].map(side => sp[side] ? { k: sp[side], side, ...S[side] } : { k: null, inside: true, side, ...S[side] });
   }
   function bkScrOutMorph(b, one) {
     if (bkReduce() || !b.scr || !b.view) return false;
@@ -28027,6 +28040,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const clone = (el, r) => {
       const d = document.createElement('div'); d.className = 'bk-fly-pg';
       Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
+      if (el) d.dataset.k = el.dataset.k;
       const c0 = el && el.querySelector(':scope > canvas');
       let srcCv = c0 && c0.width ? c0 : null;
       if (!srcCv) { const kk = el ? +el.dataset.k : 0; srcCv = (b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)) || null; }
@@ -28034,7 +28048,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       L.appendChild(d); return d;
     };
     const D = Math.round(BK_SX * 1.15 * (window.__pkfxSlow || 1)), E = BK_SXE, moving = new Map(), runs = [];
-    const tk = new Set(T.map(t => t.k));
+    const tk = new Set(T.filter(t => t.k).map(t => t.k));
     /* الصفحاتُ الظاهرةُ وما يُنقل منها (صفحتا الفتحة ولو كانت إحداهما خارج النظر: تأتي منه) */
     const pages = [...sc.querySelectorAll('.cbk-scr__pg')];
     pages.forEach(el => {
@@ -28051,8 +28065,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         runs.push(d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${up ? -70 : 70}px) scale(.96)`, opacity: 0 }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }));
       }
     });
+    /* باطنُ الغلاف في جانبه: لونُه نفسُه يتكوّن من الكعب إلى الطرف (لا صفحةَ تطير إليه) */
+    const insides = [];
+    T.filter(t => t.inside).forEach(t => {
+      const d = document.createElement('div'); d.className = 'bk-fly-pg bk-fly-in';
+      Object.assign(d.style, { left: t.l + 'px', top: t.t + 'px', width: t.w + 'px', height: t.h + 'px', transformOrigin: t.side === 'R' ? 'left center' : 'right center' });
+      L.appendChild(d); insides.push([d, t.side]);
+      d.animate([{ transform: 'scaleX(.15)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D * .8, delay: D * .2, easing: E, fill: 'both' });
+    });
     /* صفحةُ الفتحة التي ليست في القائمة الظاهرة بعدُ (نادر): تأتي بيضاءَ من تحت */
-    T.filter(t => !moving.has(t.k)).forEach(t => { const d = clone(null, t); runs.push(d.animate([{ transform: 'translateY(60px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D, easing: E, fill: 'both' })); moving.set(t.k, d); });
+    T.filter(t => t.k && !moving.has(t.k)).forEach(t => { const d = clone(null, t); runs.push(d.animate([{ transform: 'translateY(60px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D, easing: E, fill: 'both' })); moving.set(t.k, d); });
     /* ===== المرحلة ٣: ملامحُ الكتاب تتكوّن — ظلُّه تحت الفتحة يكبر، وخطُّ الكعب في وسطها (عرضُ الصفحتين) ===== */
     const U = T.reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
     const sh = document.createElement('div'); sh.className = 'bk-fly-shadow';
@@ -28083,6 +28105,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
             d.getAnimations().forEach(a => a.cancel());
             Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' });
             runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - f.l}px, ${r.top - f.t}px) scale(${r.width / f.w}, ${r.height / f.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: left, easing: 'cubic-bezier(.2, .7, .2, 1)', fill: 'both' }));
+          });
+          insides.forEach(([d, side]) => {
+            const pg = F.find(f => moving.has(f.k)); if (!pg) return;
+            const x = side === 'R' ? pg.l + pg.w : pg.l - pg.w;
+            Object.assign(d.style, { left: x + 'px', top: pg.t + 'px', width: pg.w + 'px', height: pg.h + 'px' });
           });
           const V = F.filter(f => moving.has(f.k)).reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
           place(sh, V); if (spine) { const sx = (V.l + V.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: V.t, b: V.b }); }
