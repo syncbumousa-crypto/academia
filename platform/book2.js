@@ -880,7 +880,17 @@ export function createBook2(THREE, host, cfg) {
      ‏‎cfg.onZone(side)‎ يُخبر بالنصف الذي يُقلَّب منه الآن (أو ‎null‎) فيُرسَم دليلُه */
   let grab = '';
   const setGrab = v => { if (v === grab) return; grab = v; if (cfg.onZone) cfg.onZone(v === 'l' || v === 'r' ? v : null); };
-  const setCursor = () => { zone.style.cursor = drag ? 'grabbing' : grab ? 'grab' : ''; };
+  /* ‏‎cfg.cursor(kind, side, n)‎ (طلبُ صاحب الموقع): مؤشرُ اليد البكسليّ وسهمُه لجهة السحب — ‏‎side‎ ‏‎l‎ طرفُ اليسار (يُسحب لليمين)
+     و‎r‎ اليمين؛ ‏‎kind‎ ‏‎open‎ والمؤشرُ على المقبض، ‏‎grab‎ في السحب. والسهمُ ينبض ما دام المؤشرُ على المقبض: تُبدَّل صورُه (‎n‎) كلَّ ‎110ms‎ */
+  let curT = 0, curI = 0;
+  const setCursor = () => {
+    const side = drag ? (drag.fwd ? 'l' : 'r') : (grab === 'l' || grab === 'r' ? grab : null);
+    const c = cfg.cursor && side ? cfg.cursor(drag ? 'grab' : 'open', side, drag ? 0 : curI) : '';
+    zone.style.cursor = c || (drag ? 'grabbing' : grab ? 'grab' : '');
+    const anim = !!(c && !drag && !dead);
+    if (anim && !curT) curT = setInterval(() => { curI++; setCursor(); }, 110);
+    else if (!anim && curT) { clearInterval(curT); curT = 0; curI = 0; }
+  };
   const onDown = e => {
     if (e.button !== 0) return;
     /* نصٌّ محدَّدٌ في الصفحة: النقرةُ تُلغي التحديد ولا تقلّب */
@@ -980,6 +990,7 @@ export function createBook2(THREE, host, cfg) {
   /* ‏‎keep‎: (للتحوّل إلى الصفحات المتتالية) يُطفأ كلُّ شيءٍ إلّا اللوحةَ نفسَها — تبقى على آخر إطارٍ رُسم فتذوب في مكانها بدل لقطةٍ
      تُنسخ منها (النسخُ من ‎WebGL‎ يقرأ من كرت الشاشة فيتأخّر التحوّلُ كلُّه) — ويُعاد ما يُتمّ الإطفاءَ حين تنتهي */
   function dispose(keep) {
+    if (curT) { clearInterval(curT); curT = 0; }
     if (dead) return;
     if (rf) { const res = rf.res; rf = null; res(false); }   /* تقليبٌ جارٍ: يُعلَم صاحبُه أنّه انتهى */
     dead = true;

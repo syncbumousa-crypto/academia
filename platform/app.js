@@ -29116,6 +29116,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointercancel', bkTLUp, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && bkTLSel) { bkTLClear(); e.stopImmediatePropagation(); } }, true);
   /* المحرّك: يُبنى مع التركيب، ومن جديد حين يتبدّل الوضع (صفحتان ⇄ صفحة) */
+  /* ===== مؤشرُ تقليب الصفحة (اختيارُ صاحب الموقع): يدٌ بكسليّةٌ كيد المتصفّح وسهمٌ منحنٍ صاعدٌ لجهة السحب =====
+     حدٌّ أسودُ بعرض بكسلٍ وداخلٌ أبيض؛ اليدُ يمنى دائمًا لا تنعكس، والسهمُ وحدُه: من طرف اليسار يبدأ من يسار اليد ويصعد إلى فوقٍ
+     يمينًا (السحبُ لليمين)، ومن اليمين بالعكس. يدٌ مفتوحةٌ على المقبض وسهمُها ينبض إلى فوق (‎n‎: إطارُ النبضة)، ومقبوضةٌ في السحب */
+  const BK_CUR = { open: ["........kk.......", ".....kkkwwkkk....", "....kwwkwwkwwk...", "....kwwkwwkwwkkk.", "....kwwkwwkwwkwwk", "....kwwkwwkwwkwwk", ".kk.kwwkwwkwwkwwk", "kwwkkwwkwwkwwkwwk", "kwwwkwwkwwkwwkwwk", ".kwwwwwwwwwwwwwwk", "..kwwwwwwwwwwwwwk", "..kwwwwwwwwwwwwk.", "...kwwwwwwwwwwwk.", "....kwwwwwwwwwk..", ".....kwwwwwwwwk..", ".....kwwwwwwwwk..", ".....kkkkkkkkkk.."], grab: [".................", ".................", ".................", ".................", ".....kk.kk.kk....", "....kwwkwwkwwkkk.", "..kkkwwwwwwwwkwwk", ".kwwkwwwwwwwwwwwk", ".kwwwwwwwwwwwwwwk", ".kwwwwwwwwwwwwwwk", "..kwwwwwwwwwwwwwk", "..kwwwwwwwwwwwwk.", "...kwwwwwwwwwwwk.", "....kwwwwwwwwwk..", ".....kwwwwwwwwk..", ".....kwwwwwwwwk..", ".....kkkkkkkkkk.."],
+    rise: ['......tttt', '.......ttt', '.....tt..t', '....t....t', '...t......', '..t.......', '..t.......', '.t........', '.t........', '.t........'],
+    seq: [0, 0, 0, 0, 1, 2, 1, 0, 0, 0], memo: new Map() };
+  function bkCursor(kind, side, n) {
+    const lift = BK_CUR.seq[(n || 0) % BK_CUR.seq.length], key = kind + side + lift;
+    let c = BK_CUR.memo.get(key); if (c) return c;
+    const R = side === 'r', g = kind === 'grab', hx = R ? 4 : 11, hy = 13, ax = (R ? 15 : 8) + (g ? (R ? -1 : 1) : 0), ay = 7 + (g ? 3 : 0) - lift;
+    const cells = (m, ox, oy, flip) => { const out = []; m.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') out.push([(flip ? row.length - 1 - x : x) + ox, y + oy, ch]); })); return out; };
+    const arr = cells(BK_CUR.rise, ax, ay, R), px = cells(g ? BK_CUR.grab : BK_CUR.open, hx, hy, false);
+    const on = new Set(arr.map(([x, y]) => x + ',' + y)), halo = new Set();   /* (حدٌّ أبيضُ حول السهم يفصله عن الورق) */
+    arr.forEach(([x, y]) => { for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) { const k2 = (x + dx) + ',' + (y + dy); if (!on.has(k2)) halo.add(k2); } });
+    const col = { k: '#000', w: '#fff', t: '#2c5e65' };
+    let r = [...halo].map(k2 => { const [x, y] = k2.split(','); return `<rect x="${x}" y="${y}" width="1" height="1" fill="#fff"/>`; }).join('');
+    r += arr.map(([x, y]) => `<rect x="${x}" y="${y}" width="1" height="1" fill="${col.t}"/>`).join('');
+    r += px.map(([x, y, ch]) => `<rect x="${x}" y="${y}" width="1" height="1" fill="${col[ch]}"/>`).join('');
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges">${r}</svg>`;
+    c = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}") ${hx + 8} ${hy + 10}, ${g ? 'grabbing' : 'grab'}`;
+    BK_CUR.memo.set(key, c); return c;
+  }
   function bk2Engine(b, o = {}) {
     const st = b.stage;
     if (!o.quiet) bkPhShow(b);
@@ -29128,6 +29150,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const mk = () => M.createBook2(THREE, b.stage, {
         n: b.n, ar: b.ar, A: o.A != null ? o.A : bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: o.one != null ? o.one : b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
+        cursor: bkCursor,
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
