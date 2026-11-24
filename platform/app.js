@@ -27509,14 +27509,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — بكسليٌّ بأسلوب يد التقليب ومؤشرات المتصفّح (طلبُه أيضًا):
      حدٌّ أسودُ بعرض بكسل، جسمٌ أبيض بين حلقتين، طرفاه بلون الحبر، ورأسُه المشطوفُ أسفلَ اليسار هو نقطةُ التأشير */
   /* واقفٌ نحيل (طلبُ صاحب الموقع): بعرض خمسة بكسلات وطولُه قريبٌ من سطر النصّ، فيقع على السطر بقدره — غطاءٌ بلون الحبر، جسمٌ أبيض
-     بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ نقطةُ التأشير طرفُ الرأس */
-  const HL_PEN_PX = ['.kkk.', 'kccck', 'kccck', 'kkkkk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kwwwk', 'kkkkk', 'kccck', 'kccck', 'kttk.', 'ktk..', 'kk...'];
+     بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ وفوقه وتحته خطٌّ عرضيّ (‎T‎) كمؤشّر تحديد النصّ (طلبُه أيضًا).
+     (على ورق الصفحة دائمًا، فلا حدَّ أبيضَ حوله) — نقطةُ التأشير طرفُ الرأس */
+  const HL_PEN_PX = ['kkkkkkkkk', '..kccck..', '..kccck..', '..kkkkk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kkkkk..', '..kccck..', '..kccck..', '..kttk...', '..ktk....', '..kk.....', 'kkkkkkkkk'];
   function hlPixPen(fill, ink) {
     const col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
     let r = '';
     HL_PEN_PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="20" viewBox="0 0 8 20" shape-rendering="crispEdges">${r}</svg>`;
-    return { svg, hx: ox + 1, hy: oy + HL_PEN_PX.length - 2 };
+    const W = HL_PEN_PX[0].length + 2, Hh = HL_PEN_PX.length + 2;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
+    return { svg, hx: ox + 3, hy: oy + 15 };
   }
   const hlPenCurC = {};
   function hlPenCursor(c) {
