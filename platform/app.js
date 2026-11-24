@@ -27830,6 +27830,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* طبقةٌ فوق القائمة بشكلها نفسِه: فيها حبّةُ الرقم والتقريب والشريطان — فتُقصّ معها على رسمة المساحة */
     const ov = document.createElement('div'); ov.className = 'cbk-scr__ov'; ov.appendChild(top);
     b.view.appendChild(sc); b.view.appendChild(ov);
+    bkScrFitW(b);
     b.view.pkBk = b;
     b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
     bkScrSeed(b, k0);
@@ -27867,6 +27868,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
+      bkScrFitW(b);
       b.scrPW = 0;
       b.scrSync && b.scrSync();
       bkScrFit(b);
@@ -28631,6 +28633,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     return out;
   };
+  /* ===== ‎100%‎ = الصفحةُ كاملةً في المساحة (طلبُ صاحب الموقع: «اقدر اشوفها كاملة» في كلّ المساحات) =====
+     عرضُها أصغرُ العرضين: عرضُ المساحة إلّا ‎24px‎ على كلّ جانب، أو ما تسعه قامتُها (إلّا رأسَها ‎42px‎ وهامشًا تحتها) بنسبة الصفحة —
+     فتُرى الصفحةُ كلُّها في مساحةٍ واحدةٍ واسعة أو مساحتين متجاورتين، والتقريبُ يكبّرها من هنا */
+  function bkScrFitW(b) {
+    const sc = b.scr; if (!sc) return;
+    const w = sc.clientWidth, h = sc.clientHeight; if (!w || !h) return;
+    const fw = Math.max(120, Math.floor(Math.min(w - 48, (h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
+    if (b.scrFW === fw) return;
+    b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
+  }
   function bkScrFit(b) {
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
     const card = b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]');
