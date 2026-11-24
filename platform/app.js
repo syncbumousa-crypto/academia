@@ -27512,15 +27512,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ وفوقه وتحته عارضةٌ عريضة (‎T‎) كمؤشّر تحديد النصّ بأسلوب القلم نفسِه — حدٌّ أسودُ بطرفين مدوّرين وحبرٌ ملوّن ببكسل لمعةٍ أبيضَ يسارًا وبكسل ظلٍّ داكنٍ يمينًا، العليا غطاؤه والسفلى قاعدةٌ يقف عليها رأسُه (طلبُه أيضًا).
      (على ورق الصفحة دائمًا، فلا حدَّ أبيضَ حوله) — نقطةُ التأشير طرفُ الرأس */
   const HL_PEN_PX = ['..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..', '...kccck...', '...kkkkk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kkkkk...', '...kccck...', '...kccck...', '...kttk....', '...ktk.....', '..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..'];
-  /* وهو يظلّل (طلبُه): القلمُ مضغوطٌ على الورق (أقصرُ ببكسل، رأسُه على القاعدة) والقاعدةُ حبرٌ يسيل — بكسلاتٌ داكنةٌ تحت الرأس */
-  const HL_PEN_PX_D = HL_PEN_PX.slice(0, 6).concat(HL_PEN_PX.slice(7, HL_PEN_PX.length - 4), ['..kkkkkkk..', '.kttcccctk.', '.kctcctcck.', '..kkkkkkk..']);
+  /* وهو يظلّل (طلبُه — الزوج ٦): يختفي القلمُ ويبقى مؤشّرُ تحديدٍ بكسليّ — العارضتان بلون الحبر وبينهما خطٌّ أسودُ رفيع، ونقطةُ التأشير وسطُه */
+  const HL_PEN_PX_D = HL_PEN_PX.slice(0, 4).concat(Array(HL_PEN_PX.length - 8).fill('.....k.....'), HL_PEN_PX.slice(-4));
   function hlPixPen(fill, ink, down) {
     const PX = down ? HL_PEN_PX_D : HL_PEN_PX, col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
     let r = '';
     PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
     const W = PX[0].length + 2, Hh = PX.length + 2;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
-    return { svg, hx: ox + 4, hy: oy + PX.length - 5 };
+    return { svg, hx: ox + (down ? 5 : 4), hy: oy + (down ? PX.length >> 1 : PX.length - 5) };
   }
   const hlPenCurC = {};
   function hlPenCursor(c, down) {
