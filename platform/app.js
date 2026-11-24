@@ -26774,6 +26774,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      آخرُ رسمٍ لكلّ صفحة (بتحديداتها، بأيّ عرض) يُحفظ — قليلٌ منها (‎16‎) — فإذا بُنيت الصفحاتُ المتتالية نُسخ على صفحة الوصول
      وجاراتها فورًا (‎bkScrSeed‎) بدل الهيكل الرماديّ، ثمّ يحلّ محلَّه رسمُها بدقّتها حين يجهز (‎bkScrPaint‎ يستبدل اللوحة) */
   const bkScrW = cw => Math.max(200, Math.min(3000, Math.round(cw * (window.devicePixelRatio || 1))));
+  /* ===== جودةُ الصفحات في التقريب (طلبُ صاحب الموقع: «الصفحات تتبكسل … ابي جودتها تبقى مرتفعة») =====
+     ١) دقّةٌ احتياطيّة: صفحاتُ العرض العاديّ تُرسم بـ‎1.5×‎ عرضِها المعروض (بسقف ‎bkScrW‎)، فيبقى التقريبُ حتى ‎150%‎ ممّا هي عليه حادًّا
+        من أوّل إطار، والتصغيرُ حادٌّ دائمًا. والرسمُ المسبقُ قبل الدخول بالمقاس نفسِه فتطابقه صورُه */
+  const BK_SCR_HR = 1.5, bkScrPx = cw => bkScrW(cw * BK_SCR_HR);
   /* ===== المرحلة ٢: الرسمُ يبدأ قبل النقر =====
      إذا اقترب المؤشّرُ من القوس (أو لمسه أو بلغه التركيز) والعرضُ التالي هو الصفحاتُ المتتالية: تُرسم صفحةُ القارئ وجاراتُها
      بعرض الصفحات المتتالية في الخلفية (واحدةً بعد واحدة، الأقربُ أوّلًا). فتُحفظ في ‎pgOut‎ (المرحلة ١)، فإذا نُقر وجدتها
@@ -26783,7 +26787,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const src = b.view.closest('.pk-src') || b.view, R = src.getBoundingClientRect(), pw = R.width; if (!pw) return;
     /* (خطّةُ التكبير · المرحلة ٥) بعرض ‎100%‎ نفسِه (الصفحةُ كاملةً في المساحة — ‎bkScrFitW‎)، لا بسقف ‎780px‎ القديم */
     const fw = bkScrFitCalc(b) || b.scrFW; if (!fw) return;
-    const w = bkScrW(fw * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
+    const w = bkScrPx(fw * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
     const key = k0 + '|' + w; if (b.warmKey === key) return; b.warmKey = key;
     const ks = [k0, k0 + 1, k0 - 1, k0 + 2].filter(k => k >= 1 && k <= (b.n || 1));
     ks.reduce((p, k) => p.then(() => b.warmKey === key && !b.scroll ? bk2Tex(b, k, w).catch(() => {}) : null), Promise.resolve());
@@ -28501,7 +28505,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkScrPaintNow(b, el) {
     if (!b.scroll || !b.doc || !el.isConnected) return;
     const cw = b.scrPW || (b.scrPW = el.clientWidth);   /* (عرضُ الصفحات واحد: يُقاس مرّةً لا لكلّ صفحة — كلُّ قياسٍ يفرض تخطيطًا) */
-    const k = +el.dataset.k, w = bkScrW(cw);
+    const k = +el.dataset.k, w = bkScrPx(cw);
     if (!cw || el.dataset.w == w) return;
     el.dataset.w = w;
     return bk2Tex(b, k, w).then(src => {
@@ -28579,6 +28583,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          تعود ‎14px‎ عند التثبيت. فكلُّ صفحةٍ تكبر وحدها والفجوةُ ثابتة: تُزاح ‎n·gap·(1 − s)‎ بعدد الصفحات بينها وبين صفحة المؤشّر */
       let ref = g.pages[0], bd = Infinity;
       for (const pq of g.pages) { const q = pq[1], d = ay < q.top ? q.top - ay : ay > q.bottom ? ay - q.bottom : 0; if (d < bd) { bd = d; ref = pq; } }
+      g.ref = ref && ref[0];
       const P0 = g.pages[0] && g.pages[0][1], P1 = g.pages[1] && g.pages[1][1];
       g.gap = P0 && P1 ? Math.max(0, P1.top - P0.bottom) : 14;
       g.pages.forEach(pq => { const q = pq[1], rq = ref[1]; pq[2] = Math.round((q.top - rq.top) / ((rq.height + g.gap) || 1)); });
@@ -28594,6 +28599,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     for (const [el, q, n] of g.pages) { el.style.transformOrigin = `${X - q.left}px ${g.ay - q.top}px`; el.style.transform = `translateY(${(n || 0) * g.gap * (1 - s)}px) scale(${s})`; }
     { const v = b.scrTop && b.scrTop.querySelector('.cbk-scr__zv'); if (v) v.textContent = Math.round(g.z * 100) + '%'; }
+    bkScrSharp(b, g, w);
     bkScrPing(b, true);
     clearTimeout(g.t); g.t = setTimeout(() => bkScrPinchEnd(b), 160);
     if (s < .6 || s > 1.7) bkScrPinchEnd(b);   /* (حدُّ ما تُغطّيه الصفحاتُ المأخوذة: يُثبَّت ويبدأ من جديد) */
@@ -28632,6 +28638,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopPropagation();
     if (dir) bkScrStep(b, dir); else bkScrZoomTo(b, 1);
   }, true);
+  /* ٢) تحديثٌ في أثناء التقريب: إذا جاوز التقريبُ الدقّةَ الاحتياطيّة (صورةُ الصفحة أقلُّ من بكسلات عرضها الآن) تُرسم الصفحةُ التي
+     تحت المؤشّر بدقّة المقاس الذي تمضي إليه وتُبدَّل ما إن تجهز — واليدُ ما زالت تقرّب. رسمٌ واحدٌ في كلّ مرّة */
+  function bkScrSharp(b, g, w) {
+    const el = g.ref; if (!el || g.hiBusy || !b.doc) return;
+    const cv = el.querySelector(':scope > canvas'), need = w * (window.devicePixelRatio || 1);
+    if (cv && cv.width >= need * .98) return;
+    const tw = bkScrPx(w), k = +el.dataset.k; if (cv && cv.width >= tw) return;
+    g.hiBusy = true;
+    bk2Tex(b, k, tw).then(src => {
+      if (!src || !b.scroll || !el.isConnected) return;
+      const now = el.querySelector(':scope > canvas'); if (now && now.width >= src.width) return;
+      const c = document.createElement('canvas'); c.width = src.width; c.height = src.height; c.getContext('2d').drawImage(src, 0, 0);
+      if (now) now.replaceWith(c); else el.prepend(c);
+      el.dataset.w = tw;
+    }).catch(() => {}).then(() => { g.hiBusy = false; });
+  }
   function bkScrPinchEnd(b) {
     const g = b.zg; if (!g) return; b.zg = null; clearTimeout(g.t);
     for (const [el] of g.pages) el.style.transform = el.style.transformOrigin = '';
@@ -28668,6 +28690,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const q2 = ref.getBoundingClientRect();
     if (q2.width > sc.clientWidth) sc.scrollLeft += q2.left + ux * q2.width - ax;
     clearTimeout(b.scrZT);
+    /* ٣) بعد التثبيت تُعاد الرسمةُ في الحال (كانت تنتظر ‎180ms‎) — الأقربُ إلى موضع القارئ أوّلًا، والصورةُ القديمةُ باقيةٌ حتى تجهز */
     b.scrZT = setTimeout(() => {
       if (!b.scroll || !b.scr) return;
       const r = b.scr.getBoundingClientRect();
@@ -28677,7 +28700,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (q.bottom < r.top - 900 || q.top > r.bottom + 900) { el.dataset.w = ''; el.replaceChildren(); return; }   /* بعيدةٌ: تُرسم حين يُوصل إليها */
         bkScrPaint(b, el);
       });
-    }, 180);
+    }, 0);
   }
   /* ===== شريطا تمريرٍ عائمان فوق الورق (طلبُ صاحب الموقع) =====
      شريطُ المتصفّح يحجز مجراه فيبقى في يسار المساحة وأسفلها شريطٌ بلون المساحة لا يبلغه الورق. فيُخفى، ويُرسم مكانَه
