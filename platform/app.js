@@ -27764,7 +27764,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       b.scrPend = false;
       const one = m === 'one';
-      if (b.scroll) { bkScrOut(b, one); return; }
+      if (b.scroll) { if (!bkScrOutMorph(b, one)) bkScrOut(b, one); return; }
       if (b.mx) { b.mxWant = one; return; }
       if (!!b.one !== one) bk2Switch(b, one);
     });
@@ -27969,6 +27969,104 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       if (ov) ov.animate([{ opacity: 0 }, { offset: .6, opacity: 0 }, { opacity: 1 }], o);
     };
+  }
+  /* ===== خطّةُ الرجوع إلى الكتاب · المرحلتان ١ و٢ (طلبُ صاحب الموقع) =====
+     كانت لقطةُ الصفحات تثبت جامدةً حتى يُبنى الكتابُ تحتها (~ثانيتين)، ثمّ تذوب صورةٌ في صورة، وثانيةُ الصفحتين تطلع من العدم.
+     فالآن: لكلّ صفحةٍ ظاهرةٍ نسخةٌ طائرة (عنصرٌ بصورتها لا لقطةٌ واحدة) في مكانها، وتبدأ الحركةُ مع الضغطة —
+       · صفحةُ القارئ وجارتُها في الفتحة (التي تحتها أو فوقها في القائمة) تنزلقان وتصغران كلٌّ إلى نصفها من الكتاب،
+       · وما سواهما يبتعد إلى فوق وإلى تحت ويذوب،
+     ومكانُ الصفحتين في الكتاب معروفٌ قبل بنائه: آخرُ ما رُسم عليه الكتابُ في هذه المساحة (‎b.geo‎) إن لم يتغيّر قدرُها،
+     وإلّا يُقدَّر من قدرها ونسبة الصفحة. والكتابُ يُبنى خفيًّا في أثناء ذلك، فإذا انتهت الحركةُ وجهز ظهر تحتهما
+     وصُحّح مكانُهما إلى مكانه الحقيقيّ إن اختلف، ثمّ تذوبان (المرحلة ٤ مبدئيًّا) */
+  function bkGeoSave(b, g) {
+    try {
+      const src = b.view && b.view.closest('.pk-src'); if (!src || !g || g.dead) return;
+      const P = src.getBoundingClientRect(), rs = bkPgScreens(g); if (!rs.length || !P.width) return;
+      b.geo = { one: !!g.one, pw: P.width, ph: P.height, list: rs.map(r => ({ k: r.k, x: r.l - P.left, y: r.t - P.top, w: r.w, h: r.h })) };
+    } catch (e) {}
+  }
+  function bkGeoPredict(b, k, one, P) {
+    const G = b.geo, out = [];
+    if (G && G.one === one && Math.abs(G.pw - P.width) < 4 && Math.abs(G.ph - P.height) < 4 && G.list.length) {
+      const same = G.list.find(r => (r.k - k) % 2 === 0) || G.list[0];
+      out.push({ k, l: P.left + same.x, t: P.top + same.y, w: same.w, h: same.h });
+      if (!one) { const o = G.list.find(r => r !== same); if (o) { const pk = k + (o.k - same.k); if (pk >= 1 && pk <= (b.n || 1)) out.push({ k: pk, l: P.left + o.x, t: P.top + o.y, w: o.w, h: o.h }); } }
+      return out;
+    }
+    /* تقديرٌ من قدر المساحة: الفتحةُ في وسطها، والأصغرُ رقمًا يمينًا (عربيّ) */
+    const ar = b.ar || 1 / Math.SQRT2, n = one ? 1 : 2;
+    const h = Math.min(P.height * .8, P.width * .9 / (n * ar)), w = h * ar, x0 = P.left + (P.width - n * w) / 2, y0 = P.top + (P.height - h) / 2;
+    if (one) return [{ k, l: x0, t: y0, w, h }];
+    const pk = k % 2 ? k + 1 : k - 1, lo = Math.min(k, pk);
+    [k, pk].filter(q => q >= 1 && q <= (b.n || 1)).forEach(q => out.push({ k: q, l: q === lo ? x0 + w : x0, t: y0, w, h }));
+    return out;
+  }
+  function bkScrOutMorph(b, one) {
+    if (bkReduce() || !b.scr || !b.view) return false;
+    const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
+    const P = src.getBoundingClientRect(), R = sc.getBoundingClientRect(); if (!P.width || !R.height) return false;
+    const k = Math.max(1, b.pos || 1), T = bkGeoPredict(b, k, one, P); if (!T.length) return false;
+    /* طبقةٌ ثابتةٌ مقصوصةٌ على المساحة: فيها النسخُ الطائرة (فوق الكتاب الذي يُبنى تحتها) */
+    const L = document.createElement('div'); L.className = 'bk-fly-layer'; L.setAttribute('aria-hidden', 'true');
+    L.style.clipPath = `inset(${P.top}px ${innerWidth - P.right}px ${innerHeight - P.bottom}px ${P.left}px round 14px)`;
+    document.body.appendChild(L);
+    const clone = (el, r) => {
+      const d = document.createElement('div'); d.className = 'bk-fly-pg';
+      Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
+      const c0 = el && el.querySelector(':scope > canvas');
+      let srcCv = c0 && c0.width ? c0 : null;
+      if (!srcCv) { const kk = el ? +el.dataset.k : 0; srcCv = (b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)) || null; }
+      if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
+      L.appendChild(d); return d;
+    };
+    const D = Math.round(BK_SX * 1.15 * (window.__pkfxSlow || 1)), E = BK_SXE, moving = new Map(), runs = [];
+    const tk = new Set(T.map(t => t.k));
+    /* الصفحاتُ الظاهرةُ وما يُنقل منها (صفحتا الفتحة ولو كانت إحداهما خارج النظر: تأتي منه) */
+    const pages = [...sc.querySelectorAll('.cbk-scr__pg')];
+    pages.forEach(el => {
+      const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
+      if (!vis && !tk.has(kk)) return;
+      const t = T.find(x => x.k === kk);
+      if (t) {
+        const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
+        d.style.zIndex = kk === k ? 3 : 2;
+        runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
+        moving.set(kk, d);
+      } else {
+        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = kk < k;
+        runs.push(d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${up ? -70 : 70}px) scale(.96)`, opacity: 0 }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }));
+      }
+    });
+    /* صفحةُ الفتحة التي ليست في القائمة الظاهرة بعدُ (نادر): تأتي بيضاءَ من تحت */
+    T.filter(t => !moving.has(t.k)).forEach(t => { const d = clone(null, t); runs.push(d.animate([{ transform: 'translateY(60px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D, easing: E, fill: 'both' })); moving.set(t.k, d); });
+    let ng = null, animDone = false, fin = false;
+    const finish = () => {
+      if (fin) return; fin = true;
+      if (b.gl && !b.gl.dead) b.gl.el.style.opacity = '';
+      const F = ng ? bkPgScreens(ng) : [];
+      const outs = [];
+      moving.forEach((d, kk) => {
+        const f = F.find(x => x.k === kk), r = d.getBoundingClientRect();
+        if (f && (Math.abs(f.l - r.left) > 1 || Math.abs(f.t - r.top) > 1 || Math.abs(f.w - r.width) > 1)) {
+          d.getAnimations().forEach(a => a.cancel());
+          Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' });
+          outs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - f.l}px, ${r.top - f.t}px) scale(${r.width / f.w}, ${r.height / f.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: 140 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'both' }).finished);
+        }
+      });
+      Promise.all(outs).catch(() => {}).then(() => {
+        const a = L.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' });
+        a.finished.then(() => L.remove(), () => L.remove());
+      });
+    };
+    const maybe = () => { if (animDone && ng) finish(); };
+    Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
+    setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
+    b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
+    const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
+    setTimeout(sharp, 4000);
+    /* بناءُ الكتاب بعد أوّل إطارٍ للحركة: كان يُبنى في المهمّة نفسِها فيتأخّر أوّلُ إطارٍ حتى ينتهي (~٤٠٠ms) */
+    requestAnimationFrame(() => requestAnimationFrame(() => bkScrOff(b, one, { quiet: true, near: true, onReady: g => { ng = g; maybe(); setTimeout(sharp, 400); } })));
+    return true;
   }
   /* الخروجُ: من الصفحات المتتالية إلى الكتاب — يُبنى الكتابُ خفيًّا تحت لقطة الصفحات، فإذا جهز طار إليه */
   function bkScrOut(b, one) {
@@ -28570,6 +28668,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const off = () => {
         if (done) return; done = true;
         if (b.gl !== g) return;
+        setTimeout(() => bkGeoSave(b, g), 60);
         if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
       };
       /* (المرحلة ٤) والآتي من الصفحات المتتالية لا ينتظر إلّا صفحاتِ موضعه — والبقيّةُ تُرسم وهو ظاهر */
