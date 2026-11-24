@@ -20195,3 +20195,6 @@ html.pk-ptr .pk-fstrip .pg-face:focus-visible { outline: none; }
 /* كلماتُ اسم المجلد وهي تنساب (‎pkWordsFly‎): ‎inline-block‎ ما دامت الحركة وحدها — خارجها تبقى نصًّا عاديًّا (والاختصارُ بـ‎…‎ كما هو) */
 .pk-fstrip .pg-nm > .pg-w { position: relative; }   /* (‎left/top‎ تُحرّكها وهي ‎inline‎) */
 .pg-face.pg-wfx > .pg-nm { overflow: visible; }
+
+/* النسخةُ الصغيرةُ لصفحةٍ لم تُرسم بعدُ (‎bkScrThumbPut‎): مكبَّرةٌ بنعومةٍ وضبابيّةٌ قليلًا حتى يحلّ محلَّها رسمُها */
+.cbk-scr__pg > canvas.cbk-thumb { filter: blur(1.2px); image-rendering: auto; }

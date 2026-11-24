@@ -26793,6 +26793,38 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (k !== 'cover' && cv && cv.width) { b.pgOut = b.pgOut || new Map(); b.pgOut.delete(k); b.pgOut.set(k, cv); if (b.pgOut.size > 16) b.pgOut.delete(b.pgOut.keys().next().value); }
     return cv;
   }
+  /* ===== خطّةُ التحوّل · المرحلة ٥: التمريرُ السريعُ بلا هيكلٍ رماديّ (طلبُ صاحب الموقع) =====
+     في الفراغ تُرسم لكلّ صفحةٍ نسخةٌ صغيرة جدًّا (‎~140px‎، بتحديداتها) — الأقربُ إلى موضع القارئ أوّلًا، واحدةٌ في كلّ فراغ.
+     فإذا اقتربت صفحةٌ لم تُرسم بعدُ (أو طُرحت صورتُها لبعدها) وُضعت نسختُها الصغيرةُ مكبَّرةً ضبابيّةً حالًا، ثمّ يحلّ محلَّها
+     رسمُها بدقّتها. والهيكلُ الرماديُّ لا يبقى إلّا لصفحةٍ لم تبلغها النسخُ بعد */
+  const BK_THUMB_W = 140;
+  function bkScrThumbs(b) {
+    if (!b.scroll || !b.doc || b.thumbRun) return;
+    b.thumbs = b.thumbs || new Map(); b.thumbRun = true;
+    const idle = window.requestIdleCallback || (f => setTimeout(() => f({ timeRemaining: () => 8 }), 120));
+    const next = () => {
+      if (!b.scroll || !b.doc) { b.thumbRun = false; return; }
+      const n = Math.min(b.n || 0, 600), at = b.pos || 1;
+      let k = 0, bd = 1e9;
+      for (let i = 1; i <= n; i++) if (!b.thumbs.has(i)) { const d = Math.abs(i - at); if (d < bd) { bd = d; k = i; } }
+      if (!k) { b.thumbRun = false; return; }
+      b.thumbs.set(k, null);   /* (قيد الرسم) */
+      b.doc.getPage(k).then(pg => {
+        const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: BK_THUMB_W / v1.width });
+        const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+        const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+        return pg.render({ canvasContext: cx, viewport: vp }).promise.then(() => { try { if (hlMarksOn(b, k).length) hlPaint(b, k, cv); } catch (e) {} b.thumbs.set(k, cv);
+          const el = b.scr && b.scr.querySelector(`.cbk-scr__pg[data-k="${k}"]`); if (el) bkScrThumbPut(b, el); });
+      }).catch(() => { b.thumbs.delete(k); }).then(() => idle(next, { timeout: 1500 }));
+    };
+    idle(next, { timeout: 1500 });
+  }
+  function bkScrThumbPut(b, el) {
+    if (!b.thumbs || !el.isConnected || el.querySelector(':scope > canvas')) return;
+    const t = b.thumbs.get(+el.dataset.k); if (!t) return;
+    const c = document.createElement('canvas'); c.width = t.width; c.height = t.height; c.dataset.seed = '1'; c.className = 'cbk-thumb';
+    c.getContext('2d').drawImage(t, 0, 0); el.prepend(c);
+  }
   function bkScrSeed(b, k0) {
     if (!b.scr) return;
     for (let k = Math.max(1, k0 - 2); k <= Math.min(b.n || 1, k0 + 3); k++) {
@@ -27783,6 +27815,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.view.pkBk = b;
     b.scr = sc; b.scrOv = ov; b.scrTop = top; b.scrInd = top.querySelector('.cbk-scr__ind'); b.scrAt = null;
     bkScrSeed(b, k0);
+    bkScrThumbs(b);
     b.tlPages = new Map(); b.tlText = b.tlText || new Map();
     bkScrBars(b);
     requestAnimationFrame(() => bkScrFit(b));
@@ -27798,10 +27831,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrZoom(b, b.scrZ * Math.exp(-d / 200), zAt); });
     }, { passive: false });
     sc.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === '0') { e.preventDefault(); bkScrZoom(b, 1); } });
-    b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) bkScrPaint(b, en.target); }), { root: sc, rootMargin: '900px 0px' });
+    b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { bkScrThumbPut(b, en.target); bkScrPaint(b, en.target); } }), { root: sc, rootMargin: '900px 0px' });
     b.scrFar = new IntersectionObserver(es => es.forEach(en => {
       if (en.isIntersecting || !en.target.dataset.w) return;
-      en.target.dataset.w = ''; en.target.replaceChildren();   /* بعيدةٌ جدًّا: تُطرح صورتُها (الذاكرة) وتُرسم إن عاد إليها */
+      en.target.dataset.w = ''; en.target.replaceChildren(); bkScrThumbPut(b, en.target);   /* بعيدةٌ جدًّا: تُطرح صورتُها (الذاكرة) وتُرسم إن عاد إليها */
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
