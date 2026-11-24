@@ -18608,10 +18608,13 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
    (‎onerror‎ ينزع ‎bk--img‎) عاد المرسومُ كما كان */
 :root { --bk-gh1: rgba(44, 94, 101, .22); --bk-gh2: rgba(44, 94, 101, .08); --bk-ghr: #2c5e65; }
 html[data-theme="dark"] { --bk-gh1: rgba(127, 192, 199, .2); --bk-gh2: rgba(127, 192, 199, .06); --bk-ghr: #7fc0c7; }
+.bk.bk--wait > .bkface, .bk.bk--wait::before, .bk.bk--wait::after,
 .bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img),
 .bk.bk--img:has(> .bkface--img > img:not(.is-in))::before,
 .bk.bk--img:has(> .bkface--img > img:not(.is-in))::after { background: var(--bk-gh1); box-shadow: none; animation: bkGhost 1.4s ease-in-out infinite; }
+.bk.bk--wait > .bkface > *,
 .bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img) > * { visibility: hidden; }
+.bk.bk--wait > .bkface::after,
 .bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img)::after {
   content: ''; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
   border: 2px solid var(--bk-gh1); border-top-color: var(--bk-ghr); animation: bkGhostRing .8s linear infinite; }

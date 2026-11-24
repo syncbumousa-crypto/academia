@@ -728,7 +728,7 @@
         + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\')})"'
         + ' onerror="' + fail + '">' + inner + '</span>'
       : '';
-    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : '') + '">'
+    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : (() => { try { return coverWait(code); } catch (e) { return false; } })() ? ' bk--wait' : '') + '">'
       + face + shot + (op.after || '') + '</span>';
   }
 
@@ -867,10 +867,20 @@
      مادّتان لكلٍّ مساهماتُها، فتثبيتُ مساهمةٍ في إحداهما لا يعيّن غلافَ الأخرى —
      وإلّا صار الغلافُ للحزمة لا للمادّة. ومن أراد للمعمل غلافًا ثبّت له مساهمةً
      في مفتاحه هو. */
+  /* ===== وقبل أن يصل جوابُ الأغلفة (‎coversPull‎) — طلبُ صاحب الموقع =====
+     كانت الكتبُ تُرسم أوّلَ الموقع بالغلاف البديل، ثمّ يصل الجوابُ فيقال «لهذا صورة» فتصير شبحًا ثمّ صورة.
+     فقائمةُ الأغلفة تُحفظ في الجهاز (‎ac.covers1‎) كلّما وصلت: وبها يُعرف من أوّل لحظةٍ أيُّ الكتب له صورة (فيبدأ شبحًا
+     يحمّلها) وأيُّها لا (فبديلُه من أوّل لحظة). ولا قائمةَ محفوظةً بعدُ (أوّلُ زيارة): كلُّ كتابٍ شبحٌ حتى يصل الجواب */
+  const COVERS_MEMO_K = 'ac.covers1';
+  let coversDone = false, coversMemo;
+  const coversMemoGet = () => { if (coversMemo === undefined) { try { coversMemo = JSON.parse(localStorage.getItem(COVERS_MEMO_K) || 'null'); } catch (e) { coversMemo = null; } } return coversMemo; };
+  const coverWait = code => !coversDone && typeof SRV_ON === 'function' && SRV_ON() && !coversMemoGet() && !coverPost(code);
   function coverOf(code) {
     const cp = coverPost(code);
-    return cp ? { via: 'pin', img: assetURL(cp.data.bookImg), pid: cp.id }
-              : { via: 'none', img: '', pid: '' };
+    if (cp) return { via: 'pin', img: assetURL(cp.data.bookImg), pid: cp.id };
+    const m = !coversDone && coversMemoGet();
+    if (m && m[code]) return { via: 'memo', img: assetURL(m[code]), pid: '' };
+    return { via: 'none', img: '', pid: '' };
   }
   const coverSrc = coverOf;
   const imgOf = code => coverSrc(code).img;
@@ -37831,17 +37841,31 @@ void main() {
 
      ولا تُجذب متونٌ ههنا: عنوانُ الصورة واسمُ الكتاب وحدَهما. */
   let coversPulled = 0;
+  /* إعادةُ رسم الكتب حيث تُرى — والكتبُ التي لم يتغيّر بناؤها تبقى كما هي (‎renderWindow‎) */
+  function coversRedraw(on) {
+    if (!on) return;
+    if (typeof mkTab === 'object' && mkTab && mkTab.render) mkTab.render();
+    if (typeof mkModal === 'object' && mkModal && mkModal.render) mkModal.render();
+    if (typeof selTerm !== 'undefined' && selTerm && typeof renderFrame === 'function') renderFrame();
+    if (typeof renderTerms === 'function') renderTerms();
+  }
   async function coversPull(force) {
     if (!SRV_ON()) return;
     if (!force && coversPulled) return;
     coversPulled = 1;
+    /* (ما دام شبحٌ ينتظر الجواب — أوّلُ زيارة — أو غلافٌ من القائمة المحفوظة: تُعاد الكتبُ حين يصل، ولو لم يتغيّر شيء) */
+    const waited = !coversDone && (!coversMemoGet() || Object.keys(coversMemoGet()).length);
+    const done = () => { coversDone = true; };
     let j;
     try {
       const r = await apiFetch(postsURL('?covers=1'), { credentials: 'same-origin' });
-      if (!r.ok) { coversPulled = 0; return; }
+      if (!r.ok) { coversPulled = 0; done(); return coversRedraw(waited); }
       j = await r.json();
-    } catch (e) { coversPulled = 0; return; }
-    if (!j || !Array.isArray(j.covers)) { coversPulled = 0; return; }
+    } catch (e) { coversPulled = 0; done(); return coversRedraw(waited); }
+    if (!j || !Array.isArray(j.covers)) { coversPulled = 0; done(); return coversRedraw(waited); }
+    { const memo = {}; j.covers.forEach(r => { if (r && r.code && r.data && r.data.bookImg) memo[r.code] = r.data.bookImg; });
+      try { localStorage.setItem(COVERS_MEMO_K, JSON.stringify(memo)); } catch (e) {} coversMemo = memo; }
+    done();
 
     const byCode = {};
     j.covers.forEach(r => { if (r && r.code) byCode[r.code] = r; });
@@ -37873,7 +37897,8 @@ void main() {
       });
       n++;
     });
-    if (n || cut) {
+    if (!(n || cut)) return coversRedraw(waited);
+    {
       save();
       bootMark('covers:' + n + '/' + cut);
       /* وتُعاد الأغلفةُ حيث تُرى: المكتبةُ والسوقُ وإطارُ الترم والركن */
