@@ -12598,7 +12598,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (on) p.data.src = { pdf: (pkSrcMeta(id) || {}).name || null, cover: (pkSrcCovMeta(id) || {}).name || null, ...(L.length > 1 ? { all: L.map(s => pkSrcMeta(s).name) } : {}), ...files };
     else delete p.data.src;
   };
-  async function pkSrcSet(id, file) {
+  async function pkSrcSet(id, file, seed) {
     if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) { toast(T().chNotPdf); return; }
     const key = pkSrcKey(id);
     if (!await chIdb('readwrite', key, file)) { toast(T().chSaveFail); return; }
@@ -12611,7 +12611,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (id !== base) { const xs = ((state.pkSrcX = state.pkSrcX || {})[base] = state.pkSrcX[base] || []); if (!xs.includes(id)) xs.push(id); }
     pkSrcCur[base] = id;
     /* والمصدرُ الجديدُ تستقبله المساحةُ بطريقة الصفحتين دائمًا (طلبُ صاحب الموقع) */
-    if (!was) bkModeSet('two');
+    if (!was && !seed) bkModeSet('two');   /* (لا في بذر العيّنة: لا يُغيّر طريقةَ القارئ) */
     /* ولا تنفتح أيُّ قائمةٍ بعد الإضافة (طلبُ صاحب الموقع) — النوعُ يُخمَّن من اسم الملفّ ويُغيَّر من قائمة المصدر متى شاء */
     pkSrcMark(id); save(); renderCmSection();
     pkSrcCloud(id, file);   /* وإلى السحابة في الخلفية — لا ينتظره العرض */
@@ -30306,14 +30306,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       } else { open.delete(par); delete pkSolo[id]; }   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       const pubPick = !pf.closest('.pk--edit');
-      if (pubPick) { pkAwait.delete(id); hlFill.add(id); }
-      requestAnimationFrame(() => hlCallRun(id));   /* والكتابُ مغلقٌ على الطاولة: يستدعي المجلدُ تحديداتِ بطائقه (بعد أن يعود الكتابُ إلى وعائه المرسوم) */
+      /* ‏تطيرُ التحديداتُ من الكتاب إلى البطائق والكتابُ بطريقة الصفحتين وحدها (طلبُ صاحب الموقع) — وفيما سواها تظهر البطائقُ حالًا */
+      const fly = bkModeGet() === 'two' && !!pkSplitOn(id);
+      if (pubPick) { pkAwait.delete(id); if (fly) hlFill.add(id); }
+      if (fly) requestAnimationFrame(() => hlCallRun(id));   /* والكتابُ مغلقٌ على الطاولة: يستدعي المجلدُ تحديداتِ بطائقه (بعد أن يعود الكتابُ إلى وعائه المرسوم) */
       /* ===== وقامةُ الشريط تنتقل بنعومة (طلبُ صاحب الموقع) =====
          فتحُ مجلدٍ فيه مجلداتٌ يُطيل الشريطَ (ومعه المساهمة) وإغلاقُه يُقصّره — كانا يقفزان. فتُقاس القامةُ قبلُ وبعدُ،
          ويُحرَّك الشريطُ بينهما (يُقصّ ما لم يبلغه)، والكتلُ تُرسم حيّةً معه */
       const st0 = pf.closest('.pk-fstrip'), h0 = st0 ? st0.getBoundingClientRect().height : null;
       renderCmSection();
-      if (pubPick) hlFillHide(id);   /* قبل أن يُرسم إطار: الصفوفُ خفيّةٌ حتى تملأها تظليلاتُها */
+      if (pubPick && fly) hlFillHide(id);   /* قبل أن يُرسم إطار: الصفوفُ خفيّةٌ حتى تملأها تظليلاتُها */
       const st1 = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"]`);
       /* ===== ولا شريطَ تمريرٍ عابر (طلبُ صاحب الموقع) =====
          المقاساتُ النهائيّة (قدرُ اسم كلّ مغلق وتسطيحُ اللوح الضيّق) كانت تُحسب في الإطار التالي (‎pkFitSoon‎)، فيُرسم
@@ -41477,7 +41479,7 @@ void main() {
     if (S.pdf) {
       try {
         const r = await fetch(assetURL('assets/demo/' + S.pdf));
-        if (r.ok) await pkSrcSet(p.id, new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }));
+        if (r.ok) await pkSrcSet(p.id, new File([await r.blob()], S.pdfName || S.pdf, { type: 'application/pdf' }), true);
       } catch (e) {}
     }
     pkSplit[p.id] = true;   /* والكتابُ ظاهرٌ بجانب الملخّص: نقرُ مجلدٍ يقلّبه ويُطلع تظليلاتِه */
