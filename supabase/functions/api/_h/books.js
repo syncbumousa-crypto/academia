@@ -65,7 +65,8 @@ const BUCKET = "books";
    والحقّ (‎book_access‎) يُكتسب **برفع الملفّ نفسِه**: الخادمُ ينزّله ويحسب بصمتَه — لا يكفي إرسالُ البصمة (هي مكشوفةٌ في المساهمة).
      POST {h,size,type,priv:1}  ⇐ إذنُ رفعٍ إلى مسارٍ مؤقّت (‎tmp/<uid>/…‎)
      POST {verify:1,h,tmp}      ⇐ يُحسب بصمةُ المؤقّت؛ تطابقت ⇐ يُنقل إلى ‎<h>‎ ويُسجَّل الحقّ وتُحذف أيُّ نسخةٍ عامّةٍ بالبصمة نفسِها
-     GET ?h=                    ⇐ له حقّ ⇐ رابطٌ موقَّع ٦٠ ثانية · وإلّا ٤٠٣ (ولا يُقال أموجودٌ هو أم لا)
+     GET ?h=[&src=]             ⇐ له حقّ ⇐ رابطٌ موقَّع ٦٠ ثانية · وإلّا نسختُه هو لهذا المصدر (‎book_own‎) · وإلّا ٤٠٣
+     POST {own:1,h,src}         ⇐ نسختي لهذا المصدر (طبعةٌ أخرى ببصمةٍ أخرى — وقد رُفعت وتُحقّق منها): تتزامن بين أجهزتي
      POST {pv:1,h}              ⇐ لمن له حقّ: إذنُ رفع المصغّرات العامّة ‎pv/<h>.webp‎ (أشكالُ الصفحات بلا نصٍّ يُقرأ)
      POST {unpriv:1,h}          ⇐ لمن له حقّ: يعود الملفُّ عامًّا (غُيّر نوعُ المصدر عن «كتاب») */
 const PRIV = "books-private";
@@ -108,9 +109,15 @@ export async function onRequest({ request, env }) {
 
     /* ===== القراءة: رابطٌ موقَّعٌ قصير لمن له حقّ ===== */
     if (request.method === "GET") {
-      const h = String(new URL(request.url).searchParams.get("h") || "").toLowerCase();
+      const sp = new URL(request.url).searchParams;
+      let h = String(sp.get("h") || "").toLowerCase();
+      const src = String(sp.get("src") || "").slice(0, 120);
       if (!/^[0-9a-f]{64}$/.test(h)) return J({ error: "hash" }, 400);
-      if (!(await canRead(h, s.uid))) return J({ error: "forbidden" }, 403);
+      if (!(await canRead(h, s.uid))) {
+        const o = src ? await db.prepare("SELECT h FROM book_own WHERE uid = ? AND src = ?").bind(s.uid, src).first() : null;
+        if (!o || !(await canRead(o.h, s.uid))) return J({ error: "forbidden" }, 403);
+        h = o.h;
+      }
       await ensureBucket(base, key, PRIV, false);
       const r = await fetch(base + "/storage/v1/object/sign/" + PRIV + "/" + h, {
         method: "POST", headers: Object.assign({ "content-type": "application/json" }, AH), body: JSON.stringify({ expiresIn: 60 }) });
@@ -146,6 +153,15 @@ export async function onRequest({ request, env }) {
       await db.prepare("INSERT INTO book_priv (h, ts) VALUES (?, ?) ON CONFLICT (h) DO NOTHING").bind(h, t).run();
       await db.prepare("INSERT INTO book_access (h, uid, ts) VALUES (?, ?, ?) ON CONFLICT (h, uid) DO NOTHING").bind(h, s.uid, t).run();
       await del(BUCKET, [h]);   /* ولا تبقى نسخةٌ عامّة بالبصمة نفسِها */
+      return J({ h, ok: true });
+    }
+
+    /* ===== نسختي لمصدرٍ بعينه (طبعةٌ أخرى): لمن له حقٌّ في ملفّها ===== */
+    if (b.own) {
+      const src = String(b.src || "").slice(0, 120);
+      if (!src) return J({ error: "src" }, 400);
+      if (!(await canRead(h, s.uid))) return J({ error: "forbidden" }, 403);
+      await db.prepare("INSERT INTO book_own (uid, src, h, ts) VALUES (?, ?, ?, ?) ON CONFLICT (uid, src) DO UPDATE SET h = EXCLUDED.h, ts = EXCLUDED.ts").bind(s.uid, src, h, now()).run();
       return J({ h, ok: true });
     }
 

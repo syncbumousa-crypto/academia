@@ -12028,6 +12028,76 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!b || !/^[0-9a-f]{64}$/.test(String(h || ''))) return null;
     try { const r = await fetch(b + h); return r.ok ? await r.blob() : null; } catch (e) { return null; }
   }
+  /* ===== الكتبُ المحميّة (ROADMAP-PROTECT) =====
+     مصدرٌ نوعه «كتاب» يُرفع إلى مستودعٍ خاصّ ولا يُقرأ إلّا برابطٍ موقَّعٍ قصيرٍ لمن له حقّ — والحقُّ برفع الملفّ نفسِه
+     (الخادمُ يحسب بصمته). ولا رابطَ عامًّا له أبدًا */
+  const bookPriv = sid => ((pkSrcMeta(sid) || {}).type || 'book') === 'book';
+  async function bookUpPriv(blob, src) {
+    if (!blob || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return null;
+    try {
+      const h = await bookHash(blob);
+      const post = body => apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      let r = await post({ h, size: blob.size, type: 'application/pdf', priv: 1 });
+      if (!r.ok) { bootMark('bookp:' + r.status); return null; }
+      const j = await r.json();
+      if (!j.exists) {
+        const u = await fetch(j.upload, { method: 'PUT', headers: { 'content-type': 'application/pdf' }, body: blob });
+        if (!u.ok) { bootMark('bookp:put:' + u.status); return null; }
+        r = await post({ h, verify: 1, tmp: j.tmp });
+        if (!r.ok) { bootMark('bookp:verify:' + r.status); return null; }
+      }
+      if (src) await post({ h, own: 1, src }).catch(() => {});
+      return h;
+    } catch (e) { return null; }
+  }
+  /* القراءةُ: ‎{blob}‎ · ‎{forbidden}‎ (لا حقّ: العرضُ المحميّ) · ‎{}‎ (تعثّرت الشبكة) */
+  async function bookPrivGet(h, src) {
+    if (!h || typeof SRV_ON !== 'function' || !SRV_ON()) return {};
+    try {
+      const r = await apiFetch(booksURL() + '?h=' + h + (src ? '&src=' + encodeURIComponent(src) : ''), { credentials: 'same-origin', cache: 'no-store' });
+      if (r.status === 401 || r.status === 403) return { forbidden: true };
+      if (!r.ok) return {};
+      const j = await r.json(); if (!j.url) return {};
+      const f = await fetch(j.url); if (!f.ok) return {};
+      return { blob: await f.blob(), h: j.h };
+    } catch (e) { return {}; }
+  }
+  /* تغيّر نوعُ المصدر: إلى «كتاب» ⇐ يُرفع خاصًّا (والخادمُ يحذف العامّ) · وعنه ⇐ يعود عامًّا */
+  async function bkPrivMove(sid, was) {
+    const m = pkSrcMeta(sid), now = bookPriv(sid); if (!m || !m.h || was === now) return;
+    if (now) { const blob = await chIdb('readonly', pkSrcKey(sid)); if (blob) await bookUpPriv(blob); return; }
+    try { await apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ h: m.h, unpriv: 1 }) }); } catch (e) {}
+  }
+  /* ===== المصغّراتُ العامّة للعرض المحميّ: كلُّ صفحةٍ بعرض ‎24px‎ (أشكالٌ بلا كلمةٍ تُقرأ) في صورةٍ واحدة =====
+     يصنعها أوّلُ متصفّحٍ يفتح الملفَّ وله حقّ، مرّةً لكلّ بصمة */
+  const PV_TW = 24, PV_COLS = 10, pvDone = new Set();
+  const pvURL = h => BOOKS_PUB() + 'pv/' + h + '.webp';
+  async function pvEnsure(h, doc) {
+    if (!h || pvDone.has(h) || !doc || doc.__prot || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return;
+    pvDone.add(h);
+    try { const hd = await fetch(pvURL(h), { method: 'HEAD', cache: 'no-store' }); if (hd.ok) return; } catch (e) { return; }
+    const idle = () => new Promise(res => (window.requestIdleCallback || (f => setTimeout(f, 60)))(res, { timeout: 800 }));
+    try {
+      const n = doc.numPages, p1 = await doc.getPage(1), v1 = p1.getViewport({ scale: 1 });
+      const TH = Math.max(8, Math.round(PV_TW * v1.height / v1.width)), rows = Math.ceil(n / PV_COLS);
+      const sh = document.createElement('canvas'); sh.width = PV_COLS * PV_TW; sh.height = rows * TH;
+      const sc = sh.getContext('2d'); sc.fillStyle = '#ffffff'; sc.fillRect(0, 0, sh.width, sh.height);
+      const t = document.createElement('canvas'); t.width = PV_TW * 2; t.height = TH * 2;
+      for (let k = 1; k <= n; k++) {
+        if (k % 4 === 1) await idle();
+        const pg = await doc.getPage(k), vp = pg.getViewport({ scale: t.width / pg.getViewport({ scale: 1 }).width });
+        const tc = t.getContext('2d'); tc.fillStyle = '#fff'; tc.fillRect(0, 0, t.width, t.height);
+        await pg.render({ canvasContext: tc, viewport: vp }).promise;
+        sc.drawImage(t, 0, 0, t.width, t.height, ((k - 1) % PV_COLS) * PV_TW, Math.floor((k - 1) / PV_COLS) * TH, PV_TW, TH);
+      }
+      const blob = await new Promise(res => sh.toBlob(res, 'image/webp', .6));
+      if (!blob) return;
+      const r = await apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ h, pv: 1 }) });
+      if (!r.ok) return;
+      const j = await r.json();
+      await fetch(j.upload, { method: 'PUT', headers: { 'content-type': 'image/webp', 'x-upsert': 'true' }, body: blob });
+    } catch (e) { pvDone.delete(h); }
+  }
   /* غلافُ المصدر: من المتصفّح إن وُجد، وإلّا من السحابة ثمّ يُحفظ فيه (ROADMAP-CLOUD-NEXT ١).
      وما ليس غلافَ مصدرٍ (غلافُ الشابتر) يُقرأ كما كان */
   async function covBlob(key) {
@@ -12103,7 +12173,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ملفٌّ أُضيف للتوّ: يُرفع في الخلفية، ثمّ تُكتب بصمتُه في المساهمة فتُدفع */
   async function pkSrcCloud(sid, blob) {
     if (!(pkSrcMeta(sid) || {}).name || pkSrcMeta(sid).h) return;
-    const h = await bookUp(blob, 'application/pdf');
+    const h = bookPriv(sid) ? await bookUpPriv(blob) : await bookUp(blob, 'application/pdf');
     const m = pkSrcMeta(sid);
     if (!h || !m) return;
     m.h = h;
@@ -12142,7 +12212,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (!p || !isMine(p)) continue;
         const blob = await chIdb('readonly', pkSrcKey(sid));
         if (!blob) continue;
-        const h = await bookUp(blob, 'application/pdf');
+        const h = bookPriv(sid) ? await bookUpPriv(blob) : await bookUp(blob, 'application/pdf');
         if (!h) continue;
         m.h = h; up++;
         pkSrcMark(p.id);
@@ -12910,7 +12980,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const r = b.closest('[data-sid]'), s = r ? r.dataset.sid : pkSP.sid, k = b.dataset.psp;
     if (k === 'go') { const id = pkSP.id; pkSrcPopClose(); pkSrcGo(id, s); return; }
     if (k === 'cov' || k === 'type' || k === 'more') { const same = pkSP.sid === s && pkSP.sub === k; pkSP.sub = same ? null : k; pkSP.sid = same ? null : s; pkSP.conf = null; pkSP.pg = 0; pkSrcPopShow(); if (pkSP.sub === 'cov') { const i = document.querySelector('#pk-srcpop [data-pspnum]'); if (i) i.select(); } return; }
-    if (k === 'settype') { const m = pkSrcMeta(s); if (m) { m.type = b.dataset.ty; save(); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
+    if (k === 'settype') { const m = pkSrcMeta(s); if (m) { const was = bookPriv(s); m.type = b.dataset.ty; save(); bkPrivMove(s, was); } pkSP.sub = null; pkSP.sid = null; renderCmSection(); return; }   /* والرسمُ يُحدّث أيقونةَ النوع فوق أيضًا */
     if (k === 'pg') { const inp = P.querySelector('[data-pspnum]'); pkSrcCovPg(s, (+inp.value || 1) + (+b.dataset.d)); return; }
     if (k === 'upcov') { pkSrcCovIn.dataset.pkid = s; pkSrcCovIn.click(); return; }
     if (k === 'gencov') { pkSrcCovGen(s); return; }
@@ -12940,6 +13010,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       try { doc = await chPdfOpen(key); } catch (e) { doc = undefined; }
       if (!view.isConnected) return;
       if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
+      bkProtUI(view, id, doc);
+      if (!doc.__prot && meta && meta.h && bookPriv(id)) (window.requestIdleCallback || setTimeout)(() => pvEnsure(meta.h, doc));
       bkLoadSet(key, 45, 62);
       await pkSrcColorSync(id, doc);
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
@@ -26464,6 +26536,118 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* فتحٌ واحدٌ لكلّ ملفّ: رسماتٌ متزامنة (بعد الرفع خاصّةً) كانت تفتحه كلٌّ وحدها فيصير له مستندان — فيُبنى الكتابُ من أحدهما
      ويُخبَّأ الآخر، ثمّ لا يُعرف الكتابُ القائمُ أنّه للملفّ نفسِه فيُبنى من الصفر في كلّ فتحٍ لمساحته (ثقلُ الحركة) */
   const chPdfOpening = {};
+  const bkPrivOk = {};   /* ‏‎sid → 1‎: أذن الخادمُ بقراءته في هذه الجلسة */
+  /* ===== اللوحُ الجانبيّ وشارةُ «محمي» (الاتجاه د) و«حمّل ملف المصدر» ===== */
+  const PROT_T = () => state.lang === 'en'
+    ? { chip: 'Protected', t: 'This source is hidden to respect copyright.', d: 'If you have the source file, upload it here and the highlights will match it. It is saved to your account only and never published.', b: 'Upload the source file', busy: 'Uploading…', fail: 'Upload failed — try again', diff: n => `Your file has ${n[0]} pages, the source has ${n[1]}. Please check with the contributor about the edition.`, go: 'Continue anyway', bad: 'That is not a PDF file' }
+    : { chip: 'محمي', t: 'هذا المصدر غير مرئي حفاظًا على حقوق الطبع.', d: 'إذا كان لديك ملف المصدر، حمّله من هنا وستتطابق التظليلات معه مباشرة. يُحفظ في حسابك أنت، ولن يُنشر للعامة.', b: 'حمّل ملف المصدر', busy: 'جارٍ الرفع…', fail: 'تعذّر الرفع — حاول مرة أخرى', diff: n => `ملفك عدد صفحاته ${n[0]} وصفحات المصدر ${n[1]}. ننصحك تتأكد من صاحب المساهمة وتتواصل معه بخصوص النسخة.`, go: 'أكمل على أي حال', bad: 'الملف ليس PDF' };
+  const PROT_LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  function bkProtUI(view, sid, doc) {
+    const host = view.parentElement; if (!host) return;
+    let el = host.querySelector(':scope > .pk-prot');
+    if (!doc || !doc.__prot) { if (el) el.remove(); return; }
+    if (el && el.dataset.sid === sid) return;
+    if (el) el.remove();
+    const L = PROT_T();
+    el = document.createElement('div'); el.className = 'pk-prot'; el.dataset.sid = sid;
+    el.innerHTML = `<span class="pk-prot__chip">${PROT_LOCK}${esc(L.chip)}</span>`
+      + `<div class="pk-prot__card"><b>${esc(L.t)}</b><p>${esc(L.d)}</p><p class="pk-prot__msg" hidden></p>`
+      + `<button type="button" class="pk-prot__go" data-protgo hidden>${esc(L.go)}</button>`
+      + `<button type="button" class="pk-prot__up" data-protup>${esc(L.b)}</button></div>`;
+    host.appendChild(el);
+  }
+  let protPick = null, protPend = null;
+  async function protUse(sid, blob, card) {
+    const L = PROT_T(), msg = card.querySelector('.pk-prot__msg'), up = card.querySelector('[data-protup]'), go = card.querySelector('[data-protgo]');
+    msg.hidden = false; msg.textContent = L.busy; up.disabled = true; go.hidden = true;
+    const h = await bookUpPriv(blob, sid);
+    if (!h) { msg.textContent = L.fail; up.disabled = false; return; }
+    const key = pkSrcKey(sid);
+    await chIdb('readwrite', key, blob); bkPrivOk[sid] = 1;
+    if (chPdfDoc[key]) { try { chPdfDoc[key].destroy(); } catch (e) {} delete chPdfDoc[key]; } delete chPdfOpening[key];
+    bkForget(key); renderCmSection();
+  }
+  document.addEventListener('click', async e => {
+    const up = e.target.closest && e.target.closest('#cm-body [data-protup]');
+    const go = !up && e.target.closest && e.target.closest('#cm-body [data-protgo]');
+    if (!up && !go) return;
+    e.preventDefault(); e.stopPropagation();
+    const card = (up || go).closest('.pk-prot'), sid = card.dataset.sid;
+    if (go) { if (protPend && protPend.sid === sid) protUse(sid, protPend.blob, card); return; }
+    if (!protPick) { protPick = document.createElement('input'); protPick.type = 'file'; protPick.accept = 'application/pdf,.pdf'; protPick.hidden = true; document.body.appendChild(protPick); }
+    protPick.value = '';
+    protPick.onchange = async () => {
+      const f = protPick.files && protPick.files[0]; if (!f) return;
+      const L = PROT_T(), msg = card.querySelector('.pk-prot__msg'), gob = card.querySelector('[data-protgo]');
+      if (f.type !== 'application/pdf' && !/\.pdf$/i.test(f.name)) { msg.hidden = false; msg.textContent = L.bad; return; }
+      let n = 0;
+      try { const Lib = await chPdfLib(); const d = await Lib.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise; n = d.numPages; d.destroy(); }
+      catch (er) { msg.hidden = false; msg.textContent = L.bad; return; }
+      const want = (pkSrcMeta(sid) || {}).pages || 0;
+      if (want && n !== want) { protPend = { sid, blob: f }; msg.hidden = false; msg.textContent = L.diff([n, want]); gob.hidden = false; return; }
+      protUse(sid, f, card);
+    };
+    protPick.click();
+  }, true);
+  /* ===== المستندُ البديلُ للكتاب المحميّ (ROADMAP-PROTECT · الاتجاه د) =====
+     بواجهة ‎pdf.js‎ نفسِها (‎numPages · getPage · getViewport · render · getTextContent‎) فيمرّ في الكتاب ثلاثيّ الأبعاد والعرض
+     الطبيعيّ بلا مسارٍ ثانٍ. صفحتُه: المصغّرةُ مكبّرةً ضبابيّة، ومكانُ كلّ تظليلٍ صافٍ فيه **خطٌّ رماديّ** (تظليلُ نصّ) أو **مربّعٌ
+     رماديّ** (تظليلُ مربّع) — ولونُه يطليه ‎hlPaint‎ فوقه بعد الرسم (‎multiply‎) — وقفلٌ صغيرٌ على زاويتها. بلا نصّ: لا تحديدَ ولا بحث */
+  function bkProtDoc(sid) {
+    const m = pkSrcMeta(sid) || {}, id = pkSrcBase(sid), s0 = sid.slice(id.length);
+    const n = Math.max(1, m.pages || 1);
+    let sprite = null, ar = m.ar || 1 / Math.SQRT2;
+    const spriteP = new Promise(res => {
+      const im = new Image(); im.crossOrigin = 'anonymous';
+      im.onload = () => { sprite = im; const rows = Math.ceil(n / PV_COLS), th = im.naturalHeight / rows; if (th > 0) ar = PV_TW / th; res(); };
+      im.onerror = () => res(); im.src = pvURL(m.h);
+    });
+    const W0 = 612;
+    const page = k => {
+      const H0 = W0 / ar;
+      const vp = sc => ({ width: W0 * sc, height: H0 * sc, scale: sc, rotation: 0, transform: [sc, 0, 0, -sc, 0, H0 * sc], viewBox: [0, 0, W0, H0] });
+      return {
+        pageNumber: k, view: [0, 0, W0, H0],
+        getViewport: ({ scale = 1 } = {}) => vp(scale),
+        getTextContent: async () => ({ items: [], styles: {} }),
+        cleanup() {},
+        render({ canvasContext: c, viewport: v }) {
+          const promise = (async () => {
+            const W = v.width, H = v.height;
+            c.save(); c.fillStyle = '#fbfaf6'; c.fillRect(0, 0, W, H);
+            if (sprite) {
+              const th = sprite.naturalHeight / Math.ceil(n / PV_COLS);
+              /* (المصغّرةُ ‎24px‎: تُكبَّر بنعومةٍ ثمّ ضبابٌ خفيف يمحو مربّعاتها — والأشكالُ تُرى، والكلماتُ لا) */
+              c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
+              c.filter = `blur(${Math.max(1.5, W * .0045)}px) contrast(1.25)`;
+              c.drawImage(sprite, ((k - 1) % PV_COLS) * PV_TW, Math.floor((k - 1) / PV_COLS) * th, PV_TW, th, 0, 0, W, H);
+              c.filter = 'none';
+            } else {   /* (لا مصغّرةَ بعد: أسطرٌ رماديّةٌ عامّة) */
+              c.fillStyle = 'rgba(60, 70, 75, .12)';
+              for (let y = H * .1; y < H * .88; y += H * .045) c.fillRect(W * .12, y, W * (.6 + (Math.sin(y) + 1) * .1), H * .012);
+            }
+            const H_ = hlData(id), ms = H_ ? H_.marks.filter(x => x.s === s0 && x.k === k) : [];
+            for (const mk of ms) for (const [l, r, t, b] of mk.bars) {
+              const x = l * W, y = t * H, w = (r - l) * W, h = (b - t) * H;
+              c.fillStyle = '#fbfaf6'; c.fillRect(x, y, w, h);
+              c.fillStyle = 'rgba(60, 70, 75, .55)';
+              if (mk.kind === 'box') { c.globalAlpha = .55; c.fillRect(x + w * .19, y + h * .24, w * .62, h * .52); c.globalAlpha = 1; }
+              else { const lh = Math.max(1.5, h * .13); c.fillRect(x + w * .03, y + h / 2 - lh / 2, w * .94, lh); }
+            }
+            /* القفل */
+            const R = Math.max(7, W * .035), cx = W - R * 1.9, cy = R * 1.9;
+            c.fillStyle = 'rgba(44, 94, 101, .88)'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
+            c.strokeStyle = '#fff'; c.fillStyle = '#fff'; c.lineWidth = Math.max(1.2, R * .16);
+            c.fillRect(cx - R * .42, cy - R * .05, R * .84, R * .6);
+            c.beginPath(); c.arc(cx, cy - R * .08, R * .28, Math.PI, 0); c.stroke();
+            c.restore();
+          })();
+          return { promise, cancel() {} };
+        },
+      };
+    };
+    return { __prot: true, numPages: n, getPage: async k => { await spriteP; return page(Math.max(1, Math.min(n, k | 0))); }, destroy() {} };
+  }
   function chPdfOpen(key) {
     if (chPdfDoc[key]) return Promise.resolve(chPdfDoc[key]);
     if (chPdfOpening[key]) return chPdfOpening[key];
@@ -26471,9 +26655,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       let blob = await chIdb('readonly', key);
       /* ===== وما ليس في المتصفّح يُجلب من السحابة ثمّ يُحفظ فيه (ROADMAP-BOOKS-SERVER) =====
          المتصفّحُ ذاكرةٌ مؤقّتةٌ لا أصل: جهازٌ آخر، أو غيرُ صاحب المساهمة، أو متصفّحٌ مُسح */
-      if (!blob && key.indexOf('pksrc:') === 0) {
-        const m = pkSrcMeta(key.slice(6));
-        if (m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
+      if (key.indexOf('pksrc:') === 0) {
+        const sid = key.slice(6), m = pkSrcMeta(sid);
+        /* ===== والكتابُ المحميّ (ROADMAP-PROTECT) =====
+           لا يُجلب إلّا بإذن الخادم. وما ليس لي يُسأل عنه مرّةً في الجلسة ولو كان في الذاكرة المؤقّتة (نُسخت قبل الحماية):
+           لا حقّ ⇐ تُمحى ويُعرض المحميّ. ولي: الذاكرةُ تكفي، وإلّا من الخادم (وقبل نقل كتبي القديمة: من العامّ، ثمّ يُرفع خاصًّا) */
+        if (m && m.h && bookPriv(sid) && typeof SRV_ON === 'function' && SRV_ON()) {
+          const po = pkSrcPost(pkSrcBase(sid)), mine = !!(po && isMine(po));
+          if (!blob || (!mine && !bkPrivOk[sid])) {
+            const r = await bookPrivGet(m.h, sid);
+            if (r.blob) { blob = r.blob; bkPrivOk[sid] = 1; chIdb('readwrite', key, blob); }
+            else if (r.forbidden) {
+              if (mine) { if (!blob) { blob = await bookDown(m.h); if (blob) { chIdb('readwrite', key, blob); bookUpPriv(blob); } } }
+              else { if (blob) chIdb('readwrite', key, null); blob = null; const pd = bkProtDoc(sid); if (chPdfOpening[key] === pr) chPdfDoc[key] = pd; return pd; }
+            }
+            else if (!blob && !mine) { return bkProtDoc(sid); }
+          }
+        } else if (!blob && m && m.h) { blob = await bookDown(m.h); if (blob) chIdb('readwrite', key, blob); }
       }
       if (!blob && key.indexOf('chpdf:') === 0) {      /* وملفُّ الشابتر كذلك (ROADMAP-CLOUD-NEXT ٢) */
         const rest = key.slice(6), i = rest.lastIndexOf(':');
@@ -28697,7 +28895,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والتقريب، وتُبنى من جديد إذا تبدّل عرضُها. وعليها يجري التحديدُ الهندسيّ والمربّعُ ونقرُ التظليل كما في الكتاب */
   function bkScrTL(b, el) {
     if (bkFx(b)) { (b.tlWait = b.tlWait || new Set()).add(el); return bkFxLater(b, 'tlT', () => { const s = b.tlWait; b.tlWait = null; if (s) s.forEach(x => bkScrTL(b, x)); }); }
-    if (!b.scroll || !b.doc || !window.pdfjsLib || !el.isConnected) return;
+    if (!b.scroll || !b.doc || b.doc.__prot || !window.pdfjsLib || !el.isConnected) return;   /* (المحميُّ بلا نصّ) */
     const k = +el.dataset.k, W = Math.round(el.clientWidth); if (!W) return;
     b.tlPages = b.tlPages || new Map(); b.tlText = b.tlText || new Map();
     const old = b.tlPages.get(k);
@@ -29084,7 +29282,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkTLHide(b) { if (b && b.tlBox) b.tlBox.hidden = true; }
   async function bkTLShow(b) {
     const g = b && b.gl;
-    if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc) return;
+    if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc || b.doc.__prot) return;   /* (المحميُّ بلا نصّ) */
     if (g.flat === false) { bkTLHide(b); return; }
     if (!b.tlBox || !b.tlBox.isConnected) {
       b.tlBox = document.createElement('div'); b.tlBox.className = 'bk-tlbox'; b.tlBox.hidden = true;
