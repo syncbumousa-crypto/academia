@@ -2829,12 +2829,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const lo = clampIdx(centerIdx - WIN), hi = clampIdx(centerIdx + WIN);
       if (!force && lo === curLo && hi === curHi) return;
       curLo = lo; curHi = hi;
-      let html = '';
+      /* ===== ولا يُعاد بناءُ ما لم يتغيّر (طلبُ صاحب الموقع) =====
+         كانت النافذةُ تُبنى من الصفر مع كلّ ‎setList‎ (بداية الموقع، وصولُ جواب الخادم، وصولُ الأغلفة): فصورةُ غلافٍ في
+         منتصف تحميلها تُنزع وتُطلب من جديد — يظهر الغلافُ ثمّ يختفي ثمّ يعود يحمّل. فيُبقى كلُّ مربّعٍ مثلُه مكانَه بعناصره */
+      /* (يُعرف المربّعُ بمادّته وبنائه لا برقم موضعه: القائمةُ قد تُرتَّب من جديد أو تُستأنف على مادّةٍ أخرى فتتبدّل الأرقام) */
+      const old = new Map([...track.children].filter(x => x.classList && x.classList.contains('reel-slot') && x._h).map(x => [x._h, x]));
+      const out = [];
       for (let i = lo; i <= hi; i++) {
         /* __en = مدخلة الترم (للركن) — تُمرَّر لتظهر شارة «جهّزها» ودائرة الإتقان */
-        html += `<div class="reel-slot" data-i="${i}">${cardHTML(items[i], opts.cardMode, null, items[i].__en)}</div>`;
+        const h = cardHTML(items[i], opts.cardMode, null, items[i].__en), k = h.replace(/ class="is-in"/g, '');   /* (صورةٌ اكتمل تحميلُها لا تُحسب تغيّرًا) */
+        const key = items[i].code + '|' + k;
+        let el = old.get(key);
+        if (el) { old.delete(key); el.dataset.i = i; }
+        else { el = document.createElement('div'); el.className = 'reel-slot'; el.dataset.i = i; el.innerHTML = h; el._h = key; }
+        out.push(el);
       }
-      track.innerHTML = html;
+      if (out.length !== track.children.length || out.some((el, j) => track.children[j] !== el)) track.replaceChildren(...out);
     }
 
     /* توزيع البطاقات أفقيًا + تكبير لطيف للمتمركز (بلا دوران — الكتب على ميلها الطبيعي) */
@@ -30892,9 +30902,10 @@ void main() {
     $('#cm-title').textContent = (state.lang === 'ar' ? `${arShort(c)}${actLbl} (${c.h})` : `${c.code}${actLbl} (${c.h})`);
     if (COURSE_PREV[code]) $('#cm-title').insertAdjacentHTML('beforeend', coursePrevHTML(code));
     /* مربع صورة المادة يمين الاسم بالعنوان */
-    $('#cm-timg').innerHTML = imgOf(code)
+    const timg = imgOf(code)
       ? `<img src="${imgOf(code)}" alt="">`
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 15l-4.5-4.5L7 20"/></svg>';
+    { const ti = $('#cm-timg'); if (ti._h !== timg) { ti.innerHTML = timg; ti._h = timg; } }   /* (لا تُنزع الصورةُ وتُطلب ثانيةً إن لم تتغيّر) */
     /* شريط واحد لكل الأقسام (٧): أُدمج «الغياب والتأخير» داخل «الدكاترة» فحُذف زره */
     /* «المواضيع» حُذف من شريط التبويبات (بيانات القناة lessons باقية في التخزين).
        آخر أربعة = موارد الإتقان (فهم/ممارسة/شروح/بطائق) تُلَفّ في «رفّ الموارد» المرفوع (بلا عنوان) */
@@ -30909,10 +30920,15 @@ void main() {
       + XT_RES().map(cmTab).join('')
       + `</div>`;
     if (isChTab(cmTabSel)) cmTabSel = 'info';
-    const flip = cmTabsFlipStart();
-    $('#cm-tabs').innerHTML = secTabs();
-    renderCmSection();   /* يفتح النافذة على القسم النشط */
-    cmTabsFlipEnd(flip);
+    /* والشريطُ نفسُه لا يُبنى ثانيةً إن لم يتغيّر (طلبُ صاحب الموقع): كان كلُّ تمركزٍ للكتاب نفسِه (يعاد مع وصول الجواب والأغلفة)
+       ينزعه بوجوهه وحلقات تحميلها فتتوقّف الحلقاتُ وتعود من أوّلها */
+    const tabsH = secTabs(), TB = $('#cm-tabs');
+    if (TB._h !== tabsH || !TB.firstElementChild) {
+      const flip = cmTabsFlipStart();
+      TB.innerHTML = tabsH; TB._h = tabsH;
+      renderCmSection();   /* يفتح النافذة على القسم النشط */
+      cmTabsFlipEnd(flip);
+    } else renderCmSection();
   }
   /* ===== التبويباتُ بين الكتب: لا قفز (طلبُ صاحب الموقع) =====
      كتابٌ فيه مساهماتٌ تحت أسماء تبويباته وكتابٌ ليس فيه: تنزل الأيقونةُ والاسمُ إلى وسط التبويب أو تصعد، ويطول الشريطُ
