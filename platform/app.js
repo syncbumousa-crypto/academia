@@ -27709,18 +27709,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* تبديلُ المحرّك خفيف: لقطةٌ ثابتةٌ من القديم تغطّيه، ويُطفأ قبل أن يُبنى الجديد (سياقُ رسمٍ واحدٌ لا اثنان)،
      ثمّ تذوب اللقطةُ حين يرسم الجديدُ الصورةَ نفسَها */
+  /* ===== خطّةُ الرجوع · المرحلة ٥: بين الصفحة والصفحتين (طلبُ صاحب الموقع) =====
+     كما في التحوّل إلى الصفحات المتتالية: لوحةُ المحرّك القديم الحيّةُ نفسُها هي الغطاء (لا لقطةٌ تُنسخ من كرت الشاشة فتؤخّر
+     كلَّ شيء)، والجديدُ يُبنى بما رُسم من الصفحات (‎fastTex‎) وينتظر صفحاتِ موضع القارئ وحدها (‎near‎)، والبعيدةُ تُرسم بعده،
+     ثمّ تُطلب الدقّة */
   function bk2Swap(b, old, morph) {
     return new Promise(res => {
-      const sh = document.createElement('canvas');
-      try { old.snapshot(sh); } catch (e) {}
-      Object.assign(sh.style, { position: 'absolute', left: old.el.offsetLeft + 'px', top: old.el.offsetTop + 'px', width: old.el.style.width, height: old.el.style.height, pointerEvents: 'none', zIndex: 2 });
-      b.stage.appendChild(sh);
-      old.dispose(); b.gl = null;
+      let sh = null, kill = null;
+      if (old.el && old.el.getContext) {
+        sh = old.el; Object.assign(sh.style, { pointerEvents: 'none', zIndex: 2 });
+        const f = old.dispose(true); kill = typeof f === 'function' ? f : null;
+      } else {
+        sh = document.createElement('canvas');
+        try { old.snapshot(sh); } catch (e) {}
+        Object.assign(sh.style, { position: 'absolute', left: old.el.offsetLeft + 'px', top: old.el.offsetTop + 'px', width: old.el.style.width, height: old.el.style.height, pointerEvents: 'none', zIndex: 2 });
+        b.stage.appendChild(sh);
+        old.dispose();
+      }
+      b.gl = null;
+      b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
+      const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
+      setTimeout(sharp, 4000);
       bk2Engine(b, {
-        quiet: true, morph: morph || undefined,
+        quiet: true, near: true, morph: morph || undefined,
         onReady: ng => {
           ng.el.style.opacity = '';
-          const end = () => { sh.remove(); res(ng); };
+          const end = () => { sh.remove(); if (kill) kill(); res(ng); setTimeout(sharp, BK_MX + 120); };
           sh.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 110, easing: 'ease-out' }).finished.then(end, end);
         },
       });
