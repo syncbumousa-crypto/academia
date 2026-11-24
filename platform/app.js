@@ -28129,14 +28129,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.gl && !b.gl.dead) b.gl.el.style.opacity = '';
       const F = ng ? bkPgScreens(ng) : [];
       const outs = [];
+      let jump = 0;
       moving.forEach((d, kk) => {
         const f = F.find(x => x.k === kk), r = d.getBoundingClientRect();
+        if (f) jump = Math.max(jump, Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width));
         if (f && (Math.abs(f.l - r.left) > 1 || Math.abs(f.t - r.top) > 1 || Math.abs(f.w - r.width) > 1)) {
           d.getAnimations().forEach(a => a.cancel());
           Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' });
           outs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - f.l}px, ${r.top - f.t}px) scale(${r.width / f.w}, ${r.height / f.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: 140 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'both' }).finished);
         }
       });
+      L.dataset.jump = Math.round(jump * 10) / 10;   /* (قدرُ التصحيح عند الاستلام — للاختبار) */
       Promise.all(outs).catch(() => {}).then(() => {
         const a = L.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'forwards' });
         a.finished.then(() => L.remove(), () => L.remove());
