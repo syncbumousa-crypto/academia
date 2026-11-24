@@ -2844,7 +2844,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         else { el = document.createElement('div'); el.className = 'reel-slot'; el.dataset.i = i; el.innerHTML = h; el._h = key; }
         out.push(el);
       }
-      if (out.length !== track.children.length || out.some((el, j) => track.children[j] !== el)) track.replaceChildren(...out);
+      /* ولا يُنقل الباقي في الشجرة: العنصرُ المنزوعُ والمُعاد يفقد انتقالَه الجاري (ميلُ الكتاب وهو يعتدل) فيقفز إلى آخره —
+         فيُزال ما خرج من النافذة ويُلحق ما دخلها، والترتيبُ لا يهمّ (الموضعُ والطبقةُ مكتوبان لكلّ مربّع) */
+      const keep = new Set(out);
+      [...track.children].forEach(x => { if (!keep.has(x)) x.remove(); });
+      out.forEach(el => { if (el.parentNode !== track) track.appendChild(el); });
     }
 
     /* توزيع البطاقات أفقيًا + تكبير لطيف للمتمركز (بلا دوران — الكتب على ميلها الطبيعي) */
@@ -2872,7 +2876,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     }
 
+    /* ‏‎is-moving‎: البِكرةُ تتحرّك (عجلةٌ أو سحبٌ أو انزلاق) — فلا يُعدّ مرورُها تحت مؤشّرٍ ساكنٍ «تحويمًا» يُعدّل الكتابَ
+       في منتصف حركته (طلبُ صاحب الموقع)؛ ويُرفع بعد أن تقف */
+    let movT = 0;
+    function moving() { if (!stage) return; stage.classList.add('is-moving'); clearTimeout(movT); movT = setTimeout(() => stage.classList.remove('is-moving'), 220); }
     function layout(force) {
+      if (!force) moving();
       centerIdx = clampIdx(Math.round(pos / GAP));
       renderWindow(force);
       position();

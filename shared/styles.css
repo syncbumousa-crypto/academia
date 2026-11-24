@@ -1278,6 +1278,10 @@ html[data-lang="en"] .reel-count { direction: ltr; }
 }
 /* إبراز لطيف عند المرور فوق كتاب غير متمركز (الـtransform محجوز للتموضع، فنستخدم filter) */
 .reel-slot:not(.is-center):hover { filter: brightness(1.08); }
+/* والبِكرةُ تتحرّك (‎is-moving‎ · ‎layout‎): مرورُ الكتب تحت مؤشّرٍ ساكنٍ ليس تحويمًا — فلا يعتدل كتابٌ ولا يضيء في منتصف حركته */
+.reel-stage.is-moving .reel-slot:not(.is-center):hover { filter: none; }
+.reel-stage.is-moving .reel-slot:not(.is-center) .crow:hover .bk { transform: rotateY(var(--tilt)); }
+html[data-lang="en"] .reel-stage.is-moving .reel-slot:not(.is-center) .crow:hover .bk { transform: rotateY(calc(var(--tilt) * -1)); }
 .reel-slot .crow { width: 132px; }
 .reel-slot.is-center .crow .bk { transform: rotateY(9deg); }   /* المتمركز يعتدل قليلًا نحو الناظر */
 html[data-lang="en"] .reel-slot.is-center .crow .bk { transform: rotateY(-9deg); }
