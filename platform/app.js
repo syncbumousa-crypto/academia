@@ -12076,8 +12076,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!h || pvDone.has(h) || !doc || doc.__prot || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return;
     pvDone.add(h);
     try { const hd = await fetch(pvURL(h), { method: 'HEAD', cache: 'no-store' }); if (hd.ok) return; } catch (e) { return; }
-    const idle = () => new Promise(res => (window.requestIdleCallback || (f => setTimeout(f, 60)))(res, { timeout: 800 }));
     try {
+      const sh = await pvSheet(doc);
+      const blob = await new Promise(res => sh.toBlob(res, 'image/webp', .6));
+      if (!blob) return;
+      const r = await apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ h, pv: 1 }) });
+      if (!r.ok) return;
+      const j = await r.json();
+      await fetch(j.upload, { method: 'PUT', headers: { 'content-type': 'image/webp', 'x-upsert': 'true' }, body: blob });
+    } catch (e) { pvDone.delete(h); }
+  }
+  /* صورةُ المصغّرات نفسُها (لوحٌ ‎canvas‎): تُرفع للكتاب المحميّ، وتُرسم محلّيًّا للمساهمات التجريبيّة */
+  async function pvSheet(doc) {
+    const idle = () => new Promise(res => (window.requestIdleCallback || (f => setTimeout(f, 60)))(res, { timeout: 800 }));
+    {
       const n = doc.numPages, p1 = await doc.getPage(1), v1 = p1.getViewport({ scale: 1 });
       const TH = Math.max(8, Math.round(PV_TW * v1.height / v1.width)), rows = Math.ceil(n / PV_COLS);
       const sh = document.createElement('canvas'); sh.width = PV_COLS * PV_TW; sh.height = rows * TH;
@@ -12090,13 +12102,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         await pg.render({ canvasContext: tc, viewport: vp }).promise;
         sc.drawImage(t, 0, 0, t.width, t.height, ((k - 1) % PV_COLS) * PV_TW, Math.floor((k - 1) / PV_COLS) * TH, PV_TW, TH);
       }
-      const blob = await new Promise(res => sh.toBlob(res, 'image/webp', .6));
-      if (!blob) return;
-      const r = await apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ h, pv: 1 }) });
-      if (!r.ok) return;
-      const j = await r.json();
-      await fetch(j.upload, { method: 'PUT', headers: { 'content-type': 'image/webp', 'x-upsert': 'true' }, body: blob });
-    } catch (e) { pvDone.delete(h); }
+      return sh;
+    }
   }
   /* غلافُ المصدر: من المتصفّح إن وُجد، وإلّا من السحابة ثمّ يُحفظ فيه (ROADMAP-CLOUD-NEXT ١).
      وما ليس غلافَ مصدرٍ (غلافُ الشابتر) يُقرأ كما كان */
@@ -26593,11 +26600,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بواجهة ‎pdf.js‎ نفسِها (‎numPages · getPage · getViewport · render · getTextContent‎) فيمرّ في الكتاب ثلاثيّ الأبعاد والعرض
      الطبيعيّ بلا مسارٍ ثانٍ. صفحتُه: المصغّرةُ مكبّرةً ضبابيّة، ومكانُ كلّ تظليلٍ صافٍ فيه **خطٌّ رماديّ** (تظليلُ نصّ) أو **مربّعٌ
      رماديّ** (تظليلُ مربّع) — ولونُه يطليه ‎hlPaint‎ فوقه بعد الرسم (‎multiply‎) — وقفلٌ صغيرٌ على زاويتها. بلا نصّ: لا تحديدَ ولا بحث */
-  function bkProtDoc(sid) {
+  function bkProtDoc(sid, loc) {
     const m = pkSrcMeta(sid) || {}, id = pkSrcBase(sid), s0 = sid.slice(id.length);
-    const n = Math.max(1, m.pages || 1);
+    const n = Math.max(1, (loc && loc.n) || m.pages || 1);
     let sprite = null, ar = m.ar || 1 / Math.SQRT2;
-    const spriteP = new Promise(res => {
+    const spriteP = loc ? Promise.resolve(loc.sheet).then(sh => { if (!sh) return; sprite = sh; sh.naturalHeight = sh.height; const th = sh.height / Math.ceil(n / PV_COLS); if (th > 0) ar = PV_TW / th; }, () => {}) : new Promise(res => {
       const im = new Image(); im.crossOrigin = 'anonymous';
       im.onload = () => { sprite = im; const rows = Math.ceil(n / PV_COLS), th = im.naturalHeight / rows; if (th > 0) ar = PV_TW / th; res(); };
       im.onerror = () => res(); im.src = pvURL(m.h);
@@ -26682,6 +26689,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const L = await chPdfLib();
       const data = new Uint8Array(await blob.arrayBuffer());
       const doc = await L.getDocument({ data }).promise;
+      /* ===== والمساهمةُ التجريبيّة («بروفايل وهمي») تُعرض محميّةً كالحقيقيّة (طلبُ صاحب الموقع) =====
+         ملفُّها من ملفّات الموقع نفسِه، فتُرسم مصغّراتُه هنا ولا يُعطى المحرّكَ إلّا المستندُ البديل */
+      if (key.indexOf('pksrc:') === 0) {
+        const sid = key.slice(6);
+        if (/^a\d{3}d-/.test(sid) && bookPriv(sid) && !bkPrivOk[sid]) {
+          const pd = bkProtDoc(sid, { n: doc.numPages, sheet: pvSheet(doc) });
+          if (chPdfOpening[key] === pr) chPdfDoc[key] = pd;
+          return pd;
+        }
+      }
       if (chPdfOpening[key] === pr) chPdfDoc[key] = doc;
       return doc;
     })();
