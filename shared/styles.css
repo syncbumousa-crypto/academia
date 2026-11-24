@@ -18503,6 +18503,23 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 /* ===== تحميلُ الكتاب المركون «يُجمَع ورقةً ورقة» (اختيارُ صاحب الموقع) =====
    لوحةٌ واحدةٌ يرسمها ‎bkLd‎ بزاوية الطاولة نفسِها، والنسبةُ تحتها — في الوعاء قبل أن يُفتح الملفّ، ثمّ فوق الكتاب (‎--over‎) حتى يجهز */
 .bk-skel { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 0; padding: 0; }
+/* ===== تحميلُ الكتاب المفتوح (الاقتراحُ ٣): أوراقٌ بمقاس الصفحات ومكانها، حلقةٌ ورقمٌ، ثمّ معاينةٌ ضبابيّة ===== */
+.bk-pgld { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 0; margin-bottom: calc(-1 * var(--bk-foot, 0px)); container-type: size; pointer-events: none; }
+.bk-pgld__in { position: absolute; left: 50%; top: 50%; display: flex; direction: rtl; transform: translate(-50%, -49%);
+  width: min(calc(100cqw / 1.08), calc(100cqh / 1.08 * var(--cols) * var(--ar))); aspect-ratio: calc(var(--cols) * var(--ar)); }
+.bk-pgld--over { position: absolute; inset: 0; z-index: 2; margin: 0; container-type: normal; }
+.bk-pgld--over .bk-pgld__in { transform: none; aspect-ratio: auto; }   /* (مستطيلُ الكتاب نفسُه بالبكسل — ‎bkPhShow‎) */
+.bk-pgld__pg { position: relative; flex: 1 1 0; min-width: 0; background: #fff; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 8px 22px -12px rgba(0, 0, 0, .4); }
+.bk-pgld__pg--in { background: #ece7dc; }   /* باطنُ الغلاف قبل أوّل صفحة */
+.bk-pgld__ring { position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+  border: 2.5px solid rgba(44, 94, 101, .16); border-top-color: #2c5e65; animation: bkPgSpin .8s linear infinite; transition: opacity .2s; }
+.bk-pgld__pg > em { position: absolute; bottom: 10px; inset-inline: 0; text-align: center; font-size: 11px; font-weight: 600; line-height: 1; font-style: normal; color: #8a979c; transition: opacity .2s; }
+.bk-pgld__pg > canvas { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(4px); transform: scale(1.02); animation: bkPgIn .3s ease-out both; }
+.bk-pgld__pg.has-th > .bk-pgld__ring, .bk-pgld__pg.has-th > em { opacity: 0; }
+@keyframes bkPgSpin { to { transform: rotate(360deg); } }
+@keyframes bkPgIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .bk-pgld__ring { animation: none; } }
 .bk-skel--over { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .bk-skel__cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .bk-skel__pc { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-style: normal; font-weight: 700; font-size: 12px; font-variant-numeric: tabular-nums;
@@ -20067,8 +20084,10 @@ html[data-theme="dark"] .cbk-scr::-webkit-scrollbar-thumb { background: rgba(255
 /* (طلبُ صاحب الموقع) حجمُها الطبيعيّ — ‎100%‎ — الصفحةُ كاملةً في المساحة (‎--bk-fit‎ من ‎bkScrFitW‎: أصغرُ عرض المساحة وما تسعه قامتُها) */
 .cbk-scr__pg { flex: none; width: calc(var(--bk-fit, calc(100% - 48px)) * var(--bk-z, 1)); margin-inline: auto; position: relative; overflow: hidden; border-radius: 3px;
   background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
-.cbk-scr__pg:empty::after { content: ''; position: absolute; inset: 14% 12%;
-  background: repeating-linear-gradient(to bottom, rgba(20, 35, 63, .07) 0 6px, transparent 6px 18px); }
+/* والصفحةُ قبل أن تُرسم: حلقةٌ ساكنةٌ ورقمُها (الاقتراحُ ٣ · ساكنةٌ لا تدور: القائمةُ قد تحمل مئات الصفحات) */
+.cbk-scr__pg:empty::after { content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+  border: 2.5px solid rgba(44, 94, 101, .16); border-top-color: rgba(44, 94, 101, .7); }
+.cbk-scr__pg:empty::before { content: attr(data-k); position: absolute; bottom: 12px; inset-inline: 0; text-align: center; font-size: 11px; font-weight: 600; line-height: 1; color: #8a979c; }
 .cbk-scr__pg > canvas { display: block; width: 100%; height: 100%; }
 .cbk-scr.is-zg > .cbk-scr__pg { will-change: transform; }   /* (في أثناء إيماءة التقريب: صورٌ على كرت الشاشة) */
 /* وأدواتُ التظليل في التذييل حاضرةٌ في التمرير أيضًا (طلبُ صاحب الموقع): التظليلُ يجري على طبقة نصّ كلّ صفحة (‎bkScrTL‎) */

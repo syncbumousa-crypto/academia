@@ -12554,7 +12554,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (t) t.innerHTML = pkActTools(id, post.classList.contains('pk--maxpub') || post.classList.contains('pk--framepub'));
   }
   /* جوفُ مصدرٍ واحد — وحتى يُفتح الملفّ: هيكلُ صفحاتٍ تتقلّب يُسلِّم إلى الكتاب بلا قفزة */
-  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n, (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover)}</div>`;
+  const pkSrcSlot = s => `<div class="chsrc__view pk-src__view pk-src__slot" data-pksrcview data-pksid="${esc(s)}" data-pkid="${esc(s)}">${bkPgLdFor(s) || bkSkelHTML(pkSrcKey(s), (pkSrcMeta(s) || {}).ar, (pkSrcMeta(s) || {}).n, (pkSrcCovMeta(s) || {}).color || (pkSrcMeta(s) || {}).cover)}</div>`;
   const pkSrcView = (id, ed) => {
     /* والمربّعُ فيه المصدرُ وحدَه؛ وأدواتُه الثلاث (الغلاف · صفحاتُ المصدر · ربطُ الصفحات) في التذييل (طلبُ صاحب الموقع · ‎pkSrcTools‎) */
     /* وكلُّ مصدرٍ في مربّعه كأنّه موضوعٌ في مكانه، وتحتها مربّعٌ مرقّطٌ يدعو إلى مصدرٍ آخر (طلبُ صاحب الموقع) */
@@ -26550,6 +26550,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ويذوب حين يرسم الكتابُ صفحاتِه */
   function bkPhShow(b) {
     if (b.phEl && b.phEl.isConnected) return;
+    if (!b.closed && b.pos) {
+      const w = document.createElement('div');
+      w.innerHTML = bkPgLdHTML(bkPgLdKs(b.pos, bkSk(b), b.n, b.one), b.ar, b.one ? 1 : 2, true);
+      const ph = b.phEl = w.firstElementChild, inn = ph.firstElementChild, es = b.el.style;
+      Object.assign(inn.style, { left: es.left, top: es.top, width: es.width, height: es.height });
+      b.stage.appendChild(ph);
+      /* النسخةُ الصغيرةُ الضبابيّة من كلّ صفحة (‎BK_THUMB_W‎ كمعايناتِ العرض الطبيعيّ) — بتظليلاتها */
+      ph.querySelectorAll('.bk-pgld__pg[data-k]').forEach(pg => {
+        const k = +pg.dataset.k;
+        b.doc.getPage(k).then(p => {
+          const v1 = p.getViewport({ scale: 1 }), vp = p.getViewport({ scale: BK_THUMB_W / v1.width });
+          const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+          const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+          return p.render({ canvasContext: cx, viewport: vp }).promise.then(() => {
+            if (b.phEl !== ph) return;
+            try { if (hlMarksOn(b, k).length) hlPaint(b, k, cv); } catch (e) {}
+            pg.appendChild(cv); pg.classList.add('has-th');
+          });
+        }).catch(() => {});
+      });
+      return;
+    }
     /* الهيكلُ نفسُه يبقى فوق الكتاب حتى يرسم المحرّكُ صفحاتِه — والحلقةُ تكمل من حيث وصلت */
     const k = b.key || '';
     bkLoadSet(k, 62, 88);
@@ -26569,11 +26591,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkLoadSet(k, 100, 100);
     const cv = b.gl && b.gl.el;
     if (bkReduce()) { ph.remove(); bkLoadEnd(k); if (cv) cv.style.opacity = ''; return; }
-    /* والكتابُ عائدٌ مفتوحًا على صفحة صاحبه: لا ينطبق الهيكلُ على الطاولة — يذوب حالًا فوق الصفحات المفتوحة تحته */
-    if (!b.closed && !b.scroll) {
+    /* وأوراقُ الكتاب المفتوح: تذوب فوق صفحاته الحادّة تحتها — فتبدو المعايناتُ الضبابيّةُ وقد توضّحت */
+    if (ph.classList.contains('bk-pgld')) {
       if (cv) cv.style.opacity = '';
       const fin = () => { ph.remove(); bkLoadEnd(k); };
-      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: 'ease-out', fill: 'forwards' }).finished.then(fin, fin);
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320, easing: 'ease-out', fill: 'forwards' }).finished.then(fin, fin);
       return;
     }
     /* تنقلب آخرُ الصفحات وينطبق الغلاف، ثمّ يتسلّم المحرّكُ الكتابَ في مكانه نفسِه: يذوب هذا فوقه وذاك يظهر تحته (بلا رفعة) */
@@ -26593,6 +26615,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      حتى لا تقف — ولا تبلغ حدَّ المرحلة قبل أن تتمّ */
   const bkLoad = {};
   let bkLoadRaf = 0;
+  /* ===== تحميلُ الكتاب المفتوح (الاقتراحُ ٣ · طلبُ صاحب الموقع) =====
+     الكتابُ العائدُ مفتوحًا على صفحة (أو بالعرض الطبيعيّ) لا يُحمَّل بهيكل الكتاب المسدوح: أوراقٌ بمقاس صفحاته ومكانها، في وسط كلٍّ
+     حلقةُ تحميلٍ ورقمُها — ثمّ تظهر نسخةٌ صغيرةٌ ضبابيّةٌ من الصفحة نفسِها حين تُفتح، وتتوضّح حين يجهز الكتاب */
+  function bkPgLdHTML(ks, ar, cols, over) {
+    return `<div class="bk-pgld${over ? ' bk-pgld--over' : ''}" role="status" aria-label="${esc(T().chLoading)}" style="--ar:${(+ar > 0 ? +ar : 1 / Math.SQRT2).toFixed(4)};--cols:${cols}"><div class="bk-pgld__in">`
+      + ks.map(k => k ? `<div class="bk-pgld__pg" data-k="${k}"><i class="bk-pgld__ring"></i><em>${k}</em></div>` : '<div class="bk-pgld__pg bk-pgld__pg--in"></div>').join('') + `</div></div>`;
+  }
+  /* صفحاتُ الفتحة المحفوظة: الصفحتان يمناهما ‎pos‎ (وقبل أوّل صفحةٍ باطنُ الغلاف) ويسراهما التالية */
+  const bkPgLdKs = (pos, sk, n, one) => one ? [Math.max(1, pos)] : [pos > sk ? pos : 0, pos + 1 <= (n || 1e9) ? pos + 1 : 0];
+  const bkPgLdFor = s => {
+    const m = pkSrcMeta(s); if (!m) return '';
+    const scr = bkModeGet() === 'scroll';
+    if (!scr && (m.closed !== false || !m.pos)) return '';
+    const one = scr || bk2OneGet();
+    return bkPgLdHTML(bkPgLdKs(m.pos || 1, bkSkOf(pkSrcCovMeta(s), m.covPg, m.pages), m.pages, one), m.ar, one ? 1 : 2, false);
+  };
   function bkSkelHTML(k, ar, n, cv) {
     return `<div class="bk-skel" data-bkl="${esc(k)}" data-n="${+n || 0}" data-cv="${esc(cv || '')}" role="status" aria-label="${esc(T().chLoading)}" style="--ar:${(+ar > 0 ? +ar : 1 / Math.SQRT2).toFixed(4)}">`
       + `<canvas class="bk-skel__cv" aria-hidden="true"></canvas><em class="bk-skel__pc">${Math.round((bkLoad[k] || {}).shown || 0)}٪</em></div>`;
