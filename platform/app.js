@@ -27509,16 +27509,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* مؤشّرُ الفأرة قلمُ تظليلٍ بحبر القلم المختار (طلبُ صاحب الموقع) — بكسليٌّ بأسلوب يد التقليب ومؤشرات المتصفّح (طلبُه أيضًا):
      حدٌّ أسودُ بعرض بكسل، جسمٌ أبيض بين حلقتين، طرفاه بلون الحبر، ورأسُه المشطوفُ أسفلَ اليسار هو نقطةُ التأشير */
   /* واقفٌ نحيل (طلبُ صاحب الموقع): بعرض خمسة بكسلات وطولُه قريبٌ من سطر النصّ، فيقع على السطر بقدره — غطاءٌ بلون الحبر، جسمٌ أبيض
-     بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ وفوقه وتحته خطٌّ عرضيّ (‎T‎) كمؤشّر تحديد النصّ (طلبُه أيضًا).
+     بين حلقتين، وحلقةٌ ملوّنةٌ فوق رأسٍ مشطوفٍ مائل نحو اليسار؛ وفوقه وتحته عارضةٌ عريضة (‎T‎) كمؤشّر تحديد النصّ بأسلوب القلم نفسِه — حدٌّ أسودُ وحبرٌ ملوّن، العليا غطاؤه والسفلى قاعدةٌ يقف عليها رأسُه (طلبُه أيضًا).
      (على ورق الصفحة دائمًا، فلا حدَّ أبيضَ حوله) — نقطةُ التأشير طرفُ الرأس */
-  const HL_PEN_PX = ['kkkkkkkkk', '..kccck..', '..kccck..', '..kkkkk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kwwwk..', '..kkkkk..', '..kccck..', '..kccck..', '..kttk...', '..ktk....', '..kk.....', 'kkkkkkkkk'];
+  const HL_PEN_PX = ['.kkkkkkkkk.', '.kccccccck.', '.kkkkkkkkk.', '...kccck...', '...kkkkk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kkkkk...', '...kccck...', '...kccck...', '...kttk....', '...ktk.....', '.kkkkkkkkk.', '.kccccccck.', '.kkkkkkkkk.'];
   function hlPixPen(fill, ink) {
     const col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
     let r = '';
     HL_PEN_PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
     const W = HL_PEN_PX[0].length + 2, Hh = HL_PEN_PX.length + 2;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
-    return { svg, hx: ox + 3, hy: oy + 15 };
+    return { svg, hx: ox + 4, hy: oy + 16 };
   }
   const hlPenCurC = {};
   function hlPenCursor(c) {
