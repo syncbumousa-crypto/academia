@@ -28174,14 +28174,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     for (let i = 0; i <= N; i++) { const c = cE(i / N), p = lerp(R0, F, c); kfL.push({ offset: i / N, transform: liveTf(p) }); kfT.push({ offset: i / N, transform: twinTf(p, 1 - c) }); }
     const aL = live.animate(kfL, { duration: Dm, easing: 'linear', fill: 'forwards' });
     const aT = tw.animate(kfT, { duration: Dm, easing: 'linear', fill: 'forwards' });
-    /* القائمةُ حولها تنطوي فيها وتذوب (كما في التحوّل إلى الصفحة الواحدة) */
-    const D = Math.round(BK_SX * slow), sK = F.w / R0.w;
+    /* القائمةُ حولها (طلبُ صاحب الموقع: «يبدو كأنهم يميلون لليمين أو اليسار») — كانت على ساعةٍ ومنحنًى غير ساعة صفحة القارئ
+       (أقصر وأسرع)، فتسبقها في اتّجاهها إلى جانبها من الفتحة فتبدو مائلة. فالآن عمودٌ واحدٌ معها على الساعة نفسِها: تصغر بمقياسها
+       وتمضي معها أفقيًّا كما هي، وتتباعد عنها قليلًا (التي فوقها إلى فوق والتي تحتها إلى تحت) وتذوب في أوّل الحركة */
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
       const kk = +el.dataset.k; if (kk === k) return;
       const r = el.getBoundingClientRect(); if (!(r.bottom > R.top && r.top < R.bottom)) return;
-      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
-      const to = `translate(${F.l + (r.left - R0.l) * sK - r.left}px, ${F.t + (r.top - R0.t) * sK - r.top}px) scale(${sK})`;
-      d.animate([{ transformOrigin: '0 0', transform: 'none', opacity: 1 }, { transformOrigin: '0 0', opacity: 0, offset: .34 }, { transformOrigin: '0 0', transform: to, opacity: 0 }], { duration: D, easing: BK_SXE, fill: 'both' });
+      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = r.top < R0.t ? -1 : 1, kf = [];
+      for (let i = 0; i <= N; i++) {
+        const c = cE(i / N), p = lerp(R0, F, c), sc2 = p.w / R0.w;
+        const x = p.l + (r.left - R0.l) * sc2, y = p.t + (r.top - R0.t) * sc2 + up * 56 * c;
+        kf.push({ offset: i / N, transformOrigin: '0 0', transform: `translate(${x - r.left}px, ${y - r.top}px) scale(${sc2})`, opacity: Math.max(0, 1 - c / .42) });
+      }
+      d.animate(kf, { duration: Dm, easing: 'linear', fill: 'forwards' });
     });
     /* تبدُّلٌ جارٍ: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، والرجوعُ إلى الصفحة الواحدة إلى صفحة القارئ، والقامةُ ثابتةٌ حتى الاستلام */
     b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true; b.hHold = true;
