@@ -20287,13 +20287,21 @@ html[data-theme="light"] .pk-prot__card { background: #fff; -webkit-backdrop-fil
 .pk-prot__msg { color: #a3612f !important; font-weight: 600; }
 .pk-prot__btns { flex: none; display: flex; flex-direction: column; gap: 4px; }
 .pk-prot__card button { font: inherit; font-weight: 700; border-radius: 99px; padding: 5px 12px; cursor: pointer; white-space: nowrap; }
-.pk-prot__up { background: #2c5e65; color: #fff; border: 0; }
+.pk-prot__card .pk-prot__up { display: flex; align-items: center; gap: 8px; text-align: start; line-height: 1.35; border-radius: 14px; padding: 6px 12px;
+  background: transparent; color: #2c5e65; border: 1.5px dashed color-mix(in srgb, #2c5e65 70%, transparent);
+  transition: background .15s, border-color .15s, transform .18s cubic-bezier(.3, 1.4, .5, 1); }
+.pk-prot__up svg { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+.pk-prot__up small { display: block; font-size: 10px; font-weight: 500; color: var(--u-mut, #5f6f76); }
+.pk-prot__up:hover:not(:disabled), .is-protover .pk-prot__up { background: color-mix(in srgb, #2c5e65 12%, transparent); border-style: solid; }
+.is-protover .pk-prot__up { transform: scale(1.06); }
 .pk-prot__up:disabled { opacity: .55; cursor: default; }
 .pk-prot__go { background: transparent; color: #2c5e65; border: 1.5px solid #2c5e65; }
 html[data-theme="dark"] .pk-prot__card { color: #e7ecee; }
 html[data-theme="dark"] .pk-prot__card p { color: #9aa9af; }
 html[data-theme="dark"] .pk-prot__ic { color: #7fc0c7; }
-html[data-theme="dark"] .pk-prot__up { background: #3b6c73; }
+html[data-theme="dark"] .pk-prot__card .pk-prot__up { color: #7fc0c7; border-color: color-mix(in srgb, #7fc0c7 70%, transparent); }
+html[data-theme="dark"] .pk-prot__up:hover:not(:disabled), html[data-theme="dark"] .is-protover .pk-prot__up { background: rgba(127, 192, 199, .12); }
+html[data-theme="dark"] .pk-prot__up small { color: #9aa9af; }
 html[data-theme="dark"] .pk-prot__go { color: #7fc0c7; border-color: #7fc0c7; }
 /* ضيّقةً: الزرّ تحت الرسالة */
 @media (max-width: 520px) { .pk-prot__card { flex-wrap: wrap; } .pk-prot__btns { width: 100%; } }

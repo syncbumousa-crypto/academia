@@ -26574,8 +26574,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const bkPrivOk = {};   /* ‏‎sid → 1‎: أذن الخادمُ بقراءته في هذه الجلسة */
   /* ===== اللوحُ الجانبيّ وشارةُ «محمي» (الاتجاه د) و«حمّل ملف المصدر» ===== */
   const PROT_T = () => state.lang === 'en'
-    ? { chip: 'Protected', t: 'This source is hidden to respect copyright.', d: 'If you have the source file, upload it here and the highlights will match it. It is saved to your account only and never published.', b: 'Upload the source file', busy: 'Uploading…', fail: 'Upload failed — try again', diff: n => `Your file has ${n[0]} pages, the source has ${n[1]}. Please check with the contributor about the edition.`, go: 'Continue anyway', bad: 'That is not a PDF file' }
-    : { chip: 'محمي', t: 'هذا المصدر غير مرئي حفاظًا على حقوق الطبع.', d: 'إذا كان لديك ملف المصدر، حمّله من هنا وستتطابق التظليلات معه مباشرة. يُحفظ في حسابك أنت، ولن يُنشر للعامة.', b: 'حمّل ملف المصدر', busy: 'جارٍ الرفع…', fail: 'تعذّر الرفع — حاول مرة أخرى', diff: n => `ملفك عدد صفحاته ${n[0]} وصفحات المصدر ${n[1]}. ننصحك تتأكد من صاحب المساهمة وتتواصل معه بخصوص النسخة.`, go: 'أكمل على أي حال', bad: 'الملف ليس PDF' };
+    ? { chip: 'Protected', t: 'This source is hidden to respect copyright.', d: 'If you have the source file, upload it here and the highlights will match it. It is saved to your account only and never published.', b: 'Upload the source file', drop: 'Drop the PDF', or: 'or click to choose', busy: 'Uploading…', fail: 'Upload failed — try again', diff: n => `Your file has ${n[0]} pages, the source has ${n[1]}. Please check with the contributor about the edition.`, go: 'Continue anyway', bad: 'That is not a PDF file' }
+    : { chip: 'محمي', t: 'هذا المصدر غير مرئي حفاظًا على حقوق الطبع.', d: 'إذا كان لديك ملف المصدر، حمّله من هنا وستتطابق التظليلات معه مباشرة. يُحفظ في حسابك أنت، ولن يُنشر للعامة.', b: 'حمّل ملف المصدر', drop: 'أفلت ملف PDF', or: 'أو اضغط واختره', busy: 'جارٍ الرفع…', fail: 'تعذّر الرفع — حاول مرة أخرى', diff: n => `ملفك عدد صفحاته ${n[0]} وصفحات المصدر ${n[1]}. ننصحك تتأكد من صاحب المساهمة وتتواصل معه بخصوص النسخة.`, go: 'أكمل على أي حال', bad: 'الملف ليس PDF' };
+  const PROT_DROP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
   const PROT_LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
   function bkProtUI(view, sid, doc) {
     const host = view.parentElement; if (!host) return;
@@ -26589,7 +26590,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     el.innerHTML = `<div class="pk-prot__card"><span class="pk-prot__ic">${PROT_LOCK}</span>`
       + `<div class="pk-prot__tx"><b>${esc(L.t)}</b><p>${esc(L.d)}</p><p class="pk-prot__msg" hidden></p></div>`
       + `<div class="pk-prot__btns"><button type="button" class="pk-prot__go" data-protgo hidden>${esc(L.go)}</button>`
-      + `<button type="button" class="pk-prot__up" data-protup>${esc(L.b)}</button></div></div>`;
+      + `<button type="button" class="pk-prot__up" data-protup aria-label="${esc(L.b)}">${PROT_DROP}<span>${esc(L.drop)}<small>${esc(L.or)}</small></span></button></div></div>`;
     host.appendChild(el);
   }
   let protPick = null, protPend = null;
@@ -26612,8 +26613,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (go) { if (protPend && protPend.sid === sid) protUse(sid, protPend.blob, card); return; }
     if (!protPick) { protPick = document.createElement('input'); protPick.type = 'file'; protPick.accept = 'application/pdf,.pdf'; protPick.hidden = true; document.body.appendChild(protPick); }
     protPick.value = '';
-    protPick.onchange = async () => {
-      const f = protPick.files && protPick.files[0]; if (!f) return;
+    protPick.onchange = () => { const f = protPick.files && protPick.files[0]; if (f) protFile(sid, card, f); };
+    protPick.click();
+  }, true);
+  /* ===== منطقةُ الإفلات (طلبُ صاحب الموقع · الاقتراح ٢): يُسحب الملفُّ إلى مساحة المصدر كلِّها، والزرُّ المنقّطُ يشتدّ ===== */
+  const protHost = e => { const h = e.target.closest && e.target.closest('#cm-body .pk-src'); return h && h.querySelector(':scope > .pk-prot') ? h : null; };
+  const protIsFile = e => !!(e.dataTransfer && [...(e.dataTransfer.types || [])].includes('Files'));
+  ['dragenter', 'dragover'].forEach(k => document.addEventListener(k, e => {
+    const h = protHost(e); if (!h || !protIsFile(e)) return;
+    e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; h.classList.add('is-protover');
+  }));
+  document.addEventListener('dragleave', e => {
+    const h = protHost(e); if (h && !(e.relatedTarget && h.contains(e.relatedTarget))) h.classList.remove('is-protover');
+  });
+  document.addEventListener('drop', e => {
+    const h = protHost(e); if (!h || !protIsFile(e)) return;
+    e.preventDefault(); h.classList.remove('is-protover');
+    const card = h.querySelector(':scope > .pk-prot'), f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f && card && !card.querySelector('[data-protup]').disabled) protFile(card.dataset.sid, card, f);
+  });
+  async function protFile(sid, card, f) {
+    {
       const L = PROT_T(), msg = card.querySelector('.pk-prot__msg'), gob = card.querySelector('[data-protgo]');
       if (f.type !== 'application/pdf' && !/\.pdf$/i.test(f.name)) { msg.hidden = false; msg.textContent = L.bad; return; }
       let n = 0;
@@ -26622,9 +26642,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const want = (pkSrcMeta(sid) || {}).pages || 0;
       if (want && n !== want) { protPend = { sid, blob: f }; msg.hidden = false; msg.textContent = L.diff([n, want]); gob.hidden = false; return; }
       protUse(sid, f, card);
-    };
-    protPick.click();
-  }, true);
+    }
+  }
   /* ===== المستندُ البديلُ للكتاب المحميّ (ROADMAP-PROTECT · الاتجاه د) =====
      بواجهة ‎pdf.js‎ نفسِها (‎numPages · getPage · getViewport · render · getTextContent‎) فيمرّ في الكتاب ثلاثيّ الأبعاد والعرض
      الطبيعيّ بلا مسارٍ ثانٍ. صفحتُه: المصغّرةُ مكبّرةً ضبابيّة، ومكانُ كلّ تظليلٍ صافٍ فيه **خطٌّ رماديّ** (تظليلُ نصّ) أو **مربّعٌ
