@@ -12980,7 +12980,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         doc, key, meta, n: doc.numPages, ar: p1.width / p1.height,
         cover: (cv && cv.color) || (meta && meta.cover) || '#2c5e65',
         pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
-        closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة: فيه ينتهي هيكلُ التحميل، فلا يتسلّمه المحرّكُ مفتوحًا على صفحةٍ قديمة */
+        /* يبدأ كما تركه صاحبُه: على الطاولة أو مفتوحًا على صفحته (طلبُ صاحب الموقع) — كان يبدأ مغلقًا دائمًا، فإذا أُعيد رسمُ القسم
+           (فتحُ مساحةٍ أخرى) وجد الموضعَ المحفوظَ غيرَ موضعه فقفز إليه */
+        closed: !meta || meta.closed !== false,
         covKey, covPg,
         wide: true,
         flip: (() => { const f = pkSplitFlip[id] || null; delete pkSplitFlip[id]; return f; })(),
@@ -26511,7 +26513,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       cover: ((chCovMeta(code, ch) || {}).color) || (meta && meta.cover) || '#2c5e65',
       pos: Math.max(0, Math.min((meta && meta.pos) || 0, doc.numPages)),
       /* يُفتح الكتابُ مغلقًا أوّلَ مرّة، ثمّ كما تركتَه */
-      closed: true,   /* كلُّ تحميلٍ يبدأ والكتابُ مغلقٌ على الطاولة (حيث ينتهي هيكلُ التحميل) */
+      closed: !meta || meta.closed !== false,   /* كما تركه: على الطاولة أو مفتوحًا على صفحته */
       covKey: chCovMeta(code, ch) ? chCovKey(code, ch) : null,
     });
   }
@@ -26567,6 +26569,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkLoadSet(k, 100, 100);
     const cv = b.gl && b.gl.el;
     if (bkReduce()) { ph.remove(); bkLoadEnd(k); if (cv) cv.style.opacity = ''; return; }
+    /* والكتابُ عائدٌ مفتوحًا على صفحة صاحبه: لا ينطبق الهيكلُ على الطاولة — يذوب حالًا فوق الصفحات المفتوحة تحته */
+    if (!b.closed && !b.scroll) {
+      if (cv) cv.style.opacity = '';
+      const fin = () => { ph.remove(); bkLoadEnd(k); };
+      ph.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: 'ease-out', fill: 'forwards' }).finished.then(fin, fin);
+      return;
+    }
     /* تنقلب آخرُ الصفحات وينطبق الغلاف، ثمّ يتسلّم المحرّكُ الكتابَ في مكانه نفسِه: يذوب هذا فوقه وذاك يظهر تحته (بلا رفعة) */
     if (cv) cv.style.opacity = '0';
     bkLdClose(ph).then(() => {
