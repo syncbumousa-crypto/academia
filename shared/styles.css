@@ -20019,7 +20019,7 @@ html[data-theme="dark"] .pk-bank .cx-nm__f::before { --rl: rgba(201, 212, 214, .
    فتبدو الزوايا مربّعة — والقصُّ يحكمها كلَّها */
 .pk-src .is-scr > .cbk-scr { border-radius: var(--pk-scr-r, 14px); clip-path: inset(0 round var(--pk-scr-r, 14px)); padding-inline: 0; }
 .is-scr > .cbk-stage, .is-scr > .cbk-nav { visibility: hidden; pointer-events: none; }
-.cbk-scr { position: absolute; inset: 0; z-index: 1; overflow: auto; overscroll-behavior: contain;
+.cbk-scr { position: absolute; inset: 0; z-index: 1; overflow: auto; overscroll-behavior: contain; touch-action: pan-x pan-y;
   display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding: 0 14px 22px; outline: none;
   scrollbar-width: auto; scrollbar-color: auto; }   /* ‎scrollbar-color‎ موروثٌ من أعلى، وكرومُ إن رآه ترك الرسمَ أدناه إلى شريطه العريض (كما في البنك) */
 /* شريطا التمرير كشريطَي البنك بالضبط (طلبُ صاحب الموقع): رفيعان ‎4px‎ بلا سكّة، يقفان ‎18px‎ عن طرفي المساحة، ويغمقان قليلًا عند المرور.

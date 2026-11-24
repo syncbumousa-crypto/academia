@@ -10010,7 +10010,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const b = post && Object.values(pkSrcBk).find(b => b && b.scroll && b.view && post.contains(b.view));
     if (!b) return;
     const d = +z.dataset.bkzm;
-    bkScrZoom(b, d ? Math.round(((b.scrZ || 1) + d * .1) * 10) / 10 : 1);
+    /* (خطّةُ التكبير · المرحلة ٤) الزرّان إلى المستوى الثابت التالي، والنسبةُ تبدّل بين «الصفحة كاملة» (‎100%‎) و«ملء العرض» */
+    if (d) bkScrStep(b, d);
+    else { const z = b.scrZ || 1, zw = bkScrWidthZ(b); bkScrZoomTo(b, Math.abs(z - 1) < .01 && zw > 1.02 ? zw : 1); }
   }, true);
   function pkActTools(id, pub) {
     const a = id ? pkActOf(id) : 'mid';
@@ -26778,8 +26780,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      القائمةُ بدقّتها الحقيقيّة لا بنسخة الكتاب، ورسمُها هي يجد الملفَّ مرسومًا */
   function bkScrWarm(b) {
     if (!b || b.scroll || !b.doc || !b.view || !b.view.isConnected) return;
-    const src = b.view.closest('.pk-src') || b.view, pw = src.getBoundingClientRect().width; if (!pw) return;
-    const w = bkScrW(Math.min(780, Math.max(pw, 520)) * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
+    const src = b.view.closest('.pk-src') || b.view, R = src.getBoundingClientRect(), pw = R.width; if (!pw) return;
+    /* (خطّةُ التكبير · المرحلة ٥) بعرض ‎100%‎ نفسِه (الصفحةُ كاملةً في المساحة — ‎bkScrFitW‎)، لا بسقف ‎780px‎ القديم */
+    const fw = b.scrFW || Math.max(120, Math.min(pw - 48, (R.height - 66) * (b.ar || 1 / Math.SQRT2)));
+    const w = bkScrW(fw * (b.scrZ || 1)), k0 = b.closed ? 1 : Math.max(1, b.pos || 1);
     const key = k0 + '|' + w; if (b.warmKey === key) return; b.warmKey = key;
     const ks = [k0, k0 + 1, k0 - 1, k0 + 2].filter(k => k >= 1 && k <= (b.n || 1));
     ks.reduce((p, k) => p.then(() => b.warmKey === key && !b.scroll ? bk2Tex(b, k, w).catch(() => {}) : null), Promise.resolve());
@@ -27840,16 +27844,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(() => bkScrFit(b));
     b.scrZ = b.scrZ || 1; sc.style.setProperty('--bk-z', b.scrZ); bkScrZv(b);
     /* القرصةُ بإصبعين (عجلةٌ مع ‎ctrlKey‎) تقرّب حول موضع الإصبعين — تُجمع وتُنفَّذ مرّةً في الإطار كما في نافذة الملخّص */
+    /* ===== خطّةُ التكبير · المرحلة ٣: كلُّ طرق التقريب =====
+       · عجلةُ الفأرة مع ‎Ctrl‎ (درجاتٌ كبيرة): كلُّ درجةٍ إلى المستوى الثابت التالي، حول المؤشّر وبانسيابٍ قصير؛
+       · القرصُ على لوحة اللمس (يصل عجلةً بـ‎Ctrl‎ بفروقٍ صغيرة): سلسٌ بلا مستويات؛ وفي سفاري يصل ‎gesture*‎؛
+       · بإصبعين على الجوّال واللوح: حول ما بين الإصبعين، ولا يُقرَّب الموقعُ كلُّه */
     let zAcc = 0, zReq = 0, zAt = null;
     sc.addEventListener('wheel', e => {
       if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
-      const r = sc.getBoundingClientRect(); zAt = { x: e.clientX - r.left, y: e.clientY - r.top };
-      zAcc += e.deltaY;
+      const r = sc.getBoundingClientRect(), at = { x: e.clientX - r.left, y: e.clientY - r.top };
+      const notch = e.deltaMode === 1 || (Math.abs(e.deltaY) >= 50 && Number.isInteger(e.deltaY));
+      if (notch) { if (performance.now() - (b.zStepAt || 0) > 90) { b.zStepAt = performance.now(); bkScrStep(b, e.deltaY < 0 ? 1 : -1, at); } return; }
+      zAt = at; zAcc += e.deltaY;
       if (zReq) return;
-      zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrPinch(b, Math.exp(-d / 200), zAt); });
+      zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrPinch(b, Math.exp(-d / 110), zAt); });
     }, { passive: false });
-    sc.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === '0') { e.preventDefault(); bkScrZoom(b, 1); } });
+    let gs = 1;
+    sc.addEventListener('gesturestart', e => { e.preventDefault(); gs = 1; }, { passive: false });
+    sc.addEventListener('gesturechange', e => {
+      e.preventDefault(); const r = sc.getBoundingClientRect();
+      bkScrPinch(b, e.scale / gs, { x: e.clientX - r.left, y: e.clientY - r.top }); gs = e.scale;
+    }, { passive: false });
+    let tp = null;
+    const tpd = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    sc.addEventListener('touchstart', e => { if (e.touches.length === 2) tp = tpd(e.touches); }, { passive: true });
+    sc.addEventListener('touchmove', e => {
+      if (e.touches.length !== 2 || !tp) return;
+      e.preventDefault();
+      const d = tpd(e.touches), r = sc.getBoundingClientRect();
+      bkScrPinch(b, d / tp, { x: (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left, y: (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top }); tp = d;
+    }, { passive: false });
+    sc.addEventListener('touchend', e => { if (e.touches.length < 2) tp = null; }, { passive: true });
     b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { bkScrThumbPut(b, en.target); bkScrPaint(b, en.target); } }), { root: sc, rootMargin: '900px 0px' });
     b.scrFar = new IntersectionObserver(es => es.forEach(en => {
       if (en.isIntersecting || !en.target.dataset.w) return;
@@ -28561,6 +28586,40 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     clearTimeout(g.t); g.t = setTimeout(() => bkScrPinchEnd(b), 160);
     if (s < .6 || s > 1.7) bkScrPinchEnd(b);   /* (حدُّ ما تُغطّيه الصفحاتُ المأخوذة: يُثبَّت ويبدأ من جديد) */
   }
+  /* ===== خطّةُ التكبير · المرحلة ٤: مستوياتٌ ثابتة (كعارض كروم) للأزرار والمفاتيح ودرجات العجلة =====
+     ‏‎100%‎ = الصفحةُ كاملة. والانتقالُ إليها انسيابٌ قصيرٌ بالإيماءة نفسِها (صورةٌ على كرت الشاشة ثمّ تثبيتٌ مرّةً) */
+  const BK_ZLV = [.5, .67, .75, .8, .9, 1, 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4];
+  function bkScrStep(b, dir, at) {
+    const z = b.zg ? b.zg.z : (b.scrZ || 1);
+    const t = dir > 0 ? BK_ZLV.find(v => v > z + .005) : [...BK_ZLV].reverse().find(v => v < z - .005);
+    if (t) bkScrZoomTo(b, t, at);
+  }
+  function bkScrZoomTo(b, zt, at) {
+    const sc = b.scr; if (!sc) return;
+    zt = Math.min(BK_ZMAX, Math.max(BK_ZMIN, zt));
+    at = at || { x: sc.clientWidth / 2, y: sc.clientHeight / 2 };
+    cancelAnimationFrame(b.zAnim);
+    const z0 = b.zg ? b.zg.z : (b.scrZ || 1), t0 = performance.now(), D = 160 * (window.__pkfxSlow || 1);
+    if (Math.abs(zt - z0) < .001) return;
+    const tick = () => {
+      const q = Math.min(1, (performance.now() - t0) / D), e = 1 - Math.pow(1 - q, 3), z = z0 * Math.pow(zt / z0, e);
+      const cur = b.zg ? b.zg.z : (b.scrZ || 1);
+      bkScrPinch(b, z / cur, at);
+      if (q < 1) b.zAnim = requestAnimationFrame(tick); else { b.zAnim = 0; bkScrPinchEnd(b); }
+    };
+    b.zAnim = requestAnimationFrame(tick);
+  }
+  /* ملءُ العرض: الصفحةُ بعرض المساحة إلّا هامشها */
+  const bkScrWidthZ = b => b.scr && b.scrFW ? Math.min(BK_ZMAX, (b.scr.clientWidth - 48) / b.scrFW) : 1;
+  /* ‏‎Ctrl +/−/0‎ والمؤشّرُ على مساحة الصفحات (أو التركيزُ فيها): تقريبُها لا تقريبُ المتصفّح كلِّه */
+  document.addEventListener('keydown', e => {
+    if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
+    const k = e.key, dir = k === '+' || k === '=' ? 1 : k === '-' || k === '_' ? -1 : k === '0' ? 0 : null; if (dir === null) return;
+    const b = Object.values(pkSrcBk).find(b => b && b.scroll && b.scr && b.scr.isConnected && (b.scr.matches(':hover') || b.scr.contains(document.activeElement)));
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    if (dir) bkScrStep(b, dir); else bkScrZoomTo(b, 1);
+  }, true);
   function bkScrPinchEnd(b) {
     const g = b.zg; if (!g) return; b.zg = null; clearTimeout(g.t);
     for (const [el] of g.pages) el.style.transform = el.style.transformOrigin = '';
