@@ -28533,6 +28533,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sc = b.scr; if (!sc) return;
     b.scrPW = 0;
     z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
+    if (Math.abs(z - 1) < .04) z = 1;   /* (يلتصق بـ ‎100%‎ — لا يقف على ‎101%‎ والصفحةُ مزاحةٌ شعرة) */
     const z0 = b.scrZ || 1; if (Math.abs(z - z0) < .001) return;
     /* ===== التقريبُ حول ما تحت المؤشّر، لا حول الوسط (طلبُ صاحب الموقع) =====
        تُؤخذ الصفحةُ التي تحت المؤشّر (أو أقربُها إليه) وموضعُه منها نسبةً، ثمّ بعد التكبير تُردّ تلك النقطةُ تحت المؤشّر:
@@ -28558,7 +28559,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const lim = (cw - q2.width) / 2 - 14;
       /* التصغيرُ يعيد الصفحةَ إلى وسط المساحة (طلبُ صاحب الموقع): لا تبقى مائلةً يمينًا أو يسارًا بهامشٍ في جانبٍ واحد.
          فإزاحتُها تتلاشى بقدر ما يقترب التقريبُ من ‎100%‎، وتنعدم عندها وما دونها؛ والتقريبُ وحده يتبع المؤشّر */
-      b.scrX = z < z0 ? (z <= 1 ? 0 : (b.scrX || 0) * (z - 1) / (z0 - 1)) : (b.scrX || 0) - dx;
+      /* (طلبُ صاحب الموقع: «بعد ما اكبّر لما ارجع اصغّر تميل الصفحات») كانت تتلاشى بنسبة التقريب نفسِها فتبقى مائلةً ظاهرًا حتى
+         ‎100%‎ — فالآن بمربّعها: تعود إلى الوسط مع أوّل التصغير */
+      b.scrX = z < z0 ? (z <= 1 ? 0 : (b.scrX || 0) * Math.pow((z - 1) / (z0 - 1), 2)) : (b.scrX || 0) - dx;
       b.scrX = Math.max(-lim, Math.min(lim, b.scrX));
       sc.style.setProperty('--bk-x', b.scrX + 'px');
     } else {
@@ -28642,6 +28645,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fw = Math.max(120, Math.floor(Math.min(w - 48, (h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
     if (b.scrFW === fw) return;
     b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
+    if ((b.scrZ || 1) <= 1 && b.scrX) { b.scrX = 0; sc.style.setProperty('--bk-x', '0px'); }   /* (تغيّر المقاس: على ‎100%‎ وما دونها في الوسط) */
   }
   function bkScrFit(b) {
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
