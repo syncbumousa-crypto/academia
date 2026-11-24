@@ -67,7 +67,7 @@ const BUCKET = "books";
      POST {verify:1,h,tmp}      ⇐ يُحسب بصمةُ المؤقّت؛ تطابقت ⇐ يُنقل إلى ‎<h>‎ ويُسجَّل الحقّ وتُحذف أيُّ نسخةٍ عامّةٍ بالبصمة نفسِها
      GET ?h=[&src=]             ⇐ له حقّ ⇐ رابطٌ موقَّع ٦٠ ثانية · وإلّا نسختُه هو لهذا المصدر (‎book_own‎) · وإلّا ٤٠٣
      POST {own:1,h,src}         ⇐ نسختي لهذا المصدر (طبعةٌ أخرى ببصمةٍ أخرى — وقد رُفعت وتُحقّق منها): تتزامن بين أجهزتي
-     POST {pv:1,h}              ⇐ لمن له حقّ: إذنُ رفع المصغّرات العامّة ‎pv/<h>.webp‎ (أشكالُ الصفحات بلا نصٍّ يُقرأ)
+     POST {pv:1,h[,cov:n]}      ⇐ لمن له حقّ: إذنُ رفع المصغّرات العامّة ‎pv/<h>.webp‎ (أشكالُ الصفحات بلا نصٍّ يُقرأ) أو صورة الغلاف ‎pv/<h>-c<n>.webp‎
      POST {unpriv:1,h}          ⇐ لمن له حقّ: يعود الملفُّ عامًّا (غُيّر نوعُ المصدر عن «كتاب») */
 const PRIV = "books-private";
 const MAX_VERIFY = 200 * 1024 * 1024;
@@ -169,8 +169,10 @@ export async function onRequest({ request, env }) {
     if (b.pv) {
       if (!(await canRead(h, s.uid))) return J({ error: "forbidden" }, 403);
       await ensureBucket(base, key, BUCKET, true);
-      const up = await signUp(BUCKET, "pv/" + h + ".webp", true);
-      return up ? J({ h, upload: up, url: pub("pv/" + h + ".webp") }) : J({ error: "sign" }, 502);
+      /* (‎cov:n‎ ⇐ صورةُ الغلاف واضحةً — صفحةُ الملفّ التي هي غلافُ الكتاب: ‎pv/<h>-c<n>.webp‎) */
+      const cn = b.cov | 0, name = "pv/" + h + (cn > 0 && cn < 100000 ? "-c" + cn : "") + ".webp";
+      const up = await signUp(BUCKET, name, true);
+      return up ? J({ h, upload: up, url: pub(name) }) : J({ error: "sign" }, 502);
     }
 
     /* ===== العودةُ عامًّا (تغيّر النوع عن «كتاب»): لمن له حقّ ===== */

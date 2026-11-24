@@ -12072,8 +12072,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يصنعها أوّلُ متصفّحٍ يفتح الملفَّ وله حقّ، مرّةً لكلّ بصمة */
   const PV_TW = 24, PV_COLS = 10, pvDone = new Set();
   const pvURL = h => BOOKS_PUB() + 'pv/' + h + '.webp';
-  async function pvEnsure(h, doc) {
-    if (!h || pvDone.has(h) || !doc || doc.__prot || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return;
+  const pvCovURL = (h, k) => BOOKS_PUB() + 'pv/' + h + '-c' + k + '.webp';
+  /* الغلافُ ظاهرٌ في المحميّ (طلبُ صاحب الموقع): صفحةُ الملفّ التي هي غلافُ الكتاب تُرسم واضحةً */
+  const PV_CW = 720;
+  async function pvCover(doc, k) {
+    const pg = await doc.getPage(Math.max(1, Math.min(doc.numPages, k))), v1 = pg.getViewport({ scale: 1 });
+    const vp = pg.getViewport({ scale: PV_CW / v1.width }), cv = document.createElement('canvas');
+    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+    const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+    await pg.render({ canvasContext: cx, viewport: vp }).promise;
+    return cv;
+  }
+  const protCovPg = sid => pkSrcCovMeta(sid) ? 0 : ((pkSrcMeta(sid) || {}).covPg || 1);
+  async function pvCovEnsure(h, doc, k) {
+    const tag = h + '-c' + k;
+    if (!k || pvDone.has(tag)) return; pvDone.add(tag);
+    try { const hd = await fetch(pvCovURL(h, k), { method: 'HEAD', cache: 'no-store' }); if (hd.ok) return; } catch (e) { return; }
+    try {
+      const blob = await new Promise(async res => (await pvCover(doc, k)).toBlob(res, 'image/webp', .8));
+      if (!blob) return;
+      const r = await apiFetch(booksURL(), { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ h, pv: 1, cov: k }) });
+      if (!r.ok) return;
+      const j = await r.json();
+      if (!j.upload || !String(j.url || '').endsWith('-c' + k + '.webp')) return;   /* (خادمٌ لا يعرف الغلاف: لا تُكتب فوق المصغّرات) */
+      await fetch(j.upload, { method: 'PUT', headers: { 'content-type': 'image/webp', 'x-upsert': 'true' }, body: blob });
+    } catch (e) { pvDone.delete(tag); }
+  }
+  async function pvEnsure(h, doc, sid) {
+    if (!h || !doc || doc.__prot || typeof SRV_ON !== 'function' || !SRV_ON() || isGuest()) return;
+    if (sid) pvCovEnsure(h, doc, protCovPg(sid));
+    if (pvDone.has(h)) return;
     pvDone.add(h);
     try { const hd = await fetch(pvURL(h), { method: 'HEAD', cache: 'no-store' }); if (hd.ok) return; } catch (e) { return; }
     try {
@@ -13018,7 +13046,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!view.isConnected) return;
       if (!doc) { bkLoadEnd(key); view.innerHTML = `<p class="v-none">${doc === null ? T().chMissing : T().chBadPdf}</p>`; return; }
       bkProtUI(view, id, doc);
-      if (!doc.__prot && meta && meta.h && bookPriv(id)) (window.requestIdleCallback || setTimeout)(() => pvEnsure(meta.h, doc));
+      if (!doc.__prot && meta && meta.h && bookPriv(id)) (window.requestIdleCallback || setTimeout)(() => pvEnsure(meta.h, doc, id));
       bkLoadSet(key, 45, 62);
       await pkSrcColorSync(id, doc);
       if (meta && meta.pages !== doc.numPages) meta.pages = doc.numPages;
@@ -26609,6 +26637,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       im.onload = () => { sprite = im; const rows = Math.ceil(n / PV_COLS), th = im.naturalHeight / rows; if (th > 0) ar = PV_TW / th; res(); };
       im.onerror = () => res(); im.src = pvURL(m.h);
     });
+    const covK = protCovPg(sid);
+    let covP = null;
+    const covImg = () => covP || (covP = loc ? Promise.resolve(loc.cover && loc.cover()).catch(() => null) : !m.h ? Promise.resolve(null) : new Promise(res => {
+      const im = new Image(); im.crossOrigin = 'anonymous';
+      im.onload = () => res(im); im.onerror = () => res(null); im.src = pvCovURL(m.h, covK);
+    }));
     const W0 = 612;
     const page = k => {
       const H0 = W0 / ar;
@@ -26622,6 +26656,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const promise = (async () => {
             const W = v.width, H = v.height;
             c.save(); c.fillStyle = '#fbfaf6'; c.fillRect(0, 0, W, H);
+            const cov = k === covK ? await covImg() : null;
+            if (cov) {   /* الغلافُ واضحٌ، بلا ضبابٍ ولا قفل */
+              c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high'; c.drawImage(cov, 0, 0, W, H); c.restore(); return;
+            }
             if (sprite) {
               const th = sprite.naturalHeight / Math.ceil(n / PV_COLS);
               /* (المصغّرةُ ‎24px‎: تُكبَّر بنعومةٍ ثمّ ضبابٌ خفيف يمحو مربّعاتها — والأشكالُ تُرى، والكلماتُ لا) */
@@ -26694,7 +26732,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (key.indexOf('pksrc:') === 0) {
         const sid = key.slice(6);
         if (/^a\d{3}d-/.test(sid) && bookPriv(sid) && !bkPrivOk[sid]) {
-          const pd = bkProtDoc(sid, { n: doc.numPages, sheet: pvSheet(doc) });
+          const pd = bkProtDoc(sid, { n: doc.numPages, sheet: pvSheet(doc), cover: () => pvCover(doc, protCovPg(sid)) });
           if (chPdfOpening[key] === pr) chPdfDoc[key] = pd;
           return pd;
         }
