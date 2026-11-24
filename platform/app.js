@@ -27674,7 +27674,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
       bk2Show(b);
       const w = b.mxWant; b.mxWant = null;
-      if (b.scrPend) { b.scrPend = false; if (bkModeGet() === 'scroll') { bkScrOn(b); pkSrcHFit(); return; } }
+      if (b.scrPend) { b.scrPend = false; if (bkModeGet() === 'scroll') { bkDiag(b, 'pending-after-morph'); bkScrInSafe(b); pkSrcHFit(); return; } }   /* (كان يُبنى مباشرةً بلا تحوّل) */
       if (w != null && w !== !!b.one) bk2Switch(b, w);
       else pkSrcHFit();
     };
@@ -27774,7 +27774,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (m === 'scroll') {
         if (b.scroll) return;
         if (b.mx) { b.mxWant = true; b.scrPend = true; return; }   /* تبدُّلٌ جارٍ: يُمرَّر حين يتمّ */
-        bkScrIn(b); return;
+        bkScrInSafe(b); return;
       }
       b.scrPend = false;
       const one = m === 'one';
@@ -27916,19 +27916,57 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return { cv, R };
   }
   /* الدخولُ: من الكتاب إلى الصفحات المتتالية */
+  /* ===== خطّةُ ثبات التحويل · المرحلة ٠: سجلُّ التحويلات (يعمل بطلب: ‎localStorage['ac.bk.diag']='1'‎) =====
+     لكلّ تحويلٍ إلى الصفحات المتتالية: الطريقُ الذي أخذه (حيّ / تلاشٍ)، وأسبابُه، وانتظاراتُه، واللحظاتُ الثقيلةُ على الجهاز
+     في الثانيتين بعده. يُقرأ من الكونسول: ‎copy(JSON.stringify(__bkDiag))‎ */
+  const bkDiagOn = () => { try { return localStorage.getItem('ac.bk.diag') === '1'; } catch (e) { return false; } };
+  function bkDiag(b, note, extra) {
+    if (!bkDiagOn()) return;
+    const L = window.__bkDiag = window.__bkDiag || [];
+    let e = b.__dg;
+    if (!e || note === 'start') {
+      e = b.__dg = { at: new Date().toISOString().slice(11, 23), t0: performance.now(), steps: [], ua: navigator.userAgent.replace(/^.*?\) /, '').slice(0, 60), long: 0, longMs: 0 };
+      L.push(e); if (L.length > 30) L.shift();
+      try { const po = new PerformanceObserver(l => l.getEntries().forEach(x => { if (x.startTime >= e.t0) { e.long++; e.longMs += Math.round(x.duration); } })); po.observe({ type: 'longtask', buffered: false }); setTimeout(() => po.disconnect(), 2000); } catch (er) {}
+    }
+    e.steps.push(Math.round(performance.now() - e.t0) + 'ms ' + note + (extra ? ' ' + JSON.stringify(extra) : ''));
+  }
+  /* ===== المرحلة ١: طريقٌ واحدٌ دائمًا — لا حالةَ تسقط إلى قفزة =====
+     · استدعاءُ التحديدات جارٍ (الكتابُ يُقلَّب مغلقًا): يُوقف بلا إعادة فتح.
+     · صفحةٌ تتقلّب (المحرّكُ لا يُعطي أماكنَ صفحاته وهو يتحرّك): يُنتظر استقرارُه — ثلثَ ثانيةٍ على الأكثر.
+     ثمّ التحويلُ الحيّ (‎bkScrIn‎) — وإن بقي بلا أماكن (مغلقٌ أو لم يستقرّ) قُدِّر مكانُ الصفحة فوق الكتاب فكبرت منه */
+  function bkScrInSafe(b) {
+    bkDiag(b, 'start', { closed: !!b.closed, pos: b.pos });
+    const g = b.gl;
+    if (g && !g.dead && g.riffling) { try { if (hlCall && hlCall.b === b) { b.hlReopen = null; hlCallStop(false); } else g.riffleEnd(); } catch (e) {} bkDiag(b, 'stopped-riffle'); }
+    if (!g || g.dead || b.closed || g.settled !== false) return bkScrIn(b);
+    const t0 = performance.now();
+    const wait = () => {
+      if (b.scroll || bkModeGet() !== 'scroll') return;   /* (تبدّل شيءٌ في أثناء الانتظار) */
+      if (!b.gl || b.gl.dead || b.gl.settled || performance.now() - t0 > 340) { bkDiag(b, 'waited-settle', { ms: Math.round(performance.now() - t0), settled: !!(b.gl && b.gl.settled) }); return bkScrIn(b); }
+      requestAnimationFrame(wait);
+    };
+    requestAnimationFrame(wait);
+  }
   function bkScrIn(b) {
     const g = b.gl, ok = g && !g.dead && !bkReduce() && b.stage && b.stage.clientWidth;
     let gh = null, F = null, FS = [];
     if (ok) {
       F = b.closed ? null : bkPgScreen(g, b.pos);
       FS = b.closed ? [] : bkPgScreens(g);
+      if (!FS.length) {
+        /* بلا أماكن (مغلقٌ على الطاولة، أو لم يستقرّ): الصفحةُ تكبر من وسط الكتاب بقدر صفحةٍ فيه — الغلافُ يصير أوّلَ صفحة */
+        const R = g.el.getBoundingClientRect(), ar = b.ar || 1 / Math.SQRT2, h = R.height * .62, w = h * ar;
+        FS = [{ k: b.closed ? 1 : Math.max(1, b.pos || 1), l: R.left + (R.width - w) / 2, t: R.top + (R.height - h) / 2, w, h }];
+        bkDiag(b, 'estimated-rect', { closed: !!b.closed });
+      }
       /* (المرحلة ٢) لوحةُ الكتاب الحيّةُ نفسُها هي اللقطة: تبقى على آخر إطار وتذوب، ويُتمّ إطفاؤها بعد — بلا نسخٍ منها */
       if (g.el && g.el.getContext) { gh = { cv: g.el, R: g.el.getBoundingClientRect() }; b.keepGl = true; }
       else { const cv = document.createElement('canvas'); try { g.snapshot(cv); gh = { cv, R: g.el.getBoundingClientRect() }; } catch (e) { gh = null; } }
     }
     bkScrOn(b);
     if (gh && b.glFin) { const fin = b.glFin, cv = gh.cv; b.glFin = null; const rm = cv.remove; cv.remove = () => { cv.remove = rm; cv.remove(); fin(); }; }   /* (يُعاد الإزالةُ الأصليّة أوّلًا: الإطفاءُ يُزيلها هو أيضًا) */
-    if (!gh || !b.scr) { if (gh) gh.cv.remove(); return; }
+    if (!gh || !b.scr) { if (gh) gh.cv.remove(); bkDiag(b, 'no-transition', { gl: !!g, ok: !!ok }); return; }
     const sc = b.scr, ov = b.scrOv, k = b.pos;
     bkGhostPut(b, gh.cv, gh.R);
     sc.style.opacity = '0'; if (ov) ov.style.opacity = '0';
@@ -27955,6 +27993,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          (المرحلة ١) فتأخذ مكانَ اللقطة. وما لم يكن ظاهرًا في الكتاب ينزلق إلى مكانه من فوق ومن تحت بفارقٍ يسير،
          ولقطةُ الكتاب (طاولتُه وظلُّه) تذوب سريعًا */
       const pgs = el && P && P.w ? FS.map(f => [sc.querySelector(`.cbk-scr__pg[data-k="${f.k}"]`), f]).filter(([e, f]) => e && f.w) : [];
+      bkDiag(b, pgs.length ? 'live' : 'fade', { gateMs: Math.round(performance.now() - t0), pages: pgs.length });
       if (pgs.length) {
         const D = o.duration, mv = new Set(pgs.map(([e]) => e));
         pgs.forEach(([e, f]) => {
