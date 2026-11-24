@@ -28730,8 +28730,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sc = b.scr; if (!sc) return;
     const w = sc.clientWidth, h = sc.clientHeight; if (!w || !h) return;
     const fw = Math.max(120, Math.floor(Math.min(w - 48, (h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
-    if (b.scrFW === fw) return;
-    b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
+    /* (المقارنةُ بما على هذه القائمة نفسِها: الكتابُ يبقى والقائمةُ تُبنى من جديد مع كلّ رجوعٍ إلى العرض العاديّ — كانت تُقارن
+       بقيمة الكتاب المحفوظة فلا تُكتب على القائمة الجديدة، فتأخذ عرضَ المساحة كلَّه ويختلّ ‎100%‎ وحدُّ التصغير) */
+    if (sc.bkFW === fw) return;
+    sc.bkFW = b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
   }
   function bkScrFit(b) {
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
