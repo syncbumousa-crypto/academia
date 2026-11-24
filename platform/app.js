@@ -28243,12 +28243,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          كانت تُقاد من أوّلها إطارًا إطارًا، وبناءُ الكتاب يشغل الصفحةَ في الوقت نفسِه فتقف. فقبله حركةٌ يجريها كرتُ الشاشة وحده
          (‎WAAPI‎) نحو ‎42%‎ من طريقها تتمهّل؛ ومعه تُقاد بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) من حيث بلغت إلى مكانه الحيّ،
          بمنحناه ومدّته (‎cosE‎) — فيمضيان معًا وينتهيان معًا */
-      const pre = live ? live.d.animate([{ transform: 'none' }, { transform: tf(T[0], .42) }], { duration: 700 * slow, easing: 'cubic-bezier(.2, .7, .3, 1)', fill: 'forwards' }) : null;
-      let mEnd = false, rc = null, tM = 0;
+      /* (طلبُ صاحب الموقع: «ابيها مستمرة من اول ما اضغط») حركةٌ واحدةٌ متّصلةُ السرعة — لا تتمهّل حتى تكاد تقف وهي تنتظر الكتاب
+         ثمّ يبدأ الانفتاحُ من السكون (كان ذلك وقفةً في وسطها): قبله تمضي بسرعةٍ ثابتةٍ تقريبًا (‎e = cap·(1 − e^(−v·t/cap))‎ — تبطؤ
+         قليلًا إن طال البناء ولا تقف)، ومعه يكمل الباقي من سرعتها نفسِها إلى السكون في آخره (منحنى ‎Hermite‎) */
+      const cap = .58, v = 1 / (760 * slow), eAt = t => cap * (1 - Math.exp(-v * t / cap));
+      const PD = 2600 * slow, pre = live ? live.d.animate(Array.from({ length: 14 }, (_, i) => ({ offset: i / 13, transform: tf(T[0], eAt(PD * i / 13)) })), { duration: PD, easing: 'linear', fill: 'forwards' }) : null;
+      let mEnd = false, rc = null, tM = 0, m0 = 0, ctx = 0, cty = 0;
+      /* (طلبُ صاحب الموقع: «ما احس انها جت من ورا الورقة وانما هي جزء ممتد من كعبها») كان الكتابُ ينفتح بقدّه الأصغر خلف الصفحة
+         الطائرة وهي بعدُ أكبر منه، فيطلّ النصفُ المنفتحُ من فوقها. فالكتابُ كلُّه (لوحتُه) يُكبَّر ويُزاح إطارًا إطارًا حتى تنطبق صفحتُه
+         الباقيةُ على الصفحة الطائرة: الكعبُ حافّتُها، والنصفُ الآخرُ يمتدّ منه — ويصغران معًا إلى مكانهما */
       const put = () => {
         if (mDone || !live || !rc || !L.isConnected) return;
-        const q = mEnd ? 1 : Math.min(1, (performance.now() - tM) / (BK_MX * slow)), c = (1 - Math.cos(Math.PI * q)) / 2, f = goal();
-        live.d.style.transform = tf({ l: rc.left + (f.l - rc.left) * c, t: rc.top + (f.t - rc.top) * c, w: rc.width + (f.w - rc.width) * c, h: rc.height + (f.h - rc.height) * c }, 1);
+        const g = b.gl; if (!g || g.dead) return;
+        const q = mEnd ? 1 : Math.min(1, (performance.now() - tM) / (BK_MX * slow));
+        const c = m0 * (q * q * q - 2 * q * q + q) + (3 * q * q - 2 * q * q * q);   /* (يبدأ بميل ‎m0‎: سرعتُها قبله) */
+        const R = g.el.getBoundingClientRect(), bx = R.left - ctx, by = R.top - cty;   /* (مكانُ اللوحة بلا إزاحتنا) */
+        const fr = (g.pageRects() || []).find(x => x.k === k);
+        const f = fr ? { l: bx + fr.x, t: by + fr.y, w: fr.w, h: fr.h } : T[0];
+        const p = { l: rc.left + (f.l - rc.left) * c, t: rc.top + (f.t - rc.top) * c, w: rc.width + (f.w - rc.width) * c, h: rc.height + (f.h - rc.height) * c };
+        live.d.style.transform = tf(p, 1);
+        if (fr && fr.w) {
+          const sc = p.w / fr.w; ctx = p.l - bx - sc * fr.x; cty = p.t - by - sc * fr.y;
+          g.el.style.transformOrigin = '0 0';
+          g.el.style.transform = Math.abs(sc - 1) < 1e-4 && Math.abs(ctx) < .05 && Math.abs(cty) < .05 ? '' : `translate(${ctx}px, ${cty}px) scale(${sc})`;
+        }
       };
       const open = g => {
         if (mOn || mDone) return;
@@ -28258,6 +28276,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* تُثبَّت حيث بلغت حركتُها ثمّ تُرفع */
         if (live) { rc = live.d.getBoundingClientRect(); live.d.style.transform = tf({ l: rc.left, t: rc.top, w: rc.width, h: rc.height }, 1); if (pre) pre.cancel(); }
         tM = performance.now();
+        { const t = tM - t0, e = Math.min(cap, eAt(t)); m0 = Math.max(0, Math.min(3, v * Math.exp(-v * t / cap) * BK_MX * slow / Math.max(.05, 1 - e))); }
         bkDiag(b, 'unfold-start', { resizes: g.resizes });
         if (g.hideKept) g.hideKept(true);
         g.afterFrame = () => { if (!g.folding) mEnd = true; put(); };   /* (آخرُ إطارٍ من الانفتاح: في مكانها تمامًا) */
@@ -28267,7 +28286,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const f = bkPgScreens(g).find(x => x.k === k), r = live && live.d.getBoundingClientRect();
           if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;
           bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null, resizes: g.resizes });
-          mDone = true; g.afterFrame = null; L.remove(); bk2MxEnd(b);
+          mDone = true; g.afterFrame = null; g.el.style.transform = g.el.style.transformOrigin = ''; L.remove(); bk2MxEnd(b);
         });
       };
       onEngine = open;
