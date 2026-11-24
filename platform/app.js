@@ -28098,6 +28098,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        · الاستلام: حين يجهز الكتابُ (مطويًّا، معروضًا بشفافيةٍ لا تُرى) يُوضع على درجة الطيّ نفسِها (‎setFold‎) ويكمل على الساعة
          نفسِها (‎morph(…, ease)‎)، ولوحتُه تُكبَّر وتُزاح حتى تنطبق صفحتُه على صفحة القارئ — فيُرفع التوأمُ في الإطار الذي يظهر فيه؛
        · وإن تأخّر الكتابُ حتى تنتهي الحركة: يستلم ساكنًا، وتمضي صفحةُ القارئ إلى مكانها الحقيقيّ في لحظة */
+  /* ===== خطّةُ التوأم · المرحلة ٤: الكتابُ يُبنى من لحظة الضغط على القوس (لا من رفع الإصبع) =====
+     بين نزول الإصبع ورفعه ‎~0.1‎ ثانية: يبدأ فيها بناءُ الكتاب المطويّ على صفحة القارئ، فيستلم من التوأم أبكر. وإن لم تتمّ النقرة
+     (سُحب الإصبعُ بعيدًا) يُطرح بعد أربع ثوانٍ — لا كتابَ ينتظر في الصفحات المتتالية */
+  const bkTwoAt = b => {
+    const k = Math.min(Math.max(1, b.n || 1), Math.max(bkSk(b) + 1, b.pos || 1)), side = bkSideOf(b, k), sp = bkSpread(b, k);
+    const pg = Math.max(1, k - bkSk(b));
+    return { k, side, pk: side === 'L' ? sp.R : sp.L, A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1 };
+  };
+  function bkPreDrop(b) {
+    const p = b.pre; if (!p) return; b.pre = null; p.cancel = true; clearTimeout(p.t);
+    if (!b.mx && !b.texGate) b.fastTex = false;
+    if (p.g && !p.g.dead) try { p.g.dispose(); } catch (e) {}
+  }
+  function bkPreTwo(b) {
+    if (b.pre || !b.scroll || !b.stage || bkReduce() || b.mx) return;
+    const t = bkTwoAt(b), p = b.pre = { k: t.k, side: t.side, g: null, ready: false, cancel: false };
+    p.p = new Promise(r => { p.on = r; });
+    p.t = setTimeout(() => { if (b.pre === p) bkPreDrop(b); }, 4000);
+    b.fastTex = true;   /* (صورُه من رسم الصفحات المتتالية الحاضر — لا رسمَ من الملفّ) */
+    bk2Engine(b, { pre: p, quiet: true, morph: t.side, A: t.A, one: false, nearKs: [t.k, t.pk].filter(Boolean) });
+  }
+  document.addEventListener('pointerdown', e => {
+    const a = e.target.closest && e.target.closest('#cm-body [data-bkvw]');
+    if (!a || a.dataset.bkvw !== 'two' || bkModeGet() !== 'scroll' || e.button !== 0) return;
+    Object.values(pkSrcBk).forEach(b => { if (b && b.scroll && b.view && b.view.isConnected) bkPreTwo(b); });
+  }, true);
   function bkScrOutTwo(b) {
     if (bkReduce() || !b.scr || !b.view || !b.stage) return false;
     const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
@@ -28107,7 +28133,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!r0 || !r0.width) return false;
     const side = bkSideOf(b, k), out = side === 'L' ? 1 : -1, sp = bkSpread(b, k), pk = side === 'L' ? sp.R : sp.L;
     const F = (bkGeoPredict(b, k, false, P).find(t => t.k === k)); if (!F) return false;
-    bkDiag(b, 'start', { to: 'two', k, twin: true });
+    /* الكتابُ المبنيُّ عند الضغط (إن كان على هذه الصفحة ووُجد) يُتبنّى */
+    let pre = b.pre && b.pre.g && !b.pre.g.dead && b.pre.k === k && b.pre.side === side ? b.pre : null;
+    if (pre) { clearTimeout(pre.t); b.pre = null; } else bkPreDrop(b);
+    bkDiag(b, 'start', { to: 'two', k, twin: true, pre: pre ? (pre.ready ? 'ready' : 'building') : 'none' });
     const slow = window.__pkfxSlow || 1, Dm = BK_MX * slow, t0 = performance.now();
     /* الكاميرا كما يحسبها المحرّك (‎frameCam‎ مع ‎mo‎): مساحتُه قامةُ المسرح وعرضُه، والعدسة ‎28°‎ */
     const sw = b.stage.clientWidth || P.width, sh = b.stage.clientHeight || P.height;
@@ -28215,7 +28244,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     setTimeout(() => { if (!g) take(b.gl); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
     /* الكتابُ يُبنى بعد أوّل إطارٍ للحركة (مطويًّا، معروضًا بشفافيةٍ لا تُرى) */
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      bkScrOff(b, false, { quiet: true, near: true, morph: side, warm: true, onReady: eng => { bkDiag(b, 'engine-ready'); take(eng); setTimeout(sharp, BK_MX + 500); } });
+      bkScrOff(b, false, { quiet: true, near: true, nearKs: [k, pk].filter(Boolean), morph: side, warm: true, adopt: pre ? pre.g : null, adoptP: pre ? pre.p : null, onReady: eng => { bkDiag(b, 'engine-ready'); take(eng); setTimeout(sharp, BK_MX + 500); } });
       b.stage.classList.add('is-mx');
     }));
     return true;
@@ -28389,6 +28418,7 @@ if (t) {
   }
   function bkScrOff(b, one, eo) {
     if (!b || !b.scroll) return;
+    if (b.pre && !(eo && eo.adopt)) bkPreDrop(b);
     const k = Math.max(1, b.pos || 1);
     try { b.scrIO && b.scrIO.disconnect(); b.scrFar && b.scrFar.disconnect(); b.scrRO && b.scrRO.disconnect(); } catch (e) {}
     if (b.scr) { b.scr.removeEventListener('scroll', b.scrOn); b.scr.remove(); }
@@ -28916,11 +28946,13 @@ if (t) {
     const st = b.stage;
     if (!o.quiet) bkPhShow(b);
     bk2Lib().then(([THREE, M]) => {
-      if (b.gl && !b.gl.dead) return;
-      bkLoadSet(b.key || '', 85, 96);
+      if (o.pre ? o.pre.cancel : (b.gl && !b.gl.dead)) return;
+      if (!o.pre) bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
-      b.gl = M.createBook2(THREE, b.stage, {
-        n: b.n, ar: b.ar, A: bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
+      /* (خطّةُ التوأم · المرحلة ٤) ‏‎o.pre‎: يُبنى مسبقًا (عند الضغط على القوس، قبل رفع الإصبع) ولا يصير كتابَ المساحة حتى يُتبنّى
+         (‏‎o.adopt‎) — مطويًّا ساكنًا لا يتفاعل مع شيء، معروضًا بشفافيةٍ لا تُرى ليجهز على كرت الشاشة */
+      const mk = () => M.createBook2(THREE, b.stage, {
+        n: b.n, ar: b.ar, A: o.A != null ? o.A : bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: o.one != null ? o.one : b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
@@ -28945,6 +28977,14 @@ if (t) {
           bk2Show(b);
         },
       });
+      if (o.pre) {
+        const g = o.pre.g = mk();
+        Object.assign(g.el.style, { visibility: 'visible', opacity: '0.001' });   /* (المسرحُ مخفيٌّ وراء الصفحات المتتالية) */
+        (g.readyFor ? g.readyFor(o.nearKs || [b.pos]) : g.ready()).then(() => { o.pre.ready = true; if (o.pre.on) o.pre.on(); });
+        return;
+      }
+      b.gl = o.adopt || mk();
+      if (o.adopt) o.adopt.el.style.visibility = '';
       /* تبدُّلُ الجلد (فاتح/داكن) يصل الكتابَ ولو لم يُعَد رسمُه */
       const mo = new MutationObserver(() => {
         if (!b.gl || b.gl.dead) return mo.disconnect();
@@ -28965,8 +29005,10 @@ if (t) {
         if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
       };
       /* (المرحلة ٤) والآتي من الصفحات المتتالية لا ينتظر إلّا صفحاتِ موضعه — والبقيّةُ تُرسم وهو ظاهر */
-      const near = o.near && g.readyFor ? [b.pos - 1, b.pos, b.pos + 1, b.pos + 2].filter(k => k >= 1 && k <= (b.n || 1)) : null;
-      (near ? g.readyFor(near) : g.ready()).then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
+      const near = o.near && g.readyFor ? (o.nearKs || [b.pos - 1, b.pos, b.pos + 1, b.pos + 2].filter(k => k >= 1 && k <= (b.n || 1))) : null;
+      /* (المتبنّى جاهزٌ مرسومٌ من قبل: إطارٌ واحد) */
+      if (o.adoptP) o.adoptP.then(() => requestAnimationFrame(off));
+      else (near ? g.readyFor(near) : g.ready()).then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
       setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
       /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
