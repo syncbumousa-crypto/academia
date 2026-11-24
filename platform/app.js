@@ -12997,6 +12997,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!src || !ctl) return null;
     const W = src.clientWidth; if (!W) return null;
     const sid = pkSrcCurOf(ctl.dataset.pkid), b = pkSrcBk[sid], meta = pkSrcMeta(sid);
+    if (b && b.hHold) return null;   /* (قامةٌ مثبَّتةٌ في أثناء تحوّل: تبقى كما هي) */
     const ar = (b && b.ar) || (meta && meta.ar) || 1 / Math.SQRT2, one = b ? !!(b.mxTo != null ? b.mxTo : b.one) : bk2OneGet();
     const view = src.querySelector('.pk-src__view');
     const over = view ? sp.getBoundingClientRect().height - view.getBoundingClientRect().height : 70;
@@ -27694,7 +27695,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* نهايةُ التبدُّل (من صفحةٍ إلى صفحتين أو بالعكس، أو من الصفحات المتتالية): ما طُلب في أثنائه يُنفَّذ الآن */
   function bk2MxEnd(b) {
-    b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
+    b.hHold = false; b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
     if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
     bk2Show(b);
     const w = b.mxWant; b.mxWant = null;
@@ -27931,7 +27932,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!e || note === 'start') {
       e = b.__dg = { at: new Date().toISOString().slice(11, 23), t0: performance.now(), steps: [], ua: navigator.userAgent.replace(/^.*?\) /, '').slice(0, 60), long: 0, longMs: 0 };
       L.push(e); if (L.length > 30) L.shift();
-      try { const po = new PerformanceObserver(l => l.getEntries().forEach(x => { if (x.startTime >= e.t0) { e.long++; e.longMs += Math.round(x.duration); } })); po.observe({ type: 'longtask', buffered: false }); setTimeout(() => po.disconnect(), 2000); } catch (er) {}
+      try { const po = new PerformanceObserver(l => l.getEntries().forEach(x => { if (x.startTime >= e.t0) { e.long++; e.longMs += Math.round(x.duration); e.steps.push(Math.round(x.startTime - e.t0) + 'ms LONG ' + Math.round(x.duration) + 'ms'); } })); po.observe({ type: 'longtask', buffered: false }); setTimeout(() => po.disconnect(), 3000); } catch (er) {}
     }
     e.steps.push(Math.round(performance.now() - e.t0) + 'ms ' + note + (extra ? ' ' + JSON.stringify(extra) : ''));
   }
@@ -28094,6 +28095,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        بصفحتين مطويًّا (‎morph: side‎ — يبدو صفحةً واحدة)، وتطير صفحةُ القارئ وحدها إلى تلك الصفحة، والقائمةُ كلُّها
        (شريكتُها معها) تنطوي فيها وتذوب، ثمّ يفتح المحرّكُ النصفَ الآخرَ من ورائه (‎morph(side, 0)‎) كما يفعل من الصفحة */
     const side = one ? null : bkSideOf(b, k);
+    bkDiag(b, 'start', { to: one ? 'one' : 'two', k });
     let T = bkGeoPredict(b, k, one, P); if (!T.length) return false;
     if (side) {
       /* مكانُها المطويُّ تقديرًا: صفحتُها من الفتحة بقدّها في وسط الفتحة (يُصوَّب إلى الحقيقيّ في الطيران) */
@@ -28230,36 +28232,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (side) {
       const slow = window.__pkfxSlow || 1, t0 = performance.now();
       const goal = () => { const g = b.gl; const f = g && !g.dead ? bkPgScreens(g).find(x => x.k === k) : null; return f || T[0]; };
-      /* قبل الانفتاح بإطارات الصفحة، وفي أثنائه بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) — فلا تتأخّر عنه إطارًا ولو تقطّع الجهاز */
+      const tf = (q, e) => { const r0 = live.r0; return `translate(${(q.l - r0.left) * e}px, ${(q.t - r0.top) * e}px) scale(${(r0.width + (q.w - r0.width) * e) / r0.width}, ${(r0.height + (q.h - r0.height) * e) / r0.height})`; };
+      /* (طلبُ صاحب الموقع: «لسه على خطوتين») التصغُّرُ مربوطٌ بالانفتاح نفسِه.
+         ===== خطّةُ الثقل · المرحلة ١: قبل الانفتاح على كرت الشاشة =====
+         كانت تُقاد من أوّلها إطارًا إطارًا، وبناءُ الكتاب يشغل الصفحةَ في الوقت نفسِه فتقف. فقبله حركةٌ يجريها كرتُ الشاشة وحده
+         (‎WAAPI‎) نحو ‎42%‎ من طريقها تتمهّل؛ ومعه تُقاد بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) من حيث بلغت إلى مكانه الحيّ،
+         بمنحناه ومدّته (‎cosE‎) — فيمضيان معًا وينتهيان معًا */
+      const pre = live ? live.d.animate([{ transform: 'none' }, { transform: tf(T[0], .42) }], { duration: 700 * slow, easing: 'cubic-bezier(.2, .7, .3, 1)', fill: 'forwards' }) : null;
+      let mEnd = false, rc = null, tM = 0;
       const put = () => {
-        if (mDone || !live || !L.isConnected) return;
-        /* (طلبُ صاحب الموقع: «لسه على خطوتين») التصغُّرُ مربوطٌ بالانفتاح نفسِه: قبله تمضي الصفحةُ شيئًا يسيرًا (نحو ‎40%‎ وتتمهّل)،
-           ومعه يجري باقي طريقها بمنحناه ومدّته (‎cosE‎ كالمحرّك) — فيبدآن معًا وينتهيان معًا ولو تأخّر بناءُ الكتاب */
-        const now = performance.now();
-        let e;
-        if (mEnd) e = 1;
-        else if (!mOn) e = .42 * (1 - Math.exp(-(now - t0) / (180 * slow)));
-        else { if (eA == null) { eA = cur; tM = now; } const q = Math.min(1, (now - tM) / (BK_MX * slow)); e = eA + (1 - eA) * (1 - Math.cos(Math.PI * q)) / 2; }
-        cur = e;
-        const f = goal(), r0 = live.r0;
-        /* (بالتحويل وحده على كرت الشاشة — كان تغييرُ مقاسها في كلّ إطارٍ يُعيد تخطيطَها ورسمَ لوحتها الكبيرة: ثقل) */
-        const x = (f.l - r0.left) * e, y = (f.t - r0.top) * e, sx = (r0.width + (f.w - r0.width) * e) / r0.width, sy = (r0.height + (f.h - r0.height) * e) / r0.height;
-        live.d.style.transform = `translate(${x}px, ${y}px) scale(${sx}, ${sy})`;
+        if (mDone || !live || !rc || !L.isConnected) return;
+        const q = mEnd ? 1 : Math.min(1, (performance.now() - tM) / (BK_MX * slow)), c = (1 - Math.cos(Math.PI * q)) / 2, f = goal();
+        live.d.style.transform = tf({ l: rc.left + (f.l - rc.left) * c, t: rc.top + (f.t - rc.top) * c, w: rc.width + (f.w - rc.width) * c, h: rc.height + (f.h - rc.height) * c }, 1);
       };
-      let mEnd = false, eA = null, tM = 0, cur = 0;
-      const tick = () => { if (mOn || mDone) return; put(); requestAnimationFrame(tick); };
-      requestAnimationFrame(tick);
       const open = g => {
         if (mOn || mDone) return;
-        if (!g || g.dead || !g.morph || !g.folding) { mDone = true; L.remove(); b.mx = false; b.stage.classList.remove('is-mx'); if (g && !g.dead) g.el.style.opacity = ''; return; }
-        mOn = true; b.mxTo = false; put();
+        b.hHold = false;
+        if (!g || g.dead || !g.morph || !g.folding) { mDone = true; L.remove(); b.mx = false; b.stage.classList.remove('is-mx'); if (g && !g.dead) g.el.style.opacity = ''; pkSrcHFit(); return; }
+        mOn = true; b.mxTo = false;
+        /* تُثبَّت حيث بلغت حركتُها ثمّ تُرفع */
+        if (live) { rc = live.d.getBoundingClientRect(); live.d.style.transform = tf({ l: rc.left, t: rc.top, w: rc.width, h: rc.height }, 1); if (pre) pre.cancel(); }
+        tM = performance.now();
+        bkDiag(b, 'unfold-start', { resizes: g.resizes });
         if (g.hideKept) g.hideKept(true);
         g.afterFrame = () => { if (!g.folding) mEnd = true; put(); };   /* (آخرُ إطارٍ من الانفتاح: في مكانها تمامًا) */
         g.el.style.opacity = '';
         g.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140 * slow, easing: 'ease-out' });
         g.morph(side, 0, BK_MX * slow, bkMxH(b)).then(() => {
           const f = bkPgScreens(g).find(x => x.k === k), r = live && live.d.getBoundingClientRect();
-          if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;; bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null });   /* (للاختبار) */
+          if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;
+          bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null, resizes: g.resizes });
           mDone = true; g.afterFrame = null; L.remove(); bk2MxEnd(b);
         });
       };
@@ -28276,11 +28278,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (side) {
       /* تبدُّلٌ جارٍ من أوّله: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، وموضعُ الرجوع إلى الصفحة هو صفحةُ القارئ */
       b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true;
+      /* ===== خطّةُ الثقل · المرحلة ٢: القامةُ تتغيّر مرّةً واحدة =====
+         كانت تمضي عند الضغطة إلى قامة الصفحة الواحدة ثمّ مع الانفتاح إلى قامة الصفحتين — والكتابُ يُبنى في أثناء الأولى فتُعاد
+         لوحتُه (وصورُ صفحاته بمقاسٍ آخر) إطارًا بعد إطار. فتثبت حتى يبدأ الانفتاح، ثمّ تنتقل معه مرّةً (‎bkMxH‎) */
+      b.hHold = true;
       const d = bkSk(b), pg = Math.max(1, k - d);
       b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side };
     }
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, onReady: g => { ng = g; if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
+      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, onReady: g => { ng = g; bkDiag(b, 'engine-ready', { resizes: g.resizes }); if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
       if (side) b.stage.classList.add('is-mx');
     }));
     return true;

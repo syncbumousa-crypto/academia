@@ -639,11 +639,12 @@ export function createBook2(THREE, host, cfg) {
       : { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };
     return true;
   }
+  let rsN = 0;
   function resize() {
     if (mo && mo.box) return;   /* التبدُّلُ جارٍ: لا تُعاد اللوحةُ كلَّ إطار (ثقيلٌ ويمسحها) — تُقاس بعده */
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
     if (w === cw && h === ch) return;
-    cw = w; ch = h;
+    cw = w; ch = h; rsN++;
     renderer.setSize(w, h, false); el.style.width = w + 'px'; el.style.height = h + 'px';
     camera.aspect = w / h;
     camOpen = -1; frameCam();
@@ -1027,6 +1028,7 @@ export function createBook2(THREE, host, cfg) {
     get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get folding() { return !!mo; },
+    get resizes() { return rsN; },   /* (للقياس: كم مرّةً أُعيد مقاسُ اللوحة) */
     /* يُخفي النصفَ الباقيَ (صفحةَ القارئ وكومتَها) ما دام التبدُّل — ويعود وحده في آخر إطارٍ منه */
     hideKept(h) { if (!dead) keptVis(!(h && mo)); },
     /* يُنادى بعد كلّ إطارٍ يرسمه (أو ‎null‎) */
