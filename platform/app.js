@@ -28083,12 +28083,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const place = (el, u) => Object.assign(el.style, { left: u.l + 'px', top: u.t + 'px', width: (u.r - u.l) + 'px', height: (u.b - u.t) + 'px' });
     place(sh, U); L.prepend(sh);
     sh.animate([{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: D, delay: D * .25, easing: E, fill: 'both' });
-    let spine = null;
-    if (!one && T.length > 1) {
-      spine = document.createElement('div'); spine.className = 'bk-fly-spine';
-      const sx = (U.l + U.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: U.t, b: U.b }); L.appendChild(spine);
-      spine.animate([{ opacity: 0 }, { opacity: 0, offset: .55 }, { opacity: 1 }], { duration: D, easing: 'ease-out', fill: 'both' });
-    }
+    /* (لا خطَّ كعبٍ طائرًا: كان يُوضع في وسط الفتحة النهائيّة من أوّل الحركة فيقع على وسط الصفحة وهي بعدُ كبيرةٌ تتحرّك —
+       طلبُ صاحب الموقع. والكتابُ الحقيقيّ يحمل ظلَّ كعبه حين يستلم) */
+    const spine = null;
     /* ===== المرحلة ٤: التصويبُ في الطيران — المحرّكُ يُبنى بعد عُشر ثانيةٍ تقريبًا، قبل أن تنتهي الحركة: فإذا عرف مكانَ صفحاته
        الحقيقيّ وهي تطير غيّرت وجهتها إليه بنعومةٍ في الوقت الباقي — فلا تصحيحَ عند الاستلام ولو كان التقديرُ أوّلَ مرّة ===== */
     const t00 = performance.now();
