@@ -55,8 +55,15 @@ varying vec2 vSheet;
 uniform sampler2D uThru; uniform float uThruFlip; uniform float uThruAmt;
 uniform sampler2D uGrain; uniform vec2 uGrainRep; uniform vec3 uPaper; uniform float uGrainAmt;
 `;
+/* ===== خطّةُ الجودة · المرحلة ٢: التصغيرُ يفضّل النسخةَ الأحدّ =====
+   الصورةُ ‎1.5×‎ الصفحةِ المعروضة (المرحلة ١)، فكان كرتُ الشاشة يخلط مستواها الأصليَّ بنسخةٍ نصفيّةٍ أنعم (‎mipmaps‎، المستوى ≈ ‎0.58‎).
+   انحيازُ ‎−0.75‎ يُبقي الساكنةَ على المستوى الأصليّ وحده، والمائلةُ في التقليب تنزل إلى النسخ المصغّرة بقدرٍ أقلّ فلا تتلألأ.
+   بالقياس على لوحة الكتاب (طاقةُ الحوافّ في سطرٍ مكبّر): ‎2181 → 2934‎ (‎+35%‎)، وصورةٌ على قدر الصفحة بالضبط كانت أنعم (‎2006‎) */
 const PAPER_FRAG = /* glsl */`
-#include <map_fragment>
+#ifdef USE_MAP
+  vec4 sampledDiffuseColor = texture2D( map, vMapUv, -0.75 );
+  diffuseColor *= sampledDiffuseColor;
+#endif
 float inkL = 1.0;
 #ifdef USE_MAP
   inkL = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
@@ -191,7 +198,13 @@ export function createBook2(THREE, host, cfg) {
   const inside = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').getHexString());
   const outsideBack = solid('#' + new THREE.Color(cfg.cover || '#2c5e65').multiplyScalar(0.85).getHexString());
 
-  let texW = 1024;
+  /* (الدقّةُ الأولى من مقاس المساحة الآن — قبل أن تُطلب الصورُ — بحساب ‎resize‎ نفسِه: لا تُرسم بغيرها ثمّ تُعاد) */
+  const TEX_HEAD = 1.5;
+  let texW = (() => {
+    const w = host.clientWidth, h = host.clientHeight, m = cfg.frame ? cfg.frame.m : 1.04; if (!w || !h) return 1024;
+    const ppu = Math.min(h / (H * m), w / ((ONE ? W : 2 * W) * m));
+    return Math.min(2048, Math.max(256, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) * TEX_HEAD / 32) * 32));
+  })();
   const pageTex = new Map();
   function texFor(k) {
     if (k === 'inside') return inside;
@@ -639,7 +652,7 @@ export function createBook2(THREE, host, cfg) {
       : { w: 2 * W * ppu, h: H * ppu, x: cw / 2 - W * ppu, y: ch / 2 - H * ppu / 2 };
     return true;
   }
-  let rsN = 0;
+  let rsN = 0, rtWant = 0, rtT = 0;
   function resize() {
     if (mo && mo.box) return;   /* التبدُّلُ جارٍ: لا تُعاد اللوحةُ كلَّ إطار (ثقيلٌ ويمسحها) — تُقاس بعده */
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
@@ -648,9 +661,16 @@ export function createBook2(THREE, host, cfg) {
     renderer.setSize(w, h, false); el.style.width = w + 'px'; el.style.height = h + 'px';
     camera.aspect = w / h;
     camOpen = -1; frameCam();
-    /* الدقّةُ على أكبر قدرٍ تبلغه الصفحة (المغلقُ يُقرَّب) */
-    const tn = Math.tan(FOV * Math.PI / 360), dMin = Math.max(H * MY / 2 / tn, W * MX / 2 / tn / camera.aspect);
-    retex(Math.min(2048, Math.max(512, Math.ceil(W * (h / (2 * dMin * tn)) * Math.min(devicePixelRatio || 1, 2) / 256) * 256)));
+    /* ===== خطّةُ الجودة · المرحلة ١: دقّةُ الصورة من الصفحة المعروضة فعلًا =====
+       كانت على أكبر قدرٍ تبلغه الصفحةُ مقرَّبةً لأعلى بخطوات ‎256‎ (فتختلف نسبتُها بين مساحةٍ وأخرى). فالآن عرضُ الصفحة الساكنة في
+       وضعها (صفحةٌ أو صفحتان) × دقّةُ اللوحة × ‎1.5‎ (هامشٌ يجعل التصغيرَ حادًّا مع المرحلة ٢ — بالقياس أحدُّ من الصورة بقدر الصفحة
+       بالضبط)، بخطوات ‎32‎. وهذا قرابةُ مقاسها السابق فلا تزيد الذاكرة */
+    const pr = renderer.getPixelRatio(), span = ONE ? W : 2 * W, ppu = Math.min(h / (H * MY), w / (span * MX));
+    rtWant = Math.min(2048, Math.max(256, Math.ceil(W * ppu * pr * TEX_HEAD / 32) * 32));
+    /* ===== المرحلة ٣: تُعاد الصورُ حين تكبر الصفحةُ (أكثر من ‎5%‎) أو تصغر كثيرًا (دون ‎60%‎) — بعد أن يستقرّ المقاس =====
+       (كانت لا تُعاد إلّا بتغيّرٍ يجاوز ‎30%‎، فتبقى ممدودةً إن كبرت المساحة أقلَّ منه) */
+    if (!pageTex.size) texW = rtWant;
+    else { clearTimeout(rtT); rtT = setTimeout(() => { if (!dead && (rtWant > texW * 1.05 || rtWant < texW * .6)) retex(rtWant, true); }, 220); }
     /* تغييرُ المقاس يمسح اللوحة: تُرسم الآن في الإطار نفسِه، وإلّا ظهرت فارغةً إطارًا بعد كلّ إطارٍ والقسمةُ تتحرّك (وميض) */
     if (!dead && typeof frameNow === 'function') frameNow(); else needs = true;
   }
@@ -1031,6 +1051,7 @@ export function createBook2(THREE, host, cfg) {
     get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get folding() { return !!mo; },
+    get texW() { return texW; },   /* (للقياس: دقّةُ صور الصفحات) */
     get resizes() { return rsN; },   /* (للقياس: كم مرّةً أُعيد مقاسُ اللوحة) */
     /* يُخفي النصفَ الباقيَ (صفحةَ القارئ وكومتَها) ما دام التبدُّل — ويعود وحده في آخر إطارٍ منه */
     hideKept(h) { if (!dead) keptVis(!(h && mo)); },
