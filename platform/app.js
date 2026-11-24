@@ -27847,7 +27847,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const r = sc.getBoundingClientRect(); zAt = { x: e.clientX - r.left, y: e.clientY - r.top };
       zAcc += e.deltaY;
       if (zReq) return;
-      zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrZoom(b, b.scrZ * Math.exp(-d / 200), zAt); });
+      zReq = requestAnimationFrame(() => { zReq = 0; const d = zAcc; zAcc = 0; bkScrPinch(b, Math.exp(-d / 200), zAt); });
     }, { passive: false });
     sc.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === '0') { e.preventDefault(); bkScrZoom(b, 1); } });
     b.scrIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { bkScrThumbPut(b, en.target); bkScrPaint(b, en.target); } }), { root: sc, rootMargin: '900px 0px' });
@@ -27857,7 +27857,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; if (bkFx(b)) return bkFxLater(b, 'onT', () => b.scrOn && b.scrOn()); cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); if (performance.now() - (b.scrUserAt || 0) < 1200) bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
+    b.scrOn = () => { if (b.zg) bkScrPinchEnd(b); if (sc.isConnected) b.scrY = sc.scrollTop; if (bkFx(b)) return bkFxLater(b, 'onT', () => b.scrOn && b.scrOn()); cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); if (performance.now() - (b.scrUserAt || 0) < 1200) bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
     sc.addEventListener('scroll', b.scrOn, { passive: true });
     /* (طلبُ صاحب الموقع) حبّةُ عدد الصفحات تظهر لتحريك القارئ نفسِه — لا لتمريرٍ يجريه الموقع (الدخولُ إلى الصفحات المتتالية
        على موضعه، وملاءمةُ المقاس): يُحفظ وقتُ آخر لمسةٍ منه (عجلة، إصبع، مفاتيح، شريطُ التمرير) */
@@ -28017,7 +28017,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const o = { duration: BK_SX * (window.__pkfxSlow || 1), easing: BK_SXE };
       /* ===== خطّةُ التحوّل · المرحلة ٣: الصفحةُ نفسُها تتحوّل (طلبُ صاحب الموقع) =====
          كلُّ صفحةٍ كانت ظاهرةً في الكتاب (صفحتان في عرض الصفحتين) تمضي وحدها من مكانها وقدرها فيه إلى مكانها في القائمة —
-         ‏‎translate/scale‎ لا ‎transform‎ (الصفحةُ تحمل إزاحةَ التمرير الأفقيّ ‎--bk-x‎ فيه) — وهي مرسومةٌ أصلًا بنسخة الكتاب
+         بخاصّيّتي ‎translate/scale‎ (لا تُزاحمان ‎transform‎ الذي يأخذه تقريبُ الإيماءة) — وهي مرسومةٌ أصلًا بنسخة الكتاب
          (المرحلة ١) فتأخذ مكانَ اللقطة. وما لم يكن ظاهرًا في الكتاب ينزلق إلى مكانه من فوق ومن تحت بفارقٍ يسير،
          ولقطةُ الكتاب (طاولتُه وظلُّه) تذوب سريعًا */
       const pgs = el && P && P.w ? FS.map(f => [sc.querySelector(`.cbk-scr__pg[data-k="${f.k}"]`), f]).filter(([e, f]) => e && f.w) : [];
@@ -28529,16 +28529,54 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     clearTimeout(b.scrPhT);
     b.scrPhT = setTimeout(() => { if (b.scrTop === t && !t.classList.contains('is-z')) t.classList.remove('is-on'); }, 1300);
   }
+  /* ===== خطّةُ التكبير · المرحلة ٢: التقريبُ بالإيماءة سلسٌ (طريقةُ ‎pdf.js‎) =====
+     كان كلُّ تحريكٍ للعجلة يغيّر عرضَ الصفحات كلِّها فيُعاد ترتيبُ القائمة وتتمدّد صورُها في كلّ إطار. فالآن في أثناء الإيماءة تكبر
+     الصفحاتُ القريبةُ كصورةٍ على كرت الشاشة (‎transform‎) حول نقطة التثبيت — المؤشّرُ إن كانت ستفيض عن المساحة، ووسطُها إن
+     كانت ستبقى أضيق (فهي في الوسط بعدها) — وإذا وقفت اليدُ (‎160ms‎) أو بلغ التحجيمُ حدّه يُثبَّت المقاسُ الحقيقيّ مرّةً واحدة
+     (‎bkScrZoom‎) وتُعاد رسمةُ الظاهرة بدقّتها */
+  function bkScrPinch(b, f, at) {
+    const sc = b.scr; if (!sc || !f) return;
+    let g = b.zg;
+    if (!g) {
+      const r = sc.getBoundingClientRect(), H = sc.clientHeight, ay = r.top + at.y;
+      g = b.zg = { z0: b.scrZ || 1, z: b.scrZ || 1, ax: r.left + at.x, ay, l0: r.left, cx: r.left + sc.clientWidth / 2, cw: sc.clientWidth, pages: [], w0: 0 };
+      sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
+        const q = el.getBoundingClientRect();
+        if (q.bottom < r.top - 3 * H || q.top > r.bottom + 3 * H) return;
+        g.pages.push([el, q]); if (!g.w0) g.w0 = q.width;
+      });
+      sc.classList.add('is-zg');
+    }
+    g.z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, g.z * f));
+    /* أفقيًّا كما سيُثبَّت تمامًا: الأضيقُ في الوسط، والأعرضُ حول المؤشّر ما دام التمريرُ يبلغ (لا يتجاوز طرفي الصفحة) */
+    const s = g.z / g.z0, w = g.w0 * s, q0 = g.pages.length ? g.pages[0][1] : null;
+    let X = g.ax;
+    if (q0 && Math.abs(s - 1) > 1e-4) {
+      const L = w <= g.cw ? g.cx - w / 2 : Math.min(g.l0, Math.max(g.l0 + g.cw - w, g.ax - (g.ax - q0.left) / q0.width * w));
+      X = (L - s * q0.left) / (1 - s);
+    }
+    for (const [el, q] of g.pages) { el.style.transformOrigin = `${X - q.left}px ${g.ay - q.top}px`; el.style.transform = `scale(${s})`; }
+    { const v = b.scrTop && b.scrTop.querySelector('.cbk-scr__zv'); if (v) v.textContent = Math.round(g.z * 100) + '%'; }
+    bkScrPing(b, true);
+    clearTimeout(g.t); g.t = setTimeout(() => bkScrPinchEnd(b), 160);
+    if (s < .6 || s > 1.7) bkScrPinchEnd(b);   /* (حدُّ ما تُغطّيه الصفحاتُ المأخوذة: يُثبَّت ويبدأ من جديد) */
+  }
+  function bkScrPinchEnd(b) {
+    const g = b.zg; if (!g) return; b.zg = null; clearTimeout(g.t);
+    for (const [el] of g.pages) el.style.transform = el.style.transformOrigin = '';
+    const sc = b.scr; if (!sc) return;
+    sc.classList.remove('is-zg');
+    const r = sc.getBoundingClientRect();
+    bkScrZoom(b, g.z, { x: g.ax - r.left, y: g.ay - r.top });
+    bkScrZv(b);
+  }
   function bkScrZoom(b, z, at) {
     const sc = b.scr; if (!sc) return;
     b.scrPW = 0;
     z = Math.min(BK_ZMAX, Math.max(BK_ZMIN, z));
     if (Math.abs(z - 1) < .04) z = 1;   /* (يلتصق بـ ‎100%‎ — لا يقف على ‎101%‎ والصفحةُ مزاحةٌ شعرة) */
     const z0 = b.scrZ || 1; if (Math.abs(z - z0) < .001) return;
-    /* ===== التقريبُ حول ما تحت المؤشّر، لا حول الوسط (طلبُ صاحب الموقع) =====
-       تُؤخذ الصفحةُ التي تحت المؤشّر (أو أقربُها إليه) وموضعُه منها نسبةً، ثمّ بعد التكبير تُردّ تلك النقطةُ تحت المؤشّر:
-       عموديًّا بالتمرير، وأفقيًّا بالتمرير إن فاضت الصفحةُ عن المساحة، وإلّا بإزاحة الصفحات (‎--bk-x‎) داخلها — فلا تبقى
-       الصفحةُ الأضيقُ من المساحة متمركزةً تكبر من وسطها والمؤشّرُ على طرفها */
+    /* التقريبُ حول ما تحت المؤشّر: تُؤخذ الصفحةُ التي تحته (أو أقربُها) وموضعُه منها نسبةً، وبعد التكبير تُردّ تلك النقطةُ تحته */
     const r = sc.getBoundingClientRect();
     const pt = at || { x: sc.clientWidth / 2, y: sc.clientHeight / 2 };
     const ax = r.left + pt.x, ay = r.top + pt.y;
@@ -28553,22 +28591,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(() => { b.scrSync && b.scrSync(); bkScrTone(b); });
     const q1 = ref.getBoundingClientRect();
     sc.scrollTop += q1.top + uy * q1.height - ay;
-    const cw = sc.clientWidth;
-    let q2 = ref.getBoundingClientRect(), dx = q2.left + ux * q2.width - ax;
-    if (q2.width + 28 <= cw) {
-      const lim = (cw - q2.width) / 2 - 14;
-      /* التصغيرُ يعيد الصفحةَ إلى وسط المساحة (طلبُ صاحب الموقع): لا تبقى مائلةً يمينًا أو يسارًا بهامشٍ في جانبٍ واحد.
-         فإزاحتُها تتلاشى بقدر ما يقترب التقريبُ من ‎100%‎، وتنعدم عندها وما دونها؛ والتقريبُ وحده يتبع المؤشّر */
-      /* (طلبُ صاحب الموقع: «بعد ما اكبّر لما ارجع اصغّر تميل الصفحات») كانت تتلاشى بنسبة التقريب فتبقى مائلةً ظاهرًا حتى ‎100%‎.
-         فالتصغيرُ يعيدها إلى الوسط — بانزلاقٍ قصير (‎.bk-xr‎) لا بقفزة — والتكبيرُ وحده يتبع المؤشّر */
-      if (z < z0 && b.scrX) { sc.classList.add('bk-xr'); clearTimeout(b.scrXT); b.scrXT = setTimeout(() => sc.classList.remove('bk-xr'), 280); }
-      b.scrX = z < z0 ? 0 : (b.scrX || 0) - dx;
-      b.scrX = Math.max(-lim, Math.min(lim, b.scrX));
-      sc.style.setProperty('--bk-x', b.scrX + 'px');
-    } else {
-      if (b.scrX) { b.scrX = 0; sc.style.setProperty('--bk-x', '0px'); q2 = ref.getBoundingClientRect(); dx = q2.left + ux * q2.width - ax; }
-      sc.scrollLeft += dx;
-    }
+    /* ===== خطّةُ التكبير · المرحلة ١: نظامٌ هندسيٌّ واحد (كعارضات الملفّات) =====
+       الصفحةُ الأضيقُ من المساحة في وسطها دائمًا (لا إزاحةَ أفقيّة — كانت ‎--bk-x‎ تُميلها)، والأعرضُ تُمرَّر أفقيًّا فتبقى النقطةُ
+       تحت المؤشّر */
+    const q2 = ref.getBoundingClientRect();
+    if (q2.width > sc.clientWidth) sc.scrollLeft += q2.left + ux * q2.width - ax;
     clearTimeout(b.scrZT);
     b.scrZT = setTimeout(() => {
       if (!b.scroll || !b.scr) return;
@@ -28646,7 +28673,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fw = Math.max(120, Math.floor(Math.min(w - 48, (h - 42 - 24) * (b.ar || 1 / Math.SQRT2))));
     if (b.scrFW === fw) return;
     b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
-    if ((b.scrZ || 1) <= 1 && b.scrX) { b.scrX = 0; sc.style.setProperty('--bk-x', '0px'); }   /* (تغيّر المقاس: على ‎100%‎ وما دونها في الوسط) */
   }
   function bkScrFit(b) {
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
