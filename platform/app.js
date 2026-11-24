@@ -28114,7 +28114,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
       if (!vis && !tk.has(kk)) return;
       const t = T.find(x => x.k === kk);
-      if (t) {
+      if (t && !one && kk !== k) {
+        /* ===== شريكةُ الفتحة تنفتح ثلاثيّةَ الأبعاد (طلبُ صاحب الموقع) =====
+           عكسُ ما يجري من الصفحتين إلى الصفحة (هناك تنطوي إلى الوراء): تبدأ مطويّةً على كعبها خلف صفحة القارئ (نصفُ دورة)
+           فتنفتح نحو الناظر إلى مكانها — بعد أن تقارب صفحةُ القارئ مكانَها. والكعبُ حافّتُها المجاورةُ لصفحة القارئ */
+        const d = clone(el, t), hingeR = t.side === 'L' || (T.find(x => x.k === k) || {}).l > t.l;
+        d.style.zIndex = 1; d.style.backfaceVisibility = 'hidden';
+        const og = hingeR ? 'right center' : 'left center', a0 = hingeR ? 180 : -180;   /* (اتّجاهُ الدوران: تمرّ أمام الناظر لا خلفه) */
+        runs.push(d.animate([{ transformOrigin: og, transform: `perspective(1600px) rotateY(${a0}deg)` }, { transformOrigin: og, transform: 'perspective(1600px) rotateY(0deg)' }], { duration: D * .75, delay: D * .5, easing: 'cubic-bezier(.25, .8, .3, 1)', fill: 'both' }));
+        d.dataset.unfold = '1';
+        moving.set(kk, d);
+      } else if (t) {
         const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
         d.style.zIndex = kk === k ? 3 : 2;
         runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
@@ -28159,6 +28169,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const left = Math.max(140, D - (performance.now() - t00));
           moving.forEach((d, kk) => {
             const f = F.find(x => x.k === kk), r = d.getBoundingClientRect();
+            if (d.dataset.unfold) { Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' }); return; }   /* (تنفتح في مكانها الحقيقيّ، ودورانُها ماضٍ) */
             if (Math.abs(f.l - r.left) < 1 && Math.abs(f.t - r.top) < 1 && Math.abs(f.w - r.width) < 1) return;
             d.getAnimations().forEach(a => a.cancel());
             Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' });
