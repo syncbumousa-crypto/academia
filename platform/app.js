@@ -27856,8 +27856,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }), { root: sc, rootMargin: '3200px 0px' });
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => { b.scrIO.observe(el); b.scrFar.observe(el); });
     let raf = 0;
-    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; if (bkFx(b)) return bkFxLater(b, 'onT', () => b.scrOn && b.scrOn()); cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
+    b.scrOn = () => { if (sc.isConnected) b.scrY = sc.scrollTop; if (bkFx(b)) return bkFxLater(b, 'onT', () => b.scrOn && b.scrOn()); cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { bkScrTrack(b); b.scrSync && b.scrSync(); if (performance.now() - (b.scrUserAt || 0) < 1200) bkScrPing(b); bkScrTone(b); }); };   /* (‎scrY‎: موضعُه محفوظًا — يُقرأ بعد أن تُنزع الصفحاتُ فيصير صفرًا) */
     sc.addEventListener('scroll', b.scrOn, { passive: true });
+    /* (طلبُ صاحب الموقع) حبّةُ عدد الصفحات تظهر لتحريك القارئ نفسِه — لا لتمريرٍ يجريه الموقع (الدخولُ إلى الصفحات المتتالية
+       على موضعه، وملاءمةُ المقاس): يُحفظ وقتُ آخر لمسةٍ منه (عجلة، إصبع، مفاتيح، شريطُ التمرير) */
+    if (!b.view.scrUsr) {
+      const usr = b.view.scrUsr = () => { b.scrUserAt = performance.now(); };
+      ['wheel', 'pointerdown', 'touchstart', 'keydown'].forEach(t => b.view.addEventListener(t, usr, { passive: true, capture: true }));
+    }
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
