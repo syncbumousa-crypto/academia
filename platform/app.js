@@ -39567,6 +39567,7 @@ void main() {
   function applyTheme() {
     const th = state.theme === 'dark' ? 'dark' : 'light';
     document.documentElement.dataset.theme = th;
+    try { localStorage.setItem('ac.theme', th); } catch (e) {}   /* (يقرؤه رأسُ الصفحة قبل أن تُرسم: فلا تومض فاتحةً — ‎index.html‎) */
     document.querySelectorAll('#themebar button').forEach(x =>
       x.classList.toggle('is-active', x.dataset.theme === th));
     /* والنسخةُ تتبع الورقة: تبديلُ الجلد يُعيد صبغَ كلّ صورةٍ لها إعداد */

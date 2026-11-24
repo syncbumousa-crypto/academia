@@ -22,6 +22,12 @@
 
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
+  <!-- الجلدُ قبل أوّل رسمة (طلبُ صاحب الموقع): كانت الصفحةُ تُرسم فاتحةً حتى يحمّل المحرّكُ الكبير فيُطبّق الداكن.
+       ‏‎ac.theme‎ يكتبه ‎applyTheme‎ — وقبل أن يُكتب أوّلَ مرّة يُقرأ من الحالة المحفوظة -->
+  <script>
+    try { var t = localStorage.getItem('ac.theme'); if (!t) t = (JSON.parse(localStorage.getItem('academia2:v1') || '{}') || {}).theme;
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+  </script>
   <script>
     window.AC_MINV = 1390;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
@@ -328,7 +334,7 @@
 
   <!-- مقبض طيّ/فتح الشريط: تبويب عمودي ملتصق بحافة الشريط في المنتصف -->
   <button type="button" class="side-handle" id="side-handle" title="طيّ/فتح الشريط" aria-label="طيّ/فتح الشريط">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3.2"/><path d="M15.2 4.5v15"/></svg>
   </button>
 
   <!-- لوحة سوق المواد -->
@@ -798,15 +804,8 @@
       }, true);
       /* السكّةُ هي الافتراض (الواسعُ لوحٌ يطفو فوق المحتوى): من لم يختر شيئًا (‎null‎) فسكّة، ومن اختار الواسعَ (‎''‎) بقي عليه */ var rail0 = true; try { var rv = localStorage.getItem(RAIL_K); rail0 = rv === null || !!rv; } catch (e) {} sideCls('side-rail', rail0);
 
-      /* وأيقونةُ «شريط جانبيّ» مكانَ السهم: المحرّكُ يبنيها وهو مشترك،
-         فتُبدَّل من ههنا كما صُنع في الجذر. */
-      document.addEventListener('DOMContentLoaded', function () {
-        setRail(isRail());
-        var h = document.getElementById('side-handle');
-        if (h) h.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
-          + ' stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-          + '<rect x="3" y="4.5" width="18" height="15" rx="3.2"/><path d="M15.2 4.5v15"/></svg>';
-      });
+      /* (وأيقونةُ «شريط جانبيّ» في الزرّ من الـ‎HTML‎ نفسِه — كانت تُبدَّل بالسهم بعد التحميل فيُرى السهمُ أوّلًا) */
+      document.addEventListener('DOMContentLoaded', function () { setRail(isRail()); });
     })();
   </script>
 
