@@ -253,8 +253,8 @@ export function createBook2(THREE, host, cfg) {
     needs = true;
   }
   /* تغيّرت دقّةُ العرض كثيرًا: تُطلب الصورُ من جديد بالدقّة الجديدة */
-  function retex(w) {
-    if (Math.abs(w - texW) / texW < 0.3) return;
+  function retex(w, force) {
+    if (!force && Math.abs(w - texW) / texW < 0.3) return;
     texW = w;
     /* الصورةُ القديمةُ تبقى حتى تجهز الجديدة — لا تسودّ الصفحاتُ وهي تُرسم من جديد */
     pageTex.forEach((t, k) => Promise.resolve(cfg.tex(k, w)).then(cv => {
@@ -982,6 +982,8 @@ export function createBook2(THREE, host, cfg) {
     open() { if (tv < 1 || ta) table(1); },
     /* (لاستدعاء التحديدات) يُفتح على فتحةٍ بعينها — يعود القارئُ إلى حيث كان — ويُعرف متى سكن على الطاولة فيُقلَّب */
     openAt(g) { if (tv < 1 || ta) table(1, g); },
+    /* (للتحوّل من الصفحات المتتالية) تُطلب صورُ الصفحات من جديد بدقّتها — بعد أن بُني الكتابُ بنسخٍ جاهزةٍ قريبة الدقّة */
+    refreshTex() { retex(texW, true); },
     get resting() { return tv === 0 && !ta && !rf; },
     rest() { if (!cfg.rest) return; if (A > 0) { tAfter = true; goTo(0); } else table(0); },
     get onTable() { return tv < 1 || !!ta; },
@@ -1038,6 +1040,8 @@ export function createBook2(THREE, host, cfg) {
       return out;
     },
     ready: () => Promise.all([compileP, ...[...pageTex.values()].map(t => t.userData.ready)]),
+    /* (للتحوّل من الصفحات المتتالية) ينتظر صفحاتٍ بعينها لا كلَّ ما طُلب — ما حول موضع القارئ */
+    readyFor: ks => Promise.all([compileP, ...ks.map(k => pageTex.get(k)).filter(Boolean).map(t => t.userData.ready)]),
     /* لقطةٌ للّوحة (للشبح الذي يخرج به الكتابُ في القسمة) — تُرسم الآن فتُقرأ قبل أن يُمسح المخزن */
     snapshot(cv) { renderer.render(scene, camera); const c = cv.getContext('2d'); cv.width = el.width; cv.height = el.height; c.drawImage(el, 0, 0); },
     sheets,

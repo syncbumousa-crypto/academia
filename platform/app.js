@@ -26727,6 +26727,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ck = k + '|' + w;
     b.pgCv = b.pgCv || new Map();
     let base = b.pgCv.get(ck);
+    /* ===== خطّةُ التحوّل · المرحلة ٤: لا يُرسم الملفُّ مرّتين (طلبُ صاحب الموقع) =====
+       رسمٌ محفوظٌ للصفحة نفسِها بعرضٍ أكبر أو مساوٍ (من الصفحات المتتالية أو الكتاب) يُصغَّر فورًا بدل أن يُرسم الملفُّ من جديد —
+       فالكتابُ الذي يُبنى من الصفحات المتتالية يجد نسخَه الصغيرة (‎512‎) جاهزةً من رسمها (‎780‎) فيظهر بلا انتظار */
+    /* والكتابُ يُبنى من الصفحات المتتالية (‎b.fastTex‎): أقربُ رسمٍ محفوظٍ للصفحة يُعطاه حالًا ولو كان أصغرَ قليلًا (لا دونَ النصف) —
+       فلا ينتظر رسمَ ملفّاتٍ بدقّةٍ لن يُبقيها — ثمّ تُطلب الدقّةُ الحقيقيّةُ حين يظهر (‎refreshTex‎) */
+    if (!base && b.fastTex && k !== 'cover') {
+      let near = null;
+      for (const [ck2, cv2] of b.pgCv) { const [k2, w2] = ck2.split('|'); if (k2 === String(k) && +w2 >= w * .5 && (!near || cv2.width > near.width)) near = cv2; }
+      if (near) return bkSeedKeep(b, k, (!hlMarksOn(b, k).length && !hlSelOn(b, k)) ? near : (() => { const c = document.createElement('canvas'); c.width = near.width; c.height = near.height; c.getContext('2d').drawImage(near, 0, 0); hlPaint(b, k, c); return c; })());
+    }
+    /* وما بعُد عن موضع القارئ (أكثرَ من صفحتين) ينتظر حتى تنتهي حركةُ التحوّل (‎b.texGate‎) — كان رسمُه يشغل الصفحةَ عن الحركة */
+    if (!base && b.fastTex && b.texGate && (k === 'cover' || Math.abs(k - (b.pos || 1)) > 2)) await b.texGate;
+    if (!base && k !== 'cover') {
+      let big = null;
+      for (const [ck2, cv2] of b.pgCv) { const [k2, w2] = ck2.split('|'); if (k2 === String(k) && +w2 >= w && (!big || cv2.width < big.width)) big = cv2; }
+      if (big) {
+        base = document.createElement('canvas'); base.width = w; base.height = Math.round(big.height * w / big.width);
+        const cx2 = base.getContext('2d'); cx2.imageSmoothingQuality = 'high'; cx2.drawImage(big, 0, 0, base.width, base.height);
+        b.pgCv.set(ck, base); if (b.pgCv.size > 8) b.pgCv.delete(b.pgCv.keys().next().value);
+      }
+    }
     if (!base) {
       const pg = await b.doc.getPage(k === 'cover' ? Math.min(b.n || 1, Math.max(1, b.covPg || 1)) : k);
       const v1 = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: w / v1.width });
@@ -27924,9 +27945,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     bkGhostPut(b, gh.cv, gh.R);
     let done = false;
     const end = () => { if (!done) { done = true; gh.cv.remove(); } };
+    b.fastTex = true;   /* (المرحلة ٤) يُبنى الكتابُ بما رُسم للصفحات المتتالية، ثمّ تُطلب الدقّة */
+    b.texGate = new Promise(r => { b.texOpen = r; });
+    const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
+    setTimeout(sharp, 4000);
     bkScrOff(b, one, {
-      quiet: true,
+      quiet: true, near: true,
       onReady: ng => {
+        setTimeout(sharp, BK_SX * (window.__pkfxSlow || 1) + 60);   /* بعد الحركة: لا يُثقلها رسمُ الدقّة */
         const o = { duration: BK_SX * (window.__pkfxSlow || 1), easing: BK_SXE };
         ng.el.style.opacity = '';
         const F = bkPgScreen(ng, k), E = bkRect(ng.el.getBoundingClientRect()), G = bkRect(gh.R);
@@ -28513,7 +28539,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (b.gl !== g) return;
         if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
       };
-      g.ready().then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
+      /* (المرحلة ٤) والآتي من الصفحات المتتالية لا ينتظر إلّا صفحاتِ موضعه — والبقيّةُ تُرسم وهو ظاهر */
+      const near = o.near && g.readyFor ? [b.pos - 1, b.pos, b.pos + 1, b.pos + 2].filter(k => k >= 1 && k <= (b.n || 1)) : null;
+      (near ? g.readyFor(near) : g.ready()).then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
       setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
     }).catch(() => {
       /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
