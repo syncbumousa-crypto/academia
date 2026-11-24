@@ -27704,10 +27704,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     else pkSrcHFit();
   }
   /* القامةُ تنتقل الآن بمدّة الحركة، ويُعطى المحرّكُ قامةَ المساحة قبلها وبعدها */
-  function bkMxH(b) {
+  function bkMxH(b, dur = BK_MX) {
     const sp = b.stage.closest('.pk-split'), h0 = b.stage.clientHeight;
     const v = () => sp ? parseFloat(sp.style.getPropertyValue('--pk-h')) || 0 : 0, p0 = v();
-    pkSrcHFit(BK_MX);
+    pkSrcHFit(dur);
     const p1 = v();
     return { h0, h1: p0 && p1 ? Math.max(1, h0 + p1 - p0) : h0 };
   }
@@ -28089,24 +28089,147 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sp = bkSpread(b, k), S = ok && G.sides.L && G.sides.R ? { L: abs(G.sides.L), R: abs(G.sides.R) } : { L: { l: x0, t: y0, w, h }, R: { l: x0 + w, t: y0, w, h } };
     return ['R', 'L'].map(side => sp[side] ? { k: sp[side], side, ...S[side] } : { k: null, inside: true, side, ...S[side] });
   }
+  /* ===== خطّةُ التوأم والاستلام (طلبُ صاحب الموقع: «ابيهم سوا سموذ» — التصغيرُ والانفتاحُ معًا من أوّل ضغطة) =====
+     الكتابُ لا يكون موجودًا لحظةَ الضغط (يُبنى بعدها في ثلث ثانية)، فكان الانفتاحُ يتأخّر عن التصغير مهما ضُبطت السرعات.
+     والنصفُ الذي ينفتح في المحرّك لوحٌ مسطَّحٌ لا ينثني: يدور حول الكعب بزاوية ‎π·k‎ إلى ما وراء الكتاب (‎book2: sheetPoint‎،
+     ‏‎uSpan = 2‎)، والكاميرا بعدستها (‎28°‎) ومركزُها يبعد عن الكعب ‎k·w/2‎ نحو الصفحة الباقية. فهذا كلُّه يُحسب بـ ‎CSS‎ مطابقًا:
+       · التوأم: صفحةُ القارئ والصفحةُ الأخرى على كعبها، يصغران وينفتح الثاني على ساعةٍ واحدةٍ من الضغطة — حركةٌ مُعدّةٌ سلفًا
+         يجريها كرتُ الشاشة (‎WAAPI‎)، فلا يقطعها بناءُ الكتاب؛
+       · الاستلام: حين يجهز الكتابُ (مطويًّا، معروضًا بشفافيةٍ لا تُرى) يُوضع على درجة الطيّ نفسِها (‎setFold‎) ويكمل على الساعة
+         نفسِها (‎morph(…, ease)‎)، ولوحتُه تُكبَّر وتُزاح حتى تنطبق صفحتُه على صفحة القارئ — فيُرفع التوأمُ في الإطار الذي يظهر فيه؛
+       · وإن تأخّر الكتابُ حتى تنتهي الحركة: يستلم ساكنًا، وتمضي صفحةُ القارئ إلى مكانها الحقيقيّ في لحظة */
+  function bkScrOutTwo(b) {
+    if (bkReduce() || !b.scr || !b.view || !b.stage) return false;
+    const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
+    const P = src.getBoundingClientRect(), R = sc.getBoundingClientRect(); if (!P.width || !R.height) return false;
+    const k = Math.min(Math.max(1, b.n || 1), Math.max(bkSk(b) + 1, b.pos || 1));
+    const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), r0 = kEl && kEl.getBoundingClientRect();
+    if (!r0 || !r0.width) return false;
+    const side = bkSideOf(b, k), out = side === 'L' ? 1 : -1, sp = bkSpread(b, k), pk = side === 'L' ? sp.R : sp.L;
+    const F = (bkGeoPredict(b, k, false, P).find(t => t.k === k)); if (!F) return false;
+    bkDiag(b, 'start', { to: 'two', k, twin: true });
+    const slow = window.__pkfxSlow || 1, Dm = BK_MX * slow, t0 = performance.now();
+    /* الكاميرا كما يحسبها المحرّك (‎frameCam‎ مع ‎mo‎): مساحتُه قامةُ المسرح وعرضُه، والعدسة ‎28°‎ */
+    const sw = b.stage.clientWidth || P.width, sh = b.stage.clientHeight || P.height;
+    const Hh = 1 / (b.ar || 1 / Math.SQRT2), Mf = BK_FR.m, fpx = sh / (2 * Math.tan(28 * Math.PI / 360));
+    const ppu = kk => Math.min(sh / (Hh * Mf), sw / ((2 - kk) * Mf));
+    const cE = q => .5 - .5 * Math.cos(Math.PI * Math.max(0, Math.min(1, q)));
+    const lerp = (a, z, c) => ({ l: a.l + (z.l - a.l) * c, t: a.t + (z.t - a.t) * c, w: a.w + (z.w - a.w) * c, h: a.h + (z.h - a.h) * c });
+    const R0 = { l: r0.left, t: r0.top, w: r0.width, h: r0.height };
+    /* طبقةٌ ثابتةٌ مقصوصةٌ على المساحة */
+    const L = document.createElement('div'); L.className = 'bk-fly-layer'; L.setAttribute('aria-hidden', 'true');
+    L.style.clipPath = `inset(${P.top}px ${innerWidth - P.right}px ${innerHeight - P.bottom}px ${P.left}px round 14px)`;
+    document.body.appendChild(L);
+    const clone = (el, r, cls) => {
+      const d = document.createElement('div'); d.className = 'bk-fly-pg' + (cls ? ' ' + cls : '');
+      Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
+      const kk = el ? +el.dataset.k : 0; if (kk) d.dataset.k = kk;
+      const c0 = el && el.querySelector(':scope > canvas');
+      const srcCv = (c0 && c0.width ? c0 : null) || (kk && ((b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)))) || null;
+      if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
+      L.appendChild(d); return d;
+    };
+    /* صفحةُ القارئ (مقاسُها الأوّلُ أساسٌ، وتُحرَّك بالتحويل وحده) والتوأمُ (الصفحةُ الأخرى، أو باطنُ الغلاف) خلفها */
+    const live = clone(kEl, R0); live.style.zIndex = 3; live.style.boxShadow = 'none'; live.style.transformOrigin = '0 0';
+    const pEl = pk ? sc.querySelector(`.cbk-scr__pg[data-k="${pk}"]`) : null;
+    const tw = clone(pEl, { l: 0, t: 0, w: R0.w, h: R0.h }, pk ? '' : 'bk-fly-in');
+    Object.assign(tw.style, { zIndex: 2, boxShadow: 'none', transformOrigin: '0 0', backfaceVisibility: 'hidden' });
+    const liveTf = p => `translate(${p.l - R0.l}px, ${p.t - R0.t}px) scale(${p.w / R0.w}, ${p.h / R0.h})`;
+    const twinTf = (p, kk) => {
+      const Sx = side === 'L' ? p.l + p.w : p.l, Ox = Sx - out * kk * p.w / 2, Oy = p.t + p.h / 2 + BK_FR.lift * p.h;
+      const Pp = fpx * p.w / ppu(kk), a = out * Math.PI * kk;
+      return `translate(${Ox}px, ${Oy}px) perspective(${Pp}px) translate(${Sx - Ox}px, ${p.t - Oy}px) rotateY(${a}rad) translate(${side === 'L' ? 0 : -p.w}px, 0px) scale(${p.w / R0.w}, ${p.h / R0.h})`;
+    };
+    /* الحركةُ المُعدّةُ سلفًا: ساعةٌ واحدة (‎cosE‎ كالمحرّك) — الصفحةُ إلى مكانها في الفتحة، والتوأمُ من الطيّ (‎k = 1‎) إلى الفتح */
+    const N = 30, kfL = [], kfT = [];
+    for (let i = 0; i <= N; i++) { const c = cE(i / N), p = lerp(R0, F, c); kfL.push({ offset: i / N, transform: liveTf(p) }); kfT.push({ offset: i / N, transform: twinTf(p, 1 - c) }); }
+    const aL = live.animate(kfL, { duration: Dm, easing: 'linear', fill: 'forwards' });
+    const aT = tw.animate(kfT, { duration: Dm, easing: 'linear', fill: 'forwards' });
+    /* القائمةُ حولها تنطوي فيها وتذوب (كما في التحوّل إلى الصفحة الواحدة) */
+    const D = Math.round(BK_SX * slow), sK = F.w / R0.w;
+    sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
+      const kk = +el.dataset.k; if (kk === k) return;
+      const r = el.getBoundingClientRect(); if (!(r.bottom > R.top && r.top < R.bottom)) return;
+      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
+      const to = `translate(${F.l + (r.left - R0.l) * sK - r.left}px, ${F.t + (r.top - R0.t) * sK - r.top}px) scale(${sK})`;
+      d.animate([{ transformOrigin: '0 0', transform: 'none', opacity: 1 }, { transformOrigin: '0 0', opacity: 0, offset: .34 }, { transformOrigin: '0 0', transform: to, opacity: 0 }], { duration: D, easing: BK_SXE, fill: 'both' });
+    });
+    /* تبدُّلٌ جارٍ: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، والرجوعُ إلى الصفحة الواحدة إلى صفحة القارئ، والقامةُ ثابتةٌ حتى الاستلام */
+    b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true; b.hHold = true;
+    { const d = bkSk(b), pg = Math.max(1, k - d); b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side }; }
+    b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
+    const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
+    setTimeout(sharp, 4000);
+    /* ===== الاستلام ===== */
+    let g = null, hand = null, done = false, ctx = 0, cty = 0, mEnd = false;
+    const engRect = () => {
+      const R2 = g.el.getBoundingClientRect(), bx = R2.left - ctx, by = R2.top - cty;   /* (مكانُ اللوحة بلا إزاحتنا) */
+      const fr = (g.pageRects() || []).find(x => x.k === k);
+      return fr ? { fr, f: { l: bx + fr.x, t: by + fr.y, w: fr.w, h: fr.h }, bx, by } : null;
+    };
+    const put = () => {
+      if (done || !g || g.dead || !hand) return;
+      const now = performance.now(), E = engRect(); if (!E) return;
+      const c2 = mEnd ? 1 : hand.cu ? Math.min(1, (now - hand.at) / hand.cu) : Math.max(0, Math.min(1, (cE((now - t0) / Dm) - hand.c) / Math.max(1e-6, 1 - hand.c)));
+      const p = lerp(hand.p, E.f, c2);
+      live.style.transform = liveTf(p);
+      const s2 = p.w / E.fr.w; ctx = p.l - E.bx - s2 * E.fr.x; cty = p.t - E.by - s2 * E.fr.y;
+      g.el.style.transformOrigin = '0 0';
+      g.el.style.transform = Math.abs(s2 - 1) < 1e-4 && Math.abs(ctx) < .05 && Math.abs(cty) < .05 ? '' : `translate(${ctx}px, ${cty}px) scale(${s2})`;
+    };
+    const finish = () => {
+      if (done) return; done = true;
+      if (g && !g.dead) { g.afterFrame = null; g.el.style.transform = g.el.style.transformOrigin = ''; g.el.style.opacity = ''; }
+      L.remove(); bk2MxEnd(b);
+    };
+    const take = eng => {
+      if (g || done) return; g = eng;
+      if (!g || g.dead || !g.morph || !g.folding) { done = true; L.remove(); b.hHold = false; b.mx = false; b.stage.classList.remove('is-mx'); if (g && !g.dead) g.el.style.opacity = ''; pkSrcHFit(); return; }
+      const t = performance.now() - t0, kh = 1 - cE(t / Dm), late = t >= Dm - 1, rem = late ? 180 * slow : Math.max(1, Dm - t);
+      bkDiag(b, 'handover', { k: Math.round(kh * 100) / 100, late });
+      b.hHold = false; b.mxTo = false;
+      g.setFold(kh); if (g.hideKept) g.hideKept(true);
+      /* على الساعة نفسِها: تقدُّمُه من ‎kh‎ إلى الفتح كما يمضي التوأم */
+      const ease = late || kh < 1e-4 ? (() => 1) : (q => (kh - (1 - cE((t + q * rem) / Dm))) / kh);
+      let first = true;
+      g.afterFrame = () => {
+        if (first) {
+          /* أوّلُ إطارٍ رسمه على درجة الطيّ: يُثبَّت التوأمُ حيث بلغ ويُرفع، ويظهر الكتابُ في الإطار نفسِه */
+          first = false;
+          const rc = live.getBoundingClientRect();
+          aL.cancel(); hand = { p: { l: rc.left, t: rc.top, w: rc.width, h: rc.height }, c: cE(t / Dm), at: performance.now(), cu: late ? rem : 0 };
+          aT.cancel(); tw.remove();
+          g.el.style.opacity = '';
+        }
+        if (!g.folding) mEnd = true;
+        put();
+      };
+      g.morph(side, 0, rem, bkMxH(b, rem), ease).then(() => {
+        mEnd = true; put();
+        const E = engRect(), r = live.getBoundingClientRect();
+        if (E && r) L.dataset.jump = Math.round(Math.max(Math.abs(E.f.l - r.left), Math.abs(E.f.t - r.top), Math.abs(E.f.w - r.width)) * 10) / 10;
+        bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null });
+        finish();
+      });
+    };
+    setTimeout(() => { if (!g) take(b.gl); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
+    /* الكتابُ يُبنى بعد أوّل إطارٍ للحركة (مطويًّا، معروضًا بشفافيةٍ لا تُرى) */
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bkScrOff(b, false, { quiet: true, near: true, morph: side, warm: true, onReady: eng => { bkDiag(b, 'engine-ready'); take(eng); setTimeout(sharp, BK_MX + 500); } });
+      b.stage.classList.add('is-mx');
+    }));
+    return true;
+  }
   function bkScrOutMorph(b, one) {
+    if (!one) return bkScrOutTwo(b);
     if (bkReduce() || !b.scr || !b.view) return false;
     const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
     const P = src.getBoundingClientRect(), R = sc.getBoundingClientRect(); if (!P.width || !R.height) return false;
     /* (صفحةُ الغلاف في الملفّ ليست من صفحات الكتاب الداخليّة: الكتابُ يُفتح على أولاها، فهي التي تطير) */
     const k = Math.min(Math.max(1, b.n || 1), Math.max(bkSk(b) + 1, b.pos || 1));
-    /* ===== إلى الصفحتين: حركةُ المحرّك نفسُها بالعكس (طلبُ صاحب الموقع) =====
-       من الصفحتين إلى الصفحة ينطوي نصفُ الفتحة حول الكعب إلى ما وراء الكتاب (‎book2: morph(side, 1)‎). فهنا يُبنى الكتابُ
-       بصفحتين مطويًّا (‎morph: side‎ — يبدو صفحةً واحدة)، وتطير صفحةُ القارئ وحدها إلى تلك الصفحة، والقائمةُ كلُّها
-       (شريكتُها معها) تنطوي فيها وتذوب، ثمّ يفتح المحرّكُ النصفَ الآخرَ من ورائه (‎morph(side, 0)‎) كما يفعل من الصفحة */
-    const side = one ? null : bkSideOf(b, k);
-    bkDiag(b, 'start', { to: one ? 'one' : 'two', k });
-    let T = bkGeoPredict(b, k, one, P); if (!T.length) return false;
-    if (side) {
-      /* مكانُها المطويُّ تقديرًا: صفحتُها من الفتحة بقدّها في وسط الفتحة (يُصوَّب إلى الحقيقيّ في الطيران) */
-      const f = T.find(t => t.k === k) || T[0], cx = T.reduce((a, t) => a + t.l + t.w / 2, 0) / T.length;
-      T = [{ k, side, l: cx - f.w / 2, t: f.t, w: f.w, h: f.h }];
-    }
+    /* (إلى الصفحتين: ‎bkScrOutTwo‎ — هنا إلى الصفحة الواحدة) */
+    bkDiag(b, 'start', { to: 'one', k });
+    const T = bkGeoPredict(b, k, true, P); if (!T.length) return false;
     /* طبقةٌ ثابتةٌ مقصوصةٌ على المساحة: فيها النسخُ الطائرة (فوق الكتاب الذي يُبنى تحتها) */
     const L = document.createElement('div'); L.className = 'bk-fly-layer'; L.setAttribute('aria-hidden', 'true');
     L.style.clipPath = `inset(${P.top}px ${innerWidth - P.right}px ${innerHeight - P.bottom}px ${P.left}px round 14px)`;
@@ -28132,17 +28255,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        نفسِه (بُعدُها منها محفوظٌ بالمقياس نفسِه)، وتذوب في نصف الحركة الأوّل — كأنّ القائمةَ كلَّها تنطوي في الكتاب */
     const kEl = sc.querySelector(`.cbk-scr__pg[data-k="${k}"]`), R0 = kEl && kEl.getBoundingClientRect(), T0 = T.find(x => x.k === k);
     const sK = R0 && T0 && R0.width ? T0.w / R0.width : 1;
-    let live = null;
     pages.forEach(el => {
       const kk = +el.dataset.k, r = el.getBoundingClientRect(), vis = r.bottom > R.top && r.top < R.bottom;
       if (!vis && !tk.has(kk)) return;
       const t = T.find(x => x.k === kk);
-      if (t && side) {
-        /* (إلى الصفحتين) تُقاد إطارًا إطارًا إلى مكان صفحتها الحيّ في الكتاب — يتغيّر وهو ينفتح */
-        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height });
-        d.style.zIndex = 3; d.style.boxShadow = 'none'; d.style.transformOrigin = '0 0';
-        live = { d, r0: r }; moving.set(kk, d);   /* (في ‎moving‎: وإلّا حُسبت غائبةً عن القائمة فطلعت لها ورقةٌ بيضاء) */
-      } else if (t) {
+if (t) {
         const d = clone(el, t);   /* في مكانها الأخير، وتبدأ من مكانها الآن (‎FLIP‎) */
         d.style.zIndex = kk === k ? 3 : 2;
         runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
@@ -28167,7 +28284,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const U = T.reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
     const sh = document.createElement('div'); sh.className = 'bk-fly-shadow';
     const place = (el, u) => Object.assign(el.style, { left: u.l + 'px', top: u.t + 'px', width: (u.r - u.l) + 'px', height: (u.b - u.t) + 'px' });
-    place(sh, U); if (!side) L.prepend(sh); sh.style.opacity = '0';
+    place(sh, U); L.prepend(sh); sh.style.opacity = '0';
     /* (الظلُّ يتكوّن حين يُعرف مكانُ الكتاب الحقيقيّ — كان يظهر في المكان المقدَّر أوّلًا فيُرى مستطيلًا باهتًا فوق الفتحة) */
     const shIn = ms => { sh.style.opacity = ''; sh.animate([{ opacity: 0, transform: 'scale(.94)' }, { opacity: 1, transform: 'none' }], { duration: Math.max(140, ms), easing: E, fill: 'both' }); };
     /* ===== المرحلة ٤: التصويبُ في الطيران — المحرّكُ يُبنى بعد عُشر ثانيةٍ تقريبًا، قبل أن تنتهي الحركة: فإذا عرف مكانَ صفحاته
@@ -28203,8 +28320,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       }
       if (performance.now() - t00 < D) requestAnimationFrame(aim);
     };
-    if (!side) requestAnimationFrame(aim);
-    let ng = null, animDone = false, fin = false, onEngine = null;
+    requestAnimationFrame(aim);
+    let ng = null, animDone = false, fin = false;
     const finish = () => {
       if (fin) return; fin = true;
       if (!aimed) shIn(140);   /* (لم يُعرف مكانُه في الطيران: يظهر الآن) */
@@ -28229,90 +28346,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     };
     const maybe = () => { if (animDone && ng && !d0busy()) finish(); };
     const d0busy = () => [...moving.values()].some(d => d.getAnimations().some(a => a.playState === 'running'));
-    /* ===== الانفتاحُ في أثناء التصغُّر (طلبُ صاحب الموقع: «ابيها تنفتح خلال ماهي تتصغر») =====
-       أوّلَ ما يجهز الكتابُ (المطويُّ) يظهر ويبدأ انفتاحُه بالمحرّك (‎morph(side, 0)‎) وصفحةُ القارئ ما زالت تطير: نصفُه الباقي
-       مخفيٌّ (‎hideKept‎) فلا تتكرّر الصفحة، والنسخةُ تقوم مقامه — تمضي في كلّ إطارٍ نحو مكانه الحيّ (يتغيّر والكاميرا تبتعد)،
-       فتبلغه في آخر الحركة. وفي آخر إطارٍ من الانفتاح يعود النصفُ إلى الكتاب تحتها بالصورة نفسِها فتُرفع */
-    let mDone = false, mOn = false;
-    if (side) {
-      const slow = window.__pkfxSlow || 1, t0 = performance.now();
-      const goal = () => { const g = b.gl; const f = g && !g.dead ? bkPgScreens(g).find(x => x.k === k) : null; return f || T[0]; };
-      const tf = (q, e) => { const r0 = live.r0; return `translate(${(q.l - r0.left) * e}px, ${(q.t - r0.top) * e}px) scale(${(r0.width + (q.w - r0.width) * e) / r0.width}, ${(r0.height + (q.h - r0.height) * e) / r0.height})`; };
-      /* (طلبُ صاحب الموقع: «لسه على خطوتين») التصغُّرُ مربوطٌ بالانفتاح نفسِه.
-         ===== خطّةُ الثقل · المرحلة ١: قبل الانفتاح على كرت الشاشة =====
-         كانت تُقاد من أوّلها إطارًا إطارًا، وبناءُ الكتاب يشغل الصفحةَ في الوقت نفسِه فتقف. فقبله حركةٌ يجريها كرتُ الشاشة وحده
-         (‎WAAPI‎) نحو ‎42%‎ من طريقها تتمهّل؛ ومعه تُقاد بعد كلّ إطارٍ يرسمه الكتاب (‎afterFrame‎) من حيث بلغت إلى مكانه الحيّ،
-         بمنحناه ومدّته (‎cosE‎) — فيمضيان معًا وينتهيان معًا */
-      /* (طلبُ صاحب الموقع: «ابيها مستمرة من اول ما اضغط») حركةٌ واحدةٌ متّصلةُ السرعة — لا تتمهّل حتى تكاد تقف وهي تنتظر الكتاب
-         ثمّ يبدأ الانفتاحُ من السكون (كان ذلك وقفةً في وسطها): قبله تمضي بسرعةٍ ثابتةٍ تقريبًا (‎e = cap·(1 − e^(−v·t/cap))‎ — تبطؤ
-         قليلًا إن طال البناء ولا تقف)، ومعه يكمل الباقي من سرعتها نفسِها إلى السكون في آخره (منحنى ‎Hermite‎) */
-      const cap = .58, v = 1 / (760 * slow), eAt = t => cap * (1 - Math.exp(-v * t / cap));
-      const PD = 2600 * slow, pre = live ? live.d.animate(Array.from({ length: 14 }, (_, i) => ({ offset: i / 13, transform: tf(T[0], eAt(PD * i / 13)) })), { duration: PD, easing: 'linear', fill: 'forwards' }) : null;
-      let mEnd = false, rc = null, tM = 0, m0 = 0, ctx = 0, cty = 0;
-      /* (طلبُ صاحب الموقع: «ما احس انها جت من ورا الورقة وانما هي جزء ممتد من كعبها») كان الكتابُ ينفتح بقدّه الأصغر خلف الصفحة
-         الطائرة وهي بعدُ أكبر منه، فيطلّ النصفُ المنفتحُ من فوقها. فالكتابُ كلُّه (لوحتُه) يُكبَّر ويُزاح إطارًا إطارًا حتى تنطبق صفحتُه
-         الباقيةُ على الصفحة الطائرة: الكعبُ حافّتُها، والنصفُ الآخرُ يمتدّ منه — ويصغران معًا إلى مكانهما */
-      const put = () => {
-        if (mDone || !live || !rc || !L.isConnected) return;
-        const g = b.gl; if (!g || g.dead) return;
-        const q = mEnd ? 1 : Math.min(1, (performance.now() - tM) / (BK_MX * slow));
-        const c = m0 * (q * q * q - 2 * q * q + q) + (3 * q * q - 2 * q * q * q);   /* (يبدأ بميل ‎m0‎: سرعتُها قبله) */
-        const R = g.el.getBoundingClientRect(), bx = R.left - ctx, by = R.top - cty;   /* (مكانُ اللوحة بلا إزاحتنا) */
-        const fr = (g.pageRects() || []).find(x => x.k === k);
-        const f = fr ? { l: bx + fr.x, t: by + fr.y, w: fr.w, h: fr.h } : T[0];
-        const p = { l: rc.left + (f.l - rc.left) * c, t: rc.top + (f.t - rc.top) * c, w: rc.width + (f.w - rc.width) * c, h: rc.height + (f.h - rc.height) * c };
-        live.d.style.transform = tf(p, 1);
-        if (fr && fr.w) {
-          const sc = p.w / fr.w; ctx = p.l - bx - sc * fr.x; cty = p.t - by - sc * fr.y;
-          g.el.style.transformOrigin = '0 0';
-          g.el.style.transform = Math.abs(sc - 1) < 1e-4 && Math.abs(ctx) < .05 && Math.abs(cty) < .05 ? '' : `translate(${ctx}px, ${cty}px) scale(${sc})`;
-        }
-      };
-      const open = g => {
-        if (mOn || mDone) return;
-        b.hHold = false;
-        if (!g || g.dead || !g.morph || !g.folding) { mDone = true; L.remove(); b.mx = false; b.stage.classList.remove('is-mx'); if (g && !g.dead) g.el.style.opacity = ''; pkSrcHFit(); return; }
-        mOn = true; b.mxTo = false;
-        /* تُثبَّت حيث بلغت حركتُها ثمّ تُرفع */
-        if (live) { rc = live.d.getBoundingClientRect(); live.d.style.transform = tf({ l: rc.left, t: rc.top, w: rc.width, h: rc.height }, 1); if (pre) pre.cancel(); }
-        tM = performance.now();
-        { const t = tM - t0, e = Math.min(cap, eAt(t)); m0 = Math.max(0, Math.min(3, v * Math.exp(-v * t / cap) * BK_MX * slow / Math.max(.05, 1 - e))); }
-        bkDiag(b, 'unfold-start', { resizes: g.resizes });
-        if (g.hideKept) g.hideKept(true);
-        g.afterFrame = () => { if (!g.folding) mEnd = true; put(); };   /* (آخرُ إطارٍ من الانفتاح: في مكانها تمامًا) */
-        g.el.style.opacity = '';
-        g.el.animate([{ opacity: 0.001 }, { opacity: 1 }], { duration: 140 * slow, easing: 'ease-out' });
-        g.morph(side, 0, BK_MX * slow, bkMxH(b)).then(() => {
-          const f = bkPgScreens(g).find(x => x.k === k), r = live && live.d.getBoundingClientRect();
-          if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;
-          bkDiag(b, 'unfold-end', { jump: L.dataset.jump || null, resizes: g.resizes });
-          mDone = true; g.afterFrame = null; g.el.style.transform = g.el.style.transformOrigin = ''; L.remove(); bk2MxEnd(b);
-        });
-      };
-      onEngine = open;
-      setTimeout(() => { if (!mOn) open(b.gl); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
-    } else {
-      Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
-      setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
-    }
+    Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
+    setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
     b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
     const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
     setTimeout(sharp, 4000);
     /* بناءُ الكتاب بعد أوّل إطارٍ للحركة: كان يُبنى في المهمّة نفسِها فيتأخّر أوّلُ إطارٍ حتى ينتهي (~٤٠٠ms) */
-    if (side) {
-      /* تبدُّلٌ جارٍ من أوّله: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، وموضعُ الرجوع إلى الصفحة هو صفحةُ القارئ */
-      b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true;
-      /* ===== خطّةُ الثقل · المرحلة ٢: القامةُ تتغيّر مرّةً واحدة =====
-         كانت تمضي عند الضغطة إلى قامة الصفحة الواحدة ثمّ مع الانفتاح إلى قامة الصفحتين — والكتابُ يُبنى في أثناء الأولى فتُعاد
-         لوحتُه (وصورُ صفحاته بمقاسٍ آخر) إطارًا بعد إطار. فتثبت حتى يبدأ الانفتاح، ثمّ تنتقل معه مرّةً (‎bkMxH‎) */
-      b.hHold = true;
-      const d = bkSk(b), pg = Math.max(1, k - d);
-      b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side };
-    }
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, warm: !!side, onReady: g => { ng = g; bkDiag(b, 'engine-ready', { resizes: g.resizes }); if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
-      if (side) b.stage.classList.add('is-mx');
-    }));
+    requestAnimationFrame(() => requestAnimationFrame(() => bkScrOff(b, true, { quiet: true, near: true, onReady: g => { ng = g; bkDiag(b, 'engine-ready'); maybe(); setTimeout(sharp, 400); } })));
     return true;
   }
   /* الخروجُ: من الصفحات المتتالية إلى الكتاب — يُبنى الكتابُ خفيًّا تحت لقطة الصفحات، فإذا جهز طار إليه */

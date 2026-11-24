@@ -676,7 +676,7 @@ export function createBook2(THREE, host, cfg) {
     let moving = false, active = null;
     if (mo && mo.a) {
       const q = Math.min(1, Math.max(0, (now - mo.a.t0) / mo.a.dur));
-      const e = cosE(q);
+      const e = mo.a.ease ? mo.a.ease(q) : cosE(q);
       mo.k = mo.a.from + (mo.a.to - mo.a.from) * e; moving = true;
       if (mo.box) mo.vh = mo.box.h0 + (mo.box.h1 - mo.box.h0) * e;
       if (q >= 1) {
@@ -1001,7 +1001,10 @@ export function createBook2(THREE, host, cfg) {
     /* يطوي نصفَ الفتحة (‎to = 1‎) أو يفتحه (‎0‎) في ‎dur‎ ميلي ثانية — ويَعِد بانتهائه */
     /* ‏‎box = { h0, h1 }‎ قامةُ المساحة قبل التبدُّل وبعده (تتغيّر بالمدّة والمنحنى نفسَيهما): اللوحةُ تُكبَّر مرّةً إلى أطولهما
        وتتوسّط المساحة، والكتابُ يُحجَّم داخلها — فلا تُعاد اللوحةُ ولا صورُها في كلّ إطار */
-    morph(side, to, dur = 700, box) {
+    /* (للتحوّل من الصفحات المتتالية) المطويُّ الساكنُ يُوضع على درجةٍ من طيّه (‎0..1‎) — ليكمل من حيث بلغت نسخةٌ تسبقه */
+    setFold(k) { if (mo && !mo.a) { mo.k = Math.max(0, Math.min(1, k)); needs = true; } },
+    /* ‏‎ease(q)‎ (اختياريّ): منحنى التقدّم بدل ‎cosE‎ — يتبع به ساعةَ حركةٍ بدأت قبله */
+    morph(side, to, dur = 700, box, ease) {
       if (ONE || dead) return Promise.resolve();
       if (!mo) { if (!to) return Promise.resolve(); mo = { side: side === 'R' ? 'R' : 'L', k: 0, a: null }; }
       hover = -1; needs = true;
@@ -1013,7 +1016,7 @@ export function createBook2(THREE, host, cfg) {
         camOpen = -1;
       }
       if (mo.a) mo.a.res();
-      return new Promise(res => { mo.a = { from: mo.k, to: to ? 1 : 0, t0: performance.now(), dur: Math.max(1, dur), res }; });
+      return new Promise(res => { mo.a = { from: mo.k, to: to ? 1 : 0, t0: performance.now(), dur: Math.max(1, dur), res, ease: typeof ease === 'function' ? ease : null }; });
     },
     /* صفحةٌ تغيّر ما يُرسم عليها (تحديداتٌ وأرقام): تُطلب صورتُها من جديد إن كانت محمَّلة */
     refreshPage(k) {
