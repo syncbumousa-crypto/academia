@@ -20203,3 +20203,8 @@ html.pk-ptr .pk-fstrip .pg-face:focus-visible { outline: none; }
 .bk-fly-layer { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
 .bk-fly-pg { position: fixed; background: #fff; overflow: hidden; border-radius: 3px; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); will-change: transform; }
 .bk-fly-pg > canvas { display: block; width: 100%; height: 100%; }
+
+/* ظلُّ الكتاب تحت الفتحة وكعبُه وهما يتكوّنان (‎bkScrOutMorph‎) — بلون ظلّ الكتاب على الطاولة */
+.bk-fly-shadow { position: fixed; border-radius: 4px; box-shadow: 0 18px 38px -14px rgba(0, 0, 0, .5), 0 4px 10px -4px rgba(0, 0, 0, .25); }
+.bk-fly-spine { position: fixed; z-index: 4; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .12) 45%, rgba(0, 0, 0, .2) 50%, rgba(0, 0, 0, .12) 55%, transparent); }

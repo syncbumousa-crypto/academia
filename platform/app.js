@@ -28039,6 +28039,47 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     /* صفحةُ الفتحة التي ليست في القائمة الظاهرة بعدُ (نادر): تأتي بيضاءَ من تحت */
     T.filter(t => !moving.has(t.k)).forEach(t => { const d = clone(null, t); runs.push(d.animate([{ transform: 'translateY(60px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: D, easing: E, fill: 'both' })); moving.set(t.k, d); });
+    /* ===== المرحلة ٣: ملامحُ الكتاب تتكوّن — ظلُّه تحت الفتحة يكبر، وخطُّ الكعب في وسطها (عرضُ الصفحتين) ===== */
+    const U = T.reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
+    const sh = document.createElement('div'); sh.className = 'bk-fly-shadow';
+    const place = (el, u) => Object.assign(el.style, { left: u.l + 'px', top: u.t + 'px', width: (u.r - u.l) + 'px', height: (u.b - u.t) + 'px' });
+    place(sh, U); L.prepend(sh);
+    sh.animate([{ opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }], { duration: D, delay: D * .25, easing: E, fill: 'both' });
+    let spine = null;
+    if (!one && T.length > 1) {
+      spine = document.createElement('div'); spine.className = 'bk-fly-spine';
+      const sx = (U.l + U.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: U.t, b: U.b }); L.appendChild(spine);
+      spine.animate([{ opacity: 0 }, { opacity: 0, offset: .55 }, { opacity: 1 }], { duration: D, easing: 'ease-out', fill: 'both' });
+    }
+    /* ===== المرحلة ٤: التصويبُ في الطيران — المحرّكُ يُبنى بعد عُشر ثانيةٍ تقريبًا، قبل أن تنتهي الحركة: فإذا عرف مكانَ صفحاته
+       الحقيقيّ وهي تطير غيّرت وجهتها إليه بنعومةٍ في الوقت الباقي — فلا تصحيحَ عند الاستلام ولو كان التقديرُ أوّلَ مرّة ===== */
+    const t00 = performance.now();
+    let aimed = false;
+    const aim = () => {
+      if (aimed || fin) return;
+      const g = b.gl;
+      if (g && !g.dead && g.pageRects) {
+        const F = bkPgScreens(g);
+        if (F.length && [...moving.keys()].every(kk => F.some(f => f.k === kk))) {
+          aimed = true;
+          const left = Math.max(140, D - (performance.now() - t00));
+          moving.forEach((d, kk) => {
+            const f = F.find(x => x.k === kk), r = d.getBoundingClientRect();
+            if (Math.abs(f.l - r.left) < 1 && Math.abs(f.t - r.top) < 1 && Math.abs(f.w - r.width) < 1) return;
+            d.getAnimations().forEach(a => a.cancel());
+            Object.assign(d.style, { left: f.l + 'px', top: f.t + 'px', width: f.w + 'px', height: f.h + 'px' });
+            runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - f.l}px, ${r.top - f.t}px) scale(${r.width / f.w}, ${r.height / f.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: left, easing: 'cubic-bezier(.2, .7, .2, 1)', fill: 'both' }));
+          });
+          const V = F.filter(f => moving.has(f.k)).reduce((a, t) => ({ l: Math.min(a.l, t.l), t: Math.min(a.t, t.t), r: Math.max(a.r, t.l + t.w), b: Math.max(a.b, t.t + t.h) }), { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
+          place(sh, V); if (spine) { const sx = (V.l + V.r) / 2; place(spine, { l: sx - 9, r: sx + 9, t: V.t, b: V.b }); }
+          /* (لا يُنتظر ما أُلغي: وعدُ انتهائه بعد الإلغاء وعدٌ جديدٌ لا يُوفى أبدًا) */
+          Promise.all(runs.filter(a => a.playState !== 'idle').map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
+          return;
+        }
+      }
+      if (performance.now() - t00 < D) requestAnimationFrame(aim);
+    };
+    requestAnimationFrame(aim);
     let ng = null, animDone = false, fin = false;
     const finish = () => {
       if (fin) return; fin = true;
@@ -28058,7 +28099,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         a.finished.then(() => L.remove(), () => L.remove());
       });
     };
-    const maybe = () => { if (animDone && ng) finish(); };
+    const maybe = () => { if (animDone && ng && !d0busy()) finish(); };
+    const d0busy = () => [...moving.values()].some(d => d.getAnimations().some(a => a.playState === 'running'));
     Promise.all(runs.map(a => a.finished.catch(() => {}))).then(() => { animDone = true; maybe(); });
     setTimeout(() => { animDone = true; if (!ng && b.gl) ng = b.gl; finish(); }, 4500);   /* ولا تبقى النسخُ إن تعثّر بناءُ الكتاب */
     b.fastTex = true; b.texGate = new Promise(r => { b.texOpen = r; });
