@@ -28133,13 +28133,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== الجاراتُ حين يُغادَر العرضُ العاديّ (طلبُ صاحب الموقع: «تتحرّك لفوق أو تحت بشكلٍ عموديٍّ خالص ما فيه أيّ أفقيّة،
      من مكانها نفسه») — كانت تصغر وتمضي مع صفحة القارئ إلى جانبها من الفتحة فتبدو مائلة. فالآن كلُّ صفحةٍ ظاهرةٍ غيرها تنزلق
      من مكانها عموديًّا فقط (التي فوقها إلى فوق، والتي تحتها إلى تحت) بلا تحجيمٍ ولا إزاحةٍ أفقيّة، وتذوب في أوّل الحركة ===== */
-  function bkScrNbOut(b, sc, R, y0, k, clone, dur, skip) {
-    const H = R.height || 600;
+  /* (طلبُ صاحب الموقع: «خروج الصفحة من فوق ما فيه نعومة ويبدو كأنه مربوط بتحرّك الكتاب») ‏‎still‎: شريكةُ الفتحة — هي نفسُها
+     التي تنفتح على الكعب، فلا تمضي إلى فوق وهي تنفتح هناك: تذوب في مكانها كأنّها دخلت الكتاب. والبقيّةُ تتحرّك من أوّل إطار
+     (منحنًى يبدأ بسرعته لا من السكون) وتذوب تدريجًا */
+  function bkScrNbOut(b, sc, R, y0, k, clone, dur, skip, still) {
+    const H = R.height || 600, slow = window.__pkfxSlow || 1;
     sc.querySelectorAll('.cbk-scr__pg').forEach(el => {
       const kk = +el.dataset.k; if (kk === k || (skip && skip(kk))) return;
       const r = el.getBoundingClientRect(); if (!(r.bottom > R.top && r.top < R.bottom)) return;
-      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), dy = (r.top < y0 ? -1 : 1) * H * .28;
-      d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${dy * .6}px)`, opacity: 0, offset: .5 }, { transform: `translateY(${dy}px)`, opacity: 0 }], { duration: dur, easing: 'cubic-bezier(.33, 0, .2, 1)', fill: 'forwards' });
+      const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }, '', true);
+      if (kk === still) { d.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220 * slow, easing: 'ease-out', fill: 'forwards' }); return; }
+      const dy = (r.top < y0 ? -1 : 1) * H * .22;
+      d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${dy * .7}px)`, opacity: .25, offset: .45 }, { transform: `translateY(${dy}px)`, opacity: 0 }], { duration: dur, easing: 'cubic-bezier(.25, .6, .35, 1)', fill: 'forwards' });
     });
   }
   function bkScrOutTwo(b) {
@@ -28167,17 +28172,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const L = document.createElement('div'); L.className = 'bk-fly-layer'; L.setAttribute('aria-hidden', 'true');
     L.style.clipPath = `inset(${P.top}px ${innerWidth - P.right}px ${innerHeight - P.bottom}px ${P.left}px round 14px)`;
     document.body.appendChild(L);
-    const clone = (el, r, cls) => {
+    /* ‏‎move‎: لوحةُ الصفحة نفسُها تُنقل إلى النسخة (القائمةُ تُزال بعد إطارين) — كان نسخُ اللوحات الكبيرة يُثقل لحظةَ الضغط */
+    const clone = (el, r, cls, move) => {
       const d = document.createElement('div'); d.className = 'bk-fly-pg' + (cls ? ' ' + cls : '');
       Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
       const kk = el ? +el.dataset.k : 0; if (kk) d.dataset.k = kk;
       const c0 = el && el.querySelector(':scope > canvas');
-      const srcCv = (c0 && c0.width ? c0 : null) || (kk && ((b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)))) || null;
-      if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
+      if (move && c0 && c0.width) d.appendChild(c0);
+      else {
+        const srcCv = (c0 && c0.width ? c0 : null) || (kk && ((b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)))) || null;
+        if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
+      }
       L.appendChild(d); return d;
     };
     /* صفحةُ القارئ (مقاسُها الأوّلُ أساسٌ، وتُحرَّك بالتحويل وحده) والتوأمُ (الصفحةُ الأخرى، أو باطنُ الغلاف) خلفها */
-    const live = clone(kEl, R0); live.style.zIndex = 3; live.style.boxShadow = 'none'; live.style.transformOrigin = '0 0';
+    const live = clone(kEl, R0, '', true); live.style.zIndex = 3; live.style.boxShadow = 'none'; live.style.transformOrigin = '0 0';
     const pEl = pk ? sc.querySelector(`.cbk-scr__pg[data-k="${pk}"]`) : null;
     const tw = clone(pEl, { l: 0, t: 0, w: R0.w, h: R0.h }, pk ? '' : 'bk-fly-in');
     Object.assign(tw.style, { zIndex: 2, boxShadow: 'none', transformOrigin: '0 0', backfaceVisibility: 'hidden' });
@@ -28192,7 +28201,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     for (let i = 0; i <= N; i++) { const c = cE(i / N), p = lerp(R0, F, c); kfL.push({ offset: i / N, transform: liveTf(p) }); kfT.push({ offset: i / N, transform: twinTf(p, 1 - c) }); }
     const aL = live.animate(kfL, { duration: Dm, easing: 'linear', fill: 'forwards' });
     const aT = tw.animate(kfT, { duration: Dm, easing: 'linear', fill: 'forwards' });
-    bkScrNbOut(b, sc, R, R0.t, k, clone, Dm);
+    bkScrNbOut(b, sc, R, R0.t, k, clone, Dm, null, pk);
     /* تبدُّلٌ جارٍ: ضغطاتُ القوس في أثنائه تُنفَّذ بعده، والرجوعُ إلى الصفحة الواحدة إلى صفحة القارئ، والقامةُ ثابتةٌ حتى الاستلام */
     b.mx = true; b.mxWant = null; b.mxGoal = false; b.mxTo = true; b.hHold = true;
     { const d = bkSk(b), pg = Math.max(1, k - d); b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side }; }
