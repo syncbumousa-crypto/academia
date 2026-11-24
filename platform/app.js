@@ -27932,7 +27932,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!e || note === 'start') {
       e = b.__dg = { at: new Date().toISOString().slice(11, 23), t0: performance.now(), steps: [], ua: navigator.userAgent.replace(/^.*?\) /, '').slice(0, 60), long: 0, longMs: 0 };
       L.push(e); if (L.length > 30) L.shift();
-      try { const po = new PerformanceObserver(l => l.getEntries().forEach(x => { if (x.startTime >= e.t0) { e.long++; e.longMs += Math.round(x.duration); e.steps.push(Math.round(x.startTime - e.t0) + 'ms LONG ' + Math.round(x.duration) + 'ms'); } })); po.observe({ type: 'longtask', buffered: false }); setTimeout(() => po.disconnect(), 3000); } catch (er) {}
+      /* (إطاراتٌ طويلةٌ كاملة — ‎long-animation-frame‎ إن وُجد: يرى انتظارَ كرت الشاشة الذي لا يراه ‎longtask‎ — من تقرير القياس) */
+      try {
+        const lf = (PerformanceObserver.supportedEntryTypes || []).includes('long-animation-frame'), tag = lf ? 'FRAME ' : 'LONG ';
+        const po = new PerformanceObserver(l => l.getEntries().forEach(x => { if (x.startTime >= e.t0 && x.duration >= 60) { e.long++; e.longMs += Math.round(x.duration); e.steps.push(Math.round(x.startTime - e.t0) + 'ms ' + tag + Math.round(x.duration) + 'ms' + (lf ? ' js ' + Math.round((x.scripts || []).reduce((a, sc) => a + sc.duration, 0)) : '')); } }));
+        po.observe({ type: lf ? 'long-animation-frame' : 'longtask', buffered: false }); setTimeout(() => po.disconnect(), 3000);
+      } catch (er) {}
     }
     e.steps.push(Math.round(performance.now() - e.t0) + 'ms ' + note + (extra ? ' ' + JSON.stringify(extra) : ''));
   }
@@ -28257,7 +28262,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (g.hideKept) g.hideKept(true);
         g.afterFrame = () => { if (!g.folding) mEnd = true; put(); };   /* (آخرُ إطارٍ من الانفتاح: في مكانها تمامًا) */
         g.el.style.opacity = '';
-        g.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140 * slow, easing: 'ease-out' });
+        g.el.animate([{ opacity: 0.001 }, { opacity: 1 }], { duration: 140 * slow, easing: 'ease-out' });
         g.morph(side, 0, BK_MX * slow, bkMxH(b)).then(() => {
           const f = bkPgScreens(g).find(x => x.k === k), r = live && live.d.getBoundingClientRect();
           if (f && r) L.dataset.jump = Math.round(Math.max(Math.abs(f.l - r.left), Math.abs(f.t - r.top), Math.abs(f.w - r.width)) * 10) / 10;
@@ -28286,7 +28291,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       b.mxBack = { A: side === 'L' ? (pg + 1) / 2 : pg / 2 + 1, side };
     }
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, onReady: g => { ng = g; bkDiag(b, 'engine-ready', { resizes: g.resizes }); if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
+      bkScrOff(b, one, { quiet: true, near: true, morph: side || undefined, warm: !!side, onReady: g => { ng = g; bkDiag(b, 'engine-ready', { resizes: g.resizes }); if (onEngine) onEngine(g); else maybe(); setTimeout(sharp, side ? BK_MX + 500 : 400); } });
       if (side) b.stage.classList.add('is-mx');
     }));
     return true;
@@ -28340,7 +28345,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const post = b.view.closest('.post'); if (post) post.classList.remove('bk-scroll');
     b.one = b.single = !!one; b.closed = false;
     b.pos = bkNorm(bkSk(b), k, b.one);
-    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = false; saveSoon(); }
+    if (b.meta) { b.meta.pos = b.pos; b.meta.closed = false; if (!b.mx) saveSoon(); }   /* (في تبدُّلٍ يُحفظ في آخره — كان الحفظُ يقع وسط الحركة) */
     bk2Layout(b);
     bk2Engine(b, eo);
   }
@@ -28891,7 +28896,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (b.phEl) b.gl.el.style.opacity = '0';   /* الكتابُ مخفيٌّ تحت الهيكل حتى يكتمل، ثمّ يظهر بتلاشٍ */
       /* الغلافُ المؤقّتُ يذوب حين تجهز صورُ الصفحات القريبة وتُرسم (إطاران) */
       const g = b.gl;
-      if (o.quiet) g.el.style.opacity = '0';
+      /* (‎warm‎: يُعرض من أوّله بشفافيةٍ لا تُرى — كرتُ الشاشة يرفع صورَه ويقدّم لوحتَه في أثناء الطيران، لا في أوّل إطارٍ يظهر فيه) */
+      if (o.quiet) g.el.style.opacity = o.warm ? '0.001' : '0';
       let done = false;
       const off = () => {
         if (done) return; done = true;
