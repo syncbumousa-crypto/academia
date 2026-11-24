@@ -27514,50 +27514,25 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const HL_PEN_PX = ['..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..', '...kccck...', '...kkkkk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kwwwk...', '...kkkkk...', '...kccck...', '...kccck...', '...kttk....', '...ktk.....', '..kkkkkkk..', '.kwcccccck.', '.kcccccctk.', '..kkkkkkk..'];
   /* وهو يظلّل (طلبُه — الزوج ٦): يختفي القلمُ ويبقى مؤشّرُ تحديدٍ بكسليّ — العارضتان بلون الحبر وبينهما خطٌّ أسودُ رفيع، ونقطةُ التأشير وسطُه */
   const HL_PEN_PX_D = HL_PEN_PX.slice(0, 4).concat(Array(HL_PEN_PX.length - 8).fill('.....k.....'), HL_PEN_PX.slice(-4));
-  /* ‏‎P‎ صفوفُ الرسم: يطول القلمُ (جسمُه الأبيض) وخطُّ التحديد بين العارضتين أو يقصران بصفوفٍ كاملة فيبلغ قامةَ السطر بالضبط
-     وبكسلُه حادّ؛ و‎k‎ مقاسُ بكسل الرسم بـ‎px‎ (عددٌ صحيحٌ من بكسلات الشاشة) */
-  function hlPenRows(down, P) {
-    if (P === HL_PEN_PX.length) return down ? HL_PEN_PX_D : HL_PEN_PX;
-    const bar = HL_PEN_PX.slice(0, 4), foot = HL_PEN_PX.slice(-4);
-    if (down) return bar.concat(Array(Math.max(2, P - 8)).fill('.....k.....'), foot);
-    return bar.concat(HL_PEN_PX.slice(4, 6), Array(Math.max(1, P - 15)).fill('...kwwwk...'), HL_PEN_PX.slice(-9, -4), foot);
-  }
-  function hlPixPen(fill, ink, down, k = 1, P = HL_PEN_PX.length) {
-    const PX = hlPenRows(down, P), col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
+  function hlPixPen(fill, ink, down) {
+    const PX = down ? HL_PEN_PX_D : HL_PEN_PX, col = { k: '#000000', w: '#ffffff', c: fill, t: ink }, ox = 1, oy = 1;
     let r = '';
     PX.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== '.') r += `<rect x="${x + ox}" y="${y + oy}" width="1" height="1" fill="${col[ch]}"/>`; }));
     const W = PX[0].length + 2, Hh = PX.length + 2;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${+(W * k).toFixed(3)}" height="${+(Hh * k).toFixed(3)}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
-    return { svg, hx: Math.floor((ox + (down ? 5 : 4) + .5) * k), hy: Math.floor((oy + (down ? PX.length >> 1 : PX.length - 5) + .5) * k) };
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" shape-rendering="crispEdges">${r}</svg>`;
+    return { svg, hx: ox + (down ? 5 : 4), hy: oy + (down ? PX.length >> 1 : PX.length - 5) };
   }
   const hlPenCurC = {};
-  function hlPenCursor(c, down, k = 1, P = HL_PEN_PX.length) {
-    const ck = c + (down ? 'd' : '') + k + ':' + P;
+  function hlPenCursor(c, down) {
+    const ck = c + (down ? 'd' : '');
     if (hlPenCurC[ck]) return hlPenCurC[ck];
     const ink = { y: '#c99410', g: '#3f9a52', b: '#3f84c6', p: '#c95b7d' }[c] || '#c99410', fill = (HL_COL[c] || HL_COL.y)[1];
-    const r = hlPixPen(fill, ink, down, k, P);
+    const r = hlPixPen(fill, ink, down);
     return (hlPenCurC[ck] = `url("data:image/svg+xml,${encodeURIComponent(r.svg)}") ${r.hx} ${r.hy}, text`);
   }
   /* نصُّ الكتاب يُظلَّل بالسحب دائمًا، فمؤشّرُه القلمُ البكسليّ في كل طرق العرض لا مؤشّرُ المتصفّح (طلبُ صاحب الموقع) */
   function hlCurRoot() { document.documentElement.style.setProperty('--hl-cur', hlPenCursor(hlCol.t)); }
   hlCurRoot();
-  /* ===== مقاسُ المؤشّر على قدر أسطر الصفحة (طلبُ صاحب الموقع) =====
-     قامتُه ‎1.35‎ من قامة السطر الغالب في الصفحة (‎d._lh‎ من ‎bkTLLines‎) بقدر ما تُعرض الآن — فيكبر بتكبيرها ويصغر بتصغيرها.
-     بكسلُ الرسم عددٌ صحيحٌ من بكسلات الشاشة (حادٌّ دائمًا): بكسلٌ واحدٌ حتى تبلغ القامةُ ‎40‎ بكسلَ شاشة ثمّ اثنان وهكذا،
-     والباقي تضبطه صفوفُ الجسم؛ وأقصرُه ‎18‎ صفًّا (فلا يصغر عنه) وأطولُه ‎64px‎ */
-  function hlCurScale(d) {
-    const dpr = devicePixelRatio || 1, T = Math.min(64 * dpr, (d._lh || .018) * d.getBoundingClientRect().height * 1.35 * dpr);
-    const n = Math.max(1, Math.floor(T / 40)), rows = Math.max(18, Math.round(T / n));
-    return { k: n / dpr, P: rows - 2 };
-  }
-  function hlCurFit(d) {
-    const z = hlCurScale(d), key = hlCol.t + z.k + ':' + z.P;
-    if (d._curK !== key) { d._curK = key; d._curZ = z; d.style.setProperty('--hl-cur', hlPenCursor(hlCol.t, false, z.k, z.P)); }
-    return z;
-  }
-  document.addEventListener('pointermove', e => {
-    const d = e.pointerType !== 'touch' && e.target.closest && e.target.closest('.bk-tl'); if (d && d._lh) hlCurFit(d);
-  }, { passive: true, capture: true });
   function hlToolSync(id) {
     const cur = hlPenCursor(hlCol.t);
     Object.values(pkSrcBk).forEach(b => {
@@ -29047,8 +29022,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     d.insertBefore(f, d.firstChild);
     d._lines = true;
-    /* قامةُ السطر الغالب (كسرٌ من قامة الصفحة) — منها مقاسُ مؤشّر القلم */
-    if (d._rows.length) { d._lh = med(d._rows.map(o => o.b - o.t)); d._curK = ''; }
   }
   /* الموضعُ تحت المؤشّر: أقربُ سطرٍ عموديًّا، وأقربُ حدِّ حرفٍ فيه */
   function bkTLAt(d, e) {
@@ -29137,7 +29110,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault();
     bkTLClear();
     bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
-    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur-d', d._lh ? (z => hlPenCursor(hlCol.t, true, z.k, z.P))(hlCurFit(d)) : hlPenCursor(hlCol.t, true)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
+    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur-d', hlPenCursor(hlCol.t, true)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
     try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
   document.addEventListener('pointermove', e => {
