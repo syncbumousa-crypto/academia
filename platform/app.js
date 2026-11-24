@@ -26229,12 +26229,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
 
   /* طلاء دوائر كل التبويبات — يحدّث span.cm-faces فقط (لا يمسّ الأزرار ولا نصّها) */
+  /* ===== وقبل أن يصل جوابُ الخادم (طلبُ صاحب الموقع) =====
+     كانت الدوائرُ تظهر فجأةً بعد بداية الموقع فيطول الشريطُ قفزًا. فما دام الجوابُ لم يصل (‎srvSeen‎): في كلّ تبويبٍ ثلاثُ
+     دوائرَ باهتةٍ تنبض — مكانُها محجوزٌ من أوّل لحظة. والجوابُ واحدٌ للتبويبات كلِّها (‎srvPull‎ مادّةً كاملة) فتمتلئ معًا،
+     وما تغيّر منها ينتقل بانزلاق الشريط نفسِه (‎cmTabsFlipStart/End‎): الباهتةُ تذوب والوجوهُ تطلع، والقامةُ تتنفّس */
+  const FACES_LD = '<span class="cm-face cm-face--ld"></span>'.repeat(3);
   function paintTabFaces(code) {
     if (!code) return;
+    let ld = false; try { ld = !srvSeen(code) && !srvPullFail[code]; } catch (e) {}   /* (قبل أن يُعرَّف في التمهيد: لا انتظار) */
+    const todo = [];
     document.querySelectorAll('.cm-tabs button[data-tab]').forEach(btn => {   /* يشمل الشريطين */
-      const span = btn.querySelector('.cm-faces');
-      if (span) { span.innerHTML = facesRowHTML(code, btn.dataset.tab); span.classList.toggle('is-none', !span.querySelector('.cm-face:not(.cm-face--me)')); }
+      const span = btn.querySelector('.cm-faces:not(.cm-faces--ghost)'); if (!span) return;
+      const html = ld ? FACES_LD : facesRowHTML(code, btn.dataset.tab);
+      if (span.dataset.sig === html) return;
+      todo.push([btn, span, html]);
     });
+    if (!todo.length) return;
+    /* أوّلُ طلاءٍ بعد بناء الشريط بلا حركة (البناءُ له انزلاقُه) — وما بعده إن تغيّر */
+    const flip = todo.some(([, sp]) => sp.dataset.sig != null) ? cmTabsFlipStart() : null;
+    todo.forEach(([btn, span, html]) => {
+      span.dataset.sig = html; span.innerHTML = html;
+      span.classList.toggle('is-none', !ld && !span.querySelector('.cm-face:not(.cm-face--me)'));
+    });
+    if (flip) cmTabsFlipEnd(flip, new Set(todo.map(([b]) => b.dataset.tab)));
   }
 
   /* أيقونات أزرار التبويبات (مختارة من مختبر الأيقونات) — تُرسم فوق التسمية، وترث لون الزرّ
@@ -30904,7 +30921,7 @@ void main() {
     });
     return { old, h0: T.getBoundingClientRect().height };
   }
-  function cmTabsFlipEnd(st) {
+  function cmTabsFlipEnd(st, only) {
     const T = document.getElementById('cm-tabs');
     if (!st || !T || !T.offsetParent) return;
     const D = 620, E = 'cubic-bezier(.22, 1, .36, 1)';
@@ -30916,7 +30933,8 @@ void main() {
     if (Math.abs(h1 - st.h0) > .5) T.animate([{ height: st.h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: E });
     T.querySelectorAll('button[data-tab]').forEach(b => {
       const o = st.old[b.dataset.tab]; if (!o) return;
-      if (o.fc) {
+      const mine = !only || only.has(b.dataset.tab);   /* (‎only‎: تبويباتٌ تغيّرت وجوهُها — وحدَها تذوب وتطلع) */
+      if (o.fc && mine) {
         const box = document.createElement('div'); box.innerHTML = o.fc.html;
         const g = box.firstElementChild; g.classList.add('cm-faces--ghost'); g.setAttribute('aria-hidden', 'true');
         Object.assign(g.style, { position: 'absolute', left: o.fc.x + 'px', top: o.fc.y + 'px', width: o.fc.w + 'px', height: o.fc.h + 'px', margin: '0', pointerEvents: 'none' });
@@ -30930,7 +30948,7 @@ void main() {
         const n = el.getBoundingClientRect(), dx = o[k].left - n.left, dy = o[k].top - n.top;
         if (Math.abs(dx) > .5 || Math.abs(dy) > .5) el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: D, easing: E });
       });
-      b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
+      if (mine) b.querySelectorAll('.cm-faces:not(.cm-faces--ghost) > .cm-face').forEach((f, i) => f.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
         { duration: D * .8, delay: D * .25 + i * 45, easing: 'cubic-bezier(.22, 1.35, .36, 1)', fill: 'backwards' }));
     });
   }
@@ -37905,7 +37923,7 @@ void main() {
      المربّعاتُ تُبنى من الدرج فورًا، والدرجُ لا يحمل مساهماتِ غيرك حتّى تصل. فمن
      دخل الرَّكنَ رأى «سجّل بنودك» في مكانٍ فيه عمل — كأنّه ضاع.
      فختمٌ ثانٍ عند **الوصول**، وبه تُقال «جارٍ التحميل» ولا يُكذَب على الناظر. */
-  const srvGot = {};
+  const srvGot = {}, srvPullFail = {};
   const srvSeen = code => !SRV_ON() || !!srvGot[code];
 
   /* ===== تاريخُ المساهمة من الخادم: بالمللي =====
@@ -37919,12 +37937,14 @@ void main() {
     if (!force && Date.now() - (srvPulled[code] || 0) < SRV_FRESH) return;
     srvPulled[code] = Date.now();
     let j;
+    /* وإن تعثّرت الرحلةُ: لا تبقى دوائرُ التحميل في التبويبات أبدًا — تُرسم ممّا عندنا */
+    const fail = () => { srvPullFail[code] = 1; if (cmCode === code) paintTabFaces(code); };
     try {
       const r = await apiFetch(postsURL('?code=' + encodeURIComponent(code)), { credentials: 'same-origin' });
-      if (!r.ok) return;
+      if (!r.ok) return fail();
       j = await r.json();
-    } catch (e) { return; }
-    if (!j || !Array.isArray(j.posts)) return;
+    } catch (e) { return fail(); }
+    if (!j || !Array.isArray(j.posts)) return fail();
     srvMerge(code, j.posts);
   }
 
@@ -38157,6 +38177,7 @@ void main() {
        الشاشةُ تنتظره لتكفّ عن قول «جارٍ التحميل». فيُختم قبل كلّ إعادةِ رسم. */
     srvGot[code] = 1;
     if ((n || cut) && !srvSame && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
+    else if (cmCode === code && typeof paintTabFaces === 'function') paintTabFaces(code);   /* (ولا جديد: دوائرُ التحميل تكفّ) */
     /* ===== والمربّعاتُ الأربعةُ تُعاد كذلك =====
        كانت تُبنى مرّةً عند فتح الرَّكن ثمّ لا يبلغها شيء: يصل الجوابُ فتُعاد لوحةُ
        المادّة وحدَها، وتبقى الأربعةُ على حالها الصفريّة حتّى يُفتح الرَّكنُ من جديد.
