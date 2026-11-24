@@ -28047,7 +28047,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
       L.appendChild(d); return d;
     };
-    const D = Math.round(BK_SX * 1.15 * (window.__pkfxSlow || 1)), E = BK_SXE, moving = new Map(), runs = [];
+    /* (خطّةُ الفتحة · المرحلة ٢) عكسُ التحوّل من الصفحة إلى الصفحات المتتالية بعينه: مدّتُه ومنحناه، والجاراتُ تنسحب بمسافة
+       انزلاقها هناك (‎46px‎) بفارقٍ يسير بحسب بعدها — الأقربُ أوّلًا */
+    const D = Math.round(BK_SX * (window.__pkfxSlow || 1)), E = BK_SXE, moving = new Map(), runs = [];
     const tk = new Set(T.filter(t => t.k).map(t => t.k));
     /* الصفحاتُ الظاهرةُ وما يُنقل منها (صفحتا الفتحة ولو كانت إحداهما خارج النظر: تأتي منه) */
     const pages = [...sc.querySelectorAll('.cbk-scr__pg')];
@@ -28061,8 +28063,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         runs.push(d.animate([{ transformOrigin: '0 0', transform: `translate(${r.left - t.l}px, ${r.top - t.t}px) scale(${r.width / t.w}, ${r.height / t.h})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: D, easing: E, fill: 'both' }));
         moving.set(kk, d);
       } else {
-        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = kk < k;
-        runs.push(d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${up ? -70 : 70}px) scale(.96)`, opacity: 0 }], { duration: D * .7, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }));
+        const d = clone(el, { l: r.left, t: r.top, w: r.width, h: r.height }), up = kk < k, ks = [...tk], gap = up ? Math.min(...ks) - kk : kk - Math.max(...ks);
+        runs.push(d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${up ? -46 : 46}px)`, opacity: 0 }], { duration: D * .8, delay: Math.max(0, gap - 1) * 55, easing: E, fill: 'both' }));
       }
     });
     /* باطنُ الغلاف في جانبه: لونُه نفسُه يتكوّن من الكعب إلى الطرف (لا صفحةَ تطير إليه) */
