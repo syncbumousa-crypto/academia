@@ -9919,6 +9919,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* العرضُ الطبيعيّ: نسخةُ الأرقام الخفيّة وحشوتا الكبسولة وحافّتاها — لا عرضُها الآن (هي ‎22px‎ وهي مطويّة) */
   const pkCapPlace = cnt => {
     const cap = cnt.querySelector('.pg-cap'), sz = cap && cap.querySelector('.pg-capsz'); if (!sz) return;
+    if (cap.dataset.w) { cnt.style.setProperty('--pk-w', cap.dataset.w + 'px'); if (!cnt.matches(':hover, .is-peek')) pkCapSide(cnt); pkStgFit(cnt); return; }
     const cs = getComputedStyle(cap), pad = 20 + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);   /* حشوتا المفتوحة (‎10px‎) — المطويّةُ بلا حشو */
     cnt.style.setProperty('--pk-w', Math.ceil(sz.getBoundingClientRect().width + pad) + 'px');
     if (!cnt.matches(':hover, .is-peek')) pkCapSide(cnt);   /* أيُّ الجهتين تتّسع لها (لا وهي مفتوحة: تقفز) */
@@ -9968,7 +9969,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2, th = e * Math.PI / 2, co = Math.cos(th), si = Math.sin(th);
     const amp = .05 * Math.sin(Math.PI * e), tt = performance.now() / 1000, B = g.S.map((x, i) => x + (g.E[i] - x) * e);
     for (let j = 0; j < Hp; j++) {
-      const v = (j + .5) / Hp, sh = 1 - .12 * v;
+      const v = (j + .5) / Hp, sh = 1;
       for (let i = 0; i < Wp; i++) {
         const u = (i + .5) / Wp, o = (j * Wp + i) * 4;
         const q = (v * co + (1 - u) * si) / (co + si) + amp * Math.sin(2 * Math.PI * (1.6 * u + 1.2 * v) - tt * 9);
@@ -9983,7 +9984,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkStgSet.forEach(c => {
       const cap = c.isConnected && c.querySelector(':scope > .pg-cap'); if (!cap) { pkStgSet.delete(c); return; }
       const open = c.matches(':hover, .is-peek');
-      if (!open && c.classList.contains('is-stdone')) { c.classList.remove('is-stdone'); c.querySelectorAll('.pg-stb b.on').forEach(b => b.classList.remove('on')); }
+      if (!open && c.classList.contains('is-stdone')) { c.classList.remove('is-stdone'); c._stArm = false; c._stP0 = null; c.querySelectorAll('.pg-stb b.on').forEach(b => b.classList.remove('on')); }
       const w1 = parseFloat(c.style.getPropertyValue('--pk-w')) || 150, k = Math.min(1, Math.max(0, (cap.offsetWidth - 18) / Math.max(1, w1 - 18)));
       if (!pkStgRM()) pkStgDraw(cap, k);
       if (open && (k >= .995 || pkStgRM())) { c.classList.add('is-stdone'); pkStgSet.delete(c); }
@@ -9992,11 +9993,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (pkStgSet.size) pkStgRaf = requestAnimationFrame(pkStgTick);
   }
   /* والشريطُ الذي تحت المؤشّر يتّسع ويُظهر عددَه */
-  document.addEventListener('pointerover', e => {
-    const b = e.target.closest && e.target.closest('.pg-stb b');
-    const stb = e.target.closest && e.target.closest('.pg-stb');
-    document.querySelectorAll('.pg-stb b.on').forEach(x => { if (x !== b) x.classList.remove('on'); });
-    if (b && stb) b.classList.add('on');
+  /* (طلبُ صاحب الموقع) لا يتّسع الشريطُ الذي صادف المؤشّرَ لحظةَ الانفتاح (المؤشّرُ واقفٌ مكانَ الدائرة): يتّسع بعد أن يتحرّك فعلًا */
+  document.addEventListener('pointermove', e => {
+    const b = e.target.closest && e.target.closest('.pg-stb > b'), c = b && b.closest('.pg-cnt');
+    document.querySelectorAll('.pg-stb > b.on').forEach(x => { if (x !== b) x.classList.remove('on'); });
+    if (!b || !c.classList.contains('is-stdone')) return;
+    if (!c._stArm) { const p = c._stP0 || (c._stP0 = [e.clientX, e.clientY]); if (Math.hypot(e.clientX - p[0], e.clientY - p[1]) < 4) return; c._stArm = true; }
+    b.classList.add('on');
   }, { passive: true });
   document.addEventListener('pointerout', e => { if (!e.relatedTarget && pkCapHot) { const c = pkCapHot; pkCapHot = null; pkStgWake(c); } }, { passive: true });
   let pkCapHot = null;
@@ -10086,9 +10089,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const m = x3Surf(G.L);
       dot = `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:linear-gradient(to top, ${st.join(', ')}, transparent ${(G.L * 100).toFixed(2)}%)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>`;
     }
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="flex-grow:${Math.max(c[i], 1.2)};background:var(--stg-${k})"><i>${c[i]}</i></b>` : '').join('');
+    /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎22 + 12 × عددها‎ بين ‎56‎ و‎110‎ */
+    const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(110, 22 + 12 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k})"><i>${c[i]}</i></b>` : '').join('');
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
-      + `<span class="pg-cap pg-cap--stg" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb">${bands}<i class="pg-stgl"></i></span></span></span>`;
+      + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
@@ -11857,19 +11862,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والكبسولةُ تنفتح إلى الفراغ الذي بعد الدائرة إن اتّسع لها (‎is-gl‎)، فلا تغطّي الاسم؛ وإلّا غطّته كما كانت */
     items.forEach(([, c]) => pkCapSide(c));
   }
+  /* (طلبُ صاحب الموقع) كبسولةُ المراحل لا تخرج من مربّع مجلدها أبدًا: إن لم تنفتح في الفراغ بعد الدائرة (‎is-gl‎)
+     غطّت الاسمَ بعرضٍ أقصر — لا يتعدّى حافّةَ الوجه */
+  function pkStgFit(c) {
+    const cap = c.querySelector(':scope > .pg-cap--stg'); if (!cap) return;
+    let w = +cap.dataset.w; const f = c.parentElement;
+    if (f && c.offsetParent && !c.classList.contains('is-gl')) {
+      const fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetWidth ? fr.width / f.offsetWidth : 1;
+      const rtl = getComputedStyle(f).direction === 'rtl', room = (rtl ? fr.right - cr.left : cr.right - fr.left) / (k || 1) + 2 - 8;
+      w = Math.max(40, Math.min(w, Math.floor(room)));
+    }
+    c.style.setProperty('--pk-w', w + 'px');
+  }
   function pkCapSide(c) {
     const f = c.parentElement; if (!f || !f.parentElement || f.parentElement.classList.contains('is-wide') || !c.offsetParent) return;
     const fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetWidth ? fr.width / f.offsetWidth : 1;
     const rtl = getComputedStyle(f).direction === 'rtl', pad = parseFloat(getComputedStyle(f)[rtl ? 'paddingLeft' : 'paddingRight']) || 0;
     const room = (rtl ? cr.right - fr.left : fr.right - cr.left) / (k || 1) - pad * .5;
-    const gl = room >= (parseFloat(c.style.getPropertyValue('--pk-w')) || 64) + 2;
+    const st = c.querySelector(':scope > .pg-cap--stg'), gl = room >= (st ? +st.dataset.w : parseFloat(c.style.getPropertyValue('--pk-w')) || 64) + 2;
     c.classList.toggle('is-gl', gl);
     /* (ثمّ بطلبه) ولا متّسعَ بعدها في سطرها: تنزل الكبسولةُ إلى السطر الفارغ تحت الدائرة إن كان في المربّع متّسعٌ له (‎is-gd‎) */
     const ky = f.offsetHeight ? fr.height / f.offsetHeight : 1, below = (fr.bottom - cr.bottom) / (ky || 1);
-    c.classList.toggle('is-gd', !gl && below >= 26);
+    c.classList.toggle('is-gd', !gl && below >= 26 && !st);
     /* ونازلةً تبدأ من أوّل السطر كما يبدأ الاسم (يمينًا) لا من موضع الدائرة: ‎--gdl‎ حافّةُ الاسم الأولى من حافّة الدائرة */
     const nm = f.querySelector(':scope > .pg-nm');
     if (nm) { const nb = nm.getBoundingClientRect(); c.style.setProperty('--gdl', (((rtl ? nb.right : nb.left) - cr.left) / (k || 1)).toFixed(1) + 'px'); }
+    if (st) pkStgFit(c);
   }
   function pkFit(strip) {
     /* ولا يُقاس الاسمُ والشريطُ مخفيّ (المساحةُ تنبسط من أيقونتها، أو وعاءٌ مطويّ): عرضُه حينها صفر، فيصير الحدُّ الأدنى
