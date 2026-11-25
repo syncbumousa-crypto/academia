@@ -14087,13 +14087,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       strips.push(s_); fronts.push(sf.firstElementChild); backs.push(sb.firstElementChild);
       shadesF.push(sf.lastElementChild); shadesB.push(sb.lastElementChild);
     }
+    /* ===== لسانُ الورقة (طلبُ صاحب الموقع · ‎ROADMAP‎ لسان الورقة) =====
+       حبّةُ الرقم والإكمال في لسانٍ يخرج من حافّة الورقة اليمنى (واليسرى في الإنجليزيّة)، وانحناءاه للداخل شكلٌ واحدٌ مرسوم.
+       وهو ابنُ **شريحة الطرف** نفسِها لا الورقة: يدور وينثني معها ويأخذ ظلَّها، والشرائحُ تقصّ ما يخرج عنها فلا يوضع فيها.
+       وله وجهان: الأماميُّ فيه الرقمُ ومربّعُ الصحّ، والخلفيُّ (يظهر يسارًا حين تنقلب كالورقة الحقيقيّة) فيه الرقمُ وحده.
+       والصحُّ إكمالُك أنت (‎state.ktok‎) كما في الجدول، ولونُ الحبّة لونُ مرحلة المفهوم إن كانت له مرحلة */
+    const EN = document.documentElement.getAttribute('data-lang') === 'en', EDGE = EN ? 0 : NS - 1;
+    const PT_TK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const ptTab = back => `<span class="pp-tab${back ? ' pp-tab--b' : ''}"><svg class="pp-tabsv"><path class="f"/><path class="s"/><path class="e"/></svg><span class="pp-pill"><span class="n"></span>${back ? '' : `<span class="b" data-pptk role="checkbox" tabindex="-1">${PT_TK}</span>`}</span></span>`;
+    { const t = document.createElement('div'); t.innerHTML = ptTab(0) + ptTab(1); strips[EDGE].append(...t.children); }
+    const tabF = strips[EDGE].querySelector('.pp-tab:not(.pp-tab--b)'), tabB = strips[EDGE].querySelector('.pp-tab--b');
+    const ptStg = (() => { const m = new Map(), h = hostOf(); if (h) pkStgEach(h.arr, (n, i) => { if (!i) return; const q = m.get(n.id); if (q == null || i < q) m.set(n.id, i); }); return m; })();
+    const ptPaint = (pill, c, num) => {
+      if (!pill || !c) return;
+      const sg = ptStg.get(c.id), on = !!(state.ktok || {})[recId(c)];
+      pill.querySelector('.n').textContent = num;
+      pill.classList.toggle('stg', !!sg); pill.classList.toggle('on', on);
+      pill.style.setProperty('--c', sg ? `var(--stg-${PK_STG[sg]})` : 'var(--stg-done)');
+      const b = pill.querySelector('[data-pptk]'); if (b) b.setAttribute('aria-checked', String(on));
+    };
     let W = 400, SW = 400 / NS;
     /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
       /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
       const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"], .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
-      const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.84, h * 0.84 - 30));
+      const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.78, h * 0.84 - 30));   /* (‎0.78‎ لا ‎0.84‎) يتّسع للّسان على الحافّة */
       stage.style.width = stage.style.height = s + 'px';
       if (!isFinite(h)) host.style.height = (s + 64) + 'px';
     }
@@ -14102,6 +14121,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       W = card.clientWidth || 400; SW = W / NS;
       card.style.setProperty('--W', W + 'px'); card.style.setProperty('--sw', (SW + .8) + 'px');
       for (let i = 0; i < NS; i++) { fronts[i].style.left = (-i * SW) + 'px'; backs[i].style.left = (-(W - (i + 1) * SW) - .8) + 'px'; }
+      /* اللسانُ بقدر الورقة؛ وفي الصغيرة جدًّا (شبكةُ التسعة) لا لسان: يبقى الرقمُ والصحُّ في وجهها كما كانا */
+      const on = W >= 96; host.classList.toggle('has-tab', on);
+      if (on) {
+        const tw = Math.round(W * .088), th = Math.round(W * .16), f = Math.round(tw * .4), r = Math.round(tw * .42), y0 = Math.round(W * .075), H = th + 2 * f;
+        const d = `M-1 0 L0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H} L-1 ${H} Z`;
+        const e = `M0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H}`;
+        host.style.setProperty('--tw', tw + 'px'); host.style.setProperty('--tth', th + 'px'); host.style.setProperty('--tf', f + 'px'); host.style.setProperty('--ty', (y0 - f) + 'px'); host.style.setProperty('--tsw', SW + 'px');
+        host.querySelectorAll('.pp-tabsv').forEach(sv => {
+          sv.setAttribute('viewBox', `-1 0 ${tw + 1} ${H}`);
+          sv.querySelector('.f').setAttribute('d', d); sv.querySelector('.s').setAttribute('d', d); sv.querySelector('.e').setAttribute('d', e);
+        });
+      }
       wake();
     }
     const all = sel => card.querySelectorAll(sel);
@@ -14114,8 +14145,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const fit = (el, txt, k) => el.style.setProperty('--fs', Math.max(6, Math.min(k[0], k[1] / Math.max(1, Math.sqrt(txt.length * 3)))) + 'cqh');
     const layers = CARDS.map((c, i) => {
       const d = document.createElement('div'); d.className = 'pp-layer';
-      d.innerHTML = `<span class="pp-num"></span><div class="pp-word"></div>`;
+      d.innerHTML = `<span class="pp-num"></span><div class="pp-word"></div>` + ptTab(0);
       d.querySelector('.pp-num').textContent = pad(i + 1) + ' / ' + pad(N);
+      ptPaint(d.querySelector('.pp-pill'), c, i + 1);
       const w = d.querySelector('.pp-word'); w.textContent = c.f || ''; fit(w, c.f || '', [16, 70]);
       pile.appendChild(d); return d;
     });
@@ -14139,6 +14171,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       all('.pp-mean').forEach(el => { el.textContent = c.b || ''; fit(el, c.b || '', [9, 60]); });
       all('.pp-num').forEach(el => { el.textContent = pad(idx + 1) + ' / ' + pad(N); });
       all('.pp-ok').forEach(el => el.classList.toggle('on', !!c.ok));
+      ptPaint(tabF.querySelector('.pp-pill'), c, idx + 1); ptPaint(tabB.querySelector('.pp-pill'), c, idx + 1);
       card.setAttribute('aria-label', showingBack() ? (c.b || '') : (c.f || ''));
     }
     /* الفيزياء — كما في المرجع */
@@ -14172,7 +14205,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الإدخال */
     card.addEventListener('pointerdown', e => {
       if (st.mode !== 'idle' || e.button > 0 || ppEditing) return;
-      if (e.target.closest('[data-ppok], [data-pppen]')) return;
+      if (e.target.closest('[data-ppok], [data-pppen], [data-pptk]')) return;
       card.setPointerCapture(e.pointerId);
       const now = performance.now();
       const sr = stage.getBoundingClientRect();
@@ -14255,6 +14288,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* ✓ عرفتُها: في زاوية الوجه */
     card.addEventListener('click', e => {
+      const tk = e.target.closest('[data-pptk]');
+      if (tk) {   /* مربّعُ الصحّ في اللسان: يعلّم المفهومَ وحدَه، لا يقلب الورقةَ ولا يسحبها */
+        e.stopPropagation(); const c = CARDS[idx], m = state.ktok || (state.ktok = {}), k = recId(c);
+        if (m[k]) delete m[k]; else m[k] = 1; save(); render();
+        const lp = layers[idx] && layers[idx].querySelector('.pp-pill'); if (lp) ptPaint(lp, c, idx + 1);
+        return;
+      }
       if (ro) return;
       if (e.target.closest('[data-pppen]')) { e.stopPropagation(); editFace(); return; }
       const ok = e.target.closest('[data-ppok]'); if (!ok) return;
@@ -14361,6 +14401,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         minX = Math.min(minX, px[i]); maxX = Math.max(maxX, px[i]);
       }
       minX = Math.min(minX, px[NS]); maxX = Math.max(maxX, px[NS]);
+      { const ae = nphi(EN ? 0 : NS); tabF.style.setProperty('--sh', fF(ae)); tabB.style.setProperty('--sh', fB(ae)); }
       const span = clamp((maxX - minX) / W, .2, 1), away = clamp(1 + st.y / 320, 0, 1);
       shadow.style.transform = `translate3d(${st.x * .85 + (maxX + minX) / 2}px, ${st.y * .85 + 12 + L * 26}px, 0) scale(${span * (1 + L * .1)}, ${1 + L * .06})`;
       const behind = st.mode === 'toss' && st.phase === 'down';

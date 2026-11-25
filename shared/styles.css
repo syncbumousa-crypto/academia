@@ -17402,6 +17402,39 @@ html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp
 .pp-pen { inset-inline-start: auto; right: 6cqh; left: auto; }
 html[data-lang="en"] .pp-num { left: auto; right: 7cqh; }
 html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6cqh; }
+/* ===== لسانُ الورقة (طلبُ صاحب الموقع): حبّةُ الرقم والإكمال في لسانٍ على حافّة الورقة، ابنِ شريحة الطرف ===== */
+.pp-tab { display: none; }
+.pp-host.has-tab .pp-face .pp-num, .pp-host.has-tab .pp-face .pp-ok, .pp-host.has-tab .pp-layer .pp-num { display: none; }
+.pp-host.has-tab .pp-layer { overflow: visible; }
+.pp-host.has-tab .pp-tab { display: block; position: absolute; top: var(--ty); left: calc(var(--tsw) - 1px); width: calc(var(--tw) + 1px); height: calc(var(--tth) + 2 * var(--tf));
+  backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.pp-host.has-tab .pp-tab--b { transform: rotateY(180deg); }
+.pp-host.has-tab .pp-layer .pp-tab { left: calc(100% - 1px); }
+html[data-lang="en"] .pp-host.has-tab .pp-tab { left: calc(-1 * var(--tw)); }
+html[data-lang="en"] .pp-host.has-tab .pp-layer .pp-tab { left: calc(-1 * var(--tw)); }
+html[data-lang="en"] .pp-tabsv { transform: scaleX(-1); }
+/* والوجهُ الخلفيُّ يُدار نصفَ دورةٍ حول نفسه فتنعكس جهتُه: يُعاد شكلُه لتبقى انحناءاتُه على حافّة الورقة، والرقمُ يُقرأ من الخلف */
+.pp-tab--b .pp-tabsv { transform: scaleX(-1); }
+html[data-lang="en"] .pp-tab--b .pp-tabsv { transform: none; }
+.pp-tabsv { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pp-tabsv .f { fill: var(--pp-paper); }
+.pp-tabsv .s { fill: rgb(18, 24, 40); fill-opacity: var(--sh, 0); }
+.pp-tabsv .e { fill: none; stroke: var(--pp-edge); stroke-width: .9; }
+.pp-tab .pp-pill { position: absolute; top: var(--tf); left: 1px; width: var(--tw); height: var(--tth); display: grid; place-items: center; }
+html[data-lang="en"] .pp-tab .pp-pill { left: 0; }
+.pp-pill { --k: #2f7d86; }
+.pp-pill.stg, .pp-pill.on { --k: var(--c); }
+.pp-tab .pp-pill > * { position: relative; }
+.pp-tab .pp-pill::before { content: ''; position: absolute; left: 50%; top: 50%; width: calc(var(--tw) * .66); height: calc(var(--tth) * .86); transform: translate(-50%, -50%);
+  border-radius: 99px; border: 1.3px solid color-mix(in srgb, var(--k) 62%, transparent); background: color-mix(in srgb, var(--k) 7%, transparent); box-sizing: border-box; }
+.pp-pill.on::before { border-width: 1.7px; border-color: var(--k); }
+.pp-tab .pp-pill { grid-template-rows: auto auto; align-content: center; gap: calc(var(--tw) * .1); }
+.pp-pill .n { font-family: 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-size: calc(var(--tw) * .36); line-height: 1; color: var(--k); direction: ltr; }
+.pp-pill .b { width: calc(var(--tw) * .27); height: calc(var(--tw) * .27); border-radius: 22%; border: 1.4px dashed color-mix(in srgb, var(--k) 65%, transparent); display: grid; place-items: center; color: transparent; cursor: pointer; box-sizing: border-box; }
+.pp-pill.stg .b { border-style: solid; }
+.pp-pill.on .b { border: 1.5px solid var(--k); color: var(--k); }
+.pp-pill .b svg { width: 80%; height: 80%; display: block; }
+.pp-pill .b:hover { transform: scale(1.1); }
 
 /* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
    مسكةُ طيّ الذيل ظاهرةٌ دائمًا (طلبُ صاحب الموقع) — الكتلُ لم تعد تتّصل بالذيل فلا تقطعها */
