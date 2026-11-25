@@ -38141,7 +38141,7 @@ void main() {
       try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
       const why = (j && j.error) || ('http' + r.status);
       medWhy = why;
-      bootMark('med:' + why);
+      bootMark('med:' + why + (j && j.ref ? '#' + j.ref : ''));   /* ‏‎#ref‎ يطابق سطرَه في ‎errlog‎ على الخادم */
       if (!quiet && typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
       return null;
     }
@@ -38633,10 +38633,13 @@ void main() {
       const r = await apiFetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ kind: 'nook', data: body }),
+        /* ‏‎base‎: النسخةُ التي بُني عليها — فإن كتب جهازٌ آخر بعدها ردّها الخادمُ ‎409‎
+           فتُجذب وتُدمج ثمّ تُدفع، ولا يُكتب فوق ما لم يُرَ (ROADMAP-DATA-INTEGRITY م٤-١) */
+        body: JSON.stringify({ kind: 'nook', data: body, base: nookRev }),
       });
-      if (r.status === 409) {                        /* الخادمُ منع محوًا: تُقرأ نسختُه */
-        nookOff = 'conflict'; bootMark('nook:409');
+      if (r.status === 409) {                        /* الخادمُ منع محوًا أو نسخةً قديمة: تُقرأ نسختُه */
+        let why = ''; try { why = ((await r.json()) || {}).error || ''; } catch (e) {}
+        nookOff = 'conflict'; bootMark('nook:409' + (why ? ':' + why : ''));
         nookGot = false; nookPull();
         return;
       }
@@ -38658,6 +38661,26 @@ void main() {
     nookT = setTimeout(nookPush, 3000);
   }
   window.acNookSync = nookPull;                      /* يُنادى بعد الدخول */
+
+  /* ===== ودفترُ الإقلاع إلى الحساب (ROADMAP-DATA-INTEGRITY م٥-٣) =====
+     شُخِّصت حادثةُ الأترام بـ‎acBootLog()‎ من متصفّح صاحب الموقع — واحتاج ذلك
+     وصولًا إلى جهازه. فيُرفع الدفترُ (عشرون سطرًا، أعدادٌ لا محتوى) إلى حسابه:
+     بعد الإقلاع بعشرين ثانية، وعند الاختفاء — مرّةً في خمس دقائق على الأكثر */
+  let bootUpAt = 0;
+  function bootUp() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (Date.now() - bootUpAt < 300000) return;
+    bootUpAt = Date.now();
+    try {
+      apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin', keepalive: true,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'boot', data: { at: Date.now(), tab: WV_TAB, rows: bootRead_() }, force: true }),
+      }).catch(() => {});
+    } catch (e) {}
+  }
+  setTimeout(bootUp, 20000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') bootUp(); });
 
   /* ============================================================
      سجلُّ الاختبارات ⇐ الحساب (م٢)

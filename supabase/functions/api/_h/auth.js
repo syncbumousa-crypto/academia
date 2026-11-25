@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/auth/*‎ — المستخدمون والجلسات (م١أ من ROADMAP-SERVER)
@@ -370,7 +371,6 @@ export async function onRequest(ctx) {
 
     return J({ error: 'not-found' }, 404);
   } catch (e) {
-    console.error('auth:', path, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('auth', e, path);
   }
 }

@@ -32,6 +32,7 @@ import * as likes    from './_h/likes.js';
 import * as comments from './_h/comments.js';
 import * as admin    from './_h/admin.js';
 import * as mcp      from './_h/mcp.js';
+import { oops } from './_err.js';
 
 /* المسار ⇐ الوحدة. والاطول اولا حيث تشابهت الرؤوس. */
 const ROUTES = [
@@ -87,7 +88,9 @@ async function handle(request) {
           || mod.onRequest;
   if (!fn) return J({ error: 'method-not-allowed' }, 405);
 
-  const res = await fn(ctx);
+  let res;
+  try { res = await fn(ctx); }
+  catch (e) { res = await oops('route', e, request.method + ' ' + url.pathname); }   /* ما أفلت من نقطته يُكتب كذلك */
   const out = new Response(res.body, res);
   Object.keys(SEC).forEach(k => { if (!out.headers.has(k)) out.headers.set(k, SEC[k]); });
   return out;

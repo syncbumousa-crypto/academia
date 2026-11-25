@@ -19,6 +19,7 @@
    المتصفّحُ يعدّ نسختَه أصلًا ويدفعها كاملة، فيمحو ما كُتب في ‎posts‎ من غيره. فيُكتب في ‎mcp_inbox‎،
    والموقعُ يدمجه حين يُفتح — مسوّدةً يراجعها صاحبُها ثمّ ينشر. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 const SITE = 'https://syncbumousa-crypto.github.io/academia/Almaslakh/';
 const CONNECT = SITE + 'connect.html';
@@ -333,7 +334,6 @@ export async function onRequest({ request, params }) {
     }
     return J({ error: 'not-found' }, 404);
   } catch (e) {
-    console.error('mcp:', path, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('mcp', e, path);
   }
 }

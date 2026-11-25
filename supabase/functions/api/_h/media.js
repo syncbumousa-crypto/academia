@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/media‎ — بِتاتُ الصور المنشورة (م٤ من ROADMAP-SERVER)
@@ -143,7 +144,6 @@ export async function onRequest({ request, env, params }) {
     if (!had) await mediaPut(db, k, mime, u8, s.uid);
     return J({ k, url: '/api/media/' + k, mime, size: buf.byteLength, fresh: !had });
   } catch (e) {
-    console.error('media:', e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('media', e);
   }
 }

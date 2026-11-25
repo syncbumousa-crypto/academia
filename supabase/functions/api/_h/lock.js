@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/lock/*‎ — قفلُ لوحة الأدمن
@@ -138,7 +139,6 @@ export async function onRequest({ request, env, params }) {
 
     return J({ error: 'not-found' }, 404);
   } catch (e) {
-    console.error('lock:', path, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('lock', e, path);
   }
 }

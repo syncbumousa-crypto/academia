@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/admin/*‎ — الإشراف (تركب على لوحة الأدمن القائمة)
@@ -110,6 +111,30 @@ export async function onRequest({ request, env, params }) {
       });
     }
 
+    /* ---------- صحّةُ الخادم (ROADMAP-DATA-INTEGRITY م٥) ----------
+       قراءةٌ فقط. كلُّ سؤالٍ وحده: جدولٌ غائبٌ (‎errlog‎ قبل الترحيل) يُردّ ‎null‎ ولا يُسقط الباقي */
+    if (path === 'health' && m === 'GET') {
+      const one = async (sql, ...a) => { try { return await db.prepare(sql).bind(...a).first(); } catch (e) { return null; } };
+      const many = async (sql, ...a) => { try { return ((await db.prepare(sql).bind(...a).all()) || {}).results || []; } catch (e) { return null; } };
+      const day = Date.now() - 86400000;
+      const [lastUp, errN, errBy, errs, hist] = await Promise.all([
+        one('SELECT MAX(ts) t, COUNT(*) n FROM media'),
+        one('SELECT COUNT(*) n FROM errlog WHERE ts > ?', day),
+        many("SELECT split_part(route, ' ', 1) r, COUNT(*) n FROM errlog WHERE ts > ? GROUP BY 1 ORDER BY 2 DESC", day),
+        many('SELECT ts, ref, route, code, LEFT(msg, 300) msg FROM errlog ORDER BY id DESC LIMIT 20'),
+        one('SELECT COUNT(*) n FROM udoc_hist'),
+      ]);
+      return J({
+        now: Date.now(),
+        lastUpload: lastUp ? (lastUp.t | 0) * 1000 : 0,      /* ‏‎media.ts‎ بالثواني */
+        uploads: lastUp ? lastUp.n | 0 : 0,
+        errors24h: errN ? errN.n | 0 : null,                  /* ‏‎null‎: الجدولُ لم يُنشأ بعد */
+        errorsByRoute: errBy,
+        recent: errs,
+        history: hist ? hist.n | 0 : null,
+      });
+    }
+
     /* ---------- المنشورات ---------- */
     if (path === 'posts' && m === 'GET') {
       const lim = Math.min(200, Math.max(1, parseInt(url.searchParams.get('limit') || '60', 10)));
@@ -198,7 +223,6 @@ export async function onRequest({ request, env, params }) {
 
     return J({ error: 'not-found' }, 404);
   } catch (e) {
-    console.error('admin:', path, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('admin', e, path);
   }
 }

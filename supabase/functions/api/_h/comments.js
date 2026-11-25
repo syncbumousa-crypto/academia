@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/comments‎ — كلامُ القرّاء على مساهمات غيرهم (م٣ب)
@@ -168,7 +169,6 @@ export async function onRequest({ request, env, params }) {
 
     return J({ error: 'method' }, 405);
   } catch (e) {
-    console.error('comments:', m, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('comments', e, m);
   }
 }

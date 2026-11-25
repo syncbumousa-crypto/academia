@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/posts‎ — المساهماتُ المنشورة (م٢ من ROADMAP-SERVER)
@@ -272,7 +273,6 @@ export async function onRequest({ request, env }) {
 
     return J({ error: 'method' }, 405);
   } catch (e) {
-    console.error('posts:', m, e && e.message);
     /* وقيدُ «واحدةٌ لكلّ بند» يقع خطأً في القاعدة — يُترجَم إلى ما يفهمه المستخدم */
     /* ===== وبصيغة Postgres لا SQLite =====
        نُقل الملفُّ من قاعدةٍ تقول ‎UNIQUE constraint failed‎ إلى Postgres، وهو يقول
@@ -281,6 +281,6 @@ export async function onRequest({ request, env }) {
        ويُعيد الدفعَ في كلّ حفظٍ أبدًا: ألفٌ ومئةٌ من لوحة الأدمن عند كلّ فتح. */
     if ((e && e.code === '23505') || /unique|duplicate key/i.test(String(e && e.message)))
       return J({ error: 'duplicate' }, 409);
-    return J({ error: 'server' }, 500);
+    return oops('posts', e, m);
   }
 }
