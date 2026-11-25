@@ -20114,10 +20114,9 @@ html[data-theme="dark"] .pg-stb > b > i::after { opacity: 1.1; }
 .pg-cnt--stg { cursor: pointer; }
 .x3-dot--stg { cursor: pointer; }
 .pg-cnt.pk-stfloat { position: fixed; z-index: 60; display: inline-flex; align-items: center; width: 18px; height: 18px; transform: scale(var(--pk-sc, 1)); transform-origin: 0 0; }
-.pg-cnt.pk-stfloat > .pg-cap { left: auto; right: 0; }
-.pg-cnt.pk-stfloat.is-peek > .pg-cap { left: auto; right: -2px; }
-[dir="ltr"] .pg-cnt.pk-stfloat > .pg-cap { right: auto; left: 0; }
-[dir="ltr"] .pg-cnt.pk-stfloat.is-peek > .pg-cap { right: auto; left: -2px; }
+/* (طلبُ صاحب الموقع) تبقى في مكانها على سطر الدائرة، وانبساطُها كلُّه إلى اليمين — حافّتُها اليسرى حافّةُ الدائرة */
+.pg-cnt.pk-stfloat > .pg-cap, [dir="ltr"] .pg-cnt.pk-stfloat > .pg-cap { right: auto; left: 0; }
+.pg-cnt.pk-stfloat.is-peek > .pg-cap, [dir="ltr"] .pg-cnt.pk-stfloat.is-peek > .pg-cap { right: auto; left: -2px; }
 /* (بلاغُ صاحب الموقع: «تنغلق فاتحةً ثمّ تظلم فجأة») — المطويّةُ تبلغ قدَّ الدائرة نحو ‎.55s‎ والدائرةُ الحقيقيّة كانت تعود بعد ‎.8s‎ دفعةً
    واحدة، فتُرى دائرةُ الرسم الفاتحة ثمّ تُستبدل بالدائرة بعمقها وزجاجها. فصارتا تتلاشيان معًا إحداهما إلى الأخرى من ‎.5s‎ */
 .pg-cnt--stg > .pg-ring { transition: opacity .24s ease .5s, transform .56s cubic-bezier(.22, 1, .36, 1); }
