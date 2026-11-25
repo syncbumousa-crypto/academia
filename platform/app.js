@@ -10244,7 +10244,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkCntHTML(k, wide) {
     if (!pkBoxDeck || !k || k.id === '') return '';
     /* (طلبُ صاحب الموقع) المجلدُ المطويُّ كبسولتُه تقول كلَّ ما فيه بمجلداته؛ فإذا انفتح صار لكلّ مجلدٍ فيه كبسولتُه،
-       وبقيت له هو بطائقُه المباشرة وحدها (ولا دائرةَ له إن لم تكن له بطائقُ خارج مجلداته) */
+       وبقيت دائرتُه هو تقول كلَّ ما فيه كما كانت */
     const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];   /* (ثمّ بطلبه) ودائرةُ المفتوح باقيةٌ تقول كلَّ ما فيه — لا بطائقَه المباشرةَ وحدها */
     const cs = flatCards(ns), tot = cs.length; if (!tot) return '';
     const a = x3Ans(ns), en = state.lang === 'en';
