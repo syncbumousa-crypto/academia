@@ -10134,8 +10134,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkStgCount = ns => {
     const c = [0, 0, 0, 0, 0, 0, 0, 0], lv = x3Leaves(ns);
     if (pkStgDemo && pkBoxMine && lv.length) {
-      const w = PK_STG_DEMO[pkStgHash(lv.map(recId).join('|')) % PK_STG_DEMO.length], W = w.reduce((x, y) => x + y, 0);
-      lv.forEach(n => cxRecsOf(n).forEach((_, j) => { let r = pkStgHash(recId(n) + '#' + j) % 1000 / 1000 * W, i = 0; while (i < 7 && r >= w[i]) r -= w[i++]; c[i]++; }));
+      /* وحالُ كلّ بطاقةٍ ثابتةٌ أيًّا كان المجلدُ المعروض: تُؤخذ من إخوتها المباشرين (بطائقِ مجلدها نفسِه)، فكبسولةُ الأب
+         المطويّ مجموعُ كبسولات أبنائه بالضبط */
+      (function walk(arr) {
+        const lf = (arr || []).filter(n => n.t !== 'f');
+        if (lf.length) {
+          const w = PK_STG_DEMO[pkStgHash(lf.map(recId).join('|')) % PK_STG_DEMO.length], W = w.reduce((x, y) => x + y, 0);
+          lf.forEach(n => cxRecsOf(n).forEach((_, j) => { let r = pkStgHash(recId(n) + '#' + j) % 1000 / 1000 * W, i = 0; while (i < 7 && r >= w[i]) r -= w[i++]; c[i]++; }));
+        }
+        (arr || []).forEach(n => { if (n.t === 'f') walk(n.ch); });
+      })(ns);
       return c;
     }
     lv.flatMap(cxRecsOf).forEach(r => c[pkStg(r)]++); return c;
@@ -10167,9 +10175,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
       + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
-  function pkCntHTML(k) {
+  function pkCntHTML(k, wide) {
     if (!pkBoxDeck || !k || k.id === '') return '';
-    const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];
+    /* (طلبُ صاحب الموقع) المجلدُ المطويُّ كبسولتُه تقول كلَّ ما فيه بمجلداته؛ فإذا انفتح صار لكلّ مجلدٍ فيه كبسولتُه،
+       وبقيت له هو بطائقُه المباشرة وحدها (ولا دائرةَ له إن لم تكن له بطائقُ خارج مجلداته) */
+    const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []).filter(n => !wide || n.t !== 'f') : [];
     const cs = flatCards(ns), tot = cs.length; if (!tot) return '';
     const a = x3Ans(ns), en = state.lang === 'en';
     /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
@@ -12147,7 +12157,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + (k.id === sel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
-        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k) + '</button>'
+        + (pkLab() ? pkFace(k) : '') + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k, wide) + '</button>'
         + (has ? '<div class="pg-in">' + pkBoxHTML(k.kids, open, k.id, sel) + '</div>' : '')
         + '</div>';
     }).join('') + '</div>';
@@ -12188,7 +12198,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const has = k.kids && k.kids.length, wide = has && pkOpHas(open, parentKey, k.id), isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
-        : pkFace(k, true) + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k);
+        : pkFace(k, true) + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k, wide);
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (isSel ? ' is-sel' : '') + (isSel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<div class="pg-face" role="button" tabindex="0"' + (k.id !== '' ? ' data-pkdrag="1"' : '') + ' data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '" title="' + esc(k.name) + '"'
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + isSel + '">' + face + '</div>'
