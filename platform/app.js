@@ -9969,7 +9969,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const dpr = Math.min(2, window.devicePixelRatio || 1), Wp = Math.max(1, Math.round(w * dpr)), Hp = Math.max(1, Math.round(h * dpr));
     if (cv.width !== Wp || cv.height !== Hp) { cv.width = Wp; cv.height = Hp; }
     const g = cap._stg || (cap._stg = { S: cap.dataset.s.split(',').map(Number), E: cap.dataset.e.split(',').map(Number), gold: !!cap.dataset.gold });
-    const cs = getComputedStyle(cap), pal = PK_STG.map(x => pkStgHex(cs.getPropertyValue('--stg-' + x))), gd = pkStgHex(cs.getPropertyValue('--u-gold') || '#c9a25c');
+    const cs = getComputedStyle(cap), pal = PK_STG.map(x => pkStgHex(cs.getPropertyValue('--stg-' + x))), gd = pkStgHex(cs.getPropertyValue('--stg-done'));
     const ctx = cv.getContext('2d'), img = ctx.createImageData(Wp, Hp), d = img.data;
     const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2, th = e * Math.PI / 2, co = Math.cos(th), si = Math.sin(th);
     const amp = .05 * Math.sin(Math.PI * e), tt = performance.now() / 1000, B = g.S.map((x, i) => x + (g.E[i] - x) * e);
@@ -10212,12 +10212,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
     const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
-    /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالأصفر =====
+    /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالرماديّ (كان أصفرَ ثمّ بُدّل بطلبه) =====
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
        يبدأ رسمُ الإمالة بماءٍ أصفرَ واحدٍ بمستوى الإكمال، ويتلوّن بألوان المراحل وهو يميل */
     const lv = x3Leaves(ns), ok = state.ktok || {}, dn = lv.filter(n => ok[recId(n)]).length;
     let Ld = lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
-    { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--u-gold, #c9a25c)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
+    { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
     { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
     title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`

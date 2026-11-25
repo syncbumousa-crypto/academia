@@ -20087,8 +20087,8 @@ html[data-theme="dark"] .pg-cap .pg-capt--d { display: inline; }
 /* ===== مراحلُ الحفظ (طلبُ صاحب الموقع): الدائرةُ طبقاتٌ فوق بعض، والكبسولةُ شرائطُ جنب بعض، وبينهما «الإمالة» =====
    الألوانُ متغيّراتٌ يقرؤها رسمُ الإمالة أيضًا (‎pkStgDraw‎). والأحمرُ ما غلطتَ فيه، والبرتقاليُّ ما نسيتَه، والأخضرُ يغمق
    مع طول المدى، والبنفسجيُّ ما ثبت في الذاكرة الطويلة، والرماديُّ الجديد */
-:root { --stg-new: #c3cacd; --stg-fgt: #c98a68; --stg-lrn: #d26a60; --stg-s1: #86b8aa; --stg-s2: #64a58b; --stg-s3: #4b8f73; --stg-s4: #357459; --stg-lm: #8f80d4; }
-html[data-theme="dark"] { --stg-new: #4d5459; --stg-fgt: #9c7055; --stg-lrn: #b85d55; --stg-s1: #81c29d; --stg-s2: #5fa986; --stg-s3: #4a9078; --stg-s4: #3d6f66; --stg-lm: #9b8ed6; }
+:root { --stg-done: #9aa3a8; --stg-new: #c3cacd; --stg-fgt: #c98a68; --stg-lrn: #d26a60; --stg-s1: #86b8aa; --stg-s2: #64a58b; --stg-s3: #4b8f73; --stg-s4: #357459; --stg-lm: #8f80d4; }
+html[data-theme="dark"] { --stg-done: #8a9499; --stg-new: #4d5459; --stg-fgt: #9c7055; --stg-lrn: #b85d55; --stg-s1: #81c29d; --stg-s2: #5fa986; --stg-s3: #4a9078; --stg-s4: #3d6f66; --stg-lm: #9b8ed6; }
 .pg-cnt > .pg-cap--stg > .pg-capsz { display: none; }
 .pg-cap--stg > .pg-stc { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .pg-cap--stg > .pg-stb { position: absolute; inset: 0; z-index: 2; display: flex; direction: rtl; border-radius: inherit; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .08s; }
