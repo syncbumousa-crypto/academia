@@ -13809,7 +13809,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     sdn: '<rect x="4" y="16" width="16" height="5" rx="1.5"/><rect x="4" y="6" width="16" height="6" rx="1.5"/><path d="M2 14h3M19 14h3"/><path d="M12 2v2"/>',
     nr: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 14 14 4M10 20 20 10M4.6 19.4 19.4 4.6"/>',
     del: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
-    tm: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/>',
+    tm: PK_QT_IC.t,   /* أيقونةُ الزمن واحدةٌ في الموقع: ساعةُ قوس الكمية والزمن الرمليّة (طلبُ صاحب الموقع) */
   };
   /* ===== «زمنٌ لهذا الصف» (طلبُ صاحب الموقع): زرٌّ دائريٌّ بين أدوات الصف يتّسع في مكانه إلى عدّادين — دقائقُ وثوانٍ =====
      ‏‎n.tm‎ بالثواني (حتى ‎99:59‎) */
@@ -18046,7 +18046,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>',
     del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
     pal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10.5" cy="7.5" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
-    hg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h14M5 20.5h14"/><path d="M6.3 3.5l1.1 4.6a2.5 2.5 0 0 0 1 1.5L11 11.4a.8.8 0 0 1 0 1.2L8.4 14.4a2.5 2.5 0 0 0-1 1.5l-1.1 4.6M17.7 3.5l-1.1 4.6a2.5 2.5 0 0 1-1 1.5L13 11.4a.8.8 0 0 0 0 1.2l2.6 1.8a2.5 2.5 0 0 1 1 1.5l1.1 4.6"/></svg>',
+    hg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${PK_QT_IC.t}</svg>`,
     chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>',
     back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>' };
   const fmnTx = () => state.lang === 'en'
