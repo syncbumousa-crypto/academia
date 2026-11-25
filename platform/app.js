@@ -10909,7 +10909,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const tf = cs.filter(c => !c.closest('.pg-box').classList.contains('is-wide') && !c.closest('.pg-in') && !c.classList.contains('is-gl') && !c.classList.contains('is-gd')).map(c => c.parentElement);   /* ولا تطول المجلداتُ التي داخل مجلدٍ مفتوح: لا هامشَ فارغًا تحتها (طلبُ صاحب الموقع) */
     /* وبقدر ما ينقصها فقط: الكبسولةُ تنزل تحت الدائرة إن كان تحتها ‎26px‎ (‎pkCapSide‎)، فيُزاد الفرقُ وحده (طلبُ صاحب الموقع: «الزيادة عالية») */
     const need = new Map(tf.map(f => { const c = f.querySelector(':scope > .pg-cnt--stg'), fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetHeight ? fr.height / f.offsetHeight : 1;
-      return [f, Math.max(0, Math.ceil(30 - (fr.bottom - cr.bottom) / (k || 1))) + parseFloat(getComputedStyle(f).paddingBottom || 0)]; }));
+      return [f, Math.max(0, Math.ceil(38 - (fr.bottom - cr.bottom) / (k || 1))) + parseFloat(getComputedStyle(f).paddingBottom || 0)]; }));
     const room = on => tf.forEach(f => { f.classList.toggle('is-qtroom', on); f.style.paddingBottom = on ? need.get(f) + 'px' : ''; });
     const go = () => {
       cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; if (!c.parentElement.classList.contains('is-qtroom')) pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }, i * 60));   /* ما طال وجهُه موضعُه محسوبٌ على طوله الجديد — لا يُعاد وهو يطول */
