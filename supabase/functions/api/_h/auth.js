@@ -143,7 +143,18 @@ const SID = req => {
 };
 function readCookie(req) { return SID(req) || null; }
 
-const publicUser = u => ({ id: u.id, name: u.name || '', email: u.email, img: u.img || '' });
+/* عنوانُ المستودع المطلق: صورُ الحسابات تُخزَّن به (الصفحاتُ على أصلٍ آخر) */
+const MEDIA_BASE = (Deno.env.get('SUPABASE_URL') || 'https://cyuufavrbqyqywhftbjw.supabase.co').replace(/\/+$/, '') + '/functions/v1/api';
+/* مفتاحُ الصورة من شكليها: النسبيّ، أو المطلقِ على هذا الخادم وحده */
+const mediaKey = v => {
+  const m = /^\/api\/media\/([a-f0-9]{64})$/.exec(v);
+  if (m) return m[1];
+  const a = /\/media\/([a-f0-9]{64})$/.exec(v);
+  return a && v === MEDIA_BASE + '/media/' + a[1] ? a[1] : '';
+};
+/* وما خُزّن نسبيًّا قبل الإصلاح يُردّ مطلقًا */
+const absImg = v => (v && v.indexOf('/api/media/') === 0 ? MEDIA_BASE + v.slice(4) : v || '');
+const publicUser = u => ({ id: u.id, name: u.name || '', email: u.email, img: absImg(u.img) });
 
 async function sessionUser(db, req) {
   const tok = readCookie(req);
@@ -220,10 +231,18 @@ export async function onRequest(ctx) {
         set.push('name = ?'); val.push(nm);
       }
       if (b.img !== undefined) {
-        const im = String(b.img || '');
+        let im = String(b.img || '');
         /* والصورةُ عنوانٌ لا بِتات: ‎data:‎ ضخمةٌ تُثقل كلَّ قراءةِ مساهمة.
            فيُقبل مسارُ المستودع وحدَه (م٤) أو الخلوّ */
-        if (im && !/^\/api\/media\/[a-f0-9]{64}$/.test(im)) return J({ error: 'img' }, 400);
+        if (im) {
+          const k = mediaKey(im);
+          if (!k) return J({ error: 'img' }, 400);
+          /* ===== ويُخزَّن مطلقًا كسائر الحسابات =====
+             كان يُخزَّن ‎/api/media/<k>‎ نسبيًّا، والصفحةُ على أصلٍ غيرِ أصل الخادم،
+             فيطلبها المتصفّحُ من الموقع لا من الخادم فتنكسر الصورة. وصورُ الحسابات
+             الأخرى (٢٤١٢) مطلقةٌ منذ النقل — فيُكتب بشكلها. */
+          im = MEDIA_BASE + '/media/' + k;
+        }
         set.push('img = ?'); val.push(im);
       }
 

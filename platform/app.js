@@ -5046,7 +5046,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const LETTER_AV = /letter_avatar_proxy\/v\d+\/letter\/([^/])\//;
   const avatarHTML = p => {
     if (p.me && profUp) return AV_LOAD;
-    const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
+    /* ‏‎assetURL‎: صورةٌ في المستودع بعنوانٍ نسبيّ (‎/api/media/…‎) تُطلب من الخادم لا من الموقع */
+    const src = assetURL((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img));
     /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
        تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
     if (!src) return FLAT_AVATAR;
@@ -9968,7 +9969,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const x3Initial = s => (String(s || '').trim()[0] || '؟');
   const x3Hue = s => (x3Initial(s).charCodeAt(0) * 47) % 360;
   /* مصدر صورة البروفايل (نفس منطق avatarHTML) */
-  const x3Img = p => ((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img)) || '';
+  const x3Img = p => assetURL(((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img)) || '');
   /* ألوان البروفايل: كثير من الأفاتارات هنا صور SVG مولَّدة بتدرّج لونيّ (أفاتارات العرض مثلًا)،
      فتُستخرج ألوانها من الصورة نفسها ليخرج الغلاف بلون بروفايل صاحبه حرفيًّا لا بلون قريب منه */
   const x3AvColors = src => {
@@ -37603,7 +37604,7 @@ void main() {
   /* ---------- بروفايل الحساب: صورة + اسم أسفل الشريط الجانبي · نقره يفتح صفحة الحساب ---------- */
   /* ===== وأثناء الرفع: أيقونةُ تحميلٍ مكانَ الوجه (طلبُ صاحب الموقع) =====
      فإن ظهرت الصورةُ فقد حُفظت على الخادم — لا رسالةَ تقول ذلك ولا تقول ضدّه */
-  const profAvatar = () => profUp ? AV_LOAD : state.profile.img ? `<img src="${state.profile.img}" alt="">` : FLAT_AVATAR;
+  const profAvatar = () => profUp ? AV_LOAD : state.profile.img ? `<img src="${assetURL(state.profile.img)}" alt="">` : FLAT_AVATAR;
   const logoutIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h9"/></svg>';
   function renderProfile() {
     const el = $('#side-profile');
