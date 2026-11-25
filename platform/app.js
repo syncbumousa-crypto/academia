@@ -10042,8 +10042,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   function pkStgFloat(dot) {
     const r = dot.getBoundingClientRect(), en = state.lang === 'en', c = dot.dataset.stg.split(',').map(Number);
-    const t = document.createElement('div'); t.innerHTML = pkStgHTML(null, dot.closest('[title]') ? '' : '', en, c);
-    const x = t.firstElementChild; x.classList.add('pk-stfloat'); x.removeAttribute('title'); x._dot = dot;
+    const t = document.createElement('div'); t.innerHTML = pkStgHTML(null, '', en, c, dot.dataset.ld != null ? +dot.dataset.ld : null);
+    const x = t.firstElementChild; x.classList.add('pk-stfloat'); if (dot.dataset.nopick) x.classList.add('is-nopick'); x.removeAttribute('title'); x._dot = dot;
     const sc = r.width / 18; x.style.cssText = `left:${r.left}px;top:${r.top}px;--pk-sc:${sc}`;
     document.body.appendChild(x); dot.style.visibility = 'hidden';
     pkCapPlace(x); void x.offsetWidth;
@@ -10066,6 +10066,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (td) { e.preventDefault(); e.stopImmediatePropagation(); pkStgFloat(td); return; }
     if (!c) return;
     e.preventDefault(); e.stopImmediatePropagation();
+    if (c.classList.contains('is-nopick') && e.target.closest('.pg-stb > b')) return;   /* دائرةُ المساهمة: تُلمس شرائطُها ولا تُضغط */
     const bd = c.classList.contains('is-stdone') && e.target.closest('.pg-stb > b'), st = c.closest('#cm-body .pk-fstrip');
     if (bd && st) {   /* شريطٌ في كبسولة مجلدٍ من الشريط: يُصفّي الملخّصَ بمرحلته */
       /* (طلبُ صاحب الموقع) وتُختار شرائطُ كثيرةٌ معًا — من المجلد نفسِه أو من غيره: كلُّ نقرةٍ تضيف شريطًا أو ترفعه.
@@ -10200,7 +10201,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.forEach(x => E.push(E[E.length - 1] + x / G)); E[8] = 1;
     return { L, S, E };
   };
-  function pkStgHTML(ns, title, en, cnt) {
+  function pkStgHTML(ns, title, en, cnt, ldx) {
     const c = cnt || pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
     let dot = '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
     if (G.L > 0) {
@@ -10216,7 +10217,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
        يبدأ رسمُ الإمالة بماءٍ أصفرَ واحدٍ بمستوى الإكمال، ويتلوّن بألوان المراحل وهو يميل */
     const lv = x3Leaves(ns), ok = state.ktok || {}, dn = lv.filter(n => ok[recId(n)]).length;
-    let Ld = lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
+    let Ld = ldx != null ? ldx : lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
     { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
     { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
     title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;
@@ -11008,7 +11009,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const a = { n: lv.length + qa.n, k: lv.filter(n => ok[recId(n)]).length + qa.k };
     const pct = a.n ? Math.round(a.k / a.n * 100) : 0, en = pcEn();
     let L = a.n ? a.k / a.n : 0; if (L > 0 && L < 1) L = Math.max(L, 3.4 / 15.2);
-    const mk = x3Surf(L), dot = L > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${mk ? ';--mask:' + mk : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
+    /* (طلبُ صاحب الموقع) وتُلمس فتنبسط كبسولةً بمراحل الملخّص والبنك معًا — وشرائطُها تُرى ولا تُضغط */
+    const mine0 = pkBoxMine; pkBoxMine = isMine(p); const sc = pkStgCount([...(d.deck || []), ...(d.qb || [])]); pkBoxMine = mine0;
+    const at = sc.some(Boolean) ? ` x3-dot--stg" data-nopick="1" data-ld="${L.toFixed(4)}" data-stg="${sc.join(',')}` : '';
+    const mk = x3Surf(L), dot = L > 0 ? `<span class="x3-dot x3-dot--ans${at}"><i class="x3-lqa" style="background:var(--stg-done)${mk ? ';--mask:' + mk : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : `<span class="x3-dot x3-dot--ans${at}"><i class="x3-gls"></i></span>`;
     const tx = pct <= 0 ? `<span class="pc-ptx is-0">${en ? 'Not started' : 'لم تبدأ بعد'}</span>`
       : pct >= 100 ? `<span class="pc-ptx">${en ? 'Completed ✓' : 'مكتملة ✓'}</span>`
         : `<span class="pc-ptx">${en ? pct + '% done' : 'أكملت ' + pct + '%'}</span>`;

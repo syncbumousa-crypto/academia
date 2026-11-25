@@ -20117,6 +20117,7 @@ html[data-theme="dark"] .pg-stb > b > i::after { opacity: 1.1; }
 /* الشريطُ المصفّى به: حلقةٌ بيضاءُ داخله، ولا يخفت */
 .pg-stb > b.is-pick { box-shadow: inset 0 0 0 1.6px rgba(255, 255, 255, .9); opacity: 1 !important; filter: brightness(1.1); }
 .pg-stb > b { cursor: pointer; }
+.pk-stfloat.is-nopick .pg-stb > b { cursor: default; }
 .pg-cnt.pk-stfloat { position: fixed; z-index: 60; display: inline-flex; align-items: center; width: 18px; height: 18px; transform: scale(var(--pk-sc, 1)); transform-origin: 0 0; }
 /* (طلبُ صاحب الموقع) تبقى في مكانها على سطر الدائرة، وانبساطُها كلُّه إلى اليمين — حافّتُها اليسرى حافّةُ الدائرة */
 .pg-cnt.pk-stfloat > .pg-cap, [dir="ltr"] .pg-cnt.pk-stfloat > .pg-cap { right: auto; left: 0; }
