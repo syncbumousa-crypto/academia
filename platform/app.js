@@ -1672,8 +1672,6 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
-      profImgPending: 'لم تُحفظ صورتك على الخادم بعد — سنعيد المحاولة تلقائيًّا',
-      profImgSaved: 'حُفظت صورتك',
       profImgRejected: 'رفض الخادم الصورة — جرّب صورةً أخرى',
       srvBusy: 'بلغتَ حدّ الطلبات — سيُعاد الإرسال تلقائيًا بعد قليل',
       /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
@@ -2068,8 +2066,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
-      profImgPending: 'Your photo is not saved on the server yet — retrying automatically',
-      profImgSaved: 'Your photo is saved',
       profImgRejected: 'The server rejected this photo — try another one',
       srvBusy: 'Rate limit reached — this will be sent again shortly',
       likeSelf: 'You cannot like your own contribution',
@@ -3132,10 +3128,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
         const url = cv.toDataURL('image/jpeg', .82);
         if (pickProfile) {
-          state.profile.img = url; pickProfile = false;
-          /* معلَّقةٌ حتى يؤكّد الخادمُ حفظَها — فلا يكتب ‎authTake‎ القديمةَ فوقها (ROADMAP-PROFILE-IMG م١) */
-          if (!isGuest()) state.profile.imgPending = url;
-          save(); renderProfile(); renderAcctPage();
+          pickProfile = false;
+          /* الزائرُ لا خادمَ له: صورتُه محلّيّةٌ تظهر فورًا.
+             والعضو: معلَّقةٌ حتى يؤكّد الخادمُ حفظَها، وأيقونةُ تحميلٍ مكانَها حتى ذلك */
+          if (isGuest() || !AUTH_SRV) state.profile.img = url;
+          else state.profile.imgPending = url;
+          save();
           /* ===== وتبلغ الخادمَ إن كنتَ عضوًا =====
              الصورةُ تُعرض على كلّ مساهمةٍ نشرتَها، وهي في جدول المستخدمين لا في
              نسخة المساهمة. فلو بقيت في الدرج لَظهرتَ للناس بلا صورةٍ أبدًا.
@@ -4787,9 +4785,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
   /* صورُ الحروف من منتدى STKFUPM ألوانُها عشوائيّةٌ من المنتدى لا من الموقع: يُرسم الحرفُ
      هنا محايدًا (‎.av-letter‎) بدل جلب صورته — ولا طلبَ شبكةٍ لكلّ وجه */
+  /* صورةُ الحساب تُرفع الآن ⇐ أيقونةُ تحميلٍ مكانَ الوجه (‎profImg‎) */
+  let profUp = false;
+  const AV_LOAD = '<span class="av-load" role="status" aria-label="…"></span>';
   const AV_COLS = ['#2c5e65', '#3f7fb8', '#8a5bb0', '#b9803a', '#3f8f55', '#b85a78', '#5a68b8', '#4b949a'];
   const LETTER_AV = /letter_avatar_proxy\/v\d+\/letter\/([^/])\//;
   const avatarHTML = p => {
+    if (p.me && profUp) return AV_LOAD;
     const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
     /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
        تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
@@ -37345,7 +37347,9 @@ void main() {
   });
 
   /* ---------- بروفايل الحساب: صورة + اسم أسفل الشريط الجانبي · نقره يفتح صفحة الحساب ---------- */
-  const profAvatar = () => state.profile.img ? `<img src="${state.profile.img}" alt="">` : FLAT_AVATAR;
+  /* ===== وأثناء الرفع: أيقونةُ تحميلٍ مكانَ الوجه (طلبُ صاحب الموقع) =====
+     فإن ظهرت الصورةُ فقد حُفظت على الخادم — لا رسالةَ تقول ذلك ولا تقول ضدّه */
+  const profAvatar = () => profUp ? AV_LOAD : state.profile.img ? `<img src="${state.profile.img}" alt="">` : FLAT_AVATAR;
   const logoutIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h9"/></svg>';
   function renderProfile() {
     const el = $('#side-profile');
@@ -37653,8 +37657,8 @@ void main() {
     /* والصورةُ المعلَّقةُ (اختيرت ولم يؤكّدها الخادم) تغلب صورةَ الخادم ما دام الحسابُ هو هو:
        كانت تُمحى في أوّل إقلاع فتعود القديمة — الشكوى بعينها. فتبقى، ويُعاد رفعُها */
     if (swap) delete state.profile.imgPending;
-    if (state.profile.imgPending) { state.profile.img = state.profile.imgPending; setTimeout(profRetry, 1500); }
-    else if (u.img) state.profile.img = u.img;
+    if (state.profile.imgPending) setTimeout(profRetry, 1500);
+    if (u.img) state.profile.img = u.img;
     else if (swap) state.profile.img = '';
     if (swap) state.profile.phone = '';
     state.profile.password = '';        /* لا سرَّ في الدرج بعد اليوم */
@@ -37768,14 +37772,17 @@ void main() {
   /* ===== ولا فشلَ صامت (ROADMAP-PROFILE-IMG م٢) =====
      كلُّ محطّةٍ تُكتب في سجلّ الإقلاع (‎prof:…‎)، وكلُّ فشلٍ يُقال — مرّةً في الجلسة
      حين تكون الإعادةُ تلقائيّة، فلا يُزعَج بها في كلّ محاولة. */
-  let profSaid = false, profBusy = false;
+  let profBusy = false;
   async function profImg(dataUrl, fromPick) {
     if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return false;
     if (profBusy) return false;
     const blob = dataToBlob(dataUrl);
-    if (!blob) { bootMark('prof:blob'); return false; }
+    if (!blob) { bootMark('prof:blob'); delete state.profile.imgPending; save(); return false; }
     profBusy = true;
-    const pending = () => { if (fromPick || !profSaid) { profSaid = true; toast(T().profImgPending); } };
+    /* أيقونةُ التحميل تظهر من أوّل الطلب حتى آخره، في الاختيار وفي الإعادة.
+       وما فشل لسببٍ عابرٍ يُعاد بصمت: لا رسالةَ «لم تُحفظ» (طلبُ صاحب الموقع) */
+    profUp = true; renderProfile(); renderAcctPage();
+    const pending = () => {};
     try {
       medWhy = '';
       const url = await medUp(blob);            /* ‎medUp‎ يقول سببَ رفضه المعروف بنفسه */
@@ -37806,11 +37813,9 @@ void main() {
       bootMark('prof:ok');
       if (state.profile.imgPending === dataUrl) delete state.profile.imgPending;
       state.profile.img = url; save(); renderProfile(); renderAcctPage();
-      if (profSaid || !fromPick) toast(T().profImgSaved);
-      profSaid = false;
       return true;
     } catch (e) { bootMark('prof:err'); pending(); return false; }
-    finally { profBusy = false; }
+    finally { profBusy = false; profUp = false; renderProfile(); renderAcctPage(); }
   }
   /* ===== وما عُلِّق يُعاد حتى يصل =====
      عند الإقلاع (من ‎authTake‎)، وعند عودة الشبكة، وعند الرجوع إلى الصفحة */
