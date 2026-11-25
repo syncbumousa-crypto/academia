@@ -14127,7 +14127,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
       const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"], .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
-      const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.78, h * 0.84 - 30));   /* (‎0.78‎ لا ‎0.84‎) يتّسع للّسان على الحافّة */
+      const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.74, h * 0.84 - 30));   /* (‎0.74‎ لا ‎0.84‎) يتّسع للّسان على الحافّة */
       stage.style.width = stage.style.height = s + 'px';
       if (!isFinite(h)) host.style.height = (s + 64) + 'px';
     }
@@ -14139,7 +14139,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* اللسانُ بقدر الورقة؛ وفي الصغيرة جدًّا (شبكةُ التسعة) لا لسان: يبقى الرقمُ والصحُّ في وجهها كما كانا */
       const on = W >= 96; host.classList.toggle('has-tab', on);
       if (on) {
-        const tw = Math.round(W * .088), th = Math.round(W * .16), f = Math.round(tw * .4), r = Math.round(tw * .42), y0 = Math.round(W * .075), H = th + 2 * f;
+        const tw = Math.round(W * .13), th = Math.round(W * .24), f = Math.round(tw * .38), r = Math.round(tw * .42), y0 = Math.round(W * .075), H = th + 2 * f;   /* (طلبُ صاحب الموقع) أكبرُ بكثير */
         const d = `M-1 0 L0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H} L-1 ${H} Z`;
         const e = `M0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H}`;
         host.style.setProperty('--tw', tw + 'px'); host.style.setProperty('--tth', th + 'px'); host.style.setProperty('--tf', f + 'px'); host.style.setProperty('--ty', (y0 - f) + 'px'); host.style.setProperty('--tsw', SW + 'px');
@@ -14474,7 +14474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (طلبُ صاحب الموقع) لسانُ الرقم والإكمال على حافّة كلّ بطاقة — شكلٌ واحدٌ بانحناءاته، كلسان الورقة */
     const kStg = new Map(); pkStgEach(host.arr, (n, i) => { if (!i) return; const q = kStg.get(n.id); if (q == null || i < q) kStg.set(n.id, i); });
     const kTab = (n, i) => { const sg = kStg.get(n.id), on = !!(state.ktok || {})[recId(n)];
-      return `<span class="kcv-tab"><svg class="kcv-tabsv" viewBox="-1 0 25 52"><path class="f" d="M-1 0 L0 0 A9 9 0 0 0 9 9 L14 9 A10 10 0 0 1 24 19 L24 33 A10 10 0 0 1 14 43 L9 43 A9 9 0 0 0 0 52 L-1 52 Z"/><path class="e" d="M0 0 A9 9 0 0 0 9 9 L14 9 A10 10 0 0 1 24 19 L24 33 A10 10 0 0 1 14 43 L9 43 A9 9 0 0 0 0 52"/></svg>`
+      return `<span class="kcv-tab"><svg class="kcv-tabsv" viewBox="-1 0 31 64"><path class="f" d="M-1 0 L0 0 A11 11 0 0 0 11 11 L18 11 A12 12 0 0 1 30 23 L30 41 A12 12 0 0 1 18 53 L11 53 A11 11 0 0 0 0 64 L-1 64 Z"/><path class="e" d="M0 0 A11 11 0 0 0 11 11 L18 11 A12 12 0 0 1 30 23 L30 41 A12 12 0 0 1 18 53 L11 53 A11 11 0 0 0 0 64"/></svg>`
         + `<span class="pp-pill kcv-pill${sg ? ' stg' : ''}${on ? ' on' : ''}" style="--c:${sg ? `var(--stg-${PK_STG[sg]})` : 'var(--stg-done)'}"><span class="n">${i + 1}</span><span class="b" data-kctk="${esc(recId(n))}" role="checkbox" aria-checked="${on}">`
         + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span>`; };
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
