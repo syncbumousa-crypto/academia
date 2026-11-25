@@ -9927,7 +9927,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      النقرُ يعيد رسمَ الشريط، فيُبحث عن الوجه الجديد بعد الرسم بمعرّفه. والفرعيّةُ تتتابع بفارقٍ يسير (‎70ms‎) فتُرى موجةً
      تسري فيها. ويُفتح فقط ما انفتح أو اختير — لا عند طيّ مجلد */
   let pkCapPeekT = null, pkCapPeekOn = [];
-  const pkCapPeekOff = () => { clearTimeout(pkCapPeekT); pkCapPeekOn.forEach(c => c.classList.remove('is-peek')); pkCapPeekOn = []; };
+  const pkCapPeekOff = () => { clearTimeout(pkCapPeekT); pkCapPeekOn.forEach(c => { c.classList.remove('is-peek'); pkStgWake(c); }); pkCapPeekOn = []; };
   function pkCapPeek(sid, fid, was) {
     const strip = document.querySelector('#cm-body .pk-fstrip.pk-lg[data-pkid="' + CSS.escape(sid) + '"]');
     const face = strip && strip.querySelector('.pg-face[data-pkf="' + CSS.escape(fid) + '"]');
@@ -9938,8 +9938,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cs = [face.querySelector(':scope > .pg-cnt'), ...(box.classList.contains('is-solo') ? [] : box.querySelectorAll(':scope > .pg-in > .pg-row > .pg-box > .pg-face > .pg-cnt'))].filter(Boolean);
     /* (طلبُ صاحب الموقع) وما كانت كبسولتُه مفتوحةً قبل النقر تبقى مفتوحةً بلا حركةٍ جديدة — الرسمُ الجديدُ لا يعيد انفتاحها */
     const kept = c => was && was.has(c.closest('.pg-face').dataset.pkf);
-    cs.filter(kept).forEach(c => { pkCapPlace(c); c.classList.add('pg-cnt--now', 'is-peek'); void c.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('pg-cnt--now'))); });
-    cs.filter(c => !kept(c)).forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); }, i * 70));
+    cs.filter(kept).forEach(c => { pkCapPlace(c); c.classList.add('pg-cnt--now', 'is-peek'); void c.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('pg-cnt--now'))); pkStgWake(c); });
+    cs.filter(c => !kept(c)).forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek'); pkCapWaves(c); pkStgWake(c); }, i * 70));
     pkCapPeekOn = cs;
     pkCapPeekT = setTimeout(pkCapPeekOff, 5000);
   }
@@ -9951,12 +9951,61 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkCapPeekOn = []; clearTimeout(pkCapPeekT);   /* (المفتوحةُ تُنقل إلى الرسم الجديد، فلا يطويها مؤقّتُها القديم) */
     setTimeout(() => pkCapPeek(sid, fid, was), 40);
   }, true);   /* بالالتقاط: معالجُ الشريط يوقف انتشارَ النقرة */
+  /* ===== الإمالة (‎pkStgTick‎): تُرسم في لوحٍ داخل الكبسولة ما دام عرضُها يتغيّر، ثمّ تُسلَّم للشرائط =====
+     التقدّمُ ‎k‎ = عرضُها الآن بين الدائرة (‎18‎) وعرضِها المفتوح (‎--pk-w‎)، فلا ساعةَ مستقلّةً تسبقها أو تتأخّر عنها */
+  const pkStgSet = new Set(); let pkStgRaf = 0;
+  const pkStgRM = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pkStgWake = c => { if (!c || !c.classList || !c.classList.contains('pg-cnt--stg')) return; pkStgSet.add(c); if (!pkStgRaf) pkStgRaf = requestAnimationFrame(pkStgTick); };
+  const pkStgHex = h => { h = (h || '').trim(); if (h[0] !== '#') return [128, 128, 128]; if (h.length === 4) h = '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3]; return [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); };
+  function pkStgDraw(cap, k) {
+    const cv = cap.querySelector(':scope > .pg-stc'); if (!cv) return;
+    const w = cap.clientWidth, h = cap.clientHeight; if (!w || !h) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1), Wp = Math.max(1, Math.round(w * dpr)), Hp = Math.max(1, Math.round(h * dpr));
+    if (cv.width !== Wp || cv.height !== Hp) { cv.width = Wp; cv.height = Hp; }
+    const g = cap._stg || (cap._stg = { S: cap.dataset.s.split(',').map(Number), E: cap.dataset.e.split(',').map(Number) });
+    const cs = getComputedStyle(cap), pal = PK_STG.map(x => pkStgHex(cs.getPropertyValue('--stg-' + x)));
+    const ctx = cv.getContext('2d'), img = ctx.createImageData(Wp, Hp), d = img.data;
+    const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2, th = e * Math.PI / 2, co = Math.cos(th), si = Math.sin(th);
+    const amp = .05 * Math.sin(Math.PI * e), tt = performance.now() / 1000, B = g.S.map((x, i) => x + (g.E[i] - x) * e);
+    for (let j = 0; j < Hp; j++) {
+      const v = (j + .5) / Hp, sh = 1 - .12 * v;
+      for (let i = 0; i < Wp; i++) {
+        const u = (i + .5) / Wp, o = (j * Wp + i) * 4;
+        const q = (v * co + (1 - u) * si) / (co + si) + amp * Math.sin(2 * Math.PI * (1.6 * u + 1.2 * v) - tt * 9);
+        let L = 7; for (let m = 0; m < 8; m++) if (q < B[m + 1]) { L = m; break; }
+        const c = pal[L]; d[o] = c[0] * sh; d[o + 1] = c[1] * sh; d[o + 2] = c[2] * sh; d[o + 3] = L ? 255 : 255 * e;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  function pkStgTick() {
+    pkStgRaf = 0;
+    pkStgSet.forEach(c => {
+      const cap = c.isConnected && c.querySelector(':scope > .pg-cap'); if (!cap) { pkStgSet.delete(c); return; }
+      const open = c.matches(':hover, .is-peek');
+      if (!open && c.classList.contains('is-stdone')) { c.classList.remove('is-stdone'); c.querySelectorAll('.pg-stb b.on').forEach(b => b.classList.remove('on')); }
+      const w1 = parseFloat(c.style.getPropertyValue('--pk-w')) || 150, k = Math.min(1, Math.max(0, (cap.offsetWidth - 18) / Math.max(1, w1 - 18)));
+      if (!pkStgRM()) pkStgDraw(cap, k);
+      if (open && (k >= .995 || pkStgRM())) { c.classList.add('is-stdone'); pkStgSet.delete(c); }
+      else if (!open && k <= .005) pkStgSet.delete(c);
+    });
+    if (pkStgSet.size) pkStgRaf = requestAnimationFrame(pkStgTick);
+  }
+  /* والشريطُ الذي تحت المؤشّر يتّسع ويُظهر عددَه */
+  document.addEventListener('pointerover', e => {
+    const b = e.target.closest && e.target.closest('.pg-stb b');
+    const stb = e.target.closest && e.target.closest('.pg-stb');
+    document.querySelectorAll('.pg-stb b.on').forEach(x => { if (x !== b) x.classList.remove('on'); });
+    if (b && stb) b.classList.add('on');
+  }, { passive: true });
+  document.addEventListener('pointerout', e => { if (!e.relatedTarget && pkCapHot) { const c = pkCapHot; pkCapHot = null; pkStgWake(c); } }, { passive: true });
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
     const cnt = e.target.closest && e.target.closest('.pg-cnt');
-    if (cnt === pkCapHot) return; pkCapHot = cnt;
+    if (cnt === pkCapHot) return; const was = pkCapHot; pkCapHot = cnt;
+    pkStgWake(was);
     if (!cnt) return;
-    pkCapPlace(cnt);
+    pkCapPlace(cnt); pkStgWake(cnt);
     if (e.pointerType !== 'touch') pkCapWaves(cnt);
   }, { passive: true });
   /* في الكبسولة كلُّ قيمةٍ بوحدتها: ما دون الدقيقة ثوانٍ «45ث»، وما دون الساعة دقائقُ وثوانٍ «8:15د»،
@@ -9965,6 +10014,52 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     : (() => { const m = Math.round(t / 60), h = Math.floor(m / 60), x = m % 60; return x ? h + ':' + String(x).padStart(2, '0') : String(h); })();
   const pkTmU = (t, en) => t < 60 ? (en ? 's' : 'ث') : t < 3600 ? (en ? 'm' : 'د') : (en ? 'h' : 'س');
   const pkTmTx = t => { const m = Math.floor(t / 60), x = t % 60; return x ? m + ':' + String(x).padStart(2, '0') : String(m); };
+  /* ===== مراحلُ الحفظ في دائرة المجلد وكبسولته (طلبُ صاحب الموقع) =====
+     كلُّ وحدة سؤالٍ في مرحلة: جديدةٌ (لا سجلّ) · نسيتها (آخرُها خطأٌ وقد أصابها قبلُ) · غلطت فيها (آخرُها خطأٌ ولم تُصِبها قطّ)
+     · قصيرةُ المدى ١–٤ بفاصلها (يومان · ٣ · أسبوع · ١٣ يومًا) · طويلةُ المدى (أبعدُ من ذلك).
+     الدائرةُ: الطبقاتُ فوق بعض والجديدةُ فراغٌ فوق الماء، وآخرُ طبقةٍ (القاع) لا تقلّ عن قرابة نصف الماء لتُرى.
+     والكبسولةُ: شرائطُ جنب بعض، والجديدةُ رماديّةٌ يمينًا؛ وبينهما «الإمالة»: الطبقاتُ تلفّ ربعَ لفّةٍ وهي تتموّج،
+     وتقدُّمُها يُقرأ من عرض الكبسولة نفسِه كلَّ إطار فيمشي مع فتحها وطيّها بالضبط (‎pkStgTick‎) */
+  const PK_STG = ['new', 'fgt', 'lrn', 's1', 's2', 's3', 's4', 'lm'];
+  const PK_STG_TIP = {
+    ar: ['مفاهيم جديدة - ما ذاكرتها بعد', 'مفاهيم نسيتها - تحتاج تراجعها من جديد', 'مفاهيم غلطت فيها - ما ثبتت بذاكرتك بعد',
+      'مفاهيم بذاكرتك قصيرة المدى الأولى - بتنساها خلال يومين', 'مفاهيم بذاكرتك قصيرة المدى الثانية - بتنساها خلال ٣ أيام',
+      'مفاهيم بذاكرتك قصيرة المدى الثالثة - بتنساها خلال أسبوع', 'مفاهيم بذاكرتك قصيرة المدى الرابعة - بتنساها خلال ١٣ يوم',
+      'مفاهيم بذاكرتك طويلة المدى - ثابتة معك'],
+    en: ['New concepts - not studied yet', 'Forgotten - review them again', 'Missed - not settled in memory yet',
+      'Short-term memory 1 - fades within 2 days', 'Short-term memory 2 - fades within 3 days',
+      'Short-term memory 3 - fades within a week', 'Short-term memory 4 - fades within 13 days', 'Long-term memory - here to stay'] };
+  const pkStg = r => {
+    if (!r) return 0;
+    if (!srsLast(r)) return (r.ok || 0) > 0 ? 1 : 2;
+    const i = r.i || 0;
+    return i <= 2 ? 3 : i <= 3 ? 4 : i <= 7 ? 5 : i <= 13 ? 6 : 7;
+  };
+  const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; x3Leaves(ns).flatMap(cxRecsOf).forEach(r => c[pkStg(r)]++); return c; };
+  /* حدودُ الطبقات (من فوق إلى تحت) في الدائرة ‎S‎، وحدودُ الشرائط (من اليمين إلى اليسار) في الكبسولة ‎E‎ */
+  const pkStgGeom = c => {
+    const T = c.reduce((x, y) => x + y, 0), W = T - c[0];
+    let L = T ? W / T : 0; if (L > 0 && L < 1) L = Math.max(L, 3.4 / 15.2);
+    const F = c.map((x, i) => i && W ? x / W : 0); let B = -1;
+    for (let i = 7; i > 0; i--) if (c[i]) { B = i; break; }
+    if (B > 0 && F[B] < .45) { const r = .55 / (1 - F[B]); for (let i = 1; i < 8; i++) F[i] = i === B ? .45 : F[i] * r; }
+    const S = [0, 1 - L]; for (let i = 1; i < 8; i++) S.push(S[S.length - 1] + F[i] * L); S[8] = 1;
+    const g = c.map(x => x ? Math.max(x, 1.2) : 0), G = g.reduce((x, y) => x + y, 0) || 1, E = [0];
+    g.forEach(x => E.push(E[E.length - 1] + x / G)); E[8] = 1;
+    return { L, S, E };
+  };
+  function pkStgHTML(ns, title, en) {
+    const c = pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
+    let dot = '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
+    if (G.L > 0) {
+      const st = []; for (let i = 7; i > 0; i--) { const a = (1 - G.S[i + 1]) * 100, b = (1 - G.S[i]) * 100; if (b - a > .01) st.push(`var(--stg-${PK_STG[i]}) ${a.toFixed(2)}% ${b.toFixed(2)}%`); }
+      const m = x3Surf(G.L);
+      dot = `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:linear-gradient(to top, ${st.join(', ')}, transparent ${(G.L * 100).toFixed(2)}%)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>`;
+    }
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="flex-grow:${Math.max(c[i], 1.2)};background:var(--stg-${k})"><i>${c[i]}</i></b>` : '').join('');
+    return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
+      + `<span class="pg-cap pg-cap--stg" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb">${bands}<i class="pg-stgl"></i></span></span></span>`;
+  }
   function pkCntHTML(k) {
     if (!pkBoxDeck || !k || k.id === '') return '';
     const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];
@@ -9980,14 +10075,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return `<span class="pg-cnt pg-cnt--tm" title="${esc(en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`)}"><span class="pg-ring">${x3DotAns(at)}</span>${pkCapHTML(at.lvl, at.rat, pkTmV(dt), pkTmV(tt), pkTmU(dt || tt, en), pkTmU(tt, en), en)}</span>`;
+        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en);
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
        يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها.
        ويُرى الدائرةُ وحدها، فإذا مرّ عليها المؤشّرُ انبسطت كبسولةً بثيمها نفسِه (الحدّ واللمعة والماء الصاعد من الأسفل) وفيها الكسر (طلبُ صاحب الموقع) */
     const k2 = Math.min(a.k, tot);
-    return `<span class="pg-cnt" title="${esc(en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`)}"><span class="pg-ring">${x3DotAns(a)}</span>${pkCapHTML(a.lvl, a.rat, k2, tot, '', '', en)}</span>`;
+    return pkStgHTML(ns, en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`, en);
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
