@@ -9984,6 +9984,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     ctx.putImageData(img, 0, 0);
   }
+  /* الشريطُ الذي صُفّي به الملخّصُ يُعلَّم في كبسولة مجلده */
+  const pkStgMark = c => {
+    const st = c.closest && c.closest('#cm-body .pk-fstrip'), f = c.closest('.pg-face');
+    const o = st && f && pkStgFilt[st.dataset.pkid];
+    c.querySelectorAll('.pg-stb > b').forEach(b => b.classList.toggle('is-pick', !!(o && o.f === f.dataset.pkf && PK_STG[o.k] === b.dataset.k)));
+  };
+  document.addEventListener('click', e => {
+    const x = e.target.closest && e.target.closest('[data-stgclr]'); if (!x) return;
+    e.preventDefault(); delete pkStgFilt[x.dataset.stgclr]; renderCmSection();
+  });
   function pkStgTick() {
     pkStgRaf = 0;
     pkStgSet.forEach(c => {
@@ -9996,7 +10006,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          قد وصلت بعدُ (اللمس يضعها متأخّرة)، فلا تُسلَّم للشرائط أبدًا. فصار: لا يُترك المطويُّ قبل ‎700ms‎ من الإيقاظ،
          ويُسلَّم المفتوحُ إذا بلغ عرضَه أو ثبت عرضُه ثلاثة إطارات (تقريبُ الأبعاد مع تكبير الصفحة لا يبلغ ‎0.995‎ دائمًا) */
       const w = cap.offsetWidth; c._stN = w === c._stW ? (c._stN || 0) + 1 : 0; c._stW = w;
-      if (open && (k >= .98 || (k > .5 && c._stN >= 3) || pkStgRM())) { pkStgDraw(cap, 1); c.classList.add('is-stdone'); pkStgSet.delete(c); }
+      if (open && (k >= .98 || (k > .5 && c._stN >= 3) || pkStgRM())) { pkStgDraw(cap, 1); c.classList.add('is-stdone'); pkStgSet.delete(c); pkStgMark(c); }
       else if (!open && k <= .005 && performance.now() - (c._stT || 0) > 700) pkStgSet.delete(c);
     });
     if (pkStgSet.size) pkStgRaf = requestAnimationFrame(pkStgTick);
@@ -10059,6 +10069,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (td) { e.preventDefault(); e.stopImmediatePropagation(); pkStgFloat(td); return; }
     if (!c) return;
     e.preventDefault(); e.stopImmediatePropagation();
+    const bd = c.classList.contains('is-stdone') && e.target.closest('.pg-stb > b'), st = c.closest('#cm-body .pk-fstrip');
+    if (bd && st) {   /* شريطٌ في كبسولة مجلدٍ من الشريط: يُصفّي الملخّصَ بمرحلته */
+      const id = st.dataset.pkid, f = c.closest('.pg-face').dataset.pkf, k = PK_STG.indexOf(bd.dataset.k), w = c.closest('.pg-box').classList.contains('is-wide');
+      const o = pkStgFilt[id];
+      if (o && o.f === f && o.k === k) delete pkStgFilt[id]; else pkStgFilt[id] = { f, k, w };
+      pkFs[id] = f; if (w) pkSolo[id] = f; else delete pkSolo[id]; pkAwait.delete(id);
+      renderCmSection();
+      const nc = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"] .pg-face[data-pkf="${CSS.escape(f)}"] > .pg-cnt--stg`);
+      if (nc) { pkCapPlace(nc); nc.classList.add('pg-cnt--now', 'is-peek', 'is-stclk'); void nc.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => nc.classList.remove('pg-cnt--now'))); pkStgWake(nc); pkStgAuto(nc); }
+      return;
+    }
     if (c.classList.contains('is-peek')) pkStgShut(c);
     else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); pkStgAuto(c); }
   }, true);
@@ -10131,23 +10152,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255), l = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
     return '#' + c.map(x => { let v = Math.min(1, Math.max(0, (l + (x - l) * 1.5) * 1.35 + (dk ? .12 : .2))); v = v + (1 - v) * (dk ? .06 : .18); return Math.round(v * 255).toString(16).padStart(2, '0'); }).join('');
   };
-  const pkStgCount = ns => {
-    const c = [0, 0, 0, 0, 0, 0, 0, 0], lv = x3Leaves(ns);
-    if (pkStgDemo && pkBoxMine && lv.length) {
+  /* مرحلةُ كلّ وحدة سؤال: ‎cb(البطاقة، المرحلة)‎ — والعدُّ وتصفيةُ الملخّص بشريطٍ (‎pkStgFilt‎) يمرّان من هنا فيتّفقان */
+  const pkStgEach = (ns, cb) => {
+    if (pkStgDemo && pkBoxMine) {
       /* وحالُ كلّ بطاقةٍ ثابتةٌ أيًّا كان المجلدُ المعروض: تُؤخذ من إخوتها المباشرين (بطائقِ مجلدها نفسِه)، فكبسولةُ الأب
          المطويّ مجموعُ كبسولات أبنائه بالضبط */
       (function walk(arr) {
         const lf = (arr || []).filter(n => n.t !== 'f');
         if (lf.length) {
           const w = PK_STG_DEMO[pkStgHash(lf.map(recId).join('|')) % PK_STG_DEMO.length], W = w.reduce((x, y) => x + y, 0);
-          lf.forEach(n => cxRecsOf(n).forEach((_, j) => { let r = pkStgHash(recId(n) + '#' + j) % 1000 / 1000 * W, i = 0; while (i < 7 && r >= w[i]) r -= w[i++]; c[i]++; }));
+          lf.forEach(n => cxRecsOf(n).forEach((_, j) => { let r = pkStgHash(recId(n) + '#' + j) % 1000 / 1000 * W, i = 0; while (i < 7 && r >= w[i]) r -= w[i++]; cb(n, i); }));
         }
         (arr || []).forEach(n => { if (n.t === 'f') walk(n.ch); });
       })(ns);
-      return c;
+      return;
     }
-    lv.flatMap(cxRecsOf).forEach(r => c[pkStg(r)]++); return c;
+    x3Leaves(ns).forEach(n => cxRecsOf(n).forEach(r => cb(n, pkStg(r))));
   };
+  const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => c[i]++); return c; };
+  /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
+     النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً أو «×» يرفعها.
+     ‏‎{f: المجلد، k: المرحلة، w: كانت كبسولتُه كبسولةَ المفتوح (بطائقُه المباشرة وحدها)}‎ */
+  const pkStgFilt = {};
   /* حدودُ الطبقات (من فوق إلى تحت) في الدائرة ‎S‎، وحدودُ الشرائط (من اليمين إلى اليسار) في الكبسولة ‎E‎ */
   const pkStgGeom = c => {
     const T = c.reduce((x, y) => x + y, 0), W = T - c[0];
@@ -13799,7 +13825,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!host) return '';
     if (!ro) ktMigrate(host);
     /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
-    const deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
+    let deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
+    const sf = pkStgFilt[id]; let sfBar = '';
+    if (sf && sf.f !== sel) delete pkStgFilt[id];
+    else if (sf && deep) {
+      const hit = new Set(); pkStgEach(host.arr, (n, i) => { if (i === sf.k) hit.add(n.id); });
+      const out = [], pend = [];
+      deep.forEach(x => {
+        if (x.h) { pend.length = Math.max(0, (x.d || 1) - 1); pend.push(x); return; }
+        if (!x.n || !hit.has(x.n.id)) return;
+        pend.forEach(h => h && out.push(h)); pend.length = 0; out.push(x);
+      });
+      deep = out;
+      const en = state.lang === 'en', tip = PK_STG_TIP[en ? 'en' : 'ar'][sf.k], nn = out.filter(x => x.n).length;
+      sfBar = `<div class="kt-stgf" style="--c:var(--stg-${PK_STG[sf.k]})"><i></i><span>${esc(tip)}</span><b>${nn}</b><button type="button" class="kt-stgf__x" data-stgclr="${esc(id)}" aria-label="${en ? 'Show all' : 'اعرض الكل'}" title="${en ? 'Show all' : 'اعرض الكل'}">×</button></div>`;
+    }
     const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
     if (v === 'table') {
@@ -13871,7 +13911,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        وزرُّ «+ معرفة» شِيل حتى يُقرَّر مكانُه الجديد (‎ktAddBtn‎ باقيةٌ له) */
     const empty = v !== 'tree' && !cards.length ? `<div class="pk-vwph kt-empty" aria-hidden="true"></div>` : '';
     const ln = ((pack || cardDataRaw(cmCode)) || {}).ln;
-    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}${ln === 'en' ? ' kt-ln--en' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${empty}</div>`;
+    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}${ln === 'en' ? ' kt-ln--en' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${sfBar}${body}${empty}</div>`;
   }
 
   /* ===== ROADMAP-PAPERS: العرضُ البطاقيُّ رزمةُ أوراق (من «ورقات» — كودُ صاحب الموقع) =====
