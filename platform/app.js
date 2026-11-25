@@ -10781,7 +10781,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * 100 + 50 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); }
     const gl = 54 * (1 - kc) + .01, m = P[5];
     m.setAttribute('d', G.d); m.style.strokeWidth = 3.4 + (q.w - 5 - 3.4) * kc; m.style.strokeDasharray = `${gl} 400`; m.style.strokeDashoffset = -(st.g * 100 + 50 - gl / 2);
-    m.style.strokeOpacity = 1 - .8 * kc;
+    m.style.strokeOpacity = 1 - pkFanCl(kc * 1.6);   /* بلا قرصٍ خلف المختارة: يكفيها لونُها الذهبيّ (طلبُ صاحب الموقع) */
     if (ic) ic.style.opacity = k > .04 ? 0 : '';
     el.querySelectorAll('.pk-varc__vi').forEach((b, i) => {
       const [x, y] = G.at((i * 100 + 50) / 300), isC = i === st.cur, dist = Math.abs(i - st.cur);
