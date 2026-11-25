@@ -20506,3 +20506,7 @@ html[data-theme="dark"] #cm-body .pk-varc__vi.on { color: #d4b36a; }
 #cm-body .pk-varc--fan:focus-visible .pk-varc__bg { stroke: rgba(201, 162, 92, .45); }
 /* أيقونةُ الجدول معكوسةٌ بالعربيّ: عمودُ الأسماء يمينًا كما يُقرأ الجدول، وبالإنجليزيّ على حالها يسارًا (طلبُ صاحب الموقع) */
 html:not([data-lang="en"]) .pk-ic-tblv { transform: translateX(6px); }
+/* قوسُ الكمية والزمن: قوسُ الطرق نفسُه معكوسًا في الزاوية اليسرى فوق، وأيقوناتُه تُعاد فلا تنقلب (‎--pk-fl‎) */
+#cm-body .pk-vdots.pk-varc.pk-varc--qt { inset-inline-start: auto; inset-inline-end: -6px; transform: scaleX(-1); --pk-fl: -1; }
+html[data-lang="en"] #cm-body .pk-vdots.pk-varc.pk-varc--qt { transform: none; --pk-fl: 1; }
+#cm-body .pk-blkh--bank { position: relative; }

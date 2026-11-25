@@ -10187,6 +10187,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     x3Leaves(ns).forEach(n => cxRecsOf(n).forEach(r => cb(n, pkStg(r))));
   };
   const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => c[i]++); return c; };
+  /* وبالزمن (قوسُ الكمية والزمن): دقائقُ كلّ مرحلةٍ من أزمنة بطائقها، ودقيقةٌ على الأقلّ لما له زمن. ولا زمنَ في المجلد ⇐ ‎null‎ فيبقى بعدده */
+  const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += n.tm || 0; }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
+  const pkStgC = ns => pkBoxId != null && pkQt[pkBoxId] ? pkStgTm(ns) : null;
   /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
      النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً يرفعها (ولا شريطَ وسمٍ فوق الملخّص — بطلبه).
      ‏‎{f: المجلد، k: المرحلة، w: كانت كبسولتُه كبسولةَ المفتوح (بطائقُه المباشرة وحدها)}‎ */
@@ -10234,7 +10237,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let Ld = ldx != null ? ldx : lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
     { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
     { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
-    title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;
+    if (!(cnt && pkBoxId != null && pkQt[pkBoxId])) title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;   /* وبالزمن يبقى عنوانُه بالدقائق */
     /* (طلبُ صاحب الموقع) وكبسولةٌ اختير منها شريطٌ تبقى مفتوحةً ما دام مختارًا — وتُرسم مفتوحةً في كلّ رسمة */
     const pn = pin && pin.size ? ' pg-cnt--now is-peek is-stclk is-stdone' : '';
     return `<span class="pg-cnt pg-cnt--stg${pn}" title="${esc(title)}"${pn ? ` style="--pk-w:${W}px"` : ''}><span class="pg-ring">${dot}</span>`
@@ -10253,14 +10256,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
        الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
        ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
-    if (pkBoxTime) {
+    if (pkBoxTime && pkQt[pkBoxId]) {
       const tt = cs.reduce((x, n) => x + (n.tm || 0), 0);
       if (tt) {
         let dt = 0;
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, null, null, pkPinOf(k.id));
+        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, pkStgTm(ns), null, pkPinOf(k.id));
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
@@ -10759,7 +10762,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يبقى يُغلق المساحة. الهندسةُ بإحداثيّات الزرّ (مركزُ الأيقونة 15,15): خطٌّ أفقيّ ‎h‎ ثمّ قوسٌ ‎th‎ ثمّ خطٌّ ‎v‎ */
   const PK_FAN_C = { cx: 20, cy: 12, r: 14 - PK_VA_IN, h: PK_VA_RUN, v: PK_VA_RUN, th: 90, w: 7 };
   const PK_FAN_E = { cx: -23, cy: 53, r: 40, h: 2, v: 2, th: 90, w: 28 };
-  const pkFan = {};   /* ‏‎postId → { k, kv, kt, g, gv, cur, hov, t }‎ */
+  const pkFan = {};   /* ‏‎fk → { k, kv, kt, g, gv, cur, hov, t, n, qt }‎ — ‎fk‎: معرّفُ المساهمة لقوس الطرق، و‎qt:‎+معرّفها لقوس الكمية والزمن */
+  /* ===== قوسُ الكمية والزمن (طلبُ صاحب الموقع): القوسُ نفسُه معكوسًا على الزاوية اليسرى فوق لمساحتَي الملخّص والبنك =====
+     شرطتان: الكميةُ (وعاءٌ نصفُه ملآن) والزمنُ (ساعةٌ رمليّة: وعاءان متقابلان) — تُبدّلان ما تقوله الكبسولات.
+     ولا أيقونةَ له خارجَه: مطويًّا هو القوسُ وحده، ومنبسطًا تخرج الأيقونتان من شرطتيهما */
+  const pkQt = {};   /* ‏‎postId → 1‎: الكبسولاتُ بالزمن */
+  const PK_QT_IC = {
+    q: '<path d="M4 9h16l-1.6 9.4a2.5 2.5 0 0 1-2.5 2.1H8.1a2.5 2.5 0 0 1-2.5-2.1z"/><path d="M5.2 14h13.6l-.4 4.4a2.5 2.5 0 0 1-2.5 2.1H8.1a2.5 2.5 0 0 1-2.5-2.1z" fill="currentColor" stroke="none" opacity=".35"/>',
+    t: '<path d="M5 3.5h14M5 20.5h14"/><path d="M6.3 3.5l1.1 4.6a2.5 2.5 0 0 0 1 1.5L11 11.4a.8.8 0 0 1 0 1.2L8.4 14.4a2.5 2.5 0 0 0-1 1.5l-1.1 4.6M17.7 3.5l-1.1 4.6a2.5 2.5 0 0 1-1 1.5L13 11.4a.8.8 0 0 0 0 1.2l2.6 1.8a2.5 2.5 0 0 1 1 1.5l1.1 4.6"/><path d="M7.2 20.5l.6-2.9a2.5 2.5 0 0 1 1-1.5L12 14l3.2 2.1a2.5 2.5 0 0 1 1 1.5l.6 2.9z" fill="currentColor" stroke="none" opacity=".35"/>' };
   const pkFanGeo = q => {
     const { cx, cy, r, h, v } = q, a0 = -Math.PI / 2, A = q.th * Math.PI / 180, a1 = a0 + A;
     const sx = cx - h, sy = cy - r, ex = cx + r * Math.cos(a1), ey = cy + r * Math.sin(a1), tx = -Math.sin(a1), ty = Math.cos(a1);
@@ -10783,7 +10793,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* حالُ المروحة عند قيمةٍ ‎k‎ — يُستعمل في البناء (فلا تومض مطويّةً بعد إعادة الرسم) وفي كلّ إطار */
   const pkFanPaint = (el, st) => {
     const k = st.k, kc = pkFanCl(k), q = pkFanQ(k), G = pkFanGeo(q), hit = pkFanGeo(Object.assign({}, PK_FAN_C, { r: PK_FAN_C.r + 2.2 }));   /* الطرفُ ثابتٌ في موضعه: المؤشّرُ الذي فتحها لا يخرج منها وهي تكبر */
-    const P = el.querySelectorAll('path'), ic = el.parentElement && el.parentElement.querySelector(':scope > .pk-blkh__ic > svg');
+    const Q = c => el.querySelector('.pk-varc__' + c), P = [Q('hit'), Q('bg')], ic = !st.qt && el.parentElement && el.parentElement.querySelector(':scope > .pk-blkh__ic > svg');
+    const N = st.n || 3, SG = 300 / N, DL = SG * (100 - PK_VA_GAP) / 100;   /* شرائحُ متساويةٌ في ‎300‎ والفجوةُ بنسبة الموقع */
     el.classList.toggle('is-fan', kc > .02); el.classList.toggle('is-fanon', k > .5);
     P[0].setAttribute('d', hit.d);
     P[1].setAttribute('d', G.d); P[1].style.strokeWidth = q.w;
@@ -10794,23 +10805,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const mk = on ? `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='330' height='330'><path d='${pkFanOutline(G, q.w / 2, 150)}'/></svg>`)}")` : '';
       glx.style.webkitMaskImage = glx.style.maskImage = mk; glx.style.opacity = on ? 1 : 0;
       glx.style.clipPath = on ? `path('${pkFanOutline(G, q.w / 2, 150)}')` : '';   /* والقصُّ معه: القناعُ يُفكّ بعد إطار، فلا يُرى المستطيلُ في أوّل الفتح */ }
-    P[6].setAttribute('d', ol || 'M0 0'); P[6].style.opacity = on ? kc : 0;
-    for (let i = 0; i < 3; i++) { const dl = 54 + (8 - 54) * kc, x = P[2 + i];
-      x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * 100 + 50 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); }
-    const gl = 54 * (1 - kc) + .01, m = P[5];
-    m.setAttribute('d', G.d); m.style.strokeWidth = 3.4 + (q.w - 5 - 3.4) * kc; m.style.strokeDasharray = `${gl} 400`; m.style.strokeDashoffset = -(st.g * 100 + 50 - gl / 2);
+    const eg = Q('eg'); eg.setAttribute('d', ol || 'M0 0'); eg.style.opacity = on ? kc : 0;
+    el.querySelectorAll('.pk-varc__d').forEach((x, i) => { const dl = DL + (8 - DL) * kc;
+      x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * SG + SG / 2 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); });
+    const gl = DL * (1 - kc) + .01, m = Q('m');
+    m.setAttribute('d', G.d); m.style.strokeWidth = 3.4 + (q.w - 5 - 3.4) * kc; m.style.strokeDasharray = `${gl} 400`; m.style.strokeDashoffset = -(st.g * SG + SG / 2 - gl / 2);
     m.style.strokeOpacity = 1 - pkFanCl(kc * 1.6);   /* بلا قرصٍ خلف المختارة: يكفيها لونُها الذهبيّ (طلبُ صاحب الموقع) */
     if (ic) ic.style.opacity = k > .04 ? 0 : '';
     el.querySelectorAll('.pk-varc__vi').forEach((b, i) => {
-      const [x, y] = G.at((i * 100 + 50) / 300), isC = i === st.cur, dist = Math.abs(i - st.cur);
-      const a = isC ? 1 : pkFanCl((k - .12 * dist) / (1 - .12 * dist));
-      const px = isC ? 15 + (x - 15) * kc : x, py = isC ? 15 + (y - 15) * kc : y, sc = (isC ? 1 : .2 + .8 * a) * (st.hov === i && k > .9 ? 1.14 : 1);
-      b.style.transform = `translate(${px - 12}px,${py - 12}px) scale(${sc})`; b.style.opacity = isC ? (k > .04 ? 1 : 0) : a;
+      const [x, y] = G.at((i * SG + SG / 2) / 300), isC = i === st.cur, dist = Math.abs(i - st.cur);
+      /* وقوسُ الكمية لا أيقونةَ له في الزاوية: الحاليّةُ تخرج من شرطتها كالأخرى، أوّلَهما */
+      const fly = isC && !st.qt, a = fly ? 1 : pkFanCl((k - .12 * dist) / (1 - .12 * dist));
+      const px = fly ? 15 + (x - 15) * kc : x, py = fly ? 15 + (y - 15) * kc : y, sc = (fly ? 1 : .2 + .8 * a) * (st.hov === i && k > .9 ? 1.14 : 1);
+      b.style.transform = `translate(${px - 12}px,${py - 12}px) scale(calc(var(--pk-fl, 1) * ${sc}), ${sc})`; b.style.opacity = fly ? (k > .04 ? 1 : 0) : a;
       b.classList.toggle('on', isC);
     });
   };
   let pkFanRaf = 0, pkFanLast = 0;
-  const pkFanEl = id => document.querySelector(`#cm-body .pk-varc--fan[data-pkid="${CSS.escape(id)}"]`);
+  const pkFanEl = fk => document.querySelector(`#cm-body .pk-varc--fan[data-fk="${CSS.escape(fk)}"]`);
   const pkFanTick = now => {
     const dt = Math.min(.034, (now - pkFanLast) / 1000); pkFanLast = now; let busy = false;
     for (const id in pkFan) {
@@ -10837,13 +10849,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.cur = cur; if (bkReduce() || st.k < .01) st.g = cur;
     pkVdPrev[id] = cur;
     const nm = v => esc(T()['pkView_' + v]);
-    return `<span class="pk-vdots pk-varc pk-varc--fan" role="button" tabindex="0" data-pkfan data-pkid="${esc(id)}" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}" aria-expanded="${st.kt ? 'true' : 'false'}">`
+    return `<span class="pk-vdots pk-varc pk-varc--fan" role="button" tabindex="0" data-pkfan data-fk="${esc(id)}" data-pkid="${esc(id)}" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}" aria-expanded="${st.kt ? 'true' : 'false'}">`
       + `<span class="pk-varc__gl" aria-hidden="true"></span><svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
       + ['hit', 'bg', 'd', 'd', 'd', 'm', 'eg'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
       + `</svg>`
       + V.map(v => `<button type="button" class="pk-varc__vi" data-pkview="${v}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS.find(x => x[0] === v)[1]}</svg></button>`).join('')
       + `</span>`;
   };
+  const pkQtArc = (id, pn) => {
+    const fk = 'qt:' + pn + ':' + id,   /* لكلّ مساحةٍ قوسُها (الملخّص والبنك)، والحالُ واحدٌ للمساهمة */ cur = pkQt[id] ? 1 : 0, en = state.lang === 'en';
+    const st = pkFan[fk] || (pkFan[fk] = { k: 0, kv: 0, kt: 0, g: cur, gv: 0, cur, hov: -1, t: 0, n: 2, qt: 1 });
+    st.cur = cur; if (bkReduce() || st.k < .01) st.g = cur;
+    const nm = v => v === 't' ? (en ? 'Time' : 'الزمن') : (en ? 'Amount' : 'الكمية'), bar = en ? 'Amount or time' : 'الكمية أو الزمن';
+    return `<span class="pk-vdots pk-varc pk-varc--fan pk-varc--qt" role="button" tabindex="0" data-pkfan data-fk="${esc(fk)}" data-pkid="${esc(id)}" title="${bar}" aria-label="${bar}" aria-expanded="${st.kt ? 'true' : 'false'}">`
+      + `<span class="pk-varc__gl" aria-hidden="true"></span><svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + ['hit', 'bg', 'd', 'd', 'm', 'eg'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
+      + `</svg>`
+      + ['q', 't'].map(v => `<button type="button" class="pk-varc__vi" data-pkqt="${v}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_QT_IC[v]}</svg></button>`).join('')
+      + `</span>`;
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cm-body [data-pkqt]'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const id = b.dataset.pkid, t = b.dataset.pkqt === 't' ? 1 : 0; if (!id || !!pkQt[id] === !!t) return;
+    if (t) pkQt[id] = 1; else delete pkQt[id];
+    renderCmSection();
+  });
   /* ترسمه المروحةُ بحالها فور الإدراج: بعد كلّ رسمٍ للمساهمة تُطلى المراوحُ الحاضرة (‎MutationObserver‎ خفيف على ‎#cm-body‎) */
   new MutationObserver(() => { for (const id in pkFan) { const el = pkFanEl(id); if (el && !el.pkFanP) { el.pkFanP = 1; pkFanPaint(el, pkFan[id]); } } })
     .observe(document.documentElement, { childList: true, subtree: true });
@@ -10852,28 +10883,28 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (e.pointerType !== 'mouse') return;
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
     for (const id in pkFan) {
-      const st = pkFan[id], mine = f && f.dataset.pkid === id;
+      const st = pkFan[id], mine = f && f.dataset.fk === id;
       if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
       else if (st.kt) pkFanSet(id, false, 260);
     }
   }, true);
   document.addEventListener('pointerdown', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
-    for (const id in pkFan) if (pkFan[id].kt && (!f || f.dataset.pkid !== id)) pkFanSet(id, false);
-    if (f && e.target.closest('.pk-varc__hit')) { const st = pkFan[f.dataset.pkid]; st.down = performance.now(); st.fast = false;
-      if (e.pointerType !== 'mouse' && !st.kt) { e.preventDefault(); pkFanSet(f.dataset.pkid, true); } }
-    if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__vi') && pkFan[f.dataset.pkid].k > .5) pkFanSet(f.dataset.pkid, false, 650);   /* باللمس: تنطوي بعد أن يُرى الذهبيُّ ينزلق */
+    for (const id in pkFan) if (pkFan[id].kt && (!f || f.dataset.fk !== id)) pkFanSet(id, false);
+    if (f && e.target.closest('.pk-varc__hit')) { const st = pkFan[f.dataset.fk]; st.down = performance.now(); st.fast = false;
+      if (e.pointerType !== 'mouse' && !st.kt) { e.preventDefault(); pkFanSet(f.dataset.fk, true); } }
+    if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__vi') && pkFan[f.dataset.fk].k > .5) pkFanSet(f.dataset.fk, false, 650);   /* باللمس: تنطوي بعد أن يُرى الذهبيُّ ينزلق */
   }, true);
   /* ===== النقرةُ السريعة على الطرف (طلبُ صاحب الموقع) =====
      ضغطةٌ قصيرة (بالماوس أو لمسةٌ تُرفع قبل ٣٠٠ مللي) تفتح المروحةَ وتنضغط فيها الطريقةُ التالية ثمّ تنطوي — حركةٌ واحدةٌ متّصلة.
      واللمسةُ المُمسَكة تُبقيها مفتوحةً ليُختار منها */
   document.addEventListener('click', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan'); if (!f || !e.target.closest('.pk-varc__hit')) return;
-    const id = f.dataset.pkid, st = pkFan[id]; if (!st) return;
+    const id = f.dataset.fk, st = pkFan[id]; if (!st) return;
     if (st.down && performance.now() - st.down > 300) return;
     e.preventDefault(); clearTimeout(st.t); clearTimeout(st.q);
     st.fast = true; st.kt = 1; pkFanWake();
-    const nx = (st.cur + 1) % 3;
+    const nx = (st.cur + 1) % (st.n || 3);
     /* الذهبُ ينتقل إلى التالية في المروحة نفسِها، وتنطوي، ثمّ يُبدَّل العرض: رسمُ العرض الجديد ثقيل (قِيس: نصفُ ثانيةٍ بلا إطار)
        فلو سبق لقطع الانطواء */
     const swap = () => { st.fast = false; const el = pkFanEl(id), b = el && el.querySelectorAll('.pk-varc__vi')[nx]; if (b) b.click(); };
@@ -10881,16 +10912,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.q = setTimeout(() => {
       st.cur = nx; pkFanWake();
       /* وأيقونةُ الزاوية تصير التاليةَ من الآن، فلا تعود القديمةُ لحظةً بعد الانطواء وقبل الرسم */
-      const ic = pkFanEl(id), sv = ic && ic.parentElement.querySelector(':scope > .pk-blkh__ic > svg'), pv = PK_VIEWS.find(x => x[0] === ['tree', 'cards', 'table'][nx]);
+      const ic = !st.qt && pkFanEl(id), sv = ic && ic.parentElement.querySelector(':scope > .pk-blkh__ic > svg'), pv = PK_VIEWS.find(x => x[0] === ['tree', 'cards', 'table'][nx]);
       if (sv && pv) sv.innerHTML = pv[1];
       st.q = setTimeout(() => { st.kt = 0; st.hov = -1; pkFanWake(); st.q = setTimeout(swap, 340); }, 230);
     }, st.k > .8 ? 0 : 130);
   });
   document.addEventListener('keydown', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan'); if (!f) return;
-    const st = pkFan[f.dataset.pkid];
-    if (e.key === 'Enter' || e.key === ' ') { if (e.target === f) { e.preventDefault(); pkFanSet(f.dataset.pkid, !st.kt); if (!st.kt) return; setTimeout(() => { const b = f.isConnected && f.querySelectorAll('.pk-varc__vi')[st.cur]; if (b) { f.querySelectorAll('.pk-varc__vi').forEach(x => x.tabIndex = 0); b.focus(); } }, 60); } }
-    else if (e.key === 'Escape' && st.kt) { pkFanSet(f.dataset.pkid, false); f.focus(); }
+    const st = pkFan[f.dataset.fk];
+    if (e.key === 'Enter' || e.key === ' ') { if (e.target === f) { e.preventDefault(); pkFanSet(f.dataset.fk, !st.kt); if (!st.kt) return; setTimeout(() => { const b = f.isConnected && f.querySelectorAll('.pk-varc__vi')[st.cur]; if (b) { f.querySelectorAll('.pk-varc__vi').forEach(x => x.tabIndex = 0); b.focus(); } }, 60); } }
+    else if (e.key === 'Escape' && st.kt) { pkFanSet(f.dataset.fk, false); f.focus(); }
   });
   /* قوسُ الكتاب: قوسُ الملخّص نفسُه على زاوية أيقونة المساحة، ثلاثُ قطعٍ للطرق الثلاث، والضغطُ ينقل إلى التالية.
      ‏‎from‎ موضعُ الذهبيّة قبل التبديل فتنزلق منه */
@@ -13649,7 +13680,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (lab && (cxMax || cxMaxPub) && chPdfMeta(cmCode, cmTabSel) && bk2Ok()) (window.requestIdleCallback || setTimeout)(() => { bk2Lib().catch(() => {}); });
     /* وقوسُ طرق العرض لا يظهر والملخّصُ بلا مفهوم — حتى تُضغط «إضافة مفهوم» (طلبُ صاحب الموقع) */
     const nCards = flatCards(deck).length;
-    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, nCards).replace('</span>', '</span>' + (nCards || pkVaArm[id] ? pkVDots(id) : '')) : '';
+    const midH = wrap && !pkMidOff[id] ? pkBlkH('mid', id, nCards).replace('</span>', '</span>' + (nCards || pkVaArm[id] ? pkVDots(id) : '')).replace(/<\/div>$/, (nCards ? pkQtArc(id, 'mid') : '') + '</div>') : '';   /* وقوسُ الكمية والزمن يسارًا */
     /* ومنطقةُ المجلدات وهي فارغة: مكانٌ مرقّطٌ يقول إنّها لمجلدات الملخّص (طلبُ صاحب الموقع) — وفي التحرير ينقر فيضيف أوّلَ فصل */
     const fph = midH ? `<div class="pk-fstrip-ph">`
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS[0][1]}</svg>`
@@ -13702,7 +13733,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
     let hB = pkBlkH('book', id, pkSrcList(id).length);
-    const hQ = pkBlkH('bank', id, flatCards(qb).length);
+    const hQ = pkBlkH('bank', id, flatCards(qb).length).replace(/<\/div>$/, flatCards(qb).length ? pkQtArc(id, 'bank') + '</div>' : '</div>');
     if (pkSrcAny(id) && bk2On()) hB = hB.replace('</span>', '</span>' + pkBkArc(id));   /* قوسُ طريقة العرض على زاوية أيقونة الكتاب */
     return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
@@ -15534,7 +15565,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (f.t !== 'f') return cxCardView(f, fold, k, live);
       const open = fold[f.id] === true;
       return `<div class="x3-st${open ? ' on' : ''}" style="--o:${X3IND(k)}px">
-        ${live ? pkStgHTML(f.ch, null) : ''}
+        ${live ? pkStgHTML(f.ch, null, undefined, pkStgC(f.ch)) : ''}
         <div class="x3-hd${cxHot === f.id ? ' is-peek' : ''}" data-roid="${f.id}">
           ${RO_GRAB(f.id)}
           <button type="button" class="cx-fold cx-fold--tri x3-tg${(f.ch || []).length ? '' : ' is-void'}"${(f.ch || []).length ? ` data-fold="${f.id}" title="${open ? T().pkCollapse : T().pkExpand}"` : ' tabindex="-1" aria-hidden="true"'}>${CX_TRI}</button>
@@ -15996,7 +16027,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ? cxCardBlock(f, pid, k, live)
       : `<div class="x3-st${f.open === false ? '' : ' on'}" style="--o:${X3IND(k)}px">
         <!-- وشجرةُ المحرّر مثلُها: السجلُّ سجلُّك أنت، ومن كتب رزمةً يذاكرها -->
-        ${live ? pkStgHTML(f.ch, null) : ''}
+        ${live ? pkStgHTML(f.ch, null, undefined, pkStgC(f.ch)) : ''}
         <div class="x3-hd${cxSel.has(f.id) ? ' is-sel' : ''}${cxHot === f.id ? ' is-peek' : ''}" data-id="${f.id}">
           ${VT_GRAB(true)}
           <!-- سهمُ الطيّ سابقٌ للأيقونة (يقع يمينَها في العربيّة): هو وأيقونةُ المجلد
