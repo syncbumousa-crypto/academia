@@ -10073,7 +10073,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (bd && st) {   /* شريطٌ في كبسولة مجلدٍ من الشريط: يُصفّي الملخّصَ بمرحلته */
       /* (طلبُ صاحب الموقع) وتُختار شرائطُ كثيرةٌ معًا — من المجلد نفسِه أو من غيره: كلُّ نقرةٍ تضيف شريطًا أو ترفعه.
          والملخّصُ يُري أقربَ مجلدٍ يجمعها (أو المساهمةَ كلَّها) مصفّى بما اختير */
-      const id = st.dataset.pkid, face = c.closest('.pg-face'), f = face.dataset.pkf, k = PK_STG.indexOf(bd.dataset.k), w = false;
+      const id = st.dataset.pkid, face = c.closest('.pg-face'), f = face.dataset.pkf, k = PK_STG.indexOf(bd.dataset.k), w = c.closest('.pg-box').classList.contains('is-wide');
       const path = []; for (let b = face.closest('.pg-box'); b && st.contains(b); b = b.parentElement.closest('.pg-box')) path.unshift(b.querySelector(':scope > .pg-face').dataset.pkf);
       const o = pkStgFilt[id] || { picks: [] }, at = o.picks.findIndex(p => p.f === f && p.k === k);
       if (at >= 0) o.picks.splice(at, 1); else o.picks.push({ f, k, w, path });
@@ -10244,9 +10244,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkCntHTML(k, wide) {
     if (!pkBoxDeck || !k || k.id === '') return '';
     /* (طلبُ صاحب الموقع) المجلدُ المطويُّ كبسولتُه تقول كلَّ ما فيه بمجلداته؛ فإذا انفتح صار لكلّ مجلدٍ فيه كبسولتُه،
-       وبقيت دائرتُه هو تقول كلَّ ما فيه كما كانت */
-    const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []) : [];   /* (ثمّ بطلبه) ودائرةُ المفتوح باقيةٌ تقول كلَّ ما فيه — لا بطائقَه المباشرةَ وحدها */
-    const cs = flatCards(ns), tot = cs.length; if (!tot) return '';
+       وبقيت دائرتُه هو لبطائقه المباشرة وحدها — وتبقى ظاهرةً ولو خلت (بطلبه) */
+    const r = findNode(pkBoxDeck, k.id), ns = r ? (r.n.ch || []).filter(n => !wide || n.t !== 'f') : [];
+    const cs = flatCards(ns), tot = cs.length; if (!tot && !wide) return '';
+    /* والمفتوحُ الذي لا بطائقَ له خارج مجلداته: دائرتُه باقيةٌ فارغةً بلا كبسولة (لا مراحلَ تُعرض) */
+    if (!tot) return `<span class="pg-cnt pg-cnt--void" title="${esc(state.lang === 'en' ? '0 of 0 concepts done' : 'أنجزت 0 من 0 مفهوم')}"><span class="pg-ring"><span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span></span></span>`;
     const a = x3Ans(ns), en = state.lang === 'en';
     /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
        الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
