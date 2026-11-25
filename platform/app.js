@@ -10897,18 +10897,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   let pkQtT = 0;
   function pkQtShow(id) {
     const st = document.querySelector(`#cm-body .pk-fstrip.pk-lg[data-pkid="${CSS.escape(id)}"]`); if (!st) return;
-    clearTimeout(pkQtT); st.querySelectorAll('.pg-face.is-qtroom').forEach(f => f.classList.remove('is-qtroom'));
+    clearTimeout(pkQtT); st.querySelectorAll('.pg-face.is-qtroom').forEach(f => { f.classList.remove('is-qtroom'); f.style.paddingBottom = ''; });
     const cs = [...st.querySelectorAll('.pg-face > .pg-cnt--stg')].filter(c => c.offsetParent && !c.classList.contains('is-peek'));
     if (!cs.length) return;
     cs.forEach(c => pkCapPlace(c));
     /* الوجوهُ التي ستُغطّي كبسولتُها اسمَها وحدَها تطول (وما جاورها في صفّه يطول بطولها) */
     const tf = cs.filter(c => !c.closest('.pg-box').classList.contains('is-wide') && !c.classList.contains('is-gl') && !c.classList.contains('is-gd')).map(c => c.parentElement);
-    const room = on => tf.forEach(f => f.classList.toggle('is-qtroom', on));
+    /* وبقدر ما ينقصها فقط: الكبسولةُ تنزل تحت الدائرة إن كان تحتها ‎26px‎ (‎pkCapSide‎)، فيُزاد الفرقُ وحده (طلبُ صاحب الموقع: «الزيادة عالية») */
+    const need = new Map(tf.map(f => { const c = f.querySelector(':scope > .pg-cnt--stg'), fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetHeight ? fr.height / f.offsetHeight : 1;
+      return [f, Math.max(0, Math.ceil(30 - (fr.bottom - cr.bottom) / (k || 1))) + parseFloat(getComputedStyle(f).paddingBottom || 0)]; }));
+    const room = on => tf.forEach(f => { f.classList.toggle('is-qtroom', on); f.style.paddingBottom = on ? need.get(f) + 'px' : ''; });
     const go = () => {
-      cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }, i * 60));
+      cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; if (!c.parentElement.classList.contains('is-qtroom')) pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }, i * 60));   /* ما طال وجهُه موضعُه محسوبٌ على طوله الجديد — لا يُعاد وهو يطول */
       pkQtT = setTimeout(() => {
         cs.forEach(c => { if (c.isConnected && c.classList.contains('is-stclk') && !c.matches(':hover')) pkStgShut(c); });
-        pkQtT = setTimeout(() => st.querySelectorAll('.pg-face.is-qtroom').forEach(f => f.classList.remove('is-qtroom')), 900);
+        pkQtT = setTimeout(() => st.querySelectorAll('.pg-face.is-qtroom').forEach(f => { f.classList.remove('is-qtroom'); f.style.paddingBottom = ''; }), 900);
       }, 10000);
     };
     if (!tf.length || bkReduce()) { go(); return; }

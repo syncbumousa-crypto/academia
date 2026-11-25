@@ -20563,4 +20563,3 @@ html[data-theme="dark"] .fmn-row--del.is-arm > svg { color: #fff; }
 .fmn-ctl b { min-width: 38px; text-align: center; font: 700 11px "IBM Plex Sans Arabic", sans-serif; color: var(--f-gold); font-variant-numeric: tabular-nums; }
 /* (طلبُ صاحب الموقع) عند التبديل بين الكمية والزمن: يطول صفُّ المجلدات ليتّسع تحت دوائرها لكبسولاتها، ثمّ يعود */
 #cm-body .pk-fstrip .pg-face { transition: padding-bottom .38s cubic-bezier(.22, 1, .36, 1); }
-#cm-body .pk-fstrip .pg-face.is-qtroom { padding-bottom: 34px; }
