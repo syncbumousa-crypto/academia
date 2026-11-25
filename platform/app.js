@@ -10009,7 +10009,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والنقرُ في أيّ مكانٍ آخر يطوي ما فُتح بالنقر. وفي الالتقاط على ‎window‎ ليسبق معالجاتِ الشريط والوثيقة */
   /* (طلبُ صاحب الموقع) ودوائرُ الشجرة (البنك وجوفُ الملخّص) مثلُها: دائرةُ المراحل نفسُها (‎x3-dot--stg‎)، والنقرُ عليها يفتح الكبسولةَ
      نفسَها طافيةً فوق الدائرة (‎pk-stfloat‎) — تُبنى من أعدادها وتنبسط بالإمالة نفسِها، وتُزال بعد أن تنطوي */
+  /* (طلبُ صاحب الموقع) وما فُتح بالنقر يبقى مفتوحًا ‎13‎ ثانيةً ثمّ ينطوي وحده — وإن كان المؤشّرُ فوقه حينها انتظر حتى يغادره */
+  const pkStgAuto = x => {
+    clearTimeout(x._stTm);
+    x._stTm = setTimeout(() => {
+      if (!x.classList.contains('is-stclk')) return;
+      if (x.matches(':hover')) x.addEventListener('pointerleave', () => { if (x.classList.contains('is-stclk')) pkStgShut(x); }, { once: true });
+      else pkStgShut(x);
+    }, 13000);
+  };
   const pkStgShut = x => {
+    clearTimeout(x._stTm);
     x.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(y => y !== x); pkStgWake(x);
     if (x._ct && x._sh) {   /* وتعود المساحةُ إلى مكانها مع انطواء الكبسولة (بتأخيره نفسِه) */
       const tr = 'transform .46s cubic-bezier(.22, 1, .36, 1) .34s';
@@ -10033,7 +10043,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       x._ct = ct; x._l0 = r.left; x._sh = sh;
       if (sh) { const tr = 'transform .46s cubic-bezier(.22, 1, .36, 1)'; ct.style.transition = tr; ct.style.transform = `translateX(${-sh}px)`; x.style.transition = tr.replace('transform', 'left'); x.style.left = (r.left - sh) + 'px'; }
     }
-    x.classList.add('is-peek', 'is-stclk'); pkStgWake(x);
+    x.classList.add('is-peek', 'is-stclk'); pkStgWake(x); pkStgAuto(x);
     return x;
   }
   window.addEventListener('click', e => {
@@ -10044,7 +10054,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!c) return;
     e.preventDefault(); e.stopImmediatePropagation();
     if (c.classList.contains('is-peek')) pkStgShut(c);
-    else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }
+    else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); pkStgAuto(c); }
   }, true);
   /* والطافيةُ تُطوى إن تمرّرت الصفحةُ تحتها (موضعُها ثابتٌ في الشاشة) */
   window.addEventListener('scroll', () => document.querySelectorAll('.pk-stfloat.is-peek').forEach(pkStgShut), { capture: true, passive: true });
