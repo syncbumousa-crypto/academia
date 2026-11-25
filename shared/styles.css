@@ -11187,6 +11187,30 @@ body.is-guest .side-logout { display: none; }
   caret-color: var(--c-ink);
 }
 .acct-btns { display: flex; gap: 10px; margin-top: 22px; }
+/* ===== المساعدُ الذكيّ (ROADMAP-MCP · الشكل ٢): زرّان بألوان العلامة ===== */
+.ai-sec { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
+.ai-t { margin: 0; font-size: 13px; font-weight: 700; color: var(--c-ink); }
+.ai-d { margin: 2px 0 12px; font-size: 12px; line-height: 1.7; color: var(--c-ink-soft); }
+.ai-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ai-btn { display: flex; align-items: center; justify-content: center; gap: 8px; font: inherit; font-size: 13px; font-weight: 700; border: 0; border-radius: 12px; padding: 11px 10px; cursor: pointer; transition: filter .15s, box-shadow .15s; }
+.ai-btn svg { width: 18px; height: 18px; flex: none; }
+.ai-btn:hover { filter: brightness(1.08); }
+.ai-btn--claude { background: #D97757; color: #fff; }
+.ai-btn--chatgpt { background: #0d0d0d; color: #fff; }
+html[data-theme="dark"] .ai-btn--chatgpt { background: #f2f2f2; color: #0d0d0d; }
+.ai-btn.is-open { box-shadow: 0 0 0 3px rgba(44, 94, 101, .35); }
+.ai-how { margin-top: 10px; padding: 12px 14px; border-radius: 12px; background: var(--c-kfupm-soft, #f2f5f5); font-size: 12px; line-height: 1.75; color: var(--c-ink); }
+.ai-how ol { margin: 0 0 8px; padding-inline-start: 18px; }
+.ai-how p { margin: 8px 0 0; color: var(--c-ink-soft); }
+.ai-url { display: flex; gap: 6px; }
+.ai-url input { flex: 1; min-width: 0; font: 11.5px ui-monospace, Menlo, monospace; padding: 7px 9px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--c-ink); }
+.ai-url button { flex: none; font: inherit; font-weight: 700; font-size: 12px; border: 0; border-radius: 9px; padding: 0 14px; background: var(--c-kfupm); color: #fff; cursor: pointer; }
+.ai-done { margin-top: 8px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-ink-soft); background: var(--c-kfupm-soft, #f2f5f5); border-radius: 12px; padding: 7px 10px; }
+.ai-done__ic { display: grid; width: 16px; height: 16px; }
+.ai-done__ic svg { width: 16px; height: 16px; }
+.ai-done__ic--claude { color: #D97757; }
+.ai-off { margin-inline-start: auto; font: inherit; font-size: 12px; font-weight: 700; border: 0; background: none; color: #c0564b; cursor: pointer; padding: 0; }
+.ai-off:disabled { opacity: .5; }
 .acct-btn {
   flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
   padding: 11px 12px; border-radius: 12px; cursor: pointer;
