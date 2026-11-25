@@ -93,6 +93,28 @@
   try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
 
   /* ============================================================
+     الدرجُ أجزاءٌ لا كتلةٌ واحدة (ROADMAP-DATA-INTEGRITY م٣)
+     ============================================================
+     كانت الحالُ كلُّها نصًّا واحدًا (‎academia2:v1‎) يُكتب كلُّه في كلّ حفظة —
+     ٢ ميجا للخارج. فخطأٌ واحدٌ يمحو كلَّ شيء، وكلُّ حفظةٍ تكتب ما لم يتغيّر.
+     فصارت أجزاءً، كلٌّ في مفتاحه (‎academia2:p:<الجزء>‎):
+       · ‎core‎       ⇐ النواة (‎CORE_F‎: الأترامُ والمكتبةُ والتواريخُ والحساب) جزءٌ واحد،
+                        فلا تتفرّق: الترمُ ومكتبتُه يُكتبان معًا أو لا يُكتبان
+       · ‎c:<المادّة>‎ ⇐ مادّةٌ مادّة من ‎cinfo‎ — وهي الثقيلة
+       · وكلُّ مفتاحٍ آخرَ في الحال جزءُ نفسه
+     ولا يُكتب إلّا الجزءُ الذي تبدّل نصُّه. وفهرسُ الأجزاء (‎MF_KEY‎) يُكتب **آخرًا**:
+     فما يذكره الفهرسُ موجودٌ دائمًا، وجزءٌ كُتب ولم يُذكر بعدُ لا يُقرأ.
+
+     ===== والانتقالُ في أوّل حفظة، ولا يُمسّ القديم =====
+     الدرجُ القديمُ يبقى ثلاثين يومًا لقطةً للرجوع، ثمّ يُحذف. وإن لم تتّسع السعةُ
+     للاثنين معًا رُدّ ما كُتب من الأجزاء وبقي القديمُ يعمل كما كان — ويُعاد في الإقلاع التالي. */
+  const MF_KEY = 'academia2:mf:v1';
+  const PART = k => 'academia2:p:' + k;
+  const LEGACY_DAYS = 30;
+  let partsMode = false, partsTried = false, partsMf = '', partsLegacyUntil = 0;
+  const partsLast = new Map();          /* الجزء ⇐ آخرُ نصٍّ كُتب له (أو قُرئ) */
+
+  /* ============================================================
      كاتبٌ واحدٌ للدرج — ختمُ الكتابة (ROADMAP-DATA-INTEGRITY م١)
      ============================================================
      كلُّ تبويبٍ يحفظ الحالَ كلَّها من ذاكرته. فكان التبويبُ القديم يكتب فوق ما
@@ -121,6 +143,9 @@
   }
   /* كتابةُ الترحيلات عند الإقلاع تمرّ بالختم كذلك */
   function rawSave() {
+    /* وفي الأجزاء لا يُكتب ههنا: مُجزِّئُ الحال يُعرَّف بعد هذا السطر بكثير، والحفظةُ
+       الأولى بعد الإقلاع تكتب ما رحّلته الترحيلات — وهي تقع في كلّ إقلاع */
+    if (partsMode) return;
     try { const body = JSON.stringify(state); if (wvClaim()) localStorage.setItem(LS_KEY, body); } catch (e) {}
   }
   /* ===== والمتقادمُ يُحدِّث نفسه — بلا محوٍ ولا مفاجأة (قرارُ صاحب الموقع) =====
@@ -167,7 +192,43 @@
     if (document.visibilityState === 'visible' && wvStale) wvGoStale('show');
   });
 
-  {
+  /* ===== أجزاءٌ إن وُجد فهرسُها ===== */
+  let bootMf = null, bootPartsBad = '';
+  try { bootMf = JSON.parse(localStorage.getItem(MF_KEY) || 'null'); } catch (e) { bootMf = null; bootPartsBad = 'mf'; }
+  if (bootMf && Array.isArray(bootMf.keys)) {
+    const st = {}, strs = [];
+    let total = 0;
+    for (const k of bootMf.keys) {
+      let raw = null;
+      try { raw = localStorage.getItem(PART(k)); } catch (e) { raw = null; }
+      /* جزءٌ يذكره الفهرسُ وغاب، أو تلف: تجميدٌ كالدرج التالف — ولا يُكتب فوق شيء */
+      if (raw == null) { bootPartsBad = 'missing:' + k; break; }
+      let v;
+      try { v = JSON.parse(raw); } catch (e) { bootPartsBad = 'bad:' + k; break; }
+      total += raw.length;
+      partsLast.set(k, raw);
+      if (k === 'core') Object.assign(st, v);
+      else if (k.indexOf('c:') === 0) (st.cinfo || (st.cinfo = {}))[k.slice(2)] = v;
+      else st[k] = v;
+      strs.push(JSON.stringify(k) + ':' + raw);
+    }
+    partsMf = JSON.stringify(bootMf.keys);
+    partsLegacyUntil = bootMf.legacyUntil || 0;
+    partsMode = true;
+    bootRaw = total;
+    if (bootPartsBad) {
+      state = {}; stateFrozen = true; bootRead = 'bad';
+      try { if (!localStorage.getItem(RAW_KEY)) localStorage.setItem(RAW_KEY, JSON.stringify({ parts: bootMf, why: bootPartsBad })); } catch (e2) {}
+    } else {
+      state = st; bootRead = 'ok';
+      bootRawStr = total > 300000 ? '{' + strs.join(',') + '}' : '';
+      /* واللقطةُ القديمةُ تُحذف بعد مهلتها */
+      if (bootMf.legacyUntil && Date.now() > bootMf.legacyUntil) { try { localStorage.removeItem(LS_KEY); } catch (e) {} }
+    }
+  } else if (bootPartsBad) {
+    /* فهرسٌ تالف: لا يُعرف ما الأجزاء — تجميد */
+    state = {}; stateFrozen = true; bootRead = 'bad'; partsMode = true;
+  } else {
     let raw = null;
     try { raw = localStorage.getItem(LS_KEY); } catch (e) { raw = null; }
     bootRawStr = raw || '';
@@ -175,6 +236,7 @@
     if (raw == null || raw === '') {
       state = {};
       bootRead = 'new';
+      partsMode = true;                /* متصفّحٌ جديد: يبدأ أجزاءً */
     } else {
       try {
         state = JSON.parse(raw) || {};
@@ -1207,6 +1269,81 @@
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
+  /* ===== تقطيعُ الحال إلى أجزائها (م٣) =====
+     قواعدُ ‎saveTrim‎ نفسُها: ما بلغ الخادمَ من المساهمات يُسقط، وسجلُّ الاختبارات
+     وجدولةُ المذاكرة لا تُكتب متى بلغت الحساب، وما مُلئ من مصدرٍ لا يُكتب. */
+  function partTrim(k, v) {
+    if (SRC_FILL.indexOf(k) < 0) return v;
+    return (this && this.ref && this.ref.pid) ? undefined : v;
+  }
+  function partsOf() {
+    const out = new Map();
+    const core = {};
+    CORE_F.forEach(k => { if (state[k] !== undefined) core[k] = state[k]; });
+    out.set('core', JSON.stringify(core, partTrim));
+    Object.keys(state).forEach(k => {
+      if (CORE_F.indexOf(k) >= 0) return;
+      const v0 = saveTrim.call(state, k, state[k]);
+      if (v0 === undefined) return;
+      if (k === 'cinfo') {
+        Object.keys(v0 || {}).forEach(code => {
+          const t = JSON.stringify(v0[code], partTrim);
+          if (t !== undefined) out.set('c:' + code, t);
+        });
+        return;
+      }
+      const t = JSON.stringify(v0, partTrim);
+      if (t !== undefined) out.set(k, t);
+    });
+    return out;
+  }
+  /* يُكتب ما تبدّل، ثمّ الفهرس، ثمّ يُحذف ما خرج منه — بهذا الترتيب لا يذكر الفهرسُ غائبًا */
+  function writeParts(parts, mfExtra) {
+    parts.forEach((str, k) => {
+      if (partsLast.get(k) !== str) { localStorage.setItem(PART(k), str); partsLast.set(k, str); }
+    });
+    const keys = Array.from(parts.keys());
+    const ks = JSON.stringify(keys);
+    if (ks !== partsMf || mfExtra) {
+      const mf = { v: 1, keys, at: Date.now() };
+      if (mfExtra) Object.assign(mf, mfExtra);
+      else if (partsLegacyUntil) mf.legacyUntil = partsLegacyUntil;
+      localStorage.setItem(MF_KEY, JSON.stringify(mf));
+      partsMf = ks;
+    }
+    Array.from(partsLast.keys()).forEach(k => {
+      if (!parts.has(k)) { try { localStorage.removeItem(PART(k)); } catch (e) {} partsLast.delete(k); }
+    });
+  }
+  /* الانتقالُ من الكتلة إلى الأجزاء — مرّةً في الجلسة، في أوّل حفظة */
+  function partsMigrate() {
+    partsTried = true;
+    if (stateFrozen) return;
+    const parts = partsOf();
+    if (!wvClaim()) return;
+    partsLegacyUntil = Date.now() + LEGACY_DAYS * 86400000;
+    try {
+      writeParts(parts, { legacyUntil: partsLegacyUntil });
+      partsMode = true;
+      bootMark('mf:on:' + parts.size);
+    } catch (e) {
+      /* لم تتّسع السعةُ للاثنين: يُردّ ما كُتب، ويبقى القديمُ يعمل */
+      Array.from(partsLast.keys()).forEach(k => { try { localStorage.removeItem(PART(k)); } catch (e2) {} });
+      partsLast.clear(); partsMf = ''; partsLegacyUntil = 0;
+      try { localStorage.removeItem(MF_KEY); } catch (e2) {}
+      bootMark('mf:quota');
+    }
+  }
+  /* حجمُ الدرج كما هو على القرص — للفاحص والدفتر */
+  window.acDrawerSize = () => {
+    let n = 0;
+    try {
+      if (partsMode) partsLast.forEach(v => { n += v.length; });
+      else n = (localStorage.getItem(LS_KEY) || '').length;
+    } catch (e) {}
+    return n;
+  };
+
   let saveBad = false, lastCore = '';
   let wvHidAt = 0, wvLate = false;   /* متى اختفى التبويب · وحفظٌ أُجِّل إلى ظهوره */
   document.addEventListener('visibilitychange', () => {
@@ -1261,9 +1398,26 @@
     try {
       dropCinfo = cinfoSafe();     /* يُسأل مرّةً في الحفظة لا لكلّ مفتاح */
       /* يُسلسَل أوّلًا ثمّ يُطالَب بالدور ثمّ يُكتب: فبين فحص الختم والكتابة لا شيءَ إلّا الكتابة */
-      const body = JSON.stringify(state, saveTrim);
-      if (!wvClaim()) return;
-      localStorage.setItem(LS_KEY, body);
+      if (!partsMode && !partsTried) partsMigrate();
+      if (partsMode) {
+        const parts = partsOf();
+        if (!wvClaim()) return;
+        try { writeParts(parts); }
+        catch (eQ) {
+          /* ضاقت السعة: اللقطةُ القديمةُ أوّلُ ما يُترك، ثمّ يُعاد مرّةً */
+          let had = false;
+          try { had = localStorage.getItem(LS_KEY) != null; } catch (e) {}
+          if (!had) throw eQ;
+          localStorage.removeItem(LS_KEY);
+          partsLegacyUntil = 0;
+          bootMark('mf:legacy-dropped');
+          writeParts(parts, {});
+        }
+      } else {
+        const body = JSON.stringify(state, saveTrim);
+        if (!wvClaim()) return;
+        localStorage.setItem(LS_KEY, body);
+      }
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
@@ -45546,9 +45700,7 @@ void main() {
      ولا يُبنى عليه شيءٌ في المنطق — أداةُ نظرٍ لا غير */
   window.acCheck = function () {
     const L = [];
-    let raw = '';
-    try { raw = localStorage.getItem(LS_KEY) || ''; } catch (e) {}
-    const mb = raw.length * 2 / 1048576;
+    const mb = window.acDrawerSize() * 2 / 1048576;
     L.push('١ الحصّة   : ' + mb.toFixed(2) + ' م.ب' + (mb > 6 ? '  ← عاليةٌ! الحدُّ 10 مشتركة' : '  سليم'));
     L.push('٢ المفتاح  : record = ' + (xtS ? xtS.record : '(لم تُفتح النافذة بعد ⇒ ' + (state.xtS ? state.xtS.record : 'لا محفوظ') + ')'));
     L.push('٣ السجلات  : srs = ' + Object.keys(state.srs || {}).length

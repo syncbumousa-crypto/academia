@@ -100,7 +100,8 @@
   const saveApp = s => {
     if (appBad || !s) { toast('لم يُكتب شيء — الدرج غير مقروء'); return false; }
     let cur = null;
-    try { cur = JSON.parse(localStorage.getItem(LS_APP) || 'null'); } catch (e) { cur = null; }
+    /* ونسخةُ النواة لا الدرج: الدرجُ صار أجزاءً (م٣)، والنسخةُ موجودةٌ في الشكلين */
+    try { cur = JSON.parse(localStorage.getItem('academia2:core:v1') || localStorage.getItem(LS_APP) || 'null'); } catch (e) { cur = null; }
     if (cur && (cur.terms || []).length && !(s.terms || []).length) {
       toast('مُنعت كتابة كانت ستمحو الأترام — حدّث الصفحة');
       return false;

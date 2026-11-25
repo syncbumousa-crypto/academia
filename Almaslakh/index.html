@@ -25,11 +25,11 @@
   <!-- الجلدُ قبل أوّل رسمة (طلبُ صاحب الموقع): كانت الصفحةُ تُرسم فاتحةً حتى يحمّل المحرّكُ الكبير فيُطبّق الداكن.
        ‏‎ac.theme‎ يكتبه ‎applyTheme‎ — وقبل أن يُكتب أوّلَ مرّة يُقرأ من الحالة المحفوظة -->
   <script>
-    try { var t = localStorage.getItem('ac.theme'); if (!t) t = (JSON.parse(localStorage.getItem('academia2:v1') || '{}') || {}).theme;
+    try { var t = localStorage.getItem('ac.theme'); if (!t) t = JSON.parse(localStorage.getItem('academia2:p:theme') || 'null') || (JSON.parse(localStorage.getItem('academia2:v1') || '{}') || {}).theme;
       if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
   </script>
   <script>
-    window.AC_MINV = 1517;
+    window.AC_MINV = 1518;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
