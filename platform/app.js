@@ -10049,7 +10049,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   window.addEventListener('click', e => {
     const c = e.target.closest && e.target.closest('.pg-cnt--stg');
     const td = !c && e.target.closest && e.target.closest('.x3-dot--stg');
-    document.querySelectorAll('.pg-cnt--stg.is-stclk').forEach(x => { if (x !== c) pkStgShut(x); });
+    /* (طلبُ صاحب الموقع) فتحُ دائرةٍ لا يطوي المفتوحةَ قبلها — النقرُ خارج الدوائر وحده يطويها */
+    if (!c && !td) document.querySelectorAll('.pg-cnt--stg.is-stclk').forEach(pkStgShut);
     if (td) { e.preventDefault(); e.stopImmediatePropagation(); pkStgFloat(td); return; }
     if (!c) return;
     e.preventDefault(); e.stopImmediatePropagation();
