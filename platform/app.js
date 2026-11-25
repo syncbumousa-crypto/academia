@@ -10047,6 +10047,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (/^#memdemo(-off)?$/.test(hh)) history.replaceState(null, '', location.pathname + location.search);
     pkStgDemo = localStorage.getItem('ac.memdemo') === '1';
   } catch (e) { }
+  /* وإن كُتب في رابط صفحةٍ مفتوحة (تغيّرُ العلامة وحدَه لا يعيد تحميلها): تُحفظ العلامةُ ثمّ يُعاد التحميل فتُرسم الكبسولاتُ بها */
+  window.addEventListener('hashchange', () => {
+    const hh = location.hash; if (!/^#memdemo(-off)?$/.test(hh)) return;
+    try { if (hh === '#memdemo') localStorage.setItem('ac.memdemo', '1'); else localStorage.removeItem('ac.memdemo'); history.replaceState(null, '', location.pathname + location.search); } catch (e) { }
+    location.reload();
+  });
   let pkBoxMine = false;
   const PK_STG_DEMO = [[2, 2, 3, 4, 3, 2, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0], [10, 0, 1, 2, 0, 0, 0, 0], [2, 1, 9, 1, 0, 0, 0, 0], [1, 8, 1, 1, 0, 0, 0, 1],
     [0, 0, 1, 4, 4, 3, 2, 0], [0, 0, 0, 2, 2, 2, 3, 6], [1, 0, 0, 0, 0, 1, 3, 10], [0, 0, 0, 0, 0, 0, 0, 1], [7, 0, 0, 0, 0, 0, 0, 7], [2, 0, 4, 0, 1, 0, 1, 6], [1, 5, 5, 1, 1, 0, 0, 0]];
