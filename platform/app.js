@@ -10191,16 +10191,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* زمنُ البطاقة الفعليّ (طلبُ صاحب الموقع): زمنُها، إلّا أن يقول مجلدُها غيرَ ذلك — «موحَّد» يعطي كلَّ بطائقه زمنَه،
      و«يُكمَل الفارغ» يعطي ما لا زمنَ له زمنَ المجلد (ويرثه ما تحته من مجلدات). يُبنى مرّةً لكلّ رسم */
   let pkTmMap = null;
+  /* (طلبُ صاحب الموقع) الوضعُ الطبيعيُّ للمجلد: زمنُ كلّ مفهوم، ويُكمَل الفارغُ بـ‎60‎ ثانية — فما لم يُختر له غيرُه (‎tmm‎ غائب) يرث ذلك.
+     و«كما حُدِّد» صار خيارًا يُكتب (‎tmm:'own'‎) */
+  const PK_TM_FILL = 60;
   const pkTmBuild = () => { const m = new Map();
     const walk = (ns, fill) => (ns || []).forEach(n => {
       if (n.t === 'f') {
-        if (n.tmm === 'each') { flatCards(n.ch || []).forEach(c => m.set(c, n.tmv || 0)); return; }
-        walk(n.ch, n.tmm === 'fill' ? (n.tmv || 0) : fill); return;
+        if (n.tmm === 'each') { flatCards(n.ch || []).forEach(c => m.set(c, n.tmv ?? PK_TM_FILL)); return; }
+        walk(n.ch, n.tmm === 'fill' ? (n.tmv ?? PK_TM_FILL) : n.tmm === 'own' ? 0 : fill); return;
       }
       if (n.ch && n.ch.length) walk(n.ch, fill);
       m.set(n, n.tm || fill || 0);
     });
-    walk(pkBoxDeck || [], 0); return m; };
+    walk(pkBoxDeck || [], PK_TM_FILL); return m; };
   const pkTm = n => { if (!pkTmMap) pkTmMap = pkTmBuild(); return pkTmMap.has(n) ? pkTmMap.get(n) : (n.tm || 0); };
   const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += pkTm(n); }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
   const pkStgC = ns => pkBoxId != null && pkQt[pkBoxId] ? pkStgTm(ns) : null;
@@ -18087,9 +18090,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ? { ren: 'Rename folder', look: 'Folder icon', tm: 'Folder concepts time', del: 'Delete folder', conf: 'Press again to confirm', back: 'Back', own: 'Each concept as set', fill: 'Each concept, fill the empty', each: 'One time for all concepts', fillQ: 'Per empty concept', eachQ: 'Per concept', s: 's' }
     : { ren: 'تعديل اسم المجلد', look: 'أيقونة المجلد', tm: 'زمن مفاهيم المجلد', del: 'حذف المجلد', conf: 'اضغط ثانية للتأكيد', back: 'رجوع', own: 'زمن كل مفهوم كما حدد', fill: 'زمن كل مفهوم، ويكمل الفارغ', each: 'زمن موحد لكل المفاهيم', fillQ: 'للمفهوم الفارغ', eachQ: 'لكل مفهوم', s: 'ث' };
   /* (طلبُ صاحب الموقع) زمنُ مفاهيم المجلد: كما حُدِّد لكلّ مفهوم (الأصل) · ويُكمَل الفارغُ بزمن (‎tmm:'fill'‎) · أو زمنٌ واحدٌ لكلّ مفهوم (‎tmm:'each'‎)، و‎tmv‎ بالثواني */
-  const fmnTimeHTML = f => { const X = fmnTx(), md = f.tmm || 'own';
+  const fmnTimeHTML = f => { const X = fmnTx(), md = f.tmm || 'fill';
     return ['own', 'fill', 'each'].map(k => `<div class="fmn-rd${md === k ? ' on' : ''}" role="radio" tabindex="0" aria-checked="${md === k}" data-tmm="${k}"><i></i><span>${esc(X[k])}</span></div>`
-      + (md === k && k !== 'own' ? `<div class="fmn-step"><span>${esc(k === 'each' ? X.eachQ : X.fillQ)}</span><span class="fmn-ctl"><button type="button" data-tmd="1" aria-label="+">+</button><b>${f.tmv || 0} ${esc(X.s)}</b><button type="button" data-tmd="-1" aria-label="−">−</button></span></div>` : '')).join(''); };
+      + (md === k && k !== 'own' ? `<div class="fmn-step"><span>${esc(k === 'each' ? X.eachQ : X.fillQ)}</span><span class="fmn-ctl"><button type="button" data-tmd="1" aria-label="+">+</button><b>${f.tmv ?? PK_TM_FILL} ${esc(X.s)}</b><button type="button" data-tmd="-1" aria-label="−">−</button></span></div>` : '')).join(''); };
   /* القائمةُ صفحات: الأولى صفوفٌ كقوائم الموقع، و«أيقونة المجلد» و«زمن مفاهيم المجلد» يُدخَل إليهما وفوقهما زرُّ رجوع.
      و«تعديل اسم المجلد» لا صفحةَ له: يُكتب الاسمُ في مكانه فوق (طلبُ صاحب الموقع) */
   function fmnHTML(f, tm) {
@@ -18315,13 +18318,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const rd = e.target.closest('.fmn-rd');
     if (rd) {
       const md = rd.dataset.tmm;
-      if (md === 'own') { delete r.n.tmm; delete r.n.tmv; }
-      else { if (!r.n.tmm) r.n.tmv = 180; r.n.tmm = md; }
+      if (md === 'fill' && (r.n.tmv ?? PK_TM_FILL) === PK_TM_FILL) { delete r.n.tmm; delete r.n.tmv; }   /* الطبيعيُّ لا يُكتب */
+      else r.n.tmm = md;
       save(); fmnTimeSync(box, r.n); refit(); return;
     }
     const td = e.target.closest('[data-tmd]');
     if (td) {
-      r.n.tmv = Math.max(10, Math.min(5999, (r.n.tmv || 0) + 10 * +td.dataset.tmd));   /* بالثواني، عشرًا عشرًا */
+      r.n.tmm = r.n.tmm || 'fill'; r.n.tmv = Math.max(10, Math.min(5999, (r.n.tmv ?? PK_TM_FILL) + 10 * +td.dataset.tmd));   /* بالثواني، عشرًا عشرًا */
       save(); fmnTimeSync(box, r.n); return;
     }
 
