@@ -13895,6 +13895,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* مرحلةُ كلّ مفهومٍ في العرض المنشور (لون مربّع الصحّ) — تُحسب مرّةً للرسمة: أدنى مراحل وجوهه غيرِ «الجديدة» */
   let KTSTG = null;
+  /* (بلاغُ صاحب الموقع) رقمُ المفهوم ثابتٌ في كلّ عرض: رقمُه في الجدول (بطائقُ المجلد المفتوح بترتيبها، ووحدَه إن كان «وحدَه»)،
+     لا موضعُه في رزمةٍ فُصلت أو في تصفية — والأوراقُ واللوحُ يأخذانه من هنا */
+  const KTNUM = new Map();
   function ktViewHTML(id, sel, v, folds, pack, ro) {
     KTRO = !!ro;
     try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; KTSTG = null; }
@@ -13906,6 +13909,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (ro) { KTSTG = new Map(); pkStgEach(host.arr, (n, i) => { if (!i) return; const q = KTSTG.get(n.id); if (q == null || i < q) KTSTG.set(n.id, i); }); }
     /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
     let deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
+    { const base = deep || (sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host)); let q = 0; base.forEach(x => { if (x.n) KTNUM.set(x.n.id, ++q); }); }
     const sf = pkStgFilt[id];
     if (sf && sf.sel !== sel) delete pkStgFilt[id];
     else if (sf && deep) {
@@ -13948,7 +13952,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const ja = !!(n.ja && k && !hb.has(n.id)), jb = !!(nx && nx.ja && !hb.has(nx.id));
           if (ja) jn++;
           const cls = (n.ln ? ' kt-lnr--' + n.ln : '') + (n.clr ? ' kt-clr--' + n.clr : '') + (n.nr ? ' kt-nr' : '') + (ja ? ' kt-ja' : '') + (jb ? ' kt-jb' : '') + (!ro && ktRow && ktRow.id === n.id ? ' is-rowsel' : '');
-          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0">${ro ? ktPill(n, ++k, used.has(n.id)) : `<span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span>`}</td>`
+          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0">${(++k, ro) ? ktPill(n, KTNUM.get(n.id) || k, used.has(n.id)) : `<span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${KTNUM.get(n.id) || k}</span>`}</td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
           + `</tr>`;   /* (طلبُ صاحب الموقع) لا عمودَ للصحّ بعد اليوم: الصحُّ في حبّة الرقم */
@@ -14157,8 +14161,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const layers = CARDS.map((c, i) => {
       const d = document.createElement('div'); d.className = 'pp-layer';
       d.innerHTML = `<span class="pp-num"></span><div class="pp-word"></div>` + ptTab(0);
-      d.querySelector('.pp-num').textContent = pad(i + 1) + ' / ' + pad(N);
-      ptPaint(d.querySelector('.pp-pill'), c, i + 1);
+      d.querySelector('.pp-num').textContent = String(KTNUM.get(c.id) || i + 1);
+      ptPaint(d.querySelector('.pp-pill'), c, KTNUM.get(c.id) || i + 1);
       const w = d.querySelector('.pp-word'); w.textContent = c.f || ''; fit(w, c.f || '', [16, 70]);
       pile.appendChild(d); return d;
     });
@@ -14180,9 +14184,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const c = CARDS[idx], num = pad(order.indexOf(idx) + 1) + ' / ' + pad(N);
       all('.pp-word').forEach(el => { el.textContent = c.f || ''; fit(el, c.f || '', [16, 70]); });
       all('.pp-mean').forEach(el => { el.textContent = c.b || ''; fit(el, c.b || '', [9, 60]); });
-      all('.pp-num').forEach(el => { el.textContent = pad(idx + 1) + ' / ' + pad(N); });
+      all('.pp-num').forEach(el => { el.textContent = String(KTNUM.get(c.id) || idx + 1); });
       all('.pp-ok').forEach(el => el.classList.toggle('on', !!c.ok));
-      ptPaint(tabF.querySelector('.pp-pill'), c, idx + 1); ptPaint(tabB.querySelector('.pp-pill'), c, idx + 1);
+      const cn = KTNUM.get(c.id) || idx + 1; ptPaint(tabF.querySelector('.pp-pill'), c, cn); ptPaint(tabB.querySelector('.pp-pill'), c, cn);
       card.setAttribute('aria-label', showingBack() ? (c.b || '') : (c.f || ''));
     }
     /* الفيزياء — كما في المرجع */
@@ -14303,7 +14307,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (tk) {   /* مربّعُ الصحّ في اللسان: يعلّم المفهومَ وحدَه، لا يقلب الورقةَ ولا يسحبها */
         e.stopPropagation(); const c = CARDS[idx], m = state.ktok || (state.ktok = {}), k = recId(c);
         if (m[k]) delete m[k]; else m[k] = 1; save(); render();
-        const lp = layers[idx] && layers[idx].querySelector('.pp-pill'); if (lp) ptPaint(lp, c, idx + 1);
+        const lp = layers[idx] && layers[idx].querySelector('.pp-pill'); if (lp) ptPaint(lp, c, KTNUM.get(c.id) || idx + 1);
         return;
       }
       if (ro) return;
@@ -14488,7 +14492,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           + (n.pos ? ` data-rx="${+n.pos.x || 0}" data-ry="${+n.pos.y || 0}" style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
           + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
-          + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + kTab(n, ci) + `</div>`).join('')
+          + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + kTab(n, (KTNUM.get(n.id) || ci + 1) - 1) + `</div>`).join('')
       + links.filter(l => l.label).map(l => `<div class="kcv-lab" data-klab="${esc(l.id)}">${esc(l.label)}</div>`).join('')
       + `<i class="kcv-guide kcv-guide--v" aria-hidden="true"></i><i class="kcv-guide kcv-guide--h" aria-hidden="true"></i>`
       + `</div>`
