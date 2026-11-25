@@ -20504,3 +20504,5 @@ html[data-theme="dark"] #cm-body .pk-varc__vi.on { color: #d4b36a; }
 #cm-body .pk-varc__vi:focus-visible { outline: 1.5px solid rgba(201, 162, 92, .7); outline-offset: 0; }
 #cm-body .pk-varc--fan:focus-visible { outline: none; }
 #cm-body .pk-varc--fan:focus-visible .pk-varc__bg { stroke: rgba(201, 162, 92, .45); }
+/* أيقونةُ الجدول معكوسةٌ بالعربيّ: عمودُ الأسماء يمينًا كما يُقرأ الجدول، وبالإنجليزيّ على حالها يسارًا (طلبُ صاحب الموقع) */
+html:not([data-lang="en"]) .pk-ic-tblv { transform: translateX(6px); }

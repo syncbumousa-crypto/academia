@@ -9783,7 +9783,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ['folder', '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>'],
     ['tree', '<circle cx="6" cy="5" r="2"/><circle cx="17" cy="11" r="2"/><circle cx="17" cy="19" r="2"/><path d="M6 7v10a2 2 0 0 0 2 2h7M6 11h9"/>'],
     ['cards', '<rect x="3" y="7.5" width="13" height="12.5" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v11"/>'],
-    ['table', '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/>'],
+    ['table', '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18"/><path class="pk-ic-tblv" d="M9 4v16"/>'],   /* عمودُ الأسماء يمينًا بالعربيّ (‎.pk-ic-tblv‎) */
   ];
   /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
