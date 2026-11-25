@@ -10270,9 +10270,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
        الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
        ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
-    if (pkBoxTime && pkQt[pkBoxId]) {
+    if (pkQt[pkBoxId]) {   /* (طلبُ صاحب الموقع) قوسُ الزمن: الكبسولاتُ بالزمن فعلًا — وما لا زمنَ لمفاهيمه دائرةٌ فارغةٌ تقول ذلك، لا عدد */
       const tt = Math.round(cs.reduce((x, n) => x + pkTm(n), 0));
-      if (tt) {
+      if (!tt) return `<span class="pg-cnt pg-cnt--void" title="${esc(en ? 'No time set for these concepts' : 'لا زمن لمفاهيم هذا المجلد')}"><span class="pg-ring"><span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span></span></span>`;
+      {
         let dt = 0;
         cs.forEach(n => { const t = pkTm(n); if (!t) return; const rs = cxRecsOf(n); dt += t * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
@@ -10888,7 +10889,36 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const id = b.dataset.pkid, t = b.dataset.pkqt === 't' ? 1 : 0; if (!id || !!pkQt[id] === !!t) return;
     if (t) pkQt[id] = 1; else delete pkQt[id];
     renderCmSection();
+    pkQtShow(id);
   });
+  /* ===== (طلبُ صاحب الموقع) بعد التبديل بين الكمية والزمن تنفتح كبسولاتُ المجلدات كلُّها ‎10‎ ثوانٍ ثمّ تنطوي =====
+     فإن كان في الشريط متّسعٌ لها (بعد دوائرها أو تحتها — مجلدٌ مفتوحٌ يطيل الصفَّ) انفتحت في الحال. وإن كانت ستغطّي الأسماءَ
+     (المجلداتُ مطويّةٌ والصفُّ قصير) طال الشريطُ عموديًّا وانفتحت معه في الوقت نفسِه، ثمّ يعود قصيرًا بعد انطوائها */
+  let pkQtT = 0;
+  function pkQtShow(id) {
+    const st = document.querySelector(`#cm-body .pk-fstrip.pk-lg[data-pkid="${CSS.escape(id)}"]`); if (!st) return;
+    clearTimeout(pkQtT); st.querySelectorAll('.pg-face.is-qtroom').forEach(f => f.classList.remove('is-qtroom'));
+    const cs = [...st.querySelectorAll('.pg-face > .pg-cnt--stg')].filter(c => c.offsetParent && !c.classList.contains('is-peek'));
+    if (!cs.length) return;
+    cs.forEach(c => pkCapPlace(c));
+    /* الوجوهُ التي ستُغطّي كبسولتُها اسمَها وحدَها تطول (وما جاورها في صفّه يطول بطولها) */
+    const tf = cs.filter(c => !c.closest('.pg-box').classList.contains('is-wide') && !c.classList.contains('is-gl') && !c.classList.contains('is-gd')).map(c => c.parentElement);
+    const room = on => tf.forEach(f => f.classList.toggle('is-qtroom', on));
+    const go = () => {
+      cs.forEach((c, i) => setTimeout(() => { if (!c.isConnected) return; pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }, i * 60));
+      pkQtT = setTimeout(() => {
+        cs.forEach(c => { if (c.isConnected && c.classList.contains('is-stclk') && !c.matches(':hover')) pkStgShut(c); });
+        pkQtT = setTimeout(() => st.querySelectorAll('.pg-face.is-qtroom').forEach(f => f.classList.remove('is-qtroom')), 900);
+      }, 10000);
+    };
+    if (!tf.length || bkReduce()) { go(); return; }
+    /* مواضعُها تُحسب على الطول الجديد (يُطبَّق بلا حركةٍ فيُقاس ثمّ يُرفع)، ثمّ يطول الشريطُ بحركته وتنفتح هي معه */
+    const fs = [...st.querySelectorAll('.pg-face')];
+    fs.forEach(f => { f.style.transition = 'none'; }); room(true); void st.offsetHeight;
+    cs.forEach(c => pkCapPlace(c));
+    room(false); void st.offsetHeight; fs.forEach(f => { f.style.transition = ''; });
+    room(true); go();
+  }
   /* ترسمه المروحةُ بحالها فور الإدراج: بعد كلّ رسمٍ للمساهمة تُطلى المراوحُ الحاضرة (‎MutationObserver‎ خفيف على ‎#cm-body‎) */
   new MutationObserver(() => { for (const id in pkFan) { const el = pkFanEl(id); if (el && !el.pkFanP) { el.pkFanP = 1; pkFanPaint(el, pkFan[id]); } } })
     .observe(document.documentElement, { childList: true, subtree: true });
