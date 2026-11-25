@@ -9968,8 +9968,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = cap.clientWidth, h = cap.clientHeight; if (!w || !h) return;
     const dpr = Math.min(2, window.devicePixelRatio || 1), Wp = Math.max(1, Math.round(w * dpr)), Hp = Math.max(1, Math.round(h * dpr));
     if (cv.width !== Wp || cv.height !== Hp) { cv.width = Wp; cv.height = Hp; }
-    const g = cap._stg || (cap._stg = { S: cap.dataset.s.split(',').map(Number), E: cap.dataset.e.split(',').map(Number) });
-    const cs = getComputedStyle(cap), pal = PK_STG.map(x => pkStgHex(cs.getPropertyValue('--stg-' + x)));
+    const g = cap._stg || (cap._stg = { S: cap.dataset.s.split(',').map(Number), E: cap.dataset.e.split(',').map(Number), gold: !!cap.dataset.gold });
+    const cs = getComputedStyle(cap), pal = PK_STG.map(x => pkStgHex(cs.getPropertyValue('--stg-' + x))), gd = pkStgHex(cs.getPropertyValue('--u-gold') || '#c9a25c');
     const ctx = cv.getContext('2d'), img = ctx.createImageData(Wp, Hp), d = img.data;
     const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2, th = e * Math.PI / 2, co = Math.cos(th), si = Math.sin(th);
     const amp = .05 * Math.sin(Math.PI * e), tt = performance.now() / 1000, B = g.S.map((x, i) => x + (g.E[i] - x) * e);
@@ -9979,7 +9979,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const u = (i + .5) / Wp, o = (j * Wp + i) * 4;
         const q = (v * co + (1 - u) * si) / (co + si) + amp * Math.sin(2 * Math.PI * (1.6 * u + 1.2 * v) - tt * 9);
         let L = 7; for (let m = 0; m < 8; m++) if (q < B[m + 1]) { L = m; break; }
-        const c = pal[L]; d[o] = c[0] * sh; d[o + 1] = c[1] * sh; d[o + 2] = c[2] * sh; d[o + 3] = L ? 255 : 255 * e;
+        let c = pal[L]; if (g.gold && L) c = [gd[0] + (c[0] - gd[0]) * e, gd[1] + (c[1] - gd[1]) * e, gd[2] + (c[2] - gd[2]) * e];
+        d[o] = c[0] * sh; d[o + 1] = c[1] * sh; d[o + 2] = c[2] * sh; d[o + 3] = L ? 255 : 255 * e;
       }
     }
     ctx.putImageData(img, 0, 0);
@@ -10211,8 +10212,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
     const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
+    /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالأصفر =====
+       والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
+       يبدأ رسمُ الإمالة بماءٍ أصفرَ واحدٍ بمستوى الإكمال، ويتلوّن بألوان المراحل وهو يميل */
+    const lv = x3Leaves(ns), ok = state.ktok || {}, dn = lv.filter(n => ok[recId(n)]).length;
+    let Ld = lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
+    { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--u-gold, #c9a25c)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
+    { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
+    title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
-      + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
+      + `<span class="pg-cap pg-cap--stg" data-gold="1" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
   function pkCntHTML(k, wide) {
     if (!pkBoxDeck || !k || k.id === '') return '';
@@ -13808,7 +13817,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* المنشورةُ تُقرأ ولا تُحرَّر (‎KTRO‎ أثناء رسمها): لا حقولَ ولا مفاتيحَ ولا إضافة */
   let KTRO = false;
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
-  const ktOk = n => KTRO ? `<span class="kt-ok${n.ok ? ' on' : ''}" aria-label="${n.ok ? '✓' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  /* (طلبُ صاحب الموقع) مربّعُ الصحّ في صفوف الملخّص المنشور تعلّمه أنت: «أكملتُ هذا المفهوم» — ويُحفظ في حسابك (‎state.ktok‎،
+     مع التفضيلات) ومنه تمتلئ دوائرُ المجلدات بالأصفر */
+  const ktOk = n => KTRO ? ((on, id) => `<span class="kt-ok${on ? ' on' : ''}" role="checkbox" tabindex="0" aria-checked="${on}" data-ktok="${esc(id)}" aria-label="${on ? '✓' : ''}">`)(!!(state.ktok || {})[recId(n)], recId(n)) + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  const ktOkTog = el => {
+    const id = el.dataset.ktok, m = state.ktok || (state.ktok = {});
+    if (m[id]) delete m[id]; else m[id] = 1;
+    save();
+    /* والصفُّ يتبدّل في مكانه، ودوائرُ المجلدات تُعاد بالرسم — مع حفظ موضع كلّ ما يُمرَّر */
+    const sc = [...document.querySelectorAll('#cm-body *')].filter(x => x.scrollTop || x.scrollLeft).map(x => [x, x.scrollTop, x.scrollLeft]);
+    const keep = [...sc].map(([x, t, l]) => { const k = x.dataset && (x.dataset.pkid || x.className); return [k, t, l, x]; });
+    renderCmSection();
+    keep.forEach(([k, t, l, x]) => { const y = x.isConnected ? x : [...document.querySelectorAll('#cm-body *')].find(z => (z.dataset && z.dataset.pkid || z.className) === k); if (y) { y.scrollTop = t; y.scrollLeft = l; } });
+  };
+  document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-ktok]'); if (!el) return; e.preventDefault(); e.stopPropagation(); ktOkTog(el); });
+  document.addEventListener('keydown', e => { if (e.key !== ' ' && e.key !== 'Enter') return; const el = e.target.closest && e.target.closest('[data-ktok]'); if (!el) return; e.preventDefault(); ktOkTog(el); });
   const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
   /* بقيّةُ صفوف الجدول المنشور: تُلحَق بجدولها دفعةً في كلّ فراغ. ومفتاحٌ لم يُرسم جدولُه
      (بُني نصُّه ولم يُوضع، أو هُدم قبل أن يكتمل) يُمحى فلا يبقى في الذاكرة */
@@ -44510,7 +44533,7 @@ void main() {
   var acctReady = false;
   var actDev = '', actGot = false, actSig = '', actT = 0, actBusy = false, xaOthers = null;
   var prefsGot = false, prefsSig = '', prefsT = 0, prefsBusy = false;
-  var PREF_ST = ['lang', 'theme', 'xtS', 'cdSet', 'cdSetV', 'pkSplR', 'pkSqbR', 'ppGrid', 'lastNook', 'nkInfo', 'nkDoc', 'nkFit'];
+  var PREF_ST = ['ktok', 'lang', 'theme', 'xtS', 'cdSet', 'cdSetV', 'pkSplR', 'pkSqbR', 'ppGrid', 'lastNook', 'nkInfo', 'nkDoc', 'nkFit'];
   var PREF_LS = ['ac.hl.col', 'ac.hl.colb', 'ac.bk.one'];
   const acctOn = () => acctReady && SRV_ON() && !isGuest() && !!state.uid;
 

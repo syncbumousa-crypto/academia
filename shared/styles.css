@@ -17121,6 +17121,7 @@ html[data-theme="dark"] .kcv-lab { background: #3a4246; }
 .kcv.is-ro .kcv-card { cursor: default; user-select: text; }
 .kcv.is-ro .kcv-link, .kcv.is-ro .kcv-lab { cursor: default; pointer-events: none; }
 .kt-view.is-ro .kt-ok { cursor: default; }
+.kt-view.is-ro .kt-ok[data-ktok] { cursor: pointer; }   /* (طلبُ صاحب الموقع) مربّعُ الصحّ يعلّمه القارئُ لنفسه */
 
 /* ===== «الكتاب ٢» (ROADMAP-BOOK2 · المرحلة ٣) — كتابُ «المصدر» بـWebGL =====
    اللوحةُ تملأ مسرحَ الكتاب كلَّه (هامشُها للظلّ)، والـ‎.cbk‎ صندوقٌ شفّافٌ على مستطيل الفتحة: منه تُحاذى الأدواتُ ويُقاس ‎FLIP‎ */
