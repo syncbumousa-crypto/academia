@@ -10060,6 +10060,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const PK_STG_DEMO = [[2, 2, 3, 4, 3, 2, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0], [10, 0, 1, 2, 0, 0, 0, 0], [2, 1, 9, 1, 0, 0, 0, 0], [1, 8, 1, 1, 0, 0, 0, 1],
     [0, 0, 1, 4, 4, 3, 2, 0], [0, 0, 0, 2, 2, 2, 3, 6], [1, 0, 0, 0, 0, 1, 3, 10], [0, 0, 0, 0, 0, 0, 0, 1], [7, 0, 0, 0, 0, 0, 0, 7], [2, 0, 4, 0, 1, 0, 1, 6], [1, 5, 5, 1, 1, 0, 0, 0]];
   const pkStgHash = t => { let h = 2166136261; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+  /* ===== أعدادُ الشرائط زجاجٌ كأرقام الكبسولة السابقة (طلبُ صاحب الموقع) =====
+     هناك كان الرقمُ نافذةً تُري الماءَ خلفه مكسورًا: تشبّعٌ ‎1.5‎ ثمّ تفتيحٌ (‎×1.35 + 0.2‎ فاتحًا · ‎+0.12‎ داكنًا) ثمّ مسحةُ بياض
+     (‎18٪‎ · ‎6٪‎)، وفوقه حافّةُ ضوءٍ وتحته عتمةٌ وظلّ. والشريطُ لونٌ واحد، فلونُ زجاجه يُحسب هنا مرّةً بالمعادلة نفسِها */
+  const PK_STG_PAL = { l: ['#c3cacd', '#c98a68', '#d26a60', '#86b8aa', '#64a58b', '#4b8f73', '#357459', '#8f80d4'], d: ['#4d5459', '#9c7055', '#b85d55', '#81c29d', '#5fa986', '#4a9078', '#3d6f66', '#9b8ed6'] };
+  const pkStgGlass = (h, dk) => {
+    const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255), l = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+    return '#' + c.map(x => { let v = Math.min(1, Math.max(0, (l + (x - l) * 1.5) * 1.35 + (dk ? .12 : .2))); v = v + (1 - v) * (dk ? .06 : .18); return Math.round(v * 255).toString(16).padStart(2, '0'); }).join('');
+  };
   const pkStgCount = ns => {
     const c = [0, 0, 0, 0, 0, 0, 0, 0], lv = x3Leaves(ns);
     if (pkStgDemo && pkBoxMine && lv.length) {
@@ -10091,7 +10099,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎20 + 15 × عددها‎ بين ‎56‎ و‎124‎ (وفيها أعدادُها كلُّها) */
     const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k})"><i>${c[i]}</i></b>` : '').join('');
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
       + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
