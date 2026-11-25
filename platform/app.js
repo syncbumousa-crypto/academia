@@ -9788,6 +9788,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حالُ العرض لكلّ مساهمة (بمعرّفها): الطريقةُ · المجلداتُ المفتوحةُ في الشريط · المختار =====
      حالُ نظرةٍ لا تُحفظ في الرزمة: كلُّ قارئٍ يرى المساهمةَ بطريقته، ولا يُبدّلها لغيره */
   const pkVw = {}, pkFo = {}, pkFs = {};
+  /* (طلبُ صاحب الموقع) في الصفّ الواحد تبقى المجلداتُ المفتوحةُ مفتوحةً معًا — فتحُ مجلدٍ لا يطوي أخاه.
+     فقيمةُ ‎pkFo[id]‎ لكلّ أبٍ **مجموعةُ** المفتوح فيه لا واحدٌ (وما كُتب واحدًا قبلُ يُقرأ مجموعةً من واحد) */
+  const pkOpHas = (open, key, id) => { const v = open && open.get(key); return v instanceof Set ? v.has(id) : v === id; };
+  const pkOpAdd = (open, key, id) => { let v = open.get(key); if (!(v instanceof Set)) { v = new Set(v != null ? [v] : []); open.set(key, v); } v.add(id); };
+  const pkOpDel = (open, key, id) => { const v = open.get(key); if (v instanceof Set) { v.delete(id); if (!v.size) open.delete(key); } else if (v === id) open.delete(key); };
   /* ‏‎pkSolo[id]‎: المجلدُ المفتوحُ المضغوطُ ثانيةً — يُعرض ما فيه هو وحدَه بلا مجلداته الداخليّة، والإطارُ على اسمه وحدَه (طلبُ صاحب الموقع) */
   const pkSolo = {};
   let pkSoloCur = null;
@@ -11826,8 +11831,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      فتجري الحوافُّ متوازية. ويُحسب من الأسفل: لوحٌ لا يتّسع فيه شيء ٢٤ (١٨ للكبسولة + ٦)،
      وكلُّ لوحٍ متّسعٍ داخله يزيده ٦ */
   const pkChain = (nodes, open, key) => {
-    const o = open.get(key), n = (nodes || []).find(k => k.id === o && k.kids && k.kids.length);
-    return n ? 1 + pkChain(n.kids, open, n.id) : 0;
+    return (nodes || []).filter(k => k.kids && k.kids.length && pkOpHas(open, key, k.id)).reduce((m, n) => Math.max(m, 1 + pkChain(n.kids, open, n.id)), 0);
   };
   const pkBoxAt = (k, wide, open) => !pkLab() ? ''
     : ' data-c="' + esc(k.c || '') + '" style="--c:' + esc(k.c || '#8a97a3') + (wide ? ';--r:' + (24 + 6 * pkChain(k.kids, open, k.id)) + 'px' : '') + '"';
@@ -12138,9 +12142,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, { timeout: 1500 });
   function pkBoxHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
-    const openId = open.get(parentKey);
     return '<div class="pg-row">' + nodes.map(k => {
-      const has = k.kids && k.kids.length, wide = has && k.id === openId;
+      const has = k.kids && k.kids.length, wide = has && pkOpHas(open, parentKey, k.id);
       return '<div class="pg-box' + (wide ? ' is-wide' : '') + (k.id === sel ? ' is-sel' : '') + (k.id === sel && k.id === pkSoloCur ? ' is-solo' : '') + '"' + pkBoxAt(k, wide, open) + '>'
         + '<button type="button" class="pg-face" data-pkf="' + esc(k.id) + '" data-pkp="' + esc(parentKey) + '"' + (pkLab() ? ' title="' + esc(k.name) + '"' : '')
         + (has ? ' aria-expanded="' + wide + '"' : '') + ' aria-pressed="' + (k.id === sel) + '">'
@@ -12181,9 +12184,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      والوجهُ ‎div[role=button]‎ لا ‎<button>‎: لا يحوي زرٌّ حقلَ كتابة */
   function pkBoxEdHTML(nodes, open, parentKey, sel) {
     if (!nodes || !nodes.length) return '';
-    const openId = open.get(parentKey);
     return '<div class="pg-row">' + nodes.map(k => {
-      const has = k.kids && k.kids.length, wide = has && k.id === openId, isSel = k.id === sel;
+      const has = k.kids && k.kids.length, wide = has && pkOpHas(open, parentKey, k.id), isSel = k.id === sel;
       const face = isSel && k.id !== '' && k.id === pkNaming
         ? '<input class="pk-fnm" data-pkfn="' + esc(k.id) + '" value="' + esc(k.raw || '') + '" placeholder="' + esc(T().pkTitlePh) + '" aria-label="' + esc(T().pkFoldName) + '">'
         : pkFace(k, true) + '<span class="pg-nm">' + pkNmW(k.name) + '</span>' + pkCntHTML(k);
@@ -30893,15 +30895,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
          فإن كان «وحدَه» رجع كلَّه، وإن كان مختارًا كلَّه طُوي */
       if (tray) {
         /* (ثمّ بطلبه) والمختارُ كلُّه يُطوى بنقر لوحه ثانيةً */
-        if (pkFs[id] === f && open.get(par) === f && pkSolo[id] !== f) { open.delete(par); delete pkSolo[id]; }
-        else { open.set(par, f); delete pkSolo[id]; }
+        if (pkFs[id] === f && pkOpHas(open, par, f) && pkSolo[id] !== f) { pkOpDel(open, par, f); delete pkSolo[id]; }
+        else { pkOpAdd(open, par, f); delete pkSolo[id]; }
       } else if (pf.hasAttribute('aria-expanded')) {
-        if (open.get(par) === f && pkFs[id] === f) {
+        if (pkOpHas(open, par, f) && pkFs[id] === f) {
           if (pkSolo[id] !== f) pkSolo[id] = f;
-          else { delete pkSolo[id]; open.delete(par); }
-        } else if (open.get(par) === f) pkSolo[id] = f;   /* (طلبُ صاحب الموقع) مفتوحٌ وأحدُ أبنائه مختار: اسمُه يختاره «وحدَه» — والمجلدُ كلُّه بمساحة لوحه */
-        else { open.set(par, f); delete pkSolo[id]; }
-      } else { open.delete(par); delete pkSolo[id]; }   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
+          else { delete pkSolo[id]; pkOpDel(open, par, f); }
+        } else if (pkOpHas(open, par, f)) pkSolo[id] = f;   /* (طلبُ صاحب الموقع) مفتوحٌ وأحدُ أبنائه مختار: اسمُه يختاره «وحدَه» — والمجلدُ كلُّه بمساحة لوحه */
+        else { pkOpAdd(open, par, f); delete pkSolo[id]; }
+      } else delete pkSolo[id];   /* (طلبُ صاحب الموقع) واختيارُ أخٍ لا جوفَ له لا يطوي المفتوحَ في صفّه بعد اليوم */   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
       const pubPick = !pf.closest('.pk--edit');
       /* ‏تطيرُ التحديداتُ من الكتاب إلى البطائق والكتابُ بطريقة الصفحتين وحدها (طلبُ صاحب الموقع) — وفيما سواها تظهر البطائقُ حالًا */
@@ -31074,7 +31076,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const open = pkFo[id] || (pkFo[id] = new Map());
     if (to !== '') {
       const trail = (cxTrail(deck, to) || []).concat([to]);
-      trail.forEach((fid, k) => open.set(k ? trail[k - 1] : PG_TOP, fid));
+      trail.forEach((fid, k) => pkOpAdd(open, k ? trail[k - 1] : PG_TOP, fid));
     }
     pkFs[id] = dragId;
     renderCmSection();
@@ -39511,7 +39513,7 @@ void main() {
         const open = pkFo[me.id] || (pkFo[me.id] = new Map());
         if (holder) {
           const trail = (cxTrail(d.deck, holder.n.id) || []).concat([holder.n.id]);
-          trail.forEach((fid, k) => open.set(k ? trail[k - 1] : PG_TOP, fid));
+          trail.forEach((fid, k) => pkOpAdd(open, k ? trail[k - 1] : PG_TOP, fid));
         }
         pkFocusNew = nn.id; pkNaming = nn.id;
         renderCmSection();
