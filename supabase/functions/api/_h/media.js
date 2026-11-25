@@ -134,19 +134,9 @@ export async function onRequest({ request, env, params }) {
     const mime = sniff(u8);
     if (!mime) return J({ error: 'type' }, 415);
 
-    /* ===== حصّةُ اليوم =====
-       حدُّ الوسيط يمنع **السرعة**، وهذا يمنع **التراكم**: من رفع ستّين صورةً
-       في الساعة ستَّ عشرةَ ساعةً بلغ ألفًا. فيُسأل: كم رفعتَ منذ يومٍ؟
-       والعدُّ من ‎media‎ نفسِه (‎uid‎ و‎ts‎) فلا جدولَ ثالثَ يُصان.
-       ولا يُحاسَب على ما رُفع قبله: المعنونُ بالمحتوى يُخزَّن مرّةً، ورافعُه
-       الثاني لا يزيد بايتًا — فلا يُعدّ عليه. */
-    const DAY = 86400, Q_N = 300, Q_B = 60 * 1024 * 1024;
-    const q = await db.prepare(
-      'SELECT COUNT(*) n, COALESCE(SUM(size),0) b FROM media WHERE uid = ? AND ts > ?')
-      .bind(s.uid, now() - DAY).first();
-    if (q && ((q.n | 0) >= Q_N || (q.b | 0) >= Q_B)) {
-      return J({ error: 'quota', perDay: Q_N, bytesPerDay: Q_B }, 429);
-    }
+    /* ===== ولا حصّةَ يوميّة — نُزعت بقرار صاحب الموقع (نوفمبر ٢٠٢٦) =====
+       كانت ٣٠٠ صورةٍ أو ٦٠ ميجا في اليوم لكلّ حساب. وما بقي: حدُّ الصورة الواحدة
+       (‎MAX‎) وفحصُ نوعها، والجلسةُ شرط. والمكرَّرُ لا يُكتب ثانيةً (المفتاحُ هو المحتوى). */
 
     const k = await sha256(buf);
     const had = await db.prepare('SELECT k FROM media WHERE k = ?').bind(k).first();
