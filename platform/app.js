@@ -10790,9 +10790,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     P[1].style.filter = kc > .05 ? `drop-shadow(0 ${3 * kc}px ${7 * kc}px var(--glass-cast, rgba(13, 42, 72, .13)))` : '';
     /* زجاجٌ سائلٌ كلوح فلاتر البحث: تحت الخطّ طبقةٌ تموّه ما خلفها مقصوصةٌ على حدّه، وفوقه حرفٌ لامع (‎--glass-edge‎) */
     const glx = el.querySelector('.pk-varc__gl'), on = kc > .02, ol = on ? pkFanOutline(G, q.w / 2) : '';
-    if (glx) {   /* قناعٌ لا ‎clip-path‎: القصُّ مع التمويه يُرسم أحيانًا مستطيلًا في كروم (قِيس) */
+    if (glx) {   /* قناعٌ وقصٌّ معًا: القصُّ وحده يُرسم أحيانًا مستطيلًا في كروم، والقناعُ وحده يتأخّر إطارًا (قِيس كلاهما) */
       const mk = on ? `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='330' height='330'><path d='${pkFanOutline(G, q.w / 2, 150)}'/></svg>`)}")` : '';
-      glx.style.webkitMaskImage = glx.style.maskImage = mk; glx.style.opacity = on ? 1 : 0; }
+      glx.style.webkitMaskImage = glx.style.maskImage = mk; glx.style.opacity = on ? 1 : 0;
+      glx.style.clipPath = on ? `path('${pkFanOutline(G, q.w / 2, 150)}')` : '';   /* والقصُّ معه: القناعُ يُفكّ بعد إطار، فلا يُرى المستطيلُ في أوّل الفتح */ }
     P[6].setAttribute('d', ol || 'M0 0'); P[6].style.opacity = on ? kc : 0;
     for (let i = 0; i < 3; i++) { const dl = 54 + (8 - 54) * kc, x = P[2 + i];
       x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * 100 + 50 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); }
@@ -10814,8 +10815,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const dt = Math.min(.034, (now - pkFanLast) / 1000); pkFanLast = now; let busy = false;
     for (const id in pkFan) {
       const st = pkFan[id], el = pkFanEl(id);
-      st.kv += (210 * (st.kt - st.k) - 20 * st.kv) * dt; st.k += st.kv * dt;
-      st.gv += (260 * (st.cur - st.g) - 26 * st.gv) * dt; st.g += st.gv * dt;
+      const F = st.fast ? 1.8 : 1, Fd = Math.sqrt(F);   /* النقرةُ السريعة: النابضُ أصلبُ بالنسبة نفسِها فيبقى شكلُ الحركة ويقصر زمنُها */
+      st.kv += (210 * F * (st.kt - st.k) - 20 * Fd * st.kv) * dt; st.k += st.kv * dt;
+      st.gv += (260 * F * (st.cur - st.g) - 26 * Fd * st.gv) * dt; st.g += st.gv * dt;
       if (Math.abs(st.kt - st.k) > .001 || Math.abs(st.kv) > .001 || Math.abs(st.cur - st.g) > .001 || Math.abs(st.gv) > .001) busy = true;
       else { st.k = st.kt; st.g = st.cur; st.kv = st.gv = 0; }
       if (el) pkFanPaint(el, st);
@@ -10858,9 +10860,32 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
     for (const id in pkFan) if (pkFan[id].kt && (!f || f.dataset.pkid !== id)) pkFanSet(id, false);
-    if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__hit') && !pkFan[f.dataset.pkid].kt) { e.preventDefault(); pkFanSet(f.dataset.pkid, true); }
+    if (f && e.target.closest('.pk-varc__hit')) { const st = pkFan[f.dataset.pkid]; st.down = performance.now(); st.fast = false;
+      if (e.pointerType !== 'mouse' && !st.kt) { e.preventDefault(); pkFanSet(f.dataset.pkid, true); } }
     if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__vi') && pkFan[f.dataset.pkid].k > .5) pkFanSet(f.dataset.pkid, false, 650);   /* باللمس: تنطوي بعد أن يُرى الذهبيُّ ينزلق */
   }, true);
+  /* ===== النقرةُ السريعة على الطرف (طلبُ صاحب الموقع) =====
+     ضغطةٌ قصيرة (بالماوس أو لمسةٌ تُرفع قبل ٣٠٠ مللي) تفتح المروحةَ وتنضغط فيها الطريقةُ التالية ثمّ تنطوي — حركةٌ واحدةٌ متّصلة.
+     واللمسةُ المُمسَكة تُبقيها مفتوحةً ليُختار منها */
+  document.addEventListener('click', e => {
+    const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan'); if (!f || !e.target.closest('.pk-varc__hit')) return;
+    const id = f.dataset.pkid, st = pkFan[id]; if (!st) return;
+    if (st.down && performance.now() - st.down > 300) return;
+    e.preventDefault(); clearTimeout(st.t); clearTimeout(st.q);
+    st.fast = true; st.kt = 1; pkFanWake();
+    const nx = (st.cur + 1) % 3;
+    /* الذهبُ ينتقل إلى التالية في المروحة نفسِها، وتنطوي، ثمّ يُبدَّل العرض: رسمُ العرض الجديد ثقيل (قِيس: نصفُ ثانيةٍ بلا إطار)
+       فلو سبق لقطع الانطواء */
+    const swap = () => { st.fast = false; const el = pkFanEl(id), b = el && el.querySelectorAll('.pk-varc__vi')[nx]; if (b) b.click(); };
+    if (bkReduce()) { st.kt = 0; swap(); return; }
+    st.q = setTimeout(() => {
+      st.cur = nx; pkFanWake();
+      /* وأيقونةُ الزاوية تصير التاليةَ من الآن، فلا تعود القديمةُ لحظةً بعد الانطواء وقبل الرسم */
+      const ic = pkFanEl(id), sv = ic && ic.parentElement.querySelector(':scope > .pk-blkh__ic > svg'), pv = PK_VIEWS.find(x => x[0] === ['tree', 'cards', 'table'][nx]);
+      if (sv && pv) sv.innerHTML = pv[1];
+      st.q = setTimeout(() => { st.kt = 0; st.hov = -1; pkFanWake(); st.q = setTimeout(swap, 340); }, 230);
+    }, st.k > .8 ? 0 : 130);
+  });
   document.addEventListener('keydown', e => {
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan'); if (!f) return;
     const st = pkFan[f.dataset.pkid];
