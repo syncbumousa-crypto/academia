@@ -20511,9 +20511,27 @@ html:not([data-lang="en"]) .pk-ic-tblv { transform: translateX(6px); }
 html[data-lang="en"] #cm-body .pk-vdots.pk-varc.pk-varc--qt { transform: none; --pk-fl: 1; }
 #cm-body .pk-blkh--bank { position: relative; }
 /* ===== نافذةُ المجلد صفوفًا كقوائم الموقع (طلبُ صاحب الموقع): تعديلُ الاسم · اللونُ والوجه · الزمن · حذفُ المجلد ===== */
-.fmn--rows { gap: 1px; padding: 5px; --fmn-w: 208px; }
+.fmn--rows { gap: 1px; padding: 6px; --fmn-w: 214px; border-radius: 18px; }
+/* زجاجٌ سائلٌ كلوح فلاتر البحث (‎glass.css · .market-tools .fpanel‎): صبغةُ ‎--glass‎ بكثافة ‎84%‎، وحرفٌ ‎--glass-edge‎، وظلٌّ ‎--glass-cast‎، وتمويهُ ما خلفه (طلبُ صاحب الموقع) */
+html:root .fmn--rows { background: color-mix(in srgb, var(--glass, #fff) 84%, transparent); border: 0; box-shadow: inset 0 0 0 1px var(--glass-edge, rgba(20, 40, 46, .08)), 0 10px 28px -12px var(--glass-cast, rgba(20, 40, 46, .3)); }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  html:root .fmn--rows { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+}
+.fmn--rows .fmn-row, .fmn--rows .fmn-rd { border-radius: 12px; }
+.fmn-pg { display: flex; flex-direction: column; gap: 1px; }
+.fmn-pg[hidden] { display: none; }
+.fmn-pg[data-pg="look"] { gap: 7px; }
+.fmn-phd { display: flex; align-items: center; gap: 4px; padding: 0 0 5px; margin-bottom: 2px; border-bottom: 1px solid var(--f-line); }
+.fmn-phd b { font-size: 11px; color: var(--f-tx); }
+.fmn-back { width: 24px; height: 24px; flex: none; display: grid; place-items: center; border: 0; border-radius: 8px; background: none; color: var(--f-lab); cursor: pointer; }
+.fmn-back:hover { background: var(--f-hov); color: var(--f-tx); }
+.fmn-back svg { width: 13px; height: 13px; }
+html[data-lang="en"] .fmn-back svg { transform: scaleX(-1); }
+.fmn-tm { display: flex; flex-direction: column; gap: 2px; }
+.fmn-step { flex-wrap: wrap; }
+.fmn-ctl { flex: none; }
 .fmn-row { display: flex; align-items: center; gap: 7px; width: 100%; padding: 6px 7px; border: 0; border-radius: 7px; background: none; cursor: pointer; color: var(--f-tx); font: 600 11px/1.5 "IBM Plex Sans Arabic", sans-serif; text-align: start; transition: background .14s, color .14s; }
-.fmn-row:hover, .fmn-row[aria-expanded="true"] { background: var(--f-hov); }
+.fmn-row:hover { background: var(--f-hov); }
 .fmn-row > svg { width: 13px; height: 13px; flex: none; color: var(--f-lab); }
 .fmn-v { margin-inline-start: auto; display: inline-flex; align-items: center; gap: 4px; color: var(--f-lab); font-weight: 500; font-size: 10px; white-space: nowrap; }
 .fmn-v em { font-style: normal; }
