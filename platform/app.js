@@ -14105,11 +14105,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== لسانُ الورقة (طلبُ صاحب الموقع · ‎ROADMAP‎ لسان الورقة) =====
        حبّةُ الرقم والإكمال في لسانٍ يخرج من حافّة الورقة اليمنى (واليسرى في الإنجليزيّة)، وانحناءاه للداخل شكلٌ واحدٌ مرسوم.
        وهو ابنُ **شريحة الطرف** نفسِها لا الورقة: يدور وينثني معها ويأخذ ظلَّها، والشرائحُ تقصّ ما يخرج عنها فلا يوضع فيها.
-       وله وجهان: الأماميُّ فيه الرقمُ ومربّعُ الصحّ، والخلفيُّ (يظهر يسارًا حين تنقلب كالورقة الحقيقيّة) فيه الرقمُ وحده.
+       وله وجهان: الأماميُّ فيه الرقمُ ومربّعُ الصحّ، والخلفيُّ (يظهر يسارًا حين تنقلب كالورقة الحقيقيّة) لسانٌ خالٍ.
        والصحُّ إكمالُك أنت (‎state.ktok‎) كما في الجدول، ولونُ الحبّة لونُ مرحلة المفهوم إن كانت له مرحلة */
     const EN = document.documentElement.getAttribute('data-lang') === 'en', EDGE = EN ? 0 : NS - 1;
     const PT_TK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    const ptTab = back => `<span class="pp-tab${back ? ' pp-tab--b' : ''}"><svg class="pp-tabsv"><path class="f"/><path class="s"/><path class="e"/></svg><span class="pp-pill"><span class="n"></span>${back ? '' : `<span class="b" data-pptk role="checkbox" tabindex="-1">${PT_TK}</span>`}</span></span>`;
+    /* (طلبُ صاحب الموقع) والوجهُ الخلفيُّ لسانٌ خالٍ: الحبّةُ ورقمُها على الوجه الآخر من الورقة */
+    const ptTab = back => `<span class="pp-tab${back ? ' pp-tab--b' : ''}"><svg class="pp-tabsv"><path class="f"/><path class="s"/><path class="e"/></svg>${back ? '' : `<span class="pp-pill"><span class="n"></span><span class="b" data-pptk role="checkbox" tabindex="-1">${PT_TK}</span></span>`}</span>`;
     { const t = document.createElement('div'); t.innerHTML = ptTab(0) + ptTab(1); strips[EDGE].append(...t.children); }
     const tabF = strips[EDGE].querySelector('.pp-tab:not(.pp-tab--b)'), tabB = strips[EDGE].querySelector('.pp-tab--b');
     const ptStg = (() => { const m = new Map(), h = hostOf(); if (h) pkStgEach(h.arr, (n, i) => { if (!i) return; const q = m.get(n.id); if (q == null || i < q) m.set(n.id, i); }); return m; })();
@@ -14139,7 +14140,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* اللسانُ بقدر الورقة؛ وفي الصغيرة جدًّا (شبكةُ التسعة) لا لسان: يبقى الرقمُ والصحُّ في وجهها كما كانا */
       const on = W >= 96; host.classList.toggle('has-tab', on);
       if (on) {
-        const tw = Math.round(W * .22), th = Math.round(W * .40), f = Math.round(tw * .38), r = Math.round(tw * .42), y0 = Math.round(W * .075), H = th + 2 * f;   /* (طلبُ صاحب الموقع) أكبرُ بكثير */
+        const tw = Math.round(W * .22), th = Math.round(W * .40), f = Math.round(tw * .38), r = Math.round(tw * .42), y0 = Math.max(Math.round(W * .075), f + 3), H = th + 2 * f;   /* لا يعلو انحناؤه حافّةَ الورقة العليا */   /* (طلبُ صاحب الموقع) أكبرُ بكثير */
         const d = `M-1 0 L0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H} L-1 ${H} Z`;
         const e = `M0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H}`;
         host.style.setProperty('--tw', tw + 'px'); host.style.setProperty('--tth', th + 'px'); host.style.setProperty('--tf', f + 'px'); host.style.setProperty('--ty', (y0 - f) + 'px'); host.style.setProperty('--tsw', SW + 'px');
