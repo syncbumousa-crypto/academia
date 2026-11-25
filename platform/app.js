@@ -14140,12 +14140,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* اللسانُ بقدر الورقة؛ وفي الصغيرة جدًّا (شبكةُ التسعة) لا لسان: يبقى الرقمُ والصحُّ في وجهها كما كانا */
       const on = W >= 96; host.classList.toggle('has-tab', on);
       if (on) {
-        const tw = Math.round(W * .22), th = Math.round(W * .40), f = Math.round(tw * .38), r = Math.round(tw * .42), y0 = Math.max(Math.round(W * .075), f + 3), H = th + 2 * f;   /* لا يعلو انحناؤه حافّةَ الورقة العليا */   /* (طلبُ صاحب الموقع) أكبرُ بكثير */
-        const d = `M-1 0 L0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H} L-1 ${H} Z`;
+        const tw = Math.round(W * .22), th = Math.round(W * .40), f = Math.round(tw * .38), r = Math.round(tw * .42), y0 = Math.max(Math.round(W * .075), f + 12), H = th + 2 * f;   /* لا يعلو انحناؤه حافّةَ الورقة العليا */   /* (طلبُ صاحب الموقع) أكبرُ بكثير */
+        const d = `M-3 0 L0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H} L-3 ${H} Z`;   /* ويدخل في الورقة ‎3px‎ فيغطّي خطَّ حافّتها حيث يتّصل */
         const e = `M0 0 A${f} ${f} 0 0 0 ${f} ${f} L${tw - r} ${f} A${r} ${r} 0 0 1 ${tw} ${f + r} L${tw} ${f + th - r} A${r} ${r} 0 0 1 ${tw - r} ${f + th} L${f} ${f + th} A${f} ${f} 0 0 0 0 ${H}`;
         host.style.setProperty('--tw', tw + 'px'); host.style.setProperty('--tth', th + 'px'); host.style.setProperty('--tf', f + 'px'); host.style.setProperty('--ty', (y0 - f) + 'px'); host.style.setProperty('--tsw', SW + 'px');
         host.querySelectorAll('.pp-tabsv').forEach(sv => {
-          sv.setAttribute('viewBox', `-1 0 ${tw + 1} ${H}`);
+          sv.setAttribute('viewBox', `-3 0 ${tw + 3} ${H}`);
           sv.querySelector('.f').setAttribute('d', d); sv.querySelector('.s').setAttribute('d', d); sv.querySelector('.e').setAttribute('d', e);
         });
       }

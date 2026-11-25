@@ -17406,10 +17406,11 @@ html[data-lang="en"] .pp-ok, html[data-lang="en"] .pp-pen { right: auto; left: 6
 .pp-tab { display: none; }
 .pp-host.has-tab .pp-face .pp-num, .pp-host.has-tab .pp-face .pp-ok, .pp-host.has-tab .pp-layer .pp-num { display: none; }
 .pp-host.has-tab .pp-layer { overflow: visible; }
-.pp-host.has-tab .pp-tab { display: block; position: absolute; top: var(--ty); left: calc(var(--tsw) - 1px); width: calc(var(--tw) + 1px); height: calc(var(--tth) + 2 * var(--tf));
+.pp-host.has-tab .pp-tab { display: block; position: absolute; top: var(--ty); left: calc(var(--tsw) - 3px);   /* (بلاغُ صاحب الموقع) الشريحةُ أعرضُ بـ‎0.8px‎ من قسمتها: يبدأ اللسانُ عند حافّتها الفعليّة فلا درجة */
+  width: calc(var(--tw) + 3px); height: calc(var(--tth) + 2 * var(--tf));
   backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .pp-host.has-tab .pp-tab--b { transform: rotateY(180deg); }
-.pp-host.has-tab .pp-layer .pp-tab { left: calc(100% - 1px); }
+.pp-host.has-tab .pp-layer .pp-tab { left: calc(100% - 3px); }
 html[data-lang="en"] .pp-host.has-tab .pp-tab { left: calc(-1 * var(--tw)); }
 html[data-lang="en"] .pp-host.has-tab .pp-layer .pp-tab { left: calc(-1 * var(--tw)); }
 html[data-lang="en"] .pp-tabsv { transform: scaleX(-1); }
@@ -17420,7 +17421,7 @@ html[data-lang="en"] .pp-tab--b .pp-tabsv { transform: none; }
 .pp-tabsv .f { fill: var(--pp-paper); }
 .pp-tabsv .s { fill: rgb(18, 24, 40); fill-opacity: var(--sh, 0); }
 .pp-tabsv .e { fill: none; stroke: var(--pp-edge); stroke-width: .9; }
-.pp-tab .pp-pill { position: absolute; top: var(--tf); left: 1px; width: var(--tw); height: var(--tth); display: grid; place-items: center; }
+.pp-tab .pp-pill { position: absolute; top: var(--tf); left: 3px; width: var(--tw); height: var(--tth); display: grid; place-items: center; }
 html[data-lang="en"] .pp-tab .pp-pill { left: 0; }
 .pp-pill { --k: #2f7d86; }
 .pp-pill.stg, .pp-pill.on { --k: var(--c); }
