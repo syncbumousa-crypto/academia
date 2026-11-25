@@ -20094,11 +20094,12 @@ html[data-theme="dark"] { --stg-new: #4d5459; --stg-fgt: #9c7055; --stg-lrn: #b8
 .pg-cnt.is-stdone > .pg-cap--stg > .pg-stb { opacity: 1; pointer-events: auto; }
 .pg-cnt.is-stdone > .pg-cap--stg > .pg-stc { opacity: 0; transition: opacity .08s .08s; }
 .pg-stb > b { position: relative; display: grid; place-items: center; min-width: 0; height: 100%; cursor: default; flex: var(--g) 1 0px; overflow: hidden;
-  transition: flex-grow .35s cubic-bezier(.3, 1.2, .45, 1), filter .15s; }
-.pg-stb > b > i { font: 400 13px/1 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-style: normal; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .45); opacity: 0; transition: opacity .15s; }
-/* يكبر شوي (طلبُ صاحب الموقع): ضعفان وشيءٌ من قدّه، أو ما يتّسع لرقمه (ربعُ الكبسولة) أيُّهما أكبر */
-.pg-stb > b.on { flex-grow: max(calc(var(--g) * 2.2), calc(var(--gt) * .26)); filter: brightness(1.06); }
-.pg-stb > b.on > i { opacity: 1; }
+  transition: filter .18s, opacity .18s; }
+/* (طلبُ صاحب الموقع · الشكل ٢) الأعدادُ ظاهرةٌ كلُّها من أوّل ما تنبسط، والشريطُ الملموسُ يضوي والباقي يخفت — لا يتّسع شيء */
+.pg-stb > b > i { font: 400 12px/1 'Caffie Lofie', 'IBM Plex Sans Arabic', sans-serif; font-style: normal; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .5); white-space: nowrap; opacity: 0; transition: opacity .15s; }
+.pg-cnt.is-stdone .pg-stb > b > i { opacity: 1; transition-delay: .08s; }
+.pg-stb > b.on { filter: brightness(1.14) saturate(1.1); }
+.pg-stb:has(> b.on) > b:not(.on) { opacity: .42; filter: saturate(.7); }
 .pg-cap--stg::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit; background: linear-gradient(180deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 48%); }
 @media (prefers-reduced-motion: reduce) { .pg-stb > b { transition: none; } }
 

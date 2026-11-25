@@ -10089,8 +10089,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const m = x3Surf(G.L);
       dot = `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:linear-gradient(to top, ${st.join(', ')}, transparent ${(G.L * 100).toFixed(2)}%)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>`;
     }
-    /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎22 + 12 × عددها‎ بين ‎56‎ و‎110‎ */
-    const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(110, 22 + 12 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
+    /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎20 + 15 × عددها‎ بين ‎56‎ و‎124‎ (وفيها أعدادُها كلُّها) */
+    const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
     const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k})"><i>${c[i]}</i></b>` : '').join('');
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
       + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
