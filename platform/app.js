@@ -91,6 +91,82 @@
 
   let state, stateFrozen = false, coreBak = null, bootRead = 'new', bootRaw = 0, bootRawStr = '';   /* نصُّ الدرج كما قُرئ: يُوزن في أوّل فراغٍ ثمّ يُترك */
   try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
+
+  /* ============================================================
+     كاتبٌ واحدٌ للدرج — ختمُ الكتابة (ROADMAP-DATA-INTEGRITY م١)
+     ============================================================
+     كلُّ تبويبٍ يحفظ الحالَ كلَّها من ذاكرته. فكان التبويبُ القديم يكتب فوق ما
+     كتبه الأحدث بلا علم: هكذا ذهبت الأترامُ الستّة ليلةَ نقل الدومين — تبويبٌ
+     فُتح خارجًا، ودخل صاحبُه من آخر، ثمّ غادر الأوّلُ فحفظ «خارج · بلا أترام».
+
+     فصار لكلّ كتابةٍ ختم (‎WV_KEY‎: ‎{rev, tab, t}‎) يُقرأ مع الدرج عند الإقلاع.
+     وقبل كلّ كتابة يُقارَن بما على القرص: فإن زاد فقد كتب غيري بعدي — فلا أكتب،
+     وأصير «متقادمًا» فأُحدِّث نفسي. ويُقرأ الختمُ **قبل** الدرج: إن كتب غيري
+     بينهما قرأتُ الأحدثَ بختمٍ أقدم، فأوّلُ حفظٍ يُردّ فأُحدَّث — والخطأُ في
+     الجهة الآمنة. */
+  const WV_KEY = 'academia2:wv';
+  const WV_TAB = Math.random().toString(36).slice(2, 10);
+  const wvRead = () => { try { const o = JSON.parse(localStorage.getItem(WV_KEY) || 'null'); return o && typeof o.rev === 'number' ? o.rev : 0; } catch (e) { return 0; } };
+  let wvMine = wvRead(), wvStale = false;
+  /* يُطالَب بالدور: إن كان الختمُ ما تركتُه أخذتُه ورفعتُه، وإلّا فقد كتب غيري.
+     والختمُ يُكتب **قبل** الدرج: إن سقطت كتابةُ الدرج صار غيري متقادمًا بلا داعٍ
+     فيُحدِّث نفسه — ولا يُمحى شيء. */
+  function wvClaim() {
+    if (wvStale) return false;
+    const cur = wvRead();
+    if (cur !== wvMine) { wvGoStale('rev:' + cur + '>' + wvMine); return false; }
+    wvMine = cur + 1;
+    localStorage.setItem(WV_KEY, JSON.stringify({ rev: wvMine, tab: WV_TAB, t: Date.now() }));
+    return true;
+  }
+  /* كتابةُ الترحيلات عند الإقلاع تمرّ بالختم كذلك */
+  function rawSave() {
+    try { const body = JSON.stringify(state); if (wvClaim()) localStorage.setItem(LS_KEY, body); } catch (e) {}
+  }
+  /* ===== والمتقادمُ يُحدِّث نفسه — بلا محوٍ ولا مفاجأة (قرارُ صاحب الموقع) =====
+     مخفيٌّ ⇐ يُحدَّث عند ظهوره · ظاهرٌ بلا كتابةٍ جارية ⇐ يُحدَّث الآن ·
+     ظاهرٌ وفيه كتابة ⇐ شريطٌ صغير «حدِّث»، فلا تُسحب الصفحةُ من تحت يده. */
+  function wvTyping() {
+    const a = document.activeElement;
+    return !!(a && (a.isContentEditable || a.tagName === 'TEXTAREA'
+      || (a.tagName === 'INPUT' && !/^(button|submit|checkbox|radio|range|file|color)$/i.test(a.type || ''))));
+  }
+  function wvGoStale(why) {
+    if (!wvStale) { wvStale = true; try { bootMark('stale:' + why); } catch (e) {} }
+    if (document.visibilityState === 'hidden') return;          /* يُحدَّث عند ظهوره */
+    /* ولا دوّامة: نافذتان ظاهرتان معًا تُقادِم كلٌّ منهما الأخرى بحفظات إقلاعها، فلو
+       حدّث كلٌّ نفسَه بلا حدٍّ لَما سكنتا. فالتحديثُ التلقائيُّ مرّةً في ١٥ ثانيةً للتبويب،
+       وما زاد فشريط */
+    let last = 0;
+    try { last = +sessionStorage.getItem('academia2:wvReload') || 0; } catch (e) {}
+    if (!wvTyping() && Date.now() - last > 15000) {
+      try { sessionStorage.setItem('academia2:wvReload', String(Date.now())); } catch (e) {}
+      location.reload(); return;
+    }
+    if (document.getElementById('wv-bar')) return;
+    const ar = !state || (state.lang || 'ar') === 'ar';
+    const b = document.createElement('div');
+    b.id = 'wv-bar';
+    b.style.cssText = 'position:fixed;inset-inline:0;bottom:0;z-index:9999;padding:10px 16px;'
+      + 'background:#2c5e65;color:#fff;font:700 13px/1.7 "IBM Plex Sans Arabic",sans-serif;text-align:center';
+    b.textContent = ar ? 'تغيّر حسابك في تبويبٍ آخر' : 'Your account changed in another tab';
+    const x = document.createElement('button');
+    x.type = 'button'; x.textContent = ar ? 'حدِّث' : 'Refresh';
+    x.style.cssText = 'margin-inline-start:12px;border:0;border-radius:8px;padding:4px 12px;'
+      + 'cursor:pointer;font:inherit;background:#fff;color:#2c5e65';
+    x.onclick = () => location.reload();
+    b.appendChild(x);
+    (document.body || document.documentElement).appendChild(b);
+  }
+  /* ويُعرف فورًا: كتابةُ الختم في تبويبٍ آخر تُطلق ‎storage‎ ههنا */
+  window.addEventListener('storage', e => {
+    if (e.key !== WV_KEY) return;
+    if (wvRead() !== wvMine) wvGoStale('peer');
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && wvStale) wvGoStale('show');
+  });
+
   {
     let raw = null;
     try { raw = localStorage.getItem(LS_KEY); } catch (e) { raw = null; }
@@ -448,7 +524,7 @@
     if (fixed) {
       state.terms = out;
       if (state.lastNook && !out.includes(state.lastNook.term)) state.lastNook = null;
-      try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+      rawSave();
     }
   }
 
@@ -461,7 +537,7 @@
         return x;
       });
     });
-    if (migrated) { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {} }
+    if (migrated) { rawSave(); }
   }
   const libEntries = term => state.libs[term] || (state.libs[term] = []);
   const libCodes = term => libEntries(term).map(e => e.code);
@@ -535,7 +611,7 @@
     };
     fnWalk(state.cinfo);
     state.fnFix = 2;
-    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    rawSave();
     if (fnHits) console.log('وسمُ صورةٍ رُدَّ إلى صيغته:', fnHits);
   }
 
@@ -601,7 +677,7 @@
     };
     walk(state.cinfo);
     state.ansSeed = 1;
-    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    rawSave();
     if (seeded) console.log('بذرةُ حكم الجواب: بطائقُ نُقل إليها سجلُّها القديم:', seeded);
   }
 
@@ -1132,6 +1208,11 @@
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
   let saveBad = false, lastCore = '';
+  let wvHidAt = 0, wvLate = false;   /* متى اختفى التبويب · وحفظٌ أُجِّل إلى ظهوره */
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') { wvHidAt = Date.now(); return; }
+    if (wvLate && !wvStale) save();
+  });
   /* saveHold: a pass over many courses (the admin boot publish) saves once at the end, not once per course --
      each save serialises the whole state, and ~800 of them froze the panel for minutes. */
   let saveHold = 0, saveLate = false;
@@ -1141,6 +1222,15 @@
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
     if (stateFrozen) { bootMark('frozen'); saveAlarm(new Error('frozen'), 'frozen'); return; }
+    /* ===== والمتقادمُ لا يكتب =====
+       كتب تبويبٌ آخرُ بعدي: ما في ذاكرتي أقدمُ مما على القرص (م١) */
+    if (wvStale) return;
+    /* ===== والتبويبُ المخفيُّ لا يكتب متأخّرًا =====
+       ثانيتان بعد الاختفاء يُحفظ فيهما ما عُدِّل وهو ظاهر (‎visibilitychange‎ و‎pagehide‎).
+       وما بعدهما ثمرةُ جذبٍ في الخلفية — يُعاد جذبُه، فيُؤجَّل إلى الظهور. فلا يكتب
+       تبويبٌ منسيٌّ فوق التبويب الذي تعمل فيه. */
+    if (document.visibilityState === 'hidden' && Date.now() - wvHidAt > 2000) { wvLate = true; return; }
+    wvLate = false;
 
     /* ===== ولا تُمحى النواةُ بحفظٍ =====
        أترامٌ كانت ثمّ صارت صفرًا في الذاكرة: ذاك محوٌ لم يطلبه أحد. ولا يُكتب،
@@ -1151,7 +1241,14 @@
        المرّة، وسقوطُ اثنين فأكثرَ دفعةً ليس فعلَ إنسان.
        ومن قصد نقصانًا أكبرَ (دمجُ نواةٍ فيها شواهدُ حذفٍ من متصفّحٍ آخر)
        يستأذن بـ‎allowDrop‎ — إذنٌ يُستهلك مرّةً واحدة، فلا يبقى بابًا مفتوحًا. */
-    const bak = coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0;
+    /* ===== والحارسُ يقرأ القرصَ لا الذاكرة (م١) =====
+       كان يقارن بنسخة التبويب في ذاكرته، فالتبويبُ الذي فُتح بلا أترام لم يرَ
+       ما يحميه. فتُقرأ النسخةُ من القرص لحظةَ الحفظ (عشراتُ الكيلوبايتات) */
+    let coreDiskStr = null;
+    try { coreDiskStr = localStorage.getItem(CORE_KEY); } catch (e) {}
+    let coreDisk = coreBak;
+    try { if (coreDiskStr) coreDisk = JSON.parse(coreDiskStr); } catch (e) {}
+    const bak = coreDisk && Array.isArray(coreDisk.terms) ? coreDisk.terms.length : 0;
     const nowN = (state.terms || []).length;
     const drop = bak - nowN;
     if (bak && drop > 1 && dropOK < drop) {
@@ -1163,13 +1260,16 @@
 
     try {
       dropCinfo = cinfoSafe();     /* يُسأل مرّةً في الحفظة لا لكلّ مفتاح */
-      localStorage.setItem(LS_KEY, JSON.stringify(state, saveTrim));
+      /* يُسلسَل أوّلًا ثمّ يُطالَب بالدور ثمّ يُكتب: فبين فحص الختم والكتابة لا شيءَ إلّا الكتابة */
+      const body = JSON.stringify(state, saveTrim);
+      if (!wvClaim()) return;
+      localStorage.setItem(LS_KEY, body);
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
-        coreStamp(coreBak || {});          /* الشاهدان: بمقابلة المحفوظ بالحاضر */
+        coreStamp(coreDisk || {});         /* الشاهدان: بمقابلة المحفوظ بالحاضر */
         const c = JSON.stringify(coreOf(state));
-        if (c !== lastCore) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
+        if (c !== coreDiskStr) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
@@ -1205,7 +1305,7 @@
     if (!s || typeof s !== 'object' || Array.isArray(s)) return false;
     Object.keys(s).forEach(k => { state[k] = s[k]; });
     save();
-    return !saveBad && !stateFrozen;
+    return !saveBad && !stateFrozen && !wvStale;
   };
 
   /* يُقال صراحةً حين يُردّ ما ضاع: صمتُ الإصلاح كصمت العطب */
@@ -1672,7 +1772,7 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
-      profImgRejected: 'رفض الخادم الصورة — جرّب صورةً أخرى',
+      profImgFail: 'فشل رفع الصورة',
       srvBusy: 'بلغتَ حدّ الطلبات — سيُعاد الإرسال تلقائيًا بعد قليل',
       /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
          لا يُزكّيه صاحبُه». والسببُ صحيحٌ ومكانُه التعليقُ في الشيفرة لا شريطٌ
@@ -2066,7 +2166,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
-      profImgRejected: 'The server rejected this photo — try another one',
+      profImgFail: 'Photo upload failed',
       srvBusy: 'Rate limit reached — this will be sent again shortly',
       likeSelf: 'You cannot like your own contribution',
       cmtLikeSelf: 'You cannot like your own comment',
@@ -37782,16 +37882,18 @@ void main() {
     /* أيقونةُ التحميل تظهر من أوّل الطلب حتى آخره، في الاختيار وفي الإعادة.
        وما فشل لسببٍ عابرٍ يُعاد بصمت: لا رسالةَ «لم تُحفظ» (طلبُ صاحب الموقع) */
     profUp = true; renderProfile(); renderAcctPage();
-    const pending = () => {};
+    /* ===== والفشلُ يُقال بكلمتين، مرّةً عند الاختيار (قرارُ صاحب الموقع) =====
+       «فشل رفع الصورة» — بلا خادمٍ ولا شرح. وإعادةُ المحاولة في الخلفية صامتة:
+       إن نجحت ظهرت الصورة. والسببُ بعينه في الدفتر (‎prof:…‎ و‎med:…‎) */
+    const failed = () => { if (fromPick) toast(T().profImgFail); };
     try {
       medWhy = '';
-      const url = await medUp(blob);            /* ‎medUp‎ يقول سببَ رفضه المعروف بنفسه */
+      const url = await medUp(blob, true);      /* صامتة: الرسالةُ هنا وحدها */
       if (!url) {
         bootMark('prof:up:' + (medWhy || 'fail'));
         /* صورةٌ مرفوضةٌ لذاتها (نوعٌ أو حجم) لا تُعاد — والإعادةُ لا تغيّرها */
-        if (medWhy === 'type' || medWhy === 'too-big') { delete state.profile.imgPending; save(); return false; }
-        /* وما قال ‎medUp‎ سببَه (الجلسة، الحصّة، الشبكة) لا يُثنّى عليه */
-        if (!MED_SAY[medWhy]) pending();
+        if (medWhy === 'type' || medWhy === 'too-big') { delete state.profile.imgPending; save(); }
+        failed();
         return false;
       }
       let r;
@@ -37801,12 +37903,11 @@ void main() {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ img: url }),
         });
-      } catch (e) { bootMark('prof:patch:net'); pending(); return false; }
+      } catch (e) { bootMark('prof:patch:net'); failed(); return false; }
       if (!r.ok) {
         bootMark('prof:patch:' + r.status);
-        if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
-        else if (r.status === 400) { delete state.profile.imgPending; save(); toast(T().profImgRejected); }
-        else pending();
+        if (r.status === 400) { delete state.profile.imgPending; save(); }
+        failed();
         return false;
       }
       /* حُفظت: تُرفع علامةُ التعليق، وتصير الصورةُ عنوانَ الخادم بدل ‎data:‎ الثقيلة في الدرج */
@@ -37814,7 +37915,7 @@ void main() {
       if (state.profile.imgPending === dataUrl) delete state.profile.imgPending;
       state.profile.img = url; save(); renderProfile(); renderAcctPage();
       return true;
-    } catch (e) { bootMark('prof:err'); pending(); return false; }
+    } catch (e) { bootMark('prof:err'); failed(); return false; }
     finally { profBusy = false; profUp = false; renderProfile(); renderAcctPage(); }
   }
   /* ===== وما عُلِّق يُعاد حتى يصل =====
@@ -38025,7 +38126,7 @@ void main() {
     'too-big': 'الصورة أكبر من الحدّ',
     net: 'تعذّر الوصول للخادم',
   };
-  async function medUp(blob) {
+  async function medUp(blob, quiet) {
     let r = null;
     try {
       r = await apiFetch((ASSET_BASE ? new URL('api/media', window.AC_API_BASE || ASSET_BASE).href
@@ -38033,7 +38134,7 @@ void main() {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
       });
-    } catch (e) { medWhy = 'net'; bootMark('med:net'); if (typeof toast === 'function') toast(MED_SAY.net); return null; }
+    } catch (e) { medWhy = 'net'; bootMark('med:net'); if (!quiet && typeof toast === 'function') toast(MED_SAY.net); return null; }
     if (r.status === 413) { medBig = true; medWhy = 'too-big'; bootMark('med:413'); return null; }
     if (!r.ok) {
       let j = null;
@@ -38041,7 +38142,7 @@ void main() {
       const why = (j && j.error) || ('http' + r.status);
       medWhy = why;
       bootMark('med:' + why);
-      if (typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
+      if (!quiet && typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
       return null;
     }
     const j = await r.json().catch(() => null);
