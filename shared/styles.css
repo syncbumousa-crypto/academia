@@ -20121,7 +20121,12 @@ html[data-theme="dark"] .pg-stb > b > i::after { opacity: 1.1; }
 .pg-cnt--stg { cursor: pointer; }
 .x3-dot--stg { cursor: pointer; }
 /* الشريطُ المصفّى به: حلقةٌ بيضاءُ داخله، ولا يخفت */
-.pg-stb > b.is-pick { box-shadow: inset 0 0 0 1.6px rgba(255, 255, 255, .9); opacity: 1 !important; filter: brightness(1.1); }
+/* (طلبُ صاحب الموقع: «حسّن الإطار») — كان حدًّا أبيضَ مربّعًا يُقصّ عند طرفي الكبسولة. فصار حبّةً مدوّرةً داخل الشريط بحدٍّ رفيعٍ
+   ولمعةٍ خفيفة، والشريطُ أسطعُ قليلًا، وما لم يُختر من إخوته يخفت قليلًا ما دام فيها مختار */
+.pg-stb > b.is-pick { opacity: 1 !important; filter: brightness(1.08) saturate(1.08); }
+.pg-stb > b.is-pick::after { content: ''; position: absolute; inset: 2.5px 2px; border-radius: 99px; pointer-events: none;
+  box-shadow: inset 0 0 0 1.3px rgba(255, 255, 255, .88), 0 0 5px rgba(255, 255, 255, .28); }
+.pg-stb:has(> b.is-pick):not(:has(> b.on)) > b:not(.is-pick) { opacity: .62; filter: saturate(.75); }
 .pg-stb > b { cursor: pointer; }
 .pk-stfloat.is-nopick .pg-stb > b { cursor: default; }
 /* (بلاغُ صاحب الموقع: «تموضعها سيء») كبسولةُ المساهمة تنبسط من الدائرة نحو نصّ «أكملت» لا فوق الغلاف */
