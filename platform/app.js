@@ -10025,13 +10025,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkStgAuto = x => {
     clearTimeout(x._stTm);
     x._stTm = setTimeout(() => {
-      if (!x.classList.contains('is-stclk')) return;
+      if (!x.classList.contains('is-stclk') || pkStgPinned(x)) return;
       if (x.matches(':hover')) x.addEventListener('pointerleave', () => { if (x.classList.contains('is-stclk')) pkStgShut(x); }, { once: true });
       else pkStgShut(x);
     }, 13000);
   };
+  const pkStgPinned = x => { const st = x.closest && x.closest('#cm-body .pk-fstrip'), f = x.closest && x.closest('.pg-face'), o = st && f && pkStgFilt[st.dataset.pkid]; return !!(o && o.picks.some(p => p.f === f.dataset.pkf)); };
   const pkStgShut = x => {
-    clearTimeout(x._stTm);
+    if (pkStgPinned(x)) return;   /* المختارُ منها شريطٌ لا ينطوي */
+    clearTimeout(x._stTm); x.classList.remove('pg-cnt--now');
     x.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(y => y !== x); pkStgWake(x);
     if (x._ct && x._sh) {   /* وتعود المساحةُ إلى مكانها مع انطواء الكبسولة (بتأخيره نفسِه) */
       const tr = 'transform .46s cubic-bezier(.22, 1, .36, 1) .34s';
@@ -10155,7 +10157,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     try { if (hh === '#memdemo') localStorage.setItem('ac.memdemo', '1'); else localStorage.removeItem('ac.memdemo'); history.replaceState(null, '', location.pathname + location.search); } catch (e) { }
     location.reload();
   });
-  let pkBoxMine = false;
+  let pkBoxMine = false, pkBoxId = null;
   const PK_STG_DEMO = [[2, 2, 3, 4, 3, 2, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0], [10, 0, 1, 2, 0, 0, 0, 0], [2, 1, 9, 1, 0, 0, 0, 0], [1, 8, 1, 1, 0, 0, 0, 1],
     [0, 0, 1, 4, 4, 3, 2, 0], [0, 0, 0, 2, 2, 2, 3, 6], [1, 0, 0, 0, 0, 1, 3, 10], [0, 0, 0, 0, 0, 0, 0, 1], [7, 0, 0, 0, 0, 0, 0, 7], [2, 0, 4, 0, 1, 0, 1, 6], [1, 5, 5, 1, 1, 0, 0, 0]];
   const pkStgHash = t => { let h = 2166136261; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -10201,7 +10203,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.forEach(x => E.push(E[E.length - 1] + x / G)); E[8] = 1;
     return { L, S, E };
   };
-  function pkStgHTML(ns, title, en, cnt, ldx) {
+  function pkStgHTML(ns, title, en, cnt, ldx, pin) {
     const c = cnt || pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
     let dot = '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
     if (G.L > 0) {
@@ -10223,7 +10225,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tot = w.reduce((x, y) => x + y, 0) || 1; return w.map(x => x / tot);
     })();
     { const E = [0]; pw.forEach(x => E.push(E[E.length - 1] + x)); E[8] = 1; G.E = E; }
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" ${pin && pin.has(i) ? 'class="is-pick" ' : ''}style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
     /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالرماديّ (كان أصفرَ ثمّ بُدّل بطلبه) =====
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
@@ -10233,9 +10235,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
     { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
     title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;
-    return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
+    /* (طلبُ صاحب الموقع) وكبسولةٌ اختير منها شريطٌ تبقى مفتوحةً ما دام مختارًا — وتُرسم مفتوحةً في كلّ رسمة */
+    const pn = pin && pin.size ? ' pg-cnt--now is-peek is-stclk is-stdone' : '';
+    return `<span class="pg-cnt pg-cnt--stg${pn}" title="${esc(title)}"${pn ? ` style="--pk-w:${W}px"` : ''}><span class="pg-ring">${dot}</span>`
       + `<span class="pg-cap pg-cap--stg" data-gold="1" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
+  const pkPinOf = f => { const o = pkBoxId != null && pkStgFilt[pkBoxId]; return o ? new Set(o.picks.filter(p => p.f === f).map(p => p.k)) : null; };
   function pkCntHTML(k, wide) {
     if (!pkBoxDeck || !k || k.id === '') return '';
     /* (طلبُ صاحب الموقع) المجلدُ المطويُّ كبسولتُه تقول كلَّ ما فيه بمجلداته؛ فإذا انفتح صار لكلّ مجلدٍ فيه كبسولتُه،
@@ -10253,14 +10258,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en);
+        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, null, null, pkPinOf(k.id));
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
        يقلبه المتصفّحُ أرقامًا من اليسار. والدائرةُ النسبةُ نفسُها.
        ويُرى الدائرةُ وحدها، فإذا مرّ عليها المؤشّرُ انبسطت كبسولةً بثيمها نفسِه (الحدّ واللمعة والماء الصاعد من الأسفل) وفيها الكسر (طلبُ صاحب الموقع) */
     const k2 = Math.min(a.k, tot);
-    return pkStgHTML(ns, en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`, en);
+    return pkStgHTML(ns, en ? `${k2} of ${tot} concepts done` : `أنجزت ${k2} من ${tot} مفهوم`, en, null, null, pkPinOf(k.id));
   }
   const pkAwait = new Set();   /* مساهماتٌ منشورةٌ ملخّصُها فارغٌ حتى يُنقر أوّلُ مجلد */
   /* ===== ROADMAP-BANKPANE: «العرضُ المجلّديّ» صار منطقةَ البنك (قرارُ صاحب الموقع: «هو نفسُه») =====
@@ -13546,7 +13551,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxMine = !!(editable || mine); pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
+    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxId = id; pkBoxMine = !!(editable || mine); pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
@@ -31017,6 +31022,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         else { pkOpAdd(open, par, f); delete pkSolo[id]; }
       } else delete pkSolo[id];   /* (طلبُ صاحب الموقع) واختيارُ أخٍ لا جوفَ له لا يطوي المفتوحَ في صفّه بعد اليوم */   /* اختيارُ أخٍ لا جوفَ له يُنهي توسّعَ المفتوح في صفّه (بطلب صاحب الموقع) */
       pkFs[id] = f;
+      if (pkStgFilt[id] && pkStgFilt[id].sel !== f) delete pkStgFilt[id];   /* اختيارُ مجلدٍ آخر يرفع تصفيةَ الشرائط (فتنطوي كبسولتُها كعادتها) */
       const pubPick = !pf.closest('.pk--edit');
       /* ‏تطيرُ التحديداتُ من الكتاب إلى البطائق والكتابُ بطريقة الصفحتين وحدها (طلبُ صاحب الموقع) — وفيما سواها تظهر البطائقُ حالًا */
       const fly = bkModeGet() === 'two' && !!pkSplitOn(id);
