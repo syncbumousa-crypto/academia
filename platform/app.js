@@ -1672,6 +1672,9 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
+      profImgPending: 'لم تُحفظ صورتك على الخادم بعد — سنعيد المحاولة تلقائيًّا',
+      profImgSaved: 'حُفظت صورتك',
+      profImgRejected: 'رفض الخادم الصورة — جرّب صورةً أخرى',
       srvBusy: 'بلغتَ حدّ الطلبات — سيُعاد الإرسال تلقائيًا بعد قليل',
       /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
          لا يُزكّيه صاحبُه». والسببُ صحيحٌ ومكانُه التعليقُ في الشيفرة لا شريطٌ
@@ -2065,6 +2068,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
+      profImgPending: 'Your photo is not saved on the server yet — retrying automatically',
+      profImgSaved: 'Your photo is saved',
+      profImgRejected: 'The server rejected this photo — try another one',
       srvBusy: 'Rate limit reached — this will be sent again shortly',
       likeSelf: 'You cannot like your own contribution',
       cmtLikeSelf: 'You cannot like your own comment',
@@ -3126,13 +3132,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
         const url = cv.toDataURL('image/jpeg', .82);
         if (pickProfile) {
-          state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage();
+          state.profile.img = url; pickProfile = false;
+          /* معلَّقةٌ حتى يؤكّد الخادمُ حفظَها — فلا يكتب ‎authTake‎ القديمةَ فوقها (ROADMAP-PROFILE-IMG م١) */
+          if (!isGuest()) state.profile.imgPending = url;
+          save(); renderProfile(); renderAcctPage();
           /* ===== وتبلغ الخادمَ إن كنتَ عضوًا =====
              الصورةُ تُعرض على كلّ مساهمةٍ نشرتَها، وهي في جدول المستخدمين لا في
              نسخة المساهمة. فلو بقيت في الدرج لَظهرتَ للناس بلا صورةٍ أبدًا.
              وترفعها ‎profImg‎ إلى المستودع أوّلًا ثمّ تبعث عنوانَها: نقطةُ البروفايل
              لا تقبل ‎data:‎ — ضخمةٌ تُثقل كلَّ قراءةِ مساهمة. */
-          profImg(url);
+          profImg(url, true);
           return;
         }
         /* ===== ولا مخزنَ ثانٍ للصورة =====
@@ -37641,7 +37650,11 @@ void main() {
     profLast = u.name || '';          /* ما جاء من الخادم لا يُدفع إليه */
     state.profile.name = u.name || (swap ? '' : state.profile.name) || '';
     state.profile.email = u.email || '';
-    if (u.img) state.profile.img = u.img;
+    /* والصورةُ المعلَّقةُ (اختيرت ولم يؤكّدها الخادم) تغلب صورةَ الخادم ما دام الحسابُ هو هو:
+       كانت تُمحى في أوّل إقلاع فتعود القديمة — الشكوى بعينها. فتبقى، ويُعاد رفعُها */
+    if (swap) delete state.profile.imgPending;
+    if (state.profile.imgPending) { state.profile.img = state.profile.imgPending; setTimeout(profRetry, 1500); }
+    else if (u.img) state.profile.img = u.img;
     else if (swap) state.profile.img = '';
     if (swap) state.profile.phone = '';
     state.profile.password = '';        /* لا سرَّ في الدرج بعد اليوم */
@@ -37752,21 +37765,61 @@ void main() {
      تُرفع إلى المستودع (المعنونِ بالمحتوى) ثمّ يُبعث عنوانُها. ولا تُرسل ‎data:‎:
      نقطةُ البروفايل ترفضها، وصورةٌ خامٌ في جدول المستخدمين تُثقل كلَّ قراءةِ
      مساهمةٍ لأنّ الاسمَ والصورةَ يُقرآن معها. */
-  async function profImg(dataUrl) {
-    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return;
+  /* ===== ولا فشلَ صامت (ROADMAP-PROFILE-IMG م٢) =====
+     كلُّ محطّةٍ تُكتب في سجلّ الإقلاع (‎prof:…‎)، وكلُّ فشلٍ يُقال — مرّةً في الجلسة
+     حين تكون الإعادةُ تلقائيّة، فلا يُزعَج بها في كلّ محاولة. */
+  let profSaid = false, profBusy = false;
+  async function profImg(dataUrl, fromPick) {
+    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return false;
+    if (profBusy) return false;
     const blob = dataToBlob(dataUrl);
-    if (!blob) return;
+    if (!blob) { bootMark('prof:blob'); return false; }
+    profBusy = true;
+    const pending = () => { if (fromPick || !profSaid) { profSaid = true; toast(T().profImgPending); } };
     try {
-      const url = await medUp(blob);
-      if (!url) return;
-      const r = await apiFetch(authURL('me'), {
-        method: 'PATCH', credentials: 'same-origin',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ img: url }),
-      });
-      if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
-    } catch (e) { /* لا شبكة: تبقى محلّيّةً حتى يُعاد الاختيار */ }
+      medWhy = '';
+      const url = await medUp(blob);            /* ‎medUp‎ يقول سببَ رفضه المعروف بنفسه */
+      if (!url) {
+        bootMark('prof:up:' + (medWhy || 'fail'));
+        /* صورةٌ مرفوضةٌ لذاتها (نوعٌ أو حجم) لا تُعاد — والإعادةُ لا تغيّرها */
+        if (medWhy === 'type' || medWhy === 'too-big') { delete state.profile.imgPending; save(); return false; }
+        /* وما قال ‎medUp‎ سببَه (الجلسة، الحصّة، الشبكة) لا يُثنّى عليه */
+        if (!MED_SAY[medWhy]) pending();
+        return false;
+      }
+      let r;
+      try {
+        r = await apiFetch(authURL('me'), {
+          method: 'PATCH', credentials: 'same-origin',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ img: url }),
+        });
+      } catch (e) { bootMark('prof:patch:net'); pending(); return false; }
+      if (!r.ok) {
+        bootMark('prof:patch:' + r.status);
+        if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
+        else if (r.status === 400) { delete state.profile.imgPending; save(); toast(T().profImgRejected); }
+        else pending();
+        return false;
+      }
+      /* حُفظت: تُرفع علامةُ التعليق، وتصير الصورةُ عنوانَ الخادم بدل ‎data:‎ الثقيلة في الدرج */
+      bootMark('prof:ok');
+      if (state.profile.imgPending === dataUrl) delete state.profile.imgPending;
+      state.profile.img = url; save(); renderProfile(); renderAcctPage();
+      if (profSaid || !fromPick) toast(T().profImgSaved);
+      profSaid = false;
+      return true;
+    } catch (e) { bootMark('prof:err'); pending(); return false; }
+    finally { profBusy = false; }
   }
+  /* ===== وما عُلِّق يُعاد حتى يصل =====
+     عند الإقلاع (من ‎authTake‎)، وعند عودة الشبكة، وعند الرجوع إلى الصفحة */
+  function profRetry() {
+    const d = state.profile && state.profile.imgPending;
+    if (d && !isGuest()) profImg(d, false);
+  }
+  window.addEventListener('online', profRetry);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') profRetry(); });
 
   /* ---------- جسرٌ للوحة الأدمن ----------
      اللوحةُ تفتح جلسةَ الموقع بنفسها (‎/api/auth/site‎) بعد أن يكون المحرّكُ قد
@@ -37944,6 +37997,7 @@ void main() {
      كلاهما يردّ ‎null‎، وحكمُهما نقيضان: الشبكةُ تُعاد، والحجمُ لا يُعاد أبدًا
      مهما أُعيد. فلو خُلطا لَبقيت المساهمةُ تُحاول إلى الأبد بلا كلمة. */
   let medBig = false;
+  let medWhy = '';                 /* سببُ آخرِ رفضٍ من ‎medUp‎ — يقرؤه ‎profImg‎ ليعرف أيُعيد أم لا */
 
   /* ============================================================
      وحالُ المساهمة عند الدفع — ولا يُخفَّض ما جاء من الخادم منشورًا
@@ -37974,18 +38028,19 @@ void main() {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
       });
-    } catch (e) { bootMark('med:net'); return null; }
-    if (r.status === 413) { medBig = true; bootMark('med:413'); return null; }
+    } catch (e) { medWhy = 'net'; bootMark('med:net'); if (typeof toast === 'function') toast(MED_SAY.net); return null; }
+    if (r.status === 413) { medBig = true; medWhy = 'too-big'; bootMark('med:413'); return null; }
     if (!r.ok) {
       let j = null;
       try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
       const why = (j && j.error) || ('http' + r.status);
+      medWhy = why;
       bootMark('med:' + why);
       if (typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
       return null;
     }
     const j = await r.json().catch(() => null);
-    if (!j || !j.url) { bootMark('med:noUrl'); return null; }
+    if (!j || !j.url) { medWhy = 'noUrl'; bootMark('med:noUrl'); return null; }
     bootMark('med:ok:' + (j.size | 0));
     return j.url;
   }
