@@ -17435,6 +17435,31 @@ html[data-lang="en"] .pp-tab .pp-pill { left: 0; }
 .pp-pill.on .b { border: 1.5px solid var(--k); color: var(--k); }
 .pp-pill .b svg { width: 80%; height: 80%; display: block; }
 .pp-pill .b:hover { transform: scale(1.1); }
+/* لسانُ بطاقة اللوح: على الحافّة اليمنى أعلاها (يسارًا في الإنجليزيّة)، يغطّي حدَّ البطاقة حيث يتّصل فلا شقّ */
+.kcv-tab { position: absolute; top: 4px; left: 100%; width: 25px; height: 52px; z-index: 2; --tw: 24px; --tth: 34px; --tf: 9px; }
+html[data-lang="en"] .kcv-tab { left: auto; right: 100%; }
+html[data-lang="en"] .kcv-tabsv { transform: scaleX(-1); }
+.kcv-tabsv { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.kcv-tabsv .f { fill: var(--u-in-bg, #fff); }
+html[data-theme="dark"] .kcv-tabsv .f { fill: #3a4246; }
+.kcv-tabsv .e { fill: none; stroke: var(--u-line, rgba(44, 94, 101, .18)); stroke-width: 1; }
+.kcv-card.is-sel .kcv-tabsv .e { stroke: color-mix(in srgb, var(--u-gold, #c9a25c) 85%, transparent); }
+.kcv-pill { position: absolute; top: 9px; left: 0; width: 24px; height: 34px; display: grid; place-items: center; align-content: center; gap: 3px; }
+html[data-lang="en"] .kcv-pill { left: 1px; }
+.kcv-pill > * { position: relative; }
+.kcv-pill::before { content: ''; position: absolute; left: 50%; top: 50%; width: 17px; height: 30px; transform: translate(-50%, -50%); border-radius: 99px; box-sizing: border-box;
+  border: 1.2px solid color-mix(in srgb, var(--k) 62%, transparent); background: color-mix(in srgb, var(--k) 7%, transparent); }
+.kcv-pill.on::before { border-width: 1.6px; border-color: var(--k); }
+.kcv-pill .n { font-size: 9.5px; }
+.kcv-pill .b { width: 7.5px; height: 7.5px; border-width: 1.2px; }
+.kcv-pill.on .b { border-width: 1.3px; }
+/* حبّةُ الجدول في عمود الرقم */
+.kt-pill { position: relative; display: inline-grid; place-items: center; align-content: center; gap: 4px; width: 22px; height: 40px; vertical-align: middle; }
+.kt-pill > * { position: relative; }
+.kt-pill::before { content: ''; position: absolute; inset: 0; border-radius: 99px; box-sizing: border-box; border: 1.3px solid color-mix(in srgb, var(--k) 62%, transparent); background: color-mix(in srgb, var(--k) 7%, transparent); }
+.kt-pill.on::before { border-width: 1.7px; border-color: var(--k); }
+.kt .kt-pill .n.kt-num { font-size: 12px; font-weight: 400; color: var(--k); background: none; box-shadow: none; min-width: 0; height: auto; padding: 0; display: inline; }
+.kt-pill .b { width: 9px; height: 9px; }
 
 /* ===== الكتلةُ متّصلةٌ بلا قاطع (طلبُ صاحب الموقع) =====
    مسكةُ طيّ الذيل ظاهرةٌ دائمًا (طلبُ صاحب الموقع) — الكتلُ لم تعد تتّصل بالذيل فلا تقطعها */

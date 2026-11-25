@@ -13862,6 +13862,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('[data-ktok]'); if (!el) return; e.preventDefault(); e.stopPropagation(); ktOkTog(el); });
   document.addEventListener('keydown', e => { if (e.key !== ' ' && e.key !== 'Enter') return; const el = e.target.closest && e.target.closest('[data-ktok]'); if (!el) return; e.preventDefault(); ktOkTog(el); });
+  /* مربّعُ الصحّ في لسان بطاقة اللوح: يعلّم المفهومَ (إكمالُك أنت) في مكانه — بلا إعادة رسمٍ تحرّك اللوح */
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-kctk]'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const k = b.dataset.kctk, m = state.ktok || (state.ktok = {}); if (m[k]) delete m[k]; else m[k] = 1; save();
+    document.querySelectorAll(`[data-kctk="${CSS.escape(k)}"]`).forEach(x => { x.setAttribute('aria-checked', String(!!m[k])); x.closest('.pp-pill').classList.toggle('on', !!m[k]); });
+  }, true);
+  /* حبّةُ الرقم والإكمال في عمود الرقم (الملخّص المنشور): الرقمُ فوق — يبقى نقرُه للتظليلات كما كان — ومربّعُ الصحّ تحته */
+  const ktPill = (n, k, hl) => { const sg = KTSTG && KTSTG.get(n.id), on = !!(state.ktok || {})[recId(n)];
+    return `<span class="pp-pill kt-pill${sg ? ' stg' : ''}${on ? ' on' : ''}" style="--c:${sg ? `var(--stg-${PK_STG[sg]})` : 'var(--stg-done)'}"><span class="n kt-num${hl ? ' has-hl' : ''}">${k}</span>`
+      + `<span class="b" data-kctk="${esc(recId(n))}" role="checkbox" aria-checked="${on}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>`; };
   const ktAddBtn = () => `<button type="button" class="kt-add" data-ktadd aria-label="${esc(T().ktAddAria)}"><span aria-hidden="true">+</span>${esc(T().ktAdd)}</button>`;
   /* بقيّةُ صفوف الجدول المنشور: تُلحَق بجدولها دفعةً في كلّ فراغ. ومفتاحٌ لم يُرسم جدولُه
      (بُني نصُّه ولم يُوضع، أو هُدم قبل أن يكتمل) يُمحى فلا يبقى في الذاكرة */
@@ -13923,7 +13934,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const hrow = x => {
         const sel = !ro && ktRow && ktRow.id === 'h:' + x.key;
         return `<tr class="kt-hrow${sel ? ' is-rowsel' : ''}" data-kh="${esc(x.key)}" style="transform:translateY(${6 - jn * 15}px)">`
-          + x.c.slice(0, ro ? 4 : 3).map((t, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"${x.key === 'main' ? '' : ` data-khx="${esc(x.key)}"`}`}>${esc(t || '')}</th>`).join('')
+          + x.c.slice(0, 3).map((t, c) => `<th class="kt-c${c} kt-t"${ro ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kth="${c}"${x.key === 'main' ? '' : ` data-khx="${esc(x.key)}"`}`}>${esc(t || '')}</th>`).join('')
           + `</tr>`;
       };
       const hrows = pos => HB.filter(x => x.pos === pos).map(hrow).join('');
@@ -13937,10 +13948,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const ja = !!(n.ja && k && !hb.has(n.id)), jb = !!(nx && nx.ja && !hb.has(nx.id));
           if (ja) jn++;
           const cls = (n.ln ? ' kt-lnr--' + n.ln : '') + (n.clr ? ' kt-clr--' + n.clr : '') + (n.nr ? ' kt-nr' : '') + (ja ? ' kt-ja' : '') + (jb ? ' kt-jb' : '') + (!ro && ktRow && ktRow.id === n.id ? ' is-rowsel' : '');
-          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0"><span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span></td>`
+          return hh + `<tr data-kcard="${esc(n.id)}"${cls ? ` class="${cls.trim()}"` : ''}${jn ? ` style="transform:translateY(-${jn * 15}px)"` : ''}><td class="kt-c0">${ro ? ktPill(n, ++k, used.has(n.id)) : `<span class="kt-num${used.has(n.id) ? ' has-hl' : ''}">${++k}</span>`}</td>`
           + `<td${ktEd(n.id, 'f', 'kt-c1 kt-t kt-term')}>${esc(n.f || '')}</td>`
           + `<td${ktEd(n.id, 'b', 'kt-c2 kt-t kt-mean')}>${esc(n.b || '')}</td>`
-          + (ro ? `<td class="kt-c3">${ktOk(n)}</td>` : '') + `</tr>`;
+          + `</tr>`;   /* (طلبُ صاحب الموقع) لا عمودَ للصحّ بعد اليوم: الصحُّ في حبّة الرقم */
         }).filter(Boolean);
       { const he = hrows('$end'); if (he) rows.push(he); }
       const topH = CL[0] && hb.has(CL[0].id);
@@ -14456,6 +14467,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const holders = trail.map(t => (findNode(deck, t) || {}).n).filter(Boolean);   /* آباءٌ هي مجلدات — لا «جذرَ» يُفتح */
       holders.forEach(H => (H && H.links || []).forEach(l => { const ia = ids.has(l.a), ib = ids.has(l.b); if (ia !== ib) stubs.push({ id: l.id, c: ia ? l.a : l.b, out: ia }); }));
     }
+    /* (طلبُ صاحب الموقع) لسانُ الرقم والإكمال على حافّة كلّ بطاقة — شكلٌ واحدٌ بانحناءاته، كلسان الورقة */
+    const kStg = new Map(); pkStgEach(host.arr, (n, i) => { if (!i) return; const q = kStg.get(n.id); if (q == null || i < q) kStg.set(n.id, i); });
+    const kTab = (n, i) => { const sg = kStg.get(n.id), on = !!(state.ktok || {})[recId(n)];
+      return `<span class="kcv-tab"><svg class="kcv-tabsv" viewBox="-1 0 25 52"><path class="f" d="M-1 0 L0 0 A9 9 0 0 0 9 9 L14 9 A10 10 0 0 1 24 19 L24 33 A10 10 0 0 1 14 43 L9 43 A9 9 0 0 0 0 52 L-1 52 Z"/><path class="e" d="M0 0 A9 9 0 0 0 9 9 L14 9 A10 10 0 0 1 24 19 L24 33 A10 10 0 0 1 14 43 L9 43 A9 9 0 0 0 0 52"/></svg>`
+        + `<span class="pp-pill kcv-pill${sg ? ' stg' : ''}${on ? ' on' : ''}" style="--c:${sg ? `var(--stg-${PK_STG[sg]})` : 'var(--stg-done)'}"><span class="n">${i + 1}</span><span class="b" data-kctk="${esc(recId(n))}" role="checkbox" aria-checked="${on}">`
+        + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span>`; };
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
       + `<div class="kcv-world"${V ? ` style="transform:translate(${V.x}px,${V.y}px) scale(${V.z})"` : ' style="visibility:hidden"'}>`
       /* المنطقةُ خفيّةٌ (طلبُ صاحب الموقع: اللوحُ يبدو واحدًا بلا إطارٍ ولا اسمٍ ولا أيقونة) — تبقى للترتيب بلا تراكب،
@@ -14467,11 +14484,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `</defs>` + links.map(l => `<g class="kcv-link" data-klink="${esc(l.id)}" data-a="${esc(l.a)}" data-b="${esc(l.b)}"><path class="kcv-hit"/><path class="kcv-line" marker-end="url(#kcv-ar)"/></g>`).join('')
       + stubs.map(t => `<g class="kcv-stub" data-kstub="${esc(t.id)}" data-c="${esc(t.c)}" data-out="${t.out ? 1 : 0}" data-kup="${esc(up)}"><path class="kcv-hit"/><path class="kcv-line"${t.out ? ' marker-end="url(#kcv-ar)"' : ' marker-start="url(#kcv-ar)"'}/></g>`).join('')
       + `</svg>`
-      + cards.map(n => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}" data-kz="${esc(zOf.get(n.id))}"`
+      + cards.map((n, ci) => `<div class="kcv-card${n.ok ? ' is-ok' : ''}" data-kcard="${esc(n.id)}" data-kz="${esc(zOf.get(n.id))}"`
           + (n.pos ? ` data-rx="${+n.pos.x || 0}" data-ry="${+n.pos.y || 0}" style="left:${+n.pos.x || 0}px;top:${+n.pos.y || 0}px"` : ' data-auto="1"') + `>`
           + `<div class="kt-t kcv-f" data-kc="${esc(n.id)}" data-kfld="f">${esc(n.f || '')}</div>`
           + `<div class="kt-t kcv-b" data-kc="${esc(n.id)}" data-kfld="b">${esc(n.b || '')}</div>`
-          + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + `</div>`).join('')
+          + (ro ? '' : ['t', 'r', 'b', 'l'].map(sd => `<i class="kcv-port kcv-port--${sd}" data-port="${sd}" aria-hidden="true"></i>`).join('')) + kTab(n, ci) + `</div>`).join('')
       + links.filter(l => l.label).map(l => `<div class="kcv-lab" data-klab="${esc(l.id)}">${esc(l.label)}</div>`).join('')
       + `<i class="kcv-guide kcv-guide--v" aria-hidden="true"></i><i class="kcv-guide kcv-guide--h" aria-hidden="true"></i>`
       + `</div>`
@@ -14773,7 +14790,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   document.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
     const card = e.target.closest && e.target.closest('#cm-body .kcv .kcv-card');
-    if (!card || e.target.closest('[contenteditable], .kcv-port') || card.closest('.kcv.is-ro')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب · ومن النقطة: وصل · والمنشورُ يُقرأ */
+    if (!card || e.target.closest('[contenteditable], .kcv-port, [data-kctk]') || card.closest('.kcv.is-ro')) return;   /* داخل نصٍّ يُحرَّر: تحديدُ نصٍّ لا سحب · ومن النقطة: وصل · والمنشورُ يُقرأ */
     kcvLinkSel(null);
     const cv = card.closest('.kcv'), id = card.dataset.kcard;
     e.preventDefault(); cv.focus({ preventScroll: true });
