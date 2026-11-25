@@ -10220,7 +10220,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.forEach(x => E.push(E[E.length - 1] + x / G)); E[8] = 1;
     return { L, S, E };
   };
-  function pkStgHTML(ns, title, en, cnt, ldx, pin) {
+  function pkStgHTML(ns, title, en, cnt, ldx, pin, lab) {   /* ‏‎lab‎: ما يُكتب على الشرائط بدل أعدادها (الزمنُ صفرًا لمجلدٍ بلا أزمنة) */
     const c = cnt || pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
     let dot = '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
     if (G.L > 0) {
@@ -10242,7 +10242,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tot = w.reduce((x, y) => x + y, 0) || 1; return w.map(x => x / tot);
     })();
     { const E = [0]; pw.forEach(x => E.push(E[E.length - 1] + x)); E[8] = 1; G.E = E; }
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" ${pin && pin.has(i) ? 'class="is-pick" ' : ''}style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" ${pin && pin.has(i) ? 'class="is-pick" ' : ''}style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${lab ? lab[i] : c[i]}">${lab ? lab[i] : c[i]}</i></b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
     /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالرماديّ (كان أصفرَ ثمّ بُدّل بطلبه) =====
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
@@ -10272,7 +10272,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
     if (pkQt[pkBoxId]) {   /* (طلبُ صاحب الموقع) قوسُ الزمن: الكبسولاتُ بالزمن فعلًا — وما لا زمنَ لمفاهيمه دائرةٌ فارغةٌ تقول ذلك، لا عدد */
       const tt = Math.round(cs.reduce((x, n) => x + pkTm(n), 0));
-      if (!tt) return `<span class="pg-cnt pg-cnt--void" title="${esc(en ? 'No time set for these concepts' : 'لا زمن لمفاهيم هذا المجلد')}"><span class="pg-ring"><span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span></span></span>`;
+      /* وما لا زمنَ لمفاهيمه كبسولتُه بمراحلها نفسِها وعلى كلّ شريطٍ صفر — فتنفتح مع أخواتها ولا تُرى عددًا (طلبُ صاحب الموقع) */
+      if (!tt) return pkStgHTML(ns, en ? 'No time set for these concepts' : 'لا زمن لمفاهيم هذا المجلد', en, pkStgCount(ns), null, pkPinOf(k.id), [0, 0, 0, 0, 0, 0, 0, 0]);
       {
         let dt = 0;
         cs.forEach(n => { const t = pkTm(n); if (!t) return; const rs = cxRecsOf(n); dt += t * rs.filter(Boolean).length / (rs.length || 1); });
