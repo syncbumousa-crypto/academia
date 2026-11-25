@@ -11879,7 +11879,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkStgFit(c) {
     const cap = c.querySelector(':scope > .pg-cap--stg'); if (!cap) return;
     let w = +cap.dataset.w; const f = c.parentElement;
-    if (f && c.offsetParent && !c.classList.contains('is-gl')) {
+    if (f && c.offsetParent && c.classList.contains('is-gd')) {
+      /* (طلبُ صاحب الموقع) وإن كان تحت الدائرة سطرٌ فارغ نزلت إليه (‎is-gd‎) بعرضها كاملًا ما اتّسع له الوجه */
+      const cs = getComputedStyle(f); w = Math.max(40, Math.min(w, Math.floor(f.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight))));
+    } else if (f && c.offsetParent && !c.classList.contains('is-gl')) {
       const fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetWidth ? fr.width / f.offsetWidth : 1;
       const rtl = getComputedStyle(f).direction === 'rtl', room = (rtl ? fr.right - cr.left : cr.right - fr.left) / (k || 1) + 2 - 8;
       w = Math.max(40, Math.min(w, Math.floor(room)));
@@ -11895,7 +11898,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     c.classList.toggle('is-gl', gl);
     /* (ثمّ بطلبه) ولا متّسعَ بعدها في سطرها: تنزل الكبسولةُ إلى السطر الفارغ تحت الدائرة إن كان في المربّع متّسعٌ له (‎is-gd‎) */
     const ky = f.offsetHeight ? fr.height / f.offsetHeight : 1, below = (fr.bottom - cr.bottom) / (ky || 1);
-    c.classList.toggle('is-gd', !gl && below >= 26 && !st);
+    c.classList.toggle('is-gd', !gl && below >= 26);
     /* ونازلةً تبدأ من أوّل السطر كما يبدأ الاسم (يمينًا) لا من موضع الدائرة: ‎--gdl‎ حافّةُ الاسم الأولى من حافّة الدائرة */
     const nm = f.querySelector(':scope > .pg-nm');
     if (nm) { const nb = nm.getBoundingClientRect(); c.style.setProperty('--gdl', (((rtl ? nb.right : nb.left) - cr.left) / (k || 1)).toFixed(1) + 'px'); }
