@@ -10236,7 +10236,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (بلاغُ صاحب الموقع: «تداخل أرقام») ولكلّ شريطٍ قدُّ رقمه على الأقلّ: تُقسم الكبسولةُ بالنسبة، وما قصُر عن رقمه أخذ قدَّه
        وتقاسم الباقون ما بقي — وتطول الكبسولةُ إن لم تتّسع لأرقامها (حتى ‎170‎). والإمالةُ ترسم الحدودَ نفسَها (‎G.E‎) */
     const nk = c.filter(Boolean).length, gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
-    const mn = c.map(x => x ? 7.6 * String(x).length + 8 : 0), need = mn.reduce((x, y) => x + y, 0) + 6;
+    const mn = c.map((x, i) => x ? 7.6 * String(lab ? lab[i] : x).length + 8 : 0), need = mn.reduce((x, y) => x + y, 0) + 6;
     const W = Math.max(56, Math.min(170, Math.max(Math.min(124, 20 + 15 * nk), Math.ceil(need))));
     const pw = (() => {
       const A = W - 2.8, w = c.map(() => 0), free = new Set(c.map((x, i) => x ? i : -1).filter(i => i >= 0)); let rem = A, ch = true;
@@ -10283,7 +10283,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { const t = pkTm(n); if (!t) return; const rs = cxRecsOf(n); dt += t * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, pkStgTm(ns), null, pkPinOf(k.id));
+        const tc = pkStgTm(ns);   /* وبوحدتها على كلّ شريط (‎د‎): دقيقةٌ لكلّ مفهومٍ تساوي عددَه، فبلا وحدةٍ تُقرأ كمّيّةً (طلبُ صاحب الموقع) */
+        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, tc, null, pkPinOf(k.id), tc && tc.map(x => x ? x + (en ? 'm' : 'د') : 0));
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
