@@ -20510,3 +20510,36 @@ html:not([data-lang="en"]) .pk-ic-tblv { transform: translateX(6px); }
 #cm-body .pk-vdots.pk-varc.pk-varc--qt { inset-inline-start: auto; inset-inline-end: -6px; transform: scaleX(-1); --pk-fl: -1; }
 html[data-lang="en"] #cm-body .pk-vdots.pk-varc.pk-varc--qt { transform: none; --pk-fl: 1; }
 #cm-body .pk-blkh--bank { position: relative; }
+/* ===== نافذةُ المجلد صفوفًا كقوائم الموقع (طلبُ صاحب الموقع): تعديلُ الاسم · اللونُ والوجه · الزمن · حذفُ المجلد ===== */
+.fmn--rows { gap: 1px; padding: 5px; --fmn-w: 208px; }
+.fmn-row { display: flex; align-items: center; gap: 7px; width: 100%; padding: 6px 7px; border: 0; border-radius: 7px; background: none; cursor: pointer; color: var(--f-tx); font: 600 11px/1.5 "IBM Plex Sans Arabic", sans-serif; text-align: start; transition: background .14s, color .14s; }
+.fmn-row:hover, .fmn-row[aria-expanded="true"] { background: var(--f-hov); }
+.fmn-row > svg { width: 13px; height: 13px; flex: none; color: var(--f-lab); }
+.fmn-v { margin-inline-start: auto; display: inline-flex; align-items: center; gap: 4px; color: var(--f-lab); font-weight: 500; font-size: 10px; white-space: nowrap; }
+.fmn-v em { font-style: normal; }
+.fmn-v svg { width: 10px; height: 10px; transition: transform .18s; }
+.fmn-row[aria-expanded="true"] .fmn-v svg { transform: rotate(-90deg); }
+html[data-lang="en"] .fmn-v svg { transform: scaleX(-1); }
+html[data-lang="en"] .fmn-row[aria-expanded="true"] .fmn-v svg { transform: rotate(90deg); }
+.fmn-dot { width: 10px; height: 10px; border-radius: 3px; display: block; }
+.fmn-acc { display: flex; flex-direction: column; gap: 6px; padding: 4px 4px 6px; }
+.fmn-acc[hidden] { display: none; }
+.fmn-sep { height: 1px; background: var(--f-line); margin: 3px 2px; }
+.fmn-row--del, .fmn-row--del > svg { color: #c0564b; }
+.fmn-row--del:hover { background: rgba(192, 86, 75, .1); }
+.fmn-row--del.is-arm { background: #c0564b; color: #fff; }
+.fmn-row--del.is-arm > svg { color: #fff; }
+html[data-theme="dark"] .fmn-row--del, html[data-theme="dark"] .fmn-row--del > svg { color: #e08377; }
+html[data-theme="dark"] .fmn-row--del.is-arm { background: #c0564b; color: #fff; }
+html[data-theme="dark"] .fmn-row--del.is-arm > svg { color: #fff; }
+.fmn-rd { display: flex; align-items: center; gap: 7px; padding: 6px 7px; border-radius: 7px; cursor: pointer; font-size: 10.5px; color: var(--f-tx); }
+.fmn-rd:hover { background: var(--f-hov); }
+.fmn-rd i { width: 12px; height: 12px; flex: none; border-radius: 99px; border: 1.5px solid var(--f-inline); }
+.fmn-rd.on { background: var(--f-goldh); }
+.fmn-rd.on i { border-color: var(--f-gold); background: var(--f-gold); box-shadow: inset 0 0 0 2.5px var(--f-bg); }
+.fmn-rd:focus-visible { outline: 1.5px solid var(--f-golddash); }
+.fmn-step { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 7px 3px 4px; font-size: 10px; color: var(--f-lab); }
+.fmn-ctl { display: inline-flex; align-items: center; border-radius: 7px; background: var(--f-in); border: 1px solid var(--f-inline); overflow: hidden; }
+.fmn-ctl button { width: 22px; height: 22px; border: 0; background: none; color: var(--f-tx); font: 700 13px/1 sans-serif; cursor: pointer; }
+.fmn-ctl button:hover { background: var(--f-hov); }
+.fmn-ctl b { min-width: 38px; text-align: center; font: 700 11px "IBM Plex Sans Arabic", sans-serif; color: var(--f-gold); font-variant-numeric: tabular-nums; }

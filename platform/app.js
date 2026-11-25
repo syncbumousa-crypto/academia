@@ -10188,7 +10188,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => c[i]++); return c; };
   /* وبالزمن (قوسُ الكمية والزمن): دقائقُ كلّ مرحلةٍ من أزمنة بطائقها، ودقيقةٌ على الأقلّ لما له زمن. ولا زمنَ في المجلد ⇐ ‎null‎ فيبقى بعدده */
-  const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += n.tm || 0; }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
+  /* زمنُ البطاقة الفعليّ (طلبُ صاحب الموقع): زمنُها، إلّا أن يقول مجلدُها غيرَ ذلك — «ثابت» يُقسم زمنَ المجلد على بطائقه كلِّها،
+     و«مكمَّل» يعطي ما لا زمنَ له زمنَ المجلد (ويرثه ما تحته من مجلدات). يُبنى مرّةً لكلّ رسم */
+  let pkTmMap = null;
+  const pkTmBuild = () => { const m = new Map();
+    const walk = (ns, fill) => (ns || []).forEach(n => {
+      if (n.t === 'f') {
+        if (n.tmm === 'fix') { const cs = flatCards(n.ch || []); cs.forEach(c => m.set(c, cs.length ? (n.tmv || 0) / cs.length : 0)); return; }
+        walk(n.ch, n.tmm === 'fill' ? (n.tmv || 0) : fill); return;
+      }
+      if (n.ch && n.ch.length) walk(n.ch, fill);
+      m.set(n, n.tm || fill || 0);
+    });
+    walk(pkBoxDeck || [], 0); return m; };
+  const pkTm = n => { if (!pkTmMap) pkTmMap = pkTmBuild(); return pkTmMap.has(n) ? pkTmMap.get(n) : (n.tm || 0); };
+  const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += pkTm(n); }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
   const pkStgC = ns => pkBoxId != null && pkQt[pkBoxId] ? pkStgTm(ns) : null;
   /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
      النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً يرفعها (ولا شريطَ وسمٍ فوق الملخّص — بطلبه).
@@ -10257,10 +10271,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
        ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
     if (pkBoxTime && pkQt[pkBoxId]) {
-      const tt = cs.reduce((x, n) => x + (n.tm || 0), 0);
+      const tt = Math.round(cs.reduce((x, n) => x + pkTm(n), 0));
       if (tt) {
         let dt = 0;
-        cs.forEach(n => { if (!n.tm) return; const rs = cxRecsOf(n); dt += n.tm * rs.filter(Boolean).length / (rs.length || 1); });
+        cs.forEach(n => { const t = pkTm(n); if (!t) return; const rs = cxRecsOf(n); dt += t * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
         return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, pkStgTm(ns), null, pkPinOf(k.id));
@@ -13710,7 +13724,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxId = id; pkBoxMine = !!(editable || mine); pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
+    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxId = id; pkBoxMine = !!(editable || mine); pkTmMap = null; pkBoxTime = !!pkBoxDeck && (flatCards(deck).some(n => n.tm) || (function f(a) { return (a || []).some(n => n.t === 'f' && (n.tmm || f(n.ch))); })(deck));
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
@@ -18025,16 +18039,53 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      ولا قدمَ للقائمة: «تمّ» لا معنى لها في منبثقةٍ تُغلق بالضغط في الخارج، وكلُّ اختيارٍ
      يقع ويُحفظ في لحظته — فلا شيءَ ينتظر تأكيدًا.
      والشريحةُ المضيئةُ عند الفتح تتبع الحالَ لا العادة: مجلدٌ له وجهٌ يفتح على «إيموجي» */
-  function fmnHTML(f) {
-    return `<div class="fmn" role="dialog" aria-label="${esc(T().ffTitle)}">
-      <div class="fmn-cols">${fmnSwHTML(f)}</div>
-      <div class="fmn-seg">
-        <button type="button" class="fmn-sgf${f.em ? '' : ' on'}" data-tab="folder">${PK_IC.folderFill}<span>${esc(T().ffFolder)}</span></button>
-        <button type="button"${f.em ? ' class="on"' : ''} data-tab="face">${esc(T().ffEmoji)}</button>
+  /* ===== (طلبُ صاحب الموقع) القائمةُ صفوفٌ كقوائم الموقع: تعديلُ الاسم · اللونُ والوجه · الزمن · حذفُ المجلد =====
+     كلُّ صفٍّ قرارٌ واحد، و«اللونُ والوجه» و«الزمن» ينفتحان في مكانهما فلا يُرى إلّا ما تفتحه.
+     والزمنُ لمجلدات الملخّص وحدها (‎tm‎): من أزمنة المفاهيم (الأصل) · زمنٌ ثابتٌ للمجلد (‎tmm:'fix'‎) · أو يُكمَل الناقصُ بزمن (‎tmm:'fill'‎)، و‎tmv‎ بالثواني */
+  const FMN_IC = {
+    pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>',
+    del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
+    pal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10.5" cy="7.5" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
+    hg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h14M5 20.5h14"/><path d="M6.3 3.5l1.1 4.6a2.5 2.5 0 0 0 1 1.5L11 11.4a.8.8 0 0 1 0 1.2L8.4 14.4a2.5 2.5 0 0 0-1 1.5l-1.1 4.6M17.7 3.5l-1.1 4.6a2.5 2.5 0 0 1-1 1.5L13 11.4a.8.8 0 0 0 0 1.2l2.6 1.8a2.5 2.5 0 0 1 1 1.5l1.1 4.6"/></svg>',
+    chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>' };
+  const fmnTx = () => state.lang === 'en'
+    ? { ren: 'Rename', look: 'Colour and face', tm: 'Time', del: 'Delete folder', conf: 'Press again to confirm', own: 'From the concepts', fix: 'Fixed time for the folder', fill: 'Fill the missing', fixQ: 'Minutes for the folder', fillQ: 'Minutes per missing concept', m: 'min', s: { own: 'Auto', fix: 'Fixed', fill: 'Filled' } }
+    : { ren: 'تعديل الاسم', look: 'اللون والوجه', tm: 'الزمن', del: 'حذف المجلد', conf: 'اضغط مرة ثانية للتأكيد', own: 'من أزمنة المفاهيم', fix: 'زمن ثابت للمجلد', fill: 'أكمّل الناقص بزمن', fixQ: 'دقائق المجلد', fillQ: 'لكل مفهوم ناقص', m: 'د', s: { own: 'تلقائي', fix: 'ثابت', fill: 'مكمَّل' } };
+  /* زمنُ المجلد كما تقوله كبسولتُه، بثوانيه */
+  const fmnTot = f => { const cs = flatCards(f.ch || []), own = cs.reduce((x, n) => x + (n.tm || 0), 0);
+    return f.tmm === 'fix' ? (f.tmv || 0) : f.tmm === 'fill' ? own + cs.filter(n => !n.tm).length * (f.tmv || 0) : own; };
+  const fmnTimeHTML = f => { const X = fmnTx(), md = f.tmm || 'own';
+    return ['own', 'fix', 'fill'].map(k => `<div class="fmn-rd${md === k ? ' on' : ''}" role="radio" tabindex="0" aria-checked="${md === k}" data-tmm="${k}"><i></i><span>${esc(X[k])}</span></div>`
+      + (md === k && k !== 'own' ? `<div class="fmn-step"><span>${esc(k === 'fix' ? X.fixQ : X.fillQ)}</span><span class="fmn-ctl"><button type="button" data-tmd="1" aria-label="+">+</button><b>${pkTmTx(f.tmv || 0)}</b><button type="button" data-tmd="-1" aria-label="−">−</button></span></div>` : '')).join(''); };
+  const fmnTimeV = f => { const X = fmnTx(); return `${esc(X.s[f.tmm || 'own'])} · ${pkTmTx(fmnTot(f))} ${esc(X.m)}`; };
+  function fmnHTML(f, tm) {
+    const X = fmnTx(), col = folderColor(f);
+    return `<div class="fmn fmn--rows" role="dialog" aria-label="${esc(T().ffTitle)}">
+      <button type="button" class="fmn-row" data-fx="ren">${FMN_IC.pen}<span>${esc(X.ren)}</span></button>
+      <button type="button" class="fmn-row" data-fx="look" aria-expanded="false">${FMN_IC.pal}<span>${esc(X.look)}</span><span class="fmn-v"><i class="fmn-dot" style="background:${col}"></i>${FMN_IC.chev}</span></button>
+      <div class="fmn-acc" data-acc="look" hidden>
+        <div class="fmn-cols">${fmnSwHTML(f)}</div>
+        <div class="fmn-seg">
+          <button type="button" class="fmn-sgf${f.em ? '' : ' on'}" data-tab="folder">${PK_IC.folderFill}<span>${esc(T().ffFolder)}</span></button>
+          <button type="button"${f.em ? ' class="on"' : ''} data-tab="face">${esc(T().ffEmoji)}</button>
+        </div>
+        <div class="fmn-body">${f.em ? fmnFaceHTML(f) : ''}</div>
       </div>
-      <div class="fmn-body">${f.em ? fmnFaceHTML(f) : ''}</div>
+      ${tm ? `<button type="button" class="fmn-row" data-fx="time" aria-expanded="false">${FMN_IC.hg}<span>${esc(X.tm)}</span><span class="fmn-v"><em>${fmnTimeV(f)}</em>${FMN_IC.chev}</span></button>
+      <div class="fmn-acc" data-acc="time" hidden>${fmnTimeHTML(f)}</div>` : ''}
+      <div class="fmn-sep"></div>
+      <button type="button" class="fmn-row fmn-row--del" data-fx="del">${FMN_IC.del}<span>${esc(X.del)}</span></button>
     </div>`;
   }
+  const fmnTimeSync = (box, f) => {
+    const acc = box.querySelector('.fmn-acc[data-acc="time"]'), v = box.querySelector('.fmn-row[data-fx="time"] em');
+    if (acc) acc.innerHTML = fmnTimeHTML(f); if (v) v.innerHTML = fmnTimeV(f);
+    const dot = box.querySelector('.fmn-dot'); if (dot) dot.style.background = folderColor(f);
+  };
+  document.addEventListener('keydown', e => {
+    const rd = e.target.closest && e.target.closest('.fmn-rd');
+    if (rd && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); rd.click(); }
+  });
   /* ===== الإرساء: الرأسُ تحت الأيقونة دائمًا =====
      ولا انقلابَ فوقها ولو ضاق ما دونها. والسببُ ليس ذوقًا: القائمةُ المنقلبةُ يُحسب رأسُها
      من **قاعدتها** (‎top = anchor.top − h‎)، فيصير موضعُ الرأس تابعًا لارتفاعها — وارتفاعُها
@@ -18153,10 +18204,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const deck = pid ? () => (((hlPost(pid) || {}).data || {}).deck || []) : null;
     const r = findNode(deck ? deck() : road ? roadOf(nookEntry, true) : edPack().deck, id);
     if (!r) return;
-    document.body.insertAdjacentHTML('beforeend', fmnHTML(r.n));
+    document.body.insertAdjacentHTML('beforeend', fmnHTML(r.n, !!strip && !road));
     emArLoad();
     const el = document.body.lastElementChild;
-    fmn = { id, el, road, deck, tab: 'col', box: fmnBoxOf(anchor) };
+    fmn = { id, el, road, deck, tab: 'col', box: fmnBoxOf(anchor), strip: !!strip };
     fmnPlace(el, anchor);
     fmnFit(el, anchor);
     fmnClip();
@@ -18193,6 +18244,51 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!fmn) return;
     const r = findNode(fmnDeck(), fmn.id);
     if (!r) { closeFolderMenu(); return; }
+    /* ===== صفوفُ القائمة ===== */
+    const refit = () => { fmnFollow(); const a = ffbOf(fmn.id); if (a) fmnFit(box, a); fmnClip(); };
+    const fx = e.target.closest('.fmn-row');
+    if (fx) {
+      const k = fx.dataset.fx, X = fmnTx(), del = box.querySelector('.fmn-row--del');
+      if (k !== 'del' && del && del.classList.contains('is-arm')) { del.classList.remove('is-arm'); del.querySelector('span').textContent = X.del; }
+      if (k === 'look' || k === 'time') {
+        const acc = box.querySelector(`.fmn-acc[data-acc="${k}"]`), on = acc.hidden;
+        box.querySelectorAll('.fmn-acc').forEach(a => { a.hidden = true; });
+        box.querySelectorAll('.fmn-row[aria-expanded]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        acc.hidden = !on; fx.setAttribute('aria-expanded', on ? 'true' : 'false');
+        refit(); return;
+      }
+      if (k === 'ren') {
+        /* الاسمُ يُكتب في مكانه: حقلُ المربّع في الشريط، أو حقلُ الصفّ في الشجرة */
+        const fid = fmn.id, a = ffbOf(fid), host = a && (a.closest('.x3-hd, .x3-row, li') || a.parentElement);
+        if (fmn.strip) { pkNaming = fid; pkFocusNew = fid; closeFolderMenu(); return; }   /* الشريط: يصير وجهُه حقلًا ويُحدَّد نصُّه بعد الرسم */
+        const inp = host && host.querySelector('input, textarea, [contenteditable="true"]');
+        closeFolderMenu();
+        if (inp && inp.isConnected) { inp.focus(); if (inp.select) inp.select(); }
+        return;
+      }
+      if (k === 'del') {
+        /* ضغطتان: الأولى تُحمِّر الصفَّ وتطلب التأكيد، والثانيةُ تحذف */
+        if (!fx.classList.contains('is-arm')) { fx.classList.add('is-arm'); fx.querySelector('span').textContent = X.conf; return; }
+        const isStrip = fmn.strip;
+        r.arr.splice(r.i, 1); save();
+        closeFolderMenu();
+        if (!isStrip && typeof edRender === 'function') edRender();
+        return;
+      }
+    }
+    const rd = e.target.closest('.fmn-rd');
+    if (rd) {
+      const md = rd.dataset.tmm;
+      if (md === 'own') { delete r.n.tmm; delete r.n.tmv; }
+      else { if (r.n.tmm !== md) r.n.tmv = md === 'fix' ? Math.max(60, Math.round(fmnTot(r.n) / 60) * 60 || 600) : 180; r.n.tmm = md; }
+      save(); fmnTimeSync(box, r.n); refit(); return;
+    }
+    const td = e.target.closest('[data-tmd]');
+    if (td) {
+      const st = r.n.tmm === 'fix' ? 60 : 30;
+      r.n.tmv = Math.max(st, Math.min(5999 * 60, (r.n.tmv || 0) + st * +td.dataset.tmd));
+      save(); fmnTimeSync(box, r.n); return;
+    }
 
     const seg = e.target.closest('.fmn-seg button');
     if (seg) {
@@ -18223,6 +18319,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sw) {
       r.n.ci = +sw.dataset.ci;
       box.querySelectorAll('.fmn-sw').forEach(x => x.classList.toggle('on', x === sw));
+      { const dot = box.querySelector('.fmn-dot'); if (dot) dot.style.background = folderColor(r.n); }
       save(); fmnPaint(fmn.id);
       return;
     }
