@@ -9988,7 +9988,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkStgMark = c => {
     const st = c.closest && c.closest('#cm-body .pk-fstrip'), f = c.closest('.pg-face');
     const o = st && f && pkStgFilt[st.dataset.pkid];
-    c.querySelectorAll('.pg-stb > b').forEach(b => b.classList.toggle('is-pick', !!(o && o.f === f.dataset.pkf && PK_STG[o.k] === b.dataset.k)));
+    c.querySelectorAll('.pg-stb > b').forEach(b => b.classList.toggle('is-pick', !!(o && o.picks.some(p => p.f === f.dataset.pkf && PK_STG[p.k] === b.dataset.k))));
   };
   function pkStgTick() {
     pkStgRaf = 0;
@@ -10067,13 +10067,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     e.preventDefault(); e.stopImmediatePropagation();
     const bd = c.classList.contains('is-stdone') && e.target.closest('.pg-stb > b'), st = c.closest('#cm-body .pk-fstrip');
     if (bd && st) {   /* شريطٌ في كبسولة مجلدٍ من الشريط: يُصفّي الملخّصَ بمرحلته */
-      const id = st.dataset.pkid, f = c.closest('.pg-face').dataset.pkf, k = PK_STG.indexOf(bd.dataset.k), w = c.closest('.pg-box').classList.contains('is-wide');
-      const o = pkStgFilt[id];
-      if (o && o.f === f && o.k === k) delete pkStgFilt[id]; else pkStgFilt[id] = { f, k, w };
-      pkFs[id] = f; if (w) pkSolo[id] = f; else delete pkSolo[id]; pkAwait.delete(id);
+      /* (طلبُ صاحب الموقع) وتُختار شرائطُ كثيرةٌ معًا — من المجلد نفسِه أو من غيره: كلُّ نقرةٍ تضيف شريطًا أو ترفعه.
+         والملخّصُ يُري أقربَ مجلدٍ يجمعها (أو المساهمةَ كلَّها) مصفّى بما اختير */
+      const id = st.dataset.pkid, face = c.closest('.pg-face'), f = face.dataset.pkf, k = PK_STG.indexOf(bd.dataset.k), w = c.closest('.pg-box').classList.contains('is-wide');
+      const path = []; for (let b = face.closest('.pg-box'); b && st.contains(b); b = b.parentElement.closest('.pg-box')) path.unshift(b.querySelector(':scope > .pg-face').dataset.pkf);
+      const o = pkStgFilt[id] || { picks: [] }, at = o.picks.findIndex(p => p.f === f && p.k === k);
+      if (at >= 0) o.picks.splice(at, 1); else o.picks.push({ f, k, w, path });
+      if (!o.picks.length) { delete pkStgFilt[id]; if (pkSolo[id] === o.sel) delete pkSolo[id]; }
+      else {
+        let lca = o.picks[0].path.slice();
+        o.picks.forEach(p => { let i = 0; while (i < lca.length && i < p.path.length && lca[i] === p.path[i]) i++; lca = lca.slice(0, i); });
+        const fs = new Set(o.picks.map(p => p.f));
+        o.sel = fs.size === 1 ? f === [...fs][0] ? f : [...fs][0] : (lca.length ? lca[lca.length - 1] : '');
+        pkStgFilt[id] = o; pkFs[id] = o.sel;
+        if (fs.size === 1 && o.picks[0].w) pkSolo[id] = o.sel; else delete pkSolo[id];
+      }
+      pkAwait.delete(id);
+      /* وما كان مفتوحًا من الكبسولات قبل الرسم يبقى مفتوحًا بعده بلا حركة */
+      const keep = [...st.querySelectorAll('.pg-cnt--stg.is-stclk')].map(x => x.closest('.pg-face').dataset.pkf);
+      if (!keep.includes(f)) keep.push(f);
       renderCmSection();
-      const nc = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"] .pg-face[data-pkf="${CSS.escape(f)}"] > .pg-cnt--stg`);
-      if (nc) { pkCapPlace(nc); nc.classList.add('pg-cnt--now', 'is-peek', 'is-stclk'); void nc.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => nc.classList.remove('pg-cnt--now'))); pkStgWake(nc); pkStgAuto(nc); }
+      keep.forEach(kf => {
+        const nc = document.querySelector(`#cm-body .pk-fstrip[data-pkid="${CSS.escape(id)}"] .pg-face[data-pkf="${CSS.escape(kf)}"] > .pg-cnt--stg`);
+        if (nc) { pkCapPlace(nc); nc.classList.add('pg-cnt--now', 'is-peek', 'is-stclk'); void nc.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => nc.classList.remove('pg-cnt--now'))); pkStgWake(nc); pkStgAuto(nc); }
+      });
       return;
     }
     if (c.classList.contains('is-peek')) pkStgShut(c);
@@ -13823,9 +13840,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
     let deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
     const sf = pkStgFilt[id];
-    if (sf && sf.f !== sel) delete pkStgFilt[id];
+    if (sf && sf.sel !== sel) delete pkStgFilt[id];
     else if (sf && deep) {
-      const hit = new Set(); pkStgEach(host.arr, (n, i) => { if (i === sf.k) hit.add(n.id); });
+      /* بطاقةٌ تُرى إن وافقت أحدَ المختار: في مجلده (وفي بطائقه المباشرة وحدها إن كان مفتوحًا) وبمرحلته */
+      const hit = new Set();
+      sf.picks.forEach(p => { const hp = ktHost(p.f, pack); if (hp) pkStgEach(p.w ? hp.arr.filter(n => n.t !== 'f') : hp.arr, (n, i) => { if (i === p.k) hit.add(n.id); }); });
       const out = [], pend = [];
       deep.forEach(x => {
         if (x.h) { pend.length = Math.max(0, (x.d || 1) - 1); pend.push(x); return; }
