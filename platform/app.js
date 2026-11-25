@@ -10007,15 +10007,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }, { passive: true });
   /* (طلبُ صاحب الموقع) تنفتح بالنقر لا بالمرور: النقرُ على الدائرة (أو على الكبسولة) يفتحها ويطويها، ولا يفتح المجلدَ الذي هي فيه؛
      والنقرُ في أيّ مكانٍ آخر يطوي ما فُتح بالنقر. وفي الالتقاط على ‎window‎ ليسبق معالجاتِ الشريط والوثيقة */
+  /* (طلبُ صاحب الموقع) ودوائرُ الشجرة (البنك وجوفُ الملخّص) مثلُها: دائرةُ المراحل نفسُها (‎x3-dot--stg‎)، والنقرُ عليها يفتح الكبسولةَ
+     نفسَها طافيةً فوق الدائرة (‎pk-stfloat‎) — تُبنى من أعدادها وتنبسط بالإمالة نفسِها، وتُزال بعد أن تنطوي */
+  const pkStgShut = x => {
+    x.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(y => y !== x); pkStgWake(x);
+    if (x._dot) setTimeout(() => { if (!x.classList.contains('is-peek')) { x._dot.style.visibility = ''; x.remove(); } }, 900);
+  };
+  function pkStgFloat(dot) {
+    const r = dot.getBoundingClientRect(), en = state.lang === 'en', c = dot.dataset.stg.split(',').map(Number);
+    const t = document.createElement('div'); t.innerHTML = pkStgHTML(null, dot.closest('[title]') ? '' : '', en, c);
+    const x = t.firstElementChild; x.classList.add('pk-stfloat'); x.removeAttribute('title'); x._dot = dot;
+    const sc = r.width / 18; x.style.cssText = `left:${r.left}px;top:${r.top}px;--pk-sc:${sc}`;
+    document.body.appendChild(x); dot.style.visibility = 'hidden';
+    pkCapPlace(x); void x.offsetWidth;
+    x.classList.add('is-peek', 'is-stclk'); pkStgWake(x);
+    return x;
+  }
   window.addEventListener('click', e => {
     const c = e.target.closest && e.target.closest('.pg-cnt--stg');
-    document.querySelectorAll('.pg-cnt--stg.is-stclk').forEach(x => { if (x !== c) { x.classList.remove('is-peek', 'is-stclk'); pkStgWake(x); } });
+    const td = !c && e.target.closest && e.target.closest('.x3-dot--stg');
+    document.querySelectorAll('.pg-cnt--stg.is-stclk').forEach(x => { if (x !== c) pkStgShut(x); });
+    if (td) { e.preventDefault(); e.stopImmediatePropagation(); pkStgFloat(td); return; }
     if (!c) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    if (c.classList.contains('is-peek')) { c.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(x => x !== c); }
-    else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); }
-    pkStgWake(c);
+    if (c.classList.contains('is-peek')) pkStgShut(c);
+    else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); pkStgWake(c); }
   }, true);
+  /* والطافيةُ تُطوى إن تمرّرت الصفحةُ تحتها (موضعُها ثابتٌ في الشاشة) */
+  window.addEventListener('scroll', () => document.querySelectorAll('.pk-stfloat.is-peek').forEach(pkStgShut), { capture: true, passive: true });
   document.addEventListener('pointerout', e => { if (!e.relatedTarget && pkCapHot) { const c = pkCapHot; pkCapHot = null; pkStgWake(c); } }, { passive: true });
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
@@ -10104,8 +10123,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     g.forEach(x => E.push(E[E.length - 1] + x / G)); E[8] = 1;
     return { L, S, E };
   };
-  function pkStgHTML(ns, title, en) {
-    const c = pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
+  function pkStgHTML(ns, title, en, cnt) {
+    const c = cnt || pkStgCount(ns), G = pkStgGeom(c), tip = PK_STG_TIP[en ? 'en' : 'ar'];
     let dot = '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
     if (G.L > 0) {
       const st = []; for (let i = 7; i > 0; i--) { const a = (1 - G.S[i + 1]) * 100, b = (1 - G.S[i]) * 100; if (b - a > .01) st.push(`var(--stg-${PK_STG[i]}) ${a.toFixed(2)}% ${b.toFixed(2)}%`); }
@@ -10115,6 +10134,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎20 + 15 × عددها‎ بين ‎56‎ و‎124‎ (وفيها أعدادُها كلُّها) */
     const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
     const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
+    if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
     return `<span class="pg-cnt pg-cnt--stg" title="${esc(title)}"><span class="pg-ring">${dot}</span>`
       + `<span class="pg-cap pg-cap--stg" data-w="${W}" data-s="${G.S.map(x => x.toFixed(4)).join(',')}" data-e="${G.E.map(x => x.toFixed(4)).join(',')}"><span class="pg-capsz"></span><canvas class="pg-stc" aria-hidden="true"></canvas><span class="pg-stb" style="--gt:${gt}">${bands}</span></span></span>`;
   }
@@ -15180,7 +15200,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (f.t !== 'f') return cxCardView(f, fold, k, live);
       const open = fold[f.id] === true;
       return `<div class="x3-st${open ? ' on' : ''}" style="--o:${X3IND(k)}px">
-        ${live ? x3DotAns(x3Ans(f.ch)) : ''}
+        ${live ? pkStgHTML(f.ch, null) : ''}
         <div class="x3-hd${cxHot === f.id ? ' is-peek' : ''}" data-roid="${f.id}">
           ${RO_GRAB(f.id)}
           <button type="button" class="cx-fold cx-fold--tri x3-tg${(f.ch || []).length ? '' : ' is-void'}"${(f.ch || []).length ? ` data-fold="${f.id}" title="${open ? T().pkCollapse : T().pkExpand}"` : ' tabindex="-1" aria-hidden="true"'}>${CX_TRI}</button>
@@ -15642,7 +15662,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       ? cxCardBlock(f, pid, k, live)
       : `<div class="x3-st${f.open === false ? '' : ' on'}" style="--o:${X3IND(k)}px">
         <!-- وشجرةُ المحرّر مثلُها: السجلُّ سجلُّك أنت، ومن كتب رزمةً يذاكرها -->
-        ${live ? x3DotAns(x3Ans(f.ch)) : ''}
+        ${live ? pkStgHTML(f.ch, null) : ''}
         <div class="x3-hd${cxSel.has(f.id) ? ' is-sel' : ''}${cxHot === f.id ? ' is-peek' : ''}" data-id="${f.id}">
           ${VT_GRAB(true)}
           <!-- سهمُ الطيّ سابقٌ للأيقونة (يقع يمينَها في العربيّة): هو وأيقونةُ المجلد
