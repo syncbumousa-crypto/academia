@@ -150,6 +150,11 @@
 .sidebar.side-rail .side-acct .side-profile:hover { background: transparent; opacity: .85; }
 .sidebar.side-rail .side-profile .sp-av { width: 100%; height: 100%; border-radius: 50%; }
 .sidebar.side-rail .side-brand { gap: 0; }
+/* واسمُ الموقع المطويُّ بلا حشوٍ أيضًا: كان حشوُه (‎4+4px‎) يبقى بعد أن ينطوي فيزيح الشعارَ عن الوسط ‎4px‎ (بلاغُ صاحب الموقع) */
+.sidebar.side-rail .side-logo { padding-inline: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar.side-anim .side-logo { transition: max-width .32s cubic-bezier(.32,.72,0,1), opacity .18s ease, padding .32s cubic-bezier(.32,.72,0,1); }
+}
 
 /* ============================================================
    داخلُ اللوح — نظامٌ واحدٌ لكلّ ما يُضغط
