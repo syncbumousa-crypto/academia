@@ -14474,7 +14474,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (طلبُ صاحب الموقع) لسانُ الرقم والإكمال على حافّة كلّ بطاقة — شكلٌ واحدٌ بانحناءاته، كلسان الورقة */
     const kStg = new Map(); pkStgEach(host.arr, (n, i) => { if (!i) return; const q = kStg.get(n.id); if (q == null || i < q) kStg.set(n.id, i); });
     const kTab = (n, i) => { const sg = kStg.get(n.id), on = !!(state.ktok || {})[recId(n)];
-      return `<span class="kcv-tab"><svg class="kcv-tabsv" viewBox="-1 0 37 76"><path class="f" d="M-1 0 L0 0 A13 13 0 0 0 13 13 L22 13 A14 14 0 0 1 36 27 L36 49 A14 14 0 0 1 22 63 L13 63 A13 13 0 0 0 0 76 L-1 76 Z"/><path class="e" d="M0 0 A13 13 0 0 0 13 13 L22 13 A14 14 0 0 1 36 27 L36 49 A14 14 0 0 1 22 63 L13 63 A13 13 0 0 0 0 76"/></svg>`
+      return `<span class="kcv-tab"><svg class="kcv-tabsv" viewBox="-1 0 37 81"><path class="f" d="M-1 0 L0 0 A13 13 0 0 0 13 13 L22 13 A14 14 0 0 1 36 27 L36 54 A14 14 0 0 1 22 68 L13 68 A13 13 0 0 0 0 81 L-1 81 Z"/><path class="e" d="M0 0 A13 13 0 0 0 13 13 L22 13 A14 14 0 0 1 36 27 L36 54 A14 14 0 0 1 22 68 L13 68 A13 13 0 0 0 0 81"/></svg>`
         + `<span class="pp-pill kcv-pill${sg ? ' stg' : ''}${on ? ' on' : ''}" style="--c:${sg ? `var(--stg-${PK_STG[sg]})` : 'var(--stg-done)'}"><span class="n">${i + 1}</span><span class="b" data-kctk="${esc(recId(n))}" role="checkbox" aria-checked="${on}">`
         + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span>`; };
     return `<div class="kcv${ro ? ' is-ro' : ''}" tabindex="0" data-kcv="${esc(key)}" aria-label="${esc(T().pkView_tree)}">`
