@@ -29512,14 +29512,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const p = bkTLAt(d, e); if (!p) return;
     e.preventDefault();
     bkTLClear();
-    bkTLDrag = { d, a: p, id: e.pointerId, moved: false };
-    { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur-d', hlPenCursor(hlCol.t, true)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
+    /* (في وضع النشر لا تظليلَ ولا تحديد — طلبُ صاحب الموقع: يبقى النقرُ يختار التظليلَ الموجود) */
+    const can = !!hlCan(d);
+    bkTLDrag = { d, a: p, id: e.pointerId, moved: false, can };
+    if (can) { const v = d.closest('.pk-src__view, [data-pksrcview]'); if (v) { v.style.setProperty('--hl-cur-d', hlPenCursor(hlCol.t, true)); v.classList.add('hl-drag'); } }   /* وهو يظلّل: مؤشّرُ القلم */
     try { e.target.setPointerCapture(e.pointerId); } catch (er) {}
   }, true);
   document.addEventListener('pointermove', e => {
     if (!bkTLDrag || e.pointerId !== bkTLDrag.id) return;
     const z = bkTLAt(bkTLDrag.d, e); if (!z) return;
     bkTLDrag.z = z; bkTLDrag.moved = true;
+    if (!bkTLDrag.can) return;
     bkTLDraw(bkTLDrag.d, bkTLBars(bkTLDrag.d, bkTLDrag.a, z));
   }, true);
   const bkTLUp = e => {
@@ -29528,6 +29531,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     { const v = g.d.closest('.pk-src__view, [data-pksrcview]'); if (v) v.classList.remove('hl-drag'); }
     /* نقرةٌ بلا سحب: تختار التظليلَ الذي تحتها (أو تُلغي الاختيار) */
     if (!g.moved || !g.z) { bkTLDraw(g.d, null); hlPick(g.d, e); return; }
+    if (!g.can) return;
     const bars = bkTLBars(g.d, g.a, g.z);
     if (!bars.length) { bkTLDraw(g.d, null); return; }
     bkTLSel = { d: g.d, k: +g.d.dataset.k, rtl: g.d._rows[bars[0].ri].rtl, bars: bars.map(({ l, r, t, b }) => ({ l, r, t, b })), text: bkTLText(g.d, bars) };
