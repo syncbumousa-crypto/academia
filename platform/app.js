@@ -10753,19 +10753,103 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkVaDash = i => `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};stroke-dashoffset:${-(i * 100 + PK_VA_GAP / 2)}`;
   const pkVdPrev = {};
   const pkVaArm = {};   /* ‏‎postId → true‎: ضُغطت «إضافة مفهوم» — فيظهر قوسُ طرق العرض ولو لم يُكتب المفهومُ بعد */
-  const pkVDots = id => {
-    const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id))), nx = V[(cur + 1) % 3];
-    const prev = pkVdPrev[id];
-    pkVdPrev[id] = cur;
-    const from = prev !== undefined && prev !== cur && !bkReduce() ? prev : cur;
-    const P = (cls, st, extra = '') => `<path class="${cls}" pathLength="300" d="${PK_VA_D}"${st ? ` style="${st}"` : ''}${extra}/>`;
-    return `<button type="button" class="pk-vdots pk-varc" data-pkview="${nx}" data-pkid="${esc(id)}" title="${esc(T()['pkView_' + nx])}" aria-label="${esc(T().pkViewBar + ' · ' + T()['pkView_' + nx])}">`
-      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
-      + P('pk-varc__hit') + P('pk-varc__bg')
-      + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
-      + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(from * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, from !== cur ? ' data-move="1"' : '')
-      + `</svg></button>`;
+  /* ===== مروحةُ طرق العرض (اقتراح ١، طلبُ صاحب الموقع) =====
+     لمسُ **طرف** القوس (خطُّه وحده، بعيدًا عن الأيقونة) يدخل أيقونةَ الزاوية فيه ويكبّره ربعَ حلقةٍ تلفّ زاويةَ المساحة
+     من داخل، وكلُّ شرطةٍ تُخرج أيقونةَ طريقتها من موضعها، والذهبيّةُ تصير قرصًا خلف الحاليّة. ولمسُ **الأيقونة** نفسِها
+     يبقى يُغلق المساحة. الهندسةُ بإحداثيّات الزرّ (مركزُ الأيقونة 15,15): خطٌّ أفقيّ ‎h‎ ثمّ قوسٌ ‎th‎ ثمّ خطٌّ ‎v‎ */
+  const PK_FAN_C = { cx: 20, cy: 12, r: 14 - PK_VA_IN, h: PK_VA_RUN, v: PK_VA_RUN, th: 90, w: 7 };
+  const PK_FAN_E = { cx: -23, cy: 53, r: 40, h: 2, v: 2, th: 90, w: 28 };
+  const pkFan = {};   /* ‏‎postId → { k, kv, kt, g, gv, cur, hov, t }‎ */
+  const pkFanGeo = q => {
+    const { cx, cy, r, h, v } = q, a0 = -Math.PI / 2, A = q.th * Math.PI / 180, a1 = a0 + A;
+    const sx = cx - h, sy = cy - r, ex = cx + r * Math.cos(a1), ey = cy + r * Math.sin(a1), tx = -Math.sin(a1), ty = Math.cos(a1);
+    const d = `M${sx} ${sy}H${cx}A${r} ${r} 0 0 1 ${ex} ${ey}L${ex + tx * v} ${ey + ty * v}`, L2 = r * A, T = h + L2 + v || 1;
+    const at = t => { let x = t * T; if (x <= h) return [sx + x, sy]; x -= h; if (x <= L2) { const a = a0 + x / r; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; } x -= L2; return [ex + tx * x, ey + ty * x]; };
+    return { d, at };
   };
+  const pkFanQ = k => { const q = {}; for (const n in PK_FAN_C) q[n] = PK_FAN_C[n] + (PK_FAN_E[n] - PK_FAN_C[n]) * k; return q; };
+  const pkFanCl = x => Math.max(0, Math.min(1, x));
+  /* حالُ المروحة عند قيمةٍ ‎k‎ — يُستعمل في البناء (فلا تومض مطويّةً بعد إعادة الرسم) وفي كلّ إطار */
+  const pkFanPaint = (el, st) => {
+    const k = st.k, kc = pkFanCl(k), q = pkFanQ(k), G = pkFanGeo(q), hit = pkFanGeo(Object.assign({}, PK_FAN_C, { r: PK_FAN_C.r + 2.2 }));   /* الطرفُ ثابتٌ في موضعه: المؤشّرُ الذي فتحها لا يخرج منها وهي تكبر */
+    const P = el.querySelectorAll('path'), ic = el.parentElement && el.parentElement.querySelector(':scope > .pk-blkh__ic > svg');
+    el.classList.toggle('is-fan', kc > .02); el.classList.toggle('is-fanon', k > .5);
+    P[0].setAttribute('d', hit.d);
+    P[1].setAttribute('d', G.d); P[1].style.strokeWidth = q.w;
+    P[1].style.filter = kc > .05 ? `drop-shadow(0 ${1.5 * kc}px ${4 * kc}px var(--pk-fan-sh))` : '';
+    for (let i = 0; i < 3; i++) { const dl = 54 + (8 - 54) * kc, x = P[2 + i];
+      x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * 100 + 50 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); }
+    const gl = 54 * (1 - kc) + .01, m = P[5];
+    m.setAttribute('d', G.d); m.style.strokeWidth = 3.4 + (q.w - 5 - 3.4) * kc; m.style.strokeDasharray = `${gl} 400`; m.style.strokeDashoffset = -(st.g * 100 + 50 - gl / 2);
+    m.style.strokeOpacity = 1 - .8 * kc;
+    if (ic) ic.style.opacity = k > .04 ? 0 : '';
+    el.querySelectorAll('.pk-varc__vi').forEach((b, i) => {
+      const [x, y] = G.at((i * 100 + 50) / 300), isC = i === st.cur, dist = Math.abs(i - st.cur);
+      const a = isC ? 1 : pkFanCl((k - .12 * dist) / (1 - .12 * dist));
+      const px = isC ? 15 + (x - 15) * kc : x, py = isC ? 15 + (y - 15) * kc : y, sc = (isC ? 1 : .2 + .8 * a) * (st.hov === i && k > .9 ? 1.14 : 1);
+      b.style.transform = `translate(${px - 12}px,${py - 12}px) scale(${sc})`; b.style.opacity = isC ? (k > .04 ? 1 : 0) : a;
+      b.classList.toggle('on', isC);
+    });
+  };
+  let pkFanRaf = 0, pkFanLast = 0;
+  const pkFanEl = id => document.querySelector(`#cm-body .pk-varc--fan[data-pkid="${CSS.escape(id)}"]`);
+  const pkFanTick = now => {
+    const dt = Math.min(.034, (now - pkFanLast) / 1000); pkFanLast = now; let busy = false;
+    for (const id in pkFan) {
+      const st = pkFan[id], el = pkFanEl(id);
+      st.kv += (210 * (st.kt - st.k) - 20 * st.kv) * dt; st.k += st.kv * dt;
+      st.gv += (260 * (st.cur - st.g) - 26 * st.gv) * dt; st.g += st.gv * dt;
+      if (Math.abs(st.kt - st.k) > .001 || Math.abs(st.kv) > .001 || Math.abs(st.cur - st.g) > .001 || Math.abs(st.gv) > .001) busy = true;
+      else { st.k = st.kt; st.g = st.cur; st.kv = st.gv = 0; }
+      if (el) pkFanPaint(el, st);
+    }
+    pkFanRaf = busy ? requestAnimationFrame(pkFanTick) : 0;
+  };
+  const pkFanWake = () => { if (!pkFanRaf) { pkFanLast = performance.now(); pkFanRaf = requestAnimationFrame(pkFanTick); } };
+  const pkFanSet = (id, on, ms) => {
+    const st = pkFan[id]; if (!st) return;
+    clearTimeout(st.t);
+    const go = () => { st.kt = on ? 1 : 0; if (!on) st.hov = -1; if (bkReduce()) { st.k = st.kt; st.kv = 0; const el = pkFanEl(id); if (el) pkFanPaint(el, st); } else pkFanWake(); };
+    if (ms) st.t = setTimeout(go, ms); else go();
+  };
+  const pkVDots = id => {
+    const V = ['tree', 'cards', 'table'], cur = Math.max(0, V.indexOf(pkVwOf(id)));
+    const st = pkFan[id] || (pkFan[id] = { k: 0, kv: 0, kt: 0, g: cur, gv: 0, cur, hov: -1, t: 0 });
+    st.cur = cur; if (bkReduce() || st.k < .01) st.g = cur;
+    pkVdPrev[id] = cur;
+    const nm = v => esc(T()['pkView_' + v]);
+    return `<span class="pk-vdots pk-varc pk-varc--fan" role="button" tabindex="0" data-pkfan data-pkid="${esc(id)}" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}" aria-expanded="${st.kt ? 'true' : 'false'}">`
+      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + ['hit', 'bg', 'd', 'd', 'd', 'm'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
+      + `</svg>`
+      + V.map(v => `<button type="button" class="pk-varc__vi" data-pkview="${v}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS.find(x => x[0] === v)[1]}</svg></button>`).join('')
+      + `</span>`;
+  };
+  /* ترسمه المروحةُ بحالها فور الإدراج: بعد كلّ رسمٍ للمساهمة تُطلى المراوحُ الحاضرة (‎MutationObserver‎ خفيف على ‎#cm-body‎) */
+  new MutationObserver(() => { for (const id in pkFan) { const el = pkFanEl(id); if (el && !el.pkFanP) { el.pkFanP = 1; pkFanPaint(el, pkFan[id]); } } })
+    .observe(document.documentElement, { childList: true, subtree: true });
+  /* الماوس: الوقوفُ على الطرف يفتح، والخروجُ من المروحة يطويها بعد مهلة. اللمس: نقرُ الطرف يفتح، ونقرُ ما خارجها يطويها */
+  document.addEventListener('pointerover', e => {
+    if (e.pointerType !== 'mouse') return;
+    const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
+    for (const id in pkFan) {
+      const st = pkFan[id], mine = f && f.dataset.pkid === id;
+      if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
+      else if (st.kt) pkFanSet(id, false, 260);
+    }
+  }, true);
+  document.addEventListener('pointerdown', e => {
+    const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
+    for (const id in pkFan) if (pkFan[id].kt && (!f || f.dataset.pkid !== id)) pkFanSet(id, false);
+    if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__hit') && !pkFan[f.dataset.pkid].kt) { e.preventDefault(); pkFanSet(f.dataset.pkid, true); }
+    if (f && e.pointerType !== 'mouse' && e.target.closest('.pk-varc__vi') && pkFan[f.dataset.pkid].k > .5) pkFanSet(f.dataset.pkid, false, 650);   /* باللمس: تنطوي بعد أن يُرى الذهبيُّ ينزلق */
+  }, true);
+  document.addEventListener('keydown', e => {
+    const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan'); if (!f) return;
+    const st = pkFan[f.dataset.pkid];
+    if (e.key === 'Enter' || e.key === ' ') { if (e.target === f) { e.preventDefault(); pkFanSet(f.dataset.pkid, !st.kt); if (!st.kt) return; setTimeout(() => { const b = f.isConnected && f.querySelectorAll('.pk-varc__vi')[st.cur]; if (b) { f.querySelectorAll('.pk-varc__vi').forEach(x => x.tabIndex = 0); b.focus(); } }, 60); } }
+    else if (e.key === 'Escape' && st.kt) { pkFanSet(f.dataset.pkid, false); f.focus(); }
+  });
   /* قوسُ الكتاب: قوسُ الملخّص نفسُه على زاوية أيقونة المساحة، ثلاثُ قطعٍ للطرق الثلاث، والضغطُ ينقل إلى التالية.
      ‏‎from‎ موضعُ الذهبيّة قبل التبديل فتنزلق منه */
   let bkArcPrev = null;
@@ -11834,7 +11918,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   window.addEventListener('click', e => {   /* على النافذة: قبل مستمعي إغلاق المساحات */
     /* أيقونةُ المساحة المفتوحة (في زاوية مربّعها) تُغلقه عكسَ ما فُتح: إلى الصفّ الضيّق والأيقوناتُ في سطرها */
-    const ic = e.target.closest && e.target.closest('#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-split .pk-blkh__ic, #cm-body .pk--icx.pk--ic1 .pk-blkh--mid .pk-blkh__ic');
+    const ic = e.target.closest && !e.target.closest('.pk-varc') && e.target.closest('#cm-body .pk--icx.pk--ic1 .post-ytmain > .pk-split .pk-blkh__ic, #cm-body .pk--icx.pk--ic1 .pk-blkh--mid .pk-blkh__ic');
     if (ic) {
       e.preventDefault(); e.stopPropagation();
       const post = ic.closest('.post');
