@@ -9983,7 +9983,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkStgRaf = 0;
     pkStgSet.forEach(c => {
       const cap = c.isConnected && c.querySelector(':scope > .pg-cap'); if (!cap) { pkStgSet.delete(c); return; }
-      const open = c.matches(':hover, .is-peek');
+      const open = c.classList.contains('is-peek');
       if (!open && c.classList.contains('is-stdone')) { c.classList.remove('is-stdone'); c._stArm = false; c._stP0 = null; c.querySelectorAll('.pg-stb b.on').forEach(b => b.classList.remove('on')); }
       const w1 = parseFloat(c.style.getPropertyValue('--pk-w')) || 150, k = Math.min(1, Math.max(0, (cap.offsetWidth - 18) / Math.max(1, w1 - 18)));
       if (!pkStgRM()) pkStgDraw(cap, k);
@@ -10005,6 +10005,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!c._stArm) { const p = c._stP0 || (c._stP0 = [e.clientX, e.clientY]); if (Math.hypot(e.clientX - p[0], e.clientY - p[1]) < 4) return; c._stArm = true; }
     b.classList.add('on');
   }, { passive: true });
+  /* (طلبُ صاحب الموقع) تنفتح بالنقر لا بالمرور: النقرُ على الدائرة (أو على الكبسولة) يفتحها ويطويها، ولا يفتح المجلدَ الذي هي فيه؛
+     والنقرُ في أيّ مكانٍ آخر يطوي ما فُتح بالنقر. وفي الالتقاط على ‎window‎ ليسبق معالجاتِ الشريط والوثيقة */
+  window.addEventListener('click', e => {
+    const c = e.target.closest && e.target.closest('.pg-cnt--stg');
+    document.querySelectorAll('.pg-cnt--stg.is-stclk').forEach(x => { if (x !== c) { x.classList.remove('is-peek', 'is-stclk'); pkStgWake(x); } });
+    if (!c) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (c.classList.contains('is-peek')) { c.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(x => x !== c); }
+    else { pkCapPlace(c); c.classList.add('is-peek', 'is-stclk'); }
+    pkStgWake(c);
+  }, true);
   document.addEventListener('pointerout', e => { if (!e.relatedTarget && pkCapHot) { const c = pkCapHot; pkCapHot = null; pkStgWake(c); } }, { passive: true });
   let pkCapHot = null;
   document.addEventListener('pointerover', e => {
