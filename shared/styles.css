@@ -20480,11 +20480,16 @@ html[data-theme="dark"] .pk-prot__go { color: #7fc0c7; border-color: #7fc0c7; }
 @media (max-width: 520px) { .pk-prot__card { flex-wrap: wrap; } .pk-prot__btns { width: 100%; } }
 /* ===== مروحةُ طرق العرض (‎pkFanPaint‎): الطرفُ يفتحها والأيقونةُ تبقى تُغلق المساحة (طلبُ صاحب الموقع) =====
    خطُّ الالتقاط مُزاحٌ للخارج وأرقّ، فلا يمسّ صندوقَ الأيقونة: لمسُها لها، ولمسُ الطرف للمروحة */
-#cm-body .pk-varc--fan { --pk-fan-band: rgba(255, 255, 255, .94); --pk-fan-sh: rgba(20, 40, 46, .18); z-index: 60; }
-html[data-theme="dark"] #cm-body .pk-varc--fan { --pk-fan-band: rgba(48, 62, 67, .97); --pk-fan-sh: rgba(0, 0, 0, .45); }
+#cm-body .pk-varc--fan { z-index: 60; }
 #cm-body .pk-varc--fan .pk-varc__hit { stroke-width: 7.5; }
 #cm-body .pk-varc--fan .pk-varc__d { stroke-width: 3.2; }
-#cm-body .pk-varc--fan.is-fan .pk-varc__bg { stroke: var(--pk-fan-band); transition: none; }
+#cm-body .pk-varc--fan.is-fan .pk-varc__bg { stroke: color-mix(in srgb, var(--glass, #e7eff0) 84%, transparent); transition: none; }
+/* زجاجُ اللوحة (طلبُ صاحب الموقع): وصفةُ ‎.market-tools .fpanel‎ — صبغةُ ‎--glass‎ بكثافة ‎84%‎، وتمويهٌ ٢٠ بتشبيع ١٧٠، وحرفٌ ‎--glass-edge‎ وظلٌّ ‎--glass-cast‎ */
+#cm-body .pk-varc__gl { position: absolute; left: -150px; top: -150px; width: 330px; height: 330px; opacity: 0; pointer-events: none; }
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  #cm-body .pk-varc__gl { -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%); }
+}
+#cm-body .pk-varc__eg { fill: none; stroke: var(--glass-edge, rgba(255, 255, 255, .85)); stroke-width: 1; pointer-events: none; }
 #cm-body .pk-varc--fan.is-fanon .pk-varc__bg { pointer-events: stroke; }
 #cm-body .pk-varc--fan .pk-varc__m { animation: none; }
 #cm-body .pk-varc--fan:hover .pk-varc__m { stroke-width: unset; }

@@ -10767,6 +10767,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const at = t => { let x = t * T; if (x <= h) return [sx + x, sy]; x -= h; if (x <= L2) { const a = a0 + x / r; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; } x -= L2; return [ex + tx * x, ey + ty * x]; };
     return { d, at };
   };
+  /* حدُّ اللوحة مغلقًا (لقصّ الزجاج ولحرفه): يُسار على الخطّ ويُزاح نصفَ العرض يمينًا ويسارًا، ويُختم الطرفان بنصف دائرة */
+  const pkFanOutline = (G, hw, o = 0) => {
+    const N = 40, A = [], B = [], f = n => n.toFixed(2);
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, [x, y] = G.at(t), [x0, y0] = G.at(Math.max(0, t - .004)), [x1, y1] = G.at(Math.min(1, t + .004));
+      let dx = x1 - x0, dy = y1 - y0; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+      A.push([x - dy * hw + o, y + dx * hw + o]); B.push([x + dy * hw + o, y - dx * hw + o]);
+    }
+    const r = f(hw);
+    return `M${A.map(p => f(p[0]) + ' ' + f(p[1])).join('L')}A${r} ${r} 0 0 0 ${f(B[N][0])} ${f(B[N][1])}L${B.reverse().map(p => f(p[0]) + ' ' + f(p[1])).join('L')}A${r} ${r} 0 0 0 ${f(A[0][0])} ${f(A[0][1])}Z`;
+  };
   const pkFanQ = k => { const q = {}; for (const n in PK_FAN_C) q[n] = PK_FAN_C[n] + (PK_FAN_E[n] - PK_FAN_C[n]) * k; return q; };
   const pkFanCl = x => Math.max(0, Math.min(1, x));
   /* حالُ المروحة عند قيمةٍ ‎k‎ — يُستعمل في البناء (فلا تومض مطويّةً بعد إعادة الرسم) وفي كلّ إطار */
@@ -10776,7 +10787,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     el.classList.toggle('is-fan', kc > .02); el.classList.toggle('is-fanon', k > .5);
     P[0].setAttribute('d', hit.d);
     P[1].setAttribute('d', G.d); P[1].style.strokeWidth = q.w;
-    P[1].style.filter = kc > .05 ? `drop-shadow(0 ${1.5 * kc}px ${4 * kc}px var(--pk-fan-sh))` : '';
+    P[1].style.filter = kc > .05 ? `drop-shadow(0 ${3 * kc}px ${7 * kc}px var(--glass-cast, rgba(13, 42, 72, .13)))` : '';
+    /* زجاجٌ سائلٌ كلوح فلاتر البحث: تحت الخطّ طبقةٌ تموّه ما خلفها مقصوصةٌ على حدّه، وفوقه حرفٌ لامع (‎--glass-edge‎) */
+    const glx = el.querySelector('.pk-varc__gl'), on = kc > .02, ol = on ? pkFanOutline(G, q.w / 2) : '';
+    if (glx) {   /* قناعٌ لا ‎clip-path‎: القصُّ مع التمويه يُرسم أحيانًا مستطيلًا في كروم (قِيس) */
+      const mk = on ? `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='330' height='330'><path d='${pkFanOutline(G, q.w / 2, 150)}'/></svg>`)}")` : '';
+      glx.style.webkitMaskImage = glx.style.maskImage = mk; glx.style.opacity = on ? 1 : 0; }
+    P[6].setAttribute('d', ol || 'M0 0'); P[6].style.opacity = on ? kc : 0;
     for (let i = 0; i < 3; i++) { const dl = 54 + (8 - 54) * kc, x = P[2 + i];
       x.setAttribute('d', G.d); x.style.strokeDasharray = `${dl} 400`; x.style.strokeDashoffset = -(i * 100 + 50 - dl / 2); x.style.opacity = 1 - pkFanCl(k * 2.2); }
     const gl = 54 * (1 - kc) + .01, m = P[5];
@@ -10819,8 +10836,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkVdPrev[id] = cur;
     const nm = v => esc(T()['pkView_' + v]);
     return `<span class="pk-vdots pk-varc pk-varc--fan" role="button" tabindex="0" data-pkfan data-pkid="${esc(id)}" title="${esc(T().pkViewBar)}" aria-label="${esc(T().pkViewBar)}" aria-expanded="${st.kt ? 'true' : 'false'}">`
-      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
-      + ['hit', 'bg', 'd', 'd', 'd', 'm'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
+      + `<span class="pk-varc__gl" aria-hidden="true"></span><svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + ['hit', 'bg', 'd', 'd', 'd', 'm', 'eg'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
       + `</svg>`
       + V.map(v => `<button type="button" class="pk-varc__vi" data-pkview="${v}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_VIEWS.find(x => x[0] === v)[1]}</svg></button>`).join('')
       + `</span>`;
