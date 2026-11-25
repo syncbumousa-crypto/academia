@@ -10206,7 +10206,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     walk(pkBoxDeck || [], PK_TM_FILL); return m; };
   const pkTm = n => { if (!pkTmMap) pkTmMap = pkTmBuild(); return pkTmMap.has(n) ? pkTmMap.get(n) : (n.tm || 0); };
   const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += pkTm(n); }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
-  const pkStgC = ns => pkBoxId != null && pkQt[pkBoxId] ? pkStgTm(ns) : null;
+  let pkBoxQb = null;   /* بنكُ المساهمة المرسومة — لتُعرف دوائرُ الشجرة أهي للبنك أم للملخّص */
+  const pkStgC = ns => { if (pkBoxId == null || !ns || !ns.length) return null; const bank = !!(pkBoxQb && findNode(pkBoxQb, ns[0].id)); return pkQt[(bank ? 'bank:' : 'mid:') + pkBoxId] ? pkStgTm(ns) : null; };
   /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
      النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً يرفعها (ولا شريطَ وسمٍ فوق الملخّص — بطلبه).
      ‏‎{f: المجلد، k: المرحلة، w: كانت كبسولتُه كبسولةَ المفتوح (بطائقُه المباشرة وحدها)}‎ */
@@ -10254,7 +10255,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let Ld = ldx != null ? ldx : lv.length ? dn / lv.length : 0; if (Ld > 0 && Ld < 1) Ld = Math.max(Ld, 3.4 / 15.2);
     { const m = x3Surf(Ld); dot = Ld > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>'; }
     { const S = [0, 1 - Ld]; for (let i = 1; i < 8; i++) S.push(1 - Ld + Ld * (G.E[i + 1] - G.E[1]) / Math.max(1e-6, 1 - G.E[1])); S[8] = 1; G.S = S; }
-    if (!(cnt && pkBoxId != null && pkQt[pkBoxId])) title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;   /* وبالزمن يبقى عنوانُه بالدقائق */
+    if (!(cnt && pkBoxId != null && (pkQt['mid:' + pkBoxId] || pkQt['bank:' + pkBoxId]))) title = en ? `${dn} of ${lv.length} concepts done` : `أنجزت ${dn} من ${lv.length} مفهوم`;   /* وبالزمن يبقى عنوانُه بالدقائق */
     /* (طلبُ صاحب الموقع) وكبسولةٌ اختير منها شريطٌ تبقى مفتوحةً ما دام مختارًا — وتُرسم مفتوحةً في كلّ رسمة */
     const pn = pin && pin.size ? ' pg-cnt--now is-peek is-stclk is-stdone' : '';
     return `<span class="pg-cnt pg-cnt--stg${pn}" title="${esc(title)}"${pn ? ` style="--pk-w:${W}px"` : ''}><span class="pg-ring">${dot}</span>`
@@ -10273,7 +10274,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ===== وإن كان للمساهمة أزمنة (طلبُ صاحب الموقع): الكسرُ نفسُه والدائرةُ نفسُها، بالزمن بدل العدد =====
        الكلُّ مجموعُ أزمنة بطائق المجلد، والمُنجَزُ زمنُ كلّ بطاقةٍ بقدر ما ذوكر من وجوهها، والدائرةُ نسبتُهما.
        ومجلدٌ بلا أزمنةٍ في مساهمةٍ لها أزمنةٌ يبقى بعدده */
-    if (pkQt[pkBoxId]) {   /* (طلبُ صاحب الموقع) قوسُ الزمن: الكبسولاتُ بالزمن فعلًا — وما لا زمنَ لمفاهيمه دائرةٌ فارغةٌ تقول ذلك، لا عدد */
+    if (pkQt['mid:' + pkBoxId]) {   /* (طلبُ صاحب الموقع) قوسُ الزمن: الكبسولاتُ بالزمن فعلًا — وما لا زمنَ لمفاهيمه دائرةٌ فارغةٌ تقول ذلك، لا عدد */
       const tt = Math.round(cs.reduce((x, n) => x + pkTm(n), 0));
       /* وما لا زمنَ لمفاهيمه كبسولتُه بمراحلها نفسِها وعلى كلّ شريطٍ صفر — فتنفتح مع أخواتها ولا تُرى عددًا (طلبُ صاحب الموقع) */
       if (!tt) return pkStgHTML(ns, en ? 'No time set for these concepts' : 'لا زمن لمفاهيم هذا المجلد', en, pkStgCount(ns), null, pkPinOf(k.id), [0, 0, 0, 0, 0, 0, 0, 0]);
@@ -10876,7 +10877,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `</span>`;
   };
   const pkQtArc = (id, pn) => {
-    const fk = 'qt:' + pn + ':' + id,   /* لكلّ مساحةٍ قوسُها (الملخّص والبنك)، والحالُ واحدٌ للمساهمة */ cur = pkQt[id] ? 1 : 0, en = state.lang === 'en';
+    const fk = 'qt:' + pn + ':' + id,   /* لكلّ مساحةٍ قوسُها وحالُها (الملخّص والبنك) — تبديلُ أحدهما لا يمسّ الآخر (طلبُ صاحب الموقع) */ cur = pkQt[pn + ':' + id] ? 1 : 0, en = state.lang === 'en';
     const st = pkFan[fk] || (pkFan[fk] = { k: 0, kv: 0, kt: 0, g: cur, gv: 0, cur, hov: -1, t: 0, n: 2, qt: 1 });
     st.cur = cur; if (bkReduce() || st.k < .01) st.g = cur;
     const nm = v => v === 't' ? (en ? 'Time' : 'الزمن') : (en ? 'Amount' : 'الكمية'), bar = en ? 'Amount or time' : 'الكمية أو الزمن';
@@ -10884,16 +10885,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<span class="pk-varc__gl" aria-hidden="true"></span><svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
       + ['hit', 'bg', 'd', 'd', 'm', 'eg'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
       + `</svg>`
-      + ['q', 't'].map(v => `<button type="button" class="pk-varc__vi" data-pkqt="${v}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_QT_IC[v]}</svg></button>`).join('')
+      + ['q', 't'].map(v => `<button type="button" class="pk-varc__vi" data-pkqt="${v}" data-pkpn="${pn}" data-pkid="${esc(id)}" title="${nm(v)}" aria-label="${nm(v)}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_QT_IC[v]}</svg></button>`).join('')
       + `</span>`;
   };
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-pkqt]'); if (!b) return;
     e.preventDefault(); e.stopPropagation();
-    const id = b.dataset.pkid, t = b.dataset.pkqt === 't' ? 1 : 0; if (!id || !!pkQt[id] === !!t) return;
-    if (t) pkQt[id] = 1; else delete pkQt[id];
+    const id = b.dataset.pkid, pn = b.dataset.pkpn || 'mid', key = pn + ':' + id, t = b.dataset.pkqt === 't' ? 1 : 0; if (!id || !!pkQt[key] === !!t) return;
+    if (t) pkQt[key] = 1; else delete pkQt[key];
     renderCmSection();
-    pkQtShow(id);
+    if (pn === 'mid') pkQtShow(id);
   });
   /* ===== (طلبُ صاحب الموقع) بعد التبديل بين الكمية والزمن تنفتح كبسولاتُ المجلدات كلُّها ‎10‎ ثوانٍ ثمّ تنطوي =====
      فإن كان في الشريط متّسعٌ لها (بعد دوائرها أو تحتها — مجلدٌ مفتوحٌ يطيل الصفَّ) انفتحت في الحال. وإن كانت ستغطّي الأسماءَ
@@ -13783,6 +13784,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       + `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>`
       + `<span>${esc(ed ? T().pkNone : T().pkNonePub)}</span></div></div>`;
     const qb = ed ? ((cardDataRaw(cmCode) || {}).qb || []) : ((pack && pack.qb) || []);
+    pkBoxQb = qb;
     let hB = pkBlkH('book', id, pkSrcList(id).length);
     const hQ = pkBlkH('bank', id, flatCards(qb).length).replace(/<\/div>$/, flatCards(qb).length ? pkQtArc(id, 'bank') + '</div>' : '</div>');
     if (pkSrcAny(id) && bk2On()) hB = hB.replace('</span>', '</span>' + pkBkArc(id));   /* قوسُ طريقة العرض على زاوية أيقونة الكتاب */
@@ -13794,6 +13796,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkBankHTML(id, ed, pack) {
     if (ed) return `<div class="pk-bank" data-pkid="${esc(id)}"><div id="cm-cards"></div>${pkEs('qb', 'data-actqb="c"')}</div>`;
     const qb = (pack && pack.qb) || [];
+    pkBoxQb = qb;
     /* والبنكُ على وضع الرحلة يُرى رحلةً للقارئ من أوّل نظرة (طلبُ صاحب الموقع): خيطُها ومحطّاتُها ظاهرةٌ
        ولو لم يبدأ — فلا يُسقطها ‎packEntered‎ كما في الملخّص. (‎x3Tree‎ يقرأ ‎cxRoDot‎ وقتَ البناء فيُرفع حوله) */
     const dot0 = cxRoDot; if (cxRoJr) cxRoDot = true;
