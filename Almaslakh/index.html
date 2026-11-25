@@ -122,6 +122,8 @@
        عند تبديل اللغة، فما بداخلها يُمحى. */
     .side-brand { display: flex; align-items: center; justify-content: center; gap: 5px; }
     .sidebar .side-logo { padding-inline: 0; }
+    /* والشعارُ واسمُه في الشريط الواسع على اليمين لا في الوسط (طلبُ صاحب الموقع) — والضيّقُ يبقى في الوسط */
+    .sidebar:not(.side-rail) .side-brand { justify-content: flex-start; padding-inline-start: 7px; }   /* حافّةُ الشعار على حافّة أيقونات الأقسام تحته */
     .side-mark  { width: 31px; height: auto; flex: none; display: block;
                   color: var(--c-kfupm); }
     html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
