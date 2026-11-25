@@ -17436,9 +17436,12 @@ html[data-lang="en"] .pp-tab .pp-pill { left: 0; }
 .pp-pill .b svg { width: 80%; height: 80%; display: block; }
 .pp-pill .b:hover { transform: scale(1.1); }
 /* لسانُ بطاقة اللوح: على الحافّة اليمنى أعلاها (يسارًا في الإنجليزيّة)، يغطّي حدَّ البطاقة حيث يتّصل فلا شقّ */
-.kcv-tab { position: absolute; top: 4px; left: 100%; width: 37px; height: 87px; z-index: 2; --tw: 36px; --tth: 61px; --tf: 13px; }   /* (طلبُ صاحب الموقع) هامشُ الحبّة فوق وتحت كهامشها عن اليمين (‎5.5px‎) */
+.kcv-tab { position: absolute; top: 12px; left: 100%;   /* (بلاغُ صاحب الموقع) يبدأ بعد انحناءة زاوية البطاقة (‎12px‎) فيتّصل حدُّه بحدّها على استقامة */
+  width: 37px; height: 87px; z-index: 2; --tw: 36px; --tth: 61px; --tf: 13px; }   /* (طلبُ صاحب الموقع) هامشُ الحبّة فوق وتحت كهامشها عن اليمين (‎5.5px‎) */
 /* ونقطةُ الوصل اليمنى تنزل تحت اللسان إن كانت البطاقةُ قصيرة */
-.kcv-port--r { top: max(50%, 103px); }
+.kcv-port--r { top: max(50%, 111px); }
+/* والبطاقةُ لا تقصر عن اللسان وزاويتيها، فلا يبلغ انحناؤه السفليُّ زاويتَها المدوّرة */
+.kcv-card { min-height: 112px; }
 html[data-lang="en"] .kcv-tab { left: auto; right: 100%; }
 html[data-lang="en"] .kcv-tabsv { transform: scaleX(-1); }
 .kcv-tabsv { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
