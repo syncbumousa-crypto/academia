@@ -86,8 +86,9 @@
        تُلبسها تيلًا شاحبًا ‎#7fb3bb‎ — وذاك الحبرُ يطلب ٩٢٪ تعتيمًا. قِيس
        فوُجد غالبًا، فيُردُّ بمثل تخصيصه. */
     html[data-theme="dark"] .sidebar :is(.langbar, .tabs, .themebar) button:not(.is-active),
-    html[data-theme="dark"] .sidebar .side-ctl button:not(.is-active),
-    html[data-theme="dark"] .sidebar .side-logo { color: var(--glass-ink); }
+    html[data-theme="dark"] .sidebar .side-ctl button:not(.is-active) { color: var(--glass-ink); }
+    /* واسمُ المسلخ بلون شعاره، وأقربُ إليه (طلبُ صاحب الموقع) */
+    html[data-theme="dark"] .sidebar .side-logo { color: var(--brand-tx); }
 
     .side-mark { color: var(--c-kfupm); }
     html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
@@ -119,7 +120,8 @@
        ينقلب الصفُّ من نفسه، فيُقلب صراحةً بقاعدةِ ‎data-lang‎ تحتُ.
        والرمزُ أخٌ لـ‎.side-logo‎ لا ابنٌ لها: المحرّكُ يكتب فيها بـ‎textContent‎
        عند تبديل اللغة، فما بداخلها يُمحى. */
-    .side-brand { display: flex; align-items: center; justify-content: center; gap: 9px; }
+    .side-brand { display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .sidebar .side-logo { padding-inline: 0; }
     .side-mark  { width: 31px; height: auto; flex: none; display: block;
                   color: var(--c-kfupm); }
     html[data-theme="dark"] .side-mark { color: var(--brand-tx); }
@@ -193,7 +195,7 @@
   <!-- الجوال: لا تُحمَّل إلّا على الشاشة الضيّقة، فلا يُمسّ بها سطحُ المكتب -->
   <link rel="stylesheet" href="../shared/mobile.css?v=23" media="(max-width: 600px)">
   <!-- الوضعُ الفاتح للمسلخ («شمس الصباح» على الأبيض): آخرَ الرأس ليغلب ما قبله، ومقصورٌ على الفاتح -->
-  <link rel="stylesheet" href="../shared/maslakh-light.css?v=1">
+  <link rel="stylesheet" href="../shared/maslakh-light.css?v=2">
 </head>
 <body>
 

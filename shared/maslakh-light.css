@@ -32,7 +32,7 @@ html[data-theme="light"] .sidebar.side-anim {
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
 html[data-theme="light"] .sidebar .side-mark { color: #e6f2f3; }
-html[data-theme="light"] .sidebar .side-logo { color: #ffffff; }
+html[data-theme="light"] .sidebar .side-logo { color: #e6f2f3; }   /* بلون الشعار (طلبُ صاحب الموقع) */
 html[data-theme="light"] .sidebar .tabs button:not(.is-active),
 html[data-theme="light"] .sidebar .tabs button:not(.is-active) * { color: #b9d2d5 !important; stroke: #b9d2d5; }
 html[data-theme="light"] .sidebar .tabs button:not(.is-active):hover { background: rgba(255, 255, 255, .08) !important; }
