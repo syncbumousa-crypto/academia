@@ -10035,7 +10035,31 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const i = r.i || 0;
     return i <= 2 ? 3 : i <= 3 ? 4 : i <= 7 ? 5 : i <= 13 ? 6 : 7;
   };
-  const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; x3Leaves(ns).flatMap(cxRecsOf).forEach(r => c[pkStg(r)]++); return c; };
+  /* ===== سجلٌّ وهميٌّ لمساهماتك أنت فقط (طلبُ صاحب الموقع: «عشان أقيّم أداء الكبسولة وشكلها») =====
+     يُشغَّل بالرابط ‎#memdemo‎ ويُطفأ بـ‎#memdemo-off‎ — علامةٌ في هذا الجهاز وحده، وأداةُ معاينةٍ لا بيان:
+     لا يُكتب منه شيءٌ في ‎state.srs‎ ولا يُرفع، فسجلُّ مذاكرتك الحقيقيُّ لا يُمسّ. وكلُّ مجلدٍ يأخذ حالًا مختلفة
+     (خليط · جديدٌ كلُّه · أغلبُه أخطاء · أغلبُه منسيّ · قصيرةُ المدى · قريبٌ من الختم · محفوظٌ كلُّه …) ثابتةً بمعرّفه */
+  let pkStgDemo = false;
+  try {
+    const hh = location.hash;
+    if (hh === '#memdemo') localStorage.setItem('ac.memdemo', '1');
+    else if (hh === '#memdemo-off') localStorage.removeItem('ac.memdemo');
+    if (/^#memdemo(-off)?$/.test(hh)) history.replaceState(null, '', location.pathname + location.search);
+    pkStgDemo = localStorage.getItem('ac.memdemo') === '1';
+  } catch (e) { }
+  let pkBoxMine = false;
+  const PK_STG_DEMO = [[2, 2, 3, 4, 3, 2, 1, 1], [1, 0, 0, 0, 0, 0, 0, 0], [10, 0, 1, 2, 0, 0, 0, 0], [2, 1, 9, 1, 0, 0, 0, 0], [1, 8, 1, 1, 0, 0, 0, 1],
+    [0, 0, 1, 4, 4, 3, 2, 0], [0, 0, 0, 2, 2, 2, 3, 6], [1, 0, 0, 0, 0, 1, 3, 10], [0, 0, 0, 0, 0, 0, 0, 1], [7, 0, 0, 0, 0, 0, 0, 7], [2, 0, 4, 0, 1, 0, 1, 6], [1, 5, 5, 1, 1, 0, 0, 0]];
+  const pkStgHash = t => { let h = 2166136261; for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const pkStgCount = ns => {
+    const c = [0, 0, 0, 0, 0, 0, 0, 0], lv = x3Leaves(ns);
+    if (pkStgDemo && pkBoxMine && lv.length) {
+      const w = PK_STG_DEMO[pkStgHash(lv.map(recId).join('|')) % PK_STG_DEMO.length], W = w.reduce((x, y) => x + y, 0);
+      lv.forEach(n => cxRecsOf(n).forEach((_, j) => { let r = pkStgHash(recId(n) + '#' + j) % 1000 / 1000 * W, i = 0; while (i < 7 && r >= w[i]) r -= w[i++]; c[i]++; }));
+      return c;
+    }
+    lv.flatMap(cxRecsOf).forEach(r => c[pkStg(r)]++); return c;
+  };
   /* حدودُ الطبقات (من فوق إلى تحت) في الدائرة ‎S‎، وحدودُ الشرائط (من اليمين إلى اليسار) في الكبسولة ‎E‎ */
   const pkStgGeom = c => {
     const T = c.reduce((x, y) => x + y, 0), W = T - c[0];
@@ -13285,7 +13309,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkEsSeen.add(id);
     if (!(deck || []).length && !pkSrcAny(id) && pkSplit[id] === undefined && pkBank[id] === undefined) { pkSplit[id] = true; pkBank[id] = true; }
   };
-  function pkAltView(id, deck, editable, pack) {
+  function pkAltView(id, deck, editable, pack, mine) {
     const lab = pkLab(), ed = lab && editable;
     /* ما وقع خارج المجلدات (فظهر «الجذر» في الشريط — طلبُ صاحب الموقع أن يُشال) يُنقل إلى أوّل مجلد، فلا يضيع ولا يُرى جذر */
     if (ed && Array.isArray(deck) && deck.some(n => n.t !== 'f')) {
@@ -13347,7 +13371,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (nf && document.activeElement !== nf && !document.querySelector('#cm-body .pk-fnm:focus')) nf.focus({ preventScroll: true });
       });
     }
-    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
+    pkSoloCur = pkSolo[id] || null; pkBoxDeck = lab ? deck : null; pkBoxMine = !!(editable || mine); pkBoxTime = !!pkBoxDeck && flatCards(deck).some(n => n.tm);
     return (wrap && pkMidOff[id] ? '' : midH + `<div class="pg-folds pk-fstrip${ed ? ' pk-fstrip--ed' : ''}${lab ? ' pk-lg' : ''}" data-pkid="${esc(id)}">${ed ? pkBoxEdHTML(folds, open, PG_TOP, sel) : pkBoxHTML(folds, open, PG_TOP, wait ? null : sel)}</div>`)
       + ((viewH => wrap ? pkSplitWrap(id, v, ed, viewH, pack) : viewH)(
         /* والرسمةُ («انقر هنا لتلخّص المادة») باقيةٌ ما لم يُكتب صفٌّ واحد ولو أُضيفت مجلدات (طلبُ صاحب الموقع).
@@ -15226,7 +15250,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
                ولا تُعار ‎cx-ro‎: تلك تحمل مع الهندسة **حكمَ التحديد** (‎cxSelSync‎ تبحث
                عن ‎.x3.cx-ro‎ لتعرف شجرةَ النشر)، فلو لبستها الشروحُ لَالتبست الشجرتان
                في آلةٍ لا تخصّ الهندسة. فوسمٌ ثالثٌ يحمل الهندسةَ وحدَها -->
-          ${big && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data)
+          ${big && pkVwOf(p.id) !== 'folder' ? pkAltView(p.id, deck, false, p.data, isMine(p))
             : open ? (kind === 'c' && pkLab()
               ? ((p.data.qb || []).length
                 ? `<div class="x3 cx-ro${cxRoJr ? '' : ' cx-nojr'}${cxRoDot ? '' : ' cx-nodot'}">${x3Tree(p.data.qb, V.fold, 0, kind)}</div>`
