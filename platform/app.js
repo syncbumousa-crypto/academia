@@ -11002,12 +11002,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المدى بنودُ المساهمة كلُّها — بطائقُ الملخّص وأسئلةُ البنك — بحساب ‎x3Ans‎ نفسِه (ما أُجيب منها)،
      والدائرةُ تمتلئ ذهبًا من أسفل بقدرها */
   function pcProgHTML(p) {
-    const d = p.data || {}, a = x3Ans([...(d.deck || []), ...(d.qb || [])]);
+    /* (طلبُ صاحب الموقع) ودائرةُ المساهمة مجموعُ ما حصل في الملخّص والبنك: مفاهيمُ الملخّص التي علّمتَها بالصحّ (‎state.ktok‎)
+       وأسئلةُ البنك التي أجبتَها — على كلِّ مفاهيم الملخّص وكلِّ أسئلة البنك. وماؤها رماديٌّ كدوائر مجلدات الملخّص */
+    const d = p.data || {}, ok = state.ktok || {}, lv = x3Leaves(d.deck || []), qa = x3Ans(d.qb || []);
+    const a = { n: lv.length + qa.n, k: lv.filter(n => ok[recId(n)]).length + qa.k };
     const pct = a.n ? Math.round(a.k / a.n * 100) : 0, en = pcEn();
+    let L = a.n ? a.k / a.n : 0; if (L > 0 && L < 1) L = Math.max(L, 3.4 / 15.2);
+    const mk = x3Surf(L), dot = L > 0 ? `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:var(--stg-done)${mk ? ';--mask:' + mk : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>` : '<span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span>';
     const tx = pct <= 0 ? `<span class="pc-ptx is-0">${en ? 'Not started' : 'لم تبدأ بعد'}</span>`
       : pct >= 100 ? `<span class="pc-ptx">${en ? 'Completed ✓' : 'مكتملة ✓'}</span>`
         : `<span class="pc-ptx">${en ? pct + '% done' : 'أكملت ' + pct + '%'}</span>`;
-    return `<div class="pc-prog" title="${esc((en ? `${a.k} of ${a.n}` : `${a.k} من ${a.n}`))}"><span class="pc-ring">${x3DotAns(a)}</span>${tx}</div>`;   /* دائرةُ الاكتمال دائرةُ محطّة الرحلة نفسُها: ماءٌ بموجته (الصوابُ أخضرُ والخطأُ أحمر) — طلبُ صاحب الموقع */
+    return `<div class="pc-prog" title="${esc((en ? `${a.k} of ${a.n}` : `${a.k} من ${a.n}`))}"><span class="pc-ring">${dot}</span>${tx}</div>`;   /* دائرةُ الاكتمال دائرةُ محطّة الرحلة نفسُها: ماءٌ بموجته (الصوابُ أخضرُ والخطأُ أحمر) — طلبُ صاحب الموقع */
   }
   /* ===== سطرُ البيع (طلبُ صاحب الموقع) =====
      ‎data.sale‎: ‎{m:'part'|'lock', price}‎ — وبلا ‎sale‎ فهي مجانية. والمشترى سجلُّه ‎state.bought[id]‎.
