@@ -10210,8 +10210,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       dot = `<span class="x3-dot x3-dot--ans"><i class="x3-lqa" style="background:linear-gradient(to top, ${st.join(', ')}, transparent ${(G.L * 100).toFixed(2)}%)${m ? ';--mask:' + m : ''}"></i><i class="x3-dep"></i><i class="x3-gls"></i></span>`;
     }
     /* (طلبُ صاحب الموقع) عرضُ الكبسولة على قدّ مراحلها: ‎20 + 15 × عددها‎ بين ‎56‎ و‎124‎ (وفيها أعدادُها كلُّها) */
-    const nk = c.filter(Boolean).length, W = Math.max(56, Math.min(124, 20 + 15 * nk)), gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
+    /* (بلاغُ صاحب الموقع: «تداخل أرقام») ولكلّ شريطٍ قدُّ رقمه على الأقلّ: تُقسم الكبسولةُ بالنسبة، وما قصُر عن رقمه أخذ قدَّه
+       وتقاسم الباقون ما بقي — وتطول الكبسولةُ إن لم تتّسع لأرقامها (حتى ‎170‎). والإمالةُ ترسم الحدودَ نفسَها (‎G.E‎) */
+    const nk = c.filter(Boolean).length, gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
+    const mn = c.map(x => x ? 7.6 * String(x).length + 8 : 0), need = mn.reduce((x, y) => x + y, 0) + 6;
+    const W = Math.max(56, Math.min(170, Math.max(Math.min(124, 20 + 15 * nk), Math.ceil(need))));
+    const pw = (() => {
+      const A = W - 2.8, w = c.map(() => 0), free = new Set(c.map((x, i) => x ? i : -1).filter(i => i >= 0)); let rem = A, ch = true;
+      while (ch && free.size) { ch = false; const G2 = [...free].reduce((t, i) => t + Math.max(c[i], 1.2), 0);
+        free.forEach(i => { if (rem * Math.max(c[i], 1.2) / G2 < mn[i]) { w[i] = mn[i]; rem -= mn[i]; free.delete(i); ch = true; } }); }
+      const G2 = [...free].reduce((t, i) => t + Math.max(c[i], 1.2), 0) || 1; free.forEach(i => { w[i] = Math.max(0, rem) * Math.max(c[i], 1.2) / G2; });
+      const tot = w.reduce((x, y) => x + y, 0) || 1; return w.map(x => x / tot);
+    })();
+    { const E = [0]; pw.forEach(x => E.push(E[E.length - 1] + x)); E[8] = 1; G.E = E; }
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${c[i]}">${c[i]}</i></b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
     /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالرماديّ (كان أصفرَ ثمّ بُدّل بطلبه) =====
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
