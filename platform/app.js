@@ -9990,10 +9990,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const o = st && f && pkStgFilt[st.dataset.pkid];
     c.querySelectorAll('.pg-stb > b').forEach(b => b.classList.toggle('is-pick', !!(o && o.f === f.dataset.pkf && PK_STG[o.k] === b.dataset.k)));
   };
-  document.addEventListener('click', e => {
-    const x = e.target.closest && e.target.closest('[data-stgclr]'); if (!x) return;
-    e.preventDefault(); delete pkStgFilt[x.dataset.stgclr]; renderCmSection();
-  });
   function pkStgTick() {
     pkStgRaf = 0;
     pkStgSet.forEach(c => {
@@ -10171,7 +10167,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   };
   const pkStgCount = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => c[i]++); return c; };
   /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
-     النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً أو «×» يرفعها.
+     النقرُ على شريطٍ في كبسولة مجلد يختار المجلدَ ويُري تحته بطائقَ تلك المرحلة وحدها، ونقرُه ثانيةً يرفعها (ولا شريطَ وسمٍ فوق الملخّص — بطلبه).
      ‏‎{f: المجلد، k: المرحلة، w: كانت كبسولتُه كبسولةَ المفتوح (بطائقُه المباشرة وحدها)}‎ */
   const pkStgFilt = {};
   /* حدودُ الطبقات (من فوق إلى تحت) في الدائرة ‎S‎، وحدودُ الشرائط (من اليمين إلى اليسار) في الكبسولة ‎E‎ */
@@ -13826,7 +13822,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!ro) ktMigrate(host);
     /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
     let deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
-    const sf = pkStgFilt[id]; let sfBar = '';
+    const sf = pkStgFilt[id];
     if (sf && sf.f !== sel) delete pkStgFilt[id];
     else if (sf && deep) {
       const hit = new Set(); pkStgEach(host.arr, (n, i) => { if (i === sf.k) hit.add(n.id); });
@@ -13837,8 +13833,6 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         pend.forEach(h => h && out.push(h)); pend.length = 0; out.push(x);
       });
       deep = out;
-      const en = state.lang === 'en', tip = PK_STG_TIP[en ? 'en' : 'ar'][sf.k], nn = out.filter(x => x.n).length;
-      sfBar = `<div class="kt-stgf" style="--c:var(--stg-${PK_STG[sf.k]})"><i></i><span>${esc(tip)}</span><b>${nn}</b><button type="button" class="kt-stgf__x" data-stgclr="${esc(id)}" aria-label="${en ? 'Show all' : 'اعرض الكل'}" title="${en ? 'Show all' : 'اعرض الكل'}">×</button></div>`;
     }
     const cards = deep ? deep.filter(x => x.n).map(x => x.n) : ktCards(host);
     let body = '';
@@ -13911,7 +13905,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        وزرُّ «+ معرفة» شِيل حتى يُقرَّر مكانُه الجديد (‎ktAddBtn‎ باقيةٌ له) */
     const empty = v !== 'tree' && !cards.length ? `<div class="pk-vwph kt-empty" aria-hidden="true"></div>` : '';
     const ln = ((pack || cardDataRaw(cmCode)) || {}).ln;
-    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}${ln === 'en' ? ' kt-ln--en' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${sfBar}${body}${empty}</div>`;
+    return `<div class="kt-view kt-view--${v}${ro ? ' is-ro' : ''}${ln === 'en' ? ' kt-ln--en' : ''}" data-pkid="${esc(id)}" data-ktf="${esc(sel)}">${body}${empty}</div>`;
   }
 
   /* ===== ROADMAP-PAPERS: العرضُ البطاقيُّ رزمةُ أوراق (من «ورقات» — كودُ صاحب الموقع) =====
