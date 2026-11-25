@@ -10902,7 +10902,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!cs.length) return;
     cs.forEach(c => pkCapPlace(c));
     /* الوجوهُ التي ستُغطّي كبسولتُها اسمَها وحدَها تطول (وما جاورها في صفّه يطول بطولها) */
-    const tf = cs.filter(c => !c.closest('.pg-box').classList.contains('is-wide') && !c.classList.contains('is-gl') && !c.classList.contains('is-gd')).map(c => c.parentElement);
+    const tf = cs.filter(c => !c.closest('.pg-box').classList.contains('is-wide') && !c.closest('.pg-in') && !c.classList.contains('is-gl') && !c.classList.contains('is-gd')).map(c => c.parentElement);   /* ولا تطول المجلداتُ التي داخل مجلدٍ مفتوح: لا هامشَ فارغًا تحتها (طلبُ صاحب الموقع) */
     /* وبقدر ما ينقصها فقط: الكبسولةُ تنزل تحت الدائرة إن كان تحتها ‎26px‎ (‎pkCapSide‎)، فيُزاد الفرقُ وحده (طلبُ صاحب الموقع: «الزيادة عالية») */
     const need = new Map(tf.map(f => { const c = f.querySelector(':scope > .pg-cnt--stg'), fr = f.getBoundingClientRect(), cr = c.getBoundingClientRect(), k = f.offsetHeight ? fr.height / f.offsetHeight : 1;
       return [f, Math.max(0, Math.ceil(30 - (fr.bottom - cr.bottom) / (k || 1))) + parseFloat(getComputedStyle(f).paddingBottom || 0)]; }));
