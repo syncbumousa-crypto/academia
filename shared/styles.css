@@ -17121,7 +17121,11 @@ html[data-theme="dark"] .kcv-lab { background: #3a4246; }
 .kcv.is-ro .kcv-card { cursor: default; user-select: text; }
 .kcv.is-ro .kcv-link, .kcv.is-ro .kcv-lab { cursor: default; pointer-events: none; }
 .kt-view.is-ro .kt-ok { cursor: default; }
-.kt-view.is-ro .kt-ok[data-ktok] { cursor: pointer; }   /* (طلبُ صاحب الموقع) مربّعُ الصحّ يعلّمه القارئُ لنفسه */
+.kt-view.is-ro .kt-ok[data-ktok] { cursor: pointer; }
+.kt-view.is-ro .kt-ok[data-ktok].on { background: color-mix(in srgb, var(--stg-done) 22%, transparent); border: 1.5px solid var(--stg-done); color: var(--stg-done); }
+.kt-view.is-ro .kt-ok[data-ktok].has-stg { background: color-mix(in srgb, var(--kc) 24%, transparent); border: 1.5px solid var(--kc); color: transparent; }
+.kt-view.is-ro .kt-ok[data-ktok].has-stg.on { color: var(--kc); }
+.kt-view.is-ro .kt-ok[data-ktok]:hover { filter: brightness(1.05); }   /* (طلبُ صاحب الموقع) مربّعُ الصحّ يعلّمه القارئُ لنفسه */
 
 /* ===== «الكتاب ٢» (ROADMAP-BOOK2 · المرحلة ٣) — كتابُ «المصدر» بـWebGL =====
    اللوحةُ تملأ مسرحَ الكتاب كلَّه (هامشُها للظلّ)، والـ‎.cbk‎ صندوقٌ شفّافٌ على مستطيل الفتحة: منه تُحاذى الأدواتُ ويُقاس ‎FLIP‎ */
@@ -18476,6 +18480,8 @@ html[data-lang="en"] .cx-acttools:has(> .cx-ftc) { transform: translateY(-50%); 
 .kt-num.is-hlopen { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; box-sizing: border-box; border-radius: 999px;
   box-shadow: 0 0 0 1.5px #2c5e65; }
 .kt-num.has-hl.is-hlopen { box-shadow: 0 0 0 1.5px #2c5e65, 0 0 0 3px var(--u-surf, #fff); }
+/* (طلبُ صاحب الموقع) أرقامُ صفوف الملخّص أرقامٌ عاديّة — لا دوائرَ ملوّنةَ حولها (ويبقى نقرُها كما كان) */
+.kt-view .kt-num.has-hl, .kt-view .kt-num.is-hlopen, .kt-view .kt-num.has-hl.is-hlopen { display: inline; min-width: 0; height: auto; padding: 0; background: none; box-shadow: none; border-radius: 0; color: var(--u-tx-strong, #14233f); }
 /* ===== أداةُ المربّع (ROADMAP-HL ق٦): الصفحةُ الساكنةُ لوحُ رسم — مؤشّرٌ متقاطع، ومعاينةُ المربّع بلون القلم وحدٍّ متقطّع ===== */
 .hl-box .bk-tl { pointer-events: auto; cursor: crosshair; }
 .hl-box .bk-tl span, .hl-box .bk-tl .bk-tl__ln { cursor: crosshair; }

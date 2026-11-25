@@ -13828,7 +13828,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const ktEd = (cid, fld, cls) => ` class="${cls}"` + (KTRO ? '' : ` contenteditable="plaintext-only" spellcheck="false" data-kc="${esc(cid)}" data-kfld="${fld}"`);
   /* (طلبُ صاحب الموقع) مربّعُ الصحّ في صفوف الملخّص المنشور تعلّمه أنت: «أكملتُ هذا المفهوم» — ويُحفظ في حسابك (‎state.ktok‎،
      مع التفضيلات) ومنه تمتلئ دوائرُ المجلدات بالأصفر */
-  const ktOk = n => KTRO ? ((on, id) => `<span class="kt-ok${on ? ' on' : ''}" role="checkbox" tabindex="0" aria-checked="${on}" data-ktok="${esc(id)}" aria-label="${on ? '✓' : ''}">`)(!!(state.ktok || {})[recId(n)], recId(n)) + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  /* (طلبُ صاحب الموقع) والمربّعُ رماديٌّ وصحُّه رماديّ؛ فإن كان للمفهوم مرحلةٌ في المذاكرة (أحمرُ أو أخضرُ بدرجاته أو بنفسجيّ)
+     لُوّن المربّعُ بلونها — عليه الصحُّ أو لم يكن */
+  const ktOk = n => KTRO ? ((on, id, sg) => `<span class="kt-ok${on ? ' on' : ''}${sg ? ' has-stg' : ''}"${sg ? ` style="--kc:var(--stg-${PK_STG[sg]})"` : ''} role="checkbox" tabindex="0" aria-checked="${on}" data-ktok="${esc(id)}" aria-label="${on ? '✓' : ''}">`)(!!(state.ktok || {})[recId(n)], recId(n), KTSTG && KTSTG.get(n.id)) + `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>` : `<button type="button" class="kt-ok${n.ok ? ' on' : ''}" data-kok="${esc(n.id)}" aria-pressed="${!!n.ok}" aria-label="✓"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   const ktOkTog = el => {
     const id = el.dataset.ktok, m = state.ktok || (state.ktok = {});
     if (m[id]) delete m[id]; else m[id] = 1;
@@ -13861,14 +13863,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       idle(step, { timeout: 400 });
     });
   }
+  /* مرحلةُ كلّ مفهومٍ في العرض المنشور (لون مربّع الصحّ) — تُحسب مرّةً للرسمة: أدنى مراحل وجوهه غيرِ «الجديدة» */
+  let KTSTG = null;
   function ktViewHTML(id, sel, v, folds, pack, ro) {
     KTRO = !!ro;
-    try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; }
+    try { return ktViewInner(id, sel, v, folds, pack, ro); } finally { KTRO = false; KTSTG = null; }
   }
   function ktViewInner(id, sel, v, folds, pack, ro) {
     const host = ktHost(sel, pack);
     if (!host) return '';
     if (!ro) ktMigrate(host);
+    if (ro) { KTSTG = new Map(); pkStgEach(host.arr, (n, i) => { if (!i) return; const q = KTSTG.get(n.id); if (q == null || i < q) KTSTG.set(n.id, i); }); }
     /* والمجلدُ في «وحدَه» (‎pkSolo‎): بطائقُه هو بلا مجلداته الداخليّة */
     let deep = v === 'tree' ? null : sel && pkSolo[id] === sel ? ktCards(host).map(n => ({ n })) : ktDeep(host);
     const sf = pkStgFilt[id];
