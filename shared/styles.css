@@ -20110,6 +20110,12 @@ html[data-theme="dark"] .pg-stb > b > i::after { opacity: 1.1; }
 .pg-stb:has(> b.on) > b:not(.on) { opacity: .42; filter: saturate(.7); }
 .pg-cap--stg::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit; background: linear-gradient(180deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 48%); }
 @media (prefers-reduced-motion: reduce) { .pg-stb > b { transition: none; } }
+/* (بلاغُ صاحب الموقع: «تنغلق فاتحةً ثمّ تظلم فجأة») — المطويّةُ تبلغ قدَّ الدائرة نحو ‎.55s‎ والدائرةُ الحقيقيّة كانت تعود بعد ‎.8s‎ دفعةً
+   واحدة، فتُرى دائرةُ الرسم الفاتحة ثمّ تُستبدل بالدائرة بعمقها وزجاجها. فصارتا تتلاشيان معًا إحداهما إلى الأخرى من ‎.5s‎ */
+.pg-cnt--stg > .pg-ring { transition: opacity .24s ease .5s, transform .56s cubic-bezier(.22, 1, .36, 1); }
+.pg-cnt--stg > .pg-cap { transition: width .46s cubic-bezier(.22, 1, .36, 1) .34s, height .46s cubic-bezier(.22, 1, .36, 1) .34s, margin-top .46s cubic-bezier(.22, 1, .36, 1) .34s,
+  left .46s cubic-bezier(.22, 1, .36, 1) .34s, right .46s cubic-bezier(.22, 1, .36, 1) .34s, padding .46s cubic-bezier(.22, 1, .36, 1) .34s,
+  box-shadow .46s cubic-bezier(.22, 1, .36, 1) .34s, opacity .24s ease .5s, visibility 0s linear .74s; }
 
 /* ===== بنكُ الأسئلة: الحشوُ مسطرة (طلبُ صاحب الموقع) =====
    كان شريطًا شبحًا بقدّ السطر يملأ ما بقي من صفّ السؤال (ثم جُرّب غصنًا فرُدّ). فصار **مسطرةً**: علاماتٌ قصيرةٌ متتالية
