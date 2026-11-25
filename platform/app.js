@@ -10011,6 +10011,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      نفسَها طافيةً فوق الدائرة (‎pk-stfloat‎) — تُبنى من أعدادها وتنبسط بالإمالة نفسِها، وتُزال بعد أن تنطوي */
   const pkStgShut = x => {
     x.classList.remove('is-peek', 'is-stclk'); pkCapPeekOn = pkCapPeekOn.filter(y => y !== x); pkStgWake(x);
+    if (x._ct && x._sh) {   /* وتعود المساحةُ إلى مكانها مع انطواء الكبسولة (بتأخيره نفسِه) */
+      const tr = 'transform .46s cubic-bezier(.22, 1, .36, 1) .34s';
+      x._ct.style.transition = tr; x._ct.style.transform = ''; x.style.transition = tr.replace('transform', 'left'); x.style.left = x._l0 + 'px';
+      setTimeout(() => { if (!x.classList.contains('is-peek') && x._ct) { x._ct.style.transition = ''; } }, 850);
+    }
     if (x._dot) setTimeout(() => { if (!x.classList.contains('is-peek')) { x._dot.style.visibility = ''; x.remove(); } }, 900);
   };
   function pkStgFloat(dot) {
@@ -10020,6 +10025,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const sc = r.width / 18; x.style.cssText = `left:${r.left}px;top:${r.top}px;--pk-sc:${sc}`;
     document.body.appendChild(x); dot.style.visibility = 'hidden';
     pkCapPlace(x); void x.offsetWidth;
+    /* (طلبُ صاحب الموقع) لا تخرج عن المساحة: إن لم يتّسع لها ما بين الدائرة وحافّة المساحة اليمنى انزاحت عناصرُ المساحة يسارًا
+       بقدر ما ينقص — والكبسولةُ تمشي معها — ثمّ تعود حين تنطوي */
+    const ct = dot.closest('.x3'), clip = ct && ct.parentElement;
+    if (ct && clip) {
+      const W = +x.querySelector('.pg-cap').dataset.w * sc, sh = Math.max(0, Math.ceil(r.left - 2 * sc + W - (clip.getBoundingClientRect().right - 8)));
+      x._ct = ct; x._l0 = r.left; x._sh = sh;
+      if (sh) { const tr = 'transform .46s cubic-bezier(.22, 1, .36, 1)'; ct.style.transition = tr; ct.style.transform = `translateX(${-sh}px)`; x.style.transition = tr.replace('transform', 'left'); x.style.left = (r.left - sh) + 'px'; }
+    }
     x.classList.add('is-peek', 'is-stclk'); pkStgWake(x);
     return x;
   }
