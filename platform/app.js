@@ -45285,6 +45285,40 @@ void main() {
   renderTerms();
   bootAddCard();
   bootExamLink();
+  /* ===== ما كتبه المساعدُ الذكيُّ (Claude · ChatGPT) يُدمج في مساهماتي (ROADMAP-MCP) =====
+     الموصّلُ لا يكتب في المساهمة (المتصفّحُ يدفع نسختَه فوقها) بل في صندوق وارد. فيُسحب هنا: تُجذب المادّةُ أوّلًا
+     (فلا تُنشأ مساهمةٌ ثانيةٌ فوق ما على الخادم)، ثمّ يُلحق المجلدُ بالملخّص أو البنك موسومًا بمن كتبه، ثمّ يُعلَّم مدموجًا */
+  let mcpPulling = false, mcpLast = 0;
+  async function mcpInboxPull() {
+    if (mcpPulling || isGuest() || !SRV_ON() || Date.now() - mcpLast < 60000) return;
+    mcpPulling = true; mcpLast = Date.now();
+    try {
+      const url = postsURL('').replace(/posts$/, 'mcp/inbox');
+      const r = await apiFetch(url); if (!r.ok) return;
+      const j = await r.json(), items = (j && j.items) || [];
+      if (!items.length) return;
+      const done = [], codes = new Set();
+      const li = o => '<ul>' + o.map(x => `<li>${esc(x)}</li>`).join('') + '</ul>';
+      for (const it of items) {
+        if (!it.code || !Array.isArray(it.items)) continue;
+        if (!codes.has(it.code)) { codes.add(it.code); try { await srvPull(it.code, true); } catch (e) {} }
+        const d = cardDataRaw(it.code);
+        const ch = it.kind === 'qb'
+          ? it.items.map(x => Object.assign({ id: newId(), t: 'q', ctype: 'basic', f: String(x.q || ''), ok: x.ok | 0, b: li(x.o || []) }, x.ex ? { ex: String(x.ex) } : {}))
+          : it.items.map(x => ({ id: newId(), t: 'c', ctype: 'basic', f: String(x.f || ''), b: String(x.b || '') }));   /* (نصٌّ كبطائق البذرة: يُهرَّب عند العرض) */
+        const f = { id: newId(), t: 'f', name: String(it.folder || '').slice(0, 160), ci: 0, open: true, ai: it.by || 'AI', ch };
+        (it.kind === 'qb' ? (d.qb = d.qb || []) : d.deck).push(f);
+        done.push(it.id);
+      }
+      if (!done.length) return;
+      save();
+      await apiFetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ done }) });
+      toast(state.lang === 'en' ? `Your assistant added ${done.length} draft folder(s) to your contributions` : `أضاف مساعدك ${done.length} من المجلدات كمسودة في مساهماتك`);
+      if (typeof cmCode !== 'undefined' && codes.has(cmCode) && typeof renderCmSection === 'function') renderCmSection();
+    } catch (e) {} finally { mcpPulling = false; }
+  }
+  setTimeout(mcpInboxPull, 2500);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') mcpInboxPull(); });
   bootSeed();
   /* ===== ورابطُ الاختبار يُلتقط في الحالين =====
      إن فُتح في لسانٍ جديدٍ أُقلع الموقعُ فقرأه الإقلاعُ أعلاه. وإن لُصق في لسانٍ

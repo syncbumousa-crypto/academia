@@ -31,6 +31,7 @@ import * as books    from './_h/books.js';
 import * as likes    from './_h/likes.js';
 import * as comments from './_h/comments.js';
 import * as admin    from './_h/admin.js';
+import * as mcp      from './_h/mcp.js';
 
 /* المسار ⇐ الوحدة. والاطول اولا حيث تشابهت الرؤوس. */
 const ROUTES = [
@@ -44,6 +45,7 @@ const ROUTES = [
   ['/api/likes',    likes],
   ['/api/comments', comments],
   ['/api/admin',    admin],
+  ['/api/mcp',      mcp],     /* موصّلُ Claude وChatGPT (ROADMAP-MCP) */
   /* و‎/api/nook‎ لم تُنقل: ‎udoc‎ خلفتها، والعميل لا يناديها، وجدولها لم يُنشا.
      وتبقى في كلاودفلير للمتصفح الذي لم يُحدَّث حتى يُطفا الخادم القديم. */
 ];
