@@ -17436,9 +17436,9 @@ html[data-lang="en"] .pp-tab .pp-pill { left: 0; }
 .pp-pill .b svg { width: 80%; height: 80%; display: block; }
 .pp-pill .b:hover { transform: scale(1.1); }
 /* لسانُ بطاقة اللوح: على الحافّة اليمنى أعلاها (يسارًا في الإنجليزيّة)، يغطّي حدَّ البطاقة حيث يتّصل فلا شقّ */
-.kcv-tab { position: absolute; top: 4px; left: 100%; width: 31px; height: 64px; z-index: 2; --tw: 30px; --tth: 42px; --tf: 11px; }
+.kcv-tab { position: absolute; top: 4px; left: 100%; width: 37px; height: 76px; z-index: 2; --tw: 36px; --tth: 50px; --tf: 13px; }
 /* ونقطةُ الوصل اليمنى تنزل تحت اللسان إن كانت البطاقةُ قصيرة */
-.kcv-port--r { top: max(50%, 80px); }
+.kcv-port--r { top: max(50%, 92px); }
 html[data-lang="en"] .kcv-tab { left: auto; right: 100%; }
 html[data-lang="en"] .kcv-tabsv { transform: scaleX(-1); }
 .kcv-tabsv { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -17446,14 +17446,14 @@ html[data-lang="en"] .kcv-tabsv { transform: scaleX(-1); }
 html[data-theme="dark"] .kcv-tabsv .f { fill: #3a4246; }
 .kcv-tabsv .e { fill: none; stroke: var(--u-line, rgba(44, 94, 101, .18)); stroke-width: 1; }
 .kcv-card.is-sel .kcv-tabsv .e { stroke: color-mix(in srgb, var(--u-gold, #c9a25c) 85%, transparent); }
-.kcv-pill { position: absolute; top: 11px; left: 0; width: 30px; height: 42px; display: grid; place-items: center; align-content: center; gap: 3px; }
+.kcv-pill { position: absolute; top: 13px; left: 0; width: 36px; height: 50px; display: grid; place-items: center; align-content: center; gap: 3px; }
 html[data-lang="en"] .kcv-pill { left: 1px; }
 .kcv-pill > * { position: relative; }
-.kcv-pill::before { content: ''; position: absolute; left: 50%; top: 50%; width: 21px; height: 37px; transform: translate(-50%, -50%); border-radius: 99px; box-sizing: border-box;
+.kcv-pill::before { content: ''; position: absolute; left: 50%; top: 50%; width: 25px; height: 44px; transform: translate(-50%, -50%); border-radius: 99px; box-sizing: border-box;
   border: 1.3px solid color-mix(in srgb, var(--k) 62%, transparent); background: color-mix(in srgb, var(--k) 7%, transparent); }
 .kcv-pill.on::before { border-width: 1.6px; border-color: var(--k); }
-.kcv-pill .n { font-size: 11.5px; }
-.kcv-pill .b { width: 9px; height: 9px; border-width: 1.3px; }
+.kcv-pill .n { font-size: 13.5px; }
+.kcv-pill .b { width: 10.5px; height: 10.5px; border-width: 1.3px; }
 .kcv-pill.on .b { border-width: 1.3px; }
 /* حبّةُ الجدول في عمود الرقم */
 .kt-pill { position: relative; display: inline-grid; place-items: center; align-content: center; gap: 4px; width: 22px; height: 40px; vertical-align: middle; }
