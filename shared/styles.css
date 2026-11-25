@@ -20563,3 +20563,9 @@ html[data-theme="dark"] .fmn-row--del.is-arm > svg { color: #fff; }
 .fmn-ctl b { min-width: 38px; text-align: center; font: 700 11px "IBM Plex Sans Arabic", sans-serif; color: var(--f-gold); font-variant-numeric: tabular-nums; }
 /* (طلبُ صاحب الموقع) عند التبديل بين الكمية والزمن: يطول صفُّ المجلدات ليتّسع تحت دوائرها لكبسولاتها، ثمّ يعود */
 #cm-body .pk-fstrip .pg-face { transition: padding-bottom .38s cubic-bezier(.22, 1, .36, 1); }
+/* (طلبُ صاحب الموقع) الزمنُ على شرائط الكبسولة بوحدته عن يساره كما في كبسولة الكسر (‎.pg-capu‎): الرقمُ زجاجٌ بخطّه، والحرفُ ‎KFUPM‎ أصغر */
+.pg-stb > b:has(> u.pg-stu) { grid-auto-flow: column; gap: 1.5px; align-content: center; justify-content: center; }
+.pg-stb > b > u.pg-stu { text-decoration: none; font: 700 10.5px/1 'KFUPM Display', 'IBM Plex Sans Arabic', sans-serif; color: var(--gl); text-shadow: 0 1.1px 1.3px rgba(75, 95, 110, .45); opacity: 0; transition: opacity .15s; transform: translateY(.5px); }
+html[data-theme="dark"] .pg-stb > b > u.pg-stu { color: var(--gd); text-shadow: 0 .9px 1.5px rgba(0, 0, 0, .5); }
+.pg-cnt.is-stdone .pg-stb > b > u.pg-stu { opacity: 1; transition-delay: .08s; }
+html[data-lang="en"] .pg-stb > b > u.pg-stu { order: -1; }

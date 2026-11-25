@@ -10205,7 +10205,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     walk(pkBoxDeck || [], PK_TM_FILL); return m; };
   const pkTm = n => { if (!pkTmMap) pkTmMap = pkTmBuild(); return pkTmMap.has(n) ? pkTmMap.get(n) : (n.tm || 0); };
-  const pkStgTm = ns => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += pkTm(n); }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(x / 60)) : 0) : null; };
+  /* ‏‎sec‎: بالثواني (لكبسولة الشريط تُكتب بوحدتها) — وإلّا بالدقائق (لدوائر الشجرة: أعدادُها في ‎data-stg‎) */
+  const pkStgTm = (ns, sec) => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; pkStgEach(ns, (n, i) => { c[i] += pkTm(n); }); return c.some(Boolean) ? c.map(x => x ? Math.max(1, Math.round(sec ? x : x / 60)) : 0) : null; };
   let pkBoxQb = null;   /* بنكُ المساهمة المرسومة — لتُعرف دوائرُ الشجرة أهي للبنك أم للملخّص */
   const pkStgC = ns => { if (pkBoxId == null || !ns || !ns.length) return null; const bank = !!(pkBoxQb && findNode(pkBoxQb, ns[0].id)); return pkQt[(bank ? 'bank:' : 'mid:') + pkBoxId] ? pkStgTm(ns) : null; };
   /* ===== تصفيةُ الملخّص بشريط (طلبُ صاحب الموقع) =====
@@ -10236,7 +10237,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (بلاغُ صاحب الموقع: «تداخل أرقام») ولكلّ شريطٍ قدُّ رقمه على الأقلّ: تُقسم الكبسولةُ بالنسبة، وما قصُر عن رقمه أخذ قدَّه
        وتقاسم الباقون ما بقي — وتطول الكبسولةُ إن لم تتّسع لأرقامها (حتى ‎170‎). والإمالةُ ترسم الحدودَ نفسَها (‎G.E‎) */
     const nk = c.filter(Boolean).length, gt = c.reduce((x, y) => x + (y ? Math.max(y, 1.2) : 0), 0);
-    const mn = c.map((x, i) => x ? 7.6 * String(lab ? lab[i] : x).length + 8 : 0), need = mn.reduce((x, y) => x + y, 0) + 6;
+    const mn = c.map((x, i) => x ? (lab && lab[i] && lab[i].v ? 7.6 * lab[i].v.length + 16 : 7.6 * String(lab ? lab[i] : x).length + 8) : 0), need = mn.reduce((x, y) => x + y, 0) + 6;
     const W = Math.max(56, Math.min(170, Math.max(Math.min(124, 20 + 15 * nk), Math.ceil(need))));
     const pw = (() => {
       const A = W - 2.8, w = c.map(() => 0), free = new Set(c.map((x, i) => x ? i : -1).filter(i => i >= 0)); let rem = A, ch = true;
@@ -10246,7 +10247,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const tot = w.reduce((x, y) => x + y, 0) || 1; return w.map(x => x / tot);
     })();
     { const E = [0]; pw.forEach(x => E.push(E[E.length - 1] + x)); E[8] = 1; G.E = E; }
-    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" ${pin && pin.has(i) ? 'class="is-pick" ' : ''}style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}"><i data-n="${lab ? lab[i] : c[i]}">${lab ? lab[i] : c[i]}</i></b>` : '').join('');
+    const bands = PK_STG.map((k, i) => c[i] ? `<b data-k="${k}" title="${esc(tip[i])}" ${pin && pin.has(i) ? 'class="is-pick" ' : ''}style="flex:0 0 ${(pw[i] * 100).toFixed(3)}%;--g:${Math.max(c[i], 1.2)};background:var(--stg-${k});--gl:${pkStgGlass(PK_STG_PAL.l[i], 0)};--gd:${pkStgGlass(PK_STG_PAL.d[i], 1)}">${lab && lab[i] && lab[i].v ? `<i data-n="${lab[i].v}">${lab[i].v}</i><u class="pg-stu">${lab[i].u}</u>` : `<i data-n="${lab ? lab[i] : c[i]}">${lab ? lab[i] : c[i]}</i>`}</b>` : '').join('');
     if (title === null) return dot.replace('class="x3-dot x3-dot--ans"', `class="x3-dot x3-dot--ans x3-dot--stg" data-stg="${c.join(',')}"`);
     /* ===== (طلبُ صاحب الموقع) دائرةُ المجلد في مساحة الملخّص وهي مطويّة: نسبةُ الإكمال وحدها، بالرماديّ (كان أصفرَ ثمّ بُدّل بطلبه) =====
        والإكمالُ ما علّمتَه أنت بمربّع الصحّ في صفوف المفاهيم (‎state.ktok‎). فإذا نُقرت انبسطت الكبسولةُ إلى المراحل:
@@ -10283,8 +10284,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cs.forEach(n => { const t = pkTm(n); if (!t) return; const rs = cxRecsOf(n); dt += t * rs.filter(Boolean).length / (rs.length || 1); });
         dt = Math.min(tt, Math.round(dt));
         const at = Object.assign({}, a, { lvl: dt / tt });
-        const tc = pkStgTm(ns);   /* وبوحدتها على كلّ شريط (‎د‎): دقيقةٌ لكلّ مفهومٍ تساوي عددَه، فبلا وحدةٍ تُقرأ كمّيّةً (طلبُ صاحب الموقع) */
-        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, tc, null, pkPinOf(k.id), tc && tc.map(x => x ? x + (en ? 'm' : 'د') : 0));
+        /* وكلُّ شريطٍ بزمنه ووحدتِه عن يساره كما اتُّفق في الكبسولة (‎pkTmV · pkTmU‎): «45ث» · «8:15د» · «1:20س» — فلا يُقرأ كمّيّة (طلبُ صاحب الموقع) */
+        const tc = pkStgTm(ns, 1);
+        return pkStgHTML(ns, en ? `${pkTmTx(dt)} of ${pkTmTx(tt)} min done` : `أنجزت ${pkTmTx(dt)} من ${pkTmTx(tt)} دقيقة`, en, tc, null, pkPinOf(k.id), tc && tc.map(x => x ? { v: pkTmV(x), u: pkTmU(x, en) } : 0));
       }
     }
     /* كسرٌ «ما أُنجز / الكلّ» (طلبُ صاحب الموقع): المُنجَزُ يمينًا والكلُّ يسارًا — قطعٌ مستقلّةٌ في صفٍّ يمينيّ، لا نصٌّ واحدٌ
