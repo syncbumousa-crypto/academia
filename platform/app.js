@@ -9956,7 +9956,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      التقدّمُ ‎k‎ = عرضُها الآن بين الدائرة (‎18‎) وعرضِها المفتوح (‎--pk-w‎)، فلا ساعةَ مستقلّةً تسبقها أو تتأخّر عنها */
   const pkStgSet = new Set(); let pkStgRaf = 0;
   const pkStgRM = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pkStgWake = c => { if (!c || !c.classList || !c.classList.contains('pg-cnt--stg')) return; pkStgSet.add(c); if (!pkStgRaf) pkStgRaf = requestAnimationFrame(pkStgTick); };
+  const pkStgWake = c => { if (!c || !c.classList || !c.classList.contains('pg-cnt--stg')) return; c._stT = performance.now(); c._stN = 0; pkStgSet.add(c); if (!pkStgRaf) pkStgRaf = requestAnimationFrame(pkStgTick); };
   const pkStgHex = h => { h = (h || '').trim(); if (h[0] !== '#') return [128, 128, 128]; if (h.length === 4) h = '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3]; return [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); };
   function pkStgDraw(cap, k) {
     const cv = cap.querySelector(':scope > .pg-stc'); if (!cv) return;
@@ -9987,8 +9987,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!open && c.classList.contains('is-stdone')) { c.classList.remove('is-stdone'); c._stArm = false; c._stP0 = null; c.querySelectorAll('.pg-stb b.on').forEach(b => b.classList.remove('on')); }
       const w1 = parseFloat(c.style.getPropertyValue('--pk-w')) || 150, k = Math.min(1, Math.max(0, (cap.offsetWidth - 18) / Math.max(1, w1 - 18)));
       if (!pkStgRM()) pkStgDraw(cap, k);
-      if (open && (k >= .995 || pkStgRM())) { c.classList.add('is-stdone'); pkStgSet.delete(c); }
-      else if (!open && k <= .005) pkStgSet.delete(c);
+      /* (بلاغُ صاحب الموقع: «تنفتح ولا تظهر الأرقام حتى ألمسها ثانية») — كان التتبّعُ يُترك في أوّل إطار إن لم تكن حالةُ ‎:hover‎
+         قد وصلت بعدُ (اللمس يضعها متأخّرة)، فلا تُسلَّم للشرائط أبدًا. فصار: لا يُترك المطويُّ قبل ‎700ms‎ من الإيقاظ،
+         ويُسلَّم المفتوحُ إذا بلغ عرضَه أو ثبت عرضُه ثلاثة إطارات (تقريبُ الأبعاد مع تكبير الصفحة لا يبلغ ‎0.995‎ دائمًا) */
+      const w = cap.offsetWidth; c._stN = w === c._stW ? (c._stN || 0) + 1 : 0; c._stW = w;
+      if (open && (k >= .98 || (k > .5 && c._stN >= 3) || pkStgRM())) { pkStgDraw(cap, 1); c.classList.add('is-stdone'); pkStgSet.delete(c); }
+      else if (!open && k <= .005 && performance.now() - (c._stT || 0) > 700) pkStgSet.delete(c);
     });
     if (pkStgSet.size) pkStgRaf = requestAnimationFrame(pkStgTick);
   }
