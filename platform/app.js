@@ -812,7 +812,7 @@
   const BADGE_GRAD = new Set(('ACCT 477|ACCT 478|ACF 411|ACF 412|AE 411|AE 412|ARE 411|ARE 412|AS 411|AS 412|BAI 411|BAI 412|'
     + 'BIOE 411|BIOE 412|CE 410|CE 412|CHE 411|CHE 412|CIE 411|CIE 413|COE 411|COE 412|DATA 411|DATA 412|DSMM 411|DSMM 412|'
     + 'EE 411|EE 412|ENTR 411|ENTR 412|ESE 411|ESE 412|FFE 411|FFE 412|FIN 477|FIN 478|GEOL 411|GEOL 412|GEOP 411|GEOP 412|'
-    + 'ICS 413|ICS 414|ISE 411|ISE 412|MATH 413|MATH 414|ME 411|ME 412|MINE 411|MINE 412|MSE 411|MSE 412|OSC 411|OSC 412|'
+    + 'ICS 413|ICS 414|ISE 411|ISE 412|MATH 413|MATH 414|ME 411|ME 412|MINE 411|MINE 412|MIS 477|MIS 478|MSE 411|MSE 412|OSC 411|OSC 412|'
     + 'PETE 411|PETE 412|PHYS 411|PHYS 412|SWE 413|SWE 414').split('|'));
   function badgeKind(code) {
     const c = String(code || '');
@@ -820,6 +820,10 @@
     if (/ 398$/.test(c)) return 'c';
     return BADGE_GRAD.has(c) ? 'g' : '';
   }
+  /* ===== مواد التدريب ومشروع التخرّج: قسمٌ واحد «تجارب» بدل أقسام المادّة =====
+     ‎t‎ = التدريب (الصيفيّ 399 والتعاونيّ 398) · ‎g‎ = مشروع التخرّج. ومساهمتُها تسكن قناةَ
+     «المادّة» نفسَها (‎info‎) — وفيها أصلًا تجاربُ منقولةٌ من المجتمع، فتظهر تجاربَ كما هي */
+  const expKind = code => { const k = badgeKind(baseOf(code || '')); return k === 'g' ? 'g' : (k ? 't' : ''); };
   const BADGE_ICON = {
     s: '<circle cx="50" cy="50" r="19" fill="currentColor"/>' + [0, 1, 2, 3, 4, 5, 6, 7].map(i => {
       const a = i * Math.PI / 4, c = Math.cos(a), s = Math.sin(a);
@@ -1539,6 +1543,11 @@
       descLabel: 'الوصف:', descPh: 'اكتب وصف المادة…', relLabel: 'نسبة الترابط بالمنهج',
       bookName: 'اسم الكتاب:', bookPh: 'اسم الكتاب', bookLabel: 'الكتاب:', bookImgAdd: 'صورة الكتاب',
       copyName: 'نسخ اسم الكتاب', copyEmail: 'نسخ الإيميل', copied: 'تم النسخ ✓',
+      expSec: 'تجارب', expCo: 'اسم الشركة', expLogo: 'شعار الشركة', expWk: 'المدة بالأسابيع', expWkV: n => n + (n === 1 ? ' أسبوع' : n === 2 ? ' أسبوعان' : n <= 10 ? ' أسابيع' : ' أسبوعًا'),
+      expDur: 'المدة', expSal: 'الراتب الشهري', expSalPh: 'اختياري', expSalU: 'ريال', expOffer: 'عرض بعد التدريب', expYes: 'نعم', expNo: 'لا',
+      expPn: 'اسم المشروع', expTeam: 'عدد الفريق', expGrade: 'الدرجة', expFileAdd: 'أضف ملف للمشروع', expFileBad: 'ملفات المشروع: PDF أو صورة فقط',
+      expFileUp: 'جارٍ رفع الملف…', expFileFail: 'تعذّر رفع الملف — سجّل الدخول وأعد المحاولة', expFiles: n => n + (n === 1 ? ' ملف' : n === 2 ? ' ملفان' : n <= 10 ? ' ملفات' : ' ملفًّا'),
+      expDescT: 'اكتب تجربتك: وش اشتغلت عليه، كيف كانت البيئة، ونصايحك للي بعدك…', expDescG: 'اكتب تجربتكم: وش سويتوا، وش أصعب شي واجهكم، ونصايحكم للي بعدكم…',
       docSec: 'الدكاترة', docName: 'اسم الدكتور', docEmail: 'إيميل الدكتور',
       officeHours: 'الساعات المكتبية', addTime: 'إضافة وقت', addHours: 'إضافة ساعات مكتبية', fromT: 'من', toT: 'إلى',
       ampmS: { am: 'ص', pm: 'م' }, ampm: [['am', 'ص'], ['pm', 'م']],
@@ -2011,6 +2020,11 @@
       descLabel: 'Description:', descPh: 'Write a course description…', relLabel: 'Curriculum connection',
       bookName: 'Book name:', bookPh: 'Book name', bookLabel: 'Book:', bookImgAdd: 'Book cover',
       copyName: 'Copy book name', copyEmail: 'Copy email', copied: 'Copied ✓',
+      expSec: 'Experiences', expCo: 'Company', expLogo: 'Company logo', expWk: 'Weeks', expWkV: n => n + (n === 1 ? ' week' : ' weeks'),
+      expDur: 'Duration', expSal: 'Monthly pay', expSalPh: 'Optional', expSalU: 'SAR', expOffer: 'Job offer after', expYes: 'Yes', expNo: 'No',
+      expPn: 'Project name', expTeam: 'Team size', expGrade: 'Grade', expFileAdd: 'Add a project file', expFileBad: 'Project files: PDF or image only',
+      expFileUp: 'Uploading…', expFileFail: 'Upload failed — sign in and try again', expFiles: n => n + (n === 1 ? ' file' : ' files'),
+      expDescT: 'Write your experience: what you worked on, the environment, and tips for those after you…', expDescG: 'Write your experience: what you built, the hardest part, and tips for those after you…',
       docSec: 'Instructors', docName: 'Name', docEmail: 'Email',
       officeHours: 'Office hours', addTime: 'Add time', addHours: 'Add office hours', fromT: 'From', toT: 'To',
       ampmS: { am: 'AM', pm: 'PM' }, ampm: [['am', 'AM'], ['pm', 'PM']],
@@ -5496,7 +5510,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      · المصادر (نصّ + ملف) */
   function completenessOf(sec, d) {
     return sec === 'doc' ? docCompleteness(d)
-         : sec === 'info' ? infoCompleteness(d)
+         : sec === 'info' ? (expKind(cmCode) ? expCompleteness(d) : infoCompleteness(d))
          : sec === 'abs' ? absCompleteness(d)
          : sec === 'grade' ? gradeCompleteness(d)
          : (sec === 'srcU' || sec === 'srcP') ? srcCompleteness(d)
@@ -6210,7 +6224,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هل بيانات مشاركتي فارغة تمامًا؟ (تُحذف عند الخروج من المحرر بلا كتابة) */
   function isEmptyData(sec, d) {
     switch (sec) {
-      case 'info':  return !d.desc && !d.type && !(d.rel > 0) && !d.lang && !d.book;
+      case 'info':  return !d.desc && !d.type && !(d.rel > 0) && !d.lang && !d.book
+        && !d.co && !d.logo && !(d.wk > 0) && !d.sal && !d.offer && !d.pn && !(d.team > 0) && !d.grade && !(d.files && d.files.length);   /* وحقولُ «تجارب» */
       case 'grade': return !(d.items && d.items.length) && !String(d.note || '').trim();
       case 'abs':   return !(d.free || d.dedFrom || d.dedAmt || d.dn || d.late);
       case 'srcU':  case 'srcP': {
@@ -6524,7 +6539,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           shownDesc = cut.trim() + '… ';
         }
         /* «لا توجد معلومات» تظهر فقط إذا خلَت المساهمة من كل شيء — لا مع مساهمة فيها شارات (كغلاف كتاب) */
-        const chipsHTML = infoChips(dd);
+        const chipsHTML = expKind(cmCode) ? expChips(dd) : infoChips(dd);
         const txHTML = fullDesc
           ? `<span class="peek-tx">${impQ(esc(shownDesc))}</span>`
           : (chipsHTML ? '' : `<span class="peek-tx peek-none">${T().noData}</span>`);
@@ -6768,6 +6783,85 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* بطاقة تحرير «المادة» إنلاين — نفس هوية الكومنت المنشور: الصورة عمود يمين والاسم فوق (بلا تاريخ
      وبلا خط فاصل)، ثم الحقول القابلة للتحرير، وأسفلها يمينًا زرّا الإرسال والحذف */
+  /* ===== «تجارب» (التدريب ومشروع التخرّج) =====
+     الحقولُ بجلد محرّر «المادّة» نفسِه، والمساهمةُ في القائمة بشارات ‎peek-chip‎ نفسِها.
+     التدريب: الشركة (وشعارُها) · المدّة بالأسابيع · الراتب · عرضٌ بعده — والمشروع: اسمُه ·
+     عددُ الفريق · الدرجة · ملفّاتُه (PDF أو صورة، تُرفع إلى السحابة ويفتحها الزائر) */
+  const EXP_GRADES = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'];
+  const EXP_FILE_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8z"/><path d="M14 3v5h5"/></svg>';
+  const EXP_CO_IC = '<svg class="peek-bookic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20.5V6.2L12 3.5v17"/><path d="M12 9.5h6.4a1.6 1.6 0 0 1 1.6 1.6v9.4"/><path d="M2.8 20.5h18.4"/><path d="M7 8.5h2M7 12h2M7 15.5h2M15 13h2M15 16.5h2"/></svg>';
+  const expLogoHTML = raw => assetURL(raw) ? `<img class="exp-logo" src="${esc(assetURL(raw))}" alt="">` : EXP_CO_IC;
+  const expFileURL = f => (f && /^[0-9a-f]{64}$/.test(f.h || '') && BOOKS_PUB()) ? BOOKS_PUB() + f.h : '';
+  const expFileChip = (f, i, edit) => {
+    const u = expFileURL(f), nm = `<b class="fchip-n">${esc(f.n || '—')}</b>`;
+    if (edit) return `<span class="src-fchip">${EXP_FILE_IC}${nm}<button type="button" class="fchip-del exp-fdel" data-i="${i}" title="✕">✕</button></span>`;
+    return u ? `<a class="src-fchip exp-fl" href="${esc(u)}" target="_blank" rel="noopener">${EXP_FILE_IC}${nm}</a>` : `<span class="src-fchip">${EXP_FILE_IC}${nm}</span>`;
+  };
+  function expChips(d) {
+    const c = [], g = expKind(cmCode) === 'g';
+    if (!g) {
+      if (d.co || d.logo) c.push(`<span class="peek-chip peek-book exp-co">${expLogoHTML(d.logo)}${d.co ? `<b>${esc(d.co)}</b>` : ''}</span>`);
+      if (d.wk > 0) c.push(`<span class="peek-chip"><i>${T().expDur}</i><b>${T().expWkV(d.wk)}</b></span>`);
+      if (d.sal) c.push(`<span class="peek-chip"><i>${T().expSal}</i><b>${esc(d.sal)} ${T().expSalU}</b></span>`);
+      if (d.offer === 'yes' || d.offer === 'no') c.push(`<span class="peek-chip exp-of exp-of--${d.offer}"><i>${T().expOffer}</i><b>${d.offer === 'yes' ? T().expYes : T().expNo}</b></span>`);
+    } else {
+      if (d.pn) c.push(`<span class="peek-chip peek-book"><b>${esc(d.pn)}</b></span>`);
+      if (d.team > 0) c.push(`<span class="peek-chip"><i>${T().expTeam}</i><b>${d.team}</b></span>`);
+      if (d.grade) c.push(`<span class="peek-chip"><i>${T().expGrade}</i><b>${esc(d.grade)}</b></span>`);
+      (d.files || []).forEach((f, i) => c.push(expFileChip(f, i, false)));
+    }
+    return c.join('');
+  }
+  function expCompleteness(d) {
+    const checks = expKind(cmCode) === 'g'
+      ? [!!d.pn, d.team > 0, !!(d.files || []).length, !!d.desc]
+      : [!!d.co, d.wk > 0, d.offer === 'yes' || d.offer === 'no', !!d.desc];
+    return { filled: checks.filter(Boolean).length, total: checks.length };
+  }
+  function expEditCard(p, i) {
+    const d = p.data, g = expKind(cmCode) === 'g';
+    const steps = k => `<span class="chipe__steps"><button type="button" class="exp-step" data-k="${k}" data-d="1" aria-label="+"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 7 18 17 6 17Z"/></svg></button><button type="button" class="exp-step" data-k="${k}" data-d="-1" aria-label="−"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M6 7 18 7 12 17Z"/></svg></button></span>`;
+    const f = g ? `
+          <span class="chipe chipe--book"><textarea id="exp-pn" class="chipe-in chipe-in--book exp-in--wide" rows="1" placeholder="${T().expPn}">${esc(d.pn || '')}</textarea></span>
+          <span class="chipe chipe--rel"><i>${T().expTeam}</i>${steps('team')}<b id="exp-team-val">${d.team || 0}</b></span>
+          <span class="chipe chipe--type"><i>${T().expGrade}</i>${mdropHTML('xgrade', 'xgrade', d.grade || '', [['', '—'], ...EXP_GRADES.map(x => [x, x])])}</span>
+          <textarea id="cm-desc" class="chipe-in chipe-in--desc" rows="2" placeholder="${T().expDescG}">${esc(d.desc || '')}</textarea>
+          <span class="exp-files">${(d.files || []).map((x, k) => expFileChip(x, k, true)).join('')}<label class="src-fchip src-fchip--empty">${EXP_FILE_IC}<i class="fchip-ph">${T().expFileAdd}</i><input type="file" class="exp-file" accept="application/pdf,image/*" hidden></label></span>`
+      : `
+          <span class="chipe chipe--book">
+            <label class="chipe-bookimg" title="${T().expLogo}">${expLogoHTML(d.logo)}<input type="file" accept="image/*" class="exp-logofile" hidden></label>
+            <textarea id="exp-co" class="chipe-in chipe-in--book" rows="1" placeholder="${T().expCo}">${esc(d.co || '')}</textarea>
+          </span>
+          <span class="chipe chipe--rel"><i>${T().expWk}</i>${steps('wk')}<b id="exp-wk-val">${d.wk || 0}</b></span>
+          <span class="chipe chipe--lang"><i>${T().expSal}</i><textarea id="exp-sal" class="chipe-in exp-in--sal" rows="1" inputmode="numeric" placeholder="${T().expSalPh}">${esc(d.sal || '')}</textarea></span>
+          <span class="chipe chipe--type"><i>${T().expOffer}</i>${mdropHTML('xoffer', 'xoffer', d.offer || '', [['', '—'], ['yes', T().expYes], ['no', T().expNo]])}</span>
+          <textarea id="cm-desc" class="chipe-in chipe-in--desc" rows="2" placeholder="${T().expDescT}">${esc(d.desc || '')}</textarea>`;
+    return `<div class="post pk pk--peek pk--edit" data-pi="${i}" data-sub="info">
+      <div class="post-yt">
+        <span class="post-av post-av--yt">${avatarHTML(p)}</span>
+        <div class="post-ytmain">
+          <div class="post-ytmeta">${pstPostBadge(p)}<b class="post-name">${nameOf(p)}</b>${impBadge(p)}</div>
+          <div class="pk-head"><div class="fold-peek fold-peek--edit">${f}
+          </div></div>
+          ${editActsFoot('info', d)}
+        </div>
+      </div>
+    </div>`;
+  }
+  /* شعارُ الشركة: مربّعٌ بخلفيّةٍ بيضاء (الشفّافُ لا يسودّ) لا يتجاوز ‎192‎ */
+  function expLogoFit(file, done) {
+    if (!file || !/^image\//.test(file.type || '')) { toast(T().imgFail || 'تعذّرت الصورة'); return; }
+    const rd = new FileReader();
+    rd.onload = () => { const im = new Image(); im.onload = () => {
+      try {
+        const k = Math.min(1, 192 / Math.max(im.width, im.height)), cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * k) || 1; cv.height = Math.round(im.height * k) || 1;
+        const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(im, 0, 0, cv.width, cv.height);
+        done(cv.toDataURL('image/jpeg', .9));
+      } catch (e) { toast(T().imgFail || 'تعذّرت الصورة'); }
+    }; im.onerror = () => toast(T().imgFail || 'تعذّرت الصورة'); im.src = rd.result; };
+    rd.readAsDataURL(file);
+  }
   function infoEditCard(p, i) {
     const d = p.data;
     const fields = `<div class="pk-head">
@@ -7271,6 +7365,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     /* «المادة»: اختيار لغة المادة / نوعيتها من المنسدلة المخصّصة (بديل <select> الأصلي) */
     if (key === 'clang') { natureData(cmCode).lang = val; save(); renderCmSection(); return; }
+    if (key === 'xoffer') { infoData(cmCode).offer = val; save(); renderCmSection(); return; }
+    if (key === 'xgrade') { infoData(cmCode).grade = val; save(); renderCmSection(); return; }
     if (key === 'ctype') { natureData(cmCode).type = val; save(); renderCmSection(); return; }
     /* «توزيع الدرجات»: اختيار طريقة التقييم (Average / Standard) من المنسدلة */
     if (key === 'gmethod') { gradingOf(cmCode).method = val; save(); renderCmSection(); return; }
@@ -7523,7 +7619,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (editing) myPost(cmCode, 'info');   /* ضمان وجود مشاركتي */
       const posts = (cmSort === 'best' ? byBestIdx : byNewest)(draftAware(postsOf(cmCode, 'info'), editing));
       inner = posts.length
-        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? infoEditCard(p, i) : foldPost('info', p, i, null)).join('')
+        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? (expKind(cmCode) ? expEditCard(p, i) : infoEditCard(p, i)) : foldPost('info', p, i, null)).join('')
         : `<p class="v-none">${T().noPosts}</p>`;
     } else if (sec === 'abs') {
       /* «الغياب والتأخير» بند مستقلّ عن الدكاترة: قناة على مستوى المادة بنفس آلية «التقييم» */
@@ -32457,15 +32553,19 @@ void main() {
     /* والتبويبُ النشطُ يُصالَح: من دخل مادّةَ الشابترات على «المادّة» نُقل إلى أوّل
        شابتر، ومن غادرها على شابترٍ رُدّ إلى «المادّة» — فلا يرث شريطٌ تبويبًا ليس فيه.
        وزرُّ الشابتر بلا ‎.cm-faces‎: لا مساهماتِ له بعد، فلا دوائرَ ولا «+» */
-    const secTabs = () =>
-      [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].map(cmTab).join('')
+    const EXP_IC = '<svg class="cm-tabic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5v-3.5H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"/><path d="M8 10.5h8M8 13.5h5"/></svg>';
+    const secTabs = () => expKind(code)
+      ? `<button type="button" data-tab="info">${EXP_IC}<span class="cm-tabnm">${T().expSec}</span><span class="cm-faces"></span></button>`
+      : [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].map(cmTab).join('')
       + `<div class="cm-res">`
       + XT_RES().map(cmTab).join('')
       + `</div>`;
     if (isChTab(cmTabSel)) cmTabSel = 'info';
+    if (expKind(code) && cmTabSel != null && cmTabSel !== 'info') cmTabSel = 'info';   /* قسمٌ واحد: لا يُورث تبويبٌ ليس فيه */
     /* والشريطُ نفسُه لا يُبنى ثانيةً إن لم يتغيّر (طلبُ صاحب الموقع): كان كلُّ تمركزٍ للكتاب نفسِه (يعاد مع وصول الجواب والأغلفة)
        ينزعه بوجوهه وحلقات تحميلها فتتوقّف الحلقاتُ وتعود من أوّلها */
     const tabsH = secTabs(), TB = $('#cm-tabs');
+    TB.classList.toggle('cm-tabs--one', !!expKind(code));   /* «تجارب» وحدَه: تبويبٌ بعرض أخواته لا شريطٌ كامل */
     if (TB._h !== tabsH || !TB.firstElementChild) {
       const flip = cmTabsFlipStart();
       TB.innerHTML = tabsH; TB._h = tabsH;
@@ -40258,6 +40358,13 @@ void main() {
     if (!cmCode) return;
     if (e.target.id === 'cm-desc') { infoData(cmCode).desc = e.target.value; autoGrow(e.target); save(); return; }
     if (e.target.id === 'cm-book') { infoData(cmCode).book = e.target.value; autoGrow(e.target); save(); return; }
+    if (e.target.id === 'exp-co') { infoData(cmCode).co = e.target.value; autoGrow(e.target); save(); return; }
+    if (e.target.id === 'exp-pn') { infoData(cmCode).pn = e.target.value; autoGrow(e.target); save(); return; }
+    if (e.target.id === 'exp-sal') {
+      const v = e.target.value.replace(/[٠-٩]/g, c => '٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/[^\d,.]/g, '').slice(0, 9);
+      if (v !== e.target.value) e.target.value = v;
+      infoData(cmCode).sal = v; save(); return;
+    }
     /* مواضيع المادة: الرقم/الاسم يُحفظان مباشرةً بلا إعادة رسم (كي لا ينقطع المؤشّر) */
     if (e.target.classList.contains('tp-in')) {
       const chip = e.target.closest('.chipe--topics');
@@ -40357,6 +40464,26 @@ void main() {
   $('.cm-panel').addEventListener('change', e => {
     if (!cmCode) return;
     /* «المادة»: رفع صورة غلاف الكتاب — تُقاس بمقاس المجموعة كما في الركن */
+    if (e.target.classList.contains('exp-logofile')) {
+      const file = e.target.files[0], code = cmCode;
+      if (!file || file.size > 12 * 1024 * 1024) return;
+      expLogoFit(file, url => { infoData(code).logo = url; save(); renderCmSection(); });
+      return;
+    }
+    if (e.target.classList.contains('exp-file')) {
+      const file = e.target.files[0], code = cmCode;
+      e.target.value = '';
+      if (!file) return;
+      const type = file.type || '';
+      if (!(type === 'application/pdf' || /^image\/(png|jpeg|webp|gif)$/.test(type))) { toast(T().expFileBad); return; }
+      toast(T().expFileUp);
+      bookUp(file, type).then(h => {
+        if (!h) { toast(T().expFileFail); return; }
+        const d = infoData(code); (d.files || (d.files = [])).push({ n: file.name.slice(0, 120), h, t: type, s: file.size });
+        save(); if (cmCode === code) renderCmSection();
+      });
+      return;
+    }
     if (e.target.classList.contains('book-imgfile')) {
       const file = e.target.files[0];
       if (!file || file.size > 12 * 1024 * 1024) return;   /* ملفٌّ لا يُفتح أصلًا */
@@ -41109,6 +41236,16 @@ void main() {
       return;
     }
     /* «المادة»: عدّادا نسبة الترابط بالمنهج (سهم فوق يزيد ٥٪ · تحت ينقص) */
+    const xs = e.target.closest('.exp-step');
+    if (xs) {
+      const d = infoData(cmCode), k = xs.dataset.k, mx = k === 'wk' ? 52 : 20;
+      d[k] = Math.max(0, Math.min(mx, (d[k] || 0) + (+xs.dataset.d)));
+      save();
+      const v = document.getElementById('exp-' + k + '-val'); if (v) v.textContent = d[k];
+      return;
+    }
+    const xf = e.target.closest('.exp-fdel');
+    if (xf) { const d = infoData(cmCode); (d.files || []).splice(+xf.dataset.i, 1); save(); renderCmSection(); return; }
     const rs = e.target.closest('.rel-step');
     if (rs) {
       const nd = natureData(cmCode);
