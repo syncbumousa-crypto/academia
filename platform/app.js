@@ -11952,6 +11952,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      حتى يُقاس في التالي (انتظارُ الحركات كلِّها يتأخّر إطارًا: الشبحُ أطولُ منها). فتُقاس عند نهاية حركة العنصر نفسِه */
   const pkScrRefit = el => { if (!el || !el.isConnected) return;
     (el.matches('.pk-src__view.is-scr') ? [el] : [...el.querySelectorAll('.pk-src__view.is-scr')]).forEach(v => v.pkBk && bkScrFit(v.pkBk)); };
+  /* (طلبُ صاحب الموقع: «الصفحات ترتفع خلال الانفتاح ثم توقف بقفزة وتنزل») وفي العرض العاديّ لا يصعد وعاءُ الصفحات: قائمتُها
+     مفصَّلةٌ على رسمة المساحة بموضعٍ مطلق، فصعودُه يحملها فوق موضعها ثمّ تُردّ إليه بقفزةٍ آخرَ الحركة — فيظهر بالشفافية وحدَها */
+  const pkRiseKf = x => (bkModeGet() === 'scroll' && (x.matches('.pk-src__view') || x.querySelector('.pk-src__view')))
+    ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }];
   function pkIcGhost(card, blk, bb) {
     const band = card.querySelector(':scope > .pk-band');
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -12060,7 +12064,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ الملخّص يظهر بما فيه عدا أيقونته — فهي تطير إلى موضعها فيه، ولو تحرّك الرأسُ لحملها معه فتنزل ثمّ تعلو */
     const midHd = fp.querySelector('.post-ytmain > .pk-blkh--mid');
     [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...fp.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => { const a = x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
+      .forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
@@ -12287,7 +12291,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         const pane = post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`), midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
         [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-          .forEach(x => { const a = x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
+          .forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
       } else {
         /* المربّعُ القديمُ ينطوي إلى أيقونته في سطرها، ثمّ يغيب */
         const tg = post.querySelector(`.pk-icrow [data-pkic="${old}"]`);

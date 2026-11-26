@@ -19728,7 +19728,9 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
    لا يصغر (‎scale(.72)‎ يُلغى) ويقف حيث يقف في الصفّ: في وسط لافتة الغلاف عموديًّا، يسارَها */
 #cm-body .pk--pc.pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn,
 #cm-body .pk--pc.pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: none; }
-#cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: -11px; }
+/* (طلبُ صاحب الموقع: «مكانُ الثلاث نقاط لا يتغيّر» حين تتّسع المساهمة) الإطارُ يتّسع ‎11px‎ للخارج (‎margin-inline: -11px‎)،
+   فلو أُزيحت النقاطُ ‎-11px‎ فوقه لانتقلت بالقدرين معًا — فتبقى على حافّته (‎0‎) فتقع حيث كانت في الصفّ المطويّ بالضبط */
+#cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: 0; }
 #cm-body .pk--pc.pk--maxpub > .post-yt > .post-menu { top: 64px; inset-inline-end: -14px; }
 /* قوسُ التكبير في المنشورة المفتوحة: إطارُها مستديرُ الزاوية (‎16px‎) ويقصّ ما خرج منه (‎overflow: hidden‎)،
    والقوسُ على حافّته ينزلق للخارج عند المرور فيدخل في المقصوص ويختفي. فيُنزل إلى داخل الزاوية بقدر انزلاقه —
