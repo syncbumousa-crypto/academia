@@ -856,17 +856,17 @@
     const bkind = badgeKind(baseOf(code));
     if (bkind) return badgeHTML(code, bkind, op, sz);
     const face = '<span class="bkface">' + bookFace(baseOf(code)) + (img ? '' : inner) + '</span>';
-    const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
+    const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img','bk--imgwait');"
                + ' this.parentNode.remove()';
     const shot = img
       ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy" decoding="async"'
         + (BK_SEEN.has(img) ? ' class="is-in"' : '') + ' data-u="' + esc(img) + '"'
         /* لا تُرى الصورةُ وهي تصل: المتصفّحُ يرسم ما وصل منها شريطًا شريطًا من أعلى، مشوّشًا — فتبقى خفيّةً والمرسومُ تحتها،
            حتى تكتمل وتُفكّ، فتظهر دفعةً بتلاشٍ قصير */
-        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\')})"'
+        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\');var b=i.closest(\'.bk\');b&&b.classList.remove(\'bk--imgwait\')})"'
         + ' onerror="' + fail + '">' + inner + '</span>'
       : '';
-    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : (() => { try { return coverWait(code); } catch (e) { return false; } })() ? ' bk--wait' : '') + '">'
+    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' + (BK_SEEN.has(img) ? '' : ' bk--imgwait') : (() => { try { return coverWait(code); } catch (e) { return false; } })() ? ' bk--wait' : '') + '">'
       + face + shot + (op.after || '') + '</span>';
   }
 
@@ -3103,7 +3103,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const out = [];
       for (let i = lo; i <= hi; i++) {
         /* __en = مدخلة الترم (للركن) — تُمرَّر لتظهر شارة «جهّزها» ودائرة الإتقان */
-        const h = cardHTML(items[i], opts.cardMode, null, items[i].__en), k = h.replace(/ class="is-in"/g, '');   /* (صورةٌ اكتمل تحميلُها لا تُحسب تغيّرًا) */
+        const h = cardHTML(items[i], opts.cardMode, null, items[i].__en), k = h.replace(/ class="is-in"| bk--imgwait/g, '');   /* (صورةٌ اكتمل تحميلُها لا تُحسب تغيّرًا) */
         const key = items[i].code + '|' + k;
         let el = old.get(key);
         if (el) { old.delete(key); el.dataset.i = i; }
