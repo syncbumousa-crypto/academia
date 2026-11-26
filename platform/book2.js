@@ -174,8 +174,9 @@ export function createBook2(THREE, host, cfg) {
      (‎preventDefault‎) ويُعيد بناءَ حاله عند الاستعادة، وصورُه وبرامجُه تُرفع وتُترجم من جديد في أوّل رسمة — فهنا: لا رسمَ في
      أثناء الفقد، وإعادةُ الرسم عند الاستعادة، ويُخبَر صاحبُ الكتاب في الحالين (‎cfg.onLost‎) ليضع مكانَه معايناتِ الصفحات أو يبنيه */
   let lost = false;
-  el.addEventListener('webglcontextlost', () => { lost = true; try { cfg.onLost && cfg.onLost(true); } catch (e) {} }, false);
-  el.addEventListener('webglcontextrestored', () => { lost = false; needs = true; try { cfg.onLost && cfg.onLost(false); } catch (e) {} }, false);
+  /* (المسلخ) المحرّكُ المُطفأُ يفقد سياقَه عمدًا (‎renderer.dispose‎) — ذلك ليس فقدًا يُبلَّغ عنه: لا يُغطّى كتابٌ حيٌّ بسببه */
+  el.addEventListener('webglcontextlost', () => { lost = true; if (dead) return; try { cfg.onLost && cfg.onLost(true); } catch (e) {} }, false);
+  el.addEventListener('webglcontextrestored', () => { lost = false; needs = true; if (dead) return; try { cfg.onLost && cfg.onLost(false); } catch (e) {} }, false);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 20);
   const book = new THREE.Group(); scene.add(book);

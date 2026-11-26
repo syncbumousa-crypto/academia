@@ -27966,13 +27966,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      يُحمَّل للكتاب مكتبةُ ‎Three.js‎ ومحرّكُه، ثمّ تُرسم صورُ صفحاته — وقد يطول ذلك على شبكةٍ بطيئة فيبقى مكانُه فارغًا.
      فيُوضع في مكانه فورًا نظيرٌ مسطّح: الغلافُ مغلقًا، والصفحةُ أو الصفحتان الظاهرتان مفتوحًا (من الـPDF نفسِه بدقّةٍ صغيرة)،
      ويذوب حين يرسم الكتابُ صفحاتِه */
+  /* (المسلخ · الضبابيّةُ العالقة) الغطاءُ له بصمة: مغلقٌ/مفتوح، صفحةٌ/صفحتان، والموضع — فإن تبدّل الكتابُ تحته وهو قائمٌ
+     لم يبقَ بشكله القديم (غطاءُ صفحتين فوق صفحةٍ واحدة) بل يُبنى من جديد */
+  const bkPhSig = b => (b.closed || !b.pos ? 'c' : 'o' + (b.one ? 1 : 2) + ':' + b.pos);
+  /* ويُزال فورًا (بلا ذوبان) حين يُهدم المحرّكُ الذي كان يغطّيه — ومعه أيُّ غطاءٍ يتيمٍ في المسرح */
+  function bkPhDrop(b) {
+    const ph = b.phEl; b.phEl = null;
+    if (ph) ph.remove();
+    if (b.stage) b.stage.querySelectorAll(':scope > .bk-pgld--over, :scope > .bk-skel--over').forEach(e => e.remove());
+    if (ph) { try { bkLoadEnd(b.key || ''); } catch (e) {} }
+    const cv = b.gl && b.gl.el; if (cv && cv.style.opacity === '0') cv.style.opacity = '';
+  }
+  /* ومكانُه يتبع الكتاب: يُعاد على مستطيله كلّما أُعيد حسابُه (‎bk2Layout‎) فلا يخرج عن مساحته */
+  function bkPhFit(b) {
+    if (b.scroll) { if (b.phEl) bkPhDrop(b); return; }
+    const ph = b.phEl; if (!ph || !ph.classList.contains('bk-pgld--over')) return;
+    const es = b.el.style;
+    Object.assign(ph.firstElementChild.style, { left: es.left, top: es.top, width: es.width, height: es.height });
+  }
   function bkPhShow(b) {
-    if (b.phEl && b.phEl.isConnected) return;
+    if (b.scroll) return;   /* (لا غطاءَ للكتاب فوق الصفحات المتتالية) */
+    if (b.phEl && b.phEl.isConnected && b.phEl.dataset.sig === bkPhSig(b)) return;
+    if (b.phEl || (b.stage && b.stage.querySelector(':scope > .bk-pgld--over, :scope > .bk-skel--over'))) bkPhDrop(b);
     if (!b.closed && b.pos) {
       const w = document.createElement('div');
       w.innerHTML = bkPgLdHTML(bkPgLdKs(b.pos, bkSk(b), b.n, b.one), b.ar, b.one ? 1 : 2, true);
-      const ph = b.phEl = w.firstElementChild, inn = ph.firstElementChild, es = b.el.style;
-      Object.assign(inn.style, { left: es.left, top: es.top, width: es.width, height: es.height });
+      const ph = b.phEl = w.firstElementChild;
+      ph.dataset.sig = bkPhSig(b);
+      bkPhFit(b);
       b.stage.appendChild(ph);
       /* النسخةُ الصغيرةُ الضبابيّة من كلّ صفحة (‎BK_THUMB_W‎ كمعايناتِ العرض الطبيعيّ) — بتظليلاتها */
       ph.querySelectorAll('.bk-pgld__pg[data-k]').forEach(pg => {
@@ -27996,6 +28017,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = document.createElement('div');
     w.innerHTML = bkSkelHTML(k, b.ar, b.n, b.cover);
     const ph = b.phEl = w.firstElementChild;
+    ph.dataset.sig = bkPhSig(b);
     ph.classList.add('bk-skel--over');
     /* لوحةُ الهيكل الذي كان في الوعاء نفسُها بآخر ما رُسم عليها — فلا يفرغ مكانُه لحظةَ الانتقال والصفحةُ مشغولةٌ بفتح الملفّ */
     const old = bkLdCv[k]; if (old && !old.isConnected) ph.querySelector('.bk-skel__cv').replaceWith(old);
@@ -29333,6 +29355,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (g) { try { const fin = g.dispose(b.keepGl); b.glFin = typeof fin === 'function' ? fin : null; } catch (e) {} }
     b.keepGl = false;
     b.gl = null;
+    bkPhDrop(b);   /* (الغطاءُ الضبابيُّ لا يبقى فوق الصفحات المتتالية) */
     if (b.leaf) { try { bkLeafDrop(b); } catch (e) {} }
     bkTLHide(b); if (b.tlBox) { b.tlBox.remove(); b.tlBox = null; }
     b.tlPages = null;
@@ -30725,6 +30748,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      في أثناء الفقد: معايناتُ الصفحات الضبابيّة في مكانه (‎bkPhShow‎) لا لوحةٌ سوداء. فإن استُعيد السياقُ ذابت فوقه كما في الفتح؛
      وإن لم يُستعد خلال ‎2.5‎ ثانية بُني محرّكٌ جديدٌ على موضع القراءة نفسِه — فإن تعذّر WebGL كلُّه نزل إلى المحرّك القديم (‎catch‎ في ‎bk2Engine‎) */
   function bk2Lost(b, on) {
+    /* (المسلخ) الفقدُ للمحرّك القائم وحده: سياقُ محرّكٍ قديمٍ أُطفئ في تبديلٍ سريع لا يضع الغطاءَ الضبابيَّ فوق الكتاب الحيّ */
+    if (on && !(b.gl && !b.gl.dead && b.gl.lost)) return;
     clearTimeout(b.lostT);
     const g = b.gl;
     bkDiag(b, on ? 'gl-lost' : 'gl-restored');
@@ -30741,9 +30766,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bk2Engine(b, o = {}) {
     const st = b.stage;
-    if (!o.quiet) bkPhShow(b);
+    /* (المسلخ) كلُّ بناءٍ له جيل: الغطاءُ لآخر بناء، والهادئُ لا يُزيل غطاءً أبدًا — فلا يُترك فوقه غطاءٌ من قبله */
+    const gen = o.pre ? 0 : (b.engGen = (b.engGen || 0) + 1);
+    if (!o.pre) { if (o.quiet) bkPhDrop(b); else bkPhShow(b); }
     bk2Lib().then(([THREE, M]) => {
       if (o.pre ? o.pre.cancel : (b.gl && !b.gl.dead)) return;
+      /* (المسلخ) بناءٌ غير هادئٍ سبقه بناءٌ أحدث أو تحوّلٌ إلى الصفحات المتتالية وهو ينتظر المكتبة: لا يُركَّب، وغطاؤه إن بقي يُزال */
+      if (!o.pre && !o.quiet && (gen !== b.engGen || b.scroll)) { if (gen === b.engGen) bkPhDrop(b); return; }
       if (!o.pre) bkLoadSet(b.key || '', 85, 96);
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       /* (خطّةُ التوأم · المرحلة ٤) ‏‎o.pre‎: يُبنى مسبقًا (عند الضغط على القوس، قبل رفع الإصبع) ولا يصير كتابَ المساحة حتى يُتبنّى
@@ -30799,7 +30828,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       let done = false;
       const off = () => {
         if (done) return; done = true;
-        if (b.gl !== g) return;
+        /* هُدم هذا المحرّكُ ولم يُبنَ بعده غيرُه: غطاؤه لا صاحبَ له — يُزال */
+        if (b.gl !== g) { if (b.engGen === gen && b.phEl) bkPhDrop(b); return; }
         setTimeout(() => bkGeoSave(b, g), 60);
         if (o.quiet) { if (o.onReady) o.onReady(g); } else bkPhHide(b);
       };
@@ -30869,6 +30899,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.stage.style.setProperty('--bk-top', y.toFixed(1) + 'px');   /* رقمُ الصفحات فوقه */
     b.pw = Math.floor(ppu); b.ph = Math.floor(h);
     Object.assign(b.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
+    bkPhFit(b);
     b.nav.style.width = Math.round(w) + 'px';
     bk2Show(b);
     if (b.onLayout) b.onLayout(b);
