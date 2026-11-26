@@ -11260,7 +11260,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     st.q = setTimeout(() => {
       st.cur = nx; pkFanWake();
       /* وأيقونةُ الزاوية تصير التاليةَ من الآن، فلا تعود القديمةُ لحظةً بعد الانطواء وقبل الرسم */
-      const ic = !st.qt && pkFanEl(id), sv = ic && ic.parentElement.querySelector(':scope > .pk-blkh__ic > svg'), pv = PK_VIEWS.find(x => x[0] === ['tree', 'cards', 'table'][nx]);
+      const ic = !st.qt && pkFanEl(id), sv = ic && ic.parentElement.querySelector(':scope > .pk-blkh__ic > svg'), pv = st.ic ? [0, st.ic[nx]] : PK_VIEWS.find(x => x[0] === ['tree', 'cards', 'table'][nx]);
       if (sv && pv) sv.innerHTML = pv[1];
       st.q = setTimeout(() => { st.kt = 0; st.hov = -1; pkFanWake(); st.q = setTimeout(swap, 340); }, 230);
     }, st.k > .8 ? 0 : 130);
@@ -11274,17 +11274,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* قوسُ الكتاب: قوسُ الملخّص نفسُه على زاوية أيقونة المساحة، ثلاثُ قطعٍ للطرق الثلاث، والضغطُ ينقل إلى التالية.
      ‏‎from‎ موضعُ الذهبيّة قبل التبديل فتنزلق منه */
   let bkArcPrev = null;
+  /* ===== (طلبُ صاحب الموقع) قوسُ المصادر مروحةٌ كقوس الملخّص: صفحتان · صفحةٌ واحدة · صفحاتٌ متتالية =====
+     وأيقوناتُها من علامة الاقتباس نفسِها (أيقونة المصادر): الفاصلتان · فاصلةٌ واحدةٌ أكبر · فاصلتان فوق بعض. وأيقونةُ الزاوية
+     طريقةُ العرض الحاليّة كما في الملخّص. والأزرارُ تحمل ‎data-bkvw‎ فتمرّ بمبدّل الكتاب القائم (‎bkSetMode‎) */
+  const BK_Q = 'M0 5.5h4.5V11H0V5.5C0 2.5 1.5.5 4 0';
+  const bkQ = (x, y, sc) => `<path transform="translate(${x} ${y}) scale(${sc})" vector-effect="non-scaling-stroke" d="${BK_Q}"/>`;
+  const BK_IC = { two: bkQ(4, 6, 1) + bkQ(13.5, 6, 1), one: bkQ(8.6, 4, 1.4), scroll: bkQ(9.8, 2.4, .76) + bkQ(9.8, 13.2, .76) };
   const pkBkArc = (id, from) => {
-    const cur = Math.max(0, BK_MODES.indexOf(bkModeGet())), nx = BK_MODES[(cur + 1) % 3];
-    const fr = from != null && from !== cur && !bkReduce() ? from : cur;
+    const fk = 'bk:' + id, cur = Math.max(0, BK_MODES.indexOf(bkModeGet()));
+    const st = pkFan[fk] || (pkFan[fk] = { k: 0, kv: 0, kt: 0, g: cur, gv: 0, cur, hov: -1, t: 0, n: 3, ic: BK_MODES.map(m => BK_IC[m]) });
+    st.cur = cur; if (bkReduce() || st.k < .01) st.g = from != null && st.k >= .01 ? st.g : cur;
     const nm = k => k === 'two' ? T().bkTwo : k === 'one' ? T().bkOne : T().bkScroll;
-    const P = (cls, st, extra = '') => `<path class="${cls}" pathLength="300" d="${PK_VA_D}"${st ? ` style="${st}"` : ''}${extra}/>`;
-    return `<button type="button" class="pk-vdots pk-varc pk-varc--bk" data-bkvw="${nx}" data-pkid="${esc(id)}" title="${esc(nm(nx))}" aria-label="${esc(T().bkVwBar + ' · ' + nm(nx))}">`
-      + `<svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
-      + P('pk-varc__hit') + P('pk-varc__bg')
-      + [0, 1, 2].map(i => P('pk-varc__d', pkVaDash(i), i === (cur + 1) % 3 ? ' data-nx="1"' : '')).join('')
-      + P('pk-varc__m', `stroke-dasharray:${100 - PK_VA_GAP} ${200 + PK_VA_GAP};--o0:${-(fr * 100 + PK_VA_GAP / 2)};--o1:${-(cur * 100 + PK_VA_GAP / 2)};stroke-dashoffset:var(--o1)`, fr !== cur ? ' data-move="1"' : '')
-      + `</svg></button>`;
+    return `<span class="pk-vdots pk-varc pk-varc--fan pk-varc--bk" role="button" tabindex="0" data-pkfan data-fk="${esc(fk)}" data-pkid="${esc(id)}" title="${esc(T().bkVwBar)}" aria-label="${esc(T().bkVwBar)}" aria-expanded="${st.kt ? 'true' : 'false'}">`
+      + `<span class="pk-varc__gl" aria-hidden="true"></span><svg class="pk-varc__s" viewBox="0 0 30 30" aria-hidden="true">`
+      + ['hit', 'bg', 'd', 'd', 'd', 'm', 'eg'].map(c => `<path class="pk-varc__${c}" pathLength="300" d="${PK_VA_D}"/>`).join('')
+      + `</svg>`
+      + BK_MODES.map(v => `<button type="button" class="pk-varc__vi" data-bkvw="${v}" data-pkid="${esc(id)}" title="${esc(nm(v))}" aria-label="${esc(nm(v))}" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${BK_IC[v]}</svg></button>`).join('')
+      + `</span>`;
   };
   const pkVwOf = id => {
     const v = pkVw[id] || (pkLab() ? PK_KN_DEF : 'folder');
@@ -12463,7 +12469,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== ترويسةُ كلّ مساحة: أيقونتُها في مربّعٍ ذهبيّ · اسمُها · عددُ ما فيها · و× يغلقها ===== */
   const PK_BLK_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
   const pkBlkH = (k, id, n, noX) => {
-    const ic = k === 'book' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${PK_SRC_IC}</svg>`
+    const ic = k === 'book' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${pkSrcAny(id) && bk2On() ? BK_IC[bkModeGet()] : PK_SRC_IC}</svg>`   /* (وبقوسه: طريقةُ العرض الحاليّة) */
       : k === 'bank' ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${pkQbIc()}</svg>` : pkMidIc(id);
     const nm = T()[k === 'book' ? 'pkEsSrcT' : k === 'bank' ? 'pkEsQbT' : 'pkEsMidT'];
     const x = k === 'book' ? 'data-pkview="source"' : k === 'bank' ? 'data-pkview="folder"' : 'data-pkmidx';
@@ -28265,7 +28271,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   ['pointerover', 'pointerdown', 'focusin'].forEach(ev => document.addEventListener(ev, e => {
     /* (القوسُ يُلتقط من خطّه وحده؛ والمؤشّرُ يمرّ بزاوية المساحة — أيقونتِها وقوسِها — في طريقه إليه) */
     const hd = e.target.closest && e.target.closest('#cm-body .pk-src--book > .pk-blkh, #cm-body [data-bkvw]');
-    const a = hd && (hd.matches('[data-bkvw]') ? hd : hd.querySelector('[data-bkvw]')); if (!a || a.dataset.bkvw !== 'scroll') return;
+    const a = hd && hd.matches('[data-bkvw]') ? hd : null; if (!a || a.dataset.bkvw !== 'scroll') return;
     Object.values(pkSrcBk).forEach(b => { if (b && b.gl && pkSrcBase(hlSidOf(b)) === a.dataset.pkid) bkScrWarm(b); });
   }, { passive: true, capture: true }));
   function bkSeedKeep(b, k, cv) {
@@ -29294,7 +29300,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(() => pkSrcHFit());
   }
   function bkArcSync(from) {
-    document.querySelectorAll('#cm-body [data-bkvw]').forEach(el => { el.outerHTML = pkBkArc(el.dataset.pkid, from); });
+    document.querySelectorAll('#cm-body .pk-varc--bk[data-fk]').forEach(el => { el.outerHTML = pkBkArc(el.dataset.pkid, from); });
+    const ic = BK_IC[bkModeGet()]; document.querySelectorAll('#cm-body .pk-blkh--book > .pk-blkh__ic > svg').forEach(sv => { sv.innerHTML = ic; });   /* وأيقونةُ الزاوية طريقةُ العرض الحاليّة */
   }
   document.addEventListener('click', e => {
     const a = e.target.closest && e.target.closest('#cm-body [data-bkvw]');
