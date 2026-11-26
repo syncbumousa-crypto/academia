@@ -11946,6 +11946,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حركةُ الاتّساع من الصفّ الضيّق والطيِّ إليه (طلبُ صاحب الموقع: أوضحُ وأسلس) =====
      مبدأٌ واحد: المربّعُ يُكشف من داخل أيقونته بقصٍّ يتّسع (‎clip-path‎) — شكلُه الحقيقيُّ بفجواته لا يُمطّ ولا يُشوَّه —
      وقامةُ المساهمة والتذييلُ والأيقوناتُ تمضي معه على منحنًى واحدٍ ومدّةٍ واحدة، والمحتوى يظهر في آخره (ويغيب في أوّل الطيّ) */
+  /* ===== الصفحةُ لا تقفز أعلى يسارًا آخرَ الاتّساع (طلبُ صاحب الموقع: «ترقى فوق يسار ثم ترجع مكانها») =====
+     محتوى المساحة يصعد ‎6px‎ ويظهر (‎translateY‎) — وما دام عليه تحويلٌ فهو مرجعُ قائمة الصفحات المتتالية المطلقة، فتُكتب
+     إزاحتُها منه (‎-14/-18‎). فإذا انتهى صار المرجعُ المساحةَ نفسَها والإزاحةُ قديمة، فيُرسم إطارٌ والصفحةُ أعلى يسارًا بقدرها
+     حتى يُقاس في التالي (انتظارُ الحركات كلِّها يتأخّر إطارًا: الشبحُ أطولُ منها). فتُقاس عند نهاية حركة العنصر نفسِه */
+  const pkScrRefit = el => { if (!el || !el.isConnected) return;
+    (el.matches('.pk-src__view.is-scr') ? [el] : [...el.querySelectorAll('.pk-src__view.is-scr')]).forEach(v => v.pkBk && bkScrFit(v.pkBk)); };
   function pkIcGhost(card, blk, bb) {
     const band = card.querySelector(':scope > .pk-band');
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -12054,7 +12060,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ الملخّص يظهر بما فيه عدا أيقونته — فهي تطير إلى موضعها فيه، ولو تحرّك الرأسُ لحملها معه فتنزل ثمّ تعلو */
     const midHd = fp.querySelector('.post-ytmain > .pk-blkh--mid');
     [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...fp.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
+      .forEach(x => { const a = x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
   }
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
@@ -12281,7 +12287,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         const pane = post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`), midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
         [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-          .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
+          .forEach(x => { const a = x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
       } else {
         /* المربّعُ القديمُ ينطوي إلى أيقونته في سطرها، ثمّ يغيب */
         const tg = post.querySelector(`.pk-icrow [data-pkic="${old}"]`);
