@@ -20631,3 +20631,5 @@ html[data-theme="dark"] #cm-body .cx-ftsel :is(.cx-selbar__clear, .cx-selbar__b)
 }
 /* (طلبُ صاحب الموقع) القائمةُ محبوسةٌ حتى يصل جوابُ المادّة: صفوفُ الانتظار نفسُها التي في دعوة اختيار القسم — ‎cmHoldHTML‎ */
 .cm-hold { padding: 14px 4px 6px; min-height: 170px; }
+/* (طلبُ صاحب الموقع) عدّادُ المساهمات في أثناء الانتظار: الحبرُ مكانَ العدد، والكلمةُ والفرزُ في مكانهما */
+.cm-count.is-ld b { display: inline-flex; min-width: 1.6em; justify-content: center; }

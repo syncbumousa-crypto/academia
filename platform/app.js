@@ -6936,7 +6936,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const SORT_IC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4v14"/><path d="M2.5 16.5 5 19l2.5-2.5"/><path d="M11 6h9M11 12h6M11 18h3"/></svg>';
   function cmSortBar(n) {
     /* العدّاد «عدد المساهمات + مساهمة» يمينًا، والأيقونة يساره */
-    const count = n != null ? `<span class="cm-count"><b>${n}</b> ${T().contribUnit}</span>` : '';
+    /* (‎n === 'ld'‎: جوابُ المادّة لم يصل — العددُ حبرٌ ذهبيّ والفرزُ قائمٌ في مكانه · ‎cmHoldHTML‎) */
+    const count = n === 'ld' ? `<span class="cm-count is-ld" aria-busy="true"><b>${AC_INK}</b> ${T().contribUnit}</span>`
+      : n != null ? `<span class="cm-count"><b>${n}</b> ${T().contribUnit}</span>` : '';
     return `<div class="cm-sortbar">
       ${count}
       <div class="post-menu cm-sort">
@@ -7472,9 +7474,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (left <= 0) return '';
     if (!cmHoldT[code + ':t']) cmHoldT[code + ':t'] = setTimeout(() => { delete cmHoldT[code + ':t']; if (cmCode === code) renderCmSection(); }, left + 20);
     acLdMarkH('hold:' + sec);
-    if (sec === 'cards') return pcGhostHTML() + pcGhostHTML();
+    if (sec === 'cards') return cmSortBar('ld') + pcGhostHTML() + pcGhostHTML();
     const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
-    return `<div class="cm-hold" role="status" aria-label="${esc(T().chLoading)}"><div class="cm-pick__ghost">${row(34, 76) + row(42, 69) + row(50, 62)}</div></div>`;
+    return cmSortBar('ld') + `<div class="cm-hold" role="status" aria-label="${esc(T().chLoading)}"><div class="cm-pick__ghost">${row(34, 76) + row(42, 69) + row(50, 62)}</div></div>`;
   }
   const acLdMarkH = k => { if (typeof window.__acLdMark === 'function') window.__acLdMark(k); };
   function renderCmSection0() {
@@ -27438,7 +27440,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* (المرحلة ١) جوابُ المادّة لم يصل: ما عندنا يُرسم، وتحته بطاقةُ «جارٍ التحميل» — لا «لا مساهمات» كاذبة */
     let ld = false; try { ld = !srvSeen(cmCode) && !srvPullFail[cmCode]; } catch (e) {}
     if (!shown.length && !ld) return `<p class="v-none">${T().noPosts}</p>`;
-    const html = (shown.length ? cmSortBar(shown.length) : '') + shown.map(({ p, i }) => (editing && p.me)
+    const html = cmSortBar(ld ? 'ld' : shown.length) + shown.map(({ p, i }) => (editing && p.me)
       ? cardEditCard(p, i)
       : packCard(p, i, p.data.deck, 'c')).join('') + (ld ? pcGhostHTML() + (shown.length ? '' : pcGhostHTML()) : '');
     acLdMark('cards:render:' + shown.length + (ld ? ':wait' : ':ok'));
