@@ -11227,14 +11227,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ترسمه المروحةُ بحالها فور الإدراج: بعد كلّ رسمٍ للمساهمة تُطلى المراوحُ الحاضرة (‎MutationObserver‎ خفيف على ‎#cm-body‎) */
   new MutationObserver(() => { for (const id in pkFan) { const el = pkFanEl(id); if (el && !el.pkFanP) { el.pkFanP = 1; pkFanPaint(el, pkFan[id]); } } })
     .observe(document.documentElement, { childList: true, subtree: true });
-  /* الماوس: الوقوفُ على الطرف يفتح، والخروجُ من المروحة يطويها بعد مهلة. اللمس: نقرُ الطرف يفتح، ونقرُ ما خارجها يطويها */
+  /* ===== (طلبُ صاحب الموقع) المروحةُ المفتوحة تبقى ما دام الماوسُ في محيطها =====
+     كانت تنطوي حين يدخل الماوسُ أيَّ عنصرٍ غيرَ خطّها — والمفتوحةُ ينزاح شريطُها إلى الداخل فتصير الزاويةُ التي فتحها منها «خارجها»،
+     فتنطوي بحركةٍ صغيرةٍ والماوسُ لم يبتعد. فالحكمُ للمسافة لا للعنصر: مستطيلُ شريطها المفتوح مع زاويتها، وحوله ‎PK_FAN_NEAR‎ */
+  const PK_FAN_NEAR = 32;
+  const pkFanNear = (id, x, y) => {
+    const el = pkFanEl(id); if (!el) return false;
+    const bg = el.querySelector('.pk-varc__bg'), sv = el.querySelector('.pk-varc__s');
+    const R = [el.getBoundingClientRect()]; if (bg) R.push(bg.getBoundingClientRect());
+    const sc = sv ? (sv.getBoundingClientRect().width || 30) / 30 : 1;
+    const m = PK_FAN_NEAR + (bg ? (parseFloat(bg.style.strokeWidth) || 0) * sc / 2 : 0);
+    return x >= Math.min(...R.map(r => r.left)) - m && x <= Math.max(...R.map(r => r.right)) + m
+      && y >= Math.min(...R.map(r => r.top)) - m && y <= Math.max(...R.map(r => r.bottom)) + m;
+  };
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    for (const id in pkFan) {
+      const st = pkFan[id]; if (!st.kt) continue;
+      if (pkFanNear(id, e.clientX, e.clientY)) { if (st.out) { st.out = 0; clearTimeout(st.t); } }
+      else if (!st.out) { st.out = 1; pkFanSet(id, false, 260); }
+    }
+  }, { capture: true, passive: true });
+  /* والماوسُ يغادر النافذةَ كلَّها: تنطوي */
+  document.addEventListener('mouseout', e => { if (e.relatedTarget) return; for (const id in pkFan) if (pkFan[id].kt) { pkFan[id].out = 1; pkFanSet(id, false, 260); } });
+  /* الماوس: الوقوفُ على الطرف يفتح، والابتعادُ عن محيطها يطويها بعد مهلة (‎pkFanNear‎). اللمس: نقرُ الطرف يفتح، ونقرُ ما خارجها يطويها */
   document.addEventListener('pointerover', e => {
     if (e.pointerType !== 'mouse') return;
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
     for (const id in pkFan) {
       const st = pkFan[id], mine = f && f.dataset.fk === id;
-      if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
-      else if (st.kt) pkFanSet(id, false, 260);
+      if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { st.out = 0; pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
+      /* (مروحةٌ أخرى مفتوحة: يطويها الابتعادُ عن محيطها — ‎pointermove‎ — لا دخولُ عنصرٍ غيرها) */
     }
   }, true);
   document.addEventListener('pointerdown', e => {
@@ -30784,7 +30807,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         tex: (k, w) => bk2Tex(b, k, w),
         onGrab: () => st.focus({ preventScroll: true }),
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
-        zone: bkZone(b), zoneSkip: '.pk-blkh', armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
+        zone: bkZone(b), zoneSkip: '.pk-blkh', zoneSkipAt: (x, y) => bkCornerAt(b, x, y), armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
         onIdle: () => bkTLShowSoon(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
@@ -30847,6 +30870,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       delete b.gl;
       if (b.view.isConnected) bkMount(b.view, b);
     });
+  }
+  /* ===== (طلبُ صاحب الموقع) زاويةُ أيقونة الصفحة والقوس ليست مقبضَ تقليب =====
+     رأسُ المساحة وصندوقُ القوس لا يلتقطان الماوس (إلّا خطَّ القوس الرفيع) فكان ما بينهما «مساحةً» تُقلَّب منها: يدُ التقليب ولونُ
+     الخلفية والماوسُ عند الأيقونة. فالزاويةُ تُعرف بالمسافة: مستطيلُ الأيقونة والقوس وحوله ‎BK_CORNER‎ — ومعه شريطُ القوس إن كان مفتوحًا */
+  const BK_CORNER = 12;
+  function bkCornerAt(b, x, y) {
+    const src = b.stage && b.stage.closest('.pk-src'); if (!src) return false;
+    const f = src.querySelector('.pk-varc--bk'); if (!f) return false;
+    const hd = f.parentElement, R = [f.getBoundingClientRect()];
+    const ic = hd && hd.querySelector(':scope > .pk-blkh__ic'); if (ic) R.push(ic.getBoundingClientRect());
+    let m = BK_CORNER;
+    if (f.classList.contains('is-fan')) {
+      const bg = f.querySelector('.pk-varc__bg'), sv = f.querySelector('.pk-varc__s');
+      if (bg) { R.push(bg.getBoundingClientRect()); const sc = sv ? (sv.getBoundingClientRect().width || 30) / 30 : 1; m += (parseFloat(bg.style.strokeWidth) || 0) * sc / 2; }
+    }
+    const V = R.filter(r => r.width || r.height); if (!V.length) return false;
+    return x >= Math.min(...V.map(r => r.left)) - m && x <= Math.max(...V.map(r => r.right)) + m
+      && y >= Math.min(...V.map(r => r.top)) - m && y <= Math.max(...V.map(r => r.bottom)) + m;
   }
   /* المساحةُ التي تُقلَّب منها: مساحةُ المصدر كلُّها */
   function bkZone(b) {

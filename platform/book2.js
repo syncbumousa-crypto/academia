@@ -907,7 +907,8 @@ export function createBook2(THREE, host, cfg) {
   const armed = () => !cfg.armed || cfg.armed();
   /* أزرارُ المساحة وما يسمّيه الموقعُ (‎cfg.zoneSkip‎: رأسُها وأيقونتُها التي تُغلقها) ليست مقبضًا — لا تتلوّن ولا تُقلِّب */
   const SKIP = 'button, a, input, textarea, select, [contenteditable="true"]' + (cfg.zoneSkip ? ', ' + cfg.zoneSkip : '');
-  const skip = e => e.target !== el && !!(e.target.closest && e.target.closest(SKIP));
+  /* و‎cfg.zoneSkipAt(x, y)‎: مواضعُ يسمّيها الموقعُ بالمسافة لا بالعنصر (زاويةُ الأيقونة والقوس — صندوقُهما يمرّر الماوسَ إلى المساحة) */
+  const skip = e => (e.target !== el && !!(e.target.closest && e.target.closest(SKIP))) || !!(cfg.zoneSkipAt && cfg.zoneSkipAt(e.clientX, e.clientY));
   const at = e => {
     const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     const yN = Math.max(-0.5, Math.min(0.5, (y - fit.y) / fit.h - 0.5));
