@@ -28281,8 +28281,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   ['pointerover', 'pointerdown', 'focusin'].forEach(ev => document.addEventListener(ev, e => {
     /* (القوسُ يُلتقط من خطّه وحده؛ والمؤشّرُ يمرّ بزاوية المساحة — أيقونتِها وقوسِها — في طريقه إليه) */
     const hd = e.target.closest && e.target.closest('#cm-body .pk-src--book > .pk-blkh, #cm-body [data-bkvw]');
-    const a = hd && hd.matches('[data-bkvw]') ? hd : null; if (!a || a.dataset.bkvw !== 'scroll') return;
-    Object.values(pkSrcBk).forEach(b => { if (b && b.gl && pkSrcBase(hlSidOf(b)) === a.dataset.pkid) bkScrWarm(b); });
+    /* تُجهَّز الصفحاتُ المتتالية لمن قصدها: أيقونتُها في المروحة، أو زاويةُ المساحة وقوسُها والكتابُ على «صفحة واحدة» (فالتالي هو المتتالي) */
+    const a = hd && hd.matches('[data-bkvw]') ? hd : null;
+    const id = a ? (a.dataset.bkvw === 'scroll' ? a.dataset.pkid : null) : hd && bkModeGet() === 'one' ? (hd.querySelector('[data-pkid]') || {}).dataset?.pkid : null;
+    if (!id) return;
+    Object.values(pkSrcBk).forEach(b => { if (b && b.gl && pkSrcBase(hlSidOf(b)) === id) bkScrWarm(b); });
   }, { passive: true, capture: true }));
   function bkSeedKeep(b, k, cv) {
     if (k !== 'cover' && cv && cv.width) { b.pgOut = b.pgOut || new Map(); b.pgOut.delete(k); b.pgOut.set(k, cv); if (b.pgOut.size > 16) b.pgOut.delete(b.pgOut.keys().next().value); }
