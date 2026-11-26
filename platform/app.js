@@ -11156,7 +11156,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const pkFanSet = (id, on, ms) => {
     const st = pkFan[id]; if (!st) return;
     clearTimeout(st.t);
-    const go = () => { st.kt = on ? 1 : 0; if (!on) st.hov = -1; if (bkReduce()) { st.k = st.kt; st.kv = 0; const el = pkFanEl(id); if (el) pkFanPaint(el, st); } else pkFanWake(); };
+    const go = () => { st.kt = on ? 1 : 0; if (!on) st.hov = -1; if (bkReduce()) { st.k = st.kt; st.kv = 0; const el = pkFanEl(id); if (el) pkFanPaint(el, st); } else pkFanWake();
+      if (typeof id === 'string' && id.startsWith('bk:')) bkPre2Fan(id.slice(3), on); };
     if (ms) st.t = setTimeout(go, ms); else go();
   };
   const pkVDots = id => {
@@ -29667,6 +29668,23 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const p = b.pre; if (!p) return; b.pre = null; p.cancel = true; clearTimeout(p.t);
     if (!b.mx && !b.texGate) b.fastTex = false;
     if (p.g && !p.g.dead) try { p.g.dispose(); } catch (e) {}
+  }
+  /* ===== الكتابُ يُجهَّز من لحظة فتح المروحة (ROADMAP-BOOK-SWITCH · المرحلة ٤ · خلف مفتاح ‎ac.bk.pre2‎) =====
+     كان يُبنى عند نزول الإصبع على «صفحتين» (‎~0.1‎ث قبل النقرة) فيقع بناؤه — المحرّكُ وبرامجُ الرسم ورفعُ الصور — في الحركة نفسِها.
+     وفتحُ مروحة طريقة العرض في العاديّ نيّةٌ واضحة، وبينه وبين الاختيار مئاتُ المللي: فيبدأ البناءُ عنده، ويبقى ما دامت مفتوحة،
+     ويُطرح بعد ‎1.2‎ث من انطوائها إن لم يُختر. والمفتاحُ مطفأٌ حتى تُقارن الأرقام */
+  const bkPre2On = () => { try { return localStorage.getItem('ac.bk.pre2') === '1'; } catch (e) { return false; } };
+  function bkPre2Fan(pkid, open) {
+    if (!bkPre2On() || bkModeGet() !== 'scroll') return;
+    Object.values(pkSrcBk).forEach(b => {
+      if (!b || !b.scroll || !b.view || !b.view.isConnected || pkSrcBase(hlSidOf(b)) !== pkid) return;
+      if (open) {
+        bkPreTwo(b);
+        const p = b.pre; if (p) { clearTimeout(p.t); p.t = setTimeout(() => { if (b.pre === p) bkPreDrop(b); }, 15000); }
+      } else if (b.pre && !b.mx) {
+        const p = b.pre; clearTimeout(p.t); p.t = setTimeout(() => { if (b.pre === p) bkPreDrop(b); }, 1200);
+      }
+    });
   }
   function bkPreTwo(b) {
     if (b.pre || !b.scroll || !b.stage || bkReduce() || b.mx) return;
