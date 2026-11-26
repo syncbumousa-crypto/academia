@@ -27445,6 +27445,12 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const FACES_MEMO_K = 'ac.faces1';
   let facesMemo = null;
   const facesMemoGet = () => { if (!facesMemo) { try { facesMemo = JSON.parse(localStorage.getItem(FACES_MEMO_K) || '{}') || {}; } catch (e) { facesMemo = {}; } } return facesMemo; };
+  /* ===== ومساهمتي تُحسب قبل الجواب (طلبُ صاحب الموقع: «الأيقونات محمّلة وموجودة، بس يشيلها ثم يدخلها بدخول ديناميكي») =====
+     الدرجُ يُسقط مساهماتي بعد أن تبلغ الخادم (‎cinfoThin‎) فلا تعود إلّا بجوابه — فكان أوّلُ طلاءٍ لمادّةٍ يُرسم بلا مساهمتي
+     (دعوةُ «+» و«+10»)، ثمّ يصل الجوابُ بها (صورتي أوّلًا و«+11») فتتبدّل الدوائرُ كلُّها: تغيب وتطلع من جديد.
+     فيحفظ الختمُ ‎ac.faces1‎ مع العدّ أيَّ التبويبات كانت لي فيها مساهمةٌ آخرَ ما رآه الخادم (‎_m‎)، وقبل الجواب تُعدّ فيها
+     مساهمتي — بصورتي نفسِها (‎avatarHTML‎ يرسمها من ملفّي لا من المساهمة) — فيطابق الطلاءُ الأوّلُ الجوابَ ولا يتبدّل شيء */
+  const FACE_MINE_STUB = { me: true, id: '__mine', data: {} };
   function facesMemoPut(code, counts) {
     const m = facesMemoGet(), was = m[code];
     if (was && Object.keys(counts).every(k => was[k] === counts[k])) return;
@@ -27455,17 +27461,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function paintTabFaces(code) {
     if (!code) return;
     let ld = false, seen = false; try { seen = srvSeen(code); ld = !seen && !srvPullFail[code]; } catch (e) {}   /* (قبل أن يُعرَّف في التمهيد: لا انتظار) */
-    const memo = ld ? facesMemoGet()[code] : null, counts = {};
+    const memo = !seen ? facesMemoGet()[code] : null, counts = {}, mineTabs = [];
+    const memoMine = memo && typeof memo._m === 'string' ? memo._m.split(',') : [];
     const todo = [];
     document.querySelectorAll('.cm-tabs button[data-tab]').forEach(btn => {   /* يشمل الشريطين */
       const span = btn.querySelector('.cm-faces:not(.cm-faces--ghost)'); if (!span) return;
-      const tab = btn.dataset.tab, n = collectTabPosts(code, tab).length;
-      if (seen) counts[tab] = n;
-      const html = ld && !n && !(memo && memo[tab] === 0) ? FACES_LD : facesRowHTML(code, tab);
+      const tab = btn.dataset.tab;
+      let posts = collectTabPosts(code, tab);
+      if (seen) { counts[tab] = posts.length; if (posts.some(p => p.me)) mineTabs.push(tab); }
+      else if (memoMine.includes(tab) && !posts.some(p => p.me)) posts = [FACE_MINE_STUB, ...posts];   /* (مساهمتي الساقطةُ من الدرج) */
+      const n = posts.length;
+      const html = ld && !n && !(memo && memo[tab] === 0) ? FACES_LD : facesHTML(posts, false);
       if (span.dataset.sig === html) return;
       todo.push([btn, span, html]);
     });
-    if (seen && Object.keys(counts).length) facesMemoPut(code, counts);
+    if (seen && Object.keys(counts).length) { counts._m = mineTabs.join(','); facesMemoPut(code, counts); }
     if (!todo.length) return;
     /* أوّلُ طلاءٍ بعد بناء الشريط بلا حركة (البناءُ له انزلاقُه) — وما بعده إن تغيّر */
     const flip = todo.some(([, sp]) => sp.dataset.sig != null) ? cmTabsFlipStart() : null;
@@ -30426,6 +30436,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بكلمات الملفّ نفسِه في مواضعها (‎pdf.js renderTextLayer‎) — لا نسخةَ صورٍ ولا نصٍّ تُحفظ، كلُّه من الـPDF.
      تُخفى مع أوّل حركة (تقليبٌ أو سحبٌ أو تحويمٌ عند الحرف) وتعود حين يسكن. والفراغُ بين الكلمات يمرّر النقرَ للكتاب فيُقلَّب */
   function bkTLHide(b) { if (b && b.tlBox) b.tlBox.hidden = true; }
+  /* ===== طبقةُ نصّ الكتاب بعد إطار السكون لا فيه (ROADMAP-BOOK-SWITCH · المرحلة ١) =====
+     كان المحرّكُ ينادي ‎bkTLShow‎ من داخل حلقة رسمه لحظةَ يسكن — فيُبنى نصُّ الصفحتين (‎pdf.js‎ وقياسُ الأسطر) في ذلك الإطار
+     نفسِه: قيس ‎82–140ms‎ تخطيطًا مفروضًا في أوّل إطارات الكتاب بعد التبديل. وهي لا تلزم إلّا للتحديد والتظليل (والظاهرُ
+     مرسومٌ في الصورة)، فتُبنى في أوّل فراغٍ بعده؛ والحركةُ تُلغي ما لم يُبنَ بعد */
+  function bkTLSoonStop(b) {
+    if (!b) return;
+    if (b.tlSI) { (window.cancelIdleCallback || clearTimeout)(b.tlSI); b.tlSI = 0; }
+  }
+  function bkTLShowSoon(b) {
+    bkTLSoonStop(b);
+    const idle = window.requestIdleCallback || (f => setTimeout(f, 60));
+    b.tlSI = idle(() => { b.tlSI = 0; const g = b.gl; if (g && !g.dead) bkTLShow(b); }, { timeout: 600 });
+  }
   async function bkTLShow(b) {
     const g = b && b.gl;
     if (!g || g.dead || !g.pageRects || !window.pdfjsLib || !b.doc || b.doc.__prot) return;   /* (المحميُّ بلا نصّ) */
@@ -30674,14 +30697,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* مقبضُ التقليب مساحةُ الكتاب حوله، وبعد أن تُختار مساحةً يُعمل فيها */
         zone: bkZone(b), zoneSkip: '.pk-blkh', armed: () => bkArmed(b), onZone: side => bkZoneFx(b, side),
         /* طبقةُ النصّ: تُوضع على الصفحة الساكنة، وتُخفى ما دام شيءٌ يتحرّك */
-        onIdle: () => bkTLShow(b),
+        onIdle: () => bkTLShowSoon(b),
         /* تحديدٌ قائمٌ في هذا الكتاب: النقرةُ تُلغيه ولا تقلّب */
         interceptDown: () => {
           if (bkTLSel && bkTLSel.d.isConnected && b.stage.contains(bkTLSel.d)) { bkTLClear(); return true; }
           if (hlCur && hlPost(hlCur.id) && pkSrcBase(hlSidOf(b)) === hlCur.id) { hlSetCur(hlCur.id, null); return true; }
           return false;
         },
-        onBusy: () => bkTLHide(b),
+        onBusy: () => { bkTLSoonStop(b); bkTLHide(b); },
         /* والقلمُ أو المربّعُ مختار: الصفحةُ للتظليل وحده، والتقليبُ من زرّي التذييل (طلبُ صاحب الموقع) */
         locked: () => { const t = hlTool[pkSrcBase(hlSidOf(b))]; return t === 't' || t === 'box'; },
         onTurn: A => {

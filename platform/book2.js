@@ -205,12 +205,47 @@ export function createBook2(THREE, host, cfg) {
     const fr = cfg.frame, m = fr ? fr.m : 1.04;
     return fr && fr.fit ? fr.fit(w, h, span, H, host) : Math.min(h / (H * m), w / (span * m));
   }
+  /* ===== سقفُ دقّة الصورة حسب الجهاز (ROADMAP-BOOK-SWITCH · المرحلة ٣) =====
+     كان ‎2048‎ لكلّ جهاز. فيُنزل إلى ما يحتمله كرتُ الشاشة (‎MAX_TEXTURE_SIZE‎)، وإلى ‎1536‎ في الجوال والجهاز قليل الذاكرة
+     (‎≤ 4GB‎) — وفي الحاسوب يبقى ‎2048‎ كما كان فلا تتغيّر الدقّةُ التي تُرى */
+  const TEX_CAP = (() => {
+    let cap = 2048;
+    try { cap = Math.min(cap, renderer.capabilities.maxTextureSize || cap); } catch (e) {}
+    let low = false;
+    try { low = (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) < 820) || (navigator.deviceMemory && navigator.deviceMemory <= 4); } catch (e) {}
+    return low ? Math.min(cap, 1536) : cap;
+  })();
   let texW = (() => {
     const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return 1024;
     const ppu = fitS(w, h, ONE ? W : 2 * W);
-    return Math.min(2048, Math.max(256, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) * TEX_HEAD / 32) * 32));
+    return Math.min(TEX_CAP, Math.max(256, Math.ceil(W * ppu * Math.min(devicePixelRatio || 1, 2) * TEX_HEAD / 32) * 32));
   })();
   const pageTex = new Map();
+  /* ===== رفعُ الصور بميزانية (ROADMAP-BOOK-SWITCH · المرحلة ٢) =====
+     كانت كلُّ صورةٍ تجهز تُرفع إلى كرت الشاشة في الإطار نفسِه (‎needsUpdate‎) — ‎17‎ صورةً (‎~900×1300‎ بتصغيراتها) في ثوانٍ
+     قليلة بعد التبديل، فيتراكم عملُ كرت الشاشة في إطارٍ واحد: قيس ‎418–583ms‎ بلا سطرِ كود. فالآن تدخل طابورًا، ويُرفع منه
+     **صورةٌ واحدة في كلّ إطار** — الظاهرةُ على الفتحة أوّلًا. والوعدُ ‎ready‎ لا يُوفى إلّا بعد رفعها، فلا يُكشف الكتابُ بصفحةٍ بيضاء */
+  const upList = [];   /* [صورة، لوحة، يُوفى] */
+  function upQ(t, cv) {
+    return new Promise(res => {
+      const i = upList.findIndex(x => x[0] === t);
+      if (i >= 0) { upList[i][2](); upList.splice(i, 1); }
+      upList.push([t, cv, res]); needs = true;
+    });
+  }
+  function upSeen(t) {   /* على الفتحة الآن (وجهُ الورقة التي قبلها أو ظهرُ التي بعدها) */
+    for (const s of sheets) if (Math.abs(s.i + 0.5 - A) < 1.5 && (s.fm.map === t || s.bm.map === t)) return true;
+    return false;
+  }
+  function upPump() {
+    if (!upList.length || dead) return false;
+    let bi = 0; for (let i = 0; i < upList.length; i++) if (upSeen(upList[i][0])) { bi = i; break; }
+    const [t, cv, res] = upList.splice(bi, 1)[0];
+    /* مقاسٌ آخر: مخزنُ الصورة في البطاقة ثابتُ المقاس، فيُحرَّر ليُبنى بالجديد (وإلّا بقيت القديمةُ ملصقةً في زاويتها) */
+    if (t.image && (t.image.width !== cv.width || t.image.height !== cv.height)) t.dispose();
+    t.image = cv; t.needsUpdate = true; needs = true; res();
+    return true;
+  }
   function texFor(k) {
     if (k === 'inside') return inside;
     if (k === 'back') return outsideBack;
@@ -222,7 +257,7 @@ export function createBook2(THREE, host, cfg) {
     tex.generateMipmaps = true; tex.minFilter = THREE.LinearMipmapLinearFilter;
     tex.userData.ready = Promise.resolve(cfg.tex(k, texW)).then(cv => {
       if (dead || !cv) return;
-      tex.image = cv; tex.needsUpdate = true; needs = true;
+      return upQ(tex, cv);
     }).catch(() => {});
     pageTex.set(k, tex);
     return tex;
@@ -277,9 +312,7 @@ export function createBook2(THREE, host, cfg) {
     /* الصورةُ القديمةُ تبقى حتى تجهز الجديدة — لا تسودّ الصفحاتُ وهي تُرسم من جديد */
     pageTex.forEach((t, k) => Promise.resolve(cfg.tex(k, w)).then(cv => {
       if (dead || !cv || pageTex.get(k) !== t) return;
-      /* مقاسٌ آخر: مخزنُ الصورة في البطاقة ثابتُ المقاس، فيُحرَّر ليُبنى بالجديد (وإلّا بقيت القديمةُ ملصقةً في زاويتها) */
-      if (t.image && (t.image.width !== cv.width || t.image.height !== cv.height)) t.dispose();
-      t.image = cv; t.needsUpdate = true; needs = true;
+      return upQ(t, cv);   /* (والمقاسُ الآخرُ يُحرَّر في الطابور قبل رفعه) */
     }).catch(() => {}));
   }
 
@@ -664,7 +697,7 @@ export function createBook2(THREE, host, cfg) {
        وضعها (صفحةٌ أو صفحتان) × دقّةُ اللوحة × ‎1.5‎ (هامشٌ يجعل التصغيرَ حادًّا مع المرحلة ٢ — بالقياس أحدُّ من الصورة بقدر الصفحة
        بالضبط)، بخطوات ‎32‎. وهذا قرابةُ مقاسها السابق فلا تزيد الذاكرة */
     const pr = renderer.getPixelRatio(), span = ONE ? W : 2 * W, ppu = fitS(w, h, span);
-    rtWant = Math.min(2048, Math.max(256, Math.ceil(W * ppu * pr * TEX_HEAD / 32) * 32));
+    rtWant = Math.min(TEX_CAP, Math.max(256, Math.ceil(W * ppu * pr * TEX_HEAD / 32) * 32));
     /* ===== المرحلة ٣: تُعاد الصورُ حين تكبر الصفحةُ (أكثر من ‎5%‎) أو تصغر كثيرًا (دون ‎60%‎) — بعد أن يستقرّ المقاس =====
        (كانت لا تُعاد إلّا بتغيّرٍ يجاوز ‎30%‎، فتبقى ممدودةً إن كبرت المساحة أقلَّ منه) */
     if (!pageTex.size) texW = rtWant;
@@ -783,6 +816,7 @@ export function createBook2(THREE, host, cfg) {
     updCase(smooth(tv));
     if (rf) { rfTick(now); moving = true; }
     if (frameCam()) moving = true;
+    if (upPump()) moving = true;   /* (صورةٌ واحدةٌ من الطابور في هذا الإطار — المرحلة ٢) */
     if (moving || needs) { renderer.render(scene, camera); needs = false; }
     if (after) after();   /* (ما يتبع الكتابَ على الشاشة يُوضع بعد رسمه، في الإطار نفسِه) */
     const wasIdle = idle; idle = !moving && !drag;
@@ -995,6 +1029,7 @@ export function createBook2(THREE, host, cfg) {
     if (dead) return;
     if (rf) { const res = rf.res; rf = null; res(false); }   /* تقليبٌ جارٍ: يُعلَم صاحبُه أنّه انتهى */
     dead = true;
+    upList.forEach(x => x[2]()); upList.length = 0;   /* (لا يبقى منتظرٌ لصورةٍ لن تُرفع — المرحلة ٢) */
     cancelAnimationFrame(raf); stopHold();
     for (const [t, f] of evs) zone.removeEventListener(t, f);
     setGrab('');
@@ -1056,8 +1091,7 @@ export function createBook2(THREE, host, cfg) {
       const t = pageTex.get(k); if (!t) return Promise.resolve();
       return Promise.resolve(cfg.tex(k, texW)).then(cv => {
         if (dead || !cv) return;
-        if (t.image && (t.image.width !== cv.width || t.image.height !== cv.height)) t.dispose();
-        t.image = cv; t.needsUpdate = true; needs = true;
+        return upQ(t, cv);
       }).catch(() => {});
     },
     /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
