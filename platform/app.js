@@ -29962,13 +29962,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.getContext('2d').drawImage(src, 0, 0);
       /* تُبدَّل الصورةُ وحدها: طبقةُ النصّ فوقها تبقى (والتحديدُ الجاري عليها) إلّا إن تبدّل عرضُ الصفحة */
       const oc = el.querySelector(':scope > canvas'); if (oc) oc.replaceWith(c); else el.prepend(c);
-      bkScrTL(b, el);
+      bkScrTLSoon(b, el);
       bkScrTone(b);   /* صفحةٌ رُسمت للتوّ قد تكون هي التي خلف الزاوية */
     }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
   }
   /* ===== طبقةُ النصّ في الصفحات المتتالية (طلبُ صاحب الموقع): التظليلُ وقائمتُه وأدواتُ التذييل كما في الصفحة والصفحتين =====
      لكلّ صفحةٍ مرسومةٍ طبقتُها الشفّافة بكلمات الملفّ (‎pdf.js renderTextLayer‎) داخلها، بعرضها على الشاشة — فتمشي معها في التمرير
      والتقريب، وتُبنى من جديد إذا تبدّل عرضُها. وعليها يجري التحديدُ الهندسيّ والمربّعُ ونقرُ التظليل كما في الكتاب */
+  /* ===== طبقةُ النصّ تُبنى بعد الفتح وفي فراغ المتصفّح (ROADMAP-SPACE-MOTION · المرحلة ٥ · طلبُ صاحب الموقع) =====
+     كانت تُبنى مع رسم كلّ صفحة — ‎5‎ طبقاتٍ في كلّ فتح (نحو ‎1900‎ قطعة نصّ، وأوّلُ قياسٍ بعد كلٍّ منها يفرض تخطيطَها ‎~40ms‎) —
+     فتقع كلُّها داخلَ حركة الفتح: قيس ‎876–1006ms‎ من الوقفات في ثانيته الأولى و‎3–4‎ إطارات فقط. وهي لا تلزم إلّا للتحديد والتظليل،
+     فتُؤجَّل حتى تهدأ الحركة، ثمّ واحدةٌ في كلّ فراغ (‎requestIdleCallback‎) — الأقربُ إلى موضع القراءة أوّلًا */
+  function bkScrTLSoon(b, el) {
+    if (el) (b.tlQ = b.tlQ || new Set()).add(el);
+    if (b.tlQT || !b.tlQ || !b.tlQ.size) return;
+    const idle = window.requestIdleCallback || (f => setTimeout(f, 120));
+    const run = () => {
+      b.tlQT = 0;
+      if (!b.scroll || !b.tlQ) return;
+      if (bkFx(b)) { b.tlQT = 1; return bkFxLater(b, 'tlQF', () => { b.tlQT = 0; bkScrTLSoon(b); }); }
+      const po = b.view && b.view.closest('.post');   /* (والمساهمةُ نفسُها في اتّساعها أو طيّها) */
+      if (po && po.pkBlkHold) { b.tlQT = setTimeout(() => { b.tlQT = 0; bkScrTLSoon(b); }, 150); return; }
+      let best = null, bd = 1e9;
+      for (const x of b.tlQ) { if (!x.isConnected) { b.tlQ.delete(x); continue; } const d = Math.abs(+x.dataset.k - (b.pos || 1)); if (d < bd) { bd = d; best = x; } }
+      if (best) { b.tlQ.delete(best); bkScrTL(b, best); }
+      if (b.tlQ.size) b.tlQT = idle(run, { timeout: 1000 });
+    };
+    b.tlQT = idle(run, { timeout: 1000 });
+  }
   function bkScrTL(b, el) {
     if (bkFx(b)) { (b.tlWait = b.tlWait || new Set()).add(el); return bkFxLater(b, 'tlT', () => { const s = b.tlWait; b.tlWait = null; if (s) s.forEach(x => bkScrTL(b, x)); }); }
     if (!b.scroll || !b.doc || b.doc.__prot || !window.pdfjsLib || !el.isConnected) return;   /* (المحميُّ بلا نصّ) */
