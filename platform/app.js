@@ -7427,6 +7427,31 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="cm-pick"><div class="cm-pick__ghost" aria-hidden="true">${row(34, 76) + row(42, 69) + row(50, 62)}</div>`
       + `<div class="cm-pick__msg" role="note"><svg class="cm-pick__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
   }
+  /* ===== رسمُ ما تغيّر وحدَه (ROADMAP-SPACE-MOTION · المرحلة ٥ · خلف مفتاح ‎ac.render.partial‎) =====
+     كان كلُّ رسمٍ للقسم يبني مساهماته كلَّها من جديد — فتحُ مساحةٍ واحدة يعيد بناء ‎11‎ مساهمة ويُعيد حساب أنماطها
+     (قيس: ‎~60ms‎ بناءً و‎50–86ms‎ أنماطًا من معالج الضغط). فمع المفتاح: يُفكّ الجديدُ في قالبٍ خارج الصفحة، وكلُّ
+     عنصرٍ في أعلى القسم يُقارن بنصّ رسمه السابق نفسِه (‎_h‎: ما رُسم به قبل أن يمسّه شيء) — المطابقُ يبقى عقدتَه كما هي
+     في مكانها (لا تُنقل: النقلُ يُصفّر تمريرَها ويعيد حركاتِها)، وغيرُه يُستبدل. والمفتاحُ مطفأٌ افتراضيًّا */
+  const cmPartialOn = () => { try { return localStorage.getItem('ac.render.partial') === '1'; } catch (e) { return false; } };
+  function cmBodySet(body, html) {
+    const mark = () => { for (const el of body.children) el._h = el.outerHTML; };
+    if (!cmPartialOn()) { body.innerHTML = html; return; }
+    const olds = new Map();
+    for (const el of body.children) if (el._h != null) { const a = olds.get(el._h); if (a) a.push(el); else olds.set(el._h, [el]); }
+    if (!olds.size) { body.innerHTML = html; mark(); return; }
+    const t = document.createElement('template'); t.innerHTML = html;
+    const want = [];
+    for (const n of [...t.content.childNodes]) {
+      if (n.nodeType !== 1) { want.push(n); continue; }
+      const h = n.outerHTML, a = olds.get(h), keep = a && a.shift();
+      if (keep) want.push(keep); else { n._h = h; want.push(n); }
+    }
+    /* يُرفع ما لم يبقَ أوّلًا، ثمّ يُدرج الجديدُ في موضعه بين الباقين — فلا يتحرّك باقٍ من مكانه */
+    const keepSet = new Set(want);
+    [...body.childNodes].forEach(n => { if (!keepSet.has(n)) n.remove(); });
+    let cur = body.firstChild;
+    for (const n of want) { if (n === cur) { cur = cur.nextSibling; continue; } body.insertBefore(n, cur); }
+  }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
@@ -7545,7 +7570,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     /* والمكبَّرُ يُمرَّر جوفُه (‎#cm-cards‎) وهو يُبنى من جديد هنا — فيُحفظ تمريرُه ويُردّ */
     const cxY = cxMax ? ((document.querySelector('#cm-body #cm-cards') || {}).scrollTop || 0) : 0;
-    $('#cm-body').innerHTML = inner;
+    cmBodySet($('#cm-body'), inner);
     /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
        حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
     if (cxMax && !cxMaxOk()) cxMax = false;
