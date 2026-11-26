@@ -20358,11 +20358,12 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 /* ===== قوسُ الزاوية وشريطا التمرير آخرُ ما يظهر وأوّلُ ما يغيب (طلبُ صاحب الموقع) =====
    في الاتّساع (‎pk--chrome0‎) يبقيان خفيّين حتى تكتمل المساحة ثمّ يظهران بتلاشٍ قصير؛ وفي الطيّ (‎pk--chromeout‎) يغيبان
    قبل المحتوى (أسرعَ منه وبلا بدءٍ ليّن) — كانا يظهران قبل وصول المساحة ويبقيان حتى يختفيا دفعةً آخرَ الطيّ */
-#cm-body .pk-varc--bk { transition: transform .14s cubic-bezier(.3, .7, .4, 1), opacity .2s ease-out; }
+/* (المرحلة ١) الأقواسُ الثلاثة (الكتاب · الملخّص · البنك) وشريطا التمرير معًا — والصنفُ على المساهمة أو على المساحة الداخلة/الخارجة وحدَها */
+#cm-body .pk-varc { transition: transform .14s cubic-bezier(.3, .7, .4, 1), opacity .2s ease-out; }
 #cm-body .cbk-sb { transition: opacity .2s ease-out; }
-#cm-body .post.pk--chrome0 .pk-src :is(.pk-varc--bk, .cbk-sb) { opacity: 0; pointer-events: none; transition: none; }
-#cm-body .post.pk--chromeout .pk-src :is(.pk-varc--bk, .cbk-sb) { opacity: 0; pointer-events: none; transition: opacity .1s ease-out; }
-#cm-body .post:is(.pk--chrome0, .pk--chromeout) .pk-src .cbk-sb > i { pointer-events: none; }
+#cm-body .pk--chrome0 :is(.pk-varc, .cbk-sb) { opacity: 0; pointer-events: none; transition: none; }
+#cm-body .pk--chromeout :is(.pk-varc, .cbk-sb) { opacity: 0; pointer-events: none; transition: opacity .1s ease-out; }
+#cm-body :is(.pk--chrome0, .pk--chromeout) .cbk-sb > i { pointer-events: none; }
 
 /* ===== زرُّ تكبير الصفحات المتتالية في تذييل المصادر (‎pkBkZoomHTML‎ · طلبُ صاحب الموقع) =====
    بشكل زرّ المصدر (‎34px‎، حدٌّ رفيع، دائريّ، ظلٌّ خفيف): عدسةُ تصغير · النسبة · عدسةُ تكبير. ولا يظهر إلّا بالعرض العادي */

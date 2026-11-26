@@ -11954,6 +11954,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     (el.matches('.pk-src__view.is-scr') ? [el] : [...el.querySelectorAll('.pk-src__view.is-scr')]).forEach(v => v.pkBk && bkScrFit(v.pkBk)); };
   /* (طلبُ صاحب الموقع: «الصفحات ترتفع خلال الانفتاح ثم توقف بقفزة وتنزل») وفي العرض العاديّ لا يصعد وعاءُ الصفحات: قائمتُها
      مفصَّلةٌ على رسمة المساحة بموضعٍ مطلق، فصعودُه يحملها فوق موضعها ثمّ تُردّ إليه بقفزةٍ آخرَ الحركة — فيظهر بالشفافية وحدَها */
+  /* ===== خطّا الرأس والتذييل يُرسمان مع المساحة وينطويان قبلها (ROADMAP-SPACE-MOTION · المرحلة ٣ · طلبُ صاحب الموقع) =====
+     «الخطُّ» هو شريطُ الرأس/الذيل الممدود خلفه بحافّته (‎::before‎)، وفوقه المسكة. كانا يظهران دفعةً في الفتح ويغيبان بالشفافية في الطيّ.
+     الآن: في الفتح يُكشف الشريطُ من المسكة إلى الطرفين (قصٌّ يتّسع من المركز) مع آخر تمدّد المساحة، ثمّ تظهر المسكة؛
+     وفي الطيّ تغيب المسكةُ أوّلًا وينطوي الشريطُ إلى مركزه قبل أن تنطوي المساحة. قصٌّ وشفافيةٌ وتحويلٌ فقط — بلا تخطيطٍ في الإطار */
+  const pkLineEls = fp => [...fp.querySelectorAll('.post-ytmain > .pk-hdline')];
+  const pkLineClip = (fp, open) => { const h = Math.ceil(fp.getBoundingClientRect().width / 2) + 4;
+    return open ? `inset(0 calc(50% - ${h}px) 0 calc(50% - ${h}px))` : 'inset(0 50% 0 50%)'; };
+  function pkLinesIn(fp, D, an) {
+    if (bkReduce()) return;
+    const c0 = pkLineClip(fp, false), c1 = pkLineClip(fp, true), ez = 'cubic-bezier(.2, .8, .2, 1)';
+    pkLineEls(fp).forEach(ln => {
+      an.push(ln.animate([{ clipPath: c0 }, { clipPath: c1 }], { duration: D * .5, delay: D * .4, easing: ez, fill: 'backwards', pseudoElement: '::before' }));
+      const g = ln.querySelector('.pk-hdline__grip');
+      if (g) an.push(g.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'none' }], { duration: D * .25, delay: D * .85, easing: ez, fill: 'backwards' }));
+    });
+  }
+  function pkLinesOut(fp, D, an) {
+    if (bkReduce()) return;
+    const c0 = pkLineClip(fp, false), c1 = pkLineClip(fp, true);
+    pkLineEls(fp).forEach(ln => {
+      const g = ln.querySelector('.pk-hdline__grip');
+      if (g) an.push(g.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.6)' }], { duration: D * .12, easing: 'ease-in', fill: 'forwards' }));
+      an.push(ln.animate([{ clipPath: c1 }, { clipPath: c0 }], { duration: D * .3, delay: D * .06, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards', pseudoElement: '::before' }));
+    });
+  }
+  /* (المرحلة ١) أقواسُ طرق العرض الثلاثة لا تدخل في حركة المحتوى: شفافيةُ الحركة تغلب صنفَ ‎pk--chrome0/out‎ فتُظهرها معه —
+     فلها توقيتُها وحدَها: بعد اكتمال المساحة، وأوّلَ ما يغيب */
+  const pkNoArc = x => !x.matches('.pk-varc');
   const pkRiseKf = x => (bkModeGet() === 'scroll' && (x.matches('.pk-src__view') || x.querySelector('.pk-src__view')))
     ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }];
   function pkIcGhost(card, blk, bb) {
@@ -12030,6 +12058,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react, .vt-foot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
       an.push(x.animate([{ transform: `translateY(${h0 - h1}px)` }, { transform: 'none' }], { duration: D, easing: ez })));
     fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .vt-foot) *').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .45, easing: 'ease-out', fill: 'backwards' })));
+    pkLinesIn(fp, D, an);
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .3, fill: 'backwards' })));
     /* الأيقوناتُ من سطرها إلى مواضعها، على المنحنى نفسِه */
     PK_IC_KEYS.forEach(q => {
@@ -12065,7 +12094,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ الملخّص يظهر بما فيه عدا أيقونته — فهي تطير إلى موضعها فيه، ولو تحرّك الرأسُ لحملها معه فتنزل ثمّ تعلو */
     const midHd = fp.querySelector('.post-ytmain > .pk-blkh--mid');
     [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...fp.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
+      .filter(pkNoArc).forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; fp.classList.remove('pk--chrome0'); if (fp.isConnected) pkBandFit(fp); });
   }
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
@@ -12097,8 +12126,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
     /* ١. المحتوى يغيب أوّلًا */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
-      ...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *'), ...fp.querySelectorAll('.post-ytmain > .pk-hdline:not(.pk-ftline)')]
-      .forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
+      ...fp.querySelectorAll('.post-ytmain > .pk-pubfoot *')]
+      .filter(pkNoArc).forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
+    pkLinesOut(fp, D, an);
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, fill: 'forwards' })));
     /* ٢. المربّعُ ينطوي إلى أيقونته */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
@@ -12115,13 +12145,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       [g, m].forEach(x => { x.style.setProperty('--pc-pg', pg); Object.assign(x.style, { left: px(t.left), top: px(t.top), width: px(t.width), height: px(t.height) }); });
       m.innerHTML = '<i class="pc-morph__pane"></i>' + (from ? '' : (sv.html || ''));
       document.body.append(g, m); pcFl.push(g, m);
-      an.push(g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: .12 }, { transform: 'none', offset: .42 }, { transform: 'none' }], { ...o, easing: 'ease-out' }));
+      /* (المرحلة ٢ · طلبُ صاحب الموقع) الفجوةُ تتبع الزرَّ لا الساعة: كانت تنفتح بين ‎12%‎ و‎42%‎ والزرُّ يصل عند ‎100%‎ — فتبقى
+         فارغةً نحو ‎300ms‎. الآن تنفرج حين يقترب الزرُّ وتكتمل لحظةَ وصوله، والزرّان الآخران يظهران معها */
+      an.push(g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: .55 }, { transform: 'none', offset: .88 }, { transform: 'none' }], { ...o, easing: 'ease-out' }));
       if (from) {
         const pn = m.firstChild; pn.style.background = fill;
         an.push(m.animate([{ left: px(from.left), top: px(from.top), width: px(from.width), height: px(from.height), borderRadius: '16px' },
           { left: px(t.left), top: px(t.top), width: px(t.width), height: px(t.height), borderRadius: '14px' }], { ...o, easing: ez }));
         an.push(pn.animate([{ opacity: 1 }, { opacity: 1, offset: .2 }, { opacity: 0, offset: .75 }, { opacity: 0 }], o));
-      } else an.push(m.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(.4)', opacity: 0, offset: .4 }, { transform: 'none', opacity: 1 }], { ...o, easing: ez }));
+      } else an.push(m.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(.4)', opacity: 0, offset: .55 }, { transform: 'none', opacity: 1, offset: .9 }, { transform: 'none', opacity: 1 }], { ...o, easing: 'ease-out' }));
     };
     if (blk && band && pcM) {
       const bb = blk.getBBox(), cs = getComputedStyle(blk);
@@ -12300,7 +12332,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const pane = post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`), midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
         post.classList.add('pk--chrome0');
         [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-          .forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
+          .filter(pkNoArc).forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
       } else {
         /* المربّعُ القديمُ ينطوي إلى أيقونته في سطرها، ثمّ يغيب */
         const tg = post.querySelector(`.pk-icrow [data-pkic="${old}"]`);
@@ -26507,14 +26539,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = E.getBoundingClientRect().width, m = pkFxOuter(E, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
-    E.style.overflow = 'hidden';
+    E.style.overflow = 'hidden'; E.classList.add('pk--chrome0');   /* أقواسُها وشريطاها بعد أن تنبسط (المرحلة ١) */
     const pin = pkFxPin(E);   /* محتواها على عرضه الأخير والحافّةُ تقصّه — فلا يُعاد ترتيبُه في كلّ إطار */
     const cs = getComputedStyle(E), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
     const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
     /* من عرضٍ صفرٍ حقًّا: الحاشيةُ تنبسط معها (وإلّا بدأت بعرض الحاشية) */
     const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; E.classList.remove('pk--chrome0'); sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
     bkHoldAnims(an);   /* الكتابُ يُجمَّد حتى تنبسط */
     return true;
   }
@@ -26632,7 +26664,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ولا ملخّصَ بينهما: الآخرُ يأخذ القسمةَ كلَّها، وكلٌّ يلزم حافّتَه (الخارجةُ تنطوي إلى حافّتها لا نحوه) */
     const noMid = !sp.querySelector(':scope > .kt-view');
     if (noMid && other) sp.style.justifyContent = 'space-between';
-    L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
+    L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box'; L.classList.add('pk--chromeout');   /* أوّلَ ما يغيب (المرحلة ١) */
     pkFxPin(L);   /* يخرج: محتواه ثابتُ العرض حتى يُرفع (لا يُعاد ترتيبُ شجرةٍ ممتلئةٍ في كلّ إطار) */
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
