@@ -786,3 +786,13 @@ html[data-theme="dark"]:root .market-tools .m-count b.is-q { color: #e1c172; }
 .av-letter { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; border-radius: 50%;
   background: var(--av-c, #2c5e65) !important; color: #fff !important; font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif; font-style: normal;
   font-weight: 700; font-size: .92em; line-height: 1; user-select: none; }
+
+/* ===== وجهُ الحساب أثناء رفعه: حلقةُ تحميلٍ مكانَ الصورة (‎AV_LOAD‎ في ‎app.js‎) =====
+   فإن ظهرت الصورةُ فقد حُفظت. والدوران تحويلٌ وحده: لا تخطيطَ ولا رسمَ يُعاد */
+.av-load { position: relative; display: block; width: 100%; height: 100%; border-radius: 50%;
+  background: color-mix(in srgb, currentColor 8%, transparent); }
+.av-load::after { content: ''; position: absolute; inset: 22%; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 22%, transparent); border-top-color: currentColor;
+  animation: av-spin .8s linear infinite; }
+@keyframes av-spin { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) { .av-load::after { animation-duration: 2.4s; } }

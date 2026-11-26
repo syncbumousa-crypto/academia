@@ -18727,13 +18727,13 @@ tr.hl-call-land > td { animation: hl-call-row .8s ease-out; }
 :root { --bk-gh1: rgba(44, 94, 101, .22); --bk-gh2: rgba(44, 94, 101, .08); --bk-ghr: #2c5e65; }
 html[data-theme="dark"] { --bk-gh1: rgba(127, 192, 199, .2); --bk-gh2: rgba(127, 192, 199, .06); --bk-ghr: #7fc0c7; }
 .bk.bk--wait > .bkface, .bk.bk--wait::before, .bk.bk--wait::after,
-.bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img),
-.bk.bk--img:has(> .bkface--img > img:not(.is-in))::before,
-.bk.bk--img:has(> .bkface--img > img:not(.is-in))::after { background: var(--bk-gh1); box-shadow: none; animation: bkGhost 1.4s ease-in-out infinite; }
+.bk.bk--img.bk--imgwait > .bkface:not(.bkface--img),
+.bk.bk--img.bk--imgwait::before,
+.bk.bk--img.bk--imgwait::after { background: var(--bk-gh1); box-shadow: none; animation: bkGhost 1.4s ease-in-out infinite; }
 .bk.bk--wait > .bkface > *,
-.bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img) > * { visibility: hidden; }
+.bk.bk--img.bk--imgwait > .bkface:not(.bkface--img) > * { visibility: hidden; }
 .bk.bk--wait > .bkface::after,
-.bk.bk--img:has(> .bkface--img > img:not(.is-in)) > .bkface:not(.bkface--img)::after {
+.bk.bk--img.bk--imgwait > .bkface:not(.bkface--img)::after {
   content: ''; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
   border: 2px solid var(--bk-gh1); border-top-color: var(--bk-ghr); animation: bkGhostRing .8s linear infinite; }
 @keyframes bkGhost { 50% { background: var(--bk-gh2); } }
@@ -19728,7 +19728,9 @@ html[data-theme="dark"] #pcp .pcp-ft { border-top-color: rgba(255, 255, 255, .08
    لا يصغر (‎scale(.72)‎ يُلغى) ويقف حيث يقف في الصفّ: في وسط لافتة الغلاف عموديًّا، يسارَها */
 #cm-body .pk--pc.pk--icx.pk--framepub > .post-yt > .post-menu .post-menubtn,
 #cm-body .pk--pc.pk--icx.pk--max > .post-yt > .post-menu .post-menubtn { transform: none; }
-#cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: -11px; }
+/* (طلبُ صاحب الموقع: «مكانُ الثلاث نقاط لا يتغيّر» حين تتّسع المساهمة) الإطارُ يتّسع ‎11px‎ للخارج (‎margin-inline: -11px‎)،
+   فلو أُزيحت النقاطُ ‎-11px‎ فوقه لانتقلت بالقدرين معًا — فتبقى على حافّته (‎0‎) فتقع حيث كانت في الصفّ المطويّ بالضبط */
+#cm-body .pk--pc.pk--framepub > .post-yt > .post-menu { top: 64px; inset-inline-end: 0; }
 #cm-body .pk--pc.pk--maxpub > .post-yt > .post-menu { top: 64px; inset-inline-end: -14px; }
 /* قوسُ التكبير في المنشورة المفتوحة: إطارُها مستديرُ الزاوية (‎16px‎) ويقصّ ما خرج منه (‎overflow: hidden‎)،
    والقوسُ على حافّته ينزلق للخارج عند المرور فيدخل في المقصوص ويختفي. فيُنزل إلى داخل الزاوية بقدر انزلاقه —
@@ -20352,6 +20354,16 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 #cm-body .pk-src.bk-on-dark .pk-varc--bk .pk-varc__m { stroke: #d4b36a; }
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) > .pk-blkh .pk-blkh__ic,
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) .pk-varc--bk path { transition: color .3s ease, stroke .3s ease; }
+
+/* ===== قوسُ الزاوية وشريطا التمرير آخرُ ما يظهر وأوّلُ ما يغيب (طلبُ صاحب الموقع) =====
+   في الاتّساع (‎pk--chrome0‎) يبقيان خفيّين حتى تكتمل المساحة ثمّ يظهران بتلاشٍ قصير؛ وفي الطيّ (‎pk--chromeout‎) يغيبان
+   قبل المحتوى (أسرعَ منه وبلا بدءٍ ليّن) — كانا يظهران قبل وصول المساحة ويبقيان حتى يختفيا دفعةً آخرَ الطيّ */
+/* (المرحلة ١) الأقواسُ الثلاثة (الكتاب · الملخّص · البنك) وشريطا التمرير معًا — والصنفُ على المساهمة أو على المساحة الداخلة/الخارجة وحدَها */
+#cm-body .pk-varc { transition: transform .14s cubic-bezier(.3, .7, .4, 1), opacity .2s ease-out; }
+#cm-body .cbk-sb { transition: opacity .2s ease-out; }
+#cm-body .pk--chrome0 :is(.pk-varc, .cbk-sb) { opacity: 0; pointer-events: none; transition: none; }
+#cm-body .pk--chromeout :is(.pk-varc, .cbk-sb) { opacity: 0; pointer-events: none; transition: opacity .1s ease-out; }
+#cm-body :is(.pk--chrome0, .pk--chromeout) .cbk-sb > i { pointer-events: none; }
 
 /* ===== زرُّ تكبير الصفحات المتتالية في تذييل المصادر (‎pkBkZoomHTML‎ · طلبُ صاحب الموقع) =====
    بشكل زرّ المصدر (‎34px‎، حدٌّ رفيع، دائريّ، ظلٌّ خفيف): عدسةُ تصغير · النسبة · عدسةُ تكبير. ولا يظهر إلّا بالعرض العادي */

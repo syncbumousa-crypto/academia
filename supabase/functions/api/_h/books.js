@@ -16,6 +16,7 @@
 
    ===== ولا حدَّ للحجم من عندنا (قرارُ صاحب الموقع) =====
    يبقى حدُّ Supabase نفسِه للملفّ الواحد. وتُضبط الحدودُ لاحقًا. */
+import { oops } from '../_err.js';
 import { db } from "../_db.js";
 
 const J = (o, s = 200) => new Response(JSON.stringify(o), {
@@ -211,7 +212,6 @@ export async function onRequest({ request, env }) {
     const up = await signUp(BUCKET, h, false);
     return up ? J({ h, exists: false, upload: up, url: pub(h) }) : J({ error: "sign" }, 502);
   } catch (e) {
-    console.error("books:", e && e.message);
-    return J({ error: "server" }, 500);
+    return oops("books", e);
   }
 }

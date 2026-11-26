@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎POST /api/likes‎ — يُعجب أو يرجع (م٣أ من ROADMAP-SERVER)
@@ -89,7 +90,6 @@ export async function onRequest({ request, env }) {
     const c = await db.prepare('SELECT COUNT(*) n FROM likes WHERE pid = ?').bind(pid).first();
     return J({ id: pid, likes: (c && c.n) || 0, liked: !had });
   } catch (e) {
-    console.error('likes:', e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('likes', e);
   }
 }

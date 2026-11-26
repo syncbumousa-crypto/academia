@@ -13,6 +13,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>لا توجد هذه الصفحة — أكاديميا</title>
+<script>
+  /* ===== الرابطُ المكتوبُ بغير حروفه يُردّ إلى مكانه (ربط الدومين · طلبُ صاحب الموقع) =====
+     مساراتُ GitHub Pages تفرّق بين الكبير والصغير: ‎/almaslakh‎ لا يقابله ‎/Almaslakh‎ فيصل الزائرُ إلى هنا.
+     فإن كان أوّلُ المسار مجلدًا معروفًا بكتابةٍ أخرى — حروفٌ صغيرة، أو تهجئةٌ قريبة، أو اسمُه بالعربيّة،
+     أو البادئةُ القديمة ‎/academia/‎ من أيّام ‎github.io‎ — يُستبدل الرابطُ قبل أن تُرسم الصفحة،
+     وما بعد المجلد (والاستعلامُ والمرساة) كما هو. وما لا يُعرف تبقى له صفحةُ ٤٠٤ */
+  (function () {
+    var DIRS = { almaslakh: 'Almaslakh', platform: 'platform', abdulrahmanuniprojectadmin: 'AbdulrahmanUniProjectAdmin' };
+    var ALIAS = { 'al-maslakh': 'Almaslakh', 'al_maslakh': 'Almaslakh', maslakh: 'Almaslakh', almaslak: 'Almaslakh',
+                  almslakh: 'Almaslakh', almaslkh: 'Almaslakh', 'المسلخ': 'Almaslakh', 'مسلخ': 'Almaslakh' };
+    var path = location.pathname, segs = path.split('/');
+    var dec = function (s) { try { return decodeURIComponent(s); } catch (e) { return s; } };
+    if (dec(segs[1] || '').toLowerCase() === 'academia' && segs.length > 2) segs.splice(1, 1);   /* /academia/… ⇐ /… */
+    var key = dec(segs[1] || '').toLowerCase().trim();
+    var dir = DIRS[key] || ALIAS[key];
+    if (dir) segs[1] = dir;
+    var to = segs.join('/');
+    if (to === path) return;   /* لا حلقة: المسارُ صحيحُ الكتابة ولا ملفَّ له حقًّا ⇐ تبقى صفحةُ ٤٠٤ */
+    location.replace(to + location.search + location.hash);
+  })();
+</script>
   <!-- ومساراتُها مطلقةٌ من الجذر وحدَها دون سائر الصفحات: هذي الصفحةُ تُقدَّم على
        **أيّ** مسارٍ مجهول (‎/platform/lasho‎ مثلًا)، والنسبيُّ يُحلّ من موضع الخطأ
        لا من الجذر — فتنكسر أيقونتُها في كلّ خطأٍ عميق -->

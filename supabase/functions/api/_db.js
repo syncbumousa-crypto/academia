@@ -25,6 +25,10 @@
    كل طلب. ولا يحتاج تجميع اتصالات ولا اغلاقا. */
 
 import postgres from 'npm:postgres@3.4.5';
+/* ‏‎Buffer‎ ليس عامًّا في Deno على Supabase — فيُستورد صراحةً.
+   وبدونه رمى ‎asArg‎ «‎Buffer is not defined‎» عند كلّ كتابة بِتات، فكان كلُّ رفعِ صورةٍ ‎500‎
+   منذ النقل إلى Supabase. ثبت بدالّةٍ تجريبيّة (‎api-canary‎، ROADMAP-DATA-INTEGRITY م٢). */
+import { Buffer } from 'node:buffer';
 
 let _sql = null;
 

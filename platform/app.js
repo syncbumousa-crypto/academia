@@ -91,7 +91,144 @@
 
   let state, stateFrozen = false, coreBak = null, bootRead = 'new', bootRaw = 0, bootRawStr = '';   /* نصُّ الدرج كما قُرئ: يُوزن في أوّل فراغٍ ثمّ يُترك */
   try { coreBak = JSON.parse(localStorage.getItem(CORE_KEY) || 'null'); } catch (e) { coreBak = null; }
-  {
+
+  /* ============================================================
+     الدرجُ أجزاءٌ لا كتلةٌ واحدة (ROADMAP-DATA-INTEGRITY م٣)
+     ============================================================
+     كانت الحالُ كلُّها نصًّا واحدًا (‎academia2:v1‎) يُكتب كلُّه في كلّ حفظة —
+     ٢ ميجا للخارج. فخطأٌ واحدٌ يمحو كلَّ شيء، وكلُّ حفظةٍ تكتب ما لم يتغيّر.
+     فصارت أجزاءً، كلٌّ في مفتاحه (‎academia2:p:<الجزء>‎):
+       · ‎core‎       ⇐ النواة (‎CORE_F‎: الأترامُ والمكتبةُ والتواريخُ والحساب) جزءٌ واحد،
+                        فلا تتفرّق: الترمُ ومكتبتُه يُكتبان معًا أو لا يُكتبان
+       · ‎c:<المادّة>‎ ⇐ مادّةٌ مادّة من ‎cinfo‎ — وهي الثقيلة
+       · وكلُّ مفتاحٍ آخرَ في الحال جزءُ نفسه
+     ولا يُكتب إلّا الجزءُ الذي تبدّل نصُّه. وفهرسُ الأجزاء (‎MF_KEY‎) يُكتب **آخرًا**:
+     فما يذكره الفهرسُ موجودٌ دائمًا، وجزءٌ كُتب ولم يُذكر بعدُ لا يُقرأ.
+
+     ===== والانتقالُ في أوّل حفظة، ولا يُمسّ القديم =====
+     الدرجُ القديمُ يبقى ثلاثين يومًا لقطةً للرجوع، ثمّ يُحذف. وإن لم تتّسع السعةُ
+     للاثنين معًا رُدّ ما كُتب من الأجزاء وبقي القديمُ يعمل كما كان — ويُعاد في الإقلاع التالي. */
+  const MF_KEY = 'academia2:mf:v1';
+  const PART = k => 'academia2:p:' + k;
+  const LEGACY_DAYS = 30;
+  let partsMode = false, partsTried = false, partsMf = '', partsLegacyUntil = 0;
+  const partsLast = new Map();          /* الجزء ⇐ آخرُ نصٍّ كُتب له (أو قُرئ) */
+
+  /* ============================================================
+     كاتبٌ واحدٌ للدرج — ختمُ الكتابة (ROADMAP-DATA-INTEGRITY م١)
+     ============================================================
+     كلُّ تبويبٍ يحفظ الحالَ كلَّها من ذاكرته. فكان التبويبُ القديم يكتب فوق ما
+     كتبه الأحدث بلا علم: هكذا ذهبت الأترامُ الستّة ليلةَ نقل الدومين — تبويبٌ
+     فُتح خارجًا، ودخل صاحبُه من آخر، ثمّ غادر الأوّلُ فحفظ «خارج · بلا أترام».
+
+     فصار لكلّ كتابةٍ ختم (‎WV_KEY‎: ‎{rev, tab, t}‎) يُقرأ مع الدرج عند الإقلاع.
+     وقبل كلّ كتابة يُقارَن بما على القرص: فإن زاد فقد كتب غيري بعدي — فلا أكتب،
+     وأصير «متقادمًا» فأُحدِّث نفسي. ويُقرأ الختمُ **قبل** الدرج: إن كتب غيري
+     بينهما قرأتُ الأحدثَ بختمٍ أقدم، فأوّلُ حفظٍ يُردّ فأُحدَّث — والخطأُ في
+     الجهة الآمنة. */
+  const WV_KEY = 'academia2:wv';
+  const WV_TAB = Math.random().toString(36).slice(2, 10);
+  const wvRead = () => { try { const o = JSON.parse(localStorage.getItem(WV_KEY) || 'null'); return o && typeof o.rev === 'number' ? o.rev : 0; } catch (e) { return 0; } };
+  let wvMine = wvRead(), wvStale = false;
+  /* يُطالَب بالدور: إن كان الختمُ ما تركتُه أخذتُه ورفعتُه، وإلّا فقد كتب غيري.
+     والختمُ يُكتب **قبل** الدرج: إن سقطت كتابةُ الدرج صار غيري متقادمًا بلا داعٍ
+     فيُحدِّث نفسه — ولا يُمحى شيء. */
+  function wvClaim() {
+    if (wvStale) return false;
+    const cur = wvRead();
+    if (cur !== wvMine) { wvGoStale('rev:' + cur + '>' + wvMine); return false; }
+    wvMine = cur + 1;
+    localStorage.setItem(WV_KEY, JSON.stringify({ rev: wvMine, tab: WV_TAB, t: Date.now() }));
+    return true;
+  }
+  /* كتابةُ الترحيلات عند الإقلاع تمرّ بالختم كذلك */
+  function rawSave() {
+    /* وفي الأجزاء لا يُكتب ههنا: مُجزِّئُ الحال يُعرَّف بعد هذا السطر بكثير، والحفظةُ
+       الأولى بعد الإقلاع تكتب ما رحّلته الترحيلات — وهي تقع في كلّ إقلاع */
+    if (partsMode) return;
+    try { const body = JSON.stringify(state); if (wvClaim()) localStorage.setItem(LS_KEY, body); } catch (e) {}
+  }
+  /* ===== والمتقادمُ يُحدِّث نفسه — بلا محوٍ ولا مفاجأة (قرارُ صاحب الموقع) =====
+     مخفيٌّ ⇐ يُحدَّث عند ظهوره · ظاهرٌ بلا كتابةٍ جارية ⇐ يُحدَّث الآن ·
+     ظاهرٌ وفيه كتابة ⇐ شريطٌ صغير «حدِّث»، فلا تُسحب الصفحةُ من تحت يده. */
+  function wvTyping() {
+    const a = document.activeElement;
+    return !!(a && (a.isContentEditable || a.tagName === 'TEXTAREA'
+      || (a.tagName === 'INPUT' && !/^(button|submit|checkbox|radio|range|file|color)$/i.test(a.type || ''))));
+  }
+  function wvGoStale(why) {
+    if (!wvStale) { wvStale = true; try { bootMark('stale:' + why); } catch (e) {} }
+    if (document.visibilityState === 'hidden') return;          /* يُحدَّث عند ظهوره */
+    /* ولا دوّامة: نافذتان ظاهرتان معًا تُقادِم كلٌّ منهما الأخرى بحفظات إقلاعها، فلو
+       حدّث كلٌّ نفسَه بلا حدٍّ لَما سكنتا. فالتحديثُ التلقائيُّ مرّةً في ١٥ ثانيةً للتبويب،
+       وما زاد فشريط */
+    let last = 0;
+    try { last = +sessionStorage.getItem('academia2:wvReload') || 0; } catch (e) {}
+    if (!wvTyping() && Date.now() - last > 15000) {
+      try { sessionStorage.setItem('academia2:wvReload', String(Date.now())); } catch (e) {}
+      location.reload(); return;
+    }
+    if (document.getElementById('wv-bar')) return;
+    const ar = !state || (state.lang || 'ar') === 'ar';
+    const b = document.createElement('div');
+    b.id = 'wv-bar';
+    b.style.cssText = 'position:fixed;inset-inline:0;bottom:0;z-index:9999;padding:10px 16px;'
+      + 'background:#2c5e65;color:#fff;font:700 13px/1.7 "IBM Plex Sans Arabic",sans-serif;text-align:center';
+    b.textContent = ar ? 'تغيّر حسابك في تبويبٍ آخر' : 'Your account changed in another tab';
+    const x = document.createElement('button');
+    x.type = 'button'; x.textContent = ar ? 'حدِّث' : 'Refresh';
+    x.style.cssText = 'margin-inline-start:12px;border:0;border-radius:8px;padding:4px 12px;'
+      + 'cursor:pointer;font:inherit;background:#fff;color:#2c5e65';
+    x.onclick = () => location.reload();
+    b.appendChild(x);
+    (document.body || document.documentElement).appendChild(b);
+  }
+  /* ويُعرف فورًا: كتابةُ الختم في تبويبٍ آخر تُطلق ‎storage‎ ههنا */
+  window.addEventListener('storage', e => {
+    if (e.key !== WV_KEY) return;
+    if (wvRead() !== wvMine) wvGoStale('peer');
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && wvStale) wvGoStale('show');
+  });
+
+  /* ===== أجزاءٌ إن وُجد فهرسُها ===== */
+  let bootMf = null, bootPartsBad = '';
+  try { bootMf = JSON.parse(localStorage.getItem(MF_KEY) || 'null'); } catch (e) { bootMf = null; bootPartsBad = 'mf'; }
+  if (bootMf && Array.isArray(bootMf.keys)) {
+    const st = {}, strs = [];
+    let total = 0;
+    for (const k of bootMf.keys) {
+      let raw = null;
+      try { raw = localStorage.getItem(PART(k)); } catch (e) { raw = null; }
+      /* جزءٌ يذكره الفهرسُ وغاب، أو تلف: تجميدٌ كالدرج التالف — ولا يُكتب فوق شيء */
+      if (raw == null) { bootPartsBad = 'missing:' + k; break; }
+      let v;
+      try { v = JSON.parse(raw); } catch (e) { bootPartsBad = 'bad:' + k; break; }
+      total += raw.length;
+      partsLast.set(k, raw);
+      if (k === 'core') Object.assign(st, v);
+      else if (k.indexOf('c:') === 0) (st.cinfo || (st.cinfo = {}))[k.slice(2)] = v;
+      else st[k] = v;
+      strs.push(JSON.stringify(k) + ':' + raw);
+    }
+    partsMf = JSON.stringify(bootMf.keys);
+    partsLegacyUntil = bootMf.legacyUntil || 0;
+    partsMode = true;
+    bootRaw = total;
+    if (bootPartsBad) {
+      state = {}; stateFrozen = true; bootRead = 'bad';
+      try { if (!localStorage.getItem(RAW_KEY)) localStorage.setItem(RAW_KEY, JSON.stringify({ parts: bootMf, why: bootPartsBad })); } catch (e2) {}
+    } else {
+      state = st; bootRead = 'ok';
+      bootRawStr = total > 300000 ? '{' + strs.join(',') + '}' : '';
+      /* واللقطةُ القديمةُ تُحذف بعد مهلتها */
+      if (bootMf.legacyUntil && Date.now() > bootMf.legacyUntil) { try { localStorage.removeItem(LS_KEY); } catch (e) {} }
+    }
+  } else if (bootPartsBad) {
+    /* فهرسٌ تالف: لا يُعرف ما الأجزاء — تجميد */
+    state = {}; stateFrozen = true; bootRead = 'bad'; partsMode = true;
+  } else {
     let raw = null;
     try { raw = localStorage.getItem(LS_KEY); } catch (e) { raw = null; }
     bootRawStr = raw || '';
@@ -99,6 +236,7 @@
     if (raw == null || raw === '') {
       state = {};
       bootRead = 'new';
+      partsMode = true;                /* متصفّحٌ جديد: يبدأ أجزاءً */
     } else {
       try {
         state = JSON.parse(raw) || {};
@@ -448,7 +586,7 @@
     if (fixed) {
       state.terms = out;
       if (state.lastNook && !out.includes(state.lastNook.term)) state.lastNook = null;
-      try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+      rawSave();
     }
   }
 
@@ -461,7 +599,7 @@
         return x;
       });
     });
-    if (migrated) { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {} }
+    if (migrated) { rawSave(); }
   }
   const libEntries = term => state.libs[term] || (state.libs[term] = []);
   const libCodes = term => libEntries(term).map(e => e.code);
@@ -535,7 +673,7 @@
     };
     fnWalk(state.cinfo);
     state.fnFix = 2;
-    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    rawSave();
     if (fnHits) console.log('وسمُ صورةٍ رُدَّ إلى صيغته:', fnHits);
   }
 
@@ -601,7 +739,7 @@
     };
     walk(state.cinfo);
     state.ansSeed = 1;
-    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    rawSave();
     if (seeded) console.log('بذرةُ حكم الجواب: بطائقُ نُقل إليها سجلُّها القديم:', seeded);
   }
 
@@ -718,17 +856,17 @@
     const bkind = badgeKind(baseOf(code));
     if (bkind) return badgeHTML(code, bkind, op, sz);
     const face = '<span class="bkface">' + bookFace(baseOf(code)) + (img ? '' : inner) + '</span>';
-    const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img');"
+    const fail = "var b=this.closest('.bk'); if(b) b.classList.remove('bk--img','bk--imgwait');"
                + ' this.parentNode.remove()';
     const shot = img
       ? '<span class="bkface bkface--img"><img src="' + img + '" alt="" loading="lazy" decoding="async"'
         + (BK_SEEN.has(img) ? ' class="is-in"' : '') + ' data-u="' + esc(img) + '"'
         /* لا تُرى الصورةُ وهي تصل: المتصفّحُ يرسم ما وصل منها شريطًا شريطًا من أعلى، مشوّشًا — فتبقى خفيّةً والمرسومُ تحتها،
            حتى تكتمل وتُفكّ، فتظهر دفعةً بتلاشٍ قصير */
-        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\')})"'
+        + ' onload="var i=this;window.__bkSeen&&__bkSeen.add(i.dataset.u);(i.decode?i.decode():Promise.resolve()).catch(function(){}).then(function(){i.classList.add(\'is-in\');var b=i.closest(\'.bk\');b&&b.classList.remove(\'bk--imgwait\')})"'
         + ' onerror="' + fail + '">' + inner + '</span>'
       : '';
-    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' : (() => { try { return coverWait(code); } catch (e) { return false; } })() ? ' bk--wait' : '') + '">'
+    return '<span class="bk' + sz + ' bk--ph' + (img ? ' bk--img' + (BK_SEEN.has(img) ? '' : ' bk--imgwait') : (() => { try { return coverWait(code); } catch (e) { return false; } })() ? ' bk--wait' : '') + '">'
       + face + shot + (op.after || '') + '</span>';
   }
 
@@ -1131,7 +1269,87 @@
     if (SRC_FILL.indexOf(k) < 0) return v;
     return (this && this.ref && this.ref.pid) ? undefined : v;
   }
+  /* ===== تقطيعُ الحال إلى أجزائها (م٣) =====
+     قواعدُ ‎saveTrim‎ نفسُها: ما بلغ الخادمَ من المساهمات يُسقط، وسجلُّ الاختبارات
+     وجدولةُ المذاكرة لا تُكتب متى بلغت الحساب، وما مُلئ من مصدرٍ لا يُكتب. */
+  function partTrim(k, v) {
+    if (SRC_FILL.indexOf(k) < 0) return v;
+    return (this && this.ref && this.ref.pid) ? undefined : v;
+  }
+  function partsOf() {
+    const out = new Map();
+    const core = {};
+    CORE_F.forEach(k => { if (state[k] !== undefined) core[k] = state[k]; });
+    out.set('core', JSON.stringify(core, partTrim));
+    Object.keys(state).forEach(k => {
+      if (CORE_F.indexOf(k) >= 0) return;
+      const v0 = saveTrim.call(state, k, state[k]);
+      if (v0 === undefined) return;
+      if (k === 'cinfo') {
+        Object.keys(v0 || {}).forEach(code => {
+          const t = JSON.stringify(v0[code], partTrim);
+          if (t !== undefined) out.set('c:' + code, t);
+        });
+        return;
+      }
+      const t = JSON.stringify(v0, partTrim);
+      if (t !== undefined) out.set(k, t);
+    });
+    return out;
+  }
+  /* يُكتب ما تبدّل، ثمّ الفهرس، ثمّ يُحذف ما خرج منه — بهذا الترتيب لا يذكر الفهرسُ غائبًا */
+  function writeParts(parts, mfExtra) {
+    parts.forEach((str, k) => {
+      if (partsLast.get(k) !== str) { localStorage.setItem(PART(k), str); partsLast.set(k, str); }
+    });
+    const keys = Array.from(parts.keys());
+    const ks = JSON.stringify(keys);
+    if (ks !== partsMf || mfExtra) {
+      const mf = { v: 1, keys, at: Date.now() };
+      if (mfExtra) Object.assign(mf, mfExtra);
+      else if (partsLegacyUntil) mf.legacyUntil = partsLegacyUntil;
+      localStorage.setItem(MF_KEY, JSON.stringify(mf));
+      partsMf = ks;
+    }
+    Array.from(partsLast.keys()).forEach(k => {
+      if (!parts.has(k)) { try { localStorage.removeItem(PART(k)); } catch (e) {} partsLast.delete(k); }
+    });
+  }
+  /* الانتقالُ من الكتلة إلى الأجزاء — مرّةً في الجلسة، في أوّل حفظة */
+  function partsMigrate() {
+    partsTried = true;
+    if (stateFrozen) return;
+    const parts = partsOf();
+    if (!wvClaim()) return;
+    partsLegacyUntil = Date.now() + LEGACY_DAYS * 86400000;
+    try {
+      writeParts(parts, { legacyUntil: partsLegacyUntil });
+      partsMode = true;
+      bootMark('mf:on:' + parts.size);
+    } catch (e) {
+      /* لم تتّسع السعةُ للاثنين: يُردّ ما كُتب، ويبقى القديمُ يعمل */
+      Array.from(partsLast.keys()).forEach(k => { try { localStorage.removeItem(PART(k)); } catch (e2) {} });
+      partsLast.clear(); partsMf = ''; partsLegacyUntil = 0;
+      try { localStorage.removeItem(MF_KEY); } catch (e2) {}
+      bootMark('mf:quota');
+    }
+  }
+  /* حجمُ الدرج كما هو على القرص — للفاحص والدفتر */
+  window.acDrawerSize = () => {
+    let n = 0;
+    try {
+      if (partsMode) partsLast.forEach(v => { n += v.length; });
+      else n = (localStorage.getItem(LS_KEY) || '').length;
+    } catch (e) {}
+    return n;
+  };
+
   let saveBad = false, lastCore = '';
+  let wvHidAt = 0, wvLate = false;   /* متى اختفى التبويب · وحفظٌ أُجِّل إلى ظهوره */
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') { wvHidAt = Date.now(); return; }
+    if (wvLate && !wvStale) save();
+  });
   /* saveHold: a pass over many courses (the admin boot publish) saves once at the end, not once per course --
      each save serialises the whole state, and ~800 of them froze the panel for minutes. */
   let saveHold = 0, saveLate = false;
@@ -1141,6 +1359,15 @@
        إن كان المقروءُ تالفًا فالذاكرةُ خاوية، وكلُّ حفظٍ محوٌ. فيُمنع الحفظُ
        كلُّه حتّى يقول صاحبُ الموقع كلمتَه — والخامُ محفوظٌ في مفتاح الإنقاذ. */
     if (stateFrozen) { bootMark('frozen'); saveAlarm(new Error('frozen'), 'frozen'); return; }
+    /* ===== والمتقادمُ لا يكتب =====
+       كتب تبويبٌ آخرُ بعدي: ما في ذاكرتي أقدمُ مما على القرص (م١) */
+    if (wvStale) return;
+    /* ===== والتبويبُ المخفيُّ لا يكتب متأخّرًا =====
+       ثانيتان بعد الاختفاء يُحفظ فيهما ما عُدِّل وهو ظاهر (‎visibilitychange‎ و‎pagehide‎).
+       وما بعدهما ثمرةُ جذبٍ في الخلفية — يُعاد جذبُه، فيُؤجَّل إلى الظهور. فلا يكتب
+       تبويبٌ منسيٌّ فوق التبويب الذي تعمل فيه. */
+    if (document.visibilityState === 'hidden' && Date.now() - wvHidAt > 2000) { wvLate = true; return; }
+    wvLate = false;
 
     /* ===== ولا تُمحى النواةُ بحفظٍ =====
        أترامٌ كانت ثمّ صارت صفرًا في الذاكرة: ذاك محوٌ لم يطلبه أحد. ولا يُكتب،
@@ -1151,7 +1378,14 @@
        المرّة، وسقوطُ اثنين فأكثرَ دفعةً ليس فعلَ إنسان.
        ومن قصد نقصانًا أكبرَ (دمجُ نواةٍ فيها شواهدُ حذفٍ من متصفّحٍ آخر)
        يستأذن بـ‎allowDrop‎ — إذنٌ يُستهلك مرّةً واحدة، فلا يبقى بابًا مفتوحًا. */
-    const bak = coreBak && Array.isArray(coreBak.terms) ? coreBak.terms.length : 0;
+    /* ===== والحارسُ يقرأ القرصَ لا الذاكرة (م١) =====
+       كان يقارن بنسخة التبويب في ذاكرته، فالتبويبُ الذي فُتح بلا أترام لم يرَ
+       ما يحميه. فتُقرأ النسخةُ من القرص لحظةَ الحفظ (عشراتُ الكيلوبايتات) */
+    let coreDiskStr = null;
+    try { coreDiskStr = localStorage.getItem(CORE_KEY); } catch (e) {}
+    let coreDisk = coreBak;
+    try { if (coreDiskStr) coreDisk = JSON.parse(coreDiskStr); } catch (e) {}
+    const bak = coreDisk && Array.isArray(coreDisk.terms) ? coreDisk.terms.length : 0;
     const nowN = (state.terms || []).length;
     const drop = bak - nowN;
     if (bak && drop > 1 && dropOK < drop) {
@@ -1163,13 +1397,33 @@
 
     try {
       dropCinfo = cinfoSafe();     /* يُسأل مرّةً في الحفظة لا لكلّ مفتاح */
-      localStorage.setItem(LS_KEY, JSON.stringify(state, saveTrim));
+      /* يُسلسَل أوّلًا ثمّ يُطالَب بالدور ثمّ يُكتب: فبين فحص الختم والكتابة لا شيءَ إلّا الكتابة */
+      if (!partsMode && !partsTried) partsMigrate();
+      if (partsMode) {
+        const parts = partsOf();
+        if (!wvClaim()) return;
+        try { writeParts(parts); }
+        catch (eQ) {
+          /* ضاقت السعة: اللقطةُ القديمةُ أوّلُ ما يُترك، ثمّ يُعاد مرّةً */
+          let had = false;
+          try { had = localStorage.getItem(LS_KEY) != null; } catch (e) {}
+          if (!had) throw eQ;
+          localStorage.removeItem(LS_KEY);
+          partsLegacyUntil = 0;
+          bootMark('mf:legacy-dropped');
+          writeParts(parts, {});
+        }
+      } else {
+        const body = JSON.stringify(state, saveTrim);
+        if (!wvClaim()) return;
+        localStorage.setItem(LS_KEY, body);
+      }
       if (saveBad) { saveBad = false; const b = document.getElementById('sv-alarm'); if (b) b.remove(); }
       /* ونسخةُ النواة تُجدَّد متى تبدّلت — كيلوباتاتٌ ثمنُها أن يُستعاد ما لا يُعوَّض */
       try {
-        coreStamp(coreBak || {});          /* الشاهدان: بمقابلة المحفوظ بالحاضر */
+        coreStamp(coreDisk || {});         /* الشاهدان: بمقابلة المحفوظ بالحاضر */
         const c = JSON.stringify(coreOf(state));
-        if (c !== lastCore) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
+        if (c !== coreDiskStr) { localStorage.setItem(CORE_KEY, c); lastCore = c; coreBak = JSON.parse(c); }
       } catch (e2) { /* امتلاءٌ: النسخةُ تُؤجَّل ولا تُعطّل الحفظ */ }
       if (typeof nookPushSoon === 'function') nookPushSoon();   /* والنواةُ إلى الحساب */
       if (typeof xtPushSoon === 'function') xtPushSoon();     /* وسجلُّ الاختبارات كذلك */
@@ -1205,7 +1459,7 @@
     if (!s || typeof s !== 'object' || Array.isArray(s)) return false;
     Object.keys(s).forEach(k => { state[k] = s[k]; });
     save();
-    return !saveBad && !stateFrozen;
+    return !saveBad && !stateFrozen && !wvStale;
   };
 
   /* يُقال صراحةً حين يُردّ ما ضاع: صمتُ الإصلاح كصمت العطب */
@@ -1672,6 +1926,7 @@
       errTaken: 'هذا الإيميل مسجَّل — سجّل دخولك',
       errNet: 'تعذّر الوصول إلى الخادم — تحقّق من اتصالك',
       srvTooBig: 'المساهمة كبيرة على النشر — خفّف صورها أو قسّمها',
+      profImgFail: 'فشل رفع الصورة',
       srvBusy: 'بلغتَ حدّ الطلبات — سيُعاد الإرسال تلقائيًا بعد قليل',
       /* ولا وعظَ في رسالةِ منع: كانت «لا تُعجب بمساهمتك — والعدّ الذي يُرتَّب به
          لا يُزكّيه صاحبُه». والسببُ صحيحٌ ومكانُه التعليقُ في الشيفرة لا شريطٌ
@@ -2065,6 +2320,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       errTaken: 'This email is registered — log in instead',
       errNet: 'Could not reach the server — check your connection',
       srvTooBig: 'This contribution is too large to publish — lighten its images or split it',
+      profImgFail: 'Photo upload failed',
       srvBusy: 'Rate limit reached — this will be sent again shortly',
       likeSelf: 'You cannot like your own contribution',
       cmtLikeSelf: 'You cannot like your own comment',
@@ -2847,7 +3103,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const out = [];
       for (let i = lo; i <= hi; i++) {
         /* __en = مدخلة الترم (للركن) — تُمرَّر لتظهر شارة «جهّزها» ودائرة الإتقان */
-        const h = cardHTML(items[i], opts.cardMode, null, items[i].__en), k = h.replace(/ class="is-in"/g, '');   /* (صورةٌ اكتمل تحميلُها لا تُحسب تغيّرًا) */
+        const h = cardHTML(items[i], opts.cardMode, null, items[i].__en), k = h.replace(/ class="is-in"| bk--imgwait/g, '');   /* (صورةٌ اكتمل تحميلُها لا تُحسب تغيّرًا) */
         const key = items[i].code + '|' + k;
         let el = old.get(key);
         if (el) { old.delete(key); el.dataset.i = i; }
@@ -3126,13 +3382,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
         const url = cv.toDataURL('image/jpeg', .82);
         if (pickProfile) {
-          state.profile.img = url; pickProfile = false; save(); renderProfile(); renderAcctPage();
+          pickProfile = false;
+          /* الزائرُ لا خادمَ له: صورتُه محلّيّةٌ تظهر فورًا.
+             والعضو: معلَّقةٌ حتى يؤكّد الخادمُ حفظَها، وأيقونةُ تحميلٍ مكانَها حتى ذلك */
+          if (isGuest() || !AUTH_SRV) state.profile.img = url;
+          else state.profile.imgPending = url;
+          save();
           /* ===== وتبلغ الخادمَ إن كنتَ عضوًا =====
              الصورةُ تُعرض على كلّ مساهمةٍ نشرتَها، وهي في جدول المستخدمين لا في
              نسخة المساهمة. فلو بقيت في الدرج لَظهرتَ للناس بلا صورةٍ أبدًا.
              وترفعها ‎profImg‎ إلى المستودع أوّلًا ثمّ تبعث عنوانَها: نقطةُ البروفايل
              لا تقبل ‎data:‎ — ضخمةٌ تُثقل كلَّ قراءةِ مساهمة. */
-          profImg(url);
+          profImg(url, true);
           return;
         }
         /* ===== ولا مخزنَ ثانٍ للصورة =====
@@ -4778,10 +5039,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* هوية «أنا» في كل مساهماتي = بروفايل الحساب (الصورة والاسم اللذان ضبطتُهما لنفسي) */
   /* صورُ الحروف من منتدى STKFUPM ألوانُها عشوائيّةٌ من المنتدى لا من الموقع: يُرسم الحرفُ
      هنا محايدًا (‎.av-letter‎) بدل جلب صورته — ولا طلبَ شبكةٍ لكلّ وجه */
+  /* صورةُ الحساب تُرفع الآن ⇐ أيقونةُ تحميلٍ مكانَ الوجه (‎profImg‎) */
+  let profUp = false;
+  const AV_LOAD = '<span class="av-load" role="status" aria-label="…"></span>';
   const AV_COLS = ['#2c5e65', '#3f7fb8', '#8a5bb0', '#b9803a', '#3f8f55', '#b85a78', '#5a68b8', '#4b949a'];
   const LETTER_AV = /letter_avatar_proxy\/v\d+\/letter\/([^/])\//;
   const avatarHTML = p => {
-    const src = (p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img);
+    if (p.me && profUp) return AV_LOAD;
+    /* ‏‎assetURL‎: صورةٌ في المستودع بعنوانٍ نسبيّ (‎/api/media/…‎) تُطلب من الخادم لا من الموقع */
+    const src = assetURL((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img));
     /* ‏‎lazy‎: المساهماتُ المنقولةُ تحمل صورَ أصحابها من موقعٍ آخر — سبعٌ وسبعون في «الدكاترة»
        تُجلب وتُرسم واحدةً واحدةً عند أوّل فتح. فلا يُجلب إلّا ما قرب من الشاشة، ومقاسُها ثابتٌ في الجلد */
     if (!src) return FLAT_AVATAR;
@@ -7161,6 +7427,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     return `<div class="cm-pick"><div class="cm-pick__ghost" aria-hidden="true">${row(34, 76) + row(42, 69) + row(50, 62)}</div>`
       + `<div class="cm-pick__msg" role="note"><svg class="cm-pick__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>${esc(T().cmPick)}</span></div></div>`;
   }
+  /* ===== رسمُ ما تغيّر وحدَه (ROADMAP-SPACE-MOTION · المرحلة ٥ · خلف مفتاح ‎ac.render.partial‎) =====
+     كان كلُّ رسمٍ للقسم يبني مساهماته كلَّها من جديد — فتحُ مساحةٍ واحدة يعيد بناء ‎11‎ مساهمة ويُعيد حساب أنماطها
+     (قيس: ‎~60ms‎ بناءً و‎50–86ms‎ أنماطًا من معالج الضغط). فمع المفتاح: يُفكّ الجديدُ في قالبٍ خارج الصفحة، وكلُّ
+     عنصرٍ في أعلى القسم يُقارن بنصّ رسمه السابق نفسِه (‎_h‎: ما رُسم به قبل أن يمسّه شيء) — المطابقُ يبقى عقدتَه كما هي
+     في مكانها (لا تُنقل: النقلُ يُصفّر تمريرَها ويعيد حركاتِها)، وغيرُه يُستبدل.
+     وهو الافتراضيُّ (v1529 · اعتمادُ صاحب الموقع بعد المقارنة على مساهمته: فتحُ المصادر ‎126–134‎ ← ‎89–98ms‎،
+     والبنك ‎195–210‎ ← ‎150–163ms‎، والحالُ مطابقة). ويُطفأ في متصفّحٍ بعينه بـ‎ac.render.partial = '0'‎ للمقارنة */
+  const cmPartialOn = () => { try { return localStorage.getItem('ac.render.partial') !== '0'; } catch (e) { return true; } };
+  function cmBodySet(body, html) {
+    const mark = () => { for (const el of body.children) el._h = el.outerHTML; };
+    if (!cmPartialOn()) { body.innerHTML = html; return; }
+    const olds = new Map();
+    for (const el of body.children) if (el._h != null) { const a = olds.get(el._h); if (a) a.push(el); else olds.set(el._h, [el]); }
+    if (!olds.size) { body.innerHTML = html; mark(); return; }
+    const t = document.createElement('template'); t.innerHTML = html;
+    const want = [];
+    for (const n of [...t.content.childNodes]) {
+      if (n.nodeType !== 1) { want.push(n); continue; }
+      const h = n.outerHTML, a = olds.get(h), keep = a && a.shift();
+      if (keep) want.push(keep); else { n._h = h; want.push(n); }
+    }
+    /* يُرفع ما لم يبقَ أوّلًا، ثمّ يُدرج الجديدُ في موضعه بين الباقين — فلا يتحرّك باقٍ من مكانه */
+    const keepSet = new Set(want);
+    [...body.childNodes].forEach(n => { if (!keepSet.has(n)) n.remove(); });
+    let cur = body.firstChild;
+    for (const n of want) { if (n === cur) { cur = cur.nextSibling; continue; } body.insertBefore(n, cur); }
+  }
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
@@ -7279,7 +7572,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     /* والمكبَّرُ يُمرَّر جوفُه (‎#cm-cards‎) وهو يُبنى من جديد هنا — فيُحفظ تمريرُه ويُردّ */
     const cxY = cxMax ? ((document.querySelector('#cm-body #cm-cards') || {}).scrollTop || 0) : 0;
-    $('#cm-body').innerHTML = inner;
+    cmBodySet($('#cm-body'), inner);
     /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
        حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
     if (cxMax && !cxMaxOk()) cxMax = false;
@@ -9703,7 +9996,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   const x3Initial = s => (String(s || '').trim()[0] || '؟');
   const x3Hue = s => (x3Initial(s).charCodeAt(0) * 47) % 360;
   /* مصدر صورة البروفايل (نفس منطق avatarHTML) */
-  const x3Img = p => ((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img)) || '';
+  const x3Img = p => assetURL(((p.me && state.profile.img) ? state.profile.img : (p.u && p.u.img)) || '');
   /* ألوان البروفايل: كثير من الأفاتارات هنا صور SVG مولَّدة بتدرّج لونيّ (أفاتارات العرض مثلًا)،
      فتُستخرج ألوانها من الصورة نفسها ليخرج الغلاف بلون بروفايل صاحبه حرفيًّا لا بلون قريب منه */
   const x3AvColors = src => {
@@ -11680,6 +11973,44 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   /* ===== حركةُ الاتّساع من الصفّ الضيّق والطيِّ إليه (طلبُ صاحب الموقع: أوضحُ وأسلس) =====
      مبدأٌ واحد: المربّعُ يُكشف من داخل أيقونته بقصٍّ يتّسع (‎clip-path‎) — شكلُه الحقيقيُّ بفجواته لا يُمطّ ولا يُشوَّه —
      وقامةُ المساهمة والتذييلُ والأيقوناتُ تمضي معه على منحنًى واحدٍ ومدّةٍ واحدة، والمحتوى يظهر في آخره (ويغيب في أوّل الطيّ) */
+  /* ===== الصفحةُ لا تقفز أعلى يسارًا آخرَ الاتّساع (طلبُ صاحب الموقع: «ترقى فوق يسار ثم ترجع مكانها») =====
+     محتوى المساحة يصعد ‎6px‎ ويظهر (‎translateY‎) — وما دام عليه تحويلٌ فهو مرجعُ قائمة الصفحات المتتالية المطلقة، فتُكتب
+     إزاحتُها منه (‎-14/-18‎). فإذا انتهى صار المرجعُ المساحةَ نفسَها والإزاحةُ قديمة، فيُرسم إطارٌ والصفحةُ أعلى يسارًا بقدرها
+     حتى يُقاس في التالي (انتظارُ الحركات كلِّها يتأخّر إطارًا: الشبحُ أطولُ منها). فتُقاس عند نهاية حركة العنصر نفسِه */
+  const pkScrRefit = el => { if (!el || !el.isConnected) return;
+    (el.matches('.pk-src__view.is-scr') ? [el] : [...el.querySelectorAll('.pk-src__view.is-scr')]).forEach(v => v.pkBk && bkScrFit(v.pkBk)); };
+  /* (طلبُ صاحب الموقع: «الصفحات ترتفع خلال الانفتاح ثم توقف بقفزة وتنزل») وفي العرض العاديّ لا يصعد وعاءُ الصفحات: قائمتُها
+     مفصَّلةٌ على رسمة المساحة بموضعٍ مطلق، فصعودُه يحملها فوق موضعها ثمّ تُردّ إليه بقفزةٍ آخرَ الحركة — فيظهر بالشفافية وحدَها */
+  /* ===== خطّا الرأس والتذييل يُرسمان مع المساحة وينطويان قبلها (ROADMAP-SPACE-MOTION · المرحلة ٣ · طلبُ صاحب الموقع) =====
+     «الخطُّ» هو شريطُ الرأس/الذيل الممدود خلفه بحافّته (‎::before‎)، وفوقه المسكة. كانا يظهران دفعةً في الفتح ويغيبان بالشفافية في الطيّ.
+     الآن: في الفتح يُكشف الشريطُ من المسكة إلى الطرفين (قصٌّ يتّسع من المركز) مع آخر تمدّد المساحة، ثمّ تظهر المسكة؛
+     وفي الطيّ تغيب المسكةُ أوّلًا وينطوي الشريطُ إلى مركزه قبل أن تنطوي المساحة. قصٌّ وشفافيةٌ وتحويلٌ فقط — بلا تخطيطٍ في الإطار */
+  const pkLineEls = fp => [...fp.querySelectorAll('.post-ytmain > .pk-hdline')];
+  const pkLineClip = (fp, open) => { const h = Math.ceil(fp.getBoundingClientRect().width / 2) + 4;
+    return open ? `inset(0 calc(50% - ${h}px) 0 calc(50% - ${h}px))` : 'inset(0 50% 0 50%)'; };
+  function pkLinesIn(fp, D, an) {
+    if (bkReduce()) return;
+    const c0 = pkLineClip(fp, false), c1 = pkLineClip(fp, true), ez = 'cubic-bezier(.2, .8, .2, 1)';
+    pkLineEls(fp).forEach(ln => {
+      an.push(ln.animate([{ clipPath: c0 }, { clipPath: c1 }], { duration: D * .5, delay: D * .4, easing: ez, fill: 'backwards', pseudoElement: '::before' }));
+      const g = ln.querySelector('.pk-hdline__grip');
+      if (g) an.push(g.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'none' }], { duration: D * .25, delay: D * .85, easing: ez, fill: 'backwards' }));
+    });
+  }
+  function pkLinesOut(fp, D, an) {
+    if (bkReduce()) return;
+    const c0 = pkLineClip(fp, false), c1 = pkLineClip(fp, true);
+    pkLineEls(fp).forEach(ln => {
+      const g = ln.querySelector('.pk-hdline__grip');
+      if (g) an.push(g.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.6)' }], { duration: D * .12, easing: 'ease-in', fill: 'forwards' }));
+      an.push(ln.animate([{ clipPath: c1 }, { clipPath: c0 }], { duration: D * .3, delay: D * .06, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards', pseudoElement: '::before' }));
+    });
+  }
+  /* (المرحلة ١) أقواسُ طرق العرض الثلاثة لا تدخل في حركة المحتوى: شفافيةُ الحركة تغلب صنفَ ‎pk--chrome0/out‎ فتُظهرها معه —
+     فلها توقيتُها وحدَها: بعد اكتمال المساحة، وأوّلَ ما يغيب */
+  const pkNoArc = x => !x.matches('.pk-varc');
+  const pkRiseKf = x => (bkModeGet() === 'scroll' && (x.matches('.pk-src__view') || x.querySelector('.pk-src__view')))
+    ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }];
   function pkIcGhost(card, blk, bb) {
     const band = card.querySelector(':scope > .pk-band');
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -11746,6 +12077,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (fp && pkIcRowM[id]) pkIcRowM[id].dT = pkIcRowM[id].top - fp.getBoundingClientRect().top;
     if (!fp || bkReduce()) return;
     cxHdMeasure(); pkBandFit(fp); fp.pkBlkHold = true;
+    fp.classList.add('pk--chrome0');   /* قوسُ الزاوية وشريطا التمرير يظهران بعد اكتمال المساحة (طلبُ صاحب الموقع) */
     const D = 560 * (window.__pkfxSlow || 1), ez = PK_IC_EZ, an = [];
     const h1 = fp.getBoundingClientRect().height;
     an.push(fp.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: D, easing: ez }));
@@ -11753,6 +12085,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .post-react, .vt-foot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
       an.push(x.animate([{ transform: `translateY(${h0 - h1}px)` }, { transform: 'none' }], { duration: D, easing: ez })));
     fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot, .vt-foot) *').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .4, delay: D * .45, easing: 'ease-out', fill: 'backwards' })));
+    pkLinesIn(fp, D, an);
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .3, delay: D * .3, fill: 'backwards' })));
     /* الأيقوناتُ من سطرها إلى مواضعها، على المنحنى نفسِه */
     PK_IC_KEYS.forEach(q => {
@@ -11788,8 +12121,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ورأسُ الملخّص يظهر بما فيه عدا أيقونته — فهي تطير إلى موضعها فيه، ولو تحرّك الرأسُ لحملها معه فتنزل ثمّ تعلو */
     const midHd = fp.querySelector('.post-ytmain > .pk-blkh--mid');
     [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...fp.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-      .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
-    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; if (fp.isConnected) pkBandFit(fp); });
+      .filter(pkNoArc).forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; fp.classList.remove('pk--chrome0'); if (fp.isConnected) pkBandFit(fp); });
   }
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
   function pkIcCollapse(id, fp) {
@@ -11800,8 +12133,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       delete pkNotchSt[id]; renderCmSection(); };
     if (!k || bkReduce()) return done();
     fp.pkBlkHold = true;
-    /* الطيُّ ليّنُ البدء والختام (لا يقفز في أوّله كما يقفز الاتّساعُ المنطلق) */
-    const D = 540 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.6, 0, .25, 1)', an = [];
+    /* (طلبُ صاحب الموقع: «الإغلاقُ أقلُّ سلاسةً وديناميكيةً من الفتح»)
+       · قوسُ الزاوية وشريطا التمرير أوّلُ ما يغيب — قبل المحتوى (‎pk--chromeout‎)؛
+       · والطيُّ يبدأ في الحال: كان منحناه ‎(.6, 0, …)‎ مع تأخير ‎10%‎ فلا تتحرّك القامةُ نحو ‎150ms‎ — الآن يبدأ ليّنًا بلا وقفة؛
+       · وما تحت المساهمة على طبقاتٍ مستقلّة أثناء الحركة: تقصيرُ القامة يزيح كلَّ ما تحتها فيُعاد رسمُه في كلّ إطار (قيس ‎~35ms‎ للإطار) */
+    fp.classList.add('pk--chromeout');
+    const below = []; for (let x = fp.nextElementSibling; x; x = x.nextElementSibling) { x.style.willChange = 'transform'; below.push(x); }
+    const D = 540 * (window.__pkfxSlow || 1), ez = 'cubic-bezier(.4, .1, .2, 1)', an = [];
     const fr = fp.getBoundingClientRect(), h1 = fr.height;
     /* قامةُ الصفّ الضيّق: ترويستُه وسطرُ أيقوناته وإعجابُه (كما في الصفّ) */
     const hd = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd');
@@ -11815,8 +12153,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const pane = fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`);
     /* ١. المحتوى يغيب أوّلًا */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : []),
-      ...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot) *'), ...fp.querySelectorAll('.post-ytmain > .pk-hdline:not(.pk-ftline)')]
-      .forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
+      ...fp.querySelectorAll('.post-ytmain > .pk-pubfoot *')]
+      .filter(pkNoArc).forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, easing: 'ease-in', fill: 'forwards' })));
+    pkLinesOut(fp, D, an);
     fp.querySelectorAll('.pk-maxdock').forEach(x => an.push(x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .25, fill: 'forwards' })));
     /* ٢. المربّعُ ينطوي إلى أيقونته */
     const blk = fp.querySelector(`:scope > .pk-band path.pk-blk[data-k="${k}"]`), band = fp.querySelector(':scope > .pk-band');
@@ -11827,19 +12166,42 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       pg = pg || getComputedStyle(document.body).backgroundColor; }
     const pcMorph = (q, from, fill) => {
       const sv = pkIcRowSv[id][q]; if (!sv || !pkIcRowAt[id][q]) return;
-      const t = slot(PK_IC_KEYS.indexOf(q)), px = v => v + 'px', o = { duration: D, delay: D * .1, fill: 'both' };
+      const t = slot(PK_IC_KEYS.indexOf(q)), px = v => v + 'px', o = { duration: D, delay: D * .05, fill: 'both' };
       const g = document.createElement('span'), m = document.createElement('span');
       g.className = 'pc-mgap'; m.className = 'pc-morph'; g.setAttribute('aria-hidden', 'true'); m.setAttribute('aria-hidden', 'true');
       [g, m].forEach(x => { x.style.setProperty('--pc-pg', pg); Object.assign(x.style, { left: px(t.left), top: px(t.top), width: px(t.width), height: px(t.height) }); });
       m.innerHTML = '<i class="pc-morph__pane"></i>' + (from ? '' : (sv.html || ''));
       document.body.append(g, m); pcFl.push(g, m);
-      an.push(g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: .12 }, { transform: 'none', offset: .42 }, { transform: 'none' }], { ...o, easing: 'ease-out' }));
+      /* (المرحلة ٢ · طلبُ صاحب الموقع) الفجوةُ تتبع الزرَّ لا الساعة: كانت تنفتح بين ‎12%‎ و‎42%‎ والزرُّ يصل عند ‎100%‎ — فتبقى
+         فارغةً نحو ‎300ms‎. الآن تنفرج حين يقترب الزرُّ وتكتمل لحظةَ وصوله، والزرّان الآخران يظهران معها */
+      an.push(g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: .55 }, { transform: 'none', offset: .88 }, { transform: 'none' }], { ...o, easing: 'ease-out' }));
       if (from) {
         const pn = m.firstChild; pn.style.background = fill;
+        /* (طلبُ صاحب الموقع: «الزوايا اللي تحت يمين ويسار حقت مكان الزر اللي برا تنرسم بقفز») المساحةُ الطائرةُ مستطيلٌ مدوَّر —
+           فكانت فجوتا زرَّي المساحتين الأخريين في زاويتيها السفليّتين تمتلئان في أوّل إطار. فتُغطّى كلُّ فجوةٍ بغطاءٍ بلون ما خلفها
+           على شكلها نفسِه (زاويتُها الداخليّة وانحناءتا حافّتيها)، ثمّ ينكمش الغطاءُ إلى زاويته في أوّل الطيّ — فتلتئم أمام العين */
+        (card => (card && card.pkNch || []).filter(n => n.k === q && n.nw > 1 && n.nh > 1))(fp).forEach(n => {
+          const rgt = n.sd === 'r', r = Math.min(16, n.nw / 2, n.nh / 2), sd = rgt ? 'right' : 'left';
+          const fil = `radial-gradient(circle at ${rgt ? '0' : '100%'} 0, transparent ${Math.max(0, r - .5)}px, ${pg} ${r + .5}px)`;
+          const cap = document.createElement('i'); cap.className = 'pc-morph__cap';
+          Object.assign(cap.style, { position: 'absolute', bottom: '0', [sd]: '0', width: px(n.nw + r), height: px(n.nh + r), transformOrigin: `${sd} bottom` });
+          cap.innerHTML = `<i style="position:absolute;bottom:0;${sd}:0;width:${n.nw}px;height:${n.nh}px;background:${pg};border-top-${rgt ? 'left' : 'right'}-radius:${n.c}px"></i>`
+            + `<i style="position:absolute;bottom:0;${sd}:${n.nw}px;width:${r}px;height:${r}px;background:${fil}"></i>`
+            + `<i style="position:absolute;bottom:${n.nh}px;${sd}:0;width:${r}px;height:${r}px;background:${fil}"></i>`;
+          m.appendChild(cap);
+          an.push(cap.animate([{ transform: 'none' }, { transform: 'scale(0)' }], { duration: D * .32, delay: D * .05, easing: 'cubic-bezier(.45, 0, .25, 1)', fill: 'forwards' }));
+        });
+        /* وظلُّها الخارجيُّ (حلقةُ ‎1px‎ وظلُّ القاع) يُرسم خارجها فلا يغطّيه الغطاء — فيُرى إطارُ المستطيل حول الفجوة. فيبدأ شفّافًا
+           (المساحةُ نفسُها بلا هذا الظلّ) ويظهر بعد التئامها، كلّما صارت زرًّا */
+        { const s1 = getComputedStyle(m).boxShadow;   /* (‎m‎ في الصفحة الآن: أُلحق قبل هذا) */
+          if (s1 && s1 !== 'none') {
+            const s0 = s1.split(/,\s*(?=rgba?\()/).map(e => /inset/.test(e) ? e : e.replace(/^rgba?\([^)]*\)/, 'rgba(0, 0, 0, 0)')).join(', ');
+            an.push(m.animate([{ boxShadow: s0 }, { boxShadow: s0, offset: .32 }, { boxShadow: s1 }], { duration: D, delay: D * .05, easing: 'ease-out', fill: 'both' }));
+          } }
         an.push(m.animate([{ left: px(from.left), top: px(from.top), width: px(from.width), height: px(from.height), borderRadius: '16px' },
           { left: px(t.left), top: px(t.top), width: px(t.width), height: px(t.height), borderRadius: '14px' }], { ...o, easing: ez }));
         an.push(pn.animate([{ opacity: 1 }, { opacity: 1, offset: .2 }, { opacity: 0, offset: .75 }, { opacity: 0 }], o));
-      } else an.push(m.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(.4)', opacity: 0, offset: .4 }, { transform: 'none', opacity: 1 }], { ...o, easing: ez }));
+      } else an.push(m.animate([{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(.4)', opacity: 0, offset: .55 }, { transform: 'none', opacity: 1, offset: .9 }, { transform: 'none', opacity: 1 }], { ...o, easing: 'ease-out' }));
     };
     if (blk && band && pcM) {
       const bb = blk.getBBox(), cs = getComputedStyle(blk);
@@ -11852,34 +12214,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const g = pkIcGhost(fp, blk, bb); g.style.transformOrigin = '';
       band.after(g); blk.style.opacity = '0';
       an.push(g.animate([{ clipPath: pkIcInset(W, H, { x: bb.x - 1, y: bb.y - 1, w: bb.width + 2, h: bb.height + 2 }, 16), opacity: 1 },
-        { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+        { clipPath: pkIcInset(W, H, a, 8), opacity: 1, offset: .85 }, { clipPath: pkIcInset(W, H, a, 8), opacity: 0 }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' }));
     }
     /* والمساهمةُ تقصر معه، والتذييلُ يلزم حافّتها */
     /* الإطارُ يبدأ أعلى من الصفّ بقدر فرق الهوامش (ومحتواه — الترويسةُ — في الموضع نفسِه): فلا تُمسّ الهوامشُ ولا يتحرّك شيءٌ من الترويسة،
        وتُحسب المواضعُ والقامةُ بذلك الفرق، فتبلغ الأيقوناتُ والإعجابُ والمساهمةُ التاليةُ مواضعَها في الصفّ بلا قفزة */
-    an.push(fp.animate([{ height: h1 + 'px' }, { height: hT + 'px' }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+    an.push(fp.animate([{ height: h1 + 'px' }, { height: hT + 'px' }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' }));
     /* خطُّ التذييل وأدواتُه وحافّتُه في الرسم تغيب مع المحتوى (لا تُرفع فوق الترويسة)، وتنزل مع الحافّة ما دامت ظاهرة */
     [...fp.querySelectorAll('.post-ytmain > :is(.pk-ftline, .pk-pubfoot)'), ...fp.querySelectorAll(':scope > .pk-band .pk-band__foot')].forEach(x =>
-      an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })));
+      an.push(x.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0, offset: .3 }, { transform: `translateY(${(h0 - h1) * .3}px)`, opacity: 0 }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' })));
     /* والإعجابُ يمضي مباشرةً إلى موضعه في الصفّ على منحنى القامة نفسِه، فلا يعلو ولا يُقصّ */
     fp.querySelectorAll('.post-ytmain > .post-react').forEach(x => {
       const q = x.getBoundingClientRect(), t = pkIcRowRe[id];
       const dx = 0, dy = t ? t.y + dT - (q.top - fr.top) : h0 - h1;
       x.style.position = 'relative'; x.style.zIndex = '3';
-      an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      an.push(x.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px)` }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' }));
     });
     /* والعنوانُ يُفسح للأيقونات في سطره (موضعُه في الصفّ) */
     { const t0 = pkIcRowTtl[id], tt = fp.querySelector('.post-yt > .post-ytmain > .x3-pkhd > .x3-pkttl');
       if (t0 && tt) { const r1 = tt.getBoundingClientRect(), dx = (en ? main.left + t0.x : main.right + t0.xr - t0.r.width) - r1.left;
-        if (Math.abs(dx) > .5) an.push(tt.animate([{ transform: 'none' }, { transform: `translateX(${dx}px)` }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' })); } }
+        if (Math.abs(dx) > .5) an.push(tt.animate([{ transform: 'none' }, { transform: `translateX(${dx}px)` }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' })); } }
     /* ٣. الأيقوناتُ إلى سطرها */
     const flies = [];
     (pkIcRowSep[id] || []).forEach(g => { const sf = pkIcGoFly(g, main, fr.top + dT);
-      if (sf) { flies.push(sf); an.push(sf.animate([{ opacity: 0 }, { opacity: 0, offset: .6 }, { opacity: 1 }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'both' })); } });
+      if (sf) { flies.push(sf); an.push(sf.animate([{ opacity: 0 }, { opacity: 0, offset: .6 }, { opacity: 1 }], { duration: D, delay: D * .05, easing: 'ease-out', fill: 'both' })); } });
     { const art = fp.querySelector('.x3-pkhd > .x3-art'), sh = pkIcRowArtSh[id];
-      if (art && sh) { const s0 = getComputedStyle(art).boxShadow; an.push(art.animate([{ boxShadow: s0 }, { boxShadow: s0, offset: .5 }, { boxShadow: sh }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'forwards' })); } }
+      if (art && sh) { const s0 = getComputedStyle(art).boxShadow; an.push(art.animate([{ boxShadow: s0 }, { boxShadow: s0, offset: .5 }, { boxShadow: sh }], { duration: D, delay: D * .05, easing: 'ease-out', fill: 'forwards' })); } }
     { const gf = pkIcGoFly(pkIcRowGoAt[id], main, fr.top + dT);
-      if (gf) { flies.push(gf); an.push(gf.animate([{ opacity: 0 }, { opacity: 0, offset: .55 }, { opacity: 1 }], { duration: D, delay: D * .1, easing: 'ease-out', fill: 'both' })); } }
+      if (gf) { flies.push(gf); an.push(gf.animate([{ opacity: 0 }, { opacity: 0, offset: .55 }, { opacity: 1 }], { duration: D, delay: D * .05, easing: 'ease-out', fill: 'both' })); } }
     PK_IC_KEYS.forEach((q, i) => {
       const inRow = fp.querySelector(`.pk-icrow [data-pkic="${q}"]`);
       const el = inRow && inRow.offsetParent ? inRow : (q === 'mid' ? fp.querySelector('.pk-blkh--mid .pk-blkh__ic') : fp.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[q]} .pk-blkh__ic`));
@@ -11907,16 +12269,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         /* لافتةُ الغلاف: الرسمُ إلى رسم الزرّ، بلون أيقونات الصفّ من أوّلها (لا ذهبيّة)، ويصغر إلى حجمه قبل أن يبلغ موضعه */
         const b1 = sv1.getBoundingClientRect(), t2 = { left: en ? main.left + sv0.x : main.right + sv0.xr - sv0.w, top: fr.top + dT + sv0.y };
         const s2 = b1.width ? sv0.w / b1.width : 1, ex = (t2.left + sv0.w / 2) - (b1.left + b1.width / 2), ey = (t2.top + sv0.h / 2) - (b1.top + b1.height / 2);
-        an.push(mv.animate([{ transform: 'none', color: cs.color }, { color: sv0.c, offset: .12 }, { transform: `translate(${ex * .4}px, ${ey * .4}px) scale(${s2})`, offset: .4 }, { transform: `translate(${ex}px, ${ey}px) scale(${s2})`, color: sv0.c }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+        an.push(mv.animate([{ transform: 'none', color: cs.color }, { color: sv0.c, offset: .12 }, { transform: `translate(${ex * .4}px, ${ey * .4}px) scale(${s2})`, offset: .4 }, { transform: `translate(${ex}px, ${ey}px) scale(${s2})`, color: sv0.c }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' }));
         return;
       }
-      an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .1, easing: ez, fill: 'forwards' }));
+      an.push(mv.animate([{ transform: bm ? cs.transform : 'none', opacity: cs.opacity }, { transform: `translate(${dx}px, ${dy}px) scale(${sc})`, opacity: 1 }], { duration: D, delay: D * .05, easing: ez, fill: 'forwards' }));
     });
     /* والنسخةُ الطائرة ثابتةٌ في النافذة: إن تحرّكت المساهمةُ (يتقلّص ما تحت التمرير فيُقصَر مداه) تتبعها */
     let live = true;
     flies.push(...pcFl);
     if (flies.length) { const y0 = fr.top; const follow = () => { if (!live) return; const d = fp.getBoundingClientRect().top - y0; flies.forEach(x => { x.style.translate = `0px ${d}px`; }); requestAnimationFrame(follow); }; requestAnimationFrame(follow); }
-    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { live = false; done(); flies.forEach(x => x.remove());
+    /* وإعادةُ رسم القسم بعد أن يُرسم إطارُ الوصول نفسُه — كانت في إطاره فتوقفه ‎~120ms‎ لحظةَ الهبوط (والصورةُ الأخيرةُ ثابتةٌ بـ‎fill‎ حتى تُبدَّل) */
+    Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { live = false;
+      requestAnimationFrame(() => { const mc = new MessageChannel(); mc.port1.onmessage = () => { below.forEach(x => { x.style.willChange = ''; }); done(); flies.forEach(x => x.remove()); }; mc.port2.postMessage(0); });
  });
   }
   function pkIcToggle(post, k) {
@@ -12014,8 +12378,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           ga.finished.then(() => { blk.style.opacity = ''; g.remove(); }, () => { blk.style.opacity = ''; g.remove(); });
         }
         const pane = post.querySelector(`.post-ytmain > .pk-split > ${PK_PANE[k]}`), midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
+        post.classList.add('pk--chrome0');
         [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)'), ...(pane ? [...pane.children].filter(x => !x.classList.contains('pk-blkh')) : [])]
-          .forEach(x => an.push(x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' })));
+          .filter(pkNoArc).forEach(x => { const a = x.animate(pkRiseKf(x), { duration: D * .45, delay: D * .5, easing: 'ease-out', fill: 'backwards' }); an.push(a); a.finished.then(() => pkScrRefit(x), () => {}); });
       } else {
         /* المربّعُ القديمُ ينطوي إلى أيقونته في سطرها، ثمّ يغيب */
         const tg = post.querySelector(`.pk-icrow [data-pkic="${old}"]`);
@@ -12032,11 +12397,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         const msg = post.querySelector('.pk-split--none > .pk-none');
         if (msg) an.push(msg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D * .5, delay: D * .45, easing: 'ease-out', fill: 'backwards' }));
       }
-      Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { if (ghost) ghost.remove(); post.pkBlkHold = false; post.pkIcBusy = false; if (post.isConnected) pkBandFit(post); });
+      Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { if (ghost) ghost.remove(); post.pkBlkHold = false; post.pkIcBusy = false; post.classList.remove('pk--chrome0'); if (post.isConnected) pkBandFit(post); });
     };
     /* المحتوى القديمُ يغيب أوّلًا */
     if (oldPane && !bkReduce()) {
-      post0.pkBlkHold = true;
+      post0.pkBlkHold = true; post0.classList.add('pk--chromeout');   /* أوّلَ ما يغيب */
       const fade = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), ...[...oldPane.children].filter(x => !x.classList.contains('pk-blkh'))]
         .map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .22, easing: 'ease-in', fill: 'forwards' }));
       Promise.all(fade.map(a => a.finished.catch(() => {}))).then(go);
@@ -25959,6 +26324,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     });
     pkKcvNotch(card, nchN);
+    card.pkNch = nchN;   /* (مقاسُ الفجوات الآن — يحمله الطيُّ إلى المساحة الطائرة فتلتئم فيها بحركة) */
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
   }
   function pkBandDraw(card, tongues) {
@@ -26222,14 +26588,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const w = E.getBoundingClientRect().width, m = pkFxOuter(E, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
-    E.style.overflow = 'hidden';
+    E.style.overflow = 'hidden'; E.classList.add('pk--chrome0');   /* أقواسُها وشريطاها بعد أن تنبسط (المرحلة ١) */
     const pin = pkFxPin(E);   /* محتواها على عرضه الأخير والحافّةُ تقصّه — فلا يُعاد ترتيبُه في كلّ إطار */
     const cs = getComputedStyle(E), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
     const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
     /* من عرضٍ صفرٍ حقًّا: الحاشيةُ تنبسط معها (وإلّا بدأت بعرض الحاشية) */
     const an = [E.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }, { flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }], { duration: D, easing: ez })];
     os.forEach(([el, w0, w1]) => { if (Math.abs(w1 - w0) > .5) an.push(el.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w0 + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: w1 + 'px' }], { duration: D, easing: ez })); });
-    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => { E.style.overflow = ''; E.classList.remove('pk--chrome0'); sized.forEach(x => { x.style.boxSizing = ''; }); pin(); });
     bkHoldAnims(an);   /* الكتابُ يُجمَّد حتى تنبسط */
     return true;
   }
@@ -26347,7 +26713,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* ولا ملخّصَ بينهما: الآخرُ يأخذ القسمةَ كلَّها، وكلٌّ يلزم حافّتَه (الخارجةُ تنطوي إلى حافّتها لا نحوه) */
     const noMid = !sp.querySelector(':scope > .kt-view');
     if (noMid && other) sp.style.justifyContent = 'space-between';
-    L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box';
+    L.style.overflow = 'hidden'; L.style.boxSizing = 'border-box'; L.classList.add('pk--chromeout');   /* أوّلَ ما يغيب (المرحلة ١) */
     pkFxPin(L);   /* يخرج: محتواه ثابتُ العرض حتى يُرفع (لا يُعاد ترتيبُ شجرةٍ ممتلئةٍ في كلّ إطار) */
     [...L.children].forEach(c => c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
       { duration: D * .35, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }));
@@ -29646,13 +30012,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       c.getContext('2d').drawImage(src, 0, 0);
       /* تُبدَّل الصورةُ وحدها: طبقةُ النصّ فوقها تبقى (والتحديدُ الجاري عليها) إلّا إن تبدّل عرضُ الصفحة */
       const oc = el.querySelector(':scope > canvas'); if (oc) oc.replaceWith(c); else el.prepend(c);
-      bkScrTL(b, el);
+      bkScrTLSoon(b, el);
       bkScrTone(b);   /* صفحةٌ رُسمت للتوّ قد تكون هي التي خلف الزاوية */
     }).catch(() => { if (el.dataset.w == w) el.dataset.w = ''; });
   }
   /* ===== طبقةُ النصّ في الصفحات المتتالية (طلبُ صاحب الموقع): التظليلُ وقائمتُه وأدواتُ التذييل كما في الصفحة والصفحتين =====
      لكلّ صفحةٍ مرسومةٍ طبقتُها الشفّافة بكلمات الملفّ (‎pdf.js renderTextLayer‎) داخلها، بعرضها على الشاشة — فتمشي معها في التمرير
      والتقريب، وتُبنى من جديد إذا تبدّل عرضُها. وعليها يجري التحديدُ الهندسيّ والمربّعُ ونقرُ التظليل كما في الكتاب */
+  /* ===== طبقةُ النصّ تُبنى بعد الفتح وفي فراغ المتصفّح (ROADMAP-SPACE-MOTION · المرحلة ٥ · طلبُ صاحب الموقع) =====
+     كانت تُبنى مع رسم كلّ صفحة — ‎5‎ طبقاتٍ في كلّ فتح (نحو ‎1900‎ قطعة نصّ، وأوّلُ قياسٍ بعد كلٍّ منها يفرض تخطيطَها ‎~40ms‎) —
+     فتقع كلُّها داخلَ حركة الفتح: قيس ‎876–1006ms‎ من الوقفات في ثانيته الأولى و‎3–4‎ إطارات فقط. وهي لا تلزم إلّا للتحديد والتظليل،
+     فتُؤجَّل حتى تهدأ الحركة، ثمّ واحدةٌ في كلّ فراغ (‎requestIdleCallback‎) — الأقربُ إلى موضع القراءة أوّلًا */
+  function bkScrTLSoon(b, el) {
+    if (el) (b.tlQ = b.tlQ || new Set()).add(el);
+    if (b.tlQT || !b.tlQ || !b.tlQ.size) return;
+    const idle = window.requestIdleCallback || (f => setTimeout(f, 120));
+    const run = () => {
+      b.tlQT = 0;
+      if (!b.scroll || !b.tlQ) return;
+      if (bkFx(b)) { b.tlQT = 1; return bkFxLater(b, 'tlQF', () => { b.tlQT = 0; bkScrTLSoon(b); }); }
+      const po = b.view && b.view.closest('.post');   /* (والمساهمةُ نفسُها في اتّساعها أو طيّها) */
+      if (po && po.pkBlkHold) { b.tlQT = setTimeout(() => { b.tlQT = 0; bkScrTLSoon(b); }, 150); return; }
+      let best = null, bd = 1e9;
+      for (const x of b.tlQ) { if (!x.isConnected) { b.tlQ.delete(x); continue; } const d = Math.abs(+x.dataset.k - (b.pos || 1)); if (d < bd) { bd = d; best = x; } }
+      if (best) { b.tlQ.delete(best); bkScrTL(b, best); }
+      if (b.tlQ.size) b.tlQT = idle(run, { timeout: 1000 });
+    };
+    b.tlQT = idle(run, { timeout: 1000 });
+  }
   function bkScrTL(b, el) {
     if (bkFx(b)) { (b.tlWait = b.tlWait || new Set()).add(el); return bkFxLater(b, 'tlT', () => { const s = b.tlWait; b.tlWait = null; if (s) s.forEach(x => bkScrTL(b, x)); }); }
     if (!b.scroll || !b.doc || b.doc.__prot || !window.pdfjsLib || !el.isConnected) return;   /* (المحميُّ بلا نصّ) */
@@ -37337,7 +37724,9 @@ void main() {
   });
 
   /* ---------- بروفايل الحساب: صورة + اسم أسفل الشريط الجانبي · نقره يفتح صفحة الحساب ---------- */
-  const profAvatar = () => state.profile.img ? `<img src="${state.profile.img}" alt="">` : FLAT_AVATAR;
+  /* ===== وأثناء الرفع: أيقونةُ تحميلٍ مكانَ الوجه (طلبُ صاحب الموقع) =====
+     فإن ظهرت الصورةُ فقد حُفظت على الخادم — لا رسالةَ تقول ذلك ولا تقول ضدّه */
+  const profAvatar = () => profUp ? AV_LOAD : state.profile.img ? `<img src="${assetURL(state.profile.img)}" alt="">` : FLAT_AVATAR;
   const logoutIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h9"/></svg>';
   function renderProfile() {
     const el = $('#side-profile');
@@ -37642,6 +38031,10 @@ void main() {
     profLast = u.name || '';          /* ما جاء من الخادم لا يُدفع إليه */
     state.profile.name = u.name || (swap ? '' : state.profile.name) || '';
     state.profile.email = u.email || '';
+    /* والصورةُ المعلَّقةُ (اختيرت ولم يؤكّدها الخادم) تغلب صورةَ الخادم ما دام الحسابُ هو هو:
+       كانت تُمحى في أوّل إقلاع فتعود القديمة — الشكوى بعينها. فتبقى، ويُعاد رفعُها */
+    if (swap) delete state.profile.imgPending;
+    if (state.profile.imgPending) setTimeout(profRetry, 1500);
     if (u.img) state.profile.img = u.img;
     else if (swap) state.profile.img = '';
     if (swap) state.profile.phone = '';
@@ -37753,21 +38146,63 @@ void main() {
      تُرفع إلى المستودع (المعنونِ بالمحتوى) ثمّ يُبعث عنوانُها. ولا تُرسل ‎data:‎:
      نقطةُ البروفايل ترفضها، وصورةٌ خامٌ في جدول المستخدمين تُثقل كلَّ قراءةِ
      مساهمةٍ لأنّ الاسمَ والصورةَ يُقرآن معها. */
-  async function profImg(dataUrl) {
-    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return;
+  /* ===== ولا فشلَ صامت (ROADMAP-PROFILE-IMG م٢) =====
+     كلُّ محطّةٍ تُكتب في سجلّ الإقلاع (‎prof:…‎)، وكلُّ فشلٍ يُقال — مرّةً في الجلسة
+     حين تكون الإعادةُ تلقائيّة، فلا يُزعَج بها في كلّ محاولة. */
+  let profBusy = false;
+  async function profImg(dataUrl, fromPick) {
+    if (!AUTH_SRV || isGuest() || !dataUrl || dataUrl.indexOf('data:') !== 0) return false;
+    if (profBusy) return false;
     const blob = dataToBlob(dataUrl);
-    if (!blob) return;
+    if (!blob) { bootMark('prof:blob'); delete state.profile.imgPending; save(); return false; }
+    profBusy = true;
+    /* أيقونةُ التحميل تظهر من أوّل الطلب حتى آخره، في الاختيار وفي الإعادة.
+       وما فشل لسببٍ عابرٍ يُعاد بصمت: لا رسالةَ «لم تُحفظ» (طلبُ صاحب الموقع) */
+    profUp = true; renderProfile(); renderAcctPage();
+    /* ===== والفشلُ يُقال بكلمتين، مرّةً عند الاختيار (قرارُ صاحب الموقع) =====
+       «فشل رفع الصورة» — بلا خادمٍ ولا شرح. وإعادةُ المحاولة في الخلفية صامتة:
+       إن نجحت ظهرت الصورة. والسببُ بعينه في الدفتر (‎prof:…‎ و‎med:…‎) */
+    const failed = () => { if (fromPick) toast(T().profImgFail); };
     try {
-      const url = await medUp(blob);
-      if (!url) return;
-      const r = await apiFetch(authURL('me'), {
-        method: 'PATCH', credentials: 'same-origin',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ img: url }),
-      });
-      if (r.status === 413 || r.status === 429) toast(T().srvTooBig);
-    } catch (e) { /* لا شبكة: تبقى محلّيّةً حتى يُعاد الاختيار */ }
+      medWhy = '';
+      const url = await medUp(blob, true);      /* صامتة: الرسالةُ هنا وحدها */
+      if (!url) {
+        bootMark('prof:up:' + (medWhy || 'fail'));
+        /* صورةٌ مرفوضةٌ لذاتها (نوعٌ أو حجم) لا تُعاد — والإعادةُ لا تغيّرها */
+        if (medWhy === 'type' || medWhy === 'too-big') { delete state.profile.imgPending; save(); }
+        failed();
+        return false;
+      }
+      let r;
+      try {
+        r = await apiFetch(authURL('me'), {
+          method: 'PATCH', credentials: 'same-origin',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ img: url }),
+        });
+      } catch (e) { bootMark('prof:patch:net'); failed(); return false; }
+      if (!r.ok) {
+        bootMark('prof:patch:' + r.status);
+        if (r.status === 400) { delete state.profile.imgPending; save(); }
+        failed();
+        return false;
+      }
+      /* حُفظت: تُرفع علامةُ التعليق، وتصير الصورةُ عنوانَ الخادم بدل ‎data:‎ الثقيلة في الدرج */
+      bootMark('prof:ok');
+      if (state.profile.imgPending === dataUrl) delete state.profile.imgPending;
+      state.profile.img = url; save(); renderProfile(); renderAcctPage();
+      return true;
+    } catch (e) { bootMark('prof:err'); failed(); return false; }
+    finally { profBusy = false; profUp = false; renderProfile(); renderAcctPage(); }
   }
+  /* ===== وما عُلِّق يُعاد حتى يصل =====
+     عند الإقلاع (من ‎authTake‎)، وعند عودة الشبكة، وعند الرجوع إلى الصفحة */
+  function profRetry() {
+    const d = state.profile && state.profile.imgPending;
+    if (d && !isGuest()) profImg(d, false);
+  }
+  window.addEventListener('online', profRetry);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') profRetry(); });
 
   /* ---------- جسرٌ للوحة الأدمن ----------
      اللوحةُ تفتح جلسةَ الموقع بنفسها (‎/api/auth/site‎) بعد أن يكون المحرّكُ قد
@@ -37945,6 +38380,7 @@ void main() {
      كلاهما يردّ ‎null‎، وحكمُهما نقيضان: الشبكةُ تُعاد، والحجمُ لا يُعاد أبدًا
      مهما أُعيد. فلو خُلطا لَبقيت المساهمةُ تُحاول إلى الأبد بلا كلمة. */
   let medBig = false;
+  let medWhy = '';                 /* سببُ آخرِ رفضٍ من ‎medUp‎ — يقرؤه ‎profImg‎ ليعرف أيُعيد أم لا */
 
   /* ============================================================
      وحالُ المساهمة عند الدفع — ولا يُخفَّض ما جاء من الخادم منشورًا
@@ -37967,7 +38403,7 @@ void main() {
     'too-big': 'الصورة أكبر من الحدّ',
     net: 'تعذّر الوصول للخادم',
   };
-  async function medUp(blob) {
+  async function medUp(blob, quiet) {
     let r = null;
     try {
       r = await apiFetch((ASSET_BASE ? new URL('api/media', window.AC_API_BASE || ASSET_BASE).href
@@ -37975,18 +38411,19 @@ void main() {
         method: 'POST', credentials: 'same-origin',
         headers: { 'content-type': blob.type || 'application/octet-stream' }, body: blob,
       });
-    } catch (e) { bootMark('med:net'); return null; }
-    if (r.status === 413) { medBig = true; bootMark('med:413'); return null; }
+    } catch (e) { medWhy = 'net'; bootMark('med:net'); if (!quiet && typeof toast === 'function') toast(MED_SAY.net); return null; }
+    if (r.status === 413) { medBig = true; medWhy = 'too-big'; bootMark('med:413'); return null; }
     if (!r.ok) {
       let j = null;
       try { j = await r.json(); } catch (e) { /* ردٌّ بلا متن */ }
       const why = (j && j.error) || ('http' + r.status);
-      bootMark('med:' + why);
-      if (typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
+      medWhy = why;
+      bootMark('med:' + why + (j && j.ref ? '#' + j.ref : ''));   /* ‏‎#ref‎ يطابق سطرَه في ‎errlog‎ على الخادم */
+      if (!quiet && typeof toast === 'function' && MED_SAY[why]) toast(MED_SAY[why]);
       return null;
     }
     const j = await r.json().catch(() => null);
-    if (!j || !j.url) { bootMark('med:noUrl'); return null; }
+    if (!j || !j.url) { medWhy = 'noUrl'; bootMark('med:noUrl'); return null; }
     bootMark('med:ok:' + (j.size | 0));
     return j.url;
   }
@@ -38473,10 +38910,13 @@ void main() {
       const r = await apiFetch(udocURL(), {
         method: 'PUT', credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ kind: 'nook', data: body }),
+        /* ‏‎base‎: النسخةُ التي بُني عليها — فإن كتب جهازٌ آخر بعدها ردّها الخادمُ ‎409‎
+           فتُجذب وتُدمج ثمّ تُدفع، ولا يُكتب فوق ما لم يُرَ (ROADMAP-DATA-INTEGRITY م٤-١) */
+        body: JSON.stringify({ kind: 'nook', data: body, base: nookRev }),
       });
-      if (r.status === 409) {                        /* الخادمُ منع محوًا: تُقرأ نسختُه */
-        nookOff = 'conflict'; bootMark('nook:409');
+      if (r.status === 409) {                        /* الخادمُ منع محوًا أو نسخةً قديمة: تُقرأ نسختُه */
+        let why = ''; try { why = ((await r.json()) || {}).error || ''; } catch (e) {}
+        nookOff = 'conflict'; bootMark('nook:409' + (why ? ':' + why : ''));
         nookGot = false; nookPull();
         return;
       }
@@ -38498,6 +38938,26 @@ void main() {
     nookT = setTimeout(nookPush, 3000);
   }
   window.acNookSync = nookPull;                      /* يُنادى بعد الدخول */
+
+  /* ===== ودفترُ الإقلاع إلى الحساب (ROADMAP-DATA-INTEGRITY م٥-٣) =====
+     شُخِّصت حادثةُ الأترام بـ‎acBootLog()‎ من متصفّح صاحب الموقع — واحتاج ذلك
+     وصولًا إلى جهازه. فيُرفع الدفترُ (عشرون سطرًا، أعدادٌ لا محتوى) إلى حسابه:
+     بعد الإقلاع بعشرين ثانية، وعند الاختفاء — مرّةً في خمس دقائق على الأكثر */
+  let bootUpAt = 0;
+  function bootUp() {
+    if (!SRV_ON() || isGuest() || !state.uid) return;
+    if (Date.now() - bootUpAt < 300000) return;
+    bootUpAt = Date.now();
+    try {
+      apiFetch(udocURL(), {
+        method: 'PUT', credentials: 'same-origin', keepalive: true,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind: 'boot', data: { at: Date.now(), tab: WV_TAB, rows: bootRead_() }, force: true }),
+      }).catch(() => {});
+    } catch (e) {}
+  }
+  setTimeout(bootUp, 20000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') bootUp(); });
 
   /* ============================================================
      سجلُّ الاختبارات ⇐ الحساب (م٢)
@@ -45363,9 +45823,7 @@ void main() {
      ولا يُبنى عليه شيءٌ في المنطق — أداةُ نظرٍ لا غير */
   window.acCheck = function () {
     const L = [];
-    let raw = '';
-    try { raw = localStorage.getItem(LS_KEY) || ''; } catch (e) {}
-    const mb = raw.length * 2 / 1048576;
+    const mb = window.acDrawerSize() * 2 / 1048576;
     L.push('١ الحصّة   : ' + mb.toFixed(2) + ' م.ب' + (mb > 6 ? '  ← عاليةٌ! الحدُّ 10 مشتركة' : '  سليم'));
     L.push('٢ المفتاح  : record = ' + (xtS ? xtS.record : '(لم تُفتح النافذة بعد ⇒ ' + (state.xtS ? state.xtS.record : 'لا محفوظ') + ')'));
     L.push('٣ السجلات  : srs = ' + Object.keys(state.srs || {}).length

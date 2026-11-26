@@ -2,6 +2,7 @@
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
 import { db } from '../_db.js';
+import { oops } from '../_err.js';
 
 /* ============================================================
    ‎/api/udoc‎ — وثائقُ المستخدم في حسابه (م٢)
@@ -48,7 +49,9 @@ const XT = /^xt:[a-z0-9]{4,40}$/;
    فلا يكتب جهازٌ فوق جهاز، ولا يُعدّ يومٌ مرّتين.
      GET /api/udoc?list=act  ⇐ أجهزتي كلُّها */
 const ACT = /^act:[a-z0-9]{4,40}$/;
-const okKind = k => KINDS.has(k) || XT.test(k) || ACT.test(k);
+/* ‏‎boot‎: دفترُ الإقلاع من متصفّح صاحب الحساب (م٥-٣) — يُقرأ للتشخيص بلا وصولٍ إلى المتصفّح.
+   ولا يُنسخ في ‎udoc_hist‎: سطورُه تتجدّد ولا قيمةَ لقديمها */
+const okKind = k => KINDS.has(k) || k === 'boot' || XT.test(k) || ACT.test(k);
 const LISTS = new Map([['xt', 'xt:%'], ['act', 'act:%']]);
 
 const enc = new TextEncoder();
@@ -150,24 +153,67 @@ export async function onRequest({ request, env }) {
 
       const cur = await db.prepare('SELECT data, rev FROM udoc WHERE uid = ? AND kind = ?')
         .bind(s.uid, kind).first();
-      if (cur && !b.force) {
-        let old = null;
-        try { old = JSON.parse(cur.data); } catch (e) { old = null; }
-        if (count(old) && !count(d)) return J({ error: 'would-wipe', had: count(old) }, 409);
+      const curRev = cur ? (cur.rev | 0) : 0;
+
+      /* ===== ولا يُكتب على نسخةٍ لم يرها الكاتب (ROADMAP-DATA-INTEGRITY م٤-١) =====
+         من يرسل ‎base‎ (الـ‎rev‎ الذي بنى عليه) يُكتب له بشرط أن يكون هو ما على
+         الخادم. وإلّا ‎409 stale‎ بالنسخة الحاليّة، فيدمج ثمّ يعيد. ومن لا يرسله
+         (عميلٌ قديم، أو نوعٌ لكلّ جهاز) يُكتب له كما كان. */
+      const base = (typeof b.base === 'number' && b.base >= 0) ? (b.base | 0) : null;
+      if (base !== null && cur && curRev !== base) {
+        return J({ error: 'stale', rev: curRev }, 409);
       }
 
-      const rev = (cur ? (cur.rev | 0) : 0) + 1;
-      await db.prepare(
+      let old = null;
+      if (cur) { try { old = JSON.parse(cur.data); } catch (e) { old = null; } }
+      if (cur && !b.force) {
+        if (count(old) && !count(d)) return J({ error: 'would-wipe', had: count(old) }, 409);
+      }
+      /* ===== ولا تسقط الأترامُ دفعةً بلا شاهد (م٤-٢) =====
+         الحارسُ نفسُه الذي في العميل: حذفُ ترمٍ فعلُ إنسانٍ يقع واحدًا، وما ذهب
+         اثنين فأكثر بلا شاهد حذفٍ (‎termsGone‎) فعطبٌ — ولو جاء بـ‎force‎. */
+      if (kind === 'nook' && old && Array.isArray(old.terms)) {
+        const nowT = Array.isArray(d.terms) ? d.terms : [];
+        const gone = d.termsGone && typeof d.termsGone === 'object' ? d.termsGone : {};
+        const lost = old.terms.filter(t => nowT.indexOf(t) < 0 && !gone[t]);
+        if (lost.length > 1) return J({ error: 'would-wipe-terms', lost: lost.length }, 409);
+      }
+
+      const rev = curRev + 1;
+      const ts = now();
+      const put = db.prepare(
         `INSERT INTO udoc (uid, kind, data, rev, updated) VALUES (?,?,?,?,?)
            ON CONFLICT(uid, kind) DO UPDATE SET data = excluded.data, rev = excluded.rev,
-                                                updated = excluded.updated`)
-        .bind(s.uid, kind, txt, rev, now()).run();
-      return J({ ok: true, kind, rev, updated: now() });
+                                                updated = excluded.updated
+           WHERE udoc.rev = ?`)
+        .bind(s.uid, kind, txt, rev, ts, curRev);
+      /* ===== وما قبل الكتابة يُحفظ (م٤-٢) =====
+         آخرُ عشرين نسخةً لكلّ وثيقةٍ مفردة (‎nook‎ و‎prefs‎ و‎srs‎ و‎chap‎ و‎exams‎).
+         فما مُحي يُستعاد من الخادم، لا من درج متصفّحٍ واحد. والاختباراتُ وسجلُّ
+         الأجهزة لا تُنسخ: كثيرةٌ، ولكلٍّ كاتبٌ واحد.
+         والنسخُ والكتابةُ صفقةٌ واحدة: إمّا كلاهما أو لا شيء. */
+      let res;
+      if (cur && KINDS.has(kind)) {
+        const out = await db.batch([
+          db.prepare('INSERT INTO udoc_hist (uid, kind, rev, data, ts) VALUES (?,?,?,?,?) ON CONFLICT DO NOTHING')
+            .bind(s.uid, kind, curRev, cur.data, ts),
+          db.prepare('DELETE FROM udoc_hist WHERE uid = ? AND kind = ? AND rev <= ?').bind(s.uid, kind, curRev - 20),
+          put,
+        ]);
+        res = out[2];
+      } else {
+        res = await put.run();
+      }
+      /* وإن سبقني كاتبٌ بين القراءة والكتابة لم يتغيّر صفّ — فلا يُدّعى النجاح */
+      if (cur && !(res && res.meta && res.meta.changes)) {
+        const now2 = await db.prepare('SELECT rev FROM udoc WHERE uid = ? AND kind = ?').bind(s.uid, kind).first();
+        return J({ error: 'stale', rev: now2 ? (now2.rev | 0) : 0 }, 409);
+      }
+      return J({ ok: true, kind, rev, updated: ts });
     }
 
     return J({ error: 'method' }, 405);
   } catch (e) {
-    console.error('udoc:', m, e && e.message);
-    return J({ error: 'server' }, 500);
+    return oops('udoc', e, m);
   }
 }

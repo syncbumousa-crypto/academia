@@ -438,3 +438,8 @@ html:root body { padding-inline: 0; }
 .a-kind select { font: inherit; padding: 3px 6px; border-radius: 8px; border: 1px solid #d6dde6; background: #fff; }
 .a-tag__k { font-style: normal; opacity: .7; margin-inline-start: 4px; font-size: .9em; }
 .a-tag__k::before { content: "· "; }
+
+/* صحّةُ الخادم */
+.h-tab { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
+.h-tab th, .h-tab td { text-align: start; padding: 6px 8px; border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent); vertical-align: top; }
+.h-tab .h-msg { font-family: ui-monospace, monospace; font-size: 11.5px; word-break: break-word; max-width: 420px; }

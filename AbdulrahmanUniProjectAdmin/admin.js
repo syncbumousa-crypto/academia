@@ -100,7 +100,8 @@
   const saveApp = s => {
     if (appBad || !s) { toast('لم يُكتب شيء — الدرج غير مقروء'); return false; }
     let cur = null;
-    try { cur = JSON.parse(localStorage.getItem(LS_APP) || 'null'); } catch (e) { cur = null; }
+    /* ونسخةُ النواة لا الدرج: الدرجُ صار أجزاءً (م٣)، والنسخةُ موجودةٌ في الشكلين */
+    try { cur = JSON.parse(localStorage.getItem('academia2:core:v1') || localStorage.getItem(LS_APP) || 'null'); } catch (e) { cur = null; }
     if (cur && (cur.terms || []).length && !(s.terms || []).length) {
       toast('مُنعت كتابة كانت ستمحو الأترام — حدّث الصفحة');
       return false;
@@ -169,7 +170,7 @@
   }
 
   /* ---------- التبويبات ---------- */
-  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'people'];
+  const PANELS = ['tags', 'courses', 'docs', 'posts', 'time', 'people', 'health'];
   $('#a-tabs').addEventListener('click', e => {
     const b = e.target.closest('button[data-tab]'); if (!b) return;
     document.querySelectorAll('#a-tabs button').forEach(x => x.classList.toggle('on', x === b));
@@ -177,6 +178,7 @@
     if (b.dataset.tab === 'docs') { renderDocs(); drxSync($('#d-course').value); }
     if (b.dataset.tab === 'time') { fillTlSelects(); renderTimeline(); }
     if (b.dataset.tab === 'people') peopleOpen();
+    if (b.dataset.tab === 'health') healthOpen();
     if (b.dataset.tab === 'posts') whoPaint();   /* ويُعاد الطلاءُ لا الجلسة: whoPaint تعرف */
   });
 
@@ -202,6 +204,37 @@
     var d = new Date(ts * 1000);
     return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
   };
+
+  /* ============================================================
+     صحّةُ الخادم — لئلّا تُكتشف العلّةُ من شكوى (ROADMAP-DATA-INTEGRITY م٥)
+     ============================================================
+     تعطّل رفعُ الصور عشرةَ أيّامٍ ولم يعرف به أحد. فههنا: متى نجح آخرُ رفع،
+     وكم خطأً في آخر يوم ومن أين، وآخرُ الأخطاء بمعرّفاتها — والمعرّفُ نفسُه
+     يظهر في دفتر الإقلاع عند المستخدم (‎med:server#…‎). */
+  async function healthOpen() {
+    const gate = $('#h-gate'), body = $('#h-body');
+    gate.hidden = false; body.hidden = true; gate.textContent = 'جارٍ السؤال…';
+    const r = await gAsk('health');
+    if (!r.ok) {
+      gate.textContent = r.status === 404 ? 'انتهت جلسةُ القفل — حدّث الصفحة واكتب كلمة المرور.' : 'تعذّر الوصول إلى الخادم.';
+      return;
+    }
+    const j = r.j, ago = t => {
+      if (!t) return 'لم يقع';
+      const m = Math.round((j.now - t) / 60000);
+      return m < 60 ? 'قبل ' + m + ' دقيقة' : m < 2880 ? 'قبل ' + Math.round(m / 60) + ' ساعة' : 'قبل ' + Math.round(m / 1440) + ' يومًا';
+    };
+    const stale = j.lastUpload && j.now - j.lastUpload > 2 * 86400000 && j.errors24h;
+    const rows = (j.recent || []).map(e => `<tr><td>${gEsc(new Date(+e.ts).toLocaleString('ar-SA-u-nu-latn'))}</td><td><code>${gEsc(e.ref)}</code></td><td>${gEsc(e.route)}</td><td>${gEsc(e.code)}</td><td class="h-msg">${gEsc(e.msg)}</td></tr>`).join('');
+    body.innerHTML = `
+      <div class="a-tools"><span class="a-count">آخرُ رفعِ صورة: <b>${ago(j.lastUpload)}</b>${stale ? ' — <b style="color:#c0453e">متوقّف وفي السجلّ أخطاء</b>' : ''}</span></div>
+      <div class="a-tools"><span class="a-count">أخطاء آخر يوم: <b>${j.errors24h == null ? 'سجلُّ الأخطاء لم يُنشأ بعد' : j.errors24h}</b>${(j.errorsByRoute || []).map(x => ` · ${gEsc(x.r)}: ${x.n | 0}`).join('')}</span></div>
+      <div class="a-tools"><span class="a-count">نسخُ وثائق الحسابات المحفوظة: <b>${j.history == null ? '—' : j.history}</b></span></div>
+      ${rows ? `<table class="h-tab"><thead><tr><th>الوقت</th><th>المعرّف</th><th>الموضع</th><th>النوع</th><th>الرسالة</th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="a-count">لا أخطاء مسجّلة.</p>'}
+      <div class="a-tools"><button type="button" class="a-btn" id="h-re">حدّث</button></div>`;
+    gate.hidden = true; body.hidden = false;
+  }
+  document.addEventListener('click', e => { if (e.target.closest('#h-re')) healthOpen(); });
 
   async function peopleOpen() {
     const gate = $('#p-gate'), body = $('#p-body');
