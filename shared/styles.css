@@ -20569,3 +20569,20 @@ html[data-theme="dark"] .fmn-row--del.is-arm > svg { color: #fff; }
 html[data-theme="dark"] .pg-stb > b > u.pg-stu { color: var(--gd); text-shadow: 0 .9px 1.5px rgba(0, 0, 0, .5); }
 .pg-cnt.is-stdone .pg-stb > b > u.pg-stu { opacity: 1; transition-delay: .08s; }
 html[data-lang="en"] .pg-stb > b > u.pg-stu { order: -1; }
+/* ===== (طلبُ صاحب الموقع) أزرارُ تحديد البنك في التذييل كبسولاتٌ كأدوات المصدر والملخّص (‎.cx-srctools .chtool‎) =====
+   حدٌّ واحد، وزوايا تامّة الاستدارة، وظلٌّ خفيف، وقامة ‎34px‎ — بدل نصوصٍ عاريةٍ تفصلها خيوط. والعدّادان في كبسولةٍ واحدة */
+#cm-body .cx-ftsel .cx-selbar__body.cx-ftsel__body { gap: 8px; }
+#cm-body .cx-ftsel .cx-selbar__sep { display: none; }
+#cm-body .cx-ftsel .cx-selbar__c, #cm-body .cx-ftsel .cx-selbar__clear, #cm-body .cx-ftsel .cx-selbar__b {
+  height: 34px; box-sizing: border-box; padding: 0 12px; border: 1px solid var(--u-line); border-radius: 999px;
+  background: var(--u-surf, #fff); box-shadow: 0 6px 16px -10px rgba(20, 35, 63, .35); display: inline-flex; align-items: center; gap: 6px;
+  font: 700 12px/1 'IBM Plex Sans Arabic', sans-serif; transition: background .15s, box-shadow .15s; }
+html[data-theme="dark"] #cm-body .cx-ftsel :is(.cx-selbar__c, .cx-selbar__clear, .cx-selbar__b) { border-color: rgba(255, 255, 255, .14); background: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05)); }
+#cm-body .cx-ftsel :is(.cx-selbar__clear, .cx-selbar__b):hover { background: rgba(225, 193, 114, .16); }
+html[data-theme="dark"] #cm-body .cx-ftsel :is(.cx-selbar__clear, .cx-selbar__b):hover { background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .08)); }
+#cm-body .cx-ftsel .cx-selbar__c b { font-size: 13px; }
+#cm-body .cx-ftsel .cx-selbar__c i, #cm-body .cx-ftsel .cx-selbar__c svg { width: 16px; height: 16px; }
+/* والعدّادان كبسولةٌ واحدة: الأولى تُفتح من جهة الثانية، والثانيةُ تُكمِلها */
+#cm-body .cx-ftsel .cx-selbar__c:has(+ .cx-selbar__c) { border-start-end-radius: 0; border-end-end-radius: 0; border-inline-end: 0; padding-inline-end: 6px; }
+#cm-body .cx-ftsel .cx-selbar__c + .cx-selbar__c { border-start-start-radius: 0; border-end-start-radius: 0; margin-inline-start: -8px; padding-inline-start: 6px; }
+#cm-body .cx-ftsel .cx-selbar__acts { gap: 8px; }
