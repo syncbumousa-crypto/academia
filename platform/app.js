@@ -29716,6 +29716,20 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       d.animate([{ transform: 'none', opacity: 1 }, { transform: `translateY(${dy * .7}px)`, opacity: .25, offset: .45 }, { transform: `translateY(${dy}px)`, opacity: 0 }], { duration: dur, easing: 'cubic-bezier(.25, .6, .35, 1)', fill: 'forwards' });
     });
   }
+  /* ===== مصدرُ النسخة الطائرة: أحدُّ ما عندنا من الصفحة (طلبُ صاحب الموقع: «تظهر أمامهم صفحة فيها blur») =====
+     كانت تأخذ أوّلَ لوحةٍ في الصفحة — وما لم تُرسم الصفحةُ بدقّتها بعدُ فأوّلُها نسختُها الصغيرةُ الضبابيّة (‎cbk-thumb‎، ‎~140px‎)،
+     ولها عرضٌ فتُقبل ولا يُبحث بعدها. فالترتيب: رسمُ الصفحة نفسِها، ثمّ آخرُ رسمٍ محفوظٍ لها (‎pgOut‎)، ثمّ أعرضُ رسمٍ خامٍ لها
+     (‎pgCv‎)، ثمّ النسخةُ الصغيرة — وحدَها إن لم يكن غيرُها */
+  function bkFlySrc(b, el, kk, c0) {
+    if (c0 && c0.width) return c0;
+    if (!kk) return null;
+    const o = b.pgOut && b.pgOut.get(kk); if (o && o.width) return o;
+    let best = null;
+    if (b.pgCv) for (const [ck, cv] of b.pgCv) if (ck.split('|')[0] === String(kk) && cv && cv.width && (!best || cv.width > best.width)) best = cv;
+    if (best) return best;
+    const th = (b.thumbs && b.thumbs.get(kk)) || (el && el.querySelector(':scope > canvas.cbk-thumb'));
+    return th && th.width ? th : null;
+  }
   function bkScrOutTwo(b) {
     if (bkReduce() || !b.scr || !b.view || !b.stage) return false;
     const src = b.view.closest('.pk-src'), sc = b.scr; if (!src) return false;
@@ -29747,10 +29761,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const d = document.createElement('div'); d.className = 'bk-fly-pg' + (cls ? ' ' + cls : '');
       Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
       const kk = el ? +el.dataset.k : 0; if (kk) d.dataset.k = kk;
-      const c0 = el && el.querySelector(':scope > canvas');
+      const c0 = el && el.querySelector(':scope > canvas:not(.cbk-thumb)');   /* (النسخةُ الصغيرةُ الضبابيّة ليست مصدرًا ما دام غيرُها) */
       if (move && c0 && c0.width) d.appendChild(c0);
       else {
-        const srcCv = (c0 && c0.width ? c0 : null) || (kk && ((b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)))) || null;
+        const srcCv = bkFlySrc(b, el, kk, c0);
         if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
       }
       L.appendChild(d); return d;
@@ -29858,9 +29872,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const d = document.createElement('div'); d.className = 'bk-fly-pg';
       Object.assign(d.style, { left: r.l + 'px', top: r.t + 'px', width: r.w + 'px', height: r.h + 'px' });
       if (el) d.dataset.k = el.dataset.k;
-      const c0 = el && el.querySelector(':scope > canvas');
-      let srcCv = c0 && c0.width ? c0 : null;
-      if (!srcCv) { const kk = el ? +el.dataset.k : 0; srcCv = (b.pgOut && b.pgOut.get(kk)) || (b.thumbs && b.thumbs.get(kk)) || null; }
+      const c0 = el && el.querySelector(':scope > canvas:not(.cbk-thumb)');
+      const srcCv = bkFlySrc(b, el, el ? +el.dataset.k : 0, c0);
       if (srcCv) { const c = document.createElement('canvas'); c.width = srcCv.width; c.height = srcCv.height; c.getContext('2d').drawImage(srcCv, 0, 0); d.appendChild(c); }
       L.appendChild(d); return d;
     };
