@@ -27477,14 +27477,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     });
     if (seen && Object.keys(counts).length) { counts._m = mineTabs.join(','); facesMemoPut(code, counts); }
     if (!todo.length) return;
-    /* أوّلُ طلاءٍ بعد بناء الشريط بلا حركة (البناءُ له انزلاقُه) — وما بعده إن تغيّر */
-    const flip = todo.some(([, sp]) => sp.dataset.sig != null) ? cmTabsFlipStart() : null;
-    const fan = new Set(todo.filter(([, sp]) => sp.dataset.sig === FACES_LD).map(([b]) => b.dataset.tab));   /* (من الحلقة: تنفرد الوجوهُ منها) */
+    /* (طلبُ صاحب الموقع) الحركةُ لحلقة التحميل وحدَها وهي تدخل. والوجوهُ إذا وصلت ظهرت في مكانها بلا حركة، وما ظهر قبلها
+       لا يذوب ولا يعود: كان كلُّ تغيّرٍ في الصفّ (صورةٌ تأخّرت ثمّ وصلت) يُذيب الصفَّ كلَّه ويُطلعه من تحت */
+    const enter = todo.filter(([, sp, html]) => html === FACES_LD && sp.dataset.sig != null && sp.dataset.sig !== FACES_LD);
+    const flip = enter.length ? cmTabsFlipStart() : null;
     todo.forEach(([btn, span, html]) => {
       span.dataset.sig = html; span.innerHTML = html;
       span.classList.toggle('is-none', html !== FACES_LD && !span.querySelector('.cm-face:not(.cm-face--me)'));
     });
-    if (flip) cmTabsFlipEnd(flip, new Set(todo.map(([b]) => b.dataset.tab)), fan);
+    if (flip) cmTabsFlipEnd(flip, new Set(enter.map(([b]) => b.dataset.tab)), null);
   }
 
   /* أيقونات أزرار التبويبات (مختارة من مختبر الأيقونات) — تُرسم فوق التسمية، وترث لون الزرّ
