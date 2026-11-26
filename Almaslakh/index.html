@@ -29,7 +29,7 @@
       if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
   </script>
   <script>
-    window.AC_MINV = 1529;
+    window.AC_MINV = 1530;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
@@ -814,7 +814,9 @@
   </script>
 
   <!-- رقمُ النسخة: به تتبدّل روابطُ ما يُحمَّل لاحقًا (محرّكُ الكتاب) مع كلّ نشر — بدونه كان يُطلَب ‎book2.js?v=0‎ دائمًا فيبقى القديمُ في المتصفّح -->
-  <script src="../shared/version.js"></script>
+  <!-- رقمُ النسخة بختم النسخة التي بُنيت لها الصفحة: كان يُطلب بلا ختمٍ فيبقى القديمُ في ذاكرة المتصفّح (GitHub Pages ‎~10‎ دقائق)
+       والصفحةُ تطلب المضغوطَ الجديد — فيختلفان ويُحمَّل الأصلُ الكامل بدله. الآن يأتيان معًا من النسخة نفسِها -->
+  <script>document.write('<script src="../shared/version.js' + (window.AC_MINV ? '?v=' + window.AC_MINV : '') + '"><\/script>');</script>
   <script src="../platform/api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>

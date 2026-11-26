@@ -23,7 +23,7 @@
   <!-- الورقةُ مضغوطةً في المنشور: ‎_ver.sh‎ يبنيها (‎styles.min.css‎) ويكتب رقمَ بنائها في ‎AC_MINV‎.
        ‎0‎ = لم تُبنَ فالأصل. ومحلّيًّا الأصلُ دائمًا: ما يُعدَّل يُرى بلا بناء -->
   <script>
-    window.AC_MINV = 1529;
+    window.AC_MINV = 1530;
     window.AC_MIN = !!AC_MINV && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
     document.write('<link rel="stylesheet" href="../shared/styles' + (AC_MIN ? '.min.css?v=' + AC_MINV : '.css?v=1') + '">');
   </script>
@@ -1265,7 +1265,9 @@
   </div>
 
   <!-- جسرُ الخادم: يسبق المحرّك ليُستبدَل fetch قبل أوّل نداء -->
-  <script src="../shared/version.js"></script>
+  <!-- رقمُ النسخة بختم النسخة التي بُنيت لها الصفحة: كان يُطلب بلا ختمٍ فيبقى القديمُ في ذاكرة المتصفّح (GitHub Pages ‎~10‎ دقائق)
+       والصفحةُ تطلب المضغوطَ الجديد — فيختلفان ويُحمَّل الأصلُ الكامل بدله. الآن يأتيان معًا من النسخة نفسِها -->
+  <script>document.write('<script src="../shared/version.js' + (window.AC_MINV ? '?v=' + window.AC_MINV : '') + '"><\/script>');</script>
   <script src="api-base.js"></script>
   <script src="../shared/courses.js"></script>
   <script src="../shared/covers.js"></script>
