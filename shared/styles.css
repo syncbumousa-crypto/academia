@@ -20355,6 +20355,15 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) > .pk-blkh .pk-blkh__ic,
 #cm-body .pk-src:is(.bk-on-light, .bk-on-dark) .pk-varc--bk path { transition: color .3s ease, stroke .3s ease; }
 
+/* ===== قوسُ الزاوية وشريطا التمرير آخرُ ما يظهر وأوّلُ ما يغيب (طلبُ صاحب الموقع) =====
+   في الاتّساع (‎pk--chrome0‎) يبقيان خفيّين حتى تكتمل المساحة ثمّ يظهران بتلاشٍ قصير؛ وفي الطيّ (‎pk--chromeout‎) يغيبان
+   قبل المحتوى (أسرعَ منه وبلا بدءٍ ليّن) — كانا يظهران قبل وصول المساحة ويبقيان حتى يختفيا دفعةً آخرَ الطيّ */
+#cm-body .pk-varc--bk { transition: transform .14s cubic-bezier(.3, .7, .4, 1), opacity .2s ease-out; }
+#cm-body .cbk-sb { transition: opacity .2s ease-out; }
+#cm-body .post.pk--chrome0 .pk-src :is(.pk-varc--bk, .cbk-sb) { opacity: 0; pointer-events: none; transition: none; }
+#cm-body .post.pk--chromeout .pk-src :is(.pk-varc--bk, .cbk-sb) { opacity: 0; pointer-events: none; transition: opacity .1s ease-out; }
+#cm-body .post:is(.pk--chrome0, .pk--chromeout) .pk-src .cbk-sb > i { pointer-events: none; }
+
 /* ===== زرُّ تكبير الصفحات المتتالية في تذييل المصادر (‎pkBkZoomHTML‎ · طلبُ صاحب الموقع) =====
    بشكل زرّ المصدر (‎34px‎، حدٌّ رفيع، دائريّ، ظلٌّ خفيف): عدسةُ تصغير · النسبة · عدسةُ تكبير. ولا يظهر إلّا بالعرض العادي */
 .pk-bkzoom { display: none; align-items: center; height: 34px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
