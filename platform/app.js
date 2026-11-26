@@ -7454,6 +7454,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let cur = body.firstChild;
     for (const n of want) { if (n === cur) { cur = cur.nextSibling; continue; } body.insertBefore(n, cur); }
   }
+  /* ===== (طلبُ صاحب الموقع) لا قائمةَ ناقصةً قبل جواب المادّة =====
+     الدرجُ يُسقط ما بلغ الخادمَ من مساهماتي (‎cinfoThin‎ — توفيرًا للسعة)، فبعد التحديث لا تكون مساهمتي في الجهاز
+     أصلًا: تعود مع جواب المادّة. وكانت القائمةُ تُرسم قبله بما عندها (البذورُ وما لم يُرفع)، ثمّ يصل الجوابُ فتقفز
+     مساهمتي إلى أعلاها — «مو موجودة لجزء من الثانية ثمّ تظهر، ومو أوّل وحدة».
+     فما دام جوابُ المادّة لم يصل: بطاقاتُ «جارٍ التحميل» مكانَ القائمة كلِّها، ثمّ تُرسم القائمةُ مرّةً واحدةً بترتيبها
+     الأخير. ولا انتظارَ أبدًا: تعثّرُ الجواب (‎srvPullFail‎) أو ‎CM_HOLD_MAX‎ يُطلقان ما عندنا. والتحريرُ لا يُحبس */
+  const CM_HOLD_MAX = 6000;
+  const cmHoldT = {};
+  const CM_HOLD_SECS = ['info', 'abs', 'grade', 'srcU', 'srcP', 'cards', 'lessons', 'videos'];
+  function cmHoldHTML(sec) {
+    if (CM_HOLD_SECS.indexOf(sec) < 0 || cmView.mode === 'edit' || cmView.mode === 'view' || cxMax || cxMaxPub) return '';
+    const code = cmCode;
+    let wait = false; try { wait = !srvSeen(code) && !srvPullFail[code]; } catch (e) {}
+    if (!wait) { delete cmHoldT[code]; return ''; }
+    const t0 = cmHoldT[code] || (cmHoldT[code] = performance.now()), left = CM_HOLD_MAX - (performance.now() - t0);
+    if (left <= 0) return '';
+    if (!cmHoldT[code + ':t']) cmHoldT[code + ':t'] = setTimeout(() => { delete cmHoldT[code + ':t']; if (cmCode === code) renderCmSection(); }, left + 20);
+    acLdMarkH('hold:' + sec);
+    if (sec === 'cards') return pcGhostHTML() + pcGhostHTML();
+    const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
+    return `<div class="cm-hold" role="status" aria-label="${esc(T().chLoading)}"><div class="cm-pick__ghost">${row(34, 76) + row(42, 69) + row(50, 62)}</div></div>`;
+  }
+  const acLdMarkH = k => { if (typeof window.__acLdMark === 'function') window.__acLdMark(k); };
   function renderCmSection0() {
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
@@ -7572,6 +7595,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     /* والمكبَّرُ يُمرَّر جوفُه (‎#cm-cards‎) وهو يُبنى من جديد هنا — فيُحفظ تمريرُه ويُردّ */
     const cxY = cxMax ? ((document.querySelector('#cm-body #cm-cards') || {}).scrollTop || 0) : 0;
+    { const h = cmHoldHTML(sec); if (h) inner = h; }
     cmBodySet($('#cm-body'), inner);
     /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
        حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
@@ -39702,7 +39726,7 @@ void main() {
     srvPulled[code] = Date.now();
     let j;
     /* وإن تعثّرت الرحلةُ: لا تبقى دوائرُ التحميل في التبويبات أبدًا — تُرسم ممّا عندنا */
-    const fail = () => { srvPullFail[code] = 1; if (cmCode === code) { if (document.querySelector('#cm-body .pc-ghost') && typeof renderCmSection === 'function') renderCmSection(); else paintTabFaces(code); } };
+    const fail = () => { srvPullFail[code] = 1; if (cmCode === code) { if (document.querySelector('#cm-body .pc-ghost, #cm-body .cm-hold') && typeof renderCmSection === 'function') renderCmSection(); else paintTabFaces(code); } };
     try {
       const r = await apiFetch(postsURL('?code=' + encodeURIComponent(code)), { credentials: 'same-origin' });
       if (!r.ok) return fail();
@@ -39941,7 +39965,7 @@ void main() {
        الشاشةُ تنتظره لتكفّ عن قول «جارٍ التحميل». فيُختم قبل كلّ إعادةِ رسم. */
     srvGot[code] = 1;
     if ((n || cut) && !srvSame && cmCode === code && typeof renderCmSection === 'function') renderCmSection();
-    else if (cmCode === code && document.querySelector('#cm-body .pc-ghost') && typeof renderCmSection === 'function') renderCmSection();   /* (بطاقاتُ «جارٍ التحميل» تذهب) */
+    else if (cmCode === code && document.querySelector('#cm-body .pc-ghost, #cm-body .cm-hold') && typeof renderCmSection === 'function') renderCmSection();   /* (بطاقاتُ «جارٍ التحميل» تذهب) */
     else if (cmCode === code && typeof paintTabFaces === 'function') paintTabFaces(code);   /* (ولا جديد: دوائرُ التحميل تكفّ) */
     /* ===== والمربّعاتُ الأربعةُ تُعاد كذلك =====
        كانت تُبنى مرّةً عند فتح الرَّكن ثمّ لا يبلغها شيء: يصل الجوابُ فتُعاد لوحةُ

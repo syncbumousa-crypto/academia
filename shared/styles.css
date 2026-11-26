@@ -20629,3 +20629,5 @@ html[data-theme="dark"] #cm-body .cx-ftsel :is(.cx-selbar__clear, .cx-selbar__b)
   .ac-ink > i { animation: none; opacity: .6; }
   #cm-body .pk--pc .pc-art:not(.is-ld)::after { animation: acLdIn .2s .25s ease-out forwards; }
 }
+/* (طلبُ صاحب الموقع) القائمةُ محبوسةٌ حتى يصل جوابُ المادّة: صفوفُ الانتظار نفسُها التي في دعوة اختيار القسم — ‎cmHoldHTML‎ */
+.cm-hold { padding: 14px 4px 6px; min-height: 170px; }
