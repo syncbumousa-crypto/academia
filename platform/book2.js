@@ -169,6 +169,13 @@ export function createBook2(THREE, host, cfg) {
   const el = renderer.domElement;
   el.className = 'bk2-gl';
   host.appendChild(el);
+  /* ===== فقدُ سياق الرسم (ROADMAP-BOOK-SWITCH · المرحلة ٦) =====
+     الجوالُ (وكرتُ الشاشة الضعيف) يُسقط السياقَ حين تضيق ذاكرتُه، فكان الكتابُ يسودّ ولا يعود. ‏‎three‎ يمنع الإسقاطَ النهائيّ
+     (‎preventDefault‎) ويُعيد بناءَ حاله عند الاستعادة، وصورُه وبرامجُه تُرفع وتُترجم من جديد في أوّل رسمة — فهنا: لا رسمَ في
+     أثناء الفقد، وإعادةُ الرسم عند الاستعادة، ويُخبَر صاحبُ الكتاب في الحالين (‎cfg.onLost‎) ليضع مكانَه معايناتِ الصفحات أو يبنيه */
+  let lost = false;
+  el.addEventListener('webglcontextlost', () => { lost = true; try { cfg.onLost && cfg.onLost(true); } catch (e) {} }, false);
+  el.addEventListener('webglcontextrestored', () => { lost = false; needs = true; try { cfg.onLost && cfg.onLost(false); } catch (e) {} }, false);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 20);
   const book = new THREE.Group(); scene.add(book);
@@ -719,7 +726,7 @@ export function createBook2(THREE, host, cfg) {
   const T = { follow: 0.07, settle: 0.12, flip: 0.8, hoverLift: 0.035, fan: 0.05 };
   function frame(now) {
     raf = requestAnimationFrame(frame);
-    if (!compiled) { last = now; return; }
+    if (!compiled || lost) { last = now; return; }   /* (والسياقُ مفقودٌ: لا رسمَ ولا رفعَ حتى يُستعاد — المرحلة ٦) */
     /* نُقل الكتابُ بين الرسمات فانفصل لحظةً — ويُطفأ إن طال انفصالُه (رُفع الكتاب) */
     if (!el.isConnected) { if (!goneAt) goneAt = now; else if (now - goneAt > 6000) dispose(); return; }
     goneAt = 0;
@@ -1095,6 +1102,7 @@ export function createBook2(THREE, host, cfg) {
       }).catch(() => {});
     },
     /* كلُّ الأوراق مستقرّةٌ تمامًا في كومتها (لا مرفوعةَ بتحويمٍ ولا مُمسَكة): الصفحةُ مسطّحةٌ فتنطبق عليها طبقةُ النصّ */
+    get lost() { return lost; },
     get flat() { return !mo && tv === 1 && !ta && !drag && sheets.every(s => !s.anim && s.drag == null && (s.p === 0 || s.p === 1)); },
     get A() { return A; }, get maxA() { return maxA; }, get dead() { return dead; },
     get folding() { return !!mo; },

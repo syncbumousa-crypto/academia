@@ -30690,6 +30690,24 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     c = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}") ${hx + 8} ${hy + 10}, ${g ? 'grabbing' : 'grab'}`;
     BK_CUR.memo.set(key, c); return c;
   }
+  /* ===== الكتابُ يصمد إذا أسقط الجهازُ سياقَ الرسم (ROADMAP-BOOK-SWITCH · المرحلة ٦) =====
+     في أثناء الفقد: معايناتُ الصفحات الضبابيّة في مكانه (‎bkPhShow‎) لا لوحةٌ سوداء. فإن استُعيد السياقُ ذابت فوقه كما في الفتح؛
+     وإن لم يُستعد خلال ‎2.5‎ ثانية بُني محرّكٌ جديدٌ على موضع القراءة نفسِه — فإن تعذّر WebGL كلُّه نزل إلى المحرّك القديم (‎catch‎ في ‎bk2Engine‎) */
+  function bk2Lost(b, on) {
+    clearTimeout(b.lostT);
+    const g = b.gl;
+    bkDiag(b, on ? 'gl-lost' : 'gl-restored');
+    if (!on) { if (b.phEl) requestAnimationFrame(() => requestAnimationFrame(() => { if (b.gl === g) bkPhHide(b); })); return; }
+    bkTLSoonStop(b); bkTLHide(b);
+    bkPhShow(b);
+    b.lostT = setTimeout(() => {
+      if (!g || b.gl !== g || g.dead || !g.lost) return;
+      try { g.dispose(); } catch (e) {}
+      b.gl = null;
+      if (b.phEl) { b.phEl.remove(); b.phEl = null; }   /* (يعود مع البناء الجديد ويذوب فوقه) */
+      bk2Engine(b);
+    }, 2500);
+  }
   function bk2Engine(b, o = {}) {
     const st = b.stage;
     if (!o.quiet) bkPhShow(b);
@@ -30716,6 +30734,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           return false;
         },
         onBusy: () => { bkTLSoonStop(b); bkTLHide(b); },
+        onLost: on => bk2Lost(b, on),
         /* والقلمُ أو المربّعُ مختار: الصفحةُ للتظليل وحده، والتقليبُ من زرّي التذييل (طلبُ صاحب الموقع) */
         locked: () => { const t = hlTool[pkSrcBase(hlSidOf(b))]; return t === 't' || t === 'box'; },
         onTurn: A => {
