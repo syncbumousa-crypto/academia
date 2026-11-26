@@ -7431,8 +7431,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كان كلُّ رسمٍ للقسم يبني مساهماته كلَّها من جديد — فتحُ مساحةٍ واحدة يعيد بناء ‎11‎ مساهمة ويُعيد حساب أنماطها
      (قيس: ‎~60ms‎ بناءً و‎50–86ms‎ أنماطًا من معالج الضغط). فمع المفتاح: يُفكّ الجديدُ في قالبٍ خارج الصفحة، وكلُّ
      عنصرٍ في أعلى القسم يُقارن بنصّ رسمه السابق نفسِه (‎_h‎: ما رُسم به قبل أن يمسّه شيء) — المطابقُ يبقى عقدتَه كما هي
-     في مكانها (لا تُنقل: النقلُ يُصفّر تمريرَها ويعيد حركاتِها)، وغيرُه يُستبدل. والمفتاحُ مطفأٌ افتراضيًّا */
-  const cmPartialOn = () => { try { return localStorage.getItem('ac.render.partial') === '1'; } catch (e) { return false; } };
+     في مكانها (لا تُنقل: النقلُ يُصفّر تمريرَها ويعيد حركاتِها)، وغيرُه يُستبدل.
+     وهو الافتراضيُّ (v1529 · اعتمادُ صاحب الموقع بعد المقارنة على مساهمته: فتحُ المصادر ‎126–134‎ ← ‎89–98ms‎،
+     والبنك ‎195–210‎ ← ‎150–163ms‎، والحالُ مطابقة). ويُطفأ في متصفّحٍ بعينه بـ‎ac.render.partial = '0'‎ للمقارنة */
+  const cmPartialOn = () => { try { return localStorage.getItem('ac.render.partial') !== '0'; } catch (e) { return true; } };
   function cmBodySet(body, html) {
     const mark = () => { for (const el of body.children) el._h = el.outerHTML; };
     if (!cmPartialOn()) { body.innerHTML = html; return; }
@@ -12175,6 +12177,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       an.push(g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: .55 }, { transform: 'none', offset: .88 }, { transform: 'none' }], { ...o, easing: 'ease-out' }));
       if (from) {
         const pn = m.firstChild; pn.style.background = fill;
+        /* (طلبُ صاحب الموقع: «الزوايا اللي تحت يمين ويسار حقت مكان الزر اللي برا تنرسم بقفز») المساحةُ الطائرةُ مستطيلٌ مدوَّر —
+           فكانت فجوتا زرَّي المساحتين الأخريين في زاويتيها السفليّتين تمتلئان في أوّل إطار. فتُغطّى كلُّ فجوةٍ بغطاءٍ بلون ما خلفها
+           على شكلها نفسِه (زاويتُها الداخليّة وانحناءتا حافّتيها)، ثمّ ينكمش الغطاءُ إلى زاويته في أوّل الطيّ — فتلتئم أمام العين */
+        (card => (card && card.pkNch || []).filter(n => n.k === q && n.nw > 1 && n.nh > 1))(fp).forEach(n => {
+          const rgt = n.sd === 'r', r = Math.min(16, n.nw / 2, n.nh / 2), sd = rgt ? 'right' : 'left';
+          const fil = `radial-gradient(circle at ${rgt ? '0' : '100%'} 0, transparent ${Math.max(0, r - .5)}px, ${pg} ${r + .5}px)`;
+          const cap = document.createElement('i'); cap.className = 'pc-morph__cap';
+          Object.assign(cap.style, { position: 'absolute', bottom: '0', [sd]: '0', width: px(n.nw + r), height: px(n.nh + r), transformOrigin: `${sd} bottom` });
+          cap.innerHTML = `<i style="position:absolute;bottom:0;${sd}:0;width:${n.nw}px;height:${n.nh}px;background:${pg};border-top-${rgt ? 'left' : 'right'}-radius:${n.c}px"></i>`
+            + `<i style="position:absolute;bottom:0;${sd}:${n.nw}px;width:${r}px;height:${r}px;background:${fil}"></i>`
+            + `<i style="position:absolute;bottom:${n.nh}px;${sd}:0;width:${r}px;height:${r}px;background:${fil}"></i>`;
+          m.appendChild(cap);
+          an.push(cap.animate([{ transform: 'none' }, { transform: 'scale(0)' }], { duration: D * .32, delay: D * .05, easing: 'cubic-bezier(.45, 0, .25, 1)', fill: 'forwards' }));
+        });
+        /* وظلُّها الخارجيُّ (حلقةُ ‎1px‎ وظلُّ القاع) يُرسم خارجها فلا يغطّيه الغطاء — فيُرى إطارُ المستطيل حول الفجوة. فيبدأ شفّافًا
+           (المساحةُ نفسُها بلا هذا الظلّ) ويظهر بعد التئامها، كلّما صارت زرًّا */
+        { const s1 = getComputedStyle(m).boxShadow;   /* (‎m‎ في الصفحة الآن: أُلحق قبل هذا) */
+          if (s1 && s1 !== 'none') {
+            const s0 = s1.split(/,\s*(?=rgba?\()/).map(e => /inset/.test(e) ? e : e.replace(/^rgba?\([^)]*\)/, 'rgba(0, 0, 0, 0)')).join(', ');
+            an.push(m.animate([{ boxShadow: s0 }, { boxShadow: s0, offset: .32 }, { boxShadow: s1 }], { duration: D, delay: D * .05, easing: 'ease-out', fill: 'both' }));
+          } }
         an.push(m.animate([{ left: px(from.left), top: px(from.top), width: px(from.width), height: px(from.height), borderRadius: '16px' },
           { left: px(t.left), top: px(t.top), width: px(t.width), height: px(t.height), borderRadius: '14px' }], { ...o, easing: ez }));
         an.push(pn.animate([{ opacity: 1 }, { opacity: 1, offset: .2 }, { opacity: 0, offset: .75 }, { opacity: 0 }], o));
@@ -26301,6 +26324,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     });
     pkKcvNotch(card, nchN);
+    card.pkNch = nchN;   /* (مقاسُ الفجوات الآن — يحمله الطيُّ إلى المساحة الطائرة فتلتئم فيها بحركة) */
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
   }
   function pkBandDraw(card, tongues) {
