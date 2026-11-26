@@ -20633,3 +20633,15 @@ html[data-theme="dark"] #cm-body .cx-ftsel :is(.cx-selbar__clear, .cx-selbar__b)
 .cm-hold { padding: 14px 4px 6px; min-height: 170px; }
 /* (طلبُ صاحب الموقع) عدّادُ المساهمات في أثناء الانتظار: الحبرُ مكانَ العدد، والكلمةُ والفرزُ في مكانهما */
 .cm-count.is-ld b { display: inline-flex; min-width: 1.6em; justify-content: center; }
+/* (طلبُ صاحب الموقع: أولويّات) نهايةُ انتظار جواب المادّة: مساهماتُ غيري تظهر واحدةً بعد واحدة من فوق — ومساهمتي في مكانها */
+#cm-body > .post.cm-rise { animation: cmRise .34s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes cmRise { from { opacity: 0; transform: translateY(10px); } }
+#cm-body > [data-cmcached] { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { #cm-body > .post.cm-rise { animation: none; } }
+/* (طلبُ صاحب الموقع) عناوينُ بطاقة «جارٍ التحميل» مستطيلاتٌ مدوّرة (الاتّجاه «ب» في العناوين، و«ج» في الأرقام) */
+.pc-gbar { display: inline-block; height: 11px; border-radius: 6px; background: rgba(127, 150, 160, .22); vertical-align: middle; }
+.pc-gbar--t { width: 100%; max-width: 190px; height: 15px; border-radius: 8px; }
+#cm-body .pc-ghost .post-ytmeta { display: flex; align-items: center; gap: 8px; }
+#cm-body .pc-ghost .pc-name { display: block; width: 100%; }
+#cm-body .pc-ghost .pc-sale--ghost { color: transparent; }
+#cm-body .pc-ghost .pc-sale--ghost .ac-ink { color: initial; }

@@ -7474,12 +7474,45 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (left <= 0) return '';
     if (!cmHoldT[code + ':t']) cmHoldT[code + ':t'] = setTimeout(() => { delete cmHoldT[code + ':t']; if (cmCode === code) renderCmSection(); }, left + 20);
     acLdMarkH('hold:' + sec);
-    if (sec === 'cards') return cmSortBar('ld') + pcGhostHTML() + pcGhostHTML();
+    cmHoldOn = code + '|' + sec;
+    /* (طلبُ صاحب الموقع: «أولويّات» لا «كلُّ شيءٍ ثمّ فجأةً كلُّ شيء») مساهمتي أوّلًا — من آخر رسمٍ لها في هذا الجهاز،
+       لا تُضغط حتى يصل الجواب (‎inert‎) — ثمّ بطاقاتُ الانتظار لغيري تحتها */
+    const mine = cmMineGet(code, sec);
+    const mineH = mine ? mine.h.map(h => h.replace(/^(\s*<div)/, '$1 inert data-cmcached="1"')).join('') : '';
+    if (sec === 'cards') return cmSortBar('ld') + mineH + pcGhostHTML() + (mineH ? '' : pcGhostHTML());
     const row = (a, b) => `<div class="cm-pick__row"><span class="cm-pick__av"></span><span class="cm-pick__ln"><i style="width:${a}%"></i><i style="width:${b}%"></i></span></div>`;
-    return cmSortBar('ld') + `<div class="cm-hold" role="status" aria-label="${esc(T().chLoading)}"><div class="cm-pick__ghost">${row(34, 76) + row(42, 69) + row(50, 62)}</div></div>`;
+    return cmSortBar('ld') + mineH + `<div class="cm-hold" role="status" aria-label="${esc(T().chLoading)}"><div class="cm-pick__ghost">${row(34, 76) + row(42, 69) + row(50, 62)}</div></div>`;
   }
   const acLdMarkH = k => { if (typeof window.__acLdMark === 'function') window.__acLdMark(k); };
+  /* ===== آخرُ رسمٍ لمساهمتي في كلّ تبويب (‎ac.mine1‎) =====
+     الدرجُ يُسقط مساهمتي متى بلغت الخادم، فلا يبقى في الجهاز ما تُرسم منه قبل الجواب. فيُحفظ **رسمُها** وحده
+     (بطاقةٌ أو بطاقتان، بضعةُ كيلوبايت) كلّما رُسم التبويبُ كاملًا بعد الجواب — ويُمحى إن لم تبق لي فيه مساهمة.
+     ثلاثون تبويبًا على الأكثر (الأقدمُ يُسقط)، وما جاوز ‎80KB‎ لا يُحفظ */
+  const CM_MINE_KEY = 'ac.mine1';
+  let cmMineAcc = null, cmHoldOn = '';
+  function cmMineKeep(p, h) {
+    if (!isMine(p)) return h;
+    h = h.replace(/^(\s*<div)/, '$1 data-cmmine="1"');
+    if (cmMineAcc) cmMineAcc.push(h);
+    return h;
+  }
+  function cmMineAll() { try { return JSON.parse(localStorage.getItem(CM_MINE_KEY) || '{}') || {}; } catch (e) { return {}; } }
+  function cmMineGet(code, sec) { const e = cmMineAll()[code + '|' + sec]; return e && Array.isArray(e.h) && e.h.length ? e : null; }
+  function cmMineSave(code, sec, hs) {
+    try {
+      const all = cmMineAll(), k = code + '|' + sec, size = hs.reduce((n, h) => n + h.length, 0);
+      const was = all[k];
+      if (!hs.length || size > 80000) { if (!was) return; delete all[k]; }
+      else {
+        if (was && JSON.stringify(was.h) === JSON.stringify(hs)) return;   /* (لم يتغيّر: لا كتابة) */
+        all[k] = { h: hs, t: Date.now() };
+        const ks = Object.keys(all); if (ks.length > 30) ks.sort((a, b) => (all[a].t || 0) - (all[b].t || 0)).slice(0, ks.length - 30).forEach(x => delete all[x]);
+      }
+      localStorage.setItem(CM_MINE_KEY, JSON.stringify(all));
+    } catch (e) {}
+  }
   function renderCmSection0() {
+    cmMineAcc = [];
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
@@ -7548,7 +7581,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (editing) myPost(cmCode, 'info');   /* ضمان وجود مشاركتي */
       const posts = (cmSort === 'best' ? byBestIdx : byNewest)(draftAware(postsOf(cmCode, 'info'), editing));
       inner = posts.length
-        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? infoEditCard(p, i) : foldPost('info', p, i, null)).join('')
+        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? infoEditCard(p, i) : cmMineKeep(p, foldPost('info', p, i, null))).join('')
         : `<p class="v-none">${T().noPosts}</p>`;
     } else if (sec === 'abs') {
       /* «الغياب والتأخير» بند مستقلّ عن الدكاترة: قناة على مستوى المادة بنفس آلية «التقييم» */
@@ -7556,7 +7589,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (editing) myPost(cmCode, 'abs');   /* ضمان وجود مساهمتي */
       const posts = (cmSort === 'best' ? byBestIdx : byNewest)(draftAware(postsOf(cmCode, 'abs'), editing));
       inner = posts.length
-        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? absEditCard(p, i) : foldPost('abs', p, i, null)).join('')
+        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? absEditCard(p, i) : cmMineKeep(p, foldPost('abs', p, i, null))).join('')
         : `<p class="v-none">${T().noPosts}</p>`;
     } else if (sec === 'grade') {
       /* «توزيع الدرجات» بنفس آلية «المادة»: التحرير إنلاين داخل القائمة — مساهمتي تتحوّل بطاقةً
@@ -7565,7 +7598,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (editing) myPost(cmCode, 'grade');   /* ضمان وجود مشاركتي */
       const posts = (cmSort === 'best' ? byBestIdx : byNewest)(draftAware(postsOf(cmCode, 'grade'), editing));
       inner = posts.length
-        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? gradeEditCard(p, i) : foldPost('grade', p, i, null)).join('')
+        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? gradeEditCard(p, i) : cmMineKeep(p, foldPost('grade', p, i, null))).join('')
         : `<p class="v-none">${T().noPosts}</p>`;
     } else if (sec === 'srcU' || sec === 'srcP') {
       /* «المصادر» (فهم/ممارسة) بنفس آلية «المادة»: التحرير إنلاين داخل القائمة */
@@ -7573,7 +7606,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (editing) myPost(cmCode, sec);   /* ضمان وجود مشاركتي */
       const posts = (cmSort === 'best' ? byBestIdx : byNewest)(draftAware(postsOf(cmCode, sec), editing));
       inner = posts.length
-        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? srcEditCard(p, i, sec) : foldPost(sec, p, i, null)).join('')
+        ? cmSortBar(posts.length) + posts.map(({ p, i }) => (editing && p.me) ? srcEditCard(p, i, sec) : cmMineKeep(p, foldPost(sec, p, i, null))).join('')
         : `<p class="v-none">${T().noPosts}</p>`;
     } else if (cmView.mode === 'edit') {
       myPost(cmCode, cmView.sub || sec);   /* ضمان وجود مشاركتي قبل المحرر */
@@ -7597,8 +7630,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* المحتوى مباشرة بلا صندوق حاوٍ — النافذة نفسها هي الإطار (تسطيح بطاقة-داخل-بطاقة) */
     /* والمكبَّرُ يُمرَّر جوفُه (‎#cm-cards‎) وهو يُبنى من جديد هنا — فيُحفظ تمريرُه ويُردّ */
     const cxY = cxMax ? ((document.querySelector('#cm-body #cm-cards') || {}).scrollTop || 0) : 0;
-    { const h = cmHoldHTML(sec); if (h) inner = h; }
+    const heldWas = cmHoldOn; cmHoldOn = '';
+    const held = cmHoldHTML(sec); if (held) inner = held;
     cmBodySet($('#cm-body'), inner);
+    if (!held && cmMineAcc && CM_HOLD_SECS.indexOf(sec) > -1 && cmView.mode !== 'edit' && cmView.mode !== 'view') {
+      let seen = false; try { seen = srvSeen(cmCode); } catch (e) {}
+      if (seen) cmMineSave(cmCode, sec, cmMineAcc);
+    }
+    cmMineAcc = null;
+    /* (طلبُ صاحب الموقع) نهايةُ الانتظار: مساهمتي في مكانها لا تتحرّك، وغيرُها يظهر واحدةً بعد واحدة من فوق */
+    if (!held && heldWas === cmCode + '|' + sec && !bkReduce()) {
+      let k = 0;
+      $('#cm-body').querySelectorAll(':scope > .post:not([data-cmmine])').forEach(el => {
+        el.style.animationDelay = Math.min(k++, 8) * 70 + 'ms'; el.classList.add('cm-rise');
+        el.addEventListener('animationend', () => { el.classList.remove('cm-rise'); el.style.animationDelay = ''; }, { once: true });
+      });
+    }
     /* موضعُ إلباس التكبير الوحيد: إن لم يصحّ الآن (تبويبٌ آخر · خروجٌ من التحرير ·
        حاضنٌ بلا قامة) أُطفئ — فلا يبقى حالٌ معلّقٌ يُفاجئ قسمًا آخر */
     if (cxMax && !cxMaxOk()) cxMax = false;
@@ -11612,8 +11659,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     try {
       const fr = pcCardsHTML({ id: '__ghost', data: {} });
       return `<div class="post pk pk--info pk--peek pk--pack pk--icx pk--icrow pk--pc pc-ghost" aria-hidden="true" inert><div class="post-yt">`
-        + `<span class="post-av post-av--yt"><span class="pc-gav"></span></span><div class="post-ytmain"><div class="post-ytmeta"><b class="post-name">${AC_INK}</b></div>`
-        + `<div class="pc-ban pc-ban--ghost"><span class="pc-art pc-art--ghost"></span><div class="pc-ttl"><b class="pc-name">${AC_INK}</b></div>${fr}</div></div></div></div>`;
+        /* (طلبُ صاحب الموقع) والعناوينُ مستطيلاتٌ لا حبر: الاسمُ والتاريخُ والعنوانُ والحالة — والأرقامُ وحدَها حبرٌ ذهبيّ */
+        + `<span class="post-av post-av--yt"><span class="pc-gav"></span></span><div class="post-ytmain"><div class="post-ytmeta"><b class="post-name"><i class="pc-gbar" style="width:46px"></i></b><i class="pc-gbar" style="width:58px"></i></div>`
+        + `<div class="pc-ban pc-ban--ghost"><span class="pc-art pc-art--ghost"></span><div class="pc-ttl"><b class="pc-name"><i class="pc-gbar pc-gbar--t"></i></b>`
+        + `<span class="pc-sale pc-sale--free pc-sale--ghost">${AC_INK}</span><div class="pc-prog"><span class="pc-ring"><span class="x3-dot x3-dot--ans"><i class="x3-gls"></i></span></span><i class="pc-gbar" style="width:62px"></i></div></div>${fr}</div></div></div></div>`;
     } finally { pcGhost = false; }
   }
   /* والغلافُ: حلقةٌ تدور فوقه حتى تصل صورتُه (أو تتعثّر) — ‎.pc-art.is-ld‎ */
@@ -27442,7 +27491,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!shown.length && !ld) return `<p class="v-none">${T().noPosts}</p>`;
     const html = cmSortBar(ld ? 'ld' : shown.length) + shown.map(({ p, i }) => (editing && p.me)
       ? cardEditCard(p, i)
-      : packCard(p, i, p.data.deck, 'c')).join('') + (ld ? pcGhostHTML() + (shown.length ? '' : pcGhostHTML()) : '');
+      : cmMineKeep(p, packCard(p, i, p.data.deck, 'c'))).join('') + (ld ? pcGhostHTML() + (shown.length ? '' : pcGhostHTML()) : '');
     acLdMark('cards:render:' + shown.length + (ld ? ':wait' : ':ok'));
     return html;
   }
