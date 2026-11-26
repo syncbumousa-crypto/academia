@@ -1915,6 +1915,12 @@ html[data-lang="en"] .market-course textarea { direction: ltr; }
 }
 .cm-pane > * { direction: rtl; }
 html[data-lang="en"] .cm-pane { direction: ltr; }
+/* الإنجليزيّة: الصفحةُ الرئيسيّة تنعكس كلُّها (الأقسام والمساهمات) — بقيّةُ الموقع على تخطيطه الثابت بعد */
+html[data-lang="en"] #panel-market { direction: ltr; }
+html[data-lang="en"] #panel-market .cm-pane > * { direction: ltr; }
+/* ‏ما كان يُقلَب باليد داخل حاويةٍ ‎rtl‎ يعود إلى طبيعته هنا: الحاويةُ نفسُها صارت ‎ltr‎ */
+html[data-lang="en"] #panel-market .cm-sortbar { justify-content: flex-start; }
+html[data-lang="en"] #panel-market .cm-sort__list { inset-inline-start: 0; inset-inline-end: auto; }
 /* شريط التمرير على ثيم الموقع: نحيف ومدوّر، بلون الأزرار الأصفر باهتًا (أوضح عند المرور) */
 .cm-pane::-webkit-scrollbar { width: 9px; }
 .cm-pane::-webkit-scrollbar-track { background: transparent; }

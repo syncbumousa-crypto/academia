@@ -3035,7 +3035,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let raf = 0, idleT = 0, centerT = 0;
     let drag = null;
 
-    const dir = () => -1;   // التخطيط دائمًا rtl: الفهرس الأعلى ينساب لليسار — الكتب لا تنعكس مع تغيّر اللغة
+    const dir = () => (state.lang === 'en' ? 1 : -1);   // الفهرس الأعلى ينساب لليسار بالعربيّة ولليمين بالإنجليزيّة
     const maxPos = () => Math.max(0, (items.length - 1) * GAP);
     const clampPos = v => Math.max(0, Math.min(maxPos(), v));
     const clampIdx = i => Math.max(0, Math.min(items.length - 1, i));
