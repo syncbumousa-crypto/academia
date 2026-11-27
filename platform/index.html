@@ -172,14 +172,15 @@
     .gn-strip .ex-card { cursor: pointer; }
 
     /* ===== أوراقُ المجتمعات (‎ROADMAP-EXPLORE س٢‎) =====
-       كلُّ ورقةٍ مطلقةُ الموضع، ويحسب ‎csLayout()‎ بدايتَها (‎inset-inline-start‎) وعرضَها، فتنقلب
+       كلُّ ورقةٍ مطلقةُ الموضع، ويحسب ‎csRender()‎ بدايتَها (‎inset-inline-start‎) وعرضَها، فتنقلب
        مع اللغة بلا حسابٍ ثانٍ. والمقدّمةُ فوق الجميع، وكلُّ ما بعُد عنها أخفضُ وأعتم. */
-    .cs-stack { position: relative; z-index: 0; height: 212px; margin: 4px 0 6px; outline: none; touch-action: pan-y; }   /* ‎z-index‎ يحبس طبقاتِ الأوراق داخلها */
+    .cs-stack { position: relative; z-index: 0; height: 212px; margin: 4px 0 6px; outline: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .cs-stack img { -webkit-user-drag: none; }   /* ‎z-index‎ يحبس طبقاتِ الأوراق داخلها */
     .cs-card  { container-type: inline-size; position: absolute; top: 14px; bottom: 14px; overflow: hidden; border-radius: 22px; color: #fff;
                 background: linear-gradient(160deg, var(--b), var(--a));
                 box-shadow: 0 6px 16px -10px rgba(0,0,0,.45);
-                transition: inset-inline-start .4s ease, width .4s ease, top .4s ease, bottom .4s ease, filter .4s ease, box-shadow .4s ease; }
-    .cs-card.is-on { top: 0; bottom: 0; box-shadow: 0 18px 40px -18px rgba(0,0,0,.55); }
+                transition: box-shadow .3s ease; }   /* الموضعُ والعرضُ يرسمهما ‎csRender‎ إطارًا إطارًا */
+    .cs-card.is-on { box-shadow: 0 18px 40px -18px rgba(0,0,0,.55); }
     .cs-card.is-soon { filter: saturate(.35) brightness(.8); }
     /* العلامةُ المائيّة: رمزُ الجهة وحده (بلا نصوص) على اليسار في العربيّة (آخرَ السطر)، كبيرةٌ ومقصوصةٌ بالحافّة،
        في منتصف الارتفاع — والنصوصُ في النصف الآخر فلا يتقاطعان (‎.cs-open‎ يترك لها ٤٢٪) */
@@ -199,14 +200,14 @@
     .cs-hit:focus-visible { outline: 3px solid var(--acc, #fff); outline-offset: -5px; }
     /* المغلقة: رمزُها في الجزء الظاهر منها وحده — أوّلَ الورقة أو آخرَها بحسب جهتها */
     .cs-peek  { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center;
-                justify-content: center; gap: 10px; pointer-events: none; transition: opacity .25s; }
+                justify-content: center; gap: 10px; pointer-events: none; }
     .cs-peek img { width: auto; max-width: 70%; height: 46px; }
     .cs-peek span { font-size: 12.5px; font-weight: 700; text-align: center; padding: 0 6px; line-height: 1.35; }
-    .cs-card.is-on .cs-peek { opacity: 0; }
     /* المقدّمة: الشعارُ كاملًا والاسمُ والجهةُ وزرّا الدخول والإضافة */
     .cs-open  { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px;
-                padding-block: 16px; padding-inline: 30px 44%; opacity: 0; pointer-events: none; transition: opacity .25s .1s; }
-    .cs-card.is-on .cs-open { opacity: 1; }
+                padding-block: 16px; padding-inline: 30px 44%; opacity: 0; pointer-events: none;
+                inset-inline-end: auto; width: var(--ow, 100%); }   /* عرضٌ ثابت: النصُّ لا يُعاد لفُّه والورقةُ تتّسع */
+    .cs-card:not(.is-on) .cs-act { visibility: hidden; }
     .cs-open img { height: 40px; width: auto; max-width: 60%; align-self: flex-start; margin-bottom: 6px; }
     .cs-name  { display: flex; align-items: center; gap: 14px; min-width: 0; }
     .cs-tt    { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -232,7 +233,7 @@
     .cs-acts  { display: flex; flex-wrap: wrap; gap: 6px; }
     #cs-fp .fchips { display: flex; flex-wrap: wrap; gap: 6px; }
     #cs-fp .fchip:disabled { opacity: .4; cursor: default; }
-    @media (prefers-reduced-motion: reduce) { .cs-card, .cs-wm, .cs-peek, .cs-open { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .cs-card, .cs-wm { transition: none; } }
     @media (max-width: 600px) { .cs-stack { height: 190px; } .cs-open { padding-block: 12px; padding-inline: 16px 40%; } .cs-open img { height: 28px; } .cs-badge { width: 44px; height: 44px; } .cs-badge.is-wide { width: 88px; height: 30px; } .cs-name { gap: 10px; } .cs-open b { font-size: 22px; } .cs-open b.is-long { font-size: 16px; } .cs-wm { width: 48%; height: 115%; } .cs-card[data-wmw] .cs-wm { width: 34%; inset-inline-end: 4%; } .cs-more { display: none; } }
 
     /* رفٌّ موعودٌ لم يُملأ بعد: أغلفةٌ مرسومةٌ بالخطّ المتقطّع لا كتبٌ مخترَعة */
@@ -1129,9 +1130,11 @@
         }).join('') + '<button type="button" class="cs-more" data-more="-1" hidden></button><button type="button" class="cs-more" data-more="1" hidden></button>';
         csLayout();
       }
-      function csLayout() {
-        var box = document.getElementById('ex-coms'); if (!box || !CS.list.length) return;
-        var W = box.clientWidth || 900, n = CS.list.length, p = CS.sel;
+      /* ===== الحركة المتصلة (‎ROADMAP: حركة المجتمعات مثل رف الكتب‎) =====
+         ‎CS.pos‎ موقعٌ عشريّ (٢٫٤ = بين الثالثة والرابعة)، و‎CS.sel‎ تقريبُه. يُحسب ترتيبُ الأوراق عند العددين
+         الصحيحين حوله ويُمزج بينهما، فتتبع الأوراقُ الإصبعَ لحظةً بلحظة ثمّ تنزلق لأقرب ورقة — كشريط الكتب */
+      CS.pos = CS.sel || 0;
+      function csGeom(p, W, n) {
         var R = W < 600 ? 1 : 3;                                   /* كم ورقةً تطلّ من كلّ جانب */
         var s0 = Math.max(0, p - R), s1 = Math.min(n - 1, p + R), b = p - s0, a = s1 - p;
         var gap = R > 1 ? 14 : 8, OPEN = Math.max(220, Math.min(560, W - (b + a) * (R > 1 ? 52 : 30) - gap * 2));
@@ -1139,29 +1142,55 @@
         var step = (b + a) ? Math.max(36, Math.min(120, (W - OPEN - gap * 2) / (b + a))) : 0;
         var openS = b * step + (b ? gap : 0), total = openS + OPEN + (a ? gap + a * step : 0);
         var off = Math.max(0, (W - total) / 2);
-        var cards = box.querySelectorAll('.cs-card');
-        cards.forEach(function (el, k) {
-          var on = k === p, st, w = on ? OPEN : CW, side = '';
-          if (k < s0 || k > s1) { el.style.display = 'none'; return; }
+        var at = function (k) {
+          return off + (k === p ? openS : k < p ? (k - s0) * step : openS + OPEN + gap + (k - p) * step - CW);
+        };
+        var g = { open: OPEN, cw: CW, step: step, s0: s0, s1: s1, st: [], w: [], vis: [] };
+        for (var k = 0; k < n; k++) {
+          var kk = Math.max(s0, Math.min(s1, k));                 /* المخفيّةُ تحت آخر ورقةٍ ظاهرة من جهتها */
+          g.st.push(at(kk)); g.w.push(k === p ? OPEN : CW); g.vis.push(k === kk ? 1 : 0);
+        }
+        return g;
+      }
+      function csRender() {
+        var box = document.getElementById('ex-coms'); if (!box || !CS.list.length) return;
+        var W = box.clientWidth || 900, n = CS.list.length;
+        var f = Math.max(0, Math.min(n - 1, CS.pos)), i0 = Math.floor(f), i1 = Math.min(n - 1, i0 + 1), t = f - i0;
+        var A = csGeom(i0, W, n), B = i1 === i0 ? A : csGeom(i1, W, n), sel = Math.round(f);
+        var G = sel === i0 ? A : B, L = function (x, y) { return x + (y - x) * t; };
+        CS.sel = sel;
+        box.style.setProperty('--ow', L(A.open, B.open) + 'px');
+        box.querySelectorAll('.cs-card').forEach(function (el, k) {
+          var vis = L(A.vis[k], B.vis[k]);
+          if (vis <= 0) { el.style.display = 'none'; return; }
           el.style.display = '';
-          if (on) st = openS;
-          else if (k < p) { st = (k - s0) * step; side = 's'; }
-          else { st = openS + OPEN + gap + (k - p) * step - CW; side = 'e'; }
-          el.style.insetInlineStart = (off + st) + 'px';
-          el.style.width = w + 'px';
-          el.style.zIndex = on ? 50 : 40 - Math.abs(k - p);
-          el.style.filter = on ? '' : 'brightness(' + (1 - Math.min(3, Math.abs(k - p)) * .07) + ')';
+          var d = Math.abs(k - f), near = Math.max(0, 1 - d), o = Math.max(0, Math.min(1, 1 - d * 2.2)), on = k === sel;
+          el.style.insetInlineStart = L(A.st[k], B.st[k]) + 'px';
+          el.style.width = L(A.w[k], B.w[k]) + 'px';
+          el.style.top = el.style.bottom = (14 * (1 - near)) + 'px';
+          el.style.opacity = vis < 1 ? vis : '';
+          el.style.zIndex = 100 - Math.round(d * 10);
+          var dim = d > .01 ? 'brightness(' + (1 - Math.min(3, d) * .07) + ')' : '';
+          el.style.filter = el.classList.contains('is-soon') ? 'saturate(.35) brightness(.8) ' + dim : dim;
           el.classList.toggle('is-on', on);
-          var pk = el.querySelector('.cs-peek');
+          el.querySelector('.cs-open').style.opacity = o;
+          var pk = el.querySelector('.cs-peek'), side = k < sel ? 's' : 'e', pw = Math.max(36, G.step);
           /* الجزءُ الظاهر من المغلقة عرضُه ‎step‎ على جهتها، ففيه وحده رمزُها */
-          pk.style.width = Math.max(36, step) + 'px';
-          pk.style.insetInlineStart = side === 'e' ? (CW - Math.max(36, step)) + 'px' : '0';
-          pk.style.display = step < 48 ? 'none' : '';
+          pk.style.opacity = Math.max(0, Math.min(1, (d - .45) * 2.2));   /* يظهر بعد أن يغيب نصُّ المقدّمة */
+          pk.style.width = pw + 'px';
+          pk.style.insetInlineStart = side === 'e' ? 'auto' : '0';          /* مثبّتٌ بحافّة جهته والورقةُ تضيق */
+          pk.style.insetInlineEnd = side === 'e' ? '0' : 'auto';
+          pk.style.display = G.step < 48 ? 'none' : '';
           el.querySelector('.cs-hit').setAttribute('aria-pressed', on ? 'true' : 'false');
         });
         var mb = box.querySelectorAll('.cs-more'); if (mb.length < 2) return;
-        mb[0].hidden = s0 === 0; mb[0].textContent = '+' + s0; mb[0].style.insetInlineStart = '-24px';
-        mb[1].hidden = s1 === n - 1; mb[1].textContent = '+' + (n - 1 - s1); mb[1].style.insetInlineEnd = '-24px';
+        mb[0].hidden = G.s0 === 0; mb[0].textContent = '+' + G.s0; mb[0].style.insetInlineStart = '-24px';
+        mb[1].hidden = G.s1 === n - 1; mb[1].textContent = '+' + (n - 1 - G.s1); mb[1].style.insetInlineEnd = '-24px';
+      }
+      /* من خارج الحركة (بحث، فلتر، بناء): يُؤخذ ‎CS.sel‎ كما هو */
+      function csLayout() {
+        if (Math.round(CS.pos) !== CS.sel) { cancelAnimationFrame(CS.anim); CS.anim = 0; clearTimeout(CS.idle); CS.pos = CS.sel; }
+        csRender();
       }
       /* ===== البحثُ والفلاتر (‎ROADMAP-EXPLORE س٣–س٤‎) =====
          الدولةُ ثمّ مدينتُها ثمّ النوع، و«مجتمعاتي». والبحثُ يتسامح في الهمزات والتاء المربوطة والياء.
@@ -1284,49 +1313,92 @@
         });
       })();
 
+      /* الانزلاق إلى ورقة: نفس منحنى الكتب (‎easeOutCubic‎ في ٣٠٠ms)، وفوريٌّ مع «تقليل الحركة» */
+      var CS_SNAP = 300, CS_IDLE = 130;
+      function csClamp(v) { return Math.max(0, Math.min(CS.list.length - 1, v)); }
+      function csTo(target) {
+        cancelAnimationFrame(CS.anim); CS.anim = 0; clearTimeout(CS.idle);
+        target = csClamp(target); CS.target = target;
+        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { CS.pos = target; csRender(); return; }
+        var from = CS.pos, t0 = performance.now();
+        var stepFn = function (now) {
+          var k = Math.min(1, (now - t0) / CS_SNAP), e = 1 - Math.pow(1 - k, 3);
+          CS.pos = from + (target - from) * e; csRender();
+          if (k < 1) CS.anim = requestAnimationFrame(stepFn); else { CS.anim = 0; CS.pos = target; csRender(); }
+        };
+        CS.anim = requestAnimationFrame(stepFn);
+      }
       function csGo(d) {
         if (!CS.list.length) return;
-        CS.sel = Math.max(0, Math.min(CS.list.length - 1, CS.sel + d)); csLayout();
+        var base = CS.anim ? CS.target : Math.round(CS.pos);      /* ضغطاتٌ متتالية تتراكم ولا تضيع */
+        csTo(base + d);
       }
       (function () {
         var box = document.getElementById('ex-coms');
+        var dir = function () { return getComputedStyle(box).direction === 'rtl' ? -1 : 1; };
+        var live = function () { cancelAnimationFrame(CS.anim); CS.anim = 0; };
+        var settle = function () { clearTimeout(CS.idle); CS.idle = setTimeout(function () { csTo(Math.round(CS.pos)); }, CS_IDLE); };
+        var noClick = false;
         box.addEventListener('click', function (e) {
+          if (noClick) { noClick = false; e.preventDefault(); e.stopPropagation(); return; }
           var more = e.target.closest('.cs-more');
           if (more) { csGo(+more.dataset.more * 4); return; }
           var hit = e.target.closest('.cs-hit'); if (!hit) return;
           var card = hit.closest('.cs-card'), k = Array.prototype.indexOf.call(box.querySelectorAll('.cs-card'), card);
-          if (k !== CS.sel) { CS.sel = k; csLayout(); return; }
+          if (k !== CS.sel) { csTo(k); return; }
           var c = COMS[+card.dataset.ci];                       /* الثانيةُ تفتح، و«قريبًا» لا يُفتح */
           if (c && !c.soon) openCom(c);
-        });
+        }, true);
         box.addEventListener('keydown', function (e) {
-          var rtl = getComputedStyle(box).direction === 'rtl';
-          if (e.key === 'ArrowLeft')  { csGo(rtl ? 1 : -1); e.preventDefault(); }
-          if (e.key === 'ArrowRight') { csGo(rtl ? -1 : 1); e.preventDefault(); }
+          if (e.key === 'ArrowLeft')  { csGo(dir() < 0 ? 1 : -1); e.preventDefault(); }
+          if (e.key === 'ArrowRight') { csGo(dir() < 0 ? -1 : 1); e.preventDefault(); }
         });
-        /* السحبُ في الجوّال: أفقيٌّ يكفي ٤٠ بكسلًا، والعموديُّ يبقى للتمرير */
-        var x0 = null;
-        box.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
-        box.addEventListener('pointerup', function (e) {
-          if (x0 == null) return; var dx = e.clientX - x0; x0 = null;
-          if (Math.abs(dx) < 40) return;
-          var rtl = getComputedStyle(box).direction === 'rtl';
-          csGo((dx < 0) === rtl ? 1 : -1);
+        box.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        /* السحب (فأرة ولمس): الأوراقُ تتبع الإصبع، وعند الإفلات تكمل بقدر سرعته ثمّ تستقرّ على ورقة.
+           العموديُّ يبقى لتمرير الصفحة (‎touch-action: pan-y‎) */
+        var drag = null;
+        var pxPerCard = function () { return (box.clientWidth || 900) < 600 ? 140 : 200; };
+        box.addEventListener('pointerdown', function (e) {
+          if (e.button !== 0 || !CS.list.length) return;
+          drag = { x: e.clientX, pos: CS.pos, id: e.pointerId, moved: false, hist: [[performance.now(), e.clientX]] };
         });
-        /* إصبعان على لوحة اللمس (عجلة أفقية): بطاقة واحدة لكل سحبة؛ العمودي يبقى لتمرير الصفحة */
-        var wAcc = 0, wLock = false, wIdle = 0;
+        box.addEventListener('pointermove', function (e) {
+          if (!drag || e.pointerId !== drag.id) return;
+          var dx = e.clientX - drag.x;
+          if (!drag.moved) {
+            if (Math.abs(dx) < 6) return;
+            drag.moved = true; live(); clearTimeout(CS.idle);
+            try { box.setPointerCapture(drag.id); } catch (_) {}
+          }
+          CS.pos = csClamp(drag.pos - dx * dir() / pxPerCard());   /* كالكتب: الأوراقُ تمشي مع الإصبع */
+          csRender();
+          drag.hist.push([performance.now(), e.clientX]); if (drag.hist.length > 8) drag.hist.shift();
+        });
+        var endDrag = function (e) {
+          if (!drag || e.pointerId !== drag.id) return;
+          var d = drag; drag = null;
+          if (!d.moved) return;
+          noClick = true; setTimeout(function () { noClick = false; }, 0);
+          try { box.releasePointerCapture(d.id); } catch (_) {}
+          var now = performance.now(), h = d.hist.filter(function (p) { return now - p[0] < 120; });
+          var v = h.length > 1 ? (h[h.length - 1][1] - h[0][1]) / Math.max(16, h[h.length - 1][0] - h[0][0]) : 0;   /* بكسل/ms */
+          var fling = (-v * dir()) / pxPerCard() * 160;           /* دفعةُ السرعة: ما ستقطعه في ١٦٠ms */
+          var base = Math.round(CS.pos), tgt = Math.round(CS.pos + fling);
+          csTo(Math.max(base - 1, Math.min(base + 1, tgt)));
+        };
+        box.addEventListener('pointerup', endDrag);
+        box.addEventListener('pointercancel', endDrag);
+        /* إصبعان على لوحة اللمس (عجلة أفقية): يحرّكان الموقع مباشرةً بحساسية الكتب، والتوقّفُ ١٣٠ms يستقرّ
+           على أقرب ورقة. والعموديُّ يبقى لتمرير الصفحة */
+        var SENS = .6 / 160;
         box.addEventListener('wheel', function (e) {
           var dx = e.deltaX || (e.shiftKey ? e.deltaY : 0);
           if (Math.abs(dx) <= Math.abs(e.deltaY) && !e.shiftKey) return;
-          e.preventDefault();
-          clearTimeout(wIdle); wIdle = setTimeout(function () { wLock = false; wAcc = 0; }, 180);
-          if (wLock) return;
-          wAcc += dx;
-          if (Math.abs(wAcc) < 40) return;
-          var rtl = getComputedStyle(box).direction === 'rtl';
-          csGo((wAcc > 0) === rtl ? 1 : -1); wLock = true; wAcc = 0;
+          e.preventDefault(); live();
+          CS.pos = csClamp(CS.pos + dx * SENS * dir());
+          csRender(); settle();
         }, { passive: false });
-        window.addEventListener('resize', csLayout);
+        window.addEventListener('resize', csRender);
       })();
 
       /* شارةُ المجتمع: دائرتُه بلون غلافه، واسمُه، ووصلةٌ تفتحه */
