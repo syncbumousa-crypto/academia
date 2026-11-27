@@ -50,7 +50,7 @@
       country: 'GB', city: { ar: 'مانشستر', en: 'Manchester' },
       aliases: ['UoM', 'Manchester', 'مانشستر', 'Hive', 'The Hive'],
       a: '#3d0a5c', b: '#660099', acc: '#ffcc33',
-      logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', wmWide: 1, href: '../TheHive/' }
+      logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', wm: 'unis/uom-mono-white.svg', wmWide: 1, badgeWide: 1, href: '../TheHive/' }
   ].concat([
     /* ===== المراحل الدراسية ===== */
     ['thanawi', 'الثانوية', 'Thanawi', 'stage', SA, 'المرحلة الثانوية: المسار العام والمسارات التخصصية', 'Saudi secondary school (General and specialised tracks)', 'ثانوي', 'Thanawi', ['ثانوي', 'ثالث ثانوي', 'المسارات', 'High School', 'Secondary'], '#1d4a2e', '#3c8a55', '#cfe9b4'],
@@ -103,7 +103,7 @@
     sat: ['collegeboard.svg', 'collegeboard-mark.svg', 1],  /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
     gmat: ['gmac.svg', 'gmac-mark.svg', 1], cfa: ['cfa.svg', 'cfa-mark.svg', 1],
     cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', 'aicpa-mark.svg', 0, 0, ''], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
-    acca: ['acca-white.svg', 'acca-white.svg', 0, 1], cia: ['iia-white.svg', 'iia-mark.svg', 1],
+    acca: ['acca-white.svg', 'acca-white.svg', 0, 1, 'acca-white.svg'], cia: ['iia-white.svg', 'iia-mark.svg', 1],
     usmle: ['usmle-white.svg', 'usmle-mark.svg', 0]
   };
   window.AC_COMS.forEach(function (c) {

@@ -210,9 +210,11 @@
     .cs-open img { height: 40px; width: auto; max-width: 60%; align-self: flex-start; margin-bottom: 6px; }
     .cs-card[data-wide] .cs-open img { height: auto; width: 150px; }
     .cs-name  { display: flex; align-items: center; gap: 14px; min-width: 0; }
-    .cs-tt    { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .cs-tt    { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .cs-open b { padding-bottom: .3em; }
     .cs-badge { flex: none; width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center;
                 background: rgba(255,255,255,.14); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+    .cs-badge.is-wide { width: auto; padding: 0 12px; } .cs-open .cs-badge.is-wide img { width: 104px; height: auto; }
     .cs-open .cs-badge img { width: 70%; height: 70%; max-width: none; object-fit: contain; margin: 0; align-self: center; }
     .cs-open b { font-size: clamp(24px, 2.8vw, 34px); font-weight: 700; line-height: 1.15; }
     .cs-open b.is-long { font-size: clamp(19px, 2vw, 24px); } .cs-open > * { flex-shrink: 0; } .cs-open b.is-long + small { -webkit-line-clamp: 1; }
@@ -325,7 +327,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=8"></script>
+  <script src="../shared/communities.js?v=9"></script>
 </head>
 <body>
 
@@ -1116,7 +1118,7 @@
                    : c.tag ? (function (t) { return '<span class="cs-wmt" aria-hidden="true" style="--n:' + Math.max(3, t.length) + '">' + esc(t) + '</span>'; })(typeof c.tag === 'string' ? c.tag : c.tag[i ? 'en' : 'ar']) : '';
           var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
           /* رمز الجهة شارة جنب الاسم؛ والشعار الكامل فوق الاسم فقط لمن شعاره نص بلا رمز */
-          var badge = c.mark && (!c.wmWide || c.id === 'acca') ? '<span class="cs-badge"><img src="' + LOGO + c.mark + '" alt="' + esc(org || nm) + '"></span>' : '';
+          var badge = c.mark && (!c.wmWide || c.wm !== undefined) ? '<span class="cs-badge' + (c.badgeWide ? ' is-wide' : '') + '"><img src="' + LOGO + c.mark + '" alt="' + esc(org || nm) + '"></span>' : '';
           var logo = !badge && c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
           var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
                   : '<a class="cs-go" href="' + c.href + '" data-com="' + ci + '">' + (i ? 'Enter' : 'ادخل') + '</a>' + plusFor(c.id);
