@@ -958,7 +958,7 @@
          أصلًا في ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
       var COMS = [
         { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
-        { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', soon:1,               a:'#0a4a6c', b:'#1a8abe' },   /* ‎soon‎ يُرفع ويُضاف ‎href:'../Almudarraj/'‎ يومَ يُفتح */
+        { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', href:'../Almudarraj/', a:'#0a4a6c', b:'#1a8abe' },
         { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1,               a:'#2a2142', b:'#5d4a95' },
         { id:'tahsili',  ar:'التحصيلي', en:'Tahsili',   soon:1,               a:'#1e3326', b:'#3f7a55' },
         { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1,               a:'#3b1f26', b:'#8d4654' }
@@ -1127,6 +1127,10 @@
       /* ‎mode‎: ‎'market'‎ مكتبةُ المجتمع (من بطاقته) · ‎'nook'‎ ركنُك فيه
          (من اسمه في الدرج). والرأسُ واحدٌ فوقهما، فيُعلم أين أنت. */
       function openCom(c, mode) {
+        /* المكتبةُ التي تُفتح ههنا هي مكتبةُ المحرّك في هذه الصفحة — وهي المسلخ.
+           والمدرجُ موقعٌ منفصلٌ بجداوله ودرجه (‎platform/com.js‎)، فيُذهب إليه ولا
+           يُفتح ههنا، وإلّا لبست موادُّ المسلخ اسمَ المدرج (ROADMAP-MUDARRAJ) */
+        if (c.id !== 'maslakh') { if (c.href) location.href = c.href; return; }
         inCom = true; curCom = c;
         var nook = mode === 'nook';
         document.getElementById('com-open').href = c.href;
