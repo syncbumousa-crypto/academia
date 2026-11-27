@@ -31,6 +31,20 @@
              org: { ar: r[5], en: r[6] }, tag: { ar: r[7], en: r[8] }, aliases: r[9],
              a: r[10], b: r[11], acc: r[12], soon: 1 };
   }
+  /* جامعة قادمة: [id, ar, en, orgAr, orgEn, cityAr, cityEn, aliases, a, b, acc, logo, mark, mono, wide, private]
+     الشعار من موقع الجامعة أو ويكيميديا (المصادر في assets/brand/unis/sa/README.md)، والرمز قص viewBox منه.
+     وبلا شعار: اسمها المختصر علامة مائية */
+  function uni(r) {
+    var short = r[1].replace(/^(الجامعة|جامعة)\s+/, '');
+    var c = { id: r[0], ar: r[1], en: r[2], kind: 'uni', country: SA, city: { ar: r[5], en: r[6] },
+              org: { ar: r[3], en: r[4] }, aliases: r[7], a: r[8], b: r[9], acc: r[10], soon: 1,
+              tag: { ar: short, en: r[2] } };
+    if (r[11]) c.logo = r[11];
+    if (r[12]) { c.mark = r[12]; if (r[14]) { c.wmWide = 1; c.badgeWide = 1; c.wm = r[12]; } }
+    if (r[13]) c.mono = 1;
+    if (r[15]) c.aliases = c.aliases.concat(['اهلية', 'خاصة', 'Private']);
+    return c;
+  }
   window.AC_COMS = [
     /* ===== الجامعات ===== */
     { id: 'maslakh', ar: 'المسلخ', en: 'Almaslakh', kind: 'uni',
@@ -52,6 +66,10 @@
       a: '#3d0a5c', b: '#660099', acc: '#ffcc33',
       logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', wm: 'unis/uom-mono-white.svg', wmWide: 1, badgeWide: 1, href: '../TheHive/' }
   ].concat([
+    /* ===== جامعات السعودية القادمة (حكومية وأهلية): الصفوف بين العلامتين مولدة من بيان بحث الشعارات ===== */
+    /* UNIS-SA:BEGIN */
+    /* UNIS-SA:END */
+  ].map(uni)).concat([
     /* ===== المراحل الدراسية ===== */
     ['thanawi', 'الثانوية', 'Thanawi', 'stage', SA, 'المرحلة الثانوية: المسار العام والمسارات التخصصية', 'Saudi secondary school (General and specialised tracks)', 'ثانوي', 'Thanawi', ['ثانوي', 'ثالث ثانوي', 'المسارات', 'High School', 'Secondary'], '#1d4a2e', '#3c8a55', '#cfe9b4'],
     ['mutawasit', 'المتوسطة', 'Mutawasit', 'stage', SA, 'المرحلة المتوسطة', 'Saudi intermediate school', 'متوسط', 'Mutawasit', ['متوسط', 'Middle School', 'Intermediate'], '#2c4a1d', '#5e8a3c', '#e4e9b4'],
