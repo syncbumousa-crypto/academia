@@ -20672,3 +20672,9 @@ a.exp-fl:hover { text-decoration: underline; }
 
 /* المساهماتُ البعيدةُ عن النظر (‎cmFarWatch‎): لا تُرسم ولا يُحسب ما بداخلها، بقامتها المقيسة نفسِها */
 #cm-body > .post.cm-far { content-visibility: auto; }
+
+/* (اقتراح ٣+١ · ٣) المروحةُ المفتوحةُ تكبر حول الزاوية نفسِها فتخرج قليلًا عن حدّ مساحتها: يُرفع قصُّ المساحة ما دامت مفتوحة وحدَها
+   (القصُّ لازمٌ لحركة الانبساط والانطواء فقط، ولا تكون مروحةٌ مفتوحةً حينها) */
+#cm-body .pk-split > :is(.pk-src, .kt-view, .pk-bank):has(.pk-varc--fan.is-fan) { overflow: visible !important; position: relative; z-index: 30; }
+/* والمساهمةُ نفسُها تقصّ ما خرج عن حدّها (الزاويةُ على ‎~13px‎ منه): يُرفع قصُّها كذلك ما دامت مروحةٌ فيها مفتوحة */
+#cm-body .post.pk:has(.pk-varc--fan.is-fan) { overflow: visible !important; }
