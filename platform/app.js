@@ -11120,7 +11120,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) { bkScrThawAll(); return; }
       post.pkMidRun = true;
-      const D = closing ? PKFX.OUT * .62 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      const D = closing ? PKFX.IN * .85 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];   /* (الخروجُ حركةٌ واحدةٌ للجارين — عرضًا وقامةً معًا — فمدّتُه قريبةٌ من الدخول) */
       /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
       if (post.classList.contains('pk--framepub')) {
         const cardH1 = post.getBoundingClientRect().height;
@@ -11202,11 +11202,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
       const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
       const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
-      sides.forEach((x, i) => { x.style.boxSizing = 'border-box';
-        x.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ws[i] + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: wF + 'px' }], { duration: D, easing: cz, fill: 'forwards' }); });
-      kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
-      kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginLeft: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
-        { flexGrow: 0, flexShrink: 0, flexBasis: '0px', marginLeft: -gp + 'px', minWidth: '0px', paddingLeft: '0px', paddingRight: '0px' }], { duration: D, easing: cz, fill: 'forwards' });
+      /* (طلبُ صاحب الموقع: «لما اقفلها فيه jumps بمساحة المصادر») كان الجاران يتّسعان هنا في ‎170ms‎ (قفزاتٌ بـ‎275px‎ في الإطار)،
+         ثمّ يقفان والمساهمةُ تُرسم (‎~140ms‎)، ثمّ يصعدان مع ذهاب شريط المجلدات — حركتان بينهما وقفة. فالآن العمودُ وحده يصعد
+         إلى السقف هنا، والجاران ساكنان؛ ويتّسعان ويصعدان معًا في حركةٍ واحدة بعد الرسم (‎run‎) كما في الدخول */
+      void sides; void wF; void ws; void kw; void kcs; void cz;
       const t0 = performance.now();
       return new Promise(res => {
         const step = now => {
