@@ -27123,11 +27123,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        تنطوي مسرعةً (قيس: ‎~200ms‎ وخطواتٌ بـ‎~200px‎ في الإطار). فالآن تنطوي من أوّلها والمحتوى يخفت معها */
     const D = PKFX.IN * .8, isBook = L.classList.contains('pk-src');
     bkScrFrz(card);   /* (ROADMAP-BANK-SMOOTH ١) */
-    /* (ROADMAP-BANK-SMOOTH ٣) أيقونةُ الترويسة تبقى في مكانها نسخةً ثابتة، ثمّ تطير منها أيقونةُ الصفّ إلى فجوتها بعد الرسم */
-    const hIc = L.querySelector(':scope > .pk-blkh .pk-blkh__ic'), icR = hIc ? hIc.getBoundingClientRect() : null;
-    let icGh = icR && icR.width && !bkReduce() ? pkIcClone(hIc, icR) : null;
-    const icGone = () => { if (icGh) { icGh.remove(); icGh = null; } };
-    if (icGh) setTimeout(icGone, 3000);
+    /* (طلبُ صاحب الموقع: «نفس الشي أيقونة البنك» — كالملخّص في 1588) أيقونةُ الترويسة لا تبقى لتطير: تخفت سريعًا مع ترويستها
+       (أبناءُ المساحة تخفت أدناه)، وتظهر أيقونةُ الصفّ في فجوتها بتلاشٍ بعد الرسم (‎_fade‎ في ‎pkNotchDraw‎) */
+    const hIc = L.querySelector(':scope > .pk-blkh .pk-blkh__ic');
+    if (hIc && !bkReduce()) hIc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' });
     const hd = sp.querySelector(isBook ? ':scope > .pk-splh:not(.pk-splh--b)' : ':scope > .pk-splh--b');
     if (hd) hd.style.opacity = '0';
     const w = L.getBoundingClientRect().width, m = pkFxOuter(L, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
@@ -27172,7 +27171,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الكتابُ (الخارجُ أو الباقي) يُجمَّد أثناء الانطواء، ويُفكّ بعد الرسم الجديد — فالخارجُ لا يُبنى على عرضٍ صفر */
     bkHold();
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
-      if (icGh && icR) { const nid = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fly = { k: isBook ? 'book' : 'bank', r: icR, at: performance.now(), done: icGone }; setTimeout(icGone, 900); }
+      if (hIc && !bkReduce()) { const nid = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fade = { k: isBook ? 'book' : 'bank', at: performance.now() }; }
       try { commit(); } finally { bkRelease(); }
       if (hA) { try { hA.cancel(); } catch (e) {} }
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
