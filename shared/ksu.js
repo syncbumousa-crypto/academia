@@ -4,7 +4,7 @@
    يقوم في صفحة المدرج مقامَ ‎courses.js‎ و‎covers.js‎ في المسلخ، ولا يُحمَّل
    معهما. والمحرّكُ يقرأ منه ثلاثة أسماء:
      ‎COLLEGES‎ — الكلّيّات (من دليل القبول ١٤٤٧هـ، ‎_catalog/ksu/‎)
-     ‎DEPT_AR‎  — اختصاراتُ الأقسام بالعربي (تُملأ مع الكتالوج)
+     ‎DEPT_AR‎  — اختصاراتُ الأقسام بالعربي (من عمود ‎ar‎ في الكتالوج)
      ‎COURSES‎  — فارغة عمدًا: موادُّ المدرج من الخادم وحده، فلا تظهر
                   موادُّ المسلخ الاحتياطيّة لزائرٍ لم يصله الكتالوجُ بعد.
      ‎COVERS‎   — فارغة: لا أغلفةَ مبذورة.
@@ -32,6 +32,28 @@ const COLLEGES = {
   cfy:   { ar: 'السنة الأولى المشتركة',                       en: 'Common First Year' },
   muz:   { ar: 'كليات المزاحمية',                             en: 'Al-Muzahimiyah Colleges' },
 };
-const DEPT_AR = {};
+/* ===== اختصاراتُ الأقسام بالعربي تُستخرج من الكتالوج =====
+   موادُّ جامعة الملك سعود لها رمزٌ عربيٌّ رسميّ (‎CSC 111‎ = «عال 111»)، وهو في
+   عمود ‎ar‎ من كتالوج الخادم. فيُبنى منه ‎DEPT_AR‎ ليقرأ الكتابُ في العربيّة اسمَه
+   العربيَّ المختصر كما يُكتب في الجامعة. والدرجُ ههنا درجُ المدرج (‎com.js‎ قبلنا).
+   وأوّلُ زيارةٍ بلا كتالوج: المحرّكُ يُعيد الصفحةَ مرّةً حين يصل، فيُبنى حينها. */
+const DEPT_AR = (function () {
+  var out = {}, n = {};
+  try {
+    var C = JSON.parse(localStorage.getItem('academia2:catalog:v1') || 'null');
+    ((C && C.courses) || []).forEach(function (c) {
+      var e = /^([A-Z]+)\s/.exec(c.code || ''), a = /^([\u0600-\u06ff]+)\s/.exec(c.ar || '');
+      if (!e || !a) return;
+      var k = e[1], m = n[k] || (n[k] = {});
+      m[a[1]] = (m[a[1]] || 0) + 1;
+    });
+    Object.keys(n).forEach(function (k) {
+      var best = '', b = 0;
+      Object.keys(n[k]).forEach(function (a) { if (n[k][a] > b) { b = n[k][a]; best = a; } });
+      out[k] = best;
+    });
+  } catch (e) {}
+  return out;
+})();
 const COURSES = [];
 const COVERS = {};

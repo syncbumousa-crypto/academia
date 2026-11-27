@@ -798,7 +798,12 @@
     const sp = c.indexOf(' ');
     const dept = sp < 0 ? c : c.slice(0, sp);
     const num = sp < 0 ? '' : c.slice(sp + 1);
-    const lab = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
+    let lab = state.lang === 'ar' ? (DEPT_AR[dept] || dept) : dept;
+    /* وفي المدرج لكلّ مادّةٍ رمزُها العربيُّ الرسميّ (‎CSC 111‎ = «عال 111») — يُقرأ منها
+       لا من القسم: بعضُ البادئات الإنجليزيّة يقتسمها قسمان (‎GEO‎ جيولوجيا وجغرافيا) */
+    if (window.AC_COM && state.lang === 'ar') {
+      try { const a = /^([\u0600-\u06ff]+)\s/.exec((CM[c] || {}).arName || ''); if (a) lab = a[1]; } catch (e) {}
+    }
     return '<b>' + esc(lab) + '</b><i>' + esc(num) + '</i>';
   }
   /* ‎o = { size: 'xs'|'lg'|'' , inner: وسمٌ داخل الوجه , after: وسمٌ أخو الوجه }‎ */
@@ -2421,7 +2426,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      بطاقة الترم تحمل دائرة إتقان المادة في الطرف المقابل للصورة (فكرة الدائرة الزمنية أُلغيت) */
   /* «اسلامي 111» — الاسم العربي المختصر على طريقة الكود الإنجليزي */
   function arShort(c) {
-    if (c.arName) return c.arName;   /* اسم المادة العربي كما كتبه الأدمن في الكتالوج */
+    /* اسم المادة العربي كما كتبه الأدمن في الكتالوج. وفي المدرج بعضُ الخطط لم تطبع رمزًا
+       عربيًّا فبقي ‎ar‎ إنجليزيًّا (‎ACCT 317‎) — فيُبنى حينها من قسمه كبقيّة الرفّ */
+    if (c.arName && !(window.AC_COM && !/[\u0600-\u06ff]/.test(c.arName))) return c.arName;
     const sp = c.code.indexOf(' ');
     const dept = c.code.slice(0, sp);
     return `${DEPT_AR[dept] || dept} ${c.code.slice(sp + 1)}`;

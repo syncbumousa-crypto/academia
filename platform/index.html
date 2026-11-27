@@ -1237,6 +1237,7 @@
       }
       /* أسماءُ الموادّ: لكلّ مجتمعٍ كتالوجُه في درجه (المدرجُ يكتبه في ‎academia2:mudarraj:‎) */
       function gnCat(id) {
+        if (GN.cats && GN.cats[id]) return GN.cats[id];
         var k = id === 'maslakh' ? 'academia2:catalog:v1' : 'academia2:' + id + ':catalog:v1', m = {};
         try { var c = JSON.parse(localStorage.getItem(k) || 'null');
               (c && c.courses || []).forEach(function (x) { m[x.code] = x; }); } catch (e) {}
@@ -1326,6 +1327,22 @@
           GN.out = rs.some(function (r) { return r.out; });
           GN.coms.forEach(function (id, k) { GN.data[id] = rs[k]; });
           GN.at = Date.now(); gnRender();
+          /* ومن لم يزر المجتمعَ في هذا المتصفّح لم يُخبَّأ كتالوجُه، فتسقط أسماءُ موادّه إلى
+             الرمز الإنجليزيّ. فيُطلب مرّةً ويبقى في الذاكرة — لا يُكتب في درج المجتمع */
+          GN.coms.forEach(function (id) {
+            var nk = (GN.data[id] || {}).nook; if (!nk || id === 'maslakh') return;
+            var cat = gnCat(id), miss = Object.keys(nk.libs || {}).some(function (t) {
+              return (nk.libs[t] || []).some(function (x) { return x && x.code && !cat[x.code]; });
+            });
+            if (!miss) return;
+            fetch('/api/catalog?com=' + id).then(function (r) {
+              return r.ok && r.headers.get('x-com') === id ? r.json() : null;
+            }).then(function (j) {
+              if (!j || !Array.isArray(j.courses)) return;
+              var m = {}; j.courses.forEach(function (x) { m[x.code] = x; });
+              GN.cats = GN.cats || {}; GN.cats[id] = m; gnRender();
+            }).catch(function () {});
+          });
         });
       }
       document.getElementById('panel-nook-soon').addEventListener('click', function (e) {
