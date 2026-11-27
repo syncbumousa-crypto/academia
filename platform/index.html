@@ -314,7 +314,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=2"></script>
+  <script src="../shared/communities.js?v=3"></script>
 </head>
 <body>
 
@@ -333,7 +333,7 @@
         <!-- شعارُ أكاديميا: قلبُ «لُب» في إطار تحديدٍ مائلٍ بمقابضه وقلمٍ على زاويته المفتوحة.
              يأخذ لونَه من ‎currentColor‎، وشقُّ القلم فراغٌ (‎evenodd‎) لا لونَ خلفيّة. -->
         <a class="side-mark-a" href="https://syncbumousa-crypto.github.io/lobe/"
-           target="_blank" rel="noopener" title="لُب" aria-label="لُب">
+           target="_blank" rel="noopener" title="لب" aria-label="لب">
           <svg class="side-mark" viewBox="36 36 328 332" fill="currentColor"
                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <g transform="rotate(-8 200 200)">
@@ -470,7 +470,7 @@
       <div class="com-acts">
         <!-- الإضافةُ لا تفعل شيئًا بعدُ، كزرّ البطاقة في «استكشاف» سواءً -->
         <button class="com-btn" id="com-add" type="button">
-          <span class="com-plus">+</span><span id="com-add-tx">أضِف المجتمع</span></button>
+          <span class="com-plus">+</span><span id="com-add-tx">أضف المجتمع</span></button>
         <!-- وهذي تخرج من الجذر إلى موقع المجتمع نفسِه -->
         <a class="com-btn com-btn--go" id="com-open" href="../Almaslakh/"><span id="com-open-tx">صفحة المجتمع</span></a>
       </div>
@@ -480,7 +480,7 @@
   <section class="panel" id="panel-explore">
     <section class="ex-row">
       <div class="ex-head"><h2 class="ex-h" id="ex-h">مجتمعات</h2>
-        <p class="ex-sub" id="ex-sub">لكلِّ مجتمعٍ أهلُه ومكتبتُه.</p></div>
+        <p class="ex-sub" id="ex-sub">لكل مجتمع أهله ومكتبته.</p></div>
       <!-- المجتمعات أوراقٌ متراكبة (‎ROADMAP-EXPLORE س٢، الاتّجاه ٣٣‎): المقدّمةُ عريضةٌ والباقي يطلّ من حوافّه.
            لا ‎ex-wrap‎ حولها: التنقّلُ بين الأوراق لا بأسهم التمرير -->
       <!-- بحثُ المجتمعات وفلاترُها (‎ROADMAP-EXPLORE س٣–س٤‎) بأدوات بحث المكتبة نفسِها -->
@@ -938,9 +938,9 @@
 
       /* والمحرّكُ لا يعرف هذا التابَ فلا يترجمه: يتبع لغةَ الصفحة من ههنا */
       var T = { tab:['استكشاف','Explore'], h1:['مجتمعات','Communities'],
-                s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
-                soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'],
-                add:['أضِف المجتمع','Add community'], added:['مضاف','Added'],
+                s1:['لكل مجتمع أهله ومكتبته.','Each community has its own people and library.'],
+                soon:['قريبا','Soon'], empty:['لم يفتح هذا الرف بعد.','This shelf is not open yet.'],
+                add:['أضف المجتمع','Add community'], added:['مضاف','Added'],
                 page:['صفحة المجتمع','Community page'], soonN:['ركني','My nook'] };
       function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
 
@@ -986,7 +986,7 @@
           var on = isMine(b.dataset.mine);
           b.classList.toggle('is-in', on);
           b.textContent = on ? '✓' : '+';
-          b.title = on ? 'مضاف — اضغط للإزالة' : 'أضِف المجتمع';
+          b.title = on ? 'مضاف — اضغط للإزالة' : 'أضف المجتمع';
         });
         var ca = document.getElementById('com-add');
         if (ca && curCom) {
@@ -1076,11 +1076,11 @@
         return null;
       }
       /* زرُّ الكتاب بلا معرّف: لم يُقرَّر بعدُ ما يفعله، فيبقى ساكنًا */
-      var PLUS = '<button class="ex-add" type="button" title="أضِف">+</button>';
+      var PLUS = '<button class="ex-add" type="button" title="أضف">+</button>';
       function plusFor(id) {
         var on = isMine(id);
         return '<button class="ex-add' + (on ? ' is-in' : '') + '" type="button" data-mine="' + id +
-               '" title="' + (on ? 'مضاف — اضغط للإزالة' : 'أضِف المجتمع') + '">' + (on ? '✓' : '+') + '</button>';
+               '" title="' + (on ? 'مضاف — اضغط للإزالة' : 'أضف المجتمع') + '">' + (on ? '✓' : '+') + '</button>';
       }
 
       function esc(t) { return String(t).replace(/[&<>"]/g, function (c) {
@@ -1094,14 +1094,14 @@
       function csNote(i) { return T.soon[i]; }
       function buildComs() {
         var i = lang(), box = document.getElementById('ex-coms');
-        if (!CS.list.length) { box.innerHTML = '<div class="cs-empty">' + esc(i ? 'No community by that name.' : 'ما لقينا مجتمعًا بهذا الاسم.') + '</div>'; return; }
+        if (!CS.list.length) { box.innerHTML = '<div class="cs-empty">' + esc(i ? 'No community by that name.' : 'ما لقينا مجتمعا بهذا الاسم.') + '</div>'; return; }
         if (CS.sel >= CS.list.length) CS.sel = 0;
         box.innerHTML = CS.list.map(function (ci) {
           var c = COMS[ci], nm = i ? c.en : c.ar, org = c.org ? (i ? c.org.en : c.org.ar) : '';
           var city = c.city ? (i ? c.city.en : c.city.ar) : (window.AC_COUNTRIES && c.country && AC_COUNTRIES[c.country] ? AC_COUNTRIES[c.country][i ? 'en' : 'ar'] : '');
           var wide = c.id === 'hive' ? ' data-wide' : '';
           var mark = c.mark ? '<img class="cs-wm" src="' + LOGO + c.mark + '" alt="" aria-hidden="true">'
-                   : c.tag ? '<span class="cs-wmt" aria-hidden="true">' + esc(c.tag) + '</span>' : '';
+                   : c.tag ? '<span class="cs-wmt" aria-hidden="true">' + esc(typeof c.tag === 'string' ? c.tag : c.tag[i ? 'en' : 'ar']) + '</span>' : '';
           var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
           var logo = c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
           var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
@@ -1180,6 +1180,17 @@
       function cfApply(keepSel) {
         var cur = CS.list[CS.sel];
         CS.list = COMS.map(function (_, k) { return k; }).filter(function (k) { return passes(COMS[k], CF); });
+        /* والأقربُ أوّلًا: الاسمُ نفسُه، ثمّ ما يبدأ به اسمٌ أو لقب، ثمّ ما ورد في الوصف («سات» قبل «للدراسات») */
+        if (CF.q) {
+          var qq = norm(CF.q), rank = function (c) {
+            var names = [c.ar, c.en].concat(c.aliases || []).map(norm);
+            if (names.indexOf(qq) >= 0) return 0;
+            if (names.some(function (n) { return n.indexOf(qq) === 0 || n.indexOf(' ' + qq) >= 0; })) return 1;
+            return 2;
+          };
+          CS.list = CS.list.map(function (k, o) { return [rank(COMS[k]), o, k]; })
+            .sort(function (x, y) { return x[0] - y[0] || x[1] - y[1]; }).map(function (x) { return x[2]; });
+        }
         var at = keepSel ? CS.list.indexOf(cur) : -1;
         CS.sel = at >= 0 ? at : 0;
         buildComs(); cfPaint();
@@ -1195,7 +1206,7 @@
         document.getElementById('cs-ftx').textContent = i ? 'Filters' : 'فلاتر';
         var fn = document.getElementById('cs-fn'); fn.hidden = !active; fn.textContent = active;
         document.getElementById('cs-count').textContent = (CF.q || active)
-          ? (!n ? (i ? 'No results' : 'لا نتائج') : i ? n + (n === 1 ? ' community' : ' communities') : (n === 1 ? 'مجتمعٌ واحد' : n === 2 ? 'مجتمعان' : n + ' مجتمعات')) : '';
+          ? (!n ? (i ? 'No results' : 'لا نتائج') : i ? n + (n === 1 ? ' community' : ' communities') : (n === 1 ? 'مجتمع واحد' : n === 2 ? 'مجتمعان' : n + ' مجتمعات')) : '';
         /* اللوحة: لكلّ قيمةٍ عددُ ما تُظهره لو اختيرت، والتي تُفرغ النتائجَ مطفأة */
         var chip = function (grp, val, label) {
           var on = grp === 'mine' ? CF.mine : CF[grp] === val;
@@ -1475,11 +1486,11 @@
          ويُتحقّق من ترويسة ‎x-com‎ في كلّ ردّ: ما لم يأتِ من جداول مجتمعه لا يُعرض. */
       /* والمجتمعاتُ المفتوحةُ وحدها (ما عليه «قريبًا» لا جداولَ له بعد) */
       var GN = { coms: COMS.filter(function (c) { return !c.soon && c.href; }).map(function (c) { return c.id; }), data: {}, at: 0, f: 'all' };
-      var GN_T = { sub: ['ترماتك في كلّ المجتمعات. تضغط المادة فتنفتح في موقعها.', 'Your terms across communities. Tap a course to open it in its site.'],
+      var GN_T = { sub: ['ترماتك في كل المجتمعات. تضغط المادة فتنفتح في موقعها.', 'Your terms across communities. Tap a course to open it in its site.'],
                    all: ['الكل', 'All'], now: ['الترم الحالي', 'Current term'], past: ['الترمات السابقة', 'Past terms'],
-                   none: ['ما عندك مواد بعد. افتح مجتمعًا من «استكشاف» وأضف ترمك.', 'No courses yet. Open a community from Explore and add your term.'],
-                   out: ['ركنك للأعضاء. سجّل دخولك ويطلع لك ركنك من كلّ المجتمعات.', 'Sign in to see your nook from every community.'],
-                   err: ['تعذّر الوصول إلى ', 'Could not reach '], load: ['يُحمَّل…', 'Loading…'] };
+                   none: ['ما عندك مواد بعد. افتح مجتمعا من «استكشاف» وأضف ترمك.', 'No courses yet. Open a community from Explore and add your term.'],
+                   out: ['ركنك للأعضاء. سجل دخولك ويطلع لك ركنك من كل المجتمعات.', 'Sign in to see your nook from every community.'],
+                   err: ['تعذر الوصول إلى ', 'Could not reach '], load: ['يحمل…', 'Loading…'] };
       function gnTok() { try { return localStorage.getItem('academia2:tok:user') || ''; } catch (e) { return ''; } }
       function gnFetch(id) {
         var u = '/api/udoc?kind=nook' + (id === 'maslakh' ? '' : '&com=' + id);
