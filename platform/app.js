@@ -11290,13 +11290,21 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let live = true;
     /* وسقفُ الـT (رسمتُه في الخلفية) يخفت ويصعد مع الشريط: كان يبقى منه ‎~8px‎ فوق المصادر ثمّ يغيب دفعةً بعد الرسم */
     const tC = performance.now(), cE = pkBez(.4, 0, .2, 1);
-    const loop = () => { if (!live || !post0.isConnected) return; pkBandDraw(post0, []);
+    /* وفجواتُ كتلة الملخّص (أيقونةُ البنك أو المصادر في زاويته) تؤول بعد الرسم إلى الجار الذي يأخذ الزاوية: تُنحت فيه وهو
+       يقترب منها — مقدارُها من **المسافة الباقية** لا من الزمن (آخرُ ‎120px‎)، فتكتمل حول الأيقونة حين يصل، ولا تظهر دفعةً بعد الرسم */
+    const nSt = pkNotchSt[post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'] || {};
+    const nX = ['l', 'r'].filter(sd => nSt[sd] && nSt[sd].k === 'mid' && nSt[sd].to === 1 && sides.length).map(sd => {
+      const el = sides.slice().sort((a, b) => sd === 'l' ? R(a).left - R(b).left : R(b).right - R(a).right)[0];
+      return { sd, el, k: el.classList.contains('pk-src') ? 'book' : 'bank', v: 0 }; });
+    const loop = () => { if (!live || !post0.isConnected) return;
+      if (nX.length) { const sr = R(sp0); nX.forEach(x => { const er = R(x.el), q = Math.max(0, Math.min(1, 1 - (x.sd === 'l' ? er.left - sr.left : sr.right - er.right) / 120)); x.v = q * q * (3 - 2 * q); }); post0.pkNchX = nX; }
+      pkBandDraw(post0, []);
       const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), e = cE(Math.min(1, (performance.now() - tC) / D));
       if (mp) { mp.style.opacity = String(Math.max(0, 1 - e * 1.25)); mp.style.transform = `translateY(${-6 * e}px)`; }
       requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
-      live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
+      live = false; post0.pkMidRun = false; post0.pkBlkHold = false; post0.pkNchX = null;
       if (hdIc) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fade = { k: 'mid', at: performance.now() }; }
       { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
       run();
@@ -26648,8 +26656,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (e.t0 == null || (now - e.t0) < DUR) busy = true;
       if (v <= .01 && !(e.to === 1 && flyOf(tasks.find(x => x.sd === key)))) { if (e.to === 0 && e.t0 != null && now - e.t0 >= DUR) delete st[key]; if (e.to === 1) { const t0k = tasks.find(x => x.sd === key); if (t0k && t0k.bt) { t0k.bt.style.opacity = '0'; } } return; }   /* (الأيقونةُ لا تُرى قبل أن تبدأ فجوتُها) */
       if (!alive(k)) { delete st[key]; return; }
+      cut(k, sd, v, tasks.find(x => x.sd === key));
+    });
+    /* فجوةٌ بمقدار ‎v‎ في زاوية الكتلة ‎k‎ من جهة ‎sd‎ — و‎t‎ أيقونتُها إن كانت (وإلّا فجوةٌ بلا أيقونة: ‎pkNchX‎ أدناه) */
+    function cut(k, sd, v, t) {
       const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
-      const t = tasks.find(x => x.sd === key);
       nchN.push({ k, sd, nw, nh, c });
       apply(k, d => {
         const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
@@ -26687,7 +26698,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         }
         return d.replace(hit[0], seg);
       });
-    });
+    }
+    /* (طلبُ صاحب الموقع: «لما اقفل مساحة الملخص، مساحة المصادر من اليسار بالزاوية فجأة تجي فجوة زاويتها ما تنرسم»)
+       فجواتٌ تُنحت سلفًا في كتلةٍ ستأخذ الزاويةَ بعد الرسم (‎pkNchX‎ يضعه إغلاقُ الملخّص كلَّ إطار): الفجوةُ كانت في كتلة الملخّص
+       فتخفت معها، والجارُ يبلغ الزاويةَ مصمتًا ثمّ تظهر فجوتُه كاملةً مع الرسم (‎e.k = t.k‎ أعلاه). فتُنحت فيه وهو يقترب */
+    (card.pkNchX || []).forEach(x => { if (x.v > .01 && alive(x.k)) cut(x.k, x.sd, Math.min(1, x.v), null); });
     pkKcvNotch(card, nchN);
     card.pkNch = nchN;   /* (مقاسُ الفجوات الآن — يحمله الطيُّ إلى المساحة الطائرة فتلتئم فيها بحركة) */
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
