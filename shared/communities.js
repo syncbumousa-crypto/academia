@@ -50,7 +50,7 @@
       country: 'GB', city: { ar: 'مانشستر', en: 'Manchester' },
       aliases: ['UoM', 'Manchester', 'مانشستر', 'Hive', 'The Hive'],
       a: '#3d0a5c', b: '#660099', acc: '#ffcc33',
-      logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', href: '../TheHive/' }
+      logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', wmWide: 1, href: '../TheHive/' }
   ].concat([
     /* ===== المراحل الدراسية ===== */
     ['thanawi', 'الثانوية', 'Thanawi', 'stage', SA, 'المرحلة الثانوية: المسار العام والمسارات التخصصية', 'Saudi secondary school (General and specialised tracks)', 'ثانوي', 'Thanawi', ['ثانوي', 'ثالث ثانوي', 'المسارات', 'High School', 'Secondary'], '#1d4a2e', '#3c8a55', '#cfe9b4'],
@@ -90,22 +90,25 @@
      والهيئة السعودية للتخصصات الصحية لاختباراتها الأربعة، وETS للتوفل وجي آر إي.
      ولا شعار بعد لزمالة سوكبا واختبارات المهندسين والسنة التحضيرية: موقعا الهيئتين يقطعان الاتصال
      من خارج السعودية، والتحضيرية لا جهة واحدة لها. */
+  /* [الشعار الكامل على الورقة، رمزه وحده للعلامة المائية، ملون؟، الرمز عريض؟]
+     الرمز بلا نصوص (قص viewBox من الملف الرسمي نفسه) إلا ما كان شعاره نصا كله: آيلتس وAICPA وACCA */
   var E = 'exams/', LOGOS = {
-    thanawi: ['moe-white.svg', 'moe-white.svg', 0], mutawasit: ['moe-white.svg', 'moe-white.svg', 0],
-    qudurat: ['etec.svg', 'etec.svg', 1], tahsili: ['etec.svg', 'etec.svg', 1], step: ['etec.svg', 'etec.svg', 1],
-    pgat: ['etec.svg', 'etec.svg', 1], teacher: ['etec.svg', 'etec.svg', 1],
+    thanawi: ['moe-white.svg', 'moe-mark.svg', 0, 1], mutawasit: ['moe-white.svg', 'moe-mark.svg', 0, 1],
+    qudurat: ['etec.svg', 'etec-mark.svg', 1], tahsili: ['etec.svg', 'etec-mark.svg', 1], step: ['etec.svg', 'etec-mark.svg', 1],
+    pgat: ['etec.svg', 'etec-mark.svg', 1], teacher: ['etec.svg', 'etec-mark.svg', 1],
     smle: ['scfhs.svg', 'scfhs-mark.svg', 1], sple: ['scfhs.svg', 'scfhs-mark.svg', 1],
     sdle: ['scfhs.svg', 'scfhs-mark.svg', 1], snle: ['scfhs.svg', 'scfhs-mark.svg', 1],
-    ielts: ['ielts-white.svg', 'ielts-white.svg', 0], toefl: ['toefl.svg', 'toefl.svg', 1], gre: ['gre.svg', 'gre.svg', 1],
-    sat: ['collegeboard.svg', 'collegeboard.svg', 1],      /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
-    gmat: ['gmac.svg', 'gmac.svg', 1], cfa: ['cfa.svg', 'cfa.svg', 1],
-    cma: ['ima.svg', 'ima.svg', 1], cpa: ['aicpa.svg', 'aicpa.svg', 0], pmp: ['pmi.svg', 'pmi.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان لا أبيض كله (حروفه محفورة في المربع) */
-    acca: ['acca-white.svg', 'acca-white.svg', 0], cia: ['iia-white.svg', 'iia-white.svg', 0],
-    usmle: ['usmle-white.svg', 'usmle-white.svg', 0]
+    ielts: ['ielts-white.svg', 'ielts-white.svg', 0, 1],
+    toefl: ['toefl.svg', 'ets-mark.svg', 1], gre: ['gre.svg', 'ets-mark.svg', 1],      /* نجمة ETS */
+    sat: ['collegeboard.svg', 'collegeboard-mark.svg', 1],  /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
+    gmat: ['gmac.svg', 'gmac-mark.svg', 1], cfa: ['cfa.svg', 'cfa-mark.svg', 1],
+    cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', '', 0], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
+    acca: ['acca-white.svg', 'acca-white.svg', 0, 1], cia: ['iia-white.svg', 'iia-mark.svg', 1],
+    usmle: ['usmle-white.svg', 'usmle-mark.svg', 0]
   };
   window.AC_COMS.forEach(function (c) {
     var l = LOGOS[c.id]; if (!l) return;
-    c.logo = E + l[0]; c.mark = E + l[1]; if (l[2]) c.mono = 1;
+    c.logo = E + l[0]; c.mark = l[1] ? E + l[1] : ''; if (l[2]) c.mono = 1; if (l[3]) c.wmWide = 1;
   });
   window.AC_COUNTRIES = {
     SA:   { ar: 'السعودية', en: 'Saudi Arabia' },
