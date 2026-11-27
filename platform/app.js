@@ -26983,7 +26983,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        (طلبُ صاحب الموقع) */
     const loop = () => { if (!live || !card.isConnected) return; pkBandDraw(card, []); card.querySelectorAll('.pk-src__view.is-scr').forEach(v => v.pkBk && bkScrFit(v.pkBk)); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
-    Promise.all(anims.map(a => a.finished.catch(() => {}))).then(() => {
+    /* (لا تُنتظر حركةٌ بلا نهاية — كسهم التنبيه ‎pkUpNudge‎ في الملخّص الفارغ: كان خروجُ البنك يقف عندها فلا يُرسم أبدًا) */
+    const fin = a => { try { const t = a.effect && a.effect.getComputedTiming(); return !!t && isFinite(t.endTime); } catch (e) { return false; } };
+    Promise.all(anims.filter(fin).map(a => a.finished.catch(() => {}))).then(() => {
       live = false; card.pkBlkHold = false;
       if (done) done(); else if (card.isConnected) pkBandFit(card);
     });
@@ -27073,6 +27075,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
     /* تنطوي أفقيًّا إلى حافّة القسمة الخارجيّة (لا تنزل)، والفُرجةُ بينها وبين جارها ثابتة: هامشُها الخارجيُّ يبتلع فُرجتَها في آخرها */
     const D = PKFX.OUT, isBook = L.classList.contains('pk-src');
+    bkScrFrz(card);   /* (ROADMAP-BANK-SMOOTH ١) */
     const hd = sp.querySelector(isBook ? ':scope > .pk-splh:not(.pk-splh--b)' : ':scope > .pk-splh--b');
     if (hd) hd.style.opacity = '0';
     const w = L.getBoundingClientRect().width, m = pkFxOuter(L, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
@@ -27110,6 +27113,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
          إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
       const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
+      requestAnimationFrame(() => bkScrThawAfter(card1));
     });
   }
   function cxHdSet(up) {
@@ -30793,6 +30797,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bkFrzSet.add(b);
       clearTimeout(b.frzT); b.frzT = setTimeout(() => bkScrThaw(b), 3000);   /* (أمانٌ: لا تبقى مجمَّدةً إن انقطعت الحركة) */
       bkScrFrzFrame(b);
+      /* (ROADMAP-BANK-SMOOTH ١) وتتبع مساحتها كلَّ إطارٍ بنفسها — بعضُ حركات البنك لا تعيد رسم الكتل في كلّ إطار */
+      const z0 = b.frz, tick = () => { if (b.frz !== z0) return; bkScrFrzFrame(b); requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
     });
   }
   function bkScrFrzFrame(b) {
@@ -30822,6 +30829,13 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     b.ovFx.finished.then(() => { b.ovFx = null; }, () => {});
   }
   const bkScrThawAll = () => [...bkFrzSet].forEach(bkScrThaw);
+  function bkScrThawAfter(card) {
+    if (!bkFrzSet.size) return;
+    const fin = a => { try { const e = a.effect && a.effect.getComputedTiming(); return !!e && isFinite(e.endTime); } catch (er) { return false; } };
+    const an = (card && card.isConnected ? card.getAnimations({ subtree: true }) : [])
+      .concat([...document.querySelectorAll('#cm-body .pk-bkout, #cm-body .pk-ghost')].flatMap(x => x.getAnimations({ subtree: true }))).filter(fin);
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => bkScrThawAll());
+  }
   function bkScrFit(b) {
     if (b && b.frz) return bkScrFrzFrame(b);
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
@@ -32072,12 +32086,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (bk) fly = { r: bk.getBoundingClientRect(), node: bk.cloneNode(true) };
     }
     cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
+    if (post && pkLab()) bkScrFrz(post);   /* (ROADMAP-BANK-SMOOTH ١) الصفحاتُ المتتاليةُ لقطةٌ تتبع مساحتها حتى تقف الحركة */
     pkBank[id] = !on;
     if (!on) pkPaneLast[id] = 'bank';   /* يُضاف ولا يُنشَّط (طلبُ صاحب الموقع) */
     if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
     renderCmSection();
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
     const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
+    requestAnimationFrame(() => bkScrThawAfter(post2));   /* (بعد أن تُنشأ حركاتُها كلُّها في هذه النقرة) */
     /* ولا ملخّصَ مفتوح (المصادرُ وحدَها): ينبسط البنكُ من حافّته اليسرى والمصادرُ تتضيّق له — كدخوله بجانب الملخّص */
     if (!on && !nv && pkLab() && !bkReduce() && post2) {
       const pane = post2.querySelector('.post-ytmain > .pk-split > .pk-bank'), bo = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
