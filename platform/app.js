@@ -29679,7 +29679,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
-      clearTimeout(b.fitT); b.fitT = setTimeout(() => bkScrFitW(b), 160);   /* (بعد أن يستقرّ المقاس — لا في كلّ إطارٍ من انتقاله) */
+      /* (طلبُ صاحب الموقع: «الديناميكيّة سيّئة وفيه jumps» حين تنفتح مساحةٌ بجانب الصفحات المتتالية)
+         كان عرضُ ‎100%‎ يُحسب بعد أن يستقرّ المقاس بـ‎160ms‎ — فتبقى الصفحةُ بمقاسها القديم طوالَ حركة المساحة، ثمّ تقفز
+         إلى الجديد بعد انتهائها (قيس: ‎288→236px‎ بعد ‎280ms‎ من النهاية). فالآن يتبع المساحةَ في كلّ إطار ومكانُ القراءة ثابت،
+         كما تصغر لوحةُ الكتاب في الصفحة والصفحتين. ونافذةُ تبديل العرض (‎bkFx‎) والتقريبُ يبقيان على التأجيل (داخل ‎bkScrFitW‎) */
+      clearTimeout(b.fitT); bkScrFitW(b);
       b.scrPW = 0;
       b.scrSync && b.scrSync();
       bkScrFit(b);
@@ -30659,6 +30663,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkScrTone(b) {
     if (bkFx(b)) return bkFxLater(b, 'toneT', () => bkScrTone(b));
     if (!b || !b.scroll || !b.scr) return;
+    /* والمساحاتُ تتحرّك: قراءةُ ألوان اللوحات (‎getImageData‎) ثقيلةٌ في كلّ إطار — تُقرأ مرّةً بعد أن تقف */
+    { const cd = b.view && b.view.closest('.post'); if (cd && (cd.pkBandAnim || cd.classList.contains('pk--fxrun'))) { clearTimeout(b.toneMv); b.toneMv = setTimeout(() => bkScrTone(b), 140); return; } }
     bkScrPillTone(b);
     const src = b.view.closest('.pk-src'), hd = src && src.querySelector(':scope > .pk-blkh');
     if (!src || !hd) return;
