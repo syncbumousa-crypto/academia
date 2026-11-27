@@ -7536,7 +7536,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { cmFarWatch(); } catch (e) {} try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   /* الدعوة (الاقتراحُ ٤ من صاحب الموقع): مساهماتٌ مغبّشةٌ تُوحي بما ينتظر، وفوقها بطاقةٌ تقول اختر قسمًا من فوق */
   function cmPickHTML() {
@@ -11145,6 +11145,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
       const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
       const cardH0 = post0.getBoundingClientRect().height;
+      /* (طلبُ صاحب الموقع: «الاقي الايقونة وراها فجأة … ينبغي تظهر بديناميكية») موضعُ أيقونة الملخّص في فجوتها قبل الدخول — منه تطير */
+      const icFrom = closing ? null : (x => x && x.offsetParent ? x.getBoundingClientRect() : null)(post0.querySelector('.pk-icrow [data-pkic="mid"]'));
       commit();
       if (post0.pkClsAn) { post0.pkClsAn.forEach(x => { try { x.cancel(); } catch (e) {} }); post0.pkClsAn = null; [kv0, ...sp0.children].forEach(x => { if (x && x.style) { x.style.boxSizing = ''; if (x === kv0) x.style.overflow = ''; } }); }
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
@@ -11176,8 +11178,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (over > .5) an.push(kv.animate([{ [m]: -over + 'px' }, { [m]: '0px' }], { duration: D, easing: ez }));
         /* المحتوى لا العمودُ نفسُه: الكتلُ تُقاس من العمود، فلا يُزاح */
         [...kv.children].forEach(c => an.push(c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: D * .55, delay: D * .45, easing: ez, fill: 'backwards' })));
-        post.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)').forEach(x =>
+        /* (الأيقونةُ نفسُها لا تخفت مع ترويستها: تطير إليها) */
+        const midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
+        [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')).filter(pkNoArc) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)')].forEach(x =>
           an.push(x.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .6, delay: D * .3, easing: ez, fill: 'backwards' })));
+        const hic = midHd && midHd.querySelector('.pk-blkh__ic');
+        if (icFrom && hic) {
+          const r1 = hic.getBoundingClientRect(), cs = getComputedStyle(hic), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;
+          if (r1.width) {
+            const dx = (icFrom.left + icFrom.width / 2) - (r1.left + r1.width / 2 - (bm ? bm.e : 0)), dy = (icFrom.top + icFrom.height / 2) - (r1.top + r1.height / 2 - (bm ? bm.f : 0));
+            an.push(hic.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${icFrom.width / r1.width})` }, { transform: bm ? cs.transform : 'none' }], { duration: D, easing: ez }));
+          }
+        }
       }
       const dTop = old.top - R(sp).top;
       if (Math.abs(dTop) > 1) { const mt = parseFloat(getComputedStyle(sp).marginTop) || 0; an.push(sp.animate([{ marginTop: (mt + dTop) + 'px' }, { marginTop: mt + 'px' }], { duration: D, easing: ez })); }
@@ -26582,7 +26594,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const val = e => e.t0 == null ? e.from : e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
-    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now, k: e.k }; } });
+    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { const ne = st[key] = { from: val(e), to: 0, t0: null, k: e.k }; requestAnimationFrame(() => { ne.t0 = performance.now(); if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); }); } });
     tasks.forEach(t => { const key = t.sd, e = st[key];
       if (!e) { if (first) st[key] = { from: 1, to: 1, t0: now, k: t.k }; else { const ne = st[key] = { from: 0, to: 1, t0: null, k: t.k }; requestAnimationFrame(() => { ne.t0 = performance.now(); if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); }); } }
       else { if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now, k: t.k }; else e.k = t.k; } });
@@ -26619,6 +26631,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkKcvNotch(card, nchN);
     card.pkNch = nchN;   /* (مقاسُ الفجوات الآن — يحمله الطيُّ إلى المساحة الطائرة فتلتئم فيها بحركة) */
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
+  }
+  /* ===== رسمةُ الكتل تُعدَّل في مكانها (خطّةُ بطء الإغلاق ٣) =====
+     كانت تُبنى نصًّا جديدًا كلَّ إطارٍ من الحركة (‎innerHTML‎): عناصرُ تُهدم وتُنشأ ويُعاد حسابُ أنماطها. فإن بقي بناؤها كما هو
+     (العناصرُ نفسُها بالترتيب نفسِه) تُغيَّر سماتُها وحدها — ويُرفع ما كُتب عليها من ‎style‎ كما كان البناءُ الجديدُ يرفعه */
+  /* ===== المساهماتُ البعيدةُ عن النظر لا تُرسم ولا يُحسب ما بداخلها (خطّةُ بطء الإغلاق ٢) =====
+     حين تتحرّك مساهمةٌ (تتّسع مساحةٌ أو تضيق) يُعاد ترتيبُ ما تحتها كلِّه في كلّ إطار. فالبعيدةُ (أبعدُ من ‎600px‎ عن النظر)
+     تأخذ ‎content-visibility: auto‎ بقامتها المقيسة نفسِها (فلا يتغيّر طولُ الصفحة ولا موضعُ التمرير)، وتعود كما كانت قبل أن تقترب */
+  const cmFarSet = new Set();
+  let cmFarIO = null, cmFarRoot;
+  /* (الصفحةُ تُمرَّر في عنصرٍ لا في النافذة — ‎body‎ — فهامشُ المراقِب يُحسب على ذلك العنصر، وإلّا كانت التي تحت النظر مباشرةً «بعيدة») */
+  const cmFarScroller = el => { for (let e = el && el.parentElement; e; e = e.parentElement) { const o = getComputedStyle(e).overflowY; if (o === 'auto' || o === 'scroll') return e; } return null; };
+  function cmFarWatch() {
+    if (typeof IntersectionObserver !== 'function') return;
+    const body = document.getElementById('cm-body'); if (!body) return;
+    const root = cmFarScroller(body);
+    if (!cmFarIO || root !== cmFarRoot) {
+      if (cmFarIO) cmFarIO.disconnect();
+      cmFarSet.forEach(el => { el.classList.remove('cm-far'); el.style.containIntrinsicSize = ''; }); cmFarSet.clear();
+      cmFarRoot = root;
+      cmFarIO = new IntersectionObserver(es => es.forEach(e => {
+        const el = e.target;
+        if (!el.isConnected) { cmFarIO.unobserve(el); cmFarSet.delete(el); return; }
+        if (e.isIntersecting) { if (el.classList.contains('cm-far')) { el.classList.remove('cm-far'); el.style.containIntrinsicSize = ''; } }
+        else if (!el.classList.contains('cm-far')) { const h = e.boundingClientRect.height; if (h > 0) { el.style.containIntrinsicSize = `auto ${Math.round(h)}px`; el.classList.add('cm-far'); } }
+      }), { root, rootMargin: '600px 0px' });
+    }
+    cmFarSet.forEach(el => { if (!el.isConnected) { cmFarIO.unobserve(el); cmFarSet.delete(el); } });
+    body.querySelectorAll(':scope > .post').forEach(el => { if (!cmFarSet.has(el)) { cmFarSet.add(el); cmFarIO.observe(el); } });
+  }
+  function pkSvgSet(svg, html) {
+    if (svg.pkHtml === html && svg.children.length) return;
+    const items = [], re = /<(\w+)((?:\s+[\w-]+="[^"]*")*)\s*\/>/g; let m;
+    while ((m = re.exec(html))) { const at = {}; m[2].replace(/([\w-]+)="([^"]*)"/g, (x, k, v) => { at[k] = v; }); items.push([m[1], at]); }
+    const kids = svg.children;
+    const same = (html.match(/</g) || []).length === items.length && kids.length === items.length
+      && items.every((it, i) => kids[i].tagName.toLowerCase() === it[0] && (kids[i].getAttribute('data-k') || '') === (it[1]['data-k'] || ''));
+    svg.pkHtml = html;
+    if (!same) { svg.innerHTML = html; return; }
+    items.forEach((it, i) => {
+      const el = kids[i];
+      if (el.hasAttribute('style')) el.removeAttribute('style');
+      for (const k in it[1]) if (el.getAttribute(k) !== it[1][k]) el.setAttribute(k, it[1][k]);
+    });
   }
   function pkBandDraw(card, tongues) {
     const svg = card.querySelector(':scope > .pk-band'), ft = card.querySelector('.pk-ftline');
@@ -26711,8 +26766,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
       }
     }
-    svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
-      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
+    pkSvgSet(svg, `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
+      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out);    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
     /* ===== والصفحاتُ المتتاليةُ تُفصَّل على الرسمة **في اللحظة نفسها** (شكوى صاحب الموقع: «الصفحة تطلع برا مساحتها لجزء من الثانية») =====
        كانت تُؤجَّل إلى الإطار التالي مع شريط التمرير — وفي ذلك الإطار تكون المساحةُ قد تحرّكت (شريطُ المجلدات يقصر أو يطول)،
        فتُفصَّل على رسمةٍ قديمة وتنزاح بقدر حركة إطار (١٠–٢٥px): تحت الحافّة حين يقصر الشريط، وفوقها حين يطول */
