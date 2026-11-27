@@ -1264,12 +1264,12 @@
           if (c.country) countries[c.country] = 1;
           if (c.city && (!CF.country || c.country === CF.country)) { cities[c.city.en] = c.city; cityN[c.city.en] = (cityN[c.city.en] || 0) + 1; }
         });
-        /* المدينةُ ظاهرةٌ دائمًا (طلبُ صاحب الموقع)، والأكثرُ مجتمعاتٍ أوّلًا؛ واختيارُ دولةٍ يحصرها في مدنها */
+        /* المدنُ تظهر بعد اختيار الدولة (طلبُ صاحب الموقع)، مدنُها وحدها، والأكثرُ مجتمعاتٍ أوّلًا */
         var cityKeys = Object.keys(cities).sort(function (x, y) { return cityN[y] - cityN[x] || cities[x][L].localeCompare(cities[y][L], L); });
         var C = window.AC_COUNTRIES || {};
         var h = '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Country' : 'الدولة') + '</p><div class="fchips">' +
           Object.keys(countries).map(function (k) { return chip('country', k, C[k] ? C[k][L] : k); }).join('') + '</div></div>';
-        if (cityKeys.length) {
+        if (CF.country && cityKeys.length) {
           h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'City' : 'المدينة') + '</p><div class="fchips">' +
             cityKeys.map(function (k) { return chip('city', k, cities[k][L]); }).join('') + '</div></div>';
         }
