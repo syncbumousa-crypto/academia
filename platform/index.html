@@ -209,6 +209,11 @@
     .cs-card.is-on .cs-open { opacity: 1; }
     .cs-open img { height: 40px; width: auto; max-width: 60%; align-self: flex-start; margin-bottom: 6px; }
     .cs-card[data-wide] .cs-open img { height: auto; width: 150px; }
+    .cs-name  { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .cs-tt    { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .cs-badge { flex: none; width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center;
+                background: rgba(255,255,255,.14); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+    .cs-open .cs-badge img { width: 70%; height: 70%; max-width: none; object-fit: contain; margin: 0; align-self: center; }
     .cs-open b { font-size: clamp(24px, 2.8vw, 34px); font-weight: 700; line-height: 1.15; }
     .cs-open b.is-long { font-size: clamp(19px, 2vw, 24px); } .cs-open > * { flex-shrink: 0; } .cs-open b.is-long + small { -webkit-line-clamp: 1; }
     .cs-open small { font-size: 12.5px; line-height: 1.5; opacity: .85; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -228,7 +233,7 @@
     #cs-fp .fchips { display: flex; flex-wrap: wrap; gap: 6px; }
     #cs-fp .fchip:disabled { opacity: .4; cursor: default; }
     @media (prefers-reduced-motion: reduce) { .cs-card, .cs-wm, .cs-peek, .cs-open { transition: none; } }
-    @media (max-width: 600px) { .cs-stack { height: 190px; } .cs-open { padding-block: 12px; padding-inline: 16px 40%; } .cs-open img { height: 28px; } .cs-open b { font-size: 22px; } .cs-open b.is-long { font-size: 16px; } .cs-wm { width: 48%; height: 115%; } .cs-card[data-wmw] .cs-wm { width: 34%; inset-inline-end: 4%; } .cs-more { display: none; } }
+    @media (max-width: 600px) { .cs-stack { height: 190px; } .cs-open { padding-block: 12px; padding-inline: 16px 40%; } .cs-open img { height: 28px; } .cs-badge { width: 42px; height: 42px; border-radius: 12px; } .cs-name { gap: 10px; } .cs-open b { font-size: 22px; } .cs-open b.is-long { font-size: 16px; } .cs-wm { width: 48%; height: 115%; } .cs-card[data-wmw] .cs-wm { width: 34%; inset-inline-end: 4%; } .cs-more { display: none; } }
 
     /* رفٌّ موعودٌ لم يُملأ بعد: أغلفةٌ مرسومةٌ بالخطّ المتقطّع لا كتبٌ مخترَعة */
     .ex-chip  { font-size: 11px; font-weight: 700; color: var(--c-ink-soft);
@@ -320,7 +325,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=6"></script>
+  <script src="../shared/communities.js?v=8"></script>
 </head>
 <body>
 
@@ -1106,17 +1111,20 @@
           var c = COMS[ci], nm = i ? c.en : c.ar, org = c.org ? (i ? c.org.en : c.org.ar) : '';
           var city = c.city ? (i ? c.city.en : c.city.ar) : (window.AC_COUNTRIES && c.country && AC_COUNTRIES[c.country] ? AC_COUNTRIES[c.country][i ? 'en' : 'ar'] : '');
           var wide = (c.id === 'hive' ? ' data-wide' : '') + (c.wmWide ? ' data-wmw' : '');
-          var mark = c.mark ? '<img class="cs-wm" src="' + LOGO + c.mark + '" alt="" aria-hidden="true">'
+          var wmSrc = c.wm !== undefined ? c.wm : c.mark;
+          var mark = wmSrc ? '<img class="cs-wm" src="' + LOGO + wmSrc + '" alt="" aria-hidden="true">'
                    : c.tag ? (function (t) { return '<span class="cs-wmt" aria-hidden="true" style="--n:' + Math.max(3, t.length) + '">' + esc(t) + '</span>'; })(typeof c.tag === 'string' ? c.tag : c.tag[i ? 'en' : 'ar']) : '';
           var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
-          var logo = c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
+          /* رمز الجهة شارة جنب الاسم؛ والشعار الكامل فوق الاسم فقط لمن شعاره نص بلا رمز */
+          var badge = c.mark && (!c.wmWide || c.id === 'acca') ? '<span class="cs-badge"><img src="' + LOGO + c.mark + '" alt="' + esc(org || nm) + '"></span>' : '';
+          var logo = !badge && c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
           var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
                   : '<a class="cs-go" href="' + c.href + '" data-com="' + ci + '">' + (i ? 'Enter' : 'ادخل') + '</a>' + plusFor(c.id);
           return '<div class="cs-card' + (c.soon ? ' is-soon' : '') + '" data-ci="' + ci + '"' + wide + (c.mono ? ' data-mono' : '') +
                  ' style="--a:' + c.a + ';--b:' + c.b + ';--acc:' + (c.acc || '#fff') + '">' + mark +
                  '<div class="cs-peek">' + peekImg + '<span>' + esc(nm) + '</span></div>' +
-                 '<div class="cs-open">' + logo + '<b' + (nm.length > 12 ? ' class="is-long"' : '') + '>' + esc(nm) + '</b>' +
-                 '<small>' + esc(org) + (city ? ' · ' + esc(city) : '') + '</small><div class="cs-act">' + act + '</div></div>' +
+                 '<div class="cs-open">' + logo + '<div class="cs-name">' + badge + '<div class="cs-tt"><b' + (nm.length > (badge ? 9 : 12) ? ' class="is-long"' : '') + '>' + esc(nm) + '</b>' +
+                 '<small>' + esc(org) + (city ? ' · ' + esc(city) : '') + '</small></div></div><div class="cs-act">' + act + '</div></div>' +
                  '<button type="button" class="cs-hit" aria-label="' + esc(nm) + '"></button></div>';
         }).join('') + '<button type="button" class="cs-more" data-more="-1" hidden></button><button type="button" class="cs-more" data-more="1" hidden></button>';
         csLayout();

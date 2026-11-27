@@ -102,13 +102,13 @@
     toefl: ['toefl.svg', 'ets-mark.svg', 1], gre: ['gre.svg', 'ets-mark.svg', 1],      /* نجمة ETS */
     sat: ['collegeboard.svg', 'collegeboard-mark.svg', 1],  /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
     gmat: ['gmac.svg', 'gmac-mark.svg', 1], cfa: ['cfa.svg', 'cfa-mark.svg', 1],
-    cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', '', 0], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
+    cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', 'aicpa-mark.svg', 0, 0, ''], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
     acca: ['acca-white.svg', 'acca-white.svg', 0, 1], cia: ['iia-white.svg', 'iia-mark.svg', 1],
     usmle: ['usmle-white.svg', 'usmle-mark.svg', 0]
   };
   window.AC_COMS.forEach(function (c) {
     var l = LOGOS[c.id]; if (!l) return;
-    c.logo = E + l[0]; c.mark = l[1] ? E + l[1] : ''; if (l[2]) c.mono = 1; if (l[3]) c.wmWide = 1;
+    c.logo = E + l[0]; c.mark = l[1] ? E + l[1] : ''; if (l[2]) c.mono = 1; if (l[3]) c.wmWide = 1; if (l.length > 4) c.wm = l[4] ? E + l[4] : '';   /* علامة الخلفية إن اختلفت عن الرمز (فارغ = كلمة) */
   });
   window.AC_COUNTRIES = {
     SA:   { ar: 'السعودية', en: 'Saudi Arabia' },
