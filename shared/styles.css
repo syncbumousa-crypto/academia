@@ -17352,7 +17352,7 @@ html[data-theme="dark"] .pp-host { --pp-paper: #e9e5da; --pp-edge: #c9c3b4; --pp
 /* الورقةُ محمولة: المربّعاتُ التسعةُ كلُّها ظاهرةٌ ليُفلت في أيّها */
 .pp-grid.is-carry { grid-template-columns: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); grid-template-rows: minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); }
 .pk--max .kt-view--cards > .pp-grid,
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--cards > .pp-grid { flex: 1 1 auto; aspect-ratio: auto; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.pk-split--h > .kt-view--cards > .pp-grid { flex: 1 1 auto; aspect-ratio: auto; }
 .pp-cell { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 14px; overflow: visible; box-sizing: border-box; padding: 4px;
   border: 1.5px dashed transparent; transition: border-color .15s ease, background-color .15s ease; }
 .pp-cell > .pp-host { width: 100%; height: 100%; min-height: 0; }
@@ -18628,12 +18628,12 @@ html[data-theme="dark"] .cx-hlt.is-new .cx-hlt__n { color: #a0cdd2; }
 .cx-hltool__ul { bottom: -4px; height: 8px; }
 .hl-pal { border-radius: 0 0 12px 12px; padding: 7px 9px 6px; }
 /* ===== قامةُ المساحات من صفحة المصدر في الضيّقة (‎--pk-h‎ يضعها ‎pkSrcHFit‎) — والمساهمةُ الفارغةُ بها من أوّلها ===== */
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"]:not(.pk-split--none) { height: var(--pk-h); flex: none; }
-#cm-body .pk--frame.pk--blank:has(.post-ytmain > .pk-split[style*="--pk-h"]) { height: auto; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.pk-split--h:not(.pk-split--none) { height: var(--pk-h); flex: none; }
+#cm-body .pk--frame.pk--blank:has(.post-ytmain > .pk-split.pk-split--h) { height: auto; }   /* (بالصنف لا بـ‎[style*=]‎: مُحدِّدُ السمة داخل ‎:has()‎ كان يجعل كلَّ كتابةٍ على ‎style‎ في الموقع كلِّه تعيد فحص الأنماط ‎~7ms‎ — قيس) */
 /* ولوحُ الملخص يتبع القامةَ إذا قصرت (صفحتان أقصرُ من صفحة) — حدُّه الأدنى كان يُبقيه أطولَ من مساحته */
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--tree .kcv { min-height: 0; }
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--cards { display: flex; flex-direction: column; }
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split[style*="--pk-h"] > .kt-view--cards > .pp-host { flex: 1 1 auto; min-height: 0; height: auto; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.pk-split--h > .kt-view--tree .kcv { min-height: 0; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.pk-split--h > .kt-view--cards { display: flex; flex-direction: column; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.pk-split--h > .kt-view--cards > .pp-host { flex: 1 1 auto; min-height: 0; height: auto; }
 .pk-split.pk-splh-anim { transition: height .38s cubic-bezier(.2, .8, .2, 1); }
 
 /* ===== تحميلُ الكتاب المركون «يُجمَع ورقةً ورقة» (اختيارُ صاحب الموقع) =====
@@ -18915,7 +18915,7 @@ body:has(#cm-body.is-cxfull) :is(#card-modal, #xl-modal) { z-index: 4002; }
    وحده لا كتابَ معه ولا ملخّص، فكان يُمدّ إلى تلك القامة ولو كانت فيه خمسةُ مجلدات. فتصير قامتُه قدرَ صفوفه، لها حدٌّ
    أدنى (‎220px‎) لا تنزل عنه، وسقفُ القامة الثابتة نفسُه فما زاد يُمرَّر. ومتى انفتح معه الكتابُ أو الملخّصُ عادت قامتُهما */
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none),
-#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none)[style*="--pk-h"] { height: auto; min-height: 220px; }
+#cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none).pk-split--h { height: auto; min-height: 220px; }
 #cm-body .post:not(.pk--max) .post-ytmain > .pk-split.has-bank.no-mid:not(.has-book):not(.pk-split--none) > .pk-bank { max-height: clamp(440px, 60vh, 600px); }
 /* ===== مجلداتُ البنك (طلبُ صاحب الموقع) =====
    تصعد الصفوفُ نحو رأس المساحة (كانت تبدأ تحت سطر الرأس كلِّه وأيقونتُه في زاويته وحدها)، وزرُّ التحديد يدنو من
@@ -20339,6 +20339,8 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 /* طبقةُ القائمة (حبّةُ الرقم والتقريب والشريطان) بشكل القائمة نفسِه فوقها، لا تلتقط إلّا من أزرارها ومقبضَيها.
    والمساحةُ لا تقصّ ما يجاوز صندوقَها: رسمتُها أوسعُ منه قليلًا، والقصُّ عندئذٍ بالرسمة (‎bkScrFit‎) */
 .cbk-scr__ov { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: 14px; clip-path: inset(0 round 14px); }
+/* لقطةُ الصفحات المتتالية في أثناء حركة المساحات (‎bkScrFrz‎): مكانَ القائمة وعلى شكل المساحة، تُحجَّم بـ‎transform‎ وحده */
+.cbk-frz { position: absolute; z-index: 1; overflow: hidden; pointer-events: none; border-radius: var(--pk-scr-r, 14px); contain: strict; }
 #cm-body .pk-src:has(> .pk-src__view.is-scr) { overflow: visible; }
 
 /* ===== أيقونةُ مساحة المصادر وقوسُها بلونٍ يتكيّف مع الورق خلفهما (‎bkScrTone‎) — في الصفحات المتتالية وحدها ===== */
