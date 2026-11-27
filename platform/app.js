@@ -11245,7 +11245,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (fin.h && hCur) pkSrcH[id] = fin.h;   /* (الرسمُ يكتب القامةَ الأخيرةَ نفسَها: لا انتقالَ ثانٍ بعده) */
     /* ١. المحتوى يخفت (العمودُ أسرع، والشريطُ صاعدًا كما نزل) */
     [...kv0.children].forEach(c => an.push(c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }], { duration: D * .45, easing: 'ease-out', fill: 'forwards' })));
-    heads.forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
+    /* (طلبُ صاحب الموقع: «ظهور الأيقونة بالزاوية … ما فيه ديناميكية») أيقونةُ الملخّص لا تخفت مع ترويستها: تبقى، ثمّ تطير منها إلى فجوتها */
+    const hdIc = post0.querySelector('.post-ytmain > .pk-blkh--mid .pk-blkh__ic');
+    heads.flatMap(x => x.classList.contains('pk-blkh--mid') ? [...x.children].filter(y => y !== hdIc) : [x])
+      .forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
     /* ٢. العمودُ يضيق إلى جهته والجاران يتّسعان إليه */
     kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
     an.push(kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginInlineStart: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
@@ -11271,6 +11274,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(loop);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
       live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
+      if (hdIc && hdIc.isConnected) { const r = hdIc.getBoundingClientRect(); if (r.width) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fly = { k: 'mid', r, at: performance.now() }; } }
       { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
       run();
     });
@@ -26590,7 +26594,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        طويلة ‎~110ms‎)، فكانت ساعةُ الفجوة (‎180ms‎) تمضي قبل أوّل إطارٍ يُرى — فتظهر الفجوةُ والأيقونةُ شبهَ كاملتين. فالجديدةُ تبدأ
        ساعتُها من الرسم التالي (إطارٍ يُرى)، وتُعرف بزاويتها لا بكتلتها: أيقونةٌ تبقى في زاويتها وقد صارت الكتلةُ غيرَها (أُغلق الملخّصُ
        فصارت زاويتُه للمصادر) لا تُنحت فجوتُها من جديد */
-    const keys = () => Object.keys(st).filter(x => x !== '_seen');
+    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly');
+    /* أيقونةٌ تطير إلى فجوتها (‎_fly‎: من أين — يضعه إغلاقُ الملخّص): تُرى من أوّل إطارٍ وتهبط إليها والفجوةُ تُنحت حولها */
+    const fly = st._fly && performance.now() - st._fly.at < 2500 ? st._fly : null;
+    const flyOf = t => !!(fly && t && t.bt && t.bt.dataset.pkic === fly.k);
     const val = e => e.t0 == null ? e.from : e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
     const want = new Set(tasks.map(t => t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
@@ -26603,7 +26610,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const e = st[key], v = val(e), sd = key, k = e.k;
       if (v < 1 && v > 0 && e.to === e.from) {}   /* (ثابت) */
       if (e.t0 == null || (now - e.t0) < DUR) busy = true;
-      if (v <= .01) { if (e.to === 0 && e.t0 != null && now - e.t0 >= DUR) delete st[key]; if (e.to === 1) { const t0k = tasks.find(x => x.sd === key); if (t0k && t0k.bt) { t0k.bt.style.opacity = '0'; } } return; }   /* (الأيقونةُ لا تُرى قبل أن تبدأ فجوتُها) */
+      if (v <= .01 && !(e.to === 1 && flyOf(tasks.find(x => x.sd === key)))) { if (e.to === 0 && e.t0 != null && now - e.t0 >= DUR) delete st[key]; if (e.to === 1) { const t0k = tasks.find(x => x.sd === key); if (t0k && t0k.bt) { t0k.bt.style.opacity = '0'; } } return; }   /* (الأيقونةُ لا تُرى قبل أن تبدأ فجوتُها) */
       if (!alive(k)) { delete st[key]; return; }
       const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
       const t = tasks.find(x => x.sd === key);
@@ -26620,10 +26627,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (t && pr) {
           const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
           t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
+          if (flyOf(t)) {
+            st._fly = null; t.bt.style.opacity = ''; t.bt.style.transform = '';
+            const r1 = t.bt.getBoundingClientRect(), fr = fly.r;
+            if (r1.width) {
+              const dx = (fr.left + fr.width / 2) - (r1.left + r1.width / 2), dy = (fr.top + fr.height / 2) - (r1.top + r1.height / 2), bt = t.bt;
+              bt.pkFly = bt.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${fr.width / r1.width})` }, { transform: 'none' }], { duration: PKFX.IN * .85, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+              bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
+            }
+          }
+          if (t.bt.pkFly) { t.bt.style.opacity = ''; t.bt.style.transform = ''; }
+          else {
           /* والأيقونةُ لا تظهر قبل أن تكتمل فجوتُها: تنبت فيها في آخر انفتاحها */
           const q = Math.max(0, Math.min(1, (v - .55) / .45));
           t.bt.style.opacity = q < 1 ? f(q) : '';
           t.bt.style.transform = q < 1 ? `scale(${f(.55 + .45 * q)})` : '';
+          }
         }
         return d.replace(hit[0], seg);
       });
