@@ -18,7 +18,8 @@
      country · city     SA · GB · INTL (بلا مدينة)
      aliases            ما قد يكتبه الباحث: الاختصار واللقب والاسم الشائع
      a · b · acc        طرفا التدرج ولون الإبراز
-     logo · mark        شعار أبيض كامل · رمز أبيض للعلامة المائية (assets/brand/unis/)
+     logo · mark        شعار كامل · رمز للعلامة المائية (assets/brand/: unis/ للجامعات، exams/ للجهات)
+     mono               الشعار ملون فيرسم أبيض على الورقة الداكنة
      tag                بلا شعار: كلمة قصيرة ترسم علامة مائية، {ar, en}
      href · soon        رابط الموقع · «قريبا» بلا رابط
    ============================================================ */
@@ -37,19 +38,19 @@
       country: SA, city: { ar: 'الظهران', en: 'Dhahran' },
       aliases: ['KFUPM', 'البترول', 'جامعة البترول', 'Petroleum', 'فهد'],
       a: '#0e3b41', b: '#1f7a85', acc: '#d0aa68',
-      logo: 'kfupm-white.svg', mark: 'kfupm-mark-white.svg', href: '../Almaslakh/' },
+      logo: 'unis/kfupm-white.svg', mark: 'unis/kfupm-mark-white.svg', href: '../Almaslakh/' },
     { id: 'mudarraj', ar: 'المدرج', en: 'Almudarraj', kind: 'uni',
       org: { ar: 'جامعة الملك سعود', en: 'King Saud University' },
       country: SA, city: { ar: 'الرياض', en: 'Riyadh' },
       aliases: ['KSU', 'سعود', 'جامعة سعود', 'King Saud'],
       a: '#0a4a6c', b: '#1a8abe', acc: '#82c3d8',
-      logo: 'ksu-white.svg', mark: 'ksu-shield-white.svg', href: '../Almudarraj/' },
+      logo: 'unis/ksu-white.svg', mark: 'unis/ksu-shield-white.svg', href: '../Almudarraj/' },
     { id: 'hive', ar: 'الخلية', en: 'The Hive', kind: 'uni',   /* اسمها الإنجليزي اختاره صاحب الموقع */
       org: { ar: 'جامعة مانشستر', en: 'The University of Manchester' },
       country: 'GB', city: { ar: 'مانشستر', en: 'Manchester' },
       aliases: ['UoM', 'Manchester', 'مانشستر', 'Hive', 'The Hive'],
       a: '#3d0a5c', b: '#660099', acc: '#ffcc33',
-      logo: 'uom-mono-white.svg', mark: 'uom-box-white.svg', href: '../TheHive/' }
+      logo: 'unis/uom-mono-white.svg', mark: 'unis/uom-box-white.svg', href: '../TheHive/' }
   ].concat([
     /* ===== المراحل الدراسية ===== */
     ['thanawi', 'الثانوية', 'Thanawi', 'stage', SA, 'المرحلة الثانوية: المسار العام والمسارات التخصصية', 'Saudi secondary school (General and specialised tracks)', 'ثانوي', 'Thanawi', ['ثانوي', 'ثالث ثانوي', 'المسارات', 'High School', 'Secondary'], '#1d4a2e', '#3c8a55', '#cfe9b4'],
@@ -82,6 +83,30 @@
     ['pmp', 'بي إم بي', 'PMP', 'intl', INTL, 'محترف إدارة المشاريع من PMI', 'Project Management Professional by PMI', 'بي إم بي', 'PMP', ['PMP', 'إدارة مشاريع', 'PMI'], '#3b3a1f', '#8d8a2e', '#f0eeb8'],
     ['usmle', 'يو إس إم إل إي', 'USMLE', 'intl', INTL, 'رخصة الطب الأمريكية', 'United States Medical Licensing Examination', 'يو إس', 'USMLE', ['USMLE', 'طب', 'أمريكا', 'Step 1'], '#3b1f1f', '#8d2e2e', '#f0b8b8']
   ].map(soon));
+
+  /* ===== شعارات الجهات (assets/brand/exams/) =====
+     من مواقع الجهات الرسمية إلا ما ذكر: [الشعار، الرمز، ملون؟]. والجهة الواحدة تخدم أكثر من مجتمع:
+     قياس (هيئة تقويم التعليم والتدريب) للقدرات والتحصيلي وستيب والجامعيين ورخصة المعلمين،
+     والهيئة السعودية للتخصصات الصحية لاختباراتها الأربعة، وETS للتوفل وجي آر إي.
+     ولا شعار بعد لزمالة سوكبا واختبارات المهندسين والسنة التحضيرية: موقعا الهيئتين يقطعان الاتصال
+     من خارج السعودية، والتحضيرية لا جهة واحدة لها. */
+  var E = 'exams/', LOGOS = {
+    thanawi: ['moe-white.svg', 'moe-white.svg', 0], mutawasit: ['moe-white.svg', 'moe-white.svg', 0],
+    qudurat: ['etec.svg', 'etec.svg', 1], tahsili: ['etec.svg', 'etec.svg', 1], step: ['etec.svg', 'etec.svg', 1],
+    pgat: ['etec.svg', 'etec.svg', 1], teacher: ['etec.svg', 'etec.svg', 1],
+    smle: ['scfhs.svg', 'scfhs-mark.svg', 1], sple: ['scfhs.svg', 'scfhs-mark.svg', 1],
+    sdle: ['scfhs.svg', 'scfhs-mark.svg', 1], snle: ['scfhs.svg', 'scfhs-mark.svg', 1],
+    ielts: ['ielts-white.svg', 'ielts-white.svg', 0], toefl: ['toefl.svg', 'toefl.svg', 1], gre: ['gre.svg', 'gre.svg', 1],
+    sat: ['collegeboard.svg', 'collegeboard.svg', 1],      /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
+    gmat: ['gmac.svg', 'gmac.svg', 1], cfa: ['cfa.svg', 'cfa.svg', 1],
+    cma: ['ima.svg', 'ima.svg', 1], cpa: ['aicpa.svg', 'aicpa.svg', 0], pmp: ['pmi.svg', 'pmi.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان لا أبيض كله (حروفه محفورة في المربع) */
+    acca: ['acca-white.svg', 'acca-white.svg', 0], cia: ['iia-white.svg', 'iia-white.svg', 0],
+    usmle: ['usmle-white.svg', 'usmle-white.svg', 0]
+  };
+  window.AC_COMS.forEach(function (c) {
+    var l = LOGOS[c.id]; if (!l) return;
+    c.logo = E + l[0]; c.mark = E + l[1]; if (l[2]) c.mono = 1;
+  });
   window.AC_COUNTRIES = {
     SA:   { ar: 'السعودية', en: 'Saudi Arabia' },
     GB:   { ar: 'بريطانيا', en: 'United Kingdom' },

@@ -184,6 +184,8 @@
     .cs-wm    { position: absolute; inset-inline-end: -40px; bottom: -70px; height: 300px; width: auto; opacity: .1;
                 pointer-events: none; transition: opacity .4s; }
     .cs-card.is-on .cs-wm { opacity: .16; }
+    /* شعارٌ ملوّن على ورقةٍ داكنة: يرسم أبيض كله (‎mono‎ في السجل) */
+    .cs-card[data-mono] .cs-open img, .cs-card[data-mono] .cs-peek img, .cs-card[data-mono] .cs-wm { filter: brightness(0) invert(1); }
     /* بلا شعار: الاختصارُ نفسُه علامةٌ مائيّة (‎STEP‎ · ‎CFA‎ · «ثانوي») */
     .cs-wmt   { position: absolute; inset-inline-end: -14px; bottom: -34px; font-family: 'Space Grotesk', 'IBM Plex Sans Arabic', sans-serif;
                 font-size: 150px; font-weight: 700; line-height: 1; letter-spacing: -4px; white-space: nowrap; opacity: .12;
@@ -314,7 +316,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=3"></script>
+  <script src="../shared/communities.js?v=4"></script>
 </head>
 <body>
 
@@ -1089,7 +1091,7 @@
       /* ===== أوراقُ المجتمعات (‎ROADMAP-EXPLORE س٢‎) =====
          ‎CS.list‎ فهارسُ ما يُعرض (بعد البحث والفلاتر)، و‎CS.sel‎ موضعُ المقدّمة فيها.
          الضغطةُ الأولى على ورقةٍ تقدّمها، والثانيةُ تفتح مجتمعَها. */
-      var LOGO = '../assets/brand/unis/';
+      var LOGO = '../assets/brand/';
       var CS = { list: COMS.map(function (_, k) { return k; }), sel: 0 };
       function csNote(i) { return T.soon[i]; }
       function buildComs() {
@@ -1106,7 +1108,7 @@
           var logo = c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
           var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
                   : '<a class="cs-go" href="' + c.href + '" data-com="' + ci + '">' + (i ? 'Enter' : 'ادخل') + '</a>' + plusFor(c.id);
-          return '<div class="cs-card' + (c.soon ? ' is-soon' : '') + '" data-ci="' + ci + '"' + wide +
+          return '<div class="cs-card' + (c.soon ? ' is-soon' : '') + '" data-ci="' + ci + '"' + wide + (c.mono ? ' data-mono' : '') +
                  ' style="--a:' + c.a + ';--b:' + c.b + ';--acc:' + (c.acc || '#fff') + '">' + mark +
                  '<div class="cs-peek">' + peekImg + '<span>' + esc(nm) + '</span></div>' +
                  '<div class="cs-open">' + logo + '<b>' + esc(nm) + '</b>' +
