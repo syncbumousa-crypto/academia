@@ -171,6 +171,54 @@
     .gn-msg a { color: var(--c-kfupm); }
     .gn-strip .ex-card { cursor: pointer; }
 
+    /* ===== أوراقُ المجتمعات (‎ROADMAP-EXPLORE س٢‎) =====
+       كلُّ ورقةٍ مطلقةُ الموضع، ويحسب ‎csLayout()‎ بدايتَها (‎inset-inline-start‎) وعرضَها، فتنقلب
+       مع اللغة بلا حسابٍ ثانٍ. والمقدّمةُ فوق الجميع، وكلُّ ما بعُد عنها أخفضُ وأعتم. */
+    .cs-stack { position: relative; z-index: 0; height: 212px; margin: 4px 0 6px; outline: none; touch-action: pan-y; }   /* ‎z-index‎ يحبس طبقاتِ الأوراق داخلها */
+    .cs-card  { position: absolute; top: 14px; bottom: 14px; overflow: hidden; border-radius: 22px; color: #fff;
+                background: linear-gradient(160deg, var(--b), var(--a));
+                box-shadow: 0 6px 16px -10px rgba(0,0,0,.45);
+                transition: inset-inline-start .4s ease, width .4s ease, top .4s ease, bottom .4s ease, filter .4s ease, box-shadow .4s ease; }
+    .cs-card.is-on { top: 0; bottom: 0; box-shadow: 0 18px 40px -18px rgba(0,0,0,.55); }
+    .cs-card.is-soon { filter: saturate(.35) brightness(.8); }
+    .cs-wm    { position: absolute; inset-inline-end: -40px; bottom: -70px; height: 300px; width: auto; opacity: .1;
+                pointer-events: none; transition: opacity .4s; }
+    .cs-card.is-on .cs-wm { opacity: .16; }
+    .cs-card[data-wide] .cs-wm { height: auto; width: 520px; bottom: auto; top: 10px; inset-inline-end: -120px; }
+    .cs-hit   { position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
+    .cs-hit:focus-visible { outline: 3px solid var(--acc, #fff); outline-offset: -5px; }
+    /* المغلقة: رمزُها في الجزء الظاهر منها وحده — أوّلَ الورقة أو آخرَها بحسب جهتها */
+    .cs-peek  { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center;
+                justify-content: center; gap: 10px; pointer-events: none; transition: opacity .25s; }
+    .cs-peek img { width: auto; max-width: 70%; height: 46px; }
+    .cs-peek span { font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .cs-card.is-on .cs-peek { opacity: 0; }
+    /* المقدّمة: الشعارُ كاملًا والاسمُ والجهةُ وزرّا الدخول والإضافة */
+    .cs-open  { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px;
+                padding: 0 30px; opacity: 0; pointer-events: none; transition: opacity .25s .1s; }
+    .cs-card.is-on .cs-open { opacity: 1; }
+    .cs-open img { height: 40px; width: auto; max-width: 60%; align-self: flex-start; margin-bottom: 6px; }
+    .cs-card[data-wide] .cs-open img { height: auto; width: 150px; }
+    .cs-open b { font-size: clamp(26px, 3.2vw, 36px); font-weight: 700; line-height: 1.1; }
+    .cs-open small { font-size: 13px; opacity: .85; }
+    .cs-act   { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; margin-top: 8px; pointer-events: auto; }
+    .cs-go    { font-size: 13px; font-weight: 700; color: var(--a); background: #fff; border-radius: 99px; padding: 5px 16px; text-decoration: none; }
+    .cs-act .ex-add { margin: 0; color: #fff; border-color: rgba(255,255,255,.6); }
+    .cs-soon  { font-size: 12px; font-weight: 700; background: rgba(255,255,255,.18); border-radius: 99px; padding: 3px 12px; }
+    .cs-card.is-on .cs-hit { display: var(--hit-on, block); }
+    .cs-more  { position: absolute; top: 50%; z-index: 60; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%;
+                border: 0; background: var(--surface, #fff); color: var(--c-ink); font: inherit; font-size: 12px; font-weight: 700;
+                box-shadow: 0 4px 14px -6px rgba(0,0,0,.35); cursor: pointer; }
+    .cs-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--c-ink-soft); font-size: 14px; }
+    .cs-tools { margin: 4px 0 8px; position: relative; z-index: 2; }   /* لوحةُ الفلاتر فوق الأوراق */
+    .cs-meta  { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-height: 22px; margin-bottom: 2px; }
+    .cs-count { font-size: 12.5px; color: var(--c-ink-soft); }
+    .cs-acts  { display: flex; flex-wrap: wrap; gap: 6px; }
+    #cs-fp .fchips { display: flex; flex-wrap: wrap; gap: 6px; }
+    #cs-fp .fchip:disabled { opacity: .4; cursor: default; }
+    @media (prefers-reduced-motion: reduce) { .cs-card, .cs-wm, .cs-peek, .cs-open { transition: none; } }
+    @media (max-width: 600px) { .cs-stack { height: 190px; } .cs-open { padding: 0 20px; } .cs-open img { height: 32px; } .cs-more { display: none; } }
+
     /* رفٌّ موعودٌ لم يُملأ بعد: أغلفةٌ مرسومةٌ بالخطّ المتقطّع لا كتبٌ مخترَعة */
     .ex-chip  { font-size: 11px; font-weight: 700; color: var(--c-ink-soft);
                 border: 1px solid var(--border); border-radius: 99px; padding: 1px 9px; }
@@ -260,6 +308,8 @@
     html .sidebar::-webkit-scrollbar-thumb:hover {
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
+  <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
+  <script src="../shared/communities.js?v=1"></script>
 </head>
 <body>
 
@@ -426,9 +476,21 @@
     <section class="ex-row">
       <div class="ex-head"><h2 class="ex-h" id="ex-h">مجتمعات</h2>
         <p class="ex-sub" id="ex-sub">لكلِّ مجتمعٍ أهلُه ومكتبتُه.</p></div>
-      <div class="ex-wrap">
-        <div class="ex-strip ex-strip--com" id="ex-coms"></div>
+      <!-- المجتمعات أوراقٌ متراكبة (‎ROADMAP-EXPLORE س٢، الاتّجاه ٣٣‎): المقدّمةُ عريضةٌ والباقي يطلّ من حوافّه.
+           لا ‎ex-wrap‎ حولها: التنقّلُ بين الأوراق لا بأسهم التمرير -->
+      <!-- بحثُ المجتمعات وفلاترُها (‎ROADMAP-EXPLORE س٣–س٤‎) بأدوات بحث المكتبة نفسِها -->
+      <div class="market-tools cs-tools">
+        <input class="search" id="cs-q" type="search" placeholder="ابحث عن مجتمع…" autocomplete="off">
+        <div class="filterwrap">
+          <button class="btn-filter" id="cs-fbtn" type="button" aria-expanded="false" aria-controls="cs-fp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            <span id="cs-ftx">فلاتر</span><span class="fbadge" id="cs-fn" hidden></span>
+          </button>
+          <div class="fpanel" id="cs-fp" hidden></div>
+        </div>
       </div>
+      <div class="cs-meta"><span class="cs-count" id="cs-count"></span><span class="cs-acts" id="cs-acts"></span></div>
+      <div class="cs-stack" id="ex-coms" tabindex="0" aria-roledescription="أوراق المجتمعات"></div>
     </section>
 
     <!-- رفوفُ الكتب: تُولَّد من جدولٍ واحد، فزيادةُ رفٍّ سطرٌ فيه -->
@@ -963,7 +1025,7 @@
       });
 
       function paint() {
-        label(); buildComs(); buildShelves(); paintMine();
+        label(); cfApply(true); buildShelves(); paintMine();
         /* الأسهمُ تُعلَّق على ما لم يُعلَّق عليه بعد: الرفوفُ تُبنى من جديدٍ
            عند تبديل اللغة، فلولا العلامةُ لتضاعفت أزرارُها */
         document.querySelectorAll('#panel-explore .ex-wrap').forEach(function (w) {
@@ -979,14 +1041,12 @@
          مرفوعة. والتدرّجُ هو كذلك لونُ النقطة تحت الكتاب ونقطةِ الدرج،
          فهو مذكورٌ مرّةً ويُقرأ في ثلاثة مواضع. والكتبُ أغلفتُها موجودةٌ
          أصلًا في ‎shared/covers.js‎ — تُقرأ منه فلا تُكتب القائمةُ مرّتين. */
-      var COMS = [
+      /* المصدرُ ‎shared/communities.js‎ (‎ROADMAP-EXPLORE س١‎). والقائمةُ ههنا احتياطٌ لو تعطّل
+         تحميلُه — فلا تخلو «استكشاف» ولا يسقط ما يقرأ ‎COMS‎ (الدرجُ والركنُ العامّ) */
+      var COMS = (Array.isArray(window.AC_COMS) && window.AC_COMS.length) ? window.AC_COMS : [
         { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
         { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', href:'../Almudarraj/', a:'#0a4a6c', b:'#1a8abe' },
-        /* الخلية (جامعة مانشستر · ROADMAP-HIVE) — جداولُها في مخطّط ‎hive‎ */
-        { id:'hive',     ar:'الخلية',  en:'The Hive',   href:'../TheHive/',    a:'#3d0a5c', b:'#660099' },
-        { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1,               a:'#2a2142', b:'#5d4a95' },
-        { id:'tahsili',  ar:'التحصيلي', en:'Tahsili',   soon:1,               a:'#1e3326', b:'#3f7a55' },
-        { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1,               a:'#3b1f26', b:'#8d4654' }
+        { id:'hive',     ar:'الخلية',  en:'The Hive',   href:'../TheHive/',    a:'#3d0a5c', b:'#660099' }
       ];
 
       /* ===== مجتمعاتي =====
@@ -1004,6 +1064,7 @@
         var a = mine(), i = a.indexOf(id);
         if (i >= 0) a.splice(i, 1); else a.push(id);
         mineSet(a); paintMine();
+        if (CF.mine) cfApply(true);   /* فلترُ «مجتمعاتي» يتبع الإضافةَ والإزالة فورًا */
       }
       function comById(id) {
         for (var i = 0; i < COMS.length; i++) if (COMS[i].id === id) return COMS[i];
@@ -1020,24 +1081,208 @@
       function esc(t) { return String(t).replace(/[&<>"]/g, function (c) {
         return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
 
+      /* ===== أوراقُ المجتمعات (‎ROADMAP-EXPLORE س٢‎) =====
+         ‎CS.list‎ فهارسُ ما يُعرض (بعد البحث والفلاتر)، و‎CS.sel‎ موضعُ المقدّمة فيها.
+         الضغطةُ الأولى على ورقةٍ تقدّمها، والثانيةُ تفتح مجتمعَها. */
+      var LOGO = '../assets/brand/unis/';
+      var CS = { list: COMS.map(function (_, k) { return k; }), sel: 0 };
+      function csNote(i) { return T.soon[i]; }
       function buildComs() {
-        var i = lang();
-        document.getElementById('ex-coms').innerHTML = COMS.map(function (c) {
-          /* الغلافُ تدرّجٌ في السمة واسمٌ فوقه — ولا طلبَ شبكةٍ له أصلًا،
-             فصفُّ الخمسةِ يُرى كاملًا في الرسمة الأولى بلا تحميلٍ مؤجَّل. */
-          var cover = '<div class="ex-cover" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')">' +
-                      '<span class="ex-cover-t">' + esc(i ? c.en : c.ar) + '</span></div>';
-          /* والزرُّ خارجَ الوصلة لا بداخلها: لو سكن فيها لفتح المجتمعَ من ضغطه */
-          var cap = '<div class="ex-cap"><b>' +
-                    (c.soon ? T.soon[i] : esc(i ? c.en : c.ar)) + '</b>' + plusFor(c.id) + '</div>';
-          var face = c.soon
-            ? '<div class="ex-face">' + cover + '</div>'
-            /* الرابطُ يبقى في ‎href‎ وإن كان الفتحُ في مكانه: من فتحه في لسانٍ
-               جديدٍ أو عطبت جافاسكربتُه وجد موقعَ المجتمع لا زرًّا ميّتًا */
-            : '<a class="ex-face" href="' + c.href + '" data-com="' + COMS.indexOf(c) + '">' + cover + '</a>';
-          return '<div class="ex-card' + (c.soon ? ' is-soon' : '') + '">' + face + cap + '</div>';
+        var i = lang(), box = document.getElementById('ex-coms');
+        if (!CS.list.length) { box.innerHTML = '<div class="cs-empty">' + esc(i ? 'No community by that name.' : 'ما لقينا مجتمعًا بهذا الاسم.') + '</div>'; return; }
+        if (CS.sel >= CS.list.length) CS.sel = 0;
+        box.innerHTML = CS.list.map(function (ci) {
+          var c = COMS[ci], nm = i ? c.en : c.ar, org = c.org ? (i ? c.org.en : c.org.ar) : '';
+          var city = c.city ? (i ? c.city.en : c.city.ar) : (window.AC_COUNTRIES && c.country && AC_COUNTRIES[c.country] ? AC_COUNTRIES[c.country][i ? 'en' : 'ar'] : '');
+          var wide = c.id === 'hive' ? ' data-wide' : '';
+          var mark = c.mark ? '<img class="cs-wm" src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
+          var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
+          var logo = c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
+          var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
+                  : '<a class="cs-go" href="' + c.href + '" data-com="' + ci + '">' + (i ? 'Enter' : 'ادخل') + '</a>' + plusFor(c.id);
+          return '<div class="cs-card' + (c.soon ? ' is-soon' : '') + '" data-ci="' + ci + '"' + wide +
+                 ' style="--a:' + c.a + ';--b:' + c.b + ';--acc:' + (c.acc || '#fff') + '">' + mark +
+                 '<div class="cs-peek">' + peekImg + '<span>' + esc(nm) + '</span></div>' +
+                 '<div class="cs-open">' + logo + '<b>' + esc(nm) + '</b>' +
+                 '<small>' + esc(org) + (city ? ' · ' + esc(city) : '') + '</small><div class="cs-act">' + act + '</div></div>' +
+                 '<button type="button" class="cs-hit" aria-label="' + esc(nm) + '"></button></div>';
+        }).join('') + '<button type="button" class="cs-more" data-more="-1" hidden></button><button type="button" class="cs-more" data-more="1" hidden></button>';
+        csLayout();
+      }
+      function csLayout() {
+        var box = document.getElementById('ex-coms'); if (!box || !CS.list.length) return;
+        var W = box.clientWidth || 900, n = CS.list.length, p = CS.sel;
+        var R = W < 600 ? 1 : 3;                                   /* كم ورقةً تطلّ من كلّ جانب */
+        var s0 = Math.max(0, p - R), s1 = Math.min(n - 1, p + R), b = p - s0, a = s1 - p;
+        var gap = 14, OPEN = Math.max(220, Math.min(560, W - (b + a) * 52 - gap * 2));
+        var CW = Math.min(230, Math.max(120, OPEN * .45));
+        var step = (b + a) ? Math.max(36, Math.min(120, (W - OPEN - gap * 2) / (b + a))) : 0;
+        var openS = b * step + (b ? gap : 0), total = openS + OPEN + (a ? gap + a * step : 0);
+        var off = Math.max(0, (W - total) / 2);
+        var cards = box.querySelectorAll('.cs-card');
+        cards.forEach(function (el, k) {
+          var on = k === p, st, w = on ? OPEN : CW, side = '';
+          if (k < s0 || k > s1) { el.style.display = 'none'; return; }
+          el.style.display = '';
+          if (on) st = openS;
+          else if (k < p) { st = (k - s0) * step; side = 's'; }
+          else { st = openS + OPEN + gap + (k - p) * step - CW; side = 'e'; }
+          el.style.insetInlineStart = (off + st) + 'px';
+          el.style.width = w + 'px';
+          el.style.zIndex = on ? 50 : 40 - Math.abs(k - p);
+          el.style.filter = on ? '' : 'brightness(' + (1 - Math.min(3, Math.abs(k - p)) * .07) + ')';
+          el.classList.toggle('is-on', on);
+          var pk = el.querySelector('.cs-peek');
+          /* الجزءُ الظاهر من المغلقة عرضُه ‎step‎ على جهتها، ففيه وحده رمزُها */
+          pk.style.width = Math.max(36, step) + 'px';
+          pk.style.insetInlineStart = side === 'e' ? (CW - Math.max(36, step)) + 'px' : '0';
+          pk.style.display = step < 48 ? 'none' : '';
+          el.querySelector('.cs-hit').setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        var mb = box.querySelectorAll('.cs-more'); if (mb.length < 2) return;
+        mb[0].hidden = s0 === 0; mb[0].textContent = '+' + s0; mb[0].style.insetInlineStart = '-6px';
+        mb[1].hidden = s1 === n - 1; mb[1].textContent = '+' + (n - 1 - s1); mb[1].style.insetInlineEnd = '-6px';
+      }
+      /* ===== البحثُ والفلاتر (‎ROADMAP-EXPLORE س٣–س٤‎) =====
+         الدولةُ ثمّ مدينتُها ثمّ النوع، و«مجتمعاتي». والبحثُ يتسامح في الهمزات والتاء المربوطة والياء.
+         والفلاترُ تُذكر في متصفّح الزائر وحده — تسهيلٌ لا بيانات. */
+      var CF = { q: '', country: '', city: '', kind: '', mine: false }, CF_K = 'academia2:explore:f1';
+      try { var sv = JSON.parse(localStorage.getItem(CF_K) || 'null'); if (sv) { CF.country = sv.country || ''; CF.city = sv.city || ''; CF.kind = sv.kind || ''; CF.mine = !!sv.mine; } } catch (e) {}
+      function cfSave() { try { localStorage.setItem(CF_K, JSON.stringify({ country: CF.country, city: CF.city, kind: CF.kind, mine: CF.mine })); } catch (e) {} }
+      function norm(t) {
+        return String(t || '').toLowerCase().replace(/[ً-ْـ]/g, '')
+          .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/\s+/g, ' ').trim();
+      }
+      function hay(c) {
+        var h = [c.ar, c.en].concat(c.aliases || []);
+        if (c.org) h.push(c.org.ar, c.org.en);
+        if (c.city) h.push(c.city.ar, c.city.en);
+        if (c.country && window.AC_COUNTRIES && AC_COUNTRIES[c.country]) h.push(AC_COUNTRIES[c.country].ar, AC_COUNTRIES[c.country].en);
+        return norm(h.join(' '));
+      }
+      function cityKey(c) { return c.city ? c.city.en : ''; }
+      /* ‎skip‎: فلترٌ يُتجاهل ليُحسب عددُ ما يظهر لو تغيّر هو وحده */
+      function passes(c, f, skip) {
+        if (skip !== 'country' && f.country && c.country !== f.country) return false;
+        if (skip !== 'city' && f.city && cityKey(c) !== f.city) return false;
+        if (skip !== 'kind' && f.kind && c.kind !== f.kind) return false;
+        if (skip !== 'mine' && f.mine && !isMine(c.id)) return false;
+        if (f.q) { var hs = hay(c); if (!norm(f.q).split(' ').every(function (w) { return hs.indexOf(w) >= 0; })) return false; }
+        return true;
+      }
+      function cfApply(keepSel) {
+        var cur = CS.list[CS.sel];
+        CS.list = COMS.map(function (_, k) { return k; }).filter(function (k) { return passes(COMS[k], CF); });
+        var at = keepSel ? CS.list.indexOf(cur) : -1;
+        CS.sel = at >= 0 ? at : 0;
+        buildComs(); cfPaint();
+      }
+      function cfCount(skip, patch) {
+        var f = Object.assign({}, CF, patch);
+        return COMS.filter(function (c) { return passes(c, f, skip === 'none' ? '' : ''); }).length;
+      }
+      function cfPaint() {
+        var i = lang(), L = i ? 'en' : 'ar';
+        var n = CS.list.length, active = (CF.country ? 1 : 0) + (CF.city ? 1 : 0) + (CF.kind ? 1 : 0) + (CF.mine ? 1 : 0);
+        document.getElementById('cs-q').placeholder = i ? 'Search communities…' : 'ابحث عن مجتمع…';
+        document.getElementById('cs-ftx').textContent = i ? 'Filters' : 'فلاتر';
+        var fn = document.getElementById('cs-fn'); fn.hidden = !active; fn.textContent = active;
+        document.getElementById('cs-count').textContent = (CF.q || active)
+          ? (!n ? (i ? 'No results' : 'لا نتائج') : i ? n + (n === 1 ? ' community' : ' communities') : (n === 1 ? 'مجتمعٌ واحد' : n === 2 ? 'مجتمعان' : n + ' مجتمعات')) : '';
+        /* اللوحة: لكلّ قيمةٍ عددُ ما تُظهره لو اختيرت، والتي تُفرغ النتائجَ مطفأة */
+        var chip = function (grp, val, label) {
+          var on = grp === 'mine' ? CF.mine : CF[grp] === val;
+          var patch = {}; patch[grp] = grp === 'mine' ? true : val; if (grp === 'country') patch.city = '';
+          var cnt = cfCount('none', patch);
+          return '<button type="button" class="fchip' + (on ? ' on' : '') + '" data-g="' + grp + '" data-v="' + esc(val) + '"' +
+                 (!on && !cnt ? ' disabled' : '') + '>' + esc(label) + '<span class="fchip__n">' + cnt + '</span></button>';
+        };
+        var countries = {}, cities = {};
+        COMS.forEach(function (c) {
+          if (c.country) countries[c.country] = 1;
+          if (c.city && (!CF.country || c.country === CF.country)) cities[c.city.en] = c.city;
+        });
+        var C = window.AC_COUNTRIES || {};
+        var h = '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Country' : 'الدولة') + '</p><div class="fchips">' +
+          Object.keys(countries).map(function (k) { return chip('country', k, C[k] ? C[k][L] : k); }).join('') + '</div></div>';
+        if (CF.country && Object.keys(cities).length) {
+          h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'City' : 'المدينة') + '</p><div class="fchips">' +
+            Object.keys(cities).map(function (k) { return chip('city', k, cities[k][L]); }).join('') + '</div></div>';
+        }
+        h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Type' : 'النوع') + '</p><div class="fchips">' +
+          chip('kind', 'uni', i ? 'Universities' : 'جامعات') + chip('kind', 'test', i ? 'Assessment tests' : 'اختبارات تقييم') +
+          chip('mine', '1', i ? 'My communities' : 'مجتمعاتي') + '</div></div>';
+        document.getElementById('cs-fp').innerHTML = h;
+        /* الشاراتُ المفعّلة تحت البحث، وكلٌّ يُرفع بـ× */
+        var acts = [];
+        if (CF.country) acts.push(['country', C[CF.country] ? C[CF.country][L] : CF.country]);
+        if (CF.city) { var cc = COMS.filter(function (c) { return cityKey(c) === CF.city; })[0]; acts.push(['city', cc ? cc.city[L] : CF.city]); }
+        if (CF.kind) acts.push(['kind', CF.kind === 'uni' ? (i ? 'Universities' : 'جامعات') : (i ? 'Assessment tests' : 'اختبارات تقييم')]);
+        if (CF.mine) acts.push(['mine', i ? 'My communities' : 'مجتمعاتي']);
+        document.getElementById('cs-acts').innerHTML = acts.map(function (a) {
+          return '<button type="button" class="fact" data-x="' + a[0] + '">' + esc(a[1]) + ' <span class="fact-x">✕</span></button>';
         }).join('');
       }
+      (function () {
+        var q = document.getElementById('cs-q'), fb = document.getElementById('cs-fbtn'), fp = document.getElementById('cs-fp');
+        q.addEventListener('input', function () { CF.q = q.value; cfApply(false); });
+        q.addEventListener('keydown', function (e) {
+          if (e.key !== 'Enter') return;
+          var c = COMS[CS.list[CS.sel]]; if (c && !c.soon) openCom(c);
+        });
+        fb.addEventListener('click', function (e) {
+          e.stopPropagation(); fp.hidden = !fp.hidden; fb.setAttribute('aria-expanded', String(!fp.hidden));
+        });
+        fp.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var b = e.target.closest('.fchip'); if (!b || b.disabled) return;
+          var g = b.dataset.g, v = b.dataset.v;
+          if (g === 'mine') CF.mine = !CF.mine;
+          else { CF[g] = CF[g] === v ? '' : v; if (g === 'country') CF.city = ''; }
+          cfSave(); cfApply(true);
+        });
+        document.getElementById('cs-acts').addEventListener('click', function (e) {
+          var b = e.target.closest('.fact'); if (!b) return;
+          var g = b.dataset.x;
+          if (g === 'mine') CF.mine = false; else { CF[g] = ''; if (g === 'country') CF.city = ''; }
+          cfSave(); cfApply(true);
+        });
+        document.addEventListener('click', function (e) {
+          if (!fp.hidden && !e.target.closest('.filterwrap')) { fp.hidden = true; fb.setAttribute('aria-expanded', 'false'); }
+        });
+      })();
+
+      function csGo(d) {
+        if (!CS.list.length) return;
+        CS.sel = Math.max(0, Math.min(CS.list.length - 1, CS.sel + d)); csLayout();
+      }
+      (function () {
+        var box = document.getElementById('ex-coms');
+        box.addEventListener('click', function (e) {
+          var more = e.target.closest('.cs-more');
+          if (more) { csGo(+more.dataset.more * 4); return; }
+          var hit = e.target.closest('.cs-hit'); if (!hit) return;
+          var card = hit.closest('.cs-card'), k = Array.prototype.indexOf.call(box.querySelectorAll('.cs-card'), card);
+          if (k !== CS.sel) { CS.sel = k; csLayout(); return; }
+          var c = COMS[+card.dataset.ci];                       /* الثانيةُ تفتح، و«قريبًا» لا يُفتح */
+          if (c && !c.soon) openCom(c);
+        });
+        box.addEventListener('keydown', function (e) {
+          var rtl = getComputedStyle(box).direction === 'rtl';
+          if (e.key === 'ArrowLeft')  { csGo(rtl ? 1 : -1); e.preventDefault(); }
+          if (e.key === 'ArrowRight') { csGo(rtl ? -1 : 1); e.preventDefault(); }
+        });
+        /* السحبُ في الجوّال: أفقيٌّ يكفي ٤٠ بكسلًا، والعموديُّ يبقى للتمرير */
+        var x0 = null;
+        box.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+        box.addEventListener('pointerup', function (e) {
+          if (x0 == null) return; var dx = e.clientX - x0; x0 = null;
+          if (Math.abs(dx) < 40) return;
+          var rtl = getComputedStyle(box).direction === 'rtl';
+          csGo((dx < 0) === rtl ? 1 : -1);
+        });
+        window.addEventListener('resize', csLayout);
+      })();
 
       /* شارةُ المجتمع: دائرتُه بلون غلافه، واسمُه، ووصلةٌ تفتحه */
       function ownOf(ci) {
