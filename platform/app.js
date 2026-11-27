@@ -11253,6 +11253,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const hdIc = post0.querySelector('.post-ytmain > .pk-blkh--mid .pk-blkh__ic');
     heads.flatMap(x => x.classList.contains('pk-blkh--mid') ? [...x.children].filter(y => y !== hdIc) : [x])
       .forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
+    /* (ثمّ بطلبه: «ما أبيها تنتظرني عشان تنزل … أبيها تخرج بسرعة خروج متلاشي، وتظهر بدخول متلاشي في زاوية المصادر»)
+       فتخفت وحدَها في أوّل الخروج — أسرعَ من ترويستها — وتظهر أيقونةُ الصفّ متلاشيةً في فجوتها بعد الرسم (‎_fade‎) */
+    if (hdIc) an.push(hdIc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' }));
     /* ٢. العمودُ يضيق إلى جهته والجاران يتّسعان إليه */
     kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
     an.push(kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginInlineStart: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
@@ -11278,7 +11281,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(loop);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
       live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
-      if (hdIc && hdIc.isConnected) { const r = hdIc.getBoundingClientRect(); if (r.width) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fly = { k: 'mid', r, at: performance.now() }; } }
+      if (hdIc) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fade = { k: 'mid', at: performance.now() }; }
       { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
       run();
     });
@@ -26609,7 +26612,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        طويلة ‎~110ms‎)، فكانت ساعةُ الفجوة (‎180ms‎) تمضي قبل أوّل إطارٍ يُرى — فتظهر الفجوةُ والأيقونةُ شبهَ كاملتين. فالجديدةُ تبدأ
        ساعتُها من الرسم التالي (إطارٍ يُرى)، وتُعرف بزاويتها لا بكتلتها: أيقونةٌ تبقى في زاويتها وقد صارت الكتلةُ غيرَها (أُغلق الملخّصُ
        فصارت زاويتُه للمصادر) لا تُنحت فجوتُها من جديد */
-    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly');
+    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly' && x !== '_fade');
+    const fadeIn = st._fade && performance.now() - st._fade.at < 2500 ? st._fade : null;
+    const fadeOf = t => !!(fadeIn && t && t.bt && t.bt.dataset.pkic === fadeIn.k);
     /* أيقونةٌ تطير إلى فجوتها (‎_fly‎: من أين — يضعه إغلاقُ الملخّص): تُرى من أوّل إطارٍ وتهبط إليها والفجوةُ تُنحت حولها */
     const fly = st._fly && performance.now() - st._fly.at < 2500 ? st._fly : null;
     const flyOf = t => !!(fly && t && t.bt && t.bt.dataset.pkic === fly.k);
@@ -26650,6 +26655,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
               bt.pkFly = bt.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${fr.width / r1.width})` }, { transform: 'none' }], { duration: PKFX.IN * .85, easing: 'cubic-bezier(.2, .8, .2, 1)' });
               bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
             }
+          }
+          if (fadeOf(t)) {
+            st._fade = null; t.bt.style.opacity = ''; t.bt.style.transform = ''; const bt = t.bt;
+            bt.pkFly = bt.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'backwards' });
+            bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
           }
           if (t.bt.pkFly) { t.bt.style.opacity = ''; t.bt.style.transform = ''; }
           else {
