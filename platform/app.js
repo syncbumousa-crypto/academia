@@ -7604,15 +7604,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (بطاقةٌ أو بطاقتان، بضعةُ كيلوبايت) كلّما رُسم التبويبُ كاملًا بعد الجواب — ويُمحى إن لم تبق لي فيه مساهمة.
      ثلاثون تبويبًا على الأكثر (الأقدمُ يُسقط)، وما جاوز ‎80KB‎ لا يُحفظ */
   const CM_MINE_KEY = 'ac.mine1';
-  let cmMineAcc = null, cmHoldOn = '';
+  let cmMineAcc = null, cmHoldOn = '', cmMineSkip = false;
+  /* (طلبُ صاحب الموقع: «بعد ما أحدّث … ألاقي مساهمة مفتوحة بوجهي … ثم تتسكّر فجأة») كان يُحفظ رسمُ مساهمتي كما هو — مفتوحةً إن
+     كانت مفتوحة — وفتحُها لا يبقى بعد التحديث (‎pubOpen‎ في الذاكرة)، فتظهر مفتوحةً من المحفوظ ثمّ يرسمها الجوابُ مغلقة.
+     فالمفتوحةُ لا يُحفظ رسمُها (يبقى آخرُ رسمٍ مغلقٍ لها)، والمحفوظُ المفتوحُ لا يُعرض */
+  const cmMineOpen = h => /^\s*<div[^>]*\bclass="[^"]*\b(pk--pcopen|pk--frame|pk--max)\b/.test(h);
   function cmMineKeep(p, h) {
     if (!isMine(p)) return h;
     h = h.replace(/^(\s*<div)/, '$1 data-cmmine="1"');
-    if (cmMineAcc) cmMineAcc.push(h);
+    if (cmMineAcc) { if (cmMineOpen(h)) cmMineSkip = true; else cmMineAcc.push(h); }
     return h;
   }
   function cmMineAll() { try { return JSON.parse(localStorage.getItem(CM_MINE_KEY) || '{}') || {}; } catch (e) { return {}; } }
-  function cmMineGet(code, sec) { const e = cmMineAll()[code + '|' + sec]; return e && Array.isArray(e.h) && e.h.length ? e : null; }
+  function cmMineGet(code, sec) { const e = cmMineAll()[code + '|' + sec]; return e && Array.isArray(e.h) && e.h.length && !e.h.some(cmMineOpen) ? e : null; }
   function cmMineSave(code, sec, hs) {
     try {
       const all = cmMineAll(), k = code + '|' + sec, size = hs.reduce((n, h) => n + h.length, 0);
@@ -7627,7 +7631,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     } catch (e) {}
   }
   function renderCmSection0() {
-    cmMineAcc = [];
+    cmMineAcc = []; cmMineSkip = false;
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
@@ -7750,7 +7754,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cmBodySet($('#cm-body'), inner);
     if (!held && cmMineAcc && CM_HOLD_SECS.indexOf(sec) > -1 && cmView.mode !== 'edit' && cmView.mode !== 'view') {
       let seen = false; try { seen = srvSeen(cmCode); } catch (e) {}
-      if (seen) cmMineSave(cmCode, sec, cmMineAcc);
+      if (seen && !cmMineSkip) cmMineSave(cmCode, sec, cmMineAcc);   /* (وفيها مساهمتي مفتوحةً: يبقى المحفوظُ كما هو) */
     }
     cmMineAcc = null;
     /* (طلبُ صاحب الموقع) نهايةُ الانتظار: مساهمتي في مكانها لا تتحرّك، وغيرُها يظهر واحدةً بعد واحدة من فوق */
