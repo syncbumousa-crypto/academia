@@ -11250,10 +11250,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post0.classList.contains('pk--framepub')) { const c1 = fin.card + dH; if (Math.abs(c1 - cardH0) > 1) an.push(post0.animate([{ height: cardH0 + 'px' }, { height: c1 + 'px' }], { duration: D, easing: cz, fill: 'forwards' })); }
     post0.pkClsAn = an;
     let live = true;
-    const loop = () => { if (!live || !post0.isConnected) return; pkBandDraw(post0, []); requestAnimationFrame(loop); };
+    /* وسقفُ الـT (رسمتُه في الخلفية) يخفت ويصعد مع الشريط: كان يبقى منه ‎~8px‎ فوق المصادر ثمّ يغيب دفعةً بعد الرسم */
+    const tC = performance.now(), cE = pkBez(.4, 0, .2, 1);
+    const loop = () => { if (!live || !post0.isConnected) return; pkBandDraw(post0, []);
+      const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), e = cE(Math.min(1, (performance.now() - tC) / D));
+      if (mp) { mp.style.opacity = String(Math.max(0, 1 - e * 1.25)); mp.style.transform = `translateY(${-6 * e}px)`; }
+      requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
       live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
+      { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
       run();
     });
   }
@@ -26568,21 +26574,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والفجوةُ تُنحت أمام العين — سريعةً تبدأ من فورها وتلين في آخرها (طلبُ صاحب الموقع: «لا أحسّ بتأخير»)؛ كانت ‎420ms‎ لينةَ البدء
        فتبدو متأخّرةً بعد انطواء المساحة */
     const now = performance.now(), DUR = 180 * (window.__pkfxSlow || 1), ez = pkBez(.2, .8, .2, 1);
-    const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
-    const want = new Set(tasks.map(t => t.k + '|' + t.sd));
-    const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
+    /* (طلبُ صاحب الموقع: «الفجوة … فجأة يصير فراغ بالزاوية وفيه الأيقونة») أوّلُ رسمٍ بعد الضغط يكون في أثناء رسم المساهمة (مهمّةٌ
+       طويلة ‎~110ms‎)، فكانت ساعةُ الفجوة (‎180ms‎) تمضي قبل أوّل إطارٍ يُرى — فتظهر الفجوةُ والأيقونةُ شبهَ كاملتين. فالجديدةُ تبدأ
+       ساعتُها من الرسم التالي (إطارٍ يُرى)، وتُعرف بزاويتها لا بكتلتها: أيقونةٌ تبقى في زاويتها وقد صارت الكتلةُ غيرَها (أُغلق الملخّصُ
+       فصارت زاويتُه للمصادر) لا تُنحت فجوتُها من جديد */
     const keys = () => Object.keys(st).filter(x => x !== '_seen');
-    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now }; } });
-    tasks.forEach(t => { const key = t.k + '|' + t.sd, e = st[key]; if (!e) st[key] = { from: first ? 1 : 0, to: 1, t0: now }; else if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now }; });
+    const val = e => e.t0 == null ? e.from : e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
+    const want = new Set(tasks.map(t => t.sd));
+    const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
+    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now, k: e.k }; } });
+    tasks.forEach(t => { const key = t.sd, e = st[key];
+      if (!e) { if (first) st[key] = { from: 1, to: 1, t0: now, k: t.k }; else { const ne = st[key] = { from: 0, to: 1, t0: null, k: t.k }; requestAnimationFrame(() => { ne.t0 = performance.now(); if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); }); } }
+      else { if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now, k: t.k }; else e.k = t.k; } });
     let busy = false; const nchN = [];
     keys().forEach(key => {
-      const e = st[key], v = val(e), [k, sd] = key.split('|');
+      const e = st[key], v = val(e), sd = key, k = e.k;
       if (v < 1 && v > 0 && e.to === e.from) {}   /* (ثابت) */
-      if ((now - e.t0) < DUR) busy = true;
-      if (v <= .01) { if (e.to === 0 && now - e.t0 >= DUR) delete st[key]; return; }
+      if (e.t0 == null || (now - e.t0) < DUR) busy = true;
+      if (v <= .01) { if (e.to === 0 && e.t0 != null && now - e.t0 >= DUR) delete st[key]; if (e.to === 1) { const t0k = tasks.find(x => x.sd === key); if (t0k && t0k.bt) { t0k.bt.style.opacity = '0'; } } return; }   /* (الأيقونةُ لا تُرى قبل أن تبدأ فجوتُها) */
       if (!alive(k)) { delete st[key]; return; }
       const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
-      const t = tasks.find(x => x.k + '|' + x.sd === key);
+      const t = tasks.find(x => x.sd === key);
       nchN.push({ k, sd, nw, nh, c });
       apply(k, d => {
         const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
