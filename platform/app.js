@@ -11110,6 +11110,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (post0.pkMidRun) return;
     const R = el => el ? el.getBoundingClientRect() : null;
     const run = () => {
+      bkScrFrz(post0);
       const old = { book: R(sp0.querySelector(':scope > .pk-src')), bank: R(sp0.querySelector(':scope > .pk-bank')), top: R(sp0).top };
       const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
       const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
@@ -11117,7 +11118,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       commit();
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
-      if (!sp || sp.classList.contains('pk-split--none')) return;
+      if (!sp || sp.classList.contains('pk-split--none')) { bkScrThawAll(); return; }
       post.pkMidRun = true;
       const D = closing ? PKFX.OUT * .62 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
       /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
@@ -11172,12 +11173,14 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
         live = false; sp.style.justifyContent = ''; sized.forEach(x => { x.style.boxSizing = ''; }); if (kv) kv.style.overflow = ''; if (gh) gh.remove();
         post.pkBlkHold = false; post.pkMidRun = false; if (post.isConnected) pkBandFit(post);
+        bkScrThawAll();
       });
     };
     if (!closing) return run();
     /* ===== الخروج بجانب غيره (طلبُ صاحب الموقع): مراحلُ أربع =====
        ١. محتوى العمود يخفت · ٢. العمودُ يتقلّص صاعدًا إلى السقف · ٣. محتوى السقف يخفت · ٤. السقفُ ينكمش إلى وسطه والجاران يأخذان مكانه */
     post0.pkMidRun = true; post0.pkBlkHold = true;
+    bkScrFrz(post0);
     const slow = window.__pkfxSlow || 1, wait = an => Promise.all(an.map(a => a.finished.catch(() => {})));
     const kv0 = sp0.querySelector(':scope > .kt-view'), band = post0.querySelector(':scope > .pk-band'), mp = band && band.querySelector('path.pk-blk[data-k="mid"]');
     const cr = R(post0), ox = cr.left + post0.clientLeft, oy = cr.top + post0.clientTop;
@@ -14291,7 +14294,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (sp.classList.contains('pk-splh-anim') && !dur && !now) { clearTimeout(pkSrcHFit.r); pkSrcHFit.r = setTimeout(pkSrcHFit, 450); return; }
       const h = pkSrcHCalc(card), id = ctl.dataset.pkid, cur = parseFloat(sp.style.getPropertyValue('--pk-h')) || 0;
       /* أُغلق الكتاب: تبقى المساحةُ بقامتها التي كانت معه (طلبُ صاحب الموقع) — لا تطول إلى قامتها الحرّة */
-      if (h == null) { if (pkSrcH[id] && Math.abs(pkSrcH[id] - cur) >= 1) sp.style.setProperty('--pk-h', pkSrcH[id] + 'px'); return; }
+      if (h == null) { if (pkSrcH[id] && Math.abs(pkSrcH[id] - cur) >= 1) { sp.style.setProperty('--pk-h', pkSrcH[id] + 'px'); sp.classList.add('pk-split--h'); } return; }
       pkSrcH[id] = h;
       if (Math.abs(h - cur) < 3) return;
       if (now) { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = sp.style.transitionTimingFunction = ''; }
@@ -14301,7 +14304,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         sp.classList.add('pk-splh-anim'); clearTimeout(sp.pkHT);
         sp.pkHT = setTimeout(() => { sp.classList.remove('pk-splh-anim'); sp.style.transitionDuration = sp.style.transitionTimingFunction = ''; }, (dur || 380) + 40);
       }
-      sp.style.setProperty('--pk-h', h + 'px');
+      sp.style.setProperty('--pk-h', h + 'px'); sp.classList.add('pk-split--h');   /* (الصنفُ يقرؤه ‎CSS‎ بدل ‎[style*="--pk-h"]‎) */
     });
   }
   window.addEventListener('resize', () => { clearTimeout(pkSrcHFit.t); pkSrcHFit.t = setTimeout(pkSrcHFit, 150); });
@@ -14399,7 +14402,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     let hB = pkBlkH('book', id, pkSrcList(id).length);
     const hQ = pkBlkH('bank', id, flatCards(qb).length).replace(/<\/div>$/, flatCards(qb).length ? pkQtArc(id, 'bank') + '</div>' : '</div>');
     if (pkSrcAny(id) && bk2On()) hB = hB.replace('</span>', '</span>' + pkBkArc(id));   /* قوسُ طريقة العرض على زاوية أيقونة الكتاب */
-    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
+    return `<div class="pk-split pk-split--${v}${anim ? ' is-in' : ''}${bank ? ' has-bank' : ''}${book ? ' has-book' : ''}${mid ? '' : ' no-mid'}${pkSrcH[id] ? ' pk-split--h' : ''}" style="--spl:${pkSplR(id)};--sqb:${pkSqbR(id)}${pkSrcH[id] ? `;--pk-h:${pkSrcH[id]}px` : ''}">`
       + (book ? pkBlkIn(pkSrcView(id, ed), hB) + (mid ? pkSplH(id) : '') : '') + (mid ? viewH : '')
       + (bank ? (mid ? pkSplH(id, 'b') : '') + pkBlkIn(pkBankHTML(id, ed, pack), hQ) : '') + `</div>`;
   }
@@ -14948,7 +14951,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* الورقةُ مربّعةٌ على قدّ مكانها: عرضُه، وقامتُه إن كانت محدودة، وحدٌّ أقصى ‎440‎ */
     function size() {
       /* والضيّقةُ ذاتُ القامة المحدودة (بجانب الكتاب) كالمكبَّرة: تصغر الورقةُ مع قامتها ولا تُمرَّر */
-      const fill = !!host.closest('.pk--max, .pk-split[style*="--pk-h"], .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
+      const fill = !!host.closest('.pk--max, .pk-split.pk-split--h, .pp-grid'), w = host.clientWidth, h = fill ? host.clientHeight : Infinity;
       host.style.height = fill ? '' : host.style.height;
       const s = Math.max(host.closest('.pp-grid') ? 36 : 160, Math.min(440, w * 0.66, h * 0.84 - 30));   /* (‎0.66‎ لا ‎0.84‎) يتّسع للّسان على الحافّة */
       stage.style.width = stage.style.height = s + 'px';
@@ -29679,7 +29682,11 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* اتّسعت المساحةُ كثيرًا: تُعاد الصفحاتُ الظاهرةُ بدقّتها الجديدة */
     b.scrRO = new ResizeObserver(() => {
       const w = sc.clientWidth; if (!w) return;
-      clearTimeout(b.fitT); b.fitT = setTimeout(() => bkScrFitW(b), 160);   /* (بعد أن يستقرّ المقاس — لا في كلّ إطارٍ من انتقاله) */
+      /* (طلبُ صاحب الموقع: «الديناميكيّة سيّئة وفيه jumps» حين تنفتح مساحةٌ بجانب الصفحات المتتالية)
+         كان عرضُ ‎100%‎ يُحسب بعد أن يستقرّ المقاس بـ‎160ms‎ — فتبقى الصفحةُ بمقاسها القديم طوالَ حركة المساحة، ثمّ تقفز
+         إلى الجديد بعد انتهائها (قيس: ‎288→236px‎ بعد ‎280ms‎ من النهاية). فالآن يتبع المساحةَ في كلّ إطار ومكانُ القراءة ثابت،
+         كما تصغر لوحةُ الكتاب في الصفحة والصفحتين. ونافذةُ تبديل العرض (‎bkFx‎) والتقريبُ يبقيان على التأجيل (داخل ‎bkScrFitW‎) */
+      clearTimeout(b.fitT); bkScrFitW(b);
       b.scrPW = 0;
       b.scrSync && b.scrSync();
       bkScrFit(b);
@@ -30612,7 +30619,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الطائرةُ في طريقها. فالآن لا يُغيَّر في نافذة الحركة (‎bkFx‎) ولا في تبدُّلٍ جارٍ، ويُعاد بعد استقرار المقاس فقط (‎force‎ عند
      البناء)، ومكانُ القراءة ثابتٌ حين يتغيّر (أعلى صفحةٍ ظاهرةٍ وموضعُها منها) */
   function bkScrFitW(b, force) {
-    const sc = b.scr; if (!sc) return;
+    const sc = b.scr; if (!sc || b.frz) return;   /* (مجمَّدةٌ: يُحسب حين تُفكّ) */
     if (!force && (bkFx(b) || b.mx || b.zg)) { clearTimeout(b.fitT); b.fitT = setTimeout(() => bkScrFitW(b), 220); return; }
     const fw = bkScrFitCalc(b); if (!fw) return;
     /* (المقارنةُ بما على هذه القائمة نفسِها: الكتابُ يبقى والقائمةُ تُبنى من جديد مع كلّ رجوعٍ إلى العرض العاديّ) */
@@ -30625,7 +30632,60 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     sc.bkFW = b.scrFW = fw; sc.style.setProperty('--bk-fit', fw + 'px');
     if (top) { const r = sc.getBoundingClientRect(), q = top.getBoundingClientRect(); sc.scrollTop += q.top + off * q.height - r.top; }
   }
+  /* ===== الصفحاتُ المتتاليةُ مجمَّدةً في أثناء حركة المساحات (طلبُ صاحب الموقع: «بطء شديد وlag» حين ينفتح الملخّصُ بجانبها) =====
+     كانت القائمةُ الحقيقيّةُ تُقصّ على الرسمة ويُعاد مقاسُ صفحاتها ومكانُ القراءة فيها في كلّ إطار — وهي عناصرُ في الصفحة،
+     فكلُّ إطارٍ قياسٌ وتخطيط. فالآن كالكتاب في الصفحة والصفحتين: لقطةٌ واحدةٌ لما يُرى منها (وما تحته بقدره) تُحجَّم بـ‎transform‎
+     وحده (على كرت الشاشة) حول أعلى منتصف المساحة — وهو ما يُثبّته ‎bkScrFitW‎ حين يتغيّر المقاس — فتصل إلى مقاس الصفحة الأخير
+     نفسِه. والقائمةُ مخفيّةٌ ثابتةٌ لا تُقاس، وتعود في آخر الحركة على مقاسها الجديد ومكانِ القراءة نفسِه */
+  const bkFrzSet = new Set();
+  function bkScrFrz(root) {
+    if (!root || bkReduce()) return;
+    root.querySelectorAll('.pk-src__view.is-scr').forEach(v => {
+      const b = v.pkBk; if (!b || !b.scroll || !b.scr || !b.scrOv || b.frz || b.zg || (b.scrZ || 1) !== 1) return;
+      const sc = b.scr, R = sc.getBoundingClientRect(), f0 = sc.bkFW || b.scrFW; if (!R.width || !R.height || !f0) return;
+      const ext = R.height, H = R.height + ext;   /* (وما تحت المرئيّ بقدره: المساحةُ إن قصرت صفحاتُها ظهر ما تحتها) */
+      const d = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement('canvas');
+      cv.width = Math.round(R.width * d); cv.height = Math.round(H * d);
+      const x = cv.getContext('2d'); x.scale(d, d);
+      for (const el of sc.querySelectorAll('.cbk-scr__pg')) {
+        const q = el.getBoundingClientRect(); if (q.bottom < R.top || q.top > R.top + H) continue;
+        const X = q.left - R.left, Y = q.top - R.top, c = el.querySelector(':scope > canvas:not(.cbk-thumb)') || el.querySelector(':scope > canvas');
+        x.save(); x.shadowColor = 'rgba(0, 0, 0, .28)'; x.shadowBlur = 14; x.shadowOffsetY = 4; x.fillStyle = '#fff'; x.fillRect(X, Y, q.width, q.height); x.restore();
+        if (c && c.width) { try { x.drawImage(c, X, Y, q.width, q.height); } catch (e) {} }
+      }
+      const wrap = document.createElement('div'); wrap.className = 'cbk-frz'; wrap.setAttribute('aria-hidden', 'true');
+      Object.assign(cv.style, { position: 'absolute', top: '0px', width: R.width + 'px', height: H + 'px', transformOrigin: '50% 0', willChange: 'transform' });
+      wrap.appendChild(cv); v.appendChild(wrap);
+      b.frz = { wrap, cv, w0: R.width, f0 };
+      sc.style.visibility = 'hidden'; b.scrOv.style.visibility = 'hidden';
+      bkFrzSet.add(b);
+      clearTimeout(b.frzT); b.frzT = setTimeout(() => bkScrThaw(b), 3000);   /* (أمانٌ: لا تبقى مجمَّدةً إن انقطعت الحركة) */
+      bkScrFrzFrame(b);
+    });
+  }
+  function bkScrFrzFrame(b) {
+    const z = b.frz; if (!z) return;
+    const card = b.view && b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]'), par = b.scr && b.scr.offsetParent;
+    if (!bp || !par) return;
+    let bb; try { bb = bp.getBBox(); } catch (e) { return; }
+    if (!bb || !bb.width) return;
+    const cr = card.getBoundingClientRect(), pr = par.getBoundingClientRect();
+    const left = cr.left + card.clientLeft + bb.x - pr.left - par.clientLeft, top = cr.top + card.clientTop + bb.y - pr.top - par.clientTop;
+    const fw = bkScrFitCalc(b) || z.f0, k = fw / z.f0;
+    Object.assign(z.wrap.style, { left: left + 'px', top: top + 'px', width: bb.width + 'px', height: bb.height + 'px' });
+    z.cv.style.left = (bb.width - z.w0) / 2 + 'px';
+    z.cv.style.transform = `scale(${k})`;
+  }
+  function bkScrThaw(b) {
+    const z = b && b.frz; if (!z) return;
+    clearTimeout(b.frzT); b.frz = null; bkFrzSet.delete(b);
+    if (b.scr) b.scr.style.visibility = ''; if (b.scrOv) b.scrOv.style.visibility = '';
+    if (b.scroll && b.scr && b.scr.isConnected) { b.scrFitK = ''; bkScrFit(b); bkScrFitW(b); b.scrSync && b.scrSync(); bkScrTone(b); }
+    z.wrap.remove();
+  }
+  const bkScrThawAll = () => [...bkFrzSet].forEach(bkScrThaw);
   function bkScrFit(b) {
+    if (b && b.frz) return bkScrFrzFrame(b);
     if (!b || !b.scroll || !b.scr || !b.scrOv) return;
     const card = b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]');
     const d = bp && bp.getAttribute('d'), par = b.scr.offsetParent;
@@ -30659,6 +30719,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bkScrTone(b) {
     if (bkFx(b)) return bkFxLater(b, 'toneT', () => bkScrTone(b));
     if (!b || !b.scroll || !b.scr) return;
+    /* والمساحاتُ تتحرّك: قراءةُ ألوان اللوحات (‎getImageData‎) ثقيلةٌ في كلّ إطار — تُقرأ مرّةً بعد أن تقف */
+    { const cd = b.view && b.view.closest('.post'); if (cd && (cd.pkBandAnim || cd.classList.contains('pk--fxrun'))) { clearTimeout(b.toneMv); b.toneMv = setTimeout(() => bkScrTone(b), 140); return; } }
     bkScrPillTone(b);
     const src = b.view.closest('.pk-src'), hd = src && src.querySelector(':scope > .pk-blkh');
     if (!src || !hd) return;
