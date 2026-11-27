@@ -11120,6 +11120,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الخروج: محتواه يخفت، ثمّ يُرسم الحالُ الجديد وكتلةُ الـT شبحٌ بلونها يذوب مكانَها، والجاران يتّسعان إليه من عرضيهما القديمين،
      والقسمةُ تصعد إلى مكان سقفه. والدخول عكسُه: الجاران يتضيّقان، وعمودُه ينبسط بينهما، والقسمةُ تنزل تحت سقفه وهو يظهر.
      والكتلُ تُرسم من المواضع الحيّة كلَّ إطار، وتُثبَّت ثمّ تُرسم ساكنةً حين تقف */
+  /* ===== ما بقي من انتقال قامة القسمة (طلبُ صاحب الموقع: «المساهمات اللي تحت تقفز ولا تنزلق») =====
+     ‏‎pkSrcHFit‎ يكتب ‎--pk-h‎ الجديدةَ مع الرسم نفسِه، لكنّها تنتقل بـ‎CSS transition‎ — فالقامةُ المقيسةُ بعده مباشرةً هي قامةُ
+     البداية، وكانت حركةُ قامة المساهمة تذهب إلى قامةٍ خاطئةٍ بقدر ذلك الفرق (قيس: ‎40px‎ دائمًا) ثمّ تقفز إلى الصحيحة حين
+     تنتهي، فيقفز ما تحتها. فيُضاف إليها ما بقي: القامةُ الأخيرة (‎--pk-h‎) ناقصَ الجارية */
+  function pkSplHLeft(card) {
+    const sp = card && card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || !sp.classList.contains('pk-split--h') || card.classList.contains('pk--max') || sp.classList.contains('pk-split--none')) return 0;
+    const to = parseFloat(sp.style.getPropertyValue('--pk-h')); if (!to) return 0;
+    if (!sp.classList.contains('pk-splh-anim')) return 0;   /* (لا انتقالَ جارٍ: القامةُ المقيسةُ هي الأخيرة) */
+    return to - sp.getBoundingClientRect().height;
+  }
   function pkMidFx(id, btn, commit) {
     const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
     const closing = !pkMidOff[id];
@@ -11142,7 +11153,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const D = closing ? PKFX.IN * .85 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];   /* (الخروجُ حركةٌ واحدةٌ للجارين — عرضًا وقامةً معًا — فمدّتُه قريبةٌ من الدخول) */
       /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
       if (post.classList.contains('pk--framepub')) {
-        const cardH1 = post.getBoundingClientRect().height;
+        const cardH1 = post.getBoundingClientRect().height + pkSplHLeft(post);
         if (Math.abs(cardH1 - cardH0) > 2) an.push(post.animate([{ height: cardH0 + 'px' }, { height: cardH1 + 'px' }], { duration: D, easing: ez }));
       }
       const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
