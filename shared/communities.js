@@ -102,7 +102,7 @@
     toefl: ['toefl.svg', 'ets-mark.svg', 1], gre: ['gre.svg', 'ets-mark.svg', 1],      /* نجمة ETS */
     sat: ['collegeboard.svg', 'collegeboard-mark.svg', 1],  /* College Board: ويكيبيديا، فموقعها يرسمه بخط أيقونات */
     gmat: ['gmac.svg', 'gmac-mark.svg', 1], cfa: ['cfa.svg', 'cfa-mark.svg', 1],
-    cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', 'aicpa-mark.svg', 0, 0, ''], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
+    cma: ['ima.svg', 'ima-mark.svg', 1], cpa: ['aicpa.svg', 'aicpa-mark.svg', 0, 1, 'aicpa-mark.svg'], pmp: ['pmi.svg', 'pmi-mark.svg', 1],   /* هذه الثلاثة من worldvectorlogo؛ وAICPA مقلوب الألوان (حروفه محفورة في المربع) */
     acca: ['acca-white.svg', 'acca-white.svg', 0, 1, 'acca-white.svg'], cia: ['iia-white.svg', 'iia-mark.svg', 1],
     usmle: ['usmle-white.svg', 'usmle-mark.svg', 0]
   };
