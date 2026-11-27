@@ -1313,6 +1313,19 @@
           var rtl = getComputedStyle(box).direction === 'rtl';
           csGo((dx < 0) === rtl ? 1 : -1);
         });
+        /* إصبعان على لوحة اللمس (عجلة أفقية): بطاقة واحدة لكل سحبة؛ العمودي يبقى لتمرير الصفحة */
+        var wAcc = 0, wLock = false, wIdle = 0;
+        box.addEventListener('wheel', function (e) {
+          var dx = e.deltaX || (e.shiftKey ? e.deltaY : 0);
+          if (Math.abs(dx) <= Math.abs(e.deltaY) && !e.shiftKey) return;
+          e.preventDefault();
+          clearTimeout(wIdle); wIdle = setTimeout(function () { wLock = false; wAcc = 0; }, 180);
+          if (wLock) return;
+          wAcc += dx;
+          if (Math.abs(wAcc) < 40) return;
+          var rtl = getComputedStyle(box).direction === 'rtl';
+          csGo((wAcc > 0) === rtl ? 1 : -1); wLock = true; wAcc = 0;
+        }, { passive: false });
         window.addEventListener('resize', csLayout);
       })();
 
