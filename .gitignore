@@ -6,3 +6,4 @@ desktop.ini
 .stage/
 __pycache__/
 _catalog/plans/
+_catalog/uom/raw/html/

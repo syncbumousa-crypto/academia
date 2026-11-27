@@ -2416,6 +2416,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       startsIn: n => `starts in ${n} ${n === 1 ? 'day' : 'days'}`,
     },
   };
+  /* ===== وكلُّ موقعٍ يُعدّل كلماتِه من صفحته (‎window.AC_CFG‎) =====
+     الخلية (جامعة مانشستر) ساعاتُها ‎credits‎ وموادُّها إجباريّةٌ واختياريّة لا «تخصّص وكلّية».
+     فتضع صفحتُها ‎AC_CFG.i18n = { ar:{…}, en:{…} }‎ ويُدمج ههنا فوق الأصل — والمسلخُ والمدرج
+     لا يُعرّفانه فلا يتغيّر عليهما حرف. */
+  if (window.AC_CFG && window.AC_CFG.i18n) {
+    Object.keys(window.AC_CFG.i18n).forEach(l => { if (I18N[l]) Object.assign(I18N[l], window.AC_CFG.i18n[l]); });
+  }
+  /* وأقسامٌ لا معنى لها في جامعةٍ بعينها تُرفع من شريط المادّة (‎AC_CFG.hide = { abs: 1 }‎) */
+  const COM_HIDE = (window.AC_CFG && window.AC_CFG.hide) || {};
   const T = () => I18N[state.lang];
 
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -4660,7 +4669,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     ['info', T().infoSec], ['doc', T().docSec], ['grade', T().gradeSec],
     ['abs', T().absSec],
     ['srcU', T().studySrc], ['srcP', T().practiceSrc], ['lessons', T().lessonsSec],
-  ];
+  ].filter(t => !COM_HIDE[t[0]]);
 
   function secHasContent(code, sec) {
     if (sec === 'doc') return doctorsOf(code).some(d => d.posts.length);
@@ -32900,7 +32909,7 @@ void main() {
     const EXP_IC = '<svg class="cm-tabic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5v-3.5H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"/><path d="M8 10.5h8M8 13.5h5"/></svg>';
     const secTabs = () => expKind(code)
       ? `<button type="button" data-tab="info">${EXP_IC}<span class="cm-tabnm">${T().expSec}</span><span class="cm-faces"></span></button>`
-      : [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].map(cmTab).join('')
+      : [['info', T().infoSec], ['doc', T().docSec], ['abs', T().absSec], ['grade', T().gradeSec]].filter(t => !COM_HIDE[t[0]]).map(cmTab).join('')
       + `<div class="cm-res">`
       + XT_RES().map(cmTab).join('')
       + `</div>`;

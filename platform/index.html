@@ -982,6 +982,8 @@
       var COMS = [
         { id:'maslakh',  ar:'المسلخ',  en:'Almaslakh',  href:'../Almaslakh/', a:'#0e3b41', b:'#1f7a85' },
         { id:'mudarraj', ar:'المدرج',  en:'Almudarraj', href:'../Almudarraj/', a:'#0a4a6c', b:'#1a8abe' },
+        /* الخلية (جامعة مانشستر · ROADMAP-HIVE): «قريبًا» حتى خ٨، ثمّ يُضاف ‎href:'../TheHive/'‎ ويُرفع ‎soon‎ */
+        { id:'hive',     ar:'الخلية',  en:'The Hive',   soon:1,               a:'#3d0a5c', b:'#660099' },
         { id:'qudurat',  ar:'القدرات', en:'Qudurat',    soon:1,               a:'#2a2142', b:'#5d4a95' },
         { id:'tahsili',  ar:'التحصيلي', en:'Tahsili',   soon:1,               a:'#1e3326', b:'#3f7a55' },
         { id:'ielts',    ar:'الآيلتس', en:'IELTS',      soon:1,               a:'#3b1f26', b:'#8d4654' }
@@ -1219,7 +1221,8 @@
          ‎&com=mudarraj‎ لجداول المدرج. ولا يُكتب منه شيء — هو مرآة: ضغطةُ الكتاب
          تفتح ركنَه في موقعه، والتعديلُ هناك. فلا يختلط ركنٌ بركن.
          ويُتحقّق من ترويسة ‎x-com‎ في كلّ ردّ: ما لم يأتِ من جداول مجتمعه لا يُعرض. */
-      var GN = { coms: ['maslakh', 'mudarraj'], data: {}, at: 0, f: 'all' };
+      /* والمجتمعاتُ المفتوحةُ وحدها (ما عليه «قريبًا» لا جداولَ له بعد) */
+      var GN = { coms: COMS.filter(function (c) { return !c.soon && c.href; }).map(function (c) { return c.id; }), data: {}, at: 0, f: 'all' };
       var GN_T = { sub: ['ترماتك في كلّ المجتمعات. تضغط المادة فتنفتح في موقعها.', 'Your terms across communities. Tap a course to open it in its site.'],
                    all: ['الكل', 'All'], now: ['الترم الحالي', 'Current term'], past: ['الترمات السابقة', 'Past terms'],
                    none: ['ما عندك مواد بعد. افتح مجتمعًا من «استكشاف» وأضف ترمك.', 'No courses yet. Open a community from Explore and add your term.'],

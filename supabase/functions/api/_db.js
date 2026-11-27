@@ -42,7 +42,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
    نداءٍ من المدرج تجري في صفقةٍ أوّلُها ‎SET LOCAL search_path‎ — والصفقةُ
    هي ما يحفظ الإعدادَ في مجمّع الاتصالات، فلا يتسرّب إلى نداءٍ غيره. */
 const _com = new AsyncLocalStorage();
-export const COMS = { mudarraj: 1 };
+export const COMS = { mudarraj: 1, hive: 1 };
 export const runCom = (c, fn) => _com.run(COMS[c] ? c : '', fn);
 export const com = () => _com.getStore() || '';
 /* مفتاحٌ في ‎meta‎ المشتركة يخصّ المجتمع: ‎catalog_rev‎ ⇐ ‎catalog_rev:mudarraj‎ */
