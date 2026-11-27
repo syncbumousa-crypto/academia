@@ -149,6 +149,28 @@
     a.ex-own:hover { color: var(--c-kfupm); }
     .ex-dot   { width: 15px; height: 15px; border-radius: 50%; flex: none; }
 
+    /* ===== الركنُ العامّ ===== */
+    #panel-nook-soon .ex-head { margin-bottom: 14px; }
+    #panel-nook-soon .ex-h    { font-size: 24px; }
+    .gn-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 22px; }
+    .gn-chip  { font: inherit; font-size: 13px; border: 1px solid var(--border); background: transparent;
+                color: inherit; padding: 5px 13px; border-radius: 99px; display: inline-flex;
+                align-items: center; gap: 7px; cursor: pointer; }
+    .gn-chip.is-on { background: var(--c-ink, #1d1d1f); color: var(--bg, #fff); border-color: transparent; }
+    .gn-chip i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .gn-past  { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 18px; }
+    .gn-row   { display: flex; align-items: center; gap: 12px; width: 100%; padding: 11px 2px;
+                border: 0; border-bottom: 1px solid var(--border); background: none; color: inherit;
+                font: inherit; font-size: 14px; text-align: start; cursor: pointer; flex-wrap: wrap; }
+    .gn-row:hover b { color: var(--c-kfupm); }
+    .gn-row i { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+    .gn-row b { min-width: 52px; }
+    .gn-row span { color: var(--c-ink-soft); font-size: 12.5px; min-width: 0; direction: ltr; unicode-bidi: plaintext; }
+    .gn-row em { margin-inline-start: auto; font-style: normal; color: var(--c-ink-soft); font-size: 12px; }
+    .gn-msg   { color: var(--c-ink-soft); font-size: 14px; padding: 26px 2px; }
+    .gn-msg a { color: var(--c-kfupm); }
+    .gn-strip .ex-card { cursor: pointer; }
+
     /* رفٌّ موعودٌ لم يُملأ بعد: أغلفةٌ مرسومةٌ بالخطّ المتقطّع لا كتبٌ مخترَعة */
     .ex-chip  { font-size: 11px; font-weight: 700; color: var(--c-ink-soft);
                 border: 1px solid var(--border); border-radius: 99px; padding: 1px 9px; }
@@ -494,10 +516,11 @@
   </section>
 
   <!-- لوحة الاختبارات الماضية: كل اختبار دخله المستخدم وبدأ فيه — يُملأ من الجافا -->
-  <!-- الركنُ العامّ: كلُّ مجتمعاتك وكتبك. شكلُه لم يُقرَّر بعد، فمكانُه
-       محجوزٌ بمساحةٍ رماديّةٍ لا بوعدٍ مكتوب -->
+  <!-- الركنُ العامّ (م٢ب، الشكل «أ»): ركنُك في كلّ مجتمعٍ معًا — للقراءة. يُملأ من الجافا -->
   <section class="panel" id="panel-nook-soon" hidden>
-    <div class="soon-area"><span id="soon-tx">الركن العامّ</span></div>
+    <div class="ex-head"><h2 class="ex-h" id="soon-tx">ركني</h2><p class="ex-sub" id="gn-sub"></p></div>
+    <div class="gn-chips" id="gn-chips"></div>
+    <div id="gn-body"></div>
   </section>
 
   <section class="panel" id="panel-past" hidden></section>
@@ -851,7 +874,7 @@
                 s1:['لكلِّ مجتمعٍ أهلُه ومكتبتُه.','Each community has its own people and library.'],
                 soon:['قريبًا','Soon'], empty:['لم يُفتح هذا الرفُّ بعد.','This shelf is not open yet.'],
                 add:['أضِف المجتمع','Add community'], added:['مضاف','Added'],
-                page:['صفحة المجتمع','Community page'], soonN:['الركن العامّ','Your nook'] };
+                page:['صفحة المجتمع','Community page'], soonN:['ركني','My nook'] };
       function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 1 : 0; }
 
       /* الرفوف: جدولٌ واحدٌ يُقرأ، فزيادةُ رفٍّ سطرٌ فيه لا قسمٌ في الصفحة.
@@ -1190,6 +1213,133 @@
           document.getElementById('com-head').hidden = true;
         }
       });
+
+      /* ===== الركنُ العامّ (م٢ب · الشكل «أ» · ROADMAP-MUDARRAJ) =====
+         ركنُك في كلّ مجتمعٍ يُقرأ من خادمه هو: ‎/api/udoc?kind=nook‎ للمسلخ، ومع
+         ‎&com=mudarraj‎ لجداول المدرج. ولا يُكتب منه شيء — هو مرآة: ضغطةُ الكتاب
+         تفتح ركنَه في موقعه، والتعديلُ هناك. فلا يختلط ركنٌ بركن.
+         ويُتحقّق من ترويسة ‎x-com‎ في كلّ ردّ: ما لم يأتِ من جداول مجتمعه لا يُعرض. */
+      var GN = { coms: ['maslakh', 'mudarraj'], data: {}, at: 0, f: 'all' };
+      var GN_T = { sub: ['ترماتك في كلّ المجتمعات. تضغط المادة فتنفتح في موقعها.', 'Your terms across communities. Tap a course to open it in its site.'],
+                   all: ['الكل', 'All'], now: ['الترم الحالي', 'Current term'], past: ['الترمات السابقة', 'Past terms'],
+                   none: ['ما عندك مواد بعد. افتح مجتمعًا من «استكشاف» وأضف ترمك.', 'No courses yet. Open a community from Explore and add your term.'],
+                   out: ['ركنك للأعضاء. سجّل دخولك ويطلع لك ركنك من كلّ المجتمعات.', 'Sign in to see your nook from every community.'],
+                   err: ['تعذّر الوصول إلى ', 'Could not reach '], load: ['يُحمَّل…', 'Loading…'] };
+      function gnTok() { try { return localStorage.getItem('academia2:tok:user') || ''; } catch (e) { return ''; } }
+      function gnFetch(id) {
+        var u = '/api/udoc?kind=nook' + (id === 'maslakh' ? '' : '&com=' + id);
+        return fetch(u, { cache: 'no-store' }).then(function (r) {
+          if (r.status === 401) return { out: 1 };
+          var xc = r.headers.get('x-com');
+          if (!r.ok || xc !== id) return { err: 1 };
+          return r.json().then(function (j) { return { nook: (j && j.data) || null }; });
+        }).catch(function () { return { err: 1 }; });
+      }
+      /* أسماءُ الموادّ: لكلّ مجتمعٍ كتالوجُه في درجه (المدرجُ يكتبه في ‎academia2:mudarraj:‎) */
+      function gnCat(id) {
+        var k = id === 'maslakh' ? 'academia2:catalog:v1' : 'academia2:' + id + ':catalog:v1', m = {};
+        try { var c = JSON.parse(localStorage.getItem(k) || 'null');
+              (c && c.courses || []).forEach(function (x) { m[x.code] = x; }); } catch (e) {}
+        return m;
+      }
+      function gnCurrent(nk) {
+        var ts = (nk && nk.terms) || [], d = (nk && nk.termDates) || {}, today = new Date().toISOString().slice(0, 10);
+        for (var i = ts.length - 1; i >= 0; i--) {
+          var x = d[ts[i]];
+          if (x && x.s && x.e && x.s <= today && today <= x.e) return ts[i];
+        }
+        for (var j = ts.length - 1; j >= 0; j--) if (((nk.libs || {})[ts[j]] || []).length) return ts[j];
+        return ts[ts.length - 1] || '';
+      }
+      function gnBook(c, code, cat, i) {
+        var mas = c.id === 'maslakh', x = cat[code] || {};
+        var nm = i ? code : (mas ? codeLabel(code, 0) : (x.ar || code));
+        var full = x.full || (mas ? fullName(code) : '');
+        var cov = mas && typeof COVERS !== 'undefined' && COVERS[code];
+        var face = cov ? '<img loading="lazy" alt="' + esc(nm) + '" src="../' + cov + '">'
+                       : '<span class="ex-noimg">' + esc(nm) + '</span>';
+        return '<div class="ex-card" data-gn="' + c.id + '"' + (full ? ' title="' + esc(full) + '"' : '') + '>' +
+               '<div class="ex-cover' + (cov ? '' : ' is-noimg') + '">' + face + '</div>' +
+               '<div class="ex-cap"><b>' + esc(nm) + '</b></div>' +
+               '<span class="ex-own"><i class="ex-dot" style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')"></i>' +
+               '<span>' + esc(i ? c.en : c.ar) + '</span></span></div>';
+      }
+      function gnCount(n, i) {
+        if (i) return n + (n === 1 ? ' course' : ' courses');
+        return n === 1 ? 'مادة واحدة' : n === 2 ? 'مادتان' : n <= 10 ? n + ' مواد' : n + ' مادة';
+      }
+      function gnRender() {
+        var i = lang(), body = document.getElementById('gn-body');
+        document.getElementById('soon-tx').textContent = i ? 'My nook' : 'ركني';
+        document.getElementById('gn-sub').textContent = GN_T.sub[i];
+        var chips = document.getElementById('gn-chips');
+        if (!gnTok() || GN.out) { chips.innerHTML = ''; body.innerHTML = '<p class="gn-msg">' + GN_T.out[i] + '</p>'; return; }
+        if (!GN.at) { chips.innerHTML = ''; body.innerHTML = '<p class="gn-msg">' + GN_T.load[i] + '</p>'; return; }
+        var coms = GN.coms.map(comById).filter(Boolean);
+        chips.innerHTML = '<button type="button" class="gn-chip' + (GN.f === 'all' ? ' is-on' : '') + '" data-f="all">' + GN_T.all[i] + '</button>' +
+          coms.map(function (c) {
+            return '<button type="button" class="gn-chip' + (GN.f === c.id ? ' is-on' : '') + '" data-f="' + c.id + '">' +
+                   '<i style="background:linear-gradient(135deg,' + c.a + ',' + c.b + ')"></i>' + esc(i ? c.en : c.ar) + '</button>';
+          }).join('');
+        var now = [], nowLbl = [], past = [], errs = [];
+        coms.forEach(function (c) {
+          if (GN.f !== 'all' && GN.f !== c.id) return;
+          var r = GN.data[c.id] || {};
+          if (r.err) { errs.push(i ? c.en : c.ar); return; }
+          var nk = r.nook; if (!nk) return;
+          var cat = gnCat(c.id), cur = gnCurrent(nk), libs = nk.libs || {}, d = nk.termDates || {};
+          (libs[cur] || []).forEach(function (x) { if (x && x.code) now.push(gnBook(c, x.code, cat, i)); });
+          if ((libs[cur] || []).length) nowLbl.push((i ? c.en : c.ar) + ' ' + cur);
+          (nk.terms || []).forEach(function (t) {
+            if (t === cur) return;
+            var cs = (libs[t] || []).map(function (x) { return x && x.code; }).filter(Boolean);
+            if (!cs.length) return;
+            past.push({ c: c, t: t, cs: cs, s: (d[t] && d[t].s) || t });
+          });
+        });
+        past.sort(function (a, b) { return a.s < b.s ? 1 : a.s > b.s ? -1 : 0; });
+        var h = '';
+        if (now.length) {
+          h += '<section class="ex-row"><div class="ex-head"><h2 class="ex-h">' + GN_T.now[i] + '</h2>' +
+               '<p class="ex-sub">' + esc(nowLbl.join(' · ')) + '</p></div>' +
+               '<div class="ex-wrap"><div class="ex-strip ex-strip--books gn-strip">' + now.join('') + '</div></div></section>';
+        }
+        if (past.length) {
+          h += '<section class="gn-past"><div class="ex-head"><h2 class="ex-h">' + GN_T.past[i] + '</h2></div>' +
+               past.map(function (p) {
+                 return '<button type="button" class="gn-row" data-gn="' + p.c.id + '">' +
+                        '<i style="background:linear-gradient(135deg,' + p.c.a + ',' + p.c.b + ')"></i>' +
+                        '<b>' + esc(p.t) + '</b><span>' + esc(p.cs.join(' · ')) + '</span>' +
+                        '<em dir="' + (i ? 'ltr' : 'rtl') + '">' + gnCount(p.cs.length, i) + '</em></button>';
+               }).join('') + '</section>';
+        }
+        if (!now.length && !past.length) h += '<p class="gn-msg">' + GN_T.none[i] + '</p>';
+        if (errs.length) h += '<p class="gn-msg">' + GN_T.err[i] + esc(errs.join(' · ')) + '</p>';
+        body.innerHTML = h;
+        body.querySelectorAll('.ex-wrap').forEach(wireNav);
+      }
+      function gnPaint() {
+        gnRender();
+        if (!gnTok()) return;
+        var t = Date.now(); if (t - GN.at < 15000) return;      /* لا يُسأل الخادمُ مع كلّ ضغطة */
+        Promise.all(GN.coms.map(gnFetch)).then(function (rs) {
+          GN.out = rs.some(function (r) { return r.out; });
+          GN.coms.forEach(function (id, k) { GN.data[id] = rs[k]; });
+          GN.at = Date.now(); gnRender();
+        });
+      }
+      document.getElementById('panel-nook-soon').addEventListener('click', function (e) {
+        var ch = e.target.closest('.gn-chip');
+        if (ch) { GN.f = ch.dataset.f; gnRender(); return; }
+        var b = e.target.closest('[data-gn]'); if (!b) return;
+        var c = comById(b.dataset.gn); if (c) openCom(c, 'nook');
+      });
+      document.getElementById('sidebar').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-tab]');
+        if (b && b.dataset.tab === 'library') gnPaint();
+      });
+      new MutationObserver(function () { if (!document.getElementById('panel-nook-soon').hidden) gnRender(); })
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
 
       /* أيقونةُ «شريط جانبيّ»: مستطيلٌ وقسمةٌ على جهة الشريط — تُبدَّل ههنا
          لأنّ المحرّكَ الذي يبنيها مشتركٌ مع المسلخ، وهذا تغييرُ الجذر وحده. */
