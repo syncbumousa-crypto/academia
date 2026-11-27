@@ -193,7 +193,7 @@
     .cs-card[data-mono] .cs-open img, .cs-card[data-mono] .cs-peek img, .cs-card[data-mono] .cs-wm { filter: brightness(0) invert(1); }
     /* بلا شعار: الاختصارُ نفسُه علامةٌ مائيّة (‎STEP‎ · ‎CFA‎ · «ثانوي») */
     .cs-wmt   { position: absolute; inset-inline-end: 5%; top: 50%; transform: translateY(-50%); font-family: 'Space Grotesk', 'IBM Plex Sans Arabic', sans-serif;
-                font-size: min(150px, calc(36cqw / (var(--n) * .78))); font-weight: 700; line-height: 1; letter-spacing: -4px; white-space: nowrap; opacity: .12;
+                font-size: min(150px, calc(36cqw / (var(--n) * .78))); font-weight: 700; line-height: 1; letter-spacing: -4px; word-spacing: .35em; white-space: nowrap; opacity: .12;
                 pointer-events: none; transition: opacity .4s; }
     .cs-card.is-on .cs-wmt { opacity: .18; }
     .cs-hit   { position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
@@ -326,7 +326,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=12"></script>
+  <script src="../shared/communities.js?v=13"></script>
 </head>
 <body>
 
@@ -1114,7 +1114,7 @@
           var wide = (c.id === 'hive' ? ' data-wide' : '') + (c.wmWide ? ' data-wmw' : '');
           var wmSrc = c.wm !== undefined ? c.wm : c.mark;
           var mark = wmSrc ? '<img class="cs-wm" src="' + LOGO + wmSrc + '" alt="" aria-hidden="true">'
-                   : c.tag ? (function (t) { return '<span class="cs-wmt" aria-hidden="true" style="--n:' + Math.max(3, t.length) + '">' + esc(t) + '</span>'; })(typeof c.tag === 'string' ? c.tag : c.tag[i ? 'en' : 'ar']) : '';
+                   : c.tag ? (function (t) { return '<span class="cs-wmt" aria-hidden="true" style="--n:' + Math.max(4, t.length) + '">' + esc(t) + '</span>'; })(typeof c.tag === 'string' ? c.tag : c.tag[i ? 'en' : 'ar']) : '';
           var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
           /* رمز الجهة شارة جنب الاسم؛ والشعار الكامل فوق الاسم فقط لمن شعاره نص بلا رمز */
           var badge = c.mark && (!c.wmWide || c.wm !== undefined) ? '<span class="cs-badge' + (c.badgeWide ? ' is-wide' : '') + '"><img src="' + LOGO + c.mark + '" alt="' + esc(org || nm) + '"></span>' : '';
