@@ -20341,6 +20341,9 @@ html[data-theme="dark"] .cbk-sb > i:hover, html[data-theme="dark"] .cbk-sb.is-dr
 .cbk-scr__ov { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: 14px; clip-path: inset(0 round 14px); }
 /* لقطةُ الصفحات المتتالية في أثناء حركة المساحات (‎bkScrFrz‎): مكانَ القائمة وعلى شكل المساحة، تُحجَّم بـ‎transform‎ وحده */
 .cbk-frz { position: absolute; z-index: 1; overflow: hidden; pointer-events: none; border-radius: var(--pk-scr-r, 14px); contain: strict; }
+.cbk-frz__pg { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; overflow: hidden; border-radius: 3px; background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 8px 22px -12px rgba(0, 0, 0, .45); }
+.cbk-frz__pg > canvas { display: block; width: 100%; height: 100%; }
 #cm-body .pk-src:has(> .pk-src__view.is-scr) { overflow: visible; }
 
 /* ===== أيقونةُ مساحة المصادر وقوسُها بلونٍ يتكيّف مع الورق خلفهما (‎bkScrTone‎) — في الصفحات المتتالية وحدها ===== */
