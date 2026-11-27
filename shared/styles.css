@@ -20669,3 +20669,6 @@ a.exp-fl:hover { text-decoration: underline; }
 .cm-tabs.cm-tabs--one { justify-content: flex-start; }
 .cm-tabs.cm-tabs--one > button { flex: 0 0 148px; max-width: 148px; }
 .fold-peek a.exp-fl, .fold-peek .exp-fl { align-self: center; vertical-align: middle; line-height: 1.5; }
+
+/* المساهماتُ البعيدةُ عن النظر (‎cmFarWatch‎): لا تُرسم ولا يُحسب ما بداخلها، بقامتها المقيسة نفسِها */
+#cm-body > .post.cm-far { content-visibility: auto; }

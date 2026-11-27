@@ -7536,7 +7536,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
 
   /* نقطة إعادة الرسم الوحيدة: القسم النشط في نافذة واحدة أسفل الشريط الواحد */
   function renderCmSection() {
-    try { return renderCmSection0(); } finally { try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
+    try { return renderCmSection0(); } finally { try { cmFarWatch(); } catch (e) {} try { pkSplFitAll(); } catch (e) {} try { pkSrcHFit(); } catch (e) {} try { hlAfterRender(); } catch (e) {} try { bk2Prefetch(); } catch (e) {} }
   }
   /* الدعوة (الاقتراحُ ٤ من صاحب الموقع): مساهماتٌ مغبّشةٌ تُوحي بما ينتظر، وفوقها بطاقةٌ تقول اختر قسمًا من فوق */
   function cmPickHTML() {
@@ -11120,6 +11120,17 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      الخروج: محتواه يخفت، ثمّ يُرسم الحالُ الجديد وكتلةُ الـT شبحٌ بلونها يذوب مكانَها، والجاران يتّسعان إليه من عرضيهما القديمين،
      والقسمةُ تصعد إلى مكان سقفه. والدخول عكسُه: الجاران يتضيّقان، وعمودُه ينبسط بينهما، والقسمةُ تنزل تحت سقفه وهو يظهر.
      والكتلُ تُرسم من المواضع الحيّة كلَّ إطار، وتُثبَّت ثمّ تُرسم ساكنةً حين تقف */
+  /* ===== ما بقي من انتقال قامة القسمة (طلبُ صاحب الموقع: «المساهمات اللي تحت تقفز ولا تنزلق») =====
+     ‏‎pkSrcHFit‎ يكتب ‎--pk-h‎ الجديدةَ مع الرسم نفسِه، لكنّها تنتقل بـ‎CSS transition‎ — فالقامةُ المقيسةُ بعده مباشرةً هي قامةُ
+     البداية، وكانت حركةُ قامة المساهمة تذهب إلى قامةٍ خاطئةٍ بقدر ذلك الفرق (قيس: ‎40px‎ دائمًا) ثمّ تقفز إلى الصحيحة حين
+     تنتهي، فيقفز ما تحتها. فيُضاف إليها ما بقي: القامةُ الأخيرة (‎--pk-h‎) ناقصَ الجارية */
+  function pkSplHLeft(card) {
+    const sp = card && card.querySelector('.post-ytmain > .pk-split');
+    if (!sp || !sp.classList.contains('pk-split--h') || card.classList.contains('pk--max') || sp.classList.contains('pk-split--none')) return 0;
+    const to = parseFloat(sp.style.getPropertyValue('--pk-h')); if (!to) return 0;
+    if (!sp.classList.contains('pk-splh-anim')) return 0;   /* (لا انتقالَ جارٍ: القامةُ المقيسةُ هي الأخيرة) */
+    return to - sp.getBoundingClientRect().height;
+  }
   function pkMidFx(id, btn, commit) {
     const post0 = btn.closest('.post'), sp0 = post0 && post0.querySelector('.post-ytmain > .pk-split');
     const closing = !pkMidOff[id];
@@ -11134,7 +11145,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const kv0 = sp0.querySelector(':scope > .kt-view'), hd0 = post0.querySelector('.post-ytmain > .pk-blkh--mid');
       const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
       const cardH0 = post0.getBoundingClientRect().height;
+      /* (طلبُ صاحب الموقع: «الاقي الايقونة وراها فجأة … ينبغي تظهر بديناميكية») موضعُ أيقونة الملخّص في فجوتها قبل الدخول — منه تطير */
+      const icFrom = closing ? null : (x => x && x.offsetParent ? x.getBoundingClientRect() : null)(post0.querySelector('.pk-icrow [data-pkic="mid"]'));
       commit();
+      if (post0.pkClsAn) { post0.pkClsAn.forEach(x => { try { x.cancel(); } catch (e) {} }); post0.pkClsAn = null; [kv0, ...sp0.children].forEach(x => { if (x && x.style) { x.style.boxSizing = ''; if (x === kv0) x.style.overflow = ''; } }); }
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) { bkScrThawAll(); return; }
@@ -11142,7 +11156,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const D = closing ? PKFX.IN * .85 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];   /* (الخروجُ حركةٌ واحدةٌ للجارين — عرضًا وقامةً معًا — فمدّتُه قريبةٌ من الدخول) */
       /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
       if (post.classList.contains('pk--framepub')) {
-        const cardH1 = post.getBoundingClientRect().height;
+        const cardH1 = post.getBoundingClientRect().height + pkSplHLeft(post);
         if (Math.abs(cardH1 - cardH0) > 2) an.push(post.animate([{ height: cardH0 + 'px' }, { height: cardH1 + 'px' }], { duration: D, easing: ez }));
       }
       const book = sp.querySelector(':scope > .pk-src'), bank = sp.querySelector(':scope > .pk-bank'), kv = sp.querySelector(':scope > .kt-view'), sized = [];
@@ -11164,8 +11178,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (over > .5) an.push(kv.animate([{ [m]: -over + 'px' }, { [m]: '0px' }], { duration: D, easing: ez }));
         /* المحتوى لا العمودُ نفسُه: الكتلُ تُقاس من العمود، فلا يُزاح */
         [...kv.children].forEach(c => an.push(c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: D * .55, delay: D * .45, easing: ez, fill: 'backwards' })));
-        post.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)').forEach(x =>
+        /* (الأيقونةُ نفسُها لا تخفت مع ترويستها: تطير إليها) */
+        const midHd = post.querySelector('.post-ytmain > .pk-blkh--mid');
+        [...(midHd ? [...midHd.children].filter(x => !x.classList.contains('pk-blkh__ic')).filter(pkNoArc) : []), ...post.querySelectorAll('.post-ytmain > :is(.pk-fstrip, .pk-fstrip-ph)')].forEach(x =>
           an.push(x.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: D * .6, delay: D * .3, easing: ez, fill: 'backwards' })));
+        const hic = midHd && midHd.querySelector('.pk-blkh__ic');
+        if (icFrom && hic) {
+          const r1 = hic.getBoundingClientRect(), cs = getComputedStyle(hic), bm = cs.transform && cs.transform !== 'none' ? new DOMMatrix(cs.transform) : null;
+          if (r1.width) {
+            const dx = (icFrom.left + icFrom.width / 2) - (r1.left + r1.width / 2 - (bm ? bm.e : 0)), dy = (icFrom.top + icFrom.height / 2) - (r1.top + r1.height / 2 - (bm ? bm.f : 0));
+            an.push(hic.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${icFrom.width / r1.width})` }, { transform: bm ? cs.transform : 'none' }], { duration: D, easing: ez }));
+          }
+        }
       }
       const dTop = old.top - R(sp).top;
       if (Math.abs(dTop) > 1) { const mt = parseFloat(getComputedStyle(sp).marginTop) || 0; an.push(sp.animate([{ marginTop: (mt + dTop) + 'px' }, { marginTop: mt + 'px' }], { duration: D, easing: ez })); }
@@ -11196,49 +11220,64 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     };
     if (!closing) return run();
-    /* ===== الخروج بجانب غيره (طلبُ صاحب الموقع): مراحلُ أربع =====
-       ١. محتوى العمود يخفت · ٢. العمودُ يتقلّص صاعدًا إلى السقف · ٣. محتوى السقف يخفت · ٤. السقفُ ينكمش إلى وسطه والجاران يأخذان مكانه */
+    /* ===== الخروج عكسُ الدخول (طلبُ صاحب الموقع: «ينفتح من فوق ويسار … ابيه ينغلق نفس ما ينفتح») =====
+       كان على مراحل: العمودُ يتقلّص من تحتٍ صاعدًا إلى السقف، ثمّ يذهب السقف. فالآن حركةٌ واحدةٌ كالدخول معكوسًا، على المساهمة
+       قبل رسمها: محتوى العمود يخفت، والعمودُ يضيق إلى جهته والجاران يتّسعان إليه، وشريطُ المجلدات وترويسةُ الملخّص يخفتان
+       صاعدين والقسمةُ تصعد مكانهما — معًا. وكلُّ المواضع الأخيرة تُقاس قبلها (العمودُ والشريطُ مخفيّان لحظةً بلا رسم)،
+       فتنتهي الحركةُ حيث سيضعها الرسمُ تمامًا، ويأتي الرسمُ بعدها بلا أثر */
+    const kv0 = sp0.querySelector(':scope > .kt-view');
+    const heads = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)')];
+    let barR = null;   /* (لا شبحَ للسقف: يخفت هو نفسُه) */
+    if (!kv0) return run();
     post0.pkMidRun = true; post0.pkBlkHold = true;
     bkScrFrz(post0);
-    const slow = window.__pkfxSlow || 1, wait = an => Promise.all(an.map(a => a.finished.catch(() => {})));
-    const kv0 = sp0.querySelector(':scope > .kt-view'), band = post0.querySelector(':scope > .pk-band'), mp = band && band.querySelector('path.pk-blk[data-k="mid"]');
-    const cr = R(post0), ox = cr.left + post0.clientLeft, oy = cr.top + post0.clientTop;
-    let barR = null;
-    const fade = (els, d) => [...els].map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d * slow, easing: 'ease-out', fill: 'forwards' }));
-    let barFade = Promise.resolve();
-    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 80)).then(() => {
-      if (!mp || !kv0) return;
-      const bb = mp.getBBox(), k = R(kv0), spT = R(sp0).top - oy;
-      const bar = { x: bb.x, y: bb.y, w: bb.width, h: Math.max(0, spT - 12 - bb.y) };
-      const st = { x: k.left - ox, y: bar.y + bar.h - 16, w: k.width, h: bb.y + bb.height - (bar.y + bar.h - 16) };
-      barR = { left: bar.x + ox, right: bar.x + bar.w + ox, top: bar.y + oy, bottom: bar.y + bar.h + oy };
-      const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
-      /* والجاران يتّسعان أفقيًّا معه إلى عرضيهما الأخيرين (نصفين، أو القسمةَ كلَّها لواحد)، والعمودُ يضيق بينهما وهو يصعد —
-         فلا يتراكبان. والكتلُ تُرسم حيّةً، وعمودُ الملخّص يُرسم فوقها بقامته الصاعدة */
-      const D = 170 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
-      /* ومحتوى السقف يبدأ خفوتَه والعمودُ في آخر صعوده — مراحلُ متداخلةٌ قليلًا لا متتابعةٌ بفراغ */
-      barFade = new Promise(r => setTimeout(r, D * .45)).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 90)));
-      const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
-      const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
-      const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
-      /* (طلبُ صاحب الموقع: «لما اقفلها فيه jumps بمساحة المصادر») كان الجاران يتّسعان هنا في ‎170ms‎ (قفزاتٌ بـ‎275px‎ في الإطار)،
-         ثمّ يقفان والمساهمةُ تُرسم (‎~140ms‎)، ثمّ يصعدان مع ذهاب شريط المجلدات — حركتان بينهما وقفة. فالآن العمودُ وحده يصعد
-         إلى السقف هنا، والجاران ساكنان؛ ويتّسعان ويصعدان معًا في حركةٍ واحدة بعد الرسم (‎run‎) كما في الدخول */
-      void sides; void wF; void ws; void kw; void kcs; void cz;
-      const t0 = performance.now();
-      return new Promise(res => {
-        const step = now => {
-          if (!post0.isConnected) return res();
-          const e = ez(Math.min(1, (now - t0) / D)), h = Math.max(16, st.h) * (1 - e) + 16 * e, kk = R(kv0);
-          pkBandDraw(post0, []);
-          const m2 = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]');
-          if (m2) m2.setAttribute('d', rr(bar.x, bar.y, bar.w, bar.h) + (e < 1 ? rr(kk.left - ox, st.y, kk.width, h) : ''));
-          if (e < 1) requestAnimationFrame(step); else res();
-        };
-        requestAnimationFrame(step);
-      });
-    }).then(() => barFade)
-      .then(() => { post0.pkMidRun = false; post0.pkBlkHold = false; run(); });
+    const slow = window.__pkfxSlow || 1, D = PKFX.IN * .85 * slow, cz = 'cubic-bezier(.4, 0, .2, 1)', an = [];
+    const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
+    const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, kcs = getComputedStyle(kv0);
+    const ws = sides.map(x => R(x).width), kw = R(kv0).width, top0 = R(sp0).top, cardH0 = R(post0).height;
+    const hCur = parseFloat(sp0.style.getPropertyValue('--pk-h')) || 0, hasH = sp0.classList.contains('pk-split--h');
+    /* المواضعُ الأخيرة: العمودُ والشريطُ مخفيّان وقسمةٌ بلا ملخّص — ثمّ يُعاد كلُّ شيءٍ كما كان قبل أيّ رسم */
+    const hid = [kv0, ...heads], was = hid.map(x => x.style.display), noMid = sp0.classList.contains('no-mid');
+    hid.forEach(x => { x.style.display = 'none'; }); sp0.classList.add('no-mid');
+    const fin = { top: R(sp0).top, w: sides.map(x => R(x).width), card: R(post0).height, h: hasH ? pkSrcHCalc(post0) : null };
+    hid.forEach((x, i) => { x.style.display = was[i]; }); if (!noMid) sp0.classList.remove('no-mid');
+    const dH = fin.h && hCur ? fin.h - hCur : 0;
+    if (fin.h && hCur) pkSrcH[id] = fin.h;   /* (الرسمُ يكتب القامةَ الأخيرةَ نفسَها: لا انتقالَ ثانٍ بعده) */
+    /* ١. المحتوى يخفت (العمودُ أسرع، والشريطُ صاعدًا كما نزل) */
+    [...kv0.children].forEach(c => an.push(c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }], { duration: D * .45, easing: 'ease-out', fill: 'forwards' })));
+    /* (طلبُ صاحب الموقع: «ظهور الأيقونة بالزاوية … ما فيه ديناميكية») أيقونةُ الملخّص لا تخفت مع ترويستها: تبقى، ثمّ تطير منها إلى فجوتها */
+    const hdIc = post0.querySelector('.post-ytmain > .pk-blkh--mid .pk-blkh__ic');
+    heads.flatMap(x => x.classList.contains('pk-blkh--mid') ? [...x.children].filter(y => y !== hdIc) : [x])
+      .forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
+    /* ٢. العمودُ يضيق إلى جهته والجاران يتّسعان إليه */
+    kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
+    an.push(kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginInlineStart: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
+      { flexGrow: 0, flexShrink: 0, flexBasis: '0px', marginInlineStart: -gp + 'px', minWidth: '0px', paddingLeft: '0px', paddingRight: '0px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    sides.forEach((x, i) => { x.style.boxSizing = 'border-box';
+      an.push(x.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ws[i] + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: fin.w[i] + 'px' }], { duration: D, easing: cz, fill: 'forwards' })); });
+    /* ٣. القسمةُ تصعد مكانَ الشريط، وقامتُها وقامةُ المساهمة إلى الأخيرتين */
+    /* (هامشُ ما فوقها يندمج مع هامشها السالب — ‎margin collapsing‎ — فكانت تقف قبل موضعها بـ‎~7px‎ ثمّ تقفز بعد الرسم: يُنقل إليها هو) */
+    const prv = sp0.previousElementSibling, pmb = prv ? parseFloat(getComputedStyle(prv).marginBottom) || 0 : 0;
+    let mt = parseFloat(getComputedStyle(sp0).marginTop) || 0; const up = top0 - fin.top;
+    if (prv && pmb > 0) { prv.style.marginBottom = '0px'; mt = Math.max(mt, pmb); }
+    if (Math.abs(up) > .5) an.push(sp0.animate([{ marginTop: mt + 'px' }, { marginTop: (mt - up) + 'px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    if (Math.abs(dH) > .5) an.push(sp0.animate([{ height: hCur + 'px' }, { height: (hCur + dH) + 'px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    if (post0.classList.contains('pk--framepub')) { const c1 = fin.card + dH; if (Math.abs(c1 - cardH0) > 1) an.push(post0.animate([{ height: cardH0 + 'px' }, { height: c1 + 'px' }], { duration: D, easing: cz, fill: 'forwards' })); }
+    post0.pkClsAn = an;
+    let live = true;
+    /* وسقفُ الـT (رسمتُه في الخلفية) يخفت ويصعد مع الشريط: كان يبقى منه ‎~8px‎ فوق المصادر ثمّ يغيب دفعةً بعد الرسم */
+    const tC = performance.now(), cE = pkBez(.4, 0, .2, 1);
+    const loop = () => { if (!live || !post0.isConnected) return; pkBandDraw(post0, []);
+      const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'), e = cE(Math.min(1, (performance.now() - tC) / D));
+      if (mp) { mp.style.opacity = String(Math.max(0, 1 - e * 1.25)); mp.style.transform = `translateY(${-6 * e}px)`; }
+      requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
+      live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
+      if (hdIc && hdIc.isConnected) { const r = hdIc.getBoundingClientRect(); if (r.width) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fly = { k: 'mid', r, at: performance.now() }; } }
+      { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
+      run();
+    });
   }
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-actkf]');
@@ -26551,21 +26590,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     /* والفجوةُ تُنحت أمام العين — سريعةً تبدأ من فورها وتلين في آخرها (طلبُ صاحب الموقع: «لا أحسّ بتأخير»)؛ كانت ‎420ms‎ لينةَ البدء
        فتبدو متأخّرةً بعد انطواء المساحة */
     const now = performance.now(), DUR = 180 * (window.__pkfxSlow || 1), ez = pkBez(.2, .8, .2, 1);
-    const val = e => e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
-    const want = new Set(tasks.map(t => t.k + '|' + t.sd));
+    /* (طلبُ صاحب الموقع: «الفجوة … فجأة يصير فراغ بالزاوية وفيه الأيقونة») أوّلُ رسمٍ بعد الضغط يكون في أثناء رسم المساهمة (مهمّةٌ
+       طويلة ‎~110ms‎)، فكانت ساعةُ الفجوة (‎180ms‎) تمضي قبل أوّل إطارٍ يُرى — فتظهر الفجوةُ والأيقونةُ شبهَ كاملتين. فالجديدةُ تبدأ
+       ساعتُها من الرسم التالي (إطارٍ يُرى)، وتُعرف بزاويتها لا بكتلتها: أيقونةٌ تبقى في زاويتها وقد صارت الكتلةُ غيرَها (أُغلق الملخّصُ
+       فصارت زاويتُه للمصادر) لا تُنحت فجوتُها من جديد */
+    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly');
+    /* أيقونةٌ تطير إلى فجوتها (‎_fly‎: من أين — يضعه إغلاقُ الملخّص): تُرى من أوّل إطارٍ وتهبط إليها والفجوةُ تُنحت حولها */
+    const fly = st._fly && performance.now() - st._fly.at < 2500 ? st._fly : null;
+    const flyOf = t => !!(fly && t && t.bt && t.bt.dataset.pkic === fly.k);
+    const val = e => e.t0 == null ? e.from : e.from + (e.to - e.from) * ez(Math.min(1, (now - e.t0) / DUR));
+    const want = new Set(tasks.map(t => t.sd));
     const first = !st._seen; st._seen = 1;   /* أوّلُ رسمٍ للمساهمة المتّسعة: الفجواتُ قائمةٌ بلا حركة */
-    const keys = () => Object.keys(st).filter(x => x !== '_seen');
-    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { st[key] = { from: val(e), to: 0, t0: now }; } });
-    tasks.forEach(t => { const key = t.k + '|' + t.sd, e = st[key]; if (!e) st[key] = { from: first ? 1 : 0, to: 1, t0: now }; else if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now }; });
+    keys().forEach(key => { const e = st[key]; if (!want.has(key) && e.to !== 0) { const ne = st[key] = { from: val(e), to: 0, t0: null, k: e.k }; requestAnimationFrame(() => { ne.t0 = performance.now(); if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); }); } });
+    tasks.forEach(t => { const key = t.sd, e = st[key];
+      if (!e) { if (first) st[key] = { from: 1, to: 1, t0: now, k: t.k }; else { const ne = st[key] = { from: 0, to: 1, t0: null, k: t.k }; requestAnimationFrame(() => { ne.t0 = performance.now(); if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); }); } }
+      else { if (e.to !== 1) st[key] = { from: val(e), to: 1, t0: now, k: t.k }; else e.k = t.k; } });
     let busy = false; const nchN = [];
     keys().forEach(key => {
-      const e = st[key], v = val(e), [k, sd] = key.split('|');
+      const e = st[key], v = val(e), sd = key, k = e.k;
       if (v < 1 && v > 0 && e.to === e.from) {}   /* (ثابت) */
-      if ((now - e.t0) < DUR) busy = true;
-      if (v <= .01) { if (e.to === 0 && now - e.t0 >= DUR) delete st[key]; return; }
+      if (e.t0 == null || (now - e.t0) < DUR) busy = true;
+      if (v <= .01 && !(e.to === 1 && flyOf(tasks.find(x => x.sd === key)))) { if (e.to === 0 && e.t0 != null && now - e.t0 >= DUR) delete st[key]; if (e.to === 1) { const t0k = tasks.find(x => x.sd === key); if (t0k && t0k.bt) { t0k.bt.style.opacity = '0'; } } return; }   /* (الأيقونةُ لا تُرى قبل أن تبدأ فجوتُها) */
       if (!alive(k)) { delete st[key]; return; }
       const nw = NW * v, nh = NH * v, c = Math.min(c0, nw / 2, nh / 2);
-      const t = tasks.find(x => x.k + '|' + x.sd === key);
+      const t = tasks.find(x => x.sd === key);
       nchN.push({ k, sd, nw, nh, c });
       apply(k, d => {
         const re = /V([\d.-]+)A([\d.]+) [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)H([\d.-]+)A[\d.]+ [\d.]+ 0 0 1 ([\d.-]+) ([\d.-]+)/g;
@@ -26579,10 +26627,22 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         if (t && pr) {
           const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
           t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
+          if (flyOf(t)) {
+            st._fly = null; t.bt.style.opacity = ''; t.bt.style.transform = '';
+            const r1 = t.bt.getBoundingClientRect(), fr = fly.r;
+            if (r1.width) {
+              const dx = (fr.left + fr.width / 2) - (r1.left + r1.width / 2), dy = (fr.top + fr.height / 2) - (r1.top + r1.height / 2), bt = t.bt;
+              bt.pkFly = bt.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${fr.width / r1.width})` }, { transform: 'none' }], { duration: PKFX.IN * .85, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+              bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
+            }
+          }
+          if (t.bt.pkFly) { t.bt.style.opacity = ''; t.bt.style.transform = ''; }
+          else {
           /* والأيقونةُ لا تظهر قبل أن تكتمل فجوتُها: تنبت فيها في آخر انفتاحها */
           const q = Math.max(0, Math.min(1, (v - .55) / .45));
           t.bt.style.opacity = q < 1 ? f(q) : '';
           t.bt.style.transform = q < 1 ? `scale(${f(.55 + .45 * q)})` : '';
+          }
         }
         return d.replace(hit[0], seg);
       });
@@ -26590,6 +26650,49 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     pkKcvNotch(card, nchN);
     card.pkNch = nchN;   /* (مقاسُ الفجوات الآن — يحمله الطيُّ إلى المساحة الطائرة فتلتئم فيها بحركة) */
     if (busy && !card.pkNotchRaf) card.pkNotchRaf = requestAnimationFrame(() => { card.pkNotchRaf = 0; if (card.isConnected && !card.pkBlkHold && !card.pkBandAnim) pkBandDraw(card, []); });
+  }
+  /* ===== رسمةُ الكتل تُعدَّل في مكانها (خطّةُ بطء الإغلاق ٣) =====
+     كانت تُبنى نصًّا جديدًا كلَّ إطارٍ من الحركة (‎innerHTML‎): عناصرُ تُهدم وتُنشأ ويُعاد حسابُ أنماطها. فإن بقي بناؤها كما هو
+     (العناصرُ نفسُها بالترتيب نفسِه) تُغيَّر سماتُها وحدها — ويُرفع ما كُتب عليها من ‎style‎ كما كان البناءُ الجديدُ يرفعه */
+  /* ===== المساهماتُ البعيدةُ عن النظر لا تُرسم ولا يُحسب ما بداخلها (خطّةُ بطء الإغلاق ٢) =====
+     حين تتحرّك مساهمةٌ (تتّسع مساحةٌ أو تضيق) يُعاد ترتيبُ ما تحتها كلِّه في كلّ إطار. فالبعيدةُ (أبعدُ من ‎600px‎ عن النظر)
+     تأخذ ‎content-visibility: auto‎ بقامتها المقيسة نفسِها (فلا يتغيّر طولُ الصفحة ولا موضعُ التمرير)، وتعود كما كانت قبل أن تقترب */
+  const cmFarSet = new Set();
+  let cmFarIO = null, cmFarRoot;
+  /* (الصفحةُ تُمرَّر في عنصرٍ لا في النافذة — ‎body‎ — فهامشُ المراقِب يُحسب على ذلك العنصر، وإلّا كانت التي تحت النظر مباشرةً «بعيدة») */
+  const cmFarScroller = el => { for (let e = el && el.parentElement; e; e = e.parentElement) { const o = getComputedStyle(e).overflowY; if (o === 'auto' || o === 'scroll') return e; } return null; };
+  function cmFarWatch() {
+    if (typeof IntersectionObserver !== 'function') return;
+    const body = document.getElementById('cm-body'); if (!body) return;
+    const root = cmFarScroller(body);
+    if (!cmFarIO || root !== cmFarRoot) {
+      if (cmFarIO) cmFarIO.disconnect();
+      cmFarSet.forEach(el => { el.classList.remove('cm-far'); el.style.containIntrinsicSize = ''; }); cmFarSet.clear();
+      cmFarRoot = root;
+      cmFarIO = new IntersectionObserver(es => es.forEach(e => {
+        const el = e.target;
+        if (!el.isConnected) { cmFarIO.unobserve(el); cmFarSet.delete(el); return; }
+        if (e.isIntersecting) { if (el.classList.contains('cm-far')) { el.classList.remove('cm-far'); el.style.containIntrinsicSize = ''; } }
+        else if (!el.classList.contains('cm-far')) { const h = e.boundingClientRect.height; if (h > 0) { el.style.containIntrinsicSize = `auto ${Math.round(h)}px`; el.classList.add('cm-far'); } }
+      }), { root, rootMargin: '600px 0px' });
+    }
+    cmFarSet.forEach(el => { if (!el.isConnected) { cmFarIO.unobserve(el); cmFarSet.delete(el); } });
+    body.querySelectorAll(':scope > .post').forEach(el => { if (!cmFarSet.has(el)) { cmFarSet.add(el); cmFarIO.observe(el); } });
+  }
+  function pkSvgSet(svg, html) {
+    if (svg.pkHtml === html && svg.children.length) return;
+    const items = [], re = /<(\w+)((?:\s+[\w-]+="[^"]*")*)\s*\/>/g; let m;
+    while ((m = re.exec(html))) { const at = {}; m[2].replace(/([\w-]+)="([^"]*)"/g, (x, k, v) => { at[k] = v; }); items.push([m[1], at]); }
+    const kids = svg.children;
+    const same = (html.match(/</g) || []).length === items.length && kids.length === items.length
+      && items.every((it, i) => kids[i].tagName.toLowerCase() === it[0] && (kids[i].getAttribute('data-k') || '') === (it[1]['data-k'] || ''));
+    svg.pkHtml = html;
+    if (!same) { svg.innerHTML = html; return; }
+    items.forEach((it, i) => {
+      const el = kids[i];
+      if (el.hasAttribute('style')) el.removeAttribute('style');
+      for (const k in it[1]) if (el.getAttribute(k) !== it[1][k]) el.setAttribute(k, it[1][k]);
+    });
   }
   function pkBandDraw(card, tongues) {
     const svg = card.querySelector(':scope > .pk-band'), ft = card.querySelector('.pk-ftline');
@@ -26682,8 +26785,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         a.finished.then(() => { sp.style.overflow = ''; }, () => { sp.style.overflow = ''; });
       }
     }
-    svg.innerHTML = `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
-      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out;    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
+    pkSvgSet(svg, `<rect class="pk-band__gap" x="0" y="${f(gT)}" width="${W}" height="${f(Math.max(0, fy - gT))}"/>`
+      + `<path class="pk-band__foot" d="M0 ${f(fy)}H${W}V${H}H0Z"/>` + out);    /* وشريطُ تمرير المجلدات يُعاد وضعُه بعد رسم الكتل وأيقوناتها (حدُّه الأعلى وأيقونةُ زاويتها يُعرفان من الرسم) */
     /* ===== والصفحاتُ المتتاليةُ تُفصَّل على الرسمة **في اللحظة نفسها** (شكوى صاحب الموقع: «الصفحة تطلع برا مساحتها لجزء من الثانية») =====
        كانت تُؤجَّل إلى الإطار التالي مع شريط التمرير — وفي ذلك الإطار تكون المساحةُ قد تحرّكت (شريطُ المجلدات يقصر أو يطول)،
        فتُفصَّل على رسمةٍ قديمة وتنزاح بقدر حركة إطار (١٠–٢٥px): تحت الحافّة حين يقصر الشريط، وفوقها حين يطول */
