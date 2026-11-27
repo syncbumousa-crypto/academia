@@ -184,6 +184,11 @@
     .cs-wm    { position: absolute; inset-inline-end: -40px; bottom: -70px; height: 300px; width: auto; opacity: .1;
                 pointer-events: none; transition: opacity .4s; }
     .cs-card.is-on .cs-wm { opacity: .16; }
+    /* بلا شعار: الاختصارُ نفسُه علامةٌ مائيّة (‎STEP‎ · ‎CFA‎ · «ثانوي») */
+    .cs-wmt   { position: absolute; inset-inline-end: -14px; bottom: -34px; font-family: 'Space Grotesk', 'IBM Plex Sans Arabic', sans-serif;
+                font-size: 150px; font-weight: 700; line-height: 1; letter-spacing: -4px; white-space: nowrap; opacity: .12;
+                pointer-events: none; transition: opacity .4s; }
+    .cs-card.is-on .cs-wmt { opacity: .18; }
     .cs-card[data-wide] .cs-wm { height: auto; width: 520px; bottom: auto; top: 10px; inset-inline-end: -120px; }
     .cs-hit   { position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
     .cs-hit:focus-visible { outline: 3px solid var(--acc, #fff); outline-offset: -5px; }
@@ -191,7 +196,7 @@
     .cs-peek  { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center;
                 justify-content: center; gap: 10px; pointer-events: none; transition: opacity .25s; }
     .cs-peek img { width: auto; max-width: 70%; height: 46px; }
-    .cs-peek span { font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .cs-peek span { font-size: 12.5px; font-weight: 700; text-align: center; padding: 0 6px; line-height: 1.35; }
     .cs-card.is-on .cs-peek { opacity: 0; }
     /* المقدّمة: الشعارُ كاملًا والاسمُ والجهةُ وزرّا الدخول والإضافة */
     .cs-open  { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px;
@@ -309,7 +314,7 @@
       background: color-mix(in srgb, var(--glass-ink) 54%, transparent); background-clip: padding-box; }
   </style>
   <!-- سجلُّ المجتمعات (‎ROADMAP-EXPLORE س١‎): يُقرأ قبل سكربت «استكشاف» في جسم الصفحة -->
-  <script src="../shared/communities.js?v=1"></script>
+  <script src="../shared/communities.js?v=2"></script>
 </head>
 <body>
 
@@ -1095,7 +1100,8 @@
           var c = COMS[ci], nm = i ? c.en : c.ar, org = c.org ? (i ? c.org.en : c.org.ar) : '';
           var city = c.city ? (i ? c.city.en : c.city.ar) : (window.AC_COUNTRIES && c.country && AC_COUNTRIES[c.country] ? AC_COUNTRIES[c.country][i ? 'en' : 'ar'] : '');
           var wide = c.id === 'hive' ? ' data-wide' : '';
-          var mark = c.mark ? '<img class="cs-wm" src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
+          var mark = c.mark ? '<img class="cs-wm" src="' + LOGO + c.mark + '" alt="" aria-hidden="true">'
+                   : c.tag ? '<span class="cs-wmt" aria-hidden="true">' + esc(c.tag) + '</span>' : '';
           var peekImg = c.mark ? '<img src="' + LOGO + c.mark + '" alt="" aria-hidden="true">' : '';
           var logo = c.logo ? '<img src="' + LOGO + c.logo + '" alt="' + esc(org || nm) + '">' : '';
           var act = c.soon ? '<span class="cs-soon">' + csNote(i) + '</span>'
@@ -1140,13 +1146,14 @@
           el.querySelector('.cs-hit').setAttribute('aria-pressed', on ? 'true' : 'false');
         });
         var mb = box.querySelectorAll('.cs-more'); if (mb.length < 2) return;
-        mb[0].hidden = s0 === 0; mb[0].textContent = '+' + s0; mb[0].style.insetInlineStart = '-6px';
-        mb[1].hidden = s1 === n - 1; mb[1].textContent = '+' + (n - 1 - s1); mb[1].style.insetInlineEnd = '-6px';
+        mb[0].hidden = s0 === 0; mb[0].textContent = '+' + s0; mb[0].style.insetInlineStart = '-24px';
+        mb[1].hidden = s1 === n - 1; mb[1].textContent = '+' + (n - 1 - s1); mb[1].style.insetInlineEnd = '-24px';
       }
       /* ===== البحثُ والفلاتر (‎ROADMAP-EXPLORE س٣–س٤‎) =====
          الدولةُ ثمّ مدينتُها ثمّ النوع، و«مجتمعاتي». والبحثُ يتسامح في الهمزات والتاء المربوطة والياء.
          والفلاترُ تُذكر في متصفّح الزائر وحده — تسهيلٌ لا بيانات. */
-      var CF = { q: '', country: '', city: '', kind: '', mine: false }, CF_K = 'academia2:explore:f1';
+      var KINDS = window.AC_KINDS || [['uni', { ar: 'جامعات', en: 'Universities' }]];
+      var CF = { q: '', country: '', city: '', kind: '', mine: false }, CF_K = 'academia2:explore:f2';   /* ‎f2‎: صار النوعُ خمسة */
       try { var sv = JSON.parse(localStorage.getItem(CF_K) || 'null'); if (sv) { CF.country = sv.country || ''; CF.city = sv.city || ''; CF.kind = sv.kind || ''; CF.mine = !!sv.mine; } } catch (e) {}
       function cfSave() { try { localStorage.setItem(CF_K, JSON.stringify({ country: CF.country, city: CF.city, kind: CF.kind, mine: CF.mine })); } catch (e) {} }
       function norm(t) {
@@ -1210,14 +1217,14 @@
             Object.keys(cities).map(function (k) { return chip('city', k, cities[k][L]); }).join('') + '</div></div>';
         }
         h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Type' : 'النوع') + '</p><div class="fchips">' +
-          chip('kind', 'uni', i ? 'Universities' : 'جامعات') + chip('kind', 'test', i ? 'Assessment tests' : 'اختبارات تقييم') +
+          KINDS.map(function (k) { return chip('kind', k[0], k[1][L]); }).join('') +
           chip('mine', '1', i ? 'My communities' : 'مجتمعاتي') + '</div></div>';
         document.getElementById('cs-fp').innerHTML = h;
         /* الشاراتُ المفعّلة تحت البحث، وكلٌّ يُرفع بـ× */
         var acts = [];
         if (CF.country) acts.push(['country', C[CF.country] ? C[CF.country][L] : CF.country]);
         if (CF.city) { var cc = COMS.filter(function (c) { return cityKey(c) === CF.city; })[0]; acts.push(['city', cc ? cc.city[L] : CF.city]); }
-        if (CF.kind) acts.push(['kind', CF.kind === 'uni' ? (i ? 'Universities' : 'جامعات') : (i ? 'Assessment tests' : 'اختبارات تقييم')]);
+        if (CF.kind) { var kk = KINDS.filter(function (k) { return k[0] === CF.kind; })[0]; acts.push(['kind', kk ? kk[1][L] : CF.kind]); }
         if (CF.mine) acts.push(['mine', i ? 'My communities' : 'مجتمعاتي']);
         document.getElementById('cs-acts').innerHTML = acts.map(function (a) {
           return '<button type="button" class="fact" data-x="' + a[0] + '">' + esc(a[1]) + ' <span class="fact-x">✕</span></button>';
