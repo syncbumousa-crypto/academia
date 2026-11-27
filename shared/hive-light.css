@@ -1,5 +1,6 @@
 /* ============================================================
-   الخلية · ألوانُ جامعة مانشستر — نسخةُ ‎mudarraj-light.css‎ قاعدةً بقاعدة، والفرقُ اللونُ وحده (بنفسجيّ الجامعة ‎#660099‎، والذهبيُّ ‎#FFCC33‎ للإبراز)
+   الخلية · ثيمُ جامعة مانشستر (The Hive) — ‎mudarraj-light.css‎ قاعدةً بقاعدة، وكلُّ لونٍ مختارٌ لدوره
+   (بنفسجيُّ الجامعة ‎#660099‎ للهويّة، وأصفرُها ‎#FFCC33‎ للإبراز: «+» ودائرةُ الإتقان وشريطُ الكتاب)
    ============================================================
    اعتمده صاحبُ الموقع بعد مقارناتٍ على صفحته الحقيقيّة (لوحة «المسلخ — ثيم فاتح»).
    ورقةٌ للمسلخ وحدَه، تُحمَّل آخرَ الرأس، وكلُّ قاعدةٍ فيها مقصورةٌ على
@@ -10,7 +11,7 @@
        · الشريطُ وحدَه زجاجٌ حقيقيّ (‎backdrop-filter‎): هو ما ينفتح فوق المحتوى.
          ويُطفأ تمويهُه أثناء حركته (‎.side-anim‎) — التمويهُ على لوحٍ يتبدّل عرضُه
          هو ما أبطأ الحركةَ من قبل (‎ROADMAP-SIDEBAR.md‎ §٧–٨).
-       · والبحثُ وقرصاه والتبويبُ لونُ ذاك الزجاج كما يُرى فوق الأبيض (‎#712499‎):
+       · والبحثُ وقرصاه والتبويبُ لونُ ذاك الزجاج كما يُرى فوق الأبيض (‎#5a1a80‎):
          لا شيءَ تحتها إلّا البياض، فالتمويهُ لا يُرى ويكلّف (§١٠).
      الإجراء: «+» داخل الصفحة أصفرُ الشمس بحدٍّ من لونه · «إنشاء حساب» زجاجٌ شفّاف.
      المختار في القوائم: تيلٌ عميقٌ مصمت للأقراص الصغيرة، وصبغةٌ منه للصفوف.
@@ -20,21 +21,21 @@
 /* ---------- العمود: الشريط ---------- */
 html[data-theme="light"] #sidebar,
 html[data-theme="light"] .sidebar {
-  background-color: rgba(90, 0, 136, .86) !important;
+  background-color: rgba(74, 5, 115, .86) !important;
   -webkit-backdrop-filter: blur(14px) saturate(150%);
           backdrop-filter: blur(14px) saturate(150%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(46, 10, 69, .6) !important;
-  border: 0 !important; color: #e7cff2;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(51, 7, 79, .6) !important;
+  border: 0 !important; color: #e9dcf4;
 }
 /* وأثناء الحركة: لونُ الزجاج نفسُه مصمتًا، بلا تمويه */
 html[data-theme="light"] .sidebar.side-anim {
-  background-color: #712499 !important;
+  background-color: #5a1a80 !important;
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-html[data-theme="light"] .sidebar .side-mark { color: #f5eafb; }
-html[data-theme="light"] .sidebar .side-logo { color: #f5eafb; }   /* بلون الشعار (طلبُ صاحب الموقع) */
+html[data-theme="light"] .sidebar .side-mark { color: #f6f0fa; }
+html[data-theme="light"] .sidebar .side-logo { color: #f6f0fa; }   /* بلون الشعار (طلبُ صاحب الموقع) */
 html[data-theme="light"] .sidebar .tabs button:not(.is-active),
-html[data-theme="light"] .sidebar .tabs button:not(.is-active) * { color: #e7cff2 !important; stroke: #e7cff2; }
+html[data-theme="light"] .sidebar .tabs button:not(.is-active) * { color: #e9dcf4 !important; stroke: #e9dcf4; }
 html[data-theme="light"] .sidebar .tabs button:not(.is-active):hover { background: rgba(255, 255, 255, .08) !important; }
 html[data-theme="light"] .sidebar .tabs button.is-active {
   background: rgba(255, 255, 255, .13) !important; color: #ffffff !important;
@@ -42,7 +43,7 @@ html[data-theme="light"] .sidebar .tabs button.is-active {
 }
 html[data-theme="light"] .sidebar .tabs button.is-active * { color: #ffffff !important; stroke: #ffffff; }
 html[data-theme="light"] .sidebar .themebar button,
-html[data-theme="light"] .sidebar .langbar button { background: rgba(255, 255, 255, .08) !important; color: #e7cff2 !important; box-shadow: none !important; }
+html[data-theme="light"] .sidebar .langbar button { background: rgba(255, 255, 255, .08) !important; color: #e9dcf4 !important; box-shadow: none !important; }
 html[data-theme="light"] .sidebar .tabs--me,
 html[data-theme="light"] .sidebar .side-ctl { border-color: rgba(255, 255, 255, .12) !important; }
 
@@ -59,10 +60,10 @@ html[data-theme="light"] .sidebar .side-acct .side-join * { color: #ffffff !impo
 html[data-theme="light"] .sidebar.side-anim .side-acct .side-join { -webkit-backdrop-filter: none; backdrop-filter: none; }
 html[data-theme="light"] .sidebar .side-login,
 html[data-theme="light"] .sidebar .side-logout {
-  background: transparent !important; color: #e7cff2 !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28) !important;
+  background: transparent !important; color: #e9dcf4 !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28) !important;
 }
 html[data-theme="light"] .sidebar .side-login *,
-html[data-theme="light"] .sidebar .side-logout * { color: #e7cff2 !important; stroke: #e7cff2; }
+html[data-theme="light"] .sidebar .side-logout * { color: #e9dcf4 !important; stroke: #e9dcf4; }
 html[data-theme="light"] .sidebar .side-acct .side-profile { background: rgba(255, 255, 255, .08) !important; color: #ffffff !important; box-shadow: none !important; }
 
 /* ---------- العمود: البحث وقرصاه (لونُ الزجاج فوق الأبيض، بلا تمويه) ---------- */
@@ -70,115 +71,179 @@ html[data-theme="light"] #side-handle,
 html[data-theme="light"] .market-tools .search,
 html[data-theme="light"] #m-search,
 html[data-theme="light"] .market-tools .filterwrap::before {
-  background: #712499 !important; border: 0 !important;
+  background: #5a1a80 !important; border: 0 !important;
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(46, 10, 69, .6) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(51, 7, 79, .6) !important;
 }
 html[data-theme="light"] #side-handle,
-html[data-theme="light"] #side-handle * { color: #e7cff2 !important; stroke: #e7cff2; }
+html[data-theme="light"] #side-handle * { color: #e9dcf4 !important; stroke: #e9dcf4; }
 html[data-theme="light"] #m-search { color: #ffffff !important; }
-html[data-theme="light"] #m-search::placeholder { color: #e7cff2 !important; opacity: 1; }
-html[data-theme="light"] .m-count { color: #e7cff2 !important; border-color: rgba(255, 255, 255, .18) !important; }
+html[data-theme="light"] #m-search::placeholder { color: #e9dcf4 !important; opacity: 1; }
+html[data-theme="light"] .m-count { color: #e9dcf4 !important; border-color: rgba(255, 255, 255, .18) !important; }
 html[data-theme="light"] .m-count b { color: #ffffff !important; }
 html[data-theme="light"] #m-btn-filter,
-html[data-theme="light"] #m-btn-filter * { color: #e7cff2 !important; stroke: #e7cff2; }
+html[data-theme="light"] #m-btn-filter * { color: #e9dcf4 !important; stroke: #e9dcf4; }
 
 /* ---------- أقسام المادّة ---------- */
 html[data-theme="light"] #cm-ui button[data-tab].on {
-  background: #712499 !important; color: #ffffff !important; border-color: transparent !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 12px 26px -16px rgba(46, 10, 69, .55) !important;
+  background: #5a1a80 !important; color: #ffffff !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 12px 26px -16px rgba(51, 7, 79, .55) !important;
 }
 html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabnm,
 html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic,
 html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic * { color: #ffffff !important; stroke: #ffffff; }
-html[data-theme="light"] #cm-ui button[data-tab].on .cm-face { border-color: #712499 !important; }
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-face { border-color: #5a1a80 !important; }
 html[data-theme="light"] #cm-ui button[data-tab].on .cm-face.cm-face--count { background: rgba(255, 255, 255, .18) !important; color: #ffffff !important; }
-html[data-theme="light"] #cm-ui .cm-res { background: #f8f2fa !important; box-shadow: none !important; }
+html[data-theme="light"] #cm-ui .cm-res { background: #f8f4fb !important; box-shadow: none !important; }
 
 /* الوجوه والعدّادات محايدة، و«+» (شارك علمك) أصفرُ الشمس */
-html[data-theme="light"] .cm-face { background: #f8f2fa !important; color: #52345f !important; border-color: #ffffff !important; }
-html[data-theme="light"] .cm-face.cm-face--count { background: #e2d3e8 !important; color: #3d0a5c !important; }
+html[data-theme="light"] .cm-face { background: #f8f4fb !important; color: #4a3b57 !important; border-color: #ffffff !important; }
+html[data-theme="light"] .cm-face.cm-face--count { background: #e6dcee !important; color: #33074f !important; }
 html[data-theme="light"] .cm-face.cm-face--me {
-  background: #c9a3e0 !important; color: #3d0a5c !important; border-color: #ffffff !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, #c9a3e0 70%, #2e0a45), 0 4px 10px -6px color-mix(in srgb, #c9a3e0 80%, #000) !important;
+  background: #ffcc33 !important; color: #3a2400 !important; border-color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #ffcc33 70%, #6b4a00), 0 4px 10px -6px color-mix(in srgb, #ffcc33 80%, #000) !important;
 }
 
 /* ---------- المساهمات ---------- */
-html[data-theme="light"] .cm-sortbtn { background: #f8f2fa !important; color: #52345f !important; }
+html[data-theme="light"] .cm-sortbtn { background: #f8f4fb !important; color: #4a3b57 !important; }
 html[data-theme="light"] .post-date,
-html[data-theme="light"] .pd-dot { color: #6d5676 !important; border-color: #6d5676 !important; }
+html[data-theme="light"] .pd-dot { color: #6e6079 !important; border-color: #6e6079 !important; }
 html[data-theme="light"] a.imp-badge {
-  background: transparent !important; color: #6d5676 !important; border-color: transparent !important;
-  box-shadow: inset 0 0 0 1px #e2d3e8 !important;
+  background: transparent !important; color: #6e6079 !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #e6dcee !important;
 }
-html[data-theme="light"] a.imp-badge * { color: #6d5676 !important; }
+html[data-theme="light"] a.imp-badge * { color: #6e6079 !important; }
 html[data-theme="light"] span.v-badge {
-  background: color-mix(in srgb, #5c0a86 10%, #ffffff) !important; color: #5c0a86 !important;
+  background: color-mix(in srgb, #5a0a85 10%, #ffffff) !important; color: #5a0a85 !important;
   border-color: transparent !important; box-shadow: none !important;
 }
-html[data-theme="light"] span.v-badge * { color: #5c0a86 !important; }
-html[data-theme="light"] .dr-badge__av { background: #ffffff !important; color: #5c0a86 !important; }
-html[data-theme="light"] .cc-liquid { background: #f8f2fa !important; border-color: #e2d3e8 !important; }
-html[data-theme="light"] .cc-fill { background: #a15fcc !important; }
+html[data-theme="light"] span.v-badge * { color: #5a0a85 !important; }
+html[data-theme="light"] .dr-badge__av { background: #ffffff !important; color: #5a0a85 !important; }
+html[data-theme="light"] .cc-liquid { background: #f8f4fb !important; border-color: #e6dcee !important; }
+html[data-theme="light"] .cc-fill { background: #ffcc33 !important; }
 
 /* ---------- القوائم: سطحٌ مرفوع، والمختار تيلٌ عميق ---------- */
 html[data-theme="light"]:root .post-menu__list,
 html[data-theme="light"]:root .market-tools .fpanel {
   background: #ffffff !important; border: 0 !important;
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
-  box-shadow: inset 0 0 0 1px #eee4f2, 0 2px 8px rgba(46, 10, 69, .06), 0 28px 56px -24px rgba(46, 10, 69, .34) !important;
+  box-shadow: inset 0 0 0 1px #efe8f4, 0 2px 8px rgba(51, 7, 79, .06), 0 28px 56px -24px rgba(51, 7, 79, .34) !important;
 }
 html[data-theme="light"] .cm-sortopt,
 html[data-theme="light"] .drl-term,
 html[data-theme="light"] .fchip {
-  background: transparent !important; color: #52345f !important; border-color: transparent !important;
-  box-shadow: inset 0 0 0 1px #e2d3e8 !important;
+  background: transparent !important; color: #4a3b57 !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #e6dcee !important;
 }
-html[data-theme="light"] .fchip__n { color: #6d5676 !important; }
+html[data-theme="light"] .fchip__n { color: #6e6079 !important; }
 html[data-theme="light"] .cm-sortopt.on,
-html[data-theme="light"] .drl-term.on { background: #5a0088 !important; color: #ffffff !important; box-shadow: none !important; }
+html[data-theme="light"] .drl-term.on { background: #660099 !important; color: #ffffff !important; box-shadow: none !important; }
 html[data-theme="light"] .drl-term.on * { color: #ffffff !important; }
 html[data-theme="light"] .fchip.on,
 html[data-theme="light"] .fchip.is-on,
 html[data-theme="light"]:root .cm-docmenu .drl-row.on {
-  background: color-mix(in srgb, #5a0088 9%, #ffffff) !important; color: #5a0088 !important;
+  background: color-mix(in srgb, #660099 9%, #ffffff) !important; color: #660099 !important;
   box-shadow: none !important; border-color: transparent !important;
 }
-html[data-theme="light"]:root .cm-docmenu .drl-row.on * { color: #5a0088 !important; }
+html[data-theme="light"]:root .cm-docmenu .drl-row.on * { color: #660099 !important; }
 html[data-theme="light"] .drl-q,
-html[data-theme="light"] .fcol-search { background: #f8f2fa !important; box-shadow: none !important; border-color: transparent !important; }
-html[data-theme="light"]:root .post-menu__list.cm-docmenu b { color: #5a0088 !important; }
+html[data-theme="light"] .fcol-search { background: #f8f4fb !important; box-shadow: none !important; border-color: transparent !important; }
+html[data-theme="light"]:root .post-menu__list.cm-docmenu b { color: #660099 !important; }
 
-/* الخلية: أغلفةُ الكتب — أزرقُ السماء، بلا كحليّ */
-.bk--ph, #nook { --phc1: #7a1fb0; --phc2: #4f0077; --cov1: #7a1fb0; --cov2: #4f0077; }
-.bk--b-s, .bk--b-c { --b-body: linear-gradient(150deg, #7a1fb0, #4f0077); --b-band: #6a0f90; --b-edge: #3d0a5c; }
-/* توكنات الجذر: بترولي المسلخ ⇐ أزرق السماء، والحبرُ الكحليّ ⇐ حبرٌ أزرقُ داكن */
-:root { --c-ink: #2a1338; --c-kfupm: #660099; --c-kfupm-soft: #f4ecfa; --c-teal: #660099; }
-html[data-theme="dark"] { --bk-gh1: rgba(201, 163, 224, .2); --bk-gh2: rgba(201, 163, 224, .06); --bk-ghr: #c9a3e0; }
+/* الخلية: أغلفةُ الكتب — بنفسجيُّ الجامعة، وشريطُها أصفرُ الجامعة */
+.bk--ph, #nook { --phc1: #6e1ca6; --phc2: #3f0566; --cov1: #6e1ca6; --cov2: #3f0566; }
+.bk--b-s, .bk--b-c { --b-body: linear-gradient(150deg, #6e1ca6, #3f0566); --b-band: #ffcc33; --b-edge: #33074f; }
+/* توكنات الجذر: بترولي المسلخ ⇐ بنفسجيُّ الجامعة، والحبرُ ⇐ بنفسجيٌّ داكنٌ مائلٌ إلى الرماد */
+:root { --c-ink: #2b1d38; --c-kfupm: #660099; --c-kfupm-soft: #f3ecf9; --c-teal: #660099; }
+html[data-theme="dark"] { --bk-gh1: rgba(203, 176, 230, .2); --bk-gh2: rgba(203, 176, 230, .06); --bk-ghr: #cbb0e6; }
 
 /* ---------- الداكن ----------
-   بتروليُّ المسلخ الفاتح (‎--brand-tx‎) ⇐ الأزرقُ الفاتح، والتبويبُ المختار في المادّة
-   (ذهبيٌّ في الداكن عند المسلخ) ⇐ الأزرقُ الفاتح بحبرٍ أزرقَ داكن — لا كحليّ */
-html[data-theme="dark"] { --brand-tx: #c9a3e0; --xt-fl5: #c9a3e0; }
-html[data-theme="dark"] .cm-tabs button.on { background: #c9a3e0; color: #2e0a45; }
-html[data-theme="dark"] .cm-tabs button.on * { color: #2e0a45; }
-html[data-theme="dark"] .cm-panel .cm-tabs button.on::before { background: radial-gradient(circle at top right, transparent 8px, #c9a3e0 8px); }
-html[data-theme="dark"] .cm-panel .cm-tabs button.on::after  { background: radial-gradient(circle at top left,  transparent 8px, #c9a3e0 8px); }
-html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { background: rgba(201, 163, 224, .08) !important; }
-html[data-theme="dark"] .psp-it.is-on { background: rgba(201, 163, 224, .13) !important; }
-html[data-theme="dark"] .psp-ti.is-on { background: rgba(201, 163, 224, .1); }
+   بتروليُّ المسلخ الفاتح (‎--brand-tx‎) ⇐ البنفسجيُّ الفاتح، والتبويبُ المختار في المادّة
+   ⇐ البنفسجيُّ الفاتح بحبرٍ بنفسجيٍّ داكن */
+html[data-theme="dark"] { --brand-tx: #cbb0e6; --xt-fl5: #cbb0e6; }
+html[data-theme="dark"] .cm-tabs button.on { background: #660099; color: #ffffff; }
+html[data-theme="dark"] .cm-tabs button.on * { color: #ffffff; stroke: #ffffff; }
+html[data-theme="dark"] .cm-panel .cm-tabs button.on::before { background: radial-gradient(circle at top right, transparent 8px, #660099 8px); }
+html[data-theme="dark"] .cm-panel .cm-tabs button.on::after  { background: radial-gradient(circle at top left,  transparent 8px, #660099 8px); }
+html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { background: rgba(203, 176, 230, .08) !important; }
+html[data-theme="dark"] .psp-it.is-on { background: rgba(203, 176, 230, .13) !important; }
+html[data-theme="dark"] .psp-ti.is-on { background: rgba(203, 176, 230, .1); }
 
 /* ---------- جلدُ الأقسام الأبيض (‎--u-*‎) ----------
-   حبرُ المسلخ فيه كحليٌّ داكن (‎#3f143f‎ وشفافيّاتُه) ومسحةٌ بتروليّة — ففي الخلية
-   حبرٌ أزرقُ داكنٌ مائلٌ إلى السماء، ومسحةٌ سماويّة. والقيمُ الأخرى كما هي. */
+   حبرُ المسلخ كحليٌّ داكن ومسحةٌ بتروليّة — ففي الخلية حبرٌ بنفسجيٌّ داكنٌ مائلٌ إلى الرماد
+   (‎#2b1d38‎ وشفافيّاتُه)، ومسحةٌ بنفسجيّة. والقيمُ الأخرى كما هي. */
 html[data-theme="light"] .lib-course #cm-ui, html[data-theme="light"] #market-course #cm-ui, html[data-theme="light"] #nook,
 html[data-theme="light"] #jri-body #cm-ui, html[data-theme="light"] .vw-tok,
 html[data-theme="light"] .pick-modal .mmodal__card, html[data-theme="light"] .nkwork .nkw,
 html[data-theme="light"] #card-modal .mmodal__card,
 html[data-theme="light"] .xt-skin {
-  --u-tx: #52345f; --u-tx-strong: #2a1338;
-  --u-ph: rgba(42, 19, 56, .4); --u-ph2: rgba(42, 19, 56, .5); --u-fade: rgba(42, 19, 56, .42);
-  --u-div: rgba(42, 19, 56, .1); --u-rest: rgba(42, 19, 56, .5);
-  --u-btntx: #643f76; --u-av: #ecdcf3; --u-badge: #f4ecfa; --u-mid: #dac6e3;
+  --u-tx: #4a3b57; --u-tx-strong: #2b1d38;
+  --u-ph: rgba(43, 29, 56, .4); --u-ph2: rgba(43, 29, 56, .5); --u-fade: rgba(43, 29, 56, .42);
+  --u-div: rgba(43, 29, 56, .1); --u-rest: rgba(43, 29, 56, .5);
+  --u-btntx: #5d4d6b; --u-av: #ece3f3; --u-badge: #f3ecf9; --u-mid: #ddd0e8;
   --u-stypeon-bg: #660099;
+}
+
+/* ============================================================
+   ما زادته الخلية على المدرج
+   ============================================================ */
+/* التبويبُ المختار في الشريط: أيقونتُه بأصفر الجامعة — توقيعٌ صغيرٌ بلا صخب */
+html[data-theme="light"] .sidebar .tabs button.is-active svg, html[data-theme="light"] .sidebar .tabs button.is-active svg * { color: #ffcc33 !important; stroke: #ffcc33 !important; }
+
+/* ---------- الداكن: أرضٌ بنفسجيّةٌ مسودّة لا زرقاء ----------
+   المحرّكُ يبني داكنَه على تيلٍ مسودّ (‎#0e181c‎). والبنفسجيُّ فوق التيل يتنافر، فتُبدَّل
+   الأرضُ نفسُها: سطوحٌ مسودّةٌ مائلةٌ إلى البنفسجيّ، وحبرٌ فاتحٌ دافئ، والأصفرُ للإبراز. */
+html[data-theme="dark"] {
+  --c-ink: #ede6f3; --c-ink-soft: #a898b6; --c-kfupm: #b48ad6; --c-kfupm-soft: #24172f; --c-gold: #ffcc33;
+  --bg: #120c17; --surface: #1b1322; --border: #33263e; --border-dash: #3f304c; --placeholder: #8a7a99;
+}
+html[data-theme="dark"] #sidebar, html[data-theme="dark"] .sidebar { background-color: #1b1322 !important; }
+html[data-theme="dark"] .sidebar .tabs button.is-active { background: #660099 !important; color: #ffffff !important; box-shadow: none !important; }
+html[data-theme="dark"] .sidebar .tabs button.is-active * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="dark"] .sidebar .tabs button.is-active svg, html[data-theme="dark"] .sidebar .tabs button.is-active svg * { color: #ffcc33 !important; stroke: #ffcc33 !important; }
+html[data-theme="dark"] #side-handle, html[data-theme="dark"] #side-handle * { color: #cbb0e6 !important; stroke: #cbb0e6; }
+html[data-theme="dark"] .cm-face.cm-face--me { background: #ffcc33 !important; color: #3a2400 !important; }
+html[data-theme="dark"] .cc-fill { background: #ffcc33 !important; }
+html[data-theme="dark"] .sidebar .side-acct .side-join { background: #660099 !important; color: #ffffff !important; }
+html[data-theme="dark"] .sidebar .side-acct .side-join * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="dark"] .cm-pick__ic { stroke: #cbb0e6; }
+html[data-theme="dark"] .cm-pick__av { background: color-mix(in srgb, #cbb0e6 22%, #1b1322); }
+html[data-theme="dark"] .bk-zi { --zt: #cbb0e6; }
+
+/* جلدُ الأقسام في الداكن (‎--u-*‎): نصوصُه مكتوبةٌ في المحرّك بمسحةٍ تيليّة (‎#d5e4e7‎ ‎#bcd3d8‎)،
+   فتُبدَّل مسحتُها إلى البنفسجيّ والقيمُ الشفّافةُ كما هي */
+html[data-theme="dark"] :is(#cm-ui, #nook, .pick-modal .mmodal__card, .nkwork .nkw, #card-modal, #card-modal .mmodal__card, .vw-tok, .xt-skin) {
+  --u-tx: #f3eef7; --u-lab: #d2c3df; --u-btntx: #e2d7ec; --u-mut: #ddd0e8;
+  --u-ph: rgba(243, 238, 247, .45); --u-ph2: rgba(243, 238, 247, .55);
+  --u-gold: #ffcc33; --u-gold-dash: rgba(255, 204, 51, .55); --u-gold-hov: rgba(255, 204, 51, .15);
+}
+html[data-theme="dark"] .searchbox--ic > .srch-ic { color: #a898b6; }
+/* مقبضُ تمرير التخصّصات في المِصفاة: كان تيلًا مكتوبًا في المحرّك */
+html[data-theme="light"] .fcol-bar i { background: #cbb0e6; }
+html[data-theme="light"] .fcol-bar i:hover { background: #9d6fc4; }
+html[data-theme="dark"] .fcol-bar i { background: #4a3560; }
+html[data-theme="dark"] .fcol-bar i:hover { background: #5e4478; }
+/* مِقبضُ التمرير المرسوم (‎#xthumb‎) وشريطُ الجانب: كانا تيلًا مكتوبًا في المحرّك */
+html #xthumb { background: #8a5cb3; }
+html #xthumb:hover { background: #6e3d99; }
+html #xthumb:active { background: #55127f; }
+html[data-theme="dark"] #xthumb { background: #4a3560; }
+html[data-theme="dark"] #xthumb:hover { background: #5e4478; }
+html[data-theme="dark"] #xthumb:active { background: #73559a; }
+html[data-theme="light"] .sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .28); }
+html[data-theme="light"] .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .4); }
+html #xup, html #xdown { color: #8a5cb3; }
+html #xup:hover, html #xdown:hover { color: #55127f; }
+html[data-theme="dark"] #xup, html[data-theme="dark"] #xdown { color: #5e4478; }
+/* والحبرُ الثانويّ في الفاتح: رماديٌّ مزرقّ (‎#5d6b82‎) وكحليّ (‎#14233f‎) مكتوبان في المحرّك —
+   يُبدَّلان برماديٍّ بنفسجيٍّ من الحبر نفسه، فلا يبقى في الصفحة أزرقُ واحد */
+html[data-theme="light"] .searchbox--ic > .srch-ic,
+html[data-theme="light"] .chours, html[data-theme="light"] .chours .hu,
+html[data-theme="light"] .fgroup__t, html[data-theme="light"] [id^="m-fg-"],
+html[data-theme="light"] .fcol-search, html[data-theme="light"] .cm-count { color: #6e6079 !important; }
+html[data-theme="light"] .cm-pick__msg { color: #2b1d38; border-color: rgba(102, 0, 153, .16); box-shadow: 0 10px 30px -14px rgba(51, 7, 79, .32); }
+html[data-theme="light"] .cm-pick__ic { stroke: #660099; }
+html[data-theme="light"] .cm-pick__av { background: color-mix(in srgb, #660099 16%, #f4eff7); }
+html[data-theme="light"] :is(.lib-course #cm-ui, #market-course #cm-ui, #nook, #jri-body #cm-ui, .vw-tok, .pick-modal .mmodal__card, .nkwork .nkw, #card-modal .mmodal__card, .xt-skin) {
+  --u-mut: #6e6079; --u-line: rgba(102, 0, 153, .14);
 }

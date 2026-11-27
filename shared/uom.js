@@ -23,7 +23,8 @@ window.AC_CFG = {
   hide: { abs: 1 },
   i18n: {
     ar: {
-      hoursGroup: 'الـcredits', hoursChip: h => h + ' credits', hUnit: 'cr',
+      /* ‏‎\u2066…\u2069‎ يعزل «20 credits» فلا يقلبه اتّجاهُ العربيّة إلى «credits 20» */
+      hoursGroup: 'الوحدات (\u2066credits\u2069)', hoursChip: h => '\u2066' + h + ' credits\u2069', hUnit: 'cr',
       kindGroup: 'نوعية المواد', kindMajor: 'إجبارية', kindElective: 'اختيارية',
       kindCollege: 'مواد كلية', kindCommon: 'مواد مشتركة',
       docSec: 'المحاضرين', docName: 'اسم المحاضر', docEmail: 'إيميل المحاضر',
