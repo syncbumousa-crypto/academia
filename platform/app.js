@@ -11146,6 +11146,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const ghost = closing && barR ? { on: post0.classList.contains('pk-act--mid'), bar: barR } : null;
       const cardH0 = post0.getBoundingClientRect().height;
       commit();
+      if (post0.pkClsAn) { post0.pkClsAn.forEach(x => { try { x.cancel(); } catch (e) {} }); post0.pkClsAn = null; [kv0, ...sp0.children].forEach(x => { if (x && x.style) { x.style.boxSizing = ''; if (x === kv0) x.style.overflow = ''; } }); }
       const ctl = document.querySelector(`#cm-body [data-pkmidx][data-pkid="${CSS.escape(id)}"]`), post = ctl && ctl.closest('.post');
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) { bkScrThawAll(); return; }
@@ -11207,49 +11208,54 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       });
     };
     if (!closing) return run();
-    /* ===== الخروج بجانب غيره (طلبُ صاحب الموقع): مراحلُ أربع =====
-       ١. محتوى العمود يخفت · ٢. العمودُ يتقلّص صاعدًا إلى السقف · ٣. محتوى السقف يخفت · ٤. السقفُ ينكمش إلى وسطه والجاران يأخذان مكانه */
+    /* ===== الخروج عكسُ الدخول (طلبُ صاحب الموقع: «ينفتح من فوق ويسار … ابيه ينغلق نفس ما ينفتح») =====
+       كان على مراحل: العمودُ يتقلّص من تحتٍ صاعدًا إلى السقف، ثمّ يذهب السقف. فالآن حركةٌ واحدةٌ كالدخول معكوسًا، على المساهمة
+       قبل رسمها: محتوى العمود يخفت، والعمودُ يضيق إلى جهته والجاران يتّسعان إليه، وشريطُ المجلدات وترويسةُ الملخّص يخفتان
+       صاعدين والقسمةُ تصعد مكانهما — معًا. وكلُّ المواضع الأخيرة تُقاس قبلها (العمودُ والشريطُ مخفيّان لحظةً بلا رسم)،
+       فتنتهي الحركةُ حيث سيضعها الرسمُ تمامًا، ويأتي الرسمُ بعدها بلا أثر */
+    const kv0 = sp0.querySelector(':scope > .kt-view');
+    const heads = [...post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)')];
+    let barR = null;   /* (لا شبحَ للسقف: يخفت هو نفسُه) */
+    if (!kv0) return run();
     post0.pkMidRun = true; post0.pkBlkHold = true;
     bkScrFrz(post0);
-    const slow = window.__pkfxSlow || 1, wait = an => Promise.all(an.map(a => a.finished.catch(() => {})));
-    const kv0 = sp0.querySelector(':scope > .kt-view'), band = post0.querySelector(':scope > .pk-band'), mp = band && band.querySelector('path.pk-blk[data-k="mid"]');
-    const cr = R(post0), ox = cr.left + post0.clientLeft, oy = cr.top + post0.clientTop;
-    let barR = null;
-    const fade = (els, d) => [...els].map(x => x.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d * slow, easing: 'ease-out', fill: 'forwards' }));
-    let barFade = Promise.resolve();
-    wait(fade(post0.querySelectorAll('.post-ytmain > .pk-split > .kt-view > *'), 80)).then(() => {
-      if (!mp || !kv0) return;
-      const bb = mp.getBBox(), k = R(kv0), spT = R(sp0).top - oy;
-      const bar = { x: bb.x, y: bb.y, w: bb.width, h: Math.max(0, spT - 12 - bb.y) };
-      const st = { x: k.left - ox, y: bar.y + bar.h - 16, w: k.width, h: bb.y + bb.height - (bar.y + bar.h - 16) };
-      barR = { left: bar.x + ox, right: bar.x + bar.w + ox, top: bar.y + oy, bottom: bar.y + bar.h + oy };
-      const rr = (x, y, w, h) => { const r = Math.min(16, h / 2, w / 2); return h <= 0 || w <= 0 ? '' : `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`; };
-      /* والجاران يتّسعان أفقيًّا معه إلى عرضيهما الأخيرين (نصفين، أو القسمةَ كلَّها لواحد)، والعمودُ يضيق بينهما وهو يصعد —
-         فلا يتراكبان. والكتلُ تُرسم حيّةً، وعمودُ الملخّص يُرسم فوقها بقامته الصاعدة */
-      const D = 170 * slow, ez = pkBez(.65, 0, .35, 1), cz = 'cubic-bezier(.65, 0, .35, 1)';
-      /* ومحتوى السقف يبدأ خفوتَه والعمودُ في آخر صعوده — مراحلُ متداخلةٌ قليلًا لا متتابعةٌ بفراغ */
-      barFade = new Promise(r => setTimeout(r, D * .45)).then(() => wait(fade(post0.querySelectorAll('.post-ytmain > :is(.pk-blkh--mid, .pk-fstrip, .pk-fstrip-ph)'), 90)));
-      const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
-      const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
-      const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
-      /* (طلبُ صاحب الموقع: «لما اقفلها فيه jumps بمساحة المصادر») كان الجاران يتّسعان هنا في ‎170ms‎ (قفزاتٌ بـ‎275px‎ في الإطار)،
-         ثمّ يقفان والمساهمةُ تُرسم (‎~140ms‎)، ثمّ يصعدان مع ذهاب شريط المجلدات — حركتان بينهما وقفة. فالآن العمودُ وحده يصعد
-         إلى السقف هنا، والجاران ساكنان؛ ويتّسعان ويصعدان معًا في حركةٍ واحدة بعد الرسم (‎run‎) كما في الدخول */
-      void sides; void wF; void ws; void kw; void kcs; void cz;
-      const t0 = performance.now();
-      return new Promise(res => {
-        const step = now => {
-          if (!post0.isConnected) return res();
-          const e = ez(Math.min(1, (now - t0) / D)), h = Math.max(16, st.h) * (1 - e) + 16 * e, kk = R(kv0);
-          pkBandDraw(post0, []);
-          const m2 = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]');
-          if (m2) m2.setAttribute('d', rr(bar.x, bar.y, bar.w, bar.h) + (e < 1 ? rr(kk.left - ox, st.y, kk.width, h) : ''));
-          if (e < 1) requestAnimationFrame(step); else res();
-        };
-        requestAnimationFrame(step);
-      });
-    }).then(() => barFade)
-      .then(() => { post0.pkMidRun = false; post0.pkBlkHold = false; run(); });
+    const slow = window.__pkfxSlow || 1, D = PKFX.IN * .85 * slow, cz = 'cubic-bezier(.4, 0, .2, 1)', an = [];
+    const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
+    const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, kcs = getComputedStyle(kv0);
+    const ws = sides.map(x => R(x).width), kw = R(kv0).width, top0 = R(sp0).top, cardH0 = R(post0).height;
+    const hCur = parseFloat(sp0.style.getPropertyValue('--pk-h')) || 0, hasH = sp0.classList.contains('pk-split--h');
+    /* المواضعُ الأخيرة: العمودُ والشريطُ مخفيّان وقسمةٌ بلا ملخّص — ثمّ يُعاد كلُّ شيءٍ كما كان قبل أيّ رسم */
+    const hid = [kv0, ...heads], was = hid.map(x => x.style.display), noMid = sp0.classList.contains('no-mid');
+    hid.forEach(x => { x.style.display = 'none'; }); sp0.classList.add('no-mid');
+    const fin = { top: R(sp0).top, w: sides.map(x => R(x).width), card: R(post0).height, h: hasH ? pkSrcHCalc(post0) : null };
+    hid.forEach((x, i) => { x.style.display = was[i]; }); if (!noMid) sp0.classList.remove('no-mid');
+    const dH = fin.h && hCur ? fin.h - hCur : 0;
+    if (fin.h && hCur) pkSrcH[id] = fin.h;   /* (الرسمُ يكتب القامةَ الأخيرةَ نفسَها: لا انتقالَ ثانٍ بعده) */
+    /* ١. المحتوى يخفت (العمودُ أسرع، والشريطُ صاعدًا كما نزل) */
+    [...kv0.children].forEach(c => an.push(c.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(10px)' }], { duration: D * .45, easing: 'ease-out', fill: 'forwards' })));
+    heads.forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
+    /* ٢. العمودُ يضيق إلى جهته والجاران يتّسعان إليه */
+    kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
+    an.push(kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginInlineStart: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
+      { flexGrow: 0, flexShrink: 0, flexBasis: '0px', marginInlineStart: -gp + 'px', minWidth: '0px', paddingLeft: '0px', paddingRight: '0px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    sides.forEach((x, i) => { x.style.boxSizing = 'border-box';
+      an.push(x.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ws[i] + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: fin.w[i] + 'px' }], { duration: D, easing: cz, fill: 'forwards' })); });
+    /* ٣. القسمةُ تصعد مكانَ الشريط، وقامتُها وقامةُ المساهمة إلى الأخيرتين */
+    /* (هامشُ ما فوقها يندمج مع هامشها السالب — ‎margin collapsing‎ — فكانت تقف قبل موضعها بـ‎~7px‎ ثمّ تقفز بعد الرسم: يُنقل إليها هو) */
+    const prv = sp0.previousElementSibling, pmb = prv ? parseFloat(getComputedStyle(prv).marginBottom) || 0 : 0;
+    let mt = parseFloat(getComputedStyle(sp0).marginTop) || 0; const up = top0 - fin.top;
+    if (prv && pmb > 0) { prv.style.marginBottom = '0px'; mt = Math.max(mt, pmb); }
+    if (Math.abs(up) > .5) an.push(sp0.animate([{ marginTop: mt + 'px' }, { marginTop: (mt - up) + 'px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    if (Math.abs(dH) > .5) an.push(sp0.animate([{ height: hCur + 'px' }, { height: (hCur + dH) + 'px' }], { duration: D, easing: cz, fill: 'forwards' }));
+    if (post0.classList.contains('pk--framepub')) { const c1 = fin.card + dH; if (Math.abs(c1 - cardH0) > 1) an.push(post0.animate([{ height: cardH0 + 'px' }, { height: c1 + 'px' }], { duration: D, easing: cz, fill: 'forwards' })); }
+    post0.pkClsAn = an;
+    let live = true;
+    const loop = () => { if (!live || !post0.isConnected) return; pkBandDraw(post0, []); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
+      live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
+      run();
+    });
   }
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cm-body [data-actkf]');
