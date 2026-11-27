@@ -814,8 +814,27 @@
     + 'EE 411|EE 412|ENTR 411|ENTR 412|ESE 411|ESE 412|FFE 411|FFE 412|FIN 477|FIN 478|GEOL 411|GEOL 412|GEOP 411|GEOP 412|'
     + 'ICS 413|ICS 414|ISE 411|ISE 412|MATH 413|MATH 414|ME 411|ME 412|MINE 411|MINE 412|MIS 477|MIS 478|MSE 411|MSE 412|OSC 411|OSC 412|'
     + 'PETE 411|PETE 412|PHYS 411|PHYS 412|SWE 413|SWE 414').split('|'));
+  /* ===== وفي المدرج لا أرقامَ ثابتة =====
+     ‏‎398/399‎ وقائمةُ ‎BADGE_GRAD‎ أرقامُ جامعة الملك فهد. وموادُّ جامعة الملك سعود يقول الكتالوجُ
+     نفسُه نوعَها (‎kinds‎ في كلّ تخصّص: ‎training‎ · ‎project‎)، فيُقرأ من الدرج مرّةً ويُحفظ. */
+  let comKinds = null;
+  const comKind = c => {
+    if (!comKinds) {
+      comKinds = {};
+      try {
+        const C = JSON.parse(localStorage.getItem('academia2:catalog:v1') || 'null');
+        ((C && C.courses) || []).forEach(x => {
+          const v = Object.values(x.kinds || {});
+          if (v.indexOf('project') >= 0) comKinds[x.code] = 'g';
+          else if (v.indexOf('training') >= 0) comKinds[x.code] = 's';
+        });
+      } catch (e) {}
+    }
+    return comKinds[c] || '';
+  };
   function badgeKind(code) {
     const c = String(code || '');
+    if (window.AC_COM) return comKind(c);
     if (/ 399$/.test(c)) return 's';
     if (/ 398$/.test(c)) return 'c';
     return BADGE_GRAD.has(c) ? 'g' : '';
