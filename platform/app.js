@@ -7620,15 +7620,19 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      (بطاقةٌ أو بطاقتان، بضعةُ كيلوبايت) كلّما رُسم التبويبُ كاملًا بعد الجواب — ويُمحى إن لم تبق لي فيه مساهمة.
      ثلاثون تبويبًا على الأكثر (الأقدمُ يُسقط)، وما جاوز ‎80KB‎ لا يُحفظ */
   const CM_MINE_KEY = 'ac.mine1';
-  let cmMineAcc = null, cmHoldOn = '';
+  let cmMineAcc = null, cmHoldOn = '', cmMineSkip = false;
+  /* (طلبُ صاحب الموقع: «بعد ما أحدّث … ألاقي مساهمة مفتوحة بوجهي … ثم تتسكّر فجأة») كان يُحفظ رسمُ مساهمتي كما هو — مفتوحةً إن
+     كانت مفتوحة — وفتحُها لا يبقى بعد التحديث (‎pubOpen‎ في الذاكرة)، فتظهر مفتوحةً من المحفوظ ثمّ يرسمها الجوابُ مغلقة.
+     فالمفتوحةُ لا يُحفظ رسمُها (يبقى آخرُ رسمٍ مغلقٍ لها)، والمحفوظُ المفتوحُ لا يُعرض */
+  const cmMineOpen = h => /^\s*<div[^>]*\bclass="[^"]*\b(pk--pcopen|pk--frame|pk--max)\b/.test(h);
   function cmMineKeep(p, h) {
     if (!isMine(p)) return h;
     h = h.replace(/^(\s*<div)/, '$1 data-cmmine="1"');
-    if (cmMineAcc) cmMineAcc.push(h);
+    if (cmMineAcc) { if (cmMineOpen(h)) cmMineSkip = true; else cmMineAcc.push(h); }
     return h;
   }
   function cmMineAll() { try { return JSON.parse(localStorage.getItem(CM_MINE_KEY) || '{}') || {}; } catch (e) { return {}; } }
-  function cmMineGet(code, sec) { const e = cmMineAll()[code + '|' + sec]; return e && Array.isArray(e.h) && e.h.length ? e : null; }
+  function cmMineGet(code, sec) { const e = cmMineAll()[code + '|' + sec]; return e && Array.isArray(e.h) && e.h.length && !e.h.some(cmMineOpen) ? e : null; }
   function cmMineSave(code, sec, hs) {
     try {
       const all = cmMineAll(), k = code + '|' + sec, size = hs.reduce((n, h) => n + h.length, 0);
@@ -7643,7 +7647,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     } catch (e) {}
   }
   function renderCmSection0() {
-    cmMineAcc = [];
+    cmMineAcc = []; cmMineSkip = false;
     /* وأوّلُ ما يُسأل: أبقيتَ في نطاقك أم غادرتَه؟ — ‎cdScopeSync‎ تحرس نفسَها بمقارنةٍ
        واحدة، وهذه الدالّة تُنادى في كلّ نقرةٍ فلا تُحمَّل ما يثقلها */
     cdScopeSync();
@@ -7766,7 +7770,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     cmBodySet($('#cm-body'), inner);
     if (!held && cmMineAcc && CM_HOLD_SECS.indexOf(sec) > -1 && cmView.mode !== 'edit' && cmView.mode !== 'view') {
       let seen = false; try { seen = srvSeen(cmCode); } catch (e) {}
-      if (seen) cmMineSave(cmCode, sec, cmMineAcc);
+      if (seen && !cmMineSkip) cmMineSave(cmCode, sec, cmMineAcc);   /* (وفيها مساهمتي مفتوحةً: يبقى المحفوظُ كما هو) */
     }
     cmMineAcc = null;
     /* (طلبُ صاحب الموقع) نهايةُ الانتظار: مساهمتي في مكانها لا تتحرّك، وغيرُها يظهر واحدةً بعد واحدة من فوق */
@@ -11265,6 +11269,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const hdIc = post0.querySelector('.post-ytmain > .pk-blkh--mid .pk-blkh__ic');
     heads.flatMap(x => x.classList.contains('pk-blkh--mid') ? [...x.children].filter(y => y !== hdIc) : [x])
       .forEach(x => an.push(x.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: D * .55, easing: 'ease-out', fill: 'forwards' })));
+    /* (ثمّ بطلبه: «ما أبيها تنتظرني عشان تنزل … أبيها تخرج بسرعة خروج متلاشي، وتظهر بدخول متلاشي في زاوية المصادر»)
+       فتخفت وحدَها في أوّل الخروج — أسرعَ من ترويستها — وتظهر أيقونةُ الصفّ متلاشيةً في فجوتها بعد الرسم (‎_fade‎) */
+    if (hdIc) an.push(hdIc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' }));
     /* ٢. العمودُ يضيق إلى جهته والجاران يتّسعان إليه */
     kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
     an.push(kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginInlineStart: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
@@ -11290,7 +11297,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     requestAnimationFrame(loop);
     Promise.all(an.map(a => a.finished.catch(() => {}))).then(() => {
       live = false; post0.pkMidRun = false; post0.pkBlkHold = false;
-      if (hdIc && hdIc.isConnected) { const r = hdIc.getBoundingClientRect(); if (r.width) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fly = { k: 'mid', r, at: performance.now() }; } }
+      if (hdIc) { const nid = post0.dataset.ck || post0.dataset.pkicid || post0.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fade = { k: 'mid', at: performance.now() }; }
       { const mp = post0.querySelector(':scope > .pk-band path.pk-blk[data-k="mid"]'); if (mp) { mp.style.opacity = '0'; } }
       run();
     });
@@ -11322,7 +11329,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      من داخل، وكلُّ شرطةٍ تُخرج أيقونةَ طريقتها من موضعها، والذهبيّةُ تصير قرصًا خلف الحاليّة. ولمسُ **الأيقونة** نفسِها
      يبقى يُغلق المساحة. الهندسةُ بإحداثيّات الزرّ (مركزُ الأيقونة 15,15): خطٌّ أفقيّ ‎h‎ ثمّ قوسٌ ‎th‎ ثمّ خطٌّ ‎v‎ */
   const PK_FAN_C = { cx: 20, cy: 12, r: 14 - PK_VA_IN, h: PK_VA_RUN, v: PK_VA_RUN, th: 90, w: 7 };
-  const PK_FAN_E = { cx: -23, cy: 53, r: 40, h: 2, v: 2, th: 90, w: 28 };
+  /* (طلبُ صاحب الموقع · اقتراح ٣+١: «يتوسّع فوق الزاوية نفسها») كانت تنبسط ربعَ حلقةٍ مركزُها تحت يسار الزاوية (‎-23,53‎) فتبتعد
+     عن موضعها ويلحقها الماوس. فالآن تكبر حول مركز القوس نفسِه — وتخرج قليلًا عن حدّ المساحة، فيُرفع قصُّها ما دامت مفتوحة (CSS) */
+  const PK_FAN_E = { cx: PK_FAN_C.cx, cy: PK_FAN_C.cy, r: 36, h: 2, v: 2, th: 90, w: 26 };
   const pkFan = {};   /* ‏‎fk → { k, kv, kt, g, gv, cur, hov, t, n, qt }‎ — ‎fk‎: معرّفُ المساهمة لقوس الطرق، و‎qt:‎+معرّفها لقوس الكمية والزمن */
   /* ===== قوسُ الكمية والزمن (طلبُ صاحب الموقع): القوسُ نفسُه معكوسًا على الزاوية اليسرى فوق لمساحتَي الملخّص والبنك =====
      شرطتان: الكميةُ (وعاءٌ نصفُه ملآن) والزمنُ (ساعةٌ رمليّة: وعاءان متقابلان) — تُبدّلان ما تقوله الكبسولات.
@@ -11476,6 +11485,15 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      كانت تنطوي حين يدخل الماوسُ أيَّ عنصرٍ غيرَ خطّها — والمفتوحةُ ينزاح شريطُها إلى الداخل فتصير الزاويةُ التي فتحها منها «خارجها»،
      فتنطوي بحركةٍ صغيرةٍ والماوسُ لم يبتعد. فالحكمُ للمسافة لا للعنصر: مستطيلُ شريطها المفتوح مع زاويتها، وحوله ‎PK_FAN_NEAR‎ */
   const PK_FAN_NEAR = 32;
+  /* (اقتراح ٣+١ · ١) مهلةُ الوقوف على خطّ القوس المطويّ قبل أن ينفتح — ويُلغى إن خرج الماوسُ من خطّه قبلها */
+  const PK_FAN_DWELL = 200;
+  document.addEventListener('pointerout', e => {
+    if (e.pointerType !== 'mouse') return;
+    const h = e.target.closest && e.target.closest('#cm-body .pk-varc--fan .pk-varc__hit'); if (!h) return;
+    const f = h.closest('.pk-varc--fan'), st = f && pkFan[f.dataset.fk]; if (!st || st.kt) return;
+    const to = e.relatedTarget; if (to && to.closest && to.closest('.pk-varc--fan') === f && to.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi')) return;
+    clearTimeout(st.t);
+  }, true);
   const pkFanNear = (id, x, y) => {
     const el = pkFanEl(id); if (!el) return false;
     const bg = el.querySelector('.pk-varc__bg'), sv = el.querySelector('.pk-varc__s');
@@ -11501,7 +11519,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const f = e.target.closest && e.target.closest('#cm-body .pk-varc--fan');
     for (const id in pkFan) {
       const st = pkFan[id], mine = f && f.dataset.fk === id;
-      if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { st.out = 0; pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
+      if (mine) { const on = e.target.closest('.pk-varc__hit, .pk-varc__bg, .pk-varc__vi'); if (on) { st.out = 0; if (!st.kt && e.target.closest('.pk-varc__hit') && !bkReduce()) pkFanSet(id, true, PK_FAN_DWELL); else pkFanSet(id, true); const b = e.target.closest('.pk-varc__vi'); st.hov = b ? [...b.parentNode.querySelectorAll('.pk-varc__vi')].indexOf(b) : -1; pkFanWake(); } }
       /* (مروحةٌ أخرى مفتوحة: يطويها الابتعادُ عن محيطها — ‎pointermove‎ — لا دخولُ عنصرٍ غيرها) */
     }
   }, true);
@@ -26610,7 +26628,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
        طويلة ‎~110ms‎)، فكانت ساعةُ الفجوة (‎180ms‎) تمضي قبل أوّل إطارٍ يُرى — فتظهر الفجوةُ والأيقونةُ شبهَ كاملتين. فالجديدةُ تبدأ
        ساعتُها من الرسم التالي (إطارٍ يُرى)، وتُعرف بزاويتها لا بكتلتها: أيقونةٌ تبقى في زاويتها وقد صارت الكتلةُ غيرَها (أُغلق الملخّصُ
        فصارت زاويتُه للمصادر) لا تُنحت فجوتُها من جديد */
-    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly');
+    const keys = () => Object.keys(st).filter(x => x !== '_seen' && x !== '_fly' && x !== '_fade');
+    const fadeIn = st._fade && performance.now() - st._fade.at < 2500 ? st._fade : null;
+    const fadeOf = t => !!(fadeIn && t && t.bt && t.bt.dataset.pkic === fadeIn.k);
     /* أيقونةٌ تطير إلى فجوتها (‎_fly‎: من أين — يضعه إغلاقُ الملخّص): تُرى من أوّل إطارٍ وتهبط إليها والفجوةُ تُنحت حولها */
     const fly = st._fly && performance.now() - st._fly.at < 2500 ? st._fly : null;
     const flyOf = t => !!(fly && t && t.bt && t.bt.dataset.pkic === fly.k);
@@ -26644,13 +26664,18 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
           t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
           if (flyOf(t)) {
-            st._fly = null; t.bt.style.opacity = ''; t.bt.style.transform = '';
+            st._fly = null; t.bt.style.opacity = ''; t.bt.style.transform = ''; if (fly.done) { try { fly.done(); } catch (e) {} }
             const r1 = t.bt.getBoundingClientRect(), fr = fly.r;
             if (r1.width) {
               const dx = (fr.left + fr.width / 2) - (r1.left + r1.width / 2), dy = (fr.top + fr.height / 2) - (r1.top + r1.height / 2), bt = t.bt;
               bt.pkFly = bt.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${fr.width / r1.width})` }, { transform: 'none' }], { duration: PKFX.IN * .85, easing: 'cubic-bezier(.2, .8, .2, 1)' });
               bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
             }
+          }
+          if (fadeOf(t)) {
+            st._fade = null; t.bt.style.opacity = ''; t.bt.style.transform = ''; const bt = t.bt;
+            bt.pkFly = bt.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260 * (window.__pkfxSlow || 1), easing: 'ease-out', fill: 'backwards' });
+            bt.pkFly.finished.then(() => { bt.pkFly = null; }, () => { bt.pkFly = null; });
           }
           if (t.bt.pkFly) { t.bt.style.opacity = ''; t.bt.style.transform = ''; }
           else {
@@ -26694,6 +26719,26 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     cmFarSet.forEach(el => { if (!el.isConnected) { cmFarIO.unobserve(el); cmFarSet.delete(el); } });
     body.querySelectorAll(':scope > .post').forEach(el => { if (!cmFarSet.has(el)) { cmFarSet.add(el); cmFarIO.observe(el); } });
+  }
+  /* نسخةٌ ثابتةٌ من أيقونةٍ في موضعها على الشاشة (فوق القصّ والخفوت) — تبقى أو تطير ثمّ تُرفع (ROADMAP-BANK-SMOOTH ٣) */
+  function pkIcClone(el, r) {
+    const cs = getComputedStyle(el), g = el.cloneNode(true);
+    Object.assign(g.style, { position: 'fixed', left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', margin: '0', zIndex: '40',
+      pointerEvents: 'none', color: cs.color, display: 'grid', placeItems: 'center', transformOrigin: '50% 50%', opacity: '1', visibility: 'visible' });
+    g.querySelectorAll('svg').forEach(x => { x.style.width = '100%'; x.style.height = '100%'; });
+    g.setAttribute('aria-hidden', 'true'); g.removeAttribute('id');
+    document.body.appendChild(g);
+    return g;
+  }
+  /* تطير نسخةٌ من موضع ‎fr‎ إلى ‎el‎ (موضعِه الأخير الآن) والأصلُ مخفيٌّ حتى تصل */
+  function pkIcFlyTo(fr, el, dur) {
+    const to = el.getBoundingClientRect(); if (!to.width || !fr || !fr.width) return;
+    const g = pkIcClone(el, to);
+    el.style.visibility = 'hidden';
+    const dx = (fr.left + fr.width / 2) - (to.left + to.width / 2), dy = (fr.top + fr.height / 2) - (to.top + to.height / 2);
+    const a = g.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${fr.width / to.width})` }, { transform: 'none' }], { duration: dur, easing: 'cubic-bezier(.2, .8, .2, 1)' });
+    const end = () => { g.remove(); el.style.visibility = ''; };
+    a.finished.then(end, end);
   }
   function pkSvgSet(svg, html) {
     if (svg.pkHtml === html && svg.children.length) return;
@@ -26950,7 +26995,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function pkFxHeight(sp, h0, dur, ease) {
     if (!sp || h0 == null || bkReduce()) return;
     /* والقامةُ الأخيرةُ تُقرأ قبل أن تبدأ حركةُ العرض (‎pkPaneGrow‎ تحفظها): بعدها تكون المنطقةُ بعرضٍ صفرٍ فتُقرأ خطأ */
-    const h1 = sp.pkH1 != null ? sp.pkH1 : sp.getBoundingClientRect().height;
+    const h1 = sp.pkH1 != null ? sp.pkH1 : sp.getBoundingClientRect().height + pkSplHLeft(sp.closest('.post'));
     sp.pkH1 = null;
     /* ولو تساوت القامتان تُثبَّت طوالَ الحركة: محتوى المنطقة (الكتابُ بنسبة صفحته) يطول ويقصر مع عرضها وهو يتّسع —
        فبلا تثبيتٍ تقفز قامةُ المساهمة وتعود (شكوى صاحب الموقع) */
@@ -26967,7 +27012,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') return false;
     const D = PKFX.IN * .8, ez = 'cubic-bezier(.2, .8, .2, 1)';
     const os = (others || []).filter(([el, w0]) => el && w0 != null).map(([el, w0]) => [el, w0, el.getBoundingClientRect().width]);
-    sp.pkH1 = sp.getBoundingClientRect().height;   /* قامةُ القسمة الأخيرة — لـ‎pkFxHeight‎ */
+    sp.pkH1 = sp.getBoundingClientRect().height + pkSplHLeft(sp.closest('.post'));   /* قامةُ القسمة الأخيرة — لـ‎pkFxHeight‎ (وما بقي من انتقال ‎--pk-h‎ — ROADMAP-BANK-SMOOTH ٤) */
     const w = E.getBoundingClientRect().width, m = pkFxOuter(E, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const sized = [E, ...os.map(o => o[0])];
     sized.forEach(x => { x.style.boxSizing = 'border-box'; });
@@ -27090,12 +27135,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     if (sp && ![...sp.children].some(x => x !== L && x.matches('.pk-src, .kt-view, .pk-bank'))) return pkSoloExit(card, commit);
     if (!sp || getComputedStyle(sp).flexDirection !== 'row') { commit(); return; }
     /* تنطوي أفقيًّا إلى حافّة القسمة الخارجيّة (لا تنزل)، والفُرجةُ بينها وبين جارها ثابتة: هامشُها الخارجيُّ يبتلع فُرجتَها في آخرها */
-    const D = PKFX.OUT, isBook = L.classList.contains('pk-src');
+    /* (ROADMAP-BANK-SMOOTH ٢) بمدّة الدخول (‎pkPaneGrow‎) لا أقصر — وكان العرضُ يبدأ بعد ربعها: المحتوى يخفت والمساحاتُ واقفة ثمّ
+       تنطوي مسرعةً (قيس: ‎~200ms‎ وخطواتٌ بـ‎~200px‎ في الإطار). فالآن تنطوي من أوّلها والمحتوى يخفت معها */
+    const D = PKFX.IN * .8, isBook = L.classList.contains('pk-src');
     bkScrFrz(card);   /* (ROADMAP-BANK-SMOOTH ١) */
+    /* (طلبُ صاحب الموقع: «نفس الشي أيقونة البنك» — كالملخّص في 1588) أيقونةُ الترويسة لا تبقى لتطير: تخفت سريعًا مع ترويستها
+       (أبناءُ المساحة تخفت أدناه)، وتظهر أيقونةُ الصفّ في فجوتها بتلاشٍ بعد الرسم (‎_fade‎ في ‎pkNotchDraw‎) */
+    const hIc = L.querySelector(':scope > .pk-blkh .pk-blkh__ic');
+    if (hIc && !bkReduce()) hIc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' });
     const hd = sp.querySelector(isBook ? ':scope > .pk-splh:not(.pk-splh--b)' : ':scope > .pk-splh--b');
     if (hd) hd.style.opacity = '0';
     const w = L.getBoundingClientRect().width, m = pkFxOuter(L, sp), g = parseFloat(getComputedStyle(sp).columnGap) || 14;
     const ow = other ? other.pane.getBoundingClientRect().width : 0, sw = sp.getBoundingClientRect().width;
+    /* (ROADMAP-BANK-SMOOTH ٢/٤) قامةُ القسمة الأخيرة تُقاس قبل الحركة (الخارجةُ مخفيّةٌ لحظةً بلا رسم) فتنتقل إليها **مع** الانطواء —
+       كانت تُثبَّت ثمّ تنتقل بعد الرسم: حركةٌ ثانية. وتُكتب قامةً لمساهمتها فيرسمها البناءُ نفسَها بلا انتقالٍ بعده */
+    const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
+    let hFin = null;
+    if (narrow && sp.classList.contains('pk-split--h')) {
+      const dsp = L.style.display; L.style.display = 'none';
+      try { hFin = pkSrcHCalc(card); } catch (e) { hFin = null; }
+      L.style.display = dsp;
+    }
     /* ولا ملخّصَ بينهما: الآخرُ يأخذ القسمةَ كلَّها، وكلٌّ يلزم حافّتَه (الخارجةُ تنطوي إلى حافّتها لا نحوه) */
     const noMid = !sp.querySelector(':scope > .kt-view');
     if (noMid && other) sp.style.justifyContent = 'space-between';
@@ -27107,25 +27167,33 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const cs = getComputedStyle(L), pd = { paddingLeft: cs.paddingLeft, paddingRight: cs.paddingRight, borderLeftWidth: cs.borderLeftWidth, borderRightWidth: cs.borderRightWidth };
     const pd0 = { paddingLeft: '0px', paddingRight: '0px', borderLeftWidth: '0px', borderRightWidth: '0px', minWidth: '0px' };
     L.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: w + 'px', [m]: '0px', minWidth: '0px', ...pd }, { flexGrow: 0, flexShrink: 0, flexBasis: '0px', [m]: -g + 'px', ...pd0 }],
-      { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
+      { duration: D, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
     if (other) {
       other.pane.style.boxSizing = 'border-box';
       other.pane.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ow + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: (noMid ? sw : (sw - PK_SPL_GAP) * other.share) + 'px' }],
-        { duration: D * .75, delay: D * .25, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
+        { duration: D, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'both' });
     }
     const slot = card.classList.contains('pk-act--' + (isBook ? 'book' : 'bank')) && card.querySelector('.cx-acttools');
     if (slot) slot.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D * .3, easing: 'ease-out', fill: 'forwards' });
-    const narrow = !card.classList.contains('pk--max'), spH = narrow ? sp.getBoundingClientRect().height : null;
-    /* والقامةُ مثبّتةٌ وهي تنطوي: محتواها يقصر ويطول مع عرضها فلا تقفز المساهمة (ثمّ تنتقل إلى قامتها الجديدة بعد الرسم) */
-    if (narrow) { sp.style.height = spH + 'px'; sp.style.overflow = 'hidden'; }
+    /* والقامةُ مثبّتةٌ وهي تنطوي (محتواها يقصر ويطول مع عرضها فلا تقفز المساهمة) — أو تنتقل إلى الأخيرة معها إن تغيّرت */
+    let hA = null;
+    if (narrow) {
+      sp.style.overflow = 'hidden';
+      if (hFin && Math.abs(hFin - spH) > 1) {
+        hA = sp.animate([{ height: spH + 'px' }, { height: hFin + 'px' }], { duration: D, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });
+        const pid = (card.querySelector('[data-pkview][data-pkid]') || { dataset: {} }).dataset.pkid; if (pid) pkSrcH[pid] = hFin;
+      } else sp.style.height = spH + 'px';
+    }
     /* الكتابُ (الخارجُ أو الباقي) يُجمَّد أثناء الانطواء، ويُفكّ بعد الرسم الجديد — فالخارجُ لا يُبنى على عرضٍ صفر */
     bkHold();
     pkLiveBand(card, sp.getAnimations({ subtree: true }), () => {
+      if (hIc && !bkReduce()) { const nid = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x'; (pkNotchSt[nid] || (pkNotchSt[nid] = {}))._fade = { k: isBook ? 'book' : 'bank', at: performance.now() }; }
       try { commit(); } finally { bkRelease(); }
+      if (hA) { try { hA.cancel(); } catch (e) {} }
       /* (والمساهمةُ المنشورةُ المتّسعةُ في موضعها كذلك — تُعرف بمعرّفها) */
       const ck = card.dataset.ck;
       const sp1 = document.querySelector(ck ? `#cm-body .post[data-ck="${CSS.escape(ck)}"] .post-ytmain > .pk-split` : '#cm-body .pk--edit .post-ytmain > .pk-split');
-      if (narrow) pkFxHeight(sp1, spH, 180 * (window.__pkfxSlow || 1), 'cubic-bezier(.2, .8, .2, 1)');   /* مع نحت الفجوة: بمدّتها ومنحناها */
+      if (narrow) pkFxHeight(sp1, hA ? hFin : spH, 180 * (window.__pkfxSlow || 1), 'cubic-bezier(.2, .8, .2, 1)');   /* مع نحت الفجوة: بمدّتها ومنحناها */
       /* والكتلُ تُرسم من فورها على القامة المتحرّكة (لا على القامة النهائيّة التي رسمها البناءُ) — وإلّا رُسمت المساحةُ الباقيةُ
          إطارًا واحدًا كاملةً بزاويتها ثمّ عادت فقصرت ونبتت فجوتُها: «تكتمل فجأة» (شكوى صاحب الموقع) */
       const card1 = sp1 && sp1.closest('.post'); if (card1) pkBandDraw(card1, []);
@@ -32103,6 +32171,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     }
     cxSel.clear();   /* المحرّرُ ينتقل بين الشجرتين: لا يعبر التحديدُ بينهما */
     if (post && pkLab()) bkScrFrz(post);   /* (ROADMAP-BANK-SMOOTH ١) الصفحاتُ المتتاليةُ لقطةٌ تتبع مساحتها حتى تقف الحركة */
+    const icFromB = !on && post && !bkReduce() ? (x => x && x.offsetParent ? x.getBoundingClientRect() : null)(post.querySelector('.pk-icrow [data-pkic="bank"]')) : null;
     pkBank[id] = !on;
     if (!on) pkPaneLast[id] = 'bank';   /* يُضاف ولا يُنشَّط (طلبُ صاحب الموقع) */
     if (!PK_SPLIT_VIEWS.includes(pkVw[id])) pkVw[id] = pkLastKn[id] || PK_KN_DEF;
@@ -32110,6 +32179,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     const ctl = document.querySelector(`#cm-body [data-pkview="folder"][data-pkid="${CSS.escape(id)}"]`);
     const post2 = ctl && ctl.closest('.post'), nv = viewOf(post2);
     requestAnimationFrame(() => bkScrThawAfter(post2));   /* (بعد أن تُنشأ حركاتُها كلُّها في هذه النقرة) */
+    /* (ROADMAP-BANK-SMOOTH ٣) أيقونةُ البنك تطير من فجوتها إلى ترويسته (موضعُها الأخير يُقاس الآن، قبل أن تُنشأ حركاتُ الانبساط) */
+    if (icFromB && post2) { const hic = post2.querySelector('.post-ytmain > .pk-split > .pk-bank .pk-blkh__ic'); if (hic) pkIcFlyTo(icFromB, hic, PKFX.IN * .9); }
     /* ولا ملخّصَ مفتوح (المصادرُ وحدَها): ينبسط البنكُ من حافّته اليسرى والمصادرُ تتضيّق له — كدخوله بجانب الملخّص */
     if (!on && !nv && pkLab() && !bkReduce() && post2) {
       const pane = post2.querySelector('.post-ytmain > .pk-split > .pk-bank'), bo = post2.querySelector('.post-ytmain > .pk-split > .pk-src');
