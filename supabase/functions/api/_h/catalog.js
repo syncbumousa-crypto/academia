@@ -1,7 +1,7 @@
 /* منقولة من ‎functions/api/catalog.js‎ — والفرق سطران:
    ‎env.DB‎ صار الجسر، وفحص «لا قاعدة» ذهب لان الجسر يصيح بنفسه.
    وما عداهما حرف بحرف. */
-import { db } from '../_db.js';
+import { db, comKey } from '../_db.js';
 
 /* ============================================================
    ‎GET /api/catalog‎ — الكتالوج من الخادم (م٠ من ROADMAP-SERVER)
@@ -154,7 +154,7 @@ export async function onRequestPut({ request, env }) {
     st.push(db.prepare('INSERT INTO course_tags (code, tag_id, kind, kind_auto) VALUES (?,?,?,?)')
       .bind(r.code, tg, k, oldAuto.get(r.code + '|' + tg) || null));
   }));
-  st.push(db.prepare("UPDATE meta SET v = ? WHERE k = 'catalog_rev'").bind(rev));
+  st.push(db.prepare("UPDATE meta SET v = ? WHERE k = ?").bind(rev, comKey('catalog_rev')));
 
   await db.batch(st);
   return J({ ok: true, courses: rows.length, tags: tagRows.length, links, v: rev });
@@ -165,7 +165,7 @@ export async function onRequestGet({ env }) {
     const [cs, tg, mt] = await Promise.all([
       db.prepare('SELECT code, ar, "full", h, lab FROM courses ORDER BY code').all(),
       db.prepare('SELECT id, ar, en FROM tags ORDER BY ord, id').all(),
-      db.prepare("SELECT v FROM meta WHERE k = 'catalog_rev'").first(),
+      db.prepare("SELECT v FROM meta WHERE k = ?").bind(comKey('catalog_rev')).first(),
     ]);
     /* والوصلُ يُقرأ مرّةً ويُوزَّع — لا استعلامَ لكلّ مادّة */
     const link = await db.prepare('SELECT code, tag_id, kind FROM course_tags').all();

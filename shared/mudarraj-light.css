@@ -1,0 +1,184 @@
+/* ============================================================
+   المدرج · ألوانُ جامعة الملك سعود — نسخةُ ‎maslakh-light.css‎ قاعدةً بقاعدة، والفرقُ اللونُ وحده (أزرقُ السماء من دليل القبول ١٤٤٧هـ، ولا كحليّ)
+   ============================================================
+   اعتمده صاحبُ الموقع بعد مقارناتٍ على صفحته الحقيقيّة (لوحة «المسلخ — ثيم فاتح»).
+   ورقةٌ للمسلخ وحدَه، تُحمَّل آخرَ الرأس، وكلُّ قاعدةٍ فيها مقصورةٌ على
+   ‎html[data-theme="light"]‎ — فالوضعُ الداكن لا يمسّه شيء.
+
+   الأدوار:
+     العمود (الشريط · البحث · قرصاه · التبويبُ المختار) مادّةٌ واحدة: تيلٌ عميق زجاجيّ.
+       · الشريطُ وحدَه زجاجٌ حقيقيّ (‎backdrop-filter‎): هو ما ينفتح فوق المحتوى.
+         ويُطفأ تمويهُه أثناء حركته (‎.side-anim‎) — التمويهُ على لوحٍ يتبدّل عرضُه
+         هو ما أبطأ الحركةَ من قبل (‎ROADMAP-SIDEBAR.md‎ §٧–٨).
+       · والبحثُ وقرصاه والتبويبُ لونُ ذاك الزجاج كما يُرى فوق الأبيض (‎#2c83b0‎):
+         لا شيءَ تحتها إلّا البياض، فالتمويهُ لا يُرى ويكلّف (§١٠).
+     الإجراء: «+» داخل الصفحة أصفرُ الشمس بحدٍّ من لونه · «إنشاء حساب» زجاجٌ شفّاف.
+     المختار في القوائم: تيلٌ عميقٌ مصمت للأقراص الصغيرة، وصبغةٌ منه للصفوف.
+     الوسوم محايدة · اسمُ الدكتور صبغةٌ ذهبيّة · الذهبُ للتقييم.
+   ============================================================ */
+
+/* ---------- العمود: الشريط ---------- */
+html[data-theme="light"] #sidebar,
+html[data-theme="light"] .sidebar {
+  background-color: rgba(16, 112, 160, .86) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+          backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(10, 61, 87, .6) !important;
+  border: 0 !important; color: #cfe6f2;
+}
+/* وأثناء الحركة: لونُ الزجاج نفسُه مصمتًا، بلا تمويه */
+html[data-theme="light"] .sidebar.side-anim {
+  background-color: #2c83b0 !important;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+html[data-theme="light"] .sidebar .side-mark { color: #eaf6fb; }
+html[data-theme="light"] .sidebar .side-logo { color: #eaf6fb; }   /* بلون الشعار (طلبُ صاحب الموقع) */
+html[data-theme="light"] .sidebar .tabs button:not(.is-active),
+html[data-theme="light"] .sidebar .tabs button:not(.is-active) * { color: #cfe6f2 !important; stroke: #cfe6f2; }
+html[data-theme="light"] .sidebar .tabs button:not(.is-active):hover { background: rgba(255, 255, 255, .08) !important; }
+html[data-theme="light"] .sidebar .tabs button.is-active {
+  background: rgba(255, 255, 255, .13) !important; color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .10) !important;
+}
+html[data-theme="light"] .sidebar .tabs button.is-active * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] .sidebar .themebar button,
+html[data-theme="light"] .sidebar .langbar button { background: rgba(255, 255, 255, .08) !important; color: #cfe6f2 !important; box-shadow: none !important; }
+html[data-theme="light"] .sidebar .tabs--me,
+html[data-theme="light"] .sidebar .side-ctl { border-color: rgba(255, 255, 255, .12) !important; }
+
+/* «إنشاء حساب»: زجاجٌ شفّاف داخل الزجاج — بلا إطارٍ صارخ */
+html[data-theme="light"] .sidebar .side-acct .side-join {
+  background-color: rgba(255, 255, 255, .12) !important;
+  background-image: radial-gradient(130% 90% at 50% -20%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%);
+  color: #ffffff !important; border: 0 !important; opacity: 1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), inset 0 -2px 6px rgba(0, 0, 0, .10), 0 6px 16px -10px rgba(0, 0, 0, .35) !important;
+}
+html[data-theme="light"] .sidebar .side-acct .side-join:hover { background-color: rgba(255, 255, 255, .18) !important; opacity: 1; }
+html[data-theme="light"] .sidebar .side-acct .side-join * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] .sidebar.side-anim .side-acct .side-join { -webkit-backdrop-filter: none; backdrop-filter: none; }
+html[data-theme="light"] .sidebar .side-login,
+html[data-theme="light"] .sidebar .side-logout {
+  background: transparent !important; color: #cfe6f2 !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28) !important;
+}
+html[data-theme="light"] .sidebar .side-login *,
+html[data-theme="light"] .sidebar .side-logout * { color: #cfe6f2 !important; stroke: #cfe6f2; }
+html[data-theme="light"] .sidebar .side-acct .side-profile { background: rgba(255, 255, 255, .08) !important; color: #ffffff !important; box-shadow: none !important; }
+
+/* ---------- العمود: البحث وقرصاه (لونُ الزجاج فوق الأبيض، بلا تمويه) ---------- */
+html[data-theme="light"] #side-handle,
+html[data-theme="light"] .market-tools .search,
+html[data-theme="light"] #m-search,
+html[data-theme="light"] .market-tools .filterwrap::before {
+  background: #2c83b0 !important; border: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 14px 32px -18px rgba(10, 61, 87, .6) !important;
+}
+html[data-theme="light"] #side-handle,
+html[data-theme="light"] #side-handle * { color: #cfe6f2 !important; stroke: #cfe6f2; }
+html[data-theme="light"] #m-search { color: #ffffff !important; }
+html[data-theme="light"] #m-search::placeholder { color: #cfe6f2 !important; opacity: 1; }
+html[data-theme="light"] .m-count { color: #cfe6f2 !important; border-color: rgba(255, 255, 255, .18) !important; }
+html[data-theme="light"] .m-count b { color: #ffffff !important; }
+html[data-theme="light"] #m-btn-filter,
+html[data-theme="light"] #m-btn-filter * { color: #cfe6f2 !important; stroke: #cfe6f2; }
+
+/* ---------- أقسام المادّة ---------- */
+html[data-theme="light"] #cm-ui button[data-tab].on {
+  background: #2c83b0 !important; color: #ffffff !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 12px 26px -16px rgba(10, 61, 87, .55) !important;
+}
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabnm,
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic,
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-tabic * { color: #ffffff !important; stroke: #ffffff; }
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-face { border-color: #2c83b0 !important; }
+html[data-theme="light"] #cm-ui button[data-tab].on .cm-face.cm-face--count { background: rgba(255, 255, 255, .18) !important; color: #ffffff !important; }
+html[data-theme="light"] #cm-ui .cm-res { background: #f2f7fa !important; box-shadow: none !important; }
+
+/* الوجوه والعدّادات محايدة، و«+» (شارك علمك) أصفرُ الشمس */
+html[data-theme="light"] .cm-face { background: #f2f7fa !important; color: #34505f !important; border-color: #ffffff !important; }
+html[data-theme="light"] .cm-face.cm-face--count { background: #d3e0e8 !important; color: #0a4a6c !important; }
+html[data-theme="light"] .cm-face.cm-face--me {
+  background: #82c3d8 !important; color: #0a4a6c !important; border-color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #82c3d8 70%, #0a3d57), 0 4px 10px -6px color-mix(in srgb, #82c3d8 80%, #000) !important;
+}
+
+/* ---------- المساهمات ---------- */
+html[data-theme="light"] .cm-sortbtn { background: #f2f7fa !important; color: #34505f !important; }
+html[data-theme="light"] .post-date,
+html[data-theme="light"] .pd-dot { color: #566a76 !important; border-color: #566a76 !important; }
+html[data-theme="light"] a.imp-badge {
+  background: transparent !important; color: #566a76 !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #d3e0e8 !important;
+}
+html[data-theme="light"] a.imp-badge * { color: #566a76 !important; }
+html[data-theme="light"] span.v-badge {
+  background: color-mix(in srgb, #0a5f86 10%, #ffffff) !important; color: #0a5f86 !important;
+  border-color: transparent !important; box-shadow: none !important;
+}
+html[data-theme="light"] span.v-badge * { color: #0a5f86 !important; }
+html[data-theme="light"] .dr-badge__av { background: #ffffff !important; color: #0a5f86 !important; }
+html[data-theme="light"] .cc-liquid { background: #f2f7fa !important; border-color: #d3e0e8 !important; }
+html[data-theme="light"] .cc-fill { background: #5fb0cc !important; }
+
+/* ---------- القوائم: سطحٌ مرفوع، والمختار تيلٌ عميق ---------- */
+html[data-theme="light"]:root .post-menu__list,
+html[data-theme="light"]:root .market-tools .fpanel {
+  background: #ffffff !important; border: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  box-shadow: inset 0 0 0 1px #e4edf2, 0 2px 8px rgba(10, 61, 87, .06), 0 28px 56px -24px rgba(10, 61, 87, .34) !important;
+}
+html[data-theme="light"] .cm-sortopt,
+html[data-theme="light"] .drl-term,
+html[data-theme="light"] .fchip {
+  background: transparent !important; color: #34505f !important; border-color: transparent !important;
+  box-shadow: inset 0 0 0 1px #d3e0e8 !important;
+}
+html[data-theme="light"] .fchip__n { color: #566a76 !important; }
+html[data-theme="light"] .cm-sortopt.on,
+html[data-theme="light"] .drl-term.on { background: #1070a0 !important; color: #ffffff !important; box-shadow: none !important; }
+html[data-theme="light"] .drl-term.on * { color: #ffffff !important; }
+html[data-theme="light"] .fchip.on,
+html[data-theme="light"] .fchip.is-on,
+html[data-theme="light"]:root .cm-docmenu .drl-row.on {
+  background: color-mix(in srgb, #1070a0 9%, #ffffff) !important; color: #1070a0 !important;
+  box-shadow: none !important; border-color: transparent !important;
+}
+html[data-theme="light"]:root .cm-docmenu .drl-row.on * { color: #1070a0 !important; }
+html[data-theme="light"] .drl-q,
+html[data-theme="light"] .fcol-search { background: #f2f7fa !important; box-shadow: none !important; border-color: transparent !important; }
+html[data-theme="light"]:root .post-menu__list.cm-docmenu b { color: #1070a0 !important; }
+
+/* المدرج: أغلفةُ الكتب — أزرقُ السماء، بلا كحليّ */
+.bk--ph, #nook { --phc1: #2a9ad0; --phc2: #136f9f; --cov1: #2a9ad0; --cov2: #136f9f; }
+.bk--b-s, .bk--b-c { --b-body: linear-gradient(150deg, #2a9ad0, #136f9f); --b-band: #0f6290; --b-edge: #0a4a6c; }
+/* توكنات الجذر: بترولي المسلخ ⇐ أزرق السماء، والحبرُ الكحليّ ⇐ حبرٌ أزرقُ داكن */
+:root { --c-ink: #10303f; --c-kfupm: #1a8abe; --c-kfupm-soft: #e8f3f9; --c-teal: #1a8abe; }
+html[data-theme="dark"] { --bk-gh1: rgba(130, 195, 216, .2); --bk-gh2: rgba(130, 195, 216, .06); --bk-ghr: #82c3d8; }
+
+/* ---------- الداكن ----------
+   بتروليُّ المسلخ الفاتح (‎--brand-tx‎) ⇐ الأزرقُ الفاتح، والتبويبُ المختار في المادّة
+   (ذهبيٌّ في الداكن عند المسلخ) ⇐ الأزرقُ الفاتح بحبرٍ أزرقَ داكن — لا كحليّ */
+html[data-theme="dark"] { --brand-tx: #82c3d8; --xt-fl5: #82c3d8; }
+html[data-theme="dark"] .cm-tabs button.on { background: #82c3d8; color: #0a3d57; }
+html[data-theme="dark"] .cm-tabs button.on * { color: #0a3d57; }
+html[data-theme="dark"] .cm-panel .cm-tabs button.on::before { background: radial-gradient(circle at top right, transparent 8px, #82c3d8 8px); }
+html[data-theme="dark"] .cm-panel .cm-tabs button.on::after  { background: radial-gradient(circle at top left,  transparent 8px, #82c3d8 8px); }
+html[data-theme="dark"] .psp-r:hover, html[data-theme="dark"] .psp-it:hover, html[data-theme="dark"] .psp-more:hover, html[data-theme="dark"] .psp-more.is-on { background: rgba(130, 195, 216, .08) !important; }
+html[data-theme="dark"] .psp-it.is-on { background: rgba(130, 195, 216, .13) !important; }
+html[data-theme="dark"] .psp-ti.is-on { background: rgba(130, 195, 216, .1); }
+
+/* ---------- جلدُ الأقسام الأبيض (‎--u-*‎) ----------
+   حبرُ المسلخ فيه كحليٌّ داكن (‎#14233f‎ وشفافيّاتُه) ومسحةٌ بتروليّة — ففي المدرج
+   حبرٌ أزرقُ داكنٌ مائلٌ إلى السماء، ومسحةٌ سماويّة. والقيمُ الأخرى كما هي. */
+html[data-theme="light"] .lib-course #cm-ui, html[data-theme="light"] #market-course #cm-ui, html[data-theme="light"] #nook,
+html[data-theme="light"] #jri-body #cm-ui, html[data-theme="light"] .vw-tok,
+html[data-theme="light"] .pick-modal .mmodal__card, html[data-theme="light"] .nkwork .nkw,
+html[data-theme="light"] #card-modal .mmodal__card,
+html[data-theme="light"] .xt-skin {
+  --u-tx: #34505f; --u-tx-strong: #10303f;
+  --u-ph: rgba(16, 48, 63, .4); --u-ph2: rgba(16, 48, 63, .5); --u-fade: rgba(16, 48, 63, .42);
+  --u-div: rgba(16, 48, 63, .1); --u-rest: rgba(16, 48, 63, .5);
+  --u-btntx: #3f6476; --u-av: #dcebf3; --u-badge: #e8f3f9; --u-mid: #c6d9e3;
+  --u-stypeon-bg: #1a8abe;
+}

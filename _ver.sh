@@ -31,7 +31,7 @@ else
   echo "min: تعذّر البناء — يُخدم الأصل"
 fi
 rm -f platform/app.min.js.tmp shared/styles.min.css.tmp
-sed -i "s/window\.AC_MINV = [0-9]*;/window.AC_MINV = $M;/" Almaslakh/index.html platform/index.html
-git add shared/version.js Almaslakh/index.html platform/index.html
+sed -i "s/window\.AC_MINV = [0-9]*;/window.AC_MINV = $M;/" Almaslakh/index.html Almudarraj/index.html platform/index.html
+git add shared/version.js Almaslakh/index.html Almudarraj/index.html platform/index.html
 [ "$M" != 0 ] && git add platform/app.min.js shared/styles.min.css
 exit 0

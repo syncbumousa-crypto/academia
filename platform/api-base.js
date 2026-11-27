@@ -66,6 +66,10 @@
     if (lk) h.set('x-alock', lk);
     o.headers = h;
 
+    /* المدرج: ‎?com=‎ يقول للخادم أيَّ جداولٍ يقرأ (‎platform/com.js‎). في العنوان لا في
+       ترويسة، فخبءُ المتصفّح لا يخلط ردَّ موقعٍ بموقع. والمسلخُ لا يُعرِّف ‎AC_COM‎ */
+    if (window.AC_COM && !/[?&]com=/.test(tail)) tail += (tail.indexOf('?') >= 0 ? '&' : '?') + 'com=' + window.AC_COM;
+
     var p = native(API + tail, o);
 
     if (/\/api\/lock\/(open|set)(\?|$)/.test(url)) {

@@ -29,6 +29,25 @@ import postgres from 'npm:postgres@3.4.5';
    وبدونه رمى ‎asArg‎ «‎Buffer is not defined‎» عند كلّ كتابة بِتات، فكان كلُّ رفعِ صورةٍ ‎500‎
    منذ النقل إلى Supabase. ثبت بدالّةٍ تجريبيّة (‎api-canary‎، ROADMAP-DATA-INTEGRITY م٢). */
 import { Buffer } from 'node:buffer';
+import { AsyncLocalStorage } from 'node:async_hooks';
+
+/* ============================================================
+   المجتمع — أيُّ موقعٍ جاء منه النداء (ROADMAP-MUDARRAJ م٢)
+   ============================================================
+   المسلخُ جداولُه في ‎public‎ كما كانت، ولا يتغيّر في طريقه حرف.
+   والمدرجُ جداولُ محتواه في مخطّطٍ مستقلّ ‎mudarraj‎ (الكتالوج · المساهمات ·
+   التعليقات · الإعجابات · الوثائق المفردة)، وما سواها مشتركٌ في ‎public‎
+   (المستخدمون · الجلسات · الصور والملفّات · السجلّات).
+   فيُحمل اسمُ المجتمع مع النداء كلِّه (‎run‎ في ‎route.js‎)، وكلُّ جملةٍ في
+   نداءٍ من المدرج تجري في صفقةٍ أوّلُها ‎SET LOCAL search_path‎ — والصفقةُ
+   هي ما يحفظ الإعدادَ في مجمّع الاتصالات، فلا يتسرّب إلى نداءٍ غيره. */
+const _com = new AsyncLocalStorage();
+export const COMS = { mudarraj: 1 };
+export const runCom = (c, fn) => _com.run(COMS[c] ? c : '', fn);
+export const com = () => _com.getStore() || '';
+/* مفتاحٌ في ‎meta‎ المشتركة يخصّ المجتمع: ‎catalog_rev‎ ⇐ ‎catalog_rev:mudarraj‎ */
+export const comKey = k => (com() ? k + ':' + com() : k);
+const PATH = c => 'SET LOCAL search_path TO ' + c + ', public';
 
 let _sql = null;
 
@@ -66,11 +85,16 @@ function sql() {
        one transaction. This is how the Neon driver behaved. */
     query(text, args) {
       const d = { text, args: args || [] };
-      d.then = (ok, no) => pg.unsafe(text, d.args).then(shape).then(ok, no);
+      const c = com();
+      d.then = c
+        ? (ok, no) => pg.begin(async tx => { await tx.unsafe(PATH(c)); return tx.unsafe(text, d.args); }).then(shape).then(ok, no)
+        : (ok, no) => pg.unsafe(text, d.args).then(shape).then(ok, no);
       return d;
     },
     async transaction(list) {
+      const c = com();
       return await pg.begin(async tx => {
+        if (c) await tx.unsafe(PATH(c));
         const out = [];
         for (const d of list) out.push(shape(await tx.unsafe(d.text, d.args)));
         return out;

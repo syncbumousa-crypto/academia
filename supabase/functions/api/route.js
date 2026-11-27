@@ -33,6 +33,7 @@ import * as comments from './_h/comments.js';
 import * as admin    from './_h/admin.js';
 import * as mcp      from './_h/mcp.js';
 import { oops } from './_err.js';
+import { runCom } from './_db.js';
 
 /* المسار ⇐ الوحدة. والاطول اولا حيث تشابهت الرؤوس. */
 const ROUTES = [
@@ -89,7 +90,9 @@ async function handle(request) {
   if (!fn) return J({ error: 'method-not-allowed' }, 405);
 
   let res;
-  try { res = await fn(ctx); }
+  /* ‏‎?com=mudarraj‎ يرسله ‎api-base.js‎ من صفحة المدرج — في العنوان لا في ترويسة،
+     فخبءُ المتصفّح (الكتالوج ‎max-age‎) لا يخلط ردَّ موقعٍ بموقع. وما سواه المسلخ. */
+  try { res = await runCom(url.searchParams.get('com') || '', () => fn(ctx)); }
   catch (e) { res = await oops('route', e, request.method + ' ' + url.pathname); }   /* ما أفلت من نقطته يُكتب كذلك */
   const out = new Response(res.body, res);
   Object.keys(SEC).forEach(k => { if (!out.headers.has(k)) out.headers.set(k, SEC[k]); });
