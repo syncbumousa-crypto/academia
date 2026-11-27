@@ -1,0 +1,3771 @@
+{
+ "college": "ccis",
+ "sources": [
+  {
+   "program": "cs",
+   "url": "https://ccis.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/users/user984/guides/CS_Student_Handbook_v3_Final.pdf",
+   "title": "BSc in Computer Science — Student Guide (Student Handbook v3)",
+   "year": "2025-2026"
+  },
+  {
+   "program": "is",
+   "url": "https://cs.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/imce_images/isn_en_1.pdf",
+   "title": "Study Plan — Bachelor, Information Systems (ISN), Edition 2, 134 hrs",
+   "year": "2018"
+  },
+  {
+   "program": "swe",
+   "url": "https://ccis.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/users/user805/SWE%20BSc%20Study%20Plan-2023.pdf",
+   "title": "Software Engineering Bachelor Program — SWE BSc Study Plan",
+   "year": "2023"
+  },
+  {
+   "program": "swe",
+   "url": "https://ccis.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/users/user805/SWE%20BSc%20Arabic%20Study%20Plan-2023.pdf",
+   "title": "SWE BSc Arabic Study Plan (Arabic names/codes)",
+   "year": "2023"
+  },
+  {
+   "program": "swe",
+   "url": "https://ccis.ksu.edu.sa/ar/se/se-course-catalog",
+   "title": "قسم هندسة البرمجيات — دليل المقررات (Arabic names, lab hours)",
+   "year": ""
+  },
+  {
+   "program": "ce",
+   "url": "https://ccis.ksu.edu.sa/en/ce/new-ce-bsc-program",
+   "title": "B.Sc. in Computer Engineering — Study Plan",
+   "year": "2026"
+  },
+  {
+   "program": "ce",
+   "url": "https://ccis.ksu.edu.sa/ar/ce/new-bsc-program",
+   "title": "بكالوريوس هندسة الحاسب — الخطة الدراسية (Arabic names/codes)",
+   "year": "2026"
+  },
+  {
+   "program": "it",
+   "url": "https://ccis.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/users/user410/BSIT-Plan-English%202026.pdf",
+   "title": "Bachelor Program of Science in Information Technology (BSIT Plan)",
+   "year": "2026"
+  },
+  {
+   "program": "it",
+   "url": "https://ccis.ksu.edu.sa/sites/ccis.ksu.edu.sa/files/users/user410/BSIT-Plan-Arabic%202026.pdf",
+   "title": "BSIT Plan — Arabic (Arabic names/codes)",
+   "year": "2026"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "انجل 110",
+   "en": "English",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 106",
+   "ar_code": "انجل 106",
+   "en": "English I",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 109",
+   "ar_code": "انجل 109",
+   "en": "Language & Communication",
+   "ar": "اللغة والتخاطب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 101",
+   "ar_code": "ريض 101",
+   "en": "Differential Calculus",
+   "ar": "حساب التفاضل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 101",
+   "ar_code": "كيم 101",
+   "en": "General Chemistry I",
+   "ar": "الكيمياء العامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "STAT 101",
+   "ar_code": "إحص 101",
+   "en": "An Introduction to Probability & Statistics",
+   "ar": "مقدمة في الاحتمالات والإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "IT Skills",
+   "ar": "مهارات تقنية المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CUR 101",
+   "ar_code": "مهر 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Education",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Prophet Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Principles of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Economic System in Islam",
+   "ar": "النظام الاقتصادي في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "أخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Current Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Development Role of Women",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "The Holy Quran",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 106",
+   "ar_code": "ريض 106",
+   "en": "Integral Calculus",
+   "ar": "حساب التكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 151",
+   "ar_code": "ريض 151",
+   "en": "Discrete Mathematics",
+   "ar": "الرياضيات المحددة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 244",
+   "ar_code": "ريض 244",
+   "en": "Linear Algebra",
+   "ar": "الجبر الخطي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 204",
+   "ar_code": "ريض 204",
+   "en": "Differential Equations",
+   "ar": "المعادلات التفاضلية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 205",
+   "ar_code": "ريض 205",
+   "en": "Differential & Integral Calculus",
+   "ar": "حساب التفاضل والتكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 200",
+   "ar_code": "ريض 200",
+   "en": "Differential and Integral Calculus",
+   "ar": "حساب التفاضل والتكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 254",
+   "ar_code": "ريض 254",
+   "en": "Numerical Analysis",
+   "ar": "الطرائق العددية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 122",
+   "ar_code": "بحث 122",
+   "en": "Introduction to Operations Research",
+   "ar": "مقدمة في بحوث العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 103",
+   "ar_code": "فيز 103",
+   "en": "General Physics I",
+   "ar": "فيزياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 104",
+   "ar_code": "فيز 104",
+   "en": "General Physics II",
+   "ar": "فيزياء عامة (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 201",
+   "ar_code": "فيز 201",
+   "en": "Mathematical Physics I",
+   "ar": "فيزياء رياضية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BIOL 145",
+   "ar_code": "حين 145",
+   "en": "Biology",
+   "ar": "علم الأحياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BCH 101",
+   "ar_code": "كيح 101",
+   "en": "General Biochemistry",
+   "ar": "كيمياء حيوية عامة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MIC 140",
+   "ar_code": "حدق 140",
+   "en": "General Microbiology",
+   "ar": "علم الأحياء الدقيقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPH 201",
+   "ar_code": "جاف 201",
+   "en": "Principles of Geophysics",
+   "ar": "أسس الجيوفيزياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 207",
+   "ar_code": "كهر 207",
+   "en": "Electric Circuits for Computer Engineering",
+   "ar": "الدوائر الكهربائية لهندسة الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 310",
+   "ar_code": "كهر 310",
+   "en": "Microelectronic Devices and Circuits",
+   "ar": "نبائط ودوائر الميكروالكترونيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 312",
+   "ar_code": "كهر 312",
+   "en": "Basic Electronics Lab",
+   "ar": "معمل أساسيات الالكترونيات",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "BUS 101",
+   "ar_code": "",
+   "en": "Principles of Management & Business",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 121",
+   "ar_code": "",
+   "en": "Organizational Behavior",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 330",
+   "ar_code": "",
+   "en": "Managerial Skills",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 201",
+   "ar_code": "",
+   "en": "Principles of Accounting & Financial Reporting",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 200",
+   "ar_code": "",
+   "en": "Principles of Finance",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 111",
+   "ar_code": "عال 111",
+   "en": "Computer Programming I",
+   "ar": "برمجة حاسبات (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CSC 113",
+   "ar_code": "عال 113",
+   "en": "Computer Programming II",
+   "ar": "برمجة حاسبات (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CSC 212",
+   "ar_code": "عال 212",
+   "en": "Data Structures",
+   "ar": "تراكيب البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 215",
+   "ar_code": "عال 215",
+   "en": "Procedural Programming with C",
+   "ar": "البرمجة باللغات الاجرائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 216",
+   "ar_code": "",
+   "en": "Programming with Python",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 220",
+   "ar_code": "عال 220",
+   "en": "Computer Organization",
+   "ar": "تنظيم الحاسبات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 227",
+   "ar_code": "عال 227",
+   "en": "Operating Systems",
+   "ar": "نظم التشغيل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 281",
+   "ar_code": "",
+   "en": "Discrete Mathematics for Computer Science",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 304",
+   "ar_code": "",
+   "en": "Ethical Issues in Computing and Research Methods",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 311",
+   "ar_code": "عال 311",
+   "en": "Design and Analysis of Algorithms",
+   "ar": "تصميم وتحليل الخوارزميات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 312",
+   "ar_code": "",
+   "en": "Data Visualization",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 320",
+   "ar_code": "",
+   "en": "Systems Programming",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 329",
+   "ar_code": "",
+   "en": "Computer Networks",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 339",
+   "ar_code": "",
+   "en": "Theory of Computation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 340",
+   "ar_code": "",
+   "en": "Programming Languages and Compilation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 343",
+   "ar_code": "",
+   "en": "Systems Analysis and Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 350",
+   "ar_code": "",
+   "en": "Full-Stack Web Development 1",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 361",
+   "ar_code": "عال 361",
+   "en": "Artificial Intelligence",
+   "ar": "الذكاء الاصطناعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 380",
+   "ar_code": "عال 380",
+   "en": "Fundamentals of Database Systems",
+   "ar": "أسس نظم قواعد البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 384",
+   "ar_code": "",
+   "en": "Applied Numerical Computation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 386",
+   "ar_code": "",
+   "en": "Algorithms & Techniques for Database Management Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 412",
+   "ar_code": "عال 412",
+   "en": "Modeling and Simulation",
+   "ar": "المحاكاة والنمذجة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 413",
+   "ar_code": "",
+   "en": "Advanced Algorithms and Programming Techniques",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 427",
+   "ar_code": "",
+   "en": "Penetration Testing and Vulnerability Assessment",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 429",
+   "ar_code": "عال 429",
+   "en": "Computer Security",
+   "ar": "أمن الحاسبات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 432",
+   "ar_code": "",
+   "en": "Cyber Physical-Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 433",
+   "ar_code": "",
+   "en": "Software Security",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 434",
+   "ar_code": "",
+   "en": "Applied Cryptography",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 435",
+   "ar_code": "",
+   "en": "Privacy Foundations",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 436",
+   "ar_code": "",
+   "en": "Cyber-Forensics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 437",
+   "ar_code": "",
+   "en": "Network Security",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 439",
+   "ar_code": "",
+   "en": "Selected Topics in Cyber-Security",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 440",
+   "ar_code": "",
+   "en": "Human Computer Interaction",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 443",
+   "ar_code": "",
+   "en": "Software/IT Project Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 450",
+   "ar_code": "",
+   "en": "Full-Stack Web Development 2",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 453",
+   "ar_code": "عال 453",
+   "en": "Parallel Processing",
+   "ar": "المعالجة المتوازية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 455",
+   "ar_code": "",
+   "en": "Cloud Computing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 456",
+   "ar_code": "عال 456",
+   "en": "Distributed Systems",
+   "ar": "الأنظمة الموزعة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 462",
+   "ar_code": "عال 462",
+   "en": "Machine Learning",
+   "ar": "تعليم الآلة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 463",
+   "ar_code": "",
+   "en": "Deep Learning",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 464",
+   "ar_code": "",
+   "en": "Natural Language Processing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 465",
+   "ar_code": "",
+   "en": "Game Programming",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 466",
+   "ar_code": "",
+   "en": "Reinforcement Learning",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 469",
+   "ar_code": "",
+   "en": "Selected Topics in AI",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 472",
+   "ar_code": "",
+   "en": "Computer Vision",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 474",
+   "ar_code": "",
+   "en": "Robotics and Unmanned Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 476",
+   "ar_code": "عال 476",
+   "en": "Computer Graphics",
+   "ar": "الرسومات باستخدام الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 478",
+   "ar_code": "عال 478",
+   "en": "Digital Image Processing and Analysis",
+   "ar": "معالجة وتحليل الصور الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 479",
+   "ar_code": "",
+   "en": "Field Experience",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CSC 480",
+   "ar_code": "",
+   "en": "Big-Data and NoSQL Databases",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 482",
+   "ar_code": "",
+   "en": "Introduction to Data Science",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 484",
+   "ar_code": "",
+   "en": "Information Retrieval",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 489",
+   "ar_code": "",
+   "en": "Selected Topics in CS",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 488",
+   "ar_code": "",
+   "en": "Graduation Project (1) in Networks & Cyber-Security",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CSC 492",
+   "ar_code": "",
+   "en": "Graduation Project (2) in Networks & Cyber-Security",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CSC 494",
+   "ar_code": "",
+   "en": "Graduation Project I in AI",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CSC 495",
+   "ar_code": "",
+   "en": "Graduation Project II in AI",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CSC 496",
+   "ar_code": "",
+   "en": "Graduation Project I",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CSC 497",
+   "ar_code": "",
+   "en": "Graduation Project II",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "SWE 211",
+   "ar_code": "هاب 211",
+   "en": "Introduction to Software Engineering",
+   "ar": "مدخل إلى هندسة البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 312",
+   "ar_code": "هاب 312",
+   "en": "Software Requirements Engineering",
+   "ar": "هندسة متطلبات البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 314",
+   "ar_code": "هاب 314",
+   "en": "Software Security Engineering",
+   "ar": "هندسة أمن البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 321",
+   "ar_code": "هاب 321",
+   "en": "Software Design and Architecture",
+   "ar": "تصميم وعمارة البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 333",
+   "ar_code": "هاب 333",
+   "en": "Software Quality Assurance",
+   "ar": "ضمان جودة البرمجيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SWE 381",
+   "ar_code": "هاب 381",
+   "en": "Web Application Development",
+   "ar": "تطوير تطبيقات الشبكة العنكبوتية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 434",
+   "ar_code": "هاب 434",
+   "en": "Software Testing & Validation",
+   "ar": "الاختبار والتحقق من البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 444",
+   "ar_code": "هاب 444",
+   "en": "Software Construction Laboratory",
+   "ar": "معمل بناء البرمجيات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "SWE 455",
+   "ar_code": "هاب 455",
+   "en": "Software Maintenance & Evolution",
+   "ar": "صيانة وتطور البرمجيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SWE 466",
+   "ar_code": "هاب 466",
+   "en": "Software Project Management",
+   "ar": "إدارة مشاريع البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 477",
+   "ar_code": "هاب 477",
+   "en": "Software Engineering Code of Ethics & Professional Practice",
+   "ar": "الأخلاقيات والممارسة المهنية في هندسة البرمجيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SWE 479",
+   "ar_code": "هاب 479",
+   "en": "Practical Training",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "SWE 481",
+   "ar_code": "هاب 481",
+   "en": "Advanced Web Applications Engineering",
+   "ar": "هندسة تطبيقات الشبكة العنكبوتية المتطورة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 482",
+   "ar_code": "هاب 482",
+   "en": "Human-Computer Interaction",
+   "ar": "التفاعل بين الإنسان والحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 483",
+   "ar_code": "هاب 483",
+   "en": "Mobile Application Development",
+   "ar": "تطوير التطبيقات المتنقلة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 484",
+   "ar_code": "هاب 484",
+   "en": "Multimedia Computing",
+   "ar": "حوسبة الوسائط المتعددة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 485",
+   "ar_code": "هاب 485",
+   "en": "Selected Topics in Software Engineering",
+   "ar": "موضوعات مختارة في هندسة البرمجيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 486",
+   "ar_code": "هاب 486",
+   "en": "Cloud Computing and Big Data",
+   "ar": "الحوسبة السحابية والبيانات الضخمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 488",
+   "ar_code": "هاب 488",
+   "en": "Complex System Engineering",
+   "ar": "هندسة النظم المعقدة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 496",
+   "ar_code": "هاب 496",
+   "en": "Graduation Project I",
+   "ar": "مشروع تخرج 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SWE 497",
+   "ar_code": "هاب 497",
+   "en": "Graduation Project II",
+   "ar": "مشروع تخرج 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 201",
+   "ar_code": "",
+   "en": "Fundamentals & Ethics of Information Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 230",
+   "ar_code": "نال 230",
+   "en": "Introduction to Database Systems",
+   "ar": "أسس قواعد البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 240",
+   "ar_code": "",
+   "en": "Information Systems Analysis & Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 324",
+   "ar_code": "",
+   "en": "Modern Applications Development",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 335",
+   "ar_code": "نال 335",
+   "en": "Database Management Systems",
+   "ar": "نظم إدارة قواعد البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 340",
+   "ar_code": "",
+   "en": "Information Systems Analysis & Design (2)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 351",
+   "ar_code": "",
+   "en": "Information Systems Project Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 362",
+   "ar_code": "",
+   "en": "Mathematical Modeling for IS",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 370",
+   "ar_code": "",
+   "en": "Data Communications and Computer Networks",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 385",
+   "ar_code": "نال 385",
+   "en": "Enterprise Resource Planning Systems",
+   "ar": "نظم تخطيط موارد المؤسسات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 424",
+   "ar_code": "",
+   "en": "Web Application Development",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 432",
+   "ar_code": "",
+   "en": "Semi-Structured Data",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 436",
+   "ar_code": "",
+   "en": "DBMS Lab.",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 438",
+   "ar_code": "",
+   "en": "Introduction to Data Warehouses",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 442",
+   "ar_code": "",
+   "en": "Information Systems Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 451",
+   "ar_code": "",
+   "en": "Introduction to Enterprise Architecture",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 462",
+   "ar_code": "",
+   "en": "Information Systems Modeling and Simulation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 463",
+   "ar_code": "",
+   "en": "Introduction to Data Mining",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 466",
+   "ar_code": "",
+   "en": "Decision Support Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 468",
+   "ar_code": "",
+   "en": "Data Science Fundamentals",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 472",
+   "ar_code": "",
+   "en": "E-Health",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 474",
+   "ar_code": "",
+   "en": "Net-Centric Computing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 481",
+   "ar_code": "",
+   "en": "Business Process Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 482",
+   "ar_code": "",
+   "en": "Electronic Business",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 485",
+   "ar_code": "نال 485",
+   "en": "Enterprise Resource Planning Systems Lab",
+   "ar": "معمل نظم تخطيط المؤسسات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 486",
+   "ar_code": "",
+   "en": "Cloud Computing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 491",
+   "ar_code": "",
+   "en": "Selected Topics in Information Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 492",
+   "ar_code": "",
+   "en": "Introduction to Geographic Information Systems (GIS)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 493",
+   "ar_code": "",
+   "en": "Information Security",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 494",
+   "ar_code": "",
+   "en": "Practical Training",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "IS 495",
+   "ar_code": "",
+   "en": "Seminar",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "IS 498",
+   "ar_code": "",
+   "en": "Capstone Project-I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IS 499",
+   "ar_code": "",
+   "en": "Capstone Project-II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 211",
+   "ar_code": "هال 211",
+   "en": "Digital Logic Design I",
+   "ar": "التصميم المنطقي (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 212",
+   "ar_code": "هال 212",
+   "en": "Digital Logic Design II",
+   "ar": "التصميم المنطقي (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 303",
+   "ar_code": "هال 303",
+   "en": "Computer Communications and Networks",
+   "ar": "اتصالات وشبكات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 316",
+   "ar_code": "هال 316",
+   "en": "Computer Architecture",
+   "ar": "عمارة الحاسبات ولغات التجميع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 318",
+   "ar_code": "هال 318",
+   "en": "Embedded Systems Design",
+   "ar": "النظم المضمنة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 341",
+   "ar_code": "هال 341",
+   "en": "Data Communications",
+   "ar": "تراسل البيانات",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 351",
+   "ar_code": "هال 351",
+   "en": "Signals and Systems",
+   "ar": "إشارات ونظم",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 352",
+   "ar_code": "هال 352",
+   "en": "Digital Signal Processing",
+   "ar": "معالجة الإشارات الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 390",
+   "ar_code": "هال 390",
+   "en": "Computer Engineering Seminar",
+   "ar": "ندوة في هندسة الحاسب",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CEN 402",
+   "ar_code": "هال 402",
+   "en": "Introduction to Random Processes",
+   "ar": "مقدمة في العمليات العشوائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 413",
+   "ar_code": "هال 413",
+   "en": "Computer Architecture II",
+   "ar": "معمارية الحاسب (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 414",
+   "ar_code": "هال 414",
+   "en": "Programmable Logic Devices",
+   "ar": "مصفوفة البوابات الرقمية وبرمجتها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 415",
+   "ar_code": "هال 415",
+   "en": "Introduction to VLSI Design",
+   "ar": "مقدمة في تصميم الدوائر المتكاملة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 416",
+   "ar_code": "هال 416",
+   "en": "Introduction to Computer Arithmetic",
+   "ar": "مقدمة في الحساب الحاسوبي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 441",
+   "ar_code": "هال 441",
+   "en": "Computer Networks",
+   "ar": "شبكات الحاسب",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 442",
+   "ar_code": "هال 442",
+   "en": "Computer and Network Security",
+   "ar": "أمن الحاسب والشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 443",
+   "ar_code": "هال 443",
+   "en": "Wireless & Sensor Networks",
+   "ar": "الشبكات اللاسلكية وشبكات الاستشعار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 445",
+   "ar_code": "هال 445",
+   "en": "Network Protocols & Algorithms",
+   "ar": "بروتوكولات وخوارزميات الشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 446",
+   "ar_code": "هال 446",
+   "en": "Network Design & Management",
+   "ar": "تصميم وإدارة الشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 453",
+   "ar_code": "هال 453",
+   "en": "Digital Control & Robotics",
+   "ar": "التحكم الرقمي والروبوتية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CEN 454",
+   "ar_code": "هال 454",
+   "en": "Intelligent Systems",
+   "ar": "الأنظمة الذكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 459",
+   "ar_code": "هال 459",
+   "en": "Robotics",
+   "ar": "الروبوتية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 460",
+   "ar_code": "هال 460",
+   "en": "Digital Speech Processing",
+   "ar": "معالجة الكلام الرقمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 465",
+   "ar_code": "هال 465",
+   "en": "Digital Image Processing",
+   "ar": "معالجة الصور الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 479",
+   "ar_code": "هال 479",
+   "en": "Practical Training",
+   "ar": "التدريب الميداني",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CEN 490",
+   "ar_code": "هال 490",
+   "en": "Engineering Design & Project Management",
+   "ar": "التصميم الهندسي وإدارة المشاريع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 491",
+   "ar_code": "هال 491",
+   "en": "Selected Topics in Computer Engineering",
+   "ar": "مواضيع مختارة في هندسة الحاسبات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 492",
+   "ar_code": "هال 492",
+   "en": "Graduation Project I",
+   "ar": "مشروع تخرج (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CEN 493",
+   "ar_code": "هال 493",
+   "en": "Graduation Project II",
+   "ar": "مشروع تخرج (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 210",
+   "ar_code": "تم 210",
+   "en": "Information Technology Fundamentals",
+   "ar": "المبادئ الأساسية لتقنية المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 214",
+   "ar_code": "تم 214",
+   "en": "User Experience Design",
+   "ar": "تصميم تجربة المستخدم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 216",
+   "ar_code": "تم 216",
+   "en": "Physics for IT",
+   "ar": "الفيزياء لتقنية المعلومات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IT 222",
+   "ar_code": "تم 222",
+   "en": "Database Principles",
+   "ar": "مبادئ قواعد البيانات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 324",
+   "ar_code": "تم 324",
+   "en": "Information Security",
+   "ar": "أمن المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 327",
+   "ar_code": "تم 327",
+   "en": "Practical Software Engineering",
+   "ar": "هندسة البرمجيات العملية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 328",
+   "ar_code": "تم 328",
+   "en": "Network Principles",
+   "ar": "مبادئ شبكات الحاسب",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "IT 330",
+   "ar_code": "تم 330",
+   "en": "Web Applications Engineering",
+   "ar": "هندسة تطبيقات الويب",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "IT 333",
+   "ar_code": "تم 333",
+   "en": "Prototyping & Game Data System",
+   "ar": "النمذجة الأولية وأنظمة بيانات الألعاب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 335",
+   "ar_code": "تم 335",
+   "en": "Gameplay Systems & Interactive Design",
+   "ar": "أنظمة اللعب والتصميم التفاعلي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 336",
+   "ar_code": "تم 336",
+   "en": "Introduction to Gameplay Programming",
+   "ar": "مقدمة في برمجة الألعاب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 362",
+   "ar_code": "تم 362",
+   "en": "Principles of Data Science",
+   "ar": "أساسيات علم البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 363",
+   "ar_code": "تم 363",
+   "en": "Mobile Computing and Satellite Systems",
+   "ar": "الحوسبة المتنقلة وأنظمة الأقمار الصناعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 365",
+   "ar_code": "تم 365",
+   "en": "Robotics Systems",
+   "ar": "أنظمة الروبوتات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 371",
+   "ar_code": "تم 371",
+   "en": "Application Security",
+   "ar": "أمن التطبيقات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 382",
+   "ar_code": "تم 382",
+   "en": "IoT Security and Privacy",
+   "ar": "أمن وخصوصية إنترنت الأشياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 384",
+   "ar_code": "تم 384",
+   "en": "Edge and Cloud Computing",
+   "ar": "الحوسبة الطرفية والسحابية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 385",
+   "ar_code": "تم 385",
+   "en": "IoT Big Data Analytics",
+   "ar": "تحليل البيانات الضخمة لإنترنت الأشياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 424",
+   "ar_code": "تم 424",
+   "en": "Introduction to Project Management",
+   "ar": "مقدمة في ادارة المشاريع",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IT 426",
+   "ar_code": "تم 426",
+   "en": "Artificial Intelligence Systems",
+   "ar": "أنظمة الذكاء الاصطناعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 427",
+   "ar_code": "تم 427",
+   "en": "IT Entrepreneurship & Innovation",
+   "ar": "ريادة الأعمال والإبداع في تقنية المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 428",
+   "ar_code": "تم 428",
+   "en": "Machine Learning and Data Mining",
+   "ar": "تعلم الآلة والتنقيب في البيانات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 431",
+   "ar_code": "تم 431",
+   "en": "Game Architecture & System Design",
+   "ar": "عمارة الألعاب وتصميم الأنظمة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 432",
+   "ar_code": "تم 432",
+   "en": "Online Game System & Infrastructure",
+   "ar": "أنظمة وبنية الألعاب عبر الإنترنت",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 433",
+   "ar_code": "تم 433",
+   "en": "UI/UX for Interactive Systems",
+   "ar": "واجهة وتجربة المستخدم للأنظمة التفاعلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 435",
+   "ar_code": "تم 435",
+   "en": "Tools Development for Game Production",
+   "ar": "تطوير الأدوات لإنتاج الألعاب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 436",
+   "ar_code": "تم 436",
+   "en": "Game Graphics & Visual Effects",
+   "ar": "رسوميات الألعاب والمؤثرات البصرية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 437",
+   "ar_code": "تم 437",
+   "en": "Science Foundations for Game Development",
+   "ar": "الأسس العلمية لتطوير الألعاب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 438",
+   "ar_code": "تم 438",
+   "en": "Testing & Optimization",
+   "ar": "الاختبار والتحسين",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 439",
+   "ar_code": "تم 439",
+   "en": "Interactive AI for Game Development",
+   "ar": "الذكاء الاصطناعي التفاعلي لتطوير الألعاب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 462",
+   "ar_code": "تم 462",
+   "en": "Big Data Systems",
+   "ar": "أنظمة البيانات الضخمة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 463",
+   "ar_code": "تم 463",
+   "en": "Advance Machine Learning Systems",
+   "ar": "أنظمة تعلم الآلة المتقدمة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 465",
+   "ar_code": "تم 465",
+   "en": "Data Analytics & Visualization",
+   "ar": "تحليل البيانات وتمثيلها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 468",
+   "ar_code": "تم 468",
+   "en": "Applied Computer Vision",
+   "ar": "الرؤية الحاسوبية التطبيقية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 469",
+   "ar_code": "تم 469",
+   "en": "Human Language Technologies",
+   "ar": "تقنيات اللغات البشرية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 471",
+   "ar_code": "تم 471",
+   "en": "Cyber Security Governance",
+   "ar": "إدارة الأمن الإلكتروني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 472",
+   "ar_code": "تم 472",
+   "en": "Cybercrime and Digital Forensics",
+   "ar": "الجريمة الإلكترونية والعلوم الجنائية الرقمية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 477",
+   "ar_code": "تم 477",
+   "en": "Applied Network Security",
+   "ar": "أمن الشبكات التطبيقي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 481",
+   "ar_code": "تم 481",
+   "en": "Introduction to IoT",
+   "ar": "مقدمة في إنترنت الأشياء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 483",
+   "ar_code": "تم 483",
+   "en": "IoT Services & Applications",
+   "ar": "خدمات وتطبيقات إنترنت الأشياء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IT 486",
+   "ar_code": "تم 486",
+   "en": "Selected Topics in Networks & IoT",
+   "ar": "مواضيع مختارة في الشبكات وإنترنت الأشياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 487",
+   "ar_code": "تم 487",
+   "en": "Green Computing & Sustainability",
+   "ar": "الحوسبة الخضراء والاستدامة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 488",
+   "ar_code": "تم 488",
+   "en": "Digital Twin Systems and Applications",
+   "ar": "أنظمة وتطبيقات التوأم الرقمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 489",
+   "ar_code": "تم 489",
+   "en": "Selected Topics in IT",
+   "ar": "مواضيع مختارة في تقنية المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 492",
+   "ar_code": "تم 492",
+   "en": "Practical Training",
+   "ar": "التدريب الميداني",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "IT 496",
+   "ar_code": "تم 496",
+   "en": "Graduation Project -1",
+   "ar": "مشروع -1-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IT 497",
+   "ar_code": "تم 497",
+   "en": "Graduation Project -2",
+   "ar": "مشروع -2-",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "cs",
+   "ar": "علوم الحاسب",
+   "en": "Computer Science",
+   "courses": [
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CSC 111",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 151",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "CSC 113",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CSC 220",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CSC 281",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "CSC 212",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 304",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 339",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 380",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 215",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 216",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 227",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 311",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 329",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 361",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 429",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 340",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CSC 343",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CSC 453",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CSC 480",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "CSC 437",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "CSC 479",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "CSC 496",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "CSC 494",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "CSC 488",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "CSC 497",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "CSC 495",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "CSC 492",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "CSC 462",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "CSC 312",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 320",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 350",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 384",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 386",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 440",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 489",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 469",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 472",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 478",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 439",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 445",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "is",
+   "ar": "نظم المعلومات",
+   "en": "Information Systems",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 151",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "IS 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CSC 113",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "IS 230",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IS 240",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 121",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CSC 212",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "IS 324",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IS 340",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IS 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IS 362",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "CSC 227",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "IS 335",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IS 370",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IS 385",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "BUS 330",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "IS 424",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IS 482",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IS 493",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": 8
+    },
+    {
+     "code": "IS 495",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IS 494",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "IS 498",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "IS 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IS 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 438",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 442",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 468",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 472",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 491",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 492",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "swe",
+   "ar": "هندسة البرمجيات",
+   "en": "Software Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 151",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "SWE 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CSC 113",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CEN 303",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CSC 220",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CSC 212",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "SWE 314",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "SWE 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 227",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "IS 230",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "SWE 321",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SWE 381",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SWE 333",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "SWE 482",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SWE 434",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SWE 444",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SWE 477",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SWE 455",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "SWE 466",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": 8
+    },
+    {
+     "code": "SWE 479",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "SWE 496",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "SWE 497",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "SWE 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 488",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 316",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 318",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 215",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 311",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 361",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 476",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 478",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 385",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 200",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 254",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 122",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BIOL 145",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BCH 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIC 140",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "ce",
+   "ar": "هندسة الحاسب",
+   "en": "Computer Engineering",
+   "courses": [
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 151",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CEN 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CSC 113",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 205",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENG 109",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CEN 212",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CSC 212",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "EE 207",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CEN 316",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CEN 351",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CSC 227",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "EE 310",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "EE 312",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "CEN 352",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CEN 341",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CEN 318",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CEN 390",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SWE 211",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "CEN 453",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CEN 441",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CEN 415",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CEN 490",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CSC 311",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "CEN 442",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 9
+    },
+    {
+     "code": "CEN 479",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CEN 492",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "CEN 493",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "CEN 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 414",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 459",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CEN 491",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 230",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 335",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IS 385",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 361",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 380",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 312",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 321",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SWE 486",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "it",
+   "ar": "تقنية المعلومات",
+   "en": "Information Technology",
+   "courses": [
+    {
+     "code": "ENGS 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "IT 216",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 151",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "IT 210",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "CSC 113",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "IT 214",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IT 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IT 328",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CSC 212",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "IT 426",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IT 330",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IT 481",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IT 336",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "IT 428",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IT 327",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IT 324",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "IT 424",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CSC 227",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "IT 427",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IT 492",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "IT 496",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "IT 497",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IT 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IT 371",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 471",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 384",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IT 382",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 385",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 335",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IT 333",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 431",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IT 472",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 462",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 463",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 469",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 477",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 468",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 465",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 489",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 363",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 488",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 483",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 365",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 487",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 486",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 433",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 432",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 439",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 435",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 436",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 437",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IT 438",
+     "kind": "elective",
+     "level": 8
+    }
+   ]
+  }
+ ]
+}

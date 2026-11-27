@@ -1,0 +1,3041 @@
+{
+ "college": "cba",
+ "sources": [
+  {
+   "program": "mis",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2343/INFN%20Study%20Plan%20-%20English.pdf",
+   "title": "Study Plan, Major INFN Management Information Systems (KSU registrar printout, edition 2, plan 134 hrs)",
+   "year": "2023"
+  },
+  {
+   "program": "mis",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2343/__%D8%AE%D8%B7%D8%A9%20%D9%86%D8%B8%D9%85%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D9%8A%D8%A9_.pdf",
+   "title": "الخطة الدراسية - نظم المعلومات الإدارية (registrar printout, Arabic)",
+   "year": "2023"
+  },
+  {
+   "program": "acct",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2343/Acct%20Study%20Plan%20134.pdf",
+   "title": "Study Plan, Major ACTN Accounting (KSU registrar printout, edition 2, plan 134 hrs)",
+   "year": "2023"
+  },
+  {
+   "program": "econ",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2144/%D9%85%D8%B3%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85.pdf",
+   "title": "الخطة الدراسية - الاقتصاد، مسار الاقتصاد العام ECN1 (registrar printout, Arabic)",
+   "year": "2024"
+  },
+  {
+   "program": "econ",
+   "url": "https://cba.ksu.edu.sa/en/ECON/bachalar",
+   "title": "Study Plan (Economics) - English names only",
+   "year": ""
+  },
+  {
+   "program": "mkt",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2344/%D8%AE%D8%B7%D8%A9%20%D9%82%D8%B3%D9%85%20%D8%A7%D9%84%D8%AA%D8%B3%D9%88%D9%8A%D9%82-%20134%20(1).pdf",
+   "title": "الخطة الدراسية - التسويق MRKN (registrar printout, Arabic, plan 134 hrs)",
+   "year": "2019"
+  },
+  {
+   "program": "mkt",
+   "url": "https://cba.ksu.edu.sa/en/MKT/bachalar",
+   "title": "Study Plan (BSBA major in Marketing) - English names only",
+   "year": ""
+  },
+  {
+   "program": "fin",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/inline-images/Finance%20Plan.jpg",
+   "title": "Finance Major Plan (levels 5-9 infographic), linked from https://cba.ksu.edu.sa/en/node/33760",
+   "year": ""
+  },
+  {
+   "program": "fin",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/inline-images/%D8%AE%D8%B7%D8%A9%20%D9%82%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%D8%A9.png",
+   "title": "خطة قسم المالية (Arabic infographic)",
+   "year": ""
+  },
+  {
+   "program": "fin",
+   "url": "https://cba.ksu.edu.sa/en/FIN/bachalar",
+   "title": "Study Plan (BSBA major in Finance) - older plan, used only for credit hours / English names",
+   "year": ""
+  },
+  {
+   "program": "fin",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/imce_images/twsyf_mqrrt_lbklwryws_bqsm_lmly-mnhjy_jdyd_1.pdf",
+   "title": "Finance course descriptions (names for FIN electives)",
+   "year": "2022"
+  },
+  {
+   "program": "mgt",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2144/Study%20Plan%20(Management).pdf",
+   "title": "Detailed Course Requirements (Management Track), 134 hrs",
+   "year": "2024"
+  },
+  {
+   "program": "mgt",
+   "url": "https://cba.ksu.edu.sa/sites/cba.ksu.edu.sa/files/users/user2144/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20(%D8%A7%D9%95%D8%AF%D8%A7%D8%B1%D8%A9).pdf",
+   "title": "الخطة الدراسية (إدارة) - مسار إدارة",
+   "year": "2024"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ACCT 201",
+   "ar_code": "حسب 201",
+   "en": "Principles of Accounting & Financial Reporting",
+   "ar": "مباديء المحاسبة والتقرير المالي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 202",
+   "ar_code": "حسب 202",
+   "en": "Principles of Cost & Managerial Accounting",
+   "ar": "مباديء التكاليف والمحاسبة الإدارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 311",
+   "ar_code": "",
+   "en": "Accounting for Government and Non-Profit Organizations",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 317",
+   "ar_code": "",
+   "en": "Intermediate Accounting (1)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 318",
+   "ar_code": "",
+   "en": "Intermediate Accounting (2)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 401",
+   "ar_code": "",
+   "en": "Advanced Accounting",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 414",
+   "ar_code": "",
+   "en": "Accounting for Zakat & Tax",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 415",
+   "ar_code": "",
+   "en": "Financial Reports Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 416",
+   "ar_code": "",
+   "en": "Accounting Theory",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 421",
+   "ar_code": "",
+   "en": "Accounting in Specialized Enterprises",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 433",
+   "ar_code": "",
+   "en": "Managerial Accounting & Decision Making",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 435",
+   "ar_code": "",
+   "en": "Cost Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 444",
+   "ar_code": "",
+   "en": "Auditing & Assurance Services",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 461",
+   "ar_code": "",
+   "en": "Accounting Information Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 465",
+   "ar_code": "",
+   "en": "Computerized Accounting Applications",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 471",
+   "ar_code": "",
+   "en": "Control & Internal Auditing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACCT 477",
+   "ar_code": "",
+   "en": "Coop. Training",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ACCT 481",
+   "ar_code": "",
+   "en": "International Accounting",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARAB 101",
+   "ar_code": "عرب 101",
+   "en": "Language Skills",
+   "ar": "المهارات اللغوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARAB 103",
+   "ar_code": "عرب 103",
+   "en": "Expository Writing",
+   "ar": "التحرير العربي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BUS 101",
+   "ar_code": "ادا 101",
+   "en": "Principles of Management & Business",
+   "ar": "مباديء الإدارة والأعمال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 110",
+   "ar_code": "ادا 110",
+   "en": "Managerial Skills",
+   "ar": "المهارات الادارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 201",
+   "ar_code": "ادا 201",
+   "en": "Managerial Leadership",
+   "ar": "القيادة الإدارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 202",
+   "ar_code": "ادا 202",
+   "en": "Human Resources Management",
+   "ar": "إدارة الموارد البشرية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 211",
+   "ar_code": "ادا 211",
+   "en": "Research Methodology",
+   "ar": "منهج بحث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 213",
+   "ar_code": "ادا 213",
+   "en": "Organizational Theories and Design",
+   "ar": "نظريات التنظيم وتصميم المنظمات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 214",
+   "ar_code": "ادا 214",
+   "en": "Business Ethics & Social Responsibility",
+   "ar": "أخلاقيات العمل والمسؤولية الاجتماعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 221",
+   "ar_code": "ادا 221",
+   "en": "Organizational Behavior",
+   "ar": "السلوك التنظيمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 251",
+   "ar_code": "ادا 251",
+   "en": "Knowledge Management",
+   "ar": "إدارة المعرفة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 301",
+   "ar_code": "ادا 301",
+   "en": "International Human Resources Management",
+   "ar": "إدارة الموارد البشرية الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 302",
+   "ar_code": "ادا 302",
+   "en": "International Business",
+   "ar": "إدارة الأعمال الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 303",
+   "ar_code": "ادا 303",
+   "en": "Entrepreneurship and Innovation",
+   "ar": "ريادة الاعمال والابتكار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 318",
+   "ar_code": "ادا 318",
+   "en": "Quality Management",
+   "ar": "إدارة الجودة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 319",
+   "ar_code": "ادا 319",
+   "en": "Management of Small & Medium Size Businesses",
+   "ar": "إدارة المشروعات الصغيرة والمتوسطة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 371",
+   "ar_code": "ادا 371",
+   "en": "Operations Management",
+   "ar": "إدارة العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 372",
+   "ar_code": "ادا 372",
+   "en": "Supply Chain Management",
+   "ar": "إدارة سلسلة الإمداد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 411",
+   "ar_code": "ادا 411",
+   "en": "Strategic Management",
+   "ar": "الإدارة الإستراتيجية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 416",
+   "ar_code": "ادا 416",
+   "en": "Strategic Human Resources Management",
+   "ar": "الادارة الاستراتيجية للموارد البشرية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 418",
+   "ar_code": "ادا 418",
+   "en": "Occupational Safety and Health Management",
+   "ar": "إدارة الصحة والسلامة المهنية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 425",
+   "ar_code": "ادا 425",
+   "en": "Organizational Change & Development",
+   "ar": "التغيير والتطوير التنظيمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 427",
+   "ar_code": "ادا 427",
+   "en": "Corporate Governance",
+   "ar": "حوكمة المنظمات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 477",
+   "ar_code": "ادا 477",
+   "en": "Co-Op Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "Academic Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "IT Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 101",
+   "ar_code": "قصد 101",
+   "en": "Principles of Microeconomics",
+   "ar": "مباديء الاقتصاد الجزئي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 102",
+   "ar_code": "قصد 102",
+   "en": "Principles of Macroeconomics",
+   "ar": "مباديء الاقتصاد الكلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 201",
+   "ar_code": "قصد 201",
+   "en": "Microeconomic Analysis",
+   "ar": "تحليل اقتصادي جزئي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 202",
+   "ar_code": "قصد 202",
+   "en": "Macroeconomic Analysis",
+   "ar": "تحليل اقتصادي كلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 211",
+   "ar_code": "قصد 211",
+   "en": "Money & Banking",
+   "ar": "اقتصاديات نقود وبنوك",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 212",
+   "ar_code": "قصد 212",
+   "en": "Principles of Public Finance",
+   "ar": "مبادىء المالية العامة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 311",
+   "ar_code": "قصد 311",
+   "en": "Economics of Resources and Environment",
+   "ar": "اقتصاديات الموارد والبيئة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 312",
+   "ar_code": "قصد 312",
+   "en": "International Trade",
+   "ar": "التجارة الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 313",
+   "ar_code": "قصد 313",
+   "en": "Development of Economic Thought",
+   "ar": "تطور الفكر الاقتصادي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 314",
+   "ar_code": "قصد 314",
+   "en": "Islamic Economics",
+   "ar": "الاقتصاد الإسلامي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 317",
+   "ar_code": "قصد 317",
+   "en": "Managerial Economics",
+   "ar": "اقتصاديات الإدارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 318",
+   "ar_code": "قصد 318",
+   "en": "Economics of Transportation and Insurance",
+   "ar": "اقتصاديات النقل والتأمين",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 323",
+   "ar_code": "قصد 323",
+   "en": "Mathematical Economics",
+   "ar": "اقتصاد رياضي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 325",
+   "ar_code": "قصد 325",
+   "en": "International Finance",
+   "ar": "التمويل الدولي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 327",
+   "ar_code": "قصد 327",
+   "en": "Knowledge Economics",
+   "ar": "اقتصاديات المعرفة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 329",
+   "ar_code": "قصد 329",
+   "en": "Economics of Development & Planning",
+   "ar": "اقتصاديات التنمية والتخطيط",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 330",
+   "ar_code": "قصد 330",
+   "en": "",
+   "ar": "سياسات وتنظيم التجارة الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 413",
+   "ar_code": "قصد 413",
+   "en": "The Economy of Saudi Arabia",
+   "ar": "الاقتصاد العربي السعودي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 414",
+   "ar_code": "قصد 414",
+   "en": "Islamic Banking Services",
+   "ar": "الخدمات المصرفية الإسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 416",
+   "ar_code": "قصد 416",
+   "en": "Econometrics",
+   "ar": "اقتصاد قياسي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 417",
+   "ar_code": "قصد 417",
+   "en": "International Investment",
+   "ar": "الاستثمار الدولي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 418",
+   "ar_code": "قصد 418",
+   "en": "Economics of Energy",
+   "ar": "اقتصاديات الطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 419",
+   "ar_code": "قصد 419",
+   "en": "International Economic Organizations",
+   "ar": "المنظمات والمؤسسات الاقتصادية الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 421",
+   "ar_code": "قصد 421",
+   "en": "Feasibility Studies & Project Evaluation",
+   "ar": "دراسات الجدوى وتقييم المشروعات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 422",
+   "ar_code": "قصد 422",
+   "en": "Urban and Regional Economics",
+   "ar": "الاقتصاد العمراني والإقليمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 423",
+   "ar_code": "قصد 423",
+   "en": "Applied Econometrics",
+   "ar": "اقتصاد قياسي تطبيقي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 425",
+   "ar_code": "قصد 425",
+   "en": "Asset Management & Finance in Islamic Banking",
+   "ar": "إدارة الأصول والتمويل للصيرفة الإسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 426",
+   "ar_code": "قصد 426",
+   "en": "Islamic Financial System",
+   "ar": "النظام المصرفي الإسلامي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 428",
+   "ar_code": "قصد 428",
+   "en": "Islamic Financial Innovations & Products",
+   "ar": "المنتجات والابتكارات المالية الإسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 430",
+   "ar_code": "قصد 430",
+   "en": "Topics in Islamic Banking",
+   "ar": "مواضيع متخصصة في البنوك والمصرفية الإسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 431",
+   "ar_code": "قصد 431",
+   "en": "Industrial Economics",
+   "ar": "اقتصاد صناعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 435",
+   "ar_code": "قصد 435",
+   "en": "Labor Economics",
+   "ar": "اقتصاديات العمل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 440",
+   "ar_code": "قصد 440",
+   "en": "Topics in Trade and Finance",
+   "ar": "مواضيع متخصصة في التجارة والتمويل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 450",
+   "ar_code": "قصد 450",
+   "en": "Research Seminar (Graduation Project)",
+   "ar": "مشروع تخرج",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 477",
+   "ar_code": "قصد 477",
+   "en": "Cooperative Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "انجل 110",
+   "en": "English",
+   "ar": "لغة إنجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness & Culture Health",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "FIN 200",
+   "ar_code": "مال 200",
+   "en": "Principles of Finance",
+   "ar": "مبادئ المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 210",
+   "ar_code": "مال 210",
+   "en": "Corporate Finance",
+   "ar": "مالية الشركات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 220",
+   "ar_code": "مال 220",
+   "en": "Investment Essentials",
+   "ar": "أساسيات الاستثمار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 230",
+   "ar_code": "مال 230",
+   "en": "Financial Markets & Institutions",
+   "ar": "الأسواق والمؤسسات المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 240",
+   "ar_code": "مال 240",
+   "en": "Principles of Risk & Insurance",
+   "ar": "أساسيات الخطر والتأمين",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 250",
+   "ar_code": "مال 250",
+   "en": "International Finance",
+   "ar": "المالية الدولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 260",
+   "ar_code": "مال 260",
+   "en": "Financial Modeling",
+   "ar": "النمذجة المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 351",
+   "ar_code": "مال 351",
+   "en": "Real Estate Finance & Investment",
+   "ar": "التمويل والاستثمار العقاري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 361",
+   "ar_code": "مال 361",
+   "en": "Financial Derivatives",
+   "ar": "المشتقات المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 362",
+   "ar_code": "مال 362",
+   "en": "Assets Valuation",
+   "ar": "تقييم الأصول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 363",
+   "ar_code": "مال 363",
+   "en": "Portfolio Theory & Investment Analysis",
+   "ar": "المحفظة المالية وتحليل الاستثمار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 371",
+   "ar_code": "مال 371",
+   "en": "Banking Operations",
+   "ar": "العمليات البنكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 372",
+   "ar_code": "مال 372",
+   "en": "Bank Lending and Credit Analysis",
+   "ar": "الإقراض وتحليل الإئتمان",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 373",
+   "ar_code": "مال 373",
+   "en": "Financial Risk Management",
+   "ar": "إدارة المخاطر المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 451",
+   "ar_code": "مال 451",
+   "en": "Financial Engineering",
+   "ar": "الهندسة المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 461",
+   "ar_code": "مال 461",
+   "en": "Case Studies in Investment",
+   "ar": "حالات دراسية في الاستثمار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 462",
+   "ar_code": "مال 462",
+   "en": "Assets Management",
+   "ar": "إدارة الأصول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 463",
+   "ar_code": "مال 463",
+   "en": "Selected Topics in Investment",
+   "ar": "موضوعات مختارة في الاستثمار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 477",
+   "ar_code": "مال 477",
+   "en": "Co-Op Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the prophet biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Principles of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Economic System in Islam",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "اخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Current Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Development Role of Women",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "LAWA 101",
+   "ar_code": "",
+   "en": "Principles of Law",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "LAWA 113",
+   "ar_code": "",
+   "en": "Introduction to Islamic Jurisprudence",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "LAWA 226",
+   "ar_code": "حقق 226",
+   "en": "Commercial Law",
+   "ar": "القانون التجاري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "LAWA 231",
+   "ar_code": "",
+   "en": "Zakat & Taxation Law",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MC 205",
+   "ar_code": "علم 205",
+   "en": "Speech Communication",
+   "ar": "الاتصال الخطابي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 201",
+   "ar_code": "نما 201",
+   "en": "Management Information Systems",
+   "ar": "نظم المعلومات الإدارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 211",
+   "ar_code": "نما 211",
+   "en": "Business Computer Programming",
+   "ar": "برمجة الحاسب في الإدارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 214",
+   "ar_code": "نما 214",
+   "en": "Introduction to Databases",
+   "ar": "مقدمة في قواعد البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 215",
+   "ar_code": "نما 215",
+   "en": "Information System Analysis & Design (1)",
+   "ar": "تحليل وتصميم نظم المعلومات (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 321",
+   "ar_code": "نما 321",
+   "en": "Advanced Databases",
+   "ar": "قواعد البيانات المتقدمه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 323",
+   "ar_code": "نما 323",
+   "en": "Information System Analysis & Design (2)",
+   "ar": "تحليل وتصميم نظم المعلومات (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 333",
+   "ar_code": "نما 333",
+   "en": "Principle of Information System Security",
+   "ar": "مقدمه فى  أمن نظم المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 350",
+   "ar_code": "نما 350",
+   "en": "Decision Support System & Expert Systems",
+   "ar": "نظام مساندة القرارات والنظم الخبيرة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 354",
+   "ar_code": "نما 354",
+   "en": "Enterprise Resource Planning (ERP)",
+   "ar": "نظم تخطيط موارد المنشأة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 366",
+   "ar_code": "نما 366",
+   "en": "Web-Based Applications",
+   "ar": "تطبيقات اداريه تعتمد على الويب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 419",
+   "ar_code": "نما 419",
+   "en": "Knowledge Management & Data Mining",
+   "ar": "إدارة المعرفة والتنقيب على البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 430",
+   "ar_code": "نما 430",
+   "en": "Business Data Communication & Network Management",
+   "ar": "اتصالات بيانات الأعمال وإدارة الشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 431",
+   "ar_code": "نما 431",
+   "en": "Selected Topics in Management Information Systems (1)",
+   "ar": "موضوعات مختارة في نظم المعلومات الإدارية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 433",
+   "ar_code": "نما 433",
+   "en": "Information Security Policies",
+   "ar": "سياسات أمن المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 437",
+   "ar_code": "نما 437",
+   "en": "Electronic Business",
+   "ar": "الأعمال الإلكترونية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 450",
+   "ar_code": "نما 450",
+   "en": "E-Healthcare Information Systems",
+   "ar": "نظم معلومات العناية الصحية الالكترونية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 460",
+   "ar_code": "نما 460",
+   "en": "Project Management in Information Technology",
+   "ar": "إدارة مشاريع تقنية المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 477",
+   "ar_code": "نما 477",
+   "en": "Co-Op Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "MKT 201",
+   "ar_code": "تسق 201",
+   "en": "Principles of Marketing",
+   "ar": "مباديء التسويق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 301",
+   "ar_code": "تسق 301",
+   "en": "Consumer Behavior",
+   "ar": "سلوك المستهلك",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 302",
+   "ar_code": "تسق 302",
+   "en": "Marketing Research",
+   "ar": "بحوث التسويق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 303",
+   "ar_code": "تسق 303",
+   "en": "Selling Skills & Sales Management",
+   "ar": "مهارات البيع وإدارة المبيعات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 304",
+   "ar_code": "تسق 304",
+   "en": "Global Marketing",
+   "ar": "التسويق العالمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 401",
+   "ar_code": "تسق 401",
+   "en": "Marketing Communication",
+   "ar": "الاتصالات التسويقية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 402",
+   "ar_code": "تسق 402",
+   "en": "Distribution Management & Marketing Institutions",
+   "ar": "إدارة التوزيع والمنشآت التسويقية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 403",
+   "ar_code": "تسق 403",
+   "en": "Electronic Marketing",
+   "ar": "التسويق الإلكتروني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 410",
+   "ar_code": "تسق 410",
+   "en": "Strategic Marketing",
+   "ar": "التسويق الاستراتيجي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 420",
+   "ar_code": "تسق 420",
+   "en": "Contemporary Marketing Issues",
+   "ar": "موضوعات معاصرة في التسويق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 452",
+   "ar_code": "تسق 452",
+   "en": "Service Marketing",
+   "ar": "تسويق الخدمات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 454",
+   "ar_code": "تسق 454",
+   "en": "Industrial Marketing",
+   "ar": "التسويق الصناعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 455",
+   "ar_code": "تسق 455",
+   "en": "Product Management",
+   "ar": "إدارة المنتجات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MKT 477",
+   "ar_code": "تسق 477",
+   "en": "Cooperative Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "Psycho 379",
+   "ar_code": "نفس 379",
+   "en": "Psychological Counseling in the Professional Field",
+   "ar": "الإرشاد النفسي في المجال المهني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "Psycho 480",
+   "ar_code": "نفس 480",
+   "en": "Industrial-Organizational Psychology",
+   "ar": "علم النفس الصناعي و التنظيمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QUA 107",
+   "ar_code": "كمى 107",
+   "en": "Introduction to Statistics in Business",
+   "ar": "مباديء الإحصاء في الإدارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QUA 204",
+   "ar_code": "كمى 204",
+   "en": "Linear Algebra in Business",
+   "ar": "الجبر الخطي للإدارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QUA 207",
+   "ar_code": "كمى 207",
+   "en": "Business Statistics",
+   "ar": "الإحصاء الإداري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QUA 217",
+   "ar_code": "كمي 217",
+   "en": "Operations Research in Management Science",
+   "ar": "بحوث العمليات في الإدارة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QUA 307",
+   "ar_code": "كمى 307",
+   "en": "Business Forecasting",
+   "ar": "التنبوء الإداري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Quran Kareem",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SOC 101",
+   "ar_code": "جمع 101",
+   "en": "Introduction to Sociology",
+   "ar": "مبادئ علم الاجتماع",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "mis",
+   "ar": "نظم المعلومات الإدارية",
+   "en": "Management Information Systems",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "QUA 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "QUA 207",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BUS 110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MIS 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MKT 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ACCT 202",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 214",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "QUA 204",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MIS 211",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MIS 214",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MIS 215",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MIS 350",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MIS 366",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BUS 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MIS 333",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MIS 354",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MKT 403",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BUS 411",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MIS 430",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MIS 437",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MIS 460",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MIS 477",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "BUS 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 302",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 303",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 372",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 410",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 321",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 323",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 419",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 431",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 450",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "mgt",
+   "ar": "الإدارة",
+   "en": "Management",
+   "courses": [
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ARAB 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QUA 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "BUS 110",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "BUS 214",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "ACCT 202",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "MKT 201",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "QUA 207",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "MIS 201",
+     "kind": "college",
+     "level": null
+    },
+    {
+     "code": "BUS 202",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 221",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "LAWA 226",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 211",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "QUA 217",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 371",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 411",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 201",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 425",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 303",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 213",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 302",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 372",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 427",
+     "kind": "major",
+     "level": null
+    },
+    {
+     "code": "BUS 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 418",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 251",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 318",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SOC 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "QUA 307",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "Psycho 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "Psycho 379",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 477",
+     "kind": "training",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "fin",
+   "ar": "المالية",
+   "en": "Finance",
+   "courses": [
+    {
+     "code": "FIN 210",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FIN 220",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FIN 230",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "LAWA 226",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "QUA 307",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FIN 250",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FIN 260",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BUS 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ECON 211",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FIN 361",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FIN 362",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ECON 414",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FIN 363",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BUS 411",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FIN 477",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "FIN 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 351",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 372",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 373",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 461",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 317",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 318",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 415",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 323",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "mkt",
+   "ar": "التسويق",
+   "en": "Marketing",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "QUA 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "QUA 207",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BUS 110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MIS 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ARAB 103",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MKT 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ACCT 202",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 214",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 221",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "LAWA 226",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MKT 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MKT 302",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BUS 303",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MKT 303",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BUS 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BUS 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MKT 401",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MKT 402",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BUS 411",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MKT 403",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MKT 410",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MKT 452",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MKT 477",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "BUS 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MC 205",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 211",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 211",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 214",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 302",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "QUA 307",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 319",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 327",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 350",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 304",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 420",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MKT 455",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "econ",
+   "ar": "الاقتصاد",
+   "en": "Economics",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "QUA 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "QUA 207",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BUS 110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MIS 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MKT 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ACCT 202",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 214",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ECON 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ECON 211",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ECON 212",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ECON 202",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ECON 312",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ECON 323",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ECON 329",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ECON 313",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ECON 325",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ECON 416",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ECON 435",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ECON 418",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ECON 423",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ECON 450",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "ECON 477",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 230",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 311",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 314",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 317",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 318",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 327",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 330",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 414",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 417",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 419",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 422",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 425",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 431",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 440",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 363",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 373",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 428",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 430",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "acct",
+   "ar": "المحاسبة",
+   "en": "Accounting",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "QUA 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "BUS 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "QUA 207",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BUS 110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MIS 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MKT 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ACCT 202",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BUS 214",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "LAWA 101",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FIN 210",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ACCT 317",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ACCT 433",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ECON 211",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "LAWA 226",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ACCT 311",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ACCT 318",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ACCT 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ACCT 414",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ACCT 415",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ACCT 444",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACCT 461",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACCT 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACCT 477",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ACCT 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "LAWA 113",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 214",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 230",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "LAWA 231",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 319",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 421",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,678 @@
+{
+ "college": "cfy",
+ "plan_year": "1448 AH (2026-2027)",
+ "sources": [
+  {
+   "program": "cfy-health",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-health",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-health",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-health",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-nurs",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-nurs",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-nurs",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-nurs",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-ams",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-ams",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-ams",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-ams",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/en/node/1196",
+   "title": "Differential Calculus (Math101)",
+   "year": "1447-1448 AH"
+  },
+  {
+   "program": "cfy-sci",
+   "url": "https://cfy.ksu.edu.sa/en/node/1199",
+   "title": "Introduction to Probability and Statistics (Stat 101)",
+   "year": "1447 AH"
+  },
+  {
+   "program": "cfy-bus",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-bus",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-bus",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-bus",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-hum",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%A7%D9%94%D8%B9%D9%85%D8%A7%D9%84%20%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%81%D8%B5%D9%84%20%D8%A7%D9%94%D9%88%D9%84%201448%20%D9%87%D9%80%20.pdf",
+   "title": "المخطط العام لتسليم الأعمال الفصلية — الفصل الدراسي الأول 1448هـ (per-track course list)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-hum",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1155",
+   "title": "مقررات القسم — قسم مهارات اللغة الإنجليزية (ENGL track/semester)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-hum",
+   "url": "https://cfy.ksu.edu.sa/ar/node/1047",
+   "title": "مقررات قسم مهارات تطوير الذات (CT/CI/EPH/ENT specs, v1448)",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-hum",
+   "url": "https://cfy.ksu.edu.sa/sites/cfy.ksu.edu.sa/files/attach/%D8%AC%D8%AF%D9%88%D9%84%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D9%94%D9%8A%D8%A9_0.pdf",
+   "title": "جدول الاختبارات النهائية — الفصل الأول 1448هـ",
+   "year": "1448 AH"
+  },
+  {
+   "program": "cfy-hum",
+   "url": "https://cfy.ksu.edu.sa/en/node/1202",
+   "title": "Principles of Statistics and Probabilities (Stat102)",
+   "year": "1447 AH"
+  }
+ ],
+ "courses": [
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "Computer Skills and Artificial Intelligence",
+   "ar": "مهارات الحاسب الآلي والذكاء الاصطناعي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CT 102",
+   "ar_code": "تقن 102",
+   "en": "Computer Skills and Artificial Intelligence",
+   "ar": "مهارات الحاسب الآلي والذكاء الاصطناعي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Literacy",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "MATH 101",
+   "ar_code": "ريض 101",
+   "en": "Differential Calculus",
+   "ar": "حساب التفاضل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 101",
+   "ar_code": "إحص 101",
+   "en": "Introduction to Probability and Statistics",
+   "ar": "مدخل إلى الاحتمالات والإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 102",
+   "ar_code": "إحص 102",
+   "en": "Principles of Statistics and Probability",
+   "ar": "مبادئ في الإحصاء والاحتمالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENGL 101",
+   "ar_code": "إنجل 101",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 102",
+   "ar_code": "إنجل 102",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 103",
+   "ar_code": "إنجل 103",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 104",
+   "ar_code": "إنجل 104",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 105",
+   "ar_code": "إنجل 105",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 106",
+   "ar_code": "إنجل 106",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 107",
+   "ar_code": "إنجل 107",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 108",
+   "ar_code": "إنجل 108",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 109",
+   "ar_code": "إنجل 109",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 111",
+   "ar_code": "",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 112",
+   "ar_code": "",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 113",
+   "ar_code": "إنجل 113",
+   "en": "English for Academic Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 114",
+   "ar_code": "",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 115",
+   "ar_code": "",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 116",
+   "ar_code": "إنجل 116",
+   "en": "English for Academic and Specific Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "cfy-health",
+   "ar": "السنة الأولى · الصحية",
+   "en": "Common First Year — Health Colleges",
+   "courses": [
+    {
+     "code": "ENGL 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 108",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 114",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 115",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 116",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cfy-nurs",
+   "ar": "السنة الأولى · التمريض",
+   "en": "Common First Year — Health Colleges track (College of Nursing)",
+   "courses": [
+    {
+     "code": "ENGL 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 108",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 114",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 115",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 116",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cfy-ams",
+   "ar": "السنة الأولى · العلوم الطبية التطبيقية",
+   "en": "Common First Year — Health Colleges track (College of Applied Medical Sciences)",
+   "courses": [
+    {
+     "code": "ENGL 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 108",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 114",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 115",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 116",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cfy-sci",
+   "ar": "السنة الأولى · العلمية",
+   "en": "Common First Year — Scientific Colleges",
+   "courses": [
+    {
+     "code": "ENGL 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 111",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 112",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 113",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cfy-bus",
+   "ar": "السنة الأولى · إدارة الأعمال",
+   "en": "Common First Year — Business Administration",
+   "courses": [
+    {
+     "code": "ENGL 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 111",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 112",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 113",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cfy-hum",
+   "ar": "السنة الأولى · الإنسانية",
+   "en": "Common First Year — Humanities Colleges",
+   "courses": [
+    {
+     "code": "ENGL 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 103",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  }
+ ]
+}
