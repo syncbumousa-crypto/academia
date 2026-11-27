@@ -1,0 +1,26 @@
+{
+ "built": "2026-11-27T15:40:13.456Z",
+ "term": "الفصل الأول 1448/1449",
+ "term_en": "First Semester 2026/2027",
+ "campuses_scraped": [
+  "الرياض- طلاب",
+  "الدراسات التطبيقية -طلاب (المستمر)",
+  "الرياض- طالبات",
+  "مركزالدراسات بعليشة -طالبات",
+  "فرع المزاحمية"
+ ],
+ "degrees_scraped": [
+  "البكالوريوس"
+ ],
+ "colleges": 20,
+ "depts": 77,
+ "majors": 136,
+ "majors_empty": [],
+ "courses": 2823,
+ "courses_with_en_code": 2805,
+ "courses_with_en_name": 2800,
+ "sections": 18623,
+ "sections_with_details": 0,
+ "sections_with_instructor": 0,
+ "problems": []
+}
