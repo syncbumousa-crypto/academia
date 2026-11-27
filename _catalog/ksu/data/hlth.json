@@ -1,0 +1,2678 @@
+{
+ "college": "hlth",
+ "sources": [
+  {
+   "program": "med",
+   "url": "https://medicine.ksu.edu.sa/sites/medicine.ksu.edu.sa/files/2025-11/The%20COM%20Undergraduate%20Medical%20Curriculum%201.pdf",
+   "title": "The COM Undergraduate Medical Curriculum (List of Required Courses)",
+   "year": "2025"
+  },
+  {
+   "program": "pharmd",
+   "url": "https://pharmacy.ksu.edu.sa/ar/node/2972",
+   "title": "دكتور صيدلة - برنامج الدراسة (study plan table, Arabic page)",
+   "year": "2024 (updated plan; page last updated 2026-11-18)"
+  },
+  {
+   "program": "pharmd",
+   "url": "https://pharmacy.ksu.edu.sa/sites/pharmacy.ksu.edu.sa/files/users/user154/%D9%88%D8%B5%D9%81%20%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA%20%D8%AE%D8%B7%D8%A9%20%D8%AF%D9%83%D8%AA%D9%88%D8%B1%20%D8%B5%D9%8A%D8%AF%D9%84%D8%A9%20%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D8%AB%D8%A9.pdf",
+   "title": "Course Descriptions - updated Pharm.D. plan (scanned, English titles)",
+   "year": "2024"
+  },
+  {
+   "program": "pharmd",
+   "url": "https://pharmacy.ksu.edu.sa/en/node/2972",
+   "title": "Pharm D (English page; levels 1-5 and 7 English titles)",
+   "year": "2026"
+  },
+  {
+   "program": "nurs",
+   "url": "https://nursing.ksu.edu.sa/sites/nursing.ksu.edu.sa/files/users/user981/044%20BSN%20Program%20Handbook%202021%20(1)%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%A7%D8%B1%D8%B4%D8%A7%D8%AF%D9%8A%20%D9%84%D9%84%D8%B7%D8%A7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A%D8%A9%20.pdf",
+   "title": "BSN Nursing Program Handbook",
+   "year": "2021"
+  }
+ ],
+ "courses": [
+  {
+   "code": "CT 140",
+   "ar_code": "تقن 140",
+   "en": "IT Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 140",
+   "ar_code": "ريض 140",
+   "en": "Introduction to Mathematics",
+   "ar": "مقدمة في الرياضيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MC 140",
+   "ar_code": "علم 140",
+   "en": "Communication Skills",
+   "ar": "مهارات الاتصال",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENGL 140",
+   "ar_code": "نجم 140",
+   "en": "English (1)",
+   "ar": "اللغة الانجليزية (1)",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "STAT 145",
+   "ar_code": "احص 145",
+   "en": "Biostatistics",
+   "ar": "الإحصاء الحيوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 145",
+   "ar_code": "كيم 145",
+   "en": "Organic Chemistry For Health Sciences",
+   "ar": "مقدمة في الكيمياء العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENGL 145",
+   "ar_code": "نجم 145",
+   "en": "English For Medical Purposes",
+   "ar": "اللغة الإنجليزية للأغراض الصحية",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "ZOOL 145",
+   "ar_code": "حين 145",
+   "en": "General Zoology",
+   "ar": "علم الأحياء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 145",
+   "ar_code": "فيز 145",
+   "en": "General Physics",
+   "ar": "فيزياء عامة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "REN 114",
+   "ar_code": "كلى 114",
+   "en": "Renal Block",
+   "ar": "الجهاز البولي والكلى",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FOU 111",
+   "ar_code": "اسس 111",
+   "en": "Foundation Block",
+   "ar": "مقدمة في العلوم الطبية الأساسية",
+   "h": 10,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Current Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SKI 101",
+   "ar_code": "مهر 101",
+   "en": "Learning Skills",
+   "ar": "مهارات التعلم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CAR 113",
+   "ar_code": "قلب 113",
+   "en": "Cardiovascular Block",
+   "ar": "الجهاز الدوري والقلب",
+   "h": 7,
+   "lab": false
+  },
+  {
+   "code": "MUS 115",
+   "ar_code": "حرك 115",
+   "en": "Musculoskeletal Block",
+   "ar": "الجهاز الحركي",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "RES 112",
+   "ar_code": "صدر 112",
+   "en": "Respiratory Block",
+   "ar": "الجهاز التنفسي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "GNT 223",
+   "ar_code": "هضم 223",
+   "en": "Gastrointestinal & Nutrition Block",
+   "ar": "الجهاز الهضمي والتغذية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "NEUR 222",
+   "ar_code": "عصب 222",
+   "en": "Neuropsychiatry Block",
+   "ar": "الجهاز العصبي و النفسي",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENDO 225",
+   "ar_code": "غدد 225",
+   "en": "Endocrine Block",
+   "ar": "جهاز الغدد الصماء",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "REPR 224",
+   "ar_code": "نسل 224",
+   "en": "Reproduction Block",
+   "ar": "الجهاز التناسلي",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "SKI 221",
+   "ar_code": "مهر 221",
+   "en": "Medical Professionalism",
+   "ar": "المهنية الطبية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "اخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "COMM 311",
+   "ar_code": "طبع 311",
+   "en": "Community Medicine",
+   "ar": "علم طب المجتمع",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "FORM 321",
+   "ar_code": "شرع 321",
+   "en": "Forensic Medical & Toxicology",
+   "ar": "الطب الشرعي والسموم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MED 341",
+   "ar_code": "طبب 341",
+   "en": "Internal Medicine",
+   "ar": "الامراض الباطنية",
+   "h": 10,
+   "lab": false
+  },
+  {
+   "code": "SURG 351",
+   "ar_code": "جرح 351",
+   "en": "General Surgery",
+   "ar": "الامراض الجراحية",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "MEDI 395",
+   "ar_code": "كطب 395",
+   "en": "Muslim Medical Ethics",
+   "ar": "اخلاقيات الطبيب المسلم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MEDI 305",
+   "ar_code": "كطب 305",
+   "en": "Medical Research & Informatics",
+   "ar": "البحوث الطبية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "RAD 366",
+   "ar_code": "شاع 366",
+   "en": "Radiology & Medical Imaging",
+   "ar": "التشخيص الشعاعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MEDI 301",
+   "ar_code": "معط 301",
+   "en": "Medical Informatics",
+   "ar": "المعلوماتية الطبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SURG 452",
+   "ar_code": "جرح 452",
+   "en": "Orthopaedic Surgery",
+   "ar": "جراحة العظام",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "OPT 432",
+   "ar_code": "عين 432",
+   "en": "Ophthalmology",
+   "ar": "امراض العيون",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "PME 462",
+   "ar_code": "طنف 462",
+   "en": "Psychiatry",
+   "ar": "الطب النفسي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "COMM 421",
+   "ar_code": "طبع 421",
+   "en": "Primary Care",
+   "ar": "الرعاية الصحية الاولية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ELC 101",
+   "ar_code": "ختر 101",
+   "en": "Elective Studies 1",
+   "ar": "علوم طبية إختيارية 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ORL 432",
+   "ar_code": "اذن 432",
+   "en": "Otorhinolaryngology",
+   "ar": "جراحة الأنف والأذن والحنجرة وجراحة الرأس والرقبة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "SKD 394",
+   "ar_code": "جلد 394",
+   "en": "Dermatology",
+   "ar": "الأمراض الجلدية العامة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MEDI 045",
+   "ar_code": "كطب 045",
+   "en": "Basic Anaesthesia & Resuscitation",
+   "ar": "أساسيات التخدير",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "GYN 482",
+   "ar_code": "نسا 482",
+   "en": "Obstetrics & Gynaecology",
+   "ar": "النساء والولادة",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "SURG 453",
+   "ar_code": "جرح 453",
+   "en": "General Surgery Practice",
+   "ar": "ممارسة الجراحة العامة",
+   "h": 10,
+   "lab": false
+  },
+  {
+   "code": "MED 442",
+   "ar_code": "طبب 442",
+   "en": "Internal Medicine",
+   "ar": "ممارسة الطب الباطني",
+   "h": 10,
+   "lab": false
+  },
+  {
+   "code": "ELC 102",
+   "ar_code": "ختر 102",
+   "en": "Elective Studies 2",
+   "ar": "علوم طبية إختيارية 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PED 474",
+   "ar_code": "طفل 474",
+   "en": "Paediatrics",
+   "ar": "طب الأطفال",
+   "h": 10,
+   "lab": false
+  },
+  {
+   "code": "MED 999",
+   "ar_code": "طبب 999",
+   "en": "Internship Training",
+   "ar": "تدريب امتياز",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "ENGL 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "Computer Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Culture",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 109",
+   "ar_code": "احص 109",
+   "en": "Biostatistics",
+   "ar": "الإحصاء الحيوي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ZOOL 109",
+   "ar_code": "حين 109",
+   "en": "General Zoology",
+   "ar": "علم الأحياء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHYS 109",
+   "ar_code": "فيز 109",
+   "en": "Physics",
+   "ar": "فيزياء عامه",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHEM 109",
+   "ar_code": "كيم 109",
+   "en": "Introduction to Organic Chemistry",
+   "ar": "مقدمة في الكيمياء العضوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ENGL 110",
+   "ar_code": "انجل 110",
+   "en": "Specialized English",
+   "ar": "لغة إنجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "PHRM 211",
+   "ar_code": "صدل 211",
+   "en": "Pharmaceutical Calculations and Liquid Dosage Forms",
+   "ar": "الحسابات والمستحضرات الصيدلانية السائلة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 212",
+   "ar_code": "صدل 212",
+   "en": "Pharmaceutical Organic Chemistry",
+   "ar": "الكيمياء العضوية الصيدلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 213",
+   "ar_code": "صدل 213",
+   "en": "Pharmaceutical Analysis (1)",
+   "ar": "التحليل الصيدلي (1)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 214",
+   "ar_code": "صدل 214",
+   "en": "Biochemical Basis of Diseases",
+   "ar": "الأسس الحيوية للأمراض",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 215",
+   "ar_code": "صدل 215",
+   "en": "Physiology (1)",
+   "ar": "علم وظائف الأعضاء (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 216",
+   "ar_code": "صدل 216",
+   "en": "Anatomy and Histology",
+   "ar": "علم التشريح والأنسجة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHTR 261",
+   "ar_code": "تدص 261",
+   "en": "The Introductory Pharmacy Practice Experience (1)",
+   "ar": "التدريب الصيدلي الميداني التمهيدي (1)",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PHRM 221",
+   "ar_code": "صدل 221",
+   "en": "Solid and Semisolid Dosage Forms",
+   "ar": "المستحضرات الصيدلانية الصلبة والشبه صلبة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 222",
+   "ar_code": "صدل 222",
+   "en": "Pathogenic Microorganisms",
+   "ar": "الميكروبات الممرضة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHRM 223",
+   "ar_code": "صدل 223",
+   "en": "Principles of Pharmacogenomics",
+   "ar": "مباديء الصيدلة الجينومية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 224",
+   "ar_code": "صدل 224",
+   "en": "Physiology (2)",
+   "ar": "علم وظائف الأعضاء (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 225",
+   "ar_code": "صدل 225",
+   "en": "Principles of Drug Action and Metabolism",
+   "ar": "أساسيات عمل الدواء والأيض",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 226",
+   "ar_code": "صدل 226",
+   "en": "Drug Information and Evidence Based Practice",
+   "ar": "معلومات الأدوية والممارسة المبنية على البراهين",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 311",
+   "ar_code": "صدل 311",
+   "en": "Biopharmaceutics and Pharmacokinetics",
+   "ar": "الصيدلة الحيوية وحركية الدواء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 312",
+   "ar_code": "صدل 312",
+   "en": "Pharmaceutical Analysis (2)",
+   "ar": "التحليل الصيدلي (2)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 313",
+   "ar_code": "صدل 313",
+   "en": "Community Pharmacy and Self-Care",
+   "ar": "الصيدلة المجتمعية والرعاية الذاتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 314",
+   "ar_code": "صدل 314",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (1)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHRM 315",
+   "ar_code": "صدل 315",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (2)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 316",
+   "ar_code": "صدل 316",
+   "en": "Pharmacy Simulation Lab (1)",
+   "ar": "معمل محاكاة الصيدلة (1)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHRM 321",
+   "ar_code": "صدل 321",
+   "en": "Fundamentals of Natural Products (1)",
+   "ar": "أساسيات المنتجات الطبيعية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 322",
+   "ar_code": "صدل 322",
+   "en": "Immunology",
+   "ar": "علم المناعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 323",
+   "ar_code": "صدل 323",
+   "en": "Sterile and Non-Sterile Pharmaceuticals",
+   "ar": "المستحضرات الصيدلانية المعقمة وغير المعقمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 324",
+   "ar_code": "صدل 324",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (3)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (3)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 325",
+   "ar_code": "صدل 325",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (4)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (4)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 326",
+   "ar_code": "صدل 326",
+   "en": "Pharmacy Simulation Lab (2)",
+   "ar": "معمل محاكاة الصيدلة (2)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHTR 361",
+   "ar_code": "تدص 361",
+   "en": "Introductory Pharmacy Practice Experience (2)",
+   "ar": "التدريب الصيدلي الميداني التمهيدي (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 411",
+   "ar_code": "صدل 411",
+   "en": "Fundamentals of Natural Products (2)",
+   "ar": "أساسيات المنتجات الطبيعية (2)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 412",
+   "ar_code": "صدل 412",
+   "en": "Applied Pharmacokinetics",
+   "ar": "حركية الدواء التطبيقية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHRM 413",
+   "ar_code": "صدل 413",
+   "en": "Social and Behavioral Pharmacy",
+   "ar": "الصيدلة السلوكية والاجتماعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 414",
+   "ar_code": "صدل 414",
+   "en": "Pharmacoepidemiology",
+   "ar": "علم وبائيات الدواء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 415",
+   "ar_code": "صدل 415",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (5)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (5)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 416",
+   "ar_code": "صدل 416",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (6)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (6)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 417",
+   "ar_code": "صدل 417",
+   "en": "Pharmacy Simulation Lab (3)",
+   "ar": "معمل محاكاة الصيدلة (3)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHRM 421",
+   "ar_code": "صدل 421",
+   "en": "Herbal and Integrative Medicine",
+   "ar": "العلاج العشبي والتكاملي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 422",
+   "ar_code": "صدل 422",
+   "en": "Pharmaceutical Biotechnology",
+   "ar": "التقنية الحيوية الصيدلانية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 423",
+   "ar_code": "صدل 423",
+   "en": "Pharmacy Law, Regulations and Ethics",
+   "ar": "أنظمة وتشريعات وأخلاقيات الصيدلة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 424",
+   "ar_code": "صدل 424",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (7)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (7)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 425",
+   "ar_code": "صدل 425",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (8)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (8)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 426",
+   "ar_code": "صدل 426",
+   "en": "Pharmacy Simulation Lab (4)",
+   "ar": "معمل محاكاة الصيدلة (4)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHTR 461",
+   "ar_code": "تدص 461",
+   "en": "Introductory Pharmacy Practice Experiences (3)",
+   "ar": "التدريب الصيدلي الميداني التمهيدي (3)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 431",
+   "ar_code": "صدل 431",
+   "en": "Dietary Supplements and Nutraceuticals",
+   "ar": "المكملات الغذائية الصيدلانية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PHRM 432",
+   "ar_code": "صدل 432",
+   "en": "GMP and Quality Control",
+   "ar": "الجودة النوعية والتصنيع الجيد للمستحضرات الصيدلانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHRM 433",
+   "ar_code": "صدل 433",
+   "en": "Toxicology",
+   "ar": "علم السموم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 434",
+   "ar_code": "صدل 434",
+   "en": "Pharmacoeconomics",
+   "ar": "اقتصاديات الدواء",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 435",
+   "ar_code": "صدل 435",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (9)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (9)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 436",
+   "ar_code": "صدل 436",
+   "en": "Pharmacy Simulation Lab (5)",
+   "ar": "معمل محاكاة الصيدلة (5)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHRM 446",
+   "ar_code": "صدل 446",
+   "en": "Capstone Project",
+   "ar": "مشروع بحثي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 441",
+   "ar_code": "صدل 441",
+   "en": "Patient Safety",
+   "ar": "سلامة المرضى",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 442",
+   "ar_code": "صدل 442",
+   "en": "Pharmacy Management",
+   "ar": "الإدارة الصيدلية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 443",
+   "ar_code": "صدل 443",
+   "en": "Marketing in Pharmacy",
+   "ar": "التسويق في الصيدلة",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHRM 444",
+   "ar_code": "صدل 444",
+   "en": "Pathophysiology, Drug Action, and Therapeutics (10)",
+   "ar": "فسيولوجيا الأمراض، عمل الدواء والعلاجيات (10)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHRM 445",
+   "ar_code": "صدل 445",
+   "en": "Pharmacy Simulation Lab (6)",
+   "ar": "معمل محاكاة الصيدلة (6)",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PHTR 470",
+   "ar_code": "تدص 470",
+   "en": "",
+   "ar": "طب الباطنة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 481",
+   "ar_code": "تدص 481",
+   "en": "",
+   "ar": "الرعاية المتنقلة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 484",
+   "ar_code": "تدص 484",
+   "en": "",
+   "ar": "الصيدلة المجتمعية المتقدمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 485",
+   "ar_code": "تدص 485",
+   "en": "",
+   "ar": "صيدلة المستشفيات المتقدمة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Prophet's Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "The Origins of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Islamic Economic System",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Women and Their Developmental Role",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 451",
+   "ar_code": "صدل 451",
+   "en": "Toxicology of Natural Products",
+   "ar": "علم سموم النواتج الطبيعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 452",
+   "ar_code": "صدل 452",
+   "en": "Herbal Cosmeceuticals",
+   "ar": "مستحضرات التجميل العشبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 453",
+   "ar_code": "صدل 453",
+   "en": "Quality Control of Herbal Products",
+   "ar": "مراقبة الجودة للمنتجات العشبية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 454",
+   "ar_code": "صدل 454",
+   "en": "Drug Discovery from Natural Sources",
+   "ar": "اكتشاف الدواء من المصادر الطبيعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 461",
+   "ar_code": "صدل 461",
+   "en": "Advanced Topics in Therapeutics (1)",
+   "ar": "موضوعات متقدمة في العلاجيات (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 462",
+   "ar_code": "صدل 462",
+   "en": "Advanced Topics in Therapeutics (2)",
+   "ar": "موضوعات متقدمة في العلاجيات (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 463",
+   "ar_code": "صدل 463",
+   "en": "Formulary Management",
+   "ar": "إدارة دليل الأدوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 464",
+   "ar_code": "صدل 464",
+   "en": "Introduction to Clinical Trials",
+   "ar": "مقدمة في التجارب السريرية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 465",
+   "ar_code": "صدل 465",
+   "en": "Parental and Enteral Nutrition",
+   "ar": "التغذية الوريدية والمعوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 466",
+   "ar_code": "صدل 466",
+   "en": "Veterinary Pharmacy",
+   "ar": "الصيدلة البيطرية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 467",
+   "ar_code": "صدل 467",
+   "en": "Updates in Medical and Scientific Journals",
+   "ar": "المستجدات في الدوريات الطبية والعلمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 468",
+   "ar_code": "صدل 468",
+   "en": "Applied Pharmacogenomics",
+   "ar": "الصيدلة الجينومية التطبيقية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 469",
+   "ar_code": "صدل 469",
+   "en": "Health Informatics",
+   "ar": "المعلوماتية الصحية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 471",
+   "ar_code": "صدل 471",
+   "en": "Advanced Pharmaceutical Biotechnology",
+   "ar": "التقنية الحيوية الصيدلانية المتقدمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 472",
+   "ar_code": "صدل 472",
+   "en": "Cosmetics Preparations",
+   "ar": "مستحضرات التجميل",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 473",
+   "ar_code": "صدل 473",
+   "en": "Nuclear Pharmacy",
+   "ar": "الصيدلة النووية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 474",
+   "ar_code": "صدل 474",
+   "en": "Pharmaceutical Manufacturing",
+   "ar": "تصنيع المستحضرات الصيدلانية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 475",
+   "ar_code": "صدل 475",
+   "en": "Advanced Pharmaceutical Microbiology",
+   "ar": "علم الأحياء الدقيقة الصيدلاني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 481",
+   "ar_code": "صدل 481",
+   "en": "Analytical Techniques for Clinical Chemistry",
+   "ar": "التقنيات التحليلية للكيمياء السريرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 482",
+   "ar_code": "صدل 482",
+   "en": "Analytical Chemistry in Forensic Science",
+   "ar": "الكيمياء التحليلية في علوم الطب الشرعي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 483",
+   "ar_code": "صدل 483",
+   "en": "Quality Control of Pharmaceuticals",
+   "ar": "مراقبة جودة المستحضرات الصيدلانية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 484",
+   "ar_code": "صدل 484",
+   "en": "Contemporary Development in Pharmaceutical Chemistry",
+   "ar": "التطورات المعاصرة في الكيمياء الصيدلية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 485",
+   "ar_code": "صدل 485",
+   "en": "Drug Synthesis Theories and Applications",
+   "ar": "نظريات وتطبيقات تشييد الدواء",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 486",
+   "ar_code": "صدل 486",
+   "en": "Drug Design and Development",
+   "ar": "تصميم وتطوير الدواء",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 491",
+   "ar_code": "صدل 491",
+   "en": "Neuropharmacology",
+   "ar": "علم الأدوية العصبي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 492",
+   "ar_code": "صدل 492",
+   "en": "Molecular Pharmacology",
+   "ar": "علم الأدوية الجزيئي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHRM 493",
+   "ar_code": "صدل 493",
+   "en": "Clinical Toxicology",
+   "ar": "علم السموم الإكلينيكي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 494",
+   "ar_code": "صدل 494",
+   "en": "Experimental Therapeutics",
+   "ar": "العلاجات التجريبية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHRM 495",
+   "ar_code": "صدل 495",
+   "en": "Contemporary Developments in Pharmacology",
+   "ar": "التطورات المعاصرة في علم الأدوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHTR 471",
+   "ar_code": "تدص 471",
+   "en": "",
+   "ar": "طب الباطنة (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 472",
+   "ar_code": "تدص 472",
+   "en": "",
+   "ar": "طب الباطنة (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 473",
+   "ar_code": "تدص 473",
+   "en": "",
+   "ar": "طب الباطنة (4)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 474",
+   "ar_code": "تدص 474",
+   "en": "",
+   "ar": "طب الباطنة (5)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 475",
+   "ar_code": "تدص 475",
+   "en": "",
+   "ar": "طب الباطنة (6)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 476",
+   "ar_code": "تدص 476",
+   "en": "",
+   "ar": "معلومات الأدوية والسموم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 477",
+   "ar_code": "تدص 477",
+   "en": "",
+   "ar": "الرعاية الحرجة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 478",
+   "ar_code": "تدص 478",
+   "en": "",
+   "ar": "الرعاية الحرجة (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 479",
+   "ar_code": "تدص 479",
+   "en": "",
+   "ar": "الرعاية الحرجة (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 480",
+   "ar_code": "تدص 480",
+   "en": "",
+   "ar": "الرعاية الحرجة (4)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 482",
+   "ar_code": "تدص 482",
+   "en": "",
+   "ar": "الرعاية المتنقلة (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 483",
+   "ar_code": "تدص 483",
+   "en": "",
+   "ar": "الرعاية المتنقلة (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 486",
+   "ar_code": "تدص 486",
+   "en": "",
+   "ar": "صيدلة المستشفيات المتقدمة (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 487",
+   "ar_code": "تدص 487",
+   "en": "",
+   "ar": "صيدلة المستشفيات المتقدمة (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHTR 488",
+   "ar_code": "تدص 488",
+   "en": "",
+   "ar": "الصناعات الدوائية (1)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHTR 489",
+   "ar_code": "تدص 489",
+   "en": "",
+   "ar": "الصناعات الدوائية (2)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHTR 490",
+   "ar_code": "تدص 490",
+   "en": "",
+   "ar": "الإدارة الصيدلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHTR 491",
+   "ar_code": "تدص 491",
+   "en": "",
+   "ar": "التشريعات الدوائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHTR 492",
+   "ar_code": "تدص 492",
+   "en": "",
+   "ar": "البحث العلمي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHTR 493",
+   "ar_code": "تدص 493",
+   "en": "",
+   "ar": "التدريس",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "",
+   "en": "English",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "",
+   "en": "English",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "NURS 120",
+   "ar_code": "",
+   "en": "Medical Terminology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 210",
+   "ar_code": "",
+   "en": "Introduction to Nursing Profession",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 215",
+   "ar_code": "",
+   "en": "Fundamentals of Nursing Practice",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "ANAT 202",
+   "ar_code": "",
+   "en": "Human Anatomy",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PSL 224",
+   "ar_code": "",
+   "en": "Human Physiology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 218",
+   "ar_code": "",
+   "en": "Microbiology for Nursing",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 220",
+   "ar_code": "",
+   "en": "Professional Communications",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 221",
+   "ar_code": "",
+   "en": "Health Assessment",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "NURS 222",
+   "ar_code": "",
+   "en": "Adult Health Nursing I",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "CLS 323",
+   "ar_code": "",
+   "en": "General Pathophysiology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 226",
+   "ar_code": "",
+   "en": "Pharmacology for Nursing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 310",
+   "ar_code": "",
+   "en": "Principles of Education for Nursing Practice",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 312",
+   "ar_code": "",
+   "en": "Infection Control for Nursing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 313",
+   "ar_code": "",
+   "en": "Clinical Nutrition for Nursing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 314",
+   "ar_code": "",
+   "en": "Adult Health Nursing II",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 318",
+   "ar_code": "",
+   "en": "Nursing Informatics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 320",
+   "ar_code": "",
+   "en": "Epidemiology and Statistics for Health Care Professionals",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 321",
+   "ar_code": "",
+   "en": "Maternal Health Nursing",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 322",
+   "ar_code": "",
+   "en": "Child Health Nursing",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 328",
+   "ar_code": "",
+   "en": "Human Growth and Development",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 411",
+   "ar_code": "",
+   "en": "Nursing Research and Evidence Based Practice",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "NURS 415",
+   "ar_code": "",
+   "en": "Mental Health Nursing",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 418",
+   "ar_code": "",
+   "en": "Community Health Nursing",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 419",
+   "ar_code": "",
+   "en": "Gerontological Nursing",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "NURS 423",
+   "ar_code": "",
+   "en": "Principles of Critical Care Nursing",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "NURS 426",
+   "ar_code": "",
+   "en": "Nursing Management and Leadership",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "NURS 427",
+   "ar_code": "",
+   "en": "Qualifying for Practice",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "NURS 429",
+   "ar_code": "",
+   "en": "Principles of Emergency Nursing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "med",
+   "ar": "بكالوريوس الطب والجراحة",
+   "en": "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+   "courses": [
+    {
+     "code": "CT 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MC 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ZOOL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "REN 114",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "FOU 111",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "SKI 101",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CAR 113",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MUS 115",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RES 112",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GNT 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NEUR 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "ENDO 225",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "REPR 224",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "SKI 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "COMM 311",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FORM 321",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MED 341",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "SURG 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MEDI 395",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MEDI 305",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 366",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MEDI 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "SURG 452",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "OPT 432",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "PME 462",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "COMM 421",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "ELC 101",
+     "kind": "elective",
+     "level": 6
+    },
+    {
+     "code": "ORL 432",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "SKD 394",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "MEDI 045",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "GYN 482",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "SURG 453",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "MED 442",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "ELC 102",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "PED 474",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "MED 999",
+     "kind": "training",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "pharmd",
+   "ar": "دكتور صيدلة",
+   "en": "Doctor of Pharmacy",
+   "courses": [
+    {
+     "code": "ENGL 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHRM 211",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHRM 212",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHRM 213",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHRM 214",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHRM 215",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHRM 216",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHTR 261",
+     "kind": "training",
+     "level": 3
+    },
+    {
+     "code": "PHRM 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 224",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 225",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 226",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHRM 311",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 313",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 314",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 315",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 316",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHRM 321",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHRM 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHRM 323",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHRM 324",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHRM 325",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHRM 326",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHTR 361",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "PHRM 411",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 412",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 413",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 414",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 415",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 416",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 417",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHRM 421",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHRM 422",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHRM 423",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHRM 424",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHRM 425",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHRM 426",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHTR 461",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "PHRM 431",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 432",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 433",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 434",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 435",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 436",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PHRM 446",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "PHRM 441",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PHRM 442",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PHRM 443",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PHRM 444",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PHRM 445",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PHTR 470",
+     "kind": "training",
+     "level": 11
+    },
+    {
+     "code": "PHTR 481",
+     "kind": "training",
+     "level": 11
+    },
+    {
+     "code": "PHTR 484",
+     "kind": "training",
+     "level": 12
+    },
+    {
+     "code": "PHTR 485",
+     "kind": "training",
+     "level": 12
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHRM 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 461",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 467",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 468",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 469",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 471",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 472",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 473",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 475",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 491",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 492",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 493",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 494",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHRM 495",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHTR 471",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 472",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 473",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 474",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 475",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 476",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 477",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 478",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 479",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 480",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 482",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 483",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 486",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 487",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 488",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 489",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 490",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 491",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 492",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PHTR 493",
+     "kind": "training",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "nurs",
+   "ar": "بكالوريوس علوم التمريض",
+   "en": "Bachelor of Science in Nursing",
+   "courses": [
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "NURS 120",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "NURS 210",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "NURS 215",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ANAT 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PSL 224",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "NURS 218",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "NURS 220",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NURS 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NURS 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 323",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NURS 226",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NURS 310",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "NURS 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "NURS 313",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "NURS 314",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "NURS 318",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "NURS 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "NURS 321",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "NURS 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "NURS 328",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "NURS 411",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "NURS 415",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "NURS 418",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "NURS 419",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "NURS 423",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "NURS 426",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "NURS 427",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "NURS 429",
+     "kind": "major",
+     "level": 8
+    }
+   ]
+  }
+ ]
+}

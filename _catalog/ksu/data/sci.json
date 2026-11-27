@@ -1,0 +1,8208 @@
+{
+ "college": "sci",
+ "sources": [
+  {
+   "program": "actm",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/lktwry.pdf",
+   "title": "Study Plan for Actuarial Mathematics (Edugate print, Arabic) - structure, levels, Arabic names",
+   "year": "2020"
+  },
+  {
+   "program": "actm",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/lkht_ldrsy_rby_lbrnmj_bklwryws_llwm_fy_lrydyt_lktwry_wlmly.pdf",
+   "title": "الخطة الدراسية لبرنامج الرياضيات الإكتوارية والمالية (1439/2018) - lab hours",
+   "year": "2018"
+  },
+  {
+   "program": "actm",
+   "url": "https://sciences.ksu.edu.sa/ar/node/393",
+   "title": "AFM program page: per-course specifications (English course titles for ACTU/MATH courses)",
+   "year": "n/a"
+  },
+  {
+   "program": "bch",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/users/user106/%D8%A7%D9%84%D8%AE%D8%B7%D8%B7%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9/Study%20Plan%20Bachelor_2024.pdf",
+   "title": "Bachelor Degree of Biochemistry Curricular Plan (Program Manual Nov 2023)",
+   "year": "2023"
+  },
+  {
+   "program": "bot",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/users/user165/Botany_Program_Handbook_EN_2026-2027_V7_02%20October%202026.pdf",
+   "title": "Botany Program Handbook 2026-2027 (study plan section)",
+   "year": "2026"
+  },
+  {
+   "program": "bot",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/botany%20study%20plan%202025.pdf",
+   "title": "Study Plan: Botany Program (2025) - L/E/P hours",
+   "year": "2025"
+  },
+  {
+   "program": "chem",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/lkymy1.pdf",
+   "title": "Study Plan for Chemistry Program (Edugate print, Arabic, 136 h, edition 4)",
+   "year": "2020"
+  },
+  {
+   "program": "chem",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/users/user1012/B.Sc_.%20Program%20in%20Chemistry%20-%20Study%20Plan.pdf",
+   "title": "Chemistry Study Plan 2018-1440H (English names, L/E/P hours)",
+   "year": "2018"
+  },
+  {
+   "program": "chem",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/bachelor_course_description.pdf",
+   "title": "Chemistry bachelor course description (CHEM 427 title)",
+   "year": "2018"
+  },
+  {
+   "program": "geol",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/geology_study_plan_vision2030.pdf",
+   "title": "الخطة الدراسية لبرنامج الجيولوجيا (Vision 2030 plan)",
+   "year": "2021"
+  },
+  {
+   "program": "geol",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/jywlwjy.pdf",
+   "title": "Study Plan for Geology Program (Edugate print, Arabic) - elective list",
+   "year": "2020"
+  },
+  {
+   "program": "geol",
+   "url": "https://sciences.ksu.edu.sa/en/node/14456",
+   "title": "Geology B.Sc Course Description (English titles)",
+   "year": "n/a"
+  },
+  {
+   "program": "geop",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/geophysics_study_plan_vision2030.pdf",
+   "title": "الخطة الدراسية لبرنامج الجيوفيزياء (Vision 2030 plan)",
+   "year": "2021"
+  },
+  {
+   "program": "geop",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/lkht_lstrshdy_lbrnmj_jf-njlyzy-_382-2017.pdf",
+   "title": "Geophysics Study Plan 2017-1439H (English)",
+   "year": "2017"
+  },
+  {
+   "program": "geop",
+   "url": "https://sciences.ksu.edu.sa/en/node/14457",
+   "title": "Geophysics B.Sc. Course Description",
+   "year": "n/a"
+  },
+  {
+   "program": "math",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/mathematical_study_plan_0.pdf",
+   "title": "Mathematics Study Plan 2018G-1439H",
+   "year": "2018"
+  },
+  {
+   "program": "micro",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/MICROBIOLGY%20PROGRAM%20HANDBOOK%20%28English%291.pdf",
+   "title": "Handbook of Microbiology Program 2024 (study plan section)",
+   "year": "2024"
+  },
+  {
+   "program": "micro",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/attach/Study%20Plan%20462%20%28Microbiology%29.pdf",
+   "title": "Study curriculum: Microbiology Program (plan 462) - L/E/P hours",
+   "year": "2024"
+  },
+  {
+   "program": "or",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/users/user676/Bachelor_OR.pdf",
+   "title": "Study Plan - Operations Research (Edugate print, English, edition 3, 136 h)",
+   "year": "2024"
+  },
+  {
+   "program": "phys",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/imce_images/lfyzy.pdf",
+   "title": "Study Plan for Physics Program (Edugate print, Arabic)",
+   "year": "2020"
+  },
+  {
+   "program": "phys",
+   "url": "https://sciences.ksu.edu.sa/en/node/9785",
+   "title": "Physics Study Plan with Common First Year 2017-1439H (English)",
+   "year": "2017"
+  },
+  {
+   "program": "phys",
+   "url": "https://sciences.ksu.edu.sa/en/node/14654",
+   "title": "Physics program course list with specifications",
+   "year": "n/a"
+  },
+  {
+   "program": "stat",
+   "url": "https://sciences.ksu.edu.sa/en/node/14326",
+   "title": "Statistics Bachelor's Program study plan (Plan Hrs 136)",
+   "year": "2024"
+  },
+  {
+   "program": "stat",
+   "url": "https://sciences.ksu.edu.sa/sites/sciences.ksu.edu.sa/files/users/user676/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D8%A8%D8%A9%20%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D9%88%D8%B3%20%D8%A7%D8%AD%D8%B5%D8%A7%D8%A1.pdf",
+   "title": "الخطة الدراسية بكالوريوس احصاء (Edugate print, edition 3) - electives",
+   "year": "2024"
+  },
+  {
+   "program": "zoo",
+   "url": "https://faculty.ksu.edu.sa/sites/default/files/Study%20Plan%20of%20Bachelor%20degree%202025.pdf",
+   "title": "Study Plan of Bachelor degree in Zoology",
+   "year": "2025"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ACCT 201",
+   "ar_code": "حسب 201",
+   "en": "Principles of Accounting & Financial Reporting",
+   "ar": "مباديء المحاسبة والتقرير المالي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 262",
+   "ar_code": "ريك 262",
+   "en": "Actuarial Corporate Finance",
+   "ar": "مالية الشركات الاكتوارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 371",
+   "ar_code": "ريك 371",
+   "en": "Financial Mathematics",
+   "ar": "الرياضيات المالية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ACTU 372",
+   "ar_code": "ريك 372",
+   "en": "Actuarial Mathematical Models I",
+   "ar": "نماذج الرياضيات الاكتوارية (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ACTU 471",
+   "ar_code": "ريك 471",
+   "en": "Financial Derivatives",
+   "ar": "المشتقات المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 472",
+   "ar_code": "ريك 472",
+   "en": "Actuarial Mathematical Models II",
+   "ar": "نماذج الرياضيات الاكتوارية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 473",
+   "ar_code": "ريك 473",
+   "en": "Models for Financial Economics",
+   "ar": "نماذج الاقتصاد المالي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ACTU 474",
+   "ar_code": "ريك 474",
+   "en": "Risk Theory",
+   "ar": "نظرية المخاطرة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 475",
+   "ar_code": "ريك 475",
+   "en": "Credibility Theory and Loss Distribution",
+   "ar": "نظرية المصداقية وتوزيعات الخسارة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ACTU 476",
+   "ar_code": "ريك 476",
+   "en": "Insurance Mathematics",
+   "ar": "الرياضيات التأمينية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 477",
+   "ar_code": "ريك 477",
+   "en": "Pension Mathematics",
+   "ar": "رياضيات التقاعد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 478",
+   "ar_code": "ريك 478",
+   "en": "Mathematical Modelling of Islamic Finance",
+   "ar": "النمذجة الرياضية للمالية الاسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ACTU 483",
+   "ar_code": "ريك 483",
+   "en": "Lab Financial Mathematics",
+   "ar": "معمل الرياضيات المالية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "ACTU 484",
+   "ar_code": "ريك 484",
+   "en": "Lab Actuarial Mathematics",
+   "ar": "معمل الرياضيات الإكتوارية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "ACTU 498",
+   "ar_code": "ريك 498",
+   "en": "Training Course",
+   "ar": "التدريب الميداني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "( مهارات الكتابة )ق",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARAB 101",
+   "ar_code": "",
+   "en": "Written skills",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ASTR 102",
+   "ar_code": "فلك 102",
+   "en": "Introduction to Stellar and Solar Systems",
+   "ar": "مقدمة المجموعة النجمية والشمسية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 101",
+   "ar_code": "كيح 101",
+   "en": "General Biochemistry",
+   "ar": "كيمياء حيوية عامة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "BCH 103",
+   "ar_code": "كيح 103",
+   "en": "Biochemical fundamentals of Life",
+   "ar": "أسس الكيمياء الحيوية الحياتية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 202",
+   "ar_code": "كيح 202",
+   "en": "General Biochemistry",
+   "ar": "كيمياء حيوية عامة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "BCH 220",
+   "ar_code": "كيح 220",
+   "en": "Blood Biochemistry",
+   "ar": "أساسيات الكيمياء الحيوية للدم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 303",
+   "ar_code": "كيح 303",
+   "en": "Protein Biochemistry",
+   "ar": "الكيمياء الحيوية للبروتينات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 312",
+   "ar_code": "كيح 312",
+   "en": "Biochemical calculations",
+   "ar": "حسابات الكيمياء الحيوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 320",
+   "ar_code": "كيح 320",
+   "en": "General Enzymology",
+   "ar": "الانزيمات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BCH 322",
+   "ar_code": "كيح 322",
+   "en": "Experiments in Enzymology",
+   "ar": "عملي الانزيمات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BCH 332",
+   "ar_code": "كيح 332",
+   "en": "Physical Biochemistry",
+   "ar": "الكيمياء الحيوية الفيزيائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BCH 333",
+   "ar_code": "كيح 333",
+   "en": "Experiments in Biophysical Biochemistry",
+   "ar": "عملي الكيمياءالحيوية الفيزيائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BCH 340",
+   "ar_code": "كيح 340",
+   "en": "Metabolism-1",
+   "ar": "الايض (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BCH 350",
+   "ar_code": "كيح 350",
+   "en": "Plant Biochemistry",
+   "ar": "كيمياء حيويه نباتيه",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 361",
+   "ar_code": "كيح 361",
+   "en": "Molecular Biology",
+   "ar": "الأحياء الجزيئية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "BCH 434",
+   "ar_code": "كيح 434",
+   "en": "Biophysics",
+   "ar": "الفيزياء الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 436",
+   "ar_code": "كيح 436",
+   "en": "Nanotechnology",
+   "ar": "التقنية النانونية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 440",
+   "ar_code": "كيح 440",
+   "en": "Metabolism- II",
+   "ar": "الأيض (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BCH 441",
+   "ar_code": "كيح 441",
+   "en": "Bioenergetics",
+   "ar": "الطاقة الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 445",
+   "ar_code": "كيح 445",
+   "en": "Biochemistry of Nutrition",
+   "ar": "الكيمياء الحيوية للتغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 447",
+   "ar_code": "كيح 447",
+   "en": "Practical Metabolism",
+   "ar": "عملي الأيض",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BCH 450",
+   "ar_code": "كيح 450",
+   "en": "Biochemistry of Specialized Tissues",
+   "ar": "الكيمياء الحيوية للأنسجة المتخصصة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 452",
+   "ar_code": "كيح 452",
+   "en": "Biomembrane and Cell signaling",
+   "ar": "الأغشية الحيوية والتأشير الخلوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 453",
+   "ar_code": "كيح 453",
+   "en": "Hormones",
+   "ar": "الهرمونات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 454",
+   "ar_code": "كيح 454",
+   "en": "Toxicology & Carcinogens",
+   "ar": "السموم والمسرطنات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 462",
+   "ar_code": "كيح 462",
+   "en": "Biotechnology and Genetic engineering",
+   "ar": "التقنية الحيوية والهندسة الوراثية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "BCH 463",
+   "ar_code": "كيح 463",
+   "en": "Bioinformatics",
+   "ar": "المعلوماتية الحياتية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 464",
+   "ar_code": "كيح 464",
+   "en": "Gene Expression",
+   "ar": "التعبير الجيني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 465",
+   "ar_code": "كيح 465",
+   "en": "Molecular Genetics",
+   "ar": "الوراثة الجزيئية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 466",
+   "ar_code": "كيح 466",
+   "en": "Molecular Biology of Cancer",
+   "ar": "الأسس البيولوجية للسرطان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 471",
+   "ar_code": "كيح 471",
+   "en": "Blood Biochemistry",
+   "ar": "الكيمياء الحيوية للدم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 472",
+   "ar_code": "كيح 472",
+   "en": "Biochemistry of Biological fluids",
+   "ar": "الكيمياء الحيوية للسوائل البيولوجية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 473",
+   "ar_code": "كيح 473",
+   "en": "Biomarkers in Health and Diseases",
+   "ar": "المؤشرات الكيموحيوية في الصحة والمرض",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BCH 476",
+   "ar_code": "كيح 476",
+   "en": "Chemistry of Antibiotics",
+   "ar": "كيمياء المضادات الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 477",
+   "ar_code": "كيح 477",
+   "en": "Immunochemistry",
+   "ar": "كيمياء المناعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 484",
+   "ar_code": "كيح 484",
+   "en": "Introduction in Scientific Research skills",
+   "ar": "مقدمة في مهارات البحث العلمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 493",
+   "ar_code": "كيح 493",
+   "en": "Research Project",
+   "ar": "مشروع البحث",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BCH 496",
+   "ar_code": "كيح 496",
+   "en": "Field Training in Biochemistry",
+   "ar": "التدريب الميداني في الكيمياء الحيوية",
+   "h": 5,
+   "lab": true
+  },
+  {
+   "code": "BOT 102",
+   "ar_code": "نبت 102",
+   "en": "Botany",
+   "ar": "علم النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 211",
+   "ar_code": "نبت 211",
+   "en": "Plant Anatomy",
+   "ar": "علم تشريح النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 213",
+   "ar_code": "نبت 213",
+   "en": "Plant Microtechnique",
+   "ar": "تحضيرات مجهرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 222",
+   "ar_code": "نبت 222",
+   "en": "Principles of Flowering Plant Taxonomy",
+   "ar": "اساسيات تصنيف نباتات زهرية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 241",
+   "ar_code": "نبت 241",
+   "en": "Plant Ecological Factors",
+   "ar": "عوامل البيئة النباتية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 251",
+   "ar_code": "نبت 251",
+   "en": "Cell Biology and Cytogenetics",
+   "ar": "الخلية الإحيائية والوارثة الخلوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 254",
+   "ar_code": "نبت 254",
+   "en": "Genetics",
+   "ar": "علم الوراثة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 263",
+   "ar_code": "نبت 263",
+   "en": "Archegoniates",
+   "ar": "الارشيجونيات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 272",
+   "ar_code": "نبت 272",
+   "en": "Plant Physiology",
+   "ar": "فسيولوجيا النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 312",
+   "ar_code": "نبت 312",
+   "en": "Plant Morphogenesis",
+   "ar": "التشكل النباتى",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 322",
+   "ar_code": "نبت 322",
+   "en": "Experimental Taxonomy",
+   "ar": "تصنيف تجريبي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 341",
+   "ar_code": "نبت 341",
+   "en": "Ecosystem",
+   "ar": "النظام البيئي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "BOT 342",
+   "ar_code": "نبت 342",
+   "en": "Phytosociology",
+   "ar": "علم المجتمعات النباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 345",
+   "ar_code": "نبت 345",
+   "en": "Flora of Saudi Arabia",
+   "ar": "فلورا المملكة العربية السعودية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 346",
+   "ar_code": "نبت 346",
+   "en": "Pollution and Environmental Protection",
+   "ar": "التلوث وحماية البيئة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 347",
+   "ar_code": "نبت 347",
+   "en": "Plant Geography",
+   "ar": "الجغرافيا النباتية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BOT 349",
+   "ar_code": "نبت 349",
+   "en": "Ecophysiology",
+   "ar": "فسيولوجيا بيئية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 359",
+   "ar_code": "نبت 359",
+   "en": "Population Genetics",
+   "ar": "وراثة العشائر",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 373",
+   "ar_code": "نبت 373",
+   "en": "Plant Growth and its Regulators",
+   "ar": "نمو النبات ومنظماته",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 379",
+   "ar_code": "نبت 379",
+   "en": "Metabolism and Transport in Plants",
+   "ar": "الايض والنقل في النبات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 380",
+   "ar_code": "نبت 380",
+   "en": "Plant–Water and Soil Relations",
+   "ar": "علاقة النبات بالماء والتربة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 384",
+   "ar_code": "نبت 384",
+   "en": "Phycology",
+   "ar": "علم الطحالب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 398",
+   "ar_code": "نبت 398",
+   "en": "Research Project (1)",
+   "ar": "مشروع بحث (1)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 441",
+   "ar_code": "نبت 441",
+   "en": "Economic Botany",
+   "ar": "النبات الإقتصادي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BOT 443",
+   "ar_code": "نبت 443",
+   "en": "Ecological Methods",
+   "ar": "وسائل عملية فى علم البيئة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 445",
+   "ar_code": "نبت 445",
+   "en": "Desert Ecology and its Resources",
+   "ar": "البيئة الصحراوية وثرواتها",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BOT 447",
+   "ar_code": "نبت 447",
+   "en": "Arid Regions Development",
+   "ar": "تنمية المناطق الجافة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 449",
+   "ar_code": "نبت 449",
+   "en": "Natural Resources and their Management",
+   "ar": "الموارد الطبيعية وإدارتها",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BOT 456",
+   "ar_code": "نبت 456",
+   "en": "Gene Conservation",
+   "ar": "المحافظة على المورثات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 457",
+   "ar_code": "نبت 457",
+   "en": "Genetic Engineering",
+   "ar": "الهندسة الوراثية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 458",
+   "ar_code": "نبت 458",
+   "en": "Ecological Genetics",
+   "ar": "الوراثة البيئية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 472",
+   "ar_code": "نبت 472",
+   "en": "Plant Tissue Culture",
+   "ar": "زراعة الأنسجة النباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 473",
+   "ar_code": "نبت 473",
+   "en": "Plant Chemistry",
+   "ar": "كيمياء نباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 476",
+   "ar_code": "نبت 476",
+   "en": "Date Palm Biology",
+   "ar": "احيائية نخلة التمر",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 487",
+   "ar_code": "نبت 487",
+   "en": "Phytoplankton",
+   "ar": "العوالق النباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BOT 492",
+   "ar_code": "نبت 492",
+   "en": "Ecological Field Training",
+   "ar": "تدريبات حقلية بيئية",
+   "h": 5,
+   "lab": true
+  },
+  {
+   "code": "BOT 495",
+   "ar_code": "نبت 495",
+   "en": "Plant Molecular Biology",
+   "ar": "الاحياء الجزيئية للنبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BOT 499",
+   "ar_code": "نبت 499",
+   "en": "Research Project (2)",
+   "ar": "مشروع بحث (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 101",
+   "ar_code": "ادا 101",
+   "en": "Principles of Management & Business",
+   "ar": "مباديء الإدارة والأعمال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 202",
+   "ar_code": "ادا 202",
+   "en": "Human Resources Management",
+   "ar": "إدارة الموارد البشرية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "BUS 371",
+   "ar_code": "ادا 371",
+   "en": "Operations Management",
+   "ar": "إدارة العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 101",
+   "ar_code": "كيم 101",
+   "en": "General Chemistry (1)",
+   "ar": "كيمياء عامة (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CHEM 108",
+   "ar_code": "كيم 108",
+   "en": "Introduction in Organic Chemistry",
+   "ar": "مقدمه في الكيمياء العضوية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHEM 201",
+   "ar_code": "كيم 201",
+   "en": "General Chemistry (2)",
+   "ar": "كيمياء عامة (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHEM 223",
+   "ar_code": "كيم 223",
+   "en": "Chemistry of Main Groups",
+   "ar": "كيمياء المجموعات الرئيسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 232",
+   "ar_code": "كيم 232",
+   "en": "Chemical Thermodynamics",
+   "ar": "الثيرموداينمك الكيميائي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 233",
+   "ar_code": "كيم 233",
+   "en": "Chemical Thermodynamics",
+   "ar": "مبادىء الثيرمودايناميك الكيميائي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 240",
+   "ar_code": "كيم 240",
+   "en": "Organic Chemistry (1)",
+   "ar": "الكيمياء العضوية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 241",
+   "ar_code": "كيم 241",
+   "en": "Organic Chemistry (2)",
+   "ar": "الكيمياء العضوية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 247",
+   "ar_code": "كيم 247",
+   "en": "Identification of Organic Compounds",
+   "ar": "التعرف على المركبات العضوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 251",
+   "ar_code": "كيم 251",
+   "en": "Analytical Chemistry",
+   "ar": "الكيمياء التحليلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 252",
+   "ar_code": "كيم 252",
+   "en": "Fundamentals of Analytical Chemistry",
+   "ar": "أساسيات الكيمياء التحليلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 253",
+   "ar_code": "كيم 253",
+   "en": "Principles of Analytical Chemistry",
+   "ar": "مباديء الكيمياء التحليلية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 256",
+   "ar_code": "كيم 256",
+   "en": "Spectroscopic Analytical Methods",
+   "ar": "طرق التحليل الطيفي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 310",
+   "ar_code": "كيم 310",
+   "en": "Computer Applications in Chemistry",
+   "ar": "تطبيقات الحاسب الآلي في الكيمياء",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 320",
+   "ar_code": "كيم 320",
+   "en": "Quantum Chemistry (1)",
+   "ar": "كيمياء الكم (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 323",
+   "ar_code": "كيم 323",
+   "en": "Chemistry of Transition Elements",
+   "ar": "كيمياء العناصر الإنتقالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 326",
+   "ar_code": "كيم 326",
+   "en": "Non-aqueous Chemistry",
+   "ar": "الكيمياء اللامائية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CHEM 328",
+   "ar_code": "كيم 328",
+   "en": "Quantum Chemistry (2)",
+   "ar": "كيمياء الكم (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 329",
+   "ar_code": "كيم 329",
+   "en": "Inorganic Compounds Spectroscopy",
+   "ar": "أطياف المركبات غير العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 330",
+   "ar_code": "كيم 330",
+   "en": "Physical Chemistry of Polymers",
+   "ar": "الكيمياء الفيزيائية للبوليمرات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 333",
+   "ar_code": "كيم 333",
+   "en": "Industrial Chemistry",
+   "ar": "الكيمياء الصناعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 334",
+   "ar_code": "كيم 334",
+   "en": "Nuclear and Radiation Chemistry",
+   "ar": "الكيمياء النووية والإشعاعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 335",
+   "ar_code": "كيم 335",
+   "en": "Chemical Kinetics",
+   "ar": "الحركية الكيميائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 336",
+   "ar_code": "كيم 336",
+   "en": "Physical Chemistry of Solutions",
+   "ar": "الكيمياء الفيزيائية للمحاليل",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 341",
+   "ar_code": "كيم 341",
+   "en": "Heterocyclic Organic Chemistry",
+   "ar": "الكيمياء العضوية غير المتجانسة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 342",
+   "ar_code": "كيم 342",
+   "en": "Polymers and Petrochemicals",
+   "ar": "البوليمرات والبتروكيماويات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 344",
+   "ar_code": "كيم 344",
+   "en": "Organic Reaction Mechanism",
+   "ar": "ميكانيكية التفاعلات العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 345",
+   "ar_code": "كيم 345",
+   "en": "Organic Preparations",
+   "ar": "تحضيرات عضوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 353",
+   "ar_code": "كيم 353",
+   "en": "Electro-analytical Methods",
+   "ar": "طرق التحليل الكهروكيميائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 418",
+   "ar_code": "كيم 418",
+   "en": "Bio-inorganic Chemistry",
+   "ar": "الكيمياء غير العضوية الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 421",
+   "ar_code": "كيم 421",
+   "en": "Organometallic Chemistry",
+   "ar": "الكيمياء العضو معدنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 422",
+   "ar_code": "كيم 422",
+   "en": "Chemistry of Solid State",
+   "ar": "كيمياء الحالة الصلبة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 425",
+   "ar_code": "كيم 425",
+   "en": "Inorganic Reaction Mechanism",
+   "ar": "ميكانيكية التفاعلات غير العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 427",
+   "ar_code": "كيم 427",
+   "en": "Industrial-inorganic Chemistry",
+   "ar": "الكيمياء غير العضوية الصناعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 429",
+   "ar_code": "كيم 429",
+   "en": "Practical Inorganic Chemistry (2)",
+   "ar": "عملي كيمياء غير العضوية (2)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 430",
+   "ar_code": "كيم 430",
+   "en": "Electrochemistry",
+   "ar": "الكيمياء الكهربية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 434",
+   "ar_code": "كيم 434",
+   "en": "Practical of polymer physical chemistry",
+   "ar": "تجارب في الكيمياء الفيزيائية للبوليمرات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 436",
+   "ar_code": "كيم 436",
+   "en": "Surface Chemistry and Catalysis",
+   "ar": "كيمياء السطوح والحفز",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 441",
+   "ar_code": "كيم 441",
+   "en": "Organic Compounds Spectroscopy",
+   "ar": "أطياف المركبات العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 442",
+   "ar_code": "كيم 442",
+   "en": "Organic Industries",
+   "ar": "الصناعات العضوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 443",
+   "ar_code": "كيم 443",
+   "en": "Chemistry of Natural Products",
+   "ar": "كيمياء المنتجات الطبيعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 447",
+   "ar_code": "كيم 447",
+   "en": "Advanced Practical Organic Chemistry",
+   "ar": "عملي كيمياء عضوية متقدم",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 455",
+   "ar_code": "كيم 455",
+   "en": "Statistical Treatment of Chemical Data",
+   "ar": "المعالجة الإحصائية للبيانات الكيميائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 457",
+   "ar_code": "كيم 457",
+   "en": "Environmental Analysis",
+   "ar": "التحليل البيئي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 458",
+   "ar_code": "كيم 458",
+   "en": "Chromatographic Separation Methods",
+   "ar": "طرق الفصل الكيميائية والكروماتوجرافية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 460",
+   "ar_code": "كيم 460",
+   "en": "Green Chemistry",
+   "ar": "الكيمياء الخضراء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 461",
+   "ar_code": "كيم 461",
+   "en": "Corrosion",
+   "ar": "التآكل",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 497",
+   "ar_code": "كيم 497",
+   "en": "Instrumental Chemical Analysis Training",
+   "ar": "التدريب على أجهزة التحليل الآلي الكيميائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHEM 499",
+   "ar_code": "كيم 499",
+   "en": "Research Project",
+   "ar": "مشروع التخرج",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and healthy culture",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 111",
+   "ar_code": "عال 111",
+   "en": "Computer Programming (1)",
+   "ar": "برمجة حاسبات (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CSC 113",
+   "ar_code": "عال 113",
+   "en": "Computer Programming (2)",
+   "ar": "برمجة حاسبات (2)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CSC 115",
+   "ar_code": "عال 115",
+   "en": "Introduction to Programming With C++",
+   "ar": "C++ مقدمة للبرمجة بلغة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CSC 202",
+   "ar_code": "عال 202",
+   "en": "Computer Programming with MATLAB",
+   "ar": "برمجة الحاسب الآلي باستخدام MATLAB",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CSC 212",
+   "ar_code": "عال 212",
+   "en": "Data Structures",
+   "ar": "تراكيب البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CSC 380",
+   "ar_code": "عال 380",
+   "en": "Fundamentals Of Database Systems",
+   "ar": "اسس نظم قواعد البيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "Computer Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 101",
+   "ar_code": "قصد 101",
+   "en": "Principles of Microeconomics",
+   "ar": "مباديء الاقتصاد الجزئي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 102",
+   "ar_code": "قصد 102",
+   "en": "Principles of Macroeconomics",
+   "ar": "مباديء الاقتصاد الكلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 201",
+   "ar_code": "قصد 201",
+   "en": "Microeconomics Analysis",
+   "ar": "تحليل اقتصادي جزئي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 211",
+   "ar_code": "قصد 211",
+   "en": "Money & Banking",
+   "ar": "اقتصاديات نقود وبنوك",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 104",
+   "ar_code": "إنجل 104",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 105",
+   "ar_code": "إنجل 105",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 106",
+   "ar_code": "إنجل 106",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 110",
+   "ar_code": "انجل 110",
+   "en": "English Language",
+   "ar": "لغة إنجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 111",
+   "ar_code": "إنجل 111",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 112",
+   "ar_code": "إنجل 112",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 113",
+   "ar_code": "إنجل 113",
+   "en": "English Language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "انجل 110",
+   "en": "English for Specific Purposes",
+   "ar": "لغة إنجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Education",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "FED 420",
+   "ar_code": "غذت 420",
+   "en": "Biotechnology for food",
+   "ar": "التقنية الحيوية للأغذية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FIN 200",
+   "ar_code": "مال 200",
+   "en": "Principles of Finance",
+   "ar": "مبادئ المالية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 220",
+   "ar_code": "مال 220",
+   "en": "Investment Essentials",
+   "ar": "أساسيات الاستثمار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FIN 240",
+   "ar_code": "مال 240",
+   "en": "Principles of Risk & Insurance",
+   "ar": "أساسيات الخطر والتأمين",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 321",
+   "ar_code": "غذت 321",
+   "en": "Food Microbiology",
+   "ar": "ميكروبيولوجيا الاغذيه",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 402",
+   "ar_code": "هعم 402",
+   "en": "Management Of Engineering Projects",
+   "ar": "ادارة المشاريع الهندسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GE 403",
+   "ar_code": "هعم 403",
+   "en": "Engineering Economy",
+   "ar": "الاقتصاد الهندسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 100",
+   "ar_code": "جيو 100",
+   "en": "General Geology",
+   "ar": "جيولوجيا عامة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "GEO 101",
+   "ar_code": "جيو 101",
+   "en": "Physical Geology",
+   "ar": "جيولوجيا فيزيائية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "GEO 105",
+   "ar_code": "جيو 105",
+   "en": "Geology",
+   "ar": "مقدمة في الجيولوجيا",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 107",
+   "ar_code": "جيو 107",
+   "en": "Historical Geology",
+   "ar": "جيولوجيا تاريخية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 221",
+   "ar_code": "جيو 221",
+   "en": "Mineralogy",
+   "ar": "علم المعادن",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 237",
+   "ar_code": "جيو 237",
+   "en": "Stratigraphy and Sedimentology",
+   "ar": "علم الرسوبيات والطبقات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 242",
+   "ar_code": "جيو 242",
+   "en": "Micropaleontology",
+   "ar": "مبادىء الاحافير الدقيقة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 246",
+   "ar_code": "جيو 246",
+   "en": "Paleontology",
+   "ar": "علم الأحافير",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 274",
+   "ar_code": "جيو 274",
+   "en": "Geologic Reports",
+   "ar": "تقارير جيولوجية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "GEO 301",
+   "ar_code": "جيو 301",
+   "en": "Geomorphology",
+   "ar": "جيومورفولوجيا",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 303",
+   "ar_code": "جيو 303",
+   "en": "Principles of Remote Sensing",
+   "ar": "مبادئ الاستشعار من بعد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GEO 320",
+   "ar_code": "جيو 320",
+   "en": "Petrology",
+   "ar": "علم الصخور",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 324",
+   "ar_code": "جيو 324",
+   "en": "Igneous Petrology",
+   "ar": "علم الصخور النارية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 326",
+   "ar_code": "جيو 326",
+   "en": "Metamorphic Petrology",
+   "ar": "علم الصخور المتحولة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 334",
+   "ar_code": "جيو 334",
+   "en": "Sedimentary Petrology",
+   "ar": "علم الصخور الرسوبية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 341",
+   "ar_code": "جيو 341",
+   "en": "Paleobotany",
+   "ar": "علم النباتات القديمة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 342",
+   "ar_code": "جيو 342",
+   "en": "Paleoecology",
+   "ar": "علم البيئات القديمة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 381",
+   "ar_code": "جيو 381",
+   "en": "Structural Geology",
+   "ar": "جيولوجيا بنائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 382",
+   "ar_code": "جيو 382",
+   "en": "Geographic Information Systems",
+   "ar": "نظم المعلومات المكانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 383",
+   "ar_code": "جيو 383",
+   "en": "Remote Sensing",
+   "ar": "الاستشعار عن بعد",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 384",
+   "ar_code": "جيو 384",
+   "en": "Geological survey",
+   "ar": "مساحة جيولوجية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 385",
+   "ar_code": "جيو 385",
+   "en": "Sedimentary Geology of Saudi Arabia",
+   "ar": "الغطاء الرسوبي للمملكة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 386",
+   "ar_code": "جيو 386",
+   "en": "Geology of the Arabian Shield",
+   "ar": "جيولوجية الدرع العربي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 393",
+   "ar_code": "جيو 393",
+   "en": "Field Geology",
+   "ar": "جيولوجيا الحقل",
+   "h": 6,
+   "lab": true
+  },
+  {
+   "code": "GEO 421",
+   "ar_code": "جيو 421",
+   "en": "Volcanology",
+   "ar": "علم البراكين",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 431",
+   "ar_code": "جيو 431",
+   "en": "Carbonate Rocks",
+   "ar": "صخور الكربونات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 432",
+   "ar_code": "جيو 432",
+   "en": "Quaternary Geology",
+   "ar": "جيولوجية العصر الرباعي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 435",
+   "ar_code": "جيو 435",
+   "en": "Oceanography",
+   "ar": "جيولوجيا البحار",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 441",
+   "ar_code": "جيو 441",
+   "en": "Vertebrate Paleontology",
+   "ar": "مبادىء الأحافير الفقرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 445",
+   "ar_code": "جيو 445",
+   "en": "Sedimentary Basin Analysis",
+   "ar": "تحليل الاحواض الرسوبية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 450",
+   "ar_code": "جيو 450",
+   "en": "Ore Geology",
+   "ar": "جيولوجيا الخامات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 451",
+   "ar_code": "جيو 451",
+   "en": "Geochemistry",
+   "ar": "جيوكيمياء",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 452",
+   "ar_code": "جيو 452",
+   "en": "Petroleum Geology",
+   "ar": "جيولوجيا البترول",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 454",
+   "ar_code": "جيو 454",
+   "en": "Mining Geology",
+   "ar": "جيولوجيا التعدين",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 455",
+   "ar_code": "جيو 455",
+   "en": "Hydrogeology",
+   "ar": "جيولوجيا المياه",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 456",
+   "ar_code": "جيو 456",
+   "en": "Application in Petroleum Geology",
+   "ar": "تطبيقات في جيولوجيا البترول",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 457",
+   "ar_code": "جيو 457",
+   "en": "Engineering Geology",
+   "ar": "الجيولوجيا الهندسية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 462",
+   "ar_code": "جيو 462",
+   "en": "Environmental Geology",
+   "ar": "الجيولوجيا البيئية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 463",
+   "ar_code": "جيو 463",
+   "en": "Plate Tectonics",
+   "ar": "حركية الصفائح",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 483",
+   "ar_code": "جيو 483",
+   "en": "Regional Geology of the Middle East",
+   "ar": "الجيولوجيا الإقليمية للشرق الأوسط",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 495",
+   "ar_code": "جيو 495",
+   "en": "History of Geology",
+   "ar": "تاريخ الجيولوجيا",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "GEO 497",
+   "ar_code": "جيو 497",
+   "en": "Graduation Project - 1",
+   "ar": "مشروع تخرج (1)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GEO 498",
+   "ar_code": "جيو 498",
+   "en": "Graduation Project - 2",
+   "ar": "مشروع تخرج (2)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 201",
+   "ar_code": "جاف 201",
+   "en": "Principles of Geophysics",
+   "ar": "أسس الجيوفيزياء",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 211",
+   "ar_code": "جاف 211",
+   "en": "Gravity and Magnetic Exploration",
+   "ar": "الأستكشاف الجاذبي والمغناطيسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 221",
+   "ar_code": "جاف 221",
+   "en": "Seismic Exploration",
+   "ar": "الاسنكشاف السيزمي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 231",
+   "ar_code": "جاف 231",
+   "en": "Geoelectric and Electromagnetic Exploration",
+   "ar": "الاستكشاف الجيوكهربي والكهرومغناطيسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 301",
+   "ar_code": "جاف 301",
+   "en": "Geophysical Exploration",
+   "ar": "الاستكشاف الجيوفيزيائي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 313",
+   "ar_code": "جاف 313",
+   "en": "Seismology",
+   "ar": "علم الزلازل",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 317",
+   "ar_code": "جاف 317",
+   "en": "Time Series Analysis",
+   "ar": "تحليل السلاسل الزمنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 319",
+   "ar_code": "جاف 319",
+   "en": "Petrophysics",
+   "ar": "فيزياء الصخور",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 320",
+   "ar_code": "جاف 320",
+   "en": "Natural Hazards",
+   "ar": "المخاطر الطبيعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 381",
+   "ar_code": "جاف 381",
+   "en": "Geophysical Reports",
+   "ar": "تقارير جيوفيزيائية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "GPH 390",
+   "ar_code": "جاف 390",
+   "en": "Radiometric and Geothermal methods",
+   "ar": "الطاقة الحرارية الأرضية والإشعاعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 393",
+   "ar_code": "جاف 393",
+   "en": "Field Geophysics",
+   "ar": "جيوفيزياء الحقل",
+   "h": 6,
+   "lab": true
+  },
+  {
+   "code": "GPH 401",
+   "ar_code": "جاف 401",
+   "en": "Physics of the Earth",
+   "ar": "فيزياء الأرض",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 410",
+   "ar_code": "جاف 410",
+   "en": "Geophysical Well Logging",
+   "ar": "القياسات الجيوفيزيائية للآبار",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 411",
+   "ar_code": "جاف 411",
+   "en": "Geophysical Data Processing",
+   "ar": "معالجة البيانات الجيوفيزيائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 412",
+   "ar_code": "جاف 412",
+   "en": "Engineering Seismology",
+   "ar": "السيزمية الهندسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 417",
+   "ar_code": "جاف 417",
+   "en": "Hydrogeophysics",
+   "ar": "جيوفيزياء المياه الجوفية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 419",
+   "ar_code": "جاف 419",
+   "en": "Earthquake Geology",
+   "ar": "جيولوجيا الزلازل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 421",
+   "ar_code": "جاف 421",
+   "en": "Mining Geophysics",
+   "ar": "جيوفيزياء التعدين",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 424",
+   "ar_code": "جاف 424",
+   "en": "Environmental and Engineering Geophysics",
+   "ar": "الجيوفيزياء البيئية والهندسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 431",
+   "ar_code": "جاف 431",
+   "en": "Seismic stratigraphy",
+   "ar": "السيزمية الطباقية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 444",
+   "ar_code": "جاف 444",
+   "en": "Marine Geophysics",
+   "ar": "الجيوفيزياء البحرية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPH 496",
+   "ar_code": "جاف 496",
+   "en": "Graduation Project (1)",
+   "ar": "مشروع تخرج (1)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GPH 497",
+   "ar_code": "جاف 497",
+   "en": "Graduation Project (2)",
+   "ar": "مشروع تخرج (2)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Prophet's Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Principles of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Islamic Economic System",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "اخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Contemporary Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Women and their developmental role",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IE 214",
+   "ar_code": "صنع 214",
+   "en": "Industrial Operation Management (1)",
+   "ar": "إدارة العمليات الصناعية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 222",
+   "ar_code": "صنع 222",
+   "en": "Industrial Operations Analysis (1)",
+   "ar": "تحليل العمليات الصناعية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 314",
+   "ar_code": "صنع 314",
+   "en": "Industrial Operations Management (2)",
+   "ar": "ادارة العمليات الصناعية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 101",
+   "ar_code": "ريض 101",
+   "en": "Differential Calculus",
+   "ar": "حساب التفاضل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 106",
+   "ar_code": "ريض 106",
+   "en": "Integral Calculus",
+   "ar": "حساب التكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 111",
+   "ar_code": "ريض 111",
+   "en": "Integral Calculus",
+   "ar": "حساب التكامل",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 131",
+   "ar_code": "ريض 131",
+   "en": "Foundations of Mathematics",
+   "ar": "اسس الرياضيات",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 132",
+   "ar_code": "ريض 132",
+   "en": "Logic Mathematics",
+   "ar": "المنطق الرياضي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 201",
+   "ar_code": "ريض 201",
+   "en": "Differential & Integral Calculus",
+   "ar": "حساب التفاضل والتكامل",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 202",
+   "ar_code": "ريض 202",
+   "en": "Vector Calculus",
+   "ar": "حساب المتجهات",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 204",
+   "ar_code": "ريض 204",
+   "en": "Differential Equations",
+   "ar": "المعادلات التفاضلية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 206",
+   "ar_code": "ريض 206",
+   "en": "Multivariable Differential and Integral Calculus",
+   "ar": "حساب التفاضل والتكامل متعدد المتغيرات",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 209",
+   "ar_code": "ريض 209",
+   "en": "Differential Equations",
+   "ar": "معادلات تفاضلية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 211",
+   "ar_code": "ريض 211",
+   "en": "Mathematics for Chemists",
+   "ar": "الرياضيات للكيميائيين",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 225",
+   "ar_code": "ريض 225",
+   "en": "Introduction to Differential Equations",
+   "ar": "مقدمة في المعادلات التفاضلية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 240",
+   "ar_code": "ريض 240",
+   "en": "Introduction to Linear Algebra",
+   "ar": "مقدمة في الجبر الخطي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 243",
+   "ar_code": "ريض 243",
+   "en": "Number Theory",
+   "ar": "نظرية الاعداد",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 244",
+   "ar_code": "ريض 244",
+   "en": "Linear Algebra",
+   "ar": "الجبر الخطي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 246",
+   "ar_code": "ريض 246",
+   "en": "Linear Algebra",
+   "ar": "الجبر الخطي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 254",
+   "ar_code": "ريض 254",
+   "en": "Numerical Methods",
+   "ar": "الطرائق العددية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 280",
+   "ar_code": "ريض 280",
+   "en": "Real Analysis",
+   "ar": "مقدمة في التحليل الحقيقي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 316",
+   "ar_code": "ريض 316",
+   "en": "Mathematical Methods",
+   "ar": "الطرائق الرياضية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 343",
+   "ar_code": "ريض 343",
+   "en": "Group Theory",
+   "ar": "نظرية الزمر",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 352",
+   "ar_code": "ريض 352",
+   "en": "Numerical Analysis (1)",
+   "ar": "التحليل العددي (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 373",
+   "ar_code": "ريض 373",
+   "en": "Introduction to Topology",
+   "ar": "مقدمة فى التوبولوجيا",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 379",
+   "ar_code": "ريض 379",
+   "en": "Foundations of Euclidean and Non-Euclidean Geometry",
+   "ar": "أسس الهندسة الإقليدية واللااقليدية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 380",
+   "ar_code": "ريض 380",
+   "en": "Stochastic Processes",
+   "ar": "العمليات العشوائية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 382",
+   "ar_code": "ريض 382",
+   "en": "Real Analysis (1)",
+   "ar": "التحليل الحقيقي (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 391",
+   "ar_code": "ريض 391",
+   "en": "History of Mathematics",
+   "ar": "تاريخ الرياضيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 425",
+   "ar_code": "ريض 425",
+   "en": "Partial Differential Equations",
+   "ar": "معادلات تفاضلية جزئية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 426",
+   "ar_code": "ريض 426",
+   "en": "Modeling in Mathematical Biology",
+   "ar": "النمذجة في علم الأحياء الرباضي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 431",
+   "ar_code": "ريض 431",
+   "en": "Combinatorics and Graph Theory (1)",
+   "ar": "التركيبات ونظرية الرسومات (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 433",
+   "ar_code": "ريض 433",
+   "en": "Combinatorics and Graph Theory (2)",
+   "ar": "التركيبات ونظرية الرسومات (2)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 436",
+   "ar_code": "ريض 436",
+   "en": "Mathematical Logic",
+   "ar": "المنطق الرياضي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 441",
+   "ar_code": "ريض 441",
+   "en": "Rings and Fields",
+   "ar": "الحلقات والحقول",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 442",
+   "ar_code": "ريض 442",
+   "en": "Applications of Algebra",
+   "ar": "تطبيقات الجبر",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 453",
+   "ar_code": "ريض 453",
+   "en": "Numerical Analysis (2)",
+   "ar": "التحليل العددي (2)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 456",
+   "ar_code": "ريض 456",
+   "en": "Introduction to Mathematical Programming",
+   "ar": "المدخل الى البرمجة الرياضية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 466",
+   "ar_code": "ريض 466",
+   "en": "Dynamical Systems and Chaos",
+   "ar": "النظم الديناميكية والتشوش",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 473",
+   "ar_code": "ريض 473",
+   "en": "Introduction to Differential Geometry",
+   "ar": "مقدمة في الهندسة التفاضلية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 481",
+   "ar_code": "ريض 481",
+   "en": "Real Analysis (2)",
+   "ar": "التحليل الحقيقي (2)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 482",
+   "ar_code": "ريض 482",
+   "en": "Multivariable Calculus",
+   "ar": "التحليل في عدة متغيرات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 487",
+   "ar_code": "ريض 487",
+   "en": "Complex Analysis",
+   "ar": "التحليل المركب",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 499",
+   "ar_code": "ريض 499",
+   "en": "Research Project",
+   "ar": "مشروع بحث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MBI 140",
+   "ar_code": "حدق 140",
+   "en": "Microbiology",
+   "ar": "علم الإحياء الدقيقة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 222",
+   "ar_code": "حدق 222",
+   "en": "Microbial Fine Structure",
+   "ar": "التركيب الدقيق للأحياء الدقيقة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 240",
+   "ar_code": "حدق 240",
+   "en": "Laboratory Skills",
+   "ar": "مهارات مخبرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 250",
+   "ar_code": "حدق 250",
+   "en": "General Virology",
+   "ar": "علم الفيروسات العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 251",
+   "ar_code": "حدق 251",
+   "en": "Molecular Biology",
+   "ar": "الأحياء الجزيئية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 260",
+   "ar_code": "حدق 260",
+   "en": "General Bacteriology",
+   "ar": "علم البكتيريا العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 270",
+   "ar_code": "حدق 270",
+   "en": "General Mycology",
+   "ar": "علم الفطريات العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 280",
+   "ar_code": "حدق 280",
+   "en": "Biology of Microalgae",
+   "ar": "أحيائية الطحالب الدقيقة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 320",
+   "ar_code": "حدق 320",
+   "en": "Microbial Diagnosis",
+   "ar": "تشخيص ميكروبي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 331",
+   "ar_code": "حدق 331",
+   "en": "Microbial Physiology",
+   "ar": "فسيولوجي الميكروبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 334",
+   "ar_code": "حدق 334",
+   "en": "Biochemical Instrumentation Techniques",
+   "ar": "تقنية الاجهزة الكيموحيوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 335",
+   "ar_code": "حدق 335",
+   "en": "Biodegradation",
+   "ar": "تحلل حيوي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 340",
+   "ar_code": "حدق 340",
+   "en": "Microbial Ecology & Pollution",
+   "ar": "بيئة الأحياء الدقيقة والتلوث",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 344",
+   "ar_code": "حدق 344",
+   "en": "Sanitation & Water Microbiology",
+   "ar": "ميكروبيولوجيا المياه والصرف الصحي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 345",
+   "ar_code": "حدق 345",
+   "en": "Microbial Interaction",
+   "ar": "التفاعل بين الأحياء الدقيقة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 346",
+   "ar_code": "حدق 346",
+   "en": "Mining Microbiology",
+   "ar": "مايكروبيولوجيا التعدين",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 348",
+   "ar_code": "حدق 348",
+   "en": "Lichenology",
+   "ar": "علم الأشنات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 349",
+   "ar_code": "حدق 349",
+   "en": "Yeast",
+   "ar": "علم الخمائر",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 351",
+   "ar_code": "حدق 351",
+   "en": "Microbial Genetics",
+   "ar": "وراثة الأحياء الدقيقة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 450",
+   "ar_code": "حدق 450",
+   "en": "Medical Virology",
+   "ar": "علم الفيروسات الطبي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 451",
+   "ar_code": "حدق 451",
+   "en": "Immunology",
+   "ar": "علم المناعه",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 460",
+   "ar_code": "حدق 460",
+   "en": "Medical Bacteriology",
+   "ar": "علم البكتيريا الطبي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 463",
+   "ar_code": "حدق 463",
+   "en": "Antibiotics",
+   "ar": "مضادات حيوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 465",
+   "ar_code": "حدق 465",
+   "en": "Industrial Microbiology",
+   "ar": "ميكروبيولوجيا صناعية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 466",
+   "ar_code": "حدق 466",
+   "en": "Introduction to Petroleum Microbiology",
+   "ar": "مقدمة في ميكروبيولوجيا البترول",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 470",
+   "ar_code": "حدق 470",
+   "en": "Medical Mycology",
+   "ar": "علم الفطريات الطبي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBI 487",
+   "ar_code": "حدق 487",
+   "en": "Plankton",
+   "ar": "عوالق مائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "MBI 490",
+   "ar_code": "حدق 490",
+   "en": "Scientific Communication",
+   "ar": "الأتصال العلمي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "MBI 492",
+   "ar_code": "حدق 492",
+   "en": "Training in the techniques of food microbes, environmental and human health",
+   "ar": "تدريبات في تقنيات الميكروبات الغذائية والبيئية وصحة الأنسان",
+   "h": 6,
+   "lab": true
+  },
+  {
+   "code": "MBI 493",
+   "ar_code": "حدق 493",
+   "en": "Training in medical microbiology laboratories",
+   "ar": "تدريبات في ميكروبيولوجي المختبرات الصحية",
+   "h": 6,
+   "lab": true
+  },
+  {
+   "code": "MBI 499",
+   "ar_code": "حدق 499",
+   "en": "Research Project",
+   "ar": "مشروع بحث",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBIO 140",
+   "ar_code": "حدق 140",
+   "en": "Microbiology",
+   "ar": "علم الإحياء الدقيقة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBIO 250",
+   "ar_code": "حدق 250",
+   "en": "General Virology",
+   "ar": "علم الفيروسات العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MBIO 260",
+   "ar_code": "حدق 260",
+   "en": "General Bacteriology",
+   "ar": "علم البكتيريا العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MGT 101",
+   "ar_code": "",
+   "en": "Management and Business Principles",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MIS 201",
+   "ar_code": "نما 201",
+   "en": "Management Information Systems",
+   "ar": "نظم المعلومات الإدارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 100",
+   "ar_code": "بحث 100",
+   "en": "Introduction to Operations Research",
+   "ar": "مقدمة في بحوث العمليات",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPER 213",
+   "ar_code": "بحث 213",
+   "en": "Linear Programming",
+   "ar": "البرمجة الخطية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPER 313",
+   "ar_code": "بحث 313",
+   "en": "Integer Programming",
+   "ar": "البرمجة العددية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 322",
+   "ar_code": "بحث 322",
+   "en": "Inventory Control",
+   "ar": "ضبط ومراقبة المخزون",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 331",
+   "ar_code": "بحث 331",
+   "en": "Nonlinear Optimization",
+   "ar": "الأمثلية غير الخطية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPER 351",
+   "ar_code": "بحث 351",
+   "en": "Network Analysis",
+   "ar": "تحليل الشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 371",
+   "ar_code": "بحث 371",
+   "en": "Stochastic Processes & Queues",
+   "ar": "العمليات العشوائية ونماذج الصفوف",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPER 385",
+   "ar_code": "بحث 385",
+   "en": "Decisions & Game Theory",
+   "ar": "نظرية القرارات والمباريات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 415",
+   "ar_code": "بحث 415",
+   "en": "Dynamic Programming",
+   "ar": "البرمجة الديناميكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 435",
+   "ar_code": "بحث 435",
+   "en": "Computational Methods in Operations Research",
+   "ar": "طرق الحسابات في بحوث العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 441",
+   "ar_code": "بحث 441",
+   "en": "Modeling & Simulation",
+   "ar": "النمذجة والمحاكاة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPER 453",
+   "ar_code": "بحث 453",
+   "en": "Sequencing & Scheduling",
+   "ar": "الجدولة والتتابع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 490",
+   "ar_code": "بحث 490",
+   "en": "Special Applications in Operations Research",
+   "ar": "تطبيقات خاصة في بحوث العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 492",
+   "ar_code": "بحث 492",
+   "en": "Pricing & Revenue Management",
+   "ar": "إدارة الأسعار والعوائد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 497",
+   "ar_code": "بحث 497",
+   "en": "Graduation Project (1)",
+   "ar": "مشروع تخرج (1)",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "OPER 498",
+   "ar_code": "بحث 498",
+   "en": "Graduation Project (2)",
+   "ar": "مشروع تخرج (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 101",
+   "ar_code": "فيز 101",
+   "en": "General Physics (1)",
+   "ar": "فيزياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 102",
+   "ar_code": "فيز 102",
+   "en": "General Physics (2)",
+   "ar": "فيزياء عامه (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 110",
+   "ar_code": "فيز 110",
+   "en": "General Physics (1)",
+   "ar": "فيزياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 111",
+   "ar_code": "فيز 111",
+   "en": "General Physics (2)",
+   "ar": "فيزياء عامة (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 201",
+   "ar_code": "فيز 201",
+   "en": "Mathematical Physics (1)",
+   "ar": "فيزياء رياضية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 205",
+   "ar_code": "فيز 205",
+   "en": "Biophysics",
+   "ar": "فيزياء حيوية لطلاب علم الحيوان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 209",
+   "ar_code": "فيز 209",
+   "en": "Biophysics",
+   "ar": "فيزياء حيوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 212",
+   "ar_code": "فيز 212",
+   "en": "Classical Mechanics (1)",
+   "ar": "ميكانيكا تقليدية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 221",
+   "ar_code": "فيز 221",
+   "en": "Electromagnetism (1)",
+   "ar": "كهرومغناطيسيه (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 230",
+   "ar_code": "فيز 230",
+   "en": "Vibrations and Waves",
+   "ar": "اهتزازات وموجات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 241",
+   "ar_code": "فيز 241",
+   "en": "Thermal Physics",
+   "ar": "فيزياء حراريه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 301",
+   "ar_code": "فيز 301",
+   "en": "Mathematical Physics (2)",
+   "ar": "فيزياء رياضية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 312",
+   "ar_code": "فيز 312",
+   "en": "Classical Mechanics (2)",
+   "ar": "ميكانيكا تقليدية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 323",
+   "ar_code": "فيز 323",
+   "en": "Electromagnetism (2)",
+   "ar": "كهرومغناطيسية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 325",
+   "ar_code": "فيز 325",
+   "en": "Electronics",
+   "ar": "إلكترونيات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PHYS 331",
+   "ar_code": "فيز 331",
+   "en": "Optics",
+   "ar": "بصريات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 342",
+   "ar_code": "فيز 342",
+   "en": "Statistical Physics",
+   "ar": "فيزياء إحصائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 353",
+   "ar_code": "فيز 353",
+   "en": "Modern Physics (1)",
+   "ar": "فيزياء حديثه (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 371",
+   "ar_code": "فيز 371",
+   "en": "Solid State Physics (1)",
+   "ar": "فيزياء جوامد (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 391",
+   "ar_code": "فيز 391",
+   "en": "Thermodynamics Lab",
+   "ar": "مختبر فيزياء حرارية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 393",
+   "ar_code": "فيز 393",
+   "en": "Modern Physics Lab",
+   "ar": "مختبر فيزياء حديثة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 394",
+   "ar_code": "فيز 394",
+   "en": "Electromagnetism Lab",
+   "ar": "مختبر كهرومغناطيسية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 395",
+   "ar_code": "فيز 395",
+   "en": "Wave Physics Lab",
+   "ar": "مختبر فيزياء موجيه",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 400",
+   "ar_code": "فيز 400",
+   "en": "Computational Physics",
+   "ar": "فيزياء حاسوبية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 404",
+   "ar_code": "فيز 404",
+   "en": "Mathematical Physics (3)",
+   "ar": "فيزياء رياضية (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 411",
+   "ar_code": "فيز 411",
+   "en": "Astrophysics (1)",
+   "ar": "فيزياء فلكية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 412",
+   "ar_code": "فيز 412",
+   "en": "Astrophysics (2)",
+   "ar": "فيزياء فلكية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 423",
+   "ar_code": "فيز 423",
+   "en": "Semiconductor Physics",
+   "ar": "فيزياء أشباه الموصلات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 435",
+   "ar_code": "فيز 435",
+   "en": "Laser Physics",
+   "ar": "فيزياء الليزر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 452",
+   "ar_code": "فيز 452",
+   "en": "Quantum Mechanics",
+   "ar": "ميكانيكا الكم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 456",
+   "ar_code": "فيز 456",
+   "en": "Atomic and Molecular Spectra",
+   "ar": "أطياف ذرية وجزيئية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 457",
+   "ar_code": "فيز 457",
+   "en": "Laser Lab",
+   "ar": "مختبر الليزر",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 460",
+   "ar_code": "فيز 460",
+   "en": "Biophysics",
+   "ar": "فيزياء حيوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 462",
+   "ar_code": "فيز 462",
+   "en": "Medical Physics",
+   "ar": "فيزياء طبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 463",
+   "ar_code": "فيز 463",
+   "en": "Solid State Physics (2)",
+   "ar": "فيزياء جوامد (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 476",
+   "ar_code": "فيز 476",
+   "en": "Introduction to Nanoscience and Nanotechnology",
+   "ar": "مقدمة في علم وتقنيات النانو",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 477",
+   "ar_code": "فيز 477",
+   "en": "Energy and Environmental Physics",
+   "ar": "فيزياء الطاقة والبيئة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 478",
+   "ar_code": "فيز 478",
+   "en": "Materials Science",
+   "ar": "علم المواد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 480",
+   "ar_code": "فيز 480",
+   "en": "Elementary Particle Physics",
+   "ar": "فيزياء الجسيمات الأولية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 481",
+   "ar_code": "فيز 481",
+   "en": "Nuclear Physics (1)",
+   "ar": "الفيزياء النوويه (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 483",
+   "ar_code": "فيز 483",
+   "en": "Nuclear Physics (2)",
+   "ar": "فيزياء نووية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 485",
+   "ar_code": "فيز 485",
+   "en": "Accelerator Physics",
+   "ar": "فيزياء المعجلات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 486",
+   "ar_code": "فيز 486",
+   "en": "Radiation Physics",
+   "ar": "فيزياء اشعاعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 488",
+   "ar_code": "فيز 488",
+   "en": "Nuclear Reactor Physics",
+   "ar": "فيزياء المفاعلات النووية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PHYS 490",
+   "ar_code": "فيز 490",
+   "en": "Research Skills",
+   "ar": "مهارات بحثية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 491",
+   "ar_code": "فيز 491",
+   "en": "Solid State Physics Lab",
+   "ar": "مختبر فيزياء الجوامد",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 492",
+   "ar_code": "فيز 492",
+   "en": "Nuclear Physics Lab",
+   "ar": "مختبر الفيزياء النووية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PHYS 499",
+   "ar_code": "فيز 499",
+   "en": "Graduation Project",
+   "ar": "مشروع بحث",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Quran Kareem",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 101",
+   "ar_code": "احص 101",
+   "en": "Introduction to Probability and Statistics",
+   "ar": "مدخل الى الاحتمالات والإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 105",
+   "ar_code": "احص 105",
+   "en": "Statistical Methods",
+   "ar": "طرق احصائية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "STAT 145",
+   "ar_code": "احص 145",
+   "en": "Biostatistics",
+   "ar": "الإحصاء الحيوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 215",
+   "ar_code": "احص 215",
+   "en": "Probability (1)",
+   "ar": "احتمال (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "STAT 216",
+   "ar_code": "احص 216",
+   "en": "Actuarial Probability",
+   "ar": "احتمال اكتواري",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "STAT 231",
+   "ar_code": "احص 231",
+   "en": "Population study \"Demography\"",
+   "ar": "احصاء سكاني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 322",
+   "ar_code": "احص 322",
+   "en": "Decision Theory",
+   "ar": "نظريه القرارات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 328",
+   "ar_code": "احص 328",
+   "en": "Statistical Packages",
+   "ar": "حزم احصائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "STAT 331",
+   "ar_code": "احص 331",
+   "en": "Sampling Techniques",
+   "ar": "تقنيات المعاينة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 332",
+   "ar_code": "احص 332",
+   "en": "Regression Analysis",
+   "ar": "تحليل الانحدار",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "STAT 333",
+   "ar_code": "احص 333",
+   "en": "Nonparametric Statistics Methods",
+   "ar": "طرق احصائية لا معلمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 335",
+   "ar_code": "احص 335",
+   "en": "Generalized Linear Models",
+   "ar": "نماذج خطية معممة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 336",
+   "ar_code": "احص 336",
+   "en": "Time Series & Forecasting",
+   "ar": "سلاسل زمنيه وتنبؤ",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "STAT 337",
+   "ar_code": "احص 337",
+   "en": "Design & Analysis of Experiments",
+   "ar": "تصميم وتحليل التجارب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 339",
+   "ar_code": "احص 339",
+   "en": "Data Analysis",
+   "ar": "تحليل بيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 340",
+   "ar_code": "احص 340",
+   "en": "Theory of Statistics (1)",
+   "ar": "نظرية الإحصاء (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 362",
+   "ar_code": "احص 362",
+   "en": "Reliability Theory",
+   "ar": "نظرية الموثوقية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 402",
+   "ar_code": "احص 402",
+   "en": "Econometrics",
+   "ar": "اقتصاد قياسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 415",
+   "ar_code": "احص 415",
+   "en": "Probability (2)",
+   "ar": "احتمال (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 419",
+   "ar_code": "احص 419",
+   "en": "Theory of Statistics (2)",
+   "ar": "(2 ) نظرية الإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 423",
+   "ar_code": "احص 423",
+   "en": "Quality Control",
+   "ar": "مراقبة الجودة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 429",
+   "ar_code": "احص 429",
+   "en": "Statistical Survey Methods",
+   "ar": "طرق المسح الإحصائي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 434",
+   "ar_code": "احص 434",
+   "en": "Linear Models",
+   "ar": "نماذج خطية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 438",
+   "ar_code": "احص 438",
+   "en": "Multivariate Statistical Methods",
+   "ar": "طرق احصائية متعددة المتغيرات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 439",
+   "ar_code": "احص 439",
+   "en": "Data Analysis",
+   "ar": "تحليل بيانات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 497",
+   "ar_code": "احص 497",
+   "en": "Graduation Project (1)",
+   "ar": "مشروع تخرج (1)",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "STAT 498",
+   "ar_code": "احص 498",
+   "en": "Graduation Project (2)",
+   "ar": "مشروع تخرج (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ZOO 103",
+   "ar_code": "حين 103",
+   "en": "Principles of General Zoology",
+   "ar": "مبادئ في علم الحيوان",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 212",
+   "ar_code": "حين 212",
+   "en": "Parasitology",
+   "ar": "علم الطفيليات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 242",
+   "ar_code": "حين 242",
+   "en": "Cell biology & Physiology",
+   "ar": "بيولوجيا وفسيولوجيا الخلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 245",
+   "ar_code": "حين 245",
+   "en": "Histology",
+   "ar": "علم الانسجة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 262",
+   "ar_code": "حين 262",
+   "en": "Microtechniques",
+   "ar": "تحضيرات مجهرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 305",
+   "ar_code": "حين 305",
+   "en": "Animal Modern Taxonomy",
+   "ar": "التصنيف الحديث للحيوان",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 311",
+   "ar_code": "حين 311",
+   "en": "General Entomology",
+   "ar": "علم الحشرات العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 317",
+   "ar_code": "حين 317",
+   "en": "Medical Arthropods",
+   "ar": "مفصليات طبية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 320",
+   "ar_code": "حين 320",
+   "en": "Ichthyology",
+   "ar": "علم الأسماك",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 325",
+   "ar_code": "حين 325",
+   "en": "Ornithology",
+   "ar": "علم الطيور",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 326",
+   "ar_code": "حين 326",
+   "en": "Mammology",
+   "ar": "علم الثدييات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 327",
+   "ar_code": "حين 327",
+   "en": "Herpetology",
+   "ar": "علم البرمائيات والزواحف",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 332",
+   "ar_code": "حين 332",
+   "en": "General physiology",
+   "ar": "الفسيولوجيا العامة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOO 342",
+   "ar_code": "حين 342",
+   "en": "Molecular biology",
+   "ar": "بيولوجيا جزيئية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 352",
+   "ar_code": "حين 352",
+   "en": "Principles of genetics",
+   "ar": "أساسيات علم الوراثة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 355",
+   "ar_code": "حين 355",
+   "en": "Animal Wildlife Genetics",
+   "ar": "وراثة الأنواع الفطرية الحيوانية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 366",
+   "ar_code": "حين 366",
+   "en": "Management of fish culture",
+   "ar": "إدارة المزارع السمكية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 373",
+   "ar_code": "حين 373",
+   "en": "Terrestrial ecology",
+   "ar": "بيئة برية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 374",
+   "ar_code": "حين 374",
+   "en": "Aquatic ecology",
+   "ar": "بيئة مائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 375",
+   "ar_code": "حين 375",
+   "en": "Pollution",
+   "ar": "التلوث",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 381",
+   "ar_code": "حين 381",
+   "en": "Economics of Aquaculture",
+   "ar": "اقتصاديات الاستزراع السمكي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 382",
+   "ar_code": "حين 382",
+   "en": "Entomofauna of Saudi Arabia",
+   "ar": "التنوع الحشري في المملكة العربية السعودية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 412",
+   "ar_code": "حين 412",
+   "en": "Parasite Immunology",
+   "ar": "علم مناعة الطفيليات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 413",
+   "ar_code": "حين 413",
+   "en": "Entomology and Environmental-Health",
+   "ar": "الحشرات وصحة البيئة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 420",
+   "ar_code": "حين 420",
+   "en": "Comparative vertebrate anatomy",
+   "ar": "تشريح الفقاريات المقارن",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 423",
+   "ar_code": "حين 423",
+   "en": "Principles of descriptive embryology",
+   "ar": "مبادىء علم الأجنة الوصفي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 424",
+   "ar_code": "حين 424",
+   "en": "Principles of experimental embryology",
+   "ar": "مبادىء علم الأجنة التجريبي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 425",
+   "ar_code": "حين 425",
+   "en": "Economic fishes and crustaceans",
+   "ar": "أسماك وقشريات اقتصادية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 432",
+   "ar_code": "حين 432",
+   "en": "Endocrinology",
+   "ar": "علم الغدد الصماء",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 433",
+   "ar_code": "حين 433",
+   "en": "Immunology",
+   "ar": "علم المناعة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 434",
+   "ar_code": "حين 434",
+   "en": "Renal Physiology",
+   "ar": "فسيولوجيا الاخراج",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 435",
+   "ar_code": "حين 435",
+   "en": "Neurophysiology",
+   "ar": "فسيولوجيا الأعصاب",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 436",
+   "ar_code": "حين 436",
+   "en": "Reproductive Physiology",
+   "ar": "فسيولوجيا التناسل",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 441",
+   "ar_code": "حين 441",
+   "en": "Histochemistry",
+   "ar": "كيمياء الانسجة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 455",
+   "ar_code": "حين 455",
+   "en": "Genetic Engineering",
+   "ar": "هندسة وراثية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 456",
+   "ar_code": "حين 456",
+   "en": "Bioinformatics",
+   "ar": "المعلوماتية الحيوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 458",
+   "ar_code": "حين 458",
+   "en": "Human Genetics",
+   "ar": "الوراثة في الإنسان",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 459",
+   "ar_code": "حين 459",
+   "en": "Cytogenetics and Cell Culture",
+   "ar": "وراثة خلوية وزراعة خلايا",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 461",
+   "ar_code": "حين 461",
+   "en": "Laboratory technology",
+   "ar": "تقنية مختبرات عملية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 462",
+   "ar_code": "حين 462",
+   "en": "Experimental parasitology",
+   "ar": "علم الطفيليات التجريبي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 464",
+   "ar_code": "حين 464",
+   "en": "Biotechnology",
+   "ar": "تقنيات حيوية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 465",
+   "ar_code": "حين 465",
+   "en": "Field studies",
+   "ar": "دراسات ميدانية",
+   "h": 5,
+   "lab": true
+  },
+  {
+   "code": "ZOO 466",
+   "ar_code": "حين 466",
+   "en": "Industrial Environmental Pollution",
+   "ar": "تلوث بيئي صناعي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 471",
+   "ar_code": "حين 471",
+   "en": "Animal behavior",
+   "ar": "سلوك الحيوان",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 480",
+   "ar_code": "حين 480",
+   "en": "Wildlife Protection",
+   "ar": "حماية الحياة الفطرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 481",
+   "ar_code": "حين 481",
+   "en": "Venomous Animals",
+   "ar": "الحيوانات السامة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 482",
+   "ar_code": "حين 482",
+   "en": "Organic adaptations of Chordates",
+   "ar": "تحورات عضوية في الحبليات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 497",
+   "ar_code": "حين 497",
+   "en": "Applied Training in Zoology",
+   "ar": "تدريب تطبيقي في علم الحيوان",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOO 498",
+   "ar_code": "حين 498",
+   "en": "Graduation project",
+   "ar": "مشروع بحث التخرج",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 103",
+   "ar_code": "حين 103",
+   "en": "Principles of Zoology",
+   "ar": "مبادئ في علم الحيوان",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 212",
+   "ar_code": "حين 212",
+   "en": "Parasitology",
+   "ar": "علم الطفيليات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 262",
+   "ar_code": "حين 262",
+   "en": "Microtechniques",
+   "ar": "تحضيرات مجهرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 305",
+   "ar_code": "حين 305",
+   "en": "Modern Animal Taxonomy",
+   "ar": "التصنيف الحديث للحيوان",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 373",
+   "ar_code": "حين 373",
+   "en": "Terrestrial Ecology",
+   "ar": "بيئة برية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 374",
+   "ar_code": "حين 374",
+   "en": "Aquatic Ecology",
+   "ar": "بيئة مائية",
+   "h": 2,
+   "lab": true
+  }
+ ],
+ "programs": [
+  {
+   "id": "actm",
+   "ar": "الرياضيات الإكتوارية والمالية",
+   "en": "Actuarial and Financial Mathematics",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ECON 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "STAT 105",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 132",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ECON 102",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CSC 115",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "FIN 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 206",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "STAT 216",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 240",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ACTU 262",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 280",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "STAT 328",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "ACTU 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "STAT 332",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "ACTU 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MATH 380",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ACTU 471",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 336",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "ACTU 472",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ACTU 473",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ACTU 474",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPER 441",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "ACTU 475",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACTU 483",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACTU 484",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ACTU 498",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ECON 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 204",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 254",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 340",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 476",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 477",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 478",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "bch",
+   "ar": "الكيمياء الحيوية",
+   "en": "Biochemistry",
+   "courses": [
+    {
+     "code": "ENG 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BCH 103",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ZOO 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHEM 108",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MBIO 140",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BCH 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 102",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CHEM 233",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CHEM 251",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BCH 303",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BCH 312",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BCH 320",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BCH 322",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BCH 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BCH 452",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BCH 332",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BCH 340",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BCH 333",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BCH 462",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BCH 471",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BCH 440",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 447",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 477",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 453",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 484",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BCH 445",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BCH 496",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "BCH 493",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "BCH 350",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "BCH 476",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "ZOO 352",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "MBIO 250",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "MBIO 260",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "CHEM 341",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "FED 420",
+     "kind": "elective",
+     "level": 5
+    },
+    {
+     "code": "BCH 472",
+     "kind": "elective",
+     "level": 6
+    },
+    {
+     "code": "BCH 473",
+     "kind": "elective",
+     "level": 6
+    },
+    {
+     "code": "BCH 450",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "BCH 434",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "BCH 441",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "BCH 464",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "BCH 465",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "BCH 436",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "BCH 454",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "BCH 466",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "bot",
+   "ar": "علم النبات",
+   "en": "Botany",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BCH 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BOT 102",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MBI 140",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "STAT 145",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BOT 213",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BOT 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BOT 241",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BOT 251",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BOT 272",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BOT 211",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 253",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "BOT 254",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BOT 341",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BOT 345",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BOT 349",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BOT 342",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BOT 346",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BOT 359",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BOT 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BOT 398",
+     "kind": "project",
+     "level": 6
+    },
+    {
+     "code": "BOT 492",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "GEO 303",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "MBI 345",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "BOT 384",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BOT 443",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BOT 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "BOT 441",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "BOT 445",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "BOT 472",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "BOT 473",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "BOT 495",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "MBI 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 250",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 260",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 270",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 280",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 305",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 373",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 374",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 263",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 312",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 322",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 347",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 379",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 380",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 447",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 449",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 458",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 476",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "chem",
+   "ar": "الكيمياء",
+   "en": "Chemistry",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 211",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHEM 240",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHEM 247",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHEM 252",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CHEM 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 232",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 241",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 256",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 323",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 335",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 342",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 344",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 345",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 353",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 329",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 330",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 336",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 341",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 425",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHEM 430",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHEM 436",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHEM 441",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHEM 458",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHEM 497",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "CHEM 421",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHEM 429",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHEM 457",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHEM 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "CHEM 310",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 326",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 328",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 333",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 334",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 418",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 422",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 442",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 447",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 461",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BCH 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 103",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBIO 140",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 337",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "geol",
+   "ar": "الجيولوجيا",
+   "en": "Geology",
+   "courses": [
+    {
+     "code": "ENG 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 111",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 112",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 113",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "GEO 100",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GEO 107",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GPH 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GEO 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GEO 237",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GEO 246",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GEO 274",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GEO 324",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GEO 334",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GPH 301",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GEO 381",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GEO 382",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GEO 326",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 383",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 384",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 385",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 386",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 393",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "GEO 450",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GEO 451",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GEO 452",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GEO 455",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GEO 497",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "GPH 410",
+     "kind": "college",
+     "level": 9
+    },
+    {
+     "code": "GEO 454",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GEO 462",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GEO 463",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GEO 498",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "GEO 242",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 341",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 342",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 441",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 495",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 431",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "geop",
+   "ar": "الجيوفيزياء",
+   "en": "Geophysics",
+   "courses": [
+    {
+     "code": "ENG 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 111",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 112",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 113",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "GEO 100",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GPH 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 102",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 209",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GPH 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GEO 221",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GEO 237",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 201",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GPH 221",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GEO 320",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GEO 381",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GEO 382",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "PHYS 221",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "GPH 231",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPH 313",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPH 381",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 385",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "GEO 386",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "GPH 393",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "GPH 410",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GPH 411",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "GEO 452",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "GPH 496",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "GPH 390",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GPH 401",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GPH 412",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GPH 421",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GPH 431",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "GPH 497",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "GEO 383",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 417",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 317",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 319",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 320",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 419",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 424",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPH 444",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "math",
+   "ar": "الرياضيات",
+   "en": "Mathematics",
+   "courses": [
+    {
+     "code": "ENG 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 111",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 112",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 113",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 105",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CSC 115",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 131",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 201",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 202",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 243",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 246",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "STAT 216",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MATH 225",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 352",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 382",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 316",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MATH 343",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MATH 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MATH 425",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MATH 431",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MATH 441",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MATH 481",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "MATH 473",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MATH 487",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MATH 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "MATH 379",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 391",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 442",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MATH 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MGT 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 328",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 222",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 200",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 262",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "micro",
+   "ar": "الأحياء الدقيقة",
+   "en": "Microbiology",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BCH 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MBI 140",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "BCH 220",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MBI 240",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MBI 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MBI 250",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MBI 260",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MBI 270",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MBI 280",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MBI 320",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 321",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MBI 331",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MBI 340",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MBI 334",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MBI 344",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MBI 351",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MBI 463",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MBI 465",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "MBI 492",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "MBI 450",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MBI 451",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MBI 460",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MBI 470",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MBI 490",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "MBI 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "MBI 493",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "BOT 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 209",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 212",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHEM 253",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BOT 346",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOOL 262",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 251",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 335",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 345",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 346",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 348",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 349",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MBI 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "or",
+   "ar": "بحوث العمليات",
+   "en": "Operations Research",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "OPER 100",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "STAT 105",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "OPER 213",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "STAT 215",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "STAT 328",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 201",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "OPER 313",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPER 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPER 385",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPER 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPER 331",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 332",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "OPER 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 423",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "OPER 435",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPER 441",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPER 497",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "STAT 336",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "STAT 340",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "OPER 498",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "BUS 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 113",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 214",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 262",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GE 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GE 403",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 200",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 212",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 314",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 471",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 211",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 380",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 322",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 331",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 333",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 337",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 339",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 362",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 415",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 490",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 492",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "phys",
+   "ar": "الفيزياء",
+   "en": "Physics",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ASTR 102",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 110",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 111",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "PHYS 201",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 209",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 212",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHYS 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHYS 230",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHYS 241",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 323",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 331",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 353",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 394",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PHYS 301",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 325",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 342",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 391",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 395",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PHYS 393",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 400",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 404",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 452",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 481",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 490",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PHYS 491",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHYS 492",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PHYS 499",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 477",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 478",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 411",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 423",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 476",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PHYS 488",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "stat",
+   "ar": "الإحصاء",
+   "en": "Statistics",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "OPER 100",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "STAT 105",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CSC 111",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "STAT 215",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "STAT 328",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "STAT 333",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MATH 201",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "STAT 322",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "STAT 331",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "STAT 332",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "STAT 335",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 336",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 337",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 340",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "STAT 419",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "STAT 429",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "STAT 438",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "STAT 497",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "STAT 415",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "STAT 423",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "STAT 439",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "STAT 498",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "BUS 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 113",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 262",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 102",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 200",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MIS 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 212",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BUS 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACTU 471",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ECON 211",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FIN 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CSC 380",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 213",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 231",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 362",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 371",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 322",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 351",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "OPER 441",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "zoo",
+   "ar": "علم الحيوان",
+   "en": "Zoology",
+   "courses": [
+    {
+     "code": "ENG 104",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 105",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 106",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BCH 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOO 103",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GEO 105",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MBIO 140",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 205",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ZOO 212",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ZOO 242",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ZOO 305",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ZOO 332",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ZOO 352",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ZOO 245",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 311",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 320",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 325",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 327",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 373",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ZOO 262",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ZOO 317",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ZOO 326",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ZOO 342",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ZOO 374",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ZOO 465",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "ZOO 375",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 420",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 423",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 432",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 441",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 456",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ZOO 497",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "ZOO 424",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ZOO 425",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ZOO 433",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ZOO 461",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ZOO 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ZOO 498",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "ZOO 355",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 366",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 381",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 382",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 458",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 459",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ZOO 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  }
+ ]
+}

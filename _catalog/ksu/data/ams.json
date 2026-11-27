@@ -1,0 +1,6675 @@
+{
+ "college": "ams",
+ "sources": [
+  {
+   "program": "pt",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/attach/Program%26%23039%3Bs%20Handbook%20V.2%20-2026.pdf",
+   "title": "Physical Therapy Program Handbook for Students and Teaching Staff (Program's Handbook V.2)",
+   "year": "2026"
+  },
+  {
+   "program": "rt",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/attach/%D9%88%D8%B5%D9%81%20%D8%A7%D9%84%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA%20%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC%20%D8%A7%D9%84%D8%AA%D9%86%D9%81%D8%B3%D9%8A%202026%20%D9%85.pdf",
+   "title": "Respiratory Therapy Program – Course Description (وصف المقررات لبرنامج العلاج التنفسي 2026م); RHS courses only, no full plan published",
+   "year": "2026"
+  },
+  {
+   "program": "opt",
+   "url": "https://cams.ksu.edu.sa/en/node/1205",
+   "title": "Doctor of Optometry (OD) program page – curriculum (new plan; \"Previous Plan (before 2026)\" also shown)",
+   "year": "2026"
+  },
+  {
+   "program": "rad",
+   "url": "https://cams.ksu.edu.sa/ar/node/4706",
+   "title": "Radiological Sciences BSc Study Plan (135 credit hours); Arabic names from https://cams.ksu.edu.sa/ar/node/2940",
+   "year": "current (page updated Nov 2026)"
+  },
+  {
+   "program": "dt",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/2024-01/Curriculum-dental%20technology_0.pdf",
+   "title": "Dental Technology Curriculum (linked from BSc in Dental Technology page)",
+   "year": "2024"
+  },
+  {
+   "program": "dh",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/2024-01/Curriculum-dental%20hygiene.pdf",
+   "title": "Dental Hygiene Curriculum (linked from BSc in Dental Hygiene page)",
+   "year": "2024"
+  },
+  {
+   "program": "ot",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/attach/Occupational%20Therapy%20Program%26%23039%3Bs%20Manual%20%281%29_0.pdf",
+   "title": "Occupational Therapy Program Manual (Program's Handbook)",
+   "year": "2024"
+  },
+  {
+   "program": "bmt",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/2023-11/Curriculum%20Core%20%26%20Elective%20Courses.pdf",
+   "title": "Biomedical Technology Program – Curriculum Core & Elective Courses (138 CH); cross-checked with Curriculum by Levels (2023-10)",
+   "year": "2023"
+  },
+  {
+   "program": "slp",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/attach/Program%26%23039%3Bs%20Manual%20Speech%20and%20hearing-2023-2024%20%281%29.pdf",
+   "title": "Speech and Hearing Therapy Program Manual",
+   "year": "2023-2024"
+  },
+  {
+   "program": "cls",
+   "url": "https://cams.ksu.edu.sa/sites/cams.ksu.edu.sa/files/attach/updated_study_plan.pdf",
+   "title": "CLS Bachelor – Updated Study Plan (titles cross-checked with course_description_of_the_updated_curriculum.pdf; lecture+lab split from Course Syllabus Manual 1442/2020 dlyl_lkht_ldrsy_bklwrys.pdf)",
+   "year": "2021"
+  },
+  {
+   "program": "cn",
+   "url": "https://cams.ksu.edu.sa/en/node/4472",
+   "title": "Bachelor of Clinical Nutrition – Curricular Plan (web page; codes cross-checked with Courses Description https://cams.ksu.edu.sa/en/node/4444)",
+   "year": "undated (page updated 2026)"
+  },
+  {
+   "program": "che-ed",
+   "url": "https://cams.ksu.edu.sa/en/node/4453",
+   "title": "Health Education Bachelor – Courses Description (web page; no separate study-plan table published)",
+   "year": "undated (page updated 2026)"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ARAB 100",
+   "ar_code": "",
+   "en": "Writing Skills",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARAB 103",
+   "ar_code": "عرب 103",
+   "en": "Expository Writing",
+   "ar": "التحرير العربي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 201",
+   "ar_code": "",
+   "en": "Applied Physics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 213",
+   "ar_code": "",
+   "en": "Electrical Circuits",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 214",
+   "ar_code": "",
+   "en": "Introduction to Electronic Devices",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 227",
+   "ar_code": "تيك 227",
+   "en": "Introduction to Computer Systems",
+   "ar": "مباديء الحاسب الآلي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BMT 228",
+   "ar_code": "تيك 228",
+   "en": "Introduction to Biomechanics",
+   "ar": "مقدمة في الميكانيكا الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 230",
+   "ar_code": "",
+   "en": "Introduction to Biomechanics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 241",
+   "ar_code": "",
+   "en": "Computer Programming",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BMT 251",
+   "ar_code": "",
+   "en": "Biomedical Sensors & Measurements",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 316",
+   "ar_code": "",
+   "en": "Biomedical Integrated Circuits",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 317",
+   "ar_code": "",
+   "en": "Microcontroller Applications in Healthcare",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 318",
+   "ar_code": "",
+   "en": "Biomedical Control Systems",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 331",
+   "ar_code": "",
+   "en": "Mechanics of Materials",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 332",
+   "ar_code": "",
+   "en": "Biomaterials",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 337",
+   "ar_code": "تيك 337",
+   "en": "Biomaterials Science",
+   "ar": "المواد الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 339",
+   "ar_code": "",
+   "en": "Fluid Mechanics",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BMT 342",
+   "ar_code": "",
+   "en": "Internet of Medical Things",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BMT 352",
+   "ar_code": "",
+   "en": "Diagnostic Medical Equipment",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 353",
+   "ar_code": "",
+   "en": "Therapeutic Medical Equipment",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 362",
+   "ar_code": "",
+   "en": "Design in Biomedical Engineering",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 367",
+   "ar_code": "",
+   "en": "Hospital Safety",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 371",
+   "ar_code": "",
+   "en": "Biomedical Signal Processing",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 372",
+   "ar_code": "",
+   "en": "Medical Image processing",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 433",
+   "ar_code": "",
+   "en": "Structural Aspects of Biomaterials",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 434",
+   "ar_code": "",
+   "en": "Orthopedic Biomechanics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 435",
+   "ar_code": "",
+   "en": "Cardiovascular Biomechanics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 436",
+   "ar_code": "",
+   "en": "Cell and Tissue Engineering",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 438",
+   "ar_code": "تيك 438",
+   "en": "Orthopedic Surgery & Rehab. Technology",
+   "ar": "جراحة العظام والتأهيل التكنولوجي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 443",
+   "ar_code": "",
+   "en": "Biomedical Data Sciences",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "BMT 444",
+   "ar_code": "",
+   "en": "Health Informatics -1-",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 445",
+   "ar_code": "",
+   "en": "Health Informatics-2",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 446",
+   "ar_code": "",
+   "en": "System Analysis and Design",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 447",
+   "ar_code": "",
+   "en": "Healthcare Business Process Reengineering",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 448",
+   "ar_code": "",
+   "en": "Healthcare Data Analytics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 454",
+   "ar_code": "",
+   "en": "Advanced Biomedical Devices",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 455",
+   "ar_code": "",
+   "en": "Biomedical Intelligence and Automation",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 456",
+   "ar_code": "",
+   "en": "Implantable Medical Devices",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 457",
+   "ar_code": "",
+   "en": "Assistive technology Devices",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 463",
+   "ar_code": "",
+   "en": "Simulation in Biomedical Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 464",
+   "ar_code": "",
+   "en": "Biomedical Design and Manufacturing",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 465",
+   "ar_code": "",
+   "en": "Maintenance Management",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 473",
+   "ar_code": "",
+   "en": "Biomedical Signal Processing Applications",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 474",
+   "ar_code": "",
+   "en": "Medical Imaging Systems",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 475",
+   "ar_code": "",
+   "en": "Medical Image Analysis",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 481",
+   "ar_code": "",
+   "en": "Clinical Practice / Project -1-",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 482",
+   "ar_code": "",
+   "en": "Biomed. Innovations and Entrepreneurship",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 483",
+   "ar_code": "",
+   "en": "Health Technology Management",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 486",
+   "ar_code": "",
+   "en": "Clinical Practice / Project -2-",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "BMT 487",
+   "ar_code": "",
+   "en": "Healthcare Project Management",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 488",
+   "ar_code": "",
+   "en": "Maintenance of Biomedical Equipment",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BMT 489",
+   "ar_code": "",
+   "en": "Human Factors in Biomedical Technology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 109",
+   "ar_code": "",
+   "en": "Introduction to Organic Chemistry",
+   "ar": "مقدمة في الكيمياء العضوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHEM 145",
+   "ar_code": "",
+   "en": "Organic Chemistry for Health Sciences",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 212",
+   "ar_code": "",
+   "en": "Community Health",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 214",
+   "ar_code": "",
+   "en": "Principles of Clinical Nutrition",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 215",
+   "ar_code": "",
+   "en": "Human Physiology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 224",
+   "ar_code": "",
+   "en": "Demography",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 225",
+   "ar_code": "",
+   "en": "Computer Application in Health Care",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 231",
+   "ar_code": "",
+   "en": "Infectious Diseases",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 232",
+   "ar_code": "",
+   "en": "Health Sciences",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 242",
+   "ar_code": "",
+   "en": "Health Science and Service Organization",
+   "ar": "العلوم الصحية وتنظيم الخدمات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 243",
+   "ar_code": "صحه 243",
+   "en": "Basics of Emergency Care",
+   "ar": "مبادئ الرعاية الطارئة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHS 261",
+   "ar_code": "",
+   "en": "Principles of Nutrition",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 264",
+   "ar_code": "",
+   "en": "Nutritional Biochemistry 1",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 265",
+   "ar_code": "",
+   "en": "Nutrition Throughout the Life Cycle",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHS 266",
+   "ar_code": "",
+   "en": "Nutrients Calculation",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHS 267",
+   "ar_code": "",
+   "en": "Nutritional Biochemistry 2",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 268",
+   "ar_code": "",
+   "en": "Nutrition Therapy for Physiological Stress and Acute Diseases",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 269",
+   "ar_code": "",
+   "en": "Nutrition Epidemiology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 282",
+   "ar_code": "",
+   "en": "Principles of Health Education 1",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 303",
+   "ar_code": "",
+   "en": "Human Behaviour",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CHS 311",
+   "ar_code": "",
+   "en": "Personal Health",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 334",
+   "ar_code": "",
+   "en": "Epidemiology 1",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 335",
+   "ar_code": "",
+   "en": "Epidemiology II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 343",
+   "ar_code": "",
+   "en": "Nutrition Therapy for Chronic Diseases",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHS 344",
+   "ar_code": "",
+   "en": "Metabolic Integration and Disorders",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHS 345",
+   "ar_code": "",
+   "en": "Community Nutrition",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 346",
+   "ar_code": "",
+   "en": "Sports Nutrition",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 369",
+   "ar_code": "",
+   "en": "Practicum in Clinical Nutrition 1",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 371",
+   "ar_code": "",
+   "en": "Environmental Science 1",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 382",
+   "ar_code": "",
+   "en": "Fundamentals of Health Education",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 383",
+   "ar_code": "",
+   "en": "The Social Concept of Health Education",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 384",
+   "ar_code": "",
+   "en": "Psychological Basis of Health Education",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 385",
+   "ar_code": "",
+   "en": "Methodology in Health Education",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHS 390",
+   "ar_code": "",
+   "en": "Research Methodology in Community Health Sciences",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 412",
+   "ar_code": "",
+   "en": "Preventing Diseases of Civilization",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 413",
+   "ar_code": "",
+   "en": "Substance Abuse",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 431",
+   "ar_code": "",
+   "en": "Enteral and Parenteral Nutrition",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHS 433",
+   "ar_code": "",
+   "en": "Maternity and Child Care",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 435",
+   "ar_code": "",
+   "en": "Nutritional Assessment",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 436",
+   "ar_code": "",
+   "en": "Family Planning",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 438",
+   "ar_code": "",
+   "en": "Mass Communication in Health Education",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHS 439",
+   "ar_code": "",
+   "en": "Seminar in Clinical Nutrition",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 446",
+   "ar_code": "",
+   "en": "Communication Skills",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHS 453",
+   "ar_code": "",
+   "en": "Practicum in Clinical Nutrition 2",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 454",
+   "ar_code": "",
+   "en": "Food Services Management in Hospitals",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 455",
+   "ar_code": "",
+   "en": "Independent Study",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 456",
+   "ar_code": "",
+   "en": "Nutritional Education and Patients Counselling",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 457",
+   "ar_code": "",
+   "en": "Functional Foods",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 465",
+   "ar_code": "",
+   "en": "Nutrition and Health Education",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 472",
+   "ar_code": "",
+   "en": "Occupational Health and Safety",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 483",
+   "ar_code": "",
+   "en": "Dental Health Education",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 484",
+   "ar_code": "",
+   "en": "Systems Approach to Health Education",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 485",
+   "ar_code": "",
+   "en": "Health Education in Schools",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 486",
+   "ar_code": "",
+   "en": "Management of Health Education",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 487",
+   "ar_code": "",
+   "en": "Health Education in Health Services",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHS 488",
+   "ar_code": "",
+   "en": "Consumer Health Education",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHS 496",
+   "ar_code": "",
+   "en": "Research in Health Education",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 212",
+   "ar_code": "",
+   "en": "Medical Microbiology",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CLS 223",
+   "ar_code": "",
+   "en": "Pathology",
+   "ar": "علم الأمراض",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 224",
+   "ar_code": "كلن 224",
+   "en": "Basic Anatomy & Physiology",
+   "ar": "أساسيات التشريح وعلم وظائف الأعضاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 251",
+   "ar_code": "",
+   "en": "Introduction to CLS & Biosafety",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 261",
+   "ar_code": "",
+   "en": "Basic Microbiology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 265",
+   "ar_code": "",
+   "en": "Basic Immunology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 272",
+   "ar_code": "",
+   "en": "Descriptive Histology",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 275",
+   "ar_code": "",
+   "en": "General Pathology",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 281",
+   "ar_code": "",
+   "en": "Basic Biochemistry & Biomolecules",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 282",
+   "ar_code": "",
+   "en": "Clinical Metabolism",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 291",
+   "ar_code": "",
+   "en": "Clinical Haematology-1",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 323",
+   "ar_code": "كلن 323",
+   "en": "General Pathophysiology",
+   "ar": "علم الامراض ووظائف الاعضاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 351",
+   "ar_code": "",
+   "en": "Epidemiology & Emerging Diseases",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 353",
+   "ar_code": "",
+   "en": "Research Project-I",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CLS 354",
+   "ar_code": "",
+   "en": "Urinalysis & Body Fluids",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 361",
+   "ar_code": "",
+   "en": "Clinical Mycology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 362",
+   "ar_code": "",
+   "en": "Clinical Parasitology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 363",
+   "ar_code": "",
+   "en": "Clinical Bacteriology-I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 371",
+   "ar_code": "",
+   "en": "Pathophysiology & Molecular Pathology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 372",
+   "ar_code": "",
+   "en": "Cytopathology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 377",
+   "ar_code": "",
+   "en": "Histology Techniques & Electron. Microscopy",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 381",
+   "ar_code": "",
+   "en": "Clinical Analytical Techniques",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 382",
+   "ar_code": "",
+   "en": "Clinical Biochemistry",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 391",
+   "ar_code": "",
+   "en": "Clinical Haematology-II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 392",
+   "ar_code": "",
+   "en": "Haemostasis & Thrombosis",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 454",
+   "ar_code": "",
+   "en": "Lab Management & Quality Control",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 455",
+   "ar_code": "",
+   "en": "Assisted Reproductive Technologies & Embryology",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 456",
+   "ar_code": "",
+   "en": "Research Project-II",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CLS 457",
+   "ar_code": "",
+   "en": "Medical Genetics & Cytogenetic",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 461",
+   "ar_code": "",
+   "en": "Clinical Virology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 463",
+   "ar_code": "",
+   "en": "Clinical Bacteriology-II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 465",
+   "ar_code": "",
+   "en": "Clinical Immunology and Serology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 466",
+   "ar_code": "",
+   "en": "Infection Control & Prevention",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 467",
+   "ar_code": "",
+   "en": "Microbiology Clinical Practice",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CLS 468",
+   "ar_code": "",
+   "en": "Immunology Clinical Practice",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 469",
+   "ar_code": "",
+   "en": "Molecular Diagnostics Techniques",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 478",
+   "ar_code": "",
+   "en": "Histopathology & Cytopathology Clinical Practice",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 488",
+   "ar_code": "",
+   "en": "Biochemistry Clinical Practice",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CLS 489",
+   "ar_code": "",
+   "en": "Clinical Endocrinology & Toxicology",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CLS 491",
+   "ar_code": "",
+   "en": "Immunohaematology & Transfusion Medicine",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CLS 498",
+   "ar_code": "",
+   "en": "Haematology & Immunohaematology Clinical Practice",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "",
+   "en": "Computer Skills",
+   "ar": "مهارات تقنية المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CT 140",
+   "ar_code": "تقن 140",
+   "en": "IT Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CUR 101",
+   "ar_code": "",
+   "en": "University Skills",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 210",
+   "ar_code": "",
+   "en": "Dental Anatomy and Morphology",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 213",
+   "ar_code": "",
+   "en": "Oral Biology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 214",
+   "ar_code": "",
+   "en": "Dental Anatomy",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 215",
+   "ar_code": "",
+   "en": "Oral Pathology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 216",
+   "ar_code": "",
+   "en": "Oral Medicine",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "DEH 218",
+   "ar_code": "",
+   "en": "Introduction to Dental Technology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 219",
+   "ar_code": "",
+   "en": "Dental Occlusion",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 220",
+   "ar_code": "",
+   "en": "Safety in Dental Laboratory",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 223",
+   "ar_code": "",
+   "en": "Dental Materials",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 231",
+   "ar_code": "",
+   "en": "Complete Denture Prosthodontics I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 232",
+   "ar_code": "",
+   "en": "Removable Partial Prosthodontics I",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 233",
+   "ar_code": "",
+   "en": "Fixed Restorative Prosthodontics I",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 241",
+   "ar_code": "",
+   "en": "Introduction to Dental Hygiene",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 242",
+   "ar_code": "",
+   "en": "Pre-clinical Dental Hygiene",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 252",
+   "ar_code": "",
+   "en": "Emergencies in Dental Practice",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 321",
+   "ar_code": "",
+   "en": "Dental Materials 2",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 331",
+   "ar_code": "",
+   "en": "Complete Denture Prosthodontics II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 333",
+   "ar_code": "",
+   "en": "Removable Partial Prosthodontics II",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 334",
+   "ar_code": "",
+   "en": "Fixed Restorative Prosthodontics II",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 337",
+   "ar_code": "",
+   "en": "Digital Dental Technology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 338",
+   "ar_code": "",
+   "en": "Advanced Removable Prosthodontics",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 339",
+   "ar_code": "",
+   "en": "Dental Ceramics",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 343",
+   "ar_code": "",
+   "en": "Preventive Dentistry 1",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 344",
+   "ar_code": "",
+   "en": "Preventive Dentistry 2",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 345",
+   "ar_code": "",
+   "en": "Pharmacology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 346",
+   "ar_code": "",
+   "en": "Clinical Dental Hygiene 1",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 347",
+   "ar_code": "",
+   "en": "Clinical Dental Hygiene 2",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 348",
+   "ar_code": "",
+   "en": "Dental Health Education",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 351",
+   "ar_code": "",
+   "en": "Management of Dental Practice",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 361",
+   "ar_code": "",
+   "en": "Dental Radiography",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 424",
+   "ar_code": "",
+   "en": "Dental Materials Evaluation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 425",
+   "ar_code": "",
+   "en": "Esthetic Prosthodontics",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 427",
+   "ar_code": "",
+   "en": "New Advances in Dental Technology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 428",
+   "ar_code": "",
+   "en": "Clinical Practice I",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 429",
+   "ar_code": "",
+   "en": "Dental Laboratory Management",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 431",
+   "ar_code": "",
+   "en": "Orthodontics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 432",
+   "ar_code": "",
+   "en": "Advanced Orthodontics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 436",
+   "ar_code": "",
+   "en": "Maxillofacial Technology",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 438",
+   "ar_code": "",
+   "en": "Clinical Practice II",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 439",
+   "ar_code": "",
+   "en": "Project",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 440",
+   "ar_code": "",
+   "en": "Applied Removable Prosthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 441",
+   "ar_code": "",
+   "en": "Applied Fixed Prosthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 442",
+   "ar_code": "",
+   "en": "Clinical Dental Hygiene 3",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 443",
+   "ar_code": "",
+   "en": "Applied Digital Prosthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 444",
+   "ar_code": "",
+   "en": "Applied Implants Prosthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 445",
+   "ar_code": "",
+   "en": "Oral Hygiene and Community",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 446",
+   "ar_code": "",
+   "en": "Applied Orthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 453",
+   "ar_code": "",
+   "en": "Clinical Practice 3",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "DEH 454",
+   "ar_code": "",
+   "en": "Dental Assisting",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "DEH 461",
+   "ar_code": "",
+   "en": "Advanced Radiographic Procedures",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 462",
+   "ar_code": "",
+   "en": "Dental Laboratory Procedures",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 471",
+   "ar_code": "",
+   "en": "Oral Hygiene and Removable Prosthodontics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 472",
+   "ar_code": "",
+   "en": "Oral Hygiene and Young Patients",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 473",
+   "ar_code": "",
+   "en": "Oral Health and Hospital In-Patients",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 474",
+   "ar_code": "",
+   "en": "Oral Hygiene and Community Dentistry",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "DEH 491",
+   "ar_code": "",
+   "en": "Seminar",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENGL 100",
+   "ar_code": "",
+   "en": "English",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 107",
+   "ar_code": "",
+   "en": "English",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 110",
+   "ar_code": "",
+   "en": "English for Medical Purposes",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 114",
+   "ar_code": "",
+   "en": "Specialized English Language",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 140",
+   "ar_code": "نجم 140",
+   "en": "English 1",
+   "ar": "اللغة الانجليزية (1)",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "ENGL 145",
+   "ar_code": "نجم 145",
+   "en": "English for Medical Purposes",
+   "ar": "اللغة الإنجليزية للأغراض الصحية",
+   "h": 8,
+   "lab": false
+  },
+  {
+   "code": "ENGS 101",
+   "ar_code": "",
+   "en": "English Language",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "",
+   "en": "English",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "",
+   "en": "Health and Fitness Culture",
+   "ar": "اللياقة والتثقيف الصحي",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "FSN 317",
+   "ar_code": "",
+   "en": "Food Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 325",
+   "ar_code": "",
+   "en": "Sanitation and Food Safety",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 467",
+   "ar_code": "",
+   "en": "Food Habits and Believes",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Prophet Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Principles of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Economic System in Islam",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "اخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Current Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Development Role of Women",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 140",
+   "ar_code": "ريض 140",
+   "en": "Introduction to Mathematics",
+   "ar": "مقدمة في الرياضيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 218",
+   "ar_code": "",
+   "en": "Differential Calculus",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 228",
+   "ar_code": "",
+   "en": "Integrals Calculus",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 318",
+   "ar_code": "",
+   "en": "Differential Equations",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MC 140",
+   "ar_code": "علم 140",
+   "en": "Communication Skills",
+   "ar": "مهارات الاتصال",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ME 200",
+   "ar_code": "",
+   "en": "Intro. to Engineering Design and Graphics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "NUR 353",
+   "ar_code": "",
+   "en": "Human Growth and Development",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPTO 201",
+   "ar_code": "",
+   "en": "Introduction to Optometry",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 205",
+   "ar_code": "",
+   "en": "Ocular Anatomy and Physiology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 206",
+   "ar_code": "",
+   "en": "Vision Sciences I",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 211",
+   "ar_code": "",
+   "en": "Physical Optics and Photometry",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 212",
+   "ar_code": "",
+   "en": "Ophthalmic Optics I",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 213",
+   "ar_code": "",
+   "en": "Ocular Neuroanatomy and Neurophysiology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 214",
+   "ar_code": "",
+   "en": "Vision Sciences II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 215",
+   "ar_code": "",
+   "en": "General Pathology I",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 216",
+   "ar_code": "",
+   "en": "Clinical Examinations of the Visual System II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 221",
+   "ar_code": "",
+   "en": "Geometric Optics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 223",
+   "ar_code": "",
+   "en": "Clinical Visual Optics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 224",
+   "ar_code": "",
+   "en": "Clinical Examinations of the Visual System I",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 301",
+   "ar_code": "",
+   "en": "Ophthalmic Optics II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 303",
+   "ar_code": "",
+   "en": "General Pathology II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 304",
+   "ar_code": "",
+   "en": "Ocular Microbiology I",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 306",
+   "ar_code": "",
+   "en": "Binocular Vision",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 312",
+   "ar_code": "",
+   "en": "Introduction to Pharmacology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 313",
+   "ar_code": "",
+   "en": "Ocular Diseases I",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 318",
+   "ar_code": "",
+   "en": "Ocular Microbiology II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 319",
+   "ar_code": "",
+   "en": "Oculomotor Functions and Neurology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 320",
+   "ar_code": "",
+   "en": "Contact Lenses II",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 322",
+   "ar_code": "",
+   "en": "Clinical Examinations of the Visual System V",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 323",
+   "ar_code": "",
+   "en": "Clinical Examinations of the Visual System III",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 327",
+   "ar_code": "",
+   "en": "Contact Lenses I",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 377",
+   "ar_code": "",
+   "en": "Vision Sciences III",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 400",
+   "ar_code": "",
+   "en": "Environmental Optometry and Public Health",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 401",
+   "ar_code": "",
+   "en": "Advanced Techniques in Myopia Progression Control",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 402",
+   "ar_code": "",
+   "en": "Paediatric Optometry",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 403",
+   "ar_code": "",
+   "en": "Ocular Diseases II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 404",
+   "ar_code": "",
+   "en": "Clinical Ocular Pharmacology I",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 405",
+   "ar_code": "",
+   "en": "Statistics in Vision Sciences",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 406",
+   "ar_code": "",
+   "en": "Anomalies in Binocular Vision",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 407",
+   "ar_code": "",
+   "en": "Advanced Techniques in Visual System Examinations I",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 408",
+   "ar_code": "",
+   "en": "Ocular Diseases III",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 409",
+   "ar_code": "",
+   "en": "Clinical Ocular Pharmacology II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 417",
+   "ar_code": "",
+   "en": "Advanced Techniques in Visual System Examinations II",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 420",
+   "ar_code": "",
+   "en": "Orthoptics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 421",
+   "ar_code": "",
+   "en": "Contact Lenses III",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 423",
+   "ar_code": "",
+   "en": "Optometry Clinic I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPTO 432",
+   "ar_code": "",
+   "en": "Optometry Clinic II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPTO 434",
+   "ar_code": "",
+   "en": "Cognitive Visual Perception",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 436",
+   "ar_code": "",
+   "en": "Occupational Optometry",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 440",
+   "ar_code": "",
+   "en": "Advanced Clinic I",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPTO 444",
+   "ar_code": "",
+   "en": "Contact Lenses Clinic",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 445",
+   "ar_code": "",
+   "en": "Clinical Medicine I",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 446",
+   "ar_code": "",
+   "en": "Geriatric Optometry",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 448",
+   "ar_code": "",
+   "en": "Optometric Case Analysis",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 449",
+   "ar_code": "",
+   "en": "Advanced Clinic II",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "OPTO 450",
+   "ar_code": "",
+   "en": "Current Topics in Optometry and Vision Science",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 451",
+   "ar_code": "",
+   "en": "Low Vision",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 452",
+   "ar_code": "",
+   "en": "Clinical Medicine II",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "OPTO 453",
+   "ar_code": "",
+   "en": "Ocular Diseases IV",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 454",
+   "ar_code": "",
+   "en": "Visual Dysfunction and Learning Difficulties",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 455",
+   "ar_code": "",
+   "en": "Visual Rehabilitation for Traumatic Brain Injuries",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 461",
+   "ar_code": "",
+   "en": "Visual Impairment Management and Rehabilitation",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "OPTO 462",
+   "ar_code": "",
+   "en": "Optometry Business Management",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 463",
+   "ar_code": "",
+   "en": "Nutrition and Ocular Health",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 464",
+   "ar_code": "",
+   "en": "Sport Vision",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 465",
+   "ar_code": "",
+   "en": "Laser Application in Ophthalmology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 467",
+   "ar_code": "",
+   "en": "New Technologies in Optometry",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 468",
+   "ar_code": "",
+   "en": "Advanced Studies in Visual Field and Ocular Photography",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 470",
+   "ar_code": "",
+   "en": "Evidence Based Optometry Practice",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "OPTO 498",
+   "ar_code": "",
+   "en": "Final Project I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPTO 499",
+   "ar_code": "",
+   "en": "Final Project II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PHYS 109",
+   "ar_code": "",
+   "en": "General Physics",
+   "ar": "الفيزياء",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 145",
+   "ar_code": "فيز 145",
+   "en": "General Physics",
+   "ar": "فيزياء عامة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PSY 101",
+   "ar_code": "",
+   "en": "Introduction to Psychology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PSY 372",
+   "ar_code": "نفس 372",
+   "en": "Rehabilitation Psychology",
+   "ar": "علم النفس التأهيلي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Holy Quran",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 231",
+   "ar_code": "",
+   "en": "Radiation Physics and Equipment",
+   "ar": "فيزياء الإشعاع وأجهزته",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 232",
+   "ar_code": "",
+   "en": "Image Acquisition and Health Informatics",
+   "ar": "اكتساب الصور والمعلوماتية الصحية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 241",
+   "ar_code": "",
+   "en": "Radiographic Anatomy and Physiology I",
+   "ar": "التشريح ووظائف الأعضاء في التصوير الشعاعي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 242",
+   "ar_code": "",
+   "en": "General Radiographic Techniques I",
+   "ar": "تقنيات التصوير الشعاعي العام (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 243",
+   "ar_code": "",
+   "en": "Special Radiographic Techniques II",
+   "ar": "تقنيات التصوير الشعاعي الخاص (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 244",
+   "ar_code": "",
+   "en": "Contrast Media in Radiography & Medical Imaging",
+   "ar": "مواد التباين في التصوير الشعاعي والتصوير الطبي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 245",
+   "ar_code": "",
+   "en": "Introduction to Radiation Biology",
+   "ar": "مقدمة في علم الأحياء الإشعاعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 351",
+   "ar_code": "",
+   "en": "Radiographic Anatomy and Physiology II",
+   "ar": "التشريح ووظائف الأعضاء في التصوير الشعاعي (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 352",
+   "ar_code": "",
+   "en": "Special Radiographic Techniques",
+   "ar": "تقنيات التصوير الشعاعي الخاص",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 353",
+   "ar_code": "",
+   "en": "Magnetic Resonance Imaging Physics and Instrumentation",
+   "ar": "فيزياء الرنين المغناطيسي وأجهزته",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 354",
+   "ar_code": "",
+   "en": "Ultrasound Physics and Instrumentation",
+   "ar": "فيزياء الموجات فوق الصوتية وأجهزتها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 355",
+   "ar_code": "",
+   "en": "Clinical Practice in Radiography",
+   "ar": "الممارسة الإكلينيكية في التصوير الشعاعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 356",
+   "ar_code": "",
+   "en": "Radiation Protection",
+   "ar": "الحماية من الإشعاع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 361",
+   "ar_code": "",
+   "en": "Nuclear Medicine Physics and Instrumentation",
+   "ar": "فيزياء الطب النووي وأجهزته",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 362",
+   "ar_code": "",
+   "en": "Computerized Tomography Physics and Instrumentation",
+   "ar": "فيزياء التصوير المقطعي المحوسب وأجهزته",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 363",
+   "ar_code": "",
+   "en": "Magnetic Resonance Imaging Techniques I",
+   "ar": "تقنيات التصوير بالرنين المغناطيسي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 364",
+   "ar_code": "",
+   "en": "Ultrasound Imaging Techniques I",
+   "ar": "تقنيات التصوير بالموجات فوق الصوتية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 365",
+   "ar_code": "",
+   "en": "Introduction to Radiotherapy",
+   "ar": "مقدمة في العلاج الإشعاعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 366",
+   "ar_code": "",
+   "en": "Research Methodology",
+   "ar": "منهجية البحث",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "RAD 463",
+   "ar_code": "اشع 463",
+   "en": "Radiographs & Their Interpretation",
+   "ar": "صور بالاشعة المؤينة وقراءتها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RAD 471",
+   "ar_code": "",
+   "en": "Nuclear Medicine Imaging Techniques I",
+   "ar": "تقنيات التصوير في الطب النووي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 472",
+   "ar_code": "",
+   "en": "Computerized Tomography Imaging Techniques",
+   "ar": "تقنيات التصوير المقطعي المحوسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 473",
+   "ar_code": "",
+   "en": "Magnetic Resonance Imaging Techniques II",
+   "ar": "تقنيات التصوير بالرنين المغناطيسي (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 474",
+   "ar_code": "",
+   "en": "Ultrasound Imaging Techniques II",
+   "ar": "تقنيات التصوير بالموجات فوق الصوتية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 475",
+   "ar_code": "",
+   "en": "Clinical Practice in Magnetic Resonance Imaging",
+   "ar": "الممارسة الإكلينيكية في التصوير بالرنين المغناطيسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 476",
+   "ar_code": "",
+   "en": "Clinical Practice in Computerized Tomography",
+   "ar": "الممارسة الإكلينيكية في التصوير المقطعي المحوسب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 477",
+   "ar_code": "",
+   "en": "Research Project I",
+   "ar": "مشروع بحثي (1)",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "RAD 481",
+   "ar_code": "",
+   "en": "Nuclear Medicine Imaging Techniques II",
+   "ar": "تقنيات التصوير في الطب النووي (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 482",
+   "ar_code": "",
+   "en": "Safety and Welfare in Radiology Department",
+   "ar": "السلامة والرفاه في قسم الأشعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 483",
+   "ar_code": "",
+   "en": "Clinical Practice in Ultrasound Imaging",
+   "ar": "الممارسة الإكلينيكية في التصوير بالموجات فوق الصوتية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 484",
+   "ar_code": "",
+   "en": "Clinical Practice in Nuclear Medicine Imaging",
+   "ar": "الممارسة الإكلينيكية في التصوير في الطب النووي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 485",
+   "ar_code": "",
+   "en": "Radiotherapy Techniques",
+   "ar": "تقنيات العلاج الإشعاعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RAD 486",
+   "ar_code": "",
+   "en": "Quality Assurance in Radiology Department",
+   "ar": "ضمان الجودة في قسم الأشعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RAD 487",
+   "ar_code": "",
+   "en": "Research Project II",
+   "ar": "مشروع بحثي (2)",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "RHS 201",
+   "ar_code": "هيل 201",
+   "en": "Introduction to Occupational Therapy",
+   "ar": "مدخل في أساليب العلاج الوظيفي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 221",
+   "ar_code": "هيل 221",
+   "en": "Introduction to Physical Therapy Procedures",
+   "ar": "مدخل فى اساليب العلاج الطبيعى",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 227",
+   "ar_code": "",
+   "en": "Introduction to Exceptional Children",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 228",
+   "ar_code": "",
+   "en": "Introduction to Respiratory Therapy",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 229",
+   "ar_code": "",
+   "en": "Microbiology and Infection Control",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 231",
+   "ar_code": "هيل 231",
+   "en": "Introduction to Clinical Studies",
+   "ar": "مدخل فى دراسات اكلينيكية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 241",
+   "ar_code": "هيل 241",
+   "en": "Human Anatomy",
+   "ar": "علم التشريح البشرى",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 243",
+   "ar_code": "هيل 243",
+   "en": "Clinical Physiology",
+   "ar": "الفسيولوجيا الاكلينيكية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 244",
+   "ar_code": "هيل 244",
+   "en": "Neuroanatomy",
+   "ar": "تشريح الجهاز العصبي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 247",
+   "ar_code": "",
+   "en": "Anatomy & Physiology of Speech & Hearing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 248",
+   "ar_code": "",
+   "en": "Phonetics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 249",
+   "ar_code": "",
+   "en": "Speech & Language Pathology -I-",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 261",
+   "ar_code": "",
+   "en": "Linguistics -I-",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 301",
+   "ar_code": "هيل 301",
+   "en": "Functional Human Anatomy & Physiology",
+   "ar": "علم التشريح الوظيفي البشري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 302",
+   "ar_code": "هيل 302",
+   "en": "Occupational Therapy Procedures - 1",
+   "ar": "أساليب العلاج الوظيفي 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 303",
+   "ar_code": "",
+   "en": "Introduction to Clinical Occupational Therapy Practice",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 304",
+   "ar_code": "هيل 304",
+   "en": "Occupational Therapy Procedures - II",
+   "ar": "أساليب العلاج الوظيفي 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 305",
+   "ar_code": "هيل 305",
+   "en": "Neurophysiology for Occupational Therapists",
+   "ar": "فسيولوجيا الأعصاب لأخصائي العلاج الوظيفي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 306",
+   "ar_code": "هيل 306",
+   "en": "Occupational Therapy Modalities",
+   "ar": "وسائل العلاج الوظيفي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 307",
+   "ar_code": "هيل 307",
+   "en": "Clinical Occupational Therapy Practice (I)",
+   "ar": "ممارسة إكلينيكية للعلاج الوظيفي 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 308",
+   "ar_code": "هيل 308",
+   "en": "Clinical Practice in Pediatric Occupational Therapy",
+   "ar": "ممارسة إكلينيكية في العلاج الوظيفي لأمراض الأطفال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 309",
+   "ar_code": "هيل 309",
+   "en": "Play in Occupational Therapy",
+   "ar": "الترفيه في العلاج الوظيفي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 310",
+   "ar_code": "",
+   "en": "Anatomy of Respiratory System",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 311",
+   "ar_code": "",
+   "en": "Physiology of Respiratory System",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 312",
+   "ar_code": "",
+   "en": "Respiratory Pathophysiology (I)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 313",
+   "ar_code": "",
+   "en": "Fundamentals of Respiratory Therapy (I)",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "RHS 314",
+   "ar_code": "",
+   "en": "Respiratory Pathophysiology (II)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 315",
+   "ar_code": "",
+   "en": "Fundamentals of Respiratory Therapy (II)",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 316",
+   "ar_code": "",
+   "en": "Patient Assessment",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 317",
+   "ar_code": "",
+   "en": "Cardiopulmonary Diagnostics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 318",
+   "ar_code": "",
+   "en": "Medical Gases, Aerosol and Humidity Therapy",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 319",
+   "ar_code": "",
+   "en": "Arterial Blood Gases",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 320",
+   "ar_code": "",
+   "en": "Mechanical Ventilation",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "RHS 321",
+   "ar_code": "هيل 321",
+   "en": "Physical Therapy Procedures 1",
+   "ar": "اساليب العلاج الطبيعى 1",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 322",
+   "ar_code": "هيل 322",
+   "en": "Physical Therapy Procedures II",
+   "ar": "اساليب العلاج الطبيعى 2",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 323",
+   "ar_code": "هيل 323",
+   "en": "Physical Therapy Procedures III",
+   "ar": "اساليب العلاج الطبيعى 3",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 325",
+   "ar_code": "هيل 325",
+   "en": "Electrotherapy",
+   "ar": "العلاج الكهربائي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 326",
+   "ar_code": "هيل 326",
+   "en": "Physical Therapy for Pediatrics",
+   "ar": "العلاج الطبيعي لأمراض الاطفال",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 327",
+   "ar_code": "هيل 327",
+   "en": "Hydrotherapy",
+   "ar": "العلاج المائي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 331",
+   "ar_code": "هيل 331",
+   "en": "Clinical Studies I",
+   "ar": "دراسات اكلينيكية 1",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "RHS 332",
+   "ar_code": "هيل 332",
+   "en": "Clinical Studies II",
+   "ar": "دراسات اكلينيكية 2",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "RHS 333",
+   "ar_code": "هيل 333",
+   "en": "Clinical Practice I",
+   "ar": "ممارسة اكلينيكية 1",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "RHS 336",
+   "ar_code": "",
+   "en": "Clinical Practice in Physiotherapy",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 337",
+   "ar_code": "هيل 337",
+   "en": "Clinical Occupational Therapy Practice (II)",
+   "ar": "ممارسة إكلينيكية للعلاج الوظيفي 2",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 338",
+   "ar_code": "هيل 338",
+   "en": "Geriatric Occupational Therapy",
+   "ar": "العلاج الوظيفي للمسنين",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 341",
+   "ar_code": "",
+   "en": "Therapeutic Exercises & Human Anatomy",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 344",
+   "ar_code": "",
+   "en": "Neurology",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 345",
+   "ar_code": "هيل 345",
+   "en": "Human Growth and Development",
+   "ar": "النمو والتطور البشرى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 346",
+   "ar_code": "",
+   "en": "Neurophysiology for Physiotherapist",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 366",
+   "ar_code": "هيل 366",
+   "en": "Pharmacology",
+   "ar": "علم الادوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 371",
+   "ar_code": "",
+   "en": "Audiology - I -",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 372",
+   "ar_code": "",
+   "en": "Audiology - II -",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 373",
+   "ar_code": "",
+   "en": "Articulation Disorders",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 374",
+   "ar_code": "",
+   "en": "Speech & Language Pathology - II -",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 377",
+   "ar_code": "",
+   "en": "Physics of Sound & Voice Production",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 378",
+   "ar_code": "",
+   "en": "Clinical Procedures in Speech & Language Pathology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 416",
+   "ar_code": "هيل 416",
+   "en": "Clinical Occupational Therapy Practice (III)",
+   "ar": "ممارسة إكلينيكية للعلاج الوظيفي 3",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 417",
+   "ar_code": "هيل 417",
+   "en": "Psychiatry in Occupational Therapy",
+   "ar": "الطب النفسي في العلاج الوظيفي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 418",
+   "ar_code": "",
+   "en": "Developmental Theories in Perspective",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 419",
+   "ar_code": "",
+   "en": "Lung Expansion / Bronchial Hygiene Therapy",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 420",
+   "ar_code": "",
+   "en": "Clinical Respiratory Therapy Practice (I)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 421",
+   "ar_code": "هيل 421",
+   "en": "Advanced Physical Therapy Procedures",
+   "ar": "اساليب متقدمة فى العلاج الطبيعى",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 422",
+   "ar_code": "هيل 422",
+   "en": "Rehabilitation Procedures",
+   "ar": "اساليب فى التأهيل الطبى",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 423",
+   "ar_code": "هيل 423",
+   "en": "Management of Physical Therapy Services",
+   "ar": "تنظيم وادارة خدمات العلاج الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 424",
+   "ar_code": "هيل 424",
+   "en": "Geriatric Rehabilitation",
+   "ar": "تأهيل المسنين",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 425",
+   "ar_code": "هيل 425",
+   "en": "Occupational Therapy",
+   "ar": "العلاج بالعمل",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 426",
+   "ar_code": "",
+   "en": "Psycho-social Aspects of Aging",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 427",
+   "ar_code": "",
+   "en": "Bilingual Studies",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 428",
+   "ar_code": "",
+   "en": "Electrophysiologic Tests",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 429",
+   "ar_code": "",
+   "en": "Fluency Disorders",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 431",
+   "ar_code": "هيل 431",
+   "en": "Clinical Studies III",
+   "ar": "دراسات اكلينيكية 3",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 433",
+   "ar_code": "هيل 433",
+   "en": "Clinical Practice III",
+   "ar": "ممارسة اكلينيكية 3",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 434",
+   "ar_code": "هيل 434",
+   "en": "Selected Clinical Topics I",
+   "ar": "مواضيع اكلينيكية مختارة 1",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "RHS 435",
+   "ar_code": "هيل 435",
+   "en": "Occupational Therapy Evaluation Techniques",
+   "ar": "وسائل التقييم في العلاج الوظيفي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 438",
+   "ar_code": "",
+   "en": "Adult Pathophysiology / Geriatrics / Trauma Care",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 439",
+   "ar_code": "",
+   "en": "Neonatal & Pediatric Respiratory Care",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 440",
+   "ar_code": "",
+   "en": "Advanced Pulmonary Function Testing",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "RHS 441",
+   "ar_code": "",
+   "en": "Clinical Respiratory Therapy Practice (II)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 442",
+   "ar_code": "هيل 442",
+   "en": "Medical Aspects of Disabling Conditions",
+   "ar": "النواحى الطبية لحالات العجز",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 444",
+   "ar_code": "",
+   "en": "Medical Aspects of Communication Disorders",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 458",
+   "ar_code": "هيل 458",
+   "en": "Management & Ethics of Occupational Therapy Profession",
+   "ar": "إدارة و أخلاقيات مهنة العلاج الوظيفي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 459",
+   "ar_code": "هيل 459",
+   "en": "Clinical Occupational Therapy Practice (IV)",
+   "ar": "ممارسة إكلينيكية للعلاج الوظيفي 4",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 460",
+   "ar_code": "",
+   "en": "Counseling",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 461",
+   "ar_code": "",
+   "en": "Speech & Language Pathology - III -",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 462",
+   "ar_code": "",
+   "en": "Speech & Language Pathology - IV -",
+   "ar": "",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "RHS 464",
+   "ar_code": "",
+   "en": "Management of Critical Ill Patients",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 465",
+   "ar_code": "",
+   "en": "Management of Respiratory Therapy Services",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 466",
+   "ar_code": "",
+   "en": "Voice Disorders",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 467",
+   "ar_code": "",
+   "en": "Alternative Communication",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 469",
+   "ar_code": "",
+   "en": "Pulmonary Rehabilitation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 470",
+   "ar_code": "",
+   "en": "Clinical Respiratory Therapy Practice (III)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 471",
+   "ar_code": "",
+   "en": "Hearing Impairment",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 472",
+   "ar_code": "",
+   "en": "Pediatric Audiology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 474",
+   "ar_code": "",
+   "en": "Aural Rehabilitation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 475",
+   "ar_code": "",
+   "en": "Introduction to Hearing Aids",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "RHS 479",
+   "ar_code": "",
+   "en": "Linguistics -II-",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 481",
+   "ar_code": "هيل 481",
+   "en": "Independent Study I",
+   "ar": "دراسة مستقلة 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 483",
+   "ar_code": "",
+   "en": "Management of Speech & Hearing Therapy Program",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "RHS 499",
+   "ar_code": "",
+   "en": "Orientation to Research Methodology",
+   "ar": "",
+   "h": 5,
+   "lab": false
+  },
+  {
+   "code": "STAT 109",
+   "ar_code": "",
+   "en": "Biostatistics",
+   "ar": "الإحصاء الحيوي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "STAT 145",
+   "ar_code": "احص 145",
+   "en": "Biostatistics",
+   "ar": "الإحصاء الحيوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ZOOL 109",
+   "ar_code": "",
+   "en": "Biology",
+   "ar": "علم الحيوان العام",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 145",
+   "ar_code": "حين 145",
+   "en": "Biology",
+   "ar": "علم الأحياء",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "pt",
+   "ar": "العلاج الطبيعي",
+   "en": "Physical Therapy",
+   "courses": [
+    {
+     "code": "RHS 221",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "RHS 241",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 243",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 321",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 341",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "RHS 244",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 322",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 325",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 346",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 366",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "BMT 227",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CLS 323",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "RHS 231",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 323",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 327",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 333",
+     "kind": "training",
+     "level": 5
+    },
+    {
+     "code": "BMT 228",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "PSY 372",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "RHS 331",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 422",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 423",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 424",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 442",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 438",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "RHS 425",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 326",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 332",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 336",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RHS 421",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 8
+    },
+    {
+     "code": "RAD 463",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "RHS 431",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 433",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "RHS 434",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 481",
+     "kind": "project",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "rt",
+   "ar": "العلاج التنفسي",
+   "en": "Respiratory Therapy",
+   "courses": [
+    {
+     "code": "RHS 228",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 229",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 241",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 243",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 313",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 318",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 310",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 311",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 315",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 316",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 366",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 314",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 317",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 319",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 419",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 420",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "RHS 440",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 320",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 438",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 441",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RHS 481",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "RHS 421",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 439",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 464",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 465",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 469",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 470",
+     "kind": "training",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "opt",
+   "ar": "دكتور البصريات",
+   "en": "Doctor of Optometry",
+   "courses": [
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 114",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "OPTO 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "OPTO 221",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "OPTO 223",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "OPTO 205",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "OPTO 206",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "OPTO 224",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "OPTO 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPTO 212",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPTO 213",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPTO 214",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPTO 215",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPTO 216",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "OPTO 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 377",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 303",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 304",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 327",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 306",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "OPTO 323",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "OPTO 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 312",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 313",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 318",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 319",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "OPTO 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 423",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "OPTO 403",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 404",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 421",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 406",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 407",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "OPTO 405",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 432",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "OPTO 408",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 409",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 446",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 420",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 417",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "OPTO 440",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "OPTO 445",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "OPTO 451",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "OPTO 453",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "OPTO 402",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "OPTO 498",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "OPTO 444",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "OPTO 449",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "OPTO 452",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "OPTO 461",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "OPTO 499",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "OPTO 400",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "OPTO 434",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "OPTO 436",
+     "kind": "elective",
+     "level": 7
+    },
+    {
+     "code": "OPTO 462",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "OPTO 463",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "OPTO 464",
+     "kind": "elective",
+     "level": 8
+    },
+    {
+     "code": "OPTO 465",
+     "kind": "elective",
+     "level": 9
+    },
+    {
+     "code": "OPTO 454",
+     "kind": "elective",
+     "level": 9
+    },
+    {
+     "code": "OPTO 467",
+     "kind": "elective",
+     "level": 9
+    },
+    {
+     "code": "OPTO 468",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "OPTO 455",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "OPTO 448",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "OPTO 450",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "OPTO 470",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "rad",
+   "ar": "العلوم الإشعاعية",
+   "en": "Radiologic Sciences",
+   "courses": [
+    {
+     "code": "ENGL 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 242",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CLS 223",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "RAD 231",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RAD 232",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RAD 241",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RAD 242",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RAD 243",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RAD 244",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RAD 245",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "RAD 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 352",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 353",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 354",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 355",
+     "kind": "training",
+     "level": 5
+    },
+    {
+     "code": "RAD 356",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RAD 361",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 363",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 364",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 365",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 366",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RAD 471",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RAD 472",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RAD 473",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RAD 474",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RAD 475",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RAD 476",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RAD 477",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "RAD 481",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RAD 482",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RAD 483",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "RAD 484",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "RAD 485",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RAD 486",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RAD 487",
+     "kind": "project",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "dt",
+   "ar": "تقنية الأسنان",
+   "en": "Dental Technology",
+   "courses": [
+    {
+     "code": "ENGS 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "DEH 210",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "DEH 218",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "DEH 220",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "DEH 219",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 231",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 232",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 233",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "DEH 331",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 333",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 334",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 431",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 337",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 338",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 339",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 432",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 424",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 425",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 428",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "DEH 429",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 427",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "DEH 436",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "DEH 438",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "DEH 439",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "DEH 213",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 227",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 351",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 367",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 440",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 441",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 444",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "DEH 446",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "dh",
+   "ar": "رعاية الأسنان",
+   "en": "Dental Hygiene",
+   "courses": [
+    {
+     "code": "CT 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MC 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ZOOL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CLS 212",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "DEH 213",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "DEH 214",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "DEH 241",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "DEH 215",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 242",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "DEH 252",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 261",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "DEH 321",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 343",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 345",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "DEH 216",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 227",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "DEH 344",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 346",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 348",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "DEH 462",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARAB 103",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "CHS 231",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "DEH 347",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 445",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "DEH 454",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "DEH 442",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 471",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "DEH 474",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 487",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "PSY 101",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "DEH 351",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "DEH 453",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "DEH 472",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "DEH 473",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "DEH 491",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "ot",
+   "ar": "العلاج الوظيفي",
+   "en": "Occupational Therapy",
+   "courses": [
+    {
+     "code": "CT 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MC 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ZOOL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 145",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "RHS 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BMT 227",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "RHS 241",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "RHS 243",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 301",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 302",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 303",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 366",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BMT 228",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PSY 372",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "RHS 244",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 304",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 305",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 306",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 323",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "RHS 307",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "RHS 308",
+     "kind": "training",
+     "level": 6
+    },
+    {
+     "code": "RHS 309",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 345",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 442",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 422",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 435",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 337",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RHS 338",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 416",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "RHS 417",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 418",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BMT 337",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "RHS 434",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 458",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 481",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "RHS 459",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "RHS 460",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RAD 463",
+     "kind": "college",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "bmt",
+   "ar": "التقنية الطبية الحيوية",
+   "en": "Biomedical Technology",
+   "courses": [
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGL 107",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 114",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ARAB 103",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "MATH 218",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BMT 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "BMT 213",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "BMT 241",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "MATH 228",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "BMT 214",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BMT 230",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BMT 251",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ME 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 318",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "BMT 316",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 331",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 332",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 352",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BMT 317",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 318",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 339",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 342",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 353",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "BMT 443",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BMT 444",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BMT 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "BMT 481",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "BMT 464",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BMT 482",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BMT 483",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "BMT 486",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "BMT 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 447",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 448",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 473",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 475",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 488",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 489",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "BMT 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "slp",
+   "ar": "علاج أمراض النطق والسمع",
+   "en": "Speech-Language and Hearing Therapy",
+   "courses": [
+    {
+     "code": "ENGL 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PSY 101",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "RHS 227",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 249",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 261",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "RHS 345",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "RHS 247",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 248",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 323",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "RHS 479",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "RHS 344",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 374",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 377",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "RHS 444",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "RHS 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 378",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 427",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 461",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "RHS 426",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 428",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 429",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 462",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 472",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 475",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "RHS 466",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 467",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 474",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 483",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "RHS 499",
+     "kind": "major",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "cls",
+   "ar": "علوم المختبرات الإكلينيكية",
+   "en": "Clinical Laboratory Sciences",
+   "courses": [
+    {
+     "code": "ENGL 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 109",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ZOOL 109",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 251",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 272",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 281",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "CLS 261",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 265",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 275",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 282",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 291",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CLS 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 377",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 381",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 391",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CLS 353",
+     "kind": "project",
+     "level": 6
+    },
+    {
+     "code": "CLS 354",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 363",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 382",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 392",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CLS 454",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 456",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "CLS 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 465",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 466",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 469",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 491",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CLS 455",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CLS 457",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CLS 467",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CLS 468",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CLS 478",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CLS 488",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CLS 489",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CLS 498",
+     "kind": "training",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "cn",
+   "ar": "التغذية الإكلينيكية",
+   "en": "Clinical Nutrition",
+   "courses": [
+    {
+     "code": "ARAB 103",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "CLS 212",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHS 214",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHS 225",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHS 212",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 215",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 264",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 265",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 266",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FSN 325",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "CHS 267",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 317",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CHS 334",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 343",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 435",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 268",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 269",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 344",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 390",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 433",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 467",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "CHS 303",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 345",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 346",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 369",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "CHS 431",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 439",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 446",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 243",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "CHS 453",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CHS 454",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 455",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "CHS 456",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 457",
+     "kind": "major",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "che-ed",
+   "ar": "التثقيف الصحي",
+   "en": "Community Health Sciences – Health Education",
+   "courses": [
+    {
+     "code": "CHS 212",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 224",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHS 224",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHS 261",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CLS 212",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHS 232",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 282",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 311",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHS 225",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "NUR 353",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "CHS 231",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 382",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 334",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 383",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 384",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHS 335",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 385",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 412",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 413",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 433",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHS 436",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 484",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 472",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 487",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 465",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 488",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHS 483",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 485",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 486",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 438",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHS 496",
+     "kind": "major",
+     "level": 8
+    }
+   ]
+  }
+ ]
+}

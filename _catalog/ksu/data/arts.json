@@ -1,0 +1,1643 @@
+{
+ "college": "arts",
+ "sources": [
+  {
+   "program": "graphic",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/attach/SCGD.pdf",
+   "title": "الخطة الدراسية لبكالوريوس الفنون في التصميم تخصص تصميم جرافيكي (131 h)",
+   "year": "2024"
+  },
+  {
+   "program": "visual",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/attach/%D8%AE%D8%B7%D8%A9%20%D9%82%D8%B3%D9%85%20%D8%A7%D9%84%D9%81%D9%86%D9%88%D9%86%20%D8%A7%D9%84%D8%A8%D8%B5%D8%B1%D9%8A%D8%A9%20%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D9%88%D8%B3.pdf",
+   "title": "الخطة الدراسية لبرنامج البكالوريوس قسم الفنون البصرية",
+   "year": "2023"
+  },
+  {
+   "program": "cinema",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/attach/Bachelor%20of%20Arts%20in%20Cinematic%20Arts.pdf",
+   "title": "الخطة الدراسية لبرنامج بكالوريوس الفنون في الفنون السينمائية (122 h)",
+   "year": "undated"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 101",
+   "ar_code": "فنن 101",
+   "en": "Introduction to Visual Arts",
+   "ar": "مقدمة في الفنون البصرية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 102",
+   "ar_code": "فنن 102",
+   "en": "History of Ancient Arts",
+   "ar": "تاريخ الفنون القديمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 103",
+   "ar_code": "فنن 103",
+   "en": "Introduction to Criticism and Artistic Appreciation",
+   "ar": "مدخل إلى النقد والتذوق الفني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 200",
+   "ar_code": "فنن 200",
+   "en": "Islamic Arts",
+   "ar": "الفنون الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 201",
+   "ar_code": "فنن 201",
+   "en": "Foundation of Design in Visual Arts",
+   "ar": "أسس التصميم في الفنون البصرية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 202",
+   "ar_code": "فنن 202",
+   "en": "Drawing I",
+   "ar": "الرسم التشكيلي 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 203",
+   "ar_code": "فنن 203",
+   "en": "Ceramic Techniques",
+   "ar": "تقنيات الخزف",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 204",
+   "ar_code": "فنن 204",
+   "en": "Art and Environment",
+   "ar": "الفن البيئي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 205",
+   "ar_code": "فنن 205",
+   "en": "Drawing II",
+   "ar": "الرسم التشكيلي 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 206",
+   "ar_code": "فنن 206",
+   "en": "Calligraphy",
+   "ar": "الخط العربي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 207",
+   "ar_code": "فنن 207",
+   "en": "Trends in Modern and Contemporary Art",
+   "ar": "اتجاهات الفنون الحديثة والمعاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 208",
+   "ar_code": "فنن 208",
+   "en": "Painting",
+   "ar": "التصوير التشكيلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 209",
+   "ar_code": "فنن 209",
+   "en": "Introduction to Printmaking",
+   "ar": "مقدمة في الطباعة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 210",
+   "ar_code": "فنن 210",
+   "en": "Art Museums and Galleries",
+   "ar": "متاحف ومعارض الفنون",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 301",
+   "ar_code": "فنن 301",
+   "en": "Islamic Ornament",
+   "ar": "الزخرفة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 302",
+   "ar_code": "فنن 302",
+   "en": "Heritage Art",
+   "ar": "الفنون التراثية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 303",
+   "ar_code": "فنن 303",
+   "en": "Ceramics Glazing",
+   "ar": "طلاءات خزفية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 304",
+   "ar_code": "فنن 304",
+   "en": "Creativity and Experimentation with Materials",
+   "ar": "الابتكار والتجريب في الخامات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 305",
+   "ar_code": "فنن 305",
+   "en": "Mold Making and Kilns",
+   "ar": "صب القوالب وافران الحريق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 306",
+   "ar_code": "فنن 306",
+   "en": "Printmaking Techniques",
+   "ar": "تقنيات الطباعة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 307",
+   "ar_code": "فنن 307",
+   "en": "Art and Entrepreneurship",
+   "ar": "الفن وريادة الأعمال",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 308",
+   "ar_code": "فنن 308",
+   "en": "Contemporary Painting",
+   "ar": "التصوير المعاصر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 309",
+   "ar_code": "فنن 309",
+   "en": "Foundation of Sculpture",
+   "ar": "أسس التشكيل النحتي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 310",
+   "ar_code": "فنن 310",
+   "en": "Art and Aesthetics",
+   "ar": "الفن وعلم الجمال",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 401",
+   "ar_code": "فنن 401",
+   "en": "Contemporary Art Practices",
+   "ar": "الممارسات الفنية المعاصرة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 402",
+   "ar_code": "فنن 402",
+   "en": "Critical Readings in Arts",
+   "ar": "قراءات نقدية في الفن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARTT 403",
+   "ar_code": "فنن 403",
+   "en": "Contemporary Sculpture Composition",
+   "ar": "التشكيل النحتي المعاصر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARTT 404",
+   "ar_code": "فنن 404",
+   "en": "Graduation Project",
+   "ar": "مشروع التخرج",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ARTT 405",
+   "ar_code": "فنن 405",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "Academic Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 201",
+   "ar_code": "سما 201",
+   "en": "Introduction to Cinematic Arts",
+   "ar": "مقدمة في الفنون السينمائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 202",
+   "ar_code": "سما 202",
+   "en": "Fundamentals of Cinematography",
+   "ar": "أسس التصوير والإضاءة السينمائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 203",
+   "ar_code": "سما 203",
+   "en": "Fundamentals of Screen Directing",
+   "ar": "أسس الإخراج السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 204",
+   "ar_code": "سما 204",
+   "en": "Fundamentals of Screenwriting",
+   "ar": "أسس الكتابة السينمائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 205",
+   "ar_code": "سما 205",
+   "en": "Introduction to Film Producing",
+   "ar": "مقدمة في الإنتاج والإدارة السينمائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 206",
+   "ar_code": "سما 206",
+   "en": "Language of Film",
+   "ar": "لغة الأفلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 207",
+   "ar_code": "سما 207",
+   "en": "Fundamentals of Film Editing",
+   "ar": "أسس التحرير السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 208",
+   "ar_code": "سما 208",
+   "en": "2D Animation",
+   "ar": "الرسوم المتحركة ثنائية الأبعاد",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 209",
+   "ar_code": "سما 209",
+   "en": "Production Design",
+   "ar": "تصميم الإنتاج",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 210",
+   "ar_code": "سما 210",
+   "en": "Fundamentals of Screen Acting",
+   "ar": "أسس التمثيل السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 211",
+   "ar_code": "سما 211",
+   "en": "History of Cinema",
+   "ar": "تاريخ السينما",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 301",
+   "ar_code": "سما 301",
+   "en": "Intermediate Cinematography",
+   "ar": "التصوير والإضاءة السينمائية المتوسطة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 302",
+   "ar_code": "سما 302",
+   "en": "Intermediate Screen Directing",
+   "ar": "الإخراج السينمائي المتوسط",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 303",
+   "ar_code": "سما 303",
+   "en": "Intermediate Screenwriting",
+   "ar": "الكتابة السينمائية المتوسطة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 304",
+   "ar_code": "سما 304",
+   "en": "Intermediate Film Producing",
+   "ar": "الإنتاج والإدارة السينمائية المتوسطة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 305",
+   "ar_code": "سما 305",
+   "en": "Sound Design for Film",
+   "ar": "تصميم الصوتيات للأفلام السينمائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 306",
+   "ar_code": "سما 306",
+   "en": "Intermediate Film Editing",
+   "ar": "التحرير السينمائي المتوسط",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 307",
+   "ar_code": "سما 307",
+   "en": "3D Animation",
+   "ar": "الرسوم المتحركة ثلاثية الأبعاد",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 308",
+   "ar_code": "سما 308",
+   "en": "Practicum in Film Production",
+   "ar": "تدريب عملي على الإنتاج السينمائي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 310",
+   "ar_code": "سما 310",
+   "en": "Film Theory",
+   "ar": "نظريات الفيلم السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 311",
+   "ar_code": "سما 311",
+   "en": "Intermediate Screen Acting",
+   "ar": "التمثيل السينمائي المتوسط",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 350",
+   "ar_code": "سما 350",
+   "en": "Documentary Filmmaking",
+   "ar": "صناعة الفيلم الوثائقي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 351",
+   "ar_code": "سما 351",
+   "en": "Writing the TV Series",
+   "ar": "كتابة المسلسلات التليفزيونية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 352",
+   "ar_code": "سما 352",
+   "en": "The Art of Visual Effects",
+   "ar": "فن صناعة المؤثرات البصرية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 353",
+   "ar_code": "سما 353",
+   "en": "The Art of Color Grading",
+   "ar": "فن التلوين السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 354",
+   "ar_code": "سما 354",
+   "en": "VR Filmmaking",
+   "ar": "صناعة الأفلام في الواقع الافتراضي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 355",
+   "ar_code": "سما 355",
+   "en": "Makeup and Costume Design for Film",
+   "ar": "المكياج وتصميم الأزياء في السينما",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 401",
+   "ar_code": "سما 401",
+   "en": "Film Analysis and Criticism",
+   "ar": "التحليل والنقد السينمائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CNMA 450",
+   "ar_code": "سما 450",
+   "en": "Advanced Cinematography",
+   "ar": "التصوير والإضاءة السينمائية المتقدمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 451",
+   "ar_code": "سما 451",
+   "en": "Advanced Screen Directing",
+   "ar": "الإخراج السينمائي المتقدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 452",
+   "ar_code": "سما 452",
+   "en": "Advanced Screenwriting",
+   "ar": "الكتابة السينمائية المتقدمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 453",
+   "ar_code": "سما 453",
+   "en": "Advanced Film Producing",
+   "ar": "الإنتاج والإدارة السينمائية المتقدمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 454",
+   "ar_code": "سما 454",
+   "en": "Advanced Film Editing",
+   "ar": "التحرير السينمائي المتقدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 455",
+   "ar_code": "سما 455",
+   "en": "Advanced Screen Acting",
+   "ar": "التمثيل السينمائي المتقدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CNMA 498",
+   "ar_code": "سما 498",
+   "en": "Graduation Project",
+   "ar": "مشروع تخرج",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CNMA 499",
+   "ar_code": "سما 499",
+   "en": "Cooperative Training",
+   "ar": "تدريب تعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "CT 102",
+   "ar_code": "تقن 102",
+   "en": "Computer Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness & Culture Health",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "FIN 120",
+   "ar_code": "مال 120",
+   "en": "Investing in Arts",
+   "ar": "الاستثمار في الفنون",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 101",
+   "ar_code": "جفك 101",
+   "en": "Introduction to Design",
+   "ar": "مقدمة في التصميم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 102",
+   "ar_code": "جفك 102",
+   "en": "Design Awareness",
+   "ar": "الوعي التصميمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 205",
+   "ar_code": "جفك 205",
+   "en": "Fundamentals of Visual Communication Design",
+   "ar": "أساسيات تصميم التواصل البصري",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 206",
+   "ar_code": "جفك 206",
+   "en": "History of Graphic Design",
+   "ar": "تاريخ التصميم الجرافيكي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 208",
+   "ar_code": "جفك 208",
+   "en": "Digital Drawing",
+   "ar": "الرسم الرقمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 210",
+   "ar_code": "جفك 210",
+   "en": "Publication Design",
+   "ar": "تصميم المطبوعات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 214",
+   "ar_code": "جفك 214",
+   "en": "Illustration Design",
+   "ar": "تصميم الرسوم الإيضاحية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 216",
+   "ar_code": "جفك 216",
+   "en": "Storytelling in Design",
+   "ar": "السرد القصصي في التصميم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 218",
+   "ar_code": "جفك 218",
+   "en": "Typography (1)",
+   "ar": "التايبوغرافي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 310",
+   "ar_code": "جفك 310",
+   "en": "Research in Graphic Design",
+   "ar": "البحث في التصميم الجرافيكي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 312",
+   "ar_code": "جفك 312",
+   "en": "User Experience Design (UX)",
+   "ar": "تصميم تجربة المستخدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 314",
+   "ar_code": "جفك 314",
+   "en": "Typography (2)",
+   "ar": "التايبوغرافي (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 316",
+   "ar_code": "جفك 316",
+   "en": "Branding Design",
+   "ar": "تصميم الهوية البصرية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 318",
+   "ar_code": "جفك 318",
+   "en": "Web Design",
+   "ar": "تصميم المواقع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 320",
+   "ar_code": "جفك 320",
+   "en": "3D Design",
+   "ar": "التصميم ثلاثي الأبعاد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 330",
+   "ar_code": "جفك 330",
+   "en": "Packaging Design",
+   "ar": "تصميم المغلفات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 332",
+   "ar_code": "جفك 332",
+   "en": "Motion Design",
+   "ar": "تصميم الحركة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 334",
+   "ar_code": "جفك 334",
+   "en": "Advertising Design",
+   "ar": "تصميم الإعلان",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 336",
+   "ar_code": "جفك 336",
+   "en": "Design Interface (UI)",
+   "ar": "تصميم واجهة المستخدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 338",
+   "ar_code": "جفك 338",
+   "en": "Design Information",
+   "ar": "تصميم المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 410",
+   "ar_code": "جفك 410",
+   "en": "Design Research Project",
+   "ar": "مشروع بحثي في التصميم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 414",
+   "ar_code": "جفك 414",
+   "en": "Interactive Design",
+   "ar": "التصميم التفاعلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 416",
+   "ar_code": "جفك 416",
+   "en": "Video Design",
+   "ar": "تصميم الفيديو",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GPC 420",
+   "ar_code": "جفك 420",
+   "en": "Graduation Project",
+   "ar": "مشروع التخرج",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GPC 450",
+   "ar_code": "جفك 450",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "MAS 241",
+   "ar_code": "تصل 241",
+   "en": "Communication Skills in Arts",
+   "ar": "مهارات الاتصال في الفنون",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PRF 101",
+   "ar_code": "فاد 101",
+   "en": "Introduction to Performance Arts",
+   "ar": "مقدمة في الفنون الأدائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PRF 102",
+   "ar_code": "فاد 102",
+   "en": "Art and Society",
+   "ar": "الفن والمجتمع",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PRF 201",
+   "ar_code": "فاد 201",
+   "en": "Introduction to Performance Theories",
+   "ar": "مقدمة في نظريات الفنون الأدائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PRF 202",
+   "ar_code": "فاد 202",
+   "en": "Saudi Performance Arts",
+   "ar": "الفنون الأدائية السعودية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "STAT 102",
+   "ar_code": "احص 102",
+   "en": "Principles of Statistics and Probability",
+   "ar": "مبادئ في الإحصاء والاحتمالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 202",
+   "ar_code": "تيم 202",
+   "en": "Color Theory and Applications",
+   "ar": "نظريات اللون وتطبيقاتها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 207",
+   "ar_code": "تيم 207",
+   "en": "Introduction to Design Applications",
+   "ar": "مدخل إلى برامج وتطبيقات التصميم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 209",
+   "ar_code": "تيم 209",
+   "en": "Styles and Design Patterns",
+   "ar": "أساليب وأنماط التصميم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 211",
+   "ar_code": "تيم 211",
+   "en": "Design Theories",
+   "ar": "نظريات التصميم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TEM 212",
+   "ar_code": "تيم 212",
+   "en": "Design Ethics",
+   "ar": "أخلاقيات التصميم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TEM 215",
+   "ar_code": "تيم 215",
+   "en": "Technology in Design",
+   "ar": "التكنولوجيا في التصميم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 217",
+   "ar_code": "تيم 217",
+   "en": "Digital Photography",
+   "ar": "التصوير الفوتوغرافي الرقمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TEM 412",
+   "ar_code": "تيم 412",
+   "en": "Design Practices",
+   "ar": "ممارسات في التصميم",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "graphic",
+   "ar": "التصميم الجرافيكي",
+   "en": "Graphic Design",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "GPC 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "GPC 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 103",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "FIN 120",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "MAS 241",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "TEM 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GPC 205",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GPC 206",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TEM 207",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TEM 212",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GPC 210",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "TEM 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GPC 214",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GPC 216",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GPC 218",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GPC 310",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GPC 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GPC 314",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GPC 316",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "GPC 318",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPC 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPC 330",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPC 332",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPC 410",
+     "kind": "project",
+     "level": 6
+    },
+    {
+     "code": "TEM 412",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GPC 334",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "GPC 336",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "GPC 414",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "GPC 420",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "GPC 450",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "TEM 209",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "TEM 215",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "TEM 217",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPC 208",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPC 338",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GPC 416",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "visual",
+   "ar": "الفنون البصرية",
+   "en": "Visual Arts",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "GPC 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "GPC 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 103",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "FIN 120",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "MAS 241",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 200",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARTT 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARTT 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARTT 203",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARTT 204",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ARTT 205",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARTT 206",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARTT 207",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARTT 208",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARTT 209",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARTT 210",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARTT 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARTT 302",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARTT 303",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARTT 304",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARTT 305",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARTT 306",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARTT 307",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARTT 308",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARTT 309",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARTT 310",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ARTT 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ARTT 402",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ARTT 403",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ARTT 404",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "ARTT 405",
+     "kind": "training",
+     "level": 8
+    }
+   ]
+  },
+  {
+   "id": "cinema",
+   "ar": "الفنون السينمائية",
+   "en": "Cinematic Arts",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "GPC 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 101",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "GPC 102",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "ARTT 103",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "FIN 120",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "MAS 241",
+     "kind": "college",
+     "level": 2
+    },
+    {
+     "code": "PRF 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 201",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 203",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 204",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 205",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CNMA 206",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "PRF 202",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 207",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 208",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 209",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 210",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CNMA 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CNMA 302",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CNMA 303",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CNMA 304",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CNMA 305",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CNMA 306",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CNMA 307",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CNMA 308",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CNMA 311",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CNMA 310",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CNMA 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CNMA 498",
+     "kind": "project",
+     "level": 7
+    },
+    {
+     "code": "CNMA 499",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "CNMA 350",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 351",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 352",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 353",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 354",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 355",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CNMA 455",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  }
+ ],
+ "prefix_map": {
+  "انجل": "ENGS",
+  "فجب": "EPH",
+  "نهج": "CI",
+  "احص": "STAT",
+  "تقن": "CT",
+  "عرب": "ARAB",
+  "جفك": "GPC",
+  "فنن": "ARTT",
+  "فاد": "PRF",
+  "مال": "FIN",
+  "تصل": "MAS",
+  "تيم": "TEM",
+  "سما": "CNMA"
+ }
+}

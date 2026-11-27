@@ -1,0 +1,7086 @@
+{
+ "college": "hum",
+ "sources": [
+  {
+   "program": "eng-lit",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/Bachelor%20of%20English%20Language%20Program%20Plan2026.pdf",
+   "title": "Degree Plan – UPENG English Language and Literature (Edugate print 2026-01-23, sem 385, edition 4, 128 h)",
+   "year": "2026"
+  },
+  {
+   "program": "eng-lit",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%AE%D8%B7%D8%A9%20%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D8%A5%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A%D8%A9%20%D9%88%D8%A3%D8%AF%D8%A7%D8%A8%D9%87%D8%A7%202026.pdf",
+   "title": "الخطة الدراسية – اللغة الإنجليزية وآدابها (Arabic Edugate print 2026-01-19)",
+   "year": "2026"
+  },
+  {
+   "program": "eng-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/Bachelor%20of%20English%20Language%20and%20Translation%20Program%20Plan%202026.pdf",
+   "title": "Study Plan – UPEGT English Language and Translation (Edugate print 2026-06-11, sem 385, edition 4, 137 h)",
+   "year": "2026"
+  },
+  {
+   "program": "eng-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%AA%D8%B1%D8%AC%20%D8%A7%D9%84%D8%A7%D8%B5%D8%AF%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9.pdf",
+   "title": "الخطة الدراسية – اللغة الإنجليزية والترجمة (Arabic Edugate print 2026-05-18, edition 4)",
+   "year": "2026"
+  },
+  {
+   "program": "fr-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%84%D9%85%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A7%D9%84%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D9%88%D8%B3.pdf",
+   "title": "الخطة الدراسية – UPFRN اللغة الفرنسية والترجمة (Arabic Edugate print 2022-01-27, sem 383, edition 2, 137 h)",
+   "year": "2022"
+  },
+  {
+   "program": "fr-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/BA%20French%20Program%20Study%20Plan.pdf",
+   "title": "BA French Program Study Plan (English, PDF dated 2025-09)",
+   "year": "2025"
+  },
+  {
+   "program": "zh-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A8%D9%83%D8%A7%D9%84%D8%B1%D9%8A%D9%88%D8%B3%20%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D8%B5%D9%8A%D9%86%D9%8A%D8%A9.pdf",
+   "title": "الخطة الدراسية الجديدة لبرنامج اللغة الصينية والترجمة (Arabic, PDF dated 2019-02)",
+   "year": "2019"
+  },
+  {
+   "program": "zh-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/The%20Study%20Plan%20for%20the%20Bachelor%26%23039%3Bs%20Program%20in%20Chinese%20Language%20and%20Translation.pdf",
+   "title": "The New Study Plan for the Bachelor's Program in Chinese Language and Translation (English, PDF dated 2025-09)",
+   "year": "2025"
+  },
+  {
+   "program": "es-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A9.pdf",
+   "title": "الخطة الدراسية لبرنامج اللغة الإسبانية (Arabic, PDF dated 2025-02)",
+   "year": "2025"
+  },
+  {
+   "program": "es-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/The%20Study%20Plan%20for%20the%20Bachelor%26%23039%3Bs%20Program%20in%20Spanish%20Language%20and%20Translation.pdf",
+   "title": "The Study Plan for the Bachelor's Program in Spanish Language and Translation (English, PDF dated 2025-09)",
+   "year": "2025"
+  },
+  {
+   "program": "ja-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D9%88%D8%B3%20%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D8%AA%D8%B1%D8%AC%D9%85%D8%A9.pdf",
+   "title": "الخطة الدراسية لبرنامج بكالوريوس اللغة اليابانية والترجمة (Arabic, PDF dated 2025-02)",
+   "year": "2025"
+  },
+  {
+   "program": "ja-tr",
+   "url": "https://cols.ksu.edu.sa/sites/cols.ksu.edu.sa/files/attach/The%20Study%20Plan%20for%20the%20Bachelor%26%23039%3Bs%20Program%20in%20Japanese%20Language%20and%20Translation.pdf",
+   "title": "The Study Plan for the Bachelor's Program in Japanese Language and Translation (English, PDF dated 2025-09)",
+   "year": "2025"
+  },
+  {
+   "program": "hist",
+   "url": "https://arts.ksu.edu.sa/sites/chss.ksu.edu.sa/files/attach/11.pdf",
+   "title": "Study Plan – UPHIS History (Edugate print 2026-08-10, sem 385, edition 7, 128 h; chss file served via arts host)",
+   "year": "2026"
+  },
+  {
+   "program": "media",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/imce_images/bachelor-masscomm-plan_0.pdf",
+   "title": "برنامج بكالوريوس الإعلام: الخطة وتوصيف المقررات (plan approved 1437H/2015)",
+   "year": "2015"
+  },
+  {
+   "program": "infs",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/attach/lkht_ldrsy_llbklwryws.pdf",
+   "title": "قسم علم المعلومات – الخطة الدراسية للبكالوريوس (PDF dated 2018-10)",
+   "year": "2018"
+  },
+  {
+   "program": "soc",
+   "url": "https://arts.ksu.edu.sa/sites/arts.ksu.edu.sa/files/imce_images/twsyf_mkhtsr_lmqrrt_msr_lm_ljtm.pdf",
+   "title": "التوصيف المختصر لمقررات علم الاجتماع + الخطة الدراسية (مسار علم الاجتماع) – قسم الدراسات الاجتماعية (PDF dated 2021-03)",
+   "year": "2021"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English Language",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Education",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 102",
+   "ar_code": "احص 102",
+   "en": "Principles of Statistics and Probability",
+   "ar": "مبادئ في الإحصاء والاحتمالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 102",
+   "ar_code": "تقن 102",
+   "en": "Computer Skills and Artificial Intelligence",
+   "ar": "مهارات الحاسب الآلي والذكاء الاصطناعي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 106",
+   "ar_code": "نجل 106",
+   "en": "Basic English Grammar",
+   "ar": "أساسيات قواعد اللغة الانجليزية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 107",
+   "ar_code": "نجل 107",
+   "en": "Listening & Speaking Skills",
+   "ar": "مهارات الاستماع والتحدث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 108",
+   "ar_code": "نجل 108",
+   "en": "English Study Skills",
+   "ar": "مهارات التعلم الانجليزية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 109",
+   "ar_code": "نجل 109",
+   "en": "Reading Skills & Vocabulary Building",
+   "ar": "مهارات القراءة وبناء المفردات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 110",
+   "ar_code": "نجل 110",
+   "en": "Basic writing Skills",
+   "ar": "اساسيات مهارات الكتابة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 210",
+   "ar_code": "نجل 210",
+   "en": "Introduction to Literature",
+   "ar": "مقدمة في الآدب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 211",
+   "ar_code": "نجل 211",
+   "en": "English Grammar in Use",
+   "ar": "قواعد اللغة الانجليزية و استخداماتها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 221",
+   "ar_code": "نجل 221",
+   "en": "Introduction to Linguistic Sciences",
+   "ar": "مقدمة في علوم اللسانيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 225",
+   "ar_code": "نجل 225",
+   "en": "Foundations of Rhetoric and Writing",
+   "ar": "أسس الكتابة والبلاغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 219",
+   "ar_code": "نجل 219",
+   "en": "Translation (1)",
+   "ar": "الترجمة (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 222",
+   "ar_code": "نجل 222",
+   "en": "Introduction to Applied Linguistics",
+   "ar": "مقدمة في اللسانيات التطبيقية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 223",
+   "ar_code": "نجل 223",
+   "en": "Speech & Academic Debate",
+   "ar": "الخطاب والنقاش الأكاديمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 227",
+   "ar_code": "نجل 227",
+   "en": "Rhetoric and Writing",
+   "ar": "الكتابة والبلاغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 327",
+   "ar_code": "نجل 327",
+   "en": "English Morphology and Syntax",
+   "ar": "النحو والصرف الإنجليزي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 300",
+   "ar_code": "نجل 300",
+   "en": "Semantics & Pragmatics",
+   "ar": "علم الدلالة والتداولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 318",
+   "ar_code": "نجل 318",
+   "en": "Survey of British Literature",
+   "ar": "عرض شامل للأدب البريطاني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 329",
+   "ar_code": "نجل 329",
+   "en": "Language Acquisition",
+   "ar": "اكتساب اللغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 374",
+   "ar_code": "نجل 374",
+   "en": "Survey of American Literature",
+   "ar": "عرض شامل للأدب الأمريكي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 101",
+   "ar_code": "عرب 101",
+   "en": "Language Skills",
+   "ar": "المهارات اللغوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 301",
+   "ar_code": "نجل 301",
+   "en": "Developments in Language Learning",
+   "ar": "تطورات في تعلم اللغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 307",
+   "ar_code": "نجل 307",
+   "en": "Language and Society",
+   "ar": "اللغة والمجتمع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 322",
+   "ar_code": "نجل 322",
+   "en": "Phonetics and Phonology",
+   "ar": "الصوتيات والصواتة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 343",
+   "ar_code": "نجل 343",
+   "en": "Shakespeare",
+   "ar": "شكسبير",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 362",
+   "ar_code": "نجل 362",
+   "en": "Literary Criticism",
+   "ar": "النقد الأدبي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 118",
+   "ar_code": "عرب 118",
+   "en": "Reading Skills",
+   "ar": "مهارات القراءة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 381",
+   "ar_code": "نجل 381",
+   "en": "World Literature",
+   "ar": "الأدب العالمي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 400",
+   "ar_code": "نجل 400",
+   "en": "Language Assessment",
+   "ar": "التقويم اللغوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 414",
+   "ar_code": "نجل 414",
+   "en": "Composing Research",
+   "ar": "إعداد البحث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 434",
+   "ar_code": "نجل 434",
+   "en": "Translation (2)",
+   "ar": "الترجمة (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 498",
+   "ar_code": "نجل 498",
+   "en": "Practicum",
+   "ar": "التدريب العملي",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Prophet Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Principles of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Economic System in Islam",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Islamic Political System",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Professional Ethics",
+   "ar": "اخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Current Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Development Role of Women",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Quran Kareem",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENG 401",
+   "ar_code": "نجل 401",
+   "en": "Bilingualism",
+   "ar": "الثنائية اللغوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 402",
+   "ar_code": "نجل 402",
+   "en": "Psycholinguistics",
+   "ar": "اللسانيات النفسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 405",
+   "ar_code": "نجل 405",
+   "en": "Neurolinguistics",
+   "ar": "اللسانيات العصبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 415",
+   "ar_code": "نجل 415",
+   "en": "Language Development",
+   "ar": "تطور اللغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 416",
+   "ar_code": "نجل 416",
+   "en": "Syntactic Theories",
+   "ar": "نظريات نحوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 426",
+   "ar_code": "نجل 426",
+   "en": "Discourse Structure and Strategies",
+   "ar": "بنية واستراتيجيات الخطاب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 428",
+   "ar_code": "نجل 428",
+   "en": "Language Geography",
+   "ar": "جغرافية اللغة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 430",
+   "ar_code": "نجل 430",
+   "en": "Romantic Period",
+   "ar": "العصر الرومنتيكي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 443",
+   "ar_code": "نجل 443",
+   "en": "Development of Drama",
+   "ar": "تطور المسرحية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 450",
+   "ar_code": "نجل 450",
+   "en": "Corpus Linguistics",
+   "ar": "المدونات اللغوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 452",
+   "ar_code": "نجل 452",
+   "en": "Nineteenth Century Novel",
+   "ar": "الرواية في القرن التاسع عشر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 457",
+   "ar_code": "نجل 457",
+   "en": "Modern Fiction",
+   "ar": "الفن القصصي الحديث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 464",
+   "ar_code": "نجل 464",
+   "en": "Genre Analysis",
+   "ar": "تحليل نوع النص",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 466",
+   "ar_code": "نجل 466",
+   "en": "Major Non-Fictional Text",
+   "ar": "النصوص غير القصصية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 467",
+   "ar_code": "نجل 467",
+   "en": "Modern Literary Theory",
+   "ar": "النظرية الأدبية الحديثة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 474",
+   "ar_code": "نجل 474",
+   "en": "American Literature 1 : The Beginning to 1900",
+   "ar": "الأدب الأمريكي (1): من بداياته إلى عام 1900",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 475",
+   "ar_code": "نجل 475",
+   "en": "American Literature 2",
+   "ar": "الأدب الأمريكي (2): من 1900 إلى عام الحاضر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 484",
+   "ar_code": "نجل 484",
+   "en": "British Literature 1",
+   "ar": "الأدب البريطاني (1): من بداياته إلى عام 1780",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 485",
+   "ar_code": "نجل 485",
+   "en": "British Literature 2",
+   "ar": "الأدب البريطاني (2): من 1832 إلى عام الحاضر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 489",
+   "ar_code": "نجل 489",
+   "en": "Literary Linguistics",
+   "ar": "اللسانيات الادبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 491",
+   "ar_code": "نجل 491",
+   "en": "Computational Linguistics",
+   "ar": "اللسانيات الحاسوبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 492",
+   "ar_code": "نجل 492",
+   "en": "History of the English Language",
+   "ar": "تاريخ اللغة الانجليزية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 432",
+   "ar_code": "نجل 432",
+   "en": "Modern Poetry",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENG 447",
+   "ar_code": "نجل 447",
+   "en": "Modren Drama",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 111",
+   "ar_code": "ترج 111",
+   "en": "Writing (1)",
+   "ar": "الكتابة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 112",
+   "ar_code": "ترج 112",
+   "en": "Reading (1)",
+   "ar": "القراءة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 113",
+   "ar_code": "ترج 113",
+   "en": "Grammar (1)",
+   "ar": "القواعد (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 114",
+   "ar_code": "ترج 114",
+   "en": "Listening & Speaking (1)",
+   "ar": "الاستماع والحديث (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 115",
+   "ar_code": "ترج 115",
+   "en": "Vocabulary (1)",
+   "ar": "بناء المفردات (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 211",
+   "ar_code": "ترج 211",
+   "en": "Writing 2",
+   "ar": "الكتابة 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 212",
+   "ar_code": "ترج 212",
+   "en": "Reading 2",
+   "ar": "القراءة 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 213",
+   "ar_code": "ترج 213",
+   "en": "Grammar 2",
+   "ar": "القواعد 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 214",
+   "ar_code": "ترج 214",
+   "en": "Listening and Speaking 2",
+   "ar": "الاستماع والحديث 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 215",
+   "ar_code": "ترج 215",
+   "en": "Vocabulary 2",
+   "ar": "المفردات 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 234",
+   "ar_code": "عرب 234",
+   "en": "Grammar -1",
+   "ar": "النحو (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 255",
+   "ar_code": "عرب 255",
+   "en": "Specialized Writing",
+   "ar": "الكتابة المتخصصة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 221",
+   "ar_code": "ترج 221",
+   "en": "Academic Writing",
+   "ar": "الكتابة الأكاديمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 222",
+   "ar_code": "ترج 222",
+   "en": "Introduction to Linguistics",
+   "ar": "مدخل إلى علم اللسانيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 223",
+   "ar_code": "ترج 223",
+   "en": "Using Dictionaries for Translation",
+   "ar": "استخدام المعاجم في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 224",
+   "ar_code": "ترج 224",
+   "en": "Introduction to Translation Studies",
+   "ar": "مدخل إلى دراسات الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 225",
+   "ar_code": "ترج 225",
+   "en": "General Translation (English into Arabic)",
+   "ar": "ترجمة عامة (من الإنجليزية إلى العربية)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ARAB 350",
+   "ar_code": "عرب 350",
+   "en": "Applied Stylistics",
+   "ar": "تطبيقات أسلوبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 312",
+   "ar_code": "ترج 312",
+   "en": "Introduction to Syntax and Morphology",
+   "ar": "مدخل الى علم التراكيب والصرف",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 314",
+   "ar_code": "ترج 314",
+   "en": "Readings in Language and Culture",
+   "ar": "قراءات في اللغة والثقافة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 315",
+   "ar_code": "ترج 315",
+   "en": "General Translation (Arabic into English)",
+   "ar": "ترجمة عامة (من العربية إلى الإنجليزية)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 316",
+   "ar_code": "ترج 316",
+   "en": "Political and Media Translation",
+   "ar": "الترجمة السياسية والإعلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 317",
+   "ar_code": "ترج 317",
+   "en": "Computer Assisted Translation",
+   "ar": "الترجمة بمساعدة الحاسب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 318",
+   "ar_code": "ترج 318",
+   "en": "Consecutive and Bilateral Interpreting (1)",
+   "ar": "الترجمة التتبعية والثنائية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 322",
+   "ar_code": "ترج 322",
+   "en": "Introduction to Semantics and Pragmatics",
+   "ar": "مدخل الى علم الدلالة والتداولية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 323",
+   "ar_code": "ترج 323",
+   "en": "Text Linguistics",
+   "ar": "لسانيات النص",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 324",
+   "ar_code": "ترج 324",
+   "en": "Advanced Readings in Language and Culture",
+   "ar": "قراءات متقدمة في اللغة والثقافة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 326",
+   "ar_code": "ترج 326",
+   "en": "Financial and Economic Translation",
+   "ar": "الترجمة المالية والاقتصادية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 327",
+   "ar_code": "ترج 327",
+   "en": "Scientific and Technical Translation",
+   "ar": "الترجمة العلمية والتقنية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 328",
+   "ar_code": "ترج 328",
+   "en": "Consecutive and Bilateral Interpreting (2)",
+   "ar": "الترجمة التتبعية والثنائية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 411",
+   "ar_code": "ترج 411",
+   "en": "Research Skills",
+   "ar": "مهارات البحث العلمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 412",
+   "ar_code": "ترج 412",
+   "en": "Discourse Analysis",
+   "ar": "تحليل الخطاب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 413",
+   "ar_code": "ترج 413",
+   "en": "Proofreading and Editing",
+   "ar": "التحرير والتنقيح",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 416",
+   "ar_code": "ترج 416",
+   "en": "Medical Translation",
+   "ar": "الترجمة الطبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 417",
+   "ar_code": "ترج 417",
+   "en": "Islamic Translation",
+   "ar": "الترجمة الاسلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 418",
+   "ar_code": "ترج 418",
+   "en": "Simultaneous Interpreting (1)",
+   "ar": "الترجمة الفورية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 425",
+   "ar_code": "ترج 425",
+   "en": "Issues and Problems in Translation",
+   "ar": "قضايا الترجمة وإشكالاتها",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 426",
+   "ar_code": "ترج 426",
+   "en": "Literary Translation",
+   "ar": "الترجمة الأدبية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 427",
+   "ar_code": "ترج 427",
+   "en": "Legal Translation",
+   "ar": "الترجمة القانونية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 428",
+   "ar_code": "ترج 428",
+   "en": "Simultaneous Interpreting (2)",
+   "ar": "الترجمة الفورية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "TRAJ 429",
+   "ar_code": "ترج 429",
+   "en": "Translation Project",
+   "ar": "مشروع الترجمة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "HIST 111",
+   "ar_code": null,
+   "en": "Introduction to History",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 131",
+   "ar_code": null,
+   "en": "History of the Ancient Near East -1-",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 141",
+   "ar_code": null,
+   "en": "Ancient History of Arabian Peninsula -1-",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 145",
+   "ar_code": null,
+   "en": "History of the Prophet (Sirat Al-Nabi)",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 123",
+   "ar_code": null,
+   "en": "Greek and Roman History",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 146",
+   "ar_code": null,
+   "en": "History of the Rashidun Caliphs",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 241",
+   "ar_code": null,
+   "en": "History of the Ummyyads",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 310",
+   "ar_code": null,
+   "en": "Methodology of Historical Research",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 320",
+   "ar_code": null,
+   "en": "History of Andalusia and the Islamic West",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 341",
+   "ar_code": null,
+   "en": "History of the Abbasids",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 350",
+   "ar_code": null,
+   "en": "Ayyubids and Mamluks",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 351",
+   "ar_code": null,
+   "en": "Islamic Civilization",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 414",
+   "ar_code": null,
+   "en": "Othoman History",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 354",
+   "ar_code": null,
+   "en": "History of the Islamic East",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 436",
+   "ar_code": null,
+   "en": "History of Europe in the Renaissance",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 487",
+   "ar_code": null,
+   "en": "American History",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 419",
+   "ar_code": null,
+   "en": "Contemporary Global Issues",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 420",
+   "ar_code": null,
+   "en": "History of the Saudi State",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 470",
+   "ar_code": null,
+   "en": "Modern and Contemporary Arab History",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 399",
+   "ar_code": null,
+   "en": "Historian's Skills",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 426",
+   "ar_code": null,
+   "en": "Modern and Contemporary History of Europe",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 471",
+   "ar_code": null,
+   "en": "History of the Kingdom of Saudi Arabia",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 488",
+   "ar_code": null,
+   "en": "History of Yemen and the Arabian Gulf",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 497",
+   "ar_code": null,
+   "en": "Research Project",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 220",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 222",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 223",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 232",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 250",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 263",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 315",
+   "ar_code": null,
+   "en": "Dhimmis in Islam",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 325",
+   "ar_code": null,
+   "en": "The Arabian Peninsula in the Islamic Middle Ages",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 339",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 344",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 357",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 365",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 370",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 416",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 417",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 422",
+   "ar_code": null,
+   "en": "Modern History of China and Japan",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 480",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 491",
+   "ar_code": null,
+   "en": "The History of Oil and its Impact in the Kingdom of Saudi Arabia",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 498",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "HIST 235",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 259",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 260",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 343",
+   "ar_code": null,
+   "en": "History of the Crusades",
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "HIST 455",
+   "ar_code": null,
+   "en": "The Contemporary and Modern History of Iran",
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 465",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "HIST 486",
+   "ar_code": null,
+   "en": null,
+   "ar": null,
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 220",
+   "ar_code": "تصل 220",
+   "en": "Introduction To Media & Communication",
+   "ar": "مقدمة في الإعلام والاتصال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MAS 221",
+   "ar_code": "تصل 221",
+   "en": "Principles of Strategic Communication",
+   "ar": "مبادئ الاتصال الاستراتيجي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 222",
+   "ar_code": "تصل 222",
+   "en": "The Saudi Media",
+   "ar": "الإعلام السعودي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 226",
+   "ar_code": "تصل 226",
+   "en": "The New Media",
+   "ar": "الإعلام الجديد",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MAS 227",
+   "ar_code": "تصل 227",
+   "en": "Media Laws and Ethics",
+   "ar": "قوانين الإعلام وأخلاقياته",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 231",
+   "ar_code": "تصل 231",
+   "en": "Political Communication",
+   "ar": "الاتصال السياسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 232",
+   "ar_code": "تصل 232",
+   "en": "Media and Globalization",
+   "ar": "الإعلام والعولمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 233",
+   "ar_code": "تصل 233",
+   "en": "Media Economics",
+   "ar": "اقتصاديات الإعلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 153",
+   "ar_code": "فرن 153",
+   "en": "Listening 1",
+   "ar": "الاستيعاب الشفهي (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 154",
+   "ar_code": "فرن 154",
+   "en": "Speaking 1",
+   "ar": "التعبير الشفهي (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "FRN 155",
+   "ar_code": "فرن 155",
+   "en": "Writing 1",
+   "ar": "التعبير الكتابي (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 156",
+   "ar_code": "فرن 156",
+   "en": "Reading 1",
+   "ar": "الاستيعاب الكتابي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 157",
+   "ar_code": "فرن 157",
+   "en": "Grammar 1",
+   "ar": "القواعد (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 158",
+   "ar_code": "فرن 158",
+   "en": "Vocabulary 1",
+   "ar": "بناء المفردات (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 159",
+   "ar_code": "فرن 159",
+   "en": "Phonetics",
+   "ar": "الصوتيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 253",
+   "ar_code": "فرن 253",
+   "en": "Listening 2",
+   "ar": "الاستيعاب الشفهي 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 254",
+   "ar_code": "فرن 254",
+   "en": "Speaking 2",
+   "ar": "التعبير الشفهي 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 255",
+   "ar_code": "فرن 255",
+   "en": "Writing 2",
+   "ar": "التعبير الكتابي 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 256",
+   "ar_code": "فرن 256",
+   "en": "Reading 2",
+   "ar": "الاستيعاب الكتابي 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 257",
+   "ar_code": "فرن 257",
+   "en": "Grammar 2",
+   "ar": "القواعد 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 258",
+   "ar_code": "فرن 258",
+   "en": "Vocabulary 2",
+   "ar": "بناء المفردات 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 263",
+   "ar_code": "فرن 263",
+   "en": "Listening 3",
+   "ar": "الاستيعاب الشفهي 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 264",
+   "ar_code": "فرن 264",
+   "en": "Speaking 3",
+   "ar": "التعبير الشفهي 3",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 265",
+   "ar_code": "فرن 265",
+   "en": "Writing 3",
+   "ar": "التعبير الكتابي 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 266",
+   "ar_code": "فرن 266",
+   "en": "Reading 3",
+   "ar": "الاستيعاب الكتابي 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 267",
+   "ar_code": "فرن 267",
+   "en": "Grammar 3",
+   "ar": "القواعد 3",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 268",
+   "ar_code": "فرن 268",
+   "en": "Linguistic Dictionaries",
+   "ar": "المعاجم اللغوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 353",
+   "ar_code": "فرن 353",
+   "en": "Listening 4",
+   "ar": "الاستيعاب الشفهي 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 354",
+   "ar_code": "فرن 354",
+   "en": "Speaking 4",
+   "ar": "التعبير الشفهي 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 355",
+   "ar_code": "فرن 355",
+   "en": "Writing 4",
+   "ar": "التعبير الكتابي 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 356",
+   "ar_code": "فرن 356",
+   "en": "Reading 4",
+   "ar": "الاستيعاب الكتابي 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 357",
+   "ar_code": "فرن 357",
+   "en": "Grammar 4",
+   "ar": "القواعد 4",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 363",
+   "ar_code": "فرن 363",
+   "en": "Readings in Language Culture",
+   "ar": "قراءات في ثقافة اللغة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 364",
+   "ar_code": "فرن 364",
+   "en": "Public Speaking Skills",
+   "ar": "مهارات الخطابة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 365",
+   "ar_code": "فرن 365",
+   "en": "Advanced Grammar",
+   "ar": "القواعد المتقدمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 366",
+   "ar_code": "فرن 366",
+   "en": "Introduction to Linguistics",
+   "ar": "مدخل إلى علم اللسانيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 367",
+   "ar_code": "فرن 367",
+   "en": "Introduction to Translation",
+   "ar": "مدخل إلى علم الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 368",
+   "ar_code": "فرن 368",
+   "en": "Translation in the Humanities",
+   "ar": "ترجمة في مجالات العلوم الانسانية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 369",
+   "ar_code": "فرن 369",
+   "en": "Computer Applications in Translation",
+   "ar": "تطبيقات الحاسوب في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 453",
+   "ar_code": "فرن 453",
+   "en": "Introduction to Semantics",
+   "ar": "مدخل إلى علم الدلالة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 454",
+   "ar_code": "فرن 454",
+   "en": "Essay Writing",
+   "ar": "كتابة المقال",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 455",
+   "ar_code": "فرن 455",
+   "en": "Issues in Translation and Arabization",
+   "ar": "قضايا في الترجمة والتعريب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 456",
+   "ar_code": "فرن 456",
+   "en": "Scientific Research Methodology",
+   "ar": "مناهج البحث العلمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 457",
+   "ar_code": "فرن 457",
+   "en": "Political and Media Translation",
+   "ar": "الترجمة الإعلامية والسياسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 458",
+   "ar_code": "فرن 458",
+   "en": "Administrative and Economic Translation",
+   "ar": "الترجمة الإدارية والاقتصادية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 463",
+   "ar_code": "فرن 463",
+   "en": "Military and Security Translation",
+   "ar": "الترجمة العسكرية والامنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 464",
+   "ar_code": "فرن 464",
+   "en": "Legal Translation",
+   "ar": "الترجمة القانونية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 465",
+   "ar_code": "فرن 465",
+   "en": "Oral Translation",
+   "ar": "الترجمة الشفوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FRN 466",
+   "ar_code": "فرن 466",
+   "en": "Islamic Translation",
+   "ar": "ترجمة النصوص الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 467",
+   "ar_code": "فرن 467",
+   "en": "Technical and Scientific Translation",
+   "ar": "الترجمة التقنية والعلمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FRN 468",
+   "ar_code": "فرن 468",
+   "en": "Project",
+   "ar": "مشروع التخرج (ترجمة)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "عرب 140",
+   "ar_code": "عرب 140",
+   "en": "Writing skills",
+   "ar": "المهارات الكتابية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 160",
+   "ar_code": "صين 160",
+   "en": "Listening 1",
+   "ar": "الاستماع 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 161",
+   "ar_code": "صين 161",
+   "en": "Writing 1",
+   "ar": "الكتابة 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 162",
+   "ar_code": "صين 162",
+   "en": "Reading 1",
+   "ar": "القراءة 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 163",
+   "ar_code": "صين 163",
+   "en": "Grammar 1",
+   "ar": "القواعد 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 165",
+   "ar_code": "صين 165",
+   "en": "Phonetics 1",
+   "ar": "الصوتيات 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 166",
+   "ar_code": "صين 166",
+   "en": "Speaking 1",
+   "ar": "المحادثة 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 260",
+   "ar_code": "صين 260",
+   "en": "Listening 2",
+   "ar": "الاستماع 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 261",
+   "ar_code": "صين 261",
+   "en": "Writing 2",
+   "ar": "الكتابة 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 262",
+   "ar_code": "صين 262",
+   "en": "Reading 2",
+   "ar": "القراءة 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 263",
+   "ar_code": "صين 263",
+   "en": "Grammar 2",
+   "ar": "القواعد 2",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 264",
+   "ar_code": "صين 264",
+   "en": "Phonetics 2",
+   "ar": "الصوتيات 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 265",
+   "ar_code": "صين 265",
+   "en": "Speaking 2",
+   "ar": "المحادثة 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 270",
+   "ar_code": "صين 270",
+   "en": "Listening 3",
+   "ar": "الاستماع 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 273",
+   "ar_code": "صين 273",
+   "en": "Writing 3",
+   "ar": "الكتابة 3",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 274",
+   "ar_code": "صين 274",
+   "en": "Reading 3",
+   "ar": "القراءة 3",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 275",
+   "ar_code": "صين 275",
+   "en": "Grammar 3",
+   "ar": "القواعد 3",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 276",
+   "ar_code": "صين 276",
+   "en": "Speaking 3",
+   "ar": "المحادثة 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "صين 360",
+   "ar_code": "صين 360",
+   "en": "Listening 4",
+   "ar": "الاستماع 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "صين 361",
+   "ar_code": "صين 361",
+   "en": "Writing 4",
+   "ar": "الكتابة 4",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "صين 362",
+   "ar_code": "صين 362",
+   "en": "Reading 4",
+   "ar": "القراءة 4",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "صين 363",
+   "ar_code": "صين 363",
+   "en": "Grammar 4",
+   "ar": "القواعد 4",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "صين 364",
+   "ar_code": "صين 364",
+   "en": "Speaking 4",
+   "ar": "المحادثة 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 365",
+   "ar_code": "صين 365",
+   "en": "Introduction to Linguistics",
+   "ar": "مقدمة في علم اللسانيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 370",
+   "ar_code": "صين 370",
+   "en": "Chinese Language Culture",
+   "ar": "ثقافة اللغة الصينية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CHI 372",
+   "ar_code": "صين 372",
+   "en": "Introduction to Stylistics",
+   "ar": "مقدمة في علم الأسلوب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 373",
+   "ar_code": "صين 373",
+   "en": "Introduction to Translation Studies",
+   "ar": "مقدمة في علم الترجمة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CHI 375",
+   "ar_code": "صين 375",
+   "en": "Introduction to Semantics",
+   "ar": "مقدمة في علم الدلالة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 460",
+   "ar_code": "صين 460",
+   "en": "Readings in Chinese Newspapers",
+   "ar": "قراءات في الصحف الصينية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHI 461",
+   "ar_code": "صين 461",
+   "en": "Issues and Problems in Translation and Arabisation",
+   "ar": "قضايا ومشكلات في الترجمة والتعريب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 464",
+   "ar_code": "صين 464",
+   "en": "Translation of Political and Media Texts",
+   "ar": "ترجمة النصوص السياسية والإعلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 465",
+   "ar_code": "صين 465",
+   "en": "Computer Applications in Translation",
+   "ar": "تطبيقات الحاسب في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 466",
+   "ar_code": "صين 466",
+   "en": "Translation of Commercial and Economic Texts",
+   "ar": "ترجمة النصوص التجارية والاقتصادية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CHI 467",
+   "ar_code": "صين 467",
+   "en": "Oral Translation 1",
+   "ar": "الترجمة الشفوية 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 470",
+   "ar_code": "صين 470",
+   "en": "Translation of Islamic Texts",
+   "ar": "ترجمة النصوص الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 471",
+   "ar_code": "صين 471",
+   "en": "Translation of Literary Texts",
+   "ar": "ترجمة النصوص الأدبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 472",
+   "ar_code": "صين 472",
+   "en": "Translation of Scientific and Technical Texts",
+   "ar": "ترجمة النصوص العلمية والتقنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 473",
+   "ar_code": "صين 473",
+   "en": "Translation of Military and Security Texts",
+   "ar": "ترجمة النصوص العسكرية والأمنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 475",
+   "ar_code": "صين 475",
+   "en": "Oral Translation 2",
+   "ar": "الترجمة الشفوية 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHI 479",
+   "ar_code": "صين 479",
+   "en": "Project",
+   "ar": "المشروع",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 160",
+   "ar_code": "سبم 160",
+   "en": "Reading and Writing 1",
+   "ar": "القراءة والتعبير الكتابي 1",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 161",
+   "ar_code": "سبم 161",
+   "en": "Listening and Speaking 1",
+   "ar": "الاستماع والتعبير الشفوي 1",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 162",
+   "ar_code": "سبم 162",
+   "en": "Grammar and Vocabulary 1",
+   "ar": "القواعد وبناء المفردات 1",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 260",
+   "ar_code": "سبم 260",
+   "en": "Reading and Writing 2",
+   "ar": "القراءة والتعبير الكتابي 2",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 261",
+   "ar_code": "سبم 261",
+   "en": "Listening and Speaking 2",
+   "ar": "الاستماع والتعبير الشفوي 2",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 262",
+   "ar_code": "سبم 262",
+   "en": "Grammar and Vocabulary 2",
+   "ar": "القواعد وبناء المفردات 2",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 263",
+   "ar_code": "سبم 263",
+   "en": "Culture of the Spanish Language 1",
+   "ar": "ثقافة اللغة الاسبانية 1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 270",
+   "ar_code": "سبم 270",
+   "en": "Reading and Writing 3",
+   "ar": "القراءة والتعبير الكتابي 3",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 273",
+   "ar_code": "سبم 273",
+   "en": "Listening and Speaking 3",
+   "ar": "الاستماع والتعبير الشفوي 3",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 274",
+   "ar_code": "سبم 274",
+   "en": "Advanced Grammar 1",
+   "ar": "القواعد المتقدمة 1",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 275",
+   "ar_code": "سبم 275",
+   "en": "Culture of the Spanish Language 2",
+   "ar": "ثقافة اللغة الاسبانية 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 360",
+   "ar_code": "سبم 360",
+   "en": "Reading and Writing 4",
+   "ar": "القراءة والتعبير الكتابي 4",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 361",
+   "ar_code": "سبم 361",
+   "en": "Listening and Speaking 4",
+   "ar": "الاستماع والتعبير الشفوي 4",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 362",
+   "ar_code": "سبم 362",
+   "en": "Advanced Grammar 2",
+   "ar": "القواعد المتقدمة 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 363",
+   "ar_code": "سبم 363",
+   "en": "Introduction to Translation",
+   "ar": "مقدمة في علم الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 364",
+   "ar_code": "سبم 364",
+   "en": "Computer Applications in Translation",
+   "ar": "تطبيقات الحاسب في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 370",
+   "ar_code": "سبم 370",
+   "en": "Written Translation 1 (Spanish -Arabic)",
+   "ar": "الترجمة التحريرية 1 اسباني-عربي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 371",
+   "ar_code": "سبم 371",
+   "en": "Scientific Research Methodology",
+   "ar": "منهجية البحث العلمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 372",
+   "ar_code": "سبم 372",
+   "en": "Advanced Grammar 3",
+   "ar": "القواعد المتقدمة 3",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 373",
+   "ar_code": "سبم 373",
+   "en": "Writing Styles",
+   "ar": "أساليب التعبير الكتابي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 374",
+   "ar_code": "سبم 374",
+   "en": "Introduction to Linguistics",
+   "ar": "مقدمة في علم اللسانيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 460",
+   "ar_code": "سبم 460",
+   "en": "Written Translation 2 (Arabic - Spanish)",
+   "ar": "الترجمة التحريرية 2 عربي-اسباني",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 461",
+   "ar_code": "سبم 461",
+   "en": "Oral Translation 1 (Spanish -Arabic)",
+   "ar": "الترجمة الشفوية 1 اسباني-عربي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 462",
+   "ar_code": "سبم 462",
+   "en": "Advanced Grammar 4",
+   "ar": "القواعد المتقدمة 4",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 463",
+   "ar_code": "سبم 463",
+   "en": "Text and Writing styles",
+   "ar": "أنماط النصوص والكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 464",
+   "ar_code": "سبم 464",
+   "en": "Issues and Problems in Translation and Arabization",
+   "ar": "قضايا ومشكلات الترجمة والتعريب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "سبم 465",
+   "ar_code": "سبم 465",
+   "en": "Translation of Islamic Texts",
+   "ar": "ترجمة النصوص الاسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "سبم 470",
+   "ar_code": "سبم 470",
+   "en": "Written Translation 3 (Arabic - Spanish)",
+   "ar": "الترجمة التحريرية 3 عربي-اسباني",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 471",
+   "ar_code": "سبم 471",
+   "en": "Oral Translation 2 (Arabic - Spanish)",
+   "ar": "الترجمة الشفوية 2 عربي-اسباني",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 472",
+   "ar_code": "سبم 472",
+   "en": "Stylistics and Literary Translation",
+   "ar": "الأسلوبية والترجمة الأدبية",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "سبم 473",
+   "ar_code": "سبم 473",
+   "en": "Project",
+   "ar": "المشروع",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 161",
+   "ar_code": "يبن 161",
+   "en": "Listening and Speaking 1",
+   "ar": "الاستماع والمحادثة -1-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 162",
+   "ar_code": "يبن 162",
+   "en": "Writing 1",
+   "ar": "الكتابة -1-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 163",
+   "ar_code": "يبن 163",
+   "en": "Grammar 1",
+   "ar": "القواعد -1-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 165",
+   "ar_code": "يبن 165",
+   "en": "Vocabulary 1",
+   "ar": "بناء المفردات -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 261",
+   "ar_code": "يبن 261",
+   "en": "Listening and Speaking 2",
+   "ar": "الاستماع والمحادثة -2-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 262",
+   "ar_code": "يبن 262",
+   "en": "Writing 2",
+   "ar": "الكتابة -2-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 263",
+   "ar_code": "يبن 263",
+   "en": "Grammar 2",
+   "ar": "القواعد -2-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 264",
+   "ar_code": "يبن 264",
+   "en": "Vocabulary 2",
+   "ar": "بناء المفردات -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 265",
+   "ar_code": "يبن 265",
+   "en": "Reading 1",
+   "ar": "القراءة -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 277",
+   "ar_code": "يبن 277",
+   "en": "Listening and Speaking 3",
+   "ar": "الاستماع والمحادثة -3-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 278",
+   "ar_code": "يبن 278",
+   "en": "Writing 3",
+   "ar": "الكتابة -3-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 273",
+   "ar_code": "يبن 273",
+   "en": "Grammar 3",
+   "ar": "القواعد -3-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 274",
+   "ar_code": "يبن 274",
+   "en": "Vocabulary 3",
+   "ar": "بناء المفردات -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 275",
+   "ar_code": "يبن 275",
+   "en": "Reading 2",
+   "ar": "القراءة -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 361",
+   "ar_code": "يبن 361",
+   "en": "Listening and Speaking 4",
+   "ar": "الاستماع والمحادثة -4-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 362",
+   "ar_code": "يبن 362",
+   "en": "Writing 4",
+   "ar": "الكتابة -4-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 363",
+   "ar_code": "يبن 363",
+   "en": "Grammar 4",
+   "ar": "القواعد -4-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 365",
+   "ar_code": "يبن 365",
+   "en": "Introduction to Linguistics",
+   "ar": "مقدمة في علم اللسانيات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 366",
+   "ar_code": "يبن 366",
+   "en": "Japanese Language Culture 1",
+   "ar": "ثقافة اللغة اليابانية -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 367",
+   "ar_code": "يبن 367",
+   "en": "Introduction to Translation",
+   "ar": "مقدمة في علم الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 371",
+   "ar_code": "يبن 371",
+   "en": "Listening and Speaking 5",
+   "ar": "الاستماع والمحادثة -5-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 372",
+   "ar_code": "يبن 372",
+   "en": "Writing 5",
+   "ar": "الكتابة -5-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 373",
+   "ar_code": "يبن 373",
+   "en": "Grammar 5",
+   "ar": "القواعد -5-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "يبن 375",
+   "ar_code": "يبن 375",
+   "en": "Written Translation 1",
+   "ar": "الترجمة التحريرية -1-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 376",
+   "ar_code": "يبن 376",
+   "en": "Japanese Language Culture 2",
+   "ar": "ثقافة اللغة اليابانية -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 461",
+   "ar_code": "يبن 461",
+   "en": "Oral Translation 1",
+   "ar": "الترجمة الشفوية -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 462",
+   "ar_code": "يبن 462",
+   "en": "Advanced Writing 1",
+   "ar": "الكتابة المتقدمة -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 463",
+   "ar_code": "يبن 463",
+   "en": "Advanced Linguistic Structures 1",
+   "ar": "التراكيب اللغوية المتقدمة -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 466",
+   "ar_code": "يبن 466",
+   "en": "Contrastive Culture 1",
+   "ar": "الثقافة المقارنة -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 467",
+   "ar_code": "يبن 467",
+   "en": "Issues and Problems in Translation",
+   "ar": "قضايا ومشكلات في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 468",
+   "ar_code": "يبن 468",
+   "en": "Written Translation 2",
+   "ar": "الترجمة التحريرية -2-",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "يبن 469",
+   "ar_code": "يبن 469",
+   "en": "Introduction to Stylistics",
+   "ar": "مقدمة في علم الأسلوب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 471",
+   "ar_code": "يبن 471",
+   "en": "Oral Translation 2",
+   "ar": "الترجمة الشفوية -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 472",
+   "ar_code": "يبن 472",
+   "en": "Advanced Writing 2",
+   "ar": "الكتابة المتقدمة -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 473",
+   "ar_code": "يبن 473",
+   "en": "Advanced Linguistic Structures - 2",
+   "ar": "التراكيب اللغوية المتقدمة -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 476",
+   "ar_code": "يبن 476",
+   "en": "Contrastive Culture - 2",
+   "ar": "الثقافة المقارنة -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 477",
+   "ar_code": "يبن 477",
+   "en": "Computer Applications in Translation",
+   "ar": "تطبيقات الحاسب في الترجمة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "يبن 479",
+   "ar_code": "يبن 479",
+   "en": "Project",
+   "ar": "المشروع",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "نجم 140",
+   "ar_code": "نجم 140",
+   "en": null,
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "نهج 140",
+   "ar_code": "نهج 140",
+   "en": null,
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "تقن 140",
+   "ar_code": "تقن 140",
+   "en": null,
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "أحص 140",
+   "ar_code": "أحص 140",
+   "en": null,
+   "ar": "مقدمة في الإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "فجب 150",
+   "ar_code": "فجب 150",
+   "en": null,
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "تصل 101",
+   "ar_code": "تصل 101",
+   "en": "Introduction to Audio-Visual Communication",
+   "ar": "مدخل إلى الاتصال المرئي والمسموع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "تصل 102",
+   "ar_code": "تصل 102",
+   "en": "Introduction to Journalism and Public Publishing",
+   "ar": "مدخل إلى الصحافة والنشر الإلكتروني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "تصل 103",
+   "ar_code": "تصل 103",
+   "en": "Principles of Media Writing",
+   "ar": "مبادئ الكتابة الإعلامية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "تصل 104",
+   "ar_code": "تصل 104",
+   "en": "Computer-based Applications in Media",
+   "ar": "تطبيقات الحاسب الآلي في الإعلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 105",
+   "ar_code": "تصل 105",
+   "en": "Media Text in English",
+   "ar": "نصوص إعلامية باللغة الإنجليزية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 224",
+   "ar_code": "تصل 224",
+   "en": "The News Editing",
+   "ar": "تحرير الخبر",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "تصل 223",
+   "ar_code": "تصل 223",
+   "en": "Communication Theories",
+   "ar": "نظريات الاتصال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "تصل 225",
+   "ar_code": "تصل 225",
+   "en": "Media Research Method",
+   "ar": "مناهج البحث الإعلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 425",
+   "ar_code": "جمع 425",
+   "en": "Saudi Arab Society",
+   "ar": "المجتمع العربي السعودي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 230",
+   "ar_code": "تصل 230",
+   "en": "Photography and Graphics",
+   "ar": "التصوير والجرافيكس",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "جغر 207",
+   "ar_code": "جغر 207",
+   "en": "Political Geography",
+   "ar": "الجغرافيا السياسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 228",
+   "ar_code": "تصل 228",
+   "en": "Intercultural Communication",
+   "ar": "الاتصال البين الثقافي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 229",
+   "ar_code": "تصل 229",
+   "en": "Media Criticism",
+   "ar": "النقد الإعلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "صحف 300",
+   "ar_code": "صحف 300",
+   "en": "Investigative Journalism",
+   "ar": "الصحافة الاستقصائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "صحف 301",
+   "ar_code": "صحف 301",
+   "en": "Electronic Publishing",
+   "ar": "النشر الإلكتروني",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "صحف 302",
+   "ar_code": "صحف 302",
+   "en": "Editing of Journalism Arts",
+   "ar": "تحرير الفنون الصحفية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "صحف 303",
+   "ar_code": "صحف 303",
+   "en": "Journalism and Special Audiences",
+   "ar": "الصحافة والجماهير الخاصة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "صحف 304",
+   "ar_code": "صحف 304",
+   "en": "Journalism Design",
+   "ar": "الإخراج الصحفي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "صحف 305",
+   "ar_code": "صحف 305",
+   "en": "Citizen Journalism",
+   "ar": "صحافة المواطن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "صحف 306",
+   "ar_code": "صحف 306",
+   "en": "Field Training: Print and Electronic Publishing",
+   "ar": "التدريب الميداني (صحافة ونشر إلكتروني)",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "أذع 320",
+   "ar_code": "أذع 320",
+   "en": "Writing for Radio and TV",
+   "ar": "الكتابة للإذاعة والتلفزيون",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "أذع 321",
+   "ar_code": "أذع 321",
+   "en": "Broadcast Journalism",
+   "ar": "الصحافة التلفزيونية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "أذع 322",
+   "ar_code": "أذع 322",
+   "en": "The Art of Recitation and Interview",
+   "ar": "فن الإلقاء والمقابلة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "أذع 323",
+   "ar_code": "أذع 323",
+   "en": "Audio Production",
+   "ar": "الإنتاج المسموع",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "أذع 324",
+   "ar_code": "أذع 324",
+   "en": "Video Production",
+   "ar": "الإنتاج المرئي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "أذع 325",
+   "ar_code": "أذع 325",
+   "en": "Documentary Programs",
+   "ar": "البرامج الوثائقية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "أذع 326",
+   "ar_code": "أذع 326",
+   "en": "Field Training: Broadcast Media",
+   "ar": "التدريب الميداني (إعلام مرئي ومسموع)",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "علق 340",
+   "ar_code": "علق 340",
+   "en": "Strategic Communication in Public Relation",
+   "ar": "الاتصال الاستراتيجي في العلاقات العامة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "علق 341",
+   "ar_code": "علق 341",
+   "en": "Strategic Communication in Public Advertisement",
+   "ar": "الاتصال الاستراتيجي في الإعلان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "علق 342",
+   "ar_code": "علق 342",
+   "en": "Media and Advertisement Campaigns Designing",
+   "ar": "تصميم الحملات الإعلامية والإعلانية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "علق 343",
+   "ar_code": "علق 343",
+   "en": "Writing for Public Relations",
+   "ar": "الكتابة للعلاقات العامة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "علق 344",
+   "ar_code": "علق 344",
+   "en": "Organizing of Conventions and Events",
+   "ar": "تنظيم المؤتمرات والمناسبات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "علق 345",
+   "ar_code": "علق 345",
+   "en": "Public relations and crises",
+   "ar": "العلاقات العامة والأزمات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "علق 346",
+   "ar_code": "علق 346",
+   "en": "Field training: Strategic Communication",
+   "ar": "تدريب علمي (علاقات عامة)",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "تصل 234",
+   "ar_code": "تصل 234",
+   "en": "Media Education",
+   "ar": "التربية الإعلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 235",
+   "ar_code": "تصل 235",
+   "en": "Management of Media Organizations",
+   "ar": "إدارة المؤسسات الإعلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 236",
+   "ar_code": "تصل 236",
+   "en": "Introduction to Theatrical Arts",
+   "ar": "مقدمة في الفنون المسرحية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "تصل 237",
+   "ar_code": "تصل 237",
+   "en": "Media Aesthetics",
+   "ar": "جماليات الفنون المرئية والمسموعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 238",
+   "ar_code": "تصل 238",
+   "en": "Editing Photo Journalism",
+   "ar": "تحرير الصور الصحفية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "تصل 239",
+   "ar_code": "تصل 239",
+   "en": "Docudrama Production",
+   "ar": "إنتاج الوثائقيات الدرامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 240",
+   "ar_code": "تصل 240",
+   "en": "Designing and Producing of Strategic Communication Messages",
+   "ar": "تصميم وإنتاج رسائل الاتصال الاستراتيجي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "نفس 131",
+   "ar_code": "نفس 131",
+   "en": "The Social Psychology",
+   "ar": "علم النفس الاجتماعي (لغير التخصص)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "عرب 103",
+   "ar_code": "عرب 103",
+   "en": null,
+   "ar": "التحرير العربي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 190",
+   "ar_code": "معل 190",
+   "en": null,
+   "ar": "الثقافة المعلوماتية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 154",
+   "ar_code": "معل 154",
+   "en": null,
+   "ar": "الموارد المرجعية العامة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 143",
+   "ar_code": "معل 143",
+   "en": null,
+   "ar": "أسس تقنية المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 132",
+   "ar_code": "معل 132",
+   "en": null,
+   "ar": "إعداد أوراق البحث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 113",
+   "ar_code": "معل 113",
+   "en": null,
+   "ar": "مقدمة في علوم المكتبات والمعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 105",
+   "ar_code": "معل 105",
+   "en": null,
+   "ar": "الحاسب والمعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 165",
+   "ar_code": "معل 165",
+   "en": null,
+   "ar": "تطبيقات الإنترنت",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 170",
+   "ar_code": "معل 170",
+   "en": null,
+   "ar": "إدارة المعرفة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 176",
+   "ar_code": "معل 176",
+   "en": null,
+   "ar": "تنظيم المعلومات (1)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 360",
+   "ar_code": "معل 360",
+   "en": null,
+   "ar": "مؤسسات المعلومات وتشريعاتها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 362",
+   "ar_code": "معل 362",
+   "en": null,
+   "ar": "مقدمة في الوثائق والمحفوظات والسجلات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 234",
+   "ar_code": "معل 234",
+   "en": null,
+   "ar": "تنمية المجموعات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 245",
+   "ar_code": "معل 245",
+   "en": null,
+   "ar": "قواعد البيانات في مؤسسات المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 267",
+   "ar_code": "معل 267",
+   "en": null,
+   "ar": "تنظيم المعلومات (2)",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 290",
+   "ar_code": "معل 290",
+   "en": null,
+   "ar": "أساسيات النشر الإلكتروني",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 364",
+   "ar_code": "معل 364",
+   "en": null,
+   "ar": "خدمات المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 465",
+   "ar_code": "معل 465",
+   "en": null,
+   "ar": "إنشاء مواقع الإنترنت وإدارتها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 383",
+   "ar_code": "معل 383",
+   "en": null,
+   "ar": "إدارة مؤسسات المعلومات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 368",
+   "ar_code": "معل 368",
+   "en": null,
+   "ar": "تخزين المعلومات واسترجاعها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 278",
+   "ar_code": "معل 278",
+   "en": null,
+   "ar": "التكشيف والاستخلاص",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 372",
+   "ar_code": "معل 372",
+   "en": null,
+   "ar": "تطبيقات الحاسب في مؤسسات المعلومات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 388",
+   "ar_code": "معل 388",
+   "en": null,
+   "ar": "أنظمة المعلومات وإدارتها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 389",
+   "ar_code": "معل 389",
+   "en": null,
+   "ar": "اساسيات ما وراء البيانات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 463",
+   "ar_code": "معل 463",
+   "en": null,
+   "ar": "شبكات المعلومات واستخداماتها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 461",
+   "ar_code": "معل 461",
+   "en": null,
+   "ar": "المكتبات الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 480",
+   "ar_code": "معل 480",
+   "en": null,
+   "ar": "التدريب التطبيقي في إدارة مصادر المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 484",
+   "ar_code": "معل 484",
+   "en": null,
+   "ar": "موضوع خاص: الاتجاهات الحديثة في علم المعلومات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 496",
+   "ar_code": "معل 496",
+   "en": null,
+   "ar": "التدريب الميداني في مراكز المعلومات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 392",
+   "ar_code": "معل 392",
+   "en": null,
+   "ar": "الحفظ الإلكتروني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 410",
+   "ar_code": "معل 410",
+   "en": null,
+   "ar": "تنظيم الوثائق والسجلات والمحفوظات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 375",
+   "ar_code": "معل 375",
+   "en": null,
+   "ar": "خدمات الوثائق والمحفوظات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 404",
+   "ar_code": "معل 404",
+   "en": null,
+   "ar": "نظم إدارة المحتوى في المؤسسات الأرشيفية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 405",
+   "ar_code": "معل 405",
+   "en": null,
+   "ar": "نظم إدارة الوثائق والمحفوظات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 401",
+   "ar_code": "معل 401",
+   "en": null,
+   "ar": "الحكومة الإلكترونية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 420",
+   "ar_code": "معل 420",
+   "en": null,
+   "ar": "إدارة مراكز الوثائق والمحفوظات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 481",
+   "ar_code": "معل 481",
+   "en": null,
+   "ar": "التدريب التطبيقي في الوثائق والأرشفة الإلكترونية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 425",
+   "ar_code": "معل 425",
+   "en": null,
+   "ar": "الأرشيفات المتخصصة والنوعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 485",
+   "ar_code": "معل 485",
+   "en": null,
+   "ar": "موضوع خاص: الاتجاهات الحديثة في الوثائق والمحفوظات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 497",
+   "ar_code": "معل 497",
+   "en": null,
+   "ar": "التدريب الميداني في مراكز الوثائق والمحفوظات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 258",
+   "ar_code": "معل 258",
+   "en": null,
+   "ar": "إدارة مراكز مصادر التعلم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 371",
+   "ar_code": "معل 371",
+   "en": null,
+   "ar": "مصادر وخدمات المعلومات للأطفال والناشئة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 373",
+   "ar_code": "معل 373",
+   "en": null,
+   "ar": "تطبيقات الحاسب في مراكز مصادر التعلم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 394",
+   "ar_code": "معل 394",
+   "en": null,
+   "ar": "مصادر المعلومات التربوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 380",
+   "ar_code": "معل 380",
+   "en": null,
+   "ar": "خدمات المعلومات للفئات الخاصة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 482",
+   "ar_code": "معل 482",
+   "en": null,
+   "ar": "التدريب التطبيقي في مراكز مصادر التعلم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 486",
+   "ar_code": "معل 486",
+   "en": null,
+   "ar": "موضوع خاص: الاتجاهات الحديثة في مراكز مصادر التعلم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 498",
+   "ar_code": "معل 498",
+   "en": null,
+   "ar": "التدريب الميداني في مراكز مصادر التعلم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "معل 187",
+   "ar_code": "معل 187",
+   "en": null,
+   "ar": "مصادر التراث العربي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 382",
+   "ar_code": "معل 382",
+   "en": null,
+   "ar": "تسويق المعلومات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 386",
+   "ar_code": "معل 386",
+   "en": null,
+   "ar": "اقتصاد المعرفة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 459",
+   "ar_code": "معل 459",
+   "en": null,
+   "ar": "مبادئ أمن المعلومات وتطبيقاتها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 469",
+   "ar_code": "معل 469",
+   "en": null,
+   "ar": "المخطوطات العربية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 400",
+   "ar_code": "معل 400",
+   "en": null,
+   "ar": "حزم وتطبيقات الوثائق والأرشفة الإلكترونية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 402",
+   "ar_code": "معل 402",
+   "en": null,
+   "ar": "تحليل وتصميم نظم المعلومات الأرشيفية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 403",
+   "ar_code": "معل 403",
+   "en": null,
+   "ar": "استخدامات الحاسب الآلي في مجال الوثائق والأرشيف",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "معل 377",
+   "ar_code": "معل 377",
+   "en": null,
+   "ar": "التوثيق الإعلامي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "معل 395",
+   "ar_code": "معل 395",
+   "en": null,
+   "ar": "تصميم المقرر الإلكتروني",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MAS 207",
+   "ar_code": "تصل 207",
+   "en": "The Scientific Research Methodologies",
+   "ar": "مناهج البحث الاعلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MAS 217",
+   "ar_code": "تصل 217",
+   "en": "Management of Media Establishments",
+   "ar": "إدارة مؤسسات الإعلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 101",
+   "ar_code": "جمع 101",
+   "en": null,
+   "ar": "مبادي علم الاجتماع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 105",
+   "ar_code": "جمع 105",
+   "en": null,
+   "ar": "مقدمة في الاحصاء الاجتماعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 110",
+   "ar_code": "جمع 110",
+   "en": null,
+   "ar": "اسس الخدمة الاجتماعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 111",
+   "ar_code": "جمع 111",
+   "en": null,
+   "ar": "مدخل في الرعاية الاجتماعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 204",
+   "ar_code": "جمع 204",
+   "en": null,
+   "ar": "تاريخ الفكر الاجتماعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 231",
+   "ar_code": "جمع 231",
+   "en": null,
+   "ar": "علم النفس الاجتماعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 200",
+   "ar_code": "جمع 200",
+   "en": null,
+   "ar": "النظرية الاجتماعية 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 202",
+   "ar_code": "جمع 202",
+   "en": null,
+   "ar": "الاحصاء الاجتماعي التطبيقي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 205",
+   "ar_code": "جمع 205",
+   "en": null,
+   "ar": "مناهج البحث الاجتماعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 232",
+   "ar_code": "جمع 232",
+   "en": null,
+   "ar": "علم اجتماع السكان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 300",
+   "ar_code": "جمع 300",
+   "en": null,
+   "ar": "رعاية الفئات الخاصة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 318",
+   "ar_code": "جمع 318",
+   "en": null,
+   "ar": "علم الاجتماع الحضري",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 412",
+   "ar_code": "جمع 412",
+   "en": null,
+   "ar": "علم الاجتماع الاسري والطفولة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 217",
+   "ar_code": "جمع 217",
+   "en": null,
+   "ar": "علم المجتمعات المحلية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 275",
+   "ar_code": "جمع 275",
+   "en": null,
+   "ar": "الممارسة العامة مع الوحدات الصغرى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 330",
+   "ar_code": "جمع 330",
+   "en": null,
+   "ar": "علم الاجتماع الاقتصادي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 240",
+   "ar_code": "جمع 240",
+   "en": null,
+   "ar": "علم اجتماع الشيخوخة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 420",
+   "ar_code": "جمع 420",
+   "en": null,
+   "ar": "علم اجتماع القانون وحقوق الانسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 303",
+   "ar_code": "جمع 303",
+   "en": null,
+   "ar": "علم اجتماع التنمية والبيئة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 305",
+   "ar_code": "جمع 305",
+   "en": null,
+   "ar": "موضوع خاص في علم الاجتماع",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 306",
+   "ar_code": "جمع 306",
+   "en": null,
+   "ar": "علم الاجتماع الصناعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 395",
+   "ar_code": "جمع 395",
+   "en": null,
+   "ar": "إدارة المؤسسات الاجتماعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 430",
+   "ar_code": "جمع 430",
+   "en": null,
+   "ar": "علم الاجتماع الجنائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 435",
+   "ar_code": "جمع 435",
+   "en": null,
+   "ar": "علم الاجتماع التربوي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 256",
+   "ar_code": "جمع 256",
+   "en": null,
+   "ar": "الخدمة الاجتماعية المدرسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 260",
+   "ar_code": "جمع 260",
+   "en": null,
+   "ar": "الخدمة الاجتماعية الطبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 304",
+   "ar_code": "جمع 304",
+   "en": null,
+   "ar": "تصميم وتنفيذ البحوث الاجتماعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 329",
+   "ar_code": "جمع 329",
+   "en": null,
+   "ar": "علم الاجتماع الطبى",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 338",
+   "ar_code": "جمع 338",
+   "en": null,
+   "ar": "علم اجتماع التنظيمات الحديثة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 345",
+   "ar_code": "جمع 345",
+   "en": null,
+   "ar": "التغير الاجتماعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 350",
+   "ar_code": "جمع 350",
+   "en": null,
+   "ar": "علم الاجتماع السياسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 409",
+   "ar_code": "جمع 409",
+   "en": null,
+   "ar": "النظرية الاجتماعية 2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 426",
+   "ar_code": "جمع 426",
+   "en": null,
+   "ar": "بحث اجتماعي 1",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "جمع 479",
+   "ar_code": "جمع 479",
+   "en": null,
+   "ar": "الانثروبولوجيا الاجتماعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 486",
+   "ar_code": "جمع 486",
+   "en": null,
+   "ar": "علم اجتماع الشباب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 487",
+   "ar_code": "جمع 487",
+   "en": null,
+   "ar": "علم اجتماع الهجرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 489",
+   "ar_code": "جمع 489",
+   "en": null,
+   "ar": "علم الاجتماع التنبؤي ودراسات المستقبل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "جمع 490",
+   "ar_code": "جمع 490",
+   "en": null,
+   "ar": "البحث الاجتماعي الميداني",
+   "h": 8,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "eng-lit",
+   "ar": "اللغة الإنجليزية وآدابها",
+   "en": "English Language and Literature",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENG 106",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ENG 107",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ENG 108",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ENG 109",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ENG 110",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ENG 210",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ENG 211",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ENG 221",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ENG 225",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ENG 219",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ENG 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ENG 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ENG 227",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ENG 327",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ENG 300",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ENG 318",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ENG 329",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ENG 374",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "ENG 301",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ENG 307",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ENG 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ENG 343",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ENG 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "ENG 381",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ENG 400",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ENG 414",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ENG 434",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ENG 498",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "ENG 401",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 405",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 415",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 428",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 430",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 467",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 475",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 489",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 491",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 492",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ENG 447",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "eng-tr",
+   "ar": "اللغة الإنجليزية والترجمة",
+   "en": "English Language and Translation",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 111",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 112",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 113",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 114",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 115",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "TRAJ 211",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TRAJ 212",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TRAJ 213",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TRAJ 214",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "TRAJ 215",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARAB 234",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ARAB 255",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "TRAJ 221",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "TRAJ 222",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "TRAJ 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "TRAJ 224",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "TRAJ 225",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARAB 350",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "TRAJ 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 314",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 315",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 316",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 317",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 318",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "TRAJ 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 323",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 324",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 326",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 327",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 328",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "TRAJ 411",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 412",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 413",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 416",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 417",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 418",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "TRAJ 425",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "TRAJ 426",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "TRAJ 427",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "TRAJ 428",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "TRAJ 429",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "hist",
+   "ar": "التاريخ",
+   "en": "History",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "HIST 111",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "HIST 131",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "HIST 141",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "HIST 145",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "HIST 123",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "HIST 146",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "HIST 241",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "HIST 310",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "HIST 320",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "HIST 341",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "HIST 350",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "HIST 351",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "HIST 414",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "HIST 354",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "HIST 436",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "HIST 487",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "HIST 419",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "HIST 420",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "HIST 470",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "HIST 399",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "HIST 426",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "HIST 471",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "HIST 488",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "HIST 497",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "HIST 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 222",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 223",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 232",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 250",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 263",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 315",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 325",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 339",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 344",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 357",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 365",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 370",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 416",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 417",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 422",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 491",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 498",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 235",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 259",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 260",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 343",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "HIST 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 221",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 222",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 226",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 227",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 231",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 232",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 233",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "fr-tr",
+   "ar": "اللغة الفرنسية والترجمة",
+   "en": "French Language and Translation",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "FRN 153",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 154",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 155",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 156",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 157",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 158",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "FRN 159",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "FRN 253",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "FRN 254",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "FRN 255",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "FRN 256",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "FRN 257",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "FRN 258",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "FRN 263",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FRN 264",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FRN 265",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FRN 266",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FRN 267",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FRN 268",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ARAB 234",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "ARAB 255",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "FRN 353",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FRN 354",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FRN 355",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FRN 356",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FRN 357",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FRN 363",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 364",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 365",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 366",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 367",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 368",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FRN 369",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ARAB 350",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "FRN 453",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 454",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 455",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 456",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 457",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 458",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "FRN 463",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FRN 464",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FRN 465",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FRN 466",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FRN 467",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FRN 468",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "zh-tr",
+   "ar": "اللغة الصينية والترجمة",
+   "en": "Chinese Language and Translation",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "عرب 140",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ARAB 234",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "ARAB 255",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "ARAB 350",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "CHI 160",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 161",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 162",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 163",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 165",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 166",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "CHI 260",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 261",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 262",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 263",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 264",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 265",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "CHI 270",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHI 273",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHI 274",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHI 275",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHI 276",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "صين 360",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "صين 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "صين 362",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "صين 363",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "صين 364",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHI 365",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHI 370",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHI 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHI 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHI 375",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHI 460",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 464",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 465",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 466",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 467",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHI 470",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHI 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHI 472",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHI 473",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHI 475",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHI 479",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "es-tr",
+   "ar": "اللغة الإسبانية والترجمة",
+   "en": "Spanish Language and Translation",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ARAB 234",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "ARAB 255",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "ARAB 350",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "سبم 160",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "سبم 161",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "سبم 162",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "سبم 260",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "سبم 261",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "سبم 262",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "سبم 263",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "سبم 270",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "سبم 273",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "سبم 274",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "سبم 275",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "سبم 360",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "سبم 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "سبم 362",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "سبم 363",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "سبم 364",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "سبم 370",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "سبم 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "سبم 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "سبم 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "سبم 374",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "سبم 460",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 462",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 464",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 465",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "سبم 470",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "سبم 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "سبم 472",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "سبم 473",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "ja-tr",
+   "ar": "اللغة اليابانية والترجمة",
+   "en": "Japanese Language and Translation",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CT 102",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "ARAB 234",
+     "kind": "common",
+     "level": 4
+    },
+    {
+     "code": "ARAB 255",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "ARAB 350",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "يبن 161",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "يبن 162",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "يبن 163",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "يبن 165",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "يبن 261",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "يبن 262",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "يبن 263",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "يبن 264",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "يبن 265",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "يبن 277",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "يبن 278",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "يبن 273",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "يبن 274",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "يبن 275",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "يبن 361",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 362",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 363",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 365",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 366",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 367",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "يبن 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "يبن 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "يبن 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "يبن 375",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "يبن 376",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "يبن 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 462",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 466",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 467",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 468",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 469",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "يبن 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "يبن 472",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "يبن 473",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "يبن 476",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "يبن 477",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "يبن 479",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "media",
+   "ar": "الإعلام",
+   "en": "Media",
+   "courses": [
+    {
+     "code": "نجم 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "نهج 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "تقن 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "أحص 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "فجب 150",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "تصل 101",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "تصل 102",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "تصل 103",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "تصل 104",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "تصل 105",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "عرب 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "MAS 220",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MAS 221",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MAS 222",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "تصل 224",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "تصل 223",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "تصل 225",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MAS 226",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 425",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MAS 227",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "تصل 230",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جغر 207",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "تصل 228",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "تصل 229",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "صحف 300",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 301",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 302",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 303",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 304",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 305",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "صحف 306",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "أذع 320",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 321",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 322",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 323",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 324",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 325",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "أذع 326",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "علق 340",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 341",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 342",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 343",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 344",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 345",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "علق 346",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "MAS 231",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 232",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 233",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "تصل 234",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "تصل 235",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "تصل 236",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "تصل 237",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 238",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "تصل 239",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "نفس 131",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "عرب 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "infs",
+   "ar": "علم المعلومات",
+   "en": "Information Science",
+   "courses": [
+    {
+     "code": "نجم 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "نهج 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "تقن 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "أحص 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "فجب 150",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "معل 190",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "معل 154",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "معل 143",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "عرب 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "معل 132",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "معل 113",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "معل 105",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 165",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 170",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 176",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 360",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 362",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "معل 234",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 245",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 267",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 290",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 364",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 465",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "معل 383",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "معل 368",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "معل 278",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 5
+    },
+    {
+     "code": "معل 372",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 388",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 389",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "عرب 103",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "معل 463",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "معل 461",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "معل 480",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "معل 484",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "معل 496",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "معل 392",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "معل 410",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "معل 375",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 404",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 405",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "معل 420",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "معل 481",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "معل 425",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "معل 485",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "معل 497",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "معل 258",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "معل 371",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 394",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "معل 380",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "معل 482",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "معل 486",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "معل 498",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "معل 187",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 382",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 386",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 459",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 469",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 400",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 403",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 377",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "معل 395",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 207",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 217",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 221",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 232",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 238",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MAS 240",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "soc",
+   "ar": "علم الاجتماع",
+   "en": "Sociology",
+   "courses": [
+    {
+     "code": "جمع 101",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ARAB 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "جمع 105",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "جمع 110",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "جمع 111",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "جمع 204",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "جمع 231",
+     "kind": "major",
+     "level": 2
+    },
+    {
+     "code": "ARAB 118",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "جمع 200",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 205",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 232",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 300",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 318",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 412",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "جمع 217",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 275",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 330",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 240",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 420",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 425",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "جمع 303",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 305",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 306",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 395",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 430",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 435",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "جمع 256",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 260",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 304",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 329",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 338",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 345",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "جمع 350",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "عرب 140",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "جمع 409",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 426",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 479",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 486",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 487",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 489",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "جمع 490",
+     "kind": "project",
+     "level": 8
+    }
+   ]
+  }
+ ],
+ "prefix_map": {
+  "انجل": "ENGS",
+  "فجب": "EPH",
+  "نهج": "CI",
+  "احص": "STAT",
+  "تقن": "CT",
+  "عرب": "ARAB",
+  "نجل": "ENG",
+  "سلم": "IC",
+  "قرأ": "QURN",
+  "ترج": "TRAJ",
+  "فرن": "FRN",
+  "صين": "CHI",
+  "تصل": "MAS"
+ }
+}

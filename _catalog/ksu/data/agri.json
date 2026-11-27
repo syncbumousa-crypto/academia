@@ -1,0 +1,4000 @@
+{
+ "college": "agri",
+ "sources": [
+  {
+   "program": "agen",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4341",
+   "title": "بكالوريوس هندسة زراعية (study plan tables, ar) + /en/node/4341",
+   "year": "undated web page; matches Edugate plan AGC (138 h, printed 2024-02-23)"
+  },
+  {
+   "program": "agen",
+   "url": "https://cfas.ksu.edu.sa/sites/cfas.ksu.edu.sa/files/attach/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D9%85%D8%AA%D8%B7%D9%84%D8%A8%D8%A7%D8%AA.pdf",
+   "title": "الخطة الدراسية مع المتطلبات (Edugate, AGC, 138 h)",
+   "year": "2024"
+  },
+  {
+   "program": "anp",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4342",
+   "title": "بكالوريوس إنتاج حيواني (ar) + /en/node/4342",
+   "year": "undated web page; same plan as plan_anpr_2020_1.pdf (2020)"
+  },
+  {
+   "program": "anp",
+   "url": "https://cfas.ksu.edu.sa/sites/cfas.ksu.edu.sa/files/imce_images/plan_anpr_2020_1.pdf",
+   "title": "Animal Production (ANPR) study plan",
+   "year": "2020"
+  },
+  {
+   "program": "agec",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4343",
+   "title": "بكالوريوس اقتصاد تطبيقي (APEC and APET tracks) + /en/node/4343",
+   "year": "undated web page"
+  },
+  {
+   "program": "fshn",
+   "url": "https://cfas.ksu.edu.sa/sites/cfas.ksu.edu.sa/files/users/user994/FSN%20BSc%20Handbook_2.pdf",
+   "title": "FSN BSc Handbook",
+   "year": "2025"
+  },
+  {
+   "program": "fshn",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4344",
+   "title": "بكالوريوس علوم الأغذية والتغذية (ar) + /en/node/4344",
+   "year": "undated web page"
+  },
+  {
+   "program": "pprot",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4345",
+   "title": "بكالوريوس وقاية النبات (ar) + /en/node/4345",
+   "year": "undated web page"
+  },
+  {
+   "program": "plp",
+   "url": "https://cfas.ksu.edu.sa/ar/node/4346",
+   "title": "بكالوريوس الإنتاج النباتي (ar) + /en/node/4346",
+   "year": "undated web page; matches Edugate plan"
+  },
+  {
+   "program": "plp",
+   "url": "https://cfas.ksu.edu.sa/sites/cfas.ksu.edu.sa/files/users/user996/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D9%8A%D8%A9%20%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D9%88%D8%B3%20-%20%D8%A5%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A.pdf",
+   "title": "Study Plan PPS (Edugate, 135 h, edition 3, English)",
+   "year": "2024"
+  }
+ ],
+ "courses": [
+  {
+   "code": "ACCT 201",
+   "ar_code": "حسب 201",
+   "en": "Principles of Accounting and Financial Reporting",
+   "ar": "مبادئ المحاسبة والتقرير المالي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 201",
+   "ar_code": "رشد 201",
+   "en": "Principles of Agricultural Extension",
+   "ar": "أسس الإرشاد الزراعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AEE 203",
+   "ar_code": "رشد 203",
+   "en": "Communication Skills",
+   "ar": "مهارات الإتصال",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AEE 301",
+   "ar_code": "رشد 301",
+   "en": "Extension Applications",
+   "ar": "تطبيقات إرشادية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGEC 201",
+   "ar_code": "قصر 201",
+   "en": "Principles of Agricultural Economics",
+   "ar": "أسس الاقتصاد الزراعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 209",
+   "ar_code": "قصر 209",
+   "en": "Agricultural and Food Marketing",
+   "ar": "التسويق الزراعي والغذائي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 211",
+   "ar_code": "قصر 211",
+   "en": "Agricultural Development Economics",
+   "ar": "اقتصاديات التنمية الزراعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 214",
+   "ar_code": "قصر 214",
+   "en": "Food Marketing System",
+   "ar": "نظم اسواق الغذاء",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 216",
+   "ar_code": "قصر 216",
+   "en": "Applied Quantitative Analysis",
+   "ar": "تحليل كمي تطبيقي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEC 217",
+   "ar_code": "قصر 217",
+   "en": "Firm Management",
+   "ar": "ادارة المنشآت",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 218",
+   "ar_code": "قصر 218",
+   "en": "Price Analysis",
+   "ar": "تحليل الاسعار",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 219",
+   "ar_code": "قصر 219",
+   "en": "Environmental Economics",
+   "ar": "اقتصاديات البيئة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 321",
+   "ar_code": "قصر 321",
+   "en": "Food Consumption Economics",
+   "ar": "اقتصاديات الاستهلاك الغذائي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 324",
+   "ar_code": "قصر 324",
+   "en": "Analysis of Financial Statements for Agribusiness",
+   "ar": "تحليل القوائم المالية للمنشآت الزراعية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGEC 330",
+   "ar_code": "قصر 330",
+   "en": "Economic Data Analysis",
+   "ar": "تحليل البيانات الاقتصادية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 331",
+   "ar_code": "قصر 331",
+   "en": "Computer Applications in Applied Economics",
+   "ar": "الحاسب في الاقتصاد التطبيقي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 333",
+   "ar_code": "قصر 333",
+   "en": "Economics of Natural Resources",
+   "ar": "اقتصاديات الموارد الطبيعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 334",
+   "ar_code": "قصر 334",
+   "en": "Efficiency of Marketing Functions",
+   "ar": "كفاءة الوظائف التسويقية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 335",
+   "ar_code": "قصر 335",
+   "en": "Wholesaling and Retailing of Food Products",
+   "ar": "تجارة الجملة والتجزئة للسلع الغذائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 400",
+   "ar_code": "قصر 400",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "AGEC 401",
+   "ar_code": "قصر 401",
+   "en": "Research Methodology",
+   "ar": "طرق البحث العلمي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 403",
+   "ar_code": "قصر 403",
+   "en": "Special Studies",
+   "ar": "دراسات خاصة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 404",
+   "ar_code": "قصر 404",
+   "en": "Research and Seminar",
+   "ar": "بحث ومناقشات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 405",
+   "ar_code": "قصر 405",
+   "en": "Agricultural Production Economics",
+   "ar": "اقتصاديات الانتاج الزراعي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEC 407",
+   "ar_code": "قصر 407",
+   "en": "Agricultural Finance Economics",
+   "ar": "اقتصاديات التمويل الزراعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 409",
+   "ar_code": "قصر 409",
+   "en": "Feasibility Study & Project Evaluation",
+   "ar": "دراسة جدوى وتقييم المشروعات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEC 410",
+   "ar_code": "قصر 410",
+   "en": "Field Training",
+   "ar": "تدريب ميداني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEC 412",
+   "ar_code": "قصر 412",
+   "en": "Applied Econometrics",
+   "ar": "اقتصاد قياسي تطبيقي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEC 423",
+   "ar_code": "قصر 423",
+   "en": "Economics of Environmental Tourism",
+   "ar": "اقتصاديات السياحة البيئية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 424",
+   "ar_code": "قصر 424",
+   "en": "International Trade of Agricultural Products",
+   "ar": "التجارة الدولية للمنتجات الزراعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 426",
+   "ar_code": "قصر 426",
+   "en": "Economics of Water Resources in Agriculture",
+   "ar": "اقتصاديات المياه لقطاع الزراعة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 428",
+   "ar_code": "قصر 428",
+   "en": "Agricultural Planning and Policy",
+   "ar": "التخطيط والسياسية الزراعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 429",
+   "ar_code": "قصر 429",
+   "en": "Cooperative Marketing",
+   "ar": "التسويق التعاوني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEC 430",
+   "ar_code": "قصر 430",
+   "en": "Behavioral Economics",
+   "ar": "الاقتصاد السلوكي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 202",
+   "ar_code": "هزر 202",
+   "en": "Computer Programming in Biological Systems",
+   "ar": "برمجة الحاسب الآلي في النظم الحيوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEN 203",
+   "ar_code": "هزر 203",
+   "en": "Fluid Mechanics",
+   "ar": "ميكانيكا الموائع",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 204",
+   "ar_code": "هزر 204",
+   "en": "Electrical Circuits in Agricultural Systems",
+   "ar": "الدوائر الكهربائية في النظم الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 230",
+   "ar_code": "هزر 230",
+   "en": "Water and Irrigation Systems",
+   "ar": "نظم المياه والري",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGEN 301",
+   "ar_code": "هزر 301",
+   "en": "Measurement and Control in Biological Systems",
+   "ar": "القياس والتحكم في النظم الحيوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 311",
+   "ar_code": "هزر 311",
+   "en": "Heat Transfer in Biological Systems",
+   "ar": "انتقال الحرارة في النظم الحيوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 320",
+   "ar_code": "هزر 320",
+   "en": "Fundamentals of food Process Engineering",
+   "ar": "أسس هندسة تصنيع الأغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 322",
+   "ar_code": "هزر 322",
+   "en": "Farm Machinery",
+   "ar": "الآلات الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 325",
+   "ar_code": "هزر 325",
+   "en": "Engines and Agricultural Tractor",
+   "ar": "المحركات والجرارات الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 332",
+   "ar_code": "هزر 332",
+   "en": "Hydrology and Hydraulics",
+   "ar": "الهيدرولوجيا والهيدروليكا",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 334",
+   "ar_code": "هزر 334",
+   "en": "Systems Engineering of Water and Irrigation",
+   "ar": "هندسة نظم المياه والري",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 341",
+   "ar_code": "هزر 341",
+   "en": "Engineering Properties of Food and Biological Materials",
+   "ar": "الخواص الهندسية للمواد الغذائية والحيوية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 351",
+   "ar_code": "هزر 351",
+   "en": "Environment Control for Animal and Plant",
+   "ar": "التحكم في بيئة الحيوان والنبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 401",
+   "ar_code": "هزر 401",
+   "en": "Cooperative training",
+   "ar": "تدريب تعاوني",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AGEN 413",
+   "ar_code": "هزر 413",
+   "en": "Post-harvest Equipment and Operations",
+   "ar": "معدات وعمليات ما بعد الحصاد",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 427",
+   "ar_code": "هزر 427",
+   "en": "Management and Operation of Agricultural Equipment",
+   "ar": "إدارة وتشغيل المعدات الزراعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 428",
+   "ar_code": "هزر 428",
+   "en": "Testing and Selection of Agricultural Equipment",
+   "ar": "اختبار المعدات الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 429",
+   "ar_code": "هزر 429",
+   "en": "Engineering Techniques in Precision Farming",
+   "ar": "التقنيات الهندسية في نظم الزراعة الدقيقة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 437",
+   "ar_code": "هزر 437",
+   "en": "Hydraulics of Wells and Pumps",
+   "ar": "هيدروليكا الآبار والمضخات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGEN 438",
+   "ar_code": "هزر 438",
+   "en": "Trickle and Sprinkle Irrigation Systems",
+   "ar": "الري بالرش والتنقيط",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 439",
+   "ar_code": "هزر 439",
+   "en": "Irrigation Water Resources Management and Development",
+   "ar": "إدارة وتنمية موارد مياه الري",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 443",
+   "ar_code": "هزر 443",
+   "en": "Food and Bioprocess Engineering I",
+   "ar": "هندسة التصنيع الغذائي والحيوي-1",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 445",
+   "ar_code": "هزر 445",
+   "en": "Food and Bioprocess Engineering II",
+   "ar": "هندسة التصنيع الغذائي والحيوي-2",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 453",
+   "ar_code": "هزر 453",
+   "en": "Design and Plan for Agricultural Structures",
+   "ar": "تصميم وتخطيط المنشئات الزراعية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGEN 455",
+   "ar_code": "هزر 455",
+   "en": "Agricultural Waste Treatment Engineering",
+   "ar": "هندسة معالجة المخلفات الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGEN 460",
+   "ar_code": "هزر 460",
+   "en": "Food Packaging",
+   "ar": "تعبئة وتغليف الاغذية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGEN 493",
+   "ar_code": "هزر 493",
+   "en": "Graduation Project",
+   "ar": "مشروع تخرج",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ANPR 200",
+   "ar_code": "نجح 200",
+   "en": "Introduction to Animal Production",
+   "ar": "مقدمة في الإنتاج الحيواني",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 226",
+   "ar_code": "نجح 226",
+   "en": "Breeding and Genetic Improvement",
+   "ar": "التربية والتحسين الوراثي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ANPR 250",
+   "ar_code": "نجح 250",
+   "en": "Farm Animal Physiology",
+   "ar": "فسيولوجي الحيوان الزراعي",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "ANPR 252",
+   "ar_code": "نجح 252",
+   "en": "Comparative Physiology of Farm Animal",
+   "ar": "فسيولوجي الحيوان الزراعي المقارن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 256",
+   "ar_code": "نجح 256",
+   "en": "Camel Production",
+   "ar": "إنتاج الأبل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 258",
+   "ar_code": "نجح 258",
+   "en": "Poultry Production",
+   "ar": "إنتاج الدواجن",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ANPR 262",
+   "ar_code": "نجح 262",
+   "en": "Animal Production and Poultry Housings",
+   "ar": "منشآت الإنتاج الحيواني والدواجن",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 318",
+   "ar_code": "نجح 318",
+   "en": "Secondary Poultry Production",
+   "ar": "إنتاج الدواجن الثانوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 326",
+   "ar_code": "نجح 326",
+   "en": "Sheep and Goat Production",
+   "ar": "انتاج الضان والمعز",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 328",
+   "ar_code": "نجح 328",
+   "en": "Animals and Poultry Health",
+   "ar": "صحة الحيوان والدواجن",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 330",
+   "ar_code": "نجح 330",
+   "en": "Rearing of Exotic Birds",
+   "ar": "رعاية طيور الزينة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 336",
+   "ar_code": "نجح 336",
+   "en": "Practical Animal and Poultry Production",
+   "ar": "عملي إنتاج حيواني ودواجن",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "ANPR 338",
+   "ar_code": "نجح 338",
+   "en": "Ruminant Nutrition",
+   "ar": "تغذية المجترات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 340",
+   "ar_code": "نجح 340",
+   "en": "Pets Care and Husbandry",
+   "ar": "تربية ورعاية الحيوانات الأليفة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 342",
+   "ar_code": "نجح 342",
+   "en": "Poultry Nutrition",
+   "ar": "تغذية الدواجن",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 346",
+   "ar_code": "نجح 346",
+   "en": "Horse Production",
+   "ar": "إنتاج الخيل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 348",
+   "ar_code": "نجح 348",
+   "en": "Fish Production",
+   "ar": "إنتاج الاسماك",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 380",
+   "ar_code": "نجح 380",
+   "en": "Dairy Cattle Production",
+   "ar": "إنتاج ماشية اللبن",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ANPR 388",
+   "ar_code": "نجح 388",
+   "en": "Reproduction in Farm Animals",
+   "ar": "التناسل في حيوانات المزرعة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 400",
+   "ar_code": "نجح 400",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "ANPR 444",
+   "ar_code": "نجح 444",
+   "en": "Feed and Feed Formulation for Poultry and Ruminants",
+   "ar": "أعلاف الدواجن والمجترات وتكوينها",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 452",
+   "ar_code": "نجح 452",
+   "en": "Poultry Breeding",
+   "ar": "تربية دواجن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 454",
+   "ar_code": "نجح 454",
+   "en": "Meat Production",
+   "ar": "انتاج اللحوم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ANPR 456",
+   "ar_code": "نجح 456",
+   "en": "Dairy Breeding",
+   "ar": "تربية ماشية اللبن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 462",
+   "ar_code": "نجح 462",
+   "en": "Animal Diseases",
+   "ar": "أمراض الحيوان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 464",
+   "ar_code": "نجح 464",
+   "en": "Poultry Diseases",
+   "ar": "أمراض الدواجن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 466",
+   "ar_code": "نجح 466",
+   "en": "Modern Technology in Animal Breeding",
+   "ar": "التقانات الحديثة في تربية الحيوان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ANPR 468",
+   "ar_code": "نجح 468",
+   "en": "Research & Seminar",
+   "ar": "بحث ومناقشات",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "BCH 101",
+   "ar_code": "كيح 101",
+   "en": "General Biochemistry",
+   "ar": "كيمياء حيوية عامة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "BOT 102",
+   "ar_code": "نبت 102",
+   "en": "Botany",
+   "ar": "علم النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHE 212",
+   "ar_code": "هكم 212",
+   "en": "Thermodynamics",
+   "ar": "ديناميكا حرارية (ثيرموديناميكا)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 101",
+   "ar_code": "كيم 101",
+   "en": "General Chemistry (1)",
+   "ar": "كيمياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHEM 108",
+   "ar_code": "كيم 108",
+   "en": "Introduction to Organic Chemistry",
+   "ar": "مقدمة في الكيمياء العضوية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CI 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "IT Skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 101",
+   "ar_code": "قصد 101",
+   "en": "Principles of Microeconomics",
+   "ar": "مبادئ الاقتصاد الجزئي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 102",
+   "ar_code": "قصد 102",
+   "en": "Principles of Macroeconomics",
+   "ar": "مبادئ الاقتصاد الكلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ECON 211",
+   "ar_code": "قصد 211",
+   "en": "Money and Banking",
+   "ar": "اقتصاديات نقود وبنوك",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English",
+   "ar": "اللغة الإنجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "انجل 110",
+   "en": "English",
+   "ar": "لغة انجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Fitness and Health Education",
+   "ar": "اللياقة والثقافة الصحية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "FSN 202",
+   "ar_code": "غذت 202",
+   "en": "Principles of Food Sciences",
+   "ar": "أسس علوم الأغذية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 206",
+   "ar_code": "غذت 206",
+   "en": "Principles of Human Nutrition",
+   "ar": "أسس تغذية الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 315",
+   "ar_code": "غذت 315",
+   "en": "Nutritional Biochemistry",
+   "ar": "كيمياء حيوية تغذوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 316",
+   "ar_code": "غذت 316",
+   "en": "Food Chemistry",
+   "ar": "كيمياء الأغذية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 317",
+   "ar_code": "غذت 317",
+   "en": "Food Analysis",
+   "ar": "تحليل الأغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 322",
+   "ar_code": "غذت 322",
+   "en": "Food Microbiology",
+   "ar": "ميكروبيولوجيا الأغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 325",
+   "ar_code": "غذت 325",
+   "en": "Sanitation and Food Safety",
+   "ar": "الشؤون الصحية وسلامة الغذاء",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 351",
+   "ar_code": "غذت 351",
+   "en": "Food Preservation",
+   "ar": "حفظ الأغذية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "FSN 360",
+   "ar_code": "غذت 360",
+   "en": "Nutrition During the Life Cycle",
+   "ar": "التغذية خلال مراحل العمر",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 373",
+   "ar_code": "غذت 373",
+   "en": "Assessment of Nutritional Status",
+   "ar": "تقييم الحالة الغذائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 400",
+   "ar_code": "غذت 400",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "FSN 401",
+   "ar_code": "غذت 401",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "FSN 419",
+   "ar_code": "غذت 419",
+   "en": "Food Biotechnology",
+   "ar": "التقنية الحيوية للأغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 422",
+   "ar_code": "غذت 422",
+   "en": "Food Services",
+   "ar": "خدمات غذائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 433",
+   "ar_code": "غذت 433",
+   "en": "Dairy Science and Technology",
+   "ar": "علم وتقنية الحليب",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "FSN 434",
+   "ar_code": "غذت 434",
+   "en": "Dates Science and Technology",
+   "ar": "علم وتقنية التمور",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 436",
+   "ar_code": "غذت 436",
+   "en": "Cereal Science and Technology",
+   "ar": "علم وتقنية الحبوب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 440",
+   "ar_code": "غذت 440",
+   "en": "Meet Science and Technology",
+   "ar": "علم وتقنية اللحوم",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 455",
+   "ar_code": "غذت 455",
+   "en": "Macronutrients",
+   "ar": "المغذيات الكبرى",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 457",
+   "ar_code": "غذت 457",
+   "en": "Food Quality Control and Sensory Evalution",
+   "ar": "ضبط الجودة والتقييم الحسي للأغذية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 462",
+   "ar_code": "غذت 462",
+   "en": "Nutrition and Global Challenges",
+   "ar": "التغذية والتحديات العالمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 464",
+   "ar_code": "غذت 464",
+   "en": "Community Nutrition",
+   "ar": "تغذية المجتمع",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 465",
+   "ar_code": "غذت 465",
+   "en": "Applied Nutrition",
+   "ar": "التغذية التطبيقية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 471",
+   "ar_code": "غذت 471",
+   "en": "Food Products Development",
+   "ar": "تطوير منتجات غذائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "FSN 473",
+   "ar_code": "غذت 473",
+   "en": "Fats & Oils Science and Technology",
+   "ar": "علم وتقنية الزيوت والدهون",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "FSN 475",
+   "ar_code": "غذت 475",
+   "en": "Food Laws and Regulations",
+   "ar": "النظم والتشريعات الغذائية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 477",
+   "ar_code": "غذت 477",
+   "en": "Micronutrients",
+   "ar": "المغذيات الصغرى",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "FSN 482",
+   "ar_code": "غذت 482",
+   "en": "Nutrition in Health and Disease (1)",
+   "ar": "التغذية في الصحة والمرض (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 484",
+   "ar_code": "غذت 484",
+   "en": "Nutrition in Health and Disease (2)",
+   "ar": "التغذية في الصحة والمرض (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 485",
+   "ar_code": "غذت 485",
+   "en": "Nutrition Education and counseling",
+   "ar": "التثقيف والاستشارات التغذوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "FSN 488",
+   "ar_code": "غذت 488",
+   "en": "Nutrition and Genes",
+   "ar": "التغذية والجينات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GE 104",
+   "ar_code": "هعم 104",
+   "en": "Basics of Engineering Drawing",
+   "ar": "أساسيات الرسم الهندسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 106",
+   "ar_code": "هعم 106",
+   "en": "Introduction to Engineering Design",
+   "ar": "مقدمة في التصميم الهندسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 203",
+   "ar_code": "هعم 203",
+   "en": "Engineering and Environment",
+   "ar": "الهندسة والبيئة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GE 206",
+   "ar_code": "هعم 206",
+   "en": "Mechanics (Statics and dynamics) for Agriculture",
+   "ar": "الميكانيكا (استاتيكا وديناميكا للزراعة)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GE 404",
+   "ar_code": "هعم 404",
+   "en": "Engineering Management",
+   "ar": "الإدارة الهندسية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 196",
+   "ar_code": "جغر 196",
+   "en": "Principles of Geographical Information System (GIS)",
+   "ar": "مباديء نظم معلومات جغرافية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 197",
+   "ar_code": "جغر 197",
+   "en": "Principle of Remote Sensing",
+   "ar": "مبادئ الاستشعار عن بعد",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "GEO 310",
+   "ar_code": "جغر 310",
+   "en": "Dry lands",
+   "ar": "الأراضي الجافة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in the Biography of the Prophet",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Introduction of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Islam and Building up the Society",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "Economic System in Islam",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "Political system in Islam",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Islamic Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Ethics of Occupation",
+   "ar": "أخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Contemporary Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Woman and Her Developmental Role",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "MATH 101",
+   "ar_code": "ريض 101",
+   "en": "Differential Calculus",
+   "ar": "حساب التفاضل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 111",
+   "ar_code": "ريض 111",
+   "en": "Integral Calculus",
+   "ar": "حساب التكامل",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "MATH 351",
+   "ar_code": "ريض 351",
+   "en": "Methods of Numerical Analysis",
+   "ar": "طرائق التحليل العددي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ME 232",
+   "ar_code": "همك 232",
+   "en": "Mechanics of Machinery",
+   "ar": "ميكانيكا الات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MGT 101",
+   "ar_code": "ادا 101",
+   "en": "Principles of Management & Business",
+   "ar": "مبادئ الإدارة والأعمال",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MGT 319",
+   "ar_code": "ادا 319",
+   "en": "Management of small and medium enterprises",
+   "ar": "إدارة المشروعات الصغيرة والمتوسطة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "OPER 100",
+   "ar_code": "بحث 100",
+   "en": "Introduction to Operations Research",
+   "ar": "مقدمه في بحوث العمليات",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "PHYS 101",
+   "ar_code": "فيز 101",
+   "en": "General Physics (1)",
+   "ar": "فيزياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PLPT 200",
+   "ar_code": "وقن 200",
+   "en": "Introduction to Plant Protection",
+   "ar": "مقدمة في وقاية النبات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PLPT 211",
+   "ar_code": "وقن 211",
+   "en": "Agricultural Microbiology",
+   "ar": "ميكروبيولوجيا الزراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 214",
+   "ar_code": "وقن 214",
+   "en": "Agricultural Entomology",
+   "ar": "حشرات زراعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 221",
+   "ar_code": "وقن 221",
+   "en": "Principles of Plant Pathology",
+   "ar": "أسس أمراض النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 225",
+   "ar_code": "وقن 225",
+   "en": "Diseases of Horticultural and field Crops",
+   "ar": "أمراض المحاصيل الحقلية والبستانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 242",
+   "ar_code": "وقن 242",
+   "en": "Pests of Horticultural and Field Crops",
+   "ar": "الآفات الحشرية للمحاصيل الحقلية والبستانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 261",
+   "ar_code": "وقن 261",
+   "en": "General Pesticides",
+   "ar": "مبيدات عامة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 264",
+   "ar_code": "وقن 264",
+   "en": "Pesticides and Occupational Safety",
+   "ar": "المبيدات والسلامة المهنية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "PLPT 298",
+   "ar_code": "وقن 298",
+   "en": "Introduction to Abiotic Disease",
+   "ar": "مقدمة في امراض النبات غير المعدية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 300",
+   "ar_code": "وقن 300",
+   "en": "Bee Breeding",
+   "ar": "تربية النحل",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 322",
+   "ar_code": "وقن 322",
+   "en": "Plant Fungal Diseases",
+   "ar": "أمراض النبات الفطرية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 323",
+   "ar_code": "وقن 323",
+   "en": "Plant Viral Diseases",
+   "ar": "أمراض النبات الفيروسية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 325",
+   "ar_code": "وقن 325",
+   "en": "Plant Nematode Diseases",
+   "ar": "أمراض النبات النيماتودية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 326",
+   "ar_code": "وقن 326",
+   "en": "Agricultural Quarantine",
+   "ar": "الحجر الزراعي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PLPT 328",
+   "ar_code": "وقن 328",
+   "en": "Plant Bacterial Diseases",
+   "ar": "امراض النبات البكتيرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 340",
+   "ar_code": "وقن 340",
+   "en": "Medical and Veterinary Entomology",
+   "ar": "حشرات طبية وبيطرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 341",
+   "ar_code": "وقن 341",
+   "en": "Control of Public Health Pests",
+   "ar": "مكافحة آفات الصحة العامة",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PLPT 343",
+   "ar_code": "وقن 343",
+   "en": "Economic Entomology",
+   "ar": "حشرات اقتصادية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 348",
+   "ar_code": "وقن 348",
+   "en": "Insect Pest Ecology",
+   "ar": "بيئة الحشرات الزراعية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 349",
+   "ar_code": "وقن 349",
+   "en": "Non-Insect Animal Pests",
+   "ar": "آفات حيوانية غير حشرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 360",
+   "ar_code": "وقن 360",
+   "en": "Toxicology and Pesticides Chemistry",
+   "ar": "علم السموم وكيمياء المبيدات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PLPT 361",
+   "ar_code": "وقن 361",
+   "en": "Pesticide Residue Analysis",
+   "ar": "تحليل متبقيات المبيدات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 363",
+   "ar_code": "وقن 363",
+   "en": "Fungicides and Bactericides",
+   "ar": "المبيدات الفطرية والبكتيرية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 403",
+   "ar_code": "وقن 403",
+   "en": "Summer Cooperative Training",
+   "ar": "التدريب التعاوني الصيفي",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "PLPT 405",
+   "ar_code": "وقن 405",
+   "en": "Field Training",
+   "ar": "التدريب الميداني",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "PLPT 421",
+   "ar_code": "وقن 421",
+   "en": "Introduction to Stored Product Pests",
+   "ar": "مقدمة في آفات المواد المخزونة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 447",
+   "ar_code": "وقن 447",
+   "en": "Biological Control of Insects",
+   "ar": "المكافحة الحيوية للحشرات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PLPT 448",
+   "ar_code": "وقن 448",
+   "en": "Integrated Pest Management",
+   "ar": "الإدارة المتكاملة للآفات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PLPT 460",
+   "ar_code": "وقن 460",
+   "en": "Pesticides Formulation and Application",
+   "ar": "تجهيز واستعمال المبيدات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 200",
+   "ar_code": "نتج 200",
+   "en": "Introduction to Plant Production",
+   "ar": "مقدمة في الإنتاج النباتي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 201",
+   "ar_code": "نتج 201",
+   "en": "Principles of Plant Production",
+   "ar": "أسس انتاج نباتي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 203",
+   "ar_code": "نتج 203",
+   "en": "Crop Ecology",
+   "ar": "بيئة المحاصيل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 205",
+   "ar_code": "نتج 205",
+   "en": "Nurseries and Methods of Plant Propagation",
+   "ar": "المشاتل وطرق تكاثر النباتات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 206",
+   "ar_code": "نتج 206",
+   "en": "Applied Agriculture Genetics",
+   "ar": "الوراثة الزراعية التطبيقية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 231",
+   "ar_code": "نتج 231",
+   "en": "Forestry",
+   "ar": "علم الغابات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 241",
+   "ar_code": "نتج 241",
+   "en": "Range Science",
+   "ar": "علم المراعي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 301",
+   "ar_code": "نتج 301",
+   "en": "Production of horticultural crops",
+   "ar": "إنتاج المحاصيل البستانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 308",
+   "ar_code": "نتج 308",
+   "en": "Plant Tissue Culture",
+   "ar": "زراعة الأنسجة النباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 309",
+   "ar_code": "نتج 309",
+   "en": "Crop Physiology",
+   "ar": "فسيولوجيا المحاصيل",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 310",
+   "ar_code": "نتج 310",
+   "en": "Principles of Plant Breeding",
+   "ar": "أسس تربية النبات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 320",
+   "ar_code": "نتج 320",
+   "en": "Production of Fruit Trees",
+   "ar": "إنتاج الفاكهة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 324",
+   "ar_code": "نتج 324",
+   "en": "Production of Date Palm and Dates",
+   "ar": "إنتاج النخيل والتمور",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 330",
+   "ar_code": "نتج 330",
+   "en": "Vegetable Production",
+   "ar": "إنتاج الخضار",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 340",
+   "ar_code": "نتج 340",
+   "en": "Field Crop Production",
+   "ar": "إنتاج المحاصيل الحقلية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 347",
+   "ar_code": "نتج 347",
+   "en": "Weed Control",
+   "ar": "الحشائش ومكافحتها",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 348",
+   "ar_code": "نتج 348",
+   "en": "Forage Crop Production",
+   "ar": "إنتاج محاصيل الأعلاف",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 352",
+   "ar_code": "نتج 352",
+   "en": "Afforestation in Dry Areas",
+   "ar": "التشجير في المناطق الجافة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 370",
+   "ar_code": "نتج 370",
+   "en": "Production of Ornamental Plants and Flowers",
+   "ar": "إنتاج نباتات الزينة والزهور",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "PPS 373",
+   "ar_code": "نتج 373",
+   "en": "Turf Grasses",
+   "ar": "المسطحات الخضراء",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 374",
+   "ar_code": "نتج 374",
+   "en": "Indoor Plants and Interiorscaping",
+   "ar": "نباتات التنسيق الداخلي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 400",
+   "ar_code": "نتج 400",
+   "en": "Cooperative Training",
+   "ar": "التدريب التعاوني",
+   "h": 12,
+   "lab": false
+  },
+  {
+   "code": "PPS 401",
+   "ar_code": "نتج 401",
+   "en": "Postharvest Physiology",
+   "ar": "فسيولوجيا ما بعد الحصاد",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 402",
+   "ar_code": "نتج 402",
+   "en": "Organic Farming",
+   "ar": "الزراعة العضوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 403",
+   "ar_code": "نتج 403",
+   "en": "Controlled Environment Agriculture",
+   "ar": "الزراعة المحمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 404",
+   "ar_code": "نتج 404",
+   "en": "Principles of Field Experiments",
+   "ar": "أسس التجارب الحقلية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 405",
+   "ar_code": "نتج 405",
+   "en": "Practical Plant Biotechnology",
+   "ar": "تطبيقات التقنية الحيوية النباتية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 409",
+   "ar_code": "نتج 409",
+   "en": "Seed Production and Testing",
+   "ar": "إنتاج وفحص التقاوي",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 410",
+   "ar_code": "نتج 410",
+   "en": "Crop Breeding",
+   "ar": "تربية المحاصيل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 421",
+   "ar_code": "نتج 421",
+   "en": "Fruit Trees Physiology",
+   "ar": "فسيولوجيا أشجار الفاكهة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 446",
+   "ar_code": "نتج 446",
+   "en": "Production of Field Crops under Stress",
+   "ar": "زراعة المحاصيل الحقلية تحت الإجهاد",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PPS 460",
+   "ar_code": "نتج 460",
+   "en": "Range Survey and Monitoring",
+   "ar": "حصر المراعي ومراقبتها",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 476",
+   "ar_code": "نتج 476",
+   "en": "Landscaping of Gardens and Parks",
+   "ar": "تنسيق الحدائق والمنتزهات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PPS 495",
+   "ar_code": "نتج 495",
+   "en": "Seminar",
+   "ar": "مناقشات",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Quran Kareem",
+   "ar": "القرآن الكريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SE 251",
+   "ar_code": "همس 251",
+   "en": "Surveying Engineering (for non-engineering students)",
+   "ar": "المساحة لغير طلبة الهندسة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "SOC 260",
+   "ar_code": "جمع 260",
+   "en": "Medical Social Work",
+   "ar": "الخدمة الاجتماعية الطبية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SOSI 201",
+   "ar_code": "عتم 201",
+   "en": "Principles of Soil Sciences",
+   "ar": "أسس علوم التربة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SOSI 331",
+   "ar_code": "عتم 331",
+   "en": "Soil Fertility and Plant Nutrition",
+   "ar": "خصوبة تربة وتغذية النبات",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "STAT 101",
+   "ar_code": "احص 101",
+   "en": "An Introduction to Probability & statistics",
+   "ar": "مدخل الى الاحتمالات والإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 324",
+   "ar_code": "احص 324",
+   "en": "Probability and Statistics in the Engineering",
+   "ar": "الاحتمالات والاحصاء الهندسي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ZOOL 103",
+   "ar_code": "حين 103",
+   "en": "Principles of General Zoology",
+   "ar": "مبادئ في علم الحيوان",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ZOOL 332",
+   "ar_code": "حين 332",
+   "en": "General Physiology",
+   "ar": "الفسيولوجيا العامة",
+   "h": 3,
+   "lab": true
+  }
+ ],
+ "programs": [
+  {
+   "id": "agen",
+   "ar": "الهندسة الزراعية",
+   "en": "Agricultural Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "MATH 111",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "GE 203",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "AGEN 202",
+     "kind": "major",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGEN 204",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "AGEN 203",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "GE 206",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHE 212",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "SE 251",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "MATH 351",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 301",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 311",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 322",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 332",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 325",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEN 334",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEN 341",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEN 351",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEN 443",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEN 428",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEN 438",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEN 445",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEN 453",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEN 455",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEN 493",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "AGEN 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 437",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 439",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "STAT 324",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 232",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GE 106",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GE 404",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEN 401",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "SOSI 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 258",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 348",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 340",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 324",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 403",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "FSN 202",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 217",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 196",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 197",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 310",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MGT 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MGT 319",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "anp",
+   "ar": "الإنتاج الحيواني",
+   "en": "Animal Production",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PPS 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "FSN 202",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "CHEM 108",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ANPR 226",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ANPR 250",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "BCH 101",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ANPR 256",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ANPR 258",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ANPR 328",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEC 217",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 326",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 336",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 338",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 342",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 380",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 388",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ANPR 400",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "ANPR 444",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ANPR 454",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ANPR 466",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ANPR 468",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "ANPR 252",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 262",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 318",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 330",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 340",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 346",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 348",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ANPR 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 209",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 348",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 211",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 241",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 324",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 203",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "MGT 101",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "agec",
+   "ar": "الاقتصاد التطبيقي",
+   "en": "Applied Economics",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PPS 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "FSN 202",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ECON 101",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "AGEC 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "OPER 100",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "AGEC 216",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "MGT 101",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "ECON 102",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ACCT 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEC 217",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEC 218",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEC 219",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEC 209",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ECON 211",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEC 330",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEC 333",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEC 331",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEC 321",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AGEC 405",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 407",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 409",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 324",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 412",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 401",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AGEC 404",
+     "kind": "project",
+     "level": 8
+    },
+    {
+     "code": "AGEC 410",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "AGEC 424",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AGEC 428",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AGEC 403",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AGEC 334",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 335",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 214",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 423",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 430",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 201",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AGEC 400",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "fshn",
+   "ar": "علوم الأغذية وتغذية الإنسان",
+   "en": "Food Science & Human Nutrition",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PPS 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "FSN 202",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BCH 101",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 108",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FSN 206",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PLPT 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "FSN 316",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PHYS 101",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 317",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 322",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 325",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 422",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "FSN 464",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AGEN 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 351",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 433",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 436",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 440",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 457",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 400",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "ZOOL 332",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 419",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 434",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 471",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 473",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 475",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 315",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 360",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 373",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 455",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 482",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "FSN 401",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "SOC 260",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 462",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 465",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 477",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 484",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 485",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "FSN 488",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "pprot",
+   "ar": "وقاية النبات",
+   "en": "Plant Protection",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PPS 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "FSN 202",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 264",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "CHEM 108",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PLPT 211",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 301",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "SOSI 201",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PLPT 214",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PLPT 221",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PLPT 261",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "BCH 101",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PLPT 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PLPT 325",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PLPT 343",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PLPT 348",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PLPT 360",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PLPT 300",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 323",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 340",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 349",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 447",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PPS 347",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 448",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PLPT 326",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PLPT 341",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PLPT 361",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PLPT 405",
+     "kind": "training",
+     "level": 8
+    },
+    {
+     "code": "PLPT 460",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 301",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 206",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 298",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 309",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 328",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 340",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 363",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 403",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "PLPT 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "plp",
+   "ar": "علوم الإنتاج النباتي",
+   "en": "Plant Production Sciences",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CI 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "BOT 102",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ZOOL 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ANPR 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PPS 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PLPT 200",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "FSN 202",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGEC 201",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "BCH 101",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "AGEN 230",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "SOSI 331",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 205",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 231",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 309",
+     "kind": "major",
+     "level": 4
+    },
+    {
+     "code": "PPS 203",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PPS 206",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PPS 241",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PPS 340",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PPS 347",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PPS 404",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PLPT 225",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PPS 310",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PPS 320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PPS 330",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PPS 370",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PPS 400",
+     "kind": "training",
+     "level": 7
+    },
+    {
+     "code": "PPS 324",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 352",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 403",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 405",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 460",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 476",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PPS 495",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AGEC 217",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PLPT 242",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 308",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 348",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 373",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 374",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 401",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 409",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 410",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PPS 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    }
+   ]
+  }
+ ],
+ "prefix_map": {
+  "قصر": "AGEC",
+  "نتج": "PPS",
+  "غذت": "FSN",
+  "وقن": "PLPT",
+  "نجح": "ANPR",
+  "هزر": "AGEN",
+  "انجل": "ENGS",
+  "كيم": "CHEM",
+  "ريض": "MATH",
+  "احص": "STAT",
+  "حين": "ZOOL",
+  "عرب": "ARAB",
+  "تقن": "CT",
+  "ريد": "ENT",
+  "فجب": "EPH",
+  "نهج": "CI",
+  "نبت": "BOT",
+  "رشد": "AEE",
+  "قصد": "ECON",
+  "هعم": "GE",
+  "كيح": "BCH",
+  "جغر": "GEO",
+  "فيز": "PHYS",
+  "بحث": "OPER",
+  "ادا": "MGT",
+  "هكم": "CHE",
+  "همس": "SE",
+  "همك": "ME",
+  "عتم": "SOSI",
+  "حسب": "ACCT",
+  "جمع": "SOC",
+  "سلم": "IC",
+  "قرأ": "QURN"
+ }
+}

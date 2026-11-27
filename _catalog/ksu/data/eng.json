@@ -1,0 +1,8049 @@
+{
+ "college": "eng",
+ "sources": [
+  {
+   "program": "ee",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/ee_common_year_plan_english_short_updated_2021.pdf",
+   "title": "B.S. in Electrical Engineering Program - Academic Plan (Common First Year, updated 2021)",
+   "year": "2021"
+  },
+  {
+   "program": "ee",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/_ee_common_year_plan_arabic_short_updated_2021.pdf",
+   "title": "مختصر خطة قسم الهندسة الكهربائية (Arabic codes/names)",
+   "year": "2021"
+  },
+  {
+   "program": "me",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/attach/English-ME_Curriculum-CFY%20sep%202025.pdf",
+   "title": "Bachelor of Science in Mechanical Engineering - Academic Plan (CFY), 1439H/2018G, file dated Sep 2025",
+   "year": "2025"
+  },
+  {
+   "program": "me",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/attach/Arabic-ME_Curriculum-CFY%20Sep%202025.pdf",
+   "title": "الخطة الدراسية بكالوريوس العلوم في الهندسة الميكانيكية (Arabic)",
+   "year": "2025"
+  },
+  {
+   "program": "ie",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/ie_booklet_updated_2021.pdf",
+   "title": "Industrial Engineering Department booklet - Recommended Semester Schedule & course descriptions (updated 2021)",
+   "year": "2021"
+  },
+  {
+   "program": "cive",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/attach/b.sc_._program_in_civil_engineering_plan_23-10-2018.pdf",
+   "title": "B.Sc. Program in Civil Engineering - Academic Plan (23-10-2018)",
+   "year": "2018"
+  },
+  {
+   "program": "cive",
+   "url": "https://engineering.ksu.edu.sa/en/civil_engineering_courses_plan",
+   "title": "Civil Engineering Courses Plan (levels)",
+   "year": "2018"
+  },
+  {
+   "program": "cive",
+   "url": "https://engineering.ksu.edu.sa/ar/CE_courses_plan",
+   "title": "الخطة الدراسية - الهندسة المدنية (Arabic codes/names)",
+   "year": "2018"
+  },
+  {
+   "program": "surv",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/sep_academic_plan_e.pdf",
+   "title": "Bachelor of Science in Surveying Engineering - Academic Plan (1439H/2018G)",
+   "year": "2018"
+  },
+  {
+   "program": "surv",
+   "url": "https://engineering.ksu.edu.sa/ar/SE_courses_plan",
+   "title": "الخطة الدراسية - الهندسة المساحية (Arabic codes/names)",
+   "year": "2018"
+  },
+  {
+   "program": "pete",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/petroleum_engineering_program.pdf",
+   "title": "B.Sc. in Petroleum and Natural Gas Engineering - Academic Plan (1439H/2018G)",
+   "year": "2018"
+  },
+  {
+   "program": "pete",
+   "url": "https://engineering.ksu.edu.sa/en/Courses_Plan_PG",
+   "title": "Typical Plan for B.Sc. Program in Petroleum and Natural Gas Engineering (levels)",
+   "year": "2021"
+  },
+  {
+   "program": "pete",
+   "url": "https://engineering.ksu.edu.sa/ar/courses_plan",
+   "title": "الخطة الدراسية لبرنامج هندسة البترول والغاز الطبيعي (Arabic codes/names)",
+   "year": "2021"
+  },
+  {
+   "program": "che",
+   "url": "https://engineering.ksu.edu.sa/ar/Chemical_Bcs",
+   "title": "بكالوريوس العلوم في الهندسة الكيميائية - الخطة الدراسية (Arabic only)",
+   "year": "CFY plan (undated web page)"
+  },
+  {
+   "program": "che",
+   "url": "https://engineering.ksu.edu.sa/sites/engineering.ksu.edu.sa/files/imce_images/compilation_syllabus.pdf",
+   "title": "CHE accredited program course syllabi (English names only, 2010-2015)",
+   "year": "2015"
+  },
+  {
+   "program": "aee",
+   "url": "https://appliedengineering.ksu.edu.sa/sites/appliedengineering.ksu.edu.sa/files/attach/aeeprogram_0.pdf",
+   "title": "Applied Electrical Engineering Program - Academic Plan and Degree Requirements (Nov 2017)",
+   "year": "2017"
+  },
+  {
+   "program": "aee",
+   "url": "https://appliedengineering.ksu.edu.sa/sites/appliedengineering.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA%20%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D8%A9%20%D8%A7%D9%84%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A6%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D9%8A%D8%A9.pdf",
+   "title": "مخطط مقررات برنامج الهندسة الكهربائية التطبيقية (flowchart; Arabic codes)",
+   "year": ""
+  },
+  {
+   "program": "ame",
+   "url": "https://appliedengineering.ksu.edu.sa/sites/appliedengineering.ksu.edu.sa/files/attach/ameprogram.pdf",
+   "title": "Applied Mechanical Engineering Program - Academic Plan and Degree Requirements (Nov 2017)",
+   "year": "2017"
+  },
+  {
+   "program": "ame",
+   "url": "https://appliedengineering.ksu.edu.sa/sites/appliedengineering.ksu.edu.sa/files/attach/%D9%85%D8%AE%D8%B7%D8%B7%20%D9%85%D9%82%D8%B1%D8%B1%D8%A7%D8%AA%20%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D9%8A%D9%83%D8%A7%D9%86%D9%8A%D9%83%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D9%8A%D8%A9.pdf",
+   "title": "مخطط مقررات برنامج الهندسة الميكانيكية التطبيقية (flowchart; Arabic codes)",
+   "year": ""
+  }
+ ],
+ "courses": [
+  {
+   "code": "AEE 2110",
+   "ar_code": "هكت 2110",
+   "en": "Electric Circuits I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 2120",
+   "ar_code": "هكت 2120",
+   "en": "Electric Circuits II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 2130",
+   "ar_code": "هكت 2130",
+   "en": "Electronics I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 2310",
+   "ar_code": "هكت 2310",
+   "en": "Engineering Electromagnetics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 2410",
+   "ar_code": "",
+   "en": "Signal and System Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 2710",
+   "ar_code": "هكت 2710",
+   "en": "Circuits Laboratory",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AEE 3140",
+   "ar_code": "هكت 3140",
+   "en": "Electronics II",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3210",
+   "ar_code": "هكت 3210",
+   "en": "Fundamentals of Power Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3221",
+   "ar_code": "هكت 3221",
+   "en": "Electric Machines",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3240",
+   "ar_code": "هكت 3240",
+   "en": "Power Electronics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AEE 3421",
+   "ar_code": "هكت 3421",
+   "en": "Digital Signal Processing",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3430",
+   "ar_code": "هكت 3430",
+   "en": "Communication System Principles",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3510",
+   "ar_code": "هكت 3510",
+   "en": "Logic Systems Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 3520",
+   "ar_code": "هكت 3520",
+   "en": "Automatic Control",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AEE 3610",
+   "ar_code": "هكت 3610",
+   "en": "Data Communication and Networking",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 3721",
+   "ar_code": "هكت 3721",
+   "en": "Electronics Laboratory",
+   "ar": "",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "AEE 3730",
+   "ar_code": "هكت 3730",
+   "en": "Power Systems Laboratory",
+   "ar": "",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "AEE 3741",
+   "ar_code": "هكت 3741",
+   "en": "Machines and Power Electronics Laboratory",
+   "ar": "",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "AEE 3750",
+   "ar_code": "هكت 3750",
+   "en": "Microwave and Communications Laboratory",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AEE 3760",
+   "ar_code": "هكت 3760",
+   "en": "Logic Design Laboratory",
+   "ar": "",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "AEE 4110",
+   "ar_code": "",
+   "en": "VLSI Circuit Design",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4120",
+   "ar_code": "",
+   "en": "Real Time Systems",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4130",
+   "ar_code": "",
+   "en": "Embedded System Design",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4210",
+   "ar_code": "",
+   "en": "Power System Planning",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4220",
+   "ar_code": "",
+   "en": "High Voltage Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4230",
+   "ar_code": "",
+   "en": "Power System Protection",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4310",
+   "ar_code": "",
+   "en": "Wave Propagation and Antennas",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4320",
+   "ar_code": "",
+   "en": "RF Electronics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4410",
+   "ar_code": "",
+   "en": "Wireless Communications",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4420",
+   "ar_code": "",
+   "en": "Optoelectronics and Optical Communications",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4510",
+   "ar_code": "",
+   "en": "Artificial Intelligence",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4520",
+   "ar_code": "",
+   "en": "Introduction to Robotics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4610",
+   "ar_code": "هكت 4610",
+   "en": "Introduction to Microcontroller",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4910",
+   "ar_code": "",
+   "en": "Cooperative Training (Part I: during summer session)",
+   "ar": "",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "AEE 4920",
+   "ar_code": "",
+   "en": "Cooperative Training (Part II: during the semester next to summer session of part I)",
+   "ar": "",
+   "h": 9,
+   "lab": false
+  },
+  {
+   "code": "AEE 4931",
+   "ar_code": "",
+   "en": "Capstone Senior Design Project I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AEE 4940",
+   "ar_code": "",
+   "en": "Capstone Senior Design Project II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AEE 4950",
+   "ar_code": "",
+   "en": "Selected Topics in Electrical Engineering II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AEE 4960",
+   "ar_code": "",
+   "en": "Selected Topics in Electrical Engineering III",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGE 1310",
+   "ar_code": "هعت 1310",
+   "en": "Basics of Engineering Drawing",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGE 1320",
+   "ar_code": "هعت 1320",
+   "en": "Introduction to Manufacturing",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGE 1330",
+   "ar_code": "هعت 1330",
+   "en": "Statics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGE 1510",
+   "ar_code": "هعت 1510",
+   "en": "Technical Writing",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGE 2320",
+   "ar_code": "هعت 2320",
+   "en": "Dynamics",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGE 2340",
+   "ar_code": "هعت 2340",
+   "en": "Basic Engineering Measurements",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AGE 2410",
+   "ar_code": "هعت 2410",
+   "en": "Computer Programming",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AGE 3351",
+   "ar_code": "هعت 3351",
+   "en": "Introduction to Engineering Design",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "AGE 4530",
+   "ar_code": "هعت 4530",
+   "en": "Engineering Economy",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGE 4540",
+   "ar_code": "هعت 4540",
+   "en": "Seminar",
+   "ar": "",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "AGE 4551",
+   "ar_code": "",
+   "en": "Engineering Project Management",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AGE 4560",
+   "ar_code": "هعت 4560",
+   "en": "Industry and Environment",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AME 2110",
+   "ar_code": "همت 2110",
+   "en": "Manufacturing Processes",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 2211",
+   "ar_code": "همت 2211",
+   "en": "Mechanical Engineering Drawing",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "AME 2310",
+   "ar_code": "همت 2310",
+   "en": "Mechanics of Materials I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 2510",
+   "ar_code": "همت 2510",
+   "en": "Engineering Materials Science",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 2710",
+   "ar_code": "همت 2710",
+   "en": "Engineering Thermodynamics",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3010",
+   "ar_code": "همت 3010",
+   "en": "Mechanical Engineering Design",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3121",
+   "ar_code": "همت 3121",
+   "en": "Production Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 3320",
+   "ar_code": "",
+   "en": "Mechanics of Materials II",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3330",
+   "ar_code": "همت 3330",
+   "en": "Mechanics of Machinery",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3610",
+   "ar_code": "همت 3610",
+   "en": "System Dynamics and Control",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3620",
+   "ar_code": "همت 3620",
+   "en": "Electrical Circuits and Machines",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 3720",
+   "ar_code": "همت 3720",
+   "en": "Heat Transfer",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 3810",
+   "ar_code": "همت 3810",
+   "en": "Fluid Mechanics",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "AME 4020",
+   "ar_code": "",
+   "en": "Finite Element Method",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4030",
+   "ar_code": "",
+   "en": "Computer-Aided Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4040",
+   "ar_code": "",
+   "en": "Conceptual Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4050",
+   "ar_code": "",
+   "en": "Materials Selection in Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4130",
+   "ar_code": "",
+   "en": "Metal Forming and Metal Cutting Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4140",
+   "ar_code": "",
+   "en": "Manufacturing Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4150",
+   "ar_code": "",
+   "en": "CNC Machines",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4420",
+   "ar_code": "",
+   "en": "Principles of Refrigeration",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4430",
+   "ar_code": "",
+   "en": "Air Conditioning",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4440",
+   "ar_code": "",
+   "en": "Internal Combustion Engines",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4520",
+   "ar_code": "",
+   "en": "Introduction to Composite Materials",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4530",
+   "ar_code": "",
+   "en": "Mechanical Behavior of Materials",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4620",
+   "ar_code": "",
+   "en": "Introduction to Mechatronics",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4630",
+   "ar_code": "",
+   "en": "Introduction to Robotics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4730",
+   "ar_code": "همت 4730",
+   "en": "Thermal-Fluid Systems",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4750",
+   "ar_code": "",
+   "en": "Renewable Energy",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4760",
+   "ar_code": "",
+   "en": "Energy Conversion and Storage Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4770",
+   "ar_code": "",
+   "en": "Water Desalination",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4820",
+   "ar_code": "",
+   "en": "Propulsion",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "AME 4830",
+   "ar_code": "",
+   "en": "Power Plants",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4840",
+   "ar_code": "",
+   "en": "Fluid Machinery",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4910",
+   "ar_code": "",
+   "en": "Cooperative Training (Part I: during summer session)",
+   "ar": "",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "AME 4920",
+   "ar_code": "",
+   "en": "Cooperative Training (Part II: during the semester next to summer session of part I)",
+   "ar": "",
+   "h": 9,
+   "lab": false
+  },
+  {
+   "code": "AME 4931",
+   "ar_code": "",
+   "en": "Capstone Senior Design Project I",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "AME 4940",
+   "ar_code": "",
+   "en": "Capstone Senior Design Project II",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "AME 4950",
+   "ar_code": "",
+   "en": "Selected Topics in Mechanical Engineering II",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ARAB 100",
+   "ar_code": "عرب 100",
+   "en": "Writing Skills",
+   "ar": "مهارات الكتابة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ARCH 239",
+   "ar_code": "عمر 239",
+   "en": "Building Construction for Civil Eng. Students",
+   "ar": "انشاء معماري لطلبة المدني",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CE 302",
+   "ar_code": "همد 302",
+   "en": "Mechanics of Materials",
+   "ar": "ميكانيكا المواد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 305",
+   "ar_code": "همد 305",
+   "en": "Mechanics of Materials Lab.",
+   "ar": "معمل ميكانيكا المواد",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CE 306",
+   "ar_code": "همد 306",
+   "en": "Properties and Testing of Structural Materials",
+   "ar": "خواص واختبار المواد الانشائية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CE 320",
+   "ar_code": "همد 320",
+   "en": "Fluid Mechanics",
+   "ar": "ميكانيكا الموائع",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 323",
+   "ar_code": "همد 323",
+   "en": "Water Engineering for Surveying Students",
+   "ar": "هندسة المياه لطلبة المساحة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 324",
+   "ar_code": "همد 324",
+   "en": "Hydraulics",
+   "ar": "هيدروليكا",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 325",
+   "ar_code": "همد 325",
+   "en": "Hydraulics Lab.",
+   "ar": "معمل الهيدروليكا",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CE 334",
+   "ar_code": "همد 334",
+   "en": "Highway Engineering for Surveying Students",
+   "ar": "هندسة الطرق لطلبة المساحة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CE 360",
+   "ar_code": "همد 360",
+   "en": "Structural Analysis-1",
+   "ar": "تحليل انشائي(1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CE 363",
+   "ar_code": "همد 363",
+   "en": "Basics of Concrete Structures for Surveying Students",
+   "ar": "أساسيات المنشآت الخرسانية لطلبة المساحة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 370",
+   "ar_code": "همد 370",
+   "en": "Reinforced Concrete Design-1",
+   "ar": "تصميم خرسانة مسلحة (1)",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CE 380",
+   "ar_code": "همد 380",
+   "en": "Soil Mechanics Lab.",
+   "ar": "معمل ميكانيكا التربة",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CE 382",
+   "ar_code": "همد 382",
+   "en": "Geotechnical Engineering-1",
+   "ar": "هندسة جيوتكنيكية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 411",
+   "ar_code": "",
+   "en": "Introduction to Construction Contracts",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 412",
+   "ar_code": "",
+   "en": "Estimating Construction Cost",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 413",
+   "ar_code": "",
+   "en": "Construction Scheduling",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 415",
+   "ar_code": "",
+   "en": "Selected Topics in Engineering and Construction Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 419",
+   "ar_code": "همد 419",
+   "en": "Construction Management",
+   "ar": "إدارة التشييد",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "CE 423",
+   "ar_code": "",
+   "en": "Hydraulic Structures",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 424",
+   "ar_code": "همد 424",
+   "en": "Hydrology",
+   "ar": "هيدرولوجيا",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 425",
+   "ar_code": "",
+   "en": "Surface and Groundwater Hydrology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 426",
+   "ar_code": "",
+   "en": "Water Resources Planning",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 427",
+   "ar_code": "",
+   "en": "Hydraulics of Pressurized Flow",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 428",
+   "ar_code": "",
+   "en": "Hydraulics of Open Channel Flow",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 429",
+   "ar_code": "",
+   "en": "Computer Applications in Water Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 430",
+   "ar_code": "همد 430",
+   "en": "Transportation Systems",
+   "ar": "أنظمة النقل",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 431",
+   "ar_code": "همد 431",
+   "en": "Highway Engineering",
+   "ar": "هندسة الطرق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 432",
+   "ar_code": "همد 432",
+   "en": "Highway Lab.",
+   "ar": "معمل الطرق",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CE 435",
+   "ar_code": "",
+   "en": "Railway Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 436",
+   "ar_code": "",
+   "en": "Traffic Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 437",
+   "ar_code": "",
+   "en": "Analysis and Design of Pavement Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 438",
+   "ar_code": "",
+   "en": "Urban Public Transportation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 439",
+   "ar_code": "",
+   "en": "Pavement Maintenance",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 443",
+   "ar_code": "همد 443",
+   "en": "Water and Wastewater Lab.",
+   "ar": "معمل المياه ومياه والصرف",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "CE 444",
+   "ar_code": "",
+   "en": "Environmental Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 445",
+   "ar_code": "",
+   "en": "Wastewater Reclamation and Reuse",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 446",
+   "ar_code": "",
+   "en": "Environmental Assessment and Management Systems",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 447",
+   "ar_code": "همد 447",
+   "en": "Water Supply and Drainage Systems",
+   "ar": "أنظمة الامداد بالمياه والصرف",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 448",
+   "ar_code": "همد 448",
+   "en": "Water and Wastewater Treatment",
+   "ar": "معالجة المياه ومياه والصرف",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 449",
+   "ar_code": "",
+   "en": "Introduction to Solid Waste Management",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 450",
+   "ar_code": "",
+   "en": "Air Pollution Control Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 451",
+   "ar_code": "",
+   "en": "Advanced Water and Wastewater Treatment",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 460",
+   "ar_code": "",
+   "en": "Structural Analysis-2",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 462",
+   "ar_code": "",
+   "en": "Analysis and Design of Buildings",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CE 464",
+   "ar_code": "",
+   "en": "Structural Analysis Using Finite Elements",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 466",
+   "ar_code": "",
+   "en": "Bridge Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 468",
+   "ar_code": "",
+   "en": "Wind and Earthquake Resistant Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 470",
+   "ar_code": "",
+   "en": "Reinforced Concrete Design-2",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 473",
+   "ar_code": "",
+   "en": "Steel Structures",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 475",
+   "ar_code": "",
+   "en": "Pre-stressed Concrete Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 477",
+   "ar_code": "",
+   "en": "Concrete Technology",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 478",
+   "ar_code": "",
+   "en": "Selected Topics in Structural Analysis and Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 479",
+   "ar_code": "",
+   "en": "Rehabilitation of Reinforced Concrete Structures",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 481",
+   "ar_code": "همد 481",
+   "en": "Geotechnical Engineering-2",
+   "ar": "هندسة جيوتكنيكية(2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 483",
+   "ar_code": "همد 483",
+   "en": "Foundation Engineering",
+   "ar": "هندسة الاساسات",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 484",
+   "ar_code": "",
+   "en": "Deep Foundations",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 485",
+   "ar_code": "",
+   "en": "Introduction to Rock Mechanics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 486",
+   "ar_code": "",
+   "en": "Improvement of Geotechnical Materials",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 487",
+   "ar_code": "",
+   "en": "Geotechnical Engineering in Arid Regions",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 488",
+   "ar_code": "",
+   "en": "Selected Topics in Geotechnical Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 489",
+   "ar_code": "",
+   "en": "Introduction to Tunnels Design",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CE 496",
+   "ar_code": "همد 496",
+   "en": "Graduation Project -1",
+   "ar": "مشروع تخرج (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 497",
+   "ar_code": "همد 497",
+   "en": "Graduation Project -2",
+   "ar": "مشروع تخرج (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CE 998",
+   "ar_code": "همد 998",
+   "en": "Research Project",
+   "ar": "مشروع بحثي",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "CE 999",
+   "ar_code": "همد 999",
+   "en": "Practical Training",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CHE 201",
+   "ar_code": "هكم 201",
+   "en": "Chemical Engineering Principles 1",
+   "ar": "أسس الهندسة الكيميائية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 202",
+   "ar_code": "هكم 202",
+   "en": "Chemical Engineering Principles 2",
+   "ar": "أسس الهندسة الكيميائية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 205",
+   "ar_code": "هكم 205",
+   "en": "Chemical Engineering Thermodynamics 1",
+   "ar": "الديناميكيا الحرارية للهندسة الكيميائية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 206",
+   "ar_code": "هكم 206",
+   "en": "Chemical Engineering Thermodynamics 2",
+   "ar": "الديناميكيا الحرارية للهندسة الكيميائية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 219",
+   "ar_code": "هكم 219",
+   "en": "",
+   "ar": "أساسيات هندسة المواد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 234",
+   "ar_code": "هكم 234",
+   "en": "",
+   "ar": "انتقال كمية الحركة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 304",
+   "ar_code": "هكم 304",
+   "en": "Thermodynamics for Petroleum and Natural Gas Engineering Students",
+   "ar": "الديناميكا الحرارية لطلاب هندسة البترول والغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 312",
+   "ar_code": "هكم 312",
+   "en": "Momentum Transport Operations for Petroleum and Natural Gas Engineering Students",
+   "ar": "انتقال كمية الحركة لطلاب البترول و الغاز الطبيعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 320",
+   "ar_code": "هكم 320",
+   "en": "Chemical Reaction Engineering",
+   "ar": "هندسة التفاعلات الكيميائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 333",
+   "ar_code": "هكم 333",
+   "en": "",
+   "ar": "عمليات مشتركة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 334",
+   "ar_code": "هكم 334",
+   "en": "",
+   "ar": "انتقال الحرارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 335",
+   "ar_code": "هكم 335",
+   "en": "",
+   "ar": "انتقال المادة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 336",
+   "ar_code": "هكم 336",
+   "en": "",
+   "ar": "سلامة العمليات",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CHE 366",
+   "ar_code": "هكم 366",
+   "en": "",
+   "ar": "معمل الهندسة الكيميائية (1)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHE 406",
+   "ar_code": "هكم 406",
+   "en": "Computational Methods",
+   "ar": "الطرق الحسابية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHE 409",
+   "ar_code": "هكم 409",
+   "en": "",
+   "ar": "عمليات فصل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 412",
+   "ar_code": "هكم 412",
+   "en": "Computer Aided Chemical Process Design",
+   "ar": "تصميم العمليات الكيميائية بالحاسوب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CHE 413",
+   "ar_code": "هكم 413",
+   "en": "Desalination and Water Treatment",
+   "ar": "تحلية ومعالجة المياه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 415",
+   "ar_code": "هكم 415",
+   "en": "",
+   "ar": "عمليات تحكم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 420",
+   "ar_code": "هكم 420",
+   "en": "",
+   "ar": "اقتصاديات العمليات الكيميائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHE 422",
+   "ar_code": "هكم 422",
+   "en": "Selected Topics in Chemical Engineering- 1",
+   "ar": "مواضيع مختارة في الهندسة الكيميائية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 423",
+   "ar_code": "هكم 423",
+   "en": "",
+   "ar": "مواضيع مختارة في الهندسة الكيميائية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 425",
+   "ar_code": "هكم 425",
+   "en": "",
+   "ar": "مواضيع مختارة في الهندسة الكيميائية (3)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 426",
+   "ar_code": "هكم 426",
+   "en": "Heterogeneous Reactor Engineering",
+   "ar": "هندسة المفاعلات غير المتجانسة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 427",
+   "ar_code": "هكم 427",
+   "en": "Pollution Prevention in Chemical Industries",
+   "ar": "منع التلوث في المصانع الكيميائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 428",
+   "ar_code": "هكم 428",
+   "en": "Production of Cementing and Building Materials",
+   "ar": "إنتاج مواد البناء والاسمنت",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 429",
+   "ar_code": "هكم 429",
+   "en": "Energy and Chemical Industries",
+   "ar": "الصناعات الكيميائية والطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 430",
+   "ar_code": "هكم 430",
+   "en": "Corrosion Engineering",
+   "ar": "هندسة التآكل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 433",
+   "ar_code": "هكم 433",
+   "en": "Electrochemical Engineering",
+   "ar": "الهندسة الكهروكيميائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 434",
+   "ar_code": "هكم 434",
+   "en": "Extractive Metallurgy & Metals Recycling",
+   "ar": "استخلاص المعادن وإعادة تدوير الفلزات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 437",
+   "ar_code": "هكم 437",
+   "en": "Waste Treatment Processes",
+   "ar": "عمليات معالجة المخلفات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 438",
+   "ar_code": "هكم 438",
+   "en": "Water Chemistry and Chemical Analysis of Water",
+   "ar": "كيمياء المياه والتحليل الكيميائي للمياه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 440",
+   "ar_code": "هكم 440",
+   "en": "Introduction to Biochemical Engineering",
+   "ar": "مقدمة في هندسة الكيمياء الحيوية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 441",
+   "ar_code": "هكم 441",
+   "en": "Petroleum Refining Engineering",
+   "ar": "هندسة تكرير البترول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 442",
+   "ar_code": "هكم 442",
+   "en": "",
+   "ar": "الصناعات البتروكيميائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 443",
+   "ar_code": "هكم 443",
+   "en": "Natural Gas Processing",
+   "ar": "تصنيع الغاز الطبيعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 445",
+   "ar_code": "هكم 445",
+   "en": "Biological Wastewater treatment",
+   "ar": "المعالجة البيولوجية لمخلفات الصرف الصحي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 446",
+   "ar_code": "هكم 446",
+   "en": "Environmental Biotechnology",
+   "ar": "التقنية الحيوية البيئية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 447",
+   "ar_code": "هكم 447",
+   "en": "",
+   "ar": "أساسيات علوم وهندسة البوليمرات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 448",
+   "ar_code": "هكم 448",
+   "en": "",
+   "ar": "أساسيات معالجة المعادن",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 449",
+   "ar_code": "هكم 449",
+   "en": "",
+   "ar": "الفصل بالأغشية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 450",
+   "ar_code": "هكم 450",
+   "en": "",
+   "ar": "الطاقة المتجددة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 451",
+   "ar_code": "هكم 451",
+   "en": "",
+   "ar": "تقييم المخاطر والتحكم فيها",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 452",
+   "ar_code": "هكم 452",
+   "en": "",
+   "ar": "تقنيات الصناعات الغذائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 453",
+   "ar_code": "هكم 453",
+   "en": "",
+   "ar": "علوم وهندسة المتكونات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 454",
+   "ar_code": "هكم 454",
+   "en": "",
+   "ar": "أمثلية عمليات الطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 466",
+   "ar_code": "هكم 466",
+   "en": "",
+   "ar": "معمل الهندسة الكيميائية (2)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "CHE 467",
+   "ar_code": "هكم 467",
+   "en": "",
+   "ar": "تكامل العمليات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHE 496",
+   "ar_code": "هكم 496",
+   "en": "Graduation Project - 1",
+   "ar": "مشروع تخرج (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 497",
+   "ar_code": "هكم 497",
+   "en": "Graduation Project - 2",
+   "ar": "مشروع تخرج (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHE 998",
+   "ar_code": "هكم 998",
+   "en": "",
+   "ar": "مشروع بحثي",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "CHE 999",
+   "ar_code": "هكم 999",
+   "en": "",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "CHEM 101",
+   "ar_code": "كيم 101",
+   "en": "General Chemistry",
+   "ar": "كيمياء عامة",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHEM 230",
+   "ar_code": "كيم 230",
+   "en": "",
+   "ar": "أسس الكيمياء الفيزيائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CHEM 244",
+   "ar_code": "كيم 244",
+   "en": "",
+   "ar": "أسس الكيمياء العضوية (1)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 245",
+   "ar_code": "كيم 245",
+   "en": "",
+   "ar": "أسس الكيمياء العضوية (2)",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "CHEM 350",
+   "ar_code": "كيم 350",
+   "en": "",
+   "ar": "التحليل الآلي لطلبة غير التخصص",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "CHS 150",
+   "ar_code": "",
+   "en": "Fitness & Health Culture",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "COM 140",
+   "ar_code": "",
+   "en": "University Skills",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CT 101",
+   "ar_code": "تقن 101",
+   "en": "IT skills",
+   "ar": "مهارات الحاسب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "CUR 101",
+   "ar_code": "نهج 101",
+   "en": "University Skills",
+   "ar": "مهارات جامعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "CUR 140",
+   "ar_code": "",
+   "en": "Writing Skills",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "EE 201",
+   "ar_code": "كهر 201",
+   "en": "Fundamentals of Electric Circuits",
+   "ar": "أساسيات الدوائر الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 202",
+   "ar_code": "كهر 202",
+   "en": "Electric Circuit Analysis",
+   "ar": "تحليل الدوائر الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 203",
+   "ar_code": "كهر 203",
+   "en": "Engineering Electromagnetics (1)",
+   "ar": "الكهرومغناطيسية الهندسية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 204",
+   "ar_code": "كهر 204",
+   "en": "Engineering Electromagnetics (2)",
+   "ar": "الكهرومغناطيسية الهندسية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 205",
+   "ar_code": "كهر 205",
+   "en": "Electric Circuits Laboratory",
+   "ar": "معمل الدوائر الكهربائية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 208",
+   "ar_code": "كهر 208",
+   "en": "Logic Design",
+   "ar": "التصميم المنطقي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 210",
+   "ar_code": "كهر 210",
+   "en": "Logic Design Laboratory",
+   "ar": "معمل التصميم المنطقي",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 301",
+   "ar_code": "كهر 301",
+   "en": "Signals and Systems Analysis",
+   "ar": "تحليل الإشارات والنظم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 302",
+   "ar_code": "كهر 302",
+   "en": "Modeling and Simulation Laboratory",
+   "ar": "معمل النمذجة والمحاكاة",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 308",
+   "ar_code": "كهر 308",
+   "en": "Electrical Circuits and Machines",
+   "ar": "الدوائر و المكائن الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 310",
+   "ar_code": "كهر 310",
+   "en": "Microelectronic Devices and Circuits",
+   "ar": "نبائط ودوائر الميكروالكترونيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 312",
+   "ar_code": "كهر 312",
+   "en": "Basic Electronics Laboratory",
+   "ar": "معمل أساسيات الالكترونيات",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 320",
+   "ar_code": "كهر 320",
+   "en": "Communications Principles",
+   "ar": "مبادئ الاتصالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 329",
+   "ar_code": "كهر 329",
+   "en": "Signal analysis for Surveying Students",
+   "ar": "تحليل الإشارات لطلبة المساحة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 330",
+   "ar_code": "كهر 330",
+   "en": "Electromechanical Energy Conversion (1)",
+   "ar": "التحويل الكهروميكانيكي للطاقة (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 340",
+   "ar_code": "كهر 340",
+   "en": "Fundamentals of Power Systems",
+   "ar": "مبادئ أنظمة القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 351",
+   "ar_code": "كهر 351",
+   "en": "Automatic Control",
+   "ar": "التحكم الآلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 353",
+   "ar_code": "كهر 353",
+   "en": "Introduction to Microprocessors",
+   "ar": "مقدمة في المعالجات الصغرى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 356",
+   "ar_code": "كهر 356",
+   "en": "Control and Instrumentation Laboratory",
+   "ar": "معمل التحكم والقياسات",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 357",
+   "ar_code": "كهر 357",
+   "en": "Microprocessor and Microcontroller Laboratory",
+   "ar": "معمل المعالجات والحاكمات الصغرى",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 400",
+   "ar_code": "كهر 400",
+   "en": "Digital and Analog Electronic Circuits",
+   "ar": "الدوائر الإلكترونية الرقمية والتماثلية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 402",
+   "ar_code": "كهر 402",
+   "en": "Electronic Circuits Laboratory",
+   "ar": "معمل الدوائر الالكترونية",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 403",
+   "ar_code": "كهر 403",
+   "en": "Semiconductor Devices",
+   "ar": "نبائط أشباه الموصلات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 404",
+   "ar_code": "كهر 404",
+   "en": "Solar Cells and Photovoltaic Systems",
+   "ar": "الخلايا الشمسية والأنظمة الفوتوفولطائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 405",
+   "ar_code": "كهر 405",
+   "en": "VLSI Circuit Design",
+   "ar": "تصميم الدوائر المتكاملة ذات النطاق العالى جدا",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 406",
+   "ar_code": "كهر 406",
+   "en": "VLSI Design Laboratory",
+   "ar": "معمل الدوائر المتكاملة ذات النطاق العالي جدا",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 407",
+   "ar_code": "كهر 407",
+   "en": "Electronic Communication Circuits",
+   "ar": "الدوائر الإلكترونية للاتصالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 408",
+   "ar_code": "كهر 408",
+   "en": "VLSI Technology and Fabrication",
+   "ar": "تقنيات وتصنيع الدوائر المتكاملة ذات النطاق العالي جدا",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 409",
+   "ar_code": "كهر 409",
+   "en": "Electronic Instrumentation",
+   "ar": "الكترونيات الأجهزة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 410",
+   "ar_code": "كهر 410",
+   "en": "Optoelectronic Devices and Systems",
+   "ar": "نبائط وأنظمة الالكترونيات الضوئية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 412",
+   "ar_code": "كهر 412",
+   "en": "Low Power VLSI Design",
+   "ar": "تصميم الدوائر المتكاملة ذات النطاق العالي جدا منخفضة القدرة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 415",
+   "ar_code": "كهر 415",
+   "en": "Principles of Nanoelectronics",
+   "ar": "مبادئ النانوالكترونيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 419",
+   "ar_code": "كهر 419",
+   "en": "Introduction to Electronic Warfare",
+   "ar": "مقدمة لأساليب الحرب الالكترونية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 420",
+   "ar_code": "كهر 420",
+   "en": "Digital Signal Processing",
+   "ar": "معالجة الإشارات الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 421",
+   "ar_code": "كهر 421",
+   "en": "Communications Laboratory",
+   "ar": "معمل الاتصالات",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "EE 422",
+   "ar_code": "كهر 422",
+   "en": "Digital Communications",
+   "ar": "الاتصالات الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 423",
+   "ar_code": "كهر 423",
+   "en": "Wave Propagation and Antennas",
+   "ar": "انتشار الموجات والهوائيات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 425",
+   "ar_code": "كهر 425",
+   "en": "Satellite Communications",
+   "ar": "اتصالات الأقمار الصناعية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 426",
+   "ar_code": "كهر 426",
+   "en": "Microwave Engineering",
+   "ar": "هندسة الموجات الدقيقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 430",
+   "ar_code": "كهر 430",
+   "en": "Electromechanical Energy Conversion (2)",
+   "ar": "التحويل الكهروميكانيكي للطاقة (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 432",
+   "ar_code": "كهر 432",
+   "en": "Power Electronics",
+   "ar": "إلكترونيات القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 433",
+   "ar_code": "كهر 433",
+   "en": "Electromechanical Energy Conversion Laboratory",
+   "ar": "معمل التحويل الكهروميكانيكي للطاقة",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 435",
+   "ar_code": "كهر 435",
+   "en": "Electric Drives",
+   "ar": "التحريك الكهربائي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 436",
+   "ar_code": "كهر 436",
+   "en": "Electrical Machine Dynamics and Stability",
+   "ar": "ديناميكية واستقرارية الآلات الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 441",
+   "ar_code": "كهر 441",
+   "en": "Power System Analysis",
+   "ar": "تحليل أنظمة القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 443",
+   "ar_code": "كهر 443",
+   "en": "Power System Operation and Control",
+   "ar": "التشغيل والتحكم في أنظمة القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 444",
+   "ar_code": "كهر 444",
+   "en": "Power System Planning",
+   "ar": "تخطيط أنظمة القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 445",
+   "ar_code": "كهر 445",
+   "en": "Electrical Power Laboratory",
+   "ar": "معمل القوى الكهربائية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "EE 446",
+   "ar_code": "كهر 446",
+   "en": "High Voltage Engineering",
+   "ar": "هندسة الجهد العالي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 448",
+   "ar_code": "كهر 448",
+   "en": "Power Distribution Systems",
+   "ar": "أنظمة توزيع الطاقة الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 449",
+   "ar_code": "كهر 449",
+   "en": "Power System Protection",
+   "ar": "حماية أنظمة القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 450",
+   "ar_code": "كهر 450",
+   "en": "Computer Architecture Organization",
+   "ar": "بنية الحاسب وتنظيمه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 453",
+   "ar_code": "كهر 453",
+   "en": "Microprocessor and Embedded System Design",
+   "ar": "تصميم نظم المعالجات المصغرة المبنية داخليا",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 454",
+   "ar_code": "كهر 454",
+   "en": "Advanced Control Systems",
+   "ar": "نظم التحكم المتقدمة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 456",
+   "ar_code": "كهر 456",
+   "en": "Automatic Control Applications",
+   "ar": "تطبيقات التحكم الآلي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 457",
+   "ar_code": "كهر 457",
+   "en": "Applied Control Laboratory",
+   "ar": "معمل تطبيقات التحكم",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 458",
+   "ar_code": "كهر 458",
+   "en": "Advanced Logic Design",
+   "ar": "التصميم المنطقي المتقدم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 459",
+   "ar_code": "كهر 459",
+   "en": "Advanced Logic Design Laboratory",
+   "ar": "معمل التصميم المنطقي المتقدم",
+   "h": 1,
+   "lab": true
+  },
+  {
+   "code": "EE 463",
+   "ar_code": "كهر 463",
+   "en": "Wireless Communications",
+   "ar": "الاتصالات اللاسلكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 464",
+   "ar_code": "كهر 464",
+   "en": "Optical Communications",
+   "ar": "الاتصالات الضوئية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 465",
+   "ar_code": "كهر 465",
+   "en": "Probability Theory with Engineering Applications",
+   "ar": "نظرية الاحتمالات وتطبيقاتها الهندسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 466",
+   "ar_code": "كهر 466",
+   "en": "Cryptography and Network Security",
+   "ar": "التشفير وأمن الشبكات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 468",
+   "ar_code": "كهر 468",
+   "en": "Selected Topics in Communications and Signal Processing",
+   "ar": "موضوعات مختارة في الاتصالات ومعالجة الإشارات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 469",
+   "ar_code": "كهر 469",
+   "en": "Selected Topics in Engineering Electromagnetics",
+   "ar": "موضوعات مختارة في الكهرومغناطيسية الهندسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 470",
+   "ar_code": "كهر 470",
+   "en": "Renewable Energy Engineering",
+   "ar": "هندسة الطاقة المتجددة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 479",
+   "ar_code": "كهر 479",
+   "en": "Selected Topics in Electrical Power Engineering",
+   "ar": "موضوعات مختارة في هندسة القوى الكهربائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 480",
+   "ar_code": "كهر 480",
+   "en": "Introduction to Artificial Intelligence",
+   "ar": "مقدمة للذكاء الاصطناعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 481",
+   "ar_code": "كهر 481",
+   "en": "Real Time System Design",
+   "ar": "تصميم النظم ذات الزمن الحقيقي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 482",
+   "ar_code": "كهر 482",
+   "en": "Communication Networks",
+   "ar": "شبكات الاتصالات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 483",
+   "ar_code": "كهر 483",
+   "en": "Digital Control Systems",
+   "ar": "نظم التحكم الرقمية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "EE 496",
+   "ar_code": "كهر 496",
+   "en": "Graduation Project -1",
+   "ar": "مشروع التخرج -1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "EE 497",
+   "ar_code": "كهر 497",
+   "en": "Graduation Project -2",
+   "ar": "مشروع التخرج -2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "EE 998",
+   "ar_code": "كهر 998",
+   "en": "Research Project",
+   "ar": "مشروع بحثي",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "EE 999",
+   "ar_code": "كهر 999",
+   "en": "Practical Training",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "ENG 140",
+   "ar_code": "",
+   "en": "English Language",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENG 150",
+   "ar_code": "",
+   "en": "Academic English Language",
+   "ar": "",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGL 109",
+   "ar_code": "نجم 109",
+   "en": "Language & Communication",
+   "ar": "اللغة والتخاطب",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENGL 110",
+   "ar_code": "نجم 110",
+   "en": "Technical Writing",
+   "ar": "الكتابة التقنية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ENGS 100",
+   "ar_code": "انجل 100",
+   "en": "English language",
+   "ar": "لغة انجليزية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENGS 110",
+   "ar_code": "انجل 110",
+   "en": "English",
+   "ar": "لغة انجليزية تخصصية",
+   "h": 6,
+   "lab": false
+  },
+  {
+   "code": "ENT 101",
+   "ar_code": "ريد 101",
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "EPH 101",
+   "ar_code": "فجب 101",
+   "en": "Health & fitness",
+   "ar": "اللياقة و الثقافة الصحية",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "GE 104",
+   "ar_code": "هعم 104",
+   "en": "Basics of Engineering Drawing",
+   "ar": "أساسيات الرسم الهندسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 106",
+   "ar_code": "هعم 106",
+   "en": "Introduction to Engineering Design",
+   "ar": "مقدمة في التصميم الهندسي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 201",
+   "ar_code": "هعم 201",
+   "en": "Statics",
+   "ar": "استاتيكا",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GE 202",
+   "ar_code": "هعم 202",
+   "en": "Dynamics",
+   "ar": "الديناميكا",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GE 203",
+   "ar_code": "هعم 203",
+   "en": "Engineering and Environment",
+   "ar": "الهندسة والبيئة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GE 209",
+   "ar_code": "هعم 209",
+   "en": "Computer Programming",
+   "ar": "برمجة الحاسوب",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 211",
+   "ar_code": "هعم 211",
+   "en": "Computer Programming using C++",
+   "ar": "برمجة الحاسوب بلغة C++",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "GE 402",
+   "ar_code": "هعم 402",
+   "en": "Engineering Projects Management",
+   "ar": "إدارة المشاريع الهندسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "GE 403",
+   "ar_code": "هعم 403",
+   "en": "Engineering Economy",
+   "ar": "الاقتصاد الهندسي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 281",
+   "ar_code": "جيو 281",
+   "en": "Geology for Engineers",
+   "ar": "الجيولوجيا للمهندسيين",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "GEO 301",
+   "ar_code": "",
+   "en": "Geomorphology",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IC 100",
+   "ar_code": "سلم 100",
+   "en": "Studies in Prophet Biography",
+   "ar": "دراسات في السيرة النبوية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 101",
+   "ar_code": "سلم 101",
+   "en": "Origins of Islamic Culture",
+   "ar": "أصول الثقافة الإسلامية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 102",
+   "ar_code": "سلم 102",
+   "en": "Family in Islam",
+   "ar": "الأسرة في الإسلام",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 103",
+   "ar_code": "سلم 103",
+   "en": "The Economic System in Islam",
+   "ar": "النظام الاقتصادي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 104",
+   "ar_code": "سلم 104",
+   "en": "The Political System in Islam",
+   "ar": "النظام السياسي الإسلامي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 105",
+   "ar_code": "سلم 105",
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 106",
+   "ar_code": "سلم 106",
+   "en": "Medical Jurisprudence",
+   "ar": "الفقه الطبي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 107",
+   "ar_code": "سلم 107",
+   "en": "Ethics of the Profession",
+   "ar": "أخلاقيات المهنة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 108",
+   "ar_code": "سلم 108",
+   "en": "Contemporary Issues",
+   "ar": "قضايا معاصرة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IC 109",
+   "ar_code": "سلم 109",
+   "en": "Role of Women in Development",
+   "ar": "المرأة ودورها التنموي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IE 214",
+   "ar_code": "",
+   "en": "Industrial operation Management (1)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 222",
+   "ar_code": "",
+   "en": "Industrial Operations Analysis (1)",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 251",
+   "ar_code": "",
+   "en": "Manufacturing Materials",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 252",
+   "ar_code": "",
+   "en": "Manufacturing processes (1)",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 314",
+   "ar_code": "",
+   "en": "Industrial operation Management (2)",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 322",
+   "ar_code": "",
+   "en": "Industrial Operations Analysis (2)",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 333",
+   "ar_code": "",
+   "en": "Design & analysis of Experiments",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 337",
+   "ar_code": "",
+   "en": "Automatic Control Systems",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 339",
+   "ar_code": "",
+   "en": "Quality Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 341",
+   "ar_code": "",
+   "en": "Human Factors Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 342",
+   "ar_code": "",
+   "en": "Work Analysis & Design",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 352",
+   "ar_code": "",
+   "en": "Manufacturing processes (2)",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "IE 360",
+   "ar_code": "",
+   "en": "CAD/CAM",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 361",
+   "ar_code": "",
+   "en": "Product Design and Innovation",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 405",
+   "ar_code": "",
+   "en": "Manufacturing Economics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 420",
+   "ar_code": "",
+   "en": "Industrial Systems Simulation",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 438",
+   "ar_code": "",
+   "en": "Engineering Reliability & Maintenance",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 449",
+   "ar_code": "",
+   "en": "Safety Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 450",
+   "ar_code": "",
+   "en": "Industrial Facility Design",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 461",
+   "ar_code": "",
+   "en": "Computer Integrated manufacturing",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 462",
+   "ar_code": "",
+   "en": "Industrial Information Systems",
+   "ar": "",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "IE 469",
+   "ar_code": "",
+   "en": "Manufacturing Systems",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 480",
+   "ar_code": "",
+   "en": "Production Systems Operation",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 481",
+   "ar_code": "",
+   "en": "Supply chain and Logistics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 482",
+   "ar_code": "",
+   "en": "Decision Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 483",
+   "ar_code": "",
+   "en": "Engineering Analytics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 484",
+   "ar_code": "",
+   "en": "Advanced Quality Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 485",
+   "ar_code": "",
+   "en": "Advanced Safety Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 486",
+   "ar_code": "",
+   "en": "Ergonomics design",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 487",
+   "ar_code": "",
+   "en": "Advanced Manufacturing Technologies",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 488",
+   "ar_code": "",
+   "en": "Additive Manufacturing Technologies",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 489",
+   "ar_code": "",
+   "en": "Manufacturing System Modeling",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 490",
+   "ar_code": "",
+   "en": "Maintenance Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "IE 491",
+   "ar_code": "",
+   "en": "Reliability Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "IE 496",
+   "ar_code": "",
+   "en": "Graduation Project (1)",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IE 497",
+   "ar_code": "",
+   "en": "Graduation Project (2)",
+   "ar": "",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "IE 998",
+   "ar_code": "",
+   "en": "Research Project",
+   "ar": "",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "IE 999",
+   "ar_code": "",
+   "en": "Practical Training",
+   "ar": "",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "IT 140",
+   "ar_code": "",
+   "en": "Computer Skills",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "MATH 101",
+   "ar_code": "ريض 101",
+   "en": "Differential Calculus",
+   "ar": "حساب التفاضل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 106",
+   "ar_code": "ريض 106",
+   "en": "Integral Calculus",
+   "ar": "حساب التكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 107",
+   "ar_code": "ريض 107",
+   "en": "Vectors and Matrices",
+   "ar": "المتجهات والمصفوفات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 150",
+   "ar_code": "",
+   "en": "Differential Calculus",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 203",
+   "ar_code": "ريض 203",
+   "en": "Differential & Integral Calculus",
+   "ar": "حساب التفاضل والتكامل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 204",
+   "ar_code": "ريض 204",
+   "en": "Differential Equations",
+   "ar": "المعادلات التفاضلية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 244",
+   "ar_code": "",
+   "en": "Linear Algebra",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 254",
+   "ar_code": "ريض 254",
+   "en": "Numerical Methods",
+   "ar": "الطرائق العددية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 1110",
+   "ar_code": "ريض 1110",
+   "en": "Calculus for Engineers",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 1120",
+   "ar_code": "ريض 1120",
+   "en": "Linear Algebra and Vector Analysis",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 1130",
+   "ar_code": "ريض 1130",
+   "en": "Differential Equations",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "MATH 2140",
+   "ar_code": "ريض 2140",
+   "en": "Numerical Methods",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 201",
+   "ar_code": "همك 201",
+   "en": "Geometric Modeling in Engineering",
+   "ar": "نمذجة الأشكال في الهندسة",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ME 254",
+   "ar_code": "همك 254",
+   "en": "Materials Engineering",
+   "ar": "هندسة المواد",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "ME 304",
+   "ar_code": "همك 304",
+   "en": "Mechanical Engineering Design (1)",
+   "ar": "التصميم الهندسي الميكانيكي (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 305",
+   "ar_code": "همك 305",
+   "en": "Mechanical Engineering Design (2)",
+   "ar": "التصميم الهندسي الميكانيكي (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "ME 312",
+   "ar_code": "همك 312",
+   "en": "Manufacturing Processes (1)",
+   "ar": "اساليب التصنيع 1",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 313",
+   "ar_code": "همك 313",
+   "en": "Manufacturing Processes (2)",
+   "ar": "اساليب التصنيع 2",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 321",
+   "ar_code": "همك 321",
+   "en": "Mechanical Measurements",
+   "ar": "القياسات الميكانيكية",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ME 322",
+   "ar_code": "همك 322",
+   "en": "Mechanical Engineering Lab (1)",
+   "ar": "معمل الهندسة الميكانيكية (1)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ME 323",
+   "ar_code": "همك 323",
+   "en": "Mechanical Engineering Lab (2)",
+   "ar": "معمل الهندسة الميكانيكية (2)",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "ME 340",
+   "ar_code": "همك 340",
+   "en": "Mechanical Engineering for Petroleum and Natural Gas Students",
+   "ar": "الهندسة الميكانيكية لطلبة البترول والغاز الطبيعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 352",
+   "ar_code": "همك 352",
+   "en": "Mechanics of Materials",
+   "ar": "ميكانيكا المواد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 363",
+   "ar_code": "همك 363",
+   "en": "Mechanics of Machinery",
+   "ar": "ميكانيكا الآلات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 365",
+   "ar_code": "همك 365",
+   "en": "Dynamics of Mechanical Systems",
+   "ar": "ديناميكا المنظومات الميكانيكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 366",
+   "ar_code": "همك 366",
+   "en": "Automatic Control",
+   "ar": "التحكم التلقائى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 371",
+   "ar_code": "همك 371",
+   "en": "Thermodynamics (1)",
+   "ar": "الديناميكا الحرارية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 377",
+   "ar_code": "همك 377",
+   "en": "Thermodynamics (2)",
+   "ar": "الديناميكا الحرارية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 378",
+   "ar_code": "همك 378",
+   "en": "Heat Transfer",
+   "ar": "انتقال الحرارة",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ME 379",
+   "ar_code": "همك 379",
+   "en": "Thermal-Fluid Systems",
+   "ar": "منظومات الموائع الحرارية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 384",
+   "ar_code": "همك 384",
+   "en": "Fluid Mechanics",
+   "ar": "ميكانيكا الموائع",
+   "h": 4,
+   "lab": false
+  },
+  {
+   "code": "ME 402",
+   "ar_code": "همك 402",
+   "en": "Finite Element Method",
+   "ar": "طريقة العناصر المحددة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 404",
+   "ar_code": "همك 404",
+   "en": "Computer-Aided Design",
+   "ar": "التصميم بمساعدة الحاسوب",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 405",
+   "ar_code": "همك 405",
+   "en": "Conceptual Design",
+   "ar": "التصميم المبني على المفاهيم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 406",
+   "ar_code": "همك 406",
+   "en": "Design Optimization",
+   "ar": "التصميم الأمثل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 408",
+   "ar_code": "همك 408",
+   "en": "Friction, Wear and Lubrication",
+   "ar": "الاحتكاك ، التآكل والتزييت",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 409",
+   "ar_code": "همك 409",
+   "en": "Materials Selection in Design",
+   "ar": "اختيار المواد في التصميم",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 411",
+   "ar_code": "همك 411",
+   "en": "Modern Manufacturing Processes",
+   "ar": "أساليب التصنيع الحديثة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 412",
+   "ar_code": "همك 412",
+   "en": "Metal Forming and Metal Cutting Analysis",
+   "ar": "تحليل وتشكيل المعادن",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 413",
+   "ar_code": "همك 413",
+   "en": "Manufacturing Systems",
+   "ar": "نظم التصنيع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 414",
+   "ar_code": "همك 414",
+   "en": "CNC Machines",
+   "ar": "آلات التحكم الرقمي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 415",
+   "ar_code": "همك 415",
+   "en": "Introduction to Railway Engineering",
+   "ar": "مقدمة في هندسة السكك الحديدية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 431",
+   "ar_code": "همك 431",
+   "en": "Aerodynamics",
+   "ar": "ديناميكا الهواء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 432",
+   "ar_code": "همك 432",
+   "en": "Introduction to Flight Mechanics",
+   "ar": "ميكانيكا الطيران",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 433",
+   "ar_code": "همك 433",
+   "en": "Introduction to Aeroelasticity",
+   "ar": "مقدمة في المرونة الهوائية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 443",
+   "ar_code": "همك 443",
+   "en": "Principles of Refrigeration",
+   "ar": "مبادئ التبريد",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 444",
+   "ar_code": "همك 444",
+   "en": "Air Conditioning",
+   "ar": "تكييف الهواء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 451",
+   "ar_code": "همك 451",
+   "en": "Mechanical Behavior of Materials",
+   "ar": "السلوك الميكانيكي للمواد",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 452",
+   "ar_code": "همك 452",
+   "en": "Physical Metallurgy",
+   "ar": "فيزيائية الفلزات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 453",
+   "ar_code": "همك 453",
+   "en": "Intermediate Mechanics of Materials",
+   "ar": "ميكانيكا المواد المتوسط",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 454",
+   "ar_code": "همك 454",
+   "en": "Aircraft Structures",
+   "ar": "هياكل الطائرات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 455",
+   "ar_code": "همك 455",
+   "en": "Automotive Structures",
+   "ar": "هياكل المركبات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 456",
+   "ar_code": "همك 456",
+   "en": "Introduction to Composite Materials",
+   "ar": "مقدمة في المواد المركبة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 460",
+   "ar_code": "همك 460",
+   "en": "Railway Systems Engineering",
+   "ar": "هندسة أنظمة السكك الحديدية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 462",
+   "ar_code": "همك 462",
+   "en": "Mechanical Vibrations",
+   "ar": "الاهتزازات الميكانيكية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 465",
+   "ar_code": "همك 465",
+   "en": "Mechatronics",
+   "ar": "الميكا ترونيكس",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 466",
+   "ar_code": "همك 466",
+   "en": "Rotating Machinery",
+   "ar": "الآلات الدوارة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 467",
+   "ar_code": "همك 467",
+   "en": "Introduction to Robotics",
+   "ar": "مقدمة في الروبوتات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 468",
+   "ar_code": "همك 468",
+   "en": "Mechanisms and Linkage Design",
+   "ar": "تصميم الوصلات المفصلية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 469",
+   "ar_code": "همك 469",
+   "en": "Automotive Engineering",
+   "ar": "هندسة العربات ( السيارات )",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 472",
+   "ar_code": "همك 472",
+   "en": "Power Plants",
+   "ar": "محطات القوى",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 473",
+   "ar_code": "همك 473",
+   "en": "Introduction to Combustion",
+   "ar": "مقدمة في الاحتراق",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 474",
+   "ar_code": "همك 474",
+   "en": "Internal Combustion Engines",
+   "ar": "محركات الاحتراق الداخلي",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 475",
+   "ar_code": "همك 475",
+   "en": "Energy Efficiency",
+   "ar": "أساسيات كفاءة الطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 476",
+   "ar_code": "همك 476",
+   "en": "Solar Energy",
+   "ar": "الطاقة الشمسية",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 477",
+   "ar_code": "همك 477",
+   "en": "Energy Conversion Systems",
+   "ar": "منظومات تحويل الطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 478",
+   "ar_code": "همك 478",
+   "en": "Design of Energy Systems",
+   "ar": "تصميم منظومات الطاقة",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 479",
+   "ar_code": "همك 479",
+   "en": "Water Desalination",
+   "ar": "تحلية المياه",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 481",
+   "ar_code": "همك 481",
+   "en": "Introduction to Computational Fluid Dynamics",
+   "ar": "مقدمة ديناميكا الموائع الحسابية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "ME 482",
+   "ar_code": "همك 482",
+   "en": "Gas Dynamics",
+   "ar": "ديناميكا الغازات",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 483",
+   "ar_code": "همك 483",
+   "en": "Introduction to Propulsion",
+   "ar": "مقدمة في الدفع النفاث",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 485",
+   "ar_code": "همك 485",
+   "en": "Fluid Machinery",
+   "ar": "آلات الموائع",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 487",
+   "ar_code": "همك 487",
+   "en": "Air Pollution Control",
+   "ar": "التحكم فى تلوث الهواء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 493",
+   "ar_code": "همك 493",
+   "en": "Selected Topics in Mechanical Engineering (1)",
+   "ar": "مواضيع مختارة في الهندسة الميكانيكية (1)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 494",
+   "ar_code": "همك 494",
+   "en": "Selected Topics in Mechanical Engineering (2)",
+   "ar": "مواضيع مختارة في الهندسة الميكانيكية (2)",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "ME 496",
+   "ar_code": "همك 496",
+   "en": "Graduation Project -1",
+   "ar": "مشروع التخرج -1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ME 497",
+   "ar_code": "همك 497",
+   "en": "Graduation Project -2",
+   "ar": "مشروع التخرج -2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "ME 998",
+   "ar_code": "همك 998",
+   "en": "Research Project",
+   "ar": "مشروع بحثي",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "ME 999",
+   "ar_code": "همك 999",
+   "en": "Practical Training",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PGE 251",
+   "ar_code": "هبغ 251",
+   "en": "Introduction to Petroleum and Natural Gas Engineering",
+   "ar": "مقدمة لهندسة البترول والغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 361",
+   "ar_code": "هبغ 361",
+   "en": "Reservoir Rocks and Fluid Flow",
+   "ar": "خواص صخور المكامن و سريان الموائع",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 362",
+   "ar_code": "هبغ 362",
+   "en": "Reservoir Fluid Properties",
+   "ar": "خواص موائع المكامن",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 363",
+   "ar_code": "هبغ 363",
+   "en": "Reservoir Engineering Laboratory",
+   "ar": "معمل هندسة المكامن",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PGE 366",
+   "ar_code": "هبغ 366",
+   "en": "Natural Gas Reservoir Engineering",
+   "ar": "هندسة مكامن الغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 391",
+   "ar_code": "هبغ 391",
+   "en": "Geologic Principles of Petroleum & Natural Gas Exploration",
+   "ar": "المبادئ الجيولوجية لإستكشاف هندسة البترول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 450",
+   "ar_code": "هبغ 450",
+   "en": "Seminar",
+   "ar": "الندوة",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 455",
+   "ar_code": "هبغ 455",
+   "en": "Transportation & Storage of Petroleum and Natural Gas",
+   "ar": "نقل و تخزين البترول والغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 457",
+   "ar_code": "هبغ 457",
+   "en": "Computer Applications in Petroleum and Natural Gas Engineering",
+   "ar": "تطبيقات الحاسب في هندسة البترول و الغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 460",
+   "ar_code": "هبغ 460",
+   "en": "Petroleum Reservoir Engineering",
+   "ar": "هندسة مكامن البترول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 464",
+   "ar_code": "هبغ 464",
+   "en": "Improved Oil Recovery",
+   "ar": "الانتاج المحسن للبترول",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 467",
+   "ar_code": "هبغ 467",
+   "en": "Reservoir Simulation",
+   "ar": "محاكاة المكامن",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 471",
+   "ar_code": "هبغ 471",
+   "en": "Drilling Engineering-1-",
+   "ar": "هندسة الحفر -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 474",
+   "ar_code": "هبغ 474",
+   "en": "Drilling Engineering-2-",
+   "ar": "هندسة الحفر -2-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 476",
+   "ar_code": "هبغ 476",
+   "en": "Drilling Engineering Laboratory",
+   "ar": "معمل هندسة الحفر",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PGE 478",
+   "ar_code": "هبغ 478",
+   "en": "Directional and Horizontal Drilling and Well Control",
+   "ar": "الحفر المائل و الأفقي والسيطرة على الآبار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 481",
+   "ar_code": "هبغ 481",
+   "en": "Production of Naturally Flowing Wells",
+   "ar": "انتاج الآبار ذات التدفق الطبيعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 482",
+   "ar_code": "هبغ 482",
+   "en": "Artificial Lift Methods and Surface Operations",
+   "ar": "طرق الإنتاج الاصطناعية والعمليات السطحية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 484",
+   "ar_code": "هبغ 484",
+   "en": "Natural Gas Production Engineering",
+   "ar": "هندسة انتاج الغاز الطبيعي",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 485",
+   "ar_code": "هبغ 485",
+   "en": "Petroleum Production Engineering Laboratory",
+   "ar": "معمل هندسة انتاج البترول",
+   "h": 2,
+   "lab": true
+  },
+  {
+   "code": "PGE 486",
+   "ar_code": "هبغ 486",
+   "en": "Well Stimulation and Sand Production Management",
+   "ar": "تنشيط الآبار والتحكم في إنتاج الرمل",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 490",
+   "ar_code": "هبغ 490",
+   "en": "Petroleum and Natural Gas Exploration -1-",
+   "ar": "هندسة استكشاف البترول والغاز الطبيعي -1-",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 491",
+   "ar_code": "هبغ 491",
+   "en": "Petroleum and Natural Gas Economics",
+   "ar": "اقتصاديات البترول و الغاز الطبيعي",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 492",
+   "ar_code": "هبغ 492",
+   "en": "Well Logging",
+   "ar": "تسجيلات الآبار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 493",
+   "ar_code": "هبغ 493",
+   "en": "Well Test Analysis",
+   "ar": "تحليل اختبارات الآبار",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "PGE 494",
+   "ar_code": "هبغ 494",
+   "en": "Petroleum and Natural Gas Exploration -2-",
+   "ar": "هندسة استكشاف البترول والغاز الطبيعي -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 496",
+   "ar_code": "هبغ 496",
+   "en": "Graduation Project - 1",
+   "ar": "مشروع تخرج -1-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 497",
+   "ar_code": "هبغ 497",
+   "en": "Graduation Project - 2",
+   "ar": "مشروع التخرج -2-",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "PGE 998",
+   "ar_code": "هبغ 998",
+   "en": "Research Project",
+   "ar": "مشروع بحثي (غير متطلب للتخرج)",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "PGE 999",
+   "ar_code": "هبغ 999",
+   "en": "Practical Training",
+   "ar": "التدريب العملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "PHYS 103",
+   "ar_code": "فيز 103",
+   "en": "General Physics (1)",
+   "ar": "فيزياء عامة (1)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 104",
+   "ar_code": "فيز 104",
+   "en": "General Physics (2)",
+   "ar": "فيزياء عامة (2)",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 1211",
+   "ar_code": "فيز 1211",
+   "en": "Physics for Engineers I",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PHYS 1221",
+   "ar_code": "فيز 1221",
+   "en": "Physics for Engineers II",
+   "ar": "",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "PL 442",
+   "ar_code": "",
+   "en": "Urban Strategic Planning",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "QURN 100",
+   "ar_code": "قرأ 100",
+   "en": "Quran Kareem",
+   "ar": "قرآن كريم",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SE 212",
+   "ar_code": "همس 212",
+   "en": "Spatial Measurements",
+   "ar": "القياسات المكانية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 312",
+   "ar_code": "همس 312",
+   "en": "Introduction to Geomatics Engineering",
+   "ar": "مدخل للهندسة الجيوماتيكية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 314",
+   "ar_code": "همس 314",
+   "en": "Geodesy",
+   "ar": "الجيوديسيا",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "SE 315",
+   "ar_code": "همس 315",
+   "en": "Map Projections",
+   "ar": "إسقاط الخرائط",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 321",
+   "ar_code": "همس 321",
+   "en": "Photogrammetry",
+   "ar": "المساحة التصويرية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 331",
+   "ar_code": "همس 331",
+   "en": "Adjustment Computations",
+   "ar": "حسابات ضبط الأرصاد",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 365",
+   "ar_code": "همس 365",
+   "en": "Principles of Remote Sensing & Image Interpretation",
+   "ar": "أساسيات الاستشعار عن بعد و تفسير الصور",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 413",
+   "ar_code": "همس 413",
+   "en": "Satellite Geodesy & Geopositioning",
+   "ar": "جيوديسيا الأقمار الصناعية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 418",
+   "ar_code": "",
+   "en": "Hydrographic Surveying",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SE 419",
+   "ar_code": "",
+   "en": "Advanced Geodesy",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SE 422",
+   "ar_code": "همس 422",
+   "en": "Advanced Photogrammetry",
+   "ar": "المساحة التصويرية المتقدمة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 423",
+   "ar_code": "همس 423",
+   "en": "Digital Image Processing",
+   "ar": "تحليل الصور الرقمية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 431",
+   "ar_code": "",
+   "en": "Computer Applications in Surveying Engineering",
+   "ar": "",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 453",
+   "ar_code": "همس 453",
+   "en": "Cartography and Geographic Information Systems",
+   "ar": "علم الخرائط ونظم المعلومات الجغرافية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 464",
+   "ar_code": "همس 464",
+   "en": "Introduction to Digital Photogrammetry",
+   "ar": "مقدمة للمساحة التصويرية الرقمية",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SE 466",
+   "ar_code": "همس 466",
+   "en": "Spatial Analysis in Geographic Information Systems",
+   "ar": "التحليل المكاني في نظم المعلومات الجغرافية",
+   "h": 4,
+   "lab": true
+  },
+  {
+   "code": "SE 467",
+   "ar_code": "",
+   "en": "Web GIS",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "SE 471",
+   "ar_code": "همس 471",
+   "en": "Survey Camp",
+   "ar": "معسكر المساحة",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 473",
+   "ar_code": "همس 473",
+   "en": "Professional & Legal Aspects of Surveying",
+   "ar": "المساحة المهنية والقانونية",
+   "h": 3,
+   "lab": true
+  },
+  {
+   "code": "SE 496",
+   "ar_code": "همس 496",
+   "en": "Graduation Project -1",
+   "ar": "مشروع تخرج-1",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SE 497",
+   "ar_code": "همس 497",
+   "en": "Graduation Project -2",
+   "ar": "مشروع تخرج-2",
+   "h": 2,
+   "lab": false
+  },
+  {
+   "code": "SE 998",
+   "ar_code": "همس 998",
+   "en": "Research Project",
+   "ar": "مشروع بحثي",
+   "h": 0,
+   "lab": false
+  },
+  {
+   "code": "SE 999",
+   "ar_code": "همس 999",
+   "en": "Practical Training",
+   "ar": "تدريب عملي",
+   "h": 1,
+   "lab": false
+  },
+  {
+   "code": "STAT 101",
+   "ar_code": "احص 101",
+   "en": "Introduction to Statistics",
+   "ar": "مقدمة في الإحصاء",
+   "h": 3,
+   "lab": false
+  },
+  {
+   "code": "STAT 150",
+   "ar_code": "",
+   "en": "Introduction to Statistics",
+   "ar": "",
+   "h": 3,
+   "lab": false
+  }
+ ],
+ "programs": [
+  {
+   "id": "ee",
+   "ar": "الهندسة الكهربائية",
+   "en": "Electrical Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 9
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 8
+    },
+    {
+     "code": "GE 211",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "EE 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "EE 203",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "EE 208",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "EE 210",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "EE 202",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 204",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 205",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 301",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 310",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 312",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 302",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 320",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 330",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 340",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 353",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 357",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 351",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "EE 356",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "EE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "EE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "EE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "EE 998",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "EE 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 406",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 421",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 457",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 459",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 400",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 403",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 404",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 405",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 407",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 408",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 409",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 410",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 415",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 419",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 420",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 422",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 423",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 425",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 430",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 441",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 444",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 448",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 449",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 458",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 463",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 468",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 469",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 470",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 479",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "EE 483",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "che",
+   "ar": "الهندسة الكيميائية",
+   "en": "Chemical Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "GE 209",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "CHEM 230",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 244",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHEM 245",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHEM 350",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHE 205",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHE 219",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHE 202",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHE 206",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHE 234",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHE 333",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHE 334",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHE 335",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHE 320",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CHE 366",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 406",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 409",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 426",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 336",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CHE 412",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CHE 415",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CHE 423",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CHE 420",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CHE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "CHE 466",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "CHE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "CHE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "CHE 998",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "CHE 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 422",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 425",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 428",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 430",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 434",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 437",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 438",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 440",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 441",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 442",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 447",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 448",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 449",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CHE 467",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "ie",
+   "ar": "الهندسة الصناعية",
+   "en": "Industrial Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 3
+    },
+    {
+     "code": "GE 211",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MATH 244",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "IE 214",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IE 222",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IE 251",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "IE 314",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IE 322",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IE 333",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IE 337",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IE 252",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "IE 339",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IE 341",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IE 352",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IE 360",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "IE 420",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IE 438",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IE 342",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IE 449",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IE 361",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "IE 405",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "IE 450",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "IE 462",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "IE 469",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "IE 461",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "IE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "IE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "IE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "IE 998",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "IE 480",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 488",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 489",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 490",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "IE 491",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "cive",
+   "ar": "الهندسة المدنية",
+   "en": "Civil Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "GE 202",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 209",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "CE 320",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CE 302",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CE 305",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "GEO 281",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CE 324",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 325",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 360",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 306",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 382",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 380",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SE 212",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 370",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 481",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 430",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 447",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 424",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 448",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CE 443",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CE 431",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "CE 432",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ARCH 239",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CE 419",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CE 483",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "CE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "CE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "CE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "CE 998",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 470",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 464",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 468",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 473",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 475",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 477",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 478",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 479",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 484",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 486",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 488",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 489",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 423",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 425",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 426",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 427",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 428",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 429",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 444",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 445",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 446",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 449",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 450",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 435",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 436",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 437",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 438",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 439",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 411",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 415",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "surv",
+   "ar": "الهندسة المساحية",
+   "en": "Surveying Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 9
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "GE 209",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 202",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "CE 302",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "SE 212",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CE 323",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "EE 329",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "GEO 281",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SE 312",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SE 314",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "SE 321",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CE 334",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SE 315",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SE 331",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SE 365",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "CE 363",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "SE 413",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "SE 422",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "SE 423",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "SE 453",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "SE 466",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "SE 471",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "SE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "SE 464",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "SE 473",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "SE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "SE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "SE 998",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "SE 418",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SE 467",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SE 419",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "SE 431",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "GEO 301",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "PL 442",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 411",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "CE 412",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "me",
+   "ar": "الهندسة الميكانيكية",
+   "en": "Mechanical Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "QURN 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 9
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 6
+    },
+    {
+     "code": "GE 202",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 211",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "ME 371",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ME 254",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ME 201",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "ME 352",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ME 384",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ME 377",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ME 363",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "ME 312",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ME 304",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ME 378",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "EE 308",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ME 321",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "ME 313",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ME 305",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ME 322",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ME 365",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ME 379",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "ME 323",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "ME 366",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "ME 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "ME 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "ME 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "ME 998",
+     "kind": "elective",
+     "level": 10
+    },
+    {
+     "code": "ME 402",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 404",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 405",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 406",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 408",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 409",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 411",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 412",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 413",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 414",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 415",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 431",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 432",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 433",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 443",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 444",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 451",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 452",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 453",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 454",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 455",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 456",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 460",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 462",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 465",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 466",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 467",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 468",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 469",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 472",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 473",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 474",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 475",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 476",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 477",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 478",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 479",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 481",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 482",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 483",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 485",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 487",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 493",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "ME 494",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "pete",
+   "ar": "هندسة البترول والغاز الطبيعي",
+   "en": "Petroleum and Natural Gas Engineering",
+   "courses": [
+    {
+     "code": "ENGS 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ARAB 100",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENGS 110",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CUR 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "EPH 101",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 100",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "PHYS 103",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 106",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 107",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "ENGL 109",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "GE 104",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 104",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "ENGL 110",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 106",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 201",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "GE 203",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "MATH 204",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "GE 402",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "GE 403",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "MATH 254",
+     "kind": "college",
+     "level": 6
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": 7
+    },
+    {
+     "code": "GE 209",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "ME 340",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "CHE 312",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PGE 251",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "PGE 361",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "CHE 304",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PGE 362",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PGE 363",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PGE 391",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "PGE 490",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PGE 460",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PGE 366",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PGE 471",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "PGE 492",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 474",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 481",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 464",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 485",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 494",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 457",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "PGE 455",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 476",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 493",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 484",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 482",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 450",
+     "kind": "major",
+     "level": 9
+    },
+    {
+     "code": "PGE 496",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "PGE 491",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PGE 486",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PGE 478",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PGE 467",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "PGE 497",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "PGE 999",
+     "kind": "training",
+     "level": 10
+    },
+    {
+     "code": "PGE 998",
+     "kind": "elective",
+     "level": 10
+    }
+   ]
+  },
+  {
+   "id": "aee",
+   "ar": "الهندسة الكهربائية التطبيقية",
+   "en": "Applied Electrical Engineering",
+   "courses": [
+    {
+     "code": "ENG 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 150",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CUR 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "COM 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IT 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "MATH 1110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 1120",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 1211",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGE 1310",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGE 1510",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 1130",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 1221",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 1320",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 2410",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 1330",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 2320",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MATH 2140",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "AGE 4530",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "AGE 4560",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "AGE 2340",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "AGE 4540",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "AGE 3351",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "AGE 4551",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "AEE 2110",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AEE 3510",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AEE 3760",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AEE 2120",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AEE 2130",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AEE 2410",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AEE 2710",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AEE 2310",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AEE 3140",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3210",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3421",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3721",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3730",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3221",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3610",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AEE 3430",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 3520",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 3240",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 3741",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 3750",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AEE 4610",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "AEE 4910",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "AEE 4920",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "AEE 4931",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "AEE 4940",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "AEE 4110",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4120",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4130",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4210",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4220",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4230",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4310",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4320",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4410",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4420",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4510",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4520",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4950",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AEE 4960",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  },
+  {
+   "id": "ame",
+   "ar": "الهندسة الميكانيكية التطبيقية",
+   "en": "Applied Mechanical Engineering",
+   "courses": [
+    {
+     "code": "ENG 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "MATH 150",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENT 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CHEM 101",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "CUR 140",
+     "kind": "common",
+     "level": 1
+    },
+    {
+     "code": "ENG 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "COM 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IT 140",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "STAT 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "CHS 150",
+     "kind": "common",
+     "level": 2
+    },
+    {
+     "code": "IC 101",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 102",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 103",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 104",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 105",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 106",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 107",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 108",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "IC 109",
+     "kind": "common",
+     "level": null
+    },
+    {
+     "code": "MATH 1110",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 1120",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "PHYS 1211",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGE 1310",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "AGE 1510",
+     "kind": "college",
+     "level": 3
+    },
+    {
+     "code": "MATH 1130",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "PHYS 1221",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 1320",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 2410",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 1330",
+     "kind": "college",
+     "level": 4
+    },
+    {
+     "code": "AGE 2320",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "MATH 2140",
+     "kind": "college",
+     "level": 5
+    },
+    {
+     "code": "AGE 4530",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "AGE 4560",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "AGE 2340",
+     "kind": "college",
+     "level": 7
+    },
+    {
+     "code": "AGE 3351",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "AGE 4540",
+     "kind": "college",
+     "level": 8
+    },
+    {
+     "code": "AGE 4551",
+     "kind": "college",
+     "level": 10
+    },
+    {
+     "code": "AME 2510",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AME 2310",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AME 2211",
+     "kind": "major",
+     "level": 5
+    },
+    {
+     "code": "AME 2110",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AME 2710",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AME 3620",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AME 3320",
+     "kind": "major",
+     "level": 6
+    },
+    {
+     "code": "AME 3330",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AME 3610",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AME 3810",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AME 3121",
+     "kind": "major",
+     "level": 7
+    },
+    {
+     "code": "AME 3010",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AME 3720",
+     "kind": "major",
+     "level": 8
+    },
+    {
+     "code": "AME 4730",
+     "kind": "major",
+     "level": 10
+    },
+    {
+     "code": "AME 4910",
+     "kind": "training",
+     "level": null
+    },
+    {
+     "code": "AME 4920",
+     "kind": "training",
+     "level": 9
+    },
+    {
+     "code": "AME 4931",
+     "kind": "project",
+     "level": 9
+    },
+    {
+     "code": "AME 4940",
+     "kind": "project",
+     "level": 10
+    },
+    {
+     "code": "AME 4020",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4030",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4040",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4050",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4130",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4140",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4150",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4420",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4430",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4440",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4520",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4530",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4620",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4630",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4750",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4760",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4770",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4820",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4830",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4840",
+     "kind": "elective",
+     "level": null
+    },
+    {
+     "code": "AME 4950",
+     "kind": "elective",
+     "level": null
+    }
+   ]
+  }
+ ]
+}
