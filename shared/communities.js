@@ -31,12 +31,12 @@
              org: { ar: r[5], en: r[6] }, tag: { ar: r[7], en: r[8] }, aliases: r[9],
              a: r[10], b: r[11], acc: r[12], soon: 1 };
   }
-  /* جامعة قادمة: [id, ar, en, orgAr, orgEn, cityAr, cityEn, aliases, a, b, acc, logo, mark, mono, wide, private]
+  /* جامعة قادمة: [id, ar, en, orgAr, orgEn, cityAr, cityEn, aliases, a, b, acc, logo, mark, mono, wide, private, country(SA)]
      الشعار من موقع الجامعة أو ويكيميديا (المصادر في assets/brand/unis/sa/README.md)، والرمز قص viewBox منه.
      وبلا شعار: اسمها المختصر علامة مائية */
   function uni(r) {
     var short = r[1].replace(/^(الجامعة|جامعة)\s+/, '');
-    var c = { id: r[0], ar: r[1], en: r[2], kind: 'uni', country: SA, city: { ar: r[5], en: r[6] },
+    var c = { id: r[0], ar: r[1], en: r[2], kind: 'uni', country: r[16] || SA, city: { ar: r[5], en: r[6] },
               org: { ar: r[3], en: r[4] }, aliases: r[7], a: r[8], b: r[9], acc: r[10], soon: 1,
               tag: { ar: short, en: r[2] } };
     if (r[11]) c.logo = r[11];
@@ -111,6 +111,67 @@
     ["nu", "جامعة نجران", "Najran University", "جامعة نجران", "Najran University", "نجران", "Najran", ["NU", "جامعة نجران"], "#3b2a1a", "#7a5530", "#d9b36c", "", "", 1, 0, 0]
     /* UNIS-SA:END */
   ].map(uni)).concat([
+    /* ===== جامعات مصر (حكومية وأهلية وخاصة) — قائمة ويكيبيديا للجامعات المصرية، وما ينقصها من الحكومية ===== */
+    /* UNIS-EG:BEGIN */
+    ["aswu", "جامعة أسوان", "Aswan University", "جامعة أسوان", "Aswan University", "أسوان", "Aswan", ["ASWU", "اسوان"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 0, "EG"],
+    ["aun", "جامعة أسيوط", "Assiut University", "جامعة أسيوط", "Assiut University", "أسيوط", "Assiut", ["AUN", "اسيوط"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 0, "EG"],
+    ["luxor", "جامعة الأقصر", "Luxor University", "جامعة الأقصر", "Luxor University", "الأقصر", "Luxor", ["الاقصر"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 0, "EG"],
+    ["aast", "الأكاديمية العربية للعلوم والتكنولوجيا", "AASTMT", "الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري", "Arab Academy for Science, Technology and Maritime Transport", "الإسكندرية", "Alexandria", ["AASTMT", "الاكاديمية البحرية", "الاكاديمية العربية"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 1, "EG"],
+    ["alexu", "جامعة الإسكندرية", "Alexandria University", "جامعة الإسكندرية", "Alexandria University", "الإسكندرية", "Alexandria", ["ALEXU", "اسكندرية"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 0, "EG"],
+    ["anu", "جامعة الإسكندرية الأهلية", "Alexandria National University", "جامعة الإسكندرية الأهلية", "Alexandria National University", "الإسكندرية", "Alexandria", ["ANU", "اهلية"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 0, "EG"],
+    ["pua", "جامعة فاروس", "Pharos University", "جامعة فاروس بالإسكندرية", "Pharos University in Alexandria", "الإسكندرية", "Alexandria", ["PUA", "فاروس"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 1, "EG"],
+    ["scu", "جامعة قناة السويس", "Suez Canal University", "جامعة قناة السويس", "Suez Canal University", "الإسماعيلية", "Ismailia", ["SCU", "قناة السويس"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 0, "EG"],
+    ["galala", "جامعة الجلالة", "Galala University", "جامعة الجلالة", "Galala University", "الجلالة", "Galala", ["GU", "الجلالة", "اهلية"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 0, "EG"],
+    ["eelu", "الجامعة المصرية للتعلم الإلكتروني", "Egyptian E-Learning University", "الجامعة المصرية للتعلم الإلكتروني الأهلية", "Egyptian E-Learning University", "الجيزة", "Giza", ["EELU", "التعلم الالكتروني"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 0, "EG"],
+    ["cu", "جامعة القاهرة", "Cairo University", "جامعة القاهرة", "Cairo University", "الجيزة", "Giza", ["CU", "القاهرة", "Cairo"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 0, "EG"],
+    ["ngu", "جامعة نيو جيزة", "Newgiza University", "جامعة نيو جيزة", "Newgiza University", "الجيزة", "Giza", ["NGU", "نيوجيزة"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 1, "EG"],
+    ["nvu", "جامعة الوادي الجديد", "New Valley University", "جامعة الوادي الجديد", "New Valley University", "الخارجة", "Kharga", ["NVU", "الوادي الجديد"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 0, "EG"],
+    ["zu", "جامعة الزقازيق", "Zagazig University", "جامعة الزقازيق", "Zagazig University", "الزقازيق", "Zagazig", ["ZU", "الزقازيق"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 0, "EG"],
+    ["o6u", "جامعة 6 أكتوبر", "October 6 University", "جامعة 6 أكتوبر", "October 6 University", "السادس من أكتوبر", "6th of October", ["O6U", "ستة اكتوبر", "سته اكتوبر"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 1, "EG"],
+    ["msa", "جامعة أكتوبر للعلوم الحديثة والآداب", "MSA University", "جامعة أكتوبر للعلوم الحديثة والآداب", "October University for Modern Sciences and Arts", "السادس من أكتوبر", "6th of October", ["MSA", "ام اس ايه"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 1, "EG"],
+    ["acu", "جامعة الأهرام الكندية", "Ahram Canadian University", "جامعة الأهرام الكندية", "Ahram Canadian University", "السادس من أكتوبر", "6th of October", ["ACU", "الاهرام الكندية"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 1, "EG"],
+    ["must", "جامعة مصر للعلوم والتكنولوجيا", "MUST", "جامعة مصر للعلوم والتكنولوجيا", "Misr University for Science and Technology", "السادس من أكتوبر", "6th of October", ["MUST"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 1, "EG"],
+    ["zewail", "مدينة زويل", "Zewail City", "مدينة زويل للعلوم والتكنولوجيا والابتكار", "Zewail City of Science, Technology and Innovation", "السادس من أكتوبر", "6th of October", ["زويل", "Zewail"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 0, "EG"],
+    ["suezu", "جامعة السويس", "Suez University", "جامعة السويس", "Suez University", "السويس", "Suez", ["السويس"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 0, "EG"],
+    ["bue", "الجامعة البريطانية في مصر", "British University in Egypt", "الجامعة البريطانية في مصر", "The British University in Egypt", "الشروق", "El Shorouk", ["BUE", "البريطانية"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 1, "EG"],
+    ["ufe", "الجامعة الفرنسية في مصر", "French University of Egypt", "الجامعة الفرنسية في مصر", "Université Française d'Égypte", "الشروق", "El Shorouk", ["UFE", "الفرنسية"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 1, "EG"],
+    ["nileu", "جامعة النيل", "Nile University", "جامعة النيل الأهلية", "Nile University", "الشيخ زايد", "Sheikh Zayed", ["NU", "النيل"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 0, "EG"],
+    ["arish", "جامعة العريش", "Arish University", "جامعة العريش", "Arish University", "العريش", "Arish", ["العريش"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 0, "EG"],
+    ["sinai", "جامعة سيناء", "Sinai University", "جامعة سيناء", "Sinai University", "العريش", "Arish", ["سيناء"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 1, "EG"],
+    ["aiu", "جامعة العلمين الدولية", "Alamein International University", "جامعة العلمين الدولية للعلوم والتكنولوجيا", "Alamein International University", "العلمين", "El Alamein", ["AIU", "العلمين", "اهلية"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 0, "EG"],
+    ["fu_eg", "جامعة الفيوم", "Fayoum University", "جامعة الفيوم", "Fayoum University", "الفيوم", "Faiyum", ["FU", "الفيوم", "Faiyum"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 0, "EG"],
+    ["aou_eg", "الجامعة العربية المفتوحة", "Arab Open University", "الجامعة العربية المفتوحة (فرع مصر)", "Arab Open University – Egypt", "القاهرة", "Cairo", ["AOU"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 1, "EG"],
+    ["azhar", "جامعة الأزهر", "Al-Azhar University", "جامعة الأزهر الشريف", "Al-Azhar University", "القاهرة", "Cairo", ["AZU", "الأزهر", "Azhar"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 0, "EG"],
+    ["capu", "جامعة العاصمة", "Capital University", "جامعة العاصمة (جامعة حلوان سابقا)", "Capital University (formerly Helwan University)", "القاهرة", "Cairo", ["حلوان", "جامعة حلوان", "Helwan", "Helwan University", "العاصمة"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 0, "EG"],
+    ["asu", "جامعة عين شمس", "Ain Shams University", "جامعة عين شمس", "Ain Shams University", "القاهرة", "Cairo", ["ASU", "عين شمس"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 0, "EG"],
+    ["miu", "جامعة مصر الدولية", "Misr International University", "جامعة مصر الدولية", "Misr International University", "القاهرة", "Cairo", ["MIU"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 1, "EG"],
+    ["heliopolis", "جامعة هليوبوليس", "Heliopolis University", "جامعة هليوبوليس للتنمية المستدامة", "Heliopolis University for Sustainable Development", "القاهرة", "Cairo", ["HU", "هليوبوليس"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 1, "EG"],
+    ["guc", "الجامعة الألمانية بالقاهرة", "German University in Cairo", "الجامعة الألمانية بالقاهرة", "German University in Cairo", "القاهرة الجديدة", "New Cairo", ["GUC", "الالمانية"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 1, "EG"],
+    ["auc", "الجامعة الأمريكية بالقاهرة", "The American University in Cairo", "الجامعة الأمريكية بالقاهرة", "The American University in Cairo", "القاهرة الجديدة", "New Cairo", ["AUC", "الامريكية"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 1, "EG"],
+    ["fue", "جامعة المستقبل في مصر", "Future University in Egypt", "جامعة المستقبل في مصر", "Future University in Egypt", "القاهرة الجديدة", "New Cairo", ["FUE", "المستقبل"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 1, "EG"],
+    ["mans", "جامعة المنصورة", "Mansoura University", "جامعة المنصورة", "Mansoura University", "المنصورة", "Mansoura", ["MANS", "المنصورة"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 0, "EG"],
+    ["nmu", "جامعة المنصورة الجديدة", "New Mansoura University", "جامعة المنصورة الجديدة", "New Mansoura University", "المنصورة الجديدة", "New Mansoura", ["NMU", "اهلية"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 0, "EG"],
+    ["lotus", "جامعة اللوتس", "Lotus University", "جامعة اللوتس بالمنيا", "Lotus University in Minya", "المنيا", "Minya", ["اللوتس"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 1, "EG"],
+    ["minia", "جامعة المنيا", "Minia University", "جامعة المنيا", "Minia University", "المنيا", "Minya", ["المنيا", "Minya"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 0, "EG"],
+    ["ejust", "الجامعة المصرية اليابانية", "E-JUST", "الجامعة المصرية اليابانية للعلوم والتكنولوجيا", "Egypt-Japan University of Science and Technology", "برج العرب", "Borg El Arab", ["EJUST", "E-JUST", "اليابانية"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 0, "EG"],
+    ["benha", "جامعة بنها", "Benha University", "جامعة بنها", "Benha University", "بنها", "Benha", ["BU", "بنها", "Banha"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 0, "EG"],
+    ["nub", "جامعة النهضة", "Nahda University", "جامعة النهضة", "Nahda University in Beni Suef", "بني سويف", "Beni Suef", ["NUB", "النهضة"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 1, "EG"],
+    ["bsu", "جامعة بني سويف", "Beni-Suef University", "جامعة بني سويف", "Beni-Suef University", "بني سويف", "Beni Suef", ["BSU", "بني سويف"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 0, "EG"],
+    ["psu_eg", "جامعة بورسعيد", "Port Said University", "جامعة بورسعيد", "Port Said University", "بورسعيد", "Port Said", ["PSU", "بورسعيد", "بور سعيد"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 0, "EG"],
+    ["dust", "جامعة الدلتا", "Delta University", "جامعة الدلتا للعلوم والتكنولوجيا", "Delta University for Science and Technology", "جمصة", "Gamasa", ["DUST", "الدلتا"], "#142f36", "#2a6c7a", "#b8e2ea", "", "", 0, 0, 1, "EG"],
+    ["dmu", "جامعة دمنهور", "Damanhour University", "جامعة دمنهور", "Damanhour University", "دمنهور", "Damanhour", ["DMU", "دمنهور"], "#3b1a1a", "#8a3434", "#f0c0b8", "", "", 0, 0, 0, "EG"],
+    ["du", "جامعة دمياط", "Damietta University", "جامعة دمياط", "Damietta University", "دمياط", "Damietta", ["دمياط"], "#1a3326", "#2f7550", "#bfe8cf", "", "", 0, 0, 0, "EG"],
+    ["sohag", "جامعة سوهاج", "Sohag University", "جامعة سوهاج", "Sohag University", "سوهاج", "Sohag", ["سوهاج"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 0, "EG"],
+    ["menofia", "جامعة المنوفية", "Menoufia University", "جامعة المنوفية", "Menoufia University", "شبين الكوم", "Shibin El Kom", ["المنوفية", "Menofia"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 0, "EG"],
+    ["ksiu", "جامعة الملك سلمان الدولية", "King Salman International University", "جامعة الملك سلمان الدولية", "King Salman International University", "شرم الشيخ", "Sharm El Sheikh", ["KSIU", "الملك سلمان", "اهلية"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 0, "EG"],
+    ["tanta", "جامعة طنطا", "Tanta University", "جامعة طنطا", "Tanta University", "طنطا", "Tanta", ["TU", "طنطا"], "#262b30", "#4c5866", "#d0d8e0", "", "", 0, 0, 0, "EG"],
+    ["svu", "جامعة جنوب الوادي", "South Valley University", "جامعة جنوب الوادي", "South Valley University", "قنا", "Qena", ["SVU", "جنوب الوادي", "قنا"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 0, "EG"],
+    ["kfs", "جامعة كفر الشيخ", "Kafrelsheikh University", "جامعة كفر الشيخ", "Kafrelsheikh University", "كفر الشيخ", "Kafr El Sheikh", ["KFS", "كفر الشيخ"], "#3a2c14", "#86652a", "#f0dcb0", "", "", 0, 0, 0, "EG"],
+    ["usc", "جامعة مدينة السادات", "University of Sadat City", "جامعة مدينة السادات", "University of Sadat City", "مدينة السادات", "Sadat City", ["USC", "السادات"], "#14233d", "#2d4f86", "#b8cdf0", "", "", 0, 0, 0, "EG"],
+    ["eru", "الجامعة المصرية الروسية", "Egyptian Russian University", "الجامعة المصرية الروسية", "Egyptian Russian University", "مدينة بدر", "Badr City", ["ERU", "الروسية"], "#33162a", "#7a2f62", "#f0bfe0", "", "", 0, 0, 1, "EG"],
+    ["matrouh", "جامعة مطروح", "Matrouh University", "جامعة مطروح", "Matrouh University", "مرسى مطروح", "Marsa Matruh", ["مطروح"], "#2e2238", "#614a86", "#d6c6f0", "", "", 0, 0, 0, "EG"]
+    /* UNIS-EG:END */
+  ].map(uni)).concat([
     /* ===== المراحل الدراسية ===== */
     ['thanawi', 'الثانوية', 'Thanawi', 'stage', SA, 'المرحلة الثانوية: المسار العام والمسارات التخصصية', 'Saudi secondary school (General and specialised tracks)', 'ثانوي', 'Thanawi', ['ثانوي', 'ثالث ثانوي', 'المسارات', 'High School', 'Secondary'], '#1d4a2e', '#3c8a55', '#cfe9b4'],
     ['mutawasit', 'المتوسطة', 'Mutawasit', 'stage', SA, 'المرحلة المتوسطة', 'Saudi intermediate school', 'متوسط', 'Mutawasit', ['متوسط', 'Middle School', 'Intermediate'], '#2c4a1d', '#5e8a3c', '#e4e9b4'],
@@ -171,6 +232,7 @@
   });
   window.AC_COUNTRIES = {
     SA:   { ar: 'السعودية', en: 'Saudi Arabia' },
+    EG:   { ar: 'مصر', en: 'Egypt' },
     GB:   { ar: 'بريطانيا', en: 'United Kingdom' },
     INTL: { ar: 'دولي', en: 'International' }
   };
