@@ -231,6 +231,7 @@
     .cs-meta  { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-height: 22px; margin-bottom: 2px; }
     .cs-count { font-size: 12.5px; color: var(--c-ink-soft); }
     .cs-acts  { display: flex; flex-wrap: wrap; gap: 6px; }
+    #cs-fp { max-width: none; max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain; }
     #cs-fp .fchips { display: flex; flex-wrap: wrap; gap: 6px; }
     #cs-fp .fchip:disabled { opacity: .4; cursor: default; }
     @media (prefers-reduced-motion: reduce) { .cs-card, .cs-wm { transition: none; } }
@@ -1258,17 +1259,19 @@
           return '<button type="button" class="fchip' + (on ? ' on' : '') + '" data-g="' + grp + '" data-v="' + esc(val) + '"' +
                  (!on && !cnt ? ' disabled' : '') + '>' + esc(label) + '<span class="fchip__n">' + cnt + '</span></button>';
         };
-        var countries = {}, cities = {};
+        var countries = {}, cities = {}, cityN = {};
         COMS.forEach(function (c) {
           if (c.country) countries[c.country] = 1;
-          if (c.city && (!CF.country || c.country === CF.country)) cities[c.city.en] = c.city;
+          if (c.city && (!CF.country || c.country === CF.country)) { cities[c.city.en] = c.city; cityN[c.city.en] = (cityN[c.city.en] || 0) + 1; }
         });
+        /* المدينةُ ظاهرةٌ دائمًا (طلبُ صاحب الموقع)، والأكثرُ مجتمعاتٍ أوّلًا؛ واختيارُ دولةٍ يحصرها في مدنها */
+        var cityKeys = Object.keys(cities).sort(function (x, y) { return cityN[y] - cityN[x] || cities[x][L].localeCompare(cities[y][L], L); });
         var C = window.AC_COUNTRIES || {};
         var h = '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Country' : 'الدولة') + '</p><div class="fchips">' +
           Object.keys(countries).map(function (k) { return chip('country', k, C[k] ? C[k][L] : k); }).join('') + '</div></div>';
-        if (CF.country && Object.keys(cities).length) {
+        if (cityKeys.length) {
           h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'City' : 'المدينة') + '</p><div class="fchips">' +
-            Object.keys(cities).map(function (k) { return chip('city', k, cities[k][L]); }).join('') + '</div></div>';
+            cityKeys.map(function (k) { return chip('city', k, cities[k][L]); }).join('') + '</div></div>';
         }
         h += '<div class="fgroup"><p class="fgroup__t">' + (i ? 'Type' : 'النوع') + '</p><div class="fchips">' +
           KINDS.map(function (k) { return chip('kind', k[0], k[1][L]); }).join('') +
@@ -1293,6 +1296,8 @@
         });
         fb.addEventListener('click', function (e) {
           e.stopPropagation(); fp.hidden = !fp.hidden; fb.setAttribute('aria-expanded', String(!fp.hidden));
+          /* بعرض منطقة المحتوى لا الشاشة: على الجوال لا يدخل تحت الشريط الجانبي */
+          if (!fp.hidden) fp.style.width = Math.min(560, fb.closest('.cs-tools').clientWidth) + 'px';
         });
         fp.addEventListener('click', function (e) {
           e.stopPropagation();
