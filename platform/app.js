@@ -11139,7 +11139,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sp = post && post.querySelector('.post-ytmain > .pk-split');
       if (!sp || sp.classList.contains('pk-split--none')) { bkScrThawAll(); return; }
       post.pkMidRun = true;
-      const D = closing ? PKFX.OUT * .62 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];
+      const D = closing ? PKFX.IN * .85 : PKFX.IN, ez = 'cubic-bezier(.2, .8, .2, 1)', an = [];   /* (الخروجُ حركةٌ واحدةٌ للجارين — عرضًا وقامةً معًا — فمدّتُه قريبةٌ من الدخول) */
       /* والمتّسعةُ في موضعها (قامتُها من محتواها): قامتُها تنتقل بنعومة — شريطُ المجلدات وسقفُ الـT يُضافان أو يُطرحان دفعةً */
       if (post.classList.contains('pk--framepub')) {
         const cardH1 = post.getBoundingClientRect().height;
@@ -11221,11 +11221,10 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sides = [sp0.querySelector(':scope > .pk-src'), sp0.querySelector(':scope > .pk-bank')].filter(Boolean);
       const gp = parseFloat(getComputedStyle(sp0).columnGap) || 14, sw = R(sp0).width, wF = (sw - gp * (sides.length - 1)) / sides.length;
       const ws = sides.map(x => R(x).width), kw = k.width, kcs = getComputedStyle(kv0);
-      sides.forEach((x, i) => { x.style.boxSizing = 'border-box';
-        x.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: ws[i] + 'px' }, { flexGrow: 0, flexShrink: 0, flexBasis: wF + 'px' }], { duration: D, easing: cz, fill: 'forwards' }); });
-      kv0.style.boxSizing = 'border-box'; kv0.style.overflow = 'hidden';
-      kv0.animate([{ flexGrow: 0, flexShrink: 0, flexBasis: kw + 'px', marginLeft: '0px', minWidth: '0px', paddingLeft: kcs.paddingLeft, paddingRight: kcs.paddingRight },
-        { flexGrow: 0, flexShrink: 0, flexBasis: '0px', marginLeft: -gp + 'px', minWidth: '0px', paddingLeft: '0px', paddingRight: '0px' }], { duration: D, easing: cz, fill: 'forwards' });
+      /* (طلبُ صاحب الموقع: «لما اقفلها فيه jumps بمساحة المصادر») كان الجاران يتّسعان هنا في ‎170ms‎ (قفزاتٌ بـ‎275px‎ في الإطار)،
+         ثمّ يقفان والمساهمةُ تُرسم (‎~140ms‎)، ثمّ يصعدان مع ذهاب شريط المجلدات — حركتان بينهما وقفة. فالآن العمودُ وحده يصعد
+         إلى السقف هنا، والجاران ساكنان؛ ويتّسعان ويصعدان معًا في حركةٍ واحدة بعد الرسم (‎run‎) كما في الدخول */
+      void sides; void wF; void ws; void kw; void kcs; void cz;
       const t0 = performance.now();
       return new Promise(res => {
         const step = now => {
@@ -30657,26 +30656,37 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      وحده (على كرت الشاشة) حول أعلى منتصف المساحة — وهو ما يُثبّته ‎bkScrFitW‎ حين يتغيّر المقاس — فتصل إلى مقاس الصفحة الأخير
      نفسِه. والقائمةُ مخفيّةٌ ثابتةٌ لا تُقاس، وتعود في آخر الحركة على مقاسها الجديد ومكانِ القراءة نفسِه */
   const bkFrzSet = new Set();
+  /* (بعد طلب صاحب الموقع: «بعد ما تتصغر الصفحات تكون مرتفعة شوي ثم تنزل بjump»)
+     كانت اللقطةُ صورةً واحدةً تُحجَّم كلُّها — فتصغر معها الفُرَجُ بين الصفحات وما فوق أولاها، وهي في القائمة الحقيقيّة بالبكسل
+     ثابتة؛ فتعلو الصفحاتُ في الحركة ثمّ تنزل حين تعود القائمة. فالآن كلُّ صفحةٍ ظاهرةٍ لقطةٌ وحدها، ومكانُها في كلّ إطار يُحسب
+     كما ستضعه القائمةُ نفسُها: صفحاتٌ بالمقاس الجديد وفُرَجٌ ثابتة، ومكانُ القراءة كما يثبّته ‎bkScrFitW‎ (الصفحةُ التي في أعلى
+     النظر وموضعُه منها، ولا تمريرَ دون الصفر) */
   function bkScrFrz(root) {
     if (!root || bkReduce()) return;
     root.querySelectorAll('.pk-src__view.is-scr').forEach(v => {
       const b = v.pkBk; if (!b || !b.scroll || !b.scr || !b.scrOv || b.frz || b.zg || (b.scrZ || 1) !== 1) return;
       const sc = b.scr, R = sc.getBoundingClientRect(), f0 = sc.bkFW || b.scrFW; if (!R.width || !R.height || !f0) return;
-      const ext = R.height, H = R.height + ext;   /* (وما تحت المرئيّ بقدره: المساحةُ إن قصرت صفحاتُها ظهر ما تحتها) */
-      const d = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement('canvas');
-      cv.width = Math.round(R.width * d); cv.height = Math.round(H * d);
-      const x = cv.getContext('2d'); x.scale(d, d);
-      for (const el of sc.querySelectorAll('.cbk-scr__pg')) {
-        const q = el.getBoundingClientRect(); if (q.bottom < R.top || q.top > R.top + H) continue;
-        const X = q.left - R.left, Y = q.top - R.top, c = el.querySelector(':scope > canvas:not(.cbk-thumb)') || el.querySelector(':scope > canvas');
-        x.save(); x.shadowColor = 'rgba(0, 0, 0, .28)'; x.shadowBlur = 14; x.shadowOffsetY = 4; x.fillStyle = '#fff'; x.fillRect(X, Y, q.width, q.height); x.restore();
-        if (c && c.width) { try { x.drawImage(c, X, Y, q.width, q.height); } catch (e) {} }
-      }
+      const all = [...sc.querySelectorAll('.cbk-scr__pg')]; if (!all.length) return;
+      const P = all[0].offsetTop, h0 = all[0].offsetHeight, g = all.length > 1 ? all[1].offsetTop - P - h0 : 14, s0 = sc.scrollTop;
+      if (!h0) return;
+      const H = R.height * 2;   /* (وما تحت المرئيّ بقدره: المساحةُ إن قصرت صفحاتُها ظهر ما تحتها) */
       const wrap = document.createElement('div'); wrap.className = 'cbk-frz'; wrap.setAttribute('aria-hidden', 'true');
-      Object.assign(cv.style, { position: 'absolute', top: '0px', width: R.width + 'px', height: H + 'px', transformOrigin: '50% 0', willChange: 'transform' });
-      wrap.appendChild(cv); v.appendChild(wrap);
-      b.frz = { wrap, cv, w0: R.width, f0 };
-      sc.style.visibility = 'hidden'; b.scrOv.style.visibility = 'hidden';
+      const pgs = [];
+      all.forEach((el, i) => {
+        const y = P + i * (h0 + g); if (y + h0 < s0 || y > s0 + H) return;
+        const box = document.createElement('div'); box.className = 'cbk-frz__pg';
+        Object.assign(box.style, { width: f0 + 'px', height: h0 + 'px' });
+        const c = el.querySelector(':scope > canvas:not(.cbk-thumb)') || el.querySelector(':scope > canvas');
+        if (c && c.width) { const nc = document.createElement('canvas'); nc.width = c.width; nc.height = c.height; try { nc.getContext('2d').drawImage(c, 0, 0); } catch (e) {} box.appendChild(nc); }
+        wrap.appendChild(box); pgs.push({ i, box });
+      });
+      v.appendChild(wrap);
+      let T = 0; while (T < all.length - 1 && P + T * (h0 + g) + h0 <= s0 + 1) T++;
+      b.frz = { wrap, pgs, f0, h0, g, P, T, off: (s0 - (P + T * (h0 + g))) / h0 };
+      sc.style.visibility = 'hidden';
+      /* وطبقتُها (حبّةُ العدد وشريطا التمرير) تخفت لا تختفي */
+      const ov = b.scrOv; if (b.ovFx) b.ovFx.cancel();
+      b.ovFx = ov.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, easing: 'ease-out', fill: 'forwards' });
       bkFrzSet.add(b);
       clearTimeout(b.frzT); b.frzT = setTimeout(() => bkScrThaw(b), 3000);   /* (أمانٌ: لا تبقى مجمَّدةً إن انقطعت الحركة) */
       bkScrFrzFrame(b);
@@ -30684,23 +30694,29 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   function bkScrFrzFrame(b) {
     const z = b.frz; if (!z) return;
-    const card = b.view && b.view.closest('.post.pk'), bp = card && card.querySelector(':scope > .pk-band path.pk-blk[data-k="book"]'), par = b.scr && b.scr.offsetParent;
-    if (!bp || !par) return;
-    let bb; try { bb = bp.getBBox(); } catch (e) { return; }
-    if (!bb || !bb.width) return;
-    const cr = card.getBoundingClientRect(), pr = par.getBoundingClientRect();
-    const left = cr.left + card.clientLeft + bb.x - pr.left - par.clientLeft, top = cr.top + card.clientTop + bb.y - pr.top - par.clientTop;
-    const fw = bkScrFitCalc(b) || z.f0, k = fw / z.f0;
+    /* من مربّع المساحة الحيّ نفسِه (‎.pk-src‎) لا من رسمتها: الرسمةُ تُثبَّت في أثناء حركة الملخّص (‎pkBlkHold‎) والمساحةُ تصعد
+       وتنزل مع شريط المجلدات — فكانت اللقطةُ تبقى مكانها ثمّ تقفز الصفحاتُ إلى المساحة في آخر الحركة (قيس: ‎~110px‎) */
+    const src = b.view && b.view.closest('.pk-src'), par = b.scr && b.scr.offsetParent;
+    if (!src || !par) return;
+    const r = src.getBoundingClientRect(); if (!r.width || !r.height) return;
+    const pr = par.getBoundingClientRect();
+    const left = r.left - pr.left - par.clientLeft, top = r.top - pr.top - par.clientTop, bb = { width: r.width, height: r.height };
+    const fw = Math.max(120, Math.floor(Math.min(r.width - 48, (r.height - 42 - 24) * (b.ar || 1 / Math.SQRT2)))), k = fw / z.f0, h = z.h0 * k;   /* (‎bkScrFitCalc‎ على المربّع الحيّ) */
     Object.assign(z.wrap.style, { left: left + 'px', top: top + 'px', width: bb.width + 'px', height: bb.height + 'px' });
-    z.cv.style.left = (bb.width - z.w0) / 2 + 'px';
-    z.cv.style.transform = `scale(${k})`;
+    const S = Math.max(0, z.P + z.T * (h + z.g) + z.off * h), x = (bb.width - fw) / 2;
+    z.pgs.forEach(q => { q.box.style.transform = `translate(${x}px, ${z.P + q.i * (h + z.g) - S}px) scale(${k})`; });
   }
   function bkScrThaw(b) {
     const z = b && b.frz; if (!z) return;
     clearTimeout(b.frzT); b.frz = null; bkFrzSet.delete(b);
-    if (b.scr) b.scr.style.visibility = ''; if (b.scrOv) b.scrOv.style.visibility = '';
+    if (b.scr) b.scr.style.visibility = '';
     if (b.scroll && b.scr && b.scr.isConnected) { b.scrFitK = ''; bkScrFit(b); bkScrFitW(b); b.scrSync && b.scrSync(); bkScrTone(b); }
     z.wrap.remove();
+    /* (طلبُ صاحب الموقع: «ظهور الbar الجانبي بديناميكية وسلاسة») شريطا التمرير وحبّةُ العدد يظهران بعد أن تستقرّ القائمة — بتلاشٍ لا دفعةً */
+    const ov = b.scrOv; if (!ov) return;
+    if (b.ovFx) b.ovFx.cancel();
+    b.ovFx = ov.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, delay: 60, easing: 'cubic-bezier(.2, .7, .3, 1)', fill: 'backwards' });
+    b.ovFx.finished.then(() => { b.ovFx = null; }, () => {});
   }
   const bkScrThawAll = () => [...bkFrzSet].forEach(bkScrThaw);
   function bkScrFit(b) {
