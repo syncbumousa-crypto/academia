@@ -33,7 +33,7 @@ import * as comments from './_h/comments.js';
 import * as admin    from './_h/admin.js';
 import * as mcp      from './_h/mcp.js';
 import { oops } from './_err.js';
-import { runCom } from './_db.js';
+import { runCom, COMS } from './_db.js';
 
 /* المسار ⇐ الوحدة. والاطول اولا حيث تشابهت الرؤوس. */
 const ROUTES = [
@@ -95,6 +95,8 @@ async function handle(request) {
   try { res = await runCom(url.searchParams.get('com') || '', () => fn(ctx)); }
   catch (e) { res = await oops('route', e, request.method + ' ' + url.pathname); }   /* ما أفلت من نقطته يُكتب كذلك */
   const out = new Response(res.body, res);
+  /* أيُّ جداولَ أجابت — يقرؤه ‎platform/com.js‎ فيردّ ما لم يأتِ من مجتمعه */
+  out.headers.set('x-com', COMS[url.searchParams.get('com')] ? url.searchParams.get('com') : 'maslakh');
   Object.keys(SEC).forEach(k => { if (!out.headers.has(k)) out.headers.set(k, SEC[k]); });
   return out;
 }

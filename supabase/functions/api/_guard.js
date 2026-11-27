@@ -47,7 +47,7 @@ export const SEC = {
      الخادم — فاللوحةُ تقول «تعذّر الوصول إلى الخادم» لكلّ من فتحها مرّةً */
   'access-control-allow-headers': 'content-type, authorization, x-as, x-alock, mcp-protocol-version, mcp-session-id',
   'access-control-allow-methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-  'access-control-expose-headers': 'content-type',
+  'access-control-expose-headers': 'content-type, x-com',
   'access-control-max-age': '86400',
 };
 
