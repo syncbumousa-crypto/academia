@@ -400,9 +400,10 @@ function build() {
       const o = { no: s.no, type: s.type, instructor: null, days: null, time: null, room: null, gender: s.gender, status: s.status, campus: meta.campuses.ar?.[s.campus] || s.campus };
       if (d) {
         secDetailed++;
-        if (d.instructor) withInstr++;
+        const instr = d.instructor && !d.instructor.startsWith("لم يحدد") ? d.instructor : null; // «لم يحدد من الكلية» = ما تعيّن محاضر
+        if (instr) withInstr++;
         const uniq = (a) => [...new Set(a.filter(Boolean))];
-        o.instructor = d.instructor || null;
+        o.instructor = instr;
         o.days = [...new Set(d.meetings.flatMap((m) => m.days))].sort();
         o.time = uniq(d.meetings.map((m) => m.time)).join(' | ') || null;
         o.room = uniq(d.meetings.map((m) => m.room)).join(' | ') || null;
