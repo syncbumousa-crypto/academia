@@ -163,7 +163,8 @@ function* book2Steps(THREE, host, cfg) {
   /* وفي الصفحة الواحدة كلُّ صفحةٍ ورقة: نصفُ السماكة، فلا يتضاعف سُمكُ الكتاب */
   const STACK = ONE ? 0.0008 : 0.0016;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  /* (ROADMAP-BOOK-ONE-TWO · المرحلة ٢) ‏‎cfg.renderer‎: رسّامُ المحرّك السابق ولوحتُه — لا سياقَ جديد، والبرامجُ المترجَمةُ فيه تُستعمل كما هي */
+  const renderer = cfg.renderer || new THREE.WebGLRenderer({ antialias: true, alpha: true });
   /* لا يُسأل المشغّلُ عن أخطاء المظلّلات بعد بنائها: السؤالُ يُوقف الصفحةَ حتى ينتهي البناء (نصفُ زمن أوّل رسمة) — والمظلّلاتُ ثابتةٌ مجرَّبة */
   renderer.debug.checkShaderErrors = false;
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
@@ -174,15 +175,17 @@ function* book2Steps(THREE, host, cfg) {
   yield;
   const el = renderer.domElement;
   el.className = 'bk2-gl';
-  host.appendChild(el);
+  if (el.parentNode !== host) host.appendChild(el);
   /* ===== فقدُ سياق الرسم (ROADMAP-BOOK-SWITCH · المرحلة ٦) =====
      الجوالُ (وكرتُ الشاشة الضعيف) يُسقط السياقَ حين تضيق ذاكرتُه، فكان الكتابُ يسودّ ولا يعود. ‏‎three‎ يمنع الإسقاطَ النهائيّ
      (‎preventDefault‎) ويُعيد بناءَ حاله عند الاستعادة، وصورُه وبرامجُه تُرفع وتُترجم من جديد في أوّل رسمة — فهنا: لا رسمَ في
      أثناء الفقد، وإعادةُ الرسم عند الاستعادة، ويُخبَر صاحبُ الكتاب في الحالين (‎cfg.onLost‎) ليضع مكانَه معايناتِ الصفحات أو يبنيه */
   let lost = false;
   /* (المسلخ) المحرّكُ المُطفأُ يفقد سياقَه عمدًا (‎renderer.dispose‎) — ذلك ليس فقدًا يُبلَّغ عنه: لا يُغطّى كتابٌ حيٌّ بسببه */
-  el.addEventListener('webglcontextlost', () => { lost = true; if (dead) return; try { cfg.onLost && cfg.onLost(true); } catch (e) {} }, false);
-  el.addEventListener('webglcontextrestored', () => { lost = false; needs = true; if (dead) return; try { cfg.onLost && cfg.onLost(false); } catch (e) {} }, false);
+  const onCtxLost = () => { lost = true; if (dead) return; try { cfg.onLost && cfg.onLost(true); } catch (e) {} };
+  const onCtxBack = () => { lost = false; needs = true; if (dead) return; try { cfg.onLost && cfg.onLost(false); } catch (e) {} };
+  el.addEventListener('webglcontextlost', onCtxLost, false);
+  el.addEventListener('webglcontextrestored', onCtxBack, false);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 20);
   const book = new THREE.Group(); scene.add(book);
@@ -1058,6 +1061,17 @@ function* book2Steps(THREE, host, cfg) {
     for (const [t, f] of evs) zone.removeEventListener(t, f);
     setGrab('');
     if (zone !== el) zone.style.cursor = zone.style.touchAction = '';
+    el.removeEventListener('webglcontextlost', onCtxLost, false); el.removeEventListener('webglcontextrestored', onCtxBack, false);
+    /* (المرحلة ٢) ‏‎keep === 'renderer'‎: يقف المحرّكُ الآن، ورسّامُه ولوحتُه للمحرّك التالي؛ وموارده تُحرَّر بالدالّة المُعادة — بعد
+       أن يترجم التالي مظلّلاتِه، فتبقى البرامجُ المشتركةُ في ذاكرة الرسّام ولا تُترجم من جديد */
+    if (keep === 'renderer') return () => free();
+    free();
+    renderer.dispose();
+    if (keep) return () => { try { renderer.forceContextLoss(); } catch (e) {} el.remove(); };
+    renderer.forceContextLoss();
+    el.remove();
+  }
+  function free() {
     pageTex.forEach(t => t.dispose()); pageTex.clear();
     [grain, blank, inside, outsideBack].forEach(t => t.dispose());
     /* الطاولة: الظلُّ والغلافُ الصلب */
@@ -1068,10 +1082,6 @@ function* book2Steps(THREE, host, cfg) {
     if (rig) { rig.grp.traverse(o => { if (o.isMesh && o.geometry !== art.geometry) { o.geometry.dispose(); if (o.material !== boardM && o.material !== artM && !Array.isArray(o.material)) o.material.dispose(); } }); rig.generic.dispose(); rig.tex.forEach(t => t.dispose()); }
     for (const s of sheets) for (const mh of s.meshes) { mh.material.dispose(); mh.customDepthMaterial.dispose(); }
     geo.dispose(); ground.geometry.dispose(); ground.material.dispose();
-    renderer.dispose();
-    if (keep) return () => { try { renderer.forceContextLoss(); } catch (e) {} el.remove(); };
-    renderer.forceContextLoss();
-    el.remove();
   }
 
   return {
@@ -1160,6 +1170,8 @@ function* book2Steps(THREE, host, cfg) {
     /* (للتحوّل من الصفحات المتتالية) ينتظر صفحاتٍ بعينها لا كلَّ ما طُلب — ما حول موضع القارئ */
     readyFor: ks => Promise.all([compileP, ...ks.map(k => pageTex.get(k)).filter(Boolean).map(t => t.userData.ready)]),
     /* لقطةٌ للّوحة (للشبح الذي يخرج به الكتابُ في القسمة) — تُرسم الآن فتُقرأ قبل أن يُمسح المخزن */
+    /* (المرحلة ٢) رسّامٌ يرثه المحرّكُ التالي — ما دام سياقُه حيًّا */
+    shareRenderer: () => (dead || lost || renderer.getContext().isContextLost()) ? null : renderer,
     snapshot(cv) { renderer.render(scene, camera); const c = cv.getContext('2d'); cv.width = el.width; cv.height = el.height; c.drawImage(el, 0, 0); },
     sheets,
   };

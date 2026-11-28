@@ -29776,7 +29776,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   function bk2Swap(b, old, morph) {
     return new Promise(res => {
       let sh = null, kill = null;
-      if (old.el && old.el.getContext) {
+      /* (ROADMAP-BOOK-ONE-TWO · المرحلة ٢) رسّامٌ واحدٌ لكلّ كتاب: الجديدُ يرث رسّامَ القديم ولوحتَه، فالغطاءُ لقطةٌ من القديم
+         (اللوحةُ نفسُها سيرسم فيها الجديد)، ويُحرَّر القديمُ بعد أن يترجم الجديدُ مظلّلاتِه ويظهر */
+      const rd = old.shareRenderer ? old.shareRenderer() : null;
+      if (rd) {
+        sh = document.createElement('canvas');
+        try { old.snapshot(sh); } catch (e) {}
+        Object.assign(sh.style, { position: 'absolute', left: old.el.offsetLeft + 'px', top: old.el.offsetTop + 'px', width: old.el.style.width, height: old.el.style.height, pointerEvents: 'none', zIndex: 2 });
+        b.stage.appendChild(sh);
+        const f = old.dispose('renderer'); kill = typeof f === 'function' ? f : null;
+      } else if (old.el && old.el.getContext) {
         sh = old.el; Object.assign(sh.style, { pointerEvents: 'none', zIndex: 2 });
         const f = old.dispose(true); kill = typeof f === 'function' ? f : null;
       } else {
@@ -29791,7 +29800,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
       setTimeout(sharp, 4000);
       bk2Engine(b, {
-        quiet: true, warm: true, near: true, chunk: true, morph: morph || undefined,
+        quiet: true, warm: true, near: true, chunk: true, morph: morph || undefined, renderer: rd || undefined,
         onReady: ng => {
           bkSwLog(b, 'ready');
           ng.el.style.opacity = '';
@@ -31408,6 +31417,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const dgT = bkDiagOn() ? {} : null;
       const cfgB = {
         diag: dgT ? (n, ms) => { dgT[n] = ms; if (n === 'compileAsync') bkSwLog(b, 'build', { steps: dgT }); } : undefined,
+        renderer: o.renderer,
         n: b.n, ar: b.ar, A: o.A != null ? o.A : bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: o.one != null ? o.one : b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
         cursor: bkCursor,
