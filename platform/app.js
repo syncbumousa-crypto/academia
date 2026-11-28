@@ -12470,6 +12470,27 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
     Promise.all(an.map(x => x.finished.catch(() => {}))).then(() => { fp.pkBlkHold = false; fp.classList.remove('pk--chrome0'); if (fp.isConnected) pkBandFit(fp); });
   }
   /* والطيُّ: عكسُه على المنحنى نفسِه — المحتوى يغيب أوّلًا، ثمّ المربّعُ ينطوي إلى داخل أيقونته في سطرها والمساهمةُ تقصر معه */
+  /* ===== أيقونةُ المصادر تعود إلى «""» وهي تطير إلى سطرها (طلبُ صاحب الموقع) =====
+     في زاوية المساحة ترسم طريقةَ العرض (‎BK_IC‎): «صفحة» علامةٌ واحدةٌ كبيرة، و«العادي» علامتان فوق بعض، و«الصفحتان» ‎""‎ نفسُها.
+     وفي سطر الأيقونات ‎""‎ (‎PK_SRC_IC‎ — العلامتان جنبًا إلى جنب). فكانت تطير بشكل الطريقة ثمّ تُستبدل بـ‎""‎ لحظةَ الرسم.
+     فالآن تتحوّل في الطريق — وكلُّها من شكلٍ واحد (‎BK_Q‎) بموضعٍ وحجم، فيُحرَّك موضعُ كلّ علامةٍ وحجمُها — ولكلّ طريقةٍ حركتُها:
+     · «صفحة»: العلامةُ تنشقّ اثنتين، وتقفز الثانيةُ منها إلى يمينها بنابض؛
+     · «العادي»: العلامتان تدوران إحداهما حول الأخرى حتى تصطفّا جنبًا إلى جنب؛
+     · «الصفحتان»: هي ‎""‎ أصلًا — لا تتغيّر */
+  function pkBkIcMorph(svg, mode, D, an) {
+    const ps = [...svg.querySelectorAll('path[transform]')]; if (!ps.length || mode === 'two') return;
+    const T = (x, y, k) => `translate(${x}px, ${y}px) scale(${k})`, L = T(4, 6, 1), R = T(13.5, 6, 1);
+    const o = { duration: D, delay: D * .05, fill: 'both' };
+    if (mode === 'one') {
+      const a = ps[0], b = a.cloneNode(true); a.after(b);
+      an.push(a.animate([{ transform: T(8.6, 4, 1.4) }, { transform: T(8.6, 4, 1.4), offset: .12 }, { transform: T(6.6, 5, 1.2), offset: .42 }, { transform: L }], { ...o, easing: 'cubic-bezier(.3, .7, .3, 1)' }));
+      an.push(b.animate([{ transform: T(8.6, 4, 1.4), opacity: 0 }, { transform: T(8.6, 4, 1.4), opacity: 0, offset: .12 }, { transform: T(10.6, 5, 1.2), opacity: 1, offset: .42 }, { transform: T(14.6, 6, .96), offset: .78 }, { transform: R, opacity: 1 }], { ...o, easing: 'cubic-bezier(.3, 1.3, .5, 1)' }));
+    } else if (mode === 'scroll' && ps.length > 1) {
+      /* العليا تنزل إلى اليمين والسفلى تصعد إلى اليسار — على قوسٍ كأنّهما تدوران حول مركزهما */
+      an.push(ps[0].animate([{ transform: T(9.8, 2.4, .76) }, { transform: T(9.8, 2.4, .76), offset: .1 }, { transform: T(13.6, 2.8, .86), offset: .48 }, { transform: R }], { ...o, easing: 'cubic-bezier(.45, 0, .25, 1)' }));
+      an.push(ps[1].animate([{ transform: T(9.8, 13.2, .76) }, { transform: T(9.8, 13.2, .76), offset: .1 }, { transform: T(4.4, 12.4, .86), offset: .48 }, { transform: L }], { ...o, easing: 'cubic-bezier(.45, 0, .25, 1)' }));
+    }
+  }
   function pkIcCollapse(id, fp) {
     const k = pkIcOpenK(id);
     const done = () => { pkSplit[id] = false; pkBank[id] = false; pkMidOff[id] = true; cxRowFresh = null; pubOpen.delete(id);
@@ -12601,7 +12622,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (el !== inRow) {
         mv = document.createElement('span'); mv.className = 'pk-icfly'; mv.setAttribute('aria-hidden', 'true');
         const sv = el.querySelector('svg'), sr = sv && sv.getBoundingClientRect();
-        if (sv) { const c2 = sv.cloneNode(true); c2.style.width = sr.width + 'px'; c2.style.height = sr.height + 'px'; mv.appendChild(c2); }
+        if (sv) { const c2 = sv.cloneNode(true); c2.style.width = sr.width + 'px'; c2.style.height = sr.height + 'px'; mv.appendChild(c2);
+          if (q === 'book') pkBkIcMorph(c2, bkModeGet(), D, an); }
         Object.assign(mv.style, { position: 'fixed', left: (r.left - (bm ? bm.e : 0)) + 'px', top: (r.top - (bm ? bm.f : 0)) + 'px', width: r.width + 'px', height: r.height + 'px',
           display: 'grid', placeItems: 'center', color: cs.color, zIndex: 60, pointerEvents: 'none', margin: 0 });
         document.body.appendChild(mv); flies.push(mv); el.style.visibility = 'hidden';
@@ -26627,6 +26649,30 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         x.style.marginRight = right && Rn ? f(Rn.nw) + 'px' : ''; x.style.marginLeft = !right && L ? f(L.nw) + 'px' : ''; });
     });
   }
+  /* ===== شكلُ زاويةٍ سفلى فيها فجوةٌ بقدرٍ ما — صحيحٌ في كلّ قدر (طلبُ صاحب الموقع: «زاوية حادة تظهر خلال انرسام الاكتمال») =====
+     الفجوةُ تُرسم بحافّتين مدوَّرتين بنصف قطر زاوية المساحة (‎r‎) وقوسٍ داخليٍّ (‎c‎) — وهذا لا يصحّ إلّا وهي ‎≥ r + c‎ (‎~28px‎).
+     فكانت إذا ضاقت وهي تلتئم تنعكس خطوطُها (يرجع الخطُّ الأفقيُّ يمينًا بعد القوس): شوكةٌ وزاويةٌ حادّة، ثمّ قفزةٌ إلى الزاوية
+     المدوَّرة في آخرها. فالآن مرحلتان:
+     · ما دامت الفجوةُ تسع شكلَها (‎v ≥ vA‎): الشكلُ نفسُه بقدرها (هو هو في القدر الكامل — المفتوحةُ لا تتغيّر)؛
+     · وأصغرَ من ذلك: الشكلُ بأصغر قدرٍ يصحّ فيه يتحوّل إلى الزاوية المدوَّرة نفسِها — بالأوامر نفسِها، والحافّةُ الخارجيّةُ بنصف
+       قطرها الكامل دائمًا، والقوسان الآخران يصغران إلى الصفر — فتنكمش الفجوةُ داخل الزاوية وتغيب فيها، بلا زاويةٍ حادّةٍ ولا قفزة.
+     ‏‎sd‎: ‎'r'‎ السفلى اليمنى، ‎'l'‎ السفلى اليسرى؛ و‎NW·NH·c0‎ قدرُها الكامل */
+  function pkNotchSeg(sd, x0, x1, y1, r, nw, nh, c, f, NW, NH, c0) {
+    NW = NW || nw; NH = NH || nh; c0 = c0 == null ? c : c0;
+    const vA = Math.min(1, Math.max((r + c0) / NW, (r + c0) / NH)), v = NW ? nw / NW : 1;
+    let t = 0;
+    if (v < vA) { t = 1 - v / vA; nw = NW * vA; nh = NH * vA; c = Math.min(c0, nw / 2, nh / 2); }
+    const L = (a, b) => a + (b - a) * t, cc = c * (1 - t), rr = r * (1 - t);
+    const A = (q, x, y, sw) => q > .01 ? `A${f(q)} ${f(q)} 0 0 ${sw} ${f(x)} ${f(y)}` : `L${f(x)} ${f(y)}`;
+    if (sd === 'r') {
+      const p1y = L(y1 - nh - r, y1 - r), p2y = L(y1 - nh, y1), p3x = L(x1 - nw + c, x1 - r), p4x = p3x - cc, p4y = p2y + cc, p5y = L(y1 - r, y1), p6x = p4x - rr;
+      return `V${f(p1y)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(p2y)}H${f(p3x)}` + A(cc, p4x, p4y, 0) + `V${f(p5y)}` + A(rr, p6x, y1, 1)
+        + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}`;
+    }
+    const q1x = L(x0 + nw + r, x0 + r), q2x = q1x - rr, q2y = y1 - rr, q3y = L(y1 - nh + c, y1), q4x = q2x - cc, q4y = q3y - cc;
+    return `V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(q1x)}` + A(rr, q2x, q2y, 1) + `V${f(q3y)}` + A(cc, q4x, q4y, 0)
+      + `H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(q4y - r)}`;
+  }
   function pkNotchDraw(card, tasks, NW, NH, c0, apply, alive, ox, oy, pr, f) {
     const id = card.dataset.ck || card.dataset.pkicid || card.dataset.pi || 'x', st = pkNotchSt[id] || (pkNotchSt[id] = {});
     /* والفجوةُ تُنحت أمام العين — سريعةً تبدأ من فورها وتلين في آخرها (طلبُ صاحب الموقع: «لا أحسّ بتأخير»)؛ كانت ‎420ms‎ لينةَ البدء
@@ -26668,9 +26714,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
         while ((mm = re.exec(d))) { if (+mm[5] < +mm[3]) { hit = mm; break; } }
         if (!hit) return d;
         const r = +hit[2], y1 = +hit[4], x1 = +hit[3] + r, x0 = +hit[6];
-        const seg = sd === 'r'
-          ? `V${f(y1 - nh - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1 - nh)}H${f(x1 - nw + c)}A${c} ${c} 0 0 0 ${f(x1 - nw)} ${f(y1 - nh + c)}V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - nw - r)} ${f(y1)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - r)}`
-          : `V${f(y1 - r)}A${r} ${r} 0 0 1 ${f(x1 - r)} ${f(y1)}H${f(x0 + nw + r)}A${r} ${r} 0 0 1 ${f(x0 + nw)} ${f(y1 - r)}V${f(y1 - nh + c)}A${c} ${c} 0 0 0 ${f(x0 + nw - c)} ${f(y1 - nh)}H${f(x0 + r)}A${r} ${r} 0 0 1 ${f(x0)} ${f(y1 - nh - r)}`;
+        const seg = pkNotchSeg(sd, x0, x1, y1, r, nw, nh, c, f, NW, NH, c0);
         if (t && pr) {
           const bx = sd === 'r' ? x1 - NW + (NW - 24) / 2 : x0 + (NW - 24) / 2;
           t.bt.style.left = f(ox + bx - 2 - pr.left) + 'px'; t.bt.style.top = f(oy + y1 - NH + (NH - 24) / 2 - 2 - pr.top) + 'px';
