@@ -3429,6 +3429,8 @@ html[data-lang="en"] .drcar__num { direction: ltr; }
 /* الكومنت مباشرة بلا مستطيل محيط (أسلوب يوتيوب): الصورة والنص على خلفية اللوحة نفسها */
 .post.pk--info { background: transparent; border: 0; border-radius: 0; padding: 6px 2px 2px; }
 .post + .post.pk--info { margin-top: 12px; }
+/* ومساهمةُ «المادة» في التحرير كذلك (طلبُ صاحب الموقع): حقولُها على خلفيّة الموقع مباشرةً بلا مستطيلٍ يحملها */
+.post.pk--edit[data-sub="info"] { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 6px 2px 2px; }
 
 /* الإبهام أيقونة مباشرة بلا مربع — لايك يمينًا وديسلايك يسارًا (ترتيب RTL طبيعي) */
 .post-react { display: flex; align-items: center; gap: 18px; margin-top: 9px; }
