@@ -29719,6 +29719,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
      المحرّكان مختلفا البناء (ورقةٌ لكلّ صفحة · ورقةٌ لكلّ صفحتين)، فيُبدَّل بينهما وهما على الصورة نفسِها:
      الجديدُ يُبنى مخفيًّا فوق القديم ويظهر حين تجهز صورُه */
   function bk2Switch(b, one) {
+    bkSwLog(b, 'switch:start', { to: one ? 'one' : 'two' });
     const g = b.gl;
     if (!g || g.dead || !g.morph || b.closed || bkReduce() || !b.stage.clientWidth) return bk2SwitchNow(b, one);
     b.mx = true; b.mxWant = null; b.mxGoal = one;
@@ -29749,6 +29750,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
   }
   /* نهايةُ التبدُّل (من صفحةٍ إلى صفحتين أو بالعكس، أو من الصفحات المتتالية): ما طُلب في أثنائه يُنفَّذ الآن */
   function bk2MxEnd(b) {
+    bkSwLog(b, 'switch:end');
     b.hHold = false; b.mx = false; b.mxTo = null; b.stage.classList.remove('is-mx');
     if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
     bk2Show(b);
@@ -29789,8 +29791,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
       setTimeout(sharp, 4000);
       bk2Engine(b, {
-        quiet: true, near: true, morph: morph || undefined,
+        quiet: true, warm: true, near: true, chunk: true, morph: morph || undefined,
         onReady: ng => {
+          bkSwLog(b, 'ready');
           ng.el.style.opacity = '';
           const end = () => { sh.remove(); if (kill) kill(); res(ng); setTimeout(sharp, BK_MX + 120); };
           sh.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 110, easing: 'ease-out' }).finished.then(end, end);
@@ -31361,6 +31364,34 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       bk2Engine(b);
     }, 2500);
   }
+  /* ===== (ROADMAP-BOOK-ONE-TWO · المرحلة ٠) عدّاداتُ التبديل — تعمل بطلبٍ وحده (‎ac.bk.diag‎) =====
+     لكلّ بناء: مراحلُه بالمللي (من ‎createBook2‎)، وسياقاتُ ‎WebGL‎ الجديدة، وترجمةُ المظلّلات، ورفعُ الصور. ‏‎__bkSw‎ في الكونسول */
+  let bkSwHook = 0;
+  function bkSwDiag() {
+    if (bkSwHook || !bkDiagOn()) return null;
+    bkSwHook = 1;
+    const C = window.__bkSwC = { ctx: 0, comp: 0, link: 0, tex: 0, mip: 0 };
+    try {
+      const gc = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (t, ...a) { const had = this.__bkGl; const r = gc.call(this, t, ...a); if (/webgl/.test(t) && r && !had) { this.__bkGl = 1; C.ctx++; } return r; };
+      [window.WebGL2RenderingContext, window.WebGLRenderingContext].filter(Boolean).map(x => x.prototype).forEach(P => {
+        const w = (n, k) => { const o = P[n]; if (o) P[n] = function (...a) { C[k]++; return o.apply(this, a); }; };
+        w('compileShader', 'comp'); w('linkProgram', 'link'); w('texImage2D', 'tex'); w('texSubImage2D', 'tex'); w('generateMipmap', 'mip');
+      });
+    } catch (e) {}
+    return C;
+  }
+  function bkSwLog(b, kind, extra) {
+    if (!bkDiagOn()) return;
+    bkSwDiag();
+    const L = window.__bkSw = window.__bkSw || [], C = window.__bkSwC || {};
+    L.push(Object.assign({ t: Math.round(performance.now()), kind, pos: b && b.pos, one: b && !!b.one, n: b && b.n, cnt: Object.assign({}, C) }, extra || {}));
+  }
+  /* بعد أن يُرسم الإطار: ‏‎rAF‎ ثمّ مهمّةٌ جديدة */
+  const bkGate = f => requestAnimationFrame(() => setTimeout(() => {
+    if (!bkDiagOn()) return f();
+    const t = performance.now(); f(); (window.__bkCh = window.__bkCh || []).push(Math.round(performance.now() - t));   /* (المرحلة ٠: زمنُ كلّ دفعة) */
+  }, 0));
   function bk2Engine(b, o = {}) {
     const st = b.stage;
     /* (المسلخ) كلُّ بناءٍ له جيل: الغطاءُ لآخر بناء، والهادئُ لا يُزيل غطاءً أبدًا — فلا يُترك فوقه غطاءٌ من قبله */
@@ -31374,7 +31405,9 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (!b.stage.isConnected && !b.view.isConnected) { /* نُقل قبل التحميل — ‏‎b.stage‎ هو نفسُه في وعائه الجديد */ }
       /* (خطّةُ التوأم · المرحلة ٤) ‏‎o.pre‎: يُبنى مسبقًا (عند الضغط على القوس، قبل رفع الإصبع) ولا يصير كتابَ المساحة حتى يُتبنّى
          (‏‎o.adopt‎) — مطويًّا ساكنًا لا يتفاعل مع شيء، معروضًا بشفافيةٍ لا تُرى ليجهز على كرت الشاشة */
-      const mk = () => M.createBook2(THREE, b.stage, {
+      const dgT = bkDiagOn() ? {} : null;
+      const cfgB = {
+        diag: dgT ? (n, ms) => { dgT[n] = ms; if (n === 'compileAsync') bkSwLog(b, 'build', { steps: dgT }); } : undefined,
         n: b.n, ar: b.ar, A: o.A != null ? o.A : bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: o.one != null ? o.one : b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
         cursor: bkCursor,
@@ -31401,14 +31434,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
           if (b.meta) { b.meta.pos = b.pos; b.meta.closed = b.closed; saveSoon(); }
           bk2Show(b);
         },
-      });
+      };
+      const mk = () => M.createBook2(THREE, b.stage, cfgB);
       if (o.pre) {
         const g = o.pre.g = mk();
         Object.assign(g.el.style, { visibility: 'visible', opacity: '0.001' });   /* (المسرحُ مخفيٌّ وراء الصفحات المتتالية) */
         (g.readyFor ? g.readyFor(o.nearKs || [b.pos]) : g.ready()).then(() => { o.pre.ready = true; if (o.pre.on) o.pre.on(); });
         return;
       }
-      b.gl = o.adopt || mk();
+      const mount = g0 => {
+      b.gl = g0;
       if (o.adopt) o.adopt.el.style.visibility = '';
       /* تبدُّلُ الجلد (فاتح/داكن) يصل الكتابَ ولو لم يُعَد رسمُه */
       const mo = new MutationObserver(() => {
@@ -31436,6 +31471,16 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       if (o.adoptP) o.adoptP.then(() => requestAnimationFrame(off));
       else (near ? g.readyFor(near) : g.ready()).then(() => requestAnimationFrame(() => requestAnimationFrame(off)));
       setTimeout(off, 3000);   /* ولا يبقى إن تأخّرت صورةٌ أو تعثّرت: الكتابُ نفسُه قائمٌ تحته */
+      };
+      /* (ROADMAP-BOOK-ONE-TWO · المرحلة ١) التبديلُ بين الصفحة والصفحتين يبني على دفعات: الغطاءُ (لوحةُ القديم) فوقه والصفحةُ
+         تتحرّك، وكلُّ خطوةٍ من البناء في إطارٍ وحدها — والحركةُ تبدأ بعد ‎onReady‎ كما كانت */
+      if (o.chunk && !o.adopt && M.createBook2Async) {
+        return M.createBook2Async(THREE, b.stage, cfgB, bkGate).then(g0 => {
+          if (b.gl && !b.gl.dead) { try { g0.dispose(); } catch (e) {} return; }   /* (سبقه محرّكٌ آخر وهو يُبنى) */
+          mount(g0);
+        });
+      }
+      mount(o.adopt || mk());
     }).catch(() => {
       /* تعذّر WebGL أو التحميل: المحرّكُ القديم في الوعاء نفسِه */
       bkPhHide(b);

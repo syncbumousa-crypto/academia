@@ -134,11 +134,15 @@ const LIGHTS = {
  * cfg: { n, ar (عرض/قامة الصفحة), A, maxA, theme, cover (لون), tex(k, w) ⇒ Promise<canvas|null> (k: رقمُ صفحة أو 'cover'),
  *        onTurn(A) بعد كلّ تغيّرٍ مُلتزَم, onIdle() حين يسكن }
  */
-export function createBook2(THREE, host, cfg) {
+/* (ROADMAP-BOOK-ONE-TWO · المرحلة ١) البناءُ خطواتٌ تفصل بينها ‎yield‎: ‏‎createBook2‎ يمضي فيها كلِّها دفعةً واحدة كما كان،
+   و‎createBook2Async‎ يُعطي الإطارَ بين كلّ خطوةٍ وأختها (‎gate‎) — فلا تتجمّد الصفحةُ ‎100–200ms‎ في إطارٍ واحد */
+function* book2Steps(THREE, host, cfg) {
   const AR = 1 / cfg.ar, W = 1, H = AR;
   /* ‏‎cfg.one‎: صفحةٌ واحدةٌ أمامك — كلُّ صفحةٍ ورقةٌ وحدها (ظهرُها ورقٌ يشفّ عن وجهها كالمطبوع على وجهٍ واحد)،
      والمقلَّبةُ تُطوى حول الكعب إلى ما وراء الكتاب. ‏‎A‎ فيه رقمُ الصفحة الظاهرة (‎0‎ الغلاف) */
   const ONE = !!cfg.one;
+  /* (ROADMAP-BOOK-ONE-TWO · المرحلة ٠) علاماتُ زمنٍ في البناء — لا تعمل إلّا والتشخيصُ مطلوب (‎cfg.diag‎) */
+  const DG = typeof cfg.diag === 'function' ? cfg.diag : null, dg0 = DG ? performance.now() : 0, dg = n => { if (DG) DG(n, Math.round(performance.now() - dg0)); };
   /* ‏‎cfg.skip‎: الغلافُ صفحةُ الملفّ الأولى نفسُها — فالكتابُ من داخله يبدأ بالثانية (لا تتكرّر). ‏‎N‎ ما في الكتاب من صفحات،
      ورقمُ الصفحة في الملفّ ‎k = v + skip‎ (‏‎v‎ ترتيبُها في الكتاب) */
   const SK = cfg.skip ? 1 : 0, N = cfg.n - SK;
@@ -166,6 +170,8 @@ export function createBook2(THREE, host, cfg) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  dg('renderer');
+  yield;
   const el = renderer.domElement;
   el.className = 'bk2-gl';
   host.appendChild(el);
@@ -196,7 +202,8 @@ export function createBook2(THREE, host, cfg) {
 
   const geo = new THREE.PlaneGeometry(1, 1, 48, Math.round(48 * AR));
   geo.setAttribute('aSheet', geo.attributes.uv.clone());
-  const grain = grainTexture(THREE);
+  const grain = grainTexture(THREE); dg('grain');
+  yield;
   /* لونٌ واحدٌ صورةً بكسلٍ واحد — بقيم sRGB نفسِها (كانت تُكتب خطّيّةً ثمّ تُفكّ sRGB فيغمق اللونُ مرّتين: باطنُ الغلاف بدا أسود) */
   const solid = hex => { const h = new THREE.Color(hex).getHexString(); const t = new THREE.DataTexture(new Uint8Array([0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)).concat(255)), 1, 1); t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; return t; };
   const blank = solid('#ffffff');   /* الصفحةُ الخاليةُ بيضاءُ كورق الملفّ (كانت بيجًا، وتسري بيجيّتُها في وجه الصفحة من «ما خلفها») */
@@ -298,6 +305,8 @@ export function createBook2(THREE, host, cfg) {
   }
 
   /* لا تُبقى إلّا صورُ الأوراق القريبة من الفتحة — والبعيدةُ ورقٌ لا تراه العينُ تحت الكومة */
+  dg('sheets');
+  yield;
   const NEAR = 2;
   function keepNear() {
     const want = new Set();
@@ -386,7 +395,8 @@ export function createBook2(THREE, host, cfg) {
     for (let i = 0; i < 128; i += 3) { c.fillStyle = i % 9 ? 'rgba(150,135,105,.16)' : 'rgba(150,135,105,.26)'; vert ? c.fillRect(i, 0, 1, 8) : c.fillRect(0, i, 8, 1); }
     const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t;
   };
-  const edgeH = edgeTex(false), edgeV = edgeTex(true);
+  const edgeH = edgeTex(false), edgeV = edgeTex(true); dg('edges');
+  yield;
   const hideM = new THREE.MeshBasicMaterial({ visible: false });
   const boardM = new THREE.MeshStandardMaterial({ color: coverC, roughness: 0.78, metalness: 0 });
   /* حوافُّ الورق مضيئةٌ قليلًا من نفسها (كالكونسبت: كريميّةٌ صافية ولو كانت في الجانب البعيد عن الشمس) */
@@ -454,6 +464,7 @@ export function createBook2(THREE, host, cfg) {
      تحديد (‏‎onStop‎ يُعطى مواضعَ زواياه على الشاشة فيطير منها)، ثمّ ينطبق الغلافُ والأوراقُ معًا على اللوح السفليّ.
      هيكلٌ منفصلٌ يُبنى عند أوّل استعمال: غطاءٌ بمفصلٍ عند الكعب، وقاعدةٌ (الكعبُ واللوحُ السفليّ)، وكومةٌ تحت الغطاء،
      وثماني أوراقٍ طائرة — وما سواها لا يُرسم (خفيفٌ ولو كان الكتابُ مئاتِ الصفحات) */
+  yield;
   const RF = { open: 130, hold: 120, sweep: 1180, ivMin: 18, ivMax: 75, dwell: 170, leaf: 260, close: 260, angle: 1.05, leaves: 8 };
   let rf = null, rig = null;
   const paperM = new THREE.MeshStandardMaterial({ color: '#efe8d6', roughness: 0.95 });
@@ -619,6 +630,7 @@ export function createBook2(THREE, host, cfg) {
     needs = true; res(true);
   }
   /* الكاميرا تسع الفتحةَ (‎2W × H‎) بهامشٍ للظلّ. ‏‎rect()‎ مستطيلُ الفتحة على اللوحة (بكسل CSS) */
+  yield;
   let frameNow = null;
   let cw = 0, ch = 0, fit = { x: 0, y: 0, w: 0, h: 0 };
   /* هامشُ الإطار: الكتابُ يملأ مساحتَه إلّا قليلًا (طلبُ صاحب الموقع) — ‏‎LIFT‎ رفعُه عن الوسط ليُرى ظلُّه تحته */
@@ -834,6 +846,8 @@ export function createBook2(THREE, host, cfg) {
   /* ===== المظلّلاتُ تُبنى في الخلفية قبل أوّل رسمة (‎compileAsync‎) =====
      أوّلُ رسمةٍ كانت تبني كلَّ مظلّلٍ وتنتظره فتُجمّد الصفحة (~نصف ثانيةٍ في جهازٍ متوسّط). فتُبنى الآن والهيكلُ ما زال فوق الكتاب،
      وكلُّ ما في المشهد ظاهرٌ لحظةَ الطلب (أوراقُ القراءة المخفيّة والغلاف) فيُبنى مظلّلُه معه، ثمّ يعود كما كان */
+  dg('scene');
+  yield;
   let compiled = !renderer.compileAsync;
   const compileP = compiled ? Promise.resolve() : (() => {
     const hid = []; scene.traverse(o => { if (!o.visible) { hid.push(o); o.visible = true; } });
@@ -841,6 +855,7 @@ export function createBook2(THREE, host, cfg) {
     for (const o of hid) o.visible = false;
     return Promise.resolve(p).catch(() => {}).then(() => { compiled = true; needs = true; });
   })();
+  dg('compileAsync');
   raf = requestAnimationFrame(frame);
   frameNow = () => { if (el.isConnected && compiled) { renderer.render(scene, camera); needs = false; } else needs = true; };
 
@@ -1148,4 +1163,17 @@ export function createBook2(THREE, host, cfg) {
     snapshot(cv) { renderer.render(scene, camera); const c = cv.getContext('2d'); cv.width = el.width; cv.height = el.height; c.drawImage(el, 0, 0); },
     sheets,
   };
+}
+
+export function createBook2(THREE, host, cfg) {
+  const it = book2Steps(THREE, host, cfg);
+  for (;;) { const r = it.next(); if (r.done) return r.value; }
+}
+/* ‏‎gate(next)‎: يستدعي ‎next‎ بعد أن يُرسم إطار — فكلُّ خطوةٍ في مهمّةٍ وحدها */
+export function createBook2Async(THREE, host, cfg, gate) {
+  const it = book2Steps(THREE, host, cfg);
+  return new Promise((res, rej) => {
+    const step = () => { let r; try { r = it.next(); } catch (e) { rej(e); return; } if (r.done) res(r.value); else gate(step); };
+    gate(step);
+  });
 }
