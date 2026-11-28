@@ -270,6 +270,9 @@ function* book2Steps(THREE, host, cfg) {
     if (k === 'blank') return blank;
     if (k !== 'cover' && (k < 1 || k > cfg.n)) return blank;
     if (pageTex.has(k)) return pageTex.get(k);
+    /* (ROADMAP-BOOK-ONE-TWO · المرحلة ٣) صورةٌ ورثها من المحرّك السابق (الرسّامُ نفسُه): مرفوعةٌ بتصغيراتها — لا تُرفع من جديد */
+    const sd = cfg.texSeed && cfg.texSeed.get(k);
+    if (sd) { cfg.texSeed.delete(k); sd.userData.ready = Promise.resolve(); pageTex.set(k, sd); return sd; }
     const tex = new THREE.Texture();
     tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     tex.generateMipmaps = true; tex.minFilter = THREE.LinearMipmapLinearFilter;
@@ -326,11 +329,11 @@ function* book2Steps(THREE, host, cfg) {
     needs = true;
   }
   /* تغيّرت دقّةُ العرض كثيرًا: تُطلب الصورُ من جديد بالدقّة الجديدة */
-  function retex(w, force) {
+  function retex(w, force, keepBig) {
     if (!force && Math.abs(w - texW) / texW < 0.3) return;
     texW = w;
     /* الصورةُ القديمةُ تبقى حتى تجهز الجديدة — لا تسودّ الصفحاتُ وهي تُرسم من جديد */
-    pageTex.forEach((t, k) => Promise.resolve(cfg.tex(k, w)).then(cv => {
+    pageTex.forEach((t, k) => (keepBig && t.image && t.image.width >= w * 0.95) ? null : Promise.resolve(cfg.tex(k, w)).then(cv => {
       if (dead || !cv || pageTex.get(k) !== t) return;
       return upQ(t, cv);   /* (والمقاسُ الآخرُ يُحرَّر في الطابور قبل رفعه) */
     }).catch(() => {}));
@@ -1084,6 +1087,8 @@ function* book2Steps(THREE, host, cfg) {
     geo.dispose(); ground.geometry.dispose(); ground.material.dispose();
   }
 
+  /* (المرحلة ٣) ما ورثه ولم يحتجه بعد البناء يُحرَّر */
+  if (cfg.texSeed) { cfg.texSeed.forEach(t => t.dispose()); cfg.texSeed.clear(); }
   return {
     el, flip, goTo, resize, setTheme, dispose, turnable, setZone, one: ONE,
     /* يغيّر إعدادات ظلّ الطاولة ويُعاد رسمُه (أداةُ الضبط) */
@@ -1093,7 +1098,14 @@ function* book2Steps(THREE, host, cfg) {
     /* (لاستدعاء التحديدات) يُفتح على فتحةٍ بعينها — يعود القارئُ إلى حيث كان — ويُعرف متى سكن على الطاولة فيُقلَّب */
     openAt(g) { if (tv < 1 || ta) table(1, g); },
     /* (للتحوّل من الصفحات المتتالية) تُطلب صورُ الصفحات من جديد بدقّتها — بعد أن بُني الكتابُ بنسخٍ جاهزةٍ قريبة الدقّة */
-    refreshTex() { retex(texW, true); },
+    /* (المرحلة ٣) الدقّةُ بعد التبديل: لا تُرفع إلّا الصورُ الأصغرُ ممّا يُعرض (الموروثةُ الأكبرُ تبقى — التصغيراتُ تكفيها) */
+    refreshTex() { retex(texW, true, true); },
+    /* (المرحلة ٣) يُسلّم صورَه المرفوعةَ للمحرّك التالي على الرسّام نفسِه — فلا يحرّرها ‎free()‎ */
+    takeTex() {
+      const m = new Map(), pend = new Set(upList.map(x => x[0]));
+      pageTex.forEach((t, k) => { if (t.image && t.version > 0 && !pend.has(t)) { m.set(k, t); pageTex.delete(k); } });
+      return m;
+    },
     get resting() { return tv === 0 && !ta && !rf; },
     /* ‏‎quick‎ (طلبُ صاحب الموقع: استدعاءُ المجلد): ينطبق في حركةٍ واحدةٍ أسرع وينزل إلى الطاولة أسرع */
     rest(quick) { if (!cfg.rest) return; if (A > 0) { tAfter = quick ? 2 : true; if (quick) goTo(0, 0.42, 22); else goTo(0); } else table(0, 1, quick ? 560 : 0); },
