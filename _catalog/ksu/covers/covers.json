@@ -1,0 +1,32 @@
+{
+ "IC 100": {
+  "book": "دراسات في السيرة النبوية",
+  "file": "IC_100.jpg",
+  "sha256": "cdbd8014395d00355d2152bfa0b62a62834a1e6654b13c3fbab63a59073693fa",
+  "source": "https://ksupress.ksu.edu.sa/ar/books/7431/9786040000000"
+ },
+ "IC 105": {
+  "book": "حقوق الإنسان",
+  "file": "IC_105.jpg",
+  "sha256": "9b958073901a8b653f65017d23604c51fcea9bdd9a222994e75cc330af90238a",
+  "source": "https://ksupress.ksu.edu.sa/ar/books/7434/9786040000000"
+ },
+ "IC 106": {
+  "book": "الفقه الطبي",
+  "file": "IC_106.jpg",
+  "sha256": "0916ad2d460aaea63210701bc07b2e4eae8fb73cd3203f4e787b6b079144adc4",
+  "source": "https://ksupress.ksu.edu.sa/ar/books/7435/9786040000000"
+ },
+ "ARAB 100": {
+  "book": "مهارات الكتابة",
+  "file": "ARAB_100.jpg",
+  "sha256": "d99b8228dee06d93f4cc489c4ec784dd1e2b9e0a0cd674a37226aaef2ee714c4",
+  "source": "https://ksupress.ksu.edu.sa/ar/books/7673/9786035101905"
+ },
+ "ARAB 101": {
+  "book": "المهارات اللغوية",
+  "file": "ARAB_101.jpg",
+  "sha256": "f7f2dd4f005d617c8159fa00e5082d35cf5df019d91f8c8c98815940b05ed418",
+  "source": "https://ksupress.ksu.edu.sa/ar/books/7674/9786035101929"
+ }
+}
