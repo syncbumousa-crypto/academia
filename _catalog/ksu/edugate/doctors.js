@@ -1,0 +1,117 @@
+#!/usr/bin/env node
+/* Edugate offering -> Almudarraj doctors.
+ *
+ * Reads  edugate/offering.json  and  out/mudarraj_catalog.json, links each offered
+ * course to a catalog course (English code first, then the official Arabic code),
+ * and writes:
+ *
+ *   out/mudarraj_doctors.json   {"CODE": ["name", ...], "CODE::معمل": [...]}  most sections first
+ *   out/mudarraj_doctors.sql    one site-account `doc` post per key in mudarraj.posts
+ *   edugate/doctors_report.json match counts and what did not match
+ *
+ * The SQL only inserts: a key that already has a site `doc` post is left alone
+ * (ON CONFLICT DO NOTHING), and nothing in public.* (Almaslakh) is touched.
+ * Row shape = docRow() in platform/app.js:  data.docs = [{id, n, en, img, ...}].
+ *
+ *   node _catalog/ksu/edugate/doctors.js
+ */
+const fs = require("fs"), path = require("path"), crypto = require("crypto");
+const KSU = path.join(__dirname, "..");
+const cat = JSON.parse(fs.readFileSync(path.join(KSU, "out", "mudarraj_catalog.json"), "utf8"));
+const off = JSON.parse(fs.readFileSync(path.join(__dirname, "offering.json"), "utf8"));
+
+const LAB = "::معمل";
+const SITE = "u-academia";
+const AR = /[؀-ۿ]/;
+const fold = s => String(s || "").replace(/[أإآ]/g, "ا").replace(/\s+/g, " ").trim();
+const h = s => crypto.createHash("sha1").update(s).digest("hex");
+
+// instructor name as the site shows it: "احمد - الشناوي" -> "احمد الشناوي"
+const clean = n => String(n || "").replace(/\s*-\s*/g, " ").replace(/\s+/g, " ").trim();
+
+const byCode = new Map(cat.courses.map(c => [c.code.toUpperCase(), c]));
+const byAr = new Map();
+for (const c of cat.courses) {
+  const k = fold(c.ar);
+  if (!AR.test(k)) continue;
+  byAr.set(k, byAr.has(k) ? null : c);          // an Arabic code on two courses is never used
+}
+
+// Same code, different course: a plan and the offering sometimes reuse a code. The names must share
+// half their words (Arabic or English), else the course is skipped and listed in the report.
+const nz = t => String(t || "").replace(/[أإآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").replace(/[ً-ْـ]/g, "")
+  .replace(/[^ء-يA-Za-z0-9]+/g, " ").toLowerCase().split(" ").map(w => w.replace(/^ال/, "")).filter(Boolean);
+const share = (a, b) => { const x = new Set(nz(a)), y = new Set(nz(b)); let i = 0; for (const w of x) if (y.has(w)) i++; return i / Math.max(1, Math.min(x.size, y.size)); };
+const SAME_BY_HAND = new Set(["PS 422"]);        // «دراسات سياسية أمريكية» = «دراسات سياسة (أمريكا-ش)»
+const agrees = (o, c) => SAME_BY_HAND.has(c.code) || Math.max(share(o.ar, c.full), share(o.en, c.en), share(o.en, c.full)) >= 0.5;
+
+const plan = new Map();                          // key -> Map(name -> sections)
+const add = (key, name) => {
+  const m = plan.get(key) || plan.set(key, new Map()).get(key);
+  m.set(name, (m.get(name) || 0) + 1);
+};
+const rep = { offered: off.length, by_code: 0, by_ar_code: 0, unmatched: 0, name_conflict: 0, matched_no_instructor: 0, name_conflicts: [], unmatched_courses: [] };
+const hit = new Set();
+
+for (const o of off) {
+  let c = o.code && byCode.get(o.code.toUpperCase()), how = "by_code";
+  if (!c) { c = o.ar_code && byAr.get(fold(o.ar_code)); how = "by_ar_code"; }
+  if (c && !agrees(o, c)) {
+    rep.name_conflict++;
+    rep.name_conflicts.push({ code: c.code, edugate: o.ar + " / " + o.en, catalog: c.full + " / " + c.en });
+    continue;
+  }
+  if (c) rep[how]++;
+  if (!c) {
+    rep.unmatched++;
+    rep.unmatched_courses.push({ code: o.code, ar_code: o.ar_code, ar: o.ar, college: o.college, dept: o.dept,
+      instructors: new Set(o.sections.map(s => clean(s.instructor)).filter(Boolean)).size });
+    continue;
+  }
+  hit.add(c.code);
+  const named = o.sections.filter(s => clean(s.instructor));
+  if (!named.length) { rep.matched_no_instructor++; continue; }
+  // a course with a lab keeps its lab instructors under the lab key, as Almaslakh does
+  const theory = named.filter(s => s.type !== "عملي");
+  for (const s of named) {
+    const lab = c.lab && s.type === "عملي";
+    add(lab ? c.code + LAB : c.code, clean(s.instructor));
+    if (lab && !theory.length) add(c.code, clean(s.instructor));   // lab-only course: the course itself is not left empty
+  }
+}
+
+const keys = [...plan.keys()].sort();
+const out = {};
+for (const k of keys) out[k] = [...plan.get(k).entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ar")).map(x => x[0]);
+
+const people = new Set(); let rows = 0;
+for (const k of keys) for (const n of out[k]) { people.add(n); rows++; }
+Object.assign(rep, {
+  catalog_courses: cat.courses.length,
+  catalog_courses_offered: hit.size,
+  catalog_courses_with_doctors: new Set(keys.map(k => k.replace(LAB, ""))).size,
+  keys: keys.length, lab_keys: keys.filter(k => k.endsWith(LAB)).length,
+  doctor_rows: rows, distinct_doctors: people.size,
+});
+
+const q = s => "'" + String(s).replace(/'/g, "''") + "'";
+const ts = Date.now();
+const sql = [
+  "-- Almudarraj doctors from Edugate (" + off[0].term + "). Generated by _catalog/ksu/edugate/doctors.js - do not edit.",
+  "-- Insert only: a key that already has a site doc post is skipped. public.* is not touched.",
+  "BEGIN;",
+];
+for (const k of keys) {
+  const docs = out[k].map(n => ({ id: "dk" + h(k + "|" + n).slice(0, 14), n, en: "", img: "",
+    e: "", bld: "", room: "", d: "", hours: [], teach: 0, grade: 0 }));
+  sql.push("INSERT INTO mudarraj.posts (id, uid, code, sec, data, ts, updated, st, pin) VALUES ("
+    + [q("pkd" + h(k).slice(0, 16)), q(SITE), q(k), q("doc"), q(JSON.stringify({ docs })), ts, Math.floor(ts / 1000), q("pub"), 0].join(", ")
+    + ") ON CONFLICT DO NOTHING;");
+}
+sql.push("COMMIT;");
+
+fs.writeFileSync(path.join(KSU, "out", "mudarraj_doctors.json"), JSON.stringify(out, null, 0).replace(/\],"/g, '],\n"') + "\n");
+fs.writeFileSync(path.join(KSU, "out", "mudarraj_doctors.sql"), sql.join("\n") + "\n");
+fs.writeFileSync(path.join(__dirname, "doctors_report.json"), JSON.stringify(rep, null, 1) + "\n");
+const { unmatched_courses, name_conflicts, ...short } = rep;
+console.log(short);
