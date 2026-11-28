@@ -29779,6 +29779,8 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       /* (ROADMAP-BOOK-ONE-TWO · المرحلة ٢) رسّامٌ واحدٌ لكلّ كتاب: الجديدُ يرث رسّامَ القديم ولوحتَه، فالغطاءُ لقطةٌ من القديم
          (اللوحةُ نفسُها سيرسم فيها الجديد)، ويُحرَّر القديمُ بعد أن يترجم الجديدُ مظلّلاتِه ويظهر */
       const rd = old.shareRenderer ? old.shareRenderer() : null;
+      /* (المرحلة ٣) وصورُ صفحاته المرفوعةُ يرثها الجديد — تُؤخذ قبل الإطفاء */
+      const seed = rd && old.takeTex ? old.takeTex() : null;
       if (rd) {
         sh = document.createElement('canvas');
         try { old.snapshot(sh); } catch (e) {}
@@ -29800,7 +29802,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const sharp = () => { if (!b.fastTex) return; b.fastTex = false; const op = b.texOpen; b.texGate = b.texOpen = null; if (op) op(); try { b.gl && !b.gl.dead && b.gl.refreshTex && b.gl.refreshTex(); } catch (e) {} };
       setTimeout(sharp, 4000);
       bk2Engine(b, {
-        quiet: true, warm: true, near: true, chunk: true, morph: morph || undefined, renderer: rd || undefined,
+        quiet: true, warm: true, near: true, chunk: true, morph: morph || undefined, renderer: rd || undefined, texSeed: seed || undefined,
         onReady: ng => {
           bkSwLog(b, 'ready');
           ng.el.style.opacity = '';
@@ -31417,7 +31419,7 @@ and your contributions about it — here and on the server.\n\nIt then looks as 
       const dgT = bkDiagOn() ? {} : null;
       const cfgB = {
         diag: dgT ? (n, ms) => { dgT[n] = ms; if (n === 'compileAsync') bkSwLog(b, 'build', { steps: dgT }); } : undefined,
-        renderer: o.renderer,
+        renderer: o.renderer, texSeed: o.texSeed,
         n: b.n, ar: b.ar, A: o.A != null ? o.A : bk2A(b), cover: b.cover, theme: b.dark ? 'dark' : 'light', one: o.one != null ? o.one : b.one, morph: o.morph, skip: bkSk(b), frame: BK_FR,
         rest: true,   /* المغلقُ على الطاولة: نقرُه يرفعه ويفتحه، والرجوعُ إلى الغلاف يُنزله (طلبُ صاحب الموقع) */
         cursor: bkCursor,
